@@ -220,7 +220,10 @@ public class DebuggerPcodeStepperProvider extends ComponentProviderAdapter {
 			boolean isCurrent = counter == data.getRowModelIndex();
 			if (data.isSelected()) {
 				if (isCurrent) {
-					setBackground(ColorUtils.blend(counterColor, cursorColor, 0.5f));
+					Color blend = ColorUtils.blend(counterColor, cursorColor, 0.5f);
+					if (blend != null) {
+						setBackground(blend);
+					}
 				}
 				// else background is already set. Leave it alone
 			}
@@ -590,7 +593,8 @@ public class DebuggerPcodeStepperProvider extends ComponentProviderAdapter {
 		int index = frame.index();
 		List<PcodeRow> toAdd = frame.getCode()
 				.stream()
-				.map(op -> new OpPcodeRow(language, op, index == op.getSeqnum().getTime()))
+				.map(op -> new OpPcodeRow(language, op, index == op.getSeqnum().getTime(),
+					frame.getUseropNames()))
 				.collect(Collectors.toCollection(ArrayList::new));
 		if (frame.isBranch()) {
 			counter = toAdd.size();
