@@ -44,6 +44,8 @@ import ghidra.program.model.mem.MemoryBlock;
 import ghidra.program.util.ProgramLocation;
 import ghidra.program.util.ProgramSelection;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DisassembledViewPluginTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -57,7 +59,7 @@ public class DisassembledViewPluginTest extends AbstractGhidraHeadedIntegrationT
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		env = new TestEnv();
@@ -70,7 +72,7 @@ public class DisassembledViewPluginTest extends AbstractGhidraHeadedIntegrationT
 		componentProvider = (ComponentProvider) getInstanceField("displayComponent", plugin);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		if (program != null) {

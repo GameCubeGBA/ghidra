@@ -58,6 +58,8 @@ import ghidra.util.Msg;
 import ghidra.util.exception.NotFoundException;
 import ghidra.util.table.GhidraTable;
 import ghidra.util.table.GhidraTableFilterPanel;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class VTFunctionAssociationTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -85,7 +87,7 @@ public class VTFunctionAssociationTest extends AbstractGhidraHeadedIntegrationTe
 	private VTFunctionAssociationProvider functionAssociationProvider;
 
 	@SuppressWarnings("unchecked")
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		setErrorGUIEnabled(false);
@@ -149,7 +151,7 @@ public class VTFunctionAssociationTest extends AbstractGhidraHeadedIntegrationTe
 				functionAssociationProvider);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		runSwing(() -> vtTool.close());

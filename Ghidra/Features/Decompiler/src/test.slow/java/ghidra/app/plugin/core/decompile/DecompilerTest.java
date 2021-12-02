@@ -24,12 +24,14 @@ import ghidra.program.model.listing.Program;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.ToyProgramBuilder;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DecompilerTest extends AbstractGhidraHeadedIntegrationTest {
 	private Program prog;
 	private DecompInterface decompiler;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		ToyProgramBuilder builder = new ToyProgramBuilder("notepad_decompiler", true);
@@ -42,7 +44,7 @@ public class DecompilerTest extends AbstractGhidraHeadedIntegrationTest {
 		decompiler.openProgram(prog);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (decompiler != null) {
 			decompiler.dispose();

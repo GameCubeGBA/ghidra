@@ -29,6 +29,8 @@ import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.InvalidNameException;
 import ghidra.util.task.TaskMonitor;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Test the database Category implementation.
@@ -68,7 +70,7 @@ public class CategoryTest extends AbstractGhidraHeadedIntegrationTest {
 	/*
 	 * @see TestCase#setUp()
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		program = createDefaultProgram(testName.getMethodName(), ProgramBuilder._TOY, this);
@@ -83,7 +85,7 @@ public class CategoryTest extends AbstractGhidraHeadedIntegrationTest {
 	/*
 	 * @see TestCase#tearDown()
 	 */
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		waitForPostedSwingRunnables();// wait for leftover datatype events
 

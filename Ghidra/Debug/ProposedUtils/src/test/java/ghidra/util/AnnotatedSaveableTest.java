@@ -21,7 +21,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.Deque;
 import java.util.LinkedList;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class AnnotatedSaveableTest {
 	public static class AllFieldTypesSaveable extends AnnotatedSaveable {
@@ -251,7 +251,7 @@ public class AnnotatedSaveableTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAllFieldTypes() {
 		AllFieldTypesSaveable saveable = new AllFieldTypesSaveable();
 		saveable.primitiveBoolean = true;

@@ -18,7 +18,7 @@ package ghidra.app.merge.datatypes;
 import static org.junit.Assert.*;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.program.database.ProgramDB;
 import ghidra.program.database.ProgramModifierListener;
@@ -414,7 +414,7 @@ public class CategoryMerge2Test extends AbstractDataTypeMergeTest {
 		checkConflictCount(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testCategoryDeleteMoveConflicts3() throws Exception {
 		// move category in Latest program; delete same category in My Program 
 
@@ -800,7 +800,7 @@ public class CategoryMerge2Test extends AbstractDataTypeMergeTest {
 		checkConflictCount(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testCategoryMoveRenameConflict2() throws Exception {
 
 		//Latest: move Category1/Category2/Category3 to Root; rename

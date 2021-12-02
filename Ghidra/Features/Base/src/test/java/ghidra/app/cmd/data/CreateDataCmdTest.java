@@ -17,7 +17,7 @@ package ghidra.app.cmd.data;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
@@ -45,7 +45,7 @@ public class CreateDataCmdTest extends AbstractGenericTest {
 	private Listing listing;
 	private ProgramBuilder builder;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = buildProgram();
 		listing = program.getListing();

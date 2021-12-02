@@ -48,6 +48,8 @@ import ghidra.program.util.string.FoundString;
 import ghidra.test.*;
 import ghidra.util.table.GhidraTable;
 import ghidra.util.table.field.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  *
@@ -67,7 +69,7 @@ public class StringTable_BE_Test extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -109,7 +111,7 @@ public class StringTable_BE_Test extends AbstractGhidraHeadedIntegrationTest {
 		return program.getAddressFactory().getDefaultAddressSpace().getAddress(offset);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.release(program);
 		env.dispose();

@@ -22,19 +22,21 @@ import org.junit.*;
 import ghidra.app.cmd.data.CreateTypeDescriptorBackgroundCmd;
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.database.ProgramDB;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class EH32CreateCmdTest extends AbstractEHTest {
 
 	private ProgramBuilder builder;
 	private ProgramDB program;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		builder = build32BitX86();
 		program = builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		preserveDTMService(program);
 		if (builder != null) {

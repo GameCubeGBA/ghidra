@@ -17,33 +17,32 @@ package ghidra.bitpatterns.info;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
-import ghidra.bitpatterns.info.ByteSequenceLengthFilter;
 
 public class ByteSequenceLengthFilterTest extends AbstractGenericTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testNull() {
 		ByteSequenceLengthFilter bsFilter = new ByteSequenceLengthFilter(1, 1);
 		String result = bsFilter.filter(null);
 		assertEquals(null, result);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@org.junit.jupiter.api.Test(expected = IllegalArgumentException.class)
 	public void testException1() {
 		@SuppressWarnings("unused")
 		ByteSequenceLengthFilter bsFilter = new ByteSequenceLengthFilter(3, 2);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@org.junit.jupiter.api.Test(expected = IllegalArgumentException.class)
 	public void testException2() {
 		@SuppressWarnings("unused")
 		ByteSequenceLengthFilter bsFilter = new ByteSequenceLengthFilter(1, -1);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testPositiveIndex() {
 		ByteSequenceLengthFilter bsFilter = new ByteSequenceLengthFilter(1, 2);
 		String result = bsFilter.filter("a");
@@ -59,7 +58,7 @@ public class ByteSequenceLengthFilterTest extends AbstractGenericTest {
 		assertEquals("cd", result);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testMinimumLengthZero() {
 		ByteSequenceLengthFilter bsFilter = new ByteSequenceLengthFilter(0, 0);
 		String result = bsFilter.filter("aa");

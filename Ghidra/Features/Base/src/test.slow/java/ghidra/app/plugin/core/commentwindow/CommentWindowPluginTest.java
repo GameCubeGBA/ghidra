@@ -33,6 +33,8 @@ import ghidra.program.model.address.*;
 import ghidra.program.model.listing.CodeUnit;
 import ghidra.program.model.listing.Program;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class CommentWindowPluginTest extends AbstractGhidraHeadedIntegrationTest {
 	private TestEnv env;
@@ -53,7 +55,7 @@ public class CommentWindowPluginTest extends AbstractGhidraHeadedIntegrationTest
 		return addrFactory.getAddress(address);
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -70,7 +72,7 @@ public class CommentWindowPluginTest extends AbstractGhidraHeadedIntegrationTest
 
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

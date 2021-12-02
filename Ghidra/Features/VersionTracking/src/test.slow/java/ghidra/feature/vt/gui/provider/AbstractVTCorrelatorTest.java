@@ -27,8 +27,8 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.*;
 import javax.swing.table.TableModel;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 import docking.options.editor.OptionsEditorPanel;
 import docking.wizard.WizardManager;
@@ -81,7 +81,7 @@ public abstract class AbstractVTCorrelatorTest extends AbstractGhidraHeadedInteg
 		this.destProgLoc = destProgLoc;
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		env = new VTTestEnv();
@@ -100,7 +100,7 @@ public abstract class AbstractVTCorrelatorTest extends AbstractGhidraHeadedInteg
 		toolFrame.setSize(800, 800);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

@@ -34,6 +34,8 @@ import ghidra.program.util.OperandFieldLocation;
 import ghidra.program.util.VariableNameFieldLocation;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class CodeBrowserNavigationx86Test extends AbstractGhidraHeadedIntegrationTest {
 	private TestEnv env;
@@ -50,7 +52,7 @@ public class CodeBrowserNavigationx86Test extends AbstractGhidraHeadedIntegratio
 		return addrFactory.getAddress(address);
 	}
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -59,7 +61,7 @@ public class CodeBrowserNavigationx86Test extends AbstractGhidraHeadedIntegratio
 		cb = env.getPlugin(CodeBrowserPlugin.class);
 	}
 
-    @After
+    @AfterEach
     public void tearDown() {
 		env.dispose();
 	}

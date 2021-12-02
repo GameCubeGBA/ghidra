@@ -24,7 +24,7 @@ package ghidra.util.datastruct;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 
@@ -61,7 +61,7 @@ public class ByteArrayArrayTest extends AbstractGenericTest {
         baa.remove(1);
         assertNull(baa.get(1));
     }
-@Test
+@org.junit.jupiter.api.Test
     public void testMany() {
         ByteArrayArray baa = new ByteArrayArray();
 

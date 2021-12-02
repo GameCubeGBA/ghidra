@@ -29,6 +29,8 @@ import ghidra.program.database.ProgramBuilder;
 import ghidra.program.model.listing.Program;
 import ghidra.util.exception.AssertException;
 import mockit.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class TransactionLockingTest extends AbstractGenericTest {
 
@@ -37,13 +39,13 @@ public class TransactionLockingTest extends AbstractGenericTest {
 	private CountDownLatch programLockedLatch = new CountDownLatch(1);
 	private CountDownLatch lockExceptionLatch = new CountDownLatch(1);
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		ProgramBuilder builder = new ProgramBuilder("test", ProgramBuilder._X86, this);
 		program = builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		program.release(this);
 	}

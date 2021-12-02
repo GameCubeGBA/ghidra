@@ -22,7 +22,7 @@ import java.util.List;
 import java.io.File;
 import java.io.IOException;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
@@ -35,7 +35,7 @@ public class SymbolServerInstanceCreatorRegistryTest extends AbstractGenericTest
 		symbolServerInstanceCreatorRegistry.getContext();
 	private File temporaryDir;
 
-	@Before
+	@BeforeEach
 	public void setup() throws IOException {
 		temporaryDir = createTempDirectory("localsymbolserver");
 	}

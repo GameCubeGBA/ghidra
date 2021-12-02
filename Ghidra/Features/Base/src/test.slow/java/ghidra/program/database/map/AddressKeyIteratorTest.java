@@ -28,6 +28,9 @@ import ghidra.program.model.address.*;
 import ghidra.program.model.mem.Memory;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.datastruct.LongArray;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AddressKeyIteratorTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -50,7 +53,7 @@ public class AddressKeyIteratorTest extends AbstractGhidraHeadedIntegrationTest 
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = createDefaultProgram(testName.getMethodName(), ProgramBuilder._TOY, this);
 		space = program.getAddressFactory().getDefaultAddressSpace();
@@ -103,7 +106,7 @@ public class AddressKeyIteratorTest extends AbstractGhidraHeadedIntegrationTest 
 		return key;
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		program.endTransaction(transactionID, true);
 		program.release(this);
@@ -113,7 +116,7 @@ public class AddressKeyIteratorTest extends AbstractGhidraHeadedIntegrationTest 
 		return space.getAddress(offset);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIterator0() throws Exception {
 		AddressKeyIterator it = AddressKeyIterator.EMPTY_ITERATOR;
 		assertTrue(!it.hasNext());
@@ -134,7 +137,7 @@ public class AddressKeyIteratorTest extends AbstractGhidraHeadedIntegrationTest 
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIterator1() throws Exception {
 		int index = 0;
 		AddressKeyIterator it = new AddressKeyIterator(myTable, addrMap, true);
@@ -145,7 +148,7 @@ public class AddressKeyIteratorTest extends AbstractGhidraHeadedIntegrationTest 
 		assertEquals(0x40, index);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIterator2() throws Exception {
 		int index = 0x10;
 		AddressKeyIterator it = new AddressKeyIterator(myTable, addrMap, addr(0x4000), true);
@@ -156,7 +159,7 @@ public class AddressKeyIteratorTest extends AbstractGhidraHeadedIntegrationTest 
 		assertEquals(0x40, index);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIterator3() throws Exception {
 		int index = 0x11;
 		AddressKeyIterator it = new AddressKeyIterator(myTable, addrMap, addr(0x5000), false);
@@ -167,7 +170,7 @@ public class AddressKeyIteratorTest extends AbstractGhidraHeadedIntegrationTest 
 		assertEquals(0x40, index);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIterator4() throws Exception {
 		int index = 0x10;
 		AddressKeyIterator it = new AddressKeyIterator(myTable, addrMap, addr(0x5000), true);
@@ -189,7 +192,7 @@ public class AddressKeyIteratorTest extends AbstractGhidraHeadedIntegrationTest 
 		assertEquals(-1, index);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIterator6() throws Exception {
 		int index = 0x10;
 		AddressKeyIterator it = new AddressKeyIterator(myTable, addrMap, addr(0x5000), false);
@@ -200,7 +203,7 @@ public class AddressKeyIteratorTest extends AbstractGhidraHeadedIntegrationTest 
 		assertEquals(-1, index);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIterator7() throws Exception {
 		AddressSet set = new AddressSet();
 		set.addRange(addr(0x3008), addr(0x5008));
@@ -217,7 +220,7 @@ public class AddressKeyIteratorTest extends AbstractGhidraHeadedIntegrationTest 
 		assertEquals(0x40, index);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIterator8() throws Exception {
 		AddressSet set = new AddressSet();
 		set.addRange(addr(0x3008), addr(0x5008));
@@ -234,7 +237,7 @@ public class AddressKeyIteratorTest extends AbstractGhidraHeadedIntegrationTest 
 		assertEquals(0x40, index);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIterator9() throws Exception {
 		AddressSet set = new AddressSet();
 		set.addRange(addr(0x3008), addr(0x5008));
@@ -248,7 +251,7 @@ public class AddressKeyIteratorTest extends AbstractGhidraHeadedIntegrationTest 
 		assertEquals(0x40, index);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIterator10() throws Exception {
 		AddressSet set = new AddressSet();
 		set.addRange(addr(0x3008), addr(0x5008));
@@ -265,7 +268,7 @@ public class AddressKeyIteratorTest extends AbstractGhidraHeadedIntegrationTest 
 		assertEquals(0x40, index);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIterator11() throws Exception {
 		AddressSet set = new AddressSet();
 		set.addRange(addr(0x3008), addr(0x5008));
@@ -280,7 +283,7 @@ public class AddressKeyIteratorTest extends AbstractGhidraHeadedIntegrationTest 
 		assertEquals(0x07, index);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIterator12() throws Exception {
 		int index = 0x3f;
 		AddressKeyIterator it = new AddressKeyIterator(myTable, addrMap, null, false);
@@ -291,7 +294,7 @@ public class AddressKeyIteratorTest extends AbstractGhidraHeadedIntegrationTest 
 		assertEquals(-1, index);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIterator13() throws Exception {
 		AddressSet set = new AddressSet();
 		set.addRange(addr(0x3008), addr(0x5008));
@@ -305,7 +308,7 @@ public class AddressKeyIteratorTest extends AbstractGhidraHeadedIntegrationTest 
 		assertEquals(0x40, index);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIteratorCheckWrap1() throws Exception {
 
 		addRecord(addr(0x0));
@@ -321,7 +324,7 @@ public class AddressKeyIteratorTest extends AbstractGhidraHeadedIntegrationTest 
 		assertEquals(0x40, index);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIteratorCheckWrap2() throws Exception {
 
 		addRecord(addr(0x0));

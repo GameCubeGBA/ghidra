@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 import java.util.List;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.program.model.address.*;
 import ghidra.program.model.lang.LanguageID;
@@ -93,7 +93,7 @@ public class AddressMapDB64BitTest extends AbstractAddressMapDBTestClass {
 		return p;
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testKeyRanges() {
 
 		List<KeyRange> keyRanges = addrMap.getKeyRanges(addr(0), addr(0xffffffffffffffffL), false);
@@ -123,7 +123,7 @@ public class AddressMapDB64BitTest extends AbstractAddressMapDBTestClass {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testRelocatableAddress() {
 
 		Address addr = addr(0x1000000000L);

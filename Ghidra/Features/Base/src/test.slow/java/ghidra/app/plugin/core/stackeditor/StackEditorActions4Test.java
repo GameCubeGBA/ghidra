@@ -22,7 +22,7 @@ import java.awt.Component;
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import docking.widgets.dialogs.NumberInputDialog;
@@ -49,7 +49,7 @@ public class StackEditorActions4Test extends AbstractStackEditorTest {
 	}
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		env.showTool();

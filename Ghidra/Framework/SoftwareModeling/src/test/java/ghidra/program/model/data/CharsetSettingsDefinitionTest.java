@@ -20,7 +20,7 @@ import static org.junit.Assert.assertNull;
 
 import java.util.*;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
@@ -28,7 +28,7 @@ import ghidra.docking.settings.Settings;
 
 public class CharsetSettingsDefinitionTest extends AbstractGenericTest {
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		Map<Long, List<String>> encodingMappings = new HashMap<>();
 		encodingMappings.put(0L, Arrays.asList("charset_0_0", "charset_0_1", "charset_0_2"));

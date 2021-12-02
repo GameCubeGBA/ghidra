@@ -33,6 +33,8 @@ import ghidra.program.model.address.Address;
 import ghidra.util.Msg;
 import mockit.Mock;
 import mockit.MockUp;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class VTDomainObjectEventsTest extends VTBaseTestCase {
 
@@ -57,7 +59,7 @@ public class VTDomainObjectEventsTest extends VTBaseTestCase {
 	}
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		Msg.debug(this, "\n\nsetUp(): " + testName.getMethodName());
@@ -87,7 +89,7 @@ public class VTDomainObjectEventsTest extends VTBaseTestCase {
 	}
 
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		Msg.debug(this, "tearDown()\n");
 		db.endTransaction(transactionID, false);

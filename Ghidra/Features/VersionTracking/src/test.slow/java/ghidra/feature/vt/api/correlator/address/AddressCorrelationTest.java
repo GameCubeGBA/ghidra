@@ -39,6 +39,9 @@ import ghidra.program.util.AddressCorrelation;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests to verify that the correct address correlation is being determined and used for obtaining
@@ -61,12 +64,12 @@ public class AddressCorrelationTest extends AbstractGhidraHeadedIntegrationTest 
 	protected Function sourceFunction;
 	protected Function destinationFunction;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		vtTestEnv = new VTTestEnv();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		sourceProgram = null;
 		destinationProgram = null;
@@ -76,7 +79,7 @@ public class AddressCorrelationTest extends AbstractGhidraHeadedIntegrationTest 
 		vtTestEnv.dispose();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testExactMatchBytes() throws Exception {
 		// Test a function match created by the Exact Bytes Match correlator.
 		createSession(TEST_SOURCE_PROGRAM_NAME, TEST_DESTINATION_PROGRAM_NAME);
@@ -104,7 +107,7 @@ public class AddressCorrelationTest extends AbstractGhidraHeadedIntegrationTest 
 		checkMarkupDestinationSource(StraightLineCorrelation.NAME, false);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testExactMatchInstructions() throws Exception {
 		// Test a function match created by the Exact Instructions Match correlator.
 		createSession(TEST_SOURCE_PROGRAM_NAME, TEST_DESTINATION_PROGRAM_NAME);
@@ -118,7 +121,7 @@ public class AddressCorrelationTest extends AbstractGhidraHeadedIntegrationTest 
 		checkMarkupDestinationSource(StraightLineCorrelation.NAME, false);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSimilarSymbolName() throws Exception {
 		// Test a function match created by the Similar Symbol Name correlator where the 
 		// two programs are for the same language and processor.
@@ -136,7 +139,7 @@ public class AddressCorrelationTest extends AbstractGhidraHeadedIntegrationTest 
 		checkMarkupDestinationSource(VTHashedFunctionAddressCorrelation.NAME, true);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSimilarSymbolNameDiffLanguages() throws Exception {
 		// Test a function match created by the Similar Symbol Name correlator where the 
 		// two programs are for different processors.
@@ -156,7 +159,7 @@ public class AddressCorrelationTest extends AbstractGhidraHeadedIntegrationTest 
 		checkMarkupDestinationSource(LinearFunctionAddressCorrelation.NAME, false);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSimilarSymbolNameDiffLanguages2() throws Exception {
 		// Test a function match created by the Similar Symbol Name correlator where the 
 		// two programs are for different languages but the same processor with different
@@ -175,7 +178,7 @@ public class AddressCorrelationTest extends AbstractGhidraHeadedIntegrationTest 
 		checkMarkupDestinationSource(VTHashedFunctionAddressCorrelation.NAME, true);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEntryPointPlateCommentMatchingInstructions() throws Exception {
 		// Test that plate comments should have a destination address if the 
 		// instructions can be correlated, and entry point plates should get the other 
@@ -203,7 +206,7 @@ public class AddressCorrelationTest extends AbstractGhidraHeadedIntegrationTest 
 		checkMarkupDestinationSource(LinearFunctionAddressCorrelation.NAME, true);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEntryPointPlateCommentDifferringInstructions() throws Exception {
 		// Test that plate comments shouldn't have a destination address if the 
 		// instructions can't be correlated, except entry point plates should get the other 

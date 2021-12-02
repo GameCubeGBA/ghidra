@@ -23,6 +23,7 @@ import java.util.Arrays;
 import org.junit.*;
 
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * 
@@ -44,7 +45,7 @@ public class LittleEndianConverterTest extends AbstractGhidraHeadedIntegrationTe
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		b = new byte[12];
 		for (int i = 0; i < b.length; i++) {

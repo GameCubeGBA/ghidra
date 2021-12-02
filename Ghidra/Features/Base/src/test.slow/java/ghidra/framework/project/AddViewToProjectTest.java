@@ -25,6 +25,9 @@ import ghidra.framework.model.ProjectLocator;
 import ghidra.framework.protocol.ghidra.GhidraURL;
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 import ghidra.test.ProjectTestUtils;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test class for adding and a view to a project, and removing
@@ -37,7 +40,7 @@ public class AddViewToProjectTest extends AbstractGhidraHeadlessIntegrationTest 
 	private final static String PROJECT_VIEW1 = "TestView1";
 	private final static String PROJECT_VIEW2 = "TestView2";
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		ProjectTestUtils.deleteProject(DIRECTORY_NAME, PROJECT_NAME1);
@@ -45,7 +48,7 @@ public class AddViewToProjectTest extends AbstractGhidraHeadlessIntegrationTest 
 		ProjectTestUtils.deleteProject(DIRECTORY_NAME, PROJECT_VIEW2);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		ProjectTestUtils.deleteProject(DIRECTORY_NAME, PROJECT_NAME1);
 		ProjectTestUtils.deleteProject(DIRECTORY_NAME, PROJECT_VIEW1);

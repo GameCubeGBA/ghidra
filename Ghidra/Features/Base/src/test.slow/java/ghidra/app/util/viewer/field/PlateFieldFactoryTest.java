@@ -46,6 +46,8 @@ import ghidra.program.model.symbol.*;
 import ghidra.test.*;
 import ghidra.util.exception.AssertException;
 import ghidra.util.table.GhidraProgramTableModel;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class PlateFieldFactoryTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -56,7 +58,7 @@ public class PlateFieldFactoryTest extends AbstractGhidraHeadedIntegrationTest {
 	private Program program;
 	private GoToService goToService;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		program = buildProgram();
@@ -105,7 +107,7 @@ public class PlateFieldFactoryTest extends AbstractGhidraHeadedIntegrationTest {
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

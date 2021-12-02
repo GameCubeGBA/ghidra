@@ -20,7 +20,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.dbg.agent.*;
 import ghidra.dbg.target.*;
@@ -55,7 +55,7 @@ public class AnnotatedTargetObjectSchemaTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAnnotatedRootSchemaPlain() {
 		AnnotatedSchemaContext ctx = new AnnotatedSchemaContext();
 		TargetObjectSchema schema = ctx.getSchemaForClass(TestAnnotatedTargetRootPlain.class);
@@ -73,7 +73,7 @@ public class AnnotatedTargetObjectSchemaTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAnnotatedRootSchemaNoElems() {
 		AnnotatedSchemaContext ctx = new AnnotatedSchemaContext();
 		TargetObjectSchema schema = ctx.getSchemaForClass(TestAnnotatedTargetRootNoElems.class);
@@ -109,7 +109,7 @@ public class AnnotatedTargetObjectSchemaTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAnnotatedRootSchemaOverridenFetchElems() {
 		AnnotatedSchemaContext ctx = new AnnotatedSchemaContext();
 		TargetObjectSchema schema =
@@ -134,7 +134,7 @@ public class AnnotatedTargetObjectSchemaTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAnnotatedSubSchemaElemsByParam() {
 		AnnotatedSchemaContext ctx = new AnnotatedSchemaContext();
 		TargetObjectSchema schema = ctx.getSchemaForClass(TestAnnotatedProcessContainer.class);
@@ -212,7 +212,7 @@ public class AnnotatedTargetObjectSchemaTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAnnotatedRootSchemaWithListedAttrs() {
 		AnnotatedSchemaContext ctx = new AnnotatedSchemaContext();
 		TargetObjectSchema schema =
@@ -243,7 +243,7 @@ public class AnnotatedTargetObjectSchemaTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAnnotatedRootWithResyuncModes() {
 		AnnotatedSchemaContext ctx = new AnnotatedSchemaContext();
 		TargetObjectSchema schema =
@@ -280,7 +280,7 @@ public class AnnotatedTargetObjectSchemaTest {
 		ctx.getSchemaForClass(TestAnnotatedTargetRootWithAnnotatedAttrsBadType.class);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@org.junit.jupiter.api.Test(expected = IllegalArgumentException.class)
 	public void testNotAnnotated() {
 		AnnotatedSchemaContext ctx = new AnnotatedSchemaContext();
 		ctx.getSchemaForClass(DefaultTargetObject.class);
@@ -304,7 +304,7 @@ public class AnnotatedTargetObjectSchemaTest {
 		}
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@org.junit.jupiter.api.Test(expected = IllegalArgumentException.class)
 	public void testAnnotatedRootWithAnnotatedAttrsNonUnique() {
 		AnnotatedSchemaContext ctx = new AnnotatedSchemaContext();
 		ctx.getSchemaForClass(TestAnnotatedTargetRootWithAnnotatedAttrsNonUnique.class);
@@ -326,7 +326,7 @@ public class AnnotatedTargetObjectSchemaTest {
 		}
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@org.junit.jupiter.api.Test(expected = IllegalArgumentException.class)
 	public void testAnnotatedRootWithElemsNonUnique() {
 		AnnotatedSchemaContext ctx = new AnnotatedSchemaContext();
 		ctx.getSchemaForClass(TestAnnotatedTargetRootWithElemsNonUnique.class);
@@ -345,7 +345,7 @@ public class AnnotatedTargetObjectSchemaTest {
 		}
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@org.junit.jupiter.api.Test(expected = IllegalArgumentException.class)
 	public void testAnnotatedRootSchemaWithAnnotatedAttrsBadName() {
 		AnnotatedSchemaContext ctx = new AnnotatedSchemaContext();
 		ctx.getSchemaForClass(TestAnnotatedTargetRootWithAnnotatedAttrsBadName.class);
@@ -364,7 +364,7 @@ public class AnnotatedTargetObjectSchemaTest {
 		}
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@org.junit.jupiter.api.Test(expected = IllegalArgumentException.class)
 	public void testAnnotatedRootSchemaWithAnnotatedAttrsBadGetter() {
 		AnnotatedSchemaContext ctx = new AnnotatedSchemaContext();
 		ctx.getSchemaForClass(TestAnnotatedTargetRootWithAnnotatedAttrsBadGetter.class);
@@ -379,7 +379,7 @@ public class AnnotatedTargetObjectSchemaTest {
 		}
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@org.junit.jupiter.api.Test(expected = IllegalArgumentException.class)
 	public void testAnnotatedRootSchemaWithListAttrsBadType() {
 		AnnotatedSchemaContext ctx = new AnnotatedSchemaContext();
 		ctx.getSchemaForClass(TestAnnotatedTargetRootWithListedAttrsBadType.class);

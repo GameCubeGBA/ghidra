@@ -27,19 +27,21 @@ import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 import ghidra.trace.database.ToyDBTraceBuilder;
 import ghidra.util.database.UndoableTransaction;
 import ghidra.util.exception.DuplicateNameException;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DBTraceThreadManagerTest extends AbstractGhidraHeadlessIntegrationTest {
 
 	ToyDBTraceBuilder b;
 	DBTraceThreadManager threadManager;
 
-	@Before
+	@BeforeEach
 	public void setUpThreadManagerTest() throws Exception {
 		b = new ToyDBTraceBuilder("Testing", "Toy:BE:64:default");
 		threadManager = b.trace.getThreadManager();
 	}
 
-	@After
+	@AfterEach
 	public void tearDownThreadManagerTest() throws Exception {
 		b.close();
 	}

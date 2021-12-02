@@ -39,6 +39,8 @@ import ghidra.util.database.*;
 import ghidra.util.database.annot.*;
 import ghidra.util.exception.VersionException;
 import ghidra.util.task.ConsoleTaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DBTraceAddressSnapRangePropertyMapAddressSetViewTest
 		extends AbstractGhidraHeadlessIntegrationTest {
@@ -139,7 +141,7 @@ public class DBTraceAddressSnapRangePropertyMapAddressSetViewTest
 			predicate);
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws IOException, VersionException {
 		toy = DefaultLanguageService.getLanguageService()
 				.getLanguage(new LanguageID("Toy:BE:64:default"));
@@ -151,7 +153,7 @@ public class DBTraceAddressSnapRangePropertyMapAddressSetViewTest
 		}
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		obj.release(this);
 	}

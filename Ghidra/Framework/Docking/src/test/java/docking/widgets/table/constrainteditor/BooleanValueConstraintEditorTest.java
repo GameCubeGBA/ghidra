@@ -19,8 +19,8 @@ import static org.junit.Assert.*;
 
 import javax.swing.JComboBox;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import docking.test.AbstractDockingTest;
 import docking.widgets.table.constraint.BooleanMatchColumnConstraint;
@@ -32,7 +32,7 @@ public class BooleanValueConstraintEditorTest extends AbstractDockingTest {
 	private BooleanConstraintEditor editor;
 	private JComboBox<Boolean> combo;
 
-	@Before
+	@BeforeEach
 	public void setup() {
 		constraint = new BooleanMatchColumnConstraint(Boolean.TRUE);
 		editor = (BooleanConstraintEditor) constraint.getEditor(null);
@@ -46,7 +46,7 @@ public class BooleanValueConstraintEditorTest extends AbstractDockingTest {
 		runSwing(() -> editor.getInlineComponent());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSetValue() {
 		setEditorValue("true");
 		assertEquals(true, combo.getSelectedItem());
@@ -65,7 +65,7 @@ public class BooleanValueConstraintEditorTest extends AbstractDockingTest {
 		assertEquals("true", getEditorValue().getConstraintValueString());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDetailComponent() {
 		assertNull(editor.getDetailComponent());
 	}

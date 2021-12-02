@@ -20,6 +20,8 @@ import static org.junit.Assert.*;
 import org.junit.*;
 
 import generic.test.AbstractGenericTest;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AddressMapImplTest extends AbstractGenericTest {
 	AddressSpace sp8;
@@ -35,7 +37,7 @@ public class AddressMapImplTest extends AbstractGenericTest {
 
 	Address[] addrs;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 
 		sp8 = new GenericAddressSpace("ONE", 8, AddressSpace.TYPE_RAM, 0);
@@ -92,7 +94,7 @@ public class AddressMapImplTest extends AbstractGenericTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGetIndex() {
 
 		long[] values = new long[addrs.length];
@@ -126,7 +128,7 @@ public class AddressMapImplTest extends AbstractGenericTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGetEffectiveValue() {
 		Assert.assertEquals(map.getKey(addrs[0]), map.getKey(addrs[0]));
 		assertTrue(map.getKey(addrs[12]) == map.getKey(addrs[12]));
@@ -144,7 +146,7 @@ public class AddressMapImplTest extends AbstractGenericTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testRegisterAddress() {
 		Address a = regSpace.getAddress(0);
 		long key = map.getKey(a);

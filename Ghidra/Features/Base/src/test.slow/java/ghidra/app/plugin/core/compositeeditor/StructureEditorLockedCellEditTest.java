@@ -32,11 +32,12 @@ import ghidra.program.model.listing.Library;
 import ghidra.program.model.symbol.ExternalLocation;
 import ghidra.program.model.symbol.SourceType;
 import ghidra.util.exception.DuplicateNameException;
+import org.junit.jupiter.api.BeforeEach;
 
 public class StructureEditorLockedCellEditTest extends AbstractStructureEditorTest {
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		File dir = getDebugFileDirectory();

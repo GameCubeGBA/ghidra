@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 import docking.ActionContext;
 import docking.action.DockingActionIf;
@@ -49,7 +49,7 @@ public abstract class AbstractDecompilerFindReferencesActionTest extends Abstrac
 	protected SpyLocationReferencesService<LocationReferencesService> spyLocationReferenceService;
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		super.setUp();

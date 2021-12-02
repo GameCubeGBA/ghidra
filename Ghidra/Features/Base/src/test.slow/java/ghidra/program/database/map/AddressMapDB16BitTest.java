@@ -20,13 +20,13 @@ import static org.junit.Assert.assertEquals;
 import java.util.List;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import ghidra.program.model.address.*;
 import ghidra.program.model.listing.Program;
 import ghidra.program.model.mem.Memory;
 import ghidra.program.model.mem.MemoryConflictException;
 import ghidra.test.TestProcessorConstants;
+import org.junit.jupiter.api.Test;
 
 public class AddressMapDB16BitTest extends AbstractAddressMapDBTestClass {
 	
@@ -89,7 +89,7 @@ public class AddressMapDB16BitTest extends AbstractAddressMapDBTestClass {
 		return p;
 	}
 	
-@Test
+@org.junit.jupiter.api.Test
     public void testKeyRanges() {
 		
 		List<KeyRange> keyRanges = addrMap.getKeyRanges(addr(0), addr(0xffffffffffffffffL), false);
@@ -120,7 +120,7 @@ public class AddressMapDB16BitTest extends AbstractAddressMapDBTestClass {
 
 	}
 	
-@Test
+@org.junit.jupiter.api.Test
     public void testRelocatableAddress() {
 		Address addr = addr(0x1000);
 		long key = addrMap.getKey(addr, false);

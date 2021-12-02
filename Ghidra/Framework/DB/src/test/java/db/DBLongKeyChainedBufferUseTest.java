@@ -18,6 +18,8 @@ package db;
 import org.junit.*;
 
 import generic.test.AbstractGenericTest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DBLongKeyChainedBufferUseTest extends AbstractGenericTest {
 
@@ -34,13 +36,13 @@ public class DBLongKeyChainedBufferUseTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		dbh = new DBHandle(BUFFER_SIZE, CACHE_SIZE);
 		bigLength = ((dbh.getBufferSize() - LongKeyRecordNode.RECORD_LEAF_HEADER_SIZE) >> 2) - 13; // see VarRecNode
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (dbh != null) {
 			dbh.close();

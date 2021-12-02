@@ -15,8 +15,8 @@
  */
 package ghidra.app.plugin.core.codebrowser;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 import docking.action.DockingActionIf;
 import docking.widgets.table.GTable;
@@ -49,7 +49,7 @@ public class AbstractCodeBrowserNavigationTest extends AbstractGhidraHeadedInteg
 	protected Program program;
 	protected CodeBrowserPlugin cb;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 
@@ -67,7 +67,7 @@ public class AbstractCodeBrowserNavigationTest extends AbstractGhidraHeadedInteg
 		prevFunction = getAction(cb, "Go To Previous Function");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

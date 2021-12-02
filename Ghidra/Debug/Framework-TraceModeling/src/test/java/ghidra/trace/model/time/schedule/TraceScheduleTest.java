@@ -20,7 +20,6 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import ghidra.app.plugin.processors.sleigh.SleighLanguage;
@@ -34,11 +33,12 @@ import ghidra.trace.database.ToyDBTraceBuilder;
 import ghidra.trace.model.thread.TraceThread;
 import ghidra.util.database.UndoableTransaction;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.BeforeEach;
 
 public class TraceScheduleTest extends AbstractGhidraHeadlessIntegrationTest {
 	protected static SleighLanguage TOY_BE_64_LANG;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		try {
 			TOY_BE_64_LANG = (SleighLanguage) getLanguageService()

@@ -44,6 +44,8 @@ import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.InvalidInputException;
 import ghidra.util.task.Task;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class VTMatchAcceptTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -61,7 +63,7 @@ public class VTMatchAcceptTest extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		env = new TestEnv();
@@ -91,7 +93,7 @@ public class VTMatchAcceptTest extends AbstractGhidraHeadedIntegrationTest {
 		options.setBoolean(VTOptionDefines.APPLY_DATA_NAME_ON_ACCEPT, false);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		waitForBusyTool(tool);
 		destinationProgram.flushEvents();

@@ -34,6 +34,8 @@ import ghidra.trace.model.memory.TraceMemoryFlag;
 import ghidra.trace.model.memory.TraceOverlappedRegionException;
 import ghidra.util.database.UndoableTransaction;
 import ghidra.util.exception.DuplicateNameException;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DBTraceProgramViewMemoryTest extends AbstractGhidraHeadlessIntegrationTest {
 
@@ -43,7 +45,7 @@ public class DBTraceProgramViewMemoryTest extends AbstractGhidraHeadlessIntegrat
 	DBTraceProgramViewMemory vmem;
 	DBTraceMemoryManager memory;
 
-	@Before
+	@BeforeEach
 	public void setUpTraceProgramViewMemoryTest() throws LanguageNotFoundException, IOException {
 		b = new ToyDBTraceBuilder("Testing", ProgramBuilder._TOY64_BE);
 		try (UndoableTransaction tid = b.startTransaction()) {
@@ -55,7 +57,7 @@ public class DBTraceProgramViewMemoryTest extends AbstractGhidraHeadlessIntegrat
 		vmem = view.getMemory();
 	}
 
-	@After
+	@AfterEach
 	public void tearDownTraceProgramViewListingTest() {
 		if (b != null) {
 			b.close();

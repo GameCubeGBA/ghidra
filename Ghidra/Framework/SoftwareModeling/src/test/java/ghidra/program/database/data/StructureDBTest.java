@@ -28,13 +28,14 @@ import ghidra.program.model.data.*;
 import ghidra.util.InvalidNameException;
 import ghidra.util.task.TaskMonitor;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.BeforeEach;
 
 public class StructureDBTest extends AbstractGTest {
 
 	private StructureDB struct;
 	private DataTypeManagerDB dataMgr;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		dataMgr = new StandAloneDataTypeManager("dummyDTM");

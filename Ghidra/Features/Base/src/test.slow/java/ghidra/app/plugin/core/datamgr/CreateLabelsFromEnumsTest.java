@@ -42,6 +42,8 @@ import ghidra.program.model.symbol.Symbol;
 import ghidra.program.model.symbol.SymbolTable;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Tests for the action that creates labels from the names and values in a selection of enum
@@ -63,7 +65,7 @@ public class CreateLabelsFromEnumsTest extends AbstractGhidraHeadedIntegrationTe
 	private ArchiveRootNode archiveRootNode;
 	private ArchiveNode programNode;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -91,7 +93,7 @@ public class CreateLabelsFromEnumsTest extends AbstractGhidraHeadedIntegrationTe
 		tool.showComponentProvider(provider, true);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		plugin.getEditorManager().dismissEditors(null);// Close all editors that might be open.

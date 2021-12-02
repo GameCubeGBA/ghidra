@@ -63,6 +63,7 @@ import ghidra.trace.model.modules.TraceModule;
 import ghidra.trace.model.thread.TraceThread;
 import ghidra.trace.model.time.TraceSnapshot;
 import ghidra.util.database.UndoableTransaction;
+import org.junit.jupiter.api.BeforeEach;
 
 @Category(NightlyCategory.class)
 public class DebuggerMemoryBytesProviderTest extends AbstractGhidraHeadedDebuggerGUITest {
@@ -90,7 +91,7 @@ public class DebuggerMemoryBytesProviderTest extends AbstractGhidraHeadedDebugge
 	protected DebuggerMemoryBytesPlugin memBytesPlugin;
 	protected DebuggerMemoryBytesProvider memBytesProvider;
 
-	@Before
+	@BeforeEach
 	public void setUpMemoryBytesProviderTest() throws Exception {
 		memBytesPlugin = addPlugin(tool, DebuggerMemoryBytesPlugin.class);
 		memBytesProvider = waitForComponentProvider(DebuggerMemoryBytesProvider.class);

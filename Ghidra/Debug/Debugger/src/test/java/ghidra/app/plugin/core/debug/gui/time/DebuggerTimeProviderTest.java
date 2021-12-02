@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 import java.util.Calendar;
 import java.util.List;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import ghidra.app.plugin.core.debug.gui.AbstractGhidraHeadedDebuggerGUITest;
@@ -35,7 +35,7 @@ public class DebuggerTimeProviderTest extends AbstractGhidraHeadedDebuggerGUITes
 	protected DebuggerTimePlugin timePlugin;
 	protected DebuggerTimeProvider timeProvider;
 
-	@Before
+	@BeforeEach
 	public void setUpTimeProviderTest() throws Exception {
 		timePlugin = addPlugin(tool, DebuggerTimePlugin.class);
 		timeProvider = waitForComponentProvider(DebuggerTimeProvider.class);

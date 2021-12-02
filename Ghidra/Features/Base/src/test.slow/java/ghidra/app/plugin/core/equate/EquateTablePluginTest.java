@@ -40,6 +40,8 @@ import ghidra.program.util.OperandFieldLocation;
 import ghidra.program.util.ProgramLocation;
 import ghidra.test.*;
 import ghidra.util.table.GhidraTable;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import util.CollectionUtils;
 
 /**
@@ -59,7 +61,7 @@ public class EquateTablePluginTest extends AbstractGhidraHeadedIntegrationTest {
 	private EquateTableProvider provider;
 	private EquateTable et;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		program = buildProgram();
@@ -109,7 +111,7 @@ public class EquateTablePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

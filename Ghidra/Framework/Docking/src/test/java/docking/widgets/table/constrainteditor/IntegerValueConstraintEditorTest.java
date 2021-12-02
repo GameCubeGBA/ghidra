@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 import java.awt.Component;
 import java.util.Collection;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import docking.test.AbstractDockingTest;
@@ -37,7 +37,7 @@ public class IntegerValueConstraintEditorTest extends AbstractDockingTest {
 	private IntegerSpinner spinner;
 	private IntegerTextField textField;
 
-	@Before
+	@BeforeEach
 	public void setup() {
 		constraint = (SingleValueColumnConstraint<Integer>) findIntegerConstraint();
 		editor = constraint.getEditor(null);

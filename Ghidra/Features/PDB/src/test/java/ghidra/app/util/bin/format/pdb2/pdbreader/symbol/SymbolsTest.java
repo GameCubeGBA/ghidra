@@ -20,7 +20,7 @@ import static org.junit.Assert.fail;
 
 import java.math.BigInteger;
 
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
@@ -38,7 +38,7 @@ public class SymbolsTest extends AbstractGenericTest {
 	private static Processor processor;
 	private static SymbolParser symbolParser;
 
-	@BeforeClass
+	@BeforeAll
 	public static void setUp() {
 		try (DummyPdb700 dummyPdb700 = new DummyPdb700(4096, 4096, 4096, 4096)) {
 			pdb = dummyPdb700;

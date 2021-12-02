@@ -19,8 +19,8 @@ import static org.junit.Assert.*;
 
 import java.util.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.GhidraLocationGenerator;
 import ghidra.app.SampleLocationGenerator;
@@ -42,7 +42,7 @@ public class BookmarkEditCmdTest extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
 		notepad = buildProgram();
 		bookmarkManager = notepad.getBookmarkManager();
@@ -89,7 +89,7 @@ public class BookmarkEditCmdTest extends AbstractGhidraHeadedIntegrationTest {
 		return list;
 	}
 
-@Test
+@org.junit.jupiter.api.Test
     public void testCreateBookmarkOnAddr() throws Exception {
 
 		int origTypeCnt = bookmarkManager.getBookmarkTypes().length;
@@ -163,7 +163,7 @@ public class BookmarkEditCmdTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals("CmtX", bm.getComment());
 	}
 
-@Test
+@org.junit.jupiter.api.Test
     public void testCreateBookmarkOnAddrWithUndo() throws Exception {
 
 		int origTypeCnt = bookmarkManager.getBookmarkTypes().length;

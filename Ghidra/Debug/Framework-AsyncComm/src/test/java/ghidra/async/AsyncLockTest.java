@@ -24,7 +24,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.util.Msg;
 
@@ -87,7 +87,7 @@ public class AsyncLockTest {
 		}).finish();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testReentry() {
 		// This is very contrived. A real use would pass ownership to some method which cannot
 		// assume that it already holds the lock
@@ -123,7 +123,7 @@ public class AsyncLockTest {
 		assertEquals(exp, result);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	@Ignore("TODO") // Not sure why this fails under Gradle but not my IDE
 	public void testTwoSequencesWithLockAtomic() {
 		Deque<CompletableFuture<Void>> queue = new LinkedList<>();
@@ -168,7 +168,7 @@ public class AsyncLockTest {
 		assertEquals(exp, result);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	@Ignore("TODO") // Not sure why this fails under Gradle but not my IDE
 	public void testTwoSequencesWithReentry() {
 		// This is very contrived. A real use would pass ownership to some method which cannot
@@ -221,7 +221,7 @@ public class AsyncLockTest {
 		assertEquals(exp, result);
 	}
 
-	@Test(expected = IllegalStateException.class)
+	@org.junit.jupiter.api.Test(expected = IllegalStateException.class)
 	public void testInvalidHandle() throws Throwable {
 		Deque<CompletableFuture<Void>> queue = new LinkedList<>();
 		AsyncLock l = new AsyncLock();
@@ -284,7 +284,7 @@ public class AsyncLockTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testThrash() throws Exception {
 
 		boolean debug = false;

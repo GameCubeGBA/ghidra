@@ -41,6 +41,8 @@ import ghidra.dbg.testutil.DummyProc;
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 import ghidra.util.Msg;
 import ghidra.util.SystemUtilities;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 
 public abstract class AbstractGdbManagerTest extends AbstractGhidraHeadlessIntegrationTest {
 	protected static final long TIMEOUT_MILLISECONDS =
@@ -63,12 +65,12 @@ public abstract class AbstractGdbManagerTest extends AbstractGhidraHeadlessInteg
 		}
 	}
 
-	@After
+	@AfterEach
 	public void tearDownGdbManagerTest() throws IOException {
 		stopManager();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddInferior() throws Throwable {
 		try (GdbManager mgr = GdbManager.newInstance(getPtyFactory())) {
 			waitOn(startManager(mgr));
@@ -78,7 +80,7 @@ public abstract class AbstractGdbManagerTest extends AbstractGhidraHeadlessInteg
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testRemoveInferior() throws Throwable {
 		try (GdbManager mgr = GdbManager.newInstance(getPtyFactory())) {
 			waitOn(startManager(mgr));
@@ -91,7 +93,7 @@ public abstract class AbstractGdbManagerTest extends AbstractGhidraHeadlessInteg
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testRemoveCurrentInferior() throws Throwable {
 		try (GdbManager mgr = GdbManager.newInstance(getPtyFactory())) {
 			List<Integer> selEvtIdsTemp = new ArrayList<>();
@@ -115,7 +117,7 @@ public abstract class AbstractGdbManagerTest extends AbstractGhidraHeadlessInteg
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testConsoleCapture() throws Throwable {
 		try (GdbManager mgr = GdbManager.newInstance(getPtyFactory())) {
 			waitOn(startManager(mgr));
@@ -124,7 +126,7 @@ public abstract class AbstractGdbManagerTest extends AbstractGhidraHeadlessInteg
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testListInferiors() throws Throwable {
 		try (GdbManager mgr = GdbManager.newInstance(getPtyFactory())) {
 			waitOn(startManager(mgr));
@@ -133,7 +135,7 @@ public abstract class AbstractGdbManagerTest extends AbstractGhidraHeadlessInteg
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testListAvailableProcesses() throws Throwable {
 		try (GdbManager mgr = GdbManager.newInstance(getPtyFactory())) {
 			waitOn(startManager(mgr));
@@ -143,7 +145,7 @@ public abstract class AbstractGdbManagerTest extends AbstractGhidraHeadlessInteg
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testInfoOs() throws Throwable {
 		try (GdbManager mgr = GdbManager.newInstance(getPtyFactory())) {
 			waitOn(startManager(mgr));
@@ -154,7 +156,7 @@ public abstract class AbstractGdbManagerTest extends AbstractGhidraHeadlessInteg
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testStart() throws Throwable {
 		try (GdbManager mgr = GdbManager.newInstance(getPtyFactory())) {
 			waitOn(startManager(mgr));
@@ -165,7 +167,7 @@ public abstract class AbstractGdbManagerTest extends AbstractGhidraHeadlessInteg
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAttachDetach() throws Throwable {
 		try (DummyProc echo = run("dd"); GdbManager mgr = GdbManager.newInstance(getPtyFactory())) {
 			waitOn(startManager(mgr));
@@ -178,7 +180,7 @@ public abstract class AbstractGdbManagerTest extends AbstractGhidraHeadlessInteg
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	@Ignore("At developer's desk only")
 	public void stressTestStartInterrupt() throws Throwable {
 		// Just re-run the testStartInterrupt test many,many times
@@ -211,7 +213,7 @@ public abstract class AbstractGdbManagerTest extends AbstractGhidraHeadlessInteg
 		assertEquals("test", out.trim());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testStartInterrupt() throws Throwable {
 		assumeFalse("I know no way to get this to pass with these conditions",
 			this instanceof JoinedGdbManagerTest);
@@ -237,7 +239,7 @@ public abstract class AbstractGdbManagerTest extends AbstractGhidraHeadlessInteg
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testStepSyscallInterrupt() throws Throwable {
 		assumeFalse("I know no way to get this to pass with these conditions",
 			this instanceof JoinedGdbManagerTest);
@@ -269,7 +271,7 @@ public abstract class AbstractGdbManagerTest extends AbstractGhidraHeadlessInteg
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSetVarEvaluate() throws Throwable {
 		try (GdbManager mgr = GdbManager.newInstance(getPtyFactory())) {
 			waitOn(startManager(mgr));
@@ -284,7 +286,7 @@ public abstract class AbstractGdbManagerTest extends AbstractGhidraHeadlessInteg
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSetVarGetVar() throws Throwable {
 		try (GdbManager mgr = GdbManager.newInstance(getPtyFactory())) {
 			waitOn(startManager(mgr));
@@ -310,7 +312,7 @@ public abstract class AbstractGdbManagerTest extends AbstractGhidraHeadlessInteg
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testListReadWriteReadRegisters() throws Throwable {
 		try (GdbManager mgr = GdbManager.newInstance(getPtyFactory())) {
 			waitOn(startManager(mgr));
@@ -345,7 +347,7 @@ public abstract class AbstractGdbManagerTest extends AbstractGhidraHeadlessInteg
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testWriteReadMemory() throws Throwable {
 		ByteBuffer rBuf = ByteBuffer.allocate(1024);
 		try (GdbManager mgr = GdbManager.newInstance(getPtyFactory())) {
@@ -376,7 +378,7 @@ public abstract class AbstractGdbManagerTest extends AbstractGhidraHeadlessInteg
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testContinue() throws Throwable {
 		try (GdbManager mgr = GdbManager.newInstance(getPtyFactory())) {
 			waitOn(startManager(mgr));
@@ -391,7 +393,7 @@ public abstract class AbstractGdbManagerTest extends AbstractGhidraHeadlessInteg
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testStep() throws Throwable {
 		try (GdbManager mgr = GdbManager.newInstance(getPtyFactory())) {
 			waitOn(startManager(mgr));
@@ -406,7 +408,7 @@ public abstract class AbstractGdbManagerTest extends AbstractGhidraHeadlessInteg
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testThreadSelect() throws Throwable {
 		try (GdbManager mgr = GdbManager.newInstance(getPtyFactory())) {
 			waitOn(startManager(mgr));
@@ -419,7 +421,7 @@ public abstract class AbstractGdbManagerTest extends AbstractGhidraHeadlessInteg
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testListFrames() throws Throwable {
 		try (GdbManager mgr = GdbManager.newInstance(getPtyFactory())) {
 			waitOn(startManager(mgr));

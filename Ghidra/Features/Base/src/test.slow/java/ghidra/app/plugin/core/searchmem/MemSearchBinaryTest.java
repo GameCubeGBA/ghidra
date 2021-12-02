@@ -23,7 +23,7 @@ import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import docking.widgets.fieldpanel.support.Highlight;
@@ -44,7 +44,7 @@ public class MemSearchBinaryTest extends AbstractMemSearchTest {
 	}
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		selectRadioButton("Binary");

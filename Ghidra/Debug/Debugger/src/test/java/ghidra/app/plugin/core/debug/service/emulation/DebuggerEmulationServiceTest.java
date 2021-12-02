@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 
 import java.math.BigInteger;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -47,7 +47,7 @@ public class DebuggerEmulationServiceTest extends AbstractGhidraHeadedDebuggerGU
 	protected DebuggerEmulationServicePlugin emulationPlugin;
 	protected CodeBrowserPlugin codeBrowser;
 
-	@Before
+	@BeforeEach
 	public void setUpEmulationServiceTest() throws Exception {
 		emulationPlugin = addPlugin(tool, DebuggerEmulationServicePlugin.class);
 		// TODO: Action enablement doesn't work without CodeBrowser???

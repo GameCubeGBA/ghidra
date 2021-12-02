@@ -15,9 +15,8 @@
  */
 package ghidra.app.plugin.assembler.sleigh;
 
-import org.junit.Test;
-
 import ghidra.program.model.lang.LanguageID;
+import org.junit.jupiter.api.Test;
 
 public class ARMBEAssemblyTest extends AbstractAssemblyTest {
 	public static final String THUMB = "80:00:00:00:00:00:00:00";
@@ -28,7 +27,7 @@ public class ARMBEAssemblyTest extends AbstractAssemblyTest {
 		return new LanguageID("ARM:BE:32:v7");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAssemble_bl_0x000230b8() {
 		assertOneCompatRestExact("bl 0x000230b8", "eb:00:6c:21", 0x0000802c);
 	}

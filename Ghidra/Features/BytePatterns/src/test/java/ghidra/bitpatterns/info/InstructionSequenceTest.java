@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.util.List;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import generic.jar.ResourceFile;
@@ -32,7 +32,7 @@ public class InstructionSequenceTest extends AbstractGenericTest {
 
 	private FileBitPatternInfoReader fReader;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws IOException {
 		ResourceFile resourceFile = Application.getModuleDataSubDirectory("BytePatterns", "test");
 		fReader = new FileBitPatternInfoReader(resourceFile.getFile(false));

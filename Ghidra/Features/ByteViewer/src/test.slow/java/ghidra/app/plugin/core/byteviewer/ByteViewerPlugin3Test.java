@@ -40,6 +40,9 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.util.ProgramSelection;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for what the byte viewer should do and not when it is not visible.
@@ -64,7 +67,7 @@ public class ByteViewerPlugin3Test extends AbstractGhidraHeadedIntegrationTest {
 	/*
 	 * @see TestCase#setUp()
 	 */
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
 		env = new TestEnv();
 		try {
@@ -105,7 +108,7 @@ public class ByteViewerPlugin3Test extends AbstractGhidraHeadedIntegrationTest {
 	/*
 	 * @see TestCase#tearDown()
 	 */
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
 		env.release(program);
 		env.dispose();
@@ -164,7 +167,7 @@ public class ByteViewerPlugin3Test extends AbstractGhidraHeadedIntegrationTest {
 		assertTrue(psel.hasSameAddresses(set));
 	}
 
-@Test
+@org.junit.jupiter.api.Test
     public void testNotVisible() throws Exception {
 		GoToService goToService = tool.getService(GoToService.class);
 		Address addr = getAddr(0x01002000);

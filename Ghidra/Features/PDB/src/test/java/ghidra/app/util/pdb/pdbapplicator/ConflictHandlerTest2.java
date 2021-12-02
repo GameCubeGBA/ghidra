@@ -29,6 +29,8 @@ import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.Msg;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Tests for the {@link DataTypeConflictHandler conflict handler} stuff.
@@ -52,14 +54,14 @@ public class ConflictHandlerTest2 extends AbstractGhidraHeadedIntegrationTest {
 		program.endTransaction(transactionID, true);
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = createDefaultProgram(testName.getMethodName(), ProgramBuilder._X64, this);
 		dtm = program.getDataTypeManager();
 		startTransaction();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		endTransaction();
 		program.release(this);

@@ -42,6 +42,8 @@ import ghidra.program.util.ProgramLocation;
 import ghidra.program.util.ProgramSelection;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * PropertyManagerPluginTest
@@ -59,7 +61,7 @@ public class PropertyManagerPluginTest extends AbstractGhidraHeadedIntegrationTe
 	private PropertyManagerTableModel model;
 	private PropertyManagerProvider provider;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		env = new TestEnv();
@@ -127,7 +129,7 @@ public class PropertyManagerPluginTest extends AbstractGhidraHeadedIntegrationTe
 		assertNotNull(markerService);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 

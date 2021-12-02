@@ -22,7 +22,6 @@ import java.nio.ByteBuffer;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import com.sun.jna.Pointer;
@@ -52,6 +51,7 @@ import agent.dbgmodel.jna.dbgmodel.DbgModelNative.*;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils;
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 import ghidra.util.NumericUtilities;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DbgModelTest extends AbstractGhidraHeadlessIntegrationTest {
 	protected static HostDataModelAccess cachedAccess = null;
@@ -84,7 +84,7 @@ public class DbgModelTest extends AbstractGhidraHeadlessIntegrationTest {
 	protected DebugClient client;
 	protected DebugControl control;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		DbgEngTest.assumeDbgengDLLLoadable();
 		debugCreate();

@@ -27,6 +27,7 @@ import ghidra.program.model.address.*;
 import ghidra.program.model.lang.InstructionError.InstructionErrorType;
 import ghidra.program.model.mem.ByteMemBufferImpl;
 import ghidra.program.model.mem.MemBuffer;
+import org.junit.jupiter.api.BeforeEach;
 
 public class InstructionSetTest extends AbstractGenericTest {
 
@@ -40,7 +41,7 @@ public class InstructionSetTest extends AbstractGenericTest {
 		return AddressSpace.DEFAULT_REGISTER_SPACE.getAddress(offset);
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		// create a block graph as follows: 
 		//

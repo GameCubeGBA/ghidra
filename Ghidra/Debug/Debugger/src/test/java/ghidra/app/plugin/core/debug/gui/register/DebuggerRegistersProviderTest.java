@@ -47,6 +47,7 @@ import ghidra.trace.model.memory.TraceMemoryRegisterSpace;
 import ghidra.trace.model.thread.TraceThread;
 import ghidra.util.database.UndoableTransaction;
 import ghidra.util.exception.DuplicateNameException;
+import org.junit.jupiter.api.BeforeEach;
 
 @Category(NightlyCategory.class) // this may actually be an @PortSensitive test
 public class DebuggerRegistersProviderTest extends AbstractGhidraHeadedDebuggerGUITest
@@ -70,7 +71,7 @@ public class DebuggerRegistersProviderTest extends AbstractGhidraHeadedDebuggerG
 
 	protected StructureDataType r0Struct;
 
-	@Before
+	@BeforeEach
 	public void setUpRegistersProviderTest() throws Exception {
 		registersPlugin = addPlugin(tool, DebuggerRegistersPlugin.class);
 		registersProvider = waitForComponentProvider(DebuggerRegistersProvider.class);

@@ -20,13 +20,13 @@ import static org.junit.Assert.*;
 import java.awt.Component;
 import java.math.BigInteger;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import docking.test.AbstractDockingTest;
 import docking.widgets.table.constraint.ColumnConstraint;
 import docking.widgets.table.constraint.InRangeColumnConstraint;
 import docking.widgets.textfield.IntegerTextField;
+import org.junit.jupiter.api.BeforeEach;
 
 public class UnsignedLongRangeConstraintEditorTest extends AbstractDockingTest {
 
@@ -35,7 +35,7 @@ public class UnsignedLongRangeConstraintEditorTest extends AbstractDockingTest {
 	private IntegerTextField lowerField;
 	private IntegerTextField upperField;
 
-	@Before
+	@BeforeEach
 	public void setup() {
 		constraint = new TestUnsignedLongRangeConstraint(BigInteger.ZERO, BigInteger.ZERO);
 		editor = (UnsignedLongRangeConstraintEditor) constraint.getEditor(null);

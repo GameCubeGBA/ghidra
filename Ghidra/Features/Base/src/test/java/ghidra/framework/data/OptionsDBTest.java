@@ -36,6 +36,8 @@ import ghidra.program.database.ProgramBuilder;
 import ghidra.program.database.ProgramDB;
 import ghidra.util.HelpLocation;
 import ghidra.util.exception.InvalidInputException;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class OptionsDBTest extends AbstractGenericTest {
 
@@ -51,7 +53,7 @@ public class OptionsDBTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		builder = new ProgramBuilder();
 		ProgramDB program = builder.getProgram();
@@ -63,7 +65,7 @@ public class OptionsDBTest extends AbstractGenericTest {
 		options = new OptionsDB(builder.getProgram());
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		builder.getProgram().endTransaction(txID, false);
 		builder.dispose();

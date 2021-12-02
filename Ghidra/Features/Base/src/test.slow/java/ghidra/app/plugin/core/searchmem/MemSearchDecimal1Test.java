@@ -18,7 +18,7 @@ package ghidra.app.plugin.core.searchmem;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import ghidra.program.database.ProgramBuilder;
@@ -36,7 +36,7 @@ public class MemSearchDecimal1Test extends AbstractMemSearchTest {
 	}
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		selectRadioButton("Decimal");

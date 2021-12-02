@@ -36,6 +36,8 @@ import ghidra.program.model.data.ByteDataType;
 import ghidra.program.model.listing.Program;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class OverviewTest extends AbstractGhidraHeadedIntegrationTest {
 	private TestEnv env;
@@ -50,7 +52,7 @@ public class OverviewTest extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -74,7 +76,7 @@ public class OverviewTest extends AbstractGhidraHeadedIntegrationTest {
 		tool.addPlugin(CodeBrowserPlugin.class.getName());
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

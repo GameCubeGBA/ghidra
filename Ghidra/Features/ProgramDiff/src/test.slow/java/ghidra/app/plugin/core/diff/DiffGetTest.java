@@ -21,7 +21,7 @@ import java.awt.Window;
 
 import javax.swing.*;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import ghidra.app.events.ProgramSelectionPluginEvent;
@@ -33,7 +33,7 @@ import ghidra.program.util.ProgramSelection;
 public class DiffGetTest extends DiffTestAdapter {
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		programBuilderDiffTest1.createMemory("d4", "0x400", 0x100);

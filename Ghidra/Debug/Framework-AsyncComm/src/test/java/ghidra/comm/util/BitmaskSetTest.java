@@ -25,7 +25,7 @@ import javax.tools.*;
 import javax.tools.JavaCompiler.CompilationTask;
 import javax.tools.JavaFileObject.Kind;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.util.Msg;
 
@@ -88,7 +88,7 @@ public class BitmaskSetTest {
 		assertEquals(TestUniverse.class, setOf0.getUniverse());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	@SuppressWarnings("unlikely-arg-type") // Fair enough, Java. Fair enough. But it passes :)
 	public void testContainsEmptyDifferentType() {
 		// Check java behavior
@@ -176,7 +176,7 @@ public class BitmaskSetTest {
 	}
 
 	@SuppressWarnings("unlikely-arg-type")
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEquality() {
 		assertFalse(setOf2.equals("Some string"));
 
@@ -212,7 +212,7 @@ public class BitmaskSetTest {
 		assertFalse(setOf1.contains("Some string"));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIterator() {
 		Set<TestUniverse> test;
 		Set<TestUniverse> exp;
@@ -226,7 +226,7 @@ public class BitmaskSetTest {
 		assertEquals(exp, test);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testArray() {
 		TestUniverse[] arr;
 
@@ -255,7 +255,7 @@ public class BitmaskSetTest {
 	}
 
 	@SuppressWarnings("unlikely-arg-type")
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testRemove() {
 		BitmaskSet<TestUniverse> test = new BitmaskSet<>(setOf2);
 		assertTrue(test.remove(TestUniverse.SECOND));
@@ -268,7 +268,7 @@ public class BitmaskSetTest {
 		assertEquals(setOf1, test);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testContainsAll() {
 		assertTrue(setOf0.containsAll(setOf0));
 		assertFalse(setOf0.containsAll(setOf1));
@@ -281,7 +281,7 @@ public class BitmaskSetTest {
 		assertFalse(setOf1.containsAll(new HashSet<>(setOf2)));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testUnion() {
 		BitmaskSet<TestUniverse> test = new BitmaskSet<>(setOf2);
 		assertTrue(test.addAll(setOf2a));
@@ -306,7 +306,7 @@ public class BitmaskSetTest {
 		assertEquals(setOf1, test);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIntersection() {
 		BitmaskSet<TestUniverse> test = new BitmaskSet<>(setOf2);
 		assertTrue(test.retainAll(setOf2a));
@@ -336,7 +336,7 @@ public class BitmaskSetTest {
 		assertEquals(setOf1, test);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSubtraction() {
 		BitmaskSet<TestUniverse> exp = BitmaskSet.of(TestUniverse.SECOND);
 
@@ -366,21 +366,21 @@ public class BitmaskSetTest {
 		assertEquals(exp, test);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testClear() {
 		BitmaskSet<TestUniverse> test = new BitmaskSet<>(setOf2);
 		test.clear();
 		assertEquals(setOf0, test);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testToString() {
 		assertEquals("[]", setOf0.toString());
 		assertEquals("[FIRST]", setOf1.toString());
 		assertEquals("[FIRST, SECOND]", setOf2.toString());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testBitmask() {
 		assertEquals(0, setOf0.getBitmask());
 		assertEquals(1, setOf1.getBitmask());

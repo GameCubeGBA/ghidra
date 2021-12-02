@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.events.ProgramSelectionPluginEvent;
 import ghidra.graph.*;
@@ -70,7 +70,7 @@ public class BlockGraphEventTest extends AbstractBlockGraphTest {
 		return new AddressSet(addr(start), addr(end));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGhidraSelectionChanged() {
 		setSelection(addrSet(0x1002239, 0x1002241));
 		Set<AttributedVertex> selected = new HashSet<>(display.getSelectedVertices());
@@ -87,7 +87,7 @@ public class BlockGraphEventTest extends AbstractBlockGraphTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGraphNodeFocused() {
 		display.focusChanged(graph.getVertex("01002203"));
 		assertEquals(addr(0x01002203), codeBrowser.getCurrentLocation().getAddress());

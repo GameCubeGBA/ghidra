@@ -19,8 +19,8 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.app.cmd.function.CreateFunctionCmd;
@@ -44,7 +44,7 @@ public class AddLabelCmdTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		ProgramBuilder builder = new ProgramBuilder("notepad", ProgramBuilder._TOY);
@@ -52,12 +52,12 @@ public class AddLabelCmdTest extends AbstractGenericTest {
 		notepad = builder.getProgram();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddLabel() {
 		testAddLabel(notepad);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddBigLabel() {
 		String name = makeName(SymbolUtilities.MAX_SYMBOL_NAME_LENGTH);
 		Symbol s = testAddLabel(notepad, addr(0x0), name);
@@ -72,7 +72,7 @@ public class AddLabelCmdTest extends AbstractGenericTest {
 		assertNull(s);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddInvalidLabel() {
 
 		Symbol s = testAddLabel(notepad, addr(0x0), "foo bar");
@@ -120,7 +120,7 @@ public class AddLabelCmdTest extends AbstractGenericTest {
 		assertEquals(SourceType.ANALYSIS, other.getSource());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddNamespaceLabelAtFunction() throws Exception {
 
 		Function function = getTestFunction();
@@ -166,7 +166,7 @@ public class AddLabelCmdTest extends AbstractGenericTest {
 		return null;
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEditFunctionLabel() throws Exception {
 		Function function = getTestFunction();
 

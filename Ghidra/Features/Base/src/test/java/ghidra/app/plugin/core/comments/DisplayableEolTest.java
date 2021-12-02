@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 
 import java.nio.charset.StandardCharsets;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
@@ -45,7 +45,7 @@ public class DisplayableEolTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		ProgramBuilder builder = new ProgramBuilder();
 

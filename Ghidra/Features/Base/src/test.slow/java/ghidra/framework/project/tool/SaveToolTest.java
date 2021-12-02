@@ -24,6 +24,8 @@ import ghidra.framework.model.*;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.ProjectTestUtils;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Test for creating a new empty tool with the new front end
@@ -36,13 +38,13 @@ public class SaveToolTest extends AbstractGhidraHeadedIntegrationTest {
 	private PluginTool runningTool;
 	private Project project;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		ProjectTestUtils.deleteProject(DIRECTORY_NAME, PROJECT_NAME);
 		project = ProjectTestUtils.getProject(DIRECTORY_NAME, PROJECT_NAME);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		project.close();
 		ProjectTestUtils.deleteProject(DIRECTORY_NAME, PROJECT_NAME);

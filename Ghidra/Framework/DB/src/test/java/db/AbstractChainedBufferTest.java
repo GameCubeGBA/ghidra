@@ -25,6 +25,9 @@ import org.junit.*;
 
 import db.buffers.BufferMgr;
 import generic.test.AbstractGenericTest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public abstract class AbstractChainedBufferTest extends AbstractGenericTest {
 
@@ -52,18 +55,18 @@ public abstract class AbstractChainedBufferTest extends AbstractGenericTest {
 		this.sourceDataOffset = sourceDataOffset;
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		mgr = new BufferMgr(BUFFER_SIZE, CACHE_SIZE, BufferMgr.DEFAULT_CHECKPOINT_COUNT);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		mgr.dispose();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCreateChainedBuffer() throws IOException {
 		ChainedBuffer cb =
 			new ChainedBuffer(128 * 1024, obfuscated, sourceData, sourceDataOffset, mgr);
@@ -81,7 +84,7 @@ public abstract class AbstractChainedBufferTest extends AbstractGenericTest {
 		assertArrayEquals(origBytes, cb.get(0, origBytes.length));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testReadOnlyChainedBuffer() throws IOException {
 		ChainedBuffer cb =
 			new ChainedBuffer(128 * 1024, obfuscated, sourceData, sourceDataOffset, mgr);
@@ -99,7 +102,7 @@ public abstract class AbstractChainedBufferTest extends AbstractGenericTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testFillChainnedBuffer() throws IOException {
 
 		ChainedBuffer cb =
@@ -125,7 +128,7 @@ public abstract class AbstractChainedBufferTest extends AbstractGenericTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testBigChainnedBuffer() throws IOException {
 
 		ChainedBuffer cb =
@@ -251,7 +254,7 @@ public abstract class AbstractChainedBufferTest extends AbstractGenericTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSetByte() throws IOException {
 		int size = 400;
 		byte[] origBytes = new byte[size];
@@ -291,7 +294,7 @@ public abstract class AbstractChainedBufferTest extends AbstractGenericTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGetByte() throws IOException {
 		int size = 800;
 		byte[] bytes = new byte[size / 2];
@@ -339,7 +342,7 @@ public abstract class AbstractChainedBufferTest extends AbstractGenericTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSetInt() throws IOException {
 		int size = 400;
 		byte[] origBytes = new byte[size];
@@ -404,7 +407,7 @@ public abstract class AbstractChainedBufferTest extends AbstractGenericTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGetInt() throws IOException {
 		int size = 400;
 		byte[] origBytes = new byte[size];
@@ -468,7 +471,7 @@ public abstract class AbstractChainedBufferTest extends AbstractGenericTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSetLong() throws IOException {
 		int size = 16000;
 		byte[] origBytes = new byte[size];
@@ -545,7 +548,7 @@ public abstract class AbstractChainedBufferTest extends AbstractGenericTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGetLong() throws IOException {
 		int size = 1504;
 		byte[] origBytes = new byte[size];
@@ -621,7 +624,7 @@ public abstract class AbstractChainedBufferTest extends AbstractGenericTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSetShort() throws IOException {
 		int size = 400;
 		byte[] origBytes = new byte[size];
@@ -680,7 +683,7 @@ public abstract class AbstractChainedBufferTest extends AbstractGenericTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGetShort() throws IOException {
 		int size = 400;
 		byte[] origBytes = new byte[size];
@@ -738,7 +741,7 @@ public abstract class AbstractChainedBufferTest extends AbstractGenericTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGetId() throws IOException {
 
 		int size = 400;
@@ -752,7 +755,7 @@ public abstract class AbstractChainedBufferTest extends AbstractGenericTest {
 		assertTrue(Arrays.equals(bytes, cb.get(0, size)));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDelete() throws IOException {
 
 		ChainedBuffer cb = new ChainedBuffer(32768, obfuscated, sourceData, sourceDataOffset, mgr);
@@ -787,7 +790,7 @@ public abstract class AbstractChainedBufferTest extends AbstractGenericTest {
 		assertEquals(0, mgr.getLockCount());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSplit() throws IOException {
 
 		doSplitTest(BUFFER_SIZE / 2);// single to single
@@ -833,7 +836,7 @@ public abstract class AbstractChainedBufferTest extends AbstractGenericTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAppend() throws IOException {
 
 		doAppendTest(BUFFER_SIZE / 3, BUFFER_SIZE / 3);// single + single = single
@@ -871,7 +874,7 @@ public abstract class AbstractChainedBufferTest extends AbstractGenericTest {
 		return false;
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSetSize() throws IOException {
 
 		// start with small buffer

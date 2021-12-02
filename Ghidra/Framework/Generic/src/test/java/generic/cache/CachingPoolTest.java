@@ -20,10 +20,10 @@ import static org.junit.Assert.*;
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
+import org.junit.jupiter.api.BeforeEach;
 
 public class CachingPoolTest extends AbstractGenericTest {
 
@@ -36,7 +36,7 @@ public class CachingPoolTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		factory = new TestBasicFactory();
 		pool = new CachingPool<TestItem>(factory);
@@ -56,7 +56,7 @@ public class CachingPoolTest extends AbstractGenericTest {
 		assertSame(item, newItem);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCacheCreatesAndReusesItems() throws Exception {
 		assertEquals(0, createdCount());
 
@@ -75,7 +75,7 @@ public class CachingPoolTest extends AbstractGenericTest {
 		assertSame(item2, newItem);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCacheDisposesItem() throws Exception {
 		pool.setCleanupTimeout(TEST_CLEANUP_TIMEOUT);
 
@@ -89,7 +89,7 @@ public class CachingPoolTest extends AbstractGenericTest {
 		assertTrue(item1.isDisposed());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCacheDisposesItems() throws Exception {
 		pool.setCleanupTimeout(TEST_CLEANUP_TIMEOUT);
 

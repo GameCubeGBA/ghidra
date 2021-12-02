@@ -31,19 +31,21 @@ import ghidra.trace.database.ToyDBTraceBuilder;
 import ghidra.trace.model.modules.TraceConflictedMappingException;
 import ghidra.trace.model.modules.TraceStaticMapping;
 import ghidra.util.database.UndoableTransaction;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DBTraceStaticMappingManagerTest extends AbstractGhidraHeadlessIntegrationTest {
 
 	ToyDBTraceBuilder b;
 	DBTraceStaticMappingManager staticMappingManager;
 
-	@Before
+	@BeforeEach
 	public void setUpStaticMappingManagerTest() throws IOException {
 		b = new ToyDBTraceBuilder("Testing", "Toy:BE:64:default");
 		staticMappingManager = b.trace.getStaticMappingManager();
 	}
 
-	@After
+	@AfterEach
 	public void tearDownStaticMappingManagerTest() {
 		b.close();
 	}

@@ -33,6 +33,8 @@ import ghidra.framework.task.*;
 import ghidra.framework.task.gui.taskview.*;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class GTaskGUITest extends AbstractDockingTest {
 
@@ -41,7 +43,7 @@ public class GTaskGUITest extends AbstractDockingTest {
 	private JFrame jFrame;
 	private GTaskManagerPanel taskPanel;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		setErrorGUIEnabled(false);
@@ -58,7 +60,7 @@ public class GTaskGUITest extends AbstractDockingTest {
 		jFrame.setVisible(true);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		domainObj.release(this);

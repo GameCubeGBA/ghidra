@@ -19,7 +19,6 @@ import static org.junit.Assert.*;
 
 import java.util.*;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import ghidra.app.plugin.core.analysis.DefaultDataTypeManagerService;
@@ -32,6 +31,7 @@ import ghidra.program.model.listing.FunctionSignature;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.ToyProgramBuilder;
 import ghidra.util.exception.CancelledException;
+import org.junit.jupiter.api.BeforeEach;
 
 public class FunctionSignatureParserTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -39,7 +39,7 @@ public class FunctionSignatureParserTest extends AbstractGhidraHeadedIntegration
 	private FunctionSignatureParser parser;
 	private int dtChoiceCount;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		ProgramBuilder builder = new ToyProgramBuilder("test", false);
 		StructureDataType s = new StructureDataType("StructA", 0);

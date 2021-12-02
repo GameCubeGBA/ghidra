@@ -34,6 +34,8 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressFactory;
 import ghidra.program.model.listing.Program;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class NextPrevSelectionHighlightTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -52,7 +54,7 @@ public class NextPrevSelectionHighlightTest extends AbstractGhidraHeadedIntegrat
 		return addrFactory.getAddress(address);
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -84,7 +86,7 @@ public class NextPrevSelectionHighlightTest extends AbstractGhidraHeadedIntegrat
 		pm.closeProgram(program, true);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

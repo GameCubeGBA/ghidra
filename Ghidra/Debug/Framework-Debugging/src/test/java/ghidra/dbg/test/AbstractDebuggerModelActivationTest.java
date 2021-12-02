@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.Unique;
 import ghidra.dbg.target.*;
@@ -111,7 +111,7 @@ public abstract class AbstractDebuggerModelActivationTest extends AbstractDebugg
 		return null;
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDefaultFocusIsAsExpected() throws Throwable {
 		List<String> expectedDefaultFocus = getExpectedDefaultActivePath();
 		assumeNotNull(expectedDefaultFocus);
@@ -132,7 +132,7 @@ public abstract class AbstractDebuggerModelActivationTest extends AbstractDebugg
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testActivateEachOnce() throws Throwable {
 		m.build();
 

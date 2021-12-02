@@ -31,6 +31,9 @@ import ghidra.program.model.mem.MemBuffer;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class BitFieldListingDisplayTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -42,7 +45,7 @@ public class BitFieldListingDisplayTest extends AbstractGhidraHeadedIntegrationT
 	private TestEnv env;
 	private CodeBrowserPlugin plugin;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = createDefaultProgram("Test", ProgramBuilder._TOY, this); // big-endian
 		startTransaction();
@@ -94,7 +97,7 @@ public class BitFieldListingDisplayTest extends AbstractGhidraHeadedIntegrationT
 		return space.getAddress(value);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		endTransaction();
 		env.dispose();
@@ -112,7 +115,7 @@ public class BitFieldListingDisplayTest extends AbstractGhidraHeadedIntegrationT
 		program.endTransaction(transactionID, true);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testStructureBitFields() throws Exception {
 		openStructure(addr(0x1010));
 		assertMnemonic("Test", addr(0x1010), 0);

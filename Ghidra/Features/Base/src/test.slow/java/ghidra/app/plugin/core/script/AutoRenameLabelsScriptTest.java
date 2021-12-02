@@ -33,6 +33,9 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 import ghidra.program.model.symbol.*;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test the AutoRenameLabelsPlugin. 
@@ -44,7 +47,7 @@ public class AutoRenameLabelsScriptTest extends AbstractGhidraHeadedIntegrationT
 	private Program program;
 	private File script;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -87,7 +90,7 @@ public class AutoRenameLabelsScriptTest extends AbstractGhidraHeadedIntegrationT
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}
@@ -119,7 +122,7 @@ public class AutoRenameLabelsScriptTest extends AbstractGhidraHeadedIntegrationT
 		assertEquals("My_Label2", s2.getName());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testNoRenameOnUserDefined() throws Exception {
 		SymbolTable symbolTable = program.getSymbolTable();
 		Symbol s1 = symbolTable.getPrimarySymbol(addr(0x010046cc));

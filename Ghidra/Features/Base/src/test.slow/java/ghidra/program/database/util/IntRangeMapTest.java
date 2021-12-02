@@ -33,6 +33,8 @@ import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class IntRangeMapTest extends AbstractGhidraHeadlessIntegrationTest {
 
@@ -49,7 +51,7 @@ public class IntRangeMapTest extends AbstractGhidraHeadlessIntegrationTest {
 		return builder.getProgram();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		program = buildProgram("notepad");
@@ -57,7 +59,7 @@ public class IntRangeMapTest extends AbstractGhidraHeadlessIntegrationTest {
 		transactionID = program.startTransaction("test");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (transactionID >= 0) {
 			program.endTransaction(transactionID, true);

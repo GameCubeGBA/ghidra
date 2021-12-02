@@ -17,7 +17,7 @@ package ghidra.app.plugin.core.debug.gui.pcode;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import com.google.common.collect.Range;
@@ -50,7 +50,7 @@ public class DebuggerPcodeStepperProviderTest extends AbstractGhidraHeadedDebugg
 	protected DebuggerPcodeStepperProvider pcodeProvider;
 	protected DebuggerEmulationService emuService;
 
-	@Before
+	@BeforeEach
 	public void setUpPcodeStepperProviderTest() throws Exception {
 		traceManager = addPlugin(tool, DebuggerTraceManagerServicePlugin.class);
 		pcodePlugin = addPlugin(tool, DebuggerPcodeStepperPlugin.class);

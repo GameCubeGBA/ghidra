@@ -40,6 +40,8 @@ import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.task.TaskMonitor;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * <CODE>ProgramMerge2Test</CODE> tests the <CODE>ProgramMerge</CODE> class
@@ -64,7 +66,7 @@ public class ProgramMerge2Test extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		fixupGUI();
@@ -73,7 +75,7 @@ public class ProgramMerge2Test extends AbstractGhidraHeadedIntegrationTest {
 		testEnv.getTool().setToolName("TestTool");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		try {
 			if (resultProgram != null) {

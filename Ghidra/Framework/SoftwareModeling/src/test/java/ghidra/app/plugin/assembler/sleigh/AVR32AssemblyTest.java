@@ -15,9 +15,8 @@
  */
 package ghidra.app.plugin.assembler.sleigh;
 
-import org.junit.Test;
-
 import ghidra.program.model.lang.LanguageID;
+import org.junit.jupiter.api.Test;
 
 public class AVR32AssemblyTest extends AbstractAssemblyTest {
 	@Override
@@ -25,7 +24,7 @@ public class AVR32AssemblyTest extends AbstractAssemblyTest {
 		return new LanguageID("avr32:BE:32:default");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAssemble_BRls_0x00003dae() {
 		assertOneCompatRestExact("BR{ls} 0x00003dae", "fe:98:ff:e5", 0x00003de4);
 	}

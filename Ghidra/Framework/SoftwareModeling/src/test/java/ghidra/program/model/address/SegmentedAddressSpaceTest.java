@@ -21,6 +21,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.*;
 
 import generic.test.AbstractGenericTest;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * 
@@ -36,7 +37,7 @@ public class SegmentedAddressSpaceTest extends AbstractGenericTest {
 		super();
 	}
 
-    @Before
+    @BeforeEach
     public void setUp() {
 		space = new SegmentedAddressSpace("Test", 0);
 	}

@@ -20,7 +20,7 @@ import static org.junit.Assume.assumeFalse;
 
 import java.io.*;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import agent.gdb.pty.PtySession;
@@ -32,7 +32,7 @@ import ghidra.util.exception.CancelledException;
 public class SshPtyTest extends AbstractGhidraHeadedIntegrationTest {
 	protected GhidraSshPtyFactory factory;
 
-	@Before
+	@BeforeEach
 	public void setupSshPtyTest() throws CancelledException {
 		assumeFalse(SystemUtilities.isInTestingBatchMode());
 		factory = new GhidraSshPtyFactory();

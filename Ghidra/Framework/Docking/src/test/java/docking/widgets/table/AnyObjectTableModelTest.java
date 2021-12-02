@@ -21,25 +21,25 @@ import java.sql.Date;
 import java.util.Arrays;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class AnyObjectTableModelTest {
 
 	private AnyObjectTableModel<TestClass> model;
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testColumnsForPublicString() {
 		model = new AnyObjectTableModel<>("Test", TestClass.class, "getName");
 		assertColumns("Name");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testColumnsForMultipleWordMethodNames() {
 		model = new AnyObjectTableModel<>("Test", TestClass.class, "getNameThatIsAwesome");
 		assertColumns("Name That Is Awesome");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testColumnsForPublicInt() {
 		model = new AnyObjectTableModel<>("Test", TestClass.class, "getA");
 		assertColumns("A");

@@ -22,7 +22,6 @@ import java.lang.invoke.MethodHandles;
 import java.util.Objects;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import ghidra.dbg.AnnotatedDebuggerAttributeListener;
 import ghidra.dbg.DebugModelConventions;
@@ -31,6 +30,7 @@ import ghidra.dbg.target.*;
 import ghidra.dbg.target.TargetExecutionStateful.TargetExecutionState;
 import ghidra.program.model.address.Address;
 import ghidra.util.Msg;
+import org.junit.jupiter.api.Test;
 
 /**
  * A scenario that verifies memory writes affect the target

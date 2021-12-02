@@ -24,8 +24,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.io.FilenameUtils;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import docking.widgets.fieldpanel.field.*;
 import ghidra.app.nav.Navigatable;
@@ -56,7 +56,7 @@ public class AnnotationTest extends AbstractGhidraHeadedIntegrationTest {
 
 	private Program program;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = buildProgram();
 	}
@@ -92,14 +92,14 @@ public class AnnotationTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(rawComment, fixed);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSymbolAnnotationWithInvalidAddress() {
 		String rawComment = "This is a symbol {@sym 999999} annotation.";
 		String fixed = CommentUtils.fixupAnnoations(rawComment, program);
 		assertEquals(rawComment, fixed);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSymbolAnnotationWithSymbol() {
 		String rawComment = "This is a symbol {@sym LAB_01003d2c} annotation.";
 		String fixed = CommentUtils.fixupAnnoations(rawComment, program);
@@ -118,14 +118,14 @@ public class AnnotationTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals("This is a symbol {@sym CocoPebbles} annotation.", fixed);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testNoAnnotation() {
 		String rawComment = "This is no symbol annotation.";
 		String fixed = CommentUtils.fixupAnnoations(rawComment, program);
 		assertEquals(rawComment, fixed);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testMixedAnnotationNoSymbolAnnotation() {
 		String rawComment = "This is a symbol {@url www.noplace.com} annotation " +
 			"with a {@program notepad} annotation.";
@@ -142,28 +142,28 @@ public class AnnotationTest extends AbstractGhidraHeadedIntegrationTest {
 			"with a {@program notepad} annotation.", fixed);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSymbolAnnotationAtBeginningOfComment() {
 		String rawComment = "{@sym LAB_01003d2c} annotation at the beginning.";
 		String fixed = CommentUtils.fixupAnnoations(rawComment, program);
 		assertEquals("{@sym 01003d2c} annotation at the beginning.", fixed);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSymbolAnnotation_BackToBack() {
 		String rawComment = "Test {@sym LAB_01003d2c}{@sym LAB_01003d2c} end.";
 		String fixed = CommentUtils.fixupAnnoations(rawComment, program);
 		assertEquals("Test {@sym 01003d2c}{@sym 01003d2c} end.", fixed);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSymbolAnnotationAtEndOfComment() {
 		String rawComment = "Annotation at the end {@sym LAB_01003d2c}";
 		String fixed = CommentUtils.fixupAnnoations(rawComment, program);
 		assertEquals("Annotation at the end {@sym 01003d2c}", fixed);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSymbolAnnotationAtBeginningAndEndOfComment() {
 		String rawComment =
 			"{@sym LAB_01003d2c} annotation at the beginning and end {@sym LAB_01003d5b}";
@@ -182,7 +182,7 @@ public class AnnotationTest extends AbstractGhidraHeadedIntegrationTest {
 			"end {@sym 01003d5b}", fixed);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSymbolAnnotationWithValidAndInvalidSymbol() {
 		String rawComment = "This is a symbol {@sym LAB_01003d2c} annotation " +
 			"with a {@sym FruityPebbles} annotation.";
@@ -191,14 +191,14 @@ public class AnnotationTest extends AbstractGhidraHeadedIntegrationTest {
 			"with a {@sym FruityPebbles} annotation.", fixed);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSymbolAnnotation_WithBracesInName_Escaped() {
 		String rawComment = "This is a symbol {@sym mySym\\{0\\}} annotation";
 		String display = CommentUtils.getDisplayString(rawComment, program);
 		assertEquals("This is a symbol mySym\\{0\\} annotation", display);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSymbolAnnotation_FullyEscaped() {
 		String rawComment = "This is a symbol \\{@sym bob\\} annotation";
 		String display = CommentUtils.getDisplayString(rawComment, program);
@@ -212,7 +212,7 @@ public class AnnotationTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals("This is a symbol https://wwww.site.suffix annotation.", displayString);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testUrlAnnotationWithQuotedSubstituteText() {
 		String rawComment =
 			"This is a symbol {@url https://wwww.site.suffix \"This is my text\"} annotation.";
@@ -220,7 +220,7 @@ public class AnnotationTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals("This is a symbol This is my text annotation.", displayString);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testUrlAnnotationWithQuotedSymbolAndSubstituteText() {
 		String rawComment =
 			"This is a symbol {@url \"https://wwww.site.suffix\" \"This is my text\"} annotation.";
@@ -228,7 +228,7 @@ public class AnnotationTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals("This is a symbol This is my text annotation.", displayString);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testProgramAnnotation_ProgramNameOnly() {
 
 		String programName = OTHER_PROGRAM_NAME;
@@ -254,7 +254,7 @@ public class AnnotationTest extends AbstractGhidraHeadedIntegrationTest {
 		assertTrue(spyNavigatable.navigatedTo(programName));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testProgramAnnotation_ProgramNameAndAddress() {
 
 		String programName = OTHER_PROGRAM_NAME;
@@ -281,7 +281,7 @@ public class AnnotationTest extends AbstractGhidraHeadedIntegrationTest {
 		assertTrue(spyNavigatable.navigatedTo(programName, address));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testProgramAnnotation_ProgramNameAndAddress_InvalidAddress() {
 
 		String programName = OTHER_PROGRAM_NAME;
@@ -311,7 +311,7 @@ public class AnnotationTest extends AbstractGhidraHeadedIntegrationTest {
 		assertFalse(spyNavigatable.navigatedTo(programName, address));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testProgramAnnotation_ProgramNameAndSymbol() {
 
 		String programName = OTHER_PROGRAM_NAME;
@@ -338,7 +338,7 @@ public class AnnotationTest extends AbstractGhidraHeadedIntegrationTest {
 		assertTrue(spyNavigatable.navigatedTo(programName, symbol));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testProgramAnnotation_ProgramNameAndSymbol_InvalidSymbol() {
 
 		String programName = OTHER_PROGRAM_NAME;
@@ -395,7 +395,7 @@ public class AnnotationTest extends AbstractGhidraHeadedIntegrationTest {
 		assertTrue(spyNavigatable.navigatedTo(programName, symbol));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testProgramAnnotation_InvalidProgram() {
 
 		String programName = "bad_program";
@@ -422,7 +422,7 @@ public class AnnotationTest extends AbstractGhidraHeadedIntegrationTest {
 		assertFalse(spyServiceProvider.programOpened(programName));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testProgramAnnotation_InvalidPath() {
 
 		SpyNavigatable spyNavigatable = new SpyNavigatable();
@@ -457,7 +457,7 @@ public class AnnotationTest extends AbstractGhidraHeadedIntegrationTest {
 		assertFalse(spyServiceProvider.programOpened(otherProgramPath));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testProgramAnnotation_ProgramByPath_PathOnly() {
 
 		SpyNavigatable spyNavigatable = new SpyNavigatable();
@@ -519,7 +519,7 @@ public class AnnotationTest extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testProgramAnnotation_ProgramByPath_Backslashes_WithAddress() {
 
 		SpyNavigatable spyNavigatable = new SpyNavigatable();
@@ -552,7 +552,7 @@ public class AnnotationTest extends AbstractGhidraHeadedIntegrationTest {
 		assertTrue(spyNavigatable.navigatedTo(otherProgramPath, address));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testProgramAnnotation_ProgramByPath_Backslashes_NoFirstSlash_WithAddress() {
 
 		SpyNavigatable spyNavigatable = new SpyNavigatable();
@@ -586,7 +586,7 @@ public class AnnotationTest extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testProgramAnnotation_ProgramByPath_NoFirstSlash_WithAddress() {
 
 		SpyNavigatable spyNavigatable = new SpyNavigatable();
@@ -618,14 +618,14 @@ public class AnnotationTest extends AbstractGhidraHeadedIntegrationTest {
 		assertTrue(spyNavigatable.navigatedTo(otherProgramPath, address));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testUnknownAnnotation() {
 		String rawComment = "This is a symbol {@syyyybol bob} annotation";
 		String display = CommentUtils.getDisplayString(rawComment, program);
 		assertEquals(rawComment, display);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testInvalidAnnotation_MissingClosingBracket() {
 
 		String data = "This is an annotated string {@symbol 01001014 with trailing text";
@@ -643,7 +643,7 @@ public class AnnotationTest extends AbstractGhidraHeadedIntegrationTest {
 			prototype.getColor(0), strings[0].getColor(0));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testInvalidAnnotation_MissingStartingBracket() {
 
 		String data = "This is an annotated string @symbol 01001014} with trailing text";
@@ -661,7 +661,7 @@ public class AnnotationTest extends AbstractGhidraHeadedIntegrationTest {
 			prototype.getColor(0), strings[0].getColor(0));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testInvalidAnnotation_MissingAttributes_MatchesKnownAnnotation() {
 
 		String data = "Uh oh, here we go: annotation 2: {@symbol }";
@@ -674,7 +674,7 @@ public class AnnotationTest extends AbstractGhidraHeadedIntegrationTest {
 			strings[1].getColor(0));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testInvalidAnnotation_MissingAttributes_DoesNotMatchKnownAnnotation() {
 
 		// we do not detect an annotation in this string since there is no space after 'symbol'
@@ -693,7 +693,7 @@ public class AnnotationTest extends AbstractGhidraHeadedIntegrationTest {
 			prototype.getColor(0), strings[0].getColor(0));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testInvalidAnnotation_NoSuchSymbol() {
 
 		// valid annotation, invalid symbol

@@ -38,6 +38,8 @@ import ghidra.program.model.data.*;
 import ghidra.program.model.data.Enum;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Tests for the 'make enum from a selection' action
@@ -54,7 +56,7 @@ public class CreateEnumFromSelectionTest extends AbstractGhidraHeadedIntegration
 	private ArchiveRootNode archiveRootNode;
 	private ArchiveNode programNode;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -86,7 +88,7 @@ public class CreateEnumFromSelectionTest extends AbstractGhidraHeadedIntegration
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		plugin.getEditorManager().dismissEditors(null);// Close all editors that might be open.

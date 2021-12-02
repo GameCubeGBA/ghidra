@@ -37,6 +37,7 @@ import ghidra.util.task.SwingUpdateManager;
 import ghidra.util.task.TaskMonitor;
 import ghidra.util.worker.Worker;
 import junit.framework.AssertionFailedError;
+import org.junit.jupiter.api.BeforeEach;
 
 public class IncrementalThreadedTableTest extends AbstractThreadedTableTest {
 
@@ -52,7 +53,7 @@ public class IncrementalThreadedTableTest extends AbstractThreadedTableTest {
 //==================================================================================================	
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		super.setUp();

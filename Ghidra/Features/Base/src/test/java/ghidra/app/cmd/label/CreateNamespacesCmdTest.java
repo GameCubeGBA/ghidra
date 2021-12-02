@@ -29,6 +29,7 @@ import ghidra.program.model.listing.*;
 import ghidra.program.model.symbol.*;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.exception.InvalidInputException;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Test for the {@link ghidra.app.cmd.label.CreateNamespacesCmd} class.
@@ -48,7 +49,7 @@ public class CreateNamespacesCmdTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		ProgramBuilder builder = new ProgramBuilder("notepad", ProgramBuilder._TOY);
 		program = builder.getProgram();

@@ -22,7 +22,7 @@ import java.math.BigInteger;
 
 import javax.swing.JTextField;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import docking.test.AbstractDockingTest;
@@ -35,7 +35,7 @@ public class UnsignedLongValueConstraintEditorTest extends AbstractDockingTest {
 	private UnsignedLongConstraintEditor editor;
 	private IntegerTextField textField;
 
-	@Before
+	@BeforeEach
 	public void setup() {
 		constraint = new TestUnsignedValueConstraint(BigInteger.ZERO);
 		editor = (UnsignedLongConstraintEditor) constraint.getEditor(null);

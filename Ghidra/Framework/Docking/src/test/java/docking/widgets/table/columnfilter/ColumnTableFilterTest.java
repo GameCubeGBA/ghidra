@@ -24,7 +24,7 @@ import java.util.*;
 
 import javax.swing.table.TableColumn;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import docking.widgets.table.*;
@@ -49,7 +49,7 @@ public class ColumnTableFilterTest {
 	private ColumnFilterDialogModel<Integer> filterModel;
 	private List<ColumnConstraint<?>> allConstraints;
 
-	@Before
+	@BeforeEach
 	public void setup() {
 		allConstraints = loadConstraints();
 		// using a mock up to load discoverable column filters without performing a class search.

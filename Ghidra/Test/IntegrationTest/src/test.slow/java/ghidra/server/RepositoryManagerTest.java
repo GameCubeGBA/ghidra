@@ -26,6 +26,8 @@ import ghidra.server.remote.ServerTestUtil;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.exception.DuplicateFileException;
 import ghidra.util.exception.UserAccessException;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class RepositoryManagerTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -36,7 +38,7 @@ public class RepositoryManagerTest extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		File parent = createTempDirectory(getName());
 		root = new File(parent, "Repositories");
@@ -48,7 +50,7 @@ public class RepositoryManagerTest extends AbstractGhidraHeadedIntegrationTest {
 		writeUserList(root);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (mgr != null) {
 			mgr.dispose();

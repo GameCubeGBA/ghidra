@@ -37,6 +37,9 @@ import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.task.TaskLauncher;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AnalyzeAllOpenProgramsTaskTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -44,7 +47,7 @@ public class AnalyzeAllOpenProgramsTaskTest extends AbstractGhidraHeadedIntegrat
 	private PluginToolStub tool;
 	private List<Program> openPrograms = new ArrayList<>();
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = new PluginToolStub(env.getProject());
@@ -56,7 +59,7 @@ public class AnalyzeAllOpenProgramsTaskTest extends AbstractGhidraHeadedIntegrat
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		for (Program program : openPrograms) {
 			env.release(program);
@@ -65,7 +68,7 @@ public class AnalyzeAllOpenProgramsTaskTest extends AbstractGhidraHeadedIntegrat
 		env.dispose();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAnalyzeAllPrograms_TwoSameArchitecture() throws Exception {
 
 		// show the dialog, or the options get ignored by the task
@@ -90,7 +93,7 @@ public class AnalyzeAllOpenProgramsTaskTest extends AbstractGhidraHeadedIntegrat
 		verifyOptions(optionName, expectedAnalyzed);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAnalyzeAllPrograms_TwoDifferentArchitectures() throws Exception {
 
 		// show the dialog, or the options get ignored by the task
@@ -122,7 +125,7 @@ public class AnalyzeAllOpenProgramsTaskTest extends AbstractGhidraHeadedIntegrat
 		verifyDefaultOptions(expectedIgnored);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCancelAnalysisOptionsDialog() throws Exception {
 		// show the dialog, or the options get ignored by the task
 		tool.setShowAnalysisOptions(true);
@@ -142,7 +145,7 @@ public class AnalyzeAllOpenProgramsTaskTest extends AbstractGhidraHeadedIntegrat
 		assertTrue(spy.analyzed.isEmpty());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAnalyzeAllPrograms_NoOptionsDialog_TwoDifferentArchitectures()
 			throws Exception {
 		//
@@ -167,7 +170,7 @@ public class AnalyzeAllOpenProgramsTaskTest extends AbstractGhidraHeadedIntegrat
 		verifyDefaultOptions(expectedAnalyzed);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAnalyzeAllPrograms_TwoDifferentArchitectures_InterspersedOrdering()
 			throws Exception {
 		//
@@ -207,7 +210,7 @@ public class AnalyzeAllOpenProgramsTaskTest extends AbstractGhidraHeadedIntegrat
 		verifyDefaultOptions(expectedIgnored);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAnalyzeAllPrograms_TwoDifferentArchitectures_CancelWarningDialog()
 			throws Exception {
 

@@ -34,6 +34,8 @@ import ghidra.util.SystemUtilities;
 import ghidra.util.datastruct.WeakDataStructureFactory;
 import ghidra.util.datastruct.WeakSet;
 import ghidra.util.exception.AssertException;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class VisualGraphJobRunnerTest extends AbstractGenericTest {
 
@@ -52,7 +54,7 @@ public class VisualGraphJobRunnerTest extends AbstractGenericTest {
 		WeakDataStructureFactory.createCopyOnReadWeakSet();
 	private int jobCount;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		System.setProperty(SystemUtilities.HEADLESS_PROPERTY, "false");
@@ -68,7 +70,7 @@ public class VisualGraphJobRunnerTest extends AbstractGenericTest {
 //		Configurator.setLevel(myLogger.getName(), org.apache.logging.log4j.Level.TRACE);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 
 		for (JobExecutionThread t : jobThreads) {

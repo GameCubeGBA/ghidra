@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 
 import java.util.*;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import docking.widgets.table.*;
@@ -36,7 +36,7 @@ public class SymbolTableAddRemoveStrategyTest {
 	private SpyTableData spyTableData;
 	private List<Symbol> modelData;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		strategy = new SymbolTableAddRemoveStrategy();
 		modelData = createModelData();

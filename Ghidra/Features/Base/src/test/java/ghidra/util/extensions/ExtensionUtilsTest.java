@@ -22,7 +22,7 @@ import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import docking.test.AbstractDockingTest;
@@ -47,7 +47,7 @@ public class ExtensionUtilsTest extends AbstractDockingTest {
 	 * Create dummy archive and installation folders in the temp space that we can populate
 	 * with extensions.
 	 */
-	@Before
+	@BeforeEach
 	public void setup() throws IOException {
 
 		gLayout = Application.getApplicationLayout();

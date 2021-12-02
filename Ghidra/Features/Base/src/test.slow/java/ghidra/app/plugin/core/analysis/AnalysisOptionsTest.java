@@ -41,6 +41,9 @@ import ghidra.program.database.ProgramBuilder;
 import ghidra.program.model.listing.Program;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import utilities.util.FileUtilities;
 
 public class AnalysisOptionsTest extends AbstractGhidraHeadedIntegrationTest {
@@ -50,7 +53,7 @@ public class AnalysisOptionsTest extends AbstractGhidraHeadedIntegrationTest {
 	private Program program;
 	private AnalysisOptionsDialog optionsDialog;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		cleanUpStoredPreferences();
 		env = new TestEnv();
@@ -70,7 +73,7 @@ public class AnalysisOptionsTest extends AbstractGhidraHeadedIntegrationTest {
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.release(program);
 		env.dispose();
@@ -86,7 +89,7 @@ public class AnalysisOptionsTest extends AbstractGhidraHeadedIntegrationTest {
 		FileUtilities.deleteDir(optionsDir);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSelectAll() throws Exception {
 
 		setAnalyzerEnabled("Stack", false);
@@ -126,7 +129,7 @@ public class AnalysisOptionsTest extends AbstractGhidraHeadedIntegrationTest {
 		close(optionsDialog);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testReset() throws Exception {
 		assertTrue(isAnalyzerEnabled("Stack"));
 		assertTrue(isAnalyzerEnabled("Reference"));
@@ -149,7 +152,7 @@ public class AnalysisOptionsTest extends AbstractGhidraHeadedIntegrationTest {
 		close(optionsDialog);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSaveConfiguration() {
 		assertComboboxEquals("Current Program Options");
 		setAnalyzerEnabled("Stack", false);
@@ -164,7 +167,7 @@ public class AnalysisOptionsTest extends AbstractGhidraHeadedIntegrationTest {
 		close(optionsDialog);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDeleteConfiguration() {
 		assertComboboxEquals("Current Program Options");
 		createConfig("foo", false, false, false);
@@ -178,7 +181,7 @@ public class AnalysisOptionsTest extends AbstractGhidraHeadedIntegrationTest {
 		close(optionsDialog);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSwitchCombo() {
 		createConfig("a", false, false, false);
 		createConfig("b", false, true, false);
@@ -203,7 +206,7 @@ public class AnalysisOptionsTest extends AbstractGhidraHeadedIntegrationTest {
 		close(optionsDialog);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCancelDialogDoesntSaveChanges() {
 		assertComboboxEquals("Current Program Options");
 
@@ -229,7 +232,7 @@ public class AnalysisOptionsTest extends AbstractGhidraHeadedIntegrationTest {
 		assertTrue(isAnalyzerEnabledInProgramOptions("Reference"));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAnalyzeSavesChangesToProgram() {
 		assertComboboxEquals("Current Program Options");
 

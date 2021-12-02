@@ -17,7 +17,7 @@ package ghidra.app.plugin.core.diff;
 
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import ghidra.app.events.ProgramLocationPluginEvent;
@@ -33,7 +33,7 @@ public class DiffEnablementTest extends DiffTestAdapter {
 	}
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		programBuilderDiffTest1.createMemory("d4", "0x400", 0x100);

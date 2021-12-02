@@ -20,6 +20,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.*;
 
 import generic.test.AbstractGenericTest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * The order in which the methods are defined in this class
@@ -38,7 +40,7 @@ public class StackTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		stack1 = new Stack<String>(25);
 		stack2 = new Stack<String>();
@@ -51,7 +53,7 @@ public class StackTest extends AbstractGenericTest {
 		stack4.push("2");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		stack1 = null;
 		stack2 = null;

@@ -26,6 +26,8 @@ import docking.widgets.table.GTableColumnModel;
 import ghidra.framework.main.datatable.ProjectDataTablePanel;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class FrontEndProjectDataTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -36,7 +38,7 @@ public class FrontEndProjectDataTest extends AbstractGhidraHeadedIntegrationTest
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		env.resetDefaultTools();
@@ -46,7 +48,7 @@ public class FrontEndProjectDataTest extends AbstractGhidraHeadedIntegrationTest
 
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		runSwing(() -> frontEndTool.setVisible(false));
 		env.dispose();

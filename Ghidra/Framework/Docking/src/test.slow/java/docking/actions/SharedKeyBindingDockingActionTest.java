@@ -25,7 +25,6 @@ import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
 import org.apache.commons.collections4.IterableUtils;
-import org.junit.Before;
 import org.junit.Test;
 
 import docking.*;
@@ -36,6 +35,7 @@ import ghidra.framework.options.ToolOptions;
 import ghidra.util.Msg;
 import ghidra.util.SpyErrorLogger;
 import ghidra.util.exception.AssertException;
+import org.junit.jupiter.api.BeforeEach;
 
 public class SharedKeyBindingDockingActionTest extends AbstractDockingTest {
 
@@ -56,7 +56,7 @@ public class SharedKeyBindingDockingActionTest extends AbstractDockingTest {
 
 	private Tool tool;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		tool = new FakeDockingTool();
 

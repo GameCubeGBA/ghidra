@@ -17,7 +17,7 @@ package ghidra.program.util;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.model.address.Address;
@@ -93,7 +93,7 @@ public class AddressEvaluatorTest extends AbstractGhidraHeadedIntegrationTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testMultiAddrSpace() throws Exception {
 		Program p = createDefaultProgram("Test", ProgramBuilder._TOY_LE, this);
 		addrFactory = p.getAddressFactory();

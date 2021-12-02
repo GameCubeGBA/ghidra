@@ -21,8 +21,8 @@ import static org.junit.Assert.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import docking.widgets.OptionDialog;
 import ghidra.app.util.ByteCopier;
@@ -53,7 +53,7 @@ public class ByteViewerClipboardProviderTest extends AbstractGhidraHeadedIntegra
 	private Program program;
 	private ByteViewerClipboardProvider clipboardProvider;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		program = createProgram();
@@ -106,7 +106,7 @@ public class ByteViewerClipboardProviderTest extends AbstractGhidraHeadedIntegra
 		return builder.getProgram();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCopyPasteSpecial_ByteString() throws Exception {
 		int length = 4;
 		clipboardProvider.setSelection(selection("0x01001050", length));
@@ -122,7 +122,7 @@ public class ByteViewerClipboardProviderTest extends AbstractGhidraHeadedIntegra
 		assertBytesAt(pasteAddress, "0e 5e f4 77", length);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCopyPasteSpecial_ByteStringNoSpaces() throws Exception {
 		int length = 4;
 		clipboardProvider.setSelection(selection("0x01001050", length));
@@ -138,7 +138,7 @@ public class ByteViewerClipboardProviderTest extends AbstractGhidraHeadedIntegra
 		assertBytesAt(pasteAddress, "0e 5e f4 77", length);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCopyPasteSpecial_PythonByteString() throws Exception {
 
 		int length = 4;
@@ -155,7 +155,7 @@ public class ByteViewerClipboardProviderTest extends AbstractGhidraHeadedIntegra
 		assertBytesAt(pasteAddress, "0e 5e f4 77", length);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCopyPasteSpecial_PythonListString() throws Exception {
 
 		int length = 4;

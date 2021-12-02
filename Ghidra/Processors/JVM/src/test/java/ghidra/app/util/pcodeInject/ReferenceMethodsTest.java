@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import ghidra.app.plugin.processors.sleigh.SleighLanguage;
@@ -35,7 +35,7 @@ public class ReferenceMethodsTest extends AbstractGhidraHeadlessIntegrationTest 
 	private Address opAddress;
 	private long uniqueBase;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		language =
 			(SleighLanguage) getLanguageService().getLanguage(new LanguageID("JVM:BE:32:default"));

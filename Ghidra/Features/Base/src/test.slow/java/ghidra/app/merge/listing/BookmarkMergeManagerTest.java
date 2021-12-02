@@ -17,7 +17,7 @@ package ghidra.app.merge.listing;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.program.database.ProgramDB;
 import ghidra.program.database.ProgramModifierListener;
@@ -40,7 +40,7 @@ public class BookmarkMergeManagerTest extends AbstractListingMergeManagerTest {
 		super();
 	}
 
-@Test
+@org.junit.jupiter.api.Test
     public void testAddLatest() throws Exception {
 		mtf.initialize("NotepadMergeListingTest", new ProgramModifierListener() {
 
@@ -157,7 +157,7 @@ public class BookmarkMergeManagerTest extends AbstractListingMergeManagerTest {
 		checkBookmark("0x10028b1", BookmarkType.INFO, "Cat1", "Test bookmark @ 0x10028b1");
 	}
 
-@Test
+@org.junit.jupiter.api.Test
     public void testAddDiffPickLatest() throws Exception {
 		mtf.initialize("NotepadMergeListingTest", new ProgramModifierListener() {
 
@@ -204,7 +204,7 @@ public class BookmarkMergeManagerTest extends AbstractListingMergeManagerTest {
 		checkBookmark("0x10028b1", BookmarkType.INFO, "Cat1", "Test bookmark @ 0x10028b1");
 	}
 
-@Test
+@org.junit.jupiter.api.Test
     public void testAddDiffPickMy() throws Exception {
 		mtf.initialize("NotepadMergeListingTest", new ProgramModifierListener() {
 
@@ -306,7 +306,7 @@ public class BookmarkMergeManagerTest extends AbstractListingMergeManagerTest {
 			"This is a new analysis comment.");
 	}
 
-@Test
+@org.junit.jupiter.api.Test
     public void testChangeMy() throws Exception {
 		mtf.initialize("NotepadMergeListingTest", new ProgramModifierListener() {
 
@@ -361,7 +361,7 @@ public class BookmarkMergeManagerTest extends AbstractListingMergeManagerTest {
 			"This is a new analysis comment.");
 	}
 
-@Test
+@org.junit.jupiter.api.Test
     public void testChangeSame() throws Exception {
 		mtf.initialize("NotepadMergeListingTest", new ProgramModifierListener() {
 
@@ -786,7 +786,7 @@ public class BookmarkMergeManagerTest extends AbstractListingMergeManagerTest {
 		});
 	}
 
-@Test
+@org.junit.jupiter.api.Test
     public void testChangeMyRemoveLatestUseForAllPickLatest() throws Exception {
 		setupUseForAll();
 
@@ -799,7 +799,7 @@ public class BookmarkMergeManagerTest extends AbstractListingMergeManagerTest {
 		noBookmark("0x100248f", BookmarkType.ANALYSIS, "Found Code");
 	}
 
-@Test
+@org.junit.jupiter.api.Test
     public void testChangeMyRemoveLatestUseForAllPickMy() throws Exception {
 		setupUseForAll();
 

@@ -15,7 +15,7 @@
  */
 package ghidra.app.plugin.core.debug.gui.thread;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import ghidra.app.plugin.core.debug.gui.AbstractGhidraHeadedDebuggerGUITest;

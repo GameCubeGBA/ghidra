@@ -21,7 +21,7 @@ import static org.junit.Assert.fail;
 import java.util.*;
 
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 import generic.test.AbstractGenericTest;
 import ghidra.graph.algo.ChkDominanceAlgorithm;
@@ -33,7 +33,7 @@ public abstract class AbstractGraphAlgorithmsTest extends AbstractGenericTest {
 
 	protected GDirectedGraph<TestV, TestE> g;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		g = createGraph();
 	}

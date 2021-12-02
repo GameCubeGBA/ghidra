@@ -19,7 +19,7 @@ import java.io.*;
 
 import org.antlr.runtime.*;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 
@@ -63,19 +63,19 @@ public class BooleanExpressionTest extends AbstractGenericTest {
         Assert.assertEquals(true, parser.expression());
     }
 
-@Test
+@org.junit.jupiter.api.Test
     public void testEquals2() throws Exception {
         initParser(new StringReader("FOO == FOO"));
         Assert.assertEquals(true, parser.expression());
     }
 
-@Test
+@org.junit.jupiter.api.Test
     public void testEquals3() throws Exception {
         initParser(new StringReader("\"FOO\" == \"FOO\""));
         Assert.assertEquals(true, parser.expression());
     }
 
-@Test
+@org.junit.jupiter.api.Test
     public void testEquals4() throws Exception {
         initParser(new StringReader("\"FOO\" == FOO"));
         Assert.assertEquals(true, parser.expression());
@@ -87,13 +87,13 @@ public class BooleanExpressionTest extends AbstractGenericTest {
         Assert.assertEquals(false, parser.expression());
     }
 
-@Test
+@org.junit.jupiter.api.Test
     public void testEqualsInv2() throws Exception {
         initParser(new StringReader("FOO == BAR"));
         Assert.assertEquals(false, parser.expression());
     }
 
-@Test
+@org.junit.jupiter.api.Test
     public void testEqualsInv3() throws Exception {
         initParser(new StringReader("\"FOO\" == \"BAR\""));
         Assert.assertEquals(false, parser.expression());
@@ -105,13 +105,13 @@ public class BooleanExpressionTest extends AbstractGenericTest {
         Assert.assertEquals(false, parser.expression());
     }
 
-@Test
+@org.junit.jupiter.api.Test
     public void testNotEquals1() throws Exception {
         initParser(new StringReader("FOO != \"FOO\""));
         Assert.assertEquals(false, parser.expression());
     }
 
-@Test
+@org.junit.jupiter.api.Test
     public void testNotEquals2() throws Exception {
         initParser(new StringReader("FOO != FOO"));
         Assert.assertEquals(false, parser.expression());
@@ -123,19 +123,19 @@ public class BooleanExpressionTest extends AbstractGenericTest {
         Assert.assertEquals(false, parser.expression());
     }
 
-@Test
+@org.junit.jupiter.api.Test
     public void testNotEquals4() throws Exception {
         initParser(new StringReader("\"FOO\" != FOO"));
         Assert.assertEquals(false, parser.expression());
     }
 
-@Test
+@org.junit.jupiter.api.Test
     public void testNotEqualsInv1() throws Exception {
         initParser(new StringReader("FOO != \"BAR\""));
         Assert.assertEquals(true, parser.expression());
     }
 
-@Test
+@org.junit.jupiter.api.Test
     public void testNotEqualsInv2() throws Exception {
         initParser(new StringReader("FOO != BAR"));
         Assert.assertEquals(true, parser.expression());
@@ -153,13 +153,13 @@ public class BooleanExpressionTest extends AbstractGenericTest {
         Assert.assertEquals(true, parser.expression());
     }
 
-@Test
+@org.junit.jupiter.api.Test
     public void testSimpleParens() throws Exception {
         initParser(new StringReader("(FOO == FOO)"));
         Assert.assertEquals(true, parser.expression());
     }
 
-@Test
+@org.junit.jupiter.api.Test
     public void testMoreParens() throws Exception {
         initParser(new StringReader("((((FOO == FOO))))"));
         Assert.assertEquals(true, parser.expression());
@@ -171,7 +171,7 @@ public class BooleanExpressionTest extends AbstractGenericTest {
         Assert.assertEquals(false, parser.expression());
     }
 
-@Test
+@org.junit.jupiter.api.Test
     public void testNotInv() throws Exception {
         initParser(new StringReader("!(FOO != FOO)"));
         Assert.assertEquals(true, parser.expression());
@@ -183,19 +183,19 @@ public class BooleanExpressionTest extends AbstractGenericTest {
         Assert.assertEquals(false, parser.expression());
     }
 
-@Test
+@org.junit.jupiter.api.Test
     public void testEvenMoreNots() throws Exception {
         initParser(new StringReader("!(!(!(!(FOO == FOO))))"));
         Assert.assertEquals(true, parser.expression());
     }
 
-@Test
+@org.junit.jupiter.api.Test
     public void testOr1() throws Exception {
         initParser(new StringReader("FOO == \"FOO\" || BAR == \"BAR\""));
         Assert.assertEquals(true, parser.expression());
     }
 
-@Test
+@org.junit.jupiter.api.Test
     public void testOr2() throws Exception {
         initParser(new StringReader("FOO == \"BAR\" || BAR == \"BAR\""));
         Assert.assertEquals(true, parser.expression());
@@ -207,19 +207,19 @@ public class BooleanExpressionTest extends AbstractGenericTest {
         Assert.assertEquals(true, parser.expression());
     }
 
-@Test
+@org.junit.jupiter.api.Test
     public void testOr4() throws Exception {
         initParser(new StringReader("FOO == \"BAR\" || BAR == \"FOO\""));
         Assert.assertEquals(false, parser.expression());
     }
 
-@Test
+@org.junit.jupiter.api.Test
     public void testAnd1() throws Exception {
         initParser(new StringReader("FOO == \"FOO\" && BAR == \"BAR\""));
         Assert.assertEquals(true, parser.expression());
     }
 
-@Test
+@org.junit.jupiter.api.Test
     public void testAnd2() throws Exception {
         initParser(new StringReader("FOO == \"BAR\" && BAR == \"BAR\""));
         Assert.assertEquals(false, parser.expression());
@@ -231,7 +231,7 @@ public class BooleanExpressionTest extends AbstractGenericTest {
         Assert.assertEquals(false, parser.expression());
     }
 
-@Test
+@org.junit.jupiter.api.Test
     public void testAnd4() throws Exception {
         initParser(new StringReader("FOO == \"BAR\" && BAR == \"FOO\""));
         Assert.assertEquals(false, parser.expression());

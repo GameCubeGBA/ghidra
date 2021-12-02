@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 import java.util.Date;
 import java.util.Set;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
@@ -59,7 +59,7 @@ public class CompareFunctionsTest extends AbstractGhidraHeadedIntegrationTest {
 	private FunctionComparisonProvider provider2;
 	private FunctionComparisonModel model;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		DummyPluginTool tool = new DummyPluginTool();
 		plugin = new FunctionComparisonPlugin(tool);

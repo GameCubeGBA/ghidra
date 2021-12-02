@@ -22,7 +22,7 @@ import java.math.BigInteger;
 import java.util.*;
 import java.util.Map.Entry;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.dbg.target.*;
 import ghidra.dbg.target.schema.TargetObjectSchema;
@@ -123,7 +123,7 @@ public abstract class AbstractDebuggerModelRegistersTest extends AbstractDebugge
 		return m.findAll(TargetRegisterBank.class, seedPath, true);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testRegisterBankIsWhereExpected() throws Throwable {
 		m.build();
 
@@ -136,7 +136,7 @@ public abstract class AbstractDebuggerModelRegistersTest extends AbstractDebugge
 		assertEquals(expectedRegisterBankPath, bank.getPath());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testBanksAreContainersConventionIsAsExpected() throws Throwable {
 		m.build();
 
@@ -153,7 +153,7 @@ public abstract class AbstractDebuggerModelRegistersTest extends AbstractDebugge
 		assertEquals(isRegisterBankAlsoContainer(), banksAreContainers);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testRegistersHaveExpectedSizes() throws Throwable {
 		m.build();
 
@@ -170,7 +170,7 @@ public abstract class AbstractDebuggerModelRegistersTest extends AbstractDebugge
 
 	// TODO: Test cases for writing to non-existing registers (by name)
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testReadRegisters() throws Throwable {
 		m.build();
 

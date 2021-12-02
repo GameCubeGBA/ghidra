@@ -37,6 +37,9 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for two byte viewers connected.
@@ -52,7 +55,7 @@ public class ByteViewerConnectedToolBehaviorTest extends AbstractGhidraHeadedInt
 	private ByteViewerPanel panelOne;
 	private ByteViewerPanel panel2;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		toolOne = env.getTool();
@@ -82,12 +85,12 @@ public class ByteViewerConnectedToolBehaviorTest extends AbstractGhidraHeadedInt
 		return p;
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testLocationChanges() throws Exception {
 		// location changes should track
 		// position at 01001004
@@ -102,7 +105,7 @@ public class ByteViewerConnectedToolBehaviorTest extends AbstractGhidraHeadedInt
 		assertEquals(getAddr(0x01001004), convertToAddr(plugin2, info2));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSelectionChanges() throws Exception {
 		// selection should track
 		showTool(tool2);
@@ -139,7 +142,7 @@ public class ByteViewerConnectedToolBehaviorTest extends AbstractGhidraHeadedInt
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEdit() throws Exception {
 		// make changes in one
 		// verify the other tools shows the changes in red

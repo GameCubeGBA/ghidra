@@ -35,6 +35,8 @@ import ghidra.graph.viewer.layout.LayoutProvider;
 import ghidra.graph.viewer.layout.VisualGraphLayout;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * An integration test for the {@link SampleGraphPlugin}.   These tests are really just
@@ -47,7 +49,7 @@ public class SampleGraphPluginTest extends AbstractGhidraHeadedIntegrationTest {
 	private SampleGraphPlugin plugin;
 	private SampleGraphProvider provider;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 
@@ -59,7 +61,7 @@ public class SampleGraphPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		provider = (SampleGraphProvider) tool.getComponentProvider(SampleGraphProvider.NAME);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

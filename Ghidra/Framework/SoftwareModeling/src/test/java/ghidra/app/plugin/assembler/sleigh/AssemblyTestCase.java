@@ -20,8 +20,7 @@ import static org.junit.Assert.fail;
 import java.util.*;
 
 import org.apache.commons.collections4.MultiValuedMap;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
 
 import generic.test.AbstractGenericTest;
 import ghidra.app.plugin.assembler.*;
@@ -39,6 +38,7 @@ import ghidra.program.model.lang.*;
 import ghidra.program.model.mem.*;
 import ghidra.util.Msg;
 import ghidra.util.NumericUtilities;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * A test for assembly of a particular SLEIGH language
@@ -68,7 +68,7 @@ public abstract class AssemblyTestCase extends AbstractGenericTest {
 	//@Rule
 	//public TestName name = new TestName();
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		LanguageID langID = getLanguageID();
 		if (!setupLangID.equals(langID.toString())) {
@@ -80,7 +80,7 @@ public abstract class AssemblyTestCase extends AbstractGenericTest {
 		//oldOutput = dbg.setOutputStream(new FileOutputStream(name.getMethodName() + ".asm.log"));
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		//dbg.resetOutputStream(oldOutput).close();
 	}

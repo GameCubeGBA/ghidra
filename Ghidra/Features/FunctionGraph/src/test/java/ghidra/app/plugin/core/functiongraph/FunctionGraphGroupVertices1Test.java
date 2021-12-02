@@ -38,12 +38,13 @@ import ghidra.framework.plugintool.util.PluginException;
 import ghidra.graph.viewer.options.RelayoutOption;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSetView;
+import org.junit.jupiter.api.BeforeEach;
 import util.CollectionUtils;
 
 public class FunctionGraphGroupVertices1Test extends AbstractFunctionGraphTest {
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		disableAnimation();

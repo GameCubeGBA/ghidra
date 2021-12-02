@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import docking.widgets.fieldpanel.support.*;
@@ -45,7 +45,7 @@ public class CompositeVerticalLayoutTextFieldTest extends AbstractGenericTest {
 		return new Highlight[] {};
 	};
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		Font font = new Font("Times New Roman", 0, 14);

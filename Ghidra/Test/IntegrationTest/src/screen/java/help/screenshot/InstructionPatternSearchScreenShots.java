@@ -19,7 +19,7 @@ import java.awt.Component;
 
 import javax.swing.JButton;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import docking.DialogComponentProvider;

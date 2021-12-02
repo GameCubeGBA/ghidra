@@ -20,7 +20,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Iterator;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
@@ -36,7 +36,7 @@ public class SortedRangeListTest extends AbstractGenericTest {
 	}
 	
 	
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
 		list = new SortedRangeList();
 	}

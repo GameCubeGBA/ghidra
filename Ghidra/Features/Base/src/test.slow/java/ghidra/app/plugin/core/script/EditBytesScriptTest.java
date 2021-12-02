@@ -36,6 +36,8 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.mem.MemoryAccessException;
 import ghidra.test.*;
 import ghidra.util.NumericUtilities;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class EditBytesScriptTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -46,7 +48,7 @@ public class EditBytesScriptTest extends AbstractGhidraHeadedIntegrationTest {
 	private File script;
 	private CodeBrowserPlugin cb;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		env = new TestEnv();
@@ -59,7 +61,7 @@ public class EditBytesScriptTest extends AbstractGhidraHeadedIntegrationTest {
 		script = resourceFile.getFile(true);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

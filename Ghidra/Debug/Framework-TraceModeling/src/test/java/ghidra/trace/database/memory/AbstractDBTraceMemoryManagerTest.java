@@ -41,6 +41,9 @@ import ghidra.trace.util.LanguageTestWatcher;
 import ghidra.util.database.*;
 import ghidra.util.task.ConsoleTaskMonitor;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public abstract class AbstractDBTraceMemoryManagerTest
 		extends AbstractGhidraHeadlessIntegrationTest {
@@ -53,7 +56,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 
 	protected abstract LanguageID getLanguageID();
 
-	@Before
+	@BeforeEach
 	public void setUp() throws IOException {
 		b = new ToyDBTraceBuilder("Testing", testLanguage.getLanguage());
 		try (UndoableTransaction tid = b.startTransaction()) {
@@ -62,7 +65,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 		memory = b.trace.getMemoryManager();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		b.close();
 	}
@@ -106,7 +109,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSetGetStateOneByte() {
 		assertEquals(null, memory.getState(3, b.addr(0x4000)));
 
@@ -131,7 +134,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 		assertEquals(TraceMemoryState.UNKNOWN, memory.getState(4, b.addr(0x4000)));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSetRangeGetState() {
 		try (UndoableTransaction tid = b.startTransaction()) {
 			memory.setState(3, b.addr(0x4000), b.addr(0x5000), TraceMemoryState.KNOWN);
@@ -152,7 +155,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 		assertEquals(state, entry.getValue());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGetMostRecentStateSingleRange() {
 		try (UndoableTransaction tid = b.startTransaction()) {
 			memory.setState(3, b.addr(0x4000), b.addr(0x5000), TraceMemoryState.KNOWN);
@@ -181,7 +184,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 		assertEquals(null, memory.getMostRecentStateEntry(4, b.addr(0x5001)));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGetMostRecentStateSameSnap() {
 		try (UndoableTransaction tid = b.startTransaction()) {
 			memory.setState(3, b.addr(0x4000), b.addr(0x5000), TraceMemoryState.KNOWN);
@@ -231,7 +234,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 		assertEquals(null, memory.getMostRecentStateEntry(5, b.addr(0x5001)));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGetMostRecentStateLaterBefore() {
 		try (UndoableTransaction tid = b.startTransaction()) {
 			memory.setState(3, b.addr(0x4000), b.addr(0x5000), TraceMemoryState.KNOWN);
@@ -289,7 +292,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 		assertEquals(null, memory.getMostRecentStateEntry(5, b.addr(0x5001)));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGetMostRecentStateLaterOverStart() {
 		try (UndoableTransaction tid = b.startTransaction()) {
 			memory.setState(3, b.addr(0x4000), b.addr(0x5000), TraceMemoryState.KNOWN);
@@ -353,7 +356,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 		assertEquals(null, memory.getMostRecentStateEntry(5, b.addr(0x5001)));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGetAddressesWithState() {
 		try (UndoableTransaction tid = b.startTransaction()) {
 			memory.setState(3, b.addr(0x4000), b.addr(0x7000), TraceMemoryState.KNOWN);
@@ -392,7 +395,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 		assertEquals(expected, set.subtract(result));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGetStates() {
 		try (UndoableTransaction tid = b.startTransaction()) {
 			memory.setState(3, b.addr(0x4000), b.addr(0x7000), TraceMemoryState.KNOWN);
@@ -419,7 +422,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 		return result;
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGetMostRecentStates() {
 		try (UndoableTransaction tid = b.startTransaction()) {
 			memory.setState(3, b.addr(0x4000), b.addr(0x7000), TraceMemoryState.KNOWN);
@@ -487,7 +490,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 		return bufferStore.getRecordCount();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testBytes0Length() {
 		try (UndoableTransaction tid = b.startTransaction()) {
 			assertEquals(0, memory.putBytes(3, b.addr(0x4000), buf()));
@@ -504,7 +507,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 		assertArrayEquals(arr(-1, -2, -3, -4), read.array());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testBytesSimple4Zeros() {
 		try (UndoableTransaction tid = b.startTransaction()) {
 			assertEquals(4, memory.putBytes(3, b.addr(0x4000), buf(0, 0, 0, 0)));
@@ -525,7 +528,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 		assertArrayEquals(arr(0, 0, 0, 0), read.array());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testBytesSimple4Bytes() {
 		try (UndoableTransaction tid = b.startTransaction()) {
 			assertEquals(4, memory.putBytes(3, b.addr(0x4000), buf(1, 2, 3, 4)));
@@ -546,7 +549,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 		assertArrayEquals(arr(1, 2, 3, 4), read.array());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testBytesSpan4Bytes() {
 		try (UndoableTransaction tid = b.startTransaction()) {
 			assertEquals(4, memory.putBytes(3, b.addr(0x3ffe), buf(1, 2, 3, 4)));
@@ -559,7 +562,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 		assertArrayEquals(arr(1, 2, 3, 4), read.array());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testBytesSpan12BytesInChunks() {
 		try (UndoableTransaction tid = b.startTransaction()) {
 			assertEquals(4, memory.putBytes(3, b.addr(0x3ffa), buf(1, 2, 3, 4)));
@@ -576,7 +579,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 		assertArrayEquals(arr(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12), read.array());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testBytesOverflow() {
 		try (UndoableTransaction tid = b.startTransaction()) {
 			ByteBuffer write = buf(1, 2, 3, 4);
@@ -592,7 +595,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 		assertArrayEquals(arr(1, 2, -1, -1), read.array());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testBytesWriteSameLater() {
 		try (UndoableTransaction tid = b.startTransaction()) {
 			assertEquals(4, memory.putBytes(3, b.addr(0x4000), buf(1, 2, 3, 4)));
@@ -624,7 +627,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 		assertArrayEquals(arr(1, 2, 3, 4), read.array());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testBytesArrayOffset() {
 		try (UndoableTransaction tid = b.startTransaction()) {
 			byte[] array = new byte[20];
@@ -645,7 +648,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 		assertArrayEquals(arr(-2, 0, 1, 2, 3, 4, 0, -2), Arrays.copyOfRange(array, 9, 17));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGetBytesMostRecent() {
 		try (UndoableTransaction tid = b.startTransaction()) {
 			assertEquals(4, memory.putBytes(3, b.addr(0x4000), buf(1, 2, 3, 4)));
@@ -676,7 +679,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 		assertArrayEquals(arr(0, 0, 1, 2, 5, 0, 7, 8, 0, 0), read.array());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testPutBytesIntoPastGetBytesMostRecent() {
 		try (UndoableTransaction tid = b.startTransaction()) {
 			assertEquals(4, memory.putBytes(4, b.addr(0x4800), buf(5, 6, 7, 8)));
@@ -708,7 +711,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 		assertArrayEquals(arr(0, 0, 9, 10, 5, 6, 7, 8, 3, 4, 17, 18, 0, 0), read.array());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testPutBytesPackGetBytes() {
 		try (UndoableTransaction tid = b.startTransaction()) {
 			assertEquals(4, memory.putBytes(3, b.addr(0x4000), buf(1, 2, 3, 4)));
@@ -726,7 +729,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 		assertTrue(bufEnt.isCompressed());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testPutBytesPackPutBytes() {
 		try (UndoableTransaction tid = b.startTransaction()) {
 			assertEquals(4, memory.putBytes(3, b.addr(0x4000), buf(1, 2, 3, 4)));
@@ -744,7 +747,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 		assertArrayEquals(arr(1, 2, 3, 4), read.array());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testFindBytes() {
 		try (UndoableTransaction tid = b.startTransaction()) {
 			assertEquals(5, memory.putBytes(3, b.addr(0x4000), buf(1, 2, 3, 4, 5)));
@@ -810,7 +813,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 				true, TaskMonitor.DUMMY));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testRemoveBytes() {
 		try (UndoableTransaction tid = b.startTransaction()) {
 			assertEquals(10,
@@ -865,7 +868,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 			collectAsMap(memory.getMostRecentStates(6, b.range(0x4700, 0x4900))));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSaveAndLoad() throws Exception {
 		try (UndoableTransaction tid = b.startTransaction()) {
 			assertEquals(4, memory.putBytes(3, b.addr(0x4000), buf(1, 2, 3, 4)));
@@ -903,7 +906,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddButAbortedStillEmpty() throws Exception {
 		try (UndoableTransaction tid = b.startTransaction()) {
 			assertEquals(4, memory.putBytes(3, b.addr(0x4000), buf(1, 2, 3, 4)));
@@ -931,7 +934,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 		assertArrayEquals(arr(0, 0, 0, 0), read.array());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddThenUndo() throws Exception {
 		try (UndoableTransaction tid = b.startTransaction()) {
 			assertEquals(4, memory.putBytes(3, b.addr(0x4000), buf(1, 2, 3, 4)));
@@ -959,7 +962,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 		assertArrayEquals(arr(0, 0, 0, 0), read.array());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddThenUndoThenRedo() throws Exception {
 		try (UndoableTransaction tid = b.startTransaction()) {
 			assertEquals(4, memory.putBytes(3, b.addr(0x4000), buf(1, 2, 3, 4)));
@@ -1000,7 +1003,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 		assertArrayEquals(arr(1, 2, 3, 4), read.array());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testHighBlockNumbers() throws Exception {
 		/**
 		 * This test gets down into the block buffer implementation. If the block number exceeds
@@ -1021,7 +1024,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testRegisters() throws Exception {
 		Register r0 = b.language.getRegister("r0");
 		Register r0h = b.language.getRegister("r0h");
@@ -1103,7 +1106,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 	/**
 	 * This test is based on the MWE submitted in GitHub issue #2760.
 	 */
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testManyStateEntries() throws Exception {
 		Register pc = b.language.getRegister("pc");
 		DBTraceThread thread;
@@ -1119,7 +1122,7 @@ public abstract class AbstractDBTraceMemoryManagerTest
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testOverlaySpaces() throws Exception {
 		try (UndoableTransaction tid = b.startTransaction()) {
 			AddressSpace os = memory.createOverlayAddressSpace("test",

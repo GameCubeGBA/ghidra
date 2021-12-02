@@ -36,6 +36,8 @@ import ghidra.program.model.lang.Language;
 import ghidra.program.model.listing.Program;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class ProjectFileManagerTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -47,7 +49,7 @@ public class ProjectFileManagerTest extends AbstractGhidraHeadedIntegrationTest 
 	private DomainFolder root;
 	private List<MyEvent> events = new ArrayList<>();
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		LocalFileSystem.setValidationRequired();
@@ -95,7 +97,7 @@ public class ProjectFileManagerTest extends AbstractGhidraHeadedIntegrationTest 
 		events.clear();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		fileMgr.dispose();
 		deleteAll(privateProjectDir);

@@ -26,6 +26,8 @@ import docking.test.AbstractDockingTest;
 import docking.widgets.filter.*;
 import ghidra.test.DummyTool;
 import ghidra.util.StringUtilities;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class GTreeFilterTest extends AbstractDockingTest {
 
@@ -34,7 +36,7 @@ public class GTreeFilterTest extends AbstractDockingTest {
 
 	private DockingWindowManager winMgr;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		GTreeNode root = new TestRootNode();
 		gTree = new GTree(root);
@@ -48,7 +50,7 @@ public class GTreeFilterTest extends AbstractDockingTest {
 		waitForTree();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		winMgr.dispose();
 	}

@@ -48,6 +48,9 @@ import ghidra.program.model.listing.Data;
 import ghidra.program.util.ProgramLocation;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ApplyDataTypeToBrowserTest extends AbstractGhidraHeadedIntegrationTest {
 	private static final String PROGRAM_FILENAME = "WallaceSrc";
@@ -65,7 +68,7 @@ public class ApplyDataTypeToBrowserTest extends AbstractGhidraHeadedIntegrationT
 	private ArchiveNode programNode;
 	private CodeViewerProvider codeViewerProvider;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -120,7 +123,7 @@ public class ApplyDataTypeToBrowserTest extends AbstractGhidraHeadedIntegrationT
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		executeOnSwingWithoutBlocking(() -> {
 			ProgramManager pm = tool.getService(ProgramManager.class);
@@ -133,7 +136,7 @@ public class ApplyDataTypeToBrowserTest extends AbstractGhidraHeadedIntegrationT
 		env.dispose();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testChooseDataTypeOnDefaultDts() throws Exception {
 		goTo("004027d0");
 
@@ -148,7 +151,7 @@ public class ApplyDataTypeToBrowserTest extends AbstractGhidraHeadedIntegrationT
 		assertEquals(addr("004027f8"), data.getMaxAddress());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testChooseDataTypeOnUndefinedDts() throws Exception {
 		createData("004027d2", new Undefined4DataType());
 		goTo("004027d0");
@@ -164,7 +167,7 @@ public class ApplyDataTypeToBrowserTest extends AbstractGhidraHeadedIntegrationT
 		assertEquals(addr("004027f8"), data.getMaxAddress());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testChooseDataTypeOnDefinedDts() throws Exception {
 
 		//
@@ -187,7 +190,7 @@ public class ApplyDataTypeToBrowserTest extends AbstractGhidraHeadedIntegrationT
 		assertEquals(addr("004027f8"), data.getMaxAddress());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testChooseDataTypeOnDefinedAndUndefinedDts() throws Exception {
 		createData("004027d1", new ByteDataType());
 		createData("004027d2", new Undefined4DataType());
@@ -202,7 +205,7 @@ public class ApplyDataTypeToBrowserTest extends AbstractGhidraHeadedIntegrationT
 		assertEquals(addr("004027d0"), data.getMaxAddress());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testChooseDataTypeWhereDoesNotFit() throws Exception {
 		goTo("004027e0");
 
@@ -215,7 +218,7 @@ public class ApplyDataTypeToBrowserTest extends AbstractGhidraHeadedIntegrationT
 		assertEquals(addr("004027d0"), data.getMaxAddress());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCreateArrayOnDefaultDts() throws Exception {
 		goTo("004027d0");
 
@@ -239,7 +242,7 @@ public class ApplyDataTypeToBrowserTest extends AbstractGhidraHeadedIntegrationT
 		assertEquals(addr("004027ff"), data.getMaxAddress());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCreateArrayOnUndefinedDts() throws Exception {
 		createData("004027d2", new Undefined4DataType());
 		goTo("004027d0");
@@ -265,7 +268,7 @@ public class ApplyDataTypeToBrowserTest extends AbstractGhidraHeadedIntegrationT
 		assertEquals(addr("004027ff"), data.getMaxAddress());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCreateArrayFailureOnDefinedDts() throws Exception {
 		createData("004027d4", new ByteDataType());
 		goTo("004027d0");
@@ -299,7 +302,7 @@ public class ApplyDataTypeToBrowserTest extends AbstractGhidraHeadedIntegrationT
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCreateArrayFailureOnInstr() throws Exception {
 
 		createCode("004027d4", 1);
@@ -335,7 +338,7 @@ public class ApplyDataTypeToBrowserTest extends AbstractGhidraHeadedIntegrationT
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCreateArrayUptoInstr() throws Exception {
 
 		createCode("004027d4", 1);
@@ -367,7 +370,7 @@ public class ApplyDataTypeToBrowserTest extends AbstractGhidraHeadedIntegrationT
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCreateArrayOverwriteOnDefinedDts() throws Exception {
 		createData("004027d4", new ByteDataType());
 		goTo("004027d0");
@@ -400,7 +403,7 @@ public class ApplyDataTypeToBrowserTest extends AbstractGhidraHeadedIntegrationT
 		assertEquals(addr("004027ff"), data.getMaxAddress());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testLastUsedOnDefaultDts() throws Exception {
 		ProgramDataTypeManager dataTypeManager = program.getDataTypeManager();
 		DataType dataType = dataTypeManager.getDataType(new CategoryPath("/"), "_person");
@@ -419,7 +422,7 @@ public class ApplyDataTypeToBrowserTest extends AbstractGhidraHeadedIntegrationT
 		assertEquals(addr("004027f8"), data.getMaxAddress());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testLastUsedOnUndefinedDts() throws Exception {
 		ProgramDataTypeManager dataTypeManager = program.getDataTypeManager();
 		DataType dataType = dataTypeManager.getDataType(new CategoryPath("/"), "_person");
@@ -458,7 +461,7 @@ public class ApplyDataTypeToBrowserTest extends AbstractGhidraHeadedIntegrationT
 		assertEquals(addr("004027f8"), data.getMaxAddress());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testLastUsedOnDefinedDtsAnswerNo() throws Exception {
 		ProgramDataTypeManager dataTypeManager = program.getDataTypeManager();
 		DataType dataType = dataTypeManager.getDataType(new CategoryPath("/"), "_person");
@@ -478,7 +481,7 @@ public class ApplyDataTypeToBrowserTest extends AbstractGhidraHeadedIntegrationT
 		assertEquals(addr("004027d0"), data.getMaxAddress());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testFavoriteOnDefaultDts() throws Exception {
 		goTo("004027d0");
 
@@ -499,7 +502,7 @@ public class ApplyDataTypeToBrowserTest extends AbstractGhidraHeadedIntegrationT
 		assertEquals(addr("004027f8"), data.getMaxAddress());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testFavoriteOnUndefinedDts() throws Exception {
 		createData("004027d2", new Undefined4DataType());
 		goTo("004027d0");
@@ -521,7 +524,7 @@ public class ApplyDataTypeToBrowserTest extends AbstractGhidraHeadedIntegrationT
 		assertEquals(addr("004027f8"), data.getMaxAddress());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testFavoriteOnDefinedDtsAnswerYes() throws Exception {
 		createData("004027d1", new ByteDataType());
 		goTo("004027d0");
@@ -544,7 +547,7 @@ public class ApplyDataTypeToBrowserTest extends AbstractGhidraHeadedIntegrationT
 		assertEquals(addr("004027f8"), data.getMaxAddress());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testFavoriteOnDefinedDtsAnswerNo() throws Exception {
 		createData("004027d1", new ByteDataType());
 		goTo("004027d0");
@@ -567,7 +570,7 @@ public class ApplyDataTypeToBrowserTest extends AbstractGhidraHeadedIntegrationT
 		assertEquals(addr("004027d0"), data.getMaxAddress());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCycleOnDefaultDts() throws Exception {
 		goTo("004027d0");
 
@@ -582,7 +585,7 @@ public class ApplyDataTypeToBrowserTest extends AbstractGhidraHeadedIntegrationT
 		assertEquals(addr("004027f8"), data.getMaxAddress());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCycleOnUndefinedDts() throws Exception {
 		createData("004027d2", new Undefined4DataType());
 		goTo("004027d0");
@@ -615,7 +618,7 @@ public class ApplyDataTypeToBrowserTest extends AbstractGhidraHeadedIntegrationT
 		assertEquals(addr("004027d0"), data.getMaxAddress());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCycleOnDefinedDts() throws Exception {
 		createData("004027d3", new ByteDataType());
 		goTo("004027d0");
@@ -648,7 +651,7 @@ public class ApplyDataTypeToBrowserTest extends AbstractGhidraHeadedIntegrationT
 		assertEquals(addr("004027d0"), data.getMaxAddress());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDragNDropOnDefaultDts() throws Exception {
 		goTo("004027d0");
 
@@ -662,7 +665,7 @@ public class ApplyDataTypeToBrowserTest extends AbstractGhidraHeadedIntegrationT
 		assertEquals(addr("004027f8"), data.getMaxAddress());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDragNDropOnUndefinedDts() throws Exception {
 		createData("004027d2", new Undefined4DataType());
 		goTo("004027d0");
@@ -677,7 +680,7 @@ public class ApplyDataTypeToBrowserTest extends AbstractGhidraHeadedIntegrationT
 		assertEquals(addr("004027f8"), data.getMaxAddress());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDragNDropYesOnDefinedDts() throws Exception {
 		createData("004027d3", new ByteDataType());
 		goTo("004027d0");
@@ -694,7 +697,7 @@ public class ApplyDataTypeToBrowserTest extends AbstractGhidraHeadedIntegrationT
 		assertEquals(addr("004027f8"), data.getMaxAddress());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDragNDropNoOnDefinedDts() throws Exception {
 		createData("004027d3", new ByteDataType());
 		goTo("004027d0");
@@ -711,7 +714,7 @@ public class ApplyDataTypeToBrowserTest extends AbstractGhidraHeadedIntegrationT
 		assertEquals(addr("004027d0"), data.getMaxAddress());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDragNDropWhereDoesNotFit() throws Exception {
 		goTo("004027e0");
 

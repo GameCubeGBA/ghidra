@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import ghidra.program.database.ProgramDB;
@@ -45,7 +45,7 @@ public class DefinedDataIteratorTest extends AbstractGhidraHeadlessIntegrationTe
 	private StructureDataType struct2DT;
 	private TypeDef intTD;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		builder = new ToyProgramBuilder("DefinedDataIteratorTests", false);

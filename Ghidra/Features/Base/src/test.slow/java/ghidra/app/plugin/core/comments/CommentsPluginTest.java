@@ -58,6 +58,8 @@ import ghidra.util.SystemUtilities;
 import ghidra.util.table.GhidraProgramTableModel;
 import ghidra.util.task.TaskMonitor;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class CommentsPluginTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -81,7 +83,7 @@ public class CommentsPluginTest extends AbstractGhidraHeadedIntegrationTest {
 	private DockingActionIf deleteAction;
 	private ProgramDB program;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 
@@ -95,7 +97,7 @@ public class CommentsPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		deleteAction = getAction(plugin, "Delete Comments");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

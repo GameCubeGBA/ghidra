@@ -21,8 +21,6 @@ import static org.junit.Assert.assertTrue;
 import java.lang.invoke.MethodHandles;
 import java.util.*;
 
-import org.junit.Test;
-
 import ghidra.dbg.AnnotatedDebuggerAttributeListener;
 import ghidra.dbg.DebugModelConventions;
 import ghidra.dbg.DebugModelConventions.AsyncState;
@@ -30,6 +28,7 @@ import ghidra.dbg.target.*;
 import ghidra.dbg.target.TargetBreakpointSpec.TargetBreakpointKind;
 import ghidra.dbg.target.TargetExecutionStateful.TargetExecutionState;
 import ghidra.util.Msg;
+import org.junit.jupiter.api.Test;
 
 /**
  * A scenario which tests a single process with two threads

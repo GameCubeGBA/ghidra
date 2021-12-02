@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 
 import javax.swing.JTextField;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import ghidra.framework.model.*;
@@ -33,7 +33,7 @@ public class PositiveStackEditorProviderTest extends AbstractStackEditorTest {
 	}
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		env.showTool();

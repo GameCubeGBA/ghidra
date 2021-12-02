@@ -33,6 +33,8 @@ import ghidra.program.model.address.AddressSet;
 import ghidra.program.model.listing.Program;
 import ghidra.program.util.ProgramSelection;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class SetHighlightPluginTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -46,7 +48,7 @@ public class SetHighlightPluginTest extends AbstractGhidraHeadedIntegrationTest 
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 
@@ -62,7 +64,7 @@ public class SetHighlightPluginTest extends AbstractGhidraHeadedIntegrationTest 
 		cb = getPlugin(tool, CodeBrowserPlugin.class);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

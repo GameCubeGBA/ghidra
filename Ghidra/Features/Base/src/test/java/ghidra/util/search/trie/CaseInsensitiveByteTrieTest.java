@@ -23,6 +23,8 @@ import org.junit.*;
 
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class CaseInsensitiveByteTrieTest {
 
@@ -35,7 +37,7 @@ public class CaseInsensitiveByteTrieTest {
 
 	ByteTrieIfc<String> trie;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		trie = new CaseInsensitiveByteTrie<String>();
 	}
@@ -47,7 +49,7 @@ public class CaseInsensitiveByteTrieTest {
 		assertTrue("failed !empty after add", !trie.isEmpty());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testExists() throws Exception {
 		assertTrue("failed empty exists", !exists(trie, "a"));
 		assertTrue("failed empty exists", !exists(trie, "A"));
@@ -62,7 +64,7 @@ public class CaseInsensitiveByteTrieTest {
 		assertTrue("failed AC exists", exists(trie, "AC"));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testFindAndGetValue() throws Exception {
 		add(trie, "aBcde", true);
 		ByteTrieNodeIfc<String> trieNode = find(trie, "abc");
@@ -90,12 +92,12 @@ public class CaseInsensitiveByteTrieTest {
 		return new String(value);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEmptyIterator() throws Exception {
 		assertTrue("failed empty iterator", !iterator(trie).hasNext());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIterator() throws Exception {
 		String[] values = new String[] { "baAa", "AabA", "aBaA", "aAab", "AaAA", "Bbaa", "aBBa" };
 		TreeSet<String> expected = new TreeSet<String>(new CaseInsensitiveStringComparator());
@@ -116,7 +118,7 @@ public class CaseInsensitiveByteTrieTest {
 		assertTrue("too many values in trie", !actuals.hasNext());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIterator2() throws Exception {
 		String[] values =
 			new String[] { "baaAA", "aAaBa", "ABaa", "AaaaaAb", "", "aaAA", "BBAA", "AbbA", "a" };
@@ -138,7 +140,7 @@ public class CaseInsensitiveByteTrieTest {
 		assertTrue("too many values in trie", !actuals.hasNext());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIterator3() throws Exception {
 		String[] values = new String[] { "baAa", "AabA", "aBaA", "aAab", "AaAA", "Bbaa", "aBBa" };
 		TreeSet<String> expected = new TreeSet<String>(new CaseInsensitiveStringComparator());
@@ -159,7 +161,7 @@ public class CaseInsensitiveByteTrieTest {
 		assertTrue("too many values in trie", !actuals.hasNext());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIterator4() throws Exception {
 		String[] values =
 			new String[] { "baaAA", "aAaBa", "ABaa", "AaaaaAb", "", "aaAA", "BBAA", "AbbA", "a" };
@@ -181,7 +183,7 @@ public class CaseInsensitiveByteTrieTest {
 		assertTrue("too many values in trie", !actuals.hasNext());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSize() throws Exception {
 		assertEquals("wrong size for empty", 0, trie.size());
 		add(trie, "foo", true);
@@ -194,7 +196,7 @@ public class CaseInsensitiveByteTrieTest {
 		assertEquals("wrong size for add ''", 3, trie.size());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testNumberOfNodes() throws Exception {
 		assertEquals("wrong size for empty", 1, trie.numberOfNodes());
 		add(trie, "aa", true);
@@ -207,7 +209,7 @@ public class CaseInsensitiveByteTrieTest {
 		assertEquals("wrong size for 'aAa'", 5, trie.numberOfNodes());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSearch1() throws Exception {
 		add(trie, "a", true);
 		add(trie, "Ab", true);
@@ -229,7 +231,7 @@ public class CaseInsensitiveByteTrieTest {
 		expect(result, 4, "Ab");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSearch2() throws Exception {
 		add(trie, "hE", true);
 		add(trie, "sHe", true);
@@ -250,7 +252,7 @@ public class CaseInsensitiveByteTrieTest {
 		expect(result, 22, "hE");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSearch3() throws Exception {
 		add(trie, "unStoppable", true);
 		add(trie, "sTop", true);

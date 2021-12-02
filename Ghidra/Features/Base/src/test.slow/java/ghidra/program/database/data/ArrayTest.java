@@ -30,6 +30,9 @@ import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.task.TaskMonitorAdapter;
 
 import org.junit.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -51,7 +54,7 @@ public class ArrayTest extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		program = createDefaultProgram(testName.getMethodName(), ProgramBuilder._TOY, this);
@@ -77,13 +80,13 @@ public class ArrayTest extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		program.endTransaction(transactionID, true);
 		program.release(this);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCreateArray() throws Exception {
 
 		Array array =
@@ -93,7 +96,7 @@ public class ArrayTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(5 * structLen, array.getLength());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testApplyArray() throws Exception {
 		Array array =
 			(Array) dataMgr.resolve(new ArrayDataType(struct, 5, struct.getLength()), null);
@@ -123,7 +126,7 @@ public class ArrayTest extends AbstractGhidraHeadedIntegrationTest {
 		assertNull(dt.getDataTypeManager().getDataType(path, name));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testArrayDataSettings() throws Exception {
 		ArrayDataType dataType = new ArrayDataType(new ByteDataType(), 10, 1);
 		assertEquals(5, dataType.getSettingsDefinitions().length);
@@ -140,7 +143,7 @@ public class ArrayTest extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testArrayDataSettingsInAStructure() throws Exception {
 		ArrayDataType arrayDataType = new ArrayDataType(new ByteDataType(), 10, 1);
 		StructureDataType structDataType = new StructureDataType("TestStruct", 0);
@@ -161,7 +164,7 @@ public class ArrayTest extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSettingArrayElementAffectsAllElements() throws Exception {
 		ArrayDataType dataType = new ArrayDataType(new ByteDataType(), 10, 1);
 		listing.createData(addr(0x100), dataType, 0);
@@ -184,7 +187,7 @@ public class ArrayTest extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSettingArrayElementInStructAffectsAllElements() throws Exception {
 		ArrayDataType arrayDataType = new ArrayDataType(new ByteDataType(), 10, 1);
 		StructureDataType structDataType = new StructureDataType("TestStruct", 0);

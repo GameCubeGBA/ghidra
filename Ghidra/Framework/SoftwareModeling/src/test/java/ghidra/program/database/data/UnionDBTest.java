@@ -24,6 +24,7 @@ import com.google.common.collect.Sets;
 import generic.test.AbstractGTest;
 import ghidra.program.model.data.*;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  *
@@ -33,7 +34,7 @@ public class UnionDBTest extends AbstractGTest {
 	private DataTypeManager dataMgr;
 	private UnionDB union;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		dataMgr = new StandAloneDataTypeManager("dummydataMgr");

@@ -45,6 +45,8 @@ import ghidra.program.util.ProgramLocation;
 import ghidra.test.*;
 import mockit.Mock;
 import mockit.MockUp;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DecompilerCachingTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -74,7 +76,7 @@ public class DecompilerCachingTest extends AbstractGhidraHeadedIntegrationTest {
 		}
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		// the magic of JMockit will cause our FakeDecompilerController to get used instead
 		// of the real one, regardless of where it gets constructed.
@@ -88,7 +90,7 @@ public class DecompilerCachingTest extends AbstractGhidraHeadedIntegrationTest {
 		initializeTool();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

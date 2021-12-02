@@ -37,6 +37,7 @@ import ghidra.program.model.symbol.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.task.TaskMonitor;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
 
 public class StringsAnalyzerTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -242,7 +243,7 @@ public class StringsAnalyzerTest extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		System.gc();

@@ -23,7 +23,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import SWIG.SBTarget;
 import agent.lldb.model.iface2.LldbModelTargetSession;
@@ -146,7 +146,7 @@ public abstract class AbstractModelForLldbSessionActivationTest
 	}
 
 	@Override
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testActivateEachTwice() throws Throwable {
 		m.build();
 

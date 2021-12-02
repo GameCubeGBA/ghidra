@@ -20,7 +20,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.util.task.TaskMonitorAdapter;
@@ -53,7 +53,7 @@ public class AlgorithmsTest extends AbstractGenericTest {
 		return list;
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testBubbleSort() {
 		List<Long> data = getList(new long[] { 5, 8, 10, 2, 10, 3, 3, 7, 10, 23, 0, 15, 22 });
 		int low = 3;
@@ -65,7 +65,7 @@ public class AlgorithmsTest extends AbstractGenericTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testmergeSort() {
 		List<Long> data = getList(new long[] { 5, 8, 10, 2, 10, 3, 3, 7, 10, 23, 0, 15, 22 });
 		Algorithms.mergeSort(data, comparator, TaskMonitorAdapter.DUMMY_MONITOR);
@@ -75,7 +75,7 @@ public class AlgorithmsTest extends AbstractGenericTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testmergeSort2() {
 		List<Long> data = getList(new long[] { 0, 1, 2, 3, 4, 0, 0, 0 });
 		Algorithms.mergeSort(data, comparator, TaskMonitorAdapter.DUMMY_MONITOR);
@@ -85,7 +85,7 @@ public class AlgorithmsTest extends AbstractGenericTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testmergeSort3() {
 		List<Long> data = getList(new long[] { 0, 1, 2, 3, 4, 4, 4, 4 });
 		Algorithms.mergeSort(data, comparator, TaskMonitorAdapter.DUMMY_MONITOR);
@@ -95,7 +95,7 @@ public class AlgorithmsTest extends AbstractGenericTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testmergeSort4() {
 		List<Long> data = getList(new long[] { 1, 1, 1, 1, 1, 1, 1, 1 });
 		Algorithms.mergeSort(data, comparator, TaskMonitorAdapter.DUMMY_MONITOR);
@@ -120,7 +120,7 @@ public class AlgorithmsTest extends AbstractGenericTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testBinarySearch() {
 		List<Long> data = getList(new long[] { 0, 2, 3, 3, 5, 7, 8, 10, 10, 10, 15, 22, 23 });
 

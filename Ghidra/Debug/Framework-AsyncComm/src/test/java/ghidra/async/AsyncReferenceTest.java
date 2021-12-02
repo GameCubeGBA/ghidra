@@ -21,12 +21,11 @@ import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
-import org.junit.Test;
-
 import ghidra.util.Msg;
+import org.junit.jupiter.api.Test;
 
 public class AsyncReferenceTest {
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testListener() {
 		AsyncReference<String, Integer> str = new AsyncReference<>();
 		AtomicReference<String> got = new AtomicReference<>();
@@ -43,7 +42,7 @@ public class AsyncReferenceTest {
 		assertEquals(2, gotCause.get());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testWaitChanged() throws InterruptedException, ExecutionException {
 		AsyncReference<String, Void> str = new AsyncReference<>();
 		CompletableFuture<String> chg1 = str.waitChanged();
@@ -63,7 +62,7 @@ public class AsyncReferenceTest {
 		assertEquals("World", chg3.get());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testWaitValue() {
 		AsyncReference<String, Void> str = new AsyncReference<>();
 		CompletableFuture<Void> matchHello = str.waitValue("Hello");
@@ -95,7 +94,7 @@ public class AsyncReferenceTest {
 		assertTrue(duration >= 100);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDebouncedUnchanged() throws InterruptedException {
 		AsyncReference<Integer, Void> orig = new AsyncReference<>(1);
 		AsyncReference<Integer, Void> db = orig.debounced(new AsyncTimer(), 100);
@@ -105,7 +104,7 @@ public class AsyncReferenceTest {
 		assertFalse(settled.isDone());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDebouncedSingleChange()
 			throws InterruptedException, ExecutionException, TimeoutException {
 		AsyncReference<Integer, Void> orig = new AsyncReference<>(1);
@@ -121,7 +120,7 @@ public class AsyncReferenceTest {
 		assertTrue(duration >= 100);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDebouncedChangedBack() throws InterruptedException {
 		AsyncReference<Integer, Void> orig = new AsyncReference<>(1);
 		AsyncReference<Integer, Void> db = orig.debounced(new AsyncTimer(), 100);
@@ -132,7 +131,7 @@ public class AsyncReferenceTest {
 		assertFalse(settled.isDone());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testManyChanges()
 			throws InterruptedException, ExecutionException, TimeoutException {
 		AsyncReference<Integer, String> orig = new AsyncReference<>(1);

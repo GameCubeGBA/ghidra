@@ -16,6 +16,8 @@
 package generic.lsh.vector;
 
 import org.junit.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * This class tests equality calculations of the {@link LSHVector} class.
@@ -45,7 +47,7 @@ public class LSHVectorEqualityTest {
 	 * @see HashEntry
 	 * @throws Exception
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		vec1 = new LSHCosineVector();
 		vec2 = new LSHCosineVector();
@@ -69,7 +71,7 @@ public class LSHVectorEqualityTest {
 		entry10 = new HashEntry(1, 2, 512, w);// dcnt > 511 causes IDF value to change
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		// nothing to do
 	}

@@ -23,7 +23,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import ghidra.program.model.data.DataType;
@@ -37,7 +37,7 @@ public class StackEditorCellEditTest extends AbstractStackEditorTest {
 	}
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		env.showTool();

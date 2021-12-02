@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 import java.util.Collection;
 import java.util.Set;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import edu.uci.ics.jung.graph.Graph;
@@ -34,7 +34,7 @@ import ghidra.graph.viewer.options.RelayoutOption;
 public class FunctionGraphGroupVertices3Test extends AbstractFunctionGraphTest {
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		disableAnimation();

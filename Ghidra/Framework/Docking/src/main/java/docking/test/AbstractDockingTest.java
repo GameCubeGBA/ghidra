@@ -59,6 +59,8 @@ import ghidra.util.exception.AssertException;
 import ghidra.util.task.SwingUpdateManager;
 import ghidra.util.worker.Worker;
 import junit.framework.AssertionFailedError;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import sun.awt.AppContext;
 import util.CollectionUtils;
 import utility.application.ApplicationLayout;
@@ -86,7 +88,7 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 		setInstanceField("systemClipboard", GClipboard.class, new Clipboard("Test Clipboard"));
 	}
 
-	@Before
+	@BeforeEach
 	// named differently than setUp(), so subclasses do not override it
 	public void dockingSetUp() {
 
@@ -97,7 +99,7 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 		setErrorGUIEnabled(true);
 	}
 
-	@After
+	@AfterEach
 	// named differently than tearDown(), so subclasses do not override it
 	public void dockingTearDown() {
 		// Disable error reporting from non-test threads found during tearDown().  The idea is

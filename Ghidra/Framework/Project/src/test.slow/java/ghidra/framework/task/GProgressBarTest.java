@@ -23,12 +23,12 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import javax.swing.*;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import docking.test.AbstractDockingTest;
 import ghidra.framework.task.gui.GProgressBar;
 import ghidra.util.task.CancelledListener;
+import org.junit.jupiter.api.BeforeEach;
 
 public class GProgressBarTest extends AbstractDockingTest {
 
@@ -36,7 +36,7 @@ public class GProgressBarTest extends AbstractDockingTest {
 	private CancelledListener cancelledListener;
 	private GProgressBar progressBar;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		cancelledListener = new CancelledListener() {

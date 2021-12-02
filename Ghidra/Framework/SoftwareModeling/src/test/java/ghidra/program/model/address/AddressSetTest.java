@@ -22,6 +22,8 @@ import java.util.Iterator;
 import org.junit.*;
 
 import generic.test.AbstractGenericTest;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AddressSetTest extends AbstractGenericTest {
 	private AddressSpace space;
@@ -39,7 +41,7 @@ public class AddressSetTest extends AbstractGenericTest {
 	private AddressSet[] aXORb = new AddressSet[SIZE];
 	private boolean[] aCONTAINSb = new boolean[SIZE];
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		space = new GenericAddressSpace("xx", 32, AddressSpace.TYPE_RAM, 0);
@@ -310,7 +312,7 @@ public class AddressSetTest extends AbstractGenericTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testBasicAddRange() {
 		AddressSet mySet = new AddressSet();
 		mySet.addRange(addr(5), addr(8));
@@ -329,7 +331,7 @@ public class AddressSetTest extends AbstractGenericTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddInMissingRangeBetweenTwoRanges() {
 		AddressSet mySet = new AddressSet();
 		mySet.addRange(addr(5), addr(8));
@@ -342,7 +344,7 @@ public class AddressSetTest extends AbstractGenericTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddRangeThatConsumesSeveralExistingRanges() {
 		AddressSet mySet = new AddressSet();
 		mySet.addRange(addr(5), addr(8));
@@ -352,14 +354,14 @@ public class AddressSetTest extends AbstractGenericTest {
 		Assert.assertEquals(20, mySet.getNumAddresses());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testUnion() {
 		for (int i = 0; i < SIZE; ++i) {
 			Assert.assertEquals("case: " + i + " ", aUNIONb[i], a[i].union(b[i]));
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAdd() {
 		for (int i = 0; i < SIZE; ++i) {
 			a[i].add(b[i]);
@@ -367,14 +369,14 @@ public class AddressSetTest extends AbstractGenericTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIntersect() {
 		for (int i = 0; i < SIZE; ++i) {
 			Assert.assertEquals("case: " + i + " ", aINTERSECTb[i], a[i].intersect(b[i]));
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIntersectRange() {
 		for (int i = 0; i < SIZE; ++i) {
 			if (b[i].getNumAddressRanges() == 0) {
@@ -386,7 +388,7 @@ public class AddressSetTest extends AbstractGenericTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIntersects() {
 		AddressSet empty = set();
 		for (int i = 0; i < SIZE; i++) {
@@ -395,7 +397,7 @@ public class AddressSetTest extends AbstractGenericTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDelete() {
 		for (int i = 0; i < SIZE; ++i) {
 			a[i].delete(b[i]);
@@ -403,28 +405,28 @@ public class AddressSetTest extends AbstractGenericTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSubtract() {
 		for (int i = 0; i < SIZE; ++i) {
 			Assert.assertEquals("case: " + i + " ", aMINUSb[i], a[i].subtract(b[i]));
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testXOR() {
 		for (int i = 0; i < SIZE; ++i) {
 			Assert.assertEquals("case: " + i + " ", aXORb[i], a[i].xor(b[i]));
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testContainsSet() {
 		for (int i = 0; i < SIZE; ++i) {
 			Assert.assertEquals("case: " + i + " ", aCONTAINSb[i], a[i].contains(b[i]));
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testContainsAddress() {
 		AddressSet set = set(0x100, 0x109, 0x200, 0x205, 0x256, 0x258);
 
@@ -442,7 +444,7 @@ public class AddressSetTest extends AbstractGenericTest {
 		assertTrue(!set.contains(addr(0x259)));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testContainsRange() {
 		AddressSet set = set(0x100, 0x109, 0x200, 0x205, 0x256, 0x258);
 		assertTrue(!set.contains(addr(0x50), addr(0x200)));
@@ -450,7 +452,7 @@ public class AddressSetTest extends AbstractGenericTest {
 		assertTrue(set.contains(addr(0x101), addr(0x108)));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddSucessiveRanges() {
 		AddressSet set = set();
 		set.addRange(addr(0x10), addr(0x20));
@@ -458,7 +460,7 @@ public class AddressSetTest extends AbstractGenericTest {
 		Assert.assertEquals(1, set.getNumAddressRanges());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSpecialHandlingWhenLastRangeIsRemoved() {
 		// addressSet has optimization code for adding in consecutive ranges, but has
 		// to be careful that the "lastNode" variable is not stale.
@@ -470,14 +472,14 @@ public class AddressSetTest extends AbstractGenericTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddNullSet() {
 		AddressSet set = set();
 		set.add((AddressRange) null);
 		set.add((AddressSet) null);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testClear() {
 		AddressSet set = set(0x100, 0x109, 0x200, 0x205, 0x256, 0x258);
 		Assert.assertEquals(3, set.getNumAddressRanges());
@@ -485,7 +487,7 @@ public class AddressSetTest extends AbstractGenericTest {
 		Assert.assertEquals(0, set.getNumAddressRanges());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddressIterator() {
 		AddressSet set = new AddressSet();
 		AddressIterator iter = set.getAddresses(true);
@@ -509,13 +511,13 @@ public class AddressSetTest extends AbstractGenericTest {
 		assertTrue(!iter.hasNext());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddressIteratorAtEnd() {
 		AddressSet set = set(10, 20);
 		set.getAddresses(addr(20), true);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddressIteratorStartAddressContained() {
 
 		int[] addrs = new int[] { 0x202, 0x203, 0x204, 0x205, 0x256, 0x257, 0x258 };
@@ -528,7 +530,7 @@ public class AddressSetTest extends AbstractGenericTest {
 		assertTrue(!iter.hasNext());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddressIteratorStartAddressContainedInOnlyRange() {
 
 		int[] addrs = new int[] { 0x108, 0x109 };
@@ -541,14 +543,14 @@ public class AddressSetTest extends AbstractGenericTest {
 		assertTrue(!iter.hasNext());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEmptySet() {
 		AddressSet set = set();
 		assertNull(set.getMinAddress());
 		assertNull(set.getMaxAddress());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddressIteratorStartAddressNotContained() {
 
 		int[] addrs = new int[] { 0x200, 0x201, 0x202, 0x203, 0x204, 0x205, 0x256, 0x257, 0x258 };
@@ -561,7 +563,7 @@ public class AddressSetTest extends AbstractGenericTest {
 		assertTrue(!iter.hasNext());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testBackwardAddressIterator() {
 		AddressSet set = new AddressSet();
 		AddressIterator iter = set.getAddresses(false);
@@ -585,7 +587,7 @@ public class AddressSetTest extends AbstractGenericTest {
 		assertTrue(!iter.hasNext());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testBackwardsAddressIteratorStartAddressContained() {
 
 		int[] addrs = new int[] { 0x202, 0x201, 0x200, 0x104, 0x103, 0x102, 0x101, 0x100 };
@@ -598,7 +600,7 @@ public class AddressSetTest extends AbstractGenericTest {
 		assertTrue(!iter.hasNext());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testBackwardsAddressIteratorStartAddressNotContained() {
 
 		int[] addrs = new int[] { 0x104, 0x103, 0x102, 0x101, 0x100 };
@@ -611,7 +613,7 @@ public class AddressSetTest extends AbstractGenericTest {
 		assertTrue(!iter.hasNext());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDeleteRangeAcrossAddresSpaces() {
 		AddressSet set = set(0x10, 0x20);
 		set.add(space2.getAddress(0x10), space2.getAddress(0x30));
@@ -623,7 +625,7 @@ public class AddressSetTest extends AbstractGenericTest {
 		Assert.assertEquals(5, set.getNumAddresses());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testForwardRangeIteratorStartingInMiddle() {
 		AddressSet set = set(0x100, 0x110, 0x200, 0x210, 0x300, 0x305);
 		Iterator<AddressRange> it = set.iterator(addr(0x50), true);
@@ -647,7 +649,7 @@ public class AddressSetTest extends AbstractGenericTest {
 		assertTrue(!it.hasNext());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testBackwardRangeIteratorStartingInMiddle() {
 		AddressSet set = set(0x100, 0x110, 0x200, 0x210, 0x300, 0x305);
 		Iterator<AddressRange> it = set.iterator(addr(0x400), false);
@@ -676,7 +678,7 @@ public class AddressSetTest extends AbstractGenericTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testBadAddRange() {
 		AddressSet set = set();
 		try {
@@ -696,7 +698,7 @@ public class AddressSetTest extends AbstractGenericTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddingRangeThatSpansSpacesThrowsException() {
 		AddressSet set = new AddressSet();
 		try {
@@ -709,7 +711,7 @@ public class AddressSetTest extends AbstractGenericTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testConstructingAddressSetWithRange() {
 		try {
 			new AddressSet(new AddressRangeImpl(space.getAddress(0), space2.getAddress(0)));
@@ -721,7 +723,7 @@ public class AddressSetTest extends AbstractGenericTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testHasSameAddresses() {
 		AddressSet set1 = set(10, 20);
 		AddressSet set2 = set(10, 20);
@@ -731,7 +733,7 @@ public class AddressSetTest extends AbstractGenericTest {
 		assertTrue(!set1.hasSameAddresses(set3));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEquals() {
 		AddressSet set1 = set(10, 20);
 		AddressSet set2 = set(10, 20);
@@ -743,7 +745,7 @@ public class AddressSetTest extends AbstractGenericTest {
 		assertTrue(!set1.equals(new Object()));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEqualsAndHashCode() {
 		AddressSet set1 = set(10, 20);
 		AddressSet set2 = set(10, 20);
@@ -752,7 +754,7 @@ public class AddressSetTest extends AbstractGenericTest {
 		Assert.assertEquals(0, set().hashCode());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testForwardRangeIterator() {
 		AddressSet set = set(0x100, 0x110, 0x200, 0x210, 0x300, 0x305);
 		Iterator<AddressRange> it = set.iterator(true);
@@ -762,7 +764,7 @@ public class AddressSetTest extends AbstractGenericTest {
 		assertTrue(!it.hasNext());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testBackwardRangeIterator() {
 		AddressSet set = set(0x100, 0x110, 0x200, 0x210, 0x300, 0x305);
 		Iterator<AddressRange> it = set.iterator(false);
@@ -772,7 +774,7 @@ public class AddressSetTest extends AbstractGenericTest {
 		assertTrue(!it.hasNext());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGetRangeContaining() {
 		AddressSet set = set(0x100, 0x110, 0x200, 0x210, 0x300, 0x305);
 		Assert.assertEquals(range(0x200, 0x210), set.getRangeContaining(addr(0x200)));
@@ -781,7 +783,7 @@ public class AddressSetTest extends AbstractGenericTest {
 		assertNull(set.getRangeContaining(addr(0)));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGetFirstRange() {
 		AddressSet set = set(0x100, 0x110, 0x200, 0x210, 0x300, 0x305);
 		Assert.assertEquals(range(0x100, 0x110), set.getFirstRange());
@@ -790,7 +792,7 @@ public class AddressSetTest extends AbstractGenericTest {
 		assertNull(set.getFirstRange());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGetLastRange() {
 		AddressSet set = set(0x100, 0x110, 0x200, 0x210, 0x300, 0x305);
 		Assert.assertEquals(range(0x300, 0x305), set.getLastRange());
@@ -798,7 +800,7 @@ public class AddressSetTest extends AbstractGenericTest {
 		assertNull(set.getLastRange());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSubtractEmptySet() {
 		AddressSet set = set(0x100, 0x110, 0x200, 0x210, 0x300, 0x305);
 		AddressSet emptySet = set();
@@ -806,7 +808,7 @@ public class AddressSetTest extends AbstractGenericTest {
 		Assert.assertEquals(set, newSet);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testTrimStart() {
 		AddressSet set = set(0x10, 0x20, 0x30, 0x40);
 		set.add(space2.getAddress(0x10), space2.getAddress(0x20));
@@ -826,7 +828,7 @@ public class AddressSetTest extends AbstractGenericTest {
 		assertEquals(expectedSet, trimSet);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testdeleteFromMin() {
 		AddressSet set = set(0x10, 0x20, 0x30, 0x40);
 		set.add(space2.getAddress(0x10), space2.getAddress(0x20));
@@ -869,7 +871,7 @@ public class AddressSetTest extends AbstractGenericTest {
 		assertTrue(set.isEmpty());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testTrimEnd() {
 		AddressSet set = set(0x10, 0x20, 0x30, 0x40);
 		set.add(space2.getAddress(0x10), space2.getAddress(0x20));
@@ -887,7 +889,7 @@ public class AddressSetTest extends AbstractGenericTest {
 		assertEquals(expectedSet, trimSet);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDeleteFrom() {
 		AddressSet set = set(0x10, 0x20, 0x30, 0x40);
 		set.add(space2.getAddress(0x10), space2.getAddress(0x20));

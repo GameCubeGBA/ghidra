@@ -34,6 +34,7 @@ import generic.test.AbstractGenericTest;
 import generic.test.category.NightlyCategory;
 import ghidra.framework.*;
 import ghidra.pcodeCPort.slgh_compile.SleighCompileLauncher;
+import org.junit.jupiter.api.BeforeEach;
 
 @Category(NightlyCategory.class)
 public class SleighCompileRegressionTest extends AbstractGenericTest {
@@ -41,7 +42,7 @@ public class SleighCompileRegressionTest extends AbstractGenericTest {
 
 	private Logger log;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		log = LogManager.getLogger(SleighCompileRegressionTest.class);

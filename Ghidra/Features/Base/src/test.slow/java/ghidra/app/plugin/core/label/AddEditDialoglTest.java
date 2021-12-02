@@ -40,6 +40,9 @@ import ghidra.program.model.listing.Function;
 import ghidra.program.model.listing.Program;
 import ghidra.program.model.symbol.*;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 	private TestEnv env;
@@ -56,7 +59,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 	private List<?> recentLabels;
 	private JComboBox<?> labelNameChoices;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 
@@ -93,13 +96,13 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 		return ref.get();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		dialog.close();
 		env.dispose();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddLabelSetUp() {
 		addLabel(addr(0x0100642a));
 		assertEquals("Add Label at 0100642a", dialog.getTitle());
@@ -113,7 +116,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 		pressCancel();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testLabelChangeOne() {
 		addLabel(addr(0x0100642a));
 		setText("printf");
@@ -125,7 +128,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(addr(0x100642a), s.getAddress());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDuplicateLabelForAdd() {
 		addLabel(addr(0x0100642a));
 		setText("printf");
@@ -139,7 +142,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 		pressCancel();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSetEntryPoint() {
 		addLabel(addr(0x0100642a));
 		setText("printf");
@@ -151,7 +154,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 		assertTrue(s.isExternalEntryPoint());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSetPinned() {
 		addLabel(addr(0x0100642a));
 		setText("printf");
@@ -169,7 +172,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEmptyLabel() {
 		addLabel(addr(0x0100642a));
 		pressOk();
@@ -178,7 +181,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testInitNamespaces() throws Exception {
 		createEntryFunction();
 
@@ -233,7 +236,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 		program.endTransaction(transactionID, true);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSetScope() throws Exception {
 		Symbol s = getUniqueSymbol(program, "entry", null);
 		createEntryFunction();
@@ -249,7 +252,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(st.getNamespace(a), s.getParentNamespace());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSetPrimaryAtExistingLabel() {
 		Symbol s = getUniqueSymbol(program, "entry", null);
 		assertTrue(s.isPrimary());
@@ -270,7 +273,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSetPrimaryAtExistingLabel2() throws Exception {
 		Symbol s = getUniqueSymbol(program, "entry", null);
 		createEntryFunction();
@@ -284,7 +287,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testRecentLabels() {
 		addLabel(addr(0x100642a));
 		setText("aaaa");
@@ -306,7 +309,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testRecentLabelsLimit() {
 		for (int i = 0; i < 12; i++) {
 			addLabel(addr(0x100642a));
@@ -320,7 +323,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEditLabel() throws Exception {
 		Symbol s = getUniqueSymbol(program, "entry", null);
 		editLabel(s);
@@ -335,7 +338,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testRenameFunction() throws Exception {
 
 		Symbol s = getUniqueSymbol(program, "entry", null);
@@ -362,7 +365,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 		assertTrue(function.getSymbol().isPrimary());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSetPrimaryOnOtherLabel() throws Exception {
 		Symbol s = getUniqueSymbol(program, "entry", null);
 		Function function = program.getFunctionManager().getFunctionAt(s.getAddress());
@@ -388,7 +391,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 		assertNotNull(getUniqueSymbol(program, "entry", null));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSelectedNamespace() throws Exception {
 
 		SymbolTable symbolTable = program.getSymbolTable();
@@ -407,7 +410,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEditDefaultLabel() {
 		Address refAddr = addr(0x10064b1);
 		Symbol s = st.getPrimarySymbol(refAddr);
@@ -422,7 +425,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals("aaaa", s.getName());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testRenameLabel() {
 		Symbol s = getUniqueSymbol(program, "entry", null);
 		Address a = s.getAddress();
@@ -437,7 +440,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDuplicateLabelForEdit() {
 		addLabel(addr(0x100642a));
 		setText("printf");
@@ -457,7 +460,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testRenameOneLabel() {
 		Address a = addr(0x100642a);
 		addLabel(a);
@@ -480,7 +483,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 		assertNull(getUniqueSymbol(program, "bbbb", null));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEdit() throws Exception {
 		Symbol s = getUniqueSymbol(program, "entry", null);
 		assertTrue(s.isGlobal());
@@ -504,7 +507,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals("entry", s.getParentNamespace().getName());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEdit_CannotRemoveDefaultLabel() {
 
 		Address refAddr = addr(0x10064b1);
@@ -519,7 +522,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 		assertStatusText("Name cannot be blank");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEdit_RemoveNonDefaultLabel() {
 
 		Address a = addr(0x100642a);
@@ -542,7 +545,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 		assertNull(getUniqueSymbol(program, labelName, null));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testRecentLabelsForEdit() {
 		Symbol s = getUniqueSymbol(program, "entry", null);
 
@@ -563,7 +566,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals("bbbb", recentLabels.get(0));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testPrimaryEnablement() throws Exception {
 		Symbol s = getUniqueSymbol(program, "entry", null);
 
@@ -580,7 +583,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 		pressOk();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testPrimaryEnablement2() throws Exception {
 		Symbol s = getUniqueSymbol(program, "entry", null);
 		// add another label at this address
@@ -595,7 +598,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 		assertTrue(primaryCheckBox.isSelected());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testPrimaryEnablement3() throws Exception {
 		Symbol s = getUniqueSymbol(program, "entry", null);
 		editLabel(s);
@@ -611,7 +614,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 	 *
 	 * see Tracker ID 901
 	 */
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testMoveCurrentLabelToGlobalNamespace() {
 		Symbol s = getUniqueSymbol(program, "entry", null);
 
@@ -644,7 +647,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 			"the Global namespace while editing the symbol", !dialog.isVisible());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSetLabelNamespace_InsideFunctionBody_ToFunctionNamespace() {
 		Symbol entry = getUniqueSymbol(program, "entry", null);
 		assertNotNull(entry);
@@ -664,7 +667,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(entry.getAddress(), fun.getEntryPoint());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSetLabelNamespace_InsideFunctionBody_ToExistingNonFunctionNamespace() {
 
 		Symbol entry = getUniqueSymbol(program, "entry", null);
@@ -706,7 +709,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 		assertFalse("Namespace is not a function", parentNamespace instanceof Function);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEntryNamespacePathWithAmbiguousFunctionName() {
 		Symbol entry = getUniqueSymbol(program, "entry", null);
 		assertNotNull(entry);
@@ -729,7 +732,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(dupEntry.getAddress(), fun.getEntryPoint());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSetNamespace_NonExistentNamespace_SameNameAsFunction() throws Exception {
 
 		//

@@ -18,7 +18,7 @@ package ghidra.app.merge.datatypes;
 import static org.junit.Assert.*;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.program.database.ProgramDB;
 import ghidra.program.database.ProgramModifierListener;
@@ -32,7 +32,7 @@ import ghidra.util.task.TaskMonitorAdapter;
  */
 public class CategoryMerge4Test extends AbstractDataTypeMergeTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testMoveDataType() throws Exception {
 
 		// Latest: move data type 
@@ -108,7 +108,7 @@ public class CategoryMerge4Test extends AbstractDataTypeMergeTest {
 		checkConflictCount(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testMoveDataType2() throws Exception {
 
 		// Latest: move data type 
@@ -184,7 +184,7 @@ public class CategoryMerge4Test extends AbstractDataTypeMergeTest {
 		checkConflictCount(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testMoveDataTypeNoConflict() throws Exception {
 
 		// Latest: no changes 
@@ -232,7 +232,7 @@ public class CategoryMerge4Test extends AbstractDataTypeMergeTest {
 		checkConflictCount(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testMoveMultipleDataTypes() throws Exception {
 
 		// Latest: move data type
@@ -340,7 +340,7 @@ public class CategoryMerge4Test extends AbstractDataTypeMergeTest {
 		checkConflictCount(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testMoveDataTypesNoConflict() throws Exception {
 
 		// Latest: rename MISC to MY_MISC
@@ -413,7 +413,7 @@ public class CategoryMerge4Test extends AbstractDataTypeMergeTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testMoveDataTypes() throws Exception {
 
 		// Latest: rename MISC to MY_MISC
@@ -489,7 +489,7 @@ public class CategoryMerge4Test extends AbstractDataTypeMergeTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testMoveDataTypes2() throws Exception {
 
 		// Latest: rename MISC to MY_MISC
@@ -563,7 +563,7 @@ public class CategoryMerge4Test extends AbstractDataTypeMergeTest {
 		checkConflictCount(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testMoveDataTypes3() throws Exception {
 
 		// Latest: rename MISC to MY_MISC
@@ -637,7 +637,7 @@ public class CategoryMerge4Test extends AbstractDataTypeMergeTest {
 		checkConflictCount(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testMoveDataTypes4() throws Exception {
 
 		// Latest: rename MISC to MY_MISC; edit Foo
@@ -715,7 +715,7 @@ public class CategoryMerge4Test extends AbstractDataTypeMergeTest {
 		checkConflictCount(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testMoveDataTypes5() throws Exception {
 
 		// Latest: rename MISC to MY_MISC; edit Foo
@@ -803,7 +803,7 @@ public class CategoryMerge4Test extends AbstractDataTypeMergeTest {
 		checkConflictCount(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testMoveDataTypes6() throws Exception {
 
 		// Latest: rename MISC to MY_MISC; edit Foo
@@ -889,7 +889,7 @@ public class CategoryMerge4Test extends AbstractDataTypeMergeTest {
 		checkConflictCount(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testMoveDataTypes7() throws Exception {
 
 		// Latest: move data types from MISC to NEW_MISC; delete MISC;
@@ -974,7 +974,7 @@ public class CategoryMerge4Test extends AbstractDataTypeMergeTest {
 		checkConflictCount(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testMoveDataTypes8() throws Exception {
 
 		// Latest: delete MISC;
@@ -1049,7 +1049,7 @@ public class CategoryMerge4Test extends AbstractDataTypeMergeTest {
 		checkConflictCount(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testMoveDataTypes9() throws Exception {
 
 		// Latest: move data types from MISC to /Category1/Category2
@@ -1122,7 +1122,7 @@ public class CategoryMerge4Test extends AbstractDataTypeMergeTest {
 		checkConflictCount(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testMoveDataTypesAndEdit() throws Exception {
 
 		// Latest: delete MISC;
@@ -1204,7 +1204,7 @@ public class CategoryMerge4Test extends AbstractDataTypeMergeTest {
 		checkConflictCount(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testMoveDataTypesAndEdit2() throws Exception {
 
 		// Latest: delete MISC;
@@ -1300,7 +1300,7 @@ public class CategoryMerge4Test extends AbstractDataTypeMergeTest {
 		checkConflictCount(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testMoveDataTypesAndEdit3() throws Exception {
 
 		// Latest: delete MISC;
@@ -1396,7 +1396,7 @@ public class CategoryMerge4Test extends AbstractDataTypeMergeTest {
 		checkConflictCount(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testDeleteDataTypes() throws Exception {
 
 		// Latest: move MISC to /Category1/Category2
@@ -1463,7 +1463,7 @@ public class CategoryMerge4Test extends AbstractDataTypeMergeTest {
 		checkConflictCount(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testDeleteDataTypes2() throws Exception {
 
 		// Latest: delete data types in MISC

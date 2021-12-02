@@ -17,7 +17,7 @@ package ghidra.framework;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 
@@ -50,7 +50,7 @@ public class ApplicationVersionTest extends AbstractGenericTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testApplicationVersionGetters() {
 		ApplicationVersion applicationVersion = new ApplicationVersion("9.0.1-BETA");
 		assertEquals(applicationVersion.getMajor(), 9);
@@ -77,7 +77,7 @@ public class ApplicationVersionTest extends AbstractGenericTest {
 		assertNotEquals(applicationVersion1, applicationVersion2);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testApplicationVersionCompare() {
 		ApplicationVersion applicationVersion1 = new ApplicationVersion("9.0");
 		ApplicationVersion applicationVersion2 = new ApplicationVersion("9.0.0-BETA");

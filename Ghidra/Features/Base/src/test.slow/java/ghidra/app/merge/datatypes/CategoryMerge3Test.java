@@ -18,7 +18,7 @@ package ghidra.app.merge.datatypes;
 import static org.junit.Assert.*;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.program.database.ProgramDB;
 import ghidra.program.database.ProgramModifierListener;
@@ -31,7 +31,7 @@ public class CategoryMerge3Test extends AbstractDataTypeMergeTest {
 
 	public static final int MAX_WAIT = 5000;
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEditFuncSig() throws Exception {
 		// test is here to see what the FunctionDefinition looks like
 

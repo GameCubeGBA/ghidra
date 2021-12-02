@@ -24,6 +24,8 @@ import ghidra.program.database.ProgramBuilder;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.model.data.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class FunctionDefinitionDBTest extends AbstractGhidraHeadedIntegrationTest {
 	private ProgramDB program;
@@ -43,7 +45,7 @@ public class FunctionDefinitionDBTest extends AbstractGhidraHeadedIntegrationTes
 		program.endTransaction(transactionID, true);
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = createDefaultProgram(testName.getMethodName(), ProgramBuilder._TOY, this);
 		dtm = program.getDataTypeManager();
@@ -53,7 +55,7 @@ public class FunctionDefinitionDBTest extends AbstractGhidraHeadedIntegrationTes
 		functionDt = (FunctionDefinition) dtm.resolve(fdt, null);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		endTransaction();
 		program.release(this);

@@ -20,17 +20,17 @@ import static org.junit.Assert.assertNull;
 
 import java.io.*;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.util.LongIterator;
 import ghidra.util.datastruct.NoSuchIndexException;
+import org.junit.jupiter.api.BeforeEach;
 
 public class ObjectPropertySetTest extends AbstractGenericTest {
 	ObjectPropertySet ps;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		ps = new ObjectPropertySet("Test");
 	}

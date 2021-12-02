@@ -27,6 +27,9 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.mem.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ByteMappedMemoryBlockTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -36,7 +39,7 @@ public class ByteMappedMemoryBlockTest extends AbstractGhidraHeadedIntegrationTe
 	private Program program;
 	private int transactionID;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = createDefaultProgram(testName.getMethodName(), ProgramBuilder._TOY64_LE, this);
 		memory = program.getMemory();
@@ -53,7 +56,7 @@ public class ByteMappedMemoryBlockTest extends AbstractGhidraHeadedIntegrationTe
 		memory.setBytes(block.getStart(), bytes);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		program.endTransaction(transactionID, true);
 		program.release(this);
@@ -63,7 +66,7 @@ public class ByteMappedMemoryBlockTest extends AbstractGhidraHeadedIntegrationTe
 		return space.getAddress(offset);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCreateNewBlock1to1() throws Exception {
 		MemoryBlock byteMappedBlock =
 			memory.createByteMappedBlock("test", addr(0x1000), addr(0x80), 0x100, false);
@@ -202,7 +205,7 @@ public class ByteMappedMemoryBlockTest extends AbstractGhidraHeadedIntegrationTe
 		assertTrue(Arrays.equals(new byte[] { 1, -2, 2, -4 }, data2));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCreateNewBlock2to4() throws Exception {
 		MemoryBlock byteMappedBlock = memory.createByteMappedBlock("test", addr(0x1000), addr(0x80),
 			0x100, new ByteMappingScheme(2, 4), false);
@@ -274,7 +277,7 @@ public class ByteMappedMemoryBlockTest extends AbstractGhidraHeadedIntegrationTe
 		assertTrue(Arrays.equals(new byte[] { 1, 2, -3, -4 }, data2));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCreateNewBlock2to4Overlay() throws Exception {
 		MemoryBlock byteMappedBlock = memory.createByteMappedBlock("test", addr(0x1000), addr(0x80),
 			0x100, new ByteMappingScheme(2, 4), true);
@@ -352,7 +355,7 @@ public class ByteMappedMemoryBlockTest extends AbstractGhidraHeadedIntegrationTe
 		assertTrue(Arrays.equals(new byte[] { 1, 2, -3, -4 }, data2));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testNoUnderlyingMemory() throws Exception {
 
 		MemoryBlock byteMappedBlock = memory.createByteMappedBlock("BYTE_BLOCK", addr(0x1000),

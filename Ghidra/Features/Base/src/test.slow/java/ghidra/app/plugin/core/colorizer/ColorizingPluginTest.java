@@ -48,6 +48,8 @@ import ghidra.program.util.ProgramLocation;
 import ghidra.program.util.ProgramSelection;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class ColorizingPluginTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -65,7 +67,7 @@ public class ColorizingPluginTest extends AbstractGhidraHeadedIntegrationTest {
 	private DockingActionIf nextColorRangeAction;
 	private DockingActionIf previousColorRangeAction;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 
@@ -101,7 +103,7 @@ public class ColorizingPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.release(program);
 		env.dispose();

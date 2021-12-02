@@ -36,6 +36,8 @@ import ghidra.program.model.data.*;
 import ghidra.program.model.listing.*;
 import ghidra.program.model.symbol.SourceType;
 import ghidra.program.util.ProgramLocation;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public abstract class AbstractStackEditorTest extends AbstractEditorTest {
 
@@ -87,7 +89,7 @@ public abstract class AbstractStackEditorTest extends AbstractEditorTest {
 	}
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		addrFactory = program.getAddressFactory();
@@ -128,7 +130,7 @@ public abstract class AbstractStackEditorTest extends AbstractEditorTest {
 	}
 
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		cancelEditing();
 

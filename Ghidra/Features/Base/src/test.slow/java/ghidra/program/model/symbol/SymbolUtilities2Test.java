@@ -30,6 +30,8 @@ import ghidra.program.model.mem.Memory;
 import ghidra.program.util.DefaultLanguageService;
 import ghidra.test.*;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class SymbolUtilities2Test extends AbstractGhidraHeadedIntegrationTest {
 	private ProgramDB program;
@@ -43,7 +45,7 @@ public class SymbolUtilities2Test extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		TestEnv env = new TestEnv();
 		LanguageService ls = DefaultLanguageService.getLanguageService();
@@ -60,7 +62,7 @@ public class SymbolUtilities2Test extends AbstractGhidraHeadedIntegrationTest {
 		listing = program.getListing();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (program != null) {
 			program.endTransaction(transactionID, true);

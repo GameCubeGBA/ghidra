@@ -26,7 +26,7 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.table.TableColumn;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import com.google.common.collect.Range;
@@ -36,7 +36,7 @@ import ghidra.util.SystemUtilities;
 import ghidra.util.table.GhidraTable;
 
 public class DemoRangeCellRendererTest {
-	@Before
+	@BeforeEach
 	public void checkNotBatch() {
 		assumeFalse(SystemUtilities.isInTestingBatchMode());
 	}

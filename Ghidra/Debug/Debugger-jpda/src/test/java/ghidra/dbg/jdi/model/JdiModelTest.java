@@ -28,16 +28,18 @@ import ghidra.dbg.target.TargetMethod.ParameterDescription;
 import ghidra.dbg.testutil.DebuggerModelTestUtils;
 import ghidra.dbg.util.PathUtils;
 import ghidra.util.Msg;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class JdiModelTest implements DebuggerModelTestUtils {
 	DebuggerObjectModel model;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		model = new JdiModelImpl();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		model.close();
 	}

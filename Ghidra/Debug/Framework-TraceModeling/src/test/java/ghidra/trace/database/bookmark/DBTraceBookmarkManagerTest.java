@@ -29,18 +29,20 @@ import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 import ghidra.trace.database.ToyDBTraceBuilder;
 import ghidra.trace.model.thread.TraceThread;
 import ghidra.util.database.UndoableTransaction;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DBTraceBookmarkManagerTest extends AbstractGhidraHeadlessIntegrationTest {
 	protected ToyDBTraceBuilder b;
 	protected DBTraceBookmarkManager manager;
 
-	@Before
+	@BeforeEach
 	public void setUpBookmarkManagerTest() throws IOException {
 		b = new ToyDBTraceBuilder("Testing", "Toy:BE:64:default");
 		manager = b.trace.getBookmarkManager();
 	}
 
-	@After
+	@AfterEach
 	public void tearDownBookmarkManagerTest() {
 		b.close();
 	}

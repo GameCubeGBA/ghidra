@@ -51,12 +51,14 @@ import ghidra.trace.model.memory.TraceMemoryFlag;
 import ghidra.trace.model.memory.TraceOverlappedRegionException;
 import ghidra.util.database.UndoableTransaction;
 import ghidra.util.exception.DuplicateNameException;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DebuggerManualTest extends AbstractGhidraHeadedDebuggerGUITest {
 
 	protected ToyDBTraceBuilder ub;
 
-	@Before
+	@BeforeEach
 	public void setUpManualTest() throws IOException {
 		createTrace();
 		ub = new ToyDBTraceBuilder("dynamic2-" + name.getMethodName(), LANGID_TOYBE64);
@@ -65,7 +67,7 @@ public class DebuggerManualTest extends AbstractGhidraHeadedDebuggerGUITest {
 		}
 	}
 
-	@After
+	@AfterEach
 	public void tearDownManualTest() {
 		if (ub != null) {
 			if (traceManager != null && traceManager.getOpenTraces().contains(ub.trace)) {

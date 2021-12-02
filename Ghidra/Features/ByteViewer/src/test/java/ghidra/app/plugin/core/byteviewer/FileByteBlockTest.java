@@ -25,6 +25,8 @@ import org.junit.*;
 
 import generic.test.AbstractGenericTest;
 import ghidra.util.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Tests for the file implementation of a ByteBlockSet and ByteBlock.
@@ -42,7 +44,7 @@ public class FileByteBlockTest extends AbstractGenericTest {
 	/*
 	 * @see TestCase#setUp()
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		createFile();
 		blockSet = new FileByteBlockSet(file);
@@ -52,7 +54,7 @@ public class FileByteBlockTest extends AbstractGenericTest {
 	/*
 	 * @see TestCase#tearDown()
 	 */
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		file.delete();
 		blockSet.dispose();

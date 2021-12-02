@@ -33,6 +33,8 @@ import ghidra.program.model.mem.Memory;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  *
@@ -51,7 +53,7 @@ public class SettingsTest extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = createDefaultProgram(testName.getMethodName(), ProgramBuilder._TOY, this);
 		space = program.getAddressFactory().getDefaultAddressSpace();
@@ -61,7 +63,7 @@ public class SettingsTest extends AbstractGhidraHeadedIntegrationTest {
 		addBlock();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (program.getCurrentTransaction() != null) {
 			program.endTransaction(transactionID, true);

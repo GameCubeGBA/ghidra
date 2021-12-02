@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 import javax.swing.JDialog;
 import javax.swing.JTextArea;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import docking.test.AbstractDockingTest;
@@ -100,7 +100,7 @@ public class GraphComponentTest extends AbstractVisualGraphTest {
 	}
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 

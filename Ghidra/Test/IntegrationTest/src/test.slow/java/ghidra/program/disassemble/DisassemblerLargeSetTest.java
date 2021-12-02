@@ -27,6 +27,8 @@ import ghidra.program.model.mem.MemoryBlock;
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 import ghidra.test.ToyProgramBuilder;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DisassemblerLargeSetTest extends AbstractGhidraHeadlessIntegrationTest {
 
@@ -47,7 +49,7 @@ public class DisassemblerLargeSetTest extends AbstractGhidraHeadlessIntegrationT
 
 	private long startTime = 0;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		programBuilder = new ToyProgramBuilder("Test", true, true, null);
 		program = programBuilder.getProgram();
@@ -66,7 +68,7 @@ public class DisassemblerLargeSetTest extends AbstractGhidraHeadlessIntegrationT
 		startTime = System.currentTimeMillis();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (program != null) {
 			program.endTransaction(txId, true);

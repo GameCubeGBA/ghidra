@@ -24,6 +24,8 @@ import ghidra.program.database.ProgramBuilder;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.database.data.DataTypeUtilities;
 import ghidra.program.model.data.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Class for testing the DataType.equalsIgnoreConflict(String name1, String name2).
@@ -41,7 +43,7 @@ public class DataTypeUtilitiesTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		builder = new ProgramBuilder("nameTest", ProgramBuilder._TOY, this);
 
@@ -53,7 +55,7 @@ public class DataTypeUtilitiesTest extends AbstractGenericTest {
 		txID = program.startTransaction("NamingUtilities test");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (txID != 0) {
 			program.endTransaction(txID, false);

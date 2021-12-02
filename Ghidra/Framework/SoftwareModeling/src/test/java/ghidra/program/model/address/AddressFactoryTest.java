@@ -20,6 +20,8 @@ import static org.junit.Assert.*;
 import org.junit.*;
 
 import generic.test.AbstractGenericTest;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AddressFactoryTest extends AbstractGenericTest {
 	AddressSpace space = null;
@@ -34,7 +36,7 @@ public class AddressFactoryTest extends AbstractGenericTest {
 	final String[] spaceName = { "ONE", "TWO", "THREE", "SegSpaceOne", "SegSpaceTwo" };
 
 	////////////////////////////////////////////////////////////////////////////////////
-	@Before
+	@BeforeEach
 	public void setUp() {
 		spaces[0] = new GenericAddressSpace(spaceName[0], 8, AddressSpace.TYPE_RAM, 0);
 		spaces[1] = new GenericAddressSpace(spaceName[1], 16, AddressSpace.TYPE_RAM, 1);
@@ -47,7 +49,7 @@ public class AddressFactoryTest extends AbstractGenericTest {
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSetProgram() {
 
 		space = new GenericAddressSpace("Test", 16, AddressSpace.TYPE_RAM, 0);
@@ -55,7 +57,7 @@ public class AddressFactoryTest extends AbstractGenericTest {
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIsValidAddress() {
 		space = new GenericAddressSpace("Test", 16, AddressSpace.TYPE_RAM, 0);
 
@@ -70,7 +72,7 @@ public class AddressFactoryTest extends AbstractGenericTest {
 	}
 
 	//	/////////////////////////////////////////////////////////////////////////////////
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGenericAddress() throws Exception {
 
 		addrs[0] = new GenericAddress(spaces[0], 255);
@@ -102,7 +104,7 @@ public class AddressFactoryTest extends AbstractGenericTest {
 
 	////////////////////////////////////////////////////////////////////////////////////
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGetAddressSpce() {
 		space = factory.getAddressSpace(spaceName[0]);
 		space = factory.getAddressSpace("xyz");
@@ -119,7 +121,7 @@ public class AddressFactoryTest extends AbstractGenericTest {
 	}
 	//////////////////////////////////////////////////////////////////////////////////
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGetDefaultAddressSpce() {
 		AddressSpace defASP = factory.getDefaultAddressSpace();
 		Assert.assertEquals(defASP.getName(), spaces[0].getName());
@@ -127,7 +129,7 @@ public class AddressFactoryTest extends AbstractGenericTest {
 	}
 	////////////////////////////////////////////////////////////////////////////////////
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGetAddress() {
 		createAddresses();
 

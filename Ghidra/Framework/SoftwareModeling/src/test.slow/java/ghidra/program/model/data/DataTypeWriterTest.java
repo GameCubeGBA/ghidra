@@ -25,6 +25,8 @@ import org.junit.*;
 import generic.test.AbstractGTest;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DataTypeWriterTest extends AbstractGTest {
 
@@ -33,14 +35,14 @@ public class DataTypeWriterTest extends AbstractGTest {
 	private StringWriter writer;
 	private DataTypeWriter dtWriter;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		writer = new StringWriter();
 		dtWriter = new DataTypeWriter(null, writer); // uses default data organization
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		writer.close();

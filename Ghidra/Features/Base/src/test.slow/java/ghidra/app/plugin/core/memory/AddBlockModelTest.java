@@ -32,6 +32,9 @@ import ghidra.program.model.mem.MemoryBlock;
 import ghidra.program.model.mem.MemoryBlockType;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -62,7 +65,7 @@ public class AddBlockModelTest extends AbstractGhidraHeadedIntegrationTest
 	/*
 	 * @see TestCase#setUp()
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -74,13 +77,13 @@ public class AddBlockModelTest extends AbstractGhidraHeadedIntegrationTest
 	/*
 	 * @see TestCase#tearDown()
 	 */
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.release(program);
 		env.dispose();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSetFieldsForInitializedBlock() {
 		model.setBlockName(".test");
 		assertTrue(!model.isValidInfo());
@@ -98,7 +101,7 @@ public class AddBlockModelTest extends AbstractGhidraHeadedIntegrationTest
 		assertTrue(model.isValidInfo());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSetFieldsForUninitializedBlock() {
 		model.setBlockName(".test");
 		assertTrue(!model.isValidInfo());
@@ -114,7 +117,7 @@ public class AddBlockModelTest extends AbstractGhidraHeadedIntegrationTest
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSetFieldsForBitBlock() {
 		model.setBlockName(".test");
 		assertTrue(!model.isValidInfo());
@@ -132,7 +135,7 @@ public class AddBlockModelTest extends AbstractGhidraHeadedIntegrationTest
 		assertTrue(model.isValidInfo());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSetFieldsForOverlayBlock() {
 		model.setBlockName(".test");
 		assertTrue(!model.isValidInfo());
@@ -153,14 +156,14 @@ public class AddBlockModelTest extends AbstractGhidraHeadedIntegrationTest
 		assertTrue(model.isValidInfo());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testBadName() {
 		model.setBlockName(">/== test");
 		assertTrue(!model.isValidInfo());
 		assertTrue(model.getMessage().length() > 0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testExecute() throws Exception {
 		model.setBlockName(".test");
 		model.setStartAddress(getAddr(0x100));
@@ -178,7 +181,7 @@ public class AddBlockModelTest extends AbstractGhidraHeadedIntegrationTest
 		assertEquals((byte) 0xa, block.getByte(getAddr(0x100)));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCreateOverlayBlock() throws Exception {
 
 		model.setBlockName(".test");
@@ -204,7 +207,7 @@ public class AddBlockModelTest extends AbstractGhidraHeadedIntegrationTest
 		assertEquals((byte) 0xa, block.getByte(ovSpace.getAddress(0x100)));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCreateOverlayBlock2() throws Exception {
 
 		model.setBlockName(".test");
@@ -230,7 +233,7 @@ public class AddBlockModelTest extends AbstractGhidraHeadedIntegrationTest
 		assertEquals((byte) 0xa, block.getByte(ovSpace.getAddress(0x1001000)));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCreateBitMappedBlock() throws Exception {
 		model.setBlockName(".test");
 		model.setStartAddress(getAddr(0x100));
@@ -261,14 +264,14 @@ public class AddBlockModelTest extends AbstractGhidraHeadedIntegrationTest
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testInvalidNameSetting() {
 		model.setBlockName("");
 		assertTrue(!model.isValidInfo());
 		assertTrue(model.getMessage().length() > 0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDuplicateName() {
 		model.setBlockName(".data");
 		model.setOverlay(false);
@@ -279,7 +282,7 @@ public class AddBlockModelTest extends AbstractGhidraHeadedIntegrationTest
 		assertTrue(model.execute());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testStartAddress() throws Exception {
 
 		int transactionID = program.startTransaction("test");

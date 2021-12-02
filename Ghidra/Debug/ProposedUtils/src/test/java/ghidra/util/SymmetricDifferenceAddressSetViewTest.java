@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 
 import java.util.*;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import ghidra.program.model.address.*;
@@ -54,7 +54,7 @@ public class SymmetricDifferenceAddressSetViewTest extends AbstractGhidraHeadles
 		return result;
 	}
 
-	@Before
+	@BeforeEach
 	public void setUpIteratorTest() throws LanguageNotFoundException {
 		toy = DefaultLanguageService.getLanguageService().getLanguage(
 			new LanguageID("Toy:BE:64:default"));

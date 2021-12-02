@@ -17,7 +17,7 @@ package help.screenshot;
 
 import java.util.Map;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.plugin.core.help.AboutDomainObjectUtils;
 

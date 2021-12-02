@@ -20,7 +20,7 @@ import java.awt.Window;
 import javax.swing.*;
 import javax.swing.table.TableModel;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import docking.ComponentProvider;

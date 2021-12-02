@@ -30,6 +30,8 @@ import ghidra.util.InvalidNameException;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 import mockit.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import utilities.util.FileUtilities;
 
 public class VersionFailureRecoveryTest extends AbstractGenericTest {
@@ -39,7 +41,7 @@ public class VersionFailureRecoveryTest extends AbstractGenericTest {
 
 	private LocalFileSystem versionedFileSystem;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		testFile.delete();
@@ -51,7 +53,7 @@ public class VersionFailureRecoveryTest extends AbstractGenericTest {
 			LocalFileSystem.getLocalFileSystem(testDir.getAbsolutePath(), true, true, false, false);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		testFile.delete();
 		versionedFileSystem.dispose();

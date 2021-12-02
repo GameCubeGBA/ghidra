@@ -28,6 +28,8 @@ import ghidra.program.model.mem.Memory;
 import ghidra.program.model.mem.MemoryBlock;
 import ghidra.program.model.symbol.*;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class ProgramOverlaysTest extends AbstractGenericTest {
 
@@ -42,7 +44,7 @@ public class ProgramOverlaysTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		ProgramBuilder builder = new ProgramBuilder("Test", ProgramBuilder._TOY);
 		p = builder.getProgram();
@@ -52,7 +54,7 @@ public class ProgramOverlaysTest extends AbstractGenericTest {
 		builder.dispose();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		p.release(this);
 	}

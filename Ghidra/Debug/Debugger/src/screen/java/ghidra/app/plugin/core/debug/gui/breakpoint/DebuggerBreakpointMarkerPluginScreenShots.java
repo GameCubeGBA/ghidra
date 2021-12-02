@@ -18,7 +18,7 @@ package ghidra.app.plugin.core.debug.gui.breakpoint;
 import java.awt.event.MouseEvent;
 import java.util.Set;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import generic.Unique;

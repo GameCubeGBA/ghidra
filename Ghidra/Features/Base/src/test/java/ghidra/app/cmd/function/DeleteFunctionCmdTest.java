@@ -27,6 +27,7 @@ import ghidra.program.database.ProgramBuilder;
 import ghidra.program.model.address.*;
 import ghidra.program.model.listing.*;
 import ghidra.program.model.symbol.*;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Test for the {@link DeleteFunctionCmd}.
@@ -46,7 +47,7 @@ public class DeleteFunctionCmdTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		ProgramBuilder builder = new ProgramBuilder("Test", ProgramBuilder._TOY);

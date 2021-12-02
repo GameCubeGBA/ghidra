@@ -22,6 +22,7 @@ import org.junit.*;
 import com.google.common.collect.Sets;
 
 import generic.test.AbstractGTest;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  *
@@ -30,7 +31,7 @@ public class UnionDataTypeTest extends AbstractGTest {
 
 	private Union union;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		union = createUnion("TestUnion");
 		union.add(new ByteDataType(), "field1", "Comment1");

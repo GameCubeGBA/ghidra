@@ -29,6 +29,8 @@ import ghidra.program.model.symbol.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Test the Diff of thunk functions.
@@ -51,7 +53,7 @@ public class ExternalFunctionDiffTest extends AbstractGhidraHeadedIntegrationTes
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		// This has the four programs for the merge.
@@ -61,7 +63,7 @@ public class ExternalFunctionDiffTest extends AbstractGhidraHeadedIntegrationTes
 		testEnv.getTool().setToolName("TestTool");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		// In case a test failed we need to cancel the merge,

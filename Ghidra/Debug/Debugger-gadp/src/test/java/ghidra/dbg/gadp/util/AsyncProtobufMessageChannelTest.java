@@ -24,7 +24,7 @@ import java.nio.channels.CompletionHandler;
 import java.util.Arrays;
 import java.util.concurrent.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.async.*;
 import ghidra.dbg.gadp.protocol.Gadp;
@@ -135,7 +135,7 @@ public class AsyncProtobufMessageChannelTest {
 		assertEquals("0000000608f8acd19101", NumericUtilities.convertBytesToString(data));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testRecvBufferGrows() throws Exception {
 		byte[] data =
 			NumericUtilities.convertStringToBytes("0000000608f8acd191010000000608f8acd19101");

@@ -50,6 +50,8 @@ import ghidra.util.database.spatial.rect.*;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.VersionException;
 import ghidra.util.task.ConsoleTaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class RStarTreeMapTest {
 	public enum Int2Space implements EuclideanSpace2D<Integer, Integer> {
@@ -711,12 +713,12 @@ public class RStarTreeMapTest {
 
 	protected MyDomainObject obj;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws VersionException, IOException {
 		obj = new MyDomainObject(this);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		obj.release(this);
 	}

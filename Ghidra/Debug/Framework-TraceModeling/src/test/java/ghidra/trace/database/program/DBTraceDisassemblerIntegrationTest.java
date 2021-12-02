@@ -47,6 +47,8 @@ import ghidra.util.database.UndoableTransaction;
 import ghidra.util.exception.*;
 import ghidra.util.task.ConsoleTaskMonitor;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DBTraceDisassemblerIntegrationTest extends AbstractGhidraHeadlessIntegrationTest {
 	protected ToyDBTraceBuilder b;
@@ -55,7 +57,7 @@ public class DBTraceDisassemblerIntegrationTest extends AbstractGhidraHeadlessIn
 	@Rule
 	public LanguageTestWatcher testLanguage = new LanguageTestWatcher();
 
-	@Before
+	@BeforeEach
 	public void setUp() throws IOException {
 		b = new ToyDBTraceBuilder("Testing", testLanguage.getLanguage());
 		try (UndoableTransaction tid = b.startTransaction()) {
@@ -64,7 +66,7 @@ public class DBTraceDisassemblerIntegrationTest extends AbstractGhidraHeadlessIn
 		view = b.trace.getProgramView();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		b.close();
 	}

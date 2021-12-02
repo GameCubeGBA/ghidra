@@ -27,18 +27,20 @@ import ghidra.program.model.lang.*;
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 import ghidra.util.Msg;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import utilities.util.FileUtilities;
 
 public class XmlImportOpinionsTest extends AbstractGhidraHeadlessIntegrationTest {
 
 	private XmlLoader loader;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		loader = new XmlLoader();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		File f = new File(getTestDirectoryPath(), "test.xml");
 		f.delete();

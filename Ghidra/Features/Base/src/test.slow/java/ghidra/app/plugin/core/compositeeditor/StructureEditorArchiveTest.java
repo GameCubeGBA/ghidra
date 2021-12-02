@@ -22,7 +22,7 @@ import java.io.File;
 import javax.swing.*;
 import javax.swing.tree.TreePath;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import docking.action.DockingActionIf;
@@ -48,7 +48,7 @@ public class StructureEditorArchiveTest extends AbstractStructureEditorTest {
 	private Category arcRootCat;
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		CommonTestData.initialize();
 		emptyStructure = CommonTestData.emptyStructure;

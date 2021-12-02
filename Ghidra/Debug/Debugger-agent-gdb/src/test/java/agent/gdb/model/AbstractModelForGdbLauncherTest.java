@@ -19,12 +19,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Ignore;
-import org.junit.Test;
 
 import agent.gdb.model.impl.GdbModelTargetInferior;
 import ghidra.dbg.target.*;
 import ghidra.dbg.target.TargetMethod.TargetParameterMap;
 import ghidra.dbg.test.AbstractDebuggerModelLauncherTest;
+import org.junit.jupiter.api.Test;
 
 public abstract class AbstractModelForGdbLauncherTest extends AbstractDebuggerModelLauncherTest {
 

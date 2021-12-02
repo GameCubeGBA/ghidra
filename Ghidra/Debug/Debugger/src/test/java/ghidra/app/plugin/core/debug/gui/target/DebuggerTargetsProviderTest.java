@@ -22,7 +22,7 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.Set;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -41,7 +41,7 @@ public class DebuggerTargetsProviderTest extends AbstractGhidraHeadedDebuggerGUI
 	protected DebuggerTargetsPlugin targetsPlugin;
 	protected DebuggerTargetsProvider targetsProvider;
 
-	@Before
+	@BeforeEach
 	public void setUpTargetsProviderTest() throws Exception {
 		targetsPlugin = addPlugin(tool, DebuggerTargetsPlugin.class);
 		targetsProvider = waitForComponentProvider(DebuggerTargetsProvider.class);

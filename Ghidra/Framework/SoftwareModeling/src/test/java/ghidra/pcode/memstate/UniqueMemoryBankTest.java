@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 
 import java.util.Arrays;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
@@ -37,7 +37,7 @@ public class UniqueMemoryBankTest extends AbstractGenericTest {
 	private byte[] sixteenTestBytes = new byte[] { 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8, 0x9,
 		0xa, 0xb, 0xc, 0xd, 0xe, 0xf };
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		uniqueSpace = new GenericAddressSpace("unique", 64, AddressSpace.TYPE_UNIQUE, 0);
 		uniqueBank = new UniqueMemoryBank(uniqueSpace, false);

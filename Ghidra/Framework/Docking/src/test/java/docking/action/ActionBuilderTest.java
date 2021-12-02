@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 
 import javax.swing.KeyStroke;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.ActionContext;
 import docking.action.builder.ActionBuilder;
@@ -28,7 +28,7 @@ import resources.Icons;
 public class ActionBuilderTest {
 	private int actionCount = 0;
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDescription() {
 		DockingAction action = new ActionBuilder("Test", "Test")
 				.description("foo")
@@ -37,7 +37,7 @@ public class ActionBuilderTest {
 		assertEquals("foo", action.getDescription());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testMenuPath() {
 		DockingAction action = new ActionBuilder("Test", "Test")
 				.menuPath("foo", "bar")
@@ -61,7 +61,7 @@ public class ActionBuilderTest {
 		assertEquals("B", data.getMenuSubGroup());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testMenuIcon() {
 		DockingAction action = new ActionBuilder("Test", "Test")
 				.menuPath("foo", "bar")
@@ -73,7 +73,7 @@ public class ActionBuilderTest {
 		assertEquals(Icons.ADD_ICON, data.getMenuIcon());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testMenuMnemonic() {
 		DockingAction action = new ActionBuilder("Test", "Test")
 				.menuPath("foo", "bar")
@@ -85,7 +85,7 @@ public class ActionBuilderTest {
 		assertEquals(5, data.getMnemonic());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testPopupPath() {
 		DockingAction action = new ActionBuilder("Test", "Test")
 				.popupMenuPath("foo", "bar")
@@ -176,7 +176,7 @@ public class ActionBuilderTest {
 		assertEquals(6, actionCount);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEnabled() {
 		DockingAction action = new ActionBuilder("Test", "Test")
 				.enabled(true)
@@ -203,7 +203,7 @@ public class ActionBuilderTest {
 		assertFalse(action.isEnabledForContext(new ActionContext()));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testValidContextWhen() {
 		DockingAction action = new ActionBuilder("Test", "Test")
 				.validContextWhen(c -> c.getContextObject() == this)
@@ -214,7 +214,7 @@ public class ActionBuilderTest {
 		assertFalse(action.isValidContext(new ActionContext()));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testPopupWhen() {
 		DockingAction action = new ActionBuilder("Test", "Test")
 				.popupWhen(c -> c.getContextObject() == this)
@@ -237,7 +237,7 @@ public class ActionBuilderTest {
 		assertTrue(action.isEnabledForContext(new FooActionContext()));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testManualEnablement() {
 		DockingAction action = new ActionBuilder("Test", "Test")
 				.onAction(e -> actionCount++)

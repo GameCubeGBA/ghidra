@@ -32,6 +32,8 @@ import generic.test.AbstractGenericTest;
 import ghidra.framework.model.UndoableDomainObject;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class GTaskTest extends AbstractGenericTest {
 
@@ -49,7 +51,7 @@ public class GTaskTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws IOException {
 		domainObject = new GenericDomainObjectDB(this);
 		GThreadPool threadPool = GThreadPool.getSharedThreadPool("Test Thread Pool");
@@ -57,7 +59,7 @@ public class GTaskTest extends AbstractGenericTest {
 		gTaskManager.addTaskListener(listener);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		domainObject.release(this);
 	}

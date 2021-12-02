@@ -34,6 +34,8 @@ import ghidra.program.model.symbol.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.exception.InvalidInputException;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class FunctionManagerTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -46,7 +48,7 @@ public class FunctionManagerTest extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = createDefaultProgram(testName.getMethodName(), ProgramBuilder._TOY, this);
 		space = program.getAddressFactory().getDefaultAddressSpace();
@@ -57,7 +59,7 @@ public class FunctionManagerTest extends AbstractGhidraHeadedIntegrationTest {
 					TaskMonitorAdapter.DUMMY_MONITOR, false);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (program != null) {
 			program.endTransaction(transactionID, true);

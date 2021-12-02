@@ -35,6 +35,8 @@ import ghidra.framework.model.*;
 import ghidra.framework.plugintool.ServiceProvider;
 import ghidra.program.model.listing.Program;
 import mockit.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class TagFilterTest extends VTBaseTestCase {
 	@Mocked
@@ -52,7 +54,7 @@ public class TagFilterTest extends VTBaseTestCase {
 	}
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		controller = createController();
@@ -61,7 +63,7 @@ public class TagFilterTest extends VTBaseTestCase {
 	}
 
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		tagFilter.dispose();
 	}

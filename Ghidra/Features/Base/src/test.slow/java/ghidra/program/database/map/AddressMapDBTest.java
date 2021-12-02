@@ -17,8 +17,8 @@ package ghidra.program.database.map;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.model.address.Address;
@@ -34,7 +34,7 @@ public class AddressMapDBTest extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		ProgramBuilder builder = new ProgramBuilder(testName.getMethodName(), ProgramBuilder._TOY);
@@ -43,7 +43,7 @@ public class AddressMapDBTest extends AbstractGhidraHeadedIntegrationTest {
 		addrMap = (AddressMap) getInstanceField("addrMap", p.getMemory());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testRegisterAddress() {
 		AddressSpace regSpace = p.getAddressFactory().getRegisterSpace();
 		Address a = regSpace.getAddress(0);
@@ -59,7 +59,7 @@ public class AddressMapDBTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(a, b);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testStackAddress() {
 		AddressSpace stackSpace = p.getAddressFactory().getStackSpace();
 		Address a = stackSpace.getAddress(0);
@@ -87,7 +87,7 @@ public class AddressMapDBTest extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testStackAddressNegative() {
 		AddressSpace stackSpace = p.getAddressFactory().getStackSpace();
 		Address a = stackSpace.getAddress(-1);

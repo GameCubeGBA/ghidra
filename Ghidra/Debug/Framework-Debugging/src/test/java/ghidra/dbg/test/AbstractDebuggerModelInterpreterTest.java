@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.async.AsyncReference;
 import ghidra.dbg.DebugModelConventions;
@@ -104,7 +104,7 @@ public abstract class AbstractDebuggerModelInterpreterTest extends AbstractDebug
 	protected void ensureInterpreterAvailable() throws Throwable {
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testInterpreterIsWhereExpected() throws Throwable {
 		List<String> expectedInterpreterPath = getExpectedInterpreterPath();
 		assumeNotNull(expectedInterpreterPath);
@@ -133,7 +133,7 @@ public abstract class AbstractDebuggerModelInterpreterTest extends AbstractDebug
 		waitOn(lastOut.waitValue("test"));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testExecute() throws Throwable {
 		String cmd = getEchoCommand("test");
 		assumeNotNull(cmd);
@@ -185,7 +185,7 @@ public abstract class AbstractDebuggerModelInterpreterTest extends AbstractDebug
 	 * 
 	 * @throws Throwable expected since the model will terminate
 	 */
-	@Test(expected = DebuggerModelTerminatingException.class)
+	@org.junit.jupiter.api.Test(expected = DebuggerModelTerminatingException.class)
 	public void testExecuteQuit() throws Throwable {
 		String cmd = getQuitCommand();
 		assumeNotNull(cmd);
@@ -214,7 +214,7 @@ public abstract class AbstractDebuggerModelInterpreterTest extends AbstractDebug
 		}, List.of(AssertionError.class));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testLaunchViaInterpreterShowsInProcessContainer() throws Throwable {
 		assumeTrue(m.hasProcessContainer());
 		m.build();
@@ -243,7 +243,7 @@ public abstract class AbstractDebuggerModelInterpreterTest extends AbstractDebug
 		}, List.of(AssertionError.class));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAttachViaInterpreterShowsInProcessContainer() throws Throwable {
 		DebuggerTestSpecimen specimen = getAttachSpecimen();
 		assumeTrue(m.hasProcessContainer());

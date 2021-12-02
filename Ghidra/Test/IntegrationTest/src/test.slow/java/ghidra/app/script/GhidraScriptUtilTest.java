@@ -17,7 +17,7 @@ package ghidra.app.script;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
@@ -27,7 +27,7 @@ import ghidra.util.task.ConsoleTaskMonitor;
 
 public class GhidraScriptUtilTest extends AbstractGenericTest {
 
-	@Before
+	@BeforeEach
 	public void setup() throws CancelledException {
 		ClassSearcher.search(new ConsoleTaskMonitor());
 	}

@@ -55,6 +55,9 @@ import ghidra.program.util.ProgramLocation;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test editing in the Byte Viewer.
@@ -81,7 +84,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 	/*
 	 * @see TestCase#setUp()
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		try {
@@ -126,13 +129,13 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 	/*
 	 * @see TestCase#tearDown()
 	 */
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.release(program);
 		env.dispose();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEditModeHex() throws Exception {
 		env.showTool();
 
@@ -168,7 +171,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 			c.getFocusedCursorColor());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEditModeHex2() throws Exception {
 		// verify that the byte being edited cannot be in an instruction
 
@@ -211,7 +214,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals("Editing not allowed: Instruction exists at address 01002000", str);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEditModeHex3() throws Exception {
 		env.showTool();
 
@@ -254,7 +257,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEditsInOtherViews() throws Exception {
 		// verify changed bytes show up in red in other views
 		env.showTool();
@@ -312,7 +315,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(ByteViewerComponentProvider.DEFAULT_EDIT_COLOR, field.getForeground());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testUndoRedo() throws Exception {
 		env.showTool();
 		final Address addr = getAddr(0x01001000);
@@ -357,7 +360,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testUndoRedo2() throws Exception {
 		// remove code browser plugin so the cursor position does not
 		// get changed because of location events that the code browser
@@ -454,7 +457,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testUndoRedoHexInteger() throws Exception {
 		env.showTool();
 		addViews();
@@ -503,7 +506,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testUndoRedoHexInteger2() throws Exception {
 		// remove code browser plugin so the cursor position does not
 		// get changed because of location events that the code browser
@@ -578,7 +581,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 		assertTrue(program.canUndo());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEditInputHex() throws Exception {
 		env.showTool();
 		final ToggleDockingAction action =
@@ -644,7 +647,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 			c.getFocusedCursorColor());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEditModeOctal() throws Exception {
 		env.showTool();
 		addViews();
@@ -686,7 +689,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 			c.getFocusedCursorColor());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEditInputOctal() throws Exception {
 		env.showTool();
 		addViews();
@@ -716,7 +719,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(value, program.getMemory().getByte(getAddr(0x01001000)));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEditModeHexInteger() throws Exception {
 		env.showTool();
 		addViews();
@@ -755,7 +758,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 			c.getFocusedCursorColor());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testMemoryMapEdits() throws Exception {
 		env.showTool();
 
@@ -806,7 +809,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testMemoryMapMove() throws Exception {
 		// Move a memory block; verify that the byte viewer updates
 
@@ -864,7 +867,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 		assertNotNull(field);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testMemoryBlockSplit() throws Exception {
 		// split a memory block; verify that the byte viewer shows
 		// the separator between blocks after the block is split
@@ -887,7 +890,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testMemoryBlockExpandUp() throws Exception {
 		// expand up: create a block, then join to its successor
 		SwingUtilities.invokeAndWait(() -> tool.removePlugins(new Plugin[] { cbPlugin }));
@@ -921,7 +924,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testMemoryBlockExpandDown() throws Exception {
 		SwingUtilities.invokeAndWait(() -> tool.removePlugins(new Plugin[] { cbPlugin }));
 
@@ -950,7 +953,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(getFieldLocation(addr), loc);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testMemoryBlockDeletedInView() throws Exception {
 		// delete a memory block that is showing in the view
 		SwingUtilities.invokeAndWait(() -> tool.removePlugins(new Plugin[] { cbPlugin }));
@@ -976,7 +979,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(loc, c.getCursorLocation());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testMemoryBlockDeletedNotInView() throws Exception {
 		// delete a memory block that is not showing in the view
 
@@ -1006,7 +1009,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(loc, c.getCursorLocation());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCursorLocationNewBlock() throws Exception {
 		// set bytes per line to 10
 		// add block that starts at address 0x30, length of 0x12
@@ -1045,7 +1048,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals("00000048", findLabelStr(plugin.getProvider().getComponent(), "Insertion"));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testMemoryChange() throws Exception {
 
 		env.showTool();
@@ -1104,7 +1107,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(getFieldLocation(addr), c.getCursorLocation());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSelectionAcrossBlocks() throws Exception {
 		env.showTool();
 		ByteViewerOptionsDialog dialog = launchByteViewerOptions();
@@ -1155,7 +1158,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEditLastByteInBlock() throws Exception {
 
 		env.showTool();
@@ -1203,7 +1206,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals((byte) 0x30, memory.getByte(getAddr(0x41)));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEditOptionCurrentViewColor() throws Exception {
 		env.showTool();
 
@@ -1221,7 +1224,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(Color.GREEN, c.getFocusedCursorColor());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEditOptionCursorColor() throws Exception {
 
 		env.showTool();
@@ -1241,7 +1244,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(Color.GREEN, c.getNonFocusCursorColor());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEditOptionNonHighlightCursorColor() throws Exception {
 		env.showTool();
 		addViews();
@@ -1268,7 +1271,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 		runSwing(() -> options.setColor(optionName, color));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEditOptionEditColor() throws Exception {
 		// color for changed bytes
 		env.showTool();
@@ -1305,7 +1308,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(Color.GREEN, field.getForeground());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEditOptionFont() throws Exception {
 		env.showTool();
 		addViews();
@@ -1327,7 +1330,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(font, field.getFontMetrics().getFont());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEditOptionSeparatorColor() throws Exception {
 		env.showTool();
 		addViews();
@@ -1348,7 +1351,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(Color.GREEN, field.getForeground());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGoToUpdatesByteViewer() throws Exception {
 		env.showTool();
 		SwingUtilities.invokeAndWait(() -> {
@@ -1359,7 +1362,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(getFieldLocation(getAddr(0x01001050)), c.getCursorLocation());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGoToUpdatesFromViewer() throws Exception {
 		env.showTool();
 
@@ -1370,7 +1373,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(address, cbLocation.getAddress());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGoToFromSnapshot() throws Exception {
 		env.showTool();
 
@@ -1396,7 +1399,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 			cbLocation.getAddress());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testHighlightByte() throws Exception {
 		env.showTool();
 		ByteViewerComponent component = panel.getCurrentComponent();
@@ -1471,7 +1474,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 		return providers.get(0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSaveRestoreState() throws Exception {
 		env.showTool();
 		addViews();

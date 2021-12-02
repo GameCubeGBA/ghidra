@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
@@ -44,7 +44,7 @@ public class DWARFAttributeFactoryTest extends AbstractGenericTest {
 	private DWARFCompilationUnit cu;
 	private DWARFCompilationUnit cu64;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		ToyProgramBuilder builder = new ToyProgramBuilder("Test", true);

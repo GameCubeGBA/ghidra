@@ -36,6 +36,8 @@ import ghidra.util.task.TaskMonitor;
 import ghidra.util.task.TaskMonitorAdapter;
 import mockit.Mocked;
 import mockit.Verifications;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class VTAssociationDBTest extends VTBaseTestCase {
 
@@ -46,14 +48,14 @@ public class VTAssociationDBTest extends VTBaseTestCase {
 	}
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		testTransactionID = db.startTransaction("Test Match Set Setup");
 	}
 
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		db.endTransaction(testTransactionID, false);
 		db.release(VTTestUtils.class);

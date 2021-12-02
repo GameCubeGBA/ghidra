@@ -18,7 +18,7 @@ package ghidra.app.util.cparser.C;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 
@@ -40,7 +40,7 @@ public class CParserUtilsTest extends AbstractGenericTest {
 		assertTrue(message.contains(invalidInfo));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testUserMessage_OnParseException() {
 		String function = "void bob(int a)()";
 		Throwable t = getParseError(function);

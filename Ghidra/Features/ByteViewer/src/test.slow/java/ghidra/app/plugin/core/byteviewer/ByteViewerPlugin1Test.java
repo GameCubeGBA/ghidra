@@ -57,6 +57,9 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.util.ProgramSelection;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Basic tests for the byte view plugin
@@ -70,7 +73,7 @@ public class ByteViewerPlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 	private ByteViewerPanel panel;
 	private CodeBrowserPlugin cbPlugin;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.showTool();
@@ -110,12 +113,12 @@ public class ByteViewerPlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 		return notepadBuilder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testOpenProgram() {
 		assertEquals("Hex", panel.getCurrentComponent().getDataModel().getName());
 		DockingActionIf action = getAction(plugin, "Byte Viewer Options");
@@ -123,7 +126,7 @@ public class ByteViewerPlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(1, panel.getNumberOfViews());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testOpenProgramNoMemory() throws Exception {
 		tool.removePlugins(new Plugin[] { cbPlugin });
 
@@ -158,7 +161,7 @@ public class ByteViewerPlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 		// no errors should occur
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddRemoveViews() throws Exception {
 		ByteViewerOptionsDialog dialog = launchByteViewerOptions();
 		setViewSelected(dialog, "Ascii", true);
@@ -234,7 +237,7 @@ public class ByteViewerPlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 		assertTrue(psel.hasSameAddresses(set));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSetSelectionWithMouse() throws Exception {
 
 		loadViews("Ascii", "Octal");
@@ -264,7 +267,7 @@ public class ByteViewerPlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 		assertTrue(psel.hasSameAddresses(set));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testProcessSelectionEvent() throws Exception {
 		loadViews("Ascii", "Octal");
 
@@ -294,7 +297,7 @@ public class ByteViewerPlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 		assertTrue(psel.hasSameAddresses(set));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSetSelectionWithViews() throws Exception {
 		final FieldSelection fsel = new FieldSelection();
 		fsel.addRange(0, 0, 8, 7);
@@ -315,7 +318,7 @@ public class ByteViewerPlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testMultiRangeSelection() throws Exception {
 		loadViews("Ascii", "Octal");
 
@@ -338,7 +341,7 @@ public class ByteViewerPlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testLocationChanges() throws Exception {
 		loadViews("Ascii", "Octal");
 
@@ -383,7 +386,7 @@ public class ByteViewerPlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(addr, cbPlugin.getCurrentAddress());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testLocationChanges_RightArrow_HexToOctal() throws Exception {
 		/*
 		 	Test that each view tracks the main view correctly as the user uses the left/right
@@ -442,7 +445,7 @@ public class ByteViewerPlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 		assertPosition(octal, "125", 0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testLocationChanges_RightArrow_OctalToHex() throws Exception {
 		// see notes in testLocationChanges_RightArrow_HexToOctal
 
@@ -465,7 +468,7 @@ public class ByteViewerPlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 		assertPosition(octal, "104", 2); // at 3rd column
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testLocationChanges_LeftArrow_OctalToHex() throws Exception {
 		// see notes in testLocationChanges_RightArrow_HexToOctal
 
@@ -492,7 +495,7 @@ public class ByteViewerPlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 		assertPosition(octal, "104", 0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testLocationChanges_FromListing_WhenOnMnemonic() {
 
 		loadViews("Hex");
@@ -524,7 +527,7 @@ public class ByteViewerPlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 		assertListingPosition("\"message\"", 0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testBytesPerLinesChange() throws Exception {
 
 		ByteViewerOptionsDialog d = launchByteViewerOptions();
@@ -542,7 +545,7 @@ public class ByteViewerPlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(8, plugin.getProvider().getOffset());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSetAlignedAddress() throws Exception {
 
 		goToByte("0x0100100b");
@@ -570,7 +573,7 @@ public class ByteViewerPlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(0, floc.getFieldNum());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSetBaseAddressSegmented() throws Exception {
 
 		ProgramManager pm = tool.getService(ProgramManager.class);
@@ -594,7 +597,7 @@ public class ByteViewerPlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(10, plugin.getProvider().getOffset());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSetGroupSize() throws Exception {
 
 		ByteViewerComponent c = panel.getCurrentComponent();
@@ -615,7 +618,7 @@ public class ByteViewerPlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(2, c.getDataModel().getGroupSize());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testReorderViews() throws Exception {
 		loadViews("Ascii", "Octal");
 		final ByteViewerHeader columnHeader =
@@ -642,7 +645,7 @@ public class ByteViewerPlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testReorderViewsSaveState() throws Exception {
 
 		loadViews("Ascii", "Octal");
@@ -670,7 +673,7 @@ public class ByteViewerPlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testShowingSnapshotDoesNotAddMultipleToolbarActions() {
 
 		DockingActionIf cloneAction = getAction(plugin, "ByteViewer Clone");

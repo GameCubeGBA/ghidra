@@ -23,7 +23,7 @@ package ghidra.util.datastruct;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 
@@ -38,7 +38,7 @@ public class ArrayTest extends AbstractGenericTest {
         super();
     }
     
-@Test
+@org.junit.jupiter.api.Test
     public void testByteArray() {
         ByteArray ba = new ByteArray();
         ba.put(2,(byte)2);
@@ -84,7 +84,7 @@ public class ArrayTest extends AbstractGenericTest {
         assertEquals(0,ia.get(0));
         assertEquals(0,ia.get(1000));
     }
-@Test
+@org.junit.jupiter.api.Test
     public void testLongArray() {
         LongArray la = new LongArray();
         la.put(2,2);
@@ -97,7 +97,7 @@ public class ArrayTest extends AbstractGenericTest {
         assertEquals(0l,la.get(0));
         assertEquals(0l,la.get(1000));
     }
-@Test
+@org.junit.jupiter.api.Test
     public void testBooleanArray() {
         BooleanArray ba = new BooleanArray();
         for(int i=0;i<100;i++) {

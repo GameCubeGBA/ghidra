@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import com.google.common.collect.Range;
@@ -40,6 +39,7 @@ import ghidra.trace.model.modules.TraceStaticMapping;
 import ghidra.trace.model.modules.TraceStaticMappingManager;
 import ghidra.util.database.UndoableTransaction;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DebuggerStaticMappingProviderTest extends AbstractGhidraHeadedDebuggerGUITest {
 	protected DebuggerStaticMappingPlugin mappingsPlugin;
@@ -47,7 +47,7 @@ public class DebuggerStaticMappingProviderTest extends AbstractGhidraHeadedDebug
 
 	protected TraceStaticMappingManager manager;
 
-	@Before
+	@BeforeEach
 	public void setUpStaticMappingsProviderTest()
 			throws LanguageNotFoundException, IOException, PluginException {
 		mappingsPlugin = addPlugin(tool, DebuggerStaticMappingPlugin.class);

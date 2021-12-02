@@ -31,6 +31,8 @@ import ghidra.program.model.symbol.SourceType;
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 import ghidra.test.ToyProgramBuilder;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import util.CollectionUtils;
 
 public class DisassemblerTest extends AbstractGhidraHeadlessIntegrationTest {
@@ -60,7 +62,7 @@ public class DisassemblerTest extends AbstractGhidraHeadlessIntegrationTest {
 
 	private int txId;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		programBuilder = new ToyProgramBuilder("Test", true, true, null);
 		program = programBuilder.getProgram();
@@ -74,7 +76,7 @@ public class DisassemblerTest extends AbstractGhidraHeadlessIntegrationTest {
 		disassembler = new Disassembler(program, TaskMonitorAdapter.DUMMY_MONITOR, null);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (program != null) {
 			program.endTransaction(txId, true);

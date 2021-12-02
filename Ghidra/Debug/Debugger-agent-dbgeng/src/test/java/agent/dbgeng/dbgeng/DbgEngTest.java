@@ -44,6 +44,7 @@ import ghidra.framework.Application;
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 import ghidra.util.Msg;
 import ghidra.util.NumericUtilities;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DbgEngTest extends AbstractGhidraHeadlessIntegrationTest {
 
@@ -77,7 +78,7 @@ public class DbgEngTest extends AbstractGhidraHeadlessIntegrationTest {
 	protected DebugClient client;
 	protected DebugControl control;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		assumeDbgengDLLLoadable();
 		client = debugCreate();

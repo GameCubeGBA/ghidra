@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 import java.math.BigInteger;
 import java.util.*;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import ghidra.app.plugin.core.debug.gui.AbstractGhidraHeadedDebuggerGUITest;
@@ -53,7 +53,7 @@ public class LargestSubDebuggerRegisterMapperTest extends AbstractGhidraHeadedDe
 		}
 	}
 
-	@Before
+	@BeforeEach
 	public void setUpMapperTest() throws Throwable {
 		createTestModel();
 		mb.createTestProcessesAndThreads();

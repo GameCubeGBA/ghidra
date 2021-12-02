@@ -19,7 +19,7 @@ import java.lang.invoke.MethodHandles;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.async.AsyncReference;
 import ghidra.dbg.agent.AbstractDebuggerObjectModel;

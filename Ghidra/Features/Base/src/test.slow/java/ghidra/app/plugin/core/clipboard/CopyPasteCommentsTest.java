@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 
 import java.util.*;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import docking.ComponentProvider;
@@ -93,7 +93,7 @@ public class CopyPasteCommentsTest extends AbstractProgramBasedTest {
 		return builder.getProgram();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		initialize();

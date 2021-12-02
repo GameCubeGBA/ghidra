@@ -20,7 +20,7 @@ import static org.junit.Assert.assertNull;
 
 import java.io.*;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
@@ -30,7 +30,7 @@ import ghidra.util.datastruct.NoSuchIndexException;
 public class SaveableObjectPropertySetTest extends AbstractGenericTest {
 	SaveableObjectPropertySet ps;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		ps = new SaveableObjectPropertySet("Test", SaveableInt.class);
 	}

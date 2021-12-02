@@ -17,7 +17,7 @@ package ghidra.app.plugin.core.stackeditor;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import docking.widgets.dialogs.NumberInputDialog;
@@ -30,7 +30,7 @@ public class StackEditorActions1Test extends AbstractStackEditorTest {
 	}
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		env.showTool();

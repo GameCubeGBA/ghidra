@@ -24,11 +24,13 @@ import ghidra.app.plugin.core.compositeeditor.UnionEditorProvider;
 import ghidra.program.model.data.*;
 import ghidra.util.data.DataTypeParser.AllowedDataTypes;
 import ghidra.util.exception.DuplicateNameException;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DataTypeParserTest extends AbstractEditorTest {
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		Union dt = simpleUnion;
@@ -61,7 +63,7 @@ public class DataTypeParserTest extends AbstractEditorTest {
 	}
 
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		program.endTransaction(txId, true);
 		runSwing(() -> provider.dispose());

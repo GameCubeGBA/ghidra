@@ -30,6 +30,8 @@ import docking.widgets.tree.internal.InProgressGTreeNode;
 import ghidra.util.Swing;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class GTreeSlowLoadingNodeTest extends AbstractDockingTest {
 
@@ -43,7 +45,7 @@ public class GTreeSlowLoadingNodeTest extends AbstractDockingTest {
 	private GTree gTree;
 	private List<GTreeNode> children = null;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		gTree = new GTree(new EmptyRootNode());
@@ -56,7 +58,7 @@ public class GTreeSlowLoadingNodeTest extends AbstractDockingTest {
 		waitForTree();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		gTree.dispose();
 		frame.dispose();

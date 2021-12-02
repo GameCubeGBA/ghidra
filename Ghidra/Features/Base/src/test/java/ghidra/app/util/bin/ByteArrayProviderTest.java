@@ -21,7 +21,7 @@ import static org.junit.Assert.fail;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ByteArrayProviderTest {
 
@@ -33,7 +33,7 @@ public class ByteArrayProviderTest {
 		return new ByteArrayProvider(bytes);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testInputStream() throws IOException {
 		ByteArrayProvider bap = bap(1, 2, 3, 4, 5, 6);
 

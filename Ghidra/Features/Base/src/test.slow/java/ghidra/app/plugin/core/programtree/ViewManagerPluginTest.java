@@ -38,6 +38,8 @@ import ghidra.program.database.ProgramDB;
 import ghidra.program.model.address.AddressSetView;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Test the view manager plugin that controls the view in the browser and the
@@ -55,7 +57,7 @@ public class ViewManagerPluginTest extends AbstractGhidraHeadedIntegrationTest {
 	private JTabbedPane tabbedPane;
 	private CodeBrowserPlugin cb;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -94,7 +96,7 @@ public class ViewManagerPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		findTabbedPane();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

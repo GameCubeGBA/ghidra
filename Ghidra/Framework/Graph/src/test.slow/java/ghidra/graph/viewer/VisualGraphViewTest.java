@@ -21,7 +21,7 @@ import java.util.concurrent.atomic.*;
 
 import javax.swing.*;
 
-import org.junit.After;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.Test;
 
 import ghidra.graph.graphs.AbstractTestVertex;
@@ -45,7 +45,7 @@ public class VisualGraphViewTest extends AbstractSimpleVisualGraphTest {
 	}
 
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() {
 		close(dialog);
 		super.tearDown();

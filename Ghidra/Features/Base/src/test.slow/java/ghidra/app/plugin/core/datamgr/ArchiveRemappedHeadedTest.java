@@ -38,6 +38,9 @@ import ghidra.program.model.data.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import utilities.util.FileUtilities;
 
 public class ArchiveRemappedHeadedTest extends AbstractGhidraHeadedIntegrationTest {
@@ -55,7 +58,7 @@ public class ArchiveRemappedHeadedTest extends AbstractGhidraHeadedIntegrationTe
 	private File vs12ArchiveFile;
 	private File vs9ArchiveFile;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		// Create windows_VS9 archive copy before DataTypeManagerHandler initializes 
@@ -96,7 +99,7 @@ public class ArchiveRemappedHeadedTest extends AbstractGhidraHeadedIntegrationTe
 		waitForTree(tree);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		if (env != null) {
 			env.dispose();
@@ -148,7 +151,7 @@ public class ArchiveRemappedHeadedTest extends AbstractGhidraHeadedIntegrationTe
 		return new DataTypesActionContext(provider, program, tree, node);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGetRemappedArchive() throws Exception {
 
 		DataTypeManager vs9dtm = service.openDataTypeArchive("windows_VS9");

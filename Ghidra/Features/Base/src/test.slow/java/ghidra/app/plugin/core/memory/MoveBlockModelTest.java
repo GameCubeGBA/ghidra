@@ -30,6 +30,8 @@ import ghidra.program.model.mem.MemoryBlock;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.task.TaskBuilder;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class MoveBlockModelTest extends AbstractGhidraHeadedIntegrationTest
 		implements MoveBlockListener {
@@ -68,7 +70,7 @@ public class MoveBlockModelTest extends AbstractGhidraHeadedIntegrationTest
 		return builder.getProgram();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 
@@ -90,7 +92,7 @@ public class MoveBlockModelTest extends AbstractGhidraHeadedIntegrationTest
 		x8051.endTransaction(transactionID, true);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

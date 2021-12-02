@@ -23,24 +23,26 @@ import org.junit.*;
 
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ByteTrieTest {
 
 	ByteTrieIfc<String> trie;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		trie = new ByteTrie<String>();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testIsEmpty() throws Exception {
 		assertTrue("failed empty on creation", trie.isEmpty());
 		add(trie, "1", true);
 		assertTrue("failed !empty after add", !trie.isEmpty());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testExists() throws Exception {
 		assertTrue("failed empty exists", !exists(trie, "1"));
 		add(trie, "1", true);
@@ -51,7 +53,7 @@ public class ByteTrieTest {
 		assertTrue("failed 10111 exists", exists(trie, "10111"));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testFindAndGetValue() throws Exception {
 		add(trie, "10101", true);
 		ByteTrieNodeIfc<String> trieNode = find(trie, "101");
@@ -74,12 +76,12 @@ public class ByteTrieTest {
 		return new String(value);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testEmptyIterator() throws Exception {
 		assertTrue("failed empty iterator", !iterator(trie).hasNext());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testIterator() throws Exception {
 		String[] values = new String[] { "1000", "0010", "0100", "0001", "0000", "1100", "0110" };
 		TreeSet<String> expected = new TreeSet<String>();
@@ -100,7 +102,7 @@ public class ByteTrieTest {
 		assertTrue("too many values in trie", !actuals.hasNext());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testIterator2() throws Exception {
 		String[] values =
 			new String[] { "10000", "00010", "0100", "0000001", "", "0000", "1100", "0110", "0" };
@@ -122,7 +124,7 @@ public class ByteTrieTest {
 		assertTrue("too many values in trie", !actuals.hasNext());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testIterator3() throws Exception {
 		String[] values = new String[] { "1000", "0010", "0100", "0001", "0000", "1100", "0110" };
 		TreeSet<String> expected = new TreeSet<String>();
@@ -143,7 +145,7 @@ public class ByteTrieTest {
 		assertTrue("too many values in trie", !actuals.hasNext());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testIterator4() throws Exception {
 		String[] values =
 			new String[] { "10000", "00010", "0100", "0000001", "", "0000", "1100", "0110", "0" };
@@ -165,7 +167,7 @@ public class ByteTrieTest {
 		assertTrue("too many values in trie", !actuals.hasNext());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testSize() throws Exception {
 		assertEquals("wrong size for empty", 0, trie.size());
 		add(trie, "foo", true);
@@ -178,7 +180,7 @@ public class ByteTrieTest {
 		assertEquals("wrong size for add ''", 3, trie.size());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testNumberOfNodes() throws Exception {
 		assertEquals("wrong size for empty", 1, trie.numberOfNodes());
 		add(trie, "00", true);
@@ -191,7 +193,7 @@ public class ByteTrieTest {
 		assertEquals("wrong size for '000'", 5, trie.numberOfNodes());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testSearch1() throws Exception {
 		add(trie, "a", true);
 		add(trie, "ab", true);
@@ -234,7 +236,7 @@ public class ByteTrieTest {
 		expect(result, 22, "he");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testSearch3() throws Exception {
 		add(trie, "unstoppable", true);
 		add(trie, "stop", true);

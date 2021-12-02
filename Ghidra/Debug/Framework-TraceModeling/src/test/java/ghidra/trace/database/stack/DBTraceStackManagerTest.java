@@ -27,19 +27,21 @@ import ghidra.trace.database.ToyDBTraceBuilder;
 import ghidra.trace.database.thread.DBTraceThread;
 import ghidra.trace.model.stack.TraceStackFrame;
 import ghidra.util.database.UndoableTransaction;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DBTraceStackManagerTest extends AbstractGhidraHeadlessIntegrationTest {
 
 	ToyDBTraceBuilder b;
 	DBTraceStackManager stackManager;
 
-	@Before
+	@BeforeEach
 	public void setUpStackManagerTest() throws Exception {
 		b = new ToyDBTraceBuilder("Testing", "Toy:BE:64:default");
 		stackManager = b.trace.getStackManager();
 	}
 
-	@After
+	@AfterEach
 	public void tearDownStackManagerTest() throws Exception {
 		b.close();
 	}

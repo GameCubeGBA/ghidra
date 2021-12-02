@@ -39,6 +39,8 @@ import ghidra.framework.cmd.CompoundCmd;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.program.model.listing.*;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class FunctionWindowPluginTest extends AbstractGhidraHeadedIntegrationTest {
 	private TestEnv env;
@@ -48,7 +50,7 @@ public class FunctionWindowPluginTest extends AbstractGhidraHeadedIntegrationTes
 	private GTable functionTable;
 	private ComponentProvider provider;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		loadProgram("notepad");
@@ -62,7 +64,7 @@ public class FunctionWindowPluginTest extends AbstractGhidraHeadedIntegrationTes
 		functionTable = (GTable) findComponentByName(provider.getComponent(), "FunctionTable");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

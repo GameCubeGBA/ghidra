@@ -22,7 +22,7 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.dbg.DebuggerModelListener;
 import ghidra.dbg.target.*;
@@ -75,7 +75,7 @@ public abstract class AbstractDebuggerModelBreakpointsTest extends AbstractDebug
 		return false;
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testBreakpointContainerIsWhereExpected() throws Throwable {
 		m.build();
 
@@ -351,7 +351,7 @@ public abstract class AbstractDebuggerModelBreakpointsTest extends AbstractDebug
 		runTestPlaceBreakpoint(TargetBreakpointKind.SW_EXECUTE);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testPlaceHardwareExecuteBreakpoint() throws Throwable {
 		runTestPlaceBreakpoint(TargetBreakpointKind.HW_EXECUTE);
 	}
@@ -361,7 +361,7 @@ public abstract class AbstractDebuggerModelBreakpointsTest extends AbstractDebug
 		runTestPlaceBreakpoint(TargetBreakpointKind.READ);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testPlaceWriteBreakpoint() throws Throwable {
 		runTestPlaceBreakpoint(TargetBreakpointKind.WRITE);
 	}
@@ -376,12 +376,12 @@ public abstract class AbstractDebuggerModelBreakpointsTest extends AbstractDebug
 		runTestPlaceBreakpointViaInterpreter(TargetBreakpointKind.HW_EXECUTE);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testPlaceReadBreakpointViaInterpreter() throws Throwable {
 		runTestPlaceBreakpointViaInterpreter(TargetBreakpointKind.READ);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testPlaceWriteBreakpointViaInterpreter() throws Throwable {
 		runTestPlaceBreakpointViaInterpreter(TargetBreakpointKind.WRITE);
 	}
@@ -505,7 +505,7 @@ public abstract class AbstractDebuggerModelBreakpointsTest extends AbstractDebug
 				.collect(Collectors.toSet()));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testToggleBreakpointsViaInterpreter() throws Throwable {
 		assumeTrue(m.hasInterpreter());
 		m.build();
@@ -518,7 +518,7 @@ public abstract class AbstractDebuggerModelBreakpointsTest extends AbstractDebug
 			interpreter);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testToggleBreakpointLocations() throws Throwable {
 		assumeTrue(isSupportsTogglableLocations());
 		m.build();
@@ -581,7 +581,7 @@ public abstract class AbstractDebuggerModelBreakpointsTest extends AbstractDebug
 				.collect(Collectors.toSet()));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDeleteBreakpointsViaInterpreter() throws Throwable {
 		assumeTrue(m.hasInterpreter());
 		m.build();
@@ -594,7 +594,7 @@ public abstract class AbstractDebuggerModelBreakpointsTest extends AbstractDebug
 			interpreter);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDeleteBreakpointLocations() throws Throwable {
 		assumeTrue(isSupportsDeletableLocations());
 		m.build();
@@ -604,7 +604,7 @@ public abstract class AbstractDebuggerModelBreakpointsTest extends AbstractDebug
 			locs.stream().map(l -> l.as(TargetDeletable.class)).collect(Collectors.toSet()));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDeleteBreakpointLocationsViaInterpreter() throws Throwable {
 		assumeTrue(isSupportsDeletableLocations());
 		assumeTrue(m.hasInterpreter());

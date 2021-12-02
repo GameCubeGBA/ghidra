@@ -37,6 +37,9 @@ import ghidra.program.database.ProgramBuilder;
 import ghidra.program.model.listing.Program;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 // The ByteViewer is in its own plugin; the CodeBrowser is in Base, this we need 
 // the ModuleClassLoaderDependent interface
@@ -46,7 +49,7 @@ public class ByteViewerToolConnectionTest extends AbstractGhidraHeadedIntegratio
 	private TestEnv env;
 	private ToolConnectionDialog dialog;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		env.resetDefaultTools();
@@ -55,7 +58,7 @@ public class ByteViewerToolConnectionTest extends AbstractGhidraHeadedIntegratio
 		setErrorGUIEnabled(false);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (dialog != null) {
 			pressButtonByText(dialog, "OK");
@@ -65,7 +68,7 @@ public class ByteViewerToolConnectionTest extends AbstractGhidraHeadedIntegratio
 		env.dispose();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testConnectToolsDialog() throws Exception {
 		PluginTool cbTool = runTool("CodeBrowser");
 		PluginTool cbTool2 = runTool("CodeBrowser");
@@ -114,7 +117,7 @@ public class ByteViewerToolConnectionTest extends AbstractGhidraHeadedIntegratio
 		return p;
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testPluginsRemoved() throws Exception {
 		PluginTool cbTool = runTool("CodeBrowser");
 		PluginTool cbTool2 = runTool("CodeBrowser");

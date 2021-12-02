@@ -33,6 +33,8 @@ import ghidra.framework.plugintool.PluginTool;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Tests the Python script functionality.
@@ -43,7 +45,7 @@ public class PythonScriptTest extends AbstractGhidraHeadedIntegrationTest {
 	private PluginTool tool;
 	private ConsoleService console;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -52,7 +54,7 @@ public class PythonScriptTest extends AbstractGhidraHeadedIntegrationTest {
 		console = tool.getService(ConsoleService.class);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		GhidraScriptUtil.dispose();
 		env.dispose();

@@ -51,6 +51,8 @@ import ghidra.program.model.listing.Program;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import resources.ResourceManager;
 
 /**
@@ -62,7 +64,7 @@ public class ToolActionManagerTest extends AbstractGhidraHeadedIntegrationTest {
 	private TestEnv env;
 	private File exportFile = new File(GenericRunInfo.getProjectsDirPath(), "untitled.tool");
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		env.resetDefaultTools();
@@ -73,7 +75,7 @@ public class ToolActionManagerTest extends AbstractGhidraHeadedIntegrationTest {
 		exportFile.delete();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		closeAllWindows();
 		env.dispose();

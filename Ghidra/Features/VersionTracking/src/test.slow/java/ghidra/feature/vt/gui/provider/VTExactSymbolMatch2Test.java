@@ -35,6 +35,8 @@ import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.exception.InvalidInputException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Tests to verify that the Exact Symbol Name program correlation determines matches as expected. 
@@ -58,12 +60,12 @@ public class VTExactSymbolMatch2Test extends AbstractGhidraHeadedIntegrationTest
 	protected Function sourceFunction;
 	protected Function destinationFunction;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		vtTestEnv = new VTTestEnv();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		sourceProgram = null;
 		destinationProgram = null;

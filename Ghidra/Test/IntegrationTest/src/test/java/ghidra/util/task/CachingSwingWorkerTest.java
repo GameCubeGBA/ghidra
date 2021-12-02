@@ -22,7 +22,7 @@ import java.util.List;
 
 import javax.swing.SwingWorker;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.test.AbstractDockingTest;
 import sun.awt.AppContext;
@@ -32,7 +32,7 @@ public class CachingSwingWorkerTest extends AbstractDockingTest {
 
 	private static final int ITEM_COUNT = 10;
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSimpleThreadCase() throws InterruptedException {
 		TestWorker worker = new TestWorker();
 
@@ -56,7 +56,7 @@ public class CachingSwingWorkerTest extends AbstractDockingTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSimpleSwingThreadCase() {
 
 		disasbleTimerUsage();
@@ -80,7 +80,7 @@ public class CachingSwingWorkerTest extends AbstractDockingTest {
 		assertEquals(ITEM_COUNT, runnable.size());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSwingAndAnotherThreadCase() throws InterruptedException {
 
 		disasbleTimerUsage();
@@ -108,7 +108,7 @@ public class CachingSwingWorkerTest extends AbstractDockingTest {
 		assertEquals(ITEM_COUNT, runnable.size());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSwingAfterAnotherThreadCase() throws InterruptedException {
 
 		disasbleTimerUsage();

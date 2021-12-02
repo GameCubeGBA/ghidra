@@ -34,6 +34,8 @@ import ghidra.program.model.address.AddressFactory;
 import ghidra.program.model.listing.Program;
 import ghidra.program.util.ProgramSelection;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class RestoreSelectionPluginTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -47,7 +49,7 @@ public class RestoreSelectionPluginTest extends AbstractGhidraHeadedIntegrationT
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 
@@ -76,7 +78,7 @@ public class RestoreSelectionPluginTest extends AbstractGhidraHeadedIntegrationT
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		ProgramManager pm = tool.getService(ProgramManager.class);
 		pm.closeAllPrograms(true);

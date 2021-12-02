@@ -22,7 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import SWIG.SBDebugger;
@@ -52,7 +52,7 @@ public class LLDBTest extends AbstractGhidraHeadlessIntegrationTest {
 
 	private SBDebugger sbd;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		assumeLibLoadable();
 		SBDebugger.InitializeWithErrorHandling();

@@ -17,7 +17,7 @@ package ghidra.app.plugin.core.datamgr.util;
 
 import java.util.*;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import generic.test.AbstractGTest;
@@ -28,7 +28,7 @@ import ghidra.util.UniversalIdGenerator;
 
 public class DataTypeUtilsTest {
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		UniversalIdGenerator.initialize();
 	}

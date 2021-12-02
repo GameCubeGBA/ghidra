@@ -19,10 +19,10 @@ import static org.junit.Assert.assertEquals;
 
 import java.math.BigInteger;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
+import org.junit.jupiter.api.BeforeEach;
 
 public class RegisterValueTest extends AbstractGhidraHeadlessIntegrationTest {
 
@@ -40,7 +40,7 @@ public class RegisterValueTest extends AbstractGhidraHeadlessIntegrationTest {
 
 	private Register regCF;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		LanguageService languageService = getLanguageService();
 		language = languageService.getLanguage(new LanguageID("x86:LE:32:default"));

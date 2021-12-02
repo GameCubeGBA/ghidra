@@ -21,6 +21,7 @@ import org.junit.*;
 
 import generic.test.AbstractGenericTest;
 import ghidra.util.exception.DuplicateNameException;
+import org.junit.jupiter.api.BeforeEach;
 
 public class GenericAddressTest extends AbstractGenericTest {
 
@@ -31,7 +32,7 @@ public class GenericAddressTest extends AbstractGenericTest {
 	private AddressSpace stackSpace;
 	private AddressFactory factory;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		space = new GenericAddressSpace("Test1", 8, AddressSpace.TYPE_RAM, 0);
 		space2 = new GenericAddressSpace("Test2", 8, AddressSpace.TYPE_RAM, 1);

@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 public class DateUtilsTest {
@@ -28,7 +28,7 @@ public class DateUtilsTest {
 	private String testDateString;
 	private Date testDate;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy hh:mm a");
 		testDateString = "Nov 04, 2019 02:43 PM";

@@ -22,6 +22,8 @@ import java.util.Iterator;
 import org.junit.*;
 
 import generic.test.AbstractGenericTest;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AddressRangeImplTest extends AbstractGenericTest {
 	private AddressSpace space;
@@ -34,13 +36,13 @@ public class AddressRangeImplTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		space = new GenericAddressSpace("xx", 32, AddressSpace.TYPE_RAM, 0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIntersect() {
 		AddressRange r2 = new AddressRangeImpl(addr(0), addr(30));
 		AddressRange r1 = new AddressRangeImpl(addr(5), addr(20));
@@ -63,7 +65,7 @@ public class AddressRangeImplTest extends AbstractGenericTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddressRangeChunker_SameStartAndEndAddress() {
 		Address start = addr(0);
 		Address end = addr(0);
@@ -79,7 +81,7 @@ public class AddressRangeImplTest extends AbstractGenericTest {
 		assertFalse(it.hasNext());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddressRangeChunker_AddressRangeConstructor() {
 		Address start = addr(0);
 		Address end = addr(2);
@@ -105,7 +107,7 @@ public class AddressRangeImplTest extends AbstractGenericTest {
 		assertFalse(it.hasNext());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddressRangeChunker_LastRangeSmallerThanChunkSize() {
 		Address start = addr(0);
 		Address end = addr(30);
@@ -134,7 +136,7 @@ public class AddressRangeImplTest extends AbstractGenericTest {
 		assertFalse(it.hasNext());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddressRangeChunker_LastRangeEqualToChunkSize() {
 		Address start = addr(0);
 		Address end = addr(29);
@@ -159,7 +161,7 @@ public class AddressRangeImplTest extends AbstractGenericTest {
 		assertFalse(it.hasNext());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddressRangeChunker_NullAddresses() {
 		try {
 			new AddressRangeChunker(null, addr(0), 10);
@@ -178,7 +180,7 @@ public class AddressRangeImplTest extends AbstractGenericTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddressRangeChunker_BadChunkSize() {
 		try {
 			new AddressRangeChunker(addr(0), addr(1), -1);
@@ -197,7 +199,7 @@ public class AddressRangeImplTest extends AbstractGenericTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddressRangeChunker_StartLessThanEnd() {
 		try {
 			new AddressRangeChunker(addr(1), addr(0), 10);
@@ -210,7 +212,7 @@ public class AddressRangeImplTest extends AbstractGenericTest {
 		new AddressRangeChunker(addr(0), addr(0), 10); // this is OK
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddressRangeChunker_DifferentAddressSpaces() {
 		AddressSpace space1 = new GenericAddressSpace("xx", 32, AddressSpace.TYPE_RAM, 0);
 		AddressSpace space2 = new GenericAddressSpace("yy", 32, AddressSpace.TYPE_RAM, 0);
@@ -228,7 +230,7 @@ public class AddressRangeImplTest extends AbstractGenericTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddressRange_BoundsOrdering() {
 
 		int size = 15;
@@ -264,7 +266,7 @@ public class AddressRangeImplTest extends AbstractGenericTest {
 					addrCount == (size + 1));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddressRangeIteration_Extent() {
 		int size = 15;
 		Address start = addr(5);

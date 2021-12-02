@@ -23,6 +23,8 @@ import ghidra.framework.model.ToolManager;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.ProjectTestUtils;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * This driver tests the following requirements:
@@ -36,13 +38,13 @@ public class CreateToolTest extends AbstractGhidraHeadedIntegrationTest {
 	private Project project;
 	private PluginTool tool;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		ProjectTestUtils.deleteProject(DIRECTORY_NAME, PROJECT_NAME);
 		project = ProjectTestUtils.getProject(DIRECTORY_NAME, PROJECT_NAME);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		project.close();
 		ProjectTestUtils.deleteProject(DIRECTORY_NAME, PROJECT_NAME);

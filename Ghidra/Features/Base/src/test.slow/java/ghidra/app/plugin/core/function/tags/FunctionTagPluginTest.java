@@ -41,6 +41,8 @@ import ghidra.program.model.listing.*;
 import ghidra.program.util.ProgramLocation;
 import ghidra.test.*;
 import ghidra.util.exception.UsrException;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Test class for the {@link FunctionTagPlugin}. This tests the ability to use the
@@ -67,7 +69,7 @@ public class FunctionTagPluginTest extends AbstractGhidraHeadedIntegrationTest {
 
 	private FunctionTagProvider provider = null;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		env = new TestEnv();
@@ -97,7 +99,7 @@ public class FunctionTagPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		waitForSwing();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

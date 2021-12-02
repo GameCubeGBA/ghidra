@@ -32,6 +32,8 @@ import ghidra.test.*;
 import ghidra.util.Msg;
 import ghidra.util.exception.FileInUseException;
 import ghidra.util.task.ConsoleTaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 @Ignore("Not actual tests")
 public class ProjectExperimentsTest extends AbstractGhidraHeadedIntegrationTest {
@@ -147,12 +149,12 @@ public class ProjectExperimentsTest extends AbstractGhidraHeadedIntegrationTest 
 		}
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

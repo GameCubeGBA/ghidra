@@ -33,12 +33,14 @@ import ghidra.program.model.data.*;
 import ghidra.program.model.listing.Program;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DataTypePreviewPluginTest extends AbstractGhidraHeadedIntegrationTest {
 	private TestEnv env;
 	private DataTypePreviewPlugin plugin;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 
@@ -53,7 +55,7 @@ public class DataTypePreviewPluginTest extends AbstractGhidraHeadedIntegrationTe
 		runSwing(() -> env.getTool().showComponentProvider(plugin.getProvider(), true));
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

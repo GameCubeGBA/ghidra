@@ -22,6 +22,8 @@ import org.junit.*;
 
 import generic.test.AbstractGenericTest;
 import ghidra.program.model.address.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AddressRangeObjectMapTest extends AbstractGenericTest {
 
@@ -31,7 +33,7 @@ public class AddressRangeObjectMapTest extends AbstractGenericTest {
 		super();
 	}
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
 		space = new GenericAddressSpace("Test", 32, AddressSpace.TYPE_RAM, 0);
 	}
@@ -40,7 +42,7 @@ public class AddressRangeObjectMapTest extends AbstractGenericTest {
 		return space.getAddress(offset);
 	}
 
-@Test
+@org.junit.jupiter.api.Test
     public void testTwoSpacesWithSecondRangeAt0() throws Exception {
 		AddressSpace space2 = new GenericAddressSpace("Test2", 32, AddressSpace.TYPE_RAM, 1);
 		AddressRangeObjectMap<Integer> rangeMap = new AddressRangeObjectMap<Integer>();
@@ -81,7 +83,7 @@ public class AddressRangeObjectMapTest extends AbstractGenericTest {
 
 	}
 
-@Test
+@org.junit.jupiter.api.Test
     public void testAddAdjoiningRangesWithSameObject() {
 		AddressRangeObjectMap<Integer> rangeMap = new AddressRangeObjectMap<Integer>();
 
@@ -100,7 +102,7 @@ public class AddressRangeObjectMapTest extends AbstractGenericTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddAdjoiningRangesWithDifferentObject() {
 		AddressRangeObjectMap<Integer> rangeMap = new AddressRangeObjectMap<Integer>();
 
@@ -143,7 +145,7 @@ public class AddressRangeObjectMapTest extends AbstractGenericTest {
 		assertTrue(!it.hasNext());
 	}
 
-@Test
+@org.junit.jupiter.api.Test
     public void testAddSingleAddressRangeInMiddleOfExistingRangeWithDifferentObject() {
 		AddressRangeObjectMap<Integer> rangeMap = new AddressRangeObjectMap<Integer>();
 

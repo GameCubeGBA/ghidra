@@ -21,7 +21,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
@@ -46,7 +46,7 @@ public class ContextRegisterFilterTest extends AbstractGenericTest {
 	private List<ContextRegisterInfo> listToFilter2;
 	private List<ContextRegisterInfo> listToFilter3;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		cReg1 = "cReg1";
 		cReg2 = "cReg2";

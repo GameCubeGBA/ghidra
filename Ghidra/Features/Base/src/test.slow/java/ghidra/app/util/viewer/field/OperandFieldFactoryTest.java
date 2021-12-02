@@ -47,6 +47,8 @@ import ghidra.program.model.symbol.SourceType;
 import ghidra.program.model.util.CodeUnitInsertionException;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class OperandFieldFactoryTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -56,7 +58,7 @@ public class OperandFieldFactoryTest extends AbstractGhidraHeadedIntegrationTest
 	private Options fieldOptions;
 	private Program program;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		program = buildProgram();
@@ -119,7 +121,7 @@ public class OperandFieldFactoryTest extends AbstractGhidraHeadedIntegrationTest
 		}
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

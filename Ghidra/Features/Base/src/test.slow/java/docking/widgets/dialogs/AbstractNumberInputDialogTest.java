@@ -18,7 +18,7 @@ package docking.widgets.dialogs;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
-import org.junit.After;
+import org.junit.jupiter.api.AfterEach;
 
 import docking.DockingWindowManager;
 import docking.test.AbstractDockingTest;
@@ -30,7 +30,7 @@ public abstract class AbstractNumberInputDialogTest extends AbstractDockingTest 
 	protected JButton okButton;
 	protected JTextField textField;
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (dialog != null) {
 			runSwing(() -> dialog.close());

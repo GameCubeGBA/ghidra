@@ -15,14 +15,14 @@
  */
 package docking.widgets.table.threaded;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 import docking.widgets.table.TableSortState;
 
 public class NonSortedThreadedTableFilterTest extends DefaultThreadedTableFilterTest {
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		super.setUp();

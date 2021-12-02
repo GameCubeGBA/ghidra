@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.async.AsyncDebouncer;
 import ghidra.async.AsyncTimer;
@@ -64,7 +64,7 @@ public abstract class AbstractDebuggerModelSteppableTest extends AbstractDebugge
 		return null;
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSteppableIsWhereExpected() throws Throwable {
 		m.build();
 
@@ -147,7 +147,7 @@ public abstract class AbstractDebuggerModelSteppableTest extends AbstractDebugge
 	 * 
 	 * @throws Throwable if anything goes wrong
 	 */
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testStepEventOrder() throws Throwable {
 		m.build();
 

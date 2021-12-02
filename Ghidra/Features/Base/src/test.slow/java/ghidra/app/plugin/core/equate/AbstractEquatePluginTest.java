@@ -21,8 +21,8 @@ import java.util.Set;
 
 import javax.swing.JTextField;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 import docking.ActionContext;
 import docking.ComponentProvider;
@@ -72,7 +72,7 @@ public abstract class AbstractEquatePluginTest extends AbstractProgramBasedTest 
 	 * 
 	 * @throws Exception
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		initialize();
@@ -197,7 +197,7 @@ public abstract class AbstractEquatePluginTest extends AbstractProgramBasedTest 
 	}
 
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

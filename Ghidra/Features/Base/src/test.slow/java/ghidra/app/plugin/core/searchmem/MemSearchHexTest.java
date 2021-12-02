@@ -26,7 +26,6 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import docking.widgets.fieldpanel.support.Highlight;
@@ -40,6 +39,7 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.data.Pointer32DataType;
 import ghidra.program.model.listing.Program;
 import ghidra.program.model.mem.MemoryBlock;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Tests for the Hex format in searching memory.
@@ -51,7 +51,7 @@ public class MemSearchHexTest extends AbstractMemSearchTest {
 	}
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		selectRadioButton("Hex");

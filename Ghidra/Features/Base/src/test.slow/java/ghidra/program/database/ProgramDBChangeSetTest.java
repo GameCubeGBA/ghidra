@@ -25,6 +25,8 @@ import org.junit.*;
 import db.DBHandle;
 import ghidra.program.model.address.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class ProgramDBChangeSetTest extends AbstractGhidraHeadedIntegrationTest {
 	private ProgramDBChangeSet pcs;
@@ -35,7 +37,7 @@ public class ProgramDBChangeSetTest extends AbstractGhidraHeadedIntegrationTest 
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		ProgramBuilder builder = new ProgramBuilder("Test", ProgramBuilder._TOY);
 		builder.createMemory("TEST", "00000000", 0x100);
@@ -47,7 +49,7 @@ public class ProgramDBChangeSetTest extends AbstractGhidraHeadedIntegrationTest 
 		pcs = new ProgramDBChangeSet(program.getAddressMap(), 20); // read not supported
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		program.release(this);
 	}

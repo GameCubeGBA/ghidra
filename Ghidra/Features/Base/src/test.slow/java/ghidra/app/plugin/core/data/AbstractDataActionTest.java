@@ -51,6 +51,8 @@ import ghidra.program.model.listing.*;
 import ghidra.program.util.*;
 import ghidra.test.*;
 import ghidra.util.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public abstract class AbstractDataActionTest extends AbstractGhidraHeadedIntegrationTest
 		implements LocationCallback {
@@ -105,7 +107,7 @@ public abstract class AbstractDataActionTest extends AbstractGhidraHeadedIntegra
 
 	protected static final String RECENTLY_USED = "Recently Used";
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		env = new TestEnv();
@@ -139,7 +141,7 @@ public abstract class AbstractDataActionTest extends AbstractGhidraHeadedIntegra
 		waitForBusyTool(tool);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		closeAllWindows();
 		env.dispose();

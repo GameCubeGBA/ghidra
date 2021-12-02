@@ -26,6 +26,7 @@ import ghidra.framework.remote.User;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.NamingUtilities;
 import ghidra.util.exception.UserAccessException;
+import org.junit.jupiter.api.BeforeEach;
 import utilities.util.FileUtilities;
 
 public class RepositoryTest extends AbstractGhidraHeadedIntegrationTest {
@@ -37,7 +38,7 @@ public class RepositoryTest extends AbstractGhidraHeadedIntegrationTest {
 	private Repository repository;
 	private String userName;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		userName = ClientUtil.getUserName();

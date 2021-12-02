@@ -20,7 +20,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.List;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.program.model.address.*;
 import ghidra.program.model.listing.Program;
@@ -89,7 +89,7 @@ public class AddressMapDB32BitTest extends AbstractAddressMapDBTestClass {
 		return p;
 	}
 
-@Test
+@org.junit.jupiter.api.Test
     public void testKeyRanges() {
 		
 		List<KeyRange> keyRanges = addrMap.getKeyRanges(addr(0), addr(0xffffffffffffffffL), false);

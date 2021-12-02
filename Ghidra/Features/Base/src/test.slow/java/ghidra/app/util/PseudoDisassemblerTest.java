@@ -22,6 +22,8 @@ import org.junit.*;
 import ghidra.program.database.ProgramBuilder;
 import ghidra.program.model.listing.Program;
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class PseudoDisassemblerTest extends AbstractGhidraHeadlessIntegrationTest {
 
@@ -31,7 +33,7 @@ public class PseudoDisassemblerTest extends AbstractGhidraHeadlessIntegrationTes
 
 	private int txId;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		programBuilder = new ProgramBuilder("Test", ProgramBuilder._ARM);
 		program = programBuilder.getProgram();
@@ -44,7 +46,7 @@ public class PseudoDisassemblerTest extends AbstractGhidraHeadlessIntegrationTes
 		disassembler = new PseudoDisassembler(program);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (program != null) {
 			program.endTransaction(txId, true);

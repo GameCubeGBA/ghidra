@@ -25,6 +25,7 @@ import ghidra.program.model.address.*;
 import ghidra.program.model.data.*;
 import ghidra.program.model.listing.Data;
 import ghidra.program.model.listing.Program;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * 
@@ -43,7 +44,7 @@ public class CreateStructureCmdTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = buildProgram();
 		program.startTransaction("TEST");

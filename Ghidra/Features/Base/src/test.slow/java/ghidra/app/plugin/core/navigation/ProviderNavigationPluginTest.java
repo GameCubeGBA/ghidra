@@ -21,7 +21,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Consumer;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import docking.*;
@@ -39,7 +39,7 @@ public class ProviderNavigationPluginTest extends AbstractProgramBasedTest {
 	private SpyProviderActivator spyProviderActivator = new SpyProviderActivator();
 	private Set<DockingContextListener> testContextListeners;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		initialize();
 

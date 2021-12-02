@@ -15,7 +15,7 @@
  */
 package ghidra.app.plugin.assembler.sleigh;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.program.model.lang.LanguageID;
 
@@ -100,7 +100,7 @@ public class AARCH64BEAssemblyTest extends AbstractAssemblyTest {
 		assertOneCompatRestExact("mov x0,#0x8", "00:01:80:d2");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAssemble_sbfiz_x1_x2_0x2_0x20() {
 		assertOneCompatRestExact("sbfiz x1,x2,#0x2,#0x20", "41:7c:7e:93");
 	}

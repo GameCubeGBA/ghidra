@@ -34,6 +34,8 @@ import docking.widgets.table.GTable;
 import generic.util.Path;
 import ghidra.framework.preferences.Preferences;
 import ghidra.util.filechooser.ExtensionFileFilter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import resources.ResourceManager;
 
 public class PathManagerTest extends AbstractDockingTest {
@@ -43,7 +45,7 @@ public class PathManagerTest extends AbstractDockingTest {
 	private JFrame frame;
 	private boolean wasListenerNotified = false;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		List<Path> paths = new ArrayList<>();
@@ -63,7 +65,7 @@ public class PathManagerTest extends AbstractDockingTest {
 		frame.setVisible(true);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		frame.setVisible(false);
 		wasListenerNotified = false;

@@ -37,6 +37,8 @@ import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 import ghidra.trace.database.ToyDBTraceBuilder;
 import ghidra.util.database.UndoableTransaction;
 import ghidra.util.exception.InvalidInputException;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DBTraceProgramViewFunctionManagerTest extends AbstractGhidraHeadlessIntegrationTest {
 	ToyDBTraceBuilder b;
@@ -44,7 +46,7 @@ public class DBTraceProgramViewFunctionManagerTest extends AbstractGhidraHeadles
 	Program program;
 	UndoableTransaction tid;
 
-	@Before
+	@BeforeEach
 	public void setUpFunctionManagerTest() throws IOException {
 		b = new ToyDBTraceBuilder("Testing", ProgramBuilder._TOY);
 		program = b.trace.getFixedProgramView(0);
@@ -52,7 +54,7 @@ public class DBTraceProgramViewFunctionManagerTest extends AbstractGhidraHeadles
 		tid = b.startTransaction();
 	}
 
-	@After
+	@AfterEach
 	public void tearDownFunctionManagerTest() {
 		tid.close();
 		b.close();

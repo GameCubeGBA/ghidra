@@ -38,6 +38,8 @@ import ghidra.test.TestEnv;
 import ghidra.util.Msg;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import utilities.util.FileUtilities;
 
 public class GraphExportTest extends AbstractGhidraHeadedIntegrationTest {
@@ -48,7 +50,7 @@ public class GraphExportTest extends AbstractGhidraHeadedIntegrationTest {
 	protected CodeBrowserPlugin codeBrowser;
 	private GraphExporterDialog dialog;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		setErrorGUIEnabled(false);
@@ -76,7 +78,7 @@ public class GraphExportTest extends AbstractGhidraHeadedIntegrationTest {
 		}
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

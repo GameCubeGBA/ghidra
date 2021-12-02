@@ -47,6 +47,7 @@ import ghidra.trace.model.thread.TraceThread;
 import ghidra.util.database.UndoableTransaction;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DebuggerStackProviderTest extends AbstractGhidraHeadedDebuggerGUITest {
 	protected DebuggerStackPlugin stackPlugin;
@@ -55,7 +56,7 @@ public class DebuggerStackProviderTest extends AbstractGhidraHeadedDebuggerGUITe
 
 	protected Register pc;
 
-	@Before
+	@BeforeEach
 	public void setUpStackProviderTest() throws Exception {
 		stackPlugin = addPlugin(tool, DebuggerStackPlugin.class);
 		stackProvider = waitForComponentProvider(DebuggerStackProvider.class);

@@ -34,6 +34,7 @@ import generic.test.AbstractGenericTest;
 import ghidra.util.HelpLocation;
 import ghidra.util.bean.opteditor.OptionsVetoException;
 import ghidra.util.exception.InvalidInputException;
+import org.junit.jupiter.api.BeforeEach;
 
 public class OptionsTest extends AbstractGenericTest {
 
@@ -43,7 +44,7 @@ public class OptionsTest extends AbstractGenericTest {
 
 	private ToolOptions options;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		options = new ToolOptions("Test");
 	}

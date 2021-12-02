@@ -27,6 +27,9 @@ import org.junit.*;
 
 import generic.test.AbstractGenericTest;
 import ghidra.util.Msg;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import utilities.util.FileUtilities;
 
 public class BufferMgrTest extends AbstractGenericTest {
@@ -54,7 +57,7 @@ public class BufferMgrTest extends AbstractGenericTest {
 	int totalReadCount;
 	int totalUpdateCount;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		// Initialize fill data
@@ -65,7 +68,7 @@ public class BufferMgrTest extends AbstractGenericTest {
 		testDir = createTempDirectory(getClass().getSimpleName());
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		if (mgr != null) {
@@ -119,7 +122,7 @@ public class BufferMgrTest extends AbstractGenericTest {
 		random.nextBytes(fillPattern2);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCreateBuffer() throws IOException {
 
 		initNewFile();
@@ -176,7 +179,7 @@ public class BufferMgrTest extends AbstractGenericTest {
 		assertEquals(0, mgr.getLockCount());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testUpdateBuffer() throws IOException {
 
 		initNewFile();
@@ -205,7 +208,7 @@ public class BufferMgrTest extends AbstractGenericTest {
 		assertEquals(0, mgr.getLockCount());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDeleteBuffer() throws IOException {
 
 		initNewFile();
@@ -234,7 +237,7 @@ public class BufferMgrTest extends AbstractGenericTest {
 		assertEquals(0, mgr.getLockCount());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testUndo() throws IOException {
 
 		initNewFile();
@@ -352,7 +355,7 @@ public class BufferMgrTest extends AbstractGenericTest {
 		assertTrue(!mgr.undo(true));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testUndoAll() throws IOException {
 
 		initNewFile();
@@ -388,7 +391,7 @@ public class BufferMgrTest extends AbstractGenericTest {
 		assertTrue(!mgr.undo(true));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testRollback() throws IOException {
 
 		initNewFile();
@@ -496,7 +499,7 @@ public class BufferMgrTest extends AbstractGenericTest {
 		assertTrue(!mgr.undo(true));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testRedo() throws IOException {
 
 		initNewFile();
@@ -688,7 +691,7 @@ public class BufferMgrTest extends AbstractGenericTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSaveAs() throws Exception {
 
 		initNewFile();

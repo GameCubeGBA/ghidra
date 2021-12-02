@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 
 import java.util.*;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import com.google.common.collect.Range;
@@ -53,7 +53,7 @@ public class DebuggerRegionsProviderTest extends AbstractGhidraHeadedDebuggerGUI
 	protected MemoryBlock blockExeText;
 	protected MemoryBlock blockExeData;
 
-	@Before
+	@BeforeEach
 	public void setUpRegionsTest() throws Exception {
 		addPlugin(tool, DebuggerRegionsPlugin.class);
 		provider = waitForComponentProvider(DebuggerRegionsProvider.class);

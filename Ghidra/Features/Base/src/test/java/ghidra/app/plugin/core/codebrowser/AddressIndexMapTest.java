@@ -25,8 +25,8 @@ import static org.junit.Assert.*;
 
 import java.math.BigInteger;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import docking.widgets.fieldpanel.support.FieldRange;
 import docking.widgets.fieldpanel.support.FieldSelection;
@@ -41,7 +41,7 @@ public class AddressIndexMapTest extends AbstractGenericTest {
 	/*
 	 * @see TestCase#setUp()
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		space = new GenericAddressSpace("Test", 32, AddressSpace.TYPE_RAM, 0);
 		AddressSet set = new AddressSet();
@@ -81,7 +81,7 @@ public class AddressIndexMapTest extends AbstractGenericTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEmptyMap() {
 		map = new AddressIndexMap();
 		assertEquals(0, map.getIndexCount().intValue());
@@ -90,14 +90,14 @@ public class AddressIndexMapTest extends AbstractGenericTest {
 		assertEquals(null, map.getIndex(addr(100)));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIsGapIndex() {
 		assertEquals(false, map.isGapIndex(BigInteger.valueOf(0)));
 		assertEquals(false, map.isGapIndex(BigInteger.valueOf(5)));
 		assertEquals(true, map.isGapIndex(BigInteger.valueOf(10)));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIsGapIndexAfterAccessingValue() {
 		// this is  mainly about getting all code paths tested. By accessing values first,
 		// we are exercising the code that tries to use optimized cached ranges.
@@ -117,7 +117,7 @@ public class AddressIndexMapTest extends AbstractGenericTest {
 		assertEquals(false, map.isGapAddress(addr(100)));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testNegativeIndex() {
 		assertNull(map.getAddress(BigInteger.valueOf(-1)));
 	}
@@ -143,7 +143,7 @@ public class AddressIndexMapTest extends AbstractGenericTest {
 		assertEquals(0, map.getIndexAtOrAfter(addr(50)).intValue());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGetIndexAtOrAfterWithAddressAtBeginningOfRange() {
 		assertEquals(0, map.getIndexAtOrAfter(addr(100)).intValue());
 	}

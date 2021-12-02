@@ -28,6 +28,9 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.symbol.Reference;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test the changing of the ARM/Thumb bit for code flow
@@ -46,12 +49,12 @@ public class ArmThumbChangeDisassemblyTest extends AbstractGhidraHeadedIntegrati
 
 	private Program program;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		if (program != null)
 			env.release(program);

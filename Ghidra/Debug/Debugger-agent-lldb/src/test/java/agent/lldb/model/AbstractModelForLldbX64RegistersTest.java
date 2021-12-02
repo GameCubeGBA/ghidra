@@ -26,7 +26,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Map.Entry;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.dbg.target.TargetObject;
 import ghidra.dbg.target.TargetRegister;
@@ -107,7 +107,7 @@ public abstract class AbstractModelForLldbX64RegistersTest
 	}
 
 	@Override
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testReadRegisters() throws Throwable {
 		m.build();
 
@@ -135,7 +135,7 @@ public abstract class AbstractModelForLldbX64RegistersTest
 	}
 
 	@Override
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testWriteRegisters() throws Throwable {
 		m.build();
 

@@ -43,6 +43,8 @@ import ghidra.program.util.string.FoundString;
 import ghidra.program.util.string.FoundString.DefinedState;
 import ghidra.test.*;
 import ghidra.util.table.GhidraTable;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class StringTableProviderTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -57,7 +59,7 @@ public class StringTableProviderTest extends AbstractGhidraHeadedIntegrationTest
 	private DockingActionIf searchAction;
 
 	@SuppressWarnings("unchecked")
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -503,7 +505,7 @@ public class StringTableProviderTest extends AbstractGhidraHeadedIntegrationTest
 		return -1;
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.closeTool(tool);
 		env.dispose();

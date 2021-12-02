@@ -33,6 +33,8 @@ import ghidra.feature.vt.api.markupitem.MarkupTypeTestStub;
 import ghidra.program.model.address.Address;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class UnappliedMarkupItemStorageDBTest extends VTBaseTestCase {
 
@@ -43,7 +45,7 @@ public class UnappliedMarkupItemStorageDBTest extends VTBaseTestCase {
 	}
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		System.err.println(System.getProperty("java.class.path"));
@@ -52,7 +54,7 @@ public class UnappliedMarkupItemStorageDBTest extends VTBaseTestCase {
 	}
 
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		db.endTransaction(testTransactionID, false);
 		db.release(VTTestUtils.class);

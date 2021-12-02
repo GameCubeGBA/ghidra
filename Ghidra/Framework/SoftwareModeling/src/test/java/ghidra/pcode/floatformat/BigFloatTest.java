@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 
@@ -32,7 +32,7 @@ public class BigFloatTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIEEEFloatRepresentation() {
 		Assert.assertEquals("0b0.0", FloatFormat.toBinaryString(0.0f));
 		Assert.assertEquals("0b1.0 * 2^0", FloatFormat.toBinaryString(1.0f));
@@ -41,7 +41,7 @@ public class BigFloatTest extends AbstractGenericTest {
 		Assert.assertEquals("-0b1.0 * 2^1", FloatFormat.toBinaryString(-2.0f));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIEEEFloatAsBigFloat() {
 		Assert.assertEquals(FloatFormat.toBigFloat(0.0f).toBinaryString(),
 			FloatFormat.toBinaryString(0.0f));
@@ -55,7 +55,7 @@ public class BigFloatTest extends AbstractGenericTest {
 			FloatFormat.toBinaryString(-2.0f));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIEEEFloatAsBigFloatRandom() {
 		Random rand = new Random(1);
 		for (int i = 0; i < 100; ++i) {
@@ -65,7 +65,7 @@ public class BigFloatTest extends AbstractGenericTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIEEEDoubleRepresentation() {
 		Assert.assertEquals("0b0.0", FloatFormat.toBinaryString(0.0));
 		Assert.assertEquals("0b1.0 * 2^0", FloatFormat.toBinaryString(1.0));
@@ -74,7 +74,7 @@ public class BigFloatTest extends AbstractGenericTest {
 		Assert.assertEquals("-0b1.0 * 2^1", FloatFormat.toBinaryString(-2.0));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIEEEDoubleAsBigFloat() {
 		Assert.assertEquals(FloatFormat.toBigFloat(0.0).toBinaryString(),
 			FloatFormat.toBinaryString(0.0));
@@ -88,7 +88,7 @@ public class BigFloatTest extends AbstractGenericTest {
 			FloatFormat.toBinaryString(-2.0));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIEEEDoubleAsBigFloatRandom() {
 		Random rand = new Random(1);
 		for (int i = 0; i < 100; ++i) {
@@ -256,27 +256,27 @@ public class BigFloatTest extends AbstractGenericTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testFloatAdd() {
 		binaryFloatOpTest((a, b) -> a + b, (a, b) -> a.add(b));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testFloatSubstract() {
 		binaryFloatOpTest((a, b) -> a - b, (a, b) -> a.sub(b));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testFloatMultiply() {
 		binaryFloatOpTest((a, b) -> a * b, (a, b) -> a.mul(b));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testFloatDivide() {
 		binaryFloatOpTest((a, b) -> a / b, (a, b) -> a.div(b));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testFloatCompare() {
 		int i = 0;
 		for (float a : testFloatShortList) {
@@ -292,12 +292,12 @@ public class BigFloatTest extends AbstractGenericTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testFloatSqrt() {
 		unaryFloatOpTest(a -> (float) Math.sqrt(a), a -> a.sqrt());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testFloatFloor() {
 		unaryFloatOpTest(a -> (float) Math.floor(a), a -> a.floor());
 	}
@@ -307,17 +307,17 @@ public class BigFloatTest extends AbstractGenericTest {
 		unaryFloatOpTest(a -> (float) Math.ceil(a), a -> a.ceil());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDoubleAdd() {
 		binaryDoubleOpTest((a, b) -> a + b, (a, b) -> a.add(b));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDoubleSubstract() {
 		binaryDoubleOpTest((a, b) -> a - b, (a, b) -> a.sub(b));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDoubleMultiply() {
 		binaryDoubleOpTest((a, b) -> a * b, (a, b) -> a.mul(b));
 	}
@@ -327,7 +327,7 @@ public class BigFloatTest extends AbstractGenericTest {
 		binaryDoubleOpTest((a, b) -> a / b, (a, b) -> a.div(b));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDoubleCompare() {
 		int i = 0;
 		for (double a : testDoubleShortList) {
@@ -343,12 +343,12 @@ public class BigFloatTest extends AbstractGenericTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDoubleSqrt() {
 		unaryDoubleOpTest(a -> Math.sqrt(a), a -> a.sqrt());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDoubleFloor() {
 		unaryDoubleOpTest(a -> Math.floor(a), a -> a.floor());
 	}

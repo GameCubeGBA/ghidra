@@ -30,6 +30,8 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.listing.ProgramContext;
 import ghidra.program.util.ProgramContextImpl;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Test for the {@link ghidra.app.cmd.label.CreateNamespacesCmd} class.
@@ -48,7 +50,7 @@ public class DisassembleContextTest extends AbstractGhidraHeadedIntegrationTest 
 	private Register tmodeReg;
 	private Register r0Reg;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = createDefaultProgram("Test", ProgramBuilder._ARM, this);
 		space = program.getAddressFactory().getDefaultAddressSpace();
@@ -60,7 +62,7 @@ public class DisassembleContextTest extends AbstractGhidraHeadedIntegrationTest 
 			false);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (program != null) {
 			program.release(this);

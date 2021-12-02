@@ -15,8 +15,8 @@
  */
 package ghidra.app.plugin.core.select.flow;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 import docking.ActionContext;
 import docking.action.DockingAction;
@@ -55,7 +55,7 @@ public abstract class AbstractSelectByFlowPluginTest extends AbstractGhidraHeade
 	GoToService goToService;
 	AddressFactory addressFactory;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -88,7 +88,7 @@ public abstract class AbstractSelectByFlowPluginTest extends AbstractGhidraHeade
 		pm.openProgram(program.getDomainFile());
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		env.dispose();

@@ -32,6 +32,8 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.listing.ProgramModule;
 import ghidra.program.util.GroupPath;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import util.CollectionUtils;
 
 /**
@@ -47,7 +49,7 @@ public class ModuleAlgorithmPluginTest extends AbstractGhidraHeadedIntegrationTe
 	private ProgramTreeService service;
 	private Object context;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 
@@ -63,7 +65,7 @@ public class ModuleAlgorithmPluginTest extends AbstractGhidraHeadedIntegrationTe
 
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

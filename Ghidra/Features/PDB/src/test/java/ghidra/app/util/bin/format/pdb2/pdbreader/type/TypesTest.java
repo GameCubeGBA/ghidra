@@ -19,7 +19,6 @@ import static org.junit.Assert.assertEquals;
 
 import java.math.BigInteger;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
@@ -27,6 +26,7 @@ import ghidra.app.util.bin.format.pdb2.pdbreader.*;
 import ghidra.app.util.bin.format.pdb2.pdbreader.symbol.RegisterMsSymbol;
 import ghidra.util.Msg;
 import ghidra.util.exception.AssertException;
+import org.junit.jupiter.api.BeforeAll;
 
 //TODO: not sure if ST variety should get putPadding() or putAlign()
 
@@ -47,7 +47,7 @@ public class TypesTest extends AbstractGenericTest {
 	private static int vtShapeMsType1;
 	private static TypeParser typeParser;
 
-	@BeforeClass
+	@BeforeAll
 	public static void setUp() {
 		try (DummyPdb700 dummyPdb700 = new DummyPdb700(4096, 4096, 4096, 4096)) {
 			pdb = dummyPdb700;

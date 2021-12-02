@@ -32,6 +32,8 @@ import ghidra.program.model.lang.RegisterValue;
 import ghidra.program.model.listing.*;
 import ghidra.program.model.symbol.Reference;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * quick and dirty test of the ProgramContextImpl just to see
@@ -52,7 +54,7 @@ public class ConstantPropogationReferenceTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		builder = new ProgramBuilder("MIPS_6432", "MIPS:BE:64:64-32addr");
 		// lui v0, 0x80a8
@@ -69,7 +71,7 @@ public class ConstantPropogationReferenceTest extends AbstractGenericTest {
 		txID = program.startTransaction("Test");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		program.endTransaction(txID, true);
 	}

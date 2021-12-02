@@ -50,6 +50,8 @@ import ghidra.util.database.UndoableTransaction;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.ConsoleTaskMonitor;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DBTraceCodeManagerTest extends AbstractGhidraHeadlessIntegrationTest
 		implements Unfinished {
@@ -99,13 +101,13 @@ public class DBTraceCodeManagerTest extends AbstractGhidraHeadlessIntegrationTes
 		assertFalse(data.isDefined());
 	}
 
-	@Before
+	@BeforeEach
 	public void setUpTraceCodeManagerTest() throws IOException {
 		b = new ToyDBTraceBuilder("Testing", "Toy:BE:64:harvard");
 		manager = b.trace.getCodeManager();
 	}
 
-	@After
+	@AfterEach
 	public void tearDownTraceCodeManagerTest() {
 		b.close();
 	}

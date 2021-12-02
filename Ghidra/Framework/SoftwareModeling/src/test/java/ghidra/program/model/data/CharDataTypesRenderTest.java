@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 
 import java.nio.charset.Charset;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import generic.test.AbstractGTest;
@@ -56,7 +56,7 @@ public class CharDataTypesRenderTest extends AbstractGTest {
 			actualStr + "]", actualStr.contains(expectedSubstr));
 	}
 
-	@Before
+	@BeforeEach
 	public void setup() {
 		assertNotNull(thaiCS);
 	}

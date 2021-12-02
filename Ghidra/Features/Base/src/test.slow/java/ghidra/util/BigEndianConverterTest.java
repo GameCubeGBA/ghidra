@@ -23,6 +23,8 @@ import java.util.Arrays;
 import org.junit.*;
 
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * 
@@ -44,7 +46,7 @@ public class BigEndianConverterTest extends AbstractGhidraHeadedIntegrationTest 
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		b = new byte[12];
 		for (int i = 0; i < b.length; i++) {
@@ -52,7 +54,7 @@ public class BigEndianConverterTest extends AbstractGhidraHeadedIntegrationTest 
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGet() {
 		assertEquals(0x0001, dc.getShort(b));
 		assertEquals(0x0102, dc.getShort(b, 1));
@@ -91,7 +93,7 @@ public class BigEndianConverterTest extends AbstractGhidraHeadedIntegrationTest 
 		assertEquals(0x0000ff03, bint.intValue());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGetSignedValues() {
 		assertEquals(Integer.MIN_VALUE, dc.getSignedValue(bytes(0x80, 00, 00, 00), 4));
 		assertEquals(-0x800000L, dc.getSignedValue(bytes(0x80, 00, 00, 00), 3));

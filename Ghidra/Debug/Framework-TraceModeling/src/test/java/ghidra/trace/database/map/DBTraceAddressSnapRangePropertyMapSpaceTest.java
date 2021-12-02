@@ -47,6 +47,8 @@ import ghidra.util.database.spatial.SpatialMap;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.VersionException;
 import ghidra.util.task.ConsoleTaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * TODO: Many of the features are tested indirectly through other manager tests. Those tests should
@@ -207,7 +209,7 @@ public class DBTraceAddressSnapRangePropertyMapSpaceTest
 		return new HashSet<>(col);
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws IOException, VersionException {
 		toy = DefaultLanguageService.getLanguageService()
 				.getLanguage(
@@ -215,7 +217,7 @@ public class DBTraceAddressSnapRangePropertyMapSpaceTest
 		obj = new MyObject(toy, this);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		obj.release(this);
 	}

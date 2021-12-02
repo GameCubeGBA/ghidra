@@ -42,6 +42,8 @@ import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.SystemUtilities;
 import ghidra.util.table.GhidraTable;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class VTAddToSessionTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -68,7 +70,7 @@ public class VTAddToSessionTest extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		setErrorGUIEnabled(false);
 		env = new TestEnv();
@@ -102,7 +104,7 @@ public class VTAddToSessionTest extends AbstractGhidraHeadedIntegrationTest {
 		controller = plugin.getController();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (sourceProgram != null) {
 			env.release(sourceProgram);

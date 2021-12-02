@@ -25,6 +25,8 @@ import generic.jar.ResourceFile;
 import ghidra.app.plugin.core.osgi.BundleHost;
 import ghidra.app.script.GhidraScriptUtil;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Tests the Ghidra python interpreter's functionality.
@@ -34,7 +36,7 @@ public class PythonInterpreterTest extends AbstractGhidraHeadedIntegrationTest {
 	private ByteArrayOutputStream out;
 	private GhidraPythonInterpreter interpreter;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		out = new ByteArrayOutputStream();
 		GhidraScriptUtil.initialize(new BundleHost(), null);
@@ -43,7 +45,7 @@ public class PythonInterpreterTest extends AbstractGhidraHeadedIntegrationTest {
 		interpreter.setErr(out);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		out.reset();
 		interpreter.cleanup();

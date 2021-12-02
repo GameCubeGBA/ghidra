@@ -43,6 +43,8 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.mem.MemoryAccessException;
 import ghidra.program.util.ProgramSelection;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class QualifiedSelectionPluginTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -61,7 +63,7 @@ public class QualifiedSelectionPluginTest extends AbstractGhidraHeadedIntegratio
 	private DockingActionIf replaceView;
 	private ToyProgramBuilder builder;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		env = new TestEnv();
@@ -72,7 +74,7 @@ public class QualifiedSelectionPluginTest extends AbstractGhidraHeadedIntegratio
 		loadProgram("notepad");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

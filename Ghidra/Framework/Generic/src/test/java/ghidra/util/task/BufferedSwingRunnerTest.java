@@ -21,11 +21,11 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.util.SystemUtilities;
+import org.junit.jupiter.api.BeforeEach;
 
 public class BufferedSwingRunnerTest extends AbstractGenericTest {
 
@@ -35,7 +35,7 @@ public class BufferedSwingRunnerTest extends AbstractGenericTest {
 	private BufferedSwingRunner runner = new BufferedSwingRunner(MIN_DELAY, MAX_DELAY);
 	private ClientRunnable runnable = new ClientRunnable();
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		// must turn this on to get the expected results, as in headless mode the update manager
 		// will run it's Swing work immediately on the test thread, which is not true to the
@@ -67,7 +67,7 @@ public class BufferedSwingRunnerTest extends AbstractGenericTest {
 		assertEquals("Expected only 1 callback", 1, runnableCalled);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testMaxTimeout() {
 
 		//
@@ -112,7 +112,7 @@ public class BufferedSwingRunnerTest extends AbstractGenericTest {
 		assertEquals("Expected only 1 callback", 1, runnableCalled);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testStop() {
 		runner.runLater(runnable);
 		runner.stop();
@@ -159,7 +159,7 @@ public class BufferedSwingRunnerTest extends AbstractGenericTest {
 		assertEquals(called, runnableCalled);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIsBusy() throws Exception {
 		//
 		// Another complicated test: we want to make sure that if we try to trigger an update
@@ -240,7 +240,7 @@ public class BufferedSwingRunnerTest extends AbstractGenericTest {
 		assertEquals("Expected exactly 2 callbacks", 2, runnableCalled);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testNotFiringTooOften() throws InterruptedException {
 		Thread t = new Thread(() -> {
 			for (int i = 0; i < 50; i++) {

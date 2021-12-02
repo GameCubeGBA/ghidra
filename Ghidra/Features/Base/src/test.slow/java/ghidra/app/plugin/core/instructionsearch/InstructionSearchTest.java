@@ -48,6 +48,8 @@ import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.exception.InvalidInputException;
 import ghidra.util.table.GhidraTable;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Test of the instruction pattern search functionality.
@@ -70,7 +72,7 @@ public class InstructionSearchTest extends AbstractGhidraHeadedIntegrationTest {
 	 * Test setup.  Each test will start with a simple program having a selection
 	 * encompassing the entire range.
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		env = new TestEnv();
@@ -93,7 +95,7 @@ public class InstructionSearchTest extends AbstractGhidraHeadedIntegrationTest {
 		loadSelection("0x004065e1", "0x004065f2");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

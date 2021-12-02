@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Predicate;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import docking.widgets.filter.*;
@@ -32,6 +31,7 @@ import ghidra.docking.settings.Settings;
 import ghidra.docking.spy.SpyEventRecorder;
 import ghidra.framework.plugintool.ServiceProvider;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Specifically tests the sub-filtering behavior of the {@link ThreadedTableModel}, as well
@@ -77,7 +77,7 @@ public class DefaultThreadedTableFilterTest extends AbstractThreadedTableTest {
 	}
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 

@@ -33,6 +33,8 @@ import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.InvalidNameException;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.DuplicateFileException;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class GhidraFileTest extends AbstractGhidraHeadedIntegrationTest {
 	private File privateProjectDir;
@@ -47,7 +49,7 @@ public class GhidraFileTest extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		File tempDir = createTempDirectory(getName());
 		privateProjectDir = new File(tempDir, "privateFS");
@@ -80,7 +82,7 @@ public class GhidraFileTest extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		deleteAll(privateProjectDir);
 		deleteAll(sharedProjectDir);

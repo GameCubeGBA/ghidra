@@ -31,6 +31,8 @@ import docking.widgets.pathmanager.PathnameTablePanel;
 import ghidra.app.util.importer.LibrarySearchPathManager;
 import ghidra.framework.preferences.Preferences;
 import ghidra.util.filechooser.ExtensionFileFilter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import resources.ResourceManager;
 
 /**
@@ -46,7 +48,7 @@ public class PathnameTablePanelTest extends AbstractDockingTest {
 	private String[] tablePaths =
 		{ "c:\\path_one", "c:\\path_two", "c:\\path_three", "c:\\path_four", "c:\\path_five" };
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		panel = new PathnameTablePanel(tablePaths, true, false, () -> reset());
@@ -56,7 +58,7 @@ public class PathnameTablePanelTest extends AbstractDockingTest {
 		runSwing(() -> frame.setVisible(true));
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		frame.setVisible(false);
 	}

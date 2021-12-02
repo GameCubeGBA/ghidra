@@ -23,7 +23,7 @@ import java.awt.Container;
 
 import javax.swing.*;
 
-import org.junit.After;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.Test;
 
 import docking.DockingDialog;
@@ -37,7 +37,7 @@ public class PropertyEditorTest extends AbstractGhidraHeadedIntegrationTest {
 
 	private DockingDialog dialog;
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (dialog != null) {
 			dialog.setVisible(false);

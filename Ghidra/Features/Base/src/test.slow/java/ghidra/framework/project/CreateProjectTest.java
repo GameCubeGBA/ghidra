@@ -23,6 +23,8 @@ import ghidra.framework.model.*;
 import ghidra.project.test.TestProjectManager;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.ProjectTestUtils;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Test class for creating a project.
@@ -31,14 +33,14 @@ public class CreateProjectTest extends AbstractGhidraHeadedIntegrationTest {
 
 	private String testDir;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		testDir = getTestDirectoryPath();
 		ProjectTestUtils.deleteProject(testDir, PROJECT_NAME);
 
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		ProjectTestUtils.deleteProject(testDir, PROJECT_NAME);
 	}

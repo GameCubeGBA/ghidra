@@ -19,8 +19,7 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.plugin.core.analysis.AutoAnalysisManager;
 import ghidra.app.services.DataTypeManagerService;
@@ -30,6 +29,7 @@ import ghidra.program.database.ProgramDB;
 import ghidra.program.model.data.DataTypeManager;
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.BeforeEach;
 import utilities.util.FileUtilities;
 
 public class ArchiveRemappedHeadlessTest extends AbstractGhidraHeadlessIntegrationTest {
@@ -42,7 +42,7 @@ public class ArchiveRemappedHeadlessTest extends AbstractGhidraHeadlessIntegrati
 	private File vs12ArchiveFile;
 	private File vs9ArchiveFile;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		// Create windows_VS9 archive copy before DataTypeManagerHandler initializes 

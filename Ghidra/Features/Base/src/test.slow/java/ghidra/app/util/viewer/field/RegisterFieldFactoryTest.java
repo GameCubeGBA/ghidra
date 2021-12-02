@@ -33,6 +33,8 @@ import ghidra.program.model.lang.RegisterValue;
 import ghidra.program.model.listing.*;
 import ghidra.program.util.RegisterFieldLocation;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class RegisterFieldFactoryTest extends AbstractGhidraHeadedIntegrationTest {
 	private TestEnv env;
@@ -44,7 +46,7 @@ public class RegisterFieldFactoryTest extends AbstractGhidraHeadedIntegrationTes
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		program = buildProgram();
@@ -65,7 +67,7 @@ public class RegisterFieldFactoryTest extends AbstractGhidraHeadedIntegrationTes
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}

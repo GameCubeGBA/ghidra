@@ -24,7 +24,7 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.border.Border;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import docking.DialogComponentProvider;

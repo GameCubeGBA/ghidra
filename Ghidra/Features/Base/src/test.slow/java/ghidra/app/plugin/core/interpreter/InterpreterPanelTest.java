@@ -34,6 +34,8 @@ import ghidra.app.plugin.core.console.CodeCompletion;
 import ghidra.framework.options.ToolOptions;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.DummyTool;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import resources.Icons;
 
 /**
@@ -49,7 +51,7 @@ public class InterpreterPanelTest extends AbstractGhidraHeadedIntegrationTest {
 	private Document inputDoc;
 	private BufferedReader reader;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		ip = createIP();
@@ -62,7 +64,7 @@ public class InterpreterPanelTest extends AbstractGhidraHeadedIntegrationTest {
 		runSwing(() -> frame.setVisible(true));
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		runSwing(() -> {
 			frame.setVisible(false);

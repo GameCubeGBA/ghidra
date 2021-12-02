@@ -17,7 +17,7 @@ package ghidra.program.model.data;
 
 import static org.junit.Assert.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGTest;
 import ghidra.docking.settings.*;
@@ -38,7 +38,7 @@ public class BitFieldDataTypeTest extends AbstractGTest {
 			new BitFieldDataType(UnsignedIntegerDataType.dataType, 1).getBaseTypeSize());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGetName() throws Exception {
 		assertEquals("char:1", new BitFieldDataType(CharDataType.dataType, 1).getName());
 		assertEquals("uchar:2", new BitFieldDataType(UnsignedCharDataType.dataType, 2).getName());
@@ -122,7 +122,7 @@ public class BitFieldDataTypeTest extends AbstractGTest {
 //			new BitFieldDataType(IntegerDataType.dataType, 6, null).deriveBitField(5, 4, 1, 4).getBitOffset());
 //	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGetValueWithSignedBaseType() throws Exception {
 		assertEquals(-1, getValue(bitField(1, 0), 0x55));
 		assertEquals(0, getValue(bitField(1, 1), 0x55));
@@ -131,7 +131,7 @@ public class BitFieldDataTypeTest extends AbstractGTest {
 		assertEquals(5, getValue(bitField(4, 0), 0x55));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGetValueWithUnsignedBaseType() throws Exception {
 		assertEquals(1, getValue(unsignedBitField(1, 0), 0x55));
 		assertEquals(0, getValue(unsignedBitField(1, 1), 0x55));
@@ -167,7 +167,7 @@ public class BitFieldDataTypeTest extends AbstractGTest {
 		assertEquals("5", getDecimalRepresentation(unsignedBitField(4, 0), 0x55));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEnumRepresentation() throws Exception {
 
 		EnumDataType enumDt = new EnumDataType("MyEnum", 1);

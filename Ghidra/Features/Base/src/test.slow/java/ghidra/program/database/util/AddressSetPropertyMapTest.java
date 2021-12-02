@@ -33,6 +33,9 @@ import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AddressSetPropertyMapTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -53,7 +56,7 @@ public class AddressSetPropertyMapTest extends AbstractGhidraHeadedIntegrationTe
 		return builder.getProgram();
 	}
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
 		env = new TestEnv();
 		program = buildProgram("notepad");
@@ -61,7 +64,7 @@ public class AddressSetPropertyMapTest extends AbstractGhidraHeadedIntegrationTe
 		transactionID = program.startTransaction("test");
 	}
 
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
 		if (transactionID >= 0) {
 			program.endTransaction(transactionID, true);
@@ -69,19 +72,19 @@ public class AddressSetPropertyMapTest extends AbstractGhidraHeadedIntegrationTe
 		env.dispose();
 	}
 
-@Test
+@org.junit.jupiter.api.Test
     public void testGetNonExistentMap() throws Exception {
 		AddressSetPropertyMap pm = program.getAddressSetPropertyMap("MyMap");
 		assertNull(pm);
 	}
 
-@Test
+@org.junit.jupiter.api.Test
     public void testCreateAddressSetMap() throws Exception {
 		AddressSetPropertyMap pm = program.createAddressSetPropertyMap("MyMap");
 		assertNotNull(pm);
 	}
 
-@Test
+@org.junit.jupiter.api.Test
     public void testDuplicateName() throws Exception {
 		AddressSetPropertyMap pm = program.createAddressSetPropertyMap("MyMap");
 		pm.add(getAddr(0x100), getAddr(0x200));
@@ -107,7 +110,7 @@ public class AddressSetPropertyMapTest extends AbstractGhidraHeadedIntegrationTe
 		assertTrue(set.isEmpty());
 	}
 
-@Test
+@org.junit.jupiter.api.Test
     public void testAddSet() throws Exception {
 		AddressSet set = new AddressSet();
 		set.addRange(getAddr(0x100), getAddr(0x200));
@@ -122,7 +125,7 @@ public class AddressSetPropertyMapTest extends AbstractGhidraHeadedIntegrationTe
 		assertEquals(set, pset);
 	}
 
-@Test
+@org.junit.jupiter.api.Test
     public void testRemoveRange() throws Exception {
 		AddressSet set = new AddressSet();
 		set.addRange(getAddr(0x100), getAddr(0x200));
@@ -140,7 +143,7 @@ public class AddressSetPropertyMapTest extends AbstractGhidraHeadedIntegrationTe
 		assertEquals(s, pset);
 	}
 
-@Test
+@org.junit.jupiter.api.Test
     public void testRemoveSet() throws Exception {
 		AddressSet set = new AddressSet();
 		set.addRange(getAddr(0), getAddr(0x200));
@@ -160,7 +163,7 @@ public class AddressSetPropertyMapTest extends AbstractGhidraHeadedIntegrationTe
 
 	}
 
-@Test
+@org.junit.jupiter.api.Test
     public void testContainsAddress() throws Exception {
 		AddressSet set = new AddressSet();
 		set.addRange(getAddr(0), getAddr(0x200));
@@ -175,7 +178,7 @@ public class AddressSetPropertyMapTest extends AbstractGhidraHeadedIntegrationTe
 
 	}
 
-@Test
+@org.junit.jupiter.api.Test
     public void testClear() throws Exception {
 		AddressSet set = new AddressSet();
 		set.addRange(getAddr(0), getAddr(0x200));
@@ -188,7 +191,7 @@ public class AddressSetPropertyMapTest extends AbstractGhidraHeadedIntegrationTe
 		assertTrue(pm.getAddressSet().isEmpty());
 	}
 
-@Test
+@org.junit.jupiter.api.Test
     public void testAddressRangeIterator() throws Exception {
 		AddressSet set = new AddressSet();
 		set.addRange(getAddr(0), getAddr(0x200));
@@ -223,7 +226,7 @@ public class AddressSetPropertyMapTest extends AbstractGhidraHeadedIntegrationTe
 		assertEquals(4, count);
 	}
 
-@Test
+@org.junit.jupiter.api.Test
     public void testAddressIterator() throws Exception {
 		AddressSet set = new AddressSet();
 		set.addRange(getAddr(0), getAddr(0x10));
@@ -241,7 +244,7 @@ public class AddressSetPropertyMapTest extends AbstractGhidraHeadedIntegrationTe
 		assertNull(iter.next());
 	}
 
-@Test
+@org.junit.jupiter.api.Test
     public void testRemoveAddressSetMap() throws Exception {
 		AddressSet set = new AddressSet();
 		set.addRange(getAddr(0), getAddr(0x10));
@@ -263,7 +266,7 @@ public class AddressSetPropertyMapTest extends AbstractGhidraHeadedIntegrationTe
 
 	}
 
-@Test
+@org.junit.jupiter.api.Test
     public void testSaveProgram() throws Exception {
 		Project project = env.getProject();
 		DomainFolder rootFolder = project.getProjectData().getRootFolder();
@@ -309,7 +312,7 @@ public class AddressSetPropertyMapTest extends AbstractGhidraHeadedIntegrationTe
 		p.release(this);
 	}
 
-@Test
+@org.junit.jupiter.api.Test
     public void testEvents() throws Exception {
 		MyDomainObjectListener dol = new MyDomainObjectListener();
 		program.addListener(dol);
@@ -358,7 +361,7 @@ public class AddressSetPropertyMapTest extends AbstractGhidraHeadedIntegrationTe
 		assertEquals("MyMap", mapName);
 	}
 
-@Test
+@org.junit.jupiter.api.Test
     public void testMoveRange() throws Exception {
 		Memory memory = program.getMemory();
 		MemoryBlock block = memory.createInitializedBlock(".test", getAddr(0), 0x23, (byte) 0xa,
@@ -393,7 +396,7 @@ public class AddressSetPropertyMapTest extends AbstractGhidraHeadedIntegrationTe
 		assertEquals(s, pmSet);
 	}
 
-@Test
+@org.junit.jupiter.api.Test
     public void testDeleteBlockRange() throws Exception {
 		Memory memory = program.getMemory();
 		MemoryBlock block = memory.createInitializedBlock(".test", getAddr(5), 0x20, (byte) 0xa,

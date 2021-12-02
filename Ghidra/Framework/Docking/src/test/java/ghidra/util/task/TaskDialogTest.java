@@ -19,12 +19,12 @@ import static org.junit.Assert.*;
 
 import java.util.concurrent.CountDownLatch;
 
-import org.junit.After;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.Test;
 
 public class TaskDialogTest extends AbstractTaskTest {
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		waitForSwing();
 	}

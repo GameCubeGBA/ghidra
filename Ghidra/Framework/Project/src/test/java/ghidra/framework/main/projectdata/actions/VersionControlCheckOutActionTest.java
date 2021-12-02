@@ -22,7 +22,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.commons.collections4.IterableUtils;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import docking.DialogComponentProvider;
@@ -45,7 +45,7 @@ public class VersionControlCheckOutActionTest extends AbstractDockingTest {
 	private Set<DomainFile> failToCheckout = new HashSet<>();
 	private Set<DomainFile> checkedOut = new HashSet<>();
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		// signal to use the error display

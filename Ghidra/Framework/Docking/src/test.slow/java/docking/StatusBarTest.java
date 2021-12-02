@@ -26,6 +26,8 @@ import docking.test.AbstractDockingTest;
 import docking.widgets.label.GDLabel;
 import docking.widgets.label.GLabel;
 import ghidra.util.bean.GGlassPane;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Tests the {@link StatusBar} class.
@@ -38,7 +40,7 @@ public class StatusBarTest extends AbstractDockingTest {
 	private StatusBar statusBar;
 	private JFrame testFrame;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		testFrame = new JFrame("StatusBar Test");
@@ -49,7 +51,7 @@ public class StatusBarTest extends AbstractDockingTest {
 		testFrame.setVisible(true);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		testFrame.dispose();

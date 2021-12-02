@@ -17,7 +17,6 @@ package ghidra.app.util.demangler.gnu;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import ghidra.app.cmd.label.DemanglerCmd;
@@ -27,12 +26,13 @@ import ghidra.program.database.ProgramDB;
 import ghidra.program.model.address.Address;
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 import ghidra.test.ToyProgramBuilder;
+import org.junit.jupiter.api.BeforeEach;
 
 public class GnuDemanglerIntegrationTest extends AbstractGhidraHeadlessIntegrationTest {
 
 	private ProgramDB program;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		ToyProgramBuilder builder = new ToyProgramBuilder("test", true);
 		builder.createMemory(".text", "0x01001000", 0x100);

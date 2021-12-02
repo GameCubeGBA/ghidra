@@ -21,17 +21,19 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class TaskLauncherTest extends AbstractTaskTest {
 
 	private Thread swingThread;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		runSwing(() -> swingThread = Thread.currentThread());
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		// release any blockers
 		swingThread.interrupt();

@@ -20,7 +20,7 @@ import static org.junit.Assert.assertNotNull;
 import java.io.IOException;
 
 import org.jdom.JDOMException;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -38,7 +38,7 @@ public class DWARFRegisterMappingsTest extends AbstractGhidraHeadlessIntegration
 
 	private Language x86Lang;
 
-	@Before
+	@BeforeEach
 	public void setup() throws Exception {
 		x86Lang = DefaultLanguageService.getLanguageService().getLanguage(
 			new LanguageID("x86:LE:32:default"));

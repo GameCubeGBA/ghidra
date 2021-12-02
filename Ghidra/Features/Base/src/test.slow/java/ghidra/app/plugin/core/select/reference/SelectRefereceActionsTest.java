@@ -34,6 +34,8 @@ import ghidra.program.model.address.*;
 import ghidra.program.model.listing.*;
 import ghidra.program.util.*;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class SelectRefereceActionsTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -44,7 +46,7 @@ public class SelectRefereceActionsTest extends AbstractGhidraHeadedIntegrationTe
 	private SelectForwardRefsAction forwardAction;
 	private SelectBackRefsAction backwardAction;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		ToyProgramBuilder builder = new ToyProgramBuilder("test", false);
@@ -73,7 +75,7 @@ public class SelectRefereceActionsTest extends AbstractGhidraHeadedIntegrationTe
 
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

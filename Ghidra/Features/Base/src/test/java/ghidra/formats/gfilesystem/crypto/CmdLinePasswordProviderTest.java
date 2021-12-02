@@ -26,6 +26,8 @@ import org.junit.*;
 
 import generic.test.AbstractGenericTest;
 import ghidra.formats.gfilesystem.FSRL;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import util.CollectionUtils;
 import utilities.util.FileUtilities;
 
@@ -42,7 +44,7 @@ public class CmdLinePasswordProviderTest extends AbstractGenericTest {
 	private String origCmdLinePasswordValue;
 	private PopupGUIPasswordProvider popupGUIPasswordProvider;
 
-	@Before
+	@BeforeEach
 
 	public void setUp() {
 		popupGUIPasswordProvider =
@@ -53,7 +55,7 @@ public class CmdLinePasswordProviderTest extends AbstractGenericTest {
 				.getProperty(CmdLinePasswordProvider.CMDLINE_PASSWORD_PROVIDER_PROPERTY_NAME, null);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		if (popupGUIPasswordProvider != null) {
 			cryptoProviders.registerCryptoProvider(popupGUIPasswordProvider);

@@ -19,12 +19,10 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.concurrent.CompletableFuture;
 
-import org.junit.Test;
-
-import ghidra.async.AsyncRace;
+import org.junit.jupiter.api.Test;
 
 public class AsyncRaceTest {
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAlternateCompleted() {
 		AsyncRace<Integer> race = new AsyncRace<>();
 		race.include(CompletableFuture.completedFuture(1));
@@ -42,7 +40,7 @@ public class AsyncRaceTest {
 		assertEquals(2, race.next().getNow(null).intValue());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testTwoDelayed() {
 		AsyncRace<Integer> race = new AsyncRace<>();
 		CompletableFuture<Integer> c1 = new CompletableFuture<>();
@@ -55,7 +53,7 @@ public class AsyncRaceTest {
 		assertEquals(2, race.next().getNow(null).intValue());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testTwoDelayedReversed() {
 		AsyncRace<Integer> race = new AsyncRace<>();
 		CompletableFuture<Integer> c1 = new CompletableFuture<>();

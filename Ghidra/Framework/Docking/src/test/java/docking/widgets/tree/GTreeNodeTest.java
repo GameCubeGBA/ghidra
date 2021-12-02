@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 
 import javax.swing.tree.TreePath;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import docking.test.AbstractDockingTest;
@@ -52,7 +52,7 @@ public class GTreeNodeTest {
 	private GTreeNode node0_1;
 	private GTreeNode node1_0;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		root = new TestNode("root");
 		root.setParent(new GTreeRootParentNode(null));

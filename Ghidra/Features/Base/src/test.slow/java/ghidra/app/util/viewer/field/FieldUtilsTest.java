@@ -17,7 +17,6 @@ package ghidra.app.util.viewer.field;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import docking.widgets.fieldpanel.support.FieldUtils;
@@ -25,6 +24,7 @@ import ghidra.program.database.ProgramBuilder;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.model.listing.Program;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
+import org.junit.jupiter.api.BeforeEach;
 
 public class FieldUtilsTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -40,7 +40,7 @@ public class FieldUtilsTest extends AbstractGhidraHeadedIntegrationTest {
 		return builder.getProgram();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = buildProgram();
 	}

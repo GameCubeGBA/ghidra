@@ -27,6 +27,8 @@ import db.util.ErrorHandler;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.datastruct.IndexRange;
 import ghidra.util.datastruct.IndexRangeIterator;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 @SuppressWarnings("deprecation") // the SharedRangeMapDB is deprecated, but we still need to test it
 public class SharedRangeMapDBTest extends AbstractGhidraHeadedIntegrationTest
@@ -46,7 +48,7 @@ public class SharedRangeMapDBTest extends AbstractGhidraHeadedIntegrationTest
 	/*
 	 * @see TestCase#setUp()
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		dbh = new DBHandle();
@@ -56,7 +58,7 @@ public class SharedRangeMapDBTest extends AbstractGhidraHeadedIntegrationTest
 	/*
 	 * @see TestCase#tearDown()
 	 */
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		dbh.endTransaction(transactionID, false);
 		dbh.close();

@@ -43,6 +43,8 @@ import ghidra.trace.model.thread.TraceThread;
 import ghidra.trace.util.TraceRegisterUtils;
 import ghidra.util.Msg;
 import ghidra.util.database.UndoableTransaction;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DebuggerWatchesProviderTest extends AbstractGhidraHeadedDebuggerGUITest
 		implements AsyncTestUtils {
@@ -65,7 +67,7 @@ public class DebuggerWatchesProviderTest extends AbstractGhidraHeadedDebuggerGUI
 	protected TestTargetRegisterBankInThread bank;
 	protected TraceRecorder recorder;
 
-	@Before
+	@BeforeEach
 	public void setUpWatchesProviderTest() throws Exception {
 		watchesPlugin = addPlugin(tool, DebuggerWatchesPlugin.class);
 		watchesProvider = waitForComponentProvider(DebuggerWatchesProvider.class);
@@ -79,7 +81,7 @@ public class DebuggerWatchesProviderTest extends AbstractGhidraHeadedDebuggerGUI
 		}
 	}
 
-	@After
+	@AfterEach
 	public void tearDownWatchesProviderTest() throws Exception {
 		for (WatchRow row : watchesProvider.watchTableModel.getModelData()) {
 			Throwable error = row.getError();

@@ -24,12 +24,13 @@ import org.junit.*;
 
 import ghidra.app.util.bin.format.dwarf4.DWARFCompilationUnit;
 import ghidra.app.util.bin.format.dwarf4.next.DWARFRegisterMappings;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DWARFExpressionEvaluatorTest {
 
 	DWARFExpressionEvaluator evaluator;
 
-	@Before
+	@BeforeEach
 	public void setup() {
 		evaluator = new DWARFExpressionEvaluator((byte) 8, true, DWARFCompilationUnit.DWARF_32,
 			DWARFRegisterMappings.DUMMY);

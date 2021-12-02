@@ -26,6 +26,9 @@ import ghidra.program.model.lang.Language;
 import ghidra.program.model.lang.LanguageService;
 import ghidra.program.model.mem.Memory;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AddressIndexPrimaryKeyIteratorTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -44,7 +47,7 @@ public class AddressIndexPrimaryKeyIteratorTest extends AbstractGhidraHeadedInte
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		TestEnv env = new TestEnv();
 		LanguageService ls = getLanguageService();
@@ -95,7 +98,7 @@ public class AddressIndexPrimaryKeyIteratorTest extends AbstractGhidraHeadedInte
 		assertEquals(0x40, myTable.getRecordCount());
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		program.endTransaction(transactionID, true);
 		program.release(this);
@@ -116,7 +119,7 @@ public class AddressIndexPrimaryKeyIteratorTest extends AbstractGhidraHeadedInte
 		assertEquals(0x40, key);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIterator2() throws Exception {
 		Address minAddr = addr(0x5002);
 		Address maxAddr = addr(0x8004);
@@ -136,7 +139,7 @@ public class AddressIndexPrimaryKeyIteratorTest extends AbstractGhidraHeadedInte
 		assertEquals(17, key);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIterator3() throws Exception {
 		Address a = addr(0x5002);
 		AddressIndexPrimaryKeyIterator iter =
@@ -155,7 +158,7 @@ public class AddressIndexPrimaryKeyIteratorTest extends AbstractGhidraHeadedInte
 		assertEquals(-1, key);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIterator4() throws Exception {
 		AddressSet set = new AddressSet(addr(0x5002), addr(0x8004));
 		set.addRange(addr(0x3002), addr(0x3004));

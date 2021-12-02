@@ -35,6 +35,8 @@ import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.HelpLocation;
 import ghidra.util.Msg;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * This test differs from {@link OptionsTest} in that this test is an integration test, pulling
@@ -48,7 +50,7 @@ public class ToolPluginOptionsTest extends AbstractGhidraHeadedIntegrationTest {
 	private TestEnv env;
 	private PluginTool tool;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -65,7 +67,7 @@ public class ToolPluginOptionsTest extends AbstractGhidraHeadedIntegrationTest {
 		showTool(tool);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.closeTool(tool);
 		env.dispose();

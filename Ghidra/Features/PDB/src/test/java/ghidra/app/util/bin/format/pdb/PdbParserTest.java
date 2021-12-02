@@ -20,7 +20,7 @@ import static org.junit.Assert.assertNotNull;
 
 import java.io.*;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import ghidra.app.plugin.core.analysis.AutoAnalysisManager;
@@ -52,7 +52,7 @@ public class PdbParserTest extends AbstractGhidraHeadlessIntegrationTest {
 	TestFunction[] programFunctions =
 		new TestFunction[] { new TestFunction("function1", "0x110", "0x35") };
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		// Get temp directory in which to store files

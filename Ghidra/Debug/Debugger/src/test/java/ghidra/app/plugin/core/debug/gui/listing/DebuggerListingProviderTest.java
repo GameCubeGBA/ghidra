@@ -66,6 +66,7 @@ import ghidra.util.database.UndoableTransaction;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DebuggerListingProviderTest extends AbstractGhidraHeadedDebuggerGUITest {
 	static LocationTrackingSpec getLocationTrackingSpec(String name) {
@@ -96,7 +97,7 @@ public class DebuggerListingProviderTest extends AbstractGhidraHeadedDebuggerGUI
 	protected DebuggerStaticMappingService mappingService;
 	protected CodeViewerService codeViewer;
 
-	@Before
+	@BeforeEach
 	public void setUpListingProviderTest() throws Exception {
 		listingPlugin = addPlugin(tool, DebuggerListingPlugin.class);
 		listingProvider = waitForComponentProvider(DebuggerListingProvider.class);

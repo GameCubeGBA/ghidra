@@ -18,7 +18,7 @@ package ghidra.app.merge.datatypes;
 import static org.junit.Assert.*;
 
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.program.database.ProgramDB;
 import ghidra.program.database.ProgramModifierListener;
@@ -32,7 +32,7 @@ import ghidra.util.task.TaskMonitorAdapter;
  */
 public class CategoryMerge1Test extends AbstractDataTypeMergeTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testCategoryRenamedNoConflicts() throws Exception {
 		// Rename category in My program; no change in Results program
 		mtf.initialize("notepad", new ProgramModifierListener() {
@@ -76,7 +76,7 @@ public class CategoryMerge1Test extends AbstractDataTypeMergeTest {
 		assertNull(root.getCategory("MISC"));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testCategoryMovedNoConflicts() throws Exception {
 		// Move category in My program; no change in latest program
 
@@ -130,7 +130,7 @@ public class CategoryMerge1Test extends AbstractDataTypeMergeTest {
 		assertTrue(!dtm.containsCategory(new CategoryPath("/MISC")));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testCategoryRenamedInLatest() throws Exception {
 
 		// A category was renamed in the latest; not changed in my program
@@ -199,7 +199,7 @@ public class CategoryMerge1Test extends AbstractDataTypeMergeTest {
 		assertNull(c.getCategory("Category5"));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testCategoryRenamedToSame() throws Exception {
 
 		// A category was renamed in the latest; not changed in my program
@@ -262,7 +262,7 @@ public class CategoryMerge1Test extends AbstractDataTypeMergeTest {
 		assertNull(root.getCategory("MISC"));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testCategoryAddedInLatest() throws Exception {
 
 		// A category was added to Category5 in the latest; 
@@ -327,7 +327,7 @@ public class CategoryMerge1Test extends AbstractDataTypeMergeTest {
 		assertNotNull(c.getCategory("AnotherCategory"));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testCategoryRenamedInBoth() throws Exception {
 
 		// A category was renamed in the latest and changed in my program
@@ -389,7 +389,7 @@ public class CategoryMerge1Test extends AbstractDataTypeMergeTest {
 		assertNotNull(root.getCategory("Some Other Misc"));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testCategoryRenamedInBoth2() throws Exception {
 
 		// A category was renamed in the latest and changed in my program
@@ -451,7 +451,7 @@ public class CategoryMerge1Test extends AbstractDataTypeMergeTest {
 		assertNull(root.getCategory("Some Other Misc"));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testCategoryRenamedInBoth3() throws Exception {
 
 		// A category was renamed in the latest and changed in my program
@@ -578,7 +578,7 @@ public class CategoryMerge1Test extends AbstractDataTypeMergeTest {
 		assertNull(c.getCategory("MISC"));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testCategoryMovedConflicts2() throws Exception {
 		// Move category in My program; move same category in Latest program
 
@@ -642,7 +642,7 @@ public class CategoryMerge1Test extends AbstractDataTypeMergeTest {
 		assertNotNull(c.getCategory("MISC"));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testCategoryMovedConflicts3() throws Exception {
 		// Move category in My program; move same category in Latest program
 
@@ -706,7 +706,7 @@ public class CategoryMerge1Test extends AbstractDataTypeMergeTest {
 		assertNull(c.getCategory("MISC"));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testCategoryMoved() throws Exception {
 		// Move category in My program; move same category in Latest program
 
@@ -751,7 +751,7 @@ public class CategoryMerge1Test extends AbstractDataTypeMergeTest {
 		assertNull(root.getCategory("MISC"));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testCategoryAddedDeleted() throws Exception {
 		// Add/delete category in My progrma
 
@@ -793,7 +793,7 @@ public class CategoryMerge1Test extends AbstractDataTypeMergeTest {
 		assertNull(dtm.getRootCategory().getCategory("MyCategory"));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testDataTypeAdded() throws Exception {
 		// LATEST: rename /MISC to /Other_MISC
 		// MY: add new data type to /MISC

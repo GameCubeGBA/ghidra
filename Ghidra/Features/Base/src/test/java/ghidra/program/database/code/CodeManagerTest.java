@@ -41,6 +41,8 @@ import ghidra.util.SaveableColor;
 import ghidra.util.exception.NoValueException;
 import ghidra.util.task.TaskMonitor;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Test the code manager portion of listing.
@@ -68,7 +70,7 @@ public class CodeManagerTest extends AbstractGenericTest {
 	/*
 	 * @see TestCase#setUp()
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		builder = new ToyProgramBuilder("Test", true, this);
@@ -83,7 +85,7 @@ public class CodeManagerTest extends AbstractGenericTest {
 
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		program.endTransaction(transactionID, true);
 		program.release(this);

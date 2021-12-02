@@ -40,6 +40,8 @@ import ghidra.test.TestEnv;
 import ghidra.util.Msg;
 import ghidra.util.task.TaskMonitor;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Test the code manager portion of listing.
@@ -66,7 +68,7 @@ public class CodeUnitIteratorTest extends AbstractGhidraHeadedIntegrationTest {
 	/*
 	 * @see TestCase#setUp()
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		monitor = new TaskMonitorAdapter();
 		ProgramBuilder builder = new ProgramBuilder("Test", ProgramBuilder._TOY, this);
@@ -89,7 +91,7 @@ public class CodeUnitIteratorTest extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		program.release(this);
 	}

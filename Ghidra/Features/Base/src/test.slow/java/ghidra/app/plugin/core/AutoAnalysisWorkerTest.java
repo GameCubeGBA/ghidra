@@ -40,6 +40,9 @@ import ghidra.test.*;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AutoAnalysisWorkerTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -49,7 +52,7 @@ public class AutoAnalysisWorkerTest extends AbstractGhidraHeadedIntegrationTest 
 	private Program program;
 	private CodeBrowserPlugin cb;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -65,7 +68,7 @@ public class AutoAnalysisWorkerTest extends AbstractGhidraHeadedIntegrationTest 
 		cb = env.getPlugin(CodeBrowserPlugin.class);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 
 		tool.cancelCurrentTask();
@@ -148,7 +151,7 @@ public class AutoAnalysisWorkerTest extends AbstractGhidraHeadedIntegrationTest 
 	 * with events used by analysis at various priority levels.
 	 * @throws Exception 
 	 */
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDisableResumeAdhocThreadWorkerInvocation() throws Exception {
 		env.showTool();
 		loadProgram("notepad_empty");
@@ -172,7 +175,7 @@ public class AutoAnalysisWorkerTest extends AbstractGhidraHeadedIntegrationTest 
 	 * with events ignored by analysis at various priority levels.
 	 * @throws Exception 
 	 */
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDisableIgnoreResumeAnalysisTaskWorkerInvocation() throws Exception {
 		env.showTool();
 		loadProgram("notepad_empty");
@@ -197,7 +200,7 @@ public class AutoAnalysisWorkerTest extends AbstractGhidraHeadedIntegrationTest 
 	 * with events used by analysis at various priority levels.
 	 * @throws Exception 
 	 */
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDisableResumeAnalysisTaskWorkerInvocation() throws Exception {
 		env.showTool();
 		loadProgram("notepad_empty");
@@ -222,7 +225,7 @@ public class AutoAnalysisWorkerTest extends AbstractGhidraHeadedIntegrationTest 
 	 * with events ignored by analysis at various priority levels.
 	 * @throws Exception 
 	 */
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDisableIgnoreResumeToolTaskWorkerInvocation() throws Exception {
 		env.showTool();
 		loadProgram("notepad_empty");
@@ -248,7 +251,7 @@ public class AutoAnalysisWorkerTest extends AbstractGhidraHeadedIntegrationTest 
 	 * with events used by analysis at various priority levels.
 	 * @throws Exception 
 	 */
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDisableResumeToolTaskWorkerInvocation() throws Exception {
 		env.showTool();
 		loadProgram("notepad_empty");
@@ -273,7 +276,7 @@ public class AutoAnalysisWorkerTest extends AbstractGhidraHeadedIntegrationTest 
 	 * Test attempt to run an AnalysisWorker from swing thread
 	 * @throws Exception 
 	 */
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSwingThreadWorkerInvocation() throws Exception {
 		env.showTool();
 		loadProgram("notepad_empty");
@@ -298,7 +301,7 @@ public class AutoAnalysisWorkerTest extends AbstractGhidraHeadedIntegrationTest 
 		runSwing(r);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testWorkerCancelled() throws Exception {
 		env.showTool();
 		loadProgram("notepad_empty");
@@ -335,7 +338,7 @@ public class AutoAnalysisWorkerTest extends AbstractGhidraHeadedIntegrationTest 
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testBlockerCancelled() throws Exception {
 		env.showTool();
 		loadProgram("notepad_empty");

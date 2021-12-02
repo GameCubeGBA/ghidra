@@ -34,6 +34,8 @@ import ghidra.framework.plugintool.PluginTool;
 import ghidra.program.model.data.*;
 import ghidra.program.model.listing.Program;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DataTypeSelectionTextFieldTest extends AbstractDropDownTextFieldTest<DataType> {
 
@@ -42,7 +44,7 @@ public class DataTypeSelectionTextFieldTest extends AbstractDropDownTextFieldTes
 	private Program program;
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		env = new TestEnv();
@@ -90,7 +92,7 @@ public class DataTypeSelectionTextFieldTest extends AbstractDropDownTextFieldTes
 	}
 
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		// flush any pending events, so they don't happen while we are disposing

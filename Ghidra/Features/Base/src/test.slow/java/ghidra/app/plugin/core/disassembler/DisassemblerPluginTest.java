@@ -37,6 +37,8 @@ import ghidra.program.model.address.*;
 import ghidra.program.model.data.ByteDataType;
 import ghidra.program.model.listing.*;
 import ghidra.test.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DisassemblerPluginTest extends AbstractGhidraHeadedIntegrationTest {
 	private TestEnv env;
@@ -51,7 +53,7 @@ public class DisassemblerPluginTest extends AbstractGhidraHeadedIntegrationTest 
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.launchDefaultTool();
@@ -72,7 +74,7 @@ public class DisassemblerPluginTest extends AbstractGhidraHeadedIntegrationTest 
 		pm.closeProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}

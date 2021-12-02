@@ -17,9 +17,8 @@ package generic.stl;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Test;
-
 import generic.test.AbstractGenericTest;
+import org.junit.jupiter.api.Test;
 
 
 public class AlgorithmsTest extends AbstractGenericTest {

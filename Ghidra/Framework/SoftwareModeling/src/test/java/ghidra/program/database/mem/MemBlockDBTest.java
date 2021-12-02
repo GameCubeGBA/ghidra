@@ -36,6 +36,8 @@ import ghidra.program.model.mem.*;
 import ghidra.program.util.DefaultLanguageService;
 import ghidra.util.Lock;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class MemBlockDBTest extends AbstractGenericTest {
 	private static final long MAX_SUB_BLOCK_SIZE = 16;
@@ -46,7 +48,7 @@ public class MemBlockDBTest extends AbstractGenericTest {
 	private ProgramDB program;
 	private int ptxID;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		Language language = getLanguage("Toy:BE:64:default");
 		CompilerSpec compilerSpec = language.getDefaultCompilerSpec();
@@ -72,7 +74,7 @@ public class MemBlockDBTest extends AbstractGenericTest {
 
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		program.endTransaction(ptxID, true);
 		handle.endTransaction(txID, true);

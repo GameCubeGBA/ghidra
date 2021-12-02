@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 
 import java.util.Arrays;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import docking.options.editor.BooleanEditor;
@@ -51,7 +51,7 @@ public class GnuDemanglerAnalyzerTest extends AbstractGhidraHeadlessIntegrationT
 		}
 	};
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		ProgramBuilder builder = new ToyProgramBuilder("test", true);

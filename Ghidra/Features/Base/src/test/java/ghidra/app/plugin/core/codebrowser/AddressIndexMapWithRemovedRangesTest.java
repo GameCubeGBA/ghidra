@@ -26,12 +26,12 @@ import static org.junit.Assert.assertTrue;
 
 import java.math.BigInteger;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.app.util.viewer.util.AddressIndexMap;
 import ghidra.program.model.address.*;
+import org.junit.jupiter.api.BeforeEach;
 
 public class AddressIndexMapWithRemovedRangesTest extends AbstractGenericTest {
 	private AddressSpace space;
@@ -40,7 +40,7 @@ public class AddressIndexMapWithRemovedRangesTest extends AbstractGenericTest {
 	/*
 	 * @see TestCase#setUp()
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		space = new GenericAddressSpace("Test", 32, AddressSpace.TYPE_RAM, 0);
 		AddressSet set = new AddressSet();

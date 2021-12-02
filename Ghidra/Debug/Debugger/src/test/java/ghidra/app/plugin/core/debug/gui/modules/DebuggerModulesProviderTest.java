@@ -63,6 +63,7 @@ import ghidra.trace.model.symbol.TraceSymbol;
 import ghidra.util.database.UndoableTransaction;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.DuplicateNameException;
+import org.junit.jupiter.api.BeforeEach;
 
 @Category(NightlyCategory.class) // this may actually be an @PortSensitive test
 public class DebuggerModulesProviderTest extends AbstractGhidraHeadedDebuggerGUITest {
@@ -77,7 +78,7 @@ public class DebuggerModulesProviderTest extends AbstractGhidraHeadedDebuggerGUI
 	protected TraceSection secLibText;
 	protected TraceSection secLibData;
 
-	@Before
+	@BeforeEach
 	public void setUpModulesProviderTest() throws Exception {
 		modulesPlugin = addPlugin(tool, DebuggerModulesPlugin.class);
 		modulesProvider = waitForComponentProvider(DebuggerModulesProvider.class);

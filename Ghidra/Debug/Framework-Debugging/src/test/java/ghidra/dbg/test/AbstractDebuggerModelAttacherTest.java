@@ -24,7 +24,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.dbg.AnnotatedDebuggerAttributeListener;
 import ghidra.dbg.DebugModelConventions;
@@ -78,7 +78,7 @@ public abstract class AbstractDebuggerModelAttacherTest extends AbstractDebugger
 		assertNotNull(getAttachable(attachables, specimen, dummy, this));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testListAttachable() throws Throwable {
 		DebuggerTestSpecimen specimen = getAttachSpecimen();
 		assumeTrue(m.hasAttachableContainer());
@@ -96,7 +96,7 @@ public abstract class AbstractDebuggerModelAttacherTest extends AbstractDebugger
 		waitOn(attacher.attach(dummy.pid));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAttachByPid() throws Throwable {
 		DebuggerTestSpecimen specimen = getAttachSpecimen();
 		m.build();
@@ -139,7 +139,7 @@ public abstract class AbstractDebuggerModelAttacherTest extends AbstractDebugger
 		waitOn(attacher.attach(target));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAttachByObj() throws Throwable {
 		DebuggerTestSpecimen specimen = getAttachSpecimen();
 		assumeTrue(m.hasAttachableContainer());
@@ -173,7 +173,7 @@ public abstract class AbstractDebuggerModelAttacherTest extends AbstractDebugger
 		waitOn(attacher.attach(bogusAttachable));
 	}
 
-	@Test(expected = DebuggerIllegalArgumentException.class)
+	@org.junit.jupiter.api.Test(expected = DebuggerIllegalArgumentException.class)
 	public void testAttachByObjBogusThrowsException() throws Throwable {
 		m.build();
 
@@ -190,7 +190,7 @@ public abstract class AbstractDebuggerModelAttacherTest extends AbstractDebugger
 		assertTrue(dummy.process.isAlive());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAttachByPidThenDetach() throws Throwable {
 		DebuggerTestSpecimen specimen = getAttachSpecimen();
 		assumeTrue(m.hasDetachableProcesses());
@@ -210,7 +210,7 @@ public abstract class AbstractDebuggerModelAttacherTest extends AbstractDebugger
 		retryVoid(() -> assertFalse(dummy.process.isAlive()), List.of(AssertionError.class));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAttachByPidThenKill() throws Throwable {
 		DebuggerTestSpecimen specimen = getAttachSpecimen();
 		assumeTrue(m.hasKillableProcesses());
@@ -229,7 +229,7 @@ public abstract class AbstractDebuggerModelAttacherTest extends AbstractDebugger
 		assertTrue(dummy.process.isAlive());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAttachByPidThenResumeInterrupt() throws Throwable {
 		DebuggerTestSpecimen specimen = getAttachSpecimen();
 		assumeTrue(m.hasResumableProcesses());
@@ -247,7 +247,7 @@ public abstract class AbstractDebuggerModelAttacherTest extends AbstractDebugger
 		retryForProcessRunning(specimen, this);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAttachShowsInProcessContainer() throws Throwable {
 		DebuggerTestSpecimen specimen = getAttachSpecimen();
 		assumeTrue(m.hasProcessContainer());

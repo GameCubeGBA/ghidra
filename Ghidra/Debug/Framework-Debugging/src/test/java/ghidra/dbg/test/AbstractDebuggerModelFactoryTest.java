@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.dbg.DebugModelConventions.AsyncAccess;
 import ghidra.dbg.error.DebuggerModelTerminatingException;
@@ -33,13 +33,13 @@ public abstract class AbstractDebuggerModelFactoryTest extends AbstractDebuggerM
 
 	protected abstract Map<String, Object> getFailingFactoryOptions();
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testBuildAndClose() throws Throwable {
 		m.build();
 		assertNotNull(m.getModel());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testBuildFailingOptionsErr() throws Throwable {
 		for (Map.Entry<String, Object> bad : getFailingFactoryOptions().entrySet()) {
 			Map<String, Object> options = new HashMap<>(m.getFactoryOptions());
@@ -63,7 +63,7 @@ public abstract class AbstractDebuggerModelFactoryTest extends AbstractDebuggerM
 		waitOn(m.getModel().ping("Hello, Ghidra Async Debugging!"));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testWaitRootAccess() throws Throwable {
 		m.build();
 
@@ -72,7 +72,7 @@ public abstract class AbstractDebuggerModelFactoryTest extends AbstractDebuggerM
 		waitAcc(access);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testHasNonEnumerableRootSchema() throws Throwable {
 		m.build();
 
@@ -81,7 +81,7 @@ public abstract class AbstractDebuggerModelFactoryTest extends AbstractDebuggerM
 		assertFalse(rootSchema instanceof EnumerableTargetObjectSchema);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testNonExistentPathGivesNull() throws Throwable {
 		m.build();
 

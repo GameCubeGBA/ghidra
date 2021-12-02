@@ -22,7 +22,7 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import ghidra.app.plugin.processors.sleigh.SleighLanguage;
@@ -41,7 +41,7 @@ public class TraceSleighUtilsTest extends AbstractGhidraHeadlessIntegrationTest 
 
 	SleighLanguage language;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws LanguageNotFoundException {
 		language = (SleighLanguage) DefaultLanguageService.getLanguageService()
 				.getLanguage(new LanguageID(TOY_BE_64_HARVARD));

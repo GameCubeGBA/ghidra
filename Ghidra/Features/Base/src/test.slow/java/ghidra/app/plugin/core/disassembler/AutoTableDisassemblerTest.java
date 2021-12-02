@@ -50,6 +50,9 @@ import ghidra.util.TrackedTaskListener;
 import ghidra.util.table.GhidraTable;
 import ghidra.util.table.field.AddressBasedLocation;
 import ghidra.util.task.Task;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import utility.function.Callback;
 
 public class AutoTableDisassemblerTest extends AbstractGhidraHeadedIntegrationTest {
@@ -75,7 +78,7 @@ public class AutoTableDisassemblerTest extends AbstractGhidraHeadedIntegrationTe
 	private JCheckBox autoLabel;
 	private JCheckBox searchSelection;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -99,12 +102,12 @@ public class AutoTableDisassemblerTest extends AbstractGhidraHeadedIntegrationTe
 			(JCheckBox) findAbstractButtonByText(dialog.getComponent(), "Search Selection");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testBasicState() throws Exception {
 
 		// do the search
@@ -208,7 +211,7 @@ public class AutoTableDisassemblerTest extends AbstractGhidraHeadedIntegrationTe
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testMultiRowSelection() throws Exception {
 
 		// do the search
@@ -281,7 +284,7 @@ public class AutoTableDisassemblerTest extends AbstractGhidraHeadedIntegrationTe
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testOffset() throws Exception {
 
 		// do the search
@@ -336,7 +339,7 @@ public class AutoTableDisassemblerTest extends AbstractGhidraHeadedIntegrationTe
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAlignment() {
 
 		setText(alignment, "2");
@@ -358,7 +361,7 @@ public class AutoTableDisassemblerTest extends AbstractGhidraHeadedIntegrationTe
 		waitForBusyTool(tool);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAutoLabelOff() throws Exception {
 
 		// do the search
@@ -394,7 +397,7 @@ public class AutoTableDisassemblerTest extends AbstractGhidraHeadedIntegrationTe
 		assertEquals("DAT_00401023", st.getSymbols(d.getAddress(0))[0].getName());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCodeSelection() {
 
 		// do the search
@@ -460,7 +463,7 @@ public class AutoTableDisassemblerTest extends AbstractGhidraHeadedIntegrationTe
 	 *
 	 * @since Tracker Id 488, 489, 490
 	 */
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testOffsetFieldsEnabled() {
 
 		Component[] offsetButtons = new Component[] { disassemble, makeTable };
@@ -578,7 +581,7 @@ public class AutoTableDisassemblerTest extends AbstractGhidraHeadedIntegrationTe
 			location.getAddress());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testMakeSelection() throws Exception {
 
 		pressButton(search);

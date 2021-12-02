@@ -26,8 +26,8 @@ import javax.swing.*;
 import javax.swing.event.CellEditorListener;
 import javax.swing.event.ChangeEvent;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 import docking.test.AbstractDockingTest;
 import ghidra.util.Msg;
@@ -38,7 +38,7 @@ public abstract class AbstractDropDownTextFieldTest<T> extends AbstractDockingTe
 	protected JFrame parentFrame;
 	protected SpyTestCellEditorListener listener = new SpyTestCellEditorListener();
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		initializeGui();
@@ -79,7 +79,7 @@ public abstract class AbstractDropDownTextFieldTest<T> extends AbstractDockingTe
 		}
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		// flush any pending events, so they don't happen while we are disposing

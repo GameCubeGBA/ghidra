@@ -48,6 +48,8 @@ import ghidra.util.Msg;
 import ghidra.util.SystemUtilities;
 import ghidra.util.database.UndoableTransaction;
 import ghidra.util.datastruct.ListenerMap;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DebuggerLogicalBreakpointServiceTest extends AbstractGhidraHeadedDebuggerGUITest
 		implements DebuggerModelTestUtils {
@@ -144,7 +146,7 @@ public class DebuggerLogicalBreakpointServiceTest extends AbstractGhidraHeadedDe
 	protected ForTimingMappingChangeListener mappingChangeListener =
 		new ForTimingMappingChangeListener();
 
-	@Before
+	@BeforeEach
 	public void setUpBreakpointServiceTest() throws Throwable {
 		ListenerMap.clearErr();
 
@@ -173,7 +175,7 @@ public class DebuggerLogicalBreakpointServiceTest extends AbstractGhidraHeadedDe
 			new TestDebuggerTargetTraceMapper(mb.testProcess3));
 	}
 
-	@After
+	@AfterEach
 	public void tearDownBreakpointServiceTest() {
 		assertConsistent();
 		changeListener.assertAccurate();

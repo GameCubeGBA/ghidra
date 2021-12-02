@@ -25,6 +25,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.junit.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.osgi.framework.Bundle;
 
 import generic.jar.ResourceFile;
@@ -72,7 +75,7 @@ public class BundleHostTest extends AbstractGhidraHeadlessIntegrationTest {
 		}
 	}
 
-	@Before
+	@BeforeEach
 	public void setup() throws OSGiException, IOException {
 		wipe(GhidraSourceBundle.getCompiledBundlesDir());
 		deleteSimilarTempFiles(TEMP_NAME_PREFIX);
@@ -85,7 +88,7 @@ public class BundleHostTest extends AbstractGhidraHeadlessIntegrationTest {
 		pushNewBundle();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		bundleHost.dispose();
 		capturingBundleHostListener = null;
@@ -181,7 +184,7 @@ public class BundleHostTest extends AbstractGhidraHeadlessIntegrationTest {
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSimpleBuildAndLoadclass() throws Exception {
 		// @formatter:off
 		addClass(
@@ -199,7 +202,7 @@ public class BundleHostTest extends AbstractGhidraHeadlessIntegrationTest {
 			getInstance("apackage.AClass").toString());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCompileWhatYouCan() throws Exception {
 		// @formatter:off
 		addClass(
@@ -238,7 +241,7 @@ public class BundleHostTest extends AbstractGhidraHeadlessIntegrationTest {
 			getInstance("apackage.AClass").toString());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testLibraryInBundle() throws Exception {
 		// @formatter:off
 		addClass(
@@ -302,7 +305,7 @@ public class BundleHostTest extends AbstractGhidraHeadlessIntegrationTest {
 		// @formatter:on
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testLoadLibraryFromOtherBundleWithImportsTag() throws Exception {
 		// @formatter:off
 		addClass(
@@ -337,7 +340,7 @@ public class BundleHostTest extends AbstractGhidraHeadlessIntegrationTest {
 		// @formatter:on
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testImportFromExtraSystemPackagesWithVersionConstraint() throws Exception {
 		// @formatter:off
 		String goodRange = String.format("[%d,%d)", GUAVA_MAJOR_VERSION, GUAVA_MAJOR_VERSION+1);
@@ -357,7 +360,7 @@ public class BundleHostTest extends AbstractGhidraHeadlessIntegrationTest {
 		// @formatter:on
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testImportFromExtraSystemPackagesWithBadVersionConstraint() throws Exception {
 		// @formatter:off
 		String badRange = String.format("[%d,%d)", GUAVA_MAJOR_VERSION+1, GUAVA_MAJOR_VERSION+2);
@@ -383,7 +386,7 @@ public class BundleHostTest extends AbstractGhidraHeadlessIntegrationTest {
 		// @formatter:on
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testLoadLibraryFromOtherBundleWithManifest() throws Exception {
 		// @formatter:off
 		addClass(

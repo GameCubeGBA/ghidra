@@ -29,6 +29,8 @@ import generic.test.AbstractGenericTest;
 import ghidra.graph.graphs.*;
 import ghidra.graph.support.*;
 import ghidra.graph.viewer.GraphViewerUtils;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class GraphViewerTransformationsTest {
 
@@ -36,7 +38,7 @@ public class GraphViewerTransformationsTest {
 	private JFrame frame;
 	private TestVisualGraph graph;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		graph = buildGraph();
@@ -50,7 +52,7 @@ public class GraphViewerTransformationsTest {
 		frame.setVisible(true);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		swing(() -> {
 			frame.setVisible(false);

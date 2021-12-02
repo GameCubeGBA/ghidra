@@ -30,6 +30,8 @@ import ghidra.framework.plugintool.util.PluginDescription;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.classfinder.ClassSearcher;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  *
@@ -55,7 +57,7 @@ public class ManageFrontEndToolTest extends AbstractGhidraHeadedIntegrationTest 
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getFrontEndTool();
@@ -68,7 +70,7 @@ public class ManageFrontEndToolTest extends AbstractGhidraHeadedIntegrationTest 
 	/*
 	 * @see TestCase#tearDown()
 	 */
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		runSwing(() -> {

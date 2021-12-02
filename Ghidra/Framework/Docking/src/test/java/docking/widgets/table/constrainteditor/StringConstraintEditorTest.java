@@ -20,12 +20,12 @@ import static org.junit.Assert.*;
 import java.awt.Component;
 import java.util.List;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import docking.test.AbstractDockingTest;
 import docking.widgets.DropDownTextField;
 import docking.widgets.table.constraint.*;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * A test for the various String constraints.
@@ -38,7 +38,7 @@ public class StringConstraintEditorTest extends AbstractDockingTest {
 	String[] columnData = new String[] { "foo", "foot", "football", "base", "basement" };
 
 	@SuppressWarnings("unchecked")
-	@Before
+	@BeforeEach
 	public void setup() throws Exception {
 		constraint = new StringStartsWithColumnConstraint("");
 		editor = constraint.getEditor(new TestColumnData());

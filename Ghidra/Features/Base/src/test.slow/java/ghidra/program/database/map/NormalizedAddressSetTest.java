@@ -26,6 +26,8 @@ import ghidra.program.database.ProgramDB;
 import ghidra.program.database.mem.MemoryMapDB;
 import ghidra.program.model.address.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class NormalizedAddressSetTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -39,7 +41,7 @@ public class NormalizedAddressSetTest extends AbstractGhidraHeadedIntegrationTes
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = createDefaultProgram(testName.getMethodName(), ProgramBuilder._SPARC64, this);
 		addressFactory = program.getAddressFactory();
@@ -53,7 +55,7 @@ public class NormalizedAddressSetTest extends AbstractGhidraHeadedIntegrationTes
 		program.startTransaction("TEST");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		if (program != null) {
 			program.release(this);

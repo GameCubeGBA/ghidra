@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import ghidra.app.plugin.processors.sleigh.SleighLanguage;
@@ -30,6 +29,7 @@ import ghidra.javaclass.format.constantpool.AbstractConstantPoolInfoJava;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.lang.LanguageID;
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
+import org.junit.jupiter.api.BeforeEach;
 
 public class InvokeMethodsTest extends AbstractGhidraHeadlessIntegrationTest {
 
@@ -37,7 +37,7 @@ public class InvokeMethodsTest extends AbstractGhidraHeadlessIntegrationTest {
 	private Address opAddress;
 	private long uniqueBase;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		language =
 			(SleighLanguage) getLanguageService().getLanguage(new LanguageID("JVM:BE:32:default"));

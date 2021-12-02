@@ -15,7 +15,7 @@
  */
 package ghidra.app.plugin.core.data;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import ghidra.program.model.data.EnumDataType;
@@ -27,7 +27,7 @@ public class EnumDataActionTest extends AbstractDataActionTest {
 	private TestEnumDataAction enumDataAction;
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		super.setUp();

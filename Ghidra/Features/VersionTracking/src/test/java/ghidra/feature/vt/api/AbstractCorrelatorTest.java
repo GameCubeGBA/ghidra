@@ -32,6 +32,8 @@ import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.Msg;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public abstract class AbstractCorrelatorTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -52,7 +54,7 @@ public abstract class AbstractCorrelatorTest extends AbstractGhidraHeadedIntegra
 		errors.add(factory == null ? "" : factory.getName() + ": " + msg);
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		env = new TestEnv();
@@ -61,7 +63,7 @@ public abstract class AbstractCorrelatorTest extends AbstractGhidraHeadedIntegra
 		errors = new ArrayList<>();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.release(destinationProgram);
 		env.release(sourceProgram);

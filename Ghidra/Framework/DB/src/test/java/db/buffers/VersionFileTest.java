@@ -24,6 +24,8 @@ import java.util.*;
 import org.junit.*;
 
 import generic.test.AbstractGenericTest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import utilities.util.FileUtilities;
 
 public class VersionFileTest extends AbstractGenericTest {
@@ -34,13 +36,13 @@ public class VersionFileTest extends AbstractGenericTest {
 
 	private Random random = new Random();
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		testDir = createTempDirectory(getClass().getSimpleName());
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		FileUtilities.deleteDir(testDir);
 	}

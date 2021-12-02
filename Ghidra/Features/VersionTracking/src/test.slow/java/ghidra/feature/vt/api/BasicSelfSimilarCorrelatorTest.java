@@ -15,7 +15,7 @@
  */
 package ghidra.feature.vt.api;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.feature.vt.api.correlator.program.*;
 import ghidra.program.model.address.AddressSet;
@@ -38,13 +38,13 @@ public class BasicSelfSimilarCorrelatorTest extends AbstractSelfSimilarCorrelato
 			sourceProgram.getMemory().getLoadedAndInitializedAddressSet());
 	}
 
-@Test
+@org.junit.jupiter.api.Test
     public void testExactMnemonics() throws Exception {
 		exerciseFunctionsForFactory(new ExactMatchMnemonicsProgramCorrelatorFactory(),
 			sourceProgram.getMemory().getLoadedAndInitializedAddressSet());
 	}
 
-@Test
+@org.junit.jupiter.api.Test
     public void testSymbolName() throws Exception {
 		AddressSet realSymbols = new AddressSet();
 		SymbolIterator symbolIterator = sourceProgram.getSymbolTable().getSymbolIterator();

@@ -28,6 +28,8 @@ import org.junit.*;
 import generic.test.AbstractGenericTest;
 import ghidra.util.datastruct.NoSuchIndexException;
 import ghidra.util.prop.ObjectPropertySet;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -66,7 +68,7 @@ public class AddressObjectMapTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		set1.addRange(addr0, addr4);
 		set2.addRange(addr22, addr44);
@@ -109,7 +111,7 @@ public class AddressObjectMapTest extends AbstractGenericTest {
 		assertEquals(0, map.getObjects(set1.getMaxAddress().add(1)).length);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testAddOverlapped() {
 		map.addObject("Set1", set1);
 		map.addObject("Set2", set2);
@@ -161,7 +163,7 @@ public class AddressObjectMapTest extends AbstractGenericTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testAddOverlapRangeRange() {
 		testAddSets(10, 30, 20, 40);// range overlapping multi
 		testAddSets(10, 40, 20, 30);// range containing range
@@ -239,7 +241,7 @@ public class AddressObjectMapTest extends AbstractGenericTest {
 		return false;
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testRemove() {
 
 		testRemoveSets(10, 30, 20, 40);// range overlapping multi
@@ -257,7 +259,7 @@ public class AddressObjectMapTest extends AbstractGenericTest {
 		testRemoveSets(20, 20, 21, 30);// consecutive single at begin
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
     public void testCoalesce() throws Exception {
 		testAddCoalesce(10, 20, 21, 30);
 		testAddCoalesce(21, 31, 10, 20);

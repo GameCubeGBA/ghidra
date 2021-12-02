@@ -31,6 +31,8 @@ import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Test the tree manager.
@@ -55,7 +57,7 @@ public class TreeManagerTest extends AbstractGhidraHeadedIntegrationTest {
 	/*
 	 * @see TestCase#setUp()
 	 */
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
 		TestEnv env = new TestEnv();
 		program = createDefaultProgram("Test", ProgramBuilder._TOY, this);
@@ -71,7 +73,7 @@ public class TreeManagerTest extends AbstractGhidraHeadedIntegrationTest {
 	/*
 	 * @see TestCase#tearDown()
 	 */
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
 		program.endTransaction(transactionID, true);
 		program.release(this);

@@ -21,7 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import com.google.common.collect.Range;
@@ -60,7 +60,7 @@ public class DebuggerCopyActionsPluginTest extends AbstractGhidraHeadedDebuggerG
 
 	DebuggerListingProvider listingProvider;
 
-	@Before
+	@BeforeEach
 	public void setupCopyActionsPluginTest() throws Exception {
 		mappingService = addPlugin(tool, DebuggerStaticMappingServicePlugin.class);
 		copyActionsPlugin = addPlugin(tool, DebuggerCopyActionsPlugin.class);

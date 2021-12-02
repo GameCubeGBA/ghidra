@@ -21,10 +21,11 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.mem.ByteMemBufferImpl;
 import ghidra.util.BigEndianDataConverter;
 import ghidra.util.UniversalIdGenerator;
+import org.junit.jupiter.api.BeforeEach;
 
 public class EnumDataTypeTest {
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		UniversalIdGenerator.initialize();
 	}

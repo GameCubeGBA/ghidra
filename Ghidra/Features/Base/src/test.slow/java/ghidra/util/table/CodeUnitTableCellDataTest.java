@@ -17,7 +17,7 @@ package ghidra.util.table;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import ghidra.app.cmd.data.CreateDataCmd;
@@ -37,7 +37,7 @@ public class CodeUnitTableCellDataTest extends AbstractProgramBasedTest {
 
 	private CodeUnitFormat formatter;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		initialize();
 		formatter = new BrowserCodeUnitFormat(tool);

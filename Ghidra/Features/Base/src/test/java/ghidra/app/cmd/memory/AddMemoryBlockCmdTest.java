@@ -27,6 +27,8 @@ import ghidra.program.model.address.*;
 import ghidra.program.model.listing.*;
 import ghidra.program.model.mem.*;
 import ghidra.util.exception.RollbackException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test for the add memory block command.
@@ -40,7 +42,7 @@ public class AddMemoryBlockCmdTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		ProgramBuilder notepadBuilder = new ProgramBuilder("notepad", ProgramBuilder._TOY);
@@ -53,7 +55,7 @@ public class AddMemoryBlockCmdTest extends AbstractGenericTest {
 		x08 = x08Builder.getProgram();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddBlock() throws Exception {
 		command = new AddInitializedMemoryBlockCmd(".test", "A Test", "new block",
 			getNotepadAddr(0x100), 100, true, true, true, false, (byte) 0xa, false);
@@ -88,7 +90,7 @@ public class AddMemoryBlockCmdTest extends AbstractGenericTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testOverlap() {
 		command = new AddInitializedMemoryBlockCmd(".test", "A Test", "new block",
 			getNotepadAddr(0x1001010), 100, true, true, true, false, (byte) 0xa, false);
@@ -102,7 +104,7 @@ public class AddMemoryBlockCmdTest extends AbstractGenericTest {
 		assertTrue(command.getStatusMsg().length() > 0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddBitBlock() {
 		Address addr = getX08Addr(0x3000);
 		command = new AddBitMappedMemoryBlockCmd(".testBit", "A Test", "new block", addr, 100, true,
@@ -151,7 +153,7 @@ public class AddMemoryBlockCmdTest extends AbstractGenericTest {
 		assertTrue(block.isOverlay());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddByteBlock() {
 		Address addr = getX08Addr(0x3000);
 		command = new AddByteMappedMemoryBlockCmd(".testByte", "A Test", "new block", addr, 100,
@@ -168,7 +170,7 @@ public class AddMemoryBlockCmdTest extends AbstractGenericTest {
 		assertFalse(block.isOverlay());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddByteBlockWithScheme() {
 		Address addr = getX08Addr(0x3000);
 		command = new AddByteMappedMemoryBlockCmd(".testByte", "A Test", "new block", addr, 100,
@@ -185,7 +187,7 @@ public class AddMemoryBlockCmdTest extends AbstractGenericTest {
 		assertFalse(block.isOverlay());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddByteOverlayBlock() {
 		Address addr = getX08Addr(0x3000);
 		command = new AddByteMappedMemoryBlockCmd(".testByte", "A Test", "new block", addr, 100,
@@ -213,7 +215,7 @@ public class AddMemoryBlockCmdTest extends AbstractGenericTest {
 		assertTrue(block.isOverlay());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddByteOverlayBlockWithScheme() {
 		Address addr = getX08Addr(0x3000);
 		command = new AddByteMappedMemoryBlockCmd(".testByte", "A Test", "new block", addr, 100,
@@ -241,7 +243,7 @@ public class AddMemoryBlockCmdTest extends AbstractGenericTest {
 		assertTrue(block.isOverlay());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddOverlayBlock() throws Exception {
 		Address addr = getX08Addr(0x3000);
 		command = new AddInitializedMemoryBlockCmd(".overlay", "A Test", "new block", addr, 100,

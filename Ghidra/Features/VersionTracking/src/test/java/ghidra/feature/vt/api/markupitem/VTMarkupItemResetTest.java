@@ -32,6 +32,8 @@ import ghidra.feature.vt.db.VTTestUtils;
 import ghidra.program.model.address.Address;
 import ghidra.util.task.TaskMonitor;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class VTMarkupItemResetTest extends VTBaseTestCase {
 
@@ -39,7 +41,7 @@ public class VTMarkupItemResetTest extends VTBaseTestCase {
 	private AssociationDatabaseManager associationDBM;
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		associationDBM = db.getAssociationManagerDBM();
@@ -47,7 +49,7 @@ public class VTMarkupItemResetTest extends VTBaseTestCase {
 	}
 
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		db.endTransaction(testTransactionID, false);
 		db.release(VTTestUtils.class);

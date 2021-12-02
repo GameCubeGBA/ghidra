@@ -31,6 +31,7 @@ import ghidra.program.model.listing.Program;
 import ghidra.test.ToyProgramBuilder;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Testing the DIECreator, which is used in other tests.
@@ -40,7 +41,7 @@ public class DIETest extends AbstractGenericTest {
 	DWARFAttributeFactory attribFactory;
 	MockDWARFCompilationUnit cu;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		ToyProgramBuilder builder = new ToyProgramBuilder("Test", true);

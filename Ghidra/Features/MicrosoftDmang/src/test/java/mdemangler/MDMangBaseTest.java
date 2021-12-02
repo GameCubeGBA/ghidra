@@ -19,6 +19,8 @@ import java.io.*;
 
 import org.junit.*;
 import org.junit.experimental.categories.Category;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
 
@@ -121,7 +123,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 //		testConfiguration = new MDGenericizeTestConfiguration(beQuiet());
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		if (beQuiet()) {
 			return;
@@ -139,7 +141,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 		}
 	}
 
-	@AfterClass
+	@AfterAll
 	public static void tearDown() throws Throwable {
 		if (testWriter == null) {
 			return;

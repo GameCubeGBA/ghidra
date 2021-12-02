@@ -20,8 +20,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import ghidra.feature.vt.api.db.VTSessionDB;
 import ghidra.feature.vt.api.main.VTMarkupItem;
@@ -31,11 +30,12 @@ import ghidra.feature.vt.api.util.VTOptions;
 import ghidra.feature.vt.gui.task.ApplyMarkupItemTask;
 import ghidra.program.model.listing.CodeUnit;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.Test;
 
 public class ApplyMultipleMarkupItemsTest extends AbstractVTMarkupItemTest {
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		sourceBuilder.createComment("1002248", "Comment 1", CodeUnit.EOL_COMMENT);

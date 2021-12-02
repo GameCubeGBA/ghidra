@@ -47,13 +47,15 @@ import ghidra.util.database.UndoableTransaction;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.exception.InvalidInputException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DBTraceFunctionSymbolTest extends AbstractGhidraHeadlessIntegrationTest {
 	ToyDBTraceBuilder b;
 	TraceFunctionSymbolView functions;
 	TraceParameterSymbolView parameters;
 
-	@Before
+	@BeforeEach
 	public void setUpFunctionTest()
 			throws IOException, TraceOverlappedRegionException, DuplicateNameException {
 		b = new ToyDBTraceBuilder("Testing", ProgramBuilder._TOY);
@@ -64,7 +66,7 @@ public class DBTraceFunctionSymbolTest extends AbstractGhidraHeadlessIntegration
 		parameters = b.trace.getSymbolManager().parameters();
 	}
 
-	@After
+	@AfterEach
 	public void tearDownFunctionTest() {
 		b.close();
 	}

@@ -20,7 +20,7 @@ import static org.junit.Assert.assertTrue;
 
 import javax.swing.ButtonModel;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import docking.ActionContext;
@@ -35,7 +35,7 @@ public class EmptyBorderButtonTest extends AbstractDockingTest {
 	private EmptyBorderButton emptyBorderButton;
 	private ButtonModel buttonModel;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		emptyBorderButton = new EmptyBorderButton();
 		buttonModel = emptyBorderButton.getModel();

@@ -17,7 +17,7 @@ package help.screenshot;
 
 import javax.swing.JSplitPane;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.ComponentProvider;
 import ghidra.app.plugin.core.calltree.CallTreeProvider;

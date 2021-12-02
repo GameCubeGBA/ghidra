@@ -38,6 +38,9 @@ import ghidra.program.util.GroupPath;
 import ghidra.program.util.LabelFieldLocation;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AutoRenamePluginTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -54,7 +57,7 @@ public class AutoRenamePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -90,12 +93,12 @@ public class AutoRenamePluginTest extends AbstractGhidraHeadedIntegrationTest {
 //		env.showTool();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testActionEnabled() {
 		setViewToMainTree();
 
@@ -131,7 +134,7 @@ public class AutoRenamePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		assertTrue(labelAction.isEnabledForContext(actionContext));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testRename() throws Exception {
 		setViewToMainTree();
 

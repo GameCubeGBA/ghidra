@@ -52,6 +52,9 @@ import ghidra.program.model.mem.MemoryAccessException;
 import ghidra.program.util.ProgramLocation;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test for byte viewer formats. 
@@ -67,7 +70,7 @@ public class ByteViewerPluginFormatsTest extends AbstractGhidraHeadedIntegration
 	private ByteViewerPanel panel;
 	private ByteViewerComponentProvider provider;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -105,13 +108,13 @@ public class ByteViewerPluginFormatsTest extends AbstractGhidraHeadedIntegration
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.release(program);
 		env.dispose();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testInsertionFieldHex() throws Exception {
 		env.showTool();
 		String insertionStr = findLabelStr(panel, "Insertion");
@@ -153,7 +156,7 @@ public class ByteViewerPluginFormatsTest extends AbstractGhidraHeadedIntegration
 		assertEquals(insertionStr, findLabelStr(panel, "Insertion"));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testInsertionFieldOctal() throws Exception {
 		env.showTool();
 		addViews();
@@ -196,7 +199,7 @@ public class ByteViewerPluginFormatsTest extends AbstractGhidraHeadedIntegration
 		assertEquals(insertionStr, findLabelStr(panel, "Insertion"));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testInsertionFieldAscii() throws Exception {
 		env.showTool();
 		addViews();
@@ -237,7 +240,7 @@ public class ByteViewerPluginFormatsTest extends AbstractGhidraHeadedIntegration
 		assertEquals(insertionStr, findLabelStr(panel, "Insertion"));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testHexIntegerView() throws Exception {
 
 		env.showTool();
@@ -257,7 +260,7 @@ public class ByteViewerPluginFormatsTest extends AbstractGhidraHeadedIntegration
 		assertEquals(8, c.getCurrentField().getNumCols(loc.getRow()));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testOtherEditsHexInteger() throws Exception {
 		// verify that the 4 byte string is rendered in red when a byte
 		// is changed from another view, e.g. Ascii or Hex
@@ -296,7 +299,7 @@ public class ByteViewerPluginFormatsTest extends AbstractGhidraHeadedIntegration
 			((ByteField) hexComp.getCurrentField()).getForeground());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIntegerView() throws Exception {
 
 		env.showTool();
@@ -346,7 +349,7 @@ public class ByteViewerPluginFormatsTest extends AbstractGhidraHeadedIntegration
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testOctalView() throws Exception {
 		env.showTool();
 
@@ -395,7 +398,7 @@ public class ByteViewerPluginFormatsTest extends AbstractGhidraHeadedIntegration
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testOtherEditsInteger() throws Exception {
 		// verify that changed bytes are rendered in red in the Integer view
 		env.showTool();
@@ -440,7 +443,7 @@ public class ByteViewerPluginFormatsTest extends AbstractGhidraHeadedIntegration
 			((ByteField) intComp.getCurrentField()).getForeground());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEditUnsupportedInteger() throws Exception {
 		env.showTool();
 
@@ -475,7 +478,7 @@ public class ByteViewerPluginFormatsTest extends AbstractGhidraHeadedIntegration
 		assertEquals(v, program.getMemory().getInt(getAddr(0x01001000)));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddressIdentification16Bit() throws Exception {
 		ProgramDB pdb = null;
 		try {
@@ -522,7 +525,7 @@ public class ByteViewerPluginFormatsTest extends AbstractGhidraHeadedIntegration
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddressIdentification32Bit() throws Exception {
 
 		env.showTool();
@@ -553,7 +556,7 @@ public class ByteViewerPluginFormatsTest extends AbstractGhidraHeadedIntegration
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDisassembledRecognition() throws Exception {
 		// verify that the undefined bytes are marked with a box 
 		// ("\u2700" unicode for dingbat char);
@@ -590,7 +593,7 @@ public class ByteViewerPluginFormatsTest extends AbstractGhidraHeadedIntegration
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDisassembledRecognition2() throws Exception {
 		// verify that when data is created, the dingbat char changes to '.'
 
@@ -629,7 +632,7 @@ public class ByteViewerPluginFormatsTest extends AbstractGhidraHeadedIntegration
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDisassembledRecognition3() throws Exception {
 		// verify that when data is created, the dingbat char changes to '.'
 

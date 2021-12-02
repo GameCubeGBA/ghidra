@@ -29,20 +29,22 @@ import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.InvalidNameException;
 import ghidra.util.task.TaskMonitor;
 import ghidra.util.task.TaskMonitorAdapter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DataManagerTest extends AbstractGhidraHeadedIntegrationTest {
 	private ProgramDB program;
 	private DataTypeManagerDB dataMgr;
 	private int transactionID;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		program = createDefaultProgram(testName.getMethodName(), ProgramBuilder._TOY, this);
 		dataMgr = program.getDataTypeManager();
 		startTransaction();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		endTransaction();
 		program.release(this);

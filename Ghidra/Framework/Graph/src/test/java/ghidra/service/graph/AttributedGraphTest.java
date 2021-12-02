@@ -19,33 +19,33 @@ import static org.junit.Assert.*;
 
 import java.util.Set;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AttributedGraphTest {
 
 	private AttributedGraph graph;
 
-	@Before
+	@BeforeEach
 	public void setup() {
 		graph = new AttributedGraph("Test", new EmptyGraphType());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddVertex() {
 		AttributedVertex v = graph.addVertex();
 		assertTrue(graph.containsVertex(v));
 		assertEquals(1, graph.getVertexCount());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddVertexTwice() {
 		AttributedVertex v = graph.addVertex();
 		assertFalse(graph.addVertex(v));
 		assertEquals(1, graph.getVertexCount());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddVertexWithId() {
 		AttributedVertex v = graph.addVertex("A");
 		assertTrue(graph.containsVertex(v));
@@ -54,7 +54,7 @@ public class AttributedGraphTest {
 		assertEquals("A", v.getName());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddVertexWithIdAndName() {
 		AttributedVertex v = graph.addVertex("A", "Bob");
 		assertTrue(graph.containsVertex(v));
@@ -63,7 +63,7 @@ public class AttributedGraphTest {
 		assertEquals("Bob", v.getName());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddVertexWithExistingVertex() {
 		AttributedVertex v = new AttributedVertex("A");
 		graph.addVertex(v);
@@ -72,7 +72,7 @@ public class AttributedGraphTest {
 		assertEquals("A", v.getId());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddDuplicateVertex() {
 		AttributedVertex v1 = graph.addVertex("A");
 		AttributedVertex v2 = graph.addVertex("A");
@@ -81,7 +81,7 @@ public class AttributedGraphTest {
 		assertTrue(v1 == v2);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddDuplicateVertexWithDifferentName() {
 		AttributedVertex v1 = graph.addVertex("A", "Bob");
 		AttributedVertex v2 = graph.addVertex("A", "Joe");
@@ -91,7 +91,7 @@ public class AttributedGraphTest {
 		assertEquals("Joe", v2.getName());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddEdge() {
 		AttributedVertex v1 = graph.addVertex("A", "Bob");
 		AttributedVertex v2 = graph.addVertex("B", "Joe");
@@ -101,7 +101,7 @@ public class AttributedGraphTest {
 		assertEquals(v2, graph.getEdgeTarget(e));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddExistingEdge() {
 		AttributedVertex v1 = graph.addVertex("A", "Bob");
 		AttributedVertex v2 = graph.addVertex("B", "Joe");
@@ -139,7 +139,7 @@ public class AttributedGraphTest {
 		assertTrue(graph.containsVertex(v2));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGetVertexById() {
 
 		// create a vertex with all the possible ways
@@ -160,7 +160,7 @@ public class AttributedGraphTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCollapseDuplicateEdges() {
 		AttributedVertex v1 = graph.addVertex("A");
 		AttributedVertex v2 = graph.addVertex("B");
@@ -174,7 +174,7 @@ public class AttributedGraphTest {
 		assertEquals("3", graph.getEdge(v1, v2).getAttribute("Weight"));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCollapseDuplicateEdgesWithSuppliedEdges() {
 		AttributedVertex v1 = graph.addVertex("A");
 		AttributedVertex v2 = graph.addVertex("B");
@@ -190,7 +190,7 @@ public class AttributedGraphTest {
 		assertEquals("1", edge.getId());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testNonCollapsingEdges() {
 		graph = new AttributedGraph("Test", new EmptyGraphType(), "Test", false);
 
@@ -204,7 +204,7 @@ public class AttributedGraphTest {
 		assertEquals(3, graph.getEdgeCount());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testReverseEdgesDontCollapse() {
 		AttributedVertex v1 = graph.addVertex("A");
 		AttributedVertex v2 = graph.addVertex("B");

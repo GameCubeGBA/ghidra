@@ -23,7 +23,7 @@ import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.collections4.map.LazyMap;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class AsyncLaziesTest {
 	@Test
@@ -42,7 +42,7 @@ public class AsyncLaziesTest {
 		assertEquals(1, calls.get());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testLazyMapAskTwice() {
 		Map<String, AtomicInteger> calls =
 			LazyMap.lazyMap(new HashMap<>(), () -> new AtomicInteger());
@@ -86,7 +86,7 @@ public class AsyncLaziesTest {
 		assertEquals(Map.of("One", 1), lazyMap.getCompletedMap());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testLazyMapPut() throws InterruptedException, ExecutionException, TimeoutException {
 		Map<String, CompletableFuture<Integer>> reqs = new HashMap<>();
 		AsyncLazyMap<String, Integer> lazyMap = new AsyncLazyMap<>(new HashMap<>(), (key) -> {

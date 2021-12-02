@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 
 import java.math.BigInteger;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import docking.widgets.fieldpanel.support.*;
@@ -39,7 +39,7 @@ public class FieldSelectionTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 	}
 

@@ -29,6 +29,9 @@ import ghidra.program.model.address.AddressFactory;
 import ghidra.program.model.data.PointerDataType;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ArmOffcutReferenceTest extends AbstractGhidraHeadedIntegrationTest {
 	private final String addressTableBytes =
@@ -45,7 +48,7 @@ public class ArmOffcutReferenceTest extends AbstractGhidraHeadedIntegrationTest 
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		builder = new ProgramBuilder("Test", ProgramBuilder._ARM);
@@ -63,7 +66,7 @@ public class ArmOffcutReferenceTest extends AbstractGhidraHeadedIntegrationTest 
 		cb = env.getPlugin(CodeBrowserPlugin.class);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}
@@ -85,7 +88,7 @@ public class ArmOffcutReferenceTest extends AbstractGhidraHeadedIntegrationTest 
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testOffcutReferenceInLabelAndOperandFieldWithDefinedLabel() {
 		builder.createLabel("0023303a", "bob");
 		assertTrue(cb.goToField(addr("0045b3a0"), OperandFieldFactory.FIELD_NAME, 0, 1));
@@ -98,7 +101,7 @@ public class ArmOffcutReferenceTest extends AbstractGhidraHeadedIntegrationTest 
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testOffcutReferenceInLabelAndOperandFieldWithDefinedFunction() {
 		builder.createFunction("0023303a");
 		assertTrue(cb.goToField(addr("0045b3a0"), OperandFieldFactory.FIELD_NAME, 0, 1));

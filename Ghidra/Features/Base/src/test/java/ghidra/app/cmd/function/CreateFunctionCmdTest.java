@@ -17,7 +17,7 @@ package ghidra.app.cmd.function;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
@@ -34,7 +34,7 @@ public class CreateFunctionCmdTest extends AbstractGenericTest {
 	private Program program;
 	private ProgramBuilder builder;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		builder = new ProgramBuilder("notepad.exe", ProgramBuilder._X86);

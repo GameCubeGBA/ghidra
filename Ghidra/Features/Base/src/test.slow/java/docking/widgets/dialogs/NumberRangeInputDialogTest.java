@@ -29,18 +29,20 @@ import docking.DockingWindowManager;
 import docking.test.AbstractDockingTest;
 import ghidra.util.datastruct.Range;
 import ghidra.util.datastruct.SortedRangeList;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class NumberRangeInputDialogTest extends AbstractDockingTest {
 
 	private NumberRangeInputDialog dialog;
 	private JTextField textField;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		createAndShowDialog();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		close(dialog);
 	}

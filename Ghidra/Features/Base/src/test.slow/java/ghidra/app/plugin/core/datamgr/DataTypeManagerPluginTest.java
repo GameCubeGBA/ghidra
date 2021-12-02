@@ -64,6 +64,8 @@ import ghidra.program.database.data.ProgramDataTypeManager;
 import ghidra.program.model.data.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import util.CollectionUtils;
 import utilities.util.FileUtilities;
 
@@ -90,7 +92,7 @@ public class DataTypeManagerPluginTest extends AbstractGhidraHeadedIntegrationTe
 	private DockingActionIf pasteAction;
 	private DataTypesProvider provider;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		removeBinTestDir();
@@ -168,7 +170,7 @@ public class DataTypeManagerPluginTest extends AbstractGhidraHeadedIntegrationTe
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 		removeBinTestDir();

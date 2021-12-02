@@ -37,6 +37,8 @@ import ghidra.framework.plugintool.PluginTool;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
 import ghidra.util.Msg;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class ParseDialogTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -53,7 +55,7 @@ public class ParseDialogTest extends AbstractGhidraHeadedIntegrationTest {
 
 	private String defaultPrfOptions;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -82,7 +84,7 @@ public class ParseDialogTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals("Dialog options not correctly loaded", defaultPrfOptions, parseOptions);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		removeAllProfiles();
 		env.dispose();

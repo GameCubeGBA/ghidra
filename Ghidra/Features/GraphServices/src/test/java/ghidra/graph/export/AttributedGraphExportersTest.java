@@ -27,23 +27,26 @@ import generic.test.AbstractGenericTest;
 import ghidra.graph.exporter.*;
 import ghidra.service.graph.*;
 import ghidra.util.Msg;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import utilities.util.FileUtilities;
 
 public class AttributedGraphExportersTest extends AbstractGenericTest {
 
 	private AttributedGraph graph;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		graph = createGraph();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCsvEdgeList() throws Exception {
 		CsvEdgeListGraphExporter exporter = new CsvEdgeListGraphExporter();
 		List<String> lines = doExport(exporter, graph);
@@ -56,7 +59,7 @@ public class AttributedGraphExportersTest extends AbstractGenericTest {
 			"D,E");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCsvAdjacencyList() throws Exception {
 		CsvAdjacencyListGraphExporter exporter = new CsvAdjacencyListGraphExporter();
 		List<String> lines = doExport(exporter, graph);
@@ -70,7 +73,7 @@ public class AttributedGraphExportersTest extends AbstractGenericTest {
 			"F");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDIMACS() throws Exception {
 		DimacsGraphExporter exporter = new DimacsGraphExporter();
 		List<String> lines = doExport(exporter, graph);
@@ -86,7 +89,7 @@ public class AttributedGraphExportersTest extends AbstractGenericTest {
 			"e D E");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDOT() throws Exception {
 		DotGraphExporter exporter = new DotGraphExporter();
 		List<String> lines = doExport(exporter, graph);
@@ -108,7 +111,7 @@ public class AttributedGraphExportersTest extends AbstractGenericTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGraphML() throws Exception {
 		GmlGraphExporter exporter = new GmlGraphExporter();
 		List<String> lines = doExport(exporter, graph);
@@ -226,7 +229,7 @@ public class AttributedGraphExportersTest extends AbstractGenericTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testJSON() throws Exception {
 		JsonGraphExporter exporter = new JsonGraphExporter();
 		List<String> lines = doExport(exporter, graph);
@@ -246,7 +249,7 @@ public class AttributedGraphExportersTest extends AbstractGenericTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testMATRIX() throws Exception {
 		MatrixGraphExporter exporter = new MatrixGraphExporter();
 		List<String> lines = doExport(exporter, graph);
@@ -258,7 +261,7 @@ public class AttributedGraphExportersTest extends AbstractGenericTest {
 			"D E 1");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testVISIO() throws Exception {
 		VisioGraphExporter exporter = new VisioGraphExporter();
 		List<String> lines = doExport(exporter, graph);

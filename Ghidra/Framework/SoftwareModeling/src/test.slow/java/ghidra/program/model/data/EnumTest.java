@@ -23,6 +23,7 @@ import org.junit.*;
 
 import generic.test.AbstractGTest;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Tests for Enum data types.
@@ -31,7 +32,7 @@ public class EnumTest extends AbstractGTest {
 
 	private DataTypeManager dataMgr;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		dataMgr = new StandAloneDataTypeManager("Test");
 		dataMgr.startTransaction("");

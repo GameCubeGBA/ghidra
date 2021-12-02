@@ -17,7 +17,7 @@ package ghidra.app.merge.listing;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.app.merge.ProgramMultiUserMergeManager;
 import ghidra.program.database.MergeProgram;
@@ -546,7 +546,7 @@ public class BookmarkMergerNoteTest extends AbstractListingMergeManagerTest {
 		noBookmark(address2, BookmarkType.ANALYSIS, "Found Code");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testChangeMyRemoveLatest() throws Exception {
 
 		final String address1 = "0x100";

@@ -22,7 +22,7 @@ import java.util.Map.Entry;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import ghidra.program.model.address.*;
@@ -75,7 +75,7 @@ public class TwoWayBreakdownAddressRangeIteratorTest extends AbstractGhidraHeadl
 		return result;
 	}
 
-	@Before
+	@BeforeEach
 	public void setUpIteratorTest() throws LanguageNotFoundException {
 		toy = DefaultLanguageService.getLanguageService().getLanguage(
 			new LanguageID("Toy:BE:64:default"));

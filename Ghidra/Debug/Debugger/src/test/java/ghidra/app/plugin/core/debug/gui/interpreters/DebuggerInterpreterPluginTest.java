@@ -22,7 +22,7 @@ import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import ghidra.app.plugin.core.debug.gui.AbstractGhidraHeadedDebuggerGUITest;
@@ -35,7 +35,7 @@ public class DebuggerInterpreterPluginTest extends AbstractGhidraHeadedDebuggerG
 		implements DebuggerModelTestUtils {
 	private DebuggerInterpreterPlugin interpreterPlugin;
 
-	@Before
+	@BeforeEach
 	public void setUpInterpreterPluginTest() throws Exception {
 		interpreterPlugin = addPlugin(tool, DebuggerInterpreterPlugin.class);
 	}

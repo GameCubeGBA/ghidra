@@ -21,8 +21,8 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.util.*;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import generic.jar.ResourceFile;
 import generic.test.AbstractGenericTest;
@@ -33,7 +33,7 @@ public class ByteSequenceRowObjectTest extends AbstractGenericTest {
 	private FileBitPatternInfoReader fReader;
 	private static final int TOTAL_NUM_FUNCTIONS = 32;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws IOException {
 		ResourceFile resourceFile = Application.getModuleDataSubDirectory("BytePatterns", "test");
 		fReader = new FileBitPatternInfoReader(resourceFile.getFile(false));
@@ -116,7 +116,7 @@ public class ByteSequenceRowObjectTest extends AbstractGenericTest {
 		assertEquals(total, (TOTAL_NUM_FUNCTIONS - 2));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testPreBytesContextRegisterFiltering() {
 		List<FunctionBitPatternInfo> fInfo = fReader.getFInfoList();
 		List<ByteSequenceRowObject> preBytes =
@@ -179,7 +179,7 @@ public class ByteSequenceRowObjectTest extends AbstractGenericTest {
 		assertEquals(total, (TOTAL_NUM_FUNCTIONS + 2));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testReturnBytesContextRegisterFiltering() {
 		List<FunctionBitPatternInfo> fInfo = fReader.getFInfoList();
 		List<ByteSequenceRowObject> returnBytes =
@@ -317,7 +317,7 @@ public class ByteSequenceRowObjectTest extends AbstractGenericTest {
 		assertTrue(dis.contains(" ADD:3(EAX,0x1)  LEAVE:1()  RET:1() "));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testReturnInstructions() {
 		List<FunctionBitPatternInfo> fInfo = fReader.getFInfoList();
 		List<String> instructions = new ArrayList<>();
@@ -337,7 +337,7 @@ public class ByteSequenceRowObjectTest extends AbstractGenericTest {
 		assertEquals(rows.get(0).getSequence(), "c9c3");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testContextRegisterFiltering() {
 		List<FunctionBitPatternInfo> fInfo = fReader.getFInfoList();
 		List<String> instructions = new ArrayList<>();

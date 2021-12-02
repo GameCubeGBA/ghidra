@@ -35,6 +35,8 @@ import ghidra.program.model.mem.MemoryAccessException;
 import ghidra.program.model.mem.MemoryBlock;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class MemoryBlockUtilTest extends AbstractGhidraHeadedIntegrationTest {
 	private Object consumer = new Object();
@@ -47,7 +49,7 @@ public class MemoryBlockUtilTest extends AbstractGhidraHeadedIntegrationTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		log = new MessageLog();
 		prog = createDefaultProgram(testName.getMethodName(), ProgramBuilder._TOY, consumer);
@@ -56,7 +58,7 @@ public class MemoryBlockUtilTest extends AbstractGhidraHeadedIntegrationTest {
 		space = prog.getAddressFactory().getDefaultAddressSpace();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		if (prog != null) {

@@ -33,6 +33,8 @@ import docking.widgets.OptionDialog;
 import docking.widgets.filter.FilterOptions;
 import docking.widgets.filter.TextFilterStrategy;
 import docking.widgets.tree.support.GTreeFilter;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class GTreeTest extends AbstractDockingTest {
 
@@ -45,7 +47,7 @@ public class GTreeTest extends AbstractDockingTest {
 	 */
 	private volatile boolean filterEnabled = true;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		gTree = new GTree(new PopulatedTestRootNode());
 
@@ -57,7 +59,7 @@ public class GTreeTest extends AbstractDockingTest {
 		waitForTree();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		runSwing(() -> {
 			gTree.dispose();

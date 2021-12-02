@@ -20,7 +20,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.*;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import com.google.common.cache.*;
@@ -81,7 +81,7 @@ public class FunctionGraphCacheTest extends AbstractFunctionGraphTest {
 	}
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		// the magic of JMockit will cause our FakeDecompilerController to get used instead
 		// of the real one, regardless of where it gets constructed.

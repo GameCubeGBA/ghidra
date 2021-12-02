@@ -44,6 +44,8 @@ import ghidra.program.model.data.DataType;
 import ghidra.program.model.listing.*;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.ToyProgramBuilder;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import resources.Icons;
 import util.CollectionUtils;
 
@@ -60,13 +62,13 @@ public class TableChooserDialogTest extends AbstractGhidraHeadedIntegrationTest 
 	/** Interface for tests to signal what is expected of the executor */
 	private TestExecutorDecision testDecision = DEFAULT_DECISION;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		executor = new SpyTableChooserExecutor();
 		createDialog(executor);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		runSwing(() -> {
 			tool.close();

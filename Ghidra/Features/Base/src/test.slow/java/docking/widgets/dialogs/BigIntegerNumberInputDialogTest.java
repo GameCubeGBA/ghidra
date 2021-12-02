@@ -22,11 +22,11 @@ import java.math.BigInteger;
 
 import javax.swing.JButton;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class BigIntegerNumberInputDialogTest extends AbstractNumberInputDialogTest {
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testOkWithInitialValue() throws Exception {
 
 		int initial = 2;
@@ -41,7 +41,7 @@ public class BigIntegerNumberInputDialogTest extends AbstractNumberInputDialogTe
 		assertEquals("The returned value is not the expected value", 2, getValue());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testOkWithNewAllowedValue() throws Exception {
 		int initial = 2;
 		int min = 2;
@@ -57,7 +57,7 @@ public class BigIntegerNumberInputDialogTest extends AbstractNumberInputDialogTe
 		assertEquals("The returned value is not the entered value", 4, getValue());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testTypingInHigherThanAllowed() {
 		int initial = 2;
 		int min = 2;
@@ -72,7 +72,7 @@ public class BigIntegerNumberInputDialogTest extends AbstractNumberInputDialogTe
 		assertEquals("Value must be between 2 and 5", dialog.getStatusText());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testTypingInLowerThanAllowed() {
 		int initial = 2;
 		int min = 2;
@@ -88,7 +88,7 @@ public class BigIntegerNumberInputDialogTest extends AbstractNumberInputDialogTe
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testTypingValidHex() {
 		int initial = 2;
 		int min = 2;
@@ -105,7 +105,7 @@ public class BigIntegerNumberInputDialogTest extends AbstractNumberInputDialogTe
 		assertEquals("The returned value is not the entered value", 4, getValue());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testTypeIntTooBigWithOverflow() {
 		int initial = 2;
 		createAndShowDialog(initial, 0, Integer.MAX_VALUE);
@@ -139,7 +139,7 @@ public class BigIntegerNumberInputDialogTest extends AbstractNumberInputDialogTe
 		assertEquals("Value must be between 2 and 5", dialog.getStatusText());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testTypeLargeHexValue() {
 		int initial = 2;
 		int min = 2;
@@ -155,7 +155,7 @@ public class BigIntegerNumberInputDialogTest extends AbstractNumberInputDialogTe
 		assertEquals("The returned value is not the entered value", 4095, getValue());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testTypingNegativeValidNumber() {
 		int initial = 2;
 		int min = -5;
@@ -171,7 +171,7 @@ public class BigIntegerNumberInputDialogTest extends AbstractNumberInputDialogTe
 		assertEquals("The returned value is not the entered value", -3, getValue());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testTypingNegativeValidHexNumber() {
 		int initial = 2;
 		int min = -5;
@@ -187,7 +187,7 @@ public class BigIntegerNumberInputDialogTest extends AbstractNumberInputDialogTe
 		assertEquals("The returned value is not the entered value", -3, getValue());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSettingNoMaximum() {
 
 		int initial = 1;
@@ -206,7 +206,7 @@ public class BigIntegerNumberInputDialogTest extends AbstractNumberInputDialogTe
 		assertEquals("The returned value is not the entered value", (min + 1), getValue());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testBigInteger() {
 
 		createAndShowDialog(BigInteger.valueOf(0), new BigInteger("fffffffffffffffffffff", 16));

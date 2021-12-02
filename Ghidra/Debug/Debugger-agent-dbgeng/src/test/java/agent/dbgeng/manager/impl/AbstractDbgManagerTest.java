@@ -42,6 +42,9 @@ import ghidra.async.TypeSpec;
 import ghidra.dbg.testutil.DummyProc;
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 import ghidra.util.Msg;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public abstract class AbstractDbgManagerTest extends AbstractGhidraHeadlessIntegrationTest {
 	protected static final int TIMEOUT = 2000 * 1000;
@@ -61,12 +64,12 @@ public abstract class AbstractDbgManagerTest extends AbstractGhidraHeadlessInteg
 		}
 	}
 
-	@Before
+	@BeforeEach
 	public void setUpDbgManagerTest() {
 		DbgEngTest.assumeDbgengDLLLoadable();
 	}
 
-	@After
+	@AfterEach
 	public void tearDownDbgManagerTest() throws IOException {
 		stopManager();
 	}
@@ -84,7 +87,7 @@ public abstract class AbstractDbgManagerTest extends AbstractGhidraHeadlessInteg
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testRemoveProcess() throws Throwable {
 		try (DbgManager mgr = DbgManager.newInstance()) {
 			waitOn(sequence(TypeSpec.VOID).then(seq -> {
@@ -103,7 +106,7 @@ public abstract class AbstractDbgManagerTest extends AbstractGhidraHeadlessInteg
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testRemoveCurrentProcess() throws Throwable {
 		try (DbgManager mgr = DbgManager.newInstance()) {
 			List<DebugProcessId> selEvtIds = new ArrayList<>();
@@ -131,7 +134,7 @@ public abstract class AbstractDbgManagerTest extends AbstractGhidraHeadlessInteg
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testConsoleCapture() throws Throwable {
 		try (DbgManager mgr = DbgManager.newInstance()) {
 			String out = waitOn(sequence(TypeSpec.STRING).then(seq -> {
@@ -143,7 +146,7 @@ public abstract class AbstractDbgManagerTest extends AbstractGhidraHeadlessInteg
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testListProcesses() throws Throwable {
 		try (DbgManager mgr = DbgManager.newInstance()) {
 			Map<DebugProcessId, DbgProcess> processes =
@@ -156,7 +159,7 @@ public abstract class AbstractDbgManagerTest extends AbstractGhidraHeadlessInteg
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testListAvailableProcesses() throws Throwable {
 		try (DbgManager mgr = DbgManager.newInstance()) {
 			List<Pair<Integer, String>> pids =
@@ -169,7 +172,7 @@ public abstract class AbstractDbgManagerTest extends AbstractGhidraHeadlessInteg
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testStart() throws Throwable {
 		try (DbgManager mgr = DbgManager.newInstance()) {
 			DbgThread thread = waitOn(sequence(TypeSpec.cls(DbgThread.class)).then(seq -> {
@@ -185,7 +188,7 @@ public abstract class AbstractDbgManagerTest extends AbstractGhidraHeadlessInteg
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAttachDetach() throws Throwable {
 		try (DummyProc echo = DummyProc.run("dd"); DbgManager mgr = DbgManager.newInstance()) {
 			AtomicReference<Set<DbgThread>> threads = new AtomicReference<>();
@@ -214,7 +217,7 @@ public abstract class AbstractDbgManagerTest extends AbstractGhidraHeadlessInteg
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testInsertListDeleteBreakpoint() throws Throwable {
 		AtomicReference<DbgBreakpointInfo> breakpoint = new AtomicReference<>();
 		try (DbgManager mgr = DbgManager.newInstance()) {
@@ -238,7 +241,7 @@ public abstract class AbstractDbgManagerTest extends AbstractGhidraHeadlessInteg
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testListReadWriteReadRegisters() throws Throwable {
 		AtomicReference<DbgThread> thread = new AtomicReference<>();
 		AtomicReference<DbgRegisterSet> regs = new AtomicReference<>();
@@ -289,7 +292,7 @@ public abstract class AbstractDbgManagerTest extends AbstractGhidraHeadlessInteg
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testWriteReadMemory() throws Throwable {
 		AtomicReference<DbgThread> thread = new AtomicReference<>();
 		AtomicLong addr = new AtomicLong();
@@ -334,7 +337,7 @@ public abstract class AbstractDbgManagerTest extends AbstractGhidraHeadlessInteg
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testContinue() throws Throwable {
 		AtomicReference<DbgThread> thread = new AtomicReference<>();
 		try (DbgManager mgr = DbgManager.newInstance()) {
@@ -361,7 +364,7 @@ public abstract class AbstractDbgManagerTest extends AbstractGhidraHeadlessInteg
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testStep() throws Throwable {
 		AtomicReference<DbgThread> thread = new AtomicReference<>();
 		try (DbgManager mgr = DbgManager.newInstance()) {
@@ -388,7 +391,7 @@ public abstract class AbstractDbgManagerTest extends AbstractGhidraHeadlessInteg
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testThreadSelect() throws Throwable {
 		AtomicReference<DbgThread> thread = new AtomicReference<>();
 		try (DbgManager mgr = DbgManager.newInstance()) {
@@ -410,7 +413,7 @@ public abstract class AbstractDbgManagerTest extends AbstractGhidraHeadlessInteg
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testListFrames() throws Throwable {
 		AtomicReference<DbgThread> thread = new AtomicReference<>();
 		try (DbgManager mgr = DbgManager.newInstance()) {

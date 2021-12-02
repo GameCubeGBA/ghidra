@@ -32,6 +32,9 @@ import ghidra.util.PropertyFile;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.DuplicateFileException;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import utilities.util.FileUtilities;
 
 public abstract class AbstractLocalFileSystemTest extends AbstractGenericTest {
@@ -47,7 +50,7 @@ public abstract class AbstractLocalFileSystemTest extends AbstractGenericTest {
 		this.useIndexedFileSystem = useIndexedFileSystem;
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		File tempDir = new File(AbstractGTest.getTestDirectoryPath());
@@ -82,7 +85,7 @@ public abstract class AbstractLocalFileSystemTest extends AbstractGenericTest {
 		fs.addFileSystemListener(new MyFileSystemListener());
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		if (fs != null) {
 			fs.dispose();
@@ -90,7 +93,7 @@ public abstract class AbstractLocalFileSystemTest extends AbstractGenericTest {
 		FileUtilities.deleteDir(projectDir);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGetFolders() throws IOException {
 		String[] folderNames = fs.getFolderNames("/");
 		assertEquals(5, folderNames.length);
@@ -126,7 +129,7 @@ public abstract class AbstractLocalFileSystemTest extends AbstractGenericTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCreateFolder() throws Exception {
 		fs.createFolder("/", "abc");
 		flushFileSystemEvents();
@@ -169,7 +172,7 @@ public abstract class AbstractLocalFileSystemTest extends AbstractGenericTest {
 		assertEquals(ev, event);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDeleteFolder() throws Exception {
 		fs.createFolder("/abc/def", "ghi");
 		flushFileSystemEvents();
@@ -195,7 +198,7 @@ public abstract class AbstractLocalFileSystemTest extends AbstractGenericTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testRenameFolder() throws Exception {
 		fs.createFolder("/abc/def", "ghi");
 		flushFileSystemEvents();
@@ -208,7 +211,7 @@ public abstract class AbstractLocalFileSystemTest extends AbstractGenericTest {
 		checkEvent("Folder Renamed", "/abc", "def", null, "xyz", events.get(0));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testRenameFile() throws Exception {
 		testCreateDataBase();
 		events.clear();
@@ -248,7 +251,7 @@ public abstract class AbstractLocalFileSystemTest extends AbstractGenericTest {
 		assertNull(fs.getItem("/abc", "barney"));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testMoveFolder() throws Exception {
 		fs.createFolder("/abc/def", "ghi");
 		flushFileSystemEvents();
@@ -278,7 +281,7 @@ public abstract class AbstractLocalFileSystemTest extends AbstractGenericTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCreateDataFile() throws Exception {
 		fs.createFolder("/", "abc");
 		String data = "This is a test";
@@ -336,7 +339,7 @@ public abstract class AbstractLocalFileSystemTest extends AbstractGenericTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testReopenFileNames() throws Exception {
 
 		testFileNames();
@@ -389,7 +392,7 @@ public abstract class AbstractLocalFileSystemTest extends AbstractGenericTest {
 		return df;
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testFilePaths() throws Exception {
 
 		String data = "This is a test";
@@ -421,7 +424,7 @@ public abstract class AbstractLocalFileSystemTest extends AbstractGenericTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testFilePathsWithSpaces() throws Exception {
 
 		String data = "This is a test";
@@ -471,7 +474,7 @@ public abstract class AbstractLocalFileSystemTest extends AbstractGenericTest {
 		return new String(chars);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCreateDataBase() throws Exception {
 
 		createDatabase("/abc", "fred", "123");
@@ -525,7 +528,7 @@ public abstract class AbstractLocalFileSystemTest extends AbstractGenericTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCreateTemporaryDatabase() throws Exception {
 
 		fs.createFolder("/", "abc");
@@ -570,7 +573,7 @@ public abstract class AbstractLocalFileSystemTest extends AbstractGenericTest {
 		assertEquals("fred", names[0]);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDeleteItem() throws Exception {
 
 		testCreateDataBase();
@@ -636,7 +639,7 @@ public abstract class AbstractLocalFileSystemTest extends AbstractGenericTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testMoveDataFile() throws Exception {
 		fs.createFolder("/", "abc");
 		fs.createDataFile("/abc", "fred", null, null, "Data", null);
@@ -665,7 +668,7 @@ public abstract class AbstractLocalFileSystemTest extends AbstractGenericTest {
 		checkEvent("Item Moved", "/abc", "fred", "/xyz", "bob", events.get(1));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testMoveDatabase() throws Exception {
 		fs.createFolder("/", "abc");
 		DBHandle dbh = new DBHandle();
@@ -713,7 +716,7 @@ public abstract class AbstractLocalFileSystemTest extends AbstractGenericTest {
 //		checkEvent("Item Deleted", "/abc", "fred", null, null, events.get(0));
 //	}
 //
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDeleteDatabase() throws Exception {
 		fs.createFolder("/", "abc");
 		DBHandle dbh = new DBHandle();
@@ -748,7 +751,7 @@ public abstract class AbstractLocalFileSystemTest extends AbstractGenericTest {
 		checkEvent("Item Deleted", "/abc", "greg", null, null, events.get(0));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testItemChanged() throws Exception {
 		fs.createFolder("/", "abc");
 		DataFileItem df = fs.createDataFile("/abc", "fred", null, "Data", "DataFile", null);

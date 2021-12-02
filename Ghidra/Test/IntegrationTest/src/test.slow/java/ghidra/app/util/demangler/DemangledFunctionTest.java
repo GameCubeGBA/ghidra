@@ -31,6 +31,8 @@ import ghidra.program.model.symbol.*;
 import ghidra.test.AbstractGhidraHeadlessIntegrationTest;
 import ghidra.test.ToyProgramBuilder;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 public class DemangledFunctionTest extends AbstractGhidraHeadlessIntegrationTest {
 
@@ -38,7 +40,7 @@ public class DemangledFunctionTest extends AbstractGhidraHeadlessIntegrationTest
 	private ProgramDB program;
 	private int txID;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		programBuilder = new ToyProgramBuilder("test", true);
 		programBuilder.createMemory(".text", "0x0100", 0x100);
@@ -46,7 +48,7 @@ public class DemangledFunctionTest extends AbstractGhidraHeadlessIntegrationTest
 		txID = program.startTransaction("Test");
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		program.endTransaction(txID, false);
 	}

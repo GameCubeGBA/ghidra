@@ -20,7 +20,7 @@ import static org.junit.Assert.fail;
 
 import java.io.IOException;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import ghidra.util.NumberUtil;
 
@@ -34,7 +34,7 @@ public class BinaryReaderTest {
 		return new BinaryReader(new ByteArrayProvider(bytes), isLE);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testClone() throws Exception {
 		BinaryReader reader = new BinaryReader(new ByteArrayProvider(new byte[1024]), true);
 		reader.setPointerIndex(0x100);
@@ -48,7 +48,7 @@ public class BinaryReaderTest {
 	// Bytes
 	// ------------------------------------------------------------------------------------
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testReadByte() throws IOException {
 		BinaryReader br = br(true, 1, 2, 127, 255, 0);
 
@@ -66,7 +66,7 @@ public class BinaryReaderTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testReadUnsignedByte() throws IOException {
 		BinaryReader br = br(true, 1, 2, 127, 255, 0);
 
@@ -84,7 +84,7 @@ public class BinaryReaderTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testReadNextByte() throws IOException {
 		BinaryReader br = br(true, 1, 2, 127, 255, 0);
 
@@ -102,7 +102,7 @@ public class BinaryReaderTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testReadNextUnsignedByte() throws IOException {
 		BinaryReader br = br(true, 1, 2, 127, 255, 0);
 
@@ -159,7 +159,7 @@ public class BinaryReaderTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testReadNextShort() throws IOException {
 		BinaryReader br = br(true, 1, 0, 0xff, 0x7f, 0xff, 0xff, 0x00, 0x80);
 
@@ -176,7 +176,7 @@ public class BinaryReaderTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testReadNextUnsignedShort() throws IOException {
 		BinaryReader br = br(true, 1, 0, 0xff, 0x7f, 0xff, 0xff, 0x00, 0x80);
 
@@ -198,7 +198,7 @@ public class BinaryReaderTest {
 	// Ints
 	// ------------------------------------------------------------------------------------
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testReadInt() throws IOException {
 		BinaryReader br =
 			br(true, 1, 0, 0, 0, 0xff, 0xff, 0xff, 0x7f, 0xff, 0xff, 0xff, 0xff, 0, 0, 0, 0x80);
@@ -216,7 +216,7 @@ public class BinaryReaderTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testReadUnsignedInt() throws IOException {
 		BinaryReader br =
 			br(true, 1, 0, 0, 0, 0xff, 0xff, 0xff, 0x7f, 0xff, 0xff, 0xff, 0xff, 0, 0, 0, 0x80);
@@ -275,7 +275,7 @@ public class BinaryReaderTest {
 	// ------------------------------------------------------------------------------------
 	// UTF-16 Unicode String
 	// ------------------------------------------------------------------------------------
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testReadUnicodeString_LE() throws IOException {
 		BinaryReader br = br(true, 1, 1, 1, 'A', 0, 'B', 0, 'C', 0, 0, 0x80, 0);
 		assertEquals("ABC\u8000", br.readUnicodeString(3, 4));

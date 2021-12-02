@@ -52,6 +52,9 @@ import ghidra.program.util.ProgramSelection;
 import ghidra.test.*;
 import ghidra.util.Msg;
 import ghidra.util.table.field.AddressBasedLocation;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class BookmarkPluginTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -66,7 +69,7 @@ public class BookmarkPluginTest extends AbstractGhidraHeadedIntegrationTest {
 	private Bookmark[] bookmarks;
 	private GTable table;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.showTool();
@@ -99,12 +102,12 @@ public class BookmarkPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		return builder.getProgram();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.dispose();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testFiltering() throws Exception {
 		showBookmarkProvider();
 		BookmarkManager bmMgr = program.getBookmarkManager();
@@ -126,7 +129,7 @@ public class BookmarkPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		checkBookmarkTable(bms);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testFilteringByText() throws Exception {
 
 		showBookmarkProvider();
@@ -153,7 +156,7 @@ public class BookmarkPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		checkBookmarkTable(bookmarks);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testFilterPersistence() throws Exception {
 
 		// we want to use a different tool than the rest of the test
@@ -213,7 +216,7 @@ public class BookmarkPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testFilterPersistenceWithMissingType() throws Exception {
 		// load
 		// we want to use a different tool than the rest of the test
@@ -274,7 +277,7 @@ public class BookmarkPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSelectionGoto() throws Exception {
 
 		showBookmarkProvider();
@@ -291,7 +294,7 @@ public class BookmarkPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(addrFactory.getAddress("01001040"), cbPlugin.getCurrentAddress());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSelectionMakeSelection() throws Exception {
 
 		showBookmarkProvider();
@@ -344,7 +347,7 @@ public class BookmarkPluginTest extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEditCategory() throws Exception {
 		showBookmarkProvider();
 
@@ -366,7 +369,7 @@ public class BookmarkPluginTest extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testEditComment() throws Exception {
 
 		showBookmarkProvider();
@@ -392,7 +395,7 @@ public class BookmarkPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		assertTrue(hasFoo);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testAddBookmark() throws Exception {
 		showBookmarkProvider();
 		checkBookmarkTable(bookmarks);
@@ -426,7 +429,7 @@ public class BookmarkPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		checkBookmarkTable(bks);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDeleteBookmarkAction() throws Exception {
 		List<Bookmark> list = getBookmarks(program.getBookmarkManager());
 		Bookmark bookmark = list.get(0);
@@ -446,7 +449,7 @@ public class BookmarkPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		assertFalse(list.contains(bookmark));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDeleteBookmarkUpdatesTable() throws Exception {
 
 		//
@@ -477,7 +480,7 @@ public class BookmarkPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testMultipleDelete() throws Exception {
 		showBookmarkProvider();
 
@@ -512,7 +515,7 @@ public class BookmarkPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		waitForCondition(() -> table.getRowCount() == 0, "Bookmarks not deleted");
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testSetNoteOverDiscontiguosSelection() throws Exception {
 
 		Address address1 = addr("01001160");
@@ -537,7 +540,7 @@ public class BookmarkPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		assertTrue(addresses.contains(address2));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testMarkerAdded() throws Exception {
 		MarkerService markerService = tool.getService(MarkerService.class);
 		MarkerSet markerSet = markerService.getMarkerSet("Type1 Bookmarks", program);
@@ -556,7 +559,7 @@ public class BookmarkPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		assertTrue(addressSet.contains(addr("01001120")));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDeleteOffcutBookmarks() throws Exception {
 		CompoundCmd addCmd = new CompoundCmd("Add Bookmarks");
 		Address a = addr("0100b6db");
@@ -575,7 +578,7 @@ public class BookmarkPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(10, actions.size());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIteratorFromAddress() {
 		BookmarkManager bookmarkManager = program.getBookmarkManager();
 		Iterator<Bookmark> iterator = bookmarkManager.getBookmarksIterator(addr("1001000"), true);
@@ -612,7 +615,7 @@ public class BookmarkPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(addr("1001060"), bookmark.getAddress());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIteratorFromAddress_Backwards() {
 		BookmarkManager bookmarkManager = program.getBookmarkManager();
 		Iterator<Bookmark> iterator = bookmarkManager.getBookmarksIterator(addr("10010060"), false);
@@ -651,7 +654,7 @@ public class BookmarkPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(addr("1001010"), bookmark.getAddress());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testRemoveBookmarksByType() {
 
 		List<Bookmark> list = getBookmarks(program.getBookmarkManager());

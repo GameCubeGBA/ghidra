@@ -19,7 +19,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.concurrent.CountDownLatch;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import docking.DialogComponentProvider;
 import ghidra.framework.cmd.BackgroundCommand;

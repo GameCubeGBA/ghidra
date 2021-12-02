@@ -56,6 +56,9 @@ import ghidra.program.util.ProgramLocation;
 import ghidra.program.util.ProgramSelection;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 
@@ -73,7 +76,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 
 	private GoToService goToService;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -220,7 +223,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		return builder.addr(addr);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		incomingTree.cancelWork();
@@ -229,7 +232,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		env.dispose();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testTextFilterIncoming() {
 		setProviderFunction("0x5000");// has good depth for in and out
 
@@ -250,7 +253,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		assertIncomingNoNode(existingCaller, depth, true);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testTextFilterOutgoing() {
 		setProviderFunction("0x5000");// has good depth for in and out
 
@@ -271,7 +274,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		assertOutgoingNoNode(existingCallee, depth, true);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testChangingDepthWillFilterOnNewText() {
 		// 
 		// Verifies that we can match a filter at one depth and then increase the depth and match
@@ -298,7 +301,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		assertIncomingNode(existingCaller, depth);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDepthPersistence() {
 		//
 		// Set the depth and make sure it is passed to snapshot windows and such
@@ -314,7 +317,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(depth, currentDepthSetting(newProvider));
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testShowingTransientProvider() {
 
 		goTo(addr("0x5000"));// new function
@@ -341,7 +344,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals("Expected exactly one toolbar action", 1, toolBarActionCount);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIncomingExpandToDepthFromRoot() {
 		//
 		// Select a node and expand it recursively, limiting it to the current recurse depth
@@ -357,7 +360,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		assertIncomingMaxDepth(currentDepthSetting(provider), false);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testOutgoingExpandToDepthFromRoot() {
 		//
 		// Select a node and expand it recursively, limiting it to the current recurse depth
@@ -373,7 +376,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		assertOutgoingMaxDepth(currentDepthSetting(provider), false);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIncomingExpandToDepthSelectively() {
 		//
 		// Select a node and expand it recursively, limiting it to the current recurse depth
@@ -392,7 +395,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		assertDepth(node, depth);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testOutgoingExpandToDepthSelectively() {
 		//
 		// Select a node and expand it recursively, limiting it to the current recurse depth.
@@ -410,7 +413,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		assertDepth(node, depth);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testFollowsNavigation() {
 		//
 		// Test that navigating in the code browser will update the provider when the cursor
@@ -437,7 +440,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		assertProviderMatchesListingFunction();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testIncomingCalls() {
 		//
 		// Make sure there are some incoming calls.  Make sure we can open child nodes to see 
@@ -460,7 +463,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 			grandChildren.size() > 0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testOutgoingCalls() {
 		setProviderFunction("0x5000");
 
@@ -480,7 +483,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 			grandChildren.size() > 0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testGoToFromNode() {
 		setProviderFunction("0x5000");
 
@@ -509,7 +512,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 			callNode.getLocation().getAddress(), newCodeBrowserLocation.getAddress());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testMakeSelectionFromNodes() {
 		//
 		// Test that the user can select a node and then right-click to make a program selection.
@@ -548,7 +551,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 			currentSelection.getMinAddress());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testHomeAction_Navigation_DoNotFollow() {
 
 		//
@@ -571,7 +574,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(startAddress, getListingAddress());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testHomeAction_Navigation_Follow() {
 
 		//
@@ -593,7 +596,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(firstCallAddress, getListingAddress());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testFilterOutgoingDuplicates_DifferentSource_SameDestination() {
 		//
 		// Test that the filter action will remove duplicate entries from the child nodes of 
@@ -623,7 +626,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		assertDuplicateChildStatus(nameCountMap, shouldHaveDuplicates);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testFilterOutgoingDuplicates_SameSource_SameDestination() {
 		//
 		// Test that 2 references from the same source address to the same function will not get
@@ -657,7 +660,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(2, nameCountMap.get("Function_6000").size());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testFilterOutgoingDuplicates_SameSource_DifferentDestination() {
 		//
 		// Test that 2 references from the same source address to the same function will not get
@@ -724,7 +727,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		assertDuplicateChildStatus(nameCountMap, shouldHaveDuplicates);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testTracksSelection() {
 		//
 		// Test the action that tracks node selection in the outgoing tree.  When toggled on, 
@@ -788,7 +791,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 			getListingAddress(), startAddress);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCallTreeForExternalFicticiousFunction() {
 		// 
 		// Apparently, we create fake function markup for external functions.  Thus, there is no
@@ -818,7 +821,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 			children.size() > 0);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testRenamingIncomingFunction() {
 		//
 		// Test that renaming a function in the incoming tree will rename the node, if it is
@@ -853,7 +856,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		assertDoesntContainChild(children, originalName);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testRenamingIncomingRootFunction() {
 		setProviderFunction("0x5000");
 

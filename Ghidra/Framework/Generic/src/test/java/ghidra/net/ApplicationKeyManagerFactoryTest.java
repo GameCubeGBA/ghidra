@@ -28,6 +28,9 @@ import org.junit.*;
 
 import generic.test.AbstractGenericTest;
 import ghidra.security.KeyStorePasswordProvider;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ApplicationKeyManagerFactoryTest extends AbstractGenericTest {
 
@@ -67,7 +70,7 @@ public class ApplicationKeyManagerFactoryTest extends AbstractGenericTest {
 		super();
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		keystoreFile = createTempFile("test-key", ".p12");
@@ -79,14 +82,14 @@ public class ApplicationKeyManagerFactoryTest extends AbstractGenericTest {
 		ApplicationKeyManagerFactory.setKeyStorePasswordProvider(passwordProvider);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		if (keystoreFile != null) {
 			keystoreFile.delete();
 		}
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testCancelledPasswordOnSetCertificate() throws Exception {
 
 		assertNull(ApplicationKeyManagerFactory.getKeyStore());

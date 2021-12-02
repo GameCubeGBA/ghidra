@@ -29,7 +29,6 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.XMLOutputter;
-import org.junit.Before;
 import org.junit.Test;
 
 import com.google.gson.JsonObject;
@@ -39,12 +38,13 @@ import ghidra.app.plugin.core.overview.addresstype.AddressType;
 import ghidra.program.model.lang.Endian;
 import ghidra.util.xml.GenericXMLOutputter;
 import ghidra.util.xml.XmlUtilities;
+import org.junit.jupiter.api.BeforeEach;
 
 public class SaveStateTest extends AbstractGenericTest {
 
 	private SaveState ss;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		ss = new SaveState("foo");
 	}

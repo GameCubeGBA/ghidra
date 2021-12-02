@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.junit.After;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.Assert;
 
 import docking.*;
@@ -46,7 +46,7 @@ public abstract class GhidraScreenShotGenerator extends AbstractScreenShotGenera
 	}
 
 	@Override
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 
 		super.tearDown();

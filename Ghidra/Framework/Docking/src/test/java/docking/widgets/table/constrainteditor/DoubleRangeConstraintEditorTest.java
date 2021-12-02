@@ -24,7 +24,7 @@ import javax.swing.JSpinner;
 import javax.swing.JSpinner.NumberEditor;
 import javax.swing.JTextField;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import docking.test.AbstractDockingTest;
@@ -41,7 +41,7 @@ public class DoubleRangeConstraintEditorTest extends AbstractDockingTest {
 	private JTextField lowerTextField;
 	private JTextField upperTextField;
 
-	@Before
+	@BeforeEach
 	public void setup() {
 		constraint = findDoubleConstraint();
 		editor = (DoubleRangeConstraintEditor) constraint.getEditor(null);

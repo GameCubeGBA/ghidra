@@ -42,6 +42,8 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.symbol.EquateTable;
 import ghidra.test.*;
 import ghidra.util.task.TaskMonitor;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Tests for editing an Enumerated data type.
@@ -53,7 +55,7 @@ public class EnumEditor1Test extends AbstractGhidraHeadedIntegrationTest {
 	private TestEnv env;
 	private DataTypeManagerPlugin plugin;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
@@ -67,7 +69,7 @@ public class EnumEditor1Test extends AbstractGhidraHeadedIntegrationTest {
 		env.showTool(program);
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 		env.release(program);
 		env.dispose();

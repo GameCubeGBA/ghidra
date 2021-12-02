@@ -20,7 +20,6 @@ import static org.junit.Assert.assertEquals;
 import org.junit.*;
 
 import ghidra.MiscellaneousPluginPackage;
-import ghidra.framework.options.*;
 import ghidra.framework.options.AutoOptions.NewValue;
 import ghidra.framework.options.AutoOptions.OldValue;
 import ghidra.framework.options.annotation.AutoOptionConsumed;
@@ -30,6 +29,9 @@ import ghidra.framework.plugintool.util.PluginException;
 import ghidra.framework.plugintool.util.PluginStatus;
 import ghidra.test.AbstractGhidraHeadedIntegrationTest;
 import ghidra.test.TestEnv;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AutoOptionsTest extends AbstractGhidraHeadedIntegrationTest {
 	protected static final String OPT1_NAME = "Test Option 1";
@@ -346,18 +348,18 @@ public class AutoOptionsTest extends AbstractGhidraHeadedIntegrationTest {
 	protected TestEnv env;
 	protected PluginTool tool;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		env = new TestEnv();
 		tool = env.getTool();
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() {
 		env.dispose();
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testOptionsRegistered() throws PluginException {
 		addPlugin(tool, AnnotatedWithOptionsPlugin.class);
 
@@ -370,7 +372,7 @@ public class AutoOptionsTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(OptionType.INT_TYPE, opt1.getOptionType());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testOptionsRegisteredExplicitCategory() throws PluginException {
 		addPlugin(tool, AnnotatedWithOptionsPlugin.class);
 
@@ -380,7 +382,7 @@ public class AutoOptionsTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(OptionType.STRING_TYPE, opt2.getOptionType());
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testOptionsUpdated() throws PluginException {
 		AnnotatedWithOptionsPlugin plugin = addPlugin(tool, AnnotatedWithOptionsPlugin.class);
 		ToolOptions options = tool.getOptions(MiscellaneousPluginPackage.NAME);
@@ -390,7 +392,7 @@ public class AutoOptionsTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(10, plugin.myIntOption);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testOptionsUpdatedByMethodNoParam() throws PluginException {
 		AnnotatedWithOptionsNoParamPlugin plugin =
 			addPlugin(tool, AnnotatedWithOptionsNoParamPlugin.class);
@@ -402,7 +404,7 @@ public class AutoOptionsTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(2, plugin.updateNoParamCount);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testOptionsUpdatedByMethodNewOnlyParamDefault() throws PluginException {
 		AnnotatedWithOptionsNewOnlyParamDefaultPlugin plugin =
 			addPlugin(tool, AnnotatedWithOptionsNewOnlyParamDefaultPlugin.class);
@@ -412,7 +414,7 @@ public class AutoOptionsTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(10, plugin.updateNewOnlyParamDefaultNew);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testOptionsUpdatedByMethodNewOnlyParamAnnotated() throws PluginException {
 		AnnotatedWithOptionsNewOnlyParamAnnotatedPlugin plugin =
 			addPlugin(tool, AnnotatedWithOptionsNewOnlyParamAnnotatedPlugin.class);
@@ -422,7 +424,7 @@ public class AutoOptionsTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(10, plugin.updateNewOnlyParamAnnotatedNew);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testOptionsUpdatedByMethodOldOnlyParamAnnotated() throws PluginException {
 		AnnotatedWithOptionsOldOnlyParamAnnotatedPlugin plugin =
 			addPlugin(tool, AnnotatedWithOptionsOldOnlyParamAnnotatedPlugin.class);
@@ -443,7 +445,7 @@ public class AutoOptionsTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(6, plugin.updateNewOldParamDefaultOld);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testOptionsUpdatedByMethodNewOldParamNewAnnotated() throws PluginException {
 		AnnotatedWithOptionsNewOldParamNewAnnotPlugin plugin =
 			addPlugin(tool, AnnotatedWithOptionsNewOldParamNewAnnotPlugin.class);
@@ -454,7 +456,7 @@ public class AutoOptionsTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(6, plugin.updateNewOldParamNewAnnotOld);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testOptionsUpatedByMethodNewOldParamOldAnnotated() throws PluginException {
 		AnnotatedWithOptionsNewOldParamOldAnnotPlugin plugin =
 			addPlugin(tool, AnnotatedWithOptionsNewOldParamOldAnnotPlugin.class);
@@ -465,7 +467,7 @@ public class AutoOptionsTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(6, plugin.updateNewOldParamOldAnnotOld);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testOptionsUpdatedByMethodNewOldParamNewOldAnnotated() throws PluginException {
 		AnnotatedWithOptionsNewOldParamNewOldAnnotPlugin plugin =
 			addPlugin(tool, AnnotatedWithOptionsNewOldParamNewOldAnnotPlugin.class);
@@ -476,7 +478,7 @@ public class AutoOptionsTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(6, plugin.updateNewOldParamNewOldAnnotOld);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testOptionsUpdatedByMethodOldNewParamNewAnnotated() throws PluginException {
 		AnnotatedWithOptionsOldNewParamNewAnnotPlugin plugin =
 			addPlugin(tool, AnnotatedWithOptionsOldNewParamNewAnnotPlugin.class);
@@ -487,7 +489,7 @@ public class AutoOptionsTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(6, plugin.updateOldNewParamNewAnnotOld);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testOptionsUpatedByMethodOldNewParamOldAnnotated() throws PluginException {
 		AnnotatedWithOptionsOldNewParamOldAnnotPlugin plugin =
 			addPlugin(tool, AnnotatedWithOptionsOldNewParamOldAnnotPlugin.class);
@@ -498,7 +500,7 @@ public class AutoOptionsTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(6, plugin.updateOldNewParamOldAnnotOld);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testOptionsUpdatedByMethodOldNewParamOldNewAnnotated() throws PluginException {
 		AnnotatedWithOptionsOldNewParamOldNewAnnotPlugin plugin =
 			addPlugin(tool, AnnotatedWithOptionsOldNewParamOldNewAnnotPlugin.class);
@@ -509,7 +511,7 @@ public class AutoOptionsTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(6, plugin.updateOldNewParamOldNewAnnotOld);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDefaultsDefinerThenConsumer() throws PluginException {
 		AnnotatedWithOptionsPlugin defPlugin = addPlugin(tool, AnnotatedWithOptionsPlugin.class);
 		AnnotatedConsumerOnlyPlugin consPlugin = addPlugin(tool, AnnotatedConsumerOnlyPlugin.class);
@@ -521,7 +523,7 @@ public class AutoOptionsTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(OPT1_DEFAULT, consPlugin.othersIntOption);
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDefaultsConsumerThenDefiner() throws PluginException {
 		AnnotatedConsumerOnlyPlugin consPlugin = addPlugin(tool, AnnotatedConsumerOnlyPlugin.class);
 		AnnotatedWithOptionsPlugin defPlugin = addPlugin(tool, AnnotatedWithOptionsPlugin.class);

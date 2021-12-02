@@ -19,11 +19,11 @@ import static org.junit.Assert.*;
 
 import java.util.Iterator;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import docking.widgets.tree.*;
 import generic.test.AbstractGenericTest;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Class to test the {@link DepthFirstIterator} and {@link BreadthFirstIterator} classes for
@@ -38,7 +38,7 @@ public class TreeIteratorTest {
 	private GTreeNode node0_1;
 	private GTreeNode node1_0;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		root = new GTestNode("root");
 		node0 = new GTestNode("Node0");

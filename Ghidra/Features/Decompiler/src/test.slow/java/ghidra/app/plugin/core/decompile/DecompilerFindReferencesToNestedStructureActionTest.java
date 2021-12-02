@@ -15,7 +15,7 @@
  */
 package ghidra.app.plugin.core.decompile;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 
 import ghidra.app.decompiler.DecompileOptions.NamespaceStrategy;
@@ -41,7 +41,7 @@ public class DecompilerFindReferencesToNestedStructureActionTest
 	}
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		super.setUp();
