@@ -958,10 +958,10 @@ public class DebuggerBreakpointMarkerPlugin extends Plugin
 			return;
 		}
 		Enablement en = breakpointService.computeEnablement(bs, loc);
-		/**
-		 * If we're in the static listing, this will return null, indicating we should use the
-		 * program's perspective. The methods taking trace should accept a null trace and behave
-		 * accordingly. If in the dynamic listing, we act in the context of the returned trace.
+		/*
+		  If we're in the static listing, this will return null, indicating we should use the
+		  program's perspective. The methods taking trace should accept a null trace and behave
+		  accordingly. If in the dynamic listing, we act in the context of the returned trace.
 		 */
 		Trace trace = getTraceFromContext(context);
 		boolean mapped = breakpointService.anyMapped(bs, trace);
