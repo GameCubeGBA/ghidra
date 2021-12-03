@@ -109,7 +109,7 @@ public interface LocationTrackingSpec extends ExtensionPoint {
 	/**
 	 * Compute a title prefix to indicate this tracking specification
 	 * 
-	 * @param thread the provider's current thread
+	 * @param coordinates the provider's current coordinates
 	 * @return a prefix, or {@code null} to use a default
 	 */
 	String computeTitle(DebuggerCoordinates coordinates);
