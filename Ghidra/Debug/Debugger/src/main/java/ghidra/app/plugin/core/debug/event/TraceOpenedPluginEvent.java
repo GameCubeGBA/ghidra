@@ -25,9 +25,9 @@ public class TraceOpenedPluginEvent extends PluginEvent {
 
 	private final WeakReference<Trace> newTraceRef;
 
-	public TraceOpenedPluginEvent(String source, Trace trace) {
-		super(source, NAME + Integer.toHexString(System.identityHashCode(trace)));
-		this.newTraceRef = new WeakReference<>(trace);
+	public TraceOpenedPluginEvent(String sourceName, Trace trace) {
+		super(sourceName, NAME + Integer.toHexString(System.identityHashCode(trace)));
+		newTraceRef = new WeakReference<>(trace);
 	}
 
 	public Trace getTrace() {
