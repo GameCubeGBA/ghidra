@@ -23,8 +23,8 @@ public class TraceActivatedPluginEvent extends PluginEvent {
 
 	private final DebuggerCoordinates coordinates;
 
-	public TraceActivatedPluginEvent(String source, DebuggerCoordinates coordinates) {
-		super(source, NAME);
+	public TraceActivatedPluginEvent(String sourceName, DebuggerCoordinates coordinates) {
+		super(sourceName, NAME);
 		this.coordinates = coordinates;
 	}
 

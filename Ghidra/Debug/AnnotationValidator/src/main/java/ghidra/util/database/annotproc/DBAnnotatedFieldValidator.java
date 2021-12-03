@@ -127,7 +127,7 @@ public class DBAnnotatedFieldValidator extends AbstractDBAnnotationValidator {
 		return codecElem;
 	}
 
-	class A extends DBCachedDomainObjectAdapter {
+	static class A extends DBCachedDomainObjectAdapter {
 
 		protected A(DBHandle dbh, DBOpenMode openMode, TaskMonitor monitor, String name,
 				int timeInterval, int bufSize, Object consumer) {

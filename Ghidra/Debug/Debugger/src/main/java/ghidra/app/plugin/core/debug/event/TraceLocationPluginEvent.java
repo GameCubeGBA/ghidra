@@ -27,8 +27,8 @@ public class TraceLocationPluginEvent extends PluginEvent {
 	private final ProgramLocation loc;
 	private final TraceProgramView view;
 
-	public TraceLocationPluginEvent(String src, ProgramLocation loc) {
-		super(src, NAME);
+	public TraceLocationPluginEvent(String sourceName, ProgramLocation loc) {
+		super(sourceName, NAME);
 		this.loc = Objects.requireNonNull(loc);
 		this.view = (TraceProgramView) loc.getProgram();
 	}

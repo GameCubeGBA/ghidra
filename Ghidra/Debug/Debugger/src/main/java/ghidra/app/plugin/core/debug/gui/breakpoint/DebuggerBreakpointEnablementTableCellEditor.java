@@ -24,14 +24,14 @@ import javax.swing.plaf.basic.BasicButtonUI;
 import javax.swing.table.TableCellEditor;
 
 import docking.widgets.table.GTableFilterPanel;
-import ghidra.app.services.LogicalBreakpoint.Enablement;
+import ghidra.app.services.LogicalBreakpoint;
 
 public class DebuggerBreakpointEnablementTableCellEditor extends AbstractCellEditor
 		implements TableCellEditor, ActionListener {
 	private final GTableFilterPanel<LogicalBreakpointRow> filterPanel;
 	protected final JButton button = new JButton();
 
-	private Enablement value = Enablement.NONE;
+	private LogicalBreakpoint.Enablement value = LogicalBreakpoint.Enablement.NONE;
 	private LogicalBreakpointRow row;
 
 	public DebuggerBreakpointEnablementTableCellEditor(
@@ -62,7 +62,7 @@ public class DebuggerBreakpointEnablementTableCellEditor extends AbstractCellEdi
 			button.setBackground(table.getBackground());
 		}
 		this.row = filterPanel.getRowObject(row);
-		this.value = (Enablement) value;
+		this.value = (LogicalBreakpoint.Enablement) value;
 		button.setIcon(DebuggerBreakpointEnablementTableCellRenderer.iconForEnablement(this.value));
 		button.setHorizontalAlignment(SwingConstants.CENTER);
 		return button;
@@ -73,5 +73,13 @@ public class DebuggerBreakpointEnablementTableCellEditor extends AbstractCellEdi
 		boolean mapped = row.isMapped();
 		value = value.getToggled(mapped);
 		fireEditingStopped();
+	}
+
+	private void readObject(java.io.ObjectInputStream in) throws ClassNotFoundException, java.io.NotSerializableException {
+		throw new java.io.NotSerializableException("ghidra.app.plugin.core.debug.gui.breakpoint.DebuggerBreakpointEnablementTableCellEditor");
+	}
+
+	private void writeObject(java.io.ObjectOutputStream out) throws java.io.NotSerializableException {
+		throw new java.io.NotSerializableException("ghidra.app.plugin.core.debug.gui.breakpoint.DebuggerBreakpointEnablementTableCellEditor");
 	}
 }

@@ -15,7 +15,7 @@
  */
 package ghidra.app.plugin.core.debug.gui.action;
 
-import java.util.Map.Entry;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 import javax.swing.Icon;
@@ -71,7 +71,7 @@ public class VisibleROOnceAutoReadMemorySpec implements AutoReadMemorySpec {
 
 		AddressSet everKnown = new AddressSet();
 		for (AddressRange range : visible) {
-			for (Entry<TraceAddressSnapRange, TraceMemoryState> ent : mm
+			for (Map.Entry<TraceAddressSnapRange, TraceMemoryState> ent : mm
 					.getMostRecentStates(coordinates.getSnap(), range)) {
 				everKnown.add(ent.getKey().getRange());
 			}

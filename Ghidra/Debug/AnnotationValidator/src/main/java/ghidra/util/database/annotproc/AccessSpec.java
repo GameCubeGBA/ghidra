@@ -15,9 +15,8 @@
  */
 package ghidra.util.database.annotproc;
 
-import java.util.Set;
-
 import javax.lang.model.element.Modifier;
+import java.util.Collection;
 
 public enum AccessSpec {
 	PRIVATE(0), PACKAGE(1), PROTECTED(2), PUBLIC(3);
@@ -47,7 +46,7 @@ public enum AccessSpec {
 	 * @param modifiers the element's modifiers
 	 * @return the elements access specification
 	 */
-	public static AccessSpec get(Set<Modifier> modifiers) {
+	public static AccessSpec get(Collection<Modifier> modifiers) {
 		if (modifiers.contains(Modifier.PRIVATE)) {
 			return PRIVATE;
 		}

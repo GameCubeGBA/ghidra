@@ -29,11 +29,11 @@ public class ModelObjectFocusedPluginEvent extends PluginEvent {
 	/**
 	 * Construct a new plugin event.
 	 * 
-	 * @param source name of the plugin that created this event
-	 * @param focusRef the object (ref) associated with this event
+	 * @param sourceName name of the plugin that created this event
+	 * @param focus the object (ref) associated with this event
 	 */
-	public ModelObjectFocusedPluginEvent(String source, TargetObject focus) {
-		super(source, NAME);
+	public ModelObjectFocusedPluginEvent(String sourceName, TargetObject focus) {
+		super(sourceName, NAME);
 		this.focus = focus;
 	}
 

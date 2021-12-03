@@ -103,11 +103,10 @@ public class DebuggerGoToDialog extends DialogComponentProvider {
 			future = CompletableFuture.failedFuture(t);
 		}
 		future.thenAccept(success -> {
-			if (!success) {
-				setStatusText("Address not in trace", MessageType.ERROR, true);
-			}
-			else {
+			if (success) {
 				close();
+			} else {
+				setStatusText("Address not in trace", MessageType.ERROR, true);
 			}
 		}).exceptionally(ex -> {
 			ex = AsyncUtils.unwrapThrowable(ex);

@@ -121,7 +121,7 @@ public class DBAnnotatedObjectValidator {
 
 	}
 
-	protected void checkAccess(VariableElement field, VariableElement column, String name) {
+	protected void checkAccess(Element field, Element column, String name) {
 		AccessSpec fieldSpec = AccessSpec.get(field.getModifiers());
 		AccessSpec columnSpec = AccessSpec.get(column.getModifiers());
 		if (!AccessSpec.isSameOrMorePermissive(fieldSpec, columnSpec)) {

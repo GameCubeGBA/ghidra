@@ -113,11 +113,9 @@ public class DebuggerTrackLocationTrait {
 	protected class TrackSelectionGenerator implements SelectionGenerator {
 		@AutoOptionConsumed(name = DebuggerResources.OPTION_NAME_COLORS_TRACKING_MARKERS)
 		private Color trackingColor;
-		@SuppressWarnings("unused")
-		private final AutoOptions.Wiring autoOptionsWiring;
 
 		public TrackSelectionGenerator() {
-			autoOptionsWiring = AutoOptions.wireOptions(plugin, this);
+			AutoOptions.Wiring autoOptionsWiring = AutoOptions.wireOptions(plugin, this);
 		}
 
 		@Override
