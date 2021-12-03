@@ -41,6 +41,7 @@ import ghidra.framework.plugintool.util.PluginStatus;
 	packageName = DebuggerPluginPackage.NAME,
 	status = PluginStatus.RELEASED,
 	servicesRequired = {},
+	// TODO: Is this needed?
 	servicesProvided = {
 		DebuggerConsoleService.class,
 	})

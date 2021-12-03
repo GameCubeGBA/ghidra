@@ -211,7 +211,7 @@ public class DebuggerBreakpointMarkerPlugin extends Plugin
 		}
 		// TODO: Consider memory protections?
 		Set<TraceBreakpointKind> result =
-			new HashSet<>(Set.of(TraceBreakpointKind.READ, TraceBreakpointKind.WRITE));
+			EnumSet.range(TraceBreakpointKind.READ, TraceBreakpointKind.WRITE);
 		result.retainAll(supported);
 		return result;
 	}

@@ -119,9 +119,7 @@ public abstract class DebuggerReadsMemoryTrait {
 	protected class ForAccessRecorderListener implements TraceRecorderListener {
 		@Override
 		public void processMemoryAccessibilityChanged(TraceRecorder recorder) {
-			Swing.runIfSwingOrRunLater(() -> {
-				actionReadSelected.updateEnabled(null);
-			});
+			Swing.runIfSwingOrRunLater(() -> actionReadSelected.updateEnabled(null));
 		}
 	}
 
