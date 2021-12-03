@@ -61,7 +61,7 @@ public class DebuggerBreakpointLocEnabledTableCellEditor extends AbstractCellEdi
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		value = value == null ? true : !value;
+		value = value == null || !value;
 		fireEditingStopped();
 	}
 

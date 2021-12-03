@@ -513,12 +513,12 @@ public class DebuggerBreakpointMarkerPlugin extends Plugin
 	protected Enablement computeEnablement(ProgramLocation loc) {
 		Program programOrView = loc.getProgram();
 		if (programOrView instanceof TraceProgramView) {
-			return breakpointService.computeEnablement(loc).getPrimary();
+			return breakpointService.get().computeEnablement(loc).getPrimary();
 		}
 		// Program view should consider all trace breakpoints, too
 		// breakpointService.computeEnablement(loc) only considers program breakpoint
-		Set<LogicalBreakpoint> bs = breakpointService.getBreakpointsAt(loc);
-		return breakpointService.computeEnablement(bs);
+		Set<LogicalBreakpoint> bs = breakpointService.get().getBreakpointsAt(loc);
+		return breakpointService.get().computeEnablement(bs);
 	}
 
 	protected class ToggleBreakpointAction extends AbstractToggleBreakpointAction {
@@ -567,7 +567,7 @@ public class DebuggerBreakpointMarkerPlugin extends Plugin
 			}
 			ProgramLocation location = getLocationFromContext(context);
 			long length = computeDefaultLength(context, kinds);
-			placeBreakpointDialog.prompt(tool, breakpointService, NAME, location, length, kinds);
+			placeBreakpointDialog.prompt(tool, breakpointService.get(), NAME, location, length, kinds);
 		}
 
 		@Override
@@ -606,8 +606,8 @@ public class DebuggerBreakpointMarkerPlugin extends Plugin
 				return;
 			}
 			ProgramLocation location = getLocationFromContext(context);
-			Set<LogicalBreakpoint> col = breakpointService.getBreakpointsAt(location);
-			breakpointService.enableAll(col, getTraceFromContext(context)).exceptionally(ex -> {
+			Set<LogicalBreakpoint> col = breakpointService.get().getBreakpointsAt(location);
+			breakpointService.get().enableAll(col, getTraceFromContext(context)).exceptionally(ex -> {
 				breakpointError(NAME, "Could not enable breakpoint", ex);
 				return null;
 			});
@@ -643,8 +643,8 @@ public class DebuggerBreakpointMarkerPlugin extends Plugin
 				return;
 			}
 			ProgramLocation location = getLocationFromContext(context);
-			Set<LogicalBreakpoint> col = breakpointService.getBreakpointsAt(location);
-			breakpointService.disableAll(col, getTraceFromContext(context)).exceptionally(ex -> {
+			Set<LogicalBreakpoint> col = breakpointService.get().getBreakpointsAt(location);
+			breakpointService.get().disableAll(col, getTraceFromContext(context)).exceptionally(ex -> {
 				breakpointError(NAME, "Could not disable breakpoint", ex);
 				return null;
 			});
@@ -682,8 +682,8 @@ public class DebuggerBreakpointMarkerPlugin extends Plugin
 				return;
 			}
 			ProgramLocation location = getLocationFromContext(context);
-			Set<LogicalBreakpoint> col = breakpointService.getBreakpointsAt(location);
-			breakpointService.deleteAll(col, getTraceFromContext(context)).exceptionally(ex -> {
+			Set<LogicalBreakpoint> col = breakpointService.get().getBreakpointsAt(location);
+			breakpointService.get().deleteAll(col, getTraceFromContext(context)).exceptionally(ex -> {
 				breakpointError(NAME, "Could not delete breakpoint", ex);
 				return null;
 			});
@@ -706,7 +706,7 @@ public class DebuggerBreakpointMarkerPlugin extends Plugin
 	// @AutoServiceConsumed via method
 	private MarkerService markerService;
 	// @AutoServiceConsumed via method
-	private DebuggerLogicalBreakpointService breakpointService;
+	private static final ThreadLocal<DebuggerLogicalBreakpointService> breakpointService = new ThreadLocal<>();
 	@AutoServiceConsumed
 	private DebuggerModelService modelService;
 	@AutoServiceConsumed
@@ -715,8 +715,6 @@ public class DebuggerBreakpointMarkerPlugin extends Plugin
 	private DebuggerTraceManagerService traceManager;
 	@AutoServiceConsumed
 	private DebuggerConsoleService consoleService;
-	@SuppressWarnings("unused")
-	private final AutoService.Wiring autoServiceWiring;
 
 	@AutoOptionDefined(
 		name = DebuggerResources.OPTION_NAME_COLORS_ENABLED_BREAKPOINT_MARKERS, //
@@ -774,9 +772,6 @@ public class DebuggerBreakpointMarkerPlugin extends Plugin
 	private boolean breakpointIneffectiveDColoringBackground =
 		DebuggerResources.DEFAULT_COLOR_INEFFECTIVE_D_BREAKPOINT_COLORING_BACKGROUND;
 
-	@SuppressWarnings("unused")
-	private final AutoOptions.Wiring autoOptionsWiring;
-
 	private final Map<Program, BreakpointMarkerSets> markersByProgram = new HashMap<>();
 
 	private final LogicalBreakpointsChangeListener updateMarksListener =
@@ -802,10 +797,10 @@ public class DebuggerBreakpointMarkerPlugin extends Plugin
 
 	public DebuggerBreakpointMarkerPlugin(PluginTool tool) {
 		super(tool);
-		this.autoServiceWiring = AutoService.wireServicesProvidedAndConsumed(this);
-		this.autoOptionsWiring = AutoOptions.wireOptions(this);
+		AutoService.Wiring autoServiceWiring = AutoService.wireServicesProvidedAndConsumed(this);
+		AutoOptions.Wiring autoOptionsWiring = AutoOptions.wireOptions(this);
 
-		updateDebouncer.addListener(__ -> SwingUtilities.invokeLater(() -> updateAllMarks()));
+		updateDebouncer.addListener(__ -> SwingUtilities.invokeLater(this::updateAllMarks));
 
 		tool.addPopupActionProvider(this);
 	}
@@ -913,7 +908,7 @@ public class DebuggerBreakpointMarkerPlugin extends Plugin
 	}
 
 	protected boolean contextCanManipulateBreakpoints(ActionContext ctx) {
-		if (breakpointService == null) {
+		if (breakpointService.get() == null) {
 			return false;
 		}
 		if (!contextHasLocation(ctx)) {
@@ -938,14 +933,14 @@ public class DebuggerBreakpointMarkerPlugin extends Plugin
 
 	protected void doToggleBreakpointsAt(String title, ActionContext context) {
 		// TODO: Seems like this should be in logical breakpoint service?
-		if (breakpointService == null) {
+		if (breakpointService.get() == null) {
 			return;
 		}
 		ProgramLocation loc = getLocationFromContext(context);
 		if (loc == null) {
 			return;
 		}
-		Set<LogicalBreakpoint> bs = breakpointService.getBreakpointsAt(loc);
+		Set<LogicalBreakpoint> bs = breakpointService.get().getBreakpointsAt(loc);
 		if (bs == null || bs.isEmpty()) {
 			Set<TraceBreakpointKind> supported = getSupportedKindsFromContext(context);
 			if (supported.isEmpty()) {
@@ -954,26 +949,26 @@ public class DebuggerBreakpointMarkerPlugin extends Plugin
 			}
 			Set<TraceBreakpointKind> kinds = computeDefaultKinds(context, supported);
 			long length = computeDefaultLength(context, kinds);
-			placeBreakpointDialog.prompt(tool, breakpointService, title, loc, length, kinds);
+			placeBreakpointDialog.prompt(tool, breakpointService.get(), title, loc, length, kinds);
 			return;
 		}
-		Enablement en = breakpointService.computeEnablement(bs, loc);
+		Enablement en = breakpointService.get().computeEnablement(bs, loc);
 		/**
 		 * If we're in the static listing, this will return null, indicating we should use the
 		 * program's perspective. The methods taking trace should accept a null trace and behave
 		 * accordingly. If in the dynamic listing, we act in the context of the returned trace.
 		 */
 		Trace trace = getTraceFromContext(context);
-		boolean mapped = breakpointService.anyMapped(bs, trace);
+		boolean mapped = breakpointService.get().anyMapped(bs, trace);
 		Enablement toggled = en.getToggled(mapped);
 		if (toggled.enabled) {
-			breakpointService.enableAll(bs, trace).exceptionally(ex -> {
+			breakpointService.get().enableAll(bs, trace).exceptionally(ex -> {
 				breakpointError(title, "Could not enable breakpoints", ex);
 				return null;
 			});
 		}
 		else {
-			breakpointService.disableAll(bs, trace).exceptionally(ex -> {
+			breakpointService.get().disableAll(bs, trace).exceptionally(ex -> {
 				breakpointError(title, "Could not disable breakpoints", ex);
 				return null;
 			});
@@ -1027,7 +1022,7 @@ public class DebuggerBreakpointMarkerPlugin extends Plugin
 			for (BreakpointMarkerSets markerSet : markersByProgram.values()) {
 				markerSet.clear();
 			}
-			if (breakpointService == null) {
+			if (breakpointService.get() == null) {
 				return;
 			}
 			for (Map.Entry<Program, BreakpointMarkerSets> pEnt : markersByProgram.entrySet()) {
@@ -1036,11 +1031,11 @@ public class DebuggerBreakpointMarkerPlugin extends Plugin
 				if (program instanceof TraceProgramView) {
 					TraceProgramView view = (TraceProgramView) program;
 					Trace trace = view.getTrace();
-					doMarks(marks, breakpointService.getBreakpoints(trace),
+					doMarks(marks, breakpointService.get().getBreakpoints(trace),
 						lb -> lb.computeEnablementForTrace(trace));
 				}
 				else {
-					doMarks(marks, breakpointService.getBreakpoints(program),
+					doMarks(marks, breakpointService.get().getBreakpoints(program),
 						lb -> lb.computeEnablementForProgram(program));
 				}
 			}
@@ -1060,11 +1055,11 @@ public class DebuggerBreakpointMarkerPlugin extends Plugin
 
 	@AutoServiceConsumed
 	private void setLogicalBreakpointService(DebuggerLogicalBreakpointService breakpointService) {
-		if (this.breakpointService != null) {
-			this.breakpointService.removeChangeListener(updateMarksListener);
+		if (DebuggerBreakpointMarkerPlugin.breakpointService.get() != null) {
+			DebuggerBreakpointMarkerPlugin.breakpointService.get().removeChangeListener(updateMarksListener);
 		}
-		this.breakpointService = breakpointService;
-		if (this.breakpointService != null) {
+		DebuggerBreakpointMarkerPlugin.breakpointService.set(breakpointService);
+		if (DebuggerBreakpointMarkerPlugin.breakpointService.get() != null) {
 			breakpointService.addChangeListener(updateMarksListener);
 			updateAllMarks();
 		}
