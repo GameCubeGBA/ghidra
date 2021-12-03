@@ -22,14 +22,14 @@ import javax.swing.SwingConstants;
 
 import docking.widgets.table.GTableCellRenderingData;
 import ghidra.app.plugin.core.debug.gui.DebuggerResources;
-import ghidra.app.services.LogicalBreakpoint.Enablement;
+import ghidra.app.services.LogicalBreakpoint;
 import ghidra.docking.settings.Settings;
 import ghidra.util.table.column.AbstractGColumnRenderer;
 
 public class DebuggerBreakpointEnablementTableCellRenderer
-		extends AbstractGColumnRenderer<Enablement> {
+		extends AbstractGColumnRenderer<LogicalBreakpoint.Enablement> {
 
-	protected static Icon iconForEnablement(Enablement en) {
+	protected static Icon iconForEnablement(LogicalBreakpoint.Enablement en) {
 		switch (en) {
 			case NONE:
 				return null;
@@ -57,7 +57,7 @@ public class DebuggerBreakpointEnablementTableCellRenderer
 	@Override
 	public Component getTableCellRendererComponent(GTableCellRenderingData data) {
 		super.getTableCellRendererComponent(data);
-		Enablement en = (Enablement) data.getValue();
+		LogicalBreakpoint.Enablement en = (LogicalBreakpoint.Enablement) data.getValue();
 		setIcon(iconForEnablement(en));
 		setHorizontalAlignment(SwingConstants.CENTER);
 		setText("");
@@ -66,7 +66,7 @@ public class DebuggerBreakpointEnablementTableCellRenderer
 	}
 
 	@Override
-	public String getFilterString(Enablement t, Settings settings) {
+	public String getFilterString(LogicalBreakpoint.Enablement t, Settings settings) {
 		return t.name();
 	}
 }

@@ -64,4 +64,12 @@ public class DebuggerBreakpointLocEnabledTableCellEditor extends AbstractCellEdi
 		value = value == null ? true : !value;
 		fireEditingStopped();
 	}
+
+	private void readObject(java.io.ObjectInputStream in) throws ClassNotFoundException, java.io.NotSerializableException {
+		throw new java.io.NotSerializableException("ghidra.app.plugin.core.debug.gui.breakpoint.DebuggerBreakpointLocEnabledTableCellEditor");
+	}
+
+	private void writeObject(java.io.ObjectOutputStream out) throws java.io.NotSerializableException {
+		throw new java.io.NotSerializableException("ghidra.app.plugin.core.debug.gui.breakpoint.DebuggerBreakpointLocEnabledTableCellEditor");
+	}
 }
