@@ -140,7 +140,7 @@ public class ValidationContext {
 		return findSupertype((DeclaredType) elem.asType(), superElem);
 	}
 
-	protected Map<String, TypeMirror> toArgsMap(TypeElement superElem, DeclaredType superType) {
+	protected static Map<String, TypeMirror> toArgsMap(TypeElement superElem, DeclaredType superType) {
 		List<? extends TypeParameterElement> typeParameters = superElem.getTypeParameters();
 		List<? extends TypeMirror> typeArguments = superType.getTypeArguments();
 		assert typeParameters.size() == typeArguments.size();
@@ -159,7 +159,7 @@ public class ValidationContext {
 		return toArgsMap(superElem, findSupertype(elem, superElem));
 	}
 
-	public String format(TypeMirror type) {
+	public static String format(TypeMirror type) {
 		FormatVisitor vis = new FormatVisitor();
 		type.accept(vis, null);
 		return vis.buf.toString();

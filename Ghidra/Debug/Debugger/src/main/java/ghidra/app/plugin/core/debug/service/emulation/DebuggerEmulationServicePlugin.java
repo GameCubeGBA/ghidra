@@ -195,8 +195,8 @@ public class DebuggerEmulationServicePlugin extends Plugin implements DebuggerEm
 	protected void createActions() {
 		actionEmulateProgram = EmulateProgramAction.builder(this)
 				.withContext(ProgramLocationActionContext.class)
-				.enabledWhen(this::emulateProgramEnabled)
-				.popupWhen(this::emulateProgramEnabled)
+				.enabledWhen(DebuggerEmulationServicePlugin::emulateProgramEnabled)
+				.popupWhen(DebuggerEmulationServicePlugin::emulateProgramEnabled)
 				.onAction(this::emulateProgramActivated)
 				.buildAndInstall(tool);
 		actionEmulateAddThread = EmulateAddThreadAction.builder(this)
@@ -207,7 +207,7 @@ public class DebuggerEmulationServicePlugin extends Plugin implements DebuggerEm
 				.buildAndInstall(tool);
 	}
 
-	private boolean emulateProgramEnabled(ProgramLocationActionContext ctx) {
+	private static boolean emulateProgramEnabled(ProgramLocationActionContext ctx) {
 		Program program = ctx.getProgram();
 		// To avoid confusion of "forked from trace," only permit action from static context
 		if (program == null || program instanceof TraceProgramView) {
@@ -299,7 +299,6 @@ public class DebuggerEmulationServicePlugin extends Plugin implements DebuggerEm
 			traceManager.activateThread(thread);
 		}
 		else {
-			Program program = programOrView;
 			Address programPc = ctx.getAddress();
 
 			DebuggerCoordinates current = traceManager.getCurrent();
@@ -316,7 +315,7 @@ public class DebuggerEmulationServicePlugin extends Plugin implements DebuggerEm
 			if (region == null || !region.isExecute()) {
 				return;
 			}*/
-			TraceThread thread = ProgramEmulationUtils.launchEmulationThread(trace, snap, program,
+			TraceThread thread = ProgramEmulationUtils.launchEmulationThread(trace, snap, programOrView,
 				tracePc, programPc);
 			traceManager.activateThread(thread);
 		}
@@ -460,8 +459,8 @@ public class DebuggerEmulationServicePlugin extends Plugin implements DebuggerEm
 				List<CacheKey> toRemove = eldest.stream()
 						.filter(k -> k.trace == evt.getTrace())
 						.collect(Collectors.toList());
-				cache.keySet().removeAll(toRemove);
-				eldest.removeAll(toRemove);
+				toRemove.forEach(cache.keySet()::remove);
+				toRemove.forEach(eldest::remove);
 				assert cache.size() == eldest.size();
 			}
 		}

@@ -317,7 +317,7 @@ public class DebuggerWorkflowServicePlugin extends Plugin
 	@Override
 	public Set<DebuggerBot> getEnabledBots() {
 		synchronized (allBots) {
-			return allBots.stream().filter(a -> a.isEnabled()).collect(Collectors.toSet());
+			return allBots.stream().filter(DebuggerBot::isEnabled).collect(Collectors.toSet());
 		}
 	}
 

@@ -43,7 +43,7 @@ public enum ProgramLocationUtils {
 	 * Otherwise, this ensures that the given view is the canonical one for the same trace. If
 	 * matchSnap is true, the view is only replaced when the replacement shares the same snap.
 	 * 
-	 * @param location a location possibly in a trace view
+	 * @param loc a location possibly in a trace view
 	 * @param matchSnap true to only replace is snap matches, false to always replace
 	 * @return the adjusted location
 	 */

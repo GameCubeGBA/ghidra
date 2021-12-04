@@ -26,11 +26,11 @@ import docking.widgets.table.ColumnSortState.SortDirection;
 import docking.widgets.table.EnumeratedColumnTableModel;
 import ghidra.app.plugin.core.debug.gui.objects.components.ObjectEnumeratedColumnTableModel.ObjectsEnumeratedTableColumn;
 
-public class ObjectEnumeratedColumnTableModel<C extends ObjectsEnumeratedTableColumn<C, ? super R>, R>
+public class ObjectEnumeratedColumnTableModel<C extends ObjectsEnumeratedTableColumn<? super R>, R>
 		extends AbstractSortedTableModel<R> implements EnumeratedColumnTableModel<R> {
 
 	// NOTE: If I need to track indices, addSortListener
-	public static interface ObjectsEnumeratedTableColumn<C, R> {
+	public static interface ObjectsEnumeratedTableColumn<R> {
 		public Object getValueOf(R row);
 
 		public String getHeader();

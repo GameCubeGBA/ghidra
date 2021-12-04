@@ -42,7 +42,7 @@ public class DebuggerLocationLabel extends JLabel {
 
 		public ForLocationLabelTraceListener() {
 			updateLabelDebouncer
-					.addListener(__ -> Swing.runIfSwingOrRunLater(() -> doUpdateLabel()));
+					.addListener(__ -> Swing.runIfSwingOrRunLater(this::doUpdateLabel));
 
 			listenFor(TraceMemoryRegionChangeType.ADDED, this::regionChanged);
 			listenFor(TraceMemoryRegionChangeType.CHANGED, this::regionChanged);

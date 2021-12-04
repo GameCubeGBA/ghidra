@@ -115,9 +115,7 @@ public class DefaultBreakpointRecorder implements ManagedBreakpointRecorder {
 			Set<TraceThread> traceThreads) {
 		String path = loc.getJoinedPath(".");
 		long snap = recorder.getSnap();
-		recorder.parTx.execute("Breakpoint " + path + " placed", () -> {
-			doRecordBreakpoint(snap, loc, traceThreads);
-		}, path);
+		recorder.parTx.execute("Breakpoint " + path + " placed", () -> doRecordBreakpoint(snap, loc, traceThreads), path);
 	}
 
 	protected void doRemoveBreakpointLocation(long snap, TargetBreakpointLocation loc) {
@@ -146,9 +144,7 @@ public class DefaultBreakpointRecorder implements ManagedBreakpointRecorder {
 	public void removeBreakpointLocation(TargetBreakpointLocation loc) {
 		String path = loc.getJoinedPath(".");
 		long snap = recorder.getSnap();
-		recorder.parTx.execute("Breakpoint " + path + " deleted", () -> {
-			doRemoveBreakpointLocation(snap, loc);
-		}, path);
+		recorder.parTx.execute("Breakpoint " + path + " deleted", () -> doRemoveBreakpointLocation(snap, loc), path);
 	}
 
 	protected void doBreakpointLocationChanged(long snap, int length, Address traceAddr,
@@ -181,9 +177,7 @@ public class DefaultBreakpointRecorder implements ManagedBreakpointRecorder {
 	public void breakpointLocationChanged(int length, Address traceAddr, String path)
 			throws AssertionError {
 		long snap = recorder.getSnap();
-		recorder.parTx.execute("Breakpoint length changed", () -> {
-			doBreakpointLocationChanged(snap, length, traceAddr, path);
-		}, path);
+		recorder.parTx.execute("Breakpoint length changed", () -> doBreakpointLocationChanged(snap, length, traceAddr, path), path);
 	}
 
 	protected void doBreakpointSpecChanged(long snap,
@@ -207,9 +201,7 @@ public class DefaultBreakpointRecorder implements ManagedBreakpointRecorder {
 	public void breakpointSpecChanged(TargetBreakpointSpec spec, boolean enabled,
 			Collection<TraceBreakpointKind> kinds) {
 		long snap = recorder.getSnap();
-		spec.getLocations().thenAccept(bpts -> {
-			doBreakpointSpecChanged(snap, bpts, enabled, kinds);
-		}).exceptionally(ex -> {
+		spec.getLocations().thenAccept(bpts -> doBreakpointSpecChanged(snap, bpts, enabled, kinds)).exceptionally(ex -> {
 			Msg.error(this, "Error recording changed breakpoint spec: " + spec.getJoinedPath("."),
 				ex);
 			return null;

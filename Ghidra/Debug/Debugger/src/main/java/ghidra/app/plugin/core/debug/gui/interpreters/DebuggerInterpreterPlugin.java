@@ -121,8 +121,6 @@ public class DebuggerInterpreterPlugin extends AbstractDebuggerPlugin
 			old = connections.remove(targetConsole);
 		}
 		assert old.getInterpreterConsole() == guiConsole;
-		SwingUtilities.invokeLater(() -> {
-			guiConsole.dispose();
-		});
+		SwingUtilities.invokeLater(guiConsole::dispose);
 	}
 }

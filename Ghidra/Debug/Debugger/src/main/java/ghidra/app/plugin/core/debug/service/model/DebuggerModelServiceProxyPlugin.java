@@ -333,9 +333,7 @@ public class DebuggerModelServiceProxyPlugin extends Plugin
 			mrl.remove(offer.getConfigName());
 			mrl.add(offer.getConfigName());
 			writeMostRecentLaunches(program, mrl);
-			CompletableFuture.runAsync(() -> {
-				updateActionDebugProgram();
-			}, AsyncUtils.SWING_EXECUTOR).exceptionally(ex -> {
+			CompletableFuture.runAsync(() -> updateActionDebugProgram(), AsyncUtils.SWING_EXECUTOR).exceptionally(ex -> {
 				Msg.error(this, "Trouble writing recent launches to program user data");
 				return null;
 			});
@@ -345,9 +343,7 @@ public class DebuggerModelServiceProxyPlugin extends Plugin
 					return null;
 				}
 				return ExceptionUtils.rethrow(ex);
-			}).whenCompleteAsync((v, e) -> {
-				updateActionDebugProgram();
-			}, AsyncUtils.SWING_EXECUTOR);
+			}).whenCompleteAsync((v, e) -> updateActionDebugProgram(), AsyncUtils.SWING_EXECUTOR);
 		});
 	}
 
@@ -383,8 +379,8 @@ public class DebuggerModelServiceProxyPlugin extends Plugin
 		List<DebuggerProgramLaunchOffer> offers = program == null ? List.of()
 				: getProgramLaunchOffers(program).collect(Collectors.toList());
 		List<ActionState<DebuggerProgramLaunchOffer>> states = offers.stream()
-				.map(o -> new ActionState<DebuggerProgramLaunchOffer>(o.getButtonTitle(),
-					o.getIcon(), o))
+				.map(o -> new ActionState<>(o.getButtonTitle(),
+						o.getIcon(), o))
 				.collect(Collectors.toList());
 		if (!states.isEmpty()) {
 			actionDebugProgram.setActionStates(states);

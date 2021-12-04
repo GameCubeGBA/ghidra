@@ -55,7 +55,7 @@ public class DefaultDebuggerRegisterMapper implements DebuggerRegisterMapper {
 		return lReg.isBaseRegister();
 	}
 
-	protected synchronized void collectFilteredLanguageRegs() {
+	protected final synchronized void collectFilteredLanguageRegs() {
 		for (Register lReg : language.getRegisters()) {
 			if (!testTraceRegister(lReg)) {
 				continue;

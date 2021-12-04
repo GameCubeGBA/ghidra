@@ -21,7 +21,7 @@ import ghidra.trace.model.breakpoint.TraceBreakpoint;
 
 public interface LogicalBreakpointsChangeListener {
 	default void breakpointAdded(LogicalBreakpoint added) {
-	};
+	}
 
 	default void breakpointsAdded(Collection<LogicalBreakpoint> added) {
 		for (LogicalBreakpoint a : added) {
@@ -30,7 +30,7 @@ public interface LogicalBreakpointsChangeListener {
 	}
 
 	default void breakpointUpdated(LogicalBreakpoint updated) {
-	};
+	}
 
 	default void breakpointsUpdated(Collection<LogicalBreakpoint> updated) {
 		for (LogicalBreakpoint u : updated) {
@@ -39,7 +39,7 @@ public interface LogicalBreakpointsChangeListener {
 	}
 
 	default void breakpointRemoved(LogicalBreakpoint removed) {
-	};
+	}
 
 	default void breakpointsRemoved(Collection<LogicalBreakpoint> removed) {
 		for (LogicalBreakpoint r : removed) {

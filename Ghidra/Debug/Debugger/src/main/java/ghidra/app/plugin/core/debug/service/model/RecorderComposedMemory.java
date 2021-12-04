@@ -177,7 +177,7 @@ public class RecorderComposedMemory implements AbstractRecorderMemory {
 		}
 	}
 
-	protected AddressRange align(Address address, int length) {
+	protected static AddressRange align(Address address, int length) {
 		AddressSpace space = address.getAddressSpace();
 		long offset = address.getOffset();
 		Address start = space.getAddress(offset & BLOCK_MASK);
@@ -185,8 +185,8 @@ public class RecorderComposedMemory implements AbstractRecorderMemory {
 		return new AddressRangeImpl(start, end);
 	}
 
-	protected AddressRange alignWithLimit(Address address, int length,
-			TargetMemoryRegion limit) {
+	protected static AddressRange alignWithLimit(Address address, int length,
+												 TargetMemoryRegion limit) {
 		return align(address, length).intersect(limit.getRange());
 	}
 

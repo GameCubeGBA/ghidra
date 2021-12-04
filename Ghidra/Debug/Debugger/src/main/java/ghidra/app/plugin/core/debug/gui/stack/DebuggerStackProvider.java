@@ -337,9 +337,7 @@ public class DebuggerStackProvider extends ComponentProviderAdapter {
 		if (traceManager == null) {
 			return;
 		}
-		cbFrameSelected.invoke(() -> {
-			traceManager.activateFrame(myActionContext.getFrame().getFrameLevel());
-		});
+		cbFrameSelected.invoke(() -> traceManager.activateFrame(myActionContext.getFrame().getFrameLevel()));
 	}
 
 	private void rowActivated(StackFrameRow row) {

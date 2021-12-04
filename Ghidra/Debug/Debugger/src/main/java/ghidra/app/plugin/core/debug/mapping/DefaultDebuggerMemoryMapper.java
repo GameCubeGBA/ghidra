@@ -45,7 +45,7 @@ public class DefaultDebuggerMemoryMapper implements DebuggerMemoryMapper {
 	public Address traceToTarget(Address traceAddr) {
 		assert isInFactory(traceAddr, traceAddressFactory);
 		return toSameNamedSpace(traceAddr, targetAddressFactory);
-	};
+	}
 
 	@Override
 	public AddressRange traceToTarget(AddressRange traceRange) {

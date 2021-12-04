@@ -51,7 +51,7 @@ public abstract class AbstractMapProposal<T, P, E extends MapEntry<T, P>>
 			return computeKeyMatchScore() + computeLengthScore();
 		}
 
-		protected int computeKeyMatchScore() {
+		protected static int computeKeyMatchScore() {
 			return 3;
 		}
 

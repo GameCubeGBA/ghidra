@@ -435,8 +435,7 @@ public class DebuggerListingProvider extends CodeViewerProvider {
 		 */
 		return new CodeBrowserClipboardProvider(tool, this) {
 			@Override
-			protected boolean pasteBytes(Transferable pasteData)
-					throws UnsupportedFlavorException, IOException {
+			protected boolean pasteBytes(Transferable pasteData) {
 				return false;
 			}
 

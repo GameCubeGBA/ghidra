@@ -205,7 +205,7 @@ public class DebuggerMemoryBytesPlugin
 		 * restored from config state
 		 */
 		List<DebuggerMemoryBytesProvider> disconnected = disconnectedProviders.stream()
-				.filter(p -> p.isFollowsCurrentThread())
+				.filter(DebuggerMemoryBytesProvider::isFollowsCurrentThread)
 				.collect(Collectors.toList());
 		for (DebuggerMemoryBytesProvider p : disconnectedProviders) {
 			if (!disconnected.contains(p)) {
@@ -272,7 +272,7 @@ public class DebuggerMemoryBytesPlugin
 		saveState.putXmlElement(KEY_CONNECTED_PROVIDER, connectedProviderState.saveToXml());
 
 		List<DebuggerMemoryBytesProvider> disconnected = disconnectedProviders.stream()
-				.filter(p -> p.isFollowsCurrentThread())
+				.filter(DebuggerMemoryBytesProvider::isFollowsCurrentThread)
 				.collect(Collectors.toList());
 		int disconnectedCount = disconnected.size();
 		saveState.putInt(KEY_DISCONNECTED_COUNT, disconnectedCount);

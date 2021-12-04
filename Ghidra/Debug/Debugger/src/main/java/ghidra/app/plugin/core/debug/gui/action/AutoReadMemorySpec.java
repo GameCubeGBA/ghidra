@@ -35,9 +35,9 @@ import ghidra.util.classfinder.ExtensionPoint;
 public interface AutoReadMemorySpec extends ExtensionPoint {
 	class Private {
 		private final Map<String, AutoReadMemorySpec> specsByName = new TreeMap<>();
-		private final ChangeListener classListener = this::classesChanged;
 
 		private Private() {
+			ChangeListener classListener = this::classesChanged;
 			ClassSearcher.addChangeListener(classListener);
 		}
 

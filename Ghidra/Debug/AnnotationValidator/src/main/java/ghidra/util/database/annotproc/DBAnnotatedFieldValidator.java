@@ -192,7 +192,7 @@ public class DBAnnotatedFieldValidator extends AbstractDBAnnotationValidator {
 		if (!ctx.isCapturable(objectType.asType(), argOT)) {
 			ctx.messager.printMessage(Kind.ERROR,
 				String.format("Codec %s requires the containing object to conform to %s", codecType,
-					ctx.format(argOT)),
+					ValidationContext.format(argOT)),
 				field);
 		}
 

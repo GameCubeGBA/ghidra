@@ -51,7 +51,7 @@ public class BreakpointActionSet extends LinkedHashSet<BreakpointActionItem> {
 			return action;
 		}
 		TargetBreakpointSpec spec = loc.getSpecification();
-		if (spec instanceof TargetTogglable) {
+		if (spec != null) {
 			DisableBreakpointActionItem action = new DisableBreakpointActionItem(spec);
 			add(action);
 			return action;
@@ -67,7 +67,7 @@ public class BreakpointActionSet extends LinkedHashSet<BreakpointActionItem> {
 			return action;
 		}
 		TargetBreakpointSpec spec = loc.getSpecification();
-		if (spec instanceof TargetTogglable) {
+		if (spec != null) {
 			DeleteBreakpointActionItem action =
 				new DeleteBreakpointActionItem((TargetDeletable) spec);
 			add(action);

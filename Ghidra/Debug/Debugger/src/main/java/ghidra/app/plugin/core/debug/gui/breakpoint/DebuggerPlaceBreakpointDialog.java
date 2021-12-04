@@ -76,7 +76,7 @@ public class DebuggerPlaceBreakpointDialog extends DialogComponentProvider {
 		kindModel.addElement(TraceBreakpointKindSet.encode(Set.of(READ)));
 		kindModel.addElement(TraceBreakpointKindSet.encode(Set.of(WRITE)));
 		kindModel.addElement(TraceBreakpointKindSet.encode(Set.of(READ, WRITE)));
-		fieldKinds = new JComboBox<String>(kindModel);
+		fieldKinds = new JComboBox<>(kindModel);
 		fieldKinds.setEditable(true);
 		panel.add(labelKinds);
 		panel.add(fieldKinds);
@@ -129,11 +129,9 @@ public class DebuggerPlaceBreakpointDialog extends DialogComponentProvider {
 		}
 
 		ProgramLocation loc = new ProgramLocation(program, address);
-		service.placeBreakpointAt(loc, length, kinds).thenAccept(__ -> {
-			close();
-		}).exceptionally(ex -> {
-			ex = AsyncUtils.unwrapThrowable(ex);
-			setStatusText(ex.getMessage(), MessageType.ERROR, true);
+		service.placeBreakpointAt(loc, length, kinds).thenAccept(__ -> close()).exceptionally(ex -> {
+			Throwable throwable = AsyncUtils.unwrapThrowable(ex);
+			setStatusText(throwable.getMessage(), MessageType.ERROR, true);
 			return null;
 		});
 	}

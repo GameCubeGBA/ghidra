@@ -19,6 +19,7 @@ import java.io.File;
 import java.util.*;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -36,6 +37,9 @@ import ghidra.util.Msg;
 
 public enum DebuggerStaticMappingProposals {
 	;
+
+	private static final Pattern COMPILE = Pattern.compile("[0-9A-Fa-f]+");
+	private static final Pattern PATTERN = Pattern.compile("\\s+");
 
 	protected static String getLastLower(String path) {
 		return new File(path).getName().toLowerCase();
@@ -266,16 +270,14 @@ public enum DebuggerStaticMappingProposals {
 				"Encountered unparsable path: " + region.getName());
 			key = region.getName(); // Not a great fallback, but it'll have to do
 		}
-		return Stream.of(key.split("\\s+"))
-				.filter(n -> n.replaceAll("[0-9A-Fa-f]+", "").length() >= 5)
+		return Stream.of(PATTERN.split(key))
+				.filter(n -> COMPILE.matcher(n).replaceAll("").length() >= 5)
 				.collect(Collectors.toSet());
 	}
 
 	public static Set<Set<TraceMemoryRegion>> groupRegionsByLikelyModule(
 			Collection<? extends TraceMemoryRegion> regions) {
-		return groupByComponents(regions, r -> getLikelyModulesFromName(r), (m1, m2) -> {
-			return m1.stream().anyMatch(m2::contains);
-		});
+		return groupByComponents(regions, r -> getLikelyModulesFromName(r), (m1, m2) -> m1.stream().anyMatch(m2::contains));
 	}
 
 	public static Map<Collection<TraceMemoryRegion>, RegionMapProposal> proposeRegionMaps(

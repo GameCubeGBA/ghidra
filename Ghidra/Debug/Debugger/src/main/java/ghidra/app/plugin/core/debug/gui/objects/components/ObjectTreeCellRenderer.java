@@ -57,7 +57,7 @@ class ObjectTreeCellRenderer extends GTreeRenderer {
 			if (targetObject != null) {
 				Map<String, ?> attrs = targetObject.getCachedAttributes();
 				String kind = (String) attrs.get(TargetObject.KIND_ATTRIBUTE_NAME);
-				if (kind != null && !kind.equals("")) {
+				if (kind != null && !kind.isEmpty()) {
 					if (kind.equals("OBJECT_INTRINSIC")) {
 						container.subscribe();
 					}
@@ -70,7 +70,7 @@ class ObjectTreeCellRenderer extends GTreeRenderer {
 			}
 			if (container.getTargetObject() instanceof TargetExecutionStateful) {
 				TargetExecutionStateful stateful = (TargetExecutionStateful) targetObject;
-				if (stateful.getExecutionState().equals(TargetExecutionState.TERMINATED)) {
+				if (stateful.getExecutionState() == TargetExecutionState.TERMINATED) {
 					component.setForeground(provider
 							.getColor(
 								DebuggerObjectsProvider.OPTION_NAME_INVALIDATED_FOREGROUND_COLOR));

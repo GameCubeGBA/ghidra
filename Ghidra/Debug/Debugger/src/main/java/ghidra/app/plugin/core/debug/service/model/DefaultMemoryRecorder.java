@@ -160,7 +160,7 @@ public class DefaultMemoryRecorder implements ManagedMemoryRecorder {
 	}
 
 	public Collection<TraceMemoryFlag> getTraceFlags(TargetMemoryRegion region) {
-		Collection<TraceMemoryFlag> flags = new HashSet<>();
+		Collection<TraceMemoryFlag> flags = EnumSet.noneOf(TraceMemoryFlag.class);
 		if (region.isReadable()) {
 			flags.add(TraceMemoryFlag.READ);
 		}

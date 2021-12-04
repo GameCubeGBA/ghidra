@@ -20,8 +20,6 @@ import java.awt.event.MouseEvent;
 import java.util.*;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 import docking.widgets.table.AbstractSortedTableModel;
 import docking.widgets.table.EnumeratedColumnTableModel;
@@ -58,15 +56,12 @@ public class ObjectTable<R> implements ObjectPane {
 		this.listingService = container.getProvider().getListingService();
 		this.modelService = container.getProvider().getModelService();
 
-		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				if (e.getValueIsAdjusting()) {
-					return;
-				}
-				DebuggerObjectsProvider provider = container.getProvider();
-				provider.getTool().contextChanged(provider);
+		table.getSelectionModel().addListSelectionListener(e -> {
+			if (e.getValueIsAdjusting()) {
+				return;
 			}
+			DebuggerObjectsProvider provider = container.getProvider();
+			provider.getTool().contextChanged(provider);
 		});
 		table.addMouseListener(new MouseAdapter() {
 			@Override
@@ -108,27 +103,21 @@ public class ObjectTable<R> implements ObjectPane {
 
 	@Override
 	public void signalDataChanged(ObjectContainer oc) {
-		Swing.runIfSwingOrRunLater(() -> {
-			update(oc);
-		});
+		Swing.runIfSwingOrRunLater(() -> update(oc));
 	}
 
 	@Override
 	public void signalContentsChanged(ObjectContainer oc) {
-		Swing.runIfSwingOrRunLater(() -> {
-			update(oc);
-		});
+		Swing.runIfSwingOrRunLater(() -> update(oc));
 	}
 
 	@Override
 	public void signalUpdate(ObjectContainer oc) {
-		Swing.runIfSwingOrRunLater(() -> {
-			update(oc);
-		});
+		Swing.runIfSwingOrRunLater(() -> update(oc));
 	}
 
 	@Override
-	public List<? extends Object> update(ObjectContainer changed) {
+	public List<?> update(ObjectContainer changed) {
 		if (changed.equals(container) &&
 			((clazz.equals(ObjectElementRow.class) && changed.hasElements()) ||
 				(clazz.equals(ObjectAttributeRow.class) && !changed.hasElements()))) {
@@ -193,21 +182,17 @@ public class ObjectTable<R> implements ObjectPane {
 	}
 
 	private List<R> updateMatch(ObjectElementRow match) {
-		@SuppressWarnings("unchecked")
 		ObjectEnumeratedColumnTableModel<?, R> m = (ObjectEnumeratedColumnTableModel<?, R>) model;
 		m.updateColumns(match);
 		m.fireTableDataChanged();
 		List<R> list = new ArrayList<>();
-		if (match != null) {
-			list.add((R) match);
-			model.setLastSelectedObjects(list);
-			model.fireTableStructureChanged();
-		}
+		list.add((R) match);
+		model.setLastSelectedObjects(list);
+		model.fireTableStructureChanged();
 		return list;
 	}
 
 	public void setColumns() {
-		@SuppressWarnings("unchecked")
 		ObjectEnumeratedColumnTableModel<?, R> m = (ObjectEnumeratedColumnTableModel<?, R>) model;
 		for (int i = 0; i < model.getRowCount(); i++) {
 			R r = model.getRowObject(i);
@@ -269,9 +254,7 @@ public class ObjectTable<R> implements ObjectPane {
 
 	@Override
 	public void setFocus(TargetObject object, TargetObject focused) {
-		Swing.runIfSwingOrRunLater(() -> {
-			setSelectedObject(focused);
-		});
+		Swing.runIfSwingOrRunLater(() -> setSelectedObject(focused));
 	}
 
 	@Override

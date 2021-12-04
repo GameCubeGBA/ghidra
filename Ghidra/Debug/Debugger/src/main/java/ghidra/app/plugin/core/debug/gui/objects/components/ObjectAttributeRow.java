@@ -56,8 +56,8 @@ public class ObjectAttributeRow {
 
 	public String getDisplay() {
 		String value = to.getDisplay();
-		if (value.indexOf(":") > 0) {
-			value = value.substring(0, value.indexOf(":"));
+		if (value.indexOf(':') > 0) {
+			value = value.substring(0, value.indexOf(':'));
 		}
 		return value;
 	}

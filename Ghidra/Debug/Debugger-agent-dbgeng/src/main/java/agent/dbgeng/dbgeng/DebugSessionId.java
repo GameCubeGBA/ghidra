@@ -43,10 +43,7 @@ public class DebugSessionId implements Comparable<DebugSessionId> {
 			return false;
 		}
 		DebugSessionId that = (DebugSessionId) obj;
-		if (this.id != that.id) {
-			return false;
-		}
-		return true;
+		return this.id == that.id;
 	}
 
 	@Override

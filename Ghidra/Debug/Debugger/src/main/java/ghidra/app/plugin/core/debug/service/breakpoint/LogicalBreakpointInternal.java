@@ -334,7 +334,6 @@ public interface LogicalBreakpointInternal extends LogicalBreakpoint {
 		 * 
 		 * @param actions the action set to populate
 		 * @param kind the kind of breakpoint
-		 * @return a future which completes when the plan is ready
 		 */
 		public void planEnable(BreakpointActionSet actions, long length,
 				Collection<TraceBreakpointKind> kinds) {

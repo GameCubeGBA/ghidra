@@ -47,7 +47,7 @@ public class DisplayMethodsAction extends DockingAction {
 		this.tool = tool;
 		this.provider = provider;
 
-		String[] path = new String[] { "Display methods" };
+		String[] path = { "Display methods" };
 		setPopupMenuData(new MenuData(path, GROUP));
 		setHelpLocation(new HelpLocation(owner, "display_methods"));
 		provider.addLocalAction(this);
@@ -97,15 +97,14 @@ public class DisplayMethodsAction extends DockingAction {
 			AtomicReference<Map<String, ?>> methods) {
 		consoleService.println("Methods for " + container.getTargetObject().getName() + ":");
 		Map<String, ?> map = methods.get();
-		for (String key : map.keySet()) {
-			Object object = map.get(key);
+		map.forEach((key, object) -> {
 			if (object instanceof TargetObject) {
 				TargetObject to = (TargetObject) object;
 				if (to instanceof TargetMethod) {
 					consoleService.println(key);
 				}
 			}
-		}
+		});
 	}
 
 }

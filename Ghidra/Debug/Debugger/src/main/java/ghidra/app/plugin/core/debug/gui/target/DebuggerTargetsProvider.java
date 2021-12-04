@@ -296,7 +296,7 @@ public class DebuggerTargetsProvider extends ComponentProviderAdapter {
 		tree.setSelectionPaths(new TreePath[] { node.getTreePath() }, EventOrigin.API_GENERATED);
 	}
 
-	protected void clearServiceCaches(DebuggerModelService service) {
+	protected static void clearServiceCaches(DebuggerModelService service) {
 		for (DebuggerObjectModel model : service.getModels()) {
 			model.invalidateAllLocalCaches();
 		}

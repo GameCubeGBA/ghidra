@@ -58,7 +58,7 @@ public class ShowInterpreterDebuggerBot implements DebuggerBot {
 	public void modelAdded(DebuggerObjectModel model) {
 		model.fetchModelRoot().thenCompose(root -> {
 			CompletableFuture<? extends TargetInterpreter> fi =
-				DebugModelConventions.findSuitable(TargetInterpreter.class, root);
+				DebugModelConventions.suitable(TargetInterpreter.class, root);
 			return fi;
 		}).thenAccept(interpreter -> {
 			if (interpreter == null) {
@@ -70,9 +70,7 @@ public class ShowInterpreterDebuggerBot implements DebuggerBot {
 			if (service == null) {
 				return;
 			}
-			Swing.runIfSwingOrRunLater(() -> {
-				service.showConsole(interpreter);
-			});
+			Swing.runIfSwingOrRunLater(() -> service.showConsole(interpreter));
 		}).exceptionally(ex -> {
 			Msg.error(this, "Error displaying debugger interpreter for " + model, ex);
 			return null;

@@ -33,10 +33,7 @@ public class EnableBreakpointActionItem implements BreakpointActionItem {
 			return false;
 		}
 		EnableBreakpointActionItem that = (EnableBreakpointActionItem) obj;
-		if (this.togglable != that.togglable) {
-			return false;
-		}
-		return true;
+		return this.togglable == that.togglable;
 	}
 
 	@Override

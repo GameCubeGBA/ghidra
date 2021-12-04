@@ -30,9 +30,7 @@ public class ObjectElementRow {
 
 	public ObjectElementRow(TargetObject ref, DebuggerObjectsProvider provider) {
 		this.to = ref;
-		to.fetchAttributes(true).thenAccept(attributes -> {
-			map = attributes;
-		}).exceptionally(ex -> {
+		to.fetchAttributes(true).thenAccept(attributes -> map = attributes).exceptionally(ex -> {
 			Msg.error(this, "Failed to fetch attributes");
 			return null;
 		});
@@ -43,23 +41,21 @@ public class ObjectElementRow {
 	}
 
 	public List<String> getKeys() {
-		List<String> keys = new ArrayList<String>();
+		List<String> keys = new ArrayList<>();
 		keys.add("Accessor");
 		if (map == null) {
 			return keys;
 		}
-		for (String key : map.keySet()) {
-			Object value = map.get(key);
+		map.forEach((key, value) -> {
 			if (value instanceof TargetObject) {
 				TargetObject t = (TargetObject) value;
 				if (!(t instanceof TargetMethod)) {
 					keys.add(key);
 				}
-			}
-			else {
+			} else {
 				keys.add(key);
 			}
-		}
+		});
 		return keys;
 	}
 

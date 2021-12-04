@@ -36,11 +36,11 @@ import resources.ResourceManager;
 public class DisplayAsXMLAction extends DisplayAsAction {
 
 	protected ConsoleService consoleService;
-	protected ImageIcon ICON_XML = ResourceManager.loadImage("images/text-xml.png");;
+	protected ImageIcon ICON_XML = ResourceManager.loadImage("images/text-xml.png");
 
 	public DisplayAsXMLAction(PluginTool tool, String owner, DebuggerObjectsProvider provider) {
 		super("DisplayXml", tool, owner, provider);
-		String[] path = new String[] { "Display as...", "XML" };
+		String[] path = { "Display as...", "XML" };
 		setPopupMenuData(new MenuData(path, ICON_XML));
 		setKeyBindingData(new KeyBindingData(KeyEvent.VK_E, InputEvent.CTRL_DOWN_MASK));
 		setHelpLocation(new HelpLocation(owner, "display_as_xml"));

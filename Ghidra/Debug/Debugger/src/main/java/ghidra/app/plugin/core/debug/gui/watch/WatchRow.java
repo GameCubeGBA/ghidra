@@ -82,7 +82,7 @@ public class WatchRow {
 	protected void recompile() {
 		compiled = null;
 		error = null;
-		if (expression == null || expression.length() == 0) {
+		if (expression == null || expression.isEmpty()) {
 			return;
 		}
 		if (language == null) {
@@ -101,9 +101,7 @@ public class WatchRow {
 		if (compiled != null && asyncExecutor != null) {
 			compiled.evaluate(asyncExecutor).exceptionally(ex -> {
 				error = ex;
-				Swing.runIfSwingOrRunLater(() -> {
-					provider.watchTableModel.notifyUpdated(this);
-				});
+				Swing.runIfSwingOrRunLater(() -> provider.watchTableModel.notifyUpdated(this));
 				return null;
 			});
 			// NB. Re-evaluation triggered by database changes, or called separately
@@ -127,7 +125,7 @@ public class WatchRow {
 
 			valueString = parseAsDataType();
 		}
-		catch (Exception e) {
+		catch (RuntimeException e) {
 			error = e;
 		}
 	}
@@ -363,8 +361,8 @@ public class WatchRow {
 
 	public void setRawValueString(String valueString) {
 		valueString = valueString.trim();
-		if (valueString.startsWith("{")) {
-			if (!valueString.endsWith("}")) {
+		if (!valueString.isEmpty() && valueString.charAt(0) == '{') {
+			if (valueString.charAt(valueString.length() - 1) != '}') {
 				throw new NumberFormatException("Byte array values must be hex enclosed in {}");
 			}
 
@@ -459,7 +457,7 @@ public class WatchRow {
 			return "";
 		}
 		String message = error.getMessage();
-		if (message != null && message.trim().length() != 0) {
+		if (message != null && !message.trim().isEmpty()) {
 			return message;
 		}
 		return error.getClass().getSimpleName();

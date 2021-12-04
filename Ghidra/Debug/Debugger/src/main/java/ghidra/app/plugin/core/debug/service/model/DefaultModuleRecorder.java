@@ -68,9 +68,7 @@ public class DefaultModuleRecorder implements ManagedModuleRecorder {
 	public void offerProcessModule(TargetModule module) {
 		long snap = recorder.getSnap();
 		String path = module.getJoinedPath(".");
-		recorder.parTx.execute("Module " + path + " loaded", () -> {
-			doRecordProcessModule(snap, module);
-		}, path);
+		recorder.parTx.execute("Module " + path + " loaded", () -> doRecordProcessModule(snap, module), path);
 	}
 
 	protected TraceSection doRecordProcessModuleSection(long snap, TargetSection section) {
@@ -127,9 +125,7 @@ public class DefaultModuleRecorder implements ManagedModuleRecorder {
 	public void removeProcessModule(TargetModule module) {
 		long snap = recorder.getSnap();
 		String path = module.getJoinedPath(".");
-		recorder.parTx.execute("Module " + path + " unloaded", () -> {
-			doRemoveProcessModule(snap, module);
-		}, path);
+		recorder.parTx.execute("Module " + path + " unloaded", () -> doRemoveProcessModule(snap, module), path);
 	}
 
 	@Override

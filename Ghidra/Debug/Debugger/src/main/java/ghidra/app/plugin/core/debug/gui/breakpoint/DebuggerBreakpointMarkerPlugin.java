@@ -539,10 +539,7 @@ public class DebuggerBreakpointMarkerPlugin extends Plugin
 
 		@Override
 		public boolean isEnabledForContext(ActionContext context) {
-			if (!contextCanManipulateBreakpoints(context)) {
-				return false;
-			}
-			return true;
+			return contextCanManipulateBreakpoints(context);
 		}
 	}
 
@@ -620,10 +617,7 @@ public class DebuggerBreakpointMarkerPlugin extends Plugin
 			}
 			ProgramLocation location = getLocationFromContext(context);
 			Enablement en = computeEnablement(location);
-			if (en == Enablement.ENABLED || en == Enablement.NONE) {
-				return false;
-			}
-			return true;
+			return en != Enablement.ENABLED && en != Enablement.NONE;
 		}
 	}
 
@@ -696,10 +690,7 @@ public class DebuggerBreakpointMarkerPlugin extends Plugin
 			}
 			ProgramLocation location = getLocationFromContext(context);
 			Enablement en = computeEnablement(location);
-			if (en == Enablement.NONE) {
-				return false;
-			}
-			return true;
+			return en != Enablement.NONE;
 		}
 	}
 
@@ -805,7 +796,7 @@ public class DebuggerBreakpointMarkerPlugin extends Plugin
 		this.autoServiceWiring = AutoService.wireServicesProvidedAndConsumed(this);
 		this.autoOptionsWiring = AutoOptions.wireOptions(this);
 
-		updateDebouncer.addListener(__ -> SwingUtilities.invokeLater(() -> updateAllMarks()));
+		updateDebouncer.addListener(__ -> SwingUtilities.invokeLater(this::updateAllMarks));
 
 		tool.addPopupActionProvider(this);
 	}

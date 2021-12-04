@@ -41,7 +41,6 @@ public class MemviewProvider extends ComponentProviderAdapter {
 
 	private static final String TITLE = "Memview";
 
-	private Wiring autoServiceWiring;
 	@AutoServiceConsumed
 	private DebuggerListingService listingService;
 
@@ -63,7 +62,7 @@ public class MemviewProvider extends ComponentProviderAdapter {
 		super(tool, TITLE, plugin.getName());
 		this.plugin = plugin;
 
-		this.autoServiceWiring = AutoService.wireServicesConsumed(plugin, this);
+		Wiring autoServiceWiring = AutoService.wireServicesConsumed(plugin, this);
 
 		//setIcon(DebuggerResources.ICON_PROVIDER_REGIONS);
 		//setHelpLocation(DebuggerResources.HELP_PROVIDER_REGIONS);
@@ -99,14 +98,14 @@ public class MemviewProvider extends ComponentProviderAdapter {
 				//.menuPath("&Toggle layout") //
 				.toolBarIcon(AbstractRefreshAction.ICON)
 				.helpLocation(new HelpLocation(plugin.getName(), "toggle_layout")) //
-				.onAction(ctx -> performToggleLayout(ctx))
+				.onAction(this::performToggleLayout)
 				.buildAndInstallLocal(this);
 
 		new ToggleActionBuilder("Toggle Process Trace", plugin.getName()) //
 				//.menuPath("&Toggle layout") //
 				.toolBarIcon(DebuggerResources.ICON_SYNC)
 				.helpLocation(new HelpLocation(plugin.getName(), "toggle_process_trace")) //
-				.onAction(ctx -> performToggleTrace(ctx))
+				.onAction(this::performToggleTrace)
 				.selected(false)
 				.buildAndInstallLocal(this);
 
@@ -114,7 +113,7 @@ public class MemviewProvider extends ComponentProviderAdapter {
 				//.menuPath("&Toggle layout") //
 				.toolBarIcon(DebuggerResources.ICON_FILTER)
 				.helpLocation(new HelpLocation(plugin.getName(), "apply_to_panel")) //
-				.onAction(ctx -> performApplyFilterToPanel(ctx))
+				.onAction(this::performApplyFilterToPanel)
 				.selected(true)
 				.buildAndInstallLocal(this);
 

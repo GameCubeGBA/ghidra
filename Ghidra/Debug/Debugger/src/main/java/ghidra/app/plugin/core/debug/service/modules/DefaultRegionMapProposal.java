@@ -136,9 +136,8 @@ public class DefaultRegionMapProposal
 	protected DefaultRegionMapProposal(Collection<? extends TraceMemoryRegion> regions,
 			Program program) {
 		super(getTrace(regions), program);
-		this.regions = Collections.unmodifiableList(regions.stream()
-				.sorted(Comparator.comparing(r -> r.getMinAddress()))
-				.collect(Collectors.toList()));
+		this.regions = regions.stream()
+				.sorted(Comparator.comparing(TraceMemoryRegion::getMinAddress)).collect(Collectors.toUnmodifiableList());
 		this.fromBase = computeFromBase();
 		this.toBase = program.getImageBase();
 		processRegions();

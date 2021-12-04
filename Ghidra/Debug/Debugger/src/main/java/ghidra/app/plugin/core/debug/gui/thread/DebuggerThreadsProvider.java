@@ -227,7 +227,7 @@ public class DebuggerThreadsProvider extends ComponentProviderAdapter {
 			super(plugin);
 			setToolBarData(new ToolBarData(ICON, GROUP));
 			addLocalAction(this);
-			setSelected(traceManager == null ? false : traceManager.isAutoActivatePresent());
+			setSelected(traceManager != null && traceManager.isAutoActivatePresent());
 			traceManager.addAutoActivatePresentChangeListener(this);
 		}
 
@@ -644,17 +644,11 @@ public class DebuggerThreadsProvider extends ComponentProviderAdapter {
 		final Trace trace = traceTabs.getItem(i);
 		JMenuItem closeItem =
 			new JMenuItem("Close " + trace.getName(), DebuggerResources.ICON_CLOSE);
-		closeItem.addActionListener(evt -> {
-			traceManager.closeTrace(trace);
-		});
+		closeItem.addActionListener(evt -> traceManager.closeTrace(trace));
 		JMenuItem closeOthers = new JMenuItem("Close Others", DebuggerResources.ICON_CLOSE);
-		closeOthers.addActionListener(evt -> {
-			traceManager.closeOtherTraces(trace);
-		});
+		closeOthers.addActionListener(evt -> traceManager.closeOtherTraces(trace));
 		JMenuItem closeDead = new JMenuItem("Close Dead", DebuggerResources.ICON_CLOSE);
-		closeDead.addActionListener(evt -> {
-			traceManager.closeDeadTraces();
-		});
+		closeDead.addActionListener(evt -> traceManager.closeDeadTraces());
 		JMenuItem closeAll = new JMenuItem("Close All", DebuggerResources.ICON_CLOSE);
 		closeAll.addActionListener(evt -> {
 			for (Trace t : List.copyOf(traceManager.getOpenTraces())) {

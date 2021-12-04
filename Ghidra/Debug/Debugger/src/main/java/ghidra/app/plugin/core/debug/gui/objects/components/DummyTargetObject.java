@@ -55,7 +55,7 @@ public class DummyTargetObject implements TargetObject {
 		this.kind = kind;
 		this.value = value;
 		this.type = type;
-		this.key = path.size() > 0 ? path.get(path.size() - 1) : "";
+		this.key = !path.isEmpty() ? path.get(path.size() - 1) : "";
 		this.hash = computeHashCode();
 	}
 
@@ -67,7 +67,7 @@ public class DummyTargetObject implements TargetObject {
 		this.kind = kind;
 		this.value = value;
 		this.type = type;
-		this.key = path.size() > 0 ? path.get(path.size() - 1) : "";
+		this.key = !path.isEmpty() ? path.get(path.size() - 1) : "";
 		this.hash = computeHashCode();
 		if (objects != null) {
 			for (TargetObject obj : objects) {
@@ -85,7 +85,7 @@ public class DummyTargetObject implements TargetObject {
 		this.kind = kind;
 		this.value = value;
 		this.type = type;
-		this.key = path.size() > 0 ? path.get(path.size() - 1) : "";
+		this.key = !path.isEmpty() ? path.get(path.size() - 1) : "";
 		this.hash = computeHashCode();
 		if (!(parent instanceof DummyTargetObject)) {
 			fetchAttributes();
@@ -136,7 +136,7 @@ public class DummyTargetObject implements TargetObject {
 			return "";
 		}
 		String ret = path.get(path.size() - 1);
-		if (ret.endsWith("]")) {
+		if (!ret.isEmpty() && ret.charAt(ret.length() - 1) == ']') {
 			ret = ret.substring(ret.indexOf("["));
 		}
 		return ret;
@@ -185,7 +185,7 @@ public class DummyTargetObject implements TargetObject {
 				String display = getName() + " : " + value;
 				addAttribute(TargetObject.DISPLAY_ATTRIBUTE_NAME, display);
 			}
-			if (kind != null && !kind.equals("")) {
+			if (kind != null && !kind.isEmpty()) {
 				addAttribute(TargetObject.KIND_ATTRIBUTE_NAME, kind);
 			}
 			else {

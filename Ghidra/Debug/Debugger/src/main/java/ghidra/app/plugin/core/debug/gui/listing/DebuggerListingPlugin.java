@@ -415,7 +415,7 @@ public class DebuggerListingPlugin extends AbstractCodeBrowserPlugin<DebuggerLis
 		 * restored from config state
 		 */
 		List<DebuggerListingProvider> disconnected = disconnectedProviders.stream()
-				.filter(p -> p.isFollowsCurrentThread())
+				.filter(DebuggerListingProvider::isFollowsCurrentThread)
 				.collect(Collectors.toList());
 		for (DebuggerListingProvider p : disconnectedProviders) {
 			if (!disconnected.contains(p)) {

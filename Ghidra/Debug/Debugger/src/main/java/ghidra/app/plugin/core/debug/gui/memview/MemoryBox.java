@@ -86,7 +86,7 @@ public class MemoryBox {
 	}
 
 	public void setEnd(long tick) {
-		this.stop = stop < tick ? stop : tick;
+		this.stop = Math.min(stop, tick);
 	}
 
 	public Color getColor() {
@@ -98,12 +98,12 @@ public class MemoryBox {
 	}
 
 	public void setColor(Color base, int type) {
-		setColor(new Color(base.getRed(), (base.getGreen() + type) % 255, base.getBlue()));
+		color = new Color(base.getRed(), (base.getGreen() + type) % 255, base.getBlue());
 	}
 
 	public void setColor(Color base, int type, int src) {
-		setColor(new Color(base.getRed(), (base.getGreen() + type * 8) % 255,
-			(base.getBlue() + src * 16) % 255));
+		color = new Color(base.getRed(), (base.getGreen() + (type << 3)) % 255,
+				(base.getBlue() + (src << 4)) % 255);
 	}
 
 	public int getAddressPixelStart() {
@@ -239,11 +239,11 @@ public class MemoryBox {
 
 	public Map<String, Object> getAttributeMap() {
 		Map<String, Object> map = new HashMap<>();
-		map.put("Id", getId());
-		map.put("StartAddr", getStartAddress());
-		map.put("StopAddr", getStopAddress());
-		map.put("StartTime", getStartTime());
-		map.put("StopTIme", getStopTime());
+		map.put("Id", id);
+		map.put("StartAddr", startAddr);
+		map.put("StopAddr", stopAddr);
+		map.put("StartTime", startTime);
+		map.put("StopTIme", stopTime);
 		return map;
 	}
 }

@@ -45,9 +45,9 @@ import ghidra.util.classfinder.ExtensionPoint;
 public interface LocationTrackingSpec extends ExtensionPoint {
 	class Private {
 		private final Map<String, LocationTrackingSpec> specsByName = new TreeMap<>();
-		private final ChangeListener classListener = this::classesChanged;
 
 		private Private() {
+			ChangeListener classListener = this::classesChanged;
 			ClassSearcher.addChangeListener(classListener);
 		}
 
@@ -109,7 +109,7 @@ public interface LocationTrackingSpec extends ExtensionPoint {
 	/**
 	 * Compute a title prefix to indicate this tracking specification
 	 * 
-	 * @param thread the provider's current thread
+	 * @param coordinates the provider's current coordinates
 	 * @return a prefix, or {@code null} to use a default
 	 */
 	String computeTitle(DebuggerCoordinates coordinates);

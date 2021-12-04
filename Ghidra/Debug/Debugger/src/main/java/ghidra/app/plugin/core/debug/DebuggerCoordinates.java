@@ -58,7 +58,7 @@ public class DebuggerCoordinates {
 	public static DebuggerCoordinates all(Trace trace, TraceRecorder recorder, TraceThread thread,
 			TraceProgramView view, TraceSchedule time, Integer frame) {
 		if (trace == NOWHERE.trace && recorder == NOWHERE.recorder && thread == NOWHERE.thread &&
-			view == NOWHERE.view && time == NOWHERE.time && frame == NOWHERE.frame) {
+			view == NOWHERE.view && time == NOWHERE.time && frame.equals(NOWHERE.frame)) {
 			return NOWHERE;
 		}
 		return new DebuggerCoordinates(trace, recorder, thread, view, time, frame);

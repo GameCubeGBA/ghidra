@@ -483,7 +483,7 @@ public class DebuggerWatchesProvider extends ComponentProviderAdapter {
 			}
 		}
 		if (!errs.isEmpty()) {
-			StringBuffer msg = new StringBuffer("One or more types could not be applied:");
+			StringBuilder msg = new StringBuilder("One or more types could not be applied:");
 			for (String line : errs) {
 				msg.append("\n    ");
 				msg.append(line);
@@ -578,7 +578,7 @@ public class DebuggerWatchesProvider extends ComponentProviderAdapter {
 			readTarget();
 		}
 		reevaluate();
-		Swing.runIfSwingOrRunLater(() -> watchTableModel.fireTableDataChanged());
+		Swing.runIfSwingOrRunLater(watchTableModel::fireTableDataChanged);
 	}
 
 	public synchronized void setRowsContext(DebuggerCoordinates coordinates) {

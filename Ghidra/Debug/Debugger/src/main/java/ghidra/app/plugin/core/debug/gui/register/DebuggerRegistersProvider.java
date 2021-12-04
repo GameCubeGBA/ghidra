@@ -183,7 +183,7 @@ public class DebuggerRegistersProvider extends ComponentProviderAdapter
 
 	class TraceChangeListener extends TraceDomainObjectListener {
 		public TraceChangeListener() {
-			listenForUntyped(DomainObject.DO_OBJECT_RESTORED, e -> objectRestored(e));
+			listenForUntyped(DomainObject.DO_OBJECT_RESTORED, this::objectRestored);
 			listenFor(TraceMemoryBytesChangeType.CHANGED, this::registerValueChanged);
 			listenFor(TraceMemoryStateChangeType.CHANGED, this::registerStateChanged);
 			listenFor(TraceCodeChangeType.ADDED, this::registerTypeAdded);
@@ -810,15 +810,15 @@ public class DebuggerRegistersProvider extends ComponentProviderAdapter
 					.writeThreadRegisters(current.getThread(), current.getFrame(),
 						Map.of(rv.getRegister(), rv));
 			future.exceptionally(ex -> {
-				ex = AsyncUtils.unwrapThrowable(ex);
-				if (ex instanceof DebuggerModelAccessException) {
-					Msg.error(this, "Could not write target register", ex);
+				Throwable throwable = AsyncUtils.unwrapThrowable(ex);
+				if (throwable instanceof DebuggerModelAccessException) {
+					Msg.error(this, "Could not write target register", throwable);
 					plugin.getTool()
-							.setStatusInfo("Could not write target register: " + ex.getMessage());
+							.setStatusInfo("Could not write target register: " + throwable.getMessage());
 				}
 				else {
 					Msg.showError(this, getComponent(), "Edit Register",
-						"Could not write target register", ex);
+						"Could not write target register", throwable);
 				}
 				return null;
 			});
@@ -828,7 +828,7 @@ public class DebuggerRegistersProvider extends ComponentProviderAdapter
 		traceManager.activateTime(time);
 	}
 
-	protected String generateSleigh(RegisterValue rv) {
+	protected static String generateSleigh(RegisterValue rv) {
 		return String.format("%s=0x%s", rv.getRegister(), rv.getUnsignedValue().toString(16));
 	}
 
@@ -972,7 +972,6 @@ public class DebuggerRegistersProvider extends ComponentProviderAdapter
 	}
 
 	public LinkedHashSet<Register> computeDefaultRegistersOld(TraceThread thread) {
-		LinkedHashSet<Register> viewKnown = new LinkedHashSet<>();
 		/**
 		 * NOTE: It is rare that this includes registers outside of those common to the view and
 		 * target, but in case the user has manually populated such registers, this will ensure they
@@ -980,7 +979,7 @@ public class DebuggerRegistersProvider extends ComponentProviderAdapter
 		 * 
 		 * Also, in case the current thread is not live, we want the DB values to appear.
 		 */
-		viewKnown.addAll(collectBaseRegistersWithKnownValues(thread));
+		LinkedHashSet<Register> viewKnown = new LinkedHashSet<>(collectBaseRegistersWithKnownValues(thread));
 		Trace trace = thread.getTrace();
 		TraceRecorder recorder = modelService.getRecorder(trace);
 		if (recorder == null) {
@@ -1158,7 +1157,7 @@ public class DebuggerRegistersProvider extends ComponentProviderAdapter
 		return readTheseCoords.request();
 	}
 
-	private Set<Register> baseRegisters(Set<Register> regs) {
+	private static Set<Register> baseRegisters(Set<Register> regs) {
 		return regs.stream().filter(Register::isBaseRegister).collect(Collectors.toSet());
 	}
 
@@ -1194,18 +1193,18 @@ public class DebuggerRegistersProvider extends ComponentProviderAdapter
 		CompletableFuture<?> future =
 			recorder.captureThreadRegisters(traceThread, current.getFrame(), toRead);
 		return future.exceptionally(ex -> {
-			ex = AsyncUtils.unwrapThrowable(ex);
-			if (ex instanceof DebuggerModelAccessException) {
+			Throwable throwable = AsyncUtils.unwrapThrowable(ex);
+			if (throwable instanceof DebuggerModelAccessException) {
 				String msg =
-					"Could not read target registers for selected thread: " + ex.getMessage();
+					"Could not read target registers for selected thread: " + throwable.getMessage();
 				Msg.info(this, msg);
 				plugin.getTool().setStatusInfo(msg);
 			}
 			else {
 				Msg.showError(this, getComponent(), "Read Target Registers",
-					"Could not read target registers for selected thread", ex);
+					"Could not read target registers for selected thread", throwable);
 			}
-			return ExceptionUtils.rethrow(ex);
+			return ExceptionUtils.rethrow(throwable);
 		}).thenApply(__ -> null);
 	}
 
@@ -1235,7 +1234,7 @@ public class DebuggerRegistersProvider extends ComponentProviderAdapter
 		repaintTable();
 	}
 
-	protected String formatAddressInfo(Address address) {
+	protected static String formatAddressInfo(Address address) {
 		return address.toString(); // TODO;
 		// TODO: Examine static mapped programs, too
 		/*Memory mem = program.getMemoryManager();

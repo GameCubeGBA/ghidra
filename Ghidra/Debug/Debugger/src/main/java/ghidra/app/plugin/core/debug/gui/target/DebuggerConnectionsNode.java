@@ -58,9 +58,7 @@ public class DebuggerConnectionsNode extends AbstractDebuggerConnectionsNode
 					return;
 				}
 			}
-			Swing.runIfSwingOrRunLater(() -> {
-				removeNode(node);
-			});
+			Swing.runIfSwingOrRunLater(() -> removeNode(node));
 		}
 	}
 
@@ -108,7 +106,7 @@ public class DebuggerConnectionsNode extends AbstractDebuggerConnectionsNode
 	}
 
 	@Override
-	public Map<? extends Object, ? extends DebuggerModelNode> getObjectNodeMap() {
+	public Map<?, ? extends DebuggerModelNode> getObjectNodeMap() {
 		return models;
 	}
 }

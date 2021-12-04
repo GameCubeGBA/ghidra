@@ -102,7 +102,7 @@ public class DisassembleAtPcDebuggerBot implements DebuggerBot {
 				ClassSearcher.getInstances(DisassemblyInject.class)
 						.stream()
 						.filter(i -> i.isApplicable(trace))
-						.sorted(Comparator.comparing(i -> i.getPriority()))
+						.sorted(Comparator.comparing(DisassemblyInject::getPriority))
 						.forEach(injects::add);
 			}
 		}
@@ -141,9 +141,7 @@ public class DisassembleAtPcDebuggerBot implements DebuggerBot {
 		}
 
 		private void stackChanged(TraceStack stack) {
-			queueRunnable(() -> {
-				disassembleStackPcVals(stack, stack.getSnap(), null);
-			});
+			queueRunnable(() -> disassembleStackPcVals(stack, stack.getSnap(), null));
 		}
 
 		private long findNonScratchSnap(long snap) {

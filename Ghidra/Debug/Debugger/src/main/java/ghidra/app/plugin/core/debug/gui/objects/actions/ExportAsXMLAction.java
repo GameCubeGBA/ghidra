@@ -44,7 +44,7 @@ public class ExportAsXMLAction extends ImportExportAsAction {
 		super("ExportAsXML", tool, owner, provider);
 		fileExt = ".xml";
 		fileMode = GhidraFileChooserMode.FILES_ONLY;
-		String[] path = new String[] { "Export as...", "XML" };
+		String[] path = { "Export as...", "XML" };
 		setPopupMenuData(new MenuData(path, ICON_XML));
 		setKeyBindingData(new KeyBindingData(KeyEvent.VK_E,
 			InputEvent.SHIFT_DOWN_MASK));
@@ -57,7 +57,7 @@ public class ExportAsXMLAction extends ImportExportAsAction {
 		writeXml(container, f);
 	}
 
-	public void writeXml(ObjectContainer container, File f) {
+	public static void writeXml(ObjectContainer container, File f) {
 		if (container == null) {
 			return;
 		}

@@ -57,14 +57,13 @@ public abstract class DisplayFilteredAction extends DockingAction {
 		ObjectContainer container = provider.getSelectedContainer(contextObject);
 		if (container != null) {
 			AskDialog<String> dialog =
-				new AskDialog<String>("Filter", "Filter", AskDialog.STRING, lastCmd);
+					new AskDialog<>("Filter", "Filter", AskDialog.STRING, lastCmd);
 			if (dialog.isCanceled()) {
 				return;
 			}
 
 			lastCmd = dialog.getValueAsString();
-			List<String> path = new ArrayList<>();
-			path.addAll(container.getTargetObject().getPath());
+			List<String> path = new ArrayList<>(container.getTargetObject().getPath());
 			path.add(lastCmd);
 
 			doAction(container, path);
@@ -85,18 +84,15 @@ public abstract class DisplayFilteredAction extends DockingAction {
 	}
 
 	protected void finishGetOffspring(ObjectContainer container, final List<String> path) {
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					DebuggerObjectsProvider p = new DebuggerObjectsProvider(provider.getPlugin(),
-						provider.getModel(), container, isTree);
-					container.propagateProvider(p);
-					p.update(container);
-				}
-				catch (Exception e) {
-					e.printStackTrace();
-				}
+		SwingUtilities.invokeLater(() -> {
+			try {
+				DebuggerObjectsProvider p = new DebuggerObjectsProvider(provider.getPlugin(),
+					provider.getModel(), container, isTree);
+				container.propagateProvider(p);
+				p.update(container);
+			}
+			catch (Exception e) {
+				e.printStackTrace();
 			}
 		});
 	}

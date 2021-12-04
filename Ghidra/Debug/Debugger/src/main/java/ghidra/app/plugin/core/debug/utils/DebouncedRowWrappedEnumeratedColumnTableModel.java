@@ -26,7 +26,7 @@ import ghidra.util.Swing;
 public class DebouncedRowWrappedEnumeratedColumnTableModel<C extends Enum<C> & EnumeratedTableColumn<C, R>, K, R, T>
 		extends RowWrappedEnumeratedColumnTableModel<C, K, R, T> {
 
-	AsyncDebouncer<Void> debouncer = new AsyncDebouncer<Void>(AsyncTimer.DEFAULT_TIMER, 100);
+	AsyncDebouncer<Void> debouncer = new AsyncDebouncer<>(AsyncTimer.DEFAULT_TIMER, 100);
 
 	public DebouncedRowWrappedEnumeratedColumnTableModel(String name, Class<C> colType,
 			Function<T, K> keyFunc, Function<T, R> wrapper) {
@@ -64,6 +64,6 @@ public class DebouncedRowWrappedEnumeratedColumnTableModel<C extends Enum<C> & E
 
 	private void settled(Void __) {
 		// Just refresh the whole thing
-		Swing.runLater(() -> super.fireTableDataChanged());
+		Swing.runLater(super::fireTableDataChanged);
 	}
 }

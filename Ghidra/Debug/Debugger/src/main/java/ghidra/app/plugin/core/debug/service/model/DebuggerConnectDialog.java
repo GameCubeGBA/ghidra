@@ -110,9 +110,7 @@ public class DebuggerConnectDialog extends DialogComponentProvider
 	protected void clearFactories() {
 		synchronized (factories) {
 			factories.clear();
-			SwingUtilities.invokeLater(() -> {
-				dropdownModel.removeAllElements();
-			});
+			SwingUtilities.invokeLater(dropdownModel::removeAllElements);
 		}
 	}
 
@@ -141,9 +139,7 @@ public class DebuggerConnectDialog extends DialogComponentProvider
 			}
 			FactoryEntry entry = new FactoryEntry(element);
 			factories.put(element, entry);
-			SwingUtilities.invokeLater(() -> {
-				dropdownModel.addElement(entry);
-			});
+			SwingUtilities.invokeLater(() -> dropdownModel.addElement(entry));
 		}
 	}
 
@@ -153,9 +149,7 @@ public class DebuggerConnectDialog extends DialogComponentProvider
 			if (entry == null) {
 				return;
 			}
-			SwingUtilities.invokeLater(() -> {
-				dropdownModel.removeElement(entry);
-			});
+			SwingUtilities.invokeLater(() -> dropdownModel.removeElement(entry));
 		}
 	}
 
