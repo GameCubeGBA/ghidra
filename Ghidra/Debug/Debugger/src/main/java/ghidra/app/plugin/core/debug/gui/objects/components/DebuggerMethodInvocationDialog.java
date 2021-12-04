@@ -230,8 +230,9 @@ public class DebuggerMethodInvocationDialog extends DialogComponentProvider
 				NameTypePair ntp = NameTypePair.fromString(name);
 				memorized.put(ntp,
 					ConfigStateField.getState(subState, ntp.getType(), ntp.getName()));
-			}
-			catch (Exception e) {
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (RuntimeException e) {
 				Msg.error(this, "Error restoring memorized parameter " + name, e);
 			}
 		}

@@ -90,10 +90,7 @@ public class DisplayAsGraphAction extends DisplayAsAction {
 			graph.addEdge(start, end, start + ":" + end);
 			starts.put(c, end);
 		}
-		for (ObjectContainer c : starts.keySet()) {
-			AttributedVertex s = starts.get(c);
-			graphContainer(c, graph, s);
-		}
+		starts.forEach((key, s) -> graphContainer(key, graph, s));
 	}
 
 }

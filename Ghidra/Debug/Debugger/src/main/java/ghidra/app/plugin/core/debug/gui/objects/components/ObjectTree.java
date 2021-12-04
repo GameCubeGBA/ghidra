@@ -85,7 +85,7 @@ public class ObjectTree implements ObjectPane {
 					ObjectNode node = (ObjectNode) last;
 					TargetObject targetObject = node.getTargetObject();
 					if (targetObject != null && !(targetObject instanceof DummyTargetObject) &&
-						e.getEventOrigin().equals(EventOrigin.USER_GENERATED)) {
+							e.getEventOrigin() == EventOrigin.USER_GENERATED) {
 						DebugModelConventions.requestActivation(targetObject).exceptionally(ex -> {
 							Msg.error(this, "Could not activate " + targetObject, ex);
 							return null;
@@ -121,45 +121,8 @@ public class ObjectTree implements ObjectPane {
 			}
 		});
 		tree.setCellRenderer(new ObjectTreeCellRenderer(root.getProvider()));
-		tree.setDataTransformer(new FilterTransformer<GTreeNode>() {
-
-			@Override
-			public List<String> transform(GTreeNode t) {
-				if (t instanceof ObjectNode) {
-					ObjectNode node = (ObjectNode) t;
-					return List.of(node.getContainer().getDecoratedName());
-				}
-				return null;
-			}
-		});
-		tree.addTreeExpansionListener(new TreeExpansionListener() {
-
-			@Override
-			public void treeExpanded(TreeExpansionEvent event) {
-				TreePath expandedPath = event.getPath();
-				Object last = expandedPath.getLastPathComponent();
-				if (last instanceof ObjectNode) {
-					ObjectNode node = (ObjectNode) last;
-					if (!node.isExpanded()) {
-						//currentExpandedPaths = tree.getExpandedPaths();
-						node.markExpanded();
-					}
-				}
-			}
-
-			@Override
-			public void treeCollapsed(TreeExpansionEvent event) {
-				TreePath collapsedPath = event.getPath();
-				Object last = collapsedPath.getLastPathComponent();
-				if (last instanceof ObjectNode) {
-					ObjectNode node = (ObjectNode) last;
-					if (node.isExpanded()) {
-						//currentExpandedPaths = tree.getExpandedPaths();
-						node.markCollapsed();
-					}
-				}
-			}
-		});
+		tree.setDataTransformer(new GTreeNodeFilterTransformer());
+		tree.addTreeExpansionListener(new MyTreeExpansionListener());
 
 		tree.addMouseListener(new MouseAdapter() {
 			@Override
@@ -259,10 +222,8 @@ public class ObjectTree implements ObjectPane {
 		if (targetObject == null) {
 			return;
 		}
-		AsyncUtils.sequence(TypeSpec.VOID).then(seq -> {
-			DebugModelConventions.findSuitable(TargetAccessConditioned.class, targetObject)
-					.handle(seq::next);
-		}, access).then(seq -> {
+		AsyncUtils.sequence(TypeSpec.VOID).then(seq -> Objects.requireNonNull(DebugModelConventions.suitable(TargetAccessConditioned.class, targetObject))
+				.handle(seq::next), access).then(seq -> {
 			boolean accessible = true;
 			TargetAccessConditioned conditioned = access.get();
 			if (conditioned != null) {
@@ -328,7 +289,7 @@ public class ObjectTree implements ObjectPane {
 		}
 
 		Set<ObjectContainer> currentChildren = container.getCurrentChildren();
-		List<GTreeNode> childList = new ArrayList<GTreeNode>();
+		List<GTreeNode> childList = new ArrayList<>();
 
 		node.setRestructured(false);
 		for (ObjectContainer c : currentChildren) {
@@ -352,7 +313,7 @@ public class ObjectTree implements ObjectPane {
 		return childList;
 	}
 
-	private String path(ObjectContainer container) {
+	private static String path(ObjectContainer container) {
 		if (container == null) {
 			return null;
 		}
@@ -431,6 +392,47 @@ public class ObjectTree implements ObjectPane {
 				DebuggerMemoryMapper memoryMapper = recorder.getMemoryMapper();
 				Address traceAddr = memoryMapper.targetToTrace(addr);
 				listingService.goTo(traceAddr, true);
+			}
+		}
+	}
+
+	private static class GTreeNodeFilterTransformer implements FilterTransformer<GTreeNode> {
+
+		@Override
+		public List<String> transform(GTreeNode t) {
+			if (t instanceof ObjectNode) {
+				ObjectNode node = (ObjectNode) t;
+				return List.of(node.getContainer().getDecoratedName());
+			}
+			return null;
+		}
+	}
+
+	private static class MyTreeExpansionListener implements TreeExpansionListener {
+
+		@Override
+		public void treeExpanded(TreeExpansionEvent event) {
+			TreePath expandedPath = event.getPath();
+			Object last = expandedPath.getLastPathComponent();
+			if (last instanceof ObjectNode) {
+				ObjectNode node = (ObjectNode) last;
+				if (!node.isExpanded()) {
+					//currentExpandedPaths = tree.getExpandedPaths();
+					node.markExpanded();
+				}
+			}
+		}
+
+		@Override
+		public void treeCollapsed(TreeExpansionEvent event) {
+			TreePath collapsedPath = event.getPath();
+			Object last = collapsedPath.getLastPathComponent();
+			if (last instanceof ObjectNode) {
+				ObjectNode node = (ObjectNode) last;
+				if (node.isExpanded()) {
+					//currentExpandedPaths = tree.getExpandedPaths();
+					node.markCollapsed();
+				}
 			}
 		}
 	}

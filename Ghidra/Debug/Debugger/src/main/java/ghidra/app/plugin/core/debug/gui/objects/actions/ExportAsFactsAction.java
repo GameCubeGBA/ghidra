@@ -40,13 +40,13 @@ public class ExportAsFactsAction extends ImportExportAsAction {
 	public static String SPLIT = "\\.";
 	public static String fileExt2 = ".facts";
 	protected ImageIcon ICON_FACTS = ResourceManager.loadImage("images/closedFolder.png");
-	private Map<String, PrintWriter> files = new HashMap<String, PrintWriter>();
+	private Map<String, PrintWriter> files = new HashMap<>();
 
 	public ExportAsFactsAction(PluginTool tool, String owner, DebuggerObjectsProvider provider) {
 		super("ExportAsFacts", tool, owner, provider);
 		fileExt = "";
 		fileMode = GhidraFileChooserMode.DIRECTORIES_ONLY;
-		String[] path = new String[] { "Export as...", "Facts" };
+		String[] path = { "Export as...", "Facts" };
 		setPopupMenuData(new MenuData(path, ICON_FACTS));
 		setKeyBindingData(new KeyBindingData(KeyEvent.VK_F,
 			InputEvent.SHIFT_DOWN_MASK));

@@ -39,7 +39,7 @@ public class ImportFromFactsAction extends ImportExportAsAction {
 
 	protected ImageIcon ICON_FACTS = ResourceManager.loadImage("images/closedFolder.png");
 	private Map<String, Map<String, String>> maps =
-		new LinkedHashMap<String, Map<String, String>>();
+			new LinkedHashMap<>();
 
 	public ImportFromFactsAction(PluginTool tool, String owner, DebuggerObjectsProvider provider) {
 		super("ImportFromFacts", tool, owner, provider);
@@ -72,10 +72,10 @@ public class ImportFromFactsAction extends ImportExportAsAction {
 					if (!dir.isDirectory()) {
 						return;
 					}
-					for (File f : dir.listFiles()) {
+					for (File f : Objects.requireNonNull(dir.listFiles())) {
 						BufferedReader reader =
 							new BufferedReader(new InputStreamReader(new FileInputStream(f)));
-						Map<String, String> map = new LinkedHashMap<String, String>();
+						Map<String, String> map = new LinkedHashMap<>();
 						String name = f.getName();
 						name = name.substring(0, name.indexOf(ExportAsFactsAction.fileExt2));
 						maps.put(name, map);
@@ -94,29 +94,25 @@ public class ImportFromFactsAction extends ImportExportAsAction {
 
 					Map<String, DummyTargetObject> objMap = new LinkedHashMap<>();
 					Map<String, String> map = maps.get("ObjectPath");
-					for (String key : map.keySet()) {
-						String pathStr = map.get(key);
+					map.forEach((key, pathStr) -> {
 						String[] split = pathStr.split(ExportAsFactsAction.SPLIT);
 						List<String> path = new ArrayList<>();
-						for (String s : split) {
-							path.add(s);
-						}
+						Collections.addAll(path, split);
 						String name = maps.get("ObjectName").get(key);
 						String value = maps.get("ObjectValue").get(key);
 						String kind = maps.get("ObjectType").get(key);
 						DummyTargetObject to =
-							new DummyTargetObject(convertName(name), path, kind, value, "", null);
+								new DummyTargetObject(convertName(name), path, kind, value, "", null);
 						objMap.put(key, to);
-					}
+					});
 					Map<String, String> cmap = maps.get("ObjectChildren");
-					for (String key : cmap.keySet()) {
-						String cid = cmap.get(key);
-						String pkey = key.substring(0, key.indexOf(":"));
+					cmap.forEach((key, cid) -> {
+						String pkey = key.substring(0, key.indexOf(':'));
 						DummyTargetObject to = objMap.get(pkey);
 						DummyTargetObject cto = objMap.get(cid);
 						to.addObject(cto);
 						cto.setParent(to);
-					}
+					});
 					DummyTargetObject root = null;
 					for (DummyTargetObject to : objMap.values()) {
 						if (to.getParent() == null) {
@@ -138,8 +134,8 @@ public class ImportFromFactsAction extends ImportExportAsAction {
 		});
 	}
 
-	private String convertName(String name) {
-		return name.contains("_0x") ? "[" + name.substring(name.indexOf("_") + 1) + "]" : name;
+	private static String convertName(String name) {
+		return name.contains("_0x") ? "[" + name.substring(name.indexOf('_') + 1) + "]" : name;
 	}
 
 }

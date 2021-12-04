@@ -160,9 +160,7 @@ public class DebuggerObjectsPlugin extends AbstractDebuggerPlugin
 	}
 
 	public void showConsole(TargetInterpreter interpreter) {
-		Swing.runIfSwingOrRunLater(() -> {
-			interpreterService.showConsole(interpreter);
-		});
+		Swing.runIfSwingOrRunLater(() -> interpreterService.showConsole(interpreter));
 	}
 
 	@AutoServiceConsumed
@@ -227,10 +225,8 @@ public class DebuggerObjectsPlugin extends AbstractDebuggerPlugin
 		for (DebuggerObjectsProvider p : toRemove) {
 			providers.remove(p);
 		}
-		if (providers.size() == 0) {
-			Swing.runIfSwingOrRunLater(() -> {
-				init();
-			});
+		if (providers.isEmpty()) {
+			Swing.runIfSwingOrRunLater(() -> init());
 		}
 	}
 

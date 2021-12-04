@@ -33,7 +33,7 @@ public class DisplayFilteredTreeAction extends DisplayFilteredAction {
 			DebuggerObjectsProvider provider) {
 		super("DisplayFilteredTree", tool, owner, provider);
 		isTree = true;
-		String[] path = new String[] { "Display filtered...", "Tree" };
+		String[] path = { "Display filtered...", "Tree" };
 		setPopupMenuData(new MenuData(path, ObjectTree.ICON_TREE));
 		setKeyBindingData(new KeyBindingData(KeyEvent.VK_R,
 			InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK));

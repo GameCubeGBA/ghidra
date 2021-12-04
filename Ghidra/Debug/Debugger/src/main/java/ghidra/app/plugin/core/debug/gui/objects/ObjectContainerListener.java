@@ -15,6 +15,7 @@
  */
 package ghidra.app.plugin.core.debug.gui.objects;
 
+@FunctionalInterface
 public interface ObjectContainerListener {
 
 	void update(ObjectContainer objectPresentationContainer);

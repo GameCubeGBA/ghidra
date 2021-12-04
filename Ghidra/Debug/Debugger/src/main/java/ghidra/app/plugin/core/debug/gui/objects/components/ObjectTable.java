@@ -108,27 +108,21 @@ public class ObjectTable<R> implements ObjectPane {
 
 	@Override
 	public void signalDataChanged(ObjectContainer oc) {
-		Swing.runIfSwingOrRunLater(() -> {
-			update(oc);
-		});
+		Swing.runIfSwingOrRunLater(() -> update(oc));
 	}
 
 	@Override
 	public void signalContentsChanged(ObjectContainer oc) {
-		Swing.runIfSwingOrRunLater(() -> {
-			update(oc);
-		});
+		Swing.runIfSwingOrRunLater(() -> update(oc));
 	}
 
 	@Override
 	public void signalUpdate(ObjectContainer oc) {
-		Swing.runIfSwingOrRunLater(() -> {
-			update(oc);
-		});
+		Swing.runIfSwingOrRunLater(() -> update(oc));
 	}
 
 	@Override
-	public List<? extends Object> update(ObjectContainer changed) {
+	public List<?> update(ObjectContainer changed) {
 		if (changed.equals(container) &&
 			((clazz.equals(ObjectElementRow.class) && changed.hasElements()) ||
 				(clazz.equals(ObjectAttributeRow.class) && !changed.hasElements()))) {
@@ -198,16 +192,13 @@ public class ObjectTable<R> implements ObjectPane {
 		m.updateColumns(match);
 		m.fireTableDataChanged();
 		List<R> list = new ArrayList<>();
-		if (match != null) {
-			list.add((R) match);
-			model.setLastSelectedObjects(list);
-			model.fireTableStructureChanged();
-		}
+		list.add((R) match);
+		model.setLastSelectedObjects(list);
+		model.fireTableStructureChanged();
 		return list;
 	}
 
 	public void setColumns() {
-		@SuppressWarnings("unchecked")
 		ObjectEnumeratedColumnTableModel<?, R> m = (ObjectEnumeratedColumnTableModel<?, R>) model;
 		for (int i = 0; i < model.getRowCount(); i++) {
 			R r = model.getRowObject(i);
@@ -269,9 +260,7 @@ public class ObjectTable<R> implements ObjectPane {
 
 	@Override
 	public void setFocus(TargetObject object, TargetObject focused) {
-		Swing.runIfSwingOrRunLater(() -> {
-			setSelectedObject(focused);
-		});
+		Swing.runIfSwingOrRunLater(() -> setSelectedObject(focused));
 	}
 
 	@Override

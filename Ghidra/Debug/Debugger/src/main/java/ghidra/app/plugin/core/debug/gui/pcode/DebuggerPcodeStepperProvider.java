@@ -264,7 +264,7 @@ public class DebuggerPcodeStepperProvider extends ComponentProviderAdapter {
 		}
 	}
 
-	class UniqueRefCellRenderer extends AbstractGColumnRenderer<RefType> {
+	static class UniqueRefCellRenderer extends AbstractGColumnRenderer<RefType> {
 		@Override
 		public Component getTableCellRendererComponent(GTableCellRenderingData data) {
 			super.getTableCellRendererComponent(data);
@@ -445,14 +445,12 @@ public class DebuggerPcodeStepperProvider extends ComponentProviderAdapter {
 	}
 
 	protected void recomputeStyle() {
-		StringBuilder sb = new StringBuilder("<html><head><style>");
-		sb.append(createColoredStyle("address", addressColor));
-		sb.append(createColoredStyle("constant", constantColor));
-		sb.append(createColoredStyle("register", registerColor));
-		sb.append(createColoredStyle("unique", uniqueColor));
-		sb.append(createColoredStyle("op", opColor));
-		sb.append("</style></head>"); // NB. </html> should already be at end
-		style = sb.toString();
+		style = "<html><head><style>" + createColoredStyle("address", addressColor) +
+				createColoredStyle("constant", constantColor) +
+				createColoredStyle("register", registerColor) +
+				createColoredStyle("unique", uniqueColor) +
+				createColoredStyle("op", opColor) +
+				"</style></head>";
 		pcodeTableModel.fireTableDataChanged();
 	}
 

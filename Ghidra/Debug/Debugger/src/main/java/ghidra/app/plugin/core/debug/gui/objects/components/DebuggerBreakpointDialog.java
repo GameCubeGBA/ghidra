@@ -18,7 +18,7 @@ package ghidra.app.plugin.core.debug.gui.objects.components;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
-import java.util.HashSet;
+import java.util.EnumSet;
 import java.util.Set;
 
 import javax.swing.*;
@@ -77,7 +77,7 @@ public class DebuggerBreakpointDialog extends DialogComponentProvider {
 		String expression = expressionField.getText();
 
 		setStatusText("Adding");
-		Set<TargetBreakpointKind> kinds = new HashSet<>();
+		Set<TargetBreakpointKind> kinds = EnumSet.noneOf(TargetBreakpointKind.class);
 		kinds.add(TargetBreakpointKind.SW_EXECUTE);
 		container.placeBreakpoint(expression, kinds).exceptionally(e -> {
 			Msg.showError(this, getComponent(), "Could not set breakpoint", e);

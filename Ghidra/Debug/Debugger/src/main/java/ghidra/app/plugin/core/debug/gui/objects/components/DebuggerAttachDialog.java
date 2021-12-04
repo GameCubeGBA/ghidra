@@ -120,9 +120,7 @@ public class DebuggerAttachDialog extends DialogComponentProvider {
 			return;
 		}
 		setStatusText("Attaching");
-		attacher.attach(proc).thenAccept(__ -> {
-			close();
-		}).exceptionally(e -> {
+		attacher.attach(proc).thenAccept(__ -> close()).exceptionally(e -> {
 			Msg.showError(this, getComponent(), "Could not attach", e);
 			setStatusText("Could not attach: " + e.getMessage(), MessageType.ERROR);
 			return null;
@@ -135,11 +133,9 @@ public class DebuggerAttachDialog extends DialogComponentProvider {
 		AsyncUtils.sequence(TypeSpec.VOID).then(seq -> {
 			setStatusText("Fetching process list");
 			provider.getModel().fetchModelObject(List.of("Available")).handle(seq::next);
-		}, available).then(seq -> {
-			available.get()
-					.fetchElements()
-					.handle(seq::next);
-		}, procs).then(seq -> {
+		}, available).then(seq -> available.get()
+				.fetchElements()
+				.handle(seq::next), procs).then(seq -> {
 			List<TargetAttachable> modelData = processes.getModelData();
 			modelData.clear();
 			for (Object p : procs.get().values()) {

@@ -18,6 +18,7 @@ package ghidra.app.plugin.core.debug.gui.objects;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.CompletableFuture;
+import java.util.regex.Pattern;
 
 import org.jdom.Element;
 
@@ -27,6 +28,10 @@ import ghidra.util.xml.XmlUtilities;
 
 public class ObjectContainer implements Comparable<ObjectContainer> {
 
+	private static final Pattern COMPILE = Pattern.compile(" ");
+	private static final Pattern PATTERN = Pattern.compile("\\[");
+	private static final Pattern COMPILE1 = Pattern.compile("\\]");
+	private static final Pattern COMPILE2 = Pattern.compile("/");
 	private DebuggerObjectsProvider provider;
 	protected TargetObject targetObject;
 	private final Map<String, TargetObject> elementMap = new LinkedHashMap<>();
@@ -84,9 +89,9 @@ public class ObjectContainer implements Comparable<ObjectContainer> {
 		if (isLink) {
 			return linkKey;
 		}
-		boolean noTarget = targetObject == null;
-		String name = noTarget ? targetObject.getName() : targetObject.getName();
-		String hint = noTarget ? null : targetObject.getTypeHint();
+		boolean noTarget = false;
+		String name = targetObject.getName();
+		String hint = targetObject.getTypeHint();
 		if (name == null) {
 			return hint;
 		}
@@ -125,11 +130,11 @@ public class ObjectContainer implements Comparable<ObjectContainer> {
 		}
 		String parent = path.get(index);
 		if (parent.contains("(")) {
-			while (parent.contains("(")) {
+			do {
 				parent = path.get(--index);
-			}
+			} while (parent.contains("("));
 			String initVal = path.get(path.size() - 1);
-			return parent + initVal.substring(initVal.indexOf(")") + 1);
+			return parent + initVal.substring(initVal.indexOf(')') + 1);
 		}
 		return parent;
 	}
@@ -138,7 +143,7 @@ public class ObjectContainer implements Comparable<ObjectContainer> {
 		if (targetObject == null) {
 			return "Objects";
 		}
-		return targetObject == null ? targetObject.getName() : targetObject.getName();
+		return targetObject.getName();
 	}
 
 	public ObjectContainer getParent() {
@@ -176,16 +181,13 @@ public class ObjectContainer implements Comparable<ObjectContainer> {
 
 	public void augmentElements(Collection<String> elementsRemoved,
 			Map<String, ? extends TargetObject> elementsAdded) {
-		Set<ObjectContainer> result = new TreeSet<ObjectContainer>();
-		Map<String, Object> newAdds = new HashMap<>();
-		for (Entry<String, ? extends TargetObject> entry : elementsAdded.entrySet()) {
-			newAdds.put(entry.getKey(), entry.getValue());
-		}
+		Set<ObjectContainer> result = new TreeSet<>();
+		Map<String, Object> newAdds = new HashMap<>(elementsAdded);
 		boolean structureChanged = false;
 		synchronized (elementMap) {
 			for (ObjectContainer child : currentChildren) {
 				String key = child.getName();
-				if (key.startsWith("[")) {
+				if (!key.isEmpty() && key.charAt(0) == '[') {
 					key = key.substring(1, key.length() - 1);
 				}
 				if (elementsRemoved.contains(key) && !elementsAdded.containsKey(key)) {
@@ -198,14 +200,15 @@ public class ObjectContainer implements Comparable<ObjectContainer> {
 					ObjectContainer newChild =
 						DebuggerObjectsProvider.buildContainerFromObject(targetObject, key, val,
 							true);
-					child.updateUsing(newChild);
+					child.updateUsing(Objects.requireNonNull(newChild));
 					newAdds.remove(key);
 					provider.signalDataChanged(child);
 				}
 				result.add(child);
 			}
-			for (String key : elementsAdded.keySet()) {
-				TargetObject val = elementsAdded.get(key);
+			for (Entry<String, ? extends TargetObject> entry : elementsAdded.entrySet()) {
+				String key = entry.getKey();
+				TargetObject val = entry.getValue();
 				ObjectContainer child =
 					DebuggerObjectsProvider.buildContainerFromObject(targetObject, key, val, false);
 				elementMap.put(key, val);
@@ -223,11 +226,8 @@ public class ObjectContainer implements Comparable<ObjectContainer> {
 
 	public void augmentAttributes(Collection<String> attributesRemoved,
 			Map<String, ?> attributesAdded) {
-		Set<ObjectContainer> result = new TreeSet<ObjectContainer>();
-		Map<String, Object> newAdds = new HashMap<>();
-		for (Entry<String, ?> entry : attributesAdded.entrySet()) {
-			newAdds.put(entry.getKey(), entry.getValue());
-		}
+		Set<ObjectContainer> result = new TreeSet<>();
+		Map<String, Object> newAdds = new HashMap<>(attributesAdded);
 		boolean structureChanged = false;
 		synchronized (attributeMap) {
 			for (ObjectContainer child : currentChildren) {
@@ -248,8 +248,9 @@ public class ObjectContainer implements Comparable<ObjectContainer> {
 				}
 				result.add(child);
 			}
-			for (String key : newAdds.keySet()) {
-				Object val = newAdds.get(key);
+			for (Entry<String, Object> entry : newAdds.entrySet()) {
+				String key = entry.getKey();
+				Object val = entry.getValue();
 				ObjectContainer child =
 					DebuggerObjectsProvider.buildContainerFromObject(targetObject, key, val, true);
 				if (child != null) {
@@ -282,10 +283,9 @@ public class ObjectContainer implements Comparable<ObjectContainer> {
 			}
 		}
 
-		Set<ObjectContainer> result = new TreeSet<ObjectContainer>();
 		List<ObjectContainer> nodeFromElements =
 			DebuggerObjectsProvider.getContainersFromObjects(elementMap, targetObject, false);
-		result.addAll(nodeFromElements);
+		Set<ObjectContainer> result = new TreeSet<>(nodeFromElements);
 
 		List<ObjectContainer> nodeFromAttributes =
 			DebuggerObjectsProvider.getContainersFromObjects(attributeMap, targetObject, true);
@@ -310,10 +310,7 @@ public class ObjectContainer implements Comparable<ObjectContainer> {
 			}
 		}
 		if (added != null) {
-			for (String key : added.keySet()) {
-				Object object = added.get(key);
-				map.put(key, object);
-			}
+			map.putAll(added);
 		}
 		return map;
 	}
@@ -380,11 +377,11 @@ public class ObjectContainer implements Comparable<ObjectContainer> {
 	 */
 	public Element toXml() {
 		String name = getPrefixedName();
-		name = name.replaceAll(" ", "_");
+		name = COMPILE.matcher(name).replaceAll("_");
 		if (name.contains("[")) {
-			name = name.replaceAll("\\[", "_");
-			name = name.replaceAll("\\]", "");
-			name = name.replaceAll("/", "_");
+			name = PATTERN.matcher(name).replaceAll("_");
+			name = COMPILE1.matcher(name).replaceAll("");
+			name = COMPILE2.matcher(name).replaceAll("_");
 		}
 		Element result = new Element(name);
 		for (ObjectContainer child : getCurrentChildren()) {
@@ -397,10 +394,10 @@ public class ObjectContainer implements Comparable<ObjectContainer> {
 			}
 		}
 		if (targetObject != null) {
-			if (!targetObject.getTypeHint().equals("")) {
+			if (!targetObject.getTypeHint().isEmpty()) {
 				XmlUtilities.setStringAttr(result, "Type", targetObject.getTypeHint());
 			}
-			if (!targetObject.getDisplay().equals("")) {
+			if (!targetObject.getDisplay().isEmpty()) {
 				XmlUtilities.setStringAttr(result, "Value", targetObject.getDisplay());
 			}
 		}

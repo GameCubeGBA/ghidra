@@ -22,7 +22,7 @@ import java.util.function.Function;
 import ghidra.app.plugin.core.debug.gui.objects.components.ObjectEnumeratedColumnTableModel.ObjectsEnumeratedTableColumn;
 
 public class ObjectElementColumn
-		implements ObjectsEnumeratedTableColumn<ObjectElementColumn, ObjectElementRow> {
+		implements ObjectsEnumeratedTableColumn<ObjectElementRow> {
 
 	private final String header;
 	private final Function<ObjectElementRow, ?> getter;
@@ -43,7 +43,7 @@ public class ObjectElementColumn
 		return getter.apply(row);
 	}
 
-	public static ObjectsEnumeratedTableColumn<ObjectElementColumn, ? super ObjectElementRow>[] generateColumns(
+	public static ObjectsEnumeratedTableColumn<? super ObjectElementRow>[] generateColumns(
 			List<String> keys) {
 		keys.sort(Comparator.comparing(String::toString));
 		ObjectElementColumn[] array = new ObjectElementColumn[keys.size()];

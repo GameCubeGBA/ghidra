@@ -38,12 +38,12 @@ import resources.ResourceManager;
 public class DisplayFilteredXMLAction extends DisplayFilteredAction {
 
 	protected ConsoleService consoleService;
-	protected ImageIcon ICON_XML = ResourceManager.loadImage("images/text-xml.png");;
+	protected ImageIcon ICON_XML = ResourceManager.loadImage("images/text-xml.png");
 
 	public DisplayFilteredXMLAction(PluginTool tool, String owner,
 			DebuggerObjectsProvider provider) {
 		super("DisplayFilteredXML", tool, owner, provider);
-		String[] path = new String[] { "Display filtered...", "XML" };
+		String[] path = { "Display filtered...", "XML" };
 		setPopupMenuData(new MenuData(path, ICON_XML));
 		setKeyBindingData(new KeyBindingData(KeyEvent.VK_E,
 			InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK));

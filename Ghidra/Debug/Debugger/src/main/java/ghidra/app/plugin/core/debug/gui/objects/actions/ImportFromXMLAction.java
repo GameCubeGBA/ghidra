@@ -19,7 +19,9 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
@@ -81,9 +83,7 @@ public class ImportFromXMLAction extends ImportExportAsAction {
 
 					List<String> path = new ArrayList<>();
 					Attribute pathStr = root.getAttribute("Path");
-					for (String s : pathStr.getValue().split("\\.")) {
-						path.add(s);
-					}
+					Collections.addAll(path, pathStr.getValue().split("\\."));
 					DummyTargetObject to = xmlToObject(p, root, path);
 					ObjectContainer c = p.getRoot();
 					c.setTargetObject(to);
@@ -94,7 +94,7 @@ public class ImportFromXMLAction extends ImportExportAsAction {
 				}
 				finally {
 					try {
-						is.close();
+						Objects.requireNonNull(is).close();
 					}
 					catch (IOException e) {
 						// we tried
@@ -104,7 +104,7 @@ public class ImportFromXMLAction extends ImportExportAsAction {
 		});
 	}
 
-	private DummyTargetObject xmlToObject(DebuggerObjectsProvider p, Element e, List<String> path) {
+	private static DummyTargetObject xmlToObject(DebuggerObjectsProvider p, Element e, List<String> path) {
 		String key = convertName(e.getName());
 		Attribute type = e.getAttribute("Type");
 		Attribute value = e.getAttribute("Value");
@@ -112,8 +112,7 @@ public class ImportFromXMLAction extends ImportExportAsAction {
 		for (Object c : e.getChildren()) {
 			if (c instanceof Element) {
 				Element ce = (Element) c;
-				List<String> npath = new ArrayList<>();
-				npath.addAll(path);
+				List<String> npath = new ArrayList<>(path);
 				npath.add(convertName(ce.getName()));
 				TargetObject to = xmlToObject(p, ce, npath);
 				objects.add(to);
@@ -125,8 +124,8 @@ public class ImportFromXMLAction extends ImportExportAsAction {
 		return new DummyTargetObject(key, path, tstr, vstr, "", objects);
 	}
 
-	private String convertName(String name) {
-		return name.contains("_0x") ? "[" + name.substring(name.indexOf("_") + 1) + "]" : name;
+	private static String convertName(String name) {
+		return name.contains("_0x") ? "[" + name.substring(name.indexOf('_') + 1) + "]" : name;
 	}
 
 }

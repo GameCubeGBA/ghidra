@@ -80,7 +80,7 @@ public class ObjectNode extends GTreeSlowLoadingNode {  //extends GTreeNode
 	}
 
 	@Override
-	public List<GTreeNode> generateChildren(TaskMonitor monitor) throws CancelledException {
+	public List<GTreeNode> generateChildren(TaskMonitor monitor) {
 
 		if (!container.isImmutable() || isInProgress()) {
 			try {
@@ -143,10 +143,10 @@ public class ObjectNode extends GTreeSlowLoadingNode {  //extends GTreeNode
 		TargetObject targetObject = container.getTargetObject();
 		if (targetObject instanceof TargetExecutionStateful) {
 			TargetExecutionStateful stateful = (TargetExecutionStateful) targetObject;
-			if (stateful.getExecutionState().equals(TargetExecutionState.RUNNING)) {
+			if (stateful.getExecutionState() == TargetExecutionState.RUNNING) {
 				return ICON_RUNNING;
 			}
-			if (stateful.getExecutionState().equals(TargetExecutionState.TERMINATED)) {
+			if (stateful.getExecutionState() == TargetExecutionState.TERMINATED) {
 				return ICON_TERMINATED;
 			}
 		}
@@ -182,7 +182,7 @@ public class ObjectNode extends GTreeSlowLoadingNode {  //extends GTreeNode
 	@Override
 	public boolean isLeaf() {
 		TargetObject to = container.getTargetObject();
-		return to != null && to instanceof DummyTargetObject;
+		return to instanceof DummyTargetObject;
 	}
 
 	public boolean isVisible() {
@@ -200,7 +200,7 @@ public class ObjectNode extends GTreeSlowLoadingNode {  //extends GTreeNode
 	public void cleanUpOldChildren(List<GTreeNode> newChildren) {
 		if (oldChildren != null) {
 			synchronized (oldChildren) {
-				oldChildren.removeAll(newChildren);
+				newChildren.forEach(oldChildren::remove);
 				for (GTreeNode node : oldChildren) {
 					setRestructured(true);
 					tree.cleanupOldNode((ObjectNode) node);
@@ -212,26 +212,20 @@ public class ObjectNode extends GTreeSlowLoadingNode {  //extends GTreeNode
 
 	public void callUpdate() {
 		// NB: this has to be in its own thread
-		CompletableFuture.runAsync(new Runnable() {
-			@Override
-			public void run() {
-				List<GTreeNode> updateNodes = tree.update(container);
-				if (isRestructured()) {
-					setChildren(updateNodes);
-				}
+		CompletableFuture.runAsync(() -> {
+			List<GTreeNode> updateNodes = tree.update(container);
+			if (isRestructured()) {
+				setChildren(updateNodes);
 			}
 		});
 	}
 
 	public void callModified() {
 		// NB: this has to be in its own thread
-		CompletableFuture.runAsync(new Runnable() {
-			@Override
-			public void run() {
-				List<GTreeNode> updateNodes = tree.update(container);
-				for (GTreeNode n : updateNodes) {
-					n.fireNodeChanged(ObjectNode.this, n);
-				}
+		CompletableFuture.runAsync(() -> {
+			List<GTreeNode> updateNodes = tree.update(container);
+			for (GTreeNode n : updateNodes) {
+				n.fireNodeChanged(ObjectNode.this, n);
 			}
 		});
 	}
