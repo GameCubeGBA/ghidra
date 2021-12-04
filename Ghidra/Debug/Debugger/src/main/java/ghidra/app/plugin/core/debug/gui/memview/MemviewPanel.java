@@ -31,7 +31,7 @@ public class MemviewPanel extends JPanel implements MouseListener, MouseMotionLi
 	private MemviewProvider provider;
 	private MemviewMap amap;
 	private MemviewMap tmap;
-	private List<MemoryBox> boxList = new ArrayList<MemoryBox>();
+	private List<MemoryBox> boxList = new ArrayList<>();
 
 	private int pressedX;
 	private int pressedY;
@@ -167,14 +167,8 @@ public class MemviewPanel extends JPanel implements MouseListener, MouseMotionLi
 		if (amap == null || tmap == null) {
 			return;
 		}
-		if (vertical) {
-			amap.createMapping(provider.getZoomAmountA());
-			tmap.createMapping(provider.getZoomAmountT());
-		}
-		else {
-			amap.createMapping(provider.getZoomAmountA());
-			tmap.createMapping(provider.getZoomAmountT());
-		}
+		amap.createMapping(provider.getZoomAmountA());
+		tmap.createMapping(provider.getZoomAmountT());
 
 		updateBoxes();
 	}
@@ -183,7 +177,7 @@ public class MemviewPanel extends JPanel implements MouseListener, MouseMotionLi
 		if (!this.isShowing())
 			return;
 
-		boxList = new ArrayList<MemoryBox>();
+		boxList = new ArrayList<>();
 		Collection<MemoryBox> boxes = getBoxes();
 		if (boxes == null) {
 			return;
@@ -374,26 +368,26 @@ public class MemviewPanel extends JPanel implements MouseListener, MouseMotionLi
 
 			Set<MemoryBox> mboxes = addr2box.get(box.getStartAddress());
 			if (mboxes == null) {
-				mboxes = new HashSet<MemoryBox>();
+				mboxes = new HashSet<>();
 			}
 			mboxes.add(box);
 			addr2box.put(box.getStartAddress(), mboxes);
 			mboxes = addr2box.get(box.getStopAddress());
 			if (mboxes == null) {
-				mboxes = new HashSet<MemoryBox>();
+				mboxes = new HashSet<>();
 			}
 			mboxes.add(box);
 			addr2box.put(box.getStopAddress(), mboxes);
 
 			mboxes = time2box.get(box.getStartTime());
 			if (mboxes == null) {
-				mboxes = new HashSet<MemoryBox>();
+				mboxes = new HashSet<>();
 			}
 			mboxes.add(box);
 			time2box.put(box.getStartTime(), mboxes);
 			mboxes = time2box.get(box.getStopTime());
 			if (mboxes == null) {
-				mboxes = new HashSet<MemoryBox>();
+				mboxes = new HashSet<>();
 			}
 			mboxes.add(box);
 			time2box.put(box.getStopTime(), mboxes);
@@ -415,7 +409,7 @@ public class MemviewPanel extends JPanel implements MouseListener, MouseMotionLi
 
 	public void addBoxes(List<MemoryBox> boxes) {
 		if (blist == null) {
-			blist = new ArrayList<MemoryBox>();
+			blist = new ArrayList<>();
 		}
 		for (MemoryBox b : boxes) {
 			if (bmap.containsKey(b.getId())) {
@@ -429,7 +423,7 @@ public class MemviewPanel extends JPanel implements MouseListener, MouseMotionLi
 	}
 
 	public void reset() {
-		blist = new ArrayList<MemoryBox>();
+		blist = new ArrayList<>();
 		bmap.clear();
 		parseBoxes(blist);
 	}

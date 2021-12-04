@@ -70,7 +70,7 @@ public class MemviewTable {
 				int modelRow = filterPanel.getModelRow(table.getSelectedRow());
 				MemoryBox box = model.getBoxAt(modelRow);
 				if (box != null) {
-					Set<MemoryBox> boxes = new HashSet<MemoryBox>();
+					Set<MemoryBox> boxes = new HashSet<>();
 					boxes.add(box);
 					provider.selectPanelPosition(boxes);
 				}

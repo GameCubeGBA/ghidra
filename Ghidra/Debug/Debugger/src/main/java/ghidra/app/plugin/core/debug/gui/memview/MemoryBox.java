@@ -86,7 +86,7 @@ public class MemoryBox {
 	}
 
 	public void setEnd(long tick) {
-		this.stop = stop < tick ? stop : tick;
+		this.stop = Math.min(stop, tick);
 	}
 
 	public Color getColor() {
