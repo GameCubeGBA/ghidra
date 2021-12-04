@@ -69,7 +69,7 @@ public class MultiSelectionBlendedLayoutBackgroundColorManager
 			selections.stream().map(cfs -> cfs.intersect(index)).collect(Collectors.toList());
 
 		List<ColoredFieldSelection> empties =
-			intersections.stream().filter(cfs -> cfs.isEmpty()).collect(Collectors.toList());
+			intersections.stream().filter(ColoredFieldSelection::isEmpty).collect(Collectors.toList());
 		// Check for completely empty, i.e., use the background
 		if (empties.size() == intersections.size()) {
 			return new EmptyLayoutBackgroundColorManager(backgroundColor);

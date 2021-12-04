@@ -110,9 +110,9 @@ public class DebuggerGoToDialog extends DialogComponentProvider {
 				close();
 			}
 		}).exceptionally(ex -> {
-			ex = AsyncUtils.unwrapThrowable(ex);
-			Msg.error(this, ex.getMessage(), ex);
-			setStatusText(ex.getMessage(), MessageType.ERROR, true);
+			Throwable throwable = AsyncUtils.unwrapThrowable(ex);
+			Msg.error(this, throwable.getMessage(), throwable);
+			setStatusText(throwable.getMessage(), MessageType.ERROR, true);
 			return null;
 		});
 	}

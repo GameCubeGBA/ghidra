@@ -20,6 +20,7 @@ import java.util.List;
 
 import ghidra.app.plugin.core.debug.gui.colors.MultiSelectionBlendedLayoutBackgroundColorManager.ColoredFieldSelection;
 
+@FunctionalInterface
 public interface SelectionGenerator {
 	void addSelections(BigInteger layoutIndex, SelectionTranslator translator,
 			List<ColoredFieldSelection> selections);

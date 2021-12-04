@@ -18,6 +18,7 @@ package ghidra.app.plugin.core.debug.gui.breakpoint;
 import static ghidra.trace.model.breakpoint.TraceBreakpointKind.*;
 
 import java.util.Collection;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.swing.*;
@@ -76,7 +77,7 @@ public class DebuggerPlaceBreakpointDialog extends DialogComponentProvider {
 		kindModel.addElement(TraceBreakpointKindSet.encode(Set.of(READ)));
 		kindModel.addElement(TraceBreakpointKindSet.encode(Set.of(WRITE)));
 		kindModel.addElement(TraceBreakpointKindSet.encode(Set.of(READ, WRITE)));
-		fieldKinds = new JComboBox<String>(kindModel);
+		fieldKinds = new JComboBox<>(kindModel);
 		fieldKinds.setEditable(true);
 		panel.add(labelKinds);
 		panel.add(fieldKinds);
@@ -121,7 +122,7 @@ public class DebuggerPlaceBreakpointDialog extends DialogComponentProvider {
 		}
 
 		try {
-			kinds = TraceBreakpointKindSet.decode((String) fieldKinds.getSelectedItem(), true);
+			kinds = TraceBreakpointKindSet.decode((String) Objects.requireNonNull(fieldKinds.getSelectedItem()), true);
 		}
 		catch (IllegalArgumentException e) {
 			setStatusText("Invalid kinds: " + e);
@@ -129,11 +130,9 @@ public class DebuggerPlaceBreakpointDialog extends DialogComponentProvider {
 		}
 
 		ProgramLocation loc = new ProgramLocation(program, address);
-		service.placeBreakpointAt(loc, length, kinds).thenAccept(__ -> {
-			close();
-		}).exceptionally(ex -> {
-			ex = AsyncUtils.unwrapThrowable(ex);
-			setStatusText(ex.getMessage(), MessageType.ERROR, true);
+		service.placeBreakpointAt(loc, length, kinds).thenAccept(__ -> close()).exceptionally(ex -> {
+			Throwable throwable = AsyncUtils.unwrapThrowable(ex);
+			setStatusText(throwable.getMessage(), MessageType.ERROR, true);
 			return null;
 		});
 	}

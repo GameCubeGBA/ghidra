@@ -805,7 +805,7 @@ public class DebuggerBreakpointMarkerPlugin extends Plugin
 		this.autoServiceWiring = AutoService.wireServicesProvidedAndConsumed(this);
 		this.autoOptionsWiring = AutoOptions.wireOptions(this);
 
-		updateDebouncer.addListener(__ -> SwingUtilities.invokeLater(() -> updateAllMarks()));
+		updateDebouncer.addListener(__ -> SwingUtilities.invokeLater(this::updateAllMarks));
 
 		tool.addPopupActionProvider(this);
 	}

@@ -59,7 +59,6 @@ public class ConsoleActionsCellEditor extends AbstractCellEditor
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO: sus call
 		int index = buttonCache.indexOf(e.getSource());
 		BoundAction action = value.get(index);
 		stopCellEditing();
