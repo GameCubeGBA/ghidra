@@ -226,7 +226,7 @@ public abstract class AbstractDebuggerWrappedConsoleConnection<T extends TargetO
 		CompletableFuture<TargetInterruptible> futureInterruptible =
 			DebugModelConventions.suitable(TargetInterruptible.class, targetConsole);
 		if (futureInterruptible != null) {
-			futureInterruptible.thenCompose(i -> i.interrupt())
+			futureInterruptible.thenCompose(TargetInterruptible::interrupt)
 					.thenRun(() -> guiConsole.getOutWriter().println("Interrupt sent"))
 					.exceptionally(exc -> {
 						guiConsole.getErrWriter().println("Failed to send Interrupt");

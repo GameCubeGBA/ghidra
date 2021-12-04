@@ -319,7 +319,7 @@ public class DebuggerCopyPlan {
 			}
 		};
 
-		protected boolean sameDataOrganization(Program p1, Program p2) {
+		protected static boolean sameDataOrganization(Program p1, Program p2) {
 			DataOrganization dataOrg1 = p1.getDataTypeManager().getDataOrganization();
 			DataOrganization dataOrg2 = p2.getDataTypeManager().getDataOrganization();
 			return dataOrg1.equals(dataOrg2);
@@ -328,7 +328,7 @@ public class DebuggerCopyPlan {
 		public static final List<Copier> VALUES;
 		static {
 			List<AllCopiers> asList = Arrays.asList(values());
-			Collections.sort(asList, Comparator.comparing(AllCopiers::getName));
+			asList.sort(Comparator.comparing(AllCopiers::getName));
 			VALUES = Collections.unmodifiableList(asList);
 		}
 

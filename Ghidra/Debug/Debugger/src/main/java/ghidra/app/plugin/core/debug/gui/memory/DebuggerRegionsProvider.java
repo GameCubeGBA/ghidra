@@ -400,7 +400,7 @@ public class DebuggerRegionsProvider extends ComponentProviderAdapter {
 		}
 		return ctx.getSelectedRegions()
 				.stream()
-				.map(r -> r.getRegion())
+				.map(RegionRow::getRegion)
 				.collect(Collectors.toSet());
 	}
 

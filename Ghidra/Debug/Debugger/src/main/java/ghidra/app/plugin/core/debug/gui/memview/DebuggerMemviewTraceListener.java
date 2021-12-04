@@ -57,7 +57,7 @@ public class DebuggerMemviewTraceListener extends TraceDomainObjectListener {
 	public DebuggerMemviewTraceListener(MemviewProvider provider) {
 		this.provider = provider;
 
-		updateLabelDebouncer.addListener(__ -> Swing.runIfSwingOrRunLater(() -> doUpdate()));
+		updateLabelDebouncer.addListener(__ -> Swing.runIfSwingOrRunLater(this::doUpdate));
 
 		listenFor(TraceThreadChangeType.ADDED, this::threadChanged);
 		listenFor(TraceThreadChangeType.CHANGED, this::threadChanged);
@@ -100,7 +100,7 @@ public class DebuggerMemviewTraceListener extends TraceDomainObjectListener {
 		}
 		AddressFactory factory = thread.getTrace().getBaseAddressFactory();
 		AddressSpace defaultSpace = factory.getDefaultAddressSpace();
-		Long threadId = thread.getKey();
+		long threadId = thread.getKey();
 		AddressRange rng = rng(defaultSpace, threadId, threadId);
 		MemoryBox box = new MemoryBox("Thread " + thread.getName(), MemviewBoxType.THREAD, rng,
 			thread.getLifespan());
@@ -207,12 +207,7 @@ public class DebuggerMemviewTraceListener extends TraceDomainObjectListener {
 		setCoordinates(coordinates);
 		Trace trace = coordinates.getTrace();
 		if (trace != null) {
-			Swing.runLater(new Runnable() {
-				@Override
-				public void run() {
-					processTrace(trace);
-				}
-			});
+			Swing.runLater(() -> processTrace(trace));
 		}
 		else {
 			provider.reset();

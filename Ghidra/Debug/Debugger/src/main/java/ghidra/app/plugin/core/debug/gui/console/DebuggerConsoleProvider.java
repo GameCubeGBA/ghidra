@@ -206,7 +206,7 @@ public class DebuggerConsoleProvider extends ComponentProviderAdapter
 			LogTableColumns, ActionContext, LogRow, LogRow> {
 
 		public LogTableModel() {
-			super("Log", LogTableColumns.class, r -> r.getActionContext(), r -> r);
+			super("Log", LogTableColumns.class, LogRow::getActionContext, r -> r);
 		}
 
 		@Override
@@ -224,14 +224,14 @@ public class DebuggerConsoleProvider extends ComponentProviderAdapter
 		@Override
 		public void tableChanged(TableModelEvent e) {
 			super.tableChanged(e);
-			Swing.runIfSwingOrRunLater(() -> updateRowHeights());
+			Swing.runIfSwingOrRunLater(this::updateRowHeights);
 		}
 
 		@Override
 		public void columnMarginChanged(ChangeEvent e) {
 			super.columnMarginChanged(e);
 			// TODO: Debounce or otherwise delay this
-			Swing.runIfSwingOrRunLater(() -> updateRowHeights());
+			Swing.runIfSwingOrRunLater(this::updateRowHeights);
 		}
 
 		protected void updateRowHeights() {
@@ -290,7 +290,7 @@ public class DebuggerConsoleProvider extends ComponentProviderAdapter
 	protected GhidraTable logTable;
 	private GhidraTableFilterPanel<LogRow> logFilterPanel;
 
-	private Deque<LogRow> buffer = new ArrayDeque<>();
+	private final Deque<LogRow> buffer = new ArrayDeque<>();
 
 	private final JPanel mainPanel = new JPanel(new BorderLayout());
 
@@ -422,7 +422,7 @@ public class DebuggerConsoleProvider extends ComponentProviderAdapter
 		//logTable.scrollRectToVisible(new Rectangle(0, Integer.MAX_VALUE - 1, 1, 1));
 	}
 
-	protected Icon iconForLevel(Level level) {
+	protected static Icon iconForLevel(Level level) {
 		if (level == Level.FATAL) {
 			return DebuggerResources.ICON_LOG_FATAL;
 		}

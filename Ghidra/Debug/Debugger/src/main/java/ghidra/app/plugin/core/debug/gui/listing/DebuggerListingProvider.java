@@ -427,8 +427,7 @@ public class DebuggerListingProvider extends CodeViewerProvider {
 		 */
 		return new CodeBrowserClipboardProvider(tool, this) {
 			@Override
-			protected boolean pasteBytes(Transferable pasteData)
-					throws UnsupportedFlavorException, IOException {
+			protected boolean pasteBytes(Transferable pasteData) {
 				return false;
 			}
 
@@ -726,7 +725,7 @@ public class DebuggerListingProvider extends CodeViewerProvider {
 		}
 		new TaskLauncher(new Task("Open " + df, true, false, false) {
 			@Override
-			public void run(TaskMonitor monitor) throws CancelledException {
+			public void run(TaskMonitor monitor) {
 				Program program = null;
 				try {
 					program = (Program) df.getDomainObject(this, false, false, monitor);
