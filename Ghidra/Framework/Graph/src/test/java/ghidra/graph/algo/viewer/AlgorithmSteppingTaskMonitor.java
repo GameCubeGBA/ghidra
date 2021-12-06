@@ -77,13 +77,11 @@ public class AlgorithmSteppingTaskMonitor extends TaskMonitorAdapter {
 		}
 	}
 
-	public void step() {
-		synchronized (this) {
-			notify();
-		}
+	public synchronized void step() {
+		notify();
 	}
 
 	protected void notifyStepReady() {
-		stepListeners.forEach(l -> l.call());
+		stepListeners.forEach(Callback::call);
 	}
 }
