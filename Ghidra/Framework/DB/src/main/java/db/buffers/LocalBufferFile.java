@@ -296,7 +296,7 @@ public class LocalBufferFile implements BufferFile {
 
 	@Override
 	public void setParameter(String name, int value) {
-		userParms.put(name, new Integer(value));
+		userParms.put(name, Integer.valueOf(value));
 	}
 
 	@Override
@@ -518,7 +518,7 @@ public class LocalBufferFile implements BufferFile {
 		while (nextIndex >= 0) {
 
 			// Push index on stack
-			freeIndexList.add(new Integer(nextIndex));
+			freeIndexList.add(Integer.valueOf(nextIndex));
 
 			// Read block to get next index
 			seekBufferBlock(nextIndex);
