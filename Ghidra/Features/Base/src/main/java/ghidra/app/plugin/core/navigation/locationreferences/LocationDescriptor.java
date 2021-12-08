@@ -284,7 +284,7 @@ public abstract class LocationDescriptor {
 			return false;
 		}
 
-		Class<? extends Object> clazz = obj.getClass();
+		Class<?> clazz = obj.getClass();
 		if (getClass() != clazz) {
 			return false;
 		}
