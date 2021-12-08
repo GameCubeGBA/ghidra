@@ -1187,9 +1187,8 @@ public class AutoAnalysisManager implements DomainObjectListener, DomainObjectCl
 	 * @return an array of task names
 	 */
 	public String[] getTimedTasks() {
-		String values[] = new String[timedTasks.size()];
-		List<String> list = new ArrayList<>();
-		list.addAll(timedTasks.keySet());
+		String[] values = new String[timedTasks.size()];
+        List<String> list = new ArrayList<>(timedTasks.keySet());
 		Collections.sort(list);
 		return list.toArray(values);
 	}
@@ -1256,7 +1255,7 @@ public class AutoAnalysisManager implements DomainObjectListener, DomainObjectCl
 
 		taskTimesStringBuf.append("-----------------------------------------------------\n");
 
-		String taskNames[] = getTimedTasks();
+		String[] taskNames = getTimedTasks();
 		for (String element : taskNames) {
 			long taskTime = getTaskTime(timedTasks, element);
 			double totalTime = taskTime / 1000.00;
@@ -1293,7 +1292,7 @@ public class AutoAnalysisManager implements DomainObjectListener, DomainObjectCl
 
 		StoredAnalyzerTimes times = StoredAnalyzerTimes.getStoredAnalyzerTimes(program);
 
-		String taskNames[] = getTimedTasks();
+		String[] taskNames = getTimedTasks();
 		for (String element : taskNames) {
 			long taskTimeMSec = getTaskTime(timedTasks, element);
 			times.addTime(element, taskTimeMSec);

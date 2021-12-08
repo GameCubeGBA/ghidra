@@ -131,7 +131,7 @@ public class CycleGroupAction extends ListingContextAction {
 			if (data == null) {
 				return;
 			}
-			int compPath[] = location.getComponentPath();
+			int[] compPath = location.getComponentPath();
 			if (compPath == null || compPath.length <= 0) {
 				DataType dt = cycleGroup.getNextDataType(data.getDataType(), true);
 				if (dt != null) {

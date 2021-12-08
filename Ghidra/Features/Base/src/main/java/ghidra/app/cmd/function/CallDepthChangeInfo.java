@@ -587,7 +587,7 @@ public class CallDepthChangeInfo {
 		int offsetReg = 0;
 		Register offReg = null;
 		Scalar s = null;
-		Object obj[] = cu.getOpObjects(opIndex);
+		Object[] obj = cu.getOpObjects(opIndex);
 		for (int i = 0; obj != null && i < obj.length; i++) {
 			if (obj[i] instanceof Scalar) {
 				Scalar newsc = (Scalar) obj[i];
