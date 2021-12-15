@@ -15,6 +15,8 @@
  */
 package ghidra.app.util.bin.format.elf;
 
+import java.util.*;
+
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.*;
