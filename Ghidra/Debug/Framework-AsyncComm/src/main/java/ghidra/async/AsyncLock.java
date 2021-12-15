@@ -248,13 +248,14 @@ public class AsyncLock {
 				throw new IllegalStateException("This lock is dead! " +
 					"I.e., an ownership token was finalized without first being released");
 			}
-			if (reentry == null && curHold != null) {
-				debug("    is held: queuing");
-				CompletableFuture<Hold> future = new CompletableFuture<>();
-				queue.add(future);
-				return future;
-			}
-			if (reentry == null && curHold == null) {
+			if (reentry == null) {
+				if (curHold != null) {
+					debug("    is held: queuing");
+					CompletableFuture<Hold> future = new CompletableFuture<>();
+					queue.add(future);
+					return future;
+				}
+
 				strongHold = new Hold();
 				debug("    is available: granting " + strongHold);
 				curHold = new WeakReference<>(strongHold);
