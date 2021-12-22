@@ -205,7 +205,9 @@ public class ActionContext {
 	 * @return this context
 	 */
 	public ActionContext setMouseEvent(MouseEvent e) {
-		this.mouseEvent = e;
+		if (e != null) {
+			this.mouseEvent = e;
+		}
 		return this;
 	}
 
