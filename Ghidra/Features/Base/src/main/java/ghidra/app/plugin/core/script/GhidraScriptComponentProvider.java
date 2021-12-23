@@ -19,6 +19,7 @@ import java.awt.BorderLayout;
 import java.awt.Rectangle;
 import java.awt.event.*;
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Predicate;
@@ -658,7 +659,7 @@ public class GhidraScriptComponentProvider extends ComponentProviderAdapter {
 		catch (IllegalAccessException e) {
 			console.addErrorMessage("", "Unable to access script: " + scriptName);
 		}
-		catch (InstantiationException e) {
+		catch (InstantiationException | NoSuchMethodException | InvocationTargetException e) {
 			console.addErrorMessage("", "Unable to instantiate script: " + scriptName);
 		}
 		catch (ClassNotFoundException e) {

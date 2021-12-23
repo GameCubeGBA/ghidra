@@ -56,12 +56,8 @@ public class ToolBarManager {
 		toolBar = null; // invalidate the current toolbar
 
 		String group = toolBarData.getToolBarGroup();
-		List<ToolBarItemManager> items = groupToItemsMap.get(group);
-		if (items == null) {
-			items = new ArrayList<>();
-			groupToItemsMap.put(group, items);
-		}
-		items.add(new ToolBarItemManager(action, windowManager));
+        List<ToolBarItemManager> items = groupToItemsMap.computeIfAbsent(group, k -> new ArrayList<>());
+        items.add(new ToolBarItemManager(action, windowManager));
 
 		Collections.sort(items, toolBarItemComparator);
 	}

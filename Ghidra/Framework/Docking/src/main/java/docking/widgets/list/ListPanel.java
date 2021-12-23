@@ -17,6 +17,7 @@ package docking.widgets.list;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.List;
 
 import javax.swing.*;
 import javax.swing.border.*;
@@ -146,9 +147,10 @@ public class ListPanel extends JPanel {
 
 	/**
 	 * Returns an array of all the selected items.
+	 * @return
 	 */
-	public Object[] getSelectedValues() {
-		return list.getSelectedValues();
+	public List getSelectedValues() {
+		return list.getSelectedValuesList();
 	}
 
 	/** 
@@ -237,15 +239,6 @@ public class ListPanel extends JPanel {
 	 */
 	public void issueWarning() {
 		JOptionPane.showMessageDialog(null, DEFAULT_WARNING, "Warning", JOptionPane.WARNING_MESSAGE);
-	}
-
-	/**
-	 * Displays any warning message.
-	 * @param msg the warning message to display.
-	 * @param title the title of the dialog to display.
-	 */
-	public void issueWarning(String msg, String title) {
-		JOptionPane.showMessageDialog(null, msg, title, JOptionPane.WARNING_MESSAGE);
 	}
 
 	/**

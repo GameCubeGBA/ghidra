@@ -52,12 +52,8 @@ public class DataTypeTreeDeleteTask extends Task {
 
 		for (GTreeNode node : nodes) {
 			ArchiveNode archiveNode = ((DataTypeTreeNode) node).getArchiveNode();
-			List<GTreeNode> archiveNodeList = archiveNodeMap.get(archiveNode);
-			if (archiveNodeList == null) {
-				archiveNodeList = new ArrayList<>();
-				archiveNodeMap.put(archiveNode, archiveNodeList);
-			}
-			archiveNodeList.add(node);
+            List<GTreeNode> archiveNodeList = archiveNodeMap.computeIfAbsent(archiveNode, k -> new ArrayList<>());
+            archiveNodeList.add(node);
 		}
 		return archiveNodeMap;
 	}

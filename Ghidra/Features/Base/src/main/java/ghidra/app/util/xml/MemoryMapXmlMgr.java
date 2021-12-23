@@ -84,9 +84,9 @@ class MemoryMapXmlMgr {
 		if (permissions == null) {
 			permissions = "r";
 		}
-		boolean r = permissions.indexOf("r") >= 0;
-		boolean w = permissions.indexOf("w") >= 0;
-		boolean x = permissions.indexOf("x") >= 0;
+		boolean r = permissions.contains("r");
+		boolean w = permissions.contains("w");
+		boolean x = permissions.contains("x");
 
 		String volatility = memorySectionElement.getAttribute("VOLATILE");
 		boolean isVolatile = "y".equals(volatility);

@@ -220,13 +220,7 @@ public class ResourceDataDirectory extends DataDirectory {
 					return;
 				}
 
-				Integer cnt = countMap.get(info.getTypeID());
-				if (cnt == null) {
-					countMap.put(info.getTypeID(), 1);
-				}
-				else {
-					countMap.put(info.getTypeID(), cnt + 1);
-				}
+                countMap.merge(info.getTypeID(), 1, Integer::sum);
 
 				addr = space.getAddress(va(info.getAddress(), isBinary));
 
@@ -692,7 +686,7 @@ public class ResourceDataDirectory extends DataDirectory {
 					String menuString = fixupStringRepForDisplay(
 						data.getComponentAt(offset).getDefaultValueRepresentation());
 					menuString = menuString.replaceAll("\"", "");
-					if (menuString.equals("")) {
+					if (menuString.isEmpty()) {
 						comment.append("-------------------\n");
 					}
 					else {

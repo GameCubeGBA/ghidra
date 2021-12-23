@@ -326,12 +326,8 @@ class BookmarkMerger extends AbstractListingMerger {
 	}
 
 	private void addConflict(Address address, String bookmarkType, String bookmarkCategory) {
-		ArrayList<BookmarkUid> list = conflicts.get(address);
-		if (list == null) {
-			list = new ArrayList<BookmarkUid>(1);
-			conflicts.put(address, list);
-		}
-		list.add(new BookmarkUid(address, bookmarkType, bookmarkCategory));
+        ArrayList<BookmarkUid> list = conflicts.computeIfAbsent(address, k -> new ArrayList<BookmarkUid>(1));
+        list.add(new BookmarkUid(address, bookmarkType, bookmarkCategory));
 		conflictSet.addRange(address, address);
 	}
 

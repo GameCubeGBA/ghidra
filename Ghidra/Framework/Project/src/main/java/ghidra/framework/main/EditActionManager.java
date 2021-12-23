@@ -24,6 +24,7 @@ import docking.action.MenuData;
 import docking.tool.ToolConstants;
 import docking.widgets.OptionDialog;
 import docking.widgets.filechooser.GhidraFileChooser;
+import docking.widgets.filechooser.GhidraFileChooserMode;
 import ghidra.net.ApplicationKeyManagerFactory;
 import ghidra.util.HelpLocation;
 import ghidra.util.Msg;
@@ -186,7 +187,7 @@ class EditActionManager {
 		fileChooser.setTitle("Select Certificate (req'd for PKI authentication only)");
 		fileChooser.setApproveButtonText("Set Certificate");
 		fileChooser.setFileFilter(ApplicationKeyManagerFactory.CERTIFICATE_FILE_FILTER);
-		fileChooser.setFileSelectionMode(GhidraFileChooser.FILES_ONLY);
+		fileChooser.setFileSelectionMode(GhidraFileChooserMode.FILES_ONLY);
 		fileChooser.setHelpLocation(new HelpLocation(plugin.getName(), "Set_PKI_Certificate"));
 		return fileChooser;
 	}

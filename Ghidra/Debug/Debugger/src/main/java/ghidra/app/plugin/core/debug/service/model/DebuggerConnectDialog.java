@@ -199,8 +199,8 @@ public class DebuggerConnectDialog extends DialogComponentProvider
 		pairPanel = new JPanel(layout);
 
 		JPanel centering = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		JScrollPane scrolling = new JScrollPane(centering, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-			JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		JScrollPane scrolling = new JScrollPane(centering, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrolling.setPreferredSize(new Dimension(100, 130));
 		panel.add(scrolling, BorderLayout.CENTER);
 		centering.add(pairPanel);

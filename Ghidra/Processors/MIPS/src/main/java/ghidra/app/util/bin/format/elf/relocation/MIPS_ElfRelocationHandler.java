@@ -1210,9 +1210,9 @@ public class MIPS_ElfRelocationHandler extends ElfRelocationHandler {
 		 */
 		long getGP0Value() {
 			Symbol symbol = SymbolUtilities.getLabelOrFunctionSymbol(program,
-				MIPS_ElfExtension.MIPS_GP0_VALUE_SYMBOL, err -> getLog().error("MIPS_ELF", err));
+				MIPS_ElfExtension.MIPS_GP0_VALUE_SYMBOL, err -> getLog().appendMsg("MIPS_ELF"));
 			if (symbol == null) {
-				return -1;
+				return -1L;
 			}
 			return symbol.getAddress().getOffset();
 		}

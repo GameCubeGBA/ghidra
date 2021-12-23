@@ -344,18 +344,10 @@ public class DataTypeDependencyOrderer {
 				return;
 			}
 		}
-		Set<Entry> dependents = whoDependsOnMe.get(subEntry);
-		if (dependents == null) {
-			dependents = new HashSet<>();
-			whoDependsOnMe.put(subEntry, dependents);
-		}
-		dependents.add(entry); //ignores duplicates
-		Set<Entry> support = whoIDependOn.get(entry);
-		if (support == null) {
-			support = new HashSet<>();
-			whoIDependOn.put(entry, support);
-		}
-		support.add(subEntry); //ignores duplicates
+        Set<Entry> dependents = whoDependsOnMe.computeIfAbsent(subEntry, k -> new HashSet<>());
+        dependents.add(entry); //ignores duplicates
+        Set<Entry> support = whoIDependOn.computeIfAbsent(entry, k -> new HashSet<>());
+        support.add(subEntry); //ignores duplicates
 	}
 
 	private void addDependent(Entry entry) {

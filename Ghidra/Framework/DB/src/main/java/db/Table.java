@@ -424,13 +424,7 @@ public class Table {
 					}
 					if (!found) {
 						consistent = false;
-						Integer missing = missingIndexRecMap.get(indexTable.getColumnIndex());
-						if (missing == null) {
-							missingIndexRecMap.put(indexTable.getColumnIndex(), 1);
-						}
-						else {
-							missingIndexRecMap.put(indexTable.getColumnIndex(), missing + 1);
-						}
+                        missingIndexRecMap.merge(indexTable.getColumnIndex(), 1, Integer::sum);
 						logIndexConsistencyError(
 							schema.getFieldNames()[indexTable.getColumnIndex()],
 							"Index table does not reference record key: " +

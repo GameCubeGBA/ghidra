@@ -25,6 +25,7 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import docking.widgets.filechooser.GhidraFileChooserMode;
 import org.apache.commons.lang3.StringUtils;
 
 import docking.widgets.filechooser.GhidraFileChooser;
@@ -163,7 +164,7 @@ public class FileChooserEditor extends PropertyEditorSupport {
 
 			fileChooser.setApproveButtonText("Choose Path");
 			fileChooser.setTitle("Choose Path");
-			fileChooser.setFileSelectionMode(GhidraFileChooser.FILES_AND_DIRECTORIES);
+			fileChooser.setFileSelectionMode(GhidraFileChooserMode.FILES_AND_DIRECTORIES);
 			if (currentFileValue != null) {
 				fileChooser.setSelectedFile(currentFileValue);
 			}

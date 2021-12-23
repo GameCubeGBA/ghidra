@@ -48,7 +48,7 @@ public class Img4FileSystem extends GFileSystemBase {
 		try {
 			byte[] magicBytes = provider.readBytes(0x0, 0x20);
 			String magicString = new String(magicBytes);
-			return magicString.indexOf("IM4P") != -1;
+			return magicString.contains("IM4P");
 		}
 		catch (Exception e) {
 			//ignore...

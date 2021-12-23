@@ -27,6 +27,7 @@ import docking.DialogComponentProvider;
 import docking.options.editor.ButtonPanelFactory;
 import docking.widgets.combobox.GComboBox;
 import docking.widgets.filechooser.GhidraFileChooser;
+import docking.widgets.filechooser.GhidraFileChooserMode;
 import docking.widgets.label.GDLabel;
 import docking.widgets.label.GLabel;
 import ghidra.app.script.SelectLanguageDialog;
@@ -151,7 +152,7 @@ public class PopulateFidDialog extends DialogComponentProvider {
 		browseButton.addActionListener(e -> {
 			GhidraFileChooser chooser = new GhidraFileChooser(tool.getToolFrame());
 			chooser.setTitle("Choose Common Symbols File");
-			chooser.setFileSelectionMode(GhidraFileChooser.FILES_ONLY);
+			chooser.setFileSelectionMode(GhidraFileChooserMode.FILES_ONLY);
 //			chooser.setFileFilter(null);
 			File selectedFile = chooser.getSelectedFile();
 			if (selectedFile != null) {

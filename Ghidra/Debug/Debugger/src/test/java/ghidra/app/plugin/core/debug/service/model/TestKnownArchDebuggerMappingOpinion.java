@@ -17,6 +17,7 @@ package ghidra.app.plugin.core.debug.service.model;
 
 import java.util.Set;
 
+import ghidra.app.plugin.core.debug.gui.AbstractGhidraHeadedDebuggerGUITest;
 import ghidra.app.plugin.core.debug.mapping.*;
 import ghidra.dbg.target.TargetEnvironment;
 import ghidra.dbg.target.TargetProcess;
@@ -33,7 +34,7 @@ public class TestKnownArchDebuggerMappingOpinion implements DebuggerMappingOpini
 			return Set.of();
 		}
 		return Set.of(new DefaultDebuggerMappingOffer(process, 100, "Offer for test-known-arch",
-			new LanguageID(DebuggerModelServiceTest.LANGID_TOYBE64), new CompilerSpecID("default"),
+			new LanguageID(AbstractGhidraHeadedDebuggerGUITest.LANGID_TOYBE64), new CompilerSpecID("default"),
 			Set.of()));
 	}
 }

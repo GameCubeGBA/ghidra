@@ -183,7 +183,7 @@ public abstract class AbstractDBTraceSymbol extends DBAnnotatedObject
 	@Override
 	public long getID() {
 		if (isGlobal()) {
-			return GlobalNamespace.GLOBAL_NAMESPACE_ID;
+			return Namespace.GLOBAL_NAMESPACE_ID;
 		}
 		return DBTraceSymbolManager.packID(getSymbolType().getID(), getKey());
 	}
@@ -195,7 +195,7 @@ public abstract class AbstractDBTraceSymbol extends DBAnnotatedObject
 
 	@Override
 	public Address getAddress() {
-		return SpecialAddress.NO_ADDRESS;
+		return Address.NO_ADDRESS;
 	}
 
 	protected Collection<? extends TraceAddressSnapRange> getRanges() {

@@ -19,8 +19,7 @@ import java.awt.*;
 import java.math.BigInteger;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
+import javax.swing.*;
 
 import docking.widgets.fieldpanel.*;
 import docking.widgets.fieldpanel.field.*;
@@ -140,7 +139,7 @@ public class TestBigLayoutModel implements LayoutModel {
 		contentPane.add(button, BorderLayout.SOUTH);
 		frame.pack();
 		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.repaint();
 
 	}

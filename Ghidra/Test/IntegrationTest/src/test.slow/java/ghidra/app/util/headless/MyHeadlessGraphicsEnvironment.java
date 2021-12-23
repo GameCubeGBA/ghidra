@@ -18,6 +18,7 @@ package ghidra.app.util.headless;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Locale;
 
 import sun.java2d.HeadlessGraphicsEnvironment;
@@ -43,7 +44,7 @@ public class MyHeadlessGraphicsEnvironment extends GraphicsEnvironment {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-		getRealGraphicsEnvironemnt();
+		getRealGraphicsEnvironment();
 	}
 
 	@Override
@@ -76,18 +77,20 @@ public class MyHeadlessGraphicsEnvironment extends GraphicsEnvironment {
 		return localEnv.getScreenDevices();
 	}
 	
-	private void getRealGraphicsEnvironemnt() {
+	private void getRealGraphicsEnvironment() {
 		try {
-			localEnv = (GraphicsEnvironment) Class.forName(preferredGraphicsEnv).newInstance();
+			localEnv = (GraphicsEnvironment) Class.forName(preferredGraphicsEnv).getConstructor().newInstance();
 			if (isHeadless()) {
 				localEnv = new HeadlessGraphicsEnvironment(localEnv);
 			}
 		} catch (ClassNotFoundException e) {
 			throw new Error("Could not find class: " + preferredGraphicsEnv);
-		} catch (InstantiationException e) {
+		} catch (InstantiationException | NoSuchMethodException e) {
 			throw new Error("Could not instantiate Graphics Environment: " + preferredGraphicsEnv);
 		} catch (IllegalAccessException e) {
 			throw new Error("Could not access Graphics Environment: " + preferredGraphicsEnv);
+		} catch (InvocationTargetException e) {
+			throw new Error("Could not instantiate Graphics Environment: " + preferredGraphicsEnv);
 		}
 	}
 

@@ -896,14 +896,14 @@ public class EquatePlugin1Test extends AbstractEquatePluginTest {
 				assertTrue(popupPath[1].startsWith("Unsigned Hex"));
 				assertTrue(popupPath[1].endsWith(" 0x4"));
 			}
-			else if (name.indexOf("Char") >= 0) {
+			else if (name.contains("Char")) {
 				assertTrue(popupPath[1].startsWith("Char"));
 			}
-			else if (name.indexOf("Double") >= 0) {
+			else if (name.contains("Double")) {
 				assertTrue(popupPath[1].startsWith("Double"));
 				assertTrue(popupPath[1].endsWith(" 1.976262583364986E-323"));
 			}
-			else if (name.indexOf("Float") >= 0) {
+			else if (name.contains("Float")) {
 				assertTrue(popupPath[1].startsWith("Float"));
 				assertTrue(popupPath[1].endsWith(" 5.605194E-45"));
 			}
@@ -946,16 +946,16 @@ public class EquatePlugin1Test extends AbstractEquatePluginTest {
 				assertTrue(popupPath[1].startsWith("Unsigned Hex"));
 				assertTrue(popupPath[1].endsWith(" 0x1006610"));
 			}
-			else if (name.indexOf("Char") >= 0) {
+			else if (name.contains("Char")) {
 				assertTrue(popupPath[1].startsWith("Char"));
 			}
-			else if (name.indexOf("Unsigned Binary") >= 0) {
+			else if (name.contains("Unsigned Binary")) {
 				assertTrue(popupPath[1].startsWith("Unsigned Binary"));
 			}
-			else if (name.indexOf("Float") >= 0) {
+			else if (name.contains("Float")) {
 				assertTrue(popupPath[1].startsWith("Float"));
 			}
-			else if (name.indexOf("Double") >= 0) {
+			else if (name.contains("Double")) {
 				assertTrue(popupPath[1].startsWith("Double"));
 			}
 			else {
@@ -1006,7 +1006,7 @@ public class EquatePlugin1Test extends AbstractEquatePluginTest {
 				assertTrue(popupPath[1].startsWith("Unsigned Hex"));
 				assertTrue(popupPath[1].endsWith(" 0xFFFFFFFD"));
 			}
-			else if (name.indexOf("Char") >= 0) {
+			else if (name.contains("Char")) {
 				assertTrue(popupPath[1].startsWith("Char"));
 			}
 			else {

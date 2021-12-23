@@ -173,7 +173,7 @@ public class DecompInterface {
 		}
 
 		// do not count warning messages as error messages
-		if (decompileMessage.toLowerCase().indexOf("warning") != -1) {
+		if (decompileMessage.toLowerCase().contains("warning")) {
 			return false;
 		}
 

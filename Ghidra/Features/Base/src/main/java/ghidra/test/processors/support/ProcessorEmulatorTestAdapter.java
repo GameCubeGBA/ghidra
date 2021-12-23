@@ -1229,7 +1229,7 @@ public abstract class ProcessorEmulatorTestAdapter extends TestCase implements E
 				}
 				Address pcAddr = testRunner.getCurrentAddress();
 				String pcStr = Long.toHexString(pcAddr.getOffset());
-				if ((emuError == null) || (emuError.indexOf(pcStr) < 0)) {
+				if ((emuError == null) || (!emuError.contains(pcStr))) {
 					msg.append(", pc=0x");
 					msg.append(pcStr);
 				}
@@ -1326,7 +1326,7 @@ public abstract class ProcessorEmulatorTestAdapter extends TestCase implements E
 	private void checkInstructionDecodeFailure(EmulatorTestRunner testRunner) {
 		// assume general error has already been logged
 		String emuError = testRunner.getEmuError();
-		if (emuError == null || (emuError.indexOf("Instruction decode failed") < 0) ||
+		if (emuError == null || (!emuError.contains("Instruction decode failed")) ||
 			(emuError.indexOf("Uninitialized Memory") > 0)) {
 			return;
 		}

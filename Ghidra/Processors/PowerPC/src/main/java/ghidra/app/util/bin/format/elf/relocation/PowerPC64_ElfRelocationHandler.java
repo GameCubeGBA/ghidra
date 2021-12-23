@@ -93,7 +93,7 @@ public class PowerPC64_ElfRelocationHandler extends ElfRelocationHandler {
 
 				MessageLog log = elfRelocationContext.getLog();
 				Symbol tocBaseSym = SymbolUtilities.getLabelOrFunctionSymbol(program,
-					PowerPC64_ElfExtension.TOC_BASE, err -> log.error("PPC_ELF", err));
+					PowerPC64_ElfExtension.TOC_BASE, err -> log.appendMsg("PPC_ELF"));
 				if (tocBaseSym == null) {
 					markAsError(program, relocationAddress, type, symbolName,
 						"TOC_BASE unknown", log);

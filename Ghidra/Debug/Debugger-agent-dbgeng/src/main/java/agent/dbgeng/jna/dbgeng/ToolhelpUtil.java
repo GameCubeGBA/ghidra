@@ -53,8 +53,8 @@ public class ToolhelpUtil {
 			}
 
 			int lastError = Kernel32.INSTANCE.GetLastError();
-			if (lastError != W32Errors.ERROR_SUCCESS &&
-				lastError != W32Errors.ERROR_NO_MORE_FILES) {
+			if (lastError != WinError.ERROR_SUCCESS &&
+				lastError != WinError.ERROR_NO_MORE_FILES) {
 				throw new Win32Exception(lastError);
 			}
 

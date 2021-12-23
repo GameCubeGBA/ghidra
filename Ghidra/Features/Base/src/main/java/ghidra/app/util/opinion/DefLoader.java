@@ -88,7 +88,7 @@ public class DefLoader extends AbstractLibrarySupportLoader {
 		}
 
 		SymbolTable symtab = prog.getSymbolTable();
-		Consumer<String> errorConsumer = err -> log.error("DefLoader", err);
+		Consumer<String> errorConsumer = err -> log.appendMsg("DefLoader");
 		for (DefExportLine def : parseExports(provider)) {
 			Symbol symbol = SymbolUtilities.getLabelOrFunctionSymbol(prog,
 				SymbolUtilities.ORDINAL_PREFIX + def.getOrdinal(), errorConsumer);

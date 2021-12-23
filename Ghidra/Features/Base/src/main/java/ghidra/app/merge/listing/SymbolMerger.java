@@ -1411,12 +1411,8 @@ class SymbolMerger extends AbstractListingMerger {
 	}
 
 	private void saveAddressConflict(Address addr, Symbol symbol) {
-		ArrayList<SymbolPath> list = symbolAddressConflicts.get(addr);
-		if (list == null) {
-			list = new ArrayList<>(1);
-			symbolAddressConflicts.put(addr, list);
-		}
-		SymbolPath symbolPath = new SymbolPath(symbol.getPath());
+        ArrayList<SymbolPath> list = symbolAddressConflicts.computeIfAbsent(addr, k -> new ArrayList<>(1));
+        SymbolPath symbolPath = new SymbolPath(symbol.getPath());
 		if (!list.contains(symbolPath)) {
 			list.add(symbolPath);
 		}

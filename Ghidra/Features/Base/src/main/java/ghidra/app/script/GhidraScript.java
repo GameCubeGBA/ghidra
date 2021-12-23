@@ -3761,12 +3761,8 @@ public abstract class GhidraScript extends FlatProgramAPI {
 	}
 
 	private Map<Class<?>, Object> getScriptMap(String title, String message) {
-		Map<Class<?>, Object> scriptMap = askMap.get(title + message);
-		if (scriptMap == null) {
-			scriptMap = new HashMap<>();
-			askMap.put(title + message, scriptMap);
-		}
-		return scriptMap;
+        Map<Class<?>, Object> scriptMap = askMap.computeIfAbsent(title + message, k -> new HashMap<>());
+        return scriptMap;
 	}
 
 	private static String zeropad(String s, int len) {

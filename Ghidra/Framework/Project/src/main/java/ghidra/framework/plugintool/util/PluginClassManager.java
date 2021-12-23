@@ -127,12 +127,8 @@ public class PluginClassManager {
 			}
 
 			PluginPackage pluginPackage = pluginDescription.getPluginPackage();
-			List<Plugin> list = pluginPackageMap.get(pluginPackage);
-			if (list == null) {
-				list = new ArrayList<>();
-				pluginPackageMap.put(pluginPackage, list);
-			}
-			list.add(plugin);
+            List<Plugin> list = pluginPackageMap.computeIfAbsent(pluginPackage, k -> new ArrayList<>());
+            list.add(plugin);
 		}
 		return pluginPackageMap;
 	}

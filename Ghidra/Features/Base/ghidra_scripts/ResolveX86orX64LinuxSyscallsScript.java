@@ -249,12 +249,8 @@ public class ResolveX86orX64LinuxSyscallsScript extends GhidraScript {
 			tMonitor.checkCanceled();
 			for (Instruction inst : program.getListing().getInstructions(func.getBody(), true)) {
 				if (tester.test(inst)) {
-					Set<Address> callSites = funcsToCalls.get(func);
-					if (callSites == null) {
-						callSites = new HashSet<>();
-						funcsToCalls.put(func, callSites);
-					}
-					callSites.add(inst.getAddress());
+                    Set<Address> callSites = funcsToCalls.computeIfAbsent(func, k -> new HashSet<>());
+                    callSites.add(inst.getAddress());
 				}
 			}
 		}

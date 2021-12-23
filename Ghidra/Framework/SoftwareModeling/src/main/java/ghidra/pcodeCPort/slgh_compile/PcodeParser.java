@@ -69,7 +69,7 @@ public class PcodeParser extends PcodeCompile {
 		DocumentStorage store = new DocumentStorage();
 		Document doc = null;
 		try {
-			doc = store.parseDocument(new StringBufferInputStream(sleighSpec));
+			doc = store.parseDocument(new StringReader(sleighSpec));
 		}
 		catch (IOException e) {
 			throw new AssertException(); // unexpected on string

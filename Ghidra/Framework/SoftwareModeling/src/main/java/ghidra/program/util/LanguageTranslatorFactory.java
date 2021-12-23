@@ -136,12 +136,8 @@ public class LanguageTranslatorFactory {
 	private void addToMap(HashMap<LanguageID, List<LanguageTranslator>> map,
 			LanguageTranslator translator, boolean sorted) {
 		LanguageID fromLanguageID = translator.getOldLanguageID();
-		List<LanguageTranslator> list = map.get(fromLanguageID);
-		if (list == null) {
-			list = new ArrayList<>();
-			map.put(fromLanguageID, list);
-		}
-		int index = list.size();
+        List<LanguageTranslator> list = map.computeIfAbsent(fromLanguageID, k -> new ArrayList<>());
+        int index = list.size();
 		if (sorted) {
 			index = Collections.binarySearch(list, translator.getOldVersion(),
 				TRANSLATOR_VERSION_COMPARATOR);
@@ -163,11 +159,11 @@ public class LanguageTranslatorFactory {
 				continue; // ignore utility implementations
 			}
 			try {
-				translators.add((LanguageTranslator) translatorClass.newInstance());
+				translators.add((LanguageTranslator) translatorClass.getDeclaredConstructor().newInstance());
 			}
 			catch (Exception e) {
 				Msg.error(this,
-					"Failed to instatiate language translator: " + translatorClass.getName(), e);
+					"Failed to instantiate language translator: " + translatorClass.getName(), e);
 				++badFileCount;
 			}
 		}
@@ -185,54 +181,6 @@ public class LanguageTranslatorFactory {
 				++badFileCount;
 			}
 		}
-	}
-
-	/**
-	 * Returns number of files which failed to parse properly.
-	 * This only reflects minimal parsing of old language files
-	 * which will prevent them from being added to old language map.
-	 * This is intended to be used by a unit test.
-	 */
-	int badFileCount() {
-		return badFileCount;
-	}
-
-	/**
-	 * Validate all translators contained within the translator maps.  
-	 * This is intended to be used by a unit test.
-	 * @return number of validation errors
-	 */
-	int validateAllTranslators() {
-		int errorCnt = 0;
-		for (List<LanguageTranslator> list : translatorMap.values()) {
-			for (LanguageTranslator translator : list) {
-				if (!translator.isValid()) {
-					++errorCnt;
-				}
-			}
-		}
-		for (List<LanguageTranslator> list : translatorVersionMap.values()) {
-			for (LanguageTranslator translator : list) {
-				if (!translator.isValid()) {
-					++errorCnt;
-				}
-			}
-		}
-		return errorCnt;
-	}
-
-	/**
-	 * Returns a list of all translators.
-	 */
-	List<LanguageTranslator> getAllTranslators() {
-		List<LanguageTranslator> list = new ArrayList<>();
-		for (List<LanguageTranslator> tlist : translatorMap.values()) {
-			list.addAll(tlist);
-		}
-		for (List<LanguageTranslator> tlist : translatorVersionMap.values()) {
-			list.addAll(tlist);
-		}
-		return list;
 	}
 
 	/**

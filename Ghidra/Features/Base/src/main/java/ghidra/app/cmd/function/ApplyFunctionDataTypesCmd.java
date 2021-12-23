@@ -108,13 +108,9 @@ public class ApplyFunctionDataTypesCmd extends BackgroundCommand {
 
 			if (sym.isExternal() || addresses == null || addresses.contains(sym.getAddress())) {
 				String name = getValidName(sym.getName());
-				List<Symbol> list = symbolMap.get(name);
-				if (list == null) {
-					list = new LinkedList<>();
-					symbolMap.put(name, list);
-				}
+                List<Symbol> list = symbolMap.computeIfAbsent(name, k -> new LinkedList<>());
 
-				list.add(sym);
+                list.add(sym);
 			}
 		}
 	}

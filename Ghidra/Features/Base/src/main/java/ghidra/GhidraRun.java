@@ -106,7 +106,7 @@ public class GhidraRun implements GhidraLaunchable {
 
 	private String processArguments(String[] args) {
 		//TODO remove this special handling when possible
-		if (args.length == 1 && (args[0].startsWith("-D") || args[0].indexOf(" -D") >= 0)) {
+		if (args.length == 1 && (args[0].startsWith("-D") || args[0].contains(" -D"))) {
 			args = args[0].split(" ");
 		}
 		String projectPath = null;

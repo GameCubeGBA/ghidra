@@ -46,7 +46,7 @@ public class NewTestApp extends JPanel {
 		}
 		System.setProperty(SystemUtilities.HEADLESS_PROPERTY, Boolean.FALSE.toString());
 		JFrame frame = new JFrame("Test App");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		Container container = frame.getContentPane();
 		container.setLayout(new BorderLayout());
 		final RootNode root = new RootNode(new File("C:\\clear_svn\\Ghidra_trunk\\Ghidra"));

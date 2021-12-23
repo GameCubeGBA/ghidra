@@ -244,7 +244,7 @@ public class SelectByFlowPlugin extends Plugin implements OptionsChangeListener 
 		Program program = context.getProgram();
 		AddressSet selectionAddressSet = null;
 		if (monitor == null) {
-			monitor = TaskMonitorAdapter.DUMMY_MONITOR;
+			monitor = TaskMonitor.DUMMY;
 		}
 
 		monitor.setMessage("Computing Selection...");
@@ -347,7 +347,7 @@ public class SelectByFlowPlugin extends Plugin implements OptionsChangeListener 
 
 		monitor.initialize(startAddresses.getNumAddresses());
 
-		CodeBlockModel cbm = blockModelService.getActiveSubroutineModel();
+		CodeBlockModel cbm = blockModelService.getActiveSubroutineModel(program);
 		CodeBlockIterator iter = cbm.getCodeBlocksContaining(startAddresses, monitor);
 		while (iter.hasNext()) {
 			if (monitor.isCancelled()) {
@@ -382,7 +382,7 @@ public class SelectByFlowPlugin extends Plugin implements OptionsChangeListener 
 		monitor.initialize(startAddresses.getNumAddresses());
 
 		ReferenceManager rm = program.getReferenceManager();
-		CodeBlockModel cbm = blockModelService.getActiveSubroutineModel();
+		CodeBlockModel cbm = blockModelService.getActiveSubroutineModel(program);
 		CodeBlockIterator cbIter = cbm.getCodeBlocksContaining(startAddresses, monitor);
 
 		while (cbIter.hasNext()) {

@@ -135,7 +135,7 @@ public class CategoryPath implements Comparable<CategoryPath> {
 		else if (endsWithNonEscapedDelimiter(path)) {
 			throw new IllegalArgumentException("Paths must not end with " + DELIMITER_STRING);
 		}
-		else if (path.indexOf(ILLEGAL_STRING) >= 0) {
+		else if (path.contains(ILLEGAL_STRING)) {
 			throw new IllegalArgumentException("Paths must have non-empty elements");
 		}
 

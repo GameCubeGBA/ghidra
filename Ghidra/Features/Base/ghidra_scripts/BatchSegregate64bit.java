@@ -55,7 +55,7 @@ public class BatchSegregate64bit extends GhidraScript {
 
 			Map<String, String> metadata = file.getMetadata();
 			String langId = metadata.get("Language ID");
-			if (langId != null && langId.indexOf(":64:") != -1) {
+			if (langId != null && langId.contains(":64:")) {
 				String origName = file.getPathname();
 				DomainFolder destFolder =
 					resolvePath(projRoot,

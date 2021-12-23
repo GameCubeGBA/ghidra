@@ -377,9 +377,7 @@ public class PrelinkFileSystem extends GFileSystemBase implements GFileSystemPro
 			fileToMachoOffsetMap.put(asDir, offset);
 			ret = asDir;
 		}
-		else if (fileToPrelinkInfoMap.get(file) == null) {
-			fileToPrelinkInfoMap.put(file, info);
-		}
+		else fileToPrelinkInfoMap.putIfAbsent(file, info);
 
 		GFile parentFile = file.getParentFile();
 		storeFile((GFileImpl) parentFile, null);
@@ -396,7 +394,7 @@ public class PrelinkFileSystem extends GFileSystemBase implements GFileSystemPro
 		if (parent.equals(child)) {
 			return false;
 		}
-		return child.getPath().indexOf(parent.getPath()) != -1;
+		return child.getPath().contains(parent.getPath());
 	}
 
 	//--------------------------- Legacy code ----------------------------------------------------

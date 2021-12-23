@@ -91,21 +91,13 @@ public class DumpGhidraCapabilitiesScript extends GhidraScript {
 	}
 
 	private void addAnalyzer(String moduleName, Analyzer analyzer) {
-		List<Analyzer> list = analyzerMap.get(moduleName);
-		if (list == null) {
-			list = new ArrayList<>();
-			analyzerMap.put(moduleName, list);
-		}
-		list.add(analyzer);
+        List<Analyzer> list = analyzerMap.computeIfAbsent(moduleName, k -> new ArrayList<>());
+        list.add(analyzer);
 
 	}
 
 	private void addPlugin(String moduleName, PluginDescription pluginDescription) {
-		List<PluginDescription> list = pluginMap.get(moduleName);
-		if (list == null) {
-			list = new ArrayList<>();
-			pluginMap.put(moduleName, list);
-		}
-		list.add(pluginDescription);
+        List<PluginDescription> list = pluginMap.computeIfAbsent(moduleName, k -> new ArrayList<>());
+        list.add(pluginDescription);
 	}
 }

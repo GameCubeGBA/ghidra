@@ -15,6 +15,7 @@
  */
 package ghidra.app.util.bin.format.pef;
 
+import ghidra.app.cmd.label.AddLabelCmd;
 import ghidra.app.cmd.label.AddUniqueLabelCmd;
 import ghidra.app.util.bin.BinaryReader;
 import ghidra.app.util.importer.MessageLog;
@@ -66,7 +67,7 @@ public class RelocLgByImport extends Relocation {
 		String name = SymbolUtilities.replaceInvalidChars(importedSymbol.getName(), true);
 		Address address = relocState.getRelocationAddress();
 		Namespace tvectNamespace = importState.getTVectNamespace();
-		AddUniqueLabelCmd cmd = new AddUniqueLabelCmd(address, name, tvectNamespace, SourceType.IMPORTED);
+		AddLabelCmd cmd = new AddLabelCmd(address, name, tvectNamespace, SourceType.IMPORTED);
 		if (!cmd.applyTo(program)) {
 			log.appendMsg(cmd.getStatusMsg());
 		}

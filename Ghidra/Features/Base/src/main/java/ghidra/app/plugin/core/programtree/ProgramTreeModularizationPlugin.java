@@ -126,7 +126,7 @@ public class ProgramTreeModularizationPlugin extends ProgramPlugin {
 
 		DominanceModularizationCmd cmd =
 			new DominanceModularizationCmd(node.getGroupPath(), node.getGroup().getTreeName(),
-				currentSelection, blockModelService.getActiveSubroutineModel());
+				currentSelection, blockModelService.getActiveSubroutineModel(currentProgram));
 		tool.executeBackgroundCommand(cmd, currentProgram);
 	}
 
@@ -139,7 +139,7 @@ public class ProgramTreeModularizationPlugin extends ProgramPlugin {
 		ComplexityDepthModularizationCmd cmd =
 			new ComplexityDepthModularizationCmd(node.getGroupPath(),
 				node.getGroup().getTreeName(), currentSelection,
-				blockModelService.getActiveSubroutineModel());
+				blockModelService.getActiveSubroutineModel(currentProgram));
 		tool.executeBackgroundCommand(cmd, currentProgram);
 	}
 

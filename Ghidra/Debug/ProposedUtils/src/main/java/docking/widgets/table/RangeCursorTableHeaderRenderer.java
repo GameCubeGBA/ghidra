@@ -16,6 +16,7 @@
 package docking.widgets.table;
 
 import java.awt.*;
+import java.awt.event.InputEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.function.Consumer;
@@ -72,7 +73,7 @@ public class RangeCursorTableHeaderRenderer<N extends Number & Comparable<N>>
 		MouseAdapter l = new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if ((e.getModifiersEx() & MouseEvent.SHIFT_DOWN_MASK) != 0) {
+				if ((e.getModifiersEx() & InputEvent.SHIFT_DOWN_MASK) != 0) {
 					return;
 				}
 				if ((e.getButton() != MouseEvent.BUTTON1)) {
@@ -84,8 +85,8 @@ public class RangeCursorTableHeaderRenderer<N extends Number & Comparable<N>>
 
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				int onmask = MouseEvent.BUTTON1_DOWN_MASK;
-				int offmask = MouseEvent.SHIFT_DOWN_MASK;
+				int onmask = InputEvent.BUTTON1_DOWN_MASK;
+				int offmask = InputEvent.SHIFT_DOWN_MASK;
 				if ((e.getModifiersEx() & (onmask | offmask)) != onmask) {
 					return;
 				}

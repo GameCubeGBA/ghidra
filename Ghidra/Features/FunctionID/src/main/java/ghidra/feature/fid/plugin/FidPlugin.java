@@ -28,6 +28,7 @@ import docking.action.DockingAction;
 import docking.action.MenuData;
 import docking.tool.ToolConstants;
 import docking.widgets.filechooser.GhidraFileChooser;
+import docking.widgets.filechooser.GhidraFileChooserMode;
 import ghidra.app.plugin.PluginCategoryNames;
 import ghidra.app.plugin.ProgramPlugin;
 import ghidra.app.script.AskDialog;
@@ -266,7 +267,7 @@ public class FidPlugin extends ProgramPlugin implements ChangeListener {
 		final GhidraFileChooser chooser = new GhidraFileChooser(tool.getActiveWindow());
 		chooser.setApproveButtonText(approveButtonText);
 		chooser.setTitle(title);
-		chooser.setFileSelectionMode(GhidraFileChooser.FILES_ONLY);
+		chooser.setFileSelectionMode(GhidraFileChooserMode.FILES_ONLY);
 		return chooser.getSelectedFile();
 	}
 

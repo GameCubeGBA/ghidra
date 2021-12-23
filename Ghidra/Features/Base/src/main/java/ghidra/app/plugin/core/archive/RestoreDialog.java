@@ -24,6 +24,7 @@ import javax.swing.*;
 
 import docking.DialogComponentProvider;
 import docking.widgets.filechooser.GhidraFileChooser;
+import docking.widgets.filechooser.GhidraFileChooserMode;
 import docking.widgets.label.GDLabel;
 import ghidra.framework.GenericRunInfo;
 import ghidra.framework.model.ProjectLocator;
@@ -91,7 +92,7 @@ public class RestoreDialog extends DialogComponentProvider {
 				String archivePath = chooseArchiveFile("Choose archive file",
 					"Selects the project archive file to restore.");
 
-				if ((archivePath != null) && (!archivePath.equals(""))) {
+				if ((archivePath != null) && (!archivePath.isEmpty())) {
 					// Make sure the archive has the correct suffix.
 					if (!archivePath.endsWith(ArchivePlugin.ARCHIVE_EXTENSION)) {
 						archivePath += ArchivePlugin.ARCHIVE_EXTENSION;
@@ -102,11 +103,11 @@ public class RestoreDialog extends DialogComponentProvider {
 					projectNameField.setText(projectName);
 
 					String dir = restoreField.getText().trim();
-					if (dir.equals("")) {
+					if (dir.isEmpty()) {
 						dir = archivePath.substring(0, archivePath.lastIndexOf(File.separator));
 						restoreField.setText(dir);
 					}
-					if ((projectName == null) || (projectName.equals(""))) {
+					if ((projectName == null) || (projectName.isEmpty())) {
 						Msg.showError(this, getComponent(), ArchivePlugin.RESTORE_ERROR_TITLE,
 							"Archive File is not a valid project archive.");
 					}
@@ -245,7 +246,7 @@ public class RestoreDialog extends DialogComponentProvider {
 		this.archivePathName = pathName;
 		this.restoreURL = projectLocator;
 		String projectName = projectNameField.getText();
-		if (projectName == null || projectName.equals("")) {
+		if (projectName == null || projectName.isEmpty()) {
 			projectName = ArchivePlugin.getProjectName(pathName);
 		}
 		archiveField.setText(pathName);
@@ -296,18 +297,18 @@ public class RestoreDialog extends DialogComponentProvider {
 	 */
 	private boolean checkInput() {
 		String archiveName = getArchivePathName();
-		if ((archiveName == null) || archiveName.equals("")) {
+		if ((archiveName == null) || archiveName.isEmpty()) {
 			setStatusText("Specify a valid archive file.");
 			return false;
 		}
 		String restoreDir = restoreField.getText().trim();
-		if (restoreDir == null || restoreDir.equals("") || !(new File(restoreDir)).isDirectory()) {
+		if (restoreDir == null || restoreDir.isEmpty() || !(new File(restoreDir)).isDirectory()) {
 			setStatusText("Specify a valid project directory.");
 			return false;
 		}
 		String restoreProjectName = projectNameField.getText().trim();
-		if (restoreProjectName == null || restoreProjectName.equals("") ||
-			!NamingUtilities.isValidName(restoreProjectName)) {
+		if (restoreProjectName == null || restoreProjectName.isEmpty() ||
+			!NamingUtilities.isValidProjectName(restoreProjectName)) {
 			setStatusText("Specify a valid project name.");
 			return false;
 		}
@@ -331,7 +332,7 @@ public class RestoreDialog extends DialogComponentProvider {
 	 * Creates a file chooser for selecting files with the specified extension.
 	 * @param extension the file extension for valid files to choose.
 	 * @param desc the description for the extension
-	 * @param fileURL the URL indicating the default directory/file to select.
+	 * @param filePathName the URL indicating the default directory/file to select.
 	 * @return the file chooser.
 	 */
 	private GhidraFileChooser createFileChooser(String extension, String desc,
@@ -345,7 +346,7 @@ public class RestoreDialog extends DialogComponentProvider {
 		GhidraFileChooser fileChooser = new GhidraFileChooser(null);
 		// start the browsing in the user's preferred project directory
 		File file = null;
-		if (filePathName != null && filePathName.length() > 0) {
+		if (filePathName != null && !filePathName.isEmpty()) {
 			file = new File(filePathName);
 			if (file.isDirectory()) {
 				fileChooser.setCurrentDirectory(file);
@@ -359,7 +360,7 @@ public class RestoreDialog extends DialogComponentProvider {
 			fileChooser.setCurrentDirectory(file);
 		}
 
-		fileChooser.setFileSelectionMode(GhidraFileChooser.FILES_ONLY);
+		fileChooser.setFileSelectionMode(GhidraFileChooserMode.FILES_ONLY);
 		fileChooser.setFileFilter(new ExtensionFileFilter(exampleExtension, desc));
 
 		return fileChooser;
@@ -374,7 +375,7 @@ public class RestoreDialog extends DialogComponentProvider {
 		GhidraFileChooser fileChooser = new GhidraFileChooser(null);
 		// start the browsing in the user's preferred project directory
 		File projectDirectory = new File(GenericRunInfo.getProjectsDirPath());
-		fileChooser.setFileSelectionMode(GhidraFileChooser.DIRECTORIES_ONLY);
+		fileChooser.setFileSelectionMode(GhidraFileChooserMode.DIRECTORIES_ONLY);
 		fileChooser.setCurrentDirectory(projectDirectory);
 		fileChooser.setSelectedFile(projectDirectory);
 
@@ -419,7 +420,7 @@ public class RestoreDialog extends DialogComponentProvider {
 
 			File file = selectedFile;
 			String chosenName = file.getName();
-			if (!NamingUtilities.isValidName(chosenName)) {
+			if (!NamingUtilities.isValidProjectName(chosenName)) {
 				Msg.showError(getClass(), null, "Invalid Archive Name",
 					chosenName + " is not a valid archive name");
 				continue;

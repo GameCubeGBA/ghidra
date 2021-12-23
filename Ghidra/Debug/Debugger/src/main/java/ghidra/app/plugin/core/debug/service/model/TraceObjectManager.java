@@ -474,7 +474,7 @@ public class TraceObjectManager {
 	}
 
 	public void attributesChangedBreakpointSpec(TargetObject bpt, Map<String, ?> added) {
-		if (added.containsKey(TargetBreakpointSpec.ENABLED_ATTRIBUTE_NAME) ||
+		if (added.containsKey(TargetTogglable.ENABLED_ATTRIBUTE_NAME) ||
 			added.containsKey(TargetBreakpointSpec.KINDS_ATTRIBUTE_NAME)) {
 			TargetBreakpointSpec spec = (TargetBreakpointSpec) bpt;
 			boolean enabled = spec.isEnabled();

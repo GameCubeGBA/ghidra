@@ -651,7 +651,7 @@ public class PropertyListMergeManager1Test extends AbstractMergeTest {
 		Component[] comp = container.getComponents();
 		for (Component element : comp) {
 			if ((element instanceof AbstractButton && element.isVisible()) &&
-				((AbstractButton) element).getText().indexOf(partialButtonText) >= 0) {
+                    ((AbstractButton) element).getText().contains(partialButtonText)) {
 				return (AbstractButton) element;
 			}
 			else if ((element instanceof Container) && element.isVisible()) {

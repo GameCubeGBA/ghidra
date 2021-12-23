@@ -16,6 +16,7 @@
 package ghidra.framework.protocol.ghidra;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.*;
 import java.util.*;
 
@@ -48,7 +49,7 @@ public class Handler extends URLStreamHandler {
 
 		String pkgs = System.getProperty("java.protocol.handler.pkgs");
 		if (pkgs != null) {
-			if (pkgs.indexOf(MY_PARENT_PACKAGE) >= 0) {
+			if (pkgs.contains(MY_PARENT_PACKAGE)) {
 				return; // avoid multiple registrations
 			}
 			pkgs = pkgs + "|" + MY_PARENT_PACKAGE;
@@ -132,11 +133,14 @@ public class Handler extends URLStreamHandler {
 			ClassSearcher.getClasses(GhidraProtocolHandler.class);
 		for (Class<?> c : classes) {
 			try {
-				protocolHandlers.add((GhidraProtocolHandler) c.newInstance());
+				protocolHandlers.add((GhidraProtocolHandler) c.getDeclaredConstructor().newInstance());
 			}
-			catch (InstantiationException | IllegalAccessException e) {
+			catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
 				Msg.error(Handler.class,
 					"Failed to instantiate ghidra protocol extension handler: " + c.getName());
+			} catch (NoSuchMethodException e) {
+				Msg.error(Handler.class,
+						"Failed to instantiate ghidra protocol extension handler: " + c.getName());
 			}
 		}
 	}

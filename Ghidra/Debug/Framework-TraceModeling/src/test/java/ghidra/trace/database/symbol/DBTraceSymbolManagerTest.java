@@ -56,11 +56,11 @@ public class DBTraceSymbolManagerTest extends AbstractGhidraHeadlessIntegrationT
 
 	@Test
 	public void testGlobalNamespaceExists() {
-		assertEquals(0, GlobalNamespace.GLOBAL_NAMESPACE_ID);
+		assertEquals(0, Namespace.GLOBAL_NAMESPACE_ID);
 		DBTraceNamespaceSymbol global = manager.getGlobalNamespace();
 		assertNotNull(global);
 		assertEquals(GlobalNamespace.GLOBAL_NAMESPACE_NAME, global.getName());
-		assertEquals(GlobalNamespace.GLOBAL_NAMESPACE_ID, global.getID());
+		assertEquals(Namespace.GLOBAL_NAMESPACE_ID, global.getID());
 	}
 
 	interface NamedCreator {
@@ -204,7 +204,7 @@ public class DBTraceSymbolManagerTest extends AbstractGhidraHeadlessIntegrationT
 	public void testGetSymbolByID()
 			throws DuplicateNameException, InvalidInputException, IllegalArgumentException {
 		DBTraceNamespaceSymbol global = manager.getGlobalNamespace();
-		assertSame(global, manager.getSymbolByID(GlobalNamespace.GLOBAL_NAMESPACE_ID));
+		assertSame(global, manager.getSymbolByID(Namespace.GLOBAL_NAMESPACE_ID));
 
 		DBTraceNamespaceSymbol nsA;
 		DBTraceClassSymbol clsA;

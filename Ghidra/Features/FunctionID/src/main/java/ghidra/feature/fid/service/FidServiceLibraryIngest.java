@@ -474,12 +474,8 @@ class FidServiceLibraryIngest {
 	 */
 	private void addUnresolvedSymbol(FunctionRecord functionRecord, String symbol,
 			FidHashQuad fidHashQuad) {
-		Set<ChildSymbol> set = unresolvedSymbols.get(functionRecord);
-		if (set == null) {
-			set = new HashSet<>();
-			unresolvedSymbols.put(functionRecord, set);
-		}
-		ChildSymbol childSym = new ChildSymbol();
+        Set<ChildSymbol> set = unresolvedSymbols.computeIfAbsent(functionRecord, k -> new HashSet<>());
+        ChildSymbol childSym = new ChildSymbol();
 		childSym.name = symbol;
 		childSym.hashQuad = fidHashQuad;
 		set.add(childSym);

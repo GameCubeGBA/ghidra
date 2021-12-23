@@ -870,7 +870,7 @@ public class FunctionGraphPlugin1Test extends AbstractFunctionGraphTest {
 		// make sure the label appears in the vertex
 		String updatedTitle = vertex.getTitle();
 		Assert.assertNotEquals(originalTitle, updatedTitle);
-		assertTrue(updatedTitle.indexOf(testName.getMethodName()) != -1);
+		assertTrue(updatedTitle.contains(testName.getMethodName()));
 	}
 
 	private void doTestRelayout(boolean fullReload) throws Exception {

@@ -110,13 +110,9 @@ public class VTDualListingHighlightProvider implements HighlightProvider {
 			return;
 		}
 
-		HashMap<VTMarkupType, VTMarkupItem> typeMap = map.get(address);
-		if (typeMap == null) {
-			typeMap = new HashMap<VTMarkupType, VTMarkupItem>();
-			map.put(address, typeMap);
-		}
+        HashMap<VTMarkupType, VTMarkupItem> typeMap = map.computeIfAbsent(address, k -> new HashMap<VTMarkupType, VTMarkupItem>());
 
-		typeMap.put(markupType, markupItem);
+        typeMap.put(markupType, markupItem);
 	}
 
 	@Override

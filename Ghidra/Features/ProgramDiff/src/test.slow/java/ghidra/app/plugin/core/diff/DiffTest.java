@@ -349,8 +349,8 @@ public class DiffTest extends DiffTestAdapter {
 			DiffDetailsProvider.DIFF_DETAILS_TEXT_AREA);
 		assertNotNull(textArea);
 		String info = textArea.getText();
-		assertTrue(info.indexOf("Byte Diffs") != -1);
-		assertTrue(info.indexOf("Bookmark Diffs") == -1);
+		assertTrue(info.contains("Byte Diffs"));
+		assertTrue(!info.contains("Bookmark Diffs"));
 		assertEquals(addr("100"), getDiffAddress());
 
 		tool.firePluginEvent(new ProgramLocationPluginEvent("test",
@@ -362,7 +362,7 @@ public class DiffTest extends DiffTestAdapter {
 
 		// Check where there are no differences
 		info = textArea.getText();
-		assertTrue(info.indexOf("No differences") != -1);
+		assertTrue(info.contains("No differences"));
 
 		assertEquals(addr("1001014"), getDiffAddress());
 	}

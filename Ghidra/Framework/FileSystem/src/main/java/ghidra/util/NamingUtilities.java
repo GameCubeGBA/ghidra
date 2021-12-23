@@ -118,12 +118,16 @@ public final class NamingUtilities {
 	 * limited use and applicability (project names and project file names have
 	 * different naming restrictions).
 	 */
-	@Deprecated
 	public static char findInvalidChar(String name) {
-		for (int i = 0; i < name.length(); i++) {
-			char c = name.charAt(i);
-			if (!Character.isLetterOrDigit(c) && !VALID_NAME_SET.contains(c)) {
-				return c;
+		if (!name.isEmpty()) {
+			if (name.charAt(0) == '.') {
+				return '.';
+			}
+			for (int i = 0; i < name.length(); i++) {
+				char c = name.charAt(i);
+				if (!Character.isLetterOrDigit(c) && !VALID_NAME_SET.contains(c)) {
+					return c;
+				}
 			}
 		}
 		return (char) 0;

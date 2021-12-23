@@ -2041,7 +2041,7 @@ public class SymbolicPropogator {
 
 		// only want returns that can fit in a pointer!
 		returnLoc =
-			conv.getReturnLocation(new PointerDataType(Undefined.DEFAULT, pointerSize), program);
+			conv.getReturnLocation(new PointerDataType(DataType.DEFAULT, pointerSize), program);
 
 		return returnLoc;
 	}
@@ -2423,7 +2423,7 @@ public class SymbolicPropogator {
 		catch (DataTypeConflictException e) {
 			// do nothing
 		}
-		int addrByteSize = dt.getLength();
+		int addrByteSize = data != null ? data.getLength() : dt.getLength();
 
 		return addrByteSize;
 	}

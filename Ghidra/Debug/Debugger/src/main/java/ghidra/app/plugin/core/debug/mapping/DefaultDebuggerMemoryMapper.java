@@ -55,7 +55,7 @@ public class DefaultDebuggerMemoryMapper implements DebuggerMemoryMapper {
 
 	@Override
 	public Address targetToTrace(Address targetAddr) {
-		if (targetAddr == SpecialAddress.NO_ADDRESS) {
+		if (targetAddr == Address.NO_ADDRESS) {
 			/**
 			 * TODO: Allow NO_ADDRESS into the database? There will be a bit of fallout as the UI
 			 * will have to accommodate the same possibility, esp., for go-to.

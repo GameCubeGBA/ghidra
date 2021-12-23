@@ -108,12 +108,8 @@ public class RegisterManager {
 			}
 
 			Address addr = reg.getAddress();
-			List<Register> list = registerAddressMap.get(addr);
-			if (list == null) {
-				list = new ArrayList<Register>();
-				registerAddressMap.put(addr, list);
-			}
-			list.add(reg);
+            List<Register> list = registerAddressMap.computeIfAbsent(addr, k -> new ArrayList<Register>());
+            list.add(reg);
 			if (reg.isProcessorContext()) {
 				continue;
 			}

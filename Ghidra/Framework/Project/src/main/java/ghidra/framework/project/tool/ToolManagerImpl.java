@@ -93,12 +93,8 @@ public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
 	 * @param tool the tool being registered
 	 */
 	private void registerTool(String toolName, PluginTool tool) {
-		List<PluginTool> list = namesMap.get(toolName);
-		if (list == null) {
-			list = new ArrayList<>(5);
-			namesMap.put(toolName, list);
-		}
-		list.add(tool);
+        List<PluginTool> list = namesMap.computeIfAbsent(toolName, k -> new ArrayList<>(5));
+        list.add(tool);
 
 		if (list.size() == 1) {
 			// first tool, set the default status

@@ -948,7 +948,7 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 	 * @param x the x coordinate of the click location
 	 * @param y the y coordinate of the click location
 	 * @param clickCount the number of clicks (2 = double click)
-	 * @param modifiers additional modifiers (e.g. MouseEvent.SHIFT_MASK)
+	 * @param modifiers additional modifiers (e.g. MouseEvent.SHIFT_DOWN_MASK)
 	 * @param popupTrigger a boolean, true if this event is a trigger for a
 	 *            popup menu
 	 */
@@ -976,7 +976,7 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 	 * @param x the x coordinate of the click location
 	 * @param y the y coordinate of the click location
 	 * @param clickCount the number of clicks (2 = double click)
-	 * @param modifiers additional modifiers (e.g. MouseEvent.SHIFT_MASK)
+	 * @param modifiers additional modifiers (e.g. MouseEvent.SHIFT_DOWN_MASK)
 	 */
 	public static void clickMouse(Component comp, int button, int x, int y, int clickCount,
 			int modifiers) {
@@ -993,7 +993,7 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 	 * @param startY the y coordinate of the start drag location
 	 * @param endX the x coordinate of the end drag location
 	 * @param endY the y coordinate of the end drag location
-	 * @param modifiers additional modifiers (e.g. MouseEvent.SHIFT_MASK)
+	 * @param modifiers additional modifiers (e.g. MouseEvent.SHIFT_DOWN_MASK)
 	 */
 	public static void dragMouse(final Component comp, int button, final int startX,
 			final int startY, final int endX, final int endY, int modifiers) {

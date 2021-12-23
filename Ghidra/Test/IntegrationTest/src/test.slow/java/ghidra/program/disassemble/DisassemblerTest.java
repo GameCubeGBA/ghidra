@@ -21,6 +21,7 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.Set;
 
+import ghidra.util.task.TaskMonitor;
 import org.junit.*;
 
 import ghidra.program.model.address.*;
@@ -71,7 +72,7 @@ public class DisassemblerTest extends AbstractGhidraHeadlessIntegrationTest {
 		programBuilder.createMemory(".text2", "0x3e0", 0x800).setExecute(true);// initialized
 
 		listing = program.getListing();
-		disassembler = new Disassembler(program, TaskMonitorAdapter.DUMMY_MONITOR, null);
+		disassembler = new Disassembler(program, TaskMonitor.DUMMY, null);
 	}
 
 	@After
@@ -155,7 +156,7 @@ public class DisassemblerTest extends AbstractGhidraHeadlessIntegrationTest {
 
 		if (text != null) {
 			assertTrue("Expected error bookmark at " + addr + " to contain text: " + text,
-				errMark.getComment().indexOf(text) >= 0);
+                    errMark.getComment().contains(text));
 		}
 
 	}

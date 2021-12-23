@@ -23,6 +23,7 @@ import javax.swing.*;
 import docking.DialogComponentProvider;
 import docking.widgets.OptionDialog;
 import docking.widgets.filechooser.GhidraFileChooser;
+import docking.widgets.filechooser.GhidraFileChooserMode;
 import docking.widgets.label.GDLabel;
 import ghidra.framework.GenericRunInfo;
 import ghidra.framework.model.ProjectLocator;
@@ -230,7 +231,7 @@ public class ArchiveDialog extends DialogComponentProvider {
 	 */
 	private boolean checkInput() {
 		String pathname = getArchivePathName();
-		if ((pathname == null) || (pathname.equals(""))) {
+		if ((pathname == null) || (pathname.isEmpty())) {
 			setStatusText("Specify an archive file.");
 			return false;
 		}
@@ -257,7 +258,7 @@ public class ArchiveDialog extends DialogComponentProvider {
 
 		GhidraFileChooser fileChooser = new GhidraFileChooser(getComponent());
 
-		fileChooser.setFileSelectionMode(GhidraFileChooser.FILES_ONLY);
+		fileChooser.setFileSelectionMode(GhidraFileChooserMode.FILES_ONLY);
 		fileChooser.setFileFilter(new GhidraFileFilter() {
 			@Override
 			public boolean accept(File file, GhidraFileChooserModel model) {
@@ -336,7 +337,7 @@ public class ArchiveDialog extends DialogComponentProvider {
 			File file = selectedFile;
 			String chosenPathname = file.getAbsolutePath();
 			String name = file.getName();
-			if (!NamingUtilities.isValidName(name)) {
+			if (!NamingUtilities.isValidProjectName(name)) {
 				Msg.showError(getClass(), null, "Invalid Archive Name",
 					name + " is not a valid archive name");
 				continue;
@@ -344,7 +345,7 @@ public class ArchiveDialog extends DialogComponentProvider {
 
 			File f = projectLocator.getProjectDir();
 			String filename = f.getAbsolutePath();
-			if (chosenPathname.indexOf(filename) >= 0) {
+			if (chosenPathname.contains(filename)) {
 				Msg.showError(getClass(), null, "Invalid Archive Name",
 					"Output file cannot be inside of Project");
 				continue;

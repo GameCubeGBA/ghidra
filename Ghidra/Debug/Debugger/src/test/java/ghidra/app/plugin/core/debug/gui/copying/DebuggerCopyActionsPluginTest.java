@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import ghidra.program.database.ProgramBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -140,7 +141,7 @@ public class DebuggerCopyActionsPluginTest extends AbstractGhidraHeadedDebuggerG
 		assertDisabled(copyActionsPlugin.actionCopyIntoCurrentProgram);
 
 		createProgram(getSLEIGH_X86_LANGUAGE());
-		createAndOpenTrace(ToyProgramBuilder._X64);
+		createAndOpenTrace(ProgramBuilder._X64);
 		assertDisabled(copyActionsPlugin.actionCopyIntoCurrentProgram);
 
 		AddressSpace stSpace = program.getAddressFactory().getDefaultAddressSpace();

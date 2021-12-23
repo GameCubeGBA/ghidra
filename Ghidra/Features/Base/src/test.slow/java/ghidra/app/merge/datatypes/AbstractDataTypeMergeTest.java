@@ -206,7 +206,7 @@ public abstract class AbstractDataTypeMergeTest extends AbstractMergeTest {
 
 		for (Component element : comp) {
 			if ((element instanceof AbstractButton && element.isShowing()) &&
-				((AbstractButton) element).getText().indexOf(text) >= 0) {
+                    ((AbstractButton) element).getText().contains(text)) {
 				return (AbstractButton) element;
 			}
 			else if ((element instanceof Container) && element.isShowing()) {

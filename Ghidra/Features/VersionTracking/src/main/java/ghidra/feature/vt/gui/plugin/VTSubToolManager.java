@@ -79,36 +79,6 @@ public class VTSubToolManager implements VTControllerListener, OptionsChangeList
 		controller.addListener(this);
 	}
 
-	Program openDestinationProgram(DomainFile domainFile, Component parent) {
-		if (destinationTool == null) {
-			destinationTool = createTool(DESTINATION_TOOL_NAME, false);
-		}
-		ProgramManager service = destinationTool.getService(ProgramManager.class);
-		return service.openProgram(domainFile, parent);
-	}
-
-	Program openSourceProgram(DomainFile domainFile, Component parent) {
-		if (sourceTool == null) {
-			sourceTool = createTool(SOURCE_TOOL_NAME, true);
-		}
-		ProgramManager service = sourceTool.getService(ProgramManager.class);
-		return service.openProgram(domainFile, parent);
-	}
-
-	void closeSourceProgram(Program source) {
-		if (sourceTool != null) {
-			ProgramManager service = sourceTool.getService(ProgramManager.class);
-			service.closeProgram(source, true);
-		}
-	}
-
-	void closeDestinationProgram(Program destination) {
-		if (destinationTool != null) {
-			ProgramManager service = destinationTool.getService(ProgramManager.class);
-			service.closeProgram(destination, true);
-		}
-	}
-
 	public void addListener(VTSubToolManagerListener listener) {
 		listeners.add(listener);
 	}
@@ -197,7 +167,7 @@ public class VTSubToolManager implements VTControllerListener, OptionsChangeList
 			}
 			KeyStroke keyStroke = (KeyStroke) newValue;
 			if (sourceTool != null) {
-				Options sourceOptions = sourceTool.getOptions(ToolConstants.KEY_BINDINGS);
+				Options sourceOptions = sourceTool.getOptions(DockingToolConstants.KEY_BINDINGS);
 				if (sourceOptions != options) {
 					sourceOptions.setKeyStroke(optionName, keyStroke);
 					sourceTool.refreshKeybindings();
@@ -205,7 +175,7 @@ public class VTSubToolManager implements VTControllerListener, OptionsChangeList
 				}
 			}
 			if (destinationTool != null) {
-				Options destinationOptions = destinationTool.getOptions(ToolConstants.KEY_BINDINGS);
+				Options destinationOptions = destinationTool.getOptions(DockingToolConstants.KEY_BINDINGS);
 				if (destinationOptions != options) {
 					destinationOptions.setKeyStroke(optionName, keyStroke);
 					destinationTool.refreshKeybindings();

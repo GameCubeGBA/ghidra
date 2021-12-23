@@ -255,7 +255,7 @@ public abstract class AbstractEquatePluginTest extends AbstractProgramBasedTest 
 		for (DockingActionIf element : actions) {
 			String name = element.getName();
 			if (name.startsWith("Convert") &&
-				(name.indexOf("Char") < 0 && name.indexOf("Signed") < 0)) {
+				(!name.contains("Char") && !name.contains("Signed"))) {
 				assertTrue(element.isAddToPopup(getListingContext()));
 			}
 		}
@@ -265,7 +265,7 @@ public abstract class AbstractEquatePluginTest extends AbstractProgramBasedTest 
 		Set<DockingActionIf> actions = getActionsByOwner(tool, "EquatePlugin");
 		for (DockingActionIf action : actions) {
 			String name = action.getName();
-			if (name.startsWith("Convert") && name.indexOf("Signed") < 0) {
+			if (name.startsWith("Convert") && !name.contains("Signed")) {
 				assertTrue(action.isAddToPopup(getListingContext()));
 			}
 		}
