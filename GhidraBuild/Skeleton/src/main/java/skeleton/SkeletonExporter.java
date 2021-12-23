@@ -4,9 +4,9 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -20,7 +20,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ghidra.app.util.*;
+import ghidra.app.util.DomainObjectService;
+import ghidra.app.util.Option;
+import ghidra.app.util.OptionException;
 import ghidra.app.util.exporter.Exporter;
 import ghidra.app.util.exporter.ExporterException;
 import ghidra.framework.model.DomainObject;
@@ -28,7 +30,8 @@ import ghidra.program.model.address.AddressSetView;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * TODO: Provide class-level documentation that describes what this exporter does.
+ * TODO: Provide class-level documentation that describes what this exporter
+ * does.
  */
 public class SkeletonExporter extends Exporter {
 
@@ -43,8 +46,8 @@ public class SkeletonExporter extends Exporter {
 	}
 
 	@Override
-	public boolean export(File file, DomainObject domainObj, AddressSetView addrSet,
-			TaskMonitor monitor) throws ExporterException, IOException {
+	public boolean export(File file, DomainObject domainObj, AddressSetView addrSet, TaskMonitor monitor)
+			throws ExporterException, IOException {
 
 		// TODO: Perform the export, and return true if it succeeded
 
@@ -64,6 +67,7 @@ public class SkeletonExporter extends Exporter {
 	@Override
 	public void setOptions(List<Option> options) throws OptionException {
 
-		// TODO: If this exporter has custom options, assign their values to the exporter here
+		// TODO: If this exporter has custom options, assign their values to the
+		// exporter here
 	}
 }
