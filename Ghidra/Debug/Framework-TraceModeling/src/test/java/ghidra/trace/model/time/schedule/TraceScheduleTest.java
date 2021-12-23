@@ -20,6 +20,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import ghidra.program.database.ProgramBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -42,7 +43,7 @@ public class TraceScheduleTest extends AbstractGhidraHeadlessIntegrationTest {
 	public void setUp() {
 		try {
 			TOY_BE_64_LANG = (SleighLanguage) getLanguageService()
-					.getLanguage(new LanguageID(ToyProgramBuilder._TOY64_BE));
+					.getLanguage(new LanguageID(ProgramBuilder._TOY64_BE));
 		}
 		catch (LanguageNotFoundException e) {
 			throw new AssertionError(e);
@@ -419,7 +420,7 @@ public class TraceScheduleTest extends AbstractGhidraHeadlessIntegrationTest {
 	public void testExecute() throws Exception {
 		TestMachine machine = new TestMachine();
 		TraceSchedule time = TraceSchedule.parse("1:4;t0-3;t1-2.1");
-		try (ToyDBTraceBuilder tb = new ToyDBTraceBuilder("test", ToyProgramBuilder._TOY64_BE)) {
+		try (ToyDBTraceBuilder tb = new ToyDBTraceBuilder("test", ProgramBuilder._TOY64_BE)) {
 			TraceThread t2;
 			try (UndoableTransaction tid = tb.startTransaction()) {
 				tb.trace.getThreadManager().createThread("Threads[0]", 0);

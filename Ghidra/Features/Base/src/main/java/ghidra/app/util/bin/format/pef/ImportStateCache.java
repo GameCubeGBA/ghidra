@@ -17,6 +17,7 @@ package ghidra.app.util.bin.format.pef;
 
 import java.util.*;
 
+import ghidra.app.cmd.label.AddLabelCmd;
 import ghidra.app.cmd.label.AddUniqueLabelCmd;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
@@ -103,10 +104,10 @@ public class ImportStateCache {
 	public boolean createLibrarySymbol(ImportedLibrary library, String symbolName,
 			Address address) {
 		Namespace libraryNamespace = getNamespace(library);
-		AddUniqueLabelCmd cmd =
-			new AddUniqueLabelCmd(address, symbolName, libraryNamespace, SourceType.IMPORTED);
+		AddLabelCmd cmd =
+			new AddLabelCmd(address, symbolName, libraryNamespace, SourceType.IMPORTED);
 		boolean success = cmd.applyTo(program);
-		Symbol symbol = cmd.getNewSymbol();
+		Symbol symbol = cmd.getSymbol();
 		Map<String, Symbol> map = librarySymbolsMap.get(library);
 		map.put(symbolName, symbol);
 		return success;

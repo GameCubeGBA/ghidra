@@ -484,7 +484,7 @@ public class DebuggerBreakpointMarkerPlugin extends Plugin
 	private class ToggleBreakpointsMarkerClickedListener implements MarkerClickedListener {
 		@Override
 		public void markerDoubleClicked(MarkerLocation location) {
-			doToggleBreakpointsAt(ToggleBreakpointAction.NAME,
+			doToggleBreakpointsAt(AbstractToggleBreakpointAction.NAME,
 				new ProgramLocationActionContext(null, location.getProgram(),
 					new ProgramLocation(location.getProgram(), location.getAddr()), null, null));
 		}
@@ -1084,7 +1084,7 @@ public class DebuggerBreakpointMarkerPlugin extends Plugin
 		actionDisableBreakpoint = new DisableBreakpointAction();
 		actionClearBreakpoint = new ClearBreakpointAction();
 
-		tool.setMenuGroup(new String[] { SetBreakpointAction.NAME }, SetBreakpointAction.GROUP);
+		tool.setMenuGroup(new String[] {AbstractSetBreakpointAction.NAME}, SetBreakpointAction.GROUP);
 	}
 
 	@Override

@@ -16,8 +16,6 @@
 package ghidra.framework;
 
 import java.awt.Taskbar;
-import java.awt.Toolkit;
-import java.lang.reflect.Field;
 
 import docking.DockingErrorDisplay;
 import docking.DockingWindowManager;

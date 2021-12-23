@@ -24,6 +24,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.swing.*;
 
+import docking.test.AbstractDockingTest;
+import ghidra.util.task.TaskMonitor;
 import org.junit.*;
 
 import docking.ActionContext;
@@ -913,7 +915,7 @@ public class Function1Test extends AbstractGhidraHeadedIntegrationTest {
 		performAction(createArray, cb.getProvider(), false);
 		waitForSwing();
 		final NumberInputDialog d =
-			env.waitForDialogComponent(NumberInputDialog.class, DIALOG_WAIT_TIME);
+				AbstractDockingTest.waitForDialogComponent(NumberInputDialog.class);
 
 		assertNotNull(d);
 		vars = function.getLocalVariables(VariableFilter.STACK_VARIABLE_FILTER);
@@ -1032,7 +1034,7 @@ public class Function1Test extends AbstractGhidraHeadedIntegrationTest {
 		performAction(rename, cb.getProvider(), false);
 		waitForBusyTool();
 
-		AddEditDialog dialog = env.waitForDialogComponent(AddEditDialog.class, DIALOG_WAIT_TIME);
+		AddEditDialog dialog = AbstractDockingTest.waitForDialogComponent(AddEditDialog.class);
 		assertNotNull(dialog);
 
 		GhidraComboBox<?> combo = findComponent(dialog, GhidraComboBox.class);
@@ -1058,7 +1060,7 @@ public class Function1Test extends AbstractGhidraHeadedIntegrationTest {
 
 		performAction(rename, cb.getProvider(), false);
 
-		dialog = env.waitForDialogComponent(AddEditDialog.class, DIALOG_WAIT_TIME);
+		dialog = AbstractDockingTest.waitForDialogComponent(AddEditDialog.class);
 		assertNotNull(dialog);
 
 		JComboBox<?> nameBox = (JComboBox<?>) getInstanceField("labelNameChoices", dialog);
@@ -1084,7 +1086,7 @@ public class Function1Test extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals("dword ptr [EBP + fred],0x0", cb.getCurrentFieldText());
 		performAction(renameFunctionVar, cb.getProvider(), false);
 
-		dialog = env.waitForDialogComponent(AddEditDialog.class, DIALOG_WAIT_TIME);
+		dialog = AbstractDockingTest.waitForDialogComponent(AddEditDialog.class);
 		assertNotNull(dialog);
 
 		nameBox = (JComboBox<?>) getInstanceField("labelNameChoices", dialog);
@@ -1211,7 +1213,7 @@ public class Function1Test extends AbstractGhidraHeadedIntegrationTest {
 		performAction(deleteFunctionVar, cb.getProvider(), true);
 		waitForBusyTool();
 		cb.goToField(addr("0x01006443"), "Operands", 0, 0);
-		assertTrue(cb.getCurrentFieldText().indexOf("local") < 0);
+		assertTrue(!cb.getCurrentFieldText().contains("local"));
 		click(cb, 2);
 		assertEquals("undefined entry()", cb.getCurrentFieldText());
 	}
@@ -1235,7 +1237,7 @@ public class Function1Test extends AbstractGhidraHeadedIntegrationTest {
 		performAction(rename, cb.getProvider(), false);
 		waitForBusyTool();
 
-		AddEditDialog dialog = env.waitForDialogComponent(AddEditDialog.class, DIALOG_WAIT_TIME);
+		AddEditDialog dialog = AbstractDockingTest.waitForDialogComponent(AddEditDialog.class);
 		assertNotNull(dialog);
 
 		GhidraComboBox<?> combo = findComponent(dialog, GhidraComboBox.class);
@@ -1262,13 +1264,13 @@ public class Function1Test extends AbstractGhidraHeadedIntegrationTest {
 		Function entry = getFunction("entry");
 		assertNotNull(entry);
 
-		Set<Function> called = entry.getCalledFunctions(TaskMonitorAdapter.DUMMY_MONITOR);
+		Set<Function> called = entry.getCalledFunctions(TaskMonitor.DUMMY);
 		assertEquals(4, called.size());
-		Set<Function> calling = entry.getCallingFunctions(TaskMonitorAdapter.DUMMY_MONITOR);
+		Set<Function> calling = entry.getCallingFunctions(TaskMonitor.DUMMY);
 		assertEquals(0, calling.size());// nobody calls entry
 
 		for (Function f : called) {
-			Set<Function> calling_f = f.getCallingFunctions(TaskMonitorAdapter.DUMMY_MONITOR);
+			Set<Function> calling_f = f.getCallingFunctions(TaskMonitor.DUMMY);
 			assertTrue(calling_f.contains(entry));
 		}
 	}

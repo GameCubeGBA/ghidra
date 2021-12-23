@@ -30,32 +30,11 @@ public class DocumentStorage {
 	VectorSTL<Document> doclist = new VectorSTL<>();
 	MapSTL<String, Element> tagmap = new ComparableMapSTL<String, Element>();
 
-	public Document parseDocument(InputStream s) throws JDOMException, IOException {
+	public Document parseDocument(StringReader s) throws JDOMException, IOException {
 		SAXBuilder builder = XmlUtilities.createSecureSAXBuilder(false, false);
 		Document document = builder.build(s);
 		doclist.push_back(document);
 		return document;
-	}
-
-	// Open and parse an XML file, return Document object
-	public Document openDocument(String filename) throws XmlError {
-		InputStream is = null;
-		try {
-			is = new FileInputStream(filename);
-			return parseDocument(is);
-		}
-		catch (Exception e) {
-			throw new XmlError("Unable to open xml document " + filename);
-		}
-		finally {
-			try {
-				if (is != null) {
-					is.close();
-				}
-			}
-			catch (IOException e) {
-			}
-		}
 	}
 
 	// Register a tag under its name

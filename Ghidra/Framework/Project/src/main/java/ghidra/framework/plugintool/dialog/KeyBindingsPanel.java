@@ -490,12 +490,8 @@ public class KeyBindingsPanel extends JPanel {
 			return;
 		}
 		String ksName = KeyEntryTextField.parseKeyStroke(ks);
-		List<String> list = actionNamesByKeyStroke.get(ksName);
-		if (list == null) {
-			list = new ArrayList<>();
-			actionNamesByKeyStroke.put(ksName, list);
-		}
-		if (!list.contains(actionName)) {
+        List<String> list = actionNamesByKeyStroke.computeIfAbsent(ksName, k -> new ArrayList<>());
+        if (!list.contains(actionName)) {
 			list.add(actionName);
 		}
 	}

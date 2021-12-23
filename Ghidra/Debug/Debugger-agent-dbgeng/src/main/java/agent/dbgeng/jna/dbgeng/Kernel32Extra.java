@@ -29,11 +29,11 @@ import agent.dbgeng.jna.dbgeng.WinNTExtra.EXCEPTION_POINTERS;
 
 public interface Kernel32Extra extends StdCallLibrary {
 	Kernel32Extra INSTANCE =
-		Native.loadLibrary("kernel32", Kernel32Extra.class, W32APIOptions.DEFAULT_OPTIONS);
+			Native.load("kernel32", Kernel32Extra.class, W32APIOptions.DEFAULT_OPTIONS);
 
 	interface VectoredHandlerCallback extends StdCallCallback {
-		LONG EXCEPTION_CONTINUE_EXECUTION = new LONG(0xffffffff);
-		LONG EXCEPTION_CONTINUE_SEARCH = new LONG(0x0);
+		LONG EXCEPTION_CONTINUE_EXECUTION = new LONG(0xffffffffL);
+		LONG EXCEPTION_CONTINUE_SEARCH = new LONG(0x0L);
 
 		LONG invoke(EXCEPTION_POINTERS.ByReference ExceptionInfo);
 	}

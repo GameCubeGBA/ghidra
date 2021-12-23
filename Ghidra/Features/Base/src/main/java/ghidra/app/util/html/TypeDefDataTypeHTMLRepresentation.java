@@ -219,7 +219,7 @@ public class TypeDefDataTypeHTMLRepresentation extends HTMLDataTypeRepresentatio
 
 		lines.add(new TextLine(baseHTML));
 
-		if (baseHTML.indexOf(LENGTH_PREFIX) < 0) {
+		if (!baseHTML.contains(LENGTH_PREFIX)) {
 			StringBuilder buffy = addDataTypeLength(basedataType, new StringBuilder());
 			lines.add(new TextLine(buffy.toString()));
 		}

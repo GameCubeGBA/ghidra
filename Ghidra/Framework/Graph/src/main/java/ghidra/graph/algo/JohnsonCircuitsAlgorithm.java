@@ -139,12 +139,8 @@ public class JohnsonCircuitsAlgorithm<V, E extends GEdge<V>> {
 	}
 
 	private void addBackEdge(V u, V v) {
-		Set<V> set = blockedBackEdgesMap.get(u);
-		if (set == null) {
-			set = new HashSet<>();
-			blockedBackEdgesMap.put(u, set);
-		}
-		set.add(v);
+        Set<V> set = blockedBackEdgesMap.computeIfAbsent(u, k -> new HashSet<>());
+        set.add(v);
 	}
 
 	private void outputCircuit() {

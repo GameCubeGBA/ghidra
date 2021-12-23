@@ -261,7 +261,7 @@ public class ConditionTestPanel extends JPanel {
 		ConditionTestPanel ctPanel = new ConditionTestPanel(list);
 		frame.getContentPane().add(ctPanel);
 		frame.pack();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 
 	}

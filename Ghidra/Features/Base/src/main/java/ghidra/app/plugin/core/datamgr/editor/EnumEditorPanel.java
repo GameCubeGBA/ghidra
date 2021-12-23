@@ -465,7 +465,7 @@ class EnumEditorPanel extends JPanel {
 		SwingUtilities.invokeLater(() -> {
 			setStatusMessage("Enum size of " + newLength + " cannot contain the value " + "0x" +
 				Long.toHexString(badValue));
-			sizeComboBox.setSelectedItem(new Integer(currentLength));
+			sizeComboBox.setSelectedItem(Integer.valueOf(currentLength));
 		});
 	}
 

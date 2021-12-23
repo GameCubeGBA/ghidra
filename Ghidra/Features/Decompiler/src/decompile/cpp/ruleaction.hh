@@ -1505,7 +1505,7 @@ public:
   }
   virtual void getOpList(vector<uint4> &oplist) const;
   virtual int4 applyOp(PcodeOp *op,Funcdata &data);
-
+};
 class RuleXorSwap : public Rule {
 public:
   RuleXorSwap(const string &g) : Rule(g,0,"xorswap") {}		///< Constructor
@@ -1515,7 +1515,5 @@ public:
   }
   virtual void getOpList(vector<uint4> &oplist) const;
   virtual int4 applyOp(PcodeOp *op,Funcdata &data);
-};
-
 };
 #endif

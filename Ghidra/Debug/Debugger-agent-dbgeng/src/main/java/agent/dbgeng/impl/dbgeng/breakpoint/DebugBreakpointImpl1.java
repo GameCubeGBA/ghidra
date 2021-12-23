@@ -18,6 +18,7 @@ package agent.dbgeng.impl.dbgeng.breakpoint;
 import com.sun.jna.Native;
 import com.sun.jna.platform.win32.Kernel32;
 import com.sun.jna.platform.win32.WinDef.*;
+import com.sun.jna.platform.win32.WinError;
 import com.sun.jna.platform.win32.WinNT.HRESULT;
 import com.sun.jna.platform.win32.COM.COMUtils;
 import com.sun.jna.ptr.PointerByReference;
@@ -130,7 +131,7 @@ public class DebugBreakpointImpl1 implements DebugBreakpointInternal {
 	public Long getOffset() {
 		ULONGLONGByReference pullOffset = new ULONGLONGByReference();
 		HRESULT getOffset = jnaBreakpoint.GetOffset(pullOffset);
-		if (getOffset.longValue() == Kernel32.E_NOINTERFACE) {
+		if (getOffset.longValue() == WinError.E_NOINTERFACE) {
 			// Per MSDN, this means the placement is deferred
 			return null;
 		}

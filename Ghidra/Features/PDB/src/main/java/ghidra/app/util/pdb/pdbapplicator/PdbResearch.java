@@ -757,12 +757,8 @@ public class PdbResearch {
 	}
 
 	private static void addStuff(Map<Address, List<Stuff>> map, Address address, Stuff stuff) {
-		List<Stuff> list = map.get(address);
-		if (list == null) {
-			list = new ArrayList<>();
-			map.put(address, list);
-		}
-		list.add(stuff);
+        List<Stuff> list = map.computeIfAbsent(address, k -> new ArrayList<>());
+        list.add(stuff);
 	}
 
 	private static void dumpMap(Map<Address, List<Stuff>> map) {

@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Objects;
 
 import docking.widgets.filechooser.GhidraFileChooser;
+import docking.widgets.filechooser.GhidraFileChooserMode;
 import ghidra.bitpatterns.info.ContextRegisterFilter;
 import ghidra.bitpatterns.info.PatternType;
 import ghidra.framework.preferences.Preferences;
@@ -88,7 +89,7 @@ public class ExportPatternFileActionListener implements ActionListener {
 			return;
 		}
 		GhidraFileChooser gFileChooser = new GhidraFileChooser(component);
-		gFileChooser.setFileSelectionMode(GhidraFileChooser.FILES_ONLY);
+		gFileChooser.setFileSelectionMode(GhidraFileChooserMode.FILES_ONLY);
 		ExtensionFileFilter xmlFilter = new ExtensionFileFilter("xml", "XML Files");
 		gFileChooser.setFileFilter(xmlFilter);
 		String baseDir = Preferences.getProperty(XML_EXPORT_DIR_PROPERTY);
@@ -130,12 +131,11 @@ public class ExportPatternFileActionListener implements ActionListener {
 		Integer alignment = null;
 		ContextRegisterFilter cRegFilter = null;
 		for (PatternInfoRowObject row : selected) {
-			if (!row.getPatternType().equals(PatternType.FIRST)) {
-				continue;
+			if (row.getPatternType().equals(PatternType.FIRST)) {
+				alignment = row.getAlignment();
+				cRegFilter = row.getContextRegisterFilter();
+				break;
 			}
-			alignment = row.getAlignment();
-			cRegFilter = row.getContextRegisterFilter();
-			break;
 		}
 		//now check that all POST patterns agree with the first POST pattern
 		for (PatternInfoRowObject row : selected) {

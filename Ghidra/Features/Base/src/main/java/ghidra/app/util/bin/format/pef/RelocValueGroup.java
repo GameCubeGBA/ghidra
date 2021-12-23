@@ -15,6 +15,7 @@
  */
 package ghidra.app.util.bin.format.pef;
 
+import ghidra.app.cmd.label.AddLabelCmd;
 import ghidra.app.cmd.label.AddUniqueLabelCmd;
 import ghidra.app.util.bin.BinaryReader;
 import ghidra.app.util.importer.MessageLog;
@@ -172,7 +173,7 @@ public class RelocValueGroup extends Relocation {
 					Namespace namespace = importState.getTVectNamespace();
 
 					String name = SymbolUtilities.replaceInvalidChars(importedSymbol.getName(), true);
-					AddUniqueLabelCmd cmd = new AddUniqueLabelCmd(relocState.getRelocationAddress(), name, namespace, SourceType.IMPORTED);
+					AddLabelCmd cmd = new AddLabelCmd(relocState.getRelocationAddress(), name, namespace, SourceType.IMPORTED);
 					if (!cmd.applyTo(program)) {
 						log.appendMsg(cmd.getStatusMsg());
 					}

@@ -422,7 +422,6 @@ public interface DebuggerObjectModel {
 	 * 
 	 * @return a future that completes with the object or with {@code null} if it doesn't exist
 	 */
-	@Deprecated
 	public default CompletableFuture<? extends TargetObject> fetchModelObject(List<String> path) {
 		return fetchModelObject(path, false);
 	}

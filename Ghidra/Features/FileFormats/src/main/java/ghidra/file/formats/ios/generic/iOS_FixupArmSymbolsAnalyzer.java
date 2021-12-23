@@ -106,7 +106,7 @@ public class iOS_FixupArmSymbolsAnalyzer extends AbstractAnalyzer {
 
 		String string = new String(bytes).trim();
 
-		if (string.indexOf("Apple") != -1) {
+		if (string.contains("Apple")) {
 			if (string.startsWith("SecureROM")) {
 				return true;
 			}

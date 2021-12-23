@@ -30,6 +30,7 @@ import docking.framework.DockingApplicationConfiguration;
 import docking.framework.DockingApplicationLayout;
 import docking.widgets.combobox.GComboBox;
 import docking.widgets.filechooser.GhidraFileChooser;
+import docking.widgets.filechooser.GhidraFileChooserMode;
 import docking.widgets.label.GDLabel;
 import docking.widgets.label.GLabel;
 import ghidra.app.plugin.debug.dbtable.DbLargeTableModel;
@@ -39,6 +40,7 @@ import ghidra.framework.store.db.PackedDatabase;
 import ghidra.util.Msg;
 import ghidra.util.filechooser.ExtensionFileFilter;
 import ghidra.util.layout.PairLayout;
+import ghidra.util.task.TaskMonitor;
 import ghidra.util.task.TaskMonitorAdapter;
 import utility.application.ApplicationLayout;
 
@@ -60,7 +62,7 @@ public class DbViewer extends JFrame {
 
 	DbViewer() {
 		super("Database Viewer");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		buildGui();
 	}
 
@@ -108,7 +110,7 @@ public class DbViewer extends JFrame {
 	private void openDb() {
 		if (fileChooser == null) {
 			fileChooser = new GhidraFileChooser(this);
-			fileChooser.setFileSelectionMode(GhidraFileChooser.FILES_ONLY);
+			fileChooser.setFileSelectionMode(GhidraFileChooserMode.FILES_ONLY);
 			fileChooser.setFileFilter(new ExtensionFileFilter("gbf", "Ghidra Buffer File"));
 			fileChooser.setCurrentDirectory(new File("C:\\"));
 		}
@@ -134,8 +136,8 @@ public class DbViewer extends JFrame {
 		catch (IOException e) {
 			try {
 				PackedDatabase pdb = PackedDatabase.getPackedDatabase(selectedFile,
-					TaskMonitorAdapter.DUMMY_MONITOR);
-				dbh = pdb.open(TaskMonitorAdapter.DUMMY_MONITOR);
+                        TaskMonitor.DUMMY);
+				dbh = pdb.open(TaskMonitor.DUMMY);
 				tables = dbh.getTables();
 				Arrays.sort(tables, new TableNameComparator());
 			}

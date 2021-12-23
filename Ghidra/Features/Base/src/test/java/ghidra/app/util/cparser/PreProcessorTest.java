@@ -66,8 +66,7 @@ public class PreProcessorTest extends AbstractGenericTest {
 		String endStr = results.substring(end - 9, end);
 		assertEquals("theEnd();", endStr);
 
-		assertTrue("macro expansion _fpl(bob) failed ", results
-				.indexOf("extern int __declspec(\"fp(\\\"l\\\", \" #bob \")\") __ifplbob;") != -1);
+		assertTrue("macro expansion _fpl(bob) failed ", results.contains("extern int __declspec(\"fp(\\\"l\\\", \" #bob \")\") __ifplbob;"));
 
 		StandAloneDataTypeManager dtMgr = new StandAloneDataTypeManager("parsed");
 		parser.getDefinitions().populateDefineEquates(dtMgr);

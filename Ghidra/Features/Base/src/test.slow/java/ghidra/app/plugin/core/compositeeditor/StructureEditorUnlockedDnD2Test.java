@@ -17,6 +17,7 @@ package ghidra.app.plugin.core.compositeeditor;
 
 import static org.junit.Assert.*;
 
+import docking.test.AbstractDockingTest;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -85,7 +86,7 @@ public class StructureEditorUnlockedDnD2Test extends AbstractStructureEditorTest
 
 		assertNotNull(dt4);
 		addAtPoint(dt4, 3, 0);
-		dialog = env.waitForDialogComponent(NumberInputDialog.class, 1000);
+		dialog = AbstractDockingTest.waitForDialogComponent(NumberInputDialog.class);
 		assertNotNull(dialog);
 		okInput(dialog, 25);
 		dialog = null;

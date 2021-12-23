@@ -263,10 +263,10 @@ public class GnuDemangler implements Demangler {
 	}
 
 	private boolean isELF(String executableFormat) {
-		return executableFormat != null && executableFormat.indexOf(ElfLoader.ELF_NAME) != -1;
+		return executableFormat != null && executableFormat.contains(ElfLoader.ELF_NAME);
 	}
 
 	private boolean isMacho(String executableFormat) {
-		return executableFormat != null && executableFormat.indexOf(MachoLoader.MACH_O_NAME) != -1;
+		return executableFormat != null && executableFormat.contains(MachoLoader.MACH_O_NAME);
 	}
 }

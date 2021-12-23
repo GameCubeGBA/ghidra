@@ -355,23 +355,6 @@ public class TestEnv {
 		return AbstractDockingTest.waitForWindow(title, timeoutMS);
 	}
 
-	/**
-	 * Waits for the first window of the given class.  This method is the same as
-	 * {@link #waitForDialogComponent(Class, int)} with the exception that the parent
-	 * window is assumed to be this instance's tool frame.
-	 *
-	 * @param ghidraClass The class of the dialog the user desires
-	 * @param maxTimeMS The max amount of time in milliseconds to wait for the requested dialog
-	 *        to appear.
-	 * @return The first occurrence of a dialog that extends the given <code>ghirdraClass</code>
-	 * @deprecated use instead {@link AbstractDockingTest#waitForDialogComponent(Class)}
-	 */
-	@Deprecated
-	public <T extends DialogComponentProvider> T waitForDialogComponent(Class<T> ghidraClass,
-			int maxTimeMS) {
-		return AbstractDockingTest.waitForDialogComponent(ghidraClass);
-	}
-
 	private static GhidraProject createGhidraTestProject(String projectName) throws IOException {
 
 		// delete this content before creating the project, as the project may try to use

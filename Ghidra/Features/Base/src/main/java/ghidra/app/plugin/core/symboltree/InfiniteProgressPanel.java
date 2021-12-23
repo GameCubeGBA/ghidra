@@ -37,12 +37,7 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.*;
 
 public class InfiniteProgressPanel extends JComponent implements MouseListener {
 
@@ -447,7 +442,7 @@ private void paintText( Graphics2D graphics, Color color, double textPosition ) 
                 
         frame.setSize( 400, 400 );
         frame.setLocation( GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint() );
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         frame.getContentPane().add( mainPanel );
         frame.setVisible( true );

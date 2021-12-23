@@ -20,6 +20,7 @@ import java.util.List;
 
 import com.sun.jna.Native;
 import com.sun.jna.platform.win32.WinDef.*;
+import com.sun.jna.platform.win32.WinError;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.platform.win32.WinNT.HRESULT;
 import com.sun.jna.platform.win32.COM.COMUtils;
@@ -220,7 +221,7 @@ public class DebugClientImpl1 implements DebugClientInternal {
 	public boolean dispatchCallbacks(int timeout) {
 		HRESULT hr = jnaClient.DispatchCallbacks(new ULONG(timeout));
 		COMUtils.checkRC(hr);
-		return hr.equals(WinNT.S_OK);
+		return hr.equals(WinError.S_OK);
 	}
 
 	@Override

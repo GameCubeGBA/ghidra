@@ -30,6 +30,7 @@ import docking.options.editor.ButtonPanelFactory;
 import docking.util.image.ToolIconURL;
 import docking.widgets.OptionDialog;
 import docking.widgets.filechooser.GhidraFileChooser;
+import docking.widgets.filechooser.GhidraFileChooserMode;
 import docking.widgets.label.GLabel;
 import ghidra.framework.model.*;
 import ghidra.framework.plugintool.PluginTool;
@@ -213,12 +214,12 @@ public class SaveToolConfigDialog extends DialogComponentProvider implements Lis
 			return;
 		}
 
-		if (newName.indexOf(" ") >= 0) {
+		if (newName.contains(" ")) {
 			setStatusText("Name cannot have spaces.");
 			nameField.requestFocus();
 			return;
 		}
-		if (!NamingUtilities.isValidName(newName)) {
+		if (!NamingUtilities.isValidProjectName(newName)) {
 			setStatusText("Invalid character in name: " + NamingUtilities.findInvalidChar(newName));
 			nameField.requestFocus();
 			return;
@@ -403,7 +404,7 @@ public class SaveToolConfigDialog extends DialogComponentProvider implements Lis
 	 */
 	private void browseForIcons() {
 		GhidraFileChooser iconFileChooser = new GhidraFileChooser(getComponent());
-		iconFileChooser.setFileSelectionMode(GhidraFileChooser.FILES_ONLY);
+		iconFileChooser.setFileSelectionMode(GhidraFileChooserMode.FILES_ONLY);
 		iconFileChooser.setTitle("Choose Icon");
 		iconFileChooser.setApproveButtonToolTipText("Choose Icon");
 		iconFileChooser.setFileFilter(

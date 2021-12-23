@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.collections4.MultiMapUtils;
 import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.multimap.HashSetValuedHashMap;
-import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.commons.text.StringEscapeUtils;
 
 import agent.gdb.manager.parsing.GdbParsingUtils.AbstractGdbParser;
 import agent.gdb.manager.parsing.GdbParsingUtils.GdbParseError;

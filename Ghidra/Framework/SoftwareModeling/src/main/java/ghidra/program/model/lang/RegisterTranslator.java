@@ -52,12 +52,8 @@ public class RegisterTranslator {
 				continue;
 			}
 			Integer offset = (int) addr.getOffset();
-			List<Register> registerList = offsetMap.get(offset);
-			if (registerList == null) {
-				registerList = new ArrayList<Register>();
-				offsetMap.put(offset, registerList);
-			}
-			registerList.add(register);
+            List<Register> registerList = offsetMap.computeIfAbsent(offset, k -> new ArrayList<Register>());
+            registerList.add(register);
 		}
 		for (List<Register> registerList : offsetMap.values()) {
 			Collections.sort(registerList, registerSizeComparator);

@@ -140,7 +140,7 @@ public class PowerPC64_ElfExtension extends ElfExtension {
 			// paint TOC_BASE value as r2 across executable blocks since r2
 			// is needed to resolve call stubs
 			Symbol tocSymbol = SymbolUtilities.getLabelOrFunctionSymbol(elfLoadHelper.getProgram(),
-				TOC_BASE, err -> elfLoadHelper.getLog().error("PowerPC64_ELF", err));
+				TOC_BASE, err -> elfLoadHelper.getLog().appendMsg("PowerPC64_ELF"));
 			if (tocSymbol != null) {
 				paintTocAsR2value(tocSymbol.getAddress().getOffset(), elfLoadHelper, monitor);
 			}
@@ -440,7 +440,7 @@ public class PowerPC64_ElfExtension extends ElfExtension {
 			// ensure that r12 context has been set on global entry function
 			Symbol entrySymbol = SymbolUtilities.getLabelOrFunctionSymbol(
 				elfLoadHelper.getProgram(), ElfLoader.ELF_ENTRY_FUNCTION_NAME,
-				err -> elfLoadHelper.getLog().error("PowerPC64_ELF", err));
+				err -> elfLoadHelper.getLog().appendMsg("PowerPC64_ELF"));
 			if (entrySymbol != null && entrySymbol.getSymbolType() == SymbolType.FUNCTION) {
 				setPPC64v2GlobalFunctionR12Context(program, entrySymbol.getAddress());
 			}

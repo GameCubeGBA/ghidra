@@ -291,7 +291,7 @@ class HelpViewSearcher {
 			}
 
 			try {
-				Rectangle rectangle = htmlEditorPane.modelToView(start);
+				Rectangle rectangle = (Rectangle) htmlEditorPane.modelToView2D(start);
 				htmlEditorPane.scrollRectToVisible(rectangle);
 			}
 			catch (BadLocationException e) {

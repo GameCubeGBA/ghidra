@@ -94,13 +94,9 @@ public class HyperlinkComponent extends JPanel {
 	 *        manipulated by the user.
 	 */
 	public void addHyperlinkListener(String anchorName, HyperlinkListener listener) {
-		List<HyperlinkListener> list = hyperlinkListeners.get(anchorName);
-		if (list == null) {
-			list = new ArrayList<HyperlinkListener>();
-			hyperlinkListeners.put(anchorName, list);
-		}
+        List<HyperlinkListener> list = hyperlinkListeners.computeIfAbsent(anchorName, k -> new ArrayList<HyperlinkListener>());
 
-		list.add(listener);
+        list.add(listener);
 	}
 
 	public void removeHyperlinkListener(String anchorName, HyperlinkListener listener) {

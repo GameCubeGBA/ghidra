@@ -125,7 +125,6 @@ public interface PcodeOverride {
 	 * Get the primary call reference address from the current instruction
 	 * @return call reference address or null
 	*/
-	@Deprecated
 	Address getPrimaryCallReference();
 
 }

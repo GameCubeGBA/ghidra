@@ -21,8 +21,7 @@ import java.awt.Graphics2D;
 import java.awt.image.*;
 import java.util.Hashtable;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class SpacecurveRasterPanel extends JPanel {
 	protected static final Hashtable<?, ?> EMPTY_HASHTABLE = new Hashtable<Object, Object>();
@@ -91,7 +90,7 @@ public class SpacecurveRasterPanel extends JPanel {
 		SpacecurveRasterPanel panel = new SpacecurveRasterPanel(colorModel);
 		panel.setRaster(raster, width, height);
 		JFrame frame = new JFrame();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.getContentPane().add(panel);
 		frame.setSize(width, height);
 		frame.setVisible(true);

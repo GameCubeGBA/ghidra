@@ -328,7 +328,7 @@ public abstract class DemangledObject implements Demangled {
 
 		String comment = program.getListing().getComment(CodeUnit.PLATE_COMMENT, address);
 		String newComment = generatePlateComment();
-		if (comment == null || comment.indexOf(newComment) < 0) {
+		if (comment == null || !comment.contains(newComment)) {
 			if (comment == null) {
 				comment = newComment;
 			}

@@ -58,7 +58,7 @@ public class TaskSimulator {
 
 		jFrame.getContentPane().add(buildUserPanel(), BorderLayout.SOUTH);
 		jFrame.pack();
-		jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		jFrame.setLocation(new Point(3000, 200));
 		jFrame.setVisible(true);
 

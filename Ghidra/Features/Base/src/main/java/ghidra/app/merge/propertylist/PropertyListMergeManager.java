@@ -298,12 +298,8 @@ public class PropertyListMergeManager implements MergeResolver {
 	}
 
 	private ArrayList<ConflictInfo> getConflictList(String listName) {
-		ArrayList<ConflictInfo> list = conflictMap.get(listName);
-		if (list == null) {
-			list = new ArrayList<ConflictInfo>();
-			conflictMap.put(listName, list);
-		}
-		return list;
+        ArrayList<ConflictInfo> list = conflictMap.computeIfAbsent(listName, k -> new ArrayList<ConflictInfo>());
+        return list;
 	}
 
 	/**

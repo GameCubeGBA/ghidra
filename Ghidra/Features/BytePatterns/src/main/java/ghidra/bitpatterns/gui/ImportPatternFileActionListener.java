@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
 
+import docking.widgets.filechooser.GhidraFileChooserMode;
 import org.xml.sax.SAXException;
 
 import docking.widgets.filechooser.GhidraFileChooser;
@@ -59,7 +60,7 @@ public class ImportPatternFileActionListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		GhidraFileChooser fileChooser = new GhidraFileChooser(component);
 
-		fileChooser.setFileSelectionMode(GhidraFileChooser.FILES_ONLY);
+		fileChooser.setFileSelectionMode(GhidraFileChooserMode.FILES_ONLY);
 		fileChooser.setTitle("Select Pattern File");
 		String baseDir = Preferences.getProperty(XML_IMPORT_DIR_PROPERTY);
 		if (baseDir != null) {

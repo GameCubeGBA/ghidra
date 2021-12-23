@@ -258,10 +258,10 @@ public class ApplyFidEntriesCommand extends BackgroundCommand {
 		else {
 			addFunctionLabelMultipleMatches(function, monitor);
 		}
-		if (plateCommentContents != null && !plateCommentContents.equals("")) {
+		if (plateCommentContents != null && !plateCommentContents.isEmpty()) {
 			function.setComment(plateCommentContents);
 		}
-		if (bookmarkContents != null && !bookmarkContents.equals("")) {
+		if (bookmarkContents != null && !bookmarkContents.isEmpty()) {
 			function.getProgram()
 					.getBookmarkManager()
 					.setBookmark(function.getEntryPoint(),
@@ -361,11 +361,7 @@ public class ApplyFidEntriesCommand extends BackgroundCommand {
 		for (String functionName : unusedNames) {
 			monitor.checkCanceled();
 			addSymbolToFunction(function, functionName);
-			List<Address> list = multiMatchNames.get(functionName);
-			if (list == null) {
-				list = new LinkedList<Address>();
-				multiMatchNames.put(functionName, list);
-			}
+			List<Address> list = multiMatchNames.computeIfAbsent(functionName, k -> new LinkedList<Address>());
 			list.add(addr);
 		}
 

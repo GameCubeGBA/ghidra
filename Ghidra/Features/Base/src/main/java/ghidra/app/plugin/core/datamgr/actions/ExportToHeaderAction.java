@@ -231,13 +231,9 @@ public class ExportToHeaderAction extends DockingAction {
 			DataType dataType = node.getDataType();
 			DataTypeManager dataTypeManager = dataType.getDataTypeManager();
 
-			List<DataType> dataTypeList = managersToDataTypesMap.get(dataTypeManager);
-			if (dataTypeList == null) {
-				dataTypeList = new ArrayList<>();
-				managersToDataTypesMap.put(dataTypeManager, dataTypeList);
-			}
+            List<DataType> dataTypeList = managersToDataTypesMap.computeIfAbsent(dataTypeManager, k -> new ArrayList<>());
 
-			dataTypeList.add(dataType);
+            dataTypeList.add(dataType);
 		}
 		else if (last instanceof CategoryNode) {
 			CategoryNode node = (CategoryNode) last;

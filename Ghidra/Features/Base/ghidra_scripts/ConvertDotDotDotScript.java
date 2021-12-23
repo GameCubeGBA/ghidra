@@ -72,7 +72,7 @@ public class ConvertDotDotDotScript extends GhidraScript {
 
 	private boolean hasDotDotDotTag(StringPropertyMap stringmap, Address addr) {
 		String funcstring = stringmap.getString(addr);
-		return funcstring.indexOf("<dotdotdot/>") != -1;
+		return funcstring.contains("<dotdotdot/>");
 	}
 
 	private void removeDotDotDotTag(StringPropertyMap stringmap, Address addr) {

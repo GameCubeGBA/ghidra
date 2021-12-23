@@ -138,12 +138,8 @@ public class LldbManagerImpl implements LldbManager {
 		synchronized (threads) {
 			if (!process.IsValid())
 				return;
-			Map<String, SBThread> map = threads.get(DebugClient.getId(process));
-			if (map == null) {
-				map = new HashMap<>();
-				threads.put(DebugClient.getId(process), map);
-			}
-			if (thread == null) {
+            Map<String, SBThread> map = threads.computeIfAbsent(DebugClient.getId(process), k -> new HashMap<>());
+            if (thread == null) {
 				return;
 			}
 			String id = DebugClient.getId(thread);
@@ -217,12 +213,8 @@ public class LldbManagerImpl implements LldbManager {
 			if (!session.IsValid())
 				return;
 			String sessionId = DebugClient.getId(session);
-			Map<String, SBProcess> map = processes.get(sessionId);
-			if (map == null) {
-				map = new HashMap<>();
-				processes.put(sessionId, map);
-			}
-			String id = DebugClient.getId(process);
+            Map<String, SBProcess> map = processes.computeIfAbsent(sessionId, k -> new HashMap<>());
+            String id = DebugClient.getId(process);
 			SBProcess pred = map.get(id);
 			if (!map.containsKey(id) || !process.equals(pred)) {
 				if (process.IsValid()) {
@@ -311,12 +303,8 @@ public class LldbManagerImpl implements LldbManager {
 			if (!session.IsValid())
 				return;
 			String sessionId = DebugClient.getId(session);
-			Map<String, SBModule> map = modules.get(sessionId);
-			if (map == null) {
-				map = new HashMap<>();
-				modules.put(sessionId, map);
-			}
-			String id = DebugClient.getId(module);
+            Map<String, SBModule> map = modules.computeIfAbsent(sessionId, k -> new HashMap<>());
+            String id = DebugClient.getId(module);
 			if (!map.containsKey(id)) {
 				map.put(id, module);
 				getClient().processEvent(
@@ -348,12 +336,8 @@ public class LldbManagerImpl implements LldbManager {
 			if (!session.IsValid())
 				return;
 			String sessionId = DebugClient.getId(session);
-			Map<String, Object> map = breakpoints.get(sessionId);
-			if (map == null) {
-				map = new HashMap<>();
-				breakpoints.put(sessionId, map);
-			}
-			String id = DebugClient.getId(bpt);
+            Map<String, Object> map = breakpoints.computeIfAbsent(sessionId, k -> new HashMap<>());
+            String id = DebugClient.getId(bpt);
 			if (!map.containsKey(id)) {
 				map.put(id, bpt);
 				getClient().processEvent(
@@ -376,12 +360,8 @@ public class LldbManagerImpl implements LldbManager {
 	@Override
 	public Map<String, SBProcess> getKnownProcesses(SBTarget session) {
 		String sessionId = DebugClient.getId(session);
-		Map<String, SBProcess> map = processes.get(sessionId);
-		if (map == null) {
-			map = new HashMap<>();
-			processes.put(sessionId, map);
-		}
-		return map;
+        Map<String, SBProcess> map = processes.computeIfAbsent(sessionId, k -> new HashMap<>());
+        return map;
 	}
 
 	@Override
@@ -392,23 +372,15 @@ public class LldbManagerImpl implements LldbManager {
 	@Override
 	public Map<String, SBModule> getKnownModules(SBTarget session) {
 		String sessionId = DebugClient.getId(session);
-		Map<String, SBModule> map = modules.get(sessionId);
-		if (map == null) {
-			map = new HashMap<>();
-			modules.put(sessionId, map);
-		}
-		return map;
+        Map<String, SBModule> map = modules.computeIfAbsent(sessionId, k -> new HashMap<>());
+        return map;
 	}
 
 	@Override
 	public Map<String, Object> getKnownBreakpoints(SBTarget session) {
 		String sessionId = DebugClient.getId(session);
-		Map<String, Object> map = breakpoints.get(sessionId);
-		if (map == null) {
-			map = new HashMap<>();
-			breakpoints.put(sessionId, map);
-		}
-		return map;
+        Map<String, Object> map = breakpoints.computeIfAbsent(sessionId, k -> new HashMap<>());
+        return map;
 	}
 
 	private Object addKnownBreakpoint(SBTarget session, Object info, boolean expectExisting) {
@@ -1597,7 +1569,7 @@ public class LldbManagerImpl implements LldbManager {
 	@Override
 	public CompletableFuture<Void> console(String command) {
 		if (continuation != null) {
-			String prompt = command.equals("") ? LldbModelTargetInterpreter.LLDB_PROMPT : ">>>";
+			String prompt = command.isEmpty() ? LldbModelTargetInterpreter.LLDB_PROMPT : ">>>";
 			getEventListeners().fire.promptChanged(prompt);
 			continuation.complete(command);
 			setContinuation(null);

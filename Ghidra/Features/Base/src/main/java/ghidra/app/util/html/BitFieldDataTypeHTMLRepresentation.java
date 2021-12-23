@@ -37,7 +37,7 @@ public class BitFieldDataTypeHTMLRepresentation extends HTMLDataTypeRepresentati
 			ToolTipUtils.getHTMLRepresentation(baseDataType);
 		String baseHTML = representation.getHTMLContentString();
 		buffer.append(baseHTML);
-		if (baseHTML.indexOf(LENGTH_PREFIX) < 0) {
+		if (!baseHTML.contains(LENGTH_PREFIX)) {
 			String lengthString = getDataTypeLengthString(bitFieldDt);
 			buffer.append(LENGTH_PREFIX).append(lengthString);
 		}

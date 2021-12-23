@@ -115,7 +115,7 @@ public class HelpLocation {
 	}
 
 	private String buildId(String localTopic, String localAnchor) {
-		if (localTopic.indexOf(".htm") >= 0) {
+		if (localTopic.contains(".htm")) {
 			return null;
 		}
 		if (localAnchor == null) {
@@ -147,7 +147,7 @@ public class HelpLocation {
 	}
 
 	private URL findHelpResource(String topicPath) {
-		if (topicPath.indexOf(".htm") >= 0) {
+		if (topicPath.contains(".htm")) {
 			return ResourceManager.getResource("/help/topics/" + topicPath);
 		}
 

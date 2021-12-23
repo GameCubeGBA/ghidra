@@ -20,6 +20,7 @@ import static org.junit.Assert.*;
 import java.math.BigInteger;
 import java.util.*;
 
+import ghidra.program.database.ProgramBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -37,7 +38,7 @@ public class LargestSubDebuggerRegisterMapperTest extends AbstractGhidraHeadedDe
 	static class TestTargetMapper extends DefaultDebuggerTargetTraceMapper {
 		public TestTargetMapper(TargetObject target)
 				throws LanguageNotFoundException, CompilerSpecNotFoundException {
-			super(target, new LanguageID(ToyProgramBuilder._X64), new CompilerSpecID("gcc"),
+			super(target, new LanguageID(ProgramBuilder._X64), new CompilerSpecID("gcc"),
 				Set.of());
 		}
 

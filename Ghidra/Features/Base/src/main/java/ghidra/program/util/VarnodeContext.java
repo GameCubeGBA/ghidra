@@ -433,10 +433,8 @@ public class VarnodeContext implements ProcessorContext {
 				// if this is an offset reference, ONLY allow it to be offset into the stack, no other register offset.
 				// can't count on the offset staying the same.
 				if (isSymbolicAddr) {
-					// symbolic spaces are off of a register, find the space.
-					AddressSpace regSpace = addrFactory.getAddressSpace(varnode.getSpace());
 					// figure out what register is used for stack values 
-					Register stackRegister = getStackRegister();
+//					Register stackRegister = getStackRegister();
 					if (!isStackSymbolicSpace(varnode)) {
 						if (debug) {
 							Msg.info(this,

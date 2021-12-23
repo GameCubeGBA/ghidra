@@ -382,12 +382,8 @@ class ThreadedXmlPullParserImpl extends AbstractXmlPullParser {
 		@Override
 		public void processingInstruction(String target, String data) throws SAXException {
 			target = target.toUpperCase();
-			HashMap<String, String> map = processingInstructions.get(target);
-			if (map == null) {
-				map = new HashMap<>();
-				processingInstructions.put(target, map);
-			}
-			StringTokenizer st = new StringTokenizer(data);
+            HashMap<String, String> map = processingInstructions.computeIfAbsent(target, k -> new HashMap<>());
+            StringTokenizer st = new StringTokenizer(data);
 			while (st.hasMoreTokens()) {
 				parseAttributeValue(map, st.nextToken());
 			}

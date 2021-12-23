@@ -84,8 +84,8 @@ public class HorizontalTabPanel<T> extends JPanel {
 		list.setCellRenderer(new TabListCellRenderer<>());
 		list.setOpaque(false);
 
-		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scroll.setBorder(null);
 
 		viewport.addChangeListener(this::viewportChanged);

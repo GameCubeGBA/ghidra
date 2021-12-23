@@ -227,7 +227,7 @@ class SwatchPanel extends JPanel {
 	}
 
 	@Override
-	public boolean isFocusTraversable() {
+	public boolean isFocusable() {
 		return false;
 	}
 

@@ -191,12 +191,8 @@ public abstract class HelpModuleLocation {
 				if (name == null) {
 					continue; // ignore anchor definitions, as they don't exist in the source code
 				}
-				List<AnchorDefinition> list = map.get(name);
-				if (list == null) {
-					list = new ArrayList<AnchorDefinition>();
-					map.put(name, list);
-				}
-				list.add(anchorDefinition);
+                List<AnchorDefinition> list = map.computeIfAbsent(name, k -> new ArrayList<AnchorDefinition>());
+                list.add(anchorDefinition);
 			}
 		}
 

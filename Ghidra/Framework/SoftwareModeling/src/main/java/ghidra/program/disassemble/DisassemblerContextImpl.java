@@ -451,14 +451,10 @@ public class DisassemblerContextImpl implements DisassemblerContext {
 		if (fromAddr == Address.NO_ADDRESS) {
 			// for NO_ADDRESS flow from, always look up by the destAddr,
 
-			stateMap = futureRegisterStateMap.get(destAddr);
+            stateMap = futureRegisterStateMap.computeIfAbsent(destAddr, k -> new HashMap<Register, RegisterValue>());
 
 			// didn't find a flow from map, create it
-			if (stateMap == null) {
-				stateMap = new HashMap<Register, RegisterValue>();
-				futureRegisterStateMap.put(destAddr, stateMap);
-			}
-		} else {
+        } else {
 			// for flows where the flowFrom addr is known, look up by destAddr first, then flowFrom addr
 			futureRegisterStateMap = futureFlowRegisterStateMaps.get(destAddr);
 

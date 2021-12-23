@@ -316,9 +316,7 @@ public class FunctionTagListingMerger extends AbstractListingMerger {
 	 * @param tag the conflicting tag
 	 */
 	private void addToConflicts(Address addr, FunctionTag tag) {
-		if (conflictMap.get(addr) == null) {
-			conflictMap.put(addr, new ArrayList<>());
-		}
+        conflictMap.computeIfAbsent(addr, k -> new ArrayList<>());
 		List<Long> idList = conflictMap.get(addr);
 		idList.add(tag.getId());
 		conflictMap.put(addr, idList);

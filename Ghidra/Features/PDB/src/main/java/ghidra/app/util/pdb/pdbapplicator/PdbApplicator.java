@@ -688,22 +688,14 @@ public class PdbApplicator {
 	//==============================================================================================
 	// Investigations into source/line info
 	void putRecordNumberByFileName(RecordNumber recordNumber, String filename) {
-		Set<RecordNumber> recordNumbers = recordNumbersByFileName.get(filename);
-		if (recordNumbers == null) {
-			recordNumbers = new HashSet<>();
-			recordNumbersByFileName.put(filename, recordNumbers);
-		}
-		recordNumbers.add(recordNumber);
+        Set<RecordNumber> recordNumbers = recordNumbersByFileName.computeIfAbsent(filename, k -> new HashSet<>());
+        recordNumbers.add(recordNumber);
 	}
 
 	//==============================================================================================
 	void putRecordNumberByModuleNumber(RecordNumber recordNumber, int moduleNumber) {
-		Set<RecordNumber> recordNumbers = recordNumbersByModuleNumber.get(moduleNumber);
-		if (recordNumbers == null) {
-			recordNumbers = new HashSet<>();
-			recordNumbersByModuleNumber.put(moduleNumber, recordNumbers);
-		}
-		recordNumbers.add(recordNumber);
+        Set<RecordNumber> recordNumbers = recordNumbersByModuleNumber.computeIfAbsent(moduleNumber, k -> new HashSet<>());
+        recordNumbers.add(recordNumber);
 	}
 
 	//==============================================================================================
@@ -1394,12 +1386,8 @@ public class PdbApplicator {
 	//==============================================================================================
 	@SuppressWarnings("unused") // for method not being called.
 	private void storeLabelByAddress(Address address, String label) {
-		Set<String> labels = labelsByAddress.get(address);
-		if (labels == null) {
-			labels = new TreeSet<>();
-			labelsByAddress.put(address, labels);
-		}
-		if (labels.contains(label)) {
+        Set<String> labels = labelsByAddress.computeIfAbsent(address, k -> new TreeSet<>());
+        if (labels.contains(label)) {
 			// TODO investigate why we would see it again.
 		}
 		labels.add(label);

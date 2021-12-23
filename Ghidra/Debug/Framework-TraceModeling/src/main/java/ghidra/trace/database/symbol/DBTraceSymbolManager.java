@@ -578,7 +578,7 @@ public class DBTraceSymbolManager implements TraceSymbolManager, DBTraceManager 
 
 	protected DBTraceNamespaceSymbol getOrCreateGlobalNamespace() {
 		DBTraceNamespaceSymbol global =
-			namespaceStore.getObjectAt(GlobalNamespace.GLOBAL_NAMESPACE_ID);
+			namespaceStore.getObjectAt(Namespace.GLOBAL_NAMESPACE_ID);
 		if (global != null) {
 			assert global.parentID == -1;
 			assert GlobalNamespace.GLOBAL_NAMESPACE_NAME.equals(global.name);
@@ -679,7 +679,7 @@ public class DBTraceSymbolManager implements TraceSymbolManager, DBTraceManager 
 
 	@Override
 	public AbstractDBTraceSymbol getSymbolByID(long symbolID) {
-		if (symbolID == GlobalNamespace.GLOBAL_NAMESPACE_ID) {
+		if (symbolID == Namespace.GLOBAL_NAMESPACE_ID) {
 			return globalNamespace;
 		}
 		byte typeID = unpackTypeID(symbolID);

@@ -27,18 +27,10 @@ public class ReferenceState extends ReferenceManagerTestDouble {
 	Map<Address, Set<Address>> toMap = new HashMap<Address, Set<Address>>();
 
 	void createReference(Address from, Address to) {
-		Set<Address> fromSet = fromMap.get(from);
-		if (fromSet == null) {
-			fromSet = new HashSet<Address>();
-			fromMap.put(from, fromSet);
-		}
-		fromSet.add(to);
-		Set<Address> toSet = toMap.get(to);
-		if (toSet == null) {
-			toSet = new HashSet<Address>();
-			toMap.put(to, toSet);
-		}
-		toSet.add(from);
+        Set<Address> fromSet = fromMap.computeIfAbsent(from, k -> new HashSet<Address>());
+        fromSet.add(to);
+        Set<Address> toSet = toMap.computeIfAbsent(to, k -> new HashSet<Address>());
+        toSet.add(from);
 	}
 
 	@Override

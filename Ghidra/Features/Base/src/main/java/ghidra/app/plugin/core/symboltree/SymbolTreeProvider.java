@@ -45,6 +45,7 @@ import ghidra.program.model.symbol.*;
 import ghidra.program.util.*;
 import ghidra.util.*;
 import ghidra.util.exception.*;
+import ghidra.util.task.AbstractSwingUpdateManager;
 import ghidra.util.task.SwingUpdateManager;
 import ghidra.util.task.TaskMonitor;
 import resources.ResourceManager;
@@ -76,7 +77,7 @@ public class SymbolTreeProvider extends ComponentProviderAdapter {
 	 */
 	private List<GTreeTask> bufferedTasks = new ArrayList<>();
 	private SwingUpdateManager domainChangeUpdateManager = new SwingUpdateManager(1000,
-		SwingUpdateManager.DEFAULT_MAX_DELAY, "Symbol Tree Provider", () -> {
+            AbstractSwingUpdateManager.DEFAULT_MAX_DELAY, "Symbol Tree Provider", () -> {
 
 			if (bufferedTasks.isEmpty()) {
 				return;
