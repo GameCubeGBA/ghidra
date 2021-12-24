@@ -15,18 +15,25 @@
  */
 package docking.framework;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
 
 import java.awt.Frame;
 import java.awt.Window;
 
-import javax.swing.*;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import org.junit.After;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
-import docking.*;
+import docking.DialogComponentProvider;
+import docking.DockingDialog;
+import docking.DockingFrame;
 import docking.test.AbstractDockingTest;
 import docking.widgets.PasswordDialog;
 import generic.test.category.NightlyCategory;
@@ -187,9 +194,8 @@ public class SplashScreenTest extends AbstractDockingTest {
 	}
 
 	private SplashScreen getSplash() {
-		SplashScreen splash = runSwing(() -> {
+		return runSwing(() -> {
 			return (SplashScreen) getInstanceField("splashWindow", SplashScreen.class);
 		});
-		return splash;
 	}
 }

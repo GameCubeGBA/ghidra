@@ -38,12 +38,12 @@ import ghidra.program.model.listing.Parameter;
  */
 public interface CompilerSpec {
 
-	public final static String CALLING_CONVENTION_cdecl = "__cdecl";
-	public final static String CALLING_CONVENTION_pascal = "__pascal";
-	public final static String CALLING_CONVENTION_thiscall = "__thiscall";
-	public final static String CALLING_CONVENTION_stdcall = "__stdcall";
-	public final static String CALLING_CONVENTION_fastcall = "__fastcall";
-	public final static String CALLING_CONVENTION_vectorcall = "__vectorcall";
+	String CALLING_CONVENTION_cdecl = "__cdecl";
+	String CALLING_CONVENTION_pascal = "__pascal";
+	String CALLING_CONVENTION_thiscall = "__thiscall";
+	String CALLING_CONVENTION_stdcall = "__stdcall";
+	String CALLING_CONVENTION_fastcall = "__fastcall";
+	String CALLING_CONVENTION_vectorcall = "__vectorcall";
 
 	/**
 	 * Labels for PrototypeModels that are used by default for various analysis/evaluation
@@ -62,31 +62,31 @@ public interface CompilerSpec {
 	 * separate objects.  (M:N on disk, 1:N in memory) 
 	 * @return the language this compiler spec is based on
 	 */
-	public Language getLanguage();
+	Language getLanguage();
 
 	/**
 	 * @return a brief description of the compiler spec
 	 */
-	public CompilerSpecDescription getCompilerSpecDescription();
+	CompilerSpecDescription getCompilerSpecDescription();
 
 	/**
 	 * @return the id string associated with this compiler spec;
 	 */
-	public CompilerSpecID getCompilerSpecID();
+	CompilerSpecID getCompilerSpecID();
 
 	/**
 	 * Get the default Stack Pointer register for this language if there is one.
 	 * 
 	 * @return default stack pointer register.
 	 */
-	public Register getStackPointer();
+	Register getStackPointer();
 
 	/**
 	 * Indicates whether variables are right-justified within the 
 	 * stack alignment.
 	 * @return true if right stack justification applies.
 	 */
-	public boolean isStackRightJustified();
+	boolean isStackRightJustified();
 
 	/**
 	 * Get an address space by name.  This can be value added over the normal AddressFactory.getAddressSpace
@@ -94,60 +94,60 @@ public interface CompilerSpec {
 	 * @param spaceName is the name of the address space
 	 * @return the corresponding AddressSpace object
 	 */
-	public AddressSpace getAddressSpace(String spaceName);
+	AddressSpace getAddressSpace(String spaceName);
 
 	/**
 	 * Get the stack address space defined by this specification
 	 * @return stack address space
 	 */
-	public AddressSpace getStackSpace();
+	AddressSpace getStackSpace();
 
 	/**
 	 * Get the physical space used for stack data storage
 	 * @return address space which contains the stack
 	 */
-	public AddressSpace getStackBaseSpace();
+	AddressSpace getStackBaseSpace();
 
 	/**
 	 * @return true if the stack grows with negative offsets
 	 */
-	public boolean stackGrowsNegative();
+	boolean stackGrowsNegative();
 
 	/**
 	 * Apply context settings to the ProgramContext
 	 * as specified by the configuration
 	 * @param ctx is the ProgramContext
 	 */
-	public void applyContextSettings(DefaultProgramContext ctx);
+	void applyContextSettings(DefaultProgramContext ctx);
 
 	/**
 	 * @return an array of the prototype models. Each prototype model specifies a calling convention.
 	 */
-	public PrototypeModel[] getCallingConventions();
+	PrototypeModel[] getCallingConventions();
 
 	/**
 	 * Returns the Calling Convention Model with the given name.
 	 * @param name the name of the calling convention to retrieve
 	 * @return the calling convention with the given name or null if there is none with that name.
 	 */
-	public PrototypeModel getCallingConvention(String name);
+	PrototypeModel getCallingConvention(String name);
 
 	/**
 	 * @return all possible PrototypeModels, including calling conventions and merge models
 	 */
-	public PrototypeModel[] getAllModels();
+	PrototypeModel[] getAllModels();
 
 	/**
 	 * Returns the prototype model that is the default calling convention or else null.
 	 * @return the default calling convention or null.
 	 */
-	public PrototypeModel getDefaultCallingConvention();
+	PrototypeModel getDefaultCallingConvention();
 
 	/**
 	 * Get the language that the decompiler produces
 	 * @return an enum specifying the language
 	 */
-	public DecompilerLanguage getDecompilerOutputLanguage();
+	DecompilerLanguage getDecompilerOutputLanguage();
 
 	/**
 	 * Get the evaluation model matching the given type.
@@ -159,24 +159,24 @@ public interface CompilerSpec {
 	 * @param modelType is the type of evaluation model
 	 * @return prototype evaluation model
 	 */
-	public PrototypeModel getPrototypeEvaluationModel(EvaluationModelType modelType);
+	PrototypeModel getPrototypeEvaluationModel(EvaluationModelType modelType);
 
 	/**
 	 * @param addr is the (start of the) storage location
 	 * @return true if the specified storage location has been designated "global" in scope
 	 */
-	public boolean isGlobal(Address addr);
+	boolean isGlobal(Address addr);
 
-	public DataOrganization getDataOrganization();
+	DataOrganization getDataOrganization();
 
-	public PcodeInjectLibrary getPcodeInjectLibrary();
+	PcodeInjectLibrary getPcodeInjectLibrary();
 
 	/**
 	 * Get the PrototypeModel corresponding to the given generic calling convention
 	 * @param genericCallingConvention is the given generic calling convention
 	 * @return the matching model or the defaultModel if nothing matches
 	 */
-	public PrototypeModel matchConvention(GenericCallingConvention genericCallingConvention);
+	PrototypeModel matchConvention(GenericCallingConvention genericCallingConvention);
 
 	/**
 	 * Find the best guess at a calling convention model from this compiler spec
@@ -184,14 +184,14 @@ public interface CompilerSpec {
 	 * @param params is the ordered list of parameters
 	 * @return prototype model corresponding to the specified function signature
 	 */
-	public PrototypeModel findBestCallingConvention(Parameter[] params);
+	PrototypeModel findBestCallingConvention(Parameter[] params);
 
 	/**
 	 * Returns whether this language has a property defined.
 	 * @param key the property key
 	 * @return if the property is defined
 	 */
-	public boolean hasProperty(String key);
+	boolean hasProperty(String key);
 
 	/**
 	 * Return true if function prototypes respect the C-language data-type conversion conventions.
@@ -199,7 +199,7 @@ public interface CompilerSpec {
 	 * In C, arrays are passed by reference (structures are still passed by value)
 	 * @return if the prototype does C-language data-type conversions
 	 */
-	public boolean doesCDataTypeConversions();
+	boolean doesCDataTypeConversions();
 
 	/**
 	 * Gets the value of a property as an int, returning defaultInt if undefined.
@@ -207,7 +207,7 @@ public interface CompilerSpec {
 	 * @param defaultInt the default value to return if property is undefined
 	 * @return the property value as an int, or the default value if undefined
 	 */
-	public int getPropertyAsInt(String key, int defaultInt);
+	int getPropertyAsInt(String key, int defaultInt);
 
 	/**
 	 * Gets the value of a property as a boolean, returning defaultBoolean if undefined.
@@ -215,7 +215,7 @@ public interface CompilerSpec {
 	 * @param defaultBoolean the default value to return if property is undefined
 	 * @return the property value as a boolean, or the default value if undefined
 	 */
-	public boolean getPropertyAsBoolean(String key, boolean defaultBoolean);
+	boolean getPropertyAsBoolean(String key, boolean defaultBoolean);
 
 	/**
 	 * Gets the value of a property as a String, returning defaultString if undefined.
@@ -223,18 +223,18 @@ public interface CompilerSpec {
 	 * @param defaultString the default value to return if property is undefined
 	 * @return the property value as a String, or the default value if undefined
 	 */
-	public String getProperty(String key, String defaultString);
+	String getProperty(String key, String defaultString);
 
 	/**
 	 * Gets a property defined for this language, or null if that property isn't defined.
 	 * @param key the property key
 	 * @return the property value, or null if not defined
 	 */
-	public String getProperty(String key);
+	String getProperty(String key);
 
 	/**
 	 * Returns a read-only set view of the property keys defined on this language.
 	 * @return read-only set of property keys
 	 */
-	public Set<String> getPropertyKeys();
+	Set<String> getPropertyKeys();
 }

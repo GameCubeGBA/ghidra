@@ -17,6 +17,7 @@ package docking.widgets.fieldpanel.internal;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import docking.widgets.fieldpanel.FieldPanel;
@@ -47,9 +48,7 @@ public class LineLockedFieldPanelCoordinator extends FieldPanelCoordinator {
 	public void resetLockedLines() {
 		// Make the locked line numbers default to 0.
 		lockedLineNumbers = new BigInteger[panels.length];
-		for (int i = 0; i < lockedLineNumbers.length; i++) {
-			this.lockedLineNumbers[i] = BigInteger.ZERO;
-		}
+		Arrays.fill(this.lockedLineNumbers, BigInteger.ZERO);
 	}
 
 	/**

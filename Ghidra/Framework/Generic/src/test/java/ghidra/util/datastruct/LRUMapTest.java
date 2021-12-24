@@ -15,12 +15,19 @@
  */
 package ghidra.util.datastruct;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
 import java.util.Map.Entry;
+import java.util.Set;
 
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
 
@@ -36,7 +43,7 @@ public class LRUMapTest extends AbstractGenericTest {
 	@Before
 	public void setUp() throws Exception {
 		int size = 3;
-		map = new LRUMap<String, String>(size);
+		map = new LRUMap<>(size);
 
 		// this creates an cache order of: 3, 2, 1
 		map.put("key1", "value1");
@@ -46,7 +53,7 @@ public class LRUMapTest extends AbstractGenericTest {
 
 	@Test
 	public void testMultiplePointsDoesntIncreaseSize() {
-		map = new LRUMap<String, String>(3);
+		map = new LRUMap<>(3);
 
 		map.put("key1", "value1");
 		map.put("key1", "value1");
@@ -130,7 +137,7 @@ public class LRUMapTest extends AbstractGenericTest {
 
 	@Test
 	public void testPutAll() {
-		LRUMap<String, String> map2 = new LRUMap<String, String>(CACHE_SIZE);
+		LRUMap<String, String> map2 = new LRUMap<>(CACHE_SIZE);
 		map2.putAll(map);
 		assertTrue(map.containsKey("key1"));
 		assertTrue(map.containsKey("key2"));
@@ -194,7 +201,7 @@ public class LRUMapTest extends AbstractGenericTest {
 
 	@Test
 	public void testEntrySetIterator() {
-		LRUMap<Integer, Integer> integerMap = new LRUMap<Integer, Integer>(CACHE_SIZE = 3);
+		LRUMap<Integer, Integer> integerMap = new LRUMap<>(CACHE_SIZE = 3);
 
 		int count = 1;
 		integerMap.put(count, count++);

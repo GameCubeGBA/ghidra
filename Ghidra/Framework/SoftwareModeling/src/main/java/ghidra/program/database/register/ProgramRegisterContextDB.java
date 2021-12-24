@@ -17,22 +17,41 @@ package ghidra.program.database.register;
 
 import java.io.IOException;
 import java.math.BigInteger;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 
-import db.*;
+import db.DBConstants;
+import db.DBHandle;
+import db.Table;
 import db.util.ErrorHandler;
 import ghidra.program.database.ManagerDB;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.database.code.CodeManager;
 import ghidra.program.database.map.AddressMap;
 import ghidra.program.database.util.AddressRangeMapDB;
-import ghidra.program.model.address.*;
-import ghidra.program.model.lang.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressRange;
+import ghidra.program.model.address.AddressRangeIterator;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.lang.CompilerSpec;
+import ghidra.program.model.lang.GhidraLanguagePropertyKeys;
+import ghidra.program.model.lang.Language;
+import ghidra.program.model.lang.Register;
+import ghidra.program.model.lang.RegisterValue;
 import ghidra.program.model.listing.ContextChangeException;
-import ghidra.program.util.*;
+import ghidra.program.util.AbstractStoredProgramContext;
+import ghidra.program.util.LanguageTranslator;
+import ghidra.program.util.RangeMapAdapter;
+import ghidra.program.util.RegisterValueStore;
 import ghidra.util.Lock;
 import ghidra.util.Msg;
-import ghidra.util.exception.*;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
 
 public class ProgramRegisterContextDB extends AbstractStoredProgramContext implements ManagerDB {
@@ -321,7 +340,7 @@ public class ProgramRegisterContextDB extends AbstractStoredProgramContext imple
 		// Sort the registers by size so that largest come first.
 		// This prevents the remove call below from incorrectly clearing 
 		// smaller registers that are part of a larger register.
-		List<Register> registers = new ArrayList<Register>(language.getRegisters());
+		List<Register> registers = new ArrayList<>(language.getRegisters());
 		Collections.sort(registers, (r1, r2) -> r2.getBitLength() - r1.getBitLength());
 
 		// Map all register stores to new registers

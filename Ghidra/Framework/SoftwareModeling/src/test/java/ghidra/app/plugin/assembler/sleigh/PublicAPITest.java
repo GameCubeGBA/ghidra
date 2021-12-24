@@ -21,10 +21,15 @@ import static org.junit.Assert.assertNotEquals;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
-import ghidra.app.plugin.assembler.*;
+import ghidra.app.plugin.assembler.Assembler;
+import ghidra.app.plugin.assembler.Assemblers;
+import ghidra.app.plugin.assembler.AssemblySemanticException;
+import ghidra.app.plugin.assembler.AssemblySyntaxException;
 import ghidra.app.plugin.processors.sleigh.SleighLanguageProvider;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.database.util.ProgramTransaction;
@@ -32,7 +37,9 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressOverflowException;
 import ghidra.program.model.lang.Language;
 import ghidra.program.model.lang.LanguageID;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.Instruction;
+import ghidra.program.model.listing.InstructionIterator;
+import ghidra.program.model.listing.Program;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 

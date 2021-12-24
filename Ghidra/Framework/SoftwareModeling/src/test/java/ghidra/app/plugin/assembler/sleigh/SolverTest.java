@@ -15,7 +15,10 @@
  */
 package ghidra.app.plugin.assembler.sleigh;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,14 +28,27 @@ import org.junit.Test;
 import org.xml.sax.SAXException;
 
 import ghidra.GhidraApplicationLayout;
-import ghidra.app.plugin.assembler.sleigh.expr.*;
-import ghidra.app.plugin.assembler.sleigh.sem.*;
+import ghidra.app.plugin.assembler.sleigh.expr.MaskedLong;
+import ghidra.app.plugin.assembler.sleigh.expr.NeedsBackfillException;
+import ghidra.app.plugin.assembler.sleigh.expr.RecursiveDescentSolver;
+import ghidra.app.plugin.assembler.sleigh.expr.SolverException;
+import ghidra.app.plugin.assembler.sleigh.sem.AssemblyPatternBlock;
+import ghidra.app.plugin.assembler.sleigh.sem.AssemblyResolution;
+import ghidra.app.plugin.assembler.sleigh.sem.AssemblyResolvedConstructor;
 import ghidra.app.plugin.languages.sleigh.ConstructorEntryVisitor;
 import ghidra.app.plugin.languages.sleigh.SleighLanguages;
-import ghidra.app.plugin.processors.sleigh.*;
+import ghidra.app.plugin.processors.sleigh.ConstructState;
+import ghidra.app.plugin.processors.sleigh.Constructor;
+import ghidra.app.plugin.processors.sleigh.ContextOp;
+import ghidra.app.plugin.processors.sleigh.FixedHandle;
+import ghidra.app.plugin.processors.sleigh.ParserWalker;
+import ghidra.app.plugin.processors.sleigh.SleighLanguage;
+import ghidra.app.plugin.processors.sleigh.SleighLanguageProvider;
+import ghidra.app.plugin.processors.sleigh.SleighParserContext;
 import ghidra.app.plugin.processors.sleigh.expression.PatternExpression;
-import ghidra.app.plugin.processors.sleigh.pattern.DisjointPattern;
-import ghidra.app.plugin.processors.sleigh.symbol.*;
+import ghidra.app.plugin.processors.sleigh.symbol.OperandSymbol;
+import ghidra.app.plugin.processors.sleigh.symbol.SubtableSymbol;
+import ghidra.app.plugin.processors.sleigh.symbol.TripleSymbol;
 import ghidra.app.plugin.processors.sleigh.template.ConstructTpl;
 import ghidra.app.plugin.processors.sleigh.template.HandleTpl;
 import ghidra.framework.Application;
@@ -194,17 +210,12 @@ public class SolverTest {
 		SleighLanguageProvider provider = new SleighLanguageProvider();
 		SleighLanguage lang = (SleighLanguage) provider.getLanguage(new LanguageID(langId));
 		AtomicReference<Constructor> consref = new AtomicReference<>();
-		SleighLanguages.traverseConstructors(lang, new ConstructorEntryVisitor() {
-			@Override
-			public int visit(SubtableSymbol subtable, DisjointPattern pattern, Constructor cons) {
-				if (subtableName.equals(subtable.getName())) {
-					if (patternStr.equals(pattern.toString())) {
-						consref.set(cons);
-						return FINISHED;
-					}
-				}
-				return CONTINUE;
+		SleighLanguages.traverseConstructors(lang, (ConstructorEntryVisitor) (subtable, pattern, cons) -> {
+			if (subtableName.equals(subtable.getName()) && patternStr.equals(pattern.toString())) {
+				consref.set(cons);
+				return ConstructorEntryVisitor.FINISHED;
 			}
+			return ConstructorEntryVisitor.CONTINUE;
 		});
 		Msg.info(SolverTest.class, "Found constructor: " + consref.get());
 		return consref.get();
@@ -218,18 +229,15 @@ public class SolverTest {
 		SleighLanguageProvider provider = new SleighLanguageProvider();
 		SleighLanguage lang = (SleighLanguage) provider.getLanguage(new LanguageID(langId));
 		AtomicReference<Constructor> consref = new AtomicReference<>();
-		SleighLanguages.traverseConstructors(lang, new ConstructorEntryVisitor() {
-			@Override
-			public int visit(SubtableSymbol subtable, DisjointPattern pattern, Constructor cons) {
-				if (cons.getLineno() == lineno) {
-					consref.set(cons);
-					Msg.info(SolverTest.class, "Constructor " + cons + " has pattern " + pattern);
-					Msg.info(SolverTest.class,
-						"You should prefer to find it by pattern rather than line number");
-					return FINISHED;
-				}
-				return CONTINUE;
+		SleighLanguages.traverseConstructors(lang, (ConstructorEntryVisitor) (subtable, pattern, cons) -> {
+			if (cons.getLineno() == lineno) {
+				consref.set(cons);
+				Msg.info(SolverTest.class, "Constructor " + cons + " has pattern " + pattern);
+				Msg.info(SolverTest.class,
+					"You should prefer to find it by pattern rather than line number");
+				return ConstructorEntryVisitor.FINISHED;
 			}
+			return ConstructorEntryVisitor.CONTINUE;
 		});
 		return consref.get();
 	}
@@ -268,17 +276,12 @@ public class SolverTest {
 		SleighLanguage lang =
 			(SleighLanguage) provider.getLanguage(new LanguageID("AARCH64:BE:64:v8A"));
 		AtomicReference<Constructor> consref = new AtomicReference<>();
-		SleighLanguages.traverseConstructors(lang, new ConstructorEntryVisitor() {
-			@Override
-			public int visit(SubtableSymbol subtable, DisjointPattern pattern, Constructor cons) {
-				if ("Imm_logical_imm32_operand".equals(subtable.getName())) {
-					if ("ins:SS:C[00xx]:[x0xx]X:XX:XX".equals(pattern.toString())) {
-						consref.set(cons);
-						return FINISHED;
-					}
-				}
-				return CONTINUE;
+		SleighLanguages.traverseConstructors(lang, (ConstructorEntryVisitor) (subtable, pattern, cons) -> {
+			if ("Imm_logical_imm32_operand".equals(subtable.getName()) && "ins:SS:C[00xx]:[x0xx]X:XX:XX".equals(pattern.toString())) {
+				consref.set(cons);
+				return ConstructorEntryVisitor.FINISHED;
 			}
+			return ConstructorEntryVisitor.CONTINUE;
 		});
 		Constructor ct = consref.get();
 		ConstructState st = new ConstructState(null) {

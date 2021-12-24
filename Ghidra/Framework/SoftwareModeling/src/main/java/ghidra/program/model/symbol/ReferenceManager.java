@@ -15,7 +15,9 @@
  */
 package ghidra.program.model.symbol;
 
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressIterator;
+import ghidra.program.model.address.AddressSetView;
 import ghidra.program.model.lang.Register;
 import ghidra.program.model.listing.Variable;
 import ghidra.util.exception.DuplicateNameException;
@@ -28,13 +30,13 @@ public interface ReferenceManager {
 	/**
 	 * Operand index which corresponds to the instruction/data mnemonic.
 	 */
-	public static final int MNEMONIC = Reference.MNEMONIC;
+	int MNEMONIC = Reference.MNEMONIC;
 
 	/**
 	 * Add a memory, stack, register or external reference
 	 * @param reference
 	 */
-	public Reference addReference(Reference reference);
+	Reference addReference(Reference reference);
 
 	/**
 	 * Add a reference to a stack location. If a reference already
@@ -46,7 +48,7 @@ public interface ReferenceManager {
 	 * @param type reference type - how the location is being referenced.
 	 * @param source the source of this reference
 	 */
-	public Reference addStackReference(Address fromAddr, int opIndex, int stackOffset, RefType type,
+	Reference addStackReference(Address fromAddr, int opIndex, int stackOffset, RefType type,
 			SourceType source);
 
 	/**
@@ -59,7 +61,7 @@ public interface ReferenceManager {
 	 * @param type reference type - how the location is being referenced.
 	 * @param source the source of this reference
 	 */
-	public Reference addRegisterReference(Address fromAddr, int opIndex, Register register,
+	Reference addRegisterReference(Address fromAddr, int opIndex, Register register,
 			RefType type, SourceType source);
 
 	/**
@@ -74,7 +76,7 @@ public interface ReferenceManager {
 	 * @param opIndex the operand index 
 	 * display of the operand making this reference
 	 */
-	public Reference addMemoryReference(Address fromAddr, Address toAddr, RefType type,
+	Reference addMemoryReference(Address fromAddr, Address toAddr, RefType type,
 			SourceType source, int opIndex);
 
 	/**
@@ -88,7 +90,7 @@ public interface ReferenceManager {
 	 * @param source the source of this reference
 	 * @param opIndex the operand index
 	 */
-	public Reference addOffsetMemReference(Address fromAddr, Address toAddr, long offset,
+	Reference addOffsetMemReference(Address fromAddr, Address toAddr, long offset,
 			RefType type, SourceType source, int opIndex);
 
 	/**
@@ -105,7 +107,7 @@ public interface ReferenceManager {
 	 * @param source the source of this reference
 	 * @param opIndex the operand index
 	 */
-	public Reference addShiftedMemReference(Address fromAddr, Address toAddr, int shiftValue,
+	Reference addShiftedMemReference(Address fromAddr, Address toAddr, int shiftValue,
 			RefType type, SourceType source, int opIndex);
 
 	/**
@@ -122,7 +124,7 @@ public interface ReferenceManager {
 	 * @throws InvalidInputException
 	 * @throws DuplicateNameException 
 	 */
-	public Reference addExternalReference(Address fromAddr, String libraryName, String extLabel,
+	Reference addExternalReference(Address fromAddr, String libraryName, String extLabel,
 			Address extAddr, SourceType source, int opIndex, RefType type)
 			throws InvalidInputException, DuplicateNameException;
 
@@ -140,7 +142,7 @@ public interface ReferenceManager {
 	 * @throws InvalidInputException
 	 * @throws DuplicateNameException 
 	 */
-	public Reference addExternalReference(Address fromAddr, Namespace extNamespace, String extLabel,
+	Reference addExternalReference(Address fromAddr, Namespace extNamespace, String extLabel,
 			Address extAddr, SourceType source, int opIndex, RefType type)
 			throws InvalidInputException, DuplicateNameException;
 
@@ -156,7 +158,7 @@ public interface ReferenceManager {
 	 * @return external reference
 	 * @throws InvalidInputException
 	 */
-	public Reference addExternalReference(Address fromAddr, int opIndex, ExternalLocation location,
+	Reference addExternalReference(Address fromAddr, int opIndex, ExternalLocation location,
 			SourceType source, RefType type) throws InvalidInputException;
 
 	/**
@@ -164,21 +166,21 @@ public interface ReferenceManager {
 	 * @param beginAddr the first address in the range.
 	 * @param endAddr the last address in the range.
 	 */
-	public void removeAllReferencesFrom(Address beginAddr, Address endAddr);
+	void removeAllReferencesFrom(Address beginAddr, Address endAddr);
 
 	/**
 	 * Remove all stack, external, and memory references for the given
 	 * from address.
 	 * @param fromAddr the address of the codeunit from which to remove all references.
 	 */
-	public void removeAllReferencesFrom(Address fromAddr);
+	void removeAllReferencesFrom(Address fromAddr);
 
 	/**
 	 * Remove all stack, external, and memory references for the given
 	 * to address.
 	 * @param toAddr the address for which all references to should be removed.
 	 */
-	public void removeAllReferencesTo(Address toAddr);
+	void removeAllReferencesTo(Address toAddr);
 
 	/**
 	 * Returns all references to the given variable.  Only data references to storage 
@@ -187,45 +189,45 @@ public interface ReferenceManager {
 	 * @return array of variable references, or zero length array if no
 	 * references exist
 	 */
-	public Reference[] getReferencesTo(Variable var);
+	Reference[] getReferencesTo(Variable var);
 
 	/**
 	 * Returns the referenced function variable. 
 	 * @param reference
 	 * @return function variable or null if variable not found
 	 */
-	public Variable getReferencedVariable(Reference reference);
+	Variable getReferencedVariable(Reference reference);
 
 	/**
 	 * Set the given reference's primary attribute
 	 * @param ref the reference to make primary.
 	 * @param isPrimary true to make the reference primary, false to make it non-primary
 	 */
-	public void setPrimary(Reference ref, boolean isPrimary);
+	void setPrimary(Reference ref, boolean isPrimary);
 
 	/**
 	 * Return whether the given address has flow references from this address.
 	 * @param addr the address to test for flow references.
 	 */
-	public boolean hasFlowReferencesFrom(Address addr);
+	boolean hasFlowReferencesFrom(Address addr);
 
 	/**
 	 * Get the flow references from the given address.
 	 * @param addr the address of the codeunit to get all flows from.
 	 */
-	public Reference[] getFlowReferencesFrom(Address addr);
+	Reference[] getFlowReferencesFrom(Address addr);
 
 	/**
 	 * Returns an iterator over all external references
 	 */
-	public ReferenceIterator getExternalReferences();
+	ReferenceIterator getExternalReferences();
 
 	/**
 	 * Get an iterator over all references that have the given address as
 	 * their "To" address.
 	 * @param addr the address that all references in the iterator refer to.
 	 */
-	public ReferenceIterator getReferencesTo(Address addr);
+	ReferenceIterator getReferencesTo(Address addr);
 
 	/**
 	 * Get an iterator over references starting with the specified 
@@ -234,7 +236,7 @@ public interface ReferenceManager {
 	 * @param startAddr the first from address to consider.
 	 * @return a forward memory reference iterator.
 	 */
-	public ReferenceIterator getReferenceIterator(Address startAddr);
+	ReferenceIterator getReferenceIterator(Address startAddr);
 
 	/**
 	 * Get the reference that has the given from and to address, and
@@ -243,14 +245,14 @@ public interface ReferenceManager {
 	 * @param toAddr the address being referred to.
 	 * @param opIndex the operand index.
 	 */
-	public Reference getReference(Address fromAddr, Address toAddr, int opIndex);
+	Reference getReference(Address fromAddr, Address toAddr, int opIndex);
 
 	/**
 	 * Get all references "from" the specified addr.
 	 * @param addr address of code-unit making the references.
 	 * @return array of all references "from" the specified addr.
 	 */
-	public Reference[] getReferencesFrom(Address addr);
+	Reference[] getReferencesFrom(Address addr);
 
 	/**
 	 * Returns all references "from" the given fromAddr and operand (specified by opIndex).
@@ -258,7 +260,7 @@ public interface ReferenceManager {
 	 * @param opIndex the operand from which to get references
 	 * @return all references "from" the given fromAddr and operand.
 	 */
-	public Reference[] getReferencesFrom(Address fromAddr, int opIndex);
+	Reference[] getReferencesFrom(Address fromAddr, int opIndex);
 
 	/**
 	 * Returns true if there are any memory references at the given
@@ -268,21 +270,21 @@ public interface ReferenceManager {
 	 * @param fromAddr the address of the codeunit being tested
 	 * @param opIndex the index of the operand being tested.
 	 */
-	public boolean hasReferencesFrom(Address fromAddr, int opIndex);
+	boolean hasReferencesFrom(Address fromAddr, int opIndex);
 
 	/**
 	 * Returns true if there are any memory references at the given
 	 * address. 
 	 * @param fromAddr the address of the codeunit being tested
 	 */
-	public boolean hasReferencesFrom(Address fromAddr);
+	boolean hasReferencesFrom(Address fromAddr);
 
 	/**
 	 * Get the primary reference from the given address.
 	 * @param addr from address
 	 * @param opIndex operand index
 	 */
-	public Reference getPrimaryReferenceFrom(Address addr, int opIndex);
+	Reference getPrimaryReferenceFrom(Address addr, int opIndex);
 
 	/**
 	 * Returns an iterator over addresses that are the "From" address in a
@@ -290,7 +292,7 @@ public interface ReferenceManager {
 	 * @param startAddr address to position iterator.
 	 * @param forward true means to iterate in the forward direction
 	 */
-	public AddressIterator getReferenceSourceIterator(Address startAddr, boolean forward);
+	AddressIterator getReferenceSourceIterator(Address startAddr, boolean forward);
 
 	/**
 	 * Returns an iterator over all addresses that are the "From" address in a
@@ -298,7 +300,7 @@ public interface ReferenceManager {
 	 * @param addrSet the set of address to restrict the iterator or null for all addresses.
 	 * @param forward true means to iterate in the forward direction
 	 */
-	public AddressIterator getReferenceSourceIterator(AddressSetView addrSet, boolean forward);
+	AddressIterator getReferenceSourceIterator(AddressSetView addrSet, boolean forward);
 
 	/**
 	 * Returns an iterator over all addresses that are the "To" address in a
@@ -306,7 +308,7 @@ public interface ReferenceManager {
 	 * @param startAddr start of iterator
 	 * @param forward true means to iterate in the forward direction
 	 */
-	public AddressIterator getReferenceDestinationIterator(Address startAddr, boolean forward);
+	AddressIterator getReferenceDestinationIterator(Address startAddr, boolean forward);
 
 	/**
 	 * Returns an iterator over all addresses that are the "To" address in a
@@ -314,44 +316,44 @@ public interface ReferenceManager {
 	 * @param addrSet the set of address to restrict the iterator or null for all addresses.
 	 * @param forward true means to iterate in the forward direction
 	 */
-	public AddressIterator getReferenceDestinationIterator(AddressSetView addrSet, boolean forward);
+	AddressIterator getReferenceDestinationIterator(AddressSetView addrSet, boolean forward);
 
 	/**
 	 * Returns the number of memory References to the specified
 	 * <code>toAddr</code>
 	 * @param toAddr the address being referenced
 	 */
-	public int getReferenceCountTo(Address toAddr);
+	int getReferenceCountTo(Address toAddr);
 
 	/**
 	 * Returns the number of memory References from the specified
 	 * <code>fromAddr</code>
 	 * @param fromAddr the address of the codeunit making the reference.
 	 */
-	public int getReferenceCountFrom(Address fromAddr);
+	int getReferenceCountFrom(Address fromAddr);
 
 	/**
 	 * Return the number of references for "to" addresses.
 	 */
-	public int getReferenceDestinationCount();
+	int getReferenceDestinationCount();
 
 	/**
 	 * Return the number of references for "from" addresses.
 	 */
-	public int getReferenceSourceCount();
+	int getReferenceSourceCount();
 
 	/**
 	 * Return true if a memory reference exists with the given "to" address.
 	 * @param toAddr address being referred to.
 	 */
-	public boolean hasReferencesTo(Address toAddr);
+	boolean hasReferencesTo(Address toAddr);
 
 	/**
 	 * Uodate the reference type on a memory reference.
 	 * @param ref reference to be updated
 	 * @param refType new reference type
 	 */
-	public Reference updateRefType(Reference ref, RefType refType);
+	Reference updateRefType(Reference ref, RefType refType);
 
 	/**
 	 * Associates the given reference with the given symbol.
@@ -361,25 +363,25 @@ public interface ReferenceManager {
 	 * exist or its "To" address
 	 * is not the same as the symbol's address. 
 	 */
-	public void setAssociation(Symbol s, Reference ref);
+	void setAssociation(Symbol s, Reference ref);
 
 	/**
 	 * Removes any symbol associations with the given reference.
 	 * @param ref the reference for which any symbol association is to be removed.
 	 * @throws IllegalArgumentException if the given references does not exist.
 	 */
-	public void removeAssociation(Reference ref);
+	void removeAssociation(Reference ref);
 
 	/**
 	 * Deletes the given reference object
 	 * @param ref the reference to be deleted.
 	 */
-	public void delete(Reference ref);
+	void delete(Reference ref);
 
 	/**
 	 * Returns the reference level for the references to the given address
 	 * @param toAddr the address at which to find the highest reference level
 	 */
-	public byte getReferenceLevel(Address toAddr);
+	byte getReferenceLevel(Address toAddr);
 
 }

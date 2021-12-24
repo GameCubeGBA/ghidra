@@ -34,7 +34,7 @@ public interface ArrayStringable extends DataType {
 	 * @return true if array of this type with the specified settings will return
 	 * a String value.
 	 */
-	public boolean hasStringValue(Settings settings);
+	boolean hasStringValue(Settings settings);
 
 	/**
 	 * For cases where an array of this type exists, get the array value as a String.
@@ -45,7 +45,7 @@ public interface ArrayStringable extends DataType {
 	 * @param length length of array
 	 * @return array value expressed as a string or null if data is not character data
 	 */
-	public default String getArrayString(MemBuffer buf, Settings settings, int length) {
+	default String getArrayString(MemBuffer buf, Settings settings, int length) {
 		if (hasStringValue(settings) && buf.isInitializedMemory()) {
 			return new StringDataInstance(this, settings, buf, length, true).getStringValue();
 		}
@@ -61,7 +61,7 @@ public interface ArrayStringable extends DataType {
 	 * @param options options for how to format the default label prefix.
 	 * @return the default label prefix or null if none specified.
 	 */
-	public String getArrayDefaultLabelPrefix(MemBuffer buf, Settings settings, int len,
+	String getArrayDefaultLabelPrefix(MemBuffer buf, Settings settings, int len,
 			DataTypeDisplayOptions options);
 
 	/**
@@ -76,7 +76,7 @@ public interface ArrayStringable extends DataType {
 	 * @param offcutLength the length of the offcut label prefix.
 	 * @return the default label prefix or null if none specified.
 	 */
-	public String getArrayDefaultOffcutLabelPrefix(MemBuffer buf, Settings settings, int len,
+	String getArrayDefaultOffcutLabelPrefix(MemBuffer buf, Settings settings, int len,
 			DataTypeDisplayOptions options, int offcutLength);
 
 	// ----------------------------------------------------------------------------
@@ -92,7 +92,7 @@ public interface ArrayStringable extends DataType {
 	 * @param dt data type
 	 * @return ArrayStringable object, or null.
 	 */
-	public static ArrayStringable getArrayStringable(DataType dt) {
+	static ArrayStringable getArrayStringable(DataType dt) {
 		if (dt instanceof TypeDef) {
 			dt = ((TypeDef) dt).getBaseDataType();
 		}

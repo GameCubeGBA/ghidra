@@ -27,7 +27,7 @@ public class HashEntry {
 	public LinkedList<InstructHash> instList;	// (Starting instruction of) n-grams with this hash
 	public HashEntry(Hash h) {
 		hash = h;
-		instList = new LinkedList<InstructHash>();
+		instList = new LinkedList<>();
 	}
 
 	/**

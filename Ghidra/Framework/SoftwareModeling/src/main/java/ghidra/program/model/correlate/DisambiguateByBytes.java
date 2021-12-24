@@ -29,7 +29,7 @@ public class DisambiguateByBytes implements DisambiguateStrategy {
 
 	@Override
 	public ArrayList<Hash> calcHashes(InstructHash instHash, int matchSize, HashStore store) throws CancelledException, MemoryAccessException {
-		ArrayList<Hash> res = new ArrayList<Hash>();
+		ArrayList<Hash> res = new ArrayList<>();
 		Block block = instHash.getBlock();
 		int val = block.hashGram(matchSize, instHash, hashCalc);		// Hash over n-gram's bytes
 		res.add(new Hash(val,1));

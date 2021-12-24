@@ -15,9 +15,14 @@
  */
 package help.validator;
 
-import static help.validator.TagProcessor.TagProcessingState.*;
+import static help.validator.TagProcessor.TagProcessingState.LOOKING_FOR_NEXT_ATTR;
+import static help.validator.TagProcessor.TagProcessingState.LOOKING_FOR_VALUE;
+import static help.validator.TagProcessor.TagProcessingState.READING_ATTR;
+import static help.validator.TagProcessor.TagProcessingState.READING_VALUE;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.LineNumberReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Iterator;
@@ -128,8 +133,7 @@ public class HTMLFileParser {
 			line = line.substring(tagEnd + 1);
 		}
 
-		TagBlock tag = new TagBlock(line, tagBody);
-		return tag;
+		return new TagBlock(line, tagBody);
 	}
 
 	private static TagBlock skipPastCommentEnd(LineNumberReader rdr, Line line, int start)
@@ -151,8 +155,7 @@ public class HTMLFileParser {
 			line = line.substring(index + COMMENT_END_TAG.length());
 		}
 
-		TagBlock tag = new TagBlock(line, comment);
-		return tag;
+		return new TagBlock(line, comment);
 	}
 
 	private static ScanResult getTagName(Line line, int index) throws IOException {
@@ -182,7 +185,7 @@ public class HTMLFileParser {
 		}
 
 		LinkedHashMap<String, String> map = new LinkedHashMap<>();
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		String attr = null;
 		TagProcessingState mode = LOOKING_FOR_NEXT_ATTR;
 		char term = 0;
@@ -217,12 +220,12 @@ public class HTMLFileParser {
 						break;
 					}
 					if (c == '"' || c == '\'') {
-						buf = new StringBuffer();
+						buf = new StringBuilder();
 						mode = READING_VALUE;
 						term = c;
 						break;
 					}
-					buf = new StringBuffer();
+					buf = new StringBuilder();
 					buf.append(c);
 					mode = READING_VALUE;
 					term = 0;
@@ -241,7 +244,7 @@ public class HTMLFileParser {
 					if (c == ' ' || c == '\t') {
 						continue;
 					}
-					buf = new StringBuffer();
+					buf = new StringBuilder();
 					buf.append(c);
 					mode = READING_ATTR;
 			}
@@ -259,7 +262,7 @@ public class HTMLFileParser {
 
 		tagProcessor.processTag(tagType, map, file, lineNum);
 
-		buf = new StringBuffer();
+		buf = new StringBuilder();
 		buf.append('<');
 		buf.append(tagType);
 		Iterator<String> iter = map.keySet().iterator();

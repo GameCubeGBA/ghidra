@@ -16,13 +16,34 @@
  */
 package docking.widgets.tree.internal;
 
-import ghidra.framework.OperatingSystem;
-import ghidra.framework.Platform;
-import ghidra.util.Msg;
-
-import java.awt.*;
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.datatransfer.Transferable;
-import java.awt.dnd.*;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DragGestureEvent;
+import java.awt.dnd.DragGestureListener;
+import java.awt.dnd.DragSource;
+import java.awt.dnd.DragSourceContext;
+import java.awt.dnd.DragSourceDragEvent;
+import java.awt.dnd.DragSourceDropEvent;
+import java.awt.dnd.DragSourceEvent;
+import java.awt.dnd.DragSourceListener;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDragEvent;
+import java.awt.dnd.DropTargetDropEvent;
+import java.awt.dnd.DropTargetEvent;
+import java.awt.dnd.DropTargetListener;
+import java.awt.dnd.InvalidDnDOperationException;
 import java.awt.event.InputEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -33,9 +54,13 @@ import javax.swing.SwingUtilities;
 import javax.swing.tree.TreeCellRenderer;
 import javax.swing.tree.TreePath;
 
-import docking.widgets.tree.*;
+import docking.widgets.tree.GTree;
+import docking.widgets.tree.GTreeNode;
 import docking.widgets.tree.support.GTreeDragNDropHandler;
 import docking.widgets.tree.support.GTreeNodeTransferable;
+import ghidra.framework.OperatingSystem;
+import ghidra.framework.Platform;
+import ghidra.util.Msg;
 
 public class GTreeDragNDropAdapter implements DragSourceListener, DragGestureListener,
 		DropTargetListener {
@@ -214,14 +239,14 @@ public class GTreeDragNDropAdapter implements DragSourceListener, DragGestureLis
 
 	private List<GTreeNode> createSelectionList(TreePath[] selectionPaths) {
 
-		List<GTreeNode> list = new ArrayList<GTreeNode>();
+		List<GTreeNode> list = new ArrayList<>();
 
 		if (selectionPaths == null) {
 			return list;
 		}
 
-		for (int i = 0; i < selectionPaths.length; i++) {
-			list.add((GTreeNode) selectionPaths[i].getLastPathComponent());
+		for (TreePath selectionPath : selectionPaths) {
+			list.add((GTreeNode) selectionPath.getLastPathComponent());
 		}
 		return list;
 	}

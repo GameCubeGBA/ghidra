@@ -33,5 +33,5 @@ public interface ConstructorEntryVisitor extends VisitorResults {
 	 * @param cons the constructor
 	 * @return a value from {@link VisitorResults}
 	 */
-	public int visit(SubtableSymbol subtable, DisjointPattern pattern, Constructor cons);
+	int visit(SubtableSymbol subtable, DisjointPattern pattern, Constructor cons);
 }

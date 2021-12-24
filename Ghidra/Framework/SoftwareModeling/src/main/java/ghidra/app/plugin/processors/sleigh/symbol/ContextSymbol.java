@@ -20,7 +20,9 @@
 package ghidra.app.plugin.processors.sleigh.symbol;
 
 import ghidra.app.plugin.processors.sleigh.SleighLanguage;
-import ghidra.app.plugin.processors.sleigh.expression.*;
+import ghidra.app.plugin.processors.sleigh.expression.ContextField;
+import ghidra.app.plugin.processors.sleigh.expression.PatternExpression;
+import ghidra.app.plugin.processors.sleigh.expression.PatternValue;
 import ghidra.util.xml.SpecXmlUtils;
 import ghidra.xml.XmlElement;
 import ghidra.xml.XmlPullParser;

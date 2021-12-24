@@ -30,10 +30,12 @@ public class LayoutBackgroundColorManagerAdapter implements LayoutBackgroundColo
 	public LayoutBackgroundColorManagerAdapter(LayoutBackgroundColorManager layoutColorMap) {
 		this.layoutSelectionMap = layoutColorMap;
 	}
+	@Override
 	public Color getBackgroundColor() {
 		return layoutSelectionMap.getBackgroundColor();
 	}
 
+	@Override
 	public FieldBackgroundColorManager getFieldBackgroundColorManager(int fieldNum) {
 		return layoutSelectionMap.getFieldBackgroundColorManager(fieldNum+start);
 	}
@@ -42,6 +44,7 @@ public class LayoutBackgroundColorManagerAdapter implements LayoutBackgroundColo
 		this.end = end;
 		this.isLastRow = isLastRow;
 	}
+	@Override
 	public Color getPaddingColor(int gap) {
 		if (gap == -1) {
 			if (isLastRow) {
@@ -51,6 +54,7 @@ public class LayoutBackgroundColorManagerAdapter implements LayoutBackgroundColo
 		}
 		return layoutSelectionMap.getPaddingColor(gap+start);
 	}
+	@Override
 	public Color getBackgroundColor(FieldLocation location) {
 		return layoutSelectionMap.getBackgroundColor(location);
 	}

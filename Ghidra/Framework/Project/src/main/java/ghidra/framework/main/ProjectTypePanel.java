@@ -15,10 +15,12 @@
  */
 package ghidra.framework.main;
 
-import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
 import docking.widgets.button.GRadioButton;
 import docking.wizard.AbstractWizardJPanel;
@@ -50,12 +52,7 @@ class ProjectTypePanel extends AbstractWizardJPanel {
 	private void buildPanel() {
 		JPanel innerPanel = new JPanel(new VerticalLayout(10));
 		innerPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-		ItemListener listener = new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				panelManager.getWizardManager().validityChanged();
-			}
-		};
+		ItemListener listener = e -> panelManager.getWizardManager().validityChanged();
 
 		nonSharedRB = new GRadioButton("Non-Shared Project", true);
 		nonSharedRB.addItemListener(listener);

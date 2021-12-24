@@ -15,7 +15,10 @@
  */
 package docking.widgets.table.threaded;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import docking.widgets.table.AddRemoveListItem;
 import docking.widgets.table.TableSortingContext;

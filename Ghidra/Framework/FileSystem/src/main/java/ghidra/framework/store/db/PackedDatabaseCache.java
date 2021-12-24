@@ -15,8 +15,17 @@
  */
 package ghidra.framework.store.db;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.SyncFailedException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import db.buffers.LocalBufferFile;
 import generic.jar.ResourceFile;
@@ -98,7 +107,7 @@ public class PackedDatabaseCache {
 	}
 
 	private List<CachedDB> readCache() throws IOException {
-		List<CachedDB> list = new ArrayList<CachedDB>();
+		List<CachedDB> list = new ArrayList<>();
 		if (!mapFile.exists()) {
 			// cleanup db directories if map is missing
 			for (File f : cacheDir.listFiles()) {
@@ -111,7 +120,7 @@ public class PackedDatabaseCache {
 		boolean modified = false;
 		long now = (new Date()).getTime();
 		BufferedReader r = new BufferedReader(new FileReader(mapFile));
-		try {
+		try (r) {
 			String line;
 			while ((line = r.readLine()) != null) {
 				line = line.trim();
@@ -138,9 +147,6 @@ public class PackedDatabaseCache {
 		}
 		catch (IllegalArgumentException e) {
 			Msg.error(this, "Corrupt cache - exit and try removing it: " + cacheDir);
-		}
-		finally {
-			r.close();
 		}
 		doCleanup = false;
 		if (modified) {
@@ -475,7 +481,7 @@ public class PackedDatabaseCache {
 		}
 
 		String getMapEntry() {
-			StringBuffer buf = new StringBuffer();
+			StringBuilder buf = new StringBuilder();
 			buf.append(packedDbFilePath);
 			buf.append(MAP_SEPARATOR);
 			buf.append(dbDir.getName());

@@ -15,12 +15,12 @@
  */
 package ghidra.program.model.block;
 
+import java.util.LinkedList;
+
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSetView;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
-
-import java.util.LinkedList;
 
 /**
  * <CODE>SingleEntSubIterator</CODE> is an implementation of
@@ -54,7 +54,7 @@ public class SingleEntSubIterator implements CodeBlockIterator {
 	private OverlapCodeSubModel model = null;
 
 	// create holder for model-P subs that came from model-M subs with multiple entry points
-	private LinkedList<CodeBlock> subList = new LinkedList<CodeBlock>();
+	private LinkedList<CodeBlock> subList = new LinkedList<>();
 
 	private CodeBlockIterator modelMIter = null;
 	private TaskMonitor monitor;
@@ -118,21 +118,18 @@ public class SingleEntSubIterator implements CodeBlockIterator {
 			Address[] entPts = modelMSub.getStartAddresses();
 
 			// Check all Model-O subroutines contained within the Model-M subroutine
-			for (int i = 0; i < entPts.length; i++) {
+			for (Address entPt : entPts) {
 
-				CodeBlock sub = model.getCodeBlockAt(entPts[i], monitor);
+				CodeBlock sub = model.getCodeBlockAt(entPt, monitor);
 				if (sub == null)
 					continue;   // should only happen with screwy code
 
 				if (monitor.isCancelled())
 					return false;
 
-				if (addrSet != null) {
-
-					// Keep sub only if it overlaps address set
-					if (!sub.intersects(addrSet)) {
-						continue;
-					}
+				// Keep sub only if it overlaps address set
+				if ((addrSet != null) && !sub.intersects(addrSet)) {
+					continue;
 				}
 				subList.add(sub);
 			}

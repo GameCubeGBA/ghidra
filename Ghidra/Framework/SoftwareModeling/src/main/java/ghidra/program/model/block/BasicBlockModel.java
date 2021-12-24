@@ -18,7 +18,9 @@ package ghidra.program.model.block;
 
 import ghidra.program.model.listing.Instruction;
 import ghidra.program.model.listing.Program;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.FlowType;
+import ghidra.program.model.symbol.RefType;
+import ghidra.program.model.symbol.Reference;
 
 /**
  * This BlockModel implements the Basic block model.

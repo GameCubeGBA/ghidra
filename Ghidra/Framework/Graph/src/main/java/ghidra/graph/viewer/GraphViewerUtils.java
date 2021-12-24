@@ -15,19 +15,30 @@
  */
 package ghidra.graph.viewer;
 
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Shape;
 import java.awt.event.MouseEvent;
-import java.awt.geom.*;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.GeneralPath;
+import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
 import com.google.common.base.Function;
 
-import edu.uci.ics.jung.algorithms.layout.*;
+import edu.uci.ics.jung.algorithms.layout.GraphElementAccessor;
+import edu.uci.ics.jung.algorithms.layout.Layout;
+import edu.uci.ics.jung.algorithms.layout.LayoutDecorator;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.util.Pair;
-import edu.uci.ics.jung.visualization.*;
+import edu.uci.ics.jung.visualization.Layer;
+import edu.uci.ics.jung.visualization.MultiLayerTransformer;
+import edu.uci.ics.jung.visualization.RenderContext;
+import edu.uci.ics.jung.visualization.VisualizationServer;
 import edu.uci.ics.jung.visualization.picking.PickedState;
 import edu.uci.ics.jung.visualization.picking.ShapePickSupport;
 import edu.uci.ics.jung.visualization.transform.MutableTransformer;
@@ -207,9 +218,7 @@ public class GraphViewerUtils {
 
 		Point2D vertexUpperLeftRelativePoint =
 			translatePointFromViewSpaceToVertexRelativeSpace(viewer, mouseEvent.getPoint());
-		VertexMouseInfo<V, E> info =
-			viewer.createVertexMouseInfo(mouseEvent, vertex, vertexUpperLeftRelativePoint);
-		return info;
+		return viewer.createVertexMouseInfo(mouseEvent, vertex, vertexUpperLeftRelativePoint);
 	}
 
 	public static <V, E> Point getVertexUpperLeftCornerInGraphSpace(
@@ -720,16 +729,14 @@ public class GraphViewerUtils {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private static <V> Shape getVertexShapeForEdge(V v, Function<? super V, Shape> vertexShaper) {
-		if (vertexShaper instanceof VisualGraphVertexShapeTransformer) {
-			if (v instanceof VisualVertex) {
-				VisualVertex vv = (VisualVertex) v;
+		if ((vertexShaper instanceof VisualGraphVertexShapeTransformer) && (v instanceof VisualVertex)) {
+			VisualVertex vv = (VisualVertex) v;
 
-				// Note: it is a bit odd that we 'know' to use the compact shape here for 
-				// 		 hit detection, but this is how the edge is painted, so we want the 
-				//       view to match the mouse.
-				return ((VisualGraphVertexShapeTransformer) vertexShaper).transformToCompactShape(
-					vv);
-			}
+			// Note: it is a bit odd that we 'know' to use the compact shape here for 
+			// 		 hit detection, but this is how the edge is painted, so we want the 
+			//       view to match the mouse.
+			return ((VisualGraphVertexShapeTransformer) vertexShaper).transformToCompactShape(
+				vv);
 		}
 		return vertexShaper.apply(v);
 	}
@@ -747,9 +754,7 @@ public class GraphViewerUtils {
 			V v) {
 		Layout<V, E> layout = viewer.getGraphLayout();
 		Point2D centerInLayoutSpace = layout.apply(v);
-		Point viewSpacePoint =
-			translatePointFromLayoutSpaceToViewSpace(centerInLayoutSpace, viewer);
-		return viewSpacePoint;
+		return translatePointFromLayoutSpaceToViewSpace(centerInLayoutSpace, viewer);
 	}
 
 	public static <V, E> Point2D.Double getVertexOffsetFromLayoutCenter(
@@ -845,8 +850,7 @@ public class GraphViewerUtils {
 		Function<V, Rectangle> vertexToBounds = createVertexToBoundsTransformer(viewer);
 
 		if (!layoutUsesEdgeArticulations(layout)) {
-			Rectangle bounds = getBoundsForVerticesInLayoutSpace(vertices, vertexToBounds);
-			return bounds;
+			return getBoundsForVerticesInLayoutSpace(vertices, vertexToBounds);
 		}
 
 		Function<E, List<Point2D>> edgeToArticulations = e -> e.getArticulationPoints();
@@ -861,7 +865,7 @@ public class GraphViewerUtils {
 		RenderContext<V, E> context = viewer.getRenderContext();
 		Function<? super V, Shape> shapeTransformer = context.getVertexShapeTransformer();
 		Layout<V, E> layout = viewer.getGraphLayout();
-		Function<V, Rectangle> transformer = v -> {
+		return v -> {
 
 			Shape s = shapeTransformer.apply(v);
 			Rectangle bounds = s.getBounds();
@@ -871,7 +875,6 @@ public class GraphViewerUtils {
 			bounds.setLocation(new Point((int) p.getX(), (int) p.getY()));
 			return bounds;
 		};
-		return transformer;
 	}
 
 	//@formatter:off

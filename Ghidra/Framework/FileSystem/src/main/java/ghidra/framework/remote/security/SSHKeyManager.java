@@ -16,13 +16,24 @@
  */
 package ghidra.framework.remote.security;
 
-import ghidra.security.KeyStorePasswordProvider;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import ch.ethz.ssh2.crypto.Base64;
 import ch.ethz.ssh2.crypto.PEMDecoder;
-import ch.ethz.ssh2.signature.*;
+import ch.ethz.ssh2.signature.DSAPrivateKey;
+import ch.ethz.ssh2.signature.DSAPublicKey;
+import ch.ethz.ssh2.signature.DSASHA1Verify;
+import ch.ethz.ssh2.signature.RSAPrivateKey;
+import ch.ethz.ssh2.signature.RSAPublicKey;
+import ch.ethz.ssh2.signature.RSASHA1Verify;
+import ghidra.security.KeyStorePasswordProvider;
 
 public class SSHKeyManager {
 
@@ -122,7 +133,7 @@ public class SSHKeyManager {
 			throws IOException {
 
 		boolean isEncrypted = false;
-		StringBuffer keyBuf = new StringBuffer();
+		StringBuilder keyBuf = new StringBuilder();
 		BufferedReader r = new BufferedReader(new InputStreamReader(sshPrivateKeyIn));
 		String line;
 		while ((line = r.readLine()) != null) {

@@ -17,7 +17,9 @@ package ghidra.program.database.properties;
 
 import java.io.IOException;
 
-import db.*;
+import db.DBHandle;
+import db.DBRecord;
+import db.StringField;
 import db.util.ErrorHandler;
 import ghidra.program.database.map.AddressMap;
 import ghidra.program.model.address.Address;

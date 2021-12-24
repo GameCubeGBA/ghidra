@@ -23,14 +23,36 @@ package ghidra.app.util;
 import java.math.BigInteger;
 import java.util.List;
 
-import ghidra.program.model.address.*;
-import ghidra.program.model.lang.*;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressOverflowException;
+import ghidra.program.model.address.UniqueAddressFactory;
+import ghidra.program.model.lang.InstructionBlock;
+import ghidra.program.model.lang.InstructionContext;
+import ghidra.program.model.lang.InstructionPrototype;
+import ghidra.program.model.lang.InsufficientBytesException;
+import ghidra.program.model.lang.OperandType;
+import ghidra.program.model.lang.ParserContext;
+import ghidra.program.model.lang.ProcessorContext;
+import ghidra.program.model.lang.ProcessorContextView;
+import ghidra.program.model.lang.Register;
+import ghidra.program.model.lang.RegisterValue;
+import ghidra.program.model.lang.UnknownContextException;
+import ghidra.program.model.lang.UnknownInstructionException;
+import ghidra.program.model.listing.ContextChangeException;
+import ghidra.program.model.listing.FlowOverride;
+import ghidra.program.model.listing.Instruction;
+import ghidra.program.model.listing.InstructionPcodeOverride;
+import ghidra.program.model.listing.Program;
 import ghidra.program.model.mem.MemBuffer;
 import ghidra.program.model.mem.MemoryAccessException;
 import ghidra.program.model.pcode.PcodeOp;
 import ghidra.program.model.scalar.Scalar;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.FlowType;
+import ghidra.program.model.symbol.MemReferenceImpl;
+import ghidra.program.model.symbol.RefType;
+import ghidra.program.model.symbol.Reference;
+import ghidra.program.model.symbol.SourceType;
 import ghidra.util.SystemUtilities;
 import ghidra.util.exception.AssertException;
 
@@ -43,7 +65,7 @@ import ghidra.util.exception.AssertException;
  */
 public class PseudoInstruction extends PseudoCodeUnit implements Instruction, InstructionContext {
 
-	private final static Address[] EMPTY_ADDR_ARRAY = new Address[0];
+	private final static Address[] EMPTY_ADDR_ARRAY = {};
 
 	private AddressFactory addrFactory;
 
@@ -179,11 +201,7 @@ public class PseudoInstruction extends PseudoCodeUnit implements Instruction, In
 		}
 
 		PseudoInstruction cu = (PseudoInstruction) obj;
-		if (hash != cu.hash) {
-			return false;
-		}
-
-		if (!address.equals(cu.address)) {
+		if ((hash != cu.hash) || !address.equals(cu.address)) {
 			return false;
 		}
 
@@ -256,7 +274,7 @@ public class PseudoInstruction extends PseudoCodeUnit implements Instruction, In
 		if (opList == null) {
 			return "<UNSUPPORTED>";
 		}
-		StringBuffer strBuf = new StringBuffer();
+		StringBuilder strBuf = new StringBuilder();
 		for (Object opElem : opList) {
 			if (opElem instanceof Address) {
 				Address opAddr = (Address) opElem;
@@ -277,8 +295,7 @@ public class PseudoInstruction extends PseudoCodeUnit implements Instruction, In
 
 	@Override
 	public int getOperandType(int opIndex) {
-		int optype = instrProto.getOpType(opIndex, this);
-		return optype;
+		return instrProto.getOpType(opIndex, this);
 	}
 
 	@Override
@@ -292,10 +309,8 @@ public class PseudoInstruction extends PseudoCodeUnit implements Instruction, In
 		int opType = instrProto.getOpType(opIndex, this);
 
 		if (OperandType.isDataReference(opType)) {
-			if (getFlowType().isComputed()) {
-				if (OperandType.isIndirect(opType)) {
-					return RefType.INDIRECTION;
-				}
+			if (getFlowType().isComputed() && OperandType.isIndirect(opType)) {
+				return RefType.INDIRECTION;
 			}
 			return RefType.DATA;
 		}
@@ -451,7 +466,7 @@ public class PseudoInstruction extends PseudoCodeUnit implements Instruction, In
 
 	@Override
 	public String toString() {
-		StringBuffer stringBuffer = new StringBuffer();
+		StringBuilder stringBuffer = new StringBuilder();
 		stringBuffer.append(getMnemonicString());
 
 		int n = getNumOperands();

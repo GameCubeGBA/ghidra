@@ -15,9 +15,14 @@
  */
 package ghidra.program.model.pcode;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Iterator;
 
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressSpace;
 import ghidra.program.model.lang.UnknownInstructionException;
 import ghidra.util.xml.SpecXmlUtils;
 import ghidra.xml.XmlElement;
@@ -331,9 +336,7 @@ public class PcodeOp {
 	public final void setInput(Varnode vn, int slot) {
 		if (input == null) {
 			input = new Varnode[slot + 1];
-			for (int i = 0; i < input.length; ++i) {
-				input[i] = null;
-			}
+			Arrays.fill(input, null);
 		}
 		else if (slot >= input.length) {
 			Varnode[] newinput = new Varnode[slot + 1];
@@ -466,7 +469,7 @@ public class PcodeOp {
 			throw new PcodeXMLException("Missing output in PcodeOp");
 		}
 		Varnode output = Varnode.readXML(parser, pfact);
-		ArrayList<Varnode> inputlist = new ArrayList<Varnode>();
+		ArrayList<Varnode> inputlist = new ArrayList<>();
 		while (parser.peek().isStart()) {
 			Varnode vn = Varnode.readXML(parser, pfact);
 			inputlist.add(vn);
@@ -522,7 +525,7 @@ public class PcodeOp {
 	 * Generate a lookup table that maps pcode mnemonic strings to pcode operation codes.
 	 */
 	private static void generateOpcodeTable() {
-		opcodeTable = new Hashtable<String, Integer>();
+		opcodeTable = new Hashtable<>();
 		for (int i = 0; i < PCODE_MAX; i++) {
 			opcodeTable.put(getMnemonic(i), i);
 		}

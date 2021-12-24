@@ -17,7 +17,11 @@ package ghidra.framework.main.logviewer.ui;
 
 import java.io.File;
 import java.nio.file.WatchService;
-import java.util.concurrent.*;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 import ghidra.framework.main.logviewer.event.FVEvent;
 import ghidra.framework.main.logviewer.event.FVEvent.EventType;
@@ -77,23 +81,18 @@ public class FileWatcher {
 			return;
 		}
 
-		future = executor.scheduleAtFixedRate(new Runnable() {
+		future = executor.scheduleAtFixedRate(() -> {
 
-			@Override
-			public void run() {
-
-				// Always check for cancel here.  When the user closes the window we call cancel
-				// on the service, but that doesn't actually cancel the task, it just ensures
-				// that any call to isCancelled returns true.
-				if (future.isCancelled()) {
-					return;
-				}
-				if (isFileUpdated(file)) {
-					FVEvent updateEvt = new FVEvent(EventType.FILE_CHANGED, null);
-					eventListener.send(updateEvt);
-				}
+			// Always check for cancel here.  When the user closes the window we call cancel
+			// on the service, but that doesn't actually cancel the task, it just ensures
+			// that any call to isCancelled returns true.
+			if (future.isCancelled()) {
+				return;
 			}
-
+			if (isFileUpdated(file)) {
+				FVEvent updateEvt = new FVEvent(EventType.FILE_CHANGED, null);
+				eventListener.send(updateEvt);
+			}
 		}, POLLING_DELAY_SEC, POLLING_INTERVAL_SEC, TimeUnit.SECONDS);
 	}
 
@@ -110,7 +109,6 @@ public class FileWatcher {
 		// has been brought up.
 		if (timestamp == -1) {
 			timestamp = file.lastModified();
-			return false;
 		}
 		else if (timestamp != file.lastModified()) {
 			timestamp = file.lastModified();

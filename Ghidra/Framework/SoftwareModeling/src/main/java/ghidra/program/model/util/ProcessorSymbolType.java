@@ -24,10 +24,10 @@ public enum ProcessorSymbolType {
 			return null;
 		}
 		String lowerCase = string.toLowerCase();
-		if (lowerCase.equals("code")) {
+		if ("code".equals(lowerCase)) {
 			return CODE;
 		}
-		if (lowerCase.equals("code_ptr")) {
+		if ("code_ptr".equals(lowerCase)) {
 			return CODE_PTR;
 		}
 		return null;

@@ -15,12 +15,12 @@
  */
 package ghidra.program.model.data;
 
+import java.io.IOException;
+import java.util.List;
+
 import ghidra.docking.settings.Settings;
 import ghidra.program.model.mem.MemBuffer;
 import ghidra.util.classfinder.ClassTranslator;
-
-import java.io.IOException;
-import java.util.List;
 
 public class IconResourceDataType extends BitmapResourceDataType {
 

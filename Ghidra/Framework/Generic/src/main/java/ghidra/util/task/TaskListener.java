@@ -25,11 +25,11 @@ public interface TaskListener {
 	 * Notification that the task completed.
 	 * @param task the task that was running and is now completed
 	 */
-    public void taskCompleted(Task task);
+    void taskCompleted(Task task);
     
     /**
      * Notification that the task was canceled.
      * @param task the task that was running and was canceled
      */
-    public void taskCancelled(Task task);
+    void taskCancelled(Task task);
 }

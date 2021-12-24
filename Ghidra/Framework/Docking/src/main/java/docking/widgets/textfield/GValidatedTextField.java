@@ -20,7 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JTextField;
-import javax.swing.text.*;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 
 import ghidra.util.NumericUtilities;
 
@@ -55,9 +57,9 @@ public class GValidatedTextField extends JTextField {
 
 	public static class ValidatedDocument extends PlainDocument {
 		protected Toolkit toolkit = Toolkit.getDefaultToolkit();
-		private List<TextValidator> validators = new ArrayList<TextValidator>();
+		private List<TextValidator> validators = new ArrayList<>();
 		private List<ValidationMessageListener> listeners =
-			new ArrayList<ValidationMessageListener>();
+			new ArrayList<>();
 
 		public ValidatedDocument(List<TextValidator> validators) {
 			if (validators != null) {
@@ -113,12 +115,12 @@ public class GValidatedTextField extends JTextField {
 		}
 	}
 
-	public static interface TextValidator {
-		public void validate(String oldText, String newText) throws ValidationFailedException;
+	public interface TextValidator {
+		void validate(String oldText, String newText) throws ValidationFailedException;
 	}
 
-	public static interface ValidationMessageListener {
-		public void message(String msg);
+	public interface ValidationMessageListener {
+		void message(String msg);
 	}
 
 	public static class ValidationFailedException extends Exception {

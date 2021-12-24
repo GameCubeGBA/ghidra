@@ -27,7 +27,7 @@ public enum LSHMemoryModel {
 	private double probabilityThreshold;
 	private double tauBound;
 
-	private LSHMemoryModel(String label, int k, double probabilityThreshold, double tauBound) {
+	LSHMemoryModel(String label, int k, double probabilityThreshold, double tauBound) {
 		this.label = label;
 		this.k = k;
 		this.probabilityThreshold = probabilityThreshold;

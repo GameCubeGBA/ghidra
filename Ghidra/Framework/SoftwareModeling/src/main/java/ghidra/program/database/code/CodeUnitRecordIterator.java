@@ -17,8 +17,15 @@ package ghidra.program.database.code;
 
 import java.util.Iterator;
 
-import ghidra.program.model.address.*;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressIterator;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.listing.CodeUnit;
+import ghidra.program.model.listing.CodeUnitIterator;
+import ghidra.program.model.listing.Data;
+import ghidra.program.model.listing.DataIterator;
+import ghidra.program.model.listing.Instruction;
+import ghidra.program.model.listing.InstructionIterator;
 
 /**
  * Combines an Instruction iterator and Data iterator into a codeunit iterator

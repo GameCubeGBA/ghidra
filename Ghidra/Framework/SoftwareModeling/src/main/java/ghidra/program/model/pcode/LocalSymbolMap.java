@@ -15,13 +15,34 @@
  */
 package ghidra.program.model.pcode;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressIterator;
+import ghidra.program.model.address.AddressSpace;
 import ghidra.program.model.data.DataType;
 import ghidra.program.model.data.Undefined;
-import ghidra.program.model.listing.*;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.listing.Function;
+import ghidra.program.model.listing.Instruction;
+import ghidra.program.model.listing.Listing;
+import ghidra.program.model.listing.Parameter;
+import ghidra.program.model.listing.Program;
+import ghidra.program.model.listing.Variable;
+import ghidra.program.model.listing.VariableStorage;
+import ghidra.program.model.symbol.Equate;
+import ghidra.program.model.symbol.EquateReference;
+import ghidra.program.model.symbol.EquateTable;
+import ghidra.program.model.symbol.Namespace;
+import ghidra.program.model.symbol.SourceType;
+import ghidra.program.model.symbol.Symbol;
 import ghidra.util.SystemUtilities;
 import ghidra.util.xml.SpecXmlUtils;
 import ghidra.xml.XmlElement;
@@ -167,14 +188,12 @@ public class LocalSymbolMap {
 				istypelock = false;
 			}
 			String name = local.getName();
-			if (name.length() > 2 && name.charAt(name.length() - 2) == '$') {
-				// An indication of names like "name", "name@1", "name@2"
-				if (name.charAt(name.length() - 1) == '1') {
-					if (mergeNames == null) {
-						mergeNames = new ArrayList<>();
-					}
-					mergeNames.add(name);
+			// An indication of names like "name", "name@1", "name@2"
+			if ((name.length() > 2 && name.charAt(name.length() - 2) == '$') && (name.charAt(name.length() - 1) == '1')) {
+				if (mergeNames == null) {
+					mergeNames = new ArrayList<>();
 				}
+				mergeNames.add(name);
 			}
 
 			VariableStorage storage = local.getVariableStorage();
@@ -216,14 +235,12 @@ public class LocalSymbolMap {
 			}
 			DataType dt = var.getDataType();
 			String name = var.getName();
-			if (name.length() > 2 && name.charAt(name.length() - 2) == '$') {
-				// An indication of names like "name", "name@1", "name@2"
-				if (name.charAt(name.length() - 1) == '1') {
-					if (mergeNames == null) {
-						mergeNames = new ArrayList<>();
-					}
-					mergeNames.add(name);
+			// An indication of names like "name", "name@1", "name@2"
+			if ((name.length() > 2 && name.charAt(name.length() - 2) == '$') && (name.charAt(name.length() - 1) == '1')) {
+				if (mergeNames == null) {
+					mergeNames = new ArrayList<>();
 				}
+				mergeNames.add(name);
 			}
 			VariableStorage storage = var.getVariableStorage();
 			Address resAddr = storage.isStackStorage() ? null : pcaddr;
@@ -251,10 +268,7 @@ public class LocalSymbolMap {
 	}
 
 	private boolean isUserDefinedName(String name) {
-		if (name.startsWith("local_")) {
-			return false;
-		}
-		if (name.startsWith("param_")) {
+		if (name.startsWith("local_") || name.startsWith("param_")) {
 			return false;
 		}
 		return true;
@@ -297,12 +311,7 @@ public class LocalSymbolMap {
 		parser.end(el);
 	}
 
-	private static final Comparator<HighSymbol> PARAM_SYMBOL_SLOT_COMPARATOR = new Comparator<>() {
-		@Override
-		public int compare(HighSymbol sym1, HighSymbol sym2) {
-			return sym1.getCategoryIndex() - sym2.getCategoryIndex();
-		}
-	};
+	private static final Comparator<HighSymbol> PARAM_SYMBOL_SLOT_COMPARATOR = (sym1, sym2) -> sym1.getCategoryIndex() - sym2.getCategoryIndex();
 
 	/**
 	 * Add mapped symbols to this LocalVariableMap, by parsing the &lt;symbollist&gt; and &lt;mapsym&gt; tags.
@@ -555,7 +564,7 @@ public class LocalSymbolMap {
 	/**
 	 * Hashing keys for Local variables
 	 */
-	class MappedVarKey {
+	static class MappedVarKey {
 		private Address addr;
 		private Address pcaddr;
 

@@ -16,9 +16,11 @@
  */
 package ghidra.program.database.symbol;
 
-import ghidra.program.model.symbol.*;
-
 import java.util.Iterator;
+
+import ghidra.program.model.symbol.Symbol;
+import ghidra.program.model.symbol.SymbolIterator;
+import ghidra.program.model.symbol.SymbolType;
 
 /**
  * Filters a symbol iterator to only return a specific symbol type
@@ -41,6 +43,7 @@ public class TypeFilteredSymbolIterator implements SymbolIterator {
 	/**
 	 * @see ghidra.program.model.symbol.SymbolIterator#hasNext()
 	 */
+	@Override
 	public boolean hasNext() {
 		if (nextSymbol != null) {
 			return true;
@@ -51,6 +54,7 @@ public class TypeFilteredSymbolIterator implements SymbolIterator {
 	/**
 	 * @see ghidra.program.model.symbol.SymbolIterator#next()
 	 */
+	@Override
 	public Symbol next() {
 		if (hasNext()) {
 			Symbol s = nextSymbol;
@@ -71,6 +75,7 @@ public class TypeFilteredSymbolIterator implements SymbolIterator {
 		return false;
 	}
 
+	@Override
 	public void remove() {
 		throw new UnsupportedOperationException();
 	}

@@ -15,11 +15,15 @@
  */
 package ghidra.util.task;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.awt.Component;
 import java.util.Deque;
-import java.util.concurrent.*;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.TimeUnit;
 
 import docking.test.AbstractDockingTest;
 import ghidra.util.Swing;
@@ -224,7 +228,7 @@ public class AbstractTaskTest extends AbstractDockingTest {
 		}
 	}
 
-	protected class TDEvent {
+	protected static class TDEvent {
 
 		protected String threadName = Thread.currentThread().getName();
 		protected String message;

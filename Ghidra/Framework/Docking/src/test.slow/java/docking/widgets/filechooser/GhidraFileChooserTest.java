@@ -18,42 +18,75 @@
  */
 package docking.widgets.filechooser;
 
-import static docking.widgets.filechooser.GhidraFileChooserMode.*;
-import static org.hamcrest.Matchers.*;
+import static docking.widgets.filechooser.GhidraFileChooserMode.DIRECTORIES_ONLY;
+import static docking.widgets.filechooser.GhidraFileChooserMode.FILES_AND_DIRECTORIES;
+import static docking.widgets.filechooser.GhidraFileChooserMode.FILES_ONLY;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.text.IsEmptyString.isEmptyOrNullString;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Rectangle;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
-import java.io.*;
-import java.nio.file.*;
+import java.io.File;
+import java.io.FileFilter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
-import javax.swing.*;
+import javax.swing.AbstractButton;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.ListModel;
 import javax.swing.table.JTableHeader;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.config.Configurator;
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
-import docking.*;
+import docking.ActionContext;
+import docking.DockingDialog;
+import docking.EmptyBorderToggleButton;
 import docking.action.DockingAction;
 import docking.test.AbstractDockingTest;
 import docking.widgets.DropDownSelectionTextField;
 import docking.widgets.SpyDropDownWindowVisibilityListener;
-import docking.widgets.table.*;
+import docking.widgets.table.ColumnSortState;
+import docking.widgets.table.GTable;
+import docking.widgets.table.TableSortState;
 import generic.concurrent.ConcurrentQ;
-import ghidra.framework.*;
+import ghidra.framework.LoggingInitialization;
+import ghidra.framework.OperatingSystem;
+import ghidra.framework.Platform;
 import ghidra.framework.preferences.Preferences;
 import ghidra.util.Msg;
 import ghidra.util.filechooser.ExtensionFileFilter;
@@ -1939,7 +1972,7 @@ public class GhidraFileChooserTest extends AbstractDockingTest {
 			files.length >= count);
 
 		// create some consistency between runs
-		Arrays.sort(files, (f1, f2) -> f1.getName().compareTo(f2.getName()));
+		Arrays.sort(files, Comparator.comparing(File::getName));
 
 		List<File> result = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
@@ -2219,19 +2252,15 @@ public class GhidraFileChooserTest extends AbstractDockingTest {
 				"The drop-down matching window of the file chooser is not showing as expected",
 				spy.wasWindowShown());
 		}
-		else {
-
-			if (spy.wasWindowShown()) {
-				boolean wasHidden = spy.wasWindowHidden();
-				if (!wasHidden) {
-					Msg.debug(this, "Drop-down window not hidden:\n" + spy);
-				}
-
-				assertTrue("The drop-down matching window of the file chooser is " +
-					"showing when it is not expected to be.", wasHidden);
+		else if (spy.wasWindowShown()) {
+			boolean wasHidden = spy.wasWindowHidden();
+			if (!wasHidden) {
+				Msg.debug(this, "Drop-down window not hidden:\n" + spy);
 			}
+
+			assertTrue("The drop-down matching window of the file chooser is " +
+				"showing when it is not expected to be.", wasHidden);
 		}
-		//spy.reset();
 	}
 
 	private void assertNothingChosen(CompletableFuture<List<File>> results) throws Exception {
@@ -2326,9 +2355,7 @@ public class GhidraFileChooserTest extends AbstractDockingTest {
 	}
 
 	private DropDownSelectionTextField<?> getFilenameTextField() {
-		DropDownSelectionTextField<?> textField =
-			(DropDownSelectionTextField<?>) getInstanceField("filenameTextField", chooser);
-		return textField;
+		return (DropDownSelectionTextField<?>) getInstanceField("filenameTextField", chooser);
 	}
 
 	private void show() throws Exception {
@@ -2441,8 +2468,7 @@ public class GhidraFileChooserTest extends AbstractDockingTest {
 	}
 
 	private File createTempFile() throws IOException {
-		File file = createTempFile(getName() + "test.dir");
-		return file;
+		return createTempFile(getName() + "test.dir");
 	}
 
 	// Note: this is meant to replace createTempDirectory(String name), as that method will
@@ -2457,8 +2483,7 @@ public class GhidraFileChooserTest extends AbstractDockingTest {
 	}
 
 	private File createTempDir() throws IOException {
-		File dir = myCreateTempDirectory(getName());
-		return dir;
+		return myCreateTempDirectory(getName());
 	}
 
 	private List<File> createTempFilesInDifferentDirectories() throws IOException {
@@ -2554,7 +2579,7 @@ public class GhidraFileChooserTest extends AbstractDockingTest {
 		newTempFile.deleteOnExit();
 		assertTrue("New file was not created after a rename: " + newTempFile, newTempFile.exists());
 
-		if (editorName.equals("TABLE_EDITOR_FIELD")) {
+		if ("TABLE_EDITOR_FIELD".equals(editorName)) {
 			DirectoryTable table =
 				(DirectoryTable) findComponentByName(chooser.getComponent(), "TABLE");
 			File selectedFile = getSelectedFile(table, DEFAULT_TIMEOUT_MILLIS);
@@ -2762,11 +2787,7 @@ public class GhidraFileChooserTest extends AbstractDockingTest {
 
 	private File[] listFiles(File dir, String namePattern) {
 		File[] newFolderFiles = homeDir.listFiles((FileFilter) fileToCheck -> {
-			if (!fileToCheck.isDirectory()) {
-				return false;
-			}
-
-			if (!fileToCheck.getName().startsWith(namePattern)) {
+			if (!fileToCheck.isDirectory() || !fileToCheck.getName().startsWith(namePattern)) {
 				return false;
 			}
 
@@ -2820,7 +2841,7 @@ public class GhidraFileChooserTest extends AbstractDockingTest {
 //==================================================================================================	
 
 	/** Simple container class for newly created dirs and files */
-	private class TestFiles {
+	private static class TestFiles {
 		private File parent;
 		private List<File> dirs = new ArrayList<>();
 		private List<File> files = new ArrayList<>();

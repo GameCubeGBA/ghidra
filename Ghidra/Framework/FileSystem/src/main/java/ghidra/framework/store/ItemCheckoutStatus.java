@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * <code>ItemCheckoutStatus</code> provides immutable status information for a 
@@ -219,13 +220,7 @@ public class ItemCheckoutStatus implements java.io.Serializable {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (int) (checkoutId ^ (checkoutId >>> 32));
-		result = prime * result + (int) (time ^ (time >>> 32));
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
-		result = prime * result + version;
-		return result;
+		return Objects.hash(checkoutId, time, user, version);
 	}
 
 	@Override

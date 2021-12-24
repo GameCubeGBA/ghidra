@@ -15,7 +15,11 @@
  */
 package ghidra.framework.project.tool;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -34,8 +38,13 @@ import ghidra.framework.model.ToolTemplate;
 import ghidra.framework.options.PreferenceState;
 import ghidra.framework.plugintool.Plugin;
 import ghidra.framework.plugintool.PluginTool;
-import ghidra.framework.plugintool.dialog.*;
-import ghidra.framework.plugintool.util.*;
+import ghidra.framework.plugintool.dialog.ExtensionDetails;
+import ghidra.framework.plugintool.dialog.ExtensionException;
+import ghidra.framework.plugintool.dialog.ExtensionUtils;
+import ghidra.framework.plugintool.dialog.PluginInstallerDialog;
+import ghidra.framework.plugintool.util.PluginClassManager;
+import ghidra.framework.plugintool.util.PluginDescription;
+import ghidra.framework.plugintool.util.PluginUtils;
 import ghidra.util.HelpLocation;
 import ghidra.util.Msg;
 
@@ -149,10 +158,8 @@ public class GhidraTool extends PluginTool {
 		}
 
 		// old style of exiting - prompt to save if we are dirty
-		if (hasConfigChanged()) {
-			if (promptUserToSave()) {
-				saveTool();
-			}
+		if (hasConfigChanged() && promptUserToSave()) {
+			saveTool();
 		}
 		return true;
 	}

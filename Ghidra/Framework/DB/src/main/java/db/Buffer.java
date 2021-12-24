@@ -27,14 +27,14 @@ public interface Buffer {
 	 * Get the buffer ID for this buffer.
 	 * @return int
 	 */
-	public int getId();
+	int getId();
 
 	/**
 	 * Get the length of the buffer in bytes.  The length reflects the number of
 	 * bytes which have been allocated to the buffer.
 	 * @return length of allocated buffer.
 	 */
-	public int length();
+	int length();
 
 	/**
 	 * Get the byte data located at the specified offset and store into the
@@ -46,7 +46,7 @@ public interface Buffer {
 	 * @throws IOException is thrown if an error occurs while accessing the
 	 * underlying storage.
 	 */
-	public void get(int offset, byte[] bytes) throws IOException;
+	void get(int offset, byte[] bytes) throws IOException;
 
 	/**
 	 * Get the byte data located at the specified offset and store into the data
@@ -60,7 +60,7 @@ public interface Buffer {
 	 * @throws IOException is thrown if an error occurs while accessing the
 	 * underlying storage.
 	 */
-	public void get(int offset, byte[] data, int dataOffset, int length) throws IOException;
+	void get(int offset, byte[] data, int dataOffset, int length) throws IOException;
 
 	/**
 	 * Get the byte data located at the specified offset.
@@ -73,7 +73,7 @@ public interface Buffer {
 	 * @throws IOException is thrown if an error occurs while accessing the
 	 * underlying storage.
 	 */
-	public byte[] get(int offset, int length) throws IOException;
+	byte[] get(int offset, int length) throws IOException;
 
 	/**
 	 * Get the 8-bit byte value located at the specified offset.
@@ -84,7 +84,7 @@ public interface Buffer {
 	 * @throws IOException is thrown if an error occurs while accessing the
 	 * underlying storage.
 	 */
-	public byte getByte(int offset) throws IOException;
+	byte getByte(int offset) throws IOException;
 
 	/**
 	 * Get the 32-bit integer value located at the specified offset.
@@ -96,7 +96,7 @@ public interface Buffer {
 	 * @throws IOException is thrown if an error occurs while accessing the
 	 * underlying storage.
 	 */
-	public int getInt(int offset) throws IOException;
+	int getInt(int offset) throws IOException;
 
 	/**
 	 * Get the 16-bit short value located at the specified offset.
@@ -108,7 +108,7 @@ public interface Buffer {
 	 * @throws IOException is thrown if an error occurs while accessing the
 	 * underlying storage.
 	 */
-	public short getShort(int offset) throws IOException;
+	short getShort(int offset) throws IOException;
 
 	/**
 	 * Get the 64-bit long value located at the specified offset.
@@ -120,7 +120,7 @@ public interface Buffer {
 	 * @throws IOException is thrown if an error occurs while accessing the
 	 * underlying storage.
 	 */
-	public long getLong(int offset) throws IOException;
+	long getLong(int offset) throws IOException;
 
 	/**
 	 * Put a specified number of bytes from the array provided into the buffer
@@ -137,7 +137,7 @@ public interface Buffer {
 	 * @throws IOException is thrown if an error occurs while accessing the
 	 * underlying storage.
 	 */
-	public int put(int offset, byte[] data, int dataOffset, int length) throws IOException;
+	int put(int offset, byte[] data, int dataOffset, int length) throws IOException;
 
 	/**
 	 * Put the bytes provided into the buffer at the specified offset. The
@@ -152,7 +152,7 @@ public interface Buffer {
 	 * @throws IOException is thrown if an error occurs while accessing the
 	 * underlying storage.
 	 */
-	public int put(int offset, byte[] bytes) throws IOException;
+	int put(int offset, byte[] bytes) throws IOException;
 
 	/**
 	 * Put the 8-bit byte value into the buffer at the specified offset. 
@@ -164,7 +164,7 @@ public interface Buffer {
 	 * @throws IOException is thrown if an error occurs while accessing the
 	 * underlying storage.
 	 */
-	public int putByte(int offset, byte b) throws IOException;
+	int putByte(int offset, byte b) throws IOException;
 
 	/**
 	 * Put the 32-bit integer value into the buffer at the specified offset. 
@@ -177,7 +177,7 @@ public interface Buffer {
 	 * @throws IOException is thrown if an error occurs while accessing the
 	 * underlying storage.
 	 */
-	public int putInt(int offset, int v) throws IOException;
+	int putInt(int offset, int v) throws IOException;
 
 	/**
 	 * Put the 16-bit short value into the buffer at the specified offset. 
@@ -190,7 +190,7 @@ public interface Buffer {
 	 * @throws IOException is thrown if an error occurs while accessing the
 	 * underlying storage.
 	 */
-	public int putShort(int offset, short v) throws IOException;
+	int putShort(int offset, short v) throws IOException;
 
 	/**
 	 * Put the 64-bit long value into the buffer at the specified offset. 
@@ -203,6 +203,6 @@ public interface Buffer {
 	 * @throws IOException is thrown if an error occurs while accessing the
 	 * underlying storage.
 	 */
-	public int putLong(int offset, long v) throws IOException;
+	int putLong(int offset, long v) throws IOException;
 
 }

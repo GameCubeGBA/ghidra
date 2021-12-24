@@ -15,20 +15,36 @@
  */
 package ghidra.framework;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FilenameFilter;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jdom.*;
+import org.jdom.Attribute;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.XMLOutputter;
 
 import ghidra.framework.model.ProjectManager;
 import ghidra.framework.model.ToolTemplate;
 import ghidra.framework.project.tool.GhidraToolTemplate;
-import ghidra.util.*;
+import ghidra.util.Msg;
+import ghidra.util.NamingUtilities;
+import ghidra.util.SystemUtilities;
 import ghidra.util.exception.AssertException;
 import ghidra.util.xml.GenericXMLOutputter;
 import ghidra.util.xml.XmlUtilities;
@@ -123,8 +139,7 @@ public class ToolUtils {
 			return allTools;
 		}
 
-		Set<ToolTemplate> set = new HashSet<>();
-		set.addAll(getDefaultApplicationTools());
+		Set<ToolTemplate> set = new HashSet<>(getDefaultApplicationTools());
 		set.addAll(getExtraApplicationTools());
 
 		allTools = Collections.unmodifiableSet(set);
@@ -265,11 +280,7 @@ public class ToolUtils {
 		}
 
 		File correctToolFile = getToolFile(toolTemplate.getName());
-		if (correctToolFile.equals(toolFile)) {
-			return; // nothing to update
-		}
-
-		if (removeLastExtension(correctToolFile.getName()).equals(
+		if (correctToolFile.equals(toolFile) || removeLastExtension(correctToolFile.getName()).equals(
 			NamingUtilities.mangle(toolTemplate.getName()))) {
 			return; // nothing to update
 		}

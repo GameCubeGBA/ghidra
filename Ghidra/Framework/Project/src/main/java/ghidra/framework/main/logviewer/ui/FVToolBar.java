@@ -17,7 +17,11 @@ package ghidra.framework.main.logviewer.ui;
 
 import java.awt.event.ActionEvent;
 
-import javax.swing.*;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JToolBar;
 
 import docking.EmptyBorderToggleButton;
 import docking.widgets.EmptyBorderButton;

@@ -15,13 +15,19 @@
  */
 package docking;
 
-import java.awt.*;
-import java.util.*;
+import java.awt.Frame;
+import java.awt.Toolkit;
+import java.awt.Window;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 import javax.swing.JFrame;
 
 import docking.action.DockingActionIf;
-import docking.actions.*;
+import docking.actions.DockingToolActions;
+import docking.actions.PopupActionProvider;
+import docking.actions.ToolActions;
 import ghidra.framework.options.ToolOptions;
 import ghidra.util.Swing;
 

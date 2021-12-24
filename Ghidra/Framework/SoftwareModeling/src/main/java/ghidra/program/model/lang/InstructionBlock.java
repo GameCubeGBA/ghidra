@@ -15,7 +15,10 @@
  */
 package ghidra.program.model.lang;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 import ghidra.program.model.address.Address;
 import ghidra.program.model.lang.InstructionError.InstructionErrorType;
@@ -35,8 +38,8 @@ public class InstructionBlock implements Iterable<Instruction> {
 	private Address lastInstructionAddress;
 	private Address fallthroughAddress;
 	private LinkedHashMap<Address, Instruction> instructionMap =
-		new LinkedHashMap<Address, Instruction>();
-	private List<Address> flowAddresses = new ArrayList<Address>();
+		new LinkedHashMap<>();
+	private List<Address> flowAddresses = new ArrayList<>();
 	private List<InstructionBlockFlow> blockFlows;
 	private InstructionError instructionError;
 	private int instructionsAddedCount;
@@ -105,10 +108,7 @@ public class InstructionBlock implements Iterable<Instruction> {
 				continue;
 			}
 			Address instrMax = instr.getMaxAddress();
-			if (instrMax.compareTo(min) < 0) {
-				continue;
-			}
-			if (intersectInstr != null && intersectInstr.getAddress().compareTo(instrMin) < 0) {
+			if ((instrMax.compareTo(min) < 0) || (intersectInstr != null && intersectInstr.getAddress().compareTo(instrMin) < 0)) {
 				continue;
 			}
 			intersectInstr = instr;
@@ -156,7 +156,7 @@ public class InstructionBlock implements Iterable<Instruction> {
 	 */
 	public void addBlockFlow(InstructionBlockFlow blockFlow) {
 		if (blockFlows == null) {
-			blockFlows = new ArrayList<InstructionBlockFlow>();
+			blockFlows = new ArrayList<>();
 		}
 		blockFlows.add(blockFlow);
 	}

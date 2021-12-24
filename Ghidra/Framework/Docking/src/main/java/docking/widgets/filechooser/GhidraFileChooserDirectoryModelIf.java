@@ -19,13 +19,13 @@ import java.io.File;
 
 public interface GhidraFileChooserDirectoryModelIf {
 
-	public void setSelectedFile(File file);
+	void setSelectedFile(File file);
 
-	public File getSelectedFile();
+	File getSelectedFile();
 
-	public int[] getSelectedRows();
+	int[] getSelectedRows();
 
-	public File getFile(int row);
+	File getFile(int row);
 
-	public void edit();
+	void edit();
 }

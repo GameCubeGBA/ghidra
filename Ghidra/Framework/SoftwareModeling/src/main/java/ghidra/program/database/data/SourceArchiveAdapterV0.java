@@ -16,9 +16,20 @@
 package ghidra.program.database.data;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
-import db.*;
+import db.BooleanField;
+import db.ByteField;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.LongField;
+import db.RecordIterator;
+import db.Schema;
+import db.StringField;
+import db.Table;
 import ghidra.program.model.data.DataTypeManager;
 import ghidra.program.model.data.SourceArchive;
 import ghidra.util.UniversalID;

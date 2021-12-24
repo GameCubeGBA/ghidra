@@ -15,7 +15,9 @@
  */
 package docking.widgets.fieldpanel.support;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import docking.widgets.fieldpanel.field.FieldElement;
 
@@ -24,7 +26,7 @@ import docking.widgets.fieldpanel.field.FieldElement;
  */
 public class FieldUtils {
 
-	private static final char[] WHITE_SPACE = new char[] { '\t', '\n', '\r', '\f' };
+	private static final char[] WHITE_SPACE = { '\t', '\n', '\r', '\f' };
 
 	private FieldUtils() { // utility class
 	}

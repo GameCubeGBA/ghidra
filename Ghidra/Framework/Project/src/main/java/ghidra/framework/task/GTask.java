@@ -31,7 +31,7 @@ public interface GTask {
 	 * Returns the name of this task.
 	 * @return  the name of this task.
 	 */
-	public String getName();
+	String getName();
 
 	/**
 	 * the run method where work can be performed on the given domain object.
@@ -39,7 +39,7 @@ public interface GTask {
 	 * @param monitor the taskMonitor to be used to cancel and report progress.
 	 * @throws CancelledException if the user cancelled the task.
 	 */
-	public void run(UndoableDomainObject domainObject, TaskMonitor monitor)
+	void run(UndoableDomainObject domainObject, TaskMonitor monitor)
 			throws CancelledException;
 
 }

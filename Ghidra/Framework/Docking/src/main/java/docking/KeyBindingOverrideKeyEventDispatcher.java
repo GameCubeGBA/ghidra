@@ -15,13 +15,21 @@
  */
 package docking;
 
-import static docking.KeyBindingPrecedence.*;
+import static docking.KeyBindingPrecedence.ActionMapLevel;
+import static docking.KeyBindingPrecedence.DefaultLevel;
 
-import java.awt.*;
+import java.awt.Component;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
+import java.awt.Window;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import javax.swing.*;
+import javax.swing.Action;
+import javax.swing.JComponent;
+import javax.swing.JRootPane;
+import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
 import javax.swing.text.JTextComponent;
 
 import docking.action.MultipleKeyAction;
@@ -109,16 +117,10 @@ public class KeyBindingOverrideKeyEventDispatcher implements KeyEventDispatcher 
 	 */
 	@Override
 	public boolean dispatchKeyEvent(KeyEvent event) {
-		if (blockKeyInput(event)) {
-			return true; // let NO events through!
-		}
+		
 
 		// always let Ghidra finish processing key events that it started
-		if (actionInProgress(event)) {
-			return true;
-		}
-
-		if (MenuKeyProcessor.processMenuKeyEvent(event)) {
+		if (blockKeyInput(event) || actionInProgress(event) || MenuKeyProcessor.processMenuKeyEvent(event)) {
 			return true;
 		}
 
@@ -192,10 +194,8 @@ public class KeyBindingOverrideKeyEventDispatcher implements KeyEventDispatcher 
 		}
 
 		Component glassPane = rootPane.getGlassPane();
-		if (glassPane instanceof GGlassPane) {
-			if (((GGlassPane) glassPane).isBusy()) {
-				return true; // out parent's glass pane is blocking..don't let events through
-			}
+		if ((glassPane instanceof GGlassPane) && ((GGlassPane) glassPane).isBusy()) {
+			return true; // out parent's glass pane is blocking..don't let events through
 		}
 //        else {
 //            Msg.debug( KeyBindingOverrideKeyEventDispatcher.this,
@@ -318,14 +318,10 @@ public class KeyBindingOverrideKeyEventDispatcher implements KeyEventDispatcher 
 
 	private boolean processKeyListenerPrecedence(DockingKeyBindingAction action,
 			KeyBindingPrecedence keyBindingPrecedence, KeyEvent e) {
-		if (processActionAtPrecedence(KeyBindingPrecedence.KeyListenerLevel, keyBindingPrecedence,
-			action, e)) {
-			return true;
-		}
-
 		// O.K., there is an action for the KeyStroke, but before we process it, we have to
 		// check the proper ordering of key events (see method JavaDoc)
-		if (processComponentKeyListeners(e)) {
+		if (processActionAtPrecedence(KeyBindingPrecedence.KeyListenerLevel, keyBindingPrecedence,
+			action, e) || processComponentKeyListeners(e)) {
 			return true;
 		}
 
@@ -418,11 +414,8 @@ public class KeyBindingOverrideKeyEventDispatcher implements KeyEventDispatcher 
 			return action;
 		}
 
-		// ...next see if there is a key binding for when the component is the child of the focus
-		// owner
-		action = KeyBindingUtils.getAction(jComponent, keyStroke,
+		return KeyBindingUtils.getAction(jComponent, keyStroke,
 			JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-		return action;
 	}
 
 	/**
@@ -438,9 +431,7 @@ public class KeyBindingOverrideKeyEventDispatcher implements KeyEventDispatcher 
 		}
 
 		KeyStroke keyStroke = KeyStroke.getKeyStrokeForEvent(event);
-		DockingKeyBindingAction bindingAction =
-			(DockingKeyBindingAction) activeManager.getActionForKeyStroke(keyStroke);
-		return bindingAction;
+		return (DockingKeyBindingAction) activeManager.getActionForKeyStroke(keyStroke);
 	}
 
 	private DockingWindowManager getActiveDockingWindowManager() {

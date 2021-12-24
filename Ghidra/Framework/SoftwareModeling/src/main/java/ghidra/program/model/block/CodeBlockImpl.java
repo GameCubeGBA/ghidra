@@ -15,14 +15,21 @@
  */
 package ghidra.program.model.block;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressIterator;
+import ghidra.program.model.address.AddressRange;
+import ghidra.program.model.address.AddressRangeIterator;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetView;
 import ghidra.program.model.symbol.FlowType;
 import ghidra.util.Msg;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * CodeBlockImpl is an implementation of a CodeBlock.
@@ -134,8 +141,8 @@ public class CodeBlockImpl implements CodeBlock {
 	 */
 	@Override
 	public String toString() {
-		List<Address> sList = new ArrayList<Address>();
-		List<Address> dList = new ArrayList<Address>();
+		List<Address> sList = new ArrayList<>();
+		List<Address> dList = new ArrayList<>();
 
 		try {
 			CodeBlockReferenceIterator ri = getSources(TaskMonitor.DUMMY);
@@ -337,10 +344,7 @@ public class CodeBlockImpl implements CodeBlock {
 
 		CodeBlockImpl block = (CodeBlockImpl) obj;
 
-		if (!model.getName().equals(block.model.getName())) {
-			return false;
-		}
-		if (block.starts.length != starts.length) {
+		if (!model.getName().equals(block.model.getName()) || (block.starts.length != starts.length)) {
 			return false;
 		}
 		for (int i = 0; i < starts.length; i++) {

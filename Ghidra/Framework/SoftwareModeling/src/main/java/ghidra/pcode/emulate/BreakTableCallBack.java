@@ -15,7 +15,10 @@
  */
 package ghidra.pcode.emulate;
 
-import generic.stl.*;
+import generic.stl.ComparableMapSTL;
+import generic.stl.IteratorSTL;
+import generic.stl.MapSTL;
+import generic.stl.Pair;
 import ghidra.app.plugin.processors.sleigh.SleighLanguage;
 import ghidra.pcode.error.LowlevelError;
 import ghidra.pcode.pcoderaw.PcodeOpRaw;

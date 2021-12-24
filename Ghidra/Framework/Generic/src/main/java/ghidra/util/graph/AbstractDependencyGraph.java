@@ -15,7 +15,10 @@
  */
 package ghidra.util.graph;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Class for managing the visiting (processing)  of a set of values where some values depend

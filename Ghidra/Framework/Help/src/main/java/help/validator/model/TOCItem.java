@@ -17,7 +17,11 @@ package help.validator.model;
 
 import java.io.PrintWriter;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 import help.validator.LinkDatabase;
 
@@ -52,7 +56,7 @@ public abstract class TOCItem {
 	protected String targetAttribute;
 	private final Path sourceFile;
 	protected TOCItem parentItem;
-	private Set<TOCItem> children = new HashSet<TOCItem>();
+	private Set<TOCItem> children = new HashSet<>();
 	private int lineNumber;
 
 	public TOCItem(TOCItem parentItem, Path sourceFile, String ID, int lineNumber) {
@@ -146,14 +150,7 @@ public abstract class TOCItem {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((IDAttribute == null) ? 0 : IDAttribute.hashCode());
-		result = prime * result + ((sortPreference == null) ? 0 : sortPreference.hashCode());
-		result = prime * result + ((sourceFile == null) ? 0 : sourceFile.hashCode());
-		result = prime * result + ((targetAttribute == null) ? 0 : targetAttribute.hashCode());
-		result = prime * result + ((textAttribute == null) ? 0 : textAttribute.hashCode());
-		return result;
+		return Objects.hash(IDAttribute, sortPreference, sourceFile, targetAttribute, textAttribute);
 	}
 
 	@Override
@@ -161,51 +158,23 @@ public abstract class TOCItem {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
 		}
 		TOCItem other = (TOCItem) obj;
-		if (IDAttribute == null) {
-			if (other.IDAttribute != null) {
-				return false;
-			}
-		}
-		else if (!IDAttribute.equals(other.IDAttribute)) {
+		if (!Objects.equals(IDAttribute, other.IDAttribute)) {
 			return false;
 		}
-		if (sortPreference == null) {
-			if (other.sortPreference != null) {
-				return false;
-			}
-		}
-		else if (!sortPreference.equals(other.sortPreference)) {
+		if (!Objects.equals(sortPreference, other.sortPreference)) {
 			return false;
 		}
-		if (sourceFile == null) {
-			if (other.sourceFile != null) {
-				return false;
-			}
-		}
-		else if (!sourceFile.equals(other.sourceFile)) {
+		if (!Objects.equals(sourceFile, other.sourceFile)) {
 			return false;
 		}
-		if (targetAttribute == null) {
-			if (other.targetAttribute != null) {
-				return false;
-			}
-		}
-		else if (!targetAttribute.equals(other.targetAttribute)) {
+		if (!Objects.equals(targetAttribute, other.targetAttribute)) {
 			return false;
 		}
-		if (textAttribute == null) {
-			if (other.textAttribute != null) {
-				return false;
-			}
-		}
-		else if (!textAttribute.equals(other.textAttribute)) {
+		if (!Objects.equals(textAttribute, other.textAttribute)) {
 			return false;
 		}
 		return true;
@@ -220,44 +189,21 @@ public abstract class TOCItem {
 		if (this == other) {
 			return true;
 		}
-		if (other == null) {
-			return false;
-		}
-		if (getClass() != other.getClass()) {
+		if ((other == null) || (getClass() != other.getClass())) {
 			return false;
 		}
 
-		if (IDAttribute == null) {
-			if (other.IDAttribute != null) {
-				return false;
-			}
-		}
-		else if (!IDAttribute.equals(other.IDAttribute)) {
+		if (!Objects.equals(IDAttribute, other.IDAttribute)) {
 			return false;
 		}
-		if (sortPreference == null) {
-			if (other.sortPreference != null) {
-				return false;
-			}
-		}
-		else if (!sortPreference.equals(other.sortPreference)) {
+		if (!Objects.equals(sortPreference, other.sortPreference)) {
 			return false;
 		}
 
-		if (targetAttribute == null) {
-			if (other.targetAttribute != null) {
-				return false;
-			}
-		}
-		else if (!targetAttribute.equals(other.targetAttribute)) {
+		if (!Objects.equals(targetAttribute, other.targetAttribute)) {
 			return false;
 		}
-		if (textAttribute == null) {
-			if (other.textAttribute != null) {
-				return false;
-			}
-		}
-		else if (!textAttribute.equals(other.textAttribute)) {
+		if (!Objects.equals(textAttribute, other.textAttribute)) {
 			return false;
 		}
 		return true;

@@ -17,7 +17,11 @@ package ghidra.program.database;
 
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 import db.DBRecord;
 import ghidra.program.model.address.KeyRange;
@@ -60,16 +64,13 @@ public class DBObjectCache<T extends DatabaseObject> {
 		KeyedSoftReference<T> ref = map.get(key);
 		if (ref != null) {
 			T obj = ref.get();
-			if (obj == null) {
-				map.remove(key);
-			}
-			else {
+			if ((obj != null)) {
 				if (obj.checkIsValid()) {
 					addToHardCache(obj);
 					return obj;
 				}
-				map.remove(key);
 			}
+			map.remove(key);
 		}
 		return null;
 	}
@@ -89,16 +90,13 @@ public class DBObjectCache<T extends DatabaseObject> {
 		KeyedSoftReference<T> ref = map.get(key);
 		if (ref != null) {
 			T obj = ref.get();
-			if (obj == null) {
-				map.remove(key);
-			}
-			else {
+			if ((obj != null)) {
 				if (obj.checkIsValid(objectRecord)) {
 					addToHardCache(obj);
 					return obj;
 				}
-				map.remove(key);
 			}
+			map.remove(key);
 		}
 		return null;
 	}

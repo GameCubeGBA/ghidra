@@ -16,16 +16,39 @@
 package help.validator;
 
 import java.io.IOException;
-import java.nio.file.*;
-import java.util.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeSet;
 
 import generic.jar.ResourceFile;
 import ghidra.framework.Application;
 import help.HelpBuildUtils;
-import help.validator.links.*;
+import help.validator.links.IncorrectIMGFilenameCaseInvalidLink;
+import help.validator.links.InvalidHREFLink;
+import help.validator.links.InvalidLink;
+import help.validator.links.InvalidRuntimeIMGFileInvalidLink;
+import help.validator.links.MissingAnchorInvalidLink;
+import help.validator.links.MissingFileInvalidLink;
+import help.validator.links.MissingTOCDefinitionInvalidLink;
+import help.validator.links.MissingTOCTargetIDInvalidLink;
+import help.validator.links.NonExistentIMGFileInvalidLink;
 import help.validator.location.HelpModuleCollection;
-import help.validator.model.*;
+import help.validator.model.AnchorDefinition;
+import help.validator.model.HREF;
+import help.validator.model.HelpFile;
+import help.validator.model.HelpTopic;
+import help.validator.model.IMG;
+import help.validator.model.TOCItem;
+import help.validator.model.TOCItemReference;
 
 public class JavaHelpValidator {
 	private static boolean debug;
@@ -128,7 +151,6 @@ public class JavaHelpValidator {
 			// 
 			if (img.isInvalid()) {
 				unresolvedLinks.add(new InvalidRuntimeIMGFileInvalidLink(img));
-				return;
 			}
 			return;
 		}
@@ -238,11 +260,9 @@ public class JavaHelpValidator {
 	}
 
 	private Path removeRedundantHelp(Path root, Path p) {
-		if (p.startsWith("help")) {
-			// this is the 'help system syntax'; may need to chop off 'help'
-			if (root.endsWith("help")) {
-				p = p.subpath(1, p.getNameCount());
-			}
+		// this is the 'help system syntax'; may need to chop off 'help'
+		if (p.startsWith("help") && root.endsWith("help")) {
+			p = p.subpath(1, p.getNameCount());
 		}
 		return p;
 	}

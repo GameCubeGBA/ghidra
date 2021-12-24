@@ -15,7 +15,10 @@
  */
 package ghidra.util.datastruct;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.Queue;
 
 import org.apache.commons.lang3.ArrayUtils;
 

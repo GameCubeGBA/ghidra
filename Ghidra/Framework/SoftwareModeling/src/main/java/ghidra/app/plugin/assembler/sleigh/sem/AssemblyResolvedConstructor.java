@@ -15,7 +15,13 @@
  */
 package ghidra.app.plugin.assembler.sleigh.sem;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -75,16 +81,7 @@ public class AssemblyResolvedConstructor extends AssemblyResolution {
 			return false;
 		}
 		AssemblyResolvedConstructor that = (AssemblyResolvedConstructor) obj;
-		if (!this.ins.equals(that.ins)) {
-			return false;
-		}
-		if (!this.ctx.equals(that.ctx)) {
-			return false;
-		}
-		if (!this.backfills.equals(that.backfills)) {
-			return false;
-		}
-		if (!this.forbids.equals(that.forbids)) {
+		if (!this.ins.equals(that.ins) || !this.ctx.equals(that.ctx) || !this.backfills.equals(that.backfills) || !this.forbids.equals(that.forbids)) {
 			return false;
 		}
 		return true;
@@ -339,9 +336,8 @@ public class AssemblyResolvedConstructor extends AssemblyResolution {
 	 * NOTE: An additional separator {@code ": "} is inserted
 	 */
 	public AssemblyResolvedConstructor copyAppendDescription(String append) {
-		AssemblyResolvedConstructor cp = new AssemblyResolvedConstructor(
+		return new AssemblyResolvedConstructor(
 			description + ": " + append, children, ins.copy(), ctx.copy(), backfills, forbids);
-		return cp;
 	}
 
 	/**
@@ -637,11 +633,8 @@ public class AssemblyResolvedConstructor extends AssemblyResolution {
 		Predicate<byte[]> removeForbidden = (byte[] val) -> {
 			for (AssemblyResolvedConstructor f : forbids) {
 				// If the forbidden length is larger than us, we can ignore it
-				if (f.getDefinedInstructionLength() > val.length) {
-					continue;
-				}
 				// Check if the context matches, if not, we can let it pass
-				if (null == f.getContext().combine(forCtx)) {
+				if ((f.getDefinedInstructionLength() > val.length) || (null == f.getContext().combine(forCtx))) {
 					continue;
 				}
 				// If the context matches, now check the instruction
@@ -655,12 +648,7 @@ public class AssemblyResolvedConstructor extends AssemblyResolution {
 			}
 			return true;
 		};
-		return new Iterable<byte[]>() {
-			@Override
-			public Iterator<byte[]> iterator() {
-				return IteratorUtils.filteredIterator(ins.possibleVals().iterator(),
-					removeForbidden);
-			}
-		};
+		return () -> IteratorUtils.filteredIterator(ins.possibleVals().iterator(),
+			removeForbidden);
 	}
 }

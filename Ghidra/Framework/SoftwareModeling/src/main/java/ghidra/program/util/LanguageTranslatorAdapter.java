@@ -15,13 +15,36 @@
  */
 package ghidra.program.util;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressSpace;
 import ghidra.program.model.data.DataOrganization;
 import ghidra.program.model.data.GenericCallingConvention;
-import ghidra.program.model.lang.*;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.lang.BasicCompilerSpecDescription;
+import ghidra.program.model.lang.CompilerSpec;
+import ghidra.program.model.lang.CompilerSpecDescription;
+import ghidra.program.model.lang.CompilerSpecID;
+import ghidra.program.model.lang.CompilerSpecNotFoundException;
+import ghidra.program.model.lang.DecompilerLanguage;
+import ghidra.program.model.lang.Language;
+import ghidra.program.model.lang.LanguageID;
+import ghidra.program.model.lang.LanguageNotFoundException;
+import ghidra.program.model.lang.LanguageService;
+import ghidra.program.model.lang.PcodeInjectLibrary;
+import ghidra.program.model.lang.PrototypeModel;
+import ghidra.program.model.lang.Register;
+import ghidra.program.model.lang.RegisterValue;
+import ghidra.program.model.listing.DefaultProgramContext;
+import ghidra.program.model.listing.IncompatibleLanguageException;
+import ghidra.program.model.listing.Parameter;
+import ghidra.program.model.listing.Program;
 import ghidra.util.Msg;
 import ghidra.util.datastruct.RangeMap;
 import ghidra.util.exception.CancelledException;
@@ -88,7 +111,7 @@ public abstract class LanguageTranslatorAdapter implements LanguageTranslator {
 	 * and that newLanguage has been established
 	 */
 	private void buildRegisterNameMap() {
-		newRegisterNameMap = new HashMap<String, Register>();
+		newRegisterNameMap = new HashMap<>();
 		for (Register r : newLanguage.getRegisters()) {
 			newRegisterNameMap.put(r.getName().toUpperCase(), r);
 			for (String alias : r.getAliases()) {
@@ -166,9 +189,9 @@ public abstract class LanguageTranslatorAdapter implements LanguageTranslator {
 		AddressFactory newFactory = newLanguage.getAddressFactory();
 
 		ArrayList<AddressSpace> oldSpaces =
-			new ArrayList<AddressSpace>(Arrays.asList(oldFactory.getAddressSpaces()));
+			new ArrayList<>(Arrays.asList(oldFactory.getAddressSpaces()));
 		ArrayList<AddressSpace> newSpaces =
-			new ArrayList<AddressSpace>(Arrays.asList(newFactory.getAddressSpaces()));
+			new ArrayList<>(Arrays.asList(newFactory.getAddressSpaces()));
 
 		AddressSpace oldDefaultSpace = oldFactory.getDefaultAddressSpace();
 		AddressSpace newDefaultSpace = newFactory.getDefaultAddressSpace();
@@ -178,7 +201,7 @@ public abstract class LanguageTranslatorAdapter implements LanguageTranslator {
 					"-bit vs. " + newDefaultSpace.getSize() + "-bit) than the new language");
 		}
 
-		spaceMap = new HashMap<String, AddressSpace>();
+		spaceMap = new HashMap<>();
 
 		spaceMap.put(oldDefaultSpace.getName(), newDefaultSpace);
 		spaceMap.put(oldFactory.getRegisterSpace().getName(), newFactory.getRegisterSpace());

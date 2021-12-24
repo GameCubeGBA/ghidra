@@ -17,10 +17,11 @@ package ghidra.program.model.address;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-import generic.test.AbstractGenericTest;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import generic.test.AbstractGenericTest;
 
 public class AddressSetMappingTest extends AbstractGenericTest {
 	private AddressSpace space = new GenericAddressSpace("xx", 32, AddressSpace.TYPE_RAM, 0);

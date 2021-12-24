@@ -21,6 +21,6 @@ package ghidra.program.model.data;
  */
 public interface FileBasedDataTypeManager extends DataTypeManager {
 
-	public String getPath();
+	String getPath();
 
 }

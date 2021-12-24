@@ -15,24 +15,49 @@
  */
 package ghidra.graph.viewer.edge;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.ConcurrentModificationException;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
-import java.util.concurrent.*;
+import java.util.Objects;
+import java.util.Set;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import docking.DockingWindowManager;
 import generic.concurrent.GThreadPool;
-import ghidra.graph.*;
+import ghidra.graph.GDirectedGraph;
+import ghidra.graph.GraphAlgorithms;
+import ghidra.graph.VisualGraph;
 import ghidra.graph.algo.ChkDominanceAlgorithm;
 import ghidra.graph.algo.ChkPostDominanceAlgorithm;
 import ghidra.graph.graphs.GroupingVisualGraph;
-import ghidra.graph.viewer.*;
+import ghidra.graph.viewer.GraphViewerUtils;
+import ghidra.graph.viewer.PathHighlightMode;
+import ghidra.graph.viewer.VisualEdge;
+import ghidra.graph.viewer.VisualVertex;
 import ghidra.util.Msg;
 import ghidra.util.SystemUtilities;
 import ghidra.util.datastruct.CallbackAccumulator;
 import ghidra.util.exception.CancelledException;
-import ghidra.util.task.*;
+import ghidra.util.task.MonitoredRunnable;
+import ghidra.util.task.RunManager;
+import ghidra.util.task.SwingRunnable;
+import ghidra.util.task.SwingUpdateManager;
+import ghidra.util.task.TaskMonitor;
+import ghidra.util.task.TaskMonitorAdapter;
+import ghidra.util.task.TimeoutTaskMonitor;
 import utility.function.Callback;
 
 /**
@@ -295,11 +320,7 @@ public class VisualGraphPathHighlighter<V extends VisualVertex, E extends Visual
 
 		clearHoveredEdgesSwing();
 
-		if (workPauser.isPaused()) {
-			return; // hovers are transient, no need to remember the request
-		}
-
-		if (hoveredVertex == null) {
+		if (workPauser.isPaused() || (hoveredVertex == null)) {
 			return;
 		}
 
@@ -495,8 +516,7 @@ public class VisualGraphPathHighlighter<V extends VisualVertex, E extends Visual
 			return v;
 		}
 
-		V matchingVertex = ((GroupingVisualGraph<V, E>) graph).findMatchingVertex(v);
-		return matchingVertex;
+		return ((GroupingVisualGraph<V, E>) graph).findMatchingVertex(v);
 	}
 
 	private void clearCacheSwing() {
@@ -744,8 +764,7 @@ public class VisualGraphPathHighlighter<V extends VisualVertex, E extends Visual
 	private <T> T getAsync(CompletableFuture<T> cf) {
 
 		try {
-			T t = cf.get(); // blocking
-			return t;
+			return cf.get();
 		}
 		catch (InterruptedException e) {
 			Msg.trace(VisualGraphPathHighlighter.this,
@@ -982,7 +1001,7 @@ public class VisualGraphPathHighlighter<V extends VisualVertex, E extends Visual
 	 * A class meant to run in the hover RunManager that is slow or open-ended.  Work will
 	 * be performed as long as possible, updating results along the way.  
 	 */
-	private class SlowSetHoveredEdgesRunnable implements MonitoredRunnable {
+	private static class SlowSetHoveredEdgesRunnable implements MonitoredRunnable {
 
 		private Callback callback;
 

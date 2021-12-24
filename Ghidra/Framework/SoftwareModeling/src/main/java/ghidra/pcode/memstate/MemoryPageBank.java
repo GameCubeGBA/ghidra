@@ -15,7 +15,10 @@
  */
 package ghidra.pcode.memstate;
 
-import generic.stl.*;
+import generic.stl.ComparableMapSTL;
+import generic.stl.IteratorSTL;
+import generic.stl.MapSTL;
+import generic.stl.Pair;
 import ghidra.program.model.address.AddressSpace;
 
 public class MemoryPageBank extends MemoryBank {

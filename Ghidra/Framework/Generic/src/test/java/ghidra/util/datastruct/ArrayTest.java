@@ -90,12 +90,12 @@ public class ArrayTest extends AbstractGenericTest {
         la.put(2,2);
         la.put(8,8);
         la.put(17,17);
-        assertEquals(2l,la.get(2));
-        assertEquals(8l,la.get(8));
-        assertEquals(17l,la.get(17));
-        assertEquals(0l,la.get(0));
-        assertEquals(0l,la.get(0));
-        assertEquals(0l,la.get(1000));
+        assertEquals(2L,la.get(2));
+        assertEquals(8L,la.get(8));
+        assertEquals(17L,la.get(17));
+        assertEquals(0L,la.get(0));
+        assertEquals(0L,la.get(0));
+        assertEquals(0L,la.get(1000));
     }
 @Test
     public void testBooleanArray() {

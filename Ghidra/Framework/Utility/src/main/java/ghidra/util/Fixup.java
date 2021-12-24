@@ -26,19 +26,19 @@ public interface Fixup {
 	 * attempt to do to address some issue.
 	 * @return a description for this Fixup
 	 */
-	public String getDescription();
+	String getDescription();
 
 	/**
 	 * Return true if this Fixup object can automatically perform some action to address the issue. false 
 	 * if the fixup() method does nothing.
 	 * @return
 	 */
-	public boolean canFixup();
+	boolean canFixup();
 
 	/**
 	 * Attempts to perform some action or task to "fix" the related issue.
 	 * @param provider a service provider that can provide various services.
 	 * @return true if the fixup performed its intended action.
 	 */
-	public boolean fixup(ServiceProvider provider);
+	boolean fixup(ServiceProvider provider);
 }

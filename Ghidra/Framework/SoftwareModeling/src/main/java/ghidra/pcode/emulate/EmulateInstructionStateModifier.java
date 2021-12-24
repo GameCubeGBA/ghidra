@@ -15,6 +15,9 @@
  */
 package ghidra.pcode.emulate;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import ghidra.pcode.emulate.callother.OpBehaviorOther;
 import ghidra.pcode.error.LowlevelError;
 import ghidra.program.model.address.Address;
@@ -22,9 +25,6 @@ import ghidra.program.model.lang.Language;
 import ghidra.program.model.lang.RegisterValue;
 import ghidra.program.model.pcode.PcodeOp;
 import ghidra.program.model.pcode.Varnode;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * <code>EmulateInstructionStateModifier</code> defines a language specific 
@@ -52,7 +52,7 @@ public abstract class EmulateInstructionStateModifier {
 	 */
 	protected final void registerPcodeOpBehavior(String opName, OpBehaviorOther pcodeOpBehavior) {
 		if (pcodeOpMap == null) {
-			pcodeOpMap = new HashMap<Integer, OpBehaviorOther>();
+			pcodeOpMap = new HashMap<>();
 		}
 		int numUserOps = language.getNumberOfUserDefinedOpNames();
 		for (int i = 0; i < numUserOps; i++) {

@@ -16,10 +16,10 @@
  */
 package ghidra.pcode.opbehavior;
 
+import java.math.BigInteger;
+
 import ghidra.pcode.utils.Utils;
 import ghidra.program.model.pcode.PcodeOp;
-
-import java.math.BigInteger;
 
 public class OpBehaviorIntSext extends UnaryOpBehavior {
 
@@ -29,8 +29,7 @@ public class OpBehaviorIntSext extends UnaryOpBehavior {
 
 	@Override
 	public long evaluateUnary(int sizeout, int sizein, long in1) {
-		long res = Utils.sign_extend(in1, sizein, sizeout);
-		return res;
+		return Utils.sign_extend(in1, sizein, sizeout);
 	}
 
 	@Override

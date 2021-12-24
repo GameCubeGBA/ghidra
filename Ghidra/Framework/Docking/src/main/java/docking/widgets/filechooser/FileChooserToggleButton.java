@@ -20,11 +20,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 
-import javax.swing.*;
+import javax.swing.Action;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JToggleButton;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 public class FileChooserToggleButton extends JToggleButton {
 	private static final long serialVersionUID = 1L;
@@ -63,15 +65,13 @@ public class FileChooserToggleButton extends JToggleButton {
 		addMouseListener(new ButtonMouseListener());
 		
 		// works in conjunction with the mouse listener to properly set the border
-		addChangeListener( new ChangeListener() {
-            public void stateChanged( ChangeEvent e ) {
-                if ( isSelected() ) {
-                    setBorder( LOWERED_BORDER );
-                }
-                else {                    
-                    setBorder( NO_BORDER );
-                }
-            }		    
+		addChangeListener( e -> {
+		    if ( isSelected() ) {
+		        setBorder( LOWERED_BORDER );
+		    }
+		    else {                    
+		        setBorder( NO_BORDER );
+		    }
 		} );
 		
 		setFocusable( false ); // this prevents the focus box from being drawn over the button

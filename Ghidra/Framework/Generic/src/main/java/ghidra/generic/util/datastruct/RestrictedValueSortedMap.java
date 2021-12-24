@@ -16,7 +16,13 @@
 package ghidra.generic.util.datastruct;
 
 import java.lang.reflect.Array;
-import java.util.*;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
+import java.util.NoSuchElementException;
 
 import ghidra.util.ReversedListIterator;
 
@@ -1068,10 +1074,7 @@ public class RestrictedValueSortedMap<K, V> implements ValueSortedMap<K, V> {
 			return -1;
 		}
 		int lowest = getLowestIndex();
-		if (index < lowest) {
-			return -1;
-		}
-		if (index >= getHighestIndexPlusOne()) {
+		if ((index < lowest) || (index >= getHighestIndexPlusOne())) {
 			return -1;
 		}
 		return index - lowest;

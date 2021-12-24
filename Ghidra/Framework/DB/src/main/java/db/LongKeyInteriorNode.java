@@ -136,11 +136,7 @@ class LongKeyInteriorNode extends LongKeyNode implements InteriorNode {
 					node = nodeMgr.getLongKeyNode(getBufferId(i));
 					node.parent = this;
 				}
-				catch (IOException e) {
-					logConsistencyError(tableName, "failed to fetch child node: " + e.getMessage(),
-						e);
-				}
-				catch (RuntimeException e) {
+				catch (IOException | RuntimeException e) {
 					logConsistencyError(tableName, "failed to fetch child node: " + e.getMessage(),
 						e);
 				}

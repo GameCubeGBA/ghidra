@@ -20,7 +20,10 @@ import java.awt.Dimension;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.swing.*;
+import javax.swing.Icon;
+import javax.swing.JPanel;
+import javax.swing.JToolBar;
+import javax.swing.SwingConstants;
 
 import docking.DockingUtils;
 import ghidra.framework.model.ToolTemplate;
@@ -58,7 +61,7 @@ class RunningToolsPanel extends JPanel {
 		add(runningToolbar, BorderLayout.CENTER);
 
 		runningTools =
-			new HashMap<PluginTool, ToolButton>(WorkspacePanel.TYPICAL_NUM_RUNNING_TOOLS);
+			new HashMap<>(WorkspacePanel.TYPICAL_NUM_RUNNING_TOOLS);
 
 		// populate the toolbar if the workspace has running tools
 		if (ws != null) {

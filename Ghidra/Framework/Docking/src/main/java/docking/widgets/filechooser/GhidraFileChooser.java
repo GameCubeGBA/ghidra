@@ -15,23 +15,65 @@
  */
 package docking.widgets.filechooser;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
+import java.awt.Rectangle;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.io.File;
 import java.io.FileFilter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import javax.swing.*;
+import javax.swing.AbstractButton;
+import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.UIManager;
 import javax.swing.event.CellEditorListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.filechooser.FileSystemView;
 
-import docking.*;
-import docking.widgets.*;
+import docking.DialogComponentProvider;
+import docking.DockingUtils;
+import docking.DockingWindowManager;
+import docking.EmptyBorderToggleButton;
+import docking.widgets.DropDownSelectionChoiceListener;
+import docking.widgets.DropDownSelectionTextField;
+import docking.widgets.EmptyBorderButton;
 import docking.widgets.combobox.GComboBox;
 import docking.widgets.label.GDLabel;
 import docking.widgets.label.GLabel;
@@ -39,14 +81,20 @@ import docking.widgets.list.GListCellRenderer;
 import ghidra.framework.OperatingSystem;
 import ghidra.framework.Platform;
 import ghidra.framework.preferences.Preferences;
-import ghidra.util.*;
+import ghidra.util.Msg;
+import ghidra.util.Swing;
+import ghidra.util.SystemUtilities;
 import ghidra.util.exception.AssertException;
-import ghidra.util.filechooser.*;
+import ghidra.util.filechooser.GhidraFileChooserListener;
+import ghidra.util.filechooser.GhidraFileChooserModel;
+import ghidra.util.filechooser.GhidraFileFilter;
 import ghidra.util.layout.PairLayout;
 import ghidra.util.task.TaskMonitor;
 import ghidra.util.worker.Job;
 import ghidra.util.worker.Worker;
-import resources.*;
+import resources.Icons;
+import resources.MultiIcon;
+import resources.ResourceManager;
 import resources.icons.TranslateIcon;
 import util.CollectionUtils;
 import util.HistoryList;
@@ -897,8 +945,7 @@ public class GhidraFileChooser extends DialogComponentProvider
 			return Collections.emptyList();
 		}
 
-		List<File> filteredList = filterFilesForSelectionMode(validatedFiles);
-		return filteredList;
+		return filterFilesForSelectionMode(validatedFiles);
 	}
 
 	private String getSelectionRequiredMessage() {
@@ -1116,7 +1163,7 @@ public class GhidraFileChooser extends DialogComponentProvider
 		String titleKey = getTitle();
 		String viewStyle = Preferences.getProperty(VIEW_STYLE_PREFIX + titleKey);
 		if (viewStyle != null) {
-			setShowDetails(viewStyle.equals(DETAILS_VIEW_STYLE));
+			setShowDetails(DETAILS_VIEW_STYLE.equals(viewStyle));
 		}
 	}
 
@@ -1248,14 +1295,11 @@ public class GhidraFileChooser extends DialogComponentProvider
 			if (fileSelectionMode.supportsFiles()) {
 				setFilenameFieldText(newText, selectText);
 			}
-		}
-		else {
-			if (fileSelectionMode.supportsDirectories()) {
-				File parentFile = file.getParentFile();
-				if (parentFile == null || parentFile.equals(currentDirectory())) {
-					// must be a root dir
-					setFilenameFieldText(newText, selectText);
-				}
+		} else if (fileSelectionMode.supportsDirectories()) {
+			File parentFile = file.getParentFile();
+			if (parentFile == null || parentFile.equals(currentDirectory())) {
+				// must be a root dir
+				setFilenameFieldText(newText, selectText);
 			}
 		}
 	}
@@ -1485,6 +1529,7 @@ public class GhidraFileChooser extends DialogComponentProvider
 		return scrollPane;
 	}
 
+	@Override
 	public void dispose() {
 		actionManager.dispose();
 		close();
@@ -1925,7 +1970,7 @@ public class GhidraFileChooser extends DialogComponentProvider
 // Inner Classes
 //==================================================================================================
 
-	private abstract class FileChooserJob extends Job {
+	private abstract static class FileChooserJob extends Job {
 
 		@Override
 		public void run(TaskMonitor monitor) {
@@ -2141,7 +2186,7 @@ public class GhidraFileChooser extends DialogComponentProvider
 	 * 
 	 * <P>The methods on the class are synchronized to ensure thread visibility.
 	 */
-	private class FileList {
+	private static class FileList {
 
 		private List<File> files = new ArrayList<>();
 
@@ -2185,7 +2230,7 @@ public class GhidraFileChooser extends DialogComponentProvider
 	/**
 	 * Container class to manage history entries for a directory and any selected file
 	 */
-	private class HistoryEntry {
+	private static class HistoryEntry {
 		private File parentDir;
 		private File selectedFile;
 
@@ -2199,12 +2244,7 @@ public class GhidraFileChooser extends DialogComponentProvider
 		}
 
 		void setSelectedFile(File dir, File selectedFile) {
-			if (!parentDir.equals(dir)) {
-				// not my dir; don't save the selection
-				return;
-			}
-
-			if (selectedFile == null) {
+			if (!parentDir.equals(dir) || (selectedFile == null)) {
 				// nothing to save
 				return;
 			}

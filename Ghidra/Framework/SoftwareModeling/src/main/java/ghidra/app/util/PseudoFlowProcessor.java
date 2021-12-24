@@ -29,7 +29,7 @@ public interface PseudoFlowProcessor {
 	 * @param instr instruction to check
 	 * @return false when the processing should stop
 	 */
-	public boolean process(PseudoInstruction instr);
+	boolean process(PseudoInstruction instr);
 	
 	/**
 	 * Return true if the flows should be followed from this instruction
@@ -37,5 +37,5 @@ public interface PseudoFlowProcessor {
 	 * @param instr instruction to test
 	 * @return false if flows should not be followed
 	 */
-	public boolean followFlows(PseudoInstruction instr);
+	boolean followFlows(PseudoInstruction instr);
 }

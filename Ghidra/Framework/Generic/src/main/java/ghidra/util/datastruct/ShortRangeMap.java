@@ -16,11 +16,11 @@
  */
 package ghidra.util.datastruct;
 
+import java.io.Serializable;
+
 import ghidra.util.LongIterator;
 import ghidra.util.exception.NoValueException;
 import ghidra.util.prop.ShortPropertySet;
-
-import java.io.Serializable;
 
 /**
  * Stores ranges of short values throughout "long" space.
@@ -37,7 +37,7 @@ import java.io.Serializable;
 public class ShortRangeMap implements Serializable {
     private final static long serialVersionUID = 1;
     /** The maximum end of range index allowed. */
-	public static final long LARGEST = 0xffffffffffffffffl;
+	public static final long LARGEST = 0xffffffffffffffffL;
 	
 	ShortPropertySet map;
 
@@ -104,9 +104,7 @@ public class ShortRangeMap implements Serializable {
 				index = map.getPreviousPropertyIndex(index);	
 				return map.getShort(index);
 			}
-			catch(NoSuchIndexException ex) {
-			}
-			catch(NoValueException ex) {
+			catch(NoSuchIndexException | NoValueException ex) {
 			}
 		}		
 		return 0;

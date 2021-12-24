@@ -22,19 +22,38 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.TreeMap;
 
-import db.*;
+import db.ByteField;
+import db.DBConstants;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.IntField;
+import db.RecordIterator;
+import db.Schema;
+import db.StringField;
 import ghidra.program.database.ManagerDB;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.database.bookmark.OldBookmark;
 import ghidra.program.database.map.AddressMap;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.BookmarkManager;
-import ghidra.program.model.util.*;
+import ghidra.program.model.util.IntPropertyMap;
+import ghidra.program.model.util.LongPropertyMap;
+import ghidra.program.model.util.ObjectPropertyMap;
+import ghidra.program.model.util.PropertyMap;
+import ghidra.program.model.util.PropertyMapManager;
+import ghidra.program.model.util.StringPropertyMap;
+import ghidra.program.model.util.TypeMismatchException;
+import ghidra.program.model.util.VoidPropertyMap;
 import ghidra.program.util.ChangeManager;
-import ghidra.util.*;
-import ghidra.util.exception.*;
+import ghidra.util.Lock;
+import ghidra.util.Msg;
+import ghidra.util.Saveable;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.DuplicateNameException;
+import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * Manages generic address keyed properties.
@@ -97,7 +116,7 @@ public class DBPropertyMapManager implements PropertyMapManager, ManagerDB {
 			dbHandle.createTable(PROPERTIES_TABLE_NAME, PROPERTIES_SCHEMA);
 		}
 		findAdapters(handle);
-		propertyMapCache = new TreeMap<String, PropertyMap>();
+		propertyMapCache = new TreeMap<>();
 		loadPropertyMaps(openMode, monitor);
 	}
 

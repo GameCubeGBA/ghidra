@@ -20,5 +20,5 @@ import java.util.List;
 
 public interface FilterTransformer<T> {
 
-	public List<String> transform(T t);
+	List<String> transform(T t);
 }

@@ -36,7 +36,7 @@ public interface VertexShapeProvider {
 	 * 
 	 * @return the shape
 	 */
-	public Shape getCompactShape();
+	Shape getCompactShape();
 
 	/**
 	 * Returns the full (the actual) shape of a vertex.  This can be used to determine if a 
@@ -44,7 +44,7 @@ public interface VertexShapeProvider {
 	 * 
 	 * @return the shape
 	 */
-	default public Shape getFullShape() {
+	default Shape getFullShape() {
 		return getCompactShape();
 	}
 }

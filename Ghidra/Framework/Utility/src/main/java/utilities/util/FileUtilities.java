@@ -16,20 +16,41 @@
 package utilities.util;
 
 import java.awt.Desktop;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileFilter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.URI;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
 import java.nio.file.FileSystem;
+import java.nio.file.FileSystemNotFoundException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 import generic.jar.ResourceFile;
-import ghidra.util.*;
+import ghidra.util.MonitoredOutputStream;
+import ghidra.util.Msg;
+import ghidra.util.SystemUtilities;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
@@ -55,15 +76,7 @@ public final class FileUtilities {
 	 * @see #directoryIsEmpty(File)
 	 */
 	public static boolean directoryExistsAndIsNotEmpty(File directory) {
-		if (directory == null) {
-			return false;
-		}
-
-		if (!directory.exists()) {
-			return false;
-		}
-
-		if (!directory.isDirectory()) {
+		if ((directory == null) || !directory.exists() || !directory.isDirectory()) {
 			return false;
 		}
 
@@ -77,11 +90,7 @@ public final class FileUtilities {
 	 * @return true if the given file is a directory and has not files.
 	 */
 	public static boolean directoryIsEmpty(File directory) {
-		if (directory == null) {
-			return true;
-		}
-
-		if (!directory.exists()) {
+		if ((directory == null) || !directory.exists()) {
 			return true;
 		}
 
@@ -100,7 +109,7 @@ public final class FileUtilities {
 	 * @return the bytes
 	 * @throws IOException if the file could not be accessed
 	 */
-	public final static byte[] getBytesFromFile(File sourceFile) throws IOException {
+	public static byte[] getBytesFromFile(File sourceFile) throws IOException {
 		return getBytesFromFile(new ResourceFile(sourceFile));
 	}
 
@@ -114,7 +123,7 @@ public final class FileUtilities {
 	 * @throws IOException thrown if there was a problem accessing the file or if there weren't
 	 * at least {@code length} bytes read.
 	 */
-	public final static byte[] getBytesFromFile(File sourceFile, long offset, long length)
+	public static byte[] getBytesFromFile(File sourceFile, long offset, long length)
 			throws IOException {
 		return getBytesFromFile(new ResourceFile(sourceFile), offset, length);
 	}
@@ -125,7 +134,7 @@ public final class FileUtilities {
 	 * @return the bytes
 	 * @throws IOException if the file could not be accessed
 	 */
-	public final static byte[] getBytesFromFile(ResourceFile sourceFile) throws IOException {
+	public static byte[] getBytesFromFile(ResourceFile sourceFile) throws IOException {
 		long fileLen = sourceFile.length();
 		return getBytesFromFile(sourceFile, 0, fileLen);
 	}
@@ -154,7 +163,7 @@ public final class FileUtilities {
 	 * @throws IOException thrown if there was a problem accessing the file or if there weren't
 	 * at least {@code length} bytes read.
 	 */
-	public final static byte[] getBytesFromFile(ResourceFile sourceFile, long offset, long length)
+	public static byte[] getBytesFromFile(ResourceFile sourceFile, long offset, long length)
 			throws IOException {
 		if (length > MAX_FILE_SIZE) {
 			throw new IOException("File is too large: " + sourceFile.getName() +
@@ -236,7 +245,7 @@ public final class FileUtilities {
 	 * @return number of bytes copied from source file to destination file
 	 * @throws IOException thrown if there was a problem accessing the files
 	 */
-	public final static long copyFile(File fromFile, File toFile, boolean append,
+	public static long copyFile(File fromFile, File toFile, boolean append,
 			TaskMonitor monitor) throws IOException {
 
 		try (FileInputStream fin = new FileInputStream(fromFile)) {
@@ -258,7 +267,7 @@ public final class FileUtilities {
 	 * 				  100% when the copy is complete.
 	 * @throws IOException thrown if there was a problem accessing the files
 	 */
-	public final static void copyFile(ResourceFile fromFile, File toFile, boolean append,
+	public static void copyFile(ResourceFile fromFile, File toFile, boolean append,
 			TaskMonitor monitor) throws IOException {
 
 		try (InputStream fin = fromFile.getInputStream()) {
@@ -278,7 +287,7 @@ public final class FileUtilities {
 	 * 				  100% when the copy is complete.
 	 * @throws IOException thrown if there was a problem accessing the files
 	 */
-	public final static void copyFile(ResourceFile fromFile, ResourceFile toFile,
+	public static void copyFile(ResourceFile fromFile, ResourceFile toFile,
 			TaskMonitor monitor) throws IOException {
 
 		try (InputStream fin = fromFile.getInputStream();
@@ -404,7 +413,7 @@ public final class FileUtilities {
 	 * @return true if delete was successful. If false is returned, a partial
 	 *         delete may have occurred.
 	 */
-	public final static boolean deleteDir(File dir) {
+	public static boolean deleteDir(File dir) {
 		try {
 			return deleteDir(dir, TaskMonitor.DUMMY);
 		}
@@ -423,7 +432,7 @@ public final class FileUtilities {
 	 *         delete may have occurred.
 	 * @throws CancelledException if the operation is cancelled
 	 */
-	public final static boolean deleteDir(File dir, TaskMonitor monitor) throws CancelledException {
+	public static boolean deleteDir(File dir, TaskMonitor monitor) throws CancelledException {
 		File[] files = dir.listFiles();
 		if (files == null) {
 			return dir.delete();
@@ -458,7 +467,7 @@ public final class FileUtilities {
 	 * the progress value of the given monitor, only the status text.  This allows this recursive
 	 * method to send status updates while the caller of this method controls the progress.
 	 */
-	private final static boolean doDeleteDir(File dir, TaskMonitor monitor)
+	private static boolean doDeleteDir(File dir, TaskMonitor monitor)
 			throws CancelledException {
 		File[] files = dir.listFiles();
 
@@ -496,7 +505,7 @@ public final class FileUtilities {
 	 * @throws IOException if there is an issue copying the files
 	 * @throws CancelledException if the operation is cancelled
 	 */
-	public final static int copyDir(File originalDir, File copyDir, TaskMonitor monitor)
+	public static int copyDir(File originalDir, File copyDir, TaskMonitor monitor)
 			throws IOException, CancelledException {
 		return copyDir(originalDir, copyDir, ACCEPT_ALL_FILE_FILTER, monitor);
 	}
@@ -514,7 +523,7 @@ public final class FileUtilities {
 	 * @throws IOException if there was a problem accessing the files
 	 * @throws CancelledException if the copy is cancelled
 	 */
-	public final static int copyDir(File originalDir, File copyDir, FileFilter filter,
+	public static int copyDir(File originalDir, File copyDir, FileFilter filter,
 			TaskMonitor monitor) throws IOException, CancelledException {
 
 		if (monitor == null) {
@@ -610,7 +619,7 @@ public final class FileUtilities {
 	 * @return number of bytes copied from source file to destination file
 	 * @throws IOException thrown if there was a problem accessing the files
 	 */
-	public final static long copyStreamToFile(InputStream in, File toFile, boolean append,
+	public static long copyStreamToFile(InputStream in, File toFile, boolean append,
 			TaskMonitor monitor) throws IOException {
 
 		try (OutputStream out = new FileOutputStream(toFile, append)) {
@@ -626,7 +635,7 @@ public final class FileUtilities {
 	 * 100% when the copy is complete.
 	  * @throws IOException thrown if there was a problem accessing the files
 	 */
-	public final static void copyFileToStream(File fromFile, OutputStream out, TaskMonitor monitor)
+	public static void copyFileToStream(File fromFile, OutputStream out, TaskMonitor monitor)
 			throws IOException {
 
 		try (InputStream fin = new FileInputStream(fromFile)) {
@@ -898,8 +907,7 @@ public final class FileUtilities {
 			return null;
 		}
 
-		String childPath = otherPath.substring(parentPath.length());
-		return childPath;
+		return otherPath.substring(parentPath.length());
 	}
 
 	/**
@@ -1001,8 +1009,7 @@ public final class FileUtilities {
 		}
 
 		String absolutePath = file.getAbsolutePath();
-		FileResolutionResult result = pathIsCaseDependent(canonicalPath, absolutePath);
-		return result;
+		return pathIsCaseDependent(canonicalPath, absolutePath);
 	}
 
 	/*testing*/ static FileResolutionResult pathIsCaseDependent(String canonicalPath,
@@ -1026,12 +1033,8 @@ public final class FileUtilities {
 				}
 
 				cIndex--;
-				aIndex--;
 			}
-			else {
-				// move past relative path element (like '..')
-				aIndex--;
-			}
+			aIndex--;
 		}
 
 		return FileResolutionResult.ok();
@@ -1132,9 +1135,7 @@ public final class FileUtilities {
 	public static List<String> pathToParts(String path) {
 		String[] parts = path.split("\\\\|/");
 		List<String> list = new ArrayList<>(parts.length);
-		for (String part : parts) {
-			list.add(part);
-		}
+		Collections.addAll(list, parts);
 		return list;
 	}
 

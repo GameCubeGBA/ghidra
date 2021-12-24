@@ -131,10 +131,7 @@ public class ConstantTemplate implements Serializable {
 			return false;
 		}
 		ConstantTemplate ct = (ConstantTemplate) o;
-		if (ct.hashCode() != hashCode) {
-			return false;
-		}
-		if (ct.type() != type) {
+		if ((ct.hashCode() != hashCode) || (ct.type() != type)) {
 			return false;
 		}
 		if (type == HANDLE) {

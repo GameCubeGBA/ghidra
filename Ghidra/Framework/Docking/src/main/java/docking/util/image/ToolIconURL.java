@@ -15,9 +15,12 @@
  */
 package docking.util.image;
 
-import java.awt.image.*;
+import java.awt.image.ColorModel;
+import java.awt.image.ImageConsumer;
+import java.awt.image.ImageProducer;
 import java.io.File;
 import java.util.Hashtable;
+import java.util.Objects;
 
 import javax.swing.ImageIcon;
 
@@ -97,10 +100,7 @@ public class ToolIconURL implements Comparable<ToolIconURL> {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((location == null) ? 0 : location.hashCode());
-		return result;
+		return Objects.hash(location);
 	}
 
 	@Override
@@ -108,19 +108,11 @@ public class ToolIconURL implements Comparable<ToolIconURL> {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
 		}
 		ToolIconURL other = (ToolIconURL) obj;
-		if (location == null) {
-			if (other.location != null) {
-				return false;
-			}
-		}
-		else if (!location.equals(other.location)) {
+		if (!Objects.equals(location, other.location)) {
 			return false;
 		}
 		return true;
@@ -192,10 +184,7 @@ public class ToolIconURL implements Comparable<ToolIconURL> {
 		}
 
 		ImageIcon image = getImageIcon(name);
-		if (image != null) {
-			return image;
-		}
-		return null;
+		return image;
 	}
 
 	private String stripSizeOffName(String name) {

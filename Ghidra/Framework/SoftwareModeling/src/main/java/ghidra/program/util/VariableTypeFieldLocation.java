@@ -17,6 +17,8 @@
 
 package ghidra.program.util;
 
+import java.util.Objects;
+
 import ghidra.framework.options.SaveState;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
@@ -85,25 +87,19 @@ public class VariableTypeFieldLocation extends VariableLocation {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((typeStr == null) ? 0 : typeStr.hashCode());
-		return result;
+		return prime * result + ((typeStr == null) ? 0 : typeStr.hashCode());
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
+		if (!super.equals(obj) || (getClass() != obj.getClass()))
 			return false;
 		VariableTypeFieldLocation other = (VariableTypeFieldLocation) obj;
-		if (typeStr == null) {
-			if (other.typeStr != null)
-				return false;
-		}
-		else if (!typeStr.equals(other.typeStr))
+		if (!Objects.equals(typeStr, other.typeStr)) {
 			return false;
+		}
 		return true;
 	}
 

@@ -31,7 +31,10 @@ import ghidra.util.Msg;
 import ghidra.util.SystemUtilities;
 import ghidra.util.exception.DuplicateFileException;
 import ghidra.util.exception.FileInUseException;
-import ghidra.util.task.*;
+import ghidra.util.task.Task;
+import ghidra.util.task.TaskLauncher;
+import ghidra.util.task.TaskMonitor;
+import ghidra.util.task.TaskMonitorSplitter;
 
 public final class LocalTreeNodeHandler
 		implements DataTreeFlavorHandler, FileOpenDataFlavorHandler {
@@ -98,10 +101,7 @@ public final class LocalTreeNodeHandler
 	}
 
 	private boolean isValidDrag(DomainFolderNode folderNode, GTreeNode draggedNode) {
-		if (folderNode == draggedNode) {
-			return false;
-		}
-		if (draggedNode.getParent() == folderNode) {
+		if ((folderNode == draggedNode) || (draggedNode.getParent() == folderNode)) {
 			return false; // dragging a node onto its parent has no effect
 		}
 

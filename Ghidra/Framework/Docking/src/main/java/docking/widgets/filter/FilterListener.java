@@ -20,5 +20,5 @@ package docking.widgets.filter;
  */
 public interface FilterListener {
 
-	public void filterChanged(String text);
+	void filterChanged(String text);
 }

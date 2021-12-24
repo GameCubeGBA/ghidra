@@ -15,8 +15,18 @@
  */
 package ghidra.framework.preferences;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Properties;
+import java.util.StringTokenizer;
 
 import ghidra.framework.Application;
 import ghidra.framework.GenericRunInfo;
@@ -373,14 +383,8 @@ public class Preferences {
 			return;
 		}
 
-		StringBuffer sb = new StringBuffer();
-		for (int i = 0; i < paths.length; i++) {
-			sb.append(paths[i]);
-			if (i < paths.length - 1) {
-				sb.append(File.pathSeparator);
-			}
-		}
-		properties.setProperty(USER_PLUGIN_PATH, sb.toString());
+		String sb = String.join(File.pathSeparator, paths);
+		properties.setProperty(USER_PLUGIN_PATH, sb);
 	}
 
 	private static List<String> getPluginPathList() {

@@ -20,7 +20,7 @@ import java.util.HashMap;
 
 public class EditorStateFactory {
 
-	HashMap<String, EditorState> cache = new HashMap<String, EditorState>();
+	HashMap<String, EditorState> cache = new HashMap<>();
 
 	public EditorStateFactory() {
 	}

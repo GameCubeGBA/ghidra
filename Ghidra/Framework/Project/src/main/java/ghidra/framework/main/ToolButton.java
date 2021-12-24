@@ -15,29 +15,70 @@
  */
 package ghidra.framework.main;
 
-import java.awt.*;
-import java.awt.datatransfer.*;
-import java.awt.dnd.*;
-import java.awt.event.*;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Insets;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DragGestureEvent;
+import java.awt.dnd.DragSource;
+import java.awt.dnd.DragSourceDropEvent;
+import java.awt.dnd.DragSourceListener;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDragEvent;
+import java.awt.dnd.DropTargetDropEvent;
+import java.awt.dnd.DropTargetEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.ButtonModel;
+import javax.swing.Icon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.MenuElement;
+import javax.swing.MenuSelectionManager;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 
 import docking.DockingWindowManager;
-import docking.dnd.*;
+import docking.dnd.DragGestureAdapter;
+import docking.dnd.DragSrcAdapter;
+import docking.dnd.Draggable;
+import docking.dnd.DropTgtAdapter;
+import docking.dnd.Droppable;
 import docking.help.Help;
 import docking.help.HelpService;
 import docking.tool.ToolConstants;
 import docking.util.image.ToolIconURL;
 import docking.widgets.EmptyBorderButton;
-import ghidra.framework.main.datatree.*;
-import ghidra.framework.model.*;
+import ghidra.framework.main.datatree.DataTreeDragNDropHandler;
+import ghidra.framework.main.datatree.VersionInfo;
+import ghidra.framework.main.datatree.VersionInfoTransferable;
+import ghidra.framework.model.DefaultToolChangeListener;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.DomainObject;
+import ghidra.framework.model.Project;
+import ghidra.framework.model.ProjectData;
+import ghidra.framework.model.ToolConnection;
+import ghidra.framework.model.ToolManager;
+import ghidra.framework.model.ToolServices;
+import ghidra.framework.model.ToolTemplate;
 import ghidra.framework.plugintool.PluginTool;
-import ghidra.util.*;
+import ghidra.util.HTMLUtilities;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
 import ghidra.util.bean.GGlassPane;
 import ghidra.util.exception.AssertException;
 
@@ -141,7 +182,7 @@ class ToolButton extends EmptyBorderButton implements Draggable, Droppable {
 		if (associatedRunningTool != null) {
 			if (associatedRunningTool instanceof PluginTool) {
 				return "<html>" + HTMLUtilities.escapeHTML(
-					((PluginTool) associatedRunningTool).getToolFrame().getTitle());
+					associatedRunningTool.getToolFrame().getTitle());
 			}
 
 			return "<html>" + HTMLUtilities.escapeHTML(associatedRunningTool.getName());
@@ -202,10 +243,7 @@ class ToolButton extends EmptyBorderButton implements Draggable, Droppable {
 				}
 			}
 		}
-		catch (UnsupportedFlavorException e1) {
-			// don't care; return false
-		}
-		catch (IOException e1) {
+		catch (UnsupportedFlavorException | IOException e1) {
 			// don't care; return false
 		}
 		return false;
@@ -286,7 +324,7 @@ class ToolButton extends EmptyBorderButton implements Draggable, Droppable {
 	}
 
 	private void showFilesNotAcceptedMessage(DomainFile[] domainFiles) {
-		StringBuffer buffer = new StringBuffer("Tool did not accept files: ");
+		StringBuilder buffer = new StringBuilder("Tool did not accept files: ");
 		for (int i = 0; i < domainFiles.length; i++) {
 			buffer.append(domainFiles[i].getName());
 			if (i != domainFiles.length - 1) {
@@ -676,7 +714,6 @@ class ToolButton extends EmptyBorderButton implements Draggable, Droppable {
 	private Icon generateIcon() {
 		Icon icon = template.getIcon();
 		if (isRunningTool()) {
-			return icon;
 		}
 
 		return icon;

@@ -16,8 +16,17 @@
  */
 package ghidra.pcodeCPort.slghsymbol;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.Iterator;
+import java.util.List;
+
+import org.jdom.Element;
+
 import generic.stl.VectorSTL;
-import ghidra.pcodeCPort.context.*;
+import ghidra.pcodeCPort.context.FixedHandle;
+import ghidra.pcodeCPort.context.ParserWalker;
+import ghidra.pcodeCPort.context.SleighError;
 import ghidra.pcodeCPort.pcoderaw.VarnodeData;
 import ghidra.pcodeCPort.sleighbase.SleighBase;
 import ghidra.pcodeCPort.slghpatexpress.PatternExpression;
@@ -26,16 +35,9 @@ import ghidra.pcodeCPort.translate.BadDataError;
 import ghidra.pcodeCPort.utils.XmlUtils;
 import ghidra.sleigh.grammar.Location;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import java.util.Iterator;
-import java.util.List;
-
-import org.jdom.Element;
-
 public class VarnodeListSymbol extends ValueSymbol {
 
-	private VectorSTL<VarnodeSymbol> varnode_table = new VectorSTL<VarnodeSymbol>();
+	private VectorSTL<VarnodeSymbol> varnode_table = new VectorSTL<>();
 	private boolean tableisfilled;
 
 	public VarnodeListSymbol(Location location) {
@@ -149,7 +151,7 @@ public class VarnodeListSymbol extends ValueSymbol {
 		patval.layClaim();
 		while (iter.hasNext()) {
 			Element subel = (Element) iter.next();
-			if (subel.getName().equals("var")) {
+			if ("var".equals(subel.getName())) {
 				int id1 = XmlUtils.decodeUnknownInt(subel.getAttributeValue("id"));
 				varnode_table.push_back((VarnodeSymbol) trans.findSymbol(id1));
 			}

@@ -17,6 +17,7 @@
 package ghidra.sleigh.grammar;
 
 import java.io.IOException;
+
 import org.antlr.runtime.EarlyExitException;
 import org.antlr.runtime.FailedPredicateException;
 import org.antlr.runtime.MismatchedNotSetException;
@@ -30,7 +31,7 @@ import org.antlr.runtime.Token;
 import org.antlr.runtime.UnwantedTokenException;
 
 public class BaseRecognizerOverride {
-    static final String NEWLINE = System.getProperty("line.separator");
+    static final String NEWLINE = System.lineSeparator();
 
     public String getErrorMessage(RecognitionException e, String[] tokenNames, LineArrayListWriter writer) {
         String msg = e.getMessage();
@@ -39,11 +40,9 @@ public class BaseRecognizerOverride {
             String tokenName = "<unknown>";
             if (ute.expecting == Token.EOF) {
                 tokenName = "EOF";
-            } else {
-                if (tokenNames != null) {
-                    tokenName = tokenNames[ute.expecting];
-                }
-            }
+            } else if (tokenNames != null) {
+			    tokenName = tokenNames[ute.expecting];
+			}
             msg = "extraneous input "
                     + getTokenErrorDisplay(ute.getUnexpectedToken())
                     + " expecting " + tokenName;
@@ -63,11 +62,9 @@ public class BaseRecognizerOverride {
             String tokenName = "<unknown>";
             if (mtne.expecting == Token.EOF) {
                 tokenName = "EOF";
-            } else {
-                if (tokenNames != null) {
-                    tokenName = tokenNames[mtne.expecting];
-                }
-            }
+            } else if (tokenNames != null) {
+			    tokenName = tokenNames[mtne.expecting];
+			}
             msg = "mismatched tree node: " + mtne.node + " expecting "
                     + tokenName;
         } else if (e instanceof NoViableAltException) {
@@ -112,9 +109,9 @@ public class BaseRecognizerOverride {
                 s = "<" + t.getType() + ">";
             }
         }
-        s = s.replaceAll("\n", "\\\\n");
-        s = s.replaceAll("\r", "\\\\r");
-        s = s.replaceAll("\t", "\\\\t");
+        s = s.replace("\n", "\\n");
+        s = s.replace("\r", "\\r");
+        s = s.replace("\t", "\\t");
         return "'" + s + "'";
     }
 }

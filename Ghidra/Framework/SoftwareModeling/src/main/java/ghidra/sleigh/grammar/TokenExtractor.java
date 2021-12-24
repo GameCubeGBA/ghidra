@@ -87,12 +87,12 @@ public class TokenExtractor {
     }
 
     private static HashSet<String> extract(File[] inFiles) throws IOException {
-        HashSet<String> result = new HashSet<String>();
+        HashSet<String> result = new HashSet<>();
         BufferedReader in = null;
-        for (int ii = 0; ii < inFiles.length; ++ii) {
-        	System.out.println("extracting tokens from: " + inFiles[ii].getCanonicalPath());
+        for (File inFile : inFiles) {
+        	System.out.println("extracting tokens from: " + inFile.getCanonicalPath());
             try {
-                in = new BufferedReader(new FileReader(inFiles[ii]));
+                in = new BufferedReader(new FileReader(inFile));
                 String line;
                 while ((line = in.readLine()) != null) {
                     match(P1.matcher(line), result);

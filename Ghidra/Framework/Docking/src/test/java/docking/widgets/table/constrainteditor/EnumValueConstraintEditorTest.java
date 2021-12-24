@@ -15,11 +15,17 @@
  */
 package docking.widgets.table.constrainteditor;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.Component;
 import java.awt.Container;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
 
 import javax.swing.JCheckBox;
 
@@ -41,7 +47,7 @@ public class EnumValueConstraintEditorTest extends AbstractDockingTest {
 
 		private final String displayName;
 
-		private TestEnum(String display) {
+		TestEnum(String display) {
 			this.displayName = display;
 		}
 
@@ -281,7 +287,7 @@ public class EnumValueConstraintEditorTest extends AbstractDockingTest {
 			}
 		}
 
-		checkboxes.sort((cb1, cb2) -> cb1.getName().compareTo(cb2.getName()));
+		checkboxes.sort(Comparator.comparing(JCheckBox::getName));
 
 		return checkboxes;
 	}

@@ -16,17 +16,17 @@
  */
 package ghidra.pcodeCPort.semantics;
 
+import java.io.PrintStream;
+import java.util.Iterator;
+import java.util.List;
+
+import org.jdom.Element;
+
 import generic.stl.IteratorSTL;
 import generic.stl.VectorSTL;
-import ghidra.pcodeCPort.opcodes.*;
-import ghidra.pcodeCPort.translate.*;
-import ghidra.sleigh.grammar.*;
-
-import java.io.*;
-import java.util.*;
-
-
-import org.jdom.*;
+import ghidra.pcodeCPort.opcodes.OpCode;
+import ghidra.pcodeCPort.translate.Translate;
+import ghidra.sleigh.grammar.Location;
 
 
 public class OpTpl {
@@ -34,7 +34,7 @@ public class OpTpl {
 
 	private VarnodeTpl output;
 	private OpCode opc;
-	private VectorSTL<VarnodeTpl> input = new VectorSTL<VarnodeTpl>();
+	private VectorSTL<VarnodeTpl> input = new VectorSTL<>();
 
 	public OpTpl(Location location) {
 	    this.location = location;
@@ -100,10 +100,8 @@ public class OpTpl {
 
 	// Return if any input or output has zero size
 	public boolean isZeroSize() {
-		if ( output != null ) {
-			if ( output.isZeroSize() )
-				return true;
-		}
+		if ( (output != null) && output.isZeroSize() )
+			return true;
 		IteratorSTL<VarnodeTpl> iter;
 		for ( iter = input.begin(); !iter.isEnd(); iter.increment() )
 			if ( iter.get().isZeroSize() )
@@ -144,7 +142,7 @@ public class OpTpl {
 		List<?> list = el.getChildren();
 		Iterator<?> iter = list.iterator();
 		Element child = (Element) iter.next();
-		if ( child.getName().equals( "null" ) )
+		if ( "null".equals( child.getName() ) )
 			output = null;
 		else {
 			output = new VarnodeTpl(null);

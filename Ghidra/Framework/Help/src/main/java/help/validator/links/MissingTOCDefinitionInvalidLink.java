@@ -16,10 +16,11 @@
  */
 package help.validator.links;
 
+import java.nio.file.Path;
+import java.util.Objects;
+
 import help.validator.location.HelpModuleCollection;
 import help.validator.model.TOCItemReference;
-
-import java.nio.file.Path;
 
 public class MissingTOCDefinitionInvalidLink implements InvalidLink {
 
@@ -29,7 +30,7 @@ public class MissingTOCDefinitionInvalidLink implements InvalidLink {
 	public MissingTOCDefinitionInvalidLink(HelpModuleCollection help, TOCItemReference reference) {
 		this.help = help;
 		this.reference = reference;
-		if (Boolean.parseBoolean(System.getProperty("ghidra.help.failfast"))) {
+		if (Boolean.getBoolean("ghidra.help.failfast")) {
 			throw new RuntimeException(toString());
 		}
 	}
@@ -70,10 +71,7 @@ public class MissingTOCDefinitionInvalidLink implements InvalidLink {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((reference == null) ? 0 : reference.hashCode());
-		return result;
+		return Objects.hash(reference);
 	}
 
 	@Override
@@ -81,20 +79,12 @@ public class MissingTOCDefinitionInvalidLink implements InvalidLink {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
 		}
 
 		MissingTOCDefinitionInvalidLink other = (MissingTOCDefinitionInvalidLink) obj;
-		if (reference == null) {
-			if (other.reference != null) {
-				return false;
-			}
-		}
-		else if (!reference.equals(other.reference)) {
+		if (!Objects.equals(reference, other.reference)) {
 			return false;
 		}
 		return true;

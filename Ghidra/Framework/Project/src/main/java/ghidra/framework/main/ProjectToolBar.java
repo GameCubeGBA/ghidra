@@ -15,12 +15,18 @@
  */
 package ghidra.framework.main;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.JToolBar;
 
-import ghidra.framework.model.*;
+import ghidra.framework.model.Project;
+import ghidra.framework.model.ToolChest;
+import ghidra.framework.model.ToolChestChangeListener;
+import ghidra.framework.model.ToolSet;
+import ghidra.framework.model.ToolTemplate;
 
 /**
  * Toolbar that shows icons for the tools in the user's tool chest.

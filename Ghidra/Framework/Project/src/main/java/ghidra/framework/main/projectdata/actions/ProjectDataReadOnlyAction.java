@@ -44,10 +44,7 @@ public class ProjectDataReadOnlyAction extends ProjectDataContextToggleAction {
 
 	@Override
 	public boolean isAddToPopup(ProjectDataContext context) {
-		if (!context.isInActiveProject()) {
-			return false;
-		}
-		if (context.getFolderCount() != 0 || context.getFileCount() != 1) {
+		if (!context.isInActiveProject() || context.getFolderCount() != 0 || context.getFileCount() != 1) {
 			return false;
 		}
 

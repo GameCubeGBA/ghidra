@@ -15,8 +15,16 @@
  */
 package ghidra.framework.plugintool;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,7 +34,11 @@ import ghidra.framework.model.DomainFile;
 import ghidra.framework.model.DomainObject;
 import ghidra.framework.options.SaveState;
 import ghidra.framework.plugintool.mgr.ServiceManager;
-import ghidra.framework.plugintool.util.*;
+import ghidra.framework.plugintool.util.PluginClassManager;
+import ghidra.framework.plugintool.util.PluginException;
+import ghidra.framework.plugintool.util.PluginUtils;
+import ghidra.framework.plugintool.util.TransientToolState;
+import ghidra.framework.plugintool.util.UndoRedoToolState;
 import ghidra.util.Msg;
 import ghidra.util.classfinder.ClassSearcher;
 import ghidra.util.exception.MultipleCauses;
@@ -63,9 +75,7 @@ class PluginManager {
 	DomainFile[] getData() {
 		List<DomainFile> list = new ArrayList<>();
 		for (Plugin plugin : pluginList) {
-			for (DomainFile file : plugin.getData()) {
-				list.add(file);
-			}
+			Collections.addAll(list, plugin.getData());
 		}
 		DomainFile[] data = new DomainFile[list.size()];
 		return list.toArray(data);
@@ -74,9 +84,7 @@ class PluginManager {
 	Class<?>[] getSupportedDataTypes() {
 		Set<Class<?>> set = new HashSet<>();
 		for (Plugin plugin : pluginList) {
-			for (Class<?> element : plugin.getSupportedDataTypes()) {
-				set.add(element);
-			}
+			Collections.addAll(set, plugin.getSupportedDataTypes());
 		}
 		Class<?>[] cl = new Class[set.size()];
 		return set.toArray(cl);
@@ -115,8 +123,7 @@ class PluginManager {
 		}
 		if (badList.size() > 0) {
 			//EventManager eventMgr = tool.getEventManager
-			for (int i = 0; i < badList.size(); i++) {
-				String className = badList.get(i);
+			for (String className : badList) {
 				// remove from event manager
 				tool.removeEventListener(className);
 			}
@@ -367,8 +374,7 @@ class PluginManager {
 
 	Element saveDataStateToXml(boolean savingProject) {
 		Element root = new Element("DATA_STATE");
-		for (int i = 0; i < pluginList.size(); i++) {
-			Plugin p = pluginList.get(i);
+		for (Plugin p : pluginList) {
 			SaveState ss = new SaveState("PLUGIN");
 			p.writeDataState(ss);
 			if (!ss.isEmpty()) {

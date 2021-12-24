@@ -29,5 +29,5 @@ public interface AutocompletionListener<T> {
 	 * item.
 	 * @param e the event describing the activation
 	 */
-	public void completionActivated(AutocompletionEvent<T> e);
+	void completionActivated(AutocompletionEvent<T> e);
 }

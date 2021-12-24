@@ -15,13 +15,18 @@
  */
 package ghidra.program.util;
 
-import ghidra.program.model.address.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressOverflowException;
+import ghidra.program.model.address.AddressRange;
+import ghidra.program.model.address.AddressRangeIterator;
 import ghidra.program.model.lang.Register;
 import ghidra.program.model.lang.RegisterValue;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
-
-import java.util.*;
 
 /**
  * This is a generalized class for storing register values over ranges.  The values include mask bits
@@ -145,7 +150,7 @@ public class RegisterValueStore {
 		}
 
 		// Otherwise, combine bytes where values already exist.
-		List<AddressRange> list = new ArrayList<AddressRange>();
+		List<AddressRange> list = new ArrayList<>();
 		AddressRangeIterator rangeIt = rangeMap.getAddressRangeIterator(start, end);
 		while (rangeIt.hasNext()) {
 			list.add(rangeIt.next());
@@ -201,7 +206,7 @@ public class RegisterValueStore {
 		}
 
 		// Otherwise, mask off bits according to the mask passed in.
-		List<AddressRange> list = new ArrayList<AddressRange>();
+		List<AddressRange> list = new ArrayList<>();
 		AddressRangeIterator rangeIt = rangeMap.getAddressRangeIterator(start, end);
 		while (rangeIt.hasNext()) {
 			list.add(rangeIt.next());

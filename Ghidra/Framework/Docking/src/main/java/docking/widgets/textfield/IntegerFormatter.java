@@ -17,9 +17,15 @@
 package docking.widgets.textfield;
 
 import java.awt.Toolkit;
-import java.text.*;
+import java.text.Format;
+import java.text.NumberFormat;
+import java.text.ParseException;
 
-import javax.swing.text.*;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
+import javax.swing.text.DocumentFilter;
+import javax.swing.text.NumberFormatter;
 
 public class IntegerFormatter extends NumberFormatter {
 
@@ -163,10 +169,7 @@ public class IntegerFormatter extends NumberFormatter {
 				}
 				return (Number) parseObject;
 			}
-			catch (ParseException pe) {
-				return null;
-			}
-			catch (NumberFormatException nfe) {
+			catch (ParseException | NumberFormatException nfe) {
 				return null;
 			}
 		}

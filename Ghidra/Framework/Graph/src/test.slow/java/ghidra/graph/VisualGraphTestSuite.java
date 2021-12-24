@@ -21,7 +21,10 @@ import org.junit.runners.Suite.SuiteClasses;
 
 import ghidra.graph.graphs.FilteredVisualGraphTest;
 import ghidra.graph.job.VisualGraphJobRunnerTest;
-import ghidra.graph.viewer.*;
+import ghidra.graph.viewer.GraphComponentTest;
+import ghidra.graph.viewer.GraphViewerTest;
+import ghidra.graph.viewer.VisualGraphViewTest;
+import ghidra.graph.viewer.VisualGraphViewUpdaterTest;
 import ghidra.graph.viewer.edge.VisualGraphPathHighlighterTest;
 import ghidra.graph.viewer.layout.GridLocationMapTest;
 

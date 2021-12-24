@@ -31,7 +31,7 @@ public interface GraphDisplayProvider extends ExtensionPoint {
 	 * The name of this provider (for displaying as menu option when graphing)
 	 * @return the name of this provider.
 	 */
-	public String getName();
+	String getName();
 
 	/**
 	 * Returns a GraphDisplay that can be used to "display" a graph
@@ -41,7 +41,7 @@ public interface GraphDisplayProvider extends ExtensionPoint {
 	 * @return A GraphDisplay that can be used to display (or otherwise consume - e.g. export) the graph
 	 * @throws GraphException thrown if there is a problem creating a GraphDisplay
 	 */
-	public GraphDisplay getGraphDisplay(boolean reuseGraph,	TaskMonitor monitor) throws GraphException;
+	GraphDisplay getGraphDisplay(boolean reuseGraph,	TaskMonitor monitor) throws GraphException;
 
 
 	/**
@@ -50,23 +50,23 @@ public interface GraphDisplayProvider extends ExtensionPoint {
 	 * @param tool the tool hosting this display
 	 * @param options the tool options for graphing
 	 */
-	public void initialize(PluginTool tool, Options options);
+	void initialize(PluginTool tool, Options options);
 
 	/**
 	 * Called if the graph options change
 	 * 
 	 * @param options the current tool options
 	 */
-	public void optionsChanged(Options options);
+	void optionsChanged(Options options);
 
 	/**
 	 * Disposes this GraphDisplayProvider
 	 */
-	public void dispose();
+	void dispose();
 
 	/**
 	 * Gets the help location for this GraphDisplayProvider
 	 * @return help location for this GraphDisplayProvider
 	 */
-	public HelpLocation getHelpLocation();
+	HelpLocation getHelpLocation();
 }

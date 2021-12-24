@@ -23,7 +23,7 @@ public class MacroSymbol extends SleighSymbol {
 
 	private int index;
 	private ConstructTpl construct;
-	private VectorSTL<OperandSymbol> operands = new VectorSTL<OperandSymbol>();
+	private VectorSTL<OperandSymbol> operands = new VectorSTL<>();
 
 	public MacroSymbol( Location location, String nm, int i ) {
 		super( location, nm );

@@ -15,7 +15,9 @@
  */
 package docking.widgets.button;
 
-import javax.swing.*;
+import javax.swing.Action;
+import javax.swing.Icon;
+import javax.swing.JRadioButton;
 
 import docking.widgets.GComponent;
 

@@ -15,12 +15,16 @@
  */
 package ghidra.program.model.block;
 
-import ghidra.program.model.address.*;
-import ghidra.program.model.listing.*;
+import java.util.LinkedList;
+
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.listing.Instruction;
+import ghidra.program.model.listing.InstructionIterator;
+import ghidra.program.model.listing.Listing;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
-
-import java.util.LinkedList;
 
 /**
  * <CODE>PartitionCodeSubIterator</CODE> is an implementation of
@@ -40,7 +44,7 @@ class PartitionCodeSubIterator implements CodeBlockIterator {
 	private AddressSet addrCoveredSoFar = new AddressSet();
 
 	// Available block stack
-	private LinkedList<CodeBlock> blockList = new LinkedList<CodeBlock>();
+	private LinkedList<CodeBlock> blockList = new LinkedList<>();
 
 	private PartitionCodeSubModel model = null;
 	private TaskMonitor monitor;

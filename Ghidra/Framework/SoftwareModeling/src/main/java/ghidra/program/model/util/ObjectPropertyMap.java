@@ -30,10 +30,10 @@ public interface ObjectPropertyMap extends PropertyMap {
 	 * @param addr address for the property
 	 * @param value value of the property
 	 */
-	public void add(Address addr, Saveable value);
+	void add(Address addr, Saveable value);
 		
 	/**
 	 * Returns Saveable object class.
 	 */
-	public Class<?> getObjectClass();
+	Class<?> getObjectClass();
 }

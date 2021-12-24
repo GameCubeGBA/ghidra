@@ -15,11 +15,11 @@
  */
 package ghidra.program.model.lang;
 
-import ghidra.util.NumericUtilities;
-import ghidra.util.exception.AssertException;
-
 import java.math.BigInteger;
 import java.util.Arrays;
+
+import ghidra.util.NumericUtilities;
+import ghidra.util.exception.AssertException;
 
 /**
  * Class for representing register values that keep track of which bits are actually set.  
@@ -33,9 +33,9 @@ import java.util.Arrays;
  * 
  */
 public class RegisterValue {
-	private static final int[] START_BYTE_MASK = new int[] { 0xFF, 0x7F, 0x3F, 0x1F, 0xF, 0x7, 0x3,
+	private static final int[] START_BYTE_MASK = { 0xFF, 0x7F, 0x3F, 0x1F, 0xF, 0x7, 0x3,
 		0x1, 0 };
-	private static final int[] END_BYTE_MASK = new int[] { 0x80, 0xC0, 0xE0, 0xF0, 0xF8, 0xFC,
+	private static final int[] END_BYTE_MASK = { 0x80, 0xC0, 0xE0, 0xF0, 0xF8, 0xFC,
 		0xFE, 0xFF };
 
 	private byte[] bytes;
@@ -334,8 +334,7 @@ public class RegisterValue {
 		result = prime * result + register.hashCode();
 		result = prime * result + Arrays.hashCode(bytes);
 		result = prime * result + startBit;
-		result = prime * result + endBit;
-		return result;
+		return prime * result + endBit;
 	}
 
 	/**
@@ -390,11 +389,7 @@ public class RegisterValue {
 			return (bytes[startByte] & mask) == mask;
 		}
 
-		if ((bytes[startByte] & START_BYTE_MASK[bitInStartByte]) != START_BYTE_MASK[bitInStartByte]) {
-			return false;
-		}
-
-		if ((bytes[endByte] & END_BYTE_MASK[bitInEndByte]) != END_BYTE_MASK[bitInEndByte]) {
+		if (((bytes[startByte] & START_BYTE_MASK[bitInStartByte]) != START_BYTE_MASK[bitInStartByte]) || ((bytes[endByte] & END_BYTE_MASK[bitInEndByte]) != END_BYTE_MASK[bitInEndByte])) {
 			return false;
 		}
 
@@ -551,11 +546,7 @@ public class RegisterValue {
 			return (bytes[startByte] & mask) == mask;
 		}
 
-		if ((bytes[startByte] & START_BYTE_MASK[bitInStartByte]) != START_BYTE_MASK[bitInStartByte]) {
-			return false;
-		}
-
-		if ((bytes[endByte] & END_BYTE_MASK[bitInEndByte]) != END_BYTE_MASK[bitInEndByte]) {
+		if (((bytes[startByte] & START_BYTE_MASK[bitInStartByte]) != START_BYTE_MASK[bitInStartByte]) || ((bytes[endByte] & END_BYTE_MASK[bitInEndByte]) != END_BYTE_MASK[bitInEndByte])) {
 			return false;
 		}
 		for (int i = startByte + 1; i < endByte; i++) {

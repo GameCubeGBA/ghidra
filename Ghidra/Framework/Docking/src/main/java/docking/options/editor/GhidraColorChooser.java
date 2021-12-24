@@ -15,13 +15,21 @@
  */
 package docking.options.editor;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
-import javax.swing.*;
+import javax.swing.JColorChooser;
+import javax.swing.JDialog;
+import javax.swing.JTabbedPane;
 import javax.swing.colorchooser.AbstractColorChooserPanel;
 
 public class GhidraColorChooser extends JColorChooser {

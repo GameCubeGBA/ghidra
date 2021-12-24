@@ -35,5 +35,5 @@ public interface DBFieldAdapter {
 	 * @param end end of iterator
 	 * @throws IOException if there was a problem accessing the database
 	 */
-	public DBFieldIterator getFields(long start, long end) throws IOException;
+	DBFieldIterator getFields(long start, long end) throws IOException;
 }

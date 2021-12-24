@@ -19,7 +19,9 @@ package ghidra.framework.options;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.beans.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyEditor;
 
 import javax.swing.JCheckBox;
 
@@ -43,18 +45,15 @@ public class PropertyBoolean extends JCheckBox implements ItemListener {
 		editor = pe;
 		addItemListener(this);
 
-		editor.addPropertyChangeListener(new PropertyChangeListener() {
-			@Override
-			public void propertyChange(PropertyChangeEvent evt) {
-				Object value = editor.getValue();
-				if ((value instanceof Boolean) && !value.equals(getText())) {
-					notifyEditorOfChanges = false;
-					try {
-						setSelected((Boolean) value);
-					}
-					finally {
-						notifyEditorOfChanges = true;
-					}
+		editor.addPropertyChangeListener(evt -> {
+			Object value = editor.getValue();
+			if ((value instanceof Boolean) && !value.equals(getText())) {
+				notifyEditorOfChanges = false;
+				try {
+					setSelected((Boolean) value);
+				}
+				finally {
+					notifyEditorOfChanges = true;
 				}
 			}
 		});

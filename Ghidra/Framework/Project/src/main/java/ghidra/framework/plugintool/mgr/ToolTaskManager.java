@@ -17,18 +17,32 @@ package ghidra.framework.plugintool.mgr;
 
 import java.awt.Dimension;
 import java.rmi.ConnectException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
 
-import ghidra.framework.cmd.*;
-import ghidra.framework.model.*;
+import ghidra.framework.cmd.BackgroundCommand;
+import ghidra.framework.cmd.Command;
+import ghidra.framework.cmd.MergeableBackgroundCommand;
+import ghidra.framework.model.DomainObject;
+import ghidra.framework.model.DomainObjectException;
+import ghidra.framework.model.UndoableDomainObject;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.util.Msg;
 import ghidra.util.datastruct.PriorityQueue;
 import ghidra.util.exception.RollbackException;
-import ghidra.util.task.*;
+import ghidra.util.task.Task;
+import ghidra.util.task.TaskDialog;
+import ghidra.util.task.TaskListener;
+import ghidra.util.task.TaskMonitor;
+import ghidra.util.task.TaskMonitorComponent;
 
 /**
  * Manages a queue of background tasks that execute commands.
@@ -155,10 +169,7 @@ public class ToolTaskManager implements Runnable {
 				}
 
 				// these are not 'unexpected', so don't show the user
-				if (t instanceof ConnectException) {
-					return false;
-				}
-				if (t instanceof RollbackException) {
+				if ((t instanceof ConnectException) || (t instanceof RollbackException)) {
 					return false;
 				}
 
@@ -543,10 +554,8 @@ public class ToolTaskManager implements Runnable {
 		if (!isBusy()) {
 			return false;
 		}
-		if (currentTask != null) {
-			if (currentTask.getDomainObject() == domainObject) {
-				return true;
-			}
+		if ((currentTask != null) && (currentTask.getDomainObject() == domainObject)) {
+			return true;
 		}
 		return hasQueuedTasksForDomainObject(domainObject);
 	}

@@ -16,7 +16,7 @@
  */
 package ghidra.pcodeCPort.context;
 
-import ghidra.pcodeCPort.slghsymbol.*;
+import ghidra.pcodeCPort.slghsymbol.TripleSymbol;
 
 
 public class ContextSet {

@@ -15,7 +15,10 @@
  */
 package ghidra.graph.viewer.vertex;
 
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 
 import javax.swing.JComponent;
@@ -89,9 +92,7 @@ public class VisualGraphVertexShapeTransformer<V extends VisualVertex>
 		int y = halfHeight - bounds.y;
 
 		AffineTransform xform = AffineTransform.getTranslateInstance(x, y);
-		Shape movedShape = xform.createTransformedShape(s);
-
-		return movedShape;
+		return xform.createTransformedShape(s);
 	}
 
 	private Shape getFullShape(V v) {

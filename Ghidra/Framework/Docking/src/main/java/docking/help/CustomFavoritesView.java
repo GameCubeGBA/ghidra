@@ -24,8 +24,15 @@ import java.net.URL;
 import java.util.Hashtable;
 import java.util.Locale;
 
-import javax.help.*;
+import javax.help.BadIDException;
+import javax.help.FavoritesItem;
+import javax.help.FavoritesView;
+import javax.help.HelpModel;
+import javax.help.HelpSet;
+import javax.help.JHelpFavoritesNavigator;
+import javax.help.Map;
 import javax.help.Map.ID;
+import javax.help.NavigatorView;
 import javax.help.event.HelpModelEvent;
 import javax.help.plaf.HelpNavigatorUI;
 import javax.help.plaf.basic.BasicFavoritesCellRenderer;

@@ -16,13 +16,25 @@
 package ghidra.framework.data;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import ghidra.framework.model.*;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.DomainObject;
+import ghidra.framework.model.DomainObjectChangeRecord;
+import ghidra.framework.model.DomainObjectClosedListener;
+import ghidra.framework.model.DomainObjectException;
+import ghidra.framework.model.DomainObjectListener;
+import ghidra.framework.model.EventQueueID;
+import ghidra.framework.model.UserData;
 import ghidra.framework.store.FileSystem;
 import ghidra.framework.store.LockException;
 import ghidra.util.Lock;
@@ -41,25 +53,20 @@ public abstract class DomainObjectAdapter implements DomainObject {
 	private static Class<?> defaultDomainObjClass; // Domain object implementation mapped to unknown content type
 	private static HashMap<String, ContentHandler> contentHandlerTypeMap; // maps content-type string to handler
 	private static HashMap<Class<?>, ContentHandler> contentHandlerClassMap; // maps domain object class to handler
-	private static ChangeListener contentHandlerUpdateListener = new ChangeListener() {
-		@Override
-		public void stateChanged(ChangeEvent e) {
-			getContentHandlers();
-		}
-	};
+	private static ChangeListener contentHandlerUpdateListener = e -> getContentHandlers();
 
 	protected String name;
 	private DomainFile domainFile;
 
 	private DomainObjectChangeSupport docs;
 	protected Map<EventQueueID, DomainObjectChangeSupport> changeSupportMap =
-		new ConcurrentHashMap<EventQueueID, DomainObjectChangeSupport>();
+		new ConcurrentHashMap<>();
 	private volatile boolean eventsEnabled = true;
 	private Set<DomainObjectClosedListener> closeListeners =
-		new HashSet<DomainObjectClosedListener>();
+		new HashSet<>();
 
 	private ArrayList<Object> consumers;
-	protected Map<String, String> metadata = new LinkedHashMap<String, String>();
+	protected Map<String, String> metadata = new LinkedHashMap<>();
 
 	// a flag indicating whether the domain object has changed
 	// any methods of this domain object which cause its state to
@@ -87,7 +94,7 @@ public abstract class DomainObjectAdapter implements DomainObject {
 		}
 		this.name = name;
 		docs = new DomainObjectChangeSupport(this, timeInterval, bufsize, lock);
-		consumers = new ArrayList<Object>();
+		consumers = new ArrayList<>();
 		consumers.add(consumer);
 		if (!UserData.class.isAssignableFrom(getClass())) {
 			// UserData instances do not utilize DomainFile storage
@@ -422,7 +429,7 @@ public abstract class DomainObjectAdapter implements DomainObject {
 	@Override
 	public ArrayList<Object> getConsumerList() {
 		synchronized (consumers) {
-			return new ArrayList<Object>(consumers);
+			return new ArrayList<>(consumers);
 		}
 	}
 
@@ -484,8 +491,8 @@ public abstract class DomainObjectAdapter implements DomainObject {
 	}
 
 	private synchronized static void getContentHandlers() {
-		contentHandlerClassMap = new HashMap<Class<?>, ContentHandler>();
-		contentHandlerTypeMap = new HashMap<String, ContentHandler>();
+		contentHandlerClassMap = new HashMap<>();
+		contentHandlerTypeMap = new HashMap<>();
 
 		List<ContentHandler> handlers = ClassSearcher.getInstances(ContentHandler.class);
 		for (ContentHandler ch : handlers) {

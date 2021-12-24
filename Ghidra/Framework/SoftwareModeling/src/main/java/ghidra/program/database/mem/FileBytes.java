@@ -20,7 +20,10 @@ import java.util.ConcurrentModificationException;
 
 import org.apache.commons.lang3.StringUtils;
 
-import db.*;
+import db.BinaryCodedField;
+import db.BinaryField;
+import db.DBBuffer;
+import db.DBRecord;
 
 /**
  * FileBytes provides access to the all the byte values (both original and modified) from an
@@ -365,10 +368,7 @@ public class FileBytes {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
 		}
 		FileBytes other = (FileBytes) obj;

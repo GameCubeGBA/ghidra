@@ -15,7 +15,13 @@
  */
 package ghidra.program.model.lang;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSpace;
@@ -506,10 +512,7 @@ public class Register implements java.io.Serializable, Comparable<Register> {
 	 *         a valid lane size.
 	 */
 	public boolean isValidLaneSize(int laneSizeInBytes) {
-		if (!isVectorRegister()) {
-			return false;
-		}
-		if (laneSizes == null) {
+		if (!isVectorRegister() || (laneSizes == null)) {
 			return false;
 		}
 		return laneSizes.contains(laneSizeInBytes);

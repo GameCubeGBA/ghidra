@@ -15,8 +15,18 @@
  */
 package generic.jar;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
 public class ClassModuleTree {
 	private FileNode root = new FileNode(null, "");
@@ -33,7 +43,7 @@ public class ClassModuleTree {
 			while ((line = reader.readLine()) != null) {
 				String[] split = line.split(" ");
 				String path = split[0];
-				String module = split[1].equals("null") ? null : split[1];
+				String module = "null".equals(split[1]) ? null : split[1];
 				addNode(path, module);
 			}
 		}
@@ -50,10 +60,7 @@ public class ClassModuleTree {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (obj.getClass() != this.getClass()) {
+		if ((obj == null) || (obj.getClass() != this.getClass())) {
 			return false;
 		}
 		ClassModuleTree other = (ClassModuleTree) obj;
@@ -135,7 +142,7 @@ public class ClassModuleTree {
 			if (children == null) {
 				return null;
 			}
-			Set<String> set = new HashSet<String>();
+			Set<String> set = new HashSet<>();
 			for (FileNode node : children.values()) {
 				set.add(node.trim());
 			}
@@ -150,41 +157,25 @@ public class ClassModuleTree {
 
 		@Override
 		public int hashCode() {
-			final int prime = 31;
-			int result = 1;
-			result = prime * result + ((children == null) ? 0 : children.hashCode());
-			result = prime * result + ((module == null) ? 0 : module.hashCode());
-			result = prime * result + ((name == null) ? 0 : name.hashCode());
-			return result;
+			return Objects.hash(children, module, name);
 		}
 
 		@Override
 		public boolean equals(Object obj) {
 			if (this == obj)
 				return true;
-			if (obj == null)
-				return false;
-			if (getClass() != obj.getClass())
+			if ((obj == null) || (getClass() != obj.getClass()))
 				return false;
 			FileNode other = (FileNode) obj;
-			if (children == null) {
-				if (other.children != null)
-					return false;
-			}
-			else if (!children.equals(other.children))
+			if (!Objects.equals(children, other.children)) {
 				return false;
-			if (module == null) {
-				if (other.module != null)
-					return false;
 			}
-			else if (!module.equals(other.module))
+			if (!Objects.equals(module, other.module)) {
 				return false;
-			if (name == null) {
-				if (other.name != null)
-					return false;
 			}
-			else if (!name.equals(other.name))
+			if (!Objects.equals(name, other.name)) {
 				return false;
+			}
 			return true;
 		}
 
@@ -205,7 +196,7 @@ public class ClassModuleTree {
 
 		public FileNode createNode(String nodeName) {
 			if (children == null) {
-				children = new HashMap<String, ClassModuleTree.FileNode>();
+				children = new HashMap<>();
 			}
 			FileNode child = children.get(nodeName);
 			if (child == null) {
@@ -217,9 +208,9 @@ public class ClassModuleTree {
 
 		public List<FileNode> getChildren() {
 			if (children == null) {
-				return new ArrayList<FileNode>();
+				return new ArrayList<>();
 			}
-			return new ArrayList<FileNode>(children.values());
+			return new ArrayList<>(children.values());
 		}
 
 		@Override

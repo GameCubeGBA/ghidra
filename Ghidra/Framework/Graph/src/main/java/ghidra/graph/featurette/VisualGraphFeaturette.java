@@ -36,7 +36,7 @@ public interface VisualGraphFeaturette<V extends VisualVertex,
 	 * 
 	 * @param provider the provider associated with this feature
 	 */
-	public void init(VisualGraphComponentProvider<V, E, G> provider);
+	void init(VisualGraphComponentProvider<V, E, G> provider);
 
 	/**
 	 * Called when the client wishes to save configuration state.  Features can add any state
@@ -44,7 +44,7 @@ public interface VisualGraphFeaturette<V extends VisualVertex,
 	 * 
 	 * @param state the container for state information
 	 */
-	public void writeConfigState(SaveState state);
+	void writeConfigState(SaveState state);
 
 	/**
 	 * Called when the client wishes to restore configuration state.  Features can read state
@@ -52,25 +52,25 @@ public interface VisualGraphFeaturette<V extends VisualVertex,
 	 * 
 	 * @param saveState the container for state information
 	 */
-	public void readConfigState(SaveState saveState);
+	void readConfigState(SaveState saveState);
 
 	/**
 	 * Called when the client provider is opened
 	 * 
 	 * @param provider the provider
 	 */
-	public void providerOpened(VisualGraphComponentProvider<V, E, G> provider);
+	void providerOpened(VisualGraphComponentProvider<V, E, G> provider);
 
 	/**
 	 * Called when the client provider is closed
 	 * 
 	 * @param provider the provider
 	 */
-	public void providerClosed(VisualGraphComponentProvider<V, E, G> provider);
+	void providerClosed(VisualGraphComponentProvider<V, E, G> provider);
 
 	/**
 	 * Called when the provider is being disposed
 	 */
-	public void remove();
+	void remove();
 
 }

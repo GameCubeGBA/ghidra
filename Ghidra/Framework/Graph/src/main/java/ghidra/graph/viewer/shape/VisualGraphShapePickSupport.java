@@ -17,13 +17,18 @@ package ghidra.graph.viewer.shape;
 
 import java.awt.Point;
 import java.awt.Shape;
-import java.awt.geom.*;
+import java.awt.geom.GeneralPath;
+import java.awt.geom.PathIterator;
+import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import java.util.Collection;
 
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.visualization.VisualizationServer;
 import edu.uci.ics.jung.visualization.picking.ShapePickSupport;
-import ghidra.graph.viewer.*;
+import ghidra.graph.viewer.GraphViewerUtils;
+import ghidra.graph.viewer.VisualEdge;
+import ghidra.graph.viewer.VisualVertex;
 
 public class VisualGraphShapePickSupport<V extends VisualVertex, E extends VisualEdge<V>>
 		extends ShapePickSupport<V, E> {

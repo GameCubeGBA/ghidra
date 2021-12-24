@@ -15,9 +15,13 @@
  */
 package ghidra.program.model.data;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import ghidra.docking.settings.*;
+import ghidra.docking.settings.EnumSettingsDefinition;
+import ghidra.docking.settings.Settings;
+import ghidra.docking.settings.SettingsDefinition;
 
 /**
  *  {@link SettingsDefinition} for setting the charset of a string instance.

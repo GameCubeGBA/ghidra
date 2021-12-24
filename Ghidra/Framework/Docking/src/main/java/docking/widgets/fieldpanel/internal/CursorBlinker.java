@@ -17,8 +17,6 @@
 package docking.widgets.fieldpanel.internal;
 
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
 
@@ -38,15 +36,13 @@ public class CursorBlinker {
 	public CursorBlinker(FieldPanel panel) {
 		this.fieldPanel = panel;
 
-		timer = new Timer(500, new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (paintBounds != null) {
-					showCursor = !showCursor;
-					fieldPanel.paintImmediately(paintBounds);
-				}
-				else {
-					timer.stop();
-				}
+		timer = new Timer(500, e -> {
+			if (paintBounds != null) {
+				showCursor = !showCursor;
+				fieldPanel.paintImmediately(paintBounds);
+			}
+			else {
+				timer.stop();
 			}
 		});
 

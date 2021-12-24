@@ -24,7 +24,7 @@ public interface TableTextFilterFactory<ROW_OBJECT> {
 	 * @param transformer the object that converts a table row into a list of strings.
 	 * @return the filter that will determine if a table row matches the given text.
 	 */
-	public TableFilter<ROW_OBJECT> getTableFilter(String text,
+	TableFilter<ROW_OBJECT> getTableFilter(String text,
 			RowFilterTransformer<ROW_OBJECT> transformer);
 
 }

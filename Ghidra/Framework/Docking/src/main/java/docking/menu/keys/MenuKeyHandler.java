@@ -17,7 +17,11 @@ package docking.menu.keys;
 
 import java.awt.Component;
 
-import javax.swing.*;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import javax.swing.JSeparator;
+import javax.swing.MenuElement;
+import javax.swing.MenuSelectionManager;
 
 /**
  * The interface for work to be done on an open menu.
@@ -58,11 +62,7 @@ abstract class MenuKeyHandler {
 	protected int findActiveMenuItemIndex(MenuSelectionManager manager, MenuElement[] path) {
 
 		int popupIndexdex = getLeafPopupIndex(path);
-		if (popupIndexdex == -1) {
-			return -1; // not sure if this can happen
-		}
-
-		if (popupIndexdex == path.length - 1) {
+		if ((popupIndexdex == -1) || (popupIndexdex == path.length - 1)) {
 			// last item is the popup--no selected menu item
 			return -1;
 		}
@@ -87,11 +87,7 @@ abstract class MenuKeyHandler {
 	protected int findActiveMenuItemRawIndex(MenuSelectionManager manager, MenuElement[] path) {
 
 		int popupIndexdex = getLeafPopupIndex(path);
-		if (popupIndexdex == -1) {
-			return -1; // not sure if this can happen
-		}
-
-		if (popupIndexdex == path.length - 1) {
+		if ((popupIndexdex == -1) || (popupIndexdex == path.length - 1)) {
 			// last item is the popup--no selected menu item
 			return -1;
 		}

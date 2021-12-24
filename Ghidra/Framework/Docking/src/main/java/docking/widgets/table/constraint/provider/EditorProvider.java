@@ -35,7 +35,7 @@ public interface EditorProvider<T> {
 	 * @param columnData the context of the data in the table.
 	 * @return an editor initialized to the given columnConstraint.
 	 */
-	public ColumnConstraintEditor<T> getEditor(ColumnConstraint<T> columnConstraint,
+	ColumnConstraintEditor<T> getEditor(ColumnConstraint<T> columnConstraint,
 			ColumnData<T> columnData);
 
 	/**
@@ -45,7 +45,7 @@ public interface EditorProvider<T> {
 	 * @param dataSource the table's context object.
 	 * @return a new T object created by parsing the given string.
 	 */
-	public T parseValue(String value, Object dataSource);
+	T parseValue(String value, Object dataSource);
 
 	/**
 	 * Converts the T value into a string that can be parsed back by the {@link #parseValue(String, Object)} method.
@@ -53,6 +53,6 @@ public interface EditorProvider<T> {
 	 * @param value the value to convert to a parsable string.
 	 * @return The parsable string fromthe T value.
 	 */
-	public String toString(T value);
+	String toString(T value);
 
 }

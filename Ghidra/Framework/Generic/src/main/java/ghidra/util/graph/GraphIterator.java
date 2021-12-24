@@ -26,15 +26,15 @@ import java.util.ConcurrentModificationException;
 public interface GraphIterator<T extends KeyedObject> {
 
 	/** Return true if the iterator has more elements */
-	public boolean hasNext();
+	boolean hasNext();
 	
 	/** Returns next element in the iteration. 
 	 * @throws ConcurrentModificationException if the backing set
 	 * has been modified since the iterator was created.
 	 */
-	public T next() throws ConcurrentModificationException;
+	T next() throws ConcurrentModificationException;
 	
 	/** Removes the object from the backing set safely */
-	public boolean remove(); 
+	boolean remove(); 
 
 }

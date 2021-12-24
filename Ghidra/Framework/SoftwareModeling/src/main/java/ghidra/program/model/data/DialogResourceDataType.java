@@ -15,7 +15,10 @@
  */
 package ghidra.program.model.data;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import ghidra.docking.settings.Settings;
 import ghidra.program.model.address.Address;
@@ -94,7 +97,7 @@ public class DialogResourceDataType extends DynamicDataType {
 			//Check to see if extra font size and array info after three dialog items
 			//will only be there if DS_SETFONT mask is set at offset 0 of DLGTEMPLATE
 			byte getStyle = memBuffer.getByte(0);
-			if ((getStyle & DS_SETFONT) > 0) {
+			if ((getStyle & DS_SETFONT) != 0) {
 				tempOffset = addDialogFontSizeAndArray(memBuffer, comps, tempOffset);
 			}
 
@@ -118,19 +121,15 @@ public class DialogResourceDataType extends DynamicDataType {
 			Msg.error(this, "buffer error: " + e.getMessage(), e);
 		}
 
-		DataTypeComponent[] result = comps.toArray(new DataTypeComponent[comps.size()]);
-		return result;
+		return comps.toArray(new DataTypeComponent[comps.size()]);
 	}
 
 	//adds initial DLGTEMPLATE(EX) structure
 	private int addDlgTemplateStructure(MemBuffer memBuffer, List<DataTypeComponent> comps,
 			int tempOffset, boolean ex) {
 
-		tempOffset =
-			addComp(ex ? dlgTemplateExStructure() : dlgTemplateStructure(), ex ? 26 : 18,
-				"Dialog Template Structure", memBuffer.getAddress(), comps, tempOffset);
-
-		return tempOffset;
+		return addComp(ex ? dlgTemplateExStructure() : dlgTemplateStructure(), ex ? 26 : 18,
+			"Dialog Template Structure", memBuffer.getAddress(), comps, tempOffset);
 	}
 
 	//adds Dialog Menu array - the 1st component after the initial DLGTEMPLATE structure
@@ -207,9 +206,7 @@ public class DialogResourceDataType extends DynamicDataType {
 			addComp(new ShortDataType(), 2, "Dialog Font Size",
 				memBuffer.getAddress().add(tempOffset), comps, tempOffset);
 
-		//add Dialog Font Style array
-		tempOffset = addUnicodeString(memBuffer, comps, tempOffset, "Dialog Font Typeface");
-		return tempOffset;
+		return addUnicodeString(memBuffer, comps, tempOffset, "Dialog Font Typeface");
 	}
 
 	//adds DLGITEMTEMPLATE(EX) structure - must start on 4 byte alignment
@@ -222,11 +219,8 @@ public class DialogResourceDataType extends DynamicDataType {
 				addComp(new AlignmentDataType(), 2, "Alignment",
 					memBuffer.getAddress().add(tempOffset), comps, tempOffset);
 		}
-		tempOffset =
-			addComp(ex ? dlgItemTemplateExStructure() : dlgItemTemplateStructure(), ex ? 24 : 18,
-				"Dialog Item Structure", memBuffer.getAddress().add(tempOffset), comps, tempOffset);
-
-		return tempOffset;
+		return addComp(ex ? dlgItemTemplateExStructure() : dlgItemTemplateStructure(), ex ? 24 : 18,
+			"Dialog Item Structure", memBuffer.getAddress().add(tempOffset), comps, tempOffset);
 	}
 
 	//adds Item class array - 1st after component after each DLGITEMTEMPLATE structure
@@ -471,8 +465,7 @@ public class DialogResourceDataType extends DynamicDataType {
 	}
 
 	private ArrayDataType createArrayOfShorts(int len) {
-		ArrayDataType array = new ArrayDataType(ShortDataType.dataType, len, 2);
-		return array;
+		return new ArrayDataType(ShortDataType.dataType, len, 2);
 	}
 
 	private int addComp(DataType dataType, int len, String fieldName, Address address,

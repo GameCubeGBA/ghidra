@@ -17,8 +17,8 @@ package docking;
 
 public interface PlaceholderInstaller {
 
-	public void installPlaceholder(ComponentPlaceholder placeholder,
+	void installPlaceholder(ComponentPlaceholder placeholder,
 			WindowPosition position);
 
-	public void uninstallPlaceholder(ComponentPlaceholder placeholder, boolean keepAround);
+	void uninstallPlaceholder(ComponentPlaceholder placeholder, boolean keepAround);
 }

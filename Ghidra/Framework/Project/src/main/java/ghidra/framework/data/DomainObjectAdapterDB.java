@@ -17,12 +17,21 @@ package ghidra.framework.data;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import db.DBConstants;
 import db.DBHandle;
 import db.util.ErrorHandler;
-import ghidra.framework.model.*;
+import ghidra.framework.model.AbortedTransactionListener;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.DomainObject;
+import ghidra.framework.model.DomainObjectChangeRecord;
+import ghidra.framework.model.DomainObjectLockedException;
+import ghidra.framework.model.Transaction;
+import ghidra.framework.model.TransactionListener;
+import ghidra.framework.model.UndoableDomainObject;
 import ghidra.framework.options.Options;
 import ghidra.framework.options.SubOptions;
 import ghidra.framework.store.LockException;
@@ -31,7 +40,6 @@ import ghidra.util.Msg;
 import ghidra.util.ReadOnlyException;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * Database version of the DomainObjectAdapter; this version adds the

@@ -21,7 +21,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import docking.widgets.table.*;
+import docking.widgets.table.AbstractDynamicTableColumn;
+import docking.widgets.table.GTableCellRenderingData;
+import docking.widgets.table.TableColumnDescriptor;
 import docking.widgets.table.threaded.ThreadedTableModel;
 import generic.jar.ResourceFile;
 import ghidra.docking.settings.Settings;
@@ -78,7 +80,7 @@ class ExtensionTableModel extends ThreadedTableModel<ExtensionDetails, List<Exte
 	protected TableColumnDescriptor<ExtensionDetails> createTableColumnDescriptor() {
 
 		TableColumnDescriptor<ExtensionDetails> descriptor =
-			new TableColumnDescriptor<ExtensionDetails>();
+			new TableColumnDescriptor<>();
 
 		descriptor.addVisibleColumn(new ExtensionInstalledColumn(), INSTALLED_COL, true);
 		descriptor.addVisibleColumn(new ExtensionNameColumn(), NAME_COL, true);
@@ -102,15 +104,11 @@ class ExtensionTableModel extends ThreadedTableModel<ExtensionDetails, List<Exte
 		}
 
 		ExtensionDetails extension = getSelectedExtension(rowIndex);
-		if (!isValidVersion(extension)) {
-			return false;
-		}
-
 		// Do not allow GUI uninstallation of extensions manually installed in installation 
 		// directory
-		if (extension.getInstallPath() != null && FileUtilities.isPathContainedWithin(
+		if (!isValidVersion(extension) || (extension.getInstallPath() != null && FileUtilities.isPathContainedWithin(
 			Application.getApplicationLayout().getApplicationInstallationDir().getFile(false),
-			new File(extension.getInstallPath()))) {
+			new File(extension.getInstallPath())))) {
 			return false;
 		}
 
@@ -154,11 +152,8 @@ class ExtensionTableModel extends ThreadedTableModel<ExtensionDetails, List<Exte
 			if (ExtensionUtils.install(extension, true)) {
 				modelChanged = true;
 			}
-		}
-		else {
-			if (ExtensionUtils.removeStateFiles(extension)) {
-				modelChanged = true;
-			}
+		} else if (ExtensionUtils.removeStateFiles(extension)) {
+			modelChanged = true;
 		}
 
 		refreshTable();
@@ -212,7 +207,7 @@ class ExtensionTableModel extends ThreadedTableModel<ExtensionDetails, List<Exte
 	 */
 	public void refreshTable() {
 		try {
-			setModelData(new ArrayList<ExtensionDetails>(ExtensionUtils.getExtensions()));
+			setModelData(new ArrayList<>(ExtensionUtils.getExtensions()));
 		}
 		catch (ExtensionException e) {
 			Msg.error(this, "Error loading extensions", e);
@@ -318,7 +313,7 @@ class ExtensionTableModel extends ThreadedTableModel<ExtensionDetails, List<Exte
 
 			// Check for the default version value. If this is still set, then no version has been
 			// established so just display an empty string.
-			if (version == null || version.equals("@extversion@")) {
+			if (version == null || "@extversion@".equals(version)) {
 				return "";
 			}
 
@@ -334,7 +329,7 @@ class ExtensionTableModel extends ThreadedTableModel<ExtensionDetails, List<Exte
 	/**
 	 * Table column for displaying the extension installation status.
 	 */
-	private class ExtensionInstalledColumn
+	private static class ExtensionInstalledColumn
 			extends AbstractDynamicTableColumn<ExtensionDetails, Boolean, List<ExtensionDetails>> {
 
 		@Override
@@ -357,7 +352,7 @@ class ExtensionTableModel extends ThreadedTableModel<ExtensionDetails, List<Exte
 	/**
 	 * Table column for displaying the extension installation directory.
 	 */
-	private class ExtensionInstallationDirColumn
+	private static class ExtensionInstallationDirColumn
 			extends AbstractDynamicTableColumn<ExtensionDetails, String, List<ExtensionDetails>> {
 
 		@Override
@@ -380,7 +375,7 @@ class ExtensionTableModel extends ThreadedTableModel<ExtensionDetails, List<Exte
 	/**
 	 * Table column for displaying the extension archive file.
 	 */
-	private class ExtensionArchiveFileColumn
+	private static class ExtensionArchiveFileColumn
 			extends AbstractDynamicTableColumn<ExtensionDetails, String, List<ExtensionDetails>> {
 
 		@Override
@@ -409,14 +404,11 @@ class ExtensionTableModel extends ThreadedTableModel<ExtensionDetails, List<Exte
 			ExtensionDetails extension = getSelectedExtension(data.getRowViewIndex());
 			if (data.isSelected()) {
 				comp.setForeground(Color.WHITE);
+			} else if (isValidVersion(extension) || SystemUtilities.isInDevelopmentMode()) {
+				comp.setForeground(Color.BLACK);
 			}
 			else {
-				if (isValidVersion(extension) || SystemUtilities.isInDevelopmentMode()) {
-					comp.setForeground(Color.BLACK);
-				}
-				else {
-					comp.setForeground(Color.RED);
-				}
+				comp.setForeground(Color.RED);
 			}
 			return comp;
 		}

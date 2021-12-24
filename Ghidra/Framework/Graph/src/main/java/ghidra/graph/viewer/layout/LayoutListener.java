@@ -38,5 +38,5 @@ public interface LayoutListener<V, E> {
 	 * @param point the new vertex location
 	 * @param changeType the type of the change
 	 */
-	public void vertexLocationChanged(V v, Point2D point, ChangeType changeType);
+	void vertexLocationChanged(V v, Point2D point, ChangeType changeType);
 }

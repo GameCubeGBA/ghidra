@@ -20,16 +20,16 @@ import java.util.Set;
 
 public interface RegisterState {
 
-	public Set<String> getKeys();
+	Set<String> getKeys();
 
-	public List<byte[]> getVals(String key);
+	List<byte[]> getVals(String key);
 
-	public List<Boolean> isInitialized(String key);
+	List<Boolean> isInitialized(String key);
 
-	public void setVals(String key, byte[] vals, boolean setInitiailized);
+	void setVals(String key, byte[] vals, boolean setInitiailized);
 
-	public void setVals(String key, long val, int size, boolean setInitiailized);
+	void setVals(String key, long val, int size, boolean setInitiailized);
 
-	public void dispose();
+	void dispose();
 
 }

@@ -16,9 +16,10 @@
  */
 package help.validator.links;
 
-import help.validator.model.IMG;
-
 import java.nio.file.Path;
+import java.util.Objects;
+
+import help.validator.model.IMG;
 
 public class InvalidIMGLink implements InvalidLink {
 
@@ -28,7 +29,7 @@ public class InvalidIMGLink implements InvalidLink {
 	protected InvalidIMGLink(IMG img, String message) {
 		this.img = img;
 		this.message = message;
-		if (Boolean.parseBoolean(System.getProperty("ghidra.help.failfast"))) {
+		if (Boolean.getBoolean("ghidra.help.failfast")) {
 			throw new RuntimeException(message + ": " + img);
 		}
 	}
@@ -54,11 +55,7 @@ public class InvalidIMGLink implements InvalidLink {
 
 	@Override
 	public int compareTo(InvalidLink other) {
-		if (other == null) {
-			return 1;
-		}
-
-		if (!(other instanceof InvalidIMGLink)) {
+		if ((other == null) || !(other instanceof InvalidIMGLink)) {
 			return 1;
 		}
 		InvalidIMGLink otherLink = (InvalidIMGLink) other;
@@ -88,34 +85,22 @@ public class InvalidIMGLink implements InvalidLink {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((img == null) ? 0 : img.hashCode());
-		result = prime * result + ((message == null) ? 0 : message.hashCode());
-		return result;
+		return Objects.hash(img, message);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if ((obj == null) || (getClass() != obj.getClass()))
 			return false;
 		InvalidIMGLink other = (InvalidIMGLink) obj;
-		if (img == null) {
-			if (other.img != null)
-				return false;
-		}
-		else if (!img.equals(other.img))
+		if (!Objects.equals(img, other.img)) {
 			return false;
-		if (message == null) {
-			if (other.message != null)
-				return false;
 		}
-		else if (!message.equals(other.message))
+		if (!Objects.equals(message, other.message)) {
 			return false;
+		}
 		return true;
 	}
 }

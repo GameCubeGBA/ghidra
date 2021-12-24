@@ -16,7 +16,7 @@
  */
 package ghidra.pcodeCPort.context;
 
-import ghidra.pcodeCPort.space.*;
+import ghidra.pcodeCPort.space.AddrSpace;
 
 
 public class FixedHandle {

@@ -15,7 +15,9 @@
  */
 package ghidra.app.plugin.assembler.sleigh.expr;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A type for solver hints

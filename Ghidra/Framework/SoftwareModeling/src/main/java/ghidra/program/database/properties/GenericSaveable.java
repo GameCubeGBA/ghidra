@@ -15,7 +15,11 @@
  */
 package ghidra.program.database.properties;
 
-import db.*;
+import java.util.Objects;
+
+import db.DBRecord;
+import db.Field;
+import db.Schema;
 import ghidra.util.ObjectStorage;
 import ghidra.util.Saveable;
 
@@ -31,7 +35,7 @@ public class GenericSaveable implements Saveable {
 
 	final DBRecord record;
 	final Schema schema;
-	final Class<?>[] fieldClasses = new Class<?>[0];
+	final Class<?>[] fieldClasses = {};
 
 	/**
 	 * Creates a generic saveable that can be used by the property map manager
@@ -95,10 +99,7 @@ public class GenericSaveable implements Saveable {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((record == null) ? 0 : record.hashCode());
-		return result;
+		return Objects.hash(record);
 	}
 
 	@Override
@@ -106,19 +107,11 @@ public class GenericSaveable implements Saveable {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
 		}
 		GenericSaveable other = (GenericSaveable) obj;
-		if (record == null) {
-			if (other.record != null) {
-				return false;
-			}
-		}
-		else if (!record.equals(other.record)) {
+		if (!Objects.equals(record, other.record)) {
 			return false;
 		}
 		return true;
@@ -132,7 +125,7 @@ public class GenericSaveable implements Saveable {
 		if (record == null || schema == null) {
 			return super.toString();
 		}
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		String[] fieldNames = schema.getFieldNames();
 		int numFields = fieldNames.length;
 		for (int i = 0; i < numFields; i++) {

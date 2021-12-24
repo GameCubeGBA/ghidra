@@ -20,11 +20,13 @@
  */
 package ghidra.app.plugin.processors.sleigh.pattern;
 
-import ghidra.app.plugin.processors.sleigh.*;
-import ghidra.program.model.mem.*;
-import ghidra.xml.*;
+import java.util.ArrayList;
 
-import java.util.*;
+import ghidra.app.plugin.processors.sleigh.ParserWalker;
+import ghidra.app.plugin.processors.sleigh.SleighDebugLogger;
+import ghidra.program.model.mem.MemoryAccessException;
+import ghidra.xml.XmlElement;
+import ghidra.xml.XmlPullParser;
 
 /**
  * 
@@ -54,15 +56,15 @@ public class OrPattern extends Pattern {
 	 */
 	@Override
     public Pattern simplifyClone() {
-		for(int i=0;i<orlist.length;++i) {
-			if (orlist[i].alwaysTrue())
+		for (DisjointPattern element : orlist) {
+			if (element.alwaysTrue())
 				return new InstructionPattern(true);
 		}
 		
-		ArrayList<Object> newlist = new ArrayList<Object>();
-		for(int i=0;i<orlist.length;++i) {
-			if (!orlist[i].alwaysFalse())
-				newlist.add(orlist[i].simplifyClone());
+		ArrayList<Object> newlist = new ArrayList<>();
+		for (DisjointPattern element : orlist) {
+			if (!element.alwaysFalse())
+				newlist.add(element.simplifyClone());
 		}
 		if (newlist.size()==0)
 			return new InstructionPattern(false);
@@ -76,8 +78,8 @@ public class OrPattern extends Pattern {
 	 */
 	@Override
     public void shiftInstruction(int sa) {
-		for(int i=0;i<orlist.length;++i)
-			orlist[i].shiftInstruction(sa);
+		for (DisjointPattern element : orlist)
+			element.shiftInstruction(sa);
 	}
 
 	/* (non-Javadoc)
@@ -85,26 +87,26 @@ public class OrPattern extends Pattern {
 	 */
 	@Override
     public Pattern doOr(Pattern b, int sa) {
-		ArrayList<Object> newlist = new ArrayList<Object>();
+		ArrayList<Object> newlist = new ArrayList<>();
 		
-		for(int i=0;i<orlist.length;++i)
-			newlist.add(orlist[i].simplifyClone());
+		for (DisjointPattern element : orlist)
+			newlist.add(element.simplifyClone());
 		if (sa < 0) {
-			for(int i=0;i<orlist.length;++i)
-				orlist[i].shiftInstruction(-sa);
+			for (DisjointPattern element : orlist)
+				element.shiftInstruction(-sa);
 		}
 		
 		if (b instanceof OrPattern) {
 			OrPattern b2 = (OrPattern)b;
-			for(int i=0;i<b2.orlist.length;++i)
-				newlist.add(b2.orlist[i].simplifyClone());
+			for (DisjointPattern element : b2.orlist)
+				newlist.add(element.simplifyClone());
 		}
 		else {
 			newlist.add(b.simplifyClone());
 		}
 		if (sa > 0) {
-			for(int i=0;i<newlist.size();++i)
-				((Pattern)newlist.get(i)).shiftInstruction(sa);
+			for (Object element : newlist)
+				((Pattern)element).shiftInstruction(sa);
 		}
 		return new OrPattern(newlist);
 	}
@@ -115,19 +117,19 @@ public class OrPattern extends Pattern {
 	@Override
     public Pattern doAnd(Pattern b, int sa) {
 		DisjointPattern tmp;
-		ArrayList<Object> newlist = new ArrayList<Object>();
+		ArrayList<Object> newlist = new ArrayList<>();
 		if (b instanceof OrPattern) {
 			OrPattern b2 = (OrPattern)b;
-			for(int i=0;i<orlist.length;++i) {
-				for(int j=0;j<b2.orlist.length;++j) {
-					tmp = (DisjointPattern)orlist[i].doAnd(b2.orlist[j],sa);
+			for (DisjointPattern element : orlist) {
+				for (DisjointPattern element2 : b2.orlist) {
+					tmp = (DisjointPattern)element.doAnd(element2,sa);
 					newlist.add(tmp);
 				}
 			}
 		}
 		else {
-			for(int i=0;i<orlist.length;++i) {
-				tmp = (DisjointPattern)orlist[i].doAnd(b,sa);
+			for (DisjointPattern element : orlist) {
+				tmp = (DisjointPattern)element.doAnd(b,sa);
 				newlist.add(tmp);
 			}
 		}
@@ -196,8 +198,8 @@ public class OrPattern extends Pattern {
 	 */
 	@Override
     public boolean alwaysTrue() {
-		for(int i=0;i<orlist.length;++i) {
-			if (orlist[i].alwaysTrue()) return true;
+		for (DisjointPattern element : orlist) {
+			if (element.alwaysTrue()) return true;
 		}
 		return false;
 	}
@@ -207,8 +209,8 @@ public class OrPattern extends Pattern {
 	 */
 	@Override
     public boolean alwaysFalse() {
-		for(int i=0;i<orlist.length;++i) {
-			if (!orlist[i].alwaysFalse()) return false;
+		for (DisjointPattern element : orlist) {
+			if (!element.alwaysFalse()) return false;
 		}
 		return true;
 	}
@@ -218,8 +220,8 @@ public class OrPattern extends Pattern {
 	 */
 	@Override
     public boolean alwaysInstructionTrue() {
-		for(int i=0;i<orlist.length;++i) {
-			if (!orlist[i].alwaysInstructionTrue()) return false;
+		for (DisjointPattern element : orlist) {
+			if (!element.alwaysInstructionTrue()) return false;
 		}
 		return true;
 	}
@@ -230,7 +232,7 @@ public class OrPattern extends Pattern {
 	@Override
     public void restoreXml(XmlPullParser parser) {
 	    XmlElement el = parser.start("or_pat");
-	    ArrayList<DisjointPattern> ors = new ArrayList<DisjointPattern>();
+	    ArrayList<DisjointPattern> ors = new ArrayList<>();
 	    XmlElement peek = parser.peek();
 	    while (!peek.isEnd()) {
 	        ors.add(DisjointPattern.restoreDisjoint(parser));

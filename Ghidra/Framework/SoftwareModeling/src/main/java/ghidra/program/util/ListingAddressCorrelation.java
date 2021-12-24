@@ -32,39 +32,39 @@ public interface ListingAddressCorrelation {
 	 * Gets the program containing the first set of addresses.
 	 * @return the program for the first set of addresses.
 	 */
-	public abstract Program getFirstProgram();
+	Program getFirstProgram();
 
 	/**
 	 * Gets the program containing the second set of addresses.
 	 * This program may be different from or the same as the first program.
 	 * @return the program for the second set of addresses.
 	 */
-	public abstract Program getSecondProgram();
+	Program getSecondProgram();
 
 	/**
 	 * Gets the first set of addresses for this correlator.
 	 * @return the first set of addresses.
 	 */
-	public abstract AddressSetView getAddressesInFirst();
+	AddressSetView getAddressesInFirst();
 
 	/**
 	 * Gets the second set of addresses for this correlator.
 	 * @return the second set of addresses.
 	 */
-	public abstract AddressSetView getAddressesInSecond();
+	AddressSetView getAddressesInSecond();
 
 	/**
 	 * Determine the address from the second set that matches the specified address in the first set.
 	 * @param addressInFirst the address in the first address set.
 	 * @return the matching address in the second set or null if a match couldn't be determined.
 	 */
-	public abstract Address getAddressInSecond(Address addressInFirst);
+	Address getAddressInSecond(Address addressInFirst);
 
 	/**
 	 * Determine the address from the first set that matches the specified address in the second set.
 	 * @param addressInSecond the address in the second address set.
 	 * @return the matching address in the first set or null if a match couldn't be determined.
 	 */
-	public abstract Address getAddressInFirst(Address addressInSecond);
+	Address getAddressInFirst(Address addressInSecond);
 
 }

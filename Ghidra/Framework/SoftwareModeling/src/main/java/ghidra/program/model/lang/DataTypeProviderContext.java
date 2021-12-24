@@ -30,7 +30,7 @@ public interface DataTypeProviderContext {
 	 *
 	 * @return a unique data type name
 	 */
-	public String getUniqueName(String baseName);
+	String getUniqueName(String baseName);
 
 	/**
 	 * Get one data type from buffer at the current position plus offset.
@@ -41,7 +41,7 @@ public interface DataTypeProviderContext {
 	 *
 	 * @throws IndexOutOfBoundsException if offset is negative
 	 */
-	public DataTypeComponent getDataTypeComponent(int offset);
+	DataTypeComponent getDataTypeComponent(int offset);
 
 	/**
 	 * Get an array of DataTypeComponents that begin at start or before end.
@@ -53,7 +53,7 @@ public interface DataTypeProviderContext {
 	 *
 	 * @return array of DataTypes that exist between start and end.
 	 */
-	public DataTypeComponent[] getDataTypeComponents(int start, int end);
+	DataTypeComponent[] getDataTypeComponents(int start, int end);
 
 	/**
 	 * Get the maximum contiguous offset that can be used to retrieve from the buffer.

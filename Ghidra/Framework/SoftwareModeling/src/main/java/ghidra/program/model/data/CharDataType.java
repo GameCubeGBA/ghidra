@@ -15,7 +15,9 @@
  */
 package ghidra.program.model.data;
 
-import ghidra.docking.settings.*;
+import ghidra.docking.settings.FormatSettingsDefinition;
+import ghidra.docking.settings.Settings;
+import ghidra.docking.settings.SettingsDefinition;
 import ghidra.program.model.mem.MemBuffer;
 import ghidra.program.model.mem.MemoryAccessException;
 import ghidra.util.StringFormat;

@@ -59,6 +59,7 @@ public class RedBlackKeySet implements ShortKeySet, Serializable {
 	/**
 	 * Returns the number keys in this set.
 	 */
+	@Override
 	public int size() {
 		return size;
 	}
@@ -69,6 +70,7 @@ public class RedBlackKeySet implements ShortKeySet, Serializable {
 	 * @exception IndexOutOfBoundsException thrown if the given key is not
 	 * in the range [0, maxKey].
 	 */
+	@Override
 	public boolean containsKey(short key) {
 		if ((key < 0) || (key > maxKey)) {
 			throw new IndexOutOfBoundsException();
@@ -92,6 +94,7 @@ public class RedBlackKeySet implements ShortKeySet, Serializable {
 	/**
 	 * Returns the first key in this set.
 	 */
+	@Override
 	public short getFirst() {
 		if (root == null) {
 			return -1;
@@ -107,6 +110,7 @@ public class RedBlackKeySet implements ShortKeySet, Serializable {
 	/**
 	 * Returns the last key in this set.
 	 */
+	@Override
 	public short getLast() {
 		if (root == null) {
 			return -1;
@@ -127,6 +131,7 @@ public class RedBlackKeySet implements ShortKeySet, Serializable {
 	 * @exception IndexOutOfBoundsException thrown if the given key is not
 	 * in the range [0, maxKey].
 	 */
+	@Override
 	public short getNext(short key) {
 		if ((key < 0) || (key > maxKey)) {
 			throw new IndexOutOfBoundsException();
@@ -161,6 +166,7 @@ public class RedBlackKeySet implements ShortKeySet, Serializable {
 	 * @exception IndexOutOfBoundsException thrown if the given key is not
 	 * in the range [0, maxKey].
 	 */
+	@Override
 	public short getPrevious(short key) {
 		if ((key < 0) || (key > maxKey)) {
 			throw new IndexOutOfBoundsException();
@@ -193,6 +199,7 @@ public class RedBlackKeySet implements ShortKeySet, Serializable {
 	 * @exception IndexOutOfBoundsException thrown if the given key is not
 	 * in the range [0, maxKey].
 	 */
+	@Override
 	public void put(short key) {
 		if ((key < 0) || (key > maxKey)) {
 			throw new IndexOutOfBoundsException();
@@ -218,17 +225,14 @@ public class RedBlackKeySet implements ShortKeySet, Serializable {
 					fixAfterInsertion(node.left);
 					return;
 				}
+			} else if (node.right != null) {
+				node = node.right;
 			}
 			else {
-				if (node.right != null) {
-					node = node.right;
-				}
-				else {
-					size++;
-					node.right = new RBNode(key, node);
-					fixAfterInsertion(node.right);
-					return;
-				}
+				size++;
+				node.right = new RBNode(key, node);
+				fixAfterInsertion(node.right);
+				return;
 			}
 		}
 	}
@@ -239,6 +243,7 @@ public class RedBlackKeySet implements ShortKeySet, Serializable {
 	 * @exception IndexOutOfBoundsException thrown if the given key is not
 	 * in the range [0, maxKey].
 	 */
+	@Override
 	public boolean remove(short key) {
 		if ((key < 0) || (key > maxKey)) {
 			throw new IndexOutOfBoundsException();
@@ -268,6 +273,7 @@ public class RedBlackKeySet implements ShortKeySet, Serializable {
 	/**
 	 * Removes all keys from the set.
 	 */
+	@Override
 	public void removeAll() {
 		size = 0;
 		root = null;
@@ -277,6 +283,7 @@ public class RedBlackKeySet implements ShortKeySet, Serializable {
 	 *  Test if the set is empty.
 	 *@return true if the set is empty.
 	 */
+	@Override
 	public boolean isEmpty() {
 		return size == 0;
 	}

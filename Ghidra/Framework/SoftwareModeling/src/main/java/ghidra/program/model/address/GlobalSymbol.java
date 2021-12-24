@@ -17,7 +17,11 @@ package ghidra.program.model.address;
 
 import ghidra.program.model.listing.CircularDependencyException;
 import ghidra.program.model.listing.Program;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.Namespace;
+import ghidra.program.model.symbol.Reference;
+import ghidra.program.model.symbol.SourceType;
+import ghidra.program.model.symbol.Symbol;
+import ghidra.program.model.symbol.SymbolType;
 import ghidra.program.util.ProgramLocation;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.exception.InvalidInputException;
@@ -46,8 +50,7 @@ public class GlobalSymbol implements Symbol {
 	@Override
 	public int hashCode() {
 		int result = 17;
-		result = 31 * result + getClass().hashCode();
-		return result;
+		return 31 * result + getClass().hashCode();
 	}
 
 	@Override

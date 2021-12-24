@@ -15,13 +15,19 @@
  */
 package docking.widgets.table.constrainteditor;
 
-import java.awt.*;
-import java.time.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.GridLayout;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 
-import javax.swing.*;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import docking.widgets.label.GDHtmlLabel;
 import docking.widgets.table.constraint.ColumnConstraint;
@@ -134,14 +140,12 @@ public class DateRangeConstraintEditor extends AbstractColumnConstraintEditor<Lo
 	}
 
 	private static boolean isValidDate(LocalDate date) {
-		if (date == null) {
-			return false;
-		}
+		
 
 		// Ensure parameter date isn't the default (invalid) date:
 
 		// ... by object equality
-		if (date == DateColumnConstraintProvider.DEFAULT_DATE) {
+		if ((date == null) || (date == DateColumnConstraintProvider.DEFAULT_DATE)) {
 			return false;
 		}
 

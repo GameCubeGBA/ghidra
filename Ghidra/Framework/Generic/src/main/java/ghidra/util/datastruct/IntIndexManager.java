@@ -35,7 +35,7 @@ public class IntIndexManager implements Serializable {
      */
     public IntIndexManager() {
         nextIndex = 0;
-        freeList = new ArrayList<Integer>();
+        freeList = new ArrayList<>();
     }
 
     /**

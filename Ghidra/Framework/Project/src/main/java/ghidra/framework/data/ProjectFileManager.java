@@ -15,23 +15,44 @@
  */
 package ghidra.framework.data;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InterruptedIOException;
 import java.net.URL;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import generic.timer.GhidraSwinglessTimer;
-import ghidra.framework.client.*;
-import ghidra.framework.model.*;
+import ghidra.framework.client.ClientUtil;
+import ghidra.framework.client.RepositoryAdapter;
+import ghidra.framework.client.RepositoryServerAdapter;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.DomainFolder;
+import ghidra.framework.model.DomainFolderChangeListener;
+import ghidra.framework.model.ProjectData;
+import ghidra.framework.model.ProjectLocator;
+import ghidra.framework.model.ServerInfo;
 import ghidra.framework.protocol.ghidra.GhidraURL;
 import ghidra.framework.remote.User;
-import ghidra.framework.store.*;
 import ghidra.framework.store.FileSystem;
+import ghidra.framework.store.FileSystemListener;
+import ghidra.framework.store.FileSystemSynchronizer;
+import ghidra.framework.store.FolderItem;
 import ghidra.framework.store.local.LocalFileSystem;
 import ghidra.framework.store.remote.RemoteFileSystem;
-import ghidra.util.*;
+import ghidra.util.InvalidNameException;
+import ghidra.util.Msg;
+import ghidra.util.NotOwnerException;
+import ghidra.util.PropertyFile;
+import ghidra.util.ReadOnlyException;
+import ghidra.util.SystemUtilities;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.DuplicateFileException;
-import ghidra.util.task.*;
+import ghidra.util.task.TaskLauncher;
+import ghidra.util.task.TaskMonitor;
+import ghidra.util.task.TaskMonitorAdapter;
 import utilities.util.FileUtilities;
 
 /**
@@ -872,7 +893,7 @@ public class ProjectFileManager implements ProjectData {
 	@Override
 	public String makeValidName(String name) {
 		int maxNameLength = getMaxNameLength();
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		for (int i = 0; i < name.length(); i++) {
 			if (buf.length() == maxNameLength) {
 				break;

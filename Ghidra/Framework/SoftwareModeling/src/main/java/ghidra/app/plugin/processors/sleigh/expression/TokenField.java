@@ -60,16 +60,7 @@ public class TokenField extends PatternValue {
 			return false;
 		}
 		TokenField that = (TokenField) obj;
-		if (this.bitstart != that.bitstart) {
-			return false;
-		}
-		if (this.bitend != that.bitend) {
-			return false;
-		}
-		if (this.signbit != that.signbit) {
-			return false;
-		}
-		if (this.bigendian != that.bigendian) {
+		if ((this.bitstart != that.bitstart) || (this.bitend != that.bitend) || (this.signbit != that.signbit) || (this.bigendian != that.bigendian)) {
 			return false;
 		}
 		return true;
@@ -162,14 +153,14 @@ public class TokenField extends PatternValue {
 		while (tmpsize >= 4) {
 			tmp = walker.getInstructionBytes(bs, 4);
 			res = res << 32;
-			res |= (tmp & 0xffffffffl);
+			res |= (tmp & 0xffffffffL);
 			bs += 4;
 			tmpsize -= 4;
 		}
 		if (tmpsize > 0) {
 			tmp = walker.getInstructionBytes(bs, tmpsize);
 			res = res << (8 * tmpsize);
-			res |= (tmp & 0xffffffffl);
+			res |= (tmp & 0xffffffffL);
 		}
 		if (!bigendian)
 			res = byteSwap(res, size);

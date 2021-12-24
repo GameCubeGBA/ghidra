@@ -31,5 +31,5 @@ public interface DisambiguateStrategy {
 	 * @throws CancelledException 
 	 * @throws MemoryAccessException 
 	 */
-	public ArrayList<Hash> calcHashes(InstructHash instHash, int matchSize, HashStore store) throws CancelledException, MemoryAccessException;
+	ArrayList<Hash> calcHashes(InstructHash instHash, int matchSize, HashStore store) throws CancelledException, MemoryAccessException;
 }

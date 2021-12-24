@@ -20,12 +20,16 @@
  */
 package ghidra.app.plugin.processors.sleigh.symbol;
 
-import ghidra.app.plugin.processors.sleigh.*;
-import ghidra.app.plugin.processors.sleigh.expression.*;
-import ghidra.program.model.mem.*;
-import ghidra.xml.*;
+import java.util.ArrayList;
 
-import java.util.*;
+import ghidra.app.plugin.processors.sleigh.FixedHandle;
+import ghidra.app.plugin.processors.sleigh.ParserWalker;
+import ghidra.app.plugin.processors.sleigh.SleighLanguage;
+import ghidra.app.plugin.processors.sleigh.expression.EndInstructionValue;
+import ghidra.app.plugin.processors.sleigh.expression.PatternExpression;
+import ghidra.program.model.mem.MemoryAccessException;
+import ghidra.xml.XmlElement;
+import ghidra.xml.XmlPullParser;
 
 /**
  * 

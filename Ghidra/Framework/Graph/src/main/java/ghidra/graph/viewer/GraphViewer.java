@@ -15,13 +15,22 @@
  */
 package ghidra.graph.viewer;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Window;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.Point2D;
 import java.util.function.Consumer;
 
-import javax.swing.*;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JToolTip;
+import javax.swing.SwingUtilities;
 
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
@@ -31,11 +40,15 @@ import generic.util.WindowUtilities;
 import ghidra.graph.VisualGraph;
 import ghidra.graph.viewer.edge.PathHighlightListener;
 import ghidra.graph.viewer.edge.VisualGraphPathHighlighter;
-import ghidra.graph.viewer.event.mouse.*;
+import ghidra.graph.viewer.event.mouse.VertexMouseInfo;
+import ghidra.graph.viewer.event.mouse.VertexTooltipProvider;
+import ghidra.graph.viewer.event.mouse.VisualGraphPluggableGraphMouse;
 import ghidra.graph.viewer.event.picking.GPickedState;
 import ghidra.graph.viewer.layout.VisualGraphLayout;
 import ghidra.graph.viewer.options.VisualGraphOptions;
-import ghidra.graph.viewer.popup.*;
+import ghidra.graph.viewer.popup.PopupRegulator;
+import ghidra.graph.viewer.popup.PopupSource;
+import ghidra.graph.viewer.popup.ToolTipInfo;
 import ghidra.graph.viewer.renderer.VisualGraphRenderer;
 import ghidra.util.layout.PairLayout;
 

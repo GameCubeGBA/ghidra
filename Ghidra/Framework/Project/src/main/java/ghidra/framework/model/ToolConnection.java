@@ -27,13 +27,13 @@ public interface ToolConnection {
 	 * Get the tool that produces an event
 	 * @return the tool
 	 */
-	public PluginTool getProducer();
+	PluginTool getProducer();
 
 	/**
 	 * Get the tool that consumes an event
 	 * @return the tool
 	 */
-	public PluginTool getConsumer();
+	PluginTool getConsumer();
 
 	/**
 	 * Get the list of event names that is an intersection
@@ -42,7 +42,7 @@ public interface ToolConnection {
 	 * 
 	 * @return an array of event names
 	 */
-	public String[] getEvents();
+	String[] getEvents();
 
 	/**
 	 * Connect the tools for the given event name.
@@ -52,7 +52,7 @@ public interface ToolConnection {
 	 * @throws IllegalArgumentException if eventName is not valid for this
 	 * producer/consumer pair.
 	 */
-	public void connect(String eventName);
+	void connect(String eventName);
 
 	/**
 	 * Break the connection between the tools for the
@@ -63,7 +63,7 @@ public interface ToolConnection {
 	 * @throws IllegalArgumentException if eventName is not valid for this
 	 * producer/consumer pair.
 	 */
-	public void disconnect(String eventName);
+	void disconnect(String eventName);
 
 	/**
 	 * Return whether the tools are connected for the
@@ -72,6 +72,6 @@ public interface ToolConnection {
 	 * @param eventName name of event to check
 	 * @return true if the tools are connected by eventName.
 	 */
-	public boolean isConnected(String eventName);
+	boolean isConnected(String eventName);
 
 }

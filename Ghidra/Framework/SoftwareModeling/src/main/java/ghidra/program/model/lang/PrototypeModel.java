@@ -17,15 +17,27 @@ package ghidra.program.model.lang;
 
 import java.util.ArrayList;
 
-import ghidra.program.model.address.*;
-import ghidra.program.model.data.*;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressRange;
+import ghidra.program.model.address.AddressRangeIterator;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.GenericCallingConvention;
+import ghidra.program.model.data.PointerDataType;
+import ghidra.program.model.data.VoidDataType;
+import ghidra.program.model.listing.AutoParameterType;
+import ghidra.program.model.listing.Parameter;
+import ghidra.program.model.listing.Program;
+import ghidra.program.model.listing.VariableStorage;
 import ghidra.program.model.pcode.AddressXML;
 import ghidra.program.model.pcode.Varnode;
 import ghidra.util.SystemUtilities;
 import ghidra.util.exception.InvalidInputException;
 import ghidra.util.xml.SpecXmlUtils;
-import ghidra.xml.*;
+import ghidra.xml.XmlElement;
+import ghidra.xml.XmlParseException;
+import ghidra.xml.XmlPullParser;
 
 /**
  * A function calling convention model.
@@ -73,7 +85,7 @@ public class PrototypeModel {
 		likelytrash = model.likelytrash;
 		localRange = new AddressSet(model.localRange);
 		paramRange = new AddressSet(model.paramRange);
-		hasThis = model.hasThis || name.equals(CompilerSpec.CALLING_CONVENTION_thiscall);
+		hasThis = model.hasThis || CompilerSpec.CALLING_CONVENTION_thiscall.equals(name);
 		isConstruct = model.isConstruct;
 		genericCallingConvention = GenericCallingConvention.getGenericCallingConvention(name);
 		hasUponEntry = model.hasUponEntry;
@@ -344,12 +356,12 @@ public class PrototypeModel {
 	}
 
 	private void buildParamList(String strategy) throws XmlParseException {
-		if (strategy == null || strategy.equals("standard")) {
+		if (strategy == null || "standard".equals(strategy)) {
 			inputParams = new ParamListStandard();
 			outputParams = new ParamListStandardOut();
 			inputListType = InputListType.STANDARD;
 		}
-		else if (strategy.equals("register")) {
+		else if ("register".equals(strategy)) {
 			inputParams = new ParamListStandard();
 			outputParams = new ParamListRegisterOut();
 			inputListType = InputListType.REGISTER;
@@ -523,7 +535,7 @@ public class PrototypeModel {
 		name = protoElement.getAttribute("name");
 		extrapop = PrototypeModel.UNKNOWN_EXTRAPOP;
 		String extpopStr = protoElement.getAttribute("extrapop");
-		if (!extpopStr.equals("unknown")) {
+		if (!"unknown".equals(extpopStr)) {
 			extrapop = SpecXmlUtils.decodeInt(extpopStr);
 		}
 		stackshift = SpecXmlUtils.decodeInt(protoElement.getAttribute("stackshift"));
@@ -541,7 +553,7 @@ public class PrototypeModel {
 			hasThis = SpecXmlUtils.decodeBoolean(thisString);
 		}
 		else {
-			hasThis = name.equals(CompilerSpec.CALLING_CONVENTION_thiscall);
+			hasThis = CompilerSpec.CALLING_CONVENTION_thiscall.equals(name);
 		}
 		String constructString = protoElement.getAttribute("constructor");
 		if (constructString != null) {
@@ -552,16 +564,16 @@ public class PrototypeModel {
 		while (parser.peek().isStart()) {
 			XmlElement subel = parser.peek();
 			String elName = subel.getName();
-			if (elName.equals("input")) {
+			if ("input".equals(elName)) {
 				inputParams.restoreXml(parser, cspec);
 			}
-			else if (elName.equals("output")) {
+			else if ("output".equals(elName)) {
 				outputParams.restoreXml(parser, cspec);
 			}
-			else if (elName.equals("pcode")) {
+			else if ("pcode".equals(elName)) {
 				XmlElement el = parser.peek();
 				String source = "Compiler spec=" + cspec.getCompilerSpecID().getIdAsString();
-				if (el.getAttribute("inject").equals("uponentry")) {
+				if ("uponentry".equals(el.getAttribute("inject"))) {
 					hasUponEntry = true;
 				}
 				else {
@@ -571,22 +583,22 @@ public class PrototypeModel {
 						.restoreXmlInject(source, getInjectName(), InjectPayload.CALLMECHANISM_TYPE,
 							parser);
 			}
-			else if (elName.equals("unaffected")) {
+			else if ("unaffected".equals(elName)) {
 				unaffected = readVarnodes(parser, cspec);
 			}
-			else if (elName.equals("killedbycall")) {
+			else if ("killedbycall".equals(elName)) {
 				killedbycall = readVarnodes(parser, cspec);
 			}
-			else if (elName.equals("returnaddress")) {
+			else if ("returnaddress".equals(elName)) {
 				returnaddress = readVarnodes(parser, cspec);
 			}
-			else if (elName.equals("likelytrash")) {
+			else if ("likelytrash".equals(elName)) {
 				likelytrash = readVarnodes(parser, cspec);
 			}
-			else if (elName.equals("localrange")) {
+			else if ("localrange".equals(elName)) {
 				localRange = readAddressSet(parser, cspec);
 			}
-			else if (elName.equals("paramrange")) {
+			else if ("paramrange".equals(elName)) {
 				paramRange = readAddressSet(parser, cspec);
 			}
 			else {
@@ -620,13 +632,7 @@ public class PrototypeModel {
 	@Override
 	public boolean equals(Object obj) {
 		PrototypeModel op2 = (PrototypeModel) obj;
-		if (!name.equals(op2.name)) {
-			return false;
-		}
-		if (extrapop != op2.extrapop || stackshift != op2.stackshift) {
-			return false;
-		}
-		if (genericCallingConvention != op2.genericCallingConvention) {
+		if (!name.equals(op2.name) || extrapop != op2.extrapop || stackshift != op2.stackshift || (genericCallingConvention != op2.genericCallingConvention)) {
 			return false;
 		}
 		if (hasThis != op2.hasThis || isConstruct != op2.isConstruct) {

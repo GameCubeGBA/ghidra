@@ -15,7 +15,9 @@
  */
 package docking.menu.keys;
 
-import javax.swing.*;
+import javax.swing.JPopupMenu;
+import javax.swing.MenuElement;
+import javax.swing.MenuSelectionManager;
 
 class PageDownMenuKeyHandler extends MenuKeyHandler {
 

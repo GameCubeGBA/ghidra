@@ -15,6 +15,8 @@
  */
 package ghidra.program.util;
 
+import java.util.Objects;
+
 import ghidra.framework.options.SaveState;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.CodeUnit;
@@ -71,27 +73,21 @@ public class RefRepeatCommentFieldLocation extends CommentFieldLocation {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + currentCommentRow;
-		result = prime * result + ((refRepeatAddress == null) ? 0 : refRepeatAddress.hashCode());
-		return result;
+		return prime * result + ((refRepeatAddress == null) ? 0 : refRepeatAddress.hashCode());
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
+		if (!super.equals(obj) || (getClass() != obj.getClass()))
 			return false;
 		RefRepeatCommentFieldLocation other = (RefRepeatCommentFieldLocation) obj;
 		if (currentCommentRow != other.currentCommentRow)
 			return false;
-		if (refRepeatAddress == null) {
-			if (other.refRepeatAddress != null)
-				return false;
-		}
-		else if (!refRepeatAddress.equals(other.refRepeatAddress))
+		if (!Objects.equals(refRepeatAddress, other.refRepeatAddress)) {
 			return false;
+		}
 		return true;
 	}
 

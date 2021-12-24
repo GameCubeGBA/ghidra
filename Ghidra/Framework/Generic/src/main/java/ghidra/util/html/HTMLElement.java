@@ -15,7 +15,9 @@
  */
 package ghidra.util.html;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import ghidra.util.HTMLUtilities;
 
@@ -65,13 +67,9 @@ public class HTMLElement extends ArrayList<Object> {
 			if (obj == null) {
 				sb.append("(null)");
 			}
-			else if (obj instanceof HTMLElement) {
+			else if ((obj instanceof HTMLElement) || (obj instanceof HTMLContent)) {
 				sb.append(obj.toString());
-			}
-			else if (obj instanceof HTMLContent) {
-				sb.append(obj.toString());
-			}
-			else {
+			} else {
 				sb.append(HTMLUtilities.friendlyEncodeHTML(obj.toString()));
 			}
 		}
@@ -79,7 +77,7 @@ public class HTMLElement extends ArrayList<Object> {
 		return sb.toString();
 	}
 
-	private class HTMLContent {
+	private static class HTMLContent {
 		private String content;
 
 		HTMLContent(String content) {

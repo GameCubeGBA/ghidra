@@ -66,10 +66,7 @@ public abstract class Undefined extends BuiltIn {
 	 * its various forms, else false.
 	 */
 	public static boolean isUndefined(DataType dataType) {
-		if (dataType instanceof DefaultDataType) {
-			return true;
-		}
-		if (dataType instanceof Undefined) {
+		if ((dataType instanceof DefaultDataType) || (dataType instanceof Undefined)) {
 			return true;
 		}
 		return isUndefinedArray(dataType);

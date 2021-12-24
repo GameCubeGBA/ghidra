@@ -15,7 +15,11 @@
  */
 package ghidra.framework.main.projectdata.actions;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -25,13 +29,19 @@ import java.util.concurrent.TimeUnit;
 
 import javax.swing.AbstractButton;
 
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import docking.ActionContext;
 import docking.test.AbstractDockingTest;
 import docking.widgets.OptionDialog;
 import ghidra.framework.main.datatable.ProjectDataContext;
-import ghidra.framework.model.*;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.DomainFolder;
+import ghidra.framework.model.DomainObject;
+import ghidra.framework.model.TestDummyDomainFile;
+import ghidra.framework.model.TestDummyDomainFolder;
 import ghidra.util.task.Task;
 import ghidra.util.task.TaskListener;
 import util.CollectionUtils;

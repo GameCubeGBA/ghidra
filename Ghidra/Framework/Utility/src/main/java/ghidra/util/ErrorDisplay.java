@@ -19,13 +19,13 @@ package ghidra.util;
 import java.awt.Component;
 
 public interface ErrorDisplay {
-    public void displayInfoMessage(ErrorLogger errorLogger, Object originator,
+    void displayInfoMessage(ErrorLogger errorLogger, Object originator,
             Component parent, String title, Object message);
 
-    public void displayErrorMessage(ErrorLogger errorLogger, Object originator,
+    void displayErrorMessage(ErrorLogger errorLogger, Object originator,
             Component parent, String title, Object message, Throwable throwable);
 
-    public void displayWarningMessage(ErrorLogger errorLogger,
+    void displayWarningMessage(ErrorLogger errorLogger,
             Object originator, Component parent, String title, Object message,
             Throwable throwable);
 }

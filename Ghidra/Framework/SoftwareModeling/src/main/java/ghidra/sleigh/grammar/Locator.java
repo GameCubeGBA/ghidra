@@ -20,7 +20,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 public class Locator {
-	private TreeMap<Integer, Location> map = new TreeMap<Integer, Location>();
+	private TreeMap<Integer, Location> map = new TreeMap<>();
 
 	public void registerLocation(int expandedLineNo, Location realLocation) {
 		map.put(expandedLineNo, realLocation);
@@ -37,7 +37,6 @@ public class Locator {
 		key = headMap.lastKey();
 		location = headMap.get(key);
 		int actualLineNumber = expandedLineNo - key + location.lineno;
-		correctLocation = new Location(location.filename, actualLineNumber);
-		return correctLocation;
+		return new Location(location.filename, actualLineNumber);
 	}
 }

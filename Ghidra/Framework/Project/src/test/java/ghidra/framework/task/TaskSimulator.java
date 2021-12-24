@@ -15,12 +15,19 @@
  */
 package ghidra.framework.task;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.FlowLayout;
+import java.awt.Point;
 import java.io.IOException;
 
-import javax.swing.*;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.WindowConstants;
 
 import docking.framework.DockingApplicationConfiguration;
 import docking.widgets.button.GRadioButton;
@@ -83,31 +90,16 @@ public class TaskSimulator {
 
 		yieldingCheckbox = new GCheckBox("Yielding");
 
-		addGroupButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				addGroup();
+		addGroupButton.addActionListener(e -> addGroup());
+		addTaskButton.addActionListener(e -> addTask());
+		showResultsButton.addActionListener(e -> {
+			if (showingResults) {
+				showingResults = false;
+				removeResultsPanel();
 			}
-		});
-		addTaskButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				addTask();
-			}
-		});
-		showResultsButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (showingResults) {
-					showingResults = false;
-					removeResultsPanel();
-				}
-				else {
-					showingResults = true;
-					addResultsPanel();
-				}
+			else {
+				showingResults = true;
+				addResultsPanel();
 			}
 		});
 

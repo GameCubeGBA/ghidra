@@ -15,12 +15,28 @@
  */
 package docking;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dialog;
+import java.awt.Dimension;
+import java.awt.Frame;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Window;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
-import javax.swing.*;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 
 import org.apache.commons.collections4.map.LazyMap;
 
@@ -304,17 +320,7 @@ public class DockingDialog extends JDialog implements HelpDescriptor {
 	 * @param c the component to center over.
 	 */
 	public void setCenteredOnComponent(Component c) {
-		if (c == null) {
-			setCenteredOnScreen();
-			return;
-		}
-
-		if (c instanceof HiddenDockingFrame) {
-			setCenteredOnScreen();
-			return; // don't center over a hidden frame, as it may be is offscreen
-		}
-
-		if (!c.isVisible()) {
+		if ((c == null) || (c instanceof HiddenDockingFrame) || !c.isVisible()) {
 			// hidden frames cause us to be put in the upper-left--don't do that
 			setCenteredOnScreen();
 			return;

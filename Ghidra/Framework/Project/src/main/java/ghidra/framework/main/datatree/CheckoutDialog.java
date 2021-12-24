@@ -17,7 +17,9 @@ package ghidra.framework.main.datatree;
 
 import java.awt.BorderLayout;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JCheckBox;
+import javax.swing.JPanel;
 
 import docking.DialogComponentProvider;
 import docking.widgets.MultiLineLabel;

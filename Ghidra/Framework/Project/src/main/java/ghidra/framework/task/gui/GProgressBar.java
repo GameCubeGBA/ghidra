@@ -15,11 +15,22 @@
  */
 package ghidra.framework.task.gui;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.lang.reflect.InvocationTargetException;
 import java.text.NumberFormat;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.SwingUtilities;
+import javax.swing.Timer;
+import javax.swing.ToolTipManager;
 
 import docking.util.AnimatedIcon;
 import docking.widgets.EmptyBorderButton;

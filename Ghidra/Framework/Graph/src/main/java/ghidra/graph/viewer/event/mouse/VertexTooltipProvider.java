@@ -36,7 +36,7 @@ public interface VertexTooltipProvider<V, E> {
 	 * @param v the vertex
 	 * @return a tooltip component
 	 */
-	public JComponent getTooltip(V v);
+	JComponent getTooltip(V v);
 
 	/**
 	 * Returns a tooltip component for the given vertex and edge.  This is used to create
@@ -46,7 +46,7 @@ public interface VertexTooltipProvider<V, E> {
 	 * @param e the edge for 
 	 * @return a tooltip component
 	 */
-	public JComponent getTooltip(V v, E e);
+	JComponent getTooltip(V v, E e);
 
 	/**
 	 * Returns a tooltip string for the given vertex and mouse event
@@ -55,5 +55,5 @@ public interface VertexTooltipProvider<V, E> {
 	 * @param e the mouse event 
 	 * @return the tooltip text
 	 */
-	public String getTooltipText(V v, MouseEvent e);
+	String getTooltipText(V v, MouseEvent e);
 }

@@ -28,7 +28,7 @@ public interface Category extends Comparable<Category> {
 	/**
 	 * Get the name of this category.
 	 */
-	public abstract String getName();
+	String getName();
 
 	/**
 	 * Sets the name of this category.
@@ -36,19 +36,19 @@ public interface Category extends Comparable<Category> {
 	 * @throws DuplicateNameException if another category exists in the same parent with the same name;
 	 * @throws InvalidNameException if the name is not an acceptable name.
 	 */
-	public abstract void setName(String name) throws DuplicateNameException, InvalidNameException;
+	void setName(String name) throws DuplicateNameException, InvalidNameException;
 
 	/**
 	 * Get all categories in this category.
 	 * @return zero-length array if there are no categories
 	 */
-	public abstract Category[] getCategories();
+	Category[] getCategories();
 
 	/**
 	 * Get all data types in this category.
 	 * @return zero-length array if there are no data types
 	 */
-	public abstract DataType[] getDataTypes();
+	DataType[] getDataTypes();
 
 	/**
 	 * Get all data types in this category whose base name matches the base name of the given name.
@@ -61,7 +61,7 @@ public interface Category extends Comparable<Category> {
 	 * appended as a convenience.
 	 * @return a list of data types that have the same base name as the base name of the given name
 	 */
-	public abstract List<DataType> getDataTypesByBaseName(String name);
+	List<DataType> getDataTypesByBaseName(String name);
 
 	/**
 	 * Adds the given datatype to this category.
@@ -69,27 +69,27 @@ public interface Category extends Comparable<Category> {
 	 * @param handler the DataTypeConflictHandler to use if conflicts are discovered.
 	 * @return the new datatype with its category path adjusted.
 	 */
-	public abstract DataType addDataType(DataType dt, DataTypeConflictHandler handler);
+	DataType addDataType(DataType dt, DataTypeConflictHandler handler);
 
 	/**
 	 * Get a category with the given name.
 	 * @param name the name of the category
 	 * @return null if there is no category by this name
 	 */
-	public abstract Category getCategory(String name);
+	Category getCategory(String name);
 
 	/**
 	 * return the full CategoryPath for this category.
 	 * @return the full CategoryPath for this category.
 	 */
-	public abstract CategoryPath getCategoryPath();
+	CategoryPath getCategoryPath();
 
 	/**
 	 * Get a data type with the given name.
 	 * @param name the name of the data type
 	 * @return null if there is no data type by this name
 	 */
-	public abstract DataType getDataType(String name);
+	DataType getDataType(String name);
 
 	/**
 	 * Create a category with the given name; if category already exists, then
@@ -97,7 +97,7 @@ public interface Category extends Comparable<Category> {
 	 * @param name the category name
 	 * @throws InvalidNameException if name has invalid characters
 	 */
-	public abstract Category createCategory(String name) throws InvalidNameException;
+	Category createCategory(String name) throws InvalidNameException;
 
 	/**
 	 * Remove the named category from this category.
@@ -105,7 +105,7 @@ public interface Category extends Comparable<Category> {
 	 * @param monitor the task monitor
 	 * @return true if the category was removed
 	 */
-	public abstract boolean removeCategory(String name, TaskMonitor monitor);
+	boolean removeCategory(String name, TaskMonitor monitor);
 
 	/**
 	 * Remove the named category from this category, IFF it is empty.
@@ -113,7 +113,7 @@ public interface Category extends Comparable<Category> {
 	 * @param monitor the task monitor
 	 * @return true if the category was removed
 	 */
-	public abstract boolean removeEmptyCategory(String name, TaskMonitor monitor);
+	boolean removeEmptyCategory(String name, TaskMonitor monitor);
 
 	/**
 	 * Move the given category to this category; category is removed from
@@ -122,7 +122,7 @@ public interface Category extends Comparable<Category> {
 	 * @throws DuplicateNameException if this category already contains a
 	 * category or data type with the same name as the category param.
 	 */
-	public abstract void moveCategory(Category category, TaskMonitor monitor)
+	void moveCategory(Category category, TaskMonitor monitor)
 			throws DuplicateNameException;
 
 	/**
@@ -130,34 +130,34 @@ public interface Category extends Comparable<Category> {
 	 * @param category the category to copy into this category
 	 * @return category that is added to this category
 	 */
-	public abstract Category copyCategory(Category category, DataTypeConflictHandler handler,
+	Category copyCategory(Category category, DataTypeConflictHandler handler,
 			TaskMonitor monitor);
 
 	/**
 	 * Return this category's parent; return null if this is the root category.
 	 */
-	public abstract Category getParent();
+	Category getParent();
 
 	/**
 	 * Returns true if this is the root category.
 	 * @return true if this is the root category.
 	 */
-	public abstract boolean isRoot();
+	boolean isRoot();
 
 	/**
 	 * Get the fully qualified name for this category.
 	 */
-	public abstract String getCategoryPathName();
+	String getCategoryPathName();
 
 	/**
 	 * Get the root category.
 	 */
-	public abstract Category getRoot();
+	Category getRoot();
 
 	/**
 	 * Get the data type manager associated with this category.
 	 */
-	public abstract DataTypeManager getDataTypeManager();
+	DataTypeManager getDataTypeManager();
 
 	/**
 	 * Move a data type into this category
@@ -166,7 +166,7 @@ public interface Category extends Comparable<Category> {
 	 * @param handler the handler to call if there is a data type conflict
 	 * @throws DataTypeDependencyException
 	 */
-	public abstract void moveDataType(DataType type, DataTypeConflictHandler handler)
+	void moveDataType(DataType type, DataTypeConflictHandler handler)
 			throws DataTypeDependencyException;
 
 	/**
@@ -176,10 +176,10 @@ public interface Category extends Comparable<Category> {
 	 * @param monitor monitor of progress in case operation takes a long time.
 	 * @return true if the data type was found in this category and successfully removed.
 	 */
-	public abstract boolean remove(DataType type, TaskMonitor monitor);
+	boolean remove(DataType type, TaskMonitor monitor);
 
 	/**
 	 * Get the ID for this category.
 	 */
-	public long getID();
+	long getID();
 }

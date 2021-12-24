@@ -16,15 +16,15 @@
  */
 package docking.widgets.tree;
 
-import ghidra.util.FilterTransformer;
 import docking.widgets.filter.FilterOptions;
 import docking.widgets.tree.support.GTreeFilter;
+import ghidra.util.FilterTransformer;
 
 public interface GTreeTextFilterFactory {
-	public GTreeFilter getTreeFilter(String filterText, FilterTransformer<GTreeNode> transformer);
+	GTreeFilter getTreeFilter(String filterText, FilterTransformer<GTreeNode> transformer);
 
-	public void setFilterOptions(FilterOptions options);
+	void setFilterOptions(FilterOptions options);
 
-	public FilterOptions getFilterOptions();
+	FilterOptions getFilterOptions();
 
 }

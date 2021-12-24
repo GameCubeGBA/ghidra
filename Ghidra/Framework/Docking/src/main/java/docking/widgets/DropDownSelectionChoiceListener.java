@@ -25,5 +25,5 @@ package docking.widgets;
  */
 public interface DropDownSelectionChoiceListener<T> {
 
-    public void selectionChanged( T t );
+    void selectionChanged( T t );
 }

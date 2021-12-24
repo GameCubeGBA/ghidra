@@ -23,7 +23,9 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSetView;
 import ghidra.program.model.data.DataType;
 import ghidra.program.model.lang.PrototypeModel;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.ExternalLocation;
+import ghidra.program.model.symbol.Namespace;
+import ghidra.program.model.symbol.SourceType;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.exception.InvalidInputException;
 import ghidra.util.task.TaskMonitor;
@@ -33,20 +35,20 @@ import ghidra.util.task.TaskMonitor;
  */
 public interface Function extends Namespace {
 
-	public static final String DEFAULT_PARAM_PREFIX = "param_";
-	public static final String THIS_PARAM_NAME = AutoParameterType.THIS.getDisplayName();
-	public static final String RETURN_PTR_PARAM_NAME =
+	String DEFAULT_PARAM_PREFIX = "param_";
+	String THIS_PARAM_NAME = AutoParameterType.THIS.getDisplayName();
+	String RETURN_PTR_PARAM_NAME =
 		AutoParameterType.RETURN_STORAGE_PTR.getDisplayName();
-	public static final int DEFAULT_PARAM_PREFIX_LEN = DEFAULT_PARAM_PREFIX.length();
-	public static final String DEFAULT_LOCAL_PREFIX = "local_";
-	public static final String DEFAULT_LOCAL_RESERVED_PREFIX = "local_res";
-	public static final String DEFAULT_LOCAL_TEMP_PREFIX = "temp_";
-	public static final int DEFAULT_LOCAL_PREFIX_LEN = DEFAULT_LOCAL_PREFIX.length();
-	public static final String UNKNOWN_CALLING_CONVENTION_STRING = "unknown";
-	public static final String DEFAULT_CALLING_CONVENTION_STRING = "default";
-	public static final String INLINE = "inline";
-	public static final String NORETURN = "noreturn";
-	public static final String THUNK = "thunk";
+	int DEFAULT_PARAM_PREFIX_LEN = DEFAULT_PARAM_PREFIX.length();
+	String DEFAULT_LOCAL_PREFIX = "local_";
+	String DEFAULT_LOCAL_RESERVED_PREFIX = "local_res";
+	String DEFAULT_LOCAL_TEMP_PREFIX = "temp_";
+	int DEFAULT_LOCAL_PREFIX_LEN = DEFAULT_LOCAL_PREFIX.length();
+	String UNKNOWN_CALLING_CONVENTION_STRING = "unknown";
+	String DEFAULT_CALLING_CONVENTION_STRING = "default";
+	String INLINE = "inline";
+	String NORETURN = "noreturn";
+	String THUNK = "thunk";
 
 	public enum FunctionUpdateType {
 		/**
@@ -78,16 +80,15 @@ public interface Function extends Namespace {
 	/**
 	 * Default Stack depth for a function.
 	 */
-	public final static int UNKNOWN_STACK_DEPTH_CHANGE = Integer.MAX_VALUE;
-	public final static int INVALID_STACK_DEPTH_CHANGE = Integer.MAX_VALUE - 1;
+	int UNKNOWN_STACK_DEPTH_CHANGE = Integer.MAX_VALUE;
+	int INVALID_STACK_DEPTH_CHANGE = Integer.MAX_VALUE - 1;
 
 	/**
 	 * Get the name of this function.
 	 *
 	 * @return the functions name
 	 */
-	@Override
-	public String getName();
+	@Override String getName();
 
 	/**  
 	 * Set the name of this function.
@@ -96,7 +97,7 @@ public interface Function extends Namespace {
 	 * @throws DuplicateNameException if the name is used by some other symbol
 	 * @throws InvalidInputException if the name is not a valid function name.
 	 */
-	public void setName(String name, SourceType source)
+	void setName(String name, SourceType source)
 			throws DuplicateNameException, InvalidInputException;
 
 	/**
@@ -104,39 +105,39 @@ public interface Function extends Namespace {
 	 * @param name name of call-fixup specified by compiler spec.  A null
 	 * value will clear the current setting.
 	 */
-	public void setCallFixup(String name);
+	void setCallFixup(String name);
 
 	/**
 	 * Returns the current call-fixup name set on this instruction or null if one has not been set
 	 * @return the name
 	 */
-	public String getCallFixup();
+	String getCallFixup();
 
 	/**
 	 * Get the program containing this function.
 	 *
 	 * @return the program
 	 */
-	public Program getProgram();
+	Program getProgram();
 
 	/**
 	 * Get the comment for this function.
 	 * @return the comment for this function
 	 */
-	public String getComment();
+	String getComment();
 
 	/**
 	 * Returns the function (same as plate) comment as an array of strings where
 	 * each item in the array is a line of text in the comment.
 	 * @return the comments
 	 */
-	public String[] getCommentAsArray();
+	String[] getCommentAsArray();
 
 	/**
 	 * Set the comment for this function.
 	 * @param comment the string to set as the comment.
 	 */
-	public void setComment(String comment);
+	void setComment(String comment);
 
 	/**
 	 * Returns the repeatable comment for this function.
@@ -144,19 +145,19 @@ public interface Function extends Namespace {
 	 * at locations that 'call' this function.
 	 * @return the repeatable comment for this function
 	 */
-	public String getRepeatableComment();
+	String getRepeatableComment();
 
 	/**
 	 * Returns the repeatable comment as an array of strings.
 	 * @return the repeatable comment as an array of strings
 	 */
-	public String[] getRepeatableCommentAsArray();
+	String[] getRepeatableCommentAsArray();
 
 	/**
 	 * Set the repeatable comment for this function.
 	 * @param comment the string to set as the repeatable comment.
 	 */
-	public void setRepeatableComment(String comment);
+	void setRepeatableComment(String comment);
 
 	/**
 	 * Get the entry point for this function.
@@ -164,7 +165,7 @@ public interface Function extends Namespace {
 	 *
 	 * @return the entry point
 	 */
-	public Address getEntryPoint();
+	Address getEntryPoint();
 
 	/**
 	 * Get the Function's return type.
@@ -172,7 +173,7 @@ public interface Function extends Namespace {
 	 *
 	 * @return the DataType that this function returns.
 	 */
-	public DataType getReturnType();
+	DataType getReturnType();
 
 	/**
 	 * Set the function's return type.
@@ -180,7 +181,7 @@ public interface Function extends Namespace {
 	 * @param source TODO
 	 * @throws InvalidInputException if data type is not a fixed length.
 	 */
-	public void setReturnType(DataType type, SourceType source) throws InvalidInputException;
+	void setReturnType(DataType type, SourceType source) throws InvalidInputException;
 
 	/**
 	 * Get the Function's return type/storage represented by a Parameter 
@@ -188,7 +189,7 @@ public interface Function extends Namespace {
 	 * Parameter.RETURN_ORIDINAL.
 	 * @return return data-type/storage
 	 */
-	public Parameter getReturn();
+	Parameter getReturn();
 
 	/**
 	 * Set the return data-type and storage.
@@ -202,7 +203,7 @@ public interface Function extends Namespace {
 	 * @throws InvalidInputException if data type is not a fixed length or storage is improperly 
 	 *         sized
 	 */
-	public void setReturn(DataType type, VariableStorage storage, SourceType source)
+	void setReturn(DataType type, VariableStorage storage, SourceType source)
 			throws InvalidInputException;
 
 	/**
@@ -214,7 +215,7 @@ public interface Function extends Namespace {
 	 * defined by the program's compiler specification.
 	 * @return the function's signature
 	 */
-	public FunctionSignature getSignature();
+	FunctionSignature getSignature();
 
 	/**
 	 * Get the function's signature.
@@ -229,7 +230,7 @@ public interface Function extends Namespace {
 	 * function has custom storage enabled.
 	 * @return the function's signature
 	 */
-	public FunctionSignature getSignature(boolean formalSignature);
+	FunctionSignature getSignature(boolean formalSignature);
 
 	/**
 	 * Return a string representation of the function signature
@@ -243,21 +244,21 @@ public interface Function extends Namespace {
 	 * declaration if known.
 	 * @return the prototype
 	 */
-	public String getPrototypeString(boolean formalSignature, boolean includeCallingConvention);
+	String getPrototypeString(boolean formalSignature, boolean includeCallingConvention);
 
 	/**
 	 * Returns the source type for the overall signature excluding function name and parameter names 
 	 * whose source is carried by the corresponding symbol.
 	 * @return the overall SourceType of the function signature;
 	 */
-	public SourceType getSignatureSource();
+	SourceType getSignatureSource();
 
 	/**
 	 * Set the source type for the overall signature excluding function name and parameter names 
 	 * whose source is carried by the corresponding symbol.
 	 * @param signatureSource function signature source type
 	 */
-	public void setSignatureSource(SourceType signatureSource);
+	void setSignatureSource(SourceType signatureSource);
 
 	/**
 	 * Get the stack frame for this function.
@@ -265,7 +266,7 @@ public interface Function extends Namespace {
 	 * the compiler spec may not be known (i.e., due to language upgrade process).
 	 * @return this functions stack frame
 	 */
-	public StackFrame getStackFrame();
+	StackFrame getStackFrame();
 
 	/**
 	 * Get the change in the stack pointer resulting from calling
@@ -273,14 +274,14 @@ public interface Function extends Namespace {
 	 * 
 	 * @return int the change in bytes to the stack pointer
 	 */
-	public int getStackPurgeSize();
+	int getStackPurgeSize();
 
 	/**
 	 * Return all {@link FunctionTag} objects associated with this function.
 	 * 
 	 * @return set of tag names
 	 */
-	public Set<FunctionTag> getTags();
+	Set<FunctionTag> getTags();
 
 	/**
 	 * Adds the tag with the given name to this function; if one does
@@ -289,14 +290,14 @@ public interface Function extends Namespace {
 	 * @param name the tag name to add
 	 * @return true if the tag was successfully added
 	 */
-	public boolean addTag(String name);
+	boolean addTag(String name);
 
 	/**
 	 * Removes the given tag from this function.
 	 * 
 	 * @param name the tag name to be removed.
 	 */
-	public void removeTag(String name);
+	void removeTag(String name);
 
 	/**
 	 * Set the change in the stack pointer resulting from calling
@@ -304,14 +305,14 @@ public interface Function extends Namespace {
 	 * 
 	 * @param purgeSize the change in bytes to the stack pointer
 	 */
-	public void setStackPurgeSize(int purgeSize);
+	void setStackPurgeSize(int purgeSize);
 
 	/**
 	 * check if stack purge size is valid.
 	 * 
 	 * @return true if the stack depth is valid
 	 */
-	public boolean isStackPurgeSizeValid();
+	boolean isStackPurgeSizeValid();
 
 	/**
 	 * Adds the given variable to the end of the parameters list.  The variable storage specified
@@ -331,8 +332,7 @@ public interface Function extends Namespace {
 	 * which are easily overlooked when considering parameter ordinal.  The function signature should generally be 
 	 * adjusted with a single call to {@link #updateFunction(String, Variable, List, FunctionUpdateType, boolean, SourceType)}
 	 */
-	@Deprecated
-	public Parameter addParameter(Variable var, SourceType source)
+	@Deprecated Parameter addParameter(Variable var, SourceType source)
 			throws DuplicateNameException, InvalidInputException;
 
 	/**
@@ -356,8 +356,7 @@ public interface Function extends Namespace {
 	 * which are easily overlooked when considering parameter ordinal.  The function signature should generally be 
 	 * adjusted with a single call to {@link #updateFunction(String, Variable, List, FunctionUpdateType, boolean, SourceType)}
 	 */
-	@Deprecated
-	public Parameter insertParameter(int ordinal, Variable var, SourceType source)
+	@Deprecated Parameter insertParameter(int ordinal, Variable var, SourceType source)
 			throws DuplicateNameException, InvalidInputException;
 
 	/**
@@ -376,7 +375,7 @@ public interface Function extends Namespace {
 	 * @throws VariableSizeException if a parameter data type size is too large based upon storage constraints
 	 * or conflicts with another variable.
 	 */
-	public void replaceParameters(List<? extends Variable> params, FunctionUpdateType updateType,
+	void replaceParameters(List<? extends Variable> params, FunctionUpdateType updateType,
 			boolean force, SourceType source) throws DuplicateNameException, InvalidInputException;
 
 	/**
@@ -395,7 +394,7 @@ public interface Function extends Namespace {
 	 * @throws VariableSizeException if a parameter data type size is too large based upon storage constraints
 	 * or conflicts with another variable.
 	 */
-	public void replaceParameters(FunctionUpdateType updateType, boolean force, SourceType source,
+	void replaceParameters(FunctionUpdateType updateType, boolean force, SourceType source,
 			Variable... params) throws DuplicateNameException, InvalidInputException;
 
 	/**
@@ -417,7 +416,7 @@ public interface Function extends Namespace {
 	 * @throws VariableSizeException if a parameter data type size is too large based upon storage constraints
 	 * or conflicts with another variable.
 	 */
-	public void updateFunction(String callingConvention, Variable returnValue,
+	void updateFunction(String callingConvention, Variable returnValue,
 			FunctionUpdateType updateType, boolean force, SourceType source, Variable... newParams)
 			throws DuplicateNameException, InvalidInputException;
 
@@ -440,7 +439,7 @@ public interface Function extends Namespace {
 	 * @throws VariableSizeException if a parameter data type size is too large based upon storage constraints
 	 * or conflicts with another variable.
 	 */
-	public void updateFunction(String callingConvention, Variable returnVar,
+	void updateFunction(String callingConvention, Variable returnVar,
 			List<? extends Variable> newParams, FunctionUpdateType updateType, boolean force,
 			SourceType source) throws DuplicateNameException, InvalidInputException;
 
@@ -449,7 +448,7 @@ public interface Function extends Namespace {
 	 * @param ordinal the index of the parameter to return.
 	 * @return parameter or null if ordinal is out of range
 	 */
-	public Parameter getParameter(int ordinal);
+	Parameter getParameter(int ordinal);
 
 	/**
 	 * Remove the specified parameter.  Auto-parameters may not be removed but must be accounted 
@@ -458,8 +457,7 @@ public interface Function extends Namespace {
 	 * @deprecated The use of this method is discouraged.  The function signature should generally be 
 	 * adjusted with a single call to {@link #updateFunction(String, Variable, List, FunctionUpdateType, boolean, SourceType)}
 	 */
-	@Deprecated
-	public void removeParameter(int ordinal);
+	@Deprecated void removeParameter(int ordinal);
 
 	/**
 	 * Move the parameter which occupies the fromOrdinal position to the toOrdinal position.
@@ -472,15 +470,14 @@ public interface Function extends Namespace {
 	 * @deprecated The use of this method is discouraged.  The function signature should generally be 
 	 * adjusted with a single call to {@link #updateFunction(String, Variable, List, FunctionUpdateType, boolean, SourceType)}
 	 */
-	@Deprecated
-	public Parameter moveParameter(int fromOrdinal, int toOrdinal) throws InvalidInputException;
+	@Deprecated Parameter moveParameter(int fromOrdinal, int toOrdinal) throws InvalidInputException;
 
 	/**
 	 * Gets the total number of parameters for this function.  This number also includes any
 	 * auto-parameters which may have been injected when dynamic parameter storage is used. 
 	 * @return the total number of parameters
 	 */
-	public int getParameterCount();
+	int getParameterCount();
 
 	/**
 	 * Gets the number of auto-parameters for this function also included in the total
@@ -488,46 +485,46 @@ public interface Function extends Namespace {
 	 * custom parameter storage is used.
 	 * @return the number of auto-parameters
 	 */
-	public int getAutoParameterCount();
+	int getAutoParameterCount();
 
 	/**
 	 * Get all function parameters
 	 * @return all function parameters
 	 */
-	public Parameter[] getParameters();
+	Parameter[] getParameters();
 
 	/**
 	 * Get all function parameters which satisfy the specified filter
 	 * @param filter variable filter or null for all parameters to be returned
 	 * @return all function parameters which satisfy the specified filter
 	 */
-	public Parameter[] getParameters(VariableFilter filter);
+	Parameter[] getParameters(VariableFilter filter);
 
 	/**
 	 * Get all local function variables
 	 * @return all local function variables
 	 */
-	public Variable[] getLocalVariables();
+	Variable[] getLocalVariables();
 
 	/**
 	 * Get all local function variables which satisfy the specified filter
 	 * @param filter variable filter or null for all local variables to be returned
 	 * @return all function variables which satisfy the specified filter
 	 */
-	public Variable[] getLocalVariables(VariableFilter filter);
+	Variable[] getLocalVariables(VariableFilter filter);
 
 	/**
 	 * Get all function variables which satisfy the specified filter
 	 * @param filter variable filter or null for all variables to be returned
 	 * @return all function variables which satisfy the specified filter
 	 */
-	public Variable[] getVariables(VariableFilter filter);
+	Variable[] getVariables(VariableFilter filter);
 
 	/**
 	 * Returns an array of all local and parameter variables
 	 * @return the variables
 	 */
-	public Variable[] getAllVariables();
+	Variable[] getAllVariables();
 
 	/**
 	 * Adds a local variable to the function.
@@ -540,14 +537,14 @@ public interface Function extends Namespace {
 	 * has that name.
 	 * @throws InvalidInputException if there is an error or conflict when resolving the variable 
 	 */
-	public Variable addLocalVariable(Variable var, SourceType source)
+	Variable addLocalVariable(Variable var, SourceType source)
 			throws DuplicateNameException, InvalidInputException;
 
 	/**
 	 * Removes the given variable from the function.
 	 * @param var the variable to remove.
 	 */
-	public void removeVariable(Variable var);
+	void removeVariable(Variable var);
 
 	/**
 	 * Set the new body for this function. The entry point must be contained
@@ -556,13 +553,13 @@ public interface Function extends Namespace {
 	 * @throws OverlappingFunctionException if the address set overlaps that
 	 * of another function
 	 */
-	public void setBody(AddressSetView newBody) throws OverlappingFunctionException;
+	void setBody(AddressSetView newBody) throws OverlappingFunctionException;
 
 	/**
 	 * Returns true if this function has a variable argument list (VarArgs)
 	 * @return true if this function has a variable argument list (VarArgs)
 	 */
-	public boolean hasVarArgs();
+	boolean hasVarArgs();
 
 	/**
 	 * Set whether parameters can be passed as a VarArg (variable argument list)
@@ -570,49 +567,49 @@ public interface Function extends Namespace {
 	 * @param hasVarArgs true if this function has a variable argument list 
 	 *        (e.g.,  printf(fmt, ...)).
 	 */
-	public void setVarArgs(boolean hasVarArgs);
+	void setVarArgs(boolean hasVarArgs);
 
 	/**
 	 * @return true if this is an inline function.
 	 */
-	public boolean isInline();
+	boolean isInline();
 
 	/**
 	 * Sets whether or not this function is inline.
 	 * 
 	 * @param isInline true if this is an inline function.
 	 */
-	public void setInline(boolean isInline);
+	void setInline(boolean isInline);
 
 	/**
 	 * @return true if this function does not return.
 	 */
-	public boolean hasNoReturn();
+	boolean hasNoReturn();
 
 	/**
 	 * Set whether or not this function has a return.
 	 * 
 	 * @param hasNoReturn true if this function does not return.
 	 */
-	public void setNoReturn(boolean hasNoReturn);
+	void setNoReturn(boolean hasNoReturn);
 
 	/**
 	 * @return true if function parameters utilize custom variable storage.
 	 */
-	public boolean hasCustomVariableStorage();
+	boolean hasCustomVariableStorage();
 
 	/**
 	 * Set whether or not this function uses custom variable storage
 	 * @param hasCustomVariableStorage true if this function uses custom storage
 	 */
-	public void setCustomVariableStorage(boolean hasCustomVariableStorage);
+	void setCustomVariableStorage(boolean hasCustomVariableStorage);
 
 	/**
 	 * Gets the calling convention prototype model for this function.
 	 * 
 	 * @return the prototype model of the function's current calling convention or null.
 	 */
-	public PrototypeModel getCallingConvention();
+	PrototypeModel getCallingConvention();
 
 	/**
 	 * Gets the calling convention's name for this function.
@@ -623,7 +620,7 @@ public interface Function extends Namespace {
 	 * or Function.UNKNOWN_CALLING_CONVENTION_STRING 
 	 * (i.e. "unknown", if no calling convention is specified for this function).
 	 */
-	public String getCallingConventionName();
+	String getCallingConventionName();
 
 	/**
 	 * Gets the name of the default calling convention.
@@ -631,7 +628,7 @@ public interface Function extends Namespace {
 	 * 
 	 * @return the name of the default calling convention.
 	 */
-	public String getDefaultCallingConventionName();
+	String getDefaultCallingConventionName();
 
 	/**
 	 * Sets the calling convention for this function to the named calling convention.
@@ -643,13 +640,13 @@ public interface Function extends Namespace {
 	 * convention. (i.e. default)
 	 * @throws InvalidInputException if the specified name is not a recognized calling convention name.
 	 */
-	public void setCallingConvention(String name) throws InvalidInputException;
+	void setCallingConvention(String name) throws InvalidInputException;
 
 	/**
 	 * @return true if this function is a Thunk and has a referenced Thunked Function.
 	 * @see #getThunkedFunction(boolean)
 	 */
-	public boolean isThunk();
+	boolean isThunk();
 
 	/**
 	 * If this function is a Thunk, this method returns the referenced function.
@@ -658,13 +655,13 @@ public interface Function extends Namespace {
 	 * @return function referenced by this Thunk Function or null if this is not a Thunk
 	 * function
 	 */
-	public Function getThunkedFunction(boolean recursive);
+	Function getThunkedFunction(boolean recursive);
 
 	/**
 	 * If this function is "Thunked", an array of Thunk Function entry points is returned
 	 * @return associated thunk function entry points or null if this is not a "Thunked" function.
 	 */
-	public Address[] getFunctionThunkAddresses();
+	Address[] getFunctionThunkAddresses();
 
 	/**
 	 * Set the currently Thunked Function or null to convert to a normal function
@@ -674,18 +671,17 @@ public interface Function extends Namespace {
 	 * thunk which would result in a loop back to this function or if this function is an external
 	 * function, or specified function is from a different program instance.
 	 */
-	public void setThunkedFunction(Function thunkedFunction) throws IllegalArgumentException;
+	void setThunkedFunction(Function thunkedFunction) throws IllegalArgumentException;
 
 	/**
 	 * @return true if this function is external (i.e., entry point is in EXTERNAL address space)
 	 */
-	@Override
-	public boolean isExternal();
+	@Override boolean isExternal();
 
 	/**
 	 * @return if this is an external function return the associated external location object.
 	 */
-	public ExternalLocation getExternalLocation();
+	ExternalLocation getExternalLocation();
 
 	/**
 	 * Returns a set of functions that call this function.
@@ -694,7 +690,7 @@ public interface Function extends Namespace {
 	 *                the search.  May be null.
 	 * @return a set of functions that call this function.
 	 */
-	public Set<Function> getCallingFunctions(TaskMonitor monitor);
+	Set<Function> getCallingFunctions(TaskMonitor monitor);
 
 	/**
 	 * Returns a set of functions that this function calls.
@@ -703,19 +699,19 @@ public interface Function extends Namespace {
 	 *                the search.  May be null.
 	 * @return a set of functions that this function calls.
 	 */
-	public Set<Function> getCalledFunctions(TaskMonitor monitor);
+	Set<Function> getCalledFunctions(TaskMonitor monitor);
 
 	/**
 	 * Changes all local user-defined labels for this function to global symbols. If a
 	 * global code symbol already exists with the same name at the symbols address the
 	 * symbol will be removed. 
 	 */
-	public void promoteLocalUserLabelsToGlobal();
+	void promoteLocalUserLabelsToGlobal();
 
 	/**
 	 * Determine if this function object has been deleted.  NOTE: the function could be
 	 * deleted at anytime due to asynchronous activity.  
 	 * @return true if function has been deleted, false if not.
 	 */
-	public boolean isDeleted();
+	boolean isDeleted();
 }

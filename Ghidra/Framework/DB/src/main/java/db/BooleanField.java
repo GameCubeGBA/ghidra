@@ -74,7 +74,7 @@ public final class BooleanField extends PrimitiveField {
 
 	@Override
 	public boolean getBooleanValue() {
-		return (value == 0) ? false : true;
+		return (value == 0) == false;
 	}
 
 	@Override

@@ -18,24 +18,38 @@ package ghidra.framework.main;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.Icon;
 import javax.swing.KeyStroke;
 
 import docking.ActionContext;
-import docking.action.*;
+import docking.action.DockingAction;
+import docking.action.KeyBindingData;
+import docking.action.MenuData;
 import docking.tool.ToolConstants;
 import docking.widgets.OptionDialog;
 import docking.widgets.filechooser.GhidraFileChooser;
 import docking.wizard.WizardManager;
 import ghidra.framework.client.ClientUtil;
 import ghidra.framework.client.RepositoryAdapter;
-import ghidra.framework.model.*;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.DomainObject;
+import ghidra.framework.model.Project;
+import ghidra.framework.model.ProjectListener;
+import ghidra.framework.model.ProjectLocator;
+import ghidra.framework.model.ProjectManager;
+import ghidra.framework.model.Transaction;
+import ghidra.framework.model.UndoableDomainObject;
 import ghidra.framework.options.SaveState;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.framework.store.LockException;
-import ghidra.util.*;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
+import ghidra.util.NotOwnerException;
+import ghidra.util.Swing;
 import ghidra.util.exception.NotFoundException;
 import ghidra.util.task.TaskLauncher;
 import resources.ResourceManager;
@@ -186,10 +200,8 @@ class FileActionManager {
 		try {
 			// if all is well and we already have an active project, close it
 			Project activeProject = plugin.getActiveProject();
-			if (activeProject != null) {
-				if (!closeProject(false)) { // false -->not exiting
-					return; // user canceled
-				}
+			if ((activeProject != null) && !closeProject(false)) { // false -->not exiting
+				return; // user canceled
 			}
 
 			if (newRepo != null) {
@@ -243,12 +255,8 @@ class FileActionManager {
 
 		ProjectLocator projectLocator =
 			plugin.chooseProject(fileChooser, "Open", LAST_SELECTED_PROJECT_DIRECTORY);
-		if (projectLocator != null) {
-
-			if (!doOpenProject(projectLocator) && currentProjectLocator != null) {
-				doOpenProject(currentProjectLocator);
-			}
-
+		if ((projectLocator != null) && (!doOpenProject(projectLocator) && currentProjectLocator != null)) {
+			doOpenProject(currentProjectLocator);
 		}
 	}
 
@@ -368,7 +376,7 @@ class FileActionManager {
 			}
 			if (!objs[lastIndex].lock(null)) {
 				String title = "Exit Ghidra";
-				StringBuffer buf = new StringBuffer();
+				StringBuilder buf = new StringBuilder();
 				UndoableDomainObject udo = (UndoableDomainObject) objs[lastIndex];
 				buf.append("The File " + files.get(lastIndex).getPathname() +
 					" is currently being modified by the\n");
@@ -437,11 +445,7 @@ class FileActionManager {
 		}
 
 		boolean saveSuccessful = saveChangedData(activeProject);
-		if (!saveSuccessful) {
-			return false;
-		}
-
-		if (!activeProject.saveSessionTools()) {
+		if (!saveSuccessful || !activeProject.saveSessionTools()) {
 			return false;
 		}
 
@@ -551,11 +555,7 @@ class FileActionManager {
 	 */
 	void saveProject() {
 		Project project = plugin.getActiveProject();
-		if (project == null) {
-			return;
-		}
-
-		if (!project.saveSessionTools()) {
+		if ((project == null) || !project.saveSessionTools()) {
 			// if tools have conflicting options, user is presented with a dialog that can
 			// be cancelled. If they press the cancel button, abort the entire save project action.
 			return;
@@ -597,7 +597,7 @@ class FileActionManager {
 
 		// give a special confirm message if user is about to
 		// remove the active project
-		StringBuffer confirmMsg = new StringBuffer("Project: ");
+		StringBuilder confirmMsg = new StringBuilder("Project: ");
 		confirmMsg.append(projectLocator.toString());
 		confirmMsg.append(" ?\n");
 		boolean isActiveProject =
@@ -685,7 +685,7 @@ class FileActionManager {
 			return true;
 		}
 
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append("The following files are Read-Only and cannot be\n" +
 			" saved 'As Is.' You must do a manual 'Save As' for these\n" + " files: \n \n");
 

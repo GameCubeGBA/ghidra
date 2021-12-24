@@ -17,7 +17,10 @@ package ghidra.framework.client;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
-import java.rmi.*;
+import java.rmi.AccessException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.UnmarshalException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.HashSet;
@@ -33,7 +36,14 @@ import javax.security.auth.login.LoginException;
 
 import ghidra.framework.Application;
 import ghidra.framework.model.ServerInfo;
-import ghidra.framework.remote.*;
+import ghidra.framework.remote.AnonymousCallback;
+import ghidra.framework.remote.GhidraPrincipal;
+import ghidra.framework.remote.GhidraServerHandle;
+import ghidra.framework.remote.InetNameLookup;
+import ghidra.framework.remote.RMIServerPortFactory;
+import ghidra.framework.remote.RemoteRepositoryServerHandle;
+import ghidra.framework.remote.SSHSignatureCallback;
+import ghidra.framework.remote.SignatureCallback;
 import ghidra.net.ApplicationKeyManagerFactory;
 import ghidra.util.Msg;
 import ghidra.util.task.Task;
@@ -109,8 +119,7 @@ class ServerConnectTask extends Task {
 		HashSet<GhidraPrincipal> pset = new HashSet<>();
 		HashSet<Object> emptySet = new HashSet<>();
 		pset.add(new GhidraPrincipal(username));
-		Subject subj = new Subject(false, pset, emptySet, emptySet);
-		return subj;
+		return new Subject(false, pset, emptySet, emptySet);
 	}
 
 	private static String getPreferredHostname(String name) {
@@ -184,10 +193,8 @@ class ServerConnectTask extends Task {
 			if (cause instanceof UnmarshalException || cause instanceof ClassNotFoundException) {
 				throw new RemoteException("Incompatible Ghidra Server interface version");
 			}
-			if (cause instanceof SSLHandshakeException) {
-				if (isSSLHandshakeCancelled((SSLHandshakeException) cause)) {
-					return null;
-				}
+			if ((cause instanceof SSLHandshakeException) && isSSLHandshakeCancelled((SSLHandshakeException) cause)) {
+				return null;
 			}
 			throw e;
 		}
@@ -271,15 +278,12 @@ class ServerConnectTask extends Task {
 
 							loopOK = false; // only try once
 							ClientUtil.processSignatureCallback(serverName, pkiSignatureCb);
-						}
-						else {
-							// assume all other callback scenarios are password based
-							// anonymous option must be explicitly chosen over username/password
-							// when processing password callback
-							if (!ClientUtil.processPasswordCallbacks(callbacks, serverName,
-								defaultUserID, loginError)) {
-								return null; // Cancelled by user
-							}
+						} else // assume all other callback scenarios are password based
+						// anonymous option must be explicitly chosen over username/password
+						// when processing password callback
+						if (!ClientUtil.processPasswordCallbacks(callbacks, serverName,
+							defaultUserID, loginError)) {
+							return null; // Cancelled by user
 						}
 					}
 					else {
@@ -345,7 +349,7 @@ class ServerConnectTask extends Task {
 		int badVerCount = 0;
 
 		for (String name : regList) {
-			if (name.equals(GhidraServerHandle.BIND_NAME)) {
+			if (GhidraServerHandle.BIND_NAME.equals(name)) {
 				return; // found it
 			}
 			else if (name.startsWith(GhidraServerHandle.BIND_NAME_PREFIX)) {

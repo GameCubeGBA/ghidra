@@ -19,7 +19,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import generic.algorithms.CRC64;
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.address.AddressSpace;
 import ghidra.program.model.lang.Register;
 import ghidra.program.model.lang.UnknownRegister;
 import ghidra.program.model.pcode.Varnode;
@@ -216,7 +219,7 @@ public class VariableStorage implements Comparable<VariableStorage> {
 				if (reg != null && !(reg instanceof UnknownRegister)) {
 					isRegister = true;
 					if (registers == null) {
-						registers = new ArrayList<Register>();
+						registers = new ArrayList<>();
 					}
 					registers.add(reg);
 				}
@@ -590,16 +593,7 @@ public class VariableStorage implements Comparable<VariableStorage> {
 			return false;
 		}
 		VariableStorage otherVS = (VariableStorage) obj;
-		if (isAutoStorage() != otherVS.isAutoStorage()) {
-			return false;
-		}
-		if (isForcedIndirect() != otherVS.isForcedIndirect()) {
-			return false;
-		}
-		if (isBadStorage() != otherVS.isBadStorage()) {
-			return false;
-		}
-		if (isUnassignedStorage() != otherVS.isUnassignedStorage()) {
+		if ((isAutoStorage() != otherVS.isAutoStorage()) || (isForcedIndirect() != otherVS.isForcedIndirect()) || (isBadStorage() != otherVS.isBadStorage()) || (isUnassignedStorage() != otherVS.isUnassignedStorage())) {
 			return false;
 		}
 		if (isVoidStorage() != otherVS.isVoidStorage()) {
@@ -619,9 +613,9 @@ public class VariableStorage implements Comparable<VariableStorage> {
 		if (varnodes == null || otherVarnodes == null) {
 			return false;
 		}
-		for (int i = 0; i < varnodes.length; i++) {
-			for (int j = 0; j < otherVarnodes.length; j++) {
-				if (varnodes[i].intersects(otherVarnodes[j])) {
+		for (Varnode varnode : varnodes) {
+			for (Varnode otherVarnode : otherVarnodes) {
+				if (varnode.intersects(otherVarnode)) {
 					return true;
 				}
 			}
@@ -638,8 +632,8 @@ public class VariableStorage implements Comparable<VariableStorage> {
 		if (varnodes == null || set == null || set.isEmpty()) {
 			return false;
 		}
-		for (int i = 0; i < varnodes.length; i++) {
-			if (varnodes[i].intersects(set)) {
+		for (Varnode varnode : varnodes) {
+			if (varnode.intersects(set)) {
 				return true;
 			}
 		}
@@ -656,8 +650,8 @@ public class VariableStorage implements Comparable<VariableStorage> {
 			return false;
 		}
 		Varnode regVarnode = new Varnode(reg.getAddress(), reg.getMinimumByteSize());
-		for (int i = 0; i < varnodes.length; i++) {
-			if (varnodes[i].intersects(regVarnode)) {
+		for (Varnode varnode : varnodes) {
+			if (varnode.intersects(regVarnode)) {
 				return true;
 			}
 		}
@@ -673,8 +667,8 @@ public class VariableStorage implements Comparable<VariableStorage> {
 		if (varnodes == null) {
 			return false;
 		}
-		for (int i = 0; i < varnodes.length; i++) {
-			if (varnodes[i].contains(address)) {
+		for (Varnode varnode : varnodes) {
+			if (varnode.contains(address)) {
 				return true;
 			}
 		}
@@ -782,7 +776,7 @@ public class VariableStorage implements Comparable<VariableStorage> {
 		if (BAD.equals(serialization)) {
 			return null;
 		}
-		ArrayList<Varnode> list = new ArrayList<Varnode>();
+		ArrayList<Varnode> list = new ArrayList<>();
 		String[] varnodeStrings = serialization.split(",");
 		try {
 			for (String piece : varnodeStrings) {

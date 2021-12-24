@@ -18,16 +18,25 @@ package ghidra.graph;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.isOneOf;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import ghidra.graph.algo.*;
+import ghidra.graph.algo.ChkDominanceAlgorithm;
+import ghidra.graph.algo.ChkPostDominanceAlgorithm;
+import ghidra.graph.algo.DepthFirstSorter;
 import ghidra.util.Msg;
 import ghidra.util.datastruct.ListAccumulator;
 import ghidra.util.exception.CancelledException;

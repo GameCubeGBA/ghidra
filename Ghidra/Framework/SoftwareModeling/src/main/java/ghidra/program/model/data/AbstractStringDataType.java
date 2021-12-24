@@ -19,9 +19,9 @@ import static ghidra.program.model.data.CharsetSettingsDefinition.CHARSET;
 import static ghidra.program.model.data.RenderUnicodeSettingsDefinition.RENDER;
 import static ghidra.program.model.data.TranslationSettingsDefinition.TRANSLATION;
 
-import java.nio.charset.CoderResult;
-
-import ghidra.docking.settings.*;
+import ghidra.docking.settings.Settings;
+import ghidra.docking.settings.SettingsDefinition;
+import ghidra.docking.settings.SettingsImpl;
 import ghidra.program.model.mem.MemBuffer;
 
 /**

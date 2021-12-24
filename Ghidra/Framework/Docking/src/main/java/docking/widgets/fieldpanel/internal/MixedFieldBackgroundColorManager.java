@@ -21,7 +21,10 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
-import docking.widgets.fieldpanel.support.*;
+import docking.widgets.fieldpanel.support.FieldLocation;
+import docking.widgets.fieldpanel.support.FieldRange;
+import docking.widgets.fieldpanel.support.FieldSelection;
+import docking.widgets.fieldpanel.support.Highlight;
 
 public class MixedFieldBackgroundColorManager implements FieldBackgroundColorManager {
 
@@ -43,11 +46,12 @@ public class MixedFieldBackgroundColorManager implements FieldBackgroundColorMan
 		this.selectionColor = selectionColor;
 	}
 
+	@Override
 	public List<Highlight> getSelectionHighlights(int row) {
 		FieldLocation start = new FieldLocation(index, fieldNum, row, 0);
 		FieldLocation end = new FieldLocation(index, fieldNum, row + 1, 0);
 		FieldSelection intersect = selection.intersect(new FieldRange(start, end));
-		List<Highlight> highlights = new ArrayList<Highlight>(intersect.getNumRanges());
+		List<Highlight> highlights = new ArrayList<>(intersect.getNumRanges());
 		for (int i = 0; i < intersect.getNumRanges(); i++) {
 			FieldRange range = intersect.getFieldRange(i);
 			int min = range.getStart().col;
@@ -57,6 +61,7 @@ public class MixedFieldBackgroundColorManager implements FieldBackgroundColorMan
 		return highlights;
 	}
 
+	@Override
 	public Color getBackgroundColor() {
 		if (layoutSelection.getBackgroundColor() == backgroundColor) {
 			return null;
@@ -64,6 +69,7 @@ public class MixedFieldBackgroundColorManager implements FieldBackgroundColorMan
 		return backgroundColor;
 	}
 
+	@Override
 	public Color getPaddingColor(int padIndex) {
 		return layoutSelection.getPaddingColor(fieldNum + padIndex);
 	}

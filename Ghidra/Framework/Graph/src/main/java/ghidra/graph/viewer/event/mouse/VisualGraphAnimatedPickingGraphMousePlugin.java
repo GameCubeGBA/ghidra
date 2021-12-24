@@ -21,7 +21,11 @@ import java.awt.event.MouseEvent;
 
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.AnimatedPickingGraphMousePlugin;
-import ghidra.graph.viewer.*;
+import ghidra.graph.viewer.GraphViewer;
+import ghidra.graph.viewer.GraphViewerUtils;
+import ghidra.graph.viewer.VisualEdge;
+import ghidra.graph.viewer.VisualGraphViewUpdater;
+import ghidra.graph.viewer.VisualVertex;
 
 /**
  * A mouse handler to center a vertex when the header is double-clicked

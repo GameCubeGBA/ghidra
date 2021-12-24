@@ -15,10 +15,28 @@
  */
 package utilities.util.reflection;
 
-import java.io.*;
-import java.lang.reflect.*;
-import java.util.*;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.lang.reflect.Array;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.GenericArrayType;
+import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.lang.reflect.TypeVariable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import ghidra.util.exception.AssertException;
@@ -146,10 +164,7 @@ public class ReflectionUtilities {
 		try {
 			constructor = containingClass.getDeclaredConstructor(parameterTypes);
 		}
-		catch (SecurityException e) {
-			// shouldn't happen
-		}
-		catch (NoSuchMethodException e) {
+		catch (SecurityException | NoSuchMethodException e) {
 			// no constructor with the given parameters
 		}
 
@@ -230,12 +245,9 @@ public class ReflectionUtilities {
 			int nameIndex = toFind.indexOf(className);
 			if (nameIndex != -1) {
 				lastIgnoreIndex = i;
-			}
-			else {
-				// not a class of interest; if we have already seen our muse, then we are done
-				if (lastIgnoreIndex != -1) {
-					break;
-				}
+			} else // not a class of interest; if we have already seen our muse, then we are done
+			if (lastIgnoreIndex != -1) {
+				break;
 			}
 		}
 
@@ -288,9 +300,7 @@ public class ReflectionUtilities {
 			return trace;
 		}
 
-		StackTraceElement[] updatedTrace =
-			Arrays.copyOfRange(trace, desiredStartIndex, trace.length);
-		return updatedTrace;
+		return Arrays.copyOfRange(trace, desiredStartIndex, trace.length);
 	}
 
 	/**
@@ -666,9 +676,7 @@ public class ReflectionUtilities {
 		}
 
 		Type[] interfaceTypes = rawType.getGenericInterfaces();
-		Set<Type> toCheck = new HashSet<>();
-		toCheck.addAll(Arrays.asList(interfaceTypes));
-
+		Set<Type> toCheck = new HashSet<>(Arrays.asList(interfaceTypes));
 		Type parentType = rawType.getGenericSuperclass();
 		toCheck.add(parentType);
 
@@ -707,7 +715,6 @@ public class ReflectionUtilities {
 			if (componentClass != null) {
 				return Array.newInstance(componentClass, 0).getClass();
 			}
-			return null;
 		}
 
 		return null;

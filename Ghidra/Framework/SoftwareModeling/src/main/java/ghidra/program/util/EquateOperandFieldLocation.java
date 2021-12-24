@@ -19,7 +19,9 @@ import ghidra.framework.options.SaveState;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 import ghidra.program.model.listing.VariableOffset;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.Equate;
+import ghidra.program.model.symbol.EquateReference;
+import ghidra.program.model.symbol.EquateTable;
 import ghidra.util.SystemUtilities;
 
 /**

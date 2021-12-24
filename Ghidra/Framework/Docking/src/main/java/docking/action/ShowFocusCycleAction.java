@@ -15,7 +15,10 @@
  */
 package docking.action;
 
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.FocusTraversalPolicy;
+import java.awt.KeyboardFocusManager;
 
 import javax.swing.JFrame;
 

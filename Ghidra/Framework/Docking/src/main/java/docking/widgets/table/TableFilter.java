@@ -23,7 +23,7 @@ public interface TableFilter<ROW_OBJECT> {
 	 * @param rowObject the current row object
 	 * @return true if the element at the given row matches this filter.
 	 */
-	public boolean acceptsRow(ROW_OBJECT rowObject);
+	boolean acceptsRow(ROW_OBJECT rowObject);
 
 	/**
 	 * Returns true if this filter is a more specific version of the given filter.
@@ -36,7 +36,7 @@ public interface TableFilter<ROW_OBJECT> {
 	 * @param tableFilter the filter to check
 	 * @return true if this filter is a sub-filter of the given filter
 	 */
-	public boolean isSubFilterOf(TableFilter<?> tableFilter);
+	boolean isSubFilterOf(TableFilter<?> tableFilter);
 
 	/**
 	 * Returns true if the there is a column filter on the column specified
@@ -44,7 +44,7 @@ public interface TableFilter<ROW_OBJECT> {
 	 * @param columnModelIndex the model index of the column to test for column filters.
 	 * @return  true if the there is a column filter on the column specified.
 	 */
-	public default boolean hasColumnFilter(int columnModelIndex) {
+	default boolean hasColumnFilter(int columnModelIndex) {
 		return false;
 	}
 
@@ -54,7 +54,7 @@ public interface TableFilter<ROW_OBJECT> {
 	 * 
 	 * @return true if this filter will not perform any filtering
 	 */
-	public default boolean isEmpty() {
+	default boolean isEmpty() {
 		return false;
 	}
 }

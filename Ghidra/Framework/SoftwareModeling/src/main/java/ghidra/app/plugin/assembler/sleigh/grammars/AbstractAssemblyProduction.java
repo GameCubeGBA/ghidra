@@ -81,8 +81,7 @@ public abstract class AbstractAssemblyProduction<NT extends AssemblyNonTerminal>
 
 	@Override
 	public String toString() {
-		String result = idx + ". " + lhs + " => " + rhs;
-		return result;
+		return idx + ". " + lhs + " => " + rhs;
 	}
 
 	@Override
@@ -91,10 +90,7 @@ public abstract class AbstractAssemblyProduction<NT extends AssemblyNonTerminal>
 			return false;
 		}
 		AbstractAssemblyProduction<?> aap = (AbstractAssemblyProduction<?>) that;
-		if (!this.lhs.equals(aap.lhs)) {
-			return false;
-		}
-		if (!this.rhs.equals(aap.rhs)) {
+		if (!this.lhs.equals(aap.lhs) || !this.rhs.equals(aap.rhs)) {
 			return false;
 		}
 		return true;
@@ -108,10 +104,7 @@ public abstract class AbstractAssemblyProduction<NT extends AssemblyNonTerminal>
 			return result;
 		}
 		result = this.rhs.compareTo(that.rhs);
-		if (result != 0) {
-			return result;
-		}
-		return 0;
+		return result;
 	}
 
 	@Override

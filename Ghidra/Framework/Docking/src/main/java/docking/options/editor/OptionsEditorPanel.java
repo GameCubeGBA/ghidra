@@ -26,7 +26,9 @@ import javax.swing.border.Border;
 
 import docking.help.Help;
 import docking.help.HelpService;
-import ghidra.framework.options.*;
+import ghidra.framework.options.EditorState;
+import ghidra.framework.options.EditorStateFactory;
+import ghidra.framework.options.Options;
 import ghidra.util.HelpLocation;
 import ghidra.util.exception.AssertException;
 import ghidra.util.layout.VerticalLayout;
@@ -130,11 +132,9 @@ public class OptionsEditorPanel extends JPanel {
 	private class EditorPropertyChangeListener implements PropertyChangeListener {
 		@Override
 		public void propertyChange(PropertyChangeEvent evt) {
-			if (checkForDifferences()) {
-				if (propertyChangeListener != null) {
-					propertyChangeListener.propertyChange(
-						new PropertyChangeEvent(this, "apply.enabled", null, Boolean.TRUE));
-				}
+			if (checkForDifferences() && (propertyChangeListener != null)) {
+				propertyChangeListener.propertyChange(
+					new PropertyChangeEvent(this, "apply.enabled", null, Boolean.TRUE));
 			}
 		}
 

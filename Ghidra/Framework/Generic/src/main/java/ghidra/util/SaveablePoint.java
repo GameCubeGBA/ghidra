@@ -20,7 +20,7 @@ import java.awt.Point;
 public class SaveablePoint extends PrivateSaveable {
 
     private Point point;
-    private Class<?>[] fields = new Class<?>[] {
+    private Class<?>[] fields = {
         Double.class, Double.class
     };
 

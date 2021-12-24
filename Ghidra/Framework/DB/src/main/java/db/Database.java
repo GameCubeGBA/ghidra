@@ -15,13 +15,19 @@
  */
 package db;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import db.buffers.*;
+import db.buffers.BufferFileManager;
+import db.buffers.LocalBufferFile;
+import db.buffers.LocalManagedBufferFile;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.FileInUseException;
 import ghidra.util.task.TaskMonitor;
@@ -141,15 +147,12 @@ public abstract class Database {
 		if (flist == null) {
 			return false;
 		}
-		for (int i = 0; i < flist.length; i++) {
-			if (flist[i].isDirectory()) {
-				if (!deleteDir(flist[i]))
+		for (File element : flist) {
+			if (element.isDirectory()) {
+				if (!deleteDir(element))
 					return false;
-			}
-			else {
-				if (!flist[i].delete())
-					return false;
-			}
+			} else if (!element.delete())
+				return false;
 		}
 		return dir.delete();
 	}
@@ -215,14 +218,12 @@ public abstract class Database {
 //		boolean bufferFileFound = false;
 		boolean versionFileFound = false;
 
-		for (int i = 0; i < fileList.length; i++) {
-			// Identify files of interest
-			String fname = fileList[i];
+		for (String fname : fileList) {
 			if (fname.endsWith(LocalBufferFile.BUFFER_FILE_EXTENSION)) {
 				if (fname.startsWith(DATABASE_FILE_PREFIX)) {
 //					bufferFileFound = true;
 				}
-				else if (fname.equals(CUMULATIVE_CHANGE_FILENAME)) {
+				else if (CUMULATIVE_CHANGE_FILENAME.equals(fname)) {
 // TODO: This check is not reliable
 // If the detabase is checked-out and not yet modified, this file will not yet exist
 					isCheckOutCopy = true;
@@ -273,9 +274,7 @@ public abstract class Database {
 				throw new FileNotFoundException(dbDir + " not found");
 			}
 
-			for (int i = 0; i < fileList.length; i++) {
-				// Identify files of interest
-				String fname = fileList[i];
+			for (String fname : fileList) {
 				if (fname.endsWith(LocalBufferFile.BUFFER_FILE_EXTENSION)) {
 					if (fname.startsWith(DATABASE_FILE_PREFIX)) {
 						bufFiles.add(fname);

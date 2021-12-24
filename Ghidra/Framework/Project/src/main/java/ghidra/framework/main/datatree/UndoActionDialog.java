@@ -18,7 +18,13 @@ package ghidra.framework.main.datatree;
 import java.awt.BorderLayout;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import docking.DialogComponentProvider;
 import docking.widgets.checkbox.GCheckBox;

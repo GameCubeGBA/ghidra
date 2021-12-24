@@ -18,8 +18,17 @@ package ghidra.util.classfinder;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
-import java.nio.file.*;
-import java.util.*;
+import java.nio.file.InvalidPathException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.StringTokenizer;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -284,22 +293,17 @@ public class ClassSearcher {
 			rawPaths.add(st.nextToken());
 		}
 
-		List<String> canonicalPaths = canonicalizePaths(rawPaths);
-		return canonicalPaths;
+		return canonicalizePaths(rawPaths);
 	}
 
 	private static List<String> canonicalizePaths(Collection<String> paths) {
 
-		//@formatter:off
-		List<String> canonical = paths.stream()
+		return paths.stream()
 			 .map(path -> {
 				 String normalized = normalize(path);
 				 return normalized;
 			 })
 			 .collect(Collectors.toList());
-		//@formatter:on
-
-		return canonical;
 	}
 
 	private static String normalize(String path) {

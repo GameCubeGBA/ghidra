@@ -16,7 +16,9 @@
 package ghidra.program.model.util;
 
 import ghidra.program.model.address.Address;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.Namespace;
+import ghidra.program.model.symbol.SourceType;
+import ghidra.program.model.symbol.Symbol;
 
 /**
  * <CODE>AddressLabelInfo</CODE> is a utility class for storing
@@ -150,7 +152,7 @@ public class AddressLabelInfo implements Comparable<AddressLabelInfo> {
 
 	@Override
 	public String toString() {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		buf.append("LABEL INFO NAME=");
 		buf.append(label);
 		buf.append(", ");

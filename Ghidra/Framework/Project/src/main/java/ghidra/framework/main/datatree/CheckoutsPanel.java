@@ -15,12 +15,16 @@
  */
 package ghidra.framework.main.datatree;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
@@ -35,7 +39,9 @@ import docking.widgets.table.GTable;
 import docking.widgets.table.TableSortStateEditor;
 import ghidra.framework.client.ClientUtil;
 import ghidra.framework.main.projectdata.actions.CheckoutsActionContext;
-import ghidra.framework.model.*;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.DomainFolder;
+import ghidra.framework.model.DomainFolderListenerAdapter;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.framework.remote.User;
 import ghidra.framework.store.ItemCheckoutStatus;
@@ -166,11 +172,7 @@ public class CheckoutsPanel extends JPanel {
 				public boolean isEnabledForContext(ActionContext context) {
 
 					// user will be null for private projects with local versioning
-					if (user != null && !user.isAdmin()) {
-						return false;
-					}
-
-					if (!(context instanceof CheckoutsActionContext)) {
+					if ((user != null && !user.isAdmin()) || !(context instanceof CheckoutsActionContext)) {
 						return false;
 					}
 

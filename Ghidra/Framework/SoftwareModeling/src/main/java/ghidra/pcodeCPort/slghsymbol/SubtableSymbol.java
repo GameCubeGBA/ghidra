@@ -16,13 +16,17 @@
 package ghidra.pcodeCPort.slghsymbol;
 
 import java.io.PrintStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import org.jdom.Element;
 
 import generic.stl.IteratorSTL;
 import generic.stl.VectorSTL;
-import ghidra.pcodeCPort.context.*;
+import ghidra.pcodeCPort.context.FixedHandle;
+import ghidra.pcodeCPort.context.ParserWalker;
+import ghidra.pcodeCPort.context.SleighError;
 import ghidra.pcodeCPort.sleighbase.SleighBase;
 import ghidra.pcodeCPort.slghpatexpress.PatternExpression;
 import ghidra.pcodeCPort.slghpatexpress.TokenPattern;
@@ -36,7 +40,7 @@ public class SubtableSymbol extends TripleSymbol {
 	private TokenPattern pattern;
 	private boolean beingbuilt, errors;
 	// All the Constructors in this table
-	private VectorSTL<Constructor> construct = new VectorSTL<Constructor>();
+	private VectorSTL<Constructor> construct = new VectorSTL<>();
 	private DecisionNode decisiontree;
 
 	public SubtableSymbol(Location location) {
@@ -160,12 +164,12 @@ public class SubtableSymbol extends TripleSymbol {
 		Iterator<?> iter = children.iterator();
 		while (iter.hasNext()) {
 			Element child = (Element) iter.next();
-			if (child.getName().equals("constructor")) {
+			if ("constructor".equals(child.getName())) {
 				Constructor ct = new Constructor(null);
 				addConstructor(ct);
 				ct.restoreXml(child, trans);
 			}
-			else if (child.getName().equals("decision")) {
+			else if ("decision".equals(child.getName())) {
 				decisiontree = new DecisionNode();
 				decisiontree.restoreXml(child, null, this);
 			}

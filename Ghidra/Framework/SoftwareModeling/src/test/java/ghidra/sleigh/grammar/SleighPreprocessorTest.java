@@ -17,9 +17,17 @@ package ghidra.sleigh.grammar;
 
 import static org.junit.Assert.assertTrue;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.StringReader;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -84,7 +92,7 @@ public class SleighPreprocessorTest extends AbstractGenericTest {
 				debug("line number " + lineno);
 				actualLine = actual.readLine();
 				targetLine = target.readLine();
-				if (!(actualLine == null || targetLine == null)) {
+				if (((actualLine != null) && (targetLine != null))) {
 					Assert.assertEquals(inputFile.getName() + ": difference at line " + lineno,
 						targetLine, actualLine);
 				}
@@ -123,7 +131,7 @@ public class SleighPreprocessorTest extends AbstractGenericTest {
 			debug(accum);
 			++line;
 		}
-		while (!(iline == null && tline == null && aline == null));
+		while (((iline != null) || (tline != null) || (aline != null)));
 		debug("(END)");
 	}
 

@@ -21,11 +21,21 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import javax.swing.*;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JMenuItem;
+import javax.swing.KeyStroke;
 
-import docking.*;
+import docking.ActionContext;
+import docking.DockingMenuItem;
+import docking.DockingWindowManager;
+import docking.KeyBindingPrecedence;
 import docking.widgets.EmptyBorderButton;
-import ghidra.util.*;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
+import ghidra.util.StringUtilities;
+import ghidra.util.SystemUtilities;
 import ghidra.util.datastruct.WeakDataStructureFactory;
 import ghidra.util.datastruct.WeakSet;
 import ghidra.util.exception.AssertException;
@@ -485,7 +495,7 @@ public abstract class DockingAction implements DockingActionIf {
 			}
 
 			Icon icon = menuBarData.getMenuIcon();
-			if (icon != null && icon instanceof ImageIconWrapper) {
+			if (icon instanceof ImageIconWrapper) {
 				ImageIconWrapper wrapper = (ImageIconWrapper) icon;
 				String filename = wrapper.getFilename();
 				buffer.append("        MENU ICON:           ").append(filename);
@@ -514,7 +524,7 @@ public abstract class DockingAction implements DockingActionIf {
 			}
 
 			Icon icon = popupMenuData.getMenuIcon();
-			if (icon != null && icon instanceof ImageIconWrapper) {
+			if (icon instanceof ImageIconWrapper) {
 				ImageIconWrapper wrapper = (ImageIconWrapper) icon;
 				String filename = wrapper.getFilename();
 				buffer.append("        POPUP ICON:         ").append(filename);
@@ -661,8 +671,7 @@ public abstract class DockingAction implements DockingActionIf {
 		Throwable t = ReflectionUtilities.createThrowableWithStackOlderThan(getClass());
 		StackTraceElement[] trace =
 			ReflectionUtilities.filterStackTrace(t.getStackTrace(), "ActionBuilder");
-		String classInfo = trace[0].toString();
-		return classInfo;
+		return trace[0].toString();
 	}
 	
 }

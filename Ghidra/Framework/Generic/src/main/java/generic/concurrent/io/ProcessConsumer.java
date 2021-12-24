@@ -64,7 +64,6 @@ public class ProcessConsumer {
 		GThreadPool pool = GThreadPool.getSharedThreadPool(IOResult.THREAD_POOL_NAME);
 		IOResult runnable = new IOResult(inception, is);
 		runnable.setConsumer(lineConsumer);
-		Future<IOResult> future = pool.submit(runnable, runnable);
-		return future;
+		return pool.submit(runnable, runnable);
 	}
 }

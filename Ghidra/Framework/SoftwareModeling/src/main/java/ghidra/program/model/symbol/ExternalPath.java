@@ -53,7 +53,7 @@ public class ExternalPath {
 	@Override
 	public String toString() {
 		int lastIndex = strings.length - 1;
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		for (int i = 0; i < strings.length; i++) {
 			buffer.append(strings[i]);
 			if (i < lastIndex) {

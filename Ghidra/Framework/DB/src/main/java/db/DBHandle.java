@@ -20,12 +20,17 @@ import java.io.IOException;
 import java.util.Hashtable;
 import java.util.Iterator;
 
-import db.buffers.*;
+import db.buffers.BufferFile;
+import db.buffers.BufferMgr;
+import db.buffers.LocalBufferFile;
 import ghidra.util.Msg;
 import ghidra.util.UniversalIdGenerator;
 import ghidra.util.datastruct.WeakDataStructureFactory;
 import ghidra.util.datastruct.WeakSet;
-import ghidra.util.exception.*;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.DuplicateFileException;
+import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.task.TaskMonitor;
 
 /**

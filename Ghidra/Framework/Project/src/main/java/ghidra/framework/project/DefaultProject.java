@@ -15,13 +15,28 @@
  */
 package ghidra.framework.project;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.*;
+import java.nio.file.FileSystems;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.StringTokenizer;
 
-import org.jdom.*;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.XMLOutputter;
 
@@ -29,14 +44,25 @@ import docking.widgets.OptionDialog;
 import ghidra.framework.client.RepositoryAdapter;
 import ghidra.framework.data.ProjectFileManager;
 import ghidra.framework.data.TransientDataManager;
-import ghidra.framework.model.*;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.Project;
+import ghidra.framework.model.ProjectData;
+import ghidra.framework.model.ProjectLocator;
+import ghidra.framework.model.ProjectManager;
+import ghidra.framework.model.ToolChest;
+import ghidra.framework.model.ToolManager;
+import ghidra.framework.model.ToolServices;
+import ghidra.framework.model.ToolTemplate;
 import ghidra.framework.options.SaveState;
 import ghidra.framework.project.tool.GhidraToolTemplate;
 import ghidra.framework.project.tool.ToolManagerImpl;
 import ghidra.framework.protocol.ghidra.GhidraURL;
 import ghidra.framework.protocol.ghidra.GhidraURLConnection;
 import ghidra.framework.store.LockException;
-import ghidra.util.*;
+import ghidra.util.HTMLUtilities;
+import ghidra.util.Msg;
+import ghidra.util.NotOwnerException;
+import ghidra.util.SystemUtilities;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.xml.GenericXMLOutputter;
 import ghidra.util.xml.XmlUtilities;
@@ -174,10 +200,8 @@ public class DefaultProject implements Project {
 			success = true;
 		}
 		finally {
-			if (!success) {
-				if (fileMgr != null) {
-					fileMgr.dispose();
-				}
+			if (!success && (fileMgr != null)) {
+				fileMgr.dispose();
 			}
 		}
 		initializeNewProject();
@@ -210,7 +234,7 @@ public class DefaultProject implements Project {
 		}
 
 		String projectStr = "Project: " + HTMLUtilities.escapeHTML(locator.getLocation()) +
-			System.getProperty("file.separator") + HTMLUtilities.escapeHTML(locator.getName());
+		FileSystems.getDefault().getSeparator() + HTMLUtilities.escapeHTML(locator.getName());
 		String lockInformation = lock.getExistingLockFileInformation();
 		if (!lock.canForceLock()) {
 			Msg.showInfo(getClass(), null, "Project Locked",
@@ -479,7 +503,7 @@ public class DefaultProject implements Project {
 			if (msg == null) {
 				msg = e.toString();
 			}
-			StringBuffer sb = new StringBuffer();
+			StringBuilder sb = new StringBuilder();
 			StringTokenizer st = new StringTokenizer(msg, ":");
 			while (st.hasMoreTokens()) {
 				sb.append(st.nextToken());
@@ -592,8 +616,7 @@ public class DefaultProject implements Project {
 		}
 		List<DomainFile> list = new ArrayList<>();
 		TransientDataManager.getTransients(list);
-		for (int i = 0; i < list.size(); i++) {
-			DomainFile df = list.get(i);
+		for (DomainFile df : list) {
 			if (df != null && df.isOpen()) {
 				openFiles.add(df);
 			}

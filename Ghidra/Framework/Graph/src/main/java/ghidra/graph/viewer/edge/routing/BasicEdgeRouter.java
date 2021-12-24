@@ -20,7 +20,9 @@ import static ghidra.graph.viewer.GraphViewerUtils.getVertexBoundsInGraphSpace;
 import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.geom.Point2D;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.Graph;

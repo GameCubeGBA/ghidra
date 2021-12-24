@@ -15,7 +15,9 @@
  */
 package docking.widgets.fieldpanel.support;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Rectangle;
 
 import javax.swing.JComponent;
 
@@ -273,24 +275,21 @@ public class RowLayout implements Layout {
 	public int cursorLeft(FieldLocation cursorLoc) {
 		if (cursorLoc.col > 0) {
 			cursorLoc.col--;
-		}
-		else { // need to move back one field.
-			if (cursorLoc.fieldNum > 0) {
-				cursorLoc.fieldNum--;
-				Field field = fields[cursorLoc.fieldNum];
-				int x = field.getStartX() + field.getWidth() - 1;
+		} else if (cursorLoc.fieldNum > 0) {
+			cursorLoc.fieldNum--;
+			Field field = fields[cursorLoc.fieldNum];
+			int x = field.getStartX() + field.getWidth() - 1;
 
-				cursorLoc.row = field.getRow(lastCursorY);
-				cursorLoc.col = field.getCol(cursorLoc.row, x);
-			}
-			else if (cursorLoc.row > 0) {
-				Field field = fields[cursorLoc.fieldNum];
-				cursorLoc.row--;
-				cursorLoc.col = field.getNumCols(cursorLoc.row) - 1;
-			}
-			else {
-				return -1;
-			}
+			cursorLoc.row = field.getRow(lastCursorY);
+			cursorLoc.col = field.getCol(cursorLoc.row, x);
+		}
+		else if (cursorLoc.row > 0) {
+			Field field = fields[cursorLoc.fieldNum];
+			cursorLoc.row--;
+			cursorLoc.col = field.getNumCols(cursorLoc.row) - 1;
+		}
+		else {
+			return -1;
 		}
 		return fields[cursorLoc.fieldNum].getX(cursorLoc.row, cursorLoc.col);
 	}
@@ -389,20 +388,16 @@ public class RowLayout implements Layout {
 		y -= heightAbove;
 		// first check to the left
 		for (int i = fields.length - 1; i >= 0; i--) {
-			if (fields[i] != null) {
-				if (y >= -fields[i].getHeightAbove() && y < fields[i].getHeightBelow() &&
-					fields[i].getStartX() <= x) {
-					return i;
-				}
+			if ((fields[i] != null) && (y >= -fields[i].getHeightAbove() && y < fields[i].getHeightBelow() &&
+				fields[i].getStartX() <= x)) {
+				return i;
 			}
 		}
 		// didn't work, check to the right
 		for (int i = 0; i < fields.length; i++) {
-			if (fields[i] != null) {
-				if (y >= -fields[i].getHeightAbove() && y < fields[i].getHeightBelow() &&
-					fields[i].getStartX() > x) {
-					return i;
-				}
+			if ((fields[i] != null) && (y >= -fields[i].getHeightAbove() && y < fields[i].getHeightBelow() &&
+				fields[i].getStartX() > x)) {
+				return i;
 			}
 		}
 		// no matches

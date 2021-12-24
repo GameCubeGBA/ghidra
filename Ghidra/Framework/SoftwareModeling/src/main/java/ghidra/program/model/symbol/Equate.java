@@ -35,7 +35,7 @@ public interface Equate {
 	 * 
 	 * @return The actual name of this equate.
 	 */
-	public String getName();
+	String getName();
 
 	/**
 	 * Gets the "display name" of this equate.  Note that the display name may be different
@@ -43,24 +43,24 @@ public interface Equate {
 	 * 
 	 * @return The "display name" of this equate.
 	 */
-	public String getDisplayName();
+	String getDisplayName();
 
 	/**
 	 * Get the value of this equate.
 	 */
-	public long getValue();
+	long getValue();
 
 	/**
 	 * Gets a more accurate representation of the equate value. Used for rendering as close to the
 	 * listing as possible. 
 	 * @return A more accurate representation of the equate value.
 	 */
-	public String getDisplayValue();
+	String getDisplayValue();
 
 	/**
 	 * Get the number of references to this equate.
 	 */
-	public int getReferenceCount();
+	int getReferenceCount();
 
 	/**
 	 * Add a reference (at the given operand position) to this equate.  If a reference already
@@ -70,7 +70,7 @@ public interface Equate {
 	 * @param refAddr the address where the equate is used.
 	 * @param opndPosition the operand index where the equate is used.
 	 */
-	public void addReference(Address refAddr, int opndPosition);
+	void addReference(Address refAddr, int opndPosition);
 
 	/**
 	 * Add a reference (at the given dynamic hash position) to this equate. If a reference already
@@ -80,7 +80,7 @@ public interface Equate {
 	 * @param dynamicHash constant varnode dynamic hash value
 	 * @param refAddr the address where the equate is used.
 	 */
-	public void addReference(long dynamicHash, Address refAddr);
+	void addReference(long dynamicHash, Address refAddr);
 
 	/**
 	 * Changes the name associated with the equate.
@@ -96,52 +96,51 @@ public interface Equate {
 	 * Get the references for this equate.
 	 * @return a array of EquateReferences. 
 	 */
-	public EquateReference[] getReferences();
+	EquateReference[] getReferences();
 
 	/**
 	 * Get references for this equate attached to a specific address
 	 * @param refAddr is the address
 	 * @return the list of EquateReferences
 	 */
-	public List<EquateReference> getReferences(Address refAddr);
+	List<EquateReference> getReferences(Address refAddr);
 
 	/**
 	 * Remove the reference at the given operand position.
 	 * @param refAddr the address that was using this equate
 	 * @param opndPosition the operand index of the operand that was using this eqate.
 	 */
-	public void removeReference(Address refAddr, int opndPosition);
+	void removeReference(Address refAddr, int opndPosition);
 
 	/**
 	 * Remove the reference at the given address
 	 * @param dynamicHash the hash of the reference
 	 * @param refAddr the reference's address
 	 */
-	public void removeReference(long dynamicHash, Address refAddr);
+	void removeReference(long dynamicHash, Address refAddr);
 
 	/**
 	 * Checks if equate is based off an enum's universal id and checks if the enum still exists.
 	 * The equate is still valid if the equate is not based off an enum.
 	 * @return true if the equate is based off an enum that still exists.
 	 */
-	public boolean isValidUUID();
+	boolean isValidUUID();
 
 	/**
 	 * Checks if equate is based off an enum's universal id.
 	 * @return
 	 */
-	public boolean isEnumBased();
+	boolean isEnumBased();
 
 	/**
 	 * Gets the universal id from this equate if the equate was based off of an enum.
 	 * @return The universal id for this equate.
 	 */
-	public UniversalID getEnumUUID();
+	UniversalID getEnumUUID();
 
 	/**
 	 * Get the name of this equate.
 	 * @see #getName()
 	 */
-	@Override
-	public String toString();
+	@Override String toString();
 }

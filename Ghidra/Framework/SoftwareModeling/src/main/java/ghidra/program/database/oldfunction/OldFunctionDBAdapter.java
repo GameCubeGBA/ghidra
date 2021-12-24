@@ -15,12 +15,14 @@
  */
 package ghidra.program.database.oldfunction;
 
-import ghidra.program.database.map.AddressMap;
-import ghidra.util.exception.VersionException;
-
 import java.io.IOException;
 
-import db.*;
+import db.DBHandle;
+import db.DBRecord;
+import db.RecordIterator;
+import db.Schema;
+import ghidra.program.database.map.AddressMap;
+import ghidra.util.exception.VersionException;
 
 /**
  * Database adapter for functions.

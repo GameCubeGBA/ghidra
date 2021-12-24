@@ -28,99 +28,99 @@ public interface Reference extends Comparable<Reference> {
 	/**
 	 * Operand index which corresponds to the instruction/data mnemonic.
 	 */
-	public static final int MNEMONIC = -1;
+	int MNEMONIC = -1;
 
 	/**
 	 * Special purpose operand index when not applicable (i.e., Thunk reference)
 	 */
-	public static final int OTHER = -2;
+	int OTHER = -2;
 
 	/**
 	 * Get the address of the codeunit that is making the reference.
 	 */
-	public Address getFromAddress();
+	Address getFromAddress();
 
 	/**
 	 * Get the "to" address for this reference.
 	 */
-	public Address getToAddress();
+	Address getToAddress();
 
 	/**
 	 * Return whether this reference is marked as primary.
 	 */
-	public boolean isPrimary();
+	boolean isPrimary();
 
 	/**
 	 * Get the symbol ID associated with this reference.
 	 * 
 	 * @return symbol ID or -1 if no symbol is associated with this reference
 	 */
-	public long getSymbolID();
+	long getSymbolID();
 
 	/**
 	 * Get the type of reference being made.
 	 */
-	public RefType getReferenceType();
+	RefType getReferenceType();
 
 	/**
 	 * Get the operand index of where this reference was placed.
 	 * 
 	 * @return op index or ReferenceManager.MNEMONIC
 	 */
-	public int getOperandIndex();
+	int getOperandIndex();
 
 	/**
 	 * Return true if this reference is on the Mnemonic and not on an operand
 	 */
-	public boolean isMnemonicReference();
+	boolean isMnemonicReference();
 
 	/**
 	 * Return true if this reference is on an operand and not on the Mnemonic.
 	 */
-	public boolean isOperandReference();
+	boolean isOperandReference();
 
 	/**
 	 * Returns true if this reference is an instance of StackReference and
 	 * refers to a stack location.
 	 */
-	public boolean isStackReference();
+	boolean isStackReference();
 
 	/**
 	 * Returns true if this reference is an instance of ExternalReference.
 	 */
-	public boolean isExternalReference();
+	boolean isExternalReference();
 
 	/**
 	 * Returns true if this reference is an instance of EntryReference.
 	 */
-	public boolean isEntryPointReference();
+	boolean isEntryPointReference();
 
 	/**
 	 * Returns true if this reference to an address in the programs memory
 	 * space. This includes offset and shifted references.
 	 */
-	public boolean isMemoryReference();
+	boolean isMemoryReference();
 
 	/**
 	 * Returns true if this reference to an address in the programs register
 	 * space.
 	 */
-	public boolean isRegisterReference();
+	boolean isRegisterReference();
 
 	/**
 	 * Returns true if this reference is an instance of OffsetReference.
 	 */
-	public boolean isOffsetReference();
+	boolean isOffsetReference();
 
 	/**
 	 * Returns true if this reference is an instance of ShiftedReference.
 	 */
-	public boolean isShiftedReference();
+	boolean isShiftedReference();
 
 	/**
 	 * Gets the source of this reference. {@link SourceType}s
 	 * 
 	 * @return the source of this reference
 	 */
-	public SourceType getSource();
+	SourceType getSource();
 }

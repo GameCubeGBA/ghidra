@@ -15,9 +15,14 @@
  */
 package ghidra.util;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Modifier;
-import java.util.*;
+import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.StringTokenizer;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -120,7 +125,7 @@ public class TestSuiteUtilities {
      */
     public static Iterator<String> getClassNames(String pkgName, Class<?> searchClass) {
         	
-        HashSet<String> classNames = new HashSet<String>();
+        HashSet<String> classNames = new HashSet<>();
 
         String classPath = System.getProperty("java.class.path");
         if (classPath == null || classPath.trim().length() == 0) {
@@ -238,10 +243,7 @@ public class TestSuiteUtilities {
 			while (entries.hasMoreElements()) {
 				JarEntry entry = entries.nextElement();
 				String name = entry.getName();
-				if (!name.endsWith(".class")) {
-					continue; // file is not a class file
-				}
-				if ((lastSepIx != -1 && name.indexOf(pkgPath) != 0) ||
+				if (!name.endsWith(".class") || (lastSepIx != -1 && name.indexOf(pkgPath) != 0) ||
 					name.lastIndexOf(JAR_FILE_SEPARATOR) != lastSepIx) {
 					continue; // file not contained within specified package
 				}
@@ -301,7 +303,7 @@ public class TestSuiteUtilities {
      */
     public static Iterator<String> getSubPkgNames(String pkgName) {
         	
-        HashSet<String> pkgNames = new HashSet<String>();
+        HashSet<String> pkgNames = new HashSet<>();
 
         String classPath = System.getProperty("java.class.path");
         if (classPath == null || classPath.trim().length() == 0) {

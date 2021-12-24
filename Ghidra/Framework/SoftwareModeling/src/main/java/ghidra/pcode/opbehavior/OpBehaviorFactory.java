@@ -22,7 +22,7 @@ import ghidra.program.model.pcode.PcodeOp;
 
 public class OpBehaviorFactory {
 
-	private static Map<Integer, OpBehavior> opBehaviorMap = new HashMap<Integer, OpBehavior>();
+	private static Map<Integer, OpBehavior> opBehaviorMap = new HashMap<>();
 	static {
 		// TODO: should pass float format factory
 

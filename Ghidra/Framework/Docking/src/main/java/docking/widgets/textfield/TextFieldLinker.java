@@ -16,7 +16,10 @@
 package docking.widgets.textfield;
 
 import java.awt.Component;
-import java.awt.event.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -25,7 +28,10 @@ import java.util.regex.Pattern;
 
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
-import javax.swing.event.*;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Caret;
 
@@ -129,10 +135,7 @@ public class TextFieldLinker {
 				return false;
 			}
 			FieldState that = (FieldState) obj;
-			if (!this.text.equals(that.text)) {
-				return false;
-			}
-			if (this.caret != that.caret) {
+			if (!this.text.equals(that.text) || (this.caret != that.caret)) {
 				return false;
 			}
 			return true;
@@ -177,10 +180,7 @@ public class TextFieldLinker {
 				return false;
 			}
 			LinkerState that = (LinkerState) o;
-			if (this.whichFocus != that.whichFocus) {
-				return false;
-			}
-			if (!this.fieldStates.equals(that.fieldStates)) {
+			if ((this.whichFocus != that.whichFocus) || !this.fieldStates.equals(that.fieldStates)) {
 				return false;
 			}
 			return true;
@@ -637,11 +637,9 @@ public class TextFieldLinker {
 		@Override
 		public void focusLost(FocusEvent e) {
 			int i = findField(e.getOppositeComponent());
-			if (i == -1) {
-				if (haveFocus) {
-					haveFocus = false;
-					fireFocusListeners(e);
-				}
+			if ((i == -1) && haveFocus) {
+				haveFocus = false;
+				fireFocusListeners(e);
 			}
 		}
 
@@ -681,12 +679,7 @@ public class TextFieldLinker {
 	 * Schedule a state synchronization.
 	 */
 	protected void syncStateLater() {
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				doSyncState();
-			}
-		});
+		SwingUtilities.invokeLater(() -> doSyncState());
 	}
 
 	/**

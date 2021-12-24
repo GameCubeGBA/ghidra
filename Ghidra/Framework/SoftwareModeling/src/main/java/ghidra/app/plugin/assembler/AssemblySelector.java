@@ -15,10 +15,19 @@
  */
 package ghidra.app.plugin.assembler;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import ghidra.app.plugin.assembler.sleigh.parse.AssemblyParseResult;
-import ghidra.app.plugin.assembler.sleigh.sem.*;
+import ghidra.app.plugin.assembler.sleigh.sem.AssemblyPatternBlock;
+import ghidra.app.plugin.assembler.sleigh.sem.AssemblyResolution;
+import ghidra.app.plugin.assembler.sleigh.sem.AssemblyResolutionResults;
+import ghidra.app.plugin.assembler.sleigh.sem.AssemblyResolvedConstructor;
+import ghidra.app.plugin.assembler.sleigh.sem.AssemblyResolvedError;
 import ghidra.app.plugin.assembler.sleigh.util.SleighUtil;
 
 /**
@@ -49,10 +58,7 @@ public class AssemblySelector {
 
 		result =
 			SleighUtil.compareArrays(a.getInstruction().getVals(), b.getInstruction().getVals());
-		if (result != 0) {
-			return result;
-		}
-		return 0;
+		return result;
 	};
 
 	/**

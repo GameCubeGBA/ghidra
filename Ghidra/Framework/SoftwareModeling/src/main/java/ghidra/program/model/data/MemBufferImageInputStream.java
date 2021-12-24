@@ -16,13 +16,13 @@
  */
 package ghidra.program.model.data;
 
-import ghidra.program.model.mem.MemBuffer;
-import ghidra.program.model.mem.MemoryAccessException;
-
 import java.io.IOException;
 import java.nio.ByteOrder;
 
 import javax.imageio.stream.ImageInputStreamImpl;
+
+import ghidra.program.model.mem.MemBuffer;
+import ghidra.program.model.mem.MemoryAccessException;
 
 /**
  * ImageInputStream for reading images that wraps a MemBuffer to get the bytes.  Adds a method

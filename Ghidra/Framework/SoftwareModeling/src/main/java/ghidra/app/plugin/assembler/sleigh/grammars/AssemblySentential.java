@@ -15,11 +15,20 @@
  */
 package ghidra.app.plugin.assembler.sleigh.grammars;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.collections4.list.AbstractListDecorator;
 
-import ghidra.app.plugin.assembler.sleigh.symbol.*;
+import ghidra.app.plugin.assembler.sleigh.symbol.AssemblyNonTerminal;
+import ghidra.app.plugin.assembler.sleigh.symbol.AssemblyStringTerminal;
+import ghidra.app.plugin.assembler.sleigh.symbol.AssemblySymbol;
+import ghidra.app.plugin.assembler.sleigh.symbol.AssemblyTerminal;
 import ghidra.app.plugin.assembler.sleigh.tree.AssemblyParseToken;
 
 /**

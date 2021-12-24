@@ -15,22 +15,29 @@
  */
 package help.validator;
 
-import help.validator.model.*;
-
 import java.nio.file.Path;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import help.validator.model.AnchorDefinition;
+import help.validator.model.HREF;
+import help.validator.model.IMG;
 
 public class AnchorManager {
 
 	private Map<String, AnchorDefinition> anchorsByHelpPath =
-		new HashMap<String, AnchorDefinition>();
-	private Map<String, AnchorDefinition> anchorsById = new HashMap<String, AnchorDefinition>();
-	private Map<String, AnchorDefinition> anchorsByName = new HashMap<String, AnchorDefinition>();
+		new HashMap<>();
+	private Map<String, AnchorDefinition> anchorsById = new HashMap<>();
+	private Map<String, AnchorDefinition> anchorsByName = new HashMap<>();
 	private Map<String, List<AnchorDefinition>> duplicateAnchorsById =
-		new HashMap<String, List<AnchorDefinition>>();
+		new HashMap<>();
 
-	private List<HREF> anchorRefs = new ArrayList<HREF>();
-	private List<IMG> imgRefs = new ArrayList<IMG>();
+	private List<HREF> anchorRefs = new ArrayList<>();
+	private List<IMG> imgRefs = new ArrayList<>();
 
 	public AnchorManager() {
 	}
@@ -55,7 +62,7 @@ public class AnchorManager {
 	private void addDuplicateAnchor(String anchorName, AnchorDefinition anchor, String id) {
 		List<AnchorDefinition> list = duplicateAnchorsById.get(id);
 		if (list == null) {
-			list = new ArrayList<AnchorDefinition>();
+			list = new ArrayList<>();
 			list.add(anchorsById.get(id)); // put in the original definition
 			duplicateAnchorsById.put(id, list);
 		}

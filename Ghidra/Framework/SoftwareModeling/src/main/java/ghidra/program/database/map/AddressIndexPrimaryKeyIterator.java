@@ -19,8 +19,14 @@ import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import db.*;
-import ghidra.program.model.address.*;
+import db.DBFieldIterator;
+import db.Field;
+import db.LongField;
+import db.Table;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.address.KeyRange;
 
 /**
  * Long iterator over indexed addresses. The longs are primary keys returned ordered and restrained

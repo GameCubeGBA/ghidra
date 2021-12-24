@@ -28,11 +28,13 @@ public interface GhidraFileFilter {
     /**
      * A default implementation that shows all files.
      */
-    public final static GhidraFileFilter ALL = new GhidraFileFilter() {
-        public String getDescription() {
+    GhidraFileFilter ALL = new GhidraFileFilter() {
+        @Override
+		public String getDescription() {
             return "All Files (*.*)";
         }
-        public boolean accept(File pathname, GhidraFileChooserModel model) {
+        @Override
+		public boolean accept(File pathname, GhidraFileChooserModel model) {
             return true;
         }
     };
@@ -53,5 +55,5 @@ public interface GhidraFileFilter {
      * Returns the description of this filter.
      * @return the description of this filter
      */
-    public String getDescription();
+    String getDescription();
 }

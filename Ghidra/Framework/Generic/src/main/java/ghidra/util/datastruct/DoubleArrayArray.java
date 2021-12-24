@@ -107,7 +107,8 @@ public class DoubleArrayArray implements Array, Serializable {
     /** Removes the array at the given index
      * @param index index of the array to be removed
      */    
-    public void remove(int index) {
+    @Override
+	public void remove(int index) {
         try {
             if (starts[index] > 0) {
                 totalSpaceAllocated -= lengths[index];
@@ -213,7 +214,8 @@ public class DoubleArrayArray implements Array, Serializable {
     /**
      * Returns the index of the last non-null or non-zero element in the array.
      */
-    public int getLastNonEmptyIndex() {
+    @Override
+	public int getLastNonEmptyIndex() {
         return lastStart;
     }
 
@@ -221,7 +223,8 @@ public class DoubleArrayArray implements Array, Serializable {
 	 * 
 	 * @see ghidra.util.datastruct.Array#copyDataTo(int, DataTable, int, int)
 	 */
-    public void copyDataTo(int index, DataTable table, int toIndex, int toCol) {
+    @Override
+	public void copyDataTo(int index, DataTable table, int toIndex, int toCol) {
     	table.putDoubleArray(toIndex, toCol, get(index));
     }
 

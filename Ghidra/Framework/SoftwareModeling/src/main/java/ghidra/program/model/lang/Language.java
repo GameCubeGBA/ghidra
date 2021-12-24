@@ -20,7 +20,10 @@ import java.util.List;
 import java.util.Set;
 
 import ghidra.app.plugin.processors.generic.MemoryBlockDefinition;
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.address.AddressSpace;
 import ghidra.program.model.listing.DefaultProgramContext;
 import ghidra.program.model.listing.Program;
 import ghidra.program.model.mem.MemBuffer;
@@ -35,21 +38,21 @@ public interface Language {
 	 * find the language when Ghidra loads it.
 	 * @return the LanguageID of this language
 	 */
-	public LanguageID getLanguageID();
+	LanguageID getLanguageID();
 
 	/**
 	 * Returns the LanguageDescription of this language, which contains useful
 	 * information about the characteristics of the language.
 	 * @return the LanguageDescription of this language
 	 */
-	public LanguageDescription getLanguageDescription();
+	LanguageDescription getLanguageDescription();
 
 	/**
 	 * Returns a parallel instruction helper for this language or null
 	 * if one has not been defined. 
 	 * @return parallel instruction helper or null if not applicable
 	 */
-	public ParallelInstructionLanguageHelper getParallelInstructionHelper();
+	ParallelInstructionLanguageHelper getParallelInstructionHelper();
 
 	/**
 	 * Returns the processor name on which this language is based.
@@ -58,7 +61,7 @@ public interface Language {
 	 * 
 	 * @return the processor name
 	 */
-	public Processor getProcessor();
+	Processor getProcessor();
 
 	/**
 	 * Returns the major version for this language. Returning a version number
@@ -68,7 +71,7 @@ public interface Language {
 	 * 
 	 * @return the language version number
 	 */
-	public int getVersion();
+	int getVersion();
 
 	/**
 	 * Returns the minor version for this language. Returning a minor version
@@ -78,7 +81,7 @@ public interface Language {
 	 * 
 	 * @return the language minor version number
 	 */
-	public int getMinorVersion();
+	int getMinorVersion();
 
 	/**
 	 * Get the AddressFactory for this language. The returned Address factory will allow
@@ -90,19 +93,19 @@ public interface Language {
 	 * @return the AddressFactory for this language.
 	 * @see Program#getAddressFactory()
 	 */
-	public AddressFactory getAddressFactory();
+	AddressFactory getAddressFactory();
 
 	/**
 	 * Get the default memory/code space.
 	 * @return default address space
 	 */
-	public AddressSpace getDefaultSpace();
+	AddressSpace getDefaultSpace();
 
 	/**
 	 * Get the preferred data space used by loaders for data sections.
 	 * @return default data address space
 	 */
-	public AddressSpace getDefaultDataSpace();
+	AddressSpace getDefaultDataSpace();
 
 	/**
 	 * get the Endian type for this language. (If a language supports both, then
@@ -110,21 +113,21 @@ public interface Language {
 	 * 
 	 * @return true for BigEndian, false for LittleEndian.
 	 */
-	public boolean isBigEndian();
+	boolean isBigEndian();
 
 	/**
 	 * Get instruction alignment in terms of bytes.
 	 * 
 	 * @return instruction alignment
 	 */
-	public int getInstructionAlignment();
+	int getInstructionAlignment();
 
 	/**
 	 * Return true if the instructions in this language support Pcode.
 	 * 
 	 * @return true if language supports the use of pcode
 	 */
-	public boolean supportsPcode();
+	boolean supportsPcode();
 
 	/**
 	 * Returns true if the language has defined the specified location as
@@ -133,7 +136,7 @@ public interface Language {
 	 * @param addr location address
 	 * @return true if specified address is within a volatile range
 	 */
-	public boolean isVolatile(Address addr);
+	boolean isVolatile(Address addr);
 
 	/**
 	 * Get the InstructionPrototype that matches the bytes presented by the
@@ -156,7 +159,7 @@ public interface Language {
 	 *                thrown if the byte pattern does not match any legal
 	 *                instruction.
 	 */
-	public InstructionPrototype parse(MemBuffer buf, ProcessorContext context, boolean inDelaySlot)
+	InstructionPrototype parse(MemBuffer buf, ProcessorContext context, boolean inDelaySlot)
 			throws InsufficientBytesException, UnknownInstructionException;
 
 	/**
@@ -166,7 +169,7 @@ public interface Language {
 	 * 
 	 * @return number of user defined pcodeops
 	 */
-	public int getNumberOfUserDefinedOpNames();
+	int getNumberOfUserDefinedOpNames();
 
 	/**
 	 * Get the user define name for a given index. Certain pcode has operations
@@ -178,7 +181,7 @@ public interface Language {
 	 * @param index user defined pcodeop index
 	 * @return pcodeop name or null if not defined
 	 */
-	public String getUserDefinedOpName(int index);
+	String getUserDefinedOpName(int index);
 
 	/**
 	 * Returns all the registers (each different size is a different register)
@@ -189,7 +192,7 @@ public interface Language {
 	 * @return all the registers (each different size is a different register)
 	 *         for an address.
 	 */
-	public Register[] getRegisters(Address address);
+	Register[] getRegisters(Address address);
 
 	/**
 	 * Get a register given the address space it is in, its offset in the space
@@ -203,7 +206,7 @@ public interface Language {
 	 *            size of the register in bytes
 	 * @return the register
 	 */
-	public Register getRegister(AddressSpace addrspc, long offset, int size);
+	Register getRegister(AddressSpace addrspc, long offset, int size);
 
 	/**
 	 * Get an unsorted unmodifiable list of Register objects that this language defines
@@ -211,7 +214,7 @@ public interface Language {
 	 * 
 	 * @return unmodifiable list of processor registers.
 	 */
-	public List<Register> getRegisters();
+	List<Register> getRegisters();
 
 	/**
 	 * Get an alphabetical sorted unmodifiable list of original register names 
@@ -220,7 +223,7 @@ public interface Language {
 	 * 
 	 * @return alphabetical sorted unmodifiable list of original register names.
 	 */
-	public List<String> getRegisterNames();
+	List<String> getRegisterNames();
 
 	/**
 	 * Get a register given the name of the register
@@ -229,7 +232,7 @@ public interface Language {
 	 *            Register name
 	 * @return the register
 	 */
-	public Register getRegister(String name);
+	Register getRegister(String name);
 
 	/**
 	 * Get a register given it's underlying address location and size.
@@ -241,7 +244,7 @@ public interface Language {
 	 *            largest register at the specified addr
 	 * @return the register
 	 */
-	public Register getRegister(Address addr, int size);
+	Register getRegister(Address addr, int size);
 
 	/**
 	 * Get the default program counter register for this language if there is
@@ -249,14 +252,14 @@ public interface Language {
 	 * 
 	 * @return default program counter register.
 	 */
-	public Register getProgramCounter();
+	Register getProgramCounter();
 
 	/**
 	 * Returns processor context base register or null if one has not been defined by the
 	 * language. 
 	 * @return base context register or Register.NO_CONTEXT if not defined
 	 */
-	public Register getContextBaseRegister();
+	Register getContextBaseRegister();
 
 	/**
 	 * Get an unsorted unmodifiable list of processor context registers that this language defines
@@ -264,20 +267,20 @@ public interface Language {
 	 * 
 	 * @return unmodifiable list of processor registers.
 	 */
-	public List<Register> getContextRegisters();
+	List<Register> getContextRegisters();
 
 	/**
 	 * Returns the default memory blocks for this language.
 	 * @return the default memory blocks for this language
 	 */
-	public MemoryBlockDefinition[] getDefaultMemoryBlocks();
+	MemoryBlockDefinition[] getDefaultMemoryBlocks();
 
 	/**
 	 * Returns the default symbols for this language.  This list does not 
 	 * contain registers.
 	 * @return the default symbols for this language
 	 */
-	public List<AddressLabelInfo> getDefaultSymbols();
+	List<AddressLabelInfo> getDefaultSymbols();
 
 	/**
 	 * Returns the name of the segmented space for this language, or the
@@ -285,13 +288,13 @@ public interface Language {
 	 * segmented.
 	 * @return the name of the segmented space or ""
 	 */
-	public String getSegmentedSpace();
+	String getSegmentedSpace();
 
 	/**
 	 * Returns an AddressSetView of the volatile addresses for this language
 	 * @return an AddressSetView of the volatile addresses for this language
 	 */
-	public AddressSetView getVolatileAddresses();
+	AddressSetView getVolatileAddresses();
 
 	/**
 	 * Apply context settings to the ProgramContext as specified by the
@@ -300,7 +303,7 @@ public interface Language {
 	 * @param ctx
 	 *            is the default program context
 	 */
-	public void applyContextSettings(DefaultProgramContext ctx);
+	void applyContextSettings(DefaultProgramContext ctx);
 
 	/**
 	 * Refreshes the definition of this language if possible.  Use of this method is 
@@ -309,14 +312,14 @@ public interface Language {
 	 * @param taskMonitor monitor for progress back to the user
 	 * @throws IOException if error occurs while reloading language spec file(s)
 	 */
-	public void reloadLanguage(TaskMonitor taskMonitor) throws IOException;
+	void reloadLanguage(TaskMonitor taskMonitor) throws IOException;
 
 	/**
 	 * Returns a list of all compatible compiler spec descriptions.
 	 * The first item in the list is the default.
 	 * @return list of all compatible compiler specifications descriptions
 	 */
-	public List<CompilerSpecDescription> getCompatibleCompilerSpecDescriptions();
+	List<CompilerSpecDescription> getCompatibleCompilerSpecDescriptions();
 
 	/**
 	 * Returns the compiler spec associated with a given CompilerSpecID.
@@ -324,7 +327,7 @@ public interface Language {
 	 * @return the compiler spec associated with the given id
 	 * @throws CompilerSpecNotFoundException if no such compiler spec exists
 	 */
-	public CompilerSpec getCompilerSpecByID(CompilerSpecID compilerSpecID)
+	CompilerSpec getCompilerSpecByID(CompilerSpecID compilerSpecID)
 			throws CompilerSpecNotFoundException;
 
 	/**
@@ -336,14 +339,14 @@ public interface Language {
 	 * for that! 
 	 * @return the default compiler spec for this language
 	 */
-	public CompilerSpec getDefaultCompilerSpec();
+	CompilerSpec getDefaultCompilerSpec();
 
 	/**
 	 * Returns whether this lanugage has a property defined.
 	 * @param key the property key
 	 * @return if the property is defined
 	 */
-	public boolean hasProperty(String key);
+	boolean hasProperty(String key);
 
 	/**
 	 * Gets the value of a property as an int, returning defaultInt if undefined.
@@ -351,7 +354,7 @@ public interface Language {
 	 * @param defaultInt the default value to return if property is undefined
 	 * @return the property value as an int, or the default value if undefined
 	 */
-	public int getPropertyAsInt(String key, int defaultInt);
+	int getPropertyAsInt(String key, int defaultInt);
 
 	/**
 	 * Gets the value of a property as a boolean, returning defaultBoolean if undefined.
@@ -359,7 +362,7 @@ public interface Language {
 	 * @param defaultBoolean the default value to return if property is undefined
 	 * @return the property value as a boolean, or the default value if undefined
 	 */
-	public boolean getPropertyAsBoolean(String key, boolean defaultBoolean);
+	boolean getPropertyAsBoolean(String key, boolean defaultBoolean);
 
 	/**
 	 * Gets the value of a property as a String, returning defaultString if undefined.
@@ -367,26 +370,26 @@ public interface Language {
 	 * @param defaultString the default value to return if property is undefined
 	 * @return the property value as a String, or the default value if undefined
 	 */
-	public String getProperty(String key, String defaultString);
+	String getProperty(String key, String defaultString);
 
 	/**
 	 * Gets a property defined for this language, or null if that property isn't defined.
 	 * @param key the property key
 	 * @return the property value, or null if not defined
 	 */
-	public String getProperty(String key);
+	String getProperty(String key);
 
 	/**
 	 * Returns a read-only set view of the property keys defined on this language.
 	 * @return read-only set of property keys
 	 */
-	public Set<String> getPropertyKeys();
+	Set<String> getPropertyKeys();
 
 	/**
 	 * Returns whether the language has a valid manual defined.
 	 * @return if the language has a manual
 	 */
-	public boolean hasManual();
+	boolean hasManual();
 
 	/**
 	 * Get the ManualEntry for the given instruction mnemonic.
@@ -396,7 +399,7 @@ public interface Language {
 	 * @return the ManualEntry or null.  A default manual entry will be returned if 
 	 * an instruction can not be found within the index and a manual exists.
 	 */
-	public ManualEntry getManualEntry(String instructionMnemonic);
+	ManualEntry getManualEntry(String instructionMnemonic);
 
 	/**
 	 * Returns a read-only set view of the instruction mnemonic keys defined on
@@ -404,18 +407,18 @@ public interface Language {
 	 * 
 	 * @return read-only set of instruction mnemonic keys
 	 */
-	public Set<String> getManualInstructionMnemonicKeys();
+	Set<String> getManualInstructionMnemonicKeys();
 
 	/**
 	 * Returns the exception generated trying to load the manual, or null if it succeeded.
 	 * @return the exception generated trying to load the manual, or null if it succeeded
 	 */
-	public Exception getManualException();
+	Exception getManualException();
 
 	/**
 	 * Returns an unmodifiable list of vector registers, sorted first by size and then by name.
 	 * @return unmodifiable list of vector registers.
 	 */
-	public List<Register> getSortedVectorRegisters();
+	List<Register> getSortedVectorRegisters();
 
 }

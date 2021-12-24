@@ -16,17 +16,21 @@
  */
 package ghidra.pcodeCPort.slghsymbol;
 
+import java.io.PrintStream;
+
+import org.jdom.Element;
+
 import generic.stl.VectorSTL;
 import ghidra.pcodeCPort.context.ParserWalkerChange;
 import ghidra.pcodeCPort.context.SleighError;
 import ghidra.pcodeCPort.sleighbase.SleighBase;
-import ghidra.pcodeCPort.slghpatexpress.*;
-import ghidra.pcodeCPort.utils.*;
+import ghidra.pcodeCPort.slghpatexpress.OperandValue;
+import ghidra.pcodeCPort.slghpatexpress.PatternExpression;
+import ghidra.pcodeCPort.slghpatexpress.PatternValue;
+import ghidra.pcodeCPort.utils.MutableInt;
+import ghidra.pcodeCPort.utils.Utils;
+import ghidra.pcodeCPort.utils.XmlUtils;
 import ghidra.sleigh.grammar.Location;
-
-import java.io.PrintStream;
-
-import org.jdom.Element;
 
 public class ContextOp extends ContextChange {
 	public final Location location;
@@ -68,7 +72,7 @@ public class ContextOp extends ContextChange {
 	// Throw an exception if the PatternExpression is not valid
 	@Override
 	public void validate() {
-		VectorSTL<PatternValue> values = new VectorSTL<PatternValue>();
+		VectorSTL<PatternValue> values = new VectorSTL<>();
 
 		patexp.listValues(values); // Get all the expression tokens
 		for (int i = 0; i < values.size(); ++i) {

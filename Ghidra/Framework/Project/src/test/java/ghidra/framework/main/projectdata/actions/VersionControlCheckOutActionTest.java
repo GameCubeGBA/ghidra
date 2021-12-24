@@ -15,7 +15,7 @@
  */
 package ghidra.framework.main.projectdata.actions;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -27,9 +27,16 @@ import org.junit.Test;
 
 import docking.DialogComponentProvider;
 import docking.test.AbstractDockingTest;
-import ghidra.framework.model.*;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.DomainObject;
+import ghidra.framework.model.TestDummyDomainFile;
+import ghidra.framework.model.TestDummyDomainFolder;
 import ghidra.framework.plugintool.DummyPluginTool;
-import ghidra.util.*;
+import ghidra.util.InvalidNameException;
+import ghidra.util.Msg;
+import ghidra.util.SpyErrorDisplay;
+import ghidra.util.SpyErrorLogger;
+import ghidra.util.SystemUtilities;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 import util.CollectionUtils;
@@ -274,7 +281,7 @@ public class VersionControlCheckOutActionTest extends AbstractDockingTest {
 
 	}
 
-	private class CheckoutableDomainFile extends TestDummyDomainFile {
+	private static class CheckoutableDomainFile extends TestDummyDomainFile {
 
 		private boolean ableToCheckout = true;
 

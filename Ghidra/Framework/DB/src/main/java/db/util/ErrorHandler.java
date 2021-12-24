@@ -26,5 +26,5 @@ public interface ErrorHandler {
 	/**
 	 * Notification that an IO exception occurred.
 	 */
-	public void dbError(IOException e);
+	void dbError(IOException e);
 }

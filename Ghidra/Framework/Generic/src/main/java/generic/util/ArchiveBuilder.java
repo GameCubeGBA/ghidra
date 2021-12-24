@@ -16,12 +16,15 @@
  */
 package generic.util;
 
-import ghidra.util.exception.AssertException;
-
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
+
+import ghidra.util.exception.AssertException;
 
 public class ArchiveBuilder {
 

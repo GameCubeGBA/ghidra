@@ -15,7 +15,10 @@
  */
 package ghidra.program.model.data;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 import ghidra.util.InvalidNameException;
 import ghidra.util.UniversalID;

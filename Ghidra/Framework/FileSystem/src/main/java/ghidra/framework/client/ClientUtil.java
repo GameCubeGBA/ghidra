@@ -19,19 +19,35 @@ import java.awt.Component;
 import java.io.IOException;
 import java.net.Authenticator;
 import java.net.UnknownHostException;
-import java.rmi.*;
+import java.rmi.ConnectException;
+import java.rmi.RemoteException;
+import java.rmi.ServerError;
+import java.rmi.ServerException;
 import java.security.GeneralSecurityException;
 import java.util.Arrays;
 import java.util.Hashtable;
 
-import javax.security.auth.callback.*;
+import javax.security.auth.callback.Callback;
+import javax.security.auth.callback.ChoiceCallback;
+import javax.security.auth.callback.NameCallback;
+import javax.security.auth.callback.PasswordCallback;
 import javax.security.auth.login.LoginException;
 
 import ghidra.framework.model.ServerInfo;
-import ghidra.framework.remote.*;
+import ghidra.framework.remote.AnonymousCallback;
+import ghidra.framework.remote.GhidraServerHandle;
+import ghidra.framework.remote.InetNameLookup;
+import ghidra.framework.remote.RemoteRepositoryServerHandle;
+import ghidra.framework.remote.RepositoryServerHandle;
+import ghidra.framework.remote.SSHSignatureCallback;
+import ghidra.framework.remote.SignatureCallback;
 import ghidra.framework.remote.security.SSHKeyManager;
-import ghidra.net.*;
-import ghidra.util.*;
+import ghidra.net.ApplicationKeyManagerFactory;
+import ghidra.net.ApplicationKeyManagerUtils;
+import ghidra.net.SignedToken;
+import ghidra.util.HashUtilities;
+import ghidra.util.Msg;
+import ghidra.util.SystemUtilities;
 import ghidra.util.exception.AssertException;
 import ghidra.util.exception.UserAccessException;
 import ghidra.util.task.TaskLauncher;
@@ -223,13 +239,7 @@ public class ClientUtil {
 			if (excMsg == null) {
 				excMsg = exc.toString();
 			}
-			if (exc instanceof IOException) {
-				Msg.showError(ClientUtil.class, parent, title, excMsg, exc);
-			}
-			else {
-				// show the stacktrace for non-IOException
-				Msg.showError(ClientUtil.class, parent, title, excMsg, exc);
-			}
+			Msg.showError(ClientUtil.class, parent, title, excMsg, exc);
 		}
 	}
 
@@ -267,7 +277,7 @@ public class ClientUtil {
 			return;
 		}
 
-		final StringBuffer sb = new StringBuffer();
+		final StringBuilder sb = new StringBuilder();
 		if (mustRetry) {
 			sb.append("The " + operation +
 				" may have failed due to a lost connection with the Ghidra Server.\n");
@@ -468,10 +478,7 @@ public class ClientUtil {
 				sshCb = (SSHSignatureCallback) callback;
 			}
 		}
-		if (sshCb == null || !clientAuthenticator.isSSHKeyAvailable()) {
-			return false;
-		}
-		if (!clientAuthenticator.processSSHSignatureCallbacks(serverName, nameCb, sshCb)) {
+		if (sshCb == null || !clientAuthenticator.isSSHKeyAvailable() || !clientAuthenticator.processSSHSignatureCallbacks(serverName, nameCb, sshCb)) {
 			return false;
 		}
 		Msg.info(ClientUtil.class,

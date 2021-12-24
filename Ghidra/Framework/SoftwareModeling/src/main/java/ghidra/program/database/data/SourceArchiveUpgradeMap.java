@@ -18,7 +18,9 @@ package ghidra.program.database.data;
 import java.util.HashMap;
 import java.util.Map;
 
-import ghidra.program.model.data.*;
+import ghidra.program.model.data.ArchiveType;
+import ghidra.program.model.data.DataTypeManager;
+import ghidra.program.model.data.SourceArchive;
 import ghidra.program.model.lang.CompilerSpec;
 import ghidra.program.model.lang.CompilerSpecID;
 import ghidra.util.UniversalID;
@@ -28,7 +30,7 @@ public class SourceArchiveUpgradeMap {
 	private static final long OLD_WINDOWS_ARCHIVE_ID = 2592694847825635591L;
 	private static final long OLD_NTDDK_ARCHIVE_ID = 2585014353215059675L;
 	private static final long[] oldArchiveIds =
-		new long[] { OLD_CLIB_ARCHIVE_ID, OLD_NTDDK_ARCHIVE_ID, OLD_WINDOWS_ARCHIVE_ID };
+		{ OLD_CLIB_ARCHIVE_ID, OLD_NTDDK_ARCHIVE_ID, OLD_WINDOWS_ARCHIVE_ID };
 
 	private CompilerSpecID WINDOWS_CSPEC_ID = new CompilerSpecID("windows");
 	private Map<UniversalID, SourceArchive> windowsMap;
@@ -48,13 +50,13 @@ public class SourceArchiveUpgradeMap {
 			new SourceArchiveImpl(NEW_DEFAULT_CLIB_ARCHIVE_ID, NEW_DEFAULT_CLIB_ARCHIVE_NAME);
 
 		// create mapping for WINDOWS
-		windowsMap = new HashMap<UniversalID, SourceArchive>();
+		windowsMap = new HashMap<>();
 		windowsMap.put(new UniversalID(OLD_CLIB_ARCHIVE_ID), newWindowsArchive);
 		windowsMap.put(new UniversalID(OLD_WINDOWS_ARCHIVE_ID), newWindowsArchive);
 		windowsMap.put(new UniversalID(OLD_NTDDK_ARCHIVE_ID), newWindowsArchive);
 
 		// create defaultMap
-		defaultMap = new HashMap<UniversalID, SourceArchive>();
+		defaultMap = new HashMap<>();
 		defaultMap.put(new UniversalID(OLD_CLIB_ARCHIVE_ID), newDefaultClibArchive);
 		SourceArchive removedSourceArchive = new SourceArchiveImpl();
 		defaultMap.put(new UniversalID(OLD_WINDOWS_ARCHIVE_ID), removedSourceArchive);
@@ -107,36 +109,45 @@ class SourceArchiveImpl implements SourceArchive {
 		archiveName = "";
 	}
 
+	@Override
 	public ArchiveType getArchiveType() {
 		return ArchiveType.FILE;
 	}
 
+	@Override
 	public String getDomainFileID() {
 		return null;
 	}
 
+	@Override
 	public long getLastSyncTime() {
 		return 0;
 	}
 
+	@Override
 	public String getName() {
 		return archiveName;
 	}
 
+	@Override
 	public UniversalID getSourceArchiveID() {
 		return id;
 	}
 
+	@Override
 	public boolean isDirty() {
 		return false;
 	}
 
+	@Override
 	public void setDirtyFlag(boolean dirty) {
 	}
 
+	@Override
 	public void setLastSyncTime(long time) {
 	}
 
+	@Override
 	public void setName(String name) {
 	}
 

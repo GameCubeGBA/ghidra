@@ -18,7 +18,9 @@ package ghidra.framework.main.datatree;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.table.TableColumn;
@@ -26,14 +28,18 @@ import javax.swing.table.TableColumnModel;
 
 import docking.ActionContext;
 import docking.DialogComponentProvider;
-import docking.widgets.table.*;
+import docking.widgets.table.GTable;
+import docking.widgets.table.GTableCellRenderer;
+import docking.widgets.table.GTableCellRenderingData;
 import docking.widgets.table.threaded.GThreadedTablePanel;
 import docking.widgets.table.threaded.ThreadedTableModelListener;
 import ghidra.framework.main.datatable.ProjectDataContext;
 import ghidra.framework.model.DomainFile;
 import ghidra.framework.model.DomainFolder;
 import ghidra.framework.plugintool.Plugin;
-import ghidra.util.*;
+import ghidra.util.DateUtils;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
 
 /**
  * Dialog that shows all checkouts in a specific folder and all of its subfolders.
@@ -97,7 +103,7 @@ public class FindCheckoutsDialog extends DialogComponentProvider {
 			TableColumn column = columnModel.getColumn(i);
 			column.setCellRenderer(cellRenderer);
 			String name = (String) column.getIdentifier();
-			if (name.equals(FindCheckoutsTableModel.CHECKOUT_DATE)) {
+			if (FindCheckoutsTableModel.CHECKOUT_DATE.equals(name)) {
 				column.setPreferredWidth(180);
 			}
 		}

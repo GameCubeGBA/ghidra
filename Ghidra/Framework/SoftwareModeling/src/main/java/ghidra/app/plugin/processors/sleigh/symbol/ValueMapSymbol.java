@@ -15,9 +15,15 @@
  */
 package ghidra.app.plugin.processors.sleigh.symbol;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-import ghidra.app.plugin.processors.sleigh.*;
+import ghidra.app.plugin.processors.sleigh.Constructor;
+import ghidra.app.plugin.processors.sleigh.FixedHandle;
+import ghidra.app.plugin.processors.sleigh.ParserWalker;
+import ghidra.app.plugin.processors.sleigh.SleighDebugLogger;
+import ghidra.app.plugin.processors.sleigh.SleighLanguage;
 import ghidra.app.plugin.processors.sleigh.expression.PatternExpression;
 import ghidra.app.plugin.processors.sleigh.expression.PatternValue;
 import ghidra.program.model.lang.UnknownInstructionException;
@@ -43,8 +49,10 @@ public class ValueMapSymbol extends ValueSymbol {
 		long max = getPatternValue().maxValue();
 		tableisfilled = (min >= 0) && (max < valuetable.length);
 		for (long element : valuetable) {
-			if (element == 0xBADBEEF)
+			if (element == 0xBADBEEF) {
 				tableisfilled = false;
+				break;
+			}
 		}
 	}
 

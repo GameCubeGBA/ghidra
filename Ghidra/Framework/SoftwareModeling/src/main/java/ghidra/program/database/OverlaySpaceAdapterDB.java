@@ -19,7 +19,14 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import db.*;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.LongField;
+import db.RecordIterator;
+import db.Schema;
+import db.StringField;
+import db.Table;
 import ghidra.program.model.address.AddressSpace;
 import ghidra.program.model.address.OverlayAddressSpace;
 import ghidra.program.model.lang.Language;

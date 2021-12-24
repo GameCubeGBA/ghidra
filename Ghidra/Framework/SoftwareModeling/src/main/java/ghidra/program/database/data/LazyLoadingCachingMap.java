@@ -16,7 +16,9 @@
 package ghidra.program.database.data;
 
 import java.lang.ref.SoftReference;
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Map;
 
 import ghidra.util.Lock;
 

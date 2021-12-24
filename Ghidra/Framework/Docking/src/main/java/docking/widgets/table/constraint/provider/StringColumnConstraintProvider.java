@@ -15,9 +15,21 @@
  */
 package docking.widgets.table.constraint.provider;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
-import docking.widgets.table.constraint.*;
+import docking.widgets.table.constraint.ColumnConstraint;
+import docking.widgets.table.constraint.ColumnConstraintProvider;
+import docking.widgets.table.constraint.StringContainsColumnConstraint;
+import docking.widgets.table.constraint.StringEndsWithColumnConstraint;
+import docking.widgets.table.constraint.StringIsEmptyColumnConstraint;
+import docking.widgets.table.constraint.StringIsNotEmptyColumnConstraint;
+import docking.widgets.table.constraint.StringMatcherColumnConstraint;
+import docking.widgets.table.constraint.StringNotContainsColumnConstraint;
+import docking.widgets.table.constraint.StringNotEndsWithColumnConstraint;
+import docking.widgets.table.constraint.StringNotStartsWithColumnConstraint;
+import docking.widgets.table.constraint.StringStartsWithColumnConstraint;
 
 /**
  * Provides String related column constraints.

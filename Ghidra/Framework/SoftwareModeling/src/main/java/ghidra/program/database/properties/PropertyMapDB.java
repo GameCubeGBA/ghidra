@@ -18,19 +18,32 @@ package ghidra.program.database.properties;
 import java.io.IOException;
 import java.util.NoSuchElementException;
 
-import db.*;
+import db.DBConstants;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.RecordIterator;
+import db.Schema;
+import db.Table;
 import db.util.ErrorHandler;
-import ghidra.program.database.map.*;
+import ghidra.program.database.map.AddressKeyAddressIterator;
+import ghidra.program.database.map.AddressKeyIterator;
+import ghidra.program.database.map.AddressMap;
+import ghidra.program.database.map.AddressRecordDeleter;
 import ghidra.program.database.util.DatabaseTableUtils;
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressIterator;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.address.EmptyAddressIterator;
 import ghidra.program.model.util.PropertyMap;
 import ghidra.program.util.ChangeManager;
 import ghidra.program.util.ChangeManagerAdapter;
 import ghidra.util.Lock;
 import ghidra.util.datastruct.ObjectCache;
-import ghidra.util.exception.*;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.NoValueException;
+import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * Abstract class which defines a map containing properties over a set of addresses.
@@ -40,9 +53,9 @@ public abstract class PropertyMapDB implements PropertyMap {
 
 	private static final String PROPERTY_TABLE_PREFIX = "Property Map - ";
 
-	protected static final String[] SCHEMA_FIELD_NAMES = new String[] { "Value" };
-	protected static final String[] NO_SCHEMA_FIELD_NAMES = new String[0];
-	protected static final Field[] NO_SCHEMA_FIELDS = new Field[0];
+	protected static final String[] SCHEMA_FIELD_NAMES = { "Value" };
+	protected static final String[] NO_SCHEMA_FIELD_NAMES = {};
+	protected static final Field[] NO_SCHEMA_FIELDS = {};
 
 	protected static final int PROPERTY_VALUE_COL = 0;
 
@@ -178,7 +191,7 @@ public abstract class PropertyMapDB implements PropertyMap {
 	protected void createTable(Field valueField) throws IOException {
 		if (valueField != null) {
 			// Create default table schema with a value column and an long Address key
-			Field[] fields = new Field[] { valueField };
+			Field[] fields = { valueField };
 			schema = new Schema(0, "Address", fields, SCHEMA_FIELD_NAMES);
 		}
 		else {

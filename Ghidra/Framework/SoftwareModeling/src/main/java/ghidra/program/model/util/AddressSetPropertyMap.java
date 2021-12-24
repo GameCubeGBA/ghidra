@@ -15,7 +15,11 @@
  */
 package ghidra.program.model.util;
 
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressIterator;
+import ghidra.program.model.address.AddressRangeIterator;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetView;
 
 /**
  * Defines methods to mark ranges in a property map. 

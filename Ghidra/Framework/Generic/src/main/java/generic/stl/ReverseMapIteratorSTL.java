@@ -69,7 +69,7 @@ public class ReverseMapIteratorSTL<K, V> extends MapIteratorSTL<K, V> {
 	}
 	@Override
     public IteratorSTL<Pair<K, V>> copy() {
-		return new ReverseMapIteratorSTL<K, V>(tree, node);
+		return new ReverseMapIteratorSTL<>(tree, node);
 	}
 		
 	@SuppressWarnings("unchecked")
@@ -78,10 +78,7 @@ public class ReverseMapIteratorSTL<K, V> extends MapIteratorSTL<K, V> {
 		if (obj == this) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (obj.getClass() != getClass() ) {
+		if ((obj == null) || (obj.getClass() != getClass()) ) {
 			return false;
 		}
 		ReverseMapIteratorSTL<K, V> other = (ReverseMapIteratorSTL<K, V>) obj;

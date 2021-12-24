@@ -15,22 +15,39 @@
  */
 package ghidra.framework.task.gui;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.swing.JFrame;
 
-import org.junit.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import docking.test.AbstractDockingTest;
 import generic.concurrent.GThreadPool;
 import ghidra.framework.model.UndoableDomainObject;
-import ghidra.framework.task.*;
-import ghidra.framework.task.gui.taskview.*;
+import ghidra.framework.task.GScheduledTask;
+import ghidra.framework.task.GTask;
+import ghidra.framework.task.GTaskGroup;
+import ghidra.framework.task.GTaskManager;
+import ghidra.framework.task.GTaskManagerPanel;
+import ghidra.framework.task.GenericDomainObjectDB;
+import ghidra.framework.task.SimpleTask;
+import ghidra.framework.task.gui.taskview.AbstractTaskInfo;
+import ghidra.framework.task.gui.taskview.GroupInfo;
+import ghidra.framework.task.gui.taskview.ScheduledTaskPanel;
+import ghidra.framework.task.gui.taskview.TaskInfo;
+import ghidra.framework.task.gui.taskview.TaskViewer;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 

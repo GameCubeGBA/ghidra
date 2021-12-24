@@ -16,7 +16,9 @@
 package ghidra.framework.main.projectdata.actions;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 
@@ -33,7 +35,9 @@ import ghidra.framework.remote.User;
 import ghidra.util.Msg;
 import ghidra.util.Swing;
 import ghidra.util.exception.CancelledException;
-import ghidra.util.task.*;
+import ghidra.util.task.Task;
+import ghidra.util.task.TaskMonitor;
+import ghidra.util.task.WrappingTaskMonitor;
 import resources.ResourceManager;
 
 /**

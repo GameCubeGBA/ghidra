@@ -16,24 +16,51 @@
  */
 package ghidra.framework.task.gui.taskview;
 
-import ghidra.framework.task.*;
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Composite;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Insets;
+import java.awt.LayoutManager;
+import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Deque;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
+
+import javax.swing.JComponent;
+import javax.swing.JLayeredPane;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.SwingUtilities;
+
+import org.jdesktop.animation.timing.Animator;
+import org.jdesktop.animation.timing.TimingTarget;
+import org.jdesktop.animation.timing.TimingTargetAdapter;
+
+import docking.util.GraphicsUtils;
+import ghidra.framework.task.GScheduledTask;
+import ghidra.framework.task.GTaskGroup;
+import ghidra.framework.task.GTaskListenerAdapter;
+import ghidra.framework.task.GTaskManager;
+import ghidra.framework.task.GTaskMonitor;
+import ghidra.framework.task.GTaskResult;
 import ghidra.framework.task.gui.GProgressBar;
 import ghidra.util.SystemUtilities;
 import ghidra.util.exception.AssertException;
 import ghidra.util.task.CancelledListener;
 import ghidra.util.task.SwingUpdateManager;
-
-import java.awt.*;
-import java.util.*;
-import java.util.List;
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
-
-import javax.swing.*;
-
-import org.jdesktop.animation.timing.*;
-
-import docking.util.GraphicsUtils;
 
 /*
  * The TaskViewer manages a component for showing the running and waiting tasks of a GTaskManager.
@@ -45,10 +72,10 @@ public class TaskViewer {
 	private static final int MIN_DELAY = 250;
 	private static final int MAX_DELAY = 1000;
 
-	private Deque<AbstractTaskInfo> runningList = new LinkedList<AbstractTaskInfo>();
-	private LinkedList<AbstractTaskInfo> waitingList = new LinkedList<AbstractTaskInfo>();
-	private LinkedList<AbstractTaskInfo> scrollAwayList = new LinkedList<AbstractTaskInfo>();
-	private Queue<Runnable> runnableQueue = new ConcurrentLinkedQueue<Runnable>();
+	private Deque<AbstractTaskInfo> runningList = new LinkedList<>();
+	private LinkedList<AbstractTaskInfo> waitingList = new LinkedList<>();
+	private LinkedList<AbstractTaskInfo> scrollAwayList = new LinkedList<>();
+	private Queue<Runnable> runnableQueue = new ConcurrentLinkedQueue<>();
 	private SwingUpdateManager updateManager;
 	private GTaskManager taskManager;
 	private TaskViewerTaskListener taskListener;
@@ -70,24 +97,15 @@ public class TaskViewer {
 
 		buildComponent();
 		taskListener = new TaskViewerTaskListener();
-		updateComponentsRunnable = new Runnable() {
-			@Override
-			public void run() {
-				while (!runnableQueue.isEmpty()) {
-					Runnable runnable = runnableQueue.poll();
-					runnable.run();
-				}
-				updateComponent();
+		updateComponentsRunnable = () -> {
+			while (!runnableQueue.isEmpty()) {
+				Runnable runnable = runnableQueue.poll();
+				runnable.run();
 			}
+			updateComponent();
 		};
 		updateManager = new SwingUpdateManager(MIN_DELAY, MAX_DELAY, updateComponentsRunnable);
-		animationRunnable = new Runnable() {
-
-			@Override
-			public void run() {
-				startScrollingAwayAnimation(0);
-			}
-		};
+		animationRunnable = () -> startScrollingAwayAnimation(0);
 
 		completedTimingTarget = new TimingTargetAdapter() {
 			@Override
@@ -192,10 +210,7 @@ public class TaskViewer {
 	}
 
 	void startScrollingAwayAnimation(int startDelay) {
-		if (scrollAwayList.isEmpty()) {
-			return;
-		}
-		if (scrollAwayAnimator.isRunning()) {
+		if (scrollAwayList.isEmpty() || scrollAwayAnimator.isRunning()) {
 			return;
 		}
 
@@ -212,7 +227,7 @@ public class TaskViewer {
 
 	// this layout makes sure the main component and the layered pane are both sized together.  This
 	// ensures the "watermark" message is centered.
-	private class CustomLayoutManager implements LayoutManager {
+	private static class CustomLayoutManager implements LayoutManager {
 
 		@Override
 		public void addLayoutComponent(String name, Component comp) {
@@ -331,19 +346,16 @@ public class TaskViewer {
 
 		@Override
 		public void suspendedStateChanged(boolean isSuspended) {
-			SystemUtilities.runSwingLater(new Runnable() {
-				@Override
-				public void run() {
-					layeredPane.invalidate();
-					layeredPane.repaint();
-				}
+			SystemUtilities.runSwingLater(() -> {
+				layeredPane.invalidate();
+				layeredPane.repaint();
 			});
 		}
 	}
 
 	private class InitializeRunnable implements Runnable {
 		private GTaskGroup currentGroup;
-		private List<GScheduledTask> scheduledTasks = new ArrayList<GScheduledTask>();
+		private List<GScheduledTask> scheduledTasks = new ArrayList<>();
 		private List<GScheduledTask> delayedTasks;
 		private GScheduledTask runningTask;
 		private List<TaskGroupScheduledRunnable> groupRunnables;
@@ -355,7 +367,7 @@ public class TaskViewer {
 			runningTask = taskManager.getRunningTask();
 			List<GTaskGroup> groups = taskManager.getScheduledGroups();
 
-			groupRunnables = new ArrayList<TaskGroupScheduledRunnable>();
+			groupRunnables = new ArrayList<>();
 			for (GTaskGroup gTaskGroup : groups) {
 				groupRunnables.add(new TaskGroupScheduledRunnable(gTaskGroup));
 			}

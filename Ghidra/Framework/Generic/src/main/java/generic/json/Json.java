@@ -18,7 +18,9 @@ package generic.json;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 
-import org.apache.commons.lang3.builder.*;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * A utility class to format strings in JSON format.   This is useful for easily generating
@@ -61,7 +63,7 @@ public class Json extends ToStringStyle {
 	/**
 	 * Creates a Json string representation of the given object and all of its fields.  To exclude
 	 * some fields, call {@link #toStringExclude(Object, String...)}.  To only include particular
-	 * fields, call {@link #appendToString(StringBuffer, String)}.
+	 * fields, call {@link #appendToString(StringBuilder, String)}.
 	 * @param o the object
 	 * @return the string
 	 */

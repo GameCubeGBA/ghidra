@@ -19,7 +19,10 @@ import java.awt.event.MouseEvent;
 
 import docking.DockingUtils;
 import edu.uci.ics.jung.visualization.control.ScalingGraphMousePlugin;
-import ghidra.graph.viewer.*;
+import ghidra.graph.viewer.GraphViewer;
+import ghidra.graph.viewer.VisualEdge;
+import ghidra.graph.viewer.VisualGraphScalingControl;
+import ghidra.graph.viewer.VisualVertex;
 import ghidra.graph.viewer.options.VisualGraphOptions;
 
 /**
@@ -62,6 +65,6 @@ public class VisualGraphScalingGraphMousePlugin<V extends VisualVertex, E extend
 		}
 
 		// scrolling *will* zoom only when not modified (modified in this case means to pan)
-		return !((scrollWheelModifierToggle & eventModifiers) == scrollWheelModifierToggle);
+		return ((scrollWheelModifierToggle & eventModifiers) != scrollWheelModifierToggle);
 	}
 }

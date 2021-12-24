@@ -15,11 +15,21 @@
  */
 package docking.framework;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import docking.widgets.label.GIconLabel;
 import docking.widgets.label.GLabel;
@@ -60,10 +70,7 @@ public class ApplicationInformationDisplayFactory {
 		Image bestImageSoFar = null;
 		for (Image image : windowIcons) {
 			int width = image.getWidth(null);
-			if (bestImageSoFar == null) {
-				bestImageSoFar = image;
-			}
-			else if (width > bestImageSoFar.getWidth(null)) {
+			if ((bestImageSoFar == null) || (width > bestImageSoFar.getWidth(null))) {
 				bestImageSoFar = image;
 			}
 		}

@@ -100,7 +100,7 @@ public class ReducingLCSTest {
 		return charList;
 	}
 
-	private class StringLcs extends ReducingLcs<String, Character> {
+	private static class StringLcs extends ReducingLcs<String, Character> {
 
 		public StringLcs(String x, String y) {
 			super(x, y);

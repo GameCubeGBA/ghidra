@@ -46,11 +46,7 @@ public class ProjectDataCopyAction extends ProjectDataCopyCutBaseAction {
 
 	@Override
 	protected boolean isEnabledForContext(FrontEndProjectTreeContext context) {
-		if (!context.hasOneOrMoreFilesAndFolders()) {
-			return false;
-		}
-
-		if (!context.isInActiveProject()) {
+		if (!context.hasOneOrMoreFilesAndFolders() || !context.isInActiveProject()) {
 			return false;
 		}
 

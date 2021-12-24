@@ -16,7 +16,9 @@
  */
 package docking.widgets.table;
 
-import javax.swing.*;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
 
 public class GTableTextCellEditor extends DefaultCellEditor {
 	private static final Object TABLE_FOCUS_CELL_HIGHLIGHT_BORDER =

@@ -19,8 +19,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import db.*;
-import ghidra.program.model.address.*;
+import db.BooleanField;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.IntField;
+import db.RecordIterator;
+import db.Schema;
+import db.StringField;
+import db.Table;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.address.GenericAddressSpace;
 import ghidra.util.exception.VersionException;
 
 /**
@@ -103,7 +114,7 @@ class AddressMapDBAdapterV1 extends AddressMapDBAdapter {
 	 */
 	@Override
 	List<AddressMapEntry> getEntries() throws IOException {
-		ArrayList<AddressMapEntry> list = new ArrayList<AddressMapEntry>();
+		ArrayList<AddressMapEntry> list = new ArrayList<>();
 		RecordIterator it = table.iterator();
 		while (it.hasNext()) {
 			DBRecord rec = it.next();

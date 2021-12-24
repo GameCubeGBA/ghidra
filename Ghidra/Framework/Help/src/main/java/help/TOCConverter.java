@@ -15,13 +15,25 @@
  */
 package help;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.StringTokenizer;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParserFactory;
 
-import org.xml.sax.*;
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.helpers.ParserAdapter;
 
@@ -52,8 +64,8 @@ public class TOCConverter {
 
 		sourceFilename = sourceTOCfilename;
 		this.outFilename = outFilename;
-		urlMap = new HashMap<String, String>();
-		tocList = new ArrayList<String>();
+		urlMap = new HashMap<>();
+		tocList = new ArrayList<>();
 		readSourceTOC();
 		writeJavaHelpTOC();
 		System.out.println("  TOC conversion is done!");
@@ -67,8 +79,7 @@ public class TOCConverter {
 	 */
 	void writeTOCMapFile(PrintWriter out) {
 		out.println("  <!-- Table of Contents help IDs -->");
-		for (int i = 0; i < tocList.size(); i++) {
-			String target = tocList.get(i);
+		for (String target : tocList) {
 			String url = urlMap.get(target);
 
 			String line = "  <mapID target=\"" + target + "\" url=\"" + url + "\" />";
@@ -137,7 +148,7 @@ public class TOCConverter {
 	}
 
 	private String getPadString(String line) {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < line.length(); i++) {
 			if (line.charAt(i) == ' ') {
 				sb.append(' ');
@@ -187,11 +198,9 @@ public class TOCConverter {
 				}
 				endLineFound = false;
 			}
-			if (!endLineFound) {
-				if (line.endsWith(">")) {
-					endLineFound = true;
-					continue;
-				}
+			if (!endLineFound && line.endsWith(">")) {
+				endLineFound = true;
+				continue;
 			}
 			out.println(line);
 		}
@@ -200,7 +209,7 @@ public class TOCConverter {
 		return tempFile;
 	}
 
-	private class TOCItem {
+	private static class TOCItem {
 		private String text;
 		private String target;
 
@@ -231,7 +240,7 @@ public class TOCConverter {
 				Attributes atts) throws SAXException {
 
 			if (atts != null) {
-				if (!atts.getQName(0).equals(TEXT)) {
+				if (!TEXT.equals(atts.getQName(0))) {
 					return;
 				}
 

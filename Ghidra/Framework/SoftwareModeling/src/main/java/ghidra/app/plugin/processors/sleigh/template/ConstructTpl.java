@@ -104,7 +104,7 @@ public class ConstructTpl {
 			sectionid = SpecXmlUtils.decodeInt(sectionidstr);
 		}
 		XmlElement handel = parser.peek();
-		if (handel.getName().equals("null")) {
+		if ("null".equals(handel.getName())) {
 			result = null;
 			parser.discardSubTree();
 		}

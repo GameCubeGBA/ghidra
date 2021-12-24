@@ -16,12 +16,16 @@
 package db;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.NoSuchElementException;
 
 import db.Field.UnsupportedFieldException;
 import ghidra.util.Msg;
 import ghidra.util.datastruct.IntObjectHashtable;
-import ghidra.util.exception.*;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.task.TaskMonitor;
 
 /**
@@ -44,7 +48,7 @@ public class Table {
 	private long maximumKey;
 
 	private IntObjectHashtable<IndexTable> secondaryIndexes = new IntObjectHashtable<>();
-	private int[] indexedColumns = new int[0];
+	private int[] indexedColumns = {};
 	private boolean isIndexed = false;
 
 	/**
@@ -2060,11 +2064,7 @@ public class Table {
 			this.minKey = minKey;
 			this.maxKey = maxKey;
 
-			if (rootBufferId < 0) {
-				return;
-			}
-
-			if (minKey > maxKey) {
+			if ((rootBufferId < 0) || (minKey > maxKey)) {
 				return;
 			}
 
@@ -2353,11 +2353,7 @@ public class Table {
 			this.minKey = minKey;
 			this.maxKey = maxKey;
 
-			if (rootBufferId < 0) {
-				return;
-			}
-
-			if (minKey != null && maxKey != null && minKey.compareTo(maxKey) > 0) {
+			if ((rootBufferId < 0) || (minKey != null && maxKey != null && minKey.compareTo(maxKey) > 0)) {
 				return;
 			}
 
@@ -2679,11 +2675,9 @@ public class Table {
 		@Override
 		public boolean hasNext() throws IOException {
 			synchronized (db) {
-				if (iterCnt < SHORT_ITER_THRESHOLD) {
-					if (++iterCnt > SHORT_ITER_THRESHOLD) {
-						// Long iterations should use LongKeyIterator1
-						keyIter = new LongKeyIterator1((LongKeyIterator2) keyIter);
-					}
+				if ((iterCnt < SHORT_ITER_THRESHOLD) && (++iterCnt > SHORT_ITER_THRESHOLD)) {
+					// Long iterations should use LongKeyIterator1
+					keyIter = new LongKeyIterator1((LongKeyIterator2) keyIter);
 				}
 				return keyIter.hasNext();
 			}
@@ -2692,11 +2686,9 @@ public class Table {
 		@Override
 		public boolean hasPrevious() throws IOException {
 			synchronized (db) {
-				if (iterCnt < SHORT_ITER_THRESHOLD) {
-					if (++iterCnt > SHORT_ITER_THRESHOLD) {
-						// Long iterations should use LongKeyIterator1
-						keyIter = new LongKeyIterator1((LongKeyIterator2) keyIter);
-					}
+				if ((iterCnt < SHORT_ITER_THRESHOLD) && (++iterCnt > SHORT_ITER_THRESHOLD)) {
+					// Long iterations should use LongKeyIterator1
+					keyIter = new LongKeyIterator1((LongKeyIterator2) keyIter);
 				}
 				return keyIter.hasPrevious();
 			}
@@ -3378,11 +3370,9 @@ public class Table {
 		@Override
 		public boolean hasNext() throws IOException {
 			synchronized (db) {
-				if (iterCnt < SHORT_ITER_THRESHOLD) {
-					if (++iterCnt > SHORT_ITER_THRESHOLD) {
-						// Long iterations should use LongKeyIterator1
-						keyIter = new FieldKeyIterator1((FieldKeyIterator2) keyIter);
-					}
+				if ((iterCnt < SHORT_ITER_THRESHOLD) && (++iterCnt > SHORT_ITER_THRESHOLD)) {
+					// Long iterations should use LongKeyIterator1
+					keyIter = new FieldKeyIterator1((FieldKeyIterator2) keyIter);
 				}
 				return keyIter.hasNext();
 			}
@@ -3391,11 +3381,9 @@ public class Table {
 		@Override
 		public boolean hasPrevious() throws IOException {
 			synchronized (db) {
-				if (iterCnt < SHORT_ITER_THRESHOLD) {
-					if (++iterCnt > SHORT_ITER_THRESHOLD) {
-						// Long iterations should use LongKeyIterator1
-						keyIter = new FieldKeyIterator1((FieldKeyIterator2) keyIter);
-					}
+				if ((iterCnt < SHORT_ITER_THRESHOLD) && (++iterCnt > SHORT_ITER_THRESHOLD)) {
+					// Long iterations should use LongKeyIterator1
+					keyIter = new FieldKeyIterator1((FieldKeyIterator2) keyIter);
 				}
 				return keyIter.hasPrevious();
 			}

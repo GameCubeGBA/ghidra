@@ -19,7 +19,13 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -301,7 +307,7 @@ public abstract class AbstractGTest {
 	private static String printListFailureMessage(String message, List<?> expected,
 			List<?> actual) {
 
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append("Expected: ").append(expected.toString());
 		buffer.append(" Found: ").append(actual.toString());
 		buffer.toString();

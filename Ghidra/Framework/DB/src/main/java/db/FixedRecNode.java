@@ -40,7 +40,7 @@ class FixedRecNode extends LongKeyRecordNode {
 
 	private static final int KEY_SIZE = 8;
 
-	private static final int[] EMPTY_ID_LIST = new int[0];
+	private static final int[] EMPTY_ID_LIST = {};
 
 	private int entrySize;
 	private int recordLength;

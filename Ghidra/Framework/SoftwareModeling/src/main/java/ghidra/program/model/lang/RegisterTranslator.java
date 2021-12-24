@@ -15,18 +15,16 @@
  */
 package ghidra.program.model.lang;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
 
 import ghidra.program.model.address.Address;
 
 public class RegisterTranslator {
-	private static Comparator<Register> registerSizeComparator = new Comparator<Register>() {
-		@Override
-		public int compare(Register r1, Register r2) {
-			// Used for sorting largest to smallest
-			return r2.getBitLength() - r1.getBitLength();
-		}
-	};
+	private static Comparator<Register> registerSizeComparator = (r1, r2) -> r2.getBitLength() - r1.getBitLength();
 
 	private Language oldLang;
 	private Language newLang;
@@ -42,17 +40,17 @@ public class RegisterTranslator {
 	}
 
 	private HashMap<Integer, List<Register>> buildOffsetMap(List<Register> registers) {
-		HashMap<Integer, List<Register>> offsetMap = new HashMap<Integer, List<Register>>();
+		HashMap<Integer, List<Register>> offsetMap = new HashMap<>();
 		for (Register register : registers) {
 			Address addr = register.getAddress();
 			// Must disregard registers which are not in the "register" anmed space
 			// since these would never have been encoded/decoded properly by the addressMap
 			if (!addr.isRegisterAddress() ||
-				!register.getAddressSpace().getName().equalsIgnoreCase("register")) {
+				!"register".equalsIgnoreCase(register.getAddressSpace().getName())) {
 				continue;
 			}
 			Integer offset = (int) addr.getOffset();
-            List<Register> registerList = offsetMap.computeIfAbsent(offset, k -> new ArrayList<Register>());
+            List<Register> registerList = offsetMap.computeIfAbsent(offset, k -> new ArrayList<>());
             registerList.add(register);
 		}
 		for (List<Register> registerList : offsetMap.values()) {

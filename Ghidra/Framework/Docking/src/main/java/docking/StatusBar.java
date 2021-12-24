@@ -15,12 +15,23 @@
  */
 package docking;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Map;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.border.Border;
 
@@ -31,7 +42,10 @@ import docking.util.AnimationUtils;
 import docking.widgets.EmptyBorderButton;
 import docking.widgets.label.GDLabel;
 import generic.util.WindowUtilities;
-import ghidra.util.*;
+import ghidra.util.DateUtils;
+import ghidra.util.HTMLUtilities;
+import ghidra.util.Swing;
+import ghidra.util.SystemUtilities;
 import ghidra.util.layout.HorizontalLayout;
 import ghidra.util.layout.MiddleLayout;
 
@@ -276,7 +290,7 @@ public class StatusBar extends JPanel {
 	@Override
 	public String getToolTipText() {
 		if (messageQueue.size() > 0) {
-			StringBuffer buffer = new StringBuffer("<HTML>");
+			StringBuilder buffer = new StringBuilder("<HTML>");
 
 			Iterator<String> iter = messageQueue.iterator();
 			for (int i = 0; iter.hasNext(); i++) {

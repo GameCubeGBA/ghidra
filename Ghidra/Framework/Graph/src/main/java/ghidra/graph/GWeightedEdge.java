@@ -25,5 +25,5 @@ public interface GWeightedEdge<V> extends GEdge<V> {
 	 * The natural weight of the edge
 	 * @return the weight
 	 */
-	public double getWeight();
+	double getWeight();
 }

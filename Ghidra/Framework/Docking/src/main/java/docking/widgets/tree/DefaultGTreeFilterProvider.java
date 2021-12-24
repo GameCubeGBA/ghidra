@@ -17,7 +17,10 @@ package docking.widgets.tree;
 
 import java.awt.BorderLayout;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.border.BevelBorder;
 
 import org.jdom.Element;
@@ -25,7 +28,10 @@ import org.jdom.Element;
 import docking.DockingWindowManager;
 import docking.help.HelpService;
 import docking.widgets.EmptyBorderButton;
-import docking.widgets.filter.*;
+import docking.widgets.filter.FilterListener;
+import docking.widgets.filter.FilterOptions;
+import docking.widgets.filter.FilterOptionsEditorDialog;
+import docking.widgets.filter.FilterTextField;
 import docking.widgets.label.GLabel;
 import docking.widgets.tree.internal.DefaultGTreeDataTransformer;
 import docking.widgets.tree.support.GTreeFilter;
@@ -97,11 +103,7 @@ public class DefaultGTreeFilterProvider implements GTreeFilterProvider {
 	public void loadFilterPreference(DockingWindowManager windowManager,
 			String uniquePreferenceKey) {
 		preferenceKey = uniquePreferenceKey;
-		if (optionsSet) {  // if the options were specifically set, don't restore saved values
-			return;
-		}
-
-		if (windowManager == null) {
+		if (optionsSet || (windowManager == null)) {
 			return;
 		}
 

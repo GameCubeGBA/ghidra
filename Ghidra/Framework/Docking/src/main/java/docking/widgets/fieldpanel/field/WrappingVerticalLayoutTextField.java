@@ -15,7 +15,9 @@
  */
 package docking.widgets.fieldpanel.field;
 
-import docking.widgets.fieldpanel.support.*;
+import docking.widgets.fieldpanel.support.FieldUtils;
+import docking.widgets.fieldpanel.support.HighlightFactory;
+import docking.widgets.fieldpanel.support.RowColLocation;
 
 /**
  * A text field meant to take a string of text and wrap as needed.

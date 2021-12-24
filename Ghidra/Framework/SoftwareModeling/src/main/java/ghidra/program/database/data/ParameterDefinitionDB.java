@@ -18,7 +18,10 @@ package ghidra.program.database.data;
 import java.io.IOException;
 
 import db.DBRecord;
-import ghidra.program.model.data.*;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.FunctionDefinition;
+import ghidra.program.model.data.ParameterDefinition;
+import ghidra.program.model.data.ParameterDefinitionImpl;
 import ghidra.program.model.listing.Parameter;
 import ghidra.program.model.listing.Variable;
 import ghidra.program.model.symbol.SymbolUtilities;
@@ -50,7 +53,7 @@ final class ParameterDefinitionDB implements ParameterDefinition {
 	}
 
 	@Override
-	public final DataType getDataType() {
+	public DataType getDataType() {
 		DataType dt =
 			dataMgr.getDataType(record.getLongValue(FunctionParameterAdapter.PARAMETER_DT_ID_COL));
 		if (dt == null) {
@@ -141,16 +144,7 @@ final class ParameterDefinitionDB implements ParameterDefinition {
 
 	@Override
 	public boolean isEquivalent(Variable otherVar) {
-		if (otherVar == null) {
-			return false;
-		}
-		if (!(otherVar instanceof Parameter)) {
-			return false;
-		}
-		if (getOrdinal() != ((Parameter) otherVar).getOrdinal()) {
-			return false;
-		}
-		if (!DataTypeUtilities.isSameOrEquivalentDataType(getDataType(), otherVar.getDataType())) {
+		if ((otherVar == null) || !(otherVar instanceof Parameter) || (getOrdinal() != ((Parameter) otherVar).getOrdinal()) || !DataTypeUtilities.isSameOrEquivalentDataType(getDataType(), otherVar.getDataType())) {
 			return false;
 		}
 		return true;
@@ -158,13 +152,7 @@ final class ParameterDefinitionDB implements ParameterDefinition {
 
 	@Override
 	public boolean isEquivalent(ParameterDefinition parm) {
-		if (parm == null) {
-			return false;
-		}
-		if (getOrdinal() != parm.getOrdinal()) {
-			return false;
-		}
-		if (!DataTypeUtilities.isSameOrEquivalentDataType(getDataType(), parm.getDataType())) {
+		if ((parm == null) || (getOrdinal() != parm.getOrdinal()) || !DataTypeUtilities.isSameOrEquivalentDataType(getDataType(), parm.getDataType())) {
 			return false;
 		}
 		return true;

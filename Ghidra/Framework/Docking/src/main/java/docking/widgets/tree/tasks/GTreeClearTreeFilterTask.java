@@ -16,9 +16,9 @@
  */
 package docking.widgets.tree.tasks;
 
-import ghidra.util.task.TaskMonitor;
 import docking.widgets.tree.GTree;
 import docking.widgets.tree.GTreeTask;
+import ghidra.util.task.TaskMonitor;
 
 public class GTreeClearTreeFilterTask extends GTreeTask {
 
@@ -28,15 +28,12 @@ public class GTreeClearTreeFilterTask extends GTreeTask {
 
 	@Override
 	public void run(final TaskMonitor monitor) {
-		runOnSwingThread(new Runnable() {
-			@Override
-			public void run() {
-				if (monitor.isCancelled()) {
-					return; // we can be cancelled while waiting for Swing to run us
-				}
-
-				tree.clearFilter();
+		runOnSwingThread(() -> {
+			if (monitor.isCancelled()) {
+				return; // we can be cancelled while waiting for Swing to run us
 			}
+
+			tree.clearFilter();
 		});
 	}
 

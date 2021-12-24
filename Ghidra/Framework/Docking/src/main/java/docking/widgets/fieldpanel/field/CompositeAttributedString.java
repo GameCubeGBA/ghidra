@@ -15,7 +15,9 @@
  */
 package docking.widgets.fieldpanel.field;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
 import java.util.List;
 
 import javax.swing.JComponent;
@@ -121,7 +123,7 @@ public class CompositeAttributedString extends AttributedString {
 	@Override
 	public String getText() {
 		if (fullText == null) {
-			StringBuffer buffer = new StringBuffer();
+			StringBuilder buffer = new StringBuilder();
 			for (AttributedString attributedString : attributedStrings) {
 				buffer.append(attributedString.getText());
 			}

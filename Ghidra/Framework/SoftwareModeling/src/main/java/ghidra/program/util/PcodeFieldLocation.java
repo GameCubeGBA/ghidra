@@ -15,7 +15,10 @@
  */
 package ghidra.program.util;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
 import ghidra.framework.options.SaveState;
 import ghidra.program.model.address.Address;
@@ -46,25 +49,19 @@ public class PcodeFieldLocation extends ProgramLocation {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((pcodeStrings == null) ? 0 : pcodeStrings.hashCode());
-		return result;
+		return prime * result + ((pcodeStrings == null) ? 0 : pcodeStrings.hashCode());
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
+		if (!super.equals(obj) || (getClass() != obj.getClass()))
 			return false;
 		PcodeFieldLocation other = (PcodeFieldLocation) obj;
-		if (pcodeStrings == null) {
-			if (other.pcodeStrings != null)
-				return false;
-		}
-		else if (!pcodeStrings.equals(other.pcodeStrings))
+		if (!Objects.equals(pcodeStrings, other.pcodeStrings)) {
 			return false;
+		}
 		return true;
 	}
 
@@ -79,10 +76,8 @@ public class PcodeFieldLocation extends ProgramLocation {
 		super.restoreState(p, obj);
 
 		String[] strings = obj.getStrings("_PCODE_STRINGS", new String[0]);
-		pcodeStrings = new ArrayList<String>(strings.length);
-		for (String string : strings) {
-			pcodeStrings.add(string);
-		}
+		pcodeStrings = new ArrayList<>(strings.length);
+		Collections.addAll(pcodeStrings, strings);
 	}
 
 	@Override

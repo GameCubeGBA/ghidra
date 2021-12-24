@@ -19,13 +19,13 @@ package docking.widgets.tree.support;
 import docking.widgets.tree.GTreeNode;
 
 public interface GTreeFilter {
-	public boolean acceptsNode(GTreeNode node);
+	boolean acceptsNode(GTreeNode node);
 
 	/**
 	 * True signals that the matching nodes should be made visible, expanding the tree as 
 	 * necessary.
 	 * @return True if the matching nodes should be made visible.
 	 */
-	public boolean showFilterMatches();
+	boolean showFilterMatches();
 
 }

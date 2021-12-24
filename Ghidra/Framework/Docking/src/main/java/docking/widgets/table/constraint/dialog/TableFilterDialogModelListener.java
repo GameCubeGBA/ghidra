@@ -27,11 +27,11 @@ public interface TableFilterDialogModelListener {
 	 *
 	 * @param editor the editor whose component has changed.
 	 */
-	public void editorValueChanged(ColumnConstraintEditor<?> editor);
+	void editorValueChanged(ColumnConstraintEditor<?> editor);
 
 	/**
 	 * Invoked when any change to the structure of the ColumnFilterModel occurs such as adding
 	 * entries
 	 */
-	public void structureChanged();
+	void structureChanged();
 }

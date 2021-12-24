@@ -36,11 +36,7 @@ public class GTreeRestoreTreeStateTask extends GTreeTask {
 
 	@Override
 	public void run(TaskMonitor monitor) {
-		if (monitor.isCancelled()) {
-			return;
-		}
-
-		if (state == null) {
+		if (monitor.isCancelled() || (state == null)) {
 			return;
 		}
 

@@ -15,17 +15,37 @@
  */
 package ghidra.framework.main;
 
-import java.awt.*;
-import java.util.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import javax.swing.*;
+import javax.swing.Box;
+import javax.swing.Icon;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 
 import docking.DialogComponentProvider;
 import docking.tool.ToolConstants;
-import docking.widgets.table.*;
+import docking.widgets.table.AbstractSortedTableModel;
+import docking.widgets.table.GTable;
+import docking.widgets.table.GTableCellRenderer;
+import docking.widgets.table.GTableCellRenderingData;
 import ghidra.framework.data.ContentHandler;
-import ghidra.framework.model.*;
+import ghidra.framework.model.DomainObject;
+import ghidra.framework.model.Project;
+import ghidra.framework.model.ToolAssociationInfo;
+import ghidra.framework.model.ToolServices;
+import ghidra.framework.model.ToolTemplate;
 import ghidra.framework.project.tool.GhidraToolTemplate;
 import ghidra.util.HelpLocation;
 import resources.ResourceManager;
@@ -236,7 +256,7 @@ class SetToolAssociationsDialog extends DialogComponentProvider {
 		}
 	}
 
-	private class ContentHandlerComparator implements Comparator<ToolAssociationInfo> {
+	private static class ContentHandlerComparator implements Comparator<ToolAssociationInfo> {
 		@Override
 		public int compare(ToolAssociationInfo o1, ToolAssociationInfo o2) {
 			return o1.getContentHandler().getContentType().compareTo(
@@ -244,7 +264,7 @@ class SetToolAssociationsDialog extends DialogComponentProvider {
 		}
 	}
 
-	private class ToolTemplateComparator implements Comparator<ToolAssociationInfo> {
+	private static class ToolTemplateComparator implements Comparator<ToolAssociationInfo> {
 		@Override
 		public int compare(ToolAssociationInfo o1, ToolAssociationInfo o2) {
 			return o1.getCurrentTemplate().getName().compareTo(o2.getCurrentTemplate().getName());

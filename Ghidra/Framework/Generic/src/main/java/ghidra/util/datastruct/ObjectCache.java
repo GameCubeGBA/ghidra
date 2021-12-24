@@ -17,7 +17,9 @@ package ghidra.util.datastruct;
 
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
 
 /**
  * <code>ObjectClass</code> provides a fixed-size long-key-based object cache.

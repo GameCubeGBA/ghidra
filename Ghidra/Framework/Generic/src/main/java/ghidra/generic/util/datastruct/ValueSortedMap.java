@@ -15,7 +15,13 @@
  */
 package ghidra.generic.util.datastruct;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Deque;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.Spliterator;
+import java.util.Spliterators;
 
 /**
  * A map that is sorted by value.

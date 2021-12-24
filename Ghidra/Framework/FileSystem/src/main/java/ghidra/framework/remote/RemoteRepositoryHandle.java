@@ -20,7 +20,9 @@ import java.rmi.Remote;
 import java.rmi.server.RemoteObjectInvocationHandler;
 
 import db.buffers.ManagedBufferFileHandle;
-import ghidra.framework.store.*;
+import ghidra.framework.store.CheckoutType;
+import ghidra.framework.store.ItemCheckoutStatus;
+import ghidra.framework.store.Version;
 import ghidra.util.InvalidNameException;
 
 /**

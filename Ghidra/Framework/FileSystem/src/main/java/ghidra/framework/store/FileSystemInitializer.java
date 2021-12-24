@@ -20,7 +20,8 @@ import ghidra.framework.ModuleInitializer;
 import ghidra.framework.store.db.PackedDatabase;
 
 public class FileSystemInitializer implements ModuleInitializer {
-    public void run() {
+    @Override
+	public void run() {
         
     	PackedDatabase.cleanupOldTempDatabases();
     	

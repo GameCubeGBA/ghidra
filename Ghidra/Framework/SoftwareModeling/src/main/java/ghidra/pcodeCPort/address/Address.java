@@ -15,14 +15,16 @@
  */
 package ghidra.pcodeCPort.address;
 
-import ghidra.pcodeCPort.pcoderaw.*;
-import ghidra.pcodeCPort.space.*;
-import ghidra.pcodeCPort.translate.*;
-import ghidra.pcodeCPort.utils.*;
-
 import java.io.PrintStream;
 
 import org.jdom.Element;
+
+import ghidra.pcodeCPort.pcoderaw.VarnodeData;
+import ghidra.pcodeCPort.space.AddrSpace;
+import ghidra.pcodeCPort.space.spacetype;
+import ghidra.pcodeCPort.translate.Translate;
+import ghidra.pcodeCPort.utils.AddrSpaceToIdSymmetryMap;
+import ghidra.pcodeCPort.utils.MutableInt;
 
 
 
@@ -138,6 +140,7 @@ public class Address implements Comparable<Address>{
 		return base == other.base && offset == other.offset;
 	}
 
+	@Override
 	public int compareTo( Address other ) {
 		int result = base.compareTo( other.base );
 		if (result != 0) {
@@ -179,7 +182,7 @@ public class Address implements Comparable<Address>{
 	}
 
 	public static AddrSpace getSpaceFromConst( Address addr ) {
-		return (AddrSpace) AddrSpaceToIdSymmetryMap.getSpace( addr.offset );
+		return AddrSpaceToIdSymmetryMap.getSpace( addr.offset );
 	}
 
 	// Define pseudo-locations that have specific
@@ -197,10 +200,7 @@ public class Address implements Comparable<Address>{
 	// Return true if (op2,sz2) is endian aligned and contained
 	// in (this,sz)
 	public boolean endianContain( int sz, Address op2, int sz2 ) {
-		if (base != op2.base) {
-			return false;
-		}
-		if (op2.offset < offset) {
+		if ((base != op2.base) || (op2.offset < offset)) {
 			return false;
 		}
 		if (base.isBigEndian()) {
@@ -219,10 +219,7 @@ public class Address implements Comparable<Address>{
 
 	public int overlap( int skip, Address op, int size ) {// Where does this+skip fall in op to op+size
 
-		if (base != op.base) {
-			return -1; // Must be in same address space to overlap
-		}
-		if (base.getType() == spacetype.IPTR_CONSTANT) {
+		if ((base != op.base) || (base.getType() == spacetype.IPTR_CONSTANT)) {
 			return -1; // Must not be constants
 		}
 

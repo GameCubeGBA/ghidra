@@ -15,14 +15,29 @@
  */
 package ghidra.program.database.data;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -32,13 +47,32 @@ import ghidra.GhidraApplicationLayout;
 import ghidra.GhidraLaunchable;
 import ghidra.framework.Application;
 import ghidra.framework.ApplicationConfiguration;
-import ghidra.program.model.data.*;
+import ghidra.program.model.data.Array;
+import ghidra.program.model.data.BuiltIn;
+import ghidra.program.model.data.Category;
+import ghidra.program.model.data.CategoryPath;
 import ghidra.program.model.data.Composite;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.DataTypeComponent;
+import ghidra.program.model.data.DataTypeManager;
 import ghidra.program.model.data.Enum;
-import ghidra.util.*;
+import ghidra.program.model.data.FileDataTypeManager;
+import ghidra.program.model.data.Pointer;
+import ghidra.program.model.data.SourceArchive;
+import ghidra.program.model.data.Structure;
+import ghidra.program.model.data.TypeDef;
+import ghidra.program.model.data.Union;
+import ghidra.util.Msg;
+import ghidra.util.SystemUtilities;
+import ghidra.util.UniversalID;
+import ghidra.util.UniversalIdGenerator;
 import ghidra.util.classfinder.ClassSearcher;
-import ghidra.util.exception.*;
-import ghidra.util.task.*;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.DuplicateFileException;
+import ghidra.util.exception.InvalidInputException;
+import ghidra.util.task.MonitoredRunnable;
+import ghidra.util.task.RunManager;
+import ghidra.util.task.TaskMonitor;
 
 /**
  * DataTypeArchiveTransformer changes (transforms) a new archive file so that it appears to be
@@ -157,12 +191,7 @@ public class DataTypeArchiveTransformer implements GhidraLaunchable {
 			while (allDataTypes.hasNext()) {
 				monitor.checkCanceled();
 				DataType newDataType = allDataTypes.next();
-				if (isAnonymousType(newDataType)) {
-					// Skip anonymous types, they are matched as components of composites or
-					// later unmatched enums are matched in categories.
-					continue;
-				}
-				if (newDataType instanceof Pointer || newDataType instanceof Array ||
+				if (isAnonymousType(newDataType) || newDataType instanceof Pointer || newDataType instanceof Array ||
 					newDataType instanceof BuiltIn) {
 					continue; // Skip pointer array or builtin.
 				}
@@ -296,12 +325,10 @@ public class DataTypeArchiveTransformer implements GhidraLaunchable {
 			Composite oldComposite = (Composite) oldDataType;
 			boolean isNewDtAnonymous = isAnonymousType(newDataType);
 			boolean isOldDtAnonymous = isAnonymousType(oldDataType);
-			if (isNewDtAnonymous && isOldDtAnonymous) {
-				if (newComposite.getNumComponents() != oldComposite.getNumComponents()) {
-					// Don't match anonymous components if the number of components
-					// differs in anonymous composite data types.
-					return;
-				}
+			if ((isNewDtAnonymous && isOldDtAnonymous) && (newComposite.getNumComponents() != oldComposite.getNumComponents())) {
+				// Don't match anonymous components if the number of components
+				// differs in anonymous composite data types.
+				return;
 			}
 			DataTypeComponent[] newComponents = newComposite.getComponents();
 			for (DataTypeComponent newComp : newComponents) {
@@ -542,10 +569,8 @@ public class DataTypeArchiveTransformer implements GhidraLaunchable {
 			else {
 				// Doesn't have source archive, so let it be whatever it is.
 			}
-			if (!(newDataType instanceof BuiltIn) && oldUniversalID != null) {
-				if (!oldUniversalID.equals(newUniversalID)) {
-					((DataTypeDB) newDataType).setUniversalID(oldUniversalID);
-				}
+			if ((!(newDataType instanceof BuiltIn) && oldUniversalID != null) && !oldUniversalID.equals(newUniversalID)) {
+				((DataTypeDB) newDataType).setUniversalID(oldUniversalID);
 			}
 		}
 	}
@@ -633,10 +658,7 @@ public class DataTypeArchiveTransformer implements GhidraLaunchable {
 
 	private static boolean isAnonymousType(DataType newDataType) {
 		String name = newDataType.getName();
-		if (newDataType instanceof Structure && hasAnonymousName(name, "_struct_")) {
-			return true;
-		}
-		if (newDataType instanceof Union && name.startsWith("_union_")) {
+		if ((newDataType instanceof Structure && hasAnonymousName(name, "_struct_")) || (newDataType instanceof Union && name.startsWith("_union_"))) {
 			return true;
 		}
 		if (newDataType instanceof Enum && name.startsWith("enum_")) {
@@ -704,13 +726,11 @@ public class DataTypeArchiveTransformer implements GhidraLaunchable {
 			oldDataType =
 				oldFileArchive.getDataType(newDataType.getCategoryPath(), newDataType.getName());
 		}
-		if (oldDataType != null) {
-			// Check to see if the data type is unchanged.
-			if (oldDataType.equals(newDataType)) {
-				// Change the timestamp to the old timestamp.
-				long oldLastChangeTime = oldDataType.getLastChangeTime();
-				newDataType.setLastChangeTime(oldLastChangeTime);
-			}
+		// Check to see if the data type is unchanged.
+		if ((oldDataType != null) && oldDataType.equals(newDataType)) {
+			// Change the timestamp to the old timestamp.
+			long oldLastChangeTime = oldDataType.getLastChangeTime();
+			newDataType.setLastChangeTime(oldLastChangeTime);
 		}
 	}
 

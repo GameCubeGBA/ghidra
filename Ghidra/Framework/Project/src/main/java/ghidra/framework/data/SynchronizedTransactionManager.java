@@ -18,7 +18,9 @@ package ghidra.framework.data;
 import java.io.IOException;
 import java.util.LinkedList;
 
-import ghidra.framework.model.*;
+import ghidra.framework.model.AbortedTransactionListener;
+import ghidra.framework.model.Transaction;
+import ghidra.framework.model.TransactionListener;
 import ghidra.framework.store.LockException;
 import ghidra.util.Msg;
 
@@ -29,9 +31,9 @@ class SynchronizedTransactionManager extends AbstractTransactionManager {
 
 	//private Map<DomainObjectAdapterDB, DomainObjectTransactionManager> domainObjects = new HashMap<DomainObjectAdapterDB, DomainObjectTransactionManager>();
 
-	private DomainObjectAdapterDB[] domainObjects = new DomainObjectAdapterDB[0];
+	private DomainObjectAdapterDB[] domainObjects = {};
 	private DomainObjectTransactionManager[] domainObjectTransactionManagers =
-		new DomainObjectTransactionManager[0];
+		{};
 
 	private SynchronizedTransaction transaction;
 

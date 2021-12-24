@@ -15,7 +15,11 @@
  */
 package ghidra.util.datastruct;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.NavigableMap;
+import java.util.NavigableSet;
+import java.util.SortedMap;
 
 /**
  * Class to provide a navigable, e.g., tree-, map with weak values

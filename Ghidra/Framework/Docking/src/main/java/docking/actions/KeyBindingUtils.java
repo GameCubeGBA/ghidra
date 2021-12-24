@@ -15,28 +15,59 @@
  */
 package docking.actions;
 
-import static org.apache.commons.lang3.StringUtils.*;
+import static org.apache.commons.lang3.StringUtils.indexOfIgnoreCase;
+import static org.apache.commons.lang3.StringUtils.removeIgnoreCase;
 
 import java.awt.Component;
 import java.awt.KeyboardFocusManager;
-import java.awt.event.*;
-import java.io.*;
-import java.util.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.StringTokenizer;
 import java.util.stream.Collectors;
 
-import javax.swing.*;
+import javax.swing.Action;
+import javax.swing.ActionMap;
+import javax.swing.InputMap;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
+import javax.swing.LookAndFeel;
 
 import org.apache.commons.collections4.map.LazyMap;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jdom.*;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.XMLOutputter;
 
 import docking.DockingUtils;
 import docking.Tool;
-import docking.action.*;
+import docking.action.ActionContextProvider;
+import docking.action.DockingAction;
+import docking.action.DockingActionIf;
+import docking.action.KeyBindingData;
+import docking.action.KeyBindingType;
 import docking.widgets.filechooser.GhidraFileChooser;
 import ghidra.framework.options.ToolOptions;
 import ghidra.framework.preferences.Preferences;
@@ -117,10 +148,7 @@ public class KeyBindingUtils {
 		try {
 			rootElement = builder.build(inputStream).getRootElement();
 		}
-		catch (JDOMException e) {
-			Msg.showError(log, null, "Error Loading Key Bindings", "Unable to build XML data.", e);
-		}
-		catch (IOException e) {
+		catch (JDOMException | IOException e) {
 			Msg.showError(log, null, "Error Loading Key Bindings", "Unable to build XML data.", e);
 		}
 		if (rootElement != null) {
@@ -757,15 +785,10 @@ public class KeyBindingUtils {
 				buffy.append("shift ");
 				iterator.remove();
 			}
-			else if (indexOfIgnoreCase(piece, CTRL) != -1) {
+			else if ((indexOfIgnoreCase(piece, CTRL) != -1) || (indexOfIgnoreCase(piece, CONTROL) != -1)) {
 				buffy.append("ctrl ");
 				iterator.remove();
-			}
-			else if (indexOfIgnoreCase(piece, CONTROL) != -1) {
-				buffy.append("ctrl ");
-				iterator.remove();
-			}
-			else if (indexOfIgnoreCase(piece, ALT) != -1) {
+			} else if (indexOfIgnoreCase(piece, ALT) != -1) {
 				buffy.append("alt ");
 				iterator.remove();
 			}

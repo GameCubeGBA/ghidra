@@ -23,7 +23,9 @@ import javax.swing.tree.TreePath;
 import docking.action.KeyBindingData;
 import docking.action.MenuData;
 import docking.widgets.tree.GTreeNode;
-import ghidra.framework.main.datatree.*;
+import ghidra.framework.main.datatree.Cuttable;
+import ghidra.framework.main.datatree.DataTreeClipboardUtils;
+import ghidra.framework.main.datatree.FrontEndProjectTreeContext;
 import resources.ResourceManager;
 
 public class ProjectDataCutAction extends ProjectDataCopyCutBaseAction {
@@ -47,11 +49,7 @@ public class ProjectDataCutAction extends ProjectDataCopyCutBaseAction {
 
 	@Override
 	protected boolean isEnabledForContext(FrontEndProjectTreeContext context) {
-		if (!context.hasOneOrMoreFilesAndFolders()) {
-			return false;
-		}
-
-		if (!context.isInActiveProject()) {
+		if (!context.hasOneOrMoreFilesAndFolders() || !context.isInActiveProject()) {
 			return false;
 		}
 

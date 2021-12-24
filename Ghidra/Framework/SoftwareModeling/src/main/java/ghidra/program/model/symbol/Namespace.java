@@ -24,63 +24,62 @@ import ghidra.util.exception.InvalidInputException;
  * The Namespace interface
  */
 public interface Namespace {
-	static final long GLOBAL_NAMESPACE_ID = 0;
+	long GLOBAL_NAMESPACE_ID = 0;
 	/**
 	 * The delimiter that is used to separate namespace nodes in a namespace
 	 * string.  For example, "Global::child1::symbolName"
 	 */
-	public static final String DELIMITER = "::";
+	String DELIMITER = "::";
 
 	/**
 	 * Replaced by {@link #DELIMITER}
 	 * @deprecated use {@link #DELIMITER}
 	 */
-	@Deprecated
-	public static final String NAMESPACE_DELIMITER = "::";
+	@Deprecated String NAMESPACE_DELIMITER = "::";
 
 	/**
 	 * Get the symbol for this namespace; Note: The global namespace will return null
 	 * @return the symbol for this namespace; Note: The global namespace will return null
 	 */
-	public Symbol getSymbol();
+	Symbol getSymbol();
 
 	/**
 	 * Returns true if this namespace is external (i.e., associated with a Library)
 	 * @return true if this namespace is external (i.e., associated with a Library)
 	 */
-	public boolean isExternal();
+	boolean isExternal();
 
 	/**
 	 * Get the name of the symbol for this scope
 	 * @return the name of the symbol for this scope
 	 */
-	public String getName();
+	String getName();
 
 	/**
 	 * Returns the fully qualified name
 	 * @param includeNamespacePath true to include the namespace in the returned name
 	 * @return the fully qualified name
 	 */
-	public String getName(boolean includeNamespacePath);
+	String getName(boolean includeNamespacePath);
 
 	/**
 	 * Return the namespace id
 	 * @return the namespace id
 	 */
-	public long getID();
+	long getID();
 
 	/**
 	 * Get the parent scope.
 	 * @return null if this scope is the global scope.
 	 */
-	public Namespace getParentNamespace();
+	Namespace getParentNamespace();
 
 	/**
 	 * Get the address set for this namespace.  Note: The body of a namespace (currently
 	 * only used by the function namespace) is restricted it Integer.MAX_VALUE.
 	 * @return the address set for this namespace
 	 */
-	public AddressSetView getBody();
+	AddressSetView getBody();
 
 	/**
 	 * Set the parent namespace for this namespace. Restrictions may apply.
@@ -92,14 +91,14 @@ public interface Namespace {
 	 * @throws CircularDependencyException if the parent namespace is a descendent of this
 	 * namespace.
 	 */
-	public void setParentNamespace(Namespace parentNamespace)
+	void setParentNamespace(Namespace parentNamespace)
 			throws DuplicateNameException, InvalidInputException, CircularDependencyException;
 
 	/**
 	 * Return true if this is the global namespace;
 	 * @return  true if this is the global namespace;
 	 */
-	public default boolean isGlobal() {
+	default boolean isGlobal() {
 		return getID() == GLOBAL_NAMESPACE_ID;
 	}
 

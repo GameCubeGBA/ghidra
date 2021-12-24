@@ -45,7 +45,7 @@ public class ObjectLongHashtable<T> {
 
         capacity = Prime.nextPrime(capacity);
         this.capacity = capacity;
-        indexer = new ObjectKeyIndexer<T>(capacity);
+        indexer = new ObjectKeyIndexer<>(capacity);
         values = new long[capacity];
     }
 

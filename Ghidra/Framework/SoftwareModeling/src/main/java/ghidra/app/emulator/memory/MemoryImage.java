@@ -15,7 +15,9 @@
  */
 package ghidra.app.emulator.memory;
 
-import ghidra.pcode.memstate.*;
+import ghidra.pcode.memstate.MemoryBank;
+import ghidra.pcode.memstate.MemoryFaultHandler;
+import ghidra.pcode.memstate.MemoryPage;
 import ghidra.program.model.address.AddressSpace;
 
 /// A kind of MemoryBank which retrieves its data from an underlying LoadImage

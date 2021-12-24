@@ -20,7 +20,9 @@ import ghidra.program.model.address.AddressSpace;
 import ghidra.program.model.pcode.AddressXML;
 import ghidra.util.SystemUtilities;
 import ghidra.util.xml.SpecXmlUtils;
-import ghidra.xml.*;
+import ghidra.xml.XmlElement;
+import ghidra.xml.XmlParseException;
+import ghidra.xml.XmlPullParser;
 
 public class InjectPayloadSegment extends InjectPayloadSleigh {
 
@@ -45,7 +47,7 @@ public class InjectPayloadSegment extends InjectPayloadSleigh {
 		buffer.append("<segmentop");
 		int pos = name.indexOf('_');
 		String subName = pos > 0 ? name.substring(0, pos) : name;
-		if (!subName.equals("segment")) {
+		if (!"segment".equals(subName)) {
 			SpecXmlUtils.encodeStringAttribute(buffer, "userop", subName);
 		}
 		SpecXmlUtils.encodeStringAttribute(buffer, "space", space.getName());
@@ -81,7 +83,7 @@ public class InjectPayloadSegment extends InjectPayloadSleigh {
 		}
 		supportsFarPointer = SpecXmlUtils.decodeBoolean(el.getAttribute("farpointer"));
 		if (parser.peek().isStart()) {
-			if (parser.peek().getName().equals("pcode")) {
+			if ("pcode".equals(parser.peek().getName())) {
 				super.restoreXml(parser, language);
 			}
 			else {
@@ -105,16 +107,7 @@ public class InjectPayloadSegment extends InjectPayloadSleigh {
 	@Override
 	public boolean equals(Object obj) {
 		InjectPayloadSegment op2 = (InjectPayloadSegment) obj;
-		if (constResolveOffset != op2.constResolveOffset) {
-			return false;
-		}
-		if (constResolveSize != op2.constResolveSize) {
-			return false;
-		}
-		if (!SystemUtilities.isEqual(constResolveSpace, op2.constResolveSpace)) {
-			return false;
-		}
-		if (!space.equals(op2.space)) {
+		if ((constResolveOffset != op2.constResolveOffset) || (constResolveSize != op2.constResolveSize) || !SystemUtilities.isEqual(constResolveSpace, op2.constResolveSpace) || !space.equals(op2.space)) {
 			return false;
 		}
 		if (supportsFarPointer != op2.supportsFarPointer) {
@@ -131,7 +124,6 @@ public class InjectPayloadSegment extends InjectPayloadSleigh {
 		}
 		hash = 79 * hash + Long.hashCode(constResolveOffset);
 		hash = 79 * hash + constResolveSize;
-		hash = 79 * hash + (supportsFarPointer ? 1 : 13);
-		return hash;
+		return 79 * hash + (supportsFarPointer ? 1 : 13);
 	}
 }

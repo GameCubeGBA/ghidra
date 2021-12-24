@@ -15,7 +15,7 @@
  */
 package ghidra.program.model.data;
 
-import ghidra.util.classfinder.*;
+import ghidra.util.classfinder.ClassTranslator;
 
 public class ImageBaseOffset64DataType extends AbstractImageBaseOffsetDataType {
 	static {
@@ -38,6 +38,7 @@ public class ImageBaseOffset64DataType extends AbstractImageBaseOffsetDataType {
 		return datatype;
 	}
 
+	@Override
 	public DataType clone(DataTypeManager dtm) {
 		if (dtm == getDataTypeManager()) {
 			return this;

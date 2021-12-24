@@ -15,7 +15,13 @@
  */
 package docking.widgets;
 
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Insets;
+import java.awt.LayoutManager;
+import java.awt.Rectangle;
+import java.awt.Window;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
@@ -293,18 +299,15 @@ class VariableHeightLayoutManager implements LayoutManager {
 			// if the current component fits width-wise on the remaining space
 			if (rowWidth + hgap + preferredSize.width <= useableWidth) {
 				rowWidth += preferredSize.width + hgap;
-				c.setBounds(x, y + (rowHeight - preferredSize.height) / 2, preferredSize.width,
-					preferredSize.height);
-				x += preferredSize.width + hgap;
 			}
 			else {
 				x = insets.left;
 				y += rowHeight + vgap;
 				rowWidth = preferredSize.width;
-				c.setBounds(x, y + (rowHeight - preferredSize.height) / 2, preferredSize.width,
-					preferredSize.height);
-				x += preferredSize.width + hgap;
 			}
+			c.setBounds(x, y + (rowHeight - preferredSize.height) / 2, preferredSize.width,
+				preferredSize.height);
+			x += preferredSize.width + hgap;
 		}
 	}
 

@@ -17,9 +17,15 @@ package docking.widgets.filechooser;
 
 import java.awt.Component;
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
 
-import javax.swing.*;
+import javax.swing.JList;
+import javax.swing.ListCellRenderer;
+import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileSystemView;
 
 import docking.widgets.DropDownSelectionTextField;
@@ -96,9 +102,7 @@ public class FileDropDownSelectionDataModel implements DropDownTextFieldDataMode
 			return Collections.emptyList();
 		}
 		List<File> list = new ArrayList<>();
-		for (File file : files) {
-			list.add(file);
-		}
+		Collections.addAll(list, files);
 
 		Collections.sort(list, sortComparator);
 
@@ -139,14 +143,14 @@ public class FileDropDownSelectionDataModel implements DropDownTextFieldDataMode
 // Inner Classes
 //==================================================================================================
 
-	private class FileComparator implements Comparator<File> {
+	private static class FileComparator implements Comparator<File> {
 		@Override
 		public int compare(File f1, File f2) {
 			return f1.getName().compareToIgnoreCase(f2.getName());
 		}
 	}
 
-	private class FileSearchComparator implements Comparator<Object> {
+	private static class FileSearchComparator implements Comparator<Object> {
 		@Override
 		public int compare(Object o1, Object o2) {
 			if (o1 instanceof File && o2 instanceof String) {

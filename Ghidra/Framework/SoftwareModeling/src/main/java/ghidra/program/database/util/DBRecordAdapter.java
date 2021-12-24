@@ -16,11 +16,10 @@
  */
 package ghidra.program.database.util;
 
-import ghidra.program.model.address.Address;
-
 import java.io.IOException;
 
 import db.RecordIterator;
+import ghidra.program.model.address.Address;
 
 /**
  * Interface to get a record iterator. 
@@ -35,5 +34,5 @@ public interface DBRecordAdapter {
 	 * @param colIndex index column
 	 * @throws IOException if there was a problem accessing the database
 	 */
-	public RecordIterator getRecords(Address start, Address end, int colIndex) throws IOException;
+	RecordIterator getRecords(Address start, Address end, int colIndex) throws IOException;
 }

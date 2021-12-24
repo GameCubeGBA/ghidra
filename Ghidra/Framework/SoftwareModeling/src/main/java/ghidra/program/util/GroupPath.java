@@ -15,9 +15,12 @@
  */
 package ghidra.program.util;
 
-import ghidra.program.model.listing.*;
-
 import java.io.Serializable;
+
+import ghidra.program.model.listing.Group;
+import ghidra.program.model.listing.Listing;
+import ghidra.program.model.listing.Program;
+import ghidra.program.model.listing.ProgramModule;
 
 /**
  * The <CODE>GroupPath</CODE> is a class to represent a unique path in a tree for a Group.
@@ -189,14 +192,8 @@ public class GroupPath implements Serializable {
 	 */
     @Override
     public String toString() {
-		StringBuffer sb = new StringBuffer();
-		for (int i=0; i<groupNames.length; i++) {
-			sb.append(groupNames[i]);
-			if (i < groupNames.length-1) {
-				sb.append(", ");
-			}
-		}
-        return sb.toString();
+		String sb = String.join(", ", groupNames);
+        return sb;
     }
     
     /**
@@ -205,8 +202,8 @@ public class GroupPath implements Serializable {
 	@Override
     public int hashCode() {
 		int hash = 0;
-		for(int i=0;i<groupNames.length;i++) {
-			hash += groupNames[i].hashCode();
+		for (String groupName : groupNames) {
+			hash += groupName.hashCode();
 		}
 		return hash;
 	}

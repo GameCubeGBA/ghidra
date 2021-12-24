@@ -34,13 +34,13 @@ public interface ColumnConstraint<T> extends Comparable<ColumnConstraint<T>> {
 	 * allows the filter to base its decision on information other than just the column value.
 	 * @return true if the column value passes the constraint, false otherwise
 	 */
-	public boolean accepts(T value, TableFilterContext context);
+	boolean accepts(T value, TableFilterContext context);
 
 	/**
 	 * Returns a reasonable String version of this constraint useful for debugging.
 	 * @return the String representation of this constraint
 	 */
-	public default String asString() {
+	default String asString() {
 		return getName() + " " + getConstraintValueTooltip();
 	}
 
@@ -49,13 +49,13 @@ public interface ColumnConstraint<T> extends Comparable<ColumnConstraint<T>> {
 	 *
 	 * @return the name of the constraint.
 	 */
-	public String getName();
+	String getName();
 
 	/**
 	 * Returns the column type that this constraint can be used to filter.
 	 * @return the column type
 	 */
-	public Class<T> getColumnType();
+	Class<T> getColumnType();
 
 	/**
 	 * Returns a ColumnConstraintEditor which will provide gui components for users to edit the
@@ -65,20 +65,20 @@ public interface ColumnConstraint<T> extends Comparable<ColumnConstraint<T>> {
 	 * table model as well as the DataProvider of the table (if it has one)
 	 * @return A columnConstraintEditor for editing the constraints value.
 	 */
-	public ColumnConstraintEditor<T> getEditor(ColumnData<T> columnDataSource);
+	ColumnConstraintEditor<T> getEditor(ColumnData<T> columnDataSource);
 
 	/**
 	 * Returns a "group" string that is used to logically group column constraints for
 	 * presentation to the user
 	 * @return the group this constraint belongs to.
 	 */
-	public String getGroup();
+	String getGroup();
 
 	/**
 	 * returns a description of the constraint suitable for displaying in a tooltip
 	 * @return a description of the constraint.
 	 */
-	public default String getConstraintValueTooltip() {
+	default String getConstraintValueTooltip() {
 		return getConstraintValueString();
 	}
 
@@ -88,7 +88,7 @@ public interface ColumnConstraint<T> extends Comparable<ColumnConstraint<T>> {
 	 * <P>This is used for serializing the constraint.
 	 * @return the "value" of the constraint in string form.
 	 */
-	public String getConstraintValueString();
+	String getConstraintValueString();
 
 	/**
 	 * Parses the constraint value string for deserialization purposes.
@@ -96,14 +96,14 @@ public interface ColumnConstraint<T> extends Comparable<ColumnConstraint<T>> {
 	 * @param dataSource the DataSource from the Table.
 	 * @return a new ColumnConstraint
 	 */
-	public ColumnConstraint<T> parseConstraintValue(String constraintValueString,
+	ColumnConstraint<T> parseConstraintValue(String constraintValueString,
 			Object dataSource);
 
 	/**
 	 * ColumnConstraints are displayed by group and then by name
 	 */
 	@Override
-	public default int compareTo(ColumnConstraint<T> other) {
+	default int compareTo(ColumnConstraint<T> other) {
 		int result = getGroup().compareTo(other.getGroup());
 		if (result == 0) {
 			result = getName().compareTo(other.getName());

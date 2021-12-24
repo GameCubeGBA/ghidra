@@ -18,7 +18,10 @@ package ghidra.program.database.function;
 import ghidra.program.database.symbol.SymbolDB;
 import ghidra.program.model.data.DataType;
 import ghidra.program.model.data.DataTypeManager;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.AutoParameterType;
+import ghidra.program.model.listing.Parameter;
+import ghidra.program.model.listing.Program;
+import ghidra.program.model.listing.VariableStorage;
 
 class ParameterDB extends VariableDB implements Parameter {
 

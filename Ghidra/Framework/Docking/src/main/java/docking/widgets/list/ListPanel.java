@@ -15,12 +15,31 @@
  */
 package docking.widgets.list;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 
-import javax.swing.*;
-import javax.swing.border.*;
+import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ListCellRenderer;
+import javax.swing.ListModel;
+import javax.swing.UIManager;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionListener;
 
 /**
@@ -67,15 +86,13 @@ public class ListPanel extends JPanel {
 		list.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (doubleClickActionListener != null) {
-					if (e.getClickCount() == 2) {
-						int index = list.locationToIndex(e.getPoint());
-						if (index >= 0) {
-							Object o = list.getModel().getElementAt(index);
-							ActionEvent ev = new ActionEvent(this, e.getID(), o.toString());
-							doubleClickActionListener.actionPerformed(ev);
-							list.repaint();
-						}
+				if ((doubleClickActionListener != null) && (e.getClickCount() == 2)) {
+					int index = list.locationToIndex(e.getPoint());
+					if (index >= 0) {
+						Object o = list.getModel().getElementAt(index);
+						ActionEvent ev = new ActionEvent(this, e.getID(), o.toString());
+						doubleClickActionListener.actionPerformed(ev);
+						list.repaint();
 					}
 				}
 			}

@@ -29,7 +29,7 @@ public interface GEdge<V> {
 	 * 
 	 * @return the start
 	 */
-	public V getStart();
+	V getStart();
 
 	/**
 	 * Get the end, or head, of the edge
@@ -38,5 +38,5 @@ public interface GEdge<V> {
 	 * 
 	 * @return the end
 	 */
-	public V getEnd();
+	V getEnd();
 }

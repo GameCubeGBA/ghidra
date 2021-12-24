@@ -18,7 +18,9 @@ package ghidra.app.plugin.assembler;
 import java.util.Collection;
 
 import ghidra.app.plugin.assembler.sleigh.parse.AssemblyParseResult;
-import ghidra.app.plugin.assembler.sleigh.sem.*;
+import ghidra.app.plugin.assembler.sleigh.sem.AssemblyPatternBlock;
+import ghidra.app.plugin.assembler.sleigh.sem.AssemblyResolutionResults;
+import ghidra.app.plugin.assembler.sleigh.sem.AssemblyResolvedConstructor;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressOverflowException;
 import ghidra.program.model.listing.Instruction;
@@ -52,7 +54,7 @@ public interface Assembler {
 	 * @throws MemoryAccessException there is an issue writing the result to program memory
 	 * @throws AddressOverflowException the resulting block is beyond the valid address range
 	 */
-	public InstructionIterator assemble(Address at, String... listing)
+	InstructionIterator assemble(Address at, String... listing)
 			throws AssemblySyntaxException,
 			AssemblySemanticException, MemoryAccessException, AddressOverflowException;
 
@@ -70,7 +72,7 @@ public interface Assembler {
 	 * @throws AssemblySyntaxException the textual instruction is not well-formed
 	 * @throws AssemblySemanticException the the well-formed instruction cannot be assembled
 	 */
-	public byte[] assembleLine(Address at, String line)
+	byte[] assembleLine(Address at, String line)
 			throws AssemblySyntaxException, AssemblySemanticException;
 
 	/**
@@ -87,7 +89,7 @@ public interface Assembler {
 	 * @throws AssemblySyntaxException the textual instruction is not well-formed
 	 * @throws AssemblySemanticException the well-formed instruction cannot be assembled
 	 */
-	public byte[] assembleLine(Address at, String line, AssemblyPatternBlock ctx)
+	byte[] assembleLine(Address at, String line, AssemblyPatternBlock ctx)
 			throws AssemblySemanticException, AssemblySyntaxException;
 
 	/**
@@ -108,7 +110,7 @@ public interface Assembler {
 	 * @param line the line (or partial line) to parse
 	 * @return the results of parsing
 	 */
-	public Collection<AssemblyParseResult> parseLine(String line);
+	Collection<AssemblyParseResult> parseLine(String line);
 
 	/**
 	 * Resolve a given parse tree at the given address, assuming the given context
@@ -127,7 +129,7 @@ public interface Assembler {
 	 * @param ctx the context register value at the start of the instruction
 	 * @return the results of semantic resolution
 	 */
-	public AssemblyResolutionResults resolveTree(AssemblyParseResult parse, Address at,
+	AssemblyResolutionResults resolveTree(AssemblyParseResult parse, Address at,
 			AssemblyPatternBlock ctx);
 
 	/**
@@ -146,7 +148,7 @@ public interface Assembler {
 	 * @param at the location of the start of the instruction
 	 * @return the results of semantic resolution
 	 */
-	public AssemblyResolutionResults resolveTree(AssemblyParseResult parse, Address at);
+	AssemblyResolutionResults resolveTree(AssemblyParseResult parse, Address at);
 
 	/**
 	 * Assemble a line instruction at the given address.
@@ -160,7 +162,7 @@ public interface Assembler {
 	 * @return the collection of semantic resolution results
 	 * @throws AssemblySyntaxException the textual instruction is not well-formed
 	 */
-	public AssemblyResolutionResults resolveLine(Address at, String line)
+	AssemblyResolutionResults resolveLine(Address at, String line)
 			throws AssemblySyntaxException;
 
 	/**
@@ -177,7 +179,7 @@ public interface Assembler {
 	 * @return the collection of semantic resolution results
 	 * @throws AssemblySyntaxException the textual instruction is not well-formed
 	 */
-	public AssemblyResolutionResults resolveLine(Address at, String line, AssemblyPatternBlock ctx)
+	AssemblyResolutionResults resolveLine(Address at, String line, AssemblyPatternBlock ctx)
 			throws AssemblySyntaxException;
 
 	/**
@@ -192,7 +194,7 @@ public interface Assembler {
 	 * @return the new {@link Instruction} code unit
 	 * @throws MemoryAccessException there is an issue writing the result to program memory
 	 */
-	public Instruction patchProgram(AssemblyResolvedConstructor res, Address at)
+	Instruction patchProgram(AssemblyResolvedConstructor res, Address at)
 			throws MemoryAccessException;
 
 	/**
@@ -207,7 +209,7 @@ public interface Assembler {
 	 * @return an iterator over the disassembled instructions
 	 * @throws MemoryAccessException there is an issue writing the result to program memory
 	 */
-	public InstructionIterator patchProgram(byte[] insbytes, Address at)
+	InstructionIterator patchProgram(byte[] insbytes, Address at)
 			throws MemoryAccessException;
 
 	/**
@@ -220,5 +222,5 @@ public interface Assembler {
 	 * @param addr the address
 	 * @return the context
 	 */
-	public AssemblyPatternBlock getContextAt(Address addr);
+	AssemblyPatternBlock getContextAt(Address addr);
 }

@@ -40,7 +40,7 @@ public class XmlTreeNode {
 	 *             if an XML parser error occurs
 	 */
 	public XmlTreeNode(XmlPullParser parser) throws SAXParseException {
-		children = new LinkedList<XmlTreeNode>();
+		children = new LinkedList<>();
 		startElement = parser.start();
 
 		XmlElement child = parser.peek();
@@ -139,10 +139,12 @@ public class XmlTreeNode {
 			nextNode = null;
 		}
 
+		@Override
 		public void remove() {
 			it.remove();
 		}
 
+		@Override
 		public boolean hasNext() {
 			if (nextNode == null) {
 				findNext();
@@ -150,6 +152,7 @@ public class XmlTreeNode {
 			return nextNode != null;
 		}
 
+		@Override
 		public XmlTreeNode next() {
 			if (hasNext()) {
 				XmlTreeNode node = nextNode;

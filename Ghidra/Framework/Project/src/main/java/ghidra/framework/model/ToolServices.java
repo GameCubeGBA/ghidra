@@ -15,7 +15,9 @@
  */
 package ghidra.framework.model;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Set;
 
 import ghidra.framework.plugintool.PluginEvent;
@@ -27,14 +29,14 @@ import ghidra.framework.plugintool.PluginTool;
 public interface ToolServices {
 
 	/** The default tool name for Ghidra  */
-	public static final String DEFAULT_TOOLNAME = "DefaultTool";
+	String DEFAULT_TOOLNAME = "DefaultTool";
 
 	/**
 	 * Notify the framework that the tool is closing.
 	 * 
 	 * @param tool tool that is closing
 	 */
-	public void closeTool(PluginTool tool);
+	void closeTool(PluginTool tool);
 
 	/**
 	 * Saves the tool's configuration in the standard
@@ -42,7 +44,7 @@ public interface ToolServices {
 	 * 
 	 * @param tool tool to save.
 	 */
-	public void saveTool(PluginTool tool);
+	void saveTool(PluginTool tool);
 
 	/**
 	 * Save the tool to the given location on the local file system.
@@ -52,13 +54,13 @@ public interface ToolServices {
 	 * @throws FileNotFoundException thrown if the file's directory doesn't exist.
 	 * @throws IOException thrown if there is an error writing the file.
 	 */
-	public File exportTool(ToolTemplate tool) throws FileNotFoundException, IOException;
+	File exportTool(ToolTemplate tool) throws FileNotFoundException, IOException;
 
 	/**
 	 * Get the tool chest for the project
 	 * @return the tool chest
 	 */
-	public ToolChest getToolChest();
+	ToolChest getToolChest();
 
 	/**
 	 * Find a running tool like the one specified that has the named domain file.
@@ -70,7 +72,7 @@ public interface ToolServices {
 	 * @param domainFile open this file in the found/created tool.
 	 * @param event invoke this event on the found/created tool
 	 */
-	public void displaySimilarTool(PluginTool tool, DomainFile domainFile, PluginEvent event);
+	void displaySimilarTool(PluginTool tool, DomainFile domainFile, PluginEvent event);
 
 	/**
 	 * Returns the default tool template used to open the tool.  Here <b>default</b> means the 
@@ -80,14 +82,14 @@ public interface ToolServices {
 	 * @param domainFile The file for which to find the preferred tool.
 	 * @return The preferred tool that should be used to open the given file.
 	 */
-	public ToolTemplate getDefaultToolTemplate(DomainFile domainFile);
+	ToolTemplate getDefaultToolTemplate(DomainFile domainFile);
 
 	/**
 	 * Returns a set of tools that can open the given domain file class.
 	 * @param domainClass The domain file class type for which to get tools
 	 * @return the tools
 	 */
-	public Set<ToolTemplate> getCompatibleTools(Class<? extends DomainObject> domainClass);
+	Set<ToolTemplate> getCompatibleTools(Class<? extends DomainObject> domainClass);
 
 	/**
 	 * Returns the {@link ToolAssociationInfo associations}, which describe content 
@@ -96,7 +98,7 @@ public interface ToolServices {
 	 * @return the associations
 	 * @see #setContentTypeToolAssociations(Set)
 	 */
-	public Set<ToolAssociationInfo> getContentTypeToolAssociations();
+	Set<ToolAssociationInfo> getContentTypeToolAssociations();
 
 	/**
 	 * Sets the  {@link ToolAssociationInfo associations}, which describe content 
@@ -105,7 +107,7 @@ public interface ToolServices {
 	 * @param infos The associations to be applied
 	 * @see #getContentTypeToolAssociations()
 	 */
-	public void setContentTypeToolAssociations(Set<ToolAssociationInfo> infos);
+	void setContentTypeToolAssociations(Set<ToolAssociationInfo> infos);
 
 	/**
 	 * Launch the default tool; if domainFile is not null, this file will
@@ -113,7 +115,7 @@ public interface ToolServices {
 	 * @param domainFile the file to open; may be null
 	 * @return the tool
 	 */
-	public PluginTool launchDefaultTool(DomainFile domainFile);
+	PluginTool launchDefaultTool(DomainFile domainFile);
 
 	/**
 	 * Launch the tool with the given name
@@ -121,25 +123,25 @@ public interface ToolServices {
 	 * @param domainFile the file to open; may be null
 	 * @return the tool
 	 */
-	public PluginTool launchTool(String toolName, DomainFile domainFile);
+	PluginTool launchTool(String toolName, DomainFile domainFile);
 
 	/**
 	 * Add a listener that will be notified when the default tool specification changes 
 	 * @param listener the listener
 	 */
-	public void addDefaultToolChangeListener(DefaultToolChangeListener listener);
+	void addDefaultToolChangeListener(DefaultToolChangeListener listener);
 
 	/**
 	 * Remove the listener
 	 * @param listener the listener
 	 */
-	public void removeDefaultToolChangeListener(DefaultToolChangeListener listener);
+	void removeDefaultToolChangeListener(DefaultToolChangeListener listener);
 
 	/**
 	 * Return array of running tools
 	 * @return array of Tools
 	 */
-	public PluginTool[] getRunningTools();
+	PluginTool[] getRunningTools();
 
 	/**
 	 * Returns true if this tool should be saved base on the state of other running instances of
@@ -147,5 +149,5 @@ public interface ToolServices {
 	 * @param tool the tool to check for saving
 	 * @return true if the tool should be saved
 	 */
-	public boolean canAutoSave(PluginTool tool);
+	boolean canAutoSave(PluginTool tool);
 }

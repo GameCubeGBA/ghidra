@@ -15,14 +15,38 @@
  */
 package docking.framework;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dialog;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Frame;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Window;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JComponent;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JWindow;
+import javax.swing.Timer;
+import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 
-import docking.*;
+import docking.DockingFrame;
+import docking.DockingWindowManager;
+import docking.HiddenDockingFrame;
 import docking.widgets.label.GDLabel;
 import docking.widgets.label.GLabel;
 import generic.util.WindowUtilities;
@@ -182,11 +206,7 @@ public class SplashScreen extends JWindow {
 
 		Frame[] frames = Frame.getFrames();
 		for (Frame frame : frames) {
-			if (frame instanceof HiddenDockingFrame) {
-				continue;
-			}
-
-			if (frame == hiddenFrame) {
+			if ((frame instanceof HiddenDockingFrame) || (frame == hiddenFrame)) {
 				continue;
 			}
 

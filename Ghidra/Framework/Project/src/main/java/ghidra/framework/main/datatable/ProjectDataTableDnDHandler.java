@@ -15,17 +15,45 @@
  */
 package ghidra.framework.main.datatable;
 
-import java.awt.*;
-import java.awt.datatransfer.*;
-import java.awt.dnd.*;
-import java.awt.event.*;
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DragGestureEvent;
+import java.awt.dnd.DragGestureListener;
+import java.awt.dnd.DragSource;
+import java.awt.dnd.DragSourceContext;
+import java.awt.dnd.DragSourceDragEvent;
+import java.awt.dnd.DragSourceDropEvent;
+import java.awt.dnd.DragSourceEvent;
+import java.awt.dnd.DragSourceListener;
+import java.awt.dnd.InvalidDnDOperationException;
+import java.awt.event.InputEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.CellRendererPane;
-import javax.swing.table.*;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 import docking.widgets.table.GTable;
 import ghidra.framework.OperatingSystem;
@@ -243,7 +271,7 @@ public class ProjectDataTableDnDHandler implements DragSourceListener, DragGestu
 	}
 
 	private List<DomainFileInfo> createSelectionList(GTable tableToSelect) {
-		ArrayList<DomainFileInfo> list = new ArrayList<DomainFileInfo>();
+		ArrayList<DomainFileInfo> list = new ArrayList<>();
 
 		int[] rows = table.getSelectedRows();
 
@@ -256,7 +284,7 @@ public class ProjectDataTableDnDHandler implements DragSourceListener, DragGestu
 		return list;
 	}
 
-	class DomainFileTransferable implements Transferable {
+	static class DomainFileTransferable implements Transferable {
 		private List<DomainFileInfo> list;
 
 		DomainFileTransferable(List<DomainFileInfo> list) {
@@ -273,7 +301,7 @@ public class ProjectDataTableDnDHandler implements DragSourceListener, DragGestu
 		}
 
 		private Object getDomainFileList() {
-			List<DomainFile> domainFileList = new ArrayList<DomainFile>();
+			List<DomainFile> domainFileList = new ArrayList<>();
 			for (DomainFileInfo domainFileInfo : list) {
 				domainFileList.add(domainFileInfo.getDomainFile());
 			}
@@ -337,11 +365,7 @@ public class ProjectDataTableDnDHandler implements DragSourceListener, DragGestu
 
 		private boolean isBasicLeftClick(MouseEvent e) {
 
-			if (e.getButton() != MouseEvent.BUTTON1) {
-				return false;
-			}
-
-			if (e.getClickCount() > 1) {
+			if ((e.getButton() != MouseEvent.BUTTON1) || (e.getClickCount() > 1)) {
 				return false;
 			}
 

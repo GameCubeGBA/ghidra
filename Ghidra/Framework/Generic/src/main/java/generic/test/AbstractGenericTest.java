@@ -15,31 +15,76 @@
  */
 package generic.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.AWTEvent;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Frame;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
+import java.awt.Window;
+import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.io.*;
-import java.lang.reflect.*;
-import java.net.*;
-import java.nio.file.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.TypeVariable;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
 
-import javax.swing.*;
+import javax.swing.AbstractButton;
+import javax.swing.Icon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JTable;
+import javax.swing.JTree;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.text.JTextComponent;
-import javax.swing.tree.*;
+import javax.swing.tree.TreeModel;
+import javax.swing.tree.TreeNode;
+import javax.swing.tree.TreePath;
 
 import org.junit.Assert;
 import org.junit.Rule;
-import org.junit.rules.*;
+import org.junit.rules.RuleChain;
+import org.junit.rules.TestRule;
+import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
 
 import generic.jar.ResourceFile;
@@ -47,7 +92,10 @@ import generic.util.WindowUtilities;
 import ghidra.GhidraTestApplicationLayout;
 import ghidra.framework.Application;
 import ghidra.framework.ApplicationConfiguration;
-import ghidra.util.*;
+import ghidra.util.Msg;
+import ghidra.util.Swing;
+import ghidra.util.SystemUtilities;
+import ghidra.util.TaskUtilities;
 import ghidra.util.datastruct.WeakSet;
 import ghidra.util.exception.AssertException;
 import ghidra.util.task.AbstractSwingUpdateManager;
@@ -168,12 +216,8 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 	private void printWarningIfConflictingInitializationConfigs(ApplicationLayout layout,
 			ApplicationConfiguration configuration) {
 
-		if (loadedApplicationLayout.getClass().equals(layout.getClass()) &&
-			loadedApplicationConfiguration.getClass().equals(configuration.getClass())) {
-			return;
-		}
-
-		if (printedApplicationConflictWaring) {
+		if ((loadedApplicationLayout.getClass().equals(layout.getClass()) &&
+			loadedApplicationConfiguration.getClass().equals(configuration.getClass())) || printedApplicationConflictWaring) {
 			return; // don't print repeatedly
 		}
 
@@ -205,8 +249,7 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 	}
 
 	protected ApplicationConfiguration createApplicationConfiguration() {
-		ApplicationConfiguration configuration = new ApplicationConfiguration();
-		return configuration;
+		return new ApplicationConfiguration();
 	}
 
 	/**
@@ -253,7 +296,7 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 		Set<Window> set = new HashSet<>();
 		Frame sharedOwnerFrame = (Frame) AppContext.getAppContext()
 				.get(
-					new StringBuffer("SwingUtilities.sharedOwnerFrame"));
+					new StringBuilder("SwingUtilities.sharedOwnerFrame"));
 		if (sharedOwnerFrame != null) {
 			set.addAll(getAllWindows(sharedOwnerFrame));
 		}
@@ -263,9 +306,7 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 		}
 
 		Window[] windows = Window.getWindows();
-		for (Window window : windows) {
-			set.add(window);
-		}
+		Collections.addAll(set, windows);
 
 		return set;
 	}
@@ -273,9 +314,7 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 	private static List<Window> getAllWindows(Window parent) {
 		List<Window> list = new ArrayList<>();
 		list.add(parent);
-		for (Window w : parent.getOwnedWindows()) {
-			list.add(w);
-		}
+		Collections.addAll(list, parent.getOwnedWindows());
 		return list;
 	}
 
@@ -1484,7 +1523,7 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 	 * @return A string representation of the given collection
 	 */
 	public static String toString(Collection<?> collection) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		TypeVariable<?>[] typeParameters = collection.getClass().getTypeParameters();
 		buffer.append("Collection<");
 		for (TypeVariable<?> typeVariable : typeParameters) {
@@ -1522,16 +1561,7 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 			try {
 				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			}
-			catch (ClassNotFoundException e1) {
-				// don't care
-			}
-			catch (InstantiationException e2) {
-				// don't care
-			}
-			catch (IllegalAccessException e3) {
-				// don't care
-			}
-			catch (UnsupportedLookAndFeelException e4) {
+			catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e4) {
 				// don't care
 			}
 		});
@@ -1608,8 +1638,7 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 			TimeUnit.MILLISECONDS.convert(end - start, TimeUnit.NANOSECONDS));
 		*/
 
-		boolean wasEverBusy = waitForSwing(set, true);
-		return wasEverBusy;
+		return waitForSwing(set, true);
 	}
 
 	private static boolean waitForSwing(Set<AbstractSwingUpdateManager> managers, boolean flush) {
@@ -1844,8 +1873,7 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 	 * @see #createTempFilePath(String, String)
 	 */
 	public String createTempFilePath(String name) throws IOException {
-		String path = createTempFilePath(name, ".tmp");
-		return path;
+		return createTempFilePath(name, ".tmp");
 	}
 
 	/**
@@ -1911,8 +1939,7 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 	 * @see #createTempFile(String, String)
 	 */
 	public File createTempFile(String name) throws IOException {
-		File file = createTempFile(name, ".tmp");
-		return file;
+		return createTempFile(name, ".tmp");
 	}
 
 	/**
@@ -1988,8 +2015,7 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 		String tempPath = getTestDirectoryPath();
 		File testTempDir = new File(tempPath);
 		File[] oldFiles = testTempDir.listFiles((dir, filename) -> {
-			boolean matches = pattern.matcher(filename).matches();
-			return matches;
+			return pattern.matcher(filename).matches();
 		});
 
 		for (File file : oldFiles) {

@@ -19,7 +19,9 @@ package ghidra.pcodeCPort.slgh_compile;
 import generic.stl.VectorSTL;
 import ghidra.pcodeCPort.context.SleighError;
 import ghidra.pcodeCPort.opcodes.OpCode;
-import ghidra.pcodeCPort.semantics.*;
+import ghidra.pcodeCPort.semantics.ConstTpl;
+import ghidra.pcodeCPort.semantics.OpTpl;
+import ghidra.pcodeCPort.semantics.VarnodeTpl;
 import ghidra.sleigh.grammar.Location;
 
 //A flattened expression tree
@@ -40,12 +42,12 @@ public class ExprTree {
 	public ExprTree(Location location, VarnodeTpl vn) {
 		this.location = location;
 		outvn = vn;
-		ops = new VectorSTL<OpTpl>();
+		ops = new VectorSTL<>();
 	}
 
 	public ExprTree(Location location, OpTpl op) {
 		this.location = location;
-		ops = new VectorSTL<OpTpl>();
+		ops = new VectorSTL<>();
 		ops.push_back(op);
 		if (op.getOut() != null)
 			outvn = new VarnodeTpl(location, op.getOut());
@@ -81,7 +83,7 @@ public class ExprTree {
 	// Create op expression with entire list of expression
 	// inputs
 	static VectorSTL<OpTpl> appendParams(OpTpl op, VectorSTL<ExprTree> param) {
-		VectorSTL<OpTpl> res = new VectorSTL<OpTpl>();
+		VectorSTL<OpTpl> res = new VectorSTL<>();
 
 		for (int i = 0; i < param.size(); ++i) {
 			res.appendAll(param.get(i).ops);

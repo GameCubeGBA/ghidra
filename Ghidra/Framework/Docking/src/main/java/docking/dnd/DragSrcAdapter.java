@@ -16,7 +16,13 @@
 package docking.dnd;
 
 import java.awt.Cursor;
-import java.awt.dnd.*;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DragSource;
+import java.awt.dnd.DragSourceContext;
+import java.awt.dnd.DragSourceDragEvent;
+import java.awt.dnd.DragSourceDropEvent;
+import java.awt.dnd.DragSourceEvent;
+import java.awt.dnd.DragSourceListener;
 
 /**
  * Adapter class that receives notifications in order to
@@ -50,7 +56,8 @@ public class DragSrcAdapter implements DragSourceListener {
      * Calls the drag component's move() method if the action is a
      * move operation.
      */
-    public void dragDropEnd(DragSourceDropEvent e) {
+    @Override
+	public void dragDropEnd(DragSourceDropEvent e) {
 
         if (!e.getDropSuccess()) {
             dragComponent.dragCanceled(e);
@@ -69,14 +76,16 @@ public class DragSrcAdapter implements DragSourceListener {
     /**
      * Called as the hotspot enters a platform dependent drop site.
      */
-    public void dragEnter(DragSourceDragEvent e) {
+    @Override
+	public void dragEnter(DragSourceDragEvent e) {
 
         setDragOverFeedback(e);
     }
     /**
      * Called as the hotspot moves over a platform dependent drop site.
      */
-    public void dragOver(DragSourceDragEvent e) {
+    @Override
+	public void dragOver(DragSourceDragEvent e) {
 
         setDragOverFeedback(e);
     }
@@ -84,7 +93,8 @@ public class DragSrcAdapter implements DragSourceListener {
     /**
      * Called as the hotspot exits a platform dependent drop site.
      */
-    public void dragExit(DragSourceEvent e) {
+    @Override
+	public void dragExit(DragSourceEvent e) {
 
         DragSourceContext context = e.getDragSourceContext();
         context.setCursor(null); // bug workaround
@@ -95,7 +105,8 @@ public class DragSrcAdapter implements DragSourceListener {
      * Drop action changed, i.e., ctrl key pressed during drag to
      * change to a copy operation.
      */
-    public void dropActionChanged(DragSourceDragEvent e) {
+    @Override
+	public void dropActionChanged(DragSourceDragEvent e) {
         setDragOverFeedback(e);
     }
 

@@ -73,17 +73,15 @@ public class TestThread extends Thread {
 	 * @return the filtered trace
 	 */
 	public static StackTraceElement[] filterTrace(StackTraceElement[] trace) {
-		//@formatter:off
-		StackTraceElement[] filtered =
-				ReflectionUtilities.filterStackTrace(trace, JUNIT_ORG_PACKAGE, 
-															JUNIT_FRAMEWORK_PACKAGE,
-															MOCKIT_JUNIT_PACKAGE,
-															JAVA_AWT_EVENT_PACKAGE, 
-															JAVA_LANG_PACKAGE, 
-															SUN_PACKAGE, 
-															GHIDRA_SWING_RUNNER);
+		
 		//@formatter:on
-		return filtered;
+		return ReflectionUtilities.filterStackTrace(trace, JUNIT_ORG_PACKAGE, 
+													JUNIT_FRAMEWORK_PACKAGE,
+													MOCKIT_JUNIT_PACKAGE,
+													JAVA_AWT_EVENT_PACKAGE, 
+													JAVA_LANG_PACKAGE, 
+													SUN_PACKAGE, 
+													GHIDRA_SWING_RUNNER);
 	}
 
 //==================================================================================================

@@ -15,6 +15,14 @@
  */
 package ghidra.program.database.reloc;
 
+import java.io.IOException;
+import java.util.Iterator;
+
+import db.BinaryCodedField;
+import db.BinaryField;
+import db.DBHandle;
+import db.DBRecord;
+import db.RecordIterator;
 import ghidra.framework.options.Options;
 import ghidra.program.database.ManagerDB;
 import ghidra.program.database.ProgramDB;
@@ -28,11 +36,6 @@ import ghidra.util.Lock;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
-
-import java.io.IOException;
-import java.util.Iterator;
-
-import db.*;
 
 /**
  * An implementation of the relocation table interface.

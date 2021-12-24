@@ -15,11 +15,17 @@
  */
 package docking.widgets.list;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FontMetrics;
 import java.util.List;
 import java.util.function.Function;
 
-import javax.swing.*;
+import javax.swing.JList;
+import javax.swing.ListCellRenderer;
+import javax.swing.ListModel;
+import javax.swing.SwingConstants;
 
 import docking.widgets.AbstractGCellRenderer;
 

@@ -22,7 +22,10 @@ import java.util.List;
 
 import ghidra.GhidraApplicationLayout;
 import ghidra.GhidraLaunchable;
-import ghidra.framework.store.local.*;
+import ghidra.framework.store.local.IndexedLocalFileSystem;
+import ghidra.framework.store.local.IndexedV1LocalFileSystem;
+import ghidra.framework.store.local.LocalFileSystem;
+import ghidra.framework.store.local.MangledLocalFileSystem;
 
 public class ConvertFileSystem implements GhidraLaunchable {
 
@@ -45,8 +48,8 @@ public class ConvertFileSystem implements GhidraLaunchable {
 		}
 	}
 
-	public static interface MessageListener {
-		public void println(String string);
+	public interface MessageListener {
+		void println(String string);
 	}
 
 	public static class ConvertFileSystemException extends IOException {

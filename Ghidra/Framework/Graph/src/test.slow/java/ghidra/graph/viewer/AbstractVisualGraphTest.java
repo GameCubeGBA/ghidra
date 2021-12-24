@@ -15,7 +15,9 @@
  */
 package ghidra.graph.viewer;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.fail;
 
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -35,7 +37,9 @@ import edu.uci.ics.jung.algorithms.layout.Layout;
 import generic.test.AbstractGenericTest;
 import ghidra.graph.graphs.AbstractTestVertex;
 import ghidra.graph.graphs.TestEdge;
-import ghidra.graph.support.*;
+import ghidra.graph.support.TestGraphLayout;
+import ghidra.graph.support.TestLayoutProvider;
+import ghidra.graph.support.TestVisualGraph;
 import ghidra.graph.viewer.event.mouse.VisualGraphMouseTrackingGraphMousePlugin;
 import ghidra.graph.viewer.event.mouse.VisualGraphPluggableGraphMouse;
 import ghidra.graph.viewer.event.picking.GPickedState;
@@ -118,8 +122,7 @@ public abstract class AbstractVisualGraphTest extends AbstractDockingTest {
 	}
 
 	protected TestEdge getEdge(AbstractTestVertex v1, AbstractTestVertex v2) {
-		TestEdge e = graph.findEdge(v1, v2);
-		return e;
+		return graph.findEdge(v1, v2);
 	}
 
 	protected void swing(Runnable r) {
@@ -202,10 +205,7 @@ public abstract class AbstractVisualGraphTest extends AbstractDockingTest {
 	protected Point getViewLocation(AbstractTestVertex v) {
 
 		GraphViewer<AbstractTestVertex, TestEdge> viewer = graphComponent.getPrimaryViewer();
-		Point vertexUpperLeftCornerInViewSpace =
-			swing(() -> GraphViewerUtils.getVertexUpperLeftCornerInViewSpace(viewer, v));
-
-		return vertexUpperLeftCornerInViewSpace;
+		return swing(() -> GraphViewerUtils.getVertexUpperLeftCornerInViewSpace(viewer, v));
 	}
 
 	/**

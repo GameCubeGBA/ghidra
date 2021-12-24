@@ -20,7 +20,9 @@ import java.awt.Font;
 import java.io.IOException;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import docking.widgets.label.GDLabel;
 import ghidra.framework.client.RepositoryAdapter;

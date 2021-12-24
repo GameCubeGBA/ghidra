@@ -22,5 +22,5 @@ import docking.ActionContext;
 
 public interface ActionContextProvider {
 
-	public ActionContext getActionContext(MouseEvent e);
+	ActionContext getActionContext(MouseEvent e);
 }

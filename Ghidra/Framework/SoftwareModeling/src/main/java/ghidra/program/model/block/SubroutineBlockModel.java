@@ -27,6 +27,6 @@ public interface SubroutineBlockModel extends CodeBlockModel {
 	 * @return base subroutine model.  If there is no base model,
 	 * this subroutine model is returned.
 	 */
-	public SubroutineBlockModel getBaseSubroutineModel();
+	SubroutineBlockModel getBaseSubroutineModel();
 	
 }

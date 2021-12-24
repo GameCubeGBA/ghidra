@@ -21,13 +21,17 @@ import java.io.IOException;
 
 import javax.swing.Icon;
 
-import docking.action.*;
+import docking.action.KeyBindingData;
+import docking.action.MenuData;
+import docking.action.ToolBarData;
 import ghidra.framework.client.ClientUtil;
-import ghidra.framework.main.datatable.ProjectDataContext;
 import ghidra.framework.main.datatable.FrontendProjectTreeAction;
+import ghidra.framework.main.datatable.ProjectDataContext;
 import ghidra.framework.model.ProjectData;
 import ghidra.util.HelpLocation;
-import ghidra.util.task.*;
+import ghidra.util.task.Task;
+import ghidra.util.task.TaskLauncher;
+import ghidra.util.task.TaskMonitor;
 import resources.Icons;
 
 public class ProjectDataRefreshAction extends FrontendProjectTreeAction {

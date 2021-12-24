@@ -15,12 +15,14 @@
  */
 package ghidra.program.database.bookmark;
 
-import ghidra.util.exception.VersionException;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
-import db.*;
+import db.DBHandle;
+import db.DBRecord;
+import db.RecordIterator;
+import db.Table;
+import ghidra.util.exception.VersionException;
 
 public class BookmarkTypeDBAdapterV0 extends BookmarkTypeDBAdapter {
 
@@ -44,7 +46,7 @@ public class BookmarkTypeDBAdapterV0 extends BookmarkTypeDBAdapter {
 
 	@Override
 	DBRecord[] getRecords() throws IOException {
-		ArrayList<DBRecord> list = new ArrayList<DBRecord>();
+		ArrayList<DBRecord> list = new ArrayList<>();
 		RecordIterator iter = table.iterator();
 		while (iter.hasNext()) {
 			list.add(iter.next());

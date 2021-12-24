@@ -22,7 +22,9 @@ import javax.swing.JComponent;
 
 import docking.widgets.fieldpanel.Layout;
 import docking.widgets.fieldpanel.field.Field;
-import docking.widgets.fieldpanel.internal.*;
+import docking.widgets.fieldpanel.internal.LayoutBackgroundColorManager;
+import docking.widgets.fieldpanel.internal.LayoutBackgroundColorManagerAdapter;
+import docking.widgets.fieldpanel.internal.PaintContext;
 
 /**
  * Handles layouts with muliple rows.
@@ -54,9 +56,9 @@ public class MultiRowLayout implements Layout {
 		this.indexSize = indexSize;
 		this.layouts = layouts;
 		int height = 0;
-		for (int i = 0; i < layouts.length; i++) {
-			numFields += layouts[i].getNumFields();
-			height += layouts[i].getHeight();
+		for (RowLayout layout : layouts) {
+			numFields += layout.getNumFields();
+			height += layout.getHeight();
 		}
 		heightAbove = layouts[0].getHeightAbove();
 		heightBelow = height - heightAbove;
@@ -326,23 +328,22 @@ public class MultiRowLayout implements Layout {
 				layout.layouts[otherRow].insertSpaceAbove(myHeight);
 				if (++myRow < myNumRows)
 					myHeight = layouts[myRow].getHeight();
-			}
-			else if (myId > otherId) {
-				layouts[myRow].insertSpaceAbove(otherHeight);
-				if (++otherRow < otherNumRows)
-					otherHeight = layout.layouts[otherRow].getHeight();
-			}
-			else {
-				int myEnd = layouts[myRow].getHeight();
-				int otherEnd = layout.layouts[otherRow].getHeight();
-				if (myEnd > otherEnd) {
-					layout.layouts[otherRow].insertSpaceBelow(myEnd - otherEnd);
+			} else {
+				if (myId > otherId) {
+					layouts[myRow].insertSpaceAbove(otherHeight);
 				}
-				else if (otherEnd > myEnd) {
-					layouts[myRow].insertSpaceBelow(otherEnd - myEnd);
+				else {
+					int myEnd = layouts[myRow].getHeight();
+					int otherEnd = layout.layouts[otherRow].getHeight();
+					if (myEnd > otherEnd) {
+						layout.layouts[otherRow].insertSpaceBelow(myEnd - otherEnd);
+					}
+					else if (otherEnd > myEnd) {
+						layouts[myRow].insertSpaceBelow(otherEnd - myEnd);
+					}
+					if (++myRow < myNumRows)
+						myHeight = layouts[myRow].getHeight();
 				}
-				if (++myRow < myNumRows)
-					myHeight = layouts[myRow].getHeight();
 				if (++otherRow < otherNumRows)
 					otherHeight = layout.layouts[otherRow].getHeight();
 			}
@@ -370,11 +371,11 @@ public class MultiRowLayout implements Layout {
 
 	private void findPrimaryOffset() {
 		primaryOffset = 0;
-		for (int i = 0; i < layouts.length; i++) {
-			if (layouts[i].isPrimary()) {
+		for (RowLayout layout : layouts) {
+			if (layout.isPrimary()) {
 				return;
 			}
-			primaryOffset += layouts[i].getHeight();
+			primaryOffset += layout.getHeight();
 		}
 		primaryOffset = 0;
 	}
@@ -414,17 +415,17 @@ public class MultiRowLayout implements Layout {
 	public void fillHeights(int[] rowHeights) {
 		int lastId = -1;
 		int height = 0;
-		for (int i = 0; i < layouts.length; i++) {
-			int id = layouts[i].getRowID();
+		for (RowLayout layout : layouts) {
+			int id = layout.getRowID();
 			if (id == lastId) {
-				height += layouts[i].getHeight();
+				height += layout.getHeight();
 			}
 			else {
 				if (lastId >= 0) {
 					rowHeights[lastId] = Math.max(rowHeights[lastId], height);
 				}
 				lastId = id;
-				height = layouts[i].getHeight();
+				height = layout.getHeight();
 			}
 		}
 		if (lastId >= 0) {
@@ -441,20 +442,20 @@ public class MultiRowLayout implements Layout {
 		int row = 0;
 		int totalAbove = 0;
 		int lastId = -1;
-		for (int i = 0; i < layouts.length; i++) {
-			int id = layouts[i].getRowID();
+		for (RowLayout layout : layouts) {
+			int id = layout.getRowID();
 			if (id != lastId) {
 				for (; row < id; row++) {
 					totalAbove += rowHeights[row];
 				}
-				int origHeight = layouts[i].getHeight();
-				layouts[i].insertSpaceAbove(totalAbove);
+				int origHeight = layout.getHeight();
+				layout.insertSpaceAbove(totalAbove);
 				totalAbove = rowHeights[id] - origHeight;
 				lastId = id;
 				row++;
 			}
 			else {
-				totalAbove -= layouts[i].getHeight();
+				totalAbove -= layout.getHeight();
 			}
 		}
 		int totalBelow = totalAbove;
@@ -464,8 +465,8 @@ public class MultiRowLayout implements Layout {
 		insertSpaceBelow(totalBelow);
 
 		int height = 0;
-		for (int i = 0; i < layouts.length; i++) {
-			height += layouts[i].getHeight();
+		for (RowLayout layout : layouts) {
+			height += layout.getHeight();
 		}
 		heightAbove = layouts[0].getHeightAbove();
 		heightBelow = height - heightAbove;

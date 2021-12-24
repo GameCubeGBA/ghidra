@@ -15,7 +15,9 @@
  */
 package docking.widgets.fieldpanel.field;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,7 +28,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import docking.widgets.fieldpanel.internal.FieldBackgroundColorManager;
 import docking.widgets.fieldpanel.internal.PaintContext;
-import docking.widgets.fieldpanel.support.*;
+import docking.widgets.fieldpanel.support.DefaultRowColLocation;
+import docking.widgets.fieldpanel.support.HighlightFactory;
+import docking.widgets.fieldpanel.support.RowColLocation;
 import generic.json.Json;
 
 /**
@@ -144,7 +148,7 @@ public class CompositeVerticalLayoutTextField implements TextField {
 
 	private ClippingTextField createClippedField(FieldElement element) {
 
-		FieldElement[] elements = new FieldElement[] {
+		FieldElement[] elements = {
 			element,
 			new StrutFieldElement(500)
 		};
@@ -284,14 +288,13 @@ public class CompositeVerticalLayoutTextField implements TextField {
 		int startY = myStartY;
 		int translatedY = 0;
 
-		for (int i = 0; i < fieldRows.size(); i++) {
+		for (FieldRow fieldRow : fieldRows) {
 
 			// if past clipping region we are done
 			if (startY > clipEndY) {
 				break;
 			}
 
-			FieldRow fieldRow = fieldRows.get(i);
 			TextField field = fieldRow.field;
 			int subFieldHeight = fieldRow.field.getHeight();
 			int endY = startY + subFieldHeight;
@@ -435,8 +438,7 @@ public class CompositeVerticalLayoutTextField implements TextField {
 			if (bottom > y) {
 				int relativeY = y - ySoFar;
 				int relativeRow = fieldRow.field.getRow(relativeY);
-				int displayRow = fieldRow.fromRelativeRow(relativeRow);
-				return displayRow;
+				return fieldRow.fromRelativeRow(relativeRow);
 			}
 			ySoFar += fieldHeight;
 		}
@@ -580,7 +582,7 @@ public class CompositeVerticalLayoutTextField implements TextField {
 		return new DefaultRowColLocation(numRows - 1, length);
 	}
 
-	private class FieldRow {
+	private static class FieldRow {
 		private TextField field;
 		private int displayRowOffset;
 		private int yOffset;

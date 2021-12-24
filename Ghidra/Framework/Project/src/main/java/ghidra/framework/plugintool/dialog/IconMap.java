@@ -15,7 +15,12 @@
  */
 package ghidra.framework.plugintool.dialog;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import docking.util.image.ToolIconURL;
 import resources.ResourceManager;
@@ -30,7 +35,7 @@ class IconMap {
 	private static Map<String, ToolIconURL> map = createIconMap(); // map name to icon
 
 	private static Map<String, ToolIconURL> createIconMap() {
-		Map<String, ToolIconURL> iconMap = new HashMap<String, ToolIconURL>();
+		Map<String, ToolIconURL> iconMap = new HashMap<>();
 		load(iconMap); // load image names from classpath
 		return iconMap;
 	}
@@ -63,13 +68,13 @@ class IconMap {
 	 * Get the sorted list of icon names the icon map.
 	 */
 	static List<String> getIconNames() {
-		List<String> list = new ArrayList<String>(map.keySet());
+		List<String> list = new ArrayList<>(map.keySet());
 		Collections.sort(list);
 		return list;
 	}
 
 	static List<ToolIconURL> getIcons() {
-		List<ToolIconURL> list = new ArrayList<ToolIconURL>(map.values());
+		List<ToolIconURL> list = new ArrayList<>(map.values());
 		Collections.sort(list);
 		return list;
 	}

@@ -28,6 +28,6 @@ public interface VoidPropertyMap extends PropertyMap {
 	 * Mark the specified address as having a property
 	 * @param addr address for the property
 	 */
-	public void add(Address addr);
+	void add(Address addr);
 
 }

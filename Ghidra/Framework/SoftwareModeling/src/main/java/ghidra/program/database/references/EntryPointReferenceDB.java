@@ -17,7 +17,9 @@
 package ghidra.program.database.references;
 
 import ghidra.program.model.address.Address;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.RefType;
+import ghidra.program.model.symbol.Reference;
+import ghidra.program.model.symbol.SourceType;
 
 class EntryPointReferenceDB extends ReferenceDB {
 

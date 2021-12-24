@@ -16,9 +16,19 @@
 package docking.widgets.table;
 
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-import docking.widgets.table.constraint.*;
+import docking.widgets.table.constraint.ColumnConstraint;
+import docking.widgets.table.constraint.ColumnConstraintProvider;
+import docking.widgets.table.constraint.ColumnTypeMapper;
+import docking.widgets.table.constraint.EnumColumnConstraint;
+import docking.widgets.table.constraint.MappedColumnConstraint;
+import docking.widgets.table.constraint.ObjectToStringMapper;
 import ghidra.util.classfinder.ClassSearcher;
 import utilities.util.reflection.ReflectionUtilities;
 
@@ -107,7 +117,7 @@ public class DiscoverableTableUtils {
 	public static <ROW_TYPE> Collection<DynamicTableColumn<ROW_TYPE, ?, ?>> getDynamicTableColumns(
 			Class<ROW_TYPE> rowTypeClass) {
 
-		Collection<DynamicTableColumn<?, ?, ?>> columnExtensions = getTableColumExtensions();
+		List<DynamicTableColumn<?, ?, ?>> columnExtensions = getTableColumExtensions();
 		Set<DynamicTableColumn<ROW_TYPE, ?, ?>> dataSet = new HashSet<>();
 		for (DynamicTableColumn<?, ?, ?> column : columnExtensions) {
 			Collection<DynamicTableColumn<ROW_TYPE, Object, Object>> mappedColumns =
@@ -118,8 +128,12 @@ public class DiscoverableTableUtils {
 		return dataSet;
 	}
 
-	private static Collection<DynamicTableColumn<?, ?, ?>> getTableColumExtensions() {
+	private static List<DynamicTableColumn<?, ?, ?>> getTableColumExtensions() {
 		List<DynamicTableColumn<?, ?, ?>> list = new ArrayList<>();
+
+		// TODO: Why won't this compile?
+		// list.addAll(ClassSearcher.getInstances(
+		// 	DynamicTableColumn.class));
 
 		for (DynamicTableColumn<?, ?, ?> dynamicTableColumn : ClassSearcher.getInstances(
 			DynamicTableColumn.class)) {
@@ -245,8 +259,7 @@ public class DiscoverableTableUtils {
 
 		Class<M> destinationType = mapper.getDestinationType();
 		Collection<ColumnConstraint<M>> unmapped = getColumnConstraints(destinationType);
-		Collection<ColumnConstraint<T>> mapped = mapConstraints(mapper, unmapped);
-		return mapped;
+		return mapConstraints(mapper, unmapped);
 	}
 
 	/**

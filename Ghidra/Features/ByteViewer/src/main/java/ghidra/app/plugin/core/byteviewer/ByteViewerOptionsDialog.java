@@ -150,7 +150,8 @@ public class ByteViewerOptionsDialog extends DialogComponentProvider
 		// since we want the alignment address to begin a column, need to subtract addrOffset from bytesPerLine
 		int offset = addrOffset == 0 ? 0 : bytesPerLine - addrOffset;
 
-		ByteBlockSelection blockSelection = provider.getBlockSelection();
+		// TODO: find out what this was meant for
+		// ByteBlockSelection blockSelection = provider.getBlockSelection();
 
 		// Setting these properties individually is problematic since it can temporarily put
 		// the system into a bad state.  As a hack, set the bytes per line to 256 since that

@@ -16,7 +16,15 @@
 package ghidra.program.model.data;
 
 import java.math.BigInteger;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -31,7 +39,7 @@ import ghidra.util.UniversalID;
 public class EnumDataType extends GenericDataType implements Enum {
 
 	private static final SettingsDefinition[] ENUM_SETTINGS_DEFINITIONS =
-		new SettingsDefinition[] { MutabilitySettingsDefinition.DEF };
+		{ MutabilitySettingsDefinition.DEF };
 
 	private Map<String, Long> nameMap; // name to value
 	private TreeMap<Long, List<String>> valueMap; // value to names
@@ -107,8 +115,7 @@ public class EnumDataType extends GenericDataType implements Enum {
 
 	@Override
 	public long[] getValues() {
-		long[] values = valueMap.keySet().stream().mapToLong(Long::longValue).toArray();
-		return values;
+		return valueMap.keySet().stream().mapToLong(Long::longValue).toArray();
 	}
 
 	@Override
@@ -360,8 +367,7 @@ public class EnumDataType extends GenericDataType implements Enum {
 		else {
 			valueStr = Long.toString(value);
 		}
-		valueName = "" + valueStr;
-		return valueName;
+		return "" + valueStr;
 	}
 
 	@Override
@@ -375,11 +381,7 @@ public class EnumDataType extends GenericDataType implements Enum {
 
 		Enum enumm = (Enum) dt;
 		if (!DataTypeUtilities.equalsIgnoreConflict(name, enumm.getName()) ||
-			length != enumm.getLength() || getCount() != enumm.getCount()) {
-			return false;
-		}
-
-		if (!isEachValueEquivalent(enumm)) {
+			length != enumm.getLength() || getCount() != enumm.getCount() || !isEachValueEquivalent(enumm)) {
 			return false;
 		}
 		return true;

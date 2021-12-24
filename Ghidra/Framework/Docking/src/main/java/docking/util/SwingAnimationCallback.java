@@ -27,13 +27,13 @@ public interface SwingAnimationCallback {
 	 * @param percentComplete a value (from 0 to 1.0) that indicates the percentage of the 
 	 *                        animation cycle that has completed.
 	 */
-	public void progress(double percentComplete);
+	void progress(double percentComplete);
 
 	/**
 	 * Called when the entire animation cycle is done.  This allows clients to perform any
 	 * finalization work.
 	 */
-	public void done();
+	void done();
 
 	/**
 	 * Returns the duration of this callback.  The default is <code>1000 ms</code>.  Subclasses
@@ -41,7 +41,7 @@ public interface SwingAnimationCallback {
 	 * 
 	 * @return the duration
 	 */
-	public default int getDuration() {
+	default int getDuration() {
 		return 1000;
 	}
 }

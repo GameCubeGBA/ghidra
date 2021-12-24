@@ -19,7 +19,9 @@
 package ghidra.sleigh.grammar;
 
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Utility class to Search for Files in any directory
@@ -55,7 +57,7 @@ public class FileSearcher {
 	public static final List<File> gatherFilesFromDir(File currDirToSearch,
 			List<String> currFileTypeExtList, boolean useRecursionInSearch)
 			throws FileSearcherException {
-		List<File> foundFilesFromSearchList = new ArrayList<File>();
+		List<File> foundFilesFromSearchList = new ArrayList<>();
 
 		//Sanity Checks before use!
 		if (currDirToSearch == null) {
@@ -92,8 +94,7 @@ public class FileSearcher {
 	 * @param recursiveSearch - Determine whether to Search recursively or not
 	 */
 	private static final void locateFilesFromDirRoot(File [] currDirArray, List<String> currFileTypeExtList, List<File> currFilesFromSearchList, boolean recursiveSearch){
-		List<File> currDirRootList = new ArrayList<File>();
-		currDirRootList.addAll( Arrays.asList( currDirArray ) );
+		List<File> currDirRootList = new ArrayList<>(Arrays.asList( currDirArray ));
 		//No Sanity Checks needed as this is a private member and used internally...
 		for(File currFile : currDirRootList){
 			if(currFile.isDirectory()){

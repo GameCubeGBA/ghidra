@@ -38,20 +38,19 @@ public interface DataType {
 	/**
 	 * Singleton instance of default datatype.
 	 */
-	public static final DataType DEFAULT = DefaultDataType.dataType;
+	DataType DEFAULT = DefaultDataType.dataType;
 
 	/**
 	 * Instance of void datatype (never use <code>==</code>)
 	 * 
 	 * @deprecated should use {@link VoidDataType#dataType} instead
 	 */
-	@Deprecated
-	public static final DataType VOID = VoidDataType.dataType;
+	@Deprecated DataType VOID = VoidDataType.dataType;
 
-	public final static String CONFLICT_SUFFIX = ".conflict";
+	String CONFLICT_SUFFIX = ".conflict";
 
-	static final long NO_SOURCE_SYNC_TIME = 0L;
-	static final long NO_LAST_CHANGE_TIME = 0L;
+	long NO_SOURCE_SYNC_TIME = 0L;
+	long NO_LAST_CHANGE_TIME = 0L;
 
 	/**
 	 * Indicates if the length of this data-type is determined based upon the
@@ -59,21 +58,21 @@ public interface DataType {
 	 * 
 	 * @return true length is language/compiler-specification dependent, else false
 	 */
-	public boolean hasLanguageDependantLength();
+	boolean hasLanguageDependantLength();
 
 	/**
 	 * Gets a list of all the settingsDefinitions used by this datatype.
 	 * 
 	 * @return a list of the settingsDefinitions used by this datatype.
 	 */
-	public SettingsDefinition[] getSettingsDefinitions();
+	SettingsDefinition[] getSettingsDefinitions();
 
 	/**
 	 * Gets the default settings for this datatype.
 	 * 
 	 * @return the default settings for this datatype.
 	 */
-	public Settings getDefaultSettings();
+	Settings getDefaultSettings();
 
 	/**
 	 * Returns an instance of this DataType with its universalID and SourceArchive identity
@@ -86,7 +85,7 @@ public interface DataType {
 	 * @param dtm the data-type manager instance whose data-organization should apply.
 	 * @return cloned instance which may be the same as this instance
 	 */
-	public DataType clone(DataTypeManager dtm);
+	DataType clone(DataTypeManager dtm);
 
 	/**
 	 * Returns a new instance (shallow copy) of this DataType with a new identity.
@@ -96,21 +95,21 @@ public interface DataType {
 	 * @param dtm the data-type manager instance whose data-organization should apply.
 	 * @return new instanceof of this datatype
 	 */
-	public DataType copy(DataTypeManager dtm);
+	DataType copy(DataTypeManager dtm);
 
 	/**
 	 * Gets the categoryPath associated with this datatype
 	 * 
 	 * @return the datatype's category path
 	 */
-	public CategoryPath getCategoryPath();
+	CategoryPath getCategoryPath();
 
 	/**
 	 * Returns the dataTypePath for this datatype;
 	 * 
 	 * @return the dataTypePath for this datatype;
 	 */
-	public DataTypePath getDataTypePath();
+	DataTypePath getDataTypePath();
 
 	/**
 	 * Set the categoryPath associated with this datatype
@@ -120,7 +119,7 @@ public interface DataType {
 	 *             category resulted in a name collision. This should not occur for non-DB DataType
 	 *             instances.
 	 */
-	public void setCategoryPath(CategoryPath path) throws DuplicateNameException;
+	void setCategoryPath(CategoryPath path) throws DuplicateNameException;
 
 	/**
 	 * Get the DataTypeManager containing this datatype.
@@ -130,21 +129,21 @@ public interface DataType {
 	 * 
 	 * @return the DataTypeManager that is associated with this datatype.
 	 */
-	public DataTypeManager getDataTypeManager();
+	DataTypeManager getDataTypeManager();
 
 	/**
 	 * Gets the name for referring to this datatype.
 	 * 
 	 * @return generic name for this Data Type (i.e.: Word)
 	 */
-	public String getDisplayName();
+	String getDisplayName();
 
 	/**
 	 * Get the name of this datatype.
 	 * 
 	 * @return the name
 	 */
-	public String getName();
+	String getName();
 
 	/**
 	 * Get the full category path name that includes this datatype's name.
@@ -153,7 +152,7 @@ public interface DataType {
 	 * 
 	 * @return the path, or just this type's name
 	 */
-	public String getPathName();
+	String getPathName();
 
 	/**
 	 * Sets the name of the datatype
@@ -164,7 +163,7 @@ public interface DataType {
 	 *             another datatype within the same category (only applies to DB stored
 	 *             {@link DataType}).
 	 */
-	public void setName(String name) throws InvalidNameException, DuplicateNameException;
+	void setName(String name) throws InvalidNameException, DuplicateNameException;
 
 	/**
 	 * Sets the name and category of a datatype at the same time.
@@ -176,7 +175,7 @@ public interface DataType {
 	 *             another datatype within the same category (only applies to DB stored
 	 *             {@link DataType}).
 	 */
-	public void setNameAndCategory(CategoryPath path, String name)
+	void setNameAndCategory(CategoryPath path, String name)
 			throws InvalidNameException, DuplicateNameException;
 
 	/**
@@ -185,7 +184,7 @@ public interface DataType {
 	 * @param settings settings which may influence the result or null
 	 * @return the mnemonic for this DataType.
 	 */
-	public String getMnemonic(Settings settings);
+	String getMnemonic(Settings settings);
 
 	/**
 	 * Get the length (number of 8-bit bytes) of this DataType.
@@ -197,7 +196,7 @@ public interface DataType {
 	 * 
 	 * @return the length of this DataType
 	 */
-	public int getLength();
+	int getLength();
 
 	/**
 	 * Indicates this datatype is defined with a zero length.
@@ -212,7 +211,7 @@ public interface DataType {
 	 * 
 	 * @return true if type definition has a length of 0, else false
 	 */
-	public boolean isZeroLength();
+	boolean isZeroLength();
 
 	/**
 	 * Indicates if this datatype has not yet been fully defined.
@@ -222,14 +221,14 @@ public interface DataType {
 	 * 
 	 * @return true if this type is not yet defined.
 	 */
-	public boolean isNotYetDefined();
+	boolean isNotYetDefined();
 
 	/**
 	 * Get a String briefly describing this DataType.
 	 *
 	 * @return a one-liner describing this DataType.
 	 */
-	public String getDescription();
+	String getDescription();
 
 	/**
 	 * Sets a String briefly describing this DataType.
@@ -238,7 +237,7 @@ public interface DataType {
 	 * @throws UnsupportedOperationException if the description is not allowed to be set for this
 	 *             datatype.
 	 */
-	public void setDescription(String description) throws UnsupportedOperationException;
+	void setDescription(String description) throws UnsupportedOperationException;
 
 	/**
 	 * The getDocs method should provide a URL pointing to extended documentation for this DataType
@@ -249,7 +248,7 @@ public interface DataType {
 	 *
 	 * @return null - there is no URL documentation for this prototype.
 	 */
-	public URL getDocs();
+	URL getDocs();
 
 	/**
 	 * Get the data in the form of the appropriate Object for this DataType.
@@ -262,7 +261,7 @@ public interface DataType {
 	 * @param length the number of bytes to get the value from.
 	 * @return the data Object.
 	 */
-	public Object getValue(MemBuffer buf, Settings settings, int length);
+	Object getValue(MemBuffer buf, Settings settings, int length);
 
 	/**
 	 * Check if this type supports encoding (patching)
@@ -274,7 +273,7 @@ public interface DataType {
 	 * 
 	 * @return true if encoding is supported
 	 */
-	public boolean isEncodable();
+	boolean isEncodable();
 
 	/**
 	 * Encode bytes from an Object appropriate for this DataType.
@@ -295,7 +294,7 @@ public interface DataType {
 	 *             incorrect type, not enough space, buffer overflow, unsupported (see
 	 *             {@link #isEncodable()}).
 	 */
-	public byte[] encodeValue(Object value, MemBuffer buf, Settings settings, int length)
+	byte[] encodeValue(Object value, MemBuffer buf, Settings settings, int length)
 			throws DataTypeEncodeException;
 
 	/**
@@ -306,14 +305,14 @@ public interface DataType {
 	 *         unspecified. Types which correspond to a string or char array will return the String
 	 *         class.
 	 */
-	public Class<?> getValueClass(Settings settings);
+	Class<?> getValueClass(Settings settings);
 
 	/**
 	 * Returns the appropriate string to use as the default label prefix in the absence of any data.
 	 * 
 	 * @return the default label prefix or null if none specified.
 	 */
-	public String getDefaultLabelPrefix();
+	String getDefaultLabelPrefix();
 
 	/**
 	 * Returns the prefix to use for this datatype when an abbreviated prefix is desired.
@@ -324,7 +323,7 @@ public interface DataType {
 	 * @return the prefix to use for this datatype when an abbreviated prefix is desired. May return
 	 *         null.
 	 */
-	public String getDefaultAbbreviatedLabelPrefix();
+	String getDefaultAbbreviatedLabelPrefix();
 
 	/**
 	 * Returns the appropriate string to use as the default label prefix.
@@ -335,7 +334,7 @@ public interface DataType {
 	 * @param options options for how to format the default label prefix.
 	 * @return the default label prefix or null if none specified.
 	 */
-	public String getDefaultLabelPrefix(MemBuffer buf, Settings settings, int len,
+	String getDefaultLabelPrefix(MemBuffer buf, Settings settings, int len,
 			DataTypeDisplayOptions options);
 
 	/**
@@ -351,7 +350,7 @@ public interface DataType {
 	 * @param offcutOffset offset into datatype
 	 * @return the default label prefix.
 	 */
-	public String getDefaultOffcutLabelPrefix(MemBuffer buf, Settings settings, int len,
+	String getDefaultOffcutLabelPrefix(MemBuffer buf, Settings settings, int len,
 			DataTypeDisplayOptions options, int offcutOffset);
 
 	/**
@@ -362,7 +361,7 @@ public interface DataType {
 	 * @param length the number of bytes to represent.
 	 * @return the representation of the data in this format, never null.
 	 */
-	public String getRepresentation(MemBuffer buf, Settings settings, int length);
+	String getRepresentation(MemBuffer buf, Settings settings, int length);
 
 	/**
 	 * Encode bytes according to the display format for this type.
@@ -385,7 +384,7 @@ public interface DataType {
 	 *             incorrect format, not enough space, buffer overflow, unsupported (see
 	 *             {@link #isEncodable()}).
 	 */
-	public byte[] encodeRepresentation(String repr, MemBuffer buf, Settings settings, int length)
+	byte[] encodeRepresentation(String repr, MemBuffer buf, Settings settings, int length)
 			throws DataTypeEncodeException;
 
 	/**
@@ -393,7 +392,7 @@ public interface DataType {
 	 * 
 	 * @return true if this datatype has been deleted and is no longer valid.
 	 */
-	public boolean isDeleted();
+	boolean isDeleted();
 
 	/**
 	 * Check if the given datatype is equivalent to this datatype.
@@ -405,7 +404,7 @@ public interface DataType {
 	 * @param dt the datatype being tested for equivalence.
 	 * @return true if the if the given datatype is equivalent to this datatype.
 	 */
-	public boolean isEquivalent(DataType dt);
+	boolean isEquivalent(DataType dt);
 
 	/**
 	 * Notification that the given datatype's size has changed.
@@ -415,7 +414,7 @@ public interface DataType {
 	 * 
 	 * @param dt the datatype that has changed.
 	 */
-	public void dataTypeSizeChanged(DataType dt);
+	void dataTypeSizeChanged(DataType dt);
 
 	/**
 	 * Notification that the given datatype's alignment has changed.
@@ -425,7 +424,7 @@ public interface DataType {
 	 * 
 	 * @param dt the datatype that has changed.
 	 */
-	public void dataTypeAlignmentChanged(DataType dt);
+	void dataTypeAlignmentChanged(DataType dt);
 
 	/**
 	 * Informs this datatype that the given datatype has been deleted.
@@ -434,7 +433,7 @@ public interface DataType {
 	 * 
 	 * @param dt the datatype that has been deleted.
 	 */
-	public void dataTypeDeleted(DataType dt);
+	void dataTypeDeleted(DataType dt);
 
 	/**
 	 * Informs this datatype that the given oldDT has been replaced with newDT
@@ -444,7 +443,7 @@ public interface DataType {
 	 * @param oldDt old datatype
 	 * @param newDt new datatype
 	 */
-	public void dataTypeReplaced(DataType oldDt, DataType newDt);
+	void dataTypeReplaced(DataType oldDt, DataType newDt);
 
 	/**
 	 * Set the default settings for this datatype.
@@ -453,7 +452,7 @@ public interface DataType {
 	 * 
 	 * @param settings the settings to be used as this dataTypes default settings.
 	 */
-	public void setDefaultSettings(Settings settings);
+	void setDefaultSettings(Settings settings);
 
 	/**
 	 * Inform this datatype that it has the given parent
@@ -462,7 +461,7 @@ public interface DataType {
 	 * 
 	 * @param dt parent datatype
 	 */
-	public void addParent(DataType dt);
+	void addParent(DataType dt);
 
 	/**
 	 * Remove a parent datatype
@@ -471,7 +470,7 @@ public interface DataType {
 	 * 
 	 * @param dt parent datatype
 	 */
-	public void removeParent(DataType dt);
+	void removeParent(DataType dt);
 
 	/**
 	 * Informs this datatype that its name has changed from the indicated old name.
@@ -481,21 +480,21 @@ public interface DataType {
 	 * @param dt the datatype whose name changed
 	 * @param oldName the datatype's old name
 	 */
-	public void dataTypeNameChanged(DataType dt, String oldName);
+	void dataTypeNameChanged(DataType dt, String oldName);
 
 	/**
 	 * Get the parents of this datatype
 	 * 
 	 * @return an array of parents of this datatype
 	 */
-	public DataType[] getParents();
+	DataType[] getParents();
 
 	/**
 	 * Gets the alignment to be used when aligning this datatype within another datatype.
 	 * 
 	 * @return this datatype's alignment.
 	 */
-	public int getAlignment();
+	int getAlignment();
 
 	/**
 	 * Check if this datatype depends on the existence of the given datatype.
@@ -506,21 +505,21 @@ public interface DataType {
 	 * @return true if the existence of this datatype relies on the existence of the specified
 	 *         datatype dt.
 	 */
-	public boolean dependsOn(DataType dt);
+	boolean dependsOn(DataType dt);
 
 	/**
 	 * Get the source archive where this type originated
 	 * 
 	 * @return source archive object
 	 */
-	public SourceArchive getSourceArchive();
+	SourceArchive getSourceArchive();
 
 	/**
 	 * Set the source archive where this type originated
 	 * 
 	 * @param archive source archive object
 	 */
-	public void setSourceArchive(SourceArchive archive);
+	void setSourceArchive(SourceArchive archive);
 
 	/**
 	 * Get the timestamp corresponding to the last time this type was changed within its datatype
@@ -528,7 +527,7 @@ public interface DataType {
 	 * 
 	 * @return timestamp of last change within datatype manager
 	 */
-	public long getLastChangeTime();
+	long getLastChangeTime();
 
 	/**
 	 * Get the timestamp corresponding to the last time this type was sync'd within its source
@@ -536,7 +535,7 @@ public interface DataType {
 	 * 
 	 * @return timestamp of last sync with source archive
 	 */
-	public long getLastChangeTimeInSourceArchive();
+	long getLastChangeTimeInSourceArchive();
 
 	/**
 	 * Get the universal ID for this datatype.
@@ -547,7 +546,7 @@ public interface DataType {
 	 * 
 	 * @return datatype UniversalID
 	 */
-	public UniversalID getUniversalID();
+	UniversalID getUniversalID();
 
 	/**
 	 * For datatypes that support change, this method replaces the internals of this datatype with
@@ -560,7 +559,7 @@ public interface DataType {
 	 * @throws UnsupportedOperationException if the datatype does not support change.
 	 * @throws IllegalArgumentException if the given datatype is not the same type as this datatype.
 	 */
-	public void replaceWith(DataType dataType);
+	void replaceWith(DataType dataType);
 
 	/**
 	 * Sets the lastChangeTime for this datatype.
@@ -571,7 +570,7 @@ public interface DataType {
 	 * 
 	 * @param lastChangeTime the time to use as the lastChangeTime for this datatype
 	 */
-	public void setLastChangeTime(long lastChangeTime);
+	void setLastChangeTime(long lastChangeTime);
 
 	/**
 	 * Sets the lastChangeTimeInSourceArchive for this datatype.
@@ -581,13 +580,13 @@ public interface DataType {
 	 * @param lastChangeTimeInSourceArchive the time to use as the lastChangeTimeInSourceArchive for
 	 *            this datatype
 	 */
-	public void setLastChangeTimeInSourceArchive(long lastChangeTimeInSourceArchive);
+	void setLastChangeTimeInSourceArchive(long lastChangeTimeInSourceArchive);
 
 	/**
 	 * Returns the DataOrganization associated with this data-type
 	 * 
 	 * @return associated data organization
 	 */
-	public DataOrganization getDataOrganization();
+	DataOrganization getDataOrganization();
 
 }

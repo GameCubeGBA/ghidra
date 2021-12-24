@@ -15,7 +15,10 @@
  */
 package ghidra.framework.model;
 
-import java.util.*;
+import java.util.BitSet;
+import java.util.EventObject;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * An event indicating a DomainObject has changed.  This event is actually

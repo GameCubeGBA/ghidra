@@ -33,5 +33,5 @@ public interface ComponentBasedDockingAction extends DockingActionIf {
 	 * @param context the context
 	 * @return true if the given context contains this action's component
 	 */
-	public boolean isValidComponentContext(ActionContext context);
+	boolean isValidComponentContext(ActionContext context);
 }

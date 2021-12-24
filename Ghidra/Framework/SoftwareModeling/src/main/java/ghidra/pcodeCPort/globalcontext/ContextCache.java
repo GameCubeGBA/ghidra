@@ -16,9 +16,10 @@
  */
 package ghidra.pcodeCPort.globalcontext;
 
-import ghidra.pcodeCPort.address.*;
-import ghidra.pcodeCPort.space.*;
-import ghidra.pcodeCPort.utils.*;
+import ghidra.pcodeCPort.address.Address;
+import ghidra.pcodeCPort.space.AddrSpace;
+import ghidra.pcodeCPort.utils.MutableLong;
+import ghidra.pcodeCPort.utils.Utils;
 
 public class ContextCache {
 

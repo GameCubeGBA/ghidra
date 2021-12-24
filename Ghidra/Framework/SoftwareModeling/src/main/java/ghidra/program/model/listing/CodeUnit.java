@@ -25,7 +25,12 @@ import ghidra.program.model.lang.Register;
 import ghidra.program.model.mem.MemBuffer;
 import ghidra.program.model.mem.MemoryAccessException;
 import ghidra.program.model.scalar.Scalar;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.ExternalReference;
+import ghidra.program.model.symbol.RefType;
+import ghidra.program.model.symbol.Reference;
+import ghidra.program.model.symbol.ReferenceIterator;
+import ghidra.program.model.symbol.SourceType;
+import ghidra.program.model.symbol.Symbol;
 import ghidra.util.Saveable;
 import ghidra.util.exception.NoValueException;
 import ghidra.util.prop.PropertyVisitor;
@@ -38,29 +43,29 @@ public interface CodeUnit extends MemBuffer {
 	/**
 	 * Indicator for a mnemonic (versus an operand).
 	 */
-	public final static int MNEMONIC = -1;
+	int MNEMONIC = -1;
 
-	public static final int NO_COMMENT = -1;
+	int NO_COMMENT = -1;
 	/**
 	 * comment type for end of line
 	 */
-	public static final int EOL_COMMENT = 0;
+	int EOL_COMMENT = 0;
 	/**
 	 * comment type that goes before a code unit
 	 */
-	public static final int PRE_COMMENT = 1;
+	int PRE_COMMENT = 1;
 	/**
 	 * comment type that follows after a code unit
 	 */
-	public static final int POST_COMMENT = 2;
+	int POST_COMMENT = 2;
 	/**
 	 * Property name for plate comment type
 	 */
-	public static final int PLATE_COMMENT = 3;
+	int PLATE_COMMENT = 3;
 	/**
 	 * Property name for repeatable comment type
 	 */
-	public static final int REPEATABLE_COMMENT = 4;
+	int REPEATABLE_COMMENT = 4;
 
 //	/**
 //	 * Property type for fall through property
@@ -70,19 +75,19 @@ public interface CodeUnit extends MemBuffer {
 	/**
 	 * Any comment property.
 	 */
-	public static final String COMMENT_PROPERTY = "COMMENT__GHIDRA_";
+	String COMMENT_PROPERTY = "COMMENT__GHIDRA_";
 	/** 
 	 * Property name for vertical space formatting
 	 */
-	public static final String SPACE_PROPERTY = "Space";
+	String SPACE_PROPERTY = "Space";
 	/**
 	 * Property name for code units that are instructions
 	 */
-	public static final String INSTRUCTION_PROPERTY = "INSTRUCTION__GHIDRA_";
+	String INSTRUCTION_PROPERTY = "INSTRUCTION__GHIDRA_";
 	/**
 	 * Property name for code units that are defined data
 	 */
-	public static final String DEFINED_DATA_PROPERTY = "DEFINED_DATA__GHIDRA_";
+	String DEFINED_DATA_PROPERTY = "DEFINED_DATA__GHIDRA_";
 
 	/**
 	 * Get the string representation of the starting address for
@@ -92,49 +97,49 @@ public interface CodeUnit extends MemBuffer {
 	 * false, the string will be padded to make the address string contain at least 4 digits.
 	 * @return string representation of address
 	 */
-	public String getAddressString(boolean showBlockName, boolean pad);
+	String getAddressString(boolean showBlockName, boolean pad);
 
 	/**
 	 * Set the named property with the given value at the address of this codeunit.
 	 * @param name the name of the property.
 	 * @param value value to be stored.
 	 */
-	public void setProperty(String name, Saveable value);
+	void setProperty(String name, Saveable value);
 
 	/**
 	 * Set the named property with the given value at the address of this codeunit.
 	 * @param name the name of the property.
 	 * @param value value to be stored.
 	 */
-	public void setProperty(String name, String value);
+	void setProperty(String name, String value);
 
 	/**
 	 * Set the named property with the given value at the address of this codeunit.
 	 * @param name the name of the property.
 	 * @param value value to be stored.
 	 */
-	public void setProperty(String name, int value);
+	void setProperty(String name, int value);
 
 	/**
 	 * Set the named property.  This method is used for "void" properites. The
 	 * property is either set or not set - there is no value
 	 * @param name the name of the property.
 	 */
-	public void setProperty(String name);
+	void setProperty(String name);
 
 	/**
 	 * Get the object property for name; returns null if
 	 * there is no name property for this code unit.
 	 * @param name the name of the property
 	 */
-	public Saveable getObjectProperty(String name);
+	Saveable getObjectProperty(String name);
 
 	/**
 	 * Get the string property for name; returns null if
 	 * there is no name property for this code unit.
 	 * @param name the name of the property
 	 */
-	public String getStringProperty(String name);
+	String getStringProperty(String name);
 
 	/**
 	 * Get the int property for name.
@@ -142,13 +147,13 @@ public interface CodeUnit extends MemBuffer {
 	 * @throws NoValueException if there is not name property
 	 * for this code unit
 	 */
-	public int getIntProperty(String name) throws NoValueException;
+	int getIntProperty(String name) throws NoValueException;
 
 	/**
 	 * Returns true if the codeunit has the given property defined.
 	 * @param name the name of the property
 	 */
-	public boolean hasProperty(String name);
+	boolean hasProperty(String name);
 
 	/**
 	 * Returns whether this code unit is marked as having the
@@ -160,13 +165,13 @@ public interface CodeUnit extends MemBuffer {
 	/**
 	 * Get an iterator over the property names.
 	 */
-	public Iterator<String> propertyNames();
+	Iterator<String> propertyNames();
 
 	/**
 	 * Remove the property with the given name from this code unit.
 	 * @param name the name of the property
 	 */
-	public void removeProperty(String name);
+	void removeProperty(String name);
 
 	/**
 	 * Invokes the visit() method of the specified PropertyVisitor if the named
@@ -174,41 +179,41 @@ public interface CodeUnit extends MemBuffer {
 	 * @param visitor the class implementing the PropertyVisitor interface.
 	 * @param propertyName the name of the property to be visited.
 	 */
-	public void visitProperty(PropertyVisitor visitor, String propertyName);
+	void visitProperty(PropertyVisitor visitor, String propertyName);
 
 	/**
 	 * Get the label for this code unit.
 	 */
-	public String getLabel();
+	String getLabel();
 
 	/**
 	 * Get the Symbols for this code unit.
 	 * @throws ConcurrentModificationException if this object is no
 	 * longer valid.
 	 */
-	public Symbol[] getSymbols();
+	Symbol[] getSymbols();
 
 	/**
 	 * Get the Primary Symbol for this code unit.
 	 * @throws ConcurrentModificationException if this object is no
 	 * longer valid.
 	 */
-	public Symbol getPrimarySymbol();
+	Symbol getPrimarySymbol();
 
 	/**
 	 * Get the starting address for this code unit.
 	 */
-	public Address getMinAddress();
+	Address getMinAddress();
 
 	/**
 	 * Get the ending address for this code unit.
 	 */
-	public Address getMaxAddress();
+	Address getMaxAddress();
 
 	/**
 	 * Get the mnemonic for this code unit, e.g., MOV, JMP
 	 */
-	public String getMnemonicString();
+	String getMnemonicString();
 
 	/**
 	 * Get the comment for the given type
@@ -220,7 +225,7 @@ public interface CodeUnit extends MemBuffer {
 	 * @throws IllegalArgumentException if type is not one of the
 	 * three types of comments supported
 	 */
-	public String getComment(int commentType);
+	String getComment(int commentType);
 
 	/**
 	 * Get the comment for the given type and parse it into an array of strings
@@ -234,7 +239,7 @@ public interface CodeUnit extends MemBuffer {
 	 * @throws IllegalArgumentException if type is not one of the
 	 * three types of comments supported
 	 */
-	public String[] getCommentAsArray(int commentType);
+	String[] getCommentAsArray(int commentType);
 
 	/**
 	 * Set the comment for the given comment type.  Passing <code>null</code> clears the comment
@@ -246,7 +251,7 @@ public interface CodeUnit extends MemBuffer {
 	 * @throws IllegalArgumentException if type is not one of the
 	 * three types of comments supported
 	 */
-	public void setComment(int commentType, String comment);
+	void setComment(int commentType, String comment);
 
 	/**
 	 * Set the comment (with each line in its own string) for the given comment type
@@ -257,19 +262,19 @@ public interface CodeUnit extends MemBuffer {
 	 * @throws IllegalArgumentException if type is not one of the
 	 * three types of comments supported
 	 */
-	public void setCommentAsArray(int commentType, String[] comment);
+	void setCommentAsArray(int commentType, String[] comment);
 
 	/**
 	 * Return true if the given CodeUnit follows
 	 * directly after this code unit.
 	 * @param codeUnit the codeUnit being tested to see if it follows this codeUnit.
 	 */
-	public boolean isSuccessor(CodeUnit codeUnit);
+	boolean isSuccessor(CodeUnit codeUnit);
 
 	/**
 	 * Get length of this code unit.
 	 */
-	public int getLength();
+	int getLength();
 
 	/**
 	 * Get the bytes that make up this code unit.
@@ -277,7 +282,7 @@ public interface CodeUnit extends MemBuffer {
 	 * array length is the same as the codeUnits length
 	 * @throws MemoryAccessException if the full number of bytes could not be read.
 	 */
-	public byte[] getBytes() throws MemoryAccessException;
+	byte[] getBytes() throws MemoryAccessException;
 
 	/**
 	 * Copies max(buffer.length, code unit length) bytes into buffer starting at location offset in buffer.
@@ -285,13 +290,13 @@ public interface CodeUnit extends MemBuffer {
 	 * @param bufferOffset offset in byte array the copy will start
 	 * @throws MemoryAccessException if the full number of bytes could not be read.
 	 */
-	public void getBytesInCodeUnit(byte[] buffer, int bufferOffset) throws MemoryAccessException;
+	void getBytesInCodeUnit(byte[] buffer, int bufferOffset) throws MemoryAccessException;
 
 	/**
 	 * Returns true if address is contained in the range of this codeUnit
 	 * @param testAddr the address to test.
 	 */
-	public boolean contains(Address testAddr);
+	boolean contains(Address testAddr);
 
 	/**
 	   * Compares the given address to the address range of this node.
@@ -301,7 +306,7 @@ public interface CodeUnit extends MemBuffer {
 	   *         zero if addr is in the range
 	   *         a positive integer if addr is less than minimum range address
 	   */
-	public int compareTo(Address addr);
+	int compareTo(Address addr);
 
 	/**
 	 * Add a reference to the mnemonic for this code unit.
@@ -309,32 +314,32 @@ public interface CodeUnit extends MemBuffer {
 	 * @param refType the type of reference to add.
 	 * @param sourceType the source of this reference
 	*/
-	public void addMnemonicReference(Address refAddr, RefType refType, SourceType sourceType);
+	void addMnemonicReference(Address refAddr, RefType refType, SourceType sourceType);
 
 	/**
 	 * Remove a reference to the mnemonic for this code unit.
 	 * @param refAddr the address to remove as a reference.
 	 */
-	public void removeMnemonicReference(Address refAddr);
+	void removeMnemonicReference(Address refAddr);
 
 	/**
 	* Get references for the mnemonic for this code unit.
 	* @return an array of memory references. A zero length array will be 
 	* returned if there are no references for the mnemonic.
 	*/
-	public Reference[] getMnemonicReferences();
+	Reference[] getMnemonicReferences();
 
 	/**
 	 * Get the references for the operand index.
 	 * @param index operand index (0 is the first operand)
 	 */
-	public Reference[] getOperandReferences(int index);
+	Reference[] getOperandReferences(int index);
 
 	/**
 	 * Get the primary reference for the operand index.
 	 * @param index operand index (0 is the first operand)
 	 */
-	public Reference getPrimaryReference(int index);
+	Reference getPrimaryReference(int index);
 
 	/**
 	 * Add a memory reference to the operand at the given index.
@@ -343,7 +348,7 @@ public interface CodeUnit extends MemBuffer {
 	 * @param type the reference type to be added.
 	 * @param sourceType the source of this reference
 	 */
-	public void addOperandReference(int index, Address refAddr, RefType type,
+	void addOperandReference(int index, Address refAddr, RefType type,
 			SourceType sourceType);
 
 	/**
@@ -351,24 +356,24 @@ public interface CodeUnit extends MemBuffer {
 	 * @param index operand index
 	 * @param refAddr address referencing the operand
 	 */
-	public void removeOperandReference(int index, Address refAddr);
+	void removeOperandReference(int index, Address refAddr);
 
 	/**
 	 * Get ALL memory references FROM this code unit.
 	 * @return an array of memory references from this codeUnit or an empty array
 	 * if there are no references.
 	 */
-	public Reference[] getReferencesFrom();
+	Reference[] getReferencesFrom();
 
 	/**
 	 * Get an iterator over all references TO this code unit.
 	 */
-	public ReferenceIterator getReferenceIteratorTo();
+	ReferenceIterator getReferenceIteratorTo();
 
 	/**
 	 * Returns the program that generated this CodeUnit.
 	 */
-	public Program getProgram();
+	Program getProgram();
 
 	//////////////////////////////////////////////////////////////////////////
 	/**
@@ -376,13 +381,13 @@ public interface CodeUnit extends MemBuffer {
 	 * @param opIndex the operand index to look for external references
 	 * @return the external reference at the operand or null if none exists.
 	 */
-	public ExternalReference getExternalReference(int opIndex);
+	ExternalReference getExternalReference(int opIndex);
 
 	/**
 	 * Remove external reference (if any) at the given opIndex
 	 * opIndex the index of the operand from which to remove any external reference.
 	 */
-	public void removeExternalReference(int opIndex);
+	void removeExternalReference(int opIndex);
 
 	/**
 	 * Sets a memory reference to be the primary reference at its
@@ -390,7 +395,7 @@ public interface CodeUnit extends MemBuffer {
 	 * is used in the getOperandRepresentation() method.
 	 * @param ref the reference to be set as primary.
 	 */
-	public void setPrimaryMemoryReference(Reference ref);
+	void setPrimaryMemoryReference(Reference ref);
 
 	/**
 	 * Sets a stack reference at the <code>offset</code> on the
@@ -406,7 +411,7 @@ public interface CodeUnit extends MemBuffer {
 	 * @param sourceType   the source of this reference
 	 * @param refType      type of reference, RefType.READ,WRITE,PTR...
 	 */
-	public void setStackReference(int opIndex, int offset, SourceType sourceType, RefType refType);
+	void setStackReference(int opIndex, int offset, SourceType sourceType, RefType refType);
 
 	/**
 	 * Sets a register reference at the <code>offset</code> on the
@@ -422,13 +427,13 @@ public interface CodeUnit extends MemBuffer {
 	 * @param sourceType   the source of this reference
 	 * @param refType      type of reference, RefType.READ,WRITE,PTR...
 	 */
-	public void setRegisterReference(int opIndex, Register reg, SourceType sourceType,
+	void setRegisterReference(int opIndex, Register reg, SourceType sourceType,
 			RefType refType);
 
 	/**
 	 * Get the number of operands for this code unit.
 	 */
-	public int getNumOperands();
+	int getNumOperands();
 
 	/**
 	 * Get the Address for the given operand index if one exists.  Data
@@ -439,7 +444,7 @@ public interface CodeUnit extends MemBuffer {
 	 * as an address. Null is returned if no address or scalar exists on that 
 	 * operand.
 	 */
-	public Address getAddress(int opIndex);
+	Address getAddress(int opIndex);
 
 	/**
 	 * Returns the scalar at the given operand index.  Data objects have
@@ -448,6 +453,6 @@ public interface CodeUnit extends MemBuffer {
 	 * @return the scalar at the given operand index or null if no
 	 * scalar exists at that index.
 	 */
-	public Scalar getScalar(int opIndex);
+	Scalar getScalar(int opIndex);
 
 }

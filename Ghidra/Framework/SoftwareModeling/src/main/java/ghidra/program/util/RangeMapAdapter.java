@@ -15,7 +15,9 @@
  */
 package ghidra.program.util;
 
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressRange;
+import ghidra.program.model.address.AddressRangeIterator;
 import ghidra.program.model.lang.Register;
 import ghidra.util.datastruct.IndexRangeIterator;
 import ghidra.util.exception.CancelledException;
@@ -39,7 +41,7 @@ public interface RangeMapAdapter {
 	 * @param monitor the task monitor.
 	 * @throws CancelledException if the user canceled the operation via the task monitor.
 	 */
-	public void moveAddressRange(Address fromAddr, Address toAddr, long length, TaskMonitor monitor)
+	void moveAddressRange(Address fromAddr, Address toAddr, long length, TaskMonitor monitor)
 			throws CancelledException;
 
 	/**
@@ -101,12 +103,12 @@ public interface RangeMapAdapter {
 	 * @param addr the containing address
 	 * @return single value address-range containing addr
 	 */
-	public AddressRange getValueRangeContaining(Address addr);
+	AddressRange getValueRangeContaining(Address addr);
 
 	/**
 	 * Verify that adapter is in a writable state (i.e., valid transaction has been started).
 	 * @throws IllegalStateException if not in a writable state
 	 */
-	public void checkWritableState();
+	void checkWritableState();
 
 }

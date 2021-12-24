@@ -17,11 +17,21 @@ package ghidra.program.database.mem;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
-import db.*;
+import db.DBBuffer;
+import db.DBHandle;
+import db.DBRecord;
+import db.RecordIterator;
+import db.Table;
 import ghidra.program.database.map.AddressMap;
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressOverflowException;
+import ghidra.program.model.address.SegmentedAddress;
 import ghidra.program.model.mem.MemoryBlock;
 import ghidra.program.model.mem.MemoryBlockType;
 import ghidra.util.exception.VersionException;
@@ -90,7 +100,7 @@ class MemoryMapDBAdapterV0 extends MemoryMapDBAdapter {
 				", got " + versionNumber);
 		}
 		int recCount = table.getRecordCount();
-		blocks = new ArrayList<MemoryBlockDB>(recCount);
+		blocks = new ArrayList<>(recCount);
 
 		AddressFactory addrFactory = memMap.getAddressFactory();
 		int key = 0;

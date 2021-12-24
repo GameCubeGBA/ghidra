@@ -17,12 +17,17 @@ package ghidra.framework.options;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.util.Date;
 
 import javax.swing.KeyStroke;
 
-import org.jdom.*;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.XMLOutputter;
 
@@ -290,7 +295,7 @@ public enum OptionType {
 
 	static class FontStringAdapter extends StringAdapter {
 		private static final String[] STYLES =
-			new String[] { "PLAIN", "BOLD", "ITALIC", "BOLDITALIC" };
+			{ "PLAIN", "BOLD", "ITALIC", "BOLDITALIC" };
 
 		@Override
 		Object stringToObject(String string) {
@@ -303,7 +308,7 @@ public enum OptionType {
 			String fontName = font.getFamily();
 			int style = font.getStyle();
 			int size = font.getSize();
-			StringBuffer buf = new StringBuffer();
+			StringBuilder buf = new StringBuilder();
 			buf.append(fontName);
 			buf.append("-");
 			buf.append(STYLES[style]);

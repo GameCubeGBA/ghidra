@@ -16,11 +16,15 @@
  */
 package ghidra.framework.task.gui.taskview;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Rectangle;
+
+import javax.swing.BorderFactory;
+import javax.swing.JPanel;
+import javax.swing.Scrollable;
+
 import ghidra.util.layout.VerticalLayout;
-
-import java.awt.*;
-
-import javax.swing.*;
 
 // This component is basically a JPanel that implements the Scrollable interface needed for the 
 // TaskViewer.

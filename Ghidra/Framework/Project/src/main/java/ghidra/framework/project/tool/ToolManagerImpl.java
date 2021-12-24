@@ -17,14 +17,27 @@ package ghidra.framework.project.tool;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.jdom.Element;
 
 import docking.ComponentProvider;
 import ghidra.framework.main.AppInfo;
 import ghidra.framework.main.FrontEndTool;
-import ghidra.framework.model.*;
+import ghidra.framework.model.Project;
+import ghidra.framework.model.ToolChest;
+import ghidra.framework.model.ToolConnection;
+import ghidra.framework.model.ToolManager;
+import ghidra.framework.model.ToolServices;
+import ghidra.framework.model.ToolTemplate;
+import ghidra.framework.model.Workspace;
+import ghidra.framework.model.WorkspaceChangeListener;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.util.Msg;
 import ghidra.util.SystemUtilities;
@@ -157,9 +170,7 @@ public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
 		ArrayList<PluginTool> runningTools = new ArrayList<>(TYPICAL_NUM_TOOLS);
 		for (Workspace element : wsList) {
 			PluginTool[] tools = element.getTools();
-			for (PluginTool tool : tools) {
-				runningTools.add(tool);
-			}
+			Collections.addAll(runningTools, tools);
 		}
 
 		PluginTool[] tools = new PluginTool[runningTools.size()];
@@ -204,8 +215,7 @@ public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
 		wsMap.put(name, ws);
 
 		// notify listeners of added workspace
-		for (int i = 0; i < changeListeners.size(); i++) {
-			WorkspaceChangeListener listener = changeListeners.get(i);
+		for (WorkspaceChangeListener listener : changeListeners) {
 			listener.workspaceAdded(ws);
 		}
 
@@ -246,8 +256,7 @@ public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
 		wsMap.remove(wsName);
 
 		// notify listeners of removed workspace
-		for (int i = 0; i < changeListeners.size(); i++) {
-			WorkspaceChangeListener listener = changeListeners.get(i);
+		for (WorkspaceChangeListener listener : changeListeners) {
 			listener.workspaceRemoved(ws);
 		}
 
@@ -284,8 +293,8 @@ public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
 
 		Element root = new Element("TOOL_MANAGER");
 		root.setAttribute("ACTIVE_WORKSPACE", activeWorkspace.getName());
-		for (int i = 0; i < workspaces.size(); i++) {
-			WorkspaceImpl ws = (WorkspaceImpl) workspaces.get(i);
+		for (Workspace element : workspaces) {
+			WorkspaceImpl ws = (WorkspaceImpl) element;
 			root.addContent(ws.saveToXml());
 		}
 		Iterator<String> keys = connectMap.keySet().iterator();
@@ -377,8 +386,8 @@ public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
 	 * Close all running tools in the project.
 	 */
 	public void close() {
-		for (int i = 0; i < workspaces.size(); i++) {
-			WorkspaceImpl w = (WorkspaceImpl) workspaces.get(i);
+		for (Workspace element : workspaces) {
+			WorkspaceImpl w = (WorkspaceImpl) element;
 			w.close();
 		}
 	}
@@ -397,11 +406,8 @@ public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
 				if (tool.shouldSave()) {
 					toolServices.saveTool(tool);
 				}
-			}
-			else {
-				if (!saveToolSet(tools)) {
-					return false;
-				}
+			} else if (!saveToolSet(tools)) {
+				return false;
 			}
 		}
 
@@ -469,11 +475,11 @@ public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
 
 		String propertyName = evt.getPropertyName();
 
-		if (propertyName.equals(PluginTool.PLUGIN_COUNT_PROPERTY_NAME)) {
+		if (PluginTool.PLUGIN_COUNT_PROPERTY_NAME.equals(propertyName)) {
 			updateConnections(evt);
 		}
 
-		if (!propertyName.equals(PluginTool.TOOL_NAME_PROPERTY)) {
+		if (!PluginTool.TOOL_NAME_PROPERTY.equals(propertyName)) {
 			return;
 		}
 
@@ -559,8 +565,8 @@ public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
 	void closeTool(PluginTool tool) {
 
 		// find the workspace running the tool
-		for (int i = 0; i < workspaces.size(); i++) {
-			WorkspaceImpl ws = (WorkspaceImpl) workspaces.get(i);
+		for (Workspace element : workspaces) {
+			WorkspaceImpl ws = (WorkspaceImpl) element;
 			PluginTool[] tools = ws.getTools();
 			for (PluginTool tool2 : tools) {
 				if (tool == tool2) {
@@ -596,8 +602,7 @@ public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
 		activeWorkspace = workspace;
 
 		// notify listeners of new active workspace
-		for (int i = 0; i < changeListeners.size(); i++) {
-			WorkspaceChangeListener listener = changeListeners.get(i);
+		for (WorkspaceChangeListener listener : changeListeners) {
 			listener.workspaceSetActive(activeWorkspace);
 		}
 	}
@@ -644,8 +649,7 @@ public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
 		// fire property change event
 		PropertyChangeEvent event =
 			new PropertyChangeEvent(this, WORKSPACE_NAME_PROPERTY, ws.getName(), name);
-		for (int i = 0; i < changeListeners.size(); i++) {
-			WorkspaceChangeListener l = changeListeners.get(i);
+		for (WorkspaceChangeListener l : changeListeners) {
 			l.propertyChange(event);
 		}
 	}
@@ -668,8 +672,7 @@ public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
 		deregisterTool(tool.getToolName(), tool);
 		disconnectTool(tool);
 
-		for (int i = 0; i < changeListeners.size(); i++) {
-			WorkspaceChangeListener l = changeListeners.get(i);
+		for (WorkspaceChangeListener l : changeListeners) {
 			l.toolRemoved(ws, tool);
 		}
 	}
@@ -710,8 +713,7 @@ public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
 	}
 
 	void fireToolAddedEvent(Workspace ws, PluginTool tool) {
-		for (int i = 0; i < changeListeners.size(); i++) {
-			WorkspaceChangeListener l = changeListeners.get(i);
+		for (WorkspaceChangeListener l : changeListeners) {
 			l.toolAdded(ws, tool);
 		}
 	}
@@ -774,8 +776,7 @@ public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
 
 	private void firePropertyChangeEvent(PropertyChangeEvent ev) {
 		// notify listeners of tool change
-		for (int i = 0; i < changeListeners.size(); i++) {
-			WorkspaceChangeListener l = changeListeners.get(i);
+		for (WorkspaceChangeListener l : changeListeners) {
 			l.propertyChange(ev);
 		}
 	}
@@ -784,7 +785,7 @@ public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
 		if (!name.startsWith(DEFAULT_WORKSPACE_NAME)) {
 			return false;
 		}
-		if (name.equals(DEFAULT_WORKSPACE_NAME) || name.startsWith(DEFAULT_WORKSPACE_NAME + " (")) {
+		if (DEFAULT_WORKSPACE_NAME.equals(name) || name.startsWith(DEFAULT_WORKSPACE_NAME + " (")) {
 			return true;
 		}
 		return false;

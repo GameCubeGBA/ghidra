@@ -15,8 +15,17 @@
  */
 package ghidra.framework.project.tool;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.jdom.Document;
 import org.jdom.output.XMLOutputter;
@@ -26,7 +35,15 @@ import docking.widgets.filechooser.GhidraFileChooser;
 import ghidra.framework.ToolUtils;
 import ghidra.framework.data.ContentHandler;
 import ghidra.framework.data.DomainObjectAdapter;
-import ghidra.framework.model.*;
+import ghidra.framework.model.DefaultToolChangeListener;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.DomainObject;
+import ghidra.framework.model.ToolAssociationInfo;
+import ghidra.framework.model.ToolChest;
+import ghidra.framework.model.ToolChestChangeListener;
+import ghidra.framework.model.ToolServices;
+import ghidra.framework.model.ToolTemplate;
+import ghidra.framework.model.Workspace;
 import ghidra.framework.plugintool.PluginEvent;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.framework.preferences.Preferences;
@@ -479,7 +496,7 @@ class ToolServicesImpl implements ToolServices {
 	private PluginTool findToolUsingFile(PluginTool[] tools, DomainFile domainFile) {
 		PluginTool matchingTool = null;
 		for (int toolNum = 0; (toolNum < tools.length) && (matchingTool == null); toolNum++) {
-			PluginTool pTool = (PluginTool) tools[toolNum];
+			PluginTool pTool = tools[toolNum];
 			// Is this tool the same as the type we are in.
 			DomainFile[] df = pTool.getDomainFiles();
 			for (DomainFile element : df) {

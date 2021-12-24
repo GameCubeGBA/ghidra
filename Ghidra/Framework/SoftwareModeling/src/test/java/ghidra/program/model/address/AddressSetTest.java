@@ -15,11 +15,15 @@
  */
 package ghidra.program.model.address;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Iterator;
 
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
 
@@ -498,7 +502,7 @@ public class AddressSetTest extends AbstractGenericTest {
 		Assert.assertEquals(addr, iter.next());
 		assertTrue(!iter.hasNext());
 
-		int[] addrs = new int[] { 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 200, 201, 202,
+		int[] addrs = { 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 200, 201, 202,
 			203, 204, 205, 256, 257, 258 };
 		set = set(100, 109, 200, 205, 256, 258);
 		iter = set.getAddresses(true);
@@ -518,7 +522,7 @@ public class AddressSetTest extends AbstractGenericTest {
 	@Test
 	public void testAddressIteratorStartAddressContained() {
 
-		int[] addrs = new int[] { 0x202, 0x203, 0x204, 0x205, 0x256, 0x257, 0x258 };
+		int[] addrs = { 0x202, 0x203, 0x204, 0x205, 0x256, 0x257, 0x258 };
 		AddressSet set = set(0x100, 0x109, 0x200, 0x205, 0x256, 0x258);
 		AddressIterator iter = set.getAddresses(addr(0x202), true);
 		for (int addr : addrs) {
@@ -531,7 +535,7 @@ public class AddressSetTest extends AbstractGenericTest {
 	@Test
 	public void testAddressIteratorStartAddressContainedInOnlyRange() {
 
-		int[] addrs = new int[] { 0x108, 0x109 };
+		int[] addrs = { 0x108, 0x109 };
 		AddressSet set = set(0x100, 0x109);
 		AddressIterator iter = set.getAddresses(addr(0x108), true);
 		for (int addr : addrs) {
@@ -551,7 +555,7 @@ public class AddressSetTest extends AbstractGenericTest {
 	@Test
 	public void testAddressIteratorStartAddressNotContained() {
 
-		int[] addrs = new int[] { 0x200, 0x201, 0x202, 0x203, 0x204, 0x205, 0x256, 0x257, 0x258 };
+		int[] addrs = { 0x200, 0x201, 0x202, 0x203, 0x204, 0x205, 0x256, 0x257, 0x258 };
 		AddressSet set = set(0x100, 0x109, 0x200, 0x205, 0x256, 0x258);
 		AddressIterator iter = set.getAddresses(addr(0x150), true);
 		for (int addr : addrs) {
@@ -574,7 +578,7 @@ public class AddressSetTest extends AbstractGenericTest {
 		Assert.assertEquals(addr, iter.next());
 		assertTrue(!iter.hasNext());
 
-		int[] addrs = new int[] { 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 200, 201, 202,
+		int[] addrs = { 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 200, 201, 202,
 			203, 204, 205, 256, 257, 258 };
 		set = set(100, 109, 200, 205, 256, 258);
 		iter = set.getAddresses(false);
@@ -588,7 +592,7 @@ public class AddressSetTest extends AbstractGenericTest {
 	@Test
 	public void testBackwardsAddressIteratorStartAddressContained() {
 
-		int[] addrs = new int[] { 0x202, 0x201, 0x200, 0x104, 0x103, 0x102, 0x101, 0x100 };
+		int[] addrs = { 0x202, 0x201, 0x200, 0x104, 0x103, 0x102, 0x101, 0x100 };
 		AddressSet set = set(0x100, 0x104, 0x200, 0x205, 0x256, 0x258);
 		AddressIterator iter = set.getAddresses(addr(0x202), false);
 		for (int addr : addrs) {
@@ -601,7 +605,7 @@ public class AddressSetTest extends AbstractGenericTest {
 	@Test
 	public void testBackwardsAddressIteratorStartAddressNotContained() {
 
-		int[] addrs = new int[] { 0x104, 0x103, 0x102, 0x101, 0x100 };
+		int[] addrs = { 0x104, 0x103, 0x102, 0x101, 0x100 };
 		AddressSet set = set(0x100, 0x104, 0x200, 0x205, 0x256, 0x258);
 		AddressIterator iter = set.getAddresses(addr(0x150), false);
 		for (int addr : addrs) {

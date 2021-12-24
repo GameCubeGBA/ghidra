@@ -20,9 +20,10 @@
  */
 package ghidra.app.plugin.processors.sleigh.symbol;
 
-import ghidra.app.plugin.processors.sleigh.*;
-import ghidra.util.xml.*;
-import ghidra.xml.*;
+import ghidra.app.plugin.processors.sleigh.SleighLanguage;
+import ghidra.util.xml.SpecXmlUtils;
+import ghidra.xml.XmlElement;
+import ghidra.xml.XmlPullParser;
 
 /**
  * 

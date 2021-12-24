@@ -15,18 +15,38 @@
  */
 package ghidra.graph.viewer;
 
-import static ghidra.graph.viewer.GraphViewerUtils.*;
+import static ghidra.graph.viewer.GraphViewerUtils.getOffsetFromCenterInLayoutSpace;
+import static ghidra.graph.viewer.GraphViewerUtils.getVertexOffsetFromLayoutCenter;
+import static ghidra.graph.viewer.GraphViewerUtils.getVertexOffsetFromLayoutCenterTop;
+import static ghidra.graph.viewer.GraphViewerUtils.isScaledPastVertexInteractionThreshold;
+import static ghidra.graph.viewer.GraphViewerUtils.layoutUsesEdgeArticulations;
+import static ghidra.graph.viewer.GraphViewerUtils.translatePointFromViewSpaceToLayoutSpace;
 
-import java.awt.*;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Shape;
 import java.awt.geom.Point2D;
 import java.util.Collection;
 import java.util.Objects;
 
 import com.google.common.base.Function;
 
-import edu.uci.ics.jung.visualization.*;
+import edu.uci.ics.jung.visualization.Layer;
+import edu.uci.ics.jung.visualization.MultiLayerTransformer;
+import edu.uci.ics.jung.visualization.RenderContext;
+import edu.uci.ics.jung.visualization.VisualizationServer;
 import ghidra.graph.VisualGraph;
-import ghidra.graph.job.*;
+import ghidra.graph.job.AbstractAnimator;
+import ghidra.graph.job.EdgeHoverAnimator;
+import ghidra.graph.job.EnsureAreaVisibleAnimatorFunctionGraphJob;
+import ghidra.graph.job.FitGraphToViewJob;
+import ghidra.graph.job.GraphJob;
+import ghidra.graph.job.GraphJobRunner;
+import ghidra.graph.job.MoveVertexToCenterAnimatorFunctionGraphJob;
+import ghidra.graph.job.MoveVertexToCenterTopAnimatorFunctionGraphJob;
+import ghidra.graph.job.MoveViewToLayoutSpacePointAnimatorFunctionGraphJob;
+import ghidra.graph.job.MoveViewToViewSpacePointAnimatorFunctionGraphJob;
+import ghidra.graph.job.TwinkleVertexAnimator;
 import ghidra.graph.viewer.edge.routing.BasicEdgeRouter;
 import ghidra.util.Msg;
 import ghidra.util.datastruct.WeakDataStructureFactory;
@@ -383,20 +403,11 @@ public class VisualGraphViewUpdater<V extends VisualVertex, E extends VisualEdge
 	 * @return true if busy
 	 */
 	public boolean isBusy() {
-		if (edgeHoverAnimator != null) {
-			if (!edgeHoverAnimator.hasFinished()) {
-				return true;
-			}
+		if (((edgeHoverAnimator != null) && !edgeHoverAnimator.hasFinished()) || ((vertexTwinkleAnimator != null) && !vertexTwinkleAnimator.hasFinished())) {
+			return true;
 		}
 
-		if (vertexTwinkleAnimator != null) {
-			if (!vertexTwinkleAnimator.hasFinished()) {
-				return true;
-			}
-		}
-
-		boolean busy = jobRunner.isBusy();
-		return busy;
+		return jobRunner.isBusy();
 	}
 
 	/**
@@ -405,8 +416,7 @@ public class VisualGraphViewUpdater<V extends VisualVertex, E extends VisualEdge
 	 * @return true if busy
 	 */
 	public boolean isMutatingGraph() {
-		boolean busy = jobRunner.isBusy();
-		return busy;
+		return jobRunner.isBusy();
 	}
 
 //==================================================================================================

@@ -19,7 +19,10 @@ import java.io.IOException;
 
 import javax.help.UnsupportedOperationException;
 
-import db.*;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.RecordIterator;
 import ghidra.program.database.util.EmptyRecordIterator;
 
 /**

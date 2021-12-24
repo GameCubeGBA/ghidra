@@ -188,11 +188,7 @@ public abstract class AbstractSwingUpdateManager {
 	 */
 	public void flush() {
 		synchronized (this) {
-			if (disposed) {
-				return;
-			}
-
-			if (!hasPendingUpdates()) {
+			if (disposed || !hasPendingUpdates()) {
 				return;
 			}
 
@@ -361,7 +357,7 @@ public abstract class AbstractSwingUpdateManager {
 		Throwable t = ReflectionUtilities.createThrowableWithStackOlderThan(getClass());
 
 		StackTraceElement[] trace = t.getStackTrace();
-		String classInfo = trace[0].toString();
+		
 
 		/*
 		// debug source of creation
@@ -370,7 +366,7 @@ public abstract class AbstractSwingUpdateManager {
 		classInfo = classInfo + "\n\tfrom:\n\n" + string;
 		*/
 
-		return classInfo;
+		return trace[0].toString();
 	}
 
 }

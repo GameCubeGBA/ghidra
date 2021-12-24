@@ -15,13 +15,24 @@
  */
 package ghidra.graph.viewer;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
-import java.util.*;
+import java.util.Collections;
+import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;
 
-import javax.swing.*;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import docking.widgets.label.GDLabel;
 import edu.uci.ics.jung.visualization.RenderContext;
@@ -277,8 +288,7 @@ public class VisualGraphView<V extends VisualVertex,
 		try {
 			viewPanel.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
-			T t = s.get();
-			return t;
+			return s.get();
 		}
 		finally {
 			viewPanel.setCursor(originalCursor);
@@ -508,8 +518,7 @@ public class VisualGraphView<V extends VisualVertex,
 			return null;
 		}
 		GraphViewer<V, E> viewer = getPrimaryGraphViewer();
-		VisualGraphViewUpdater<V, E> updater = viewer.getViewUpdater();
-		return updater;
+		return viewer.getViewUpdater();
 	}
 
 	public Point getVertexPointInViewSpace(V v) {

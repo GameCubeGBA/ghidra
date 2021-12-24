@@ -24,7 +24,9 @@ import ghidra.framework.store.db.PackedDBHandle;
 import ghidra.framework.store.db.PackedDatabase;
 import ghidra.util.InvalidNameException;
 import ghidra.util.UniversalID;
-import ghidra.util.exception.*;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.DuplicateFileException;
+import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.task.TaskMonitor;
 
 /**
@@ -205,9 +207,7 @@ public class FileDataTypeManager extends StandAloneDataTypeManager
 		try {
 			root.setName(newName);
 		}
-		catch (DuplicateNameException e) {
-		}
-		catch (InvalidNameException e) {
+		catch (DuplicateNameException | InvalidNameException e) {
 		}
 	}
 

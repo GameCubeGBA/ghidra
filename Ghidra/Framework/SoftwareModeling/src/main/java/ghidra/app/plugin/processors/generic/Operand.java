@@ -15,12 +15,12 @@
  */
 package ghidra.app.plugin.processors.generic;
 
-import ghidra.program.model.mem.MemBuffer;
-import ghidra.program.model.pcode.PcodeOp;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Hashtable;
+
+import ghidra.program.model.mem.MemBuffer;
+import ghidra.program.model.pcode.PcodeOp;
 
 /**
  * 
@@ -113,7 +113,7 @@ public class Operand implements Serializable {
 
 	public PcodeOp[] getPcode(Position position) throws Exception {
 		
-		ArrayList<PcodeOp> pcode = new ArrayList<PcodeOp>();
+		ArrayList<PcodeOp> pcode = new ArrayList<>();
 		getHandle(pcode,position,0);
 		PcodeOp[] pcodeops = new PcodeOp[pcode.size()];
 		pcode.toArray(pcodeops);

@@ -17,7 +17,13 @@ package ghidra.program.util;
 
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSpace;
-import ghidra.program.model.lang.*;
+import ghidra.program.model.lang.CompilerSpec;
+import ghidra.program.model.lang.CompilerSpecID;
+import ghidra.program.model.lang.CompilerSpecNotFoundException;
+import ghidra.program.model.lang.Language;
+import ghidra.program.model.lang.LanguageID;
+import ghidra.program.model.lang.Register;
+import ghidra.program.model.lang.RegisterValue;
 import ghidra.program.model.listing.Program;
 import ghidra.util.classfinder.ExtensionPoint;
 import ghidra.util.exception.CancelledException;
@@ -41,46 +47,46 @@ public interface LanguageTranslator extends ExtensionPoint {
 	 * translator.
 	 * @return true if translator successfully validated
 	 */
-	public boolean isValid();
+	boolean isValid();
 	
 	/**
 	 * Returns old language
 	 * @throws IllegalStateException if instance has not been validated
 	 * @see #isValid()
 	 */
-	public Language getOldLanguage();
+	Language getOldLanguage();
 
 	/**
 	 * Returns new language
 	 */
-	public Language getNewLanguage();
+	Language getNewLanguage();
 	
 	/**
 	 * Returns old language name
 	 */
-	public LanguageID getOldLanguageID();
+	LanguageID getOldLanguageID();
 	
 	/**
 	 * Returns new language name
 	 */
-	public LanguageID getNewLanguageID();
+	LanguageID getNewLanguageID();
 	
 	/**
 	 * Returns old language version
 	 */
-	public int getOldVersion();
+	int getOldVersion();
 	
 	/**
 	 * Returns new language version
 	 */
-	public int getNewVersion();
+	int getNewVersion();
 	
 	/**
 	 * Translate BASE address spaces (Overlay spaces are not handled)
 	 * @param oldSpaceName old space name
 	 * @return corresponding address space in new language
 	 */
-	public AddressSpace getNewAddressSpace(String oldSpaceName);
+	AddressSpace getNewAddressSpace(String oldSpaceName);
 
 	/**
 	 * Get the old register at the specified oldAddr.  This will null if the specified
@@ -91,31 +97,31 @@ public interface LanguageTranslator extends ExtensionPoint {
 	 * @return old register or null if suitable register can not be found.
 	 * @see #getOldRegisterContaining(Address) 
 	 */
-	public Register getOldRegister(Address oldAddr, int size);
+	Register getOldRegister(Address oldAddr, int size);
 	
 	/**
 	 * Get the largest old register which contains the specified oldAddr
 	 * @param oldAddr old register address which may be offcut
 	 * @return old register or null if suitable register can not be found.
 	 */
-	public Register getOldRegisterContaining(Address oldAddr);
+	Register getOldRegisterContaining(Address oldAddr);
 
 	/**
 	 * Returns the old processor context register or null if not defined
 	 */
-	public Register getOldContextRegister();
+	Register getOldContextRegister();
 	
 	/**
 	 * Find new register which corresponds to the specified old register.
 	 * @param oldReg old register
 	 * @return new register or null if corresponding register not found.
 	 */
-	public Register getNewRegister(Register oldReg);
+	Register getNewRegister(Register oldReg);
 	
 	/**
 	 * Returns the new processor context register or null if not defined
 	 */
-	public Register getNewContextRegister();
+	Register getNewContextRegister();
 
 	/**
 	 * Get the translated register value
@@ -123,7 +129,7 @@ public interface LanguageTranslator extends ExtensionPoint {
 	 * @return new register value or null if register not mapped
 	 * @see #isValueTranslationRequired(Register)
 	 */
-	public RegisterValue getNewRegisterValue(RegisterValue oldValue);
+	RegisterValue getNewRegisterValue(RegisterValue oldValue);
 
 	/**
 	 * Returns true if register value translation required for 
@@ -131,14 +137,14 @@ public interface LanguageTranslator extends ExtensionPoint {
 	 * @param oldReg
 	 * @see #getNewRegisterValue(RegisterValue)
 	 */
-	public boolean isValueTranslationRequired(Register oldReg);
+	boolean isValueTranslationRequired(Register oldReg);
 
 	/**
 	 * Obtain the new compiler specification ID given the old compiler spec ID.
 	 * @param oldCompilerSpecID old compiler spec ID.
 	 * @return new compiler spec ID.
 	 */
-	public CompilerSpecID getNewCompilerSpecID(CompilerSpecID oldCompilerSpecID);
+	CompilerSpecID getNewCompilerSpecID(CompilerSpecID oldCompilerSpecID);
 
 	/**
 	 * Get a compiler spec suitable for use with the old language.  The compiler 
@@ -150,7 +156,7 @@ public interface LanguageTranslator extends ExtensionPoint {
 	 * @throws CompilerSpecNotFoundException if new compiler spec not found based upon 
 	 * translator mappings.
 	 */
-	public CompilerSpec getOldCompilerSpec(CompilerSpecID oldCompilerSpecID) throws CompilerSpecNotFoundException;
+	CompilerSpec getOldCompilerSpec(CompilerSpecID oldCompilerSpecID) throws CompilerSpecNotFoundException;
 
 	/**
 	 * Invoked after Program language upgrade has completed.  
@@ -170,6 +176,6 @@ public interface LanguageTranslator extends ExtensionPoint {
 	 * @throws Exception if a bad exception occurs with the post upgrade fixup
 	 * @throws CancelledException if upgrade cancelled
 	 */
-	public void fixupInstructions(Program program, Language oldLanguage, TaskMonitor monitor)
+	void fixupInstructions(Program program, Language oldLanguage, TaskMonitor monitor)
 			throws Exception, CancelledException;
 }

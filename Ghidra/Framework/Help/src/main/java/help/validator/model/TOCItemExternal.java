@@ -16,9 +16,9 @@
  */
 package help.validator.model;
 
-import help.validator.LinkDatabase;
-
 import java.nio.file.Path;
+
+import help.validator.LinkDatabase;
 
 public class TOCItemExternal extends TOCItem {
 

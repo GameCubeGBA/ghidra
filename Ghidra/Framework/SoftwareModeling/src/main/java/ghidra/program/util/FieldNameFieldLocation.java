@@ -17,6 +17,8 @@
 
 package ghidra.program.util;
 
+import java.util.Objects;
+
 import ghidra.framework.options.SaveState;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
@@ -65,25 +67,19 @@ public class FieldNameFieldLocation extends CodeUnitLocation {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((fieldName == null) ? 0 : fieldName.hashCode());
-		return result;
+		return prime * result + ((fieldName == null) ? 0 : fieldName.hashCode());
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
+		if (!super.equals(obj) || (getClass() != obj.getClass()))
 			return false;
 		FieldNameFieldLocation other = (FieldNameFieldLocation) obj;
-		if (fieldName == null) {
-			if (other.fieldName != null)
-				return false;
-		}
-		else if (!fieldName.equals(other.fieldName))
+		if (!Objects.equals(fieldName, other.fieldName)) {
 			return false;
+		}
 		return true;
 	}
 

@@ -191,8 +191,7 @@ public class GMouseListenerAdapter extends MouseAdapter {
 			return false;
 		}
 
-		boolean isLeft = currentButton == LEFT;
-		return isLeft;
+		return currentButton == LEFT;
 	}
 
 	private void reset() {

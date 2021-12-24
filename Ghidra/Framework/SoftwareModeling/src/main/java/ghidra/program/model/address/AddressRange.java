@@ -33,18 +33,18 @@ public interface AddressRange extends Comparable<AddressRange>, Iterable<Address
 	/**
 	 * Returns the number of addresses in the range.
 	 */
-	public long getLength();
+	long getLength();
 
 	/**
 	 * Returns the number of addresses as a BigInteger.
 	 * @return the number of addresses as a BigInteger.
 	 */
-	public BigInteger getBigLength();
+	BigInteger getBigLength();
 
 	/**
 	 * Returns true if the given address is contained in the range.
 	 */
-	public boolean contains(Address addr);
+	boolean contains(Address addr);
 
 	/**
 	 * Computes the intersection of this range with another.
@@ -52,7 +52,7 @@ public interface AddressRange extends Comparable<AddressRange>, Iterable<Address
 	 * @return AddressRange the intersection or null if the ranges
 	 * do not intersect.
 	 */
-	public AddressRange intersect(AddressRange range);
+	AddressRange intersect(AddressRange range);
 
 	/**
 	 * Computes the intersection of this range with another.
@@ -61,20 +61,20 @@ public interface AddressRange extends Comparable<AddressRange>, Iterable<Address
 	 * @return AddressRange the intersection or null if the ranges
 	 * do not intersect.
 	 */
-	public AddressRange intersectRange(Address start, Address end);
+	AddressRange intersectRange(Address start, Address end);
 
 	/**
 	 * Returns true if the given range intersects this range.
 	 * @param range the range to test for intersection with.
 	 */
-	public boolean intersects(AddressRange range);
+	boolean intersects(AddressRange range);
 
 	/**
 	 * Returns true if the given range intersects this range.
 	 * @param start the first address in the range to test for intersection.
 	 * @param end the last address in the range to test for intersection.
 	 */
-	public boolean intersects(Address start, Address end);
+	boolean intersects(Address start, Address end);
 
 	/**
 	 * Compares the given address to this address range.
@@ -84,21 +84,21 @@ public interface AddressRange extends Comparable<AddressRange>, Iterable<Address
 	 *         zero if the address is in the range, and
 	 *         a positive integer if the address is less than minimum range address.
 	 */
-	public int compareTo(Address addr);
+	int compareTo(Address addr);
 
 	/**
 	 * @return the maximum address in the range.
 	 */
-	public Address getMaxAddress();
+	Address getMaxAddress();
 
 	/**
 	 * @return the minimum address in the range.
 	 */
-	public Address getMinAddress();
+	Address getMinAddress();
 
 	/**
 	 * @return address space this range resides within
 	 */
-	public AddressSpace getAddressSpace();
+	AddressSpace getAddressSpace();
 
 }

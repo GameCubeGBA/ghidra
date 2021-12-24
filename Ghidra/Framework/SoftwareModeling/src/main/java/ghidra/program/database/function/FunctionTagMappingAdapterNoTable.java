@@ -17,7 +17,9 @@ package ghidra.program.database.function;
 
 import java.io.IOException;
 
-import db.*;
+import db.DBHandle;
+import db.DBRecord;
+import db.RecordIterator;
 import ghidra.program.database.util.EmptyRecordIterator;
 
 /**

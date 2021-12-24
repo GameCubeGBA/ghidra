@@ -19,7 +19,11 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressIterator;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.address.GenericAddressSpace;
 
 /**
  * 

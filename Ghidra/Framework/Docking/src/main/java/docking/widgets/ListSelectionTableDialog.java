@@ -17,15 +17,25 @@ package docking.widgets;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.event.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 
 import docking.DialogComponentProvider;
 import docking.DockingWindowManager;
-import docking.widgets.table.*;
+import docking.widgets.table.AbstractGTableModel;
+import docking.widgets.table.GTable;
+import docking.widgets.table.GTableFilterPanel;
+import docking.widgets.table.RowObjectTableModel;
 
 public class ListSelectionTableDialog<T> extends DialogComponentProvider {
 

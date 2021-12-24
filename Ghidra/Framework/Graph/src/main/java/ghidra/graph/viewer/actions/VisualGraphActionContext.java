@@ -26,7 +26,7 @@ public interface VisualGraphActionContext {
 	 * Returns true actions that manipulate the satellite viewer should be enabled for this context
 	 * @return true actions that manipulate the satellite viewer should be enabled for this context
 	 */
-	public default boolean shouldShowSatelliteActions() {
+	default boolean shouldShowSatelliteActions() {
 		// these actions should be available generically; subclasses may override to return false
 		return true;
 	}

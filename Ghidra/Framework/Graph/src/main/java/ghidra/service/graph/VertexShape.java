@@ -17,8 +17,16 @@ package ghidra.service.graph;
 
 import java.awt.Rectangle;
 import java.awt.Shape;
-import java.awt.geom.*;
-import java.util.*;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Path2D;
+import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * Class for defining shapes to use for rendering vertices in a graph
@@ -123,7 +131,7 @@ public abstract class VertexShape {
 	 * @return a list of names for all the supported {@link VertexShape}s
 	 */
 	public static List<String> getShapeNames() {
-		ArrayList<String> list = new ArrayList<String>(registeredShapes.keySet());
+		ArrayList<String> list = new ArrayList<>(registeredShapes.keySet());
 		Collections.sort(list);
 		return list;
 	}
@@ -138,10 +146,7 @@ public abstract class VertexShape {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
 		}
 		VertexShape other = (VertexShape) obj;
@@ -156,6 +161,7 @@ public abstract class VertexShape {
 			super("Rectangle", size);
 		}
 
+		@Override
 		protected Shape createShape() {
 			return new Rectangle2D.Double(-1.0, -1.0, 2.0, 2.0);
 		}
@@ -167,6 +173,7 @@ public abstract class VertexShape {
 			super("Ellipse", size);
 		}
 
+		@Override
 		protected Shape createShape() {
 			return new Ellipse2D.Double(-1.0, -1.0, 2.0, 2.0);
 		}
@@ -183,6 +190,7 @@ public abstract class VertexShape {
 			super("Triangle Up", size);
 		}
 
+		@Override
 		protected Shape createShape() {
 			Path2D path = new Path2D.Double();
 			path.moveTo(-1.0, 1.0);
@@ -208,6 +216,7 @@ public abstract class VertexShape {
 			super("Triangle Down", size);
 		}
 
+		@Override
 		protected Shape createShape() {
 			Path2D path = new Path2D.Double();
 			path.moveTo(-1.0, -1.0);
@@ -234,6 +243,7 @@ public abstract class VertexShape {
 			super("Star", size);
 		}
 
+		@Override
 		protected Shape createShape() {
 			int numPoints = 7;
 			Path2D path = new Path2D.Double();
@@ -263,6 +273,7 @@ public abstract class VertexShape {
 			super("Diamond", size);
 		}
 
+		@Override
 		protected Shape createShape() {
 			Path2D path = new Path2D.Double();
 			path.moveTo(0.0, -1.0);
@@ -290,6 +301,7 @@ public abstract class VertexShape {
 			this.startAngle = startAngle;
 		}
 
+		@Override
 		protected Shape createShape() {
 			Path2D path = new Path2D.Double();
 

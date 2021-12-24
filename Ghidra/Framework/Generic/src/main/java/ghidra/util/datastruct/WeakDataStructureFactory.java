@@ -26,7 +26,7 @@ public class WeakDataStructureFactory {
 	 * @return a new WeakSet
 	 */
 	public static <T> WeakSet<T> createSingleThreadAccessWeakSet() {
-		return new ThreadUnsafeWeakSet<T>();
+		return new ThreadUnsafeWeakSet<>();
 	}
 
 	/**
@@ -36,7 +36,7 @@ public class WeakDataStructureFactory {
 	 * @see CopyOnReadWeakSet
 	 */
 	public static <T> WeakSet<T> createCopyOnReadWeakSet() {
-		return new CopyOnReadWeakSet<T>();
+		return new CopyOnReadWeakSet<>();
 	}
 
 	/**
@@ -46,6 +46,6 @@ public class WeakDataStructureFactory {
 	 * @see CopyOnWriteWeakSet
 	 */
 	public static <T> WeakSet<T> createCopyOnWriteWeakSet() {
-		return new CopyOnWriteWeakSet<T>();
+		return new CopyOnWriteWeakSet<>();
 	}
 }

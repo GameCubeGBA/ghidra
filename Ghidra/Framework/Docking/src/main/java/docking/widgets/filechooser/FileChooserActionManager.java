@@ -104,7 +104,7 @@ class FileChooserActionManager {
 					(GhidraFileChooserDirectoryModelIf) contextObject;
 
 				File file = model.getSelectedFile();
-				return file != null && file instanceof RecentGhidraFile;
+				return file instanceof RecentGhidraFile;
 			}
 		};
 

@@ -57,6 +57,7 @@ public class QueryRecordIterator implements RecordIterator {
 	/** 
 	 * @see db.RecordIterator#hasNext()
 	 */
+	@Override
 	public boolean hasNext() throws IOException {
 		if (record == null) {
 			if (forward) {
@@ -72,6 +73,7 @@ public class QueryRecordIterator implements RecordIterator {
 	/**
 	 * @see db.RecordIterator#next()
 	 */
+	@Override
 	public DBRecord next() throws IOException {
 		if (hasNext()) {
 			DBRecord rec = record;
@@ -84,6 +86,7 @@ public class QueryRecordIterator implements RecordIterator {
 	/**
 	 * @see db.RecordIterator#hasPrevious()
 	 */
+	@Override
 	public boolean hasPrevious() throws IOException {
 		if (record == null) {
 			findPrevious();
@@ -94,6 +97,7 @@ public class QueryRecordIterator implements RecordIterator {
 	/**
 	 * @see db.RecordIterator#previous()
 	 */
+	@Override
 	public DBRecord previous() throws IOException {
 		if (hasPrevious()) {
 			DBRecord rec = record;
@@ -106,6 +110,7 @@ public class QueryRecordIterator implements RecordIterator {
 	/**
 	 * @see db.RecordIterator#delete()
 	 */
+	@Override
 	public boolean delete() throws IOException {
 		return iter.delete();
 	}

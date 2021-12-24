@@ -106,8 +106,7 @@ public class UserSearchUtils {
 			options |= Pattern.CASE_INSENSITIVE;
 		}
 
-		Pattern p = createPattern(input, true, options);
-		return p;
+		return createPattern(input, true, options);
 	}
 
 	/**
@@ -126,8 +125,7 @@ public class UserSearchUtils {
 	 *             if the input could be compiled
 	 */
 	public static Pattern createLiteralSearchPattern(String text) {
-		Pattern p = createPattern(text, false, CASE_SENSITIVE);
-		return p;
+		return createPattern(text, false, CASE_SENSITIVE);
 	}
 
 	/**
@@ -160,8 +158,7 @@ public class UserSearchUtils {
 		}
 
 		String converted = convertUserInputToRegex(input, allowGlobbing);
-		Pattern p = Pattern.compile(converted + ".*", options);
-		return p;
+		return Pattern.compile(converted + ".*", options);
 	}
 
 	/**
@@ -193,8 +190,7 @@ public class UserSearchUtils {
 		}
 
 		String converted = convertUserInputToRegex(input, allowGlobbing);
-		Pattern p = Pattern.compile(".*" + converted, options);
-		return p;
+		return Pattern.compile(".*" + converted, options);
 	}
 
 	/**
@@ -222,8 +218,7 @@ public class UserSearchUtils {
 		}
 
 		String converted = convertUserInputToRegex(input, allowGlobbing);
-		Pattern p = Pattern.compile(".*" + converted + ".*", options);
-		return p;
+		return Pattern.compile(".*" + converted + ".*", options);
 	}
 
 	/**
@@ -253,8 +248,7 @@ public class UserSearchUtils {
 		}
 
 		String converted = convertUserInputToRegex(input, allowGlobbing);
-		Pattern p = Pattern.compile(converted, options);
-		return p;
+		return Pattern.compile(converted, options);
 	}
 
 	/**
@@ -280,14 +274,13 @@ public class UserSearchUtils {
 			return wildCardPatternString;
 		}
 
-		String converted = convertUserInputToRegex(input, allowGlobbing);
-		return converted;
+		return convertUserInputToRegex(input, allowGlobbing);
 	}
 
 	private static Pattern createSingleStarPattern(String input, boolean allowGlobbing,
 			int options) {
 
-		if (allowGlobbing && input.equals(STAR)) {
+		if (allowGlobbing && STAR.equals(input)) {
 			return Pattern.compile(".+", options);
 		}
 		return null;
@@ -295,7 +288,7 @@ public class UserSearchUtils {
 
 	private static String createSingleStarPatternString(String input, boolean allowGlobbing) {
 
-		if (allowGlobbing && input.equals(STAR)) {
+		if (allowGlobbing && STAR.equals(input)) {
 			return ".+";
 		}
 		return null;
@@ -342,10 +335,7 @@ public class UserSearchUtils {
 		// replace all unescaped '*' chars
 		Matcher starMatcher = STAR_PATTERN.matcher(questionReplaced);
 
-		// *? is a Reluctant Quantifier, matching zero or more.  '*' is the quantifier, '?' makes
-		// it reluctant
-		String starReplaced = starMatcher.replaceAll(".*?");
-		return starReplaced;
+		return starMatcher.replaceAll(".*?");
 	}
 
 	/**
@@ -387,7 +377,7 @@ public class UserSearchUtils {
 	 */
 	// note: 'package' for testing
 	static String escapeSomeRegexCharacters(String input, char[] doNotEscape) {
-		StringBuffer buffy = new StringBuffer();
+		StringBuilder buffy = new StringBuilder();
 		for (int i = 0; i < input.length(); i++) {
 			char c = input.charAt(i);
 

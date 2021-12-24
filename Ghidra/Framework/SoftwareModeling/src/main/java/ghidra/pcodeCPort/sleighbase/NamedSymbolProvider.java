@@ -19,5 +19,5 @@ package ghidra.pcodeCPort.sleighbase;
 import ghidra.pcodeCPort.slghsymbol.SleighSymbol;
 
 public interface NamedSymbolProvider {
-    public SleighSymbol findSymbol(String nm);
+    SleighSymbol findSymbol(String nm);
 }

@@ -16,7 +16,10 @@
 package docking.widgets.tree;
 
 import java.awt.Rectangle;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.List;
 
 import javax.swing.JTree;
 import javax.swing.tree.TreePath;
@@ -141,8 +144,7 @@ public class GTreeState {
 	 * @return the top few paths that are visible in the view.
 	 */
 	public TreePath[] getViewPaths() {
-		TreePath[] arrrr = viewPaths.toArray(new TreePath[viewPaths.size()]);
-		return arrrr;
+		return viewPaths.toArray(new TreePath[viewPaths.size()]);
 	}
 
 	public void updateStateForMovedNodes() {
@@ -235,7 +237,7 @@ public class GTreeState {
 	}
 
 	private String getPaths(List<TreePath> paths) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		for (TreePath treePath : paths) {
 			buffer.append(treePath);
 		}

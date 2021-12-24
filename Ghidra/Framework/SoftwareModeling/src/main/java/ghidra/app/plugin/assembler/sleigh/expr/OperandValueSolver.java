@@ -15,9 +15,14 @@
  */
 package ghidra.app.plugin.assembler.sleigh.expr;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-import ghidra.app.plugin.assembler.sleigh.sem.*;
+import ghidra.app.plugin.assembler.sleigh.sem.AssemblyResolution;
+import ghidra.app.plugin.assembler.sleigh.sem.AssemblyResolvedConstructor;
+import ghidra.app.plugin.assembler.sleigh.sem.AssemblyResolvedError;
+import ghidra.app.plugin.assembler.sleigh.sem.AssemblyTreeResolver;
 import ghidra.app.plugin.processors.sleigh.Constructor;
 import ghidra.app.plugin.processors.sleigh.expression.OperandValue;
 import ghidra.app.plugin.processors.sleigh.expression.PatternExpression;
@@ -53,8 +58,7 @@ public class OperandValueSolver extends AbstractExpressionSolver<OperandValue> {
 		if (defSym == null) {
 			return null;
 		}
-		patexp = defSym.getPatternExpression();
-		return patexp;
+		return defSym.getPatternExpression();
 	}
 
 	@Override
@@ -96,8 +100,7 @@ public class OperandValueSolver extends AbstractExpressionSolver<OperandValue> {
 		}
 		int shamt = AssemblyTreeResolver.computeOffset(sym, cons, res);
 		cur = cur == null ? null : cur.truncate(shamt);
-		MaskedLong result = solver.getValue(patexp, vals, res, cur);
-		return result;
+		return solver.getValue(patexp, vals, res, cur);
 	}
 
 	@Override

@@ -15,11 +15,13 @@
  */
 package ghidra.pcode.emulate;
 
+import java.math.BigInteger;
+
 import ghidra.pcode.memstate.MemoryState;
 import ghidra.program.model.address.Address;
-import ghidra.program.model.mem.*;
-
-import java.math.BigInteger;
+import ghidra.program.model.mem.MemBuffer;
+import ghidra.program.model.mem.Memory;
+import ghidra.program.model.mem.MemoryAccessException;
 
 /**
  * <code>MemoryStateBuffer</code> provides a MemBuffer for instruction parsing use

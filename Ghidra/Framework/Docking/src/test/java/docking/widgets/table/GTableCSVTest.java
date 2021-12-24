@@ -15,11 +15,13 @@
  */
 package docking.widgets.table;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -89,21 +91,21 @@ public class GTableCSVTest {
 			String line = lines[i];
 			String[] columns = line.split("(?<!\\\\),");
 
-			String name = columns[0].replaceAll("\\\\,", ",");
-			name = name.replaceAll("\\\\\"", "\"");
+			String name = columns[0].replace("\\,", ",");
+			name = name.replace("\\\"", "\"");
 			assertEquals("\"" + row.getName() + "\"", name);
 
-			String description = columns[1].replaceAll("\\\\,", ",");
-			description = description.replaceAll("\\\\\"", "\"");
+			String description = columns[1].replace("\\,", ",");
+			description = description.replace("\\\"", "\"");
 			assertEquals("\"" + row.getDescription() + "\"", description);
 
-			String number = columns[2].replaceAll("\\\\,", ",");
-			number = number.replaceAll("\\\\\"", "\"");
+			String number = columns[2].replace("\\,", ",");
+			number = number.replace("\\\"", "\"");
 			assertEquals("\"" + row.getNumber() + "\"", number);
 		}
 	}
 
-	class CSVRowObject {
+	static class CSVRowObject {
 
 		private String name;
 		private String description;

@@ -29,11 +29,11 @@ public interface TOCItemProvider {
 	 * Returns all external TOC items referenced by this provider
 	 * @return the items
 	 */
-	public Map<String, TOCItemExternal> getExternalTocItemsById();
+	Map<String, TOCItemExternal> getExternalTocItemsById();
 
 	/**
 	 * Returns all TOC items defined by this provider
 	 * @return the items
 	 */
-	public Map<String, TOCItemDefinition> getTocDefinitionsByID();
+	Map<String, TOCItemDefinition> getTocDefinitionsByID();
 }

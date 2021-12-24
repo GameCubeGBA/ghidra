@@ -19,7 +19,10 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
-import db.*;
+import db.DBFieldIterator;
+import db.DBRecord;
+import db.Field;
+import db.Table;
 import ghidra.program.database.util.RecordFilter;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.KeyRange;

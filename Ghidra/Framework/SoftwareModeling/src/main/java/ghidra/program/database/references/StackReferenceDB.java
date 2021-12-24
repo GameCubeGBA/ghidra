@@ -18,7 +18,9 @@ package ghidra.program.database.references;
 
 import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.RefType;
+import ghidra.program.model.symbol.SourceType;
+import ghidra.program.model.symbol.StackReference;
 
 class StackReferenceDB extends MemReferenceDB implements StackReference {
 
@@ -30,6 +32,7 @@ class StackReferenceDB extends MemReferenceDB implements StackReference {
 	/**
 	 * @see ghidra.program.model.symbol.StackReference#getStackOffset()
 	 */
+	@Override
 	public int getStackOffset() {
 		return (int) toAddr.getOffset();
 	}

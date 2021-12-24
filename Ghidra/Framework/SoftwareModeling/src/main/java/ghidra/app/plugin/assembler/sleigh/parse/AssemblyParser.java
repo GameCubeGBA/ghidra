@@ -16,17 +16,31 @@
 package ghidra.app.plugin.assembler.sleigh.parse;
 
 import java.io.PrintStream;
-import java.util.*;
-import java.util.function.Consumer;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.apache.commons.collections4.map.LazyMap;
 import org.apache.commons.lang3.StringUtils;
 
-import ghidra.app.plugin.assembler.sleigh.grammars.*;
-import ghidra.app.plugin.assembler.sleigh.symbol.*;
+import ghidra.app.plugin.assembler.sleigh.grammars.AssemblyExtendedGrammar;
+import ghidra.app.plugin.assembler.sleigh.grammars.AssemblyExtendedProduction;
+import ghidra.app.plugin.assembler.sleigh.grammars.AssemblyGrammar;
+import ghidra.app.plugin.assembler.sleigh.grammars.AssemblyProduction;
+import ghidra.app.plugin.assembler.sleigh.grammars.AssemblySentential;
+import ghidra.app.plugin.assembler.sleigh.symbol.AssemblyEOI;
+import ghidra.app.plugin.assembler.sleigh.symbol.AssemblyExtendedNonTerminal;
+import ghidra.app.plugin.assembler.sleigh.symbol.AssemblyNonTerminal;
+import ghidra.app.plugin.assembler.sleigh.symbol.AssemblySymbol;
+import ghidra.app.plugin.assembler.sleigh.symbol.AssemblyTerminal;
 import ghidra.app.plugin.assembler.sleigh.util.DbgTimer;
 import ghidra.app.plugin.assembler.sleigh.util.DbgTimer.DbgCtx;
-import ghidra.app.plugin.assembler.sleigh.util.TableEntry;
 
 /**
  * A class to encapsulate LALR(1) parsing for a given grammar
@@ -225,20 +239,17 @@ public class AssemblyParser {
 
 		// Copy the translations tables NT columns as GOTOs
 		// Also, copy the T columns as SHIFTs
-		table.forEach(new Consumer<TableEntry<Integer>>() {
-			@Override
-			public void accept(TableEntry<Integer> ent) {
-				if (ent.getSym() instanceof AssemblyNonTerminal) {
-					AssemblyNonTerminal nt = (AssemblyNonTerminal) ent.getSym();
-					actions.putGoto(ent.getState(), nt, ent.getValue());
-				}
-				else if (ent.getSym() instanceof AssemblyTerminal) {
-					AssemblyTerminal t = (AssemblyTerminal) ent.getSym();
-					actions.putShift(ent.getState(), t, ent.getValue());
-				}
-				else {
-					throw new AssertionError("INTERNAL: symbols must be T or NT");
-				}
+		table.forEach(ent -> {
+			if (ent.getSym() instanceof AssemblyNonTerminal) {
+				AssemblyNonTerminal nt = (AssemblyNonTerminal) ent.getSym();
+				actions.putGoto(ent.getState(), nt, ent.getValue());
+			}
+			else if (ent.getSym() instanceof AssemblyTerminal) {
+				AssemblyTerminal t = (AssemblyTerminal) ent.getSym();
+				actions.putShift(ent.getState(), t, ent.getValue());
+			}
+			else {
+				throw new AssertionError("INTERNAL: symbols must be T or NT");
 			}
 		});
 
@@ -266,7 +277,7 @@ public class AssemblyParser {
 		nextState: for (i = 0; i < states.size(); i++) {
 			AssemblyParseState state = states.get(i);
 			for (AssemblyParseStateItem item : state) {
-				if (item.completed() && item.getProduction().getLHS().getName().equals("$S")) {
+				if (item.completed() && "$S".equals(item.getProduction().getLHS().getName())) {
 					actions.putAccept(i);
 					continue nextState;
 				}
@@ -301,10 +312,7 @@ public class AssemblyParser {
 				return false;
 			}
 			MergeKey mk = (MergeKey) that;
-			if (this.finalState != mk.finalState) {
-				return false;
-			}
-			if (!this.prod.equals(mk.prod)) {
+			if ((this.finalState != mk.finalState) || !this.prod.equals(mk.prod)) {
 				return false;
 			}
 			return true;
@@ -318,10 +326,7 @@ public class AssemblyParser {
 				return result;
 			}
 			result = this.prod.compareTo(that.prod);
-			if (result != 0) {
-				return result;
-			}
-			return 0;
+			return result;
 		}
 	}
 

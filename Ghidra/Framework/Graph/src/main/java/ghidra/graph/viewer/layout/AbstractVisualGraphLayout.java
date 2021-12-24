@@ -15,11 +15,19 @@
  */
 package ghidra.graph.viewer.layout;
 
-import java.awt.*;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Shape;
 import java.awt.geom.Point2D;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.google.common.base.Function;
@@ -30,7 +38,9 @@ import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.visualization.renderers.BasicEdgeRenderer;
 import edu.uci.ics.jung.visualization.renderers.Renderer.EdgeLabel;
 import ghidra.graph.VisualGraph;
-import ghidra.graph.viewer.*;
+import ghidra.graph.viewer.GraphViewerUtils;
+import ghidra.graph.viewer.VisualEdge;
+import ghidra.graph.viewer.VisualVertex;
 import ghidra.graph.viewer.layout.LayoutListener.ChangeType;
 import ghidra.graph.viewer.renderer.ArticulatedEdgeRenderer;
 import ghidra.graph.viewer.shape.ArticulatedEdgeTransformer;
@@ -203,8 +213,7 @@ public abstract class AbstractVisualGraphLayout<V extends VisualVertex,
 		try {
 			monitor = taskMonitor;
 			gridLocations = performInitialGridLayout(g);
-			LayoutPositions<V, E> positions = positionInLayoutSpaceFromGrid(g, gridLocations);
-			return positions;
+			return positionInLayoutSpaceFromGrid(g, gridLocations);
 		}
 		catch (CancelledException ce) {
 			return LayoutPositions.createEmptyPositions();
@@ -461,9 +470,8 @@ public abstract class AbstractVisualGraphLayout<V extends VisualVertex,
 		}
 
 		Function<E, List<Point2D>> edgeToArticulations = e -> Collections.emptyList();
-		Rectangle bounds = GraphViewerUtils.getTotalGraphSizeInLayoutSpace(vertices, edges,
+		return GraphViewerUtils.getTotalGraphSizeInLayoutSpace(vertices, edges,
 			vertexToBounds, edgeToArticulations);
-		return bounds;
 	}
 
 	protected void condenseVertices(List<Row<V>> rows, Map<V, Point2D> newLocations,
@@ -673,8 +681,7 @@ public abstract class AbstractVisualGraphLayout<V extends VisualVertex,
 		// The neighbors do not touch, but sometimes this is because our 'vertex' has been
 		// moved to far past the 'otherVertex'.  So, we also have to check the x values.
 
-		boolean crossed = moveRight ? p1.x < p2.x : p1.x > p2.x;
-		return crossed;
+		return moveRight ? p1.x < p2.x : p1.x > p2.x;
 	}
 //==================================================================================================
 // Listener Stuff

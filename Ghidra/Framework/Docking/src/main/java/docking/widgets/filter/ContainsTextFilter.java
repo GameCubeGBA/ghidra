@@ -36,8 +36,7 @@ public class ContainsTextFilter extends MatchesPatternTextFilter {
 			options |= Pattern.CASE_INSENSITIVE;
 		}
 
-		Pattern pattern = UserSearchUtils.createContainsPattern(filterText, allowGlobbing, options);
-		return pattern;
+		return UserSearchUtils.createContainsPattern(filterText, allowGlobbing, options);
 	}
 
 	@Override
@@ -52,8 +51,7 @@ public class ContainsTextFilter extends MatchesPatternTextFilter {
 			return false;
 		}
 
-		boolean isSubFilter = filterText.contains(parent.filterText);
-		return isSubFilter;
+		return filterText.contains(parent.filterText);
 	}
 
 }

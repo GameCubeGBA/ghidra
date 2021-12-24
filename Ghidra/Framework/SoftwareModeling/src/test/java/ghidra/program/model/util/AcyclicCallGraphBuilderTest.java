@@ -15,18 +15,29 @@
  */
 package ghidra.program.model.util;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
-import ghidra.util.task.TaskMonitor;
 import org.junit.Assert;
 import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
-import ghidra.program.model.*;
-import ghidra.program.model.address.*;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.FunctionManagerTestDouble;
+import ghidra.program.model.FunctionTestDouble;
+import ghidra.program.model.ProgramTestDouble;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.address.GenericAddressSpace;
+import ghidra.program.model.listing.Function;
+import ghidra.program.model.listing.FunctionManager;
+import ghidra.program.model.listing.Program;
 import ghidra.program.model.symbol.ReferenceManager;
 import ghidra.util.graph.AbstractDependencyGraph;
+import ghidra.util.task.TaskMonitor;
 
 public class AcyclicCallGraphBuilderTest extends AbstractGenericTest {
 
@@ -35,9 +46,9 @@ public class AcyclicCallGraphBuilderTest extends AbstractGenericTest {
 
 	private AddressSpace space = new GenericAddressSpace("Test", 32, AddressSpace.TYPE_RAM, 0);
 
-	Set<Function> functions = new HashSet<Function>();
+	Set<Function> functions = new HashSet<>();
 	ReferenceState refState = new ReferenceState();
-	Map<Address, Function> functionMap = new HashMap<Address, Function>();
+	Map<Address, Function> functionMap = new HashMap<>();
 	Program program = createProgram();
 
 	public AcyclicCallGraphBuilderTest() {
@@ -274,7 +285,7 @@ public class AcyclicCallGraphBuilderTest extends AbstractGenericTest {
 	}
 
 	private void assertDependents(AbstractDependencyGraph<Address> graph, int fromID, int... toIDs) {
-		Set<Address> expectedSet = new HashSet<Address>();
+		Set<Address> expectedSet = new HashSet<>();
 		for (int toAddr : toIDs) {
 			expectedSet.add(functionAddress(toAddr));
 		}

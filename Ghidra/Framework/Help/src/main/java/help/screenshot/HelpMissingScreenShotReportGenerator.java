@@ -15,6 +15,30 @@
  */
 package help.screenshot;
 
+import java.awt.image.BufferedImage;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.StringTokenizer;
+import java.util.TreeMap;
+import java.util.TreeSet;
+
+import javax.imageio.ImageIO;
+
 import help.GHelpBuilder;
 import help.HelpBuildUtils;
 import help.validator.UnusedHelpImageFileFinder;
@@ -22,19 +46,6 @@ import help.validator.location.DirectoryHelpModuleLocation;
 import help.validator.location.HelpModuleLocation;
 import help.validator.model.HelpTopic;
 import help.validator.model.IMG;
-
-import java.awt.image.BufferedImage;
-import java.io.*;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.*;
-import java.util.Map.Entry;
-
-import javax.imageio.ImageIO;
 
 public class HelpMissingScreenShotReportGenerator {
 
@@ -57,7 +68,7 @@ public class HelpMissingScreenShotReportGenerator {
 		}
 
 		for (String arg : args) {
-			if (arg.equalsIgnoreCase(DEBUG_OPTION)) {
+			if (DEBUG_OPTION.equalsIgnoreCase(arg)) {
 				debugEnabled = true;
 			}
 		}
@@ -68,17 +79,17 @@ public class HelpMissingScreenShotReportGenerator {
 		generator.generateReport();
 	}
 
-	private Set<HelpModuleLocation> helpDirectories = new HashSet<HelpModuleLocation>();
-	private Map<String, HelpTopic> topicNameToTopic = new HashMap<String, HelpTopic>();
-	private Set<HelpTestCase> testCases = new HashSet<HelpTestCase>();
-	private Map<String, HelpTestCase> imageNameToTestCase = new HashMap<String, HelpTestCase>();
+	private Set<HelpModuleLocation> helpDirectories = new HashSet<>();
+	private Map<String, HelpTopic> topicNameToTopic = new HashMap<>();
+	private Set<HelpTestCase> testCases = new HashSet<>();
+	private Map<String, HelpTestCase> imageNameToTestCase = new HashMap<>();
 
-	private SortedSet<String> badlyNamedTestFiles = new TreeSet<String>();
-	private SortedSet<HelpTestCase> badlyNamedTestCases = new TreeSet<HelpTestCase>();
+	private SortedSet<String> badlyNamedTestFiles = new TreeSet<>();
+	private SortedSet<HelpTestCase> badlyNamedTestCases = new TreeSet<>();
 //	private Map<HelpDirectory, IMG> untestedImages = new TreeMap<HelpDirectory, IMG>();
-	private Map<HelpTopic, Set<IMG>> untestedImages = new TreeMap<HelpTopic, Set<IMG>>();
+	private Map<HelpTopic, Set<IMG>> untestedImages = new TreeMap<>();
 
-	private Set<Path> examinedImageFiles = new HashSet<Path>();
+	private Set<Path> examinedImageFiles = new HashSet<>();
 
 	private File outputFile;
 
@@ -430,7 +441,7 @@ public class HelpMissingScreenShotReportGenerator {
 			errorMessage("Unable to load image: " + img, e);
 		}
 
-        Set<IMG> set = untestedImages.computeIfAbsent(topic, k -> new TreeSet<IMG>());
+        Set<IMG> set = untestedImages.computeIfAbsent(topic, k -> new TreeSet<>());
 
         set.add(img);
 	}
@@ -562,7 +573,7 @@ public class HelpMissingScreenShotReportGenerator {
 		String absolutePath = testFile.toAbsolutePath().toString();
 		String packageAndClassName = absolutePath.substring(javaIndex + JAVA_DIR.length() + 1); // +1 for slash
 		packageAndClassName = packageAndClassName.replaceAll("\\", ".");
-		packageAndClassName = packageAndClassName.replaceAll("/", ".");
+		packageAndClassName = packageAndClassName.replace('/', '.');
 		String className = packageAndClassName.replace(".java", "");
 
 		debug("Loading class: " + className);
@@ -655,7 +666,7 @@ public class HelpMissingScreenShotReportGenerator {
 // Inner Classes
 //==================================================================================================
 
-	private class HelpTestFile implements Comparable<HelpTestFile> {
+	private static class HelpTestFile implements Comparable<HelpTestFile> {
 		private String filename;
 		private HelpModuleLocation helpDir;
 		private Path filePath;
@@ -688,7 +699,7 @@ public class HelpMissingScreenShotReportGenerator {
 
 	}
 
-	private class HelpTestCase implements Comparable<HelpTestCase> {
+	private static class HelpTestCase implements Comparable<HelpTestCase> {
 
 		private HelpTestFile file;
 		private String name;

@@ -56,7 +56,7 @@ public class VarnodeAST extends Varnode {
 		uniqId = id;
 		def = null;
 		mergegroup = 0;
-		descend = new LinkedList<PcodeOp>();
+		descend = new LinkedList<>();
 	}
 
 	@Override

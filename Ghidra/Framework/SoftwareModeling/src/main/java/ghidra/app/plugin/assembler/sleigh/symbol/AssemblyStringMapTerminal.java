@@ -15,7 +15,9 @@
  */
 package ghidra.app.plugin.assembler.sleigh.symbol;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.collections4.MultiValuedMap;

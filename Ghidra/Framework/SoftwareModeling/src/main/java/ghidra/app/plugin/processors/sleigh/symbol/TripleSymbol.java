@@ -21,7 +21,10 @@ package ghidra.app.plugin.processors.sleigh.symbol;
 
 import java.util.ArrayList;
 
-import ghidra.app.plugin.processors.sleigh.*;
+import ghidra.app.plugin.processors.sleigh.Constructor;
+import ghidra.app.plugin.processors.sleigh.FixedHandle;
+import ghidra.app.plugin.processors.sleigh.ParserWalker;
+import ghidra.app.plugin.processors.sleigh.SleighDebugLogger;
 import ghidra.app.plugin.processors.sleigh.expression.PatternExpression;
 import ghidra.program.model.lang.UnknownInstructionException;
 import ghidra.program.model.mem.MemoryAccessException;

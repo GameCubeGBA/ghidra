@@ -17,7 +17,11 @@
 package ghidra.program.util;
 
 import ghidra.program.model.address.Address;
-import ghidra.program.model.block.*;
+import ghidra.program.model.block.BasicBlockModel;
+import ghidra.program.model.block.CodeBlock;
+import ghidra.program.model.block.CodeBlockIterator;
+import ghidra.program.model.block.CodeBlockReference;
+import ghidra.program.model.block.CodeBlockReferenceIterator;
 import ghidra.program.model.listing.Function;
 import ghidra.program.model.symbol.FlowType;
 import ghidra.util.exception.CancelledException;

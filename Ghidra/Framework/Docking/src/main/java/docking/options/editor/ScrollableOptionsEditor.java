@@ -20,9 +20,15 @@ import java.awt.Rectangle;
 import java.beans.PropertyChangeListener;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.Scrollable;
 
-import ghidra.framework.options.*;
+import ghidra.framework.options.EditorStateFactory;
+import ghidra.framework.options.Options;
+import ghidra.framework.options.OptionsEditor;
 import ghidra.util.exception.InvalidInputException;
 import ghidra.util.layout.MiddleLayout;
 
@@ -144,8 +150,7 @@ public class ScrollableOptionsEditor implements OptionsEditor {
 			//			
 			Dimension mySize = getPreferredSize();
 			Dimension viewSize = scrollPane.getViewport().getSize();
-			boolean viewIsLarger = viewSize.height > mySize.height;
-			return viewIsLarger;
+			return viewSize.height > mySize.height;
 		}
 
 		@Override
@@ -159,8 +164,7 @@ public class ScrollableOptionsEditor implements OptionsEditor {
 			//			
 			Dimension mySize = getPreferredSize();
 			Dimension viewSize = scrollPane.getViewport().getSize();
-			boolean viewIsLarger = viewSize.width > mySize.width;
-			return viewIsLarger;
+			return viewSize.width > mySize.width;
 		}
 
 		@Override

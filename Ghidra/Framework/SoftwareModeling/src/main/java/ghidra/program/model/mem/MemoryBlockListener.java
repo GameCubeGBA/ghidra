@@ -31,7 +31,7 @@ public interface MemoryBlockListener {
 	 * @param oldName old name
 	 * @param newName new name
 	 */
-	public void nameChanged(MemoryBlock block, String oldName, String newName);
+	void nameChanged(MemoryBlock block, String oldName, String newName);
 
 	/**
 	 * Notification that the block's comment changed.
@@ -39,7 +39,7 @@ public interface MemoryBlockListener {
 	 * @param oldComment old comment; may be null
 	 * @param newComment new comment; may be null
 	 */
-	public void commentChanged(MemoryBlock block,
+	void commentChanged(MemoryBlock block,
                                 String oldComment,
                                 String newComment);
 
@@ -49,21 +49,21 @@ public interface MemoryBlockListener {
 	 * @param block affected block
 	 * @param isRead true means the block is marked as readable
 	 */
-	public void readStatusChanged(MemoryBlock block, boolean isRead);
+	void readStatusChanged(MemoryBlock block, boolean isRead);
     
     /**
      * Notification that the block's write attribute has changed.
      * @param block affected block
      * @param isWrite true means the block is marked as writable
      */
-    public void writeStatusChanged(MemoryBlock block, boolean isWrite);
+    void writeStatusChanged(MemoryBlock block, boolean isWrite);
     
     /**
      * Notification that the block's execute attribute has changed.
      * @param block affected block
      * @param isExecute true means the block is marked as executable
      */
-    public void executeStatusChanged(MemoryBlock block, boolean isExecute);
+    void executeStatusChanged(MemoryBlock block, boolean isExecute);
 	
 	/**
 	 * Notification that the source of the block has changed.
@@ -71,7 +71,7 @@ public interface MemoryBlockListener {
 	 * @param oldSource old source 
 	 * @param newSource new source
 	 */
-	public void sourceChanged(MemoryBlock block,
+	void sourceChanged(MemoryBlock block,
                                 String oldSource,
                                 String newSource);
 	/**
@@ -80,7 +80,7 @@ public interface MemoryBlockListener {
 	 * @param oldOffset old offset
 	 * @param newOffset new offset
 	 */
-	public void sourceOffsetChanged(MemoryBlock block,
+	void sourceOffsetChanged(MemoryBlock block,
                                     long oldOffset,
                                     long newOffset);
 	/**
@@ -90,7 +90,7 @@ public interface MemoryBlockListener {
 	 * @param oldData old byte values
 	 * @param newData new byte values
 	 */
-	public void dataChanged(MemoryBlock block,
+	void dataChanged(MemoryBlock block,
                             Address addr,
                             byte[] oldData,
                             byte[] newData);	

@@ -20,11 +20,18 @@ import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import ghidra.app.plugin.assembler.*;
+import ghidra.app.plugin.assembler.Assembler;
+import ghidra.app.plugin.assembler.Assemblers;
+import ghidra.app.plugin.assembler.AssemblySemanticException;
+import ghidra.app.plugin.assembler.AssemblySyntaxException;
 import ghidra.app.plugin.assembler.sleigh.sem.AssemblyResolution;
 import ghidra.app.plugin.assembler.sleigh.sem.AssemblyResolvedConstructor;
-import ghidra.program.model.address.*;
-import ghidra.program.model.lang.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressOutOfBoundsException;
+import ghidra.program.model.address.AddressOverflowException;
+import ghidra.program.model.lang.InsufficientBytesException;
+import ghidra.program.model.lang.LanguageID;
+import ghidra.program.model.lang.UnknownInstructionException;
 import ghidra.program.model.mem.MemoryAccessException;
 import ghidra.util.Msg;
 

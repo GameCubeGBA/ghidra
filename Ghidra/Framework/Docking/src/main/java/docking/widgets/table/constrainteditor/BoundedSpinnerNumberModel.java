@@ -44,16 +44,13 @@ class BoundedSpinnerNumberModel extends SpinnerNumberModel {
 
 	@Override
 	public void setValue(Object value) {
-		if (value != null && value instanceof Number) {
+		if (value instanceof Number) {
 			Comparable minimum = getMinimum();
 			Comparable maximum = getMaximum();
 
 			Number val = (Number) value;
 
-			if (minimum != null && minimum.compareTo(val) > 0) {
-				return;
-			}
-			if (maximum != null && maximum.compareTo(val) < 0) {
+			if ((minimum != null && minimum.compareTo(val) > 0) || (maximum != null && maximum.compareTo(val) < 0)) {
 				return;
 			}
 			super.setValue(value);

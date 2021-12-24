@@ -15,16 +15,25 @@
  */
 package ghidra.framework.store.local;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import db.buffers.BufferFile;
 import db.buffers.LocalManagedBufferFile;
-import ghidra.framework.store.*;
 import ghidra.framework.store.FileSystem;
-import ghidra.util.*;
+import ghidra.framework.store.FileSystemEventManager;
+import ghidra.framework.store.FileSystemListener;
+import ghidra.framework.store.FolderItem;
+import ghidra.util.InvalidNameException;
+import ghidra.util.Msg;
+import ghidra.util.PropertyFile;
+import ghidra.util.ReadOnlyException;
+import ghidra.util.SystemUtilities;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.DuplicateFileException;
 import ghidra.util.task.TaskMonitor;
@@ -251,7 +260,7 @@ public abstract class LocalFileSystem implements FileSystem {
 			repositoryLogger.log(path, msg, user);
 		}
 		else {
-			StringBuffer buf = new StringBuffer();
+			StringBuilder buf = new StringBuilder();
 			if (item != null) {
 				buf.append(item.getPathName());
 			}
@@ -750,7 +759,7 @@ public abstract class LocalFileSystem implements FileSystem {
 	 * @return true if c is a valid character within the FileSystem.
 	 */
 	public static boolean isValidNameCharacter(char c) {
-		return !((c < ' ') || (INVALID_FILENAME_CHARS.indexOf(c) >= 0) || (c > 255));
+		return ((c >= ' ') && (INVALID_FILENAME_CHARS.indexOf(c) < 0) && (c <= 255));
 	}
 
 	/**

@@ -15,7 +15,10 @@
  */
 package ghidra.util.prop;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -133,7 +136,6 @@ public abstract class PropertySet implements Serializable {
 			}
 		}
 		catch (NoSuchIndexException e) {
-			return false;
 		}
 		return false;
 	}

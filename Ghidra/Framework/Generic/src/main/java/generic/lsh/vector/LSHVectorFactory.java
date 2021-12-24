@@ -140,11 +140,11 @@ public abstract class LSHVectorFactory {
 		settings = Integer.decode(el.getAttribute("settings"));
 		el = parser.peek();	// The <weightfactory> and <idflookup> tags must be at the second level of the xml
 		while(el.isStart()) {
-			if (el.getName().equals("weightfactory")) {
+			if ("weightfactory".equals(el.getName())) {
 				weightFactory.restoreXml(parser);
 				foundweights = true;
 			}
-			else if (el.getName().equals("idflookup")) {
+			else if ("idflookup".equals(el.getName())) {
 				idfLookup.restoreXml(parser);
 				foundlookup = true;
 			}

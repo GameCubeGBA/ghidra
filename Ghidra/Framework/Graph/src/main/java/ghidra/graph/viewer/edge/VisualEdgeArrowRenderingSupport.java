@@ -16,7 +16,11 @@
 package ghidra.graph.viewer.edge;
 
 import java.awt.Shape;
-import java.awt.geom.*;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.GeneralPath;
+import java.awt.geom.Line2D;
+import java.awt.geom.PathIterator;
+import java.awt.geom.Point2D;
 
 import edu.uci.ics.jung.visualization.RenderContext;
 import ghidra.graph.viewer.VisualEdge;

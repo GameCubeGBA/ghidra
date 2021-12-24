@@ -19,14 +19,14 @@
  */
 package ghidra.app.plugin.processors.sleigh.symbol;
 
+import java.util.ArrayList;
+
 import ghidra.app.plugin.processors.sleigh.SleighException;
 import ghidra.app.plugin.processors.sleigh.SleighLanguage;
 import ghidra.program.model.lang.UnknownInstructionException;
 import ghidra.util.xml.SpecXmlUtils;
 import ghidra.xml.XmlElement;
 import ghidra.xml.XmlPullParser;
-
-import java.util.ArrayList;
 
 /**
  * 
@@ -112,9 +112,9 @@ public class SymbolTable {
 			restoreSymbolHeader(parser);
 		}
 
-		ArrayList<UseropSymbol> userops = new ArrayList<UseropSymbol>();
+		ArrayList<UseropSymbol> userops = new ArrayList<>();
 		XmlElement subel = parser.peek();
-		while(!subel.getName().equals("symbol_table")) {			// Restore the symbol content
+		while(!"symbol_table".equals(subel.getName())) {			// Restore the symbol content
 			int id = SpecXmlUtils.decodeInt(subel.getAttribute("id"));
 			Symbol sym = findSymbol(id);
 			sym.restoreXml(parser,sleigh);
@@ -130,29 +130,29 @@ public class SymbolTable {
 	public void restoreSymbolHeader(XmlPullParser parser) {
 		Symbol sym;
 		XmlElement el = parser.peek();
-		if (el.getName().equals("userop_head"))
+		if ("userop_head".equals(el.getName()))
 			sym = new UseropSymbol();
-		else if (el.getName().equals("epsilon_sym_head"))
+		else if ("epsilon_sym_head".equals(el.getName()))
 			sym = new EpsilonSymbol();
-		else if (el.getName().equals("value_sym_head"))
+		else if ("value_sym_head".equals(el.getName()))
 			sym = new ValueSymbol();
-		else if (el.getName().equals("valuemap_sym_head"))
+		else if ("valuemap_sym_head".equals(el.getName()))
 			sym = new ValueMapSymbol();
-		else if (el.getName().equals("name_sym_head"))
+		else if ("name_sym_head".equals(el.getName()))
 			sym = new NameSymbol();
-		else if (el.getName().equals("varnode_sym_head"))
+		else if ("varnode_sym_head".equals(el.getName()))
 			sym = new VarnodeSymbol();
-		else if (el.getName().equals("context_sym_head"))
+		else if ("context_sym_head".equals(el.getName()))
 			sym = new ContextSymbol();
-		else if (el.getName().equals("varlist_sym_head"))
+		else if ("varlist_sym_head".equals(el.getName()))
 			sym = new VarnodeListSymbol();
-		else if (el.getName().equals("operand_sym_head"))
+		else if ("operand_sym_head".equals(el.getName()))
 			sym = new OperandSymbol();
-		else if (el.getName().equals("start_sym_head"))
+		else if ("start_sym_head".equals(el.getName()))
 			sym = new StartSymbol();
-		else if (el.getName().equals("end_sym_head"))
+		else if ("end_sym_head".equals(el.getName()))
 			sym = new EndSymbol();
-		else if (el.getName().equals("subtable_sym_head"))
+		else if ("subtable_sym_head".equals(el.getName()))
 			sym = new SubtableSymbol();
 		else
 			throw new SleighException("Bad symbol xml");

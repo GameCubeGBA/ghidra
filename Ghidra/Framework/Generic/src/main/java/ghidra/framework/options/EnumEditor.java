@@ -41,7 +41,7 @@ public class EnumEditor extends PropertyEditorSupport {
 		try {
 			Method m = value.getClass().getMethod("values");
 			Enum<?>[] enums = (Enum<?>[]) m.invoke(null);
-			HashSet<String> set = new HashSet<String>();
+			HashSet<String> set = new HashSet<>();
 			String[] choices = new String[enums.length];
 			for (int i = 0; i < enums.length; i++) {
 				String s = enums[i].toString();
@@ -63,8 +63,7 @@ public class EnumEditor extends PropertyEditorSupport {
 
 		try {
 			Method m = value.getClass().getMethod("values");
-			Enum<?>[] enums = (Enum<?>[]) m.invoke(null);
-			return enums;
+			return (Enum<?>[]) m.invoke(null);
 		}
 		catch (Throwable t) {
 			Msg.error(this, "Unexpected Exception: " + t.getMessage(), t);

@@ -16,21 +16,36 @@
 package ghidra.program.database.module;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
-import db.*;
+import db.DBConstants;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.IntField;
+import db.LongField;
+import db.RecordIterator;
+import db.Schema;
+import db.StringField;
 import db.util.ErrorHandler;
 import ghidra.program.database.ManagerDB;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.database.map.AddressMap;
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressOverflowException;
+import ghidra.program.model.address.AddressRange;
+import ghidra.program.model.address.AddressRangeImpl;
 import ghidra.program.model.listing.ProgramFragment;
 import ghidra.program.model.listing.ProgramModule;
 import ghidra.program.model.mem.Memory;
 import ghidra.program.model.mem.MemoryBlock;
 import ghidra.program.util.ChangeManager;
 import ghidra.util.Lock;
-import ghidra.util.exception.*;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.DuplicateNameException;
+import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
 
 /**
@@ -266,7 +281,7 @@ public class TreeManager implements ManagerDB {
 	public ProgramModule getDefaultRootModule() {
 		try {
 			RecordIterator iter = adapter.getRecords();
-			while (iter.hasNext()) {
+			if (iter.hasNext()) {
 				DBRecord record = iter.next();
 				String name = record.getString(TREE_NAME_COL);
 				return getRootModule(name);

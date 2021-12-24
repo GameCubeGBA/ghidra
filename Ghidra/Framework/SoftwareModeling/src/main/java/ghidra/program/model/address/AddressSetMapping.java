@@ -15,7 +15,9 @@
  */
 package ghidra.program.model.address;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Class that provides random access to {@link Address}es in an {@link AddressSet}, based on the index of the address in the set, not the {@link Address#getOffset() address offset value}.<p>

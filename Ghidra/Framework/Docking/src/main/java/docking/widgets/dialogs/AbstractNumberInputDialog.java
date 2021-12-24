@@ -18,7 +18,9 @@ package docking.widgets.dialogs;
 import java.awt.BorderLayout;
 import java.math.BigInteger;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import docking.DialogComponentProvider;
 import docking.DockingWindowManager;

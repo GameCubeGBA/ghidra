@@ -17,12 +17,18 @@ package docking.widgets.fieldpanel;
 
 import static org.junit.Assert.assertEquals;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Toolkit;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import docking.widgets.fieldpanel.field.*;
+import docking.widgets.fieldpanel.field.AttributedString;
+import docking.widgets.fieldpanel.field.CompositeFieldElement;
+import docking.widgets.fieldpanel.field.FieldElement;
+import docking.widgets.fieldpanel.field.TextFieldElement;
 import generic.test.AbstractGenericTest;
 
 public class AttributedStringTest extends AbstractGenericTest {
@@ -44,15 +50,15 @@ public class AttributedStringTest extends AbstractGenericTest {
 	@Test
 	public void testSubstring() {
 		FieldElement[] strings =
-			new FieldElement[] {
-				new TextFieldElement(new AttributedString("This is string", Color.BLACK, fm), 0, 0), // 14 chars
-				new TextFieldElement(new AttributedString("to test", Color.RED, fm), 0, 0), //  7 chars
-				new TextFieldElement(new AttributedString("the substring of ", Color.BLACK, fm), 0,
-					0), // 17 chars
-				new TextFieldElement(new AttributedString(" ....   ", Color.BLACK, fm), 0, 0), //  8 chars
-				new TextFieldElement(
-					new AttributedString("the CompositeAttributedString", Color.BLUE, fm), 0, 0), // 29 chars
-				new TextFieldElement(new AttributedString("class.", Color.BLACK, fm), 0, 0) };
+			{
+			new TextFieldElement(new AttributedString("This is string", Color.BLACK, fm), 0, 0), // 14 chars
+			new TextFieldElement(new AttributedString("to test", Color.RED, fm), 0, 0), //  7 chars
+			new TextFieldElement(new AttributedString("the substring of ", Color.BLACK, fm), 0,
+				0), // 17 chars
+			new TextFieldElement(new AttributedString(" ....   ", Color.BLACK, fm), 0, 0), //  8 chars
+			new TextFieldElement(
+				new AttributedString("the CompositeAttributedString", Color.BLUE, fm), 0, 0), // 29 chars
+			new TextFieldElement(new AttributedString("class.", Color.BLACK, fm), 0, 0) };
 		FieldElement compositeString = new CompositeFieldElement(strings);
 
 		FieldElement substring = compositeString.substring(0);

@@ -30,6 +30,6 @@ public interface LongConverter<T> {
 	 * @param value the long value.
 	 * @return the long value converted to T
 	 */
-	public T fromLong(long value);
+	T fromLong(long value);
 
 }

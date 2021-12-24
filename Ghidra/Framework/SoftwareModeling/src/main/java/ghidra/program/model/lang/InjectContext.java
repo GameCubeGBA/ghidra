@@ -21,13 +21,17 @@ import java.util.ArrayList;
 
 import javax.xml.parsers.SAXParser;
 
-import org.xml.sax.*;
+import org.xml.sax.Attributes;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import ghidra.app.plugin.processors.sleigh.SleighLanguage;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressFactory;
-import ghidra.program.model.pcode.*;
+import ghidra.program.model.pcode.AddressXML;
+import ghidra.program.model.pcode.PcodeXMLException;
+import ghidra.program.model.pcode.Varnode;
 import ghidra.util.xml.SpecXmlUtils;
 
 public class InjectContext {
@@ -45,18 +49,18 @@ public class InjectContext {
 		@Override
 		public void startElement(String uri, String localName, String rawName, Attributes attr)
 				throws SAXException {
-			if (rawName.equals("context")) {
+			if ("context".equals(rawName)) {
 				state = 1;
 			}
-			else if (rawName.equals("input")) {
+			else if ("input".equals(rawName)) {
 				inputlist = new ArrayList<>();
 				state = 3;
 			}
-			else if (rawName.equals("output")) {
+			else if ("output".equals(rawName)) {
 				output = new ArrayList<>();
 				state = 4;
 			}
-			else if (rawName.equals("addr")) {
+			else if ("addr".equals(rawName)) {
 				curaddr = AddressXML.readXML(rawName, attr, addrFactory);
 				if (state == 1) {
 					baseAddr = curaddr;
@@ -100,10 +104,7 @@ public class InjectContext {
 		try {
 			parser.parse(new InputSource(new StringReader(xml)), handler);
 		}
-		catch (SAXException e) {
-			throw new PcodeXMLException("Problem parsing inject context: " + e.getMessage());
-		}
-		catch (IOException e) {
+		catch (SAXException | IOException e) {
 			throw new PcodeXMLException("Problem parsing inject context: " + e.getMessage());
 		}
 

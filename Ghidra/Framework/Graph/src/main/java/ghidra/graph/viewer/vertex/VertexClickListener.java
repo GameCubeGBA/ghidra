@@ -38,5 +38,5 @@ public interface VertexClickListener<V extends VisualVertex, E extends VisualEdg
 	 *        the low-level vertex's clicked component
 	 * @return true if this call wants to stop all further mouse event processing
 	 */
-	public boolean vertexDoubleClicked(V v, VertexMouseInfo<V, E> mouseInfo);
+	boolean vertexDoubleClicked(V v, VertexMouseInfo<V, E> mouseInfo);
 }

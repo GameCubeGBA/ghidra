@@ -15,18 +15,33 @@
  */
 package docking.help;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dialog;
+import java.awt.Frame;
+import java.awt.KeyboardFocusManager;
+import java.awt.Window;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.WeakHashMap;
 
-import javax.help.*;
+import javax.help.BadIDException;
+import javax.help.DefaultHelpBroker;
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
+import javax.help.HelpSetException;
 import javax.help.Map.ID;
+import javax.help.NavigatorView;
 import javax.swing.JButton;
 import javax.swing.UIManager;
 
@@ -34,7 +49,10 @@ import docking.ComponentProvider;
 import docking.action.DockingActionIf;
 import generic.concurrent.GThreadPool;
 import generic.util.WindowUtilities;
-import ghidra.util.*;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
+import ghidra.util.Swing;
+import ghidra.util.SystemUtilities;
 import ghidra.util.exception.AssertException;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
@@ -435,11 +453,7 @@ public class HelpManager implements HelpService {
 
 	private void printBadHelp() {
 
-		if (!SystemUtilities.isInDevelopmentMode()) {
-			return;
-		}
-
-		if (hasBeenDisplayed) {
+		if (!SystemUtilities.isInDevelopmentMode() || hasBeenDisplayed) {
 			// only show this once
 			return;
 		}
@@ -511,13 +525,7 @@ public class HelpManager implements HelpService {
 		}
 
 		DockingActionIf action = (DockingActionIf) helpee;
-		if (action.getToolBarData() != null) {
-			return false;
-		}
-		if (action.getMenuBarData() != null) {
-			return false;
-		}
-		if (action.getPopupMenuData() != null) {
+		if ((action.getToolBarData() != null) || (action.getMenuBarData() != null) || (action.getPopupMenuData() != null)) {
 			return false;
 		}
 		return true;
@@ -594,9 +602,6 @@ public class HelpManager implements HelpService {
 		try {
 			testStream = url.openStream();
 			return true; // if the above didn't fail, then the resource can be accessed
-		}
-		catch (MalformedURLException e) {
-			return false; // shouldn't happen as the URL should be valid
 		}
 		catch (IOException e) {
 			return false; // this happens if the resource doesn't exit

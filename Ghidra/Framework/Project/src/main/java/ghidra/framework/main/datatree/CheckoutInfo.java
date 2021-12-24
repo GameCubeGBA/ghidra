@@ -16,10 +16,10 @@
  */
 package ghidra.framework.main.datatree;
 
+import java.io.IOException;
+
 import ghidra.framework.model.DomainFile;
 import ghidra.framework.store.ItemCheckoutStatus;
-
-import java.io.IOException;
 
 class CheckoutInfo {
     private DomainFile file;

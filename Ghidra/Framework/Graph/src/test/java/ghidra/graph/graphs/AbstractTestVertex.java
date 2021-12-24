@@ -15,6 +15,8 @@
  */
 package ghidra.graph.graphs;
 
+import java.util.Objects;
+
 import ghidra.graph.viewer.vertex.AbstractVisualVertex;
 
 /**
@@ -55,10 +57,7 @@ public abstract class AbstractTestVertex extends AbstractVisualVertex {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		return result;
+		return Objects.hash(name);
 	}
 
 	@Override
@@ -66,19 +65,11 @@ public abstract class AbstractTestVertex extends AbstractVisualVertex {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
 		}
 		AbstractTestVertex other = (AbstractTestVertex) obj;
-		if (name == null) {
-			if (other.name != null) {
-				return false;
-			}
-		}
-		else if (!name.equals(other.name)) {
+		if (!Objects.equals(name, other.name)) {
 			return false;
 		}
 		return true;

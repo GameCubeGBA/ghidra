@@ -31,25 +31,25 @@ public interface OptionsEditor {
 	/**
 	 * Apply the changes.
 	 */
-	public void apply() throws InvalidInputException;
+	void apply() throws InvalidInputException;
 
 	/**
 	 * Cancel the changes.
 	 */
-	public void cancel();
+	void cancel();
 
 	/**
 	 * A signal to reload the GUI widgets in the component created by this editor.  This will 
 	 * happen when the options change out from under the editor, such as when the user restores
 	 * the default options values.
 	 */
-	public void reload();
+	void reload();
 
 	/**
 	 * Sets the options change listener
 	 * @param listener
 	 */
-	public void setOptionsPropertyChangeListener(PropertyChangeListener listener);
+	void setOptionsPropertyChangeListener(PropertyChangeListener listener);
 
 	/**
 	 * Get the editor component.
@@ -57,10 +57,10 @@ public interface OptionsEditor {
 	 * @param options The editable options that for which a GUI component will be created
 	 * @param editorStateFactory The factory that will provide state objects this options editor
 	 */
-	public JComponent getEditorComponent(Options options, EditorStateFactory editorStateFactory);
+	JComponent getEditorComponent(Options options, EditorStateFactory editorStateFactory);
 
 	/**
 	 * Dispose this editor
 	 */
-	public void dispose();
+	void dispose();
 }

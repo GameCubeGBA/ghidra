@@ -17,10 +17,43 @@ package ghidra.program.model.pcode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 
 import ghidra.app.plugin.processors.sleigh.SleighLanguage;
-import ghidra.program.model.data.*;
+import ghidra.program.model.data.AbstractFloatDataType;
+import ghidra.program.model.data.AbstractIntegerDataType;
+import ghidra.program.model.data.AbstractStringDataType;
+import ghidra.program.model.data.Array;
+import ghidra.program.model.data.ArrayDataType;
+import ghidra.program.model.data.BooleanDataType;
+import ghidra.program.model.data.BuiltIn;
+import ghidra.program.model.data.BuiltInDataTypeManager;
+import ghidra.program.model.data.CharDataType;
+import ghidra.program.model.data.DataOrganization;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.DataTypeComponent;
+import ghidra.program.model.data.DataTypeManager;
+import ghidra.program.model.data.DefaultDataType;
 import ghidra.program.model.data.Enum;
+import ghidra.program.model.data.FunctionDefinition;
+import ghidra.program.model.data.Pointer;
+import ghidra.program.model.data.PointerDataType;
+import ghidra.program.model.data.StringDataType;
+import ghidra.program.model.data.StringUTF8DataType;
+import ghidra.program.model.data.Structure;
+import ghidra.program.model.data.StructureDataType;
+import ghidra.program.model.data.TerminatedStringDataType;
+import ghidra.program.model.data.TerminatedUnicode32DataType;
+import ghidra.program.model.data.TerminatedUnicodeDataType;
+import ghidra.program.model.data.TypeDef;
+import ghidra.program.model.data.Undefined;
+import ghidra.program.model.data.Undefined1DataType;
+import ghidra.program.model.data.Unicode32DataType;
+import ghidra.program.model.data.UnicodeDataType;
+import ghidra.program.model.data.VoidDataType;
+import ghidra.program.model.data.WideChar16DataType;
+import ghidra.program.model.data.WideChar32DataType;
+import ghidra.program.model.data.WideCharDataType;
 import ghidra.program.model.lang.CompilerSpec;
 import ghidra.program.model.lang.DecompilerLanguage;
 import ghidra.program.model.listing.Program;
@@ -150,7 +183,7 @@ public class PcodeDataTypeManager {
 		if (datatypes.size() != 0) {
 			return datatypes.get(0).clone(progDataTypes);
 		}
-		if (nm.equals("code")) {		// A special datatype, the decompiler needs
+		if ("code".equals(nm)) {		// A special datatype, the decompiler needs
 			return DataType.DEFAULT;
 		}
 		return null;
@@ -170,13 +203,13 @@ public class PcodeDataTypeManager {
 				throw new PcodeXMLException("Bad <type> tag");
 			}
 
-			if (el.getName().equals("void")) {
+			if ("void".equals(el.getName())) {
 				return voidDt;
 			}
-			if (el.getName().equals("typeref")) {
+			if ("typeref".equals(el.getName())) {
 				return findBaseType(el.getAttribute("name"), el.getAttribute("id"));
 			}
-			if (el.getName().equals("def")) {
+			if ("def".equals(el.getName())) {
 				String nameStr = el.getAttribute("name");
 				String idStr = el.getAttribute("id");
 				parser.discardSubTree();	// Get rid of unused <typeref>
@@ -188,7 +221,7 @@ public class PcodeDataTypeManager {
 			}
 			String meta = el.getAttribute("metatype");
 			DataType restype = null;
-			if (meta.equals("ptr")) {
+			if ("ptr".equals(meta)) {
 				int size = SpecXmlUtils.decodeInt(el.getAttribute("size"));
 				if (parser.peek().isStart()) {
 					DataType dt = readXMLDataType(parser);
@@ -197,7 +230,7 @@ public class PcodeDataTypeManager {
 					restype = new PointerDataType(dt, useDefaultSize ? -1 : size, progDataTypes);
 				}
 			}
-			else if (meta.equals("array")) {
+			else if ("array".equals(meta)) {
 				int arrsize = SpecXmlUtils.decodeInt(el.getAttribute("arraysize"));
 				if (parser.peek().isStart()) {
 					DataType dt = readXMLDataType(parser);
@@ -207,11 +240,11 @@ public class PcodeDataTypeManager {
 					restype = new ArrayDataType(dt, arrsize, dt.getLength(), progDataTypes);
 				}
 			}
-			else if (meta.equals("spacebase")) {				// Typically the type of "the whole stack"
+			else if ("spacebase".equals(meta)) {				// Typically the type of "the whole stack"
 				parser.discardSubTree();  // get rid of unused "addr" element
 				return voidDt;
 			}
-			else if (meta.equals("struct")) {
+			else if ("struct".equals(meta)) {
 				// we now can reach here with the decompiler inventing structures, apparently
 				// this is a band-aid so that we don't blow up
 				// just make an undefined data type of the appropriate size
@@ -222,15 +255,15 @@ public class PcodeDataTypeManager {
 				// if all the structures are contained in ghidra. I should probably add the
 				// parsing here so the decompiler can pass new structures into ghidra
 			}
-			else if (meta.equals("int")) {
+			else if ("int".equals(meta)) {
 				int size = SpecXmlUtils.decodeInt(el.getAttribute("size"));
 				return AbstractIntegerDataType.getSignedDataType(size, progDataTypes);
 			}
-			else if (meta.equals("uint")) {
+			else if ("uint".equals(meta)) {
 				int size = SpecXmlUtils.decodeInt(el.getAttribute("size"));
 				return AbstractIntegerDataType.getUnsignedDataType(size, progDataTypes);
 			}
-			else if (meta.equals("float")) {
+			else if ("float".equals(meta)) {
 				int size = SpecXmlUtils.decodeInt(el.getAttribute("size"));
 				return AbstractFloatDataType.getFloatDataType(size, progDataTypes);
 			}
@@ -263,15 +296,7 @@ public class PcodeDataTypeManager {
 		if (type != null && type.getDataTypeManager() != progDataTypes) {
 			type = type.clone(progDataTypes);
 		}
-		if ((type instanceof VoidDataType) || (type == null)) {
-			buildType(resBuf, type, size);
-			return;
-		}
-		if (type instanceof AbstractIntegerDataType) {
-			buildType(resBuf, type, size);
-			return;
-		}
-		if (type instanceof Pointer) {
+		if ((type instanceof VoidDataType) || (type == null) || (type instanceof AbstractIntegerDataType) || (type instanceof Pointer)) {
 			buildType(resBuf, type, size);
 			return;
 		}
@@ -322,17 +347,18 @@ public class PcodeDataTypeManager {
 			resBuf.append("<typeref name=\"wchar_t\"/>");
 			return;
 		}
-		if (size == 2) {
+		switch (size) {
+		case 2:
 			resBuf.append("<typeref name=\"wchar16\"/>");
 			return;
-		}
-		if (size == 4) {
+		case 4:
 			resBuf.append("<typeref name=\"wchar32\"/>");
 			return;
-		}
-		if (size == 1) {
+		case 1:
 			resBuf.append("<typeref name=\"byte\"/>");
 			return;
+		default:
+			break;
 		}
 		throw new IllegalArgumentException("Unsupported character size");
 	}
@@ -405,15 +431,11 @@ public class PcodeDataTypeManager {
 					resBuf.append("</type>\n");
 				}
 			}
-			else if (ptrto instanceof FunctionDefinition) {
+			else if ((ptrto instanceof FunctionDefinition) || ((ptrto.getLength() >= 0) || (ptrto instanceof FunctionDefinition))) {
 				// FunctionDefinition may have size of -1, do not translate to undefined
 				buildTypeRef(resBuf, ptrto, ptrto.getLength());
-			}
-			else if (ptrto.getLength() < 0 && !(ptrto instanceof FunctionDefinition)) {
+			} else {
 				buildTypeRef(resBuf, Undefined1DataType.dataType, 1);
-			}
-			else {
-				buildTypeRef(resBuf, ptrto, ptrto.getLength());
 			}
 		}
 		else if ((type instanceof Array) && !type.isZeroLength()) {
@@ -560,48 +582,46 @@ public class PcodeDataTypeManager {
 			CompilerSpec cspec = program.getCompilerSpec();
 			FunctionPrototype fproto = new FunctionPrototype(fdef, cspec, voidInputIsVarargs);
 			fproto.buildPrototypeXML(resBuf, this);
-		}
-		else if (type instanceof BooleanDataType) {
-			appendNameIdAttributes(resBuf, type);
-			SpecXmlUtils.encodeStringAttribute(resBuf, "metatype", "bool");
-			SpecXmlUtils.encodeSignedIntegerAttribute(resBuf, "size", type.getLength());
-			resBuf.append('>');
-		}
-		else if (type instanceof AbstractIntegerDataType) { // must handle char and bool above
-			boolean signed = ((AbstractIntegerDataType) type).isSigned();
-			int sz = type.getLength();
-			if (sz <= 0) {
-				sz = size;
+		} else {
+			if (type instanceof BooleanDataType) {
+				appendNameIdAttributes(resBuf, type);
+				SpecXmlUtils.encodeStringAttribute(resBuf, "metatype", "bool");
+				SpecXmlUtils.encodeSignedIntegerAttribute(resBuf, "size", type.getLength());
 			}
-			appendNameIdAttributes(resBuf, type);
-			SpecXmlUtils.encodeStringAttribute(resBuf, "metatype", signed ? "int" : "uint");
-			SpecXmlUtils.encodeSignedIntegerAttribute(resBuf, "size", sz);
-			resBuf.append('>');
-		}
-		else if (type instanceof AbstractFloatDataType) {
-			appendNameIdAttributes(resBuf, type);
-			SpecXmlUtils.encodeStringAttribute(resBuf, "metatype", "float");
-			SpecXmlUtils.encodeSignedIntegerAttribute(resBuf, "size", type.getLength());
-			resBuf.append('>');
-		}
-		else {
-			int sz = type.getLength();
-			boolean isVarLength = false;
-			if (sz <= 0) {
-				sz = size;
-				isVarLength = true;
+			else if (type instanceof AbstractIntegerDataType) { // must handle char and bool above
+				boolean signed = ((AbstractIntegerDataType) type).isSigned();
+				int sz = type.getLength();
+				if (sz <= 0) {
+					sz = size;
+				}
+				appendNameIdAttributes(resBuf, type);
+				SpecXmlUtils.encodeStringAttribute(resBuf, "metatype", signed ? "int" : "uint");
+				SpecXmlUtils.encodeSignedIntegerAttribute(resBuf, "size", sz);
 			}
-			appendNameIdAttributes(resBuf, type);
-			if (sz < 16) {
-				SpecXmlUtils.encodeStringAttribute(resBuf, "metatype", "unknown");
+			else if (type instanceof AbstractFloatDataType) {
+				appendNameIdAttributes(resBuf, type);
+				SpecXmlUtils.encodeStringAttribute(resBuf, "metatype", "float");
+				SpecXmlUtils.encodeSignedIntegerAttribute(resBuf, "size", type.getLength());
 			}
 			else {
-				// Build an "opaque" structure with no fields
-				SpecXmlUtils.encodeStringAttribute(resBuf, "metatype", "struct");
-			}
-			SpecXmlUtils.encodeSignedIntegerAttribute(resBuf, "size", sz);
-			if (isVarLength) {
-				SpecXmlUtils.encodeBooleanAttribute(resBuf, "varlength", true);
+				int sz = type.getLength();
+				boolean isVarLength = false;
+				if (sz <= 0) {
+					sz = size;
+					isVarLength = true;
+				}
+				appendNameIdAttributes(resBuf, type);
+				if (sz < 16) {
+					SpecXmlUtils.encodeStringAttribute(resBuf, "metatype", "unknown");
+				}
+				else {
+					// Build an "opaque" structure with no fields
+					SpecXmlUtils.encodeStringAttribute(resBuf, "metatype", "struct");
+				}
+				SpecXmlUtils.encodeSignedIntegerAttribute(resBuf, "size", sz);
+				if (isVarLength) {
+					SpecXmlUtils.encodeBooleanAttribute(resBuf, "varlength", true);
+				}
 			}
 			resBuf.append('>');
 		}
@@ -735,7 +755,7 @@ public class PcodeDataTypeManager {
 	}
 
 	private void sortCoreTypes() {
-		Arrays.sort(coreBuiltin, (o1, o2) -> Long.compare(o1.id, o2.id));
+		Arrays.sort(coreBuiltin, Comparator.comparing(o1 -> o1.id));
 	}
 
 	/**

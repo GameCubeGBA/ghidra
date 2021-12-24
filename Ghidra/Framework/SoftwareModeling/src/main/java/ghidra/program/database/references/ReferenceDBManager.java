@@ -16,32 +16,74 @@
 package ghidra.program.database.references;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import org.apache.commons.collections4.map.LazyMap;
 import org.apache.commons.collections4.map.LazySortedMap;
 
-import db.*;
+import db.DBConstants;
+import db.DBHandle;
+import db.DBRecord;
+import db.RecordIterator;
 import db.util.ErrorHandler;
-import ghidra.program.database.*;
+import ghidra.program.database.DBObjectCache;
+import ghidra.program.database.ManagerDB;
+import ghidra.program.database.ProgramDB;
 import ghidra.program.database.external.ExternalManagerDB;
 import ghidra.program.database.map.AddressMap;
-import ghidra.program.database.symbol.*;
-import ghidra.program.model.address.*;
+import ghidra.program.database.symbol.SymbolDB;
+import ghidra.program.database.symbol.SymbolManager;
+import ghidra.program.database.symbol.VariableSymbolDB;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressIterator;
+import ghidra.program.model.address.AddressOutOfBoundsException;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.address.EmptyAddressIterator;
+import ghidra.program.model.address.OldGenericNamespaceAddress;
+import ghidra.program.model.address.OverlayAddressSpace;
 import ghidra.program.model.lang.Register;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.CodeUnit;
+import ghidra.program.model.listing.Function;
+import ghidra.program.model.listing.Variable;
+import ghidra.program.model.listing.VariableStorage;
 import ghidra.program.model.pcode.Varnode;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.ExternalLocation;
+import ghidra.program.model.symbol.ExternalReference;
+import ghidra.program.model.symbol.Namespace;
+import ghidra.program.model.symbol.OffsetReference;
+import ghidra.program.model.symbol.RefType;
+import ghidra.program.model.symbol.Reference;
+import ghidra.program.model.symbol.ReferenceIterator;
+import ghidra.program.model.symbol.ReferenceManager;
+import ghidra.program.model.symbol.ShiftedReference;
+import ghidra.program.model.symbol.SourceType;
+import ghidra.program.model.symbol.Symbol;
+import ghidra.program.model.symbol.SymbolType;
+import ghidra.program.model.symbol.SymbolUtilities;
 import ghidra.program.util.ChangeManager;
 import ghidra.util.Lock;
-import ghidra.util.exception.*;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.ClosedException;
+import ghidra.util.exception.DuplicateNameException;
+import ghidra.util.exception.InvalidInputException;
+import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
 
 /**
  * Reference manager implementation for the database.
  */
 public class ReferenceDBManager implements ReferenceManager, ManagerDB, ErrorHandler {
-	private static final Reference[] NO_REFS = new Reference[0];
+	private static final Reference[] NO_REFS = {};
 
 	private FunctionVariableReferenceCacher functionCacher = new FunctionVariableReferenceCacher();
 
@@ -301,10 +343,8 @@ public class ReferenceDBManager implements ReferenceManager, ManagerDB, ErrorHan
 	 * @return combined reference type, or the newType if unable to combine
 	 */
 	private RefType combineReferenceType(RefType newType, RefType oldType) {
-		if (newType == RefType.DATA) {
-			if (oldType.isData()) {
-				return oldType;
-			}
+		if ((newType == RefType.DATA) && oldType.isData()) {
+			return oldType;
 		}
 		if (newType == RefType.DATA_IND) {
 			if (oldType.isIndirect()) {
@@ -315,21 +355,14 @@ public class ReferenceDBManager implements ReferenceManager, ManagerDB, ErrorHan
 			if (oldType == RefType.WRITE || oldType == RefType.READ_WRITE) {
 				return RefType.READ_WRITE;
 			}
+		} else if ((newType == RefType.WRITE) && (oldType == RefType.READ || oldType == RefType.READ_WRITE)) {
+			return RefType.READ_WRITE;
 		}
-		else if (newType == RefType.WRITE) {
-			if (oldType == RefType.READ || oldType == RefType.READ_WRITE) {
-				return RefType.READ_WRITE;
-			}
+		if ((newType == RefType.READ_IND) && (oldType == RefType.WRITE_IND || oldType == RefType.READ_WRITE_IND)) {
+			return RefType.READ_WRITE_IND;
 		}
-		if (newType == RefType.READ_IND) {
-			if (oldType == RefType.WRITE_IND || oldType == RefType.READ_WRITE_IND) {
-				return RefType.READ_WRITE_IND;
-			}
-		}
-		if (newType == RefType.WRITE_IND) {
-			if (oldType == RefType.READ_IND || oldType == RefType.READ_WRITE_IND) {
-				return RefType.READ_WRITE_IND;
-			}
+		if ((newType == RefType.WRITE_IND) && (oldType == RefType.READ_IND || oldType == RefType.READ_WRITE_IND)) {
+			return RefType.READ_WRITE_IND;
 		}
 		return newType;
 	}
@@ -1786,7 +1819,7 @@ public class ReferenceDBManager implements ReferenceManager, ManagerDB, ErrorHan
 		}
 	}
 
-	private class ExtEntryAddressIterator implements AddressIterator {
+	private static class ExtEntryAddressIterator implements AddressIterator {
 
 		private ReferenceIterator iter;
 		private Address currentAddress;
@@ -1821,11 +1854,9 @@ public class ReferenceDBManager implements ReferenceManager, ManagerDB, ErrorHan
 			if (currentAddress == null) {
 				while (iter.hasNext()) {
 					Reference ref = iter.next();
-					if (ref != null) {
-						if (ref.isEntryPointReference()) {
-							currentAddress = ref.getToAddress();
-							break;
-						}
+					if ((ref != null) && ref.isEntryPointReference()) {
+						currentAddress = ref.getToAddress();
+						break;
 					}
 				}
 			}
@@ -1869,10 +1900,7 @@ public class ReferenceDBManager implements ReferenceManager, ManagerDB, ErrorHan
 				return addExternalReference(from, extLoc.getParentNameSpace(), extLoc.getLabel(),
 					extLoc.getAddress(), sourceType, opIndex, type);
 			}
-			catch (DuplicateNameException e) {
-				throw new AssertException(e);
-			}
-			catch (InvalidInputException e) {
+			catch (DuplicateNameException | InvalidInputException e) {
 				throw new AssertException(e);
 			}
 		}
@@ -2046,7 +2074,7 @@ public class ReferenceDBManager implements ReferenceManager, ManagerDB, ErrorHan
 		}
 	}
 
-	private class Scope {
+	private static class Scope {
 
 		int outOfScopeOffset;
 		int firstUseOffset;

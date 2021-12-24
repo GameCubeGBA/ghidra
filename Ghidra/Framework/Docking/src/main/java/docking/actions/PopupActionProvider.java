@@ -46,5 +46,5 @@ public interface PopupActionProvider {
 	 * @param context the ActionContext
 	 * @return list of temporary popup actions; return null if there are no popup actions
 	 */
-	public List<DockingActionIf> getPopupActions(Tool tool, ActionContext context);
+	List<DockingActionIf> getPopupActions(Tool tool, ActionContext context);
 }

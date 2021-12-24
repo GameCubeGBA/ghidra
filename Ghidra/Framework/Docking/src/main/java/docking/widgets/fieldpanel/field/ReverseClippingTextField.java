@@ -15,14 +15,19 @@
  */
 package docking.widgets.fieldpanel.field;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.List;
 
 import javax.swing.JComponent;
 
 import docking.widgets.fieldpanel.internal.FieldBackgroundColorManager;
 import docking.widgets.fieldpanel.internal.PaintContext;
-import docking.widgets.fieldpanel.support.*;
+import docking.widgets.fieldpanel.support.DefaultRowColLocation;
+import docking.widgets.fieldpanel.support.Highlight;
+import docking.widgets.fieldpanel.support.HighlightFactory;
+import docking.widgets.fieldpanel.support.RowColLocation;
 
 /**
  * Field for showing multiple strings, each with its own attributes in a field,

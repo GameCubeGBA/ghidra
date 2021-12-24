@@ -234,9 +234,7 @@ public class PatternBlock {
 			value1 = getValue(sbit, tmplength);
 			mask2 = op2.getMask(sbit, tmplength);
 			value2 = op2.getValue(sbit, tmplength);
-			if ((mask1 & mask2) != mask2)
-				return false;
-			if ((value1 & mask2) != (value2 & mask2))
+			if (((mask1 & mask2) != mask2) || ((value1 & mask2) != (value2 & mask2)))
 				return false;
 			sbit += tmplength;
 		}
@@ -256,9 +254,7 @@ public class PatternBlock {
 			value1 = getValue(sbit, tmplength);
 			mask2 = op2.getMask(sbit, tmplength);
 			value2 = op2.getValue(sbit, tmplength);
-			if (mask1 != mask2)
-				return false;
-			if ((mask1 & value1) != (mask2 & value2))
+			if ((mask1 != mask2) || ((mask1 & value1) != (mask2 & value2)))
 				return false;
 			sbit += tmplength;
 		}
@@ -418,8 +414,8 @@ public class PatternBlock {
 	 */
 	public byte[] getWholeBytes() {
 		int count = 0;
-		for (int i = 0; i < maskvec.length; i++) {
-			int mask = maskvec[i];
+		for (int element : maskvec) {
+			int mask = element;
 			for (int j = 0; j < 4; j++) {
 				if ((mask & LEFT_BYTE) == LEFT_BYTE) {
 					count++;

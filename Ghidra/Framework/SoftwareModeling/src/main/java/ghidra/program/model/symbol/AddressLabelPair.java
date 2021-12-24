@@ -16,10 +16,10 @@
  */
 package ghidra.program.model.symbol;
 
+import java.io.Serializable;
+
 import ghidra.program.model.address.Address;
 import ghidra.util.SystemUtilities;
-
-import java.io.Serializable;
 
 /**
  * Container for holding an address and label.
@@ -59,10 +59,7 @@ public final class AddressLabelPair implements Serializable {
 	 */
     @Override
     public boolean equals(Object obj) {
-        if(obj == null) {
-            return false;
-        }
-        if(!(obj instanceof AddressLabelPair)) {
+        if((obj == null) || !(obj instanceof AddressLabelPair)) {
             return false;
         }
         

@@ -18,10 +18,15 @@ package ghidra.framework.main.logviewer.ui;
 import java.io.IOException;
 import java.util.Iterator;
 
-import javax.swing.*;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.JSlider;
+import javax.swing.JTable;
 import javax.swing.plaf.basic.BasicSliderUI;
 
-import ghidra.framework.main.logviewer.model.*;
+import ghidra.framework.main.logviewer.model.Chunk;
+import ghidra.framework.main.logviewer.model.ChunkModel;
+import ghidra.framework.main.logviewer.model.ChunkReader;
 import ghidra.util.Msg;
 
 /**

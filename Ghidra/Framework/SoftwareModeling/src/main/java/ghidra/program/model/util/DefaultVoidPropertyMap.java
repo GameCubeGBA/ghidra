@@ -39,6 +39,7 @@ public class DefaultVoidPropertyMap extends DefaultPropertyMap implements VoidPr
 	 * Mark the specified address as having a property
 	 * @param addr address for the property
 	 */
+	@Override
 	public void add(Address addr) {
 		propSet.put(addrMap.getKey(addr));
 	}
@@ -46,6 +47,7 @@ public class DefaultVoidPropertyMap extends DefaultPropertyMap implements VoidPr
 	/**
 	 * @see ghidra.program.model.util.PropertyMap#getObject(ghidra.program.model.address.Address)
 	 */
+	@Override
 	public Object getObject(Address addr) {
 		if (hasProperty(addr)) {
 			return Boolean.TRUE;

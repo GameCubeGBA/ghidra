@@ -16,15 +16,15 @@
  */
 package ghidra.pcodeCPort.slghpatexpress;
 
+import java.io.PrintStream;
+
+import org.jdom.Element;
+
 import generic.stl.VectorSTL;
 import ghidra.pcodeCPort.context.ParserWalker;
 import ghidra.pcodeCPort.translate.Translate;
 import ghidra.pcodeCPort.utils.XmlUtils;
 import ghidra.sleigh.grammar.Location;
-
-import java.io.PrintStream;
-
-import org.jdom.Element;
 
 public class ConstantValue extends PatternValue {
 

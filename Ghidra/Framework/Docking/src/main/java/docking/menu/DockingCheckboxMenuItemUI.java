@@ -15,7 +15,8 @@
  */
 package docking.menu;
 
-import javax.swing.*;
+import javax.swing.JComponent;
+import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.MenuItemUI;
 

@@ -18,7 +18,10 @@ package ghidra.program.database.code;
 import db.DBRecord;
 import ghidra.program.database.DBObjectCache;
 import ghidra.program.model.address.Address;
-import ghidra.program.model.data.*;
+import ghidra.program.model.data.Array;
+import ghidra.program.model.data.Composite;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.DataTypeComponent;
 import ghidra.program.model.listing.CodeUnit;
 import ghidra.program.model.listing.Data;
 import ghidra.program.model.mem.MemoryAccessException;
@@ -188,7 +191,7 @@ class DataComponent extends DataDB {
 	}
 
 	private String getComponentName(String parentPath) {
-		StringBuffer stringBuffer = new StringBuffer();
+		StringBuilder stringBuffer = new StringBuilder();
 		if (parentPath != null && parentPath.length() > 0) {
 			stringBuffer.append(parentPath);
 			if (component != null) { // not an array?

@@ -15,17 +15,26 @@
  */
 package docking.widgets.fieldpanel;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import docking.widgets.fieldpanel.field.*;
-import docking.widgets.fieldpanel.support.*;
+import docking.widgets.fieldpanel.field.AttributedString;
+import docking.widgets.fieldpanel.field.FieldElement;
+import docking.widgets.fieldpanel.field.TextFieldElement;
+import docking.widgets.fieldpanel.field.VerticalLayoutTextField;
+import docking.widgets.fieldpanel.support.DefaultRowColLocation;
+import docking.widgets.fieldpanel.support.Highlight;
+import docking.widgets.fieldpanel.support.HighlightFactory;
+import docking.widgets.fieldpanel.support.RowColLocation;
 import generic.test.AbstractGenericTest;
 
 public class VerticalLayoutTextFieldTest extends AbstractGenericTest {

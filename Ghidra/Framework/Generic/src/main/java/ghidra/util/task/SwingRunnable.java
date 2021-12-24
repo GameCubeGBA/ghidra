@@ -31,6 +31,6 @@ public interface SwingRunnable extends MonitoredRunnable {
 	/**
 	 * Callback on the swing thread.
 	 */
-	public void swingRun(boolean isCancelled);
+	void swingRun(boolean isCancelled);
 
 }

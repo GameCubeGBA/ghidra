@@ -25,6 +25,6 @@ public interface KeyStorePasswordProvider {
 	 * @return password or null, if not null caller will clear array
 	 * when no longer needed.
 	 */
-	public char[] getKeyStorePassword(String keystorePath, boolean passwordError);
+	char[] getKeyStorePassword(String keystorePath, boolean passwordError);
 
 }

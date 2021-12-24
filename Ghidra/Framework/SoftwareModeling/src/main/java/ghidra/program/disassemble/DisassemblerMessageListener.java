@@ -25,15 +25,14 @@ public interface DisassemblerMessageListener {
 	/**
 	 * Ignores all messages from the disassembler.
 	 */
-    public final static DisassemblerMessageListener IGNORE = new DisassemblerMessageListener() {
-        public void disassembleMessageReported(String msg) {//don't care...
-        }
-    };
+    DisassemblerMessageListener IGNORE = msg -> {//don't care...
+	};
 
     /**
      * Writes all messages from disassembler to the console.
      */
-    public final static DisassemblerMessageListener CONSOLE = new DisassemblerMessageListener() {
+    DisassemblerMessageListener CONSOLE = new DisassemblerMessageListener() {
+		@Override
 		public void disassembleMessageReported(String msg) {
 			Msg.debug(this, "DisassemblerMessageListener: "+msg);
 		}

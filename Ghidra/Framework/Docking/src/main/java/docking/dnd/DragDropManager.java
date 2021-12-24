@@ -33,7 +33,7 @@ public interface DragDropManager {
      * @param dragNode node where user is initiating the drag operation
      * @param dragAction user action for the drag operation
      */
-    public boolean isStartDragOk(DragDropNode dragNode, int dragAction);
+    boolean isStartDragOk(DragDropNode dragNode, int dragAction);
 
     /**
      * Return true if the drop site is valid for the given target and drag event.
@@ -41,7 +41,7 @@ public interface DragDropManager {
      * @param e the drag event
      * 
      */
-    public boolean isDropSiteOk(DragDropNode destNode, DropTargetDragEvent e);
+    boolean isDropSiteOk(DragDropNode destNode, DropTargetDragEvent e);
 
     /**
      * Add the given data to the destination node.
@@ -50,25 +50,25 @@ public interface DragDropManager {
      * @param chosen data flavor for the data being added
      * @param dropAction user action for drop operation
      */
-    public void add(DragDropNode destNode, Object data, 
+    void add(DragDropNode destNode, Object data, 
                     DataFlavor chosen, int dropAction);
 
     /**
      * Remove the given sourceNodes. (It got moved, so remove it at the source)
      * @param sourceNodes nodes to remove. 
      */
-    public void move(DragDropNode[] sourceNodes); 
+    void move(DragDropNode[] sourceNodes); 
 
     /**
      * Return the data flavors that can be dragged and dropped.
      */
-    public DataFlavor[] getAcceptableFlavors();
+    DataFlavor[] getAcceptableFlavors();
 
     /**
      * Get the transferable at the given point.
      * @param p point where the mouse pointer is when the drag begins
      */
-    public Transferable getTransferable(Point p);
+    Transferable getTransferable(Point p);
 
 }
 

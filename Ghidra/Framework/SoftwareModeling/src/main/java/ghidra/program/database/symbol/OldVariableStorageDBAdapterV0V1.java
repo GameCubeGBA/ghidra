@@ -17,7 +17,13 @@ package ghidra.program.database.symbol;
 
 import java.io.IOException;
 
-import db.*;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.IntField;
+import db.LongField;
+import db.Schema;
+import db.Table;
 
 /**
  * <code>OldVariableStorageDBAdapterV0V1</code> provide legacy variable storage 

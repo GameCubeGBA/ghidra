@@ -15,7 +15,9 @@
  */
 package ghidra.program.model;
 
-import ghidra.program.model.data.*;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.GenericCallingConvention;
+import ghidra.program.model.data.ParameterDefinition;
 import ghidra.program.model.listing.FunctionSignature;
 
 /**

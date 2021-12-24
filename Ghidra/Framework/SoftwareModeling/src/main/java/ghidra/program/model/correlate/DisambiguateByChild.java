@@ -31,7 +31,7 @@ public class DisambiguateByChild implements DisambiguateStrategy {
 
 	@Override
 	public ArrayList<Hash> calcHashes(InstructHash instHash, int matchSize, HashStore store) throws CancelledException {
-		ArrayList<Hash> res = new ArrayList<Hash>();
+		ArrayList<Hash> res = new ArrayList<>();
 		Block block = instHash.getBlock();
 		CodeBlockReferenceIterator iter = block.origBlock.getDestinations(store.getMonitor());
 		int count = 0;

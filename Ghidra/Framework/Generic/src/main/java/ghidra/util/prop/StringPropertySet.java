@@ -16,7 +16,9 @@
  */
 package ghidra.util.prop;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 /**
  * Handles general storage and retrieval of Strings indexed by long keys.

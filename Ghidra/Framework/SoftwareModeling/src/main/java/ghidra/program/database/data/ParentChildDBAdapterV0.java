@@ -17,7 +17,12 @@ package ghidra.program.database.data;
 
 import java.io.IOException;
 
-import db.*;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.LongField;
+import db.Schema;
+import db.Table;
 import ghidra.util.exception.VersionException;
 
 class ParentChildDBAdapterV0 extends ParentChildAdapter {

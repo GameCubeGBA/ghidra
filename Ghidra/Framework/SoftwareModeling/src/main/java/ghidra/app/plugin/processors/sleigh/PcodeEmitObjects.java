@@ -17,9 +17,13 @@ package ghidra.app.plugin.processors.sleigh;
 
 import java.util.ArrayList;
 
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.address.UniqueAddressFactory;
 import ghidra.program.model.lang.InstructionContext;
-import ghidra.program.model.pcode.*;
+import ghidra.program.model.pcode.PcodeOp;
+import ghidra.program.model.pcode.PcodeOverride;
+import ghidra.program.model.pcode.Varnode;
 
 public class PcodeEmitObjects extends PcodeEmit {
 
@@ -55,7 +59,7 @@ public class PcodeEmitObjects extends PcodeEmit {
 	public PcodeEmitObjects(ParserWalker walk, InstructionContext ictx, int fallOffset,
 			PcodeOverride override, UniqueAddressFactory uniqueFactory) {
 		super(walk, ictx, fallOffset, override, uniqueFactory);
-		oplist = new ArrayList<PcodeOp>();
+		oplist = new ArrayList<>();
 	}
 
 	public PcodeOp[] getPcodeOp() {
@@ -72,8 +76,7 @@ public class PcodeEmitObjects extends PcodeEmit {
 		if (labelref == null) {
 			return;
 		}
-		for (int i = 0; i < labelref.size(); ++i) {
-			int opindex = labelref.get(i);
+		for (Integer opindex : labelref) {
 			PcodeOp op = oplist.get(opindex);
 			Varnode vn = op.getInput(0);
 			int labelid = (int) vn.getOffset();
@@ -98,7 +101,7 @@ public class PcodeEmitObjects extends PcodeEmit {
 	@Override
 	void addLabelRef() {
 		if (labelref == null) {
-			labelref = new ArrayList<Integer>();
+			labelref = new ArrayList<>();
 		}
 		labelref.add(numOps);
 	}

@@ -15,12 +15,25 @@
  */
 package ghidra.graph.algo.viewer;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.AbstractButton;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import org.apache.commons.collections4.BidiMap;
 import org.apache.commons.collections4.bidimap.DualHashBidiMap;
@@ -28,7 +41,9 @@ import org.apache.commons.collections4.bidimap.DualHashBidiMap;
 import edu.uci.ics.jung.visualization.decorators.EdgeShape;
 import edu.uci.ics.jung.visualization.renderers.Renderer;
 import generic.util.image.ImageUtils;
-import ghidra.graph.*;
+import ghidra.graph.GDirectedGraph;
+import ghidra.graph.GEdge;
+import ghidra.graph.VisualGraph;
 import ghidra.graph.algo.GraphAlgorithmStatusListener;
 import ghidra.graph.graphs.DefaultVisualGraph;
 import ghidra.graph.viewer.GraphViewer;
@@ -338,8 +353,7 @@ public class TestGraphAlgorithmSteppingViewerPanel<V, E extends GEdge<V>> extend
 		public AbstractVisualGraphLayout<AlgorithmTestSteppingVertex<V>, AlgorithmTestSteppingEdge<V>> createClonedLayout(
 				VisualGraph<AlgorithmTestSteppingVertex<V>, AlgorithmTestSteppingEdge<V>> newGraph) {
 
-			TestGraphLayout newLayout = new TestGraphLayout((TestGraph) newGraph);
-			return newLayout;
+			return new TestGraphLayout((TestGraph) newGraph);
 		}
 
 	}

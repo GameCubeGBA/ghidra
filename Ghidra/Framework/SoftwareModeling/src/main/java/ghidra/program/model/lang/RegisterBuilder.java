@@ -15,7 +15,12 @@
  */
 package ghidra.program.model.lang;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 import ghidra.program.model.address.Address;
 import ghidra.util.Msg;
@@ -144,14 +149,7 @@ public class RegisterBuilder {
 		long parentOffset = parent.getOffset();
 		long childOffset = child.getOffset();
 		if ((childOffset < parentOffset) || (childOffset +
-			child.getMinimumByteSize() > parentOffset + parent.getMinimumByteSize())) {
-			return false;
-		}
-
-		if (parent.getLeastSignificantBit() != 0) {
-			return false;
-		}
-		if (parent.getBitLength() != parent.getMinimumByteSize() * 8) {
+			child.getMinimumByteSize() > parentOffset + parent.getMinimumByteSize()) || (parent.getLeastSignificantBit() != 0) || (parent.getBitLength() != parent.getMinimumByteSize() * 8)) {
 			return false;
 		}
 		return true;
@@ -195,10 +193,7 @@ public class RegisterBuilder {
 	 */
 	public boolean addAlias(String registerName, String alias) {
 		Register register = registerMap.get(registerName);
-		if (register == null) {
-			return false;
-		}
-		if (registerMap.containsKey(alias)) {
+		if ((register == null) || registerMap.containsKey(alias)) {
 			return false;
 		}
 		register.addAlias(alias);

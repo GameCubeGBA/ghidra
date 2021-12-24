@@ -15,11 +15,25 @@
  */
 package ghidra.util.graph;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.Vector;
 
 import ghidra.util.Msg;
 import ghidra.util.exception.NoValueException;
-import ghidra.util.graph.attributes.*;
+import ghidra.util.graph.attributes.Attribute;
+import ghidra.util.graph.attributes.AttributeManager;
+import ghidra.util.graph.attributes.DoubleAttribute;
+import ghidra.util.graph.attributes.IntegerAttribute;
+import ghidra.util.graph.attributes.LongAttribute;
+import ghidra.util.graph.attributes.ObjectAttribute;
+import ghidra.util.graph.attributes.StringAttribute;
 
 /** Base implementation of a directed graph. A directed graph consists
  * of a set of vertices (implemented as a VertexSet) and a set of edges
@@ -48,8 +62,8 @@ public class DirectedGraph {
 	public DirectedGraph(int vertexCapacity, int edgeCapacity) {
 		vertices = new VertexSet(this, vertexCapacity);
 		edges = new EdgeSet(this, edgeCapacity);
-		vertexAttributes = new AttributeManager<Vertex>(vertices);
-		edgeAttributes = new AttributeManager<Edge>(edges);
+		vertexAttributes = new AttributeManager<>(vertices);
+		edgeAttributes = new AttributeManager<>(edges);
 	}
 
 	/** Default constructor */
@@ -152,7 +166,7 @@ public class DirectedGraph {
 	 *  edges, the number of children and outvalence need not be the same.
 	 */
 	public Set<Vertex> getChildren(Vertex v) {
-		Set<Vertex> children = new HashSet<Vertex>();
+		Set<Vertex> children = new HashSet<>();
 		Edge e = vertices.getFirstOutgoingEdge(v);
 		while (e != null) {
 			children.add(e.to());
@@ -163,7 +177,7 @@ public class DirectedGraph {
 
 	/** Returns the outgoing edges from the given vertex. */
 	public Set<Edge> getOutgoingEdges(Vertex v) {
-		Set<Edge> outgoingEdges = new HashSet<Edge>();
+		Set<Edge> outgoingEdges = new HashSet<>();
 		Edge e = vertices.getFirstOutgoingEdge(v);
 		while (e != null) {
 			outgoingEdges.add(e);
@@ -176,7 +190,7 @@ public class DirectedGraph {
 	 *  into the given vertex.
 	 */
 	public Set<Vertex> getParents(Vertex v) {
-		Set<Vertex> parents = new HashSet<Vertex>();
+		Set<Vertex> parents = new HashSet<>();
 		Edge e = vertices.getFirstIncomingEdge(v);
 		while (e != null) {
 			parents.add(e.from());
@@ -187,7 +201,7 @@ public class DirectedGraph {
 
 	/** Returns a Set containing all of the edges to the given vertex. */
 	public Set<Edge> getIncomingEdges(Vertex v) {
-		Set<Edge> incomingEdges = new HashSet<Edge>();
+		Set<Edge> incomingEdges = new HashSet<>();
 		Edge e = vertices.getFirstIncomingEdge(v);
 		while (e != null) {
 			incomingEdges.add(e);
@@ -198,7 +212,7 @@ public class DirectedGraph {
 
 	/** Returns all children of the vertices in the given set. */
 	public Set<Vertex> getChildren(Set<Vertex> vs) {
-		Set<Vertex> children = new HashSet<Vertex>();
+		Set<Vertex> children = new HashSet<>();
 		Vertex v;
 		Edge e;
 		Iterator<Vertex> i = vs.iterator();
@@ -215,7 +229,7 @@ public class DirectedGraph {
 
 	/** Returns all parents of the vertices in the given set. */
 	public Set<Vertex> getParents(Set<Vertex> vs) {
-		Set<Vertex> parents = new HashSet<Vertex>();
+		Set<Vertex> parents = new HashSet<>();
 		Edge e;
 		Vertex v;
 		Iterator<Vertex> i = vs.iterator();
@@ -234,10 +248,10 @@ public class DirectedGraph {
 	 *  Note: The vertex is defined to be a descendant of itself.
 	 */
 	public Set<Vertex> getDescendants(Vertex v) {
-		Set<Vertex> seeds = new HashSet<Vertex>(11);
+		Set<Vertex> seeds = new HashSet<>(11);
 		seeds.add(v);
-		Set<Vertex> descendants = new HashSet<Vertex>(vertices.size() / 20);
-		Set<Vertex> newSeeds = new HashSet<Vertex>();
+		Set<Vertex> descendants = new HashSet<>(vertices.size() / 20);
+		Set<Vertex> newSeeds = new HashSet<>();
 		Iterator<Vertex> i;
 		Vertex vertex, child;
 		Edge e;
@@ -320,12 +334,10 @@ public class DirectedGraph {
 	public Set<Vertex> getDescendants(Vertex[] seedVertices) {
 		Edge edge;
 		Vertex parent, child;
-		Set<Vertex> descendants = new HashSet<Vertex>(2 * seedVertices.length);
-		Set<Vertex> pending = new HashSet<Vertex>(seedVertices.length);
-		Set<Vertex> newlyPending = new HashSet<Vertex>(seedVertices.length);
-		for (Vertex seedVertice : seedVertices) {
-			pending.add(seedVertice);
-		}
+		Set<Vertex> descendants = new HashSet<>(2 * seedVertices.length);
+		Set<Vertex> pending = new HashSet<>(seedVertices.length);
+		Set<Vertex> newlyPending = new HashSet<>(seedVertices.length);
+		Collections.addAll(pending, seedVertices);
 
 		while (!pending.isEmpty()) {
 			Iterator<Vertex> iter = pending.iterator();
@@ -352,10 +364,10 @@ public class DirectedGraph {
 	 *   Note: By definition a vertex is one of its own ancestors.
 	 */
 	public Set<Vertex> getAncestors(Vertex v) {
-		Set<Vertex> seeds = new HashSet<Vertex>(11);
+		Set<Vertex> seeds = new HashSet<>(11);
 		seeds.add(v);
-		Set<Vertex> ancestors = new HashSet<Vertex>(this.numVertices() / 20);
-		Set<Vertex> newSeeds = new HashSet<Vertex>();
+		Set<Vertex> ancestors = new HashSet<>(this.numVertices() / 20);
+		Set<Vertex> newSeeds = new HashSet<>();
 		Iterator<Vertex> i;
 		Vertex vertex, parent;
 		Edge e;
@@ -449,13 +461,13 @@ public class DirectedGraph {
 		DepthFirstSearch dfsb =
 			new DepthFirstSearch(this, dfsa.topologicalSort(), true, false, true);
 		//Err.debug(this, "The number of SCCs is " + dfsb.seedsUsed.size());
-		Set<Vertex> sccSeeds = new HashSet<Vertex>(dfsb.seedsUsed());
+		Set<Vertex> sccSeeds = new HashSet<>(dfsb.seedsUsed());
 		Set<Vertex>[] sccVertices = new Set[sccSeeds.size()]; // triggers unchecked warning
 		Vertex[] finishOrder = dfsb.topologicalSort();
 		int n = finishOrder.length;
 		int j = 0;
 		for (int i = 0; i < sccSeeds.size(); i++) {
-			sccVertices[i] = new HashSet<Vertex>(1);
+			sccVertices[i] = new HashSet<>(1);
 			do {
 				//Err.debug(this,  Long.toHexString(finishOrder[j].getName() ) + " ");
 				sccVertices[i].add(finishOrder[j++]);
@@ -475,11 +487,9 @@ public class DirectedGraph {
 	public Vector<Vertex> getEntryPoints() {
 
 		Vertex[] sources = this.vertices().getSources();
-		Set<Vertex> entryPointSet = new TreeSet<Vertex>();
-		Vector<Vertex> entryPoints = new Vector<Vertex>(sources.length);
-		for (Vertex source : sources) {
-			entryPointSet.add(source);
-		}
+		Set<Vertex> entryPointSet = new TreeSet<>();
+		Vector<Vertex> entryPoints = new Vector<>(sources.length);
+		Collections.addAll(entryPointSet, sources);
 		Set<Vertex> descendantsOfSources = this.getDescendants(sources);
 		Set<Vertex> nonDescendants = this.vertices().toSet();
 		nonDescendants.removeAll(descendantsOfSources);
@@ -612,9 +622,9 @@ public class DirectedGraph {
 	 *  same component a the given vertex.
 	 */
 	public Set<Vertex> getVerticesInContainingComponent(Vertex v) {
-		Set<Vertex> verticesInComponent = new HashSet<Vertex>();
-		Set<Vertex> toDo = new HashSet<Vertex>();
-		Set<Vertex> toDoNext = new HashSet<Vertex>();
+		Set<Vertex> verticesInComponent = new HashSet<>();
+		Set<Vertex> toDo = new HashSet<>();
+		Set<Vertex> toDoNext = new HashSet<>();
 		Set<Vertex> neighborhood;
 		Iterator<Vertex> i;
 		Vertex u;
@@ -651,9 +661,9 @@ public class DirectedGraph {
 		Vertex u, v;
 		Edge e;
 		DirectedGraph g;
-		Set<Vertex> accountedFor = new HashSet<Vertex>(this.numVertices());
-		Set<Vertex> toDo = new HashSet<Vertex>(this.numVertices());
-		List<DirectedGraph> components = new ArrayList<DirectedGraph>();
+		Set<Vertex> accountedFor = new HashSet<>(this.numVertices());
+		Set<Vertex> toDo = new HashSet<>(this.numVertices());
+		List<DirectedGraph> components = new ArrayList<>();
 		GraphIterator<Vertex> vertIter = this.vertexIterator();
 		Iterator<Vertex> iter;
 		int i;
@@ -780,7 +790,7 @@ public class DirectedGraph {
 	 *  neighbors.
 	 */
 	public Set<Vertex> getNeighborhood(Set<Vertex> vs) {
-		Set<Vertex> neighborhood = new HashSet<Vertex>(2 * vs.size());
+		Set<Vertex> neighborhood = new HashSet<>(2 * vs.size());
 		Iterator<Vertex> iter = vs.iterator();
 		while (iter.hasNext()) {
 			neighborhood.addAll(getNeighborhood(iter.next()));
@@ -798,7 +808,7 @@ public class DirectedGraph {
 	/** This method assigns levels in a top-down manner. Sources are on level 0.
 	 */
 	public IntegerAttribute<Vertex> getLevels() {
-		IntegerAttribute<Vertex> levels = new IntegerAttribute<Vertex>("Levels", this.vertices());
+		IntegerAttribute<Vertex> levels = new IntegerAttribute<>("Levels", this.vertices());
 		DepthFirstSearch dfs = new DepthFirstSearch(this, this.getSources(), true, true, false);
 		Vertex[] topologicalSort = dfs.topologicalSort();
 		int numVertices = this.numVertices();
@@ -983,7 +993,7 @@ public class DirectedGraph {
 		AttributeManager<Edge> attm = this.edgeAttributes;
 		AttributeManager<Edge> copyManager = copy.edgeAttributes();
 		String[] names = attm.getAttributeNames();
-		List<Attribute<Edge>> attrs = new ArrayList<Attribute<Edge>>(names.length);
+		List<Attribute<Edge>> attrs = new ArrayList<>(names.length);
 		for (String name : names) {
 			attrs.add(attm.getAttribute(name));
 		}
@@ -1070,7 +1080,7 @@ public class DirectedGraph {
 		AttributeManager<Vertex> attm = this.vertexAttributes;
 		AttributeManager<Vertex> copyManager = copy.vertexAttributes();
 		String[] names = attm.getAttributeNames();
-		List<Attribute<Vertex>> attrs = new ArrayList<Attribute<Vertex>>();
+		List<Attribute<Vertex>> attrs = new ArrayList<>();
 
 		for (String name : names) {
 			attrs.add(attm.getAttribute(name));
@@ -1194,14 +1204,14 @@ public class DirectedGraph {
 
 		AttributeManager<Edge> aman = other.edgeAttributes();
 		String[] vamNames = aman.getAttributeNames();
-		for (int i = 0; i < vamNames.length; i++) {
-			ObjectAttribute<Edge> att = (ObjectAttribute<Edge>) aman.getAttribute(vamNames[i]);
-			if (!this.edgeAttributes().hasAttributeNamed(vamNames[i])) {
-				this.edgeAttributes().createAttribute(vamNames[i], att.attributeType());
+		for (String vamName : vamNames) {
+			ObjectAttribute<Edge> att = (ObjectAttribute<Edge>) aman.getAttribute(vamName);
+			if (!this.edgeAttributes().hasAttributeNamed(vamName)) {
+				this.edgeAttributes().createAttribute(vamName, att.attributeType());
 			}
-			Object o = other.getEdgeProperty(vamNames[i], e);
+			Object o = other.getEdgeProperty(vamName, e);
 			if (o != null)
-				this.setEdgeProperty(vamNames[i], newe, o);
+				this.setEdgeProperty(vamName, newe, o);
 		}
 
 	}
@@ -1239,14 +1249,14 @@ public class DirectedGraph {
 
 		AttributeManager<Vertex> aman = other.vertexAttributes();
 		String[] vamNames = aman.getAttributeNames();
-		for (int i = 0; i < vamNames.length; i++) {
-			ObjectAttribute<Vertex> att = (ObjectAttribute<Vertex>) aman.getAttribute(vamNames[i]);
-			if (!this.vertexAttributes().hasAttributeNamed(vamNames[i])) {
-				this.vertexAttributes().createAttribute(vamNames[i], att.attributeType());
+		for (String vamName : vamNames) {
+			ObjectAttribute<Vertex> att = (ObjectAttribute<Vertex>) aman.getAttribute(vamName);
+			if (!this.vertexAttributes().hasAttributeNamed(vamName)) {
+				this.vertexAttributes().createAttribute(vamName, att.attributeType());
 			}
-			Object o = other.getVertexProperty(vamNames[i], vert);
+			Object o = other.getVertexProperty(vamName, vert);
 			if (o != null)
-				this.setVertexProperty(vamNames[i], vert, o);
+				this.setVertexProperty(vamName, vert, o);
 		}
 	}
 
@@ -1269,9 +1279,7 @@ public class DirectedGraph {
 	 */
 	protected Object getEdgeProperty(String propName, Edge e) {
 		ObjectAttribute<Edge> attrib = getEdgeAttribute(propName);
-		Object o = attrib.getValue(e);
-
-		return o;
+		return attrib.getValue(e);
 	}
 
 	/**
@@ -1347,7 +1355,7 @@ public class DirectedGraph {
 	 * @return the set of referent objects
 	 */
 	public static Set<?> verts2referentSet(Collection<Vertex> verts) {
-		Set<Object> s = new HashSet<Object>();
+		Set<Object> s = new HashSet<>();
 		Iterator<Vertex> vIter = verts.iterator();
 		while (vIter.hasNext()) {
 			Vertex vert = vIter.next();

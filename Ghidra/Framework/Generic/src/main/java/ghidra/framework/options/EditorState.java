@@ -16,8 +16,12 @@
 package ghidra.framework.options;
 
 import java.awt.Component;
-import java.beans.*;
-import java.util.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyEditor;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 import ghidra.framework.Application;
 
@@ -63,10 +67,7 @@ public class EditorState implements PropertyChangeListener {
 		}
 
 		EditorState other = (EditorState) obj;
-		if (!options.equals(other.options)) {
-			return false;
-		}
-		if (!name.equals(other.name)) {
+		if (!options.equals(other.options) || !name.equals(other.name)) {
 			return false;
 		}
 

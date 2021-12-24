@@ -15,8 +15,15 @@
  */
 package utility.module;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import generic.jar.ResourceFile;
 import ghidra.util.Msg;
@@ -43,9 +50,9 @@ public class ModuleManifestFile {
 
 	private String moduleName;
 	private boolean excludeFromGhidraJar;
-	private Map<String, String> fileIPMap = new HashMap<String, String>();
+	private Map<String, String> fileIPMap = new HashMap<>();
 
-	private Set<String> dataSearchIgnoreDirs = new HashSet<String>();
+	private Set<String> dataSearchIgnoreDirs = new HashSet<>();
 	private Set<String> fatJars = new HashSet<>();
 
 	public ModuleManifestFile(File moduleRootDir) throws IOException {

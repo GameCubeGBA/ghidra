@@ -16,7 +16,24 @@
  */
 package ghidra.pcodeCPort.slgh_compile;
 
-import ghidra.pcodeCPort.slghsymbol.*;
+import ghidra.pcodeCPort.slghsymbol.BitrangeSymbol;
+import ghidra.pcodeCPort.slghsymbol.ContextSymbol;
+import ghidra.pcodeCPort.slghsymbol.EndSymbol;
+import ghidra.pcodeCPort.slghsymbol.LabelSymbol;
+import ghidra.pcodeCPort.slghsymbol.MacroSymbol;
+import ghidra.pcodeCPort.slghsymbol.NameSymbol;
+import ghidra.pcodeCPort.slghsymbol.OperandSymbol;
+import ghidra.pcodeCPort.slghsymbol.SleighSymbol;
+import ghidra.pcodeCPort.slghsymbol.SpaceSymbol;
+import ghidra.pcodeCPort.slghsymbol.SpecificSymbol;
+import ghidra.pcodeCPort.slghsymbol.StartSymbol;
+import ghidra.pcodeCPort.slghsymbol.SubtableSymbol;
+import ghidra.pcodeCPort.slghsymbol.TokenSymbol;
+import ghidra.pcodeCPort.slghsymbol.UserOpSymbol;
+import ghidra.pcodeCPort.slghsymbol.ValueMapSymbol;
+import ghidra.pcodeCPort.slghsymbol.ValueSymbol;
+import ghidra.pcodeCPort.slghsymbol.VarnodeListSymbol;
+import ghidra.pcodeCPort.slghsymbol.VarnodeSymbol;
 
 class Yylval {
     SleighSymbol sym;

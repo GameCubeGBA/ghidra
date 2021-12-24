@@ -15,24 +15,38 @@
  */
 package docking.widgets.fieldpanel.internal;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.math.BigInteger;
 import java.util.ArrayList;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 
-import docking.widgets.fieldpanel.*;
-import docking.widgets.fieldpanel.field.*;
+import docking.widgets.fieldpanel.FieldPanel;
+import docking.widgets.fieldpanel.Layout;
+import docking.widgets.fieldpanel.LayoutModel;
+import docking.widgets.fieldpanel.field.AttributedString;
+import docking.widgets.fieldpanel.field.ClippingTextField;
+import docking.widgets.fieldpanel.field.FieldElement;
+import docking.widgets.fieldpanel.field.TextFieldElement;
 import docking.widgets.fieldpanel.listener.IndexMapper;
 import docking.widgets.fieldpanel.listener.LayoutModelListener;
-import docking.widgets.fieldpanel.support.*;
+import docking.widgets.fieldpanel.support.Highlight;
+import docking.widgets.fieldpanel.support.HighlightFactory;
+import docking.widgets.fieldpanel.support.SingleRowLayout;
 import docking.widgets.indexedscrollpane.IndexedScrollPane;
 
 public class TestBigLayoutModel implements LayoutModel {
-	private static final Highlight[] NO_HIGHLIGHTS = new Highlight[0];
+	private static final Highlight[] NO_HIGHLIGHTS = {};
 	private static final HighlightFactory hlFactory =
 		(field, text, cursorTextOffset) -> NO_HIGHLIGHTS;
-	ArrayList<LayoutModelListener> listeners = new ArrayList<LayoutModelListener>();
+	ArrayList<LayoutModelListener> listeners = new ArrayList<>();
 
 	FontMetrics fm;
 	//	BigInteger numIndexes = BigInteger.valueOf(1000000000000000L);
@@ -74,10 +88,7 @@ public class TestBigLayoutModel implements LayoutModel {
 
 	@Override
 	public Layout getLayout(BigInteger index) {
-		if (index.compareTo(BigInteger.ZERO) < 0) {
-			return null;
-		}
-		if (index.compareTo(numIndexes) >= 0) {
+		if ((index.compareTo(BigInteger.ZERO) < 0) || (index.compareTo(numIndexes) >= 0)) {
 			return null;
 		}
 		String text = name + ": This is line " + index +

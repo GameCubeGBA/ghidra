@@ -15,8 +15,16 @@
  */
 package ghidra.docking.util.painting;
 
-import java.awt.*;
-import java.awt.image.*;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GraphicsConfiguration;
+import java.awt.Image;
+import java.awt.ImageCapabilities;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.awt.image.ImageProducer;
+import java.awt.image.VolatileImage;
 
 import javax.swing.RepaintManager;
 

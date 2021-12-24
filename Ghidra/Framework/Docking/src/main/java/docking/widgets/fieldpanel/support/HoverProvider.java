@@ -26,12 +26,12 @@ public interface HoverProvider {
 	 * Returns true if this service's popup window is currently visible
 	 * @return true if this service's popup window is currently visible
 	 */
-	public boolean isShowing();
+	boolean isShowing();
 
 	/**
 	 * Hide this service's popup window if visible
 	 */
-	public void closeHover();
+	void closeHover();
 
 	/**
 	 * Notify this service that the mouse is hovering over a specific field within a 
@@ -41,7 +41,7 @@ public interface HoverProvider {
 	 * @param fieldBounds the rectangle containing the bounds of the given field.
 	 * @param event the last mouse motion event over the field viewer component (i.e., FieldPanel).
 	 */
-	public void mouseHovered(FieldLocation fieldLocation, Field field, Rectangle fieldBounds,
+	void mouseHovered(FieldLocation fieldLocation, Field field, Rectangle fieldBounds,
 			MouseEvent event);
 
 	/**
@@ -50,5 +50,5 @@ public interface HoverProvider {
 	 * 
 	 * @param amount the amount by which to scroll
 	 */
-	public void scroll(int amount);
+	void scroll(int amount);
 }

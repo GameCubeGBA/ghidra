@@ -36,7 +36,7 @@ public enum AutoParameterType {
 
 	private String displayName;
 
-	private AutoParameterType(String displayName) {
+	AutoParameterType(String displayName) {
 		this.displayName = displayName;
 	}
 

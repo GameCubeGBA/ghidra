@@ -35,12 +35,12 @@ public interface AbstractWrapperTypeColumnRenderer<T> extends GColumnRenderer<T>
 
 	// Overridden to only allow the constraint filtering mechanism.
 	@Override
-	public default ColumnConstraintFilterMode getColumnConstraintFilterMode() {
+	default ColumnConstraintFilterMode getColumnConstraintFilterMode() {
 		return ColumnConstraintFilterMode.ALLOW_CONSTRAINTS_FILTER_ONLY;
 	}
 
 	@Override
-	public default String getFilterString(T t, Settings settings) {
+	default String getFilterString(T t, Settings settings) {
 		// we don't use String values for filtering wrapper types
 		throw createWrapperTypeException();
 	}

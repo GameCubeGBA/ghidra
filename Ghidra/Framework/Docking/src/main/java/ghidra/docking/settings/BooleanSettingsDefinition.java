@@ -27,13 +27,13 @@ public interface BooleanSettingsDefinition extends SettingsDefinition {
 	 * @param settings the set of Settings values for a particular location or null for default value.
 	 * @return the values for this settings object given the context.
 	 */
-	public abstract boolean getValue(Settings settings);
+	boolean getValue(Settings settings);
 
 	/**
 	 * Sets the given value into the given settings object using this settingsDefinition as the key.
 	 * @param settings the settings object to store the value in.
 	 * @param value the value to store in the settings object using this settingsDefinition as the key.
 	 */
-	public abstract void setValue(Settings settings, boolean value);
+	void setValue(Settings settings, boolean value);
 
 }

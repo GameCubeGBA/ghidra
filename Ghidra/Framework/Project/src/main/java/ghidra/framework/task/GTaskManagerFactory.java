@@ -16,12 +16,12 @@
  */
 package ghidra.framework.task;
 
+import java.util.Map;
+import java.util.WeakHashMap;
+
 import generic.concurrent.GThreadPool;
 import ghidra.framework.model.UndoableDomainObject;
 import ghidra.util.exception.AssertException;
-
-import java.util.Map;
-import java.util.WeakHashMap;
 
 /**
  * Factory class managing a single GTaskManager for an UndoableDomainObject.
@@ -29,7 +29,7 @@ import java.util.WeakHashMap;
  */
 public class GTaskManagerFactory {
 	private static Map<UndoableDomainObject, GTaskManager> map =
-		new WeakHashMap<UndoableDomainObject, GTaskManager>();
+		new WeakHashMap<>();
 
 	/**
 	 * Returns the one GTaskManager for the domainObject. A new GTaskManager will be created if

@@ -330,18 +330,15 @@ abstract class AbstractAddressSpace implements AddressSpace {
 				throw new AddressOverflowException("Address Overflow in subtract: " + addr +
 					" - 0x" + Long.toHexString(displacement));
 			}
-			else if ((addrOff < 0 && result < 0) || (addrOff >= 0 && result >= 0)) {
+			else if (addrOff < 0 == result < 0) {
 				if (result > addrOff) {
 					throw new AddressOverflowException("Address Overflow in subtract: " + addr +
 						" - 0x" + Long.toHexString(displacement));
 				}
 			}
-		}
-		else {
-			if (result > addrOff || result < minOff) {
-				throw new AddressOverflowException("Address Overflow in subtract: " + addr +
-					" - 0x" + Long.toHexString(displacement));
-			}
+		} else if (result > addrOff || result < minOff) {
+			throw new AddressOverflowException("Address Overflow in subtract: " + addr +
+				" - 0x" + Long.toHexString(displacement));
 		}
 		return getUncheckedAddress(result);
 	}
@@ -390,18 +387,15 @@ abstract class AbstractAddressSpace implements AddressSpace {
 				throw new AddressOverflowException(
 					"Address Overflow in add: " + addr + " + 0x" + Long.toHexString(displacement));
 			}
-			else if ((addrOff < 0 && result < 0) || (addrOff >= 0 && result >= 0)) {
+			else if (addrOff < 0 == result < 0) {
 				if (result < addrOff) {
 					throw new AddressOverflowException("Address Overflow in add: " + addr +
 						" + 0x" + Long.toHexString(displacement));
 				}
 			}
-		}
-		else {
-			if (result < addrOff || result > maxOff) {
-				throw new AddressOverflowException(
-					"Address Overflow in add: " + addr + " + 0x" + Long.toHexString(displacement));
-			}
+		} else if (result < addrOff || result > maxOff) {
+			throw new AddressOverflowException(
+				"Address Overflow in add: " + addr + " + 0x" + Long.toHexString(displacement));
 		}
 
 		return getUncheckedAddress(result);
@@ -461,11 +455,7 @@ abstract class AbstractAddressSpace implements AddressSpace {
 
 	@Override
 	public boolean isSuccessor(Address addr1, Address addr2) {
-		if (!addr1.getAddressSpace().equals(addr2.getAddressSpace())) {
-			return false;
-		}
-
-		if (maxAddress.getOffset() == addr1.getOffset()) {
+		if (!addr1.getAddressSpace().equals(addr2.getAddressSpace()) || (maxAddress.getOffset() == addr1.getOffset())) {
 			return false;
 		}
 		return addr1.getOffset() == addr2.getOffset() - 1;
@@ -535,13 +525,7 @@ abstract class AbstractAddressSpace implements AddressSpace {
 		if (obj == this) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		if (hashcode != obj.hashCode()) {
+		if ((obj == null) || (getClass() != obj.getClass()) || (hashcode != obj.hashCode())) {
 			return false;
 		}
 
@@ -602,10 +586,7 @@ abstract class AbstractAddressSpace implements AddressSpace {
 
 	@Override
 	public long makeValidOffset(long offset) throws AddressOutOfBoundsException {
-		if (size == 64 || spaceSize == 0) {
-			return offset;
-		}
-		if ((offset >= minOffset && offset <= maxOffset)) {
+		if (size == 64 || spaceSize == 0 || (offset >= minOffset && offset <= maxOffset)) {
 			return offset;
 		}
 		if (signed) {
@@ -613,12 +594,9 @@ abstract class AbstractAddressSpace implements AddressSpace {
 				// sign extend negative offset
 				return offset - spaceSize;
 			}
-		}
-		else {
-			if (offset < 0 && offset >= -maxOffset - 1) {
-				// recover from accidental sign extension
-				return offset + spaceSize;
-			}
+		} else if (offset < 0 && offset >= -maxOffset - 1) {
+			// recover from accidental sign extension
+			return offset + spaceSize;
 		}
 		String max = Long.toHexString(maxOffset);
 		String min = Long.toHexString(minOffset);

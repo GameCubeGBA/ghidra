@@ -23,7 +23,7 @@ import ghidra.program.model.mem.MemBuffer;
  */
 public interface Array extends DataType {
 
-	public static final String ARRAY_LABEL_PREFIX = "ARRAY";
+	String ARRAY_LABEL_PREFIX = "ARRAY";
 
 	/**
 	 * Returns the number of elements in the array
@@ -58,7 +58,7 @@ public interface Array extends DataType {
 	 * @param options options for how to format the default label prefix.
 	 * @return the label prefix or null if not applicable
 	 */
-	default public String getArrayDefaultLabelPrefix(MemBuffer buf, Settings settings, int len,
+	default String getArrayDefaultLabelPrefix(MemBuffer buf, Settings settings, int len,
 			DataTypeDisplayOptions options) {
 		ArrayStringable stringableElementType = ArrayStringable.getArrayStringable(getDataType());
 		String prefix = (stringableElementType != null)
@@ -80,7 +80,7 @@ public interface Array extends DataType {
 	 * @param offcutLength offcut offset from start of buf
 	 * @return the offcut label prefix or null if not applicable
 	 */
-	default public String getArrayDefaultOffcutLabelPrefix(MemBuffer buf, Settings settings,
+	default String getArrayDefaultOffcutLabelPrefix(MemBuffer buf, Settings settings,
 			int len, DataTypeDisplayOptions options, int offcutLength) {
 
 		ArrayStringable stringableElementType = ArrayStringable.getArrayStringable(getDataType());
@@ -101,7 +101,7 @@ public interface Array extends DataType {
 	 * @param length length of array
 	 * @return a String if it is an array of chars; otherwise empty string, never null.
 	 */
-	default public String getArrayRepresentation(MemBuffer buf, Settings settings, int length) {
+	default String getArrayRepresentation(MemBuffer buf, Settings settings, int length) {
 		if (getNumElements() == 0) {
 			return "";
 		}
@@ -131,9 +131,7 @@ public interface Array extends DataType {
 			return null;
 		}
 		ArrayStringable as = ArrayStringable.getArrayStringable(getDataType());
-		Object value = (as != null) ? as.getArrayString(buf, settings, length) : null;
-
-		return value;
+		return (as != null) ? as.getArrayString(buf, settings, length) : null;
 		// TODO
 		// For large array it is not scalable to create a java array object.  Perhaps
 		// we could create a GhidraArray that can dish out objects.
@@ -160,15 +158,13 @@ public interface Array extends DataType {
 	 * @return Class of the value to be returned by the array or null if it can vary
 	 * or is unspecified (String or Array class will be returned).
 	 */
-	default public Class<?> getArrayValueClass(Settings settings) {
+	default Class<?> getArrayValueClass(Settings settings) {
 		DataType dt = getDataType();
 		if (dt instanceof TypeDef) {
 			dt = ((TypeDef) dt).getBaseDataType();
 		}
-		if (dt instanceof ArrayStringable) {
-			if (((ArrayStringable) dt).hasStringValue(settings)) {
-				return String.class;
-			}
+		if ((dt instanceof ArrayStringable) && ((ArrayStringable) dt).hasStringValue(settings)) {
+			return String.class;
 		}
 		Class<?> valueClass = dt.getValueClass(settings);
 		return valueClass != null ? Array.class : null;

@@ -16,10 +16,10 @@
  */
 package ghidra.pcode.opbehavior;
 
+import java.math.BigInteger;
+
 import ghidra.pcode.utils.Utils;
 import ghidra.program.model.pcode.PcodeOp;
-
-import java.math.BigInteger;
 
 public class OpBehaviorIntLessEqual extends BinaryOpBehavior {
 
@@ -59,8 +59,7 @@ public class OpBehaviorIntLessEqual extends BinaryOpBehavior {
 
 	@Override
 	public BigInteger evaluateBinary(int sizeout, int sizein, BigInteger in1, BigInteger in2) {
-		BigInteger res = (in1.compareTo(in2) <= 0) ? BigInteger.ONE : BigInteger.ZERO;
-		return res;
+		return (in1.compareTo(in2) <= 0) ? BigInteger.ONE : BigInteger.ZERO;
 	}
 
 }

@@ -36,39 +36,39 @@ public interface LayoutModel {
 	/**
 	 * Returns the width of the largest possible layout.
 	 */
-	public Dimension getPreferredViewSize();
+	Dimension getPreferredViewSize();
 
 	/**
 	 * Returns the total number of indexes.
 	 */
-	public BigInteger getNumIndexes();
+	BigInteger getNumIndexes();
 
 	/**
 	 * Returns the closest larger index in the model that has a non-null layout.
 	 * @param index for which to find the next index with a non-null layout.
 	 * @return returns the closest larger index in the model that has a non-null layout.
 	 */
-	public BigInteger getIndexAfter(BigInteger index);
+	BigInteger getIndexAfter(BigInteger index);
 
 	/**
 	 * Returns the closest smaller index in the model that has a non-null layout.
 	 * @param index for which to find the previous index with a non-null layout.
 	 * @return returns the closest smaller index in the model that has a non-null layout.
 	 */
-	public BigInteger getIndexBefore(BigInteger index);
+	BigInteger getIndexBefore(BigInteger index);
 
 	/**
 	 * Returns a layout for the given index.
 	 * @param index the index of the layout to retrieve.
 	 */
-	public Layout getLayout(BigInteger index);
+	Layout getLayout(BigInteger index);
 
 	/**
 	 * Returns an iterator that walks all the Layout items in this model.
 	 * 
 	 * @return new iterator
 	 */
-	public default LayoutModelIterator iterator() {
+	default LayoutModelIterator iterator() {
 		return new LayoutModelIterator(this);
 	}
 
@@ -79,7 +79,7 @@ public interface LayoutModel {
 	 * @param startIndex start index in the model to beginning iterating
 	 * @return new iterator
 	 */
-	public default LayoutModelIterator iterator(BigInteger startIndex) {
+	default LayoutModelIterator iterator(BigInteger startIndex) {
 		return new LayoutModelIterator(this, startIndex);
 	}
 
@@ -87,17 +87,17 @@ public interface LayoutModel {
 	 * Adds a LayoutModelListener to be notified when changes occur.
 	 * @param listener the LayoutModelListener to add.
 	 */
-	public void addLayoutModelListener(LayoutModelListener listener);
+	void addLayoutModelListener(LayoutModelListener listener);
 
 	/**
 	 * Removes a LayoutModelListener to be notified when changes occur.
 	 * @param listener the LayoutModelListener to remove.
 	 */
-	public void removeLayoutModelListener(LayoutModelListener listener);
+	void removeLayoutModelListener(LayoutModelListener listener);
 
 	/**
 	 * Returns true if the model knows about changes that haven't yet been told to the 
 	 * LayoutModelListeners.
 	 */
-	public void flushChanges();
+	void flushChanges();
 }

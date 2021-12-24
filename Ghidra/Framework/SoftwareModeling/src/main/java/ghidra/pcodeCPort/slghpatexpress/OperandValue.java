@@ -20,9 +20,14 @@ import java.io.PrintStream;
 import org.jdom.Element;
 
 import generic.stl.VectorSTL;
-import ghidra.pcodeCPort.context.*;
+import ghidra.pcodeCPort.context.ConstructState;
+import ghidra.pcodeCPort.context.ParserWalker;
+import ghidra.pcodeCPort.context.SleighError;
 import ghidra.pcodeCPort.sleighbase.SleighBase;
-import ghidra.pcodeCPort.slghsymbol.*;
+import ghidra.pcodeCPort.slghsymbol.Constructor;
+import ghidra.pcodeCPort.slghsymbol.OperandSymbol;
+import ghidra.pcodeCPort.slghsymbol.SubtableSymbol;
+import ghidra.pcodeCPort.slghsymbol.TripleSymbol;
 import ghidra.pcodeCPort.translate.Translate;
 import ghidra.pcodeCPort.utils.MutableInt;
 import ghidra.pcodeCPort.utils.XmlUtils;
@@ -97,8 +102,7 @@ public class OperandValue extends PatternValue {
 		ConstructState tempstate = new ConstructState();
 		ParserWalker newwalker = new ParserWalker(pos.getParserContext());
 		newwalker.setOutOfBandState(ct, index, tempstate, pos);
-		long res = patexp.getValue(newwalker);
-		return res;
+		return patexp.getValue(newwalker);
 	}
 
 	@Override

@@ -19,14 +19,17 @@ import generic.stl.IteratorSTL;
 import generic.stl.VectorSTL;
 import ghidra.pcodeCPort.context.SleighError;
 import ghidra.pcodeCPort.context.Token;
-import ghidra.pcodeCPort.slghpattern.*;
+import ghidra.pcodeCPort.slghpattern.ContextPattern;
+import ghidra.pcodeCPort.slghpattern.InstructionPattern;
+import ghidra.pcodeCPort.slghpattern.Pattern;
+import ghidra.pcodeCPort.slghpattern.PatternBlock;
 import ghidra.sleigh.grammar.Location;
 
 public class TokenPattern {
 	public final Location location;
 
 	private Pattern pattern;
-	private VectorSTL<Token> toklist = new VectorSTL<Token>();
+	private VectorSTL<Token> toklist = new VectorSTL<>();
 	private boolean leftell;
 	private boolean rightell;
 
@@ -89,15 +92,15 @@ public class TokenPattern {
 			tok1.toklist.size() < tok2.toklist.size() ? tok1.toklist.size() : tok2.toklist.size();
 		if (minsize == 0) {
 			// Check if pattern doesn't care about tokens
-			if ((tok1.toklist.size() == 0) && (tok1.getLeftEllipsis() == false) &&
-				(tok1.getRightEllipsis() == false)) {
+			if ((tok1.toklist.size() == 0) && !tok1.getLeftEllipsis() &&
+				!tok1.getRightEllipsis()) {
 				toklist = tok2.toklist.copy();
 				setLeftEllipsis(tok2.getLeftEllipsis());
 				setRightEllipsis(tok2.getRightEllipsis());
 				return 0;
 			}
-			else if ((tok2.toklist.size() == 0) && (tok2.getLeftEllipsis() == false) &&
-				(tok2.getRightEllipsis() == false)) {
+			else if ((tok2.toklist.size() == 0) && !tok2.getLeftEllipsis() &&
+				!tok2.getRightEllipsis()) {
 				toklist = tok1.toklist.copy();
 				setLeftEllipsis(tok1.getLeftEllipsis());
 				setRightEllipsis(tok1.getRightEllipsis());
@@ -138,32 +141,29 @@ public class TokenPattern {
 			else if (tok1.toklist.size() == tok2.toklist.size()) {
 				throw new SleighError("Pattern size cannot vary (missing ... ?)", location);
 			}
+		} else if (tok2.getLeftEllipsis()) {
+			reversedirection = true;
+			if (tok2.toklist.size() != minsize) {
+				throw new SleighError(String.format("Mismatched pattern sizes -- %d vs %d",
+					tok2.toklist.size(), minsize), location);
+			}
+			else if (tok1.toklist.size() == tok2.toklist.size()) {
+				throw new SleighError("Pattern size cannot vary (missing ... ?)", location);
+			}
+		}
+		else if (tok2.getRightEllipsis()) {
+			if (tok2.toklist.size() != minsize) {
+				throw new SleighError(String.format("Mismatched pattern sizes -- %d vs %d",
+					tok1.toklist.size(), minsize), location);
+			}
+			else if (tok1.toklist.size() == tok2.toklist.size()) {
+				throw new SleighError("Pattern size cannot vary (missing ... ?)", location);
+			}
 		}
 		else {
-			if (tok2.getLeftEllipsis()) {
-				reversedirection = true;
-				if (tok2.toklist.size() != minsize) {
-					throw new SleighError(String.format("Mismatched pattern sizes -- %d vs %d",
-						tok2.toklist.size(), minsize), location);
-				}
-				else if (tok1.toklist.size() == tok2.toklist.size()) {
-					throw new SleighError("Pattern size cannot vary (missing ... ?)", location);
-				}
-			}
-			else if (tok2.getRightEllipsis()) {
-				if (tok2.toklist.size() != minsize) {
-					throw new SleighError(String.format("Mismatched pattern sizes -- %d vs %d",
-						tok1.toklist.size(), minsize), location);
-				}
-				else if (tok1.toklist.size() == tok2.toklist.size()) {
-					throw new SleighError("Pattern size cannot vary (missing ... ?)", location);
-				}
-			}
-			else {
-				if (tok2.toklist.size() != tok1.toklist.size()) {
-					throw new SleighError(String.format("Mismatched pattern sizes -- %d vs %d",
-						tok2.toklist.size(), tok1.toklist.size()), location);
-				}
+			if (tok2.toklist.size() != tok1.toklist.size()) {
+				throw new SleighError(String.format("Mismatched pattern sizes -- %d vs %d",
+					tok2.toklist.size(), tok1.toklist.size()), location);
 			}
 		}
 		if (reversedirection) {
@@ -362,7 +362,7 @@ public class TokenPattern {
 	public TokenPattern(Location location, TokenPattern tokpat) {
 		this.location = location;
 		simplifyPattern(tokpat);
-		toklist = new VectorSTL<Token>(tokpat.toklist);
+		toklist = new VectorSTL<>(tokpat.toklist);
 		setLeftEllipsis(tokpat.getLeftEllipsis());
 		setRightEllipsis(tokpat.getRightEllipsis());
 	}
@@ -371,7 +371,7 @@ public class TokenPattern {
 		pattern.dispose();
 
 		simplifyPattern(tokpat);
-		toklist = new VectorSTL<Token>(tokpat.toklist);
+		toklist = new VectorSTL<>(tokpat.toklist);
 		setLeftEllipsis(tokpat.getLeftEllipsis());
 		setRightEllipsis(tokpat.getRightEllipsis());
 		return this;
@@ -412,10 +412,8 @@ public class TokenPattern {
 		res.setRightEllipsis(getRightEllipsis());
 		res.toklist = toklist.copy();
 		if (getRightEllipsis() || tokpat.getLeftEllipsis()) { // Check for interior ellipsis
-			if (getRightEllipsis()) {
-				if (!tokpat.alwaysInstructionTrue()) {
-					throw new SleighError("Interior ellipsis in pattern", location);
-				}
+			if (getRightEllipsis() && !tokpat.alwaysInstructionTrue()) {
+				throw new SleighError("Interior ellipsis in pattern", location);
 			}
 			if (tokpat.getLeftEllipsis()) {
 				if (!alwaysInstructionTrue()) {

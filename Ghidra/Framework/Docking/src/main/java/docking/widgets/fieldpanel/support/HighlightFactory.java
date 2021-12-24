@@ -28,5 +28,5 @@ public interface HighlightFactory {
 	 * 		  cursor is not in this field.
 	 * @return an array of highlights to be rendered
 	 */
-	public Highlight[] getHighlights(Field field, String text, int cursorTextOffset);
+	Highlight[] getHighlights(Field field, String text, int cursorTextOffset);
 }

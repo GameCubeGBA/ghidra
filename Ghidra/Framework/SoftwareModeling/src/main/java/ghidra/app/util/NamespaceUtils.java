@@ -15,13 +15,27 @@
  */
 package ghidra.app.util;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.GlobalNamespace;
-import ghidra.program.model.listing.*;
-import ghidra.program.model.symbol.*;
-import ghidra.util.exception.*;
+import ghidra.program.model.listing.Function;
+import ghidra.program.model.listing.FunctionManager;
+import ghidra.program.model.listing.GhidraClass;
+import ghidra.program.model.listing.Library;
+import ghidra.program.model.listing.Program;
+import ghidra.program.model.symbol.Namespace;
+import ghidra.program.model.symbol.SourceType;
+import ghidra.program.model.symbol.Symbol;
+import ghidra.program.model.symbol.SymbolIterator;
+import ghidra.program.model.symbol.SymbolTable;
+import ghidra.program.model.symbol.SymbolType;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.DuplicateNameException;
+import ghidra.util.exception.InvalidInputException;
 
 /**
  * A class to hold utility methods for working with namespaces.
@@ -160,8 +174,7 @@ public class NamespaceUtils {
 		}
 
 		List<String> namespaceNames = path.asList();
-		List<Namespace> namespaces = doGetNamespaces(namespaceNames, parent, program);
-		return namespaces;
+		return doGetNamespaces(namespaceNames, parent, program);
 	}
 
 	private static List<Namespace> doGetNamespaces(List<String> namespaceNames,
@@ -415,10 +428,8 @@ public class NamespaceUtils {
 
 		FunctionManager fm = program.getFunctionManager();
 		Function f = fm.getFunctionContaining(address);
-		if (f != null) {
-			if (symbolPath.matchesPathOf(f.getSymbol())) {
-				return f;
-			}
+		if ((f != null) && symbolPath.matchesPathOf(f.getSymbol())) {
+			return f;
 		}
 		return null;
 	}
@@ -493,11 +504,9 @@ public class NamespaceUtils {
 	}
 
 	private static void validate(Program program, Namespace namespace) {
-		if (namespace != null && !namespace.isGlobal()) {
-			if (program != namespace.getSymbol().getProgram()) {
-				throw new IllegalArgumentException(
-					"Given namespace does not belong to the given program");
-			}
+		if ((namespace != null && !namespace.isGlobal()) && (program != namespace.getSymbol().getProgram())) {
+			throw new IllegalArgumentException(
+				"Given namespace does not belong to the given program");
 		}
 	}
 

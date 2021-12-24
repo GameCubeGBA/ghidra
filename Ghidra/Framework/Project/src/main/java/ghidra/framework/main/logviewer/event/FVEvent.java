@@ -27,7 +27,7 @@ package ghidra.framework.main.logviewer.event;
  */
 public class FVEvent {
 
-	public static enum EventType {
+	public enum EventType {
 		COPY_SELECTION,
 		DECREMENT_SELECTION,
 		DECREMENT_AND_ADD_SELECTION,

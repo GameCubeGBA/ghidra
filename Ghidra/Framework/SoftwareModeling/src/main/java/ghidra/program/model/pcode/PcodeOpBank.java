@@ -31,9 +31,9 @@ public class PcodeOpBank {
 	private int nextUnique;					// Next unique index for created op
 
 	public PcodeOpBank() {
-		opTree = new TreeMap<SequenceNumber, PcodeOpAST>();
-		deadList = new ListLinked<Object>();
-		aliveList = new ListLinked<Object>();
+		opTree = new TreeMap<>();
+		deadList = new ListLinked<>();
+		aliveList = new ListLinked<>();
 		nextUnique = 0;
 	}
 

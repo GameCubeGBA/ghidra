@@ -16,7 +16,10 @@
  */
 package ghidra.program.database.code;
 
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.CodeUnit;
+import ghidra.program.model.listing.CodeUnitIterator;
+import ghidra.program.model.listing.Data;
+import ghidra.program.model.listing.DataIterator;
 
 /**
  * Converts a code unit iterator into a data iterator.
@@ -36,6 +39,7 @@ public class DataFilteredCodeUnitIterator implements DataIterator {
 	/**
 	 * @see java.util.Iterator#remove()
 	 */
+	@Override
 	public void remove() {
 		throw new UnsupportedOperationException();
 	}
@@ -43,6 +47,7 @@ public class DataFilteredCodeUnitIterator implements DataIterator {
 	/**
 	 * @see ghidra.program.model.listing.DataIterator#hasNext()
 	 */
+	@Override
 	public boolean hasNext() {
 		if (nextData == null) {
 			findNext();
@@ -53,6 +58,7 @@ public class DataFilteredCodeUnitIterator implements DataIterator {
 	/**
 	 * @see ghidra.program.model.listing.DataIterator#next()
 	 */
+	@Override
 	public Data next() {
 		if (hasNext()) {
 			Data ret = nextData;

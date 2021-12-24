@@ -15,21 +15,30 @@
  */
 package ghidra.framework.store.db;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
 
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
-import db.buffers.*;
+import db.buffers.BufferFileBlock;
+import db.buffers.BufferMgr;
+import db.buffers.InputBlockStream;
+import db.buffers.LocalBufferFile;
 import generic.test.AbstractGenericTest;
 import ghidra.framework.store.local.LocalFileSystem;
 import ghidra.framework.store.local.LocalFolderItem;
 import ghidra.util.InvalidNameException;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
-import mockit.*;
+import mockit.Invocation;
+import mockit.Mock;
+import mockit.MockUp;
 import utilities.util.FileUtilities;
 
 public class VersionFailureRecoveryTest extends AbstractGenericTest {
@@ -74,10 +83,7 @@ public class VersionFailureRecoveryTest extends AbstractGenericTest {
 				"comment", "PROGRAM", false, TaskMonitor.DUMMY, "test-user");
 			fail("Expected IOException");
 		}
-		catch (InvalidNameException e) {
-			fail("unexpected");
-		}
-		catch (CancelledException e) {
+		catch (InvalidNameException | CancelledException e) {
 			fail("unexpected");
 		}
 		catch (IOException e) {

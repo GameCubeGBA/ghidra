@@ -27,20 +27,20 @@ public interface AssemblerBuilder {
 	 * Get the ID of the language for which this instance builds an assembler
 	 * @return the language ID
 	 */
-	public LanguageID getLanguageID();
+	LanguageID getLanguageID();
 
 	/**
 	 * Get the language for which this instance builds an assembler
 	 * @return the language
 	 */
-	public Language getLanguage();
+	Language getLanguage();
 
 	/**
 	 * Build an assembler with the given selector callback
 	 * @param selector the selector callback
 	 * @return the built assembler
 	 */
-	public Assembler getAssembler(AssemblySelector selector);
+	Assembler getAssembler(AssemblySelector selector);
 
 	/**
 	 * Build an assembler with the given selector callback and program binding
@@ -48,5 +48,5 @@ public interface AssemblerBuilder {
 	 * @param program the bound program
 	 * @return the built assembler
 	 */
-	public Assembler getAssembler(AssemblySelector selector, Program program);
+	Assembler getAssembler(AssemblySelector selector, Program program);
 }

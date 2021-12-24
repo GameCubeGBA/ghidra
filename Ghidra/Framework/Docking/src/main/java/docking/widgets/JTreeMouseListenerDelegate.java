@@ -15,8 +15,12 @@
  */
 package docking.widgets;
 
-import java.awt.event.*;
-import java.util.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 import javax.swing.JTree;
@@ -144,10 +148,8 @@ public class JTreeMouseListenerDelegate extends MouseAdapter {
 		}
 
 		TreePath selPath = tree.getPathForLocation(e.getX(), e.getY());
-		if (selPath != null) {
-			if (!tree.isPathSelected(selPath)) {
-				setSelectedPathNow(selPath);
-			}
+		if ((selPath != null) && !tree.isPathSelected(selPath)) {
+			setSelectedPathNow(selPath);
 		}
 		return true;
 	}

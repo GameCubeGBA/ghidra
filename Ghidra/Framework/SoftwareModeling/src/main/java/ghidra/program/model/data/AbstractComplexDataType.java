@@ -28,14 +28,15 @@ import ghidra.program.model.mem.WrappedMemBuffer;
 public abstract class AbstractComplexDataType extends BuiltIn {
 
 	protected static AbstractComplexDataType getDefaultComplexDataType(int size) {
-		if (size == 8) {
+		switch (size) {
+		case 8:
 			return Complex8DataType.dataType;
-		}
-		if (size == 16) {
+		case 16:
 			return Complex16DataType.dataType;
-		}
-		if (size == 32) {
+		case 32:
 			return Complex32DataType.dataType;
+		default:
+			break;
 		}
 		return null;
 	}

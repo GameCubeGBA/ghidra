@@ -15,18 +15,34 @@
  */
 package ghidra.app.plugin.assembler.sleigh.sem;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.collections4.IteratorUtils;
 
 import com.google.common.collect.Sets;
 
 import ghidra.app.plugin.assembler.sleigh.SleighAssemblerBuilder;
-import ghidra.app.plugin.assembler.sleigh.expr.*;
+import ghidra.app.plugin.assembler.sleigh.expr.MaskedLong;
+import ghidra.app.plugin.assembler.sleigh.expr.NeedsBackfillException;
+import ghidra.app.plugin.assembler.sleigh.expr.RecursiveDescentSolver;
 import ghidra.app.plugin.assembler.sleigh.grammars.AssemblyGrammar;
 import ghidra.app.plugin.assembler.sleigh.grammars.AssemblyProduction;
-import ghidra.app.plugin.assembler.sleigh.symbol.*;
-import ghidra.app.plugin.assembler.sleigh.tree.*;
+import ghidra.app.plugin.assembler.sleigh.symbol.AssemblyNonTerminal;
+import ghidra.app.plugin.assembler.sleigh.symbol.AssemblyNumericTerminal;
+import ghidra.app.plugin.assembler.sleigh.symbol.AssemblySymbol;
+import ghidra.app.plugin.assembler.sleigh.tree.AssemblyParseBranch;
+import ghidra.app.plugin.assembler.sleigh.tree.AssemblyParseNumericToken;
+import ghidra.app.plugin.assembler.sleigh.tree.AssemblyParseTreeNode;
 import ghidra.app.plugin.assembler.sleigh.util.DbgTimer;
 import ghidra.app.plugin.assembler.sleigh.util.DbgTimer.DbgCtx;
 import ghidra.app.plugin.processors.sleigh.Constructor;
@@ -418,8 +434,7 @@ public class AssemblyTreeResolver {
 					throw e;
 				}
 			}
-			results = tryResolveBackfills(results);
-			return results;
+			return tryResolveBackfills(results);
 		}
 	}
 
@@ -438,12 +453,7 @@ public class AssemblyTreeResolver {
 					continue next_ar;
 				}
 				ar = rc.backfill(solver, vals);
-				if (ar.isError() || ar.isBackfill()) {
-					// fail: It is now known that the solution doesn't exist
-					res.add(ar);
-					continue next_ar;
-				}
-				if (ar.equals(rc)) {
+				if (ar.isError() || ar.isBackfill() || ar.equals(rc)) {
 					// fail: The solution is /still/ not known, and we made no progress
 					res.add(ar);
 					continue next_ar;

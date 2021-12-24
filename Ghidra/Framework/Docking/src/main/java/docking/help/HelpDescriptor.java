@@ -22,10 +22,10 @@ public interface HelpDescriptor {
 	 * Returns the object for which help locations are defined.  This may be the implementor of
 	 * this interface or some other delegate object.
 	 */
-	public Object getHelpObject();
+	Object getHelpObject();
 	
 	/**
 	 * Returns a descriptive String about the help object that this descriptor represents. 
 	 */
-	public String getHelpInfo();
+	String getHelpInfo();
 }

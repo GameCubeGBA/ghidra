@@ -36,6 +36,6 @@ public interface BuiltInDataType extends DataType, ExtensionPoint {
 	 * if type name is a standard C-primitive name or if type is FactoryDataType
 	 * or Dynamic.
 	 */
-	public String getCTypeDeclaration(DataOrganization dataOrganization);
+	String getCTypeDeclaration(DataOrganization dataOrganization);
 
 }

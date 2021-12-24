@@ -18,12 +18,20 @@ package ghidra.net;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.Socket;
-import java.security.*;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.Principal;
+import java.security.PrivateKey;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.Arrays;
 
-import javax.net.ssl.*;
+import javax.net.ssl.KeyManager;
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.SSLEngine;
+import javax.net.ssl.X509ExtendedKeyManager;
+import javax.net.ssl.X509KeyManager;
 import javax.security.auth.x500.X500Principal;
 
 import org.apache.commons.lang3.StringUtils;
@@ -286,7 +294,7 @@ public class ApplicationKeyManagerFactory {
 		int tryCount = 0;
 
 		while (true) {
-			char[] password = new char[0];
+			char[] password = {};
 			char[] oldPassword = null;
 			try {
 				if (tryCount == 0) {

@@ -16,10 +16,12 @@
  */
 package ghidra.framework.plugintool.util;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import ghidra.framework.model.DomainObject;
 import ghidra.framework.plugintool.Plugin;
-
-import java.util.*;
 
 public class UndoRedoToolState {
 	private List<PluginState> states;
@@ -28,7 +30,7 @@ public class UndoRedoToolState {
 	 * @param plugins array of plugins to get transient state for
 	 */
 	public UndoRedoToolState(List<Plugin> plugins, DomainObject domainObject) {
-		states = new ArrayList<PluginState>();
+		states = new ArrayList<>();
 		Iterator<Plugin> it = plugins.iterator();
 		while(it.hasNext()) {
 			Plugin plugin = it.next();

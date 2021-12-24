@@ -50,10 +50,10 @@ public final class Prime {
      * Finds the next prime number greater than or equal to n.
      * @param n the number from which to find the next higher prime number.
      */
-    public final static int nextPrime(int n) {
-        for(int i=0;i<PRIMES.length;i++) {
-            if (PRIMES[i] > n) {
-                return PRIMES[i];
+    public static int nextPrime(int n) {
+        for (int element : PRIMES) {
+            if (element > n) {
+                return element;
             }
         }
         return 0;

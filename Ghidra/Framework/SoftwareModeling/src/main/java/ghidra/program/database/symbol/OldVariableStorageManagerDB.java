@@ -35,9 +35,9 @@ public class OldVariableStorageManagerDB {
 
 	private long lastNamespaceCacheID; // ID of cached namespace variables
 	private Hashtable<Address, OldVariableStorage> variableAddrLookupCache =
-		new Hashtable<Address, OldVariableStorage>();
+		new Hashtable<>();
 	private Hashtable<Address, OldVariableStorage> storageAddrLookupCache =
-		new Hashtable<Address, OldVariableStorage>();
+		new Hashtable<>();
 
 	/**
 	 * Construct a read-only variable storage manager for the old record format

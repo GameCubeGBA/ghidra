@@ -23,10 +23,8 @@ public class Path extends Vector {
 	public boolean containsInSomeElement(Vector otherVector) {
 		for (int i = 0; i < size(); i++) {
 			Vector path = (Vector) elementAt(i);
-			if (path.size() >= otherVector.size()) {
-				if (hasSameChildren(path, otherVector)) {
-					return true;
-				}
+			if ((path.size() >= otherVector.size()) && hasSameChildren(path, otherVector)) {
+				return true;
 			}
 		}
 		return false;

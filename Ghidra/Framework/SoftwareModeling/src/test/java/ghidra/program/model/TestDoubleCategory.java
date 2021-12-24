@@ -17,7 +17,12 @@ package ghidra.program.model;
 
 import java.util.List;
 
-import ghidra.program.model.data.*;
+import ghidra.program.model.data.Category;
+import ghidra.program.model.data.CategoryPath;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.DataTypeConflictHandler;
+import ghidra.program.model.data.DataTypeDependencyException;
+import ghidra.program.model.data.DataTypeManager;
 import ghidra.util.InvalidNameException;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.task.TaskMonitor;

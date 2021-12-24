@@ -28,27 +28,27 @@ public interface Workspace {
 	 * Get the workspace name
 	 * @return the name
 	 */
-	public String getName();
+	String getName();
 
 	/**
 	 * Get the running tools in the workspace.
 	 * 
 	 * @return list of running tools or zero-length array if there are no tools in the workspace
 	 */
-	public PluginTool[] getTools();
+	PluginTool[] getTools();
 
 	/**
 	 * Launch an empty tool.
 	 * @return name of empty tool that is launched.
 	 */
-	public PluginTool createTool();
+	PluginTool createTool();
 
 	/**
 	 * Run the tool specified by the tool template object.
 	 * @param template the template
 	 * @return launched tool that is now running.
 	 */
-	public PluginTool runTool(ToolTemplate template);
+	PluginTool runTool(ToolTemplate template);
 
 	/**
 	 * Rename this workspace.
@@ -58,7 +58,7 @@ public interface Workspace {
 	 * @throws DuplicateNameException if newName is already the
 	 * name of a workspace.
 	 */
-	public void setName(String newName)
+	void setName(String newName)
 			throws DuplicateNameException;
 
 	/**
@@ -67,6 +67,6 @@ public interface Workspace {
 	 * The currently active workspace becomes inactive, and
 	 * this workspace becomes active.
 	 */
-	public void setActive();
+	void setActive();
 
 }

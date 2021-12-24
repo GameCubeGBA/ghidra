@@ -80,7 +80,7 @@ public class DefaultAddressFactory implements AddressFactory {
 				uniqueSpace = space;
 			}
 			else if (space.getType() == AddressSpace.TYPE_REGISTER) {
-				if (registerSpace != null || !space.getName().equalsIgnoreCase("register")) {
+				if (registerSpace != null || !"register".equalsIgnoreCase(space.getName())) {
 					// Ghidra address encoding only handles a single register space
 					throw new IllegalArgumentException(
 						"Ghidra can only support a single Register space named 'register'");
@@ -128,7 +128,7 @@ public class DefaultAddressFactory implements AddressFactory {
 
 	private void checkReservedJoin(AddressSpace space) {
 		if (space.getType() == AddressSpace.TYPE_JOIN ||
-			space.getName().equals(BasicCompilerSpec.JOIN_SPACE_NAME)) {
+			BasicCompilerSpec.JOIN_SPACE_NAME.equals(space.getName())) {
 			throw new IllegalArgumentException("Join space should not be specified");
 		}
 	}
@@ -142,7 +142,7 @@ public class DefaultAddressFactory implements AddressFactory {
 
 	private void checkReservedStack(AddressSpace space) {
 		if (space.getType() == AddressSpace.TYPE_STACK ||
-			space.getName().equalsIgnoreCase(BasicCompilerSpec.STACK_SPACE_NAME)) {
+			BasicCompilerSpec.STACK_SPACE_NAME.equalsIgnoreCase(space.getName())) {
 			throw new IllegalArgumentException("Stack space should not be specified");
 		}
 	}
@@ -195,10 +195,7 @@ public class DefaultAddressFactory implements AddressFactory {
 			if (space.isMemorySpace()) {
 				try {
 					Address addr = space.getAddress(addrString, caseSensitive);
-					if (addr == null) {
-						continue;
-					}
-					if (space.isOverlaySpace() && addr.getAddressSpace() != space) {
+					if ((addr == null) || (space.isOverlaySpace() && addr.getAddressSpace() != space)) {
 						continue;
 					}
 					if (space.isNonLoadedMemorySpace()) {

@@ -33,14 +33,14 @@ public interface ConfigurableColumnTableModel extends TableModel {
 	 * @param index column index
 	 * @return column settings.
 	 */
-	public Settings getColumnSettings(int index);
+	Settings getColumnSettings(int index);
 
 	/**
 	 * Returns settings definitions for the specified column index
 	 * @param index column index
 	 * @return column settings definitions.
 	 */
-	public SettingsDefinition[] getColumnSettingsDefinitions(int index);
+	SettingsDefinition[] getColumnSettingsDefinitions(int index);
 
 	/**
 	 * Allows for the bulk setting of Settings.  This prevents excessive event 
@@ -50,7 +50,7 @@ public interface ConfigurableColumnTableModel extends TableModel {
 	 *        where the index of the Settings in the array is the index of the column
 	 *        in the model
 	 */
-	public void setAllColumnSettings(Settings[] settings);
+	void setAllColumnSettings(Settings[] settings);
 
 	/**
 	 * Gets the maximum number of text display lines needed for any given cell within the 
@@ -58,12 +58,12 @@ public interface ConfigurableColumnTableModel extends TableModel {
 	 * @param index column field index
 	 * @return maximum number of lines needed for specified column
 	 */
-	public int getMaxLines(int index);
+	int getMaxLines(int index);
 
 	/**
 	 * Returns the table cell renderer for the given column
 	 * @param columnIndex the index of the column
 	 * @return the renderer
 	 */
-	public TableCellRenderer getRenderer(int columnIndex);
+	TableCellRenderer getRenderer(int columnIndex);
 }

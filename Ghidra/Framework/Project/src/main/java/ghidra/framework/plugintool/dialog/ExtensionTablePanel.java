@@ -20,12 +20,16 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Set;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.TableColumn;
 
 import docking.help.Help;
 import docking.help.HelpService;
-import docking.widgets.table.*;
+import docking.widgets.table.GTable;
+import docking.widgets.table.GTableFilterPanel;
+import docking.widgets.table.TableSortState;
 import ghidra.app.util.GenericHelpTopics;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.util.HelpLocation;

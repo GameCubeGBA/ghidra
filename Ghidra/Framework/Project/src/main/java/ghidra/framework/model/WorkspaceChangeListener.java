@@ -30,30 +30,30 @@ public interface WorkspaceChangeListener extends PropertyChangeListener {
 	 * @param ws workspace the affected workspace
 	 * @param tool tool that was added
 	 */
-	public void toolAdded(Workspace ws, PluginTool tool);
+	void toolAdded(Workspace ws, PluginTool tool);
 
 	/**
 	 * Notification that a tool was removed from the given workspace.
 	 * @param ws workspace the affected workspace
 	 * @param tool tool that was removed from the workspace
 	 */
-	public void toolRemoved(Workspace ws, PluginTool tool);
+	void toolRemoved(Workspace ws, PluginTool tool);
 
 	/**
 	 * Notification that the given workspace was added by the ToolManager.
 	 * @param ws workspace the affected workspace
 	 */
-	public void workspaceAdded(Workspace ws);
+	void workspaceAdded(Workspace ws);
 
 	/**
 	 * Notification that the given workspace was removed by the ToolManager.
 	 * @param ws workspace the affected workspace
 	 */
-	public void workspaceRemoved(Workspace ws);
+	void workspaceRemoved(Workspace ws);
 
 	/**
 	 * Notification that the given workspace is the current one.
 	 * @param ws workspace the affected workspace
 	 */
-	public void workspaceSetActive(Workspace ws);
+	void workspaceSetActive(Workspace ws);
 }

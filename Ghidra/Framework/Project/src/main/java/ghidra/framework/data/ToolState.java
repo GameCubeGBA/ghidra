@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 package ghidra.framework.data;
-import ghidra.framework.model.*;
-import ghidra.framework.plugintool.*;
-import ghidra.framework.plugintool.util.*;
+import ghidra.framework.model.DomainObject;
+import ghidra.framework.plugintool.PluginTool;
+import ghidra.framework.plugintool.util.UndoRedoToolState;
 
 /**
  * Container object for the state of the tool to hold an XML element.

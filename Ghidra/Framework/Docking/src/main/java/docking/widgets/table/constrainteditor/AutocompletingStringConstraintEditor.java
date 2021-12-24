@@ -15,21 +15,29 @@
  */
 package docking.widgets.table.constrainteditor;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
 import java.text.Collator;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.stream.Collectors;
 
-import javax.swing.*;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.ListCellRenderer;
 
 import org.apache.commons.lang3.StringUtils;
 
 import docking.widgets.DropDownTextField;
 import docking.widgets.DropDownTextFieldDataModel;
 import docking.widgets.list.GListCellRenderer;
-import docking.widgets.table.constraint.*;
+import docking.widgets.table.constraint.ColumnConstraint;
+import docking.widgets.table.constraint.ColumnData;
+import docking.widgets.table.constraint.StringColumnConstraint;
 import ghidra.util.HTMLUtilities;
 
 /**

@@ -15,16 +15,22 @@
  */
 package ghidra.app.emulator.state;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import generic.stl.Pair;
 import ghidra.program.model.lang.Language;
-import ghidra.util.*;
-
-import java.util.*;
+import ghidra.util.BigEndianDataConverter;
+import ghidra.util.DataConverter;
+import ghidra.util.LittleEndianDataConverter;
 
 public class DumpMiscState implements RegisterState {
 
 	private Map<String, Pair<Boolean, byte[]>> context =
-		new HashMap<String, Pair<Boolean, byte[]>>();
+		new HashMap<>();
 
 	private DataConverter dc;
 
@@ -46,7 +52,7 @@ public class DumpMiscState implements RegisterState {
 
 	@Override
 	public List<byte[]> getVals(String key) {
-		List<byte[]> list = new ArrayList<byte[]>();
+		List<byte[]> list = new ArrayList<>();
 		Pair<Boolean, byte[]> pair = context.get(key);
 		if (pair != null && pair.second != null) {
 			list.add(pair.second);
@@ -56,7 +62,7 @@ public class DumpMiscState implements RegisterState {
 
 	@Override
 	public List<Boolean> isInitialized(String key) {
-		List<Boolean> list = new ArrayList<Boolean>();
+		List<Boolean> list = new ArrayList<>();
 		Pair<Boolean, byte[]> pair = context.get(key);
 		if (pair != null && pair.first != null) {
 			list.add(pair.first);
@@ -69,7 +75,7 @@ public class DumpMiscState implements RegisterState {
 
 	@Override
 	public void setVals(String key, byte[] vals, boolean setInitiailized) {
-		Pair<Boolean, byte[]> pair = new Pair<Boolean, byte[]>(setInitiailized, vals);
+		Pair<Boolean, byte[]> pair = new Pair<>(setInitiailized, vals);
 		context.put(key, pair);
 	}
 

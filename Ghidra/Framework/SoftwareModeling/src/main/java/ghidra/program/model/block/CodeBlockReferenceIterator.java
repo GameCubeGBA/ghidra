@@ -28,12 +28,12 @@ public interface CodeBlockReferenceIterator {
      * Return true if next() will return a CodeBlockReference.
      * @throws CancelledException thrown if the operation is cancelled.
      */
-	public boolean hasNext() throws CancelledException;
+	boolean hasNext() throws CancelledException;
 
     /**
      * Return the next CodeBlockReference.
      * @throws CancelledException thrown if the operation is cancelled.
      */
-    public CodeBlockReference next() throws CancelledException;
+    CodeBlockReference next() throws CancelledException;
 }
 

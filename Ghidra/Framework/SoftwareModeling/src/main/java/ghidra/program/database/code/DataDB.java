@@ -15,7 +15,9 @@
  */
 package ghidra.program.database.code;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import db.DBRecord;
 import ghidra.docking.settings.Settings;
@@ -23,13 +25,33 @@ import ghidra.docking.settings.SettingsDefinition;
 import ghidra.program.database.DBObjectCache;
 import ghidra.program.database.data.DataTypeManagerDB;
 import ghidra.program.database.map.AddressMap;
-import ghidra.program.model.address.*;
-import ghidra.program.model.data.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressIterator;
+import ghidra.program.model.address.AddressOverflowException;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.data.Array;
+import ghidra.program.model.data.Composite;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.DataTypeComponent;
+import ghidra.program.model.data.DataTypeDisplayOptions;
+import ghidra.program.model.data.DefaultDataType;
+import ghidra.program.model.data.DynamicDataType;
+import ghidra.program.model.data.MutabilitySettingsDefinition;
+import ghidra.program.model.data.Pointer;
+import ghidra.program.model.data.Structure;
+import ghidra.program.model.data.TypeDef;
+import ghidra.program.model.data.Undefined;
+import ghidra.program.model.data.Union;
 import ghidra.program.model.listing.Data;
 import ghidra.program.model.mem.Memory;
 import ghidra.program.model.mem.MemoryBlock;
 import ghidra.program.model.scalar.Scalar;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.RefType;
+import ghidra.program.model.symbol.Reference;
+import ghidra.program.model.symbol.SourceType;
+import ghidra.program.model.symbol.Symbol;
+import ghidra.program.model.symbol.SymbolTable;
+import ghidra.program.model.symbol.SymbolUtilities;
 import ghidra.program.util.ChangeManager;
 import ghidra.util.Msg;
 
@@ -53,7 +75,7 @@ class DataDB extends CodeUnitDB implements Data {
 
 	private Boolean hasMutabilitySetting;
 
-	private static final int[] EMPTY_PATH = new int[0];
+	private static final int[] EMPTY_PATH = {};
 
 	private DBObjectCache<DataDB> componentCache = null;// data components are keyed on index in parent (i.e., ordinal)
 
@@ -152,12 +174,8 @@ class DataDB extends CodeUnitDB implements Data {
 		}
 
 		// no need to do all that follow on checking when length == 1
-		if (length == 1) {
-			return;
-		}
-
 		// FIXME Trying to get Data to display for External.
-		if (address.isExternalAddress()) { // FIXME
+		if ((length == 1) || address.isExternalAddress()) { // FIXME
 			return; // FIXME
 		} // FIXME
 
@@ -706,9 +724,6 @@ class DataDB extends CodeUnitDB implements Data {
 					return ((DynamicDataType) baseDataType).getNumComponents(this);
 				}
 				catch (Throwable t) {
-					//Msg.error(this,
-					//	"Data type error (" + baseDataType.getName() + "): " + t.getMessage(), t);
-					return 0;
 				}
 			}
 			return 0;
@@ -865,9 +880,7 @@ class DataDB extends CodeUnitDB implements Data {
 		while (iter.hasNext()) {
 			Address fromAddress = iter.next();
 			Reference[] refs = refMgr.getReferencesFrom(fromAddress);
-			for (Reference element : refs) {
-				list.add(element);
-			}
+			Collections.addAll(list, refs);
 		}
 		return list.toArray(new Reference[list.size()]);
 	}

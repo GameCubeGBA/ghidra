@@ -15,15 +15,40 @@
  */
 package docking;
 
-import java.awt.*;
-import java.awt.dnd.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Cursor;
+import java.awt.FocusTraversalPolicy;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
+import java.awt.Shape;
+import java.awt.Window;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DragGestureEvent;
+import java.awt.dnd.DragGestureListener;
+import java.awt.dnd.DragSource;
+import java.awt.dnd.DragSourceContext;
+import java.awt.dnd.DragSourceDragEvent;
+import java.awt.dnd.DragSourceDropEvent;
+import java.awt.dnd.DragSourceEvent;
+import java.awt.dnd.DragSourceListener;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseListener;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.Animator.RepeatBehavior;
@@ -95,11 +120,9 @@ public class DockableHeader extends GenericHeader
 
 	@Override
 	public void setSelected(boolean hasFocus) {
-		if (!hasFocus) {
-			if (focusAnimator != null) {
-				focusAnimator.stop();
-				focusAnimator = null;
-			}
+		if (!hasFocus && (focusAnimator != null)) {
+			focusAnimator.stop();
+			focusAnimator = null;
 		}
 
 		super.setSelected(hasFocus);
@@ -130,11 +153,7 @@ public class DockableHeader extends GenericHeader
 
 		JFrame toolFrame = manager.getRootFrame();
 		Component glassPane = toolFrame.getGlassPane();
-		if (!(glassPane instanceof GGlassPane)) {
-			return;
-		}
-
-		if (focusAnimator != null && focusAnimator.isRunning()) {
+		if (!(glassPane instanceof GGlassPane) || (focusAnimator != null && focusAnimator.isRunning())) {
 			// prevent multiple animation
 			return;
 		}
@@ -336,7 +355,7 @@ public class DockableHeader extends GenericHeader
 // Inner Classes
 //==================================================================================================
 
-	private class DragCursorManager {
+	private static class DragCursorManager {
 
 		void setCursor(DragSourceEvent event, Cursor dragCursor) {
 			DragSourceContext context = event.getDragSourceContext();
@@ -506,7 +525,7 @@ public class DockableHeader extends GenericHeader
 			}
 		}
 
-		private class ComponentPaintInfo {
+		private static class ComponentPaintInfo {
 
 			private Component myComponent;
 			private Image myImage;

@@ -15,7 +15,15 @@
  */
 package ghidra.framework.plugintool.mgr;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.collections4.map.LazyMap;
@@ -307,11 +315,7 @@ public class EventManager {
 
 	// note: this is expected to be on the Swing thread, called from sendEvent()
 	private void sendToolEvent(PluginEvent event) {
-		if (toolListeners.isEmpty()) {
-			return;
-		}
-
-		if (!event.isToolEvent()) {
+		if (toolListeners.isEmpty() || !event.isToolEvent()) {
 			return;
 		}
 
@@ -319,9 +323,7 @@ public class EventManager {
 		try {
 			event.setSourceName(PluginEvent.EXTERNAL_SOURCE_NAME);
 			event.setTriggerEvent(null);
-			for (int i = 0; i < toolListeners.size(); i++) {
-				ToolListener tl = toolListeners.get(i);
-
+			for (ToolListener tl : toolListeners) {
 				try {
 					tl.processToolEvent(event);
 				}
@@ -363,8 +365,7 @@ public class EventManager {
 			}
 		}
 
-		for (int i = 0; i < unusedList.size(); i++) {
-			Class<? extends PluginEvent> eventClass = unusedList.get(i);
+		for (Class<? extends PluginEvent> eventClass : unusedList) {
 			eventConsumerRemoved(eventClass);
 		}
 	}

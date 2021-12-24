@@ -15,13 +15,18 @@
  */
 package ghidra.program.model.correlate;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSetView;
 import ghidra.program.model.block.CodeBlock;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.Function;
+import ghidra.program.model.listing.Instruction;
+import ghidra.program.model.listing.Program;
 import ghidra.program.model.mem.MemoryAccessException;
 import ghidra.program.util.FunctionAddressCorrelation;
 import ghidra.util.exception.CancelledException;
@@ -88,8 +93,8 @@ public class HashedFunctionAddressCorrelation implements FunctionAddressCorrelat
 		srcFunction = function1;
 		destFunction = function2;
 		monitor = mon;
-		srcToDest = new TreeMap<Address,Address>();
-		destToSrc = new TreeMap<Address,Address>();
+		srcToDest = new TreeMap<>();
+		destToSrc = new TreeMap<>();
 		if (function1 == null || function2 == null)
 			return;
 		srcStore = new HashStore(function1, monitor);
@@ -193,10 +198,10 @@ public class HashedFunctionAddressCorrelation implements FunctionAddressCorrelat
 			cancelMatch = true;						// Cancel the match
 		}
 		if (cancelMatch) return;
-		ArrayList<Instruction> srcInstructVec = new ArrayList<Instruction>();
-		ArrayList<Instruction> destInstructVec = new ArrayList<Instruction>();
-		ArrayList<CodeBlock> srcBlockVec = new ArrayList<CodeBlock>();
-		ArrayList<CodeBlock> destBlockVec = new ArrayList<CodeBlock>();
+		ArrayList<Instruction> srcInstructVec = new ArrayList<>();
+		ArrayList<Instruction> destInstructVec = new ArrayList<>();
+		ArrayList<CodeBlock> srcBlockVec = new ArrayList<>();
+		ArrayList<CodeBlock> destBlockVec = new ArrayList<>();
 		HashStore.NgramMatch srcMatch = new HashStore.NgramMatch();
 		HashStore.NgramMatch destMatch = new HashStore.NgramMatch();
 		HashStore.extendMatch(matchSize, srcInstruct, srcMatch, destInstruct, destMatch, hashCalc);
@@ -219,7 +224,7 @@ public class HashedFunctionAddressCorrelation implements FunctionAddressCorrelat
 	private static TreeMap<Hash, DisambiguatorEntry> constructDisambiguatorTree(HashEntry entry,
 			HashStore store, DisambiguateStrategy strategy)
 			throws CancelledException, MemoryAccessException {
-		TreeMap<Hash,DisambiguatorEntry> entryMap = new TreeMap<Hash,DisambiguatorEntry>();
+		TreeMap<Hash,DisambiguatorEntry> entryMap = new TreeMap<>();
 		int matchSize = entry.hash.size;
 		for(InstructHash curInstruct : entry.instList) {
 			ArrayList<Hash> hashList = strategy.calcHashes(curInstruct, matchSize, store);
@@ -256,9 +261,8 @@ public class HashedFunctionAddressCorrelation implements FunctionAddressCorrelat
 		Iterator<DisambiguatorEntry> iter = srcDisambig.values().iterator();
 		while(iter.hasNext()) {
 			DisambiguatorEntry srcDisEntry = iter.next();
-			if (srcDisEntry.count != 1) continue;
 			// Its possible for this InstructHash to have been matched by an earlier DisambiguatorEntry
-			if (srcDisEntry.instruct.isMatched) continue;
+			if ((srcDisEntry.count != 1) || srcDisEntry.instruct.isMatched) continue;
 			DisambiguatorEntry destDisEntry = destDisambig.get(srcDisEntry.hash);
 			if (destDisEntry == null) continue;
 			if (destDisEntry.count != 1) continue;
@@ -279,11 +283,7 @@ public class HashedFunctionAddressCorrelation implements FunctionAddressCorrelat
 	 * @throws MemoryAccessException
 	 */
 	private boolean disambiguateMatchingNgrams(HashEntry srcEntry,HashEntry destEntry) throws CancelledException, MemoryAccessException {
-		if (srcEntry.hasDuplicateBlocks())
-			return false;
-		if (destEntry.hasDuplicateBlocks())
-			return false;
-		if (srcEntry.hash.size != destEntry.hash.size)
+		if (srcEntry.hasDuplicateBlocks() || destEntry.hasDuplicateBlocks() || (srcEntry.hash.size != destEntry.hash.size))
 			return false;		// This likely never happens, because we know the hash values are equal
 		int count = disambiguateNgramsWithStrategy(new DisambiguateByParent(),srcEntry,destEntry);
 		if (count != 0) return true;
@@ -322,11 +322,8 @@ public class HashedFunctionAddressCorrelation implements FunctionAddressCorrelat
 				else if (srcEntry2.instList.size() == 1 && destEntry2.instList.size() == 1) {
 					// Found a unique match
 					declareMatch(srcEntry2,srcEntry2.instList.getFirst(),destEntry2,destEntry2.instList.getFirst());
-				}
-				else {
-					if (!disambiguateMatchingNgrams(srcEntry, destEntry))
-						srcStore.removeHash(srcEntry);
-				}
+				} else if (!disambiguateMatchingNgrams(srcEntry, destEntry))
+					srcStore.removeHash(srcEntry);
 			}
 		}		
 	}
@@ -377,8 +374,7 @@ public class HashedFunctionAddressCorrelation implements FunctionAddressCorrelat
 
 		findMatches();
 
-		if (srcStore.numMatchedInstructions() == srcStore.getTotalInstructions()) return;
-		if (destStore.numMatchedInstructions() == destStore.getTotalInstructions()) return;
+		if ((srcStore.numMatchedInstructions() == srcStore.getTotalInstructions()) || (destStore.numMatchedInstructions() == destStore.getTotalInstructions())) return;
 
 		// Now try multiple passes of 3 and 4 long n-grams hopefully filling in a lot of small holes in our match
 		// given a scaffolding of previously matched basic blocks

@@ -16,15 +16,15 @@
  */
 package generic.lsh.vector;
 
+import java.io.IOException;
+import java.io.Writer;
+
 import ghidra.util.xml.SpecXmlUtils;
 import ghidra.xml.XmlElement;
 import ghidra.xml.XmlPullParser;
 
-import java.io.IOException;
-import java.io.Writer;
-
 public class IDFLookup {
-	public class IDFEntry {
+	public static class IDFEntry {
 		public int hash;
 		public int count;
 	}
@@ -141,16 +141,16 @@ public class IDFLookup {
 	 */
 	public int[] toArray() {
 		int count = 0;
-		for(int i=0;i<hashtable.length;++i)
-			if (hashtable[i].count != 0xffffffff)	// If not empty
+		for (IDFEntry element : hashtable)
+			if (element.count != 0xffffffff)	// If not empty
 				count += 1;							//   count it
 		int[] res = new int[count * 2];
 		int pos = 0;
-		for(int i=0;i<hashtable.length;++i) {
-			if (hashtable[i].count == 0xffffffff) continue;
-			res[pos] = hashtable[i].hash;
+		for (IDFEntry element : hashtable) {
+			if (element.count == 0xffffffff) continue;
+			res[pos] = element.hash;
 			pos += 1;
-			res[pos] = hashtable[i].count;
+			res[pos] = element.count;
 			pos += 1;
 		}
 		return res;

@@ -25,14 +25,14 @@ import ghidra.graph.viewer.VisualVertex;
  */
 public interface VisualGraphVertexActionContext<V extends VisualVertex>
 		extends VisualGraphActionContext {
-	public V getVertex();
+	V getVertex();
 
 	/**
 	 * Returns true actions that manipulate the satellite viewer should be enabled for this context
 	 * @return true actions that manipulate the satellite viewer should be enabled for this context
 	 */
 	@Override
-	public default boolean shouldShowSatelliteActions() {
+	default boolean shouldShowSatelliteActions() {
 		// no satellite viewer actions when on a vertex
 		return false;
 	}

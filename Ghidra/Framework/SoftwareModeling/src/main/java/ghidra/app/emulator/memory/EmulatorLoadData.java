@@ -20,11 +20,11 @@ import ghidra.program.model.address.AddressSetView;
 
 public interface EmulatorLoadData {
 
-	public MemoryLoadImage getMemoryLoadImage();
+	MemoryLoadImage getMemoryLoadImage();
 
-	public RegisterState getInitialRegisterState();
+	RegisterState getInitialRegisterState();
 
-	public default AddressSetView getView() {
+	default AddressSetView getView() {
 		return null;
 	}
 

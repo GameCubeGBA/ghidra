@@ -32,7 +32,7 @@ public interface DataConverter extends Serializable {
 	 * @param isBigEndian boolean flag, true means big endian
 	 * @return static DataConverter instance
 	 */
-	public static DataConverter getInstance(boolean isBigEndian) {
+	static DataConverter getInstance(boolean isBigEndian) {
 		return isBigEndian ? BigEndianDataConverter.INSTANCE : LittleEndianDataConverter.INSTANCE;
 	}
 
@@ -186,8 +186,7 @@ public interface DataConverter extends Serializable {
 
 		// this little bit of magic will sign-extend the value
 		val = val << shiftBits;
-		val = val >> shiftBits;
-		return val;
+		return val >> shiftBits;
 	}
 
 	/**
@@ -384,7 +383,7 @@ public interface DataConverter extends Serializable {
 	 * @param value BigInteger value to convert
 	 * @throws IndexOutOfBoundsException if (offset+size)&gt;b.length
 	 */
-	public void putBigInteger(byte[] b, int offset, int size, BigInteger value);
+	void putBigInteger(byte[] b, int offset, int size, BigInteger value);
 
 	//--------------------------------------------------------------------------------
 
@@ -508,7 +507,7 @@ public interface DataConverter extends Serializable {
 	 * @param size number of least significant bytes to be swapped
 	 * @return value with bytes swapped (any high-order bytes beyond size will be 0)
 	 */
-	public static long swapBytes(long val, int size) {
+	static long swapBytes(long val, int size) {
 		long res = 0;
 		while (size > 0) {
 			res <<= 8;

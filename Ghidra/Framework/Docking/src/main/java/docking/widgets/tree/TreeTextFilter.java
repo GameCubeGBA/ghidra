@@ -16,12 +16,11 @@
  */
 package docking.widgets.tree;
 
-import ghidra.util.FilterTransformer;
-
 import java.util.List;
 
 import docking.widgets.filter.TextFilter;
 import docking.widgets.tree.support.GTreeFilter;
+import ghidra.util.FilterTransformer;
 
 public class TreeTextFilter implements GTreeFilter {
 

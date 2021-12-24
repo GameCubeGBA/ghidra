@@ -15,7 +15,10 @@
  */
 package ghidra.program.model.data;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 import ghidra.docking.settings.Settings;
 import ghidra.program.model.mem.MemBuffer;
@@ -458,10 +461,7 @@ public class UnionDataType extends CompositeDataTypeImpl implements UnionInterna
 
 	@Override
 	public void dataTypeAlignmentChanged(DataType dt) {
-		if (!isPackingEnabled()) {
-			return;
-		}
-		if (dt instanceof BitFieldDataType) {
+		if (!isPackingEnabled() || (dt instanceof BitFieldDataType)) {
 			return; // unsupported
 		}
 		boolean hasPossibleChange = false;

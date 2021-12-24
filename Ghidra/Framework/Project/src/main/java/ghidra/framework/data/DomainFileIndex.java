@@ -16,13 +16,16 @@
  */
 package ghidra.framework.data;
 
-import ghidra.framework.model.*;
+import java.io.IOException;
+import java.util.HashMap;
+
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.DomainFolder;
+import ghidra.framework.model.DomainFolderChangeListener;
+import ghidra.framework.model.DomainObject;
 import ghidra.framework.store.FolderItem;
 import ghidra.util.Msg;
 import ghidra.util.task.TaskMonitor;
-
-import java.io.IOException;
-import java.util.HashMap;
 
 /**
  * Helper class to maintain mapping of fileID's to DomainFile's.
@@ -30,7 +33,7 @@ import java.util.HashMap;
 class DomainFileIndex implements DomainFolderChangeListener {
 
 	private ProjectFileManager projectData;
-	private HashMap<String, String> fileIdToPathIndex = new HashMap<String, String>();
+	private HashMap<String, String> fileIdToPathIndex = new HashMap<>();
 
 	DomainFileIndex(ProjectFileManager projectData) {
 		this.projectData = projectData;
@@ -182,56 +185,69 @@ class DomainFileIndex implements DomainFolderChangeListener {
 		return null;
 	}
 
+	@Override
 	public void domainFileAdded(DomainFile file) {
 		updateFileEntry((GhidraFile) file);
 	}
 
+	@Override
 	public void domainFileMoved(DomainFile file, DomainFolder oldParent, String oldName) {
 		updateFileEntry((GhidraFile) file);
 	}
 
+	@Override
 	public void domainFileObjectClosed(DomainFile file, DomainObject object) {
 		// no-op
 	}
 
+	@Override
 	public void domainFileObjectOpenedForUpdate(DomainFile file, DomainObject object) {
 		// no-op
 	}
 
+	@Override
 	public void domainFileObjectReplaced(DomainFile file, DomainObject oldObject) {
 		// no-op
 	}
 
+	@Override
 	public void domainFileRemoved(DomainFolder parent, String name, String fileID) {
 		fileIdToPathIndex.remove(fileID);
 	}
 
+	@Override
 	public void domainFileRenamed(DomainFile file, String oldName) {
 		updateFileEntry((GhidraFile) file);
 	}
 
+	@Override
 	public void domainFileStatusChanged(DomainFile file, boolean fileIDset) {
 		if (fileIDset) {
 			updateFileEntry((GhidraFile) file);
 		}
 	}
 
+	@Override
 	public void domainFolderAdded(DomainFolder folder) {
 		// no-op
 	}
 
+	@Override
 	public void domainFolderMoved(DomainFolder folder, DomainFolder oldParent) {
 		// no-op
 	}
 
+	@Override
 	public void domainFolderRemoved(DomainFolder parent, String name) {
 		// no-op
 	}
 
+	@Override
 	public void domainFolderRenamed(DomainFolder folder, String oldName) {
 		// no-op
 	}
 
+	@Override
 	public void domainFolderSetActive(DomainFolder folder) {
 		// no-op
 	}

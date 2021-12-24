@@ -15,7 +15,10 @@
  */
 package docking.widgets.table.constrainteditor;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.Component;
 import java.awt.Container;
@@ -125,7 +128,7 @@ public class DateRangeConstraintEditorTest extends AbstractDockingTest {
 
 		for (ColumnConstraint<?> colConstraint : columnConstraints) {
 			if (colConstraint.getColumnType().equals(LocalDate.class) &&
-				colConstraint.getName().equals("Between Dates")) {
+				"Between Dates".equals(colConstraint.getName())) {
 				return new MappedColumnConstraint<>(new DateColumnTypeMapper(),
 					(ColumnConstraint<LocalDate>) colConstraint);
 			}

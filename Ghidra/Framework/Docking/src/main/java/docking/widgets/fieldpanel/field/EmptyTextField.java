@@ -15,7 +15,9 @@
  */
 package docking.widgets.fieldpanel.field;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Rectangle;
 
 import javax.swing.JComponent;
 
@@ -118,10 +120,7 @@ public class EmptyTextField implements Field {
 	@Override
 	public boolean isValid(int row, int col) {
 
-		if (row != 0) {
-			return false;
-		}
-		if (col != 0) {
+		if ((row != 0) || (col != 0)) {
 			return false;
 		}
 		return true;

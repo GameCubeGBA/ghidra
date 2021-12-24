@@ -18,10 +18,16 @@ package ghidra.program.database.register;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressRange;
+import ghidra.program.model.address.AddressRangeIterator;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.address.GenericAddressSpace;
 
 public class AddressRangeObjectMapTest extends AbstractGenericTest {
 
@@ -43,7 +49,7 @@ public class AddressRangeObjectMapTest extends AbstractGenericTest {
 @Test
     public void testTwoSpacesWithSecondRangeAt0() throws Exception {
 		AddressSpace space2 = new GenericAddressSpace("Test2", 32, AddressSpace.TYPE_RAM, 1);
-		AddressRangeObjectMap<Integer> rangeMap = new AddressRangeObjectMap<Integer>();
+		AddressRangeObjectMap<Integer> rangeMap = new AddressRangeObjectMap<>();
 		Integer one = Integer.valueOf(1);
 		rangeMap.setObject(addr(0x1000), addr(0x2000), one);
 		rangeMap.setObject(space2.getAddress(0), space2.getAddress(10), one);
@@ -64,7 +70,7 @@ public class AddressRangeObjectMapTest extends AbstractGenericTest {
 
 @Test
     public void testAddOverlappingRangeWithSameObject() {
-		AddressRangeObjectMap<Integer> rangeMap = new AddressRangeObjectMap<Integer>();
+		AddressRangeObjectMap<Integer> rangeMap = new AddressRangeObjectMap<>();
 
 		Integer one = Integer.valueOf(1);
 
@@ -83,7 +89,7 @@ public class AddressRangeObjectMapTest extends AbstractGenericTest {
 
 @Test
     public void testAddAdjoiningRangesWithSameObject() {
-		AddressRangeObjectMap<Integer> rangeMap = new AddressRangeObjectMap<Integer>();
+		AddressRangeObjectMap<Integer> rangeMap = new AddressRangeObjectMap<>();
 
 		Integer one = Integer.valueOf(1);
 
@@ -102,7 +108,7 @@ public class AddressRangeObjectMapTest extends AbstractGenericTest {
 
 	@Test
 	public void testAddAdjoiningRangesWithDifferentObject() {
-		AddressRangeObjectMap<Integer> rangeMap = new AddressRangeObjectMap<Integer>();
+		AddressRangeObjectMap<Integer> rangeMap = new AddressRangeObjectMap<>();
 
 		Integer one = Integer.valueOf(1);
 		Integer two = Integer.valueOf(2);
@@ -126,7 +132,7 @@ public class AddressRangeObjectMapTest extends AbstractGenericTest {
 	}
 
 	public void testAddCompletelyCoveredRangeWithDifferentObject() {
-		AddressRangeObjectMap<Integer> rangeMap = new AddressRangeObjectMap<Integer>();
+		AddressRangeObjectMap<Integer> rangeMap = new AddressRangeObjectMap<>();
 
 		Integer one = Integer.valueOf(1);
 		Integer two = Integer.valueOf(2);
@@ -145,7 +151,7 @@ public class AddressRangeObjectMapTest extends AbstractGenericTest {
 
 @Test
     public void testAddSingleAddressRangeInMiddleOfExistingRangeWithDifferentObject() {
-		AddressRangeObjectMap<Integer> rangeMap = new AddressRangeObjectMap<Integer>();
+		AddressRangeObjectMap<Integer> rangeMap = new AddressRangeObjectMap<>();
 
 		Integer one = Integer.valueOf(1);
 		Integer two = Integer.valueOf(2);

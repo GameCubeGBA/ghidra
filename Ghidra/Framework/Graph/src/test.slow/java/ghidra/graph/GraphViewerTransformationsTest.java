@@ -21,13 +21,20 @@ import java.awt.geom.Point2D;
 
 import javax.swing.JFrame;
 
-import org.junit.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import edu.uci.ics.jung.algorithms.layout.DAGLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import generic.test.AbstractGenericTest;
-import ghidra.graph.graphs.*;
-import ghidra.graph.support.*;
+import ghidra.graph.graphs.AbstractTestVertex;
+import ghidra.graph.graphs.LabelTestVertex;
+import ghidra.graph.graphs.TestEdge;
+import ghidra.graph.support.TestGraphLayout;
+import ghidra.graph.support.TestGraphViewer;
+import ghidra.graph.support.TestVisualGraph;
 import ghidra.graph.viewer.GraphViewerUtils;
 
 public class GraphViewerTransformationsTest {

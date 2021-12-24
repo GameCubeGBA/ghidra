@@ -16,12 +16,13 @@
 package ghidra.program.model.data;
 
 import java.net.URL;
-import java.nio.ByteBuffer;
 
 import ghidra.docking.settings.Settings;
 import ghidra.docking.settings.SettingsDefinition;
 import ghidra.program.model.mem.MemBuffer;
-import ghidra.util.*;
+import ghidra.util.InvalidNameException;
+import ghidra.util.UniversalID;
+import ghidra.util.UniversalIdGenerator;
 import ghidra.util.exception.DuplicateNameException;
 
 /**

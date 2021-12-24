@@ -17,7 +17,14 @@ package ghidra.program.database.mem;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 import db.DBConstants;
 import db.DBHandle;
@@ -28,14 +35,42 @@ import ghidra.program.database.ManagerDB;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.database.code.CodeManager;
 import ghidra.program.database.map.AddressMapDB;
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressIterator;
+import ghidra.program.model.address.AddressOutOfBoundsException;
+import ghidra.program.model.address.AddressOverflowException;
+import ghidra.program.model.address.AddressRange;
+import ghidra.program.model.address.AddressRangeImpl;
+import ghidra.program.model.address.AddressRangeIterator;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.address.AddressSetViewAdapter;
+import ghidra.program.model.address.AddressSpace;
 import ghidra.program.model.lang.Language;
 import ghidra.program.model.listing.Instruction;
 import ghidra.program.model.listing.Program;
-import ghidra.program.model.mem.*;
+import ghidra.program.model.mem.LiveMemoryHandler;
+import ghidra.program.model.mem.LiveMemoryListener;
+import ghidra.program.model.mem.Memory;
+import ghidra.program.model.mem.MemoryAccessException;
+import ghidra.program.model.mem.MemoryBlock;
+import ghidra.program.model.mem.MemoryBlockException;
+import ghidra.program.model.mem.MemoryBlockSourceInfo;
+import ghidra.program.model.mem.MemoryBlockStub;
+import ghidra.program.model.mem.MemoryBlockType;
+import ghidra.program.model.mem.MemoryConflictException;
 import ghidra.program.util.ChangeManager;
-import ghidra.util.*;
-import ghidra.util.exception.*;
+import ghidra.util.BigEndianDataConverter;
+import ghidra.util.DataConverter;
+import ghidra.util.LittleEndianDataConverter;
+import ghidra.util.Lock;
+import ghidra.util.MonitoredInputStream;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.IOCancelledException;
+import ghidra.util.exception.NotFoundException;
+import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
 
 /**
@@ -62,7 +97,7 @@ public class MemoryMapDB implements Memory, ManagerDB, LiveMemoryListener {
 	private LiveMemoryHandler liveMemory;
 
 	// lazy hashmap of block names to blocks, must be reloaded if blocks are removed or added
-	private HashMap<String, MemoryBlock> nameBlockMap = new HashMap<String, MemoryBlock>();
+	private HashMap<String, MemoryBlock> nameBlockMap = new HashMap<>();
 	private final static MemoryBlock NoBlock = new MemoryBlockStub();  // placeholder for no block, not given out
 
 	Lock lock;
@@ -217,15 +252,12 @@ public class MemoryMapDB implements Memory, ManagerDB, LiveMemoryListener {
 			AddressSet mappedSet = getMappedIntersection(mappedBlock, blockSet);
 			if (isInitialized) {
 				allInitializedAddrSet = allInitializedAddrSet.union(mappedSet);
-				if (isLoaded) {
-					initializedLoadedAddrSet = initializedLoadedAddrSet.union(mappedSet);
-				}
 			}
 			else {
 				allInitializedAddrSet = allInitializedAddrSet.subtract(mappedSet);
-				if (isLoaded) {
-					initializedLoadedAddrSet = initializedLoadedAddrSet.union(mappedSet);
-				}
+			}
+			if (isLoaded) {
+				initializedLoadedAddrSet = initializedLoadedAddrSet.union(mappedSet);
 			}
 		}
 	}
@@ -441,10 +473,8 @@ public class MemoryMapDB implements Memory, ManagerDB, LiveMemoryListener {
 	}
 
 	private synchronized MemoryBlock getBlockDB(Address addr) {
-		if (lastBlock != null) {
-			if (lastBlock.contains(addr)) {
-				return lastBlock;
-			}
+		if ((lastBlock != null) && lastBlock.contains(addr)) {
+			return lastBlock;
 		}
 		List<MemoryBlockDB> tmpBlocks = blocks;
 		int index = Collections.binarySearch(tmpBlocks, addr, BLOCK_ADDRESS_COMPARATOR);
@@ -586,8 +616,7 @@ public class MemoryMapDB implements Memory, ManagerDB, LiveMemoryListener {
 		AddressSpace ovSpace = program.addOverlaySpace(name, start.getAddressSpace(),
 			start.getOffset(), start.getOffset() + (dataLength - 1));
 
-		Address ovAddr = ovSpace.getAddress(start.getOffset());
-		return ovAddr;
+		return ovSpace.getAddress(start.getOffset());
 	}
 
 	@Override
@@ -2024,7 +2053,7 @@ public class MemoryMapDB implements Memory, ManagerDB, LiveMemoryListener {
 			if (blocks == null || blocks.isEmpty()) {
 				return "[empty]\n";
 			}
-			StringBuffer buffer = new StringBuffer();
+			StringBuilder buffer = new StringBuilder();
 			for (MemoryBlock block : blocks) {
 				buffer.append("[");
 				buffer.append(block.getStart());
@@ -2270,11 +2299,9 @@ public class MemoryMapDB implements Memory, ManagerDB, LiveMemoryListener {
 		}
 		if (!end.equals(start)) {
 			instr = codeManager.getInstructionAfter(start);
-			if (instr != null) {
-				if (instr.getMinAddress().compareTo(end) <= 0) {
-					throw new MemoryAccessException(
-						"Memory change conflicts with instruction at " + instr.getMinAddress());
-				}
+			if ((instr != null) && (instr.getMinAddress().compareTo(end) <= 0)) {
+				throw new MemoryAccessException(
+					"Memory change conflicts with instruction at " + instr.getMinAddress());
 			}
 		}
 	}

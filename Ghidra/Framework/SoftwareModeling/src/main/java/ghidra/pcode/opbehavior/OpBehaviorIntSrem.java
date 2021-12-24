@@ -16,11 +16,11 @@
  */
 package ghidra.pcode.opbehavior;
 
+import java.math.BigInteger;
+
 import ghidra.pcode.error.LowlevelError;
 import ghidra.pcode.utils.Utils;
 import ghidra.program.model.pcode.PcodeOp;
-
-import java.math.BigInteger;
 
 public class OpBehaviorIntSrem extends BinaryOpBehavior {
 
@@ -39,9 +39,7 @@ public class OpBehaviorIntSrem extends BinaryOpBehavior {
 		mod = Utils.zzz_sign_extend(mod, 8 * sizein - 1);
 		// Do the remainder
 		long sres = val % mod;
-		// Convert back to unsigned
-		sres = Utils.zzz_zero_extend(sres, 8 * sizeout - 1);
-		return sres;
+		return Utils.zzz_zero_extend(sres, 8 * sizeout - 1);
 	}
 
 	@Override

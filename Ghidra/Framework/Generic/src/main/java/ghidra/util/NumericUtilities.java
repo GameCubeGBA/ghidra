@@ -16,7 +16,9 @@
 package ghidra.util;
 
 import java.math.BigInteger;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -195,7 +197,7 @@ public final class NumericUtilities {
 	 * 
 	 * @param value the long value to convert
 	 */
-	public final static String toHexString(long value) {
+	public static String toHexString(long value) {
 		return HEX_PREFIX_x + Long.toHexString(value);
 	}
 
@@ -206,7 +208,7 @@ public final class NumericUtilities {
 	 * @param value the long value to convert
 	 * @param size number of bytes to be represented
 	 */
-	public final static String toHexString(long value, int size) {
+	public static String toHexString(long value, int size) {
 		if (size > 0 && size < 8) {
 			value &= -1L >> (8 * (8 - size));
 		}
@@ -219,8 +221,8 @@ public final class NumericUtilities {
 	 * 
 	 * @param value the long value to convert
 	 */
-	public final static String toSignedHexString(long value) {
-		StringBuffer buf = new StringBuffer();
+	public static String toSignedHexString(long value) {
+		StringBuilder buf = new StringBuilder();
 		if (value < 0) {
 			buf.append("-");
 		}
@@ -892,7 +894,7 @@ public final class NumericUtilities {
 	/**
 	 * Provides the protocol for rendering integer-type numbers in different signed-ness modes.
 	 */
-	private static interface IntegerRadixRenderer {
+	private interface IntegerRadixRenderer {
 		/**
 		 * Format the given number in the provided radix base.
 		 * 
@@ -900,7 +902,7 @@ public final class NumericUtilities {
 		 * @param radix the base in which to render
 		 * @return a string representing the provided number in the given base
 		 */
-		public String toString(long number, int radix);
+		String toString(long number, int radix);
 
 	}
 

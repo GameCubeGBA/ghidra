@@ -18,12 +18,20 @@ package docking.widgets.dialogs;
 import java.awt.BorderLayout;
 import java.awt.Component;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextPane;
 import javax.swing.text.DefaultCaret;
 
 import org.apache.commons.lang3.StringUtils;
 
-import docking.*;
+import docking.DialogComponentProvider;
+import docking.DockingUtils;
+import docking.DockingWindowManager;
 import docking.widgets.OptionDialog;
 import docking.widgets.label.GIconLabel;
 import docking.widgets.label.GLabel;

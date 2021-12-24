@@ -23,9 +23,15 @@ import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 
-import docking.wizard.*;
-import ghidra.framework.client.*;
-import ghidra.framework.model.*;
+import docking.wizard.PanelManager;
+import docking.wizard.WizardManager;
+import docking.wizard.WizardPanel;
+import ghidra.framework.client.NotConnectedException;
+import ghidra.framework.client.RepositoryAdapter;
+import ghidra.framework.client.RepositoryServerAdapter;
+import ghidra.framework.model.ProjectLocator;
+import ghidra.framework.model.ProjectManager;
+import ghidra.framework.model.ServerInfo;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.framework.preferences.Preferences;
 import ghidra.framework.remote.User;
@@ -98,11 +104,9 @@ class NewProjectPanelManager implements PanelManager {
 
 	@Override
 	public boolean hasNextPanel() {
-		if (currentWizardPanel == selectProjectPanel) {
-			if (selectProjectPanel.isValidInformation() && projectTypePanel.isValidInformation() &&
-				!projectTypePanel.isSharedProject()) {
-				return false;
-			}
+		if ((currentWizardPanel == selectProjectPanel) && (selectProjectPanel.isValidInformation() && projectTypePanel.isValidInformation() &&
+			!projectTypePanel.isSharedProject())) {
+			return false;
 		}
 		return currentWizardPanel != selectProjectPanel;
 	}

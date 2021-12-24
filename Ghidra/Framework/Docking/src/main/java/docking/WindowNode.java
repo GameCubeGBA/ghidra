@@ -17,9 +17,16 @@ package docking;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-import javax.swing.*;
+import javax.swing.JComponent;
+import javax.swing.JMenuBar;
+import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
 
 public abstract class WindowNode extends Node {
 	private JPanel toolBarPanel;
@@ -76,7 +83,7 @@ public abstract class WindowNode extends Node {
 
 	public Set<Class<?>> getContextTypes() {
 		if (contextTypes == null) {
-			contextTypes = new HashSet<Class<?>>();
+			contextTypes = new HashSet<>();
 			List<ComponentPlaceholder> activeComponents = getActiveComponents();
 			for (ComponentPlaceholder placeholder : activeComponents) {
 				ComponentProvider provider = placeholder.getProvider();
@@ -91,7 +98,7 @@ public abstract class WindowNode extends Node {
 
 	List<ComponentPlaceholder> getActiveComponents() {
 		List<ComponentPlaceholder> activeComponents =
-			new ArrayList<ComponentPlaceholder>();
+			new ArrayList<>();
 		populateActiveComponents(activeComponents);
 		return activeComponents;
 	}

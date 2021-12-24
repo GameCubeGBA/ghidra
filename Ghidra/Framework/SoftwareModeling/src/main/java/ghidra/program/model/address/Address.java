@@ -18,6 +18,7 @@ package ghidra.program.model.address;
 import java.math.BigInteger;
 
 import ghidra.program.model.data.DataOrganization;
+import ghidra.program.model.lang.Register;
 
 /**
  * An address represents a location in a program.  Conceptually, addresses consist
@@ -32,15 +33,15 @@ public interface Address extends Comparable<Address> {
 	/**
 	 * Address object representing an invalid address.
 	 */
-	public static final Address NO_ADDRESS = new SpecialAddress("NO ADDRESS");
+	Address NO_ADDRESS = new SpecialAddress("NO ADDRESS");
 	/**
 	 * Address object representing an extenal entry address.
 	 */
-	public static final Address EXT_FROM_ADDRESS = new SpecialAddress("Entry Point");
+	Address EXT_FROM_ADDRESS = new SpecialAddress("Entry Point");
 	/**
 	 * Character used to separate space names from offsets.
 	 */
-	public final char SEPARATOR_CHAR = ':';
+	char SEPARATOR_CHAR = ':';
 
 	/**
 	 * Creates a new Address by parsing a String representation of an address. The
@@ -54,7 +55,7 @@ public interface Address extends Comparable<Address> {
 	 * @throws AddressFormatException if the string cannot be parsed or the
 	 * parsed offset is larger than the size for this address' space.
 	 */
-	public Address getAddress(String addrString) throws AddressFormatException;
+	Address getAddress(String addrString) throws AddressFormatException;
 
 	/**
 	 * Creates a new Address in this address's space with the given byte offset.
@@ -64,7 +65,7 @@ public interface Address extends Comparable<Address> {
 	 * @throws AddressOutOfBoundsException if the offset is less than the minimum offset or 
 	 * greater than the max offset allowed for this space.
 	 */
-	public Address getNewAddress(long byteOffset);
+	Address getNewAddress(long byteOffset);
 
 	/**
 	 * Returns a new address in this address's space with the given offset.  
@@ -103,7 +104,7 @@ public interface Address extends Comparable<Address> {
 	 * result will be one of {1,2,4,8}.
 	 * @see DataOrganization#getPointerSize() for compiler-specific size of pointers stored in memory.
 	 */
-	public int getPointerSize();
+	int getPointerSize();
 
 	/**
 	 * Returns the address's successor.  In most cases, this is equivalent
@@ -112,7 +113,7 @@ public interface Address extends Comparable<Address> {
 	 * @return the next higher address, or null if already at the
 	 * highest address.
 	 */
-	public Address next();
+	Address next();
 
 	/**
 	 * Returns the address's predecessor.  In most cases, this is equivalent to
@@ -121,50 +122,50 @@ public interface Address extends Comparable<Address> {
 	 * @return the next lower address, or null if already at the
 	 *  lowest address.
 	 */
-	public Address previous();
+	Address previous();
 
 	/**
 	 * Get the offset of this Address.
 	 *
 	 * @return the offset of this Address.
 	 */
-	public long getOffset();
+	long getOffset();
 
 	/**
 	 * Get the offset of this Address as a BigInteger
 	 *
 	 * @return the offset of this Address.
 	 */
-	public BigInteger getOffsetAsBigInteger();
+	BigInteger getOffsetAsBigInteger();
 
 	/**
 	 * Get the address offset as an unsigned number.
 	 * This may be useful when dealing with signed spaces (e.g. stack)
 	 * @return unsigned address offset
 	 */
-	public long getUnsignedOffset();
+	long getUnsignedOffset();
 
 	/**
 	 * Get the addressable memory word offset which corresponds to this address.
 	 * @return addressable memory word offset
 	 */
-	public long getAddressableWordOffset();
+	long getAddressableWordOffset();
 
 	/**
 	 * Returns the address space associated with this address.
 	 */
-	public AddressSpace getAddressSpace();
+	AddressSpace getAddressSpace();
 
 	/**
 	 * Return true if this address' address space is equal to the
 	 * address space for addr.
 	 */
-	public boolean hasSameAddressSpace(Address addr);
+	boolean hasSameAddressSpace(Address addr);
 
 	/** Returns the number of bits that are used to form the address.  Thus
 	 * the maximum offset for this address space will be 2^size-1.
 	 */
-	public int getSize();
+	int getSize();
 
 	/**
 	 * Calculates the displacement between two addresses (<code>this - addr</code>)
@@ -173,7 +174,7 @@ public interface Address extends Comparable<Address> {
 	 * @return the difference (thisAddress.offset - thatAddress.offset)
 	 * @throws IllegalArgumentException if the two addresses are not in the same address space
 	 */
-	public long subtract(Address addr);
+	long subtract(Address addr);
 
 	/**
 	 * Creates a new address by subtracting the displacement from the current 
@@ -185,7 +186,7 @@ public interface Address extends Comparable<Address> {
 	 * @param displacement  the displacement to subtract.
 	 * @return The new Address formed by subtracting the displacement for the offset.
 	 */
-	public Address subtractWrap(long displacement);
+	Address subtractWrap(long displacement);
 
 	/**
 	 * Creates a new address by subtracting the displacement from the current 
@@ -196,7 +197,7 @@ public interface Address extends Comparable<Address> {
 	 * @param displacement  the displacement to add.
 	 * @return The new Address formed by subtracting the displacement from this address's offset.
 	 */
-	public Address subtractWrapSpace(long displacement);
+	Address subtractWrapSpace(long displacement);
 
 	/**
 	 * Creates a new Address by subtracting displacement from the
@@ -209,7 +210,7 @@ public interface Address extends Comparable<Address> {
 	 * @throws AddressOverflowException if the offset in this Address would
 	 *  overflow due to this operation.
 	 */
-	public Address subtractNoWrap(long displacement) throws AddressOverflowException;
+	Address subtractNoWrap(long displacement) throws AddressOverflowException;
 
 	/**
 	 * Creates a new address (possibly in a new space) by subtracting the displacement to 
@@ -217,7 +218,7 @@ public interface Address extends Comparable<Address> {
 	 * @param displacement the amount to subtract from this offset.
 	 * @return The address using the subtracted offset.
 	 */
-	public Address subtract(long displacement);
+	Address subtract(long displacement);
 
 	/**
 	 * Creates a new address by adding the displacement to the current 
@@ -229,7 +230,7 @@ public interface Address extends Comparable<Address> {
 	 * @param displacement  the displacement to add.
 	 * @return The new Address formed by adding the displacement to this address's offset.
 	 */
-	public Address addWrap(long displacement);
+	Address addWrap(long displacement);
 
 	/**
 	 * Creates a new address by adding the displacement to the current 
@@ -240,7 +241,7 @@ public interface Address extends Comparable<Address> {
 	 * @param displacement  the displacement to add.
 	 * @return The new Address formed by adding the displacement to this address's offset.
 	 */
-	public Address addWrapSpace(long displacement);
+	Address addWrapSpace(long displacement);
 
 	/**
 	 *  Creates a new Address with a displacement relative to this
@@ -252,9 +253,9 @@ public interface Address extends Comparable<Address> {
 	 * @throws AddressOverflowException if the offset in this Address would
 	 *  overflow (wrap around) due to this operation.
 	 */
-	public Address addNoWrap(long displacement) throws AddressOverflowException;
+	Address addNoWrap(long displacement) throws AddressOverflowException;
 
-	public Address addNoWrap(BigInteger displacement) throws AddressOverflowException;
+	Address addNoWrap(BigInteger displacement) throws AddressOverflowException;
 
 	/**
 	 * Creates a new address (possibly in a new space) by adding the displacement to 
@@ -265,28 +266,27 @@ public interface Address extends Comparable<Address> {
 	 * corresponding address space and the addition causes an out-of-bounds
 	 * error
 	 */
-	public Address add(long displacement) throws AddressOutOfBoundsException;
+	Address add(long displacement) throws AddressOutOfBoundsException;
 
 	/**
 	 * Tests whether the given address immediately follows this address.
 	 *
 	 * @param addr   the address to test.
 	 */
-	public boolean isSuccessor(Address addr);
+	boolean isSuccessor(Address addr);
 
 	/**
 	 * Returns a String representation of the address in hex and padded
 	 * to the appropriate size.
 	 */
-	@Override
-	public String toString();
+	@Override String toString();
 
 	/** 
 	 * Returns a String representation of the address using the
 	 * given string as a prefix.  Equivalent of prefix + ":" + toString(false)
 	 * @param prefix the string to prepend to the address string.  
 	 */
-	public String toString(String prefix);
+	String toString(String prefix);
 
 	/**
 	 * Returns a String representation that may include the address space name
@@ -294,7 +294,7 @@ public interface Address extends Comparable<Address> {
 	 * resulting string.
 	 * @return String the string representation of the address
 	 */
-	public String toString(boolean showAddressSpace);
+	String toString(boolean showAddressSpace);
 
 	/**
 	 * Returns a String representation that may include the address space name and may or may
@@ -305,7 +305,7 @@ public interface Address extends Comparable<Address> {
 	 * the number of hex digits at least 4.
 	 * @return the address as a String.
 	 */
-	public String toString(boolean showAddressSpace, boolean pad);
+	String toString(boolean showAddressSpace, boolean pad);
 
 	/**
 	 * Returns a String representation that may include the address space name and may or may
@@ -317,7 +317,7 @@ public interface Address extends Comparable<Address> {
 	 * necessary, but will contain leading zeros to make the address string have at least minNumDigits.
 	 * @return the address as a String.
 	 */
-	public String toString(boolean showAddressSpace, int minNumDigits);
+	String toString(boolean showAddressSpace, int minNumDigits);
 
 	/**
 	 * Compares this Address to the specified object.
@@ -330,8 +330,7 @@ public interface Address extends Comparable<Address> {
 	 * @return  <code>true</code> if the <code>Addresses</code>are equal;
 	 *          <code>false</code> otherwise.
 	 */
-	@Override
-	public boolean equals(Object o);
+	@Override boolean equals(Object o);
 
 	/**
 	 * Returns a hashcode for this Address. The hashcode for an 
@@ -341,8 +340,7 @@ public interface Address extends Comparable<Address> {
 	 *
 	 * @return  a hash code value for this object. 
 	 */
-	@Override
-	public int hashCode();
+	@Override int hashCode();
 
 	/**
 	 * Returns the physical Address that corresponds to this Address.
@@ -350,42 +348,42 @@ public interface Address extends Comparable<Address> {
 	 * @return address in a physical space corresponding to this
 	 * address.
 	 */
-	public Address getPhysicalAddress();
+	Address getPhysicalAddress();
 
 	/**
 	 * Returns true if this address represents a location in memory
 	 */
-	public boolean isMemoryAddress();
+	boolean isMemoryAddress();
 
 	/**
 	 * Returns true if this address represents an address in a loaded memory block
 	 */
-	public boolean isLoadedMemoryAddress();
+	boolean isLoadedMemoryAddress();
 
 	/**
 	 * Returns true if this address represents an address not loaded in real memory (i.e. OTHER)
 	 */
-	public boolean isNonLoadedMemoryAddress();
+	boolean isNonLoadedMemoryAddress();
 
 	/**
 	 * Returns true if this address represents a location in stack space
 	 */
-	public boolean isStackAddress();
+	boolean isStackAddress();
 
 	/**
 	 * Returns true if this address represents a location in unique space
 	 */
-	public boolean isUniqueAddress();
+	boolean isUniqueAddress();
 
 	/**
 	 * Returns true if this address represents a location in constant space
 	 */
-	public boolean isConstantAddress();
+	boolean isConstantAddress();
 
 	/**
 	 * Returns true if this address represents a location in the HASH space
 	 */
-	public boolean isHashAddress();
+	boolean isHashAddress();
 
 	/**
 	 * Returns true if this address represents a location in the register space.
@@ -393,17 +391,17 @@ public interface Address extends Comparable<Address> {
 	 * a memory space and not the register space in which case this method would return
 	 * false for its address.
 	 */
-	public boolean isRegisterAddress();
+	boolean isRegisterAddress();
 
 	/**
 	 * Returns true if this address represents a location in variable space
 	 */
-	public boolean isVariableAddress();
+	boolean isVariableAddress();
 
 	/**
 	 * Returns true if this address represents an external location in the external address space
 	 */
-	public boolean isExternalAddress();
+	boolean isExternalAddress();
 
 	/**
 	 * Return the minimum of two addresses using Address.compareTo
@@ -411,7 +409,7 @@ public interface Address extends Comparable<Address> {
 	 * @param b second address
 	 * @return minimum of two addresses
 	 */
-	public static Address min(Address a, Address b) {
+	static Address min(Address a, Address b) {
 		return a.compareTo(b) <= 0 ? a : b;
 	}
 
@@ -421,7 +419,7 @@ public interface Address extends Comparable<Address> {
 	 * @param b second address
 	 * @return maximum of two addresses
 	 */
-	public static Address max(Address a, Address b) {
+	static Address max(Address a, Address b) {
 		return a.compareTo(b) > 0 ? a : b;
 	}
 }

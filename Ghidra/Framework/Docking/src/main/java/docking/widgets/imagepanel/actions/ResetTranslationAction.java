@@ -40,10 +40,7 @@ public class ResetTranslationAction extends ImagePanelDockingAction {
 
 	@Override
 	public boolean isEnabledForContext(ActionContext context) {
-		if (!super.isEnabledForContext(context)) {
-			return false;
-		}
-		if (imagePanel.getImage() == null) {
+		if (!super.isEnabledForContext(context) || (imagePanel.getImage() == null)) {
 			return false;
 		}
 		return imagePanel.isTranslated();

@@ -15,10 +15,18 @@
  */
 package ghidra.framework.main;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Font;
+import java.awt.Insets;
 import java.io.InputStream;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JComponent;
+import javax.swing.JEditorPane;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 import javax.swing.text.html.HTMLEditorKit;
 
 import docking.DialogComponentProvider;
@@ -88,9 +96,7 @@ public class UserAgreementDialog extends DialogComponentProvider {
 				text = HTMLUtilities.toHTML(text);
 			}
 
-			text = text.replace('\n', ' ');
-
-			return text;
+			return text.replace('\n', ' ');
 		}
 		catch (Exception e) {
 			// use default splash screen info

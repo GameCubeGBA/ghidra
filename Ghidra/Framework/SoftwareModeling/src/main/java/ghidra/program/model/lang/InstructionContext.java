@@ -30,7 +30,7 @@ public interface InstructionContext {
 	 * Get the instruction address that this context corresponds to.
 	 * @return instruction address
 	 */
-	public Address getAddress();
+	Address getAddress();
 
 	/**
 	 * Get the read-only processor context containing the context-register state
@@ -38,14 +38,14 @@ public interface InstructionContext {
 	 * parse phase to provide the initial context-register state.
 	 * @return the read-only processor context
 	 */
-	public ProcessorContextView getProcessorContext();
+	ProcessorContextView getProcessorContext();
 
 	/**
 	 * Get the read-only memory buffer containing the instruction bytes.  Its position will
 	 * correspond to the instruction address.
 	 * @return instruction memory buffer
 	 */
-	public MemBuffer getMemBuffer();
+	MemBuffer getMemBuffer();
 
 	/**
 	 * Get the instruction parser context for the instruction which corresponds to this 
@@ -55,7 +55,7 @@ public interface InstructionContext {
 	 * @throws MemoryAccessException if memory error occurred while resolving instruction
 	 * details. 
 	 */
-	public ParserContext getParserContext() throws MemoryAccessException;
+	ParserContext getParserContext() throws MemoryAccessException;
 
 	/**
 	 * Get the instruction parser context which corresponds to the specified instruction
@@ -70,7 +70,7 @@ public interface InstructionContext {
 	 * @throws MemoryAccessException if memory error occurred while resolving instruction
 	 * details.
 	 */
-	public ParserContext getParserContext(Address instructionAddress)
+	ParserContext getParserContext(Address instructionAddress)
 			throws UnknownContextException, MemoryAccessException;
 
 }

@@ -16,10 +16,6 @@
  */
 package ghidra.program.database.util;
 
-import ghidra.program.database.map.AddressMap;
-import ghidra.program.model.address.Address;
-import ghidra.program.model.address.AddressIterator;
-
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -27,6 +23,9 @@ import java.util.NoSuchElementException;
 import db.DBFieldIterator;
 import db.Field;
 import db.util.ErrorHandler;
+import ghidra.program.database.map.AddressMap;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressIterator;
 
 /**
  * Iterates over a FieldIterator; the field is the address but not

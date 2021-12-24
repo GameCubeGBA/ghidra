@@ -63,7 +63,8 @@ public class ByteArray implements Array, Serializable {
      * @param index the index to set to 0.
      * @throws IndexOutOfBoundsException if the index is negative
      */
-    public void remove(int index) {
+    @Override
+	public void remove(int index) {
 		if (index >= bytes.length) {
 			return;
 		}
@@ -122,7 +123,8 @@ public class ByteArray implements Array, Serializable {
 	 * 
 	 * @see ghidra.util.datastruct.Array#getLastNonEmptyIndex()
 	 */
-    public int getLastNonEmptyIndex() {
+    @Override
+	public int getLastNonEmptyIndex() {
         return lastNonZeroIndex;
     }
 
@@ -130,7 +132,8 @@ public class ByteArray implements Array, Serializable {
 	 * 
 	 * @see ghidra.util.datastruct.Array#copyDataTo(int, DataTable, int, int)
 	 */
-    public void copyDataTo(int index, DataTable table, int toIndex, int toCol) {
+    @Override
+	public void copyDataTo(int index, DataTable table, int toIndex, int toCol) {
     	table.putByte(toIndex, toCol, get(index));
     }
 

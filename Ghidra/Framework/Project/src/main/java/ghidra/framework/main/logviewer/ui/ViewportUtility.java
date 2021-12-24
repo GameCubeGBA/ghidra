@@ -17,7 +17,9 @@ package ghidra.framework.main.logviewer.ui;
 
 import java.awt.Point;
 import java.io.IOException;
-import java.util.*;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JViewport;
 import javax.swing.SwingUtilities;
@@ -25,7 +27,10 @@ import javax.swing.SwingUtilities;
 import ghidra.framework.main.logviewer.event.FVEvent;
 import ghidra.framework.main.logviewer.event.FVEvent.EventType;
 import ghidra.framework.main.logviewer.event.FVEventListener;
-import ghidra.framework.main.logviewer.model.*;
+import ghidra.framework.main.logviewer.model.Chunk;
+import ghidra.framework.main.logviewer.model.ChunkModel;
+import ghidra.framework.main.logviewer.model.ChunkReader;
+import ghidra.framework.main.logviewer.model.Pair;
 import ghidra.util.Msg;
 
 /**

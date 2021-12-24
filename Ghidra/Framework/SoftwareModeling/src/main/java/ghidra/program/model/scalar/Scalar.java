@@ -58,7 +58,7 @@ public class Scalar implements Comparable<Scalar> {
 	 */
 	public Scalar(int bitLength, long value, boolean signed) {
 		this.signed = signed;
-		if (!(bitLength == 0 && value == 0) && (bitLength < 1 || bitLength > 64)) {
+		if (((bitLength != 0) || (value != 0)) && (bitLength < 1 || bitLength > 64)) {
 			throw new IllegalArgumentException("Bit length must be >= 1 and <= 64");
 		}
 		this.bitLength = (byte) bitLength;
@@ -183,12 +183,10 @@ public class Scalar implements Comparable<Scalar> {
 		if (v != other.getValue()) {
 			return false;
 		}
-		if (v < 0) {
-			if (bitLength == 64 || other.bitLength == 64) {
-				// if both values are negative ensure that they have
-				// the same signed-ness
-				return signed == other.signed;
-			}
+		if ((v < 0) && (bitLength == 64 || other.bitLength == 64)) {
+			// if both values are negative ensure that they have
+			// the same signed-ness
+			return signed == other.signed;
 		}
 		return true;
 	}
@@ -379,7 +377,7 @@ public class Scalar implements Comparable<Scalar> {
 		}
 
 		String b;
-		StringBuffer buf = new StringBuffer(32);
+		StringBuilder buf = new StringBuilder(32);
 		if (bitLength == 64 && !signed) {
 			b = getBigInteger().toString(radix);
 		}
@@ -387,11 +385,9 @@ public class Scalar implements Comparable<Scalar> {
 			b = Long.toString(val);
 		}
 		else {
-			if (showSign) {
-				if (val < 0) {
-					val = -val;
-					buf.append('-');
-				}
+			if (showSign && (val < 0)) {
+				val = -val;
+				buf.append('-');
 			}
 			switch (radix) {
 				case 2:

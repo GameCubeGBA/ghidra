@@ -17,8 +17,8 @@ package ghidra.graph.support;
 
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import ghidra.graph.VisualGraph;
-import ghidra.graph.graphs.TestEdge;
 import ghidra.graph.graphs.AbstractTestVertex;
+import ghidra.graph.graphs.TestEdge;
 import ghidra.graph.viewer.layout.JungWrappingVisualGraphLayoutAdapter;
 
 /**

@@ -16,13 +16,22 @@
 package ghidra.program.database.oldfunction;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
-import db.Field;
 import db.DBRecord;
+import db.Field;
 import ghidra.program.model.address.AddressOutOfBoundsException;
 import ghidra.program.model.data.DataType;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.Function;
+import ghidra.program.model.listing.LocalVariableImpl;
+import ghidra.program.model.listing.ParameterImpl;
+import ghidra.program.model.listing.StackFrame;
+import ghidra.program.model.listing.StackVariableComparator;
+import ghidra.program.model.listing.Variable;
+import ghidra.program.model.listing.VariableStorage;
 import ghidra.program.model.symbol.SourceType;
 import ghidra.util.Msg;
 import ghidra.util.exception.InvalidInputException;
@@ -41,7 +50,7 @@ class OldStackFrameDB implements StackFrame {
 	private OldFunctionManager functionManager;
 	private OldStackVariableDBAdapter adapter;
 
-	private final static Variable[] emptyArray = new Variable[0];
+	private final static Variable[] emptyArray = {};
 
 	/**
 	 * Construct a function stack frame.
@@ -87,10 +96,10 @@ class OldStackFrameDB implements StackFrame {
 		if (variables != null)
 			return;
 		try {
-			variables = new ArrayList<Variable>();
+			variables = new ArrayList<>();
 			Field[] keys = adapter.getStackVariableKeys(function.getKey());
-			for (int i = 0; i < keys.length; i++) {
-				DBRecord varRec = adapter.getStackVariableRecord(keys[i].getLongValue());
+			for (Field key : keys) {
+				DBRecord varRec = adapter.getStackVariableRecord(key.getLongValue());
 				variables.add(getStackVariable(varRec));
 			}
 			Collections.sort(variables, StackVariableComparator.get());
@@ -482,9 +491,6 @@ class OldStackFrameDB implements StackFrame {
 			if (stackOffset >= 0 || stackOffset >= paramStart) {
 				break;
 			}
-		}
-		if (index == 0) {
-			return 0;
 		}
 		return index;
 	}

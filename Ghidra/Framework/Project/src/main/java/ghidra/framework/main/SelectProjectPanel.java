@@ -15,12 +15,17 @@
  */
 package ghidra.framework.main;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.io.File;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.Document;
@@ -152,12 +157,7 @@ class SelectProjectPanel extends AbstractWizardJPanel {
 		JLabel projectNameLabel = new GDLabel("Project Name:", SwingConstants.RIGHT);
 		projectNameField = new JTextField(25);
 		projectNameField.setName("Project Name");
-		projectNameField.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setProjectFile();
-			}
-		});
+		projectNameField.addActionListener(e -> setProjectFile());
 
 		docListener = new DocumentListener() {
 			@Override
@@ -179,12 +179,7 @@ class SelectProjectPanel extends AbstractWizardJPanel {
 		directoryField.getDocument().addDocumentListener(docListener);
 
 		browseButton = ButtonPanelFactory.createButton(ButtonPanelFactory.BROWSE_TYPE);
-		browseButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				displayFileChooser();
-			}
-		});
+		browseButton.addActionListener(e -> displayFileChooser());
 
 //		sharedProjectCB = new GCheckBox("Project can be Shared with Others"); 
 //		sharedProjectCB.addItemListener(new ItemListener() {

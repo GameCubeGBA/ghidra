@@ -15,16 +15,32 @@
  */
 package docking.widgets.textfield;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Insets;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.math.BigInteger;
-
-import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.text.*;
+import javax.swing.JComponent;
+import javax.swing.JTextField;
+import javax.swing.ToolTipManager;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
+import javax.swing.text.DocumentFilter;
 
 import docking.DockingUtils;
 import docking.util.GraphicsUtils;
@@ -303,10 +319,8 @@ public class IntegerTextField {
 	public void setAllowNegativeValues(boolean b) {
 		BigInteger currentValue = getValue();
 		allowsNegative = b;
-		if (!allowsNegative) {
-			if (currentValue != null && currentValue.compareTo(BigInteger.ZERO) < 0) {
-				currentValue = null;
-			}
+		if (!allowsNegative && (currentValue != null && currentValue.compareTo(BigInteger.ZERO) < 0)) {
+			currentValue = null;
 		}
 		updateTextField(currentValue);
 	}
@@ -454,10 +468,7 @@ public class IntegerTextField {
 	}
 
 	private boolean passesMaxCheck(BigInteger value) {
-		if (value == null) {
-			return true;
-		}
-		if (maxValue == null) {
+		if ((value == null) || (maxValue == null)) {
 			return true;
 		}
 

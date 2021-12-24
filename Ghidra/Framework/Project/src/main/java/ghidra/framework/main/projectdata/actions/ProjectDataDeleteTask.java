@@ -18,16 +18,27 @@ package ghidra.framework.main.projectdata.actions;
 import java.awt.Component;
 import java.io.IOException;
 import java.rmi.RemoteException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import docking.widgets.OptionDialog;
 import docking.widgets.dialogs.MultiLineMessageDialog;
 import ghidra.framework.model.DomainFile;
 import ghidra.framework.model.DomainFolder;
-import ghidra.util.*;
+import ghidra.util.DateUtils;
+import ghidra.util.Msg;
+import ghidra.util.SystemUtilities;
 import ghidra.util.exception.CancelledException;
-import ghidra.util.task.*;
+import ghidra.util.task.Task;
+import ghidra.util.task.TaskMonitor;
+import ghidra.util.task.UnknownProgressWrappingTaskMonitor;
 import utilities.util.FileUtilities;
 
 /**
@@ -145,10 +156,8 @@ public class ProjectDataDeleteTask extends Task {
 					return;
 			}
 		}
-		if (!failPreprocessCheckedOut.isEmpty()) {
-			if (!confirmUserSkipFailedPreprocessedFiles()) {
-				return;
-			}
+		if (!failPreprocessCheckedOut.isEmpty() && !confirmUserSkipFailedPreprocessedFiles()) {
+			return;
 		}
 
 		if (filesToDelete.isEmpty() && foldersToDelete.isEmpty()) {
@@ -287,7 +296,7 @@ public class ProjectDataDeleteTask extends Task {
 			monitor.setMessage("Deleting directories...");
 			List<DomainFolder> sortedFolders = new ArrayList<>(foldersToDelete.keySet());
 			Collections.sort(sortedFolders,
-				(o1, o2) -> o2.getPathname().compareTo(o1.getPathname()));
+				Comparator.comparing(DomainFolder::getPathname).reversed());
 			for (DomainFolder folder : sortedFolders) {
 				monitor.checkCanceled();
 				try {

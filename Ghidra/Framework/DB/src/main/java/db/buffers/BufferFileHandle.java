@@ -26,91 +26,91 @@ public interface BufferFileHandle {
 	/**
 	 * @see BufferFile#isReadOnly()
 	 */
-	public boolean isReadOnly() throws IOException;
+	boolean isReadOnly() throws IOException;
 
 	/**
 	 * @see BufferFile#setReadOnly()
 	 */
-	public boolean setReadOnly() throws IOException;
+	boolean setReadOnly() throws IOException;
 
 	/**
 	 * @see BufferFile#getParameter(java.lang.String)
 	 */
-	public int getParameter(String name) throws NoSuchElementException, IOException;
+	int getParameter(String name) throws NoSuchElementException, IOException;
 
 	/**
 	 * @see BufferFile#setParameter(java.lang.String, int)
 	 */
-	public void setParameter(String name, int value) throws IOException;
+	void setParameter(String name, int value) throws IOException;
 
 	/**
 	 * @see BufferFile#clearParameters()
 	 */
-	public void clearParameters() throws IOException;
+	void clearParameters() throws IOException;
 
 	/**
 	 * @see BufferFile#getParameterNames()
 	 */
-	public String[] getParameterNames() throws IOException;
+	String[] getParameterNames() throws IOException;
 
 	/**
 	 * @see BufferFile#getBufferSize()
 	 */
-	public int getBufferSize() throws IOException;
+	int getBufferSize() throws IOException;
 
 	/**
 	 * @see BufferFile#getIndexCount()
 	 */
-	public int getIndexCount() throws IOException;
+	int getIndexCount() throws IOException;
 
 	/**
 	 * @see BufferFile#getFreeIndexes()
 	 */
-	public int[] getFreeIndexes() throws IOException;
+	int[] getFreeIndexes() throws IOException;
 
 	/**
 	 * @see BufferFile#setFreeIndexes(int[])
 	 */
-	public void setFreeIndexes(int[] indexes) throws IOException;
+	void setFreeIndexes(int[] indexes) throws IOException;
 
 	/**
 	 * @see BufferFile#close()
 	 */
-	public void close() throws IOException;
+	void close() throws IOException;
 
 	/**
 	 * @see BufferFile#delete() }
 	 */
-	public boolean delete() throws IOException;
+	boolean delete() throws IOException;
 
 	/**
 	 * @see BufferFile#get(DataBuffer, int)
 	 */
-	public DataBuffer get(int index) throws IOException;
+	DataBuffer get(int index) throws IOException;
 
 	/**
 	 * @see BufferFile#put(DataBuffer, int)
 	 */
-	public void put(DataBuffer buf, int index) throws IOException;
+	void put(DataBuffer buf, int index) throws IOException;
 
 	/**
 	 * @see BufferFile#dispose()
 	 */
-	public void dispose() throws IOException;
+	void dispose() throws IOException;
 
 	/**
 	 * Provides local access to an input block stream.  This method should only be used 
 	 * if the associated {@link BufferFileAdapter#isRemote()} is <i>false</i>.
 	 * @see BufferFileAdapter#getInputBlockStream()
 	 */
-	public InputBlockStream getInputBlockStream() throws IOException;
+	InputBlockStream getInputBlockStream() throws IOException;
 
 	/**
 	 * Provides local access to an output block stream.  This method should only be used 
 	 * if the associated {@link BufferFileAdapter#isRemote()} is <i>false</i>.
 	 * @see BufferFileAdapter#getOutputBlockStream(int)
 	 */
-	public OutputBlockStream getOutputBlockStream(int blockCount) throws IOException;
+	OutputBlockStream getOutputBlockStream(int blockCount) throws IOException;
 
 	/**
 	 * Get an input block stream handle which will facilitate access to a remote InputBlockStream.
@@ -118,7 +118,7 @@ public interface BufferFileHandle {
 	 * if the associated {@link BufferFileAdapter#isRemote()} is <i>true</i>. 
 	 * @see BufferFileAdapter#getInputBlockStream()
 	 */
-	public BlockStreamHandle<InputBlockStream> getInputBlockStreamHandle() throws IOException;
+	BlockStreamHandle<InputBlockStream> getInputBlockStreamHandle() throws IOException;
 
 	/**
 	 * Get an output block stream handle which will facilitate access to a remote InputBlockStream.
@@ -126,7 +126,7 @@ public interface BufferFileHandle {
 	 * if the associated {@link BufferFileAdapter#isRemote()} is <i>true</i>. 
 	 * @see BufferFileAdapter#getOutputBlockStream(int)
 	 */
-	public BlockStreamHandle<OutputBlockStream> getOutputBlockStreamHandle(int blockCount)
+	BlockStreamHandle<OutputBlockStream> getOutputBlockStreamHandle(int blockCount)
 			throws IOException;
 
 }

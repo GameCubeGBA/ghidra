@@ -25,7 +25,7 @@ import utilities.util.reflection.ReflectionUtilities;
 
 public interface GComponent {
 	// taken from BasicHTML.htmlDisable, which is private
-	public static final String HTML_DISABLE_STRING = "html.disable";
+	String HTML_DISABLE_STRING = "html.disable";
 
 	/**
 	 * Enables and disables the rendering of HTML content in this component.  If enabled, this
@@ -34,7 +34,7 @@ public interface GComponent {
 	 *
 	 * @param enabled true to enable HTML rendering; false to disable it
 	 */
-	public default void setHTMLRenderingEnabled(boolean enabled) {
+	default void setHTMLRenderingEnabled(boolean enabled) {
 		setHTMLRenderingFlag((JComponent) this, enabled);
 	}
 
@@ -43,7 +43,7 @@ public interface GComponent {
 	 * 
 	 * @return boolean, true if HTML rendering is allowed
 	 */
-	public default boolean getHTMLRenderingEnabled() {
+	default boolean getHTMLRenderingEnabled() {
 		Object prop = ((JComponent) this).getClientProperty(HTML_DISABLE_STRING);
 		return prop == null || prop != Boolean.TRUE;
 	}
@@ -55,7 +55,7 @@ public interface GComponent {
 	 * <p>
 	 * @param text string to test for HTML and warn about
 	 */
-	public static void warnAboutHtmlText(String text) {
+	static void warnAboutHtmlText(String text) {
 		// #ifdef still_finding_html_labels_in_our_huge_codebase
 		if (StringUtils.startsWithIgnoreCase(text, "<html>")) {
 			Msg.warn(GLabel.class, "HTML text detected in non-HTML component: " + text,
@@ -70,7 +70,7 @@ public interface GComponent {
 	 * @param comp the thing
 	 * @param enabled boolean, if true html rendering will be allowed
 	 */
-	public static void setHTMLRenderingFlag(JComponent comp, boolean enabled) {
+	static void setHTMLRenderingFlag(JComponent comp, boolean enabled) {
 		comp.putClientProperty(HTML_DISABLE_STRING, enabled ? null : true);
 	}
 

@@ -15,7 +15,9 @@
  */
 package ghidra.graph;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
@@ -124,14 +126,12 @@ public class MutableGDirectedGraphWrapper<V, E extends GEdge<V>> implements GDir
 
 	@Override
 	public Collection<V> getVertices() {
-		Set<V> set = callOnBothGraphs(GDirectedGraph::getVertices);
-		return set;
+		return callOnBothGraphs(GDirectedGraph::getVertices);
 	}
 
 	@Override
 	public Collection<E> getEdges() {
-		Set<E> set = callOnBothGraphs(GDirectedGraph::getEdges);
-		return set;
+		return callOnBothGraphs(GDirectedGraph::getEdges);
 	}
 
 	@Override
@@ -177,26 +177,22 @@ public class MutableGDirectedGraphWrapper<V, E extends GEdge<V>> implements GDir
 
 	@Override
 	public Collection<E> getInEdges(V v) {
-		Set<E> set = callOnBothGraphs(GDirectedGraph::getInEdges, v);
-		return set;
+		return callOnBothGraphs(GDirectedGraph::getInEdges, v);
 	}
 
 	@Override
 	public Collection<E> getOutEdges(V v) {
-		Set<E> set = callOnBothGraphs(GDirectedGraph::getOutEdges, v);
-		return set;
+		return callOnBothGraphs(GDirectedGraph::getOutEdges, v);
 	}
 
 	@Override
 	public Collection<V> getPredecessors(V v) {
-		Set<V> set = callOnBothGraphs(GDirectedGraph::getPredecessors, v);
-		return set;
+		return callOnBothGraphs(GDirectedGraph::getPredecessors, v);
 	}
 
 	@Override
 	public Collection<V> getSuccessors(V v) {
-		Set<V> set = callOnBothGraphs(GDirectedGraph::getSuccessors, v);
-		return set;
+		return callOnBothGraphs(GDirectedGraph::getSuccessors, v);
 	}
 
 	@Override
@@ -222,16 +218,14 @@ public class MutableGDirectedGraphWrapper<V, E extends GEdge<V>> implements GDir
 
 	@SuppressWarnings("unchecked")
 	private <R> Set<R> callOnBothGraphs(Function<GDirectedGraph<V, E>, Collection<R>> f) {
-		Set<R> set = new HashSet<>();
-		set.addAll(CollectionUtils.nonNull(f.apply((GDirectedGraph<V, E>) mutatedGraph)));
+		Set<R> set = new HashSet<>(CollectionUtils.nonNull(f.apply((GDirectedGraph<V, E>) mutatedGraph)));
 		set.addAll(CollectionUtils.nonNull(f.apply(delegate)));
 		return set;
 	}
 
 	@SuppressWarnings("unchecked")
 	private <R> Set<R> callOnBothGraphs(BiFunction<GDirectedGraph<V, E>, V, Collection<R>> f, V v) {
-		Set<R> set = new HashSet<>();
-		set.addAll(CollectionUtils.nonNull(f.apply((GDirectedGraph<V, E>) mutatedGraph, v)));
+		Set<R> set = new HashSet<>(CollectionUtils.nonNull(f.apply((GDirectedGraph<V, E>) mutatedGraph, v)));
 		set.addAll(CollectionUtils.nonNull(f.apply(delegate, v)));
 		return set;
 	}

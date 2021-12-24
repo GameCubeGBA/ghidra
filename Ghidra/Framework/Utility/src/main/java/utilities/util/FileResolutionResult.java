@@ -23,7 +23,7 @@ import generic.jar.ResourceFile;
  */
 public class FileResolutionResult {
 
-	public static enum FileResolutionStatus {
+	public enum FileResolutionStatus {
 		OK, FileDoesNotExist, NotProperlyCaseDependent;
 	}
 

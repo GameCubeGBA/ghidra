@@ -39,12 +39,12 @@ public interface ProgramFragment extends Group, AddressSetView {
 	 * 
 	 * @return true if the code unit is in the fragment, false otherwise.
 	 */
-    public boolean contains(CodeUnit codeUnit);
+    @Override boolean contains(CodeUnit codeUnit);
 
 	/**
 	 * Returns a forward iterator over the code units making up this fragment. 
 	 */
-    public CodeUnitIterator getCodeUnits();
+    CodeUnitIterator getCodeUnits();
 
     /**
 	 * Moves all of the code units in a given range into this fragment.
@@ -58,6 +58,6 @@ public interface ProgramFragment extends Group, AddressSetView {
 	 * @exception NotFoundException thrown if any address between <CODE>min</CODE>
 	 * and <CODE>max</CODE> (inclusive) does not belong to program memory.
 	 */
-    public void move(Address min, Address max) throws NotFoundException;
+    void move(Address min, Address max) throws NotFoundException;
 
 }

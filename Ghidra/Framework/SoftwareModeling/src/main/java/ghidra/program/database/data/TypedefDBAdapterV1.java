@@ -18,7 +18,14 @@ package ghidra.program.database.data;
 import java.io.IOException;
 import java.util.Date;
 
-import db.*;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.LongField;
+import db.RecordIterator;
+import db.Schema;
+import db.StringField;
+import db.Table;
 import ghidra.util.UniversalID;
 import ghidra.util.exception.VersionException;
 
@@ -138,8 +145,8 @@ class TypedefDBAdapterV1 extends TypedefDBAdapter {
 		Field[] keys =
 			table.findRecords(new LongField(datatypeID.getValue()), V1_TYPEDEF_UNIVERSAL_DT_ID_COL);
 
-		for (int i = 0; i < keys.length; i++) {
-			DBRecord record = table.getRecord(keys[i]);
+		for (Field key : keys) {
+			DBRecord record = table.getRecord(key);
 			if (record.getLongValue(V1_TYPEDEF_SOURCE_ARCHIVE_ID_COL) == sourceID.getValue()) {
 				return record;
 			}

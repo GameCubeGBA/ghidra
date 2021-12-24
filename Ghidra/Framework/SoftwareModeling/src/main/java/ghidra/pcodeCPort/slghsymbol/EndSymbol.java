@@ -16,6 +16,10 @@
  */
 package ghidra.pcodeCPort.slghsymbol;
 
+import java.io.PrintStream;
+
+import org.jdom.Element;
+
 import ghidra.pcodeCPort.context.FixedHandle;
 import ghidra.pcodeCPort.context.ParserWalker;
 import ghidra.pcodeCPort.semantics.ConstTpl;
@@ -25,10 +29,6 @@ import ghidra.pcodeCPort.slghpatexpress.EndInstructionValue;
 import ghidra.pcodeCPort.slghpatexpress.PatternExpression;
 import ghidra.pcodeCPort.space.AddrSpace;
 import ghidra.sleigh.grammar.Location;
-
-import java.io.PrintStream;
-
-import org.jdom.Element;
 
 public class EndSymbol extends SpecificSymbol {
 	private AddrSpace const_space;

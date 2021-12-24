@@ -41,16 +41,16 @@ public class BlockMap {
 
 	public BlockMap(AddressFactory fac) {
 		factory = fac;
-		leaflist = new ArrayList<PcodeBlock>();
-		gotoreflist = new ArrayList<GotoReference>();
-		sortlist = new ArrayList<PcodeBlock>();
+		leaflist = new ArrayList<>();
+		gotoreflist = new ArrayList<>();
+		sortlist = new ArrayList<>();
 	}
 
 	public BlockMap(BlockMap op2) {
 		factory = op2.factory;
 		leaflist = op2.leaflist;
 		gotoreflist = op2.gotoreflist;
-		sortlist = new ArrayList<PcodeBlock>();
+		sortlist = new ArrayList<>();
 	}
 
 	public AddressFactory getAddressFactory() {
@@ -58,13 +58,7 @@ public class BlockMap {
 	}
 
 	private static void sortList(ArrayList<PcodeBlock> list) {
-		Comparator<PcodeBlock> comp = new Comparator<PcodeBlock>() {
-
-			@Override
-			public int compare(PcodeBlock o1, PcodeBlock o2) {
-				return o1.index - o2.index;
-			}
-		};
+		Comparator<PcodeBlock> comp = (o1, o2) -> o1.index - o2.index;
 		Collections.sort(list, comp);
 	}
 
@@ -155,8 +149,7 @@ public class BlockMap {
 
 	public void resolveGotoReferences() {
 		sortList(leaflist);
-		for (int i = 0; i < gotoreflist.size(); ++i) {
-			GotoReference gotoref = gotoreflist.get(i);
+		for (GotoReference gotoref : gotoreflist) {
 			PcodeBlock bl = findBlock(leaflist, gotoref.rootindex);
 			int depth = gotoref.depth;
 			while (depth > 0) {

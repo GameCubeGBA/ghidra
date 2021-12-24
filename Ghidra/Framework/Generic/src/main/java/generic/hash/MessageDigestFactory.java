@@ -16,5 +16,5 @@
 package generic.hash;
 
 public interface MessageDigestFactory {
-	public MessageDigest createDigest();
+	MessageDigest createDigest();
 }

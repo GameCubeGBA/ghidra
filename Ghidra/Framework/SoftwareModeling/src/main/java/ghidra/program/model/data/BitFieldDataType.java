@@ -17,7 +17,9 @@ package ghidra.program.model.data;
 
 import java.math.BigInteger;
 
-import ghidra.docking.settings.*;
+import ghidra.docking.settings.FormatSettingsDefinition;
+import ghidra.docking.settings.Settings;
+import ghidra.docking.settings.SettingsDefinition;
 import ghidra.program.model.mem.MemBuffer;
 import ghidra.program.model.scalar.Scalar;
 import ghidra.util.DataConverter;
@@ -155,10 +157,7 @@ public class BitFieldDataType extends AbstractDataType {
 		if (baseDataType instanceof TypeDef) {
 			baseDataType = ((TypeDef) baseDataType).getBaseDataType();
 		}
-		if (baseDataType instanceof Enum) {
-			return true;
-		}
-		if (baseDataType instanceof AbstractIntegerDataType) {
+		if ((baseDataType instanceof Enum) || (baseDataType instanceof AbstractIntegerDataType)) {
 			return true;
 		}
 		return false;
@@ -259,10 +258,7 @@ public class BitFieldDataType extends AbstractDataType {
 		if (dt == this) {
 			return true;
 		}
-		if (dt == null) {
-			return false;
-		}
-		if (!(dt instanceof BitFieldDataType)) {
+		if ((dt == null) || !(dt instanceof BitFieldDataType)) {
 			return false;
 		}
 		BitFieldDataType otherBitField = (BitFieldDataType) dt;
@@ -277,8 +273,7 @@ public class BitFieldDataType extends AbstractDataType {
 		int result = 1;
 		result = prime * result + baseDataType.hashCode();
 		result = prime * result + bitOffset;
-		result = prime * result + bitSize;
-		return result;
+		return prime * result + bitSize;
 	}
 
 	@Override
@@ -333,7 +328,7 @@ public class BitFieldDataType extends AbstractDataType {
 
 	@Override
 	public String getDescription() {
-		StringBuffer sbuf = new StringBuffer();
+		StringBuilder sbuf = new StringBuilder();
 		sbuf.append(Integer.toString(effectiveBitSize));
 		sbuf.append("-bit ");
 		DataType dt = getBaseDataType();

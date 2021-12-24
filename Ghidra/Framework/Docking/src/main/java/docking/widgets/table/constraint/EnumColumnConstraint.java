@@ -15,7 +15,9 @@
  */
 package docking.widgets.table.constraint;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import docking.widgets.table.constrainteditor.ColumnConstraintEditor;
@@ -89,7 +91,7 @@ public class EnumColumnConstraint<T extends Enum<T>> implements ColumnConstraint
 	public String getConstraintValueTooltip() {
 		EnumConstraintEditor<T> editor = (EnumConstraintEditor<T>) getEditor(null);
 
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 
 		buf.append("{");
 		// @formatter:off
@@ -105,7 +107,7 @@ public class EnumColumnConstraint<T extends Enum<T>> implements ColumnConstraint
 	@Override
 	public String getConstraintValueString() {
 
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 
 		buf.append("{");
 		// @formatter:off
@@ -157,10 +159,7 @@ public class EnumColumnConstraint<T extends Enum<T>> implements ColumnConstraint
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
 		}
 		EnumColumnConstraint<?> other = (EnumColumnConstraint<?>) obj;

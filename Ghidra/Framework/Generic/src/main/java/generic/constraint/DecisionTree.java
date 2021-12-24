@@ -15,13 +15,23 @@
  */
 package generic.constraint;
 
-import java.io.*;
-import java.util.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
-import org.xml.sax.*;
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 import generic.jar.ResourceFile;
-import ghidra.xml.*;
+import ghidra.xml.NonThreadedXmlPullParserImpl;
+import ghidra.xml.XmlElement;
+import ghidra.xml.XmlParseException;
+import ghidra.xml.XmlPullParser;
 
 /**
  * A decisionTree is used to find property values that are determined by traversing a tree
@@ -45,9 +55,9 @@ public class DecisionTree<T> {
 	private Set<String> propertyNameSet;
 
 	public DecisionTree() {
-		root = new RootDecisionNode<T>();
-		constraintClassMap = new HashMap<String, Class<? extends Constraint<T>>>();
-		propertyNameSet = new HashSet<String>();
+		root = new RootDecisionNode<>();
+		constraintClassMap = new HashMap<>();
+		propertyNameSet = new HashSet<>();
 	}
 
 	/**

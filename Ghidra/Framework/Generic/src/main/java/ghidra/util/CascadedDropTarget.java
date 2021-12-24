@@ -16,7 +16,10 @@
 package ghidra.util;
 
 import java.awt.Component;
-import java.awt.dnd.*;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDragEvent;
+import java.awt.dnd.DropTargetDropEvent;
+import java.awt.dnd.DropTargetEvent;
 
 /**
  * Combines two drop targets and sends events to them in priority order.  If the first drop target

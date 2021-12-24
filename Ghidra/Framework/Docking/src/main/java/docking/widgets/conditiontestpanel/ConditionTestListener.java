@@ -17,5 +17,5 @@
 package docking.widgets.conditiontestpanel;
 
 public interface ConditionTestListener {
-	public void testsCompleted();
+	void testsCompleted();
 }

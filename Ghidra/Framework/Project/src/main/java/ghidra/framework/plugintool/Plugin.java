@@ -15,16 +15,25 @@
  */
 package ghidra.framework.plugintool;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 import docking.ComponentProvider;
 import docking.action.DockingAction;
-import ghidra.framework.main.*;
+import ghidra.framework.main.FrontEndOnly;
+import ghidra.framework.main.FrontEndable;
+import ghidra.framework.main.ProgramaticUseOnly;
 import ghidra.framework.model.DomainFile;
 import ghidra.framework.model.DomainObject;
 import ghidra.framework.options.OptionsChangeListener;
 import ghidra.framework.options.SaveState;
-import ghidra.framework.plugintool.util.*;
+import ghidra.framework.plugintool.util.PluginDescription;
+import ghidra.framework.plugintool.util.PluginEventListener;
+import ghidra.framework.plugintool.util.PluginUtils;
+import ghidra.framework.plugintool.util.ServiceListener;
 import ghidra.util.Msg;
 import ghidra.util.SystemUtilities;
 import ghidra.util.classfinder.ExtensionPoint;

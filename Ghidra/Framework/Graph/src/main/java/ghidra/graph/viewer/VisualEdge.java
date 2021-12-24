@@ -50,14 +50,14 @@ public interface VisualEdge<V extends VisualVertex> extends GEdge<V> {
 	 * 
 	 * @param selected true to select this edge; false to de-select this vertex
 	 */
-	public void setSelected(boolean selected);
+	void setSelected(boolean selected);
 
 	/**
 	 * Returns true if this edge is selected
 	 * 
 	 * @return true if this edge is selected 
 	 */
-	public boolean isSelected();
+	boolean isSelected();
 
 	/**
 	 * Sets this edge to be marked as in the active path of a currently hovered vertex
@@ -65,7 +65,7 @@ public interface VisualEdge<V extends VisualVertex> extends GEdge<V> {
 	 * @param inPath true to be marked as in the active path; false to be marked as not 
 	 *        in the active path
 	 */
-	public void setInHoveredVertexPath(boolean inPath);
+	void setInHoveredVertexPath(boolean inPath);
 
 	/**
 	 * Returns true if this edge is part of an active path for a currently hovered 
@@ -73,7 +73,7 @@ public interface VisualEdge<V extends VisualVertex> extends GEdge<V> {
 	 * 
 	 * @return true if this edge is part of the active path
 	 */
-	public boolean isInHoveredVertexPath();
+	boolean isInHoveredVertexPath();
 
 	/**
 	 * Sets this edge to be marked as in the active path of a currently focused/selected vertex
@@ -81,7 +81,7 @@ public interface VisualEdge<V extends VisualVertex> extends GEdge<V> {
 	 * @param inPath true to be marked as in the active path; false to be marked as not 
 	 *        in the active path
 	 */
-	public void setInFocusedVertexPath(boolean inPath);
+	void setInFocusedVertexPath(boolean inPath);
 
 	/**
 	 * Returns true if this edge is part of an active path for a currently focused/selected 
@@ -89,7 +89,7 @@ public interface VisualEdge<V extends VisualVertex> extends GEdge<V> {
 	 * 
 	 * @return true if this edge is part of the active path
 	 */
-	public boolean isInFocusedVertexPath();
+	boolean isInFocusedVertexPath();
 
 	/**
 	 * Returns the points (in {@link GraphViewerUtils} View Space) of the articulation
@@ -98,7 +98,7 @@ public interface VisualEdge<V extends VisualVertex> extends GEdge<V> {
 	 * 
 	 * @return the points (in View Space space) of the articulation.
 	 */
-	public List<Point2D> getArticulationPoints();
+	List<Point2D> getArticulationPoints();
 
 	/**
 	 * Sets the articulation points for the given edge
@@ -107,7 +107,7 @@ public interface VisualEdge<V extends VisualVertex> extends GEdge<V> {
 	 * 
 	 * @param points the points
 	 */
-	public void setArticulationPoints(List<Point2D> points);
+	void setArticulationPoints(List<Point2D> points);
 
 	/**
 	 * Creates a new edge of this type using the given vertices.
@@ -121,7 +121,7 @@ public interface VisualEdge<V extends VisualVertex> extends GEdge<V> {
 	 * @param end the end vertex
 	 * @return the new edge
 	 */
-	public <E extends VisualEdge<V>> E cloneEdge(V start, V end);
+	<E extends VisualEdge<V>> E cloneEdge(V start, V end);
 
 //==================================================================================================
 // Rendering Methods (these could be refactored into another object in the future)
@@ -132,14 +132,14 @@ public interface VisualEdge<V extends VisualVertex> extends GEdge<V> {
 	 * 
 	 * @param emphasisLevel the emphasis
 	 */
-	public void setEmphasis(double emphasisLevel);
+	void setEmphasis(double emphasisLevel);
 
 	/**
 	 * Returns the emphasis value of this edge.  0 if not emphasized.
 	 * 
 	 * @return the emphasis value of this edge.
 	 */
-	public double getEmphasis();
+	double getEmphasis();
 
 	/**
 	 * Set the alpha, which determines how much of the edge is visible/see through.  0 is 
@@ -147,7 +147,7 @@ public interface VisualEdge<V extends VisualVertex> extends GEdge<V> {
 	 * 
 	 * @param alpha the alpha value
 	 */
-	public void setAlpha(double alpha);
+	void setAlpha(double alpha);
 
 	/**
 	 * Get the alpha, which determines how much of the edge is visible/see through.  0 is 
@@ -155,5 +155,5 @@ public interface VisualEdge<V extends VisualVertex> extends GEdge<V> {
 	 * 
 	 * @return the alpha value
 	 */
-	public double getAlpha();
+	double getAlpha();
 }

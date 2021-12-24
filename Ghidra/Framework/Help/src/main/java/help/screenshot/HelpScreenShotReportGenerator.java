@@ -15,8 +15,13 @@
  */
 package help.screenshot;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 
 public class HelpScreenShotReportGenerator {
 
@@ -45,7 +50,7 @@ public class HelpScreenShotReportGenerator {
 		System.out.println("Processing image files: " + images);
 
 		StringTokenizer tokenizer = new StringTokenizer(images, ",");
-		List<String> list = new ArrayList<String>();
+		List<String> list = new ArrayList<>();
 		while (tokenizer.hasMoreTokens()) {
 			list.add(tokenizer.nextToken());
 		}

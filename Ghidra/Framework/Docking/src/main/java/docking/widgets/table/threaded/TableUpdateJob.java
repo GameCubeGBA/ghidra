@@ -15,13 +15,25 @@
  */
 package docking.widgets.table.threaded;
 
-import static docking.widgets.table.threaded.TableUpdateJob.JobState.*;
+import static docking.widgets.table.threaded.TableUpdateJob.JobState.ADD_REMOVING;
+import static docking.widgets.table.threaded.TableUpdateJob.JobState.APPLYING;
+import static docking.widgets.table.threaded.TableUpdateJob.JobState.DONE;
+import static docking.widgets.table.threaded.TableUpdateJob.JobState.FILTERING;
+import static docking.widgets.table.threaded.TableUpdateJob.JobState.LOADING;
+import static docking.widgets.table.threaded.TableUpdateJob.JobState.NOT_RUNNING;
+import static docking.widgets.table.threaded.TableUpdateJob.JobState.SORTING;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import javax.swing.SwingUtilities;
 
-import docking.widgets.table.*;
+import docking.widgets.table.AddRemoveListItem;
+import docking.widgets.table.RowObjectFilterModel;
+import docking.widgets.table.TableFilter;
+import docking.widgets.table.TableSortingContext;
 import ghidra.util.Msg;
 import ghidra.util.SystemUtilities;
 import ghidra.util.datastruct.Algorithms;
@@ -55,7 +67,7 @@ import ghidra.util.task.TaskMonitor;
 public class TableUpdateJob<T> {
 
 	//@formatter:off
-	static enum JobState {
+	enum JobState {
 		NOT_RUNNING, 
 		LOADING, 
 		FILTERING, 
@@ -395,8 +407,7 @@ public class TableUpdateJob<T> {
 			// must use all data due to a new filter
 			startSourceData = model.getAllTableData();
 		}
-		TableData<T> copy = startSourceData.copy();
-		return copy;
+		return startSourceData.copy();
 	}
 
 	/** 
@@ -407,20 +418,14 @@ public class TableUpdateJob<T> {
 	private TableData<T> getReusableFilteredData() {
 		TableData<T> allTableData = model.getAllTableData();
 		TableData<T> currentAppliedData = model.getCurrentTableData();
-		if (allTableData == currentAppliedData) { // yes, '=='
-			return null; // same data; no filter
-		}
-
-		if (currentAppliedData.isUnrelatedTo(allTableData)) {
+		if ((allTableData == currentAppliedData) || currentAppliedData.isUnrelatedTo(allTableData)) {
 			// the data has changed such that the currently applied data is not progeny of
 			// the current master dataset
 			return null;
 		}
 
 		TableFilter<T> appliedOrPendingFilter = model.getTableFilter();
-		TableData<T> alreadyFilteredData =
-			currentAppliedData.getLowestLevelSourceDataForFilter(appliedOrPendingFilter);
-		return alreadyFilteredData;
+		return currentAppliedData.getLowestLevelSourceDataForFilter(appliedOrPendingFilter);
 	}
 
 	/**
@@ -428,11 +433,7 @@ public class TableUpdateJob<T> {
 	 * @return true if the data needs to be sorted.
 	 */
 	private boolean needsSorting() {
-		if (doForceSort) {
-			return true;
-		}
-
-		if (hasNewSort()) {
+		if (doForceSort || hasNewSort()) {
 			return true;
 		}
 
@@ -528,12 +529,7 @@ public class TableUpdateJob<T> {
 		// view to the table's model when it is filtered.  Thus, make sure that any time we are 
 		// sorting the filtered data, that the source data too is sorted.
 		//
-		if (sourceData == updatedData) {
-			// they are the same dataset; it will be sorted after this call
-			return;
-		}
-
-		if (sourceData.isSorted()) {
+		if ((sourceData == updatedData) || sourceData.isSorted()) {
 			// this is the typical case
 			return;
 		}
@@ -641,8 +637,7 @@ public class TableUpdateJob<T> {
 	}
 
 	private TableData<T> getCurrentFilteredData() {
-		TableData<T> currentData = model.getCurrentTableData();
-		return currentData;
+		return model.getCurrentTableData();
 	}
 
 	/**

@@ -30,7 +30,7 @@ public interface XmlPullParser {
      * 
      * @return the name of this parser
      */
-    public String getName();
+    String getName();
 
 	/**
 	 * Returns the value of the attribute of the processing instruction.
@@ -39,7 +39,7 @@ public interface XmlPullParser {
 	 * @param attribute the name of the attribute
 	 * @return the value of the attribute of the processing instruction
 	 */
-	public String getProcessingInstruction(String name, String attribute);
+	String getProcessingInstruction(String name, String attribute);
 
     /**
      * Returns the current line number where the parser is (note that this may
@@ -48,7 +48,7 @@ public interface XmlPullParser {
      * 
      * @return the current line number
      */
-    public int getLineNumber();
+    int getLineNumber();
 
     /**
      * Returns the current column number where the parser is (note that this may
@@ -57,7 +57,7 @@ public interface XmlPullParser {
      * 
      * @return the current column number
      */
-    public int getColumnNumber();
+    int getColumnNumber();
 
     /**
      * Returns whether the parser will return content elements as well as start
@@ -66,7 +66,7 @@ public interface XmlPullParser {
      * 
      * @return whether the parser will return content elements
      */
-    public boolean isPullingContent();
+    boolean isPullingContent();
 
     /**
      * Set whether the parser will return content elements. Note that this
@@ -76,7 +76,7 @@ public interface XmlPullParser {
      * @param pullingContent
      *            whether the parser will return content elements
      */
-    public void setPullingContent(boolean pullingContent);
+    void setPullingContent(boolean pullingContent);
 
     /**
      * The current element level, as if the XML document was a tree. The root
@@ -87,14 +87,14 @@ public interface XmlPullParser {
      * 
      * @return the current element level
      */
-    public int getCurrentLevel();
+    int getCurrentLevel();
 
     /**
      * Returns whether there is a next element.
      * 
      * @return whether there is a next element
      */
-    public boolean hasNext();
+    boolean hasNext();
 
     /**
      * Returns the next element, without removing it from the queue (assuming
@@ -104,7 +104,7 @@ public interface XmlPullParser {
      * 
      * @return the next element, without removing it
      */
-    public XmlElement peek();
+    XmlElement peek();
 
     /**
      * Returns the next element, removing it from the queue (assuming there is
@@ -117,7 +117,7 @@ public interface XmlPullParser {
      * 
      * @return the next element, removing it
      */
-    public XmlElement next();
+    XmlElement next();
 
     /**
      * Returns the next element, which must be a start element, and must be one
@@ -130,7 +130,7 @@ public interface XmlPullParser {
      *            of
      * @return the next element (which is a start element)
      */
-    public XmlElement start(String... names);
+    XmlElement start(String... names);
 
     /**
      * Returns the next element, which must be an end element. The name doesn't
@@ -140,7 +140,7 @@ public interface XmlPullParser {
      * 
      * @return the next element (which is an end element)
      */
-    public XmlElement end();
+    XmlElement end();
 
     /**
      * Returns the next element, which must be an end element, and must match
@@ -152,7 +152,7 @@ public interface XmlPullParser {
      *            the presumed start element to match names
      * @return the next element (which is an end element)
      */
-    public XmlElement end(XmlElement element);
+    XmlElement end(XmlElement element);
 
     /**
      * Returns the next element, which must be a start element, and must be one
@@ -167,7 +167,7 @@ public interface XmlPullParser {
      *            of
      * @return the next element (which is a start element) or null
      */
-    public XmlElement softStart(String... names);
+    XmlElement softStart(String... names);
 
     /**
      * Discards the current subtree. If the current element (peek()) is a
@@ -178,7 +178,7 @@ public interface XmlPullParser {
      * 
      * @return the number of elements discarded
      */
-    public int discardSubTree();
+    int discardSubTree();
 
     /**
      * Discards the current subtree. The current element must be a start
@@ -188,7 +188,7 @@ public interface XmlPullParser {
      *            what the current start element must be named
      * @return the number of elements discarded
      */
-    public int discardSubTree(String name);
+    int discardSubTree(String name);
 
     /**
      * Discards a subtree. The element provided is used as the "start" of the
@@ -203,12 +203,12 @@ public interface XmlPullParser {
      *            the element provided as the "start" element
      * @return the number of elements discarded
      */
-    public int discardSubTree(XmlElement element);
+    int discardSubTree(XmlElement element);
 
     /**
      * Disposes all resources of the parser. It's important that this is called
      * when a client is finished with the parser, because this allows files to
      * be closed, threads to be stopped, etc.
      */
-    public void dispose();
+    void dispose();
 }

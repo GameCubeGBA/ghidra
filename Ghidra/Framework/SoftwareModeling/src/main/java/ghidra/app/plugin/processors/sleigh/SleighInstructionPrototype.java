@@ -19,18 +19,48 @@
  */
 package ghidra.app.plugin.processors.sleigh;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 
 import ghidra.app.plugin.assembler.sleigh.sem.AssemblyResolvedConstructor;
 import ghidra.app.plugin.processors.sleigh.SleighDebugLogger.SleighDebugMode;
 import ghidra.app.plugin.processors.sleigh.expression.PatternExpression;
-import ghidra.app.plugin.processors.sleigh.symbol.*;
-import ghidra.app.plugin.processors.sleigh.template.*;
-import ghidra.program.model.address.*;
-import ghidra.program.model.lang.*;
+import ghidra.app.plugin.processors.sleigh.symbol.OperandSymbol;
+import ghidra.app.plugin.processors.sleigh.symbol.SubtableSymbol;
+import ghidra.app.plugin.processors.sleigh.symbol.TripleSymbol;
+import ghidra.app.plugin.processors.sleigh.template.ConstTpl;
+import ghidra.app.plugin.processors.sleigh.template.ConstructTpl;
+import ghidra.app.plugin.processors.sleigh.template.HandleTpl;
+import ghidra.app.plugin.processors.sleigh.template.OpTpl;
+import ghidra.app.plugin.processors.sleigh.template.VarnodeTpl;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressOverflowException;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.address.OverlayAddressSpace;
+import ghidra.program.model.address.UniqueAddressFactory;
+import ghidra.program.model.lang.InstructionContext;
+import ghidra.program.model.lang.InstructionPrototype;
+import ghidra.program.model.lang.InsufficientBytesException;
+import ghidra.program.model.lang.Language;
+import ghidra.program.model.lang.Mask;
+import ghidra.program.model.lang.MaskImpl;
+import ghidra.program.model.lang.OperandType;
+import ghidra.program.model.lang.PackedBytes;
+import ghidra.program.model.lang.ParserContext;
+import ghidra.program.model.lang.ProcessorContextView;
+import ghidra.program.model.lang.ReadOnlyProcessorContext;
+import ghidra.program.model.lang.Register;
+import ghidra.program.model.lang.UnknownContextException;
+import ghidra.program.model.lang.UnknownInstructionException;
 import ghidra.program.model.listing.FlowOverride;
-import ghidra.program.model.mem.*;
-import ghidra.program.model.pcode.*;
+import ghidra.program.model.mem.MemBuffer;
+import ghidra.program.model.mem.MemoryAccessException;
+import ghidra.program.model.mem.WrappedMemBuffer;
+import ghidra.program.model.pcode.PcodeOp;
+import ghidra.program.model.pcode.PcodeOverride;
+import ghidra.program.model.pcode.Varnode;
 import ghidra.program.model.scalar.Scalar;
 import ghidra.program.model.symbol.FlowType;
 import ghidra.program.model.symbol.RefType;
@@ -88,9 +118,9 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 	private boolean hasCrossBuilds;
 	private ArrayList<ArrayList<FlowRecord>> flowStateListNamed;
 
-	private final static PcodeOp[] emptyPCode = new PcodeOp[0];
-	private final static Object[] emptyObject = new Object[0];
-	private final static Address[] emptyFlow = new Address[0];
+	private final static PcodeOp[] emptyPCode = {};
+	private final static Object[] emptyObject = {};
+	private final static Address[] emptyFlow = {};
 
 	private ContextCache contextCache;
 //	private InstructionContext instructionContextCache;
@@ -169,10 +199,8 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 		res.op = op;
 		res.addressnode = null;
 		VarnodeTpl dest = op.getInput()[0];		// First varnode input contains the destination address
-		if ((flags & (JUMPOUT | CALL | CROSSBUILD)) == 0)
-			return;
 		// If the flow is out of the instruction, store the ConstructState so we can easily calculate address
-		if (state == null)
+		if (((flags & (JUMPOUT | CALL | CROSSBUILD)) == 0) || (state == null))
 			return;
 		if ((flags & CROSSBUILD) != 0) {
 			res.addressnode = state;
@@ -218,14 +246,20 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 					break;
 				case PcodeOp.BRANCH:
 					destType = res.lastop.getInput()[0].getOffset().getType();
-					if (destType == ConstTpl.J_NEXT)
-						flags = BRANCH_TO_END;
-					else if (destType == ConstTpl.J_START)
-						flags = NO_FALLTHRU;
-					else if (destType == ConstTpl.J_RELATIVE)
-						flags = NO_FALLTHRU;
-					else
-						flags = JUMPOUT | NO_FALLTHRU;
+				switch (destType) {
+				case ConstTpl.J_NEXT:
+					flags = BRANCH_TO_END;
+					break;
+				case ConstTpl.J_START:
+					flags = NO_FALLTHRU;
+					break;
+				case ConstTpl.J_RELATIVE:
+					flags = NO_FALLTHRU;
+					break;
+				default:
+					flags = JUMPOUT | NO_FALLTHRU;
+					break;
+				}
 					addExplicitFlow(walker.getState(), res.lastop, flags, res);
 					break;
 				case PcodeOp.CBRANCH:
@@ -421,10 +455,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 		try {
 			flags = gatherFlags(0, context, -1);
 		}
-		catch (MemoryAccessException e) {
-			return RefType.INVALID;
-		}
-		catch (UnknownContextException e) {
+		catch (MemoryAccessException | UnknownContextException e) {
 			return RefType.INVALID;
 		}
 		return convertFlowFlags(flags);
@@ -661,10 +692,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 		try {
 			gatherFlows(addresses, (SleighParserContext) context.getParserContext(), context, -1);
 		}
-		catch (MemoryAccessException e) {
-			return emptyFlow;
-		}
-		catch (UnknownContextException e) {
+		catch (MemoryAccessException | UnknownContextException e) {
 			return emptyFlow;
 		}
 
@@ -855,16 +883,17 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 		int vi = 0;
 		// if this is a store or load instruction, skip over address space
 		int opID = pcode.getOpcode();
-		if (opID == PcodeOp.CALL || opID == PcodeOp.BRANCH) {
+		switch (opID) {
+		case PcodeOp.CALL:
+		case PcodeOp.BRANCH:
 			return; // flow only
-		}
-		if (opID == PcodeOp.CBRANCH) {
+		case PcodeOp.CBRANCH:
 			++vi; // ignore flow address
-		}
-		else if (opID == PcodeOp.STORE) {
+			break;
+		case PcodeOp.STORE:
 			++vi; // ignore space ID
-		}
-		else if (opID == PcodeOp.LOAD) {
+			break;
+		case PcodeOp.LOAD:
 			if (varNode[1].isConstant()) {
 				AddressSpace space =
 					language.getAddressFactory().getAddressSpace((int) varNode[0].getOffset());
@@ -878,6 +907,9 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 				}
 			}
 			++vi; // ignore space ID
+			break;
+		default:
+			break;
 		}
 		for (; vi < varNode.length; vi++) {
 			Varnode node = varNode[vi];
@@ -932,8 +964,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 			int bitsize = node.getSize() * 8;
 			bitsize = bitsize > 64 ? 64 : bitsize;
 			boolean signed = node.getOffset() < 0;
-			Scalar scalar = new Scalar(bitsize, node.getOffset(), signed);
-			return scalar;
+			return new Scalar(bitsize, node.getOffset(), signed);
 		}
 		if (node.isAddress() || node.isRegister()) {
 			Register reg = language.getRegister(node.getAddress(), node.getSize());
@@ -1353,11 +1384,8 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 						debug.endPatternGroup(true);
 						debug.dropIndent();
 					}
-				}
-				else {
-					if (debug != null)
-						debug.dumpPattern(sym, walker);
-				}
+				} else if (debug != null)
+					debug.dumpPattern(sym, walker);
 				walker.setCurrentLength(sym.getMinimumLength());
 				walker.popOperand();
 				oper += 1;
@@ -1365,12 +1393,10 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 			if (oper >= numoper) {			// Finished processing constructor
 				walker.calcCurrentLength(ct.getMinimumLength(), numoper);
 				walker.popOperand();
-				if (debug != null) {
-					if (walker.isState()) {
-						debug.dropIndent();
-						debug.endPatternGroup(true);
-						debug.dropIndent();
-					}
+				if ((debug != null) && walker.isState()) {
+					debug.dropIndent();
+					debug.endPatternGroup(true);
+					debug.dropIndent();
 				}
 
 			}
@@ -1459,7 +1485,9 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 			return false;
 		}
 		int type = handle.space.getType();
-		if (type == AddressSpace.TYPE_REGISTER) {
+		switch (type) {
+		case AddressSpace.TYPE_REGISTER:
+		{
 			Register reg;
 			reg = language.getRegister(handle.space, handle.offset_offset, handle.size);
 			if (reg == null) {
@@ -1470,7 +1498,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 			}
 			return true;
 		}
-		else if (type == AddressSpace.TYPE_CONSTANT) {
+		case AddressSpace.TYPE_CONSTANT:
 			Scalar sc;
 			int size = handle.size;
 			if (size == 0) {
@@ -1483,8 +1511,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 			sc = new Scalar(size * 8, handle.offset_offset, signed);
 			list.add(sc);
 			return true;
-		}
-		else if (type == AddressSpace.TYPE_RAM) {
+		case AddressSpace.TYPE_RAM:
 			if (handle.offset_space == null) {
 				Address addr = getHandleAddr(handle, curSpace);
 				if (addr != null) {
@@ -1506,7 +1533,9 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 				list.add(reg);
 				return true;
 			}
-
+			break;
+		default:
+			break;
 		}
 		return false;
 	}

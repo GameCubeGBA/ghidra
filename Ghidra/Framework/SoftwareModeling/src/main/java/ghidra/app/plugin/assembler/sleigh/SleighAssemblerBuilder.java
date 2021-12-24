@@ -15,25 +15,47 @@
  */
 package ghidra.app.plugin.assembler.sleigh;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.multimap.HashSetValuedHashMap;
 
-import ghidra.app.plugin.assembler.*;
+import ghidra.app.plugin.assembler.AssemblerBuilder;
+import ghidra.app.plugin.assembler.Assemblers;
+import ghidra.app.plugin.assembler.AssemblySelector;
 import ghidra.app.plugin.assembler.sleigh.grammars.AssemblyGrammar;
 import ghidra.app.plugin.assembler.sleigh.grammars.AssemblySentential;
 import ghidra.app.plugin.assembler.sleigh.parse.AssemblyParser;
 import ghidra.app.plugin.assembler.sleigh.sem.AssemblyContextGraph;
 import ghidra.app.plugin.assembler.sleigh.sem.AssemblyDefaultContext;
-import ghidra.app.plugin.assembler.sleigh.symbol.*;
+import ghidra.app.plugin.assembler.sleigh.symbol.AssemblyNonTerminal;
+import ghidra.app.plugin.assembler.sleigh.symbol.AssemblyNumericMapTerminal;
+import ghidra.app.plugin.assembler.sleigh.symbol.AssemblyNumericTerminal;
+import ghidra.app.plugin.assembler.sleigh.symbol.AssemblyStringMapTerminal;
+import ghidra.app.plugin.assembler.sleigh.symbol.AssemblyStringTerminal;
+import ghidra.app.plugin.assembler.sleigh.symbol.AssemblySymbol;
 import ghidra.app.plugin.assembler.sleigh.util.DbgTimer;
 import ghidra.app.plugin.assembler.sleigh.util.DbgTimer.DbgCtx;
 import ghidra.app.plugin.languages.sleigh.SleighLanguages;
 import ghidra.app.plugin.languages.sleigh.SubtableEntryVisitor;
-import ghidra.app.plugin.processors.sleigh.*;
-import ghidra.app.plugin.processors.sleigh.pattern.DisjointPattern;
-import ghidra.app.plugin.processors.sleigh.symbol.*;
+import ghidra.app.plugin.processors.sleigh.Constructor;
+import ghidra.app.plugin.processors.sleigh.SleighException;
+import ghidra.app.plugin.processors.sleigh.SleighLanguage;
+import ghidra.app.plugin.processors.sleigh.symbol.EndSymbol;
+import ghidra.app.plugin.processors.sleigh.symbol.NameSymbol;
+import ghidra.app.plugin.processors.sleigh.symbol.OperandSymbol;
+import ghidra.app.plugin.processors.sleigh.symbol.StartSymbol;
+import ghidra.app.plugin.processors.sleigh.symbol.SubtableSymbol;
+import ghidra.app.plugin.processors.sleigh.symbol.Symbol;
+import ghidra.app.plugin.processors.sleigh.symbol.TripleSymbol;
+import ghidra.app.plugin.processors.sleigh.symbol.UseropSymbol;
+import ghidra.app.plugin.processors.sleigh.symbol.ValueMapSymbol;
+import ghidra.app.plugin.processors.sleigh.symbol.ValueSymbol;
+import ghidra.app.plugin.processors.sleigh.symbol.VarnodeListSymbol;
+import ghidra.app.plugin.processors.sleigh.symbol.VarnodeSymbol;
 import ghidra.app.plugin.processors.sleigh.template.ConstructTpl;
 import ghidra.app.plugin.processors.sleigh.template.HandleTpl;
 import ghidra.program.model.lang.LanguageID;
@@ -154,8 +176,7 @@ public class SleighAssemblerBuilder implements AssemblerBuilder {
 	@Override
 	public SleighAssembler getAssembler(AssemblySelector selector) {
 		generateAssembler();
-		SleighAssembler asm = new SleighAssembler(selector, lang, parser, defaultContext, ctxGraph);
-		return asm;
+		return new SleighAssembler(selector, lang, parser, defaultContext, ctxGraph);
 	}
 
 	@Override
@@ -292,11 +313,7 @@ public class SleighAssemblerBuilder implements AssemblerBuilder {
 			return 0;
 		}
 		HandleTpl htpl = ctpl.getResult();
-		if (null == htpl) {
-			// If nothing is exported, the size is unspecified
-			return 0;
-		}
-		if (opsym.getIndex() != htpl.getOffsetOperandIndex()) {
+		if ((null == htpl) || (opsym.getIndex() != htpl.getOffsetOperandIndex())) {
 			// If the export is not of the same operand, it does not specify its size
 			return 0;
 		}
@@ -312,50 +329,47 @@ public class SleighAssemblerBuilder implements AssemblerBuilder {
 	protected AssemblyGrammar buildSubGrammar(SubtableSymbol subtable) {
 		final AssemblyGrammar subgrammar = new AssemblyGrammar();
 		final AssemblyNonTerminal lhs = new AssemblyNonTerminal(subtable.getName());
-		SleighLanguages.traverseConstructors(subtable, new SubtableEntryVisitor() {
-			@Override
-			public int visit(DisjointPattern pattern, Constructor cons) {
-				AssemblySentential<AssemblyNonTerminal> rhs = new AssemblySentential<>();
-				List<Integer> indices = new ArrayList<>();
-				for (String str : cons.getPrintPieces()) {
-					if (str.length() != 0) {
-						if (str.charAt(0) == '\n') {
-							int index = str.charAt(1) - 'A';
-							OperandSymbol opsym = cons.getOperand(index);
-							AssemblySymbol sym = getSymbolFor(cons, opsym);
-							if (sym.takesOperandIndex()) {
-								indices.add(index);
-							}
-							rhs.add(sym);
+		SleighLanguages.traverseConstructors(subtable, (SubtableEntryVisitor) (pattern, cons) -> {
+			AssemblySentential<AssemblyNonTerminal> rhs = new AssemblySentential<>();
+			List<Integer> indices = new ArrayList<>();
+			for (String str : cons.getPrintPieces()) {
+				if (str.length() != 0) {
+					if (str.charAt(0) == '\n') {
+						int index = str.charAt(1) - 'A';
+						OperandSymbol opsym = cons.getOperand(index);
+						AssemblySymbol sym = getSymbolFor(cons, opsym);
+						if (sym.takesOperandIndex()) {
+							indices.add(index);
+						}
+						rhs.add(sym);
+					}
+					else {
+						String tstr = str.trim();
+						if (tstr.isEmpty()) {
+							rhs.addWS();
 						}
 						else {
-							String tstr = str.trim();
-							if (tstr.isEmpty()) {
+							char first = tstr.charAt(0);
+							if (!str.startsWith(tstr)) {
 								rhs.addWS();
 							}
-							else {
-								char first = tstr.charAt(0);
-								if (!str.startsWith(tstr)) {
-									rhs.addWS();
-								}
-								if (!Character.isLetterOrDigit(first)) {
-									rhs.addWS();
-								}
-								rhs.add(new AssemblyStringTerminal(str.trim()));
-								char last = tstr.charAt(tstr.length() - 1);
-								if (!str.endsWith(tstr)) {
-									rhs.addWS();
-								}
-								if (!Character.isLetterOrDigit(last)) {
-									rhs.addWS();
-								}
+							if (!Character.isLetterOrDigit(first)) {
+								rhs.addWS();
+							}
+							rhs.add(new AssemblyStringTerminal(str.trim()));
+							char last = tstr.charAt(tstr.length() - 1);
+							if (!str.endsWith(tstr)) {
+								rhs.addWS();
+							}
+							if (!Character.isLetterOrDigit(last)) {
+								rhs.addWS();
 							}
 						}
 					}
 				}
-				subgrammar.addProduction(lhs, rhs, pattern, cons, indices);
-				return CONTINUE;
 			}
+			subgrammar.addProduction(lhs, rhs, pattern, cons, indices);
+			return SubtableEntryVisitor.CONTINUE;
 		});
 		return subgrammar;
 	}
@@ -371,19 +385,10 @@ public class SleighAssemblerBuilder implements AssemblerBuilder {
 					SubtableSymbol subtable = (SubtableSymbol) sym;
 					grammar.combine(buildSubGrammar(subtable));
 				}
-				else if (sym instanceof VarnodeSymbol) {
+				else if ((sym instanceof VarnodeSymbol) || (sym instanceof StartSymbol) || (sym instanceof EndSymbol)
+						|| (sym instanceof UseropSymbol)) {
 					// Ignore. This just becomes a string terminal
-				}
-				else if (sym instanceof StartSymbol) {
-					// Ignore. We handle inst_start in semantic processing
-				}
-				else if (sym instanceof EndSymbol) {
-					// Ignore. We handle inst_next in semantic processing
-				}
-				else if (sym instanceof UseropSymbol) {
-					// Ignore. We don't do pcode.
-				}
-				else if (sym instanceof OperandSymbol) {
+				} else if (sym instanceof OperandSymbol) {
 					// Ignore. These are terminals, or will be produced by there defining symbol
 				}
 				else if (sym instanceof ValueSymbol) {

@@ -20,7 +20,9 @@ import java.util.List;
 
 import ghidra.program.disassemble.DisassemblerContextImpl;
 import ghidra.program.model.address.Address;
-import ghidra.program.model.lang.*;
+import ghidra.program.model.lang.DisassemblerContext;
+import ghidra.program.model.lang.Register;
+import ghidra.program.model.lang.RegisterValue;
 import ghidra.program.model.listing.ProgramContext;
 
 public class PseudoDisassemblerContext implements DisassemblerContext {

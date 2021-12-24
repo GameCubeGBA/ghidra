@@ -32,7 +32,6 @@ public class DockingWindowManagerTestHelper {
 
 		ActionToGuiMapper mapper = dwm.getActionToGuiMapper();
 		PopupActionManager popupManager = mapper.getPopupActionManager();
-		JPopupMenu popup = popupManager.createPopupMenu(null, context);
-		return popup;
+		return popupManager.createPopupMenu(null, context);
 	}
 }

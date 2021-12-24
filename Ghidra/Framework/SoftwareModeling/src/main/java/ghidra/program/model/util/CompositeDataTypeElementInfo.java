@@ -59,17 +59,14 @@ public class CompositeDataTypeElementInfo extends DataTypeInfo {
     public int hashCode() {
         final int prime = 31;
         int result = super.hashCode();
-        result = prime * result + dataTypeOffset;
-        return result;
+        return prime * result + dataTypeOffset;
     }
 
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
-        if (!super.equals(obj))
-            return false;
-        if (!(obj instanceof CompositeDataTypeElementInfo))
+        if (!super.equals(obj) || !(obj instanceof CompositeDataTypeElementInfo))
             return false;
         final CompositeDataTypeElementInfo other = (CompositeDataTypeElementInfo) obj;
         if (dataTypeOffset != other.dataTypeOffset)

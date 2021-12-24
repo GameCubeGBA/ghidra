@@ -19,7 +19,9 @@ import java.io.IOException;
 import java.io.Writer;
 import java.math.BigInteger;
 
-import org.xml.sax.*;
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 /**
  * Utilities for encoding and decoding XML datatypes for use in specification files that
@@ -109,12 +111,8 @@ public class SpecXmlUtils {
 	}
 	
 	static public int decodeInt( String intString ) {
-	    if (intString == null) {
-            return 0;
-        }
-	    
 	    // special case
-	    if ( "0".equals( intString ) ) {
+	    if ( (intString == null) || "0".equals( intString ) ) {
 	    	return 0;
 	    }
 	    
@@ -133,12 +131,8 @@ public class SpecXmlUtils {
 	}
 	
 	static public long decodeLong( String longString ) {
-		if (longString == null) {
-            return 0;
-        }
-	    
-	    // special case
-	    if ( "0".equals( longString ) ) {
+		// special case
+	    if ( (longString == null) || "0".equals( longString ) ) {
 	    	return 0;
 	    }
 	    
@@ -197,32 +191,43 @@ public class SpecXmlUtils {
 	static public void xmlEscapeWriter(Writer writer,String val) throws IOException {
 		for(int i=0;i<val.length();++i) {
 			char c = val.charAt(i);
-			if (c == '&')
+			switch (c) {
+			case '&':
 				writer.append("&amp;");
-			else if (c == '<')
+				break;
+			case '<':
 				writer.append("&lt;");
-			else if (c == '>')
+				break;
+			case '>':
 				writer.append("&gt;");
-			else if (c == '"')
+				break;
+			case '"':
 				writer.append("&quot;");
-			else if (c == '\'')
+				break;
+			case '\'':
 				writer.append("&apos;");
-			else
+				break;
+			default:
 				writer.append(c);
+				break;
+			}
 		}
 		
 	}
 	
 	public static ErrorHandler getXmlHandler() {
 		return new ErrorHandler() {
+			@Override
 			public void error(SAXParseException exception) throws SAXException {
 				throw new SAXException("Error: "+exception);
 			}
 
+			@Override
 			public void fatalError(SAXParseException exception) throws SAXException {
 				throw new SAXException("Fatal error: "+exception);
 			}
 
+			@Override
 			public void warning(SAXParseException exception) throws SAXException {
 				throw new SAXException("Warning: "+exception);
 			}

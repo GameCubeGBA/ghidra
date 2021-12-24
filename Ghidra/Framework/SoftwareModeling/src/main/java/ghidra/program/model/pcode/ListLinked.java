@@ -49,6 +49,7 @@ public class ListLinked<T> {
 		/* (non-Javadoc)
 	 	* @see java.util.Iterator#remove()
 	 	*/
+		@Override
 		public void remove() {
 			if (curNode.data == null) return;		// Should probably throw an exception here
 			curNode.nextNode.previousNode = curNode.previousNode;
@@ -59,6 +60,7 @@ public class ListLinked<T> {
 		/* (non-Javadoc)
 	 	* @see java.util.Iterator#hasNext()
 	 	*/
+		@Override
 		public boolean hasNext() {
 			return (curNode.nextNode.data != null);
 		}
@@ -66,6 +68,7 @@ public class ListLinked<T> {
 		/* (non-Javadoc)
 	 	* @see java.util.Iterator#next()
 	 	*/
+		@Override
 		public T next() {
 			curNode = curNode.nextNode;
 			return curNode.data;
@@ -99,8 +102,7 @@ public class ListLinked<T> {
 		LinkedNode newNode = new LinkedNode(terminal.previousNode,terminal,o);
 		terminal.previousNode.nextNode = newNode;
 		terminal.previousNode = newNode;
-		LinkedIterator iter = new LinkedIterator(newNode);
-		return iter;	
+		return new LinkedIterator(newNode);	
 	}
 
 	/**
@@ -150,8 +152,7 @@ public class ListLinked<T> {
 	 * @return an iterator over this linked list
 	 */
 	public Iterator<T> iterator() {
-		LinkedIterator iter = new LinkedIterator(terminal);			// Build starting iterator
-		return iter;	
+		return new LinkedIterator(terminal);	
 	}
 	
 	/**

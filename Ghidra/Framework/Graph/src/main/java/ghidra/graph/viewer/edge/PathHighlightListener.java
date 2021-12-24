@@ -23,5 +23,5 @@ public interface PathHighlightListener {
 	 * @param hoverChange true if the change path is hover change; false if the changed path 
 	 *        is a selection change
 	 */
-	public void pathHighlightChanged(boolean hoverChange);
+	void pathHighlightChanged(boolean hoverChange);
 }

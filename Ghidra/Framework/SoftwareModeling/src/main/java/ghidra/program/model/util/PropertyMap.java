@@ -15,8 +15,9 @@
  */
 package ghidra.program.model.util;
 
-import ghidra.program.model.address.*;
-import ghidra.util.datastruct.NoSuchIndexException;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressIterator;
+import ghidra.program.model.address.AddressSetView;
 import ghidra.util.prop.PropertyVisitor;
 
 /**
@@ -26,7 +27,7 @@ public interface PropertyMap {
 	/**
 	 * Get the name for this property map.
 	 */
-	public String getName();
+	String getName();
 	/**
 	 * Given two addresses, indicate whether there is an address in
 	 * that range (inclusive) having the property.<p>
@@ -36,7 +37,7 @@ public interface PropertyMap {
 	 * @return boolean true if at least one address in the range
 	 * has the property, false otherwise.
 	 */
-	public boolean intersects(Address start, Address end);
+	boolean intersects(Address start, Address end);
 	
 	/**
 	 * Indicate whether there is an address within
@@ -46,7 +47,7 @@ public interface PropertyMap {
 	 * @return boolean true if at least one address in the set
 	 * has the property, false otherwise.
 	 */
-	public boolean intersects(AddressSetView set);
+	boolean intersects(AddressSetView set);
 	
 	/**
 	 * Removes all property values within a given range.
@@ -55,19 +56,19 @@ public interface PropertyMap {
 	 * @return true if any property value was removed; return
 	 * 		false otherwise.
 	 */
-	public boolean removeRange(Address start, Address end);
+	boolean removeRange(Address start, Address end);
 	/**
 	 * Remove the property value at the given address.
 	 * @return true if the property value was removed, false
 	 *   otherwise.
 	 * @param addr the address where the property should be removed
 	 */
-	public boolean remove(Address addr);
+	boolean remove(Address addr);
 	/**
 	 * returns whether there is a property value at addr.
 	 * @param addr the address in question
 	 */
-	public boolean hasProperty(Address addr);
+	boolean hasProperty(Address addr);
 	
 	/**
 	 * Returns the property value stored at the specified 
@@ -75,38 +76,38 @@ public interface PropertyMap {
 	 * @param addr property address
 	 * @return property value
 	 */
-	public Object getObject(Address addr);
+	Object getObject(Address addr);
 	
 	/**
 	 * Get the next address where the property value exists.
 	 * @param addr the address from which to begin the search (exclusive).
 	 */
-	public Address getNextPropertyAddress(Address addr);
+	Address getNextPropertyAddress(Address addr);
 	/**
 	 * Get the previous Address where a property value exists.
 	 * @param addr the address from which
 	 * 		to begin the search (exclusive).
 	 */
-	public Address getPreviousPropertyAddress(Address addr);
+	Address getPreviousPropertyAddress(Address addr);
 	/**
 	 * Get the first Address where a property value exists.
 	 */
-	public Address getFirstPropertyAddress();
+	Address getFirstPropertyAddress();
 	/**
 	 * Get the last Address where a property value exists.
 	 */
-	public Address getLastPropertyAddress();
+	Address getLastPropertyAddress();
 	/**
 	 * Get the number of properties in the map.
 	 */
-	public int getSize();
+	int getSize();
 	/**
 	 * Returns an iterator over the indices having a property
 	 * value.
 	 * @exception TypeMismatchException thrown if the property does not
 	 * have values of type <CODE>Object</CODE>.
 	 */
-	public AddressIterator getPropertyIterator(
+	AddressIterator getPropertyIterator(
 		Address start,
 		Address end);
 	/**
@@ -117,7 +118,7 @@ public interface PropertyMap {
 	 * @exception TypeMismatchException thrown if the property does not
 	 * have values of type <CODE>Object</CODE>.
 	 */
-	public AddressIterator getPropertyIterator(
+	AddressIterator getPropertyIterator(
 		Address start,
 		Address end,
 		boolean forward);
@@ -127,14 +128,14 @@ public interface PropertyMap {
 	 * @exception TypeMismatchException thrown if the property does not
 	 * have values of type <CODE>Object</CODE>.
 	 */
-	public AddressIterator getPropertyIterator();
+	AddressIterator getPropertyIterator();
 
 	/**
 	 * Returns an iterator over the addresses that have a property value and
 	 * are in the given address set.
 	 * @param asv the set of addresses to iterate over.
 	 */
-	public AddressIterator getPropertyIterator(AddressSetView asv); 
+	AddressIterator getPropertyIterator(AddressSetView asv); 
 
 	/**
 	 * Returns an iterator over the addresses that have a property value and
@@ -142,7 +143,7 @@ public interface PropertyMap {
 	 * @param forward if true will iterate in increasing address order, otherwise it will start at
 	 * the end and iterate in decreasing address order
 	 */
-	public AddressIterator getPropertyIterator(AddressSetView asv, boolean forward);
+	AddressIterator getPropertyIterator(AddressSetView asv, boolean forward);
 	
 	/**
 	 * Returns an iterator over the address having a property
@@ -153,7 +154,7 @@ public interface PropertyMap {
 	 * @exception TypeMismatchException thrown if the property does not
 	 * have values of type <CODE>Object</CODE>.
 	 */
-	public AddressIterator getPropertyIterator(Address start, boolean forward);
+	AddressIterator getPropertyIterator(Address start, boolean forward);
 	
 	/**
 	 * Applies a property value at the indicated address without knowing its 
@@ -162,7 +163,7 @@ public interface PropertyMap {
 	 * without knowing its specific type ahead of time.
 	 * @param addr the address where the property is to be applied.
 	 */
-	public void applyValue(PropertyVisitor visitor, Address addr);
+	void applyValue(PropertyVisitor visitor, Address addr);
 	
 	/**
 	 * Moves the properties defined in the range from the start address thru the 
@@ -174,6 +175,6 @@ public interface PropertyMap {
 	 * @param newStart the new start location of the range of properties 
 	 * after the move.
 	 */
-	public void moveRange(Address start, Address end, Address newStart);
+	void moveRange(Address start, Address end, Address newStart);
 
 }

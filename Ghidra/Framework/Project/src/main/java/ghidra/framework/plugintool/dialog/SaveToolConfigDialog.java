@@ -15,15 +15,32 @@
  */
 package ghidra.framework.plugintool.dialog;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
+import javax.swing.Icon;
+import javax.swing.JButton;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
-import javax.swing.event.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import docking.DialogComponentProvider;
 import docking.options.editor.ButtonPanelFactory;
@@ -32,7 +49,9 @@ import docking.widgets.OptionDialog;
 import docking.widgets.filechooser.GhidraFileChooser;
 import docking.widgets.filechooser.GhidraFileChooserMode;
 import docking.widgets.label.GLabel;
-import ghidra.framework.model.*;
+import ghidra.framework.model.ToolChest;
+import ghidra.framework.model.ToolServices;
+import ghidra.framework.model.ToolTemplate;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.framework.preferences.Preferences;
 import ghidra.framework.project.tool.GhidraToolTemplate;
@@ -76,12 +95,7 @@ public class SaveToolConfigDialog extends DialogComponentProvider implements Lis
 		addWorkPanel(buildMainPanel());
 
 		saveButton = new JButton("Save");
-		saveButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ev) {
-				save();
-			}
-		});
+		saveButton.addActionListener(ev -> save());
 		addButton(saveButton);
 		addCancelButton();
 
@@ -187,12 +201,7 @@ public class SaveToolConfigDialog extends DialogComponentProvider implements Lis
 
 	private void addListeners() {
 
-		nameField.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				save();
-			}
-		});
+		nameField.addActionListener(e -> save());
 		nameField.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -227,21 +236,14 @@ public class SaveToolConfigDialog extends DialogComponentProvider implements Lis
 
 		if (newName.equals(defaultName)) {
 			saveToolConfig();
-		}
-		else if (isOverwriteExistingTool(newName)) {
-			if (OptionDialog.showOptionDialog(tool.getToolFrame(), "Overwrite Tool?",
-				"Overwrite existing tool, " + newName + "?", "Overwrite",
-				OptionDialog.QUESTION_MESSAGE) == OptionDialog.OPTION_ONE) {
-				tool.setToolName(newName);
-				saveToolConfig();
-			}
-			else {
-				return;
-			}
-		}
-		else {
+		} else if (!isOverwriteExistingTool(newName) || (OptionDialog.showOptionDialog(tool.getToolFrame(), "Overwrite Tool?",
+			"Overwrite existing tool, " + newName + "?", "Overwrite",
+			OptionDialog.QUESTION_MESSAGE) == OptionDialog.OPTION_ONE)) {
 			tool.setToolName(newName);
 			saveToolConfig();
+		}
+		else {
+			return;
 		}
 		close();
 	}
@@ -328,16 +330,13 @@ public class SaveToolConfigDialog extends DialogComponentProvider implements Lis
 	 */
 	private void addIconPanelListeners() {
 
-		iconField.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String filename = iconField.getText();
-				if (filename.length() == 0) {
-					setStatusText("Please enter a filename for the icon.");
-					return;
-				}
-				setPicture(new ToolIconURL(filename));
+		iconField.addActionListener(e -> {
+			String filename = iconField.getText();
+			if (filename.length() == 0) {
+				setStatusText("Please enter a filename for the icon.");
+				return;
 			}
+			setPicture(new ToolIconURL(filename));
 		});
 
 		iconField.addKeyListener(new KeyAdapter() {
@@ -373,12 +372,7 @@ public class SaveToolConfigDialog extends DialogComponentProvider implements Lis
 		};
 		iconField.getDocument().addDocumentListener(dl);
 
-		browseButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				browseForIcons();
-			}
-		});
+		browseButton.addActionListener(e -> browseForIcons());
 
 	}
 

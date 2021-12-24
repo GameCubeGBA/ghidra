@@ -20,14 +20,23 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.*;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingUtilities;
 
 import docking.dnd.GClipboard;
-import ghidra.framework.main.logviewer.event.*;
+import ghidra.framework.main.logviewer.event.FVEvent;
 import ghidra.framework.main.logviewer.event.FVEvent.EventType;
-import ghidra.framework.main.logviewer.model.*;
+import ghidra.framework.main.logviewer.event.FVEventListener;
+import ghidra.framework.main.logviewer.event.MouseWheelAction;
+import ghidra.framework.main.logviewer.model.Chunk;
+import ghidra.framework.main.logviewer.model.ChunkModel;
+import ghidra.framework.main.logviewer.model.ChunkReader;
 import ghidra.util.Msg;
 import utilities.util.FileUtilities;
 

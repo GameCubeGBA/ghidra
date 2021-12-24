@@ -15,13 +15,18 @@
  */
 package docking.widgets.tree;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 import java.util.stream.Stream;
 
 import javax.swing.Icon;
 import javax.swing.tree.TreePath;
 
-import docking.widgets.tree.support.*;
+import docking.widgets.tree.support.BreadthFirstIterator;
+import docking.widgets.tree.support.DepthFirstIterator;
+import docking.widgets.tree.support.GTreeFilter;
 import ghidra.util.Swing;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
@@ -286,7 +291,7 @@ public abstract class GTreeNode extends CoreGTreeNode implements Comparable<GTre
 	public boolean isAncestor(GTreeNode node) {
 		GTreeNode nodeParent = node.getParent();
 		while (nodeParent != null) {
-			if (nodeParent.equals(this)) {
+			if (this.equals(nodeParent)) {
 				return true;
 			}
 			nodeParent = nodeParent.getParent();
@@ -400,10 +405,7 @@ public abstract class GTreeNode extends CoreGTreeNode implements Comparable<GTre
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
 		}
 		GTreeNode other = (GTreeNode) obj;

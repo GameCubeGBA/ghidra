@@ -20,7 +20,17 @@ import java.util.Date;
 
 import javax.help.UnsupportedOperationException;
 
-import db.*;
+import db.BooleanField;
+import db.DBConstants;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.IntField;
+import db.LongField;
+import db.RecordIterator;
+import db.Schema;
+import db.StringField;
+import db.Table;
 import ghidra.program.model.data.CompositeInternal;
 import ghidra.util.UniversalID;
 import ghidra.util.exception.VersionException;
@@ -97,6 +107,7 @@ class CompositeDBAdapterV5V6 extends CompositeDBAdapter {
 		}
 	}
 
+	@Override
 	int getVersion() {
 		return compositeTable.getSchema().getVersion();
 	}

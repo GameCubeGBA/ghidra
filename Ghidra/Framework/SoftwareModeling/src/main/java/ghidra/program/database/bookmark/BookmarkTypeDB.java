@@ -16,11 +16,11 @@
  */
 package ghidra.program.database.bookmark;
 
-import ghidra.program.model.listing.BookmarkType;
-
 import java.awt.Color;
 
 import javax.swing.ImageIcon;
+
+import ghidra.program.model.listing.BookmarkType;
 
 public class BookmarkTypeDB implements BookmarkType {
 	private int typeId;
@@ -38,6 +38,7 @@ public class BookmarkTypeDB implements BookmarkType {
 	/*
 	 * @see ghidra.program.model.listing.BookmarkType#getTypeString()
 	 */
+	@Override
 	public String getTypeString() {
 		return type;
 	}
@@ -46,10 +47,12 @@ public class BookmarkTypeDB implements BookmarkType {
 		hasMarks = b;
 	}
 
+	@Override
 	public boolean hasBookmarks() {
 		return hasMarks;
 	}
 
+	@Override
 	public int getTypeId() {
 		return typeId;
 	}
@@ -58,6 +61,7 @@ public class BookmarkTypeDB implements BookmarkType {
 		this.icon = icon;
 	}
 
+	@Override
 	public ImageIcon getIcon() {
 		return icon;
 	}
@@ -66,6 +70,7 @@ public class BookmarkTypeDB implements BookmarkType {
 		this.markerColor = markerColor;
 	}
 
+	@Override
 	public Color getMarkerColor() {
 		return markerColor;
 	}
@@ -74,6 +79,7 @@ public class BookmarkTypeDB implements BookmarkType {
 		this.priority = priority;
 	}
 
+	@Override
 	public int getMarkerPriority() {
 		return priority;
 	}

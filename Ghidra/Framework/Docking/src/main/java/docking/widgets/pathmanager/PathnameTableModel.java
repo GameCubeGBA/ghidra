@@ -18,6 +18,7 @@ package docking.widgets.pathmanager;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
@@ -36,14 +37,13 @@ class PathnameTableModel extends AbstractTableModel {
 	PathnameTableModel(String[] paths, boolean isEditable) {
 		super();
 		this.isEditable = isEditable;
-		pathList = new ArrayList<String>();
+		pathList = new ArrayList<>();
 		if (paths != null) {
-			for (int i=0; i<paths.length; i++) {
-				pathList.add(paths[i]);
-			}
+			Collections.addAll(pathList, paths);
 		}
 	}
 
+	@Override
 	public int getColumnCount() {
 		return 1;
 	}
@@ -65,10 +65,12 @@ class PathnameTableModel extends AbstractTableModel {
 		super.fireTableCellUpdated(rowIndex, 0);
 	}
 
+	@Override
 	public int getRowCount() {
 		return pathList.size();
 	}
 
+	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		if (rowIndex >= pathList.size()) {
 			return null;
@@ -86,8 +88,8 @@ class PathnameTableModel extends AbstractTableModel {
 			paths[i] = pathList.get(selectedRows[i]);
 		}
 		
-		for (int i=0; i<paths.length; i++) {
-			pathList.remove(paths[i]);
+		for (String path : paths) {
+			pathList.remove(path);
 		}
 		fireTableDataChanged();
 	}

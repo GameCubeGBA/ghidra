@@ -22,7 +22,13 @@ import ghidra.docking.settings.Settings;
 import ghidra.docking.settings.SettingsDefinition;
 import ghidra.program.database.DBObjectCache;
 import ghidra.program.model.address.Address;
-import ghidra.program.model.data.*;
+import ghidra.program.model.data.CategoryPath;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.DataTypeDisplayOptions;
+import ghidra.program.model.data.DataTypeManager;
+import ghidra.program.model.data.MutabilitySettingsDefinition;
+import ghidra.program.model.data.Pointer;
+import ghidra.program.model.data.PointerDataType;
 import ghidra.program.model.mem.MemBuffer;
 import ghidra.util.InvalidNameException;
 import ghidra.util.UniversalID;
@@ -34,7 +40,7 @@ import ghidra.util.exception.DuplicateNameException;
 class PointerDB extends DataTypeDB implements Pointer {
 
 	private static final SettingsDefinition[] POINTER_SETTINGS_DEFINITIONS =
-		new SettingsDefinition[] { MutabilitySettingsDefinition.DEF };
+		{ MutabilitySettingsDefinition.DEF };
 
 	private PointerDBAdapter adapter;
 	private String displayName;
@@ -212,7 +218,7 @@ class PointerDB extends DataTypeDB implements Pointer {
 		lock.acquire();
 		try {
 			checkIsValid();
-			StringBuffer sbuf = new StringBuffer();
+			StringBuilder sbuf = new StringBuilder();
 			if (!hasLanguageDependantLength()) {
 				sbuf.append(Integer.toString(getLength() * 8));
 				sbuf.append("-bit ");
@@ -291,10 +297,7 @@ class PointerDB extends DataTypeDB implements Pointer {
 
 		Pointer p = (Pointer) dt;
 		DataType otherDataType = p.getDataType();
-		if (hasLanguageDependantLength() != p.hasLanguageDependantLength()) {
-			return false;
-		}
-		if (!hasLanguageDependantLength() && (getLength() != p.getLength())) {
+		if ((hasLanguageDependantLength() != p.hasLanguageDependantLength()) || (!hasLanguageDependantLength() && (getLength() != p.getLength()))) {
 			return false;
 		}
 

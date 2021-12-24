@@ -15,11 +15,23 @@
  */
 package docking.widgets.table.constrainteditor;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.GridLayout;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.Collections;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.label.GDHtmlLabel;
@@ -119,10 +131,7 @@ public class EnumConstraintEditor<T extends Enum<T>> extends AbstractColumnConst
 	private String getDisplayNameUsingMethodNamed(String methodName, T value) {
 		try {
 			Method method = getConstraint().getEnumClass().getMethod(methodName);
-			if (method.getReturnType() != String.class) {
-				return null;
-			}
-			if (method.getParameterCount() != 0) {
+			if ((method.getReturnType() != String.class) || (method.getParameterCount() != 0)) {
 				return null;
 			}
 			return (String) method.invoke(value);

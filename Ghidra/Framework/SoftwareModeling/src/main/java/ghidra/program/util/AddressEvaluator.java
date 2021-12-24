@@ -15,9 +15,14 @@
  */
 package ghidra.program.util;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressOutOfBoundsException;
+import ghidra.program.model.address.AddressSpace;
 import ghidra.program.model.listing.Program;
 import ghidra.program.model.symbol.Symbol;
 import ghidra.program.model.symbol.SymbolTable;
@@ -43,7 +48,7 @@ public class AddressEvaluator {
 
 		AddressFactory af = p.getAddressFactory();
 		SymbolTable st = p.getSymbolTable();
-		List<Object> list = new ArrayList<Object>();
+		List<Object> list = new ArrayList<>();
 		if (baseAddr != null) {
 			list.add(baseAddr);
 		}
@@ -66,7 +71,7 @@ public class AddressEvaluator {
 	}
 
 	public static Long evaluateToLong(String s) {
-		List<Object> list = new ArrayList<Object>();
+		List<Object> list = new ArrayList<>();
 
 		if (!parseToList(s, null, null, list)) {
 			return null;
@@ -95,12 +100,12 @@ public class AddressEvaluator {
 				tok = parser.nextToken();
 			}
 
-			if (tok.equals(" ")) {
+			if (" ".equals(tok)) {
 				continue;
 			}
 
 			// = must be followed by =, others can be followed
-			if (tok.equals("=") || tok.equals("!") || tok.equals("<") || tok.equals(">")) {
+			if ("=".equals(tok) || "!".equals(tok) || "<".equals(tok) || ">".equals(tok)) {
 				lookahead = parser.nextToken();
 				tok = checkDoubleToken(tok, lookahead);
 				// if tok is now longer, consumed lookahead
@@ -123,31 +128,31 @@ public class AddressEvaluator {
 	private static String checkDoubleToken(String tok, String lookahead) {
 		switch (tok) {
 			case "=":
-				if (lookahead.equals("=")) {
+				if ("=".equals(lookahead)) {
 					return "==";
 				}
 				break;
 
 			case "<":
-				if (lookahead.equals("=")) {
+				if ("=".equals(lookahead)) {
 					return "<=";
 				}
-				if (lookahead.equals("<")) {
+				if ("<".equals(lookahead)) {
 					return "<<";
 				}
 				break;
 
 			case ">":
-				if (lookahead.equals("=")) {
+				if ("=".equals(lookahead)) {
 					return ">=";
 				}
-				if (lookahead.equals(">")) {
+				if (">".equals(lookahead)) {
 					return ">>";
 				}
 				break;
 
 			case "!":
-				if (lookahead.equals("=")) {
+				if ("=".equals(lookahead)) {
 					return "!=";
 				}
 				break;
@@ -329,22 +334,14 @@ public class AddressEvaluator {
 		}
 
 		// evaluate all SHIFT because they have precedence
-		if (!evaluateOperator(list, Operator.RIGHTSHIFT, Operator.LEFTSHIFT)) {
-			return null;
-		}
+		
 
 		// evaluate all TIMES because they have precedence
-		if (!evaluateOperator(list, Operator.TIMES, Operator.DIVIDE)) {
-			return null;
-		}
+		
 
 		// evaluate Plus and Minus, same precedence, but do plus then minus
-		if (!evaluateOperator(list, Operator.PLUS, Operator.MINUS)) {
-			return null;
-		}
-
 		// evaluate & ^ |
-		if (!evaluateOperator(list, Operator.AND, null)) {
+		if (!evaluateOperator(list, Operator.RIGHTSHIFT, Operator.LEFTSHIFT) || !evaluateOperator(list, Operator.TIMES, Operator.DIVIDE) || !evaluateOperator(list, Operator.PLUS, Operator.MINUS) || !evaluateOperator(list, Operator.AND, null)) {
 			return null;
 		}
 		if (!evaluateOperator(list, Operator.XOR, null)) {
@@ -397,10 +394,8 @@ public class AddressEvaluator {
 	}
 
 	private static Object computeValue(Object v1, Operator op, Object v2) {
-		if (op == Operator.TIMES) {
-			if ((v1 instanceof Long) && (v2 instanceof Long)) {
-				return ((Long) v1).longValue() * ((Long) v2).longValue();
-			}
+		if ((op == Operator.TIMES) && ((v1 instanceof Long) && (v2 instanceof Long))) {
+			return ((Long) v1).longValue() * ((Long) v2).longValue();
 		}
 		if (op == Operator.DIVIDE) {
 			if ((v1 instanceof Long) && (v2 instanceof Long)) {
@@ -520,11 +515,8 @@ public class AddressEvaluator {
 			Object obj = list.get(j);
 			if (obj == Operator.LEFT_PAREN) {
 				depth++;
-			}
-			else if (obj == Operator.RIGHT_PAREN) {
-				if (--depth == 0) {
-					return j;
-				}
+			} else if ((obj == Operator.RIGHT_PAREN) && (--depth == 0)) {
+				return j;
 			}
 		}
 		return -1;
@@ -568,58 +560,58 @@ class Operator {
 	 * @return the static operator object.
 	 */
 	public static Operator getOperator(String tok) {
-		if (tok.equals("+")) {
+		if ("+".equals(tok)) {
 			return PLUS;
 		}
-		if (tok.equals("&")) {
+		if ("&".equals(tok)) {
 			return AND;
 		}
-		if (tok.equals("|")) {
+		if ("|".equals(tok)) {
 			return OR;
 		}
-		if (tok.equals("^")) {
+		if ("^".equals(tok)) {
 			return XOR;
 		}
-		else if (tok.equals("-")) {
+		else if ("-".equals(tok)) {
 			return MINUS;
 		}
-		else if (tok.equals("~")) {
+		else if ("~".equals(tok)) {
 			return NOT;
 		}
-		else if (tok.equals("*")) {
+		else if ("*".equals(tok)) {
 			return TIMES;
 		}
-		else if (tok.equals("/")) {
+		else if ("/".equals(tok)) {
 			return DIVIDE;
 		}
-		else if (tok.equals(")")) {
+		else if (")".equals(tok)) {
 			return RIGHT_PAREN;
 		}
-		else if (tok.equals("(")) {
+		else if ("(".equals(tok)) {
 			return LEFT_PAREN;
 		}
-		else if (tok.equals("<<")) {
+		else if ("<<".equals(tok)) {
 			return LEFTSHIFT;
 		}
-		else if (tok.equals(">>")) {
+		else if (">>".equals(tok)) {
 			return RIGHTSHIFT;
 		}
-		else if (tok.equals("==")) {
+		else if ("==".equals(tok)) {
 			return EQUALS;
 		}
-		else if (tok.equals("!=")) {
+		else if ("!=".equals(tok)) {
 			return NOTEQUALS;
 		}
-		else if (tok.equals("<")) {
+		else if ("<".equals(tok)) {
 			return LESS;
 		}
-		else if (tok.equals(">")) {
+		else if (">".equals(tok)) {
 			return GREATER;
 		}
-		else if (tok.equals("<=")) {
+		else if ("<=".equals(tok)) {
 			return LESSEQUALS;
 		}
-		else if (tok.equals(">=")) {
+		else if (">=".equals(tok)) {
 			return GREATEREQUALS;
 		}
 		return null;

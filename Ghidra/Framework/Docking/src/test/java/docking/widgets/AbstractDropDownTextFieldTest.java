@@ -15,14 +15,23 @@
  */
 package docking.widgets;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.BorderLayout;
-import java.awt.event.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JWindow;
 import javax.swing.event.CellEditorListener;
 import javax.swing.event.ChangeEvent;
 
@@ -68,8 +77,7 @@ public abstract class AbstractDropDownTextFieldTest<T> extends AbstractDockingTe
 	protected abstract DropDownTextFieldDataModel<T> createModel();
 
 	protected DropDownTextField<T> createTextField(DropDownTextFieldDataModel<T> model) {
-		DropDownTextField<T> field = new DropDownTextField<>(model);
-		return field;
+		return new DropDownTextField<>(model);
 	}
 
 	private void removeFocusIssues(DropDownTextField<?> field) {
@@ -142,14 +150,12 @@ public abstract class AbstractDropDownTextFieldTest<T> extends AbstractDockingTe
 		if (index < 0) {
 			return null;
 		}
-		T item = dataList.getModel().getElementAt(index);
-		return item;
+		return dataList.getModel().getElementAt(index);
 	}
 
 	protected T getListItemAt(int index) {
 		JList<T> dataList = textField.getJList();
-		T item = dataList.getModel().getElementAt(index);
-		return item;
+		return dataList.getModel().getElementAt(index);
 	}
 
 	/** The item that is selected in the JList; not the 'selectedValue' in the text field */
@@ -324,7 +330,7 @@ public abstract class AbstractDropDownTextFieldTest<T> extends AbstractDockingTe
 // Inner Classes
 //==================================================================================================	
 
-	protected class TestChoiceListener implements DropDownSelectionChoiceListener<String> {
+	protected static class TestChoiceListener implements DropDownSelectionChoiceListener<String> {
 
 		protected volatile String lastSelection;
 
@@ -338,7 +344,7 @@ public abstract class AbstractDropDownTextFieldTest<T> extends AbstractDockingTe
 		}
 	}
 
-	protected class SpyTestCellEditorListener implements CellEditorListener {
+	protected static class SpyTestCellEditorListener implements CellEditorListener {
 		protected int canceledCount;
 		protected int stoppedCount;
 

@@ -35,13 +35,13 @@ public class FixedSizeMRUCachingFactoryTest extends AbstractGenericTest {
 	@Before
 	public void setUp() throws Exception {
 
-		callCountFactory = new HitCountIdentityFactory<Integer>();
+		callCountFactory = new HitCountIdentityFactory<>();
 	}
 
 	@Test
 	public void testCacheOfSize1() throws Exception {
 		FixedSizeMRUCachingFactory<Integer, Integer> cache =
-			new FixedSizeMRUCachingFactory<Integer, Integer>(callCountFactory, 1);
+			new FixedSizeMRUCachingFactory<>(callCountFactory, 1);
 
 		//
 		// Successive calls should only generate a single call count, as the value is cached.
@@ -78,7 +78,7 @@ public class FixedSizeMRUCachingFactoryTest extends AbstractGenericTest {
 	@Test
 	public void testCacheOfSize2() throws Exception {
 		FixedSizeMRUCachingFactory<Integer, Integer> cache =
-			new FixedSizeMRUCachingFactory<Integer, Integer>(callCountFactory, 2);
+			new FixedSizeMRUCachingFactory<>(callCountFactory, 2);
 		assertEquals(0, callCountFactory.calls(0));
 		cache.get(0);
 		assertEquals(1, callCountFactory.calls(0));
@@ -105,7 +105,7 @@ public class FixedSizeMRUCachingFactoryTest extends AbstractGenericTest {
 	@Test
 	public void testCacheOfSize3() throws Exception {
 		FixedSizeMRUCachingFactory<Integer, Integer> cache =
-			new FixedSizeMRUCachingFactory<Integer, Integer>(callCountFactory, 3);
+			new FixedSizeMRUCachingFactory<>(callCountFactory, 3);
 
 		// force 1 to be the one to fail
 		cache.get(1);
@@ -133,7 +133,7 @@ public class FixedSizeMRUCachingFactoryTest extends AbstractGenericTest {
 //==================================================================================================
 
 	private static class HitCountIdentityFactory<K> implements Factory<K, K> {
-		private HashMap<K, Integer> callCounter = new HashMap<K, Integer>();
+		private HashMap<K, Integer> callCounter = new HashMap<>();
 
 		@Override
 		public K get(K key) {

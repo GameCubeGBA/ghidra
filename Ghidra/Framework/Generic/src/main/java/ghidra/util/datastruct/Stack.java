@@ -15,7 +15,9 @@
  */
 package ghidra.util.datastruct;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -42,7 +44,7 @@ public class Stack<E> implements Iterable<E> {
 	 * Creates an empty Stack.
 	 */
 	public Stack() {
-		list = new ArrayList<E>();
+		list = new ArrayList<>();
 	}
 
 	/**
@@ -50,7 +52,7 @@ public class Stack<E> implements Iterable<E> {
 	 * @param initialCapacity the initial capacity.
 	 */
 	public Stack(int initialCapacity) {
-		list = new ArrayList<E>(initialCapacity);
+		list = new ArrayList<>(initialCapacity);
 	}
 
 	/**
@@ -60,7 +62,7 @@ public class Stack<E> implements Iterable<E> {
 	 * @param stack the stack to copy
 	 */
 	public Stack(Stack<E> stack) {
-		list = new ArrayList<E>(stack.list);
+		list = new ArrayList<>(stack.list);
 	}
 
 	/**

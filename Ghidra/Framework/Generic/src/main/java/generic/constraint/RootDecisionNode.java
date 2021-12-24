@@ -33,7 +33,7 @@ public class RootDecisionNode<T> extends DecisionNode<T> {
 
 	@Override
 	protected List<String> getDecisionPath() {
-		return new ArrayList<String>();
+		return new ArrayList<>();
 	}
 
 	private static class DummyConstraint<T> extends Constraint<T> {

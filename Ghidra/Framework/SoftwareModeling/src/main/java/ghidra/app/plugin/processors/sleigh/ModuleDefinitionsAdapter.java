@@ -16,11 +16,11 @@
  */
 package ghidra.app.plugin.processors.sleigh;
 
+import java.util.HashMap;
+
 import generic.stl.Pair;
 import ghidra.pcodeCPort.slgh_compile.PreprocessorDefinitions;
 import ghidra.sleigh.grammar.HashMapPreprocessorDefinitionsAdapter;
-
-import java.util.HashMap;
 
 public class ModuleDefinitionsAdapter implements PreprocessorDefinitions {
 	private HashMapPreprocessorDefinitionsAdapter delegate;
@@ -38,14 +38,14 @@ public class ModuleDefinitionsAdapter implements PreprocessorDefinitions {
 		}
 
 		if (moduleMap == null) {
-			moduleMap = new HashMap<String, String>(ModuleDefinitionsMap.getModuleMap());
+			moduleMap = new HashMap<>(ModuleDefinitionsMap.getModuleMap());
 		}
 
 		String path = moduleMap.get(key);
 		if (path == null) {
-			return new Pair<Boolean, String>(false, null);
+			return new Pair<>(false, null);
 		}
-		return new Pair<Boolean, String>(true, path);
+		return new Pair<>(true, path);
 	}
 
 	@Override

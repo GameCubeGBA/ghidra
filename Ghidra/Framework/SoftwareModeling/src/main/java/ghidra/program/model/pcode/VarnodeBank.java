@@ -21,7 +21,10 @@
  */
 package ghidra.program.model.pcode;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSpace;
@@ -33,7 +36,7 @@ import ghidra.program.model.address.AddressSpace;
  */
 public class VarnodeBank {
 
-	public class LocComparator implements Comparator<VarnodeAST> {
+	public static class LocComparator implements Comparator<VarnodeAST> {
 
 		/* 
 		 * Compare objects by location, size, then definition
@@ -73,7 +76,7 @@ public class VarnodeBank {
 		}
 	}
 	
-	public class DefComparator implements Comparator<VarnodeAST> {
+	public static class DefComparator implements Comparator<VarnodeAST> {
 
 		/* 
 		 * Compare by definition then location and size
@@ -119,7 +122,7 @@ public class VarnodeBank {
 //	private TreeSet defTree;						// Varnodes sorted by definition
 	
 	public VarnodeBank() {
-		locTree = new TreeSet<VarnodeAST>(new LocComparator());
+		locTree = new TreeSet<>(new LocComparator());
 //		defTree = new TreeSet(new DefComparator());
 	}
 	
@@ -176,10 +179,7 @@ public class VarnodeBank {
 	}
 	
 	public Varnode setInput(Varnode vn) {
-		if (!vn.isFree()) {
-			return null;
-		}
-		if (vn.isConstant()) {
+		if (!vn.isFree() || vn.isConstant()) {
 			return null;
 		}
 		
@@ -191,10 +191,7 @@ public class VarnodeBank {
 	}
 	
 	public Varnode setDef(Varnode vn,PcodeOp op) {
-		if (!vn.isFree()) {
-			return null;
-		}
-		if (vn.isConstant()) {
+		if (!vn.isFree() || vn.isConstant()) {
 			return null;
 		}
 		
@@ -240,17 +237,12 @@ public class VarnodeBank {
 		Iterator<VarnodeAST> iter = locTree.tailSet(searchvn).iterator();
 		for(;iter.hasNext();) {
 			VarnodeAST vn = iter.next();
-			if (vn.getSize()!=sz) {
-				break;
-			}
-			if (!vn.getAddress().equals(addr)) {
+			if ((vn.getSize()!=sz) || !vn.getAddress().equals(addr)) {
 				break;
 			}
 			PcodeOp op2 = vn.getDef();
-			if ((op2!=null)&&(op2.getSeqnum().getTarget().equals(pc))) {
-				if ((uniq==-1)||(op2.getSeqnum().getTime()==uniq)) {
-					return vn;
-				}
+			if (((op2!=null)&&(op2.getSeqnum().getTarget().equals(pc))) && ((uniq==-1)||(op2.getSeqnum().getTime()==uniq))) {
+				return vn;
 			}
 		}
 		return null;

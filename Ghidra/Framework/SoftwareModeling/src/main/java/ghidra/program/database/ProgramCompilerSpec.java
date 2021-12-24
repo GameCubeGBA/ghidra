@@ -16,15 +16,28 @@
 package ghidra.program.database;
 
 import java.beans.PropertyEditor;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 import docking.options.editor.StringWithChoicesEditor;
 import generic.stl.Pair;
 import ghidra.framework.options.OptionType;
 import ghidra.framework.options.Options;
-import ghidra.program.model.lang.*;
+import ghidra.program.model.lang.BasicCompilerSpec;
+import ghidra.program.model.lang.CompilerSpec;
+import ghidra.program.model.lang.DecompilerLanguage;
+import ghidra.program.model.lang.InjectPayload;
+import ghidra.program.model.lang.InjectPayloadCallfixup;
+import ghidra.program.model.lang.InjectPayloadSleigh;
+import ghidra.program.model.lang.Language;
+import ghidra.program.model.lang.PrototypeModel;
 import ghidra.program.model.listing.Program;
-import ghidra.util.*;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
+import ghidra.util.SystemUtilities;
 import ghidra.util.task.TaskMonitor;
 
 /**
@@ -127,12 +140,10 @@ public class ProgramCompilerSpec extends BasicCompilerSpec {
 		}
 
 		for (PrototypeModel model : extensions) {
-			if (currentNames.contains(model.getName())) {
-				if (!usermodels.containsKey(model.getName())) {
-					Msg.warn(this,
-						"Cannot override prototype model " + model.getName() + " with extension");
-					continue;
-				}
+			if (currentNames.contains(model.getName()) && !usermodels.containsKey(model.getName())) {
+				Msg.warn(this,
+					"Cannot override prototype model " + model.getName() + " with extension");
+				continue;
 			}
 			markPrototypeAsExtension(model);
 			finalList.add(model);
@@ -215,10 +226,7 @@ public class ProgramCompilerSpec extends BasicCompilerSpec {
 		Options decompilerPropertyList = program.getOptions(DECOMPILER_PROPERTY_LIST_NAME);
 		PropertyEditor editor =
 			decompilerPropertyList.getRegisteredPropertyEditor(EVALUATION_MODEL_PROPERTY_NAME);
-		if (editor == null) {
-			return;
-		}
-		if (!(editor instanceof StringWithChoicesEditor)) {
+		if ((editor == null) || !(editor instanceof StringWithChoicesEditor)) {
 			return;
 		}
 		String[] evalChoices = establishEvaluationModelChoices(evalCurrentModel);
@@ -375,10 +383,7 @@ public class ProgramCompilerSpec extends BasicCompilerSpec {
 		if (this == obj) {
 			return true;
 		}
-		if (!(obj instanceof ProgramCompilerSpec)) {
-			return false;
-		}
-		if (!super.equals(obj)) {
+		if (!(obj instanceof ProgramCompilerSpec) || !super.equals(obj)) {
 			return false;
 		}
 		ProgramCompilerSpec op2 = (ProgramCompilerSpec) obj;

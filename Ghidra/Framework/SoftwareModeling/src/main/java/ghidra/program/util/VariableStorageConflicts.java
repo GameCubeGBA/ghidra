@@ -15,23 +15,29 @@
  */
 package ghidra.program.util;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import generic.stl.Pair;
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetView;
 import ghidra.program.model.lang.Register;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.Parameter;
+import ghidra.program.model.listing.Variable;
+import ghidra.program.model.listing.VariableStorage;
 import ghidra.program.model.pcode.Varnode;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
-import java.util.*;
-
 public class VariableStorageConflicts {
 
 	private List<Pair<List<Variable>, List<Variable>>> overlappingVariables =
-		new ArrayList<Pair<List<Variable>, List<Variable>>>();
+		new ArrayList<>();
 	private boolean ignoreParamToParamConflicts;
-	private List<Variable> nonOverlappingVariables1 = new ArrayList<Variable>();
-	private List<Variable> nonOverlappingVariables2 = new ArrayList<Variable>();
+	private List<Variable> nonOverlappingVariables1 = new ArrayList<>();
+	private List<Variable> nonOverlappingVariables2 = new ArrayList<>();
 
 	private boolean paramOnlyAddressSets;
 
@@ -79,8 +85,8 @@ public class VariableStorageConflicts {
 				continue; // matched variables never conflict
 			}
 			if (overlapList1 == null) {
-				overlapList1 = new ArrayList<Variable>();
-				overlapList2 = new ArrayList<Variable>();
+				overlapList1 = new ArrayList<>();
+				overlapList2 = new ArrayList<>();
 				set1 = new AddressSet();
 				set2 = new AddressSet();
 			}
@@ -107,7 +113,7 @@ public class VariableStorageConflicts {
 				}
 
 				Pair<List<Variable>, List<Variable>> pair =
-					new Pair<List<Variable>, List<Variable>>(overlapList1, overlapList2);
+					new Pair<>(overlapList1, overlapList2);
 				overlappingVariables.add(pair);
 				overlapList1 = null;
 				overlapList2 = null;
@@ -158,10 +164,7 @@ public class VariableStorageConflicts {
 			AddressSetView intersectSet) {
 
 		Variable var = variables.get(index);
-		if (var == null) {
-			return false; // already consumed
-		}
-		if (var.getFirstUseOffset() != firstUseOffset) {
+		if ((var == null) || (var.getFirstUseOffset() != firstUseOffset)) {
 			return false;
 		}
 		if (paramOnlyAddressSets && ignoreParamToParamConflicts && (var instanceof Parameter)) {
@@ -254,10 +257,7 @@ public class VariableStorageConflicts {
 	 */
 	public boolean isConflicted(Variable var1, Variable var2) {
 		for (Pair<List<Variable>, List<Variable>> pair : overlappingVariables) {
-			if (var1 != null && containsVariable(pair.first, var1)) {
-				return true;
-			}
-			if (var2 != null && containsVariable(pair.second, var2)) {
+			if ((var1 != null && containsVariable(pair.first, var1)) || (var2 != null && containsVariable(pair.second, var2))) {
 				return true;
 			}
 		}
@@ -279,13 +279,7 @@ public class VariableStorageConflicts {
 		Iterator<Variable> iter = list.iterator();
 		while (iter.hasNext()) {
 			Variable v = iter.next();
-			if (!(v instanceof Parameter)) {
-				continue;
-			}
-			if (ordinal != ((Parameter) v).getOrdinal()) {
-				continue;
-			}
-			if (!storage.equals(v.getVariableStorage())) {
+			if (!(v instanceof Parameter) || (ordinal != ((Parameter) v).getOrdinal()) || !storage.equals(v.getVariableStorage())) {
 				continue;
 			}
 			iter.remove();
@@ -300,13 +294,7 @@ public class VariableStorageConflicts {
 		Iterator<Variable> iter = list.iterator();
 		while (iter.hasNext()) {
 			Variable v = iter.next();
-			if (v == null || (v instanceof Parameter)) {
-				continue;
-			}
-			if (firstUse != v.getFirstUseOffset()) {
-				continue;
-			}
-			if (!storage.equals(v.getVariableStorage())) {
+			if (v == null || (v instanceof Parameter) || (firstUse != v.getFirstUseOffset()) || !storage.equals(v.getVariableStorage())) {
 				continue;
 			}
 			iter.remove();

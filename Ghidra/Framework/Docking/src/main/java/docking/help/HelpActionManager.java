@@ -16,9 +16,9 @@
  */
 package docking.help;
 
-import ghidra.util.HelpLocation;
-
 import javax.swing.JComponent;
+
+import ghidra.util.HelpLocation;
 
 /**
  * Register help for a specific component.
@@ -30,6 +30,6 @@ public interface HelpActionManager {
 	 * @param comp component that has help associated with it
 	 * @param helpLocation help content location
 	 */
-	public void setHelpLocation(JComponent comp, HelpLocation helpLocation);
+	void setHelpLocation(JComponent comp, HelpLocation helpLocation);
 
 }

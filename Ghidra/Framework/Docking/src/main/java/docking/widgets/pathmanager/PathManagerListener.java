@@ -19,11 +19,11 @@ package docking.widgets.pathmanager;
 
 public interface PathManagerListener {
 
-	public void pathMessage(String message);
+	void pathMessage(String message);
 
 	/**
 	 * Notified when the user changes the paths in the PathManager.  This could be the addition
 	 * or removal of Path objects, or a simple reordering of the paths.
 	 */
-	public void pathsChanged();
+	void pathsChanged();
 }

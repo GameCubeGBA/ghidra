@@ -16,13 +16,18 @@
 package ghidra.app.plugin.assembler.sleigh.parse;
 
 import java.io.PrintStream;
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.apache.commons.collections4.MultiValuedMap;
 
 import ghidra.app.plugin.assembler.sleigh.grammars.AbstractAssemblyGrammar;
 import ghidra.app.plugin.assembler.sleigh.grammars.AbstractAssemblyProduction;
-import ghidra.app.plugin.assembler.sleigh.symbol.*;
+import ghidra.app.plugin.assembler.sleigh.symbol.AssemblyNonTerminal;
+import ghidra.app.plugin.assembler.sleigh.symbol.AssemblySymbol;
+import ghidra.app.plugin.assembler.sleigh.symbol.AssemblyTerminal;
 import ghidra.generic.util.datastruct.TreeSetValuedTreeMap;
 
 /**

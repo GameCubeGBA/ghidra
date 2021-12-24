@@ -17,7 +17,12 @@ package ghidra.graph;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Deque;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Set;
 
 import org.junit.Test;
 
@@ -51,11 +56,7 @@ public class DijkstraShortestPathsAlgorithmTest {
 
 		@Override
 		public int hashCode() {
-			final int prime = 31;
-			int result = 1;
-			result = prime * result + ((end == null) ? 0 : end.hashCode());
-			result = prime * result + ((start == null) ? 0 : start.hashCode());
-			return result;
+			return Objects.hash(end, start);
 		}
 
 		@Override
@@ -64,10 +65,7 @@ public class DijkstraShortestPathsAlgorithmTest {
 				return false;
 			}
 			TestEdge that = (TestEdge) obj;
-			if (!this.start.equals(that.start)) {
-				return false;
-			}
-			if (!this.end.equals(that.end)) {
+			if (!this.start.equals(that.start) || !this.end.equals(that.end)) {
 				return false;
 			}
 			return true;
@@ -131,9 +129,7 @@ public class DijkstraShortestPathsAlgorithmTest {
 		Set<Deque<TestEdge>> result = new HashSet<>();
 		for (TestEdge[] path : paths) {
 			Deque<TestEdge> p = new LinkedList<>();
-			for (TestEdge e : path) {
-				p.add(e);
-			}
+			Collections.addAll(p, path);
 			result.add(p);
 		}
 		return result;
@@ -184,7 +180,7 @@ public class DijkstraShortestPathsAlgorithmTest {
 		INV_DIV2, INV_MUL3_ADD1, SQR /* Not really Collatz, but provides multiple paths */;
 	}
 
-	public class CollatzEdge implements GEdge<Integer> {
+	public static class CollatzEdge implements GEdge<Integer> {
 		private int start;
 		private int end;
 		private CollatzOp op;

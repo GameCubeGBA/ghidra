@@ -22,7 +22,10 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
-import javax.swing.text.*;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.JTextComponent;
+import javax.swing.text.TextAction;
+import javax.swing.text.Utilities;
 
 public class BeginningOfLineAction extends TextAction {
 	public static final KeyStroke KEY_STROKE = KeyStroke.getKeyStroke(KeyEvent.VK_HOME, 0);

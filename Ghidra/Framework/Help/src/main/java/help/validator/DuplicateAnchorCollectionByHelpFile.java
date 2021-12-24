@@ -16,13 +16,13 @@
  */
 package help.validator;
 
-import help.validator.model.AnchorDefinition;
-import help.validator.model.HelpFile;
-
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import help.validator.model.AnchorDefinition;
+import help.validator.model.HelpFile;
 
 public class DuplicateAnchorCollectionByHelpFile implements DuplicateAnchorCollection,
 		Comparable<DuplicateAnchorCollectionByHelpFile> {

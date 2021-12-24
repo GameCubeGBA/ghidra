@@ -49,14 +49,7 @@ public abstract class MatchesPatternTextFilter extends AbstractPatternTextFilter
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-
-		if (!super.equals(obj)) {
+		if ((obj == null) || (getClass() != obj.getClass()) || !super.equals(obj)) {
 			return false;
 		}
 

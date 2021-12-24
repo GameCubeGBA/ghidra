@@ -23,10 +23,10 @@ import java.util.Comparator;
 public interface CompositeInternal extends Composite {
 
 	// Strings used for toString formatting
-	static final String ALIGN_NAME = "aligned";
-	static final String PACKING_NAME = "pack";
-	static final String DISABLED_PACKING_NAME = "disabled";
-	static final String DEFAULT_PACKING_NAME = "";
+	String ALIGN_NAME = "aligned";
+	String PACKING_NAME = "pack";
+	String DISABLED_PACKING_NAME = "disabled";
+	String DEFAULT_PACKING_NAME = "";
 
 	/**
 	 * The stored packing value which corresponds to a composite that will automatically pack
@@ -35,7 +35,7 @@ public interface CompositeInternal extends Composite {
 	 * for each component.
 	 * See {@link #getStoredPackingValue}.
 	 */
-	public final static int DEFAULT_PACKING = 0;
+	int DEFAULT_PACKING = 0;
 
 	/**
 	 * The stored packing value which corresponds to a composite whose packing has been disabled.
@@ -44,14 +44,14 @@ public interface CompositeInternal extends Composite {
 	 * This is the initial state of all newly instantiated structures.
 	 * See {@link #getStoredPackingValue()}.
 	 */
-	public final static int NO_PACKING = -1;
+	int NO_PACKING = -1;
 
 	/**
 	 * The stored minimum alignment value which indicates the default alignment
 	 * should be used based upon the packing and component alignment requirements.
 	 * See {@link #getStoredMinimumAlignment}.
 	 */
-	public final static int DEFAULT_ALIGNMENT = 0;
+	int DEFAULT_ALIGNMENT = 0;
 
 	/**
 	 * The stored minimum alignment value which indicates the machine alignment
@@ -59,14 +59,14 @@ public interface CompositeInternal extends Composite {
 	 * {@link DataOrganization#getMachineAlignment()}).
 	 * See {@link #getStoredMinimumAlignment()}.
 	 */
-	public final static int MACHINE_ALIGNMENT = -1;
+	int MACHINE_ALIGNMENT = -1;
 
 	/**
 	 * Gets the current packing value (typically a power of 2).  Other special values
 	 * which may be returned include {@value #DEFAULT_PACKING} and {@value #NO_PACKING}.
 	 * @return the current positive packing value, {@value #DEFAULT_PACKING} or {@value #NO_PACKING}.
 	 */
-	public int getStoredPackingValue();
+	int getStoredPackingValue();
 
 	/**
 	 * Sets the current packing behavior (positive value, usually a power of 2). If a positive
@@ -92,7 +92,7 @@ public interface CompositeInternal extends Composite {
 	 * @return the minimum alignment setting for this Composite or a reserved value to indicate
 	 * either {@link #DEFAULT_ALIGNMENT} or {@link #MACHINE_ALIGNMENT}.
 	 */
-	public int getStoredMinimumAlignment();
+	int getStoredMinimumAlignment();
 
 	/**
 	 * <code>ComponentComparator</code> provides ability to compare two DataTypeComponent objects
@@ -161,7 +161,7 @@ public interface CompositeInternal extends Composite {
 	 * @param composite composite instance to be dumped
 	 * @return formatted dump as string
 	 */
-	public static String toString(Composite composite) {
+	static String toString(Composite composite) {
 		StringBuilder stringBuffer = new StringBuilder();
 		stringBuffer.append(composite.getPathName() + "\n");
 		stringBuffer.append(getAlignmentAndPackingString(composite) + "\n");
@@ -215,7 +215,7 @@ public interface CompositeInternal extends Composite {
 		return "";
 	}
 
-	public static String getAlignmentAndPackingString(Composite composite) {
+	static String getAlignmentAndPackingString(Composite composite) {
 		StringBuilder buf = new StringBuilder(getMinAlignmentString(composite));
 		if (buf.length() != 0) {
 			buf.append(" ");
@@ -224,7 +224,7 @@ public interface CompositeInternal extends Composite {
 		return buf.toString();
 	}
 
-	public static String getMinAlignmentString(Composite composite) {
+	static String getMinAlignmentString(Composite composite) {
 		if (composite.isDefaultAligned()) {
 			return "";
 		}
@@ -241,7 +241,7 @@ public interface CompositeInternal extends Composite {
 		return buf.toString();
 	}
 
-	public static String getPackingString(Composite composite) {
+	static String getPackingString(Composite composite) {
 		StringBuilder buf = new StringBuilder(PACKING_NAME);
 		buf.append("(");
 		if (composite.isPackingEnabled()) {

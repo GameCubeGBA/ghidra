@@ -17,7 +17,9 @@ package ghidra.graph.viewer;
 
 import java.awt.Point;
 
-import edu.uci.ics.jung.visualization.*;
+import edu.uci.ics.jung.visualization.Layer;
+import edu.uci.ics.jung.visualization.MultiLayerTransformer;
+import edu.uci.ics.jung.visualization.RenderContext;
 import ghidra.framework.options.SaveState;
 
 /**

@@ -22,5 +22,5 @@ package ghidra.program.model.listing;
  * various change information on a domain object.
  */
 public interface DomainObjectChangeSet {
-	public boolean hasChanges();
+	boolean hasChanges();
 }

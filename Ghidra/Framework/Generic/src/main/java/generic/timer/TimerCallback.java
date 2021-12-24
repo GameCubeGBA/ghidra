@@ -17,5 +17,5 @@
 package generic.timer;
 
 public interface TimerCallback {
-	public void timerFired();
+	void timerFired();
 }

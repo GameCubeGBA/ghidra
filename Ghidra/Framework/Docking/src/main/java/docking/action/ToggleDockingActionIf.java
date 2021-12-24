@@ -21,17 +21,17 @@ package docking.action;
  *
  */
 public interface ToggleDockingActionIf extends DockingActionIf {
-	public static final String SELECTED_STATE_PROPERTY = "selectState";
+	String SELECTED_STATE_PROPERTY = "selectState";
 	
 	/**
 	 * Returns true if the toggle state for this action is current selected.
 	 * @return true if the toggle state for this action is current selected.
 	 */
-	public abstract boolean isSelected();
+	boolean isSelected();
 	
 	/**
 	 * Sets the toggle state for this action.
 	 * @param newValue the new toggle state.
 	 */
-	public abstract void setSelected(boolean newValue);
+	void setSelected(boolean newValue);
 }

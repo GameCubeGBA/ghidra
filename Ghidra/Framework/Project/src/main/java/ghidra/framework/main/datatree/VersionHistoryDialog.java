@@ -27,7 +27,11 @@ import docking.action.DockingActionIf;
 import ghidra.app.util.GenericHelpTopics;
 import ghidra.framework.main.AppInfo;
 import ghidra.framework.main.FrontEndTool;
-import ghidra.framework.model.*;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.DomainFolder;
+import ghidra.framework.model.DomainFolderListenerAdapter;
+import ghidra.framework.model.Project;
+import ghidra.framework.model.ProjectListener;
 import ghidra.framework.store.FileSystem;
 import ghidra.util.HelpLocation;
 

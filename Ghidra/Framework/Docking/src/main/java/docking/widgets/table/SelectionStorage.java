@@ -20,7 +20,7 @@ import java.util.List;
 
 public interface SelectionStorage<T> {
 
-	public List<T> getLastSelectedObjects();
+	List<T> getLastSelectedObjects();
 
-	public void setLastSelectedObjects(List<T> lastSelectedObjects);
+	void setLastSelectedObjects(List<T> lastSelectedObjects);
 }

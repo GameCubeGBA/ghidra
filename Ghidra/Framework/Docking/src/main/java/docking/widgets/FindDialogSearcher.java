@@ -20,16 +20,16 @@ package docking.widgets;
  */
 public interface FindDialogSearcher {
 
-	public CursorPosition getCursorPosition();
+	CursorPosition getCursorPosition();
 
-	public void setCursorPosition(CursorPosition position);
+	void setCursorPosition(CursorPosition position);
 
-	public CursorPosition getStart();
+	CursorPosition getStart();
 
-	public CursorPosition getEnd();
+	CursorPosition getEnd();
 
-	public void highlightSearchResults(SearchLocation location);
+	void highlightSearchResults(SearchLocation location);
 
-	public SearchLocation search(String text, CursorPosition cursorPosition, boolean searchForward,
+	SearchLocation search(String text, CursorPosition cursorPosition, boolean searchForward,
 			boolean useRegex);
 }

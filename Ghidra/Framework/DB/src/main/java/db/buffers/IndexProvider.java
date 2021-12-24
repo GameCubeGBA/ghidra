@@ -29,7 +29,7 @@ import java.util.Stack;
 class IndexProvider {
 
 	private int nextIndex = 0;
-	private Stack<Integer> freeIndexStack = new Stack<Integer>();
+	private Stack<Integer> freeIndexStack = new Stack<>();
 
 	/**
 	 * Constructor for empty BufferFile.
@@ -44,8 +44,8 @@ class IndexProvider {
 	 */
 	IndexProvider(int indexCount, int[] freeIndexes) {
 		nextIndex = indexCount;
-		for (int i = 0; i < freeIndexes.length; i++) {
-			freeIndexStack.push(Integer.valueOf(freeIndexes[i]));
+		for (int element : freeIndexes) {
+			freeIndexStack.push(Integer.valueOf(element));
 		}
 	}
 	

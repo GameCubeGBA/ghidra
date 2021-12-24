@@ -20,9 +20,17 @@ import java.beans.PropertyChangeListener;
 import java.util.List;
 import java.util.Set;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JMenuItem;
+import javax.swing.KeyStroke;
 
-import docking.action.*;
+import docking.action.DockingActionIf;
+import docking.action.KeyBindingData;
+import docking.action.KeyBindingType;
+import docking.action.MenuData;
+import docking.action.MultiActionDockingActionIf;
+import docking.action.ToggleDockingActionIf;
+import docking.action.ToolBarData;
 import ghidra.util.datastruct.WeakDataStructureFactory;
 import ghidra.util.datastruct.WeakSet;
 import ghidra.util.exception.AssertException;

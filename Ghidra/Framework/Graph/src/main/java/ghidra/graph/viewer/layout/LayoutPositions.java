@@ -16,7 +16,10 @@
 package ghidra.graph.viewer.layout;
 
 import java.awt.geom.Point2D;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.collections4.TransformerUtils;
 import org.apache.commons.collections4.map.TransformedMap;

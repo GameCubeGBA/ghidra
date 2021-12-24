@@ -27,10 +27,20 @@ import generic.stl.VectorSTL;
 import ghidra.pcode.utils.MessageFormattingUtils;
 import ghidra.pcodeCPort.context.SleighError;
 import ghidra.pcodeCPort.opcodes.OpCode;
-import ghidra.pcodeCPort.semantics.*;
+import ghidra.pcodeCPort.semantics.ConstTpl;
 import ghidra.pcodeCPort.semantics.ConstTpl.const_type;
 import ghidra.pcodeCPort.semantics.ConstTpl.v_field;
-import ghidra.pcodeCPort.slghsymbol.*;
+import ghidra.pcodeCPort.semantics.ConstructTpl;
+import ghidra.pcodeCPort.semantics.HandleTpl;
+import ghidra.pcodeCPort.semantics.OpTpl;
+import ghidra.pcodeCPort.semantics.VarnodeTpl;
+import ghidra.pcodeCPort.slghsymbol.LabelSymbol;
+import ghidra.pcodeCPort.slghsymbol.MacroSymbol;
+import ghidra.pcodeCPort.slghsymbol.SectionSymbol;
+import ghidra.pcodeCPort.slghsymbol.SleighSymbol;
+import ghidra.pcodeCPort.slghsymbol.SpecificSymbol;
+import ghidra.pcodeCPort.slghsymbol.UserOpSymbol;
+import ghidra.pcodeCPort.slghsymbol.VarnodeSymbol;
 import ghidra.pcodeCPort.space.AddrSpace;
 import ghidra.sleigh.grammar.Location;
 
@@ -38,7 +48,7 @@ public abstract class PcodeCompile {
 
 	public final static Logger log = LogManager.getLogger(PcodeCompile.class);
 
-	public VectorSTL<String> noplist = new VectorSTL<String>();
+	public VectorSTL<String> noplist = new VectorSTL<>();
 	private int local_labelcount;
 
 	private int errors;
@@ -139,16 +149,14 @@ public abstract class PcodeCompile {
 		for (int i = 0; i < ops.size(); ++i) {
 			op = ops.get(i);
 			vn = op.getOut();
-			if ((vn != null) && (vn.isLocalTemp())) {
-				if (vn.getOffset().equals(vt.getOffset())) {
-					if ((size.getType() == ConstTpl.const_type.real) &&
-						(vn.getSize().getType() == ConstTpl.const_type.real) &&
-						(vn.getSize().getReal() != 0) && (vn.getSize().getReal() != size.getReal())) {
-						throw new SleighError(String.format("Localtemp size mismatch: %d vs %d",
-							vn.getSize().getReal(), size.getReal()), op.location);
-					}
-					vn.setSize(size);
+			if (((vn != null) && (vn.isLocalTemp())) && vn.getOffset().equals(vt.getOffset())) {
+				if ((size.getType() == ConstTpl.const_type.real) &&
+					(vn.getSize().getType() == ConstTpl.const_type.real) &&
+					(vn.getSize().getReal() != 0) && (vn.getSize().getReal() != size.getReal())) {
+					throw new SleighError(String.format("Localtemp size mismatch: %d vs %d",
+						vn.getSize().getReal(), size.getReal()), op.location);
 				}
+				vn.setSize(size);
 			}
 			for (int j = 0; j < op.numInput(); ++j) {
 				vn = op.getIn(j);
@@ -192,7 +200,7 @@ public abstract class PcodeCompile {
 				String.format("Label '%s' is placed more than once", labsym.getName()));
 		}
 		labsym.setPlaced();
-		VectorSTL<OpTpl> res = new VectorSTL<OpTpl>();
+		VectorSTL<OpTpl> res = new VectorSTL<>();
 		OpTpl op = new OpTpl(location, OpCode.CPUI_PTRADD);
 		VarnodeTpl idvn =
 			new VarnodeTpl(location, new ConstTpl(getConstantSpace()), new ConstTpl(
@@ -368,7 +376,7 @@ public abstract class PcodeCompile {
 		VarnodeTpl vn =
 			new VarnodeTpl(location, new ConstTpl(getConstantSpace()), new ConstTpl(
 				ConstTpl.const_type.real, val), new ConstTpl(ConstTpl.const_type.real, 4));
-		VectorSTL<OpTpl> res = new VectorSTL<OpTpl>();
+		VectorSTL<OpTpl> res = new VectorSTL<>();
 		OpTpl op = new OpTpl(location, opc);
 		op.addInput(vn);
 		res.push_back(op);
@@ -468,14 +476,7 @@ public abstract class PcodeCompile {
 			}
 		}
 
-		if ((bitoffset % 8) != 0) {
-			return null;
-		}
-		if ((numbits % 8) != 0) {
-			return null;
-		}
-
-		if (basevn.getSpace().isUniqueSpace()) {
+		if (((bitoffset % 8) != 0) || ((numbits % 8) != 0) || basevn.getSpace().isUniqueSpace()) {
 			return null;
 		}
 
@@ -506,10 +507,8 @@ public abstract class PcodeCompile {
 			}
 			specialoff = new ConstTpl(const_type.real, basevn.getOffset().getReal() + plus);
 		}
-		VarnodeTpl res =
-			new VarnodeTpl(loc, basevn.getSpace(), specialoff, new ConstTpl(const_type.real,
-				numbytes));
-		return res;
+		return new VarnodeTpl(loc, basevn.getSpace(), specialoff, new ConstTpl(const_type.real,
+			numbytes));
 	}
 
 	// Take output of res expression, combine with constant,
@@ -619,18 +618,17 @@ public abstract class PcodeCompile {
 		if ((errmsg.length() == 0) && (bitoffset == 0) && (!maskneeded)) {
 			if ((vn.getSpace().getType() == ConstTpl.const_type.handle) && vn.isZeroSize()) {
 				vn.setSize(new ConstTpl(ConstTpl.const_type.real, finalsize));
-				ExprTree res = new ExprTree(sym.getLocation(), vn);
+				
 				// VarnodeTpl *cruft = buildTemporary();
 				// delete cruft;
-				return res;
+				return new ExprTree(sym.getLocation(), vn);
 			}
 		}
 
 		if (errmsg.length() == 0) {
 			VarnodeTpl truncvn = buildTruncatedVarnode(location, vn, bitoffset, numbits);
 			if (truncvn != null) {		// If we are able to construct a simple truncated varnode
-				ExprTree res = new ExprTree(location, truncvn);		// Return just the varnode as an expression
-				return res;
+				return new ExprTree(location, truncvn);
 			}
 		}
 
@@ -691,13 +689,11 @@ public abstract class PcodeCompile {
 	// portion of varnode -var-
 	public VarnodeTpl addressOf(VarnodeTpl var, int size) {
 		entry("addressOf", var, size);
-		if (size == 0) { // If no size specified
-			if (var.getSpace().getType() == ConstTpl.const_type.spaceid) {
-				AddrSpace spc = var.getSpace().getSpace(); // Look to the
-				// particular space
-				size = spc.getAddrSize(); // to see if it has a standard
-				// address size
-			}
+		if ((size == 0) && (var.getSpace().getType() == ConstTpl.const_type.spaceid)) {
+			AddrSpace spc = var.getSpace().getSpace(); // Look to the
+			// particular space
+			size = spc.getAddrSize(); // to see if it has a standard
+			// address size
 		}
 		VarnodeTpl res;
 		if ((var.getOffset().getType() == ConstTpl.const_type.real) &&
@@ -726,11 +722,9 @@ public abstract class PcodeCompile {
 		int i, inputsize;
 
 		vt = (j == -1) ? op.getOut() : op.getIn(j);
-		if (!inputonly) {
-			if (op.getOut() != null) {
-				if (!op.getOut().isZeroSize()) {
-					match = op.getOut();
-				}
+		if (!inputonly && (op.getOut() != null)) {
+			if (!op.getOut().isZeroSize()) {
+				match = op.getOut();
 			}
 		}
 		inputsize = op.numInput();
@@ -860,7 +854,7 @@ public abstract class PcodeCompile {
 		// Return first OpTpl with a size 0 varnode
 		// that cannot be filled in or NULL otherwise
 		entry("propagateSize", ct);
-		VectorSTL<OpTpl> zerovec = new VectorSTL<OpTpl>(), zerovec2 = new VectorSTL<OpTpl>();
+		VectorSTL<OpTpl> zerovec = new VectorSTL<>(), zerovec2 = new VectorSTL<>();
 		IteratorSTL<OpTpl> iter;
 		int lastsize;
 
@@ -875,7 +869,7 @@ public abstract class PcodeCompile {
 		lastsize = zerovec.size() + 1;
 		while (zerovec.size() < lastsize) {
 			lastsize = zerovec.size();
-			zerovec2 = new VectorSTL<OpTpl>();
+			zerovec2 = new VectorSTL<>();
 			for (iter = zerovec.begin(); !iter.isEnd(); iter.increment()) {
 				fillinZero(iter.get(), ct.getOpvec());
 				if (iter.get().isZeroSize()) {
@@ -1023,16 +1017,7 @@ public abstract class PcodeCompile {
 	 * @return true if the identifier is a reserved internal function
 	 */
 	public boolean isInternalFunction(String name) {
-		if ("zext".equals(name)) {
-			return true;
-		}
-		if ("carry".equals(name)) {
-			return true;
-		}
-		if ("sext".equals(name)) {
-			return true;
-		}
-		if ("scarry".equals(name)) {
+		if ("zext".equals(name) || "carry".equals(name) || "sext".equals(name) || "scarry".equals(name)) {
 			return true;
 		}
 		if ("sborrow".equals(name)) {

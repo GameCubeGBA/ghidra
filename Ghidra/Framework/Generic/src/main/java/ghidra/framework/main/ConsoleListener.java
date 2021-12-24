@@ -26,7 +26,7 @@ public interface ConsoleListener {
 	 * @param message to output
 	 * @param isError true if this is an error message
 	 */
-	public void put(String message, boolean isError);
+	void put(String message, boolean isError);
 
-	public void putln(String message, boolean isError);
+	void putln(String message, boolean isError);
 }

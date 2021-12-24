@@ -15,8 +15,13 @@
  */
 package ghidra.framework.main.logviewer.model;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import ghidra.framework.main.logviewer.ui.FVTable;
 
@@ -106,11 +111,7 @@ public class ChunkReader {
 	public synchronized List<String> readPreviousChunk() throws IOException {
 
 		Chunk first = model.get(0);
-		if (first == null) {
-			return Collections.<String> emptyList();
-		}
-
-		if (raf == null) {
+		if ((first == null) || (raf == null)) {
 			return Collections.<String> emptyList();
 		}
 		raf.seek(first.start);

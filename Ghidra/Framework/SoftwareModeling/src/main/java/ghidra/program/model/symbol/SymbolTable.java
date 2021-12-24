@@ -15,10 +15,16 @@
  */
 package ghidra.program.model.symbol;
 
-import java.util.*;
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
+import java.util.List;
 
-import ghidra.program.model.address.*;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressIterator;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.listing.Function;
+import ghidra.program.model.listing.GhidraClass;
+import ghidra.program.model.listing.Library;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.exception.InvalidInputException;
 
@@ -66,7 +72,7 @@ public interface SymbolTable {
 	 * @throws IllegalArgumentException if you try to set the source to DEFAULT for a symbol type
 	 * that doesn't allow it, or an improper addr is specified
 	 */
-	public Symbol createLabel(Address addr, String name, SourceType source)
+	Symbol createLabel(Address addr, String name, SourceType source)
 			throws InvalidInputException;
 
 	/**
@@ -88,7 +94,7 @@ public interface SymbolTable {
 	 * @throws IllegalArgumentException if you try to set the source to DEFAULT for a symbol type
 	 * that doesn't allow it, or an improper addr is specified
 	 */
-	public Symbol createLabel(Address addr, String name, Namespace namespace, SourceType source)
+	Symbol createLabel(Address addr, String name, Namespace namespace, SourceType source)
 			throws InvalidInputException;
 
 	/**
@@ -114,14 +120,14 @@ public interface SymbolTable {
 	 * @param sym the symbol to be removed.
 	 * @return false, if removal of the symbol fails
 	 */
-	public boolean removeSymbolSpecial(Symbol sym);
+	boolean removeSymbolSpecial(Symbol sym);
 
 	/**
 	 * Get the symbol for the given symbol ID.
 	 * @param symbolID the id of the symbol to be retrieved.
 	 * @return null if there is no symbol with the given ID.
 	 */
-	public Symbol getSymbol(long symbolID);
+	Symbol getSymbol(long symbolID);
 
 	/**
 	 * Get the symbol with the given name, address, and namespace.
@@ -140,7 +146,7 @@ public interface SymbolTable {
 	 * @see #getGlobalSymbol(String, Address) for a convenience method if the namespace is the
 	 * global namespace.
 	 */
-	public Symbol getSymbol(String name, Address addr, Namespace namespace);
+	Symbol getSymbol(String name, Address addr, Namespace namespace);
 
 	/**
 	 * Get the global symbol with the given name and address.  Note that this results in a single
@@ -160,7 +166,7 @@ public interface SymbolTable {
 	 * not found
 	 *  @see #getSymbol(String, Address, Namespace)
 	 */
-	public Symbol getGlobalSymbol(String name, Address addr);
+	Symbol getGlobalSymbol(String name, Address addr);
 
 	/**
 	 * Returns a list of all global symbols with the given name.
@@ -171,7 +177,7 @@ public interface SymbolTable {
 	 * @param name the name of the symbols to retrieve.
 	 * @return a list of all global symbols with the given name.
 	 */
-	public List<Symbol> getGlobalSymbols(String name);
+	List<Symbol> getGlobalSymbols(String name);
 
 	/**
 	 * Returns all the label or function symbols that have the given name in the given namespace.
@@ -183,7 +189,7 @@ public interface SymbolTable {
 	 * @param namespace the namespace to search.  If null, then the global namespace is assumed.
 	 * @return a list of all the label or function symbols with the given name in the given namespace.
 	 */
-	public List<Symbol> getLabelOrFunctionSymbols(String name, Namespace namespace);
+	List<Symbol> getLabelOrFunctionSymbols(String name, Namespace namespace);
 
 	/**
 	 * Returns a generic namespace symbol with the given name in the given namespace.
@@ -191,14 +197,14 @@ public interface SymbolTable {
 	 * @param namespace the namespace containing the symbol to retrieve.
 	 * @return a generic namespace symbol with the given name in the given namespace.
 	 */
-	public Symbol getNamespaceSymbol(String name, Namespace namespace);
+	Symbol getNamespaceSymbol(String name, Namespace namespace);
 
 	/**
 	 * Returns the library symbol with the given name.
 	 * @param name the name of the library symbol to retrieve.
 	 * @return  the library symbol with the given name.
 	 */
-	public Symbol getLibrarySymbol(String name);
+	Symbol getLibrarySymbol(String name);
 
 	/**
 	 * Returns the class symbol with the given name in the given namespace.
@@ -206,7 +212,7 @@ public interface SymbolTable {
 	 * @param namespace the namespace to search for the class.
 	 * @return the class symbol with the given name in the given namespace.
 	 */
-	public Symbol getClassSymbol(String name, Namespace namespace);
+	Symbol getClassSymbol(String name, Namespace namespace);
 
 	/**
 	 * Returns the parameter symbol with the given name in the given namespace.
@@ -214,7 +220,7 @@ public interface SymbolTable {
 	 * @param namespace the namespace (function) to search for the class.
 	 * @return the parameter symbol with the given name in the given namespace.
 	 */
-	public Symbol getParameterSymbol(String name, Namespace namespace);
+	Symbol getParameterSymbol(String name, Namespace namespace);
 
 	/**
 	 * Returns the local variable symbol with the given name in the given namespace.
@@ -222,7 +228,7 @@ public interface SymbolTable {
 	 * @param namespace the namespace (function) to search for the class.
 	 * @return the local variable symbol with the given name in the given namespace.
 	 */
-	public Symbol getLocalVariableSymbol(String name, Namespace namespace);
+	Symbol getLocalVariableSymbol(String name, Namespace namespace);
 
 	/**
 	 * Returns a list of all symbols with the given name in the given namespace.
@@ -234,7 +240,7 @@ public interface SymbolTable {
 	 * @param namespace the namespace to search for symbols.
 	 * @return all symbols which satisfy specified criteria
 	 */
-	public List<Symbol> getSymbols(String name, Namespace namespace);
+	List<Symbol> getSymbols(String name, Namespace namespace);
 
 	/**
 	 * Returns a symbol that is either a parameter or local variable.  There can be only
@@ -243,7 +249,7 @@ public interface SymbolTable {
 	 * @param function the function to search.
 	 * @return a parameter or local variable symbol with the given name.
 	 */
-	public Symbol getVariableSymbol(String name, Function function);
+	Symbol getVariableSymbol(String name, Function function);
 
 	/**
 	 * Returns the namespace with the given name in the given parent namespace.  The namespace
@@ -253,7 +259,7 @@ public interface SymbolTable {
 	 * @param namespace the parent namespace of the namespace to be retrieved.
 	 * @return the namespace with the given name in the given parent namespace.
 	 */
-	public Namespace getNamespace(String name, Namespace namespace);
+	Namespace getNamespace(String name, Namespace namespace);
 
 	/**
 	 * Returns all the symbols with the given name.
@@ -265,7 +271,7 @@ public interface SymbolTable {
 	 *
 	 * @return array of symbols with the given name
 	 */
-	public SymbolIterator getSymbols(String name);
+	SymbolIterator getSymbols(String name);
 
 	/**
 	 * Returns an iterator over all symbols, including Dynamic symbols if
@@ -273,14 +279,14 @@ public interface SymbolTable {
 	 * @param includeDynamicSymbols if true, the iterator will include dynamicSymbols
 	 * @return symbol iterator
 	 */
-	public SymbolIterator getAllSymbols(boolean includeDynamicSymbols);
+	SymbolIterator getAllSymbols(boolean includeDynamicSymbols);
 
 	/**
 	 * Returns the symbol that this reference is associated with.
 	 * @param ref the reference to find the associated symbol for.
 	 * @return referenced symbol
 	 */
-	public Symbol getSymbol(Reference ref);
+	Symbol getSymbol(Reference ref);
 
 	/**
 	 * Returns the primary symbol at the specified
@@ -290,7 +296,7 @@ public interface SymbolTable {
 	 *
 	 * @return symbol, or null if no symbol at that address
 	 */
-	public Symbol getPrimarySymbol(Address addr);
+	Symbol getPrimarySymbol(Address addr);
 
 	/**
 	 * Returns all the symbols at the given address.  When addr is a memory address
@@ -303,7 +309,7 @@ public interface SymbolTable {
 	 * @return a zero-length array when no symbols are defined at address.
 	 * @see #getSymbolsAsIterator(Address)
 	 */
-	public Symbol[] getSymbols(Address addr);
+	Symbol[] getSymbols(Address addr);
 
 	/**
 	 * Returns a symbol iterator over all the symbols at the given address.  Use this instead of
@@ -315,14 +321,14 @@ public interface SymbolTable {
 	 * @return an iterator over all the symbols at the given address
 	 * @see #getSymbols(Address)
 	 */
-	public SymbolIterator getSymbolsAsIterator(Address addr);
+	SymbolIterator getSymbolsAsIterator(Address addr);
 
 	/**
 	 * Returns an array of all user defined symbols at the given address
 	 * @param addr the address at which to retrieve all user defined symbols.
 	 * @return all symbols at specified address
 	 */
-	public Symbol[] getUserSymbols(Address addr);
+	Symbol[] getUserSymbols(Address addr);
 
 	/**
 	 * Returns an iterator over all the symbols in the given namespace
@@ -333,7 +339,7 @@ public interface SymbolTable {
 	 * @param namespace the namespace to search for symbols.
 	 * @return symbol iterator
 	 */
-	public SymbolIterator getSymbols(Namespace namespace);
+	SymbolIterator getSymbols(Namespace namespace);
 
 	/**
 	 * Returns an iterator over all the symbols in the given namespace
@@ -344,14 +350,14 @@ public interface SymbolTable {
 	 * @param namespaceID the namespace ID to search for symbols.
 	 * @return symbol iterator
 	 */
-	public SymbolIterator getSymbols(long namespaceID);
+	SymbolIterator getSymbols(long namespaceID);
 
 	/**
 	 * Return true if there exists a symbol at the given address.
 	 * @param addr address to check for an existing symbol
 	 * @return true if any symbol exists
 	 */
-	public boolean hasSymbol(Address addr);
+	boolean hasSymbol(Address addr);
 
 	/**
 	 * Get the unique symbol ID for a dynamic symbol associated with the specified addr.
@@ -361,7 +367,7 @@ public interface SymbolTable {
 	 * @param addr dynamic symbol address
 	 * @return unique symbol ID
 	 */
-	public long getDynamicSymbolID(Address addr);
+	long getDynamicSymbolID(Address addr);
 
 	/**
 	 * Returns a an iterator over all symbols that match the given search string.
@@ -375,7 +381,7 @@ public interface SymbolTable {
 	 * @param caseSensitive flag to determine if the search is case sensitive or not.
 	 * @return symbol iterator
 	 */
-	public SymbolIterator getSymbolIterator(String searchStr, boolean caseSensitive);
+	SymbolIterator getSymbolIterator(String searchStr, boolean caseSensitive);
 
 	/**
 	 * Returns all the symbols of the given type within the given address set.
@@ -384,32 +390,32 @@ public interface SymbolTable {
 	 * @param forward the direction within the addressSet to search
 	 * @return symbol iterator
 	 */
-	public SymbolIterator getSymbols(AddressSetView set, SymbolType type, boolean forward);
+	SymbolIterator getSymbols(AddressSetView set, SymbolType type, boolean forward);
 
 	/**
 	 * Returns the total number of symbols in the table.
 	 * @return total number of symbols
 	 */
-	public int getNumSymbols();
+	int getNumSymbols();
 
 	/**
 	 * Get iterator over all label symbols. Labels are defined on memory locations.
 	 * @return symbol iterator
 	 */
-	public SymbolIterator getSymbolIterator();
+	SymbolIterator getSymbolIterator();
 
 	/**
 	 * Returns an iterator over all defined symbols in no particular order.
 	 * @return symbol iterator
 	 */
-	public SymbolIterator getDefinedSymbols();
+	SymbolIterator getDefinedSymbols();
 
 	/**
 	 * Returns the external symbol with the given name.
 	 * @param name the name of the symbol to be retrieved.
 	 * @return symbol, or null if no external symbol has that name
 	 */
-	public Symbol getExternalSymbol(String name);
+	Symbol getExternalSymbol(String name);
 
 	/**
 	 * Returns all the external symbols with the given name.
@@ -417,20 +423,20 @@ public interface SymbolTable {
 	 *
 	 * @return array of external symbols with the given name
 	 */
-	public SymbolIterator getExternalSymbols(String name);
+	SymbolIterator getExternalSymbols(String name);
 
 	/**
 	 * Returns an iterator over all defined external symbols in no particular order.
 	 * @return symbol iterator
 	 */
-	public SymbolIterator getExternalSymbols();
+	SymbolIterator getExternalSymbols();
 
 	/**
 	 * Returns an iterator over all symbols.
 	 * @param forward true means the iterator is in the forward direction
 	 * @return symbol iterator
 	 */
-	public SymbolIterator getSymbolIterator(boolean forward);
+	SymbolIterator getSymbolIterator(boolean forward);
 
 	/**
 	 * Get iterator over all symbols starting at
@@ -439,14 +445,14 @@ public interface SymbolTable {
 	 * @param forward true means the iterator is in the forward direction
 	 * @return symbol iterator
 	 */
-	public SymbolIterator getSymbolIterator(Address startAddr, boolean forward);
+	SymbolIterator getSymbolIterator(Address startAddr, boolean forward);
 
 	/**
 	 * Get iterator over all primary symbols.
 	 * @param forward true means the iterator is in the forward direction
 	 * @return symbol iterator
 	 */
-	public SymbolIterator getPrimarySymbolIterator(boolean forward);
+	SymbolIterator getPrimarySymbolIterator(boolean forward);
 
 	/**
 	 * Get iterator over only primary symbols starting at
@@ -455,7 +461,7 @@ public interface SymbolTable {
 	 * @param forward true means the iterator is in the forward direction
 	 * @return symbol iterator
 	 */
-	public SymbolIterator getPrimarySymbolIterator(Address startAddr, boolean forward);
+	SymbolIterator getPrimarySymbolIterator(Address startAddr, boolean forward);
 
 	/**
 	 * Get an iterator over symbols at addresses in the given addressSet
@@ -463,32 +469,32 @@ public interface SymbolTable {
 	 * @param forward true means the iterator is in the forward direction
 	 * @return symbol iterator
 	 */
-	public SymbolIterator getPrimarySymbolIterator(AddressSetView asv, boolean forward);
+	SymbolIterator getPrimarySymbolIterator(AddressSetView asv, boolean forward);
 
 	/**
 	 * Sets the given address to be an external entry point.
 	 * @param addr the address to set as an external entry point.
 	 */
-	public void addExternalEntryPoint(Address addr);
+	void addExternalEntryPoint(Address addr);
 
 	/**
 	 * Removes the given address as an external entry point.
 	 * @param addr the address to remove as an external entry point.
 	 */
-	public void removeExternalEntryPoint(Address addr);
+	void removeExternalEntryPoint(Address addr);
 
 	/**
 	 * Returns true if the given address has been set as an external entry point.
 	 * @param addr address to test for external entry point.
 	 * @return true if specified address has been marked as an entry point, else false
 	 */
-	public boolean isExternalEntryPoint(Address addr);
+	boolean isExternalEntryPoint(Address addr);
 
 	/**
 	 * Get forward/back iterator over addresses that are entry points.
 	 * @return entry-point address iterator
 	 */
-	public AddressIterator getExternalEntryPointIterator();
+	AddressIterator getExternalEntryPointIterator();
 
 	/**
 	 * Get the label history objects for the given address. The history
@@ -496,33 +502,33 @@ public interface SymbolTable {
 	 * @param addr address of the label change
 	 * @return array of history objects
 	 */
-	public LabelHistory[] getLabelHistory(Address addr);
+	LabelHistory[] getLabelHistory(Address addr);
 
 	/**
 	 * Get an iterator over all the label history objects.
 	 * @return label history iterator
 	 */
-	public Iterator<LabelHistory> getLabelHistory();
+	Iterator<LabelHistory> getLabelHistory();
 
 	/**
 	 * Return true if there is a history of label changes at the given address.
 	 * @param addr the address to check for symbol history.
 	 * @return true if label history exists for specified address, else false
 	 */
-	public boolean hasLabelHistory(Address addr);
+	boolean hasLabelHistory(Address addr);
 
 	/**
 	 * Returns the lowest level Namespace within which the specified address is contained.
 	 * @param addr the address for which to finds its enclosing namespace.
 	 * @return namespace which contains specified address
 	 */
-	public Namespace getNamespace(Address addr);
+	Namespace getNamespace(Address addr);
 
 	/**
 	 * Returns all Class Namespaces defined within the program in an arbitrary ordering.
 	 * @return iterator of {@link GhidraClass}
 	 */
-	public Iterator<GhidraClass> getClassNamespaces();
+	Iterator<GhidraClass> getClassNamespaces();
 
 	/**
 	 * Create a class namespace in the given parent namespace.
@@ -535,7 +541,7 @@ public interface SymbolTable {
 	 * @throws InvalidInputException throw if the name has invalid characters or is null
 	 * @throws IllegalArgumentException if you try to set the source to 'Symbol.DEFAULT'.
 	 */
-	public GhidraClass createClass(Namespace parent, String name, SourceType source)
+	GhidraClass createClass(Namespace parent, String name, SourceType source)
 			throws DuplicateNameException, InvalidInputException;
 
 	/**
@@ -547,7 +553,7 @@ public interface SymbolTable {
 	 * @param parentSymbol the parent symbol
 	 * @return symbol iterator
 	 */
-	public SymbolIterator getChildren(Symbol parentSymbol);
+	SymbolIterator getChildren(Symbol parentSymbol);
 
 	/**
 	 * Creates a Library namespace with the given name.
@@ -559,7 +565,7 @@ public interface SymbolTable {
 	 * @throws DuplicateNameException thrown if another non function or label
 	 * symbol exists with the given name
 	 */
-	public Library createExternalLibrary(String name, SourceType source)
+	Library createExternalLibrary(String name, SourceType source)
 			throws DuplicateNameException, InvalidInputException;
 
 	/**
@@ -573,7 +579,7 @@ public interface SymbolTable {
 	 * @throws InvalidInputException if the name is invalid.
 	 * @throws IllegalArgumentException if you try to set the source to 'Symbol.DEFAULT'.
 	 */
-	public Namespace createNameSpace(Namespace parent, String name, SourceType source)
+	Namespace createNameSpace(Namespace parent, String name, SourceType source)
 			throws DuplicateNameException, InvalidInputException;
 
 	/**
@@ -585,7 +591,7 @@ public interface SymbolTable {
 	 *         than that of this symbol table
 	 * @throws ConcurrentModificationException if the given parent namespace has been deleted
 	 */
-	public GhidraClass convertNamespaceToClass(Namespace namespace);
+	GhidraClass convertNamespaceToClass(Namespace namespace);
 
 	/**
 	 * Gets an existing namespace with the given name in the given parent.  If no namespace exists,
@@ -602,6 +608,6 @@ public interface SymbolTable {
 	 *         than that of this symbol table
 	 * @throws ConcurrentModificationException if the given parent namespace has been deleted
 	 */
-	public Namespace getOrCreateNameSpace(Namespace parent, String name, SourceType source)
+	Namespace getOrCreateNameSpace(Namespace parent, String name, SourceType source)
 			throws DuplicateNameException, InvalidInputException;
 }

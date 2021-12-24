@@ -15,7 +15,9 @@
  */
 package ghidra.app.plugin.assembler.sleigh.parse;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import org.apache.commons.collections4.set.AbstractSetDecorator;
 
@@ -94,10 +96,7 @@ public class AssemblyParseState extends AbstractSetDecorator<AssemblyParseStateI
 		}
 		// This only works because TreeSet presents the items in order
 		result = SleighUtil.compareInOrder(this.kernel, that.kernel);
-		if (result != 0) {
-			return result;
-		}
-		return 0;
+		return result;
 	}
 
 	@Override

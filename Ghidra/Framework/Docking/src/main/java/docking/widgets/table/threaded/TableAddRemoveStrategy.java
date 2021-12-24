@@ -35,6 +35,6 @@ public interface TableAddRemoveStrategy<T> {
 	 * @param monitor the monitor
 	 * @throws CancelledException if the monitor is cancelled
 	 */
-	public void process(List<AddRemoveListItem<T>> addRemoveList, TableData<T> tableData,
+	void process(List<AddRemoveListItem<T>> addRemoveList, TableData<T> tableData,
 			TaskMonitor monitor) throws CancelledException;
 }

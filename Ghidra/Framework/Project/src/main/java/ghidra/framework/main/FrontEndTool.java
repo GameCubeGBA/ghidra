@@ -15,9 +15,19 @@
  */
 package ghidra.framework.main;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -33,7 +43,9 @@ import org.jdom.input.SAXBuilder;
 import org.jdom.output.XMLOutputter;
 
 import db.buffers.DataBuffer;
-import docking.*;
+import docking.ActionContext;
+import docking.ComponentProvider;
+import docking.DialogComponentProvider;
 import docking.action.DockingAction;
 import docking.action.MenuData;
 import docking.help.Help;
@@ -48,7 +60,9 @@ import ghidra.app.plugin.GenericPluginCategoryNames;
 import ghidra.app.util.GenericHelpTopics;
 import ghidra.framework.Application;
 import ghidra.framework.LoggingInitialization;
-import ghidra.framework.client.*;
+import ghidra.framework.client.ClientUtil;
+import ghidra.framework.client.NotConnectedException;
+import ghidra.framework.client.RepositoryAdapter;
 import ghidra.framework.main.datatree.ChangedFilesDialog;
 import ghidra.framework.main.datatree.CheckInTask;
 import ghidra.framework.main.logviewer.event.FVEvent;
@@ -58,22 +72,36 @@ import ghidra.framework.main.logviewer.model.ChunkModel;
 import ghidra.framework.main.logviewer.model.ChunkReader;
 import ghidra.framework.main.logviewer.ui.FileViewer;
 import ghidra.framework.main.logviewer.ui.FileWatcher;
-import ghidra.framework.model.*;
-import ghidra.framework.options.*;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.Project;
+import ghidra.framework.model.ProjectListener;
+import ghidra.framework.model.ProjectManager;
+import ghidra.framework.model.ToolTemplate;
+import ghidra.framework.options.OptionsChangeListener;
+import ghidra.framework.options.SaveState;
+import ghidra.framework.options.ToolOptions;
 import ghidra.framework.plugintool.Plugin;
 import ghidra.framework.plugintool.PluginTool;
-import ghidra.framework.plugintool.util.*;
+import ghidra.framework.plugintool.util.PluginClassManager;
+import ghidra.framework.plugintool.util.PluginDescription;
+import ghidra.framework.plugintool.util.PluginException;
+import ghidra.framework.plugintool.util.PluginStatus;
 import ghidra.framework.preferences.Preferences;
 import ghidra.framework.project.tool.GhidraTool;
 import ghidra.framework.project.tool.GhidraToolTemplate;
-import ghidra.util.*;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
+import ghidra.util.Swing;
+import ghidra.util.SystemUtilities;
 import ghidra.util.bean.GGlassPane;
 import ghidra.util.classfinder.ClassSearcher;
 import ghidra.util.datastruct.WeakDataStructureFactory;
 import ghidra.util.datastruct.WeakSet;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.VersionException;
-import ghidra.util.task.*;
+import ghidra.util.task.Task;
+import ghidra.util.task.TaskListener;
+import ghidra.util.task.TaskMonitor;
 import ghidra.util.xml.GenericXMLOutputter;
 import ghidra.util.xml.XmlUtilities;
 
@@ -325,28 +353,23 @@ public class FrontEndTool extends PluginTool implements OptionsChangeListener {
 	 */
 	boolean checkRepositoryConnected(PluginTool tool) {
 		RepositoryAdapter repository = tool.getProject().getRepository();
-		if (repository != null) {
-			if (!repository.verifyConnection()) {
-				if (OptionDialog.showYesNoDialog(tool.getToolFrame(), "Lost Connection to Server",
-					"The connection to the Ghidra Server has been lost.\n" +
-						"Do you want to reconnect now?") == OptionDialog.OPTION_ONE) {
-					try {
-						repository.connect();
-						return true;
-					}
-					catch (NotConnectedException e) {
-						// message displayed by repository server adapter
-						return false;
-					}
-					catch (IOException e) {
-						ClientUtil.handleException(repository, e, "Repository Connection",
-							tool.getToolFrame());
-						return false;
-					}
+		if ((repository != null) && !repository.verifyConnection()) {
+			if (OptionDialog.showYesNoDialog(tool.getToolFrame(), "Lost Connection to Server",
+				"The connection to the Ghidra Server has been lost.\n" +
+					"Do you want to reconnect now?") == OptionDialog.OPTION_ONE) {
+				try {
+					repository.connect();
+					return true;
 				}
-
-				return false;
+				catch (NotConnectedException e) {
+				}
+				catch (IOException e) {
+					ClientUtil.handleException(repository, e, "Repository Connection",
+						tool.getToolFrame());
+				}
 			}
+
+			return false;
 		}
 		return true;
 	}
@@ -378,8 +401,7 @@ public class FrontEndTool extends PluginTool implements OptionsChangeListener {
 
 		ArrayList<DomainFile> changedList = new ArrayList<>();
 		ArrayList<DomainFile> list = new ArrayList<>();
-		for (int i = 0; i < fileList.size(); i++) {
-			DomainFile df = fileList.get(i);
+		for (DomainFile df : fileList) {
 			if (df != null && df.canCheckin()) {
 				if (!canCloseDomainFile(df)) {
 					continue;
@@ -447,8 +469,7 @@ public class FrontEndTool extends PluginTool implements OptionsChangeListener {
 
 		ArrayList<DomainFile> list = new ArrayList<>();
 		ArrayList<DomainFile> changedList = new ArrayList<>();
-		for (int i = 0; i < fileList.size(); i++) {
-			DomainFile df = fileList.get(i);
+		for (DomainFile df : fileList) {
 			if (df != null && df.canMerge()) {
 				if (!canCloseDomainFile(df)) {
 					continue;
@@ -566,9 +587,8 @@ public class FrontEndTool extends PluginTool implements OptionsChangeListener {
 
 	@Override
 	public ToolTemplate getToolTemplate(boolean includeConfigState) {
-		ToolTemplate toolTemplate = new FrontEndToolTemplate(getIconURL(),
+		return new FrontEndToolTemplate(getIconURL(),
 			saveToXml(includeConfigState), getSupportedDataTypes());
-		return toolTemplate;
 	}
 
 	//////////////////////////////////////////////////////////////////////
@@ -610,8 +630,8 @@ public class FrontEndTool extends PluginTool implements OptionsChangeListener {
 
 			PluginDescription pd = PluginDescription.getPluginDescription(pluginClass);
 			String category = pd.getCategory();
-			boolean isBadCategory = category.equals(GenericPluginCategoryNames.EXAMPLES) ||
-				category.equals(GenericPluginCategoryNames.TESTING);
+			boolean isBadCategory = GenericPluginCategoryNames.EXAMPLES.equals(category) ||
+				GenericPluginCategoryNames.TESTING.equals(category);
 			if (pd.getStatus() == PluginStatus.RELEASED && !isBadCategory) {
 				classNames.add(pluginClass.getName());
 			}

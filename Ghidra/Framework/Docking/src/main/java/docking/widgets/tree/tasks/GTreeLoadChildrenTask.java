@@ -15,7 +15,9 @@
  */
 package docking.widgets.tree.tasks;
 
-import docking.widgets.tree.*;
+import docking.widgets.tree.GTree;
+import docking.widgets.tree.GTreeSlowLoadingNode;
+import docking.widgets.tree.GTreeTask;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
@@ -39,12 +41,7 @@ public class GTreeLoadChildrenTask extends GTreeTask {
 		}
 		catch (CancelledException e) {
 			if (!tree.isDisposed()) {
-				runOnSwingThread(new Runnable() {
-					@Override
-					public void run() {
-						tree.collapseAll(tree.getViewRoot());
-					}
-				});
+				runOnSwingThread(() -> tree.collapseAll(tree.getViewRoot()));
 			}
 			node.unloadChildren();
 		}

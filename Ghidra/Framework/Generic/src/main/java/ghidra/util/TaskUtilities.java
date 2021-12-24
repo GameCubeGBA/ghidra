@@ -56,11 +56,7 @@ public class TaskUtilities {
 	 * @param monitor the task monitor for the given task
 	 */
 	public static void addTrackedTask(Task task, TaskMonitor monitor) {
-		if (!SystemUtilities.isInTestingMode()) {
-			return;
-		}
-
-		if (runningTasks.containsKey(task)) {
+		if (!SystemUtilities.isInTestingMode() || runningTasks.containsKey(task)) {
 			return;
 		}
 

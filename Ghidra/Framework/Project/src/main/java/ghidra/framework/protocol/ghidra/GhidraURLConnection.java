@@ -15,10 +15,17 @@
  */
 package ghidra.framework.protocol.ghidra;
 
-import java.io.*;
-import java.net.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.UnknownServiceException;
 
-import ghidra.framework.client.*;
+import ghidra.framework.client.NotConnectedException;
+import ghidra.framework.client.RepositoryAdapter;
+import ghidra.framework.client.RepositoryServerAdapter;
 import ghidra.framework.data.ProjectFileManager;
 import ghidra.framework.model.ProjectData;
 import ghidra.framework.model.ProjectLocator;

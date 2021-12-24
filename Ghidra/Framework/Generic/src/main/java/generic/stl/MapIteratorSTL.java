@@ -33,12 +33,14 @@ public class MapIteratorSTL<K, V> implements IteratorSTL<Pair<K, V>> {
 		this.node = node;
 	}
 	
+	@Override
 	public void assign( IteratorSTL<Pair<K,V>> otherIterator ) {
 		MapIteratorSTL<K,V> other = (MapIteratorSTL<K, V>)otherIterator;
 		this.tree = other.tree;
 		this.node = other.node;
 		this.erased = other.erased;
 	}
+	@Override
 	public IteratorSTL<Pair<K,V>> decrement() {
 		if (node == null && tree.isEmpty()) {
 			throw new IndexOutOfBoundsException();
@@ -53,6 +55,7 @@ public class MapIteratorSTL<K, V> implements IteratorSTL<Pair<K, V>> {
 		return this;
 	}
 
+	@Override
 	public Pair<K, V> get() {
 		if (erased) {
 			throw new IndexOutOfBoundsException("element erased");
@@ -61,9 +64,10 @@ public class MapIteratorSTL<K, V> implements IteratorSTL<Pair<K, V>> {
 		if (node == null) {
 			throw new IndexOutOfBoundsException();
 		}
-		return new Pair<K,V>(node.getKey(), node.getValue());
+		return new Pair<>(node.getKey(), node.getValue());
 	}
 
+	@Override
 	public IteratorSTL<Pair<K,V>> increment() {
 		if (!erased && node == null) {
 			throw new IndexOutOfBoundsException();
@@ -75,10 +79,12 @@ public class MapIteratorSTL<K, V> implements IteratorSTL<Pair<K, V>> {
 		return this;
 	}
 
+	@Override
 	public void insert(Pair<K, V> value) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public boolean isBegin() {
 		if (erased) {
 			throw new RuntimeException("Iterater in invalid state");
@@ -86,6 +92,7 @@ public class MapIteratorSTL<K, V> implements IteratorSTL<Pair<K, V>> {
 		return node == tree.getFirst();
 	}
 
+	@Override
 	public boolean isEnd() {
 		if (erased) {
 			throw new RuntimeException("Iterater in invalid state");
@@ -93,16 +100,20 @@ public class MapIteratorSTL<K, V> implements IteratorSTL<Pair<K, V>> {
 		return node == null;
 	}
 
+	@Override
 	public void set(Pair<K, V> value) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public IteratorSTL<Pair<K, V>> copy() {
-		return new MapIteratorSTL<K, V>(tree, node);
+		return new MapIteratorSTL<>(tree, node);
 	}
+	@Override
 	public IteratorSTL<Pair<K, V>> decrement( int n ) {
 		throw new UnsupportedOperationException();
 	}
+	@Override
 	public IteratorSTL<Pair<K, V>> increment( int n ) {
 		throw new UnsupportedOperationException();
 	}
@@ -113,10 +124,7 @@ public class MapIteratorSTL<K, V> implements IteratorSTL<Pair<K, V>> {
 		if (obj == this) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (obj.getClass() != getClass() ) {
+		if ((obj == null) || (obj.getClass() != getClass()) ) {
 			return false;
 		}
 		MapIteratorSTL<K, V> other = (MapIteratorSTL<K, V>) obj;

@@ -16,7 +16,7 @@
  */
 package ghidra.pcodeCPort.slghsymbol;
 
-import ghidra.pcodeCPort.space.*;
+import ghidra.pcodeCPort.space.AddrSpace;
 import ghidra.sleigh.grammar.Location;
 
 public class SpaceSymbol extends SleighSymbol {

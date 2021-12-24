@@ -15,7 +15,14 @@
  */
 package ghidra.util.graph;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Set;
+import java.util.Stack;
 
 /** 
  * Provides a depth first search service to directed graphs. 
@@ -59,15 +66,15 @@ public class DepthFirstSearch
           return;
       }
       this.graph = graph;
-      seedsUsed = new ArrayList<Vertex>();
+      seedsUsed = new ArrayList<>();
       unseen = graph.vertices().toSet();
-      finished = new HashSet<Vertex>( graph.numVertices() );
-      pending = new Stack<KeyedObject>();        //MyStack() for debugging
+      finished = new HashSet<>( graph.numVertices() );
+      pending = new Stack<>();        //MyStack() for debugging
 
 
-      finishListInReverseOrder = new LinkedList<Vertex>();
-      backEdges = new ArrayList<Edge>( graph.numEdges()/5 );
-      treeEdges = new ArrayList<Edge>( graph.numEdges()/5 );
+      finishListInReverseOrder = new LinkedList<>();
+      backEdges = new ArrayList<>( graph.numEdges()/5 );
+      treeEdges = new ArrayList<>( graph.numEdges()/5 );
       Vertex v;
       Edge e;
       Set<Edge> edges = null;
@@ -81,9 +88,8 @@ public class DepthFirstSearch
     {
       do
       {
-        for( int i=0; i< seeds.length; i++ )
-        {
-          v = seeds[i];
+        for (Vertex seed : seeds) {
+          v = seed;
           if( isUnseen( v )  )
           {
               seedsUsed.add( v );
@@ -118,26 +124,21 @@ public class DepthFirstSearch
                           pending.push( v );
                           treeEdges.add( e );
                           unseen.remove( v );
-                      }
-                      else if( isCompleted( v ) )
-                      {
-                          if( pending.peek() instanceof Vertex )
+                      } else {
+						if( isCompleted( v ) )
+						  {
+						  }
+						  else //it is pending
+						  {
+						      backEdges.add( e );
+						  }
+						if( pending.peek() instanceof Vertex )
                           {
                              v = (Vertex)pending.pop();
                              finished.add( v );
                              finishListInReverseOrder.addFirst( v );
                           }
-                      }
-                      else //it is pending
-                      {
-                          backEdges.add( e );
-                          if( pending.peek() instanceof Vertex )
-                          {
-                              v = (Vertex)pending.pop();
-                              finished.add( v );
-                              finishListInReverseOrder.addFirst( v );
-                          }
-                      }
+					}
 
                   }//peek at top of stack
               } //while stack is not empty
@@ -160,9 +161,8 @@ public class DepthFirstSearch
     {
       do
       {
-        for( int i=0; i< seeds.length; i++ )
-        {
-          v = seeds[i];
+        for (Vertex seed : seeds) {
+          v = seed;
           if( isUnseen( v )  )
           {
               seedsUsed.add( v );
@@ -197,26 +197,21 @@ public class DepthFirstSearch
                           pending.push( v );
                           treeEdges.add( e );
                           unseen.remove( v );
-                      }
-                      else if( isCompleted( v ) )
-                      {
-                          if( pending.peek() instanceof Vertex )
+                      } else {
+						if( isCompleted( v ) )
+						  {
+						  }
+						  else //it is pending
+						  {
+						      backEdges.add( e );
+						  }
+						if( pending.peek() instanceof Vertex )
                           {
                              v = (Vertex)pending.pop();
                              finished.add( v );
                              finishListInReverseOrder.addFirst( v );
                           }
-                      }
-                      else //it is pending
-                      {
-                          backEdges.add( e );
-                          if( pending.peek() instanceof Vertex )
-                          {
-                              v = (Vertex)pending.pop();
-                              finished.add( v );
-                              finishListInReverseOrder.addFirst( v );
-                          }
-                      }
+					}
 
                   }//peek at top of stack
               } //while stack is not empty
@@ -240,9 +235,8 @@ public class DepthFirstSearch
     {
       do
       {
-        for( int i=0; i< seeds.length; i++ )
-        {
-          v = seeds[i];
+        for (Vertex seed : seeds) {
+          v = seed;
           if( isUnseen( v )  )
           {
               seedsUsed.add( v );
@@ -287,26 +281,21 @@ public class DepthFirstSearch
                           pending.push( v );
                           treeEdges.add( e );
                           unseen.remove( v );
-                      }
-                      else if( isCompleted( v ) )
-                      {
-                          if( pending.peek() instanceof Vertex )
+                      } else {
+						if( isCompleted( v ) )
+						  {
+						  }
+						  else //it is pending
+						  {
+						      backEdges.add( e );
+						  }
+						if( pending.peek() instanceof Vertex )
                           {
                              v = (Vertex)pending.pop();
                              finished.add( v );
                              finishListInReverseOrder.addFirst( v );
                           }
-                      }
-                      else //it is pending
-                      {
-                          backEdges.add( e );
-                          if( pending.peek() instanceof Vertex )
-                          {
-                              v = (Vertex)pending.pop();
-                              finished.add( v );
-                              finishListInReverseOrder.addFirst( v );
-                          }
-                      }
+					}
 
                   }//peek at top of stack
               } //while stack is not empty

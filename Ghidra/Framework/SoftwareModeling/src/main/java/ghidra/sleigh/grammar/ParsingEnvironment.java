@@ -17,7 +17,17 @@ package ghidra.sleigh.grammar;
 
 import java.util.HashSet;
 
-import org.antlr.runtime.*;
+import org.antlr.runtime.EarlyExitException;
+import org.antlr.runtime.FailedPredicateException;
+import org.antlr.runtime.MismatchedNotSetException;
+import org.antlr.runtime.MismatchedSetException;
+import org.antlr.runtime.MismatchedTokenException;
+import org.antlr.runtime.MismatchedTreeNodeException;
+import org.antlr.runtime.MissingTokenException;
+import org.antlr.runtime.NoViableAltException;
+import org.antlr.runtime.RecognitionException;
+import org.antlr.runtime.Token;
+import org.antlr.runtime.UnwantedTokenException;
 import org.antlr.runtime.tree.CommonErrorNode;
 
 public class ParsingEnvironment {
@@ -110,7 +120,7 @@ public class ParsingEnvironment {
 		return getErrorMessage(e, tokenNames, writer);
 	}
 
-	static final String NEWLINE = System.getProperty("line.separator");
+	static final String NEWLINE = System.lineSeparator();
 
 	public String getErrorMessage(RecognitionException e, String[] tokenNames,
 			LineArrayListWriter mywriter) {
@@ -130,11 +140,8 @@ public class ParsingEnvironment {
 			String tokenName = "<unknown>";
 			if (ute.expecting == Token.EOF) {
 				tokenName = "EOF";
-			}
-			else {
-				if (tokenNames != null) {
-					tokenName = tokenNames[ute.expecting];
-				}
+			} else if (tokenNames != null) {
+				tokenName = tokenNames[ute.expecting];
 			}
 			msg = "extraneous input " + getTokenErrorDisplay(ute.getUnexpectedToken()) +
 				" expecting " + tokenName;
@@ -168,11 +175,8 @@ public class ParsingEnvironment {
 			String tokenName = "<unknown>";
 			if (mtne.expecting == Token.EOF) {
 				tokenName = "EOF";
-			}
-			else {
-				if (tokenNames != null) {
-					tokenName = tokenNames[mtne.expecting];
-				}
+			} else if (tokenNames != null) {
+				tokenName = tokenNames[mtne.expecting];
 			}
 			msg = "mismatched tree node: " + mtne.node + " expecting " + tokenName;
 		}
@@ -180,15 +184,12 @@ public class ParsingEnvironment {
 			NoViableAltException nvae = (NoViableAltException) e;
 			if (e.token == null) {
 				msg = "unexpected text";
+			} else if (nvae.c == -1) {
+				msg = "no viable alternative on EOF (missing semi-colon after this?)";
 			}
 			else {
-				if (nvae.c == -1) {
-					msg = "no viable alternative on EOF (missing semi-colon after this?)";
-				}
-				else {
-					msg = "no viable alternative on " + tokenNames[nvae.c] + ": " +
-						getTokenErrorDisplay(e.token);
-				}
+				msg = "no viable alternative on " + tokenNames[nvae.c] + ": " +
+					getTokenErrorDisplay(e.token);
 			}
 		}
 		else if (e instanceof EarlyExitException) {
@@ -240,9 +241,9 @@ public class ParsingEnvironment {
 				s = "<" + t.getType() + ">";
 			}
 		}
-		s = s.replaceAll("\n", "\\\\n");
-		s = s.replaceAll("\r", "\\\\r");
-		s = s.replaceAll("\t", "\\\\t");
+		s = s.replace("\n", "\\n");
+		s = s.replace("\r", "\\r");
+		s = s.replace("\t", "\\t");
 		return "'" + s + "'";
 	}
 

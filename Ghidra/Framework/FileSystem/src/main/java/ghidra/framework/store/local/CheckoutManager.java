@@ -15,14 +15,30 @@
  */
 package ghidra.framework.store.local;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InvalidObjectException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
-import org.jdom.*;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.XMLOutputter;
 
-import ghidra.framework.store.*;
+import ghidra.framework.store.CheckoutType;
+import ghidra.framework.store.ExclusiveCheckoutException;
+import ghidra.framework.store.ItemCheckoutStatus;
 import ghidra.util.xml.GenericXMLOutputter;
 import ghidra.util.xml.XmlUtilities;
 
@@ -326,13 +342,10 @@ class CheckoutManager {
 		FileOutputStream ostream = new FileOutputStream(tmpFile);
 		BufferedOutputStream bos = new BufferedOutputStream(ostream);
 
-		try {
+		try (bos) {
 			Document doc = new Document(root);
 			XMLOutputter xmlout = new GenericXMLOutputter();
 			xmlout.output(doc, bos);
-		}
-		finally {
-			bos.close();
 		}
 
 		// Rename files

@@ -26,12 +26,7 @@ import docking.widgets.fieldpanel.FieldPanel;
  * indexes to new indexes.
  */
 public interface IndexMapper {
-	public static final IndexMapper IDENTITY_MAPPER = new IndexMapper() {
-		@Override
-		public BigInteger map(BigInteger value) {
-			return value;
-		}
-	};
+	IndexMapper IDENTITY_MAPPER = value -> value;
 
 	/**
 	 * Maps an index from one address mapping to another. This method will return
@@ -39,5 +34,5 @@ public interface IndexMapper {
 	 * @param value the index value to map from an old index map to a new index map
 	 * @return the mapped index
 	 */
-	public BigInteger map(BigInteger value);
+	BigInteger map(BigInteger value);
 }

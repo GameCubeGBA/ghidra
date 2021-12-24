@@ -20,13 +20,19 @@ import java.io.IOException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-import db.*;
+import db.DBConstants;
+import db.DBHandle;
+import db.Field;
 import db.buffers.BufferFile;
 import db.buffers.ManagedBufferFile;
-import ghidra.framework.data.*;
+import ghidra.framework.data.DBContentHandler;
+import ghidra.framework.data.DomainObjectAdapter;
+import ghidra.framework.data.DomainObjectMergeManager;
 import ghidra.framework.model.ChangeSet;
 import ghidra.framework.model.DomainObject;
-import ghidra.framework.store.*;
+import ghidra.framework.store.DatabaseItem;
+import ghidra.framework.store.FileSystem;
+import ghidra.framework.store.FolderItem;
 import ghidra.util.InvalidNameException;
 import ghidra.util.Msg;
 import ghidra.util.exception.CancelledException;
@@ -62,7 +68,7 @@ public class ProgramContentHandler extends DBContentHandler {
 			int minChangeVersion, TaskMonitor monitor)
 			throws IOException, VersionException, CancelledException {
 		String contentType = item.getContentType();
-		if (contentType != null && !contentType.equals(PROGRAM_CONTENT_TYPE)) {
+		if (contentType != null && !PROGRAM_CONTENT_TYPE.equals(contentType)) {
 			throw new IOException("Unsupported content type: " + contentType);
 		}
 		DatabaseItem dbItem = (DatabaseItem) item;
@@ -82,13 +88,7 @@ public class ProgramContentHandler extends DBContentHandler {
 		catch (Field.UnsupportedFieldException e) {
 			throw new VersionException(false);
 		}
-		catch (VersionException e) {
-			throw e;
-		}
-		catch (IOException e) {
-			throw e;
-		}
-		catch (CancelledException e) {
+		catch (VersionException | IOException | CancelledException e) {
 			throw e;
 		}
 		catch (Throwable t) {
@@ -120,7 +120,7 @@ public class ProgramContentHandler extends DBContentHandler {
 			throws IOException, VersionException, CancelledException {
 
 		String contentType = item.getContentType();
-		if (contentType != null && !contentType.equals(PROGRAM_CONTENT_TYPE)) {
+		if (contentType != null && !PROGRAM_CONTENT_TYPE.equals(contentType)) {
 			throw new IOException("Unsupported content type: " + contentType);
 		}
 		DatabaseItem dbItem = (DatabaseItem) item;
@@ -141,13 +141,7 @@ public class ProgramContentHandler extends DBContentHandler {
 		catch (Field.UnsupportedFieldException e) {
 			throw new VersionException(false);
 		}
-		catch (VersionException e) {
-			throw e;
-		}
-		catch (IOException e) {
-			throw e;
-		}
-		catch (CancelledException e) {
+		catch (VersionException | IOException | CancelledException e) {
 			throw e;
 		}
 		catch (Throwable t) {
@@ -180,7 +174,7 @@ public class ProgramContentHandler extends DBContentHandler {
 			throws IOException, VersionException, CancelledException {
 
 		String contentType = item.getContentType();
-		if (contentType != null && !contentType.equals(PROGRAM_CONTENT_TYPE)) {
+		if (contentType != null && !PROGRAM_CONTENT_TYPE.equals(contentType)) {
 			throw new IOException("Unsupported content type: " + contentType);
 		}
 		DatabaseItem dbItem = (DatabaseItem) item;
@@ -207,13 +201,7 @@ public class ProgramContentHandler extends DBContentHandler {
 		catch (Field.UnsupportedFieldException e) {
 			throw new VersionException(false);
 		}
-		catch (VersionException e) {
-			throw e;
-		}
-		catch (IOException e) {
-			throw e;
-		}
-		catch (CancelledException e) {
+		catch (VersionException | IOException | CancelledException e) {
 			throw e;
 		}
 		catch (Throwable t) {
@@ -297,7 +285,7 @@ public class ProgramContentHandler extends DBContentHandler {
 	public ChangeSet getChangeSet(FolderItem item, int fromVer, int toVer)
 			throws VersionException, IOException {
 		String contentType = item.getContentType();
-		if (contentType != null && !contentType.equals(PROGRAM_CONTENT_TYPE)) {
+		if (contentType != null && !PROGRAM_CONTENT_TYPE.equals(contentType)) {
 			throw new IOException("Unsupported content type: " + contentType);
 		}
 		DatabaseItem dbItem = (DatabaseItem) item;
@@ -311,10 +299,7 @@ public class ProgramContentHandler extends DBContentHandler {
 			program = new ProgramDB(dbh, openMode, null, this);
 			return getProgramChangeSet(program, bf);
 		}
-		catch (VersionException e) {
-			throw e;
-		}
-		catch (IOException e) {
+		catch (VersionException | IOException e) {
 			throw e;
 		}
 		catch (Throwable t) {

@@ -29,11 +29,11 @@ public interface ExternalLocationIterator extends Iterator<ExternalLocation> {
 	/**
 	 * Returns true if another external location is available with the next() method.
 	 */
-	public boolean hasNext();
+	@Override boolean hasNext();
 	
 	/**
 	 * Returns the next external location
 	 */
-	public ExternalLocation next();
+	@Override ExternalLocation next();
 	
 }

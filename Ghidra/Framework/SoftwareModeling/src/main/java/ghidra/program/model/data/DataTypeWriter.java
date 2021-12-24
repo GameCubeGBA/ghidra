@@ -17,7 +17,13 @@ package ghidra.program.model.data;
 
 import java.io.IOException;
 import java.io.Writer;
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -39,7 +45,7 @@ public class DataTypeWriter {
 	private static String[] INTEGRAL_MODIFIERS =
 		{ "signed", "unsigned", "const", "static", "volatile", "mutable", };
 
-	private static String EOL = System.getProperty("line.separator");
+	private static String EOL = System.lineSeparator();
 
 	private Set<DataType> resolved = new HashSet<>();
 	private Map<String, DataType> resolvedTypeMap = new HashMap<>();
@@ -222,10 +228,7 @@ public class DataTypeWriter {
 	 */
 	private void doWrite(DataType dt, TaskMonitor monitor, boolean throwExceptionOnInvalidType)
 			throws IOException, CancelledException {
-		if (dt == null) {
-			return;
-		}
-		if (dt instanceof FunctionDefinition) {
+		if ((dt == null) || (dt instanceof FunctionDefinition)) {
 			return;
 		}
 		if (dt instanceof FactoryDataType) {
@@ -256,11 +259,9 @@ public class DataTypeWriter {
 			}
 			if (dt instanceof TypeDef) {
 				DataType baseType = ((TypeDef) dt).getBaseDataType();
-				if (resolvedType instanceof Composite || resolvedType instanceof Enum) {
-					if (baseType.isEquivalent(resolvedType)) {
-						// auto-typedef already generated for Composite or Enum
-						return;
-					}
+				if ((resolvedType instanceof Composite || resolvedType instanceof Enum) && baseType.isEquivalent(resolvedType)) {
+					// auto-typedef already generated for Composite or Enum
+					return;
 				}
 			}
 			writer.write(EOL);

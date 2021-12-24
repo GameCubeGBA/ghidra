@@ -22,10 +22,17 @@ import java.util.List;
 import org.jdom.Element;
 
 import generic.stl.VectorSTL;
-import ghidra.pcodeCPort.address.*;
+import ghidra.pcodeCPort.address.Address;
+import ghidra.pcodeCPort.address.Range;
+import ghidra.pcodeCPort.address.RangeList;
 import ghidra.pcodeCPort.error.LowlevelError;
 import ghidra.pcodeCPort.pcoderaw.VarnodeData;
-import ghidra.pcodeCPort.space.*;
+import ghidra.pcodeCPort.space.AddrSpace;
+import ghidra.pcodeCPort.space.ConstantSpace;
+import ghidra.pcodeCPort.space.OtherSpace;
+import ghidra.pcodeCPort.space.SpacebaseSpace;
+import ghidra.pcodeCPort.space.UniqueSpace;
+import ghidra.pcodeCPort.space.spacetype;
 import ghidra.pcodeCPort.utils.AddrSpaceToIdSymmetryMap;
 import ghidra.pcodeCPort.xml.DocumentStorage;
 import ghidra.program.model.lang.BasicCompilerSpec;
@@ -350,7 +357,7 @@ public abstract class Translate implements BasicSpaceProvider {
 		boolean duplicatedefine = false;
 		switch (spc.getType()) {
 			case IPTR_CONSTANT:
-				if (!spc.getName().equals("const")) {
+				if (!"const".equals(spc.getName())) {
 					nametype_mismatch = true;
 				}
 				if (baselist.size() != 0) {
@@ -359,7 +366,7 @@ public abstract class Translate implements BasicSpaceProvider {
 				constantspace = spc;
 				break;
 			case IPTR_INTERNAL:
-				if (!spc.getName().equals("unique")) {
+				if (!"unique".equals(spc.getName())) {
 					nametype_mismatch = true;
 				}
 				if (uniqspace != null) {
@@ -368,7 +375,7 @@ public abstract class Translate implements BasicSpaceProvider {
 				uniqspace = spc;
 				break;
 			case IPTR_FSPEC:
-				if (!spc.getName().equals("fspec")) {
+				if (!"fspec".equals(spc.getName())) {
 					nametype_mismatch = true;
 				}
 				if (fspecspace != null) {
@@ -377,7 +384,7 @@ public abstract class Translate implements BasicSpaceProvider {
 				fspecspace = spc;
 				break;
 			case IPTR_IOP:
-				if (!spc.getName().equals("iop")) {
+				if (!"iop".equals(spc.getName())) {
 					nametype_mismatch = true;
 				}
 				if (iopspace != null) {
@@ -386,7 +393,7 @@ public abstract class Translate implements BasicSpaceProvider {
 				iopspace = spc;
 				break;
 			case IPTR_SPACEBASE:
-				if (spc.getName().equals("stack")) {
+				if ("stack".equals(spc.getName())) {
 					if (stackspace != null) {
 						duplicatedefine = true;
 					}
@@ -396,11 +403,9 @@ public abstract class Translate implements BasicSpaceProvider {
 				}
 				// fallthru
 			case IPTR_PROCESSOR:
-				if (spc.isOtherSpace()) {
-					if (spc.getIndex() != BasicCompilerSpec.OTHER_SPACE_INDEX) {
-						throw new LowlevelError("OTHER space must be assigned index 1");
-					}
-				}
+			if (spc.isOtherSpace() && (spc.getIndex() != BasicCompilerSpec.OTHER_SPACE_INDEX)) {
+				throw new LowlevelError("OTHER space must be assigned index 1");
+			}
 				for (AddrSpace space : baselist) {
 					if (space.getName().equals(spc.getName())) {
 						duplicatedefine = true;

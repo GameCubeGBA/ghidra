@@ -16,13 +16,24 @@
 package help.validator.location;
 
 import java.io.IOException;
-import java.nio.file.*;
-import java.util.*;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.help.HelpSet;
 
 import ghidra.util.exception.AssertException;
-import help.validator.model.*;
+import help.validator.model.AnchorDefinition;
+import help.validator.model.GhidraTOCFile;
+import help.validator.model.HREF;
+import help.validator.model.HelpFile;
+import help.validator.model.HelpTopic;
+import help.validator.model.IMG;
 
 public abstract class HelpModuleLocation {
 
@@ -80,8 +91,7 @@ public abstract class HelpModuleLocation {
 		Path srcMainHelp = helpDir.getParent();
 		Path srcMain = srcMainHelp.getParent();
 		Path src = srcMain.getParent();
-		Path module = src.getParent();
-		return module;
+		return src.getParent();
 	}
 
 	public Path getModuleRepoRoot() {
@@ -90,8 +100,7 @@ public abstract class HelpModuleLocation {
 		Path module = getHelpModuleLocation();
 		Path category = module.getParent();
 		Path repo = category.getParent();
-		Path repoRoot = repo.getParent();
-		return repoRoot;
+		return repo.getParent();
 	}
 
 	GhidraTOCFile getSourceTOCFile() {
@@ -191,7 +200,7 @@ public abstract class HelpModuleLocation {
 				if (name == null) {
 					continue; // ignore anchor definitions, as they don't exist in the source code
 				}
-                List<AnchorDefinition> list = map.computeIfAbsent(name, k -> new ArrayList<AnchorDefinition>());
+                List<AnchorDefinition> list = map.computeIfAbsent(name, k -> new ArrayList<>());
                 list.add(anchorDefinition);
 			}
 		}

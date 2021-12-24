@@ -15,12 +15,20 @@
  */
 package ghidra.graph.viewer.vertex;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.beans.PropertyChangeListener;
+import java.util.Objects;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 import docking.GenericHeader;
 import ghidra.graph.viewer.VisualVertex;
@@ -188,10 +196,7 @@ public class DockingVisualVertex extends AbstractVisualVertex {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		return result;
+		return Objects.hash(name);
 	}
 
 	@Override
@@ -199,19 +204,11 @@ public class DockingVisualVertex extends AbstractVisualVertex {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
 		}
 		DockingVisualVertex other = (DockingVisualVertex) obj;
-		if (name == null) {
-			if (other.name != null) {
-				return false;
-			}
-		}
-		else if (!name.equals(other.name)) {
+		if (!Objects.equals(name, other.name)) {
 			return false;
 		}
 		return true;

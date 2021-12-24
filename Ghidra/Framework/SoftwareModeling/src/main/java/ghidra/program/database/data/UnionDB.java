@@ -16,13 +16,29 @@
 package ghidra.program.database.data;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 import db.DBRecord;
 import db.Field;
 import ghidra.docking.settings.Settings;
 import ghidra.program.database.DBObjectCache;
-import ghidra.program.model.data.*;
+import ghidra.program.model.data.BitFieldDataType;
+import ghidra.program.model.data.BitFieldPacking;
+import ghidra.program.model.data.Composite;
+import ghidra.program.model.data.CompositeAlignmentHelper;
+import ghidra.program.model.data.DataOrganizationImpl;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.DataTypeComponent;
+import ghidra.program.model.data.DataTypeDependencyException;
+import ghidra.program.model.data.DataTypeManager;
+import ghidra.program.model.data.Dynamic;
+import ghidra.program.model.data.InvalidDataTypeException;
+import ghidra.program.model.data.Union;
+import ghidra.program.model.data.UnionDataType;
+import ghidra.program.model.data.UnionInternal;
 import ghidra.program.model.mem.MemBuffer;
 import ghidra.util.Msg;
 
@@ -492,22 +508,17 @@ class UnionDB extends CompositeDB implements UnionInternal {
 				changed = true;
 			}
 		}
-		if (changed) {
-			// NOTE: since we do not retain our external alignment we have no way of knowing if
-			// it has changed, so we must assume it has if we are an aligned union
-			// Do not notify parents
-			if (!repack(false, false)) {
-				dataMgr.dataTypeChanged(this, false);
-			}
+		// NOTE: since we do not retain our external alignment we have no way of knowing if
+		// it has changed, so we must assume it has if we are an aligned union
+		// Do not notify parents
+		if (changed && !repack(false, false)) {
+			dataMgr.dataTypeChanged(this, false);
 		}
 	}
 
 	@Override
 	public void dataTypeAlignmentChanged(DataType dt) {
-		if (!isPackingEnabled()) {
-			return;
-		}
-		if (dt instanceof BitFieldDataType) {
+		if (!isPackingEnabled() || (dt instanceof BitFieldDataType)) {
 			return; // unsupported
 		}
 		lock.acquire();
@@ -668,7 +679,7 @@ class UnionDB extends CompositeDB implements UnionInternal {
 				}
 			}
 
-			if (changed & notify) {
+			if (changed && notify) {
 				if (oldLength != unionLength) {
 					notifySizeChanged(isAutoChange);
 				}

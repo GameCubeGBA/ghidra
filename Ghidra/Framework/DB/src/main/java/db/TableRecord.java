@@ -193,10 +193,7 @@ class TableRecord implements Comparable<TableRecord> {
 			return;
 		}
 		Field keyType = tableSchema.getKeyFieldType();
-		if (keyType.isVariableLength()) {
-			return;
-		}
-		if (keyType instanceof LongField || keyType instanceof IndexField ||
+		if (keyType.isVariableLength() || keyType instanceof LongField || keyType instanceof IndexField ||
 			keyType instanceof FixedField) {
 			return;
 		}

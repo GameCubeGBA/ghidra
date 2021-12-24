@@ -15,7 +15,8 @@
  */
 package ghidra.graph.job;
 
-import static util.CollectionUtils.*;
+import static util.CollectionUtils.asSet;
+import static util.CollectionUtils.asStream;
 
 import java.util.Iterator;
 import java.util.Set;
@@ -26,7 +27,9 @@ import com.google.common.collect.Iterators;
 import com.google.common.collect.UnmodifiableIterator;
 
 import ghidra.graph.graphs.FilteringVisualGraph;
-import ghidra.graph.viewer.*;
+import ghidra.graph.viewer.GraphViewer;
+import ghidra.graph.viewer.VisualEdge;
+import ghidra.graph.viewer.VisualVertex;
 
 /**
  * Uses the given filter to fade out vertices that do not pass.  Vertices that pass the filter
@@ -122,8 +125,7 @@ public class FilterVerticesJob<V extends VisualVertex, E extends VisualEdge<V>>
 
 		UnmodifiableIterator<V> nonMatchingIterator =
 			Iterators.filter(filterGraph.getUnfilteredVertices(), v -> !validVertices.contains(v));
-		Set<V> nonMatching = asSet(nonMatchingIterator);
-		return nonMatching;
+		return asSet(nonMatchingIterator);
 	}
 
 	/*

@@ -15,7 +15,10 @@
  */
 package db;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Set;
+import java.util.StringTokenizer;
 
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -440,7 +443,7 @@ public class Schema {
 	 * @param packedNames packed name list produced by the getPackedFieldNames() method.
 	 */
 	private void parseNames(String packedNames) {
-		ArrayList<String> nameList = new ArrayList<String>();
+		ArrayList<String> nameList = new ArrayList<>();
 		StringTokenizer st = new StringTokenizer(packedNames, NAME_SEPARATOR);
 		while (st.hasMoreElements()) {
 			nameList.add(st.nextToken());
@@ -455,7 +458,7 @@ public class Schema {
 	 * @return packed name list.
 	 */
 	String getPackedFieldNames() {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		buf.append(keyName);
 		buf.append(NAME_SEPARATOR);
 		for (String fieldName : fieldNames) {

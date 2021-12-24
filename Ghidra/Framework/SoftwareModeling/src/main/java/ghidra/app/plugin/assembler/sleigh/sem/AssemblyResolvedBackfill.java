@@ -17,7 +17,9 @@ package ghidra.app.plugin.assembler.sleigh.sem;
 
 import java.util.Map;
 
-import ghidra.app.plugin.assembler.sleigh.expr.*;
+import ghidra.app.plugin.assembler.sleigh.expr.MaskedLong;
+import ghidra.app.plugin.assembler.sleigh.expr.NeedsBackfillException;
+import ghidra.app.plugin.assembler.sleigh.expr.RecursiveDescentSolver;
 import ghidra.app.plugin.processors.sleigh.expression.PatternExpression;
 
 /**
@@ -67,9 +69,7 @@ public class AssemblyResolvedBackfill extends AssemblyResolution {
 	 * @return the duplicate
 	 */
 	AssemblyResolvedBackfill copy() {
-		AssemblyResolvedBackfill cp =
-			new AssemblyResolvedBackfill(description, exp, goal, res, inslen, offset);
-		return cp;
+		return new AssemblyResolvedBackfill(description, exp, goal, res, inslen, offset);
 	}
 
 	/**

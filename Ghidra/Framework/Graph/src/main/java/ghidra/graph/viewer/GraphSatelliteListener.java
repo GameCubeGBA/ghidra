@@ -26,5 +26,5 @@ public interface GraphSatelliteListener {
 	 * @param docked true if the satellite is now docked
 	 * @param visible true if the satellite is now visible
 	 */
-	public void satelliteVisibilityChanged(boolean docked, boolean visible);
+	void satelliteVisibilityChanged(boolean docked, boolean visible);
 }

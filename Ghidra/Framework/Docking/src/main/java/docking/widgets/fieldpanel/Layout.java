@@ -50,13 +50,13 @@ public interface Layout {
 	 * Inserts empty space above the layout
 	 * @param size the amount of space to insert above the layout
 	 */
-	public void insertSpaceAbove(int size);
+	void insertSpaceAbove(int size);
 
 	/**
 	 * Inserts empty space below the layout
 	 * @param size the amount of space to insert below the layout
 	 */
-	public void insertSpaceBelow(int size);
+	void insertSpaceBelow(int size);
 
 	/**
 	 * Returns the number of Fields in this Layout.

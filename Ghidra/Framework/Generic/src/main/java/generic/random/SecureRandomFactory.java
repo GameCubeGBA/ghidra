@@ -28,7 +28,7 @@ public class SecureRandomFactory {
 	private static SecureRandom random;
 
 	private static final String[] preferredAlgorithm =
-		new String[] { "NativePRNGNonBlocking", "SHA1PRNG" };
+		{ "NativePRNGNonBlocking", "SHA1PRNG" };
 
 	private static synchronized void initialize() {
 		if (random != null) {

@@ -30,9 +30,9 @@ import ghidra.util.task.TaskMonitor;
  * closed.
  */
 public interface GraphDisplay {
-	public static final int ALIGN_LEFT = 0;  // aligns graph text to the left
-	public static final int ALIGN_CENTER = 1; // aligns graph text to the center
-	public static final int ALIGN_RIGHT = 2; // aligns graph text to the right
+	int ALIGN_LEFT = 0;  // aligns graph text to the left
+	int ALIGN_CENTER = 1; // aligns graph text to the center
+	int ALIGN_RIGHT = 2; // aligns graph text to the right
 
 	/**
 	 * values are color names or rgb in hex '0xFF0000' is red
@@ -86,7 +86,7 @@ public interface GraphDisplay {
 	 * 
 	 * @param listener the listener to be notified
 	 */
-	public void setGraphDisplayListener(GraphDisplayListener listener);
+	void setGraphDisplayListener(GraphDisplayListener listener);
 
 	/**
 	 * Tells the graph display window to focus the vertex with the given id
@@ -99,20 +99,20 @@ public interface GraphDisplay {
 	 * notify the application the graph changed to avoid event cycles. See {@link EventTrigger} for
 	 * more information.
 	 */
-	public void setFocusedVertex(AttributedVertex vertex, EventTrigger eventTrigger);
+	void setFocusedVertex(AttributedVertex vertex, EventTrigger eventTrigger);
 
 	/**
 	 * Returns the graph for this display
 	 * @return the graph for this display
 	 */
-	public AttributedGraph getGraph();
+	AttributedGraph getGraph();
 
 	/**
 	 * Returns the currently focused vertex or null if no vertex is focused
 	 * 
 	 * @return  the currently focused vertex or null if no vertex is focused
 	 */
-	public AttributedVertex getFocusedVertex();
+	AttributedVertex getFocusedVertex();
 
 	/**
 	 * Tells the graph display window to select the vertices with the given ids
@@ -125,19 +125,19 @@ public interface GraphDisplay {
 	 * application the graph changed to avoid event cycles. See {@link EventTrigger} for more
 	 * information.
 	 */
-	public void selectVertices(Set<AttributedVertex> vertexSet, EventTrigger eventTrigger);
+	void selectVertices(Set<AttributedVertex> vertexSet, EventTrigger eventTrigger);
 
 	/**
 	 * Returns a set of vertex ids for all the currently selected vertices
 	 * 
 	 * @return  a set of vertex ids for all the currently selected vertices
 	 */
-	public Set<AttributedVertex> getSelectedVertices();
+	Set<AttributedVertex> getSelectedVertices();
 
 	/**
 	 * Closes this graph display window.
 	 */
-	public void close();
+	void close();
 
 	/**
 	 * Sets the graph to be displayed or consumed by this graph display
@@ -149,7 +149,8 @@ public interface GraphDisplay {
 	 * @throws CancelledException thrown if the graphing operation was cancelled
 	 * @deprecated You should now use the form that takes in a {@link GraphDisplayOptions}
 	 */
-	public default void setGraph(AttributedGraph graph, String title, boolean append,
+	@Deprecated
+	default void setGraph(AttributedGraph graph, String title, boolean append,
 			TaskMonitor monitor) throws CancelledException {
 		setGraph(graph, new GraphDisplayOptions(graph.getGraphType()), title, append, monitor);
 	}
@@ -164,13 +165,13 @@ public interface GraphDisplay {
 	 * @param append if true, append the new graph to any existing graph
 	 * @throws CancelledException thrown if the graphing operation was cancelled
 	 */
-	public void setGraph(AttributedGraph graph, GraphDisplayOptions options, String title,
+	void setGraph(AttributedGraph graph, GraphDisplayOptions options, String title,
 			boolean append, TaskMonitor monitor) throws CancelledException;
 
 	/**
 	 * Clears all graph vertices and edges from this graph display
 	 */
-	public void clear();
+	void clear();
 
 	/**
 	 * Updates a vertex to a new name
@@ -178,14 +179,14 @@ public interface GraphDisplay {
 	 * @param vertex the vertex to rename
 	 * @param newName the new name for the vertex
 	 */
-	public void updateVertexName(AttributedVertex vertex, String newName);
+	void updateVertexName(AttributedVertex vertex, String newName);
 
 	/**
 	 * Returns the title of the current graph
 	 * 
 	 * @return the title of the current graph
 	 */
-	public String getGraphTitle();
+	String getGraphTitle();
 
 	/**
 	 * Adds the action to the graph display. Not all GraphDisplays support adding custom
@@ -193,5 +194,5 @@ public interface GraphDisplay {
 	 * 
 	 * @param action the action to add
 	 */
-	public void addAction(DockingActionIf action);
+	void addAction(DockingActionIf action);
 }

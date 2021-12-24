@@ -28,5 +28,5 @@ public interface SelectionManagerListener {
 	 * @param preRestore true if the {@link SelectionManager} is about to restore selections; 
 	 *                   false when the {@link SelectionManager} is finished restoring selections.
 	 */
-	public void restoringSelection(boolean preRestore);
+	void restoringSelection(boolean preRestore);
 }

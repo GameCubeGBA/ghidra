@@ -15,7 +15,12 @@
  */
 package docking.widgets.table.threaded;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Objects;
 import java.util.function.BiFunction;
 
 import docking.widgets.table.TableFilter;
@@ -264,8 +269,7 @@ public class TableData<ROW_OBJECT> implements Iterable<ROW_OBJECT> {
 			return null;
 		}
 
-		TableData<ROW_OBJECT> parent = source.getLowestLevelSourceDataForFilter(filter);
-		return parent;
+		return source.getLowestLevelSourceDataForFilter(filter);
 	}
 
 	/**
@@ -278,16 +282,11 @@ public class TableData<ROW_OBJECT> implements Iterable<ROW_OBJECT> {
 	 */
 	private boolean hasParentFilterOf(TableFilter<ROW_OBJECT> filter) {
 
-		if (tableFilter == null) {
-			return false; // no filter--can't be a sub-filter
-		}
-
-		if (filter == null) {
+		if ((tableFilter == null) || (filter == null)) {
 			return false; // no previous filter--can't be a sub-filter
 		}
 
-		boolean isSubFilter = filter.isSubFilterOf(tableFilter);
-		return isSubFilter;
+		return filter.isSubFilterOf(tableFilter);
 	}
 
 	/**

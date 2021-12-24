@@ -16,9 +16,13 @@
  */
 package ghidra.util.prop;
 
-import ghidra.util.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
-import java.io.*;
+import ghidra.util.Msg;
+import ghidra.util.ObjectStorageStreamAdapter;
+import ghidra.util.Saveable;
 
 /**
  * Handles general storage and retrieval of saveable objects indexed by long

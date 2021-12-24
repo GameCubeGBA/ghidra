@@ -16,17 +16,16 @@
  */
 package ghidra.program.database.symbol;
 
-import ghidra.program.database.map.AddressMap;
-import ghidra.program.database.util.EmptyRecordIterator;
-import ghidra.program.model.address.Address;
-import ghidra.util.exception.CancelledException;
-import ghidra.util.task.TaskMonitor;
-
 import java.io.IOException;
 import java.util.Set;
 
 import db.DBHandle;
 import db.RecordIterator;
+import ghidra.program.database.map.AddressMap;
+import ghidra.program.database.util.EmptyRecordIterator;
+import ghidra.program.model.address.Address;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.task.TaskMonitor;
 
 /**
  * Adapter needed when a Program is being opened read only and the label

@@ -18,10 +18,21 @@ package docking.widgets.table;
 import java.awt.Rectangle;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
-import javax.swing.*;
-import javax.swing.event.*;
+import javax.swing.DefaultListSelectionModel;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 
 import org.apache.commons.collections4.map.LazyMap;
 import org.apache.logging.log4j.LogManager;
@@ -335,8 +346,7 @@ public class RowObjectSelectionManager<T> extends DefaultListSelectionModel
 		}
 
 		List<Integer> rowsList = translateRowObjectsToIndices(lastSelectedObjects, objectRowMap);
-		int[] asInts = rowsList.stream().mapToInt(i -> i).toArray();
-		return asInts;
+		return rowsList.stream().mapToInt(i -> i).toArray();
 	}
 
 	private List<Integer> translateRowObjectsToIndices(List<T> rowObjects,

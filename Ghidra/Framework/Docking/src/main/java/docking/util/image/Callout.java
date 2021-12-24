@@ -15,7 +15,20 @@
  */
 package docking.util.image;
 
-import java.awt.*;
+import java.awt.AWTException;
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GraphicsConfiguration;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Polygon;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
+import java.awt.Robot;
+import java.awt.Transparency;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.RectangularShape;
 import java.awt.image.BufferedImage;
@@ -80,8 +93,7 @@ public class Callout {
 		// Full Callout Shape Bounds
 		//
 		Rectangle fullBounds = cBounds.union(calloutBounds);
-		BufferedImage calloutImage =
-			createCalloutImage(calloutInfo, cLoc, calloutBounds, fullBounds);
+		
 
 //		DropShadow dropShadow = new DropShadow();
 //		Image shadow = dropShadow.createDrowShadow(calloutImage, 40);
@@ -90,7 +102,7 @@ public class Callout {
 		// Create our final image and draw into it the callout image and its shadow
 		//
 
-		return calloutImage;
+		return createCalloutImage(calloutInfo, cLoc, calloutBounds, fullBounds);
 
 //		int width = Math.max(shadow.getWidth(null), calloutImage.getWidth());
 //		int height = Math.max(shadow.getHeight(null), calloutImage.getHeight());

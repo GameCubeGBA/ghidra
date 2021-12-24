@@ -15,12 +15,25 @@
  */
 package docking.widgets.table;
 
-import java.awt.*;
-import java.util.*;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
-import javax.swing.*;
-import javax.swing.table.*;
+import javax.swing.BorderFactory;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
 
 import docking.DialogComponentProvider;
 import ghidra.util.HelpLocation;
@@ -88,7 +101,7 @@ public class SelectColumnsDialog extends DialogComponentProvider {
 		Collections.sort(columnList, new ColumnComparator());
 	}
 
-	private class ColumnComparator implements Comparator<TableColumnWrapper> {
+	private static class ColumnComparator implements Comparator<TableColumnWrapper> {
 		@Override
 		public int compare(TableColumnWrapper wrapper1, TableColumnWrapper wrapper2) {
 			boolean isDefault1 = wrapper1.isDefault();
@@ -190,7 +203,7 @@ public class SelectColumnsDialog extends DialogComponentProvider {
 		}
 	}
 
-	private class TableColumnWrapper {
+	private static class TableColumnWrapper {
 		private final TableColumn column;
 		private final TableModel model;
 
@@ -242,17 +255,18 @@ public class SelectColumnsDialog extends DialogComponentProvider {
 		public Object getValueAt(int row, int column) {
 			TableColumnWrapper tableColumnWrapper = columnList.get(row);
 			TableColumn tableColumn = tableColumnWrapper.getTableColumn();
-			if (column == 0) {
+			switch (column) {
+			case 0:
 				return visibilityMap.get(tableColumn);
-			}
-			else if (column == 1) {
+			case 1:
 				return tableColumn.getHeaderValue();
-			}
-			else if (column == 2) {
+			case 2:
 				if (tableColumnWrapper.isDefault()) {
 					return "Default";
 				}
 				return DISCOVERED_TABLE_COLUMN_NAME;
+			default:
+				break;
 			}
 			return "<<unknown>>";
 		}
@@ -276,21 +290,21 @@ public class SelectColumnsDialog extends DialogComponentProvider {
 				return Boolean.class;
 			}
 			else if (columnIndex == 2) {
-				return String.class;
 			}
 			return String.class;
 		}
 
 		@Override
 		public String getColumnName(int column) {
-			if (column == 0) {
+			switch (column) {
+			case 0:
 				return "Visible";
-			}
-			else if (column == 1) {
+			case 1:
 				return "Column Name";
-			}
-			else if (column == 2) {
+			case 2:
 				return "Is Default?";
+			default:
+				break;
 			}
 			return "<<unknown>>";
 		}

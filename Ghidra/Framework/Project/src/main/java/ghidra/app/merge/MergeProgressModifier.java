@@ -22,14 +22,14 @@ public interface MergeProgressModifier {
 	 * @param progressMessage a message indicating what is currently occurring in this phase.
 	 * Null indicates to use the default message.
 	 */
-	public void updateProgress(final String progressMessage);
+	void updateProgress(final String progressMessage);
 	
 	/**
 	 * Updates the current phase progress area in the default merge panel.
 	 * @param currentProgressPercentage the progress percentage completed for the current phase.
 	 * This should be a value from 0 to 100.
 	 */
-	public void updateProgress(final int currentProgressPercentage);
+	void updateProgress(final int currentProgressPercentage);
 	
 	/**
 	 * Updates the current phase progress area in the default merge panel.
@@ -37,7 +37,7 @@ public interface MergeProgressModifier {
 	 * This should be a value from 0 to 100.
 	 * @param progressMessage a message indicating what is currently occurring in this phase.
 	 */
-	public void updateProgress(final int currentProgressPercentage, final String progressMessage);
+	void updateProgress(final int currentProgressPercentage, final String progressMessage);
 	
 	/**
 	 * The manager (MergeResolver) for a particular merge phase should call this when its phase or sub-phase begins.
@@ -45,7 +45,7 @@ public interface MergeProgressModifier {
 	 * @param mergePhase identifier for the merge phase to change to in progress status.
 	 * @see MergeResolver
 	 */
-	public void setInProgress(String[] mergePhase);
+	void setInProgress(String[] mergePhase);
 	
 	/**
 	 * The manager (MergeResolver) for a particular merge phase should call this when its phase or sub-phase completes.
@@ -53,6 +53,6 @@ public interface MergeProgressModifier {
 	 * @param mergePhase identifier for the merge phase to change to completed status.
 	 * @see MergeResolver
 	 */
-	public void setCompleted(String[] mergePhase);
+	void setCompleted(String[] mergePhase);
 
 }

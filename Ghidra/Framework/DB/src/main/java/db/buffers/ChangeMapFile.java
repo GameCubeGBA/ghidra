@@ -15,14 +15,13 @@
  */
 package db.buffers;
 
-import ghidra.util.exception.AssertException;
-import ghidra.util.exception.CancelledException;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.NoSuchElementException;
 
 import db.ChainedBuffer;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.CancelledException;
 
 /**
  * <code>ChangeMapFile</code> tracks which buffers within a LocalBufferFile 

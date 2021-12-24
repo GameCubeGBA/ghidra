@@ -16,15 +16,15 @@
  */
 package ghidra.framework.task.gui.taskview;
 
-import ghidra.framework.task.GScheduledTask;
-import ghidra.framework.task.GTaskGroup;
-import ghidra.framework.task.gui.GProgressBar;
-
 import java.awt.Color;
 import java.awt.Container;
 
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.interpolation.PropertySetter;
+
+import ghidra.framework.task.GScheduledTask;
+import ghidra.framework.task.GTaskGroup;
+import ghidra.framework.task.gui.GProgressBar;
 
 public abstract class AbstractTaskInfo implements Comparable<AbstractTaskInfo> {
 	private final boolean useAnimation;

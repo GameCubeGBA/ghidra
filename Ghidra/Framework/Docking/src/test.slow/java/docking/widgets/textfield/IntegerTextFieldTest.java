@@ -15,16 +15,22 @@
  */
 package docking.widgets.textfield;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.math.BigInteger;
 import java.util.concurrent.atomic.AtomicIntegerArray;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import docking.test.AbstractDockingTest;
 
@@ -135,7 +141,7 @@ public class IntegerTextFieldTest extends AbstractDockingTest {
 
 	@Test
 	public void testMax() {
-		field.setMaxValue(BigInteger.valueOf(13l));
+		field.setMaxValue(BigInteger.valueOf(13L));
 		triggerText(textField, "12");
 		assertEquals(12, field.getIntValue());
 
@@ -226,7 +232,7 @@ public class IntegerTextFieldTest extends AbstractDockingTest {
 		field.setValue(null);
 		assertEquals("", field.getText());
 		assertEquals(0, field.getIntValue());
-		assertEquals(0l, field.getLongValue());
+		assertEquals(0L, field.getLongValue());
 		assertEquals(null, field.getValue());
 	}
 

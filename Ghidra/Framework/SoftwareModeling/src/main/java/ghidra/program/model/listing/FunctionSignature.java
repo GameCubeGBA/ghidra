@@ -15,7 +15,9 @@
  */
 package ghidra.program.model.listing;
 
-import ghidra.program.model.data.*;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.GenericCallingConvention;
+import ghidra.program.model.data.ParameterDefinition;
 
 /**
  * Interface describing all the things about a function that are portable
@@ -23,52 +25,52 @@ import ghidra.program.model.data.*;
  */
 
 public interface FunctionSignature {
-	public static final String VAR_ARGS_DISPLAY_STRING = "...";
-	public static final String VOID_PARAM_DISPLAY_STRING = "void";
+	String VAR_ARGS_DISPLAY_STRING = "...";
+	String VOID_PARAM_DISPLAY_STRING = "void";
 
 	/**
 	 * Return the name of this function
 	 */
-	public String getName();
+	String getName();
 
 	/**
 	 * Return a string representation of the function signature without the
 	 * calling convention specified.
 	 */
-	public String getPrototypeString();
+	String getPrototypeString();
 
 	/**
 	 * Return a string representation of the function signature
 	 * @param includeCallingConvention if true prototype will include call convention
 	 * declaration if known.
 	 */
-	public String getPrototypeString(boolean includeCallingConvention);
+	String getPrototypeString(boolean includeCallingConvention);
 
 	/**
 	 * Return an array of parameters for the function
 	 */
-	public ParameterDefinition[] getArguments();
+	ParameterDefinition[] getArguments();
 
 	/**
 	 * Return the return data type
 	 */
-	public DataType getReturnType();
+	DataType getReturnType();
 
 	/**
 	 * Return the comment string
 	 */
-	public String getComment();
+	String getComment();
 
 	/**
 	 * Returns true if this function signature has a variable argument list (VarArgs).
 	 */
-	public boolean hasVarArgs();
+	boolean hasVarArgs();
 
 	/**
 	 * Returns the generic calling convention associated with this function definition.
 	 * The "unknown" convention should be returned instead of null.
 	 */
-	public GenericCallingConvention getGenericCallingConvention();
+	GenericCallingConvention getGenericCallingConvention();
 
 	/**
 	 * Returns true if the given signature is equivalent to this signature.  The
@@ -76,5 +78,5 @@ public interface FunctionSignature {
 	 * @param signature the function signature being tested for equivalence.
 	 * @return true if the if the given signature is equivalent to this signature.
 	 */
-	public boolean isEquivalentSignature(FunctionSignature signature);
+	boolean isEquivalentSignature(FunctionSignature signature);
 }

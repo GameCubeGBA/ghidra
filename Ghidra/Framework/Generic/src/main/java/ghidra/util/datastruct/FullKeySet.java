@@ -37,7 +37,8 @@ public class FullKeySet implements ShortKeySet, Serializable {
     /**
      * Returns the number of keys currently in the set.
      */
-    public int size() {
+    @Override
+	public int size() {
         return numKeys;
     }
 
@@ -45,7 +46,8 @@ public class FullKeySet implements ShortKeySet, Serializable {
 	 * 
 	 * @see ghidra.util.datastruct.ShortKeySet#containsKey(short)
 	 */
-    public boolean containsKey(short key) {
+    @Override
+	public boolean containsKey(short key) {
         if ((key >= 0) &&(key < numKeys)) {
             return true;
         }
@@ -56,7 +58,8 @@ public class FullKeySet implements ShortKeySet, Serializable {
 	 * 
 	 * @see ghidra.util.datastruct.ShortKeySet#getFirst()
 	 */
-    public short getFirst() {
+    @Override
+	public short getFirst() {
         return (short)0;
     }
 
@@ -64,7 +67,8 @@ public class FullKeySet implements ShortKeySet, Serializable {
 	 * 
 	 * @see ghidra.util.datastruct.ShortKeySet#getLast()
 	 */
-    public short getLast() {
+    @Override
+	public short getLast() {
         return (short)(numKeys-1);
     }
 
@@ -72,7 +76,8 @@ public class FullKeySet implements ShortKeySet, Serializable {
 	 * 
 	 * @see ghidra.util.datastruct.ShortKeySet#put(short)
 	 */
-    public void put(short key) {
+    @Override
+	public void put(short key) {
         if ((key < 0) || (key >= numKeys)) {
             throw new IndexOutOfBoundsException();
         }
@@ -82,7 +87,8 @@ public class FullKeySet implements ShortKeySet, Serializable {
 	 * 
 	 * @see ghidra.util.datastruct.ShortKeySet#remove(short)
 	 */
-    public boolean remove(short key) {
+    @Override
+	public boolean remove(short key) {
         if ((key < 0) || (key >= numKeys)) {
             throw new IndexOutOfBoundsException();
         }
@@ -94,7 +100,8 @@ public class FullKeySet implements ShortKeySet, Serializable {
 	 * 
 	 * @see ghidra.util.datastruct.ShortKeySet#removeAll()
 	 */
-    public void removeAll() {
+    @Override
+	public void removeAll() {
         throw new UnsupportedOperationException();
     }
 
@@ -102,7 +109,8 @@ public class FullKeySet implements ShortKeySet, Serializable {
 	 * 
 	 * @see ghidra.util.datastruct.ShortKeySet#getNext(short)
 	 */
-    public short getNext(short key) {
+    @Override
+	public short getNext(short key) {
         if ((key < 0) || (key >= numKeys)) {
             throw new IndexOutOfBoundsException();
         }
@@ -116,7 +124,8 @@ public class FullKeySet implements ShortKeySet, Serializable {
 	 * 
 	 * @see ghidra.util.datastruct.ShortKeySet#getPrevious(short)
 	 */
-    public short getPrevious(short key) {
+    @Override
+	public short getPrevious(short key) {
         if ((key < 0) || (key >= numKeys)) {
             throw new IndexOutOfBoundsException();
         }
@@ -130,7 +139,8 @@ public class FullKeySet implements ShortKeySet, Serializable {
 	 * 
 	 * @see ghidra.util.datastruct.ShortKeySet#isEmpty()
 	 */
-    public boolean isEmpty() {
+    @Override
+	public boolean isEmpty() {
         return false;
     }
 }

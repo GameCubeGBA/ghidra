@@ -33,7 +33,7 @@ public class FileIDFactoryTest extends AbstractGenericTest {
 @Test
     public void testCreateFileID() {
 		long start = (new Date()).getTime();
-		HashSet<String> idSet = new HashSet<String>();
+		HashSet<String> idSet = new HashSet<>();
 		int count = 100;
 		for (int i = 0; i < count; i++) {
 			idSet.add(FileIDFactory.createFileID());

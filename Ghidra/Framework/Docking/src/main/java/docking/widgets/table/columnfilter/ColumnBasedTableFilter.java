@@ -15,12 +15,16 @@
  */
 package docking.widgets.table.columnfilter;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.jdom.Element;
 
-import docking.widgets.table.*;
+import docking.widgets.table.GDynamicColumnTableModel;
+import docking.widgets.table.RowObjectTableModel;
+import docking.widgets.table.TableFilter;
 import docking.widgets.table.constraint.ColumnConstraint;
 import docking.widgets.table.constraint.TableFilterContext;
 import ghidra.framework.options.SaveState;
@@ -264,10 +268,7 @@ public class ColumnBasedTableFilter<R> implements TableFilter<R> {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
 		}
 		ColumnBasedTableFilter<?> other = (ColumnBasedTableFilter<?>) obj;
@@ -288,10 +289,7 @@ public class ColumnBasedTableFilter<R> implements TableFilter<R> {
 	 * @return true if the other filter is the same as this one except for its name
 	 */
 	public boolean isEquivalent(ColumnBasedTableFilter<?> other) {
-		if (other == null) {
-			return false;
-		}
-		if (model != other.model) {
+		if ((other == null) || (model != other.model)) {
 			return false;
 		}
 		// Deliberately not using name in equals, so that saved filters can be compared to generated filters

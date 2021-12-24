@@ -16,11 +16,10 @@
  */
 package ghidra.program.database.util;
 
-import ghidra.program.model.address.Address;
-
 import java.io.IOException;
 
 import db.DBLongIterator;
+import ghidra.program.model.address.Address;
 
 /**
  * Adapter to get an iterator over keys in a table.
@@ -35,5 +34,5 @@ public interface DBKeyAdapter {
 	 * @param end end of range (inclusive)
 	 * @throws IOException if there was a problem accessing the database
 	 */
-	public DBLongIterator getKeys(Address start, Address end) throws IOException;
+	DBLongIterator getKeys(Address start, Address end) throws IOException;
 }

@@ -17,7 +17,10 @@ package ghidra.framework.plugintool.dialog;
 
 import java.awt.Color;
 import java.awt.Point;
-import java.util.*;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
 
 import javax.swing.KeyStroke;
 import javax.swing.text.SimpleAttributeSet;
@@ -63,7 +66,7 @@ class PluginDetailsPanel extends AbstractDetailsPanel {
 		}
 
 		List<PluginDescription> dependencies = model.getDependencies(descriptor);
-		Collections.sort(dependencies, (pd1, pd2) -> pd1.getName().compareTo(pd2.getName()));
+		Collections.sort(dependencies, Comparator.comparing(PluginDescription::getName));
 
 		StringBuilder buffer = new StringBuilder("<HTML>");
 

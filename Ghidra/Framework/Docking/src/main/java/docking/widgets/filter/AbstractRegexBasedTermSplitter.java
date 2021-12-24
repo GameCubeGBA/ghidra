@@ -28,7 +28,7 @@ public abstract class AbstractRegexBasedTermSplitter implements TermSplitter {
 
 	private final Pattern pattern;
 
-	private static final String[] EMPTY = new String[0];
+	private static final String[] EMPTY = {};
 
 	private static String generatePattern(String delim) {
 		/*

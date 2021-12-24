@@ -33,7 +33,7 @@ public interface FilterTypeConverter<COLUMN_TYPE, FILTER_TYPE> {
 	 * 
 	 * @return the destination class
 	 */
-	public Class<FILTER_TYPE> getFilterType();
+	Class<FILTER_TYPE> getFilterType();
 
 	/**
 	 * Converts in instance of the column type to an instance of the destination type
@@ -42,5 +42,5 @@ public interface FilterTypeConverter<COLUMN_TYPE, FILTER_TYPE> {
 	 * @param settings any settings the converter may need to convert the type
 	 * @return the new object
 	 */
-	public FILTER_TYPE convert(COLUMN_TYPE t, Settings settings);
+	FILTER_TYPE convert(COLUMN_TYPE t, Settings settings);
 }

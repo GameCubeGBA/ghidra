@@ -22,5 +22,5 @@ public interface LocalVariable extends Variable {
      * @param firstUseOffset
      * @return true if successful, else false
      */
-    public boolean setFirstUseOffset(int firstUseOffset);
+    boolean setFirstUseOffset(int firstUseOffset);
 }

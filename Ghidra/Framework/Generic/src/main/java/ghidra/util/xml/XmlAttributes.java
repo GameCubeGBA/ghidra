@@ -15,9 +15,9 @@
  */
 package ghidra.util.xml;
 
-import ghidra.util.Conv;
-
 import java.math.BigInteger;
+
+import ghidra.util.Conv;
 
 /**
  * A container class for creating XML attribute strings.
@@ -32,13 +32,13 @@ import java.math.BigInteger;
  * 
  */
 public class XmlAttributes {
-	private StringBuffer buffer;
+	private StringBuilder buffer;
 
 	/**
 	 * Constructs a new empty XML attributes.
 	 */
 	public XmlAttributes() {
-		buffer = new StringBuffer();
+		buffer = new StringBuilder();
 	}
 
 	/**

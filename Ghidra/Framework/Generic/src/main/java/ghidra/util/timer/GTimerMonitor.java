@@ -23,7 +23,7 @@ public interface GTimerMonitor {
 	/**
 	 * A dummy implementation of this interface
 	 */
-	public static GTimerMonitor DUMMY =
+	GTimerMonitor DUMMY =
 		new GTimerMonitor() {
 
 			@Override
@@ -46,17 +46,17 @@ public interface GTimerMonitor {
 	 * Cancels the scheduled runnable associated with this GTimerMonitor if it has not already run.
 	 * @return true if the scheduled runnable was cancelled before it had a chance to execute.
 	 */
-	public boolean cancel();
+	boolean cancel();
 
 	/**
 	 * Return true if the scheduled runnable has completed.
 	 * @return true if the scheduled runnable has completed.
 	 */
-	public boolean didRun();
+	boolean didRun();
 
 	/**
 	 * Return true if the scheduled runnable was cancelled before it had a chance to run.
 	 * @return true if the scheduled runnable was cancelled before it had a chance to run.
 	 */
-	public boolean wasCancelled();
+	boolean wasCancelled();
 }

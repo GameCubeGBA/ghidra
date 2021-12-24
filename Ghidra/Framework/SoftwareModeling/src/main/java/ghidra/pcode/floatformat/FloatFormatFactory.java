@@ -24,7 +24,7 @@ public class FloatFormatFactory {
 	// TODO: This should really be a language specific interface
 	// acting as a factory of float formats - Float Format should also be an interface.
 
-	static final Map<Integer, FloatFormat> cache = new HashMap<Integer, FloatFormat>();
+	static final Map<Integer, FloatFormat> cache = new HashMap<>();
 
 	/**
 	 * Get float format

@@ -17,8 +17,21 @@ package ghidra.program.database.data;
 
 import java.io.IOException;
 
-import db.*;
-import ghidra.program.model.data.*;
+import db.BooleanField;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.IntField;
+import db.LongField;
+import db.RecordIterator;
+import db.RecordTranslator;
+import db.Schema;
+import db.StringField;
+import db.Table;
+import db.TranslatedRecordIterator;
+import ghidra.program.model.data.CompositeInternal;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.DataTypeManager;
 import ghidra.util.UniversalID;
 import ghidra.util.UniversalIdGenerator;
 import ghidra.util.exception.VersionException;
@@ -66,6 +79,7 @@ class CompositeDBAdapterV0 extends CompositeDBAdapter implements RecordTranslato
 		}
 	}
 
+	@Override
 	int getVersion() {
 		return compositeTable.getSchema().getVersion();
 	}

@@ -28,7 +28,7 @@ public class SectionVector {
 	public SectionVector(ConstructTpl rtl, SymbolScope scope) {
 		nextindex = -1;
 		main = new RtlPair();
-		named = new VectorSTL<RtlPair>();
+		named = new VectorSTL<>();
 		main.section = rtl;
 		main.scope = scope;
 	}

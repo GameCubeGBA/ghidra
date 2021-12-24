@@ -15,18 +15,19 @@
  */
 package db;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ghidra.util.task.TaskMonitor;
 import org.junit.Before;
 import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
-import ghidra.util.task.TaskMonitorAdapter;
+import ghidra.util.task.TaskMonitor;
 
 public class TableTest extends AbstractGenericTest {
 
@@ -36,10 +37,10 @@ public class TableTest extends AbstractGenericTest {
 	private static final int BUFFER_SIZE = 256;
 	private static final int CACHE_SIZE = 4 * 1024 * 1024;
 
-	private static final Field[] FIXED_SIZE_SCHEMA_FIELDS = new Field[] { LongField.INSTANCE,
+	private static final Field[] FIXED_SIZE_SCHEMA_FIELDS = { LongField.INSTANCE,
 		IntField.INSTANCE, ShortField.INSTANCE, FixedField10.INSTANCE };
 	private static final Field[] VARIABLE_SIZE_SCHEMA_FIELDS =
-		new Field[] { StringField.INSTANCE, };
+		{ StringField.INSTANCE, };
 
 	private static final String[] FIXED_SIZE_SCHEMA_COLUMN_NAMES =
 		{ "Long1", "Int2", "Short3", "Fixed4" };
@@ -56,8 +57,8 @@ public class TableTest extends AbstractGenericTest {
 	private DBHandle dbh;
 	private long txId;
 	private Table table;
-	private List<Integer> startKeys = new ArrayList<Integer>();
-	private List<Integer> endKeys = new ArrayList<Integer>();
+	private List<Integer> startKeys = new ArrayList<>();
+	private List<Integer> endKeys = new ArrayList<>();
 
 	public TableTest() {
 		super();
@@ -259,7 +260,7 @@ public class TableTest extends AbstractGenericTest {
 //    }
 	private String getRandomSizeString(int max) {
 		int size = (int) (Math.random() * max);
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		for (int i = 0; i < size; i++) {
 			buf.append(' ');
 		}

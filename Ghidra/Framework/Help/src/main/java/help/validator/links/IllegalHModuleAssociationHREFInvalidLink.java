@@ -16,9 +16,9 @@
  */
 package help.validator.links;
 
-import help.validator.model.HREF;
-
 import java.io.File;
+
+import help.validator.model.HREF;
 
 class IllegalHModuleAssociationHREFInvalidLink extends InvalidHREFLink {
 

@@ -15,14 +15,22 @@
  */
 package ghidra.framework.plugintool;
 
-import static ghidra.framework.model.ToolTemplate.*;
+import static ghidra.framework.model.ToolTemplate.TOOL_INSTANCE_NAME_XML_NAME;
+import static ghidra.framework.model.ToolTemplate.TOOL_NAME_XML_NAME;
 
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Window;
 import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
 import javax.swing.ImageIcon;
@@ -30,8 +38,20 @@ import javax.swing.JComponent;
 
 import org.jdom.Element;
 
-import docking.*;
-import docking.action.*;
+import docking.AbstractDockingTool;
+import docking.ActionContext;
+import docking.ActionToGuiHelper;
+import docking.ComponentProvider;
+import docking.DialogComponentProvider;
+import docking.DockingUtils;
+import docking.DockingWindowManager;
+import docking.EditListener;
+import docking.ErrLogDialog;
+import docking.ErrorReporter;
+import docking.action.DockingAction;
+import docking.action.DockingActionIf;
+import docking.action.KeyBindingData;
+import docking.action.MenuData;
 import docking.action.builder.ActionBuilder;
 import docking.actions.PopupActionProvider;
 import docking.actions.ToolActions;
@@ -49,15 +69,39 @@ import ghidra.framework.cmd.BackgroundCommand;
 import ghidra.framework.cmd.Command;
 import ghidra.framework.main.AppInfo;
 import ghidra.framework.main.UserAgreementDialog;
-import ghidra.framework.model.*;
-import ghidra.framework.options.*;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.DomainObject;
+import ghidra.framework.model.Project;
+import ghidra.framework.model.ProjectManager;
+import ghidra.framework.model.ToolListener;
+import ghidra.framework.model.ToolServices;
+import ghidra.framework.model.ToolTemplate;
+import ghidra.framework.model.UndoableDomainObject;
+import ghidra.framework.options.Options;
+import ghidra.framework.options.OptionsChangeListener;
+import ghidra.framework.options.ToolOptions;
 import ghidra.framework.plugintool.dialog.ExtensionTableProvider;
 import ghidra.framework.plugintool.dialog.ManagePluginsDialog;
-import ghidra.framework.plugintool.mgr.*;
-import ghidra.framework.plugintool.util.*;
+import ghidra.framework.plugintool.mgr.DialogManager;
+import ghidra.framework.plugintool.mgr.EventManager;
+import ghidra.framework.plugintool.mgr.OptionsManager;
+import ghidra.framework.plugintool.mgr.ServiceManager;
+import ghidra.framework.plugintool.mgr.ToolTaskManager;
+import ghidra.framework.plugintool.util.OptionsService;
+import ghidra.framework.plugintool.util.PluginClassManager;
+import ghidra.framework.plugintool.util.PluginEventListener;
+import ghidra.framework.plugintool.util.PluginException;
+import ghidra.framework.plugintool.util.ServiceListener;
+import ghidra.framework.plugintool.util.TransientToolState;
+import ghidra.framework.plugintool.util.UndoRedoToolState;
 import ghidra.framework.project.ProjectDataService;
-import ghidra.util.*;
-import ghidra.util.task.*;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
+import ghidra.util.Swing;
+import ghidra.util.SystemUtilities;
+import ghidra.util.task.Task;
+import ghidra.util.task.TaskLauncher;
+import ghidra.util.task.TaskListener;
 
 /**
  * Base class that is a container to manage plugins and their actions, and to coordinate the
@@ -208,9 +252,7 @@ public abstract class PluginTool extends AbstractDockingTool {
 			boolean isModal) {
 
 		List<Image> windowIcons = ApplicationInformationDisplayFactory.getWindowIcons();
-		DockingWindowManager newManager =
-			new DockingWindowManager(this, windowIcons, isModal, isDockable, hasStatus, null);
-		return newManager;
+		return new DockingWindowManager(this, windowIcons, isModal, isDockable, hasStatus, null);
 	}
 
 	protected void installHomeButton() {
@@ -256,7 +298,7 @@ public abstract class PluginTool extends AbstractDockingTool {
 	}
 
 	protected void optionsChanged(Options options, String name, Object oldValue, Object newValue) {
-		if (name.equals(DOCKING_WINDOWS_ON_TOP)) {
+		if (DOCKING_WINDOWS_ON_TOP.equals(name)) {
 			winMgr.setWindowsOnTop(((Boolean) newValue).booleanValue());
 		}
 	}
@@ -439,10 +481,8 @@ public abstract class PluginTool extends AbstractDockingTool {
 		isDisposed = true;
 
 		pluginMgr.close();
-		if (project != null) {
-			if (project.getToolManager() != null) {
-				project.getToolManager().disconnectTool(this);
-			}
+		if ((project != null) && (project.getToolManager() != null)) {
+			project.getToolManager().disconnectTool(this);
 		}
 
 		if (manageDialog != null) {
@@ -1105,29 +1145,29 @@ public abstract class PluginTool extends AbstractDockingTool {
 	protected boolean doSaveTool() {
 		if (toolServices.canAutoSave(this)) {
 			saveTool();
-		}
-		else {
-			if (configChangedFlag) {
-				int result = OptionDialog.showOptionDialog(getToolFrame(), SAVE_DIALOG_TITLE,
-					"This tool has changed.  There are/were multiple instances of this tool\n" +
-						"running and Ghidra cannot determine if this tool instance should\n" +
-						"automatically be saved.  Do you want to save the configuration of this tool\n" +
-						"instance?",
-					"Save", "Save As...", "Don't Save", OptionDialog.WARNING_MESSAGE);
-				if (result == OptionDialog.CANCEL_OPTION) {
-					return false;
+		} else if (configChangedFlag) {
+			int result = OptionDialog.showOptionDialog(getToolFrame(), SAVE_DIALOG_TITLE,
+				"This tool has changed.  There are/were multiple instances of this tool\n" +
+					"running and Ghidra cannot determine if this tool instance should\n" +
+					"automatically be saved.  Do you want to save the configuration of this tool\n" +
+					"instance?",
+				"Save", "Save As...", "Don't Save", OptionDialog.WARNING_MESSAGE);
+			switch (result) {
+			case OptionDialog.CANCEL_OPTION:
+				return false;
+			case OptionDialog.OPTION_ONE:
+				saveTool();
+				break;
+			case OptionDialog.OPTION_TWO:
+				boolean didSave = saveToolAs();
+				if (!didSave) {
+					return doSaveTool();
 				}
-				if (result == OptionDialog.OPTION_ONE) {
-					saveTool();
-				}
-				else if (result == OptionDialog.OPTION_TWO) {
-					boolean didSave = saveToolAs();
-					if (!didSave) {
-						return doSaveTool();
-					}
-				}
-				// option 3 is don't save; just exit
+				break;
+			default:
+				break;
 			}
+			// option 3 is don't save; just exit
 		}
 		return true;
 	}
@@ -1447,7 +1487,7 @@ public abstract class PluginTool extends AbstractDockingTool {
 	}
 
 	private interface CheckedRunnable<T extends Throwable> {
-		public void run() throws T;
+		void run() throws T;
 	}
 
 	private <T extends Throwable> void checkedRunSwingNow(CheckedRunnable<T> r,

@@ -15,13 +15,19 @@
  */
 package ghidra.program.database.mem;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.ByteArrayInputStream;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import db.DBConstants;
 import db.DBHandle;
@@ -30,9 +36,18 @@ import generic.test.AbstractGenericTest;
 import ghidra.framework.Application;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.database.map.AddressMapDB;
-import ghidra.program.model.address.*;
-import ghidra.program.model.lang.*;
-import ghidra.program.model.mem.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressRangeImpl;
+import ghidra.program.model.lang.CompilerSpec;
+import ghidra.program.model.lang.Language;
+import ghidra.program.model.lang.LanguageID;
+import ghidra.program.model.lang.LanguageNotFoundException;
+import ghidra.program.model.lang.LanguageService;
+import ghidra.program.model.mem.MemoryAccessException;
+import ghidra.program.model.mem.MemoryBlock;
+import ghidra.program.model.mem.MemoryBlockSourceInfo;
+import ghidra.program.model.mem.MemoryBlockType;
 import ghidra.program.util.DefaultLanguageService;
 import ghidra.util.Lock;
 import ghidra.util.task.TaskMonitor;
@@ -1015,9 +1030,7 @@ public class MemBlockDBTest extends AbstractGenericTest {
 		for (int i = 0; i < 256; i++) {
 			bytes[i] = (byte) i;
 		}
-		FileBytes fileBytes =
-			mem.createFileBytes("test", 0, 100, new ByteArrayInputStream(bytes), TaskMonitor.DUMMY);
-		return fileBytes;
+		return mem.createFileBytes("test", 0, 100, new ByteArrayInputStream(bytes), TaskMonitor.DUMMY);
 	}
 
 	private Address addr(long offset) {
@@ -1029,8 +1042,7 @@ public class MemBlockDBTest extends AbstractGenericTest {
 		ResourceFile ldefFile = Application.getModuleDataFile("Toy", "languages/toy.ldefs");
 		if (ldefFile != null) {
 			LanguageService languageService = DefaultLanguageService.getLanguageService(ldefFile);
-			Language language = languageService.getLanguage(new LanguageID(languageName));
-			return language;
+			return languageService.getLanguage(new LanguageID(languageName));
 		}
 		throw new LanguageNotFoundException("Unsupported test language: " + languageName);
 	}

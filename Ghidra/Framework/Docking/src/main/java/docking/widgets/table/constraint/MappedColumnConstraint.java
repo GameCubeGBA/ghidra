@@ -15,6 +15,8 @@
  */
 package docking.widgets.table.constraint;
 
+import java.util.Objects;
+
 import docking.widgets.table.constrainteditor.ColumnConstraintEditor;
 import docking.widgets.table.constrainteditor.MappedColumnConstraintEditor;
 import ghidra.util.SystemUtilities;
@@ -102,11 +104,7 @@ public class MappedColumnConstraint<T, M> implements ColumnConstraint<T> {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((delegate == null) ? 0 : delegate.hashCode());
-		result = prime * result + ((mapper == null) ? 0 : mapper.hashCode());
-		return result;
+		return Objects.hash(delegate, mapper);
 	}
 
 	@Override
@@ -114,10 +112,7 @@ public class MappedColumnConstraint<T, M> implements ColumnConstraint<T> {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
 		}
 		@SuppressWarnings("rawtypes")

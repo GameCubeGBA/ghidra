@@ -16,7 +16,9 @@
 package ghidra.program.model.lang;
 
 import java.math.BigInteger;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * An implementation of processor context which contains the state of all
@@ -26,7 +28,7 @@ import java.util.*;
  * of Processor
  */
 public final class ProcessorContextImpl implements ProcessorContext {
-	Map<Register, byte[]> values = new HashMap<Register, byte[]>();
+	Map<Register, byte[]> values = new HashMap<>();
 	Language language;
 
 //	public ProcessorContextImpl(ProcessorContext context) {

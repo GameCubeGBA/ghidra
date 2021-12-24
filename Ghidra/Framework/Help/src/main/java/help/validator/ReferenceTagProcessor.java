@@ -17,8 +17,12 @@ package help.validator;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.nio.file.*;
-import java.util.*;
+import java.nio.file.FileSystem;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.Set;
 
 import ghidra.util.exception.AssertException;
 import help.HelpBuildUtils;
@@ -28,7 +32,7 @@ import help.validator.model.IMG;
 
 public class ReferenceTagProcessor extends TagProcessor {
 
-	private static final String EOL = System.getProperty("line.separator");
+	private static final String EOL = System.lineSeparator();
 	private static final String STYLESHEET_FILENAME = "Frontpage.css";
 	private static final String STYLESHEET_PATHNAME = "shared/" + STYLESHEET_FILENAME;
 
@@ -37,7 +41,7 @@ public class ReferenceTagProcessor extends TagProcessor {
 	private String title;
 	private boolean readingTitle = false;
 
-	private final StringBuffer errors = new StringBuffer();
+	private final StringBuilder errors = new StringBuilder();
 	private final Path defaultStyleSheet;
 	private final AnchorManager anchorManager;
 	private final HelpModuleLocation help;

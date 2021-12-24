@@ -16,9 +16,9 @@
  */
 package ghidra.pcode.opbehavior;
 
-import ghidra.program.model.pcode.PcodeOp;
-
 import java.math.BigInteger;
+
+import ghidra.program.model.pcode.PcodeOp;
 
 public class OpBehaviorIntSborrow extends BinaryOpBehavior {
 

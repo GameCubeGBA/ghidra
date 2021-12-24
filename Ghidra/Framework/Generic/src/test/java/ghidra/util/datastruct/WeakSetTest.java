@@ -19,9 +19,14 @@ import static org.junit.Assert.assertTrue;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
 
@@ -176,7 +181,7 @@ public class WeakSetTest extends AbstractGenericTest {
 
 		// check the array against our values
 		int elementCount = 0;
-		List<String> valuesList = new ArrayList<String>(Arrays.asList(values));
+		List<String> valuesList = new ArrayList<>(Arrays.asList(values));
 		for (; iterator.hasNext(); elementCount++) {
 			assertTrue("An element returned from the weak set was not " + "passed to the set.",
 				valuesList.contains(iterator.next()));
@@ -238,7 +243,7 @@ public class WeakSetTest extends AbstractGenericTest {
 //			+ "when they were no longer referenced.", (2 == weakSet.size()));
 //	}
 //
-	class ActionListenerAdapter implements ActionListener {
+	static class ActionListenerAdapter implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent event) {
 			// stub implementation

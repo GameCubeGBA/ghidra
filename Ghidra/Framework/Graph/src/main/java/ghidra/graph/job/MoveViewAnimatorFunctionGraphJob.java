@@ -20,7 +20,11 @@ import java.awt.geom.Point2D;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.interpolation.PropertySetter;
 
-import edu.uci.ics.jung.visualization.*;
+import edu.uci.ics.jung.visualization.Layer;
+import edu.uci.ics.jung.visualization.MultiLayerTransformer;
+import edu.uci.ics.jung.visualization.RenderContext;
+import edu.uci.ics.jung.visualization.VisualizationServer;
+import edu.uci.ics.jung.visualization.VisualizationViewer;
 
 public abstract class MoveViewAnimatorFunctionGraphJob<V, E>
 		extends AbstractAnimatorJob {

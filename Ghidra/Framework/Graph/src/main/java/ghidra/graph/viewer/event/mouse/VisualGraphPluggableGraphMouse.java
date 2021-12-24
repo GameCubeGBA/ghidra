@@ -15,7 +15,11 @@
  */
 package ghidra.graph.viewer.event.mouse;
 
-import java.awt.event.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import edu.uci.ics.jung.visualization.VisualizationViewer;

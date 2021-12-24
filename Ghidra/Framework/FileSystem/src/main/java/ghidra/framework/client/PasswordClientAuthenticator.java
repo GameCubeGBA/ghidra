@@ -19,7 +19,9 @@ import java.awt.Component;
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
 
-import javax.security.auth.callback.*;
+import javax.security.auth.callback.ChoiceCallback;
+import javax.security.auth.callback.NameCallback;
+import javax.security.auth.callback.PasswordCallback;
 
 import ghidra.framework.remote.AnonymousCallback;
 import ghidra.framework.remote.SSHSignatureCallback;

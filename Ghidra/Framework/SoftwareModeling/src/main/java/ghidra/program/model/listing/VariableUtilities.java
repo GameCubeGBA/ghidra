@@ -15,12 +15,33 @@
  */
 package ghidra.program.model.listing;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import ghidra.program.database.data.DataTypeUtilities;
 import ghidra.program.model.address.Address;
-import ghidra.program.model.data.*;
-import ghidra.program.model.lang.*;
+import ghidra.program.model.data.AbstractFloatDataType;
+import ghidra.program.model.data.Array;
+import ghidra.program.model.data.BitFieldDataType;
+import ghidra.program.model.data.CategoryPath;
+import ghidra.program.model.data.Composite;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.DataTypeManager;
+import ghidra.program.model.data.Dynamic;
+import ghidra.program.model.data.FactoryDataType;
+import ghidra.program.model.data.FunctionDefinition;
+import ghidra.program.model.data.GenericCallingConvention;
+import ghidra.program.model.data.Pointer;
+import ghidra.program.model.data.PointerDataType;
+import ghidra.program.model.data.Structure;
+import ghidra.program.model.data.StructureDataType;
+import ghidra.program.model.data.TypeDef;
+import ghidra.program.model.data.Undefined;
+import ghidra.program.model.data.VoidDataType;
+import ghidra.program.model.lang.CompilerSpec;
+import ghidra.program.model.lang.PrototypeModel;
+import ghidra.program.model.lang.Register;
 import ghidra.program.model.pcode.Varnode;
 import ghidra.program.model.symbol.Namespace;
 import ghidra.program.model.symbol.SourceType;
@@ -586,11 +607,7 @@ public class VariableUtilities {
 		}
 		List<Variable> conflicts = null;
 		for (Variable otherVar : function.getAllVariables()) {
-			if (otherVar.equals(var)) {
-				// skip variable being modified
-				continue;
-			}
-			if (var != null && otherVar.getFirstUseOffset() != var.getFirstUseOffset()) {
+			if (otherVar.equals(var) || (var != null && otherVar.getFirstUseOffset() != var.getFirstUseOffset())) {
 				// other than parameters we will have a hard time identifying
 				// local variable conflicts due to differences in scope (i.e., first-use)
 				continue;
@@ -629,11 +646,7 @@ public class VariableUtilities {
 		}
 		List<Variable> conflicts = null;
 		for (Variable otherVar : existingVariables) {
-			if (otherVar == null || otherVar.equals(var)) {
-				// skip variable being modified
-				continue;
-			}
-			if (var != null && otherVar.getFirstUseOffset() != var.getFirstUseOffset()) {
+			if (otherVar == null || otherVar.equals(var) || (var != null && otherVar.getFirstUseOffset() != var.getFirstUseOffset())) {
 				// other than parameters we will have a hard time identifying
 				// local variable conflicts due to differences in scope (i.e., first-use)
 				continue;
@@ -646,10 +659,8 @@ public class VariableUtilities {
 			}
 		}
 
-		if (conflicts != null) {
-			if (conflictHandler == null || !conflictHandler.resolveConflicts(conflicts)) {
-				generateConflictException(newStorage, conflicts, 4);
-			}
+		if ((conflicts != null) && (conflictHandler == null || !conflictHandler.resolveConflicts(conflicts))) {
+			generateConflictException(newStorage, conflicts, 4);
 		}
 	}
 
@@ -667,7 +678,7 @@ public class VariableUtilities {
 
 		maxConflictVarDetails = Math.min(conflicts.size(), maxConflictVarDetails);
 
-		StringBuffer msg = new StringBuffer();
+		StringBuilder msg = new StringBuilder();
 		msg.append("Variable storage conflict between " + newStorage + " and: ");
 		for (int i = 0; i < maxConflictVarDetails; i++) {
 			if (i != 0) {

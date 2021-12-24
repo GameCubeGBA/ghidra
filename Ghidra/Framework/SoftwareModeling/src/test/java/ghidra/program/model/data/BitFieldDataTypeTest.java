@@ -15,12 +15,14 @@
  */
 package ghidra.program.model.data;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
 import generic.test.AbstractGTest;
-import ghidra.docking.settings.*;
+import ghidra.docking.settings.FormatSettingsDefinition;
+import ghidra.docking.settings.Settings;
+import ghidra.docking.settings.SettingsImpl;
 import ghidra.program.model.mem.ByteMemBufferImpl;
 import ghidra.program.model.mem.MemBuffer;
 import ghidra.program.model.scalar.Scalar;

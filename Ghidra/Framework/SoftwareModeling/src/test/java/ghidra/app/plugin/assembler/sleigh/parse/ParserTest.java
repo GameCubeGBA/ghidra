@@ -15,18 +15,34 @@
  */
 package ghidra.app.plugin.assembler.sleigh.parse;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.PrintStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
-import ghidra.app.plugin.assembler.sleigh.grammars.*;
-import ghidra.app.plugin.assembler.sleigh.symbol.*;
-import ghidra.app.plugin.assembler.sleigh.tree.*;
+import ghidra.app.plugin.assembler.sleigh.grammars.AssemblyGrammar;
+import ghidra.app.plugin.assembler.sleigh.grammars.AssemblyProduction;
+import ghidra.app.plugin.assembler.sleigh.grammars.AssemblySentential;
+import ghidra.app.plugin.assembler.sleigh.symbol.AssemblyNonTerminal;
+import ghidra.app.plugin.assembler.sleigh.symbol.AssemblyStringTerminal;
+import ghidra.app.plugin.assembler.sleigh.symbol.AssemblySymbol;
+import ghidra.app.plugin.assembler.sleigh.symbol.AssemblyTerminal;
+import ghidra.app.plugin.assembler.sleigh.tree.AssemblyParseBranch;
+import ghidra.app.plugin.assembler.sleigh.tree.AssemblyParseToken;
+import ghidra.app.plugin.assembler.sleigh.tree.AssemblyParseTreeNode;
 import ghidra.app.plugin.assembler.sleigh.util.SleighUtil;
 import ghidra.util.NullOutputStream;
 

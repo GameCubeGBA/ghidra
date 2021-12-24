@@ -24,7 +24,11 @@ import javax.swing.JFrame;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import docking.*;
+import docking.ActionContext;
+import docking.ComponentPlaceholder;
+import docking.DockableComponent;
+import docking.DockingDialog;
+import docking.DockingWindowManager;
 import ghidra.util.ReservedKeyBindings;
 
 public class ShowFocusInfoAction extends DockingAction {

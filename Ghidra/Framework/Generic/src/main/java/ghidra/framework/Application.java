@@ -15,12 +15,21 @@
  */
 package ghidra.framework;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import generic.jar.ClassModuleTree;
 import generic.jar.ResourceFile;
-import ghidra.util.*;
+import ghidra.util.Msg;
+import ghidra.util.SystemUtilities;
+import ghidra.util.UniversalIdGenerator;
 import ghidra.util.datastruct.LRUMap;
 import ghidra.util.exception.AssertException;
 import ghidra.util.task.TaskMonitor;

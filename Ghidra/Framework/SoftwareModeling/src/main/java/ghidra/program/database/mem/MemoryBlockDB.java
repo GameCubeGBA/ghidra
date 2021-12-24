@@ -18,15 +18,26 @@ package ghidra.program.database.mem;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigInteger;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.ConcurrentModificationException;
+import java.util.List;
 
 import db.DBBuffer;
 import db.DBRecord;
 import ghidra.framework.store.LockException;
 import ghidra.program.database.map.AddressMap;
 import ghidra.program.database.map.AddressMapDB;
-import ghidra.program.model.address.*;
-import ghidra.program.model.mem.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressOverflowException;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.SegmentedAddress;
+import ghidra.program.model.mem.Memory;
+import ghidra.program.model.mem.MemoryAccessException;
+import ghidra.program.model.mem.MemoryBlock;
+import ghidra.program.model.mem.MemoryBlockSourceInfo;
+import ghidra.program.model.mem.MemoryBlockType;
 import ghidra.util.NumericUtilities;
 import ghidra.util.exception.AssertException;
 
@@ -458,10 +469,7 @@ public class MemoryBlockDB implements MemoryBlock {
 	}
 
 	public int getBytes(long offset, byte[] b, int off, int len) throws MemoryAccessException {
-		if (off < 0 || off + len > b.length) {
-			throw new ArrayIndexOutOfBoundsException();
-		}
-		if (offset < 0 || offset >= length) {
+		if (off < 0 || off + len > b.length || offset < 0 || offset >= length) {
 			throw new ArrayIndexOutOfBoundsException();
 		}
 
@@ -510,10 +518,7 @@ public class MemoryBlockDB implements MemoryBlock {
 	}
 
 	private int putBytes(long offset, byte[] b, int off, int len) throws MemoryAccessException {
-		if (off < 0 || off + len > b.length) {
-			throw new ArrayIndexOutOfBoundsException();
-		}
-		if (offset < 0 || offset >= length) {
+		if (off < 0 || off + len > b.length || offset < 0 || offset >= length) {
 			throw new ArrayIndexOutOfBoundsException();
 		}
 

@@ -15,14 +15,32 @@
  */
 package ghidra.framework.plugintool.dialog;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
+import java.util.Set;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
+import javax.swing.KeyStroke;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableColumn;
@@ -35,13 +53,19 @@ import docking.actions.KeyBindingUtils;
 import docking.help.Help;
 import docking.help.HelpService;
 import docking.tool.util.DockingToolConstants;
-import docking.widgets.*;
+import docking.widgets.EmptyBorderButton;
+import docking.widgets.MultiLineLabel;
+import docking.widgets.OptionDialog;
 import docking.widgets.label.GIconLabel;
-import docking.widgets.table.*;
+import docking.widgets.table.AbstractSortedTableModel;
+import docking.widgets.table.GTable;
+import docking.widgets.table.GTableFilterPanel;
 import ghidra.framework.options.Options;
 import ghidra.framework.options.ToolOptions;
 import ghidra.framework.plugintool.PluginTool;
-import ghidra.util.*;
+import ghidra.util.HTMLUtilities;
+import ghidra.util.ReservedKeyBindings;
+import ghidra.util.Swing;
 import ghidra.util.exception.AssertException;
 import ghidra.util.layout.PairLayout;
 import ghidra.util.layout.VerticalLayout;
@@ -516,7 +540,7 @@ public class KeyBindingsPanel extends JPanel {
 			return;
 		}
 		if (list.size() > 0) {
-			StringBuffer sb = new StringBuffer();
+			StringBuilder sb = new StringBuilder();
 			sb.append("Actions mapped to key " + ksName + ":\n");
 			for (int i = 0; i < list.size(); i++) {
 				sb.append("  ");
@@ -602,12 +626,10 @@ public class KeyBindingsPanel extends JPanel {
 		}
 
 		String selectedActionName = getSelectedActionName();
-		if (selectedActionName != null) {
-			if (processKeyStroke(selectedActionName, ks)) {
-				String keyStrokeText = KeyEntryTextField.parseKeyStroke(ks);
-				showActionsMappedToKeyStroke(keyStrokeText);
-				tableModel.fireTableDataChanged();
-			}
+		if ((selectedActionName != null) && processKeyStroke(selectedActionName, ks)) {
+			String keyStrokeText = KeyEntryTextField.parseKeyStroke(ks);
+			showActionsMappedToKeyStroke(keyStrokeText);
+			tableModel.fireTableDataChanged();
 		}
 	}
 

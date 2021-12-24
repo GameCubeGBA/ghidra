@@ -15,10 +15,22 @@
  */
 package ghidra.program.model.util;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Deque;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Set;
+import java.util.TreeSet;
 
-import ghidra.program.model.address.*;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressIterator;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.listing.Function;
+import ghidra.program.model.listing.FunctionIterator;
+import ghidra.program.model.listing.FunctionManager;
+import ghidra.program.model.listing.Program;
 import ghidra.program.model.symbol.Reference;
 import ghidra.program.model.symbol.ReferenceManager;
 import ghidra.util.exception.CancelledException;
@@ -69,10 +81,8 @@ public class AcyclicCallGraphBuilder {
 		this.program = program;
 		functionSet = new HashSet<>();
 		for (Function function : functions) {
-			if (killThunks) {
-				if (function.isThunk()) {
-					function = function.getThunkedFunction(true);
-				}
+			if (killThunks && function.isThunk()) {
+				function = function.getThunkedFunction(true);
 			}
 			functionSet.add(function.getEntryPoint());
 		}
@@ -143,11 +153,9 @@ public class AcyclicCallGraphBuilder {
 				Address toAddr = ref.getToAddress();
 				if (ref.getReferenceType().isCall()) {
 					Function childfunc = fmanage.getFunctionAt(toAddr);
-					if (childfunc != null && killThunks) {
-						if (childfunc.isThunk()) {
-							childfunc = childfunc.getThunkedFunction(true);
-							toAddr = childfunc.getEntryPoint();
-						}
+					if ((childfunc != null && killThunks) && childfunc.isThunk()) {
+						childfunc = childfunc.getThunkedFunction(true);
+						toAddr = childfunc.getEntryPoint();
 					}
 					if (functionSet.contains(toAddr)) {
 						children.add(toAddr);
@@ -212,10 +220,8 @@ public class AcyclicCallGraphBuilder {
 
 		FunctionIterator functions = program.getFunctionManager().getFunctions(set, true);
 		for (Function function : functions) {
-			if (killThunks) {
-				if (function.isThunk()) {
-					function = function.getThunkedFunction(true);
-				}
+			if (killThunks && function.isThunk()) {
+				function = function.getThunkedFunction(true);
 			}
 			functionStarts.add(function.getEntryPoint());
 		}

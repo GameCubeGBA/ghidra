@@ -32,7 +32,7 @@ public interface DockingToolActions {
 	 * @param provider the provider
 	 * @param action the action
 	 */
-	public void addLocalAction(ComponentProvider provider, DockingActionIf action);
+	void addLocalAction(ComponentProvider provider, DockingActionIf action);
 
 	/**
 	 * Gets the provider action by the given name
@@ -41,7 +41,7 @@ public interface DockingToolActions {
 	 * @param actionName the action name
 	 * @return the action
 	 */
-	public DockingActionIf getLocalAction(ComponentProvider provider, String actionName);
+	DockingActionIf getLocalAction(ComponentProvider provider, String actionName);
 
 	/**
 	 * Removes the given provider's local action
@@ -49,34 +49,34 @@ public interface DockingToolActions {
 	 * @param provider the provider
 	 * @param action the action
 	 */
-	public void removeLocalAction(ComponentProvider provider, DockingActionIf action);
+	void removeLocalAction(ComponentProvider provider, DockingActionIf action);
 
 	/**
 	 * Adds the given action that is enabled, regardless of the active provider
 	 * 
 	 * @param action the action
 	 */
-	public void addGlobalAction(DockingActionIf action);
+	void addGlobalAction(DockingActionIf action);
 
 	/**
 	 * Removes the given global action 
 	 * @param action the action
 	 */
-	public void removeGlobalAction(DockingActionIf action);
+	void removeGlobalAction(DockingActionIf action);
 
 	/**
 	 * Removes all global actions for the given owner 
 	 * 
 	 * @param owner the owner
 	 */
-	public void removeActions(String owner);
+	void removeActions(String owner);
 
 	/**
 	 * Removes all local actions for the given provider
 	 * 
 	 * @param provider the provider
 	 */
-	public void removeActions(ComponentProvider provider);
+	void removeActions(ComponentProvider provider);
 
 	/**
 	 * Returns all actions with the given owner
@@ -84,13 +84,13 @@ public interface DockingToolActions {
 	 * @param owner the owner
 	 * @return the actions
 	 */
-	public Set<DockingActionIf> getActions(String owner);
+	Set<DockingActionIf> getActions(String owner);
 
 	/**
 	 * Returns all actions known to the tool
 	 * @return the actions
 	 */
-	public Set<DockingActionIf> getAllActions();
+	Set<DockingActionIf> getAllActions();
 
 	/**
 	 * Allows clients to register an action by using a placeholder.  This is useful when 
@@ -102,5 +102,5 @@ public interface DockingToolActions {
 	 * 
 	 * @param placeholder the placeholder containing information related to the action it represents
 	 */
-	public void registerSharedActionPlaceholder(SharedDockingActionPlaceholder placeholder);
+	void registerSharedActionPlaceholder(SharedDockingActionPlaceholder placeholder);
 }

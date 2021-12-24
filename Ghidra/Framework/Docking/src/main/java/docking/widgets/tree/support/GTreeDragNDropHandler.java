@@ -29,13 +29,13 @@ public interface GTreeDragNDropHandler extends GTreeTransferHandler {
      * @param dragUserData data where user is initiating the drag operation
      * @param dragAction user action for the drag operation
      */
-    public boolean isStartDragOk(List<GTreeNode> dragUserData, int dragAction);
+    boolean isStartDragOk(List<GTreeNode> dragUserData, int dragAction);
     /**
 	 * Returns the supported Drag actions for this tree.  For available actions see
 	 * {@link DnDConstants}.
 	 * @return the supported Drag actions.
 	 */
-	public int getSupportedDragActions();
+	int getSupportedDragActions();
 
 
     /**

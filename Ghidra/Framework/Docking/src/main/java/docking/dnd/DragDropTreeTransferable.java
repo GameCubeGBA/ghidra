@@ -16,11 +16,17 @@
  */
 package docking.dnd;
 
-import ghidra.util.Msg;
-
-import java.awt.datatransfer.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.ClipboardOwner;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import ghidra.util.Msg;
 
 
 
@@ -60,13 +66,14 @@ public class DragDropTreeTransferable implements Transferable, ClipboardOwner {
      * @param nodes the array of DragDropNodes being transfered.
      */
     public DragDropTreeTransferable(DragDropNode []nodes) {
-        dataList = new ArrayList<DragDropNode>(Arrays.asList(nodes));
+        dataList = new ArrayList<>(Arrays.asList(nodes));
     }
     
     /**
      * Return all data flavors that this class supports.
      */
-    public synchronized DataFlavor []getTransferDataFlavors() {
+    @Override
+	public synchronized DataFlavor []getTransferDataFlavors() {
         return flavors;
     }
     
@@ -74,7 +81,8 @@ public class DragDropTreeTransferable implements Transferable, ClipboardOwner {
      * Return whether the specifed data flavor is supported.
      * @param f the DataFlavor to check if supported.
      */
-    public boolean isDataFlavorSupported(DataFlavor f) {
+    @Override
+	public boolean isDataFlavorSupported(DataFlavor f) {
         return flavorList.contains(f);
     }
     
@@ -82,7 +90,8 @@ public class DragDropTreeTransferable implements Transferable, ClipboardOwner {
      * Return the transfer data with the given data flavor.
      * @param f the DataFlavor for which to get a Transferable.
      */
-    public synchronized Object getTransferData(DataFlavor f) 
+    @Override
+	public synchronized Object getTransferData(DataFlavor f) 
         throws UnsupportedFlavorException, IOException {
             
         if (f.equals(localTreeNodeFlavor)) {
@@ -105,7 +114,8 @@ public class DragDropTreeTransferable implements Transferable, ClipboardOwner {
      * @param clipboard the system clipboard.
      * @param contents the Transferable lost in the clipboard.
      */
-    public void lostOwnership(Clipboard clipboard, Transferable contents) {
+    @Override
+	public void lostOwnership(Clipboard clipboard, Transferable contents) {
     }
     
 }

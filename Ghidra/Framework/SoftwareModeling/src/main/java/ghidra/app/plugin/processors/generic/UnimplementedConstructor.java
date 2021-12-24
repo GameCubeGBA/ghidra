@@ -22,10 +22,10 @@
  */
 package ghidra.app.plugin.processors.generic;
 
+import java.util.ArrayList;
+
 import ghidra.program.model.pcode.PcodeOp;
 import ghidra.util.exception.NotYetImplementedException;
-
-import java.util.ArrayList;
 
 /**
  * 

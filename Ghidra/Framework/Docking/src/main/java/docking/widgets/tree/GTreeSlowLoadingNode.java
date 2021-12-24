@@ -107,12 +107,7 @@ public abstract class GTreeSlowLoadingNode extends GTreeLazyNode {
 			}
 			catch (CancelledException e) {
 				if (!tree.isDisposed()) {
-					runOnSwingThread(new Runnable() {
-						@Override
-						public void run() {
-							tree.collapseAll(tree.getViewRoot());
-						}
-					});
+					runOnSwingThread(() -> tree.collapseAll(tree.getViewRoot()));
 				}
 				doSetChildren(null);
 			}

@@ -16,7 +16,9 @@
 package docking.framework;
 
 import java.io.FileNotFoundException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Objects;
 
 import generic.jar.ResourceFile;
 import ghidra.framework.ApplicationProperties;

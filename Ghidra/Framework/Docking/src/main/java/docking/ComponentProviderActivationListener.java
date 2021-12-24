@@ -27,12 +27,12 @@ public interface ComponentProviderActivationListener {
      * 
      * @param componentProvider The activated component provider.
      */
-    public void componentProviderActivated( ComponentProvider componentProvider );
+    void componentProviderActivated( ComponentProvider componentProvider );
     
     /**
      * Called when the given component provider is deactivated.
      * 
      * @param componentProvider The deactivated component provider.
      */
-    public void componentProviderDeactivated( ComponentProvider componentProvider );
+    void componentProviderDeactivated( ComponentProvider componentProvider );
 }

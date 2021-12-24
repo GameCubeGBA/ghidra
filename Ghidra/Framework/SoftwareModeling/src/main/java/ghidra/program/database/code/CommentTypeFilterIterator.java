@@ -16,10 +16,10 @@
  */
 package ghidra.program.database.code;
 
+import java.util.Iterator;
+
 import ghidra.program.model.listing.CodeUnit;
 import ghidra.program.model.listing.CodeUnitIterator;
-
-import java.util.Iterator;
 
 /**
  * Filters the given codeUnit iterator to only return codeUnits that have a comment of the given type

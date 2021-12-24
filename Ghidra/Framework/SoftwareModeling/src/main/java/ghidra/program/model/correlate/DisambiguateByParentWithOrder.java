@@ -33,7 +33,7 @@ public class DisambiguateByParentWithOrder implements DisambiguateStrategy {
 
 	@Override
 	public ArrayList<Hash> calcHashes(InstructHash instHash, int matchSize, HashStore store) throws CancelledException {
-		ArrayList<Hash> res = new ArrayList<Hash>();
+		ArrayList<Hash> res = new ArrayList<>();
 		Block block = instHash.getBlock();
 		CodeBlockReferenceIterator iter = block.origBlock.getSources(store.getMonitor());
 		Address startAddr = block.origBlock.getMinAddress();

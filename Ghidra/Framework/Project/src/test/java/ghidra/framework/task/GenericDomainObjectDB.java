@@ -25,7 +25,7 @@ import ghidra.framework.model.AbortedTransactionListener;
 
 public class GenericDomainObjectDB extends DomainObjectAdapterDB {
 	String currentTransaction;
-	List<String> transactionsList = new ArrayList<String>();
+	List<String> transactionsList = new ArrayList<>();
 
 	public GenericDomainObjectDB(Object consumer) throws IOException {
 		super(new DBHandle(), "Generic", 500, 1000, consumer);

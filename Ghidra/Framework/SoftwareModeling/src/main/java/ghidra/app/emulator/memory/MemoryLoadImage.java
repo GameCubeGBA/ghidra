@@ -20,8 +20,8 @@ import ghidra.program.model.address.Address;
 
 public interface MemoryLoadImage extends LoadImage {
 
-	public void writeBack(byte[] bytes, int size, Address addr, int offset);
+	void writeBack(byte[] bytes, int size, Address addr, int offset);
 	
-	public void dispose();
+	void dispose();
 
 }

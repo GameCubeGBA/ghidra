@@ -16,14 +16,17 @@
  */
 package ghidra.util.datastruct;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
 public class ListAccumulator<T> implements Accumulator<T> {
 
 	private List<T> list;
 
 	public ListAccumulator() {
-		this.list = new ArrayList<T>();
+		this.list = new ArrayList<>();
 	}
 
 	public ListAccumulator(List<T> list) {

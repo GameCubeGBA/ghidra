@@ -52,7 +52,7 @@ public class ProjectDataSelectAction extends ProjectTreeAction {
 	 * listener on a menu.
 	 */
 	private void selectAllChildren(DataTree tree, GTreeNode node) {
-		List<TreePath> paths = new ArrayList<TreePath>();
+		List<TreePath> paths = new ArrayList<>();
 		getAllTreePaths(node, paths);
 		tree.setSelectionPaths(paths.toArray(new TreePath[paths.size()]));
 	}

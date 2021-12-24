@@ -17,8 +17,14 @@ package ghidra.program.database.function;
 
 import java.io.IOException;
 
-import ghidra.program.model.data.*;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.TypeDef;
+import ghidra.program.model.data.Undefined;
+import ghidra.program.model.data.VoidDataType;
+import ghidra.program.model.listing.Program;
+import ghidra.program.model.listing.VariableSizeException;
+import ghidra.program.model.listing.VariableStorage;
+import ghidra.program.model.listing.VariableUtilities;
 import ghidra.program.model.symbol.SourceType;
 import ghidra.program.util.ChangeManager;
 import ghidra.util.exception.DuplicateNameException;

@@ -17,7 +17,9 @@ package ghidra.program.model.address;
 
 import static org.junit.Assert.assertTrue;
 
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
 

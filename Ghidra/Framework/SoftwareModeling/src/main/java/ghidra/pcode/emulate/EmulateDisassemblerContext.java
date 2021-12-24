@@ -16,10 +16,16 @@
 package ghidra.pcode.emulate;
 
 import java.math.BigInteger;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import ghidra.program.model.address.Address;
-import ghidra.program.model.lang.*;
+import ghidra.program.model.lang.DisassemblerContext;
+import ghidra.program.model.lang.Language;
+import ghidra.program.model.lang.Register;
+import ghidra.program.model.lang.RegisterValue;
 import ghidra.program.util.ProgramContextImpl;
 
 public class EmulateDisassemblerContext implements DisassemblerContext {
@@ -35,7 +41,7 @@ public class EmulateDisassemblerContext implements DisassemblerContext {
 	EmulateDisassemblerContext(Language language) {
 		this.language = language;
 		this.contextReg = language.getContextBaseRegister();
-		this.futureContextMap = new HashMap<Address, RegisterValue>();
+		this.futureContextMap = new HashMap<>();
 		initContext();
 	}
 

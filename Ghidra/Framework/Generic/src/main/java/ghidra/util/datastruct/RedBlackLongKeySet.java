@@ -211,18 +211,15 @@ public class RedBlackLongKeySet implements Serializable {
                     fixAfterInsertion(node.left);
                     return;
                 }
-            }
-            else {
-                if (node.right != null) {
-                    node = node.right;
-                }
-                else {
-                    size++;
-                    node.right = new RBNode(key, node);
-                    fixAfterInsertion(node.right);
-                    return;
-                }
-            }
+            } else if (node.right != null) {
+			    node = node.right;
+			}
+			else {
+			    size++;
+			    node.right = new RBNode(key, node);
+			    fixAfterInsertion(node.right);
+			    return;
+			}
         }
     }
 

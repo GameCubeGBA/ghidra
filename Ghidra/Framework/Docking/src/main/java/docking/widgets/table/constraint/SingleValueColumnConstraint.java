@@ -114,11 +114,7 @@ public abstract class SingleValueColumnConstraint<T> implements ColumnConstraint
 		if (o == this) {
 			return true;
 		}
-		if (o == null) {
-			return false;
-		}
-
-		if (!(getClass().equals(o.getClass()))) {
+		if ((o == null) || !(getClass().equals(o.getClass()))) {
 			return false;
 		}
 

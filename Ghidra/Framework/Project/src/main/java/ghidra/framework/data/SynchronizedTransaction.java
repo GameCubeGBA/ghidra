@@ -16,11 +16,11 @@
  */
 package ghidra.framework.data;
 
-import ghidra.framework.model.AbortedTransactionListener;
-import ghidra.framework.model.Transaction;
-
 import java.io.IOException;
 import java.util.ArrayList;
+
+import ghidra.framework.model.AbortedTransactionListener;
+import ghidra.framework.model.Transaction;
 
 /**
  * <code>SynchronizedTransaction</code> represents an atomic undoable operation performed
@@ -54,7 +54,7 @@ class SynchronizedTransaction implements Transaction {
 
 	@Override
 	public String getDescription() {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		for (int i = 0; i < managers.length; i++) {
 			if (descriptions[i] != null) {
 				if (buf.length() != 0) {
@@ -80,14 +80,14 @@ class SynchronizedTransaction implements Transaction {
 
 	@Override
 	public ArrayList<String> getOpenSubTransactions() {
-		ArrayList<String> list = new ArrayList<String>();
+		ArrayList<String> list = new ArrayList<>();
 		int status = getStatus();
 		if (status == ABORTED || status == COMMITTED) {
 			return list;
 		}
-		for (int i = 0; i < managers.length; i++) {
-			String name = getDomainObjectName(managers[i]);
-			for (String str : managers[i].getCurrentTransaction().getOpenSubTransactions()) {
+		for (DomainObjectTransactionManager manager : managers) {
+			String name = getDomainObjectName(manager);
+			for (String str : manager.getCurrentTransaction().getOpenSubTransactions()) {
 				list.add(name + ": " + str);
 			}
 		}

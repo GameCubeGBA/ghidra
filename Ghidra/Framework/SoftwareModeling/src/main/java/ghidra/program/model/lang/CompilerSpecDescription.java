@@ -17,9 +17,9 @@
 package ghidra.program.model.lang;
 
 public interface CompilerSpecDescription {
-	public CompilerSpecID getCompilerSpecID();
+	CompilerSpecID getCompilerSpecID();
 
-	public String getCompilerSpecName();
+	String getCompilerSpecName();
 
-	public String getSource();
+	String getSource();
 }

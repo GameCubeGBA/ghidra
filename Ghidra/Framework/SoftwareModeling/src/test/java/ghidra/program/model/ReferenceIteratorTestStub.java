@@ -16,11 +16,11 @@
  */
 package ghidra.program.model;
 
-import ghidra.program.model.symbol.Reference;
-import ghidra.program.model.symbol.ReferenceIterator;
-
 import java.util.Collection;
 import java.util.Iterator;
+
+import ghidra.program.model.symbol.Reference;
+import ghidra.program.model.symbol.ReferenceIterator;
 
 public class ReferenceIteratorTestStub implements ReferenceIterator {
 	private Iterator<Reference> iterator;

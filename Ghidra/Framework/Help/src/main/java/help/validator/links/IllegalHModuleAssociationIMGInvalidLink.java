@@ -16,9 +16,9 @@
  */
 package help.validator.links;
 
-import help.validator.model.IMG;
-
 import java.io.File;
+
+import help.validator.model.IMG;
 
 public class IllegalHModuleAssociationIMGInvalidLink extends InvalidIMGLink {
 

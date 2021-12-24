@@ -16,10 +16,10 @@
  */
 package ghidra.util.constraint;
 
+import java.util.StringTokenizer;
+
 import generic.constraint.ConstraintData;
 import ghidra.program.model.listing.Program;
-
-import java.util.StringTokenizer;
 
 public class LanguageConstraint extends ProgramConstraint {
 
@@ -40,7 +40,7 @@ public class LanguageConstraint extends ProgramConstraint {
 			}
 			String nextTokenA = tokA.nextToken();
 			String nextTokenB = tokB.nextToken();
-			if (nextTokenA.equals("*")) {
+			if ("*".equals(nextTokenA)) {
 				continue;
 			}
 			if (!nextTokenA.equals(nextTokenB)) {

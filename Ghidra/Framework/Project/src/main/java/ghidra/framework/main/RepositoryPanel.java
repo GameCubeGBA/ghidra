@@ -16,16 +16,29 @@
 package ghidra.framework.main;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
-import javax.swing.event.*;
+import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import docking.widgets.button.GRadioButton;
 import docking.widgets.label.GDLabel;
 import docking.widgets.list.GList;
-import docking.wizard.*;
+import docking.wizard.AbstractWizardJPanel;
+import docking.wizard.PanelManager;
+import docking.wizard.WizardManager;
 import ghidra.app.util.GenericHelpTopics;
 import ghidra.util.HelpLocation;
 import ghidra.util.NamingUtilities;
@@ -232,38 +245,29 @@ public class RepositoryPanel extends AbstractWizardJPanel {
 	}
 
 	private void addListeners() {
-		ActionListener listener = new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				boolean existingRepSelected = existingRepButton.isSelected();
-				nameList.setEnabled(existingRepSelected);
-				if (!existingRepSelected) {
-					nameList.clearSelection();
-				}
-				boolean createRepSelected = createRepButton.isSelected();
-				nameField.setEnabled(createRepSelected);
-				nameLabel.setEnabled(createRepSelected);
-				if (!createRepSelected) {
-					nameField.setText("");
-				}
-				validateName();
+		ActionListener listener = e -> {
+			boolean existingRepSelected = existingRepButton.isSelected();
+			nameList.setEnabled(existingRepSelected);
+			if (!existingRepSelected) {
+				nameList.clearSelection();
 			}
+			boolean createRepSelected = createRepButton.isSelected();
+			nameField.setEnabled(createRepSelected);
+			nameLabel.setEnabled(createRepSelected);
+			if (!createRepSelected) {
+				nameField.setText("");
+			}
+			validateName();
 		};
 		existingRepButton.addActionListener(listener);
 		createRepButton.addActionListener(listener);
 
 		ListSelectionModel selModel = nameList.getSelectionModel();
-		selModel.addListSelectionListener(new ListSelectionListener() {
-			/* (non Javadoc)
-			 * @see javax.swing.event.ListSelectionListener#valueChanged(javax.swing.event.ListSelectionEvent)
-			 */
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				if (e.getValueIsAdjusting()) {
-					return;
-				}
-				panelManager.getWizardManager().validityChanged();
+		selModel.addListSelectionListener(e -> {
+			if (e.getValueIsAdjusting()) {
+				return;
 			}
+			panelManager.getWizardManager().validityChanged();
 		});
 	}
 }

@@ -16,14 +16,26 @@
 package ghidra.program.database;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Set;
 
-import db.*;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.LongField;
+import db.RecordIterator;
+import db.Schema;
+import db.Table;
 import ghidra.framework.data.DomainObjectDBChangeSet;
 import ghidra.program.database.map.AddressMap;
 import ghidra.program.database.map.NormalizedAddressSet;
 import ghidra.program.database.util.SynchronizedAddressSetCollection;
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressSetCollection;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.address.KeyRange;
 import ghidra.program.model.listing.ProgramChangeSet;
 
 /**
@@ -92,8 +104,8 @@ class ProgramDBChangeSet implements ProgramChangeSet, DomainObjectDBChangeSet {
 	private HashSet<Long> tmpAddedSourceArchiveIds;
 	private HashSet<Long> tmpAddedTagIds;
 
-	private LinkedList<ChangeDiff> undoList = new LinkedList<ChangeDiff>();
-	private LinkedList<ChangeDiff> redoList = new LinkedList<ChangeDiff>();
+	private LinkedList<ChangeDiff> undoList = new LinkedList<>();
+	private LinkedList<ChangeDiff> redoList = new LinkedList<>();
 
 	private boolean inTransaction;
 	private int numUndos = 4;
@@ -112,18 +124,18 @@ class ProgramDBChangeSet implements ProgramChangeSet, DomainObjectDBChangeSet {
 		changedRegAddrsSinceCheckout = new NormalizedAddressSet(addrMap);
 		changedAddrsSinceSave = new NormalizedAddressSet(addrMap);
 		changedRegAddrsSinceSave = new NormalizedAddressSet(addrMap);
-		changedDataTypeIds = new HashSet<Long>();
-		changedCategoryIds = new HashSet<Long>();
-		changedProgramTreeIds = new HashSet<Long>();
-		changedSymbolIds = new HashSet<Long>();
-		changedSourceArchiveIds = new HashSet<Long>();
-		changedTagIds = new HashSet<Long>();
-		addedDataTypeIds = new HashSet<Long>();
-		addedCategoryIds = new HashSet<Long>();
-		addedProgramTreeIds = new HashSet<Long>();
-		addedSymbolIds = new HashSet<Long>();
-		addedSourceArchiveIds = new HashSet<Long>();
-		addedTagIds = new HashSet<Long>();
+		changedDataTypeIds = new HashSet<>();
+		changedCategoryIds = new HashSet<>();
+		changedProgramTreeIds = new HashSet<>();
+		changedSymbolIds = new HashSet<>();
+		changedSourceArchiveIds = new HashSet<>();
+		changedTagIds = new HashSet<>();
+		addedDataTypeIds = new HashSet<>();
+		addedCategoryIds = new HashSet<>();
+		addedProgramTreeIds = new HashSet<>();
+		addedSymbolIds = new HashSet<>();
+		addedSourceArchiveIds = new HashSet<>();
+		addedTagIds = new HashSet<>();
 	}
 
 	@Override
@@ -386,18 +398,18 @@ class ProgramDBChangeSet implements ProgramChangeSet, DomainObjectDBChangeSet {
 
 		tmpAddrs = new NormalizedAddressSet(addrMap);
 		tmpRegAddrs = new NormalizedAddressSet(addrMap);
-		tmpChangedDataTypeIds = new HashSet<Long>();
-		tmpChangedCategoryIds = new HashSet<Long>();
-		tmpChangedProgramTreeIds = new HashSet<Long>();
-		tmpChangedSymbolIds = new HashSet<Long>();
-		tmpChangedSourceArchiveIds = new HashSet<Long>();
-		tmpChangedTagIds = new HashSet<Long>();
-		tmpAddedDataTypeIds = new HashSet<Long>();
-		tmpAddedCategoryIds = new HashSet<Long>();
-		tmpAddedProgramTreeIds = new HashSet<Long>();
-		tmpAddedSymbolIds = new HashSet<Long>();
-		tmpAddedSourceArchiveIds = new HashSet<Long>();
-		tmpAddedTagIds = new HashSet<Long>();
+		tmpChangedDataTypeIds = new HashSet<>();
+		tmpChangedCategoryIds = new HashSet<>();
+		tmpChangedProgramTreeIds = new HashSet<>();
+		tmpChangedSymbolIds = new HashSet<>();
+		tmpChangedSourceArchiveIds = new HashSet<>();
+		tmpChangedTagIds = new HashSet<>();
+		tmpAddedDataTypeIds = new HashSet<>();
+		tmpAddedCategoryIds = new HashSet<>();
+		tmpAddedProgramTreeIds = new HashSet<>();
+		tmpAddedSymbolIds = new HashSet<>();
+		tmpAddedSourceArchiveIds = new HashSet<>();
+		tmpAddedTagIds = new HashSet<>();
 	}
 
 	@Override

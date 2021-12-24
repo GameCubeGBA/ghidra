@@ -17,7 +17,7 @@ package ghidra.util.task;
 
 public interface CachingLoader<T> {
 
-	public T get(TaskMonitor monitor);
+	T get(TaskMonitor monitor);
 
-	public void clear();
+	void clear();
 }

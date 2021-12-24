@@ -15,18 +15,29 @@
  */
 package docking.widgets.table.threaded;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BooleanSupplier;
 
 import javax.swing.JComponent;
 
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
-import docking.widgets.filter.*;
+import docking.widgets.filter.FilterOptions;
+import docking.widgets.filter.TextFilter;
+import docking.widgets.filter.TextFilterFactory;
+import docking.widgets.filter.TextFilterStrategy;
 import docking.widgets.table.DefaultRowFilterTransformer;
 import generic.concurrent.ConcurrentQ;
 import ghidra.docking.spy.SpyEventRecorder;
@@ -626,7 +637,7 @@ public class IncrementalThreadedTableTest extends AbstractThreadedTableTest {
 		void finishLoading();
 	}
 
-	private class NoLoadingPolicy implements TestLoadingPolicy {
+	private static class NoLoadingPolicy implements TestLoadingPolicy {
 
 		@Override
 		public void load(TestDataKeyModel testModel, Accumulator<Long> accumulator,
@@ -640,7 +651,7 @@ public class IncrementalThreadedTableTest extends AbstractThreadedTableTest {
 		}
 	}
 
-	private class LoadingDelayPolicy implements TestLoadingPolicy {
+	private static class LoadingDelayPolicy implements TestLoadingPolicy {
 
 		@Override
 		public void load(TestDataKeyModel testModel, Accumulator<Long> accumulator,
@@ -665,7 +676,7 @@ public class IncrementalThreadedTableTest extends AbstractThreadedTableTest {
 	 * A loading policy that will put some data in table quickly, and then continue to do slow
 	 * at a much slower rate.
 	 */
-	private class BurstLoadPolicy implements TestLoadingPolicy {
+	private static class BurstLoadPolicy implements TestLoadingPolicy {
 
 		@Override
 		public void load(TestDataKeyModel testModel, Accumulator<Long> accumulator,
@@ -693,7 +704,7 @@ public class IncrementalThreadedTableTest extends AbstractThreadedTableTest {
 		}
 	}
 
-	private class SingleValueLoadPolicy implements TestLoadingPolicy {
+	private static class SingleValueLoadPolicy implements TestLoadingPolicy {
 
 		private long value;
 
@@ -724,7 +735,7 @@ public class IncrementalThreadedTableTest extends AbstractThreadedTableTest {
 	/**
 	 * A loading policy that throws an exception while loading.
 	 */
-	private class ExceptionLoadPolicy implements TestLoadingPolicy {
+	private static class ExceptionLoadPolicy implements TestLoadingPolicy {
 		@Override
 		public void load(TestDataKeyModel testModel, Accumulator<Long> accumulator,
 				TaskMonitor monitor) {
@@ -742,7 +753,7 @@ public class IncrementalThreadedTableTest extends AbstractThreadedTableTest {
 	 * A policy that will initially load half of its data, waiting for the signal to finish
 	 * loading the second half. 
 	 */
-	private class HalfThenHalfSynchronizedLoadPolicy implements SynchronizedLoadPolicy {
+	private static class HalfThenHalfSynchronizedLoadPolicy implements SynchronizedLoadPolicy {
 
 		private CountDownLatch initialLatch = new CountDownLatch(1);
 		private CountDownLatch finishLatch = new CountDownLatch(1);
@@ -804,7 +815,7 @@ public class IncrementalThreadedTableTest extends AbstractThreadedTableTest {
 	 * A policy that will initially load some of its data, then wait for the client to 
 	 * signal to proceed.  Then, it will load another chunk of data, waiting again.
 	 */
-	private class CyclicSynchronizedLoadPolicy implements SynchronizedLoadPolicy {
+	private static class CyclicSynchronizedLoadPolicy implements SynchronizedLoadPolicy {
 
 		private CountDownLatch waitForInitialLoadLatch = new CountDownLatch(1);
 

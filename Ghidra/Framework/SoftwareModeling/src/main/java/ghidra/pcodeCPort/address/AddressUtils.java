@@ -22,10 +22,7 @@ public class AddressUtils {
 		if ( v1 == v2 ) {
 			return 0;
 		}
-		if ( v1 >= 0 && v2 >= 0 ) {
-			return v1 < v2 ? -1 : 1;
-		}
-		if ( v1 < 0 && v2 < 0 ) {
+		if ( (v1 >= 0 && v2 >= 0) || (v1 < 0 && v2 < 0) ) {
 			return v1 < v2 ? -1 : 1;
 		}
 		if ( v1 < 0 ) {

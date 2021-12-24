@@ -15,18 +15,24 @@
  */
 package ghidra.util;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InvalidObjectException;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map.Entry;
+import java.util.Objects;
+
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
+
 import generic.stl.Pair;
 import ghidra.framework.store.FileSystem;
 import ghidra.util.exception.DuplicateFileException;
 import ghidra.util.xml.XmlUtilities;
 import ghidra.xml.NonThreadedXmlPullParserImpl;
 import ghidra.xml.XmlElement;
-
-import java.io.*;
-import java.util.HashMap;
-import java.util.Map.Entry;
-
-import org.xml.sax.*;
 
 /**
  * Class that represents a file of property names and values. The file
@@ -47,7 +53,7 @@ public class PropertyFile {
 	protected String parentPath;
 	protected String name;
 
-	private static enum PropertyEntryType {
+	private enum PropertyEntryType {
 		INT_TYPE("int"), LONG_TYPE("long"), BOOLEAN_TYPE("boolean"), STRING_TYPE("string");
 		PropertyEntryType(String rep) {
 			this.rep = rep;
@@ -66,7 +72,7 @@ public class PropertyFile {
 	}
 
 	private HashMap<String, Pair<PropertyEntryType, String>> map =
-		new HashMap<String, Pair<PropertyEntryType, String>>();
+		new HashMap<>();
 
 	/**
 	 * Construct a new or existing PropertyFile.
@@ -186,7 +192,7 @@ public class PropertyFile {
 	 * @param value value to set
 	 */
 	public void putInt(String propertyName, int value) {
-		map.put(propertyName, new Pair<PropertyEntryType, String>(PropertyEntryType.INT_TYPE,
+		map.put(propertyName, new Pair<>(PropertyEntryType.INT_TYPE,
 			Integer.toString(value)));
 	}
 
@@ -217,7 +223,7 @@ public class PropertyFile {
 	 */
 	public void putLong(String propertyName, long value) {
 		map.put(propertyName,
-			new Pair<PropertyEntryType, String>(PropertyEntryType.LONG_TYPE, Long.toString(value)));
+			new Pair<>(PropertyEntryType.LONG_TYPE, Long.toString(value)));
 	}
 
 	/**
@@ -231,8 +237,7 @@ public class PropertyFile {
 		if (pair == null || pair.first != PropertyEntryType.STRING_TYPE) {
 			return defaultValue;
 		}
-		String value = pair.second;
-		return value;
+		return pair.second;
 	}
 
 	/**
@@ -241,7 +246,7 @@ public class PropertyFile {
 	 * @param value value to set
 	 */
 	public void putString(String propertyName, String value) {
-		map.put(propertyName, new Pair<PropertyEntryType, String>(PropertyEntryType.STRING_TYPE,
+		map.put(propertyName, new Pair<>(PropertyEntryType.STRING_TYPE,
 			value));
 	}
 
@@ -266,7 +271,7 @@ public class PropertyFile {
 	 * @param value value to set
 	 */
 	public void putBoolean(String propertyName, boolean value) {
-		map.put(propertyName, new Pair<PropertyEntryType, String>(PropertyEntryType.BOOLEAN_TYPE,
+		map.put(propertyName, new Pair<>(PropertyEntryType.BOOLEAN_TYPE,
 			Boolean.toString(value)));
 	}
 
@@ -291,7 +296,7 @@ public class PropertyFile {
 	 */
 	public void writeState() throws IOException {
 		PrintWriter writer = new PrintWriter(propertyFile);
-		try {
+		try (writer) {
 			writer.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 			writer.println("<FILE_INFO>");
 			writer.println("    <BASIC_INFO>");
@@ -309,9 +314,6 @@ public class PropertyFile {
 			}
 			writer.println("    </BASIC_INFO>");
 			writer.println("</FILE_INFO>");
-		}
-		finally {
-			writer.close();
 		}
 	}
 
@@ -348,7 +350,7 @@ public class PropertyFile {
 				String propertyTypeString = state.getAttribute("TYPE");
 				String propertyValue = state.getAttribute("VALUE");
 				PropertyEntryType propertyType = PropertyEntryType.lookup(propertyTypeString);
-				map.put(propertyName, new Pair<PropertyEntryType, String>(propertyType,
+				map.put(propertyName, new Pair<>(propertyType,
 					propertyValue));
 				parser.end(state);
 			}
@@ -409,10 +411,7 @@ public class PropertyFile {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((propertyFile == null) ? 0 : propertyFile.hashCode());
-		return result;
+		return Objects.hash(propertyFile);
 	}
 
 	@Override
@@ -420,19 +419,11 @@ public class PropertyFile {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
 		}
 		PropertyFile other = (PropertyFile) obj;
-		if (propertyFile == null) {
-			if (other.propertyFile != null) {
-				return false;
-			}
-		}
-		else if (!propertyFile.equals(other.propertyFile)) {
+		if (!Objects.equals(propertyFile, other.propertyFile)) {
 			return false;
 		}
 		return true;

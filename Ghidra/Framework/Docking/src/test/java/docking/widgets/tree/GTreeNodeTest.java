@@ -15,9 +15,17 @@
  */
 package docking.widgets.tree;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.swing.tree.TreePath;
@@ -178,7 +186,7 @@ public class GTreeNodeTest {
 
 		TestNode child1 = new TestNode("child1");
 		TestNode child2 = new TestNode("child2");
-		List<GTreeNode> list = new ArrayList<GTreeNode>();
+		List<GTreeNode> list = new ArrayList<>();
 		list.add(child1);
 		list.add(child2);
 
@@ -322,7 +330,7 @@ public class GTreeNodeTest {
 
 	@Test
 	public void testSetChildren() {
-		List<GTreeNode> list = new ArrayList<GTreeNode>();
+		List<GTreeNode> list = new ArrayList<>();
 		TestNode child1 = new TestNode("child1");
 		TestNode child2 = new TestNode("child2");
 		list.add(child1);
@@ -483,7 +491,7 @@ public class GTreeNodeTest {
 		assertEquals(nodeA.hashCode(), nodeA.clone().hashCode());
 	}
 
-	private class TestFilter implements GTreeFilter {
+	private static class TestFilter implements GTreeFilter {
 
 		private String text;
 
@@ -560,7 +568,7 @@ public class GTreeNodeTest {
 		STRUCTURE_CHANGED, NODE_CHANGED, NODE_ADDED, NODE_REMOVED
 	}
 
-	private class TestEvent {
+	private static class TestEvent {
 		EventType type;
 		GTreeNode parent;
 		GTreeNode node;

@@ -54,7 +54,7 @@ public enum StringLayoutEnum {
 
 	private final String s;
 
-	private StringLayoutEnum(String s) {
+	StringLayoutEnum(String s) {
 		this.s = s;
 	}
 

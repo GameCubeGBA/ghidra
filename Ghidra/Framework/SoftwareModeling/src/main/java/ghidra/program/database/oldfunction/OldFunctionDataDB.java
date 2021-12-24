@@ -16,17 +16,25 @@
 package ghidra.program.database.oldfunction;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
-import db.Field;
 import db.DBRecord;
+import db.Field;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.database.map.AddressMap;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSetView;
 import ghidra.program.model.data.DataType;
 import ghidra.program.model.lang.Register;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.CodeUnit;
+import ghidra.program.model.listing.Parameter;
+import ghidra.program.model.listing.ParameterImpl;
+import ghidra.program.model.listing.Program;
+import ghidra.program.model.listing.StackFrame;
+import ghidra.program.model.listing.Variable;
+import ghidra.program.model.listing.VariableStorage;
 import ghidra.program.model.symbol.SourceType;
 import ghidra.util.Msg;
 import ghidra.util.StringUtilities;
@@ -101,8 +109,7 @@ class OldFunctionDataDB {
 	 * @see ghidra.program.model.listing.Function#getRepeatableComment()
 	 */
 	public String getRepeatableComment() {
-		String comment = functionRecord.getString(OldFunctionDBAdapter.REPEATABLE_COMMENT_COL);
-		return comment;
+		return functionRecord.getString(OldFunctionDBAdapter.REPEATABLE_COMMENT_COL);
 	}
 
 	/**
@@ -153,8 +160,7 @@ class OldFunctionDataDB {
 	 * @see ghidra.program.model.listing.Function#getStackPurgeSize()
 	 */
 	public int getStackDepthChange() {
-		int value = functionRecord.getIntValue(OldFunctionDBAdapter.STACK_DEPTH_COL);
-		return value;
+		return functionRecord.getIntValue(OldFunctionDBAdapter.STACK_DEPTH_COL);
 	}
 
 	/* (non-Javadoc)
@@ -198,7 +204,7 @@ class OldFunctionDataDB {
 	private synchronized void loadRegisterParameterList() {
 		if (regParams != null)
 			return;
-		regParams = new ArrayList<Parameter>();
+		regParams = new ArrayList<>();
 		try {
 			Field[] keys = registerAdapter.getRegisterVariableKeys(functionRecord.getKey());
 			for (int i = 0; i < keys.length; i++) {
@@ -265,9 +271,9 @@ class OldFunctionDataDB {
 
 		try {
 			Variable[] stackParams = frame.getParameters();
-			for (int i = 0; i < stackParams.length; i++) {
-				parms[ordinal++] = new OldFunctionParameter(stackParams[i].getName(), ordinal,
-					stackParams[i].getDataType(), stackParams[i].getVariableStorage(), program,
+			for (Variable stackParam : stackParams) {
+				parms[ordinal++] = new OldFunctionParameter(stackParam.getName(), ordinal,
+					stackParam.getDataType(), stackParam.getVariableStorage(), program,
 					SourceType.USER_DEFINED);
 			}
 		}

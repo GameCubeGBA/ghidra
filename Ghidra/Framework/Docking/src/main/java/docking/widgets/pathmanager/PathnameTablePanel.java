@@ -15,18 +15,32 @@
  */
 package docking.widgets.pathmanager;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-import javax.swing.*;
+import javax.swing.Icon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 
 import docking.widgets.OptionDialog;
 import docking.widgets.filechooser.GhidraFileChooser;
 import docking.widgets.filechooser.GhidraFileChooserMode;
-import docking.widgets.table.*;
+import docking.widgets.table.GTable;
+import docking.widgets.table.GTableCellRenderer;
+import docking.widgets.table.GTableCellRenderingData;
 import ghidra.framework.preferences.Preferences;
 import ghidra.util.filechooser.GhidraFileChooserModel;
 import ghidra.util.filechooser.GhidraFileFilter;
@@ -340,7 +354,7 @@ public class PathnameTablePanel extends JPanel {
 		}
 
 		List<File> files = fileChooser.getSelectedFiles();
-		String[] paths = new String[0];
+		String[] paths = {};
 		if (!files.isEmpty()) {
 			if (allowMultiFileSelection) {
 				String parent = files.get(0).getParent();

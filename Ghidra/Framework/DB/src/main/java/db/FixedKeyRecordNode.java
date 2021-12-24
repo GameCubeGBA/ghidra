@@ -338,8 +338,7 @@ abstract class FixedKeyRecordNode extends FixedKeyNode implements FieldKeyRecord
 			if (table != null) {
 				table.updatedRecord(getRecord(table.getSchema(), index), record);
 			}
-			FixedKeyNode newRoot = updateRecord(index, record);
-			return newRoot;
+			return updateRecord(index, record);
 		}
 
 		// Handle new record - see if we have room in this leaf
@@ -395,8 +394,7 @@ abstract class FixedKeyRecordNode extends FixedKeyNode implements FieldKeyRecord
 
 		// Handle removal of last record in node
 		if (keyCount == 1) {
-			FixedKeyNode newRoot = removeLeaf();
-			return newRoot;
+			return removeLeaf();
 		}
 
 		// Remove record within this node

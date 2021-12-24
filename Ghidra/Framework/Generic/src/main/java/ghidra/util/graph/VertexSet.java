@@ -16,11 +16,14 @@
  */
 package ghidra.util.graph;
 
+import java.util.ConcurrentModificationException;
+import java.util.HashSet;
+import java.util.NoSuchElementException;
+import java.util.Set;
+
 import ghidra.util.Msg;
 import ghidra.util.datastruct.LongIntHashtable;
 import ghidra.util.exception.NoValueException;
-
-import java.util.*;
 
 /** 
  * VertexSet is a container class for objects of type Vertex. It is
@@ -84,7 +87,8 @@ class VertexSet implements KeyIndexableSet<Vertex>
 	   * 
 	   * @return true if and only if the vertex was sucessfully added.
 	   */
-	  public boolean add( Vertex v )
+	  @Override
+	public boolean add( Vertex v )
 	  {
 	      long key = v.key();
 	      if( !keyIndices.contains( key ) )
@@ -105,7 +109,8 @@ class VertexSet implements KeyIndexableSet<Vertex>
 	   * Removes the given vertex from this vertex set if it contains it. 
 	   * @return true if and only if the vertex was sucessfully removed.
 	   */
-	  public boolean remove( Vertex v )
+	  @Override
+	public boolean remove( Vertex v )
 	  {
 		if (v == null) {
 			return false;
@@ -133,7 +138,6 @@ class VertexSet implements KeyIndexableSet<Vertex>
 	    }
 	    catch( NoValueException e )
 	    {
-	        return false;
 	    }
 	    return false;
 	  }
@@ -141,7 +145,8 @@ class VertexSet implements KeyIndexableSet<Vertex>
 	/** 
 	 * Return The number of vertices in this VertexSet. 
 	 */
-  public int size()
+  @Override
+public int size()
   {
        return keyIndices.size();
   }
@@ -150,7 +155,8 @@ class VertexSet implements KeyIndexableSet<Vertex>
 	 * Return true iff the specified KeyedObject is contained in
 	 * this VertexSet.
 	 */
-  public boolean contains( Vertex v )
+  @Override
+public boolean contains( Vertex v )
   {
 	  if (v == null) {
 		  return false;
@@ -428,12 +434,12 @@ class VertexSet implements KeyIndexableSet<Vertex>
   /*
    * @see ghidra.util.graph.KeyIndexableSet#getKeyedObject(long)
    */
+	@Override
 	public Vertex getKeyedObject(long key) {
 		if (keyIndices.contains(key))
 			try {
 				return vertices[keyIndices.get(key)];
 			} catch (Exception e) {
-				return null;
 			}
 		return null;
 	}
@@ -454,7 +460,8 @@ class VertexSet implements KeyIndexableSet<Vertex>
   /** 
    * Return the number of vertices this VertexSet may hold without growing.
    */
-  public int capacity()
+  @Override
+public int capacity()
   {
       return this.capacity;
   }
@@ -539,7 +546,8 @@ class VertexSet implements KeyIndexableSet<Vertex>
 	/** 
 	 * Get the number of times this VertexSet has changed 
 	 */
-  public long getModificationNumber()
+  @Override
+public long getModificationNumber()
   {
       return this.modificationNumber;
   }
@@ -549,7 +557,8 @@ class VertexSet implements KeyIndexableSet<Vertex>
 	 * The iterator becomes invalid and throws a ConcurrentModificationException
 	 * if any changes are made to the VertexSet after the iterator is created.
 	 */
-  public GraphIterator<Vertex> iterator()
+  @Override
+public GraphIterator<Vertex> iterator()
   {
       return new VertexSetIterator();
   }
@@ -560,7 +569,7 @@ class VertexSet implements KeyIndexableSet<Vertex>
 	 */
   public Set<Vertex> toSet()
   {
-      Set<Vertex> vs = new HashSet<Vertex>( this.size() );
+      Set<Vertex> vs = new HashSet<>( this.size() );
       GraphIterator<Vertex> i = this.iterator();
       while( i.hasNext() )
       {
@@ -572,7 +581,8 @@ class VertexSet implements KeyIndexableSet<Vertex>
 	/** 
 	 * Return the elements of this VertexSet as an Vertex[]. 
 	 */
-  public Vertex[] toArray()
+  @Override
+public Vertex[] toArray()
   {
       Vertex[] theVertices = new Vertex[this.size()];
       int i=0, cnt = 0;
@@ -622,7 +632,8 @@ class VertexSet implements KeyIndexableSet<Vertex>
 		 * @throws ConcurrentModificationException if the VertexSet is 
 		 * modified by methods outside this iterator.
 		 */
-	    public boolean hasNext() throws ConcurrentModificationException
+	    @Override
+		public boolean hasNext() throws ConcurrentModificationException
 	    {
 	        if( setModificationNumber != getModificationNumber() )
 	        {
@@ -639,7 +650,8 @@ class VertexSet implements KeyIndexableSet<Vertex>
 		/** 
 		 * Return the next Vertex in the iteration
 		 */
-	    public Vertex next() throws ConcurrentModificationException
+	    @Override
+		public Vertex next() throws ConcurrentModificationException
 	    {
 	        if( setModificationNumber != getModificationNumber() )
 	        {
@@ -657,7 +669,8 @@ class VertexSet implements KeyIndexableSet<Vertex>
 		/** 
 		 * Remove the vertex returned by the most recent call to next(). 
 		 */
-	    public boolean remove() throws ConcurrentModificationException
+	    @Override
+		public boolean remove() throws ConcurrentModificationException
 	    {
 	        boolean removed;
 	        if( setModificationNumber != getModificationNumber() )

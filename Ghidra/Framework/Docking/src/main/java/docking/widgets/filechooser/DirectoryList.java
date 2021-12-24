@@ -18,13 +18,27 @@
  */
 package docking.widgets.filechooser;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import docking.event.mouse.GMouseListenerAdapter;
 import docking.widgets.AutoLookup;
@@ -198,14 +212,7 @@ class DirectoryList extends GList<File> implements GhidraFileChooserDirectoryMod
 	private void handleEnterKey() {
 
 		int[] selectedIndices = getSelectedIndices();
-		if (selectedIndices.length == 0) {
-			chooser.okCallback();
-			// this implies the user has somehow put focus into the table, but has not
-			// made a selection...just let the chooser decide what to do
-			return;
-		}
-
-		if (selectedIndices.length > 1) {
+		if ((selectedIndices.length == 0) || (selectedIndices.length > 1)) {
 			// let the chooser decide what to do with multiple rows selected
 			chooser.okCallback();
 			return;

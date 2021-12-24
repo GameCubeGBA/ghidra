@@ -15,9 +15,15 @@
  */
 package docking.widgets.table;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Objects;
 
-import ghidra.docking.settings.*;
+import ghidra.docking.settings.FloatingPointPrecisionSettingsDefinition;
+import ghidra.docking.settings.FormatSettingsDefinition;
+import ghidra.docking.settings.IntegerSignednessFormattingModeSettingsDefinition;
+import ghidra.docking.settings.Settings;
+import ghidra.docking.settings.SettingsDefinition;
 import ghidra.framework.plugintool.ServiceProvider;
 import ghidra.util.NumericUtilities;
 import ghidra.util.table.column.GColumnRenderer;
@@ -40,7 +46,7 @@ import utilities.util.reflection.ReflectionUtilities;
 public abstract class AbstractDynamicTableColumn<ROW_TYPE, COLUMN_TYPE, DATA_SOURCE>
 		implements DynamicTableColumn<ROW_TYPE, COLUMN_TYPE, DATA_SOURCE> {
 
-	public static SettingsDefinition[] NO_SETTINGS_DEFINITIONS = new SettingsDefinition[0];
+	public static SettingsDefinition[] NO_SETTINGS_DEFINITIONS = {};
 
 	protected static final FormatSettingsDefinition INTEGER_RADIX_SETTING =
 		FormatSettingsDefinition.DEF_DECIMAL;
@@ -52,10 +58,10 @@ public abstract class AbstractDynamicTableColumn<ROW_TYPE, COLUMN_TYPE, DATA_SOU
 		FloatingPointPrecisionSettingsDefinition.DEF;
 
 	protected static SettingsDefinition[] INTEGER_SETTINGS_DEFINITIONS =
-		new SettingsDefinition[] { INTEGER_RADIX_SETTING, INTEGER_SIGNEDNESS_MODE_SETTING };
+		{ INTEGER_RADIX_SETTING, INTEGER_SIGNEDNESS_MODE_SETTING };
 
 	protected static SettingsDefinition[] FLOATING_POINT_SETTINGS_DEFINITIONS =
-		new SettingsDefinition[] { FLOATING_POINT_PRECISION_SETTING };
+		{ FLOATING_POINT_PRECISION_SETTING };
 
 	private boolean hasConfiguredDefaultSettings = false;
 	private SettingsDefinition[] defaultSettingsDefinitions = NO_SETTINGS_DEFINITIONS;
@@ -166,11 +172,7 @@ public abstract class AbstractDynamicTableColumn<ROW_TYPE, COLUMN_TYPE, DATA_SOU
 			return true;
 		}
 
-		if (obj == null) {
-			return false;
-		}
-
-		if (!(obj instanceof AbstractDynamicTableColumn)) {
+		if ((obj == null) || !(obj instanceof AbstractDynamicTableColumn)) {
 			return false;
 		}
 

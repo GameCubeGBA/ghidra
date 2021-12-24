@@ -89,12 +89,9 @@ public class LongIntHashtableTest extends AbstractGenericTest {
                 if (i%100 != 0) {
                     Assert.fail("hashtable contains key "+i+", but it shouldn't");
                 }
-            }
-            else {
-                if (i%100 == 0) {
-                    Assert.fail("hashtable should contain key "+i+", but it doesn't");
-                }
-            }
+            } else if (i%100 == 0) {
+			    Assert.fail("hashtable should contain key "+i+", but it doesn't");
+			}
         }
     }
 
@@ -113,24 +110,22 @@ public class LongIntHashtableTest extends AbstractGenericTest {
 
     public static void testContains(LongIntHashtable ht, long[] keys, String test) {
 
-        for(int i=0;i<keys.length;i++) {
-            if (!ht.contains(keys[i])) {
-                Assert.fail("hastable should contain key "+keys[i]+", but it doesn't");
+        for (long key : keys) {
+            if (!ht.contains(key)) {
+                Assert.fail("hastable should contain key "+key+", but it doesn't");
             }
         }
 
         for(int i= 0;i<=50000;i++) {
-            if (ht.contains(i)) {
-                if (!contains(keys,i)) {
-                    Assert.fail("hashtable contains key "+i+", but it shouldn't");
-                }
-            }
+            if (ht.contains(i) && !contains(keys,i)) {
+			    Assert.fail("hashtable contains key "+i+", but it shouldn't");
+			}
         }
     }
 
     public static boolean contains(long[] keys, long key) {
-        for(int i=0;i<keys.length;i++) {
-            if (keys[i] == key) {
+        for (long key2 : keys) {
+            if (key2 == key) {
                 return true;
             }
         }

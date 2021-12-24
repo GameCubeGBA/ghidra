@@ -16,12 +16,17 @@
 package ghidra.graph.viewer.shape;
 
 import java.awt.Shape;
-import java.awt.geom.*;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.GeneralPath;
+import java.awt.geom.NoninvertibleTransformException;
+import java.awt.geom.Point2D;
 import java.util.List;
 
 import com.google.common.base.Function;
 
-import ghidra.graph.viewer.*;
+import ghidra.graph.viewer.GraphViewerUtils;
+import ghidra.graph.viewer.VisualEdge;
+import ghidra.graph.viewer.VisualVertex;
 import ghidra.util.Msg;
 import ghidra.util.SystemUtilities;
 
@@ -111,8 +116,7 @@ public class ArticulatedEdgeTransformer<V extends VisualVertex, E extends Visual
 			// TODO it is not clear why this is using an inverse transform; why not just create
 			// the transform that we want?
 			AffineTransform inverse = transform.createInverse();
-			Shape transformedShape = inverse.createTransformedShape(path);
-			return transformedShape;
+			return inverse.createTransformedShape(path);
 		}
 		catch (NoninvertibleTransformException e1) {
 			Msg.error(this, "Unexpected exception transforming an edge", e1);

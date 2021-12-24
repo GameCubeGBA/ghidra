@@ -18,7 +18,9 @@ package ghidra.app.plugin.assembler.sleigh.expr;
 import java.util.Map;
 import java.util.Set;
 
-import ghidra.app.plugin.assembler.sleigh.sem.*;
+import ghidra.app.plugin.assembler.sleigh.sem.AssemblyPatternBlock;
+import ghidra.app.plugin.assembler.sleigh.sem.AssemblyResolution;
+import ghidra.app.plugin.assembler.sleigh.sem.AssemblyResolvedConstructor;
 import ghidra.app.plugin.processors.sleigh.expression.ContextField;
 
 /**

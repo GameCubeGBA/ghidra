@@ -22,6 +22,6 @@ package ghidra.program.model.lang;
  */
 public interface ParserContext {
 
-	public InstructionPrototype getPrototype();
+	InstructionPrototype getPrototype();
 
 }

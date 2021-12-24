@@ -16,7 +16,7 @@
  */
 package ghidra.framework.store;
 
-import java.io.*;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.OutputStream;
 

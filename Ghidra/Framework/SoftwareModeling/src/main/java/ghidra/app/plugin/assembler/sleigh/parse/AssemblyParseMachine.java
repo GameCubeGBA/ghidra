@@ -15,15 +15,32 @@
  */
 package ghidra.app.plugin.assembler.sleigh.parse;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Deque;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.Stack;
+import java.util.TreeSet;
 
 import generic.util.DequePush;
 import ghidra.app.plugin.assembler.sleigh.grammars.AssemblyProduction;
 import ghidra.app.plugin.assembler.sleigh.grammars.AssemblySentential;
 import ghidra.app.plugin.assembler.sleigh.grammars.AssemblySentential.TruncatedWhiteSpaceParseToken;
-import ghidra.app.plugin.assembler.sleigh.parse.AssemblyParseActionGotoTable.*;
-import ghidra.app.plugin.assembler.sleigh.symbol.*;
-import ghidra.app.plugin.assembler.sleigh.tree.*;
+import ghidra.app.plugin.assembler.sleigh.parse.AssemblyParseActionGotoTable.AcceptAction;
+import ghidra.app.plugin.assembler.sleigh.parse.AssemblyParseActionGotoTable.Action;
+import ghidra.app.plugin.assembler.sleigh.parse.AssemblyParseActionGotoTable.GotoAction;
+import ghidra.app.plugin.assembler.sleigh.parse.AssemblyParseActionGotoTable.ReduceAction;
+import ghidra.app.plugin.assembler.sleigh.parse.AssemblyParseActionGotoTable.ShiftAction;
+import ghidra.app.plugin.assembler.sleigh.symbol.AssemblyEOI;
+import ghidra.app.plugin.assembler.sleigh.symbol.AssemblySymbol;
+import ghidra.app.plugin.assembler.sleigh.symbol.AssemblyTerminal;
+import ghidra.app.plugin.assembler.sleigh.tree.AssemblyParseBranch;
+import ghidra.app.plugin.assembler.sleigh.tree.AssemblyParseToken;
+import ghidra.app.plugin.assembler.sleigh.tree.AssemblyParseTreeNode;
 import ghidra.app.plugin.assembler.sleigh.util.DbgTimer;
 import ghidra.app.plugin.assembler.sleigh.util.DbgTimer.DbgCtx;
 import ghidra.app.plugin.assembler.sleigh.util.SleighUtil;
@@ -128,16 +145,7 @@ public class AssemblyParseMachine implements Comparable<AssemblyParseMachine> {
 			return false;
 		}
 		AssemblyParseMachine apm = (AssemblyParseMachine) that;
-		if (this.pos != apm.pos) {
-			return false;
-		}
-		if (!this.output.equals(apm.output)) {
-			return false;
-		}
-		if (!this.stack.equals(apm.stack)) {
-			return false;
-		}
-		if (this.accepted != apm.accepted) {
+		if ((this.pos != apm.pos) || !this.output.equals(apm.output) || !this.stack.equals(apm.stack) || (this.accepted != apm.accepted)) {
 			return false;
 		}
 		if (this.error != apm.error) {
@@ -171,10 +179,7 @@ public class AssemblyParseMachine implements Comparable<AssemblyParseMachine> {
 			return -1;
 		}
 		result = (this.error - that.error);
-		if (result != 0) {
-			return result;
-		}
-		return 0;
+		return result;
 	}
 
 	/* *******************************************************************************************/
@@ -286,13 +291,7 @@ public class AssemblyParseMachine implements Comparable<AssemblyParseMachine> {
 	protected static AssemblyParseMachine findLoop(AssemblyParseMachine machine,
 			Collection<AssemblyParseMachine> visited) {
 		for (AssemblyParseMachine v : visited) {
-			if (v == machine) {
-				continue;
-			}
-			if (v.pos != machine.pos) {
-				continue;
-			}
-			if (!v.stack.equals(machine.stack)) {
+			if ((v == machine) || (v.pos != machine.pos) || !v.stack.equals(machine.stack)) {
 				continue;
 			}
 			return v;

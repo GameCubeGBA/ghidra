@@ -15,16 +15,16 @@
  */
 package ghidra.framework.model;
 
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+
 import ghidra.framework.client.RepositoryAdapter;
 import ghidra.framework.remote.User;
 import ghidra.framework.store.local.LocalFileSystem;
 import ghidra.util.InvalidNameException;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
-
-import java.io.IOException;
-import java.net.URL;
-import java.util.List;
 
 /**
  * The ProjectData interface provides access to all the data files and folders
@@ -35,19 +35,19 @@ public interface ProjectData {
 	/**
 	 * @return local storage implementation class
 	 */
-	public Class<? extends LocalFileSystem> getLocalStorageClass();
+	Class<? extends LocalFileSystem> getLocalStorageClass();
 
 	/**
 	 * Returns the root folder of the project.
 	 */
-	public DomainFolder getRootFolder();
+	DomainFolder getRootFolder();
 
 	/**
 	 * Get domain folder specified by an absolute data path.
 	 * @param path the absolute path of domain folder relative to the data folder.
 	 * @return domain folder or null if folder not found
 	 */
-	public DomainFolder getFolder(String path);
+	DomainFolder getFolder(String path);
 
 	/**
 	 * Get the approximate number of files contained within the project.  The number 
@@ -63,28 +63,28 @@ public interface ProjectData {
 	 * file counts will be returned.
 	 * @return number of project files or -1 if unknown.
 	 */
-	public int getFileCount();
+	int getFileCount();
 
 	/**
 	 * Get domain file specified by an absolute data path.
 	 * @param path the absolute path of domain file relative to the root folder.
 	 * @return domain file or null if file not found
 	 */
-	public DomainFile getFile(String path);
+	DomainFile getFile(String path);
 
 	/**
 	 * Finds all open domain files and appends
 	 * them to the specified list.
 	 * @param list the list to receive the open domain files
 	 */
-	public void findOpenFiles(List<DomainFile> list);
+	void findOpenFiles(List<DomainFile> list);
 
 	/**
 	 * Get domain file specified by its unique fileID. 
 	 * @param fileID domain file ID
 	 * @return domain file or null if file not found
 	 */
-	public DomainFile getFileByID(String fileID);
+	DomainFile getFileByID(String fileID);
 
 	/**
 	 * Get a URL for a shared domain file which is available 
@@ -93,7 +93,7 @@ public interface ProjectData {
 	 * @return URL object for accessing shared file from outside of a project, or
 	 * null if file does not exist or is not shared.
 	 */
-	public URL getSharedFileURL(String path);
+	URL getSharedFileURL(String path);
 
 	/**
 	 * Transform the specified name into an acceptable folder or file item name.  Only an individual folder
@@ -102,44 +102,44 @@ public interface ProjectData {
 	 * @param name
 	 * @return valid name or "unknown" if no valid characters exist within name provided
 	 */
-	public String makeValidName(String name);
+	String makeValidName(String name);
 
 	/**
 	 * Returns the projectLocator for the this ProjectData.
 	 */
-	public ProjectLocator getProjectLocator();
+	ProjectLocator getProjectLocator();
 
 	/**
 	 * Adds a listener that will be notified when any folder or file
 	 * changes in the project.
 	 * @param listener the listener to be notified of folder and file changes.
 	 */
-	public void addDomainFolderChangeListener(DomainFolderChangeListener listener);
+	void addDomainFolderChangeListener(DomainFolderChangeListener listener);
 
 	/**
 	 * Removes the listener to be notified of folder and file changes.
 	 * @param listener the listener to be removed.
 	 */
-	public void removeDomainFolderChangeListener(DomainFolderChangeListener listener);
+	void removeDomainFolderChangeListener(DomainFolderChangeListener listener);
 
 	/**
 	 * Sync the Domain folder/file structure with the underlying file structure.
 	 * @param force if true all folders will be be visited and refreshed, if false
 	 * only those folders previously visited will be refreshed.
 	 */
-	public void refresh(boolean force) throws IOException;
+	void refresh(boolean force) throws IOException;
 
 	/**
 	 * Returns User object associated with remote repository or null if a remote repository
 	 * is not used.
 	 */
-	public User getUser();
+	User getUser();
 
 	/**
 	 * Return the repository for this project data.
 	 * @return null if the project is not associated with a repository
 	 */
-	public RepositoryAdapter getRepository();
+	RepositoryAdapter getRepository();
 
 	/**
 	 * Convert a local project to a shared project. NOTE: The project should be closed and
@@ -152,7 +152,7 @@ public interface ProjectData {
 	 * converted to private files. 
 	 * 
 	 */
-	public void convertProjectToShared(RepositoryAdapter repository, TaskMonitor monitor)
+	void convertProjectToShared(RepositoryAdapter repository, TaskMonitor monitor)
 			throws IOException, CancelledException;
 
 	/**
@@ -165,19 +165,19 @@ public interface ProjectData {
 	 * the filesystem
 	 * @throws CancelledException if the user canceled the update
 	 */
-	public void updateRepositoryInfo(RepositoryAdapter repository, TaskMonitor monitor)
+	void updateRepositoryInfo(RepositoryAdapter repository, TaskMonitor monitor)
 			throws IOException, CancelledException;
 
 	/**
 	 * Close the project storage associated with this project data object.
 	 * NOTE: This should not be invoked if this object is utilized by a Project instance.
 	 */
-	public void close();
+	void close();
 
 	/**
 	 * @return the maximum name length permitted for folders or items.
 	 */
-	public int getMaxNameLength();
+	int getMaxNameLength();
 
 	/**
 	 * Validate a folder/item name or path.
@@ -185,6 +185,6 @@ public interface ProjectData {
 	 * @param isPath if true name represents full path
 	 * @throws InvalidNameException if name is invalid
 	 */
-	public void testValidName(String name, boolean isPath) throws InvalidNameException;
+	void testValidName(String name, boolean isPath) throws InvalidNameException;
 
 }

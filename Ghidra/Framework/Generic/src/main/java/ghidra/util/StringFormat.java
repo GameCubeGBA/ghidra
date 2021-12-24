@@ -58,7 +58,7 @@ public class StringFormat {
 	 */
 	public static String padIt(String str, int padlen, char endchar, boolean padded) {
 		String pad = "0000000000000000000000000000000000000000000000000000000000000000";
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 
 		// pad the front with zeroes
 		if (padded) {

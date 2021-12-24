@@ -18,11 +18,25 @@ package docking.action;
 import java.awt.Component;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
-import javax.swing.*;
+import javax.swing.Action;
+import javax.swing.KeyStroke;
+import javax.swing.MenuSelectionManager;
 
-import docking.*;
+import docking.ActionContext;
+import docking.ComponentProvider;
+import docking.DialogComponentProvider;
+import docking.DockingDialog;
+import docking.DockingKeyBindingAction;
+import docking.DockingWindowManager;
+import docking.ExecutableAction;
+import docking.KeyBindingPrecedence;
+import docking.MultiActionDialog;
+import docking.Tool;
 import docking.actions.KeyBindingUtils;
 import generic.util.WindowUtilities;
 import ghidra.util.Swing;
@@ -282,8 +296,7 @@ public class MultipleKeyAction extends DockingKeyBindingAction {
 		ActionContext localContext = getLocalContext(localProvider);
 		localContext.setSourceObject(eventSource);
 		ActionContext globalContext = tool.getDefaultToolContext();
-		List<ExecutableAction> validActions = getValidContextActions(localContext, globalContext);
-		return validActions;
+		return getValidContextActions(localContext, globalContext);
 	}
 
 	private List<ExecutableAction> getDialogActions(Window window) {
@@ -294,8 +307,7 @@ public class MultipleKeyAction extends DockingKeyBindingAction {
 			return Collections.emptyList();
 		}
 		ActionContext context = provider.getActionContext(null);
-		List<ExecutableAction> validActions = getValidContextActions(context, null);
-		return validActions;
+		return getValidContextActions(context, null);
 	}
 
 	private ComponentProvider getProvider(DockingWindowManager dwm, Object eventSource) {
@@ -338,7 +350,7 @@ public class MultipleKeyAction extends DockingKeyBindingAction {
 		return buildy.toString();
 	}
 
-	private class ActionData {
+	private static class ActionData {
 		DockingActionIf action;
 		ComponentProvider provider;
 

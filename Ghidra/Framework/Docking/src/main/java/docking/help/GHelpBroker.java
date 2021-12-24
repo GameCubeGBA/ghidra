@@ -15,19 +15,56 @@
  */
 package docking.help;
 
-import java.awt.*;
-import java.awt.geom.*;
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Composite;
+import java.awt.Container;
+import java.awt.Dialog;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
+import java.awt.Shape;
+import java.awt.Window;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.GeneralPath;
+import java.awt.geom.Path2D;
+import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
-import javax.help.*;
+import javax.help.DefaultHelpBroker;
+import javax.help.HelpModel;
+import javax.help.HelpSet;
+import javax.help.JHelp;
+import javax.help.JHelpContentViewer;
+import javax.help.NavigatorView;
+import javax.help.WindowPresentation;
 import javax.help.event.HelpModelEvent;
 import javax.help.event.HelpModelListener;
-import javax.swing.*;
-import javax.swing.text.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JEditorPane;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JToolBar;
+import javax.swing.JViewport;
+import javax.swing.SwingUtilities;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
 import javax.swing.text.html.HTML;
 import javax.swing.text.html.HTMLDocument;
 
@@ -179,11 +216,7 @@ public class GHelpBroker extends DefaultHelpBroker {
 	}
 
 	private void initializeScreenDevice() {
-		if (isInitialized()) {
-			return;
-		}
-
-		if (activationWindow == null) {
+		if (isInitialized() || (activationWindow == null)) {
 			// This can happen when we show the 'What's New' help page on a fresh install.  In
 			// that case, we were not activated from an existing window, thus, there may 
 			// be no parent window.
@@ -630,7 +663,7 @@ public class GHelpBroker extends DefaultHelpBroker {
 		}
 	}
 
-	private class LocationHintPainter implements AnimationPainter {
+	private static class LocationHintPainter implements AnimationPainter {
 
 		private Color color = new Color(100, 100, 255, 100);
 		private Shape paintShape;

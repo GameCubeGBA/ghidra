@@ -15,11 +15,17 @@
  */
 package ghidra.graph.algo;
 
-import static util.CollectionUtils.*;
+import static util.CollectionUtils.asCollection;
+import static util.CollectionUtils.asList;
+import static util.CollectionUtils.asSet;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
-import ghidra.graph.*;
+import ghidra.graph.GDirectedGraph;
+import ghidra.graph.GEdge;
+import ghidra.graph.GraphAlgorithms;
 
 /**
  * The methods on this interface are meant to enable graph traversal in a way that allows 
@@ -161,7 +167,6 @@ public class GraphNavigator<V, E extends GEdge<V>> {
 	 * @return the ordered vertices
 	 */
 	public List<V> getVerticesInPostOrder(GDirectedGraph<V, E> graph) {
-		List<V> postOrder = asList(GraphAlgorithms.getVerticesInPostOrder(graph, this));
-		return postOrder;
+		return asList(GraphAlgorithms.getVerticesInPostOrder(graph, this));
 	}
 }

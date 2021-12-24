@@ -16,10 +16,10 @@
  */
 package ghidra.framework.model;
 
-import ghidra.framework.protocol.ghidra.GhidraURL;
-
 import java.io.File;
 import java.net.URL;
+
+import ghidra.framework.protocol.ghidra.GhidraURL;
 
 /**
  * Lightweight descriptor of a local Project storage location.

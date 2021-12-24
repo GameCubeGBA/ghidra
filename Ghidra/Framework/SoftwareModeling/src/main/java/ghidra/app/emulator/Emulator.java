@@ -15,19 +15,44 @@
  */
 package ghidra.app.emulator;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
-import ghidra.app.emulator.memory.*;
-import ghidra.app.emulator.state.*;
+import ghidra.app.emulator.memory.CompositeLoadImage;
+import ghidra.app.emulator.memory.EmulatorLoadData;
+import ghidra.app.emulator.memory.MemoryImage;
+import ghidra.app.emulator.memory.MemoryLoadImage;
+import ghidra.app.emulator.state.FilteredMemoryPageOverlay;
+import ghidra.app.emulator.state.FilteredRegisterBank;
+import ghidra.app.emulator.state.RegisterState;
 import ghidra.app.plugin.processors.sleigh.SleighLanguage;
-import ghidra.pcode.emulate.*;
+import ghidra.pcode.emulate.BreakTableCallBack;
+import ghidra.pcode.emulate.Emulate;
+import ghidra.pcode.emulate.EmulateDisassemblerContext;
+import ghidra.pcode.emulate.EmulateExecutionState;
+import ghidra.pcode.emulate.EmulateMemoryStateBuffer;
+import ghidra.pcode.emulate.InstructionDecodeException;
 import ghidra.pcode.error.LowlevelError;
-import ghidra.pcode.memstate.*;
+import ghidra.pcode.memstate.MemoryFaultHandler;
+import ghidra.pcode.memstate.MemoryPageBank;
+import ghidra.pcode.memstate.MemoryState;
 import ghidra.program.disassemble.Disassembler;
-import ghidra.program.model.address.*;
-import ghidra.program.model.lang.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.lang.InstructionBlock;
+import ghidra.program.model.lang.InstructionError;
+import ghidra.program.model.lang.Language;
+import ghidra.program.model.lang.Register;
+import ghidra.program.model.lang.RegisterValue;
 import ghidra.program.model.listing.Instruction;
-import ghidra.util.*;
+import ghidra.util.DataConverter;
+import ghidra.util.Msg;
+import ghidra.util.NumericUtilities;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
@@ -179,7 +204,7 @@ public class Emulator {
 			List<Boolean> initiailizedVals = mstate.isInitialized(key);
 			for (int i = 0; i < vals.size(); i++) {
 				String useKey = "";
-				if (key.equals("GDTR") || key.equals("IDTR") || key.equals("LDTR")) {
+				if ("GDTR".equals(key) || "IDTR".equals(key) || "LDTR".equals(key)) {
 					if (i == 0) {
 						useKey = key + "_Limit";
 					}
@@ -187,7 +212,7 @@ public class Emulator {
 						useKey = key + "_Address";
 					}
 				}
-				else if (key.equals("S.base")) {
+				else if ("S.base".equals(key)) {
 					Integer lval = conv.getInt(vals.get(i));
 					if (lval != 0 && i < vals.size() - 1) {
 						useKey = "FS_OFFSET"; // Colossal hack
@@ -241,7 +266,7 @@ public class Emulator {
 	}
 
 	private String dumpBytesAsSingleValue(byte[] bytes) {
-		StringBuffer buf = new StringBuffer("0x");
+		StringBuilder buf = new StringBuilder("0x");
 		if (language.isBigEndian()) {
 			for (byte b : bytes) {
 				String byteStr = Integer.toHexString(b & 0xff);

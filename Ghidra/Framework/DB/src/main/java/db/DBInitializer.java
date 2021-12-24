@@ -16,11 +16,12 @@
  */
 package db;
 
-import ghidra.framework.ModuleInitializer;
 import db.buffers.BufferMgr;
+import ghidra.framework.ModuleInitializer;
 
 public class DBInitializer implements ModuleInitializer {
-    public void run() {
+    @Override
+	public void run() {
         
     	BufferMgr.cleanupOldCacheFiles();
     	

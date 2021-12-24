@@ -33,6 +33,7 @@ public interface Mask {
 	*   @return true if the object is equal to this mask, false otherwise.
 	*/
 
+	@Override
 	boolean equals(Object obj);
 
 	/**

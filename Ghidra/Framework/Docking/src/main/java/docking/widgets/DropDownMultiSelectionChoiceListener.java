@@ -29,5 +29,5 @@ public interface DropDownMultiSelectionChoiceListener<T> {
 	 * 
 	 * @param t the selected items
 	 */
-	public void selectionChanged(List<T> t);
+	void selectionChanged(List<T> t);
 }

@@ -15,8 +15,14 @@
  */
 package ghidra.app.plugin.assembler.sleigh.sem;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import org.apache.commons.collections4.map.LazyMap;
 
@@ -26,8 +32,14 @@ import ghidra.app.plugin.assembler.sleigh.sem.AssemblyContextGraph.Edge;
 import ghidra.app.plugin.assembler.sleigh.sem.AssemblyContextGraph.Vertex;
 import ghidra.app.plugin.processors.sleigh.Constructor;
 import ghidra.app.plugin.processors.sleigh.SleighLanguage;
-import ghidra.app.plugin.processors.sleigh.symbol.*;
-import ghidra.graph.*;
+import ghidra.app.plugin.processors.sleigh.symbol.OperandSymbol;
+import ghidra.app.plugin.processors.sleigh.symbol.SubtableSymbol;
+import ghidra.app.plugin.processors.sleigh.symbol.TripleSymbol;
+import ghidra.graph.GDirectedGraph;
+import ghidra.graph.GEdge;
+import ghidra.graph.GEdgeWeightMetric;
+import ghidra.graph.GImplicitDirectedGraph;
+import ghidra.graph.GraphFactory;
 import ghidra.graph.algo.DijkstraShortestPathsAlgorithm;
 
 /**
@@ -148,9 +160,7 @@ public class AssemblyContextGraph implements GImplicitDirectedGraph<Vertex, Edge
 		if (rec == null) {
 			return;
 		}
-		for (AssemblyConstructorSemantic sem : grammar.getSemantics(rec)) {
-			semantics.get(grammar.getStartName()).add(sem);
-		}
+		semantics.get(grammar.getStartName()).addAll(grammar.getSemantics(rec));
 	}
 
 	/**
@@ -181,10 +191,7 @@ public class AssemblyContextGraph implements GImplicitDirectedGraph<Vertex, Edge
 		 * @return true iff they share subtables and defined bits
 		 */
 		public boolean matches(Vertex that) {
-			if (!this.subtable.equals(that.subtable)) {
-				return false;
-			}
-			if (this.context.combine(that.context) == null) {
+			if (!this.subtable.equals(that.subtable) || (this.context.combine(that.context) == null)) {
 				return false;
 			}
 			return true;
@@ -206,10 +213,7 @@ public class AssemblyContextGraph implements GImplicitDirectedGraph<Vertex, Edge
 				return false;
 			}
 			Vertex that = (Vertex) o;
-			if (!this.context.equals(that.context)) {
-				return false;
-			}
-			if (!this.subtable.equals(that.subtable)) {
+			if (!this.context.equals(that.context) || !this.subtable.equals(that.subtable)) {
 				return false;
 			}
 			return true;
@@ -223,10 +227,7 @@ public class AssemblyContextGraph implements GImplicitDirectedGraph<Vertex, Edge
 				return result;
 			}
 			result = this.subtable.compareTo(that.subtable);
-			if (result != 0) {
-				return result;
-			}
-			return 0;
+			return result;
 		}
 	}
 
@@ -275,16 +276,7 @@ public class AssemblyContextGraph implements GImplicitDirectedGraph<Vertex, Edge
 				return false;
 			}
 			Edge that = (Edge) o;
-			if (!this.sem.equals(that.sem)) {
-				return false;
-			}
-			if (this.op != that.op) {
-				return false;
-			}
-			if (!this.start.equals(that.start)) {
-				return false;
-			}
-			if (!this.end.equals(that.end)) {
+			if (!this.sem.equals(that.sem) || (this.op != that.op) || !this.start.equals(that.start) || !this.end.equals(that.end)) {
 				return false;
 			}
 			return true;
@@ -306,10 +298,7 @@ public class AssemblyContextGraph implements GImplicitDirectedGraph<Vertex, Edge
 				return result;
 			}
 			result = this.end.compareTo(that.end);
-			if (result != 0) {
-				return result;
-			}
-			return 0;
+			return result;
 		}
 
 		@Override
@@ -335,10 +324,7 @@ public class AssemblyContextGraph implements GImplicitDirectedGraph<Vertex, Edge
 			for (AssemblyResolvedConstructor rc : sem.patterns) {
 				AssemblyPatternBlock pattern = rc.ctx;
 				AssemblyPatternBlock outer = from.context.combine(pattern);
-				if (outer == null) {
-					continue;
-				}
-				if (sem.getConstructor().getNumOperands() == 0) {
+				if ((outer == null) || (sem.getConstructor().getNumOperands() == 0)) {
 					continue;
 				}
 

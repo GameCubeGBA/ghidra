@@ -16,15 +16,23 @@
  */
 package docking.help;
 
-import ghidra.util.Msg;
+import java.awt.Component;
+import java.awt.KeyboardFocusManager;
+import java.awt.Window;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.Locale;
 
-import java.awt.*;
-import java.util.*;
-
-import javax.help.*;
+import javax.help.HelpModel;
+import javax.help.HelpSet;
+import javax.help.JHelpSearchNavigator;
+import javax.help.NavigatorView;
+import javax.help.SearchView;
 import javax.help.plaf.HelpNavigatorUI;
 import javax.help.plaf.basic.BasicSearchNavigatorUI;
 import javax.help.search.SearchEvent;
+
+import ghidra.util.Msg;
 
 public class CustomSearchView extends SearchView {
 

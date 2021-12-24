@@ -19,11 +19,23 @@ import java.io.IOException;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 
-import db.*;
+import db.DBHandle;
+import db.DBListener;
+import db.DBRecord;
+import db.Field;
+import db.LongField;
+import db.RecordIterator;
+import db.Schema;
+import db.Table;
 import db.util.ErrorHandler;
 import ghidra.program.database.map.AddressKeyRecordIterator;
 import ghidra.program.database.map.AddressMap;
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressRange;
+import ghidra.program.model.address.AddressRangeImpl;
+import ghidra.program.model.address.AddressRangeIterator;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.KeyRange;
 import ghidra.util.Lock;
 import ghidra.util.Msg;
 import ghidra.util.exception.CancelledException;
@@ -59,8 +71,8 @@ public class AddressRangeMapDB implements DBListener {
 	private static final int TO_COL = 0;
 	private static final int VALUE_COL = 1;
 
-	private static final String[] COLUMN_NAMES = new String[] { "To", "Value" };
-	private static final int[] INDEXED_COLUMNS = new int[] { VALUE_COL };
+	private static final String[] COLUMN_NAMES = { "To", "Value" };
+	private static final int[] INDEXED_COLUMNS = { VALUE_COL };
 	private final Lock lock;
 
 	/**
@@ -361,14 +373,9 @@ public class AddressRangeMapDB implements DBListener {
 				rec.setLongValue(TO_COL, end);
 				rec.setField(VALUE_COL, value);
 				rangeMapTable.putRecord(rec);
-			}
-
-			// Check for empty table
-			else {
-				if (rangeMapTable.getRecordCount() == 0) {
-					dbHandle.deleteTable(tableName);
-					rangeMapTable = null;
-				}
+			} else if (rangeMapTable.getRecordCount() == 0) {
+				dbHandle.deleteTable(tableName);
+				rangeMapTable = null;
 			}
 		}
 		catch (IOException e) {

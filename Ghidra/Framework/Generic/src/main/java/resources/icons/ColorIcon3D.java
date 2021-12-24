@@ -16,7 +16,9 @@
  */
 package resources.icons;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
 
 import javax.swing.Icon;
 
@@ -37,10 +39,12 @@ public class ColorIcon3D implements Icon {
 	    this.height = height;
 	}
 	
+	@Override
 	public int getIconHeight() {
 		return height;
 	}
 
+	@Override
 	public int getIconWidth() {
 		return width;
 	}
@@ -48,6 +52,7 @@ public class ColorIcon3D implements Icon {
 		return color;
 	}
 
+	@Override
 	public void paintIcon(Component c, Graphics g, int x, int y) {
 	    Color startColor = g.getColor();	    
 		g.setColor(getColor());

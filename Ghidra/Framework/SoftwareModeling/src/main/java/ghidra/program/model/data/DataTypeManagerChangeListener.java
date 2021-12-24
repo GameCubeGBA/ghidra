@@ -25,14 +25,14 @@ public interface DataTypeManagerChangeListener {
 	 * @param dtm the dataType manager
 	 * @param path the categoryPath of the newly added category.
 	 */
-	public void categoryAdded(DataTypeManager dtm, CategoryPath path);
+	void categoryAdded(DataTypeManager dtm, CategoryPath path);
 
 	/**
 	 * Notification when a category is removed.
 	 * @param dtm data type manager associated with the category
 	 * @param path the categoryPath of the category that was removed.
 	 */
-	public void categoryRemoved(DataTypeManager dtm, CategoryPath path);
+	void categoryRemoved(DataTypeManager dtm, CategoryPath path);
 
 	/**
 	 * Notification when category is renamed.
@@ -41,7 +41,7 @@ public interface DataTypeManagerChangeListener {
 	 * @param newPath the path of the category after it was renamed.  This path will only differ in
 	 * the last segment of the path.
 	 */
-	public void categoryRenamed(DataTypeManager dtm, CategoryPath oldPath, CategoryPath newPath);
+	void categoryRenamed(DataTypeManager dtm, CategoryPath oldPath, CategoryPath newPath);
 
 	/**
 	 * Notification when a category is reparented to new category.  
@@ -49,21 +49,21 @@ public interface DataTypeManagerChangeListener {
 	 * @param oldPath the path of the category before it was moved.
 	 * @param newPath the path of the category after it was moved.
 	 */
-	public void categoryMoved(DataTypeManager dtm, CategoryPath oldPath, CategoryPath newPath);
+	void categoryMoved(DataTypeManager dtm, CategoryPath oldPath, CategoryPath newPath);
 
 	/**
 	 * Notification when a data type is added to a category
 	 * @param dtm data type manager for the given category paths.
 	 * @param path the DataTypePath of the newly added datatype.
 	 */
-	public void dataTypeAdded(DataTypeManager dtm, DataTypePath path);
+	void dataTypeAdded(DataTypeManager dtm, DataTypePath path);
 
 	/**
 	 * Notification when data type is removed.
 	 * @param dtm data type manager for the given category paths.
 	 * @param path the DataTypePath of the removed datatype.
 	 */
-	public void dataTypeRemoved(DataTypeManager dtm, DataTypePath path);
+	void dataTypeRemoved(DataTypeManager dtm, DataTypePath path);
 
 	/**
 	 * Notification when data type is renamed.
@@ -71,7 +71,7 @@ public interface DataTypeManagerChangeListener {
 	 * @param oldPath the path of the datatype before it was renamed.
 	 * @param newPath the path of the datatype after it was renamed.
 	 */
-	public void dataTypeRenamed(DataTypeManager dtm, DataTypePath oldPath, DataTypePath newPath);
+	void dataTypeRenamed(DataTypeManager dtm, DataTypePath oldPath, DataTypePath newPath);
 
 	/**
 	 * Notification when a data type is moved.
@@ -79,14 +79,14 @@ public interface DataTypeManagerChangeListener {
 	 * @param oldPath the path of the datatype before it was moved.
 	 * @param newPath the path of the datatype after it was moved.
 	 */
-	public void dataTypeMoved(DataTypeManager dtm, DataTypePath oldPath, DataTypePath newPath);
+	void dataTypeMoved(DataTypeManager dtm, DataTypePath oldPath, DataTypePath newPath);
 
 	/**
 	 * Notification when data type is changed.
 	 * @param dtm data type manager for the given category paths.
 	 * @param path the path of the datatype that changed.
 	 */
-	public void dataTypeChanged(DataTypeManager dtm, DataTypePath path);
+	void dataTypeChanged(DataTypeManager dtm, DataTypePath path);
 
 	/**
 	 * Notification when a data type has been replaced.
@@ -95,7 +95,7 @@ public interface DataTypeManagerChangeListener {
 	 * @param newPath the path of the datatype that replaced the existing datatype.
 	 * @param newDataType the new dataType that replaced the old dataType
 	 */
-	public void dataTypeReplaced(DataTypeManager dtm, DataTypePath oldPath, DataTypePath newPath,
+	void dataTypeReplaced(DataTypeManager dtm, DataTypePath oldPath, DataTypePath newPath,
 			DataType newDataType);
 
 	/**
@@ -104,7 +104,7 @@ public interface DataTypeManagerChangeListener {
 	 * @param path the DataTypePath of the datatype had its favorite status changed.
 	 * @param isFavorite reflects the current favorite status of the datatype.
 	 */
-	public void favoritesChanged(DataTypeManager dtm, DataTypePath path, boolean isFavorite);
+	void favoritesChanged(DataTypeManager dtm, DataTypePath path, boolean isFavorite);
 
 	/**
 	 * Notification that the information for a particular source archive has changed. Typically,
@@ -112,7 +112,7 @@ public interface DataTypeManagerChangeListener {
 	 * @param dataTypeManager data type manager referring to the given source information.
 	 * @param sourceArchive the changed data type source information
 	 */
-	public void sourceArchiveChanged(final DataTypeManager dataTypeManager,
+	void sourceArchiveChanged(final DataTypeManager dataTypeManager,
 			final SourceArchive sourceArchive);
 
 	/**
@@ -121,6 +121,6 @@ public interface DataTypeManagerChangeListener {
 	 * @param dataTypeManager data type manager referring to the given source information.
 	 * @param sourceArchive the new data type source information
 	 */
-	public void sourceArchiveAdded(final DataTypeManager dataTypeManager,
+	void sourceArchiveAdded(final DataTypeManager dataTypeManager,
 			final SourceArchive sourceArchive);
 }

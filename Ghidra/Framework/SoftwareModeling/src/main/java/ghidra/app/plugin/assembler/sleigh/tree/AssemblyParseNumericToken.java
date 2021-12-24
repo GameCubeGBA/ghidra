@@ -16,7 +16,11 @@
 package ghidra.app.plugin.assembler.sleigh.tree;
 
 import ghidra.app.plugin.assembler.sleigh.grammars.AssemblyGrammar;
-import ghidra.app.plugin.assembler.sleigh.symbol.*;
+import ghidra.app.plugin.assembler.sleigh.symbol.AssemblyFixedNumericTerminal;
+import ghidra.app.plugin.assembler.sleigh.symbol.AssemblyNumericMapTerminal;
+import ghidra.app.plugin.assembler.sleigh.symbol.AssemblyNumericTerminal;
+import ghidra.app.plugin.assembler.sleigh.symbol.AssemblyStringMapTerminal;
+import ghidra.app.plugin.assembler.sleigh.symbol.AssemblyTerminal;
 
 /**
  * A token having a numeric value
@@ -58,13 +62,7 @@ public class AssemblyParseNumericToken extends AssemblyParseToken {
 			return false;
 		}
 		AssemblyParseNumericToken that = (AssemblyParseNumericToken) obj;
-		if (!this.term.equals(that.term)) {
-			return false;
-		}
-		if (!this.str.equals(that.str)) {
-			return false;
-		}
-		if (this.val != that.val) {
+		if (!this.term.equals(that.term) || !this.str.equals(that.str) || (this.val != that.val)) {
 			return false;
 		}
 		return true;

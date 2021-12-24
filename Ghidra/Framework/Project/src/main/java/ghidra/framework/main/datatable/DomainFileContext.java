@@ -28,13 +28,13 @@ public interface DomainFileContext {
 	 * The selected files or empty if no files are selected
 	 * @return the files
 	 */
-	public List<DomainFile> getSelectedFiles();
+	List<DomainFile> getSelectedFiles();
 
 	/**
 	 * Returns the count of selected files
 	 * @return the count of selected files
 	 */
-	public int getFileCount();
+	int getFileCount();
 
 	/**
 	 * True if the current set of files is in the active project (false implies a non-active, 
@@ -42,5 +42,5 @@ public interface DomainFileContext {
 	 * 
 	 * @return true if in the active project
 	 */
-	public boolean isInActiveProject();
+	boolean isInActiveProject();
 }

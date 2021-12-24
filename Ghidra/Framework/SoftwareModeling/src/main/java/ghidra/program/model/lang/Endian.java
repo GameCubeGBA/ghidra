@@ -23,7 +23,7 @@ public enum Endian {
 	private final String name;
 	private final String shortName;
 
-	private Endian(String name, String shortName) {
+	Endian(String name, String shortName) {
 		this.name = name;
 		this.shortName = shortName;
 	}
@@ -39,7 +39,6 @@ public enum Endian {
 				return Endian.LITTLE;
 			}
 			else {
-				return null;
 			}
 		}
 		return null;

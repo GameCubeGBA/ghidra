@@ -17,7 +17,12 @@ package ghidra.program.database.bookmark;
 
 import java.io.IOException;
 
-import db.*;
+import db.DBConstants;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.Schema;
+import db.StringField;
 import ghidra.util.exception.VersionException;
 
 abstract class BookmarkTypeDBAdapter {

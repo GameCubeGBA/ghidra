@@ -24,20 +24,20 @@ public interface GraphDisplayListener {
 	/**
 	 * Notification that the graph window has been closed
 	 */
-	public void graphClosed();
+	void graphClosed();
 
 	/**
 	 * Notification that the set of selected vertices has changed
 	 * 
 	 * @param vertices the set of currently selected vertices
 	 */
-	public void selectionChanged(Set<AttributedVertex> vertices);
+	void selectionChanged(Set<AttributedVertex> vertices);
 
 	/**
 	 * Notification that the "focused" (active) vertex has changed
 	 * @param vertex the vertex that is currently "focused"
 	 */
-	public void locationFocusChanged(AttributedVertex vertex);
+	void locationFocusChanged(AttributedVertex vertex);
 
 	/**
 	 * Makes a new GraphDisplayListener of the same type as the specific
@@ -47,11 +47,11 @@ public interface GraphDisplayListener {
 	 * @return A new instance of a GraphDisplayListener that is the same type as as the instance
 	 * on which it is called
 	 */
-	public GraphDisplayListener cloneWith(GraphDisplay graphDisplay);
+	GraphDisplayListener cloneWith(GraphDisplay graphDisplay);
 
 	/**
 	 * Tells the listener that it is no longer needed and it can release any listeners/resources
 	 */
-	public void dispose();
+	void dispose();
 
 }

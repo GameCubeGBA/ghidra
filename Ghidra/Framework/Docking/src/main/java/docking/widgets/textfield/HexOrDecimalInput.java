@@ -15,12 +15,19 @@
  */
 package docking.widgets.textfield;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Insets;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JTextField;
-import javax.swing.text.*;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 
 import docking.util.GraphicsUtils;
 
@@ -144,10 +151,8 @@ public class HexOrDecimalInput extends JTextField {
 
 	public void setAllowNegative(boolean b) {
 		allowsNegative = b;
-		if (!allowsNegative) {
-			if (currentValue != null && currentValue.longValue() < 0) {
-				currentValue = null;
-			}
+		if (!allowsNegative && (currentValue != null && currentValue.longValue() < 0)) {
+			currentValue = null;
 		}
 		updateText();
 	}
@@ -186,10 +191,7 @@ public class HexOrDecimalInput extends JTextField {
 		 */
 		@Override
 		public void insertString(int offs, String str, AttributeSet a) throws BadLocationException {
-			if (str == null) {
-				return;
-			}
-			if (!checkChars(str)) {
+			if ((str == null) || !checkChars(str)) {
 				return;
 			}
 			StringBuilder builder = new StringBuilder(HexOrDecimalInput.this.getText());
@@ -201,7 +203,7 @@ public class HexOrDecimalInput extends JTextField {
 				return;  // not allowed anywhere except at the start
 			}
 
-			if (!newText.equals("-")) {
+			if (!"-".equals(newText)) {
 				try {
 					currentValue = computeValueFromString(newText);
 				}
@@ -216,7 +218,7 @@ public class HexOrDecimalInput extends JTextField {
 		public void remove(int offs, int len) throws BadLocationException {
 			super.remove(offs, len);
 			String newText = HexOrDecimalInput.this.getText();
-			if (newText.length() == 0 || newText.equals("-")) {
+			if (newText.length() == 0 || "-".equals(newText)) {
 				currentValue = null;
 			}
 			else {
@@ -235,10 +237,7 @@ public class HexOrDecimalInput extends JTextField {
 		}
 
 		private boolean checkChar(char c) {
-			if (allowsNegative && c == '-') {
-				return true;
-			}
-			if (c >= '0' && c <= '9') {
+			if ((allowsNegative && c == '-') || (c >= '0' && c <= '9')) {
 				return true;
 			}
 			if (isHexMode && c >= 'a' && c <= 'f') {

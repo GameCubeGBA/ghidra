@@ -20,10 +20,23 @@ import java.util.Set;
 
 import ghidra.docking.settings.Settings;
 import ghidra.program.database.data.DataTypeUtilities;
-import ghidra.program.model.address.*;
-import ghidra.program.model.listing.*;
-import ghidra.program.model.mem.*;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressOutOfBoundsException;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.address.SegmentedAddress;
+import ghidra.program.model.address.SegmentedAddressSpace;
+import ghidra.program.model.listing.Data;
+import ghidra.program.model.listing.Listing;
+import ghidra.program.model.listing.Program;
+import ghidra.program.model.mem.MemBuffer;
+import ghidra.program.model.mem.Memory;
+import ghidra.program.model.mem.MemoryAccessException;
+import ghidra.program.model.mem.MemoryBlock;
+import ghidra.program.model.symbol.Namespace;
+import ghidra.program.model.symbol.Reference;
+import ghidra.program.model.symbol.ReferenceManager;
+import ghidra.program.model.symbol.Symbol;
+import ghidra.program.model.symbol.SymbolUtilities;
 import ghidra.util.DataConverter;
 
 /**
@@ -356,10 +369,7 @@ public class PointerDataType extends BuiltIn implements Pointer {
 				// NOTE: conversion assumes a little-endian space
 				return getSegmentedAddressValue(buf, size);
 			}
-			catch (AddressOutOfBoundsException e) {
-				// offset too large
-			}
-			catch (IllegalArgumentException iae) {
+			catch (AddressOutOfBoundsException | IllegalArgumentException iae) {
 				// Do nothing... Tried to create an address that was too large
 				// for the address space
 				//
@@ -458,10 +468,7 @@ public class PointerDataType extends BuiltIn implements Pointer {
 
 		Pointer p = (Pointer) dt;
 		DataType otherDataType = p.getDataType();
-		if (hasLanguageDependantLength() != p.hasLanguageDependantLength()) {
-			return false;
-		}
-		if (!hasLanguageDependantLength() && (getLength() != p.getLength())) {
+		if ((hasLanguageDependantLength() != p.hasLanguageDependantLength()) || (!hasLanguageDependantLength() && (getLength() != p.getLength()))) {
 			return false;
 		}
 		if (referencedDataType == null) {

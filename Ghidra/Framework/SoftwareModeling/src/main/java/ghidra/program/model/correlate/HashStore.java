@@ -105,9 +105,9 @@ public class HashStore {
 		function = a;
 		program = a.getProgram();
 		monitor = mon;
-		blockList = new TreeMap<Address,Block>();
-		hashSort = new TreeMap<Hash,HashEntry>();
-		matchSort = new TreeSet<HashEntry>(new HashOrderComparator());
+		blockList = new TreeMap<>();
+		hashSort = new TreeMap<>();
+		matchSort = new TreeSet<>(new HashOrderComparator());
 		matchedBlockCount = 0;			// No matches yet
 		matchedInstructionCount = 0;
 		totalInstructions = 0;			// basic-blocks and instructions not modeled yet
@@ -143,7 +143,7 @@ public class HashStore {
 	 */
 	private void createBlock(CodeBlock codeBlock) {
 		Block res = new Block(codeBlock);			// Create hash container for underlying CodeBlock
-		ArrayList<InstructHash> instList = new ArrayList<InstructHash>();
+		ArrayList<InstructHash> instList = new ArrayList<>();
 		Listing listing = program.getListing();
 		Iterator<AddressRange> iter = codeBlock.iterator(true);
 		int index = 0;
@@ -193,8 +193,7 @@ public class HashStore {
 	 * @param instHash is the instruction
 	 */
 	private void insertInstructionNGrams(InstructHash instHash) {
-		for(int i=0;i<instHash.nGrams.length;++i) {
-			Hash curHash = instHash.nGrams[i];
+		for (Hash curHash : instHash.nGrams) {
 			if (curHash == null) break;
 			insertNGram(curHash,instHash);
 		}
@@ -220,8 +219,7 @@ public class HashStore {
 	 * @param instHash is the particular instruction
 	 */
 	private void removeInstructionNGrams(InstructHash instHash) {
-		for(int i=0;i<instHash.nGrams.length;++i) {
-			Hash curHash = instHash.nGrams[i];
+		for (Hash curHash : instHash.nGrams) {
 			if (curHash == null) continue;
 			HashEntry hashEntry = instHash.hashEntries.get(curHash);
 			if (hashEntry == null) continue;
@@ -267,8 +265,7 @@ public class HashStore {
 	 */
 	public void insertHashes() {
 		for(Block block : blockList.values()) {
-			for(int j=0;j<block.instList.length;++j) {
-				InstructHash instruct = block.instList[j];
+			for (InstructHash instruct : block.instList) {
 				if (instruct.isMatched) continue;
 				insertInstructionNGrams(instruct);
 			}
@@ -296,8 +293,8 @@ public class HashStore {
 		matchedBlockCount += 1;						// Count our block match
 		block.setMatched(matchedBlockCount);
 		blockResult.add(block.origBlock);			// Store match explicitly
-		for(int i=0;i<block.instList.length;++i) {
-			InstructHash curInstruct = block.instList[i];
+		for (InstructHash element : block.instList) {
+			InstructHash curInstruct = element;
 			if (curInstruct.isMatched) continue;		// For each remaining unknown instruction
 			for(int j=0;j<curInstruct.nGrams.length;++j) {
 				Hash curHash = curInstruct.nGrams[j];
@@ -338,8 +335,8 @@ public class HashStore {
 		while(srcMatch.startindex > 0 && destMatch.startindex > 0) {		// Can't go past beginning of block
 			InstructHash curSrcInstruct = srcMatch.block.instList[srcMatch.startindex-1];
 			InstructHash curDestInstruct = destMatch.block.instList[destMatch.startindex-1];
-			if (curSrcInstruct.isMatched) break;		// If Instruction already matched, can't extend
-			if (curDestInstruct.isMatched) break;
+					// If Instruction already matched, can't extend
+			if (curSrcInstruct.isMatched || curDestInstruct.isMatched) break;
 			int srcVal = Hash.ALTERNATE_SEED;		// Seed the hash function
 			int destVal = Hash.ALTERNATE_SEED;
 			srcVal = hashCalc.calcHash(srcVal, curSrcInstruct.instruction);
@@ -354,8 +351,8 @@ public class HashStore {
 		while(srcMatch.endindex < srcMax && destMatch.endindex < destMax) {	// Can't go past end of block
 			InstructHash curSrcInstruct = srcMatch.block.instList[srcMatch.endindex+1];
 			InstructHash curDestInstruct = destMatch.block.instList[destMatch.endindex+1];
-			if (curSrcInstruct.isMatched) break;		// If Instruction already matched, can't extend
-			if (curDestInstruct.isMatched) break;
+					// If Instruction already matched, can't extend
+			if (curSrcInstruct.isMatched || curDestInstruct.isMatched) break;
 			int srcVal = Hash.ALTERNATE_SEED;		// Seed the hash function
 			int destVal = Hash.ALTERNATE_SEED;
 			srcVal = hashCalc.calcHash(srcVal,curSrcInstruct.instruction);
@@ -370,7 +367,7 @@ public class HashStore {
 	 * @return list of unmatched instructions across the whole function
 	 */
 	public List<Instruction> getUnmatchedInstructions() {
-		LinkedList<Instruction> res = new LinkedList<Instruction>();
+		LinkedList<Instruction> res = new LinkedList<>();
 		for(Block block : blockList.values()) {
 			for(InstructHash instHash : block.instList) {
 				if (!instHash.isMatched)

@@ -15,16 +15,22 @@
  */
 package ghidra.framework.task;
 
-import generic.concurrent.GThreadPool;
-import ghidra.framework.model.DomainObjectClosedListener;
-import ghidra.framework.model.UndoableDomainObject;
-import ghidra.util.Msg;
-import ghidra.util.exception.CancelledException;
-
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
+
+import generic.concurrent.GThreadPool;
+import ghidra.framework.model.UndoableDomainObject;
+import ghidra.util.Msg;
+import ghidra.util.exception.CancelledException;
 
 /** 
  * Class for managing a queue of tasks to be executed, one at a time, in priority order.  All the
@@ -61,8 +67,8 @@ public class GTaskManager {
 	private static final int MAX_RESULTS = 100;
 
 	private UndoableDomainObject domainObject;
-	private SortedSet<GScheduledTask> priorityQ = new TreeSet<GScheduledTask>();
-	private Deque<GTaskGroup> taskGroupList = new LinkedList<GTaskGroup>();
+	private SortedSet<GScheduledTask> priorityQ = new TreeSet<>();
+	private Deque<GTaskGroup> taskGroupList = new LinkedList<>();
 	private GThreadPool threadPool;
 
 	// Note: every public method in this class should be locked; therefore, private methods don't
@@ -79,8 +85,8 @@ public class GTaskManager {
 	private Integer currentGroupTransactionID;
 
 	private GTaskListener taskListener = null;
-	private Deque<GScheduledTask> delayedTaskStack = new ArrayDeque<GScheduledTask>();
-	private Queue<GTaskResult> results = new ArrayDeque<GTaskResult>();
+	private Deque<GScheduledTask> delayedTaskStack = new ArrayDeque<>();
+	private Queue<GTaskResult> results = new ArrayDeque<>();
 
 	/**
 	 * Creates a new GTaskManager for an UndoableDomainObject
@@ -93,12 +99,9 @@ public class GTaskManager {
 		this.domainObject = undoableDomainObject;
 		this.threadPool = threadPool;
 
-		domainObject.addCloseListener(new DomainObjectClosedListener() {
-			@Override
-			public void domainObjectClosed() {
-				GTaskManagerFactory.domainObjectClosed(domainObject);
-				domainObject = null;
-			}
+		domainObject.addCloseListener(() -> {
+			GTaskManagerFactory.domainObjectClosed(domainObject);
+			domainObject = null;
 		});
 	}
 
@@ -288,13 +291,7 @@ public class GTaskManager {
 	public boolean isBusy() {
 		lock.lock();
 		try {
-			if (runningTask != null) {
-				return true;
-			}
-			if (!priorityQ.isEmpty()) {
-				return true;
-			}
-			if (!taskGroupList.isEmpty()) {
+			if ((runningTask != null) || !priorityQ.isEmpty() || !taskGroupList.isEmpty()) {
 				return true;
 			}
 			return false;
@@ -409,7 +406,7 @@ public class GTaskManager {
 	public List<GTaskResult> getTaskResults() {
 		lock.lock();
 		try {
-			return new ArrayList<GTaskResult>(results);
+			return new ArrayList<>(results);
 		}
 		finally {
 			lock.unlock();
@@ -423,7 +420,7 @@ public class GTaskManager {
 	public List<GScheduledTask> getScheduledTasks() {
 		lock.lock();
 		try {
-			return new ArrayList<GScheduledTask>(priorityQ);
+			return new ArrayList<>(priorityQ);
 		}
 		finally {
 			lock.unlock();
@@ -437,7 +434,7 @@ public class GTaskManager {
 	public List<GScheduledTask> getDelayedTasks() {
 		lock.lock();
 		try {
-			return new ArrayList<GScheduledTask>(delayedTaskStack);
+			return new ArrayList<>(delayedTaskStack);
 		}
 		finally {
 			lock.unlock();
@@ -479,7 +476,7 @@ public class GTaskManager {
 	public List<GTaskGroup> getScheduledGroups() {
 		lock.lock();
 		try {
-			return new ArrayList<GTaskGroup>(taskGroupList);
+			return new ArrayList<>(taskGroupList);
 		}
 		finally {
 			lock.unlock();
@@ -576,10 +573,7 @@ public class GTaskManager {
 	}
 
 	private void runNextTaskIfNotBusy() {
-		if (runningTask != null) {
-			return;
-		}
-		if (processNextTaskInPriorityQ()) {
+		if ((runningTask != null) || processNextTaskInPriorityQ()) {
 			return;
 		}
 

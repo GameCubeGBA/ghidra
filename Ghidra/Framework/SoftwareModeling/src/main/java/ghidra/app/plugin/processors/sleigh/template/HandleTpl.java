@@ -74,15 +74,9 @@ public class HandleTpl {
 	public void fixPrintPiece(FixedHandle hand, ParserWalker walker, int handleIndex) {
 		if (!hand.fixable)
 			return;
-		if (hand.space.getType() != AddressSpace.TYPE_CONSTANT) {
+		if ((hand.space.getType() != AddressSpace.TYPE_CONSTANT) || ((space.getType() == ConstTpl.SPACEID) && space.isUniqueSpace())) {
 			hand.fixable = false;
 			return;
-		}
-		if (space.getType() == ConstTpl.SPACEID) {
-			if (space.isUniqueSpace()) {
-				hand.fixable = false;
-				return;
-			}
 		}
 		if (ptroffset.getType() == ConstTpl.HANDLE && ptroffset.getHandleIndex() == handleIndex) {
 			hand.space = space.fixSpace(walker);

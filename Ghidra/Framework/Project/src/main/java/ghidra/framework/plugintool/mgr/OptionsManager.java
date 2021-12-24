@@ -16,7 +16,13 @@
 package ghidra.framework.plugintool.mgr;
 
 import java.beans.PropertyChangeListener;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import javax.swing.JComponent;
 import javax.swing.tree.TreePath;
@@ -26,7 +32,11 @@ import org.jdom.Element;
 import docking.options.editor.OptionsDialog;
 import docking.tool.ToolConstants;
 import docking.tool.util.DockingToolConstants;
-import ghidra.framework.options.*;
+import ghidra.framework.options.EditorStateFactory;
+import ghidra.framework.options.Options;
+import ghidra.framework.options.OptionsChangeListener;
+import ghidra.framework.options.OptionsEditor;
+import ghidra.framework.options.ToolOptions;
 import ghidra.framework.plugintool.Plugin;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.framework.plugintool.dialog.KeyBindingsPanel;
@@ -245,14 +255,13 @@ public class OptionsManager implements OptionsService, OptionsChangeListener {
 	}
 
 	private void removeUnusedOptions(List<String> deleteList) {
-		for (int i = 0; i < deleteList.size(); i++) {
-			String name = deleteList.get(i);
+		for (String name : deleteList) {
 			ToolOptions options = optionsMap.remove(name);
 			options.removeOptionsChangeListener(this);
 		}
 	}
 
-	private class OptionsComparator implements Comparator<ToolOptions> {
+	private static class OptionsComparator implements Comparator<ToolOptions> {
 		@Override
 		public int compare(ToolOptions o1, ToolOptions o2) {
 			return o1.getName().compareTo(o2.getName());

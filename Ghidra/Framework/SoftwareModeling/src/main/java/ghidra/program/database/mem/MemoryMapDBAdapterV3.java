@@ -17,15 +17,33 @@ package ghidra.program.database.mem;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import db.*;
+import db.ByteField;
+import db.DBBuffer;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.IntField;
+import db.LongField;
+import db.RecordIterator;
+import db.Schema;
+import db.StringField;
+import db.Table;
 import ghidra.program.database.map.AddressMapDB;
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressOverflowException;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.SegmentedAddress;
 import ghidra.program.model.mem.MemoryBlockType;
-import ghidra.util.exception.*;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.IOCancelledException;
+import ghidra.util.exception.VersionException;
 
 /**
  * MemoryMap adapter for version 3.

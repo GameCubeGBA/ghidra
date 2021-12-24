@@ -20,7 +20,10 @@ import java.util.Objects;
 
 import ghidra.framework.options.SaveState;
 import ghidra.program.model.address.Address;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.CodeUnit;
+import ghidra.program.model.listing.Data;
+import ghidra.program.model.listing.Instruction;
+import ghidra.program.model.listing.Program;
 import ghidra.util.Msg;
 
 /**
@@ -274,9 +277,7 @@ public class ProgramLocation implements Comparable<ProgramLocation> {
 			}
 			// no address, it must be in a removed block; we can't use it
 		}
-		catch (RuntimeException e) { // restoreState may not parse the address if it is no longer valid.
-		}
-		catch (ClassNotFoundException e) {
+		catch (RuntimeException | ClassNotFoundException e) {
 			// not sure why we are ignoring this--if you know, then please let everyone else know
 		}
 		catch (InstantiationException | IllegalAccessException | NoSuchMethodException e) {
@@ -339,16 +340,7 @@ public class ProgramLocation implements Comparable<ProgramLocation> {
 			return false;
 		}
 		ProgramLocation other = (ProgramLocation) obj;
-		if (program != other.program) {
-			return false;
-		}
-		if (compareAddr(addr, other.addr) != 0) {
-			return false;
-		}
-		if (compareAddr(refAddr, other.refAddr) != 0) {
-			return false;
-		}
-		if (compareAddr(byteAddr, other.byteAddr) != 0) {
+		if ((program != other.program) || (compareAddr(addr, other.addr) != 0) || (compareAddr(refAddr, other.refAddr) != 0) || (compareAddr(byteAddr, other.byteAddr) != 0)) {
 			return false;
 		}
 		if (!checkComponentPath(componentPath, other.componentPath)) {

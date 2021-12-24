@@ -18,14 +18,28 @@ package docking;
 import java.awt.Component;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.MouseEvent;
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
-import javax.swing.*;
+import javax.swing.Icon;
+import javax.swing.JComponent;
+import javax.swing.SwingUtilities;
 
-import docking.action.*;
+import docking.action.ActionContextProvider;
+import docking.action.DockingAction;
+import docking.action.DockingActionIf;
+import docking.action.KeyBindingData;
+import docking.action.KeyBindingType;
+import docking.action.ToolBarData;
 import docking.help.HelpDescriptor;
 import docking.help.HelpService;
-import ghidra.util.*;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
+import ghidra.util.SystemUtilities;
+import ghidra.util.UniversalIdGenerator;
 import ghidra.util.exception.AssertException;
 import utilities.util.reflection.ReflectionUtilities;
 
@@ -183,10 +197,8 @@ public abstract class ComponentProvider implements HelpDescriptor, ActionContext
 	 * @param newID the new ID of this provider
 	 */
 	protected void initializeInstanceID(long newID) {
-		if (instanceIDHasBeenInitialized) {
-			if (newID != instanceID) {
-				throw new AssertException("Cannot initialize the instanceID more than once");
-			}
+		if (instanceIDHasBeenInitialized && (newID != instanceID)) {
+			throw new AssertException("Cannot initialize the instanceID more than once");
 		}
 
 		instanceIDHasBeenInitialized = true;
@@ -781,8 +793,7 @@ public abstract class ComponentProvider implements HelpDescriptor, ActionContext
 	private String getInceptionFromTheFirstClassThatIsNotUs() {
 		Throwable t = ReflectionUtilities.createThrowableWithStackOlderThan(getClass());
 		StackTraceElement[] trace = t.getStackTrace();
-		String classInfo = trace[0].toString();
-		return classInfo;
+		return trace[0].toString();
 	}
 
 	/**

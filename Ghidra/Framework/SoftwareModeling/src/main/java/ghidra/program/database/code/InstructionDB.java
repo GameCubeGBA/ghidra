@@ -20,14 +20,31 @@ import java.util.List;
 
 import db.DBRecord;
 import ghidra.program.database.DBObjectCache;
-import ghidra.program.model.address.*;
-import ghidra.program.model.lang.*;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressOverflowException;
+import ghidra.program.model.address.UniqueAddressFactory;
+import ghidra.program.model.lang.InstructionContext;
+import ghidra.program.model.lang.InstructionPrototype;
+import ghidra.program.model.lang.OperandType;
+import ghidra.program.model.lang.ParserContext;
+import ghidra.program.model.lang.ProcessorContextView;
+import ghidra.program.model.lang.Register;
+import ghidra.program.model.lang.RegisterValue;
+import ghidra.program.model.lang.UnknownContextException;
+import ghidra.program.model.listing.FlowOverride;
+import ghidra.program.model.listing.Instruction;
+import ghidra.program.model.listing.InstructionPcodeOverride;
 import ghidra.program.model.mem.MemBuffer;
 import ghidra.program.model.mem.MemoryAccessException;
 import ghidra.program.model.pcode.PcodeOp;
 import ghidra.program.model.scalar.Scalar;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.ExternalReference;
+import ghidra.program.model.symbol.FlowType;
+import ghidra.program.model.symbol.RefType;
+import ghidra.program.model.symbol.RefTypeFactory;
+import ghidra.program.model.symbol.Reference;
+import ghidra.program.model.symbol.SourceType;
+import ghidra.program.model.symbol.StackReference;
 import ghidra.program.util.ChangeManager;
 import ghidra.util.Msg;
 import ghidra.util.exception.NoValueException;
@@ -47,7 +64,7 @@ public class InstructionDB extends CodeUnitDB implements Instruction, Instructio
 	private InstructionPrototype proto;
 	private byte flags;
 	private FlowOverride flowOverride;
-	private final static Address[] EMPTY_ADDR_ARRAY = new Address[0];
+	private final static Address[] EMPTY_ADDR_ARRAY = {};
 	private volatile boolean clearingFallThroughs = false;
 
 	private ParserContext parserContext;
@@ -219,10 +236,10 @@ public class InstructionDB extends CodeUnitDB implements Instruction, Instructio
 			return EMPTY_ADDR_ARRAY;
 		}
 
-		ArrayList<Address> list = new ArrayList<Address>();
-		for (int i = 0; i < refs.length; ++i) {
-			if (!refs[i].getReferenceType().isIndirect()) {
-				list.add(refs[i].getToAddress());
+		ArrayList<Address> list = new ArrayList<>();
+		for (Reference ref : refs) {
+			if (!ref.getReferenceType().isIndirect()) {
+				list.add(ref.getToAddress());
 			}
 		}
 
@@ -288,7 +305,7 @@ public class InstructionDB extends CodeUnitDB implements Instruction, Instructio
 			if (opList == null) {
 				return "<UNSUPPORTED>";
 			}
-			StringBuffer strBuf = new StringBuffer();
+			StringBuilder strBuf = new StringBuilder();
 			for (Object opElem : opList) {
 				if (opElem instanceof Address) {
 					Address opAddr = (Address) opElem;
@@ -331,12 +348,8 @@ public class InstructionDB extends CodeUnitDB implements Instruction, Instructio
 			Reference ref = getPrimaryReference(opIndex);
 			if (ref instanceof StackReference) {
 				optype |= OperandType.ADDRESS;
-				return optype;
 			}
-			else if (ref instanceof ExternalReference) {
-				optype |= OperandType.ADDRESS;
-			}
-			else if (ref != null && ref.getToAddress().isMemoryAddress()) {
+			else if ((ref instanceof ExternalReference) || (ref != null && ref.getToAddress().isMemoryAddress())) {
 				optype |= OperandType.ADDRESS;
 			}
 			return optype;
@@ -446,7 +459,7 @@ public class InstructionDB extends CodeUnitDB implements Instruction, Instructio
 		lock.acquire();
 		try {
 			checkIsValid();
-			StringBuffer stringBuffer = new StringBuffer();
+			StringBuilder stringBuffer = new StringBuilder();
 			stringBuffer.append(getMnemonicString());
 
 			int n = getNumOperands();
@@ -543,11 +556,7 @@ public class InstructionDB extends CodeUnitDB implements Instruction, Instructio
 
 			// Update flow references
 			for (Reference ref : refMgr.getFlowReferencesFrom(getAddress())) {
-				if (!ref.getReferenceType().isFlow()) {
-					continue;
-				}
-
-				if (!isSameFlowType(origFlowType, ref.getReferenceType())) {
+				if (!ref.getReferenceType().isFlow() || !isSameFlowType(origFlowType, ref.getReferenceType())) {
 					continue;
 				}
 				RefType refType = RefTypeFactory.getDefaultMemoryRefType(this,
@@ -570,10 +579,7 @@ public class InstructionDB extends CodeUnitDB implements Instruction, Instructio
 	}
 
 	private boolean isSameFlowType(FlowType origFlowType, RefType referenceType) {
-		if (origFlowType.isCall() && referenceType.isCall()) {
-			return true;
-		}
-		if (origFlowType.isJump() && referenceType.isJump()) {
+		if ((origFlowType.isCall() && referenceType.isCall()) || (origFlowType.isJump() && referenceType.isJump())) {
 			return true;
 		}
 		if (origFlowType.isTerminal() && referenceType.isTerminal()) {

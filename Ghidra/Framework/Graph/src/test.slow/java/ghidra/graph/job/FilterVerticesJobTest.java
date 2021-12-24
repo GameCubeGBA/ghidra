@@ -29,8 +29,12 @@ import org.junit.Test;
 
 import edu.uci.ics.jung.algorithms.layout.DAGLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
-import generic.test.AbstractGenericTest;
-import ghidra.graph.graphs.*;
+import generic.test.AbstractGTest;
+import ghidra.graph.graphs.AbstractFilteringVisualGraphTest;
+import ghidra.graph.graphs.AbstractTestVertex;
+import ghidra.graph.graphs.DefaultVisualGraph;
+import ghidra.graph.graphs.FilteringVisualGraph;
+import ghidra.graph.graphs.TestEdge;
 import ghidra.graph.support.TestGraphLayout;
 import ghidra.graph.support.TestGraphViewer;
 import ghidra.graph.viewer.layout.VisualGraphLayout;
@@ -61,7 +65,7 @@ public class FilterVerticesJobTest extends AbstractFilteringVisualGraphTest {
 		// to work properly
 		System.setProperty(SystemUtilities.HEADLESS_PROPERTY, "false");
 
-		graph = new FilteringVisualGraph<AbstractTestVertex, TestEdge>() {
+		graph = new FilteringVisualGraph<>() {
 
 			@Override
 			public VisualGraphLayout<AbstractTestVertex, TestEdge> getLayout() {
@@ -172,7 +176,7 @@ public class FilterVerticesJobTest extends AbstractFilteringVisualGraphTest {
 		 		-ape-->turtle
 		 */
 
-		AbstractTestVertex[] failed = new AbstractTestVertex[] { worm, ape, turtle };
+		AbstractTestVertex[] failed = { worm, ape, turtle };
 		assertOnlyTheseAreFiltered(failed);
 		assertAllVisibleBut(failed);
 		TestEdge apeToTurtle = edge(ape, turtle);
@@ -212,7 +216,7 @@ public class FilterVerticesJobTest extends AbstractFilteringVisualGraphTest {
 
 		waitForJobRunner();
 
-		AbstractTestVertex[] filteredOut = new AbstractTestVertex[] { worm, ape, turtle };
+		AbstractTestVertex[] filteredOut = { worm, ape, turtle };
 		assertOnlyTheseAreFiltered(filteredOut);
 		assertAllVisibleBut(filteredOut);
 		TestEdge apeToTurtle = edge(ape, turtle);
@@ -279,7 +283,7 @@ public class FilterVerticesJobTest extends AbstractFilteringVisualGraphTest {
 	private void filterSlowly(String filterText, boolean remove) {
 		Predicate<AbstractTestVertex> filter = v -> StringUtils.containsIgnoreCase(v.getName(), filterText);
 		FilterVerticesJob<AbstractTestVertex, TestEdge> job =
-			new FilterVerticesJob<AbstractTestVertex, TestEdge>(viewer, graph, filter, remove) {
+			new FilterVerticesJob<>(viewer, graph, filter, remove) {
 
 				private int myId = ++jobCount;
 
@@ -304,7 +308,7 @@ public class FilterVerticesJobTest extends AbstractFilteringVisualGraphTest {
 	}
 
 	private void waitForJobRunner() {
-		AbstractGenericTest.waitForCondition(() -> !jobRunner.isBusy(),
+		AbstractGTest.waitForCondition(() -> !jobRunner.isBusy(),
 			"Filter job never finished");
 	}
 }

@@ -27,49 +27,49 @@ import ghidra.program.model.listing.Program;
  */
 public interface AddressSpace extends Comparable<AddressSpace> {
 
-	public static final int TYPE_CONSTANT = 0; // signed offset space
-	public static final int TYPE_RAM = 1;
-	public static final int TYPE_CODE = 2; // Deprecated - required for backward compatibility/upgrade
-	public static final int TYPE_UNIQUE = 3;
-	public static final int TYPE_REGISTER = 4;
-	public static final int TYPE_STACK = 5; // signed offset space for stack
-	public static final int TYPE_JOIN = 6; // used for variable join space (see decompiler)
-	public static final int TYPE_OTHER = 7; // used for storing debug info and displaced code in memory 
+	int TYPE_CONSTANT = 0; // signed offset space
+	int TYPE_RAM = 1;
+	int TYPE_CODE = 2; // Deprecated - required for backward compatibility/upgrade
+	int TYPE_UNIQUE = 3;
+	int TYPE_REGISTER = 4;
+	int TYPE_STACK = 5; // signed offset space for stack
+	int TYPE_JOIN = 6; // used for variable join space (see decompiler)
+	int TYPE_OTHER = 7; // used for storing debug info and displaced code in memory 
 
-	public static final int TYPE_SYMBOL = 9; // symbol space used for analysis only
-	public static final int TYPE_EXTERNAL = 10;
-	public static final int TYPE_VARIABLE = 11;
+	int TYPE_SYMBOL = 9; // symbol space used for analysis only
+	int TYPE_EXTERNAL = 10;
+	int TYPE_VARIABLE = 11;
 
-	public static final int TYPE_DELETED = 13;
-	public static final int TYPE_UNKNOWN = 14;
-	public static final int TYPE_NONE = 15;
+	int TYPE_DELETED = 13;
+	int TYPE_UNKNOWN = 14;
+	int TYPE_NONE = 15;
 
 	/**
 	 * @see #TYPE_CONSTANT
 	 */
-	public static final int TYPE_IPTR_CONSTANT = TYPE_CONSTANT;
+	int TYPE_IPTR_CONSTANT = TYPE_CONSTANT;
 	/**
 	 * @see #TYPE_UNIQUE
 	 */
-	public static final int TYPE_IPTR_INTERNAL = TYPE_UNIQUE;
+	int TYPE_IPTR_INTERNAL = TYPE_UNIQUE;
 	/**
 	 * @see #TYPE_STACK
 	 */
-	public static final int TYPE_IPTR_SPACEBASE = TYPE_STACK;
+	int TYPE_IPTR_SPACEBASE = TYPE_STACK;
 
 	// Space ID Encoding
 	// NOTE: The spaceID format may be sensitive to change due to backward data compatibility
 	//       and possible decoding of the spaceID within the Decompiler
-	public static final int ID_SIZE_MASK = 0x0070;
-	public static final int ID_SIZE_SHIFT = 4;
-	public static final int ID_TYPE_MASK = 0x000f;
-	public static final int ID_UNIQUE_SHIFT = 7;
+	int ID_SIZE_MASK = 0x0070;
+	int ID_SIZE_SHIFT = 4;
+	int ID_TYPE_MASK = 0x000f;
+	int ID_UNIQUE_SHIFT = 7;
 
 	/**
 	 * The <code>OTHER_SPACE</code> is used to store data from the original program file that doesn't
 	 * get loaded into the final memory image and for user-defined spaces.
 	 */
-	public static final AddressSpace OTHER_SPACE = new GenericAddressSpace(
+	AddressSpace OTHER_SPACE = new GenericAddressSpace(
 		BasicCompilerSpec.OTHER_SPACE_NAME, 64, TYPE_OTHER, BasicCompilerSpec.OTHER_SPACE_INDEX);
 
 	/**
@@ -77,7 +77,7 @@ public interface AddressSpace extends Comparable<AddressSpace> {
 	 * defined within a given library namespace.  All external locations within a program
 	 * are given a unique offset within the EXTERNAL space.
 	 */
-	public static final AddressSpace EXTERNAL_SPACE =
+	AddressSpace EXTERNAL_SPACE =
 		new GenericAddressSpace("EXTERNAL", 32, TYPE_EXTERNAL, 0);
 
 	/**
@@ -85,20 +85,20 @@ public interface AddressSpace extends Comparable<AddressSpace> {
 	 * defined within a given namespace (i.e., function).  All variables within a program
 	 * are given a unique offset within the VARIABLE space.
 	 */
-	public static final AddressSpace VARIABLE_SPACE =
+	AddressSpace VARIABLE_SPACE =
 		new GenericAddressSpace("VARIABLE", 32, TYPE_VARIABLE, 0);
 
 	/**
 	 * The <code>HASH_SPACE</code> provides a 60-bit space for encoding of unique hashcodes. 
 	 */
-	public static final AddressSpace HASH_SPACE =
+	AddressSpace HASH_SPACE =
 		new GenericAddressSpace("HASH", 60, TYPE_UNKNOWN, 0);
 
 	/**
 	 * A language may only define a single REGISTER space.  If one is not defined, this 
 	 * DEFAULT_REGISTER_SPACE definition will be used.
 	 */
-	public static final AddressSpace DEFAULT_REGISTER_SPACE =
+	AddressSpace DEFAULT_REGISTER_SPACE =
 		new GenericAddressSpace("REGISTER", 32, TYPE_REGISTER, 0);
 
 	/**
@@ -141,7 +141,7 @@ public interface AddressSpace extends Comparable<AddressSpace> {
 	 * @param byteOffset memory byte offset
 	 * @return addressable memory word offset
 	 */
-	public long getAddressableWordOffset(long byteOffset);
+	long getAddressableWordOffset(long byteOffset);
 
 	/**
 	 * Returns the absolute size of a pointer into this space (in bytes).
@@ -268,7 +268,7 @@ public interface AddressSpace extends Comparable<AddressSpace> {
 	 * @throws IllegalArgumentException if the two addresses are not in the
 	 * same address space.
 	 */
-	public long subtract(Address addr1, Address addr2);
+	long subtract(Address addr1, Address addr2);
 
 	/**
 	 * Creates a new address by subtracting displacement from addr's offset.
@@ -279,7 +279,7 @@ public interface AddressSpace extends Comparable<AddressSpace> {
 	 * @param displacement  the displacement to subtract.
 	 * @return a new address created by subtracting the displacement from addr.offset.
 	 */
-	public Address subtractWrap(Address addr, long displacement);
+	Address subtractWrap(Address addr, long displacement);
 
 	/**
 	 * Creates a new address by subtracting the displacement from the given 
@@ -301,7 +301,7 @@ public interface AddressSpace extends Comparable<AddressSpace> {
 	 * @return The new address created by subtracting displacement from addr.offset.
 	 * @throws AddressOverflowException if the subtraction would cause a wrap,
 	 */
-	public Address subtractNoWrap(Address addr, long displacement) throws AddressOverflowException;
+	Address subtractNoWrap(Address addr, long displacement) throws AddressOverflowException;
 
 	/**
 	 * Creates a new address (possibly in a new space) by subtracting the given 
@@ -311,7 +311,7 @@ public interface AddressSpace extends Comparable<AddressSpace> {
 	 * @return the new address
 	 * @throws AddressOutOfBoundsException if the result does not correspond to any address.
 	 */
-	public Address subtract(Address addr, long displacement);
+	Address subtract(Address addr, long displacement);
 
 	/**
 	 * Creates a new address by adding displacement to the given address. The
@@ -323,7 +323,7 @@ public interface AddressSpace extends Comparable<AddressSpace> {
 	 * @param displacement  the displacement to add.
 	 * @return the new address created by adding displacement to addr.offset.
 	 */
-	public Address addWrap(Address addr, long displacement);
+	Address addWrap(Address addr, long displacement);
 
 	/**
 	 * Creates a new address by adding the displacement to the given 
@@ -345,7 +345,7 @@ public interface AddressSpace extends Comparable<AddressSpace> {
 	 * @return The new address created by adding displacement to addr.offset.
 	 * @throws AddressOverflowException if the addition would cause a wrap,
 	 */
-	public Address addNoWrap(Address addr, long displacement) throws AddressOverflowException;
+	Address addNoWrap(Address addr, long displacement) throws AddressOverflowException;
 
 	/**
 	 * Creates a new address by adding displacement to the given address. The
@@ -355,7 +355,7 @@ public interface AddressSpace extends Comparable<AddressSpace> {
 	 * @return The new address created by adding displacement to addr.offset.
 	 * @throws AddressOverflowException if the addition would cause a wrap,
 	 */
-	public Address addNoWrap(GenericAddress addr, BigInteger displacement)
+	Address addNoWrap(GenericAddress addr, BigInteger displacement)
 			throws AddressOverflowException;
 
 	/**
@@ -366,7 +366,7 @@ public interface AddressSpace extends Comparable<AddressSpace> {
 	 * @return the new address
 	 * @throws AddressOutOfBoundsException if the result does not correspond to any address.
 	 */
-	public Address add(Address addr, long displacement) throws AddressOutOfBoundsException;
+	Address add(Address addr, long displacement) throws AddressOutOfBoundsException;
 
 	/**
 	 * Check the specified address range for validity within this space.
@@ -375,24 +375,24 @@ public interface AddressSpace extends Comparable<AddressSpace> {
 	 * @param length
 	 * @return true if range is valid for this space
 	 */
-	public boolean isValidRange(long byteOffset, long length);
+	boolean isValidRange(long byteOffset, long length);
 
 	/**
 	 * Tests whether addr2 immediately follows addr1.
 	 * @param addr1 the first address.
 	 * @param addr2 the second address.
 	 */
-	public boolean isSuccessor(Address addr1, Address addr2);
+	boolean isSuccessor(Address addr1, Address addr2);
 
 	/**
 	 * Get the max address allowed for this AddressSpace.
 	 */
-	public Address getMaxAddress();
+	Address getMaxAddress();
 
 	/** 
 	 * Get the min address allowed for this AddressSpace
 	 */
-	public Address getMinAddress();
+	Address getMinAddress();
 
 	/**
 	 * Returns the physical space associated with an address space.  There
@@ -400,7 +400,7 @@ public interface AddressSpace extends Comparable<AddressSpace> {
 	 * space (it may be its own physical space).
 	 * @return the associated physical space.
 	 */
-	public AddressSpace getPhysicalSpace();
+	AddressSpace getPhysicalSpace();
 
 	/**
 	 * Tests if the offset if valid. If the space is signed, then it sign extends
@@ -409,7 +409,7 @@ public interface AddressSpace extends Comparable<AddressSpace> {
 	 * @return the valid positive offset or appropriate sign extended offset.
 	 * @throws AddressOutOfBoundsException if offset is invalid
 	 */
-	public long makeValidOffset(long offset) throws AddressOutOfBoundsException;
+	long makeValidOffset(long offset) throws AddressOutOfBoundsException;
 
 	/**
 	 * Returns true if this space represents a memory address.  NOTE: It is important to 
@@ -421,54 +421,54 @@ public interface AddressSpace extends Comparable<AddressSpace> {
 	 * @see #isLoadedMemorySpace()
 	 * @see #isNonLoadedMemorySpace() 
 	 */
-	public boolean isMemorySpace();
+	boolean isMemorySpace();
 
 	/**
 	 * Returns true if this space represents represents a Loaded Memory
 	 * region (e.g., processor RAM).
 	 */
-	public boolean isLoadedMemorySpace();
+	boolean isLoadedMemorySpace();
 
 	/**
 	 * Returns true if this space represents represents a Non-Loaded storage region
 	 * for retaining non-loaded file data (e.g., OTHER)
 	 */
-	public boolean isNonLoadedMemorySpace();
+	boolean isNonLoadedMemorySpace();
 
 	/**
 	 * Returns true if this space represents a register location
 	 */
-	public boolean isRegisterSpace();
+	boolean isRegisterSpace();
 
 	/**
 	 * Returns true if this space represents a variable location
 	 */
-	public boolean isVariableSpace();
+	boolean isVariableSpace();
 
 	/**
 	 * Returns true if this space represents a stack location
 	 */
-	public boolean isStackSpace();
+	boolean isStackSpace();
 
 	/**
 	 * Returns true if this space represents a location in the HASH space. 
 	 */
-	public boolean isHashSpace();
+	boolean isHashSpace();
 
 	/**
 	 * Returns true if this space in the EXTERNAL_SPACE
 	 */
-	public boolean isExternalSpace();
+	boolean isExternalSpace();
 
 	/**
 	 * Returns true if this space in the unique space
 	 */
-	public boolean isUniqueSpace();
+	boolean isUniqueSpace();
 
 	/**
 	 * Returns true if this space in the constant space
 	 */
-	public boolean isConstantSpace();
+	boolean isConstantSpace();
 
 	/**
 	 * Returns true if this space has registers that are mapped into it.

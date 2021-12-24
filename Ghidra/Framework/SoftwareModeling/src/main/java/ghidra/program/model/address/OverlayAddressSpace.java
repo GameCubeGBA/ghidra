@@ -60,7 +60,7 @@ public class OverlayAddressSpace extends AbstractAddressSpace {
 //
 	@Override
 	public Address getAddress(String addrString) throws AddressFormatException {
-		addrString = addrString.replaceAll("::", ":");
+		addrString = addrString.replace("::", ":");
 
 		int firstColonPos = addrString.indexOf(":");
 		int lastColonPos = addrString.lastIndexOf(":");
@@ -97,10 +97,10 @@ public class OverlayAddressSpace extends AbstractAddressSpace {
 	public long subtract(Address addr1, Address addr2) {
 		AddressSpace space1 = addr1.getAddressSpace();
 		AddressSpace space2 = addr2.getAddressSpace();
-		if (space1.equals(this)) {
+		if (this.equals(space1)) {
 			space1 = originalSpace;
 		}
-		if (space2.equals(this)) {
+		if (this.equals(space2)) {
 			space2 = originalSpace;
 		}
 		if (!space1.equals(space2)) {
@@ -170,10 +170,8 @@ public class OverlayAddressSpace extends AbstractAddressSpace {
 
 	@Override
 	public Address getOverlayAddress(Address addr) {
-		if (getOverlayedSpace().equals(addr.getAddressSpace())) {
-			if (contains(addr.getOffset())) {
-				return new GenericAddress(this, addr.getOffset());
-			}
+		if (getOverlayedSpace().equals(addr.getAddressSpace()) && contains(addr.getOffset())) {
+			return new GenericAddress(this, addr.getOffset());
 		}
 		return addr;
 	}
@@ -241,10 +239,7 @@ public class OverlayAddressSpace extends AbstractAddressSpace {
 		if (obj == this) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (!(obj instanceof OverlayAddressSpace)) {
+		if ((obj == null) || !(obj instanceof OverlayAddressSpace)) {
 			return false;
 		}
 		OverlayAddressSpace s = (OverlayAddressSpace) obj;

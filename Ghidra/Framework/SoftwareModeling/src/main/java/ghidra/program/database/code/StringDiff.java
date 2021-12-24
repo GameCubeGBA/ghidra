@@ -84,12 +84,7 @@ public class StringDiff {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((text == null) ? 0 : text.hashCode());
-		result = prime * result + start;
-		result = prime * result + end;
-		return result;
+		return Objects.hash(text, start, end);
 	}
 
 	@Override
@@ -97,10 +92,7 @@ public class StringDiff {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
 		}
 

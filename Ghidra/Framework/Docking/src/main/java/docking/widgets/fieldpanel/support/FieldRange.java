@@ -15,11 +15,11 @@
  */
 package docking.widgets.fieldpanel.support;
 
-import ghidra.util.exception.AssertException;
-
 import java.math.BigInteger;
 
 import org.jdom.Element;
+
+import ghidra.util.exception.AssertException;
 
 /**
  *  Class to a range consisting of a start position within a start row to an end position within an 
@@ -108,6 +108,7 @@ public class FieldRange implements Comparable<FieldRange> {
 		return start.hashCode() << 16 + end.hashCode();
 	}
 
+	@Override
 	public int compareTo(FieldRange o) {
 		int result = start.compareTo(o.start);
 		if (result == 0) {

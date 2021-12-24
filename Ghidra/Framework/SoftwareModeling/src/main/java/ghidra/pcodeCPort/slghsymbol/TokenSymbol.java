@@ -16,7 +16,7 @@
  */
 package ghidra.pcodeCPort.slghsymbol;
 
-import ghidra.pcodeCPort.context.*;
+import ghidra.pcodeCPort.context.Token;
 import ghidra.sleigh.grammar.Location;
 
 public class TokenSymbol extends SleighSymbol {

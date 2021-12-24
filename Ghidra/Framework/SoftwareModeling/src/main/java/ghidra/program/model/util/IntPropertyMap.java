@@ -30,12 +30,12 @@ public interface IntPropertyMap extends PropertyMap {
 	 * @param addr address for the property
 	 * @param value value of the property
 	 */
-	public void add(Address addr, int value);
+	void add(Address addr, int value);
 		
 	/**
 	 * Get the integer value at the given address.
 	 * @param addr the address from where to get the int value
 	 * @throws NoValueException if there is no property value at addr.
 	 */
-	public int getInt(Address addr) throws NoValueException;
+	int getInt(Address addr) throws NoValueException;
 }

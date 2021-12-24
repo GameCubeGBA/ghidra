@@ -15,7 +15,9 @@
  */
 package docking.widgets.tree.internal;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
@@ -30,7 +32,7 @@ import ghidra.util.SystemUtilities;
 public class GTreeModel implements TreeModel {
 
 	private volatile GTreeNode root;
-	private List<TreeModelListener> listeners = new ArrayList<TreeModelListener>();
+	private List<TreeModelListener> listeners = new ArrayList<>();
 	private boolean isFiringNodeStructureChanged;
 	private volatile boolean eventsEnabled = true;
 

@@ -24,16 +24,20 @@ public interface LongIterator {
 	/**
 	 * A default implementation of LongIterator that has no values.
 	 */
-	public final static LongIterator EMPTY = new LongIterator() {
+	LongIterator EMPTY = new LongIterator() {
+		@Override
 		public boolean hasNext() {
 			return false;
 		}
+		@Override
 		public long next() {
 			return 0;
 		}
+		@Override
 		public boolean hasPrevious() {
 			return false;
 		}
+		@Override
 		public long previous() {
 			return 0;
 		}
@@ -42,18 +46,18 @@ public interface LongIterator {
 	/**
 	 * Return true if there is a next long in this iterator.
 	 */
-    public boolean hasNext();
+    boolean hasNext();
 	/**
 	 * Get the next long value in this iterator.
 	 */
-    public long next();
+    long next();
     
     /**
      * Return true if there a previous long in this iterator.
      */
-    public boolean hasPrevious();
+    boolean hasPrevious();
 	/**
 	 * Get the previous long value in this iterator.
 	 */
-    public long previous();
+    long previous();
 }

@@ -17,5 +17,5 @@
 package generic.jar;
 
 public interface ResourceFileFilter {
-	public boolean accept(ResourceFile file);
+	boolean accept(ResourceFile file);
 }

@@ -16,10 +16,10 @@
  */
 package ghidra.app.plugin.processors.generic;
 
-import ghidra.program.model.pcode.Varnode;
-
 import java.io.Serializable;
 import java.util.HashMap;
+
+import ghidra.program.model.pcode.Varnode;
 
 /**
  * 

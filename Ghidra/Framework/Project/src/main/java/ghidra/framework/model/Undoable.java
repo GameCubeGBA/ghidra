@@ -40,7 +40,7 @@ public interface Undoable {
 	/**
 	 * Clear all undoable/redoable transactions
 	 */
-	public void clearUndo();
+	void clearUndo();
 
 	/**
 	 * Returns to the previous state.  Normally, this will cause the current state
@@ -72,12 +72,12 @@ public interface Undoable {
 	 * Adds the given transaction listener to this domain object
 	 * @param listener the new transaction listener to add
 	 */
-	public void addTransactionListener(TransactionListener listener);
+	void addTransactionListener(TransactionListener listener);
 
 	/**
 	 * Removes the given transaction listener from this domain object.
 	 * @param listener the transaction listener to remove
 	 */
-	public void removeTransactionListener(TransactionListener listener);
+	void removeTransactionListener(TransactionListener listener);
 
 }

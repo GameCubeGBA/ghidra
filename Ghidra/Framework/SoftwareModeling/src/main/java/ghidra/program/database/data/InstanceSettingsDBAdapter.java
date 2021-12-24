@@ -15,15 +15,19 @@
  */
 package ghidra.program.database.data;
 
+import java.io.IOException;
+
+import db.DBConstants;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.RecordIterator;
+import db.Schema;
 import ghidra.program.database.map.AddressMap;
 import ghidra.program.model.address.Address;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
-
-import java.io.IOException;
-
-import db.*;
 
 /**
  * Adapter to access the instance settings database tables.

@@ -16,10 +16,20 @@
 package docking.widgets.table.constraint.provider;
 
 import java.text.DecimalFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
-import docking.widgets.table.constraint.*;
-import docking.widgets.table.constrainteditor.*;
+import docking.widgets.table.constraint.AtLeastColumnConstraint;
+import docking.widgets.table.constraint.AtMostColumnConstraint;
+import docking.widgets.table.constraint.ColumnConstraint;
+import docking.widgets.table.constraint.ColumnConstraintProvider;
+import docking.widgets.table.constraint.ColumnData;
+import docking.widgets.table.constraint.InRangeColumnConstraint;
+import docking.widgets.table.constraint.NotInRangeColumnConstraint;
+import docking.widgets.table.constrainteditor.ColumnConstraintEditor;
+import docking.widgets.table.constrainteditor.DoubleRangeConstraintEditor;
+import docking.widgets.table.constrainteditor.DoubleValueConstraintEditor;
 
 /**
  * Provides number related column constraints.
@@ -35,25 +45,25 @@ public class NumberColumnConstraintProvider implements ColumnConstraintProvider 
 		list.add(new AtLeastColumnConstraint<>((byte)0, new ByteEditorProvider()));
 		list.add(new AtLeastColumnConstraint<>((short)0, new ShortEditorProvider()));
 		list.add(new AtLeastColumnConstraint<>(0, new IntEditorProvider()));
-		list.add(new AtLeastColumnConstraint<>(0l, new LongEditorProvider()));
+		list.add(new AtLeastColumnConstraint<>(0L, new LongEditorProvider()));
 		list.add(new AtLeastColumnConstraint<>(0d, new FloatingEditorProvider()));
 
 		list.add(new AtMostColumnConstraint<>((byte)0, new ByteEditorProvider()));
 		list.add(new AtMostColumnConstraint<>((short)0, new ShortEditorProvider()));
 		list.add(new AtMostColumnConstraint<>(0, new IntEditorProvider()));
-		list.add(new AtMostColumnConstraint<>(0l, new LongEditorProvider()));
+		list.add(new AtMostColumnConstraint<>(0L, new LongEditorProvider()));
 		list.add(new AtMostColumnConstraint<>(0d, new FloatingEditorProvider()));
 
 		list.add(new InRangeColumnConstraint<>((byte)0, (byte)0, new ByteRangeEditorProvider()));
 		list.add(new InRangeColumnConstraint<>((short)0, (short)0, new ShortRangeEditorProvider()));
 		list.add(new InRangeColumnConstraint<>(0, 0, new IntRangeEditorProvider()));
-		list.add(new InRangeColumnConstraint<>(0l, 0l, new LongRangeEditorProvider()));
+		list.add(new InRangeColumnConstraint<>(0L, 0L, new LongRangeEditorProvider()));
 		list.add(new InRangeColumnConstraint<>(0d, 0d, new FloatingRangeEditorProvider()));
 
 		list.add(new NotInRangeColumnConstraint<>((byte)0, (byte)0, new ByteRangeEditorProvider()));
 		list.add(new NotInRangeColumnConstraint<>((short)0, (short)0, new ShortRangeEditorProvider()));
 		list.add(new NotInRangeColumnConstraint<>(0, 0, new IntRangeEditorProvider()));
-		list.add(new NotInRangeColumnConstraint<>(0l, 0l, new LongRangeEditorProvider()));
+		list.add(new NotInRangeColumnConstraint<>(0L, 0L, new LongRangeEditorProvider()));
 		list.add(new NotInRangeColumnConstraint<>(0d, 0d, new FloatingRangeEditorProvider()));
 
 		// @formatter:on

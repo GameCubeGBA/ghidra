@@ -25,38 +25,38 @@ public interface SortedTableModel extends TableModel {
 	/**
 	 * Sort order in ascending order.
 	 */
-	public final static boolean ASCENDING_ORDER = true;
+	boolean ASCENDING_ORDER = true;
 
 	/**
 	 * Sort order in descending order.
 	 */
-	public final static boolean DESCENDING_ORDER = false;
+	boolean DESCENDING_ORDER = false;
 
 	/**
 	 * Returns true if the specified columnIndex is sortable.
 	 * @param columnIndex the column index
 	 * @return true if the specified columnIndex is sortable
 	 */
-	public boolean isSortable(int columnIndex);
+	boolean isSortable(int columnIndex);
 
 	/**
 	 * Returns the column index that is the primary sorted column; -1 if no column is sorted
 	 * 
 	 * @return the index
 	 */
-	public int getPrimarySortColumnIndex();
+	int getPrimarySortColumnIndex();
 
 	/**
 	 * Sets the sort state for this table model
 	 * @param state the sort state
 	 */
-	public void setTableSortState(TableSortState state);
+	void setTableSortState(TableSortState state);
 
 	/**
 	 * Gets the sort state of this sorted model
 	 * @return the current sort state
 	 */
-	public TableSortState getTableSortState();
+	TableSortState getTableSortState();
 
 	/**
 	 * Adds a listener to be notified when the sort state of this model changes. 
@@ -66,5 +66,5 @@ public interface SortedTableModel extends TableModel {
 	 * </b>
 	 * @param l the listener
 	 */
-	public void addSortListener(SortListener l);
+	void addSortListener(SortListener l);
 }

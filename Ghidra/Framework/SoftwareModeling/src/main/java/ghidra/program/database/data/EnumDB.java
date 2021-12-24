@@ -17,7 +17,15 @@ package ghidra.program.database.data;
 
 import java.io.IOException;
 import java.math.BigInteger;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -26,8 +34,13 @@ import db.Field;
 import ghidra.docking.settings.Settings;
 import ghidra.docking.settings.SettingsDefinition;
 import ghidra.program.database.DBObjectCache;
-import ghidra.program.model.data.*;
+import ghidra.program.model.data.BitGroup;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.DataTypeManager;
 import ghidra.program.model.data.Enum;
+import ghidra.program.model.data.EnumDataType;
+import ghidra.program.model.data.EnumValuePartitioner;
+import ghidra.program.model.data.MutabilitySettingsDefinition;
 import ghidra.program.model.mem.MemBuffer;
 import ghidra.program.model.mem.MemoryAccessException;
 import ghidra.program.model.scalar.Scalar;
@@ -39,7 +52,7 @@ import ghidra.util.UniversalID;
 class EnumDB extends DataTypeDB implements Enum {
 
 	private static final SettingsDefinition[] ENUM_SETTINGS_DEFINITIONS =
-		new SettingsDefinition[] { MutabilitySettingsDefinition.DEF };
+		{ MutabilitySettingsDefinition.DEF };
 
 	private EnumDBAdapter adapter;
 	private EnumValueDBAdapter valueAdapter;
@@ -555,8 +568,7 @@ class EnumDB extends DataTypeDB implements Enum {
 		else {
 			valueStr = Long.toString(value);
 		}
-		valueName = "" + valueStr;
-		return valueName;
+		return "" + valueStr;
 	}
 
 	@Override
@@ -570,11 +582,7 @@ class EnumDB extends DataTypeDB implements Enum {
 
 		Enum enumm = (Enum) dt;
 		if (!DataTypeUtilities.equalsIgnoreConflict(getName(), enumm.getName()) ||
-			getLength() != enumm.getLength() || getCount() != enumm.getCount()) {
-			return false;
-		}
-
-		if (!isEachValueEquivalent(enumm)) {
+			getLength() != enumm.getLength() || getCount() != enumm.getCount() || !isEachValueEquivalent(enumm)) {
 			return false;
 		}
 		return true;

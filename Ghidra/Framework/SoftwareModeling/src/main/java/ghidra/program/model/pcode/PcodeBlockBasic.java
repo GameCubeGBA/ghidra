@@ -19,7 +19,12 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.Iterator;
 
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressRange;
+import ghidra.program.model.address.AddressRangeIterator;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSpace;
 import ghidra.util.xml.SpecXmlUtils;
 import ghidra.xml.XmlElement;
 import ghidra.xml.XmlPullParser;
@@ -35,7 +40,7 @@ public class PcodeBlockBasic extends PcodeBlock {
 	PcodeBlockBasic() {
 		super();
 		blocktype = PcodeBlock.BASIC;
-		oplist = new ListLinked<PcodeOp>();
+		oplist = new ListLinked<>();
 		cover = new AddressSet();
 	}
 

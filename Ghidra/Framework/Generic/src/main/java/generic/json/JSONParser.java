@@ -3,7 +3,9 @@
  */
 package generic.json;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import ghidra.util.Msg;
 import ghidra.util.NumericUtilities;
@@ -380,7 +382,7 @@ public class JSONParser {
 		
 		switch(tp.type){
 		case JSMN_OBJECT:
-			HashMap<Object, Object> tab = new HashMap<Object, Object>();
+			HashMap<Object, Object> tab = new HashMap<>();
 			if(tp.size%2 != 0) {
 				Msg.error(this, "invalid json object");
 				return null;
@@ -393,7 +395,7 @@ public class JSONParser {
 			rv = tab;
 			break;
 		case JSMN_ARRAY:
-			List<Object> l = new ArrayList<Object>();
+			List<Object> l = new ArrayList<>();
 			for(i = 0; i < tp.size; i++)
 				l.add(convert(s, t));
 			rv = l;

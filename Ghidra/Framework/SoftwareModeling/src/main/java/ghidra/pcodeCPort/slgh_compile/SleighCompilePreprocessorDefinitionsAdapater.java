@@ -27,15 +27,18 @@ public class SleighCompilePreprocessorDefinitionsAdapater implements
         this.sleighCompile = sleighCompile;
     }
 
-    public Pair<Boolean, String> lookup(String key) {
+    @Override
+	public Pair<Boolean, String> lookup(String key) {
         return sleighCompile.getPreprocValue(key);
     }
 
-    public void set(String key, String value) {
+    @Override
+	public void set(String key, String value) {
         sleighCompile.setPreprocValue(key, value);
     }
 
-    public void undefine(String key) {
+    @Override
+	public void undefine(String key) {
         sleighCompile.undefinePreprocValue(key);
     }
 }

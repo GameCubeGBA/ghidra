@@ -27,5 +27,5 @@ public interface LogListener {
 	 * @param isError true if the message is considered an error, as opposed to an informational
 	 *        message.
 	 */
-	public void messageLogged(String message, boolean isError);
+	void messageLogged(String message, boolean isError);
 }

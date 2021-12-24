@@ -15,25 +15,49 @@
  */
 package ghidra.framework.main.datatable;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
-import javax.swing.*;
+import javax.swing.CellRendererPane;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
 
 import docking.ActionContext;
 import docking.ComponentProvider;
 import docking.help.Help;
 import docking.help.HelpService;
 import docking.widgets.label.GHtmlLabel;
-import docking.widgets.table.*;
-import docking.widgets.table.threaded.*;
+import docking.widgets.table.GFilterTable;
+import docking.widgets.table.GTable;
+import docking.widgets.table.GTableCellRenderer;
+import docking.widgets.table.GTableCellRenderingData;
+import docking.widgets.table.threaded.GThreadedTablePanel;
+import docking.widgets.table.threaded.ThreadedTableModel;
+import docking.widgets.table.threaded.ThreadedTableModelListener;
 import ghidra.framework.main.FrontEndPlugin;
-import ghidra.framework.model.*;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.DomainFolder;
+import ghidra.framework.model.DomainFolderChangeListener;
+import ghidra.framework.model.DomainObject;
+import ghidra.framework.model.ProjectData;
 import ghidra.framework.plugintool.PluginTool;
-import ghidra.util.*;
+import ghidra.util.DateUtils;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
+import ghidra.util.SystemUtilities;
 import ghidra.util.bean.GGlassPane;
 import ghidra.util.bean.GGlassPanePainter;
 
@@ -206,10 +230,7 @@ public class ProjectDataTablePanel extends JPanel {
 	}
 
 	private void checkOpen(MouseEvent e) {
-		if (tool == null) { // dialog use
-			return;
-		}
-		if (e.getButton() != MouseEvent.BUTTON1 || e.getClickCount() != 2) {
+		if ((tool == null) || e.getButton() != MouseEvent.BUTTON1 || e.getClickCount() != 2) {
 			return;
 		}
 
@@ -422,7 +443,7 @@ public class ProjectDataTablePanel extends JPanel {
 		}
 	}
 
-	private class ProjectDataTable extends GTable {
+	private static class ProjectDataTable extends GTable {
 
 		public ProjectDataTable(ThreadedTableModel<DomainFileInfo, ?> m) {
 			super(m);

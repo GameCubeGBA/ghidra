@@ -15,7 +15,16 @@
  */
 package ghidra.util.datastruct;
 
-import java.util.*;
+import java.util.AbstractCollection;
+import java.util.AbstractSet;
+import java.util.Collection;
+import java.util.ConcurrentModificationException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Set;
 
 import ghidra.util.SystemUtilities;
 
@@ -146,7 +155,7 @@ public class LRUMap<K, V> implements Map<K, V> {
 
 	@Override
 	public Set<K> keySet() {
-		return new AbstractSet<K>() {
+		return new AbstractSet<>() {
 			@Override
 			public Iterator<K> iterator() {
 				return new KeyIterator();
@@ -176,7 +185,7 @@ public class LRUMap<K, V> implements Map<K, V> {
 
 	@Override
 	public Collection<V> values() {
-		return new AbstractCollection<V>() {
+		return new AbstractCollection<>() {
 			@Override
 			public Iterator<V> iterator() {
 				return new ValueIterator();
@@ -196,7 +205,7 @@ public class LRUMap<K, V> implements Map<K, V> {
 
 	@Override
 	public Set<Map.Entry<K, V>> entrySet() {
-		return new AbstractSet<Map.Entry<K, V>>() {
+		return new AbstractSet<>() {
 			@Override
 			public Iterator<Map.Entry<K, V>> iterator() {
 				return new EntryIterator();

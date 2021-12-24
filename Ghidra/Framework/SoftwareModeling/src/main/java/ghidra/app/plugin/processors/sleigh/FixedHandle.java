@@ -80,10 +80,7 @@ public class FixedHandle {
 	}
 	
 	public Varnode getStaticVarnode() {
-		if (space == null) {
-			return null;
-		}
-		if (offset_space != null && offset_space.getType() != AddressSpace.TYPE_CONSTANT) {
+		if ((space == null) || (offset_space != null && offset_space.getType() != AddressSpace.TYPE_CONSTANT)) {
 			return null;
 		}
 		return new Varnode(space.getAddress(offset_offset), size);

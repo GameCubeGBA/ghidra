@@ -15,7 +15,12 @@
  */
 package generic.stl;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
 
 @SuppressWarnings("all") // note: if we ever decide to support this API, then remove this
 public class VectorSTL<T> implements Iterable<T> {
@@ -26,12 +31,11 @@ public class VectorSTL<T> implements Iterable<T> {
 	static Comparator comparableComparator = createComparator();
 
 	private static Comparator createComparator() {
-		Comparator c = (o1, o2) -> {
+		return (o1, o2) -> {
 			Comparable c1 = (Comparable) o1;
 			Comparable c2 = (Comparable) o2;
 			return c1.compareTo(c2);
 		};
-		return c;
 	}
 
 	private ArrayList<T> data;

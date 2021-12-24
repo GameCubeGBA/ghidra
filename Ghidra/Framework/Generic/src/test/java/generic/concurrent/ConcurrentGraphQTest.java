@@ -17,7 +17,11 @@ package generic.concurrent;
 
 import static org.junit.Assert.assertTrue;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -25,7 +29,6 @@ import org.junit.Test;
 import generic.test.AbstractGenericTest;
 import ghidra.util.graph.AbstractDependencyGraph;
 import ghidra.util.graph.DependencyGraph;
-import ghidra.util.task.TaskMonitor;
 
 public class ConcurrentGraphQTest extends AbstractGenericTest {
 
@@ -75,16 +78,12 @@ public class ConcurrentGraphQTest extends AbstractGenericTest {
 		AbstractDependencyGraph<String> savedGraph = graph.copy();
 
 		GThreadPool pool = GThreadPool.getPrivateThreadPool("ConcurrentGraphQ Test");
-		QRunnable<String> runnable = new QRunnable<>() {
-
-			@Override
-			public void run(String item, TaskMonitor monitor) throws Exception {
+		QRunnable<String> runnable = (item, monitor) -> {
 //				System.out.println("Processing item " + item + " in thread" +
 //					Thread.currentThread().getName());
 //				sleep(1000);
-				synchronized (completionOrder) {
-					completionOrder.add(item);
-				}
+			synchronized (completionOrder) {
+				completionOrder.add(item);
 			}
 		};
 

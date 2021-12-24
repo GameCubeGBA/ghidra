@@ -15,11 +15,17 @@
  */
 package docking.widgets.dialogs;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.AbstractCellEditor;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
@@ -32,7 +38,10 @@ import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.combobox.GComboBox;
 import docking.widgets.table.AbstractSortedTableModel;
 import docking.widgets.table.GTable;
-import ghidra.docking.settings.*;
+import ghidra.docking.settings.BooleanSettingsDefinition;
+import ghidra.docking.settings.EnumSettingsDefinition;
+import ghidra.docking.settings.Settings;
+import ghidra.docking.settings.SettingsDefinition;
 import ghidra.util.HelpLocation;
 import ghidra.util.exception.AssertException;
 
@@ -70,6 +79,7 @@ public class SettingsDialog extends DialogComponentProvider {
 		DockingWindowManager.showDialog(parent, this);
 	}
 
+	@Override
 	public void dispose() {
 		settingsTable.editingStopped(null);
 		settingsTable.dispose();

@@ -44,13 +44,13 @@ public interface BookmarkManager {
 	/**
 	 * 1st version of bookmark property object class (schema change and class moved)
 	 */
-	public static final String OLD_BOOKMARK_PROPERTY_OBJECT_CLASS1 =
+	String OLD_BOOKMARK_PROPERTY_OBJECT_CLASS1 =
 		"ghidra.app.plugin.bookmark.BookmarkInfo";
 
 	/**
 	 * 2nd version of bookmark property object class (class moved, property map no longer used)
 	 */
-	public static final String OLD_BOOKMARK_PROPERTY_OBJECT_CLASS2 = "ghidra.program.util.Bookmark";
+	String OLD_BOOKMARK_PROPERTY_OBJECT_CLASS2 = "ghidra.program.util.Bookmark";
 
 	/**
 	 * Define a bookmark type with its marker icon and color.  The icon and color
@@ -169,7 +169,7 @@ public interface BookmarkManager {
 	 * @param addr the address at which to retrieve all bookmarks.
 	 * @return array of bookmarks
 	 */
-	public Bookmark[] getBookmarks(Address addr);
+	Bookmark[] getBookmarks(Address addr);
 
 	/**
 	 * Get addresses for bookmarks of a specified type.

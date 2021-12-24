@@ -16,9 +16,8 @@
  */
 package ghidra.framework.model;
 
-import ghidra.framework.store.LockException;
-
 import db.TerminatedTransactionException;
+import ghidra.framework.store.LockException;
 
 /**
  * <code>UndoableDomainObject</code> extends a domain object to provide transaction
@@ -46,7 +45,7 @@ public interface UndoableDomainObject extends DomainObject, Undoable {
 	 * @throws TerminatedTransactionException an existing transaction which has not yet ended was terminated early.
 	 * Sub-transactions are not permitted until the terminated transaction ends.
 	 */
-	public int startTransaction(String description);
+	int startTransaction(String description);
 
 	/**
 	 * Start a new transaction in order to make changes to this domain object.
@@ -60,7 +59,7 @@ public interface UndoableDomainObject extends DomainObject, Undoable {
 	 * @throws TerminatedTransactionException an existing transaction which has not yet ended was terminated early.
 	 * Sub-transactions are not permitted until the terminated transaction ends.
 	 */
-	public int startTransaction(String description, AbortedTransactionListener listener);
+	int startTransaction(String description, AbortedTransactionListener listener);
 
 	/**
 	 * Terminate the specified transaction for this domain object.
@@ -68,19 +67,19 @@ public interface UndoableDomainObject extends DomainObject, Undoable {
 	 * @param commit if true the changes made in this transaction will be marked for commit,
 	 * if false this and any concurrent transaction will be rolled-back.
 	 */
-	public void endTransaction(int transactionID, boolean commit);
+	void endTransaction(int transactionID, boolean commit);
 
 	/**
 	 * Returns the current transaction
 	 * @return the current transaction
 	 */
-	public Transaction getCurrentTransaction();
+	Transaction getCurrentTransaction();
 
 	/**
 	 * Returns true if the last transaction was terminated externally from the action that
 	 * started it.
 	 */
-	public boolean hasTerminatedTransaction();
+	boolean hasTerminatedTransaction();
 
 	/**
 	 * Return array of all domain objects synchronized with a 
@@ -88,7 +87,7 @@ public interface UndoableDomainObject extends DomainObject, Undoable {
 	 * @return returns array of synchronized domain objects or
 	 * null if this domain object is not synchronized with others.
 	 */
-	public DomainObject[] getSynchronizedDomainObjects();
+	DomainObject[] getSynchronizedDomainObjects();
 
 	/**
 	 * Synchronize the specified domain object with this domain object
@@ -99,7 +98,7 @@ public interface UndoableDomainObject extends DomainObject, Undoable {
 	 * @throws LockException if lock or open transaction is active on either
 	 * this or the specified domain object
 	 */
-	public void addSynchronizedDomainObject(DomainObject domainObj) throws LockException;
+	void addSynchronizedDomainObject(DomainObject domainObj) throws LockException;
 
 	/**
 	 * Remove this domain object from a shared transaction manager.  If
@@ -107,6 +106,6 @@ public interface UndoableDomainObject extends DomainObject, Undoable {
 	 * transaction manager, this method will have no affect.
 	 * @throws LockException if lock or open transaction is active
 	 */
-	public void releaseSynchronizedDomainObject() throws LockException;
+	void releaseSynchronizedDomainObject() throws LockException;
 
 }

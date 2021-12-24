@@ -15,9 +15,18 @@
  */
 package ghidra.program.model.data;
 
-import java.nio.*;
-import java.nio.charset.*;
-import java.util.*;
+import java.nio.BufferOverflowException;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.CharBuffer;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetEncoder;
+import java.nio.charset.CoderResult;
+import java.nio.charset.MalformedInputException;
+import java.nio.charset.UnmappableCharacterException;
+import java.util.Collections;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import ghidra.program.model.lang.Endian;
@@ -60,27 +69,24 @@ public class StringRenderParser {
 		private final boolean isFinal;
 		private final Set<Character> accepts;
 
-		private State(boolean isFinal) { // Implies this accepts any
+		State(boolean isFinal) { // Implies this accepts any
 			this.isFinal = isFinal;
 			this.accepts = null;
 		}
 
-		private State(boolean isFinal, String accepts) {
+		State(boolean isFinal, String accepts) {
 			this(isFinal, accepts.chars()
 					.mapToObj(i -> (char) i)
 					.collect(Collectors.toSet()));
 		}
 
-		private State(boolean isFinal, Set<Character> accepts) {
+		State(boolean isFinal, Set<Character> accepts) {
 			this.isFinal = isFinal;
 			this.accepts = Collections.unmodifiableSet(accepts);
 		}
 
 		private void checkAccepts(int pos, char c) throws StringParseException {
-			if (accepts == null) {
-				return;
-			}
-			if (accepts.contains(c)) {
+			if ((accepts == null) || accepts.contains(c)) {
 				return;
 			}
 			throw new StringParseException(pos, accepts, c);

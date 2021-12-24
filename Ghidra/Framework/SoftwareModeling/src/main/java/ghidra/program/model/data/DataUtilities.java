@@ -15,10 +15,25 @@
  */
 package ghidra.program.model.data;
 
-import ghidra.program.model.address.*;
-import ghidra.program.model.listing.*;
-import ghidra.program.model.mem.*;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressOverflowException;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.listing.CodeUnit;
+import ghidra.program.model.listing.Data;
+import ghidra.program.model.listing.DataIterator;
+import ghidra.program.model.listing.Instruction;
+import ghidra.program.model.listing.InstructionIterator;
+import ghidra.program.model.listing.Listing;
+import ghidra.program.model.listing.Program;
+import ghidra.program.model.mem.DumbMemBufferImpl;
+import ghidra.program.model.mem.MemBuffer;
+import ghidra.program.model.mem.MemoryBlock;
+import ghidra.program.model.symbol.ExternalLocation;
+import ghidra.program.model.symbol.ExternalReference;
+import ghidra.program.model.symbol.RefType;
+import ghidra.program.model.symbol.Reference;
+import ghidra.program.model.symbol.ReferenceManager;
+import ghidra.program.model.symbol.SourceType;
 import ghidra.program.model.util.CodeUnitInsertionException;
 import ghidra.program.util.ProgramLocation;
 import ghidra.util.exception.AssertException;
@@ -57,7 +72,7 @@ public final class DataUtilities {
 	 * <code>ClearDataMode</code> specifies how conflicting data should be cleared
 	 * when creating/re-creating data
 	 */
-	public static enum ClearDataMode {
+	public enum ClearDataMode {
 		/**
 		 * Ensure that data will fit before clearing
 		 * a single code unit at the specified data address.
@@ -229,11 +244,7 @@ public final class DataUtilities {
 	private static void restoreReference(DataType newType, ReferenceManager refMgr,
 			Reference ref) {
 
-		if (ref == null) {
-			return;
-		}
-
-		if (!(newType instanceof Pointer)) {
+		if ((ref == null) || !(newType instanceof Pointer)) {
 			return;
 		}
 
@@ -438,8 +449,7 @@ public final class DataUtilities {
 			return null;
 		}
 
-		Data dataAtAddr = dataContaining.getComponent(loc.getComponentPath());
-		return dataAtAddr;
+		return dataContaining.getComponent(loc.getComponentPath());
 	}
 
 	/**
@@ -603,10 +613,7 @@ public final class DataUtilities {
 			Address endAddress) {
 		MemoryBlock block = program.getMemory().getBlock(startAddress);
 		// start and end address must be in the same block of memory.
-		if (block == null || !block.contains(endAddress)) {
-			return false;
-		}
-		if (startAddress.compareTo(endAddress) > 0) {
+		if (block == null || !block.contains(endAddress) || (startAddress.compareTo(endAddress) > 0)) {
 			return false; // start shouldn't be after end.
 		}
 		Listing listing = program.getListing();

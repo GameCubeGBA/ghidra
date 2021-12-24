@@ -16,9 +16,12 @@
  */
 package docking.widgets.fieldpanel.internal;
 
-import ghidra.util.datastruct.*;
-
 import java.awt.Color;
+
+import ghidra.util.datastruct.IndexRange;
+import ghidra.util.datastruct.IndexRangeIterator;
+import ghidra.util.datastruct.RangeMap;
+import ghidra.util.datastruct.ValueRange;
 
 
 public class ColorRangeMap {

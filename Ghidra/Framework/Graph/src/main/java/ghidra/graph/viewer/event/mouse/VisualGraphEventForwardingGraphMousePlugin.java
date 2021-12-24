@@ -15,14 +15,22 @@
  */
 package ghidra.graph.viewer.event.mouse;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Point;
+import java.awt.event.InputEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.JComponent;
 
 import docking.DockingUtils;
 import edu.uci.ics.jung.visualization.control.AbstractGraphMousePlugin;
-import ghidra.graph.viewer.*;
+import ghidra.graph.viewer.GraphViewer;
+import ghidra.graph.viewer.GraphViewerUtils;
+import ghidra.graph.viewer.VisualEdge;
+import ghidra.graph.viewer.VisualVertex;
 
 //@formatter:off
 public class VisualGraphEventForwardingGraphMousePlugin<V extends VisualVertex, 
@@ -79,11 +87,7 @@ public class VisualGraphEventForwardingGraphMousePlugin<V extends VisualVertex,
 		}
 
 		VertexMouseInfo<V, E> vertexMouseInfo = getTranslatedMouseInfo(e);
-		if (vertexMouseInfo == null) {
-			return;
-		}
-
-		if (vertexMouseInfo.isScaledPastInteractionThreshold()) {
+		if ((vertexMouseInfo == null) || vertexMouseInfo.isScaledPastInteractionThreshold()) {
 			return;
 		}
 
@@ -159,12 +163,7 @@ public class VisualGraphEventForwardingGraphMousePlugin<V extends VisualVertex,
 		if (mousePressedInfo != null) {
 			isHandlingEvent = true;
 			VertexMouseInfo<V, E> mouseDraggedMouseInfo = getTranslatedMouseInfo(e);
-			if (mouseDraggedMouseInfo == null) {
-				handleMouseEventAfterLeavingVertex(e, mousePressedInfo);
-				return;
-			}
-			else if (mousePressedInfo != mouseDraggedMouseInfo) {
-				// don't allow dragging from one vertex into another
+			if ((mouseDraggedMouseInfo == null) || (mousePressedInfo != mouseDraggedMouseInfo)) {
 				handleMouseEventAfterLeavingVertex(e, mousePressedInfo);
 				return;
 			}
@@ -214,11 +213,7 @@ public class VisualGraphEventForwardingGraphMousePlugin<V extends VisualVertex,
 			isHandlingEvent = true;
 			repaintVertex(e, mousePressedInfo);
 			VertexMouseInfo<V, E> mouseClickedMouseInfo = getTranslatedMouseInfo(e);
-			if (mouseClickedMouseInfo == null) {
-				return;
-			}
-
-			if (mouseClickedMouseInfo.isScaledPastInteractionThreshold()) {
+			if ((mouseClickedMouseInfo == null) || mouseClickedMouseInfo.isScaledPastInteractionThreshold()) {
 				return;
 			}
 
@@ -273,10 +268,7 @@ public class VisualGraphEventForwardingGraphMousePlugin<V extends VisualVertex,
 			return;
 		}
 
-		if (newInfo == null) {
-			currentInfo.simulateMouseExitedEvent(); // different infos, send the event
-		}
-		else if (newInfo.getClickedComponent() != currentInfo.getClickedComponent()) {
+		if ((newInfo == null) || (newInfo.getClickedComponent() != currentInfo.getClickedComponent())) {
 			currentInfo.simulateMouseExitedEvent(); // different infos, send the event
 		}
 	}

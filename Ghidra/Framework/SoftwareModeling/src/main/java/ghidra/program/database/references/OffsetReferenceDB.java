@@ -18,7 +18,9 @@ package ghidra.program.database.references;
 
 import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.OffsetReference;
+import ghidra.program.model.symbol.RefType;
+import ghidra.program.model.symbol.SourceType;
 
 class OffsetReferenceDB extends MemReferenceDB implements OffsetReference {
 
@@ -31,6 +33,7 @@ class OffsetReferenceDB extends MemReferenceDB implements OffsetReference {
 	/**
 	 * @see ghidra.program.model.symbol.OffsetReference#getOffset()
 	 */
+	@Override
 	public long getOffset() {
 		return offsetOrShift;
 	}
@@ -38,6 +41,7 @@ class OffsetReferenceDB extends MemReferenceDB implements OffsetReference {
 	/**
 	 * @see ghidra.program.model.symbol.OffsetReference#getBaseAddress()
 	 */
+	@Override
 	public Address getBaseAddress() {
 		return toAddr.subtractWrap(offsetOrShift);
 	}
@@ -47,10 +51,7 @@ class OffsetReferenceDB extends MemReferenceDB implements OffsetReference {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (!(obj instanceof OffsetReference)) {
-			return false;
-		}
-		if (!super.equals(obj)) {
+		if (!(obj instanceof OffsetReference) || !super.equals(obj)) {
 			return false;
 		}
 		OffsetReference ref = (OffsetReference) obj;

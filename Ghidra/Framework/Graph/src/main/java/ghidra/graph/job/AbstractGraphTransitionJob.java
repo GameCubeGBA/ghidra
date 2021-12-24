@@ -16,17 +16,26 @@
 package ghidra.graph.job;
 
 import java.awt.geom.Point2D;
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import org.jdesktop.animation.timing.Animator;
 
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.visualization.util.Caching;
 import ghidra.graph.VisualGraph;
-import ghidra.graph.viewer.*;
-import ghidra.graph.viewer.layout.*;
+import ghidra.graph.viewer.GraphViewer;
+import ghidra.graph.viewer.VisualEdge;
+import ghidra.graph.viewer.VisualVertex;
+import ghidra.graph.viewer.layout.CalculateLayoutLocationsTask;
 import ghidra.graph.viewer.layout.LayoutListener.ChangeType;
+import ghidra.graph.viewer.layout.LayoutPositions;
+import ghidra.graph.viewer.layout.VisualGraphLayout;
 import ghidra.util.SystemUtilities;
 import ghidra.util.task.TaskLauncher;
 
@@ -162,8 +171,7 @@ public abstract class AbstractGraphTransitionJob<V extends VisualVertex, E exten
 	}
 
 	protected LayoutPositions<V, E> calculateDefaultLayoutLocations() {
-		LayoutPositions<V, E> positions = calculateDefaultLayoutLocations(Collections.emptySet());
-		return positions;
+		return calculateDefaultLayoutLocations(Collections.emptySet());
 	}
 
 	protected LayoutPositions<V, E> getCurrentLayoutLocations() {

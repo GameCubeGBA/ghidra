@@ -15,19 +15,44 @@
  */
 package docking.menu;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Insets;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Shape;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.List;
 import java.util.Objects;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.ButtonModel;
+import javax.swing.Icon;
+import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
-import javax.swing.event.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
 
 import org.apache.commons.lang3.StringUtils;
 
-import docking.*;
-import docking.action.*;
+import docking.ActionContext;
+import docking.ComponentProvider;
+import docking.DockingUtils;
+import docking.DockingWindowManager;
+import docking.action.DockingActionIf;
+import docking.action.MultiActionDockingActionIf;
+import docking.action.ToggleDockingAction;
 import docking.widgets.EmptyBorderButton;
 import docking.widgets.label.GDHtmlLabel;
 import ghidra.util.Swing;
@@ -149,8 +174,7 @@ public class MultipleActionDockingToolbarButton extends EmptyBorderButton {
 	private ActionContext getActionContext() {
 		ComponentProvider provider = getComponentProvider();
 		ActionContext context = provider == null ? null : provider.getActionContext(null);
-		final ActionContext actionContext = context == null ? new ActionContext() : context;
-		return actionContext;
+		return context == null ? new ActionContext() : context;
 	}
 
 	private ComponentProvider getComponentProvider() {
@@ -218,7 +242,7 @@ public class MultipleActionDockingToolbarButton extends EmptyBorderButton {
 //==================================================================================================
 // Inner Classes
 //==================================================================================================
-	private class IconWithDropDownArrow implements Icon {
+	private static class IconWithDropDownArrow implements Icon {
 
 		private int width;
 		private int height;
@@ -392,7 +416,7 @@ public class MultipleActionDockingToolbarButton extends EmptyBorderButton {
 		}
 	}
 
-	private class HoverChangeListener implements ChangeListener {
+	private static class HoverChangeListener implements ChangeListener {
 		private final DockingActionIf delegateAction;
 
 		public HoverChangeListener(DockingActionIf delegateAction) {

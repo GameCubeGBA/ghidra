@@ -15,7 +15,9 @@
  */
 package docking.options.editor;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import javax.swing.Icon;
 
@@ -46,7 +48,7 @@ class OptionsTreeNode extends GTreeLazyNode {
 
 	@Override
 	protected List<GTreeNode> generateChildren() {
-		List<GTreeNode> childList = new ArrayList<GTreeNode>();
+		List<GTreeNode> childList = new ArrayList<>();
 		if (options.getOptionsEditor() == null) { // if hasOptionsEditor, don't show child options	
 			List<Options> childOptionsList = options.getChildOptions();
 			for (Options childOptions : childOptionsList) {
@@ -108,7 +110,7 @@ class OptionsTreeNode extends GTreeLazyNode {
 
 	public List<String> getOptionNames() {
 		if (options == null) {
-			return new ArrayList<String>();
+			return new ArrayList<>();
 		}
 		return options.getLeafOptionNames();
 	}
@@ -138,10 +140,7 @@ class OptionsTreeNode extends GTreeLazyNode {
 		if (obj == this) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (obj.getClass() != getClass()) {
+		if ((obj == null) || (obj.getClass() != getClass())) {
 			return false;
 		}
 		return getName().equals(((OptionsTreeNode) obj).getName());

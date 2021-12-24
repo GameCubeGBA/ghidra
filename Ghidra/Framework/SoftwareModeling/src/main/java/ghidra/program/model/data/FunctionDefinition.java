@@ -27,33 +27,33 @@ public interface FunctionDefinition extends DataType, FunctionSignature {
 	 * Set the arguments to this function.
 	 * @param args array of parameter definitions to be used as arguments to this function
 	 */
-	public void setArguments(ParameterDefinition[] args);
+	void setArguments(ParameterDefinition[] args);
 
 	/**
 	 * Set the return data type for this function
 	 * @param type the return datatype to be set.
 	 * @throws IllegalArgumentException if data type is not a fixed length type
 	 */
-	public void setReturnType(DataType type) throws IllegalArgumentException;
+	void setReturnType(DataType type) throws IllegalArgumentException;
 
 	/**
 	 * Set the function comment
 	 * @param comment the comment to set.
 	 */
-	public void setComment(String comment);
+	void setComment(String comment);
 
 	/**
 	 * Set whether parameters can be passed as a VarArg (variable argument list).
 	 * 
 	 * @param hasVarArgs true if this function has a variable argument list (ie printf(fmt, ...)).
 	 */
-	public void setVarArgs(boolean hasVarArgs);
+	void setVarArgs(boolean hasVarArgs);
 
 	/**
 	 * Set the generic calling convention associated with this function definition.
 	 * @param genericCallingConvention generic calling convention
 	 */
-	public void setGenericCallingConvention(GenericCallingConvention genericCallingConvention);
+	void setGenericCallingConvention(GenericCallingConvention genericCallingConvention);
 
 	/**
 	 * Replace the given argument with another data type
@@ -65,7 +65,7 @@ public interface FunctionDefinition extends DataType, FunctionSignature {
 	 * @param source the source of this function definition argument: 
 	 * Symbol.DEFAULT, Symbol.ANALYSIS, Symbol.IMPORTED, or Symbol.USER_DEFINED
 	 */
-	public void replaceArgument(int ordinal, String name, DataType dt, String comment,
+	void replaceArgument(int ordinal, String name, DataType dt, String comment,
 			SourceType source);
 
 }

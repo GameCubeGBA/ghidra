@@ -34,97 +34,68 @@ public interface RemoteManagedBufferFileHandle extends ManagedBufferFileHandle, 
 	//--------------------------------------------------------------------------
 	// BufferFileHandle methods
 	//--------------------------------------------------------------------------
-	@Override
-	public boolean isReadOnly() throws IOException;
+	@Override boolean isReadOnly() throws IOException;
 
-	@Override
-	public boolean setReadOnly() throws IOException;
+	@Override boolean setReadOnly() throws IOException;
 
-	@Override
-	public int getParameter(String name) throws NoSuchElementException, IOException;
+	@Override int getParameter(String name) throws NoSuchElementException, IOException;
 
-	@Override
-	public void setParameter(String name, int value) throws IOException;
+	@Override void setParameter(String name, int value) throws IOException;
 
-	@Override
-	public void clearParameters() throws IOException;
+	@Override void clearParameters() throws IOException;
 
-	@Override
-	public String[] getParameterNames() throws IOException;
+	@Override String[] getParameterNames() throws IOException;
 
-	@Override
-	public int getBufferSize() throws IOException;
+	@Override int getBufferSize() throws IOException;
 
-	@Override
-	public int getIndexCount() throws IOException;
+	@Override int getIndexCount() throws IOException;
 
-	@Override
-	public int[] getFreeIndexes() throws IOException;
+	@Override int[] getFreeIndexes() throws IOException;
 
-	@Override
-	public void setFreeIndexes(int[] indexes) throws IOException;
+	@Override void setFreeIndexes(int[] indexes) throws IOException;
 
-	@Override
-	public void close() throws IOException;
+	@Override void close() throws IOException;
 
-	@Override
-	public boolean delete() throws IOException;
+	@Override boolean delete() throws IOException;
 
-	@Override
-	public DataBuffer get(int index) throws IOException;
+	@Override DataBuffer get(int index) throws IOException;
 
-	@Override
-	public void put(DataBuffer buf, int index) throws IOException;
+	@Override void put(DataBuffer buf, int index) throws IOException;
 
-	@Override
-	public void dispose() throws IOException;
+	@Override void dispose() throws IOException;
 
-	@Override
-	public InputBlockStream getInputBlockStream() throws IOException;
+	@Override InputBlockStream getInputBlockStream() throws IOException;
 
-	@Override
-	public OutputBlockStream getOutputBlockStream(int blockCount) throws IOException;
+	@Override OutputBlockStream getOutputBlockStream(int blockCount) throws IOException;
 
-	@Override
-	public BlockStreamHandle<InputBlockStream> getInputBlockStreamHandle() throws IOException;
+	@Override BlockStreamHandle<InputBlockStream> getInputBlockStreamHandle() throws IOException;
 
-	@Override
-	public BlockStreamHandle<OutputBlockStream> getOutputBlockStreamHandle(int blockCount)
+	@Override BlockStreamHandle<OutputBlockStream> getOutputBlockStreamHandle(int blockCount)
 			throws IOException;
 
 	//--------------------------------------------------------------------------
 	// ManagedBufferFileHandle methods
 	//--------------------------------------------------------------------------
 
-	@Override
-	public ManagedBufferFileHandle getSaveFile() throws IOException;
+	@Override ManagedBufferFileHandle getSaveFile() throws IOException;
 
-	@Override
-	public void saveCompleted(boolean commit) throws IOException;
+	@Override void saveCompleted(boolean commit) throws IOException;
 
-	@Override
-	public boolean canSave() throws IOException;
+	@Override boolean canSave() throws IOException;
 
-	@Override
-	public void setVersionComment(String comment) throws IOException;
+	@Override void setVersionComment(String comment) throws IOException;
 
-	@Override
-	public BufferFileHandle getNextChangeDataFile(boolean getFirst) throws IOException;
+	@Override BufferFileHandle getNextChangeDataFile(boolean getFirst) throws IOException;
 
-	@Override
-	public BufferFileHandle getSaveChangeDataFile() throws IOException;
+	@Override BufferFileHandle getSaveChangeDataFile() throws IOException;
 
-	@Override
-	public long getCheckinID() throws IOException;
+	@Override long getCheckinID() throws IOException;
 
-	@Override
-	public byte[] getForwardModMapData(int oldVersion) throws IOException;
+	@Override byte[] getForwardModMapData(int oldVersion) throws IOException;
 
-	@Override
-	public InputBlockStream getInputBlockStream(byte[] changeMapData) throws IOException;
+	@Override InputBlockStream getInputBlockStream(byte[] changeMapData) throws IOException;
 
-	@Override
-	public BlockStreamHandle<InputBlockStream> getInputBlockStreamHandle(byte[] changeMapData)
+	@Override BlockStreamHandle<InputBlockStream> getInputBlockStreamHandle(byte[] changeMapData)
 			throws IOException;
 
 }

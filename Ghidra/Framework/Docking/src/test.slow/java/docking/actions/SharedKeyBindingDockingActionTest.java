@@ -15,7 +15,13 @@
  */
 package docking.actions;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -28,8 +34,14 @@ import org.apache.commons.collections4.IterableUtils;
 import org.junit.Before;
 import org.junit.Test;
 
-import docking.*;
-import docking.action.*;
+import docking.ActionContext;
+import docking.ComponentProvider;
+import docking.FakeDockingTool;
+import docking.Tool;
+import docking.action.DockingAction;
+import docking.action.DockingActionIf;
+import docking.action.KeyBindingData;
+import docking.action.KeyBindingType;
 import docking.test.AbstractDockingTest;
 import docking.tool.util.DockingToolConstants;
 import ghidra.framework.options.ToolOptions;

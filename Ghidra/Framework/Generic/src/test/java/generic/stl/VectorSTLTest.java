@@ -30,7 +30,7 @@ public class VectorSTLTest extends AbstractGenericTest {
 
 	@Test
 	public void testLowerBound() {
-		VectorSTL<Integer> v = new VectorSTL<Integer>();
+		VectorSTL<Integer> v = new VectorSTL<>();
 		v.push_back(3);
 		v.push_back(4);
 		v.push_back(4);
@@ -49,7 +49,7 @@ public class VectorSTLTest extends AbstractGenericTest {
 
 	@Test
 	public void testUpperBound() {
-		VectorSTL<Integer> v = new VectorSTL<Integer>();
+		VectorSTL<Integer> v = new VectorSTL<>();
 		v.push_back(3);
 		v.push_back(4);
 		v.push_back(4);
@@ -68,7 +68,7 @@ public class VectorSTLTest extends AbstractGenericTest {
 
 	@Test
 	public void testMerge() {
-		VectorSTL<Integer> v1 = new VectorSTL<Integer>();
+		VectorSTL<Integer> v1 = new VectorSTL<>();
 		v1.push_back(3);
 		v1.push_back(4);
 		v1.push_back(4);
@@ -76,7 +76,7 @@ public class VectorSTLTest extends AbstractGenericTest {
 		v1.push_back(7);
 		v1.push_back(9);
 
-		VectorSTL<Integer> v2 = new VectorSTL<Integer>();
+		VectorSTL<Integer> v2 = new VectorSTL<>();
 		v2.push_back(1);
 		v2.push_back(2);
 		v2.push_back(4);
@@ -84,7 +84,7 @@ public class VectorSTLTest extends AbstractGenericTest {
 		v2.push_back(7);
 		v2.push_back(10);
 
-		VectorSTL<Integer> destination = new VectorSTL<Integer>();
+		VectorSTL<Integer> destination = new VectorSTL<>();
 		VectorSTL.merge(v1, v2, destination);
 
 		assertEquals(12, destination.size());
@@ -105,7 +105,7 @@ public class VectorSTLTest extends AbstractGenericTest {
 
 	@Test
 	public void testInsert() {
-		VectorSTL<Integer> v1 = new VectorSTL<Integer>();
+		VectorSTL<Integer> v1 = new VectorSTL<>();
 		v1.push_back(3);
 		v1.push_back(4);
 		v1.push_back(5);
@@ -113,7 +113,7 @@ public class VectorSTLTest extends AbstractGenericTest {
 		v1.push_back(7);
 		v1.push_back(9);
 
-		VectorSTL<Integer> v2 = new VectorSTL<Integer>();
+		VectorSTL<Integer> v2 = new VectorSTL<>();
 		v2.push_back(1);
 		v2.push_back(2);
 		v2.push_back(8);
@@ -140,7 +140,7 @@ public class VectorSTLTest extends AbstractGenericTest {
 		v1.insert(10, 11);
 		assertEquals(10, (int) v1.get(11));
 
-		VectorSTL<Integer> v3 = new VectorSTL<Integer>();
+		VectorSTL<Integer> v3 = new VectorSTL<>();
 		v3.push_back(31);
 		v3.push_back(32);
 		v3.push_back(33);
@@ -161,8 +161,8 @@ public class VectorSTLTest extends AbstractGenericTest {
 
 	@Test
 	public void testAssign() {
-		VectorSTL<Integer> a = new VectorSTL<Integer>();
-		VectorSTL<Integer> b = new VectorSTL<Integer>();
+		VectorSTL<Integer> a = new VectorSTL<>();
+		VectorSTL<Integer> b = new VectorSTL<>();
 
 		a.push_back(1);
 		a.push_back(2);

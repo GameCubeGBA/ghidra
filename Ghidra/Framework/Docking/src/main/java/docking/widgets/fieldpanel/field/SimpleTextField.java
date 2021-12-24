@@ -15,7 +15,10 @@
  */
 package docking.widgets.fieldpanel.field;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.List;
 
 import javax.swing.JComponent;
@@ -23,7 +26,9 @@ import javax.swing.JComponent;
 import docking.util.GraphicsUtils;
 import docking.widgets.fieldpanel.internal.FieldBackgroundColorManager;
 import docking.widgets.fieldpanel.internal.PaintContext;
-import docking.widgets.fieldpanel.support.*;
+import docking.widgets.fieldpanel.support.Highlight;
+import docking.widgets.fieldpanel.support.HighlightFactory;
+import docking.widgets.fieldpanel.support.RowColLocation;
 
 /**
  * The simplest possible Text field.  It does not clip and should only be used
@@ -193,10 +198,7 @@ public class SimpleTextField implements Field {
 	@Override
 	public boolean isValid(int row, int col) {
 
-		if (row != 0) {
-			return false;
-		}
-		if ((col < 0) || (col > numCols - 1)) {
+		if ((row != 0) || (col < 0) || (col > numCols - 1)) {
 			return false;
 		}
 		return true;

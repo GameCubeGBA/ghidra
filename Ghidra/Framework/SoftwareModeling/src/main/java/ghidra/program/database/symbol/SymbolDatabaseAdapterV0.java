@@ -18,12 +18,25 @@ package ghidra.program.database.symbol;
 import java.io.IOException;
 import java.util.Set;
 
-import db.*;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.KeyToRecordIterator;
+import db.RecordIterator;
+import db.StringField;
+import db.Table;
 import ghidra.program.database.map.AddressIndexPrimaryKeyIterator;
 import ghidra.program.database.map.AddressMap;
-import ghidra.program.model.address.*;
-import ghidra.program.model.symbol.*;
-import ghidra.util.exception.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.symbol.Namespace;
+import ghidra.program.model.symbol.SourceType;
+import ghidra.program.model.symbol.SymbolType;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
 
 /**

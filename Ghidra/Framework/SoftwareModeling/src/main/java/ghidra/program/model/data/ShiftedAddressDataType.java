@@ -17,7 +17,10 @@ package ghidra.program.model.data;
 
 import ghidra.docking.settings.Settings;
 import ghidra.docking.settings.SettingsDefinition;
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressOutOfBoundsException;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.address.SegmentedAddress;
 import ghidra.program.model.mem.MemBuffer;
 import ghidra.util.DataConverter;
 import ghidra.util.classfinder.ClassTranslator;
@@ -91,11 +94,7 @@ public class ShiftedAddressDataType extends BuiltIn {
 	public static Address getAddressValue(MemBuffer buf, int size, int shift,
 			AddressSpace targetSpace) {
 
-		if (size <= 0 || size > 8) {
-			return null;
-		}
-
-		if (buf.getAddress() instanceof SegmentedAddress) {
+		if (size <= 0 || size > 8 || (buf.getAddress() instanceof SegmentedAddress)) {
 			// not supported for segmented addresses
 			return null;
 		}
@@ -112,10 +111,7 @@ public class ShiftedAddressDataType extends BuiltIn {
 		try {
 			return targetSpace.getAddress(val, true);
 		}
-		catch (AddressOutOfBoundsException e) {
-			// offset too large
-		}
-		catch (IllegalArgumentException iae) {
+		catch (AddressOutOfBoundsException | IllegalArgumentException iae) {
 			// Do nothing... Tried to create an address that was too large
 			// for the address space
 			//

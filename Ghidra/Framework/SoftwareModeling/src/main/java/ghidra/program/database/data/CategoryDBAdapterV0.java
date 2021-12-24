@@ -17,7 +17,14 @@ package ghidra.program.database.data;
 
 import java.io.IOException;
 
-import db.*;
+import db.DBConstants;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.LongField;
+import db.Schema;
+import db.StringField;
+import db.Table;
 import ghidra.util.exception.VersionException;
 
 class CategoryDBAdapterV0 extends CategoryDBAdapter {

@@ -18,7 +18,10 @@ package ghidra.program.model.block;
 
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSet;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.FlowType;
+import ghidra.program.model.symbol.RefType;
+import ghidra.program.model.symbol.Symbol;
+import ghidra.program.model.symbol.SymbolTable;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 

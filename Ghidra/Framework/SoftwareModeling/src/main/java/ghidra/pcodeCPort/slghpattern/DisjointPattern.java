@@ -61,20 +61,14 @@ public abstract class DisjointPattern extends Pattern {
 		PatternBlock a = getBlock(false);
 		PatternBlock b = op2.getBlock(false);
 		if (b != null && (!b.alwaysTrue())) { // a must match existing block
-			if (a == null) {
-				return false;
-			}
-			if (!a.specializes(b)) {
+			if ((a == null) || !a.specializes(b)) {
 				return false;
 			}
 		}
 		a = getBlock(true);
 		b = op2.getBlock(true);
 		if (b != null && !b.alwaysTrue()) { // a must match existing block
-			if (a == null) {
-				return false;
-			}
-			if (!a.specializes(b)) {
+			if ((a == null) || !a.specializes(b)) {
 				return false;
 			}
 		}
@@ -92,11 +86,8 @@ public abstract class DisjointPattern extends Pattern {
 			}
 			else if (!a.identical(b))
 				return false;
-		}
-		else {
-			if ((a != null) && (!a.alwaysTrue()))
-				return false;
-		}
+		} else if ((a != null) && (!a.alwaysTrue()))
+			return false;
 		a = getBlock(true);
 		b = op2.getBlock(true);
 		if (b != null) { // a must match existing block
@@ -106,11 +97,8 @@ public abstract class DisjointPattern extends Pattern {
 			}
 			else if (!a.identical(b))
 				return false;
-		}
-		else {
-			if ((a != null) && (!a.alwaysTrue()))
-				return false;
-		}
+		} else if ((a != null) && (!a.alwaysTrue()))
+			return false;
 		return true;
 	}
 
@@ -147,10 +135,10 @@ public abstract class DisjointPattern extends Pattern {
 	// DisjointPattern factory
 	public static DisjointPattern restoreDisjoint(Element el) {
 		DisjointPattern res;
-		if (el.getName().equals("instruct_pat")) {
+		if ("instruct_pat".equals(el.getName())) {
 			res = new InstructionPattern();
 		}
-		else if (el.getName().equals("context_pat")) {
+		else if ("context_pat".equals(el.getName())) {
 			res = new ContextPattern();
 		}
 		else {

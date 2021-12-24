@@ -17,14 +17,19 @@ package ghidra.graph.job;
 
 import static util.CollectionUtils.nonNull;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.interpolation.PropertySetter;
 
 import ghidra.graph.VisualGraph;
-import ghidra.graph.viewer.*;
+import ghidra.graph.viewer.GraphViewer;
+import ghidra.graph.viewer.VisualEdge;
+import ghidra.graph.viewer.VisualVertex;
 
 /**
  * A job that provides an animator and callbacks for transitioning the visibility of 

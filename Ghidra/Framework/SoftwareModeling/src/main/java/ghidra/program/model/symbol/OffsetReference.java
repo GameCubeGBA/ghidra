@@ -27,12 +27,12 @@ public interface OffsetReference extends Reference {
 	 * Returns the offset.
 	 * @return the offset
 	 */
-	public long getOffset();
+	long getOffset();
 
 	/**
 	 * Returns the base address.
 	 * @return the address
 	 */
-	public Address getBaseAddress();
+	Address getBaseAddress();
 
 }

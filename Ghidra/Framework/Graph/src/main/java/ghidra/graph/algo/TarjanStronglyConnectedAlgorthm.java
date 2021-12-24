@@ -15,7 +15,11 @@
  */
 package ghidra.graph.algo;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.Stack;
 
 import ghidra.graph.GDirectedGraph;
 import ghidra.graph.GEdge;

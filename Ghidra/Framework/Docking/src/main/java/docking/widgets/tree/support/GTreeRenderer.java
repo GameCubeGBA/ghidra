@@ -15,7 +15,9 @@
  */
 package docking.widgets.tree.support;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
 
 import javax.swing.Icon;
 import javax.swing.JTree;

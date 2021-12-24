@@ -18,8 +18,8 @@ package ghidra.graph.support;
 import java.awt.Color;
 import java.awt.Dimension;
 
-import ghidra.graph.graphs.TestEdge;
 import ghidra.graph.graphs.AbstractTestVertex;
+import ghidra.graph.graphs.TestEdge;
 import ghidra.graph.viewer.GraphViewer;
 
 /**

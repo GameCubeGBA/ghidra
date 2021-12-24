@@ -15,9 +15,13 @@
  */
 package ghidra.graph.viewer.vertex;
 
-import static ghidra.graph.viewer.GraphViewerUtils.*;
+import static ghidra.graph.viewer.GraphViewerUtils.PAINT_ZOOM_THRESHOLD;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Paint;
+import java.awt.Rectangle;
+import java.awt.Shape;
 
 import com.google.common.base.Function;
 

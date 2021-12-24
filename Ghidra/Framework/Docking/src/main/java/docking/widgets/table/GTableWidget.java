@@ -20,9 +20,14 @@ import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
@@ -121,11 +126,7 @@ public class GTableWidget<T> extends JPanel {
 	}
 
 	protected void processMouseClicked(MouseEvent e) {
-		if (listener == null) {
-			return;
-		}
-
-		if (e.getClickCount() != 2) {
+		if ((listener == null) || (e.getClickCount() != 2)) {
 			return;
 		}
 

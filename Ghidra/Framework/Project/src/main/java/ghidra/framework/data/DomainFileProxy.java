@@ -17,17 +17,27 @@ package ghidra.framework.data;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.Icon;
 
-import ghidra.framework.model.*;
+import ghidra.framework.model.ChangeSet;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.DomainFolder;
+import ghidra.framework.model.DomainObject;
+import ghidra.framework.model.ProjectLocator;
 import ghidra.framework.store.ItemCheckoutStatus;
 import ghidra.framework.store.Version;
 import ghidra.framework.store.db.PackedDatabase;
 import ghidra.util.InvalidNameException;
 import ghidra.util.ReadOnlyException;
-import ghidra.util.exception.*;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.ClosedException;
+import ghidra.util.exception.FileInUseException;
+import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
 
 /**
@@ -105,7 +115,7 @@ public class DomainFileProxy implements DomainFile {
 
 	@Override
 	public String getPathname() {
-		if (parentPath == null || parentPath.equals(DomainFolder.SEPARATOR)) {
+		if (parentPath == null || DomainFolder.SEPARATOR.equals(parentPath)) {
 			return DomainFolder.SEPARATOR + getName();
 		}
 		return parentPath + DomainFolder.SEPARATOR + getName();

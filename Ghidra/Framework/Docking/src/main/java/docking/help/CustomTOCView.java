@@ -21,13 +21,24 @@ import java.net.URL;
 import java.util.Hashtable;
 import java.util.Locale;
 
-import javax.help.*;
+import javax.help.HelpModel;
+import javax.help.HelpSet;
+import javax.help.InvalidHelpSetContextException;
+import javax.help.JHelpNavigator;
+import javax.help.JHelpTOCNavigator;
+import javax.help.Map;
 import javax.help.Map.ID;
+import javax.help.NavigatorView;
+import javax.help.TOCItem;
+import javax.help.TOCView;
+import javax.help.TreeItem;
 import javax.help.event.HelpModelEvent;
 import javax.help.plaf.HelpNavigatorUI;
 import javax.help.plaf.basic.BasicTOCCellRenderer;
 import javax.help.plaf.basic.BasicTOCNavigatorUI;
-import javax.swing.*;
+import javax.swing.JComponent;
+import javax.swing.JTree;
+import javax.swing.ToolTipManager;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
@@ -62,15 +73,13 @@ public class CustomTOCView extends TOCView {
 	@Override
 	// overrode this method to install our custom UI, which lets us use our custom renderer
 	public Component createNavigator(HelpModel model) {
-		JHelpTOCNavigator helpTOCNavigator = new JHelpTOCNavigator(this, model) {
+		return new JHelpTOCNavigator(this, model) {
 			@Override
 			public void setUI(HelpNavigatorUI newUI) {
 				CustomTOCView.this.ui = new CustomTOCNavigatorUI(this);
 				super.setUI(CustomTOCView.this.ui);
 			}
 		};
-
-		return helpTOCNavigator;
 	}
 
 	public HelpModel getHelpModel() {
@@ -376,7 +385,6 @@ public class CustomTOCView extends TOCView {
 			ID id = customItem.getID();
 			if (id != null) {
 				renderer.setToolTipText("Missing Help - " + id.id + " in '" + id.hs + "' help set");
-				return renderer;
 			}
 
 			// this can happen if there is no 'target' attribute in the TOC

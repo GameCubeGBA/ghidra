@@ -15,14 +15,21 @@
  */
 package ghidra.graph.viewer.event.mouse;
 
-import java.awt.*;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Shape;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 
 import javax.swing.SwingUtilities;
 
-import edu.uci.ics.jung.visualization.*;
+import edu.uci.ics.jung.visualization.Layer;
+import edu.uci.ics.jung.visualization.MultiLayerTransformer;
+import edu.uci.ics.jung.visualization.RenderContext;
+import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.SatelliteVisualizationViewer;
 import edu.uci.ics.jung.visualization.transform.MutableTransformer;
 import ghidra.graph.viewer.VisualEdge;
@@ -48,11 +55,7 @@ public class VisualGraphSatelliteTranslatingGraphMousePlugin<V extends VisualVer
 	@Override
 	@SuppressWarnings("unchecked")
 	public void mouseDragged(MouseEvent e) {
-		if (!checkModifiers(e)) {
-			return;
-		}
-
-		if (!isHandlingMouseEvents) {
+		if (!checkModifiers(e) || !isHandlingMouseEvents) {
 			return;
 		}
 
@@ -99,11 +102,7 @@ public class VisualGraphSatelliteTranslatingGraphMousePlugin<V extends VisualVer
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		if (!checkModifiers(e)) {
-			return;
-		}
-
-		if (!isInSatelliteLensArea(e)) {
+		if (!checkModifiers(e) || !isInSatelliteLensArea(e)) {
 			return;
 		}
 
@@ -114,11 +113,7 @@ public class VisualGraphSatelliteTranslatingGraphMousePlugin<V extends VisualVer
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		if (!isHandlingMouseEvents) {
-			return;
-		}
-
-		if (!didDrag) {
+		if (!isHandlingMouseEvents || !didDrag) {
 			// this is the case where we are handling the event, but we didn't drag, which means
 			// we will later get a mouseClicked() callback, which we want to do some stuff, so 
 			// don't consume the events
@@ -186,9 +181,8 @@ public class VisualGraphSatelliteTranslatingGraphMousePlugin<V extends VisualVer
 		Rectangle lensBounds =
 			moveRectangleCompletelyOntoOtherRectangle(bounds, satelliteBounds.getBounds());
 
-		Point lensPointRelativeToSatellite = SwingUtilities.convertPoint(
+		return SwingUtilities.convertPoint(
 			satelliteViewer.getParent(), lensBounds.getLocation(), satelliteViewer);
-		return lensPointRelativeToSatellite;
 	}
 
 	private Rectangle moveRectangleCompletelyOntoOtherRectangle(Rectangle moveeRectangle,

@@ -15,7 +15,9 @@
  */
 package docking.dnd;
 
-import java.awt.datatransfer.*;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 
 public class StringTransferable implements Transferable {
@@ -24,7 +26,7 @@ public class StringTransferable implements Transferable {
 	private DataFlavor[] flavors = { DataFlavor.stringFlavor };
 
 	public StringTransferable(String data) {
-		this.data = data.replaceAll("\0", "");
+		this.data = data.replace("\0", "");
 	}
 
 	@Override

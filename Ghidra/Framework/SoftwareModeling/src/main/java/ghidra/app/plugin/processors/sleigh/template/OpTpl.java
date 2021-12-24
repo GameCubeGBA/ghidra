@@ -65,7 +65,7 @@ public class OpTpl {
 		XmlElement el = parser.start("op_tpl");
 		opcode = PcodeOp.getOpcode(el.getAttribute("code"));
 		XmlElement outel = parser.peek();
-		if (outel.getName().equals("null")) {
+		if ("null".equals(outel.getName())) {
 			output = null;
 			parser.discardSubTree();
 		}

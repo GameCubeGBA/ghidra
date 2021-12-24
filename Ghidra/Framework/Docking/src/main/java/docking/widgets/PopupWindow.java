@@ -15,17 +15,35 @@
  */
 package docking.widgets;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.KeyboardFocusManager;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Window;
+import java.awt.event.ComponentListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseMotionListener;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.JComponent;
+import javax.swing.JOptionPane;
+import javax.swing.JWindow;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
-import docking.widgets.shapes.*;
+import docking.widgets.shapes.Location;
+import docking.widgets.shapes.PopupWindowPlacer;
+import docking.widgets.shapes.PopupWindowPlacerBuilder;
 import generic.util.WindowUtilities;
 import ghidra.util.bean.GGlassPane;
 import ghidra.util.bean.GGlassPanePainter;
@@ -295,8 +313,7 @@ public class PopupWindow {
 	 * popup to close.
 	 */
 	private Rectangle createMovementArea(Rectangle popupBounds, Rectangle hoverRectangle) {
-		Rectangle result = popupBounds.union(hoverRectangle);
-		return result;
+		return popupBounds.union(hoverRectangle);
 	}
 
 	private void installDebugPainter(MouseEvent e) {
@@ -318,7 +335,7 @@ public class PopupWindow {
 	/** Paints shapes used by this class (useful for debugging) */
 	@SuppressWarnings("unused")
 	// enabled as needed
-	private class ShapeDebugPainter implements GGlassPanePainter {
+	private static class ShapeDebugPainter implements GGlassPanePainter {
 
 		private MouseEvent sourceEvent;
 		private Rectangle bounds;

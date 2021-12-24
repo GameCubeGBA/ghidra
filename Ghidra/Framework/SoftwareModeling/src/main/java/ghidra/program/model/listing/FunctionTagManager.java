@@ -32,7 +32,7 @@ public interface FunctionTagManager {
 	 * @param name the tag name
 	 * @return the function tag, or null if not found
 	 */
-	public FunctionTag getFunctionTag(String name);
+	FunctionTag getFunctionTag(String name);
 
 	/**
 	 * Returns the function tag with the given database id
@@ -40,14 +40,14 @@ public interface FunctionTagManager {
 	 * @param id the tags database id
 	 * @return the function tag, or null if not found
 	 */
-	public FunctionTag getFunctionTag(long id);
+	FunctionTag getFunctionTag(long id);
 
 	/**
 	 * Returns all function tags in the database
 	 * 
 	 * @return list of function tags
 	 */
-	public List<? extends FunctionTag> getAllFunctionTags();
+	List<? extends FunctionTag> getAllFunctionTags();
 
 	/**
 	 * Returns true if the given tag is assigned to a function
@@ -55,7 +55,7 @@ public interface FunctionTagManager {
 	 * @param name the tag name
 	 * @return true if assigned to a function
 	 */
-	public boolean isTagAssigned(String name);
+	boolean isTagAssigned(String name);
 
 	/**
 	 * Creates a new function tag with the given attributes if one does
@@ -65,12 +65,12 @@ public interface FunctionTagManager {
 	 * @param comment the comment associated with the tag (optional)
 	 * @return the new function tag
 	 */
-	public FunctionTag createFunctionTag(String name, String comment);
+	FunctionTag createFunctionTag(String name, String comment);
 
 	/**
 	 * Returns the number of times the given tag has been applied to a function
 	 * @param tag the tag
 	 * @return the count
 	 */
-	public int getUseCount(FunctionTag tag);
+	int getUseCount(FunctionTag tag);
 }

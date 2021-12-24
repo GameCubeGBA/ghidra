@@ -19,12 +19,18 @@
  */
 package ghidra.app.plugin.processors.sleigh;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 import ghidra.app.plugin.processors.sleigh.symbol.OperandSymbol;
 import ghidra.app.plugin.processors.sleigh.symbol.TripleSymbol;
-import ghidra.program.model.address.*;
-import ghidra.program.model.lang.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressOutOfBoundsException;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.lang.ParserContext;
+import ghidra.program.model.lang.ProcessorContext;
+import ghidra.program.model.lang.ProcessorContextView;
 import ghidra.program.model.mem.MemBuffer;
 import ghidra.program.model.mem.MemoryAccessException;
 
@@ -45,7 +51,7 @@ public class SleighParserContext implements ParserContext {
 	private SleighInstructionPrototype prototype;
 	private AddressSpace constantSpace;
 	private HashMap<ConstructState, FixedHandle> handleMap =
-		new HashMap<ConstructState, FixedHandle>();
+		new HashMap<>();
 	private ArrayList<ContextSet> contextcommit; // Pending changes to context
 	private int[] context; // packed context bits
 
@@ -60,7 +66,7 @@ public class SleighParserContext implements ParserContext {
 		int contextSize = prototype.getContextCache().getContextSize();
 		context = new int[contextSize];
 
-		contextcommit = new ArrayList<ContextSet>();
+		contextcommit = new ArrayList<>();
 		try {
 			nextInstrAddr = addr.add(prototype.getLength());
 		}
@@ -118,8 +124,7 @@ public class SleighParserContext implements ParserContext {
 		ContextCache contextCache = prototype.getContextCache();
 		ParserWalker walker = new ParserWalker(this);
 		walker.baseState();
-		for (int i = 0; i < contextcommit.size(); ++i) {
-			ContextSet set = contextcommit.get(i);
+		for (ContextSet set : contextcommit) {
 			FixedHandle hand;
 			if (set.sym instanceof OperandSymbol) {		// value of OperandSymbol is already calculated, find right node
 				int ind = ((OperandSymbol) set.sym).getIndex();

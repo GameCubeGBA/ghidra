@@ -17,7 +17,9 @@ package docking.widgets.table.constraint.provider;
 
 import docking.widgets.table.constraint.ColumnConstraint;
 import docking.widgets.table.constraint.ColumnData;
-import docking.widgets.table.constrainteditor.*;
+import docking.widgets.table.constrainteditor.ColumnConstraintEditor;
+import docking.widgets.table.constrainteditor.IntegerRangeConstraintEditor;
+import docking.widgets.table.constrainteditor.LongConverter;
 
 /**
  * Base class for providing numeric range editors.

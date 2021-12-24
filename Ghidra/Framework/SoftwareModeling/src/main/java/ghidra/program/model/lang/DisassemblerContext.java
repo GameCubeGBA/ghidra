@@ -37,7 +37,7 @@ public interface DisassemblerContext extends ProcessorContext {
 	 * @param address  the address to store the register value
 	 * @param value    the register value to store at the address
 	 */
-	public void setFutureRegisterValue(Address address, RegisterValue value);
+	void setFutureRegisterValue(Address address, RegisterValue value);
 
 	/**
 	 * Combines <code>value</code> with any previously saved future
@@ -57,5 +57,5 @@ public interface DisassemblerContext extends ProcessorContext {
 	 * @param toAddr   the address to store the register value
 	 * @param value    the register value to store at the address
 	 */
-	public void setFutureRegisterValue(Address fromAddr, Address toAddr, RegisterValue value);
+	void setFutureRegisterValue(Address fromAddr, Address toAddr, RegisterValue value);
 }

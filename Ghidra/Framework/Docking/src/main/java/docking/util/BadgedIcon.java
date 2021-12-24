@@ -15,9 +15,15 @@
  */
 package docking.util;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
-import java.util.*;
+import java.util.EnumMap;
+import java.util.Map;
+import java.util.Objects;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -60,7 +66,7 @@ public class BadgedIcon implements Icon {
 		private final double horizontalDisplacementFactor;
 		private final double verticalDisplacementFactor;
 
-		private BadgePosition(double hdf, double vdf) {
+		BadgePosition(double hdf, double vdf) {
 			horizontalDisplacementFactor = hdf;
 			verticalDisplacementFactor = vdf;
 		}
@@ -345,9 +351,7 @@ public class BadgedIcon implements Icon {
 		double dx = pos.getHorizontalDisplacementFactor();
 		double dy = pos.getVerticalDisplacementFactor();
 
-		Point p = new Point((int) (dx * badgeSize.width), (int) (dy * badgeSize.height));
-
-		return p;
+		return new Point((int) (dx * badgeSize.width), (int) (dy * badgeSize.height));
 	}
 
 	@Override
@@ -357,7 +361,7 @@ public class BadgedIcon implements Icon {
 
 	private String getIconNames() {
 
-		StringBuffer buffy = new StringBuffer();
+		StringBuilder buffy = new StringBuilder();
 
 		for (BadgePosition pos : BadgePosition.values()) {
 			MultiIcon mi = badgeMap.get(pos);

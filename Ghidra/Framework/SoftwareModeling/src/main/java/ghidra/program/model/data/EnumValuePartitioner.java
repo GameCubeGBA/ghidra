@@ -15,7 +15,9 @@
  */
 package ghidra.program.model.data;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * This is a static utility class used to partition a set of long values into as many

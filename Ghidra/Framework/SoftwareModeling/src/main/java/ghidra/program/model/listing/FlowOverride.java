@@ -136,10 +136,7 @@ public enum FlowOverride {
 				}
 				return RefType.CONDITIONAL_JUMP;
 			}
-			if (flowType.isComputed()) {
-				return RefType.COMPUTED_JUMP;
-			}
-			if (flowType.isTerminal()) {
+			if (flowType.isComputed() || flowType.isTerminal()) {
 				// assume return replaced
 				return RefType.COMPUTED_JUMP;
 			}
@@ -188,10 +185,7 @@ public enum FlowOverride {
 				}
 				return flowType;  // don't replace
 			}
-			if (flowType.isComputed()) {
-				return RefType.COMPUTED_CALL_TERMINATOR;
-			}
-			if (flowType.isTerminal()) {
+			if (flowType.isComputed() || flowType.isTerminal()) {
 				// assume return was replaced
 				return RefType.COMPUTED_CALL_TERMINATOR;
 			}

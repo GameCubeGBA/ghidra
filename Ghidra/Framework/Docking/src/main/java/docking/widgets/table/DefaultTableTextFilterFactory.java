@@ -18,7 +18,10 @@ package docking.widgets.table;
 import java.util.ArrayList;
 import java.util.List;
 
-import docking.widgets.filter.*;
+import docking.widgets.filter.FilterOptions;
+import docking.widgets.filter.TermSplitter;
+import docking.widgets.filter.TextFilter;
+import docking.widgets.filter.TextFilterFactory;
 
 public class DefaultTableTextFilterFactory<ROW_OBJECT>
 		implements TableTextFilterFactory<ROW_OBJECT> {

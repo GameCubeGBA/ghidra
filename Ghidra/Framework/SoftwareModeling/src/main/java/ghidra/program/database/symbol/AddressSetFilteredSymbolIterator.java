@@ -20,7 +20,9 @@ import java.util.Iterator;
 
 import db.DBRecord;
 import db.RecordIterator;
-import ghidra.program.database.util.*;
+import ghidra.program.database.util.EmptyRecordIterator;
+import ghidra.program.database.util.Query;
+import ghidra.program.database.util.QueryRecordIterator;
 import ghidra.program.model.address.AddressSetView;
 import ghidra.program.model.symbol.Symbol;
 import ghidra.program.model.symbol.SymbolIterator;

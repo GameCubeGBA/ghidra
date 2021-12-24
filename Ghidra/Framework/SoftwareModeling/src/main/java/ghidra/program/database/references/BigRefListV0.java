@@ -24,12 +24,23 @@ package ghidra.program.database.references;
 import java.io.IOException;
 import java.util.Iterator;
 
-import db.*;
+import db.ByteField;
+import db.DBRecord;
+import db.Field;
+import db.LongField;
+import db.RecordIterator;
+import db.Schema;
+import db.Table;
 import ghidra.program.database.DBObjectCache;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.database.map.AddressMap;
 import ghidra.program.model.address.Address;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.RefType;
+import ghidra.program.model.symbol.RefTypeFactory;
+import ghidra.program.model.symbol.Reference;
+import ghidra.program.model.symbol.ReferenceIterator;
+import ghidra.program.model.symbol.SourceType;
+import ghidra.program.model.symbol.SymbolUtilities;
 
 /**
  * 

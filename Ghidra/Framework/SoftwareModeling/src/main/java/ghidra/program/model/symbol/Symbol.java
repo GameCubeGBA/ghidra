@@ -33,51 +33,51 @@ public interface Symbol {
 	/**
 	 * @return the address for the symbol.
 	 */
-	public Address getAddress();
+	Address getAddress();
 
 	/**
 	 * @return the name of this symbol.
 	 */
-	public String getName();
+	String getName();
 
 	/**
 	 * Gets the full path name for this symbol as an ordered array of strings ending
 	 * with the symbol name. The global symbol will return an empty array.
 	 * @return the array indicating the full path name for this symbol.
 	 */
-	public String[] getPath();
+	String[] getPath();
 
 	/**
 	 * @return the program associated with this symbol.
 	 * Null may be returned for global symbols.
 	 */
-	public Program getProgram();
+	Program getProgram();
 
 	/**
 	 * Returns the symbol name, optionally prepended with the namespace path.
 	 * @param includeNamespace if true, the namespace path is prepended to the name.
 	 * @return formatted name
 	 */
-	public String getName(boolean includeNamespace);
+	String getName(boolean includeNamespace);
 
 	/**
 	 * Return the parent namespace for this symbol.
 	 * @return the namespace that contains this symbol.
 	 */
-	public Namespace getParentNamespace();
+	Namespace getParentNamespace();
 
 	/**
 	 * Returns namespace symbol of the namespace containing this symbol
 	 * @return parent namespace symbol
 	 */
-	public Symbol getParentSymbol();
+	Symbol getParentSymbol();
 
 	/**
 	 * Returns true if the given namespace symbol is a descendant of this symbol.
 	 * @param namespace to test as descendant symbol of this Symbol
 	 * @return true if this symbol is an ancestor of the given namespace symbol
 	 */
-	public boolean isDescendant(Namespace namespace);
+	boolean isDescendant(Namespace namespace);
 
 	/**
 	 * Determines if the given parent is valid for this Symbol.  Specified namespace 
@@ -85,28 +85,28 @@ public interface Symbol {
 	 * @param parent prospective parent namespace for this symbol
 	 * @return true if parent is valid
 	 */
-	public boolean isValidParent(Namespace parent);
+	boolean isValidParent(Namespace parent);
 
 	/**
 	 * Returns this symbol's type
 	 * @return symbol type
 	 */
-	public SymbolType getSymbolType();
+	SymbolType getSymbolType();
 
 	/**
 	 * @return the number of References to this symbol.
 	 */
-	public int getReferenceCount();
+	int getReferenceCount();
 
 	/**
 	 * @return true if this symbol has more than one reference to it.
 	 */
-	public boolean hasMultipleReferences();
+	boolean hasMultipleReferences();
 
 	/**
 	 * @return true if this symbol has at least one reference to it.
 	 */
-	public boolean hasReferences();
+	boolean hasReferences();
 
 	/**
 	 * Returns all memory references to the address of this symbol.  If you do not have a
@@ -118,7 +118,7 @@ public interface Symbol {
 	 * @param monitor the monitor that is used to report progress and to cancel this
 	 *        potentially long-running call
 	 */
-	public Reference[] getReferences(TaskMonitor monitor);
+	Reference[] getReferences(TaskMonitor monitor);
 
 	/**
 	 * Returns all memory references to the address of this symbol.
@@ -126,12 +126,12 @@ public interface Symbol {
 	 * @return all memory references to the address of this symbol
 	 * @see #getReferences(TaskMonitor)
 	 */
-	public Reference[] getReferences();
+	Reference[] getReferences();
 
 	/**
 	 * @return a program location corresponding to this symbol
 	 */
-	public ProgramLocation getProgramLocation();
+	ProgramLocation getProgramLocation();
 
 	/**
 	 * Sets the name this symbol.
@@ -148,7 +148,7 @@ public interface Symbol {
 	 * @throws IllegalArgumentException if you try to set the source to DEFAULT for a symbol type
 	 * that doesn't allow it.
 	 */
-	public void setName(String newName, SourceType source)
+	void setName(String newName, SourceType source)
 			throws DuplicateNameException, InvalidInputException;
 
 	/**
@@ -161,7 +161,7 @@ public interface Symbol {
 	 * @throws CircularDependencyException if this symbol is an ancestor of
 	 * newNamespace
 	 */
-	public void setNamespace(Namespace newNamespace)
+	void setNamespace(Namespace newNamespace)
 			throws DuplicateNameException, InvalidInputException, CircularDependencyException;
 
 	/**
@@ -179,7 +179,7 @@ public interface Symbol {
 	 * @throws CircularDependencyException if this symbol is an ancestor of
 	 * newNamespace
 	 */
-	public void setNameAndNamespace(String newName, Namespace newNamespace, SourceType source)
+	void setNameAndNamespace(String newName, Namespace newNamespace, SourceType source)
 			throws DuplicateNameException, InvalidInputException, CircularDependencyException;
 
 	/**
@@ -187,7 +187,7 @@ public interface Symbol {
 	 * will be discarded.
 	 * @return true if successful
 	 */
-	public boolean delete();
+	boolean delete();
 
 	/**
 	 * Returns true if the symbol is pinned to its current address. If it is pinned, then moving
@@ -195,7 +195,7 @@ public interface Symbol {
 	 *
 	 * @return true if the symbol is pinned to its current address.
 	 */
-	public boolean isPinned();
+	boolean isPinned();
 
 	/**
 	 * <p>Sets whether or not this symbol is pinned to its associated address.</p>
@@ -211,12 +211,12 @@ public interface Symbol {
 	 * @param pinned true indicates this symbol is anchored to its address.
 	 * 		false indicates this symbol is not anchored to its address.
 	 */
-	public void setPinned(boolean pinned);
+	void setPinned(boolean pinned);
 
 	/**
 	 * @return true if this symbol is a dynamic symbol (not actually defined in the database).
 	 */
-	public boolean isDynamic();
+	boolean isDynamic();
 
 	/**
 	 * Returns true if this an external symbol.
@@ -224,59 +224,59 @@ public interface Symbol {
 	 * @return true if this an external symbol.
 	 * @see Address#isExternalAddress()
 	 */
-	public boolean isExternal();
+	boolean isExternal();
 
 	/**
 	 * @return true if this symbol is primary
 	 */
-	public boolean isPrimary();
+	boolean isPrimary();
 
 	/**
 	 * Sets this symbol to be primary. All other symbols at the same address will be set to 
 	 * !primary.  Only applies to non-function symbols.
 	 * @return returns true if the symbol was not primary and now it is, otherwise false
 	 */
-	public boolean setPrimary();
+	boolean setPrimary();
 
 	/**
 	 * @return true if the symbol is at an address
 	 * set as a external entry point.
 	 */
-	public boolean isExternalEntryPoint();
+	boolean isExternalEntryPoint();
 
 	/**
 	 * @return this symbol's ID.
 	 */
-	public long getID();
+	long getID();
 
 	/**
 	 * @return object associated with this symbol or null if symbol has been deleted
 	 */
-	public Object getObject();
+	Object getObject();
 
 	/**
 	 * @return true if the symbol is global
 	 */
-	public boolean isGlobal();
+	boolean isGlobal();
 
 	/**
 	 * Sets the source of this symbol.
 	 * {@link SourceType}
 	 * @param source the new source of this symbol
 	 */
-	public void setSource(SourceType source);
+	void setSource(SourceType source);
 
 	/**
 	 * Gets the source of this symbol.
 	 * {@link SourceType}
 	 * @return the source of this symbol
 	 */
-	public SourceType getSource();
+	SourceType getSource();
 
 	/**
 	 * Determine if this symbol object has been deleted.  NOTE: the symbol could be
 	 * deleted at anytime due to asynchronous activity.  
 	 * @return true if symbol has been deleted, false if not.
 	 */
-	public boolean isDeleted();
+	boolean isDeleted();
 }

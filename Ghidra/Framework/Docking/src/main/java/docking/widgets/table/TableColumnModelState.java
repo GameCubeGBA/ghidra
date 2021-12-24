@@ -21,7 +21,9 @@ import java.util.List;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
-import org.jdom.*;
+import org.jdom.Attribute;
+import org.jdom.DataConversionException;
+import org.jdom.Element;
 
 import docking.DockingWindowManager;
 import ghidra.docking.settings.Settings;
@@ -441,7 +443,7 @@ public class TableColumnModelState implements SortListener {
 		TableModel tableModel = table.getModel();
 
 		int columnCount = getDefaultColumnCount();
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append(getTableModelName());
 		buffer.append(":");
 		for (int i = 0; i < columnCount; i++) {

@@ -34,7 +34,7 @@ public class FilteredVisualGraphTest extends AbstractFilteringVisualGraphTest {
 	@Before
 	public void setUp() {
 
-		graph = new FilteringVisualGraph<AbstractTestVertex, TestEdge>() {
+		graph = new FilteringVisualGraph<>() {
 
 			@Override
 			public VisualGraphLayout<AbstractTestVertex, TestEdge> getLayout() {
@@ -613,6 +613,6 @@ public class FilteredVisualGraphTest extends AbstractFilteringVisualGraphTest {
 	}
 
 	private interface AddEdgeConsumer {
-		public void doAddEdge(TestEdge e, AbstractTestVertex v1, AbstractTestVertex v2);
+		void doAddEdge(TestEdge e, AbstractTestVertex v1, AbstractTestVertex v2);
 	}
 }

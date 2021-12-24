@@ -16,8 +16,12 @@
 package ghidra.program.model.pcode;
 
 import java.util.Iterator;
+import java.util.Objects;
 
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressRange;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.address.AddressSpace;
 import ghidra.program.model.lang.Language;
 import ghidra.program.model.lang.Register;
 import ghidra.util.exception.InvalidInputException;
@@ -333,7 +337,7 @@ public class Varnode {
 			throws PcodeXMLException {
 		XmlElement el = parser.start();
 		try {
-			if (el.getName().equals("void")) {
+			if ("void".equals(el.getName())) {
 				return null;
 			}
 			Varnode vn;
@@ -473,11 +477,6 @@ public class Varnode {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (int) (offset ^ (offset >>> 32));
-		result = prime * result + size;
-		result = prime * result + spaceID;
-		return result;
+		return Objects.hash(offset, size, spaceID);
 	}
 }

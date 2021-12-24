@@ -18,7 +18,9 @@ package ghidra.framework.main;
 import java.io.IOException;
 
 import docking.DialogComponentProvider;
-import ghidra.framework.client.*;
+import ghidra.framework.client.ClientUtil;
+import ghidra.framework.client.NotConnectedException;
+import ghidra.framework.client.RepositoryAdapter;
 import ghidra.framework.plugintool.Plugin;
 import ghidra.util.HelpLocation;
 import ghidra.util.Msg;

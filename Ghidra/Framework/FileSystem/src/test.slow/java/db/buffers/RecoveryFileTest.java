@@ -21,14 +21,14 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.io.IOException;
 
-import ghidra.util.task.TaskMonitor;
-import org.junit.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
-import db.DBFileListener;
-import db.Database;
 import generic.test.AbstractGenericTest;
 import ghidra.framework.store.db.PrivateDatabase;
-import ghidra.util.task.TaskMonitorAdapter;
+import ghidra.util.task.TaskMonitor;
 import utilities.util.FileUtilities;
 
 /**
@@ -88,11 +88,8 @@ public class RecoveryFileTest extends AbstractGenericTest {
 		boolean success = false;
 		try {
 
-			LocalBufferFile bf = PrivateDatabase.createDatabase(testDir, new DBFileListener() {
-				@Override
-				public void versionCreated(Database db, int version) {
+			LocalBufferFile bf = PrivateDatabase.createDatabase(testDir, (db, version) -> {
 
-				}
 			}, BUFFER_SIZE);
 
 			bufferMgr = new BufferMgr(BUFFER_SIZE, 16 * 1024, 4);

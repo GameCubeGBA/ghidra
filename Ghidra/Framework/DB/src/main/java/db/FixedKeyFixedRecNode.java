@@ -39,7 +39,7 @@ class FixedKeyFixedRecNode extends FixedKeyRecordNode {
 
 	private static final int ENTRY_BASE_OFFSET = HEADER_SIZE;
 
-	private static final int[] EMPTY_ID_LIST = new int[0];
+	private static final int[] EMPTY_ID_LIST = {};
 
 	private int entrySize;
 	private int recordLength;

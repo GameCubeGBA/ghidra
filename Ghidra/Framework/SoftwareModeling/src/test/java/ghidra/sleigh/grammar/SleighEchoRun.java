@@ -17,7 +17,9 @@ package ghidra.sleigh.grammar;
 
 import java.io.File;
 
-import org.antlr.runtime.*;
+import org.antlr.runtime.ANTLRStringStream;
+import org.antlr.runtime.CharStream;
+import org.antlr.runtime.UnbufferedTokenStream;
 import org.antlr.runtime.tree.BufferedTreeNodeStream;
 
 public class SleighEchoRun {

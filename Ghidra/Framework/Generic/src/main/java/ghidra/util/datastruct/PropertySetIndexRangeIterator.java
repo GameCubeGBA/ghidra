@@ -42,14 +42,16 @@ public class PropertySetIndexRangeIterator implements IndexRangeIterator {
     /**
      * @see ghidra.util.datastruct.IndexRangeIterator#hasNext()
      */
-    public boolean hasNext() {
+    @Override
+	public boolean hasNext() {
         return indexRange != null;
     }
 
     /**
      * @see ghidra.util.datastruct.IndexRangeIterator#next()
      */
-    public IndexRange next() {
+    @Override
+	public IndexRange next() {
     	IndexRange temp = indexRange;
     	getNextIndexRange();
     	return temp;

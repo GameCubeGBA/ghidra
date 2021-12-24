@@ -15,13 +15,18 @@
  */
 package ghidra.sleigh.grammar;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.io.Reader;
 import java.util.Iterator;
 import java.util.List;
 
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.Token;
-import org.antlr.runtime.tree.*;
+import org.antlr.runtime.tree.BufferedTreeNodeStream;
+import org.antlr.runtime.tree.CommonTree;
+import org.antlr.runtime.tree.Tree;
 
 public class ANTLRUtil {
 	static String indent(int n) {

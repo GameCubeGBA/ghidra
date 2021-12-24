@@ -25,7 +25,7 @@ import generic.hash.SimpleCRC32;
 import ghidra.xml.XmlPullParser;
 
 public class LSHCosineVector implements LSHVector {
-	private static final HashEntry[] EMPTY = new HashEntry[0];
+	private static final HashEntry[] EMPTY = {};
 
 	private HashEntry[] hash = EMPTY;// Sorted list of hash values and their counts
 	private double length;// Length of vector
@@ -70,10 +70,7 @@ public class LSHCosineVector implements LSHVector {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (!(obj instanceof LSHCosineVector)) {
+		if ((obj == null) || !(obj instanceof LSHCosineVector)) {
 			return false;
 		}
 		LSHCosineVector other = (LSHCosineVector) obj;
@@ -96,13 +93,13 @@ public class LSHCosineVector implements LSHVector {
 	private void calcLength() {
 		length = 0.0;
 		hashcount = 0;
-		for (int i = 0; i < hash.length; ++i) {
-			if (hash[i] == null) {
+		for (HashEntry element : hash) {
+			if (element == null) {
 				continue;
 			}
-			double coeff = hash[i].getCoeff();
+			double coeff = element.getCoeff();
 			length += coeff * coeff;
-			hashcount += hash[i].getTF();
+			hashcount += element.getTF();
 		}
 		length = Math.sqrt(length);
 	}
@@ -122,9 +119,9 @@ public class LSHCosineVector implements LSHVector {
 		int idf;
 		int count = 1;
 		int sz = 1;
-		for (int i = 0; i < feature.length; ++i) {
-			if (feature[i] != lasthash) {
-				lasthash = feature[i];
+		for (int element : feature) {
+			if (element != lasthash) {
+				lasthash = element;
 				sz += 1;
 			}
 		}
@@ -213,10 +210,7 @@ public class LSHCosineVector implements LSHVector {
 					}
 					++iter;
 					++iter2;
-					if (iter == enditer) {
-						break;
-					}
-					if (iter2 == enditer2) {
+					if ((iter == enditer) || (iter2 == enditer2)) {
 						break;
 					}
 					hash1 = hash[iter].getHash();
@@ -271,10 +265,7 @@ public class LSHCosineVector implements LSHVector {
 					intersectcount += (t1 < t2) ? t1 : t2;
 					++iter;
 					++iter2;
-					if (iter == enditer) {
-						break;
-					}
-					if (iter2 == enditer2) {
+					if ((iter == enditer) || (iter2 == enditer2)) {
 						break;
 					}
 					hash1 = hash[iter].getHash();
@@ -302,8 +293,7 @@ public class LSHCosineVector implements LSHVector {
 	}
 
 	private void writeOnlyList(ArrayList<HashEntry> only, StringBuilder buf) {
-		for (int i = 0; i < only.size(); ++i) {
-			HashEntry entry = only.get(i);
+		for (HashEntry entry : only) {
 			buf.append(Integer.toHexString(entry.getHash()));
 			buf.append(' ').append(entry.getTF());
 			buf.append(' ').append(entry.getCoeff());
@@ -327,9 +317,9 @@ public class LSHCosineVector implements LSHVector {
 		int iter, enditer, iter2, enditer2;
 		LSHCosineVector op = (LSHCosineVector) op2;
 
-		ArrayList<HashEntry> a_only = new ArrayList<HashEntry>();
-		ArrayList<HashEntry> b_only = new ArrayList<HashEntry>();
-		ArrayList<HashEntry> ab_both = new ArrayList<HashEntry>();
+		ArrayList<HashEntry> a_only = new ArrayList<>();
+		ArrayList<HashEntry> b_only = new ArrayList<>();
+		ArrayList<HashEntry> ab_both = new ArrayList<>();
 
 		buf.append("lena=").append(getLength()).append('\n');
 		buf.append("lenb=").append(op2.getLength()).append('\n');
@@ -362,10 +352,7 @@ public class LSHCosineVector implements LSHVector {
 					}
 					++iter;
 					++iter2;
-					if (iter == enditer) {
-						break;
-					}
-					if (iter2 == enditer2) {
+					if ((iter == enditer) || (iter2 == enditer2)) {
 						break;
 					}
 					hash1 = hash[iter].getHash();
@@ -416,7 +403,7 @@ public class LSHCosineVector implements LSHVector {
 	@Override
 	public void restoreXml(XmlPullParser parser,WeightFactory wfactory,IDFLookup idflookup) {
 		parser.start("lshcosine");
-		ArrayList<HashEntry> hashlist = new ArrayList<HashEntry>();
+		ArrayList<HashEntry> hashlist = new ArrayList<>();
 		if (idflookup.empty()) {
 			while (parser.peek().isStart()) {
 				HashEntry entry = new HashEntry();
@@ -439,7 +426,7 @@ public class LSHCosineVector implements LSHVector {
 
 	@Override
 	public void restoreSQL(String sql,WeightFactory wfactory,IDFLookup idflookup) throws IOException {
-		ArrayList<HashEntry> hashlist = new ArrayList<HashEntry>();
+		ArrayList<HashEntry> hashlist = new ArrayList<>();
 		char tok;
 		int start;
 		if (sql.length() < 2) {
@@ -470,7 +457,7 @@ public class LSHCosineVector implements LSHVector {
 
 	@Override
 	public void restoreBase64(Reader input,char[] buffer,WeightFactory wfactory,IDFLookup idflookup,int[] decode) throws IOException {
-		ArrayList<HashEntry> hashlist = new ArrayList<HashEntry>();
+		ArrayList<HashEntry> hashlist = new ArrayList<>();
 		int returned;
 		do {
 			returned = input.read(buffer,0,112);
@@ -492,8 +479,8 @@ public class LSHCosineVector implements LSHVector {
 		buf.append("<lshcosine>\n");
 		fwrite.append(buf.toString());
 		// The length is not stored as part of XML
-		for (int i = 0; i < hash.length; ++i) {
-			hash[i].saveXml(fwrite);
+		for (HashEntry element : hash) {
+			element.saveXml(fwrite);
 		}
 		fwrite.append("</lshcosine>\n");
 	}
@@ -544,8 +531,7 @@ public class LSHCosineVector implements LSHVector {
 	public long calcUniqueHash() {
 		int reg1 = 0x12CF93AB;
 		int reg2 = 0xEE39B2D6;
-		for (int i = 0; i < hash.length; ++i) {
-			HashEntry entry = hash[i];
+		for (HashEntry entry : hash) {
 			int curtf = entry.getTF();
 			int curhash = entry.getHash();
 			int oldreg1 = reg1;

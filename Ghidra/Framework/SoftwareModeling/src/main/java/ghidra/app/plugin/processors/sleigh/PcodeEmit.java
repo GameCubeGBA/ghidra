@@ -21,10 +21,22 @@ package ghidra.app.plugin.processors.sleigh;
 
 import java.util.ArrayList;
 
-import ghidra.app.plugin.processors.sleigh.symbol.*;
-import ghidra.app.plugin.processors.sleigh.template.*;
-import ghidra.program.model.address.*;
-import ghidra.program.model.lang.*;
+import ghidra.app.plugin.processors.sleigh.symbol.SubtableSymbol;
+import ghidra.app.plugin.processors.sleigh.symbol.Symbol;
+import ghidra.app.plugin.processors.sleigh.symbol.TripleSymbol;
+import ghidra.app.plugin.processors.sleigh.template.ConstTpl;
+import ghidra.app.plugin.processors.sleigh.template.ConstructTpl;
+import ghidra.app.plugin.processors.sleigh.template.OpTpl;
+import ghidra.app.plugin.processors.sleigh.template.VarnodeTpl;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressOutOfBoundsException;
+import ghidra.program.model.address.AddressOverflowException;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.address.OverlayAddressSpace;
+import ghidra.program.model.address.UniqueAddressFactory;
+import ghidra.program.model.lang.InstructionContext;
+import ghidra.program.model.lang.UnknownContextException;
+import ghidra.program.model.lang.UnknownInstructionException;
 import ghidra.program.model.listing.FlowOverride;
 import ghidra.program.model.mem.MemoryAccessException;
 import ghidra.program.model.pcode.PcodeOp;
@@ -159,7 +171,7 @@ public abstract class PcodeEmit {
 	 */
 	private void setLabel(OpTpl op) {
 		if (labeldef == null) {
-			labeldef = new ArrayList<Integer>();
+			labeldef = new ArrayList<>();
 		}
 		int labelindex = (int) op.getInput()[0].getOffset().getReal() + labelbase;
 		while (labeldef.size() <= labelindex) {
@@ -532,13 +544,12 @@ public abstract class PcodeEmit {
 				dyncache[0].offset = spc.getSpaceID();
 				dyncache[0].size = 4;		// Size of spaceid;
 				dump(startAddress, PcodeOp.STORE, dyncache, 3, null);
-				numOps += 1;
 			}
 			else {
 				generateLocation(outvn, outcache);
 				dump(startAddress, opt.getOpcode(), incache, isize, outcache);
-				numOps += 1;
 			}
+			numOps += 1;
 		}
 		else {
 			dump(startAddress, opt.getOpcode(), incache, isize, null);
@@ -747,10 +758,8 @@ public abstract class PcodeEmit {
 					v.space = ((OverlayAddressSpace) v.space).getOverlayedSpace();
 				}
 			}
-			if (out != null) {
-				if (out.space.equals(overlayspace)) {
-					out.space = ((OverlayAddressSpace) out.space).getOverlayedSpace();
-				}
+			if ((out != null) && out.space.equals(overlayspace)) {
+				out.space = ((OverlayAddressSpace) out.space).getOverlayedSpace();
 			}
 		}
 	}
@@ -873,10 +882,7 @@ public abstract class PcodeEmit {
 	// Used to check whether the address from a potentially overriding reference 
 	// actually changes the call destination
 	private boolean actualOverride(VarnodeData data, Address addr) {
-		if (!data.space.equals(addr.getAddressSpace())) {
-			return true;
-		}
-		if (data.offset != addr.getOffset()) {
+		if (!data.space.equals(addr.getAddressSpace()) || (data.offset != addr.getOffset())) {
 			return true;
 		}
 		return false;

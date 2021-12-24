@@ -28,7 +28,7 @@ import java.util.TreeMap;
  */
 public class PriorityQueue<T> {
 	private int size = 0;
-	private TreeMap<Integer, LinkedList<T>> tree = new TreeMap<Integer, LinkedList<T>>();
+	private TreeMap<Integer, LinkedList<T>> tree = new TreeMap<>();
 	
 	/**
 	 * Adds the given object to the queue at the appropriate insertion point based
@@ -38,7 +38,7 @@ public class PriorityQueue<T> {
 	 */
 	public void add(T obj, int priority) {
 		Integer key = Integer.valueOf(priority);
-        LinkedList<T> list = tree.computeIfAbsent(key, k -> new LinkedList<T>());
+        LinkedList<T> list = tree.computeIfAbsent(key, k -> new LinkedList<>());
         list.addLast(obj);
 		size++;	
 	}
@@ -80,8 +80,7 @@ public class PriorityQueue<T> {
 		if (tree.isEmpty()) {
 			return null;
 		}
-		Integer key = tree.firstKey();
-		return key;
+		return tree.firstKey();
 	}
 		
 	/**
@@ -107,8 +106,7 @@ public class PriorityQueue<T> {
 		if (tree.isEmpty()) {
 			return null;
 		}
-		Integer key = tree.lastKey();
-		return key;
+		return tree.lastKey();
 	}
 
 	/**

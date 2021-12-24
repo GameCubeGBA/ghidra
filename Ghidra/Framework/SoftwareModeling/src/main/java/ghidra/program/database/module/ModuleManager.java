@@ -19,17 +19,34 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-import db.*;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.LongField;
 import db.util.ErrorHandler;
 import ghidra.program.database.DBObjectCache;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.database.map.AddressMap;
 import ghidra.program.database.util.AddressRangeMapDB;
-import ghidra.program.model.address.*;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressOverflowException;
+import ghidra.program.model.address.AddressRange;
+import ghidra.program.model.address.AddressRangeImpl;
+import ghidra.program.model.address.AddressRangeIterator;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.listing.CodeUnit;
+import ghidra.program.model.listing.CodeUnitIterator;
+import ghidra.program.model.listing.Group;
+import ghidra.program.model.listing.ProgramFragment;
+import ghidra.program.model.listing.ProgramModule;
 import ghidra.program.util.ChangeManager;
 import ghidra.util.Lock;
-import ghidra.util.exception.*;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.DuplicateNameException;
+import ghidra.util.exception.NotEmptyException;
+import ghidra.util.exception.NotFoundException;
+import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
 
 /**
@@ -346,9 +363,8 @@ class ModuleManager {
 			monitor.checkCanceled();
 			fragMap.clearRange(fromAddr, rangeEnd);
 
-			for (int i = 0; i < list.size(); i++) {
+			for (FragmentHolder fh : list) {
 				monitor.checkCanceled();
-				FragmentHolder fh = list.get(i);
 				fragMap.paintRange(fh.range.getMinAddress(), fh.range.getMaxAddress(),
 					new LongField(fh.frag.getKey()));
 				fh.frag.addRange(fh.range);
@@ -469,10 +485,7 @@ class ModuleManager {
 			DBRecord parentChildRecord = adapter.getParentChildRecord(key.getLongValue());
 			long childID = parentChildRecord.getLongValue(TreeManager.CHILD_ID_COL);
 
-			if (childID == id) {
-				return true;
-			}
-			if (isDescendant(id, childID)) {
+			if ((childID == id) || isDescendant(id, childID)) {
 				return true;
 			}
 		}
@@ -759,7 +772,7 @@ class ModuleManager {
 		return fragMap.getAddressSet(new LongField(fragID));
 	}
 
-	private class FragmentHolder {
+	private static class FragmentHolder {
 		FragmentDB frag;
 		AddressRange range;
 

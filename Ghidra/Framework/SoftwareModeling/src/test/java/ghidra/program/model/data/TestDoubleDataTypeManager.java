@@ -15,9 +15,14 @@
  */
 package ghidra.program.model.data;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
-import ghidra.util.*;
+import ghidra.util.InvalidNameException;
+import ghidra.util.UniversalID;
+import ghidra.util.UniversalIdGenerator;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 

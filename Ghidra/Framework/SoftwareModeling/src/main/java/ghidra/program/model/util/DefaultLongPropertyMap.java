@@ -46,6 +46,7 @@ public class DefaultLongPropertyMap extends DefaultPropertyMap implements LongPr
 	 * @exception TypeMismatchException thrown if the
 	 *   property does not have long values.
 	 */
+	@Override
 	public void add(Address addr, long value) {
 		lps.putLong(addrMap.getKey(addr), value);
 	}
@@ -55,6 +56,7 @@ public class DefaultLongPropertyMap extends DefaultPropertyMap implements LongPr
 	 * @param addr the address from where to get the long value
 	 * @throws NoValueException if there is no property value at addr.
 	 */
+	@Override
 	public long getLong(Address addr) throws NoValueException {
 		return lps.getLong(addrMap.getKey(addr));
 	}
@@ -62,6 +64,7 @@ public class DefaultLongPropertyMap extends DefaultPropertyMap implements LongPr
 	/**
 	 * @see ghidra.program.model.util.PropertyMap#getObject(ghidra.program.model.address.Address)
 	 */
+	@Override
 	public Object getObject(Address addr) {
 		try {
 			return Long.valueOf(getLong(addr));

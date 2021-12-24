@@ -16,9 +16,9 @@
  */
 package ghidra.pcodeCPort.space;
 
-import ghidra.pcodeCPort.translate.*;
-
 import java.io.PrintStream;
+
+import ghidra.pcodeCPort.translate.Translate;
 
 
 public class UniqueSpace extends AddrSpace {

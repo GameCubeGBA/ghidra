@@ -15,17 +15,21 @@
  */
 package ghidra.program.database.bookmark;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+
+import db.DBRecord;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressIterator;
 import ghidra.program.model.listing.BookmarkType;
 import ghidra.program.model.listing.Program;
-import ghidra.program.model.util.*;
+import ghidra.program.model.util.ObjectPropertyMap;
+import ghidra.program.model.util.PropertyMapManager;
+import ghidra.program.model.util.TypeMismatchException;
 import ghidra.util.exception.DuplicateNameException;
-
-import java.util.*;
-
-import db.DBRecord;
 
 /**
  * Interface to manage bookmarks on a program.
@@ -40,7 +44,7 @@ class OldBookmarkManager {
 	private Program program;
 	private PropertyMapManager propertyMgr;
 
-	private HashMap<String, DBRecord> bookmarkTypes = new HashMap<String, DBRecord>();  // maps type to record
+	private HashMap<String, DBRecord> bookmarkTypes = new HashMap<>();  // maps type to record
 
 //	private ArrayList bookmarks = new ArrayList();
 //	private LongIntHashedList bookmarkAddrIndex = new LongIntHashedList();
@@ -100,14 +104,12 @@ class OldBookmarkManager {
 		String property = getPropertyName(type);
 		ObjectPropertyMap map = null;
 		map = propertyMgr.getObjectPropertyMap(property);
-		if (map == null) {
-			if (create) {
-				try {
-					map = propertyMgr.createObjectPropertyMap(property, OldBookmark.class);
-				}
-				catch (DuplicateNameException e) {
-					throw new RuntimeException("Unexpected Error");
-				}
+		if ((map == null) && create) {
+			try {
+				map = propertyMgr.createObjectPropertyMap(property, OldBookmark.class);
+			}
+			catch (DuplicateNameException e) {
+				throw new RuntimeException("Unexpected Error");
 			}
 		}
 		return map;
@@ -117,7 +119,7 @@ class OldBookmarkManager {
 	 * Return all the Bookmark types currenly in use.
 	 */
 	private String[] getTypes() {
-		ArrayList<String> list = new ArrayList<String>();
+		ArrayList<String> list = new ArrayList<>();
 		Iterator<String> iter = propertyMgr.propertyManagers();
 		while (iter.hasNext()) {
 			String property = iter.next();

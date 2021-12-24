@@ -16,13 +16,18 @@
  */
 package ghidra.framework.main;
 
-import ghidra.util.bean.GGlassPane;
-import ghidra.util.bean.GGlassPanePainter;
-
-import java.awt.*;
+import java.awt.AlphaComposite;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 
 import javax.swing.Icon;
+
+import ghidra.util.bean.GGlassPane;
+import ghidra.util.bean.GGlassPanePainter;
 
 /**
  * A class that paints a given image with varying zoom levels.  The zoom is set by clients 
@@ -46,7 +51,8 @@ public class ZoomedImagePainter implements GGlassPanePainter {
         this.image = image;
     }
 
-    public void paint( GGlassPane glassPane, Graphics g ) {
+    @Override
+	public void paint( GGlassPane glassPane, Graphics g ) {
         if ( image == null || targetBounds == null ) {
             return;
         }

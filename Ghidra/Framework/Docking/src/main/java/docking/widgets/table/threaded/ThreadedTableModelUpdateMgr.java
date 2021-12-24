@@ -15,14 +15,19 @@
  */
 package docking.widgets.table.threaded;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 import docking.widgets.table.AddRemoveListItem;
 import docking.widgets.table.TableSortingContext;
 import generic.concurrent.ConcurrentListenerSet;
 import ghidra.util.Swing;
 import ghidra.util.SystemUtilities;
-import ghidra.util.task.*;
+import ghidra.util.task.DummyCancellableTaskMonitor;
+import ghidra.util.task.SwingUpdateManager;
+import ghidra.util.task.TaskMonitor;
+import ghidra.util.task.TaskMonitorAdapter;
 
 /** 
  * Manages the updating of ThreadTableModels.  As requests to load, sort, filter, add/remove item

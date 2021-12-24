@@ -15,7 +15,11 @@
  */
 package docking.widgets.table.constraint.dialog;
 
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Insets;
+import java.awt.LayoutManager;
 
 /**
  * Specialized layout for the TableFilterDialog panels.  It is intended for a container with

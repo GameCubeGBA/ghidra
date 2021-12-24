@@ -15,14 +15,16 @@
  */
 package ghidra.app.plugin.core.data;
 
+import java.util.ArrayList;
+
 import ghidra.program.model.address.Address;
-import ghidra.program.model.data.*;
+import ghidra.program.model.data.CategoryPath;
+import ghidra.program.model.data.DataTypeComponent;
+import ghidra.program.model.data.Structure;
 import ghidra.program.model.lang.DataTypeProviderContext;
 import ghidra.program.model.listing.Data;
 import ghidra.program.model.listing.Program;
 import ghidra.program.util.ProgramLocation;
-
-import java.util.ArrayList;
 
 public class ProgramStructureProviderContext implements DataTypeProviderContext {
 	Program program;
@@ -74,7 +76,7 @@ public class ProgramStructureProviderContext implements DataTypeProviderContext 
 	 */
 	@Override
 	public DataTypeComponent[] getDataTypeComponents(int start, int end) {
-		ArrayList<DataTypeComponent> list = new ArrayList<DataTypeComponent>();
+		ArrayList<DataTypeComponent> list = new ArrayList<>();
 		for (int offset = start; offset <= end;) {
 			DataTypeComponent dtc = getDataTypeComponent(offset);
 			if (dtc == null) {

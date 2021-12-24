@@ -15,11 +15,16 @@
  */
 package ghidra.framework.task.gui;
 
-import ghidra.framework.task.*;
-import ghidra.util.task.SwingUpdateManager;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
+
+import ghidra.framework.task.GScheduledTask;
+import ghidra.framework.task.GTaskListenerAdapter;
+import ghidra.framework.task.GTaskManager;
+import ghidra.framework.task.GTaskResult;
+import ghidra.util.task.SwingUpdateManager;
 
 public class CompletedTaskListModel extends GTaskListModel<GTaskResultInfo> {
 	private static final int MIN_DELAY = 250;
@@ -27,23 +32,20 @@ public class CompletedTaskListModel extends GTaskListModel<GTaskResultInfo> {
 
 	private static final int PRUNE_SIZE = 10;
 	private static final int MAX_SIZE = 200;
-	private List<GTaskResultInfo> list = new ArrayList<GTaskResultInfo>();
+	private List<GTaskResultInfo> list = new ArrayList<>();
 	private GTaskManager taskManager;
 	private CompletedPanelTaskListener taskListener;
-	private Queue<Runnable> runnableQueue = new ConcurrentLinkedQueue<Runnable>();
+	private Queue<Runnable> runnableQueue = new ConcurrentLinkedQueue<>();
 	private SwingUpdateManager updateManager;
 
 	CompletedTaskListModel(GTaskManager taskMgr) {
 		this.taskManager = taskMgr;
 		taskListener = new CompletedPanelTaskListener();
-		updateManager = new SwingUpdateManager(MIN_DELAY, MAX_DELAY, new Runnable() {
-			@Override
-			public void run() {
+		updateManager = new SwingUpdateManager(MIN_DELAY, MAX_DELAY, () -> {
 
-				while (!runnableQueue.isEmpty()) {
-					Runnable runnable = runnableQueue.poll();
-					runnable.run();
-				}
+			while (!runnableQueue.isEmpty()) {
+				Runnable runnable = runnableQueue.poll();
+				runnable.run();
 			}
 		});
 

@@ -15,13 +15,27 @@
  */
 package docking.options.editor;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.swing.*;
-import javax.swing.border.*;
+import javax.swing.Box;
+import javax.swing.Icon;
+import javax.swing.JColorChooser;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.colorchooser.AbstractColorChooserPanel;
 
 import docking.widgets.label.GHtmlLabel;
@@ -391,7 +405,7 @@ class MainSwatchPanel extends SwatchPanel {
 	// @formatter:off
     private int[] initRawValues() {
 
-        int[] rawValues = {     
+        return new int[] {     
             255, 255, 255, // first row.
             204, 255, 255,
             204, 204, 255,
@@ -671,7 +685,6 @@ class MainSwatchPanel extends SwatchPanel {
             0, 51, 51,
             0, 51, 51,
             51, 51, 51 };
-        return rawValues;
     }
     // @formatter:on
 }

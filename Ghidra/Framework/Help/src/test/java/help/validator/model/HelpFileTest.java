@@ -19,13 +19,18 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.Collection;
 
 import org.junit.Test;
 
 import help.AbstractHelpTest;
-import help.validator.*;
+import help.validator.AnchorManager;
+import help.validator.HTMLFileParser;
+import help.validator.ReferenceTagProcessor;
 import help.validator.location.DirectoryHelpModuleLocation;
 
 public class HelpFileTest extends AbstractHelpTest {

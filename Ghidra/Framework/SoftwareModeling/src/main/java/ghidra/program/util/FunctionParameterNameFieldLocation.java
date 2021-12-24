@@ -15,6 +15,8 @@
  */
 package ghidra.program.util;
 
+import java.util.Objects;
+
 import ghidra.framework.options.SaveState;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Parameter;
@@ -59,25 +61,19 @@ public class FunctionParameterNameFieldLocation extends FunctionParameterFieldLo
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((parameterName == null) ? 0 : parameterName.hashCode());
-		return result;
+		return prime * result + ((parameterName == null) ? 0 : parameterName.hashCode());
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
+		if (!super.equals(obj) || (getClass() != obj.getClass()))
 			return false;
 		FunctionParameterNameFieldLocation other = (FunctionParameterNameFieldLocation) obj;
-		if (parameterName == null) {
-			if (other.parameterName != null)
-				return false;
-		}
-		else if (!parameterName.equals(other.parameterName))
+		if (!Objects.equals(parameterName, other.parameterName)) {
 			return false;
+		}
 		return true;
 	}
 

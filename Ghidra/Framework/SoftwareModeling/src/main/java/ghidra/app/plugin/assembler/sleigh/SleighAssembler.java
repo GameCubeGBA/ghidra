@@ -17,22 +17,46 @@ package ghidra.app.plugin.assembler.sleigh;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
-import ghidra.app.plugin.assembler.*;
-import ghidra.app.plugin.assembler.sleigh.parse.*;
-import ghidra.app.plugin.assembler.sleigh.sem.*;
+import ghidra.app.plugin.assembler.Assembler;
+import ghidra.app.plugin.assembler.Assemblers;
+import ghidra.app.plugin.assembler.AssemblyError;
+import ghidra.app.plugin.assembler.AssemblySelectionError;
+import ghidra.app.plugin.assembler.AssemblySelector;
+import ghidra.app.plugin.assembler.AssemblySemanticException;
+import ghidra.app.plugin.assembler.AssemblySyntaxException;
+import ghidra.app.plugin.assembler.sleigh.parse.AssemblyParseAcceptResult;
+import ghidra.app.plugin.assembler.sleigh.parse.AssemblyParseErrorResult;
+import ghidra.app.plugin.assembler.sleigh.parse.AssemblyParseResult;
+import ghidra.app.plugin.assembler.sleigh.parse.AssemblyParser;
+import ghidra.app.plugin.assembler.sleigh.sem.AssemblyContextGraph;
+import ghidra.app.plugin.assembler.sleigh.sem.AssemblyDefaultContext;
+import ghidra.app.plugin.assembler.sleigh.sem.AssemblyPatternBlock;
+import ghidra.app.plugin.assembler.sleigh.sem.AssemblyResolution;
+import ghidra.app.plugin.assembler.sleigh.sem.AssemblyResolutionResults;
+import ghidra.app.plugin.assembler.sleigh.sem.AssemblyResolvedConstructor;
+import ghidra.app.plugin.assembler.sleigh.sem.AssemblyTreeResolver;
 import ghidra.app.plugin.assembler.sleigh.util.DbgTimer;
 import ghidra.app.plugin.processors.sleigh.SleighLanguage;
 import ghidra.program.disassemble.Disassembler;
 import ghidra.program.disassemble.DisassemblerMessageListener;
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressOverflowException;
+import ghidra.program.model.address.AddressSet;
 import ghidra.program.model.lang.Register;
 import ghidra.program.model.lang.RegisterValue;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.Instruction;
+import ghidra.program.model.listing.InstructionIterator;
+import ghidra.program.model.listing.Listing;
+import ghidra.program.model.listing.Program;
 import ghidra.program.model.mem.Memory;
 import ghidra.program.model.mem.MemoryAccessException;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.Symbol;
+import ghidra.program.model.symbol.SymbolIterator;
+import ghidra.program.model.symbol.SymbolType;
 import ghidra.util.task.TaskMonitor;
 
 /**
@@ -192,12 +216,8 @@ public class SleighAssembler implements Assembler {
 	public AssemblyResolutionResults resolveLine(Address at, String line, AssemblyPatternBlock ctx)
 			throws AssemblySyntaxException {
 
-		if (!ctx.isFullMask()) {
-			throw new AssemblyError(
-				"Context must be fully-specified (full length, no shift, no unknowns)");
-		}
-		if (lang.getContextBaseRegister() != Register.NO_CONTEXT &&
-			ctx.length() < lang.getContextBaseRegister().getMinimumByteSize()) {
+		if (!ctx.isFullMask() || (lang.getContextBaseRegister() != Register.NO_CONTEXT &&
+			ctx.length() < lang.getContextBaseRegister().getMinimumByteSize())) {
 			throw new AssemblyError(
 				"Context must be fully-specified (full length, no shift, no unknowns)");
 		}

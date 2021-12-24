@@ -18,7 +18,10 @@ package ghidra.util.task;
 import java.awt.CardLayout;
 import java.awt.Component;
 
-import javax.swing.*;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 
 import ghidra.util.Msg;
 import ghidra.util.SystemUtilities;

@@ -27,7 +27,7 @@ public interface DefaultProgramContext {
 	 * @param start the start address.
 	 * @param end the end address (inclusive)
 	 */
-	public void setDefaultValue(RegisterValue registerValue, Address start, Address end);
+	void setDefaultValue(RegisterValue registerValue, Address start, Address end);
 
 	/**
 	 * Returns the default value of a register at a given address.
@@ -36,6 +36,6 @@ public interface DefaultProgramContext {
 	 * @return the default value of the register at the given address or null if no default value
 	 * has been assigned.
 	 */
-	public RegisterValue getDefaultValue(Register register, Address address);
+	RegisterValue getDefaultValue(Register register, Address address);
 
 }

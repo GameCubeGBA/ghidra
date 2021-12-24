@@ -16,7 +16,11 @@
 package ghidra.framework;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import generic.jar.ResourceFile;
 import ghidra.util.Msg;
@@ -176,10 +180,7 @@ public class GModule {
 
 	private boolean shouldSearch(ResourceFile child) {
 		String childName = child.getName();
-		if (EXCLUDED_DIRECTORY_NAMES.contains(childName)) {
-			return false;
-		}
-		if (dataSearchIgnoreDirs.contains(childName)) {
+		if (EXCLUDED_DIRECTORY_NAMES.contains(childName) || dataSearchIgnoreDirs.contains(childName)) {
 			return false;
 		}
 		return true;

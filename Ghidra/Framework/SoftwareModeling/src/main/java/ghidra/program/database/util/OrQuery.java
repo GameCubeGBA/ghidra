@@ -38,6 +38,7 @@ public class OrQuery implements Query {
 	/**
 	 * @see ghidra.program.database.util.Query#matches(db.DBRecord)
 	 */
+	@Override
 	public boolean matches(DBRecord record) {
 		return q1.matches(record) || q2.matches(record);
 	}

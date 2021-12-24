@@ -108,13 +108,11 @@ class VarKeyRecordNode extends VarKeyNode implements FieldKeyRecordNode {
 		for (int i = 0; i < keyCount; i++) {
 			// Compare each key entry with the previous key
 			Field key = getKeyField(i);
-			if (i != 0) {
-				if (key.compareTo(prevKey) <= 0) {
-					consistent = false;
-					logConsistencyError(tableName, "key[" + i + "] <= key[" + (i - 1) + "]", null);
-					Msg.debug(this, "  key[" + i + "].minKey = " + key);
-					Msg.debug(this, "  key[" + (i - 1) + "].minKey = " + prevKey);
-				}
+			if ((i != 0) && (key.compareTo(prevKey) <= 0)) {
+				consistent = false;
+				logConsistencyError(tableName, "key[" + i + "] <= key[" + (i - 1) + "]", null);
+				Msg.debug(this, "  key[" + i + "].minKey = " + key);
+				Msg.debug(this, "  key[" + (i - 1) + "].minKey = " + prevKey);
 			}
 			prevKey = key;
 		}
@@ -306,8 +304,7 @@ class VarKeyRecordNode extends VarKeyNode implements FieldKeyRecordNode {
 			if (table != null) {
 				table.updatedRecord(getRecord(table.getSchema(), index), record);
 			}
-			VarKeyNode newRoot = updateRecord(index, record);
-			return newRoot;
+			return updateRecord(index, record);
 		}
 
 		// Handle new record - see if we have room in this leaf
@@ -370,8 +367,7 @@ class VarKeyRecordNode extends VarKeyNode implements FieldKeyRecordNode {
 
 		// Handle removal of last record in node
 		if (keyCount == 1) {
-			VarKeyNode newRoot = removeLeaf();
-			return newRoot;
+			return removeLeaf();
 		}
 
 		// Remove record within this node

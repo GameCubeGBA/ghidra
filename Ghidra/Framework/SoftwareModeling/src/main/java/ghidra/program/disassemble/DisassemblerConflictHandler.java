@@ -20,6 +20,6 @@ import ghidra.program.model.lang.InstructionError;
 
 public interface DisassemblerConflictHandler {
 
-	public void markInstructionError(InstructionError conflict);
+	void markInstructionError(InstructionError conflict);
 
 }

@@ -20,12 +20,28 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import db.*;
+import db.BinaryField;
+import db.BooleanField;
+import db.DBConstants;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.LongField;
+import db.RecordIterator;
+import db.Schema;
+import db.StringField;
+import db.Table;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.database.map.AddressMap;
 import ghidra.program.database.util.DatabaseVersionException;
 import ghidra.program.model.address.Address;
-import ghidra.program.model.lang.*;
+import ghidra.program.model.lang.InstructionPrototype;
+import ghidra.program.model.lang.InvalidPrototype;
+import ghidra.program.model.lang.Language;
+import ghidra.program.model.lang.ProcessorContext;
+import ghidra.program.model.lang.ProcessorContextView;
+import ghidra.program.model.lang.Register;
+import ghidra.program.model.lang.RegisterValue;
 import ghidra.program.model.listing.ProgramContext;
 import ghidra.program.model.mem.ByteMemBufferImpl;
 import ghidra.program.model.mem.MemBuffer;
@@ -33,7 +49,9 @@ import ghidra.util.MD5Utilities;
 import ghidra.util.Msg;
 import ghidra.util.datastruct.ObjectArray;
 import ghidra.util.datastruct.ObjectIntHashtable;
-import ghidra.util.exception.*;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.NoValueException;
+import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
 
 /**
@@ -68,16 +86,14 @@ class PrototypeManager {
 	final static Schema REGISTER_SCHEMA = createRegisterSchema();
 
 	private static Schema createPrototypeSchema() {
-		Schema schema = new Schema(1, "Keys",
+		return new Schema(1, "Keys",
 			new Field[] { BinaryField.INSTANCE, LongField.INSTANCE, BooleanField.INSTANCE },
 			new String[] { "Bytes", "Address", "InDelaySlot" });
-		return schema;
 	}
 
 	private static Schema createRegisterSchema() {
-		Schema schema = new Schema(1, "Keys", new Field[] { StringField.INSTANCE },
+		return new Schema(1, "Keys", new Field[] { StringField.INSTANCE },
 			new String[] { "Register Context" });
-		return schema;
 	}
 
 	private static final int CURRENT_VERSION = 1;
@@ -229,7 +245,7 @@ class PrototypeManager {
 	}
 
 	private void init() {
-		protoHt = new ObjectIntHashtable<InstructionPrototype>();
+		protoHt = new ObjectIntHashtable<>();
 		protoArray = new ObjectArray();
 		programContext = program.getProgramContext();
 		baseContextRegister = programContext.getBaseContextRegister();
@@ -490,8 +506,7 @@ class PrototypeManager {
 				DBRecord record = contextTable.getRecord(protoID);
 				if (record != null) {
 					String s = record.getString(0);
-					BigInteger value = new BigInteger(s);
-					return value;
+					return new BigInteger(s);
 				}
 			}
 			catch (IOException e) {

@@ -15,14 +15,32 @@
  */
 package ghidra.docking.util.painting;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Composite;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GraphicsConfiguration;
+import java.awt.Image;
+import java.awt.LinearGradientPaint;
 import java.awt.MultipleGradientPaint.CycleMethod;
+import java.awt.Paint;
+import java.awt.Polygon;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.RenderingHints.Key;
+import java.awt.Shape;
+import java.awt.Stroke;
 import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
-import java.awt.image.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.BufferedImageOp;
+import java.awt.image.ImageObserver;
+import java.awt.image.RenderedImage;
 import java.awt.image.renderable.RenderableImage;
 import java.text.AttributedCharacterIterator;
 import java.util.Map;
@@ -77,8 +95,7 @@ public class Graphics2DWrapper extends Graphics2D {
 		// revert the color or it will get restored incorrectly.
 		//
 		Color alt = delegate.getColor();
-		Color orig = getComplementaryColor(alt);
-		return orig;
+		return getComplementaryColor(alt);
 	}
 
 	private static Color getComplementaryColor(Color c) {
@@ -87,8 +104,7 @@ public class Graphics2DWrapper extends Graphics2D {
 			return null;
 		}
 
-		Color alt = new Color(255 - c.getRed(), 255 - c.getGreen(), 255 - c.getBlue());
-		return alt;
+		return new Color(255 - c.getRed(), 255 - c.getGreen(), 255 - c.getBlue());
 	}
 
 	@Override
@@ -104,8 +120,7 @@ public class Graphics2DWrapper extends Graphics2D {
 		// revert the color or it will get restored incorrectly.
 		//
 		Color alt = delegate.getBackground();
-		Color orig = getComplementaryColor(alt);
-		return orig;
+		return getComplementaryColor(alt);
 	}
 
 	@Override
@@ -120,16 +135,13 @@ public class Graphics2DWrapper extends Graphics2D {
 
 		if (alt instanceof Color) {
 			Color c = (Color) alt;
-			Color orig = getComplementaryColor(c);
-			return orig;
+			return getComplementaryColor(c);
 		}
 		else if (alt instanceof GradientPaint) {
 			GradientPaint gp = (GradientPaint) alt;
 			Color alt1 = getComplementaryColor(gp.getColor1());
 			Color alt2 = getComplementaryColor(gp.getColor2());
-			GradientPaint orig =
-				new GradientPaint(gp.getPoint1(), alt1, gp.getPoint2(), alt2, gp.isCyclic());
-			return orig;
+			return new GradientPaint(gp.getPoint1(), alt1, gp.getPoint2(), alt2, gp.isCyclic());
 		}
 		else if (alt instanceof LinearGradientPaint) {
 
@@ -139,9 +151,7 @@ public class Graphics2DWrapper extends Graphics2D {
 			Point2D start = gp.getStartPoint();
 			Point2D end = gp.getEndPoint();
 			CycleMethod cycleMethod = gp.getCycleMethod();
-			LinearGradientPaint orig =
-				new LinearGradientPaint(start, end, fractions, colors, cycleMethod);
-			return orig;
+			return new LinearGradientPaint(start, end, fractions, colors, cycleMethod);
 		}
 		else {
 			// Else case from  setPaint()

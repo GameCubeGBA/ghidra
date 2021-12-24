@@ -15,12 +15,22 @@
  */
 package ghidra.program.util;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.NoSuchElementException;
 import java.util.function.Predicate;
 
 import ghidra.program.model.address.AddressSetView;
-import ghidra.program.model.data.*;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.data.Array;
+import ghidra.program.model.data.Composite;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.DataTypeComponent;
+import ghidra.program.model.data.StringDataInstance;
+import ghidra.program.model.data.Structure;
+import ghidra.program.model.data.TypeDef;
+import ghidra.program.model.listing.Data;
+import ghidra.program.model.listing.DataIterator;
+import ghidra.program.model.listing.Program;
 
 /**
  * Iterator that visits each defined data instance in the initialized memory of a Program or in the footprint of
@@ -205,7 +215,6 @@ public class DefinedDataIterator implements DataIterator {
 					return true;
 				}
 			}
-			return false;
 		}
 		else if (dt instanceof Composite) {
 			Composite comp = (Composite) dt;
@@ -214,7 +223,6 @@ public class DefinedDataIterator implements DataIterator {
 					return true;
 				}
 			}
-			return false;
 		}
 		else if (dt instanceof TypeDef) {
 			TypeDef tdDT = (TypeDef) dt;

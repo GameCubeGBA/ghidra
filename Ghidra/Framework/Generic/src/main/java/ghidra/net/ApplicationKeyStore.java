@@ -15,10 +15,19 @@
  */
 package ghidra.net;
 
-import java.io.*;
-import java.security.*;
-import java.security.cert.*;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.Principal;
 import java.security.cert.Certificate;
+import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
 import java.util.Date;
 import java.util.Enumeration;
 
@@ -35,7 +44,7 @@ import ghidra.util.Msg;
  */
 class ApplicationKeyStore {
 
-	static final String[] PKCS_FILE_EXTENSIONS = new String[] { "p12", "pks", "pfx" };
+	static final String[] PKCS_FILE_EXTENSIONS = { "p12", "pks", "pfx" };
 
 	private static final FileNameExtensionFilter PKCS_FILENAME_FILTER =
 		new FileNameExtensionFilter("PKCS Key File", PKCS_FILE_EXTENSIONS);
@@ -65,7 +74,7 @@ class ApplicationKeyStore {
 		InputStream fis = new FileInputStream(cacertsPath);
 		BufferedInputStream bis = new BufferedInputStream(fis);
 
-		try {
+		try (bis) {
 			CertificateFactory cf = CertificateFactory.getInstance("X.509");
 			while (bis.available() > 0) {
 				try {
@@ -86,9 +95,6 @@ class ApplicationKeyStore {
 					throw e;
 				}
 			}
-		}
-		finally {
-			bis.close();
 		}
 		if (certCount == 0) {
 			// Processing JKS files above produce "Empty input", if no certs read
@@ -119,11 +125,8 @@ class ApplicationKeyStore {
 
 		InputStream fis = new FileInputStream(keystorePath);
 		BufferedInputStream bis = new BufferedInputStream(fis);
-		try {
+		try (bis) {
 			ks.load(bis, pwd);
-		}
-		finally {
-			bis.close();
 		}
 		return ks;
 	}
@@ -148,7 +151,7 @@ class ApplicationKeyStore {
 		String fieldName = firstElement.substring(0, equalsIndex).trim();
 		String fieldValue = firstElement.substring(equalsIndex + 1).trim();
 
-		if (!fieldName.equalsIgnoreCase("CN")) {
+		if (!"CN".equalsIgnoreCase(fieldName)) {
 			return name; // bad common name
 		}
 

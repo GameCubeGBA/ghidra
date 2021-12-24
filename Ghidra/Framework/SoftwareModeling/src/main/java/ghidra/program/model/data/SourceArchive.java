@@ -28,26 +28,26 @@ public interface SourceArchive {
 	 * Gets the ID that the program has associated with the data type archive.
 	 * @return the data type archive ID
 	 */
-	public UniversalID getSourceArchiveID();
+	UniversalID getSourceArchiveID();
 
 	/**
 	 * Gets the ID used to uniquely identify the domain file for the data type archive.
 	 * @return the domain file identifier
 	 */
-	public String getDomainFileID();
+	String getDomainFileID();
 	
 	/**
 	 * Gets an indicator for the type of data type archive.
 	 * (ArchiveType.BUILT_IN, ArchiveType.PROGRAM, ArchiveType.PROJECT, ArchiveType.FILE)
 	 * @return the type
 	 */
-	public ArchiveType getArchiveType();
+	ArchiveType getArchiveType();
 
 	/**
 	 * Returns the name of the source archive
 	 * @return the name of the source archive.
 	 */
-	public String getName();
+	String getName();
 	
 	/**
 	 * Returns the last time that this source archive was synchronized to the containing 
@@ -55,7 +55,7 @@ public interface SourceArchive {
 	 * @return the last time that this source archive was synchronized to the containing 
 	 * DataTypeManager.
 	 */
-	public long getLastSyncTime();
+	long getLastSyncTime();
 	
 	/** 
 	 * Returns true if at least one data type that originally came from this source archive has been
@@ -63,7 +63,7 @@ public interface SourceArchive {
 	 * @return true if at least one data type that originally came from this source archive has been
 	 * changed.
 	 */
-	public boolean isDirty();
+	boolean isDirty();
 
 	/**
 	 * Sets the last time that this source archive was synchronized to the containing 
@@ -71,13 +71,13 @@ public interface SourceArchive {
 	 * @param time the last time that this source archive was synchronized to the containing 
 	 * DataTypeManager.
 	 */
-	public void setLastSyncTime( long time );
+	void setLastSyncTime( long time );
 	
 	/**
 	 * Sets the name of the source archive associated with this SourceArchive object.
 	 * @param name the name of the associated source archive.
 	 */
-	public void setName(String name);
+	void setName(String name);
 
 
 	/**
@@ -87,5 +87,5 @@ public interface SourceArchive {
 	 * @param dirty true means at least one data type that originally came from this source archive has been
 	 * changed.
 	 */
-	public void setDirtyFlag( boolean dirty );
+	void setDirtyFlag( boolean dirty );
 }

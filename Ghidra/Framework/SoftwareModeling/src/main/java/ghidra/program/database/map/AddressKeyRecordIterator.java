@@ -19,8 +19,12 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
-import db.*;
-import ghidra.program.model.address.*;
+import db.DBRecord;
+import db.RecordIterator;
+import db.Table;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.address.KeyRange;
 
 /**
  * Returns a RecordIterator over records that are address keyed.  Various constructors allow

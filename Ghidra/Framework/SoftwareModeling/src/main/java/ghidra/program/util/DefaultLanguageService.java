@@ -15,7 +15,10 @@
  */
 package ghidra.program.util;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -25,7 +28,19 @@ import org.apache.logging.log4j.Logger;
 
 import generic.jar.ResourceFile;
 import ghidra.app.plugin.processors.sleigh.SleighLanguageProvider;
-import ghidra.program.model.lang.*;
+import ghidra.program.model.lang.CompilerSpecDescription;
+import ghidra.program.model.lang.CompilerSpecID;
+import ghidra.program.model.lang.Endian;
+import ghidra.program.model.lang.ExternalLanguageCompilerSpecQuery;
+import ghidra.program.model.lang.Language;
+import ghidra.program.model.lang.LanguageCompilerSpecPair;
+import ghidra.program.model.lang.LanguageCompilerSpecQuery;
+import ghidra.program.model.lang.LanguageDescription;
+import ghidra.program.model.lang.LanguageID;
+import ghidra.program.model.lang.LanguageNotFoundException;
+import ghidra.program.model.lang.LanguageProvider;
+import ghidra.program.model.lang.LanguageService;
+import ghidra.program.model.lang.Processor;
 import ghidra.util.classfinder.ClassSearcher;
 import ghidra.util.task.TaskBuilder;
 
@@ -138,10 +153,7 @@ public class DefaultLanguageService implements LanguageService, ChangeListener {
 		List<LanguageDescription> languageDescriptions = new ArrayList<>();
 		for (LanguageInfo info : languageInfos) {
 			LanguageDescription description = info.description;
-			if (processor != null && processor != description.getProcessor()) {
-				continue;
-			}
-			if (endianess != null && endianess != description.getEndian()) {
+			if ((processor != null && processor != description.getProcessor()) || (endianess != null && endianess != description.getEndian())) {
 				continue;
 			}
 			if (size != null && size.intValue() != description.getSize()) {
@@ -183,11 +195,7 @@ public class DefaultLanguageService implements LanguageService, ChangeListener {
 			LanguageDescription description = info.description;
 
 			if (!languageMatchesExternalProcessor(description, externalProcessorName,
-				externalTool)) {
-				continue;
-			}
-
-			if (endianess != null && endianess != description.getEndian()) {
+				externalTool) || (endianess != null && endianess != description.getEndian())) {
 				continue;
 			}
 			if (size != null && size.intValue() != description.getSize()) {
@@ -361,7 +369,7 @@ public class DefaultLanguageService implements LanguageService, ChangeListener {
 		}
 	}
 
-	private class LanguageInfo {
+	private static class LanguageInfo {
 
 		private LanguageProvider provider;
 		LanguageDescription description;

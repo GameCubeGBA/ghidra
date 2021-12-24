@@ -19,7 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import docking.widgets.table.RowObjectFilterModel;
-import docking.widgets.table.columnfilter.*;
+import docking.widgets.table.columnfilter.ColumnBasedTableFilter;
+import docking.widgets.table.columnfilter.ColumnConstraintSet;
+import docking.widgets.table.columnfilter.LogicOperation;
 import docking.widgets.table.constraint.ColumnConstraint;
 import docking.widgets.table.constraint.ColumnData;
 import docking.widgets.table.constrainteditor.ColumnConstraintEditor;
@@ -119,7 +121,7 @@ public class DialogFilterConditionSet<T> {
 	<R> ColumnData<T> getColumnData() {
 		RowObjectFilterModel<R> tableModel = (RowObjectFilterModel<R>) filterRow.getTableModel();
 		int columnModelIndex = columnFilterData.getColumnModelIndex();
-		return new ColumnData<T>() {
+		return new ColumnData<>() {
 
 			@Override
 			public String getColumnName() {

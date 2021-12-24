@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 package ghidra.util.datastruct;
-import ghidra.util.exception.AssertException;
-
 import java.io.Serializable;
 import java.util.Iterator;
+
+import ghidra.util.exception.AssertException;
 
 /**
  * This class converts arbitrary Strings into compacted int indexes suitable
@@ -215,8 +215,8 @@ public class StringKeyIndexer implements Serializable {
 		String[] oldKeys = keys;
         keys = new String[newCapacity];
         capacity = newCapacity;
-		for(int i=0;i<oldKeys.length;i++) {
-			put(oldKeys[i]);
+		for (String oldKey : oldKeys) {
+			put(oldKey);
 		}
     }
     private class KeyIterator implements Iterator<String> {
@@ -235,6 +235,7 @@ public class StringKeyIndexer implements Serializable {
      	/* (non-Javadoc)
      	 * @see java.util.Iterator#hasNext()
      	 */
+		@Override
 		public boolean hasNext() {
         	return nextKey != null;
         }
@@ -242,7 +243,8 @@ public class StringKeyIndexer implements Serializable {
 		/* (non-Javadoc)
 		 * @see java.util.Iterator#next()
 		 */
-        public String next() {
+        @Override
+		public String next() {
         	if (hasNext()) {
             	String result = nextKey;
                 findNext();
@@ -254,7 +256,8 @@ public class StringKeyIndexer implements Serializable {
         /* (non-Javadoc)
          * @see java.util.Iterator#remove()
          */
-        public void remove() {
+        @Override
+		public void remove() {
         	throw new UnsupportedOperationException();
         }
         

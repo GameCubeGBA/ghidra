@@ -15,7 +15,9 @@
  */
 package docking.widgets.table;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class TableColumnDescriptor<ROW_TYPE> {
 	private List<TableColumnInfo> columns = new ArrayList<>();

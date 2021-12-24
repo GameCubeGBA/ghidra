@@ -38,5 +38,5 @@ public interface ModuleInitializer
 	/**
 	 * @return initializer name
 	 */
-	public String getName();
+	String getName();
 }

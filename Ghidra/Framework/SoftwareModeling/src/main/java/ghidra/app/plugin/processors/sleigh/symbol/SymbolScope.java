@@ -20,9 +20,9 @@
  */
 package ghidra.app.plugin.processors.sleigh.symbol;
 
-import ghidra.app.plugin.processors.sleigh.SleighException;
-
 import java.util.HashMap;
+
+import ghidra.app.plugin.processors.sleigh.SleighException;
 
 /**
  * 
@@ -37,7 +37,7 @@ public class SymbolScope {
 	public SymbolScope(SymbolScope p,int i) {
 		parent = p;
 		id = i;
-		tree = new HashMap<String, Symbol>();
+		tree = new HashMap<>();
 	}
 	
 	public SymbolScope getParent() { return parent; }

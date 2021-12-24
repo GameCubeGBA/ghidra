@@ -15,11 +15,14 @@
  */
 package ghidra.framework.store.local;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
@@ -38,9 +41,7 @@ public class IndexedLocalFileSystemTest extends AbstractLocalFileSystemTest {
 		testFilePaths();
 
 		List<String> names = new ArrayList<>();
-		for (String itemName : fs.getItemNames("/a/x/bbb")) {
-			names.add(itemName);
-		}
+		Collections.addAll(names, fs.getItemNames("/a/x/bbb"));
 
 		// re-instantiate file-system (index will not have been rewritten)
 		// journal will be replayed to build memory-based index
@@ -71,9 +72,7 @@ public class IndexedLocalFileSystemTest extends AbstractLocalFileSystemTest {
 		testFilePaths();
 
 		List<String> names = new ArrayList<>();
-		for (String itemName : fs.getItemNames("/a/x/bbb")) {
-			names.add(itemName);
-		}
+		Collections.addAll(names, fs.getItemNames("/a/x/bbb"));
 
 		fs.dispose();
 

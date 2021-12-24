@@ -19,7 +19,10 @@ import java.awt.Color;
 import java.awt.Font;
 import java.beans.PropertyEditor;
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 import javax.swing.KeyStroke;
 
@@ -61,7 +64,7 @@ public class SubOptions implements Options {
 	public List<Options> getChildOptions() {
 		List<String> optionPaths = getOptionNames();
 		Set<String> childCategories = AbstractOptions.getChildCategories(optionPaths);
-		List<Options> childOptions = new ArrayList<Options>(childCategories.size());
+		List<Options> childOptions = new ArrayList<>(childCategories.size());
 		for (String categoryName : childCategories) {
 			childOptions.add(new SubOptions(options, categoryName, prefix + categoryName +
 				DELIMITER));
@@ -240,7 +243,7 @@ public class SubOptions implements Options {
 	@Override
 	public List<String> getOptionNames() {
 		List<String> allOptionPaths = options.getOptionNames();
-		List<String> names = new ArrayList<String>();
+		List<String> names = new ArrayList<>();
 		for (String path : allOptionPaths) {
 			if (path.startsWith(prefix)) {
 				names.add(path.substring(prefix.length()));
@@ -366,6 +369,6 @@ public class SubOptions implements Options {
 	public List<String> getLeafOptionNames() {
 		List<String> optionPaths = getOptionNames();
 		Set<String> leaves = AbstractOptions.getLeaves(optionPaths);
-		return new ArrayList<String>(leaves);
+		return new ArrayList<>(leaves);
 	}
 }

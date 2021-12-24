@@ -15,86 +15,91 @@
  */
 package help.validator;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeSet;
+
 import help.OverlayHelpTree;
 import help.TOCItemProvider;
 import help.validator.links.InvalidHREFLink;
 import help.validator.links.InvalidLink;
 import help.validator.location.HelpModuleCollection;
-import help.validator.model.*;
-
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.*;
-import java.util.Map.Entry;
+import help.validator.model.AnchorDefinition;
+import help.validator.model.GhidraTOCFile;
+import help.validator.model.HREF;
+import help.validator.model.HelpFile;
+import help.validator.model.TOCItemDefinition;
+import help.validator.model.TOCItemExternal;
+import help.validator.model.TOCItemReference;
 
 public class LinkDatabase {
 
 	/** Sorted for later presentation */
-	private Set<InvalidLink> allUnresolvedLinks = new TreeSet<InvalidLink>(
-		new Comparator<InvalidLink>() {
-			@Override
-			public int compare(InvalidLink o1, InvalidLink o2) {
-				// same module...no subgroup by error type
-				String name1 = o1.getClass().getSimpleName();
-				String name2 = o2.getClass().getSimpleName();
-				if (!name1.equals(name2)) {
-					return name1.compareTo(name2);
-				}
-
-				// ...also same error type, now subgroup by file
-				Path file1 = o1.getSourceFile();
-				Path file2 = o2.getSourceFile();
-				if (!file1.equals(file2)) {
-					return file1.toUri().compareTo(file2.toUri());
-				}
-
-				// ...same file too...compare by line number
-				int lineNumber1 = o1.getLineNumber();
-				int lineNumber2 = o2.getLineNumber();
-				if (lineNumber1 != lineNumber2) {
-					return lineNumber1 - lineNumber2;
-				}
-
-				// ...wow...on the same line too?...just use identity, since we 
-				// create as we parse, which is how we read, from left to right
-
-				return o1.identityHashCode() - o2.identityHashCode();
+	private Set<InvalidLink> allUnresolvedLinks = new TreeSet<>(
+		(o1, o2) -> {
+			// same module...no subgroup by error type
+			String name1 = o1.getClass().getSimpleName();
+			String name2 = o2.getClass().getSimpleName();
+			if (!name1.equals(name2)) {
+				return name1.compareTo(name2);
 			}
+
+			// ...also same error type, now subgroup by file
+			Path file1 = o1.getSourceFile();
+			Path file2 = o2.getSourceFile();
+			if (!file1.equals(file2)) {
+				return file1.toUri().compareTo(file2.toUri());
+			}
+
+			// ...same file too...compare by line number
+			int lineNumber1 = o1.getLineNumber();
+			int lineNumber2 = o2.getLineNumber();
+			if (lineNumber1 != lineNumber2) {
+				return lineNumber1 - lineNumber2;
+			}
+
+			// ...wow...on the same line too?...just use identity, since we 
+			// create as we parse, which is how we read, from left to right
+
+			return o1.identityHashCode() - o2.identityHashCode();
 		});
 
 	private final Set<DuplicateAnchorCollection> duplicateAnchors =
-		new TreeSet<DuplicateAnchorCollection>(new Comparator<DuplicateAnchorCollection>() {
-			@Override
-			public int compare(DuplicateAnchorCollection o1, DuplicateAnchorCollection o2) {
-				if (o1.getClass().equals(o2.getClass())) {
-					if (o1 instanceof DuplicateAnchorCollectionByHelpTopic) {
-						DuplicateAnchorCollectionByHelpTopic d1 =
-							(DuplicateAnchorCollectionByHelpTopic) o1;
-						DuplicateAnchorCollectionByHelpTopic d2 =
-							(DuplicateAnchorCollectionByHelpTopic) o2;
-						return d1.compareTo(d2);
-					}
-					else if (o1 instanceof DuplicateAnchorCollectionByHelpFile) {
-						DuplicateAnchorCollectionByHelpFile d1 =
-							(DuplicateAnchorCollectionByHelpFile) o1;
-						DuplicateAnchorCollectionByHelpFile d2 =
-							(DuplicateAnchorCollectionByHelpFile) o2;
-						return d1.compareTo(d2);
-					}
-					throw new RuntimeException(
-						"New type of DuplicateAnchorCollection not handled by this comparator");
+		new TreeSet<>((o1, o2) -> {
+			if (o1.getClass().equals(o2.getClass())) {
+				if (o1 instanceof DuplicateAnchorCollectionByHelpTopic) {
+					DuplicateAnchorCollectionByHelpTopic d11 =
+						(DuplicateAnchorCollectionByHelpTopic) o1;
+					DuplicateAnchorCollectionByHelpTopic d21 =
+						(DuplicateAnchorCollectionByHelpTopic) o2;
+					return d11.compareTo(d21);
 				}
-
-				return o1.getClass().getSimpleName().compareTo(o2.getClass().getSimpleName());
+				else if (o1 instanceof DuplicateAnchorCollectionByHelpFile) {
+					DuplicateAnchorCollectionByHelpFile d12 =
+						(DuplicateAnchorCollectionByHelpFile) o1;
+					DuplicateAnchorCollectionByHelpFile d22 =
+						(DuplicateAnchorCollectionByHelpFile) o2;
+					return d12.compareTo(d22);
+				}
+				throw new RuntimeException(
+					"New type of DuplicateAnchorCollection not handled by this comparator");
 			}
+
+			return o1.getClass().getSimpleName().compareTo(o2.getClass().getSimpleName());
 		});
 
 	private final HelpModuleCollection helpCollection;
 	private final Map<String, TOCItemDefinition> mapOfIDsToTOCDefinitions =
-		new HashMap<String, TOCItemDefinition>();
+		new HashMap<>();
 	private final Map<String, TOCItemExternal> mapOfIDsToTOCExternals =
-		new HashMap<String, TOCItemExternal>();
+		new HashMap<>();
 
 	private OverlayHelpTree printableTree;
 
@@ -155,10 +160,7 @@ public class LinkDatabase {
 
 	private HelpFile findHelpFileForPath(Path helpPath) {
 		HelpFile helpFile = helpCollection.getHelpFile(helpPath);
-		if (helpFile != null) {
-			return helpFile;
-		}
-		return null;
+		return helpFile;
 	}
 
 	Collection<InvalidLink> getUnresolvedLinks() {

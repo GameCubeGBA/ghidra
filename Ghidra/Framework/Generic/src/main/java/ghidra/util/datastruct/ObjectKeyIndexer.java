@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 package ghidra.util.datastruct;
-import ghidra.util.exception.AssertException;
-
 import java.util.Arrays;
+
+import ghidra.util.exception.AssertException;
 
 /**
  * This class converts arbitrary Objects into compacted int indexes suitable
@@ -210,8 +210,8 @@ public class ObjectKeyIndexer<T>{
 		T[] oldKeys = keys;
         keys = (T[])new Object[newCapacity];
         capacity = newCapacity;
-		for(int i=0;i<oldKeys.length;i++) {
-			put(oldKeys[i]);
+		for (T oldKey : oldKeys) {
+			put(oldKey);
 		}
     }
 }

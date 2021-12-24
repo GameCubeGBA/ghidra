@@ -24,10 +24,14 @@ import db.DBConstants;
 import db.DBHandle;
 import db.buffers.BufferFile;
 import db.buffers.ManagedBufferFile;
-import ghidra.framework.data.*;
+import ghidra.framework.data.DBContentHandler;
+import ghidra.framework.data.DomainObjectAdapter;
+import ghidra.framework.data.DomainObjectMergeManager;
 import ghidra.framework.model.ChangeSet;
 import ghidra.framework.model.DomainObject;
-import ghidra.framework.store.*;
+import ghidra.framework.store.DatabaseItem;
+import ghidra.framework.store.FileSystem;
+import ghidra.framework.store.FolderItem;
 import ghidra.util.InvalidNameException;
 import ghidra.util.Msg;
 import ghidra.util.exception.CancelledException;
@@ -64,7 +68,7 @@ public class DataTypeArchiveContentHandler extends DBContentHandler {
 			int minChangeVersion, TaskMonitor monitor)
 			throws IOException, VersionException, CancelledException {
 		String contentType = item.getContentType();
-		if (contentType != null && !contentType.equals(DATA_TYPE_ARCHIVE_CONTENT_TYPE)) {
+		if (contentType != null && !DATA_TYPE_ARCHIVE_CONTENT_TYPE.equals(contentType)) {
 			throw new IOException("Unsupported content type: " + contentType);
 		}
 		DatabaseItem dbItem = (DatabaseItem) item;
@@ -81,13 +85,7 @@ public class DataTypeArchiveContentHandler extends DBContentHandler {
 			success = true;
 			return dataTypeArchive;
 		}
-		catch (VersionException e) {
-			throw e;
-		}
-		catch (IOException e) {
-			throw e;
-		}
-		catch (CancelledException e) {
+		catch (VersionException | IOException | CancelledException e) {
 			throw e;
 		}
 		catch (Throwable t) {
@@ -119,7 +117,7 @@ public class DataTypeArchiveContentHandler extends DBContentHandler {
 			throws IOException, VersionException, CancelledException {
 
 		String contentType = item.getContentType();
-		if (contentType != null && !contentType.equals(DATA_TYPE_ARCHIVE_CONTENT_TYPE)) {
+		if (contentType != null && !DATA_TYPE_ARCHIVE_CONTENT_TYPE.equals(contentType)) {
 			throw new IOException("Unsupported content type: " + contentType);
 		}
 		DatabaseItem dbItem = (DatabaseItem) item;
@@ -136,13 +134,7 @@ public class DataTypeArchiveContentHandler extends DBContentHandler {
 			success = true;
 			return dataTypeArchive;
 		}
-		catch (VersionException e) {
-			throw e;
-		}
-		catch (IOException e) {
-			throw e;
-		}
-		catch (CancelledException e) {
+		catch (VersionException | IOException | CancelledException e) {
 			throw e;
 		}
 		catch (Throwable t) {
@@ -174,7 +166,7 @@ public class DataTypeArchiveContentHandler extends DBContentHandler {
 			throws IOException, VersionException, CancelledException {
 
 		String contentType = item.getContentType();
-		if (contentType != null && !contentType.equals(DATA_TYPE_ARCHIVE_CONTENT_TYPE)) {
+		if (contentType != null && !DATA_TYPE_ARCHIVE_CONTENT_TYPE.equals(contentType)) {
 			throw new IOException("Unsupported content type: " + contentType);
 		}
 		DatabaseItem dbItem = (DatabaseItem) item;
@@ -199,13 +191,7 @@ public class DataTypeArchiveContentHandler extends DBContentHandler {
 			success = true;
 			return dataTypeArchive;
 		}
-		catch (VersionException e) {
-			throw e;
-		}
-		catch (IOException e) {
-			throw e;
-		}
-		catch (CancelledException e) {
+		catch (VersionException | IOException | CancelledException e) {
 			throw e;
 		}
 		catch (Throwable t) {
@@ -282,7 +268,7 @@ public class DataTypeArchiveContentHandler extends DBContentHandler {
 	public ChangeSet getChangeSet(FolderItem item, int fromVer, int toVer)
 			throws VersionException, IOException {
 		String contentType = item.getContentType();
-		if (contentType != null && !contentType.equals(DATA_TYPE_ARCHIVE_CONTENT_TYPE)) {
+		if (contentType != null && !DATA_TYPE_ARCHIVE_CONTENT_TYPE.equals(contentType)) {
 			throw new IOException("Unsupported content type: " + contentType);
 		}
 		DatabaseItem dbItem = (DatabaseItem) item;
@@ -296,10 +282,7 @@ public class DataTypeArchiveContentHandler extends DBContentHandler {
 			dataTypeArchive = new DataTypeArchiveDB(dbh, openMode, null, this);
 			return getDataTypeArchiveChangeSet(dataTypeArchive, bf);
 		}
-		catch (VersionException e) {
-			throw e;
-		}
-		catch (IOException e) {
+		catch (VersionException | IOException e) {
 			throw e;
 		}
 		catch (Throwable t) {

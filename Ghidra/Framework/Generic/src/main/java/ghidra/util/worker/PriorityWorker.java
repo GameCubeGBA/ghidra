@@ -15,10 +15,10 @@
  */
 package ghidra.util.worker;
 
-import ghidra.util.task.TaskMonitor;
-
 import java.util.Comparator;
 import java.util.concurrent.PriorityBlockingQueue;
+
+import ghidra.util.task.TaskMonitor;
 
 /**
  * Executes a single job at a time in priority order.
@@ -35,7 +35,7 @@ public class PriorityWorker extends AbstractWorker<PriorityJob> {
 	 * @param monitor the monitor used to cancel jobs.
 	 */
 	public PriorityWorker(String name, TaskMonitor monitor) {
-		super(new PriorityBlockingQueue<PriorityJob>(11, new PriorityJobComparator()), false, name,
+		super(new PriorityBlockingQueue<>(11, new PriorityJobComparator()), false, name,
 			true /* shared */, monitor);
 	}
 
@@ -52,7 +52,7 @@ public class PriorityWorker extends AbstractWorker<PriorityJob> {
 	 */
 	public PriorityWorker(String name, boolean isPersistentThread, boolean useSharedThreadPool,
 			TaskMonitor monitor) {
-		super(new PriorityBlockingQueue<PriorityJob>(11, new PriorityJobComparator()),
+		super(new PriorityBlockingQueue<>(11, new PriorityJobComparator()),
 			isPersistentThread, name, useSharedThreadPool, monitor);
 	}
 

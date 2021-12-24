@@ -15,23 +15,54 @@
  */
 package docking;
 
-import java.awt.*;
-import java.awt.datatransfer.*;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.KeyboardFocusManager;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.dnd.DnDConstants;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import javax.swing.*;
+import javax.swing.Action;
+import javax.swing.ActionMap;
+import javax.swing.Box;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JTree;
+import javax.swing.KeyStroke;
+import javax.swing.TransferHandler;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.tree.TreePath;
 
 import docking.widgets.label.GHtmlLabel;
-import docking.widgets.tree.*;
+import docking.widgets.tree.GTree;
+import docking.widgets.tree.GTreeLazyNode;
+import docking.widgets.tree.GTreeNode;
 import docking.widgets.tree.support.GTreeDragNDropHandler;
-import ghidra.util.*;
+import ghidra.util.HTMLUtilities;
+import ghidra.util.Msg;
+import ghidra.util.SystemUtilities;
 import ghidra.util.exception.MultipleCauses;
 import ghidra.util.html.HTMLElement;
 import resources.ResourceManager;
@@ -222,8 +253,7 @@ public class ErrLogExpandableDialog extends AbstractErrDialog {
 	}
 
 	private String addBR(String text) {
-		String withBRs = HTMLUtilities.lineWrapWithHTMLLineBreaks(text, 0);
-		return withBRs;
+		return HTMLUtilities.lineWrapWithHTMLLineBreaks(text, 0);
 	}
 
 	private String getMessage(Throwable t) {
@@ -284,12 +314,12 @@ public class ErrLogExpandableDialog extends AbstractErrDialog {
 		return root.getReportText();
 	}
 
-	static interface NodeWithText {
-		public String getReportText();
+	interface NodeWithText {
+		String getReportText();
 
-		public String collectReportText(Collection<? extends GTreeNode> included, int indent);
+		String collectReportText(Collection<? extends GTreeNode> included, int indent);
 
-		public boolean doesIndent();
+		boolean doesIndent();
 
 		public static class Util {
 			public static final String INDENTATION = "    ";
@@ -324,8 +354,7 @@ public class ErrLogExpandableDialog extends AbstractErrDialog {
 
 			public static boolean containsAny(Collection<? extends GTreeNode> included,
 					Collection<GTreeNode> allChildren) {
-				Set<GTreeNode> res = new HashSet<>();
-				res.addAll(included);
+				Set<GTreeNode> res = new HashSet<>(included);
 				res.retainAll(allChildren);
 				return !res.isEmpty();
 			}

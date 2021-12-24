@@ -20,7 +20,9 @@ import java.util.List;
 
 import org.jdom.Element;
 
-import generic.stl.*;
+import generic.stl.ComparableSetSTL;
+import generic.stl.IteratorSTL;
+import generic.stl.SetSTL;
 import ghidra.pcodeCPort.space.AddrSpace;
 import ghidra.pcodeCPort.translate.Translate;
 import ghidra.pcodeCPort.utils.Utils;
@@ -156,10 +158,7 @@ public class RangeList {
 	// Return size of biggest range (up to maxsize) starting at addr
 	// which is completely covered by this rangelist
 	public long longestFit( Address addr, long maxsize ) {
-		if ( addr.isInvalid() ) {
-			return 0;
-		}
-		if ( tree.isEmpty() ) {
+		if ( addr.isInvalid() || tree.isEmpty() ) {
 			return 0;
 		}
 
@@ -202,10 +201,7 @@ public class RangeList {
 	public Range getFirstRange( AddrSpace spaceid ) {
 		Range range = new Range(spaceid,0,0);
 		IteratorSTL<Range> iter = tree.lower_bound(range);
-		if (iter.equals( tree.end() ) ) {
-			return null;
-		}
-		if ( !iter.get().getSpace().equals( spaceid ) ) {
+		if ( iter.equals( tree.end() ) || !iter.get().getSpace().equals( spaceid ) ) {
 			return null;
 		}
 		return iter.get();

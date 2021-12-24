@@ -20,8 +20,8 @@ import docking.widgets.tree.GTreeNode;
 
 
 public interface GTreeNodeListener {
-	public void nodeAdded(GTreeNode parentNode, GTreeNode newNode);
-	public void nodeChanged(GTreeNode parentNode, GTreeNode changedNode);
-	public void nodeRemoved(GTreeNode parentNode, GTreeNode removedNode, int oldIndexInParent);
-	public void nodeStructureChanged(GTreeNode node);
+	void nodeAdded(GTreeNode parentNode, GTreeNode newNode);
+	void nodeChanged(GTreeNode parentNode, GTreeNode changedNode);
+	void nodeRemoved(GTreeNode parentNode, GTreeNode removedNode, int oldIndexInParent);
+	void nodeStructureChanged(GTreeNode node);
 }

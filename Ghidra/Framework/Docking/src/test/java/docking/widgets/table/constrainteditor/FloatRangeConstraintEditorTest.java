@@ -15,7 +15,9 @@
  */
 package docking.widgets.table.constrainteditor;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.Component;
 import java.awt.Container;
@@ -113,7 +115,7 @@ public class FloatRangeConstraintEditorTest extends AbstractDockingTest {
 			new NumberColumnConstraintProvider().getColumnConstraints();
 		for (ColumnConstraint<?> columnConstraint : columnConstraints) {
 			if (columnConstraint.getColumnType().equals(Double.class) &&
-				columnConstraint.getName().equals("In Range")) {
+				"In Range".equals(columnConstraint.getName())) {
 				return new MappedColumnConstraint<>(new FloatColumnTypeMapper(),
 					(ColumnConstraint<Double>) columnConstraint);
 			}

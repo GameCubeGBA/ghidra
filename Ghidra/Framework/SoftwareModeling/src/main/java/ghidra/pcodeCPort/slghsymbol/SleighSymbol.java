@@ -16,13 +16,13 @@
  */
 package ghidra.pcodeCPort.slghsymbol;
 
-import ghidra.pcodeCPort.sleighbase.SleighBase;
-import ghidra.pcodeCPort.utils.XmlUtils;
-import ghidra.sleigh.grammar.Location;
-
 import java.io.PrintStream;
 
 import org.jdom.Element;
+
+import ghidra.pcodeCPort.sleighbase.SleighBase;
+import ghidra.pcodeCPort.utils.XmlUtils;
+import ghidra.sleigh.grammar.Location;
 
 public class SleighSymbol implements Comparable<SleighSymbol> {
 	@Override

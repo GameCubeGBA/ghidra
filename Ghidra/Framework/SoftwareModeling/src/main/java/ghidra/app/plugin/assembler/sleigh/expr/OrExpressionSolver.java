@@ -15,13 +15,23 @@
  */
 package ghidra.app.plugin.assembler.sleigh.expr;
 
-import java.util.*;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
-import ghidra.app.plugin.assembler.sleigh.sem.*;
+import ghidra.app.plugin.assembler.sleigh.sem.AssemblyResolution;
+import ghidra.app.plugin.assembler.sleigh.sem.AssemblyResolvedConstructor;
+import ghidra.app.plugin.assembler.sleigh.sem.AssemblyResolvedError;
 import ghidra.app.plugin.assembler.sleigh.util.DbgTimer.DbgCtx;
 import ghidra.app.plugin.processors.sleigh.ParserWalker;
 import ghidra.app.plugin.processors.sleigh.SleighLanguage;
-import ghidra.app.plugin.processors.sleigh.expression.*;
+import ghidra.app.plugin.processors.sleigh.expression.BinaryExpression;
+import ghidra.app.plugin.processors.sleigh.expression.ConstantValue;
+import ghidra.app.plugin.processors.sleigh.expression.LeftShiftExpression;
+import ghidra.app.plugin.processors.sleigh.expression.OrExpression;
+import ghidra.app.plugin.processors.sleigh.expression.PatternExpression;
+import ghidra.app.plugin.processors.sleigh.expression.RightShiftExpression;
+import ghidra.app.plugin.processors.sleigh.expression.SubExpression;
 import ghidra.program.model.mem.MemoryAccessException;
 import ghidra.util.Msg;
 import ghidra.xml.XmlPullParser;

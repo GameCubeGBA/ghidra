@@ -20,21 +20,17 @@ import java.nio.file.Path;
 
 public interface InvalidLink extends Comparable<InvalidLink> {
 
-	@Override
-	public int compareTo(InvalidLink other);
+	@Override int compareTo(InvalidLink other);
 
-	@Override
-	public String toString();
+	@Override String toString();
 
-	@Override
-	public int hashCode();
+	@Override int hashCode();
 
-	@Override
-	public boolean equals(Object obj);
+	@Override boolean equals(Object obj);
 
-	public Path getSourceFile();
+	Path getSourceFile();
 
-	public int getLineNumber();
+	int getLineNumber();
 
-	public int identityHashCode();
+	int identityHashCode();
 }

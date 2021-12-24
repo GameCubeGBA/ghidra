@@ -17,5 +17,5 @@
 package docking.menu;
 
 public interface MenuGroupListener {
-	public void menuGroupChanged(String[] menuPath, String group);
+	void menuGroupChanged(String[] menuPath, String group);
 }

@@ -15,9 +15,18 @@
  */
 package ghidra.graph.algo;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.Stack;
 
-import ghidra.graph.*;
+import ghidra.graph.GDirectedGraph;
+import ghidra.graph.GEdge;
+import ghidra.graph.GraphAlgorithms;
 import ghidra.util.datastruct.Accumulator;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;

@@ -15,11 +15,22 @@
  */
 package ghidra.framework.plugintool.dialog;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.Icon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.Scrollable;
+import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.HyperlinkEvent.EventType;
@@ -27,7 +38,9 @@ import javax.swing.event.HyperlinkEvent.EventType;
 import docking.EmptyBorderToggleButton;
 import docking.widgets.HyperlinkComponent;
 import docking.widgets.checkbox.GCheckBox;
-import docking.widgets.label.*;
+import docking.widgets.label.GHtmlLabel;
+import docking.widgets.label.GIconLabel;
+import docking.widgets.label.GLabel;
 import ghidra.framework.plugintool.PluginConfigurationModel;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.framework.plugintool.util.PluginPackage;

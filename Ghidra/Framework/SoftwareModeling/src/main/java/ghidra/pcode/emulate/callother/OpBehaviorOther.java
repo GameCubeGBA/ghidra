@@ -33,5 +33,5 @@ public interface OpBehaviorOther {
 	 * corresponds to the first (leftmost) parameter passed to 
 	 * this pcodeop within the language implementation.
 	 */
-	public void evaluate(Emulate emu, Varnode out, Varnode[] inputs);
+	void evaluate(Emulate emu, Varnode out, Varnode[] inputs);
 }

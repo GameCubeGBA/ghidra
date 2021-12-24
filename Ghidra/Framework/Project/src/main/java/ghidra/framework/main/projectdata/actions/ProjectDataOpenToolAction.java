@@ -21,9 +21,14 @@ import javax.swing.Icon;
 
 import docking.action.MenuData;
 import ghidra.framework.main.AppInfo;
-import ghidra.framework.main.datatable.ProjectDataContext;
 import ghidra.framework.main.datatable.FrontendProjectTreeAction;
-import ghidra.framework.model.*;
+import ghidra.framework.main.datatable.ProjectDataContext;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.Project;
+import ghidra.framework.model.ToolChest;
+import ghidra.framework.model.ToolManager;
+import ghidra.framework.model.ToolTemplate;
+import ghidra.framework.model.Workspace;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.util.HTMLUtilities;
 import ghidra.util.HelpLocation;

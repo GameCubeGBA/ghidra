@@ -28,26 +28,26 @@ public interface ToolChest {
      * @return null if there is no tool template for the given
      * toolName.
      */
-    public ToolTemplate getToolTemplate(String toolName);
+    ToolTemplate getToolTemplate(String toolName);
 
     /**
      * Get the tool templates from the tool chest.
      * @return list of tool template
      */
-    public ToolTemplate[] getToolTemplates();
+    ToolTemplate[] getToolTemplates();
 
     /**
      * Add a listener to be notified when the tool chest is changed.
      * @param l listener to add
      */
-    public void addToolChestChangeListener(ToolChestChangeListener l);
+    void addToolChestChangeListener(ToolChestChangeListener l);
 
     /**
      * 
      * Remove a listener that is listening to when the tool chest is changed.
      * @param l to remove
      */
-    public void removeToolChestChangeListener(ToolChestChangeListener l);
+    void removeToolChestChangeListener(ToolChestChangeListener l);
 
     /**
      * Add tool template to the tool chest.
@@ -61,7 +61,7 @@ public interface ToolChest {
      * 
      * @param template tool template to add
      */
-    public boolean addToolTemplate(ToolTemplate template);
+    boolean addToolTemplate(ToolTemplate template);
 
     /**
      * Remove entry (toolTemplate or toolSet) from the tool chest.
@@ -70,13 +70,13 @@ public interface ToolChest {
      * @return true if the toolConfig or toolset was
      * successfully removed from the tool chest.
      */
-    public boolean remove(String toolName);
+    boolean remove(String toolName);
     
     /**
      * Get the number of tools in this tool chest.
      * @return tool count.
      */
-    public int getToolCount();
+    int getToolCount();
 
     /**
      * Performs the same action as calling {@link #remove(String)} and then 
@@ -86,5 +86,5 @@ public interface ToolChest {
      * @param template The template to add to the tool chest, replacing any tools with the same name.
      * @return True if the template was added.
      */
-    public boolean replaceToolTemplate(ToolTemplate template);
+    boolean replaceToolTemplate(ToolTemplate template);
 }

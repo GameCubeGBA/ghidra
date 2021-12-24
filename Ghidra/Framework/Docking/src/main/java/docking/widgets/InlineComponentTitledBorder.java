@@ -15,7 +15,12 @@
  */
 package docking.widgets;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Insets;
+import java.awt.Rectangle;
 
 import javax.swing.JComponent;
 import javax.swing.border.Border;

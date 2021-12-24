@@ -15,17 +15,24 @@
  */
 package ghidra.program.database.register;
 
-import db.*;
+import db.BinaryField;
+import db.DBHandle;
+import db.Field;
+import db.NoTransactionException;
 import db.util.ErrorHandler;
 import ghidra.program.database.map.AddressMap;
 import ghidra.program.database.util.AddressRangeMapDB;
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressRange;
+import ghidra.program.model.address.AddressRangeIterator;
 import ghidra.program.model.lang.Register;
 import ghidra.program.model.lang.RegisterValue;
 import ghidra.program.util.LanguageTranslator;
 import ghidra.program.util.RangeMapAdapter;
 import ghidra.util.Lock;
-import ghidra.util.exception.*;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.task.TaskMonitor;
 
 public class DatabaseRangeMapAdapter implements RangeMapAdapter {

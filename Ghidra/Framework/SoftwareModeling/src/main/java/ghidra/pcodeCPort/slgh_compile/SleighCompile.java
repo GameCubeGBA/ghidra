@@ -15,30 +15,99 @@
  */
 package ghidra.pcodeCPort.slgh_compile;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
-import org.antlr.runtime.*;
+import org.antlr.runtime.ANTLRStringStream;
+import org.antlr.runtime.CharStream;
+import org.antlr.runtime.RecognitionException;
+import org.antlr.runtime.UnbufferedTokenStream;
 import org.antlr.runtime.tree.CommonTreeNodeStream;
 import org.jdom.JDOMException;
 
-import generic.stl.*;
+import generic.stl.IteratorSTL;
+import generic.stl.MapSTL;
+import generic.stl.Pair;
+import generic.stl.SelfComparator;
+import generic.stl.VectorSTL;
 import ghidra.pcode.utils.MessageFormattingUtils;
 import ghidra.pcodeCPort.address.Address;
 import ghidra.pcodeCPort.context.SleighError;
 import ghidra.pcodeCPort.error.LowlevelError;
 import ghidra.pcodeCPort.opcodes.OpCode;
-import ghidra.pcodeCPort.semantics.*;
+import ghidra.pcodeCPort.semantics.ConstTpl;
+import ghidra.pcodeCPort.semantics.ConstructTpl;
+import ghidra.pcodeCPort.semantics.HandleTpl;
+import ghidra.pcodeCPort.semantics.OpTpl;
+import ghidra.pcodeCPort.semantics.VarnodeTpl;
 import ghidra.pcodeCPort.sleighbase.SleighBase;
-import ghidra.pcodeCPort.slghpatexpress.*;
-import ghidra.pcodeCPort.slghsymbol.*;
-import ghidra.pcodeCPort.space.*;
+import ghidra.pcodeCPort.slghpatexpress.ContextField;
+import ghidra.pcodeCPort.slghpatexpress.EndInstructionValue;
+import ghidra.pcodeCPort.slghpatexpress.EqualEquation;
+import ghidra.pcodeCPort.slghpatexpress.EquationAnd;
+import ghidra.pcodeCPort.slghpatexpress.OperandEquation;
+import ghidra.pcodeCPort.slghpatexpress.PatternEquation;
+import ghidra.pcodeCPort.slghpatexpress.PatternExpression;
+import ghidra.pcodeCPort.slghpatexpress.PatternValue;
+import ghidra.pcodeCPort.slghpatexpress.TokenField;
+import ghidra.pcodeCPort.slghsymbol.BitrangeSymbol;
+import ghidra.pcodeCPort.slghsymbol.Constructor;
+import ghidra.pcodeCPort.slghsymbol.ContextChange;
+import ghidra.pcodeCPort.slghsymbol.ContextCommit;
+import ghidra.pcodeCPort.slghsymbol.ContextOp;
+import ghidra.pcodeCPort.slghsymbol.ContextSymbol;
+import ghidra.pcodeCPort.slghsymbol.DecisionProperties;
+import ghidra.pcodeCPort.slghsymbol.EndSymbol;
+import ghidra.pcodeCPort.slghsymbol.EpsilonSymbol;
+import ghidra.pcodeCPort.slghsymbol.FamilySymbol;
+import ghidra.pcodeCPort.slghsymbol.LabelSymbol;
+import ghidra.pcodeCPort.slghsymbol.MacroSymbol;
+import ghidra.pcodeCPort.slghsymbol.NameSymbol;
+import ghidra.pcodeCPort.slghsymbol.OperandSymbol;
+import ghidra.pcodeCPort.slghsymbol.SectionSymbol;
+import ghidra.pcodeCPort.slghsymbol.SleighSymbol;
+import ghidra.pcodeCPort.slghsymbol.SpaceSymbol;
+import ghidra.pcodeCPort.slghsymbol.StartSymbol;
+import ghidra.pcodeCPort.slghsymbol.SubtableSymbol;
+import ghidra.pcodeCPort.slghsymbol.SymbolScope;
+import ghidra.pcodeCPort.slghsymbol.TokenSymbol;
+import ghidra.pcodeCPort.slghsymbol.TripleSymbol;
+import ghidra.pcodeCPort.slghsymbol.UserOpSymbol;
+import ghidra.pcodeCPort.slghsymbol.ValueMapSymbol;
+import ghidra.pcodeCPort.slghsymbol.ValueSymbol;
+import ghidra.pcodeCPort.slghsymbol.VarnodeListSymbol;
+import ghidra.pcodeCPort.slghsymbol.VarnodeSymbol;
+import ghidra.pcodeCPort.slghsymbol.symbol_type;
+import ghidra.pcodeCPort.space.AddrSpace;
+import ghidra.pcodeCPort.space.ConstantSpace;
+import ghidra.pcodeCPort.space.OtherSpace;
+import ghidra.pcodeCPort.space.UniqueSpace;
+import ghidra.pcodeCPort.space.spacetype;
 import ghidra.pcodeCPort.utils.Utils;
 import ghidra.pcodeCPort.xml.DocumentStorage;
 import ghidra.program.model.lang.BasicCompilerSpec;
-import ghidra.sleigh.grammar.*;
+import ghidra.sleigh.grammar.BailoutException;
+import ghidra.sleigh.grammar.LineArrayListWriter;
+import ghidra.sleigh.grammar.Location;
+import ghidra.sleigh.grammar.ParsingEnvironment;
+import ghidra.sleigh.grammar.PreprocessorException;
+import ghidra.sleigh.grammar.SleighCompiler;
+import ghidra.sleigh.grammar.SleighLexer;
+import ghidra.sleigh.grammar.SleighParser;
+import ghidra.sleigh.grammar.SleighPreprocessor;
 import ghidra.util.Msg;
 import utilities.util.FileResolutionResult;
 import utilities.util.FileUtilities;
@@ -327,9 +396,7 @@ public class SleighCompile extends SleighBase {
 
 	protected SectionVector standaloneSection(ConstructTpl main) {
 		entry("standaloneSection", main);
-		// Create SectionVector for just the main rtl section with no named sections
-		SectionVector res = new SectionVector(main, symtab.getCurrentScope());
-		return res;
+		return new SectionVector(main, symtab.getCurrentScope());
 	}
 
 	protected SectionVector firstNamedSection(ConstructTpl main, SectionSymbol sym) {
@@ -500,11 +567,7 @@ public class SleighCompile extends SleighBase {
 		ConsistencyChecker checker = new ConsistencyChecker(this, root, warnunnecessarypcode,
 			warndeadtemps, largetemporarywarning);
 
-		if (!checker.testSizeRestrictions()) {
-			errors += 1;
-			return;
-		}
-		if (!checker.testTruncations()) {
+		if (!checker.testSizeRestrictions() || !checker.testTruncations()) {
 			errors += 1;
 			return;
 		}
@@ -538,23 +601,15 @@ public class SleighCompile extends SleighBase {
 		Integer boxOperand = Integer.valueOf(operand);
 		for (Long local : locals) {
 			Integer previous = local2Operand.putIfAbsent(local, boxOperand);
-			if (previous != null) {
-				if (previous.intValue() != operand) {
-					return previous.intValue();
-				}
+			if ((previous != null) && (previous.intValue() != operand)) {
+				return previous.intValue();
 			}
 		}
 		return -1;
 	}
 
 	private boolean checkLocalExports(Constructor ct) {
-		if (ct.getTempl() == null) {
-			return true;		// No template, collisions impossible
-		}
-		if (ct.getTempl().buildOnly()) {
-			return true;		// Operand exports aren't manipulated, so no collision is possible
-		}
-		if (ct.getNumOperands() < 2) {
+		if ((ct.getTempl() == null) || ct.getTempl().buildOnly() || (ct.getNumOperands() < 2)) {
 			return true;		// Collisions can only happen with multiple operands
 		}
 		boolean noCollisions = true;
@@ -1322,11 +1377,8 @@ public class SleighCompile extends SleighBase {
 		entry("compareMacroParams", sym, param);
 		for (int i = 0; i < param.size(); ++i) {
 			VarnodeTpl outvn = param.get(i).outvn;
-			if (outvn == null) {
-				continue;
-			}
 			// Check if an OperandSymbol was passed into this macro
-			if (outvn.getOffset().getType() != ConstTpl.const_type.handle) {
+			if ((outvn == null) || (outvn.getOffset().getType() != ConstTpl.const_type.handle)) {
 				continue;
 			}
 			int hand = outvn.getOffset().getHandleIndex();
@@ -1407,10 +1459,8 @@ public class SleighCompile extends SleighBase {
 		for (int i = 0; i < ops.size(); ++i) {
 			op = ops.get(i);
 			vn = op.getOut();
-			if ((vn != null) && (vn.isLocalTemp())) {
-				if (vn.getOffset().equals(offset)) {
-					return vn;
-				}
+			if (((vn != null) && (vn.isLocalTemp())) && vn.getOffset().equals(offset)) {
+				return vn;
 			}
 			for (int j = 0; j < op.numInput(); ++j) {
 				vn = op.getIn(j);
@@ -1517,14 +1567,12 @@ public class SleighCompile extends SleighBase {
 					myErrors.push_back(scopeString + "Could not resolve at least 1 variable size");
 				}
 			}
-			if (i < 0) {		// These potential errors only apply to main section
-				if (cur.section.getResult() != null) {	// If there is an export statement
-					if (big.getParent() == root) {
-						myErrors.push_back("   Cannot have export statement in root constructor");
-					}
-					else if (!forceExportSize(cur.section)) {
-						myErrors.push_back("   Size of export is unknown");
-					}
+			if ((i < 0) && (cur.section.getResult() != null)) {	// If there is an export statement
+				if (big.getParent() == root) {
+					myErrors.push_back("   Cannot have export statement in root constructor");
+				}
+				else if (!forceExportSize(cur.section)) {
+					myErrors.push_back("   Size of export is unknown");
 				}
 			}
 			if (cur.section.delaySlot() != 0) { // Delay slot is present in this constructor
@@ -1669,11 +1717,9 @@ public class SleighCompile extends SleighBase {
 				if (sleighSymbol instanceof ValueSymbol) {
 					ValueSymbol valueSymbol = (ValueSymbol) sleighSymbol;
 					PatternValue patternValue = valueSymbol.getPatternValue();
-					if (patternValue instanceof TokenField) {
-						if (sleighSymbol.location != Location.INTERNALLY_DEFINED) {
-							reportWarning(patternValue.location, "token field '" +
-								sleighSymbol.getName() + "' defined but never used");
-						}
+					if ((patternValue instanceof TokenField) && (sleighSymbol.location != Location.INTERNALLY_DEFINED)) {
+						reportWarning(patternValue.location, "token field '" +
+							sleighSymbol.getName() + "' defined but never used");
 					}
 				}
 			}

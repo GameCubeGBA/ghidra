@@ -20,11 +20,16 @@ import java.io.File;
 import java.util.List;
 import java.util.Properties;
 
-import javax.swing.*;
+import javax.swing.Icon;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
 
 import docking.ActionContext;
 import docking.DialogComponentProvider;
-import docking.action.*;
+import docking.action.DockingAction;
+import docking.action.MenuData;
+import docking.action.ToolBarData;
 import docking.widgets.filechooser.GhidraFileChooser;
 import docking.widgets.filechooser.GhidraFileChooserMode;
 import docking.widgets.table.GTable;
@@ -32,7 +37,9 @@ import generic.jar.ResourceFile;
 import ghidra.app.util.GenericHelpTopics;
 import ghidra.framework.Application;
 import ghidra.framework.plugintool.PluginTool;
-import ghidra.util.*;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
+import ghidra.util.SystemUtilities;
 import ghidra.util.filechooser.GhidraFileChooserModel;
 import ghidra.util.filechooser.GhidraFileFilter;
 import resources.Icons;
@@ -268,7 +275,7 @@ public class ExtensionTableProvider extends DialogComponentProvider {
 	 * files that are Ghidra Extensions (zip files with an extension.properties
 	 * file) or folders.
 	 */
-	private class ExtensionFileFilter implements GhidraFileFilter {
+	private static class ExtensionFileFilter implements GhidraFileFilter {
 		@Override
 		public String getDescription() {
 			return "Ghidra Extension";

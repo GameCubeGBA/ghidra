@@ -17,7 +17,12 @@ package ghidra.pcodeCPort.slgh_compile;
 
 import java.io.File;
 import java.io.FileFilter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 public class DirectoryVisitor implements Iterable<File> {
     private final ArrayList<File> startingDirectories;
@@ -41,7 +46,7 @@ public class DirectoryVisitor implements Iterable<File> {
 
     public DirectoryVisitor(File startingDirectory, FileFilter directoryFilter,
             FileFilter filter, boolean compareCase) {
-        this.startingDirectories = new ArrayList<File>();
+        this.startingDirectories = new ArrayList<>();
         this.startingDirectories.add(startingDirectory);
         this.directoryFilter = directoryFilter;
         this.filter = filter;
@@ -64,51 +69,36 @@ public class DirectoryVisitor implements Iterable<File> {
 
     public DirectoryVisitor(Collection<File> startingDirectories, FileFilter directoryFilter,
             FileFilter filter, boolean compareCase) {
-        this.startingDirectories = new ArrayList<File>(startingDirectories);
+        this.startingDirectories = new ArrayList<>(startingDirectories);
         this.directoryFilter = directoryFilter;
         this.filter = filter;
         this.compareCase = compareCase;
     }
 
-    public Iterator<File> iterator() {
+    @Override
+	public Iterator<File> iterator() {
         return new BreadthFirstDirectoryVisitor(startingDirectories, directoryFilter, filter, compareCase);
     }
 
     private static class BreadthFirstDirectoryVisitor implements Iterator<File> {
-        private final LinkedList<File> directoryQueue = new LinkedList<File>();
-        private final LinkedList<File> fileQueue = new LinkedList<File>();
+        private final LinkedList<File> directoryQueue = new LinkedList<>();
+        private final LinkedList<File> fileQueue = new LinkedList<>();
         private final FileFilter directoryFilter;
         private final FileFilter filter;
         private final Comparator<File> comparator;
 
-        private static final Comparator<File> CASE_SENSITIVE = new Comparator<File>() {
-            public int compare(File o1, File o2) {
-                return o1.getName().compareTo(o2.getName());
-            }
-        };
+        private static final Comparator<File> CASE_SENSITIVE = Comparator.comparing(File::getName);
 
-        private static final Comparator<File> CASE_INSENSITIVE = new Comparator<File>() {
-            public int compare(File o1, File o2) {
-                return o1.getName().compareToIgnoreCase(o2.getName());
-            }
-        };
+        private static final Comparator<File> CASE_INSENSITIVE = (o1, o2) -> o1.getName().compareToIgnoreCase(o2.getName());
 
-        private static final FileFilter DIRECTORIES = new FileFilter() {
-            public boolean accept(File pathname) {
-                return pathname.isDirectory();
-            }
-        };
+        private static final FileFilter DIRECTORIES = pathname -> pathname.isDirectory();
 
         public BreadthFirstDirectoryVisitor(Iterable<File> startingDirectories,
                 final FileFilter directoryFilter, FileFilter filter,
                 boolean compareCase) {
             this.directoryFilter = directoryFilter == null ? DIRECTORIES
-                    : new FileFilter() {
-                        public boolean accept(File pathname) {
-                            return pathname.isDirectory()
-                                    && directoryFilter.accept(pathname);
-                        }
-                    };
+                    : pathname -> pathname.isDirectory()
+					        && directoryFilter.accept(pathname);
             this.filter = filter;
             comparator = compareCase ? CASE_SENSITIVE : CASE_INSENSITIVE;
             for (File directory : startingDirectories) {
@@ -147,17 +137,20 @@ public class DirectoryVisitor implements Iterable<File> {
             }
         }
 
-        public boolean hasNext() {
+        @Override
+		public boolean hasNext() {
             ensureNextFileIsPresentInQueue();
             return !fileQueue.isEmpty();
         }
 
-        public File next() {
+        @Override
+		public File next() {
             ensureNextFileIsPresentInQueue();
             return fileQueue.removeFirst();
         }
 
-        public void remove() {
+        @Override
+		public void remove() {
             throw new UnsupportedOperationException();
         }
     }

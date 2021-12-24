@@ -31,5 +31,5 @@ public interface ExceptionalConsumer<T, E extends Exception> {
 	 * @param t the input
 	 * @throws E if the call throws an exception
 	 */
-	public void accept(T t) throws E;
+	void accept(T t) throws E;
 }

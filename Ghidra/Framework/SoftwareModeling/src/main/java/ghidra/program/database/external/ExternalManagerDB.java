@@ -16,25 +16,52 @@
 package ghidra.program.database.external;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import db.*;
+import db.DBConstants;
+import db.DBHandle;
+import db.DBRecord;
+import db.RecordIterator;
 import ghidra.framework.store.FileSystem;
 import ghidra.program.database.ManagerDB;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.database.external.ExternalLocationDB.ExternalData;
 import ghidra.program.database.function.FunctionManagerDB;
 import ghidra.program.database.map.AddressMap;
-import ghidra.program.database.symbol.*;
-import ghidra.program.model.address.*;
+import ghidra.program.database.symbol.CodeSymbol;
+import ghidra.program.database.symbol.LibrarySymbol;
+import ghidra.program.database.symbol.NamespaceManager;
+import ghidra.program.database.symbol.SymbolDB;
+import ghidra.program.database.symbol.SymbolManager;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressSpace;
 import ghidra.program.model.data.DataType;
 import ghidra.program.model.listing.Function;
 import ghidra.program.model.listing.Library;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.ExternalLocation;
+import ghidra.program.model.symbol.ExternalLocationIterator;
+import ghidra.program.model.symbol.ExternalManager;
+import ghidra.program.model.symbol.Namespace;
+import ghidra.program.model.symbol.RefType;
+import ghidra.program.model.symbol.ReferenceManager;
+import ghidra.program.model.symbol.SourceType;
+import ghidra.program.model.symbol.Symbol;
+import ghidra.program.model.symbol.SymbolIterator;
+import ghidra.program.model.symbol.SymbolType;
+import ghidra.program.model.symbol.SymbolUtilities;
 import ghidra.program.util.LanguageTranslator;
 import ghidra.util.Lock;
 import ghidra.util.Msg;
-import ghidra.util.exception.*;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.DuplicateNameException;
+import ghidra.util.exception.InvalidInputException;
+import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
 
 /**
@@ -98,10 +125,7 @@ public class ExternalManagerDB implements ManagerDB, ExternalManager {
 	@Override
 	public void programReady(int openMode, int currentRevision, TaskMonitor monitor)
 			throws IOException, CancelledException {
-		if (openMode != DBConstants.UPGRADE) {
-			return;
-		}
-		if (upgradeOldExtRefAdapter(monitor)) {
+		if ((openMode != DBConstants.UPGRADE) || upgradeOldExtRefAdapter(monitor)) {
 			return;
 		}
 	}
@@ -128,10 +152,7 @@ public class ExternalManagerDB implements ManagerDB, ExternalManager {
 					SourceType.USER_DEFINED);
 				nameMap.put(rec.getKey(), name);
 			}
-			catch (DuplicateNameException e) {
-				// ignore
-			}
-			catch (InvalidInputException e) {
+			catch (DuplicateNameException | InvalidInputException e) {
 				// ignore
 			}
 			monitor.setProgress(++cnt);
@@ -167,10 +188,7 @@ public class ExternalManagerDB implements ManagerDB, ExternalManager {
 					userDefined ? SourceType.USER_DEFINED : SourceType.IMPORTED, opIndex,
 					RefType.DATA);
 			}
-			catch (DuplicateNameException e) {
-				Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-			}
-			catch (InvalidInputException e) {
+			catch (DuplicateNameException | InvalidInputException e) {
 				Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
 			}
 			monitor.setProgress(++cnt);
@@ -323,18 +341,16 @@ public class ExternalManagerDB implements ManagerDB, ExternalManager {
 			ExternalLocationDB extLoc =
 				(ExternalLocationDB) getExtLocation(extNamespace, extLabel, extAddr, reuseExisting);
 
-			if (extLoc != null) {
-				// if there is already a location with the address, then we must use it
-				if (extAddr != null || reuseExisting) {
-					if (extLabel != null && !extLabel.equals(extLoc.getLabel())) {
-						extLoc.setLabel(extLabel, sourceType);
-					}
-					if (isFunction) {
-						// transform to a function if needed
-						extLoc = (ExternalLocationDB) createFunction(extLoc).getExternalLocation();
-					}
-					return extLoc;
+			// if there is already a location with the address, then we must use it
+			if ((extLoc != null) && (extAddr != null || reuseExisting)) {
+				if (extLabel != null && !extLabel.equals(extLoc.getLabel())) {
+					extLoc.setLabel(extLabel, sourceType);
 				}
+				if (isFunction) {
+					// transform to a function if needed
+					extLoc = (ExternalLocationDB) createFunction(extLoc).getExternalLocation();
+				}
+				return extLoc;
 			}
 			// ok can't or don't want to reuse an existing one, so make a new one.
 			SymbolDB s;
@@ -469,10 +485,8 @@ public class ExternalManagerDB implements ManagerDB, ExternalManager {
 	private ExternalLocation findMatchingLocationByAddress(List<ExternalLocation> locations,
 			Address extAddr, boolean reuseExisting) {
 		for (ExternalLocation externalLocation : locations) {
-			if (extAddr.equals(externalLocation.getAddress())) {
-				if (reuseExisting || externalLocation.getLabel() == null) {
-					return externalLocation;
-				}
+			if (extAddr.equals(externalLocation.getAddress()) && (reuseExisting || externalLocation.getLabel() == null)) {
+				return externalLocation;
 			}
 		}
 		return null;
@@ -841,11 +855,7 @@ public class ExternalManagerDB implements ManagerDB, ExternalManager {
 				return null;
 			}
 
-			if (matchingAddress == null) {
-				return externalLocation;
-			}
-
-			if (matchingAddress.equals(externalLocation.getAddress())) {
+			if ((matchingAddress == null) || matchingAddress.equals(externalLocation.getAddress())) {
 				return externalLocation;
 			}
 			return null;

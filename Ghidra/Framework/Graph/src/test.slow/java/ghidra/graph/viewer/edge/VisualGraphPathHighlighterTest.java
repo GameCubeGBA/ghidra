@@ -15,13 +15,18 @@
  */
 package ghidra.graph.viewer.edge;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.Test;
 
-import ghidra.graph.graphs.*;
+import ghidra.graph.graphs.AbstractTestVertex;
+import ghidra.graph.graphs.LabelTestVertex;
+import ghidra.graph.graphs.TestEdge;
 import ghidra.graph.support.TestVisualGraph;
 import ghidra.graph.viewer.AbstractVisualGraphTest;
 import ghidra.graph.viewer.PathHighlightMode;
@@ -39,9 +44,7 @@ public class VisualGraphPathHighlighterTest extends AbstractVisualGraphTest {
 	@Override
 	protected TestVisualGraph buildGraph() {
 
-		// each test will populate the graph as needed 
-		TestVisualGraph g = new TestVisualGraph();
-		return g;
+		return new TestVisualGraph();
 	}
 
 	@Override

@@ -36,6 +36,6 @@ public interface QCallback<I, R> {
 	 * transient messages.
 	 * @return The return value resulting from processing the item.
 	 */
-	public R process(I item, TaskMonitor monitor) throws Exception;
+	R process(I item, TaskMonitor monitor) throws Exception;
 
 }

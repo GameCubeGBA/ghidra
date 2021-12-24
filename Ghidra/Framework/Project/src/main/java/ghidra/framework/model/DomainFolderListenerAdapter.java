@@ -16,9 +16,9 @@
  */
 package ghidra.framework.model;
 
-import ghidra.framework.store.FileSystem;
-
 import java.lang.reflect.Method;
+
+import ghidra.framework.store.FileSystem;
 
 /**
  * Adapter for the domain folder change listener.
@@ -38,10 +38,7 @@ public abstract class DomainFolderListenerAdapter implements DomainFolderChangeL
 				foundStateChangedMethod = true;
 			}
 		}
-		catch (SecurityException e) {
-			// ignore
-		}
-		catch (NoSuchMethodException e) {
+		catch (SecurityException | NoSuchMethodException e) {
 			// ignore
 		}
 		enableStateChangeCallback = foundStateChangedMethod;

@@ -28,25 +28,30 @@ public class ListIterator<T> implements IteratorSTL<T> {
 		this.node = node;
 	}
 	
+	@Override
 	public void assign( IteratorSTL<T> otherIterator ) {
 		ListIterator<T> other = (ListIterator<T>)otherIterator;
 		this.list = other.list;
 		this.root = other.root;
 		this.node = other.node;
 	}
+	@Override
 	public IteratorSTL<T> copy() {
-		return new ListIterator<T>( list, root, node );
+		return new ListIterator<>( list, root, node );
 	}
 
+	@Override
 	public boolean isBegin() {
 		return node == root.next;
 	}
 
+	@Override
 	public boolean isEnd() {
 		return node == root;
 	}
 	
 	
+	@Override
 	public IteratorSTL<T> decrement() {
 		if (node.prev == root) {
 			throw new IndexOutOfBoundsException();
@@ -55,6 +60,7 @@ public class ListIterator<T> implements IteratorSTL<T> {
 		return this;
 	}
 
+	@Override
 	public T get() {
 		if (node == root) {
 			throw new IndexOutOfBoundsException();
@@ -62,28 +68,33 @@ public class ListIterator<T> implements IteratorSTL<T> {
 		return node.value;
 	}
 
+	@Override
 	public IteratorSTL<T> increment() {
 		node = node.next;
 		return this;
 	}
 
+	@Override
 	public IteratorSTL<T> increment(int count) {
 		for(int i=0;i<count;i++) {
 			increment();
 		}
 		return this;
 	}
+	@Override
 	public IteratorSTL<T> decrement( int n ) {
 		throw new UnsupportedOperationException();
 	}
+	@Override
 	public void insert(T value) {
-		ListNodeSTL<T> newNode = new ListNodeSTL<T>(node.prev, node, value);
+		ListNodeSTL<T> newNode = new ListNodeSTL<>(node.prev, node, value);
 		node.prev.next = newNode;
 		node.prev = newNode;
 		node = newNode;
 		list.adjustSize(1);
 	}
 
+	@Override
 	public void set(T value) {
 		if (root == node) {
 			throw new IndexOutOfBoundsException();

@@ -22,28 +22,28 @@ import ghidra.program.model.data.DataType;
  */
 public interface Parameter extends Variable {
 
-	public static final String RETURN_NAME = "<RETURN>";
+	String RETURN_NAME = "<RETURN>";
 
-	public static final int RETURN_ORIDINAL = -1;
-	public static final int UNASSIGNED_ORDINAL = -2;
+	int RETURN_ORIDINAL = -1;
+	int UNASSIGNED_ORDINAL = -2;
 
 	/**
 	 * Returns the ordinal (index) of this parameter within the function signature.
 	 */
-	public int getOrdinal();
+	int getOrdinal();
 
 	/**
 	 * @return true if this parameter is automatically generated based upon the associated
 	 * function calling convention and function signature.  An example of such a parameter 
 	 * include the "__return_storage_ptr__" parameter. 
 	 */
-	public boolean isAutoParameter();
+	boolean isAutoParameter();
 
 	/**
 	 * If this is an auto-parameter this method will indicate its type.
 	 * @return auto-parameter type of null if not applicable.
 	 */
-	public AutoParameterType getAutoParameterType();
+	AutoParameterType getAutoParameterType();
 
 	/**
 	 * If this parameter which was forced by the associated calling 
@@ -51,7 +51,7 @@ public interface Parameter extends Variable {
 	 * @return true if this parameter was forced to be passed as a pointer instead of its 
 	 * original formal type
 	 */
-	public boolean isForcedIndirect();
+	boolean isForcedIndirect();
 
 	/**
 	 * Get the original formal signature data type before a possible forced indirect was
@@ -61,5 +61,5 @@ public interface Parameter extends Variable {
 	 * @return Formal data type.  This type will only differ from the {@link #getDataType()}
 	 * value if this parameter isForcedIndirect.
 	 */
-	public DataType getFormalDataType();
+	DataType getFormalDataType();
 }

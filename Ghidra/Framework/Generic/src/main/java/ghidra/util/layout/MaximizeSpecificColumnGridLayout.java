@@ -15,7 +15,11 @@
  */
 package ghidra.util.layout;
 
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Insets;
+import java.awt.LayoutManager;
 
 /**
  * <CODE>MaximizeSpecificColumnGridLayout</CODE> is a row oriented grid type of layout.
@@ -146,8 +150,8 @@ public class MaximizeSpecificColumnGridLayout implements LayoutManager {
 
 	private int getTotalWidth(int[] individualWidths) {
 		int total = 0;
-		for (int i = 0; i < individualWidths.length; i++) {
-			total += individualWidths[i];
+		for (int individualWidth : individualWidths) {
+			total += individualWidth;
 		}
 		return total;
 	}
@@ -168,14 +172,12 @@ public class MaximizeSpecificColumnGridLayout implements LayoutManager {
 				while (foundOne) {
 					foundOne = false;
 					for (int i = 0; i < computedColumnWidths.length; i++) {
-						if ((maximizedColumns[i] == true) && (computedColumnWidths[i] == 0)) {
-							// This is a maximized that doesn't yet have a computed width.
-							if (desiredColumnWidths[i] < averageMaximizedWidth) {
-								computedColumnWidths[i] = desiredColumnWidths[i];
-								remainingMaximizedWidth -= computedColumnWidths[i];
-								remainingMaximizedCount--;
-								foundOne = true;
-							}
+						// This is a maximized that doesn't yet have a computed width.
+						if ((maximizedColumns[i] && (computedColumnWidths[i] == 0)) && (desiredColumnWidths[i] < averageMaximizedWidth)) {
+							computedColumnWidths[i] = desiredColumnWidths[i];
+							remainingMaximizedWidth -= computedColumnWidths[i];
+							remainingMaximizedCount--;
+							foundOne = true;
 						}
 					}
 					averageMaximizedWidth = (remainingMaximizedCount > 0)
@@ -185,7 +187,7 @@ public class MaximizeSpecificColumnGridLayout implements LayoutManager {
 
 				// Now just divide up whatever width remains among whatever maximized columns remain.
 				for (int i = 0; i < computedColumnWidths.length; i++) {
-					if ((maximizedColumns[i] == true) && (computedColumnWidths[i] == 0)) {
+					if (maximizedColumns[i] && (computedColumnWidths[i] == 0)) {
 						// This is a maximized that doesn't yet have a computed width.
 						computedColumnWidths[i] = averageMaximizedWidth;
 						remainingMaximizedWidth -= computedColumnWidths[i];
@@ -197,7 +199,7 @@ public class MaximizeSpecificColumnGridLayout implements LayoutManager {
 
 			// Each maximized gets width it wants and the rest will be divided.
 			for (int i = 0; i < desiredColumnWidths.length; i++) {
-				if (maximizedColumns[i] == true) {
+				if (maximizedColumns[i]) {
 					computedColumnWidths[i] = desiredColumnWidths[i];
 					remainingWidth -= computedColumnWidths[i];
 					remainingColumnCount--;
@@ -211,13 +213,11 @@ public class MaximizeSpecificColumnGridLayout implements LayoutManager {
 		while (foundOne) {
 			foundOne = false;
 			for (int i = 0; i < computedColumnWidths.length; i++) {
-				if (computedColumnWidths[i] == 0) {
-					if (desiredColumnWidths[i] < averageColumnWidth) {
-						computedColumnWidths[i] = desiredColumnWidths[i];
-						remainingWidth -= computedColumnWidths[i];
-						remainingColumnCount--;
-						foundOne = true;
-					}
+				if ((computedColumnWidths[i] == 0) && (desiredColumnWidths[i] < averageColumnWidth)) {
+					computedColumnWidths[i] = desiredColumnWidths[i];
+					remainingWidth -= computedColumnWidths[i];
+					remainingColumnCount--;
+					foundOne = true;
 				}
 			}
 			averageColumnWidth =
@@ -235,8 +235,8 @@ public class MaximizeSpecificColumnGridLayout implements LayoutManager {
 
 	private int getMaximizedCount() {
 		int count = 0;
-		for (int i = 0; i < maximizedColumns.length; i++) {
-			if (maximizedColumns[i] == true) {
+		for (boolean maximizedColumn : maximizedColumns) {
+			if (maximizedColumn) {
 				count++;
 			}
 		}
@@ -264,7 +264,7 @@ public class MaximizeSpecificColumnGridLayout implements LayoutManager {
 	private int getDesiredMaximizedWidth(int[] desiredWidths) {
 		int width = 0;
 		for (int i = 0; i < desiredWidths.length; i++) {
-			if (maximizedColumns[i] == true) {
+			if (maximizedColumns[i]) {
 				width += desiredWidths[i];
 			}
 		}

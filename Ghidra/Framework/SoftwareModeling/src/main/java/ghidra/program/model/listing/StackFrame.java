@@ -62,15 +62,15 @@ public interface StackFrame {
 	/**
 	 * Indicator for a Stack that grows negatively.
 	 */
-	public final static int GROWS_NEGATIVE = -1;
+	int GROWS_NEGATIVE = -1;
 	/**
 	 * Indicator for a Stack that grows positively.
 	 */
-	public final static int GROWS_POSITIVE = 1;
+	int GROWS_POSITIVE = 1;
 	/**
 	 * Indicator for a unknown stack parameter offset
 	 */
-	public static final int UNKNOWN_PARAM_OFFSET = (128 * 1024);
+	int UNKNOWN_PARAM_OFFSET = (128 * 1024);
 
 	/**
 	 * Get the function that this stack belongs to.
@@ -78,35 +78,35 @@ public interface StackFrame {
 	 *
 	 * @return the function
 	 */
-	public Function getFunction();
+	Function getFunction();
 
 	/**
 	 * Get the size of this stack frame in bytes.
 	 *
 	 * @return stack frame size
 	 */
-	public int getFrameSize();
+	int getFrameSize();
 
 	/**
 	 * Get the local portion of the stack frame in bytes.
 	 *
 	 * @return local frame size
 	 */
-	public int getLocalSize();
+	int getLocalSize();
 
 	/**
 	 * Get the parameter portion of the stack frame in bytes.
 	 *
 	 * @return parameter frame size
 	 */
-	public int getParameterSize();
+	int getParameterSize();
 
 	/**
 	 * Get the offset to the start of the parameters.
 	 *
 	 * @return offset
 	 */
-	public int getParameterOffset();
+	int getParameterOffset();
 
 //	/**
 //	 * Set the offset on the stack of the parameters.
@@ -119,27 +119,27 @@ public interface StackFrame {
 	 * Returns true if specified offset could correspond to a parameter
 	 * @param offset
 	 */
-	public boolean isParameterOffset(int offset);
+	boolean isParameterOffset(int offset);
 
 	/**
 	 * Set the size of the local stack in bytes.
 	 *
 	 * @param size size of local stack
 	 */
-	public void setLocalSize(int size);
+	void setLocalSize(int size);
 
 	/**
 	 * Set the return address stack offset.
 	 * @param offset offset of return address.
 	 */
-	public void setReturnAddressOffset(int offset);
+	void setReturnAddressOffset(int offset);
 
 	/**
 	 * Get the return address stack offset.
 	 *
 	 * @return return address offset.
 	 */
-	public int getReturnAddressOffset();
+	int getReturnAddressOffset();
 
 	/**
 	 * Get the stack variable containing offset.  This may fall in
@@ -147,7 +147,7 @@ public interface StackFrame {
 	 *
 	 * @param offset offset of on stack to get variable.
 	 */
-	public Variable getVariableContaining(int offset);
+	Variable getVariableContaining(int offset);
 
 	/**
 	 * Create a stack variable.  It could be a parameter or a local depending
@@ -160,7 +160,7 @@ public interface StackFrame {
 	 * @throws InvalidInputException if data type is not a fixed length or variable name is invalid.
 	 * @throws VariableSizeException if data type size is too large based upon storage constraints.
 	 */
-	public Variable createVariable(String name, int offset, DataType dataType, SourceType source)
+	Variable createVariable(String name, int offset, DataType dataType, SourceType source)
 			throws DuplicateNameException, InvalidInputException;
 
 	/**
@@ -168,7 +168,7 @@ public interface StackFrame {
 	 *
 	 * @param offset Offset onto the stack to be cleared.
 	 */
-	public void clearVariable(int offset);
+	void clearVariable(int offset);
 
 	/**
 	 * Get all defined stack variables.
@@ -176,21 +176,21 @@ public interface StackFrame {
 	 *
 	 * @return an array of parameters.
 	 */
-	public Variable[] getStackVariables();
+	Variable[] getStackVariables();
 
 	/**
 	 * Get all defined parameters as stack variables.
 	 *
 	 * @return an array of parameters.
 	 */
-	public Variable[] getParameters();
+	Variable[] getParameters();
 
 	/**
 	 * Get all defined local variables.
 	 *
 	 * @return an array of all local variables
 	 */
-	public Variable[] getLocals();
+	Variable[] getLocals();
 
 	/**
 	 * A stack that grows negative has local references negative and
@@ -199,5 +199,5 @@ public interface StackFrame {
 	 *
 	 * @return true if the stack grows in a negative direction.
 	 */
-	public boolean growsNegative();
+	boolean growsNegative();
 }

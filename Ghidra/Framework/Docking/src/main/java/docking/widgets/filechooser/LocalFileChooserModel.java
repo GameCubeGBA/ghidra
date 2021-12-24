@@ -40,7 +40,7 @@ public class LocalFileChooserModel implements GhidraFileChooserModel {
 	private FileSystemView fsView = FileSystemView.getFileSystemView();
 	private Map<File, String> rootDescripMap = new HashMap<>();
 	private Map<File, Icon> rootIconMap = new HashMap<>();
-	private File[] roots = new File[0];
+	private File[] roots = {};
 	private GhidraFileChooserListener listener;
 
 	/**
@@ -230,8 +230,8 @@ public class LocalFileChooserModel implements GhidraFileChooserModel {
 	@Override
 	public boolean isDirectory(File file) {
 		File[] localRoots = getRoots();
-		for (int i = 0; i < localRoots.length; i++) {
-			if (localRoots[i].equals(file)) {
+		for (File localRoot : localRoots) {
+			if (localRoot.equals(file)) {
 				return true;
 			}
 		}

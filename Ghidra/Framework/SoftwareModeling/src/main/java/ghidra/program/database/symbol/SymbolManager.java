@@ -16,29 +16,76 @@
 package ghidra.program.database.symbol;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
-import db.*;
-import ghidra.program.database.*;
+import db.BooleanField;
+import db.ByteField;
+import db.DBConstants;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.LongField;
+import db.RecordIterator;
+import db.Schema;
+import db.StringField;
+import db.Table;
+import ghidra.program.database.DBObjectCache;
+import ghidra.program.database.ManagerDB;
+import ghidra.program.database.ProgramDB;
 import ghidra.program.database.code.CodeManager;
 import ghidra.program.database.external.ExternalManagerDB;
 import ghidra.program.database.function.FunctionManagerDB;
 import ghidra.program.database.map.AddressMap;
 import ghidra.program.database.references.ReferenceDBManager;
-import ghidra.program.database.util.*;
-import ghidra.program.model.address.*;
+import ghidra.program.database.util.EmptyRecordIterator;
+import ghidra.program.database.util.FieldMatchQuery;
+import ghidra.program.database.util.Query;
+import ghidra.program.database.util.QueryRecordIterator;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressIterator;
+import ghidra.program.model.address.AddressMapImpl;
+import ghidra.program.model.address.AddressRange;
+import ghidra.program.model.address.AddressRangeImpl;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.address.OldGenericNamespaceAddress;
 import ghidra.program.model.data.DataType;
-import ghidra.program.model.listing.*;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.listing.CircularDependencyException;
+import ghidra.program.model.listing.Function;
+import ghidra.program.model.listing.GhidraClass;
+import ghidra.program.model.listing.Library;
+import ghidra.program.model.listing.LocalVariableImpl;
+import ghidra.program.model.listing.Variable;
+import ghidra.program.model.listing.VariableStorage;
+import ghidra.program.model.symbol.LabelHistory;
+import ghidra.program.model.symbol.Namespace;
+import ghidra.program.model.symbol.Reference;
+import ghidra.program.model.symbol.SourceType;
+import ghidra.program.model.symbol.Symbol;
+import ghidra.program.model.symbol.SymbolIterator;
+import ghidra.program.model.symbol.SymbolTable;
+import ghidra.program.model.symbol.SymbolType;
+import ghidra.program.model.symbol.SymbolUtilities;
 import ghidra.program.util.ChangeManager;
 import ghidra.program.util.LanguageTranslator;
-import ghidra.util.*;
-import ghidra.util.exception.*;
+import ghidra.util.Lock;
+import ghidra.util.Msg;
+import ghidra.util.UserSearchUtils;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.DuplicateNameException;
+import ghidra.util.exception.InvalidInputException;
+import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
 
 public class SymbolManager implements SymbolTable, ManagerDB {
@@ -469,11 +516,7 @@ public class SymbolManager implements SymbolTable, ManagerDB {
 				"A symbol named " + name + " already exists at this address!");
 		}
 
-		if (name.length() == 0) {
-			return;
-		}
-
-		if (type.allowsDuplicates()) {
+		if ((name.length() == 0) || type.allowsDuplicates()) {
 			return;
 		}
 
@@ -752,8 +795,7 @@ public class SymbolManager implements SymbolTable, ManagerDB {
 			try {
 				Address a = getDynamicAddress(symbolID);
 				if (a.getAddressSpace().isMemorySpace()) {
-					s = new CodeSymbol(this, cache, a, symbolID);
-					return s;
+					return new CodeSymbol(this, cache, a, symbolID);
 				}
 			}
 			catch (Exception e) {
@@ -774,8 +816,7 @@ public class SymbolManager implements SymbolTable, ManagerDB {
 			if (s != null) {
 				return s;
 			}
-			s = new CodeSymbol(this, cache, addr, symbolID);
-			return s;
+			return new CodeSymbol(this, cache, addr, symbolID);
 		}
 		finally {
 			lock.release();
@@ -901,13 +942,9 @@ public class SymbolManager implements SymbolTable, ManagerDB {
 		}
 
 		// check for default external symbol
-		if (namespace.isExternal() && SymbolUtilities.isPossibleDefaultExternalName(name)) {
-			return searchNamespaceForSymbol(namespace, name, address);
-		}
-
 		// also check for possible default parameter or local variable symbol
-		if (namespace instanceof Function &&
-			SymbolUtilities.isPossibleDefaultLocalOrParamName(name)) {
+		if ((namespace.isExternal() && SymbolUtilities.isPossibleDefaultExternalName(name)) || (namespace instanceof Function &&
+			SymbolUtilities.isPossibleDefaultLocalOrParamName(name))) {
 			return searchNamespaceForSymbol(namespace, name, address);
 		}
 
@@ -967,13 +1004,9 @@ public class SymbolManager implements SymbolTable, ManagerDB {
 		}
 
 		// if name is possible default parameter or local variable name, must do brute force search
-		if (namespace instanceof Function &&
-			SymbolUtilities.isPossibleDefaultLocalOrParamName(name)) {
-			return searchNamespaceForSymbols(name, namespace);
-		}
-
 		// if the name is a possible default external name, do brute force search
-		if (namespace.isExternal() && SymbolUtilities.isPossibleDefaultExternalName(name)) {
+		if ((namespace instanceof Function &&
+			SymbolUtilities.isPossibleDefaultLocalOrParamName(name)) || (namespace.isExternal() && SymbolUtilities.isPossibleDefaultExternalName(name))) {
 			return searchNamespaceForSymbols(name, namespace);
 		}
 
@@ -1041,13 +1074,9 @@ public class SymbolManager implements SymbolTable, ManagerDB {
 		}
 
 		// if name is possible default parameter or local variable name, must do brute force search
-		if (namespace instanceof Function &&
-			SymbolUtilities.isPossibleDefaultLocalOrParamName(name)) {
-			return searchNamespaceForFirstSymbol(name, namespace, test);
-		}
-
 		// if the name is a possible default external name, do brute force search
-		if (namespace.isExternal() && SymbolUtilities.isPossibleDefaultExternalName(name)) {
+		if ((namespace instanceof Function &&
+			SymbolUtilities.isPossibleDefaultLocalOrParamName(name)) || (namespace.isExternal() && SymbolUtilities.isPossibleDefaultExternalName(name))) {
 			return searchNamespaceForFirstSymbol(name, namespace, test);
 		}
 
@@ -1575,8 +1604,7 @@ public class SymbolManager implements SymbolTable, ManagerDB {
 		long addr = record.getLongValue(SymbolDatabaseAdapter.SYMBOL_ADDR_COL);
 		byte typeID = record.getByteValue(SymbolDatabaseAdapter.SYMBOL_TYPE_COL);
 		SymbolType type = SymbolType.getSymbolType(typeID);
-		SymbolDB s = makeSymbol(addrMap.decodeAddress(addr), record, type);
-		return s;
+		return makeSymbol(addrMap.decodeAddress(addr), record, type);
 	}
 
 	SymbolDB getSymbol(DBRecord record) {
@@ -1593,7 +1621,7 @@ public class SymbolManager implements SymbolTable, ManagerDB {
 		}
 	}
 
-	private class SingleSymbolIterator implements SymbolIterator {
+	private static class SingleSymbolIterator implements SymbolIterator {
 
 		Symbol sym;
 
@@ -1771,7 +1799,7 @@ public class SymbolManager implements SymbolTable, ManagerDB {
 		}
 	}
 
-	private class SymbolQueryIterator implements SymbolIterator {
+	private static class SymbolQueryIterator implements SymbolIterator {
 		private SymbolIterator it;
 		private Symbol nextMatch;
 		private Pattern pattern;
@@ -2069,8 +2097,7 @@ public class SymbolManager implements SymbolTable, ManagerDB {
 	public SymbolIterator getExternalSymbols(String name) {
 		lock.acquire();
 		try {
-			SymbolIterator symIter = new ExternalSymbolNameRecordIterator(name);
-			return symIter;
+			return new ExternalSymbolNameRecordIterator(name);
 		}
 		catch (IOException e) {
 			program.dbError(e);
@@ -2513,10 +2540,7 @@ public class SymbolManager implements SymbolTable, ManagerDB {
 	private SourceType adjustSourceTypeIfNecessary(String name, SymbolType type, SourceType source,
 			VariableStorage storage) {
 
-		if (type == SymbolType.PARAMETER && SymbolUtilities.isDefaultParameterName(name)) {
-			return SourceType.DEFAULT;
-		}
-		if (SymbolUtilities.isDefaultLocalName(program, name, storage)) {
+		if ((type == SymbolType.PARAMETER && SymbolUtilities.isDefaultParameterName(name)) || SymbolUtilities.isDefaultLocalName(program, name, storage)) {
 			return SourceType.DEFAULT;
 		}
 		return source;
@@ -2591,11 +2615,7 @@ public class SymbolManager implements SymbolTable, ManagerDB {
 
 	private void checkIsValidNamespaceForMyProgram(Namespace namespace) {
 
-		if (namespace == null) {
-			return;
-		}
-
-		if (namespace == program.getGlobalNamespace()) {
+		if ((namespace == null) || (namespace == program.getGlobalNamespace())) {
 			return;
 		}
 
@@ -2871,11 +2891,8 @@ public class SymbolManager implements SymbolTable, ManagerDB {
 	 */
 	private Symbol findSymbolToPromote(Symbol matching, Symbol primary, SourceType source) {
 		// if the function is default, then the primary will be promoted
-		if (source == SourceType.DEFAULT) {
-			return primary;
-		}
 		// if the primary is a default, it needs to be deleted, so return it as the "promoted" symbol
-		if (primary != null && primary.isDynamic()) {
+		if ((source == SourceType.DEFAULT) || (primary != null && primary.isDynamic())) {
 			return primary;
 		}
 		// otherwise return a symbol that has the same name and namespce as the function (if it exists)
@@ -2945,11 +2962,9 @@ public class SymbolManager implements SymbolTable, ManagerDB {
 	private SourceType validateSource(SourceType source, String name, Address addr,
 			SymbolType type) {
 		validateSource(name, addr, type, source);
-		if (addr.isExternalAddress() && source != SourceType.DEFAULT) {
-			if (StringUtils.isBlank(name) ||
-				SymbolUtilities.isReservedDynamicLabelName(name, addrMap.getAddressFactory())) {
-				return SourceType.DEFAULT;
-			}
+		if ((addr.isExternalAddress() && source != SourceType.DEFAULT) && (StringUtils.isBlank(name) ||
+			SymbolUtilities.isReservedDynamicLabelName(name, addrMap.getAddressFactory()))) {
+			return SourceType.DEFAULT;
 		}
 		return source;
 	}
@@ -2975,12 +2990,8 @@ public class SymbolManager implements SymbolTable, ManagerDB {
 		}
 
 		Function function = program.getFunctionManager().getFunctionAt(addr);
-		if (function == null || function.getSymbol().getSource() != SourceType.DEFAULT) {
-			return null;
-		}
-
 		// don't promote default functions to new code symbols if the code symbol is in a function namespace.
-		if (isInFunctionNamespace(namespace)) {
+		if (function == null || function.getSymbol().getSource() != SourceType.DEFAULT || isInFunctionNamespace(namespace)) {
 			return null;
 		}
 		Symbol functionSym = function.getSymbol();

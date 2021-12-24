@@ -15,9 +15,12 @@
  */
 package ghidra.program.model.data;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.Set;
+import java.util.TreeSet;
 
 import ghidra.util.Msg;
 
@@ -82,7 +85,7 @@ public class CompositeTestUtils {
 	}
 
 	private static Comparator<Composite> NAME_COMPARATOR =
-		(o1, o2) -> o1.getPathName().compareTo(o2.getPathName());
+		Comparator.comparing(Composite::getPathName);
 
 	/**
 	 * Dump composite details for examination or test comparison.

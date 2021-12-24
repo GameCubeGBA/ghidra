@@ -16,7 +16,7 @@
  */
 package ghidra.sleigh.grammar;
 
-import java.util.*;
+import java.util.List;
 
 public final class LocationUtil {
     private LocationUtil() { }

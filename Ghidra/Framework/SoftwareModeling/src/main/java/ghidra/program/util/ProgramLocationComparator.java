@@ -15,7 +15,9 @@
  */
 package ghidra.program.util;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
 
 import ghidra.program.model.listing.Program;
 
@@ -105,10 +107,7 @@ public class ProgramLocationComparator implements Comparator<ProgramLocation> {
 			return -1;
 		}
 		result = Integer.compare(ordinal1.intValue(), ordinal2.intValue());
-		if (result != 0) {
-			return result;
-		}
-		return 0;
+		return result;
 	}
 
 }

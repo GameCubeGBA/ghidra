@@ -23,7 +23,6 @@ import org.jdom.Element;
 import ghidra.pcodeCPort.error.LowlevelError;
 import ghidra.pcodeCPort.pcoderaw.VarnodeData;
 import ghidra.pcodeCPort.translate.Translate;
-import ghidra.pcodeCPort.utils.*;
 /// \brief A region where processor data is stored
 ///
 /// An AddrSpace (Address Space) is an arbitrary sequence of
@@ -54,11 +53,9 @@ import ghidra.pcodeCPort.utils.*;
 ///     - \b unique       There is always a \e unique address space used
 ///                       as a pool for temporary registers. (See UniqueSpace)
 ///
-
-import ghidra.pcodeCPort.error.LowlevelError;
-import ghidra.pcodeCPort.pcoderaw.VarnodeData;
-import ghidra.pcodeCPort.translate.Translate;
-import ghidra.pcodeCPort.utils.*;
+import ghidra.pcodeCPort.utils.MutableInt;
+import ghidra.pcodeCPort.utils.Utils;
+import ghidra.pcodeCPort.utils.XmlUtils;
 
 public class AddrSpace {
 
@@ -355,7 +352,7 @@ public class AddrSpace {
 	}
 
 	public String toString(long offset) {
-		StringBuffer s = new StringBuffer();
+		StringBuilder s = new StringBuilder();
 		int addrSize = getAddrSize();
 		int padLength = 2 * addrSize;
 		String longString = Long.toHexString(offset >>> scale);

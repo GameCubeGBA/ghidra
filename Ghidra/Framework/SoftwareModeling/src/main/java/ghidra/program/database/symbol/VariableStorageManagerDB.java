@@ -18,8 +18,12 @@ package ghidra.program.database.symbol;
 import java.io.IOException;
 import java.util.List;
 
-import db.*;
-import ghidra.program.database.*;
+import db.DBHandle;
+import db.DBRecord;
+import db.RecordIterator;
+import ghidra.program.database.DBObjectCache;
+import ghidra.program.database.DatabaseObject;
+import ghidra.program.database.ProgramDB;
 import ghidra.program.database.map.AddressMap;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSpace;
@@ -29,7 +33,9 @@ import ghidra.program.util.LanguageTranslator;
 import ghidra.util.Lock;
 import ghidra.util.Msg;
 import ghidra.util.datastruct.WeakValueHashMap;
-import ghidra.util.exception.*;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.InvalidInputException;
+import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
 
 public class VariableStorageManagerDB {
@@ -42,7 +48,7 @@ public class VariableStorageManagerDB {
 
 	private DBObjectCache<MyVariableStorage> cache = new DBObjectCache<>(256);
 	private WeakValueHashMap<Long, MyVariableStorage> cacheMap =
-		new WeakValueHashMap<Long, MyVariableStorage>(256);
+		new WeakValueHashMap<>(256);
 
 	/**
 	 * Construct a new variable manager.

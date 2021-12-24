@@ -34,10 +34,7 @@ public class DominantPair<K, V> extends Pair<K, V> {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((first == null) ? 0 : first.hashCode());
-		return result;
+		return Objects.hash(first);
 	}
 
 	@Override
@@ -45,10 +42,7 @@ public class DominantPair<K, V> extends Pair<K, V> {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
 		}
 		DominantPair<?, ?> other = (DominantPair<?, ?>) obj;

@@ -77,11 +77,9 @@ public class EquationCat extends PatternEquation {
 		if (!res) return false;
 		state.base = cur_base;			// Restore base and offset
 		state.offset = cur_offset;
-		if (state.cur_rightmost == -1) {
-			if ((state.size != -1)&&(cur_rightmost != -1)&&(cur_size != -1)) {
-				state.cur_rightmost = cur_rightmost;
-				state.size += cur_size;
-			}
+		if ((state.cur_rightmost == -1) && ((state.size != -1)&&(cur_rightmost != -1)&&(cur_size != -1))) {
+			state.cur_rightmost = cur_rightmost;
+			state.size += cur_size;
 		}
 		return true;
 	}

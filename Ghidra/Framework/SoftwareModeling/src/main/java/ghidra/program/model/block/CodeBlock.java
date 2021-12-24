@@ -43,7 +43,7 @@ public interface CodeBlock extends AddressSetView {
      *
      * @return the first start address of the block.
      */
-    public Address getFirstStartAddress();
+    Address getFirstStartAddress();
     
     /** 
      * Get all the entry points to this block.  Depending on the
@@ -53,7 +53,7 @@ public interface CodeBlock extends AddressSetView {
      * @return an array of entry points to this block.
      * a zero length array if there are no entry points.
      */
-    public Address[] getStartAddresses();
+    Address[] getStartAddresses();
     
     /** 
      * Return the name of the block.
@@ -61,7 +61,7 @@ public interface CodeBlock extends AddressSetView {
      * @return name of block,
      *  normally the symbol at the starting address
      */
-    public String getName();
+    String getName();
     
     /**
      * Return, in theory, how things flow out of this node.
@@ -74,7 +74,7 @@ public interface CodeBlock extends AddressSetView {
      *
      * @return flow type of this node
      */
-    public FlowType getFlowType();
+    FlowType getFlowType();
     
     /**
      * Get the number of CodeBlocks that flow into this CodeBlock.
@@ -84,7 +84,7 @@ public interface CodeBlock extends AddressSetView {
      * @throws CancelledException if the monitor cancels the operation.
      * @see #getSources(ghidra.util.task.TaskMonitor)
      */
-    public int getNumSources(TaskMonitor monitor) throws CancelledException;
+    int getNumSources(TaskMonitor monitor) throws CancelledException;
     
     /**
      * Get an Iterator over the CodeBlocks that flow into this CodeBlock.
@@ -92,7 +92,7 @@ public interface CodeBlock extends AddressSetView {
      * @return An iterator over CodeBlocks referencing this Block.
      * @throws CancelledException if the monitor cancels the operation.
      */
-    public CodeBlockReferenceIterator getSources(TaskMonitor monitor) throws CancelledException;
+    CodeBlockReferenceIterator getSources(TaskMonitor monitor) throws CancelledException;
     
     /**
      * Get the number of CodeBlocks this block flows to.
@@ -102,7 +102,7 @@ public interface CodeBlock extends AddressSetView {
      * @throws CancelledException if the monitor cancels the operation.
      * @see #getDestinations(ghidra.util.task.TaskMonitor)
      */
-    public int getNumDestinations(TaskMonitor monitor) throws CancelledException;
+    int getNumDestinations(TaskMonitor monitor) throws CancelledException;
     
     /**
      * Get an Iterator over the CodeBlocks that are flowed to from this
@@ -111,11 +111,11 @@ public interface CodeBlock extends AddressSetView {
      * @return An iterator over CodeBlocks referred to by this Block.
      * @throws CancelledException if the monitor cancels the operation.
      */
-    public CodeBlockReferenceIterator getDestinations(TaskMonitor monitor) throws CancelledException;
+    CodeBlockReferenceIterator getDestinations(TaskMonitor monitor) throws CancelledException;
     
     /**
      * Get the model instance which was used to generate this block.
      * @return the model used to build this CodeBlock
      */
-    public CodeBlockModel getModel();
+    CodeBlockModel getModel();
 }

@@ -45,8 +45,7 @@ public class TestExceptionTracker {
 
 				// grab the state of the test thread, but chop out some uninteresting calls
 				StackTraceElement[] fullTrace = entry.getValue();
-				StackTraceElement[] filtered = TestThread.filterTrace(fullTrace);
-				return filtered;
+				return TestThread.filterTrace(fullTrace);
 			}
 		}
 
@@ -59,9 +58,7 @@ public class TestExceptionTracker {
 
 	public Throwable getCombinedException() {
 
-		TestReportingException exception =
-			new TestReportingException(threadName, t, testThreadTrace);
-		return exception;
+		return new TestReportingException(threadName, t, testThreadTrace);
 	}
 
 	public void printStackTrace() {

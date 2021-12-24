@@ -15,12 +15,19 @@
  */
 package ghidra.program.model.block;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressObjectMap;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetView;
 import ghidra.program.model.listing.Listing;
 import ghidra.program.model.listing.Program;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.FlowType;
+import ghidra.program.model.symbol.RefType;
+import ghidra.program.model.symbol.Symbol;
 import ghidra.util.Msg;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
@@ -130,9 +137,9 @@ public class MultEntSubModel implements SubroutineBlockModel {
 		bbModel = new SimpleBlockModel(program, includeExternals);
 
 		// Create the todoStack and initialize it with instr; also initialize the list for entryPts.
-		ArrayList<Address> entryPtList = new ArrayList<Address>();
-		LinkedList<Address> todoList = new LinkedList<Address>();   // list of address destinations to follow
-		LinkedList<CodeBlock> srcList = new LinkedList<CodeBlock>();    // list of blocks to process for possible sources
+		ArrayList<Address> entryPtList = new ArrayList<>();
+		LinkedList<Address> todoList = new LinkedList<>();   // list of address destinations to follow
+		LinkedList<CodeBlock> srcList = new LinkedList<>();    // list of blocks to process for possible sources
 		todoList.addFirst(addr);
 
 		// Build model-M subroutine from basic blocks
@@ -164,12 +171,8 @@ public class MultEntSubModel implements SubroutineBlockModel {
 			}
 
 			CodeBlock bblock = bbModel.getFirstCodeBlockContaining(a, monitor);
-			if (bblock == null) {
-				continue;
-			}
-
 			// Verify that the block contains instructions
-			if (listing.getInstructionAt(bblock.getMinAddress()) == null) {
+			if ((bblock == null) || (listing.getInstructionAt(bblock.getMinAddress()) == null)) {
 				continue;
 			}
 

@@ -137,8 +137,7 @@ public class TableModelWrapper<ROW_OBJECT>
 		}
 
 		ROW_OBJECT rowObject = wrappedModel.getRowObject(modelRow);
-		boolean accepts = tableFilter.acceptsRow(rowObject);
-		return accepts;
+		return tableFilter.acceptsRow(rowObject);
 	}
 
 	@Override
@@ -222,8 +221,7 @@ public class TableModelWrapper<ROW_OBJECT>
 			return modelRow;
 		}
 
-		int viewRow = getViewRow(modelRow);
-		return viewRow;
+		return getViewRow(modelRow);
 	}
 
 	@Override

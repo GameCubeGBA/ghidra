@@ -17,7 +17,9 @@ package generic.jar;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import ghidra.framework.Application;
 import ghidra.util.exception.AssertException;
@@ -58,31 +60,31 @@ public class ApplicationModule implements Comparable<ApplicationModule> {
 	}
 
 	public boolean isExtension() {
-		return moduleDir.getParentFile().getName().equalsIgnoreCase("Extensions");
+		return "Extensions".equalsIgnoreCase(moduleDir.getParentFile().getName());
 	}
 
 	public boolean isFramework() {
-		return moduleDir.getParentFile().getName().equalsIgnoreCase("Framework");
+		return "Framework".equalsIgnoreCase(moduleDir.getParentFile().getName());
 	}
 
 	public boolean isDebug() {
-		return moduleDir.getParentFile().getName().equalsIgnoreCase("Debug");
+		return "Debug".equalsIgnoreCase(moduleDir.getParentFile().getName());
 	}
 
 	public boolean isProcessor() {
-		return moduleDir.getParentFile().getName().equalsIgnoreCase("Processors");
+		return "Processors".equalsIgnoreCase(moduleDir.getParentFile().getName());
 	}
 
 	public boolean isFeature() {
-		return moduleDir.getParentFile().getName().equalsIgnoreCase("Features");
+		return "Features".equalsIgnoreCase(moduleDir.getParentFile().getName());
 	}
 
 	public boolean isConfiguration() {
-		return moduleDir.getParentFile().getName().equalsIgnoreCase("Configurations");
+		return "Configurations".equalsIgnoreCase(moduleDir.getParentFile().getName());
 	}
 
 	public boolean isGPL() {
-		return moduleDir.getParentFile().getName().equalsIgnoreCase("GPL");
+		return "GPL".equalsIgnoreCase(moduleDir.getParentFile().getName());
 	}
 	@Override
 	public int compareTo(ApplicationModule o) {
@@ -101,7 +103,7 @@ public class ApplicationModule implements Comparable<ApplicationModule> {
 	}
 
 	private int getRank() {
-		if (getName().equals("RenoirGraph")) {
+		if ("RenoirGraph".equals(getName())) {
 			return 10;  // renoir is always last
 		}
 		if (isFramework()) {
@@ -122,7 +124,7 @@ public class ApplicationModule implements Comparable<ApplicationModule> {
 			Collection<ResourceFile> applicationRoots = Application.getApplicationRootDirectories();
 
 			// multiple dirs during development (repo dirs); single dir in installation (install dir)
-			Set<File> rootDirParents = new HashSet<File>();
+			Set<File> rootDirParents = new HashSet<>();
 			for (ResourceFile root : applicationRoots) {
 				rootDirParents.add(root.getParentFile().getFile(true));
 			}

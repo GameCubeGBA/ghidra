@@ -15,7 +15,9 @@
  */
 package ghidra.util.graph;
 
-import java.util.*;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 import org.apache.commons.collections4.set.ListOrderedSet;
 

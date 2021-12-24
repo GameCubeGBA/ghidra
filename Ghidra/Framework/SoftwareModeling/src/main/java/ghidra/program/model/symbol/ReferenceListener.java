@@ -26,13 +26,13 @@ public interface ReferenceListener {
 	 * Notification that the given memory reference has been added.
 	 * @param ref the reference that was added.
 	 */	
-	public void memReferenceAdded(Reference ref);
+	void memReferenceAdded(Reference ref);
 
 	/**
 	 * Notification that the given memory reference has bee removed.
 	 * @param ref the reference that was removed.
 	 */		
-	public void memReferenceRemoved(Reference ref);
+	void memReferenceRemoved(Reference ref);
 	
 	/**
 	 * Notification that the reference type on the given memory reference
@@ -40,50 +40,50 @@ public interface ReferenceListener {
 	 * @param newRef the reference with the new reference type.
 	 * @param oldRef the reference with the old reference type. 
 	 */	
-	public void memReferenceTypeChanged(Reference newRef, Reference oldRef);
+	void memReferenceTypeChanged(Reference newRef, Reference oldRef);
 
 	/**
 	 * Notification that the given memory reference has been set as
 	 * the primary reference.
 	 * @param ref the reference that is now primary.
 	 */		
-	public void memReferencePrimarySet(Reference ref);
+	void memReferencePrimarySet(Reference ref);
 
 	/**
 	 * Notification that the given memory reference is no longer the primary
 	 * reference.
 	 * @param ref the reference that was primary but now is not.
 	 */		
-	public void memReferencePrimaryRemoved(Reference ref);
+	void memReferencePrimaryRemoved(Reference ref);
 	
 	/**
 	 * Notification that the given stack reference has been added.
 	 * @param ref the stack reference that was added.
 	 */		
-	public void stackReferenceAdded(Reference ref);
+	void stackReferenceAdded(Reference ref);
 
 	/**
 	 * Notification tbat the given stack reference has been removed.
 	 * @param ref The stack reference that was removed
 	 */		
-	public void stackReferenceRemoved(Reference ref);
+	void stackReferenceRemoved(Reference ref);
 
 	/**
 	 * Notification that the given external reference has been added.
 	 * @param ref the external reference that was added.
 	 */		
-	public void externalReferenceAdded(Reference ref);
+	void externalReferenceAdded(Reference ref);
 
 	/**
 	 * Notification that the given external reference has been removed.
 	 * @param ref the external reference that was removed.
 	 */		
-	public void externalReferenceRemoved(Reference ref);
+	void externalReferenceRemoved(Reference ref);
 
 	/**
 	 * Notification that the external program name in the reference
 	 * has changed.
 	 * @param ref the external reference with its new external name.
 	 */		
-	public void externalReferenceNameChanged(Reference ref);
+	void externalReferenceNameChanged(Reference ref);
 }

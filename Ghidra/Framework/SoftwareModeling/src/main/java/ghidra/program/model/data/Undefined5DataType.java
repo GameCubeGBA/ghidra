@@ -20,7 +20,7 @@ import ghidra.program.model.mem.MemBuffer;
 import ghidra.program.model.mem.MemoryAccessException;
 import ghidra.program.model.scalar.Scalar;
 import ghidra.util.StringFormat;
-import ghidra.util.classfinder.*;
+import ghidra.util.classfinder.ClassTranslator;
 
 /**
  * Provides an implementation of a byte that has not been defined yet as a
@@ -53,6 +53,7 @@ public class Undefined5DataType extends Undefined {
 	 * 
 	 * @see ghidra.program.model.data.DataType#getLength()
 	 */
+	@Override
 	public int getLength() {
 		return 5;
 	}
@@ -61,6 +62,7 @@ public class Undefined5DataType extends Undefined {
 	 * 
 	 * @see ghidra.program.model.data.DataType#getDescription()
 	 */
+	@Override
 	public String getDescription() {
 		return "Undefined 5-Byte";
 	}
@@ -69,19 +71,21 @@ public class Undefined5DataType extends Undefined {
 	 * 
 	 * @see ghidra.program.model.data.DataType#getMnemonic(Settings)
 	 */
+	@Override
 	public String getMnemonic(Settings settings) {
 		return name;
 	}
 
 	private long getValue(MemBuffer buf) throws MemoryAccessException {
-		long val = (buf.getInt(0) << 8) + (buf.getByte(4) & 0xffl);
-		return val & 0xffffffffffl;
+		long val = (buf.getInt(0) << 8) + (buf.getByte(4) & 0xffL);
+		return val & 0xffffffffffL;
 	}
 
 	/**
 	 * 
 	 * @see ghidra.program.model.data.DataType#getRepresentation(MemBuffer, Settings, int)
 	 */
+	@Override
 	public String getRepresentation(MemBuffer buf, Settings settings, int length) {
 		String val = "??";
 
@@ -100,6 +104,7 @@ public class Undefined5DataType extends Undefined {
 	 * 
 	 * @see ghidra.program.model.data.DataType#getValue(ghidra.program.model.mem.MemBuffer, ghidra.docking.settings.Settings, int)
 	 */
+	@Override
 	public Object getValue(MemBuffer buf, Settings settings, int length) {
 		try {
 			return new Scalar(40, getValue(buf));
@@ -109,6 +114,7 @@ public class Undefined5DataType extends Undefined {
 		}
 	}
 
+	@Override
 	public DataType clone(DataTypeManager dtm) {
 		if (dtm == getDataTypeManager()) {
 			return this;

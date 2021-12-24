@@ -35,5 +35,5 @@ public interface PcodeOpEntryVisitor extends VisitorResults {
 	 * @param op the Pcode operation
 	 * @return a value from {@link VisitorResults}
 	 */
-	public int visit(SubtableSymbol subtable, DisjointPattern pattern, Constructor cons, OpTpl op);
+	int visit(SubtableSymbol subtable, DisjointPattern pattern, Constructor cons, OpTpl op);
 }

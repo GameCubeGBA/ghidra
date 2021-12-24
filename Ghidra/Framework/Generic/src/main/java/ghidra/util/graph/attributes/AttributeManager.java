@@ -16,12 +16,12 @@
  */
 package ghidra.util.graph.attributes;
 
+import java.util.Enumeration;
+import java.util.Hashtable;
+
 import ghidra.util.Msg;
 import ghidra.util.graph.KeyIndexableSet;
 import ghidra.util.graph.KeyedObject;
-
-import java.util.Enumeration;
-import java.util.Hashtable;
 
 /** Class which creates and keeps track of attributes defined 
  * for a single KeyIndexableSet.
@@ -49,7 +49,7 @@ public class AttributeManager<T extends KeyedObject>
   public AttributeManager(KeyIndexableSet<T> attributedSet)
   {
       this.attributedSet = attributedSet;
-      definedAttributes = new Hashtable<String, Attribute<T>>();
+      definedAttributes = new Hashtable<>();
   }
 
 	/** Create a new attribute.
@@ -65,29 +65,29 @@ public class AttributeManager<T extends KeyedObject>
 //           Err.info(this, "Creating new attribute using same name as old attribute.");
 //           Err.info(this, "Earlier attribute is now permanently destroyed.");
 //       }
-       if( attributeType.equals( INTEGER_TYPE ) )
+       if( INTEGER_TYPE.equals( attributeType ) )
        {
-          newAttribute = new IntegerAttribute<T>( attributeName, attributedSet );
+          newAttribute = new IntegerAttribute<>( attributeName, attributedSet );
           definedAttributes.put( attributeName, newAttribute );
        }
-       else if( attributeType.equals( LONG_TYPE ) )
+       else if( LONG_TYPE.equals( attributeType ) )
        {
-          newAttribute = new LongAttribute<T>( attributeName, attributedSet );
+          newAttribute = new LongAttribute<>( attributeName, attributedSet );
           definedAttributes.put( attributeName, newAttribute );
        }
-       else if( attributeType.equals( DOUBLE_TYPE ) )
+       else if( DOUBLE_TYPE.equals( attributeType ) )
        {
-          newAttribute = new DoubleAttribute<T>( attributeName, attributedSet );
+          newAttribute = new DoubleAttribute<>( attributeName, attributedSet );
           definedAttributes.put( attributeName, newAttribute );
        }
-       else if( attributeType.equals( STRING_TYPE ) )
+       else if( STRING_TYPE.equals( attributeType ) )
        {
-          newAttribute = new StringAttribute<T>( attributeName, attributedSet );
+          newAttribute = new StringAttribute<>( attributeName, attributedSet );
           definedAttributes.put( attributeName, newAttribute );
        }
-       else if( attributeType.equals( OBJECT_TYPE ) )
+       else if( OBJECT_TYPE.equals( attributeType ) )
        {
-          newAttribute = new ObjectAttribute<T>( attributeName, attributedSet );
+          newAttribute = new ObjectAttribute<>( attributeName, attributedSet );
           definedAttributes.put( attributeName, newAttribute );
        }
        else
@@ -126,9 +126,8 @@ public class AttributeManager<T extends KeyedObject>
 	 */
   public String[] getAttributeNames()
   {
-      String[] names = new String[0];
-      names = definedAttributes.keySet().toArray(names);
-      return names;
+      String[] names = {};
+      return definedAttributes.keySet().toArray(names);
   }
   
   /** Clears all of the attributes managed by this AttributeManager 

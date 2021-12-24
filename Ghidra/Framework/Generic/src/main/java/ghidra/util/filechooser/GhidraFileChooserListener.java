@@ -26,5 +26,5 @@ public interface GhidraFileChooserListener {
      * Invoked when the contents of the file
      * chooser model have changed.
      */
-    public void modelChanged();
+    void modelChanged();
 }

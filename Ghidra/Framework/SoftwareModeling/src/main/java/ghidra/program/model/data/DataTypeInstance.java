@@ -85,10 +85,7 @@ public class DataTypeInstance {
 	 * @return data-type instance or null if unable to create instance.
 	 */
 	public static DataTypeInstance getDataTypeInstance(DataType dataType, int length) {
-		if (dataType == null) {
-			return null;
-		}
-		if (dataType instanceof FactoryDataType) {
+		if ((dataType == null) || (dataType instanceof FactoryDataType)) {
 			return null;
 		}
 		boolean isFunctionDef = (dataType instanceof FunctionDefinition);

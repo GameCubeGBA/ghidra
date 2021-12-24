@@ -22,7 +22,9 @@ import javax.swing.event.ChangeListener;
 
 import ghidra.framework.ShutdownHookRegistry;
 import ghidra.framework.ShutdownPriority;
-import ghidra.util.*;
+import ghidra.util.InvalidNameException;
+import ghidra.util.Msg;
+import ghidra.util.UniversalID;
 import ghidra.util.classfinder.ClassFilter;
 import ghidra.util.classfinder.ClassSearcher;
 import ghidra.util.exception.AssertException;

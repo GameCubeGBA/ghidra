@@ -17,16 +17,33 @@ package ghidra.program.database.register;
 
 import java.io.IOException;
 import java.math.BigInteger;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
-import db.*;
+import db.ByteField;
+import db.DBHandle;
+import db.Field;
+import db.Table;
 import db.util.ErrorHandler;
 import ghidra.program.database.ManagerDB;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.database.map.AddressMap;
 import ghidra.program.database.util.AddressRangeMapDB;
-import ghidra.program.model.address.*;
-import ghidra.program.model.lang.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressRange;
+import ghidra.program.model.address.AddressRangeImpl;
+import ghidra.program.model.address.AddressRangeIterator;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.lang.Language;
+import ghidra.program.model.lang.Register;
+import ghidra.program.model.lang.RegisterValue;
+import ghidra.program.model.lang.UndefinedValueException;
 import ghidra.program.model.listing.DefaultProgramContext;
 import ghidra.program.model.listing.ProgramContext;
 import ghidra.program.util.RangeMapAdapter;
@@ -82,7 +99,7 @@ public class OldProgramContextDB implements ProgramContext, DefaultProgramContex
 		this.addrMap = addrMap.getOldAddressMap();
 		this.language = language;
 
-		defaultRegisterValueMap = new HashMap<Register, RegisterValueStore>();
+		defaultRegisterValueMap = new HashMap<>();
 		valueMaps = new HashMap<>();
 
 		baseContextRegister = language.getContextBaseRegister();
@@ -205,7 +222,7 @@ public class OldProgramContextDB implements ProgramContext, DefaultProgramContex
 		SortedSet<Address> changePoints =
 			getChangePoints(start, end, getRegisterOffset(reg), reg.getMinimumByteSize());
 
-		ArrayList<RegisterValueRange> ranges = new ArrayList<RegisterValueRange>();
+		ArrayList<RegisterValueRange> ranges = new ArrayList<>();
 
 		Iterator<Address> it = changePoints.iterator();
 		Address currentAddress = start;
@@ -380,7 +397,7 @@ public class OldProgramContextDB implements ProgramContext, DefaultProgramContex
 	private SortedSet<Address> getChangePoints(Address startAddr, Address endAddr,
 			int registerOffset, int registerLength) {
 
-		SortedSet<Address> changePoints = new TreeSet<Address>();
+		SortedSet<Address> changePoints = new TreeSet<>();
 
 		AddressRangeMapDB map = getRangeMap(registerOffset);
 		if (map != null) {
@@ -410,7 +427,7 @@ public class OldProgramContextDB implements ProgramContext, DefaultProgramContex
 	@Override
 	public Register[] getRegistersWithValues() {
 		if (registersWithValues == null) {
-			List<Register> tmp = new ArrayList<Register>();
+			List<Register> tmp = new ArrayList<>();
 			for (Register register : getRegisters()) {
 				AddressRangeIterator it = getRegisterValueAddressRanges(register);
 				if (it.hasNext()) {

@@ -28,5 +28,5 @@ public interface DockingContextListener {
 	 * Called when the context changes
 	 * @param context the context
 	 */
-	public void contextChanged(ActionContext context);
+	void contextChanged(ActionContext context);
 }

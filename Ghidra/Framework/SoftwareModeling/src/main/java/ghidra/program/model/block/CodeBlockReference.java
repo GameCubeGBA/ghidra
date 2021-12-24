@@ -39,42 +39,42 @@ public interface CodeBlockReference {
      * The source address should only occur in one block.
      * @return the Source Block address
      */
-    public Address getSourceAddress();
+    Address getSourceAddress();
 
     /**
      * Returns the Destination Block address.
      * The destination address should only occur in one block.
      * @return the Destination Block address
      */
-    public Address getDestinationAddress();
+    Address getDestinationAddress();
 
     /**
      * Returns the type of flow from the Source to the Destination CodeBlock.
      * @return the type of flow
      */
-    public FlowType getFlowType();
+    FlowType getFlowType();
 
     /**
      * Returns the address in the Destination block that is referenced by the Source block.
      * @return the address in the Destination block that is referenced by the Source block
      */
-    public Address getReference();
+    Address getReference();
 
     /**
      * Returns the address of the instruction in the Source Block that refers to the Destination block.
      * @return the address of the instruction in the Source Block that refers to the Destination block
      */ 
-    public Address getReferent();
+    Address getReferent();
 
     /**
      * Returns the Destination CodeBlock.
      * @return the Destination CodeBlock
      */ 
-    public CodeBlock getDestinationBlock();
+    CodeBlock getDestinationBlock();
 
     /** 
      * Returns the Source CodeBlock.
      * @return the Source CodeBlock
      */
-    public CodeBlock getSourceBlock();
+    CodeBlock getSourceBlock();
 }

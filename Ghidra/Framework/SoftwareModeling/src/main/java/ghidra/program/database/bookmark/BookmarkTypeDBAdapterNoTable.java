@@ -25,7 +25,7 @@ import db.DBRecord;
  */
 public class BookmarkTypeDBAdapterNoTable extends BookmarkTypeDBAdapter {
 
-	private DBRecord[] records = new DBRecord[0];
+	private DBRecord[] records = {};
 
 	/**
 	 * @param dbHandle the database handle

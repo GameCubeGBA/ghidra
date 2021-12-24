@@ -15,12 +15,18 @@
  */
 package docking.menu;
 
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 
 import docking.DockingWindowManager;
 import docking.EmptyBorderToggleButton;
-import docking.action.*;
+import docking.action.ActionContextProvider;
+import docking.action.DockingActionIf;
+import docking.action.ToggleDockingAction;
+import docking.action.ToggleDockingActionIf;
+import docking.action.ToolBarData;
 
 /**
  * Toolbar buttons for Dialogs.   
@@ -64,20 +70,20 @@ public class DialogToolbarButton extends EmptyBorderToggleButton {
 		super.doPropertyChange(e);
 
 		String name = e.getPropertyName();
-		if (name.equals(DockingActionIf.ENABLEMENT_PROPERTY)) {
+		if (DockingActionIf.ENABLEMENT_PROPERTY.equals(name)) {
 			setEnabled(((Boolean) e.getNewValue()).booleanValue());
 		}
-		else if (name.equals(DockingActionIf.DESCRIPTION_PROPERTY)) {
+		else if (DockingActionIf.DESCRIPTION_PROPERTY.equals(name)) {
 			DockingToolBarUtils.setToolTipText(this, dockingAction);
 		}
-		else if (name.equals(DockingActionIf.TOOLBAR_DATA_PROPERTY)) {
+		else if (DockingActionIf.TOOLBAR_DATA_PROPERTY.equals(name)) {
 			ToolBarData toolBarData = (ToolBarData) e.getNewValue();
 			setIcon(toolBarData == null ? null : toolBarData.getIcon());
 		}
-		else if (name.equals(ToggleDockingActionIf.SELECTED_STATE_PROPERTY)) {
+		else if (ToggleDockingActionIf.SELECTED_STATE_PROPERTY.equals(name)) {
 			setSelected((Boolean) e.getNewValue());
 		}
-		else if (name.equals(DockingActionIf.KEYBINDING_DATA_PROPERTY)) {
+		else if (DockingActionIf.KEYBINDING_DATA_PROPERTY.equals(name)) {
 			DockingToolBarUtils.setToolTipText(this, dockingAction);
 		}
 	}

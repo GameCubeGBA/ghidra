@@ -15,17 +15,31 @@
  */
 package ghidra.graph.viewer.edge.routing;
 
-import static ghidra.graph.viewer.GraphViewerUtils.*;
+import static ghidra.graph.viewer.GraphViewerUtils.getBoundsForVerticesInLayoutSpace;
+import static ghidra.graph.viewer.GraphViewerUtils.getEdgeShapeInGraphSpace;
+import static ghidra.graph.viewer.GraphViewerUtils.getVertexBoundsInGraphSpace;
+import static ghidra.graph.viewer.GraphViewerUtils.translatePointFromGraphSpaceToLayoutSpace;
+import static ghidra.graph.viewer.GraphViewerUtils.translateShapeFromLayoutSpaceToGraphSpace;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Shape;
 import java.awt.geom.PathIterator;
 import java.awt.geom.Point2D;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.apache.commons.collections4.*;
+import org.apache.commons.collections4.Factory;
+import org.apache.commons.collections4.FactoryUtils;
+import org.apache.commons.collections4.MapUtils;
 
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.Graph;

@@ -22,11 +22,11 @@ import ghidra.program.model.symbol.Namespace;
  */
 public interface Library extends Namespace {
 
-	public static final String UNKNOWN = "<EXTERNAL>";
+	String UNKNOWN = "<EXTERNAL>";
 
 	/**
 	 * @return the associated program within the project which corresponds to this library
 	 */
-	public String getAssociatedProgramPath();
+	String getAssociatedProgramPath();
 
 }

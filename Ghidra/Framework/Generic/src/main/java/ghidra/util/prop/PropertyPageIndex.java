@@ -16,9 +16,9 @@
  */
 package ghidra.util.prop;
 
-import ghidra.util.datastruct.RedBlackLongKeySet;
-
 import java.io.Serializable;
+
+import ghidra.util.datastruct.RedBlackLongKeySet;
 
 
 /**

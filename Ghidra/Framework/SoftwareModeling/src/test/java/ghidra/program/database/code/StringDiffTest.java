@@ -17,7 +17,9 @@ package ghidra.program.database.code;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
@@ -29,8 +31,8 @@ public class StringDiffTest {
 	@Test
 	public void testGetDiffLines_Insert_AtFront() {
 
-		String[] a1 = new String[] { "This", "is", "four", "friends" };
-		String[] a2 = new String[] { "Inserted", "This", "is", "four", "friends" };
+		String[] a1 = { "This", "is", "four", "friends" };
+		String[] a2 = { "Inserted", "This", "is", "four", "friends" };
 		String v1 = StringUtils.join(a1, '\n');
 		String v2 = StringUtils.join(a2, '\n');
 
@@ -42,8 +44,8 @@ public class StringDiffTest {
 	@Test
 	public void testGetDiffLines_Insert_AtEnd() {
 
-		String[] a1 = new String[] { "This", "is", "four", "friends" };
-		String[] a2 = new String[] { "This", "is", "four", "friends", "Inserted" };
+		String[] a1 = { "This", "is", "four", "friends" };
+		String[] a2 = { "This", "is", "four", "friends", "Inserted" };
 		String v1 = StringUtils.join(a1, '\n');
 		String v2 = StringUtils.join(a2, '\n');
 
@@ -55,8 +57,8 @@ public class StringDiffTest {
 	@Test
 	public void testGetDiffLines_Insert_AtMiddle() {
 
-		String[] a1 = new String[] { "This", "is", "four", "friends" };
-		String[] a2 = new String[] { "This", "is", "Inserted", "four", "friends" };
+		String[] a1 = { "This", "is", "four", "friends" };
+		String[] a2 = { "This", "is", "Inserted", "four", "friends" };
 		String v1 = StringUtils.join(a1, '\n');
 		String v2 = StringUtils.join(a2, '\n');
 
@@ -68,8 +70,8 @@ public class StringDiffTest {
 	@Test
 	public void testGetDiffLines_Delete_AtStart() {
 
-		String[] a1 = new String[] { "DELETED", "This", "is", "the", "best" };
-		String[] a2 = new String[] { "This", "is", "the", "best" };
+		String[] a1 = { "DELETED", "This", "is", "the", "best" };
+		String[] a2 = { "This", "is", "the", "best" };
 		String v1 = StringUtils.join(a1, '\n');
 		String v2 = StringUtils.join(a2, '\n');
 
@@ -81,8 +83,8 @@ public class StringDiffTest {
 	@Test
 	public void testGetDiffLines_Delete_AtEnd() {
 
-		String[] a1 = new String[] { "This", "is", "the", "best", "DELETED" };
-		String[] a2 = new String[] { "This", "is", "the", "best" };
+		String[] a1 = { "This", "is", "the", "best", "DELETED" };
+		String[] a2 = { "This", "is", "the", "best" };
 		String v1 = StringUtils.join(a1, '\n');
 		String v2 = StringUtils.join(a2, '\n');
 
@@ -94,8 +96,8 @@ public class StringDiffTest {
 	@Test
 	public void testGetDiffLines_Delete_AtMiddle() {
 
-		String[] a1 = new String[] { "This", "is", "DELETED", "the", "best" };
-		String[] a2 = new String[] { "This", "is", "the", "best" };
+		String[] a1 = { "This", "is", "DELETED", "the", "best" };
+		String[] a2 = { "This", "is", "the", "best" };
 		String v1 = StringUtils.join(a1, '\n');
 		String v2 = StringUtils.join(a2, '\n');
 
@@ -107,8 +109,8 @@ public class StringDiffTest {
 	@Test
 	public void testGetDiffLines_Delete_MultipleDeletes() {
 
-		String[] a1 = new String[] { "This", "is", "DELETED", "the", "best", "DELETED" };
-		String[] a2 = new String[] { "This", "is", "the", "best" };
+		String[] a1 = { "This", "is", "DELETED", "the", "best", "DELETED" };
+		String[] a2 = { "This", "is", "the", "best" };
 		String v1 = StringUtils.join(a1, '\n');
 		String v2 = StringUtils.join(a2, '\n');
 
@@ -123,8 +125,8 @@ public class StringDiffTest {
 		// note: this text used to cause an infinite loop bug that tripped when two words were
 		//       swapped at some point in the two strings *and* had the same length
 
-		String[] a1 = new String[] { "This", "is", "best", "four", "friends" };
-		String[] a2 = new String[] { "This", "is", "four", "best", "friends" };
+		String[] a1 = { "This", "is", "best", "four", "friends" };
+		String[] a2 = { "This", "is", "four", "best", "friends" };
 		String v1 = StringUtils.join(a1, '\n');
 		String v2 = StringUtils.join(a2, '\n');
 
@@ -136,8 +138,8 @@ public class StringDiffTest {
 	@Test
 	public void testGetDiffLines_Rearrange_DifferentLineLength_LongerThanNewSpot() {
 
-		String[] a1 = new String[] { "This", "is", "besties", "four", "friends" };
-		String[] a2 = new String[] { "This", "is", "four", "besties", "friends" };
+		String[] a1 = { "This", "is", "besties", "four", "friends" };
+		String[] a2 = { "This", "is", "four", "besties", "friends" };
 		String v1 = StringUtils.join(a1, '\n');
 		String v2 = StringUtils.join(a2, '\n');
 
@@ -149,8 +151,8 @@ public class StringDiffTest {
 	@Test
 	public void testGetDiffLines_Rearrange_DifferentLineLength_ShorterThanNewSpot() {
 
-		String[] a1 = new String[] { "This", "is", "be", "four", "friends" };
-		String[] a2 = new String[] { "This", "is", "four", "be", "friends" };
+		String[] a1 = { "This", "is", "be", "four", "friends" };
+		String[] a2 = { "This", "is", "four", "be", "friends" };
 		String v1 = StringUtils.join(a1, '\n');
 		String v2 = StringUtils.join(a2, '\n');
 
@@ -194,8 +196,8 @@ public class StringDiffTest {
 
 	@Test
 	public void testReplace() {
-		String[] a1 = new String[] { "In", "the", "beginning" };
-		String[] a2 = new String[] { "There", "was", "vastness" };
+		String[] a1 = { "In", "the", "beginning" };
+		String[] a2 = { "There", "was", "vastness" };
 		String v1 = StringUtils.join(a1, '\n');
 		String v2 = StringUtils.join(a2, '\n');
 
@@ -227,7 +229,7 @@ public class StringDiffTest {
 		List<String> results = new ArrayList<>();
 		for (int i = 0; i < size; i++) {
 			String random = AbstractGTest.getRandomString(0, 50);
-			random = random.replaceAll("\n", "");
+			random = random.replace("\n", "");
 			results.add("Line " + (i + 1) + ": " + random);
 		}
 

@@ -15,9 +15,14 @@
  */
 package ghidra.app.plugin.assembler.sleigh.parse;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Set;
+import java.util.TreeSet;
 
-import ghidra.app.plugin.assembler.sleigh.grammars.*;
+import ghidra.app.plugin.assembler.sleigh.grammars.AssemblyGrammar;
+import ghidra.app.plugin.assembler.sleigh.grammars.AssemblyProduction;
+import ghidra.app.plugin.assembler.sleigh.grammars.AssemblySentential;
 import ghidra.app.plugin.assembler.sleigh.symbol.AssemblyNonTerminal;
 import ghidra.app.plugin.assembler.sleigh.symbol.AssemblySymbol;
 
@@ -82,10 +87,7 @@ public class AssemblyParseStateItem implements Comparable<AssemblyParseStateItem
 	 */
 	public Collection<AssemblyParseStateItem> getClosure(AssemblyGrammar grammar) {
 		AssemblySymbol next = getNext();
-		if (next == null) {
-			return Collections.emptySet();
-		}
-		if (!(next instanceof AssemblyNonTerminal)) {
+		if ((next == null) || !(next instanceof AssemblyNonTerminal)) {
 			return Collections.emptySet();
 		}
 		AssemblyNonTerminal nt = (AssemblyNonTerminal) next;
@@ -102,10 +104,7 @@ public class AssemblyParseStateItem implements Comparable<AssemblyParseStateItem
 			return false;
 		}
 		AssemblyParseStateItem apsi = (AssemblyParseStateItem) that;
-		if (!(this.prod.getIndex() == apsi.prod.getIndex())) {
-			return false;
-		}
-		if (this.pos != apsi.pos) {
+		if ((this.prod.getIndex() != apsi.prod.getIndex()) || (this.pos != apsi.pos)) {
 			return false;
 		}
 		return true;
@@ -119,11 +118,7 @@ public class AssemblyParseStateItem implements Comparable<AssemblyParseStateItem
 			return result;
 		}
 		result = this.pos - that.pos;
-		if (result != 0) {
-			return result;
-		}
-
-		return 0;
+		return result;
 	}
 
 	@Override

@@ -31,13 +31,13 @@ public interface StringPropertyMap extends PropertyMap {
 	 * @exception TypeMismatchException thrown if the
 	 *   property does not have String values.
 	 */
-	public void add(Address addr, String value);
+	void add(Address addr, String value);
 		
 	/**
 	 * Get the String value at the given address.
 	 * @param addr the address from where to get the String value
 	 * @return String or null if property not found at addr.
 	 */
-	public String getString(Address addr);
+	String getString(Address addr);
 
 }

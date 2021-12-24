@@ -17,7 +17,9 @@ package ghidra.framework.model;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import ghidra.framework.options.Options;
 import ghidra.util.ReadOnlyException;
@@ -35,48 +37,48 @@ public interface DomainObject {
 	/**
 	 * Object to synchronize on for undo/redo operations.
 	 */
-	public final static Object undoLock = new Object();
+	Object undoLock = new Object();
 	/**
 	 * Event type generated when the domain object is saved.
 	 */
-	public final static int DO_OBJECT_SAVED = 1;
+	int DO_OBJECT_SAVED = 1;
 
 	/**
 	 * Event type generated when the domain file associated with
 	 * the domain object changes.
 	 */
-	public final static int DO_DOMAIN_FILE_CHANGED = 2;
+	int DO_DOMAIN_FILE_CHANGED = 2;
 
 	/**
 	 * Event type generated when the object name changes.
 	 */
-	public final static int DO_OBJECT_RENAMED = 3;
+	int DO_OBJECT_RENAMED = 3;
 
 	/**
 	 * Event type generated when domain object is restored.
 	 */
-	public static final int DO_OBJECT_RESTORED = 4;
+	int DO_OBJECT_RESTORED = 4;
 
 	/**
 	 * Event type generated when a property on this DomainObject is changed.
 	 */
-	public static final int DO_PROPERTY_CHANGED = 5;
+	int DO_PROPERTY_CHANGED = 5;
 
 	/**
 	 * Event type generated when this domain object is closed.
 	 */
-	public static final int DO_OBJECT_CLOSED = 6;
+	int DO_OBJECT_CLOSED = 6;
 
 	/**
 	 * Event type generated when a fatal error occurs which renders the domain object invalid.
 	 */
-	public static final int DO_OBJECT_ERROR = 8;
+	int DO_OBJECT_ERROR = 8;
 
 	/**
 	 * Returns whether the object has changed.
 	 * @return whether the object has changed.
 	 */
-	public boolean isChanged();
+	boolean isChanged();
 
 	/**
 	 * Set the temporary state of this object.
@@ -84,25 +86,25 @@ public interface DomainObject {
 	 * always return false.  The default temporary state is false.
 	 * @param state if true object is marked as temporary
 	 */
-	public void setTemporary(boolean state);
+	void setTemporary(boolean state);
 
 	/**
 	 * Returns true if this object has been marked as Temporary.
 	 * @return true if this object has been marked as Temporary.
 	 */
-	public boolean isTemporary();
+	boolean isTemporary();
 
 	/**
 	 * Returns true if changes are permitted.
 	 * @return true if changes are permitted.
 	 */
-	public boolean isChangeable();
+	boolean isChangeable();
 
 	/**
 	 * Returns true if this object can be saved; a read-only file cannot be saved.
 	 * @return true if this object can be saved
 	 */
-	public boolean canSave();
+	boolean canSave();
 
 	/**
 	 * Saves changes to the DomainFile.
@@ -115,7 +117,7 @@ public interface DomainObject {
 	 * @throws CancelledException thrown if the user canceled the save
 	 * operation
 	 */
-	public void save(String comment, TaskMonitor monitor) throws IOException, CancelledException;
+	void save(String comment, TaskMonitor monitor) throws IOException, CancelledException;
 
 	/**
 	 * Saves (i.e., serializes) the current content to a packed file.
@@ -125,7 +127,7 @@ public interface DomainObject {
 	 * @throws CancelledException if the user cancels
 	 * @throws UnsupportedOperationException if not supported by object implementation
 	 */
-	public void saveToPackedFile(File outputFile, TaskMonitor monitor)
+	void saveToPackedFile(File outputFile, TaskMonitor monitor)
 			throws IOException, CancelledException;
 
 	/**
@@ -135,19 +137,19 @@ public interface DomainObject {
 	 * @param consumer the consumer (e.g., tool, plugin, etc) of the domain object
 	 * previously established with the addConsumer method.
 	 */
-	public void release(Object consumer);
+	void release(Object consumer);
 
 	/**
 	 * Adds a listener for this object.
 	 * @param dol listener notified when any change occurs to this domain object
 	 */
-	public void addListener(DomainObjectListener dol);
+	void addListener(DomainObjectListener dol);
 
 	/**
 	 * Remove the listener for this object.
 	 * @param dol listener
 	 */
-	public void removeListener(DomainObjectListener dol);
+	void removeListener(DomainObjectListener dol);
 
 	/**
 	 * Adds a listener that will be notified when this DomainObject is closed.  This is meant
@@ -155,14 +157,14 @@ public interface DomainObject {
 	 *
 	 * @param listener the reference to add
 	 */
-	public void addCloseListener(DomainObjectClosedListener listener);
+	void addCloseListener(DomainObjectClosedListener listener);
 
 	/**
 	 * Removes the given close listener.
 	 *
 	 * @param listener the listener to remove.
 	 */
-	public void removeCloseListener(DomainObjectClosedListener listener);
+	void removeCloseListener(DomainObjectClosedListener listener);
 
 	/**
 	 * Creates a private event queue that can be flushed independently from the main event queue.
@@ -170,39 +172,39 @@ public interface DomainObject {
 	 * @param maxDelay the time interval (in milliseconds) used to buffer events.
 	 * @return a unique identifier for this private queue.
 	 */
-	public EventQueueID createPrivateEventQueue(DomainObjectListener listener, int maxDelay);
+	EventQueueID createPrivateEventQueue(DomainObjectListener listener, int maxDelay);
 
 	/**
 	 * Removes the specified private event queue
 	 * @param id the id of the queue to remove.
 	 * @return true if the id represents a valid queue that was removed.
 	 */
-	public boolean removePrivateEventQueue(EventQueueID id);
+	boolean removePrivateEventQueue(EventQueueID id);
 
 	/**
 	 * Returns a word or short phrase that best describes or categorizes
 	 * the object in terms that a user will understand.
 	 * @return the description
 	 */
-	public String getDescription();
+	String getDescription();
 
 	/**
 	 * Get the name of this domain object.
 	 * @return the name
 	 */
-	public String getName();
+	String getName();
 
 	/**
 	 * Set the name for this domain object.
 	 * @param name object name
 	 */
-	public void setName(String name);
+	void setName(String name);
 
 	/**
 	 * Get the domain file for this domain object.
 	 * @return the associated domain file
 	 */
-	public DomainFile getDomainFile();
+	DomainFile getDomainFile();
 
 	/**
 	 * Adds the given object as a consumer.  The release method must be invoked
@@ -210,20 +212,20 @@ public interface DomainObject {
 	 * @param consumer domain object consumer
 	 * @return false if this domain object has already been closed
 	 */
-	public boolean addConsumer(Object consumer);
+	boolean addConsumer(Object consumer);
 
 	/**
 	 * Returns the list of consumers on this domainObject
 	 * @return the list of consumers.
 	 */
-	public ArrayList<Object> getConsumerList();
+	ArrayList<Object> getConsumerList();
 
 	/**
 	 * Returns true if the given consumer is using (has open) this domain object.
 	 * @param consumer the object to test to see if it is a consumer of this domain object.
 	 * @return true if the given consumer is using (has open) this domain object;
 	 */
-	public boolean isUsedBy(Object consumer);
+	boolean isUsedBy(Object consumer);
 
 	/**
 	 * If true, domain object change events are sent. If false, no events are sent.
@@ -238,7 +240,7 @@ public interface DomainObject {
 	 *
 	 * @param enabled true means to enable events
 	 */
-	public void setEventsEnabled(boolean enabled);
+	void setEventsEnabled(boolean enabled);
 
 	/**
 	 * Returns true if this object is sending out events as it is changed.  The default is
@@ -247,18 +249,18 @@ public interface DomainObject {
 	 * @return true if sending events
 	 * @see #setEventsEnabled(boolean)
 	 */
-	public boolean isSendingEvents();
+	boolean isSendingEvents();
 
 	/**
 	 * Makes sure all pending domainEvents have been sent.
 	 */
-	public void flushEvents();
+	void flushEvents();
 
 	/**
 	 * Flush events from the specified event queue.
 	 * @param id the id specifying the event queue to be flushed.
 	 */
-	public void flushPrivateEventQueue(EventQueueID id);
+	void flushPrivateEventQueue(EventQueueID id);
 
 	/**
 	 * Returns true if a modification lock can be obtained on this
@@ -266,13 +268,13 @@ public interface DomainObject {
 	 * this will not prevent another thread from modifying the domain object.
 	 * @return true if can lock
 	 */
-	public boolean canLock();
+	boolean canLock();
 
 	/**
 	 * Returns true if the domain object currently has a modification lock enabled.
 	 * @return true if locked
 	 */
-	public boolean isLocked();
+	boolean isLocked();
 
 	/**
 	 * Attempt to obtain a modification lock on the domain object.  Multiple locks may be granted
@@ -281,58 +283,58 @@ public interface DomainObject {
 	 * @return true if lock obtained successfully, else false which indicates that a modification
 	 * is in process.
 	 */
-	public boolean lock(String reason);
+	boolean lock(String reason);
 
 	/**
 	 * Cancels any previous lock and acquires it.
 	 * @param rollback if true, any changes in made with the previous lock should be discarded.
 	 * @param reason very short reason for requesting lock
 	 */
-	public void forceLock(boolean rollback, String reason);
+	void forceLock(boolean rollback, String reason);
 
 	/**
 	 * Release a modification lock previously granted with the lock method.
 	 */
-	public void unlock();
+	void unlock();
 
 	/**
 	 * Returns all properties lists contained by this domain object.
 	 *
 	 * @return all property lists contained by this domain object.
 	 */
-	public List<String> getOptionsNames();
+	List<String> getOptionsNames();
 
 	/**
 	 * Get the property list for the given name.
 	 * @param propertyListName name of property list
 	 * @return the options
 	 */
-	public Options getOptions(String propertyListName);
+	Options getOptions(String propertyListName);
 
 	/**
 	 * Returns true if this domain object has been closed as a result of the last release
 	 * @return true if closed
 	 */
-	public boolean isClosed();
+	boolean isClosed();
 
 	/**
 	 * Returns true if the user has exclusive access to the domain object.  Exclusive access means
 	 * either the object is not shared or the user has an exclusive checkout on the object.
 	 * @return true if has exclusive access
 	 */
-	public boolean hasExclusiveAccess();
+	boolean hasExclusiveAccess();
 
 	/**
 	 * Returns a map containing all the stored metadata associated with this domain object.  The map
 	 * contains key,value pairs and are ordered by their insertion order.
 	 * @return a map containing all the stored metadata associated with this domain object.
 	 */
-	public Map<String, String> getMetadata();
+	Map<String, String> getMetadata();
 
 	/**
 	 * Returns a long value that gets incremented every time a change, undo, or redo takes place.
 	 * Useful for implementing a lazy caching system.
 	 * @return a long value that is incremented for every change to the program.
 	 */
-	public long getModificationNumber();
+	long getModificationNumber();
 }

@@ -16,10 +16,15 @@
 package ghidra.framework.project;
 
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 import ghidra.framework.ToolUtils;
-import ghidra.framework.model.*;
+import ghidra.framework.model.ToolChest;
+import ghidra.framework.model.ToolChestChangeListener;
+import ghidra.framework.model.ToolTemplate;
 import ghidra.util.SystemUtilities;
 
 /**
@@ -36,7 +41,7 @@ class ToolChestImpl implements ToolChest {
 	ToolChestImpl() {
 		// we want sorting by tool name, so use a sorted map
 		map = ToolUtils.loadUserTools();
-		listeners = new ArrayList<ToolChestChangeListener>(3);
+		listeners = new ArrayList<>(3);
 	}
 
 	@Override
@@ -103,8 +108,8 @@ class ToolChestImpl implements ToolChest {
 		SystemUtilities.runSwingNow(() -> {
 			ToolChestChangeListener[] tcListeners = new ToolChestChangeListener[listeners.size()];
 			listeners.toArray(tcListeners);
-			for (int l = 0; l < tcListeners.length; l++) {
-				tcListeners[l].toolRemoved(name);
+			for (ToolChestChangeListener tcListener : tcListeners) {
+				tcListener.toolRemoved(name);
 			}
 		});
 

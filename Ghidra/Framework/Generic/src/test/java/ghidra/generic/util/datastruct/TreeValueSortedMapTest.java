@@ -15,17 +15,24 @@
  */
 package ghidra.generic.util.datastruct;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map.Entry;
+import java.util.Random;
+import java.util.Set;
 
 import org.apache.commons.collections4.comparators.ReverseComparator;
 import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
-
-import ghidra.generic.util.datastruct.TreeValueSortedMap;
-import ghidra.generic.util.datastruct.ValueSortedMap;
 
 public class TreeValueSortedMapTest {
 	@Test
@@ -35,7 +42,7 @@ public class TreeValueSortedMapTest {
 		queue.put("1st", 1);
 		queue.put("3rd", 3);
 		List<String> ordered = new ArrayList<>(queue.keySet());
-		assertEquals(Arrays.asList(new String[] { "1st", "2nd", "3rd" }), ordered);
+		assertEquals(Arrays.asList("1st", "2nd", "3rd"), ordered);
 	}
 
 	@Test
@@ -46,7 +53,7 @@ public class TreeValueSortedMapTest {
 		queue.put("1st", 1);
 		queue.put("3rd", 3);
 		List<String> ordered = new ArrayList<>(queue.keySet());
-		assertEquals(Arrays.asList(new String[] { "3rd", "2nd", "1st" }), ordered);
+		assertEquals(Arrays.asList("3rd", "2nd", "1st"), ordered);
 	}
 
 	@Test
@@ -246,7 +253,7 @@ public class TreeValueSortedMapTest {
 		Random rand = new Random();
 		ValueSortedMap<String, Integer> queue = TreeValueSortedMap.createWithNaturalOrder();
 		int[] vals = // 0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 18 19 20 21 22
-			new int[] { 0, 0, 1, 1, 1, 2, 3, 4, 4, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 8, 8, 10 };
+			{ 0, 0, 1, 1, 1, 2, 3, 4, 4, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 8, 8, 10 };
 		for (int r = 0; r < ROUNDS; r++) {
 			for (int i = 0; i < vals.length; i++) {
 				ArrayUtils.swap(vals, i, i + rand.nextInt(vals.length - i));

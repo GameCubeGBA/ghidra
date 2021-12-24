@@ -24,7 +24,7 @@ public enum PluginStatus {
 
 	private String description;
 
-	private PluginStatus(String description) {
+	PluginStatus(String description) {
 		this.description = description;
 	}
 

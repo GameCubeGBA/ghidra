@@ -17,7 +17,6 @@ package generic.stl;
 import static generic.stl.RedBlackNode.NodeColor.BLACK;
 import static generic.stl.RedBlackNode.NodeColor.RED;
 
-
 import java.util.Comparator;
 
 
@@ -61,7 +60,7 @@ public class RedBlackTree<K,V> {
     
     @Override
 	public String toString() {
-		StringBuffer buffy = new StringBuffer( "RedBlackTree[size=" + size + "]\n" );
+		StringBuilder buffy = new StringBuilder( "RedBlackTree[size=" + size + "]\n" );
 		int showSize = Math.min( 20, size() );		
 		RedBlackNode<K, V> current = getFirst();
 		for ( int i = 0; i < showSize; i++ ) {
@@ -193,8 +192,8 @@ public class RedBlackTree<K,V> {
     public Pair<RedBlackNode<K, V>, Boolean> put(K key, V value) {
         if (root == null) {
             size++;
-            root = new RedBlackNode<K,V>(key,value,null);
-            return new Pair<RedBlackNode<K, V>, Boolean>( root, Boolean.TRUE );
+            root = new RedBlackNode<>(key,value,null);
+            return new Pair<>( root, Boolean.TRUE );
         }
         RedBlackNode<K,V> node = root;
 
@@ -202,7 +201,7 @@ public class RedBlackTree<K,V> {
         	int comp = comparator.compare(key, node.key);
             if (comp == 0 && !allowDuplicateKeys) {
                 node.value = value;
-                return new Pair<RedBlackNode<K, V>, Boolean>( node, Boolean.FALSE );
+                return new Pair<>( node, Boolean.FALSE );
             }
             else if (comp < 0) {
                 if (node.left != null) {
@@ -210,24 +209,21 @@ public class RedBlackTree<K,V> {
                 }
                 else {
                     size++;
-                    RedBlackNode<K, V> newNode = new RedBlackNode<K,V>(key, value, node); 
+                    RedBlackNode<K, V> newNode = new RedBlackNode<>(key, value, node); 
                     node.left = newNode;
                     fixAfterInsertion(newNode);
-                    return new Pair<RedBlackNode<K, V>, Boolean>( newNode, Boolean.TRUE );
+                    return new Pair<>( newNode, Boolean.TRUE );
                 }
-            }
-            else {
-                if (node.right != null) {
-                    node = node.right;
-                }
-                else {
-                    size++;
-                    RedBlackNode<K, V> newNode = new RedBlackNode<K,V>(key, value, node); 
-                    node.right = newNode;
-                    fixAfterInsertion(newNode);
-                    return new Pair<RedBlackNode<K, V>, Boolean>( newNode, Boolean.TRUE );
-                }
-            }
+            } else if (node.right != null) {
+			    node = node.right;
+			}
+			else {
+			    size++;
+			    RedBlackNode<K, V> newNode = new RedBlackNode<>(key, value, node); 
+			    node.right = newNode;
+			    fixAfterInsertion(newNode);
+			    return new Pair<>( newNode, Boolean.TRUE );
+			}
         }
     }
     public RedBlackNode<K,V> findFirstNode(K key) {

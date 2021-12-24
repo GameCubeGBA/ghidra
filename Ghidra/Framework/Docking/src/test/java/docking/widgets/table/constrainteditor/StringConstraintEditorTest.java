@@ -15,7 +15,9 @@
  */
 package docking.widgets.table.constrainteditor;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.Component;
 import java.util.List;
@@ -25,7 +27,9 @@ import org.junit.Test;
 
 import docking.test.AbstractDockingTest;
 import docking.widgets.DropDownTextField;
-import docking.widgets.table.constraint.*;
+import docking.widgets.table.constraint.ColumnConstraint;
+import docking.widgets.table.constraint.ColumnData;
+import docking.widgets.table.constraint.StringStartsWithColumnConstraint;
 
 /**
  * A test for the various String constraints.
@@ -35,7 +39,7 @@ public class StringConstraintEditorTest extends AbstractDockingTest {
 	private StringStartsWithColumnConstraint constraint;
 	private ColumnConstraintEditor<String> editor;
 	private DropDownTextField<String> textField;
-	String[] columnData = new String[] { "foo", "foot", "football", "base", "basement" };
+	String[] columnData = { "foo", "foot", "football", "base", "basement" };
 
 	@SuppressWarnings("unchecked")
 	@Before

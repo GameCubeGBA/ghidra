@@ -15,22 +15,29 @@
  */
 package ghidra.program.model.lang;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.address.OldGenericNamespaceAddress;
 
 public class RegisterManager {
 
 	private List<Register> registers;
-	private Map<String, Register> registerNameMap = new HashMap<String, Register>(); // include aliases and case-variations
+	private Map<String, Register> registerNameMap = new HashMap<>(); // include aliases and case-variations
 
 	private List<String> registerNames; // alphabetical sorted list, excludes aliases
 	private List<Register> contextRegisters;
 	private Register contextBaseRegister;
 
-	private Map<RegisterSizeKey, Register> sizeMap = new HashMap<RegisterSizeKey, Register>();
+	private Map<RegisterSizeKey, Register> sizeMap = new HashMap<>();
 	private Map<Address, List<Register>> registerAddressMap =
-		new HashMap<Address, List<Register>>();
+		new HashMap<>();
 
 	/** List of vector registers, sorted first by size and then by offset **/
 	private List<Register> sortedVectorRegisters;
@@ -70,13 +77,7 @@ public class RegisterManager {
 		}
 	}
 
-	private static Comparator<Register> registerSizeComparator = new Comparator<Register>() {
-		@Override
-		public int compare(Register r1, Register r2) {
-			// Used for sorting largest to smallest
-			return r2.getBitLength() - r1.getBitLength();
-		}
-	};
+	private static Comparator<Register> registerSizeComparator = (r1, r2) -> r2.getBitLength() - r1.getBitLength();
 
 	/**
 	 * Construct RegisterManager
@@ -93,8 +94,8 @@ public class RegisterManager {
 	}
 
 	private void initialize() {
-		List<String> registerNameList = new ArrayList<String>();
-		List<Register> contextRegisterList = new ArrayList<Register>();
+		List<String> registerNameList = new ArrayList<>();
+		List<Register> contextRegisterList = new ArrayList<>();
 		ArrayList<Register> registerListSortedBySize = new ArrayList<>(registers); // copy for sorting
 		Collections.sort(registerListSortedBySize, registerSizeComparator);
 		for (Register reg : registerListSortedBySize) {
@@ -108,7 +109,7 @@ public class RegisterManager {
 			}
 
 			Address addr = reg.getAddress();
-            List<Register> list = registerAddressMap.computeIfAbsent(addr, k -> new ArrayList<Register>());
+            List<Register> list = registerAddressMap.computeIfAbsent(addr, k -> new ArrayList<>());
             list.add(reg);
 			if (reg.isProcessorContext()) {
 				continue;
@@ -262,7 +263,7 @@ public class RegisterManager {
 	 */
 	public List<Register> getSortedVectorRegisters() {
 		if (sortedVectorRegisters == null) {
-			ArrayList<Register> list = new ArrayList<Register>();
+			ArrayList<Register> list = new ArrayList<>();
 			for (Register reg : registers) {
 				if (reg.isVectorRegister()) {
 					list.add(reg);
@@ -282,7 +283,7 @@ public class RegisterManager {
 	 * @return result of comparison
 	 */
 	private static int compareVectorRegisters(Register reg1, Register reg2) {
-		if (!(reg1.isVectorRegister() && reg2.isVectorRegister())) {
+		if ((!reg1.isVectorRegister() || !reg2.isVectorRegister())) {
 			throw new IllegalArgumentException(
 				"compareVectorRegisters can only be applied to vector registers!");
 		}

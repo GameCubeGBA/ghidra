@@ -15,9 +15,22 @@
  */
 package ghidra.program.database.map;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressIterator;
+import ghidra.program.model.address.AddressRange;
+import ghidra.program.model.address.AddressRangeImpl;
+import ghidra.program.model.address.AddressRangeIterator;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.address.KeyRange;
 import ghidra.util.datastruct.Range;
 import ghidra.util.datastruct.SortedRangeList;
 
@@ -35,16 +48,12 @@ public class NormalizedAddressSet implements AddressSetView {
 	private AddressMap addrMap;
 
 	private Map<Long, SortedRangeList> baseLists = new HashMap<>();
-	private ArrayList<Long> bases = new ArrayList<Long>();
+	private ArrayList<Long> bases = new ArrayList<>();
 
-	private Comparator<Long> baseComparator = new Comparator<Long>() {
-
-		@Override
-		public int compare(Long base1, Long base2) {
-			Address a1 = addrMap.decodeAddress(base1);
-			Address a2 = addrMap.decodeAddress(base2);
-			return a1.compareTo(a2);
-		}
+	private Comparator<Long> baseComparator = (base1, base2) -> {
+		Address a1 = addrMap.decodeAddress(base1);
+		Address a2 = addrMap.decodeAddress(base2);
+		return a1.compareTo(a2);
 	};
 
 	/**
@@ -109,7 +118,7 @@ public class NormalizedAddressSet implements AddressSetView {
 	 */
 	public void clear() {
 		baseLists = new HashMap<>();
-		bases = new ArrayList<Long>();
+		bases = new ArrayList<>();
 	}
 
 	private void addRange(long minKey, long maxKey) {
@@ -226,7 +235,7 @@ public class NormalizedAddressSet implements AddressSetView {
 
 		long minBase = (bases.get(0)).longValue();
 		SortedRangeList list = baseLists.get(minBase);
-		long min = minBase + ((list.getMin() - Integer.MIN_VALUE) & 0xffffffffl);
+		long min = minBase + ((list.getMin() - Integer.MIN_VALUE) & 0xffffffffL);
 		return addrMap.decodeAddress(min);
 	}
 
@@ -241,7 +250,7 @@ public class NormalizedAddressSet implements AddressSetView {
 
 		long maxBase = (bases.get(bases.size() - 1)).longValue();
 		SortedRangeList list = baseLists.get(maxBase);
-		long max = maxBase + ((list.getMax() - Integer.MIN_VALUE) & 0xffffffffl);
+		long max = maxBase + ((list.getMax() - Integer.MIN_VALUE) & 0xffffffffL);
 		return addrMap.decodeAddress(max);
 	}
 
@@ -431,7 +440,7 @@ public class NormalizedAddressSet implements AddressSetView {
 					nextAddr = start;
 					endAddr = forward ? range.getMaxAddress() : range.getMinAddress();
 				}
-				else if ((forward & (comp > 0)) || (!forward & (comp < 0))) {
+				else if ((forward ? (comp > 0) : (comp < 0))) {
 					return;
 				}
 			}
@@ -500,7 +509,7 @@ public class NormalizedAddressSet implements AddressSetView {
 
 		MyAddressRangeIterator(boolean forward) {
 			this.forward = forward;
-			ArrayList<Long> myBases = new ArrayList<Long>(bases);
+			ArrayList<Long> myBases = new ArrayList<>(bases);
 			if (!forward) {
 				Collections.reverse(myBases);
 			}
@@ -530,9 +539,9 @@ public class NormalizedAddressSet implements AddressSetView {
 			if (hasNext()) {
 				Range range = currIt.next();
 				Address a1 =
-					addrMap.decodeAddress(base + ((range.min - Integer.MIN_VALUE) & 0xffffffffl));
+					addrMap.decodeAddress(base + ((range.min - Integer.MIN_VALUE) & 0xffffffffL));
 				Address a2 =
-					addrMap.decodeAddress(base + ((range.max - Integer.MIN_VALUE) & 0xffffffffl));
+					addrMap.decodeAddress(base + ((range.max - Integer.MIN_VALUE) & 0xffffffffL));
 				return new AddressRangeImpl(a1, a2);
 			}
 			return null;
@@ -574,7 +583,7 @@ public class NormalizedAddressSet implements AddressSetView {
 			return ("[empty]\n");
 		}
 
-		StringBuffer str = new StringBuffer();
+		StringBuilder str = new StringBuilder();
 		for (AddressRange range : this) {
 			str.append(range);
 			str.append(" ");

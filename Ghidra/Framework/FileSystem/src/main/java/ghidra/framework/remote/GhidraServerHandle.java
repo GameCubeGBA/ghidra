@@ -51,27 +51,27 @@ public interface GhidraServerHandle extends Remote {
 	 *         older clients the ability to connect to the server.  Remote interface remained
 	 *         unchanged allowing 9.1 clients to connect to 9.0 server.
 	 */
-	public static final int INTERFACE_VERSION = 11;
+	int INTERFACE_VERSION = 11;
 
 	/**
 	 * Minimum version of Ghidra which utilized the current INTERFACE_VERSION
 	 */
-	public static final String MIN_GHIDRA_VERSION = "9.0";
+	String MIN_GHIDRA_VERSION = "9.0";
 
 	/**
 	 * Default RMI base port for Ghidra Server
 	 */
-	static final int DEFAULT_PORT = 13100;
+	int DEFAULT_PORT = 13100;
 
 	/**
 	 * RMI registry binding name prefix for all versions of the remote GhidraServerHandle object.
 	 */
-	static final String BIND_NAME_PREFIX = "GhidraServer";
+	String BIND_NAME_PREFIX = "GhidraServer";
 
 	/**
 	 * RMI registry binding name for the supported version of the remote GhidraServerHandle object.
 	 */
-	static final String BIND_NAME = BIND_NAME_PREFIX + MIN_GHIDRA_VERSION;
+	String BIND_NAME = BIND_NAME_PREFIX + MIN_GHIDRA_VERSION;
 
 	/**
 	 * Returns user authentication proxy object.

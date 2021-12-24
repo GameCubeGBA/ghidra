@@ -15,9 +15,19 @@
  */
 package docking.menu;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-import javax.swing.*;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import javax.swing.SwingUtilities;
 import javax.swing.event.PopupMenuListener;
 
 import docking.action.DockingActionIf;
@@ -392,7 +402,7 @@ public class MenuManager implements ManagedMenuItem {
 	 * This comparator puts null grouped items at the bottom of menus for menu bar menus so that
 	 * the ungrouped items will cluster at the end.
 	 */
-	private class GroupComparator implements Comparator<String> {
+	private static class GroupComparator implements Comparator<String> {
 
 		@Override
 		public int compare(String group1, String group2) {
@@ -413,7 +423,7 @@ public class MenuManager implements ManagedMenuItem {
 	 * This comparator puts null grouped items at the top of the menu so that universal popup
 	 * actions are always at the bottom (e.g., Copy for tables).
 	 */
-	private class PopupGroupComparator implements Comparator<String> {
+	private static class PopupGroupComparator implements Comparator<String> {
 
 		@Override
 		public int compare(String group1, String group2) {
@@ -430,7 +440,7 @@ public class MenuManager implements ManagedMenuItem {
 		}
 	}
 
-	private class ManagedMenuItemComparator implements Comparator<ManagedMenuItem> {
+	private static class ManagedMenuItemComparator implements Comparator<ManagedMenuItem> {
 
 		private final Comparator<String> groupComparator;
 

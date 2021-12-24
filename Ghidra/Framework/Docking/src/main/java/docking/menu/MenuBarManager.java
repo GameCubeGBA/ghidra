@@ -15,7 +15,9 @@
  */
 package docking.menu;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.swing.JMenuBar;
 

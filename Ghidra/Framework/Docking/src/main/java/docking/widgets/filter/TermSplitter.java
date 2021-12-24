@@ -26,6 +26,6 @@ public interface TermSplitter {
 	 * @param input the string to split
 	 * @return array of terms
 	 */
-	public String[] split(String input);
+	String[] split(String input);
 
 }

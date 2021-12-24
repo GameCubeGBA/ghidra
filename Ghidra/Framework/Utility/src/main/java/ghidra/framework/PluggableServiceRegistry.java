@@ -20,7 +20,7 @@ import java.util.Map;
 
 public class PluggableServiceRegistry {
 
-	private static Map<Class<?>, Object> MAP = new HashMap<Class<?>, Object>();
+	private static Map<Class<?>, Object> MAP = new HashMap<>();
 
 	public static <T> void registerPluggableService(Class<? extends T> pluggableServiceClass,
 			T replacementInstance) throws PluggableServiceRegistryException {

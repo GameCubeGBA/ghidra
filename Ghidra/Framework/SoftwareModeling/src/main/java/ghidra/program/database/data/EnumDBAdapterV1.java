@@ -18,7 +18,15 @@ package ghidra.program.database.data;
 import java.io.IOException;
 import java.util.Date;
 
-import db.*;
+import db.ByteField;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.LongField;
+import db.RecordIterator;
+import db.Schema;
+import db.StringField;
+import db.Table;
 import ghidra.util.UniversalID;
 import ghidra.util.exception.VersionException;
 
@@ -139,8 +147,8 @@ class EnumDBAdapterV1 extends EnumDBAdapter {
 		Field[] keys = enumTable.findRecords(new LongField(datatypeID.getValue()),
 			V1_ENUM_UNIVERSAL_DT_ID_COL);
 
-		for (int i = 0; i < keys.length; i++) {
-			DBRecord record = enumTable.getRecord(keys[i]);
+		for (Field key : keys) {
+			DBRecord record = enumTable.getRecord(key);
 			if (record.getLongValue(V1_ENUM_SOURCE_ARCHIVE_ID_COL) == sourceID.getValue()) {
 				return record;
 			}

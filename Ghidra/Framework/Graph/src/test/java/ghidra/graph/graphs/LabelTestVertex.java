@@ -18,7 +18,10 @@ package ghidra.graph.graphs;
 import java.awt.Color;
 import java.awt.Dimension;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 import docking.widgets.label.GDLabel;
 

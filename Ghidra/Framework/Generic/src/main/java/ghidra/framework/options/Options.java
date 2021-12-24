@@ -19,23 +19,26 @@ import java.awt.Color;
 import java.awt.Font;
 import java.beans.PropertyEditor;
 import java.io.File;
-import java.util.*;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 
 import javax.swing.KeyStroke;
 
 import ghidra.util.HelpLocation;
 
 public interface Options {
-	public static final char DELIMITER = '.';
-	public final static String DELIMITER_STRING = new String(new char[] { DELIMITER });
-	public final static String ILLEGAL_DELIMITER = DELIMITER_STRING + DELIMITER_STRING;
+	char DELIMITER = '.';
+	String DELIMITER_STRING = new String(new char[] { DELIMITER });
+	String ILLEGAL_DELIMITER = DELIMITER_STRING + DELIMITER_STRING;
 
 	/**
 	 * Get the name of this options object.
 	 *
 	 * @return String
 	 */
-	public abstract String getName();
+	String getName();
 
 	/**
 	 * Returns a unique id for option in this options with the given name.  This will be the full
@@ -43,14 +46,14 @@ public interface Options {
 	 * @param optionName the name of the option for which to get an ID;
 	 * @return the unique ID for the given option.
 	 */
-	public String getID(String optionName);
+	String getID(String optionName);
 
 	/**
 	 * Returns the OptionType of the given option.
 	 * @param optionName the name of the option for which to get the type.
 	 * @return the OptionType of option with the given name.
 	 */
-	public OptionType getType(String optionName);
+	OptionType getType(String optionName);
 
 	/**
 	 * Get the property editor for the option with the given name. Note: This method must be called
@@ -60,7 +63,7 @@ public interface Options {
 	 * for the property type if one can be found; otherwise null.
 	 * @throws IllegalStateException if not called from the swing thread.
 	 */
-	public PropertyEditor getPropertyEditor(String optionName);
+	PropertyEditor getPropertyEditor(String optionName);
 
 	/**
 	 * Get the property editor that was registered for the specific option with the given name.  Unlike
@@ -69,13 +72,13 @@ public interface Options {
 	 * @return the PropertyEditor that was registered for this option.
 	 */
 
-	public PropertyEditor getRegisteredPropertyEditor(String optionName);
+	PropertyEditor getRegisteredPropertyEditor(String optionName);
 
 	/**
 	 * Returns a list of Options objects that are nested one level down from this Options object.
 	 * @return  a list of Options objects that are nested one level down from this Options object.
 	 */
-	public List<Options> getChildOptions();
+	List<Options> getChildOptions();
 
 	/**
 	 * Returns a list of option names that immediately fall under this options.  For example, if this options
@@ -83,19 +86,19 @@ public interface Options {
 	 * "c.d" leaf option name could be returned by getOptions("c").getLeafOptionNames()
 	 * @return the list of the names of the options that are immediate children of this options object.
 	 */
-	public List<String> getLeafOptionNames();
+	List<String> getLeafOptionNames();
 
 	/**
 	 * Set the location for where help can be found for this entire options object.
 	 * @param helpLocation location for help on the option
 	 */
-	public abstract void setOptionsHelpLocation(HelpLocation helpLocation);
+	void setOptionsHelpLocation(HelpLocation helpLocation);
 
 	/**
 	 * Returns the HelpLocation for this entire Options object.
 	 * @return  the HelpLocation for this entire Options object.
 	 */
-	public abstract HelpLocation getOptionsHelpLocation();
+	HelpLocation getOptionsHelpLocation();
 
 	/**
 	 * Get the location for where help can be found for the option with
@@ -103,7 +106,7 @@ public interface Options {
 	 * @param optionName name of the option
 	 * @return null if the help location was not set on the option
 	 */
-	public abstract HelpLocation getHelpLocation(String optionName);
+	HelpLocation getHelpLocation(String optionName);
 
 	/**
 	 * Registers an option with a description, help location, and a default value without specifying
@@ -117,7 +120,7 @@ public interface Options {
 	 * @param description a description of the option.
 	 * @throws IllegalArgumentException if the defaultValue is null
 	 */
-	public abstract void registerOption(String optionName, Object defaultValue, HelpLocation help,
+	void registerOption(String optionName, Object defaultValue, HelpLocation help,
 			String description);
 
 	/**
@@ -130,7 +133,7 @@ public interface Options {
 	 * @param help the HelpLocation for this option.
 	 * @param description a description of the option.
 	 */
-	public abstract void registerOption(String optionName, OptionType type, Object defaultValue,
+	void registerOption(String optionName, OptionType type, Object defaultValue,
 			HelpLocation help, String description);
 
 	/**
@@ -146,20 +149,20 @@ public interface Options {
 	 * then the property editor can't be null;
 	 * @throws IllegalStateException if the options is a custom option and the editor is null.
 	 */
-	public abstract void registerOption(String optionName, OptionType type, Object defaultValue,
+	void registerOption(String optionName, OptionType type, Object defaultValue,
 			HelpLocation help, String description, PropertyEditor editor);
 
 	/**
 	 * Register the options editor that will handle the editing for all the options or a sub group of options.
 	 * @param editor the custom editor panel to be used to edit the options or sub group of options.
 	 */
-	public abstract void registerOptionsEditor(OptionsEditor editor);
+	void registerOptionsEditor(OptionsEditor editor);
 
 	/**
 	 * Get the editor that will handle editing all the values in this options or sub group of options.
 	 * @return null if no options editor was registered
 	 */
-	public abstract OptionsEditor getOptionsEditor();
+	OptionsEditor getOptionsEditor();
 
 	/**
 	 * Put the object value.  If the option exists, the type must match the type of the existing
@@ -169,7 +172,7 @@ public interface Options {
 	 * @throws IllegalStateException if the object does not match the existing type of the option.
 	 * @throws IllegalArgumentException if the object is null or not a supported type.
 	 */
-	public abstract void putObject(String optionName, Object obj);
+	void putObject(String optionName, Object obj);
 
 	/**
 	 * Get the object value; called when the options dialog is being
@@ -179,7 +182,7 @@ public interface Options {
 	 * @return object with the given option name; if no option was found,
 	 * return default value (this value is not stored in the option maps)
 	 */
-	public abstract Object getObject(String optionName, Object defaultValue);
+	Object getObject(String optionName, Object defaultValue);
 
 	/**
 	 * Get the boolean value for the given option name.
@@ -188,7 +191,7 @@ public interface Options {
 	 * is no option with the given name.
 	 * @return boolean option value
 	 */
-	public abstract boolean getBoolean(String optionName, boolean defaultValue);
+	boolean getBoolean(String optionName, boolean defaultValue);
 
 	/**
 	 * Get the byte array for the given option name.
@@ -197,7 +200,7 @@ public interface Options {
 	 * is no option with the given name
 	 * @return byte[] byte array value
 	 */
-	public abstract byte[] getByteArray(String optionName, byte[] defaultValue);
+	byte[] getByteArray(String optionName, byte[] defaultValue);
 
 	/**
 	 * Get the int value for the given option name.
@@ -206,7 +209,7 @@ public interface Options {
 	 * is no option with the given name
 	 * @return int option value
 	 */
-	public abstract int getInt(String optionName, int defaultValue);
+	int getInt(String optionName, int defaultValue);
 
 	/**
 	 * Get the double value for the given option name.
@@ -215,7 +218,7 @@ public interface Options {
 	 * is no option with the given name
 	 * @return double value for the option
 	 */
-	public abstract double getDouble(String optionName, double defaultValue);
+	double getDouble(String optionName, double defaultValue);
 
 	/**
 	 * Get the float value for the given option name.
@@ -224,7 +227,7 @@ public interface Options {
 	 * is no option with the given name
 	 * @return float value for the option
 	 */
-	public abstract float getFloat(String optionName, float defaultValue);
+	float getFloat(String optionName, float defaultValue);
 
 	/**
 	 * Get the long value for the given option name.
@@ -233,7 +236,7 @@ public interface Options {
 	 * is no option with the given name
 	 * @return long value for the option
 	 */
-	public abstract long getLong(String optionName, long defaultValue);
+	long getLong(String optionName, long defaultValue);
 
 	/**
 	 * Get the custom option value for the given option name.
@@ -242,7 +245,7 @@ public interface Options {
 	 * is no option with the given name
 	 * @return WrappedOption value for the option
 	 */
-	public abstract CustomOption getCustomOption(String optionName, CustomOption defaultValue);
+	CustomOption getCustomOption(String optionName, CustomOption defaultValue);
 
 	/**
 	 * Get the Color for the given option name.
@@ -253,7 +256,7 @@ public interface Options {
 	 * @throws IllegalArgumentException is a option exists with the given
 	 * name but it is not a Color
 	 */
-	public abstract Color getColor(String optionName, Color defaultValue);
+	Color getColor(String optionName, Color defaultValue);
 
 	/**
 	 * Get the File for the given option name.
@@ -264,7 +267,7 @@ public interface Options {
 	 * @throws IllegalArgumentException is a option exists with the given
 	 * name but it is not a File options
 	 */
-	public abstract File getFile(String optionName, File defaultValue);
+	File getFile(String optionName, File defaultValue);
 
 	/**
 	 * Get the Date for the given option name.
@@ -275,7 +278,7 @@ public interface Options {
 	 * @throws IllegalArgumentException is a option exists with the given
 	 * name but it is not a Date options
 	 */
-	public abstract Date getDate(String pName, Date date);
+	Date getDate(String pName, Date date);
 
 	/**
 	 * Get the Font for the given option name.
@@ -286,7 +289,7 @@ public interface Options {
 	 * @throws IllegalArgumentException is a option exists with the given
 	 * name but it is not a Font
 	 */
-	public abstract Font getFont(String optionName, Font defaultValue);
+	Font getFont(String optionName, Font defaultValue);
 
 	/**
 	 * Get the KeyStrokg for the given action name.
@@ -297,7 +300,7 @@ public interface Options {
 	 * @throws IllegalArgumentException is a option exists with the given
 	 * name but it is not a KeyStroke
 	 */
-	public abstract KeyStroke getKeyStroke(String optionName, KeyStroke defaultValue);
+	KeyStroke getKeyStroke(String optionName, KeyStroke defaultValue);
 
 	/**
 	 * Get the string value for the given option name.
@@ -306,7 +309,7 @@ public interface Options {
 	 * option with the given name
 	 * @return String value for the option
 	 */
-	public abstract String getString(String optionName, String defaultValue);
+	String getString(String optionName, String defaultValue);
 
 	/**
 	 * Get the Enum value for the given option name.
@@ -315,70 +318,70 @@ public interface Options {
 	 * no option with the given name
 	 * @return Enum value for the option
 	 */
-	public abstract <T extends Enum<T>> T getEnum(String optionName, T defaultValue);
+	<T extends Enum<T>> T getEnum(String optionName, T defaultValue);
 
 	/**
 	 * Sets the long value for the option.
 	 * @param optionName name of the option
 	 * @param value value of the option
 	 */
-	public abstract void setLong(String optionName, long value);
+	void setLong(String optionName, long value);
 
 	/**
 	 * Sets the boolean value for the option.
 	 * @param optionName name of the option
 	 * @param value value of the option
 	 */
-	public abstract void setBoolean(String optionName, boolean value);
+	void setBoolean(String optionName, boolean value);
 
 	/**
 	 * Sets the int value for the option.
 	 * @param optionName name of the option
 	 * @param value value of the option
 	 */
-	public abstract void setInt(String optionName, int value);
+	void setInt(String optionName, int value);
 
 	/**
 	 * Sets the double value for the option.
 	 * @param optionName name of the option
 	 * @param value value of the option
 	 */
-	public abstract void setDouble(String optionName, double value);
+	void setDouble(String optionName, double value);
 
 	/**
 	 * Sets the float value for the option.
 	 * @param optionName name of the option
 	 * @param value value of the option
 	 */
-	public abstract void setFloat(String optionName, float value);
+	void setFloat(String optionName, float value);
 
 	/**
 	 * Sets the Custom option value for the option.
 	 * @param optionName name of the option
 	 * @param value the value
 	 */
-	public abstract void setCustomOption(String optionName, CustomOption value);
+	void setCustomOption(String optionName, CustomOption value);
 
 	/**
 	 * Sets the byte[] value for the given option name.
 	 * @param optionName the name of the option on which to save bytes.
 	 * @param value the value
 	 */
-	public abstract void setByteArray(String optionName, byte[] value);
+	void setByteArray(String optionName, byte[] value);
 
 	/**
 	 * Sets the File value for the option.
 	 * @param optionName name of the option
 	 * @param value the value
 	 */
-	public abstract void setFile(String optionName, File value);
+	void setFile(String optionName, File value);
 
 	/**
 	 * Sets the Date value for the option.
 	 * @param optionName name of the option
 	 * @param newSetting the Date to set
 	 */
-	public abstract void setDate(String optionName, Date newSetting);
+	void setDate(String optionName, Date newSetting);
 
 	/**
 	 * Sets the Color value for the option
@@ -387,7 +390,7 @@ public interface Options {
 	 * @throws IllegalArgumentException if a option with the given
 	 * name already exists, but it is not a Color
 	 */
-	public abstract void setColor(String optionName, Color value);
+	void setColor(String optionName, Color value);
 
 	/**
 	 * Sets the Font value for the option
@@ -396,7 +399,7 @@ public interface Options {
 	 * @throws IllegalArgumentException if a option with the given
 	 * name already exists, but it is not a Font
 	 */
-	public abstract void setFont(String optionName, Font value);
+	void setFont(String optionName, Font value);
 
 	/**
 	 * Sets the KeyStroke value for the option
@@ -405,27 +408,27 @@ public interface Options {
 	 * @throws IllegalArgumentException if a option with the given
 	 * name already exists, but it is not a KeyStroke
 	 */
-	public abstract void setKeyStroke(String optionName, KeyStroke value);
+	void setKeyStroke(String optionName, KeyStroke value);
 
 	/**
 	 * Set the String value for the option.
 	 * @param optionName name of the option
 	 * @param value value of the option
 	 */
-	public abstract void setString(String optionName, String value);
+	void setString(String optionName, String value);
 
 	/**
 	 * Set the Enum value for the option.
 	 * @param optionName name of the option
 	 * @param value Enum value of the option
 	 */
-	public abstract <T extends Enum<T>> void setEnum(String optionName, T value);
+	<T extends Enum<T>> void setEnum(String optionName, T value);
 
 	/**
 	 * Remove the option name.
 	 * @param optionName name of option to remove
 	 */
-	public abstract void removeOption(String optionName);
+	void removeOption(String optionName);
 
 	/**
 	 * Get the list of option names. This method will return the names (paths) of all options contained
@@ -434,21 +437,21 @@ public interface Options {
 	 * the "aaa" and "bbb" names.
 	 * @return the list of all option names(paths) under this options.
 	 */
-	public abstract List<String> getOptionNames();
+	List<String> getOptionNames();
 
 	/**
 	 * Return true if a option exists with the given name.
 	 * @param optionName option name
 	 * @return true if there exists an option with the given name
 	 */
-	public abstract boolean contains(String optionName);
+	boolean contains(String optionName);
 
 	/**
 	 * Get the description for the given option name.
 	 * @param optionName name of the option
 	 * @return null if the description or option name does not exist
 	 */
-	public abstract String getDescription(String optionName);
+	String getDescription(String optionName);
 
 	/**
 	 * Returns true if the specified option has been registered.  Only registered names
@@ -456,21 +459,21 @@ public interface Options {
 	 * @param optionName the option name
 	 * @return true if registered
 	 */
-	public abstract boolean isRegistered(String optionName);
+	boolean isRegistered(String optionName);
 
 	/**
 	 * Returns true if the option with the given name's current value is the default value.
 	 * @param optionName the name of the option.
 	 * @return true if the options has its current value equal to its default value.
 	 */
-	public abstract boolean isDefaultValue(String optionName);
+	boolean isDefaultValue(String optionName);
 
 	/**
 	 * Restores <b>all</b> options contained herein to their default values.
 	 * 
 	 * @see #restoreDefaultValue(String)
 	 */
-	public abstract void restoreDefaultValues();
+	void restoreDefaultValues();
 
 	/**
 	 * Restores the option denoted by the given name to its default value.
@@ -478,7 +481,7 @@ public interface Options {
 	 * @param optionName The name of the option to restore
 	 * @see #restoreDefaultValues()
 	 */
-	public abstract void restoreDefaultValue(String optionName);
+	void restoreDefaultValue(String optionName);
 
 	/**
 	 * Returns a Options object that is a sub-options of this options.
@@ -490,7 +493,7 @@ public interface Options {
 	 * @param path the path for the sub-options object
 	 * @return an Options object that is a sub-options of this options
 	 */
-	public Options getOptions(String path);
+	Options getOptions(String path);
 
 	/**
 	 * Create an alias in this options for an existing option in some other options object.
@@ -499,35 +502,35 @@ public interface Options {
 	 * @param options the options object that has the actual option.
 	 * @param optionsName the name within the given options object of the actual option.
 	 */
-	public void createAlias(String aliasName, Options options, String optionsName);
+	void createAlias(String aliasName, Options options, String optionsName);
 
 	/**
 	 * Returns
 	 * @param aliasName the name of the alias.
 	 * @return  a Options object that is a sub-options of this options.
 	 */
-	public boolean isAlias(String aliasName);
+	boolean isAlias(String aliasName);
 
 	/**
 	 * Returns the default value for the given option.
 	 * @param optionName the name of the option for which to retrieve the default value.
 	 * @return  the default value for the given option.
 	 */
-	public Object getDefaultValue(String optionName);
+	Object getDefaultValue(String optionName);
 
 	/**
 	 * Returns the value as a string for the given option.
 	 * @param name the name of the option for which to retrieve the value as a string
 	 * @return  the value as a string for the given option.
 	 */
-	public abstract String getValueAsString(String name);
+	String getValueAsString(String name);
 
 	/**
 	 * Returns the default value as a string for the given option.
 	 * @param optionName the name of the option for which to retrieve the default value as a string
 	 * @return  the default value as a string for the given option.
 	 */
-	public abstract String getDefaultValueAsString(String optionName);
+	String getDefaultValueAsString(String optionName);
 
 	/**
 	 * Returns true if the two options objects have the same set of options and values
@@ -535,7 +538,7 @@ public interface Options {
 	 * @param options2 the second options object to test
 	 * @return true if the two options objects have the same set of options and values
 	 */
-	public static boolean hasSameOptionsAndValues(Options options1, Options options2) {
+	static boolean hasSameOptionsAndValues(Options options1, Options options2) {
 		List<String> leafOptionNames1 = options1.getOptionNames();
 		List<String> leafOptionNames2 = options2.getOptionNames();
 		Collections.sort(leafOptionNames1);

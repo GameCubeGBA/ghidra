@@ -109,7 +109,8 @@ public class StringArray implements Array, Serializable {
     /** Removes the string at the given index
      * @param index index of the string to be removed
      */    
-    public void remove(int index) {
+    @Override
+	public void remove(int index) {
         try {
             if (starts[index] > 0) {
                 totalSpaceAllocated -= lengths[index];
@@ -216,7 +217,8 @@ public class StringArray implements Array, Serializable {
     /**
      * Returns the index of the last non-null or non-zero element in the array.
      */
-    public int getLastNonEmptyIndex() {
+    @Override
+	public int getLastNonEmptyIndex() {
         return lastStart;
     }
     
@@ -224,7 +226,8 @@ public class StringArray implements Array, Serializable {
      * 
      * @see ghidra.util.datastruct.Array#copyDataTo(int, ghidra.util.datastruct.DataTable, int, int)
      */
-    public void copyDataTo(int index, DataTable table, int toIndex, int toCol) {
+    @Override
+	public void copyDataTo(int index, DataTable table, int toIndex, int toCol) {
     	table.putString(toIndex, toCol, get(index));
     }
 }

@@ -21,7 +21,10 @@ import java.awt.event.MouseEvent;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.visualization.picking.PickedState;
-import ghidra.graph.viewer.*;
+import ghidra.graph.viewer.GraphViewer;
+import ghidra.graph.viewer.VisualEdge;
+import ghidra.graph.viewer.VisualGraphViewUpdater;
+import ghidra.graph.viewer.VisualVertex;
 import ghidra.graph.viewer.event.picking.GPickedState;
 
 public class VisualGraphEdgeSelectionGraphMousePlugin<V extends VisualVertex, E extends VisualEdge<V>>
@@ -33,11 +36,7 @@ public class VisualGraphEdgeSelectionGraphMousePlugin<V extends VisualVertex, E 
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		if (!checkModifiers(e)) {
-			return;
-		}
-
-		if (e.getClickCount() != 2) {
+		if (!checkModifiers(e) || (e.getClickCount() != 2)) {
 			return;
 		}
 

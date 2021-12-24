@@ -43,6 +43,7 @@ public class DefaultSettingsPropertyMap extends DefaultPropertyMap implements Se
 	 * @exception TypeMismatchException thrown if the
 	 *   property does not have Settings object values.
 	 */
+	@Override
 	public void add(Address addr, Settings value) {
 		propSet.putObject(addrMap.getKey(addr), value);
 	}
@@ -52,6 +53,7 @@ public class DefaultSettingsPropertyMap extends DefaultPropertyMap implements Se
 	 * @param addr the address from where to get the int value
 	 * @return Settings object or null if property not found at addr.
 	 */
+	@Override
 	public Settings getSettings(Address addr) {
 		return (Settings)propSet.getObject(addrMap.getKey(addr));
 	}
@@ -59,6 +61,7 @@ public class DefaultSettingsPropertyMap extends DefaultPropertyMap implements Se
 	/**
 	 * @see ghidra.program.model.util.PropertyMap#getObject(ghidra.program.model.address.Address)
 	 */
+	@Override
 	public Object getObject(Address addr) {
 		return getSettings(addr);
 	}

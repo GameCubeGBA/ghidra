@@ -17,11 +17,20 @@ package ghidra.program.database.util;
 
 import java.util.ConcurrentModificationException;
 
-import db.*;
+import db.BooleanField;
+import db.DBHandle;
+import db.Field;
 import db.util.ErrorHandler;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.database.map.AddressMap;
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressIterator;
+import ghidra.program.model.address.AddressOverflowException;
+import ghidra.program.model.address.AddressRange;
+import ghidra.program.model.address.AddressRangeIterator;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.address.EmptyAddressIterator;
 import ghidra.program.model.util.AddressSetPropertyMap;
 import ghidra.program.util.ChangeManager;
 import ghidra.util.Lock;

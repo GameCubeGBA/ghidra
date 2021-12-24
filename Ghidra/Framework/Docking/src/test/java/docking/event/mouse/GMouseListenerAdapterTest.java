@@ -15,8 +15,12 @@
  */
 package docking.event.mouse;
 
-import static java.awt.event.MouseEvent.*;
-import static org.junit.Assert.*;
+import static java.awt.event.MouseEvent.MOUSE_CLICKED;
+import static java.awt.event.MouseEvent.MOUSE_PRESSED;
+import static java.awt.event.MouseEvent.MOUSE_RELEASED;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -355,7 +359,7 @@ public class GMouseListenerAdapterTest extends AbstractGenericTest {
 // Inner Classes
 //==================================================================================================
 
-	private class TestGMouseListener extends GMouseListenerAdapter {
+	private static class TestGMouseListener extends GMouseListenerAdapter {
 
 		private List<MouseEvent> doubleClicks = new ArrayList<>();
 		private List<MouseEvent> popups = new ArrayList<>();

@@ -17,11 +17,20 @@ package docking.widgets.table.constrainteditor;
 
 import java.awt.Component;
 import java.awt.GridLayout;
-import java.text.*;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
 
-import javax.swing.*;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFormattedTextField.AbstractFormatter;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.JSpinner.NumberEditor;
+import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -264,10 +273,7 @@ public class DoubleRangeConstraintEditor extends AbstractColumnConstraintEditor<
 
 			return Double.compare(textDouble, roundTripDouble) == 0;
 		}
-		catch (ParseException e) {
-			return false;
-		}
-		catch (NumberFormatException nfe) {
+		catch (ParseException | NumberFormatException nfe) {
 			return false;
 		}
 	}

@@ -38,7 +38,7 @@ public interface Variable extends Comparable<Variable> {
 	 * 
 	 * @return the data type of the variable
 	 */
-	public DataType getDataType();
+	DataType getDataType();
 
 	/**
 	 * Set the Data Type of this variable and the associated storage whose size matches the 
@@ -52,7 +52,7 @@ public interface Variable extends Comparable<Variable> {
 	 * @throws VariableSizeException if force is false and data type size causes a conflict 
 	 * with other variables
 	 */
-	public void setDataType(DataType type, VariableStorage storage, boolean force, SourceType source)
+	void setDataType(DataType type, VariableStorage storage, boolean force, SourceType source)
 			throws InvalidInputException;
 
 	/**
@@ -66,7 +66,7 @@ public interface Variable extends Comparable<Variable> {
 	 * @throws VariableSizeException if data type size causes a conflict with other variables
 	 * @see #setDataType(DataType, boolean, boolean, SourceType)
 	 */
-	public void setDataType(DataType type, SourceType source) throws InvalidInputException;
+	void setDataType(DataType type, SourceType source) throws InvalidInputException;
 
 	/**
 	 * Set the Data Type of this variable. The given dataType must have a fixed length.
@@ -82,7 +82,7 @@ public interface Variable extends Comparable<Variable> {
 	 * with other variables
 	 * 
 	 */
-	public void setDataType(DataType type, boolean alignStack, boolean force, SourceType source)
+	void setDataType(DataType type, boolean alignStack, boolean force, SourceType source)
 			throws InvalidInputException;
 
 	/**
@@ -90,21 +90,21 @@ public interface Variable extends Comparable<Variable> {
 	 *
 	 * @return the name of the variable
 	 */
-	public String getName();
+	String getName();
 
 	/**
 	 * Get the length of this variable
 	 *
 	 * @return the length of the variable
 	 */
-	public int getLength();
+	int getLength();
 
 	/**
 	 * Verify that the variable is valid 
 	 * (i.e., storage is valid and size matches variable data type size)
 	 * @return true if variable is valid
 	 */
-	public boolean isValid();
+	boolean isValid();
 
 	/**
 	 * Returns the function that contains this Variable.  May be null if the variable is not in
@@ -112,19 +112,19 @@ public interface Variable extends Comparable<Variable> {
 	 * @return containing function or null
 	 */
 
-	public Function getFunction();
+	Function getFunction();
 
 	/**
 	 * Returns the program that contains this variable or is the intended target
 	 * @return the program.
 	 */
-	public Program getProgram();
+	Program getProgram();
 
 	/**
 	 * Get the source of this variable
 	 * @return the source of this variable
 	 */
-	public SourceType getSource();
+	SourceType getSource();
 
 	/**
 	 * Set the name of this variable.
@@ -135,7 +135,7 @@ public interface Variable extends Comparable<Variable> {
 	 * @throws InvalidInputException
 	 * 		if name contains blank characters, is zero length, or is null
 	 */
-	public void setName(String name, SourceType source) throws DuplicateNameException,
+	void setName(String name, SourceType source) throws DuplicateNameException,
 			InvalidInputException;
 
 	/**
@@ -143,33 +143,33 @@ public interface Variable extends Comparable<Variable> {
 	 *
 	 * @return the comment
 	 */
-	public String getComment();
+	String getComment();
 
 	/**
 	 * Set the comment for this variable
 	 * @param comment the comment
 	 */
-	public void setComment(String comment);
+	void setComment(String comment);
 
 	/**
 	 * Get the variable storage associated with this variable.
 	 * @return the variable storage for this variable
 	 */
-	public VariableStorage getVariableStorage();
+	VariableStorage getVariableStorage();
 
 	/**
 	 * Get the first storage varnode for this variable
 	 * @return the first storage varnode associated with this variable
 	 * @see #getVariableStorage()
 	 */
-	public Varnode getFirstStorageVarnode();
+	Varnode getFirstStorageVarnode();
 
 	/**
 	 * Get the last storage varnode for this variable
 	 * @return the last storage varnode associated with this variable
 	 * @see #getVariableStorage()
 	 */
-	public Varnode getLastStorageVarnode();
+	Varnode getLastStorageVarnode();
 
 	/** 
 	 * @return true if this is a simple variable consisting of a single stack varnode
@@ -179,14 +179,14 @@ public interface Variable extends Comparable<Variable> {
 	 * 		getFirstStorageVarnode().getOffset()
 	 *  </pre>
 	 */
-	public boolean isStackVariable();
+	boolean isStackVariable();
 
 	/**
 	 * @return true if this variable uses simple or compound storage which contains a stack element.  
 	 * If true, the last storage varnode will always be the stack element.
 	 * @see #getLastStorageVarnode()
 	 */
-	public boolean hasStackStorage();
+	boolean hasStackStorage();
 
 	/** 
 	 * @return true if this is a simple variable consisting of a single register varnode
@@ -194,7 +194,7 @@ public interface Variable extends Comparable<Variable> {
 	 * {@link #getLastStorageVarnode()} methods.  The register can be obtained using the 
 	 * {@link #getRegister()} method.
 	 */
-	public boolean isRegisterVariable();
+	boolean isRegisterVariable();
 
 	/**
 	 * @return first storage register associated with this variable, else null is returned.
@@ -202,7 +202,7 @@ public interface Variable extends Comparable<Variable> {
 	 * in addition to the register returned by this method.
 	 * @see #isRegisterVariable()
 	 */
-	public Register getRegister();
+	Register getRegister();
 
 	/**
 	 * @return all storage register(s) associated with this variable, else null is returned if 
@@ -211,28 +211,28 @@ public interface Variable extends Comparable<Variable> {
 	 * @see #isRegisterVariable()
 	 * @see #isCompoundVariable()
 	 */
-	public List<Register> getRegisters();
+	List<Register> getRegisters();
 
 	/**
 	 * @return the minimum address corresponding to the first varnode of this storage
 	 * or null if this is a special empty storage: {@link VariableStorage#BAD_STORAGE},
 	 * {@link VariableStorage#UNASSIGNED_STORAGE}, {@link VariableStorage#VOID_STORAGE}
 	 */
-	public Address getMinAddress();
+	Address getMinAddress();
 
 	/**
 	 * @return the stack offset associated with simple stack variable (i.e., {@link #isStackVariable()} 
 	 * returns true). 
 	 * @throws UnsupportedOperationException if storage is not a simple stack variable
 	 */
-	public int getStackOffset();
+	int getStackOffset();
 
 	/** 
 	 * @return true if this is a simple variable consisting of a single storage memory element
 	 * which will be returned by either the {@link #getFirstStorageVarnode()} or 
 	 * {@link #getVariableStorage()} methods.
 	 */
-	public boolean isMemoryVariable();
+	boolean isMemoryVariable();
 
 	/** 
 	 * @return true if this is a simple variable consisting of a single storage unique/hash element
@@ -240,38 +240,38 @@ public interface Variable extends Comparable<Variable> {
 	 * {@link #getVariableStorage()} methods.  The unique hash can be obtained from the 
 	 * storage address offset corresponding to the single storage element.
 	 */
-	public boolean isUniqueVariable();
+	boolean isUniqueVariable();
 
 	/**
 	 * @return true if this variable uses compound storage consisting of two or more storage elements
 	 * which will be returned by the {@link #getVariableStorage()} method.  Compound variables will
 	 * always use a register(s) optionally followed by other storage (i.e., stack).
 	 */
-	public boolean isCompoundVariable();
+	boolean isCompoundVariable();
 
 	/**
 	 * @return true if this variable has been assigned storage.  This is equivalent to 
 	 * {@link #getVariableStorage()} != null
 	 */
-	public boolean hasAssignedStorage();
+	boolean hasAssignedStorage();
 
 	/**
 	 * @return the first use offset relative to the function entry point. 
 	 */
-	public int getFirstUseOffset();
+	int getFirstUseOffset();
 
 	/**
 	 * @return the symbol associated with this variable or null if no symbol 
 	 * associated.  Certain dynamic variables such as auto-parameters do not
 	 * have a symbol and will return null. 
 	 */
-	public Symbol getSymbol();
+	Symbol getSymbol();
 
 	/**
 	 * Determine is another variable is equivalent to this variable.
 	 * @param variable other variable
 	 * @return true if the specified variable is equivalent to this variable
 	 */
-	public boolean isEquivalent(Variable variable);
+	boolean isEquivalent(Variable variable);
 
 }

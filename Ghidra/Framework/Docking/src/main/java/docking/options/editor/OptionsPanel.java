@@ -15,15 +15,26 @@
  */
 package docking.options.editor;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyEditor;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.regex.Pattern;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
@@ -35,8 +46,13 @@ import docking.widgets.label.GIconLabel;
 import docking.widgets.tree.GTree;
 import docking.widgets.tree.GTreeNode;
 import docking.widgets.tree.internal.DefaultGTreeDataTransformer;
-import ghidra.framework.options.*;
-import ghidra.util.*;
+import ghidra.framework.options.CustomOptionsEditor;
+import ghidra.framework.options.EditorStateFactory;
+import ghidra.framework.options.Options;
+import ghidra.framework.options.OptionsEditor;
+import ghidra.util.HTMLUtilities;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
 import ghidra.util.bean.opteditor.OptionsVetoException;
 import ghidra.util.layout.MiddleLayout;
 import ghidra.util.task.SwingUpdateManager;
@@ -405,15 +421,11 @@ public class OptionsPanel extends JPanel {
 
 		private void addOptionDetails(CustomOptionsEditor editor, List<String> results) {
 			String[] optionNames = editor.getOptionNames();
-			for (String string : optionNames) {
-				results.add(string);
-			}
+			Collections.addAll(results, optionNames);
 
 			String[] descriptions = editor.getOptionDescriptions();
 			if (descriptions != null) {
-				for (String string : descriptions) {
-					results.add(string);
-				}
+				Collections.addAll(results, descriptions);
 			}
 		}
 	}

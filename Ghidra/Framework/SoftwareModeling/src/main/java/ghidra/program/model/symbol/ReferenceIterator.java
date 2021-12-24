@@ -29,13 +29,11 @@ public interface ReferenceIterator extends Iterator<Reference>, Iterable<Referen
 	/**
 	 * Returns whether there is a next memory reference in the iterator.
 	 */
-	@Override
-	public boolean hasNext();
+	@Override boolean hasNext();
 
 	/**
 	 * Get the next memory reference.
 	 * @return null if there is no next reference
 	 */
-	@Override
-	public Reference next();
+	@Override Reference next();
 }

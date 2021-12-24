@@ -31,5 +31,5 @@ public interface PeekableIterator<T> extends Iterator<T> {
 	 * 
 	 * @return the item that would be returned by calling {@link #next()}
 	 */
-	public T peek() throws NoSuchElementException;
+	T peek() throws NoSuchElementException;
 }

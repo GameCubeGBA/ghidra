@@ -16,13 +16,12 @@
  */
 package docking.widgets;
 
-import ghidra.security.KeyStorePasswordProvider;
-import ghidra.util.SystemUtilities;
-
 import java.awt.Component;
 import java.util.Arrays;
 
 import docking.DockingWindowManager;
+import ghidra.security.KeyStorePasswordProvider;
+import ghidra.util.SystemUtilities;
 
 public class PopupKeyStorePasswordProvider implements KeyStorePasswordProvider {
 

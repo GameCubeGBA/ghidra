@@ -28,7 +28,9 @@ import docking.DialogComponentProvider;
 import docking.DockingWindowManager;
 import docking.tool.ToolConstants;
 import docking.widgets.OptionDialog;
-import ghidra.util.*;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
+import ghidra.util.Swing;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.timer.GTimer;
 import ghidra.util.timer.GTimerMonitor;
@@ -200,9 +202,8 @@ public class TaskDialog extends DialogComponentProvider implements TaskMonitor {
 	 * @return true if the task should be cancelled
 	 */
 	private boolean promptToVerifyCancel() {
-		boolean userSaysYes = OptionDialog.showYesNoDialog(getComponent(), "Cancel?",
+		return OptionDialog.showYesNoDialog(getComponent(), "Cancel?",
 			"Do you really want to cancel \"" + getTitle() + "\"?") == OptionDialog.OPTION_ONE;
-		return userSaysYes;
 	}
 
 	private boolean isInstalled(Component c) {
@@ -362,6 +363,7 @@ public class TaskDialog extends DialogComponentProvider implements TaskMonitor {
 	/**
 	 * Cancels the task and closes this dialog
 	 */
+	@Override
 	public void dispose() {
 		internalCancel();
 	}

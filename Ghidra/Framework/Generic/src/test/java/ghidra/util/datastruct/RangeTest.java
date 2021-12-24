@@ -49,8 +49,7 @@ public class RangeTest extends AbstractGenericTest {
 	public void testRange() {
 		Range r;
 		// Valid construction
-		for (int i = 0; i < goodPairs.length; i++) {
-			int[] pair = goodPairs[i];
+		for (int[] pair : goodPairs) {
 			int min = pair[0];
 			int max = pair[1];
 			r = new Range(min, max);
@@ -59,8 +58,7 @@ public class RangeTest extends AbstractGenericTest {
 		}
 
 		// Invalid construction
-		for (int i = 0; i < badPairs.length; i++) {
-			int[] pair = badPairs[i];
+		for (int[] pair : badPairs) {
 			int min = pair[0];
 			int max = pair[1];
 			try {
@@ -284,8 +282,7 @@ public class RangeTest extends AbstractGenericTest {
 	public void testEqualsObject() {
 		Range r1;
 		Range r2;
-		for (int i = 0; i < goodPairs.length; i++) {
-			int[] pair = goodPairs[i];
+		for (int[] pair : goodPairs) {
 			int min = pair[0];
 			int max = pair[1];
 			r1 = new Range(min, max);
@@ -300,8 +297,7 @@ public class RangeTest extends AbstractGenericTest {
 	@Test
 	public void testToString() {
 		Range r;
-		for (int i = 0; i < goodPairs.length; i++) {
-			int[] pair = goodPairs[i];
+		for (int[] pair : goodPairs) {
 			int min = pair[0];
 			int max = pair[1];
 			r = new Range(min, max);
@@ -479,8 +475,7 @@ public class RangeTest extends AbstractGenericTest {
 	public void testSize() {
 		Range r;
 		// Valid construction
-		for (int i = 0; i < goodPairs.length; i++) {
-			int[] pair = goodPairs[i];
+		for (int[] pair : goodPairs) {
 			int min = pair[0];
 			int max = pair[1];
 			r = new Range(min, max);

@@ -15,16 +15,26 @@
  */
 package ghidra.program.database.external;
 
+import java.util.Objects;
+
 import ghidra.app.util.NamespaceUtils;
 import ghidra.app.util.SymbolPath;
 import ghidra.program.database.symbol.SymbolDB;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressFactory;
 import ghidra.program.model.data.DataType;
-import ghidra.program.model.listing.*;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.listing.CircularDependencyException;
+import ghidra.program.model.listing.Function;
+import ghidra.program.model.listing.Library;
+import ghidra.program.model.symbol.ExternalLocation;
+import ghidra.program.model.symbol.Namespace;
+import ghidra.program.model.symbol.SourceType;
+import ghidra.program.model.symbol.Symbol;
+import ghidra.program.model.symbol.SymbolType;
 import ghidra.util.SystemUtilities;
-import ghidra.util.exception.*;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.DuplicateNameException;
+import ghidra.util.exception.InvalidInputException;
 
 public class ExternalLocationDB implements ExternalLocation {
 
@@ -298,10 +308,7 @@ public class ExternalLocationDB implements ExternalLocation {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((symbol == null) ? 0 : symbol.hashCode());
-		return result;
+		return Objects.hash(symbol);
 	}
 
 	@Override
@@ -309,10 +316,7 @@ public class ExternalLocationDB implements ExternalLocation {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
 		}
 		ExternalLocationDB other = (ExternalLocationDB) obj;
@@ -321,12 +325,8 @@ public class ExternalLocationDB implements ExternalLocation {
 
 	@Override
 	public boolean isEquivalent(ExternalLocation other) {
-		if (other == null) {
-			return false;
-		}
-
 		// first they must be the same of type of external locations
-		if (isFunction() != other.isFunction()) {
+		if ((other == null) || (isFunction() != other.isFunction())) {
 			return false;
 		}
 

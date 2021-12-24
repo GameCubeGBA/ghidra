@@ -16,11 +16,15 @@
  */
 package docking.widgets.list;
 
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.*;
+import javax.swing.JList;
+import javax.swing.ListCellRenderer;
+import javax.swing.ListModel;
 
 /**
  * A listener designed to forward events from a JList to its renderer.  This listener allows

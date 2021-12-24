@@ -15,12 +15,14 @@
  */
 package ghidra.program.database.function;
 
-import ghidra.program.database.map.AddressMap;
-import ghidra.util.exception.VersionException;
-
 import java.io.IOException;
 
-import db.*;
+import db.DBHandle;
+import db.DBRecord;
+import db.RecordIterator;
+import db.Table;
+import ghidra.program.database.map.AddressMap;
+import ghidra.util.exception.VersionException;
 
 class FunctionAdapterV1 extends FunctionAdapter {
 

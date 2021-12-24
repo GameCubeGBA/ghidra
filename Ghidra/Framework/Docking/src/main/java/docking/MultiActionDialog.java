@@ -15,11 +15,24 @@
  */
 package docking;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
+import javax.swing.Icon;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.UIManager;
 
 import docking.action.DockingActionIf;
 import docking.event.mouse.GMouseListenerAdapter;
@@ -77,8 +90,7 @@ public class MultiActionDialog extends DialogComponentProvider {
 		okButton.setEnabled(false);
 		this.list = list;
 		listModel.clear();
-		for (int i = 0; i < list.size(); i++) {
-			ExecutableAction actionProxy = list.get(i);
+		for (ExecutableAction actionProxy : list) {
 			DockingActionIf action = actionProxy.getAction();
 			listModel.addElement(action.getName() + " (" + action.getOwnerDescription() + ")");
 		}

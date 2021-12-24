@@ -15,7 +15,9 @@
  */
 package ghidra.pcodeCPort.semantics;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.util.List;
 
 import org.jdom.Element;
@@ -120,10 +122,7 @@ public class VarnodeTpl {
 	}
 
 	public boolean isLocalTemp() {
-		if (space.getType() != ConstTpl.const_type.spaceid) {
-			return false;
-		}
-		if (space.getSpace().getType() != spacetype.IPTR_INTERNAL) {
+		if ((space.getType() != ConstTpl.const_type.spaceid) || (space.getSpace().getType() != spacetype.IPTR_INTERNAL)) {
 			return false;
 		}
 		return true;
@@ -154,9 +153,8 @@ public class VarnodeTpl {
 		offset.transfer(params);
 		size.transfer(params);
 		if (doesOffsetPlus) {
-			if (isLocalTemp())
-				return plus;		// A positive number indicates truncation of a local temp
-			if (params.get(handleIndex).getSize().isZero())
+					// A positive number indicates truncation of a local temp
+			if (isLocalTemp() || params.get(handleIndex).getSize().isZero())
 				return plus;		//     or a zerosize object
 		}
 		return -1;
@@ -241,10 +239,7 @@ public class VarnodeTpl {
 		if (obj == this) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (!(obj instanceof VarnodeTpl)) {
+		if ((obj == null) || !(obj instanceof VarnodeTpl)) {
 			return false;
 		}
 		VarnodeTpl o2 = (VarnodeTpl) obj;

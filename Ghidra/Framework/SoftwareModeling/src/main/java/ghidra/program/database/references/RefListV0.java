@@ -29,7 +29,12 @@ import ghidra.program.database.DBObjectCache;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.database.map.AddressMap;
 import ghidra.program.model.address.Address;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.RefType;
+import ghidra.program.model.symbol.RefTypeFactory;
+import ghidra.program.model.symbol.Reference;
+import ghidra.program.model.symbol.ReferenceIterator;
+import ghidra.program.model.symbol.SourceType;
+import ghidra.program.model.symbol.SymbolUtilities;
 
 /**
  * 
@@ -39,7 +44,7 @@ import ghidra.program.model.symbol.*;
  */
 class RefListV0 extends RefList {
 
-	private static final byte[] EMPTY_DATA = new byte[0];
+	private static final byte[] EMPTY_DATA = {};
 	private static final int BASE_REF_SIZE = 11;
 	private static final int OFFSET_SIZE = 8;
 	private static final int SYMBOL_ID_SIZE = 8;
@@ -137,22 +142,22 @@ class RefListV0 extends RefList {
 	}
 
 	synchronized void addRefs(Reference[] refs) throws IOException {
-		for (int i = 0; i < refs.length; i++) {
+		for (Reference ref : refs) {
 
-			boolean isPrimary = refs[i].isPrimary();
-			long symbolID = refs[i].getSymbolID();
+			boolean isPrimary = ref.isPrimary();
+			long symbolID = ref.getSymbolID();
 			boolean isOffset = false;
 			boolean isShifted = false;
 			long offsetOrShift = 0;
-			if (refs[i].isMemoryReference()) {
-				MemReferenceDB memRef = (MemReferenceDB) refs[i];
+			if (ref.isMemoryReference()) {
+				MemReferenceDB memRef = (MemReferenceDB) ref;
 				isOffset = memRef.isOffset();
 				isShifted = memRef.isShifted();
 				offsetOrShift = memRef.getOffsetOrShift();
 			}
 
-			appendRef(refs[i].getFromAddress(), refs[i].getToAddress(), refs[i].getOperandIndex(),
-				refs[i].getReferenceType(), refs[i].getSource(), isPrimary, symbolID, isOffset,
+			appendRef(ref.getFromAddress(), ref.getToAddress(), ref.getOperandIndex(),
+				ref.getReferenceType(), ref.getSource(), isPrimary, symbolID, isOffset,
 				isShifted, offsetOrShift);
 
 		}

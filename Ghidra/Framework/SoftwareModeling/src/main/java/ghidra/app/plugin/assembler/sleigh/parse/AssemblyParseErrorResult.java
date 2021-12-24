@@ -15,7 +15,10 @@
  */
 package ghidra.app.plugin.assembler.sleigh.parse;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Set;
 
 import org.apache.commons.collections4.IterableUtils;
 

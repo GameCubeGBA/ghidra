@@ -16,11 +16,11 @@
  */
 package ghidra.util.datastruct;
 
+import java.io.Serializable;
+
 import ghidra.util.LongIterator;
 import ghidra.util.exception.NoValueException;
 import ghidra.util.prop.IntPropertySet;
-
-import java.io.Serializable;
 
 /**
  * Stores ranges of int values throughout "long" space. Every "long" index has
@@ -119,9 +119,7 @@ public class RangeMap implements Serializable {
 				index = map.getPreviousPropertyIndex(index);	
 				return map.getInt(index);
 			}
-			catch(NoSuchIndexException ex) {
-			}
-			catch(NoValueException ex) {
+			catch(NoSuchIndexException | NoValueException ex) {
 			}
 		}		
 		return 0;

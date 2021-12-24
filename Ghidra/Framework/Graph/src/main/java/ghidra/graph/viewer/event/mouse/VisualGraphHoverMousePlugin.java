@@ -15,12 +15,20 @@
  */
 package ghidra.graph.viewer.event.mouse;
 
-import java.awt.event.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.AbstractGraphMousePlugin;
 import ghidra.graph.VisualGraph;
-import ghidra.graph.viewer.*;
+import ghidra.graph.viewer.GraphComponent;
+import ghidra.graph.viewer.GraphViewer;
+import ghidra.graph.viewer.GraphViewerUtils;
+import ghidra.graph.viewer.PathHighlightMode;
+import ghidra.graph.viewer.VisualEdge;
+import ghidra.graph.viewer.VisualGraphViewUpdater;
+import ghidra.graph.viewer.VisualVertex;
 import ghidra.graph.viewer.edge.VisualGraphPathHighlighter;
 import ghidra.util.task.SwingUpdateManager;
 

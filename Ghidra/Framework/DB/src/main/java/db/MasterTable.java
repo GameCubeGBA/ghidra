@@ -56,7 +56,7 @@ class MasterTable {
 		}
 
 		table = new Table(dbh, masterRecord);
-		ArrayList<TableRecord> trList = new ArrayList<TableRecord>();
+		ArrayList<TableRecord> trList = new ArrayList<>();
 		RecordIterator it = table.iterator();
 		while (it.hasNext()) {
 			trList.add(new TableRecord(dbh, it.next()));
@@ -161,7 +161,7 @@ class MasterTable {
 			throw new IOException("Corrupt database parameters", e);
 		}
 
-		ArrayList<TableRecord> trList = new ArrayList<TableRecord>();
+		ArrayList<TableRecord> trList = new ArrayList<>();
 
 		int ix = 0;
 		int oldTableCnt = tableRecords.length;
@@ -198,8 +198,8 @@ class MasterTable {
 	 * @throws IOException database IO error
 	 */
 	void flush() throws IOException {
-		for (int i = 0; i < tableRecords.length; i++) {
-			DBRecord rec = tableRecords[i].getRecord();
+		for (TableRecord tableRecord : tableRecords) {
+			DBRecord rec = tableRecord.getRecord();
 			if (rec.isDirty()) {
 				table.putRecord(rec);
 			}
@@ -212,9 +212,9 @@ class MasterTable {
 	 * @param newName new tablename
 	 */
 	void changeTableName(String oldName, String newName) {
-		for (int i = 0; i < tableRecords.length; i++) {
-			if (oldName.equals(tableRecords[i].getName())) {
-				tableRecords[i].setName(newName);
+		for (TableRecord tableRecord : tableRecords) {
+			if (oldName.equals(tableRecord.getName())) {
+				tableRecord.setName(newName);
 			}
 		}
 	}

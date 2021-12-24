@@ -37,6 +37,7 @@ public abstract class AbstractVisualVertex implements VisualVertex {
 		this.focused = focused;
 	}
 
+	@Override
 	public boolean isFocused() {
 		return focused;
 	}

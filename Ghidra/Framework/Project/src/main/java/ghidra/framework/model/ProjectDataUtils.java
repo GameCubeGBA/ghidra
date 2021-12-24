@@ -16,7 +16,9 @@
 package ghidra.framework.model;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Deque;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 import ghidra.util.InvalidNameException;
 

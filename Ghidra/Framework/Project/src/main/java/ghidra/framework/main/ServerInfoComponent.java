@@ -16,11 +16,15 @@
 package ghidra.framework.main;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.*;
-import javax.swing.event.*;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import docking.widgets.label.GDLabel;
 import ghidra.framework.model.ServerInfo;
@@ -96,12 +100,7 @@ public class ServerInfoComponent extends JPanel {
 		JLabel nameLabel = new GDLabel("Server Name:", SwingConstants.RIGHT);
 		nameField = new JTextField(20);
 		nameField.setName("Server Name");
-		nameField.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				nameField.transferFocus();
-			}
-		});
+		nameField.addActionListener(e -> nameField.transferFocus());
 		nameDocListener = new DocumentListener() {
 			@Override
 			public void changedUpdate(DocumentEvent e) {
@@ -125,12 +124,7 @@ public class ServerInfoComponent extends JPanel {
 		portNumberField.setName("Port Number");
 
 		portNumberField.setText(Integer.toString(GhidraServerHandle.DEFAULT_PORT));
-		portNumberField.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				portNumberField.transferFocus();
-			}
-		});
+		portNumberField.addActionListener(e -> portNumberField.transferFocus());
 
 		portDocListener = new DocumentListener() {
 			@Override

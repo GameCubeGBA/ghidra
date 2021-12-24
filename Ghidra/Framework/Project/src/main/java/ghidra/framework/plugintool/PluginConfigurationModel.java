@@ -15,14 +15,24 @@
  */
 package ghidra.framework.plugintool;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.swing.Icon;
 import javax.swing.event.ChangeListener;
 
 import docking.action.DockingActionIf;
 import docking.actions.KeyBindingUtils;
-import ghidra.framework.plugintool.util.*;
+import ghidra.framework.plugintool.util.PluginClassManager;
+import ghidra.framework.plugintool.util.PluginDescription;
+import ghidra.framework.plugintool.util.PluginException;
+import ghidra.framework.plugintool.util.PluginPackage;
+import ghidra.framework.plugintool.util.PluginPackageState;
 import ghidra.util.Msg;
 import resources.ResourceManager;
 
@@ -104,8 +114,7 @@ public class PluginConfigurationModel {
 	 * @param plugins the list of all loaded plugins.
 	 */
 	private void findDependencies(Plugin plugin, List<Plugin> plugins) {
-		for (int i = 0; i < plugins.size(); i++) {
-			Plugin p = plugins.get(i);
+		for (Plugin p : plugins) {
 			if (p.dependsUpon(plugin)) {
 				pluginsWithDependenciesSet.add(getPluginDescription(plugin));
 			}
@@ -236,8 +245,7 @@ public class PluginConfigurationModel {
 		HashSet<PluginDescription> set = new HashSet<>();
 
 		// find out all plugins that depend on this plugin
-		for (int i = 0; i < plugins.size(); i++) {
-			Plugin p = plugins.get(i);
+		for (Plugin p : plugins) {
 			if (p.dependsUpon(plugin)) {
 				set.add(p.getPluginDescription());
 			}

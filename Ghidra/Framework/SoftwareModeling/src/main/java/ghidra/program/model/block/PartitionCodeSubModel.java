@@ -15,19 +15,29 @@
  */
 package ghidra.program.model.block;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Set;
 
-import ghidra.program.model.address.*;
-import ghidra.program.model.listing.*;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.listing.Instruction;
+import ghidra.program.model.listing.Listing;
+import ghidra.program.model.listing.Program;
+import ghidra.program.model.symbol.FlowType;
+import ghidra.program.model.symbol.RefType;
+import ghidra.program.model.symbol.Symbol;
 import ghidra.util.Msg;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.NoValueException;
-import ghidra.util.graph.*;
+import ghidra.util.graph.DirectedGraph;
+import ghidra.util.graph.Edge;
+import ghidra.util.graph.GraphIterator;
+import ghidra.util.graph.Vertex;
 import ghidra.util.graph.attributes.AttributeManager;
 import ghidra.util.graph.attributes.IntegerAttribute;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * <CODE>PartitionCodeSubModel</CODE> (Model-P) defines subroutines which do not share code with
@@ -57,7 +67,7 @@ public class PartitionCodeSubModel implements SubroutineBlockModel {
 	private CodeBlockCache foundModelP;     // cache for model-P subroutine
 	private MultEntSubModel modelM;
 
-	private final static CodeBlock[] emptyArray = new CodeBlock[0];
+	private final static CodeBlock[] emptyArray = {};
 
 	// create graph and the vertex attributes associated with the graph
 	private final static String ENTRY_POINT_TAG = "Entry Point Tag";
@@ -104,10 +114,8 @@ public class PartitionCodeSubModel implements SubroutineBlockModel {
 
 		// get block containing addr, but return it only if it's entry point is addr
 		block = getFirstCodeBlockContaining(addr, monitor);
-		if (block != null) {
-			if (block.getFirstStartAddress().equals(addr)) {
-				return block;
-			}
+		if ((block != null) && block.getFirstStartAddress().equals(addr)) {
+			return block;
 		}
 		return null;
 	}

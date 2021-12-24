@@ -19,7 +19,9 @@ import java.io.IOException;
 import java.io.StringWriter;
 
 import javax.swing.JTextPane;
-import javax.swing.text.*;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
+import javax.swing.text.Position;
 
 import ghidra.util.HTMLUtilities;
 import ghidra.util.Msg;
@@ -50,8 +52,7 @@ public class GHtmlTextPane extends JTextPane {
 	private String getPrettifiedHtml() {
 
 		String selectedHtml = getSelectedHtmlText();
-		String converted = HTMLUtilities.fromHTML(selectedHtml);
-		return converted;
+		return HTMLUtilities.fromHTML(selectedHtml);
 	}
 
 	private String getSelectedHtmlText() {
@@ -67,8 +68,7 @@ public class GHtmlTextPane extends JTextPane {
 			int size = endOffset - startOffset;
 			StringWriter stringWriter = new StringWriter(size);
 			getEditorKit().write(stringWriter, doc, startOffset, size);
-			String text = stringWriter.toString();
-			return text;
+			return stringWriter.toString();
 		}
 		catch (BadLocationException | IOException e) {
 			Msg.error(this, "Unable to extract HTML text from editor pane", e);

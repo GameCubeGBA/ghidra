@@ -16,18 +16,18 @@
  */
 package ghidra.pcodeCPort.globalcontext;
 
+import java.io.PrintStream;
+import java.util.Iterator;
+import java.util.List;
+
+import org.jdom.Element;
+
 import generic.stl.VectorSTL;
 import ghidra.pcodeCPort.address.Address;
 import ghidra.pcodeCPort.pcoderaw.VarnodeData;
 import ghidra.pcodeCPort.translate.Translate;
 import ghidra.pcodeCPort.utils.MutableLong;
 import ghidra.pcodeCPort.utils.Utils;
-
-import java.io.PrintStream;
-import java.util.Iterator;
-import java.util.List;
-
-import org.jdom.Element;
 
 /**
  * This is the interface and implementation for a database of memory locations which should be
@@ -133,7 +133,7 @@ public abstract class ContextDatabase {
 	public void setVariableRegion(String nm, Address begad, Address endad, int value) {
 		ContextBitRange bitrange = getVariable(nm);
 
-		VectorSTL<int[]> vec = new VectorSTL<int[]>();
+		VectorSTL<int[]> vec = new VectorSTL<>();
 		getRegion(vec, begad, endad);
 		for (int i = 0; i < vec.size(); ++i) {
 			bitrange.setValue(vec.get(i), value);
@@ -155,10 +155,7 @@ public abstract class ContextDatabase {
 			}
 
 			// tcont must contain -mem-
-			if (tcont.loc.space != mem.space) {
-				continue;
-			}
-			if (tcont.loc.offset > mem.offset) {
+			if ((tcont.loc.space != mem.space) || (tcont.loc.offset > mem.offset)) {
 				continue;
 			}
 			tendoff = tcont.loc.offset + tcont.loc.size - 1;
@@ -172,11 +169,8 @@ public abstract class ContextDatabase {
 				if (endoff != tendoff) {
 					res >>>= (8 * (tendoff - mem.offset));
 				}
-			}
-			else {
-				if (mem.offset != tcont.loc.offset) {
-					res >>>= (8 * (mem.offset - tcont.loc.offset));
-				}
+			} else if (mem.offset != tcont.loc.offset) {
+				res >>>= (8 * (mem.offset - tcont.loc.offset));
 			}
 			res &= Utils.calc_mask(mem.size); // Final trim based on size
 			return res;

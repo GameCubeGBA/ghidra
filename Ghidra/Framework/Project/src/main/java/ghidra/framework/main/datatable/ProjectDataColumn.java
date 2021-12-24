@@ -16,9 +16,9 @@
  */
 package ghidra.framework.main.datatable;
 
+import docking.widgets.table.AbstractDynamicTableColumn;
 import ghidra.framework.model.ProjectData;
 import ghidra.util.classfinder.ExtensionPoint;
-import docking.widgets.table.AbstractDynamicTableColumn;
 
 public abstract class ProjectDataColumn<T> extends
 		AbstractDynamicTableColumn<DomainFileInfo, T, ProjectData> implements ExtensionPoint,

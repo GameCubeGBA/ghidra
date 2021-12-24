@@ -15,7 +15,9 @@
  */
 package ghidra.graph.job;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.Objects;
+import java.util.Queue;
 
 import ghidra.util.Msg;
 import ghidra.util.SystemUtilities;
@@ -94,11 +96,7 @@ public class GraphJobRunner implements GraphJobListener {
 	}
 
 	public synchronized boolean isBusy() {
-		if (!queue.isEmpty()) {
-			return true;
-		}
-
-		if (finalJob != null) {
+		if (!queue.isEmpty() || (finalJob != null)) {
 			return true;
 		}
 
@@ -222,12 +220,7 @@ public class GraphJobRunner implements GraphJobListener {
 		//
 		// See if we can shortcut the current job 
 		//
-		if (!shortcutCurrentJob()) {
-			// cannot stop the current job; allow it to finish, processing the pending jobs later
-			return false;
-		}
-
-		if (!shortcutPendingJobs(shortcutAll)) {
+		if (!shortcutCurrentJob() || !shortcutPendingJobs(shortcutAll)) {
 			return false;
 		}
 

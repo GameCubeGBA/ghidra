@@ -17,9 +17,19 @@ package ghidra.program.database.symbol;
 
 import java.io.IOException;
 
-import db.*;
+import db.DBConstants;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.LongField;
+import db.RecordIterator;
+import db.Schema;
+import db.StringField;
+import db.Table;
 import ghidra.program.database.map.AddressMap;
-import ghidra.util.exception.*;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
 
 abstract class VariableStorageDBAdapter {
@@ -51,8 +61,7 @@ abstract class VariableStorageDBAdapter {
 		}
 
 		try {
-			VariableStorageDBAdapter adapter = new VariableStorageDBAdapterV2(dbHandle, false);
-			return adapter;
+			return new VariableStorageDBAdapterV2(dbHandle, false);
 		}
 		catch (VersionException e) {
 			if (!e.isUpgradable() || openMode == DBConstants.UPDATE) {

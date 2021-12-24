@@ -116,7 +116,7 @@ public enum OpCode {
 
 	CPUI_MAX;
 
-	private OpCode() {
+	OpCode() {
 	}
 
 	public String getName() {

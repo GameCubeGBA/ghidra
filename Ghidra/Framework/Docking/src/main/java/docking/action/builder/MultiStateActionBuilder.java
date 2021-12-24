@@ -22,7 +22,9 @@ import java.util.function.BiConsumer;
 import javax.swing.Icon;
 
 import docking.ActionContext;
-import docking.menu.*;
+import docking.menu.ActionState;
+import docking.menu.MultiActionDockingAction;
+import docking.menu.MultiStateDockingAction;
 import docking.widgets.EventTrigger;
 
 /** 
@@ -103,7 +105,7 @@ public class MultiStateActionBuilder<T> extends
 	 * @return this MultiActionDockingActionBuilder (for chaining)
 	 */
 	public MultiStateActionBuilder<T> addState(String displayName, Icon icon, T userData) {
-		states.add(new ActionState<T>(displayName, icon, userData));
+		states.add(new ActionState<>(displayName, icon, userData));
 		return self();
 	}
 

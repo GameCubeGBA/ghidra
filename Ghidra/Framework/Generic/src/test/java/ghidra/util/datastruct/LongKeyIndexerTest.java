@@ -37,48 +37,48 @@ public class LongKeyIndexerTest extends AbstractGenericTest {
         System.out.println("Test put method");
         int index;
 
-        index = indexer.put(1000l);
+        index = indexer.put(1000L);
         if (index != 0) {
             Assert.fail("Put: expected 0, got "+index);
         }
-        index = indexer.put(2000l);
+        index = indexer.put(2000L);
         if (index != 1) {
             Assert.fail("Put: expected 1, got "+index);
         }
-        index = indexer.put(3000l);
+        index = indexer.put(3000L);
         if (index != 2) {
             Assert.fail("Put: expected 2, got "+index);
         }
-        index = indexer.put(4000l);
+        index = indexer.put(4000L);
         if (index != 3) {
             Assert.fail("Put: expected 3, got "+index);
         }
-        index = indexer.put(123l);
+        index = indexer.put(123L);
         if (index != 4) {
             Assert.fail("Put: expected 4, got "+index);
         }
-        index = indexer.put(456l);
+        index = indexer.put(456L);
         if (index != 5) {
             Assert.fail("Put: expected 5, got "+index);
         }
-        index = indexer.put(1789l);
+        index = indexer.put(1789L);
         if (index != 6) {
             Assert.fail("Put: expected 6, got "+index);
         }
-        index = indexer.put(2000l);
+        index = indexer.put(2000L);
         if (index != 1) {
             Assert.fail("Put: expected 1, got "+index);
         }
 
         System.out.println("Test remove method");
 
-        indexer.remove(4000l);
-        index = indexer.get(4000l);
+        indexer.remove(4000L);
+        index = indexer.get(4000L);
         if (index != -1) {
             Assert.fail("Expected to get -1 on remove of " +
                 "non-existent index and instead got "+index);
         }
-        index = indexer.put(9999l);
+        index = indexer.put(9999L);
         if (index != 3) {
             Assert.fail("Remove: expected 3, got "+index);
         }
@@ -89,40 +89,40 @@ public class LongKeyIndexerTest extends AbstractGenericTest {
         for(int i=0;i<20;i++) {
             indexer.put(i);
         }
-        index = indexer.get(1000l);
+        index = indexer.get(1000L);
         if (index != 0) {
             Assert.fail("Grow: expected 0, got "+index);
         }
-        index = indexer.get(2000l);
+        index = indexer.get(2000L);
         if (index != 1) {
             Assert.fail("Grow: expected 1, got "+index);
         }
-        index = indexer.get(3000l);
+        index = indexer.get(3000L);
         if (index != 2) {
             Assert.fail("Grow: expected 2, got "+index);
         }
-        index = indexer.get(4000l);
+        index = indexer.get(4000L);
         if (index != -1) {
             Assert.fail("Grow: expected 3, got "+index);
         }
-        index = indexer.get(123l);
+        index = indexer.get(123L);
         if (index != 4) {
             Assert.fail("Grow: expected 4, got "+index);
         }
-        index = indexer.get(456l);
+        index = indexer.get(456L);
         if (index != 5) {
             Assert.fail("Grow: expected 5, got "+index);
         }
-        index = indexer.get(1789l);
+        index = indexer.get(1789L);
         if (index != 6) {
             Assert.fail("Grow: expected 6, got "+index);
         }
-        index = indexer.get(0l);
+        index = indexer.get(0L);
         if (index != 7) {
             Assert.fail("Grow: expected 7, got "+index);
         }
 
-        index = indexer.get(500l);
+        index = indexer.get(500L);
         if (index != -1) {
             Assert.fail("Grow: expected -1, got "+index);
         }

@@ -15,7 +15,7 @@
  */
 package docking.widgets.table.threaded;
 
-import static org.apache.commons.lang3.exception.ExceptionUtils.*;
+import static org.apache.commons.lang3.exception.ExceptionUtils.hasCause;
 
 import java.util.Collection;
 import java.util.concurrent.CountDownLatch;

@@ -29,19 +29,19 @@ public interface Droppable {
 	 * @param e event that has current state of drag and drop operation 
 	 * @return true if OK
 	 */
-	public boolean isDropOk(DropTargetDragEvent e);
+	boolean isDropOk(DropTargetDragEvent e);
 
 	/**
 	 * Set drag feedback according to the ok parameter
 	 * @param ok true means the drop action is OK
 	 * @param e event that has current state of drag and drop operation 
 	 */
-	public void dragUnderFeedback(boolean ok, DropTargetDragEvent e);
+	void dragUnderFeedback(boolean ok, DropTargetDragEvent e);
 
 	/**
 	 * Revert back to normal if any drag feedback was set
 	 */
-	public void undoDragUnderFeedback();
+	void undoDragUnderFeedback();
 
 	/**
 	 * Add the object to the droppable component. The DropTargetAdapter
@@ -52,6 +52,6 @@ public interface Droppable {
 	 * @param f represents the opaque concept of a data format as 
 	 * would appear on a clipboard, during drag and drop.
 	 */
-	public void add(Object obj, DropTargetDropEvent e, DataFlavor f);
+	void add(Object obj, DropTargetDropEvent e, DataFlavor f);
 
 }

@@ -15,14 +15,32 @@
  */
 package ghidra.program.model.block;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
 
-import ghidra.program.model.address.*;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressIterator;
+import ghidra.program.model.address.AddressOutOfBoundsException;
+import ghidra.program.model.address.AddressOverflowException;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.listing.CodeUnit;
+import ghidra.program.model.listing.CodeUnitIterator;
+import ghidra.program.model.listing.Data;
+import ghidra.program.model.listing.Instruction;
+import ghidra.program.model.listing.Listing;
+import ghidra.program.model.listing.Program;
 import ghidra.program.model.mem.Memory;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.FlowType;
+import ghidra.program.model.symbol.RefType;
+import ghidra.program.model.symbol.Reference;
+import ghidra.program.model.symbol.ReferenceIterator;
+import ghidra.program.model.symbol.ReferenceManager;
+import ghidra.program.model.symbol.Symbol;
+import ghidra.program.model.symbol.SymbolIterator;
+import ghidra.program.model.symbol.SymbolTable;
+import ghidra.program.model.symbol.SymbolType;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * FollowFlow follows the program's code flow either forward or backward from an initial
@@ -103,26 +121,26 @@ public class FollowFlow {
 	private void updateFollowFlags(FlowType[] doNotFollow) {
 		if ((doNotFollow != null) && (doNotFollow.length > 0)) {
 			followAllFlow = false;
-			for (int index = 0; index < doNotFollow.length; index++) {
-				if (doNotFollow[index].equals(RefType.COMPUTED_CALL)) {
+			for (FlowType element : doNotFollow) {
+				if (element.equals(RefType.COMPUTED_CALL)) {
 					followComputedCall = false;
 				}
-				else if (doNotFollow[index].equals(RefType.CONDITIONAL_CALL)) {
+				else if (element.equals(RefType.CONDITIONAL_CALL)) {
 					followConditionalCall = false;
 				}
-				else if (doNotFollow[index].equals(RefType.UNCONDITIONAL_CALL)) {
+				else if (element.equals(RefType.UNCONDITIONAL_CALL)) {
 					followUnconditionalCall = false;
 				}
-				else if (doNotFollow[index].equals(RefType.COMPUTED_JUMP)) {
+				else if (element.equals(RefType.COMPUTED_JUMP)) {
 					followComputedJump = false;
 				}
-				else if (doNotFollow[index].equals(RefType.CONDITIONAL_JUMP)) {
+				else if (element.equals(RefType.CONDITIONAL_JUMP)) {
 					followConditionalJump = false;
 				}
-				else if (doNotFollow[index].equals(RefType.UNCONDITIONAL_JUMP)) {
+				else if (element.equals(RefType.UNCONDITIONAL_JUMP)) {
 					followUnconditionalJump = false;
 				}
-				else if (doNotFollow[index].equals(RefType.INDIRECTION)) {
+				else if (element.equals(RefType.INDIRECTION)) {
 					followPointers = false;
 				}
 			}
@@ -267,7 +285,7 @@ public class FollowFlow {
 		if (codeUnit == null) {
 			return;
 		}
-		Stack<CodeUnit> instructionStack = new Stack<CodeUnit>();
+		Stack<CodeUnit> instructionStack = new Stack<>();
 		if (codeUnit instanceof Data) {
 			followData(instructionStack, flowAddressSet, (Data) codeUnit, dataAddr);
 		}
@@ -350,7 +368,7 @@ public class FollowFlow {
 		if (codeUnit == null) {
 			return;
 		}
-		Stack<CodeUnit> codeUnitStack = new Stack<CodeUnit>(); // additional code to be processed.
+		Stack<CodeUnit> codeUnitStack = new Stack<>(); // additional code to be processed.
 		if (codeUnit instanceof Data) {
 			followDataBack(codeUnitStack, flowAddressSet, (Data) codeUnit, dataAddress);
 			// Make sure we don't lose the data address from the original selection,
@@ -589,7 +607,7 @@ public class FollowFlow {
 
 		Instruction instruction = currentInstruction;
 		boolean inDelaySlot = false;
-		List<Instruction> list = new ArrayList<Instruction>();
+		List<Instruction> list = new ArrayList<>();
 		int alignment = program.getLanguage().getInstructionAlignment();
 		if (alignment < 1) {
 			alignment = 1;
@@ -678,21 +696,19 @@ public class FollowFlow {
 	private Address[] getFlowsFromInstruction(Instruction instr) {
 		Reference[] refsFrom = instr.getReferencesFrom();
 		int length = refsFrom.length;
-		List<Address> list = new ArrayList<Address>(length);
+		List<Address> list = new ArrayList<>(length);
 		for (int i = 0; i < length; i++) {
 			RefType refType = refsFrom[i].getReferenceType();
-			if (refType.isFlow()) {
-				if (shouldFollowFlow((FlowType) refType)) {
-					Address toAddr = refsFrom[i].getToAddress();
-					if (!followIntoFunction) {
-						SymbolTable symbolTable = program.getSymbolTable();
-						Symbol primarySymbol = symbolTable.getPrimarySymbol(toAddr);
-						if (primarySymbol.getSymbolType() == SymbolType.FUNCTION) {
-							continue;
-						}
+			if (refType.isFlow() && shouldFollowFlow((FlowType) refType)) {
+				Address toAddr = refsFrom[i].getToAddress();
+				if (!followIntoFunction) {
+					SymbolTable symbolTable = program.getSymbolTable();
+					Symbol primarySymbol = symbolTable.getPrimarySymbol(toAddr);
+					if (primarySymbol.getSymbolType() == SymbolType.FUNCTION) {
+						continue;
 					}
-					list.add(toAddr);
 				}
+				list.add(toAddr);
 			}
 		}
 		return list.toArray(new Address[list.size()]);
@@ -718,7 +734,7 @@ public class FollowFlow {
 		}
 
 		Listing listing = program.getListing();
-		ArrayList<Address> list = new ArrayList<Address>();
+		ArrayList<Address> list = new ArrayList<>();
 		ReferenceIterator referenceIteratorTo = instr.getReferenceIteratorTo();
 		for (Reference reference : referenceIteratorTo) {
 			RefType refType = reference.getReferenceType();
@@ -735,12 +751,9 @@ public class FollowFlow {
 					// Add just address of the pointer?
 					list.add(fromAddress);
 				}
-			}
-			else if (refType.isFlow()) {
-				if (shouldFollowFlow((FlowType) refType)) {
-					Address fromAddress = reference.getFromAddress();
-					list.add(fromAddress);
-				}
+			} else if (refType.isFlow() && shouldFollowFlow((FlowType) refType)) {
+				Address fromAddress = reference.getFromAddress();
+				list.add(fromAddress);
 			}
 		}
 		return list.toArray(new Address[list.size()]);
@@ -776,12 +789,10 @@ public class FollowFlow {
 				ReferenceManager referenceManager = program.getReferenceManager();
 				Reference[] memRefs = referenceManager.getReferencesFrom(addr);
 				boolean foundRef = false;
-				for (int i = 0; i < memRefs.length; i++) {
-					RefType rt = memRefs[i].getReferenceType();
-					if (rt.isData()) {
-						if (pushInstruction(instructionStack, memRefs[i].getToAddress())) {
-							foundRef = true; // pointer was to an instruction.
-						}
+				for (Reference memRef : memRefs) {
+					RefType rt = memRef.getReferenceType();
+					if (rt.isData() && pushInstruction(instructionStack, memRef.getToAddress())) {
+						foundRef = true; // pointer was to an instruction.
 					}
 				}
 				if (!foundRef) {

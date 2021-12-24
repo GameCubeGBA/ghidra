@@ -120,9 +120,9 @@ public class Block {		// Basic block within the function
 		}
 		else if (matchOnly && matchHash == 0 && instList.length > 8) {
 			// If matchOnly, this block has not been matched, and this block is big, then don't generate n-grams for it
-			for(int i=0;i<instList.length;++i) {
-				if (!instList[i].isMatched)
-					instList[i].clearNGrams(0);		// No possibility of matching with tiny pieces
+			for (InstructHash element : instList) {
+				if (!element.isMatched)
+					element.clearNGrams(0);		// No possibility of matching with tiny pieces
 			}
 			return;
 		}

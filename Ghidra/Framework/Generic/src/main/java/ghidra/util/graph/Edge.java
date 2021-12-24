@@ -60,13 +60,15 @@ public final class Edge implements KeyedObject, Comparable<Edge>
   }
 
   /** Returns the key of this edge. */
-  public long key()
+  @Override
+public long key()
   {
       return this.key;
   }
 
   /** Compare one edge to another. Based on time of creation. */
-  public int compareTo( Edge edge )
+  @Override
+public int compareTo( Edge edge )
   {
       if( this.key() < edge.key() )
       {

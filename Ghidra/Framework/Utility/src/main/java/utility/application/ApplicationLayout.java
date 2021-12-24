@@ -17,7 +17,9 @@ package utility.application;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 import generic.jar.ResourceFile;
 import ghidra.framework.ApplicationProperties;

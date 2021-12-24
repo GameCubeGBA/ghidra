@@ -126,11 +126,7 @@ class VarKeyInteriorNode extends VarKeyNode implements FieldKeyInteriorNode {
 					node = nodeMgr.getVarKeyNode(getBufferId(i));
 					node.parent = this;
 				}
-				catch (IOException e) {
-					logConsistencyError(tableName, "failed to fetch child node: " + e.getMessage(),
-						e);
-				}
-				catch (RuntimeException e) {
+				catch (IOException | RuntimeException e) {
 					logConsistencyError(tableName, "failed to fetch child node: " + e.getMessage(),
 						e);
 				}
@@ -484,11 +480,9 @@ class VarKeyInteriorNode extends VarKeyNode implements FieldKeyInteriorNode {
 
 		if (parent != null) {
 			parent.insert(newNode);
-			if (newNode.parent != parent) {
-				// Fix my parent
-				if (parent.getKeyIndex(getKeyField(0)) < 0) {
-					parent = newNode.parent;
-				}
+			// Fix my parent
+			if ((newNode.parent != parent) && (parent.getKeyIndex(getKeyField(0)) < 0)) {
+				parent = newNode.parent;
 			}
 			return;
 		}
@@ -575,11 +569,9 @@ class VarKeyInteriorNode extends VarKeyNode implements FieldKeyInteriorNode {
 
 		if (parent != null) {
 			VarKeyNode rootNode = parent.insert(newNode);
-			if (newNode.parent != parent) {
-				// Fix my parent
-				if (parent.getKeyIndex(getKeyField(0)) < 0) {
-					parent = newNode.parent;
-				}
+			// Fix my parent
+			if ((newNode.parent != parent) && (parent.getKeyIndex(getKeyField(0)) < 0)) {
+				parent = newNode.parent;
 			}
 			return rootNode;
 		}

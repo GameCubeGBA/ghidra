@@ -15,7 +15,12 @@
  */
 package ghidra.app.plugin.assembler.sleigh.symbol;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
 
 import ghidra.app.plugin.assembler.sleigh.grammars.AssemblyGrammar;
 import ghidra.app.plugin.assembler.sleigh.tree.AssemblyParseNumericToken;

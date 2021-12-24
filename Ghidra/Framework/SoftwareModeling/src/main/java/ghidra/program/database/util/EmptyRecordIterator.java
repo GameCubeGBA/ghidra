@@ -30,6 +30,7 @@ public class EmptyRecordIterator implements RecordIterator {
 	/**
 	 * @see db.RecordIterator#hasNext()
 	 */
+	@Override
 	public boolean hasNext() throws IOException {
 		return false;
 	}
@@ -37,6 +38,7 @@ public class EmptyRecordIterator implements RecordIterator {
 	/**
 	 * @see db.RecordIterator#hasPrevious()
 	 */
+	@Override
 	public boolean hasPrevious() throws IOException {
 		return false;
 	}
@@ -44,6 +46,7 @@ public class EmptyRecordIterator implements RecordIterator {
 	/**
 	 * @see db.RecordIterator#next()
 	 */
+	@Override
 	public DBRecord next() throws IOException {
 		return null;
 	}
@@ -51,6 +54,7 @@ public class EmptyRecordIterator implements RecordIterator {
 	/**
 	 * @see db.RecordIterator#previous()
 	 */
+	@Override
 	public DBRecord previous() throws IOException {
 		return null;
 	}
@@ -58,6 +62,7 @@ public class EmptyRecordIterator implements RecordIterator {
 	/**
 	 * @see db.RecordIterator#delete()
 	 */
+	@Override
 	public boolean delete() throws IOException {
 		return false;
 	}

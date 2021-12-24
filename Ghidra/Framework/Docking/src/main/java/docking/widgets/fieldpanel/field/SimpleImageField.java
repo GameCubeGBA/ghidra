@@ -15,7 +15,9 @@
  */
 package docking.widgets.fieldpanel.field;
 
-import java.awt.*;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -78,14 +80,12 @@ public class SimpleImageField implements Field {
 		// is the less than the icon width, then scale the height relative to the
 		// width. Otherwise, use the icon height.
 		//
-		if (icon != null) {
-			if (this.height < icon.getIconHeight()) {
-				if (this.width < icon.getIconWidth()) {
-					this.height = (width * icon.getIconHeight()) / icon.getIconWidth();
-				}
-				else {
-					this.height = icon.getIconHeight();
-				}
+		if ((icon != null) && (this.height < icon.getIconHeight())) {
+			if (this.width < icon.getIconWidth()) {
+				this.height = (width * icon.getIconHeight()) / icon.getIconWidth();
+			}
+			else {
+				this.height = icon.getIconHeight();
 			}
 		}
 	}
@@ -176,10 +176,7 @@ public class SimpleImageField implements Field {
 
 	@Override
 	public boolean isValid(int row, int col) {
-		if (row != 0) {
-			return false;
-		}
-		if (col != 0) {
+		if ((row != 0) || (col != 0)) {
 			return false;
 		}
 		return true;

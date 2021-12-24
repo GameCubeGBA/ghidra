@@ -15,7 +15,9 @@
  */
 package ghidra.graph.job;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
@@ -24,7 +26,9 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import generic.test.AbstractGTest;
 import generic.test.AbstractGenericTest;
@@ -703,9 +707,8 @@ public class VisualGraphJobRunnerTest extends AbstractGenericTest {
 				runState = testThread.isFinished() ? "finished" : "running";
 			}
 
-			String status = "Job.isFinished()?: " + started + " | " + shortcut + " | " + runState +
+			return "Job.isFinished()?: " + started + " | " + shortcut + " | " + runState +
 				" (" + toString() + ")";
-			return status;
 		}
 
 		boolean didShortcut() {

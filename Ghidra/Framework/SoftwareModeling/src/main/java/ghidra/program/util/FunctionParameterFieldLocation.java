@@ -17,7 +17,9 @@ package ghidra.program.util;
 
 import ghidra.framework.options.SaveState;
 import ghidra.program.model.address.Address;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.Function;
+import ghidra.program.model.listing.Parameter;
+import ghidra.program.model.listing.Program;
 
 public class FunctionParameterFieldLocation extends FunctionSignatureFieldLocation {
 

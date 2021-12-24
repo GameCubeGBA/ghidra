@@ -16,11 +16,15 @@
  */
 package db.buffers;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.NoSuchElementException;
+
 import ghidra.util.datastruct.IntIntHashtable;
 import ghidra.util.exception.NoValueException;
-
-import java.io.IOException;
-import java.util.*;
 
 /**
  * <code>VersionFileHandler</code> allows a set of VersionFile's to be used in
@@ -43,7 +47,7 @@ public class VersionFileHandler {
 	private int maxBufCount;
 	private long originalFileId;
 	private int[] freeIndexes;
-	private Hashtable<String,Integer> origParms = new Hashtable<String,Integer>();
+	private Hashtable<String,Integer> origParms = new Hashtable<>();
 	
 
 	/**
@@ -81,15 +85,12 @@ public class VersionFileHandler {
 					originalBufCount = vf.getOriginalBufferCount();
 					freeIndexes = vf.getFreeIndexList();
 					String[] names = vf.getOldParameterNames();
-					for (int i = 0; i < names.length; i++) {
-						origParms.put(names[i], Integer.valueOf(vf.getOldParameter(names[i])));
+					for (String name : names) {
+						origParms.put(name, Integer.valueOf(vf.getOldParameter(name)));
 					}
 					originalFileId = vf.getOriginalFileID();
-				}
-				else {
-					if (lastTargetFileId != vf.getOriginalFileID())	{
-						throw new IOException("Incorrect version file - wrong file ID");	
-					}
+				} else if (lastTargetFileId != vf.getOriginalFileID())	{
+					throw new IOException("Incorrect version file - wrong file ID");	
 				}
 				lastTargetFileId = vf.getTargetFileID();
 				if (maxBufCount < vf.getOriginalBufferCount()) {
@@ -98,9 +99,9 @@ public class VersionFileHandler {
 				
 				// Add buffer indexes to map which are not present in earlier version file
 				int[] bufferIndexes = vf.getOldBufferIndexes();
-				for (int i = 0; i < bufferIndexes.length; i++) {
-					if (!bufferMap.contains(bufferIndexes[i])) {
-						bufferMap.put(bufferIndexes[i], openFileIx);
+				for (int element : bufferIndexes) {
+					if (!bufferMap.contains(element)) {
+						bufferMap.put(element, openFileIx);
 					}
 				}
 			}
@@ -247,7 +248,7 @@ public class VersionFileHandler {
 	 * Returns a list of parameters defined within the original beffer file.
 	 */
 	String[] getOldParameterNames() {
-		ArrayList<String> list = new ArrayList<String>();
+		ArrayList<String> list = new ArrayList<>();
 		Enumeration<String> it = origParms.keys();
 		while (it.hasMoreElements()) {
 			String name = it.nextElement();

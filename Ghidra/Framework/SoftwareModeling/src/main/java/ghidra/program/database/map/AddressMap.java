@@ -18,7 +18,10 @@ package ghidra.program.database.map;
 import java.io.IOException;
 import java.util.List;
 
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.address.KeyRange;
 import ghidra.program.model.lang.Language;
 import ghidra.program.util.LanguageTranslator;
 
@@ -32,7 +35,7 @@ public interface AddressMap {
 	/**
 	 * Reserved key for an invalid key.
 	 */
-	public static final long INVALID_ADDRESS_KEY = -1;
+	long INVALID_ADDRESS_KEY = -1;
 
 	/**
 	 * Get the database key associated with the given relative address.
@@ -47,7 +50,7 @@ public interface AddressMap {
 	 * @return the database key for the given address or INVALID_ADDRESS_KEY if 
 	 * create is false and one does not exist for the specified addr.
 	 */
-	public long getKey(Address addr, boolean create);
+	long getKey(Address addr, boolean create);
 
 	/**
 	 * Get the database key associated with the given absolute address.
@@ -60,7 +63,7 @@ public interface AddressMap {
 	 * @return the database key for the given address or INVALID_ADDRESS_KEY if 
 	 * create is false and one does not exist for the specified addr.
 	 */
-	public long getAbsoluteEncoding(Address addr, boolean create);
+	long getAbsoluteEncoding(Address addr, boolean create);
 
 	/**
 	 * Search for addr within the "sorted" keyRangeList and return the index of the
@@ -77,7 +80,7 @@ public interface AddressMap {
 	 * and only if the addr is found within a keyRange.  
 	 * An addr of null will always result in a returned index of -1.
 	 */
-	public int findKeyRange(List<KeyRange> keyRangeList, Address addr);
+	int findKeyRange(List<KeyRange> keyRangeList, Address addr);
 
 	/**
 	 * Generates a properly ordered list of database key ranges for a
@@ -94,7 +97,7 @@ public interface AddressMap {
 	 * key-ranges will be limited to those already defined.
 	 * @return "sorted" list of KeyRange objects
 	 */
-	public List<KeyRange> getKeyRanges(Address start, Address end, boolean create);
+	List<KeyRange> getKeyRanges(Address start, Address end, boolean create);
 
 	/**
 	 * Generates a properly ordered list of database key ranges for a
@@ -105,7 +108,7 @@ public interface AddressMap {
 	 * key-ranges will be limited to those already defined.
 	 * @return "sorted" list of KeyRange objects
 	 */
-	public List<KeyRange> getKeyRanges(AddressSetView set, boolean create);
+	List<KeyRange> getKeyRanges(AddressSetView set, boolean create);
 
 	/**
 	 * Returns the address that was used to generate the given long key. (If the image base was
@@ -115,14 +118,14 @@ public interface AddressMap {
 	 * @param value the long value to convert to an address.
 	 * @return address decoded from long 
 	 */
-	public Address decodeAddress(long value);
+	Address decodeAddress(long value);
 
 	/**
 	 * Returns the address factory associated with this map.
 	 * Null may be returned if map not associated with a specific address factory.
 	 * @return associated {@link AddressFactory} or null
 	 */
-	public AddressFactory getAddressFactory();
+	AddressFactory getAddressFactory();
 
 	/**
 	 * Generates a properly ordered list of database key ranges for a
@@ -136,7 +139,7 @@ public interface AddressMap {
 	 * key-ranges will be limited to those already defined.
 	 * @return "sorted" list of KeyRange objects
 	 */
-	public List<KeyRange> getKeyRanges(Address start, Address end, boolean absolute, boolean create);
+	List<KeyRange> getKeyRanges(Address start, Address end, boolean absolute, boolean create);
 
 	/**
 	 * Generates a properly ordered list of database key ranges for a
@@ -149,34 +152,34 @@ public interface AddressMap {
 	 * key-ranges will be limited to those already defined.
 	 * @return "sorted" list of KeyRange objects
 	 */
-	public List<KeyRange> getKeyRanges(AddressSetView set, boolean absolute, boolean create);
+	List<KeyRange> getKeyRanges(AddressSetView set, boolean absolute, boolean create);
 
 	/**
 	 * Returns an address map capable of decoding old address encodings.
 	 */
-	public AddressMap getOldAddressMap();
+	AddressMap getOldAddressMap();
 
 	/**
 	 * Returns true if this address map has been upgraded.
 	 */
-	public boolean isUpgraded();
+	boolean isUpgraded();
 
 	/**
 	 * Sets the image base, effectively changing the mapping between addresses and longs.
 	 * @param base the new base address.
 	 */
-	public void setImageBase(Address base);
+	void setImageBase(Address base);
 
 	/**
 	 * Returns a modification number that always increases when the address map base table has
 	 * changed.
 	 */
-	public int getModCount();
+	int getModCount();
 
 	/**
 	 * Returns the current image base setting.
 	 */
-	public Address getImageBase();
+	Address getImageBase();
 
 	/**
 	 * Converts the current base addresses to addresses compatible with the new language.
@@ -184,14 +187,14 @@ public interface AddressMap {
 	 * @param addrFactory the new AddressFactory.
 	 * @param translator translates address spaces from the old language to the new language.
 	 */
-	public void setLanguage(Language newLanguage, AddressFactory addrFactory,
+	void setLanguage(Language newLanguage, AddressFactory addrFactory,
 			LanguageTranslator translator) throws IOException;
 
 	/**
 	 * Clears any cached values.
 	 * @throws IOException
 	 */
-	public void invalidateCache() throws IOException;
+	void invalidateCache() throws IOException;
 
 	/**
 	 * Rename an existing overlay space.
@@ -199,14 +202,14 @@ public interface AddressMap {
 	 * @param newName new overlay name (must be unique among all space names within this map)
 	 * @throws IOException
 	 */
-	public void renameOverlaySpace(String oldName, String newName) throws IOException;
+	void renameOverlaySpace(String oldName, String newName) throws IOException;
 
 	/**
 	 * Delete the specified overlay space from this address map.
 	 * @param name overlay space name (must be unique among all space names within this map)
 	 * @throws IOException
 	 */
-	public void deleteOverlaySpace(String name) throws IOException;
+	void deleteOverlaySpace(String name) throws IOException;
 
 	/**
 	 * Returns true if the two address keys share a common key base and can be 
@@ -214,19 +217,19 @@ public interface AddressMap {
 	 * @param addrKey1
 	 * @param addrKey2
 	 */
-	public boolean hasSameKeyBase(long addrKey1, long addrKey2);
+	boolean hasSameKeyBase(long addrKey1, long addrKey2);
 
 	/**
 	 * Returns true if the specified addrKey is the minimum key within
 	 * its key-range.
 	 * @param addrKey
 	 */
-	public boolean isKeyRangeMin(long addrKey);
+	boolean isKeyRangeMin(long addrKey);
 
 	/**
 	 * Returns true if the specified addrKey is the maximum key within
 	 * its key-range.
 	 * @param addrKey
 	 */
-	public boolean isKeyRangeMax(long addrKey);
+	boolean isKeyRangeMax(long addrKey);
 }

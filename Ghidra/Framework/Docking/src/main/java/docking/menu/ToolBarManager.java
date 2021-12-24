@@ -15,10 +15,21 @@
  */
 package docking.menu;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeMap;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.JButton;
+import javax.swing.JComponent;
 
 import docking.DockingUtils;
 import docking.DockingWindowManager;
@@ -180,7 +191,7 @@ public class ToolBarManager {
 // Inner Classes
 //==================================================================================================
 
-	private class GroupComparator implements Comparator<String> {
+	private static class GroupComparator implements Comparator<String> {
 
 		@Override
 		public int compare(String group1, String group2) {
@@ -197,7 +208,7 @@ public class ToolBarManager {
 		}
 	}
 
-	private class ToolBarItemManagerComparator implements Comparator<ToolBarItemManager> {
+	private static class ToolBarItemManagerComparator implements Comparator<ToolBarItemManager> {
 
 		@Override
 		public int compare(ToolBarItemManager t1, ToolBarItemManager t2) {

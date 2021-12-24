@@ -30,28 +30,28 @@ interface BTreeNode {
 	/**
 	 * @return the parent node or null if this is the root
 	 */
-	public InteriorNode getParent();
+	InteriorNode getParent();
 
 	/**
 	 * @return the data buffer ID associated with this node.
 	 */
-	public int getBufferId();
+	int getBufferId();
 
 	/**
 	 * @return the data buffer associated with this node.
 	 */
-	public DataBuffer getBuffer();
+	DataBuffer getBuffer();
 
 	/**
 	 * @return the number of keys contained within this node.
 	 */
-	public int getKeyCount();
+	int getKeyCount();
 
 	/**
 	 * Set the number of keys contained within this node.
 	 * @param cnt key count
 	 */
-	public void setKeyCount(int cnt);
+	void setKeyCount(int cnt);
 
 	/**
 	 * Get the key value at a specific index.
@@ -59,7 +59,7 @@ interface BTreeNode {
 	 * @return key value
 	 * @throws IOException thrown if an IO error occurs
 	 */
-	public Field getKeyField(int index) throws IOException;
+	Field getKeyField(int index) throws IOException;
 
 	/**
 	 * Perform a binary search to locate the specified key and derive an index
@@ -71,20 +71,20 @@ interface BTreeNode {
 	 * @return int buffer ID index.
 	 * @throws IOException thrown if an IO error occurs
 	 */
-	public int getKeyIndex(Field key) throws IOException;
+	int getKeyIndex(Field key) throws IOException;
 
 	/**
 	 * Delete this node and all child nodes.
 	 * @throws IOException thrown if IO error occurs
 	 */
-	public void delete() throws IOException;
+	void delete() throws IOException;
 
 	/**
 	 * Return all buffer IDs for those buffers which are children
 	 * of this buffer.
 	 * @return array of buffer IDs
 	 */
-	public int[] getBufferReferences();
+	int[] getBufferReferences();
 
 	/**
 	 * Check the consistency of this node and all of its children.
@@ -95,7 +95,7 @@ interface BTreeNode {
 	 * @throws CancelledException if task cancelled
 	 * @{@link ThrowsTag} CancelledException
 	 */
-	public boolean isConsistent(String tableName, TaskMonitor monitor)
+	boolean isConsistent(String tableName, TaskMonitor monitor)
 			throws IOException, CancelledException;
 
 }

@@ -20,7 +20,9 @@ import java.util.List;
 
 import ghidra.docking.settings.Settings;
 import ghidra.program.model.address.AddressOverflowException;
-import ghidra.program.model.mem.*;
+import ghidra.program.model.mem.MemBuffer;
+import ghidra.program.model.mem.Memory;
+import ghidra.program.model.mem.MemoryBufferImpl;
 import ghidra.util.Msg;
 
 /**
@@ -34,9 +36,9 @@ import ghidra.util.Msg;
 public abstract class StructuredDynamicDataType extends DynamicDataType {
 
 	protected String description;
-	protected List<DataType> components = new ArrayList<DataType>();
-	protected List<String> componentNames = new ArrayList<String>();
-	protected List<String> componentDescs = new ArrayList<String>();
+	protected List<DataType> components = new ArrayList<>();
+	protected List<String> componentNames = new ArrayList<>();
+	protected List<String> componentDescs = new ArrayList<>();
 
 	/**
 	 * Construct an empty dynamic structure
@@ -85,9 +87,9 @@ public abstract class StructuredDynamicDataType extends DynamicDataType {
 	 */
 	public void setComponents(List<DataType> components, List<String> componentNames,
 			List<String> componentDescs) {
-		this.components = new ArrayList<DataType>(components);
-		this.componentNames = new ArrayList<String>(componentNames);
-		this.componentDescs = new ArrayList<String>(componentDescs);
+		this.components = new ArrayList<>(components);
+		this.componentNames = new ArrayList<>(componentNames);
+		this.componentDescs = new ArrayList<>(componentDescs);
 	}
 
 	/* (non-Javadoc)
@@ -125,6 +127,7 @@ public abstract class StructuredDynamicDataType extends DynamicDataType {
 	/* (non-Javadoc)
 	 * @see ghidra.program.model.data.DataType#getDescription()
 	 */
+	@Override
 	public String getDescription() {
 		return description;
 	}
@@ -132,6 +135,7 @@ public abstract class StructuredDynamicDataType extends DynamicDataType {
 	/* (non-Javadoc)
 	 * @see ghidra.program.model.data.DataType#getValue(ghidra.program.model.mem.MemBuffer, ghidra.program.model.lang.ProcessorContext, ghidra.program.model.data.Settings, int)
 	 */
+	@Override
 	public Object getValue(MemBuffer buf, Settings settings, int length) {
 		return null;
 	}
@@ -139,6 +143,7 @@ public abstract class StructuredDynamicDataType extends DynamicDataType {
 	/* (non-Javadoc)
 	 * @see ghidra.program.model.data.DataType#getRepresentation(ghidra.program.model.mem.MemBuffer, ghidra.program.model.lang.ProcessorContext, ghidra.program.model.data.Settings, int)
 	 */
+	@Override
 	public String getRepresentation(MemBuffer buf, Settings settings, int length) {
 		return "";
 	}
@@ -146,6 +151,7 @@ public abstract class StructuredDynamicDataType extends DynamicDataType {
 	/* (non-Javadoc)
 	 * @see ghidra.program.model.data.DataType#getMnemonic(ghidra.program.model.data.Settings)
 	 */
+	@Override
 	public String getMnemonic(Settings settings) {
 		return name;
 	}

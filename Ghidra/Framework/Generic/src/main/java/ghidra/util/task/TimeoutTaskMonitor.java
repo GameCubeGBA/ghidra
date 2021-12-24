@@ -49,8 +49,7 @@ public class TimeoutTaskMonitor implements TaskMonitor {
 	public static TimeoutTaskMonitor timeoutIn(long timeout, TimeUnit timeUnit) {
 
 		TaskMonitor delegate = new TaskMonitorAdapter(true);
-		TimeoutTaskMonitor timeoutMonitor = timeoutIn(timeout, timeUnit, delegate);
-		return timeoutMonitor;
+		return timeoutIn(timeout, timeUnit, delegate);
 	}
 
 	/**
@@ -73,8 +72,7 @@ public class TimeoutTaskMonitor implements TaskMonitor {
 			delegate = new TaskMonitorAdapter(true);
 		}
 
-		TimeoutTaskMonitor timeoutMonitor = new TimeoutTaskMonitor(delegate, timeout, timeUnit);
-		return timeoutMonitor;
+		return new TimeoutTaskMonitor(delegate, timeout, timeUnit);
 	}
 
 	private TaskMonitor delegate;

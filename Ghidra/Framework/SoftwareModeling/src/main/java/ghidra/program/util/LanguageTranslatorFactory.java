@@ -16,13 +16,24 @@
 package ghidra.program.util;
 
 import java.lang.reflect.Modifier;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
 
 import generic.jar.ResourceFile;
 import ghidra.framework.Application;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSpace;
-import ghidra.program.model.lang.*;
+import ghidra.program.model.lang.CompilerSpec;
+import ghidra.program.model.lang.CompilerSpecID;
+import ghidra.program.model.lang.CompilerSpecNotFoundException;
+import ghidra.program.model.lang.Language;
+import ghidra.program.model.lang.LanguageID;
+import ghidra.program.model.lang.LanguageNotFoundException;
+import ghidra.program.model.lang.Register;
+import ghidra.program.model.lang.RegisterValue;
 import ghidra.program.model.listing.Program;
 import ghidra.util.Msg;
 import ghidra.util.classfinder.ClassSearcher;
@@ -507,6 +518,6 @@ class FactoryLanguageTranslator implements LanguageTranslator {
 
 	@Override
 	public String toString() {
-		return t1.toString() + "; " + System.getProperty("line.separator") + t2.toString();
+		return t1.toString() + "; " + System.lineSeparator() + t2.toString();
 	}
 }

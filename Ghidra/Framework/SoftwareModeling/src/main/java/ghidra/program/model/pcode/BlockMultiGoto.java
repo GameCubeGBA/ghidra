@@ -38,7 +38,7 @@ public class BlockMultiGoto extends BlockGraph {
 	
 	public BlockMultiGoto() {
 		super();
-		targets = new ArrayList<PcodeBlock>();
+		targets = new ArrayList<>();
 		blocktype = PcodeBlock.MULTIGOTO;
 	}
 	
@@ -49,9 +49,8 @@ public class BlockMultiGoto extends BlockGraph {
 	@Override
 	public void saveXmlBody(Writer writer) throws IOException {
 		super.saveXmlBody(writer);
-		for(int i=0;i<targets.size();++i) {
+		for (PcodeBlock gototarget : targets) {
 			
-			PcodeBlock gototarget = targets.get(i);
 			StringBuilder buf = new StringBuilder();
 			buf.append("<target");
 			PcodeBlock leaf = gototarget.getFrontLeaf();

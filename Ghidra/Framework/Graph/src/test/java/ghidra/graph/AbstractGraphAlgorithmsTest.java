@@ -18,7 +18,12 @@ package ghidra.graph;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -185,9 +190,7 @@ public abstract class AbstractGraphAlgorithmsTest extends AbstractGenericTest {
 
 	protected Set<TestV> set(TestV... vertices) {
 		HashSet<TestV> set = new HashSet<>();
-		for (TestV v : vertices) {
-			set.add(v);
-		}
+		Collections.addAll(set, vertices);
 		return set;
 	}
 
@@ -195,16 +198,14 @@ public abstract class AbstractGraphAlgorithmsTest extends AbstractGenericTest {
 	protected Collection<TestE> findDominance(TestV from,
 			ChkDominanceAlgorithm<TestV, TestE> algo) {
 		Set<TestV> dominated = algo.getDominated(from);
-		Set<TestE> filtered = GraphAlgorithms.retainEdges(g, dominated);
-		return filtered;
+		return GraphAlgorithms.retainEdges(g, dominated);
 	}
 
 	// returns those nodes dominated by 'from'
 	protected Collection<TestE> findPostDominance(TestV from,
 			ChkPostDominanceAlgorithm<TestV, TestE> algo) {
 		Set<TestV> dominated = algo.getDominated(from);
-		Set<TestE> filtered = GraphAlgorithms.retainEdges(g, dominated);
-		return filtered;
+		return GraphAlgorithms.retainEdges(g, dominated);
 	}
 
 	// returns those nodes post-dominated by 'from'
@@ -213,8 +214,7 @@ public abstract class AbstractGraphAlgorithmsTest extends AbstractGenericTest {
 		try {
 			Set<TestV> postDominated =
 				GraphAlgorithms.findPostDominance(g, from, TaskMonitor.DUMMY);
-			Set<TestE> filtered = GraphAlgorithms.retainEdges(g, postDominated);
-			return filtered;
+			return GraphAlgorithms.retainEdges(g, postDominated);
 		}
 		catch (CancelledException e) {
 			// can't happen; dummy monitor
@@ -275,10 +275,7 @@ public abstract class AbstractGraphAlgorithmsTest extends AbstractGenericTest {
 
 		@Override
 		public int hashCode() {
-			final int prime = 31;
-			int result = 1;
-			result = prime * result + ((id == null) ? 0 : id.hashCode());
-			return result;
+			return Objects.hash(id);
 		}
 
 		@Override
@@ -286,10 +283,7 @@ public abstract class AbstractGraphAlgorithmsTest extends AbstractGenericTest {
 			if (this == obj) {
 				return true;
 			}
-			if (obj == null) {
-				return false;
-			}
-			if (getClass() != obj.getClass()) {
+			if ((obj == null) || (getClass() != obj.getClass())) {
 				return false;
 			}
 

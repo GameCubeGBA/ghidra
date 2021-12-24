@@ -19,11 +19,11 @@ package docking.wizard;
 import java.util.EmptyStackException;
 
 public interface WizardContext {
-    public void checkpoint();
+    void checkpoint();
 
-    public void uncheckpoint() throws EmptyStackException;
+    void uncheckpoint() throws EmptyStackException;
 
-    public int depth();
+    int depth();
 
-    public WizardContext deepCopy();
+    WizardContext deepCopy();
 }

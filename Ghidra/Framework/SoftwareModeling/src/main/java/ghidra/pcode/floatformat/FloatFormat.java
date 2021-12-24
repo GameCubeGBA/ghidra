@@ -15,7 +15,10 @@
  */
 package ghidra.pcode.floatformat;
 
-import java.math.*;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.math.MathContext;
+import java.math.RoundingMode;
 
 import ghidra.pcode.utils.Utils;
 import ghidra.util.SystemUtilities;
@@ -76,7 +79,8 @@ public strictfp class FloatFormat {
 	FloatFormat(int sz) throws UnsupportedFloatFormatException {
 		size = sz;
 
-		if (size == 2) {
+		switch (size) {
+		case 2:
 			signbit_pos = 15;
 			exp_pos = 10;
 			exp_size = 5;
@@ -85,8 +89,8 @@ public strictfp class FloatFormat {
 			bias = 15;
 			jbitimplied = true;
 			displayContext = new MathContext(7, RoundingMode.HALF_EVEN);
-		}
-		else if (size == 4) {
+			break;
+		case 4:
 			signbit_pos = 31;
 			exp_pos = 23;
 			exp_size = 8;
@@ -95,8 +99,8 @@ public strictfp class FloatFormat {
 			bias = 127;
 			jbitimplied = true;
 			displayContext = new MathContext(7, RoundingMode.HALF_EVEN);
-		}
-		else if (size == 8) {
+			break;
+		case 8:
 			signbit_pos = 63;
 			exp_pos = 52;
 			exp_size = 11;
@@ -105,8 +109,8 @@ public strictfp class FloatFormat {
 			bias = 1023;
 			jbitimplied = true;
 			displayContext = new MathContext(16, RoundingMode.HALF_EVEN);
-		}
-		else if (size == 16) {
+			break;
+		case 16:
 			signbit_pos = 127;
 			exp_pos = 112;
 			exp_size = 15;
@@ -115,8 +119,8 @@ public strictfp class FloatFormat {
 			bias = 16383;
 			jbitimplied = true;
 			displayContext = new MathContext(33, RoundingMode.HALF_EVEN);
-		}
-		else if (size == 10) {
+			break;
+		case 10:
 			signbit_pos = 79;
 			exp_pos = 64;
 			exp_size = 15;
@@ -125,8 +129,8 @@ public strictfp class FloatFormat {
 			bias = 16383;
 			jbitimplied = true;
 			displayContext = new MathContext(18, RoundingMode.HALF_EVEN);
-		}
-		else if (size == 12) { // For the Motorola 68000, extended precision, in which bits 80 to 63 are always 0.
+			break;
+		case 12:
 			// Note that m68k internal floating point regs are 80-bits, but 96 bits are moved to/from memory.
 			// Also note this is not IEEE format.
 			signbit_pos = 95;
@@ -137,8 +141,8 @@ public strictfp class FloatFormat {
 			bias = 16383;
 			jbitimplied = true;
 			displayContext = new MathContext(18, RoundingMode.HALF_EVEN);
-		}
-		else {
+			break;
+		default:
 			throw new UnsupportedFloatFormatException(sz);
 		}
 		maxexponent = (1 << exp_size) - 1;
@@ -586,7 +590,7 @@ public strictfp class FloatFormat {
 	 * @return BigFloat equal to {@code f}
 	 */
 	public static BigFloat toBigFloat(float f) {
-		return JAVA_FLOAT_FORMAT.getBigFloat(0xffffffffl & Float.floatToRawIntBits(f));
+		return JAVA_FLOAT_FORMAT.getBigFloat(0xffffffffL & Float.floatToRawIntBits(f));
 	}
 
 	/**
@@ -606,7 +610,7 @@ public strictfp class FloatFormat {
 	 * @return binary representation of {@code f}
 	 */
 	public static String toBinaryString(float f) {
-		return JAVA_FLOAT_FORMAT.toBinaryString(0xffffffffl & Float.floatToRawIntBits(f));
+		return JAVA_FLOAT_FORMAT.toBinaryString(0xffffffffL & Float.floatToRawIntBits(f));
 	}
 
 	/**
@@ -727,8 +731,7 @@ public strictfp class FloatFormat {
 	public long opEqual(long a, long b) { // a == b
 		double val1 = getHostFloat(a);
 		double val2 = getHostFloat(b);
-		long res = (val1 == val2) ? 1 : 0;
-		return res;
+		return (val1 == val2) ? 1 : 0;
 	}
 
 	public BigInteger opEqual(BigInteger a, BigInteger b) { // a == b
@@ -737,15 +740,13 @@ public strictfp class FloatFormat {
 		if (fa.isNaN() || fb.isNaN()) {
 			return BigInteger.ZERO;
 		}
-		BigInteger res = SystemUtilities.isEqual(fa, fb) ? BigInteger.ONE : BigInteger.ZERO;
-		return res;
+		return SystemUtilities.isEqual(fa, fb) ? BigInteger.ONE : BigInteger.ZERO;
 	}
 
 	public long opNotEqual(long a, long b) { // a != b
 		double val1 = getHostFloat(a);
 		double val2 = getHostFloat(b);
-		long res = (val1 != val2) ? 1 : 0;
-		return res;
+		return (val1 != val2) ? 1 : 0;
 	}
 
 	public BigInteger opNotEqual(BigInteger a, BigInteger b) { // a != b
@@ -754,49 +755,42 @@ public strictfp class FloatFormat {
 		if (fa.isNaN() | fb.isNaN()) {
 			return BigInteger.ONE;
 		}
-		BigInteger res = SystemUtilities.isEqual(fa, fb) ? BigInteger.ZERO : BigInteger.ONE;
-		return res;
+		return SystemUtilities.isEqual(fa, fb) ? BigInteger.ZERO : BigInteger.ONE;
 	}
 
 	public long opLess(long a, long b) { // a < b
 		double val1 = getHostFloat(a);
 		double val2 = getHostFloat(b);
-		long res = (val1 < val2) ? 1 : 0;
-		return res;
+		return (val1 < val2) ? 1 : 0;
 	}
 
 	public BigInteger opLess(BigInteger a, BigInteger b) { // a < b
 		BigFloat fa = getHostFloat(a);
 		BigFloat fb = getHostFloat(b);
-		BigInteger res = (fa.compareTo(fb) < 0) ? BigInteger.ONE : BigInteger.ZERO;
-		return res;
+		return (fa.compareTo(fb) < 0) ? BigInteger.ONE : BigInteger.ZERO;
 	}
 
 	public long opLessEqual(long a, long b) { // a <= b
 		double val1 = getHostFloat(a);
 		double val2 = getHostFloat(b);
-		long res = (val1 <= val2) ? 1 : 0;
-		return res;
+		return (val1 <= val2) ? 1 : 0;
 	}
 
 	public BigInteger opLessEqual(BigInteger a, BigInteger b) { // a <= b
 		BigFloat fa = getHostFloat(a);
 		BigFloat fb = getHostFloat(b);
-		BigInteger res = (fa.compareTo(fb) <= 0) ? BigInteger.ONE : BigInteger.ZERO;
-		return res;
+		return (fa.compareTo(fb) <= 0) ? BigInteger.ONE : BigInteger.ZERO;
 	}
 
 	// true if a is "not a number"
 	public long opNan(long a) {
 		double val = getHostFloat(a);
-		long res = Double.isNaN(val) ? 1 : 0;
-		return res;
+		return Double.isNaN(val) ? 1 : 0;
 	}
 
 	public BigInteger opNan(BigInteger a) {
 		BigFloat val = getHostFloat(a);
-		BigInteger res = (val.isNaN()) ? BigInteger.ONE : BigInteger.ZERO;
-		return res;
+		return (val.isNaN()) ? BigInteger.ONE : BigInteger.ZERO;
 	}
 
 	public long opAdd(long a, long b) { // a + b

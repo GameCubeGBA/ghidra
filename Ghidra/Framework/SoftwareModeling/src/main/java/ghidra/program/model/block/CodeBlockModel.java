@@ -29,13 +29,13 @@ import ghidra.util.task.TaskMonitor;
  */
 public interface CodeBlockModel {
 
-	public static final CodeBlock[] emptyBlockArray = new CodeBlock[0];
+	CodeBlock[] emptyBlockArray = {};
 	
 	/**
 	 * Returns the model name.
 	 * @return the model name
 	 */
-	public String getName();
+	String getName();
 	
     /**
      * Get the code block with a starting address (i.e., entry-point) of addr.
@@ -44,7 +44,7 @@ public interface CodeBlockModel {
      * @return null if there is no codeblock starting at the address.
      * @throws CancelledException if the monitor cancels the operation.
      */
-    public CodeBlock getCodeBlockAt(Address addr, TaskMonitor monitor) throws CancelledException;
+    CodeBlock getCodeBlockAt(Address addr, TaskMonitor monitor) throws CancelledException;
 
     /**
      * Get the first code block that contains the given address.
@@ -53,7 +53,7 @@ public interface CodeBlockModel {
      * @return a block that contains the address, or null otherwise.
      * @throws CancelledException if the monitor cancels the operation.
      */
-    public CodeBlock getFirstCodeBlockContaining(Address addr, TaskMonitor monitor) throws CancelledException;
+    CodeBlock getFirstCodeBlockContaining(Address addr, TaskMonitor monitor) throws CancelledException;
 
     /**
      * Get all the code blocks containing the address.
@@ -62,14 +62,14 @@ public interface CodeBlockModel {
      * @return an array of blocks that contains the address, null otherwise.
      * @throws CancelledException if the monitor cancels the operation.
      */
-    public CodeBlock[] getCodeBlocksContaining(Address addr, TaskMonitor monitor) throws CancelledException;
+    CodeBlock[] getCodeBlocksContaining(Address addr, TaskMonitor monitor) throws CancelledException;
 
     /**
      * Get an iterator over the code blocks in the entire program.
      * @param monitor task monitor which allows user to cancel operation.
      * @throws CancelledException if the monitor cancels the operation.
      */
-    public CodeBlockIterator getCodeBlocks(TaskMonitor monitor) throws CancelledException;
+    CodeBlockIterator getCodeBlocks(TaskMonitor monitor) throws CancelledException;
 
     /**
      * Get an iterator over code blocks which overlap the specified address set.
@@ -77,7 +77,7 @@ public interface CodeBlockModel {
      * @param monitor task monitor which allows user to cancel operation.
      * @throws CancelledException if the monitor cancels the operation.
      */
-    public CodeBlockIterator getCodeBlocksContaining(AddressSetView addrSet, TaskMonitor monitor) throws CancelledException;
+    CodeBlockIterator getCodeBlocksContaining(AddressSetView addrSet, TaskMonitor monitor) throws CancelledException;
 
     /**
      * Get an iterator over the source flows into the block.
@@ -85,7 +85,7 @@ public interface CodeBlockModel {
      * @param monitor task monitor which allows user to cancel operation.
      * @throws CancelledException if the monitor cancels the operation.
      */
-    public CodeBlockReferenceIterator getSources(CodeBlock block, TaskMonitor monitor) throws CancelledException;
+    CodeBlockReferenceIterator getSources(CodeBlock block, TaskMonitor monitor) throws CancelledException;
     
     /**
      * Get the number of source flows into the block.
@@ -93,7 +93,7 @@ public interface CodeBlockModel {
      * @param monitor task monitor which allows user to cancel operation.
      * @throws CancelledException if the monitor cancels the operation.
      */
-    public int getNumSources(CodeBlock block, TaskMonitor monitor) throws CancelledException;
+    int getNumSources(CodeBlock block, TaskMonitor monitor) throws CancelledException;
 
     /**
      * Get an iterator over the destination flows out of the block.
@@ -101,7 +101,7 @@ public interface CodeBlockModel {
      * @param monitor task monitor which allows user to cancel operation.
      * @throws CancelledException if the monitor cancels the operation.
      */
-    public CodeBlockReferenceIterator getDestinations(CodeBlock block, TaskMonitor monitor) throws CancelledException;
+    CodeBlockReferenceIterator getDestinations(CodeBlock block, TaskMonitor monitor) throws CancelledException;
 
     /**
      * Get the number of destination flows out of the block.
@@ -109,19 +109,19 @@ public interface CodeBlockModel {
      * @param monitor task monitor which allows user to cancel operation.
      * @throws CancelledException if the monitor cancels the operation.
      */
-    public int getNumDestinations(CodeBlock block, TaskMonitor monitor) throws CancelledException;
+    int getNumDestinations(CodeBlock block, TaskMonitor monitor) throws CancelledException;
 
 	/**
      * Get the basic block model used by this model.
      */
-    public CodeBlockModel getBasicBlockModel();
+    CodeBlockModel getBasicBlockModel();
     
     /**
      * Returns true if externals are handled by the model,
      * false if externals are ignored.  When handled, externals
      * are represented by an ExtCodeBlockImpl.
      */
-    public boolean externalsIncluded();
+    boolean externalsIncluded();
 
     /**
      * Return in general how things flow out of this node.
@@ -133,20 +133,20 @@ public interface CodeBlockModel {
      * Fallthrough is returned if that is the only way out.
      * @return flow type of this node
      */
-    public FlowType getFlowType(CodeBlock block);
+    FlowType getFlowType(CodeBlock block);
 
     /**
      * Get a name for this block.
      * @return usually the label at the start address of the block
      *    however the model can choose any name it wants for its blocks.
      */
-    public String getName(CodeBlock block);
+    String getName(CodeBlock block);
     
     /**
      * Returns the program object associated with this CodeBlockModel instance.
      * @return program associated with this CodeBlockModel.
      */
-    public Program getProgram();
+    Program getProgram();
 
 	/**
 	 * Return true if this model allows overlapping of address sets for
@@ -156,5 +156,5 @@ public interface CodeBlockModel {
 	 *         This implies that getBlocksContaining() can return more than one block.
 	 *         false implies that getBlocksContaining() will return at most one block.
 	 */
-	public boolean allowsBlockOverlap();
+	boolean allowsBlockOverlap();
 }

@@ -21,20 +21,20 @@ import db.DBRecord;
 
 interface RecordAdapter {
 
-	public DBRecord createRecord(long key, int numRefs, byte refLevel, byte[] refData)
+	DBRecord createRecord(long key, int numRefs, byte refLevel, byte[] refData)
 			throws IOException;
 
-	public DBRecord getRecord(long key) throws IOException;
+	DBRecord getRecord(long key) throws IOException;
 
 	/**
 	 * @param key
 	 * @param refData
 	 */
-	public void putRecord(DBRecord record) throws IOException;
+	void putRecord(DBRecord record) throws IOException;
 
 	/**
 	 * @param key
 	 */
-	public void removeRecord(long key) throws IOException;
+	void removeRecord(long key) throws IOException;
 
 }

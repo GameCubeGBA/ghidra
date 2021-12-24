@@ -18,7 +18,9 @@ package docking.widgets.table.constraint.provider;
 import java.util.Arrays;
 import java.util.Collection;
 
-import docking.widgets.table.constraint.*;
+import docking.widgets.table.constraint.BooleanMatchColumnConstraint;
+import docking.widgets.table.constraint.ColumnConstraint;
+import docking.widgets.table.constraint.ColumnConstraintProvider;
 
 /**
  * Provides boolean related column constraints.

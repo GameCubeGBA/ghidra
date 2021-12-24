@@ -16,17 +16,17 @@
  */
 package ghidra.pcodeCPort.slghsymbol;
 
+import java.io.PrintStream;
+import java.util.List;
+
+import org.jdom.Element;
+
 import ghidra.pcodeCPort.context.FixedHandle;
 import ghidra.pcodeCPort.context.ParserWalker;
 import ghidra.pcodeCPort.sleighbase.SleighBase;
 import ghidra.pcodeCPort.slghpatexpress.PatternExpression;
 import ghidra.pcodeCPort.slghpatexpress.PatternValue;
 import ghidra.sleigh.grammar.Location;
-
-import java.io.PrintStream;
-import java.util.List;
-
-import org.jdom.Element;
 
 public class ValueSymbol extends FamilySymbol {
 

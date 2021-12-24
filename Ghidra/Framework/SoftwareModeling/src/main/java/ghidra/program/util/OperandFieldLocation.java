@@ -15,6 +15,8 @@
  */
 package ghidra.program.util;
 
+import java.util.Objects;
+
 import ghidra.framework.options.SaveState;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
@@ -152,33 +154,24 @@ public class OperandFieldLocation extends CodeUnitLocation {
 		int result = super.hashCode();
 		result = prime * result + ((rep == null) ? 0 : rep.hashCode());
 		result = prime * result + subOpIndex;
-		result = prime * result + ((variableOffset == null) ? 0 : variableOffset.hashCode());
-		return result;
+		return prime * result + ((variableOffset == null) ? 0 : variableOffset.hashCode());
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
+		if (!super.equals(obj) || (getClass() != obj.getClass()))
 			return false;
 		OperandFieldLocation other = (OperandFieldLocation) obj;
-		if (rep == null) {
-			if (other.rep != null)
-				return false;
-		}
-		else if (!rep.equals(other.rep))
+		if (!Objects.equals(rep, other.rep)) {
 			return false;
+		}
 		if (subOpIndex != other.subOpIndex)
 			return false;
-		if (variableOffset == null) {
-			if (other.variableOffset != null)
-				return false;
-		}
-		else if (!variableOffset.equals(other.variableOffset))
+		if (!Objects.equals(variableOffset, other.variableOffset)) {
 			return false;
+		}
 		return true;
 	}
 

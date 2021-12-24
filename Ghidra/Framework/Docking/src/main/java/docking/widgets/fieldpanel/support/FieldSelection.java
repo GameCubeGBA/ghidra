@@ -15,13 +15,16 @@
  */
 package docking.widgets.fieldpanel.support;
 
-import ghidra.framework.options.SaveState;
-import ghidra.util.Msg;
-
 import java.math.BigInteger;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
 import org.jdom.Element;
+
+import ghidra.framework.options.SaveState;
+import ghidra.util.Msg;
 
 /**
  * Interface for reporting the FieldViewer selection.  The selection consists of
@@ -35,7 +38,7 @@ public class FieldSelection implements Iterable<FieldRange> {
 	 * Construct a new empty FieldSelection.
 	 */
 	public FieldSelection() {
-		ranges = new ArrayList<FieldRange>(4);
+		ranges = new ArrayList<>(4);
 	}
 
 	/**
@@ -43,7 +46,7 @@ public class FieldSelection implements Iterable<FieldRange> {
 	 * @param selection the FieldSelection to copy.
 	 */
 	public FieldSelection(FieldSelection selection) {
-		ranges = new ArrayList<FieldRange>(selection.ranges.size());
+		ranges = new ArrayList<>(selection.ranges.size());
 		for (FieldRange range : selection.ranges) {
 			ranges.add(new FieldRange(range));
 		}
@@ -53,7 +56,7 @@ public class FieldSelection implements Iterable<FieldRange> {
 	 * Removes all indexes from the list.
 	 */
 	public void clear() {
-		ranges = new ArrayList<FieldRange>(4);
+		ranges = new ArrayList<>(4);
 	}
 
 	/**
@@ -119,10 +122,8 @@ public class FieldSelection implements Iterable<FieldRange> {
 			return false;
 		}
 		searchIndex = -searchIndex - 2;
-		if (searchIndex >= 0) {
-			if (ranges.get(searchIndex).intersects(range)) {
-				return false;
-			}
+		if ((searchIndex >= 0) && ranges.get(searchIndex).intersects(range)) {
+			return false;
 		}
 		searchIndex++;
 		if (searchIndex < ranges.size()) {
@@ -238,12 +239,10 @@ public class FieldSelection implements Iterable<FieldRange> {
 			FieldRange leftOver = range.subtract(deleteRange);
 			if (range.isEmpty()) {
 				ranges.remove(insertIndex);
-			}
-			else if (leftOver != null) {
-				ranges.add(insertIndex + 1, leftOver);
-				return;
-			}
-			else {
+			} else {
+				if (leftOver != null) {
+					ranges.add(insertIndex + 1, leftOver);
+				}
 				return;
 			}
 		}
@@ -368,7 +367,7 @@ public class FieldSelection implements Iterable<FieldRange> {
 
 	@Override
 	public String toString() {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		for (FieldRange range : ranges) {
 			buf.append(range.toString());
 		}

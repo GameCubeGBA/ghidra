@@ -16,16 +16,16 @@
  */
 package ghidra.pcodeCPort.slghpatexpress;
 
+import java.io.PrintStream;
+
+import org.jdom.Element;
+
 import generic.stl.VectorSTL;
 import ghidra.pcodeCPort.context.ParserWalker;
 import ghidra.pcodeCPort.translate.Translate;
 import ghidra.pcodeCPort.utils.Utils;
 import ghidra.pcodeCPort.utils.XmlUtils;
 import ghidra.sleigh.grammar.Location;
-
-import java.io.PrintStream;
-
-import org.jdom.Element;
 
 public class ContextField extends PatternValue {
 
@@ -64,8 +64,7 @@ public class ContextField extends PatternValue {
 	public long maxValue() {
 		long res = 0;
 		res = ~res;
-		res = Utils.zzz_zero_extend(res, (endbit - startbit));
-		return res;
+		return Utils.zzz_zero_extend(res, (endbit - startbit));
 	}
 
 	public ContextField(Location location, boolean s, int sbit, int ebit)

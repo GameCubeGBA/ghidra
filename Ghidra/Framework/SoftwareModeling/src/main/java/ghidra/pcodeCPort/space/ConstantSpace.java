@@ -20,8 +20,8 @@ import java.io.PrintStream;
 
 import org.jdom.Element;
 
-import ghidra.pcodeCPort.error.*;
-import ghidra.pcodeCPort.translate.*;
+import ghidra.pcodeCPort.error.LowlevelError;
+import ghidra.pcodeCPort.translate.Translate;
 
 
 

@@ -111,7 +111,7 @@ public class VersionControlUndoCheckOutAction extends VersionControlAction {
 	private void undoCheckOuts(List<DomainFile> unmodifiedCheckOutsList,
 			List<DomainFile> modifiedCheckOutsList) {
 		boolean saveCopy = false;
-		DomainFile[] files = new DomainFile[0];
+		DomainFile[] files = {};
 		boolean undoWasCancelled = false;
 		// Now confirm the modified ones and undo checkout for the ones the user indicates.
 		if (modifiedCheckOutsList.size() > 0) {
@@ -161,8 +161,7 @@ public class VersionControlUndoCheckOutAction extends VersionControlAction {
 		@Override
 		public void run(TaskMonitor monitor) {
 			try {
-				for (int i = 0; i < unmodifiedCheckOutsList.size(); i++) {
-					DomainFile df = unmodifiedCheckOutsList.get(i);
+				for (DomainFile df : unmodifiedCheckOutsList) {
 					if (df.isCheckedOut()) {
 						df.undoCheckout(false);
 					}

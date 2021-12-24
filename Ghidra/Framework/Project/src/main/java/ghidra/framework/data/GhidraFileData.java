@@ -15,8 +15,13 @@
  */
 package ghidra.framework.data;
 
-import java.awt.*;
-import java.io.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,18 +29,36 @@ import javax.swing.Icon;
 
 import db.DBHandle;
 import db.Field;
-import db.buffers.*;
+import db.buffers.BufferFile;
+import db.buffers.LocalManagedBufferFile;
+import db.buffers.ManagedBufferFile;
 import ghidra.framework.client.ClientUtil;
 import ghidra.framework.client.NotConnectedException;
-import ghidra.framework.model.*;
-import ghidra.framework.store.*;
+import ghidra.framework.model.ChangeSet;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.DomainFolderChangeListener;
+import ghidra.framework.model.DomainObject;
+import ghidra.framework.model.ProjectLocator;
+import ghidra.framework.store.CheckoutType;
+import ghidra.framework.store.DataFileItem;
+import ghidra.framework.store.DatabaseItem;
+import ghidra.framework.store.FileIDFactory;
 import ghidra.framework.store.FileSystem;
+import ghidra.framework.store.FolderItem;
+import ghidra.framework.store.ItemCheckoutStatus;
+import ghidra.framework.store.Version;
 import ghidra.framework.store.local.LocalFileSystem;
 import ghidra.framework.store.local.LocalFolderItem;
-import ghidra.util.*;
-import ghidra.util.exception.*;
+import ghidra.util.InvalidNameException;
+import ghidra.util.Msg;
+import ghidra.util.ReadOnlyException;
+import ghidra.util.SystemUtilities;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.DuplicateFileException;
+import ghidra.util.exception.FileInUseException;
+import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 import resources.MultiIcon;
 import resources.ResourceManager;
 import resources.icons.TranslateIcon;
@@ -496,14 +519,11 @@ public class GhidraFileData {
 				else if (isCheckedOut()) {
 					if (isCheckedOutExclusive()) {
 						multiIcon.addIcon(CHECKED_OUT_EXCLUSIVE_ICON);
+					} else if (getVersion() == getLatestVersion()) {
+						multiIcon.addIcon(CHECKED_OUT_ICON);
 					}
 					else {
-						if (getVersion() == getLatestVersion()) {
-							multiIcon.addIcon(CHECKED_OUT_ICON);
-						}
-						else {
-							multiIcon.addIcon(NOT_LATEST_CHECKED_OUT_ICON);
-						}
+						multiIcon.addIcon(NOT_LATEST_CHECKED_OUT_ICON);
 					}
 				}
 				return multiIcon;
@@ -747,12 +767,9 @@ public class GhidraFileData {
 				else if (folderItem instanceof DataFileItem) {
 					DataFileItem dataFileItem = (DataFileItem) folderItem;
 					InputStream istream = dataFileItem.getInputStream();
-					try {
+					try (istream) {
 						versionedFolderItem = versionedFileSystem.createDataFile(parentPath, name,
 							istream, comment, folderItem.getContentType(), monitor);
-					}
-					finally {
-						istream.close();
 					}
 				}
 				else {
@@ -784,16 +801,13 @@ public class GhidraFileData {
 						projectLocator.isTransient()));
 				folderItem.setCheckout(checkout.getCheckoutId(), exclusive,
 					checkout.getCheckoutVersion(), folderItem.getCurrentVersion());
-			}
-			else {
-				if (oldDomainObj == null) {
-					try {
-						folderItem.delete(-1, ClientUtil.getUserName());
-						folderItem = null;
-					}
-					catch (FileInUseException e1) {
-						// Ignore - should result in Hijacked file
-					}
+			} else if (oldDomainObj == null) {
+				try {
+					folderItem.delete(-1, ClientUtil.getUserName());
+					folderItem = null;
+				}
+				catch (FileInUseException e1) {
+					// Ignore - should result in Hijacked file
 				}
 			}
 			if (oldDomainObj != null) {
@@ -879,12 +893,9 @@ public class GhidraFileData {
 				else if (versionedFolderItem instanceof DataFileItem) {
 					DataFileItem dataFileItem = (DataFileItem) versionedFolderItem;
 					InputStream istream = dataFileItem.getInputStream(checkoutVersion);
-					try {
+					try (istream) {
 						folderItem = fileSystem.createDataFile(parentPath, name, istream, null,
 							dataFileItem.getContentType(), monitor);
-					}
-					finally {
-						istream.close();
 					}
 				}
 				else {
@@ -1127,15 +1138,12 @@ public class GhidraFileData {
 							}
 						}
 					}
+				} else if (oldDomainObj != null) {
+					oldLocalItem = folderItem;
+					folderItem = null;
 				}
 				else {
-					if (oldDomainObj != null) {
-						oldLocalItem = folderItem;
-						folderItem = null;
-					}
-					else {
-						undoCheckout(false, true);
-					}
+					undoCheckout(false, true);
 				}
 				if (oldDomainObj != null) {
 
@@ -1622,12 +1630,9 @@ public class GhidraFileData {
 				}
 				else if (item instanceof DataFileItem) {
 					InputStream istream = ((DataFileItem) item).getInputStream();
-					try {
+					try (istream) {
 						newParentData.getLocalFileSystem().createDataFile(pathname, targetName,
 							istream, null, contentType, monitor);
-					}
-					finally {
-						istream.close();
 					}
 				}
 				else {
@@ -1746,10 +1751,7 @@ public class GhidraFileData {
 				return genericDomainObj.getMetadata();
 			}
 		}
-		catch (FileNotFoundException e) {
-			// file has been deleted, just return an empty map.
-		}
-		catch (Field.UnsupportedFieldException e) {
+		catch (FileNotFoundException | Field.UnsupportedFieldException e) {
 			// file created with newer version of Ghidra
 		}
 		catch (IOException e) {

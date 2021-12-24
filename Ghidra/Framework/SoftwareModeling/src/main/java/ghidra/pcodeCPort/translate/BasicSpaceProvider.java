@@ -25,12 +25,12 @@ public interface BasicSpaceProvider {
     /// with this address bus should be modeled in pcode with a
     /// single address space, referred to as the \e default space.
     /// \return a pointer to the \e default space
-    public AddrSpace getDefaultSpace();
+    AddrSpace getDefaultSpace();
 
     /// Pcode represents constant values within an operation as
     /// offsets within a special \e constant address space. 
     /// (See ConstantSpace)
     /// \return a pointer to the \b constant space
-    public AddrSpace getConstantSpace();
+    AddrSpace getConstantSpace();
 
 }

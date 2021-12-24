@@ -15,11 +15,23 @@
  */
 package docking.wizard;
 
-import java.awt.*;
-import java.util.*;
+import java.awt.Adjustable;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.KeyboardFocusManager;
+import java.awt.Window;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Stack;
 
-import javax.swing.*;
+import javax.swing.JComponent;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JRootPane;
+import javax.swing.JScrollBar;
+import javax.swing.JWindow;
 
 public abstract class AbstractMagePanelManager<T> implements PanelManager {
 

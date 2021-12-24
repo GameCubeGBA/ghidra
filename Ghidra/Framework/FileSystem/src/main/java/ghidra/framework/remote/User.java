@@ -16,6 +16,7 @@
 package ghidra.framework.remote;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Container class for the user name and the permission type: READ_ONLY,
@@ -104,7 +105,7 @@ public class User implements Comparable<User>, Serializable {
 	 */
 	@Override
 	public String toString() {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		buf.append(name);
 		buf.append(" (");
 		buf.append(types[permission]);
@@ -114,28 +115,19 @@ public class User implements Comparable<User>, Serializable {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + permission;
-		return result;
+		return Objects.hash(name, permission);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if ((obj == null) || (getClass() != obj.getClass()))
 			return false;
 		User other = (User) obj;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		}
-		else if (!name.equals(other.name))
+		if (!Objects.equals(name, other.name)) {
 			return false;
+		}
 		if (permission != other.permission)
 			return false;
 		return true;
@@ -143,12 +135,12 @@ public class User implements Comparable<User>, Serializable {
 
 	@Override
 	public int compareTo(User other) {
-		if (name == null) {
-			if (other.name != null)
+		if (other.name != null) {
+			if (name == null)
 				return -1;
-		}
-		else if (other.name != null) {
-			return 1;
+			else {
+				return 1;
+			}
 		}
 		int rc = name.compareTo(other.name);
 		if (rc == 0) {

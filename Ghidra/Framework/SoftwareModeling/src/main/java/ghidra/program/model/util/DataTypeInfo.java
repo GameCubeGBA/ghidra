@@ -16,6 +16,8 @@
  */
 package ghidra.program.model.util;
 
+import java.util.Objects;
+
 public class DataTypeInfo {
     protected final Object dataTypeHandle;
     protected final int dataTypeLength;
@@ -64,31 +66,21 @@ public class DataTypeInfo {
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + dataTypeAlignment;
-        result = prime * result
-                + ((dataTypeHandle == null) ? 0 : dataTypeHandle.hashCode());
-        result = prime * result + dataTypeLength;
-        return result;
+        return Objects.hash(dataTypeAlignment, dataTypeHandle, dataTypeLength);
     }
 
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
-        if (obj == null)
-            return false;
-        if (!(obj instanceof DataTypeInfo))
+        if ((obj == null) || !(obj instanceof DataTypeInfo))
             return false;
         final DataTypeInfo other = (DataTypeInfo) obj;
         if (dataTypeAlignment != other.dataTypeAlignment)
             return false;
-        if (dataTypeHandle == null) {
-            if (other.dataTypeHandle != null)
-                return false;
-        } else if (!dataTypeHandle.equals(other.dataTypeHandle))
+        if (!Objects.equals(dataTypeHandle, other.dataTypeHandle)) {
             return false;
+        }
         if (dataTypeLength != other.dataTypeLength)
             return false;
         return true;

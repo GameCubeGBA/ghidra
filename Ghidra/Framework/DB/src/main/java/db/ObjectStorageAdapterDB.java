@@ -16,6 +16,7 @@
 package db;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import ghidra.util.ObjectStorage;
 
@@ -29,7 +30,7 @@ import ghidra.util.ObjectStorage;
  */
 public class ObjectStorageAdapterDB implements ObjectStorage {
 
-	private ArrayList<Field> fieldList = new ArrayList<Field>();
+	private ArrayList<Field> fieldList = new ArrayList<>();
 	private int col = 0;
 	private boolean readOnly = false;
 
@@ -47,9 +48,7 @@ public class ObjectStorageAdapterDB implements ObjectStorage {
 	public ObjectStorageAdapterDB(DBRecord rec) {
 		readOnly = true;
 		Field[] fields = rec.getFields();
-		for (int i = 0; i < fields.length; i++) {
-			fieldList.add(fields[i]);
-		}
+		Collections.addAll(fieldList, fields);
 	}
 
 	@Override

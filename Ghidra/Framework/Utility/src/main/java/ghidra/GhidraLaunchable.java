@@ -27,5 +27,5 @@ public interface GhidraLaunchable {
 	 * @param args The arguments passed through by the {@link GhidraLauncher}.
 	 * @throws Exception if there was a problem with the launch.
 	 */
-	public void launch(GhidraApplicationLayout layout, String[] args) throws Exception;
+	void launch(GhidraApplicationLayout layout, String[] args) throws Exception;
 }

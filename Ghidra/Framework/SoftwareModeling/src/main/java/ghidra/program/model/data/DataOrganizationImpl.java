@@ -15,7 +15,9 @@
  */
 package ghidra.program.model.data;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Set;
 
 import ghidra.program.model.lang.Language;
 import ghidra.util.SystemUtilities;
@@ -658,18 +660,18 @@ public class DataOrganizationImpl implements DataOrganization {
 		while (parser.peek().isStart()) {
 			String name = parser.peek().getName();
 
-			if (name.equals("char_type")) {
+			if ("char_type".equals(name)) {
 				XmlElement subel = parser.start();
 				String boolStr = subel.getAttribute("signed");
 				isSignedChar = SpecXmlUtils.decodeBoolean(boolStr);
 				parser.end(subel);
 				continue;
 			}
-			else if (name.equals("bitfield_packing")) {
+			else if ("bitfield_packing".equals(name)) {
 				bitFieldPacking.restoreXml(parser);
 				continue;
 			}
-			else if (name.equals("size_alignment_map")) {
+			else if ("size_alignment_map".equals(name)) {
 				XmlElement subel = parser.start();
 				while (parser.peek().isStart()) {
 					XmlElement subsubel = parser.start();
@@ -685,49 +687,49 @@ public class DataOrganizationImpl implements DataOrganization {
 			XmlElement subel = parser.start();
 			String value = subel.getAttribute("value");
 
-			if (name.equals("absolute_max_alignment")) {
+			if ("absolute_max_alignment".equals(name)) {
 				absoluteMaxAlignment = SpecXmlUtils.decodeInt(value);
 			}
-			else if (name.equals("machine_alignment")) {
+			else if ("machine_alignment".equals(name)) {
 				machineAlignment = SpecXmlUtils.decodeInt(value);
 			}
-			else if (name.equals("default_alignment")) {
+			else if ("default_alignment".equals(name)) {
 				defaultAlignment = SpecXmlUtils.decodeInt(value);
 			}
-			else if (name.equals("default_pointer_alignment")) {
+			else if ("default_pointer_alignment".equals(name)) {
 				defaultPointerAlignment = SpecXmlUtils.decodeInt(value);
 			}
-			else if (name.equals("pointer_size")) {
+			else if ("pointer_size".equals(name)) {
 				pointerSize = SpecXmlUtils.decodeInt(value);
 			}
-			else if (name.equals("pointer_shift")) {
+			else if ("pointer_shift".equals(name)) {
 				pointerShift = SpecXmlUtils.decodeInt(value);
 			}
-			else if (name.equals("char_size")) {
+			else if ("char_size".equals(name)) {
 				charSize = SpecXmlUtils.decodeInt(value);
 			}
-			else if (name.equals("wchar_size")) {
+			else if ("wchar_size".equals(name)) {
 				wideCharSize = SpecXmlUtils.decodeInt(value);
 			}
-			else if (name.equals("short_size")) {
+			else if ("short_size".equals(name)) {
 				shortSize = SpecXmlUtils.decodeInt(value);
 			}
-			else if (name.equals("integer_size")) {
+			else if ("integer_size".equals(name)) {
 				integerSize = SpecXmlUtils.decodeInt(value);
 			}
-			else if (name.equals("long_size")) {
+			else if ("long_size".equals(name)) {
 				longSize = SpecXmlUtils.decodeInt(value);
 			}
-			else if (name.equals("long_long_size")) {
+			else if ("long_long_size".equals(name)) {
 				longLongSize = SpecXmlUtils.decodeInt(value);
 			}
-			else if (name.equals("float_size")) {
+			else if ("float_size".equals(name)) {
 				floatSize = SpecXmlUtils.decodeInt(value);
 			}
-			else if (name.equals("double_size")) {
+			else if ("double_size".equals(name)) {
 				doubleSize = SpecXmlUtils.decodeInt(value);
 			}
-			else if (name.equals("long_double_size")) {
+			else if ("long_double_size".equals(name)) {
 				longDoubleSize = SpecXmlUtils.decodeInt(value);
 			}
 			parser.end(subel);
@@ -740,13 +742,7 @@ public class DataOrganizationImpl implements DataOrganization {
 	@Override
 	public boolean equals(Object obj) {
 		DataOrganizationImpl op2 = (DataOrganizationImpl) obj;
-		if (absoluteMaxAlignment != op2.absoluteMaxAlignment) {
-			return false;
-		}
-		if (bigEndian != op2.bigEndian) {
-			return false;
-		}
-		if (!bitFieldPacking.equals(op2.bitFieldPacking)) {
+		if ((absoluteMaxAlignment != op2.absoluteMaxAlignment) || (bigEndian != op2.bigEndian) || !bitFieldPacking.equals(op2.bitFieldPacking)) {
 			return false;
 		}
 		if (charSize != op2.charSize || wideCharSize != op2.wideCharSize) {

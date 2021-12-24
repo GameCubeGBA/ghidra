@@ -18,8 +18,13 @@ package ghidra.app.plugin.processors.sleigh;
 import java.io.InputStream;
 import java.io.StringReader;
 
-import org.iso_relax.verifier.*;
-import org.xml.sax.*;
+import org.iso_relax.verifier.Schema;
+import org.iso_relax.verifier.Verifier;
+import org.iso_relax.verifier.VerifierFactory;
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 import generic.jar.ResourceFile;
 import ghidra.framework.Application;
@@ -226,8 +231,7 @@ public class SleighLanguageValidator {
 	private static Verifier getVerifier(ResourceFile relaxSchemaFile) throws Exception {
 		VerifierFactory factory = new com.sun.msv.verifier.jarv.TheFactoryImpl();
 		Schema schema = factory.compileSchema(relaxSchemaFile.toURL().toExternalForm());
-		Verifier verifier = schema.newVerifier();
-		return verifier;
+		return schema.newVerifier();
 	}
 
 	private static class VerifierErrorHandler implements ErrorHandler {

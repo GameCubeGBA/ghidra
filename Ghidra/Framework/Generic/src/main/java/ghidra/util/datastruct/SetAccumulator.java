@@ -16,14 +16,17 @@
  */
 package ghidra.util.datastruct;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 public class SetAccumulator<T> implements Accumulator<T> {
 
 	private Set<T> set;
 
 	public SetAccumulator() {
-		this.set = new HashSet<T>();
+		this.set = new HashSet<>();
 	}
 
 	public SetAccumulator(Set<T> set) {

@@ -32,5 +32,5 @@ public interface AutocompletionModel<T> {
 	 * however, by default, the displayed text for the suggested item is inserted at the caret,
 	 * without changing the surrounding text.
 	 */
-	public Collection<T> computeCompletions(String text);
+	Collection<T> computeCompletions(String text);
 }

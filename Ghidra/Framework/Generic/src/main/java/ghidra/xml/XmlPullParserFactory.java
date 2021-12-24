@@ -15,12 +15,15 @@
  */
 package ghidra.xml;
 
-import generic.jar.ResourceFile;
-
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
+
+import generic.jar.ResourceFile;
 
 public class XmlPullParserFactory {
 	public static void setCreateTracingParsers(XmlTracer xmlTracer) {

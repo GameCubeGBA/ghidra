@@ -32,6 +32,6 @@ public interface QRunnable<I> {
 	 * @param monitor a monitor that can be used to check for cancellation and to report progress and
 	 * transient messages.
 	 */
-	public void run(I item, TaskMonitor monitor) throws Exception;
+	void run(I item, TaskMonitor monitor) throws Exception;
 
 }

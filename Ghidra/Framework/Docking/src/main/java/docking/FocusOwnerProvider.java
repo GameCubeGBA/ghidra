@@ -28,12 +28,12 @@ public interface FocusOwnerProvider {
 	 * 
 	 * @return the current focus owner
 	 */
-	public Component getFocusOwner();
+	Component getFocusOwner();
 
 	/**
 	 * Returns the active window
 	 * 
 	 * @return the active window
 	 */
-	public Window getActiveWindow();
+	Window getActiveWindow();
 }

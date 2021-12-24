@@ -34,12 +34,12 @@ public interface PcodeFactory {
 	/**
 	 * @return Address factory
 	 */
-	public AddressFactory getAddressFactory();
+	AddressFactory getAddressFactory();
 	
 	/**
 	 * @return pcode data type manager used to convert strings to Ghidra data types
 	 */
-	public PcodeDataTypeManager getDataTypeManager();
+	PcodeDataTypeManager getDataTypeManager();
 		
 	/**
 	 * Create a new Varnode with the given size an location
@@ -49,24 +49,24 @@ public interface PcodeFactory {
 	 * 
 	 * @return a new varnode
 	 */
-	public Varnode newVarnode(int sz,Address addr);
+	Varnode newVarnode(int sz,Address addr);
 	
-	public Varnode newVarnode(int sz,Address addr,int refId);
-	public VariableStorage readXMLVarnodePieces(XmlElement el, Address addr) throws PcodeXMLException, InvalidInputException;
-	public Varnode createFromStorage(Address addr,VariableStorage storage, int logicalSize);
-	public VariableStorage buildStorage(Varnode vn) throws InvalidInputException;
-	public Varnode getRef(int refid);
-	public PcodeOp getOpRef(int refid);
+	Varnode newVarnode(int sz,Address addr,int refId);
+	VariableStorage readXMLVarnodePieces(XmlElement el, Address addr) throws PcodeXMLException, InvalidInputException;
+	Varnode createFromStorage(Address addr,VariableStorage storage, int logicalSize);
+	VariableStorage buildStorage(Varnode vn) throws InvalidInputException;
+	Varnode getRef(int refid);
+	PcodeOp getOpRef(int refid);
 
-	public HighSymbol getSymbol(long symbolId);
-	public Varnode setInput(Varnode vn,boolean val);
-	public void setAddrTied(Varnode vn,boolean val);
-	public void setPersistent(Varnode vn, boolean val);
-	public void setUnaffected(Varnode vn,boolean val);
-	public void setMergeGroup(Varnode vn,short val);
-	public void setDataType(Varnode vn,DataType type);
+	HighSymbol getSymbol(long symbolId);
+	Varnode setInput(Varnode vn,boolean val);
+	void setAddrTied(Varnode vn,boolean val);
+	void setPersistent(Varnode vn, boolean val);
+	void setUnaffected(Varnode vn,boolean val);
+	void setMergeGroup(Varnode vn,short val);
+	void setDataType(Varnode vn,DataType type);
 	
-	public PcodeOp newOp(SequenceNumber sq,int opc,ArrayList<Varnode> inputs,Varnode output) 
+	PcodeOp newOp(SequenceNumber sq,int opc,ArrayList<Varnode> inputs,Varnode output) 
 		throws UnknownInstructionException;
 	
 }

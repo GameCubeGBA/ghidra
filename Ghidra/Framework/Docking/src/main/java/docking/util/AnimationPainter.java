@@ -16,9 +16,9 @@
  */
 package docking.util;
 
-import ghidra.util.bean.GGlassPane;
-
 import java.awt.Graphics;
+
+import ghidra.util.bean.GGlassPane;
 
 /**
  * An interface used with {@link AnimationUtils} to allow clients to use the timing 
@@ -33,5 +33,5 @@ public interface AnimationPainter {
 	 * @param graphics the graphics used to paint
 	 * @param percentComplete a value from 0 to 1, 1 being fully complete.
 	 */
-	public void paint(GGlassPane glassPane, Graphics graphics, double percentComplete);
+	void paint(GGlassPane glassPane, Graphics graphics, double percentComplete);
 }

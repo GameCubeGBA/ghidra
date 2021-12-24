@@ -15,27 +15,69 @@
  */
 package docking;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.FontMetrics;
+import java.awt.GridLayout;
+import java.awt.KeyboardFocusManager;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ContainerEvent;
+import java.awt.event.ContainerListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
-import javax.swing.*;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.CellRendererPane;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.KeyStroke;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 
-import docking.action.*;
+import docking.action.ActionContextProvider;
+import docking.action.DockingActionIf;
+import docking.action.ToolBarData;
 import docking.actions.KeyBindingUtils;
 import docking.event.mouse.GMouseListenerAdapter;
 import docking.help.HelpService;
 import docking.menu.DialogToolbarButton;
 import docking.util.AnimationUtils;
 import docking.widgets.label.GDHtmlLabel;
-import ghidra.util.*;
+import ghidra.util.HelpLocation;
+import ghidra.util.MessageType;
+import ghidra.util.Msg;
+import ghidra.util.StatusListener;
+import ghidra.util.Swing;
+import ghidra.util.SystemUtilities;
 import ghidra.util.exception.AssertException;
-import ghidra.util.task.*;
+import ghidra.util.task.Task;
+import ghidra.util.task.TaskListener;
+import ghidra.util.task.TaskMonitor;
+import ghidra.util.task.TaskMonitorComponent;
 import utility.function.Callback;
 
 /**
@@ -1350,7 +1392,7 @@ public class DialogComponentProvider
 	/**
 	 * A placeholder action that we register with the tool in order to get key event management
 	 */
-	private class DialogActionProxy extends DockingActionProxy {
+	private static class DialogActionProxy extends DockingActionProxy {
 
 		public DialogActionProxy(DockingActionIf dockingAction) {
 			super(dockingAction);

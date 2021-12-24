@@ -27,5 +27,5 @@ public interface PickListener<V> {
 		INTERNAL
 	}
 
-	public void verticesPicked(Set<V> vertices, EventSource source);
+	void verticesPicked(Set<V> vertices, EventSource source);
 }

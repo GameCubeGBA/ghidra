@@ -16,7 +16,7 @@
  */
 package ghidra.pcodeCPort.context;
 
-import ghidra.pcodeCPort.error.*;
+import ghidra.pcodeCPort.error.LowlevelError;
 import ghidra.sleigh.grammar.Location;
 
 

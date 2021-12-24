@@ -15,7 +15,10 @@
  */
 package ghidra.xml;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -29,7 +32,9 @@ import javax.swing.SwingUtilities;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.xml.sax.*;
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 import generic.test.AbstractGenericTest;
 
@@ -186,7 +191,7 @@ public class ThreadedXmlParserTest extends AbstractGenericTest {
 		// Empty the queue and make sure that we don't deadlock
 		//
 		final CyclicBarrier startBarrier = new CyclicBarrier(1);
-		final boolean[] container = new boolean[] { false };
+		final boolean[] container = { false };
 		new Thread(() -> {
 			try {
 				startBarrier.await();

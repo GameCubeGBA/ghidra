@@ -16,7 +16,9 @@
 package ghidra.program.model.lang;
 
 import ghidra.app.plugin.processors.sleigh.SleighLanguage;
-import ghidra.xml.*;
+import ghidra.xml.XmlElement;
+import ghidra.xml.XmlParseException;
+import ghidra.xml.XmlPullParser;
 
 public class InjectPayloadJumpAssist extends InjectPayloadSleigh {
 

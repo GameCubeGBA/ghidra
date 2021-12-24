@@ -25,11 +25,11 @@ public interface TypeDef extends DataType {
 	 * Returns the dataType that this typedef is based on. This could be
 	 * another typedef
 	 */
-	public DataType getDataType();
+	DataType getDataType();
 
 	/**
 	 * Returns the non-typedef dataType that this typedef is based on, following
 	 * chains of typedefs as necessary.
 	 */
-	public DataType getBaseDataType();
+	DataType getBaseDataType();
 }

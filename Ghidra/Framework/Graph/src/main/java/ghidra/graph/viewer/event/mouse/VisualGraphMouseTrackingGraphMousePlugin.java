@@ -17,16 +17,27 @@ package ghidra.graph.viewer.event.mouse;
 
 import java.awt.Color;
 import java.awt.Point;
-import java.awt.event.*;
+import java.awt.event.InputEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.geom.AffineTransform;
 import java.util.Objects;
 
 import docking.DockingUtils;
-import edu.uci.ics.jung.visualization.*;
+import edu.uci.ics.jung.visualization.Layer;
+import edu.uci.ics.jung.visualization.MultiLayerTransformer;
+import edu.uci.ics.jung.visualization.RenderContext;
 import edu.uci.ics.jung.visualization.control.AbstractGraphMousePlugin;
 import edu.uci.ics.jung.visualization.transform.MutableTransformer;
-import ghidra.graph.viewer.*;
-import ghidra.graph.viewer.renderer.*;
+import ghidra.graph.viewer.GraphViewer;
+import ghidra.graph.viewer.GraphViewerUtils;
+import ghidra.graph.viewer.VisualEdge;
+import ghidra.graph.viewer.VisualVertex;
+import ghidra.graph.viewer.renderer.MouseClickedPaintableShape;
+import ghidra.graph.viewer.renderer.MouseDebugPaintable;
+import ghidra.graph.viewer.renderer.MouseDraggedLinePaintableShape;
+import ghidra.graph.viewer.renderer.MouseDraggedPaintableShape;
 
 /**
  * A simple plugin that allows clients to be notified of mouse events before any of the other

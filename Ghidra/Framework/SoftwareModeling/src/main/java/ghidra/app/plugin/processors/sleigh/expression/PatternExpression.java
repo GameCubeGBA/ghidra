@@ -39,39 +39,39 @@ public abstract class PatternExpression {
 		XmlElement el = parser.peek();
 		PatternExpression res;
 		String nm = el.getName();
-		if (nm.equals("tokenfield"))
+		if ("tokenfield".equals(nm))
 			res = new TokenField();
-		else if (nm.equals("contextfield"))
+		else if ("contextfield".equals(nm))
 			res = new ContextField();
-		else if (nm.equals("intb"))
+		else if ("intb".equals(nm))
 			res = new ConstantValue();
-		else if (nm.equals("operand_exp"))
+		else if ("operand_exp".equals(nm))
 			res = new OperandValue();
-		else if (nm.equals("start_exp"))
+		else if ("start_exp".equals(nm))
 			res = new StartInstructionValue();
-		else if (nm.equals("end_exp"))
+		else if ("end_exp".equals(nm))
 			res = new EndInstructionValue();
-		else if (nm.equals("plus_exp"))
+		else if ("plus_exp".equals(nm))
 			res = new PlusExpression();
-		else if (nm.equals("sub_exp"))
+		else if ("sub_exp".equals(nm))
 			res = new SubExpression();
-		else if (nm.equals("mult_exp"))
+		else if ("mult_exp".equals(nm))
 			res = new MultExpression();
-		else if (nm.equals("lshift_exp"))
+		else if ("lshift_exp".equals(nm))
 			res = new LeftShiftExpression();
-		else if (nm.equals("rshift_exp"))
+		else if ("rshift_exp".equals(nm))
 			res = new RightShiftExpression();
-		else if (nm.equals("and_exp"))
+		else if ("and_exp".equals(nm))
 			res = new AndExpression();
-		else if (nm.equals("or_exp"))
+		else if ("or_exp".equals(nm))
 			res = new OrExpression();
-		else if (nm.equals("xor_exp"))
+		else if ("xor_exp".equals(nm))
 			res = new XorExpression();
-		else if (nm.equals("div_exp"))
+		else if ("div_exp".equals(nm))
 			res = new DivExpression();
-		else if (nm.equals("minus_exp"))
+		else if ("minus_exp".equals(nm))
 			res = new MinusExpression();
-		else if (nm.equals("not_exp"))
+		else if ("not_exp".equals(nm))
 			res = new NotExpression();
 		else
 			return null;

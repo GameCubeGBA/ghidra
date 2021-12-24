@@ -147,10 +147,7 @@ public class ConstTpl {
 		if (obj == this) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (!(obj instanceof ConstTpl)) {
+		if ((obj == null) || !(obj instanceof ConstTpl)) {
 			return false;
 		}
 		ConstTpl op2 = (ConstTpl) obj;
@@ -388,16 +385,16 @@ public class ConstTpl {
 	}
 
 	private static v_field readHandleSelector(String name) {
-		if (name.equals("space")) {
+		if ("space".equals(name)) {
 			return v_field.v_space;
 		}
-		if (name.equals("offset")) {
+		if ("offset".equals(name)) {
 			return v_field.v_offset;
 		}
-		if (name.equals("size")) {
+		if ("size".equals(name)) {
 			return v_field.v_size;
 		}
-		if (name.equals("offset_plus")) {
+		if ("offset_plus".equals(name)) {
 			return v_field.v_offset_plus;
 		}
 		throw new LowlevelError("Bad handle selector");
@@ -467,11 +464,11 @@ public class ConstTpl {
 
 	public void restoreXml(Element el, Translate trans) {
 		String typestring = el.getAttributeValue("type");
-		if (typestring.equals("real")) {
+		if ("real".equals(typestring)) {
 			type = const_type.real;
 			value_real = XmlUtils.decodeUnknownLong(el.getAttributeValue("val"));
 		}
-		else if (typestring.equals("handle")) {
+		else if ("handle".equals(typestring)) {
 			type = const_type.handle;
 			handle_index = XmlUtils.decodeUnknownInt(el.getAttributeValue("val"));
 			select = readHandleSelector(el.getAttributeValue("s"));
@@ -479,36 +476,36 @@ public class ConstTpl {
 				value_real = XmlUtils.decodeUnknownLong(el.getAttributeValue("plus"));
 			}
 		}
-		else if (typestring.equals("start")) {
+		else if ("start".equals(typestring)) {
 			type = const_type.j_start;
 		}
-		else if (typestring.equals("next")) {
+		else if ("next".equals(typestring)) {
 			type = const_type.j_next;
 		}
-		else if (typestring.equals("curspace")) {
+		else if ("curspace".equals(typestring)) {
 			type = const_type.j_curspace;
 		}
-		else if (typestring.equals("curspace_size")) {
+		else if ("curspace_size".equals(typestring)) {
 			type = const_type.j_curspace_size;
 		}
-		else if (typestring.equals("spaceid")) {
+		else if ("spaceid".equals(typestring)) {
 			type = const_type.spaceid;
 			spaceid = trans.getSpaceByName(el.getAttributeValue("name"));
 		}
-		else if (typestring.equals("relative")) {
+		else if ("relative".equals(typestring)) {
 			type = const_type.j_relative;
 			value_real = XmlUtils.decodeUnknownLong(el.getAttributeValue("val"));
 		}
-		else if (typestring.equals("flowref")) {
+		else if ("flowref".equals(typestring)) {
 			type = const_type.j_flowref;
 		}
-		else if (typestring.equals("flowref_size")) {
+		else if ("flowref_size".equals(typestring)) {
 			type = const_type.j_flowref_size;
 		}
-		else if (typestring.equals("flowdest")) {
+		else if ("flowdest".equals(typestring)) {
 			type = const_type.j_flowdest;
 		}
-		else if (typestring.equals("flowdest_size")) {
+		else if ("flowdest_size".equals(typestring)) {
 			type = const_type.j_flowdest_size;
 		}
 		else {

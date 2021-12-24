@@ -21,7 +21,7 @@ public abstract class DataTypeConflictHandler {
 	 * <code>ConflictResolutionPolicy</code> indicates the conflict resolution policy
 	 * which should be applied when any conflict is encountered
 	 */
-	public static enum ConflictResolutionPolicy {
+	public enum ConflictResolutionPolicy {
 		RENAME_AND_ADD {
 			@Override
 			public DataTypeConflictHandler getHandler() {
@@ -53,7 +53,7 @@ public abstract class DataTypeConflictHandler {
 	 * <code>ConflictResult</code> indicates the resolution which should be
 	 * applied to a specific conflict
 	 */
-	public static enum ConflictResult {
+	public enum ConflictResult {
 		RENAME_AND_ADD, USE_EXISTING, REPLACE_EXISTING;
 	}
 
@@ -191,11 +191,8 @@ public abstract class DataTypeConflictHandler {
 					if (existingDataType instanceof Structure) {
 						return resolveConflictReplaceEmpty(addedDataType, existingDataType);
 					}
-				}
-				else if (addedDataType instanceof Union) {
-					if (existingDataType instanceof Union) {
-						return resolveConflictReplaceEmpty(addedDataType, existingDataType);
-					}
+				} else if ((addedDataType instanceof Union) && (existingDataType instanceof Union)) {
+					return resolveConflictReplaceEmpty(addedDataType, existingDataType);
 				}
 				return ConflictResult.RENAME_AND_ADD;
 			}

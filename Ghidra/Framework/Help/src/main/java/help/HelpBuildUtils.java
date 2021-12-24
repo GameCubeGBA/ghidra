@@ -15,16 +15,30 @@
  */
 package help;
 
-import java.io.*;
-import java.net.*;
-import java.nio.file.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileFilter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.FileSystemNotFoundException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.MessageFormat;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import help.validator.location.*;
+import help.validator.location.DirectoryHelpModuleLocation;
+import help.validator.location.HelpModuleLocation;
+import help.validator.location.JarHelpModuleLocation;
 import resources.IconProvider;
 import resources.Icons;
 
@@ -90,15 +104,7 @@ public class HelpBuildUtils {
 	}
 
 	public static Path getFile(Path srcFile, String relativePath) {
-		if (relativePath == null || relativePath.isEmpty()) {
-			return null;
-		}
-
-		if (relativePath.startsWith("/")) {
-			return null; // absolute path
-		}
-
-		if (relativePath.contains(":")) {
+		if (relativePath == null || relativePath.isEmpty() || relativePath.startsWith("/") || relativePath.contains(":")) {
 			return null; // real URL
 		}
 
@@ -179,7 +185,7 @@ public class HelpBuildUtils {
 	private static String fixStyleSheetLinkInFile(Path helpFile, String fileContents) {
 
 		int currentPosition = 0;
-		StringBuffer newContents = new StringBuffer();
+		StringBuilder newContents = new StringBuilder();
 		Matcher matcher = STYLE_SHEET_PATTERN.matcher(fileContents);
 
 		boolean hasMatches = matcher.find();
@@ -229,7 +235,7 @@ public class HelpBuildUtils {
 	private static String fixStyleSheetClassNames(Path helpFile, String fileContents) {
 
 		int currentPosition = 0;
-		StringBuffer newContents = new StringBuffer();
+		StringBuilder newContents = new StringBuilder();
 		Matcher matcher = STYLE_CLASS_PATTERN.matcher(fileContents);
 
 		boolean hasMatches = matcher.find();
@@ -278,15 +284,15 @@ public class HelpBuildUtils {
 	}
 
 	private static String fixLinksInFile(Path helpFile, String fileContents) {
-		String updatedContents = fixRelativeLink(HREF_PATTERN, helpFile, fileContents);
+		
 
 		// not sure if more types to come
-		return updatedContents;
+		return fixRelativeLink(HREF_PATTERN, helpFile, fileContents);
 	}
 
 	private static String fixRelativeLink(Pattern pattern, Path helpFile, String fileContents) {
 		int currentPosition = 0;
-		StringBuffer newContents = new StringBuffer();
+		StringBuilder newContents = new StringBuilder();
 		Matcher matcher = pattern.matcher(fileContents);
 
 		boolean hasMatches = matcher.find();
@@ -327,11 +333,7 @@ public class HelpBuildUtils {
 		}
 
 		String[] referenceParts = linkTextReference.split("/");
-		if (referenceParts.length != 3) {
-			return linkTextReference;
-		}
-
-		if (!referenceParts[0].equals("..")) {
+		if ((referenceParts.length != 3) || !"..".equals(referenceParts[0])) {
 			return linkTextReference;
 		}
 
@@ -341,8 +343,8 @@ public class HelpBuildUtils {
 	private static String readFile(Path helpFile) throws IOException {
 		InputStreamReader isr = new InputStreamReader(Files.newInputStream(helpFile));
 		BufferedReader reader = new BufferedReader(isr);
-		try {
-			StringBuffer buffy = new StringBuffer();
+		try (reader) {
+			StringBuilder buffy = new StringBuilder();
 			String line = null;
 			while ((line = reader.readLine()) != null) {
 				buffy.append(line).append('\n');
@@ -350,20 +352,14 @@ public class HelpBuildUtils {
 
 			return buffy.toString();
 		}
-		finally {
-			reader.close();
-		}
 	}
 
 	private static void writeFileContents(Path helpFile, String updatedContents)
 			throws IOException {
 		OutputStreamWriter osw = new OutputStreamWriter(Files.newOutputStream(helpFile));
 		BufferedWriter writer = new BufferedWriter(osw);
-		try {
+		try (writer) {
 			writer.write(updatedContents);
-		}
-		finally {
-			writer.close();
 		}
 	}
 
@@ -499,18 +495,14 @@ public class HelpBuildUtils {
 		if (scheme == null) {
 			return true;
 		}
-		return scheme.equals("file");
+		return "file".equals(scheme);
 	}
 
 	private static URI resolve(Path sourceFile, String ref) throws URISyntaxException {
 		URI resolved;
-		if (ref.startsWith("help/topics")) {
+		if (ref.startsWith("help/topics") || ref.startsWith("help/")) {
 			resolved = new URI(ref);  // help system syntax
-		}
-		else if (ref.startsWith("help/")) {
-			resolved = new URI(ref);  // help system syntax
-		}
-		else {
+		} else {
 			resolved = sourceFile.toUri().resolve(ref); // real link
 		}
 
@@ -589,9 +581,7 @@ public class HelpBuildUtils {
 			return null;
 		}
 
-		// non-remote/local path
-		Path refPath = createPathFromURI(sourceFile, resolved);
-		return refPath;
+		return createPathFromURI(sourceFile, resolved);
 	}
 
 	private static Path createPathFromURI(Path sourceFile, URI resolved) throws URISyntaxException {
@@ -616,8 +606,8 @@ public class HelpBuildUtils {
 // Inner Classes
 //==================================================================================================    
 
-	public static interface Stringizer<T> {
-		public String stringize(T obj);
+	public interface Stringizer<T> {
+		String stringize(T obj);
 	}
 
 	public static class HelpFilesFilter implements FileFilter {

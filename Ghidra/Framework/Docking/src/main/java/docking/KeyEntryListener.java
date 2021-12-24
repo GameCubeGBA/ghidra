@@ -26,5 +26,5 @@ import javax.swing.KeyStroke;
  */
 public interface KeyEntryListener {
 
-	public void processEntry(KeyStroke keyStroke);
+	void processEntry(KeyStroke keyStroke);
 }

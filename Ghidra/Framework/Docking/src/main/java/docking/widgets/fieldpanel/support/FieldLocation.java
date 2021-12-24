@@ -125,10 +125,7 @@ public class FieldLocation implements Comparable<FieldLocation> {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (!(obj instanceof FieldLocation)) {
+		if ((obj == null) || !(obj instanceof FieldLocation)) {
 			return false;
 		}
 		FieldLocation loc = (FieldLocation) obj;
@@ -141,6 +138,7 @@ public class FieldLocation implements Comparable<FieldLocation> {
 		return false;
 	}
 
+	@Override
 	public int compareTo(FieldLocation o) {
 		int compareTo = index.compareTo(o.index);
 		if (compareTo != 0) {

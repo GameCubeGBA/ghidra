@@ -26,5 +26,5 @@ public interface ObjectSelectedListener<T> {
 	 * When an object is select; null if the selection is cleared
 	 * @param t the object selected or null
 	 */
-	public void objectSelected(T t);
+	void objectSelected(T t);
 }

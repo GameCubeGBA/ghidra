@@ -148,7 +148,7 @@ public class StringKeyIndexerTest extends AbstractGenericTest {
         System.out.println("Test getKeys()");
 
         String[] keys = indexer.getKeys();
-        HashSet<String> hashSet = new HashSet<String>();
+        HashSet<String> hashSet = new HashSet<>();
         for(int i=0;i<100;i++) {
         	hashSet.add(keys[i]);
         }

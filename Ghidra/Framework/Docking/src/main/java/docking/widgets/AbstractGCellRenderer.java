@@ -15,7 +15,9 @@
  */
 package docking.widgets;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Rectangle;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
@@ -247,9 +249,9 @@ public abstract class AbstractGCellRenderer extends GDHtmlLabel {
 	 */
 	@Override
 	protected void firePropertyChange(String propertyName, Object oldValue, Object newValue) {
-		if (propertyName.equals("text") || propertyName.equals("labelFor") ||
-			propertyName.equals("displayedMnemonic") ||
-			((propertyName.equals("font") || propertyName.equals("foreground")) &&
+		if ("text".equals(propertyName) || "labelFor".equals(propertyName) ||
+			"displayedMnemonic".equals(propertyName) ||
+			(("font".equals(propertyName) || "foreground".equals(propertyName)) &&
 				oldValue != newValue &&
 				getClientProperty(javax.swing.plaf.basic.BasicHTML.propertyKey) != null)) {
 

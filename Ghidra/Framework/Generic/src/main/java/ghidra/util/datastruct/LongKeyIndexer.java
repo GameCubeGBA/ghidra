@@ -32,7 +32,7 @@ import ghidra.util.exception.AssertException;
 public class LongKeyIndexer implements Serializable {
 
     private static final int DEFAULT_CAPACITY = 13;
-    private static final long[] EMPTY_LONG_ARRAY = new long[0];
+    private static final long[] EMPTY_LONG_ARRAY = {};
 
     private long []keys;                 // stores the keys to resolve hash conflicts.
     private IntListIndexer indexer;     // keeps key indexes in linked list indexed by hash
