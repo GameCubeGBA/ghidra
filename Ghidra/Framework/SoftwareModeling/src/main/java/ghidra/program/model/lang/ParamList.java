@@ -41,25 +41,25 @@ public interface ParamList {
 	 * @param res is the vector for holding the VariableStorage corresponding to datatypes
 	 * @param addAutoParams if true add/process auto-parameters
 	 */
-	public void assignMap(Program prog, DataType[] proto, ArrayList<VariableStorage> res,
+	void assignMap(Program prog, DataType[] proto, ArrayList<VariableStorage> res,
 			boolean addAutoParams);
 
-	public void saveXml(StringBuilder buffer, boolean isInput);
+	void saveXml(StringBuilder buffer, boolean isInput);
 
-	public void restoreXml(XmlPullParser parser, CompilerSpec cspec) throws XmlParseException;
+	void restoreXml(XmlPullParser parser, CompilerSpec cspec) throws XmlParseException;
 
 	/**
 	 * Get a list of all parameter storage locations consisting of a single register
 	 * @param prog is the controlling program
 	 * @return an array of VariableStorage
 	 */
-	public VariableStorage[] getPotentialRegisterStorage(Program prog);
+	VariableStorage[] getPotentialRegisterStorage(Program prog);
 
 	/**
 	 * Return the amount of alignment used for parameters passed on the stack, or -1 if there are no stack params
 	 * @return the alignment
 	 */
-	public int getStackParameterAlignment();
+	int getStackParameterAlignment();
 
 	/**
 	 * Find the boundary offset that separates parameters on the stack from other local variables
@@ -67,7 +67,7 @@ public interface ParamList {
 	 * the first address AFTER the parameters on the stack
 	 * @return the boundary offset
 	 */
-	public Long getStackParameterOffset();
+	Long getStackParameterOffset();
 
 	/**
 	 * Determine if a particular address range is a possible parameter, and if so what slot(s) it occupies
@@ -76,7 +76,7 @@ public interface ParamList {
 	 * @param res  holds the resulting slot and slotsize
 	 * @return  true if the range is a possible parameter
 	 */
-	public boolean possibleParamWithSlot(Address loc, int size, WithSlotRec res);
+	boolean possibleParamWithSlot(Address loc, int size, WithSlotRec res);
 
-	public boolean isThisBeforeRetPointer();
+	boolean isThisBeforeRetPointer();
 }

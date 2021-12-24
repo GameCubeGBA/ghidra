@@ -20,7 +20,10 @@ import java.util.Hashtable;
 import ghidra.docking.settings.Settings;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressOverflowException;
-import ghidra.program.model.mem.*;
+import ghidra.program.model.mem.MemBuffer;
+import ghidra.program.model.mem.Memory;
+import ghidra.program.model.mem.MemoryAccessException;
+import ghidra.program.model.mem.MemoryBufferImpl;
 import ghidra.util.Conv;
 import ghidra.util.Msg;
 
@@ -55,7 +58,7 @@ public abstract class IndexedDynamicDataType extends DynamicDataType {
 	protected int indexSize;
 	protected long mask;
 
-	private Hashtable<Long, Integer> table = new Hashtable<Long, Integer>();
+	private Hashtable<Long, Integer> table = new Hashtable<>();
 
 	/**
 	 * Construct and the Index dynamic data type template.
@@ -162,7 +165,7 @@ public abstract class IndexedDynamicDataType extends DynamicDataType {
 			return null;
 		}
 		DataTypeComponent[] comps = null;
-		if (data.getDescription().equalsIgnoreCase(NULL_BODY_DESCRIPTION)) {
+		if (NULL_BODY_DESCRIPTION.equalsIgnoreCase(data.getDescription())) {
 			comps = new DataTypeComponent[1];
 		}
 		else {

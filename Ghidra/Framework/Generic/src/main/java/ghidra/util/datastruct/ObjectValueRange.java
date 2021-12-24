@@ -64,6 +64,7 @@ public class ObjectValueRange<T> implements Comparable<ObjectValueRange<T>> {
 	/**
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
+	@Override
 	public int compareTo(ObjectValueRange<T> otherRange) {
 		if (start < otherRange.start) {
 			return -1;

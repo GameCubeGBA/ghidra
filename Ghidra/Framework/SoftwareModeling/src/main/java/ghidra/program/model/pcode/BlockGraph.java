@@ -35,7 +35,7 @@ public class BlockGraph extends PcodeBlock {
 	public BlockGraph() {
 		super();
 		blocktype = PcodeBlock.GRAPH;
-		list = new ArrayList<PcodeBlock>();
+		list = new ArrayList<>();
 		maxindex = -1;
 	}
 	
@@ -114,7 +114,7 @@ public class BlockGraph extends PcodeBlock {
 	 * @param ingraph is the original flow graph
 	 */
 	public void transferObjectRef(BlockGraph ingraph) {
-		ArrayList<BlockGraph> queue = new ArrayList<BlockGraph>();
+		ArrayList<BlockGraph> queue = new ArrayList<>();
 		int pos = 0;
 		queue.add(this);
 		while (pos < queue.size()) {
@@ -143,8 +143,7 @@ public class BlockGraph extends PcodeBlock {
 	@Override
 	public void saveXmlBody(Writer writer) throws IOException {
 		super.saveXmlBody(writer);
-		for(int i=0;i<list.size();++i) {
-			PcodeBlock bl = list.get(i);
+		for (PcodeBlock bl : list) {
 			StringBuilder buf = new StringBuilder();
 			buf.append("<bhead");
 			SpecXmlUtils.encodeSignedIntegerAttribute(buf, "index", bl.getIndex());
@@ -153,8 +152,7 @@ public class BlockGraph extends PcodeBlock {
 			buf.append("/>\n");
 			writer.write(buf.toString());
 		}
-		for(int i=0;i<list.size();++i) {
-			PcodeBlock bl = list.get(i);
+		for (PcodeBlock bl : list) {
 			bl.saveXml(writer);
 		}
 	}
@@ -163,9 +161,9 @@ public class BlockGraph extends PcodeBlock {
 	public void restoreXmlBody(XmlPullParser parser, BlockMap resolver) throws PcodeXMLException {
 		BlockMap newresolver = new BlockMap(resolver);
 		super.restoreXmlBody(parser, newresolver);
-		ArrayList<PcodeBlock> tmplist = new ArrayList<PcodeBlock>();
+		ArrayList<PcodeBlock> tmplist = new ArrayList<>();
 		while(parser.peek().isStart()) {
-			if (!parser.peek().getName().equals("bhead"))
+			if (!"bhead".equals(parser.peek().getName()))
 				break;
 			XmlElement el = parser.start();
 			int ind = SpecXmlUtils.decodeInt(el.getAttribute("index"));
@@ -175,8 +173,7 @@ public class BlockGraph extends PcodeBlock {
 			parser.end(el);
 		}
 		newresolver.sortLevelList();
-		for(int i=0;i<tmplist.size();++i) {
-			PcodeBlock bl = tmplist.get(i);
+		for (PcodeBlock bl : tmplist) {
 			bl.restoreXml(parser, newresolver);
 			addBlock(bl);
 		}

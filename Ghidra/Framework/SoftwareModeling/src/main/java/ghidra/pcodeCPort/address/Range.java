@@ -20,12 +20,11 @@ import java.io.PrintStream;
 
 import org.jdom.Element;
 
-
-import ghidra.pcodeCPort.error.*;
-import ghidra.pcodeCPort.pcoderaw.*;
-import ghidra.pcodeCPort.space.*;
-import ghidra.pcodeCPort.translate.*;
-import ghidra.pcodeCPort.utils.*;
+import ghidra.pcodeCPort.error.LowlevelError;
+import ghidra.pcodeCPort.pcoderaw.VarnodeData;
+import ghidra.pcodeCPort.space.AddrSpace;
+import ghidra.pcodeCPort.translate.Translate;
+import ghidra.pcodeCPort.utils.XmlUtils;
 
 
 public class Range implements Comparable<Range> {
@@ -64,6 +63,7 @@ public class Range implements Comparable<Range> {
 		return new Address( spc, last );
 	}
 
+	@Override
 	public int compareTo( Range other ) {
 		int result = spc.compareTo( other.spc );
 		if (result != 0) {

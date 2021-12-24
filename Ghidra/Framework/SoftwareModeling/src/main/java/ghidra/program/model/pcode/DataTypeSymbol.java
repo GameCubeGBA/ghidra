@@ -19,9 +19,19 @@ import java.util.ArrayList;
 
 import generic.hash.SimpleCRC32;
 import ghidra.program.model.address.Address;
-import ghidra.program.model.data.*;
+import ghidra.program.model.data.CategoryPath;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.DataTypeConflictHandler;
+import ghidra.program.model.data.DataTypeManager;
+import ghidra.program.model.data.TypeDef;
+import ghidra.program.model.data.TypedefDataType;
 import ghidra.program.model.listing.FunctionSignature;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.Namespace;
+import ghidra.program.model.symbol.SourceType;
+import ghidra.program.model.symbol.Symbol;
+import ghidra.program.model.symbol.SymbolIterator;
+import ghidra.program.model.symbol.SymbolTable;
+import ghidra.program.model.symbol.SymbolType;
 import ghidra.util.InvalidNameException;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.exception.InvalidInputException;
@@ -68,10 +78,7 @@ public class DataTypeSymbol {
 		try {
 			datatype.setNameAndCategory(path, type_hashname);
 		}
-		catch (InvalidNameException e) {
-			return null;
-		}
-		catch (DuplicateNameException e) {
+		catch (InvalidNameException | DuplicateNameException e) {
 			return null;
 		}
 		DataType preexists = dtmanage.getDataType(path, type_hashname);
@@ -104,15 +111,11 @@ public class DataTypeSymbol {
 
 	public static void deleteSymbols(String nmroot, Address addr, SymbolTable symtab,
 			Namespace space) throws InvalidInputException {
-		ArrayList<Symbol> dellist = new ArrayList<Symbol>();
+		ArrayList<Symbol> dellist = new ArrayList<>();
 		SymbolIterator iter = symtab.getSymbols(space);
 		while (iter.hasNext()) {
 			Symbol sym = iter.next();
-			if (!sym.getName().startsWith(nmroot))
-				continue;
-			if (sym.getSymbolType() != SymbolType.LABEL)
-				continue;
-			if (!addr.equals(sym.getAddress()))
+			if (!sym.getName().startsWith(nmroot) || (sym.getSymbolType() != SymbolType.LABEL) || !addr.equals(sym.getAddress()))
 				continue;
 			if (sym.hasReferences())
 				throw new InvalidInputException("DataTypeSymbol has a reference");

@@ -15,7 +15,11 @@
  */
 package generic.cache;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -39,7 +43,7 @@ public class CachingPoolTest extends AbstractGenericTest {
 	@Before
 	public void setUp() throws Exception {
 		factory = new TestBasicFactory();
-		pool = new CachingPool<TestItem>(factory);
+		pool = new CachingPool<>(factory);
 	}
 
 	@Test
@@ -125,7 +129,7 @@ public class CachingPoolTest extends AbstractGenericTest {
 
 	private class TestBasicFactory extends CountingBasicFactory<TestItem> {
 
-		private ConcurrentSkipListSet<TestItem> list = new ConcurrentSkipListSet<TestItem>();
+		private ConcurrentSkipListSet<TestItem> list = new ConcurrentSkipListSet<>();
 
 		@Override
 		public TestItem doCreate(int itemNumber) throws Exception {
@@ -140,7 +144,7 @@ public class CachingPoolTest extends AbstractGenericTest {
 		}
 	}
 
-	private class TestItem implements Comparable<TestItem> {
+	private static class TestItem implements Comparable<TestItem> {
 		private AtomicBoolean disposed = new AtomicBoolean();
 		private final int ID;
 

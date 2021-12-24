@@ -22,8 +22,8 @@ import javax.swing.Icon;
 
 import edu.uci.ics.jung.algorithms.layout.DAGLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
-import ghidra.graph.graphs.TestEdge;
 import ghidra.graph.graphs.AbstractTestVertex;
+import ghidra.graph.graphs.TestEdge;
 import ghidra.graph.viewer.layout.LayoutProvider;
 import ghidra.graph.viewer.renderer.ArticulatedEdgeRenderer;
 import ghidra.graph.viewer.shape.ArticulatedEdgeTransformer;

@@ -15,8 +15,15 @@
  */
 package utilities.util.reflection;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -162,7 +169,7 @@ public class ReflectionUtilitiesTest {
 	@Test
 	public void testRumtimeTypeDiscovery_AnonymousClass() {
 
-		List<String> myList = new ArrayList<String>() {
+		List<String> myList = new ArrayList<>() {
 			// stub
 		};
 		List<Class<?>> types = ReflectionUtilities.getTypeArguments(List.class, myList.getClass());
@@ -173,7 +180,7 @@ public class ReflectionUtilitiesTest {
 	@Test
 	public void testRumtimeTypeDiscovery_LocalVariable() {
 
-		List<String> myList = new ArrayList<String>();
+		List<String> myList = new ArrayList<>();
 		List<Class<?>> types = ReflectionUtilities.getTypeArguments(List.class, myList.getClass());
 		assertEquals(1, types.size());
 		assertNull(types.get(0));
@@ -240,21 +247,18 @@ public class ReflectionUtilitiesTest {
 		return new StackTraceElement(className + ".class", methodName, className + ".java", 1);
 	}
 
-	private class NestedTestClass {
+	private static class NestedTestClass {
 
 		String getCallerFromOneLevel() {
-			String name = ReflectionUtilities.getClassNameOlderThan(NestedTestClass.class);
-			return name;
+			return ReflectionUtilities.getClassNameOlderThan(NestedTestClass.class);
 		}
 
 		String getCallerFromTwoLevels() {
-			String caller = levelTwo();
-			return caller;
+			return levelTwo();
 		}
 
 		private String levelTwo() {
-			String name = ReflectionUtilities.getClassNameOlderThan(NestedTestClass.class);
-			return name;
+			return ReflectionUtilities.getClassNameOlderThan(NestedTestClass.class);
 		}
 	}
 
@@ -270,7 +274,7 @@ public class ReflectionUtilitiesTest {
 		// stub
 	}
 
-	private class AbstractPartiallyDefinedClass<I> implements RuntimeBaseInterface<I, Double> {
+	private static class AbstractPartiallyDefinedClass<I> implements RuntimeBaseInterface<I, Double> {
 		// stub
 	}
 
@@ -280,18 +284,18 @@ public class ReflectionUtilitiesTest {
 		// stub
 	}
 
-	private class ChildExtendingWhollyDefinedTypes
+	private static class ChildExtendingWhollyDefinedTypes
 			implements WhollyDefinedInterface {
 		// stub
 	}
 
-	private class ChildWithMixedParentTypes
+	private static class ChildWithMixedParentTypes
 			extends ArrayList<Integer>
 			implements WhollyDefinedInterface {
 		// stub
 	}
 
-	private class RuntimeBaseType<T, J> {
+	private static class RuntimeBaseType<T, J> {
 		// stub
 	}
 

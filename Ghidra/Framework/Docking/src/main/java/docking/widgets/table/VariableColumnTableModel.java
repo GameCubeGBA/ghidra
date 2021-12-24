@@ -29,7 +29,7 @@ public interface VariableColumnTableModel extends TableModel {
 	 * 
 	 * @return the variable column model
 	 */
-	public static VariableColumnTableModel from(TableModel m) {
+	static VariableColumnTableModel from(TableModel m) {
 		TableModel unwrapped = RowObjectTableModel.unwrap(m);
 		if (unwrapped instanceof VariableColumnTableModel) {
 			return (VariableColumnTableModel) unwrapped;
@@ -37,16 +37,16 @@ public interface VariableColumnTableModel extends TableModel {
 		return null;
 	}
 
-	public String getColumnDisplayName(int column);
+	String getColumnDisplayName(int column);
 
-	public String getColumnDescription(int column);
+	String getColumnDescription(int column);
 
 	/**
 	 * Returns a value that is unique for a given table column.  This is different than getting
 	 * the display name, which may be shared by different columns.
 	 * @param column the index (in the model space) of the column for which to get the identifier
 	 */
-	public String getUniqueIdentifier(int column);
+	String getUniqueIdentifier(int column);
 
 	/**
 	 * Gets the count of the default columns for this model.  This model may have non-default
@@ -57,7 +57,7 @@ public interface VariableColumnTableModel extends TableModel {
 	 *  
 	 * @return Gets the count of the default columns for this model.
 	 */
-	public int getDefaultColumnCount();
+	int getDefaultColumnCount();
 
 	/**
 	 * Returns true if the column denoted by the given model index is default (specified 
@@ -65,7 +65,7 @@ public interface VariableColumnTableModel extends TableModel {
 	 * @param modelIndex The index in the column in the column model.
 	 * @return true if the column denoted by the given model index is default.
 	 */
-	public boolean isDefaultColumn(int modelIndex);
+	boolean isDefaultColumn(int modelIndex);
 
 	/**
 	 * Returns true if the column denoted by the given model index is specified by the table 
@@ -73,5 +73,5 @@ public interface VariableColumnTableModel extends TableModel {
 	 * @param modelIndex The index in the column in the column model.
 	 * @return true if the column denoted by the given model index is visible default.
 	 */
-	public boolean isVisibleByDefault(int modelIndex);
+	boolean isVisibleByDefault(int modelIndex);
 }

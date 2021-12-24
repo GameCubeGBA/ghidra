@@ -29,7 +29,7 @@ public class WeakValueHashMapTest extends AbstractGenericTest {
 
 	@Test
 	public void testMap1() throws InterruptedException {
-		WeakValueHashMap<Integer, Foo> cache = new WeakValueHashMap<Integer, Foo>();
+		WeakValueHashMap<Integer, Foo> cache = new WeakValueHashMap<>();
 		cache.put(0, new Foo("AAA"));
 		cache.put(1, new Foo("BBB"));
 		cache.put(2, new Foo("CCC"));

@@ -15,14 +15,18 @@
  */
 package docking.widgets.fieldpanel;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.math.BigInteger;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import docking.widgets.fieldpanel.support.*;
+import docking.widgets.fieldpanel.support.FieldLocation;
+import docking.widgets.fieldpanel.support.FieldRange;
+import docking.widgets.fieldpanel.support.FieldSelection;
 import generic.test.AbstractGenericTest;
 import ghidra.framework.options.SaveState;
 

@@ -40,20 +40,20 @@ public interface DynamicTableColumn<ROW_TYPE, COLUMN_TYPE, DATA_SOURCE> {
 	 * This name must be non-changing and is used to save/restore state information.
 	 * @return the field instance name.
 	 */
-	public String getColumnName();
+	String getColumnName();
 
 	/**
 	 * Determines the class of object that is associated with this field (column).
 	 * @return the column class
 	 */
-	public Class<COLUMN_TYPE> getColumnClass();
+	Class<COLUMN_TYPE> getColumnClass();
 
 	/**
 	 * Returns the preferred width for this column.  Column should either return a valid positive 
 	 * preferred size or -1.
 	 * @return the preferred width for this column.
 	 */
-	public int getColumnPreferredWidth();
+	int getColumnPreferredWidth();
 
 	/**
 	 * Returns the single class type of the data that this table field can use to 
@@ -61,7 +61,7 @@ public interface DynamicTableColumn<ROW_TYPE, COLUMN_TYPE, DATA_SOURCE> {
 	 * @return the single class type of the data that this table field can use to 
 	 *     generate columnar data.
 	 */
-	public Class<ROW_TYPE> getSupportedRowType();
+	Class<ROW_TYPE> getSupportedRowType();
 
 	/**
 	 * Creates an object that is appropriate for this field (table column) and for the 
@@ -73,7 +73,7 @@ public interface DynamicTableColumn<ROW_TYPE, COLUMN_TYPE, DATA_SOURCE> {
 	 * @return the object for the model to display in the table cell.
 	 * @throws IllegalArgumentException if the rowObject is not one supported by this class.
 	 */
-	public COLUMN_TYPE getValue(ROW_TYPE rowObject, Settings settings, DATA_SOURCE data,
+	COLUMN_TYPE getValue(ROW_TYPE rowObject, Settings settings, DATA_SOURCE data,
 			ServiceProvider serviceProvider) throws IllegalArgumentException;
 
 	/**
@@ -89,13 +89,13 @@ public interface DynamicTableColumn<ROW_TYPE, COLUMN_TYPE, DATA_SOURCE> {
 	 * 
 	 * @return the renderer
 	 */
-	public GColumnRenderer<COLUMN_TYPE> getColumnRenderer();
+	GColumnRenderer<COLUMN_TYPE> getColumnRenderer();
 
 	/**
 	 * Returns a list of settings definitions for this field.
 	 * @return list of settings definitions for this field.
 	 */
-	public SettingsDefinition[] getSettingsDefinitions();
+	SettingsDefinition[] getSettingsDefinitions();
 
 	/**
 	 * Gets the maximum number of text display lines needed for any given cell with the 
@@ -103,32 +103,32 @@ public interface DynamicTableColumn<ROW_TYPE, COLUMN_TYPE, DATA_SOURCE> {
 	 * @param settings field settings
 	 * @return maximum number of lines needed
 	 */
-	public int getMaxLines(Settings settings);
+	int getMaxLines(Settings settings);
 
 	/**
 	 * Determines the column heading that will be displayed.
 	 * @param settings the settings
 	 * @return the field name to display as the column heading.
 	 */
-	public String getColumnDisplayName(Settings settings);
+	String getColumnDisplayName(Settings settings);
 
 	/**
 	 * Returns a description of this column.  This may be used as a tooltip for the column header
 	 * @return a description of this column.  This may be used as a tooltip for the column header.
 	 */
-	public String getColumnDescription();
+	String getColumnDescription();
 
 	/**
 	 * Returns a value that is unique for this table column.  This is different than getting
 	 * the display name, which may be shared by different columns.
 	 * @return the identifier
 	 */
-	public String getUniqueIdentifier();
+	String getUniqueIdentifier();
 
 	/**
 	 * If implemented, will return a comparator that knows how to sort values for this column.  
 	 * Implementors should return <code>null</code> if they do not wish to provider a comparator
 	 * @return the comparator
 	 */
-	public Comparator<COLUMN_TYPE> getComparator();
+	Comparator<COLUMN_TYPE> getComparator();
 }

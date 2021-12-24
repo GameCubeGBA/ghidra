@@ -16,25 +16,25 @@
  */
 package ghidra.sleigh.grammar;
 
+import java.util.HashMap;
+
 import generic.stl.Pair;
 import ghidra.pcodeCPort.slgh_compile.PreprocessorDefinitions;
-
-import java.util.HashMap;
 
 public class HashMapPreprocessorDefinitionsAdapter implements PreprocessorDefinitions {
 
 	private final HashMap<String, String> map;
 
 	public HashMapPreprocessorDefinitionsAdapter() {
-		this.map = new HashMap<String, String>();
+		this.map = new HashMap<>();
 	}
 
 	@Override
 	public Pair<Boolean, String> lookup(String key) {
 		if (map.containsKey(key)) {
-			return new Pair<Boolean, String>(true, map.get(key));
+			return new Pair<>(true, map.get(key));
 		}
-		return new Pair<Boolean, String>(false, null);
+		return new Pair<>(false, null);
 	}
 
 	@Override

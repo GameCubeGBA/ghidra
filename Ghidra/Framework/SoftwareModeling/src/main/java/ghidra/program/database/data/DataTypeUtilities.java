@@ -15,14 +15,46 @@
  */
 package ghidra.program.database.data;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
 import java.util.regex.Pattern;
 
 import ghidra.app.util.NamespaceUtils;
 import ghidra.docking.settings.Settings;
 import ghidra.program.model.address.GlobalNamespace;
-import ghidra.program.model.data.*;
+import ghidra.program.model.data.Array;
+import ghidra.program.model.data.BitFieldDataType;
+import ghidra.program.model.data.BuiltInDataType;
+import ghidra.program.model.data.CategoryPath;
+import ghidra.program.model.data.CharDataType;
+import ghidra.program.model.data.Composite;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.DataTypeComponent;
+import ghidra.program.model.data.DataTypeManager;
+import ghidra.program.model.data.DoubleDataType;
 import ghidra.program.model.data.Enum;
+import ghidra.program.model.data.FloatDataType;
+import ghidra.program.model.data.FunctionDefinition;
+import ghidra.program.model.data.IntegerDataType;
+import ghidra.program.model.data.LongDataType;
+import ghidra.program.model.data.LongDoubleDataType;
+import ghidra.program.model.data.LongLongDataType;
+import ghidra.program.model.data.MissingBuiltInDataType;
+import ghidra.program.model.data.ParameterDefinition;
+import ghidra.program.model.data.Pointer;
+import ghidra.program.model.data.ShortDataType;
+import ghidra.program.model.data.SourceArchive;
+import ghidra.program.model.data.TypeDef;
+import ghidra.program.model.data.UnsignedCharDataType;
+import ghidra.program.model.data.UnsignedIntegerDataType;
+import ghidra.program.model.data.UnsignedLongDataType;
+import ghidra.program.model.data.UnsignedLongLongDataType;
+import ghidra.program.model.data.UnsignedShortDataType;
 import ghidra.program.model.listing.Library;
 import ghidra.program.model.symbol.Namespace;
 import ghidra.util.UniversalID;
@@ -128,13 +160,9 @@ public class DataTypeUtilities {
 			BitFieldDataType bitFieldDt = (BitFieldDataType) dt;
 			list.add(bitFieldDt.getBaseDataType());
 		}
-		else if (dt instanceof MissingBuiltInDataType) {
+		else if ((dt instanceof MissingBuiltInDataType) || dt.equals(DataType.DEFAULT)) {
 			// no-op; prevents assert exception below
-		}
-		else if (dt.equals(DataType.DEFAULT)) {
-			// no-op; prevents assert exception below
-		}
-		else {
+		} else {
 			throw new AssertException("Unknown data Type:" + dt.getDisplayName());
 		}
 		return list;
@@ -189,10 +217,7 @@ public class DataTypeUtilities {
 	public static boolean isSameDataType(DataType dataType1, DataType dataType2) {
 		UniversalID id1 = dataType1.getUniversalID();
 		UniversalID id2 = dataType2.getUniversalID();
-		if (id1 == null || id2 == null) {
-			return false;
-		}
-		if (!id1.equals(id2)) {
+		if (id1 == null || id2 == null || !id1.equals(id2)) {
 			return false;
 		}
 		// Same universal id, but to be sure make sure the source archives are the same.
@@ -450,7 +475,7 @@ public class DataTypeUtilities {
 	 * <code>NamespaceMatcher</code> is used to check data type categoryPath for match against
 	 * preferred namespace.
 	 */
-	private static interface NamespaceMatcher {
+	private interface NamespaceMatcher {
 		boolean isNamespaceCategoryMatch(DataType dataType);
 	}
 
@@ -468,10 +493,8 @@ public class DataTypeUtilities {
 					!classConstraint.isAssignableFrom(existingDT.getClass())) {
 					continue;
 				}
-				if (preferredCategoryMatcher == null) {
-					if (existingDT.getCategoryPath().equals(CategoryPath.ROOT)) {
-						return existingDT;
-					}
+				if ((preferredCategoryMatcher == null) && existingDT.getCategoryPath().equals(CategoryPath.ROOT)) {
+					return existingDT;
 				}
 				if (preferredCategoryMatcher.isNamespaceCategoryMatch(existingDT)) {
 					preferredDataType = existingDT;

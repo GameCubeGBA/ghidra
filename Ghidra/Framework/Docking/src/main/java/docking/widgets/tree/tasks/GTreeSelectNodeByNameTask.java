@@ -20,7 +20,9 @@ import javax.swing.tree.TreePath;
 
 import org.apache.commons.lang3.StringUtils;
 
-import docking.widgets.tree.*;
+import docking.widgets.tree.GTree;
+import docking.widgets.tree.GTreeNode;
+import docking.widgets.tree.GTreeTask;
 import docking.widgets.tree.internal.GTreeSelectionModel;
 import docking.widgets.tree.support.GTreeSelectionEvent.EventOrigin;
 import ghidra.util.Msg;

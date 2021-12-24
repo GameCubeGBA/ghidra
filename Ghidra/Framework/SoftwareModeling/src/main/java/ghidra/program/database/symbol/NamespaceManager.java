@@ -16,16 +16,29 @@
 package ghidra.program.database.symbol;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.List;
 
-import db.*;
+import db.DBHandle;
+import db.Field;
+import db.LongField;
 import db.util.ErrorHandler;
 import ghidra.program.database.ManagerDB;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.database.map.AddressMap;
 import ghidra.program.database.util.AddressRangeMapDB;
-import ghidra.program.model.address.*;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressOverflowException;
+import ghidra.program.model.address.AddressRange;
+import ghidra.program.model.address.AddressRangeImpl;
+import ghidra.program.model.address.AddressRangeIterator;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.symbol.Namespace;
+import ghidra.program.model.symbol.Symbol;
+import ghidra.program.model.symbol.SymbolIterator;
 import ghidra.util.Lock;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.VersionException;
@@ -221,7 +234,7 @@ public class NamespaceManager implements ManagerDB {
 	public Iterator<Namespace> getNamespacesOverlapping(AddressSetView set) {
 		lock.acquire();
 		try {
-			LinkedHashSet<Long> idSet = new LinkedHashSet<Long>();
+			LinkedHashSet<Long> idSet = new LinkedHashSet<>();
 			AddressRangeIterator rangeIter = set.getAddressRanges();
 			while (rangeIter.hasNext()) {
 				AddressRange range = rangeIter.next();
@@ -237,7 +250,7 @@ public class NamespaceManager implements ManagerDB {
 				}
 			}
 
-			List<Namespace> list = new ArrayList<Namespace>(idSet.size());
+			List<Namespace> list = new ArrayList<>(idSet.size());
 			for (long namespaceID : idSet) {
 				Symbol s = symbolMgr.getSymbol(namespaceID);
 				if (s != null) {
@@ -304,7 +317,7 @@ public class NamespaceManager implements ManagerDB {
 			Address rangeEnd = fromAddr.addNoWrap(length - 1);
 
 			AddressSet addrSet = new AddressSet(fromAddr, rangeEnd);
-			ArrayList<NamespaceHolder> list = new ArrayList<NamespaceHolder>();
+			ArrayList<NamespaceHolder> list = new ArrayList<>();
 
 			AddressRangeIterator rangeIter = namespaceMap.getAddressRanges(fromAddr, rangeEnd);
 			while (rangeIter.hasNext() && !addrSet.isEmpty()) {
@@ -335,9 +348,8 @@ public class NamespaceManager implements ManagerDB {
 			monitor.checkCanceled();
 			namespaceMap.clearRange(fromAddr, rangeEnd);
 
-			for (int i = 0; i < list.size(); i++) {
+			for (NamespaceHolder h : list) {
 				monitor.checkCanceled();
-				NamespaceHolder h = list.get(i);
 				namespaceMap.paintRange(h.range.getMinAddress(), h.range.getMaxAddress(),
 					new LongField(h.namespaceID));
 			}
@@ -348,7 +360,7 @@ public class NamespaceManager implements ManagerDB {
 		}
 	}
 
-	private class NamespaceHolder {
+	private static class NamespaceHolder {
 		long namespaceID;
 		AddressRange range;
 

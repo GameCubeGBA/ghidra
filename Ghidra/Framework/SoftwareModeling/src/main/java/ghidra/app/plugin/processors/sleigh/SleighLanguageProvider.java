@@ -15,22 +15,39 @@
  */
 package ghidra.app.plugin.processors.sleigh;
 
-import static utilities.util.FileUtilities.*;
+import static utilities.util.FileUtilities.existsAndIsCaseDependent;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
-import org.xml.sax.*;
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 import generic.jar.ResourceFile;
 import ghidra.framework.Application;
-import ghidra.program.model.lang.*;
+import ghidra.program.model.lang.CompilerSpecDescription;
+import ghidra.program.model.lang.CompilerSpecID;
+import ghidra.program.model.lang.Endian;
+import ghidra.program.model.lang.Language;
+import ghidra.program.model.lang.LanguageDescription;
+import ghidra.program.model.lang.LanguageID;
+import ghidra.program.model.lang.LanguageProvider;
+import ghidra.program.model.lang.Processor;
+import ghidra.program.model.lang.SleighLanguageDescription;
+import ghidra.program.model.lang.UnknownInstructionException;
 import ghidra.util.Msg;
 import ghidra.util.SystemUtilities;
 import ghidra.util.xml.SpecXmlUtils;
-import ghidra.xml.*;
+import ghidra.xml.XmlElement;
+import ghidra.xml.XmlPullParser;
+import ghidra.xml.XmlPullParserFactory;
 import utilities.util.FileResolutionResult;
 
 /**
@@ -55,9 +72,9 @@ public class SleighLanguageProvider implements LanguageProvider {
 		Pattern.compile(".*(\\/|\\\\)\\.\\.?(\\/|\\\\)|\\.(\\/|\\\\)|\\.\\.(\\/|\\\\)");
 
 	private final LinkedHashMap<LanguageID, SleighLanguage> languages =
-		new LinkedHashMap<LanguageID, SleighLanguage>();
+		new LinkedHashMap<>();
 	private final LinkedHashMap<LanguageID, SleighLanguageDescription> descriptions =
-		new LinkedHashMap<LanguageID, SleighLanguageDescription>();
+		new LinkedHashMap<>();
 	private int failureCount = 0;
 
 	public final static String LANGUAGE_DIR_NAME = "languages";
@@ -240,9 +257,9 @@ public class SleighLanguageProvider implements LanguageProvider {
 			manualindexfile = languageEnter.getAttribute("manualindexfile");
 			pspec = languageEnter.getAttribute("processorspec");
 
-			compilerSpecs = new ArrayList<CompilerSpecDescription>();
+			compilerSpecs = new ArrayList<>();
 
-			while (!parser.peek().getName().equals("description")) {
+			while (!"description".equals(parser.peek().getName())) {
 				parser.discardSubTree();
 			}
 			XmlElement descriptionStart = parser.start();
@@ -252,7 +269,7 @@ public class SleighLanguageProvider implements LanguageProvider {
 
 			Map<String, Integer> truncatedSpaceMap = null;
 
-			Map<String, List<String>> externalNameMap = new HashMap<String, List<String>>();
+			Map<String, List<String>> externalNameMap = new HashMap<>();
 
 			XmlElement compiler;
 			XmlElement element;
@@ -263,7 +280,7 @@ public class SleighLanguageProvider implements LanguageProvider {
 				String spaceName = element.getAttribute("space");
 				int truncatedSize = SpecXmlUtils.decodeInt(element.getAttribute("size"));
 				if (truncatedSpaceMap == null) {
-					truncatedSpaceMap = new HashMap<String, Integer>();
+					truncatedSpaceMap = new HashMap<>();
 				}
 				if (truncatedSpaceMap.put(spaceName, truncatedSize) != null) {
 					throw new SleighException(
@@ -294,7 +311,7 @@ public class SleighLanguageProvider implements LanguageProvider {
 				String name = externalName.getAttribute("name");
 
 				if (tool != null && name != null && tool.length() > 0 && name.length() > 0) {
-                    List<String> nameList = externalNameMap.computeIfAbsent(tool, k -> new ArrayList<String>());
+                    List<String> nameList = externalNameMap.computeIfAbsent(tool, k -> new ArrayList<>());
                     nameList.add(name);
 				}
 				parser.end(externalName);
@@ -404,7 +421,7 @@ public class SleighLanguageProvider implements LanguageProvider {
 	}
 
 	private List<ResourceFile> findFiles(String fileName, String extension) {
-		List<ResourceFile> matches = new ArrayList<ResourceFile>();
+		List<ResourceFile> matches = new ArrayList<>();
 		List<ResourceFile> files = Application.findFilesByExtensionInApplication(extension);
 		for (ResourceFile resourceFile : files) {
 			if (resourceFile.getName().equals(fileName)) {

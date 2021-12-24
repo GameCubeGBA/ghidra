@@ -15,7 +15,9 @@
  */
 package ghidra.app.plugin.assembler.sleigh.expr;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 import ghidra.app.plugin.assembler.sleigh.sem.AssemblyResolution;
 import ghidra.app.plugin.assembler.sleigh.sem.AssemblyResolvedConstructor;

@@ -24,7 +24,7 @@ public interface TextField extends Field {
 	 * Sets this field to be primary such that its row is primary
 	 * @param b this field to be primary such that its row is primary
 	 */
-	public void setPrimary(boolean b);
+	void setPrimary(boolean b);
 
 	/**
 	 * Translates a screen coordinate to a row and column in the data from the factory
@@ -32,7 +32,7 @@ public interface TextField extends Field {
 	 * @param screenColumn the column in the displayed field text.
 	 * @return a RowColLocation containing the row and column within the data from the factory.
 	 */
-	public RowColLocation screenToDataLocation(int screenRow, int screenColumn);
+	RowColLocation screenToDataLocation(int screenRow, int screenColumn);
 
 	/**
 	 * Translates a data row and column into a screen row and column.
@@ -41,13 +41,13 @@ public interface TextField extends Field {
 	 * @return row and column in the screen coordinate system; a {@link DefaultRowColLocation} if
 	 * 		this field does not contain the given column
 	 */
-	public RowColLocation dataToScreenLocation(int dataRow, int dataColumn);
+	RowColLocation dataToScreenLocation(int dataRow, int dataColumn);
 
 	/**
 	 * Returns true if the field is not displaying all the text information
 	 * @return true if the field is not displaying all the text information
 	 */
-	public boolean isClipped();
+	boolean isClipped();
 
 	/**
 	 * Returns the FieldElement at the given screen location.
@@ -55,6 +55,6 @@ public interface TextField extends Field {
 	 * @param screenColumn the column on the screen
 	 * @return the FieldElement at the given screen location.
 	 */
-	public FieldElement getFieldElement(int screenRow, int screenColumn);
+	FieldElement getFieldElement(int screenRow, int screenColumn);
 
 }

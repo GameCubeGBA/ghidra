@@ -16,10 +16,22 @@
 package docking;
 
 import java.awt.Component;
-import java.awt.event.*;
-import java.util.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.JComponent;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import javax.swing.JTabbedPane;
+import javax.swing.SwingConstants;
 import javax.swing.event.ChangeListener;
 
 import org.jdom.Element;
@@ -27,7 +39,9 @@ import org.jdom.Element;
 import docking.help.HelpService;
 import docking.widgets.OptionDialog;
 import docking.widgets.tabbedpane.DockingTabRenderer;
-import ghidra.util.*;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
+import ghidra.util.Swing;
 import ghidra.util.exception.AssertException;
 import utilities.util.reflection.ReflectionUtilities;
 
@@ -423,11 +437,7 @@ class ComponentNode extends Node {
 	 * @param placeholder the component placeholder object of the component to be shown in the active tab.
 	 */
 	public void makeSelectedTab(ComponentPlaceholder placeholder) {
-		if (invalid) {
-			return;
-		}
-
-		if (!(comp instanceof JTabbedPane)) {
+		if (invalid || !(comp instanceof JTabbedPane)) {
 			return;
 		}
 

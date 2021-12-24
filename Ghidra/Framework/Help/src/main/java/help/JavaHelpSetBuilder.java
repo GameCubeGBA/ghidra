@@ -30,8 +30,7 @@ import java.util.Set;
 public class JavaHelpSetBuilder {
 	private static final String TAB = "\t";
 	private static final Set<String> searchFileNames =
-		new HashSet<String>(Arrays.asList(new String[] { "DOCS", "DOCS.TAB", "OFFSETS",
-			"POSITIONS", "SCHEMA", "TMAP" }));
+		new HashSet<>(Arrays.asList("DOCS", "DOCS.TAB", "OFFSETS", "POSITIONS", "SCHEMA", "TMAP"));
 	private static int indentionLevel;
 
 	private final String moduleName;
@@ -128,7 +127,7 @@ public class JavaHelpSetBuilder {
 	}
 
 	private static boolean hasIndexerFiles(Path helpSearchDirectory) {
-		Set<String> found = new HashSet<String>();
+		Set<String> found = new HashSet<>();
 		try (DirectoryStream<Path> ds = Files.newDirectoryStream(helpSearchDirectory);) {
 			for (Path file : ds) {
 				found.add(file.getFileName().toString());

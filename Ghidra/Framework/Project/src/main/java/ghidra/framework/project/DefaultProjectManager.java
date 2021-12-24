@@ -15,9 +15,20 @@
  */
 package ghidra.framework.project;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileFilter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.StringTokenizer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -26,13 +37,22 @@ import org.apache.logging.log4j.Logger;
 
 import ghidra.framework.GenericRunInfo;
 import ghidra.framework.ToolUtils;
-import ghidra.framework.client.*;
+import ghidra.framework.client.ClientUtil;
+import ghidra.framework.client.RepositoryAdapter;
+import ghidra.framework.client.RepositoryServerAdapter;
 import ghidra.framework.data.TransientDataManager;
-import ghidra.framework.model.*;
+import ghidra.framework.model.Project;
+import ghidra.framework.model.ProjectLocator;
+import ghidra.framework.model.ProjectManager;
+import ghidra.framework.model.ServerInfo;
+import ghidra.framework.model.ToolChest;
+import ghidra.framework.model.ToolTemplate;
 import ghidra.framework.preferences.Preferences;
 import ghidra.framework.protocol.ghidra.GhidraURL;
 import ghidra.framework.store.LockException;
-import ghidra.util.*;
+import ghidra.util.Msg;
+import ghidra.util.NotOwnerException;
+import ghidra.util.ReadOnlyException;
 import ghidra.util.exception.NotFoundException;
 import utilities.util.FileUtilities;
 
@@ -361,7 +381,7 @@ public class DefaultProjectManager implements ProjectManager {
 			}
 
 			for (File ghidraDirSubFile : listFiles) {
-				if (ghidraDirSubFile.getName().equals(APPLICATION_TOOLS_DIR_NAME)) {
+				if (APPLICATION_TOOLS_DIR_NAME.equals(ghidraDirSubFile.getName())) {
 					return ghidraUserDir; // found a tools dir; move on
 				}
 			}
@@ -423,7 +443,7 @@ public class DefaultProjectManager implements ProjectManager {
 		}
 
 		FileFilter dirFilter =
-			file -> file.isDirectory() && file.getName().equals(APPLICATION_TOOLS_DIR_NAME);
+			file -> file.isDirectory() && APPLICATION_TOOLS_DIR_NAME.equals(file.getName());
 		File[] toolDirs = previousUserDir.listFiles(dirFilter);
 		if (toolDirs == null || toolDirs.length != 1) {
 			LOG.debug("No user tools found in '" + previousUserDir + "'");
@@ -589,7 +609,7 @@ public class DefaultProjectManager implements ProjectManager {
 	}
 
 	private void setProjectLocatorProperty(List<ProjectLocator> list, String propertyName) {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < list.size(); i++) {
 			ProjectLocator projectLocator = list.get(i);
 			sb.append(projectLocator.toString());
@@ -601,7 +621,7 @@ public class DefaultProjectManager implements ProjectManager {
 	}
 
 	private void setProjectURLProperty(List<URL> list, String propertyName) {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < list.size(); i++) {
 			URL url = list.get(i);
 			sb.append(url.toExternalForm());

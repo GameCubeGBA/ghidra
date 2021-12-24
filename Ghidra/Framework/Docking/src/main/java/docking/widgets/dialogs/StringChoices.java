@@ -17,6 +17,7 @@
 package docking.widgets.dialogs;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * StringEnum objects represent a choice from a limited set of options.
@@ -124,11 +125,7 @@ public class StringChoices {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + selected;
-		result = prime * result + Arrays.hashCode(values);
-		return result;
+		return Objects.hash(selected, Arrays.hashCode(values));
 	}
 
 	@Override
@@ -136,10 +133,7 @@ public class StringChoices {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
 		}
 		StringChoices other = (StringChoices) obj;

@@ -15,14 +15,27 @@
  */
 package generic.util.image;
 
-import java.awt.*;
-import java.awt.image.*;
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.MediaTracker;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
+import java.awt.image.LookupOp;
+import java.awt.image.LookupTable;
+import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 
 import ghidra.util.MathUtilities;
 import ghidra.util.Msg;
@@ -203,11 +216,7 @@ public class ImageUtils {
 	 */
 	public static boolean waitForImage(String imageName, Image image) {
 
-		if (image instanceof BufferedImage) {
-			return true;
-		}
-
-		if (image.getWidth(null) > 0 && image.getHeight(null) > 0) {
+		if ((image instanceof BufferedImage) || (image.getWidth(null) > 0 && image.getHeight(null) > 0)) {
 			return true;
 		}
 
@@ -383,8 +392,8 @@ public class ImageUtils {
 		graphics.drawImage(image, 0, 0, null);
 		graphics.dispose();
 
-		int[] oldRgb = new int[] { oldColor.getRed(), oldColor.getGreen(), oldColor.getBlue() };
-		int[] newRgb = new int[] { newColor.getRed(), newColor.getGreen(), newColor.getBlue() };
+		int[] oldRgb = { oldColor.getRed(), oldColor.getGreen(), oldColor.getBlue() };
+		int[] newRgb = { newColor.getRed(), newColor.getGreen(), newColor.getBlue() };
 
 		BufferedImage destImage = new BufferedImage(image.getWidth(null), image.getHeight(null),
 			BufferedImage.TYPE_INT_ARGB);

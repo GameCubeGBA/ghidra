@@ -26,7 +26,7 @@ public interface ServiceProvider {
 	 * Returns the Service object that implements the given service interface.
 	 * @param serviceClass the interface class.
 	 */
-	public <T> T getService(Class<T> serviceClass);
+	<T> T getService(Class<T> serviceClass);
 	
 	/**
 	 * Adds a listener that will be called as services are added and removed from this 
@@ -34,12 +34,12 @@ public interface ServiceProvider {
 	 * 
 	 * @param listener The listener to add.
 	 */
-	public void addServiceListener( ServiceListener listener );
+	void addServiceListener( ServiceListener listener );
 	
 	/**
 	 * Removes the given listener from this ServiceProvider.  This method does nothing if the
 	 * given listener is not contained by this ServiceProvider.
 	 * @param listener
 	 */
-	public void removeServiceListener( ServiceListener listener );
+	void removeServiceListener( ServiceListener listener );
 }

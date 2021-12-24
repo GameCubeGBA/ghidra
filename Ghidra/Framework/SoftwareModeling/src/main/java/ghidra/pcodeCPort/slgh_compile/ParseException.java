@@ -115,16 +115,16 @@ public String getMessage() {
     if (!specialConstructor) {
       return super.getMessage();
     }
-    StringBuffer expected = new StringBuffer();
+    StringBuilder expected = new StringBuilder();
     int maxSize = 0;
-    for (int i = 0; i < expectedTokenSequences.length; i++) {
-      if (maxSize < expectedTokenSequences[i].length) {
-        maxSize = expectedTokenSequences[i].length;
+    for (int[] element : expectedTokenSequences) {
+      if (maxSize < element.length) {
+        maxSize = element.length;
       }
-      for (int j = 0; j < expectedTokenSequences[i].length; j++) {
-        expected.append(tokenImage[expectedTokenSequences[i][j]]).append(" ");
+      for (int j = 0; j < element.length; j++) {
+        expected.append(tokenImage[element[j]]).append(" ");
       }
-      if (expectedTokenSequences[i][expectedTokenSequences[i].length - 1] != 0) {
+      if (element[element.length - 1] != 0) {
         expected.append("...");
       }
       expected.append(eol).append("    ");
@@ -162,7 +162,7 @@ public String getMessage() {
    * string literal.
    */
   protected String add_escapes(String str) {
-      StringBuffer retval = new StringBuffer();
+      StringBuilder retval = new StringBuilder();
       char ch;
       for (int i = 0; i < str.length(); i++) {
         switch (str.charAt(i))
@@ -196,7 +196,7 @@ public String getMessage() {
            default:
               if ((ch = str.charAt(i)) < 0x20 || ch > 0x7e) {
                  String s = "0000" + Integer.toString(ch, 16);
-                 retval.append("\\u" + s.substring(s.length() - 4, s.length()));
+                 retval.append("\\u" + s.substring(s.length() - 4));
               } else {
                  retval.append(ch);
               }

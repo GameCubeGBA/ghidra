@@ -15,23 +15,37 @@
  */
 package docking.widgets.table.columnfilter;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 import javax.swing.table.TableColumn;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import docking.widgets.table.*;
+import docking.widgets.table.DiscoverableTableUtils;
+import docking.widgets.table.GTable;
+import docking.widgets.table.RowObjectFilterModel;
+import docking.widgets.table.TableModelWrapper;
 import docking.widgets.table.constraint.ColumnConstraint;
 import docking.widgets.table.constraint.MappedColumnConstraint;
-import docking.widgets.table.constraint.dialog.*;
-import docking.widgets.table.constraint.provider.*;
+import docking.widgets.table.constraint.dialog.ColumnFilterData;
+import docking.widgets.table.constraint.dialog.ColumnFilterDialogModel;
+import docking.widgets.table.constraint.dialog.DialogFilterCondition;
+import docking.widgets.table.constraint.dialog.DialogFilterRow;
+import docking.widgets.table.constraint.provider.DateColumnConstraintProvider;
+import docking.widgets.table.constraint.provider.DateColumnTypeMapper;
+import docking.widgets.table.constraint.provider.NumberColumnConstraintProvider;
+import docking.widgets.table.constraint.provider.StringColumnConstraintProvider;
 import ghidra.framework.options.SaveState;
 import mockit.Mock;
 import mockit.MockUp;
@@ -86,7 +100,7 @@ public class ColumnTableFilterTest {
 			new Integer[] { 600000, 500000, 400000, 300000, 200000, 100000 });
 
 		testTableModel.addColumn("Long ID",
-			new Long[] { 1000l, 2000l, 3000l, 4000l, 5000l, 10000000000l });
+			new Long[] { 1000L, 2000L, 3000L, 4000L, 5000L, 10000000000L });
 
 		testTableModel.addColumn("Birth Date", new Date[] { date("01/01/2010"), date("01/02/2010"),
 			date("01/03/2010"), date("01/04/2010"), date("01/05/2010"), date("01/06/2010"), });
@@ -356,8 +370,8 @@ public class ColumnTableFilterTest {
 		assertEquals(2, tableModel.getRowCount());
 
 		int col = getColumn("Long ID");
-		assertEquals(5000l, tableModel.getValueAt(0, col));
-		assertEquals(10000000000l, tableModel.getValueAt(1, col));
+		assertEquals(5000L, tableModel.getValueAt(0, col));
+		assertEquals(10000000000L, tableModel.getValueAt(1, col));
 	}
 
 	@Test
@@ -368,8 +382,8 @@ public class ColumnTableFilterTest {
 
 		int col = getColumn("Long ID");
 		assertEquals(2, tableModel.getRowCount());
-		assertEquals(1000l, tableModel.getValueAt(0, col));
-		assertEquals(2000l, tableModel.getValueAt(1, col));
+		assertEquals(1000L, tableModel.getValueAt(0, col));
+		assertEquals(2000L, tableModel.getValueAt(1, col));
 	}
 
 	@Test
@@ -381,9 +395,9 @@ public class ColumnTableFilterTest {
 		assertEquals(3, tableModel.getRowCount());
 
 		int col = getColumn("Long ID");
-		assertEquals(2000l, tableModel.getValueAt(0, col));
-		assertEquals(3000l, tableModel.getValueAt(1, col));
-		assertEquals(4000l, tableModel.getValueAt(2, col));
+		assertEquals(2000L, tableModel.getValueAt(0, col));
+		assertEquals(3000L, tableModel.getValueAt(1, col));
+		assertEquals(4000L, tableModel.getValueAt(2, col));
 	}
 
 	@Test
@@ -395,9 +409,9 @@ public class ColumnTableFilterTest {
 		assertEquals(3, tableModel.getRowCount());
 
 		int col = getColumn("Long ID");
-		assertEquals(1000l, tableModel.getValueAt(0, col));
-		assertEquals(5000l, tableModel.getValueAt(1, col));
-		assertEquals(10000000000l, tableModel.getValueAt(2, col));
+		assertEquals(1000L, tableModel.getValueAt(0, col));
+		assertEquals(5000L, tableModel.getValueAt(1, col));
+		assertEquals(10000000000L, tableModel.getValueAt(2, col));
 	}
 
 	@Test
@@ -673,8 +687,7 @@ public class ColumnTableFilterTest {
 
 	@SuppressWarnings("unchecked")
 	private List<ColumnConstraint<?>> loadConstraints() {
-		List<ColumnConstraint<?>> list = new ArrayList<>();
-		list.addAll(new NumberColumnConstraintProvider().getColumnConstraints());
+		List<ColumnConstraint<?>> list = new ArrayList<>(new NumberColumnConstraintProvider().getColumnConstraints());
 		list.addAll(new StringColumnConstraintProvider().getColumnConstraints());
 		Collection<ColumnConstraint<?>> columnConstraints =
 			new DateColumnConstraintProvider().getColumnConstraints();

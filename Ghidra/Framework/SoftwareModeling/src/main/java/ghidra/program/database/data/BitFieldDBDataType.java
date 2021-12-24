@@ -15,8 +15,14 @@
  */
 package ghidra.program.database.data;
 
-import ghidra.program.model.data.*;
+import ghidra.program.model.data.AbstractIntegerDataType;
+import ghidra.program.model.data.BitFieldDataType;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.DataTypeManager;
 import ghidra.program.model.data.Enum;
+import ghidra.program.model.data.IntegerDataType;
+import ghidra.program.model.data.InvalidDataTypeException;
+import ghidra.program.model.data.TypeDef;
 import ghidra.util.Msg;
 import ghidra.util.exception.AssertException;
 
@@ -64,7 +70,7 @@ class BitFieldDBDataType extends BitFieldDataType {
 		super(baseDataType, bitSize, bitOffset);
 	}
 
-	private static enum BaseDatatypeKind {
+	private enum BaseDatatypeKind {
 		NONE(0), TYPEDEF(1), ENUM(2), INTEGER(3);
 		final int id;
 
@@ -129,10 +135,9 @@ class BitFieldDBDataType extends BitFieldDataType {
 				dataTypeKind = BaseDatatypeKind.NONE;
 			}
 		}
-		long id = (dataTypeIndex << DATATYPE_INDEX_SHIFT) |
+		return (dataTypeIndex << DATATYPE_INDEX_SHIFT) |
 			(getBaseTypeEncodedField(bitfieldDt, dataTypeKind) << BASE_TYPE_SHIFT) |
 			(bitfieldDt.getBitOffset() << BIT_OFFSET_SHIFT) | bitfieldDt.getDeclaredBitSize();
-		return id;
 	}
 
 	private static final long getBaseTypeEncodedField(BitFieldDataType bitFieldDt,
@@ -214,11 +219,7 @@ class BitFieldDBDataType extends BitFieldDataType {
 		}
 		TypeDef typeDefDt = (TypeDef) dataType;
 		DataType dt = typeDefDt.getBaseDataType();
-		if (dt instanceof Enum) {
-			// TODO: how restrictive should we be on matching enum size?
-			return typeDefDt;
-		}
-		if (dt instanceof AbstractIntegerDataType) {
+		if ((dt instanceof Enum) || (dt instanceof AbstractIntegerDataType)) {
 			return typeDefDt;
 		}
 		return null; // unsupported typedef

@@ -268,10 +268,7 @@ class IndexField extends Field {
 	}
 
 	static byte getIndexFieldType(Field indexedFieldType, Field primaryKeyFieldType) {
-		if (primaryKeyFieldType instanceof IndexField) {
-			throw new IllegalArgumentException();
-		}
-		if (indexedFieldType instanceof IndexField) {
+		if ((primaryKeyFieldType instanceof IndexField) || (indexedFieldType instanceof IndexField)) {
 			throw new IllegalArgumentException();
 		}
 		return (byte) ((primaryKeyFieldType.getFieldType() << INDEX_FIELD_TYPE_SHIFT) |

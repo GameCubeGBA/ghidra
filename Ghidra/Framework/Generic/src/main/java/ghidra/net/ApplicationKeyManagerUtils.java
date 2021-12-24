@@ -15,22 +15,52 @@
  */
 package ghidra.net;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.SyncFailedException;
 import java.math.BigInteger;
-import java.security.*;
-import java.security.KeyStore.*;
-import java.security.cert.*;
+import java.security.GeneralSecurityException;
+import java.security.InvalidKeyException;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.KeyStore;
+import java.security.KeyStore.LoadStoreParameter;
+import java.security.KeyStore.PasswordProtection;
+import java.security.KeyStore.PrivateKeyEntry;
+import java.security.KeyStore.ProtectionParameter;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.Principal;
+import java.security.PrivateKey;
+import java.security.SecureRandom;
+import java.security.Signature;
+import java.security.SignatureException;
+import java.security.UnrecoverableEntryException;
 import java.security.cert.Certificate;
-import java.util.*;
+import java.security.cert.CertificateEncodingException;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.net.ssl.*;
+import javax.net.ssl.KeyManager;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509KeyManager;
+import javax.net.ssl.X509TrustManager;
 import javax.security.auth.DestroyFailedException;
 import javax.security.auth.x500.X500Principal;
 
 import org.bouncycastle.asn1.x500.X500Name;
 import org.bouncycastle.asn1.x500.style.RFC4519Style;
-import org.bouncycastle.asn1.x509.*;
+import org.bouncycastle.asn1.x509.BasicConstraints;
 import org.bouncycastle.asn1.x509.Extension;
+import org.bouncycastle.asn1.x509.KeyUsage;
+import org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
 import org.bouncycastle.cert.X509v3CertificateBuilder;
 import org.bouncycastle.cert.jcajce.JcaX509CertificateConverter;
 import org.bouncycastle.operator.ContentSigner;
@@ -311,12 +341,7 @@ public class ApplicationKeyManagerUtils {
 
 		LoadStoreParameter loadStoreParameter = null;
 		if (keyFile != null && keyFile.exists()) {
-			loadStoreParameter = new LoadStoreParameter() {
-				@Override
-				public ProtectionParameter getProtectionParameter() {
-					return pp;
-				}
-			};
+			loadStoreParameter = () -> pp;
 		}
 
 		try {
@@ -389,7 +414,7 @@ public class ApplicationKeyManagerUtils {
 
 			if (keyFile != null) {
 				FileOutputStream out = new FileOutputStream(keyFile);
-				try {
+				try (out) {
 					keyStore.store(out, protectedPassphrase);
 					out.flush();
 					out.getFD().sync();
@@ -398,9 +423,6 @@ public class ApplicationKeyManagerUtils {
 				}
 				catch (SyncFailedException e) {
 					// ignore
-				}
-				finally {
-					out.close();
 				}
 				keyFile.setReadable(true, true);
 				keyFile.setWritable(false);

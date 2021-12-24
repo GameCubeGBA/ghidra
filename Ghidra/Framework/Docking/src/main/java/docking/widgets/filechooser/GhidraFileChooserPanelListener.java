@@ -27,10 +27,10 @@ public interface GhidraFileChooserPanelListener {
      * Notification the file change.
      * @param file the new file
      */
-    public void fileChanged(File file);
+    void fileChanged(File file);
     /**
      * Notification that a new file was dropped on the panel.
      * @param file the new file that was dropped
      */
-    public void fileDropped(File file);
+    void fileDropped(File file);
 }

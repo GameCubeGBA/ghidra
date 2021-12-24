@@ -30,13 +30,13 @@ public interface LongPropertyMap extends PropertyMap {
 	 * @param addr address for the property
 	 * @param value value of the property
 	 */
-	public void add(Address addr, long value);
+	void add(Address addr, long value);
 		
 	/**
 	 * Get the long value at the given address.
 	 * @param addr the address from where to get the long value
 	 * @throws NoValueException if there is no property value at addr.
 	 */
-	public long getLong(Address addr) throws NoValueException;
+	long getLong(Address addr) throws NoValueException;
 	
 }

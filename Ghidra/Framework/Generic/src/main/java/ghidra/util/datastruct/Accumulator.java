@@ -33,15 +33,15 @@ import java.util.stream.StreamSupport;
  */
 public interface Accumulator<T> extends Iterable<T> {
 
-	public void add(T t);
+	void add(T t);
 
-	public void addAll(Collection<T> collection);
+	void addAll(Collection<T> collection);
 
-	public boolean contains(T t);
+	boolean contains(T t);
 
-	public Collection<T> get();
+	Collection<T> get();
 
-	public int size();
+	int size();
 
 	default boolean isEmpty() {
 		return size() == 0;

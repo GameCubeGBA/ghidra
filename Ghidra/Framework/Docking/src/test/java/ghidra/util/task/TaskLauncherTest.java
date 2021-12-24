@@ -15,12 +15,14 @@
  */
 package ghidra.util.task;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 public class TaskLauncherTest extends AbstractTaskTest {
 
@@ -185,7 +187,7 @@ public class TaskLauncherTest extends AbstractTaskTest {
 		}
 	}
 
-	private class SwingBlocker implements Runnable {
+	private static class SwingBlocker implements Runnable {
 
 		private static final long REALLY_LONG_SLEEP_THAT_DOESNT_FINISH_MS = 20000;
 

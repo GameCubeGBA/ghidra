@@ -16,10 +16,10 @@
 package ghidra.sleigh.grammar;
 
 public interface SleighRecognizerConstants {
-	public static final int COMMENT = 1;
-	public static final int PREPROC = 2;
+	int COMMENT = 1;
+	int PREPROC = 2;
 
-	public static final int BASE = 0;
-	public static final int DISPLAY = 1;
-	public static final int SEMANTIC = 2;
+	int BASE = 0;
+	int DISPLAY = 1;
+	int SEMANTIC = 2;
 }

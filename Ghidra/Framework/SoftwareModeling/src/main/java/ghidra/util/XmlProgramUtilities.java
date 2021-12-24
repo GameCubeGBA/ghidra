@@ -16,7 +16,10 @@
  */
 package ghidra.util;
 
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.address.OverlayAddressSpace;
 
 public class XmlProgramUtilities {
 	/**

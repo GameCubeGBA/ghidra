@@ -15,8 +15,16 @@
  */
 package db.buffers;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InterruptedIOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Stack;
 
 import db.DBChangeSet;
 import db.DBHandle;
@@ -26,7 +34,9 @@ import ghidra.framework.ShutdownPriority;
 import ghidra.util.Msg;
 import ghidra.util.SystemUtilities;
 import ghidra.util.datastruct.ObjectArray;
-import ghidra.util.exception.*;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.ClosedException;
 import ghidra.util.task.TaskMonitor;
 
 /**
@@ -243,8 +253,7 @@ public class BufferMgr {
 		// Copy file parameters into cache file
 		if (sourceFile != null) {
 			String[] parmNames = sourceFile.getParameterNames();
-			for (int i = 0; i < parmNames.length; i++) {
-				String name = parmNames[i];
+			for (String name : parmNames) {
 				cacheFile.setParameter(name, sourceFile.getParameter(name));
 			}
 		}
@@ -286,8 +295,8 @@ public class BufferMgr {
 				synchronized (BufferMgr.class) {
 					instanceList = openInstances.toArray();
 				}
-				for (int i = 0; i < instanceList.length; i++) {
-					BufferMgr bufferMgr = (BufferMgr) instanceList[i];
+				for (Object element : instanceList) {
+					BufferMgr bufferMgr = (BufferMgr) element;
 					try {
 						bufferMgr.dispose();
 					}
@@ -1303,10 +1312,8 @@ public class BufferMgr {
 						if (node.empty) {
 							// Node was removed within checkpoint - reallocate if appropriate
 							// Double check previous checkpoint - make sure it is not empty
-							if (!oldVer.empty) {
-								if (!indexProvider.allocateIndex(node.id)) {
-									throw new AssertException();
-								}
+							if (!oldVer.empty && !indexProvider.allocateIndex(node.id)) {
+								throw new AssertException();
 							}
 						}
 						else if (oldVer.empty) {
@@ -1393,12 +1400,9 @@ public class BufferMgr {
 							if (!curVer.empty) {
 								indexProvider.freeIndex(node.id);
 							}
-						}
-						else if (curVer.empty) {
-							// Node was re-allocated within checkpoint - reallocate it
-							if (!indexProvider.allocateIndex(node.id)) {
-								throw new AssertException();
-							}
+						} else // Node was re-allocated within checkpoint - reallocate it
+						if (curVer.empty && !indexProvider.allocateIndex(node.id)) {
+							throw new AssertException();
 						}
 						node.clearSnapshotTaken();
 						node.addToVersion(head);
@@ -1647,18 +1651,18 @@ public class BufferMgr {
 
 			// Recover free buffer list
 			int[] freeIndexes = recoveryFile.getFreeIndexList();
-			for (int i = 0; i < freeIndexes.length; i++) {
+			for (int element : freeIndexes) {
 				monitor.checkCanceled();
-				if (freeIndexes[i] >= origIndexCount) {
+				if (element >= origIndexCount) {
 					// Newly allocated free buffer
 					BufferNode node =
-						createNewBufferNode(freeIndexes[i], currentCheckpointHead, null);
+						createNewBufferNode(element, currentCheckpointHead, null);
 					node.isDirty = true;
 					node.modified = true;
 					node.empty = true;
 				}
-				else if (!indexProvider.isFree(freeIndexes[i])) {
-					deleteBuffer(freeIndexes[i]);
+				else if (!indexProvider.isFree(element)) {
+					deleteBuffer(element);
 				}
 			}
 
@@ -1953,8 +1957,7 @@ public class BufferMgr {
 
 		// Copy file parameters from cache file
 		String[] parmNames = cacheFile.getParameterNames();
-		for (int i = 0; i < parmNames.length; i++) {
-			String name = parmNames[i];
+		for (String name : parmNames) {
 			outFile.setParameter(name, cacheFile.getParameter(name));
 		}
 	}
@@ -2008,7 +2011,7 @@ public class BufferMgr {
 	}
 
 	public String getStatusInfo() {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		if (corruptedState) {
 			buf.append("BufferMgr is Corrupt!\n");
 		}
@@ -2051,8 +2054,8 @@ public class BufferMgr {
 		if (cacheFiles == null) {
 			return;
 		}
-		for (int i = 0; i < cacheFiles.length; i++) {
-			cacheFiles[i].delete();
+		for (File cacheFile2 : cacheFiles) {
+			cacheFile2.delete();
 		}
 	}
 }

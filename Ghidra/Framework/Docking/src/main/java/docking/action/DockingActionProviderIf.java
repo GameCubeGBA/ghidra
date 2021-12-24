@@ -39,5 +39,5 @@ public interface DockingActionProviderIf {
 	 * Returns actions that are compatible with the given context.
 	 * @return the actions
 	 */
-	public List<DockingActionIf> getDockingActions();
+	List<DockingActionIf> getDockingActions();
 }

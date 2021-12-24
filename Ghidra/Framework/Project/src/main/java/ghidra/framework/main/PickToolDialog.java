@@ -17,14 +17,28 @@ package ghidra.framework.main;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
 
-import javax.swing.*;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 
 import docking.DialogComponentProvider;
 import docking.tool.ToolConstants;
-import docking.widgets.table.*;
-import ghidra.framework.model.*;
+import docking.widgets.table.AbstractSortedTableModel;
+import docking.widgets.table.GTable;
+import docking.widgets.table.GTableCellRenderer;
+import docking.widgets.table.GTableCellRenderingData;
+import ghidra.framework.model.DomainObject;
+import ghidra.framework.model.Project;
+import ghidra.framework.model.ToolServices;
+import ghidra.framework.model.ToolTemplate;
 import ghidra.framework.project.tool.GhidraToolTemplate;
 import ghidra.util.HelpLocation;
 
@@ -167,7 +181,7 @@ public class PickToolDialog extends DialogComponentProvider {
 		}
 	}
 
-	private class ToolTemplateComparator implements Comparator<ToolTemplate> {
+	private static class ToolTemplateComparator implements Comparator<ToolTemplate> {
 		@Override
 		public int compare(ToolTemplate o1, ToolTemplate o2) {
 			return o1.getName().compareTo(o2.getName());

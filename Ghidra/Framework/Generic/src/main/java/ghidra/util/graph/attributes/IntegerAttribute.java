@@ -16,12 +16,12 @@
  */
 package ghidra.util.graph.attributes;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 import ghidra.util.exception.NoValueException;
 import ghidra.util.graph.KeyIndexableSet;
 import ghidra.util.graph.KeyedObject;
-
-import java.util.Arrays;
-import java.util.Comparator;
 
 /** This class provides a storage mechanism for integer-valued information about
  *  the elements of a KeyIndexableSet, e.g. the vertices of a DirectedGraph.

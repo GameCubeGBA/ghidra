@@ -17,18 +17,28 @@ package docking.widgets.tree.support;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.datatransfer.*;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.dnd.DnDConstants;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
-import javax.swing.*;
+import javax.swing.Icon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.WindowConstants;
 import javax.swing.tree.TreePath;
 
-import docking.widgets.tree.*;
+import docking.widgets.tree.GTree;
+import docking.widgets.tree.GTreeLazyNode;
+import docking.widgets.tree.GTreeNode;
 import ghidra.util.Msg;
 import ghidra.util.SystemUtilities;
 
@@ -57,14 +67,11 @@ public class NewTestApp extends JPanel {
 		container.add(button, BorderLayout.SOUTH);
 		frame.setSize(400, 600);
 		frame.setVisible(true);
-		button.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				TreePath selectionPath = tree.getSelectionPath();
-				if (selectionPath != null) {
-					GTreeNode node = (GTreeNode) selectionPath.getLastPathComponent();
-					tree.collapseAll(node);
-				}
+		button.addActionListener(e -> {
+			TreePath selectionPath = tree.getSelectionPath();
+			if (selectionPath != null) {
+				GTreeNode node = (GTreeNode) selectionPath.getLastPathComponent();
+				tree.collapseAll(node);
 			}
 		});
 
@@ -167,7 +174,7 @@ class DirectoryNode extends GTreeLazyNode implements FileData {
 
 	@Override
 	public List<GTreeNode> generateChildren() {
-		List<GTreeNode> children = new ArrayList<GTreeNode>();
+		List<GTreeNode> children = new ArrayList<>();
 		File[] files = file.listFiles();
 		if (files != null) {
 			for (File directoryFile : files) {
@@ -235,9 +242,7 @@ class DragNDropHandler implements GTreeDragNDropHandler {
 				Msg.info(this, "\t" + it.next());
 			}
 		}
-		catch (UnsupportedFlavorException e) {
-		}
-		catch (IOException e) {
+		catch (UnsupportedFlavorException | IOException e) {
 		}
 	}
 
@@ -254,7 +259,7 @@ class DragNDropHandler implements GTreeDragNDropHandler {
 	@Override
 	public Object getTransferData(List<GTreeNode> dragUserData, DataFlavor flavor) {
 		if (flavor.equals(DataFlavor.javaFileListFlavor)) {
-			List<File> fileList = new ArrayList<File>();
+			List<File> fileList = new ArrayList<>();
 			for (GTreeNode node : dragUserData) {
 				FileData fileData = (FileData) node;
 				fileList.add(fileData.getFile());
@@ -262,7 +267,7 @@ class DragNDropHandler implements GTreeDragNDropHandler {
 			return fileList;
 		}
 		else if (flavor.equals(DataFlavor.stringFlavor)) {
-			StringBuffer buf = new StringBuffer();
+			StringBuilder buf = new StringBuilder();
 			Iterator<?> it = dragUserData.iterator();
 			while (it.hasNext()) {
 				buf.append(it.next().toString());

@@ -16,14 +16,16 @@
  */
 package ghidra.framework.main;
 
-import ghidra.util.bean.GGlassPane;
-
 import java.awt.Rectangle;
 
 import javax.swing.Icon;
 
-import org.jdesktop.animation.timing.*;
+import org.jdesktop.animation.timing.Animator;
+import org.jdesktop.animation.timing.TimingTarget;
+import org.jdesktop.animation.timing.TimingTargetAdapter;
 import org.jdesktop.animation.timing.interpolation.PropertySetter;
+
+import ghidra.util.bean.GGlassPane;
 
 /**
  * A class to change the bounds of a given {@link ZoomedImagePainter} to make the Icon appear to 

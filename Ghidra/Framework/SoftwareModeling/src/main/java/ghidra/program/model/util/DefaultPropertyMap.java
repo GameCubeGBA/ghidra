@@ -17,11 +17,18 @@
 
 package ghidra.program.model.util;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressIterator;
+import ghidra.program.model.address.AddressMapImpl;
+import ghidra.program.model.address.AddressRange;
+import ghidra.program.model.address.AddressRangeIterator;
+import ghidra.program.model.address.AddressSetView;
 import ghidra.util.LongIterator;
 import ghidra.util.datastruct.NoSuchIndexException;
 import ghidra.util.prop.PropertySet;

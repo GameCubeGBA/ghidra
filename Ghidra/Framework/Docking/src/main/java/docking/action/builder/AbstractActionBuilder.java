@@ -22,8 +22,15 @@ import java.util.function.Predicate;
 import javax.swing.Icon;
 import javax.swing.KeyStroke;
 
-import docking.*;
-import docking.action.*;
+import docking.ActionContext;
+import docking.ComponentProvider;
+import docking.Tool;
+import docking.action.DockingAction;
+import docking.action.DockingActionIf;
+import docking.action.KeyBindingData;
+import docking.action.KeyBindingType;
+import docking.action.MenuData;
+import docking.action.ToolBarData;
 import docking.actions.KeyBindingUtils;
 import ghidra.util.HelpLocation;
 import ghidra.util.Msg;
@@ -699,8 +706,7 @@ public abstract class AbstractActionBuilder<T extends DockingActionIf, C extends
 
 		actionContextClass = newActionContextClass;
 
-		B2 newSelf = (B2) self();
-		return newSelf;
+		return (B2) self();
 	}
 
 	protected void validate() {
@@ -758,11 +764,9 @@ public abstract class AbstractActionBuilder<T extends DockingActionIf, C extends
 			// don't wrap the predicate if it doesn't need it
 			return (Predicate<ActionContext>) predicate;
 		}
-		// Convert a sub-classed ActionContext predicate to a plain ActionContext predicate
-		Predicate<ActionContext> predicateAdapter = (ac) -> {
+		return (ac) -> {
 			return actionContextClass.isInstance(ac) && predicate.test((C) ac);
 		};
-		return predicateAdapter;
 	}
 
 	protected boolean isPopupAction() {

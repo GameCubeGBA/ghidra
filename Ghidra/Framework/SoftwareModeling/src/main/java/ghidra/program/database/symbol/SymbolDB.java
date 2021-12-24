@@ -16,11 +16,15 @@
 package ghidra.program.database.symbol;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 import db.DBRecord;
 import db.Field;
-import ghidra.program.database.*;
+import ghidra.program.database.DBObjectCache;
+import ghidra.program.database.DatabaseObject;
+import ghidra.program.database.ProgramDB;
 import ghidra.program.database.external.ExternalLocationDB;
 import ghidra.program.database.external.ExternalManagerDB;
 import ghidra.program.model.address.Address;
@@ -28,7 +32,15 @@ import ghidra.program.model.address.GlobalNamespace;
 import ghidra.program.model.lang.Register;
 import ghidra.program.model.listing.CircularDependencyException;
 import ghidra.program.model.listing.Program;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.Namespace;
+import ghidra.program.model.symbol.Reference;
+import ghidra.program.model.symbol.ReferenceIterator;
+import ghidra.program.model.symbol.ReferenceManager;
+import ghidra.program.model.symbol.SourceType;
+import ghidra.program.model.symbol.Symbol;
+import ghidra.program.model.symbol.SymbolIterator;
+import ghidra.program.model.symbol.SymbolType;
+import ghidra.program.model.symbol.SymbolUtilities;
 import ghidra.program.util.ChangeManager;
 import ghidra.util.Lock;
 import ghidra.util.SystemUtilities;
@@ -256,8 +268,7 @@ public abstract class SymbolDB extends DatabaseObject implements Symbol {
 			ArrayList<String> list = new ArrayList<>();
 			fillListWithNamespacePath(getParentNamespace(), list);
 			list.add(getName());
-			String[] path = list.toArray(new String[list.size()]);
-			return path;
+			return list.toArray(new String[list.size()]);
 		}
 		finally {
 			lock.release();
@@ -715,14 +726,7 @@ public abstract class SymbolDB extends DatabaseObject implements Symbol {
 			return true;
 		}
 
-		if (!getName().equals(s.getName())) {
-			return false;
-		}
-
-		if (!getAddress().equals(s.getAddress())) {
-			return false;
-		}
-		if (!getSymbolType().equals(s.getSymbolType())) {
+		if (!getName().equals(s.getName()) || !getAddress().equals(s.getAddress()) || !getSymbolType().equals(s.getSymbolType())) {
 			return false;
 		}
 		Symbol myParent = getParentSymbol();

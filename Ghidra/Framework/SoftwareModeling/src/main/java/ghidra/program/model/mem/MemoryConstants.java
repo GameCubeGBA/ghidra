@@ -21,5 +21,5 @@ package ghidra.program.model.mem;
  * Memory Constants
  */
 public interface MemoryConstants {
-	public final static String HEAP_BLOCK_NAME = "__HEAP__";
+	String HEAP_BLOCK_NAME = "__HEAP__";
 }

@@ -15,10 +15,21 @@
  */
 package ghidra.program.model.lang;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import ghidra.program.database.register.AddressRangeObjectMap;
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetView;
 import ghidra.program.model.listing.Instruction;
 import ghidra.util.exception.AssertException;
 
@@ -26,11 +37,11 @@ import ghidra.util.exception.AssertException;
  * A set of instructions organized as a graph of basic blocks. 
  */
 public class InstructionSet implements Iterable<InstructionBlock> {
-	private Map<Address, InstructionBlock> blockMap = new HashMap<Address, InstructionBlock>();
+	private Map<Address, InstructionBlock> blockMap = new HashMap<>();
 	private AddressRangeObjectMap<InstructionBlock> blockRangeMap =
-		new AddressRangeObjectMap<InstructionBlock>();
-	private Set<Address> startAddresses = new HashSet<Address>();
-	private List<InstructionBlock> emptyBlocks = new ArrayList<InstructionBlock>();
+		new AddressRangeObjectMap<>();
+	private Set<Address> startAddresses = new HashSet<>();
+	private List<InstructionBlock> emptyBlocks = new ArrayList<>();
 	private AddressSet addressSet;
 	private int instructionCount = 0;
 
@@ -92,10 +103,7 @@ public class InstructionSet implements Iterable<InstructionBlock> {
 				continue;
 			}
 			Address blockMax = block.getMaxAddress();
-			if (blockMax.compareTo(min) < 0) {
-				continue;
-			}
-			if (intersectBlock != null && intersectBlock.getStartAddress().compareTo(blockMin) < 0) {
+			if ((blockMax.compareTo(min) < 0) || (intersectBlock != null && intersectBlock.getStartAddress().compareTo(blockMin) < 0)) {
 				continue;
 			}
 			intersectBlock = block;
@@ -184,7 +192,7 @@ public class InstructionSet implements Iterable<InstructionBlock> {
 	 * @return the list of conflicts for this set.
 	 */
 	public List<InstructionError> getConflicts() {
-		List<InstructionError> conflictList = new ArrayList<InstructionError>();
+		List<InstructionError> conflictList = new ArrayList<>();
 		for (InstructionBlock block : this) {
 			if (block.hasInstructionError()) {
 				conflictList.add(block.getInstructionConflict());
@@ -195,7 +203,7 @@ public class InstructionSet implements Iterable<InstructionBlock> {
 
 	class BlockIterator implements Iterator<InstructionBlock> {
 		private InstructionBlock currentBlock;
-		private Set<Address> visitedBlockSet = new HashSet<Address>();
+		private Set<Address> visitedBlockSet = new HashSet<>();
 		private FlowQueue flowQueue = new FlowQueue();
 
 		BlockIterator() {
@@ -277,7 +285,7 @@ public class InstructionSet implements Iterable<InstructionBlock> {
 	}
 
 	static class FlowQueue {
-		private SortedSet<Address> set = new TreeSet<Address>();
+		private SortedSet<Address> set = new TreeSet<>();
 		private Address first;
 
 		void addToFront(Address address) {

@@ -15,10 +15,15 @@
  */
 package ghidra.framework.main.datatree;
 
-import java.awt.datatransfer.*;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.dnd.DnDConstants;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import docking.dnd.GenericDataFlavor;
@@ -111,10 +116,7 @@ public class DataTreeDragNDropHandler implements GTreeDragNDropHandler {
 
 	@Override
 	public boolean isDropSiteOk(GTreeNode destUserData, DataFlavor[] flavors, int dropAction) {
-		if (!isActiveProject) {
-			return false;
-		}
-		if (ToolConstants.NO_ACTIVE_PROJECT.equals(destUserData.getName())) {
+		if (!isActiveProject || ToolConstants.NO_ACTIVE_PROJECT.equals(destUserData.getName())) {
 			return false;
 		}
 

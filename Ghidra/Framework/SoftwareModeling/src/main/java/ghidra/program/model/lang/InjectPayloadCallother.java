@@ -18,7 +18,9 @@ package ghidra.program.model.lang;
 import ghidra.app.plugin.processors.sleigh.SleighLanguage;
 import ghidra.app.plugin.processors.sleigh.template.ConstructTpl;
 import ghidra.util.xml.SpecXmlUtils;
-import ghidra.xml.*;
+import ghidra.xml.XmlElement;
+import ghidra.xml.XmlParseException;
+import ghidra.xml.XmlPullParser;
 
 public class InjectPayloadCallother extends InjectPayloadSleigh {
 
@@ -58,7 +60,7 @@ public class InjectPayloadCallother extends InjectPayloadSleigh {
 	public void restoreXml(XmlPullParser parser, SleighLanguage language) throws XmlParseException {
 		XmlElement fixupEl = parser.start("callotherfixup");
 		name = fixupEl.getAttribute("targetop");
-		if (!parser.peek().isStart() || !parser.peek().getName().equals("pcode")) {
+		if (!parser.peek().isStart() || !"pcode".equals(parser.peek().getName())) {
 			throw new XmlParseException("<callotherfixup> does not contain a <pcode> tag");
 		}
 		super.restoreXml(parser, language);

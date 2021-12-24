@@ -16,8 +16,14 @@
  */
 package ghidra.program.model.block;
 
-import ghidra.program.model.address.*;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressRange;
+import ghidra.program.model.address.AddressRangeIterator;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.listing.CodeUnit;
+import ghidra.program.model.listing.Data;
+import ghidra.program.model.listing.Instruction;
+import ghidra.program.model.listing.Listing;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
@@ -174,9 +180,7 @@ public class SimpleBlockIterator implements CodeBlockIterator {
 	private Address getNextAddress(Address addr) {
 
 		Instruction instr = listing.getInstructionAfter(addr);
-		Address instrAddr = instr != null ? instr.getMinAddress() : null;
-
-		return instrAddr;
+		return instr != null ? instr.getMinAddress() : null;
 // ?? ITERATOR HAS BEEN MODIFIED TO ONLY RETURN INSTRUCTION BLOCKS
 
 //        Data data = getDefinedDataAfter(addr);

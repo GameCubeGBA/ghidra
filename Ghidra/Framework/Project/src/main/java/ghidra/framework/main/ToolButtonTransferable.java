@@ -16,14 +16,17 @@
  */
 package ghidra.framework.main;
 
-import ghidra.util.Msg;
-
-import java.awt.datatransfer.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.ClipboardOwner;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 import docking.dnd.GenericDataFlavor;
+import ghidra.util.Msg;
 
 /**
  * Defines data that is available for drag/drop and clipboard transfers.
@@ -61,21 +64,24 @@ public class ToolButtonTransferable implements Transferable, ClipboardOwner {
     /**
      * Return all data flavors that this class supports.
      */
-    public synchronized DataFlavor []getTransferDataFlavors() {
+    @Override
+	public synchronized DataFlavor []getTransferDataFlavors() {
         return flavors;
     }
     
     /**
      * Return whether the specifed data flavor is supported.
      */
-    public boolean isDataFlavorSupported(DataFlavor f) {
+    @Override
+	public boolean isDataFlavorSupported(DataFlavor f) {
         return flavorList.contains(f);
     }
     
     /**
      * Return the transfer data with the given data flavor.
      */
-    public synchronized Object getTransferData(DataFlavor f) 
+    @Override
+	public synchronized Object getTransferData(DataFlavor f) 
         throws UnsupportedFlavorException, IOException {
             
         if (f.equals(localToolButtonFlavor)) {
@@ -95,7 +101,8 @@ public class ToolButtonTransferable implements Transferable, ClipboardOwner {
     /**
      * ClipboardOwner interface method.
      */
-    public void lostOwnership(Clipboard clipboard, Transferable contents) {
+    @Override
+	public void lostOwnership(Clipboard clipboard, Transferable contents) {
     }
 
     /**

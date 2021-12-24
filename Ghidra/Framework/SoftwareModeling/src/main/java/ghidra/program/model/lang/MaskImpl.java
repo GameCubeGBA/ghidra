@@ -15,10 +15,10 @@
  */
 package ghidra.program.model.lang;
 
+import java.io.Serializable;
+
 import ghidra.program.model.mem.MemBuffer;
 import ghidra.program.model.mem.MemoryAccessException;
-
-import java.io.Serializable;
 
 /**
  * Implements the Mask interface as a byte array.
@@ -58,6 +58,7 @@ public class MaskImpl implements Mask, Serializable {
 	 * 
 	 * @see ghidra.program.model.lang.Mask#equals(byte[])
 	 */
+	@Override
 	public boolean equals(byte[] otherMask) {
 		if (otherMask == null || otherMask.length != mask.length) {
 			return false;
@@ -75,10 +76,9 @@ public class MaskImpl implements Mask, Serializable {
 	 * 
 	 * @see ghidra.program.model.lang.Mask#applyMask(byte[], byte[])
 	 */
+	@Override
 	public byte[] applyMask(byte[] cde, byte[] result) throws IncompatibleMaskException {
-		if ((cde == null) || (result == null))
-			throw new IncompatibleMaskException();
-		if ((cde.length < mask.length) || (result.length < cde.length))
+		if ((cde == null) || (result == null) || (cde.length < mask.length) || (result.length < cde.length))
 			throw new IncompatibleMaskException();
 		for (int i = 0; i < mask.length; i++)
 			result[i] = (byte) (mask[i] & cde[i]);
@@ -90,18 +90,17 @@ public class MaskImpl implements Mask, Serializable {
 	@Override
 	public void applyMask(byte[] cde, int cdeOffset, byte[] results, int resultsOffset)
 			throws IncompatibleMaskException {
-		if ((cde == null) || (results == null))
-			throw new IncompatibleMaskException();
-		if ((cde.length - cdeOffset < mask.length) ||
+		if ((cde == null) || (results == null) || (cde.length - cdeOffset < mask.length) ||
 			(results.length - resultsOffset < mask.length))
 			throw new IncompatibleMaskException();
-		for (int i = 0; i < mask.length; i++)
-			results[resultsOffset++] = (byte) (mask[i] & cde[cdeOffset++]);
+		for (byte element : mask)
+			results[resultsOffset++] = (byte) (element & cde[cdeOffset++]);
 	}
 
 	/**
 	 * @see ghidra.program.model.lang.Mask#applyMask(ghidra.program.model.mem.MemBuffer)
 	 */
+	@Override
 	public byte[] applyMask(MemBuffer buffer) throws MemoryAccessException {
 		byte[] bytes = new byte[mask.length];
 		buffer.getBytes(bytes, 0);
@@ -115,10 +114,9 @@ public class MaskImpl implements Mask, Serializable {
 	 * 
 	 * @see ghidra.program.model.lang.Mask#equalMaskedValue(byte[], byte[])
 	 */
+	@Override
 	public boolean equalMaskedValue(byte[] cde, byte[] target) throws IncompatibleMaskException {
-		if ((cde == null) || (target == null))
-			throw new IncompatibleMaskException();
-		if ((cde.length < mask.length) || (target.length < mask.length))
+		if ((cde == null) || (target == null) || (cde.length < mask.length) || (target.length < mask.length))
 			throw new IncompatibleMaskException();
 		for (int i = 0; i < mask.length; i++)
 			if (target[i] != (byte) (mask[i] & cde[i]))
@@ -130,6 +128,7 @@ public class MaskImpl implements Mask, Serializable {
 	 * 
 	 * @see ghidra.program.model.lang.Mask#subMask(byte[])
 	 */
+	@Override
 	public boolean subMask(byte[] msk) throws IncompatibleMaskException {
 		if (msk == null)
 			throw new IncompatibleMaskException();
@@ -149,10 +148,9 @@ public class MaskImpl implements Mask, Serializable {
 	 * 
 	 * @see ghidra.program.model.lang.Mask#complementMask(byte[], byte[])
 	 */
+	@Override
 	public byte[] complementMask(byte[] msk, byte[] results) throws IncompatibleMaskException {
-		if ((msk == null) || (results == null))
-			throw new IncompatibleMaskException();
-		if ((results.length < mask.length) || (results.length < msk.length))
+		if ((msk == null) || (results == null) || (results.length < mask.length) || (results.length < msk.length))
 			throw new IncompatibleMaskException();
 		int k = mask.length;
 		if (k < msk.length)
@@ -180,8 +178,8 @@ public class MaskImpl implements Mask, Serializable {
 	public String toString() {
 		int b;
 		String s = "", t;
-		for (int i = 0; i < mask.length; i++) {
-			b = 0x0ff & mask[i];
+		for (byte element : mask) {
+			b = 0x0ff & element;
 			t = Integer.toString(b, 16);
 			if (1 == t.length())
 				t = "0" + t;
@@ -194,6 +192,7 @@ public class MaskImpl implements Mask, Serializable {
 	 * 
 	 * @see ghidra.program.model.lang.Mask#getBytes()
 	 */
+	@Override
 	public byte[] getBytes() {
 		return mask;
 	}

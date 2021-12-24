@@ -16,7 +16,10 @@
 package ghidra.framework.protocol.ghidra;
 
 import java.io.File;
-import java.net.*;
+import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.regex.Pattern;
 
 import ghidra.framework.OperatingSystem;
@@ -48,10 +51,8 @@ public class GhidraURL {
 			return false;
 		}
 		String path = url.getPath(); // assume path always starts with '/'
-		if (Platform.CURRENT_PLATFORM.getOperatingSystem() == OperatingSystem.WINDOWS) {
-			if (path.indexOf(":/") == 2) {
-				path = path.substring(1);
-			}
+		if ((Platform.CURRENT_PLATFORM.getOperatingSystem() == OperatingSystem.WINDOWS) && (path.indexOf(":/") == 2)) {
+			path = path.substring(1);
 		}
 		File markerFile = new File(path + MARKER_FILE_EXTENSION);
 		File projectDir = new File(path + PROJECT_DIRECTORY_EXTENSION);

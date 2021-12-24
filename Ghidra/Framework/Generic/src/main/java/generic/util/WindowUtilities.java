@@ -15,7 +15,20 @@
  */
 package generic.util;
 
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Dialog;
+import java.awt.Dimension;
+import java.awt.Frame;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.Insets;
+import java.awt.KeyboardFocusManager;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Shape;
+import java.awt.Toolkit;
+import java.awt.Window;
 import java.awt.geom.Area;
 import java.util.ArrayList;
 import java.util.List;
@@ -147,8 +160,7 @@ public class WindowUtilities {
 			return null; // not on screen (don't think this can happen)
 		}
 
-		Point p = c.getLocationOnScreen();
-		return p;
+		return c.getLocationOnScreen();
 	}
 
 	/**

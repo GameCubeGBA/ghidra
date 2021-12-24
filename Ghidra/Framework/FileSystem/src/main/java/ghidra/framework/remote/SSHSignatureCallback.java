@@ -21,7 +21,12 @@ import java.security.SecureRandom;
 
 import javax.security.auth.callback.Callback;
 
-import ch.ethz.ssh2.signature.*;
+import ch.ethz.ssh2.signature.DSAPrivateKey;
+import ch.ethz.ssh2.signature.DSASHA1Verify;
+import ch.ethz.ssh2.signature.DSASignature;
+import ch.ethz.ssh2.signature.RSAPrivateKey;
+import ch.ethz.ssh2.signature.RSASHA1Verify;
+import ch.ethz.ssh2.signature.RSASignature;
 import generic.random.SecureRandomFactory;
 
 /**

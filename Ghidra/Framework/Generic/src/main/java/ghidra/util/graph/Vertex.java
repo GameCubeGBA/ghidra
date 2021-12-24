@@ -41,6 +41,7 @@ public class Vertex implements KeyedObject, Comparable<Vertex> {
 	/** 
 	 * @return The key of this vertex. 
 	 */
+	@Override
 	public long key() {
 		return this.key;
 	}
@@ -85,6 +86,7 @@ public class Vertex implements KeyedObject, Comparable<Vertex> {
 	 * Compares two vertices by keys. If the specified object o is not a Vertex a
 	 * ClassCastException will be thrown.
 	 */
+	@Override
 	public int compareTo(Vertex v) {
 		long difference = (v.key() - this.key);
 		if (difference < 0) {

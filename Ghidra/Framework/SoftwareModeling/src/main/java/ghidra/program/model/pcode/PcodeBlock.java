@@ -96,15 +96,15 @@ public class PcodeBlock {
 			case 'd':
 				return DOWHILE;
 			case 'g':
-				if (name.equals("goto")) {
+				if ("goto".equals(name)) {
 					return GOTO;
 				}
 				return GRAPH;
 			case 'i':
-				if (name.equals("ifelse")) {
+				if ("ifelse".equals(name)) {
 					return IFELSE;
 				}
-				if (name.equals("infloop")) {
+				if ("infloop".equals(name)) {
 					return INFLOOP;
 				}
 				return IFGOTO;
@@ -113,7 +113,7 @@ public class PcodeBlock {
 			case 'm':
 				return MULTIGOTO;
 			case 'p':
-				if (name.equals("properif")) {
+				if ("properif".equals(name)) {
 					return PROPERIF;
 				}
 				return PLAIN;
@@ -198,8 +198,8 @@ public class PcodeBlock {
 		index = -1;
 		blocktype = PLAIN;
 		parent = null;
-		intothis = new ArrayList<BlockEdge>();
-		outofthis = new ArrayList<BlockEdge>();
+		intothis = new ArrayList<>();
+		outofthis = new ArrayList<>();
 	}
 
 	public int getType() {
@@ -365,8 +365,8 @@ public class PcodeBlock {
 
 	public void saveXmlEdges(Writer writer) throws IOException {
 		StringBuilder buf = new StringBuilder();
-		for (int i = 0; i < intothis.size(); ++i) {
-			intothis.get(i).saveXml(buf);
+		for (BlockEdge element : intothis) {
+			element.saveXml(buf);
 		}
 		writer.write(buf.toString());
 	}
@@ -383,7 +383,7 @@ public class PcodeBlock {
 
 	public void restoreXmlEdges(XmlPullParser parser, BlockMap resolver) throws PcodeXMLException {
 		while (parser.peek().isStart()) {
-			if (!parser.peek().getName().equals("edge")) {
+			if (!"edge".equals(parser.peek().getName())) {
 				return;
 			}
 			restoreNextInEdge(parser, resolver);

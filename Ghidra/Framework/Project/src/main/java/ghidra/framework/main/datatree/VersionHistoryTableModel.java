@@ -15,7 +15,10 @@
  */
 package ghidra.framework.main.datatree;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
 import docking.widgets.table.AbstractSortedTableModel;
 import docking.widgets.table.TableSortState;
@@ -43,9 +46,7 @@ class VersionHistoryTableModel extends AbstractSortedTableModel<Version> {
 
 	VersionHistoryTableModel(Version[] versions) {
 		versionList = new ArrayList<>();
-		for (Version version : versions) {
-			versionList.add(version);
-		}
+		Collections.addAll(versionList, versions);
 		setDefaultTableSortState(TableSortState.createDefaultSortState(VERSION_COL, false));
 	}
 
@@ -77,9 +78,7 @@ class VersionHistoryTableModel extends AbstractSortedTableModel<Version> {
 
 	void refresh(Version[] newVersions) {
 		List<Version> newVersionList = new ArrayList<>();
-		for (Version version : newVersions) {
-			newVersionList.add(version);
-		}
+		Collections.addAll(newVersionList, newVersions);
 		versionList = newVersionList;
 		fireTableDataChanged();
 	}

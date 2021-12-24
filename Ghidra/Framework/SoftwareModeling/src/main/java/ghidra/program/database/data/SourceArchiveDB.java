@@ -20,7 +20,9 @@ import java.io.IOException;
 import db.DBRecord;
 import ghidra.program.database.DBObjectCache;
 import ghidra.program.database.DatabaseObject;
-import ghidra.program.model.data.*;
+import ghidra.program.model.data.ArchiveType;
+import ghidra.program.model.data.DataTypeManager;
+import ghidra.program.model.data.SourceArchive;
 import ghidra.util.Lock;
 import ghidra.util.UniversalID;
 
@@ -46,6 +48,7 @@ public class SourceArchiveDB extends DatabaseObject implements SourceArchive {
 	 * Gets the ID that the program has associated with the data type archive.
 	 * @return the data type archive ID
 	 */
+	@Override
 	public UniversalID getSourceArchiveID() {
 		if (isLocal()) {
 			// if this sourceArchive represents the local archive (id == LOCAL_ARCHIVE_KEY)
@@ -67,6 +70,7 @@ public class SourceArchiveDB extends DatabaseObject implements SourceArchive {
 	 * Gets the ID used to uniquely identify the domain file for the data type archive.
 	 * @return the domain file identifier
 	 */
+	@Override
 	public String getDomainFileID() {
 		if (isLocal()) {
 			return dtMgr.getDomainFileID();
@@ -79,6 +83,7 @@ public class SourceArchiveDB extends DatabaseObject implements SourceArchive {
 	 * (PROGRAM_TYPE, PROJECT_TYPE, FILE_TYPE)
 	 * @return the type
 	 */
+	@Override
 	public ArchiveType getArchiveType() {
 		if (isLocal()) {
 			return dtMgr.getType();
@@ -87,6 +92,7 @@ public class SourceArchiveDB extends DatabaseObject implements SourceArchive {
 		return ArchiveType.values()[byteValue];
 	}
 
+	@Override
 	public String getName() {
 		if (isLocal()) {
 			return dtMgr.getName();
@@ -109,14 +115,17 @@ public class SourceArchiveDB extends DatabaseObject implements SourceArchive {
 		return false;
 	}
 
+	@Override
 	public long getLastSyncTime() {
 		return record.getLongValue(SourceArchiveAdapter.ARCHIVE_ID_LAST_SYNC_TIME_COL);
 	}
 
+	@Override
 	public boolean isDirty() {
 		return record.getBooleanValue(SourceArchiveAdapter.ARCHIVE_ID_DIRTY_FLAG_COL);
 	}
 
+	@Override
 	public void setLastSyncTime(long syncTime) {
 		lock.acquire();
 		try {
@@ -133,6 +142,7 @@ public class SourceArchiveDB extends DatabaseObject implements SourceArchive {
 		}
 	}
 
+	@Override
 	public void setDirtyFlag(boolean isDirty) {
 		lock.acquire();
 		try {
@@ -149,6 +159,7 @@ public class SourceArchiveDB extends DatabaseObject implements SourceArchive {
 		}
 	}
 
+	@Override
 	public void setName(String newName) {
 		if (getName().equals(newName)) {
 			return;

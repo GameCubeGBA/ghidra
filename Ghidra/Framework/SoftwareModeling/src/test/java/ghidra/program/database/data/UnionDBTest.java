@@ -15,14 +15,44 @@
  */
 package ghidra.program.database.data;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.google.common.collect.Sets;
 
 import generic.test.AbstractGTest;
-import ghidra.program.model.data.*;
+import ghidra.program.model.data.Array;
+import ghidra.program.model.data.ArrayDataType;
+import ghidra.program.model.data.ByteDataType;
+import ghidra.program.model.data.CharDataType;
+import ghidra.program.model.data.CompositeTestUtils;
+import ghidra.program.model.data.DWordDataType;
+import ghidra.program.model.data.DataOrganizationImpl;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.DataTypeComponent;
+import ghidra.program.model.data.DataTypeConflictHandler;
+import ghidra.program.model.data.DataTypeDependencyException;
+import ghidra.program.model.data.DataTypeManager;
+import ghidra.program.model.data.IntegerDataType;
+import ghidra.program.model.data.InvalidDataTypeException;
+import ghidra.program.model.data.Pointer;
+import ghidra.program.model.data.PointerDataType;
+import ghidra.program.model.data.QWordDataType;
+import ghidra.program.model.data.ShortDataType;
+import ghidra.program.model.data.StandAloneDataTypeManager;
+import ghidra.program.model.data.StringDataType;
+import ghidra.program.model.data.Structure;
+import ghidra.program.model.data.StructureDataType;
+import ghidra.program.model.data.TypeDef;
+import ghidra.program.model.data.TypedefDataType;
+import ghidra.program.model.data.Union;
+import ghidra.program.model.data.UnionDataType;
+import ghidra.program.model.data.WordDataType;
 import ghidra.util.task.TaskMonitor;
 
 /**
@@ -52,7 +82,7 @@ public class UnionDBTest extends AbstractGTest {
 
 	private void transitionToBigEndian() {
 
-		Union unionClone = (Union) union.clone(null);
+		Union unionClone = union.clone(null);
 		dataMgr.remove(union, TaskMonitor.DUMMY);
 
 		DataOrganizationImpl dataOrg = (DataOrganizationImpl) dataMgr.getDataOrganization();
@@ -329,7 +359,7 @@ public class UnionDBTest extends AbstractGTest {
 
 	@Test
 	public void testCloneRetainIdentity() throws Exception {
-		Union unionCopy = (Union) union.clone(null);
+		Union unionCopy = union.clone(null);
 		assertNull(unionCopy.getDataTypeManager());
 		assertEquals(4, union.getLength());
 	}

@@ -15,9 +15,13 @@
  */
 package ghidra.sleigh.grammar;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.StringReader;
 
-import org.antlr.runtime.*;
+import org.antlr.runtime.ANTLRReaderStream;
+import org.antlr.runtime.CharStream;
+import org.antlr.runtime.CommonTokenStream;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -39,14 +43,16 @@ public class BooleanExpressionDefTest extends AbstractGenericTest {
         CommonTokenStream tokenStream = new CommonTokenStream(lexer);
         parser = new BooleanExpressionParser(tokenStream);
         parser.env = new ExpressionEnvironment() {
-            public boolean equals(String lhs, String rhs) {
+            @Override
+			public boolean equals(String lhs, String rhs) {
                 if (lhs == null || rhs == null) {
                     return false;
                 }
                 return lhs.equals(rhs);
             }
 
-            public String lookup(String variable) {
+            @Override
+			public String lookup(String variable) {
                 if (variable.startsWith("A")) {
                     return variable;
                 }

@@ -31,7 +31,7 @@ import util.CollectionUtils;
 
 public interface AddressIterator extends Iterator<Address>, Iterable<Address> {
 
-	public static final AddressIterator EMPTY_ITERATOR = new AddressIterator() {
+	AddressIterator EMPTY_ITERATOR = new AddressIterator() {
 
 		@Override
 		public boolean hasNext() {
@@ -56,15 +56,13 @@ public interface AddressIterator extends Iterator<Address>, Iterable<Address> {
 	 * by returning null instead of throwing an exception.
 	 * @return the next address in the iteration.
 	 */
-	@Override
-	public Address next();
+	@Override Address next();
 
 	/**
 	 * Checks if there is a next address in the iteration.
 	 * 
 	 * @return true if there is a next address.
 	 */
-	@Override
-	public boolean hasNext();
+	@Override boolean hasNext();
 
 }

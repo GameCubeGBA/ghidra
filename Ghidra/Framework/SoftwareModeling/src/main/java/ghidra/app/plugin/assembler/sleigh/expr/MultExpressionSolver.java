@@ -81,10 +81,10 @@ public class MultExpressionSolver extends AbstractBinaryExpressionSolver<MultExp
 			if (firstBackfillRes != null) {
 				return firstBackfillRes;
 			}
-			if (firstErrorExc != null && firstErrorExc instanceof SolverException) {
+			if (firstErrorExc instanceof SolverException) {
 				throw (SolverException) firstErrorExc;
 			}
-			if (firstErrorExc != null && firstErrorExc instanceof UnsupportedOperationException) {
+			if (firstErrorExc instanceof UnsupportedOperationException) {
 				throw (UnsupportedOperationException) firstErrorExc;
 			}
 			if (firstErrorExc != null) {

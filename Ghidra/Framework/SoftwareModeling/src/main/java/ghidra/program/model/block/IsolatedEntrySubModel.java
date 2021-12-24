@@ -82,7 +82,7 @@ public class IsolatedEntrySubModel extends OverlapCodeSubModel {
 			return null;
 		}
         Address[] mEntryPts = mSub.getStartAddresses();
-        ArrayList<Address> startSet = new ArrayList<Address>();
+        ArrayList<Address> startSet = new ArrayList<>();
         for (Address mEntryPt : mEntryPts) {
             if (!mStartAddr.equals(mEntryPt)) {
 				startSet.add(mEntryPt);
@@ -93,7 +93,7 @@ public class IsolatedEntrySubModel extends OverlapCodeSubModel {
         AddressSet addrSet = new AddressSet();
         
         // Create the todoStack and initialize it with instr; also initialize the list for entryPts.
-        LinkedList<Address> todoList = new LinkedList<Address>();
+        LinkedList<Address> todoList = new LinkedList<>();
         todoList.addFirst(mStartAddr);
         
         CodeBlockModel bbModel = modelM.getBasicBlockModel();
@@ -112,12 +112,8 @@ public class IsolatedEntrySubModel extends OverlapCodeSubModel {
 				continue; // already processed this block or encountered another Model-M entry point  
 			}
 	        CodeBlock bblock = bbModel.getFirstCodeBlockContaining(a, monitor);
-	        if (bblock == null) {
-				continue;
-			}
-	        	
 	        // Verify that the block contains instructions
-	        if (listing.getInstructionAt(a) == null) {
+	        if ((bblock == null) || (listing.getInstructionAt(a) == null)) {
 				continue;
 			}
 	        	

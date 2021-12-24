@@ -44,8 +44,7 @@ public class JungDirectedGraph<V, E extends GEdge<V>> extends DirectedSparseGrap
 
 	@Override
 	public GDirectedGraph<V, E> emptyCopy() {
-		JungDirectedGraph<V, E> newGraph = new JungDirectedGraph<>();
-		return newGraph;
+		return new JungDirectedGraph<>();
 	}
 
 	@Override

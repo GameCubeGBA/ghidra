@@ -25,12 +25,12 @@ public interface IndexRangeIterator {
 	 * Returns true if there are more index ranges.
 	 * @return true if there are more index ranges.
 	 */
-	public boolean hasNext();
+	boolean hasNext();
 	
 	/**
 	 * Returns the next index range.
 	 * @return the next index range.
 	 */
-	public IndexRange next();
+	IndexRange next();
 	
 }

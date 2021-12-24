@@ -100,9 +100,7 @@ public class DynamicEntry extends SymbolEntry {
 		HighSymbol highSymbol = highVariable.getSymbol();
 		HighFunction highFunction = highSymbol.getHighFunction();
 		DynamicHash dynamicHash = new DynamicHash(vn, highFunction);
-		DynamicEntry entry =
-			new DynamicEntry(highSymbol, dynamicHash.getAddress(), dynamicHash.getHash());
-		return entry;
+		return new DynamicEntry(highSymbol, dynamicHash.getAddress(), dynamicHash.getHash());
 	}
 
 	@Override

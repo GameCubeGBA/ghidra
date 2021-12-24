@@ -15,20 +15,24 @@
  */
 package ghidra.pcodeCPort.xml;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.StringReader;
 
-import org.jdom.*;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 
-import generic.stl.*;
-import ghidra.pcodeCPort.translate.XmlError;
+import generic.stl.ComparableMapSTL;
+import generic.stl.MapSTL;
+import generic.stl.VectorSTL;
 import ghidra.util.xml.XmlUtilities;
 
 // Class for managing xml documents during initialization
 public class DocumentStorage {
 
 	VectorSTL<Document> doclist = new VectorSTL<>();
-	MapSTL<String, Element> tagmap = new ComparableMapSTL<String, Element>();
+	MapSTL<String, Element> tagmap = new ComparableMapSTL<>();
 
 	public Document parseDocument(StringReader s) throws JDOMException, IOException {
 		SAXBuilder builder = XmlUtilities.createSecureSAXBuilder(false, false);

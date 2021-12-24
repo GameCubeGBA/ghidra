@@ -15,10 +15,32 @@
  */
 package docking;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.Icon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.JViewport;
+import javax.swing.KeyStroke;
+import javax.swing.ListCellRenderer;
+import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicSeparatorUI;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.text.Document;
@@ -32,7 +54,11 @@ import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.checkbox.GHtmlCheckBox;
 import docking.widgets.combobox.GComboBox;
 import docking.widgets.combobox.GhidraComboBox;
-import docking.widgets.label.*;
+import docking.widgets.label.GDHtmlLabel;
+import docking.widgets.label.GDLabel;
+import docking.widgets.label.GHtmlLabel;
+import docking.widgets.label.GIconLabel;
+import docking.widgets.label.GLabel;
 import docking.widgets.list.GList;
 import docking.widgets.list.GListCellRenderer;
 import docking.widgets.table.GTableCellRenderer;
@@ -204,7 +230,7 @@ public class DockingUtils {
 	 * @param <T> the type of component on which to operate
 	 * @see DockingUtils#forAllDescendants(Container, Class, TreeTraversalOrder, ComponentCallback)
 	 */
-	public static interface ComponentCallback<T extends Component> {
+	public interface ComponentCallback<T extends Component> {
 		TreeTraversalResult call(T component);
 	}
 
@@ -260,12 +286,10 @@ public class DockingUtils {
 	public static <T extends Component> TreeTraversalResult forAllDescendants(Container start,
 			Class<T> type, TreeTraversalOrder order, ComponentCallback<T> cb) {
 		for (Component c : start.getComponents()) {
-			if (TreeTraversalOrder.PARENT_FIRST == order) {
-				if (type.isAssignableFrom(c.getClass())) {
-					TreeTraversalResult res = cb.call((T) c);
-					if (TreeTraversalResult.FINISH == res || TreeTraversalResult.TERMINATE == res) {
-						return res;
-					}
+			if ((TreeTraversalOrder.PARENT_FIRST == order) && type.isAssignableFrom(c.getClass())) {
+				TreeTraversalResult res = cb.call((T) c);
+				if (TreeTraversalResult.FINISH == res || TreeTraversalResult.TERMINATE == res) {
+					return res;
 				}
 			}
 			if (c instanceof Container) {
@@ -274,12 +298,10 @@ public class DockingUtils {
 					return res;
 				}
 			}
-			if (TreeTraversalOrder.CHILDREN_FIRST == order) {
-				if (type.isAssignableFrom(c.getClass())) {
-					TreeTraversalResult res = cb.call((T) c);
-					if (TreeTraversalResult.FINISH == res || TreeTraversalResult.TERMINATE == res) {
-						return res;
-					}
+			if ((TreeTraversalOrder.CHILDREN_FIRST == order) && type.isAssignableFrom(c.getClass())) {
+				TreeTraversalResult res = cb.call((T) c);
+				if (TreeTraversalResult.FINISH == res || TreeTraversalResult.TERMINATE == res) {
+					return res;
 				}
 			}
 		}

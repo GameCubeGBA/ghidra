@@ -15,7 +15,11 @@
  */
 package docking.widgets;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -109,8 +113,7 @@ public class MultiLineLabel extends JPanel {
 	}
 
 	private String getCallerString() {
-		String name = ReflectionUtilities.getClassNameOlderThan(OptionDialog.class);
-		return name;
+		return ReflectionUtilities.getClassNameOlderThan(OptionDialog.class);
 	}
 
 	/**
@@ -167,14 +170,8 @@ public class MultiLineLabel extends JPanel {
 	 * Get the label text.
 	 */
 	public String getLabel() {
-		StringBuffer sb = new StringBuffer();
-		for (int i = 0; i < lines.length; i++) {
-			sb.append(lines[i]);
-			if (i < lines.length - 1) {
-				sb.append("\n");
-			}
-		}
-		return sb.toString();
+		String sb = String.join("\n", lines);
+		return sb;
 	}
 
 	/**

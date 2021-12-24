@@ -15,11 +15,16 @@
  */
 package docking.widgets.table.constraint.dialog;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import org.apache.commons.collections4.CollectionUtils;
 
-import docking.widgets.table.*;
+import docking.widgets.table.DiscoverableTableUtils;
+import docking.widgets.table.DynamicColumnTableModel;
+import docking.widgets.table.DynamicTableColumn;
+import docking.widgets.table.RowObjectFilterModel;
 import docking.widgets.table.constraint.ColumnConstraint;
 import docking.widgets.table.constraint.ColumnTypeMapper;
 import ghidra.docking.settings.Settings;
@@ -264,8 +269,7 @@ public class ColumnFilterData<T> implements Comparable<ColumnFilterData<T>> {
 				return null;
 			}
 			Settings settings = model.getColumnSettings(columnModelIndex);
-			String s = renderer.getFilterString(value, settings);
-			return s;
+			return renderer.getFilterString(value, settings);
 		}
 	}
 

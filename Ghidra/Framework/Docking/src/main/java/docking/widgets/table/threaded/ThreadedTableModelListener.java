@@ -24,17 +24,17 @@ public interface ThreadedTableModelListener {
 	/**
 	 * Called when the model has new data to be loaded, but has not yet started the load process.
 	 */
-	public void loadPending();
+	void loadPending();
 
 	/**
 	 * Called when the table begins to load new data.
 	 */
-	public void loadingStarted();
+	void loadingStarted();
 
 	/**
 	 * Called when the table is done loading data.
 	 * 
 	 * @param wasCancelled true if the load was cancelled.
 	 */
-	public void loadingFinished(boolean wasCancelled);
+	void loadingFinished(boolean wasCancelled);
 }

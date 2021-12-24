@@ -20,7 +20,10 @@ import java.util.ArrayList;
 import ghidra.docking.settings.Settings;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressOverflowException;
-import ghidra.program.model.mem.*;
+import ghidra.program.model.mem.MemBuffer;
+import ghidra.program.model.mem.Memory;
+import ghidra.program.model.mem.MemoryAccessException;
+import ghidra.program.model.mem.MemoryBufferImpl;
 import ghidra.util.Conv;
 import ghidra.util.Msg;
 
@@ -79,7 +82,7 @@ public abstract class RepeatedDynamicDataType extends DynamicDataType {
 	@Override
 	protected DataTypeComponent[] getAllComponents(MemBuffer buf) {
 		Memory memory = buf.getMemory();
-		ArrayList<DataTypeComponent> compList = new ArrayList<DataTypeComponent>();
+		ArrayList<DataTypeComponent> compList = new ArrayList<>();
 
 		ReadOnlyDataTypeComponent comp;
 		int countSize = 0;
@@ -126,6 +129,7 @@ public abstract class RepeatedDynamicDataType extends DynamicDataType {
 	/**
 	 * @see ghidra.program.model.data.DataType#getDescription()
 	 */
+	@Override
 	public String getDescription() {
 		return description;
 	}
@@ -133,6 +137,7 @@ public abstract class RepeatedDynamicDataType extends DynamicDataType {
 	/**
 	 * @see ghidra.program.model.data.DataType#getValue(ghidra.program.model.mem.MemBuffer, ghidra.docking.settings.Settings, int)
 	 */
+	@Override
 	public Object getValue(MemBuffer buf, Settings settings, int length) {
 		return null;
 	}
@@ -140,10 +145,12 @@ public abstract class RepeatedDynamicDataType extends DynamicDataType {
 	/**
 	 * @see ghidra.program.model.data.DataType#getRepresentation(ghidra.program.model.mem.MemBuffer, ghidra.docking.settings.Settings, int)
 	 */
+	@Override
 	public String getRepresentation(MemBuffer buf, Settings settings, int length) {
 		return "";
 	}
 
+	@Override
 	public String getMnemonic(Settings settings) {
 		return name;
 	}

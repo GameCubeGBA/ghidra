@@ -27,30 +27,30 @@ public interface RecordIterator {
 	 * Return true if a Record is available in the forward direction.
 	 * @throws IOException thrown if an IO error occurs
 	 */
-	public boolean hasNext() throws IOException;
+	boolean hasNext() throws IOException;
 	
 	/**
 	 * Return true if a Record is available in the reverse direction
 	 * @throws IOException thrown if an IO error occurs
 	 */
-	public boolean hasPrevious() throws IOException;
+	boolean hasPrevious() throws IOException;
 	
 	/**
 	 * Return the nexy Record or null if one is not available.
 	 * @throws IOException thrown if an IO error occurs
 	 */
-	public DBRecord next() throws IOException;
+	DBRecord next() throws IOException;
 	
 	/**
 	 * Return the previous Record or null if one is not available.
 	 * @throws IOException thrown if an IO error occurs
 	 */
-	public DBRecord previous() throws IOException;
+	DBRecord previous() throws IOException;
 	
 	/**
 	 * Delete the last Record read via the next or previous methods.
 	 * @return true if record was successfully deleted.
 	 * @throws IOException thrown if an IO error occurs.
 	 */
-	public boolean delete() throws IOException;
+	boolean delete() throws IOException;
 }

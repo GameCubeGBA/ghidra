@@ -16,7 +16,9 @@
 package ghidra.util;
 
 import java.awt.Font;
-import java.io.*;
+import java.io.File;
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.Objects;
@@ -290,10 +292,7 @@ public class SystemUtilities {
 		if (array1 == null) {
 			return (array2 == null);
 		}
-		if (array2 == null) {
-			return false;
-		}
-		if (array1.length != array2.length) {
+		if ((array2 == null) || (array1.length != array2.length)) {
 			return false;
 		}
 		for (int i = 0; i < array1.length; i++) {

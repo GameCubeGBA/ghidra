@@ -15,7 +15,11 @@
  */
 package docking.widgets.textarea;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 
 import javax.swing.JTextArea;
 
@@ -53,16 +57,14 @@ public class HintTextArea extends JTextArea {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-		if (getText().isEmpty()) {
-			if (g instanceof Graphics2D) {
-				Graphics2D g2 = (Graphics2D) g;
-				g2.setColor(Color.gray);
-				g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-					RenderingHints.VALUE_ANTIALIAS_ON);
+		if (getText().isEmpty() && (g instanceof Graphics2D)) {
+			Graphics2D g2 = (Graphics2D) g;
+			g2.setColor(Color.gray);
+			g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+				RenderingHints.VALUE_ANTIALIAS_ON);
 
-				if (hint != null) {
-					g2.drawString(hint, 5, 12);
-				}
+			if (hint != null) {
+				g2.drawString(hint, 5, 12);
 			}
 		}
 	}

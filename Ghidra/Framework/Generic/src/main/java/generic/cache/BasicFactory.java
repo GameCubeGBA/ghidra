@@ -24,12 +24,12 @@ public interface BasicFactory<T> {
 	 * @return the new instance of T
 	 * @throws Exception any Exception encountered during creation
 	 */
-	public T create() throws Exception;
+	T create() throws Exception;
 
 	/**
 	 * Called when clients are finished with the given item and it should be disposed.
 	 * 
 	 * @param t the item to dispose.
 	 */
-	public void dispose(T t);
+	void dispose(T t);
 }

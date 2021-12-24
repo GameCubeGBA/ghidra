@@ -34,6 +34,7 @@ public class LongDoubleDataType extends AbstractFloatDataType {
 		super("longdouble", dtm);
 	}
 
+	@Override
 	public DataType clone(DataTypeManager dtm) {
 		if (dtm == getDataTypeManager()) {
 			return this;

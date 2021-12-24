@@ -15,18 +15,31 @@
  */
 package docking.widgets.tree;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.awt.Component;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.Icon;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+import javax.swing.JTree;
+import javax.swing.SwingUtilities;
 import javax.swing.tree.TreePath;
 
 import org.apache.commons.lang3.StringUtils;
-import org.junit.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import docking.test.AbstractDockingTest;
 import docking.widgets.OptionDialog;
@@ -962,8 +975,7 @@ public class GTreeTest extends AbstractDockingTest {
 	}
 
 	private TreePath rowToPath(int row) {
-		TreePath path = gTree.getPathForRow(row);
-		return path;
+		return gTree.getPathForRow(row);
 	}
 
 	private void assertExpaned(List<TreePath> expandedPaths, GTreeNode expected) {
@@ -1035,8 +1047,7 @@ public class GTreeTest extends AbstractDockingTest {
 			gTree.scrollPathToVisible(path);
 		});
 
-		TreePath path = getLastVisiblePath();
-		return path;
+		return getLastVisiblePath();
 	}
 
 	private TreePath getLastVisiblePath() {
@@ -1044,8 +1055,7 @@ public class GTreeTest extends AbstractDockingTest {
 
 		JTree jTree = gTree.getJTree();
 		int start = jTree.getClosestRowForLocation(r.x, r.y + r.height);
-		TreePath path = gTree.getPathForRow(start);
-		return path;
+		return gTree.getPathForRow(start);
 	}
 
 	private void assertProgressPanel(boolean isShowing) {
@@ -1184,7 +1194,7 @@ public class GTreeTest extends AbstractDockingTest {
 		}
 	}
 
-	private class TestRootNode extends GTreeNode {
+	private static class TestRootNode extends GTreeNode {
 
 		@Override
 		public String getName() {
@@ -1325,7 +1335,7 @@ public class GTreeTest extends AbstractDockingTest {
 	/**
 	 * A basic leaf node 
 	 */
-	private class LeafNode extends GTreeNode {
+	private static class LeafNode extends GTreeNode {
 
 		private final String name;
 
@@ -1484,7 +1494,7 @@ public class GTreeTest extends AbstractDockingTest {
 		}
 	}
 
-	private class DisabledGTreeFilter implements GTreeFilter {
+	private static class DisabledGTreeFilter implements GTreeFilter {
 
 		@Override
 		public boolean acceptsNode(GTreeNode node) {
@@ -1498,7 +1508,7 @@ public class GTreeTest extends AbstractDockingTest {
 
 	}
 
-	private class ReallySlowGTreeFilter implements GTreeFilter {
+	private static class ReallySlowGTreeFilter implements GTreeFilter {
 
 		@Override
 		public boolean acceptsNode(GTreeNode node) {

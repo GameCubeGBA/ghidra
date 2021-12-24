@@ -29,10 +29,12 @@ public class Label implements ExpressionValue {
 
 	public Label() {}
 
+	@Override
 	public long longValue(MemBuffer buf, int off) {
 		return buf.getAddress().getOffset() + off;
 	}
 
+	@Override
 	public int length(MemBuffer buf, int off) {	return 0;}
 
 }

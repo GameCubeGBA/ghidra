@@ -15,7 +15,10 @@
  */
 package ghidra.util.graph;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Original Dependency Graph implementation that uses {@link HashMap}s and {@link HashSet}s.

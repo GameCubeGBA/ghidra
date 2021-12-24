@@ -15,10 +15,9 @@
  */
 package utility.application;
 
-import ghidra.framework.PluggableServiceRegistry;
-
 import java.io.File;
 
+import ghidra.framework.PluggableServiceRegistry;
 import utilities.util.FileUtilities;
 
 public class ApplicationSettings {

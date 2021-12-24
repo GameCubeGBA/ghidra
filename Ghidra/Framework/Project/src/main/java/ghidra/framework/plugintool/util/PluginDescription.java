@@ -17,13 +17,19 @@ package ghidra.framework.plugintool.util;
 
 import java.lang.reflect.Method;
 import java.net.URL;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
 
 import generic.jar.ResourceFile;
 import ghidra.MiscellaneousPluginPackage;
 import ghidra.app.plugin.PluginCategoryNames;
 import ghidra.framework.Application;
-import ghidra.framework.plugintool.*;
+import ghidra.framework.plugintool.Plugin;
+import ghidra.framework.plugintool.PluginEvent;
+import ghidra.framework.plugintool.PluginInfo;
 import ghidra.util.Msg;
 
 /**
@@ -43,10 +49,7 @@ public class PluginDescription implements Comparable<PluginDescription> {
 	 * @return {@link PluginDescription}
 	 */
 	public static PluginDescription getPluginDescription(Class<? extends Plugin> c) {
-		// TODO: sync the hashmap?
-		PluginDescription cachedPD =
-			CACHE.computeIfAbsent(c, PluginDescription::createPluginDescription);
-		return cachedPD;
+		return CACHE.computeIfAbsent(c, PluginDescription::createPluginDescription);
 	}
 
 	private static HashMap<Class<? extends Plugin>, PluginDescription> CACHE = new HashMap<>();
@@ -126,8 +129,7 @@ public class PluginDescription implements Comparable<PluginDescription> {
 			return path;
 		}
 		String classpath = pluginClass.getName();
-		path = path.substring(0, path.length() - classpath.length() - DOTCLASS_EXT.length() - 1);
-		return path;
+		return path.substring(0, path.length() - classpath.length() - DOTCLASS_EXT.length() - 1);
 	}
 
 	/**
@@ -214,10 +216,7 @@ public class PluginDescription implements Comparable<PluginDescription> {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((pluginClass == null) ? 0 : pluginClass.hashCode());
-		return result;
+		return Objects.hash(pluginClass);
 	}
 
 	@Override
@@ -225,19 +224,11 @@ public class PluginDescription implements Comparable<PluginDescription> {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (!(obj instanceof PluginDescription)) {
+		if ((obj == null) || !(obj instanceof PluginDescription)) {
 			return false;
 		}
 		PluginDescription other = (PluginDescription) obj;
-		if (pluginClass == null) {
-			if (other.pluginClass != null) {
-				return false;
-			}
-		}
-		else if (!pluginClass.equals(other.pluginClass)) {
+		if (!Objects.equals(pluginClass, other.pluginClass)) {
 			return false;
 		}
 		return true;
@@ -276,9 +267,8 @@ public class PluginDescription implements Comparable<PluginDescription> {
 			PluginStatus status, String pluginPackage, String category, String shortDescription,
 			String description) {
 
-		PluginDescription pd = createPluginDescription(pluginClass, status, pluginPackage, category,
+		return createPluginDescription(pluginClass, status, pluginPackage, category,
 			shortDescription, description, false);
-		return pd;
 	}
 
 	/**

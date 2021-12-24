@@ -15,16 +15,32 @@
  */
 package ghidra.framework.plugintool.dialog;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 import javax.swing.table.TableColumn;
 
 import docking.DialogComponentProvider;
 import docking.help.Help;
 import docking.help.HelpService;
-import docking.widgets.table.*;
+import docking.widgets.table.GTable;
+import docking.widgets.table.GTableCellRenderer;
+import docking.widgets.table.GTableCellRenderingData;
+import docking.widgets.table.GTableFilterPanel;
+import docking.widgets.table.TableSortState;
 import ghidra.app.util.GenericHelpTopics;
 import ghidra.framework.plugintool.PluginConfigurationModel;
 import ghidra.framework.plugintool.PluginTool;
@@ -272,17 +288,14 @@ public class PluginInstallerDialog extends DialogComponentProvider {
 					renderer.setForeground(jtable.getSelectionForeground());
 					renderer.setFont(defaultFont);
 				}
+			} else // set color to red if other plugins depend on this plugin
+			if (hasDependents) {
+				renderer.setForeground(Color.red);
+				renderer.setFont(boldFont);
 			}
 			else {
-				// set color to red if other plugins depend on this plugin
-				if (hasDependents) {
-					renderer.setForeground(Color.red);
-					renderer.setFont(boldFont);
-				}
-				else {
-					renderer.setForeground(jtable.getForeground());
-					renderer.setFont(defaultFont);
-				}
+				renderer.setForeground(jtable.getForeground());
+				renderer.setFont(defaultFont);
 			}
 			return renderer;
 		}

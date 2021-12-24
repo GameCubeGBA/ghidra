@@ -16,10 +16,10 @@
  */
 package ghidra.program.database.references;
 
+import java.util.Iterator;
+
 import ghidra.program.model.symbol.Reference;
 import ghidra.program.model.symbol.ReferenceIterator;
-
-import java.util.Iterator;
 
 class EmptyMemReferenceIterator implements ReferenceIterator {
 

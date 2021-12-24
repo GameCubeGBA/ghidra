@@ -16,7 +16,9 @@
 package ghidra.program.model.lang;
 
 import ghidra.program.model.address.Address;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.AutoParameterType;
+import ghidra.program.model.listing.Program;
+import ghidra.program.model.listing.VariableStorage;
 import ghidra.program.model.pcode.Varnode;
 import ghidra.util.exception.InvalidInputException;
 

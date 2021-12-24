@@ -20,32 +20,32 @@ import java.util.ArrayList;
 
 public interface Transaction {
 
-	public static final int NOT_DONE = 0;
-	public static final int COMMITTED = 1;
-	public static final int ABORTED = 2;
-	public static final int NOT_DONE_BUT_ABORTED = 3;
+	int NOT_DONE = 0;
+	int COMMITTED = 1;
+	int ABORTED = 2;
+	int NOT_DONE_BUT_ABORTED = 3;
 
-	public long getID();
+	long getID();
 
 	/**
 	 * Returns the description of this transaction.
 	 * @return the description of this transaction
 	 */
-	public String getDescription();
+	String getDescription();
 
 	/**
 	 * Returns the list of open sub-transactions that are contained
 	 * inside this transaction.
 	 * @return the list of open sub-transactions
 	 */
-	public ArrayList<String> getOpenSubTransactions();
+	ArrayList<String> getOpenSubTransactions();
 
-	public int getStatus();
+	int getStatus();
 
 	/**
 	 * Returns true if this fully committed transaction has a corresponding 
 	 * database transaction/checkpoint.
 	 */
-	public boolean hasCommittedDBTransaction();
+	boolean hasCommittedDBTransaction();
 
 }

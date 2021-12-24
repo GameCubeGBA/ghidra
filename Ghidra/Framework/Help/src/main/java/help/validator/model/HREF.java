@@ -146,14 +146,11 @@ public class HREF implements Comparable<HREF> {
 			if (result != 0) {
 				return result;
 			}
+		} else if (helpPath == null && otherHelpPath != null) {
+			return -1; // our path is null and 'other's is not; we go before
 		}
-		else {
-			if (helpPath == null && otherHelpPath != null) {
-				return -1; // our path is null and 'other's is not; we go before
-			}
-			else if (helpPath != null && otherHelpPath == null) {
-				return 1; // we have a non-null path, but 'other' doesn't; we go after
-			}
+		else if (helpPath != null && otherHelpPath == null) {
+			return 1; // we have a non-null path, but 'other' doesn't; we go after
 		}
 
 		// highly unlikely case that we have to HREFs from the same file, pointing to the same

@@ -15,11 +15,16 @@
  */
 package ghidra.framework.plugintool.dialog;
 
-import static ghidra.util.HTMLUtilities.*;
+import static ghidra.util.HTMLUtilities.BR;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 
-import javax.swing.*;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
@@ -192,7 +197,7 @@ public abstract class AbstractDetailsPanel extends JPanel {
 	}
 
 	/**
-	 * Inserts a single line of html into a {@link StringBuffer}, with the given attributes.
+	 * Inserts a single line of html into a {@link StringBuilder}, with the given attributes.
 	 * @param buffer the string buffer
 	 * @param string the string to insert
 	 * @param attributes the attributes to apply

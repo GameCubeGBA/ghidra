@@ -59,6 +59,7 @@ public class MemReferenceImpl implements Reference {
 	/**
 	 * @see ghidra.program.model.symbol.Reference#getFromAddress()
 	 */
+	@Override
 	public Address getFromAddress() {
 		return fromAddr;
 	}
@@ -66,6 +67,7 @@ public class MemReferenceImpl implements Reference {
 	/**
 	 * @see ghidra.program.model.symbol.Reference#getToAddress()
 	 */
+	@Override
 	public Address getToAddress() {
 		return toAddr;
 	}
@@ -73,6 +75,7 @@ public class MemReferenceImpl implements Reference {
 	/**
 	 * @see ghidra.program.model.symbol.Reference#isPrimary()
 	 */
+	@Override
 	public boolean isPrimary() {
 		return isPrimary;
 	}
@@ -80,6 +83,7 @@ public class MemReferenceImpl implements Reference {
 	/**
 	 * @see ghidra.program.model.symbol.Reference#getSymbolID()
 	 */
+	@Override
 	public long getSymbolID() {
 		return symbolID;
 	}
@@ -87,6 +91,7 @@ public class MemReferenceImpl implements Reference {
 	/**
 	 * @see ghidra.program.model.symbol.Reference#getReferenceType()
 	 */
+	@Override
 	public RefType getReferenceType() {
 		return refType;
 	}
@@ -94,6 +99,7 @@ public class MemReferenceImpl implements Reference {
 	/**
 	 * @see ghidra.program.model.symbol.Reference#getOperandIndex()
 	 */
+	@Override
 	public int getOperandIndex() {
 		return opIndex;
 	}
@@ -101,6 +107,7 @@ public class MemReferenceImpl implements Reference {
 	/**
 	 * @see ghidra.program.model.symbol.Reference#isMnemonicReference()
 	 */
+	@Override
 	public boolean isMnemonicReference() {
 		return !isOperandReference();
 	}
@@ -108,6 +115,7 @@ public class MemReferenceImpl implements Reference {
 	/**
 	 * @see ghidra.program.model.symbol.Reference#isOperandReference()
 	 */
+	@Override
 	public boolean isOperandReference() {
 		return opIndex >= 0;
 	}
@@ -115,6 +123,7 @@ public class MemReferenceImpl implements Reference {
 	/**
 	 * @see java.lang.Comparable#compareTo(Object)
 	 */
+	@Override
 	public int compareTo(Reference ref) {
 		int result = fromAddr.compareTo(ref.getFromAddress());
 		if (result == 0) {
@@ -156,6 +165,7 @@ public class MemReferenceImpl implements Reference {
 	/**
 	 * @see ghidra.program.model.symbol.Reference#isExternalReference()
 	 */
+	@Override
 	public boolean isExternalReference() {
 		return false;
 	}
@@ -163,6 +173,7 @@ public class MemReferenceImpl implements Reference {
 	/**
 	 * @see ghidra.program.model.symbol.Reference#isOffsetReference()
 	 */
+	@Override
 	public boolean isOffsetReference() {
 		return false;
 	}
@@ -170,6 +181,7 @@ public class MemReferenceImpl implements Reference {
 	/**
 	 * @see ghidra.program.model.symbol.Reference#isShiftedReference()
 	 */
+	@Override
 	public boolean isShiftedReference() {
 		return false;
 	}
@@ -177,13 +189,15 @@ public class MemReferenceImpl implements Reference {
 	/**
 	 * @see ghidra.program.model.symbol.Reference#isEntryPointReference()
 	 */
-    public boolean isEntryPointReference() {
+    @Override
+	public boolean isEntryPointReference() {
         return false;
     }
 
 	/**
 	 * @see ghidra.program.model.symbol.Reference#isMemoryReference()
 	 */
+	@Override
 	public boolean isMemoryReference() {
 		return true;
 	}
@@ -191,6 +205,7 @@ public class MemReferenceImpl implements Reference {
 	/**
 	 * @see ghidra.program.model.symbol.Reference#isRegisterReference()
 	 */
+	@Override
 	public boolean isRegisterReference() {
 		return false;
 	}
@@ -198,10 +213,12 @@ public class MemReferenceImpl implements Reference {
 	/**
 	 * @see ghidra.program.model.symbol.Reference#isStackReference()
 	 */
+	@Override
 	public boolean isStackReference() {
 		return false;
 	}
 
+	@Override
 	public SourceType getSource() {
 		return sourceType;
 	}

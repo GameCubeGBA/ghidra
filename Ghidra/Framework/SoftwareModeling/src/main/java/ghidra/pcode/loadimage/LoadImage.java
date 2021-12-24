@@ -15,7 +15,6 @@
  */
 package ghidra.pcode.loadimage;
 
-import ghidra.pcode.memstate.MemoryPage;
 import ghidra.program.model.address.Address;
 
 // API for accessing a binary load image
@@ -35,6 +34,6 @@ public interface LoadImage {
 //     * @return initialized bit mask or null (see generateInitializedMask parameter)
 //     * @see MemoryPage
 //     */
-    public byte[] loadFill( byte[] buf, int size, Address addr, int bufOffset, boolean generateInitializedMask );
+    byte[] loadFill( byte[] buf, int size, Address addr, int bufOffset, boolean generateInitializedMask );
 
 }

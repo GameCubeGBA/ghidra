@@ -15,12 +15,14 @@
  */
 package ghidra.program.database.oldfunction;
 
-import ghidra.program.database.map.AddressMap;
-import ghidra.util.exception.VersionException;
-
 import java.io.IOException;
 
-import db.*;
+import db.DBHandle;
+import db.DBRecord;
+import db.RecordIterator;
+import db.Table;
+import ghidra.program.database.map.AddressMap;
+import ghidra.util.exception.VersionException;
 
 /**
  * Database adapter implementation for Functions.
@@ -113,23 +115,28 @@ class OldFunctionDBAdapterV0 extends OldFunctionDBAdapter {
 			this.it = it;
 		}
 
+		@Override
 		public boolean delete() throws IOException {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public boolean hasNext() throws IOException {
 			return it.hasNext();
 		}
 
+		@Override
 		public boolean hasPrevious() throws IOException {
 			return it.hasPrevious();
 		}
 
+		@Override
 		public DBRecord next() throws IOException {
 			DBRecord rec = it.next();
 			return translate(rec);
 		}
 
+		@Override
 		public DBRecord previous() throws IOException {
 			DBRecord rec = it.previous();
 			return translate(rec);

@@ -32,6 +32,6 @@ public interface ViewListener {
 	 * @param yOffset the y coordinate of the layout displayed at the top of the
 	 * screen.
 	 */
-	public void viewChanged(FieldPanel fp, BigInteger index, int xOffset, int yOffset);
+	void viewChanged(FieldPanel fp, BigInteger index, int xOffset, int yOffset);
 
 }

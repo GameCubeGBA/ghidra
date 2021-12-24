@@ -15,9 +15,9 @@
  */
 package ghidra.util.datastruct;
 
-import ghidra.util.exception.NoValueException;
-
 import java.io.Serializable;
+
+import ghidra.util.exception.NoValueException;
 
 /**
  *

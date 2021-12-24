@@ -17,7 +17,7 @@
 package ghidra.pcodeCPort.slghpatexpress;
 
 import generic.stl.VectorSTL;
-import ghidra.pcodeCPort.context.*;
+import ghidra.pcodeCPort.context.SleighError;
 import ghidra.sleigh.grammar.Location;
 
 public class NotEqualEquation extends ValExpressEquation {
@@ -32,10 +32,10 @@ public class NotEqualEquation extends ValExpressEquation {
 	{
 		long lhsmin = lhs.minValue();
 		long lhsmax = lhs.maxValue();
-		VectorSTL<PatternValue> semval = new VectorSTL<PatternValue>();
-		VectorSTL<Long> min = new VectorSTL<Long>();
-		VectorSTL<Long> max = new VectorSTL<Long>();
-		VectorSTL<Long> cur = new VectorSTL<Long>();
+		VectorSTL<PatternValue> semval = new VectorSTL<>();
+		VectorSTL<Long> min = new VectorSTL<>();
+		VectorSTL<Long> max = new VectorSTL<>();
+		VectorSTL<Long> cur = new VectorSTL<>();
 		int count = 0;
 
 		rhs.listValues( semval );

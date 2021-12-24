@@ -16,9 +16,9 @@
 package docking.widgets.filter;
 
 public interface TextFilter {
-	public boolean matches(String text);
+	boolean matches(String text);
 
-	public String getFilterText();
+	String getFilterText();
 
 	/**
 	 * Returns true if this filter is a more specific filter of the given filter.  This is 
@@ -30,5 +30,5 @@ public interface TextFilter {
 	 * @param filter the potential parent filter
 	 * @return true if this filter is a more specific filter of the given filter.
 	 */
-	public boolean isSubFilterOf(TextFilter filter);
+	boolean isSubFilterOf(TextFilter filter);
 }

@@ -15,7 +15,10 @@
  */
 package docking.widgets.tree.support;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 import docking.widgets.tree.GTreeNode;
 
@@ -24,7 +27,7 @@ import docking.widgets.tree.GTreeNode;
  * return in breadth first order.
  */
 public class BreadthFirstIterator implements Iterator<GTreeNode> {
-	private Queue<GTreeNode> nodeQueue = new LinkedList<GTreeNode>();
+	private Queue<GTreeNode> nodeQueue = new LinkedList<>();
 	private GTreeNode lastNode;
 
 	public BreadthFirstIterator(GTreeNode node) {

@@ -16,7 +16,9 @@
 package ghidra.program.database.data;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import db.DBRecord;
 import db.Field;
@@ -211,7 +213,7 @@ class SettingsDBManager implements Settings {
 
 	@Override
 	public String[] getNames() {
-		List<String> list = new ArrayList<String>();
+		List<String> list = new ArrayList<>();
 		try {
 			Field[] keys = adapter.getSettingsKeys(dataTypeID);
 			for (Field key : keys) {
@@ -270,8 +272,7 @@ class SettingsDBManager implements Settings {
 		if (oldByteValue != null && newByteValue != null) {
 			return Arrays.equals(oldByteValue, newByteValue);
 		}
-		if ((oldByteValue != null && newByteValue == null) ||
-			(oldByteValue == null && newByteValue != null)) {
+		if ((oldByteValue != null) == (newByteValue == null)) {
 			return true;
 		}
 		return oldLongValue != newLongValue;

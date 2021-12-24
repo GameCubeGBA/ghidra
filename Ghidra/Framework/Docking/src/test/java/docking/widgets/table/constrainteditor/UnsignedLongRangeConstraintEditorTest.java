@@ -15,7 +15,9 @@
  */
 package docking.widgets.table.constrainteditor;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.Component;
 import java.math.BigInteger;
@@ -120,7 +122,7 @@ public class UnsignedLongRangeConstraintEditorTest extends AbstractDockingTest {
 		return runSwing(() -> editor.getValue());
 	}
 
-	class TestUnsignedLongRangeConstraint extends InRangeColumnConstraint<BigInteger> {
+	static class TestUnsignedLongRangeConstraint extends InRangeColumnConstraint<BigInteger> {
 
 		public TestUnsignedLongRangeConstraint(BigInteger minValue, BigInteger maxValue) {
 			super(minValue, maxValue, new UnsignedLongRangeEditorProvider());

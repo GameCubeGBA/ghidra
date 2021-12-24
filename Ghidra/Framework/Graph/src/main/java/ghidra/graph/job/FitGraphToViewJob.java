@@ -15,16 +15,27 @@
  */
 package ghidra.graph.job;
 
-import static ghidra.graph.viewer.GraphViewerUtils.*;
+import static ghidra.graph.viewer.GraphViewerUtils.addPaddingToRectangle;
+import static ghidra.graph.viewer.GraphViewerUtils.getScaleRatioToFitInDimension;
+import static ghidra.graph.viewer.GraphViewerUtils.getTotalGraphSizeInLayoutSpace;
+import static ghidra.graph.viewer.GraphViewerUtils.translatePointFromViewSpaceToLayoutSpace;
+import static ghidra.graph.viewer.GraphViewerUtils.translateShapeFromLayoutSpaceToViewSpace;
 
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Shape;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.HashSet;
 import java.util.Set;
 
 import edu.uci.ics.jung.graph.Graph;
-import edu.uci.ics.jung.visualization.*;
+import edu.uci.ics.jung.visualization.Layer;
+import edu.uci.ics.jung.visualization.MultiLayerTransformer;
+import edu.uci.ics.jung.visualization.RenderContext;
+import edu.uci.ics.jung.visualization.VisualizationServer;
+import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.transform.MutableTransformer;
 import ghidra.graph.viewer.VisualEdge;
 import ghidra.graph.viewer.VisualVertex;
@@ -82,11 +93,7 @@ public class FitGraphToViewJob<V extends VisualVertex, E extends VisualEdge<V>>
 	}
 
 	private void doExecute() {
-		if (isFinished) {
-			return;
-		}
-
-		if (graphIsEmpty()) {
+		if (isFinished || graphIsEmpty()) {
 			return;
 		}
 

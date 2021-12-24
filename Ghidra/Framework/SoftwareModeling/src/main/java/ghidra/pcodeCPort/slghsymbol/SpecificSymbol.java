@@ -16,7 +16,7 @@
  */
 package ghidra.pcodeCPort.slghsymbol;
 
-import ghidra.pcodeCPort.semantics.*;
+import ghidra.pcodeCPort.semantics.VarnodeTpl;
 import ghidra.sleigh.grammar.Location;
 
 

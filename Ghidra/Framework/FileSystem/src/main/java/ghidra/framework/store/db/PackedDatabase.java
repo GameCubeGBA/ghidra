@@ -15,7 +15,16 @@
  */
 package ghidra.framework.store.db;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileFilter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Date;
 import java.util.Random;
 
@@ -26,13 +35,20 @@ import db.buffers.LocalManagedBufferFile;
 import generic.jar.ResourceFile;
 import ghidra.framework.store.FolderItem;
 import ghidra.framework.store.db.PackedDatabaseCache.CachedDB;
-import ghidra.framework.store.local.*;
-import ghidra.util.*;
+import ghidra.framework.store.local.ItemDeserializer;
+import ghidra.framework.store.local.ItemSerializer;
+import ghidra.framework.store.local.LocalFileSystem;
+import ghidra.framework.store.local.LockFile;
+import ghidra.util.Msg;
+import ghidra.util.ReadOnlyException;
+import ghidra.util.StringUtilities;
 import ghidra.util.datastruct.WeakDataStructureFactory;
 import ghidra.util.datastruct.WeakSet;
-import ghidra.util.exception.*;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.DuplicateFileException;
+import ghidra.util.exception.FileInUseException;
+import ghidra.util.exception.IOCancelledException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 import utilities.util.FileUtilities;
 
 /**
@@ -841,10 +857,8 @@ public class PackedDatabase extends Database {
 		File tmpDir = new File(System.getProperty("java.io.tmpdir"));
 		File[] tempDbs = tmpDir.listFiles((FileFilter) file -> {
 			String name = file.getName();
-			if (file.isDirectory()) {
-				if (name.indexOf(TEMPDB_DIR_PREFIX) == 0 && name.endsWith(TEMPDB_DIR_EXT)) {
-					return true;
-				}
+			if (file.isDirectory() && (name.indexOf(TEMPDB_DIR_PREFIX) == 0 && name.endsWith(TEMPDB_DIR_EXT))) {
+				return true;
 			}
 			return false;
 		});
@@ -858,10 +872,8 @@ public class PackedDatabase extends Database {
 
 		for (File tempDb : tempDbs) {
 			try {
-				if (tempDb.isDirectory() && tempDb.lastModified() <= lastWeek) {
-					if (FileUtilities.deleteDir(tempDb)) {
-						Msg.info(PackedDatabase.class, "Removed temporary database: " + tempDb);
-					}
+				if ((tempDb.isDirectory() && tempDb.lastModified() <= lastWeek) && FileUtilities.deleteDir(tempDb)) {
+					Msg.info(PackedDatabase.class, "Removed temporary database: " + tempDb);
 				}
 			}
 			catch (Exception e) {

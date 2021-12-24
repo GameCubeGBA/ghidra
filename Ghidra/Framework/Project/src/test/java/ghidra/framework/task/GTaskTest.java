@@ -15,7 +15,9 @@
  */
 package ghidra.framework.task;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,9 +25,14 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.logging.log4j.*;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.config.Configurator;
-import org.junit.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import generic.concurrent.GThreadPool;
 import generic.test.AbstractGenericTest;
@@ -37,7 +44,7 @@ public class GTaskTest extends AbstractGenericTest {
 
 	private GenericDomainObjectDB domainObject;
 	private GTaskManager gTaskManager;
-	private List<GTaskResult> taskResults = new ArrayList<GTaskResult>();
+	private List<GTaskResult> taskResults = new ArrayList<>();
 	private GTaskListener listener = new GTaskListenerAdapter() {
 		@Override
 		public void taskCompleted(GScheduledTask task, GTaskResult result) {

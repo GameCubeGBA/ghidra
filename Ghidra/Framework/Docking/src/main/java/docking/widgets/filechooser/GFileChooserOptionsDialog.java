@@ -15,7 +15,10 @@
  */
 package docking.widgets.filechooser;
 
-import javax.swing.*;
+import javax.swing.JCheckBox;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import docking.DialogComponentProvider;
 import docking.widgets.checkbox.GCheckBox;

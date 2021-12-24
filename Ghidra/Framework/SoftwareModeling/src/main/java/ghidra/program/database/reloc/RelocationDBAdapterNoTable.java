@@ -15,16 +15,13 @@
  */
 package ghidra.program.database.reloc;
 
-import ghidra.program.database.util.EmptyRecordIterator;
-import ghidra.program.model.address.Address;
-import ghidra.program.model.address.AddressSetView;
-
 import java.io.IOException;
-
-import java.lang.UnsupportedOperationException;
 
 import db.DBRecord;
 import db.RecordIterator;
+import ghidra.program.database.util.EmptyRecordIterator;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressSetView;
 
 /**
  * A stub for a time when we did not produce these tables.

@@ -24,11 +24,11 @@ public interface WizardPanelListener {
 	/**
 	 * Notification that something on the panel changed.
 	 */
-	public void validityChanged();
+	void validityChanged();
 
 	/**
 	 * Notification to set a status message.
 	 * @param msg message
 	 */
-	public void setStatusMessage(String msg);
+	void setStatusMessage(String msg);
 }

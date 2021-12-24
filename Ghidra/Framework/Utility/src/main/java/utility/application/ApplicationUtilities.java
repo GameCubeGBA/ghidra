@@ -15,12 +15,18 @@
  */
 package utility.application;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
 import generic.jar.ResourceFile;
-import ghidra.framework.*;
+import ghidra.framework.ApplicationIdentifier;
+import ghidra.framework.ApplicationProperties;
+import ghidra.framework.OperatingSystem;
 import ghidra.util.Msg;
 import ghidra.util.SystemUtilities;
 

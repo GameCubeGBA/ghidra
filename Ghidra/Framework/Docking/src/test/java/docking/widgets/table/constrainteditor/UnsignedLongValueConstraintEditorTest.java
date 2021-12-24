@@ -15,7 +15,10 @@
  */
 package docking.widgets.table.constrainteditor;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.Component;
 import java.math.BigInteger;
@@ -26,7 +29,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import docking.test.AbstractDockingTest;
-import docking.widgets.table.constraint.*;
+import docking.widgets.table.constraint.ColumnConstraint;
+import docking.widgets.table.constraint.SingleValueColumnConstraint;
+import docking.widgets.table.constraint.TableFilterContext;
 import docking.widgets.textfield.IntegerTextField;
 
 public class UnsignedLongValueConstraintEditorTest extends AbstractDockingTest {

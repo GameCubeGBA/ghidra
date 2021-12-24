@@ -16,13 +16,13 @@
  */
 package ghidra.app.plugin.processors.generic;
 
+import java.io.Serializable;
+import java.util.HashMap;
+
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressFactory;
 import ghidra.program.model.pcode.PcodeOp;
 import ghidra.program.model.pcode.Varnode;
-
-import java.io.Serializable;
-import java.util.HashMap;
 
 /**
  * 
@@ -84,8 +84,8 @@ public class OpTemplate implements Serializable {
 		}
 		
 		// just before emitting pcode, trim constant varnodes to proper size
-		for (int i = 0; i < in.length; i++)
-			in[i].trim();
+		for (Varnode element : in)
+			element.trim();
 			
 		return new PcodeOp(position.startAddr(),opSequenceNumber,opc,in,out);
 	}

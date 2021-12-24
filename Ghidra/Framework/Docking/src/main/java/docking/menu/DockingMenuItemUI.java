@@ -15,19 +15,40 @@
  */
 package docking.menu;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Composite;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GraphicsConfiguration;
+import java.awt.Image;
+import java.awt.Paint;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.RenderingHints.Key;
+import java.awt.Shape;
+import java.awt.Stroke;
 import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
 import java.awt.geom.AffineTransform;
-import java.awt.image.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.BufferedImageOp;
+import java.awt.image.ImageObserver;
+import java.awt.image.RenderedImage;
 import java.awt.image.renderable.RenderableImage;
 import java.text.AttributedCharacterIterator;
 import java.util.ArrayList;
 import java.util.Map;
 
 import javax.accessibility.Accessible;
-import javax.swing.*;
+import javax.swing.Icon;
+import javax.swing.JComponent;
+import javax.swing.JMenuItem;
+import javax.swing.KeyStroke;
+import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.MenuItemUI;
 
@@ -170,7 +191,7 @@ public class DockingMenuItemUI extends MenuItemUI {
 	}
 
 	public static class MenuTabulator {
-		private ArrayList<Integer> columns = new ArrayList<Integer>();
+		private ArrayList<Integer> columns = new ArrayList<>();
 
 		public static MenuTabulator tabulate(JMenuItem c) {
 			MenuTabulator tabulator = get(c);

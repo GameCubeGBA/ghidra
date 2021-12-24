@@ -17,11 +17,16 @@ package help.validator.model;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 import ghidra.util.exception.AssertException;
 import help.HelpBuildUtils;
-import help.validator.*;
+import help.validator.AnchorManager;
+import help.validator.HTMLFileParser;
+import help.validator.ReferenceTagProcessor;
+import help.validator.TagProcessor;
 import help.validator.location.HelpModuleLocation;
 
 public class HelpFile {

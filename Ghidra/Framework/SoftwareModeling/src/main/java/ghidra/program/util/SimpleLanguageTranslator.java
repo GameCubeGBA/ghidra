@@ -15,14 +15,23 @@
  */
 package ghidra.program.util;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.math.BigInteger;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jdom.*;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXNotRecognizedException;
@@ -30,7 +39,14 @@ import org.xml.sax.SAXNotRecognizedException;
 import generic.jar.ResourceFile;
 import ghidra.program.model.address.AddressFactory;
 import ghidra.program.model.address.AddressSpace;
-import ghidra.program.model.lang.*;
+import ghidra.program.model.lang.CompilerSpec;
+import ghidra.program.model.lang.CompilerSpecID;
+import ghidra.program.model.lang.Language;
+import ghidra.program.model.lang.LanguageCompilerSpecPair;
+import ghidra.program.model.lang.LanguageID;
+import ghidra.program.model.lang.OldLanguageMappingService;
+import ghidra.program.model.lang.Register;
+import ghidra.program.model.lang.RegisterValue;
 import ghidra.program.model.listing.IncompatibleLanguageException;
 import ghidra.program.model.listing.Program;
 import ghidra.util.exception.CancelledException;
@@ -47,10 +63,10 @@ class SimpleLanguageTranslator extends LanguageTranslatorAdapter {
 
 	private boolean isValid = false;
 	private final String translatorSpecSource;
-	private final HashMap<String, String> spaceNameMap = new HashMap<String, String>();
-	private final Map<String, String> registerNameMap = new HashMap<String, String>(); // old register name to new register name
-	private final Map<String, BigInteger> contextSettings = new HashMap<String, BigInteger>();
-	private final Map<String, String> compilerSpecMap = new HashMap<String, String>();
+	private final HashMap<String, String> spaceNameMap = new HashMap<>();
+	private final Map<String, String> registerNameMap = new HashMap<>(); // old register name to new register name
+	private final Map<String, BigInteger> contextSettings = new HashMap<>();
+	private final Map<String, String> compilerSpecMap = new HashMap<>();
 	private boolean clearAllContext;
 	private Class<? extends LanguagePostUpgradeInstructionHandler> postUpgradeInstructionHandlerClass;
 
@@ -85,9 +101,9 @@ class SimpleLanguageTranslator extends LanguageTranslatorAdapter {
 			AddressFactory oldFactory = getOldLanguage().getAddressFactory();
 			AddressFactory newFactory = getNewLanguage().getAddressFactory();
 
-			StringBuffer errBuf = new StringBuffer();
+			StringBuilder errBuf = new StringBuilder();
 			ArrayList<AddressSpace> oldSpaces =
-				new ArrayList<AddressSpace>(Arrays.asList(oldFactory.getPhysicalSpaces()));
+				new ArrayList<>(Arrays.asList(oldFactory.getPhysicalSpaces()));
 			for (String name : spaceNameMap.keySet()) {
 				AddressSpace space = oldFactory.getAddressSpace(name);
 				oldSpaces.remove(space);
@@ -219,9 +235,9 @@ class SimpleLanguageTranslator extends LanguageTranslatorAdapter {
 			throw new Exception(handlerClass.getName() + " must extend " +
 				LanguagePostUpgradeInstructionHandler.class.getName());
 		}
-		Constructor<?> constructor = handlerClass.getConstructor(new Class<?>[] { Program.class });
+		Constructor<?> constructor = handlerClass.getConstructor(Program.class);
 		return (LanguagePostUpgradeInstructionHandler) constructor
-				.newInstance(new Object[] { program });
+				.newInstance(program);
 	}
 
 	@Override
@@ -284,15 +300,15 @@ class SimpleLanguageTranslator extends LanguageTranslatorAdapter {
 		int fromLanguageVersion = -1;
 		int toLanguageVersion = -1;
 
-		Map<String, String> spaceMap = new HashMap<String, String>();
-		Map<String, String> registerMap = new HashMap<String, String>();
-		Map<String, BigInteger> contextSettings = new HashMap<String, BigInteger>();
-		Map<String, String> compilerSpecMap = new HashMap<String, String>();
+		Map<String, String> spaceMap = new HashMap<>();
+		Map<String, String> registerMap = new HashMap<>();
+		Map<String, BigInteger> contextSettings = new HashMap<>();
+		Map<String, String> compilerSpecMap = new HashMap<>();
 		boolean clearAllContext = false;
 		Class<? extends LanguagePostUpgradeInstructionHandler> postUpgradeInstructionHandlerClass =
 			null;
 
-		HashSet<String> newSpacesMapped = new HashSet<String>();
+		HashSet<String> newSpacesMapped = new HashSet<>();
 		Iterator<?> iter = languageTranslationElement.getChildren().iterator();
 		while (iter.hasNext()) {
 			Element element = (Element) iter.next();

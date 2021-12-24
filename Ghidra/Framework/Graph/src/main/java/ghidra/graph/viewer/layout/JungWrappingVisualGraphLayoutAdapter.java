@@ -20,7 +20,12 @@ import java.awt.Shape;
 import java.awt.geom.Point2D;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Constructor;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import com.google.common.base.Function;
 
@@ -106,8 +111,7 @@ public class JungWrappingVisualGraphLayoutAdapter<V extends VisualVertex,
 		Class<? extends Layout> delegateClass = delegate.getClass();
 		try {
 			Constructor<? extends Layout> constructor = delegateClass.getConstructor(Graph.class);
-			Layout layout = constructor.newInstance(newGraph);
-			return layout;
+			return constructor.newInstance(newGraph);
 		}
 		catch (Exception e) {
 			throw new RuntimeException("Unable to clone jung graph: " + delegate.getClass(), e);

@@ -15,12 +15,12 @@
  */
 package ghidra.framework.data;
 
+import javax.swing.JComponent;
+
 import ghidra.app.merge.MergeProgressModifier;
 import ghidra.util.HelpLocation;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
-
-import javax.swing.JComponent;
 
 /**
  * An interface to allow merging of domain objects.
@@ -42,7 +42,7 @@ public interface DomainObjectMergeManager extends MergeProgressModifier {
 	 * @see ghidra.app.merge.MergeManager#getResolveInformation(String)
 	 * MergeManager.getResolveInformation(String)
 	 */
-	public void setResolveInformation(String infoType, Object infoObject);
+	void setResolveInformation(String infoType, Object infoObject);
 	
 	/**
 	 * Show the component that is used to resolve conflicts. This method
@@ -55,23 +55,23 @@ public interface DomainObjectMergeManager extends MergeProgressModifier {
 	 * default component and do not block
 	 * @param componentID id or name for the component
 	 */
-	public void showComponent(final JComponent comp, final String componentID,
+	void showComponent(final JComponent comp, final String componentID,
 	        HelpLocation helpLoc);
 	
 	/**
 	 * Enable the apply button according to the "enabled" parameter.
 	 */
-	public void setApplyEnabled(final boolean enabled);
+	void setApplyEnabled(final boolean enabled);
 	
 	/**
 	 * Clear the status text on the merge dialog.
 	 *
 	 */
-	public void clearStatusText();
+	void clearStatusText();
 	
 	/**
 	 * Set the status text on the merge dialog.
 	 */
-	public void setStatusText(String msg);
+	void setStatusText(String msg);
 	
 }

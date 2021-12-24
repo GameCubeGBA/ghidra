@@ -17,7 +17,9 @@ package docking.dnd;
 
 import java.awt.Point;
 import java.awt.datatransfer.Transferable;
-import java.awt.dnd.*;
+import java.awt.dnd.DragGestureEvent;
+import java.awt.dnd.DragSourceDropEvent;
+import java.awt.dnd.DragSourceListener;
 
 /**
  * Interface to define a drag source.
@@ -34,26 +36,26 @@ public interface Draggable {
 	 * gesture has occurred on the Component it is tracking.  
 	 * @see docking.dnd.DragGestureAdapter
      */
-    public boolean isStartDragOk(DragGestureEvent e);
+    boolean isStartDragOk(DragGestureEvent e);
     
     /**
      * Called by the DragGestureAdapter to start the drag.
      */
-    public DragSourceListener getDragSourceListener();
+    DragSourceListener getDragSourceListener();
     
     /**
      * Do the move operation; called when the drag and drop operation
 	 * completes.
 	 * @see docking.dnd.DragSrcAdapter#dragDropEnd
      */
-    public void move();
+    void move();
     
     /**
      * Method called when the drag operation exits the drop target 
      * without dropping.
      * @param event TODO
      */
-    public void dragCanceled(DragSourceDropEvent event);
+    void dragCanceled(DragSourceDropEvent event);
 
 	/**
 	 * Get the drag actions supported by this drag source:
@@ -65,12 +67,12 @@ public interface Draggable {
 	 * 
 	 * @return the drag actions
 	 */
-    public int getDragAction();
+    int getDragAction();
     
     /**
      * Get the object to transfer.
 	 * @param p location of object to transfer
 	 * @return object to transfer
      */
-    public Transferable getTransferable(Point p);
+    Transferable getTransferable(Point p);
 }

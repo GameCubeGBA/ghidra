@@ -16,30 +16,30 @@
  */
 package generic.util;
 
-import java.lang.reflect.*;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Beanify {
 	public static Map<String, Object> beanify(Object beany) {
-		LinkedHashMap<String, Object> result = new LinkedHashMap<String, Object>();
+		LinkedHashMap<String, Object> result = new LinkedHashMap<>();
 		Class<? extends Object> bclass = beany.getClass();
 		Method[] declaredMethods = bclass.getDeclaredMethods();
 		for (Method method : declaredMethods) {
 			String name = fix(method.getName());
-			if (name != null) {
-				if (Modifier.isPublic(method.getModifiers()) &&
-					!method.getReturnType().equals(Void.TYPE) &&
-					method.getParameterTypes().length == 0) {
-					try {
-						method.setAccessible(true);
-						Object thing = method.invoke(beany);
-						result.put(name, thing);
-					}
-					catch (Exception e) {
-						// squash this, report an error in the result
-						result.put(name, e.toString());
-					}
+			if ((name != null) && (Modifier.isPublic(method.getModifiers()) &&
+				!method.getReturnType().equals(Void.TYPE) &&
+				method.getParameterTypes().length == 0)) {
+				try {
+					method.setAccessible(true);
+					Object thing = method.invoke(beany);
+					result.put(name, thing);
+				}
+				catch (Exception e) {
+					// squash this, report an error in the result
+					result.put(name, e.toString());
 				}
 			}
 		}

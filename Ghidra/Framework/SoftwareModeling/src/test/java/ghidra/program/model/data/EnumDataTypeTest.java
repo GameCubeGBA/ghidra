@@ -15,7 +15,9 @@
  */
 package ghidra.program.model.data;
 
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import ghidra.program.model.address.Address;
 import ghidra.program.model.mem.ByteMemBufferImpl;

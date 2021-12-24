@@ -22,7 +22,9 @@ import javax.swing.JPanel;
 
 import docking.DialogComponentProvider;
 import ghidra.app.util.GenericHelpTopics;
-import ghidra.framework.model.*;
+import ghidra.framework.model.ToolManager;
+import ghidra.framework.model.Workspace;
+import ghidra.framework.model.WorkspaceChangeListener;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.util.HelpLocation;
 

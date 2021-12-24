@@ -25,7 +25,9 @@ import javax.swing.SwingWorker;
 import docking.widgets.tree.GTreeNode;
 import ghidra.framework.model.DomainFile;
 import ghidra.framework.store.ItemCheckoutStatus;
-import ghidra.util.*;
+import ghidra.util.HTMLUtilities;
+import ghidra.util.InvalidNameException;
+import ghidra.util.Msg;
 import ghidra.util.exception.DuplicateFileException;
 import resources.ResourceManager;
 

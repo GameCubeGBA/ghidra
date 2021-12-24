@@ -15,6 +15,8 @@
  */
 package ghidra.program.model.lang;
 
+import java.util.Objects;
+
 /**
  * Represents an opinion's processor language (x86:LE:32:default, 8051:BE:16:default, etc).
  */
@@ -50,10 +52,7 @@ public class LanguageID implements Comparable<LanguageID> {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -61,19 +60,11 @@ public class LanguageID implements Comparable<LanguageID> {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (!(obj instanceof LanguageID)) {
+		if ((obj == null) || !(obj instanceof LanguageID)) {
 			return false;
 		}
 		final LanguageID other = (LanguageID) obj;
-		if (id == null) {
-			if (other.id != null) {
-				return false;
-			}
-		}
-		else if (!id.equals(other.id)) {
+		if (!Objects.equals(id, other.id)) {
 			return false;
 		}
 		return true;

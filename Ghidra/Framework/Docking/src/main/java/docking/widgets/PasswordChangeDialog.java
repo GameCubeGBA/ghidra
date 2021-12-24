@@ -16,10 +16,16 @@
 package docking.widgets;
 
 import java.awt.Toolkit;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Arrays;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 
 import docking.DialogComponentProvider;
 import docking.widgets.label.GLabel;
@@ -63,12 +69,7 @@ public class PasswordChangeDialog extends DialogComponentProvider {
 		wp.add(new GLabel("Repeat Password:"));
 		passwordField2 = new JPasswordField(16);
 		passwordField2.setName("PASSWORD-ENTRY2-COMPONENT");
-		passwordField2.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				okCallback();
-			}
-		});
+		passwordField2.addActionListener(e -> okCallback());
 		wp.add(passwordField2);
 
 		wp.add(new GLabel());
@@ -146,6 +147,7 @@ public class PasswordChangeDialog extends DialogComponentProvider {
 		close();
 	}
 
+	@Override
 	public void dispose() {
 		close();
 		if (newPassword != null) {

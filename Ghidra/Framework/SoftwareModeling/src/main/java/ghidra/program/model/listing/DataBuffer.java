@@ -44,7 +44,7 @@ public interface DataBuffer {
 	 * address space
 	 * @throws IndexOutOfBoundsException if offset is negative
      */
-    public Data getData(int offset);
+    Data getData(int offset);
 
     /**
      * Get the next data item starting after offset.
@@ -53,7 +53,7 @@ public interface DataBuffer {
      *
      * @return Data item starting after this offset
      */
-    public Data getDataAfter(int offset);
+    Data getDataAfter(int offset);
 
     /**
      * Get the previous data item starting before offset.
@@ -62,7 +62,7 @@ public interface DataBuffer {
      *
      * @return Data item starting before this offset
      */
-    public Data getDataBefore(int offset);
+    Data getDataBefore(int offset);
 
     /**
      * Get the offset to the next data item found after offset.
@@ -71,7 +71,7 @@ public interface DataBuffer {
      *
      * @return offset of the first data item existing after this one.
      */
-    public int getNextOffset(int offset);
+    int getNextOffset(int offset);
 
     /**
      * Get the offset to the previous data item existing before this offset.
@@ -80,7 +80,7 @@ public interface DataBuffer {
      *
      * @return offset of the first data item existing before this one.
      */
-    public int getPreviousOffset(int offset);
+    int getPreviousOffset(int offset);
 
     /**
      * Get an array of data items that begin at or after start up to end.
@@ -92,12 +92,12 @@ public interface DataBuffer {
      *
      * @return array of CodeDatas that exist between start and end.
      */
-    public Data[] getData(int start, int end);
+    Data[] getData(int start, int end);
 
     /**
      * Get the Address which corresponds to the offset 0.
      *
      * @return the current address of offset 0.
      */
-    public Address getAddress();
+    Address getAddress();
 }

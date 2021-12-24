@@ -29,7 +29,7 @@ public interface SettingsDefinition {
 	 * @param additional More settings defs to add
 	 * @return new array with all the settings defs joined together.
 	 */
-	public static SettingsDefinition[] concat(SettingsDefinition[] settings,
+	static SettingsDefinition[] concat(SettingsDefinition[] settings,
 			SettingsDefinition... additional) {
 		if (additional == null) {
 			return settings;
@@ -44,23 +44,23 @@ public interface SettingsDefinition {
 		return result;
 	}
 
-	public boolean hasValue(Settings setting);
+	boolean hasValue(Settings setting);
 
 	/**
 	 * Returns the name of this SettingsDefinition
 	 */
-	public String getName();
+	String getName();
 
 	/**
 	 * Returns a description of this settings definition
 	 */
-	public String getDescription();
+	String getDescription();
 
 	/**
 	 * Removes any values in the given settings object assocated with this settings definition
 	 * @param settings the settings object to be cleared.
 	 */
-	public void clear(Settings settings);
+	void clear(Settings settings);
 
 	/**
 	 * Copies any setting value associated with this settings definition from the
@@ -68,6 +68,6 @@ public interface SettingsDefinition {
 	 * @param srcSettings the settings to be copied
 	 * @param destSettings the settings to be updated.
 	 */
-	public void copySetting(Settings srcSettings, Settings destSettings);
+	void copySetting(Settings srcSettings, Settings destSettings);
 
 }

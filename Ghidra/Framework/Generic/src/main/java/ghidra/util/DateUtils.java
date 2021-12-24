@@ -15,13 +15,35 @@
  */
 package ghidra.util;
 
-import static java.util.Calendar.*;
+import static java.util.Calendar.DAY_OF_MONTH;
+import static java.util.Calendar.DAY_OF_WEEK;
+import static java.util.Calendar.DECEMBER;
+import static java.util.Calendar.FEBRUARY;
+import static java.util.Calendar.JANUARY;
+import static java.util.Calendar.JULY;
+import static java.util.Calendar.MAY;
+import static java.util.Calendar.MONDAY;
+import static java.util.Calendar.MONTH;
+import static java.util.Calendar.NOVEMBER;
+import static java.util.Calendar.OCTOBER;
+import static java.util.Calendar.SATURDAY;
+import static java.util.Calendar.SEPTEMBER;
+import static java.util.Calendar.SUNDAY;
+import static java.util.Calendar.THURSDAY;
+import static java.util.Calendar.YEAR;
 
-import java.time.*;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAccessor;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.function.Predicate;
 
 import ghidra.util.exception.AssertException;
@@ -308,7 +330,7 @@ public class DateUtils {
 	}
 
 	private static boolean isBusinessDay(Calendar c) {
-		return !(isWeekend(c) || isHoliday(c));
+		return (!isWeekend(c) && !isHoliday(c));
 	}
 
 	private static int doGetDaysBetween(Date date1, Date date2, Predicate<Calendar> dayFilter) {

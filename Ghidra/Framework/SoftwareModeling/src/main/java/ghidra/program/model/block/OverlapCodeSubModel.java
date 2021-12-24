@@ -18,10 +18,14 @@ package ghidra.program.model.block;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetView;
 import ghidra.program.model.listing.Listing;
 import ghidra.program.model.listing.Program;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.FlowType;
+import ghidra.program.model.symbol.RefType;
+import ghidra.program.model.symbol.Symbol;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
@@ -95,7 +99,7 @@ public class OverlapCodeSubModel implements SubroutineBlockModel {
         AddressSet addrSet = new AddressSet();
         
         // Create the todoStack and initialize it with instr; also initialize the list for entryPts.
-        LinkedList<Address> todoList = new LinkedList<Address>();
+        LinkedList<Address> todoList = new LinkedList<>();
         todoList.addFirst(mStartAddr);
         
         CodeBlockModel bbModel = modelM.getBasicBlockModel();
@@ -114,12 +118,8 @@ public class OverlapCodeSubModel implements SubroutineBlockModel {
 				continue; // already processed this block   
 			}
 	        CodeBlock bblock = bbModel.getFirstCodeBlockContaining(a, monitor);
-	        if (bblock == null) {
-				continue;
-			}
-	        	
 	        // Verify that the block contains instructions
-	        if (listing.getInstructionAt(a) == null) {
+	        if ((bblock == null) || (listing.getInstructionAt(a) == null)) {
 				continue;
 			}
 	        	
@@ -199,7 +199,7 @@ public class OverlapCodeSubModel implements SubroutineBlockModel {
         }
 
         // Return all OSubs - one per entry point
-        ArrayList<CodeBlock> blockList = new ArrayList<CodeBlock>();
+        ArrayList<CodeBlock> blockList = new ArrayList<>();
         for (int i = 0; i < cnt; i++) {
             CodeBlock block = getSubroutine(entPts[i], monitor);
             if (block.contains(addr)) {

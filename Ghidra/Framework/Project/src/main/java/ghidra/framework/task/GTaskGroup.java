@@ -16,7 +16,9 @@
  */
 package ghidra.framework.task;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Class for grouping several {@link GTask}s that all should be 
@@ -31,7 +33,7 @@ public class GTaskGroup {
 	private long id = nextID++;
 	private String description;
 
-	private List<GScheduledTask> taskList = new ArrayList<GScheduledTask>();
+	private List<GScheduledTask> taskList = new ArrayList<>();
 
 	private boolean startNewTransaction;
 	private volatile boolean cancelled = false;
@@ -83,7 +85,7 @@ public class GTaskGroup {
 	 * @return a list scheduled tasks in the group.
 	 */
 	public List<GScheduledTask> getTasks() {
-		ArrayList<GScheduledTask> list = new ArrayList<GScheduledTask>(taskList);
+		ArrayList<GScheduledTask> list = new ArrayList<>(taskList);
 		Collections.sort(list);
 		return list;
 	}

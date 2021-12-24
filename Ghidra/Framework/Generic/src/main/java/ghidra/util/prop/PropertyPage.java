@@ -22,12 +22,17 @@
 
 package ghidra.util.prop;
 
-import ghidra.util.Saveable;
-import ghidra.util.datastruct.*;
-import ghidra.util.exception.NoValueException;
-
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
+
+import ghidra.util.Saveable;
+import ghidra.util.datastruct.BitTree;
+import ghidra.util.datastruct.DataTable;
+import ghidra.util.datastruct.FullKeySet;
+import ghidra.util.datastruct.RedBlackKeySet;
+import ghidra.util.datastruct.ShortKeyIndexer;
+import ghidra.util.datastruct.ShortKeySet;
+import ghidra.util.exception.NoValueException;
 
 /**
  * Manages property values of type int, String, Object, and
@@ -105,26 +110,22 @@ class PropertyPage implements Serializable {
         }
 
 
-		if(keySet.size() == threshold) {
-			if(keySet instanceof RedBlackKeySet) {
-				// switch to BitTree
-				BitTree newKeySet = new BitTree((short)(pageSize-1));
-				short oldKey = keySet.getFirst();
+		if((keySet.size() == threshold) && (keySet instanceof RedBlackKeySet)) {
+			// switch to BitTree
+			BitTree newKeySet = new BitTree((short)(pageSize-1));
+			short oldKey = keySet.getFirst();
 
-				while(oldKey != -1) {
-					newKeySet.put(oldKey);
-					oldKey = keySet.getNext(oldKey);
-				}
-				keySet = newKeySet;
+			while(oldKey != -1) {
+				newKeySet.put(oldKey);
+				oldKey = keySet.getNext(oldKey);
 			}
+			keySet = newKeySet;
 		}
 		keySet.put(key);
-        if (keySet.size() == pageSize) {
-            // we may already have a FullKeySet
-            if(!(keySet instanceof FullKeySet)) {
-                keySet = new FullKeySet(pageSize);
-            }
-        }
+        // we may already have a FullKeySet
+		if((keySet.size() == pageSize) && !(keySet instanceof FullKeySet)) {
+		    keySet = new FullKeySet(pageSize);
+		}
 
 
 	}
@@ -200,8 +201,7 @@ class PropertyPage implements Serializable {
 		        Saveable so = (Saveable) objectClass.getConstructor().newInstance();
 		        so.restore(new ObjectStorageAdapter(table, row));  
 		        return so;
-			}catch(IllegalAccessException | InstantiationException | NoSuchMethodException e) {
-			} catch (InvocationTargetException e) {
+			}catch (IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException e) {
 			}
 		}
         return null;

@@ -80,17 +80,13 @@ public abstract class DisjointPattern extends Pattern {
 		a = getBlock(false);
 		b = op2.getBlock(false);
 		if (b != null) {		// a must match existing block
-			if (a == null)
-				return false;
-			if (!a.specializes(b))
+			if ((a == null) || !a.specializes(b))
 				return false;
 		}
 		a = getBlock(true);
 		b = op2.getBlock(true);
 		if (b != null) {		// a must match existing block
-			if (a == null)
-				return false;
-			if (!a.specializes(b))
+			if ((a == null) || !a.specializes(b))
 				return false;
 		}
 		return true;
@@ -102,17 +98,13 @@ public abstract class DisjointPattern extends Pattern {
 		a = getBlock(false);
 		b = op2.getBlock(false);
 		if (b != null) {		// a must match existing block
-			if (a == null)
-				return false;
-			if (!a.identical(b))
+			if ((a == null) || !a.identical(b))
 				return false;
 		}
 		a = getBlock(true);
 		b = op2.getBlock(true);
 		if (b != null) {		// a must match existing block
-			if (a == null)
-				return false;
-			if (!a.identical(b))
+			if ((a == null) || !a.identical(b))
 				return false;
 		}
 		return true;
@@ -121,9 +113,9 @@ public abstract class DisjointPattern extends Pattern {
 	static public DisjointPattern restoreDisjoint(XmlPullParser parser) {
 		XmlElement el = parser.peek();
 		DisjointPattern res;
-		if (el.getName().equals("instruct_pat"))
+		if ("instruct_pat".equals(el.getName()))
 			res = new InstructionPattern();
-		else if (el.getName().equals("context_pat"))
+		else if ("context_pat".equals(el.getName()))
 			res = new ContextPattern();
 		else
 			res = new CombinePattern();

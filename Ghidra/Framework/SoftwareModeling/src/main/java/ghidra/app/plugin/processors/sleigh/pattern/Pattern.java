@@ -20,9 +20,10 @@
  */
 package ghidra.app.plugin.processors.sleigh.pattern;
 
-import ghidra.app.plugin.processors.sleigh.*;
-import ghidra.program.model.mem.*;
-import ghidra.xml.*;
+import ghidra.app.plugin.processors.sleigh.ParserWalker;
+import ghidra.app.plugin.processors.sleigh.SleighDebugLogger;
+import ghidra.program.model.mem.MemoryAccessException;
+import ghidra.xml.XmlPullParser;
 
 /**
  * 

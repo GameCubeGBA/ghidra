@@ -17,7 +17,10 @@ package db.buffers;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.*;
+import java.io.EOFException;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -96,7 +99,7 @@ public class DataBufferTest extends AbstractGenericTest {
 		transferData(false);
 	}
 
-	private class MyObjectInput implements ObjectInput {
+	private static class MyObjectInput implements ObjectInput {
 
 		private final int serialDataLen;
 		private int serialDataPosition;
@@ -178,8 +181,7 @@ public class DataBufferTest extends AbstractGenericTest {
 			val = readUnsignedByte();
 			val = val | (readUnsignedByte() << 8);
 			val = val | (readUnsignedByte() << 16);
-			val = val | (readUnsignedByte() << 24);
-			return val;
+			return val | (readUnsignedByte() << 24);
 		}
 
 		@Override

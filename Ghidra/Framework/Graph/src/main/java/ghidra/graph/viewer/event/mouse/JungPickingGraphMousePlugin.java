@@ -14,8 +14,15 @@
  */
 package ghidra.graph.viewer.event.mouse;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.event.InputEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.Collection;
@@ -186,7 +193,7 @@ public class JungPickingGraphMousePlugin<V, E> extends AbstractGraphMousePlugin
 
 				vertex = pickSupport.getVertex(layout, ip.getX(), ip.getY());
 				if (vertex != null) {
-					if (pickedVertexState.isPicked(vertex) == false) {
+					if (!pickedVertexState.isPicked(vertex)) {
 						pickedVertexState.clear();
 						pickedVertexState.pick(vertex, true);
 					}
@@ -261,22 +268,17 @@ public class JungPickingGraphMousePlugin<V, E> extends AbstractGraphMousePlugin
 			if (down != null) {
 				Point2D out = e.getPoint();
 
-				if (vertex == null && heyThatsTooClose(down, out, 5) == false) {
+				if (vertex == null && !heyThatsTooClose(down, out, 5)) {
 					pickContainedVertices(vv, down, out, false);
 				}
 			}
-		}
-		else {
-
-			// Mouse released without the 'add to selection' modifiers. See if we have been dragging
-			if (down != null) {
-				// check to see if we were dragging (no vertex picked and a large enough rectangle)
-				Point2D out = e.getPoint();
-				if (vertex == null && heyThatsTooClose(down, out, 5) == false) {
-					pickContainedVertices(vv, down, out, true);
-				}
+		} else // Mouse released without the 'add to selection' modifiers. See if we have been dragging
+		if (down != null) {
+			// check to see if we were dragging (no vertex picked and a large enough rectangle)
+			Point2D out = e.getPoint();
+			if (vertex == null && !heyThatsTooClose(down, out, 5)) {
+				pickContainedVertices(vv, down, out, true);
 			}
-
 		}
 
 		down = null;
@@ -297,7 +299,7 @@ public class JungPickingGraphMousePlugin<V, E> extends AbstractGraphMousePlugin
 	@Override
 	@SuppressWarnings("unchecked")
 	public void mouseDragged(MouseEvent e) {
-		if (locked == false) {
+		if (!locked) {
 			VisualizationViewer<V, E> vv = (VisualizationViewer<V, E>) e.getSource();
 			if (vertex != null) {
 				Point p = e.getPoint();

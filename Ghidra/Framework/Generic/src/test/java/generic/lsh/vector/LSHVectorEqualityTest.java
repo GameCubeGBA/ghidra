@@ -15,7 +15,10 @@
  */
 package generic.lsh.vector;
 
-import org.junit.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * This class tests equality calculations of the {@link LSHVector} class.
@@ -138,8 +141,8 @@ public class LSHVectorEqualityTest {
 	@Test
 	public void testEquality4() {
 
-		HashEntry[] hashEntries1 = new HashEntry[] { entry1, entry2 };
-		HashEntry[] hashEntries2 = new HashEntry[] { entry1, entry2 };
+		HashEntry[] hashEntries1 = { entry1, entry2 };
+		HashEntry[] hashEntries2 = { entry1, entry2 };
 		vec1.setHashEntries(hashEntries1);
 		vec2.setHashEntries(hashEntries2);
 		Assert.assertTrue("failed to equate vectors with identical hash entries",
@@ -162,8 +165,8 @@ public class LSHVectorEqualityTest {
 	@Test
 	public void testEquality5() {
 
-		HashEntry[] hashEntries1 = new HashEntry[] { entry1, entry2 };
-		HashEntry[] hashEntries2 = new HashEntry[] { entry2, entry1 };
+		HashEntry[] hashEntries1 = { entry1, entry2 };
+		HashEntry[] hashEntries2 = { entry2, entry1 };
 		vec1.setHashEntries(hashEntries1);
 		vec2.setHashEntries(hashEntries2);
 		Assert.assertTrue("failed to equate vectors with identical elements in different order",
@@ -183,8 +186,8 @@ public class LSHVectorEqualityTest {
 	@Test
 	public void testEquality6() {
 
-		HashEntry[] hashEntries1 = new HashEntry[] { entry1, entry3 };
-		HashEntry[] hashEntries2 = new HashEntry[] { entry1, entry3 };
+		HashEntry[] hashEntries1 = { entry1, entry3 };
+		HashEntry[] hashEntries2 = { entry1, entry3 };
 		vec1.setHashEntries(hashEntries1);
 		vec2.setHashEntries(hashEntries2);
 		Assert.assertTrue("failed to equate vectors with identical hash entries with same ordering",
@@ -204,8 +207,8 @@ public class LSHVectorEqualityTest {
 	@Test
 	public void testEquality7() {
 
-		HashEntry[] hashEntries1 = new HashEntry[] { entry1, entry3 };
-		HashEntry[] hashEntries2 = new HashEntry[] { entry3, entry1 };
+		HashEntry[] hashEntries1 = { entry1, entry3 };
+		HashEntry[] hashEntries2 = { entry3, entry1 };
 		vec1.setHashEntries(hashEntries1);
 		vec2.setHashEntries(hashEntries2);
 		Assert.assertFalse("failed to recognize that vector elements are not in the same order",
@@ -223,8 +226,8 @@ public class LSHVectorEqualityTest {
 	@Test
 	public void testEquality8() {
 
-		HashEntry[] hashEntries1 = new HashEntry[] { entry1, entry2 };
-		HashEntry[] hashEntries2 = new HashEntry[] { entry1, entry3 };
+		HashEntry[] hashEntries1 = { entry1, entry2 };
+		HashEntry[] hashEntries2 = { entry1, entry3 };
 		vec1.setHashEntries(hashEntries1);
 		vec2.setHashEntries(hashEntries2);
 		Assert.assertFalse("failed to distinguish between vectors with different hash entries",
@@ -241,8 +244,8 @@ public class LSHVectorEqualityTest {
 	@Test
 	public void testEquality9() {
 
-		HashEntry[] hashEntries1 = new HashEntry[] { entry1, entry2 };
-		HashEntry[] hashEntries2 = new HashEntry[] { entry1, entry1, entry2 };
+		HashEntry[] hashEntries1 = { entry1, entry2 };
+		HashEntry[] hashEntries2 = { entry1, entry1, entry2 };
 		vec1.setHashEntries(hashEntries1);
 		vec2.setHashEntries(hashEntries2);
 		Assert.assertFalse("failed to distinguish between different size vectors",
@@ -260,8 +263,8 @@ public class LSHVectorEqualityTest {
 	@Test
 	public void testEquality10() {
 
-		HashEntry[] hashEntries1 = new HashEntry[] { entry4 };
-		HashEntry[] hashEntries2 = new HashEntry[] { entry5 };
+		HashEntry[] hashEntries1 = { entry4 };
+		HashEntry[] hashEntries2 = { entry5 };
 		vec1.setHashEntries(hashEntries1);
 		vec2.setHashEntries(hashEntries2);
 		Assert.assertTrue(
@@ -279,8 +282,8 @@ public class LSHVectorEqualityTest {
 	@Test
 	public void testEquality11() {
 
-		HashEntry[] hashEntries1 = new HashEntry[] { entry5 };
-		HashEntry[] hashEntries2 = new HashEntry[] { entry6 };
+		HashEntry[] hashEntries1 = { entry5 };
+		HashEntry[] hashEntries2 = { entry6 };
 		vec1.setHashEntries(hashEntries1);
 		vec2.setHashEntries(hashEntries2);
 		Assert.assertFalse(
@@ -298,8 +301,8 @@ public class LSHVectorEqualityTest {
 	@Test
 	public void testEquality12() {
 
-		HashEntry[] hashEntries1 = new HashEntry[] { entry6 };
-		HashEntry[] hashEntries2 = new HashEntry[] { entry7 };
+		HashEntry[] hashEntries1 = { entry6 };
+		HashEntry[] hashEntries2 = { entry7 };
 		vec1.setHashEntries(hashEntries1);
 		vec2.setHashEntries(hashEntries2);
 		Assert.assertFalse(
@@ -317,8 +320,8 @@ public class LSHVectorEqualityTest {
 	@Test
 	public void testEquality13() {
 
-		HashEntry[] hashEntries1 = new HashEntry[] { entry8 };
-		HashEntry[] hashEntries2 = new HashEntry[] { entry9 };
+		HashEntry[] hashEntries1 = { entry8 };
+		HashEntry[] hashEntries2 = { entry9 };
 		vec1.setHashEntries(hashEntries1);
 		vec2.setHashEntries(hashEntries2);
 		Assert.assertTrue(
@@ -336,8 +339,8 @@ public class LSHVectorEqualityTest {
 	@Test
 	public void testEquality14() {
 
-		HashEntry[] hashEntries1 = new HashEntry[] { entry10 };
-		HashEntry[] hashEntries2 = new HashEntry[] { entry11 };
+		HashEntry[] hashEntries1 = { entry10 };
+		HashEntry[] hashEntries2 = { entry11 };
 		vec1.setHashEntries(hashEntries1);
 		vec2.setHashEntries(hashEntries2);
 		Assert.assertFalse(

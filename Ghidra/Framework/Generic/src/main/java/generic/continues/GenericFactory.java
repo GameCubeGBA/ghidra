@@ -17,5 +17,5 @@
 package generic.continues;
 
 public interface GenericFactory {
-    public Object create(Class<?> type, Object... args);
+    Object create(Class<?> type, Object... args);
 }

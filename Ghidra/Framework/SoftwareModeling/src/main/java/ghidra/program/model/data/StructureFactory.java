@@ -17,9 +17,14 @@ package ghidra.program.model.data;
 
 import ghidra.app.plugin.core.data.ProgramProviderContext;
 import ghidra.app.plugin.core.data.ProgramStructureProviderContext;
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressOverflowException;
+import ghidra.program.model.address.AddressSet;
 import ghidra.program.model.lang.DataTypeProviderContext;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.Data;
+import ghidra.program.model.listing.InstructionIterator;
+import ghidra.program.model.listing.Listing;
+import ghidra.program.model.listing.Program;
 
 /**
  * Creates and initializes {@link Structure} objects.

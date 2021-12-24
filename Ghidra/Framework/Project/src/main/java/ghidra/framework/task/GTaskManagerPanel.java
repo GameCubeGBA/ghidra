@@ -16,15 +16,20 @@
  */
 package ghidra.framework.task;
 
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
+import javax.swing.border.Border;
+
 import ghidra.framework.task.gui.GTaskResultPanel;
 import ghidra.framework.task.gui.taskview.TaskViewer;
-
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.*;
-import javax.swing.border.Border;
 
 /**
  * Main component for managing and viewing the state of a GTaskManager.
@@ -122,30 +127,10 @@ public class GTaskManagerPanel extends JPanel {
 		JButton stepButton = new JButton("Step");
 		JButton clearButton = new JButton("Clear All");
 
-		pauseButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				pause();
-			}
-		});
-		resumeButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				resume();
-			}
-		});
-		stepButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				step();
-			}
-		});
-		clearButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				clear();
-			}
-		});
+		pauseButton.addActionListener(e -> pause());
+		resumeButton.addActionListener(e -> resume());
+		stepButton.addActionListener(e -> step());
+		clearButton.addActionListener(e -> clear());
 
 		panel.add(pauseButton);
 		panel.add(stepButton);

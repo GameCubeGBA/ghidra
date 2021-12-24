@@ -15,10 +15,15 @@
  */
 package ghidra.graph.viewer.layout;
 
-import java.awt.*;
-import java.util.*;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Shape;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeMap;
 
 import com.google.common.base.Function;
 
@@ -128,9 +133,7 @@ public class LayoutLocationMap<V, E> {
 	public Collection<Column> columns() {
 		List<Column> result = new ArrayList<>();
 		Collection<Column> values = columnsByIndex.values();
-		for (Column column : values) {
-			result.add(column);
-		}
+		result.addAll(values);
 		return result;
 	}
 
@@ -142,9 +145,7 @@ public class LayoutLocationMap<V, E> {
 	public Collection<Row<V>> rows() {
 		List<Row<V>> results = new ArrayList<>();
 		Collection<Row<V>> values = rowsByIndex.values();
-		for (Row<V> row : values) {
-			results.add(row);
-		}
+		results.addAll(values);
 		return results;
 	}
 

@@ -26,7 +26,11 @@ import docking.widgets.table.TableColumnDescriptor;
 import docking.widgets.table.threaded.ThreadedTableModelStub;
 import ghidra.docking.settings.Settings;
 import ghidra.framework.client.NotConnectedException;
-import ghidra.framework.model.*;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.DomainFolder;
+import ghidra.framework.model.DomainFolderChangeListener;
+import ghidra.framework.model.DomainFolderListenerAdapter;
+import ghidra.framework.model.ProjectData;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.framework.plugintool.ServiceProvider;
 import ghidra.util.Msg;
@@ -127,7 +131,7 @@ class FindCheckoutsTableModel extends ThreadedTableModelStub<CheckoutInfo> {
 
 	@Override
 	protected TableColumnDescriptor<CheckoutInfo> createTableColumnDescriptor() {
-		TableColumnDescriptor<CheckoutInfo> descriptor = new TableColumnDescriptor<CheckoutInfo>();
+		TableColumnDescriptor<CheckoutInfo> descriptor = new TableColumnDescriptor<>();
 
 		descriptor.addVisibleColumn(new NameTableColumn());
 		descriptor.addVisibleColumn(new PathTableColumn());
@@ -141,7 +145,7 @@ class FindCheckoutsTableModel extends ThreadedTableModelStub<CheckoutInfo> {
 // Inner Classes
 //==================================================================================================	
 
-	private class NameTableColumn extends AbstractDynamicTableColumnStub<CheckoutInfo, String> {
+	private static class NameTableColumn extends AbstractDynamicTableColumnStub<CheckoutInfo, String> {
 
 		@Override
 		public String getColumnName() {
@@ -160,7 +164,7 @@ class FindCheckoutsTableModel extends ThreadedTableModelStub<CheckoutInfo> {
 		}
 	}
 
-	private class PathTableColumn extends AbstractDynamicTableColumnStub<CheckoutInfo, String> {
+	private static class PathTableColumn extends AbstractDynamicTableColumnStub<CheckoutInfo, String> {
 
 		@Override
 		public String getColumnName() {
@@ -179,7 +183,7 @@ class FindCheckoutsTableModel extends ThreadedTableModelStub<CheckoutInfo> {
 		}
 	}
 
-	private class CheckoutDateTableColumn
+	private static class CheckoutDateTableColumn
 			extends AbstractDynamicTableColumnStub<CheckoutInfo, Date> {
 
 		@Override
@@ -199,7 +203,7 @@ class FindCheckoutsTableModel extends ThreadedTableModelStub<CheckoutInfo> {
 		}
 	}
 
-	private class VersionTableColumn extends AbstractDynamicTableColumnStub<CheckoutInfo, Integer> {
+	private static class VersionTableColumn extends AbstractDynamicTableColumnStub<CheckoutInfo, Integer> {
 
 		@Override
 		public String getColumnName() {

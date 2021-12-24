@@ -15,11 +15,21 @@
  */
 package docking.widgets.table;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 
-import javax.swing.*;
-import javax.swing.table.*;
+import javax.swing.Icon;
+import javax.swing.JComponent;
+import javax.swing.ToolTipManager;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
 
 import docking.DockingWindowManager;
 import docking.help.HelpService;
@@ -159,11 +169,7 @@ public class GTableHeader extends JTableHeader {
 	}
 
 	Icon getHelpIcon() {
-		if (!canFindHelp()) {
-			return null;
-		}
-
-		if (!isHelpEnabled()) {
+		if (!canFindHelp() || !isHelpEnabled()) {
 			return null;
 		}
 

@@ -128,13 +128,7 @@ public class ArrayDataType extends DataTypeImpl implements Array {
 			return false;
 		}
 		Array array = (Array) obj;
-		if (numElements != array.getNumElements()) {
-			return false;
-		}
-		if (!dataType.isEquivalent(array.getDataType())) {
-			return false;
-		}
-		if (dataType instanceof Dynamic && getElementLength() != array.getElementLength()) {
+		if ((numElements != array.getNumElements()) || !dataType.isEquivalent(array.getDataType()) || (dataType instanceof Dynamic && getElementLength() != array.getElementLength())) {
 			return false;
 		}
 		return true;

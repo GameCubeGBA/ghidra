@@ -19,7 +19,9 @@ import java.math.BigInteger;
 import java.nio.charset.MalformedInputException;
 import java.nio.charset.UnmappableCharacterException;
 
-import ghidra.docking.settings.*;
+import ghidra.docking.settings.FormatSettingsDefinition;
+import ghidra.docking.settings.Settings;
+import ghidra.docking.settings.SettingsDefinition;
 import ghidra.pcode.utils.Utils;
 import ghidra.program.model.data.StringRenderParser.StringParseException;
 import ghidra.program.model.mem.MemBuffer;

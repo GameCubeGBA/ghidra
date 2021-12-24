@@ -81,10 +81,7 @@ public class InstructionPattern extends DisjointPattern {
 	 */
 	@Override
 	public Pattern doOr(Pattern b, int sa) {
-		if (b.numDisjoint() > 0)
-			return b.doOr(this, -sa);
-
-		if (b instanceof CombinePattern)
+		if ((b.numDisjoint() > 0) || (b instanceof CombinePattern))
 			return b.doOr(this, -sa);
 
 		DisjointPattern res1, res2;
@@ -102,9 +99,7 @@ public class InstructionPattern extends DisjointPattern {
 	 */
 	@Override
 	public Pattern doAnd(Pattern b, int sa) {
-		if (b.numDisjoint() > 0)
-			return b.doAnd(this, -sa);
-		if (b instanceof CombinePattern)
+		if ((b.numDisjoint() > 0) || (b instanceof CombinePattern))
 			return b.doAnd(this, -sa);
 		if (b instanceof ContextPattern) {
 			InstructionPattern newpat = (InstructionPattern) simplifyClone();

@@ -17,19 +17,27 @@ package ghidra.framework.data;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.Icon;
 
-import ghidra.framework.model.*;
+import ghidra.framework.model.ChangeSet;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.DomainFolder;
+import ghidra.framework.model.DomainFolderChangeListener;
+import ghidra.framework.model.DomainObject;
+import ghidra.framework.model.ProjectLocator;
 import ghidra.framework.store.ItemCheckoutStatus;
 import ghidra.framework.store.Version;
 import ghidra.framework.store.local.LocalFileSystem;
 import ghidra.util.InvalidNameException;
 import ghidra.util.ReadOnlyException;
-import ghidra.util.exception.*;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 public class GhidraFile implements DomainFile {
 
@@ -164,11 +172,9 @@ public class GhidraFile implements DomainFile {
 	@Override
 	public DomainObject getOpenedDomainObject(Object consumer) {
 		DomainObjectAdapter domainObj = fileManager.getOpenedDomainObject(getPathname());
-		if (domainObj != null) {
-			if (!domainObj.addConsumer(consumer)) {
-				fileManager.clearDomainObject(getPathname());
-				throw new IllegalStateException("Domain Object is closed: " + domainObj.getName());
-			}
+		if ((domainObj != null) && !domainObj.addConsumer(consumer)) {
+			fileManager.clearDomainObject(getPathname());
+			throw new IllegalStateException("Domain Object is closed: " + domainObj.getName());
 		}
 		return domainObj;
 	}

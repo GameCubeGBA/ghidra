@@ -19,7 +19,11 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
 
-import db.*;
+import db.DBRecord;
+import db.RecordIterator;
+import db.Schema;
+import db.StringField;
+import db.Table;
 
 class MetadataManager {
 	private final static String TABLE_NAME = "Metadata";

@@ -15,15 +15,26 @@
  */
 package ghidra.graph.algo;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import org.apache.commons.collections4.map.LazyMap;
 
 import generic.util.DequePush;
 import ghidra.generic.util.datastruct.TreeValueSortedMap;
 import ghidra.generic.util.datastruct.ValueSortedMap;
-import ghidra.graph.*;
+import ghidra.graph.GEdge;
+import ghidra.graph.GEdgeWeightMetric;
+import ghidra.graph.GImplicitDirectedGraph;
+import ghidra.graph.GWeightedEdge;
 
 /**
  * Dijkstra's shortest-path algorithm

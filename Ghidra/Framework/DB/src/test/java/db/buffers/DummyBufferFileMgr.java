@@ -37,30 +37,37 @@ public class DummyBufferFileMgr implements BufferFileManager {
 		this.enableChangeFiles = enableChangeFiles;
 	}
 	
+	@Override
 	public int getCurrentVersion() {
 		return cur;
 	}
+	@Override
 	public File getBufferFile(int version) {
 		return new File(dir, name + version + ".bf" );
 	}
+	@Override
 	public File getVersionFile(int version) {
 		if (enableVersionFiles) {
 			return new File(dir, name + version + ".vf" );
 		}
 		return null;
 	}
+	@Override
 	public File getChangeDataFile(int version) {
 		if (enableChangeFiles) {
 			return new File(dir, name + version + ".cf" );
 		}
 		return null;
 	}
+	@Override
 	public File getChangeMapFile() {
 		return null;
 	}
+	@Override
 	public void versionCreated(int version, String comment, long checkinId) {
 		cur = version;
 	}
+	@Override
 	public void updateEnded(long checkinId) {
 	}
 }

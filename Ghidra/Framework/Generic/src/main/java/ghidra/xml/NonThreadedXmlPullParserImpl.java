@@ -15,22 +15,37 @@
  */
 package ghidra.xml;
 
-import java.io.*;
-import java.util.*;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.StringTokenizer;
 
-import javax.xml.parsers.*;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 
-import org.xml.sax.*;
+import org.xml.sax.Attributes;
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.InputSource;
+import org.xml.sax.Locator;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import ghidra.util.Msg;
 import ghidra.util.xml.XmlUtilities;
 
 public class NonThreadedXmlPullParserImpl extends AbstractXmlPullParser {
-	private LinkedList<XmlElement> queue = new LinkedList<XmlElement>();
+	private LinkedList<XmlElement> queue = new LinkedList<>();
 	private Locator locator;
 	private HashMap<String, HashMap<String, String>> processingInstructions =
-		new HashMap<String, HashMap<String, String>>();
+		new HashMap<>();
 
 	private String name;
 
@@ -231,7 +246,7 @@ public class NonThreadedXmlPullParserImpl extends AbstractXmlPullParser {
 		@Override
 		public void processingInstruction(String target, String data) throws SAXException {
 			target = target.toUpperCase();
-            HashMap<String, String> map = processingInstructions.computeIfAbsent(target, k -> new HashMap<String, String>());
+            HashMap<String, String> map = processingInstructions.computeIfAbsent(target, k -> new HashMap<>());
             StringTokenizer st = new StringTokenizer(data);
 			while (st.hasMoreTokens()) {
 				parseAttributeValue(map, st.nextToken());
@@ -276,7 +291,7 @@ public class NonThreadedXmlPullParserImpl extends AbstractXmlPullParser {
 			// because all white space between nested start tags
 			// will be appended to the buffer
 			textBuf.setLength(0);
-			LinkedHashMap<String, String> attrMap = new LinkedHashMap<String, String>();
+			LinkedHashMap<String, String> attrMap = new LinkedHashMap<>();
 			final int length = atts.getLength();
 			for (int ii = 0; ii < length; ++ii) {
 				attrMap.put(atts.getQName(ii), atts.getValue(ii));

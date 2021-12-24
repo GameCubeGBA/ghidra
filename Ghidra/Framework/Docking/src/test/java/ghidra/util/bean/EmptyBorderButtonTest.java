@@ -24,7 +24,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import docking.ActionContext;
-import docking.action.*;
+import docking.action.ActionContextProvider;
+import docking.action.DockingAction;
+import docking.action.ToolBarData;
 import docking.menu.DialogToolbarButton;
 import docking.test.AbstractDockingTest;
 import docking.widgets.EmptyBorderButton;

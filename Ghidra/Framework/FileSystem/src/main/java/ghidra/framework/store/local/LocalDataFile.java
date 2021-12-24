@@ -15,14 +15,20 @@
  */
 package ghidra.framework.store.local;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
 import ghidra.framework.store.DataFileItem;
 import ghidra.framework.store.FolderItem;
 import ghidra.util.PropertyFile;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.DuplicateFileException;
 import ghidra.util.task.TaskMonitor;
-
-import java.io.*;
 
 /**
  * <code>LocalDataFile</code> provides a FolderItem implementation
@@ -100,11 +106,8 @@ public class LocalDataFile extends LocalFolderItem implements DataFileItem {
 					abortCreate();
 				}
 			}
-		}
-		else {
-			if (!dataFile.createNewFile()) {
-				abortCreate();
-			}
+		} else if (!dataFile.createNewFile()) {
+			abortCreate();
 		}
 	}
 

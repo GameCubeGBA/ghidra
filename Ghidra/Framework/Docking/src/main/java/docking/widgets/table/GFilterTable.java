@@ -124,13 +124,11 @@ public class GFilterTable<ROW_OBJECT> extends JPanel {
 	 * @return all row objects corresponding to all selected rows in the table.
 	 */
 	public List<ROW_OBJECT> getSelectedRowObjects() {
-		List<ROW_OBJECT> items = filterPanel.getSelectedItems();
-		return items;
+		return filterPanel.getSelectedItems();
 	}
 
 	public ROW_OBJECT getSelectedRowObject() {
-		ROW_OBJECT item = filterPanel.getSelectedItem();
-		return item;
+		return filterPanel.getSelectedItem();
 	}
 
 	public void setSelectedRowObject(ROW_OBJECT rowObject) {
@@ -138,8 +136,7 @@ public class GFilterTable<ROW_OBJECT> extends JPanel {
 	}
 
 	public ROW_OBJECT getRowObject(int viewRow) {
-		ROW_OBJECT rowObject = filterPanel.getRowObject(viewRow);
-		return rowObject;
+		return filterPanel.getRowObject(viewRow);
 	}
 
 	public ROW_OBJECT getItemAt(Point point) {
@@ -148,8 +145,7 @@ public class GFilterTable<ROW_OBJECT> extends JPanel {
 			return null;
 		}
 
-		ROW_OBJECT rowObject = filterPanel.getRowObject(viewRow);
-		return rowObject;
+		return filterPanel.getRowObject(viewRow);
 	}
 
 	public void setTableFilter(TableFilter<ROW_OBJECT> tableFilter) {

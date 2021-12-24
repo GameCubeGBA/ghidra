@@ -17,10 +17,11 @@ package ghidra.pcodeCPort.pcoderaw;
 
 import org.jdom.Element;
 
-import ghidra.pcodeCPort.address.*;
-import ghidra.pcodeCPort.error.*;
-import ghidra.pcodeCPort.space.*;
-import ghidra.pcodeCPort.translate.*;
+import ghidra.pcodeCPort.address.Address;
+import ghidra.pcodeCPort.address.AddressUtils;
+import ghidra.pcodeCPort.error.LowlevelError;
+import ghidra.pcodeCPort.space.AddrSpace;
+import ghidra.pcodeCPort.translate.Translate;
 
 public class VarnodeData {
 	//  string name;			// This field will be depracated when sleigh comes on line

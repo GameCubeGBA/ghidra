@@ -16,16 +16,16 @@
  */
 package ghidra.framework.model;
 
+import java.io.IOException;
+
+import org.xml.sax.SAXException;
+
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.util.InvalidNameException;
 import ghidra.util.NotOwnerException;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.exception.NotFoundException;
 import ghidra.util.task.TaskMonitor;
-
-import java.io.IOException;
-
-import org.xml.sax.SAXException;
 
 /**
  * Defines the method for creating an Object from an 
@@ -51,7 +51,7 @@ public interface XmlDataReader {
      * @throws NotFoundException if a required service can't be found in 
      * the service registry.
      */
-    public boolean addXMLObject(PluginTool tool,
+    boolean addXMLObject(PluginTool tool,
     							String basePath,
     							String relPathName,
     							boolean removeFile,
@@ -66,5 +66,5 @@ public interface XmlDataReader {
      * @return a string summarizing the results of the xml data read
      *         or <code>null</code> if there was nothing to report
      */
-    public String getSummary();
+    String getSummary();
 }

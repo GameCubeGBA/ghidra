@@ -17,14 +17,25 @@ package ghidra.pcodeCPort.slgh_compile;
 
 import java.util.Iterator;
 
-import generic.stl.*;
+import generic.stl.ComparableMapSTL;
+import generic.stl.IteratorSTL;
+import generic.stl.MapSTL;
+import generic.stl.Pair;
+import generic.stl.VectorSTL;
 import ghidra.pcodeCPort.context.SleighError;
 import ghidra.pcodeCPort.opcodes.OpCode;
-import ghidra.pcodeCPort.semantics.*;
+import ghidra.pcodeCPort.semantics.ConstTpl;
 import ghidra.pcodeCPort.semantics.ConstTpl.const_type;
 import ghidra.pcodeCPort.semantics.ConstTpl.v_field;
+import ghidra.pcodeCPort.semantics.ConstructTpl;
+import ghidra.pcodeCPort.semantics.HandleTpl;
+import ghidra.pcodeCPort.semantics.OpTpl;
+import ghidra.pcodeCPort.semantics.VarnodeTpl;
 import ghidra.pcodeCPort.sleighbase.SleighBase;
-import ghidra.pcodeCPort.slghsymbol.*;
+import ghidra.pcodeCPort.slghsymbol.Constructor;
+import ghidra.pcodeCPort.slghsymbol.OperandSymbol;
+import ghidra.pcodeCPort.slghsymbol.SubtableSymbol;
+import ghidra.pcodeCPort.slghsymbol.TripleSymbol;
 import ghidra.pcodeCPort.space.AddrSpace;
 
 class ConsistencyChecker {
@@ -93,10 +104,7 @@ class ConsistencyChecker {
 					printOpError(op, ct, 0, 0, "Using subtable with exports in expression");
 					return false;
 				}
-				if (vnout == vn0) {
-					return true;
-				}
-				if ((vnout == 0) || (vn0 == 0)) {
+			if ((vnout == vn0) || (vnout == 0) || (vn0 == 0)) {
 					return true;
 				}
 				printOpError(op, ct, -1, 0, "Input and output sizes must match; " +
@@ -673,10 +681,7 @@ class ConsistencyChecker {
 	private boolean checkVarnodeTruncation(Constructor ct, int slot, OpTpl op, VarnodeTpl vn,
 			boolean isbigendian) {
 		ConstTpl off = vn.getOffset();
-		if (off.getType() != const_type.handle) {
-			return true;
-		}
-		if (off.getSelect() != v_field.v_offset_plus) {
+		if ((off.getType() != const_type.handle) || (off.getSelect() != v_field.v_offset_plus)) {
 			return true;
 		}
 		const_type sztype = vn.getSize().getType();
@@ -710,10 +715,8 @@ class ConsistencyChecker {
 		while (iter.hasNext()) {
 			OpTpl op = iter.next();
 			VarnodeTpl outvn = op.getOut();
-			if (outvn != null) {
-				if (!checkVarnodeTruncation(ct, -1, op, outvn, isbigendian)) {
-					testresult = false;
-				}
+			if ((outvn != null) && !checkVarnodeTruncation(ct, -1, op, outvn, isbigendian)) {
+				testresult = false;
 			}
 			for (int i = 0; i < op.numInput(); ++i) {
 				if (!checkVarnodeTruncation(ct, i, op, op.getIn(i), isbigendian)) {
@@ -869,13 +872,7 @@ class ConsistencyChecker {
 	// Optimization routines
 	private static void examineVn(MapSTL<Long, OptimizeRecord> recs, VarnodeTpl vn, int i,
 			int inslot, int secnum) {
-		if (vn == null) {
-			return;
-		}
-		if (!vn.getSpace().isUniqueSpace()) {
-			return;
-		}
-		if (vn.getOffset().getType() != ConstTpl.const_type.real) {
+		if ((vn == null) || !vn.getSpace().isUniqueSpace() || (vn.getOffset().getType() != ConstTpl.const_type.real)) {
 			return;
 		}
 
@@ -900,10 +897,7 @@ class ConsistencyChecker {
 
 	private static boolean possibleIntersection(VarnodeTpl vn1, VarnodeTpl vn2) {
 		// Conservatively test whether vn1 and vn2 can intersect
-		if (vn1.getSpace().isConstSpace()) {
-			return false;
-		}
-		if (vn2.getSpace().isConstSpace()) {
+		if (vn1.getSpace().isConstSpace() || vn2.getSpace().isConstSpace()) {
 			return false;
 		}
 
@@ -988,10 +982,8 @@ class ConsistencyChecker {
 
 		// We always check for writes to -vn-
 		VarnodeTpl vn2 = op.getOut();
-		if (vn2 != null) {
-			if (possibleIntersection(vn, vn2)) {
-				return true;
-			}
+		if ((vn2 != null) && possibleIntersection(vn, vn2)) {
+			return true;
 		}
 		return false;
 	}
@@ -1036,32 +1028,28 @@ class ConsistencyChecker {
 		if (hand == null) {
 			return;
 		}
-		if (hand.getPtrSpace().isUniqueSpace()) {
-			if (hand.getPtrOffset().getType() == ConstTpl.const_type.real) {
-				long offset = hand.getPtrOffset().getReal();
-				recs.put(offset, new OptimizeRecord());
-				IteratorSTL<Pair<Long, OptimizeRecord>> res = recs.find(offset);
-				res.get().second.writeop = 0;
-				res.get().second.readop = 0;
-				res.get().second.writecount = 2;
-				res.get().second.readcount = 2;
-				res.get().second.readsection = -2;
-				res.get().second.writesection = -2;
-			}
+		if (hand.getPtrSpace().isUniqueSpace() && (hand.getPtrOffset().getType() == ConstTpl.const_type.real)) {
+			long offset = hand.getPtrOffset().getReal();
+			recs.put(offset, new OptimizeRecord());
+			IteratorSTL<Pair<Long, OptimizeRecord>> res = recs.find(offset);
+			res.get().second.writeop = 0;
+			res.get().second.readop = 0;
+			res.get().second.writecount = 2;
+			res.get().second.readcount = 2;
+			res.get().second.readsection = -2;
+			res.get().second.writesection = -2;
 		}
-		if (hand.getSpace().isUniqueSpace()) {
-			if ((hand.getPtrSpace().getType() == ConstTpl.const_type.real) &&
-				(hand.getPtrOffset().getType() == ConstTpl.const_type.real)) {
-				long offset = hand.getPtrOffset().getReal();
-				recs.put(offset, new OptimizeRecord());
-				IteratorSTL<Pair<Long, OptimizeRecord>> res = recs.find(offset);
-				res.get().second.writeop = 0;
-				res.get().second.readop = 0;
-				res.get().second.writecount = 2;
-				res.get().second.readcount = 2;
-				res.get().second.readsection = -2;
-				res.get().second.writesection = -2;
-			}
+		if (hand.getSpace().isUniqueSpace() && ((hand.getPtrSpace().getType() == ConstTpl.const_type.real) &&
+			(hand.getPtrOffset().getType() == ConstTpl.const_type.real))) {
+			long offset = hand.getPtrOffset().getReal();
+			recs.put(offset, new OptimizeRecord());
+			IteratorSTL<Pair<Long, OptimizeRecord>> res = recs.find(offset);
+			res.get().second.writeop = 0;
+			res.get().second.readop = 0;
+			res.get().second.writecount = 2;
+			res.get().second.readcount = 2;
+			res.get().second.readsection = -2;
+			res.get().second.writesection = -2;
 		}
 	}
 

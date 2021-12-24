@@ -121,10 +121,10 @@ abstract class Node {
 	 */
 	Node processChildElement(Element elem, DockingWindowManager mgr, Node parentNode,
 			List<ComponentPlaceholder> restoredPlaceholders) {
-		if (elem.getName().equals("SPLIT_NODE")) {
+		if ("SPLIT_NODE".equals(elem.getName())) {
 			return new SplitNode(elem, mgr, parentNode, restoredPlaceholders);
 		}
-		else if (elem.getName().equals("COMPONENT_NODE")) {
+		else if ("COMPONENT_NODE".equals(elem.getName())) {
 			return new ComponentNode(elem, mgr, parentNode, restoredPlaceholders);
 		}
 		return null;

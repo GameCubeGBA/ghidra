@@ -16,13 +16,13 @@
  */
 package ghidra.framework.main;
 
-import ghidra.util.bean.GGlassPane;
-
 import java.awt.Rectangle;
 
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 import org.jdesktop.animation.timing.interpolation.PropertySetter;
+
+import ghidra.util.bean.GGlassPane;
 
 /** 
  * Changes the 'containerBounds' field on the {@link ZoomedImagePainter} via the 

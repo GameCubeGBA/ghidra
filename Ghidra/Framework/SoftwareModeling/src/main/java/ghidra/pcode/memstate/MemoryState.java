@@ -38,8 +38,8 @@ import ghidra.program.model.pcode.Varnode;
 public class MemoryState {
 
 	Language language;
-	VectorSTL<MemoryBank> memspace = new VectorSTL<MemoryBank>();
-	Map<Register, Varnode> regVarnodeCache = new HashMap<Register, Varnode>();
+	VectorSTL<MemoryBank> memspace = new VectorSTL<>();
+	Map<Register, Varnode> regVarnodeCache = new HashMap<>();
 
 	/**
 	 * MemoryState constructor for a specified processor language

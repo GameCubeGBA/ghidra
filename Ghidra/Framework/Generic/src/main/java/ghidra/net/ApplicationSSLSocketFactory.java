@@ -16,7 +16,9 @@
 package ghidra.net;
 
 import java.io.IOException;
-import java.net.*;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.security.NoSuchAlgorithmException;
 
 import javax.net.ssl.SSLContext;

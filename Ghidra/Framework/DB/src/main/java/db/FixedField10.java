@@ -221,8 +221,7 @@ public class FixedField10 extends FixedField {
 	public int hashCode() {
 		final int prime = 31;
 		int result = (int) (hi8 ^ (hi8 >>> 32));
-		result = prime * result + lo2;
-		return result;
+		return prime * result + lo2;
 	}
 
 	@Override
@@ -234,10 +233,7 @@ public class FixedField10 extends FixedField {
 			return false;
 		}
 		FixedField10 other = (FixedField10) obj;
-		if (hi8 != other.hi8) {
-			return false;
-		}
-		if (lo2 != other.lo2) {
+		if ((hi8 != other.hi8) || (lo2 != other.lo2)) {
 			return false;
 		}
 		return true;

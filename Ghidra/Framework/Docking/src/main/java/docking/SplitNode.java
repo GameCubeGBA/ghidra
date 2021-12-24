@@ -19,7 +19,9 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JComponent;
+import javax.swing.JSplitPane;
 
 import org.jdom.Element;
 
@@ -71,7 +73,7 @@ class SplitNode extends Node {
 		int height = Integer.parseInt(elem.getAttributeValue("HEIGHT"));
 		splitPaneSize = new Dimension(width, height);
 		String orient = elem.getAttributeValue("ORIENTATION");
-		isHorizontal = orient.equals("HORIZONTAL");
+		isHorizontal = "HORIZONTAL".equals(orient);
 
 		List<?> list = elem.getChildren();
 		child1 = processChildElement((Element) list.get(0), mgr, this, restoredPlaceholders);
@@ -170,10 +172,7 @@ class SplitNode extends Node {
 
 	@Override
 	boolean contains(ComponentPlaceholder info) {
-		if (child1 != null && child1.contains(info)) {
-			return true;
-		}
-		if (child2 != null && child2.contains(info)) {
+		if ((child1 != null && child1.contains(info)) || (child2 != null && child2.contains(info))) {
 			return true;
 		}
 		return false;

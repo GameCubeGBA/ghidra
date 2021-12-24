@@ -15,14 +15,23 @@
  */
 package docking.widgets.table.threaded;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.Component;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Matcher;
@@ -31,13 +40,24 @@ import java.util.regex.Pattern;
 import javax.swing.JComponent;
 import javax.swing.event.TableModelEvent;
 
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import docking.DockingUtils;
 import docking.widgets.AutoLookup;
-import docking.widgets.filter.*;
-import docking.widgets.table.*;
+import docking.widgets.filter.FilterOptions;
+import docking.widgets.filter.TextFilter;
+import docking.widgets.filter.TextFilterFactory;
+import docking.widgets.table.ColumnSortState;
 import docking.widgets.table.ColumnSortState.SortDirection;
+import docking.widgets.table.DefaultRowFilterTransformer;
+import docking.widgets.table.GTableMouseListener;
+import docking.widgets.table.GTableToCSV;
+import docking.widgets.table.SortListener;
+import docking.widgets.table.SortedTableModel;
+import docking.widgets.table.TableSortState;
+import docking.widgets.table.TableSortingContext;
 import ghidra.docking.spy.SpyEventRecorder;
 import ghidra.util.Msg;
 import ghidra.util.task.TaskMonitor;
@@ -623,7 +643,7 @@ public class ThreadedTableTest extends AbstractThreadedTableTest {
 
 		int expectedIndex = 0;
 		BufferedReader actualReader = new BufferedReader(new FileReader(actualFile));
-		try {
+		try (actualReader) {
 			while (true) {
 				String line = actualReader.readLine();
 				if (line == null) {
@@ -631,9 +651,6 @@ public class ThreadedTableTest extends AbstractThreadedTableTest {
 				}
 				assertEquals(expectedList.get(expectedIndex++), line);
 			}
-		}
-		finally {
-			actualReader.close();
 		}
 	}
 
@@ -810,8 +827,7 @@ public class ThreadedTableTest extends AbstractThreadedTableTest {
 
 		List<Object> modelValues = getModelValues(model, TestDataKeyModel.STRING_COL);
 		assertEquals("Filter did not match the expected row count", 3, modelValues.size());
-		for (int i = 0; i < modelValues.size(); i++) {
-			Object value = modelValues.get(i);
+		for (Object value : modelValues) {
 			assertEquals(text, value);
 		}
 	}

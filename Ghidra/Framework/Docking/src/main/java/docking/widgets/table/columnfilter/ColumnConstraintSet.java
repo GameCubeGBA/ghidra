@@ -15,13 +15,18 @@
  */
 package docking.widgets.table.columnfilter;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
 
 import org.apache.commons.collections4.CollectionUtils;
 
 import docking.widgets.table.DiscoverableTableUtils;
 import docking.widgets.table.RowObjectTableModel;
-import docking.widgets.table.constraint.*;
+import docking.widgets.table.constraint.ColumnConstraint;
+import docking.widgets.table.constraint.MappedColumnConstraint;
+import docking.widgets.table.constraint.TableFilterContext;
 import ghidra.framework.options.SaveState;
 
 /**
@@ -247,10 +252,7 @@ public class ColumnConstraintSet<R, T> {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
 		}
 		ColumnConstraintSet<?, ?> other = (ColumnConstraintSet<?, ?>) obj;

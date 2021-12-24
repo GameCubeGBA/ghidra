@@ -19,7 +19,9 @@ import java.util.List;
 
 import javax.swing.tree.TreePath;
 
-import docking.widgets.tree.*;
+import docking.widgets.tree.GTree;
+import docking.widgets.tree.GTreeNode;
+import docking.widgets.tree.GTreeTask;
 import ghidra.util.task.TaskMonitor;
 
 public class GTreeExpandPathsTask extends GTreeTask {

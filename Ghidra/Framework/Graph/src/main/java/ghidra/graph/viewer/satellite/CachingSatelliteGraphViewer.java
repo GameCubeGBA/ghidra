@@ -15,7 +15,12 @@
  */
 package ghidra.graph.viewer.satellite;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.Collection;
@@ -24,12 +29,18 @@ import java.util.List;
 
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.Graph;
-import edu.uci.ics.jung.visualization.*;
+import edu.uci.ics.jung.visualization.Layer;
+import edu.uci.ics.jung.visualization.MultiLayerTransformer;
+import edu.uci.ics.jung.visualization.RenderContext;
 import edu.uci.ics.jung.visualization.layout.ObservableCachingLayout;
 import edu.uci.ics.jung.visualization.renderers.Renderer;
 import edu.uci.ics.jung.visualization.transform.shape.GraphicsDecorator;
 import edu.uci.ics.jung.visualization.transform.shape.ShapeTransformer;
-import ghidra.graph.viewer.*;
+import ghidra.graph.viewer.GraphViewer;
+import ghidra.graph.viewer.SatelliteGraphViewer;
+import ghidra.graph.viewer.VisualEdge;
+import ghidra.graph.viewer.VisualGraphViewUpdater;
+import ghidra.graph.viewer.VisualVertex;
 import ghidra.graph.viewer.renderer.VisualVertexSatelliteRenderer;
 import ghidra.util.task.SwingUpdateManager;
 
@@ -76,7 +87,7 @@ public class CachingSatelliteGraphViewer<V extends VisualVertex, E extends Visua
 
 	@Override
 	public Renderer.Vertex<V, E> getPreferredVertexRenderer() {
-		return new VisualVertexSatelliteRenderer<V, E>() {
+		return new VisualVertexSatelliteRenderer<>() {
 			@Override
 			protected void paintHighlight(RenderContext<V, E> rc, V vertex, GraphicsDecorator g,
 					Rectangle bounds) {

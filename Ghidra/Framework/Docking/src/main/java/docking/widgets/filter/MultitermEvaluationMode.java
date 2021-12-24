@@ -25,7 +25,7 @@ public enum MultitermEvaluationMode {
 
 	private final String descr;
 
-	private MultitermEvaluationMode(String d) {
+	MultitermEvaluationMode(String d) {
 		this.descr = d;
 	}
 

@@ -19,7 +19,9 @@ import java.io.IOException;
 import java.util.List;
 
 import docking.widgets.OptionDialog;
-import ghidra.framework.client.*;
+import ghidra.framework.client.ClientUtil;
+import ghidra.framework.client.NotConnectedException;
+import ghidra.framework.client.RepositoryAdapter;
 import ghidra.framework.main.datatable.DomainFileContext;
 import ghidra.framework.main.datatable.DomainFileProviderContextAction;
 import ghidra.framework.model.DomainFile;
@@ -96,11 +98,7 @@ public abstract class VersionControlAction extends DomainFileProviderContextActi
 	 */
 	protected boolean checkRepositoryConnected() {
 		checkRepository();
-		if (repository == null) {
-			return true;
-		}
-
-		if (repository.verifyConnection()) {
+		if ((repository == null) || repository.verifyConnection()) {
 			return true;
 		}
 
@@ -112,13 +110,10 @@ public abstract class VersionControlAction extends DomainFileProviderContextActi
 				return true;
 			}
 			catch (NotConnectedException e) {
-				// message displayed by repository server adapter
-				return false;
 			}
 			catch (IOException e) {
 				ClientUtil.handleException(repository, e, "Repository Connection",
 					tool.getToolFrame());
-				return false;
 			}
 		}
 

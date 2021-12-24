@@ -15,8 +15,14 @@
  */
 package ghidra.net.http;
 
-import java.io.*;
-import java.net.*;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Properties;
 
 import ghidra.net.ApplicationKeyManagerFactory;
@@ -43,13 +49,11 @@ public class HttpUtil {
 
 		if ("https".equals(protocol)) {
 			// force password prompt before connecting
-			if (!ApplicationKeyManagerFactory.initialize()) {
-				if (ApplicationKeyManagerFactory.getKeyStore() != null) {
-					// Report error condition?
-					throw new IOException("Failed to initialize PKI certificate keystore");
-				}
-				// continue without private keystore
+			if (!ApplicationKeyManagerFactory.initialize() && (ApplicationKeyManagerFactory.getKeyStore() != null)) {
+				// Report error condition?
+				throw new IOException("Failed to initialize PKI certificate keystore");
 			}
+			// continue without private keystore
 		}
 		else if (!"http".equals(protocol)) {
 			throw new MalformedURLException("Unsupported protocol: " + protocol);

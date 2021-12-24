@@ -22,7 +22,7 @@ public interface InternalDataTypeComponent extends DataTypeComponent {
 	 * will not be resized.
 	 * @param dataType the new DataType for this component
 	 */
-	public void setDataType(DataType dataType);
+	void setDataType(DataType dataType);
 
 	/**
 	 * Update component ordinal, offset and length during alignment
@@ -32,8 +32,8 @@ public interface InternalDataTypeComponent extends DataTypeComponent {
 	 */
 	void update(int ordinal, int offset, int length);
 
-	public static String toString(DataTypeComponent c) {
-		StringBuffer buffer = new StringBuffer();
+	static String toString(DataTypeComponent c) {
+		StringBuilder buffer = new StringBuilder();
 		buffer.append("  " + c.getOrdinal());
 		buffer.append("  " + c.getOffset());
 		buffer.append("  " + c.getDataType().getName());

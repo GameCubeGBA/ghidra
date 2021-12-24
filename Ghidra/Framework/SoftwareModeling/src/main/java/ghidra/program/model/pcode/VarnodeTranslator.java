@@ -67,8 +67,7 @@ public class VarnodeTranslator {
 	 * @return varnode that reprents the register
 	 */
 	public Varnode getVarnode(Register register) {
-		Varnode node = new Varnode(register.getAddress(), register.getMinimumByteSize());
-		return node;
+		return new Varnode(register.getAddress(), register.getMinimumByteSize());
 	}
 
 	/**

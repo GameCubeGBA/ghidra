@@ -41,8 +41,8 @@ import ghidra.util.task.TaskMonitor;
  */
 public interface ContentHandler extends ExtensionPoint {
 
-	public static final String UNKNOWN_CONTENT = "Unknown-File";
-	public static final String MISSING_CONTENT = "Missing-File";
+	String UNKNOWN_CONTENT = "Unknown-File";
+	String MISSING_CONTENT = "Missing-File";
 
 	/**
 	 * Creates a new folder item within a specified file-system.

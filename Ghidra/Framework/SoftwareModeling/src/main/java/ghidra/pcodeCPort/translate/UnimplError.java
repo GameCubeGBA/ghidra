@@ -16,7 +16,7 @@
  */
 package ghidra.pcodeCPort.translate;
 
-import ghidra.pcodeCPort.error.*;
+import ghidra.pcodeCPort.error.LowlevelError;
 
 public class UnimplError extends LowlevelError {
 

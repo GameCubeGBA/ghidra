@@ -20,7 +20,9 @@ import java.io.IOException;
 
 import ghidra.framework.store.FolderNotEmptyException;
 import ghidra.util.InvalidNameException;
-import ghidra.util.exception.*;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.DuplicateFileException;
+import ghidra.util.exception.FileInUseException;
 import ghidra.util.task.TaskMonitor;
 
 /**
@@ -33,18 +35,18 @@ public interface DomainFolder extends Comparable<DomainFolder> {
 	/**
 	 * Character used to separate folder and item names within a path string.
 	 */
-	public static final String SEPARATOR = "/";
+	String SEPARATOR = "/";
 
 	/**
 	 * Name extension to add when attempting to avoid a duplicate name.
 	 */
-	public static final String COPY_SUFFIX = ".copy";
+	String COPY_SUFFIX = ".copy";
 
 	/**
 	 * Return this folder's name.
 	 * @return the name
 	 */
-	public String getName();
+	String getName();
 
 	/**
 	 * Set the name on this domain folder.
@@ -58,71 +60,71 @@ public interface DomainFolder extends Comparable<DomainFolder> {
 	 * in-use / checked-out.
 	 * @throws IOException thrown if an IO or access error occurs.
 	 */
-	public DomainFolder setName(String newName) throws InvalidNameException, IOException;
+	DomainFolder setName(String newName) throws InvalidNameException, IOException;
 
 	/**
 	 * Returns the local storage location for the project that this DomainFolder belongs to.
 	 * @return the locator
 	 */
-	public ProjectLocator getProjectLocator();
+	ProjectLocator getProjectLocator();
 
 	/**
 	 * Returns the project data
 	 * @return the project data
 	 */
-	public ProjectData getProjectData();
+	ProjectData getProjectData();
 
 	/**
 	 * Returns the path name to the domain object.
 	 * @return the path name
 	 */
-	public String getPathname();
+	String getPathname();
 
 	/**
 	 * Returns true if this file is in a writable project.
 	 * @return true if writable
 	 */
-	public boolean isInWritableProject();
+	boolean isInWritableProject();
 
 	/**
 	 * Return parent folder or null if this DomainFolder is the root folder.
 	 * @return the parent
 	 */
-	public DomainFolder getParent();
+	DomainFolder getParent();
 
 	/**
 	 * Get DomainFolders in this folder.
 	 * This returns cached information and does not force a full refresh.
 	 * @return list of sub-folders
 	 */
-	public DomainFolder[] getFolders();
+	DomainFolder[] getFolders();
 
 	/**
 	 * Return the folder for the given name.
 	 * @param name of folder to retrieve
 	 * @return folder or null if there is no folder by the given name.
 	 */
-	public DomainFolder getFolder(String name);
+	DomainFolder getFolder(String name);
 
 	/**
 	 * Get the domain file in this folder with the given name.
 	 * @param name name of file in this folder to retrieve
 	 * @return domain file or null if there is no domain file in this folder with the given name.
 	 */
-	public DomainFile getFile(String name);
+	DomainFile getFile(String name);
 
 	/**
 	 * Determine if this folder contains any sub-folders or domain files.
 	 * @return true if this folder is empty.
 	 */
-	public boolean isEmpty();
+	boolean isEmpty();
 
 	/**
 	 * Get all domain files in this folder.
 	 * This returns cached information and does not force a full refresh.
 	 * @return list of domain files
 	 */
-	public DomainFile[] getFiles();
+	DomainFile[] getFiles();
 
 	/**
 	 * Add a domain object to this folder.
@@ -137,7 +139,7 @@ public interface DomainFolder extends Comparable<DomainFolder> {
 	 * @throws IOException if IO or access error occurs
 	 * @throws CancelledException if the user cancels the create.
 	 */
-	public DomainFile createFile(String name, DomainObject obj, TaskMonitor monitor)
+	DomainFile createFile(String name, DomainObject obj, TaskMonitor monitor)
 			throws InvalidNameException, IOException, CancelledException;
 
 	/**
@@ -153,7 +155,7 @@ public interface DomainFolder extends Comparable<DomainFolder> {
 	 * @throws IOException if IO or access error occurs
 	 * @throws CancelledException if the user cancels the create.
 	 */
-	public DomainFile createFile(String name, File packFile, TaskMonitor monitor)
+	DomainFile createFile(String name, File packFile, TaskMonitor monitor)
 			throws InvalidNameException, IOException, CancelledException;
 
 	/**
@@ -166,14 +168,14 @@ public interface DomainFolder extends Comparable<DomainFolder> {
 	 * than alphanumerics.
 	 * @throws IOException if IO or access error occurs
 	 */
-	public DomainFolder createFolder(String folderName) throws InvalidNameException, IOException;
+	DomainFolder createFolder(String folderName) throws InvalidNameException, IOException;
 
 	/**
 	 * Deletes this folder and all of its contents
 	 * @throws IOException if IO or access error occurs
 	 * @throws FolderNotEmptyException Thrown if the subfolder is not empty.
 	 */
-	public void delete() throws IOException;
+	void delete() throws IOException;
 
 	/**
 	 * Move this folder into the newParent folder.  If connected to an archive
@@ -188,7 +190,7 @@ public interface DomainFolder extends Comparable<DomainFolder> {
 	 * contains a file which is in-use / checked-out.
 	 * @throws IOException thrown if an IO or access error occurs.
 	 */
-	public DomainFolder moveTo(DomainFolder newParent) throws IOException;
+	DomainFolder moveTo(DomainFolder newParent) throws IOException;
 
 	/**
 	 * Copy this folder into the newParent folder.
@@ -200,11 +202,11 @@ public interface DomainFolder extends Comparable<DomainFolder> {
 	 * @throws IOException thrown if an IO or access error occurs.
 	 * @throws CancelledException if task monitor cancelled operation.
 	 */
-	public DomainFolder copyTo(DomainFolder newParent, TaskMonitor monitor) throws IOException,
+	DomainFolder copyTo(DomainFolder newParent, TaskMonitor monitor) throws IOException,
 			CancelledException;
 
 	/**
 	 * Allows the framework to react to a request to make this folder the "active" one.
 	 */
-	public void setActive();
+	void setActive();
 }

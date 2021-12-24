@@ -19,10 +19,15 @@ import java.awt.Component;
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
 
-import javax.security.auth.callback.*;
+import javax.security.auth.callback.ChoiceCallback;
+import javax.security.auth.callback.NameCallback;
+import javax.security.auth.callback.PasswordCallback;
 
 import docking.DockingWindowManager;
-import docking.widgets.*;
+import docking.widgets.OptionDialog;
+import docking.widgets.PasswordChangeDialog;
+import docking.widgets.PasswordDialog;
+import docking.widgets.PopupKeyStorePasswordProvider;
 import ghidra.framework.preferences.Preferences;
 import ghidra.framework.remote.AnonymousCallback;
 import ghidra.framework.remote.SSHSignatureCallback;
@@ -103,7 +108,7 @@ public class DefaultClientAuthenticator extends PopupKeyStorePasswordProvider
 		}
 	}
 
-	private class ServerPasswordPrompt implements Runnable {
+	private static class ServerPasswordPrompt implements Runnable {
 
 		private static final String NAME_PREFERENCE = "PasswordPrompt.Name";
 		private static final String CHOICE_PREFERENCE = "PasswordPrompt.Choice";

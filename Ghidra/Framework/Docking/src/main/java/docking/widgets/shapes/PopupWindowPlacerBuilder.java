@@ -15,7 +15,9 @@
  */
 package docking.widgets.shapes;
 
-import docking.widgets.shapes.PopupWindowPlacer.*;
+import docking.widgets.shapes.PopupWindowPlacer.EdgePopupPlacer;
+import docking.widgets.shapes.PopupWindowPlacer.LeastOverlapCornerPopupWindowPlacer;
+import docking.widgets.shapes.PopupWindowPlacer.ThrowsAssertExceptionPlacer;
 
 /**
  * This class builds a PopWindowPlacer that can have subsequent PopWindowPlacers.

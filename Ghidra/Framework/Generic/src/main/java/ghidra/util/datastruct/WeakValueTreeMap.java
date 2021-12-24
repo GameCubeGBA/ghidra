@@ -15,7 +15,9 @@
  */
 package ghidra.util.datastruct;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.NavigableMap;
+import java.util.TreeMap;
 
 /**
  * Class to provide a tree map with weak values.

@@ -16,14 +16,15 @@
  */
 package ghidra.util.datastruct;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
-import java.util.*;
-
-/**
- * <CODE>Algorithms</CODE> is a class containing static methods that implement 
+/* containing static methods that implement 
  * general algorithms based on objects returned from a data model.
  */
 public class Algorithms {

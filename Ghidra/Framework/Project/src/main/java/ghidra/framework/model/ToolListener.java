@@ -31,6 +31,6 @@ public interface ToolListener {
      *
      * @param toolEvent The cross-tool PluginEvent.
      */
-    public void processToolEvent(PluginEvent toolEvent);
+    void processToolEvent(PluginEvent toolEvent);
     
 }

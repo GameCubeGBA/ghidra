@@ -18,6 +18,7 @@ package ghidra.xml;
 
 public abstract class AbstractXmlPullParser implements XmlPullParser {
 
+	@Override
 	public XmlElement end() {
 		if (!hasNext()) {
 			throw new XmlException("at EOF but expected end element");
@@ -30,6 +31,7 @@ public abstract class AbstractXmlPullParser implements XmlPullParser {
 		return next;
 	}
 
+	@Override
 	public XmlElement end(XmlElement element) {
 		String name = element.getName();
 		if (!hasNext()) {
@@ -47,6 +49,7 @@ public abstract class AbstractXmlPullParser implements XmlPullParser {
 		return next;
 	}
 
+	@Override
 	public int getColumnNumber() {
 		if (hasNext()) {
 			return peek().getColumnNumber();
@@ -54,6 +57,7 @@ public abstract class AbstractXmlPullParser implements XmlPullParser {
 		return -1;
 	}
 
+	@Override
 	public int getCurrentLevel() {
 		if (hasNext()) {
 			return peek().getLevel();
@@ -61,6 +65,7 @@ public abstract class AbstractXmlPullParser implements XmlPullParser {
 		return -1;
 	}
 
+	@Override
 	public int getLineNumber() {
 		if (hasNext()) {
 			return peek().getLineNumber();
@@ -86,6 +91,7 @@ public abstract class AbstractXmlPullParser implements XmlPullParser {
 		return sb.toString();
 	}
 
+	@Override
 	public XmlElement start(String... names) {
 		if (!hasNext()) {
 			throw new XmlException("at EOF but expected start element " + collapse(names));
@@ -109,6 +115,7 @@ public abstract class AbstractXmlPullParser implements XmlPullParser {
 		return next;
 	}
 
+	@Override
 	public XmlElement softStart(String... names) {
 		if (!hasNext()) {
 			throw new XmlException("at EOF but expected soft start element " + collapse(names));
@@ -130,10 +137,12 @@ public abstract class AbstractXmlPullParser implements XmlPullParser {
 		return next();
 	}
 
+	@Override
 	public int discardSubTree() {
 		return discardSubTree(peek());
 	}
 
+	@Override
 	public int discardSubTree(XmlElement element) {
 		if (element == peek()) {
 			// we're being asked to skip the entire subtree starting from the front of the queue
@@ -142,7 +151,7 @@ public abstract class AbstractXmlPullParser implements XmlPullParser {
 				int elementLevel = element.getLevel();
 				XmlElement next = next();
 				int count = 1;
-				while (!(next.isEnd() && next.getLevel() == elementLevel && next.getName().equals(
+				while ((!next.isEnd() || (next.getLevel() != elementLevel) || !next.getName().equals(
 					elementName))) {
 					next = next();
 					++count;
@@ -184,7 +193,7 @@ public abstract class AbstractXmlPullParser implements XmlPullParser {
 			// all over the place)
 			XmlElement next = next();
 			int count = 1;
-			while (!(next.isEnd() && next.getLevel() == elementLevel && next.getName().equals(
+			while ((!next.isEnd() || (next.getLevel() != elementLevel) || !next.getName().equals(
 				elementName))) {
 				next = next();
 				++count;
@@ -193,6 +202,7 @@ public abstract class AbstractXmlPullParser implements XmlPullParser {
 		}
 	}
 
+	@Override
 	public int discardSubTree(String elementName) {
 		XmlElement start = start(elementName);
 		return discardSubTree(start) + 1;

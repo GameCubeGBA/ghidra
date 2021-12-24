@@ -16,7 +16,9 @@
 package docking.widgets.table.threaded;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,8 +28,17 @@ import java.util.function.Predicate;
 import org.junit.Before;
 import org.junit.Test;
 
-import docking.widgets.filter.*;
-import docking.widgets.table.*;
+import docking.widgets.filter.FilterOptions;
+import docking.widgets.filter.TextFilter;
+import docking.widgets.filter.TextFilterFactory;
+import docking.widgets.filter.TextFilterStrategy;
+import docking.widgets.table.AbstractDynamicTableColumnStub;
+import docking.widgets.table.CombinedTableFilter;
+import docking.widgets.table.DefaultRowFilterTransformer;
+import docking.widgets.table.RowFilterTransformer;
+import docking.widgets.table.RowObjectFilterModel;
+import docking.widgets.table.TableColumnDescriptor;
+import docking.widgets.table.TableFilter;
 import ghidra.docking.settings.Settings;
 import ghidra.docking.spy.SpyEventRecorder;
 import ghidra.framework.plugintool.ServiceProvider;
@@ -489,8 +500,7 @@ public class DefaultThreadedTableFilterTest extends AbstractThreadedTableTest {
 
 		// the row objects are Long values that are 0-based one-up index values
 		RowFilterTransformer<Long> transformer = value -> {
-			List<String> result = Arrays.asList(Long.toString(value));
-			return result;
+			return Arrays.asList(Long.toString(value));
 		};
 
 		FilterOptions options =
@@ -625,7 +635,7 @@ public class DefaultThreadedTableFilterTest extends AbstractThreadedTableTest {
 // Inner Classes
 //==================================================================================================
 
-	private class RawRowValueTableColumn extends AbstractDynamicTableColumnStub<Long, Long> {
+	private static class RawRowValueTableColumn extends AbstractDynamicTableColumnStub<Long, Long> {
 
 		@Override
 		public String getColumnName() {
@@ -639,7 +649,7 @@ public class DefaultThreadedTableFilterTest extends AbstractThreadedTableTest {
 		}
 	}
 
-	private class EmptyCustomFilter implements TableFilter<Long> {
+	private static class EmptyCustomFilter implements TableFilter<Long> {
 
 		@Override
 		public boolean acceptsRow(Long rowObject) {
@@ -684,7 +694,7 @@ public class DefaultThreadedTableFilterTest extends AbstractThreadedTableTest {
 
 	}
 
-	private class EmptyTextFilter implements TextFilter {
+	private static class EmptyTextFilter implements TextFilter {
 
 		@Override
 		public boolean matches(String text) {
@@ -702,7 +712,7 @@ public class DefaultThreadedTableFilterTest extends AbstractThreadedTableTest {
 		}
 	}
 
-	private class AllPassesTableFilter implements TableFilter<Long> {
+	private static class AllPassesTableFilter implements TableFilter<Long> {
 
 		@Override
 		public boolean acceptsRow(Long rowObject) {
@@ -715,7 +725,7 @@ public class DefaultThreadedTableFilterTest extends AbstractThreadedTableTest {
 		}
 	}
 
-	private class PredicateTableFilter implements TableFilter<Long> {
+	private static class PredicateTableFilter implements TableFilter<Long> {
 
 		private Predicate<Long> predicate;
 

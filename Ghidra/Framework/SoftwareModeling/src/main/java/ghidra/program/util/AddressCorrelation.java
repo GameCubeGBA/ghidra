@@ -37,12 +37,12 @@ public interface AddressCorrelation {
 	 * @return the destination program address range, or null if the source program address maps 
 	 *         to one that is "deleted" in the destination program
 	 */
-	public AddressRange getCorrelatedDestinationRange(Address sourceAddress, TaskMonitor monitor)
+	AddressRange getCorrelatedDestinationRange(Address sourceAddress, TaskMonitor monitor)
 			throws CancelledException;
 
 	/**
 	 * Returns the name of the correlating algorithm.
 	 * @return the name of the correlating algorithm.
 	 */
-	public String getName();
+	String getName();
 }

@@ -15,14 +15,19 @@
  */
 package docking.options.editor;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyEditorSupport;
 
-import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import docking.DialogComponentProvider;
 import docking.DockingWindowManager;
@@ -197,15 +202,12 @@ public class ColorEditor extends PropertyEditorSupport {
 			}
 
 			add(colorChooser, BorderLayout.CENTER);
-			colorChooser.getSelectionModel().addChangeListener(new ChangeListener() {
-				@Override
-				public void stateChanged(ChangeEvent e) {
-					lastUserSelectedColor = colorChooser.getColor();
-					// This could be a ColorUIResource, but Options only support storing Color.
-					lastUserSelectedColor =
-						new Color(lastUserSelectedColor.getRed(), lastUserSelectedColor.getGreen(),
-							lastUserSelectedColor.getBlue(), lastUserSelectedColor.getAlpha());
-				}
+			colorChooser.getSelectionModel().addChangeListener(e -> {
+				lastUserSelectedColor = colorChooser.getColor();
+				// This could be a ColorUIResource, but Options only support storing Color.
+				lastUserSelectedColor =
+					new Color(lastUserSelectedColor.getRed(), lastUserSelectedColor.getGreen(),
+						lastUserSelectedColor.getBlue(), lastUserSelectedColor.getAlpha());
 			});
 			colorChooser.setColor(color);
 		}

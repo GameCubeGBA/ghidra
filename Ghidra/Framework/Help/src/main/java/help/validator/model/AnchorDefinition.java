@@ -15,10 +15,10 @@
  */
 package help.validator.model;
 
+import java.nio.file.Path;
+
 import ghidra.util.exception.AssertException;
 import help.HelpBuildUtils;
-
-import java.nio.file.Path;
 
 /**
  * A representation of a help location, which can be a file or a file with an anchor inside of

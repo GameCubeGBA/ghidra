@@ -43,6 +43,7 @@ public class DefaultIntPropertyMap extends DefaultPropertyMap implements IntProp
 	 * @param addr address for the property
 	 * @param value value of the property
 	 */
+	@Override
 	public void add(Address addr, int value) {
 		ips.putInt(addrMap.getKey(addr), value);
 	}
@@ -52,6 +53,7 @@ public class DefaultIntPropertyMap extends DefaultPropertyMap implements IntProp
 	 * @param addr the address from where to get the int value
 	 * @throws NoValueException if there is no property value at addr.
 	 */
+	@Override
 	public int getInt(Address addr) throws NoValueException {
 		return ips.getInt(addrMap.getKey(addr));
 	}
@@ -59,6 +61,7 @@ public class DefaultIntPropertyMap extends DefaultPropertyMap implements IntProp
 	/**
 	 * @see ghidra.program.model.util.PropertyMap#getObject(ghidra.program.model.address.Address)
 	 */
+	@Override
 	public Object getObject(Address addr) {
 		try {
 			return Integer.valueOf(getInt(addr));

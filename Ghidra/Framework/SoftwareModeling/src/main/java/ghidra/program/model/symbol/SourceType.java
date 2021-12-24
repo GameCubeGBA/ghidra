@@ -31,7 +31,7 @@ public enum SourceType {
 	private final String displayString;
 	private final int priority; // bigger numbers are higher priorty
 
-	private SourceType(String displayString, int priority) {
+	SourceType(String displayString, int priority) {
 		this.displayString = displayString;
 		this.priority = priority;
 	}

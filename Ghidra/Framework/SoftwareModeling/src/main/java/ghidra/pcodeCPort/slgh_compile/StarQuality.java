@@ -16,7 +16,7 @@
  */
 package ghidra.pcodeCPort.slgh_compile;
 
-import ghidra.pcodeCPort.semantics.*;
+import ghidra.pcodeCPort.semantics.ConstTpl;
 import ghidra.sleigh.grammar.Location;
 
 public class StarQuality {

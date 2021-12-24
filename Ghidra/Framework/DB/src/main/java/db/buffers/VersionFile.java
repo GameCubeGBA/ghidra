@@ -16,14 +16,16 @@
  */
 package db.buffers;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.NoSuchElementException;
+
 import ghidra.util.datastruct.IntArrayList;
 import ghidra.util.datastruct.IntIntHashtable;
 import ghidra.util.exception.AssertException;
 import ghidra.util.exception.NoValueException;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.*;
 
 /**
  * <code>VersionFile</code> records buffer changes and parameters necessary to reconstruct an
@@ -128,8 +130,7 @@ class VersionFile {
 		
 		// Copy original parameter values
 		String[] parmNames = originalBf.getParameterNames();
-		for (int i = 0; i < parmNames.length; i++) {
-			String name = parmNames[i];
+		for (String name : parmNames) {
 			versionFile.setParameter(name, originalBf.getParameter(name));
 		}
 		
@@ -383,7 +384,7 @@ class VersionFile {
 		int offset = FIRST_ENTRY_OFFSET;
 		
 		// Save freeIndexes entries
-		for (int i = 0; i < freeIndexes.length; i++) {
+		for (int element : freeIndexes) {
 
 			if (offset > maxOffset) {
 				nextIndex = vfIndexProvider.allocateIndex();
@@ -396,7 +397,7 @@ class VersionFile {
 			}
 			
 			// Save list entry as single integer
-			offset = buf.putInt(offset, freeIndexes[i]);
+			offset = buf.putInt(offset, element);
 		}
 		
 		// Mark end of list
@@ -582,10 +583,10 @@ class VersionFile {
 			throw new IOException("Version file is closed");
 		}
 		String[] allNames = versionFile.getParameterNames();
-		ArrayList<String> list = new ArrayList<String>();
-		for (int i = 0; i < allNames.length; i++) {
-			if (!allNames[i].startsWith(VERSION_PARM_PREFIX)) {
-				list.add(allNames[i]);	
+		ArrayList<String> list = new ArrayList<>();
+		for (String name : allNames) {
+			if (!name.startsWith(VERSION_PARM_PREFIX)) {
+				list.add(name);	
 			}	
 		}
 		String[] names = new String[list.size()];

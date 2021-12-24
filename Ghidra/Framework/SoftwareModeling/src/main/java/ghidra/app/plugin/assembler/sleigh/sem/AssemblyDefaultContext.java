@@ -21,7 +21,9 @@ import java.util.List;
 import ghidra.app.plugin.assembler.sleigh.util.DbgTimer;
 import ghidra.app.plugin.processors.sleigh.SleighLanguage;
 import ghidra.program.model.address.Address;
-import ghidra.program.model.lang.*;
+import ghidra.program.model.lang.DisassemblerContext;
+import ghidra.program.model.lang.Register;
+import ghidra.program.model.lang.RegisterValue;
 import ghidra.program.model.listing.ContextChangeException;
 import ghidra.program.model.listing.DefaultProgramContext;
 
@@ -164,10 +166,7 @@ public class AssemblyDefaultContext implements DisassemblerContext, DefaultProgr
 
 	@Override
 	public void setDefaultValue(RegisterValue registerValue, Address start, Address end) {
-		if (!registerValue.getRegister().isProcessorContext()) {
-			return;
-		}
-		if (at != null && (start.compareTo(at) > 0 || at.compareTo(end) > 0)) {
+		if (!registerValue.getRegister().isProcessorContext() || (at != null && (start.compareTo(at) > 0 || at.compareTo(end) > 0))) {
 			return;
 		}
 		defctx = defctx.combine(AssemblyPatternBlock.fromRegisterValue(registerValue));

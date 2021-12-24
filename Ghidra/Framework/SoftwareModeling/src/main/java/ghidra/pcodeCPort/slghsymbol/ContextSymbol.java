@@ -16,14 +16,14 @@
  */
 package ghidra.pcodeCPort.slghsymbol;
 
-import ghidra.pcodeCPort.sleighbase.*;
-import ghidra.pcodeCPort.slghpatexpress.*;
-import ghidra.pcodeCPort.utils.*;
-import ghidra.sleigh.grammar.Location;
-
 import java.io.PrintStream;
 
 import org.jdom.Element;
+
+import ghidra.pcodeCPort.sleighbase.SleighBase;
+import ghidra.pcodeCPort.slghpatexpress.ContextField;
+import ghidra.pcodeCPort.utils.XmlUtils;
+import ghidra.sleigh.grammar.Location;
 
 
 public class ContextSymbol extends ValueSymbol {

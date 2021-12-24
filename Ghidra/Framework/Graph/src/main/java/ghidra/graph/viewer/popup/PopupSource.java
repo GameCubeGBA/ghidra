@@ -35,21 +35,21 @@ public interface PopupSource<V, E> {
 	 * @param event the event
 	 * @return the info; null for no popup
 	 */
-	public ToolTipInfo<?> getToolTipInfo(MouseEvent event);
+	ToolTipInfo<?> getToolTipInfo(MouseEvent event);
 
 	/**
 	 * Returns a vertex for the given event
 	 * @param event the event
 	 * @return the vertex or null
 	 */
-	public V getVertex(MouseEvent event);
+	V getVertex(MouseEvent event);
 
 	/**
 	 * Returns an edge for the given event
 	 * @param event the event
 	 * @return the edge or null
 	 */
-	public E getEdge(MouseEvent event);
+	E getEdge(MouseEvent event);
 
 	/**
 	 * Adds the given mouse motion listener to the graph component.  This allows the popup 
@@ -57,16 +57,16 @@ public interface PopupSource<V, E> {
 	 * 
 	 * @param l the listener
 	 */
-	public void addMouseMotionListener(MouseMotionListener l);
+	void addMouseMotionListener(MouseMotionListener l);
 
 	/**
 	 * Signals that the graph needs to repaint
 	 */
-	public void repaint();
+	void repaint();
 
 	/**
 	 * Returns a suitable window parent for the popup window
 	 * @return the window parent
 	 */
-	public Window getPopupParent();
+	Window getPopupParent();
 }

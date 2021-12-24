@@ -18,13 +18,17 @@ package ghidra.framework.plugintool.dialog;
 import java.awt.Color;
 import java.awt.Point;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JScrollPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import docking.ActionContext;
 import docking.DialogComponentProvider;
-import docking.action.*;
+import docking.action.DockingAction;
+import docking.action.MenuData;
+import docking.action.ToolBarData;
 import docking.tool.ToolConstants;
 import docking.widgets.OptionDialog;
 import ghidra.app.util.GenericHelpTopics;

@@ -19,7 +19,9 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Vector;
 
-import javax.swing.*;
+import javax.swing.JComponent;
+import javax.swing.JList;
+import javax.swing.ListModel;
 import javax.swing.text.Position.Bias;
 
 import docking.widgets.AutoLookup;

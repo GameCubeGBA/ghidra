@@ -29,7 +29,7 @@ public interface VisitorResults {
 	 * From {@code visit()}: continue traversal as usual.
 	 * This value is never returned by {@code traverse()}.
 	 */
-	public static final int CONTINUE = 0;
+	int CONTINUE = 0;
 
 	/**
 	 * Finish(ed)
@@ -38,7 +38,7 @@ public interface VisitorResults {
 	 * From {@code traverse()}: traversal terminated successfully. Either a call to {@code visit()}
 	 * returned {@link #FINISHED}, or all calls to {@code visit()} returned {@link #CONTINUE}.
 	 */
-	public static final int FINISHED = 1;
+	int FINISHED = 1;
 
 	/**
 	 * Terminate(d)
@@ -47,5 +47,5 @@ public interface VisitorResults {
 	 * From {@code traverse()}: traversal terminated unsuccessful. Either a call to {@code visit()}
 	 * returned {@link #TERMINATE}, or there was an error during traversal.
 	 */
-	public static final int TERMINATE = 2;
+	int TERMINATE = 2;
 }

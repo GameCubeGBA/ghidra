@@ -20,7 +20,9 @@ import java.util.ArrayList;
 import ghidra.docking.settings.Settings;
 import ghidra.program.database.data.DataTypeUtilities;
 import ghidra.program.model.lang.PrototypeModel;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.Function;
+import ghidra.program.model.listing.FunctionSignature;
+import ghidra.program.model.listing.Parameter;
 import ghidra.program.model.mem.MemBuffer;
 import ghidra.program.model.symbol.SourceType;
 import ghidra.util.UniversalID;
@@ -96,7 +98,7 @@ public class FunctionDefinitionDataType extends GenericDataType implements Funct
 
 		Parameter[] parameters = function.getParameters();
 
-		ArrayList<ParameterDefinition> paramList = new ArrayList<ParameterDefinition>();
+		ArrayList<ParameterDefinition> paramList = new ArrayList<>();
 		for (Parameter parameter : parameters) {
 			if (formalSignature && parameter.isAutoParameter()) {
 				continue;
@@ -223,7 +225,7 @@ public class FunctionDefinitionDataType extends GenericDataType implements Funct
 
 	@Override
 	public String getPrototypeString(boolean includeCallingConvention) {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		buf.append((returnType != null ? returnType.getDisplayName() : "void"));
 		buf.append(" ");
 		if (includeCallingConvention &&

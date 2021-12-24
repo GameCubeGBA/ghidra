@@ -22,11 +22,11 @@
  */
 package ghidra.app.plugin.processors.generic;
 
-import ghidra.program.model.pcode.PcodeOp;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import ghidra.program.model.pcode.PcodeOp;
 
 /**
  * 
@@ -38,7 +38,7 @@ public class ConstructorPcodeTemplate implements Serializable {
 	private int flowFlags;
 	
 	public ConstructorPcodeTemplate() {
-		pcodeDirectives = new ArrayList<Object>();
+		pcodeDirectives = new ArrayList<>();
 	}
 
 	public void addPcodeOpTemplate(Object opT) throws SledException { 
@@ -93,9 +93,7 @@ public class ConstructorPcodeTemplate implements Serializable {
 //				}
 				if (!op.output().oneuse()) continue; // Only optimize oneuse temp. uniques
 				vt = op.input(1);
-				if (vt.space().type() != ConstantTemplate.HANDLE) continue;
-				if (vt.offset().type() != ConstantTemplate.HANDLE) continue;
-				if (vt.size().type() != ConstantTemplate.HANDLE) continue;
+				if ((vt.space().type() != ConstantTemplate.HANDLE) || (vt.offset().type() != ConstantTemplate.HANDLE) || (vt.size().type() != ConstantTemplate.HANDLE)) continue;
 				ref = vt.space().operand();
 				if (vt.offset().operand() != ref) continue;
 				if (vt.size().operand() != ref) continue;
@@ -103,8 +101,8 @@ public class ConstructorPcodeTemplate implements Serializable {
 				op.setOmit(ref);
 			}				
 			else if (op.opcode() == PcodeOp.STORE){
-				if (!op.input(2).oneuse()) continue; // Only optimize oneuse temp. uniques
-				if (op.input(2).loadomit()) continue; // Don't omit if storing an omitted load
+				 // Only optimize oneuse temp. uniques
+				if (!op.input(2).oneuse() || op.input(2).loadomit()) continue; // Don't omit if storing an omitted load
 				vt = op.input(1);
 				if (vt.space().type() != ConstantTemplate.HANDLE) continue;
 				if (vt.offset().type() != ConstantTemplate.HANDLE) continue;
@@ -173,7 +171,7 @@ public class ConstructorPcodeTemplate implements Serializable {
 	public Handle getPcode(ArrayList<PcodeOp> pcode, Position position, int off, ArrayList<PcodeOp> delayPcode) throws Exception {
 
 		int i;
-		HashMap<Object, Handle> handles = new HashMap<Object, Handle>();
+		HashMap<Object, Handle> handles = new HashMap<>();
 		
 		for (i = 0; i < pcodeDirectives.size(); i++) {
 			Object o = pcodeDirectives.get(i);

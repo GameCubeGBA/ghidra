@@ -17,7 +17,9 @@ package docking.action;
 
 import javax.swing.KeyStroke;
 
-import docking.*;
+import docking.DockingKeyBindingAction;
+import docking.KeyBindingPrecedence;
+import docking.Tool;
 
 class ReservedKeyBindingAction extends DockingKeyBindingAction {
 

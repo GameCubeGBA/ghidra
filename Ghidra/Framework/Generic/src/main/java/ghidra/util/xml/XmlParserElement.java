@@ -17,7 +17,9 @@
 package ghidra.util.xml;
 
 import java.math.BigInteger;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
 
 import org.xml.sax.Attributes;
 
@@ -25,13 +27,13 @@ import org.xml.sax.Attributes;
  * A class to represent the start or end tag from an XML file.
  */
 public class XmlParserElement {
-	private HashMap<String,Object> attrsMap = new HashMap<String,Object>();
+	private HashMap<String,Object> attrsMap = new HashMap<>();
 	private boolean isStart;
 	private String name;
-	private StringBuffer text;
+	private StringBuilder text;
 	private int lineNum;
 
-	XmlParserElement(String name, StringBuffer text, int lineNum) {
+	XmlParserElement(String name, StringBuilder text, int lineNum) {
 		isStart = false;
 		this.name = name.toUpperCase();
 		this.text = text;
@@ -50,10 +52,7 @@ public class XmlParserElement {
 	@Override
 	public boolean equals(Object obj) {
 		XmlParserElement that = (XmlParserElement)obj;
-		if (this.isStart != that.isStart) {
-			return false;
-		}
-		if (!this.name.equals(that.name)) {
+		if ((this.isStart != that.isStart) || !this.name.equals(that.name)) {
 			return false;
 		}
 		boolean textEquals = (this.text == null && that.text == null) ||
@@ -81,7 +80,7 @@ public class XmlParserElement {
 
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer(name);
+		StringBuilder buffer = new StringBuilder(name);
 		String [] attrNames = getAttrNames();
 		Arrays.sort(attrNames);
 		for (int i = 0; i < attrNames.length; i++) {
@@ -135,7 +134,7 @@ public class XmlParserElement {
 	public String getText() {
 		return text == null ? "" : text.toString();
 	}
-	StringBuffer getTextBuffer() {
+	StringBuilder getTextBuffer() {
 	    return text;
 	}
 	/**

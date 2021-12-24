@@ -20,9 +20,9 @@ import java.math.BigInteger;
 
 public interface IndexScrollListener {
 	
-	public void indexRangeChanged(BigInteger startIndex, BigInteger endIndex, int yStart, int yEnd);
+	void indexRangeChanged(BigInteger startIndex, BigInteger endIndex, int yStart, int yEnd);
 
-	public void indexModelChanged();
+	void indexModelChanged();
 
-	public void indexModelDataChanged(BigInteger start, BigInteger end);
+	void indexModelDataChanged(BigInteger start, BigInteger end);
 }

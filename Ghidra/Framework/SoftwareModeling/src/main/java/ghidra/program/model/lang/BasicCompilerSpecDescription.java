@@ -16,6 +16,8 @@
  */
 package ghidra.program.model.lang;
 
+import java.util.Objects;
+
 public class BasicCompilerSpecDescription implements CompilerSpecDescription {
 	private final CompilerSpecID id;
 	private final String name;
@@ -25,14 +27,17 @@ public class BasicCompilerSpecDescription implements CompilerSpecDescription {
 		this.name = name;
 	}
 
+	@Override
 	public CompilerSpecID getCompilerSpecID() {
 		return id;
 	}
 
+	@Override
 	public String getCompilerSpecName() {
 		return name;
 	}
 
+	@Override
 	public String getSource() {
 		return getCompilerSpecID() + " " + getCompilerSpecName();
 	}
@@ -44,19 +49,14 @@ public class BasicCompilerSpecDescription implements CompilerSpecDescription {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
+		return Objects.hash(id);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof CompilerSpecDescription))
+		if ((obj == null) || !(obj instanceof CompilerSpecDescription))
 			return false;
 		final CompilerSpecDescription other = (CompilerSpecDescription) obj;
 		if (id == null) {

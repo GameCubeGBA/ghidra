@@ -21,12 +21,25 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.Icon;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.border.BevelBorder;
 
-import docking.*;
+import docking.ActionContext;
+import docking.ComponentProvider;
+import docking.WindowPosition;
 import docking.action.DockingAction;
 import docking.action.MenuData;
 import docking.tool.ToolConstants;
@@ -35,21 +48,64 @@ import docking.widgets.OptionDialog;
 import docking.widgets.dialogs.InputDialog;
 import docking.widgets.filechooser.GhidraFileChooser;
 import docking.widgets.filechooser.GhidraFileChooserMode;
-import docking.widgets.label.*;
+import docking.widgets.label.GDLabel;
+import docking.widgets.label.GIconLabel;
+import docking.widgets.label.GLabel;
 import ghidra.app.plugin.PluginCategoryNames;
 import ghidra.framework.GenericRunInfo;
-import ghidra.framework.client.*;
+import ghidra.framework.client.ClientUtil;
+import ghidra.framework.client.NotConnectedException;
+import ghidra.framework.client.RemoteAdapterListener;
+import ghidra.framework.client.RepositoryAdapter;
 import ghidra.framework.main.datatable.ProjectDataTablePanel;
 import ghidra.framework.main.datatree.ClearCutAction;
 import ghidra.framework.main.datatree.ProjectDataTreePanel;
-import ghidra.framework.main.projectdata.actions.*;
-import ghidra.framework.model.*;
+import ghidra.framework.main.projectdata.actions.FindCheckoutsAction;
+import ghidra.framework.main.projectdata.actions.ProjectDataCollapseAction;
+import ghidra.framework.main.projectdata.actions.ProjectDataCopyAction;
+import ghidra.framework.main.projectdata.actions.ProjectDataCutAction;
+import ghidra.framework.main.projectdata.actions.ProjectDataDeleteAction;
+import ghidra.framework.main.projectdata.actions.ProjectDataExpandAction;
+import ghidra.framework.main.projectdata.actions.ProjectDataNewFolderAction;
+import ghidra.framework.main.projectdata.actions.ProjectDataOpenDefaultToolAction;
+import ghidra.framework.main.projectdata.actions.ProjectDataOpenToolAction;
+import ghidra.framework.main.projectdata.actions.ProjectDataPasteAction;
+import ghidra.framework.main.projectdata.actions.ProjectDataReadOnlyAction;
+import ghidra.framework.main.projectdata.actions.ProjectDataRefreshAction;
+import ghidra.framework.main.projectdata.actions.ProjectDataRenameAction;
+import ghidra.framework.main.projectdata.actions.ProjectDataSelectAction;
+import ghidra.framework.main.projectdata.actions.VersionControlAddAction;
+import ghidra.framework.main.projectdata.actions.VersionControlCheckInAction;
+import ghidra.framework.main.projectdata.actions.VersionControlCheckOutAction;
+import ghidra.framework.main.projectdata.actions.VersionControlShowHistoryAction;
+import ghidra.framework.main.projectdata.actions.VersionControlUndoCheckOutAction;
+import ghidra.framework.main.projectdata.actions.VersionControlUndoHijackAction;
+import ghidra.framework.main.projectdata.actions.VersionControlUpdateAction;
+import ghidra.framework.main.projectdata.actions.VersionControlViewCheckOutAction;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.Project;
+import ghidra.framework.model.ProjectListener;
+import ghidra.framework.model.ProjectLocator;
+import ghidra.framework.model.ProjectManager;
+import ghidra.framework.model.ToolChest;
+import ghidra.framework.model.ToolChestChangeListener;
+import ghidra.framework.model.ToolManager;
+import ghidra.framework.model.ToolServices;
+import ghidra.framework.model.ToolSet;
+import ghidra.framework.model.ToolTemplate;
+import ghidra.framework.model.Workspace;
 import ghidra.framework.options.SaveState;
-import ghidra.framework.plugintool.*;
+import ghidra.framework.plugintool.Plugin;
+import ghidra.framework.plugintool.PluginInfo;
+import ghidra.framework.plugintool.PluginTool;
 import ghidra.framework.plugintool.util.PluginStatus;
 import ghidra.framework.preferences.Preferences;
 import ghidra.framework.remote.User;
-import ghidra.util.*;
+import ghidra.util.HTMLUtilities;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
+import ghidra.util.NamingUtilities;
+import ghidra.util.SystemUtilities;
 import ghidra.util.filechooser.GhidraFileChooserModel;
 import ghidra.util.filechooser.GhidraFileFilter;
 import resources.ResourceManager;
@@ -474,7 +530,7 @@ public class FrontEndPlugin extends Plugin
 	 */
 	ProjectLocator chooseProject(GhidraFileChooser fileChooser, String mode,
 			String preferenceName) {
-		boolean create = (mode.equals("Create")) ? true : false;
+		boolean create = ("Create".equals(mode)) == true;
 		fileChooser.setTitle(mode + " a Ghidra Project");
 		fileChooser.setApproveButtonText(mode + " Project");
 		fileChooser.setApproveButtonToolTipText(mode + " a Ghidra Project");
@@ -583,12 +639,10 @@ public class FrontEndPlugin extends Plugin
 
 	ActionContext getActionContext(ComponentProvider provider, MouseEvent e) {
 		ActionContext actionContext = projectDataPanel.getActionContext(provider, e);
-		if (actionContext == null) {
-			if (e != null) {
-				Component source = (Component) e.getSource();
-				if (source instanceof ToolButton) {
-					return new ActionContext(provider, source);
-				}
+		if ((actionContext == null) && (e != null)) {
+			Component source = (Component) e.getSource();
+			if (source instanceof ToolButton) {
+				return new ActionContext(provider, source);
 			}
 		}
 
@@ -709,18 +763,16 @@ public class FrontEndPlugin extends Plugin
 
 	private void connect() {
 		RepositoryAdapter repository = activeProject.getRepository();
-		if (repository != null) {
-			if (!repository.isConnected()) {
-				try {
-					repository.connect();
-				}
-				catch (NotConnectedException e) {
-					// don't think this can happen
-				}
-				catch (IOException e) {
-					ClientUtil.handleException(repository, e, "Repository Connection",
-						getTool().getToolFrame());
-				}
+		if ((repository != null) && !repository.isConnected()) {
+			try {
+				repository.connect();
+			}
+			catch (NotConnectedException e) {
+				// don't think this can happen
+			}
+			catch (IOException e) {
+				ClientUtil.handleException(repository, e, "Repository Connection",
+					getTool().getToolFrame());
 			}
 		}
 	}

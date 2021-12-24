@@ -17,7 +17,12 @@ package ghidra.program.database.data;
 
 import java.io.IOException;
 
-import db.*;
+import db.DBConstants;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.RecordIterator;
+import db.Schema;
 import ghidra.program.model.data.GenericCallingConvention;
 import ghidra.util.UniversalID;
 import ghidra.util.exception.VersionException;

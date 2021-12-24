@@ -41,25 +41,30 @@ public class HashingOutputStream extends OutputStream {
 		this.messageDigest = MessageDigest.getInstance(hashAlgo);
 	}
 
+	@Override
 	public void write(int b) throws IOException {
 		messageDigest.update((byte) (b & 0xff));
 		out.write(b);
 	}
 
+	@Override
 	public void write(byte[] b) throws IOException {
 		messageDigest.update(b);
 		out.write(b, 0, b.length);
 	}
 
+	@Override
 	public void write(byte[] b, int off, int len) throws IOException {
 		messageDigest.update(b, off, len);
 		out.write(b, off, len);
 	}
 
+	@Override
 	public void flush() throws IOException {
 		out.flush();
 	}
 
+	@Override
 	public void close() throws IOException {
 		try (OutputStream ostream = out) {
 			ostream.flush();

@@ -17,9 +17,22 @@ package ghidra.program.model.block;
 
 import java.util.ArrayList;
 
-import ghidra.program.model.address.*;
-import ghidra.program.model.listing.*;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressObjectMap;
+import ghidra.program.model.address.AddressOverflowException;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.listing.Data;
+import ghidra.program.model.listing.Instruction;
+import ghidra.program.model.listing.Listing;
+import ghidra.program.model.listing.Program;
+import ghidra.program.model.symbol.FlowType;
+import ghidra.program.model.symbol.RefType;
+import ghidra.program.model.symbol.Reference;
+import ghidra.program.model.symbol.ReferenceManager;
+import ghidra.program.model.symbol.Symbol;
+import ghidra.program.model.symbol.SymbolIterator;
+import ghidra.program.model.symbol.SymbolTable;
 import ghidra.util.Msg;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
@@ -64,7 +77,7 @@ import ghidra.util.task.TaskMonitor;
 public class SimpleBlockModel implements CodeBlockModel {
 
 	public static final String NAME = "Simple Block";
-	protected final static CodeBlock[] emptyArray = new CodeBlock[0];
+	protected final static CodeBlock[] emptyArray = {};
 
 	protected Program program;
 	protected Listing listing;

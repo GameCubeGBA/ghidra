@@ -47,29 +47,31 @@ public abstract class ConstantPool {
 			StringBuilder buf = new StringBuilder();
 			buf.append("<cpoolrec");
 			SpecXmlUtils.encodeUnsignedIntegerAttribute(buf, "ref", ref);
-			if (tag == STRING_LITERAL) {
+			switch (tag) {
+			case STRING_LITERAL:
 				SpecXmlUtils.encodeStringAttribute(buf, "tag", "string");
-			}
-			else if (tag == CLASS_REFERENCE) {
+				break;
+			case CLASS_REFERENCE:
 				SpecXmlUtils.encodeStringAttribute(buf, "tag", "classref");
-			}
-			else if (tag == POINTER_METHOD) {
+				break;
+			case POINTER_METHOD:
 				SpecXmlUtils.encodeStringAttribute(buf, "tag", "method");
-			}
-			else if (tag == POINTER_FIELD) {
+				break;
+			case POINTER_FIELD:
 				SpecXmlUtils.encodeStringAttribute(buf, "tag", "field");
-			}
-			else if (tag == ARRAY_LENGTH) {
+				break;
+			case ARRAY_LENGTH:
 				SpecXmlUtils.encodeStringAttribute(buf, "tag", "arraylength");
-			}
-			else if (tag == INSTANCE_OF) {
+				break;
+			case INSTANCE_OF:
 				SpecXmlUtils.encodeStringAttribute(buf, "tag", "instanceof");
-			}
-			else if (tag == CHECK_CAST) {
+				break;
+			case CHECK_CAST:
 				SpecXmlUtils.encodeStringAttribute(buf, "tag", "checkcast");
-			}
-			else {
+				break;
+			default:
 				SpecXmlUtils.encodeStringAttribute(buf, "tag", "primitive");
+				break;
 			}
 			if (isConstructor) {
 				SpecXmlUtils.encodeBooleanAttribute(buf, "constructor", true);

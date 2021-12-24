@@ -15,7 +15,13 @@
  */
 package docking.widgets.textfield;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Insets;
+import java.awt.RenderingHints;
 
 import javax.swing.InputVerifier;
 import javax.swing.JTextField;
@@ -161,14 +167,8 @@ public class HintTextField extends JTextField {
 	 * @return true if valid, false otherwise
 	 */
 	public boolean isFieldValid() {
-		if (required && getText().isEmpty()) {
+		if ((required && getText().isEmpty()) || ((verifier != null) && !verifier.verify(this))) {
 			return false;
-		}
-
-		if (verifier != null) {
-			if (!verifier.verify(this)) {
-				return false;
-			}
 		}
 
 		return true;

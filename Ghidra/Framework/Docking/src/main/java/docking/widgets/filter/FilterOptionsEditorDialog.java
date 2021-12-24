@@ -16,12 +16,18 @@
 package docking.widgets.filter;
 
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JLayer;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
 
 import docking.DialogComponentProvider;
@@ -34,7 +40,9 @@ import docking.widgets.label.GIconLabel;
 import docking.widgets.label.GLabel;
 import docking.widgets.list.GListCellRenderer;
 import ghidra.util.HelpLocation;
-import ghidra.util.layout.*;
+import ghidra.util.layout.HorizontalLayout;
+import ghidra.util.layout.PairLayout;
+import ghidra.util.layout.VerticalLayout;
 
 /**
  * Dialog that allows the user to select options related to table filtering. It consists
@@ -168,34 +176,22 @@ public class FilterOptionsEditorDialog extends DialogComponentProvider {
 			buttonGroup.add(matchesExactlyButton);
 			buttonGroup.add(regularExpressionButton);
 
-			startsWithButton.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent ev) {
-					filterStrategy = TextFilterStrategy.STARTS_WITH;
-					updatedEnablementForNonRegularExpressionOptions(true);
-				}
+			startsWithButton.addActionListener(ev -> {
+				filterStrategy = TextFilterStrategy.STARTS_WITH;
+				updatedEnablementForNonRegularExpressionOptions(true);
 			});
 
-			containsButton.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent ev) {
-					filterStrategy = TextFilterStrategy.CONTAINS;
-					updatedEnablementForNonRegularExpressionOptions(true);
-				}
+			containsButton.addActionListener(ev -> {
+				filterStrategy = TextFilterStrategy.CONTAINS;
+				updatedEnablementForNonRegularExpressionOptions(true);
 			});
-			matchesExactlyButton.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent ev) {
-					filterStrategy = TextFilterStrategy.MATCHES_EXACTLY;
-					updatedEnablementForNonRegularExpressionOptions(true);
-				}
+			matchesExactlyButton.addActionListener(ev -> {
+				filterStrategy = TextFilterStrategy.MATCHES_EXACTLY;
+				updatedEnablementForNonRegularExpressionOptions(true);
 			});
-			regularExpressionButton.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent ev) {
-					filterStrategy = TextFilterStrategy.REGULAR_EXPRESSION;
-					updatedEnablementForNonRegularExpressionOptions(false);
-				}
+			regularExpressionButton.addActionListener(ev -> {
+				filterStrategy = TextFilterStrategy.REGULAR_EXPRESSION;
+				updatedEnablementForNonRegularExpressionOptions(false);
 			});
 
 			switch (initialFilterOptions.getTextFilterStrategy()) {

@@ -16,18 +16,25 @@
 package ghidra.pcodeCPort.slghsymbol;
 
 import java.io.PrintStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import org.jdom.Element;
 
 import generic.stl.IteratorSTL;
 import generic.stl.VectorSTL;
-import ghidra.pcodeCPort.context.*;
+import ghidra.pcodeCPort.context.ParserWalker;
+import ghidra.pcodeCPort.context.ParserWalkerChange;
+import ghidra.pcodeCPort.context.SleighError;
 import ghidra.pcodeCPort.semantics.ConstTpl.const_type;
 import ghidra.pcodeCPort.semantics.ConstructTpl;
 import ghidra.pcodeCPort.semantics.HandleTpl;
 import ghidra.pcodeCPort.sleighbase.SleighBase;
-import ghidra.pcodeCPort.slghpatexpress.*;
+import ghidra.pcodeCPort.slghpatexpress.OperandResolve;
+import ghidra.pcodeCPort.slghpatexpress.PatternEquation;
+import ghidra.pcodeCPort.slghpatexpress.PatternExpression;
+import ghidra.pcodeCPort.slghpatexpress.TokenPattern;
 import ghidra.pcodeCPort.utils.XmlUtils;
 import ghidra.sleigh.grammar.Location;
 
@@ -155,10 +162,7 @@ public class Constructor {
 			return;
 		}
 		HandleTpl handle = templ.getResult();
-		if (handle == null) {
-			return;
-		}
-		if (handle.getSpace().isConstSpace()) {
+		if ((handle == null) || handle.getSpace().isConstSpace()) {
 			return;	// Even if the value is dynamic, the pointed to value won't get used
 		}
 		if (handle.getPtrSpace().getType() != const_type.real) {
@@ -357,7 +361,7 @@ public class Constructor {
 
 	// Allow for user to force extra space at end of printing
 	public void removeTrailingSpace() {
-		if ((!printpiece.empty()) && (printpiece.back().equals(" "))) {
+		if ((!printpiece.empty()) && (" ".equals(printpiece.back()))) {
 			printpiece.pop_back();
 		}
 		// while((!printpiece.empty())&&(printpiece.back()==" "))
@@ -392,13 +396,12 @@ public class Constructor {
 				int index = piece.charAt(1) - 'A';
 				s.append("<opprint id=\"");
 				s.print(index);
-				s.append("\"/>\n");
 			}
 			else {
 				s.append("<print piece=\"");
 				XmlUtils.xml_escape(s, piece);
-				s.append("\"/>\n");
 			}
+			s.append("\"/>\n");
 		}
 		for (int i = 0; i < context.size(); ++i) {
 			context.get(i).saveXml(s);
@@ -427,26 +430,26 @@ public class Constructor {
 		Iterator<?> iter = list.iterator();
 		while (iter.hasNext()) {
 			Element child = (Element) iter.next();
-			if (child.getName().equals("oper")) {
+			if ("oper".equals(child.getName())) {
 				id = XmlUtils.decodeUnknownInt(child.getAttributeValue("id"));
 				OperandSymbol sym = (OperandSymbol) trans.findSymbol(id);
 				operands.push_back(sym);
 			}
-			else if (child.getName().equals("print")) {
+			else if ("print".equals(child.getName())) {
 				printpiece.push_back(child.getAttributeValue("piece"));
 			}
-			else if (child.getName().equals("opprint")) {
+			else if ("opprint".equals(child.getName())) {
 				int index = XmlUtils.decodeUnknownInt(child.getAttributeValue("id"));
 				char c = (char) ('A' + index);
 				String operstring = "\n" + c;
 				printpiece.push_back(operstring);
 			}
-			else if (child.getName().equals("context_op")) {
+			else if ("context_op".equals(child.getName())) {
 				ContextOp c_op = new ContextOp(location);
 				c_op.restoreXml(child, trans);
 				context.push_back(c_op);
 			}
-			else if (child.getName().equals("commit")) {
+			else if ("commit".equals(child.getName())) {
 				ContextCommit c_op = new ContextCommit();
 				c_op.restoreXml(child, trans);
 				context.push_back(c_op);
@@ -485,11 +488,7 @@ public class Constructor {
 			lastsize = newops.size();
 			for (int i = 0; i < patternorder.size(); ++i) {
 				sym = patternorder.get(i);
-				if (!sym.isMarked()) {
-					// "unmarked" means it is already in newops
-					continue;
-				}
-				if (sym.isOffsetIrrelevant()) {
+				if (!sym.isMarked() || sym.isOffsetIrrelevant()) {
 					// expression Operands come last
 					continue;
 				}

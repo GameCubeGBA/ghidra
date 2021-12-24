@@ -114,8 +114,7 @@ public class VersionControlCheckInAction extends VersionControlAction {
 
 		ArrayList<DomainFile> changedList = new ArrayList<>();
 		ArrayList<DomainFile> list = new ArrayList<>();
-		for (int i = 0; i < fileList.size(); i++) {
-			DomainFile df = fileList.get(i);
+		for (DomainFile df : fileList) {
 			if (df != null && df.canCheckin()) {
 				if (!canCloseDomainFile(df)) {
 					continue;

@@ -28,14 +28,17 @@ public class FullySelectedFieldBackgroundColorManager implements FieldBackground
 		this.selectionColor = selectionColor;
 	}
 
+	@Override
 	public Color getBackgroundColor() {
 		return selectionColor;
 	}
 
+	@Override
 	public List<Highlight> getSelectionHighlights(int row) {
 		return EmptyFieldBackgroundColorManager.EMPTY_HIGHLIGHT_LIST;
 	}
 
+	@Override
 	public Color getPaddingColor(int padIndex) {
 		return null;
 	}

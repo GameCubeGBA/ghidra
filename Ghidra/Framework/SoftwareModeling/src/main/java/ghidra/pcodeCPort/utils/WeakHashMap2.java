@@ -17,7 +17,13 @@ package ghidra.pcodeCPort.utils;
 
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;
-import java.util.*;
+import java.util.AbstractMap;
+import java.util.AbstractSet;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Set;
 
 /**
  * A hashtable-based <code>Map</code> implementation with <em>weak values</em>.
@@ -50,11 +56,7 @@ public class WeakHashMap2<K, V> extends AbstractMap<K, V> {
 				return true;
 			}
 
-			if (o == null) {
-				return false;
-			}
-
-			if (o.getClass() != getClass()) {
+			if ((o == null) || (o.getClass() != getClass())) {
 				return false;
 			}
 
@@ -329,7 +331,7 @@ public class WeakHashMap2<K, V> extends AbstractMap<K, V> {
 
 		@Override
 		public Iterator<Map.Entry<K, V>> iterator() {
-			return new Iterator<Map.Entry<K, V>>() {
+			return new Iterator<>() {
 				Iterator<Map.Entry<K, WeakValue<V>>> hashIterator = hashEntrySet.iterator();
 				Entry<K, V> next = null;
 

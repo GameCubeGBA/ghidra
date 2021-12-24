@@ -26,7 +26,7 @@ public interface DataFileHandle {
 	 * Returns true if this data file handle is open read-only.
 	 * @throws IOException if an I/O error occurs.  
 	 */
-	public boolean isReadOnly() throws IOException;
+	boolean isReadOnly() throws IOException;
 	
     /**
      * Reads <code>b.length</code> bytes from this file into the byte 
@@ -40,7 +40,7 @@ public interface DataFileHandle {
      *               all the bytes.
      * @exception  IOException   if an I/O error occurs.       
      */
-    public void read(byte[] b) throws IOException;
+    void read(byte[] b) throws IOException;
 
     /**
      * Reads exactly <code>len</code> bytes from this file into the byte 
@@ -56,7 +56,7 @@ public interface DataFileHandle {
      *               all the bytes.
      * @exception  IOException   if an I/O error occurs.
      */
-    public void read(byte[] b, int off, int len) throws IOException;
+    void read(byte[] b, int off, int len) throws IOException;
 
     /**
      * Attempts to skip over <code>n</code> bytes of input discarding the 
@@ -74,7 +74,7 @@ public interface DataFileHandle {
      * @return     the actual number of bytes skipped.
      * @exception  IOException  if an I/O error occurs.
      */
-    public int skipBytes(int n) throws IOException;
+    int skipBytes(int n) throws IOException;
 
     /**
      * Writes the specified byte to this file. The write starts at 
@@ -83,7 +83,7 @@ public interface DataFileHandle {
      * @param      b   the <code>byte</code> to be written.
      * @exception  IOException  if an I/O error occurs.
      */
-    public void write(int b) throws IOException;
+    void write(int b) throws IOException;
 
     /**
      * Writes <code>b.length</code> bytes from the specified byte array 
@@ -92,7 +92,7 @@ public interface DataFileHandle {
      * @param      b   the data.
      * @exception  IOException  if an I/O error occurs.
      */
-    public void write(byte[] b) throws IOException;
+    void write(byte[] b) throws IOException;
 
     /**
      * Writes <code>len</code> bytes from the specified byte array 
@@ -103,7 +103,7 @@ public interface DataFileHandle {
      * @param      len   the number of bytes to write.
      * @exception  IOException  if an I/O error occurs.
      */
-    public void write(byte[] b, int off, int len) throws IOException;
+    void write(byte[] b, int off, int len) throws IOException;
 
     /**
      * Sets the file-pointer offset, measured from the beginning of this 
@@ -119,7 +119,7 @@ public interface DataFileHandle {
      * @exception  IOException  if <code>pos</code> is less than 
      *                          <code>0</code> or if an I/O error occurs.
      */
-    public void seek(long pos) throws IOException;
+    void seek(long pos) throws IOException;
 
     /**
      * Returns the length of this file.
@@ -127,7 +127,7 @@ public interface DataFileHandle {
      * @return     the length of this file, measured in bytes.
      * @exception  IOException  if an I/O error occurs.
      */
-    public long length() throws IOException;
+    long length() throws IOException;
 
     /**
      * Sets the length of this file.
@@ -147,7 +147,7 @@ public interface DataFileHandle {
      * @param      newLength    The desired length of the file
      * @exception  IOException  If an I/O error occurs
      */
-    public void setLength(long newLength) throws IOException;
+    void setLength(long newLength) throws IOException;
 
     /**
      * Closes this random access file stream and releases any system 
@@ -157,6 +157,6 @@ public interface DataFileHandle {
      *
      * @exception  IOException  if an I/O error occurs.
      */
-    public void close() throws IOException;
+    void close() throws IOException;
 
 }

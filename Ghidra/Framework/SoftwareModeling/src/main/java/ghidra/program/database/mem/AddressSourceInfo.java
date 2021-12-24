@@ -21,7 +21,9 @@ import java.util.Optional;
 
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressRange;
-import ghidra.program.model.mem.*;
+import ghidra.program.model.mem.Memory;
+import ghidra.program.model.mem.MemoryBlock;
+import ghidra.program.model.mem.MemoryBlockSourceInfo;
 
 /**
  * Provides information about the source of a byte value at an address including the file it 

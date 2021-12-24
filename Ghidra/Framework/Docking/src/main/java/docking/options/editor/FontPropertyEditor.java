@@ -15,7 +15,13 @@
  */
 package docking.options.editor;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.GraphicsEnvironment;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyEditorSupport;
@@ -24,7 +30,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import docking.DialogComponentProvider;
 import docking.DockingWindowManager;
@@ -268,11 +278,7 @@ public class FontPropertyEditor extends PropertyEditorSupport {
 				return true;
 			}
 
-			if (obj == null) {
-				return false;
-			}
-
-			if (!getClass().equals(obj.getClass())) {
+			if ((obj == null) || !getClass().equals(obj.getClass())) {
 				return false;
 			}
 
@@ -284,8 +290,7 @@ public class FontPropertyEditor extends PropertyEditorSupport {
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
-			result = prime * result + ((fontName == null) ? 0 : fontName.toLowerCase().hashCode());
-			return result;
+			return prime * result + ((fontName == null) ? 0 : fontName.toLowerCase().hashCode());
 		}
 
 		@Override

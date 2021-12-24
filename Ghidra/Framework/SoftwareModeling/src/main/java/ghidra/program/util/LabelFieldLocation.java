@@ -22,7 +22,9 @@ import ghidra.app.util.SymbolPath;
 import ghidra.framework.options.SaveState;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.Namespace;
+import ghidra.program.model.symbol.Symbol;
+import ghidra.program.model.symbol.SymbolType;
 
 /**
  * The <CODE>LableFieldLocation</CODE> class contains specific location information
@@ -154,8 +156,7 @@ public class LabelFieldLocation extends CodeUnitLocation {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + symbolPath.hashCode();
-		return result;
+		return prime * result + symbolPath.hashCode();
 	}
 
 	@Override
@@ -163,10 +164,7 @@ public class LabelFieldLocation extends CodeUnitLocation {
 		if (this == obj) {
 			return true;
 		}
-		if (!super.equals(obj)) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if (!super.equals(obj) || (getClass() != obj.getClass())) {
 			return false;
 		}
 		LabelFieldLocation other = (LabelFieldLocation) obj;

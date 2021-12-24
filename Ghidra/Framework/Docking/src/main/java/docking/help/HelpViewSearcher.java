@@ -15,29 +15,56 @@
  */
 package docking.help;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Component;
+import java.awt.Rectangle;
+import java.awt.Window;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Enumeration;
 import java.util.List;
-import java.util.regex.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
-import javax.help.*;
 import javax.help.DefaultHelpModel.DefaultHighlight;
+import javax.help.HelpModel;
+import javax.help.JHelp;
+import javax.help.JHelpContentViewer;
+import javax.help.JHelpSearchNavigator;
+import javax.help.SearchHit;
+import javax.help.TextHelpModel;
 import javax.help.search.SearchEngine;
-import javax.swing.*;
+import javax.swing.AbstractAction;
+import javax.swing.JComponent;
+import javax.swing.JEditorPane;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
+import javax.swing.JViewport;
+import javax.swing.KeyStroke;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 
 import docking.DockingUtils;
 import docking.DockingWindowManager;
 import docking.actions.KeyBindingUtils;
-import docking.widgets.*;
+import docking.widgets.CursorPosition;
+import docking.widgets.FindDialog;
+import docking.widgets.FindDialogSearcher;
+import docking.widgets.SearchLocation;
 import generic.util.WindowUtilities;
 import ghidra.util.Msg;
 import ghidra.util.exception.AssertException;
-import ghidra.util.task.*;
+import ghidra.util.task.Task;
+import ghidra.util.task.TaskLauncher;
+import ghidra.util.task.TaskMonitor;
 
 /**
  * Enables the Find Dialog for searching through the current page of a help document.
@@ -276,7 +303,7 @@ class HelpViewSearcher {
 			}
 
 			int start = location.getStartIndexInclusive();
-			DefaultHighlight[] h = new DefaultHighlight[] {
+			DefaultHighlight[] h = {
 				new DefaultHighlight(start, location.getEndIndexInclusive()) };
 
 			// using setHighlights() instead of removeAll + add

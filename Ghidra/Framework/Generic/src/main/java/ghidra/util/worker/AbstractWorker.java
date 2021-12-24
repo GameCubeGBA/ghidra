@@ -20,7 +20,11 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import generic.concurrent.*;
+import generic.concurrent.ConcurrentQ;
+import generic.concurrent.ConcurrentQBuilder;
+import generic.concurrent.GThreadPool;
+import generic.concurrent.QCallback;
+import generic.concurrent.QProgressListener;
 import ghidra.util.Msg;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.ClosedException;
@@ -169,11 +173,7 @@ public abstract class AbstractWorker<T extends Job> {
 			return false;
 		}
 
-		if (t instanceof CancelledException) {
-			return true;
-		}
-
-		if (t instanceof ClosedException) {
+		if ((t instanceof CancelledException) || (t instanceof ClosedException)) {
 			return true;
 		}
 

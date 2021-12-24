@@ -62,6 +62,7 @@ public class StringArrayArray implements Array, Serializable {
 	/**
 	 * @see Array#copyDataTo(int, DataTable, int, int)
 	 */
+	@Override
 	public void copyDataTo(int index,
 							DataTable table,
 							int toIndex,
@@ -73,6 +74,7 @@ public class StringArrayArray implements Array, Serializable {
 	/**
 	 * @see Array#getLastNonEmptyIndex()
 	 */
+	@Override
 	public int getLastNonEmptyIndex() {
 		return byteStore.getLastNonEmptyIndex();
 	}
@@ -80,16 +82,17 @@ public class StringArrayArray implements Array, Serializable {
 	/**
 	 * @see Array#remove(int)
 	 */
+	@Override
 	public void remove(int index) {
 		byteStore.remove(index);
 	}
 
 	private byte[] stringArrayToBytes(String[] value) {
 		int len = 4;  // 4 bytes to store the number of strings in the array
-		for(int i=0;i<value.length;i++) {
+		for (String element : value) {
 			len += 2;  // 2 bytes to store the length of each string
-			if (value[i] != null) {
-				len += value[i].length();  // plus the bytes for the string.
+			if (element != null) {
+				len += element.length();  // plus the bytes for the string.
 			}
 		}
 		byte[] bytes = new byte[len];

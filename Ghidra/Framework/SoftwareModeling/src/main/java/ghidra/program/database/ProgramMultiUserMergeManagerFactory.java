@@ -16,9 +16,9 @@
  */
 package ghidra.program.database;
 
-import ghidra.framework.*;
-import ghidra.framework.data.*;
-import ghidra.framework.model.*;
+import ghidra.framework.PluggableServiceRegistry;
+import ghidra.framework.data.DomainObjectMergeManager;
+import ghidra.framework.model.DomainObject;
 
 public class ProgramMultiUserMergeManagerFactory {
 	static {

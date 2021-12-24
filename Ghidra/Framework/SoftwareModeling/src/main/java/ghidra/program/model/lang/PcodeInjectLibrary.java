@@ -16,15 +16,24 @@
 package ghidra.program.model.lang;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeMap;
 
 import org.jdom.JDOMException;
-import org.xml.sax.*;
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 import ghidra.app.plugin.processors.sleigh.SleighException;
 import ghidra.app.plugin.processors.sleigh.SleighLanguage;
-import ghidra.app.plugin.processors.sleigh.template.*;
+import ghidra.app.plugin.processors.sleigh.template.ConstTpl;
+import ghidra.app.plugin.processors.sleigh.template.ConstructTpl;
+import ghidra.app.plugin.processors.sleigh.template.OpTpl;
+import ghidra.app.plugin.processors.sleigh.template.VarnodeTpl;
 import ghidra.pcodeCPort.sleighbase.SleighBase;
 import ghidra.pcodeCPort.slgh_compile.PcodeParser;
 import ghidra.program.model.lang.InjectPayload.InjectParameter;
@@ -32,7 +41,9 @@ import ghidra.program.model.listing.Program;
 import ghidra.sleigh.grammar.Location;
 import ghidra.util.Msg;
 import ghidra.util.SystemUtilities;
-import ghidra.xml.*;
+import ghidra.xml.XmlParseException;
+import ghidra.xml.XmlPullParser;
+import ghidra.xml.XmlPullParserFactory;
 
 public class PcodeInjectLibrary {
 	protected SleighLanguage language;
@@ -132,17 +143,17 @@ public class PcodeInjectLibrary {
 		if (name == null) {
 			return null;
 		}
-		if (type == InjectPayload.CALLFIXUP_TYPE) {
+		switch (type) {
+		case InjectPayload.CALLFIXUP_TYPE:
 			return callFixupMap.get(name);
-		}
-		else if (type == InjectPayload.CALLOTHERFIXUP_TYPE) {
+		case InjectPayload.CALLOTHERFIXUP_TYPE:
 			return callOtherFixupMap.get(name);
-		}
-		else if (type == InjectPayload.CALLMECHANISM_TYPE) {
+		case InjectPayload.CALLMECHANISM_TYPE:
 			return callMechFixupMap.get(name);
-		}
-		else if (type == InjectPayload.EXECUTABLEPCODE_TYPE) {
+		case InjectPayload.EXECUTABLEPCODE_TYPE:
 			return exePcodeMap.get(name);
+		default:
+			break;
 		}
 		return null;
 	}
@@ -466,10 +477,8 @@ public class PcodeInjectLibrary {
 			}
 		}
 		for (InjectPayload injectPayload : exePcodeMap.values()) {
-			if (injectPayload instanceof InjectPayloadSegment) {
-				if (injectPayload.getSource().startsWith("cspec")) {
-					((InjectPayloadSleigh) injectPayload).saveXml(buffer);
-				}
+			if ((injectPayload instanceof InjectPayloadSegment) && injectPayload.getSource().startsWith("cspec")) {
+				((InjectPayloadSleigh) injectPayload).saveXml(buffer);
 			}
 		}
 	}
@@ -504,16 +513,7 @@ public class PcodeInjectLibrary {
 //		if (uniqueBase != op2.uniqueBase) {
 //			return false;
 //		}
-		if (!callFixupMap.equals(op2.callFixupMap)) {
-			return false;
-		}
-		if (!callMechFixupMap.equals(op2.callMechFixupMap)) {
-			return false;
-		}
-		if (!callOtherFixupMap.equals(op2.callOtherFixupMap)) {
-			return false;
-		}
-		if (!SystemUtilities.isArrayEqual(callOtherOverride, op2.callOtherOverride)) {
+		if (!callFixupMap.equals(op2.callFixupMap) || !callMechFixupMap.equals(op2.callMechFixupMap) || !callOtherFixupMap.equals(op2.callOtherFixupMap) || !SystemUtilities.isArrayEqual(callOtherOverride, op2.callOtherOverride)) {
 			return false;
 		}
 		if (!exePcodeMap.equals(op2.exePcodeMap)) {

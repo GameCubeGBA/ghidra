@@ -34,40 +34,40 @@ public interface FieldElement {
 	 * Returns the text contained by this field element.
 	 * @return the text contained by this field element.
 	 */
-	public String getText();
+	String getText();
 
 	/**
 	 * Returns the length of the text within this element.  This is a convenience method for
 	 * calling <code>getText().length()</code>.
 	 * @return the length of the text within this element.
 	 */
-	public int length();
+	int length();
 
 	/**
 	 * Returns the string width of this element.  The width is based upon the associated
 	 * FontMetrics object within this element.
 	 * @return the string width of this element.
 	 */
-	public int getStringWidth();
+	int getStringWidth();
 
 	/**
 	 * Returns the amount of height above the baseline of this element.
 	 * @return the amount of height above the baseline of this element.
 	 */
-	public int getHeightAbove();
+	int getHeightAbove();
 
 	/**
 	 * Returns the amount of height below the baseline of this element.
 	 * @return the amount of height below the baseline of this element.
 	 */
-	public int getHeightBelow();
+	int getHeightBelow();
 
 	/**
 	 * Returns the character at the given index.
 	 * @param index the index of the character in this field element.
 	 * @return the character at the given index.
 	 */
-	public char charAt(int index);
+	char charAt(int index);
 
 	/**
 	 * Returns the color for a given character within this element, since different colors may be
@@ -76,7 +76,7 @@ public interface FieldElement {
 	 * @param charIndex The character index
 	 * @return the color for a given character within this element.
 	 */
-	public Color getColor(int charIndex);
+	Color getColor(int charIndex);
 
 	/**
 	 * Returns a new FieldElement containing just the characters beginning at the given index.
@@ -84,7 +84,7 @@ public interface FieldElement {
 	 * @param start The starting index (inclusive) from which to substring this element.
 	 * @return a new FieldElement containing just the characters beginning at the given index.
 	 */
-	public FieldElement substring(int start);
+	FieldElement substring(int start);
 
 	/**
 	 * Returns a new FieldElement containing just the characters beginning at the given start
@@ -94,7 +94,7 @@ public interface FieldElement {
 	 * @param end The end index (exclusive) to which the substring will be performed.
 	 * @return a new FieldElement containing just the characters beginning at the given index.
 	 */
-	public FieldElement substring(int start, int end);
+	FieldElement substring(int start, int end);
 
 	/**
 	 * Returns a new FieldElement with all occurrences of the target characters replaced with the
@@ -104,7 +104,7 @@ public interface FieldElement {
 	 * @return a new FieldElement with all occurrences of the target characters replaced with the
 	 * given replacement character.
 	 */
-	public FieldElement replaceAll(char[] targets, char replacement);
+	FieldElement replaceAll(char[] targets, char replacement);
 
 	/**
 	 * As the name implies, this method returns the maximum number of characters from this field
@@ -114,7 +114,7 @@ public interface FieldElement {
 	 * @return the maximum number of characters from this field element that will fit within
 	 * the given width.
 	 */
-	public int getMaxCharactersForWidth(int width);
+	int getMaxCharactersForWidth(int width);
 
 	/**
 	 * Translates the given character index to a data location related to the data model, as
@@ -123,7 +123,7 @@ public interface FieldElement {
 	 * @param characterIndex The character index to translate.
 	 * @return The data location in the model coordinates.
 	 */
-	public RowColLocation getDataLocationForCharacterIndex(int characterIndex);
+	RowColLocation getDataLocationForCharacterIndex(int characterIndex);
 
 	/**
 	 * Returns the character index appropriate for the given data location
@@ -132,7 +132,7 @@ public interface FieldElement {
 	 * @return the character index appropriate for the given data location; -1 if this field does
 	 *         not contain the given location
 	 */
-	public int getCharacterIndexForDataLocation(int dataRow, int dataColumn);
+	int getCharacterIndexForDataLocation(int dataRow, int dataColumn);
 
 	/**
 	 * Paints the text contained in this field element at the given x,y screen coordinate using the
@@ -142,13 +142,13 @@ public interface FieldElement {
 	 * @param x the horizontal screen position to paint
 	 * @param y the vertical screen position to paint.
 	 */
-	public void paint(JComponent c, Graphics g, int x, int y);
+	void paint(JComponent c, Graphics g, int x, int y);
 
 	/**
 	 * Returns the inner-most FieldElement inside this field element at the given location
 	 * @param column the character offset.
 	 * @return  the inner-most FieldElement inside this field element at the given location
 	 */
-	public FieldElement getFieldElement(int column);
+	FieldElement getFieldElement(int column);
 
 }

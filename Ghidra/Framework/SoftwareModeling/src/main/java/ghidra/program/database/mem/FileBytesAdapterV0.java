@@ -17,9 +17,22 @@ package ghidra.program.database.mem;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import db.*;
+import db.BinaryCodedField;
+import db.BinaryField;
+import db.DBBuffer;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.LongField;
+import db.RecordIterator;
+import db.Schema;
+import db.StringField;
+import db.Table;
 import ghidra.util.exception.IOCancelledException;
 import ghidra.util.exception.VersionException;
 
@@ -107,12 +120,10 @@ class FileBytesAdapterV0 extends FileBytesAdapter {
 		while (iterator.hasNext()) {
 			DBRecord record = iterator.next();
 			FileBytes fileBytes = map.remove(record.getKey());
-			if (fileBytes != null) {
-				if (!fileBytes.refresh(record)) {
-					// FileBytes attributes changed
-					fileBytes.invalidate();
-					fileBytes = null;
-				}
+			if ((fileBytes != null) && !fileBytes.refresh(record)) {
+				// FileBytes attributes changed
+				fileBytes.invalidate();
+				fileBytes = null;
 			}
 			if (fileBytes == null) {
 				fileBytes = new FileBytes(this, record);

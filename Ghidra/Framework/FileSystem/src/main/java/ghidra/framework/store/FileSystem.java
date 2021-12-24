@@ -15,12 +15,17 @@
  */
 package ghidra.framework.store;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 
 import db.buffers.BufferFile;
 import db.buffers.ManagedBufferFile;
 import ghidra.util.InvalidNameException;
-import ghidra.util.exception.*;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.DuplicateFileException;
+import ghidra.util.exception.FileInUseException;
 import ghidra.util.task.TaskMonitor;
 
 /**
@@ -32,8 +37,8 @@ public interface FileSystem {
 	/**
 	 * Character used to separate folder and item names within a path string.
 	 */
-	public static final char SEPARATOR_CHAR = '/';
-	public static final String SEPARATOR = Character.toString(SEPARATOR_CHAR);
+	char SEPARATOR_CHAR = '/';
+	String SEPARATOR = Character.toString(SEPARATOR_CHAR);
 
 	/**
 	 * Get user name associated with this filesystem.  In the case of a remote filesystem
@@ -46,25 +51,25 @@ public interface FileSystem {
 	 * Returns true if the file-system requires check-outs when
 	 * modifying folder items.
 	 */
-	public boolean isVersioned();
+	boolean isVersioned();
 
 	/**
 	 * Returns true if file-system is on-line.
 	 */
-	public boolean isOnline();
+	boolean isOnline();
 
 	/**
 	 * Returns true if file-system is read-only.
 	 * @throws IOException
 	 */
-	public boolean isReadOnly() throws IOException;
+	boolean isReadOnly() throws IOException;
 
 	/**
 	 * Returns the number of folder items contained within this file-system.
 	 * @throws IOException
 	 * @throws UnsupportedOperationException if file-system does not support this operation
 	 */
-	public int getItemCount() throws IOException, UnsupportedOperationException;
+	int getItemCount() throws IOException, UnsupportedOperationException;
 
 	/**
 	 * Returns a list of the folder item names contained in the given folder.
@@ -72,7 +77,7 @@ public interface FileSystem {
 	 * @return a list of folder item names.
 	 * @throws IOException
 	 */
-	public String[] getItemNames(String folderPath) throws IOException;
+	String[] getItemNames(String folderPath) throws IOException;
 
 	/**
 	 * Returns the FolderItem in the given folder with the given name
@@ -81,7 +86,7 @@ public interface FileSystem {
 	 * @return the FolderItem with the given folderPath and name, or null if it doesn't exist.
 	 * @throws IOException if IO error occurs.
 	 */
-	public FolderItem getItem(String folderPath, String name) throws IOException;
+	FolderItem getItem(String folderPath, String name) throws IOException;
 
 	/**
 	 * Returns the FolderItem specified by its unique File-ID
@@ -90,14 +95,14 @@ public interface FileSystem {
 	 * @throws IOException if IO error occurs.
 	 * @throws UnsupportedOperationException if file-system does not support this operation
 	 */
-	public FolderItem getItem(String fileID) throws IOException, UnsupportedOperationException;
+	FolderItem getItem(String fileID) throws IOException, UnsupportedOperationException;
 
 	/**
 	 * Return a list of subfolders (by name) that are stored within the specified folder path.
 	 * @throws FileNotFoundException if folder path does not exist.
 	 * @throws IOException if IO error occurs.
 	 */
-	public String[] getFolderNames(String folderPath) throws IOException;
+	String[] getFolderNames(String folderPath) throws IOException;
 
 	/**
 	 * Creates a new subfolder within the specified parent folder.
@@ -108,7 +113,7 @@ public interface FileSystem {
 	 * all alphanumerics
 	 * @throws IOException thrown if an IO error occurs.
 	 */
-	public void createFolder(String parentPath, String folderName) throws InvalidNameException,
+	void createFolder(String parentPath, String folderName) throws InvalidNameException,
 			IOException;
 
 	/**
@@ -131,7 +136,7 @@ public interface FileSystem {
 	 * @throws IOException if an IO error occurs.
 	 * @throws CancelledException if cancelled by monitor
 	 */
-	public DatabaseItem createDatabase(String parentPath, String name, String fileID,
+	DatabaseItem createDatabase(String parentPath, String name, String fileID,
 			BufferFile bufferFile, String comment, String contentType, boolean resetDatabaseId,
 			TaskMonitor monitor, String user) throws InvalidNameException, IOException,
 			CancelledException;
@@ -155,7 +160,7 @@ public interface FileSystem {
 	 * all alphanumerics
 	 * @throws IOException if an IO error occurs.
 	 */
-	public ManagedBufferFile createDatabase(String parentPath, String name, String fileID,
+	ManagedBufferFile createDatabase(String parentPath, String name, String fileID,
 			String contentType, int bufferSize, String user, String projectPath)
 			throws InvalidNameException, IOException;
 
@@ -175,7 +180,7 @@ public interface FileSystem {
 	 * @throws IOException if an IO error occurs.
 	 * @throws CancelledException if cancelled by monitor
 	 */
-	public DataFileItem createDataFile(String parentPath, String name, InputStream istream,
+	DataFileItem createDataFile(String parentPath, String name, InputStream istream,
 			String comment, String contentType, TaskMonitor monitor) throws InvalidNameException,
 			IOException, CancelledException;
 
@@ -194,7 +199,7 @@ public interface FileSystem {
 	 * @throws IOException if an IO error occurs.
 	 * @throws CancelledException if cancelled by monitor
 	 */
-	public FolderItem createFile(String parentPath, String name, File packedFile,
+	FolderItem createFile(String parentPath, String name, File packedFile,
 			TaskMonitor monitor, String user) throws InvalidNameException, IOException,
 			CancelledException;
 
@@ -205,7 +210,7 @@ public interface FileSystem {
 	 * @throws FileNotFoundException if there is no folder with the given path name.
 	 * @throws IOException if error occurred during delete.
 	 */
-	public void deleteFolder(String folderPath) throws IOException;
+	void deleteFolder(String folderPath) throws IOException;
 
 	/**
 	 * Move the specified folder to the path specified by newFolderPath. 
@@ -220,7 +225,7 @@ public interface FileSystem {
 	 * @throws InvalidNameException if the new FolderPath contains an illegal file name.
 	 * @throws IllegalArgumentException if new Parent is invalid.
 	 */
-	public void moveFolder(String parentPath, String folderName, String newParentPath)
+	void moveFolder(String parentPath, String folderName, String newParentPath)
 			throws InvalidNameException, IOException;
 
 	/**
@@ -234,7 +239,7 @@ public interface FileSystem {
 	 * @throws IOException if an IO error occurs.
 	 * @throws InvalidNameException if the new FolderName contains an illegal file name.
 	 */
-	public void renameFolder(String parentPath, String folderName, String newFolderName)
+	void renameFolder(String parentPath, String folderName, String newFolderName)
 			throws InvalidNameException, IOException;
 
 	/**
@@ -248,20 +253,20 @@ public interface FileSystem {
 	 * @throws IOException if an IO error occurs.
 	 * @throws InvalidNameException if the newName is invalid
 	 */
-	public void moveItem(String folderPath, String name, String newFolderPath, String newName)
+	void moveItem(String folderPath, String name, String newFolderPath, String newName)
 			throws IOException, InvalidNameException;
 
 	/**
 	 * Adds the given listener to be notified of file system changes.
 	 * @param listener the listener to be added.
 	 */
-	public void addFileSystemListener(FileSystemListener listener);
+	void addFileSystemListener(FileSystemListener listener);
 
 	/**
 	 * Removes the listener from being notified of file system changes.
 	 * @param listener
 	 */
-	public void removeFileSystemListener(FileSystemListener listener);
+	void removeFileSystemListener(FileSystemListener listener);
 
 	/**
 	 * Returns true if the folder specified by the path exists.
@@ -269,7 +274,7 @@ public interface FileSystem {
 	 * @return true if the folder exists.
 	 * @throws IOException if an IO error occurs.
 	 */
-	public boolean folderExists(String folderPath) throws IOException;
+	boolean folderExists(String folderPath) throws IOException;
 
 	/**
 	 * Returns true if the file exists
@@ -277,16 +282,16 @@ public interface FileSystem {
 	 * @param name the name of the file to check for existence.
 	 * @throws IOException if an IO error occurs.
 	 */
-	public boolean fileExists(String folderPath, String name) throws IOException;
+	boolean fileExists(String folderPath, String name) throws IOException;
 
 	/**
 	 * Returns true if this file system is shared
 	 */
-	public boolean isShared();
+	boolean isShared();
 
 	/**
 	 * Cleanup and release resources
 	 */
-	public void dispose();
+	void dispose();
 
 }

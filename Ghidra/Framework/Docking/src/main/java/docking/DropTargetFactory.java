@@ -32,5 +32,5 @@ public interface DropTargetFactory {
      * @param component The component onto which a drop handler should be installed.
      * @return The new drop handler.
      */
-    public DropTargetHandler createDropTargetHandler( Component component );
+    DropTargetHandler createDropTargetHandler( Component component );
 }

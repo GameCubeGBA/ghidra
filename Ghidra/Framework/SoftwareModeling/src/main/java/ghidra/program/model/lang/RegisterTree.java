@@ -39,7 +39,7 @@ public class RegisterTree implements Comparable<RegisterTree> {
 		this.name = reg.getName();
 		this.register = reg;
 		List<Register> registerChildren = reg.getChildRegisters();
-		this.children = new ArrayList<RegisterTree>();
+		this.children = new ArrayList<>();
 		for (Register childReg : registerChildren) {
 			RegisterTree tree = new RegisterTree(childReg);
 			tree.parent = this;
@@ -54,7 +54,7 @@ public class RegisterTree implements Comparable<RegisterTree> {
 	 */
 	public RegisterTree(String name, Register[] regs) {
 		this.name = name;
-		children = new ArrayList<RegisterTree>();
+		children = new ArrayList<>();
 		for (Register reg : regs) {
 			if (reg.isBaseRegister()) {
 				RegisterTree tree = new RegisterTree(reg);
@@ -71,7 +71,7 @@ public class RegisterTree implements Comparable<RegisterTree> {
 	 */
 	public RegisterTree(String name, RegisterTree tree) {
 		this.name = name;
-		children = new ArrayList<RegisterTree>();
+		children = new ArrayList<>();
 		children.add(tree);
 	}
 
@@ -164,6 +164,7 @@ public class RegisterTree implements Comparable<RegisterTree> {
 	/**
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
+	@Override
 	public int compareTo(RegisterTree other) {
 		return name.compareTo(other.name);
 	}
@@ -174,10 +175,7 @@ public class RegisterTree implements Comparable<RegisterTree> {
 	 */
 	public void remove(Register reg) {
 		RegisterTree tree = getRegisterTree(reg);
-		if (tree == null) {
-			return;
-		}
-		if (tree.getParent() == null) {
+		if ((tree == null) || (tree.getParent() == null)) {
 			return;
 		}
 		tree.getParent().children.remove(tree);
@@ -188,7 +186,7 @@ public class RegisterTree implements Comparable<RegisterTree> {
 	 */
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer(name);
+		StringBuilder buffer = new StringBuilder(name);
 		buffer.append('[');
 		for (RegisterTree child : children) {
 			buffer.append(child.toString());

@@ -15,14 +15,32 @@
  */
 package ghidra.framework.store.local;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 import generic.timer.GhidraSwinglessTimer;
 import ghidra.framework.store.FolderNotEmptyException;
-import ghidra.util.*;
+import ghidra.util.InvalidNameException;
+import ghidra.util.Msg;
+import ghidra.util.NumericUtilities;
+import ghidra.util.PropertyFile;
+import ghidra.util.ReadOnlyException;
+import ghidra.util.StringUtilities;
 import ghidra.util.exception.DuplicateFileException;
 import ghidra.util.exception.NotFoundException;
 
@@ -1333,7 +1351,7 @@ public class IndexedLocalFileSystem extends LocalFileSystem {
 		}
 	}
 
-	class Folder {
+	static class Folder {
 		// root folder has null parent and null name
 		Folder parent;
 		String name;
@@ -1349,7 +1367,7 @@ public class IndexedLocalFileSystem extends LocalFileSystem {
 
 		@Override
 		public String toString() {
-			StringBuffer buf = new StringBuffer();
+			StringBuilder buf = new StringBuilder();
 			String path = getPathname();
 			Folder p = parent;
 			while (p != null) {

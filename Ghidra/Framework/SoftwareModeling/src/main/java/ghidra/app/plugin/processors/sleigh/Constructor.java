@@ -19,9 +19,15 @@
  */
 package ghidra.app.plugin.processors.sleigh;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
-import ghidra.app.plugin.processors.sleigh.symbol.*;
+import ghidra.app.plugin.processors.sleigh.symbol.OperandSymbol;
+import ghidra.app.plugin.processors.sleigh.symbol.SubtableSymbol;
+import ghidra.app.plugin.processors.sleigh.symbol.Symbol;
+import ghidra.app.plugin.processors.sleigh.symbol.SymbolTable;
 import ghidra.app.plugin.processors.sleigh.template.ConstructTpl;
 import ghidra.app.plugin.processors.sleigh.template.HandleTpl;
 import ghidra.program.model.lang.UnknownInstructionException;
@@ -338,17 +344,17 @@ public class Constructor implements Comparable<Constructor> {
 		ArrayList<Object> piecelist = new ArrayList<>();
 		ArrayList<Object> coplist = new ArrayList<>();
 		XmlElement subel = parser.peek();
-		while (!subel.getName().equals("constructor")) {
-			if (subel.getName().equals("oper")) {
+		while (!"constructor".equals(subel.getName())) {
+			if ("oper".equals(subel.getName())) {
 				myId = SpecXmlUtils.decodeInt(subel.getAttribute("id"));
 				oplist.add(symtab.findSymbol(myId));
 				parser.discardSubTree();
 			}
-			else if (subel.getName().equals("print")) {
+			else if ("print".equals(subel.getName())) {
 				piecelist.add(subel.getAttribute("piece"));
 				parser.discardSubTree();
 			}
-			else if (subel.getName().equals("opprint")) {
+			else if ("opprint".equals(subel.getName())) {
 				myId = SpecXmlUtils.decodeInt(subel.getAttribute("id"));
 				String operstring = "\n";
 				char ind = (char) ('A' + myId);
@@ -356,12 +362,12 @@ public class Constructor implements Comparable<Constructor> {
 				piecelist.add(operstring);
 				parser.discardSubTree();
 			}
-			else if (subel.getName().equals("context_op")) {
+			else if ("context_op".equals(subel.getName())) {
 				ContextOp c_op = new ContextOp();
 				c_op.restoreXml(parser, sleigh);
 				coplist.add(c_op);
 			}
-			else if (subel.getName().equals("commit")) {
+			else if ("commit".equals(subel.getName())) {
 				ContextCommit c_op = new ContextCommit();
 				c_op.restoreXml(parser, sleigh);
 				coplist.add(c_op);
@@ -444,10 +450,7 @@ public class Constructor implements Comparable<Constructor> {
 			return result;
 		}
 		result = this.parent.getId() - that.parent.getId();
-		if (result != 0) {
-			return result;
-		}
-		return 0;
+		return result;
 	}
 
 	@Override
@@ -461,10 +464,7 @@ public class Constructor implements Comparable<Constructor> {
 			return false;
 		}
 		Constructor that = (Constructor) obj;
-		if (this.id != that.id) {
-			return false;
-		}
-		if (this.parent.getId() != that.parent.getId()) {
+		if ((this.id != that.id) || (this.parent.getId() != that.parent.getId())) {
 			return false;
 		}
 		return true;

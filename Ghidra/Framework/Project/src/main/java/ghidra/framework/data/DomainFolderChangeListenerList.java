@@ -18,7 +18,10 @@ package ghidra.framework.data;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import ghidra.framework.model.*;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.DomainFolder;
+import ghidra.framework.model.DomainFolderChangeListener;
+import ghidra.framework.model.DomainObject;
 import ghidra.util.Swing;
 
 class DomainFolderChangeListenerList implements DomainFolderChangeListener {

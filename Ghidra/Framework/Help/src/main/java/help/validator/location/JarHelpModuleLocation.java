@@ -17,8 +17,14 @@ package help.validator.location;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.*;
-import java.nio.file.*;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystemNotFoundException;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -38,7 +44,7 @@ public class JarHelpModuleLocation extends HelpModuleLocation {
 	 */
 	private static final Pattern JAR_FILENAME_PATTERN = Pattern.compile(".*/(\\w*)\\.jar!/.*");
 
-	private static Map<String, String> env = new HashMap<String, String>();
+	private static Map<String, String> env = new HashMap<>();
 	static {
 		env.put("create", "false");
 	}
@@ -118,8 +124,7 @@ public class JarHelpModuleLocation extends HelpModuleLocation {
 		int moduleNameStart = fullPath.indexOf(moduleName);
 		int end = moduleNameStart + moduleName.length();
 		String moduleString = fullPath.substring(0, end);
-		Path modulePath = Paths.get(moduleString);
-		return modulePath;
+		return Paths.get(moduleString);
 	}
 
 	@Override

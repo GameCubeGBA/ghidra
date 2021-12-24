@@ -15,19 +15,19 @@
  */
 package ghidra.program.database.properties;
 
-import ghidra.program.database.map.AddressMap;
-import ghidra.program.model.address.Address;
-import ghidra.program.model.util.VoidPropertyMap;
-import ghidra.program.util.ChangeManager;
-import ghidra.util.exception.*;
-import ghidra.util.prop.PropertyVisitor;
-import ghidra.util.task.TaskMonitor;
-
 import java.io.IOException;
 
 import db.DBHandle;
 import db.DBRecord;
 import db.util.ErrorHandler;
+import ghidra.program.database.map.AddressMap;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.util.VoidPropertyMap;
+import ghidra.program.util.ChangeManager;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.VersionException;
+import ghidra.util.prop.PropertyVisitor;
+import ghidra.util.task.TaskMonitor;
 
 /**
  * Property manager that deals with properties that are of
@@ -61,6 +61,7 @@ public class VoidPropertyMapDB extends PropertyMapDB implements VoidPropertyMap 
 	/**
 	 * @see ghidra.program.model.util.VoidPropertyMap#add(ghidra.program.model.address.Address)
 	 */
+	@Override
 	public void add(Address addr) {
 		lock.acquire();
 		try {
@@ -86,6 +87,7 @@ public class VoidPropertyMapDB extends PropertyMapDB implements VoidPropertyMap 
 	/**
 	 * @see ghidra.program.model.util.PropertyMap#applyValue(ghidra.util.prop.PropertyVisitor, ghidra.program.model.address.Address)
 	 */
+	@Override
 	public void applyValue(PropertyVisitor visitor, Address addr) {
 		if (hasProperty(addr)) {
 			visitor.visit();
@@ -95,6 +97,7 @@ public class VoidPropertyMapDB extends PropertyMapDB implements VoidPropertyMap 
 	/**
 	 * @see ghidra.program.model.util.PropertyMap#getObject(ghidra.program.model.address.Address)
 	 */
+	@Override
 	public Object getObject(Address addr) {
 		if (hasProperty(addr)) {
 			return Boolean.TRUE;

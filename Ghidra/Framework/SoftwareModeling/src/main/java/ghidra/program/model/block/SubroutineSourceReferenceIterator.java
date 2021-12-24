@@ -16,13 +16,13 @@
  */
 package ghidra.program.model.block;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import ghidra.program.model.address.Address;
 import ghidra.program.model.symbol.FlowType;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
-
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * SubroutineSourceReferenceIterator is a unidirectional iterator over 
@@ -31,7 +31,7 @@ import java.util.List;
 public class SubroutineSourceReferenceIterator implements CodeBlockReferenceIterator {
     
     // queue of discovered source block references
-	private LinkedList<CodeBlockReference> blockRefQueue = new LinkedList<CodeBlockReference>();
+	private LinkedList<CodeBlockReference> blockRefQueue = new LinkedList<>();
 
 	private TaskMonitor monitor;
 	
@@ -51,7 +51,8 @@ public class SubroutineSourceReferenceIterator implements CodeBlockReferenceIter
     /**
      * @see ghidra.program.model.block.CodeBlockReferenceIterator#next()
      */
-    public CodeBlockReference next() throws CancelledException {
+    @Override
+	public CodeBlockReference next() throws CancelledException {
     	monitor.checkCanceled();
     	return (blockRefQueue.isEmpty() ? null : blockRefQueue.removeFirst());
     }
@@ -59,7 +60,8 @@ public class SubroutineSourceReferenceIterator implements CodeBlockReferenceIter
     /**
      * @see ghidra.program.model.block.CodeBlockReferenceIterator#hasNext()
      */
-    public boolean hasNext() throws CancelledException {
+    @Override
+	public boolean hasNext() throws CancelledException {
     	monitor.checkCanceled();
 		return !blockRefQueue.isEmpty();
     }

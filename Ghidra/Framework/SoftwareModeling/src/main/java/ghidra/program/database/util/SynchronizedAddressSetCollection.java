@@ -15,11 +15,14 @@
  */
 package ghidra.program.database.util;
 
-import ghidra.program.model.address.*;
-import ghidra.program.model.listing.ProgramChangeSet;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetCollection;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.listing.ProgramChangeSet;
 
 /**
  * Implementation of AddressSetCollection used by {@link ProgramChangeSet}.  It contains the
@@ -115,11 +118,9 @@ public class SynchronizedAddressSetCollection implements AddressSetCollection {
 			Address firstCommonAddress = null;
 			for (AddressSetView addressSet : addressSetList) {
 				Address possibleFirst = addressSet.findFirstAddressInCommon(set);
-				if (possibleFirst != null) {
-					if (firstCommonAddress == null ||
-						possibleFirst.compareTo(firstCommonAddress) < 0) {
-						firstCommonAddress = possibleFirst;
-					}
+				if ((possibleFirst != null) && (firstCommonAddress == null ||
+					possibleFirst.compareTo(firstCommonAddress) < 0)) {
+					firstCommonAddress = possibleFirst;
 				}
 			}
 			return firstCommonAddress;
@@ -144,10 +145,8 @@ public class SynchronizedAddressSetCollection implements AddressSetCollection {
 		synchronized (sync) {
 			for (AddressSetView addressSet : addressSetList) {
 				Address setMin = addressSet.getMinAddress();
-				if (setMin != null) {
-					if (min == null || setMin.compareTo(min) < 0) {
-						min = setMin;
-					}
+				if ((setMin != null) && (min == null || setMin.compareTo(min) < 0)) {
+					min = setMin;
 				}
 			}
 			return min;
@@ -160,10 +159,8 @@ public class SynchronizedAddressSetCollection implements AddressSetCollection {
 		synchronized (sync) {
 			for (AddressSetView addressSet : addressSetList) {
 				Address setMax = addressSet.getMaxAddress();
-				if (setMax != null) {
-					if (max == null || setMax.compareTo(max) > 0) {
-						max = setMax;
-					}
+				if ((setMax != null) && (max == null || setMax.compareTo(max) > 0)) {
+					max = setMax;
 				}
 			}
 			return max;

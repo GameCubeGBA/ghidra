@@ -16,18 +16,21 @@
  */
 package ghidra.util.datastruct;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
 public class SynchronizedListAccumulator<T> implements Accumulator<T> {
 
 	private List<T> list;
 
 	public SynchronizedListAccumulator() {
-		this.list = new ArrayList<T>();
+		this.list = new ArrayList<>();
 	}
 
 	public SynchronizedListAccumulator(List<T> list) {
-		this.list = new ArrayList<T>(list);
+		this.list = new ArrayList<>(list);
 	}
 
 	@Override
@@ -47,11 +50,11 @@ public class SynchronizedListAccumulator<T> implements Accumulator<T> {
 
 	@Override
 	public synchronized Collection<T> get() {
-		return new ArrayList<T>(list);
+		return new ArrayList<>(list);
 	}
 
 	public synchronized List<T> asList() {
-		return new ArrayList<T>(list);
+		return new ArrayList<>(list);
 	}
 
 	@Override

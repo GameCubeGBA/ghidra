@@ -16,9 +16,18 @@
 package ghidra.program.database;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Set;
 
-import db.*;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.LongField;
+import db.RecordIterator;
+import db.Schema;
+import db.Table;
 import ghidra.framework.data.DomainObjectDBChangeSet;
 import ghidra.program.database.map.NormalizedAddressSet;
 import ghidra.program.model.listing.DataTypeArchiveChangeSet;
@@ -53,8 +62,8 @@ class DataTypeArchiveDBChangeSet implements DataTypeArchiveChangeSet, DomainObje
 	private HashSet<Long> tmpAddedCategoryIds;
 	private HashSet<Long> tmpAddedSourceArchiveIds;
 
-	private LinkedList<MyChangeDiff> undoList = new LinkedList<MyChangeDiff>();
-	private LinkedList<MyChangeDiff> redoList = new LinkedList<MyChangeDiff>();
+	private LinkedList<MyChangeDiff> undoList = new LinkedList<>();
+	private LinkedList<MyChangeDiff> redoList = new LinkedList<>();
 
 	private boolean inTransaction;
 	private int numUndos = 4;
@@ -66,12 +75,12 @@ class DataTypeArchiveDBChangeSet implements DataTypeArchiveChangeSet, DomainObje
 	 */
 	public DataTypeArchiveDBChangeSet(int numUndos) {
 		this.numUndos = numUndos;
-		changedDataTypeIds = new HashSet<Long>();
-		changedCategoryIds = new HashSet<Long>();
-		changedSourceArchiveIds = new HashSet<Long>();
-		addedDataTypeIds = new HashSet<Long>();
-		addedCategoryIds = new HashSet<Long>();
-		addedSourceArchiveIds = new HashSet<Long>();
+		changedDataTypeIds = new HashSet<>();
+		changedCategoryIds = new HashSet<>();
+		changedSourceArchiveIds = new HashSet<>();
+		addedDataTypeIds = new HashSet<>();
+		addedCategoryIds = new HashSet<>();
+		addedSourceArchiveIds = new HashSet<>();
 	}
 
 	@Override
@@ -182,12 +191,12 @@ class DataTypeArchiveDBChangeSet implements DataTypeArchiveChangeSet, DomainObje
 		redoList.clear();
 		inTransaction = true;
 
-		tmpChangedDataTypeIds = new HashSet<Long>();
-		tmpChangedCategoryIds = new HashSet<Long>();
-		tmpChangedSourceArchiveIds = new HashSet<Long>();
-		tmpAddedDataTypeIds = new HashSet<Long>();
-		tmpAddedCategoryIds = new HashSet<Long>();
-		tmpAddedSourceArchiveIds = new HashSet<Long>();
+		tmpChangedDataTypeIds = new HashSet<>();
+		tmpChangedCategoryIds = new HashSet<>();
+		tmpChangedSourceArchiveIds = new HashSet<>();
+		tmpAddedDataTypeIds = new HashSet<>();
+		tmpAddedCategoryIds = new HashSet<>();
+		tmpAddedSourceArchiveIds = new HashSet<>();
 	}
 
 	@Override

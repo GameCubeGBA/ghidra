@@ -15,12 +15,16 @@
  */
 package docking;
 
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Frame;
+import java.awt.Window;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.Icon;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -510,10 +514,8 @@ public class ComponentPlaceholder {
 	 * @param action the action to be removed.
 	 */
 	void removeAction(DockingActionIf action) {
-		if (actions.remove(action)) {
-			if (comp != null) {
-				comp.actionRemoved(action);
-			}
+		if (actions.remove(action) && (comp != null)) {
+			comp.actionRemoved(action);
 		}
 	}
 

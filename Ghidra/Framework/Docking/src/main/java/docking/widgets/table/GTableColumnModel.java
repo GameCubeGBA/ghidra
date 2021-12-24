@@ -17,12 +17,23 @@ package docking.widgets.table;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.swing.DefaultListSelectionModel;
 import javax.swing.ListSelectionModel;
-import javax.swing.event.*;
-import javax.swing.table.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TableColumnModelEvent;
+import javax.swing.event.TableColumnModelListener;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
 
 import org.jdom.Element;
 
@@ -505,7 +516,7 @@ public class GTableColumnModel
 	 * A small class to provide a method to quickly see if a column is visible by calling contains
 	 * on a hash set
 	 */
-	private class VisibleColumns {
+	private static class VisibleColumns {
 		private Set<TableColumn> visibleSet = new HashSet<>();
 		private List<TableColumn> visibleList = new ArrayList<>();
 

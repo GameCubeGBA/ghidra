@@ -42,6 +42,7 @@ public class FieldRangeQuery implements Query {
 	/**
 	 * @see ghidra.program.database.util.Query#matches(db.DBRecord)
 	 */
+	@Override
 	public boolean matches(DBRecord record) {
 		return (record.compareFieldTo(column, min) > 0) && (record.compareFieldTo(column, max) < 0);
 	}

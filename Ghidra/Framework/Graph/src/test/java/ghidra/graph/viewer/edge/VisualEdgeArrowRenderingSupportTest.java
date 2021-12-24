@@ -54,7 +54,7 @@ public class VisualEdgeArrowRenderingSupportTest {
 // Private Class
 //==================================================================================================
 
-	class TestEdgeX extends AbstractVisualEdge<TestVertex> {
+	static class TestEdgeX extends AbstractVisualEdge<TestVertex> {
 
 		public TestEdgeX(TestVertex start, TestVertex end) {
 			super(start, end);

@@ -34,65 +34,65 @@ public interface MemoryBlock extends Serializable, Comparable<MemoryBlock> {
 	 * A special EXTERNAL block may be created by certain program loaders (e.g., Elf) to act as a
 	 * stand-in for unknown external symbol locations.
 	 */
-	public static final String EXTERNAL_BLOCK_NAME = "EXTERNAL";
+	String EXTERNAL_BLOCK_NAME = "EXTERNAL";
 
 	// Memory block permission bits
-	public static int VOLATILE = 0x8;
-	public static int READ = 0x4;
-	public static int WRITE = 0x2;
-	public static int EXECUTE = 0x1;
+	int VOLATILE = 0x8;
+	int READ = 0x4;
+	int WRITE = 0x2;
+	int EXECUTE = 0x1;
 
 	/**
 	 * Returns block permissions as a bit mask. Permission bits defined as READ, WRITE, EXECUTE and
 	 * VOLATILE
 	 */
-	public int getPermissions();
+	int getPermissions();
 
 	/**
 	 * Get memory data in the form of an InputStream. Null is returned for thos memory blocks which
 	 * have no data.
 	 */
-	public InputStream getData();
+	InputStream getData();
 
 	/**
 	 * Return whether addr is contained in this block.
 	 * 
 	 * @param addr address
 	 */
-	public boolean contains(Address addr);
+	boolean contains(Address addr);
 
 	/**
 	 * Return the starting address for this block.
 	 * 
 	 * @return block's start address
 	 */
-	public Address getStart();
+	Address getStart();
 
 	/**
 	 * Return the end address of this block.
 	 * 
 	 * @return end address of the block
 	 */
-	public Address getEnd();
+	Address getEnd();
 
 	/**
 	 * Get the number of bytes in this block.
 	 * 
 	 * @return number of bytes in the block
 	 */
-	public long getSize();
+	long getSize();
 
 	/**
 	 * Get the number of bytes in this block.
 	 * 
 	 * @return the number of bytes in this block as a BigInteger
 	 */
-	public BigInteger getSizeAsBigInteger();
+	BigInteger getSizeAsBigInteger();
 
 	/**
 	 * Get the name of this block
 	 */
-	public String getName();
+	String getName();
 
 	/**
 	 * Set the name for this block (See {@link NamingUtilities#isValidName(String)} for naming
@@ -102,56 +102,56 @@ public interface MemoryBlock extends Serializable, Comparable<MemoryBlock> {
 	 * @throws IllegalArgumentException if invalid name specified
 	 * @throws LockException renaming an Overlay block without exclusive access
 	 */
-	public void setName(String name)
+	void setName(String name)
 			throws IllegalArgumentException, LockException;
 
 	/**
 	 * Get the comment associated with this block.
 	 */
-	public String getComment();
+	String getComment();
 
 	/**
 	 * Set the comment associated with this block.
 	 * 
 	 * @param comment the comment to associate with this block.
 	 */
-	public void setComment(String comment);
+	void setComment(String comment);
 
 	/**
 	 * Returns the value of the read property associated with this block
 	 */
-	public boolean isRead();
+	boolean isRead();
 
 	/**
 	 * Sets the read property associated with this block.
 	 * 
 	 * @param r the value to set the read property to.
 	 */
-	public void setRead(boolean r);
+	void setRead(boolean r);
 
 	/**
 	 * Returns the value of the write property associated with this block
 	 */
-	public boolean isWrite();
+	boolean isWrite();
 
 	/**
 	 * Sets the write property associated with this block.
 	 * 
 	 * @param w the value to set the write property to.
 	 */
-	public void setWrite(boolean w);
+	void setWrite(boolean w);
 
 	/**
 	 * Returns the value of the execute property associated with this block
 	 */
-	public boolean isExecute();
+	boolean isExecute();
 
 	/**
 	 * Sets the execute property associated with this block.
 	 * 
 	 * @param e the value to set the execute property to.
 	 */
-	public void setExecute(boolean e);
+	void setExecute(boolean e);
 
 	/**
 	 * Sets the read, write, execute permissions on this block
@@ -160,34 +160,34 @@ public interface MemoryBlock extends Serializable, Comparable<MemoryBlock> {
 	 * @param write the write permission
 	 * @param execute the execute permission
 	 */
-	public void setPermissions(boolean read, boolean write, boolean execute);
+	void setPermissions(boolean read, boolean write, boolean execute);
 
 	/**
 	 * Returns the value of the volatile property associated with this block. This attribute is
 	 * generally associated with block of I/O regions of memory.
 	 */
-	public boolean isVolatile();
+	boolean isVolatile();
 
 	/**
 	 * Sets the volatile property associated with this block.
 	 * 
 	 * @param v the value to set the volatile property to.
 	 */
-	public void setVolatile(boolean v);
+	void setVolatile(boolean v);
 
 	/**
 	 * Get the name of the source of this memory block.
 	 * 
 	 * @return source name
 	 */
-	public String getSourceName();
+	String getSourceName();
 
 	/**
 	 * Sets the name of the source file that provided the data.
 	 * 
 	 * @param sourceName the name of the source file.
 	 */
-	public void setSourceName(String sourceName);
+	void setSourceName(String sourceName);
 
 	/**
 	 * Returns the byte at the given address in this block.
@@ -196,7 +196,7 @@ public interface MemoryBlock extends Serializable, Comparable<MemoryBlock> {
 	 * @throws MemoryAccessException if any of the requested bytes are uninitialized.
 	 * @throws IllegalArgumentException if the Address is not in this block.
 	 */
-	public byte getByte(Address addr) throws MemoryAccessException;
+	byte getByte(Address addr) throws MemoryAccessException;
 
 	/**
 	 * Tries to get b.length bytes from this block at the given address. May return fewer bytes if
@@ -208,7 +208,7 @@ public interface MemoryBlock extends Serializable, Comparable<MemoryBlock> {
 	 * @throws MemoryAccessException if any of the requested bytes are uninitialized.
 	 * @throws IllegalArgumentException if the Address is not in this block.
 	 */
-	public int getBytes(Address addr, byte[] b) throws MemoryAccessException;
+	int getBytes(Address addr, byte[] b) throws MemoryAccessException;
 
 	/**
 	 * Tries to get len bytes from this block at the given address and put them into the given byte
@@ -223,7 +223,7 @@ public interface MemoryBlock extends Serializable, Comparable<MemoryBlock> {
 	 * @throws MemoryAccessException if any of the requested bytes are uninitialized.
 	 * @throws IllegalArgumentException if the Address is not in this block.
 	 */
-	public int getBytes(Address addr, byte[] b, int off, int len) throws MemoryAccessException;
+	int getBytes(Address addr, byte[] b, int off, int len) throws MemoryAccessException;
 
 	/**
 	 * Puts the given byte at the given address in this block.
@@ -232,7 +232,7 @@ public interface MemoryBlock extends Serializable, Comparable<MemoryBlock> {
 	 * @throws MemoryAccessException if the block is uninitialized
 	 * @throws IllegalArgumentException if the Address is not in this block.
 	 */
-	public void putByte(Address addr, byte b) throws MemoryAccessException;
+	void putByte(Address addr, byte b) throws MemoryAccessException;
 
 	/**
 	 * Tries to put b.length bytes from the specified byte array to this block. All the bytes may
@@ -244,7 +244,7 @@ public interface MemoryBlock extends Serializable, Comparable<MemoryBlock> {
 	 * @throws MemoryAccessException if the block is uninitialized
 	 * @throws IllegalArgumentException if the Address is not in this block.
 	 */
-	public int putBytes(Address addr, byte[] b) throws MemoryAccessException;
+	int putBytes(Address addr, byte[] b) throws MemoryAccessException;
 
 	/**
 	 * Tries to put len bytes from the specified byte array to this block. All the bytes may not be
@@ -258,29 +258,29 @@ public interface MemoryBlock extends Serializable, Comparable<MemoryBlock> {
 	 * @throws MemoryAccessException if the block is uninitialized
 	 * @throws IllegalArgumentException if the Address is not in this block.
 	 */
-	public int putBytes(Address addr, byte[] b, int off, int len) throws MemoryAccessException;
+	int putBytes(Address addr, byte[] b, int off, int len) throws MemoryAccessException;
 
 	/**
 	 * Get the type for this block: DEFAULT, BIT_MAPPED, or BYTE_MAPPED
 	 */
-	public MemoryBlockType getType();
+	MemoryBlockType getType();
 
 	/**
 	 * Return whether this block has been initialized.
 	 */
-	public boolean isInitialized();
+	boolean isInitialized();
 
 	/**
 	 * Returns true if this is either a bit-mapped or byte-mapped block
 	 */
-	public boolean isMapped();
+	boolean isMapped();
 
 	/**
 	 * Returns true if this is an overlay block (i.e., contained within overlay space).
 	 * 
 	 * @return true if this is an overlay block
 	 */
-	public boolean isOverlay();
+	boolean isOverlay();
 
 	/**
 	 * Returns true if this memory block is a real loaded block (i.e. RAM) and not a special block
@@ -288,7 +288,7 @@ public interface MemoryBlock extends Serializable, Comparable<MemoryBlock> {
 	 * 
 	 * @return true if this is a loaded block and not a "special" block such as a file header.
 	 */
-	public boolean isLoaded();
+	boolean isLoaded();
 
 	/**
 	 * Returns a list of {@link MemoryBlockSourceInfo} objects for this block. A block may consist
@@ -298,7 +298,7 @@ public interface MemoryBlock extends Serializable, Comparable<MemoryBlock> {
 	 * 
 	 * @return a list of SourceInfo objects, one for each different source of bytes in this block.
 	 */
-	public List<MemoryBlockSourceInfo> getSourceInfos();
+	List<MemoryBlockSourceInfo> getSourceInfos();
 
 	/**
 	 * Determine if the specified address is contained within the reserved EXTERNAL block.
@@ -307,7 +307,7 @@ public interface MemoryBlock extends Serializable, Comparable<MemoryBlock> {
 	 * @param program
 	 * @return true if address is contained within the reserved EXTERNAL block, else false.
 	 */
-	public static boolean isExternalBlockAddress(Address address, Program program) {
+	static boolean isExternalBlockAddress(Address address, Program program) {
 		Memory memory = program.getMemory();
 		if (!address.isMemoryAddress()) {
 			return false;

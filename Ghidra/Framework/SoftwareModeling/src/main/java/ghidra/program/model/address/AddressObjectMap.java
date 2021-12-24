@@ -16,10 +16,10 @@
  */
 package ghidra.program.model.address;
 
+import java.io.Serializable;
+
 import ghidra.util.datastruct.NoSuchIndexException;
 import ghidra.util.prop.ObjectPropertySet;
-
-import java.io.Serializable;
 
 
 /**
@@ -53,7 +53,7 @@ public class AddressObjectMap {
     private AddressMapImpl addrMap = new AddressMapImpl();
     private ObjectPropertySet objMarkers = new ObjectPropertySet("AddressObjectMap");
     
-    private static final Object [] emptyArray = new Object[0];
+    private static final Object [] emptyArray = {};
 
     /**
      * Creates a new <CODE>AddressObjectMap</CODE> object.
@@ -68,8 +68,7 @@ public class AddressObjectMap {
      */
     public Object[] getObjects(Address addr) {
 
-        Object[] objarray = getObj(addrMap.getKey(addr));
-        return objarray;
+        return getObj(addrMap.getKey(addr));
     }
 
 	/**
@@ -362,10 +361,7 @@ public class AddressObjectMap {
     private void checkCoalese(long first, long second) {
         Mark fMark = getMark(first);
         Mark sMark = getMark(second);
-        if (fMark == null || sMark == null) {
-            return;
-        }
-        if (!fMark.containsSameObjects(sMark)) {
+        if (fMark == null || sMark == null || !fMark.containsSameObjects(sMark)) {
             return;
         }
 
@@ -397,7 +393,7 @@ class Mark implements Serializable {
     static final int END = 2;
     static final int SINGLE = 3;
 
-    private final static Object[] emptyArray = new Object[0];
+    private final static Object[] emptyArray = {};
 
     Object obj;
     int type;
@@ -435,8 +431,8 @@ class Mark implements Serializable {
         }
         if (obj instanceof Object[]) {
             Object[] objArray = (Object[])obj;
-            for(int i=0;i<objArray.length;i++) {
-                if (objArray[i].equals(testObj)) {
+            for (Object element : objArray) {
+                if (element.equals(testObj)) {
                     return true;
                 }
             }
@@ -448,7 +444,6 @@ class Mark implements Serializable {
             return true;
         }
         if ((obj == null) || (mark.obj == null)) {
-            return false;
         }
         else if (obj.equals(mark.obj)) {
             return true;
@@ -478,14 +473,9 @@ class Mark implements Serializable {
 
 
     boolean isEmpty() {
-        if (obj == null) {
-            return true;
-        }
-        if (obj instanceof Object[]) {
-            if (((Object[])obj).length == 0) {
-                return true;
-            }
-        }
+        if ((obj == null) || ((obj instanceof Object[]) && (((Object[])obj).length == 0))) {
+		    return true;
+		}
         return false;
     }
     void remove(Object removeObj) {

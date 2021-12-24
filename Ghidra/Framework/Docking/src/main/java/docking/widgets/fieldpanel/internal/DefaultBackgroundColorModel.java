@@ -32,12 +32,15 @@ public class DefaultBackgroundColorModel implements BackgroundColorModel {
 	public Color getBackgroundColor(int index) {
 		return backgroundColor;
 	}
+	@Override
 	public Color getBackgroundColor(BigInteger index) {
 		return backgroundColor;
 	}
+	@Override
 	public Color getDefaultBackgroundColor() {
 		return backgroundColor;
 	}
+	@Override
 	public void setDefaultBackgroundColor(Color color) {
 		this.backgroundColor = color;
 	}

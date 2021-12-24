@@ -29,7 +29,7 @@ public interface DataTypeWithCharset extends DataType {
 	 * @return the encoded value
 	 * @throws DataTypeEncodeException if the value cannot be encoded
 	 */
-	public default byte[] encodeCharacterValue(Object value, MemBuffer buf, Settings settings)
+	default byte[] encodeCharacterValue(Object value, MemBuffer buf, Settings settings)
 			throws DataTypeEncodeException {
 		char[] normalizedValue;
 		if (value instanceof Character) {
@@ -64,7 +64,7 @@ public interface DataTypeWithCharset extends DataType {
 	 * @return the encoded value
 	 * @throws DataTypeEncodeException if the value cannot be encoded
 	 */
-	public default byte[] encodeCharacterRepresentation(String repr, MemBuffer buf,
+	default byte[] encodeCharacterRepresentation(String repr, MemBuffer buf,
 			Settings settings) throws DataTypeEncodeException {
 		StringDataInstance sdi = new StringDataInstance(this, settings, buf, getLength());
 		try {
@@ -81,7 +81,7 @@ public interface DataTypeWithCharset extends DataType {
 	 * @param settings data instance settings
 	 * @return Charset for this datatype and settings
 	 */
-	public default String getCharsetName(Settings settings) {
+	default String getCharsetName(Settings settings) {
 		return StringDataInstance.DEFAULT_CHARSET_NAME;
 	}
 }

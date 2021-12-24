@@ -18,10 +18,19 @@ package ghidra.program.database.bookmark;
 import java.io.IOException;
 import java.util.HashSet;
 
-import db.*;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.LongField;
+import db.RecordIterator;
+import db.Schema;
+import db.StringField;
+import db.Table;
 import ghidra.program.database.map.AddressMap;
 import ghidra.program.database.util.EmptyRecordIterator;
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetView;
 import ghidra.util.exception.VersionException;
 
 public class BookmarkDBAdapterV3 extends BookmarkDBAdapter {
@@ -37,7 +46,7 @@ public class BookmarkDBAdapterV3 extends BookmarkDBAdapter {
 		new Field[] { LongField.INSTANCE, StringField.INSTANCE, StringField.INSTANCE },
 		new String[] { "Address", "Category", "Comment" });
 
-	static int[] INDEXED_COLUMNS = new int[] { V3_ADDRESS_COL, V3_CATEGORY_COL };
+	static int[] INDEXED_COLUMNS = { V3_ADDRESS_COL, V3_CATEGORY_COL };
 
 	private DBHandle dbHandle;
 	private Table[] tables;
@@ -54,8 +63,8 @@ public class BookmarkDBAdapterV3 extends BookmarkDBAdapter {
 			tables = new Table[0];
 		}
 		if (create) {
-			for (int i = 0; i < typeIDs.length; i++) {
-				int id = typeIDs[i];
+			for (int typeID : typeIDs) {
+				int id = typeID;
 				tables[id] =
 					handle.createTable(BOOKMARK_TABLE_NAME + id, V3_SCHEMA, INDEXED_COLUMNS);
 			}
@@ -71,8 +80,8 @@ public class BookmarkDBAdapterV3 extends BookmarkDBAdapter {
 				throw new VersionException(true);
 			}
 			else if (typeIDs.length != 0) {
-				for (int i = 0; i < typeIDs.length; i++) {
-					int id = typeIDs[i];
+				for (int typeID : typeIDs) {
+					int id = typeID;
 					tables[id] = handle.getTable(BOOKMARK_TABLE_NAME + id);
 				}
 				boolean noTables = (tables[typeIDs[0]] == null);
@@ -155,7 +164,7 @@ public class BookmarkDBAdapterV3 extends BookmarkDBAdapter {
 
 	@Override
 	String[] getCategories(int typeID) throws IOException {
-		HashSet<String> set = new HashSet<String>();
+		HashSet<String> set = new HashSet<>();
 		RecordIterator it = getIterator(typeID);
 // TODO: This is very inefficient but is just as fast as using the index iterator
 // Employing a separate category table would be faster

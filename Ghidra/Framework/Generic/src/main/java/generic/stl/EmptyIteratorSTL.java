@@ -19,6 +19,7 @@ package generic.stl;
 
 public class EmptyIteratorSTL<T> implements IteratorSTL<T> {
 
+	@Override
 	public IteratorSTL<T> copy() {
 		return this;
 	}
@@ -31,38 +32,47 @@ public class EmptyIteratorSTL<T> implements IteratorSTL<T> {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public T get() {
 		return null;
 	}
 
+	@Override
 	public IteratorSTL<T> increment() {
 		throw new IndexOutOfBoundsException();
 	}
 
+	@Override
 	public IteratorSTL<T> decrement() {
 		throw new IndexOutOfBoundsException();
 	}
 	
+	@Override
 	public void insert( T value ) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public boolean isBegin() {
 		return true;
 	}
 
+	@Override
 	public boolean isEnd() {
 		return true;
 	}
 
+	@Override
 	public void set( T value ) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public IteratorSTL<T> decrement( int n ) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public IteratorSTL<T> increment( int n ) {
 		throw new UnsupportedOperationException();
 	}
@@ -75,6 +85,7 @@ public class EmptyIteratorSTL<T> implements IteratorSTL<T> {
 		return true;
 	}
 	
+	@Override
 	public void assign( IteratorSTL<T> otherIterator ) {
 		throw new UnsupportedOperationException();
 	}

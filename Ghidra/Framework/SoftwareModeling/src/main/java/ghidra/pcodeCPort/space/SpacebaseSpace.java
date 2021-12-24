@@ -16,12 +16,12 @@
  */
 package ghidra.pcodeCPort.space;
 
-import ghidra.pcodeCPort.translate.*;
-import ghidra.pcodeCPort.utils.*;
-
 import java.io.PrintStream;
 
 import org.jdom.Element;
+
+import ghidra.pcodeCPort.translate.Translate;
+import ghidra.pcodeCPort.utils.XmlUtils;
 
 
 

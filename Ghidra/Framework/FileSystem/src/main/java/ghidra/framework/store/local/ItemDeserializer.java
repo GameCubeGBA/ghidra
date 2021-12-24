@@ -15,14 +15,20 @@
  */
 package ghidra.framework.store.local;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.OutputStream;
+import java.io.UTFDataFormatException;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
+
 import generic.jar.ResourceFile;
 import ghidra.util.MonitoredInputStream;
 import ghidra.util.exception.IOCancelledException;
 import ghidra.util.task.TaskMonitor;
-
-import java.io.*;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
 
 /**
  * <code>ItemDeserializer</code> facilitates the reading of a compressed data stream

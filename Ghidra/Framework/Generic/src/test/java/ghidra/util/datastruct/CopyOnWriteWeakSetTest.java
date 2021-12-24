@@ -30,7 +30,7 @@ import ghidra.util.exception.AssertException;
 
 public class CopyOnWriteWeakSetTest extends AbstractGenericTest {
 
-	private List<Listener> listeners = new ArrayList<Listener>();
+	private List<Listener> listeners = new ArrayList<>();
 
 	public CopyOnWriteWeakSetTest() {
 		super();
@@ -40,7 +40,7 @@ public class CopyOnWriteWeakSetTest extends AbstractGenericTest {
     public void testIterationWithModification_Add() throws InterruptedException {
 
 		final CountDownLatch finishedLatch = new CountDownLatch(1);
-		final CopyOnWriteWeakSet<Listener> set = new CopyOnWriteWeakSet<Listener>();
+		final CopyOnWriteWeakSet<Listener> set = new CopyOnWriteWeakSet<>();
 
 		LatchListener latchListener = new LatchListener();
 
@@ -59,20 +59,17 @@ public class CopyOnWriteWeakSetTest extends AbstractGenericTest {
 			set.add(listener);
 		}
 
-		final AtomicReference<Throwable> exception = new AtomicReference<Throwable>();
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					for (Listener listener : set) {
-						listener.doIt();
-					}
+		final AtomicReference<Throwable> exception = new AtomicReference<>();
+		new Thread(() -> {
+			try {
+				for (Listener listener : set) {
+					listener.doIt();
 				}
-				catch (Throwable t) {
-					exception.set(t);
-				}
-				finishedLatch.countDown();
 			}
+			catch (Throwable t) {
+				exception.set(t);
+			}
+			finishedLatch.countDown();
 		}).start();
 
 		latchListener.waitForStart();
@@ -92,7 +89,7 @@ public class CopyOnWriteWeakSetTest extends AbstractGenericTest {
     public void testIterationWithModification_Remove() throws InterruptedException {
 
 		final CountDownLatch finishedLatch = new CountDownLatch(1);
-		final CopyOnWriteWeakSet<Listener> set = new CopyOnWriteWeakSet<Listener>();
+		final CopyOnWriteWeakSet<Listener> set = new CopyOnWriteWeakSet<>();
 
 		Listener listener = null;
 		LatchListener latchListener = new LatchListener();
@@ -112,20 +109,17 @@ public class CopyOnWriteWeakSetTest extends AbstractGenericTest {
 			set.add(listener);
 		}
 
-		final AtomicReference<Throwable> exception = new AtomicReference<Throwable>();
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					for (Listener l : set) {
-						l.doIt();
-					}
+		final AtomicReference<Throwable> exception = new AtomicReference<>();
+		new Thread(() -> {
+			try {
+				for (Listener l : set) {
+					l.doIt();
 				}
-				catch (Throwable t) {
-					exception.set(t);
-				}
-				finishedLatch.countDown();
 			}
+			catch (Throwable t) {
+				exception.set(t);
+			}
+			finishedLatch.countDown();
 		}).start();
 
 		latchListener.waitForStart();
@@ -144,7 +138,7 @@ public class CopyOnWriteWeakSetTest extends AbstractGenericTest {
     public void testIterationWithModification_Clear() throws InterruptedException {
 
 		final CountDownLatch finishedLatch = new CountDownLatch(1);
-		final CopyOnWriteWeakSet<Listener> set = new CopyOnWriteWeakSet<Listener>();
+		final CopyOnWriteWeakSet<Listener> set = new CopyOnWriteWeakSet<>();
 
 		LatchListener latchListener = new LatchListener();
 
@@ -163,20 +157,17 @@ public class CopyOnWriteWeakSetTest extends AbstractGenericTest {
 			set.add(listener);
 		}
 
-		final AtomicReference<Throwable> exception = new AtomicReference<Throwable>();
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					for (Listener listener : set) {
-						listener.doIt();
-					}
+		final AtomicReference<Throwable> exception = new AtomicReference<>();
+		new Thread(() -> {
+			try {
+				for (Listener listener : set) {
+					listener.doIt();
 				}
-				catch (Throwable t) {
-					exception.set(t);
-				}
-				finishedLatch.countDown();
 			}
+			catch (Throwable t) {
+				exception.set(t);
+			}
+			finishedLatch.countDown();
 		}).start();
 
 		latchListener.waitForStart();
@@ -195,7 +186,7 @@ public class CopyOnWriteWeakSetTest extends AbstractGenericTest {
 // Inner Classes
 //==================================================================================================	
 
-	private class Listener {
+	private static class Listener {
 //		private int ID = instanceCount++;
 
 		void doIt() {

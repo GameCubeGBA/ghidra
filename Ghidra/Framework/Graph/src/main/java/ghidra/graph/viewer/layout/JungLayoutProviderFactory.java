@@ -19,7 +19,11 @@ import java.lang.reflect.Constructor;
 import java.util.HashSet;
 import java.util.Set;
 
-import edu.uci.ics.jung.algorithms.layout.*;
+import edu.uci.ics.jung.algorithms.layout.CircleLayout;
+import edu.uci.ics.jung.algorithms.layout.ISOMLayout;
+import edu.uci.ics.jung.algorithms.layout.KKLayout;
+import edu.uci.ics.jung.algorithms.layout.Layout;
+import edu.uci.ics.jung.algorithms.layout.SpringLayout;
 import edu.uci.ics.jung.graph.Graph;
 import ghidra.graph.VisualGraph;
 import ghidra.graph.graphs.JungDirectedVisualGraph;
@@ -42,18 +46,13 @@ public class JungLayoutProviderFactory {
 		Set<JungLayoutProvider<V, E, G>> createLayouts() {
 	//@formatter:on
 
-		Set<JungLayoutProvider<V, E, G>> providers = new HashSet<>();
-
-		//@formatter:off
-		providers.addAll(
-			CollectionUtils.asSet(
-				// create("DAG Layout", DAGLayout.class),
-				create("Circle Layout", CircleLayout.class),
-				create("Spring Layout", SpringLayout.class),
-				create("KK Layout", KKLayout.class),
-				create("ISOM Layout", ISOMLayout.class)		
-		));
-		//@formatter:on
+		Set<JungLayoutProvider<V, E, G>> providers = new HashSet<>(CollectionUtils.asSet(
+			// create("DAG Layout", DAGLayout.class),
+			create("Circle Layout", CircleLayout.class),
+			create("Spring Layout", SpringLayout.class),
+			create("KK Layout", KKLayout.class),
+			create("ISOM Layout", ISOMLayout.class)		
+));
 
 		return providers;
 	}
@@ -67,7 +66,7 @@ public class JungLayoutProviderFactory {
 		JungLayoutProvider<V, E, G> create(String name, Class<? extends Layout> layoutClass) {
 	//@formatter:on
 
-		JungLayoutProvider<V, E, G> provider = new JungLayoutProvider<V, E, G>() {
+		return new JungLayoutProvider<>() {
 
 			@Override
 			public String getLayoutName() {
@@ -95,6 +94,5 @@ public class JungLayoutProviderFactory {
 			}
 
 		};
-		return provider;
 	}
 }

@@ -15,11 +15,12 @@
  */
 package ghidra.util.filechooser;
 
-import java.util.*;
-import java.util.stream.Collectors;
-
 import java.io.File;
 import java.io.FileFilter;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * A convenience implementation of FileFilter that filters out
@@ -44,8 +45,7 @@ public class ExtensionFileFilter implements GhidraFileFilter {
 	 * @return new {@link ExtensionFileFilter} instance.
 	 */
 	public static ExtensionFileFilter forExtensions(String description, String... exts) {
-		ExtensionFileFilter eff = new ExtensionFileFilter(exts, description);
-		return eff;
+		return new ExtensionFileFilter(exts, description);
 	}
 
 	private List<String> extensions;
@@ -91,10 +91,7 @@ public class ExtensionFileFilter implements GhidraFileFilter {
 		if (f == null) {
 			return false;
 		}
-		if (model.isDirectory(f)) {
-			return true;
-		}
-		if (extensions.isEmpty()) {
+		if (model.isDirectory(f) || extensions.isEmpty()) {
 			return true;
 		}
 		String filename = f.getName().toLowerCase();

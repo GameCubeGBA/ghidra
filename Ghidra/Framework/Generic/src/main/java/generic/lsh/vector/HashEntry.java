@@ -18,6 +18,7 @@ package generic.lsh.vector;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Objects;
 
 import ghidra.util.xml.SpecXmlUtils;
 import ghidra.xml.XmlElement;
@@ -67,11 +68,7 @@ public class HashEntry {
 	 */
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + hash;
-		result = prime * result + tf;
-		return result;
+		return Objects.hash(hash, tf);
 	}
 
 	/**
@@ -85,10 +82,7 @@ public class HashEntry {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (!(obj instanceof HashEntry)) {
+		if ((obj == null) || !(obj instanceof HashEntry)) {
 			return false;
 		}
 		HashEntry other = (HashEntry) obj;
@@ -195,15 +189,11 @@ public class HashEntry {
 				hash <<= 4;
 				hash += ((tok - 'A') + 10);
 			}
-			else if (tok < 'a') {
+			else if ((tok < 'a') || (tok > 'f')) {
 				return start;
-			}
-			else if (tok <= 'f') {
+			} else {
 				hash <<= 4;
 				hash += ((tok - 'a') + 10);
-			}
-			else {
-				return start;
 			}
 			start += 1;
 		}

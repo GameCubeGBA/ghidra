@@ -35,7 +35,7 @@ public interface GTreeTransferHandler {
 	 * @return the DataFlavors for the types of data that this transferable supports, based upon
 	 * the given selection.
 	 */
-    public DataFlavor[] getSupportedDataFlavors(List<GTreeNode> transferNodes);
+    DataFlavor[] getSupportedDataFlavors(List<GTreeNode> transferNodes);
 
     /**
      * Gets the transfer data from the selection based upon the given flavor.
@@ -45,6 +45,6 @@ public interface GTreeTransferHandler {
      * @throws UnsupportedFlavorException if the given flavor is not one of the supported flavors
      * returned by {@link #getSupportedDataFlavors(List)}.
      */
-    public Object getTransferData(List<GTreeNode> transferNodes,
+    Object getTransferData(List<GTreeNode> transferNodes,
         DataFlavor flavor) throws UnsupportedFlavorException;
 }

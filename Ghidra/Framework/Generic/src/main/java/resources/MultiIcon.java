@@ -15,8 +15,11 @@
  */
 package resources;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Objects;
 
 import javax.swing.Icon;
@@ -62,9 +65,7 @@ public class MultiIcon implements Icon {
 	 */
 	public MultiIcon(Icon baseIcon, Icon... icons) {
 		this(baseIcon, false);
-		for (Icon icon : icons) {
-			iconList.add(icon);
-		}
+		Collections.addAll(iconList, icons);
 	}
 
 	/**
@@ -138,8 +139,7 @@ public class MultiIcon implements Icon {
 	@Override
 	public void paintIcon(Component c, Graphics g, int x, int y) {
 		init();
-		for (int i = 0; i < iconList.size(); i++) {
-			Icon icon = iconList.get(i);
+		for (Icon icon : iconList) {
 			icon.paintIcon(c, g, x, y);
 		}
 
@@ -164,7 +164,7 @@ public class MultiIcon implements Icon {
 	}
 
 	private String getIconNames() {
-		StringBuffer buffy = new StringBuffer();
+		StringBuilder buffy = new StringBuilder();
 		for (Icon icon : iconList) {
 			if (buffy.length() > 0) {
 				buffy.append(", ");

@@ -43,6 +43,7 @@ public class DefaultStringPropertyMap extends DefaultPropertyMap implements Stri
 	 * @exception TypeMismatchException thrown if the
 	 *   property does not have String values.
 	 */
+	@Override
 	public void add(Address addr, String value) {
 		propSet.putString(addrMap.getKey(addr), value);
 	}
@@ -51,6 +52,7 @@ public class DefaultStringPropertyMap extends DefaultPropertyMap implements Stri
 	 * Get the String value at the given address.
 	 * @param addr the address from where to get the String value
 	 */
+	@Override
 	public String getString(Address addr) {
 		return propSet.getString(addrMap.getKey(addr));
 	}
@@ -58,6 +60,7 @@ public class DefaultStringPropertyMap extends DefaultPropertyMap implements Stri
 	/**
 	 * @see ghidra.program.model.util.PropertyMap#getObject(ghidra.program.model.address.Address)
 	 */
+	@Override
 	public Object getObject(Address addr) {
 		return getString(addr);
 	}

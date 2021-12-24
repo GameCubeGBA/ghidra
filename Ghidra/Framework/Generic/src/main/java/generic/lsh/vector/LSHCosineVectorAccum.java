@@ -15,6 +15,7 @@
  */
 package generic.lsh.vector;
 
+import java.util.Objects;
 import java.util.TreeSet;
 
 /**
@@ -34,19 +35,14 @@ public class LSHCosineVectorAccum extends LSHCosineVector {
 
 		@Override
 		public int hashCode() {
-			final int prime = 31;
-			int result = 1;
-			result = prime * result + hash;
-			return result;
+			return Objects.hash(hash);
 		}
 
 		@Override
 		public boolean equals(Object obj) {
 			if (this == obj)
 				return true;
-			if (obj == null)
-				return false;
-			if (getClass() != obj.getClass())
+			if ((obj == null) || (getClass() != obj.getClass()))
 				return false;
 			Entry other = (Entry) obj;
 			if (hash != other.hash)
@@ -79,7 +75,7 @@ public class LSHCosineVectorAccum extends LSHCosineVector {
 
 	public LSHCosineVectorAccum() {
 		super();
-		treehash = new TreeSet<Entry>();
+		treehash = new TreeSet<>();
 	}
 
 	public void addHash(int h, double w) {

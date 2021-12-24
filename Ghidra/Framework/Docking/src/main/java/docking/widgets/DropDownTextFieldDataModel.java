@@ -34,7 +34,7 @@ public interface DropDownTextFieldDataModel<T> {
 	 * @param searchText The text used to find matches.
 	 * @return a list of items matching the given text.
 	 */
-	public List<T> getMatchingData(String searchText);
+	List<T> getMatchingData(String searchText);
 
 	/**
 	 * Returns the index in the given list of the first item that matches the given text.  For 
@@ -45,23 +45,23 @@ public interface DropDownTextFieldDataModel<T> {
 	 * @param text the text to match against the items in the list
 	 * @return the index in the given list of the first item that matches the given text.
 	 */
-	public int getIndexOfFirstMatchingEntry(List<T> data, String text);
+	int getIndexOfFirstMatchingEntry(List<T> data, String text);
 
 	/**
 	 * Returns the renderer to be used to paint the contents of the list returned by 
 	 * {@link #getMatchingData(String)}.
 	 */
-	public ListCellRenderer<T> getListRenderer();
+	ListCellRenderer<T> getListRenderer();
 
 	/**
 	 * Returns a description for this item that gives that will be displayed along side of the
 	 * {@link DropDownSelectionTextField}'s matching window. 
 	 */
-	public String getDescription(T value);
+	String getDescription(T value);
 
 	/**
 	 * Returns the text for the given item that will be entered into the 
 	 * {@link DropDownSelectionTextField} when the user makes a selection.
 	 */
-	public String getDisplayText(T value);
+	String getDisplayText(T value);
 }

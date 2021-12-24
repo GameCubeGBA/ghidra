@@ -16,12 +16,15 @@
  */
 package docking.widgets.conditiontestpanel;
 
-import ghidra.util.exception.CancelledException;
-import ghidra.util.task.TaskMonitor;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.swing.SwingUtilities;
+
+import ghidra.util.exception.CancelledException;
+import ghidra.util.task.TaskMonitor;
 
 public class ConditionTestModel {
 	private ArrayList<ConditionTester> tests;
@@ -37,8 +40,8 @@ public class ConditionTestModel {
 
 	public ConditionTestModel(ConditionTestPanel conditionTestPanel, List<ConditionTester> tests) {
 		this.conditionTestPanel = conditionTestPanel;
-		this.tests = new ArrayList<ConditionTester>(tests);
-		map = new HashMap<ConditionTester, ConditionTestState>();
+		this.tests = new ArrayList<>(tests);
+		map = new HashMap<>();
 
 		for (ConditionTester conditionTest : tests) {
 			ConditionTestState testState = new ConditionTestState(conditionTest);
@@ -131,25 +134,15 @@ public class ConditionTestModel {
 	}
 
 	private void notifyTestsCompleted() {
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				conditionTestPanel.testsCompleted();
-			}
-		});
+		SwingUtilities.invokeLater(() -> conditionTestPanel.testsCompleted());
 	}
 
 	private void updatePanel() {
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				conditionTestPanel.update();
-			}
-		});
+		SwingUtilities.invokeLater(() -> conditionTestPanel.update());
 	}
 
 	public List<ConditionTester> getTests() {
-		return new ArrayList<ConditionTester>(tests);
+		return new ArrayList<>(tests);
 	}
 
 	public ConditionStatus getStatus(ConditionTester test) {

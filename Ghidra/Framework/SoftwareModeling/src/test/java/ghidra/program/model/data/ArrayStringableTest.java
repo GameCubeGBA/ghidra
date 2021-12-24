@@ -15,7 +15,7 @@
  */
 package ghidra.program.model.data;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
@@ -52,9 +52,7 @@ public class ArrayStringableTest extends AbstractGTest {
 
 	private Array mkArray(DataTypeManager dtm, int count) {
 		CharDataType charDT = new CharDataType(dtm);
-		Array arrayDT = new ArrayDataType(charDT, count, charDT.getLength(), dtm);
-
-		return arrayDT;
+		return new ArrayDataType(charDT, count, charDT.getLength(), dtm);
 	}
 
 

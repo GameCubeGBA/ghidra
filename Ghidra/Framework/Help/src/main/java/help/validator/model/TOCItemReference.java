@@ -15,9 +15,9 @@
  */
 package help.validator.model;
 
-import help.validator.LinkDatabase;
-
 import java.nio.file.Path;
+
+import help.validator.LinkDatabase;
 
 /**
  * A representation of the {@literal <tocref>} tag, which is a way to reference a TOC item entry in 

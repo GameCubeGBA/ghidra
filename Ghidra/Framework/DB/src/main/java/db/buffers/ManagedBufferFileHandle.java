@@ -25,42 +25,42 @@ public interface ManagedBufferFileHandle extends BufferFileHandle {
 	/**
 	 * @see ManagedBufferFile#getSaveFile()
 	 */
-	public ManagedBufferFileHandle getSaveFile() throws IOException;
+	ManagedBufferFileHandle getSaveFile() throws IOException;
 
 	/**
 	 * @see ManagedBufferFile#saveCompleted(boolean)
 	 */
-	public void saveCompleted(boolean commit) throws IOException;
+	void saveCompleted(boolean commit) throws IOException;
 
 	/**
 	 * @see ManagedBufferFile#canSave()
 	 */
-	public boolean canSave() throws IOException;
+	boolean canSave() throws IOException;
 
 	/**
 	 * @see ManagedBufferFile#setVersionComment(java.lang.String)
 	 */
-	public void setVersionComment(String comment) throws IOException;
+	void setVersionComment(String comment) throws IOException;
 
 	/**
 	 * @see ManagedBufferFile#getNextChangeDataFile(boolean)
 	 */
-	public BufferFileHandle getNextChangeDataFile(boolean getFirst) throws IOException;
+	BufferFileHandle getNextChangeDataFile(boolean getFirst) throws IOException;
 
 	/**
 	 * @see ManagedBufferFile#getSaveChangeDataFile()
 	 */
-	public BufferFileHandle getSaveChangeDataFile() throws IOException;
+	BufferFileHandle getSaveChangeDataFile() throws IOException;
 
 	/**
 	 * @see ManagedBufferFile#getCheckinID()
 	 */
-	public long getCheckinID() throws IOException;
+	long getCheckinID() throws IOException;
 
 	/**
 	 * @see ManagedBufferFile#getForwardModMapData(int)
 	 */
-	public byte[] getForwardModMapData(int oldVersion) throws IOException;
+	byte[] getForwardModMapData(int oldVersion) throws IOException;
 
 	/**
 	 * Provides local access to an input block stream for a given change map.  
@@ -68,7 +68,7 @@ public interface ManagedBufferFileHandle extends BufferFileHandle {
 	 * {@link BufferFileAdapter#isRemote()} is <i>false</i>.
 	 * @see ManagedBufferFileAdapter#getInputBlockStream(byte[])
 	 */
-	public InputBlockStream getInputBlockStream(byte[] changeMapData) throws IOException;
+	InputBlockStream getInputBlockStream(byte[] changeMapData) throws IOException;
 
 	/**
 	 * Get an input block stream handle, for a given change map, which will facilitate 
@@ -77,7 +77,7 @@ public interface ManagedBufferFileHandle extends BufferFileHandle {
 	 * if the associated {@link BufferFileAdapter#isRemote()} is <i>true</i>. 
 	 * @see ManagedBufferFileAdapter#getInputBlockStream(byte[])
 	 */
-	public BlockStreamHandle<InputBlockStream> getInputBlockStreamHandle(byte[] changeMapData)
+	BlockStreamHandle<InputBlockStream> getInputBlockStreamHandle(byte[] changeMapData)
 			throws IOException;
 
 }

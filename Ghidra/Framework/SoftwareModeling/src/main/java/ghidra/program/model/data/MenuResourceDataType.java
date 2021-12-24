@@ -85,10 +85,8 @@ public class MenuResourceDataType extends DynamicDataType {
 				option = memBuffer.getShort(tempOffset);
 				tempOffset = addMenuItemTemplate(memBuffer, comps, tempOffset, option);
 				//last item in a menu
-				if (option == MF_END) {
-					if (lastMenuItem == true) {
-						lastItem = true;
-					}
+				if ((option == MF_END) && lastMenuItem) {
+					lastItem = true;
 				}
 				//last menu
 				if (option == LAST) {
@@ -100,9 +98,7 @@ public class MenuResourceDataType extends DynamicDataType {
 			Msg.error(this, "buffer error: " + e.getMessage(), e);
 		}
 
-		DataTypeComponent[] result = comps.toArray(new DataTypeComponent[comps.size()]);
-
-		return result;
+		return comps.toArray(new DataTypeComponent[comps.size()]);
 	}
 
 	//adds initial MENUITEM_TEMPLATE_HEADER structure
@@ -121,12 +117,8 @@ public class MenuResourceDataType extends DynamicDataType {
 			return -1;
 		}
 
-		//once verified as valid, lay down the initial structure
-		tempOffset =
-			addComp(menuItemTemplateHeaderStructure(), 4, "Menu Item Template Header Structure",
-				memBuffer.getAddress(), comps, tempOffset);
-
-		return tempOffset;
+		return addComp(menuItemTemplateHeaderStructure(), 4, "Menu Item Template Header Structure",
+			memBuffer.getAddress(), comps, tempOffset);
 	}
 
 	//This is always the first structure in the menu resource
@@ -172,9 +164,7 @@ public class MenuResourceDataType extends DynamicDataType {
 
 		}
 
-		tempOffset = addUnicodeString(memBuffer, comps, tempOffset, "Menu Item String");
-
-		return tempOffset;
+		return addUnicodeString(memBuffer, comps, tempOffset, "Menu Item String");
 	}
 
 	private int addComp(DataType dataType, int len, String fieldName, Address address,
@@ -196,10 +186,8 @@ public class MenuResourceDataType extends DynamicDataType {
 		memBuffer.getBytes(tempBytes, tempOffset);
 		int strLength = findUnicodeLength(tempBytes);
 		if (strLength >= 2) {
-			tempOffset =
-				addComp(UnicodeDataType.dataType, strLength, title,
-					memBuffer.getAddress().add(tempOffset), comps, tempOffset);
-			return tempOffset;
+			return addComp(UnicodeDataType.dataType, strLength, title,
+				memBuffer.getAddress().add(tempOffset), comps, tempOffset);
 		}
 
 		return -1;

@@ -16,13 +16,12 @@
  */
 package ghidra.program.database.code;
 
-import ghidra.program.database.map.AddressMap;
-import ghidra.program.model.listing.Data;
-import ghidra.program.model.listing.DataIterator;
-
 import java.io.IOException;
 
 import db.DBLongIterator;
+import ghidra.program.database.map.AddressMap;
+import ghidra.program.model.listing.Data;
+import ghidra.program.model.listing.DataIterator;
 
 /** 
  * Converts a DBLongIterator into a DataIterator
@@ -48,6 +47,7 @@ public class DataKeyIterator implements DataIterator {
 	/**
 	 * @see java.util.Iterator#remove()
 	 */
+	@Override
 	public void remove() {
 		throw new UnsupportedOperationException();
 	}
@@ -55,6 +55,7 @@ public class DataKeyIterator implements DataIterator {
 	/**
 	 * @see ghidra.program.model.listing.CodeUnitIterator#hasNext()
 	 */
+	@Override
 	public boolean hasNext() {
 		if (nextCu == null) {
 			findNext();
@@ -65,6 +66,7 @@ public class DataKeyIterator implements DataIterator {
 	/**
 	 * @see ghidra.program.model.listing.CodeUnitIterator#next()
 	 */
+	@Override
 	public Data next() {
 		if (hasNext()) {
 			Data ret = nextCu;

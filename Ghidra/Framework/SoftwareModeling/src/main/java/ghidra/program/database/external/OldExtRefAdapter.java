@@ -17,7 +17,16 @@ package ghidra.program.database.external;
 
 import java.io.IOException;
 
-import db.*;
+import db.BooleanField;
+import db.DBConstants;
+import db.DBHandle;
+import db.Field;
+import db.LongField;
+import db.RecordIterator;
+import db.Schema;
+import db.ShortField;
+import db.StringField;
+import db.Table;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;

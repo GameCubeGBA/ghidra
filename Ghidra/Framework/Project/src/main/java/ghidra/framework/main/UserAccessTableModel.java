@@ -18,7 +18,9 @@ package ghidra.framework.main;
 import java.util.ArrayList;
 import java.util.List;
 
-import docking.widgets.table.*;
+import docking.widgets.table.AbstractDynamicTableColumn;
+import docking.widgets.table.GDynamicColumnTableModel;
+import docking.widgets.table.TableColumnDescriptor;
 import ghidra.docking.settings.Settings;
 import ghidra.framework.plugintool.ServiceProvider;
 import ghidra.framework.remote.User;
@@ -189,7 +191,7 @@ class UserAccessTableModel extends GDynamicColumnTableModel<User, List<User>> {
 	/**
 	 * Table column for displaying the user name.
 	 */
-	class UserColumn extends AbstractDynamicTableColumn<User, String, List<User>> {
+	static class UserColumn extends AbstractDynamicTableColumn<User, String, List<User>> {
 
 		@Override
 		public String getColumnName() {
@@ -206,7 +208,7 @@ class UserAccessTableModel extends GDynamicColumnTableModel<User, List<User>> {
 	/**
 	 * Table column for displaying the users read only status.
 	 */
-	class ReadOnlyColumn extends AbstractDynamicTableColumn<User, Boolean, List<User>> {
+	static class ReadOnlyColumn extends AbstractDynamicTableColumn<User, Boolean, List<User>> {
 
 		@Override
 		public String getColumnName() {
@@ -223,7 +225,7 @@ class UserAccessTableModel extends GDynamicColumnTableModel<User, List<User>> {
 	/**
 	 * Table column for displaying the users read/write status.
 	 */
-	class ReadWriteColumn extends AbstractDynamicTableColumn<User, Boolean, List<User>> {
+	static class ReadWriteColumn extends AbstractDynamicTableColumn<User, Boolean, List<User>> {
 
 		@Override
 		public String getColumnName() {
@@ -240,7 +242,7 @@ class UserAccessTableModel extends GDynamicColumnTableModel<User, List<User>> {
 	/**
 	 * Table column for displaying if the user has admin status.
 	 */
-	class AdminColumn extends AbstractDynamicTableColumn<User, Boolean, List<User>> {
+	static class AdminColumn extends AbstractDynamicTableColumn<User, Boolean, List<User>> {
 
 		@Override
 		public String getColumnName() {

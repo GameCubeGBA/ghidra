@@ -19,7 +19,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-import db.*;
+import db.DBBuffer;
+import db.DBConstants;
+import db.DBHandle;
 import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
 

@@ -17,14 +17,26 @@
 
 package ghidra.framework.main;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -400,24 +412,21 @@ class EditPluginPathDialog extends DialogComponentProvider {
 					listModel.add(1, path);
 					newIndex = 1;
 				}
+			} else // if UP, place selectedIndex at previous.
+			if (whichAction == UP) {
+				listModel.add(selIndex - 1, path);
+				newIndex = selIndex - 1;
 			}
 			else {
-				// if UP, place selectedIndex at previous.
-				if (whichAction == UP) {
-					listModel.add(selIndex - 1, path);
-					newIndex = selIndex - 1;
+				if (selIndex == size - 1) {
+					// place this item first
+					listModel.add(0, path);
+					newIndex = 0;
 				}
 				else {
-					if (selIndex == size - 1) {
-						// place this item first
-						listModel.add(0, path);
-						newIndex = 0;
-					}
-					else {
-						// else place selected Index at next
-						listModel.add(selIndex + 1, path);
-						newIndex = selIndex + 1;
-					}
+					// else place selected Index at next
+					listModel.add(selIndex + 1, path);
+					newIndex = selIndex + 1;
 				}
 			}
 			if (newIndex >= 0) {

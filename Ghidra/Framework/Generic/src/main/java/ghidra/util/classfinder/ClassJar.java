@@ -15,11 +15,14 @@
  */
 package ghidra.util.classfinder;
 
-import static ghidra.util.StringUtilities.*;
+import static ghidra.util.StringUtilities.containsAnyIgnoreCase;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.regex.Matcher;
@@ -112,22 +115,16 @@ class ClassJar extends ClassLocation {
 		//
 		// Production Mode - old style (before Extensions) of user contributions
 		//
-		String forwardSlashedPathName = pathName.replaceAll("\\\\", "/");
-		if (isUserPluginJar(forwardSlashedPathName)) {
-			return false;
-		}
+		String forwardSlashedPathName = pathName.replace('\\', '/');
+		
 
 		// 
 		// Production Mode - allow users to enter code in the 'patch' directory
 		//		
-		if (isPatchJar(forwardSlashedPathName)) {
-			return false;
-		}
-
 		//
 		// Production Mode - In production, only module lib jar files are scanned
 		//
-		if (isModuleDependencyJar(forwardSlashedPathName)) {
+		if (isUserPluginJar(forwardSlashedPathName) || isPatchJar(forwardSlashedPathName) || isModuleDependencyJar(forwardSlashedPathName)) {
 			return false;
 		}
 
@@ -192,8 +189,7 @@ class ClassJar extends ClassLocation {
 			return "<no patch dir>"; // not in a distribution
 		}
 		String patchPath = patchDir.getAbsolutePath();
-		String forwardSlashed = patchPath.replaceAll("\\\\", "/");
-		return forwardSlashed;
+		return patchPath.replace('\\', '/');
 	}
 
 	private static Set<String> loadUserPluginPaths() {
@@ -201,7 +197,7 @@ class ClassJar extends ClassLocation {
 		String[] paths = Preferences.getPluginPaths();
 		for (String pathName : paths) {
 			// note: lower case because our client uses lower case for paths
-			String forwardSlashed = pathName.replaceAll("\\\\", "/").toLowerCase();
+			String forwardSlashed = pathName.replace('\\', '/').toLowerCase();
 			result.add(forwardSlashed);
 		}
 		return Collections.unmodifiableSet(result);

@@ -15,7 +15,13 @@
  */
 package ghidra.program.model.address;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 import ghidra.util.UniversalIdGenerator;
 
@@ -39,14 +45,14 @@ public class AddressMapImpl {
 
 	private final static int STACK_SPACE_ID = -1 >>> MAP_ID_SIZE;
 
-	private HashMap<String, AddressSpace> spaceMap = new HashMap<String, AddressSpace>();
+	private HashMap<String, AddressSpace> spaceMap = new HashMap<>();
 	private AddressSpace stackSpace; // special case - this is the only signed space map supports
 
 	private final AddressFactory addrFactory;
 	private Address[] baseAddrs; // order must not change since it relates to generated keys
 	private Address[] sortedBaseStartAddrs;
 	private Address[] sortedBaseEndAddrs;
-	private HashMap<Address, Integer> addrToIndexMap = new HashMap<Address, Integer>();
+	private HashMap<Address, Integer> addrToIndexMap = new HashMap<>();
 	private int lastBaseIndex;
 	private long mapIdBits;
 
@@ -94,23 +100,20 @@ public class AddressMapImpl {
 	 * Comparator used to identify if an addr occurs before or after the 
 	 * start of a key range.
 	 */
-	private Comparator<Object> addressInsertionKeyRangeComparator = new Comparator<Object>() {
-		@Override
-		public int compare(Object keyRangeObj, Object addrObj) {
-			KeyRange range = (KeyRange) keyRangeObj;
-			Address addr = (Address) addrObj;
+	private Comparator<Object> addressInsertionKeyRangeComparator = (keyRangeObj, addrObj) -> {
+		KeyRange range = (KeyRange) keyRangeObj;
+		Address addr = (Address) addrObj;
 
-			Address min = decodeAddress(range.minKey);
-			if (min.compareTo(addr) > 0) {
-				return 1;
-			}
-
-			Address max = decodeAddress(range.maxKey);
-			if (max.compareTo(addr) < 0) {
-				return -1;
-			}
-			return 0;
+		Address min = decodeAddress(range.minKey);
+		if (min.compareTo(addr) > 0) {
+			return 1;
 		}
+
+		Address max = decodeAddress(range.maxKey);
+		if (max.compareTo(addr) < 0) {
+			return -1;
+		}
+		return 0;
 	};
 
 	private int getBaseAddressIndex(Address addr) {
@@ -219,7 +222,7 @@ public class AddressMapImpl {
 			start.getOffset() > end.getOffset()) {
 			throw new IllegalArgumentException();
 		}
-		ArrayList<KeyRange> keyRangeList = new ArrayList<KeyRange>();
+		ArrayList<KeyRange> keyRangeList = new ArrayList<>();
 		addKeyRanges(keyRangeList, start, end);
 		return keyRangeList;
 	}
@@ -229,7 +232,7 @@ public class AddressMapImpl {
 	 */
 	public synchronized List<KeyRange> getKeyRanges(AddressSetView set) {
 
-		ArrayList<KeyRange> keyRangeList = new ArrayList<KeyRange>();
+		ArrayList<KeyRange> keyRangeList = new ArrayList<>();
 		if (set == null) {
 			for (int i = 0; i < sortedBaseStartAddrs.length; i++) {
 				keyRangeList.add(
@@ -285,7 +288,7 @@ public class AddressMapImpl {
 		}
 
 		HashMap<String, OverlayAddressSpace> remapSpaces =
-			new HashMap<String, OverlayAddressSpace>();
+			new HashMap<>();
 
 		Iterator<String> iter = spaceMap.keySet().iterator();
 		while (iter.hasNext()) {
@@ -352,10 +355,7 @@ public class AddressMapImpl {
 			if (obj == this) {
 				return true;
 			}
-			if (obj == null) {
-				return false;
-			}
-			if (!(obj instanceof ObsoleteOverlaySpace)) {
+			if ((obj == null) || !(obj instanceof ObsoleteOverlaySpace)) {
 				return false;
 			}
 			ObsoleteOverlaySpace s = (ObsoleteOverlaySpace) obj;

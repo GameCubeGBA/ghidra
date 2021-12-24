@@ -33,5 +33,5 @@ public interface ExceptionalFunction<I, R, E extends Exception> {
 	 * @return the result of the call
 	 * @throws E if the call throws an exception
 	 */
-	public R apply(I i) throws E;
+	R apply(I i) throws E;
 }

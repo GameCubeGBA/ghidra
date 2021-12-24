@@ -17,11 +17,23 @@ package ghidra.framework.options;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.io.*;
-import java.lang.reflect.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Reader;
+import java.lang.reflect.Array;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.nio.charset.StandardCharsets;
-import java.text.*;
-import java.util.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.KeyStroke;
 
@@ -29,7 +41,12 @@ import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.output.XMLOutputter;
 
-import com.google.gson.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import ghidra.util.Msg;
 import ghidra.util.NumericUtilities;
@@ -136,41 +153,41 @@ public class SaveState {
 			String name = elem.getAttributeValue(NAME);
 			String type = elem.getAttributeValue(TYPE);
 			String value = elem.getAttributeValue(VALUE);
-			if (tag.equals("XML")) {
+			if ("XML".equals(tag)) {
 				map.put(name, elem.getChildren().get(0));
 			}
-			else if (tag.equals("BYTES")) {
+			else if ("BYTES".equals(tag)) {
 				if (value != null) {
 					map.put(name, NumericUtilities.convertStringToBytes(value));
 				}
 			}
-			else if (tag.equals(STATE)) {
+			else if (STATE.equals(tag)) {
 				try {
 					if (type == null) {
 						// skip this element
 					}
-					else if (type.equals("byte")) {
+					else if ("byte".equals(type)) {
 						map.put(name, Byte.valueOf(value));
 					}
-					else if (type.equals("short")) {
+					else if ("short".equals(type)) {
 						map.put(name, Short.valueOf(value));
 					}
-					else if (type.equals("int")) {
+					else if ("int".equals(type)) {
 						map.put(name, Integer.valueOf(value));
 					}
-					else if (type.equals("long")) {
+					else if ("long".equals(type)) {
 						map.put(name, Long.valueOf(value));
 					}
-					else if (type.equals("float")) {
+					else if ("float".equals(type)) {
 						map.put(name, Float.valueOf(value));
 					}
-					else if (type.equals("double")) {
+					else if ("double".equals(type)) {
 						map.put(name, Double.valueOf(value));
 					}
-					else if (type.equals("boolean")) {
+					else if ("boolean".equals(type)) {
 						map.put(name, Boolean.valueOf(value));
 					}
-					else if (type.equals("string")) {
+					else if ("string".equals(type)) {
 						String encodedValue = elem.getAttributeValue("ENCODED_VALUE");
 						if (value == null && encodedValue != null) {
 							byte[] strBytes = NumericUtilities.convertStringToBytes(encodedValue);
@@ -178,19 +195,19 @@ public class SaveState {
 						}
 						map.put(name, value);
 					}
-					else if (type.equals("Color")) {
+					else if ("Color".equals(type)) {
 						map.put(name, new Color(Integer.valueOf(value)));
 					}
-					else if (type.equals("Date")) {
+					else if ("Date".equals(type)) {
 						map.put(name, DATE_FORMAT.parse(value));
 					}
-					else if (type.equals("File")) {
+					else if ("File".equals(type)) {
 						map.put(name, new File(value));
 					}
-					else if (type.equals("KeyStroke")) {
+					else if ("KeyStroke".equals(type)) {
 						map.put(name, KeyStroke.getKeyStroke(value));
 					}
-					else if (type.equals("Font")) {
+					else if ("Font".equals(type)) {
 						map.put(name, Font.decode(value));
 					}
 				}
@@ -198,7 +215,7 @@ public class SaveState {
 					Msg.warn(this, "Error processing primitive value in saveState", e);
 				}
 			}
-			else if (tag.equals("ARRAY")) {
+			else if ("ARRAY".equals(tag)) {
 				if (type == null) {
 					continue;
 				}
@@ -207,7 +224,7 @@ public class SaveState {
 					List<?> list = elem.getChildren(ARRAY_ELEMENT_NAME);
 					Iterator<?> it = list.iterator();
 					int i = 0;
-					if (type.equals("short")) {
+					if ("short".equals(type)) {
 						short[] vals = new short[list.size()];
 						while (it.hasNext()) {
 							Element e = (Element) it.next();
@@ -215,7 +232,7 @@ public class SaveState {
 						}
 						map.put(name, vals);
 					}
-					else if (type.equals("int")) {
+					else if ("int".equals(type)) {
 						int[] vals = new int[list.size()];
 						while (it.hasNext()) {
 							Element e = (Element) it.next();
@@ -223,7 +240,7 @@ public class SaveState {
 						}
 						map.put(name, vals);
 					}
-					else if (type.equals("long")) {
+					else if ("long".equals(type)) {
 						long[] vals = new long[list.size()];
 						while (it.hasNext()) {
 							Element e = (Element) it.next();
@@ -231,7 +248,7 @@ public class SaveState {
 						}
 						map.put(name, vals);
 					}
-					else if (type.equals("float")) {
+					else if ("float".equals(type)) {
 						float[] vals = new float[list.size()];
 						while (it.hasNext()) {
 							Element e = (Element) it.next();
@@ -239,7 +256,7 @@ public class SaveState {
 						}
 						map.put(name, vals);
 					}
-					else if (type.equals("double")) {
+					else if ("double".equals(type)) {
 						double[] vals = new double[list.size()];
 						while (it.hasNext()) {
 							Element e = (Element) it.next();
@@ -247,7 +264,7 @@ public class SaveState {
 						}
 						map.put(name, vals);
 					}
-					else if (type.equals("boolean")) {
+					else if ("boolean".equals(type)) {
 						boolean[] vals = new boolean[list.size()];
 						while (it.hasNext()) {
 							Element e = (Element) it.next();
@@ -256,7 +273,7 @@ public class SaveState {
 						}
 						map.put(name, vals);
 					}
-					else if (type.equals("string")) {
+					else if ("string".equals(type)) {
 						String[] vals = new String[list.size()];
 						while (it.hasNext()) {
 							Element e = (Element) it.next();
@@ -269,15 +286,12 @@ public class SaveState {
 					Msg.warn(this, "Error processing array value in saveState", exc);
 				}
 			}
-			else if (tag.equals("ENUM")) {
-				if (type == null) {
-					continue;
-				}
-				if (type.equals("stringenum")) {
+			else if ("ENUM".equals(tag)) {
+				if ((type == null) || "stringenum".equals(type)) {
 					// skip it, string enums are no longer supported
 					continue;
 				}
-				if (type.equals("enum")) {
+				if ("enum".equals(type)) {
 					String className = elem.getAttributeValue("CLASS");
 					Enum<?> e = getEnumValue(className, value);
 					if (e != null) {
@@ -285,13 +299,13 @@ public class SaveState {
 					}
 				}
 			}
-			else if (tag.equals(SAVE_STATE)) {
+			else if (SAVE_STATE.equals(tag)) {
 				Element element = (Element) elem.getChildren().get(0);
 				if (element != null) {
 					map.put(name, new SaveState(element));
 				}
 			}
-			else if (tag.equals("NULL")) {
+			else if ("NULL".equals(tag)) {
 				map.put(name, null);
 			}
 		}
@@ -437,9 +451,9 @@ public class SaveState {
 		try {
 			Class<?> enumClass = Class.forName(enumClassName).asSubclass(Enum.class);
 
-			Method m = enumClass.getMethod("valueOf", new Class[] { String.class });
+			Method m = enumClass.getMethod("valueOf", String.class);
 			if (m != null) {
-				return (Enum<?>) m.invoke(null, new Object[] { value });
+				return (Enum<?>) m.invoke(null, value);
 			}
 		}
 		catch (Exception e) {

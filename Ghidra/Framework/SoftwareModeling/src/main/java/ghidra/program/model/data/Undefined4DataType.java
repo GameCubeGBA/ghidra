@@ -20,7 +20,7 @@ import ghidra.program.model.mem.MemBuffer;
 import ghidra.program.model.mem.MemoryAccessException;
 import ghidra.program.model.scalar.Scalar;
 import ghidra.util.StringFormat;
-import ghidra.util.classfinder.*;
+import ghidra.util.classfinder.ClassTranslator;
 
 /**
  * Provides an implementation of a 4-byte dataType that has not been defined yet as a
@@ -53,6 +53,7 @@ public class Undefined4DataType extends Undefined {
 	 * 
 	 * @see ghidra.program.model.data.DataType#getLength()
 	 */
+	@Override
 	public int getLength() {
 		return 4;
 	}
@@ -61,10 +62,12 @@ public class Undefined4DataType extends Undefined {
 	 * 
 	 * @see ghidra.program.model.data.DataType#getDescription()
 	 */
+	@Override
 	public String getDescription() {
 		return "Undefined Double Word";
 	}
 
+	@Override
 	public DataType clone(DataTypeManager dtm) {
 		if (dtm == getDataTypeManager()) {
 			return this;
@@ -76,19 +79,21 @@ public class Undefined4DataType extends Undefined {
 	 * 
 	 * @see ghidra.program.model.data.DataType#getMnemonic(Settings)
 	 */
+	@Override
 	public String getMnemonic(Settings settings) {
 		return name;
 	}
 
 	private long getValue(MemBuffer buf) throws MemoryAccessException {
 		long val = buf.getInt(0);
-		return val & 0xffffffffl;
+		return val & 0xffffffffL;
 	}
 
 	/**
 	 * 
 	 * @see ghidra.program.model.data.DataType#getRepresentation(MemBuffer, Settings, int)
 	 */
+	@Override
 	public String getRepresentation(MemBuffer buf, Settings settings, int length) {
 		String val = "??";
 
@@ -107,6 +112,7 @@ public class Undefined4DataType extends Undefined {
 	 * 
 	 * @see ghidra.program.model.data.DataType#getValue(ghidra.program.model.mem.MemBuffer, ghidra.docking.settings.Settings, int)
 	 */
+	@Override
 	public Object getValue(MemBuffer buf, Settings settings, int length) {
 		try {
 			return new Scalar(32, getValue(buf));

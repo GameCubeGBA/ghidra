@@ -15,6 +15,8 @@
  */
 package ghidra.program.util;
 
+import java.util.Objects;
+
 import ghidra.framework.options.SaveState;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
@@ -62,25 +64,19 @@ public class FunctionCallFixupFieldLocation extends FunctionLocation {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((callFixupName == null) ? 0 : callFixupName.hashCode());
-		return result;
+		return prime * result + ((callFixupName == null) ? 0 : callFixupName.hashCode());
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
+		if (!super.equals(obj) || (getClass() != obj.getClass()))
 			return false;
 		FunctionCallFixupFieldLocation other = (FunctionCallFixupFieldLocation) obj;
-		if (callFixupName == null) {
-			if (other.callFixupName != null)
-				return false;
-		}
-		else if (!callFixupName.equals(other.callFixupName))
+		if (!Objects.equals(callFixupName, other.callFixupName)) {
 			return false;
+		}
 		return true;
 	}
 

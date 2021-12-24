@@ -15,12 +15,14 @@
  */
 package ghidra.program.model.data;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 import java.io.StringWriter;
 
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import generic.test.AbstractGTest;
 import ghidra.util.exception.CancelledException;
@@ -28,7 +30,7 @@ import ghidra.util.task.TaskMonitor;
 
 public class DataTypeWriterTest extends AbstractGTest {
 
-	private static String EOL = System.getProperty("line.separator");
+	private static String EOL = System.lineSeparator();
 
 	private StringWriter writer;
 	private DataTypeWriter dtWriter;

@@ -265,10 +265,7 @@ class AlignedComponentPacker {
 		if (dataTypeComponent.isBitFieldComponent()) {
 
 			if (!lastComponent.isZeroBitFieldComponent() && bitFieldPacking.useMSConvention()) {
-				if (!lastComponent.isBitFieldComponent()) {
-					return false; // can't pack bitfield with non-bitfield - start new group
-				}
-				if (getBitFieldTypeSize(dataTypeComponent) != getBitFieldTypeSize(lastComponent)) {
+				if (!lastComponent.isBitFieldComponent() || (getBitFieldTypeSize(dataTypeComponent) != getBitFieldTypeSize(lastComponent))) {
 					return false; // bitfield base types differ in size - start new group
 				}
 			}

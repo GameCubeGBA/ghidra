@@ -30,6 +30,6 @@ public interface QItemListener<I, R> {
 	 * process normally, was cancelled, or encountered an error during processing.
 	 * @param result the QResult object.
 	 */
-	public void itemProcessed(QResult<I, R> result);
+	void itemProcessed(QResult<I, R> result);
 
 }

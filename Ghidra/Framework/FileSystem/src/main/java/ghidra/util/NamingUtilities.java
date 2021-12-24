@@ -53,11 +53,7 @@ public final class NamingUtilities {
 	@Deprecated
 	public static boolean isValidName(String name) {
 
-		if (name == null) {
-			return false;
-		}
-
-		if ((name.length() < 1) || (name.length() > MAX_NAME_LENGTH)) {
+		if ((name == null) || (name.length() < 1) || (name.length() > MAX_NAME_LENGTH)) {
 			return false;
 		}
 
@@ -83,15 +79,7 @@ public final class NamingUtilities {
 	 * @return true if specified name is valid, else false
 	 */
 	public static boolean isValidProjectName(String name) {
-		if (name == null) {
-			return false;
-		}
-
-		if (name.startsWith(".")) {
-			return false;
-		}
-
-		if ((name.length() < 1) || (name.length() > MAX_NAME_LENGTH)) {
+		if ((name == null) || name.startsWith(".") || (name.length() < 1) || (name.length() > MAX_NAME_LENGTH)) {
 			return false;
 		}
 
@@ -118,6 +106,7 @@ public final class NamingUtilities {
 	 * limited use and applicability (project names and project file names have
 	 * different naming restrictions).
 	 */
+	@Deprecated
 	public static char findInvalidChar(String name) {
 		if (!name.isEmpty()) {
 			if (name.charAt(0) == '.') {
@@ -148,7 +137,7 @@ public final class NamingUtilities {
 	 */
 	public static String mangle(String name) {
 		int len = name.length();
-		StringBuffer buf = new StringBuffer(2 * len);
+		StringBuilder buf = new StringBuilder(2 * len);
 
 		for (int i = 0; i < len; i++) {
 			char c = name.charAt(i);
@@ -177,7 +166,7 @@ public final class NamingUtilities {
 	 */
 	public static String demangle(String mangledName) {
 		int len = mangledName.length();
-		StringBuffer buf = new StringBuffer(len);
+		StringBuilder buf = new StringBuilder(len);
 		boolean foundMangle = false;
 
 		for (int i = 0; i < len; i++) {

@@ -18,7 +18,10 @@ package ghidra.program.util;
 import ghidra.framework.options.SaveState;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSpace;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.Function;
+import ghidra.program.model.listing.Parameter;
+import ghidra.program.model.listing.Program;
+import ghidra.program.model.listing.Variable;
 import ghidra.program.model.symbol.Symbol;
 
 /**
@@ -160,39 +163,37 @@ public class VariableLocation extends FunctionLocation {
 
 	@Override
 	public int compareTo(ProgramLocation pl) {
-		if (pl instanceof VariableLocation) {
-			if (pl.getClass() == this.getClass() && pl.getAddress().equals(getAddress())) {
-				// only compare here is not the same variable within the same function
-				// otherwise defer to super
-				VariableLocation otherLoc = (VariableLocation) pl;
-				if (isParameter) {
-					if (!otherLoc.isParameter) {
-						return -1;
-					}
-					int retVal = ordinalOrfirstUseOffset - otherLoc.ordinalOrfirstUseOffset;
-					if (retVal != 0) {
-						return retVal;
-					}
+		if ((pl instanceof VariableLocation) && (pl.getClass() == this.getClass() && pl.getAddress().equals(getAddress()))) {
+			// only compare here is not the same variable within the same function
+			// otherwise defer to super
+			VariableLocation otherLoc = (VariableLocation) pl;
+			if (isParameter) {
+				if (!otherLoc.isParameter) {
+					return -1;
 				}
-				else {
-					if (otherLoc.isParameter) {
+				int retVal = ordinalOrfirstUseOffset - otherLoc.ordinalOrfirstUseOffset;
+				if (retVal != 0) {
+					return retVal;
+				}
+			}
+			else {
+				if (otherLoc.isParameter) {
+					return 1;
+				}
+				// nulls may be returned for non-existing variables
+				// which can't be compared against
+				Variable var = getVariable();
+				Variable otherVar = otherLoc.getVariable();
+				if (var == null) {
+					if (otherVar != null) {
 						return 1;
 					}
-					// nulls may be returned for non-existing variables
-					// which can't be compared against
-					Variable var = getVariable();
-					Variable otherVar = otherLoc.getVariable();
-					if (var == null) {
-						if (otherVar != null) {
-							return 1;
-						}
-					}
-					else if (otherVar == null) {
-						return -1;
-					}
-					else {
-						return var.compareTo(otherVar);
-					}
+				}
+				else if (otherVar == null) {
+					return -1;
+				}
+				else {
+					return var.compareTo(otherVar);
 				}
 			}
 		}

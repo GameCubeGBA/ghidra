@@ -27,7 +27,7 @@ public interface AddressSetCollection {
 	 *
 	 * @param addrSet address set to check intersection with.
 	 */
-	public boolean intersects(AddressSetView addrSet);
+	boolean intersects(AddressSetView addrSet);
 
 	/**
 	 * Determine if range specified by start and end intersects with any of the AddressSets
@@ -36,7 +36,7 @@ public interface AddressSetCollection {
 	 * @param end end of range
 	 * @return true if the given range intersects this address set collection.
 	 */
-	public boolean intersects(Address start, Address end);
+	boolean intersects(Address start, Address end);
 
 	/**
 	 * Test if the address is contained within any of the addressSets in this collection.
@@ -44,7 +44,7 @@ public interface AddressSetCollection {
 	 * @param address address to test.
 	 * @return true if addr exists in the set, false otherwise.
 	 */
-	public boolean contains(Address address);
+	boolean contains(Address address);
 
 	/**
 	 * Tests whether this collection of addressSets has approximately fewer ranges than
@@ -54,35 +54,35 @@ public interface AddressSetCollection {
 	 * @param rangeThreshold the number of ranges to test against.
 	 * @return true if the max possible ranges is less than the given threshold.
 	 */
-	public boolean hasFewerRangesThan(int rangeThreshold);
+	boolean hasFewerRangesThan(int rangeThreshold);
 
 	/**
 	 * Returns a single AddressSet containing the union of all the addressSetViews in the collection.  
 	 */
-	public AddressSet getCombinedAddressSet();
+	AddressSet getCombinedAddressSet();
 
 	/**
 	 * Finds the first address in this collection that is also in the given addressSet.
 	 * @param set the addressSet to search for the first (lowest) common address.
 	 * @return the first address that is contained in this set and the given set.
 	 */
-	public Address findFirstAddressInCommon(AddressSetView set);
+	Address findFirstAddressInCommon(AddressSetView set);
 
 	/**
 	 * Returns true if all the AddressSets in this collection are empty.
 	 * @return true if all the AddressSets in this collection are empty.
 	 */
-	public boolean isEmpty();
+	boolean isEmpty();
 
 	/**
 	 * Returns the smallest address in this collection or null if the collection is empty.
 	 * @return  the smallest address in this collection or null if the collection is empty.
 	 */
-	public Address getMinAddress();
+	Address getMinAddress();
 
 	/**
 	 * Returns the largest address in this collection or null if the collection is empty.
 	 * @return  the largest address in this collection or null if the collection is empty.
 	 */
-	public Address getMaxAddress();
+	Address getMaxAddress();
 }

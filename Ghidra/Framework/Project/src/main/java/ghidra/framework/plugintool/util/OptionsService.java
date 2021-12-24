@@ -28,7 +28,7 @@ public interface OptionsService {
 	 * Get the list of options for all categories.
 	 * @return the list of options for all categories.
 	 */
-	public Options[] getOptions();
+	Options[] getOptions();
 
 	/**
 	 * Get the options for the given category name.   If no options exist with the given name,
@@ -41,14 +41,14 @@ public interface OptionsService {
 	 * @param category name of category
 	 * @return the options for the given category name.
 	 */
-	public ToolOptions getOptions(String category);
+	ToolOptions getOptions(String category);
 
 	/**
 	 * Return whether an Options object exists for the given category.
 	 * @param category name of the category
 	 * @return true if an Options object exists
 	 */
-	public boolean hasOptions(String category);
+	boolean hasOptions(String category);
 
 	/**
 	 * Shows Options Dialog with the node denoted by "category" being displayed.  The value is
@@ -72,6 +72,6 @@ public interface OptionsService {
 	 * @throws IllegalArgumentException if the given <code>category</code> value does not exist in
 	 *                                  the tree of options.
 	 */
-	public void showOptionsDialog(String category, String filterText);
+	void showOptionsDialog(String category, String filterText);
 
 }

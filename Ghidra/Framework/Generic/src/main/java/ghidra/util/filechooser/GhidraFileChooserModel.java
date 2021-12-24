@@ -31,13 +31,13 @@ public interface GhidraFileChooserModel {
 	 * Set the model listener.
 	 * @param l the new model listener
 	 */
-	public void setListener(GhidraFileChooserListener l);
+	void setListener(GhidraFileChooserListener l);
 
 	/**
 	 * Returns the home directory.
 	 * @return the home directory
 	 */
-	public File getHomeDirectory();
+	File getHomeDirectory();
 
 	/**
 	 * Returns the user's desktop directory, as defined by their operating system and/or their windowing environment, or
@@ -45,7 +45,7 @@ public interface GhidraFileChooserModel {
 	 * Example: "/home/the_user/Desktop" or "c:/Users/the_user/Desktop"
 	 * @return desktop directory
 	 */
-	public File getDesktopDirectory();
+	File getDesktopDirectory();
 
 	/**
 	 * Returns the root drives/directories.
@@ -53,7 +53,7 @@ public interface GhidraFileChooserModel {
 	 * On linux, "/".
 	 * @return the root drives
 	 */
-	public File[] getRoots();
+	File[] getRoots();
 
 	/**
 	 * Returns an array of the files that 
@@ -61,21 +61,21 @@ public interface GhidraFileChooserModel {
 	 * @param directory the directory
 	 * @return an array of files
 	 */
-	public File[] getListing(File directory, FileFilter filter);
+	File[] getListing(File directory, FileFilter filter);
 
 	/**
 	 * Returns an icon for the specified file.
 	 * @param file the file
 	 * @return an icon for the specified file
 	 */
-	public Icon getIcon(File file);
+	Icon getIcon(File file);
 
 	/**
 	 * Returns a description for the specified file.
 	 * @param file the file
 	 * @return a description for the specified file
 	 */
-	public String getDescription(File file);
+	String getDescription(File file);
 
 	/**
 	 * Creates a directory in the specified directory with the specified
@@ -84,7 +84,7 @@ public interface GhidraFileChooserModel {
 	 * @param name the name of the directory
 	 * @return true if the new directory was create.
 	 */
-	public boolean createDirectory(File directory, String name);
+	boolean createDirectory(File directory, String name);
 
 	/**
 	 * Tests whether the file denoted by this abstract pathname is a
@@ -93,7 +93,7 @@ public interface GhidraFileChooserModel {
 	 *          abstract pathname exists <em>and</em> is a directory;
 	 *          <code>false</code> otherwise
 	 */
-	public boolean isDirectory(File file);
+	boolean isDirectory(File file);
 
 	/**
 	 * Tests whether this abstract pathname is absolute.  The definition of
@@ -104,7 +104,7 @@ public interface GhidraFileChooserModel {
 	 * @return  <code>true</code> if this abstract pathname is absolute,
 	 *          <code>false</code> otherwise
 	 */
-	public boolean isAbsolute(File file);
+	boolean isAbsolute(File file);
 
 	/**
 	 * Renames the src file to the dest file.
@@ -112,7 +112,7 @@ public interface GhidraFileChooserModel {
 	 * @param dest  the new file
 	 * @return true if the file was renamed
 	 */
-	public boolean renameFile(File src, File dest);
+	boolean renameFile(File src, File dest);
 
 	/**
 	 * Returns the file separator char.
@@ -120,5 +120,5 @@ public interface GhidraFileChooserModel {
 	 * On linux, '/'.
 	 * @return the file separator char
 	 */
-	public char getSeparator();
+	char getSeparator();
 }

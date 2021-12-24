@@ -31,5 +31,5 @@ public interface ComponentLoadedListener {
 	 * @param provider the provider that is the parent of the given component; null if the
 	 *        component for this listener is not the child of a component provider
 	 */
-	public void componentLoaded(DockingWindowManager windowManager, ComponentProvider provider);
+	void componentLoaded(DockingWindowManager windowManager, ComponentProvider provider);
 }

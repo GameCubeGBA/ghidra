@@ -15,7 +15,9 @@
  */
 package generic.test;
 
-import java.io.*;
+import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Objects;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -33,7 +35,7 @@ import utilities.util.reflection.ReflectionUtilities;
 public class TestReportingException extends RuntimeException {
 
 	private static final String[] GENERAL_USELESS_STACK_ELEMET_PATTERNS =
-		new String[] { "java.awt.WaitDispatchSupport" };
+		{ "java.awt.WaitDispatchSupport" };
 
 	//@formatter:off
 	private static final String[] SWING_STACK_ELEMENT_PATTERNS = 
@@ -157,8 +159,7 @@ public class TestReportingException extends RuntimeException {
 			printTrace(testThreadTrace, writer);
 		}
 
-		String output = stringWriter.toString();
-		return output;
+		return stringWriter.toString();
 	}
 
 	private void addAllCauseExceptions(PrintWriter writer) {
@@ -205,9 +206,7 @@ public class TestReportingException extends RuntimeException {
 				ReflectionUtilities.filterStackTrace(trace, SWING_STACK_ELEMENT_PATTERNS);
 			return filtered;
 		}
-		StackTraceElement[] filtered =
-			ReflectionUtilities.filterStackTrace(trace, GENERAL_USELESS_STACK_ELEMET_PATTERNS);
-		return filtered;
+		return ReflectionUtilities.filterStackTrace(trace, GENERAL_USELESS_STACK_ELEMET_PATTERNS);
 	}
 
 	private static void printTrace(StackTraceElement[] trace, PrintWriter writer) {

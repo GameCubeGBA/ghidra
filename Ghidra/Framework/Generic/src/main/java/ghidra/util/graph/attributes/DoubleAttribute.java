@@ -16,13 +16,13 @@
  */
 package ghidra.util.graph.attributes;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 import ghidra.util.datastruct.LongDoubleHashtable;
 import ghidra.util.exception.NoValueException;
 import ghidra.util.graph.KeyIndexableSet;
 import ghidra.util.graph.KeyedObject;
-
-import java.util.Arrays;
-import java.util.Comparator;
 
 /** This class provides a storage mechanism for double-valued information about
  *  the elements of a KeyIndexableSet, e.g. the vertices of a DirectedGraph.
@@ -130,17 +130,14 @@ public class DoubleAttribute<T extends KeyedObject> extends Attribute<T> {
 					}
 					else if ((value1 - value2) > 0) {
 						return +1;
+					} else if ((ko1.key() - ko2.key()) < 0) {
+						return -1;
 					}
-					else {
-						if ((ko1.key() - ko2.key()) < 0) {
-							return -1;
-						}
-						else if ((ko1.key() - ko2.key()) > 0) {
-							return +1;
-						}
-						else
-							return 0;
+					else if ((ko1.key() - ko2.key()) > 0) {
+						return +1;
 					}
+					else
+						return 0;
 				}
 				catch (NoValueException exc2) {
 					//ko1 is ok, ko2 fails.

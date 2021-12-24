@@ -50,19 +50,22 @@ public class XmlUtils {
 			return false;
 		}
 		char firstc = boolString.charAt(0);
-		if (firstc == 't') return true;
-		if (firstc == '1') return true;
-		if (firstc == 'y') return true;
+		switch (firstc) {
+		case 't':
+			return true;
+		case '1':
+			return true;
+		case 'y':
+			return true;
+		default:
+			break;
+		}
 		return false;
 	}
 
 	public static int decodeUnknownInt( String intString ) {
-	    if (intString == null) {
-            return 0;
-        }
-	    
 	    // special case
-	    if ( "0".equals( intString ) ) {
+	    if ( (intString == null) || "0".equals( intString ) ) {
 	    	return 0;
 	    }
 	    
@@ -81,12 +84,8 @@ public class XmlUtils {
 	}
 	
 	public static long decodeUnknownLong( String longString ) {
-		if (longString == null) {
-            return 0;
-        }
-	    
-	    // special case
-	    if ( "0".equals( longString ) ) {
+		// special case
+	    if ( (longString == null) || "0".equals( longString ) ) {
 	    	return 0;
 	    }
 	    
@@ -108,23 +107,25 @@ public class XmlUtils {
 	public static void xml_escape( PrintStream s, String str ) { 
 		for ( int i = 0; i < str.length(); i++ ) {
 			char c = str.charAt( i );
-			if ( c == '<' ) {
+			switch (c) {
+			case '<':
 				s.append( "&lt;" );
-			}
-            else if ( c == '>' ) {
-                s.append( "&gt;" );
-            }
-            else if ( c == '"' ) {
-                s.append( "&quot;" );
-            }
-            else if ( c == '\'' ) {
-                s.append( "&apos;" );
-            }
-            else if ( c == '&' ) {
-                s.append( "&amp;" );
-            }
-			else {
+				break;
+			case '>':
+				s.append( "&gt;" );
+				break;
+			case '"':
+				s.append( "&quot;" );
+				break;
+			case '\'':
+				s.append( "&apos;" );
+				break;
+			case '&':
+				s.append( "&amp;" );
+				break;
+			default:
 				s.append( c );
+				break;
 			}
 		}
 	}

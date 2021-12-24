@@ -41,7 +41,7 @@ public interface SharedDockingActionPlaceholder {
 	 * this placeholder.
 	 * @return the name
 	 */
-	public String getName();
+	String getName();
 
 	/**
 	 * Returns an owner name to use in place of {@value ToolConstants#SHARED_OWNER}.  
@@ -50,7 +50,7 @@ public interface SharedDockingActionPlaceholder {
 	 * owner (such as a plugin) has multiple component providers that share action key  bindings.
 	 * @return the owner
 	 */
-	public default String getOwner() {
+	default String getOwner() {
 		return ToolConstants.SHARED_OWNER;
 	}
 
@@ -58,7 +58,7 @@ public interface SharedDockingActionPlaceholder {
 	 * The default key binding for the action represented by this placeholder
 	 * @return the key binding; may be null
 	 */
-	public default KeyStroke getKeyBinding() {
+	default KeyStroke getKeyBinding() {
 		return null;
 	}
 }

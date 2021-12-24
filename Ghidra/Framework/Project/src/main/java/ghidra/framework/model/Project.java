@@ -35,50 +35,50 @@ public interface Project {
 	/**
 	 * Convenience method to get the name of this project.
 	 */
-	public String getName();
+	String getName();
 
 	/**
 	 * Get the project locator for this project.
 	 */
-	public ProjectLocator getProjectLocator();
+	ProjectLocator getProjectLocator();
 
 	/**
 	 * Returns the project manager of this project.
 	 * @return the project manager of this project.
 	 */
-	public ProjectManager getProjectManager();
+	ProjectManager getProjectManager();
 
 	/**
 	 * Return the tool manager for this project.
 	 */
-	public ToolManager getToolManager();
+	ToolManager getToolManager();
 
 	/**
 	 * Return the tool services for this project.
 	 */
-	public ToolServices getToolServices();
+	ToolServices getToolServices();
 
 	/**
 	 * Return whether the project configuration has changed.
 	 */
-	public boolean hasChanged();
+	boolean hasChanged();
 
 	/**
 	 * Returns whether this project instance has been closed
 	 */
-	public boolean isClosed();
+	boolean isClosed();
 
 	/**
 	 * Return the local tool chest for the user logged in.
 	 */
-	public ToolChest getLocalToolChest();
+	ToolChest getLocalToolChest();
 
 	/**
 	 * Get the repository that this project is associated with.
 	 * @return null if the project is not associated with a remote
 	 * repository
 	 */
-	public RepositoryAdapter getRepository();
+	RepositoryAdapter getRepository();
 
 	/** 
 	 * Add the given project URL to this project's list project views.
@@ -89,101 +89,101 @@ public interface Project {
 	 * @throws IOException if I/O error occurs or if project/repository not found
 	 * @throws MalformedURLException if projectURL is invalid
 	 */
-	public ProjectData addProjectView(URL projectURL) throws IOException, MalformedURLException;
+	ProjectData addProjectView(URL projectURL) throws IOException, MalformedURLException;
 
 	/**
 	 * Remove the project view from this project.
 	 * @param projectURL identifier for the project 
 	 */
-	public void removeProjectView(URL projectURL);
+	void removeProjectView(URL projectURL);
 
 	/**
 	 * Return the list of project views in this project.
 	 */
-	public ProjectLocator[] getProjectViews();
+	ProjectLocator[] getProjectViews();
 
 	/**
 	 * Close the project.
 	 */
-	public void close();
+	void close();
 
 	/**
 	 * Save the project and the list of project views.
 	 */
-	public void save();
+	void save();
 
 	/**
 	 * Saves any tools that are associated with the opened project when the project is closed. 
 	 * 
 	 * @return True if the save was not cancelled.
 	 */
-	public boolean saveSessionTools();
+	boolean saveSessionTools();
 
 	/**
 	 *  Restore this project's state.
 	 */
-	public void restore();
+	void restore();
 
 	/**
 	* Save the given tool template as part of the project.
 	* @param tag ID or name for the tool template
 	* @param template template to save
 	*/
-	public void saveToolTemplate(String tag, ToolTemplate template);
+	void saveToolTemplate(String tag, ToolTemplate template);
 
 	/**
 	 * Get the tool template with the given tag.
 	 * @param tag ID or name for the tool template to get
 	 * @return tool template
 	 */
-	public ToolTemplate getToolTemplate(String tag);
+	ToolTemplate getToolTemplate(String tag);
 
 	/**
 	 * Allows the user to store data related to the project.
 	 * @param key A value used to store and lookup saved data
 	 * @param saveState a container of data that will be written out when persisted
 	 */
-	public void setSaveableData(String key, SaveState saveState);
+	void setSaveableData(String key, SaveState saveState);
 
 	/**
 	 * The analog for {@link #setSaveableData(String, SaveState)}.
 	 */
-	public SaveState getSaveableData(String key);
+	SaveState getSaveableData(String key);
 
 	/**
 	 * Get list of domain files that are open.
 	 * @return the files; empty if no files
 	 */
-	public List<DomainFile> getOpenData();
+	List<DomainFile> getOpenData();
 
 	/**
 	 * Get the root domain data folder in the project.
 	 */
-	public ProjectData getProjectData();
+	ProjectData getProjectData();
 
 	/**
 	 * Returns the Project Data for the given Project locator.  The Project locator must
 	 * be either the current active project or an currently open project view.
 	 */
-	public ProjectData getProjectData(ProjectLocator projectLocator);
+	ProjectData getProjectData(ProjectLocator projectLocator);
 
 	/**
 	 * Returns the Project Data for the given Project URL.  The Project URL must
 	 * correspond to the current active project or an currently open project view.
 	 */
-	public ProjectData getProjectData(URL url);
+	ProjectData getProjectData(URL url);
 
 	/**
 	 * Get the project data for other projects that are
 	 * currently being viewed.
 	 * @return zero length array if there are no viewed projects open
 	 */
-	public ProjectData[] getViewedProjectData();
+	ProjectData[] getViewedProjectData();
 
 	/**
 	 * Releases all DomainObjects used by the given consumer
 	 * @param consumer object no longer using any DomainObjects.
 	 */
-	public void releaseFiles(Object consumer);
+	void releaseFiles(Object consumer);
 
 }

@@ -25,14 +25,14 @@ public interface EnumSettingsDefinition extends SettingsDefinition {
 	 * @param settings The settings to search
 	 * @return the value for the settingsDefintions
 	 */
-	public int getChoice(Settings settings);
+	int getChoice(Settings settings);
 
 	/**
 	 * Sets the given value into the settings object using this definition as a key
 	 * @param settings the settings to store the value.
 	 * @param value the settings value to be stored.
 	 */
-	public void setChoice(Settings settings, int value);
+	void setChoice(Settings settings, int value);
 
 	/**
 	 * Returns the String for the given enum value
@@ -40,7 +40,7 @@ public interface EnumSettingsDefinition extends SettingsDefinition {
 	 * @param settings the instance settings which may affect the results
 	 * @return the display string for the given settings.
 	 */
-	public String getDisplayChoice(int value, Settings settings);
+	String getDisplayChoice(int value, Settings settings);
 
 	/**
 	 * Gets the list of choices as strings based on the current settings
@@ -48,6 +48,6 @@ public interface EnumSettingsDefinition extends SettingsDefinition {
 	 * @return an array of strings which represent valid choices based on the current
 	 * settings.
 	 */
-	public String[] getDisplayChoices(Settings settings);
+	String[] getDisplayChoices(Settings settings);
 
 }

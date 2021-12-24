@@ -32,7 +32,7 @@ public class TaskInfo extends AbstractTaskInfo {
 
 	@Override
 	protected String getLabelText() {
-		StringBuffer buf = new StringBuffer("Task: ");
+		StringBuilder buf = new StringBuilder("Task: ");
 		buf.append(task.getDescription());
 		buf.append(" (");
 		buf.append(task.getPriority());

@@ -19,7 +19,9 @@
  */
 package ghidra.app.plugin.processors.sleigh.template;
 
-import ghidra.app.plugin.processors.sleigh.*;
+import ghidra.app.plugin.processors.sleigh.FixedHandle;
+import ghidra.app.plugin.processors.sleigh.ParserWalker;
+import ghidra.app.plugin.processors.sleigh.SleighException;
 import ghidra.program.model.address.AddressFactory;
 import ghidra.program.model.address.AddressSpace;
 import ghidra.util.xml.SpecXmlUtils;
@@ -273,24 +275,24 @@ public class ConstTpl {
 	public void restoreXml(XmlPullParser parser, AddressFactory factory) {
 		XmlElement el = parser.start("const_tpl");
 		String typestr = el.getAttribute("type");
-		if (typestr.equals("real")) {
+		if ("real".equals(typestr)) {
 			type = REAL;
 			value_real = SpecXmlUtils.decodeLong(el.getAttribute("val"));
 		}
-		else if (typestr.equals("handle")) {
+		else if ("handle".equals(typestr)) {
 			type = HANDLE;
 			handle_index = (short) SpecXmlUtils.decodeInt(el.getAttribute("val"));
 			String selstr = el.getAttribute("s");
-			if (selstr.equals("space")) {
+			if ("space".equals(selstr)) {
 				select = V_SPACE;
 			}
-			else if (selstr.equals("offset")) {
+			else if ("offset".equals(selstr)) {
 				select = V_OFFSET;
 			}
-			else if (selstr.equals("size")) {
+			else if ("size".equals(selstr)) {
 				select = V_SIZE;
 			}
-			else if (selstr.equals("offset_plus")) {
+			else if ("offset_plus".equals(selstr)) {
 				select = V_OFFSET_PLUS;
 				value_real = SpecXmlUtils.decodeLong(el.getAttribute("plus"));
 			}
@@ -298,36 +300,36 @@ public class ConstTpl {
 				throw new SleighException("Bad handle selector");
 			}
 		}
-		else if (typestr.equals("start")) {
+		else if ("start".equals(typestr)) {
 			type = J_START;
 		}
-		else if (typestr.equals("next")) {
+		else if ("next".equals(typestr)) {
 			type = J_NEXT;
 		}
-		else if (typestr.equals("curspace")) {
+		else if ("curspace".equals(typestr)) {
 			type = J_CURSPACE;
 		}
-		else if (typestr.equals("curspace_size")) {
+		else if ("curspace_size".equals(typestr)) {
 			type = J_CURSPACE_SIZE;
 		}
-		else if (typestr.equals("spaceid")) {
+		else if ("spaceid".equals(typestr)) {
 			type = SPACEID;
 			value_spaceid = factory.getAddressSpace(el.getAttribute("name"));
 		}
-		else if (typestr.equals("relative")) {
+		else if ("relative".equals(typestr)) {
 			type = J_RELATIVE;
 			value_real = SpecXmlUtils.decodeLong(el.getAttribute("val"));
 		}
-		else if (typestr.equals("flowref")) {
+		else if ("flowref".equals(typestr)) {
 			type = J_FLOWREF;
 		}
-		else if (typestr.equals("flowref_size")) {
+		else if ("flowref_size".equals(typestr)) {
 			type = J_FLOWREF_SIZE;
 		}
-		else if (typestr.equals("flowdest")) {
+		else if ("flowdest".equals(typestr)) {
 			type = J_FLOWDEST;
 		}
-		else if (typestr.equals("flowdest_size")) {
+		else if ("flowdest_size".equals(typestr)) {
 			type = J_FLOWDEST_SIZE;
 		}
 		else {

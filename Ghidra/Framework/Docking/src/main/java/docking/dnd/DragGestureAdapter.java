@@ -15,11 +15,15 @@
  */
 package docking.dnd;
 
-import ghidra.util.Msg;
-
 import java.awt.datatransfer.Transferable;
-import java.awt.dnd.*;
+import java.awt.dnd.DragGestureEvent;
+import java.awt.dnd.DragGestureListener;
+import java.awt.dnd.DragSource;
+import java.awt.dnd.DragSourceListener;
+import java.awt.dnd.InvalidDnDOperationException;
 import java.awt.event.InputEvent;
+
+import ghidra.util.Msg;
 
 /**
  * This class receives notification when the user intitiates a
@@ -52,7 +56,8 @@ public class DragGestureAdapter implements DragGestureListener {
 	 * 
 	 * @param e event describing the gesture that has just occurred
 	 */
-    public void dragGestureRecognized(DragGestureEvent e) {
+    @Override
+	public void dragGestureRecognized(DragGestureEvent e) {
 
         // check input event: if any button other than MB1 is pressed,
         // don't attempt to process the drag and drop event.

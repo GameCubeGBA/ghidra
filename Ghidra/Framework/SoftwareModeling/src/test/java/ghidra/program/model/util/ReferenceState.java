@@ -15,28 +15,41 @@
  */
 package ghidra.program.model.util;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-import ghidra.program.model.*;
-import ghidra.program.model.address.*;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.AddressIteratorTestStub;
+import ghidra.program.model.ReferenceIteratorTestStub;
+import ghidra.program.model.ReferenceManagerTestDouble;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressIterator;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.symbol.MemReferenceImpl;
+import ghidra.program.model.symbol.RefType;
+import ghidra.program.model.symbol.Reference;
+import ghidra.program.model.symbol.ReferenceIterator;
+import ghidra.program.model.symbol.SourceType;
 
 public class ReferenceState extends ReferenceManagerTestDouble {
 	public static final int FUNCTION_BODY_SIZE = 10;
-	Map<Address, Set<Address>> fromMap = new HashMap<Address, Set<Address>>();
-	Map<Address, Set<Address>> toMap = new HashMap<Address, Set<Address>>();
+	Map<Address, Set<Address>> fromMap = new HashMap<>();
+	Map<Address, Set<Address>> toMap = new HashMap<>();
 
 	void createReference(Address from, Address to) {
-        Set<Address> fromSet = fromMap.computeIfAbsent(from, k -> new HashSet<Address>());
+        Set<Address> fromSet = fromMap.computeIfAbsent(from, k -> new HashSet<>());
         fromSet.add(to);
-        Set<Address> toSet = toMap.computeIfAbsent(to, k -> new HashSet<Address>());
+        Set<Address> toSet = toMap.computeIfAbsent(to, k -> new HashSet<>());
         toSet.add(from);
 	}
 
 	@Override
 	public ReferenceIterator getReferencesTo(Address address) {
 		Set<Address> set = toMap.get(address);
-		List<Reference> list = new ArrayList<Reference>();
+		List<Reference> list = new ArrayList<>();
 		if (set != null) {
 			for (Address addr : set) {
 				list.add(refer(addr, address));
@@ -47,7 +60,7 @@ public class ReferenceState extends ReferenceManagerTestDouble {
 
 	@Override
 	public AddressIterator getReferenceSourceIterator(AddressSetView addrSet, boolean forward) {
-		Set<Address> set = new HashSet<Address>();
+		Set<Address> set = new HashSet<>();
 		set.add(addrSet.getMinAddress().add(getRandomOffsetInFunctionBody()));
 		return new AddressIteratorTestStub(set);
 	}

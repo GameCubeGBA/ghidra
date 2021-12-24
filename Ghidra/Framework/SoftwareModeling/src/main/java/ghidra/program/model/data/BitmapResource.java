@@ -17,7 +17,14 @@ package ghidra.program.model.data;
 
 import java.awt.Transparency;
 import java.awt.color.ColorSpace;
-import java.awt.image.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.ComponentColorModel;
+import java.awt.image.DataBuffer;
+import java.awt.image.DataBufferByte;
+import java.awt.image.IndexColorModel;
+import java.awt.image.Raster;
+import java.awt.image.WritableRaster;
 import java.io.IOException;
 
 import javax.swing.ImageIcon;
@@ -216,11 +223,9 @@ public class BitmapResource {
 		}
 		else if (getBitCount() == 4) {
 			lineLen = (lineLen + 4) / 8;
-		}
-		else if (getBitCount() == 24) {
-			lineLen = lineLen / 8;
-		}
-		else {
+		} else {
+			if (getBitCount() == 24) {
+			}
 			lineLen = lineLen / 8;
 		}
 		if ((lineLen % 4) != 0) {
@@ -289,20 +294,19 @@ public class BitmapResource {
 	 * @return DataImage
 	 */
 	public DataImage getDataImage(MemBuffer buf) {
-		if (bitCount == 1) {
+		switch (bitCount) {
+		case 1:
 			return getOnePlaneImage(buf);
-		}
-		if (bitCount == 4) {
+		case 4:
 			return getFourPlaneImage(buf);
-		}
-		if (bitCount == 8) {
+		case 8:
 			return getEightPlaneImage(buf);
-		}
-		if (bitCount == 24) {
+		case 24:
 			return get18PlaneImage(buf);
-		}
-		if (bitCount == 32) {
+		case 32:
 			return get32PlaneImage(buf);
+		default:
+			break;
 		}
 		return null;
 	}

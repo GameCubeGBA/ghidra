@@ -15,7 +15,9 @@
  */
 package docking;
 
-import java.awt.*;
+import java.awt.Component;
+import java.awt.KeyboardFocusManager;
+import java.awt.Window;
 
 /**
  * Uses Java's default focus manager to provide the focus owner.

@@ -73,11 +73,8 @@ class FileBytesSubMemoryBlock extends SubMemoryBlock {
 			return false;
 		}
 		FileBytesSubMemoryBlock other = (FileBytesSubMemoryBlock) block;
-		if (fileBytes != other.fileBytes) {
-			return false;
-		}
 		// are the two block consecutive in the fileBytes space?
-		if (other.fileBytesOffset != fileBytesOffset + subBlockLength) {
+		if ((fileBytes != other.fileBytes) || (other.fileBytesOffset != fileBytesOffset + subBlockLength)) {
 			return false;
 		}
 		// ok we can join them

@@ -31,6 +31,7 @@ public class BookmarkTypeComparator implements Comparator<BookmarkType> {
      * 	       first argument is less than, equal to, or greater than the
      *	       second. 
 	 */
+	@Override
 	public int compare(BookmarkType bt1, BookmarkType bt2) {
 		return bt1.getTypeString().compareTo(bt2.getTypeString());
 	}

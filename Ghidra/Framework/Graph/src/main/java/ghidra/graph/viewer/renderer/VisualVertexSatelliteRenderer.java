@@ -15,7 +15,10 @@
  */
 package ghidra.graph.viewer.renderer;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Paint;
+import java.awt.Rectangle;
+import java.awt.Shape;
 
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.visualization.RenderContext;
@@ -46,8 +49,6 @@ public class VisualVertexSatelliteRenderer<V extends VisualVertex, E extends Vis
 
 		double empahsis = v.getEmphasis();
 		if (empahsis == 0) {
-			super.paintIconForVertex(rc, v, layout);
-			return;
 		}
 
 // POSTERITY NOTE: we used to let the satellite paint the emphasis of nodes, as a way to call

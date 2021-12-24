@@ -16,17 +16,17 @@
  */
 package ghidra.pcodeCPort.semantics;
 
+import java.io.PrintStream;
+import java.util.List;
+
+import org.jdom.Element;
+
 import generic.stl.VectorSTL;
 import ghidra.pcodeCPort.context.FixedHandle;
 import ghidra.pcodeCPort.context.ParserWalker;
 import ghidra.pcodeCPort.space.AddrSpace;
 import ghidra.pcodeCPort.space.spacetype;
 import ghidra.pcodeCPort.translate.Translate;
-
-import java.io.PrintStream;
-import java.util.List;
-
-import org.jdom.Element;
 
 public class HandleTpl {
 

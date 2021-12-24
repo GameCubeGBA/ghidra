@@ -19,7 +19,9 @@ import javax.swing.JTree;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
-import docking.widgets.tree.*;
+import docking.widgets.tree.GTree;
+import docking.widgets.tree.GTreeNode;
+import docking.widgets.tree.GTreeTask;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
@@ -41,24 +43,20 @@ public class GTreeExpandNodeToDepthTask extends GTreeTask {
 
 	@Override
 	public void run(TaskMonitor monitor) {
-		runOnSwingThread(new Runnable() {
-			@Override
-			public void run() {
+		runOnSwingThread(() -> {
 
-				monitor.setMessage("Expanding Paths");
-				monitor.setIndeterminate(true);
+			monitor.setMessage("Expanding Paths");
+			monitor.setIndeterminate(true);
 
-				try {
-					for (TreePath path : paths) {
-						expandPath(jTree, path, depth, monitor);
-					}
+			try {
+				for (TreePath path : paths) {
+					expandPath(jTree, path, depth, monitor);
 				}
-				catch (CancelledException ce) {
-					// ignored
-				}
-				monitor.setProgress(monitor.getMaximum());
 			}
-
+			catch (CancelledException ce) {
+				// ignored
+			}
+			monitor.setProgress(monitor.getMaximum());
 		});
 	}
 

@@ -16,5 +16,5 @@
 package docking.widgets.table;
 
 public interface TableItemPickedListener<T> {
-	public void itemPicked(T t);
+	void itemPicked(T t);
 }

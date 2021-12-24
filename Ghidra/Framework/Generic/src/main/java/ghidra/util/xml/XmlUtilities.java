@@ -15,7 +15,16 @@
  */
 package ghidra.util.xml;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringReader;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -25,11 +34,18 @@ import javax.xml.XMLConstants;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParserFactory;
 
-import org.jdom.*;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.JDOMException;
+import org.jdom.Verifier;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
-import org.xml.sax.*;
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXNotRecognizedException;
+import org.xml.sax.SAXNotSupportedException;
+import org.xml.sax.SAXParseException;
 
 import generic.jar.ResourceFile;
 import ghidra.util.Msg;
@@ -87,7 +103,7 @@ public class XmlUtilities {
 	 * @return the encoded XML string
 	 */
 	public static String escapeElementEntities(String xml) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		for (int i = 0; i < xml.length(); i++) {
 			char next = xml.charAt(i);
 			if ((next < ' ') && (next != 0x09) && (next != 0x0A) && (next != 0x0D)) {
@@ -137,7 +153,7 @@ public class XmlUtilities {
 	public static String unEscapeElementEntities(String escapedXMLString) {
 
 		Matcher matcher = HEX_DIGIT_PATTERN.matcher(escapedXMLString);
-		StringBuffer buffy = new StringBuffer();
+		StringBuilder buffy = new StringBuilder();
 		while (matcher.find()) {
 			int intValue = Integer.parseInt(matcher.group(1), 16);
 			matcher.appendReplacement(buffy, Character.toString((char) intValue));
@@ -146,13 +162,11 @@ public class XmlUtilities {
 
 		String unescapedStr = buffy.toString();
 
-		unescapedStr = unescapedStr.replaceAll(LESS_THAN, "<");
-		unescapedStr = unescapedStr.replaceAll(GREATER_THAN, ">");
-		unescapedStr = unescapedStr.replaceAll(APOSTROPHE, "'");
-		unescapedStr = unescapedStr.replaceAll(QUOTE, "\"");
-		unescapedStr = unescapedStr.replaceAll(AMPERSAND, "&");
-
-		return unescapedStr;
+		unescapedStr = unescapedStr.replace(LESS_THAN, "<");
+		unescapedStr = unescapedStr.replace(GREATER_THAN, ">");
+		unescapedStr = unescapedStr.replace(APOSTROPHE, "'");
+		unescapedStr = unescapedStr.replace(QUOTE, "\"");
+		return unescapedStr.replace(AMPERSAND, "&");
 	}
 
 	/**
@@ -250,8 +264,7 @@ public class XmlUtilities {
 		SAXBuilder sax = createSecureSAXBuilder(false, false);
 
 		try (Reader r = new FileReader(f)) {
-			Document doc = sax.build(r);
-			return doc;
+			return sax.build(r);
 		}
 	}
 
@@ -269,8 +282,7 @@ public class XmlUtilities {
 
 		try (InputStream is = f.getInputStream()) {
 			Reader r = new InputStreamReader(is, StandardCharsets.UTF_8);
-			Document doc = sax.build(r);
-			return doc;
+			return sax.build(r);
 		}
 	}
 
@@ -573,8 +585,8 @@ public class XmlUtilities {
 		if (boolStr == null) {
 			return false;
 		}
-		if (!boolStr.equalsIgnoreCase("y") && !boolStr.equalsIgnoreCase("n") &&
-			!boolStr.equalsIgnoreCase("true") && !boolStr.equalsIgnoreCase("false")) {
+		if (!"y".equalsIgnoreCase(boolStr) && !"n".equalsIgnoreCase(boolStr) &&
+			!"true".equalsIgnoreCase(boolStr) && !"false".equalsIgnoreCase(boolStr)) {
 			throw new XmlAttributeException(boolStr + " is not a valid boolean (y|n)");
 		}
 		return "y".equalsIgnoreCase(boolStr) || "true".equalsIgnoreCase(boolStr);

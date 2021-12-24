@@ -19,5 +19,5 @@ package docking;
 /** A basic interface for holding onto drop handlers */
 public interface DropTargetHandler {
 
-    public void dispose();
+    void dispose();
 }

@@ -18,7 +18,12 @@ package ghidra.graph.support;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.swing.JComponent;
@@ -87,10 +92,10 @@ public class TestVertexTooltipProvider
 
 	public interface SpyTooltip {
 		// shared hierarchy interface
-		public String getTooltipAsText();
+		String getTooltipAsText();
 	}
 
-	public class SpyTooltipText implements SpyTooltip {
+	public static class SpyTooltipText implements SpyTooltip {
 
 		private String text;
 

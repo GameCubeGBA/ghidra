@@ -17,7 +17,12 @@ package ghidra.program.database.symbol;
 
 import java.io.IOException;
 
-import db.*;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.LongField;
+import db.RecordIterator;
+import db.Table;
 import ghidra.util.exception.AssertException;
 import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;

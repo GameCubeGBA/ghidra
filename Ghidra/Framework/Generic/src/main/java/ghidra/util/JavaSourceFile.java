@@ -15,7 +15,12 @@
  */
 package ghidra.util;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,16 +51,13 @@ public class JavaSourceFile {
 		try {
 			reader = new BufferedReader(new FileReader(filename));
 
-			String newline = System.getProperty("line.separator");
+			String newline = System.lineSeparator();
 			int lineNumber = 0;
 			String line = null;
 			while ((line = reader.readLine()) != null) {
 				linesList.add(new JavaSourceLine(line + newline, ++lineNumber));
 			}
 
-		}
-		catch (FileNotFoundException e) {
-			e.printStackTrace();
 		}
 		catch (IOException e) {
 			e.printStackTrace();
@@ -183,7 +185,7 @@ public class JavaSourceFile {
 			return lineText;
 		}
 
-		StringBuffer buffy = new StringBuffer(startLine.getText());
+		StringBuilder buffy = new StringBuilder(startLine.getText());
 		List<JavaSourceLine> statementLines =
 			getRemainingLinesForStatement(startLine, startLine.getLineNumber() + 1);
 		for (JavaSourceLine sourceLine : statementLines) {
@@ -263,14 +265,8 @@ public class JavaSourceFile {
 
 			TokenMatcher equalsMatcher = new TokenMatcher('=');
 			equalsMatcher.scanLine(text);
-			if (equalsMatcher.foundToken()) {
-				if (containsActionAssignment(text)) {
-					return searchLine;
-				}
-
-//                if ( parenMatcher.isBalanced() && braceMatcher.isBalanced() ) {
-//                    return searchLine;
-//                }
+			if (equalsMatcher.foundToken() && containsActionAssignment(text)) {
+				return searchLine;
 			}
 
 			if (text.contains("(") || text.contains(".")) {
@@ -404,7 +400,7 @@ public class JavaSourceFile {
 // Inner Classes
 //==================================================================================================
 
-	private class TokenMatcher {
+	private static class TokenMatcher {
 		private final char token;
 		private boolean foundToken;
 
@@ -432,7 +428,7 @@ public class JavaSourceFile {
 		}
 	}
 
-	private class TokenPairMatcher {
+	private static class TokenPairMatcher {
 		int runningTokenCount; // can be negative 
 		private final char leftToken;
 		private final char rightToken;

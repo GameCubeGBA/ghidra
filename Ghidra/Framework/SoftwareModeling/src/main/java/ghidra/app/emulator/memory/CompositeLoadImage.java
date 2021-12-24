@@ -15,7 +15,9 @@
  */
 package ghidra.app.emulator.memory;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import ghidra.pcode.memstate.MemoryPage;
 import ghidra.program.model.address.Address;
@@ -23,9 +25,9 @@ import ghidra.program.model.address.AddressSetView;
 
 public class CompositeLoadImage implements MemoryLoadImage {
 
-	private List<MemoryLoadImage> providers = new ArrayList<MemoryLoadImage>();
+	private List<MemoryLoadImage> providers = new ArrayList<>();
 	private HashMap<MemoryLoadImage, AddressSetView> addrSets =
-		new HashMap<MemoryLoadImage, AddressSetView>();
+		new HashMap<>();
 
 	public void addProvider(MemoryLoadImage provider, AddressSetView view) {
 		if (view == null) {

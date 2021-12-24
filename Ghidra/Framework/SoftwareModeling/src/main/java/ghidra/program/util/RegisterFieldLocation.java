@@ -18,12 +18,12 @@
  */
 package ghidra.program.util;
 
+import java.util.Arrays;
+
 import ghidra.framework.options.SaveState;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.lang.Register;
 import ghidra.program.model.listing.Program;
-
-import java.util.Arrays;
 
 /**
  * ProgramLocation for the Register Field.
@@ -69,17 +69,14 @@ public class RegisterFieldLocation extends ProgramLocation {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + Arrays.hashCode(registerNames);
-		result = prime * result + Arrays.hashCode(registerStrings);
-		return result;
+		return prime * result + Arrays.hashCode(registerStrings);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
+		if (!super.equals(obj) || (getClass() != obj.getClass()))
 			return false;
 		RegisterFieldLocation other = (RegisterFieldLocation) obj;
 		if (!Arrays.equals(registerNames, other.registerNames))

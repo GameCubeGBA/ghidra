@@ -21,7 +21,10 @@ import java.util.List;
 
 import docking.ActionContext;
 import docking.ComponentProvider;
-import ghidra.framework.model.*;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.DomainFolder;
+import ghidra.framework.model.Project;
+import ghidra.framework.model.ProjectData;
 
 /**
  * A context that understands files that live in a {@link Project}.  Most of the clients of

@@ -19,5 +19,5 @@ package docking;
 import java.awt.Component;
 
 public interface ErrorReporter {
-	public void report(Component parent, String title, String details);
+	void report(Component parent, String title, String details);
 }

@@ -21,7 +21,9 @@ import java.util.List;
 
 import org.jdom.Element;
 
-import generic.stl.*;
+import generic.stl.IteratorSTL;
+import generic.stl.Pair;
+import generic.stl.VectorSTL;
 import ghidra.pcodeCPort.context.ParserWalker;
 import ghidra.pcodeCPort.error.LowlevelError;
 import ghidra.pcodeCPort.slghpattern.DisjointPattern;
@@ -339,10 +341,7 @@ public class DecisionNode {
 			for (j = 0; j < list.size(); ++j) {
 				DisjointPattern tpat = list.get(j).first;
 				Constructor tconst = list.get(j).second;
-				if ((tpat.equals(pat1)) && (tconst.equals(const1))) {
-					break; // Ran out of possible specializations
-				}
-				if ((tpat == pat2) && (tconst == const2)) {
+				if (((tpat.equals(pat1)) && (tconst.equals(const1))) || ((tpat == pat2) && (tconst == const2))) {
 					break;
 				}
 				if (tpat.resolvesIntersect(pat1, pat2)) {
@@ -421,7 +420,7 @@ public class DecisionNode {
 		Iterator<?> iter = childlist.iterator();
 		while (iter.hasNext()) {
 			Element child = (Element) iter.next();
-			if (child.getName().equals("pair")) {
+			if ("pair".equals(child.getName())) {
 				int id = XmlUtils.decodeUnknownInt(child.getAttributeValue("id"));
 				Constructor ct = sub.getConstructor(id);
 				DisjointPattern pat =
@@ -430,7 +429,7 @@ public class DecisionNode {
 				list.push_back(new Pair<>(pat, ct));
 				// delete pat; // addConstructorPair makes its own copy
 			}
-			else if (child.getName().equals("decision")) {
+			else if ("decision".equals(child.getName())) {
 				DecisionNode subnode = new DecisionNode();
 				subnode.restoreXml(child, this, sub);
 				children.push_back(subnode);

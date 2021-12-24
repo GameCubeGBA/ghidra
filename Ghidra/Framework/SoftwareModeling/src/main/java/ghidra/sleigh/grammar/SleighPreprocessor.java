@@ -15,13 +15,24 @@
  */
 package ghidra.sleigh.grammar;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.antlr.runtime.*;
-import org.apache.logging.log4j.*;
+import org.antlr.runtime.ANTLRReaderStream;
+import org.antlr.runtime.CharStream;
+import org.antlr.runtime.CommonTokenStream;
+import org.antlr.runtime.RecognitionException;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.config.Configurator;
 
 import generic.stl.Pair;
@@ -98,7 +109,7 @@ public class SleighPreprocessor implements ExpressionEnvironment {
 		this.lineno = 1;
 		this.overallLineno = overallLine;
 
-		this.ifstack = new ArrayList<ConditionalHelper>();
+		this.ifstack = new ArrayList<>();
 		ifstack.add(new ConditionalHelper(false, false, false, true));
 
 		FileInputStream fis = new FileInputStream(file);
@@ -129,13 +140,7 @@ public class SleighPreprocessor implements ExpressionEnvironment {
 						if (isCopy()) {
 							String includeFileName = handleVariables(m.group(1), true);
 							boolean isAbsolute = false;
-							if (includeFileName.startsWith("/")) {
-								isAbsolute = true;
-							}
-							else if (includeFileName.startsWith("\\")) {
-								isAbsolute = true;
-							}
-							else if (includeFileName.matches("^[a-zA-Z_0-9]+:.*")) {
+							if (includeFileName.startsWith("/") || includeFileName.startsWith("\\") || includeFileName.matches("^[a-zA-Z_0-9]+:.*")) {
 								isAbsolute = true;
 							}
 							final File includeFile = isAbsolute ? new File(includeFileName)
@@ -158,17 +163,11 @@ public class SleighPreprocessor implements ExpressionEnvironment {
 							continue;
 						}
 					}
-					else if ((m = DEFINE1.matcher(line)).matches()) {
+					else if ((m = DEFINE1.matcher(line)).matches() || (m = DEFINE2.matcher(line)).matches()) {
 						if (isCopy()) {
 							define(m.group(1), m.group(2));
 						}
-					}
-					else if ((m = DEFINE2.matcher(line)).matches()) {
-						if (isCopy()) {
-							define(m.group(1), m.group(2));
-						}
-					}
-					else if ((m = DEFINE3.matcher(line)).matches()) {
+					} else if ((m = DEFINE3.matcher(line)).matches()) {
 						if (isCopy()) {
 							define(m.group(1), "");
 						}
@@ -229,21 +228,16 @@ public class SleighPreprocessor implements ExpressionEnvironment {
 					}
 					log.trace("PRINT " + lineno() + ": commenting directive out");
 					writer.write("#" + origLine);
-					writer.newLine();
+				} else if (isCopy()) {
+					log.trace("PRINT " + lineno() + ": printing text");
+					writer.write(handleVariables(line, compatible));
 				}
 				else {
-					if (isCopy()) {
-						log.trace("PRINT " + lineno() + ": printing text");
-						writer.write(handleVariables(line, compatible));
-						writer.newLine();
-					}
-					else {
-						log.trace(
-							"PRINT " + lineno() + ": replacing text with non-copied blank line");
-						writer.write("#" + line);
-						writer.newLine();
-					}
+					log.trace(
+						"PRINT " + lineno() + ": replacing text with non-copied blank line");
+					writer.write("#" + line);
 				}
+				writer.newLine();
 				lineno++;
 				overallLineno++;
 			}

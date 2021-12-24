@@ -22,53 +22,53 @@ public interface VariableFilter {
 	 * <code>PARAMETER_FILTER</code> matches all parameters (includes auto-params).  A variable is
 	 * treated as a parameter by this filter if it implements the Parameter interface.
 	 */
-	public static final VariableFilter PARAMETER_FILTER = new ParameterFilter(true);
+	VariableFilter PARAMETER_FILTER = new ParameterFilter(true);
 
 	/**
 	 * <code>NONAUTO_PARAMETER_FILTER</code> matches all parameters which are not an auto-param.  A variable is
 	 * treated as a parameter by this filter if it implements the Parameter interface.
 	 */
-	public static final VariableFilter NONAUTO_PARAMETER_FILTER = new ParameterFilter(false);
+	VariableFilter NONAUTO_PARAMETER_FILTER = new ParameterFilter(false);
 
 	/**
 	 * <code>LOCAL_VARIABLE_FILTER</code> matches all simple stack variables.  A variable is
 	 * treated as local by this filter if it does not implement the Parameter interface.
 	 */
-	public static final VariableFilter LOCAL_VARIABLE_FILTER = new LocalVariableFilter();
+	VariableFilter LOCAL_VARIABLE_FILTER = new LocalVariableFilter();
 
 	/**
 	 * <code>STACK_VARIABLE_FILTER</code> matches all simple stack variables
 	 */
-	public static final VariableFilter STACK_VARIABLE_FILTER = new StackVariableFilter();
+	VariableFilter STACK_VARIABLE_FILTER = new StackVariableFilter();
 
 	/**
 	 * <code>COMPOUND_STACK_VARIABLE_FILTER</code> matches all simple or compound variables
 	 * which utilize a stack storage element
 	 */
-	public static final VariableFilter COMPOUND_STACK_VARIABLE_FILTER =
+	VariableFilter COMPOUND_STACK_VARIABLE_FILTER =
 		new CompoundStackVariableFilter();
 
 	/**
 	 * <code>REGISTER_VARIABLE_FILTER</code> matches all simple register variables
 	 */
-	public static final VariableFilter REGISTER_VARIABLE_FILTER = new RegisterVariableFilter();
+	VariableFilter REGISTER_VARIABLE_FILTER = new RegisterVariableFilter();
 
 	/**
 	 * <code>MEMORY_VARIABLE_FILTER</code> matches all simple memory variables
 	 */
-	public static final VariableFilter MEMORY_VARIABLE_FILTER = new MemoryVariableFilter();
+	VariableFilter MEMORY_VARIABLE_FILTER = new MemoryVariableFilter();
 
 	/**
 	 * <code>UNIQUE_VARIABLE_FILTER</code> matches all simple unique variables identified by a hash value
 	 */
-	public static final VariableFilter UNIQUE_VARIABLE_FILTER = new UniqueVariableFilter();
+	VariableFilter UNIQUE_VARIABLE_FILTER = new UniqueVariableFilter();
 
 	/**
 	 * Determine if the specified variable matches this filter criteria
 	 * @param variable 
 	 * @return true if variable satisfies the criteria of this filter
 	 */
-	public boolean matches(Variable variable);
+	boolean matches(Variable variable);
 
 	public static class ParameterFilter implements VariableFilter {
 

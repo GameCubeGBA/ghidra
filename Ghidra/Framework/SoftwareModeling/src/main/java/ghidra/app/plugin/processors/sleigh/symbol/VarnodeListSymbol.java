@@ -57,9 +57,11 @@ public class VarnodeListSymbol extends ValueSymbol {
 		long min = getPatternValue().minValue();
 		long max = getPatternValue().maxValue();
 		tableisfilled = (min >= 0) && (max < varnode_table.length);
-		for (int i = 0; i < varnode_table.length; ++i) {
-			if (varnode_table[i] == null)
+		for (VarnodeSymbol element : varnode_table) {
+			if (element == null) {
 				tableisfilled = false;
+				break;
+			}
 		}
 	}
 
@@ -109,7 +111,7 @@ public class VarnodeListSymbol extends ValueSymbol {
 		SymbolTable symtab = sleigh.getSymbolTable();
 		while (!parser.peek().isEnd()) {
 			XmlElement subel = parser.start();
-			if (subel.getName().equals("var")) {
+			if ("var".equals(subel.getName())) {
 				int id = SpecXmlUtils.decodeInt(subel.getAttribute("id"));
 				varnodes.add((VarnodeSymbol) symtab.findSymbol(id));
 			}

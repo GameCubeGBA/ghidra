@@ -16,13 +16,12 @@
  */
 package ghidra.framework.project.tool;
 
-import ghidra.app.util.FileOpenDropHandler;
-import ghidra.framework.plugintool.PluginTool;
-
 import java.awt.Component;
 
 import docking.DropTargetFactory;
 import docking.DropTargetHandler;
+import ghidra.app.util.FileOpenDropHandler;
+import ghidra.framework.plugintool.PluginTool;
 
 /**
  * A basic DropTargetFactory that provides functionality for dragging files onto Ghidra to be 
@@ -37,7 +36,8 @@ class OpenFileDropHandlerFactory implements DropTargetFactory {
         
     }
     
-    public DropTargetHandler createDropTargetHandler( Component component ) {
+    @Override
+	public DropTargetHandler createDropTargetHandler( Component component ) {
         return new FileOpenDropHandler( tool, component );
     }
 

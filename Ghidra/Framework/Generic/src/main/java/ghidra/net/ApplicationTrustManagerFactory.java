@@ -21,7 +21,9 @@ import java.security.KeyStore;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 
-import javax.net.ssl.*;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.TrustManagerFactory;
+import javax.net.ssl.X509TrustManager;
 
 import ghidra.framework.preferences.Preferences;
 import ghidra.util.Msg;
@@ -174,7 +176,7 @@ public class ApplicationTrustManagerFactory {
 		caError = null;
 	}
 
-	private static final X509Certificate[] NO_CERTS = new X509Certificate[0];
+	private static final X509Certificate[] NO_CERTS = {};
 
 	private static class WrappedTrustManager implements X509TrustManager {
 

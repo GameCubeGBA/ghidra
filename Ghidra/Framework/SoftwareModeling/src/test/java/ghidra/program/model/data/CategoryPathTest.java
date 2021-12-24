@@ -21,7 +21,10 @@
  */
 package ghidra.program.model.data;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -130,7 +133,7 @@ public class CategoryPathTest extends AbstractGTest {
 	@Test
 	public void testConstructorParentAndVarargsArray() {
 		CategoryPath parent = new CategoryPath("/apple/peaches");
-		CategoryPath c = new CategoryPath(parent, new String[] { "pumpkin", "pie" });
+		CategoryPath c = new CategoryPath(parent, "pumpkin", "pie");
 		assertEquals("pie", c.getName());
 		c = c.getParent();
 		assertEquals("pumpkin", c.getName());

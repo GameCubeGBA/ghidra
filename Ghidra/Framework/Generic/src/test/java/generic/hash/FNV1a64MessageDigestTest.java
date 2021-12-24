@@ -17,13 +17,13 @@ package generic.hash;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Arrays;
 import java.util.Random;
 
-import ghidra.util.task.TaskMonitor;
 import org.junit.Before;
 import org.junit.Test;
 
-import ghidra.util.task.TaskMonitorAdapter;
+import ghidra.util.task.TaskMonitor;
 
 public class FNV1a64MessageDigestTest {
 
@@ -84,9 +84,7 @@ public class FNV1a64MessageDigestTest {
 					final int actualRequestLength = (requestLength < digest.getDigestLength()
 							? requestLength : digest.getDigestLength());
 					byte[] output = new byte[beforeLength + actualRequestLength + afterLength];
-					for (int ii = 0; ii < output.length; ++ii) {
-						output[ii] = MARKER;
-					}
+					Arrays.fill(output, MARKER);
 					digest.update(input, TaskMonitor.DUMMY);
 					digest.digest(output, beforeLength, requestLength);
 					for (int ii = 0; ii < beforeLength; ++ii) {

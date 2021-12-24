@@ -31,7 +31,7 @@ public interface FileChangeListener {
 	 * lock.
 	 * @param file the modified file.
 	 */
-	public void fileModified(File file);
+	void fileModified(File file);
 	
 	/**
 	 * Used to notify a listener that the specified file has been removed.
@@ -40,6 +40,6 @@ public interface FileChangeListener {
 	 * lock.
 	 * @param file the removed file.
 	 */
-	public void fileRemoved(File file);
+	void fileRemoved(File file);
 
 }

@@ -31,7 +31,7 @@ public class IntArrayList implements Serializable, Saveable {
     int [] ints;
     int size = 0;
 
-    private Class<?>[] classes = new Class<?>[] { Integer[].class };
+    private Class<?>[] classes = { Integer[].class };
 
     /** Creates new intArrayList */
     public IntArrayList() {

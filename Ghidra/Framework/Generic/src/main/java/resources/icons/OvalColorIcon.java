@@ -16,7 +16,9 @@
  */
 package resources.icons;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
 
 import javax.swing.Icon;
 
@@ -33,15 +35,18 @@ public class OvalColorIcon implements Icon {
         
     }
     
-    public int getIconHeight() {
+    @Override
+	public int getIconHeight() {
         return height;
     }
 
-    public int getIconWidth() {
+    @Override
+	public int getIconWidth() {
         return width;
     }
 
-    public void paintIcon( Component c, Graphics g, int x, int y ) {
+    @Override
+	public void paintIcon( Component c, Graphics g, int x, int y ) {
         g.setColor( color );
         g.fillOval( x, y, width, height );
     }

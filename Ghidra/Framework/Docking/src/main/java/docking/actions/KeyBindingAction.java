@@ -19,7 +19,9 @@ import java.awt.Component;
 
 import docking.ActionContext;
 import docking.DockingWindowManager;
-import docking.action.*;
+import docking.action.DockingAction;
+import docking.action.DockingActionIf;
+import docking.action.MenuData;
 import ghidra.util.Msg;
 
 public class KeyBindingAction extends DockingAction {

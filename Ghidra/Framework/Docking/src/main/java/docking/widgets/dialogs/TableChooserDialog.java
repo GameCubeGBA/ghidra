@@ -20,10 +20,14 @@ import java.awt.event.MouseEvent;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.JComponent;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 
 import docking.DialogComponentProvider;
-import docking.widgets.table.*;
+import docking.widgets.table.GFilterTable;
+import docking.widgets.table.GTable;
+import docking.widgets.table.RowObjectTableModel;
 
 /**
  * @param <T> the type

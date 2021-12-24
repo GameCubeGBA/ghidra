@@ -16,13 +16,18 @@
 package ghidra.program.util;
 
 import java.math.BigInteger;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.List;
 
 import ghidra.app.plugin.processors.sleigh.SleighDebugLogger;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.lang.Register;
 import ghidra.program.model.lang.RegisterValue;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.FlowOverride;
+import ghidra.program.model.listing.Instruction;
+import ghidra.program.model.listing.ProgramContext;
 import ghidra.program.model.mem.MemoryAccessException;
 import ghidra.program.model.scalar.Scalar;
 import ghidra.program.model.symbol.FlowType;
@@ -42,7 +47,7 @@ public class InstructionUtils {
 			return null;
 		}
 
-		StringBuffer textBuf = new StringBuffer("Instruction Summary");
+		StringBuilder textBuf = new StringBuilder("Instruction Summary");
 		textBuf.append("\n-------------------");
 		textBuf.append("\nMnemonic          : " + instruction.getMnemonicString());
 		textBuf.append("\nNumber of Operands: " + instruction.getNumOperands());
@@ -103,17 +108,14 @@ public class InstructionUtils {
 		return getFormattedRegisterValueBits(instr.getRegisterValue(contextReg), indent);
 	}
 
-	private static Comparator<String> OBJSTRING_COMPARATOR = new Comparator<String>() {
-		@Override
-		public int compare(String o1, String o2) {
-			// registers first (they do not have colons)
-			boolean isRegister1 = o1.indexOf(':') < 0;
-			boolean isRegister2 = o2.indexOf(':') < 0;
-			if (isRegister1 != isRegister2) {
-				return isRegister1 ? -1 : 1;
-			}
-			return o1.compareTo(o2);
+	private static Comparator<String> OBJSTRING_COMPARATOR = (o1, o2) -> {
+		// registers first (they do not have colons)
+		boolean isRegister1 = o1.indexOf(':') < 0;
+		boolean isRegister2 = o2.indexOf(':') < 0;
+		if (isRegister1 != isRegister2) {
+			return isRegister1 ? -1 : 1;
 		}
+		return o1.compareTo(o2);
 	};
 
 	/**
@@ -142,7 +144,7 @@ public class InstructionUtils {
 		if (objs == null) {
 			return null;
 		}
-		HashSet<String> set = new HashSet<String>();
+		HashSet<String> set = new HashSet<>();
 		for (Object element : objs) {
 			if (element instanceof Scalar) {
 				Scalar scalar = (Scalar) element;
@@ -215,7 +217,7 @@ public class InstructionUtils {
 		if (strs == null) {
 			return "-none-";
 		}
-		StringBuffer outStr = new StringBuffer();
+		StringBuilder outStr = new StringBuilder();
 		for (String str : strs) {
 			if (outStr.length() != 0) {
 				outStr.append(", ");
@@ -230,7 +232,7 @@ public class InstructionUtils {
 			String[] strs = list != null ? new String[list.size()] : null;
 			return getString(strs, false);
 		}
-		StringBuffer strBuf = new StringBuffer("   ");
+		StringBuilder strBuf = new StringBuilder("   ");
 		if (list == null) {
 			strBuf.append("-none-");
 			return strBuf.toString();

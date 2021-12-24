@@ -16,16 +16,14 @@
  */
 package ghidra.framework.main;
 
+import java.awt.BorderLayout;
+
+import docking.wizard.AbstractWizardJPanel;
+import docking.wizard.PanelManager;
+import docking.wizard.WizardManager;
 import ghidra.app.util.GenericHelpTopics;
 import ghidra.framework.model.ServerInfo;
 import ghidra.util.HelpLocation;
-
-import java.awt.BorderLayout;
-
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
-import docking.wizard.*;
 
 /**
  * Wizard panel that allows the user to specify the host name and port
@@ -47,6 +45,7 @@ public class ServerInfoPanel extends AbstractWizardJPanel {
 	/* (non Javadoc)
 	 * @see ghidra.util.bean.wizard.WizardPanel#getTitle()
 	 */
+	@Override
 	public String getTitle() {
 		return "Specify Server Information";
 	}
@@ -65,6 +64,7 @@ public class ServerInfoPanel extends AbstractWizardJPanel {
 	/* (non Javadoc)
 	 * @see ghidra.util.bean.wizard.WizardPanel#initialize()
 	 */
+	@Override
 	public void initialize() {
 		serverInfoComponent.setStatusListener(panelManager.getWizardManager());
 	}
@@ -72,6 +72,7 @@ public class ServerInfoPanel extends AbstractWizardJPanel {
 	/**
 	 * Return whether the fields on this panel have valid information.
 	 */
+	@Override
 	public boolean isValidInformation() {
 		return serverInfoComponent.isValidInformation();
 	}
@@ -103,12 +104,10 @@ public class ServerInfoPanel extends AbstractWizardJPanel {
 
 	private void buildMainPanel() {
 		serverInfoComponent = new ServerInfoComponent();
-		serverInfoComponent.setChangeListener(new ChangeListener() {
-			public void stateChanged(ChangeEvent e) {
-				WizardManager wm = panelManager.getWizardManager();
-				if (wm.getCurrentWizardPanel() != null) {
-					wm.validityChanged();
-				}
+		serverInfoComponent.setChangeListener(e -> {
+			WizardManager wm = panelManager.getWizardManager();
+			if (wm.getCurrentWizardPanel() != null) {
+				wm.validityChanged();
 			}
 		});
 		add(serverInfoComponent, BorderLayout.CENTER);

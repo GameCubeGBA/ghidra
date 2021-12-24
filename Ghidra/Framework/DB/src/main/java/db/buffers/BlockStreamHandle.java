@@ -25,6 +25,6 @@ public interface BlockStreamHandle<T extends BlockStream> {
 	 * @return connected/open block stream
 	 * @throws IOException
 	 */
-	public T openBlockStream() throws IOException;
+	T openBlockStream() throws IOException;
 	
 }

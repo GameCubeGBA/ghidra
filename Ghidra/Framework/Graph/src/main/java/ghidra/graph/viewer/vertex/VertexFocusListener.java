@@ -22,6 +22,6 @@ package ghidra.graph.viewer.vertex;
  */
 public interface VertexFocusListener<V> {
 
-	public void vertexFocused(V v);
+	void vertexFocused(V v);
 
 }

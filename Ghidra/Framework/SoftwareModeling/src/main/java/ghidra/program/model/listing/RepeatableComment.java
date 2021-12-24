@@ -27,12 +27,12 @@ public interface RepeatableComment {
 	 * 
 	 * @return comment
 	 */
-    public String getComment();
+    String getComment();
 	
 	/**
 	 * Set the text of this repeatable comment.
 	 * 
 	 * @param comment new text for the repeatable comment
 	 */
-    public void setComment(String comment);
+    void setComment(String comment);
 }

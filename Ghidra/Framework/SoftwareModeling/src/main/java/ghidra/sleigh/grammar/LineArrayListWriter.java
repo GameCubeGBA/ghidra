@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 public class LineArrayListWriter extends Writer {
 
-    protected ArrayList<StringBuilder> lines = new ArrayList<StringBuilder>();
+    protected ArrayList<StringBuilder> lines = new ArrayList<>();
     protected int lineno = 0;
 
     public LineArrayListWriter() {
@@ -44,7 +44,7 @@ public class LineArrayListWriter extends Writer {
     // do nothing; the writer always flushes all the time
     }
 
-    protected static final String LINE_SEPARATOR = System.getProperty("line.separator");
+    protected static final String LINE_SEPARATOR = System.lineSeparator();
 
     @Override
     public void write(char[] cbuf, int off, int len) throws IOException {
@@ -53,7 +53,7 @@ public class LineArrayListWriter extends Writer {
     }
 
     public ArrayList<String> getLines() {
-        ArrayList<String> result = new ArrayList<String>();
+        ArrayList<String> result = new ArrayList<>();
         for (StringBuilder sb : lines) {
             result.add(sb.toString());
         }

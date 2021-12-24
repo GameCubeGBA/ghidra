@@ -19,7 +19,12 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JPanel;
 
 import docking.widgets.EmptyBorderButton;
 import docking.widgets.combobox.GComboBox;
@@ -119,7 +124,7 @@ public class ConstraintFilterPanel extends JPanel {
 		constraintComboBox.addActionListener(constraintComboBoxListener);
 	}
 
-	private class ConstraintComboBoxCellRenderer extends GListCellRenderer<ColumnConstraint<?>> {
+	private static class ConstraintComboBoxCellRenderer extends GListCellRenderer<ColumnConstraint<?>> {
 
 		@Override
 		protected String getItemText(ColumnConstraint<?> value) {

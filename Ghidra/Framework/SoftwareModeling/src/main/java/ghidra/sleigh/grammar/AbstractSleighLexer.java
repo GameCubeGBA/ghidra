@@ -15,7 +15,11 @@
  */
 package ghidra.sleigh.grammar;
 
-import org.antlr.runtime.*;
+import org.antlr.runtime.CharStream;
+import org.antlr.runtime.Lexer;
+import org.antlr.runtime.RecognitionException;
+import org.antlr.runtime.RecognizerSharedState;
+import org.antlr.runtime.Token;
 
 import ghidra.util.Msg;
 

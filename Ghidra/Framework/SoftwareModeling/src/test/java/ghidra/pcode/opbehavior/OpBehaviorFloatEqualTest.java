@@ -20,7 +20,9 @@ import java.math.BigInteger;
 import org.junit.Assert;
 import org.junit.Test;
 
-import ghidra.pcode.floatformat.*;
+import ghidra.pcode.floatformat.BigFloat;
+import ghidra.pcode.floatformat.FloatFormat;
+import ghidra.pcode.floatformat.FloatFormatFactory;
 
 public class OpBehaviorFloatEqualTest extends AbstractOpBehaviorTest {
 

@@ -15,7 +15,9 @@
  */
 package docking.widgets.table;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.DecimalFormat;
@@ -28,8 +30,13 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 
 import docking.widgets.AbstractGCellRenderer;
-import ghidra.docking.settings.*;
-import ghidra.util.*;
+import ghidra.docking.settings.FloatingPointPrecisionSettingsDefinition;
+import ghidra.docking.settings.FormatSettingsDefinition;
+import ghidra.docking.settings.IntegerSignednessFormattingModeSettingsDefinition;
+import ghidra.docking.settings.Settings;
+import ghidra.util.NumericUtilities;
+import ghidra.util.SignednessFormatMode;
+import ghidra.util.StringUtilities;
 import ghidra.util.exception.AssertException;
 
 /**

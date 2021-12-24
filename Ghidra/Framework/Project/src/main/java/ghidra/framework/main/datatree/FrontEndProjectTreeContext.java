@@ -22,7 +22,9 @@ import javax.swing.tree.TreePath;
 import docking.ComponentProvider;
 import ghidra.framework.main.datatable.ProjectDataContext;
 import ghidra.framework.main.datatable.ProjectTreeContext;
-import ghidra.framework.model.*;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.DomainFolder;
+import ghidra.framework.model.ProjectData;
 
 public class FrontEndProjectTreeContext extends ProjectDataContext
 		implements ProjectTreeContext {

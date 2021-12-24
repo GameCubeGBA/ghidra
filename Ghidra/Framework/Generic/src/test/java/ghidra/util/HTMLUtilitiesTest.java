@@ -15,8 +15,8 @@
  */
 package ghidra.util;
 
-import static ghidra.util.HTMLUtilities.*;
-import static org.junit.Assert.*;
+import static ghidra.util.HTMLUtilities.HTML;
+import static org.junit.Assert.assertEquals;
 
 import java.awt.Color;
 

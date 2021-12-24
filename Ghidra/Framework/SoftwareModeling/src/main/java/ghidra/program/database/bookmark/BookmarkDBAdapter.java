@@ -15,15 +15,19 @@
  */
 package ghidra.program.database.bookmark;
 
+import java.io.IOException;
+
+import db.DBConstants;
+import db.DBHandle;
+import db.DBRecord;
+import db.RecordIterator;
+import db.Schema;
+import db.Table;
 import ghidra.program.database.map.AddressMap;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSetView;
 import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
-
-import java.io.IOException;
-
-import db.*;
 
 abstract class BookmarkDBAdapter {
 	static final Schema SCHEMA = BookmarkDBAdapterV3.V3_SCHEMA;
@@ -110,8 +114,8 @@ abstract class BookmarkDBAdapter {
 		BookmarkDBAdapter tmpAdapter = null;
 		try {
 			tmpAdapter = new BookmarkDBAdapterV3(tmpHandle, true, typeIds, addrMap);
-			for (int i = 0; i < typeIds.length; i++) {
-				RecordIterator it = oldAdapter.getRecordsByType(typeIds[i]);
+			for (int typeId2 : typeIds) {
+				RecordIterator it = oldAdapter.getRecordsByType(typeId2);
 				while (it.hasNext()) {
 					if (monitor.isCancelled()) {
 						throw new IOException("Upgrade Cancelled");
@@ -126,13 +130,13 @@ abstract class BookmarkDBAdapter {
 				}
 			}
 			dbHandle.deleteTable(BOOKMARK_TABLE_NAME);
-			for (int i = 0; i < typeIds.length; i++) {
-				dbHandle.deleteTable(BOOKMARK_TABLE_NAME + typeIds[i]);
+			for (int typeId : typeIds) {
+				dbHandle.deleteTable(BOOKMARK_TABLE_NAME + typeId);
 			}
 			BookmarkDBAdapter newAdapter =
 				new BookmarkDBAdapterV3(dbHandle, true, typeIds, addrMap);
-			for (int i = 0; i < typeIds.length; i++) {
-				RecordIterator it = tmpAdapter.getRecordsByType(typeIds[i]);
+			for (int typeId : typeIds) {
+				RecordIterator it = tmpAdapter.getRecordsByType(typeId);
 				while (it.hasNext()) {
 					if (monitor.isCancelled()) {
 						throw new IOException("Upgrade Cancelled");

@@ -31,7 +31,7 @@ public class UniqueMemoryBank extends MemoryBank {
 	 * {@link WordInfo} objects, each of which represents an eight-byte word
 	 * of memory.  Each key in this map must be 0 mod 8.
 	 */
-	protected MapSTL<Long, WordInfo> map = new ComparableMapSTL<Long, WordInfo>();
+	protected MapSTL<Long, WordInfo> map = new ComparableMapSTL<>();
 
 	private static final long ALIGNMENT_MASK = 0xfffffffffffffff8L;
 

@@ -16,15 +16,25 @@
 package ghidra.program.database.function;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.collections4.map.LazyMap;
 
-import db.*;
+import db.DBHandle;
+import db.DBRecord;
+import db.RecordIterator;
 import db.util.ErrorHandler;
 import ghidra.program.database.DBObjectCache;
 import ghidra.program.database.ProgramDB;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.FunctionTag;
+import ghidra.program.model.listing.FunctionTagManager;
+import ghidra.program.model.listing.Program;
 import ghidra.program.util.ChangeManager;
 import ghidra.util.Lock;
 import ghidra.util.datastruct.Counter;

@@ -18,7 +18,9 @@ package docking.action;
 import javax.swing.JButton;
 import javax.swing.JMenuItem;
 
-import docking.*;
+import docking.ActionContext;
+import docking.DockingCheckBoxMenuItem;
+import docking.EmptyBorderToggleButton;
 
 public abstract class ToggleDockingAction extends DockingAction implements ToggleDockingActionIf {
 	private boolean isSelected;

@@ -15,22 +15,43 @@
  */
 package docking.widgets.tree;
 
-import static docking.widgets.tree.support.GTreeSelectionEvent.EventOrigin.*;
-import static ghidra.util.SystemUtilities.*;
+import static docking.widgets.tree.support.GTreeSelectionEvent.EventOrigin.USER_GENERATED;
+import static ghidra.util.SystemUtilities.runSwingNow;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Insets;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.dnd.Autoscroll;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.function.BooleanSupplier;
 
-import javax.swing.*;
+import javax.swing.CellEditor;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTree;
+import javax.swing.JViewport;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
-import javax.swing.event.*;
-import javax.swing.tree.*;
+import javax.swing.ToolTipManager;
+import javax.swing.TransferHandler;
+import javax.swing.event.TreeExpansionListener;
+import javax.swing.event.TreeModelEvent;
+import javax.swing.event.TreeModelListener;
+import javax.swing.tree.TreeCellEditor;
+import javax.swing.tree.TreeModel;
+import javax.swing.tree.TreePath;
+import javax.swing.tree.TreeSelectionModel;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -39,14 +60,35 @@ import docking.actions.KeyBindingUtils;
 import docking.widgets.JTreeMouseListenerDelegate;
 import docking.widgets.filter.FilterTextField;
 import docking.widgets.table.AutoscrollAdapter;
-import docking.widgets.tree.internal.*;
-import docking.widgets.tree.support.*;
+import docking.widgets.tree.internal.DefaultGTreeDataTransformer;
+import docking.widgets.tree.internal.GTreeDragNDropAdapter;
+import docking.widgets.tree.internal.GTreeModel;
+import docking.widgets.tree.internal.GTreeSelectionModel;
+import docking.widgets.tree.support.GTreeCellEditor;
+import docking.widgets.tree.support.GTreeDragNDropHandler;
+import docking.widgets.tree.support.GTreeFilter;
+import docking.widgets.tree.support.GTreeRenderer;
+import docking.widgets.tree.support.GTreeSelectionEvent;
 import docking.widgets.tree.support.GTreeSelectionEvent.EventOrigin;
-import docking.widgets.tree.tasks.*;
+import docking.widgets.tree.support.GTreeSelectionListener;
+import docking.widgets.tree.tasks.GTreeBulkTask;
+import docking.widgets.tree.tasks.GTreeClearSelectionTask;
+import docking.widgets.tree.tasks.GTreeExpandAllTask;
+import docking.widgets.tree.tasks.GTreeExpandNodeToDepthTask;
+import docking.widgets.tree.tasks.GTreeExpandPathsTask;
+import docking.widgets.tree.tasks.GTreeSelectNodeByNameTask;
+import docking.widgets.tree.tasks.GTreeSelectPathsTask;
+import docking.widgets.tree.tasks.GTreeStartEditingTask;
 import generic.timer.ExpiringSwingTimer;
-import ghidra.util.*;
+import ghidra.util.FilterTransformer;
+import ghidra.util.Swing;
+import ghidra.util.SystemUtilities;
 import ghidra.util.exception.CancelledException;
-import ghidra.util.task.*;
+import ghidra.util.task.BusyListener;
+import ghidra.util.task.MonitoredRunnable;
+import ghidra.util.task.SwingUpdateManager;
+import ghidra.util.task.TaskMonitor;
+import ghidra.util.task.TaskMonitorComponent;
 import ghidra.util.worker.PriorityWorker;
 
 /**
@@ -533,8 +575,7 @@ public class GTree extends JPanel implements BusyListener {
 	 */
 	public Point getViewPosition() {
 		JViewport viewport = scrollPane.getViewport();
-		Point p = viewport.getViewPosition();
-		return p;
+		return viewport.getViewPosition();
 	}
 
 	public void setViewPosition(Point p) {
@@ -544,8 +585,7 @@ public class GTree extends JPanel implements BusyListener {
 
 	public Rectangle getViewRect() {
 		JViewport viewport = scrollPane.getViewport();
-		Rectangle viewRect = viewport.getViewRect();
-		return viewRect;
+		return viewport.getViewRect();
 	}
 
 	public GTreeNode getNodeForLocation(int x, int y) {
@@ -796,7 +836,7 @@ public class GTree extends JPanel implements BusyListener {
 	 * @param e the TreeModelEvent;
 	 */
 	public static void printEvent(PrintWriter out, String name, TreeModelEvent e) {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		buf.append(name);
 		buf.append("\n\tPath: ");
 		Object[] path = e.getPath();
@@ -1102,10 +1142,8 @@ public class GTree extends JPanel implements BusyListener {
 	 * @param newNode the node that may cause the tree to refilter.
 	 */
 	public void refilterLater(GTreeNode newNode) {
-		if (isFilteringEnabled && filter != null) {
-			if (filter.acceptsNode(newNode)) {
-				filterUpdateManager.updateLater();
-			}
+		if ((isFilteringEnabled && filter != null) && filter.acceptsNode(newNode)) {
+			filterUpdateManager.updateLater();
 		}
 	}
 
@@ -1290,11 +1328,9 @@ public class GTree extends JPanel implements BusyListener {
 			}
 			allowRootCollapse = allowed;
 
-			if (!allowed) {
-				if (model != null && model.getRoot() != null) {
-					runTask(new GTreeExpandNodeToDepthTask(GTree.this, getJTree(),
-						model.getModelRoot(), 1));
-				}
+			if (!allowed && (model != null && model.getRoot() != null)) {
+				runTask(new GTreeExpandNodeToDepthTask(GTree.this, getJTree(),
+					model.getModelRoot(), 1));
 			}
 		}
 
@@ -1352,7 +1388,7 @@ public class GTree extends JPanel implements BusyListener {
 		}
 	}
 
-	private class GTreeMouseListenerDelegate extends JTreeMouseListenerDelegate {
+	private static class GTreeMouseListenerDelegate extends JTreeMouseListenerDelegate {
 		private final GTree gTree;
 
 		GTreeMouseListenerDelegate(JTree jTree, GTree gTree) {

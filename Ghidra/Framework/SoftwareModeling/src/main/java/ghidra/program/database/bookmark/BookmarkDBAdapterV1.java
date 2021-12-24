@@ -15,14 +15,25 @@
  */
 package ghidra.program.database.bookmark;
 
-import ghidra.program.database.map.AddressMap;
-import ghidra.program.model.address.*;
-import ghidra.util.exception.VersionException;
-
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.ListIterator;
 
-import db.*;
+import db.ConvertedRecordIterator;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.LongField;
+import db.RecordIterator;
+import db.StringField;
+import db.Table;
+import ghidra.program.database.map.AddressMap;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.util.exception.VersionException;
 
 /**
  * 
@@ -83,7 +94,7 @@ class BookmarkDBAdapterV1 extends BookmarkDBAdapter {
 
 	@Override
 	String[] getCategories(int typeId) throws IOException {
-		HashSet<String> set = new HashSet<String>();
+		HashSet<String> set = new HashSet<>();
 		Field fv = new LongField(typeId);
 		RecordIterator recordIter = table.indexIterator(V1_TYPE_ID_COL, fv, fv, true);
 		while (recordIter.hasNext()) {
@@ -179,7 +190,7 @@ class BookmarkDBAdapterV1 extends BookmarkDBAdapter {
 		private ListIterator<DBRecord> iter;
 
 		BatchRecordIterator(int typeId, long start, long end) throws IOException {
-			ArrayList<DBRecord> list = new ArrayList<DBRecord>();
+			ArrayList<DBRecord> list = new ArrayList<>();
 			Field sf = new LongField(start);
 			Field ef = new LongField(end);
 			RecordIterator recIter = table.indexIterator(V1_ADDRESS_COL, sf, ef, true);

@@ -19,7 +19,11 @@ import java.awt.event.MouseEvent;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-import javax.sound.sampled.*;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 
 import ghidra.docking.settings.Settings;
@@ -30,10 +34,10 @@ import ghidra.util.Msg;
 import resources.ResourceManager;
 
 public class AUDataType extends BuiltIn implements Dynamic {
-	public static byte[] MAGIC = new byte[] { (byte) '.', (byte) 's', (byte) 'n', (byte) 'd' };
+	public static byte[] MAGIC = { (byte) '.', (byte) 's', (byte) 'n', (byte) 'd' };
 
 	public static byte[] MAGIC_MASK =
-		new byte[] { (byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0xff };
+		{ (byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0xff };
 
 	public AUDataType() {
 		this(null);
@@ -61,8 +65,7 @@ public class AUDataType extends BuiltIn implements Dynamic {
 
 			int dataSize = GhidraBigEndianDataConverter.INSTANCE.getInt(buf, 8);
 
-			int totalSize = dataOffset + dataSize; //header + data = total size			
-			return totalSize;
+			return dataOffset + dataSize;
 
 		}
 		catch (Exception e) {

@@ -25,7 +25,7 @@ import java.util.List;
  */
 public class DecisionSet {
 
-	private List<Decision> decisionList = new ArrayList<Decision>();
+	private List<Decision> decisionList = new ArrayList<>();
 	private String propertyName;
 
 	public DecisionSet(String propertyName) {
@@ -47,7 +47,7 @@ public class DecisionSet {
 	 * @return  a list of property values from decision paths that matched the constraints.
 	 */
 	public List<String> getValues() {
-		List<String> values = new ArrayList<String>(decisionList.size());
+		List<String> values = new ArrayList<>(decisionList.size());
 		for (Decision decision : decisionList) {
 			values.add(decision.getValue());
 		}

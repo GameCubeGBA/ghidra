@@ -15,7 +15,9 @@
  */
 package docking.widgets.fieldpanel.field;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
 
 import javax.swing.Icon;
 import javax.swing.JComponent;
@@ -178,7 +180,7 @@ public class AttributedString {
 	}
 
 	public AttributedString replaceAll(char[] targets, char repacement) {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		int n = text.length();
 		for (int i = 0; i < n; i++) {
 			char c = text.charAt(i);

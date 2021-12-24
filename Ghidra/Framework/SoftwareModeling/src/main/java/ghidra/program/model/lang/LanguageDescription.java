@@ -19,29 +19,29 @@ import java.util.Collection;
 import java.util.List;
 
 public interface LanguageDescription {
-	public LanguageID getLanguageID();
+	LanguageID getLanguageID();
 
-	public Processor getProcessor();
+	Processor getProcessor();
 
-	public Endian getEndian();
+	Endian getEndian();
 
-	public Endian getInstructionEndian();
+	Endian getInstructionEndian();
 
-	public int getSize();
+	int getSize();
 
-	public String getVariant();
+	String getVariant();
 
-	public int getVersion();
+	int getVersion();
 
-	public int getMinorVersion();
+	int getMinorVersion();
 
-	public String getDescription();
+	String getDescription();
 
-	public boolean isDeprecated();
+	boolean isDeprecated();
 
-	public Collection<CompilerSpecDescription> getCompatibleCompilerSpecDescriptions();
+	Collection<CompilerSpecDescription> getCompatibleCompilerSpecDescriptions();
 
-	public CompilerSpecDescription getCompilerSpecDescriptionByID(CompilerSpecID compilerSpecID)
+	CompilerSpecDescription getCompilerSpecDescriptionByID(CompilerSpecID compilerSpecID)
 			throws CompilerSpecNotFoundException;
 
 	/**
@@ -52,5 +52,5 @@ public interface LanguageDescription {
 	 * @param externalTool external tool for looking up external tool names
 	 * @return external names for this language associated with tool 'key' -- null if there are no results
 	 */
-	public List<String> getExternalNames(String externalTool);
+	List<String> getExternalNames(String externalTool);
 }

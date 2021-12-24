@@ -31,7 +31,6 @@ import ghidra.app.plugin.processors.sleigh.pattern.DisjointPattern;
 import ghidra.app.plugin.processors.sleigh.pattern.PatternBlock;
 import ghidra.program.model.lang.RegisterValue;
 import ghidra.util.NumericUtilities;
-import ghidra.util.StringUtilities;
 
 /**
  * The analog of {@link PatternBlock}, designed for use by the assembler
@@ -94,8 +93,7 @@ public class AssemblyPatternBlock implements Comparable<AssemblyPatternBlock> {
 		for (int i = 0; i < mask.length; i++) {
 			mask[i] = -1;
 		}
-		AssemblyPatternBlock res = new AssemblyPatternBlock(offset, mask, vals);
-		return res;
+		return new AssemblyPatternBlock(offset, mask, vals);
 	}
 
 	/**
@@ -428,12 +426,9 @@ public class AssemblyPatternBlock implements Comparable<AssemblyPatternBlock> {
 		int ckOffset = Math.min(this.offset, that.offset);
 		int length = Math.max(this.length(), that.length());
 		for (int i = ckOffset; i < length; i++) {
-			if (checkRead(this.mask, i - this.offset, 0) != checkRead(that.mask, i - that.offset,
-				0)) {
-				return false;
-			}
-			if (checkRead(this.vals, i - this.offset, 0) != checkRead(that.vals, i - that.offset,
-				0)) {
+			if ((checkRead(this.mask, i - this.offset, 0) != checkRead(that.mask, i - that.offset,
+				0)) || (checkRead(this.vals, i - this.offset, 0) != checkRead(that.vals, i - that.offset,
+				0))) {
 				return false;
 			}
 		}
@@ -454,10 +449,7 @@ public class AssemblyPatternBlock implements Comparable<AssemblyPatternBlock> {
 		}
 
 		result = SleighUtil.compareArrays(this.vals, that.vals);
-		if (result != 0) {
-			return result;
-		}
-		return 0;
+		return result;
 	}
 
 	/**
@@ -658,9 +650,7 @@ public class AssemblyPatternBlock implements Comparable<AssemblyPatternBlock> {
 	 */
 	public AssemblyPatternBlock fillMask() {
 		byte[] newMask = new byte[this.mask.length];
-		for (int i = 0; i < newMask.length; i++) {
-			newMask[i] = (byte) 0xff;
-		}
+		Arrays.fill(newMask, (byte) 0xff);
 		return new AssemblyPatternBlock(offset, newMask, vals);
 	}
 
@@ -766,7 +756,7 @@ public class AssemblyPatternBlock implements Comparable<AssemblyPatternBlock> {
 			byte[] cur = new byte[vals.length];
 			System.arraycopy(vals, 0, cur, 0, vals.length);
 			final int max = countPossibleVals();
-			return new Iterator<byte[]>() {
+			return new Iterator<>() {
 				int c = 0;
 
 				@Override

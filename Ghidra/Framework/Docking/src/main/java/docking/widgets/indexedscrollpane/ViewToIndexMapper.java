@@ -20,16 +20,16 @@ import java.math.BigInteger;
 // note that only vertical coordinates are affected
 public interface ViewToIndexMapper {
 
-	public int getViewHeight();
+	int getViewHeight();
 
-	public BigInteger getIndex(int value);
+	BigInteger getIndex(int value);
 
-	public int getVerticalOffset(int value);
+	int getVerticalOffset(int value);
 
-	public void setVisibleViewHeight(int height);
+	void setVisibleViewHeight(int height);
 
-	public int getScrollValue(BigInteger startIndex, BigInteger endIndex, int yStart, int yEnd);
+	int getScrollValue(BigInteger startIndex, BigInteger endIndex, int yStart, int yEnd);
 
-	public void indexModelDataChanged(BigInteger start, BigInteger end);
+	void indexModelDataChanged(BigInteger start, BigInteger end);
 
 }

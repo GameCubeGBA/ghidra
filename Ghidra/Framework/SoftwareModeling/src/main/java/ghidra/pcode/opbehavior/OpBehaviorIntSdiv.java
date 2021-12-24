@@ -16,11 +16,11 @@
  */
 package ghidra.pcode.opbehavior;
 
+import java.math.BigInteger;
+
 import ghidra.pcode.error.LowlevelError;
 import ghidra.pcode.utils.Utils;
 import ghidra.program.model.pcode.PcodeOp;
-
-import java.math.BigInteger;
 
 public class OpBehaviorIntSdiv extends BinaryOpBehavior {
 
@@ -37,9 +37,7 @@ public class OpBehaviorIntSdiv extends BinaryOpBehavior {
 		num = Utils.zzz_sign_extend(num, 8 * sizein - 1);
 		denom = Utils.zzz_sign_extend(denom, 8 * sizein - 1);
 		long sres = num / denom; // Do the signed division
-		// Cut to appropriate size
-		sres = Utils.zzz_zero_extend(sres, 8 * sizeout - 1);
-		return sres; // Recast as unsigned
+		return Utils.zzz_zero_extend(sres, 8 * sizeout - 1); // Recast as unsigned
 	}
 
 	@Override

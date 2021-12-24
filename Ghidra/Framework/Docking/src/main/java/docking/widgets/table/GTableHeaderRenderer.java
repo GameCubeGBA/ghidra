@@ -15,17 +15,41 @@
  */
 package docking.widgets.table;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Insets;
+import java.awt.Paint;
+import java.awt.Point;
 import java.awt.font.TextAttribute;
 import java.awt.geom.Rectangle2D;
 import java.text.AttributedString;
 
-import javax.swing.*;
-import javax.swing.border.*;
-import javax.swing.table.*;
+import javax.swing.Icon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableModel;
 
 import docking.widgets.label.GDLabel;
-import resources.*;
+import resources.Icons;
+import resources.MultiIcon;
+import resources.ResourceManager;
 import resources.icons.EmptyIcon;
 import resources.icons.TranslateIcon;
 
@@ -363,7 +387,7 @@ public class GTableHeaderRenderer extends JPanel implements TableCellRenderer {
 		}
 	}
 
-	private class NumberPainterIcon implements Icon {
+	private static class NumberPainterIcon implements Icon {
 
 		private final int iconWidth;
 		private final int iconHeight;

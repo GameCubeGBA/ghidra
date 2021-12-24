@@ -26,5 +26,5 @@ public interface DockingToolConstants {
 	* Name of options for key bindings that map action name to a
 	* key stroke object.
 	*/
-	public final static String KEY_BINDINGS = "Key Bindings";
+	String KEY_BINDINGS = "Key Bindings";
 }

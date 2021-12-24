@@ -16,15 +16,15 @@
  */
 package ghidra.program.model.reloc;
 
-import ghidra.util.classfinder.ClassSearcher;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import ghidra.util.classfinder.ClassSearcher;
 
 public class RelocationUtil {
 
 	public static List<RelocationHandler> getRelocationHandlers() {
-		return new ArrayList<RelocationHandler>(ClassSearcher.getInstances(RelocationHandler.class));
+		return new ArrayList<>(ClassSearcher.getInstances(RelocationHandler.class));
 	}
 
 }

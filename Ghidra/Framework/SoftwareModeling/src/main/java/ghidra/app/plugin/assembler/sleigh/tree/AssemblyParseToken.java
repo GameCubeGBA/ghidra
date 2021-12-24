@@ -56,10 +56,7 @@ public class AssemblyParseToken extends AssemblyParseTreeNode {
 			return false;
 		}
 		AssemblyParseToken that = (AssemblyParseToken) obj;
-		if (!this.term.equals(that.term)) {
-			return false;
-		}
-		if (!this.str.equals(that.str)) {
+		if (!this.term.equals(that.term) || !this.str.equals(that.str)) {
 			return false;
 		}
 		return true;

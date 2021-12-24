@@ -16,15 +16,25 @@
 package ghidra.program.database.data;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import db.DBRecord;
 import db.Field;
 import ghidra.program.database.DBObjectCache;
 import ghidra.program.database.DatabaseObject;
-import ghidra.program.model.data.*;
+import ghidra.program.model.data.Category;
+import ghidra.program.model.data.CategoryPath;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.DataTypeConflictHandler;
 import ghidra.program.model.data.DataTypeConflictHandler.ConflictResult;
+import ghidra.program.model.data.DataTypeDependencyException;
+import ghidra.program.model.data.DataTypeManager;
 import ghidra.util.InvalidNameException;
 import ghidra.util.Lock;
 import ghidra.util.exception.AssertException;
@@ -267,8 +277,7 @@ class CategoryDB extends DatabaseObject implements Category {
 					// can't happen here because we made a copy
 				}
 			}
-			DataType resolvedDataType = mgr.resolve(dt, handler);
-			return resolvedDataType;
+			return mgr.resolve(dt, handler);
 		}
 		finally {
 			mgr.lock.release();
@@ -308,8 +317,7 @@ class CategoryDB extends DatabaseObject implements Category {
 		mgr.lock.acquire();
 		try {
 			checkDeleted();
-			CategoryDB cat = mgr.createCategoryDB(this, categoryName);
-			return cat;
+			return mgr.createCategoryDB(this, categoryName);
 		}
 		catch (IOException e1) {
 			mgr.dbError(e1);
@@ -556,10 +564,7 @@ class CategoryDB extends DatabaseObject implements Category {
 				movedDataType.setCategoryPath(path);
 			}
 		}
-		catch (InvalidNameException e) {
-			throw new AssertException(e); // can't happen
-		}
-		catch (DuplicateNameException e) {
+		catch (InvalidNameException | DuplicateNameException e) {
 			throw new AssertException(e); // can't happen?
 		}
 		finally {

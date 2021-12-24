@@ -229,7 +229,7 @@ public class MaskedLong implements Comparable<MaskedLong> {
 		if (dir == 1) {
 			n = (size - n) % size;
 		}
-		if (n == 0 | size == 0) {
+		if (n == 0 || size == 0) {
 			return this;
 		}
 		final long unaffected = size == 64 ? 0 : (-1L) << size;
@@ -817,11 +817,8 @@ public class MaskedLong implements Comparable<MaskedLong> {
 			if (Long.bitCount(that.val) == 1) {
 				return this.shiftLeft(Long.numberOfTrailingZeros(that.val));
 			}
-		}
-		else if (this.isFullyDefined()) {
-			if (Long.bitCount(this.val) == 1) {
-				return that.shiftLeft(Long.numberOfTrailingZeros(this.val));
-			}
+		} else if (this.isFullyDefined() && (Long.bitCount(this.val) == 1)) {
+			return that.shiftLeft(Long.numberOfTrailingZeros(this.val));
 		}
 
 		// TODO: Distinguish size, don't knows, from don't cares.
@@ -829,11 +826,9 @@ public class MaskedLong implements Comparable<MaskedLong> {
 		// of the "field"
 		int thisSize = Long.numberOfTrailingZeros(~this.msk);
 		int thatSize = Long.numberOfTrailingZeros(~that.msk);
-		if (thisSize + Long.numberOfLeadingZeros(this.msk) == Long.SIZE) {
-			if (thatSize + Long.numberOfLeadingZeros(that.msk) == Long.SIZE) {
-				int newSize = thisSize + thatSize;
-				return fromMaskAndValue(~(-1L << newSize), this.val * that.val);
-			}
+		if ((thisSize + Long.numberOfLeadingZeros(this.msk) == Long.SIZE) && (thatSize + Long.numberOfLeadingZeros(that.msk) == Long.SIZE)) {
+			int newSize = thisSize + thatSize;
+			return fromMaskAndValue(~(-1L << newSize), this.val * that.val);
 		}
 
 		throw new UnsupportedOperationException("Cannot multiply unknown values, yet.");

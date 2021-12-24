@@ -33,6 +33,7 @@ public class GhidraTimerFactory {
 		t.setDelay(500);
 		TimerCallback callback1 = new TimerCallback() {
 			int i = 0;
+			@Override
 			public void timerFired() {
 				System.out.println("A: "+i);
 				if (++i == 20) {
@@ -47,6 +48,7 @@ public class GhidraTimerFactory {
 		
 		TimerCallback callback2 = new TimerCallback() {
 			int i = 0;
+			@Override
 			public void timerFired() {
 				System.out.println("B: "+i);
 				if (++i == 100) {

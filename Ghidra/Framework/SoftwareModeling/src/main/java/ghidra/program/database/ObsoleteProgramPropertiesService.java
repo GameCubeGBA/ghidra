@@ -16,9 +16,10 @@
  */
 package ghidra.program.database;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
-import ghidra.framework.*;
+import ghidra.framework.PluggableServiceRegistry;
 
 public class ObsoleteProgramPropertiesService {
 	static {
@@ -33,6 +34,6 @@ public class ObsoleteProgramPropertiesService {
 	}
 
 	protected Map<String, String> doGetObsoleteProgramProperties() {
-		return new HashMap<String, String>();
+		return new HashMap<>();
 	}
 }

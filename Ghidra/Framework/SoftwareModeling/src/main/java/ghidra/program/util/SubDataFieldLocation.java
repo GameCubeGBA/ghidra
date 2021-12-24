@@ -15,6 +15,8 @@
  */
 package ghidra.program.util;
 
+import java.util.Objects;
+
 import ghidra.framework.options.SaveState;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
@@ -86,31 +88,22 @@ public class SubDataFieldLocation extends CodeUnitLocation {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((fieldName == null) ? 0 : fieldName.hashCode());
-		result = prime * result + ((rep == null) ? 0 : rep.hashCode());
-		return result;
+		return prime * result + ((rep == null) ? 0 : rep.hashCode());
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
+		if (!super.equals(obj) || (getClass() != obj.getClass()))
 			return false;
 		SubDataFieldLocation other = (SubDataFieldLocation) obj;
-		if (fieldName == null) {
-			if (other.fieldName != null)
-				return false;
-		}
-		else if (!fieldName.equals(other.fieldName))
+		if (!Objects.equals(fieldName, other.fieldName)) {
 			return false;
-		if (rep == null) {
-			if (other.rep != null)
-				return false;
 		}
-		else if (!rep.equals(other.rep))
+		if (!Objects.equals(rep, other.rep)) {
 			return false;
+		}
 		return true;
 	}
 

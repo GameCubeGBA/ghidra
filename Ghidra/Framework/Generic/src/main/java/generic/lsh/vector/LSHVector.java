@@ -16,39 +16,39 @@
  */
 package generic.lsh.vector;
 
-import ghidra.xml.XmlPullParser;
-
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 
+import ghidra.xml.XmlPullParser;
+
 public interface LSHVector {
 
-	public int numEntries();
+	int numEntries();
 
-	public HashEntry getEntry(int i);
+	HashEntry getEntry(int i);
 	
-	public HashEntry[] getEntries();
+	HashEntry[] getEntries();
 
-	public double getLength();
+	double getLength();
 
-	public double compare(LSHVector op2,VectorCompare data);
+	double compare(LSHVector op2,VectorCompare data);
 
-	public void compareCounts(LSHVector op2, VectorCompare data);
+	void compareCounts(LSHVector op2, VectorCompare data);
 
-	public double compareDetail(LSHVector op2, StringBuilder buf);
+	double compareDetail(LSHVector op2, StringBuilder buf);
 
-	public void saveXml(Writer fwrite) throws IOException;
+	void saveXml(Writer fwrite) throws IOException;
 	
-	public String saveSQL();
+	String saveSQL();
 
-	public void saveBase64(StringBuilder buffer,char[] encoder);
+	void saveBase64(StringBuilder buffer,char[] encoder);
 
-	public void restoreXml(XmlPullParser parser,WeightFactory weightFactory,IDFLookup idfLookup);
+	void restoreXml(XmlPullParser parser,WeightFactory weightFactory,IDFLookup idfLookup);
 	
-	public void restoreSQL(String sql,WeightFactory weightFactory,IDFLookup idfLookup) throws IOException;
+	void restoreSQL(String sql,WeightFactory weightFactory,IDFLookup idfLookup) throws IOException;
 
-	public void restoreBase64(Reader input,char[] buffer,WeightFactory wfactory,IDFLookup idflookup,int[] decode) throws IOException;
+	void restoreBase64(Reader input,char[] buffer,WeightFactory wfactory,IDFLookup idflookup,int[] decode) throws IOException;
 
-	public long calcUniqueHash();
+	long calcUniqueHash();
 }

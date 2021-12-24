@@ -100,14 +100,8 @@ public class MenuData {
 		if (menuPath == null || menuPath.length == 0) {
 			return null;
 		}
-		StringBuilder buildy = new StringBuilder();
-		for (int i = 0; i < menuPath.length; i++) {
-			buildy.append(menuPath[i]);
-			if (i != (menuPath.length - 1)) {
-				buildy.append("->");
-			}
-		}
-		return buildy.toString();
+		String buildy = String.join("->", menuPath);
+		return buildy;
 	}
 
 	public int getMnemonic() {

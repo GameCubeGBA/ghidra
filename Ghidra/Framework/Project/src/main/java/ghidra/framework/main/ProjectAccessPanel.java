@@ -15,13 +15,25 @@
  */
 package ghidra.framework.main;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
+import javax.swing.Icon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 
 import docking.options.editor.ButtonPanelFactory;
 import docking.widgets.checkbox.GCheckBox;
@@ -291,14 +303,8 @@ public class ProjectAccessPanel extends AbstractWizardJPanel {
 
 			if (selectedUserNames.isEmpty()) {
 				enabled = false;
-			}
-			else if (selectedUserNames.size() == 1) {
-				if (selectedUserNames.get(0).equals(currentUser)) {
-					enabled = false;
-				}
-				else {
-					enabled = true;
-				}
+			} else if ((selectedUserNames.size() == 1) && selectedUserNames.get(0).equals(currentUser)) {
+				enabled = false;
 			}
 			else {
 				enabled = true;
@@ -383,8 +389,8 @@ public class ProjectAccessPanel extends AbstractWizardJPanel {
 
 			List<String> users = new ArrayList<>();
 			int[] selectedRows = table.getSelectedRows();
-			for (int i = 0; i < selectedRows.length; i++) {
-				User user = tableModel.getRowObject(selectedRows[i]);
+			for (int selectedRow : selectedRows) {
+				User user = tableModel.getRowObject(selectedRow);
 				users.add(user.getName());
 			}
 
@@ -547,8 +553,7 @@ public class ProjectAccessPanel extends AbstractWizardJPanel {
 		 * @return list of user names
 		 */
 		List<String> getAllUsers() {
-			List<String> allUsers = CollectionUtils.asList(listModel.elements());
-			return allUsers;
+			return CollectionUtils.asList(listModel.elements());
 		}
 
 		/**

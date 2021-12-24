@@ -28,11 +28,11 @@ public interface ExternalReference extends Reference {
 	/**
 	 * Returns the name of the external library containing this location.
 	 */
-	public String getLibraryName();
+	String getLibraryName();
 	
 	/**
 	 * Returns the external label associated with this location (may be null).
 	 */
-	public String getLabel();
+	String getLabel();
 	
 }

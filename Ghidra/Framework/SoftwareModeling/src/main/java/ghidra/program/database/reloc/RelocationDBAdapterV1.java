@@ -15,17 +15,17 @@
  */
 package ghidra.program.database.reloc;
 
+import java.io.IOException;
+
+import db.DBHandle;
+import db.DBRecord;
+import db.RecordIterator;
+import db.Table;
 import ghidra.program.database.map.AddressKeyRecordIterator;
 import ghidra.program.database.map.AddressMap;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSetView;
 import ghidra.util.exception.VersionException;
-
-import java.io.IOException;
-
-import java.lang.UnsupportedOperationException;
-
-import db.*;
 
 class RelocationDBAdapterV1 extends RelocationDBAdapter {
 	final static int VERSION = 1;

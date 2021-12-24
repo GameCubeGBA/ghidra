@@ -17,7 +17,9 @@ package docking.widgets.table;
 
 import javax.swing.JLabel;
 import javax.swing.JTable;
-import javax.swing.table.*;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
 
 import ghidra.docking.settings.Settings;
 import ghidra.util.table.column.GColumnRenderer;
@@ -105,17 +107,13 @@ public class TableUtils {
 		}
 
 		Settings settings = columnBasedModel.getColumnSettings(columnIndex);
-		String s = renderer.getFilterString(columnValue, settings);
-		return s;
+		return renderer.getFilterString(columnValue, settings);
 	}
 
 	private static <ROW_OBJECT> GColumnRenderer<Object> getColumnRenderer(
 			DynamicColumnTableModel<ROW_OBJECT> columnBasedModel, int columnIndex) {
 		DynamicTableColumn<ROW_OBJECT, ?, ?> column = columnBasedModel.getColumn(columnIndex);
-		@SuppressWarnings("unchecked")
-		GColumnRenderer<Object> columnRenderer =
-			(GColumnRenderer<Object>) column.getColumnRenderer();
-		return columnRenderer;
+		return (GColumnRenderer<Object>) column.getColumnRenderer();
 	}
 
 	/**
@@ -141,11 +139,7 @@ public class TableUtils {
 		}
 
 		int modelColumnIndex = getColumnModelIndex(table, columnIndex);
-		if (modelColumnIndex < 0) {
-			return;
-		}
-
-		if (!sortedModel.isSortable(modelColumnIndex)) {
+		if ((modelColumnIndex < 0) || !sortedModel.isSortable(modelColumnIndex)) {
 			return;
 		}
 
@@ -192,11 +186,7 @@ public class TableUtils {
 		}
 
 		int modelColumnIndex = getColumnModelIndex(table, columnIndex);
-		if (modelColumnIndex < 0) {
-			return;
-		}
-
-		if (!sortedModel.isSortable(modelColumnIndex)) {
+		if ((modelColumnIndex < 0) || !sortedModel.isSortable(modelColumnIndex)) {
 			return;
 		}
 

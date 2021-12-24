@@ -19,7 +19,7 @@ package ghidra.pcodeCPort.slgh_compile;
 import ghidra.sleigh.grammar.Location;
 
 public interface ErrorWarningReporter {
-    public void reportError(Location location, String msg);
+    void reportError(Location location, String msg);
 
-    public void reportWarning(Location location, String msg);
+    void reportWarning(Location location, String msg);
 }

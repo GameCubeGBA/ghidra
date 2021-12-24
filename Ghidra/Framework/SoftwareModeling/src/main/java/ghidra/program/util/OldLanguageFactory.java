@@ -15,8 +15,12 @@
  */
 package ghidra.program.util;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,8 +30,17 @@ import org.jdom.output.XMLOutputter;
 
 import generic.jar.ResourceFile;
 import ghidra.framework.Application;
-import ghidra.program.model.address.*;
-import ghidra.program.model.lang.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.address.SegmentedAddressSpace;
+import ghidra.program.model.lang.CompilerSpecDescription;
+import ghidra.program.model.lang.Language;
+import ghidra.program.model.lang.LanguageDescription;
+import ghidra.program.model.lang.LanguageID;
+import ghidra.program.model.lang.LanguageNotFoundException;
+import ghidra.program.model.lang.LanguageService;
+import ghidra.program.model.lang.Register;
 import ghidra.util.Msg;
 import ghidra.util.NumericUtilities;
 import ghidra.util.xml.GenericXMLOutputter;
@@ -37,9 +50,9 @@ public class OldLanguageFactory {
 
 	public static final String OLD_LANGUAGE_FILE_EXT = ".lang";
 
-	private HashMap<LanguageTag, OldLanguage> languageMap = new HashMap<LanguageTag, OldLanguage>();
+	private HashMap<LanguageTag, OldLanguage> languageMap = new HashMap<>();
 	private HashMap<LanguageID, OldLanguage> latestVersionMap =
-		new HashMap<LanguageID, OldLanguage>();
+		new HashMap<>();
 	private static OldLanguageFactory oldLanguageFactory;
 	private int badFileCount = 0;
 
@@ -134,7 +147,7 @@ public class OldLanguageFactory {
 
 	private void initLanguageMap() {
 		LanguageService langSvc = DefaultLanguageService.getLanguageService();
-		List<OldLanguage> oldLanguages = new ArrayList<OldLanguage>();
+		List<OldLanguage> oldLanguages = new ArrayList<>();
 		getOldLanguages(oldLanguages);
 		for (OldLanguage oldLang : oldLanguages) {
 			LanguageDescription oldDescr = oldLang.getDescription();

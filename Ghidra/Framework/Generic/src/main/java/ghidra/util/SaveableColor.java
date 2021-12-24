@@ -20,7 +20,7 @@ import java.awt.Color;
 public class SaveableColor extends PrivateSaveable 
 {
 	private Color color;
-	private Class<?>[] fields = new Class<?>[] {
+	private Class<?>[] fields = {
 	    Integer.class, Integer.class, Integer.class
 	};
 	

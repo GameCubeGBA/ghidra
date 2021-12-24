@@ -15,7 +15,10 @@
  */
 package docking.widgets.table.constrainteditor;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.Component;
 import java.util.Collection;
@@ -109,7 +112,7 @@ public class IntegerRangeConstraintEditorTest extends AbstractDockingTest {
 
 		for (ColumnConstraint<?> columnConstraint : columnConstraints) {
 			if (columnConstraint.getColumnType().equals(Integer.class) &&
-				columnConstraint.getName().equals("In Range")) {
+				"In Range".equals(columnConstraint.getName())) {
 				return (InRangeColumnConstraint<Integer>) columnConstraint;
 			}
 		}

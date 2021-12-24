@@ -15,12 +15,29 @@
  */
 package docking;
 
-import java.awt.*;
-import java.awt.dnd.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDragEvent;
+import java.awt.dnd.DropTargetDropEvent;
+import java.awt.dnd.DropTargetEvent;
+import java.awt.event.ContainerEvent;
+import java.awt.event.ContainerListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-import javax.swing.*;
+import javax.swing.CellRendererPane;
+import javax.swing.DefaultFocusManager;
 import javax.swing.FocusManager;
+import javax.swing.Icon;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import docking.action.DockingActionIf;
 import docking.help.HelpService;
@@ -370,11 +387,7 @@ public class DockableComponent extends JPanel implements ContainerListener {
 			DROP_CODE = DropCode.ROOT;
 			return;
 		}
-		if (SOURCE_INFO == null) {
-			DROP_CODE = DropCode.WINDOW;
-			return;
-		}
-		if (SOURCE_INFO.getNode().winMgr != placeholder.getNode().winMgr) {
+		if ((SOURCE_INFO == null) || (SOURCE_INFO.getNode().winMgr != placeholder.getNode().winMgr)) {
 			DROP_CODE = DropCode.WINDOW;
 			return;
 		}

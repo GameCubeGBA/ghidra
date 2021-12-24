@@ -15,10 +15,23 @@
  */
 package docking;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.AWTEvent;
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 
-import javax.swing.*;
+import javax.swing.AbstractButton;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JLayer;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.UIManager;
 import javax.swing.plaf.LayerUI;
 
 /**
@@ -35,9 +48,7 @@ public class DisabledComponentLayerFactory {
 	}
 
 	public static JLayer<JComponent> getDisabledLayer(JComponent component) {
-		JLayer<JComponent> layer = new JLayer<JComponent>(component, disabledUI);
-
-		return layer;
+		return new JLayer<>(component, disabledUI);
 	}
 
 	private static class DisabledComponentLayerUI extends LayerUI<JComponent> {

@@ -15,12 +15,16 @@
  */
 package db;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.util.Arrays;
 
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
 
@@ -67,7 +71,7 @@ public class DBBufferTest extends AbstractGenericTest {
 
 		int bufId = buf.getId();
 
-		byte[] bytes = new byte[] { 1, 2, 3, 4, 5 };
+		byte[] bytes = { 1, 2, 3, 4, 5 };
 		byte[] data = new byte[bytes.length];
 
 		buf.get(0, data);

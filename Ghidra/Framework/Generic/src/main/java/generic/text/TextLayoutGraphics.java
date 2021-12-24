@@ -15,16 +15,34 @@
  */
 package generic.text;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Composite;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GraphicsConfiguration;
+import java.awt.Image;
+import java.awt.Paint;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.RenderingHints.Key;
+import java.awt.Shape;
+import java.awt.Stroke;
 import java.awt.font.FontRenderContext;
 import java.awt.font.GlyphVector;
 import java.awt.geom.AffineTransform;
-import java.awt.image.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.BufferedImageOp;
+import java.awt.image.ImageObserver;
+import java.awt.image.RenderedImage;
 import java.awt.image.renderable.RenderableImage;
 import java.text.AttributedCharacterIterator;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Graphics used to render copied text data.  This class is not a true graphics object, but is
@@ -50,9 +68,7 @@ public class TextLayoutGraphics extends Graphics2D {
 			return diff;
 		}
 
-		diff = t1.point.x - t2.point.x;
-
-		return diff;
+		return t1.point.x - t2.point.x;
 	};
 
 	private Comparator<TextInfo> rowComparator = (o1, o2) -> {
@@ -64,9 +80,7 @@ public class TextLayoutGraphics extends Graphics2D {
 			return diff;
 		}
 
-		diff = t1.point.x - t2.point.x;
-
-		return diff;
+		return t1.point.x - t2.point.x;
 	};
 
 	private static FontMetrics createFontMetrics(Font font) {

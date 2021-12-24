@@ -16,13 +16,16 @@
  */
 package generic.util;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Enumeration;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipException;
+import java.util.zip.ZipFile;
+
 import ghidra.util.task.CancelOnlyWrappingTaskMonitor;
 import ghidra.util.task.TaskMonitor;
-
-import java.io.*;
-import java.util.Enumeration;
-import java.util.zip.*;
-
 import utilities.util.FileUtilities;
 
 public class ArchiveExtractor {

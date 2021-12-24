@@ -19,12 +19,17 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.List;
 
 import ghidra.GhidraApplicationLayout;
 import ghidra.framework.Application;
 import ghidra.framework.ApplicationConfiguration;
-import help.validator.*;
+import help.validator.DuplicateAnchorCollection;
+import help.validator.JavaHelpValidator;
+import help.validator.LinkDatabase;
 import help.validator.links.InvalidLink;
 import help.validator.location.HelpModuleCollection;
 
@@ -55,8 +60,8 @@ public class GHelpBuilder {
 
 	private String outputDirectoryName;
 	private String moduleName;
-	private Collection<File> dependencyHelpPaths = new LinkedHashSet<File>();
-	private Collection<File> helpInputDirectories = new LinkedHashSet<File>();
+	private Collection<File> dependencyHelpPaths = new LinkedHashSet<>();
+	private Collection<File> helpInputDirectories = new LinkedHashSet<>();
 	private static boolean debugEnabled = false;
 	private boolean ignoreInvalid = false; // TODO: Do actual validation here
 
@@ -98,10 +103,8 @@ public class GHelpBuilder {
 	}
 
 	private HelpModuleCollection collectAllHelp() {
-		List<File> allHelp = new ArrayList<File>(helpInputDirectories);
-		for (File file : dependencyHelpPaths) {
-			allHelp.add(file);
-		}
+		List<File> allHelp = new ArrayList<>(helpInputDirectories);
+		allHelp.addAll(dependencyHelpPaths);
 		return HelpModuleCollection.fromFiles(allHelp);
 	}
 
@@ -260,7 +263,7 @@ public class GHelpBuilder {
 
 		for (int i = 0; i < args.length; i++) {
 			String opt = args[i];
-			if (opt.equals(OUTPUT_DIRECTORY_OPTION)) {
+			if (OUTPUT_DIRECTORY_OPTION.equals(opt)) {
 				i++;
 				if (i >= args.length) {
 					errorMessage(OUTPUT_DIRECTORY_OPTION + " requires an argument");
@@ -269,7 +272,7 @@ public class GHelpBuilder {
 				}
 				outputDirectoryName = args[i];
 			}
-			else if (opt.equals(MODULE_NAME_OPTION)) {
+			else if (MODULE_NAME_OPTION.equals(opt)) {
 				i++;
 				if (i >= args.length) {
 					errorMessage(MODULE_NAME_OPTION + " requires an argument");
@@ -278,7 +281,7 @@ public class GHelpBuilder {
 				}
 				moduleName = args[i];
 			}
-			else if (opt.equals(HELP_PATHS_OPTION)) {
+			else if (HELP_PATHS_OPTION.equals(opt)) {
 				i++;
 				if (i >= args.length) {
 					errorMessage(HELP_PATHS_OPTION + " requires an argument");
@@ -292,10 +295,10 @@ public class GHelpBuilder {
 					}
 				}
 			}
-			else if (opt.equals(DEBUG_SWITCH)) {
+			else if (DEBUG_SWITCH.equals(opt)) {
 				debugEnabled = true;
 			}
-			else if (opt.equals(IGNORE_INVALID_SWITCH)) {
+			else if (IGNORE_INVALID_SWITCH.equals(opt)) {
 				ignoreInvalid = true;
 			}
 			else if (opt.startsWith("-")) {

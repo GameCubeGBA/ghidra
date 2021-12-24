@@ -16,6 +16,8 @@
  */
 package ghidra.program.model.lang;
 
+import java.util.ArrayList;
+
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.UniqueAddressFactory;
 import ghidra.program.model.mem.MemBuffer;
@@ -26,15 +28,13 @@ import ghidra.program.model.scalar.Scalar;
 import ghidra.program.model.symbol.FlowType;
 import ghidra.program.model.symbol.RefType;
 
-import java.util.ArrayList;
-
 /**
  * InstructionPrototype is designed to describe one machine level instruction.
  * A language parser can return the same InstructionProtoype object for the 
  * same type node. Prototypes for instructions will normally be fixed for a node.
  */
 public interface InstructionPrototype {
-	public static final int INVALID_DEPTH_CHANGE = 16777216; // 2^24
+	int INVALID_DEPTH_CHANGE = 16777216; // 2^24
 
 	/**
 	 * Get a new instance of a ParserContext.
@@ -43,7 +43,7 @@ public interface InstructionPrototype {
 	 * @return instruction ParserContext
 	 * @throws MemoryAccessException
 	 */
-	public ParserContext getParserContext(MemBuffer buf, ProcessorContextView processorContext)
+	ParserContext getParserContext(MemBuffer buf, ProcessorContextView processorContext)
 			throws MemoryAccessException;
 
 	/**
@@ -57,7 +57,7 @@ public interface InstructionPrototype {
 	 * @throws UnknownContextException
 	 * @throws MemoryAccessException
 	 */
-	public ParserContext getPseudoParserContext(Address addr, MemBuffer buffer,
+	ParserContext getPseudoParserContext(Address addr, MemBuffer buffer,
 			ProcessorContextView processorContext) throws InsufficientBytesException,
 			UnknownInstructionException, UnknownContextException, MemoryAccessException;
 
@@ -65,14 +65,14 @@ public interface InstructionPrototype {
 	 * @return true if instruction prototype expects one or more delay slotted
 	 * instructions to exist.
 	 */
-	public boolean hasDelaySlots();
+	boolean hasDelaySlots();
 
 	/**
 	 * @return true if instruction semantics have a CrossBuild instruction
 	 * dependency which may require a robust InstructionContext with access
 	 * to preceding instructions  
 	 */
-	public boolean hasCrossBuildDependency();
+	boolean hasCrossBuildDependency();
 
 	/**
 	 * Get the mnemonic for this CodeProtype.  Examples: "MOV" and
@@ -80,14 +80,14 @@ public interface InstructionPrototype {
 	 * @param context the instruction context
 	 * @return the mnemonic for this CodePrototype.
 	 */
-	public String getMnemonic(InstructionContext context);
+	String getMnemonic(InstructionContext context);
 
 	/**
 	 * Get the length of this CodeProtoype. 
 	 *
 	 * @return the length of this CodeProtoype.
 	 */
-	public int getLength();
+	int getLength();
 
 	/**
 	 * Get a Mask that describe which bits of this instruction determine
@@ -95,7 +95,7 @@ public interface InstructionPrototype {
 	 *
 	 * @return a Mask for the opcode bits or null if unknown.
 	 */
-	public Mask getInstructionMask();
+	Mask getInstructionMask();
 
 	/**
 	 * Get a Mask that describe which bits of this instruction determine
@@ -103,7 +103,7 @@ public interface InstructionPrototype {
 	 *
 	 * @return a Mask for the operand bits or null if unknown.
 	 */
-	public Mask getOperandValueMask(int operandIndex);
+	Mask getOperandValueMask(int operandIndex);
 
 	/**
 	 * Get the flow type of this instruction. Used
@@ -113,7 +113,7 @@ public interface InstructionPrototype {
 	 * @param context the instruction context
 	 * @return flow type.
 	 */
-	public FlowType getFlowType(InstructionContext context);
+	FlowType getFlowType(InstructionContext context);
 
 	/**
 	 * Get the number of delay slot instructions for this
@@ -127,13 +127,13 @@ public interface InstructionPrototype {
 	 * 
 	 * @return the number of delay slot instructions for this instruction.
 	 */
-	public int getDelaySlotDepth(InstructionContext context);
+	int getDelaySlotDepth(InstructionContext context);
 
 	/**
 	 * @return the number of delay-slot instruction bytes which correspond
 	 * to this prototype.
 	 */
-	public int getDelaySlotByteCount();
+	int getDelaySlotByteCount();
 
 	/**
 	 * Return true if this prototype was disassembled in a delay slot.
@@ -144,7 +144,7 @@ public interface InstructionPrototype {
 	 *  Return the number of operands in this instruction.
 	 *
 	 */
-	public int getNumOperands();
+	int getNumOperands();
 
 	/**
 	 * Get the type of a specific operand.
@@ -153,7 +153,7 @@ public interface InstructionPrototype {
 	 * @param context the instruction context.
 	 * @return the type of the operand.
 	 */
-	public int getOpType(int opIndex, InstructionContext context);
+	int getOpType(int opIndex, InstructionContext context);
 
 	/**
 	 * Get the Address for default flow after instruction.
@@ -163,7 +163,7 @@ public interface InstructionPrototype {
 	 * @return Address of fall through flow or null if flow
 	 * does not fall through this instruction.
 	 */
-	public Address getFallThrough(InstructionContext context);
+	Address getFallThrough(InstructionContext context);
 
 	/**
 	 * Get the byte offset to the default flow after instruction.
@@ -177,7 +177,7 @@ public interface InstructionPrototype {
 	 * @return int how much to add to the current address to get
 	 * the fall through address.
 	 */
-	public int getFallThroughOffset(InstructionContext context);
+	int getFallThroughOffset(InstructionContext context);
 
 	/**
 	 * Get an array of Address objects for all flows other than
@@ -187,7 +187,7 @@ public interface InstructionPrototype {
 	 * @return an array of Address objects for all flows other than
 	 *  a fall-through, null if no flows.
 	 */
-	public Address[] getFlows(InstructionContext context);
+	Address[] getFlows(InstructionContext context);
 
 	/**
 	 * Get the separator strings between an operand.
@@ -199,7 +199,7 @@ public interface InstructionPrototype {
 	 * @param context the instruction context
 	 * @return separator string, or null if there is no string
 	 */
-	public String getSeparator(int opIndex, InstructionContext context);
+	String getSeparator(int opIndex, InstructionContext context);
 
 	/**
 	 * Get a List of Objects that can be used to render an operands representation.
@@ -210,7 +210,7 @@ public interface InstructionPrototype {
 	 * @return ArrayList of Register, Address, Scalar, VariableOffset and Character objects
 	 *         of null if the operation isn't supported
 	 */
-	public ArrayList<Object> getOpRepresentationList(int opIndex, InstructionContext context);
+	ArrayList<Object> getOpRepresentationList(int opIndex, InstructionContext context);
 
 	/**
 	 * If the indicated operand is an address, this gets the address value for 
@@ -219,7 +219,7 @@ public interface InstructionPrototype {
 	 * @param context the instruction context.
 	 * @return the address indicated by the operand
 	 */
-	public Address getAddress(int opIndex, InstructionContext context);
+	Address getAddress(int opIndex, InstructionContext context);
 
 	/**
 	 * If the indicated operand is a scalar, this gets the scalar value for 
@@ -228,7 +228,7 @@ public interface InstructionPrototype {
 	 * @param context the instruction context
 	 * @return the scalar for the indicated operand
 	 */
-	public Scalar getScalar(int opIndex, InstructionContext context);
+	Scalar getScalar(int opIndex, InstructionContext context);
 
 	/**
 	 * If the indicated operand is a register, this gets the register value 
@@ -237,7 +237,7 @@ public interface InstructionPrototype {
 	 * @param context the instruction context
 	 * @return a register description for the indicated operand
 	 */
-	public Register getRegister(int opIndex, InstructionContext context);
+	Register getRegister(int opIndex, InstructionContext context);
 
 	/**
 	 * Get objects used by this operand (Address, Scalar, Register ...)
@@ -245,7 +245,7 @@ public interface InstructionPrototype {
 	 * @param context the instruction context
 	 * @return an array of objects found at this operand.
 	 */
-	public Object[] getOpObjects(int opIndex, InstructionContext context);
+	Object[] getOpObjects(int opIndex, InstructionContext context);
 
 	/**
 	 * Get the suggested operand reference type.
@@ -255,14 +255,14 @@ public interface InstructionPrototype {
 	 * @param uniqueFactory must be specified if flowOverride is not null
 	 * @return reference type.
 	 */
-	public RefType getOperandRefType(int opIndex, InstructionContext context,
+	RefType getOperandRefType(int opIndex, InstructionContext context,
 			PcodeOverride override, UniqueAddressFactory uniqueFactory);
 
 	/**
 	 * Return true if the operand at opIndex should have a delimiter following it.
 	 * @param opIndex the index of the operand to test for having a delimiter.
 	 */
-	public boolean hasDelimeter(int opIndex);
+	boolean hasDelimeter(int opIndex);
 
 	/**
 	 * Get the Result objects produced/affected by this instruction
@@ -272,7 +272,7 @@ public interface InstructionPrototype {
 	 * 
 	 * @return an array of objects that are used by this instruction
 	 */
-	public Object[] getInputObjects(InstructionContext context);
+	Object[] getInputObjects(InstructionContext context);
 
 	/**
 	 * Get the Result objects produced/affected by this instruction
@@ -282,7 +282,7 @@ public interface InstructionPrototype {
 	 * 
 	 * @return an array of objects that are affected by this instruction
 	 */
-	public Object[] getResultObjects(InstructionContext context);
+	Object[] getResultObjects(InstructionContext context);
 
 	/**
 	 * Get an array of PCode operations (micro code) that this instruction
@@ -294,7 +294,7 @@ public interface InstructionPrototype {
 	 * @return array of PCODE,
 	 *         zero length array if language doesn't support PCODE for this instruction
 	 */
-	public PcodeOp[] getPcode(InstructionContext context, PcodeOverride override,
+	PcodeOp[] getPcode(InstructionContext context, PcodeOverride override,
 			UniqueAddressFactory uniqueFactory);
 
 	/**
@@ -304,7 +304,7 @@ public interface InstructionPrototype {
 	 * @param uniqueFactory must be specified if flowOverride is not null
 	 * @return
 	 */
-	public PackedBytes getPcodePacked(InstructionContext context, PcodeOverride override,
+	PackedBytes getPcodePacked(InstructionContext context, PcodeOverride override,
 			UniqueAddressFactory uniqueFactory);
 
 	/**
@@ -317,11 +317,11 @@ public interface InstructionPrototype {
 	 * @return array of PCODE,
 	 *         zero length array if language doesn't support PCODE for this instruction
 	 */
-	public PcodeOp[] getPcode(InstructionContext context, int opIndex);
+	PcodeOp[] getPcode(InstructionContext context, int opIndex);
 
 	/**
 	 * Get processor language module associated with this prototype.
 	 * @return language module
 	 */
-	public Language getLanguage();
+	Language getLanguage();
 }

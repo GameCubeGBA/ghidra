@@ -16,11 +16,15 @@
  */
 package ghidra.app.plugin.processors.sleigh;
 
-import ghidra.program.model.address.Address;
-import ghidra.program.model.lang.*;
-
 import java.math.BigInteger;
 import java.util.Arrays;
+
+import ghidra.program.model.address.Address;
+import ghidra.program.model.lang.DisassemblerContext;
+import ghidra.program.model.lang.ProcessorContext;
+import ghidra.program.model.lang.ProcessorContextView;
+import ghidra.program.model.lang.Register;
+import ghidra.program.model.lang.RegisterValue;
 
 public class ContextCache {
 	private int context_size = 0;

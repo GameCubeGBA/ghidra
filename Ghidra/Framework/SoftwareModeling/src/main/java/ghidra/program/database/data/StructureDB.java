@@ -16,14 +16,33 @@
 package ghidra.program.database.data;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import db.DBRecord;
 import db.Field;
 import ghidra.docking.settings.Settings;
 import ghidra.program.database.DBObjectCache;
-import ghidra.program.model.data.*;
+import ghidra.program.model.data.AlignedStructureInspector;
+import ghidra.program.model.data.AlignedStructurePacker;
 import ghidra.program.model.data.AlignedStructurePacker.StructurePackResult;
+import ghidra.program.model.data.ArrayDataType;
+import ghidra.program.model.data.BitFieldDataType;
+import ghidra.program.model.data.Composite;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.DataTypeComponent;
+import ghidra.program.model.data.DataTypeDependencyException;
+import ghidra.program.model.data.DataTypeManager;
+import ghidra.program.model.data.Dynamic;
+import ghidra.program.model.data.InvalidDataTypeException;
+import ghidra.program.model.data.Structure;
+import ghidra.program.model.data.StructureDataType;
+import ghidra.program.model.data.StructureInternal;
 import ghidra.program.model.mem.MemBuffer;
 import ghidra.util.Msg;
 import ghidra.util.exception.AssertException;
@@ -636,15 +655,14 @@ class StructureDB extends CompositeDB implements StructureInternal {
 						offsetAdjustment -= dtc.getLength();
 					}
 					--ordinalAdjustment;
-					lastDefinedOrdinal = ordinal;
 				}
 				else {
 					if (ordinalAdjustment != 0) {
 						shiftOffset(dtc, ordinalAdjustment, offsetAdjustment);
 					}
 					newComponents.add(dtc);
-					lastDefinedOrdinal = ordinal;
 				}
+				lastDefinedOrdinal = ordinal;
 			}
 			if (treeSet != null) {
 				// Identify removed filler after last defined component
@@ -1063,8 +1081,7 @@ class StructureDB extends CompositeDB implements StructureInternal {
 			if (index >= 0) {
 				DataTypeComponent dtc = components.get(index);
 				index = backupToFirstComponentContainingOffset(index, offset);
-				dtc = components.get(index);
-				return dtc;
+				return components.get(index);
 			}
 			index = -index - 1;
 			if (index < components.size()) {
@@ -1784,10 +1801,7 @@ class StructureDB extends CompositeDB implements StructureInternal {
 		for (int i = 0; i < n; i++) {
 			DataTypeComponentDB dtc = components.get(i);
 			DataType dt = dtc.getDataType();
-			if (dt instanceof Dynamic) {
-				continue; // length can't change
-			}
-			if (dt instanceof BitFieldDataType) {
+			if ((dt instanceof Dynamic) || (dt instanceof BitFieldDataType)) {
 				// TODO: could get messy
 				continue;
 			}
@@ -2111,10 +2125,7 @@ class StructureDB extends CompositeDB implements StructureInternal {
 	 * @return the number of contiguous undefined bytes
 	 */
 	private int getNumUndefinedBytes(int ordinal) {
-		if (isPackingEnabled()) {
-			return 0;
-		}
-		if (ordinal >= numComponents) {
+		if (isPackingEnabled() || (ordinal >= numComponents)) {
 			return 0;
 		}
 		int idx = Collections.binarySearch(components, Integer.valueOf(ordinal),

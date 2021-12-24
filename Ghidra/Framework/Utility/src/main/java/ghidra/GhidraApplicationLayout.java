@@ -15,8 +15,15 @@
  */
 package ghidra;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
 
 import generic.jar.ResourceFile;
 import ghidra.framework.ApplicationProperties;
@@ -163,13 +170,10 @@ public class GhidraApplicationLayout extends ApplicationLayout {
 
 					// Skip extensions that live in an application root directory...we've already 
 					// found those.
+					// Skip extensions slated for cleanup
 					if (applicationRootDirs.stream()
 							.anyMatch(dir -> FileUtilities.isPathContainedWithin(dir.getFile(false),
-								extensionModuleDir))) {
-						continue;
-					}
-					// Skip extensions slated for cleanup
-					if (new File(extensionModuleDir, ModuleUtilities.MANIFEST_FILE_NAME_UNINSTALLED)
+								extensionModuleDir)) || new File(extensionModuleDir, ModuleUtilities.MANIFEST_FILE_NAME_UNINSTALLED)
 							.exists()) {
 						continue;
 					}
@@ -186,13 +190,9 @@ public class GhidraApplicationLayout extends ApplicationLayout {
 			final ResourceFile classpathEntry = new ResourceFile(entry);
 
 			// We only care about directories (skip jars)
-			if (!classpathEntry.isDirectory()) {
-				continue;
-			}
-
 			// Skip classpath entries that live in an application root directory...we've already
 			// found those.
-			if (applicationRootDirs.stream()
+			if (!classpathEntry.isDirectory() || applicationRootDirs.stream()
 					.anyMatch(dir -> FileUtilities.isPathContainedWithin(
 						dir.getFile(false), classpathEntry.getFile(false)))) {
 				continue;
@@ -217,11 +217,7 @@ public class GhidraApplicationLayout extends ApplicationLayout {
 	 */
 	protected ResourceFile findPatchDirectory() {
 
-		if (SystemUtilities.isInDevelopmentMode()) {
-			return null;
-		}
-
-		if (applicationInstallationDir == null) {
+		if (SystemUtilities.isInDevelopmentMode() || (applicationInstallationDir == null)) {
 			return null;
 		}
 
@@ -239,11 +235,7 @@ public class GhidraApplicationLayout extends ApplicationLayout {
 	 */
 	protected ResourceFile findExtensionArchiveDirectory() {
 
-		if (SystemUtilities.isInDevelopmentMode()) {
-			return null;
-		}
-
-		if (applicationInstallationDir == null) {
+		if (SystemUtilities.isInDevelopmentMode() || (applicationInstallationDir == null)) {
 			return null;
 		}
 		return new ResourceFile(applicationInstallationDir, "Extensions/Ghidra");

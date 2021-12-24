@@ -15,15 +15,35 @@
  */
 package ghidra.framework.data;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import ghidra.framework.client.RepositoryAdapter;
-import ghidra.framework.model.*;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.DomainFolder;
+import ghidra.framework.model.DomainFolderChangeListener;
+import ghidra.framework.model.DomainObject;
+import ghidra.framework.model.ProjectLocator;
 import ghidra.framework.store.FileSystem;
 import ghidra.framework.store.local.LocalFileSystem;
-import ghidra.util.*;
-import ghidra.util.exception.*;
+import ghidra.util.InvalidNameException;
+import ghidra.util.Msg;
+import ghidra.util.ReadOnlyException;
+import ghidra.util.SystemUtilities;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.ClosedException;
+import ghidra.util.exception.DuplicateFileException;
+import ghidra.util.exception.FileInUseException;
 import ghidra.util.task.TaskMonitor;
 
 class GhidraFolderData {
@@ -502,10 +522,7 @@ class GhidraFolderData {
 			}
 		}
 
-		HashSet<String> oldSet = new HashSet<>();
-		for (String folder : folderList) {
-			oldSet.add(folder);
-		}
+		HashSet<String> oldSet = new HashSet<>(folderList);
 		HashSet<String> oldSetClone = new HashSet<>(oldSet);
 		// find deleted folders
 		oldSet.removeAll(newSet);
@@ -576,10 +593,7 @@ class GhidraFolderData {
 			}
 		}
 
-		HashSet<String> oldSet = new HashSet<>();
-		for (String file : fileList) {
-			oldSet.add(file);
-		}
+		HashSet<String> oldSet = new HashSet<>(fileList);
 		HashSet<String> oldSetClone = new HashSet<>(oldSet);
 
 		// find deleted files
@@ -656,10 +670,7 @@ class GhidraFolderData {
 			if (recursive && !force) {
 				throw new IllegalArgumentException("force must be true when recursive");
 			}
-			if (monitor != null && monitor.isCancelled()) {
-				return;
-			}
-			if (visited && !force) {
+			if ((monitor != null && monitor.isCancelled()) || (visited && !force)) {
 				return;
 			}
 			try {
@@ -1000,10 +1011,7 @@ class GhidraFolderData {
 		synchronized (fileSystem) {
 			try {
 				String path = getPathname();
-				if (fileSystem.getFolderNames(path).length != 0) {
-					return;
-				}
-				if (fileSystem.getItemNames(path).length != 0) {
+				if ((fileSystem.getFolderNames(path).length != 0) || (fileSystem.getItemNames(path).length != 0)) {
 					return;
 				}
 				delete();
@@ -1093,7 +1101,7 @@ class GhidraFolderData {
 		}
 		GhidraFolderData checkParent = folderData;
 		while (checkParent != null) {
-			if (checkParent.equals(this)) {
+			if (this.equals(checkParent)) {
 				return true;
 			}
 			checkParent = checkParent.getParentData();

@@ -16,9 +16,9 @@
  */
 package ghidra.pcode.opbehavior;
 
-import ghidra.program.model.pcode.PcodeOp;
-
 import java.math.BigInteger;
+
+import ghidra.program.model.pcode.PcodeOp;
 
 public class OpBehaviorEqual extends BinaryOpBehavior {
 
@@ -33,7 +33,6 @@ public class OpBehaviorEqual extends BinaryOpBehavior {
 
 	@Override
 	public BigInteger evaluateBinary(int sizeout, int sizein, BigInteger in1, BigInteger in2) {
-		BigInteger res = in1.equals(in2) ? BigInteger.ONE : BigInteger.ZERO;
-		return res;
+		return in1.equals(in2) ? BigInteger.ONE : BigInteger.ZERO;
 	}
 }

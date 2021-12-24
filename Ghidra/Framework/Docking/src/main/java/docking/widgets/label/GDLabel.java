@@ -15,7 +15,9 @@
  */
 package docking.widgets.label;
 
-import javax.swing.*;
+import javax.swing.Icon;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 import docking.widgets.GComponent;
 import docking.widgets.checkbox.GCheckBox;

@@ -19,7 +19,9 @@ import java.util.List;
 
 import javax.swing.tree.TreePath;
 
-import docking.widgets.tree.*;
+import docking.widgets.tree.GTree;
+import docking.widgets.tree.GTreeNode;
+import docking.widgets.tree.GTreeTask;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
@@ -51,10 +53,7 @@ public class GTreeExpandAllTask extends GTreeTask {
 
 	protected void expandNode(GTreeNode parent, TaskMonitor monitor) throws CancelledException {
 		// only expand MAX number of nodes.
-		if (monitor.getProgress() >= MAX) {
-			return;
-		}
-		if (parent.isLeaf()) {
+		if ((monitor.getProgress() >= MAX) || parent.isLeaf()) {
 			return;
 		}
 		monitor.checkCanceled();
@@ -74,15 +73,12 @@ public class GTreeExpandAllTask extends GTreeTask {
 	}
 
 	private void expandPath(final TreePath treePath, final TaskMonitor monitor) {
-		runOnSwingThread(new Runnable() {
-			@Override
-			public void run() {
-				if (monitor.isCancelled()) {
-					return; // we can be cancelled while waiting for Swing to run us
-				}
-
-				jTree.expandPath(treePath);
+		runOnSwingThread(() -> {
+			if (monitor.isCancelled()) {
+				return; // we can be cancelled while waiting for Swing to run us
 			}
+
+			jTree.expandPath(treePath);
 		});
 	}
 

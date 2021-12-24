@@ -16,23 +16,39 @@
 package ghidra.program.database;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
-import db.*;
+import db.DBConstants;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.Schema;
+import db.StringField;
+import db.Table;
 import ghidra.framework.Application;
 import ghidra.framework.data.DomainObjectAdapterDB;
-import ghidra.framework.model.*;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.DomainFolder;
+import ghidra.framework.model.DomainObject;
+import ghidra.framework.model.DomainObjectChangeRecord;
 import ghidra.framework.options.Options;
 import ghidra.program.database.data.ProjectDataTypeManager;
 import ghidra.program.model.data.DataTypeManager;
 import ghidra.program.model.data.PointerDataType;
 import ghidra.program.model.listing.DataTypeArchive;
 import ghidra.program.model.listing.Program;
-import ghidra.program.util.*;
+import ghidra.program.util.DataTypeArchiveChangeManager;
+import ghidra.program.util.DataTypeArchiveChangeRecord;
+import ghidra.program.util.ProgramChangeRecord;
 import ghidra.util.InvalidNameException;
-import ghidra.util.exception.*;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.DuplicateNameException;
+import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * Database implementation for Data Type Archive. 
@@ -78,8 +94,8 @@ public class DataTypeArchiveDB extends DomainObjectAdapterDB
 
 	private static final String DEFAULT_POINTER_SIZE = "Default Pointer Size";
 
-	private final static Field[] COL_FIELDS = new Field[] { StringField.INSTANCE };
-	private final static String[] COL_TYPES = new String[] { "Value" };
+	private final static Field[] COL_FIELDS = { StringField.INSTANCE };
+	private final static String[] COL_TYPES = { "Value" };
 	private final static Schema SCHEMA =
 		new Schema(0, StringField.INSTANCE, "Key", COL_FIELDS, COL_TYPES);
 
@@ -232,10 +248,8 @@ public class DataTypeArchiveDB extends DomainObjectAdapterDB
 
 	@Override
 	protected boolean propertyChanged(String propertyName, Object oldValue, Object newValue) {
-		if (propertyName.endsWith(DEFAULT_POINTER_SIZE) && (newValue instanceof Integer)) {
-			if (!isValidDefaultpointerSize((Integer) newValue)) {
-				return false;
-			}
+		if ((propertyName.endsWith(DEFAULT_POINTER_SIZE) && (newValue instanceof Integer)) && !isValidDefaultpointerSize((Integer) newValue)) {
+			return false;
 		}
 		return super.propertyChanged(propertyName, oldValue, newValue);
 	}
@@ -424,10 +438,7 @@ public class DataTypeArchiveDB extends DomainObjectAdapterDB
 		if (storedVersion > DB_VERSION) {
 			throw new VersionException(VersionException.NEWER_VERSION, false);
 		}
-		if (openMode != DBConstants.UPGRADE && storedVersion < UPGRADE_REQUIRED_BEFORE_VERSION) {
-			return new VersionException(true);
-		}
-		if (openMode == DBConstants.UPDATE && storedVersion < DB_VERSION) {
+		if ((openMode != DBConstants.UPGRADE && storedVersion < UPGRADE_REQUIRED_BEFORE_VERSION) || (openMode == DBConstants.UPDATE && storedVersion < DB_VERSION)) {
 			return new VersionException(true);
 		}
 		return null;

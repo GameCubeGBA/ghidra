@@ -17,7 +17,10 @@ package docking.dnd;
 
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
-import java.awt.dnd.*;
+import java.awt.dnd.DropTargetDragEvent;
+import java.awt.dnd.DropTargetDropEvent;
+import java.awt.dnd.DropTargetEvent;
+import java.awt.dnd.DropTargetListener;
 
 import ghidra.util.Msg;
 
@@ -169,15 +172,10 @@ public class DropTgtAdapter implements DropTargetListener {
 
 		// Does this target accept the drop action type being dropped on it?
 		int da = e.getDropAction();
-		if ((da & dropActions) == 0) {
-			return false;
-		}
+		
 		// Does the event's transferable have a flavor that this drop target accepts?
-		if (!isDragFlavorSupported(e)) {
-			return false;
-		}
 		// Does the target component allow the drop.
-		if (!dropComponent.isDropOk(e)) {
+		if (((da & dropActions) == 0) || !isDragFlavorSupported(e) || !dropComponent.isDropOk(e)) {
 			return false;
 		}
 		return true;

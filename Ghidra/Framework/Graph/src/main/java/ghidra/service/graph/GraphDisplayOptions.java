@@ -17,7 +17,11 @@ package ghidra.service.graph;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.swing.event.ChangeEvent;
@@ -28,8 +32,14 @@ import org.apache.commons.text.StringEscapeUtils;
 import com.google.common.base.Splitter;
 
 import docking.Tool;
-import docking.options.editor.*;
-import ghidra.framework.options.*;
+import docking.options.editor.OptionsDialog;
+import docking.options.editor.ScrollableOptionsEditor;
+import docking.options.editor.StringWithChoicesEditor;
+import ghidra.framework.options.OptionType;
+import ghidra.framework.options.Options;
+import ghidra.framework.options.OptionsChangeListener;
+import ghidra.framework.options.OptionsEditor;
+import ghidra.framework.options.ToolOptions;
 import ghidra.util.HelpLocation;
 import ghidra.util.WebColors;
 import ghidra.util.bean.opteditor.OptionsVetoException;

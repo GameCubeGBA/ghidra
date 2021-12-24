@@ -20,8 +20,16 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
-import javax.swing.*;
-import javax.swing.text.*;
+import javax.swing.JPasswordField;
+import javax.swing.KeyStroke;
+import javax.swing.UIManager;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Caret;
+import javax.swing.text.Document;
+import javax.swing.text.Element;
+import javax.swing.text.JTextComponent;
+import javax.swing.text.TextAction;
+import javax.swing.text.Utilities;
 
 import docking.DockingUtils;
 

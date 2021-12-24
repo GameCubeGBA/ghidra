@@ -34,31 +34,31 @@ public interface ExternalLocation {
 	 * Returns the symbol associated with this external location or null.
 	 * @return the symbol associated with this external location or null.
 	 */
-	public Symbol getSymbol();
+	Symbol getSymbol();
 
 	/**
 	 * Returns the name of the external program containing this location.
 	 * @return  the name of the external program containing this location.
 	 */
-	public String getLibraryName();
+	String getLibraryName();
 
 	/**
 	 * Returns the parent namespace containing this location.
 	 * @return the parent namespace containing this location.
 	 */
-	public Namespace getParentNameSpace();
+	Namespace getParentNameSpace();
 
 	/**
 	 * Returns the name of the parent namespace containing this location.
 	 * @return  the name of the parent namespace containing this location.
 	 */
-	public String getParentName();
+	String getParentName();
 
 	/**
 	 * Returns the external label associated with this location.
 	 * @return  the external label associated with this location.
 	 */
-	public String getLabel();
+	String getLabel();
 
 	/**
 	 * Returns the original name for this location. Will be null if the name was never
@@ -66,19 +66,19 @@ public interface ExternalLocation {
 	 * @return the original name for this location. Will be null if the name was never
 	 * changed.
 	 */
-	public String getOriginalImportedName();
+	String getOriginalImportedName();
 
 	/**
 	 * Returns the source of this location.
 	 * @return the source
 	 */
-	public SourceType getSource();
+	SourceType getSource();
 
 	/**
 	 * Returns the external address if known, or null
 	 * @return the external address if known, or null
 	 */
-	public Address getAddress();
+	Address getAddress();
 
 	/**
 	 * Sets the address in the external program associated with this location.
@@ -86,7 +86,7 @@ public interface ExternalLocation {
 	 * @param address the address to set.
 	 * @throws InvalidInputException if address is null and location currently has a default name
 	 */
-	public void setAddress(Address address) throws InvalidInputException;
+	void setAddress(Address address) throws InvalidInputException;
 
 	/**
 	 * Set the external label which defines this location.
@@ -101,24 +101,24 @@ public interface ExternalLocation {
 	 * already been defined
 	 * @throws InvalidInputException
 	 */
-	public void setLocation(String label, Address addr, SourceType source)
+	void setLocation(String label, Address addr, SourceType source)
 			throws DuplicateNameException, InvalidInputException;
 
 	/**
 	 * @return true if location corresponds to a function
 	 */
-	public boolean isFunction();
+	boolean isFunction();
 
 	/**
 	 * Returns the DataType which has been associated with this location.
 	 */
-	public DataType getDataType();
+	DataType getDataType();
 
 	/**
 	 * Associate the specified data type with this location.
 	 * @param dt data type
 	 */
-	public void setDataType(DataType dt);
+	void setDataType(DataType dt);
 
 	/**
 	 * Returns the external function associated with this location or null if this is a data
@@ -126,20 +126,20 @@ public interface ExternalLocation {
 	 * @return external function associated with this location or null
 	 * if this is a data location.
 	 */
-	public Function getFunction();
+	Function getFunction();
 
 	/**
 	 * Create an external function associated with this location or return
 	 * the existing function if one already exists
 	 * @return external function
 	 */
-	public Function createFunction();
+	Function createFunction();
 
 	/**
 	 * Returns the address in "External" (fake) space where this location is stored.
 	 * @return the address that represents this location in "External" space.
 	 */
-	public Address getExternalSpaceAddress();
+	Address getExternalSpaceAddress();
 
 	/**
 	 * Set a new name for this external location. The new
@@ -150,7 +150,7 @@ public interface ExternalLocation {
 	 * @param sourceType the SourceType for the new name.
 	 * @throws InvalidInputException if the name contains illegal characters (space for example)
 	 */
-	public void setName(Namespace namespace, String name, SourceType sourceType)
+	void setName(Namespace namespace, String name, SourceType sourceType)
 			throws InvalidInputException;
 
 	/**
@@ -158,7 +158,7 @@ public interface ExternalLocation {
 	 * the original symbol will become the primary symbol, effectively restoring the location to
 	 * it's original name.
 	 */
-	public void restoreOriginalName();
+	void restoreOriginalName();
 
 	/**
 	 * Returns true if the given external location has the same name, namespace, original import name,
@@ -166,6 +166,6 @@ public interface ExternalLocation {
 	 * @param other the other ExternalLocation to compare
 	 * @return true if the other location is equivalent to this one.
 	 */
-	public boolean isEquivalent(ExternalLocation other);
+	boolean isEquivalent(ExternalLocation other);
 
 }

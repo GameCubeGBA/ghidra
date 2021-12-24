@@ -17,7 +17,9 @@ package ghidra.framework.data;
 
 import ghidra.util.SystemUtilities;
 import ghidra.util.exception.CancelledException;
-import ghidra.util.task.*;
+import ghidra.util.task.CancelledListener;
+import ghidra.util.task.TaskDialog;
+import ghidra.util.task.TaskMonitor;
 
 class LockingTaskMonitor implements TaskMonitor {
 

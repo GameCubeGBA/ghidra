@@ -49,10 +49,7 @@ public class NullTableFilter<ROW_OBJECT> implements TableFilter<ROW_OBJECT> {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
 		}
 		return true;

@@ -24,7 +24,7 @@ class ReverseListIterator<T> extends ListIterator<T> {
 	
 	@Override
     public IteratorSTL<T> copy() {
-		return new ReverseListIterator<T>( list, root, node );
+		return new ReverseListIterator<>( list, root, node );
 	}
 
 	@Override
@@ -49,7 +49,7 @@ class ReverseListIterator<T> extends ListIterator<T> {
 
 	@Override
     public void insert(T value) {
-		ListNodeSTL<T> newNode = new ListNodeSTL<T>(node, node.next, value);
+		ListNodeSTL<T> newNode = new ListNodeSTL<>(node, node.next, value);
 		node.next.prev = newNode;
 		node.next = newNode;
 		node = newNode;

@@ -45,7 +45,7 @@ public class ObjectIntHashtable<T> {
 
         capacity = Prime.nextPrime(capacity);
         this.capacity = capacity;
-        indexer = new ObjectKeyIndexer<T>(capacity);
+        indexer = new ObjectKeyIndexer<>(capacity);
         values = new int[capacity];
     }
 

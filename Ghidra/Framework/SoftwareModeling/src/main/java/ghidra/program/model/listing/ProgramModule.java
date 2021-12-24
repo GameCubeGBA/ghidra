@@ -17,7 +17,9 @@ package ghidra.program.model.listing;
 
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSetView;
-import ghidra.util.exception.*;
+import ghidra.util.exception.DuplicateNameException;
+import ghidra.util.exception.NotEmptyException;
+import ghidra.util.exception.NotFoundException;
 
 /**
  * A <CODE>ProgramModule</CODE> is a group of <CODE>ProgramFragment</CODE>s 
@@ -38,7 +40,7 @@ public interface ProgramModule extends Group {
 	 * 
 	 * @param fragment the fragment to check.
 	 */
-    public boolean contains(ProgramFragment fragment);
+    boolean contains(ProgramFragment fragment);
 	
 	/**
 	 * Returns whether this module directly contains the
@@ -48,17 +50,17 @@ public interface ProgramModule extends Group {
      * @return true if module is the same as this module, or if module
      * is a child of this module.
 	 */
-    public boolean contains(ProgramModule module);
+    boolean contains(ProgramModule module);
 	
 	/**
 	 * Returns the number of children of this module.
 	 */
-    public int getNumChildren();
+    int getNumChildren();
 	
 	/**
 	 * Returns an array containing this module's children.
 	 */
-    public Group[] getChildren();
+    Group[] getChildren();
 		  
 	/**
 	 * Get the index of the child with the given name.
@@ -66,7 +68,7 @@ public interface ProgramModule extends Group {
 	 * @return int index or -1 if this Module does not have a child
 	 * with the given name
 	 */
-	public int getIndex(String name);  
+	int getIndex(String name);  
 	/**
 	 * Adds the given module as a child of this module.
 	 * <P>
@@ -77,7 +79,7 @@ public interface ProgramModule extends Group {
 	 * @exception DuplicateGroupException thrown if the module being
 	 * added is already a child of this module.
 	 */
-    public void add(ProgramModule module)
+    void add(ProgramModule module)
 		throws CircularDependencyException, DuplicateGroupException;
 	
 	/**
@@ -86,7 +88,7 @@ public interface ProgramModule extends Group {
 	 * @exception DuplicateGroupException thrown if the fragment being
 	 * added is already a child of this module.	 
 	 */
-    public void add(ProgramFragment fragment)
+    void add(ProgramFragment fragment)
         throws DuplicateGroupException;
 	
 	/**
@@ -99,7 +101,7 @@ public interface ProgramModule extends Group {
 	 * @exception DuplicateNameException thrown if the given
 	 * name is already used by an existing module or fragment.
 	 */
-    public ProgramModule createModule(String moduleName)throws DuplicateNameException;
+    ProgramModule createModule(String moduleName)throws DuplicateNameException;
 	
 	/**
 	 * Creates a new fragment and makes it a child of this module.<P>
@@ -110,7 +112,7 @@ public interface ProgramModule extends Group {
 	 * @exception DuplicateNameException thrown if the given
 	 * name is already used by an existing module or fragment.
 	 */
-    public ProgramFragment createFragment(String fragmentName) throws DuplicateNameException;
+    ProgramFragment createFragment(String fragmentName) throws DuplicateNameException;
 	
     /**
      * Reparents child with the given name to this Module; removes the
@@ -120,7 +122,7 @@ public interface ProgramModule extends Group {
      * @exception NotFoundException if name is not the name of a child
      * in oldParent
      */
-    public void reparent(String name, ProgramModule oldParent) 
+    void reparent(String name, ProgramModule oldParent) 
         throws NotFoundException;
 
 	/**
@@ -132,7 +134,7 @@ public interface ProgramModule extends Group {
 	 * @exception NotFoundException thrown if a child with the given
 	 * name cannot be found in this module.
 	 */
-    public void moveChild(String name, int index) throws NotFoundException;
+    void moveChild(String name, int index) throws NotFoundException;
 
     /**
      * Removes a child module or fragment from this Module.
@@ -140,7 +142,7 @@ public interface ProgramModule extends Group {
      * @exception NotEmptyException thrown if the module appears in no other
      * modules and it is not empty.
      */
-    public boolean removeChild(String name) throws NotEmptyException;    	
+    boolean removeChild(String name) throws NotEmptyException;    	
 			
 	/**
 	 * Returns whether the given module is a descendant of this
@@ -149,7 +151,7 @@ public interface ProgramModule extends Group {
 	 * 
 	 * @return true if the module is a descendant, false otherwise.
 	 */
-	public boolean isDescendant(ProgramModule module);
+	boolean isDescendant(ProgramModule module);
 
 	/**
 	 * Returns whether the given fragment is a descendant of this
@@ -158,7 +160,7 @@ public interface ProgramModule extends Group {
 	 * 
 	 * @return true if the fragment is a descendant, false otherwise.
 	 */
-	public boolean isDescendant(ProgramFragment fragment);
+	boolean isDescendant(ProgramFragment fragment);
 
 	/**
 	 * Returns the minimum address of this module which will be the minimum
@@ -168,7 +170,7 @@ public interface ProgramModule extends Group {
 	 * @return the minimum address, this will be null if all of the module's
 	 * descendant fragments are empty.
 	 */
-	public Address getMinAddress();
+	Address getMinAddress();
 
 	/**
 	 * Returns the maximum address of this module which will be the maximum
@@ -178,7 +180,7 @@ public interface ProgramModule extends Group {
 	 * @return the maximum address, this will be null if all of the module's
 	 * descendant fragments are empty.
 	 */
-	public Address getMaxAddress();
+	Address getMaxAddress();
 
 	/**
 	 * Returns the first address of this module which will be the minimum
@@ -189,7 +191,7 @@ public interface ProgramModule extends Group {
 	 * @return the first address, this will be null if all of the module's
 	 * descendant fragments are empty.
 	 */
-	public Address getFirstAddress();
+	Address getFirstAddress();
 
 	/**
 	 * Returns the last address of this module which will be the maximum address
@@ -200,7 +202,7 @@ public interface ProgramModule extends Group {
 	 * @return the last address, this will be null if all of the module's
 	 * descendant fragments are empty.
 	 */
-	public Address getLastAddress();
+	Address getLastAddress();
 	
 	/**
 	 * Returns the set of addresses for this module which will be the combined 
@@ -208,26 +210,26 @@ public interface ProgramModule extends Group {
 	 * module.
 	 * @return the complete address set for this module.
 	 */
-	public AddressSetView getAddressSet();
+	AddressSetView getAddressSet();
 	
 	/**
 	 * Returns an object that can be used to detect when the module tree has been affected
 	 * by an undo or redo. After an undo/redo, if this module was affected, then a new
 	 * verionTag object is created.
 	 */
-	public Object getVersionTag();
+	Object getVersionTag();
 	
 	/**
 	 * Get the current modification number of the module tree; the number 
 	 * is updated when ever a change is made to any module or fragment
 	 * that is part of this module's root tree. 
 	 */
-	public long getModificationNumber();
+	long getModificationNumber();
 	
 	/**
 	 * Get the ID for the tree that this module belongs to.
 	 * @return ID for the tree
 	 */
-	public long getTreeID();
+	long getTreeID();
 
 }

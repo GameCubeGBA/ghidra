@@ -56,7 +56,7 @@ public interface MemBuffer {
 	 * 
 	 * @return boolean true if first byte of memory buffer can be read
 	 */
-	public default boolean isInitializedMemory() {
+	default boolean isInitializedMemory() {
 		// TODO: possible alternate method of testing
 		//return getMemory().getAllInitializedAddressSet().contains(getAddress());
 		try {
@@ -76,7 +76,7 @@ public interface MemBuffer {
 	 * @return the data at offset from the current position.
 	 * @throws MemoryAccessException if memory cannot be read at the specified offset
 	 */
-	public byte getByte(int offset) throws MemoryAccessException;
+	byte getByte(int offset) throws MemoryAccessException;
 
 	/**
 	 * Get one unsigned byte from memory at the current position plus offset.
@@ -85,7 +85,7 @@ public interface MemBuffer {
 	 * @return the byte data at offset from the current position, as a {@code int} value.
 	 * @throws MemoryAccessException if memory cannot be read at the specified offset
 	 */
-	default public int getUnsignedByte(int offset) throws MemoryAccessException {
+	default int getUnsignedByte(int offset) throws MemoryAccessException {
 		return getByte(offset) & 0xff;
 	}
 
@@ -102,27 +102,27 @@ public interface MemBuffer {
 	 * available bytes are exhausted or no bytes are available at the specified
 	 * offset.
 	 */
-	public int getBytes(byte[] b, int offset);
+	int getBytes(byte[] b, int offset);
 
 	/**
 	 * Get the Address which corresponds to the offset 0.
 	 *
 	 * @return the current address of offset 0.
 	 */
-	public Address getAddress();
+	Address getAddress();
 
 	/**
 	 * Get the Memory object actually used by the MemBuffer.
 	 *
 	 * @return the Memory used by this MemBuffer.
 	 */
-	public Memory getMemory();
+	Memory getMemory();
 
 	/**
 	 * Returns true if the underlying bytes are in big-endian order, false if they are little endian.
 	 * @return true if the underlying bytes are in big-endian order, false if they are little endian.
 	 */
-	public boolean isBigEndian();
+	boolean isBigEndian();
 
 	/**
 	 * returns the short at the given offset, taking into account the endianess.
@@ -130,7 +130,7 @@ public interface MemBuffer {
 	 * @return the short at the given offset, taking into account the endianess.
 	 * @throws MemoryAccessException if a 2-byte short value cannot be read at the specified offset
 	 */
-	public short getShort(int offset) throws MemoryAccessException;
+	short getShort(int offset) throws MemoryAccessException;
 
 	/**
 	 * Returns the unsigned short at the given offset, taking into account the endian-ness.
@@ -138,7 +138,7 @@ public interface MemBuffer {
 	 * @return the unsigned short at the given offset, as a {@code int}, taking into account the endianess.
 	 * @throws MemoryAccessException if a 2-byte short value cannot be read at the specified offset
 	 */
-	default public int getUnsignedShort(int offset) throws MemoryAccessException {
+	default int getUnsignedShort(int offset) throws MemoryAccessException {
 		return getShort(offset) & 0xffff;
 	}
 
@@ -148,7 +148,7 @@ public interface MemBuffer {
 	 * @return the int at the given offset, taking into account the endianess.
 	 * @throws MemoryAccessException if a 4-byte integer value cannot be read at the specified offset
 	 */
-	public int getInt(int offset) throws MemoryAccessException;
+	int getInt(int offset) throws MemoryAccessException;
 
 	/**
 	 * Returns the unsigned int at the given offset, taking into account the endianess.
@@ -156,7 +156,7 @@ public interface MemBuffer {
 	 * @return the unsigned int at the given offset, as a {@code long}, taking into account the endianess.
 	 * @throws MemoryAccessException if a 4-byte integer value cannot be read at the specified offset
 	 */
-	default public long getUnsignedInt(int offset) throws MemoryAccessException {
+	default long getUnsignedInt(int offset) throws MemoryAccessException {
 		return getInt(offset) & 0xFFFF_FFFFL;
 	}
 
@@ -166,7 +166,7 @@ public interface MemBuffer {
 	 * @return the long at the given offset, taking into account the endianess.
 	 * @throws MemoryAccessException if a 8-byte long value cannot be read at the specified offset
 	 */
-	public long getLong(int offset) throws MemoryAccessException;
+	long getLong(int offset) throws MemoryAccessException;
 
 	/**
 	 * returns the value at the given offset, taking into account the endianess.
@@ -176,7 +176,7 @@ public interface MemBuffer {
 	 * @return the value at the given offset, taking into account the endianess.
 	 * @throws MemoryAccessException if the request size value cannot be read at the specified offset
 	 */
-	public BigInteger getBigInteger(int offset, int size, boolean signed)
+	BigInteger getBigInteger(int offset, int size, boolean signed)
 			throws MemoryAccessException;
 
 	/**
@@ -188,7 +188,7 @@ public interface MemBuffer {
 	 * @return int integer value
 	 * @throws MemoryAccessException
 	 */
-	default public int getVarLengthInt(int offset, int len) throws MemoryAccessException {
+	default int getVarLengthInt(int offset, int len) throws MemoryAccessException {
 		switch (len) {
 			case 1:
 				return getByte(offset);
@@ -210,7 +210,7 @@ public interface MemBuffer {
 	 * @return long integer value
 	 * @throws MemoryAccessException
 	 */
-	default public long getVarLengthUnsignedInt(int offset, int len) throws MemoryAccessException {
+	default long getVarLengthUnsignedInt(int offset, int len) throws MemoryAccessException {
 		switch (len) {
 			case 1:
 				return getUnsignedByte(offset);

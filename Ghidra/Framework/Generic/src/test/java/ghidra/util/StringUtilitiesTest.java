@@ -15,8 +15,26 @@
  */
 package ghidra.util;
 
-import static ghidra.util.StringUtilities.*;
-import static org.junit.Assert.*;
+import static ghidra.util.StringUtilities.containsAllIgnoreCase;
+import static ghidra.util.StringUtilities.containsAnyIgnoreCase;
+import static ghidra.util.StringUtilities.convertControlCharsToEscapeSequences;
+import static ghidra.util.StringUtilities.convertEscapeSequences;
+import static ghidra.util.StringUtilities.countOccurrences;
+import static ghidra.util.StringUtilities.endsWithIgnoreCase;
+import static ghidra.util.StringUtilities.findLastWordPosition;
+import static ghidra.util.StringUtilities.findWord;
+import static ghidra.util.StringUtilities.getLastWord;
+import static ghidra.util.StringUtilities.indexOfWord;
+import static ghidra.util.StringUtilities.isAllBlank;
+import static ghidra.util.StringUtilities.toLines;
+import static ghidra.util.StringUtilities.toQuotedString;
+import static ghidra.util.StringUtilities.trim;
+import static ghidra.util.StringUtilities.trimMiddle;
+import static ghidra.util.StringUtilities.trimTrailingNulls;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -120,7 +138,7 @@ public class StringUtilitiesTest {
 		String sentenceWithInvalidChars = "This string has *word1!word2 with invalid chars";
 		assertEquals(embeddedFoundWord, findWord(sentenceWithInvalidChars, 18));
 
-		char[] allowedChars = new char[] { '!' };
+		char[] allowedChars = { '!' };
 		String foundWordWithAllowedChars = "word1!word2";
 		assertEquals(foundWordWithAllowedChars,
 			findWord(sentenceWithInvalidChars, 18, allowedChars));

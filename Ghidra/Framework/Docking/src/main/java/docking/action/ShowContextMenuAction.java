@@ -15,7 +15,9 @@
  */
 package docking.action;
 
-import java.awt.*;
+import java.awt.Component;
+import java.awt.KeyboardFocusManager;
+import java.awt.Window;
 
 import javax.swing.KeyStroke;
 

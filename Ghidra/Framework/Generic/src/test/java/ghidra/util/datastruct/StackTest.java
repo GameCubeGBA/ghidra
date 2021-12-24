@@ -17,7 +17,9 @@ package ghidra.util.datastruct;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
 
@@ -40,13 +42,13 @@ public class StackTest extends AbstractGenericTest {
 
 	@Before
 	public void setUp() {
-		stack1 = new Stack<String>(25);
-		stack2 = new Stack<String>();
+		stack1 = new Stack<>(25);
+		stack2 = new Stack<>();
 		stack2.push("1");
 		stack2.push("2");
-		stack3 = new Stack<String>();
+		stack3 = new Stack<>();
 		stack3.push("A");
-		stack4 = new Stack<String>();
+		stack4 = new Stack<>();
 		stack4.push("1");
 		stack4.push("2");
 	}
@@ -69,8 +71,8 @@ public class StackTest extends AbstractGenericTest {
 	@Test
     public void testPop() {
 		assertEquals("A", stack3.pop());
-		assertEquals(false, stack2.pop().equals("A"));
-		assertEquals(true, stack2.push("3").equals("3"));
+		assertEquals(false, "A".equals(stack2.pop()));
+		assertEquals(true, "3".equals(stack2.push("3")));
 		assertEquals("3", stack2.pop());
 	}
 

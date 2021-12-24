@@ -15,11 +15,21 @@
  */
 package ghidra.program.disassemble;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.TreeSet;
 
-import ghidra.program.model.address.*;
-import ghidra.program.model.lang.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.address.SegmentedAddress;
+import ghidra.program.model.lang.InstructionBlock;
+import ghidra.program.model.lang.InstructionBlockFlow;
 import ghidra.program.model.lang.InstructionBlockFlow.Type;
+import ghidra.program.model.lang.InstructionError;
+import ghidra.program.model.lang.InstructionSet;
 import ghidra.program.model.listing.Instruction;
 import ghidra.program.model.mem.Memory;
 import ghidra.program.model.mem.MemoryBlock;
@@ -55,17 +65,13 @@ class DisassemblerQueue {
 	private Address lastFlowFrom;
 
 	private static final Comparator<InstructionBlockFlow> ORDERED_FLOW_COMPARATOR =
-		new Comparator<InstructionBlockFlow>() {
-
-			@Override
-			public int compare(InstructionBlockFlow o1, InstructionBlockFlow o2) {
-				int c = o1.getType().ordinal() - o2.getType().ordinal();
-				if (c == 0) {
-					c = o1.getDestinationAddress().compareTo(o2.getDestinationAddress());
-				}
-				return c;
-			}
-		};
+		(o1, o2) -> {
+		int c = o1.getType().ordinal() - o2.getType().ordinal();
+		if (c == 0) {
+			c = o1.getDestinationAddress().compareTo(o2.getDestinationAddress());
+		}
+		return c;
+	};
 
 	/**
 	 * Constructor
@@ -74,10 +80,10 @@ class DisassemblerQueue {
 
 		this.restrictedAddressSet = restrictedAddressSet;
 
-		orderedSeedQueue = new TreeSet<InstructionBlockFlow>(ORDERED_FLOW_COMPARATOR);
-		priorityQueue = new TreeSet<InstructionBlockFlow>(ORDERED_FLOW_COMPARATOR);
-		currentBranchQueue = new TreeSet<InstructionBlockFlow>(ORDERED_FLOW_COMPARATOR);
-		processedBranchFlows = new HashSet<InstructionBlockFlow>(48);
+		orderedSeedQueue = new TreeSet<>(ORDERED_FLOW_COMPARATOR);
+		priorityQueue = new TreeSet<>(ORDERED_FLOW_COMPARATOR);
+		currentBranchQueue = new TreeSet<>(ORDERED_FLOW_COMPARATOR);
+		processedBranchFlows = new HashSet<>(48);
 
 		orderedSeedQueue.add(
 			new InstructionBlockFlow(startAddr, null, InstructionBlockFlow.Type.PRIORITY));

@@ -15,9 +15,18 @@
  */
 package ghidra.program.model.pcode;
 
-import ghidra.program.model.data.*;
-import ghidra.program.model.lang.*;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.GenericCallingConvention;
+import ghidra.program.model.data.ParameterDefinition;
+import ghidra.program.model.data.VoidDataType;
+import ghidra.program.model.lang.CompilerSpec;
+import ghidra.program.model.lang.InjectPayload;
+import ghidra.program.model.lang.PrototypeModel;
+import ghidra.program.model.listing.Function;
+import ghidra.program.model.listing.FunctionSignature;
+import ghidra.program.model.listing.Parameter;
+import ghidra.program.model.listing.Program;
+import ghidra.program.model.listing.VariableStorage;
 import ghidra.program.model.symbol.SourceType;
 import ghidra.util.Msg;
 import ghidra.util.xml.SpecXmlUtils;
@@ -169,15 +178,12 @@ public class FunctionPrototype {
 		int purge = f.getStackPurgeSize();
 		if (doOverride) {
 			extrapop = overrideExtrapop;
+		} else if (purge == Function.INVALID_STACK_DEPTH_CHANGE ||
+			purge == Function.UNKNOWN_STACK_DEPTH_CHANGE) {
+			extrapop = protoModel.getExtrapop();
 		}
 		else {
-			if (purge == Function.INVALID_STACK_DEPTH_CHANGE ||
-				purge == Function.UNKNOWN_STACK_DEPTH_CHANGE) {
-				extrapop = protoModel.getExtrapop();
-			}
-			else {
-				extrapop = purge + protoModel.getStackshift();
-			}
+			extrapop = purge + protoModel.getStackshift();
 		}
 	}
 
@@ -429,7 +435,7 @@ public class FunctionPrototype {
 		}
 		hasThis = protoModel.hasThisPointer();
 		String val = node.getAttribute("extrapop");
-		if (val.equals("unknown")) {
+		if ("unknown".equals(val)) {
 			extrapop = PrototypeModel.UNKNOWN_EXTRAPOP;
 		}
 		else {

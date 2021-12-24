@@ -25,8 +25,8 @@ import ghidra.util.task.TaskMonitor;
 
 public interface FindPathsAlgorithm<V, E extends GEdge<V>> {
 
-	public void findPaths(GDirectedGraph<V, E> g, V start, V end, Accumulator<List<V>> accumulator,
+	void findPaths(GDirectedGraph<V, E> g, V start, V end, Accumulator<List<V>> accumulator,
 			TaskMonitor monitor) throws CancelledException;
 
-	public void setStatusListener(GraphAlgorithmStatusListener<V> listener);
+	void setStatusListener(GraphAlgorithmStatusListener<V> listener);
 }

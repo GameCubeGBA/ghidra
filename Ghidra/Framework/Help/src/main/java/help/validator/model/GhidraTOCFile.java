@@ -18,11 +18,19 @@ package help.validator.model;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import org.xml.sax.*;
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
-import ghidra.xml.*;
+import ghidra.xml.NonThreadedXmlPullParserImpl;
+import ghidra.xml.XmlElement;
+import ghidra.xml.XmlPullParser;
 import help.validator.LinkDatabase;
 
 public class GhidraTOCFile {

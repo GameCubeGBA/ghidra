@@ -52,15 +52,7 @@ public class SwingExceptionHandler implements UncaughtExceptionHandler {
 			t = t.getCause();
 		}
 
-		if (t instanceof ThreadDeath) {
-			return;
-		}
-
-		if (t instanceof ConnectException) {
-			return;
-		}
-
-		if (t instanceof ClosedException) {
+		if ((t instanceof ThreadDeath) || (t instanceof ConnectException) || (t instanceof ClosedException)) {
 			return;
 		}
 

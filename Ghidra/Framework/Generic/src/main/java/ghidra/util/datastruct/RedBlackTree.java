@@ -142,7 +142,7 @@ public class RedBlackTree<K extends Comparable<K>, V> implements Iterable<RedBla
 		if (root == null) {
 			size++;
 			modCount++;
-			root = new RedBlackEntry<K, V>(key, null, null);
+			root = new RedBlackEntry<>(key, null, null);
 			maxEntry = root;
 			minEntry = root;
 			return root;
@@ -151,7 +151,7 @@ public class RedBlackTree<K extends Comparable<K>, V> implements Iterable<RedBla
 		if (key.compareTo(maxEntry.key) > 0) {
 			size++;
 			modCount++;
-			RedBlackEntry<K, V> newNode = new RedBlackEntry<K, V>(key, null, maxEntry);
+			RedBlackEntry<K, V> newNode = new RedBlackEntry<>(key, null, maxEntry);
 			maxEntry.right = newNode;
 			maxEntry = newNode;
 			fixAfterInsertion(maxEntry);
@@ -171,7 +171,7 @@ public class RedBlackTree<K extends Comparable<K>, V> implements Iterable<RedBla
 				else {
 					size++;
 					modCount++;
-					RedBlackEntry<K, V> newNode = new RedBlackEntry<K, V>(key, null, node);
+					RedBlackEntry<K, V> newNode = new RedBlackEntry<>(key, null, node);
 					node.left = newNode;
 					if (node == minEntry) {
 						minEntry = newNode;
@@ -179,22 +179,19 @@ public class RedBlackTree<K extends Comparable<K>, V> implements Iterable<RedBla
 					fixAfterInsertion(node.left);
 					return newNode;
 				}
+			} else if (node.right != null) {
+				node = node.right;
 			}
 			else {
-				if (node.right != null) {
-					node = node.right;
+				size++;
+				modCount++;
+				RedBlackEntry<K, V> newNode = new RedBlackEntry<>(key, null, node);
+				node.right = newNode;
+				if (node == maxEntry) {
+					maxEntry = newNode;
 				}
-				else {
-					size++;
-					modCount++;
-					RedBlackEntry<K, V> newNode = new RedBlackEntry<K, V>(key, null, node);
-					node.right = newNode;
-					if (node == maxEntry) {
-						maxEntry = newNode;
-					}
-					fixAfterInsertion(node.right);
-					return newNode;
-				}
+				fixAfterInsertion(node.right);
+				return newNode;
 			}
 		}
 

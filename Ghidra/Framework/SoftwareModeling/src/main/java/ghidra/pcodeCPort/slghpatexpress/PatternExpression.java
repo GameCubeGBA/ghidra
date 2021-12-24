@@ -16,15 +16,15 @@
  */
 package ghidra.pcodeCPort.slghpatexpress;
 
+import java.io.PrintStream;
+
+import org.jdom.Element;
+
 import generic.stl.VectorSTL;
 import ghidra.pcodeCPort.context.ParserWalker;
 import ghidra.pcodeCPort.translate.Translate;
 import ghidra.pcodeCPort.utils.MutableInt;
 import ghidra.sleigh.grammar.Location;
-
-import java.io.PrintStream;
-
-import org.jdom.Element;
 
 public abstract class PatternExpression {
 	public final Location location;
@@ -73,55 +73,55 @@ public abstract class PatternExpression {
 		PatternExpression res;
 		String nm = el.getName();
 
-		if (nm.equals("tokenfield")) {
+		if ("tokenfield".equals(nm)) {
 			res = new TokenField(null);
 		}
-		else if (nm.equals("contextfield")) {
+		else if ("contextfield".equals(nm)) {
 			res = new ContextField(null);
 		}
-		else if (nm.equals("intb")) {
+		else if ("intb".equals(nm)) {
 			res = new ConstantValue(null);
 		}
-		else if (nm.equals("operand_exp")) {
+		else if ("operand_exp".equals(nm)) {
 			res = new OperandValue(null);
 		}
-		else if (nm.equals("start_exp")) {
+		else if ("start_exp".equals(nm)) {
 			res = new StartInstructionValue(null);
 		}
-		else if (nm.equals("end_exp")) {
+		else if ("end_exp".equals(nm)) {
 			res = new EndInstructionValue(null);
 		}
-		else if (nm.equals("plus_exp")) {
+		else if ("plus_exp".equals(nm)) {
 			res = new PlusExpression(null);
 		}
-		else if (nm.equals("sub_exp")) {
+		else if ("sub_exp".equals(nm)) {
 			res = new SubExpression(null);
 		}
-		else if (nm.equals("mult_exp")) {
+		else if ("mult_exp".equals(nm)) {
 			res = new MultExpression(null);
 		}
-		else if (nm.equals("lshift_exp")) {
+		else if ("lshift_exp".equals(nm)) {
 			res = new LeftShiftExpression(null);
 		}
-		else if (nm.equals("rshift_exp")) {
+		else if ("rshift_exp".equals(nm)) {
 			res = new RightShiftExpression(null);
 		}
-		else if (nm.equals("and_exp")) {
+		else if ("and_exp".equals(nm)) {
 			res = new AndExpression(null);
 		}
-		else if (nm.equals("or_exp")) {
+		else if ("or_exp".equals(nm)) {
 			res = new OrExpression(null);
 		}
-		else if (nm.equals("xor_exp")) {
+		else if ("xor_exp".equals(nm)) {
 			res = new XorExpression(null);
 		}
-		else if (nm.equals("div_exp")) {
+		else if ("div_exp".equals(nm)) {
 			res = new DivExpression(null);
 		}
-		else if (nm.equals("minus_exp")) {
+		else if ("minus_exp".equals(nm)) {
 			res = new MinusExpression(null);
 		}
-		else if (nm.equals("not_exp")) {
+		else if ("not_exp".equals(nm)) {
 			res = new NotExpression(null);
 		}
 		else {

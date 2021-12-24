@@ -16,11 +16,11 @@
  */
 package help.validator;
 
-import help.validator.model.AnchorDefinition;
-import help.validator.model.HelpTopic;
-
 import java.nio.file.Path;
 import java.util.List;
+
+import help.validator.model.AnchorDefinition;
+import help.validator.model.HelpTopic;
 
 public class DuplicateAnchorCollectionByHelpTopic implements DuplicateAnchorCollection,
 		Comparable<DuplicateAnchorCollectionByHelpTopic> {

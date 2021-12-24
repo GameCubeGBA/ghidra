@@ -85,8 +85,7 @@ public class SetSTL<K> {
 
 	public IteratorSTL<K> upper_bound( K key ) {
 		RedBlackNode<K,K> node = rbTree.upperBound( key );
-		SetIterator<K> it = new SetIterator<>(rbTree, node);
-		return it;	
+		return new SetIterator<>(rbTree, node);	
 	}
 
 	public void erase( K key ) {

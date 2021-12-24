@@ -21,14 +21,22 @@ import java.awt.event.MouseEvent;
 import javax.swing.Icon;
 import javax.swing.JComponent;
 
-import docking.*;
+import docking.ActionContext;
+import docking.ComponentProvider;
+import docking.Tool;
+import docking.WindowPosition;
 import docking.action.MenuData;
 import docking.action.ToggleDockingAction;
 import ghidra.framework.options.SaveState;
 import ghidra.graph.VisualGraph;
 import ghidra.graph.VisualGraphComponentProvider;
-import ghidra.graph.viewer.*;
-import ghidra.graph.viewer.actions.*;
+import ghidra.graph.viewer.GraphSatelliteListener;
+import ghidra.graph.viewer.VisualEdge;
+import ghidra.graph.viewer.VisualGraphView;
+import ghidra.graph.viewer.VisualVertex;
+import ghidra.graph.viewer.actions.VgActionContext;
+import ghidra.graph.viewer.actions.VgSatelliteContext;
+import ghidra.graph.viewer.actions.VisualGraphActionContext;
 import ghidra.util.HelpLocation;
 import resources.ResourceManager;
 
@@ -139,12 +147,7 @@ public class VgSatelliteFeaturette<V extends VisualVertex,
 			@Override
 			public boolean isAddToPopup(ActionContext context) {
 				ComponentProvider componentProvider = context.getComponentProvider();
-				if (componentProvider != provider && componentProvider != satelliteProvider) {
-					// appear in satellite and the main provider
-					return false;
-				}
-
-				if (!(context instanceof VisualGraphActionContext)) {
+				if ((componentProvider != provider && componentProvider != satelliteProvider) || !(context instanceof VisualGraphActionContext)) {
 					return false;
 				}
 
@@ -167,12 +170,7 @@ public class VgSatelliteFeaturette<V extends VisualVertex,
 			@Override
 			public boolean isAddToPopup(ActionContext context) {
 				ComponentProvider componentProvider = context.getComponentProvider();
-				if (componentProvider != provider && componentProvider != satelliteProvider) {
-					// appear in satellite and the main provider
-					return false;
-				}
-
-				if (!(context instanceof VisualGraphActionContext)) {
+				if ((componentProvider != provider && componentProvider != satelliteProvider) || !(context instanceof VisualGraphActionContext)) {
 					return false;
 				}
 

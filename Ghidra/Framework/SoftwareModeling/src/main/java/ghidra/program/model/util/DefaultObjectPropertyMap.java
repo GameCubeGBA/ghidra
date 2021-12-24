@@ -45,6 +45,7 @@ public class DefaultObjectPropertyMap extends DefaultPropertyMap implements Obje
 	 * @exception TypeMismatchException thrown if the
 	 *   property does not have Saveable object values.
 	 */
+	@Override
 	public void add(Address addr, Saveable value) {
 		propSet.putObject(addrMap.getKey(addr), value);
 	}
@@ -54,6 +55,7 @@ public class DefaultObjectPropertyMap extends DefaultPropertyMap implements Obje
 	 * @param addr the address from where to get the int value
 	 * @return Saveable object or null if property not found at addr.
 	 */
+	@Override
 	public Object getObject(Address addr) {
 		return propSet.getObject(addrMap.getKey(addr));
 	}
@@ -61,6 +63,7 @@ public class DefaultObjectPropertyMap extends DefaultPropertyMap implements Obje
 	/**
 	 * @see ghidra.program.model.util.ObjectPropertyMap#getObjectClass()
 	 */
+	@Override
 	public Class<?> getObjectClass() {
 		return propSet.getObjectClass();
 	}

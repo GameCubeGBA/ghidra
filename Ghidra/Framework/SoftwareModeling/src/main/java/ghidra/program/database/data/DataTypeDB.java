@@ -17,7 +17,6 @@ package ghidra.program.database.data;
 
 import java.io.IOException;
 import java.net.URL;
-import java.nio.ByteBuffer;
 import java.util.List;
 
 import db.DBRecord;
@@ -25,9 +24,21 @@ import ghidra.docking.settings.Settings;
 import ghidra.docking.settings.SettingsDefinition;
 import ghidra.program.database.DBObjectCache;
 import ghidra.program.database.DatabaseObject;
-import ghidra.program.model.data.*;
+import ghidra.program.model.data.Category;
+import ghidra.program.model.data.CategoryPath;
+import ghidra.program.model.data.DataOrganization;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.DataTypeConflictHandler;
+import ghidra.program.model.data.DataTypeDisplayOptions;
+import ghidra.program.model.data.DataTypeEncodeException;
+import ghidra.program.model.data.DataTypeManager;
+import ghidra.program.model.data.DataTypePath;
+import ghidra.program.model.data.DataUtilities;
+import ghidra.program.model.data.SourceArchive;
 import ghidra.program.model.mem.MemBuffer;
-import ghidra.util.*;
+import ghidra.util.InvalidNameException;
+import ghidra.util.Lock;
+import ghidra.util.UniversalID;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.exception.NotYetImplementedException;
 
@@ -41,7 +52,7 @@ abstract class DataTypeDB extends DatabaseObject implements DataType {
 	protected DBRecord record;
 	protected final DataTypeManagerDB dataMgr;
 	private volatile Settings defaultSettings;
-	private final static SettingsDefinition[] EMPTY_DEFINITIONS = new SettingsDefinition[0];
+	private final static SettingsDefinition[] EMPTY_DEFINITIONS = {};
 	protected boolean resolving;
 	protected boolean pointerPostResolveRequired;
 	protected Lock lock;

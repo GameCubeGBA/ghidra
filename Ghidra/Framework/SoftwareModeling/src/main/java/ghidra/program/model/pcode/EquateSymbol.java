@@ -73,19 +73,19 @@ public class EquateSymbol extends HighSymbol {
 		convert = FORMAT_DEFAULT;
 		String formString = symel.getAttribute("format");
 		if (formString != null) {
-			if (formString.equals("hex")) {
+			if ("hex".equals(formString)) {
 				convert = FORMAT_HEX;
 			}
-			else if (formString.equals("dec")) {
+			else if ("dec".equals(formString)) {
 				convert = FORMAT_DEC;
 			}
-			else if (formString.equals("char")) {
+			else if ("char".equals(formString)) {
 				convert = FORMAT_CHAR;
 			}
-			else if (formString.equals("oct")) {
+			else if ("oct".equals(formString)) {
 				convert = FORMAT_OCT;
 			}
-			else if (formString.equals("bin")) {
+			else if ("bin".equals(formString)) {
 				convert = FORMAT_BIN;
 			}
 		}
@@ -100,20 +100,23 @@ public class EquateSymbol extends HighSymbol {
 		saveXMLHeader(buf);
 		if (convert != 0) {
 			String formString = "hex";
-			if (convert == FORMAT_HEX) {
-				// Most common case
-			}
-			else if (convert == FORMAT_DEC) {
+			switch (convert) {
+			case FORMAT_HEX:
+				break;
+			case FORMAT_DEC:
 				formString = "dec";
-			}
-			else if (convert == FORMAT_OCT) {
+				break;
+			case FORMAT_OCT:
 				formString = "oct";
-			}
-			else if (convert == FORMAT_BIN) {
+				break;
+			case FORMAT_BIN:
 				formString = "bin";
-			}
-			else if (convert == FORMAT_CHAR) {
+				break;
+			case FORMAT_CHAR:
 				formString = "char";
+				break;
+			default:
+				break;
 			}
 			SpecXmlUtils.encodeStringAttribute(buf, "format", formString);
 		}
@@ -171,10 +174,7 @@ public class EquateSymbol extends HighSymbol {
 			case 'F':
 				if (nm.length() >= 3 && nm.charAt(2) == 'h') {
 					char secondChar = nm.charAt(1);
-					if (secondChar >= '0' && secondChar <= '9') {
-						return FORMAT_CHAR;
-					}
-					if (secondChar >= 'A' && secondChar <= 'F') {
+					if ((secondChar >= '0' && secondChar <= '9') || (secondChar >= 'A' && secondChar <= 'F')) {
 						return FORMAT_CHAR;
 					}
 				}

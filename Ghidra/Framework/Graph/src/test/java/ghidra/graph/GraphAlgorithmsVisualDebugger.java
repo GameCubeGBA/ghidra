@@ -25,8 +25,12 @@ import javax.swing.JFrame;
 
 import org.junit.Test;
 
-import ghidra.graph.algo.*;
-import ghidra.graph.algo.viewer.*;
+import ghidra.graph.algo.FindPathsAlgorithm;
+import ghidra.graph.algo.IterativeFindPathsAlgorithm;
+import ghidra.graph.algo.RecursiveFindPathsAlgorithm;
+import ghidra.graph.algo.viewer.AlgorithmSelfSteppingTaskMonitor;
+import ghidra.graph.algo.viewer.AlgorithmSteppingTaskMonitor;
+import ghidra.graph.algo.viewer.TestGraphAlgorithmSteppingViewerPanel;
 import ghidra.util.SystemUtilities;
 import ghidra.util.datastruct.ListAccumulator;
 import ghidra.util.exception.CancelledException;

@@ -88,14 +88,12 @@ abstract class LongKeyRecordNode extends LongKeyNode implements RecordNode {
 		for (int i = 0; i < keyCount; i++) {
 			// Compare each key entry with the previous key
 			long key = getKey(i);
-			if (i != 0) {
-				if (key <= prevKey) {
-					consistent = false;
-					logConsistencyError(tableName, "key[" + i + "] <= key[" + (i - 1) + "]", null);
-					Msg.debug(this, "  key[" + i + "].minKey = 0x" + Long.toHexString(key));
-					Msg.debug(this,
-						"  key[" + (i - 1) + "].minKey = 0x" + Long.toHexString(prevKey));
-				}
+			if ((i != 0) && (key <= prevKey)) {
+				consistent = false;
+				logConsistencyError(tableName, "key[" + i + "] <= key[" + (i - 1) + "]", null);
+				Msg.debug(this, "  key[" + i + "].minKey = 0x" + Long.toHexString(key));
+				Msg.debug(this,
+					"  key[" + (i - 1) + "].minKey = 0x" + Long.toHexString(prevKey));
 			}
 			prevKey = key;
 		}
@@ -322,8 +320,7 @@ abstract class LongKeyRecordNode extends LongKeyNode implements RecordNode {
 				// update index tables associated with table
 				table.updatedRecord(getRecord(table.getSchema(), index), record);
 			}
-			LongKeyNode newRoot = updateRecord(index, record);
-			return newRoot;
+			return updateRecord(index, record);
 		}
 
 		// Handle new record - see if we have room in this leaf
@@ -387,8 +384,7 @@ abstract class LongKeyRecordNode extends LongKeyNode implements RecordNode {
 
 		// Handle removal of last record in node
 		if (keyCount == 1) {
-			LongKeyNode newRoot = removeLeaf();
-			return newRoot;
+			return removeLeaf();
 		}
 
 		// Remove record within this node

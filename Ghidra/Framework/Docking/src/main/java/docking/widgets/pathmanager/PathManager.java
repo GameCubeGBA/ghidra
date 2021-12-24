@@ -15,19 +15,32 @@
  */
 package docking.widgets.pathmanager;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableColumn;
 
 import docking.widgets.filechooser.GhidraFileChooser;
 import docking.widgets.filechooser.GhidraFileChooserMode;
-import docking.widgets.table.*;
+import docking.widgets.table.GTable;
+import docking.widgets.table.GTableCellRenderer;
+import docking.widgets.table.GTableCellRenderingData;
 import generic.jar.ResourceFile;
 import generic.util.Path;
 import ghidra.framework.options.SaveState;
@@ -581,10 +594,7 @@ public class PathManager {
 	}
 
 	private boolean isValidPath(Path path) {
-		if (fileChooserMode == GhidraFileChooserMode.FILES_ONLY && path.getPath().isDirectory()) {
-			return false;
-		}
-		if (fileChooserMode == GhidraFileChooserMode.DIRECTORIES_ONLY && path.getPath().isFile()) {
+		if ((fileChooserMode == GhidraFileChooserMode.FILES_ONLY && path.getPath().isDirectory()) || (fileChooserMode == GhidraFileChooserMode.DIRECTORIES_ONLY && path.getPath().isFile())) {
 			return false;
 		}
 		return path.exists();

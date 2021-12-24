@@ -23,7 +23,12 @@ import org.apache.commons.lang3.StringUtils;
 import ghidra.program.database.data.DataTypeUtilities;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressOutOfBoundsException;
-import ghidra.program.model.data.*;
+import ghidra.program.model.data.AbstractFloatDataType;
+import ghidra.program.model.data.Array;
+import ghidra.program.model.data.Composite;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.TypeDef;
+import ghidra.program.model.data.VoidDataType;
 import ghidra.program.model.lang.Register;
 import ghidra.program.model.pcode.Varnode;
 import ghidra.program.model.symbol.SourceType;
@@ -482,10 +487,7 @@ abstract class VariableImpl implements Variable {
 
 		Variable otherVar = (Variable) obj;
 
-		if (!isEquivalent(otherVar)) {
-			return false;
-		}
-		if (!StringUtils.equals(name, otherVar.getName())) {
+		if (!isEquivalent(otherVar) || !StringUtils.equals(name, otherVar.getName())) {
 			return false;
 		}
 		return StringUtils.equals(comment, otherVar.getComment());
@@ -511,16 +513,10 @@ abstract class VariableImpl implements Variable {
 		if (otherVar == this) {
 			return true;
 		}
-		if ((otherVar instanceof Parameter) != (this instanceof Parameter)) {
-			return false;
-		}
-		if ((this instanceof Parameter) &&
-			((Parameter) this).getOrdinal() != ((Parameter) otherVar).getOrdinal()) {
-			return false;
-		}
 		// Always need to check the storage for a VariableImpl regardless of whether 
 		// the otherVar is a VariableDB with custom storage or not.
-		if (!SystemUtilities.isEqual(variableStorage, otherVar.getVariableStorage())) {
+		if (((otherVar instanceof Parameter) != (this instanceof Parameter)) || ((this instanceof Parameter) &&
+			((Parameter) this).getOrdinal() != ((Parameter) otherVar).getOrdinal()) || !SystemUtilities.isEqual(variableStorage, otherVar.getVariableStorage())) {
 			return false;
 		}
 		if (getFirstUseOffset() != otherVar.getFirstUseOffset()) {

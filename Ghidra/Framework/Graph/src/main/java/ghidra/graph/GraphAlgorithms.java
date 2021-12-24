@@ -16,10 +16,23 @@
 package ghidra.graph;
 
 import java.io.PrintStream;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-import ghidra.graph.algo.*;
+import ghidra.graph.algo.ChkDominanceAlgorithm;
+import ghidra.graph.algo.ChkPostDominanceAlgorithm;
+import ghidra.graph.algo.DepthFirstSorter;
+import ghidra.graph.algo.FindPathsAlgorithm;
+import ghidra.graph.algo.GraphNavigator;
+import ghidra.graph.algo.IterativeFindPathsAlgorithm;
+import ghidra.graph.algo.JohnsonCircuitsAlgorithm;
+import ghidra.graph.algo.TarjanStronglyConnectedAlgorthm;
 import ghidra.util.datastruct.Accumulator;
 import ghidra.util.datastruct.ListAccumulator;
 import ghidra.util.exception.CancelledException;
@@ -132,8 +145,7 @@ public class GraphAlgorithms {
 			Collection<V> vertices) {
 
 		Set<E> edges = getEdgesFrom(g, vertices, true);
-		Set<V> descendants = toVertices(edges);
-		return descendants;
+		return toVertices(edges);
 	}
 
 	/**
@@ -149,8 +161,7 @@ public class GraphAlgorithms {
 			Collection<V> vertices) {
 
 		Set<E> edges = getEdgesFrom(g, vertices, false);
-		Set<V> ancestors = toVertices(edges);
-		return ancestors;
+		return toVertices(edges);
 	}
 
 	/**
@@ -165,8 +176,7 @@ public class GraphAlgorithms {
 			boolean topDown) {
 
 		List<V> list = Arrays.asList(v);
-		Set<E> edges = getEdgesFrom(g, list, topDown);
-		return edges;
+		return getEdgesFrom(g, list, topDown);
 	}
 
 	/**
@@ -322,8 +332,7 @@ public class GraphAlgorithms {
 			TaskMonitor monitor) throws CancelledException {
 
 		ChkDominanceAlgorithm<V, E> algo = new ChkDominanceAlgorithm<>(g, monitor);
-		Set<V> dominated = algo.getDominated(from);
-		return dominated;
+		return algo.getDominated(from);
 	}
 
 	/**
@@ -340,8 +349,7 @@ public class GraphAlgorithms {
 			TaskMonitor monitor) throws CancelledException {
 
 		ChkPostDominanceAlgorithm<V, E> algo = new ChkPostDominanceAlgorithm<>(g, monitor);
-		Set<V> postDominated = algo.getDominated(from);
-		return postDominated;
+		return algo.getDominated(from);
 	}
 
 	/**
@@ -460,8 +468,7 @@ public class GraphAlgorithms {
 	 */
 	public static <V, E extends GEdge<V>> List<V> getVerticesInPostOrder(GDirectedGraph<V, E> g,
 			GraphNavigator<V, E> navigator) {
-		List<V> postOrder = DepthFirstSorter.postOrder(g, navigator);
-		return postOrder;
+		return DepthFirstSorter.postOrder(g, navigator);
 	}
 
 	/**
@@ -474,8 +481,7 @@ public class GraphAlgorithms {
 	 */
 	public static <V, E extends GEdge<V>> List<V> getVerticesInPreOrder(GDirectedGraph<V, E> g,
 			GraphNavigator<V, E> navigator) {
-		List<V> preOrder = DepthFirstSorter.preOrder(g, navigator);
-		return preOrder;
+		return DepthFirstSorter.preOrder(g, navigator);
 	}
 
 	/**
@@ -512,15 +518,10 @@ public class GraphAlgorithms {
 
 		//@formatter:off
 		Collection<E> edges = graph.getEdges();
-		Set<E> results = 
-			edges.stream()
-				 .filter(e -> vertices.contains(e.getStart()))
-				 .filter(e -> vertices.contains(e.getEnd()))
-				 .collect(Collectors.toSet())
-				 ;
-		//@formatter:on
-
-		return results;
+		return edges.stream()
+			 .filter(e -> vertices.contains(e.getStart()))
+			 .filter(e -> vertices.contains(e.getEnd()))
+			 .collect(Collectors.toSet());
 	}
 
 	/**

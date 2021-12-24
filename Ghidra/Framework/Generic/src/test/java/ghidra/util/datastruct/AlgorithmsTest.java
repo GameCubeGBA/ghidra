@@ -18,38 +18,38 @@ package ghidra.util.datastruct;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Random;
 
-import ghidra.util.task.TaskMonitor;
 import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
-import ghidra.util.task.TaskMonitorAdapter;
+import ghidra.util.task.TaskMonitor;
 
 public class AlgorithmsTest extends AbstractGenericTest {
 	Comparator<Long> comparator;
 
 	public AlgorithmsTest() {
 		super();
-		comparator = new Comparator<Long>() {
-			@Override
-			public int compare(Long a, Long b) {
-				if (a < b) {
-					return -1;
-				}
-				else if (a > b) {
-					return 1;
-				}
-				return 0;
+		comparator = (a, b) -> {
+			if (a < b) {
+				return -1;
 			}
+			else if (a > b) {
+				return 1;
+			}
+			return 0;
 		};
 
 	}
 
 	private List<Long> getList(long[] data) {
-		List<Long> list = new ArrayList<Long>(data.length);
-		for (int i = 0; i < data.length; i++) {
-			list.add(data[i]);
+		List<Long> list = new ArrayList<>(data.length);
+		for (long element : data) {
+			list.add(element);
 		}
 		return list;
 	}
@@ -60,7 +60,7 @@ public class AlgorithmsTest extends AbstractGenericTest {
 		int low = 3;
 		int high = 8;
 		Algorithms.bubbleSort(data, low, high, comparator);
-		long[] expected = new long[] { 5, 8, 10, 2, 3, 3, 7, 10, 10, 23, 0, 15, 22 };
+		long[] expected = { 5, 8, 10, 2, 3, 3, 7, 10, 10, 23, 0, 15, 22 };
 		for (int i = 0; i < expected.length; i++) {
 			assertEquals(Long.valueOf(expected[i]), data.get(i));
 		}
@@ -70,7 +70,7 @@ public class AlgorithmsTest extends AbstractGenericTest {
 	public void testmergeSort() {
 		List<Long> data = getList(new long[] { 5, 8, 10, 2, 10, 3, 3, 7, 10, 23, 0, 15, 22 });
 		Algorithms.mergeSort(data, comparator, TaskMonitor.DUMMY);
-		long[] expected = new long[] { 0, 2, 3, 3, 5, 7, 8, 10, 10, 10, 15, 22, 23 };
+		long[] expected = { 0, 2, 3, 3, 5, 7, 8, 10, 10, 10, 15, 22, 23 };
 		for (int i = 0; i < expected.length; i++) {
 			assertEquals(Long.valueOf(expected[i]), data.get(i));
 		}
@@ -80,7 +80,7 @@ public class AlgorithmsTest extends AbstractGenericTest {
 	public void testmergeSort2() {
 		List<Long> data = getList(new long[] { 0, 1, 2, 3, 4, 0, 0, 0 });
 		Algorithms.mergeSort(data, comparator, TaskMonitor.DUMMY);
-		long[] expected = new long[] { 0, 0, 0, 0, 1, 2, 3, 4 };
+		long[] expected = { 0, 0, 0, 0, 1, 2, 3, 4 };
 		for (int i = 0; i < expected.length; i++) {
 			assertEquals(Long.valueOf(expected[i]), data.get(i));
 		}
@@ -90,7 +90,7 @@ public class AlgorithmsTest extends AbstractGenericTest {
 	public void testmergeSort3() {
 		List<Long> data = getList(new long[] { 0, 1, 2, 3, 4, 4, 4, 4 });
 		Algorithms.mergeSort(data, comparator, TaskMonitor.DUMMY);
-		long[] expected = new long[] { 0, 1, 2, 3, 4, 4, 4, 4 };
+		long[] expected = { 0, 1, 2, 3, 4, 4, 4, 4 };
 		for (int i = 0; i < expected.length; i++) {
 			assertEquals(Long.valueOf(expected[i]), data.get(i));
 		}
@@ -100,7 +100,7 @@ public class AlgorithmsTest extends AbstractGenericTest {
 	public void testmergeSort4() {
 		List<Long> data = getList(new long[] { 1, 1, 1, 1, 1, 1, 1, 1 });
 		Algorithms.mergeSort(data, comparator, TaskMonitor.DUMMY);
-		long[] expected = new long[] { 1, 1, 1, 1, 1, 1, 1, 1 };
+		long[] expected = { 1, 1, 1, 1, 1, 1, 1, 1 };
 		for (int i = 0; i < expected.length; i++) {
 			assertEquals(Long.valueOf(expected[i]), data.get(i));
 		}

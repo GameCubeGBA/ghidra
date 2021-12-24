@@ -15,21 +15,37 @@
  */
 package docking.widgets.table.threaded;
 
-import static docking.widgets.table.AddRemoveListItem.Type.*;
+import static docking.widgets.table.AddRemoveListItem.Type.ADD;
+import static docking.widgets.table.AddRemoveListItem.Type.CHANGE;
+import static docking.widgets.table.AddRemoveListItem.Type.REMOVE;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.swing.SwingUtilities;
 import javax.swing.event.TableModelEvent;
 
-import docking.widgets.table.*;
+import docking.widgets.table.AddRemoveListItem;
+import docking.widgets.table.DynamicTableColumn;
+import docking.widgets.table.GDynamicColumnTableModel;
+import docking.widgets.table.RowObjectFilterModel;
+import docking.widgets.table.TableFilter;
+import docking.widgets.table.TableSortingContext;
 import docking.widgets.table.sort.DefaultColumnComparator;
 import generic.concurrent.ConcurrentListenerSet;
 import ghidra.framework.plugintool.ServiceProvider;
 import ghidra.util.Swing;
 import ghidra.util.SystemUtilities;
-import ghidra.util.datastruct.*;
-import ghidra.util.exception.*;
+import ghidra.util.datastruct.Accumulator;
+import ghidra.util.datastruct.LRUMap;
+import ghidra.util.datastruct.ListAccumulator;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.ClosedException;
 import ghidra.util.task.TaskMonitor;
 import ghidra.util.worker.Worker;
 
@@ -428,11 +444,7 @@ public abstract class ThreadedTableModel<ROW_OBJECT, DATA_SOURCE>
 		// copy the filter so that it is not changed by another thread whilst this filter is
 		// taking place
 
-		if (data.size() == 0) {
-			return data;
-		}
-
-		if (!hasFilter()) {
+		if ((data.size() == 0) || !hasFilter()) {
 			return data;
 		}
 
@@ -738,16 +750,12 @@ public abstract class ThreadedTableModel<ROW_OBJECT, DATA_SOURCE>
 
 	@Override
 	public int getViewIndex(ROW_OBJECT t) {
-		// note: this is faster than it sounds
-		int index = filteredData.indexOf(t);
-		return index;
+		return filteredData.indexOf(t);
 	}
 
 	@Override
 	public int getModelIndex(ROW_OBJECT t) {
-		// note: this is faster than it sounds
-		int index = allData.indexOf(t);
-		return index;
+		return allData.indexOf(t);
 	}
 
 	/**

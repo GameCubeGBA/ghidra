@@ -15,7 +15,10 @@
  */
 package ghidra.util.datastruct;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
+import java.util.WeakHashMap;
 
 import org.apache.commons.collections4.IteratorUtils;
 

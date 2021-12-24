@@ -17,42 +17,53 @@ package docking.widgets.table;
 
 import java.awt.Component;
 import java.awt.Container;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.*;
-import javax.swing.table.*;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.SwingUtilities;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
 import javax.swing.text.JTextComponent;
 
 import docking.DockingWindowManager;
 import ghidra.util.HTMLUtilities;
 import ghidra.util.Msg;
-import ghidra.util.task.*;
+import ghidra.util.task.Task;
+import ghidra.util.task.TaskLauncher;
+import ghidra.util.task.TaskMonitor;
 
 public final class GTableToCSV {
 	final static String TITLE = "Export to CSV";
 
-	public final static void writeCSV(File file, GTable table) {
+	public static void writeCSV(File file, GTable table) {
 		ConvertTask task = new ConvertTask(file, table);
 		new TaskLauncher(task, table, 0);
 	}
 
-	public final static void writeCSVUsingColunns(File file, GTable table,
+	public static void writeCSVUsingColunns(File file, GTable table,
 			List<Integer> selectedColumns) {
 		ConvertTask task = new ConvertTask(file, table, selectedColumns);
 		new TaskLauncher(task, table, 0);
 	}
 
-	final static void writeCSV(File file, GTable table,
+	static void writeCSV(File file, GTable table,
 			List<Integer> columns, TaskMonitor monitor) throws IOException {
 
 		PrintWriter writer = new PrintWriter(file);
 		writeCSV(writer, table, columns, monitor);
 	}
 
-	final static void writeCSV(PrintWriter writer, GTable table,
+	static void writeCSV(PrintWriter writer, GTable table,
 			List<Integer> columns, TaskMonitor monitor) {
 
 		List<TableColumn> tableColumns = null;
@@ -77,7 +88,7 @@ public final class GTableToCSV {
 	private static List<TableColumn> getVisibleColumnsInOrder(JTable table, TaskMonitor monitor) {
 
 		TableColumnModel columnModel = table.getColumnModel();
-		List<TableColumn> columns = new ArrayList<TableColumn>();
+		List<TableColumn> columns = new ArrayList<>();
 		for (int columnIndex = 0; columnIndex < table.getColumnCount(); ++columnIndex) {
 			if (monitor.isCancelled()) {
 				break;
@@ -92,7 +103,7 @@ public final class GTableToCSV {
 			List<Integer> columnIndices) {
 
 		TableColumnModel columnModel = table.getColumnModel();
-		List<TableColumn> columns = new ArrayList<TableColumn>();
+		List<TableColumn> columns = new ArrayList<>();
 		for (Integer index : columnIndices) {
 			TableColumn column = columnModel.getColumn(index);
 			columns.add(column);
@@ -152,10 +163,7 @@ public final class GTableToCSV {
 			SwingUtilities
 					.invokeAndWait(() -> result[0] = getTableCellValue(table, model, row, column));
 		}
-		catch (InterruptedException e) {
-			return null;
-		}
-		catch (InvocationTargetException e) {
+		catch (InterruptedException | InvocationTargetException e) {
 			return null;
 		}
 
@@ -309,7 +317,7 @@ public final class GTableToCSV {
 	 * <p>
 	 * Note: when importing into Excel, the quotes are stripped off.
 	 */
-	private final static void writeField(PrintWriter writer, String fieldValue,
+	private static void writeField(PrintWriter writer, String fieldValue,
 			TaskMonitor monitor) {
 		writer.print("\"");
 		for (int i = 0; i < fieldValue.length(); ++i) {
@@ -334,7 +342,7 @@ public final class GTableToCSV {
 		private final GTable table;
 
 		private File file;
-		private List<Integer> columns = new ArrayList<Integer>();
+		private List<Integer> columns = new ArrayList<>();
 
 		ConvertTask(File file, GTable table) {
 			super(GTableToCSV.TITLE, true, true, true);

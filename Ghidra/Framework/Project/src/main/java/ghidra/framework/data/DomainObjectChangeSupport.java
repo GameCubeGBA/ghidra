@@ -15,13 +15,21 @@
  */
 package ghidra.framework.data;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.Callable;
 
 import generic.timer.GhidraTimer;
 import generic.timer.GhidraTimerFactory;
-import ghidra.framework.model.*;
-import ghidra.util.*;
+import ghidra.framework.model.DomainObject;
+import ghidra.framework.model.DomainObjectChangeRecord;
+import ghidra.framework.model.DomainObjectChangedEvent;
+import ghidra.framework.model.DomainObjectListener;
+import ghidra.util.Lock;
+import ghidra.util.Msg;
+import ghidra.util.SystemUtilities;
 import ghidra.util.datastruct.WeakDataStructureFactory;
 import ghidra.util.datastruct.WeakSet;
 
@@ -87,7 +95,7 @@ class DomainObjectChangeSupport {
 
 	private DomainObjectChangedEvent convertEventQueueRecordsToEvent() {
 
-		DomainObjectChangedEvent event = lockQueue(() -> {
+		return lockQueue(() -> {
 
 			if (changesQueue.isEmpty()) {
 				timer.stop();
@@ -98,8 +106,6 @@ class DomainObjectChangeSupport {
 			changesQueue = new ArrayList<>();
 			return e;
 		});
-
-		return event;
 	}
 
 	// This version of notify takes in the listeners to notify so that we can send events to
@@ -107,11 +113,7 @@ class DomainObjectChangeSupport {
 	private void notifyEvent(Iterable<DomainObjectListener> listenersToNotify,
 			DomainObjectChangedEvent ev) {
 
-		if (ev == null) {
-			return; // this implies there we no changes when the timer expired
-		}
-
-		if (isDisposed) {
+		if ((ev == null) || isDisposed) {
 			return;
 		}
 
@@ -222,8 +224,7 @@ class DomainObjectChangeSupport {
 			writeLock.acquire();
 			T result;
 			try {
-				result = c.call();
-				return result;
+				return c.call();
 			}
 			catch (Exception e) {
 				// sholudn't happen

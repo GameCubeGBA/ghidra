@@ -17,10 +17,23 @@ package ghidra.framework.data;
 
 import java.beans.PropertyEditor;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-import db.*;
-import ghidra.framework.options.*;
+import db.ByteField;
+import db.DBRecord;
+import db.Field;
+import db.RecordIterator;
+import db.Schema;
+import db.StringField;
+import db.Table;
+import ghidra.framework.options.AbstractOptions;
+import ghidra.framework.options.Option;
+import ghidra.framework.options.OptionType;
 import ghidra.util.HelpLocation;
 import ghidra.util.SystemUtilities;
 import ghidra.util.exception.ClosedException;
@@ -143,10 +156,7 @@ class OptionsDB extends AbstractOptions {
 		while (iterator.hasNext()) {
 			DBRecord rec = iterator.next();
 			String keyName = ((StringField) rec.getKeyField()).getString();
-			if (keyName.equals(path)) {
-				iterator.delete();
-			}
-			else if (keyName.startsWith(subListPath)) {
+			if (keyName.equals(path) || keyName.startsWith(subListPath)) {
 				iterator.delete();
 			}
 		}
@@ -232,7 +242,6 @@ class OptionsDB extends AbstractOptions {
 			return propertyTable.getRecord(new StringField(propertyName));
 		}
 		catch (ClosedException e) {
-			return null; // ignore closed file
 		}
 		catch (IOException e) {
 			domainObj.dbError(e);

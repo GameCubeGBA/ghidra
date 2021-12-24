@@ -18,8 +18,17 @@ package ghidra.program.model.lang;
 import java.util.ArrayList;
 import java.util.List;
 
-import ghidra.app.plugin.processors.sleigh.*;
-import ghidra.app.plugin.processors.sleigh.template.*;
+import ghidra.app.plugin.processors.sleigh.FixedHandle;
+import ghidra.app.plugin.processors.sleigh.ParserWalker;
+import ghidra.app.plugin.processors.sleigh.PcodeEmit;
+import ghidra.app.plugin.processors.sleigh.PcodeEmitObjects;
+import ghidra.app.plugin.processors.sleigh.SleighException;
+import ghidra.app.plugin.processors.sleigh.SleighLanguage;
+import ghidra.app.plugin.processors.sleigh.SleighParserContext;
+import ghidra.app.plugin.processors.sleigh.template.ConstTpl;
+import ghidra.app.plugin.processors.sleigh.template.ConstructTpl;
+import ghidra.app.plugin.processors.sleigh.template.OpTpl;
+import ghidra.app.plugin.processors.sleigh.template.VarnodeTpl;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressFactory;
 import ghidra.program.model.listing.Program;
@@ -28,7 +37,9 @@ import ghidra.program.model.pcode.PcodeOp;
 import ghidra.program.model.pcode.Varnode;
 import ghidra.util.SystemUtilities;
 import ghidra.util.xml.SpecXmlUtils;
-import ghidra.xml.*;
+import ghidra.xml.XmlElement;
+import ghidra.xml.XmlParseException;
+import ghidra.xml.XmlPullParser;
 
 /**
  * <code>InjectPayloadSleigh</code> defines an InjectPayload of p-code which is defined via
@@ -169,11 +180,7 @@ public class InjectPayloadSleigh implements InjectPayload {
 			setupParameters(context, walker);
 			emit.build(pcodeTemplate, -1);
 		}
-		catch (UnknownInstructionException e) { // Should not be happening in a CallFixup
-			e.printStackTrace();
-			return;
-		}
-		catch (MemoryAccessException e) { // Should not be happening in a CallFixup
+		catch (UnknownInstructionException | MemoryAccessException e) { // Should not be happening in a CallFixup
 			e.printStackTrace();
 			return;
 		}
@@ -273,10 +280,10 @@ public class InjectPayloadSleigh implements InjectPayload {
 		XmlElement el = parser.start();			// The <pcode> tag
 		String injectstr = el.getAttribute("inject");
 		if (injectstr != null) {
-			if (injectstr.equals("uponentry")) {
+			if ("uponentry".equals(injectstr)) {
 				subType = 0;
 			}
-			else if (injectstr.equals("uponreturn")) {
+			else if ("uponreturn".equals(injectstr)) {
 				subType = 1;
 			}
 			else {
@@ -290,14 +297,14 @@ public class InjectPayloadSleigh implements InjectPayload {
 		XmlElement subel = parser.peek();
 		while (subel.isStart()) {
 			subel = parser.start();
-			if (subel.getName().equals("body")) {
+			if ("body".equals(subel.getName())) {
 				parseString = parser.end(subel).getText();
 				break;
 			}
 			String paramName = subel.getAttribute("name");
 			int size = SpecXmlUtils.decodeInt(subel.getAttribute("size"));
 			InjectParameter param = new InjectParameter(paramName, size);
-			if (subel.getName().equals("input")) {
+			if ("input".equals(subel.getName())) {
 				inlist.add(param);
 			}
 			else {
@@ -397,16 +404,7 @@ public class InjectPayloadSleigh implements InjectPayload {
 	@Override
 	public boolean equals(Object obj) {
 		InjectPayloadSleigh op2 = (InjectPayloadSleigh) obj;
-		if (!name.equals(op2.name)) {
-			return false;
-		}
-		if (!SystemUtilities.isArrayEqual(inputlist, op2.inputlist)) {
-			return false;
-		}
-		if (!SystemUtilities.isArrayEqual(output, op2.output)) {
-			return false;
-		}
-		if (incidentalCopy != op2.incidentalCopy) {
+		if (!name.equals(op2.name) || !SystemUtilities.isArrayEqual(inputlist, op2.inputlist) || !SystemUtilities.isArrayEqual(output, op2.output) || (incidentalCopy != op2.incidentalCopy)) {
 			return false;
 		}
 		// Cannot compare isfallthru as it is a product of the p-code templates
@@ -461,7 +459,6 @@ public class InjectPayloadSleigh implements InjectPayload {
 		inputs[1] = zero;
 		OpTpl[] ops = new OpTpl[1];
 		ops[0] = new OpTpl(PcodeOp.INT_ADD, temp, inputs);
-		ConstructTpl pcode = new ConstructTpl(ops);
-		return pcode;
+		return new ConstructTpl(ops);
 	}
 }

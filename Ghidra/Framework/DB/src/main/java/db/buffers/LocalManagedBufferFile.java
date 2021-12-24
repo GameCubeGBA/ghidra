@@ -15,13 +15,15 @@
  */
 package db.buffers;
 
-import java.io.*;
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import ghidra.util.Msg;
 import ghidra.util.exception.AssertException;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * <code>LocalManagedBufferFile</code> implements a BufferFile as block-oriented
@@ -228,8 +230,8 @@ public class LocalManagedBufferFile extends LocalBufferFile implements ManagedBu
 		setFreeIndexes(versionFileHandler.getFreeIndexList());
 		String[] names = versionFileHandler.getOldParameterNames();
 		clearParameters();
-		for (int i = 0; i < names.length; i++) {
-			setParameter(names[i], versionFileHandler.getOldParameter(names[i]));
+		for (String name : names) {
+			setParameter(name, versionFileHandler.getOldParameter(name));
 		}
 	}
 

@@ -16,21 +16,46 @@
 package ghidra.program.database;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-import org.xml.sax.*;
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 import generic.stl.Pair;
-import ghidra.app.plugin.processors.sleigh.*;
+import ghidra.app.plugin.processors.sleigh.SleighException;
+import ghidra.app.plugin.processors.sleigh.SleighLanguage;
+import ghidra.app.plugin.processors.sleigh.SleighLanguageValidator;
+import ghidra.app.plugin.processors.sleigh.SpecExtensionEditor;
 import ghidra.framework.options.Options;
 import ghidra.framework.store.LockException;
-import ghidra.program.model.lang.*;
+import ghidra.program.model.lang.CompilerSpec;
 import ghidra.program.model.lang.CompilerSpec.EvaluationModelType;
-import ghidra.program.model.listing.*;
-import ghidra.util.*;
-import ghidra.util.exception.*;
+import ghidra.program.model.lang.InjectPayload;
+import ghidra.program.model.lang.InjectPayloadCallfixup;
+import ghidra.program.model.lang.InjectPayloadCallfixupError;
+import ghidra.program.model.lang.InjectPayloadCallother;
+import ghidra.program.model.lang.InjectPayloadCallotherError;
+import ghidra.program.model.lang.InjectPayloadSleigh;
+import ghidra.program.model.lang.PcodeInjectLibrary;
+import ghidra.program.model.lang.PrototypeModel;
+import ghidra.program.model.lang.PrototypeModelError;
+import ghidra.program.model.lang.PrototypeModelMerged;
+import ghidra.program.model.listing.Function;
+import ghidra.program.model.listing.FunctionIterator;
+import ghidra.program.model.listing.FunctionManager;
+import ghidra.program.model.listing.Program;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
+import ghidra.util.SystemUtilities;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.InvalidInputException;
+import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.xml.*;
+import ghidra.xml.XmlParseException;
+import ghidra.xml.XmlPullParser;
+import ghidra.xml.XmlPullParserFactory;
 
 /**
  * Utility class for installing/removing "specification extensions" to a Program.
@@ -85,7 +110,7 @@ public class SpecExtension {
 
 		private String tagName;
 
-		private Type(String nm) {
+		Type(String nm) {
 			tagName = nm;
 		}
 
@@ -372,7 +397,7 @@ public class SpecExtension {
 	 * @return the error handler object
 	 */
 	private static ErrorHandler getErrorHandler(String docTitle) {
-		ErrorHandler errHandler = new ErrorHandler() {
+		return new ErrorHandler() {
 			@Override
 			public void error(SAXParseException exception) throws SAXException {
 				throw exception;
@@ -388,7 +413,6 @@ public class SpecExtension {
 				Msg.warn(this, "Warning parsing '" + docTitle + "'", exception);
 			}
 		};
-		return errHandler;
 	}
 
 	/**
@@ -417,13 +441,11 @@ public class SpecExtension {
 		String elName = parser.peek().getName();
 		if (elName.endsWith("prototype")) {
 			PrototypeModel model;
-			if (parser.peek().getName().equals("resolveprototype")) {
+			if ("resolveprototype".equals(parser.peek().getName())) {
 				PrototypeModelMerged mergemodel = new PrototypeModelMerged();
 				ArrayList<PrototypeModel> curModels =
 					new ArrayList<>(cspec.getCallingConventions().length);
-				for (PrototypeModel curModel : cspec.getCallingConventions()) {
-					curModels.add(curModel);
-				}
+				Collections.addAll(curModels, cspec.getCallingConventions());
 				try {
 					mergemodel.restoreXml(parser, curModels);
 					model = mergemodel;
@@ -453,7 +475,7 @@ public class SpecExtension {
 			}
 			return model;
 		}
-		else if (elName.equals("callfixup")) {
+		else if ("callfixup".equals(elName)) {
 			String nm = parser.peek().getAttribute("name");
 			PcodeInjectLibrary injectLibrary = cspec.getPcodeInjectLibrary();
 			InjectPayload payload =
@@ -483,7 +505,7 @@ public class SpecExtension {
 			}
 			return payload;
 		}
-		else if (elName.equals("callotherfixup")) {
+		else if ("callotherfixup".equals(elName)) {
 			String nm = parser.peek().getAttribute("name");
 			PcodeInjectLibrary injectLibrary = cspec.getPcodeInjectLibrary();
 			InjectPayload payload =
@@ -523,10 +545,7 @@ public class SpecExtension {
 		PcodeInjectLibrary injectLibrary = cspec.getPcodeInjectLibrary();
 		InjectPayload payload =
 			injectLibrary.getPayload(InjectPayload.CALLFIXUP_TYPE, doc.formalName);
-		if (payload == null) {
-			return;
-		}
-		if (injectLibrary.hasProgramPayload(doc.formalName, InjectPayload.CALLFIXUP_TYPE)) {
+		if ((payload == null) || injectLibrary.hasProgramPayload(doc.formalName, InjectPayload.CALLFIXUP_TYPE)) {
 			return;
 		}
 		throw new SleighException("Extension cannot replace callfixup: " + doc.formalName);
@@ -546,10 +565,7 @@ public class SpecExtension {
 		}
 		InjectPayload payload =
 			injectLibrary.getPayload(InjectPayload.CALLOTHERFIXUP_TYPE, doc.formalName);
-		if (payload == null) {
-			return;
-		}
-		if (injectLibrary.hasProgramPayload(doc.formalName, InjectPayload.CALLOTHERFIXUP_TYPE)) {
+		if ((payload == null) || injectLibrary.hasProgramPayload(doc.formalName, InjectPayload.CALLOTHERFIXUP_TYPE)) {
 			return;
 		}
 		// A callother payload is allowed to override an existing core payload
@@ -567,11 +583,9 @@ public class SpecExtension {
 		CompilerSpec cspec = program.getCompilerSpec();
 		PrototypeModel[] allModels = cspec.getAllModels();
 		for (PrototypeModel model : allModels) {
-			if (model.getName().equals(doc.formalName)) {
-				if (!model.isProgramExtension()) {
-					throw new SleighException(
-						"Extension cannot replace prototype: " + doc.formalName);
-				}
+			if (model.getName().equals(doc.formalName) && !model.isProgramExtension()) {
+				throw new SleighException(
+					"Extension cannot replace prototype: " + doc.formalName);
 			}
 		}
 	}

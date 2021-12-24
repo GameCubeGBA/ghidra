@@ -16,12 +16,21 @@
 package ghidra.framework.plugintool.util;
 
 import java.io.File;
-import java.lang.reflect.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
-import ghidra.framework.plugintool.*;
+import ghidra.framework.plugintool.Plugin;
+import ghidra.framework.plugintool.PluginConfigurationModel;
+import ghidra.framework.plugintool.PluginInfo;
+import ghidra.framework.plugintool.PluginTool;
+import ghidra.framework.plugintool.ServiceInfo;
 import ghidra.framework.plugintool.dialog.ExtensionDetails;
 import ghidra.util.Msg;
 import ghidra.util.classfinder.ClassSearcher;

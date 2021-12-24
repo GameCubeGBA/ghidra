@@ -15,13 +15,39 @@
  */
 package ghidra.program.util;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressOverflowException;
+import ghidra.program.model.address.AddressRange;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.address.OverlayAddressSpace;
 import ghidra.program.model.lang.Register;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.Function;
+import ghidra.program.model.listing.Instruction;
+import ghidra.program.model.listing.Library;
+import ghidra.program.model.listing.Listing;
+import ghidra.program.model.listing.Parameter;
+import ghidra.program.model.listing.Program;
+import ghidra.program.model.listing.Variable;
+import ghidra.program.model.listing.VariableStorage;
 import ghidra.program.model.pcode.Varnode;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.ExternalLocation;
+import ghidra.program.model.symbol.ExternalManager;
+import ghidra.program.model.symbol.Namespace;
+import ghidra.program.model.symbol.Reference;
+import ghidra.program.model.symbol.ReferenceIterator;
+import ghidra.program.model.symbol.ReferenceManager;
+import ghidra.program.model.symbol.SourceType;
+import ghidra.program.model.symbol.Symbol;
+import ghidra.program.model.symbol.SymbolIterator;
+import ghidra.program.model.symbol.SymbolTable;
+import ghidra.program.model.symbol.SymbolType;
 import ghidra.util.exception.AssertException;
 import ghidra.util.exception.InvalidInputException;
 
@@ -87,7 +113,6 @@ public class SimpleDiffUtility {
 					return new Varnode(otherReg.getAddress(), varnode.getSize());
 				}
 			}
-			return null;
 		}
 		else if (addr.isMemoryAddress() || addr.isStackAddress()) {
 			Address otherAddr = getCompatibleAddress(program, addr, otherProgram);
@@ -659,10 +684,7 @@ public class SimpleDiffUtility {
 
 	private static boolean originalNamesDontConflict(ExternalLocation extLoc,
 			ExternalLocation otherExtLoc) {
-		if (extLoc.getOriginalImportedName() == null) {
-			return true;
-		}
-		if (otherExtLoc.getOriginalImportedName() == null) {
+		if ((extLoc.getOriginalImportedName() == null) || (otherExtLoc.getOriginalImportedName() == null)) {
 			return true;
 		}
 		return extLoc.getOriginalImportedName().equals(otherExtLoc.getOriginalImportedName());
@@ -785,10 +807,7 @@ public class SimpleDiffUtility {
 				continue;
 			}
 			Variable v = (Variable) s.getObject();
-			if (v instanceof Parameter && ordinal != ((Parameter) v).getOrdinal()) {
-				continue;
-			}
-			if (firstUseOffset != v.getFirstUseOffset()) {
+			if ((v instanceof Parameter && ordinal != ((Parameter) v).getOrdinal()) || (firstUseOffset != v.getFirstUseOffset())) {
 				continue;
 			}
 			if (v.getVariableStorage().equals(otherStorage)) {

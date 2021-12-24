@@ -15,14 +15,22 @@
  */
 package ghidra.util.datastruct;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import ghidra.util.graph.*;
+import ghidra.util.graph.AbstractDependencyGraph;
+import ghidra.util.graph.DependencyGraph;
+import ghidra.util.graph.DeterministicDependencyGraph;
 
 public class DependencyGraphTest {
 

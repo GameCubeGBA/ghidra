@@ -16,7 +16,10 @@
 package ghidra.graph.viewer.edge;
 
 import java.awt.geom.Point2D;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
 import ghidra.graph.viewer.VisualEdge;
 import ghidra.graph.viewer.VisualVertex;
@@ -122,11 +125,7 @@ public abstract class AbstractVisualEdge<V extends VisualVertex> implements Visu
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((end == null) ? 0 : end.hashCode());
-		result = prime * result + ((start == null) ? 0 : start.hashCode());
-		return result;
+		return Objects.hash(end, start);
 	}
 
 	@Override
@@ -134,28 +133,15 @@ public abstract class AbstractVisualEdge<V extends VisualVertex> implements Visu
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
 		}
 
 		AbstractVisualEdge<?> other = (AbstractVisualEdge<?>) obj;
-		if (end == null) {
-			if (other.end != null) {
-				return false;
-			}
-		}
-		else if (!end.equals(other.end)) {
+		if (!Objects.equals(end, other.end)) {
 			return false;
 		}
-		if (start == null) {
-			if (other.start != null) {
-				return false;
-			}
-		}
-		else if (!start.equals(other.start)) {
+		if (!Objects.equals(start, other.start)) {
 			return false;
 		}
 		return true;

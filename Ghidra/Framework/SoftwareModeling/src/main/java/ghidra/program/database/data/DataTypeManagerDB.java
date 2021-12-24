@@ -17,31 +17,99 @@ package ghidra.program.database.data;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.IdentityHashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import db.*;
+import db.DBConstants;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.RecordIterator;
+import db.Table;
 import db.util.ErrorHandler;
 import generic.jar.ResourceFile;
 import ghidra.app.plugin.core.datamgr.archive.BuiltInSourceArchive;
 import ghidra.framework.store.db.PackedDBHandle;
 import ghidra.framework.store.db.PackedDatabase;
-import ghidra.graph.*;
+import ghidra.graph.DefaultGEdge;
+import ghidra.graph.GDirectedGraph;
+import ghidra.graph.GEdge;
+import ghidra.graph.GraphAlgorithms;
+import ghidra.graph.GraphFactory;
 import ghidra.graph.algo.GraphNavigator;
-import ghidra.program.database.*;
+import ghidra.program.database.DBObjectCache;
+import ghidra.program.database.DataTypeArchiveContentHandler;
+import ghidra.program.database.DatabaseObject;
 import ghidra.program.database.map.AddressMap;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.KeyRange;
-import ghidra.program.model.data.*;
+import ghidra.program.model.data.ArchiveType;
+import ghidra.program.model.data.Array;
+import ghidra.program.model.data.ArrayDataType;
+import ghidra.program.model.data.BadDataType;
+import ghidra.program.model.data.BitFieldDataType;
+import ghidra.program.model.data.BuiltInDataType;
+import ghidra.program.model.data.BuiltInDataTypeManager;
+import ghidra.program.model.data.Category;
+import ghidra.program.model.data.CategoryPath;
+import ghidra.program.model.data.Composite;
+import ghidra.program.model.data.DataOrganization;
+import ghidra.program.model.data.DataOrganizationImpl;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.DataTypeComponent;
+import ghidra.program.model.data.DataTypeConflictHandler;
 import ghidra.program.model.data.DataTypeConflictHandler.ConflictResult;
+import ghidra.program.model.data.DataTypeDependencyException;
+import ghidra.program.model.data.DataTypeManager;
+import ghidra.program.model.data.DataTypeManagerChangeListener;
+import ghidra.program.model.data.DataTypeManagerChangeListenerHandler;
+import ghidra.program.model.data.DataTypePath;
+import ghidra.program.model.data.Dynamic;
 import ghidra.program.model.data.Enum;
+import ghidra.program.model.data.FactoryDataType;
+import ghidra.program.model.data.FunctionDefinition;
+import ghidra.program.model.data.InvalidDataTypeException;
+import ghidra.program.model.data.InvalidatedListener;
+import ghidra.program.model.data.MissingBuiltInDataType;
+import ghidra.program.model.data.ParameterDefinition;
+import ghidra.program.model.data.Pointer;
+import ghidra.program.model.data.PointerDataType;
+import ghidra.program.model.data.SourceArchive;
+import ghidra.program.model.data.Structure;
+import ghidra.program.model.data.StructureInternal;
+import ghidra.program.model.data.TypeDef;
+import ghidra.program.model.data.TypedefDataType;
+import ghidra.program.model.data.Union;
+import ghidra.program.model.data.UnionInternal;
 import ghidra.program.model.lang.CompilerSpec;
-import ghidra.util.*;
+import ghidra.util.InvalidNameException;
+import ghidra.util.Lock;
+import ghidra.util.Msg;
+import ghidra.util.UniversalID;
+import ghidra.util.UniversalIdGenerator;
+import ghidra.util.UserSearchUtils;
 import ghidra.util.classfinder.ClassTranslator;
 import ghidra.util.datastruct.FixedSizeHashMap;
-import ghidra.util.exception.*;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.ClosedException;
+import ghidra.util.exception.DuplicateNameException;
+import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
 
 /**
@@ -799,17 +867,12 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 			if (sourceArchive != null && sourceArchive.getArchiveType() == ArchiveType.BUILT_IN) {
 				resolvedDataType = resolveBuiltIn(dataType, currentHandler);
 			}
-			else if (sourceArchive == null || dataType.getUniversalID() == null) {
+			else if ((sourceArchive == null || dataType.getUniversalID() == null) || (!sourceArchive.getSourceArchiveID().equals(getUniversalID()) &&
+				sourceArchive.getArchiveType() == ArchiveType.PROGRAM)) {
 				// if the dataType has no source or it has no ID (datatypes with no ID are
 				// always local i.e. pointers)
 				resolvedDataType = resolveNoSourceDataType(dataType, currentHandler);
-			}
-			else if (!sourceArchive.getSourceArchiveID().equals(getUniversalID()) &&
-				sourceArchive.getArchiveType() == ArchiveType.PROGRAM) {
-				// dataTypes from a different program don't carry over their identity.
-				resolvedDataType = resolveNoSourceDataType(dataType, currentHandler);
-			}
-			else {
+			} else {
 				resolvedDataType =
 					resolveDataTypeWithSource(dataType, sourceArchive, currentHandler);
 			}
@@ -1095,11 +1158,9 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 		// Do we have that dataType already resolved and associated with the source archive?
 		DataType existingDataType = getDataType(sourceArchive, dataType.getUniversalID());
 		if (existingDataType != null) {
-			if (!existingDataType.isEquivalent(dataType)) {
-				if (handler.shouldUpdate(dataType, existingDataType)) {
-					existingDataType.replaceWith(dataType);
-					existingDataType.setLastChangeTime(dataType.getLastChangeTime());
-				}
+			if (!existingDataType.isEquivalent(dataType) && handler.shouldUpdate(dataType, existingDataType)) {
+				existingDataType.replaceWith(dataType);
+				existingDataType.setLastChangeTime(dataType.getLastChangeTime());
 			}
 			return existingDataType;
 		}
@@ -1695,10 +1756,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 			throw new IllegalArgumentException(
 				"The given datatype must exist in this DataTypeManager");
 		}
-		if (!datatype.getSourceArchive().equals(getLocalSourceArchive())) {
-			return;
-		}
-		if (datatype.getSourceArchive().equals(archive)) {
+		if (!datatype.getSourceArchive().equals(getLocalSourceArchive()) || datatype.getSourceArchive().equals(archive)) {
 			return;
 		}
 		resolveSourceArchive(archive);
@@ -1900,10 +1958,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 
 	@Override
 	public boolean contains(DataType dataType) {
-		if (dataType == null) {
-			return false;
-		}
-		if (dataType.getDataTypeManager() != this) {
+		if ((dataType == null) || (dataType.getDataTypeManager() != this)) {
 			return false;
 		}
 		// otherwise, it probably belongs to this dataTypeManager, but it could a
@@ -2504,8 +2559,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 		for (String enumName : enumNames) {
 			enumValueAdapter.createRecord(enumID, enumName, enumm.getValue(enumName), enumm.getComment(enumName));
 		}
-		EnumDB enumDB = new EnumDB(this, dtCache, enumAdapter, enumValueAdapter, record);
-		return enumDB;
+		return new EnumDB(this, dtCache, enumAdapter, enumValueAdapter, record);
 	}
 
 	private Pointer createPointer(DataType dt, Category cat, byte length,
@@ -2572,13 +2626,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 	}
 
 	private boolean isOtherAndNotBuiltIn(SourceArchive sourceArchive) {
-		if (sourceArchive.getSourceArchiveID() == LOCAL_ARCHIVE_UNIVERSAL_ID) {
-			return false;
-		}
-		if (sourceArchive.getSourceArchiveID() == universalID) {
-			return false;
-		}
-		if (sourceArchive.getSourceArchiveID() == BUILT_IN_ARCHIVE_UNIVERSAL_ID) {
+		if ((sourceArchive.getSourceArchiveID() == LOCAL_ARCHIVE_UNIVERSAL_ID) || (sourceArchive.getSourceArchiveID() == universalID) || (sourceArchive.getSourceArchiveID() == BUILT_IN_ARCHIVE_UNIVERSAL_ID)) {
 			return false;
 		}
 		return true;
@@ -2825,7 +2873,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 		}
 	}
 
-	private class NameComparator implements Comparator<DataType> {
+	private static class NameComparator implements Comparator<DataType> {
 		/**
 		 * Compares its two arguments for order. Returns a negative integer, zero, or a
 		 * positive integer as the first argument is less than, equal to, or greater
@@ -3048,16 +3096,8 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 	}
 
 	private boolean isAllowedNumberType(Object value) {
-		if (value instanceof Long) {
-			return true;
-		}
-		if (value instanceof Integer) {
-			return true;
-		}
-		if (value instanceof Short) {
-			return true;
-		}
-		if (value instanceof Byte) {
+		if ((value instanceof Long) || (value instanceof Integer) || (value instanceof Short)
+				|| (value instanceof Byte)) {
 			return true;
 		}
 		return false;

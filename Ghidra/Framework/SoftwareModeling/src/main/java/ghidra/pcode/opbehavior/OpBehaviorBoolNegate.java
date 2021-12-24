@@ -16,9 +16,9 @@
  */
 package ghidra.pcode.opbehavior;
 
-import ghidra.program.model.pcode.PcodeOp;
-
 import java.math.BigInteger;
+
+import ghidra.program.model.pcode.PcodeOp;
 
 public class OpBehaviorBoolNegate extends UnaryOpBehavior {
 
@@ -28,14 +28,12 @@ public class OpBehaviorBoolNegate extends UnaryOpBehavior {
 
 	@Override
 	public long evaluateUnary(int sizeout, int sizein, long in1) {
-		long res = in1 ^ 1;
-		return res;
+		return in1 ^ 1;
 	}
 
 	@Override
 	public BigInteger evaluateUnary(int sizeout, int sizein, BigInteger in1) {
-		BigInteger res = in1.xor(BigInteger.ONE);
-		return res;
+		return in1.xor(BigInteger.ONE);
 	}
 
 }

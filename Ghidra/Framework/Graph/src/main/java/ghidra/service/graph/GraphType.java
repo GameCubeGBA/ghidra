@@ -15,7 +15,12 @@
  */
 package ghidra.service.graph;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * Class that defines a new graph type. It defines the set of valid vertex and edge types
@@ -40,8 +45,8 @@ public class GraphType {
 		this.name = Objects.requireNonNull(name);
 		this.description = Objects.requireNonNull(description);
 
-		this.vertexTypes = Collections.unmodifiableSet(new LinkedHashSet<String>(vertexTypes));
-		this.edgeTypes = Collections.unmodifiableSet(new LinkedHashSet<String>(edgeTypes));
+		this.vertexTypes = Collections.unmodifiableSet(new LinkedHashSet<>(vertexTypes));
+		this.edgeTypes = Collections.unmodifiableSet(new LinkedHashSet<>(edgeTypes));
 	}
 
 	/**
@@ -96,13 +101,7 @@ public class GraphType {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((edgeTypes == null) ? 0 : edgeTypes.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((vertexTypes == null) ? 0 : vertexTypes.hashCode());
-		return result;
+		return Objects.hash(description, edgeTypes, name, vertexTypes);
 	}
 
 	@Override
@@ -110,10 +109,7 @@ public class GraphType {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
 		}
 		GraphType other = (GraphType) obj;

@@ -67,7 +67,7 @@ public class AddressRangeChunker implements Iterable<AddressRange> {
 
 	@Override
 	public Iterator<AddressRange> iterator() {
-		return new Iterator<AddressRange>() {
+		return new Iterator<>() {
 
 			@Override
 			public boolean hasNext() {

@@ -15,14 +15,52 @@
  */
 package docking.widgets.autocomplete;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Insets;
+import java.awt.Point;
+import java.awt.Window;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.DefaultListModel;
+import javax.swing.Icon;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.JWindow;
+import javax.swing.ListCellRenderer;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
 import javax.swing.border.BevelBorder;
-import javax.swing.event.*;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Caret;
 
@@ -115,7 +153,7 @@ public class TextFieldAutocompleter<T> {
 	private boolean pendingTextUpdate;
 	private SwingUpdateManager updateManager = new SwingUpdateManager(DEFAULT_UPDATE_DELAY,
 		DEFAULT_MAX_UPDATE_DELAY, "Auto Completion Update Manager " + this.getClass(), () -> {
-			if (pendingTextUpdate == false) {
+			if (!pendingTextUpdate) {
 				return; // not sure if this can happen
 			}
 			doUpdateDisplayContents();
@@ -203,7 +241,7 @@ public class TextFieldAutocompleter<T> {
 			boolean nearBottom = e.getY() >= content.getHeight() - insets.bottom - vdim;
 			boolean closeRight = e.getX() >= content.getWidth() - 20;
 			boolean closeBottom = e.getY() >= content.getHeight() - 20;
-			if (nearRight && nearBottom || nearRight && closeBottom || closeRight && nearBottom) {
+			if ((nearRight && (nearBottom || closeBottom)) || closeRight && nearBottom) {
 				return REGION_SE;
 			}
 			else if (nearRight) {
@@ -292,10 +330,7 @@ public class TextFieldAutocompleter<T> {
 	 * The actual implementation of updateDisplayContents, which gets scheduled asynchronously.
 	 */
 	private void doUpdateDisplayContents() {
-		if (focus == null) {
-			return;
-		}
-		if (completionWindow == null || !completionWindow.isVisible()) {
+		if ((focus == null) || completionWindow == null || !completionWindow.isVisible()) {
 			return;
 		}
 		String text = getPrefix(focus);
@@ -867,12 +902,9 @@ public class TextFieldAutocompleter<T> {
 				(e.getModifiersEx() & InputEvent.CTRL_DOWN_MASK) != 0) {
 				startCompletion((JTextField) e.getComponent());
 				e.consume();
-			}
-			else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-				if (isCompletionListVisible()) {
-					setCompletionListVisible(false);
-					e.consume();
-				}
+			} else if ((e.getKeyCode() == KeyEvent.VK_ESCAPE) && isCompletionListVisible()) {
+				setCompletionListVisible(false);
+				e.consume();
 			}
 		}
 
@@ -965,8 +997,7 @@ public class TextFieldAutocompleter<T> {
 
 			TextFieldAutocompleter<String> auto =
 				new TextFieldAutocompleter<>(new AutocompletionModel<String>() {
-					Set<String> strings = new HashSet<>(Arrays.asList(new String[] { "Test",
-						"Testing", "Another", "Yet another", "Yet still more" }));
+					Set<String> strings = new HashSet<>(Arrays.asList("Test", "Testing", "Another", "Yet another", "Yet still more"));
 					{
 						for (int i = 0; i < 20; i++) {
 							strings.add("Item " + i);
@@ -1014,10 +1045,9 @@ public class TextFieldAutocompleter<T> {
 
 			dual.setVisible(true);
 
-			AutocompletionModel<String> model = new AutocompletionModel<String>() {
+			AutocompletionModel<String> model = new AutocompletionModel<>() {
 				Set<String> strings =
-					new HashSet<>(Arrays.asList(new String[] { "Test", "Testing", "Another",
-						"Yet another", "Yet still more", "Yet still even more", "Yetis, yo" }));
+					new HashSet<>(Arrays.asList("Test", "Testing", "Another", "Yet another", "Yet still more", "Yet still even more", "Yetis, yo"));
 
 				@Override
 				public Collection<String> computeCompletions(String text) {
@@ -1030,7 +1060,7 @@ public class TextFieldAutocompleter<T> {
 					return matching;
 				}
 			};
-			TextFieldAutocompleter<String> auto = new TextFieldAutocompleter<String>(model) {
+			TextFieldAutocompleter<String> auto = new TextFieldAutocompleter<>(model) {
 				@Override
 				protected String getPrefix(JTextField field) {
 					return dual.getTextBeforeCursor(field);

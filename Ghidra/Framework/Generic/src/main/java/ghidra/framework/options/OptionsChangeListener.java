@@ -36,6 +36,6 @@ public interface OptionsChangeListener {
 	 * @param newValue new value of the option
 	 * @throws OptionsVetoException if a change is rejected
 	 */
-	public void optionsChanged(ToolOptions options, String optionName, Object oldValue,
+	void optionsChanged(ToolOptions options, String optionName, Object oldValue,
 			Object newValue) throws OptionsVetoException;
 }

@@ -31,7 +31,7 @@ public interface Command {
 	 * 
 	 * @return true if the command applied successfully
 	 */
-	public boolean applyTo(DomainObject obj);
+	boolean applyTo(DomainObject obj);
 	
 	/**
 	 * Returns the status message indicating the status of the command.
@@ -39,12 +39,12 @@ public interface Command {
 	 * @return reason for failure, or null if the status of the command 
 	 *         was successful
 	 */
-	public String getStatusMsg();
+	String getStatusMsg();
 	
 	/**
 	 * Returns the name of this command.
 	 * 
 	 * @return the name of this command
 	 */
-	public String getName();
+	String getName();
 }

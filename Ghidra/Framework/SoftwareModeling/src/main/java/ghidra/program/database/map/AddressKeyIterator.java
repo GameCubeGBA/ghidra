@@ -21,7 +21,9 @@ import java.util.NoSuchElementException;
 
 import db.DBLongIterator;
 import db.Table;
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.address.KeyRange;
 
 /**
  * Iterator of primary keys that are addresses. The longs returned are the address longs.

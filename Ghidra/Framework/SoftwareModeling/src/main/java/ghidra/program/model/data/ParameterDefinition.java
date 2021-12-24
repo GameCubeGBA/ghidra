@@ -36,47 +36,47 @@ public interface ParameterDefinition extends Comparable<ParameterDefinition> {
 	 *
 	 * @return the data type of the variable
 	 */
-	public DataType getDataType();
+	DataType getDataType();
 
 	/**
 	 * Set the Data Type of this variable.
 	 * @param type dataType the fixed-length datatype of the parameter
 	 * @throws IllegalArgumentException if invalid parameter datatype specified
 	 */
-	public void setDataType(DataType type) throws IllegalArgumentException;
+	void setDataType(DataType type) throws IllegalArgumentException;
 
 	/**
 	 * Get the Name of this variable.
 	 *
 	 * @return the name of the variable or null if no name has been specified.
 	 */
-	public String getName();
+	String getName();
 
 	/**
 	 * Get the length of this variable
 	 *
 	 * @return the length of the variable
 	 */
-	public int getLength();
+	int getLength();
 
 	/**
 	 * Set the name of this variable.
 	 * @param name the name
 	 */
-	public void setName(String name);
+	void setName(String name);
 
 	/**
 	 * Get the Comment for this variable
 	 *
 	 * @return the comment
 	 */
-	public String getComment();
+	String getComment();
 
 	/**
 	 * Set the comment for this variable
 	 * @param comment the comment
 	 */
-	public void setComment(String comment);
+	void setComment(String comment);
 
 	/**
 	 * Determine if a variable corresponds to a parameter which is equivalent to 
@@ -87,7 +87,7 @@ public interface ParameterDefinition extends Comparable<ParameterDefinition> {
 	 * and dataType.  False will always be returned if specified variable is
 	 * not a {@link Parameter}.
 	 */
-	public boolean isEquivalent(Variable variable);
+	boolean isEquivalent(Variable variable);
 
 	/**
 	 * Determine if parm is equivalent to this parameter definition by both ordinal 
@@ -96,5 +96,5 @@ public interface ParameterDefinition extends Comparable<ParameterDefinition> {
 	 * @return true if the specified parameter definition represents the same parameter 
 	 * by ordinal and dataType.
 	 */
-	public boolean isEquivalent(ParameterDefinition parm);
+	boolean isEquivalent(ParameterDefinition parm);
 }

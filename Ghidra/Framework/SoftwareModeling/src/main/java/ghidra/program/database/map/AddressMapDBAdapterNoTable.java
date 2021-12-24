@@ -16,14 +16,23 @@
  */
 package ghidra.program.database.map;
 
-import ghidra.program.model.address.*;
-import ghidra.program.model.lang.Language;
-import ghidra.program.util.LanguageTranslator;
-
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import db.DBHandle;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressRange;
+import ghidra.program.model.address.AddressRangeIterator;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.address.KeyRange;
+import ghidra.program.model.lang.Language;
+import ghidra.program.util.LanguageTranslator;
 
 /**
  * Adapter for when no addr map database existed.
@@ -65,7 +74,7 @@ class AddressMapDBAdapterNoTable extends AddressMapDBAdapter {
 	 */
 	@Override
 	List<AddressMapEntry> getEntries() throws IOException {
-		ArrayList<AddressMapEntry> list = new ArrayList<AddressMapEntry>();
+		ArrayList<AddressMapEntry> list = new ArrayList<>();
 		for (int i = 0; i < addresses.length; i++) {
 			list.add(new AddressMapEntry(i, addresses[i].getAddressSpace().getName(), 0, false));
 		}
@@ -94,23 +103,20 @@ class AddressMapDBAdapterNoTable extends AddressMapDBAdapter {
 		 * Comparator used to identify if an addr occurs before or after the 
 		 * start of a key range.
 		 */
-		private Comparator<Object> addressInsertionKeyRangeComparator = new Comparator<Object>() {
-			@Override
-			public int compare(Object keyRangeObj, Object addrObj) {
-				KeyRange range = (KeyRange) keyRangeObj;
-				Address addr = (Address) addrObj;
+		private Comparator<Object> addressInsertionKeyRangeComparator = (keyRangeObj, addrObj) -> {
+			KeyRange range = (KeyRange) keyRangeObj;
+			Address addr = (Address) addrObj;
 
-				Address min = decodeAddress(range.minKey);
-				if (min.compareTo(addr) > 0) {
-					return 1;
-				}
-
-				Address max = decodeAddress(range.maxKey);
-				if (max.compareTo(addr) < 0) {
-					return -1;
-				}
-				return 0;
+			Address min = decodeAddress(range.minKey);
+			if (min.compareTo(addr) > 0) {
+				return 1;
 			}
+
+			Address max = decodeAddress(range.maxKey);
+			if (max.compareTo(addr) < 0) {
+				return -1;
+			}
+			return 0;
 		};
 
 		@Override
@@ -166,7 +172,7 @@ class AddressMapDBAdapterNoTable extends AddressMapDBAdapter {
 
 		@Override
 		public List<KeyRange> getKeyRanges(AddressSetView set, boolean absolute, boolean create) {
-			ArrayList<KeyRange> keyRangeList = new ArrayList<KeyRange>();
+			ArrayList<KeyRange> keyRangeList = new ArrayList<>();
 			if (absolute) {
 				return keyRangeList;
 			}

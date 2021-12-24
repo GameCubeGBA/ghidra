@@ -50,9 +50,9 @@ class RecoveryMgr {
 
 	private BufferMgr bufferMgr;
 
-	private int[] buffersSaved = new int[] { 0, 0 };
-	private int[] buffersIgnored = new int[] { 0, 0 };
-	private int[] buffersRemoved = new int[] { 0, 0 };
+	private int[] buffersSaved = { 0, 0 };
+	private int[] buffersIgnored = { 0, 0 };
+	private int[] buffersRemoved = { 0, 0 };
 
 	/**
 	 * Constructor used to perform recovery.
@@ -375,8 +375,8 @@ class RecoveryMgr {
 				//  This is the result of an undo which may have reverted a buffer to
 				// its original unmodified state.
 				int[] indexes = oldIndexSet.getValues();
-				for (int i = 0; i < indexes.length; i++) {
-					activeFile.removeBuffer(indexes[i]);
+				for (int element : indexes) {
+					activeFile.removeBuffer(element);
 				}
 				buffersRemoved[snapshotIndex] = indexes.length;
 				File file = activeFile.getFile();

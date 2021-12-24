@@ -30,8 +30,7 @@ import java.util.List;
  */
 public interface Structure extends Composite {
 
-	@Override
-	public Structure clone(DataTypeManager dtm);
+	@Override Structure clone(DataTypeManager dtm);
 
 	/**
 	 * Returns the component of this structure with the indicated ordinal.
@@ -40,8 +39,7 @@ public interface Structure extends Composite {
 	 * @return the data type component.
 	 * @throws IndexOutOfBoundsException if the ordinal is out of bounds
 	 */
-	@Override
-	public DataTypeComponent getComponent(int ordinal) throws IndexOutOfBoundsException;
+	@Override DataTypeComponent getComponent(int ordinal) throws IndexOutOfBoundsException;
 
 	/**
 	 * Gets the first defined component located at or after the specified offset. 
@@ -50,7 +48,7 @@ public interface Structure extends Composite {
 	 * @param offset the byte offset into this structure
 	 * @return the first defined component located at or after the specified offset or null if not found.
 	 */
-	public DataTypeComponent getDefinedComponentAtOrAfterOffset(int offset);
+	DataTypeComponent getDefinedComponentAtOrAfterOffset(int offset);
 
 	/**
 	 * Gets the first non-zero-length component that contains the byte at the specified offset. 
@@ -70,7 +68,7 @@ public interface Structure extends Composite {
 	 * @return the first non-zero-length component that contains the byte at the specified offset
 	 * or null if not found.
 	 */
-	public DataTypeComponent getComponentContaining(int offset);
+	DataTypeComponent getComponentContaining(int offset);
 	
 	/**
 	 * Gets the first non-zero-length component that starts at the specified offset. 
@@ -90,7 +88,7 @@ public interface Structure extends Composite {
 	 * @param offset the byte offset into this structure
 	 * @return the first component that starts at specified offset or null if not found.
 	 */
-	public default DataTypeComponent getComponentAt(int offset) {
+	default DataTypeComponent getComponentAt(int offset) {
 		DataTypeComponent dtc = getComponentContaining(offset);
 		// scan forward with bitfields to find one which starts with offset
 		while (dtc != null && dtc.isBitFieldComponent() && dtc.getOffset() < offset &&
@@ -120,7 +118,7 @@ public interface Structure extends Composite {
 	 * @param offset the byte offset into this structure
 	 * @return a list of zero or more components containing the specified offset
 	 */
-	public List<DataTypeComponent> getComponentsContaining(int offset);
+	List<DataTypeComponent> getComponentsContaining(int offset);
 
 	/**
 	 * Returns the lowest-level component that contains the specified offset. This is useful 
@@ -132,7 +130,7 @@ public interface Structure extends Composite {
 	 * @param offset the byte offset into this data type.
 	 * @return a primitive component data type which contains the specified offset.
 	 */
-	public DataTypeComponent getDataTypeAt(int offset);
+	DataTypeComponent getDataTypeAt(int offset);
 
 	/**
 	 * Inserts a new bitfield at the specified ordinal position in this structure. Within packed
@@ -169,7 +167,7 @@ public interface Structure extends Composite {
 	 * @throws IndexOutOfBoundsException if ordinal is less than 0 or greater than the current
 	 *             number of components.
 	 */
-	public DataTypeComponent insertBitField(int ordinal, int byteWidth, int bitOffset,
+	DataTypeComponent insertBitField(int ordinal, int byteWidth, int bitOffset,
 			DataType baseDataType, int bitSize, String componentName, String comment)
 			throws InvalidDataTypeException, IndexOutOfBoundsException;
 
@@ -214,7 +212,7 @@ public interface Structure extends Composite {
 	 * @throws InvalidDataTypeException if the specified data type is not a valid base type for
 	 *             bitfields.
 	 */
-	public DataTypeComponent insertBitFieldAt(int byteOffset, int byteWidth, int bitOffset,
+	DataTypeComponent insertBitFieldAt(int byteOffset, int byteWidth, int bitOffset,
 			DataType baseDataType, int bitSize, String componentName, String comment)
 			throws InvalidDataTypeException;
 
@@ -234,7 +232,7 @@ public interface Structure extends Composite {
 	 *             suppose dt1 contains dt2. Therefore it is not valid to insert dt1 to dt2 since
 	 *             this would cause a cyclic dependency.
 	 */
-	public DataTypeComponent insertAtOffset(int offset, DataType dataType, int length)
+	DataTypeComponent insertAtOffset(int offset, DataType dataType, int length)
 			throws IllegalArgumentException;
 
 	/**
@@ -258,7 +256,7 @@ public interface Structure extends Composite {
 	 *             suppose dt1 contains dt2. Therefore it is not valid to insert dt1 to dt2 since
 	 *             this would cause a cyclic dependency.
 	 */
-	public DataTypeComponent insertAtOffset(int offset, DataType dataType, int length, String name,
+	DataTypeComponent insertAtOffset(int offset, DataType dataType, int length, String name,
 			String comment) throws IllegalArgumentException;
 
 	/**
@@ -275,13 +273,13 @@ public interface Structure extends Composite {
 	 * 
 	 * @throws IllegalArgumentException if a negative offset is specified
 	 */
-	public void deleteAtOffset(int offset) throws IllegalArgumentException;
+	void deleteAtOffset(int offset) throws IllegalArgumentException;
 
 	/**
 	 * Remove all components from this structure, effectively setting the
 	 * length to zero.  Packing and minimum alignment settings are unaffected.
 	 */
-	public void deleteAll();
+	void deleteAll();
 
 	/**
 	 * Clears all defined components containing the specified offset in this structure. If the offset
@@ -296,7 +294,7 @@ public interface Structure extends Composite {
 	 * 
 	 * @param offset the byte offset into the structure where the component(s) are to be deleted.
 	 */
-	public void clearAtOffset(int offset);
+	void clearAtOffset(int offset);
 
 	/**
 	 * Clears the defined component at the specified component ordinal. Clearing a component within
@@ -308,7 +306,7 @@ public interface Structure extends Composite {
 	 * @param ordinal the ordinal of the component to clear.
 	 * @throws IndexOutOfBoundsException if component ordinal is out of bounds
 	 */
-	public void clearComponent(int ordinal) throws IndexOutOfBoundsException;
+	void clearComponent(int ordinal) throws IndexOutOfBoundsException;
 
 	/**
 	 * Replaces the component at the specified ordinal with a new component using the 
@@ -344,7 +342,7 @@ public interface Structure extends Composite {
 	 *             associated length specified, or 3) insufficient space for replacement.
 	 * @throws IndexOutOfBoundsException if component ordinal is out of bounds
 	 */
-	public DataTypeComponent replace(int ordinal, DataType dataType, int length)
+	DataTypeComponent replace(int ordinal, DataType dataType, int length)
 			throws IndexOutOfBoundsException, IllegalArgumentException;
 
 	/**
@@ -383,7 +381,7 @@ public interface Structure extends Composite {
 	 *             associated length specified, or 3) insufficient space for replacement.
 	 * @throws IndexOutOfBoundsException if component ordinal is out of bounds
 	 */
-	public DataTypeComponent replace(int ordinal, DataType dataType, int length, String name,
+	DataTypeComponent replace(int ordinal, DataType dataType, int length, String name,
 			String comment) throws IndexOutOfBoundsException, IllegalArgumentException;
 
 	/**
@@ -426,7 +424,7 @@ public interface Structure extends Composite {
 	 * @throws IllegalArgumentException may be caused by: 1) invalid offset specified, 2) invalid datatype or 
 	 *             associated length specified, or 3) insufficient space for replacement.
 	 */
-	public DataTypeComponent replaceAtOffset(int offset, DataType dataType, int length, String name,
+	DataTypeComponent replaceAtOffset(int offset, DataType dataType, int length, String name,
 			String comment) throws IllegalArgumentException;
 
 	/**
@@ -436,7 +434,7 @@ public interface Structure extends Composite {
 	 * @param amount the amount by which to grow the structure.
 	 * @throws IllegalArgumentException if amount &lt; 1
 	 */
-	public void growStructure(int amount);
+	void growStructure(int amount);
 
 	/**
 	 * <code>BitOffsetComparator</code> provides ability to compare an normalized bit offset (see

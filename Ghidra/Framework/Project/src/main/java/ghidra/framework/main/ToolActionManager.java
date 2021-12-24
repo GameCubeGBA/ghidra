@@ -17,17 +17,30 @@ package ghidra.framework.main;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 
 import docking.ActionContext;
-import docking.action.*;
+import docking.action.DockingAction;
+import docking.action.KeyBindingData;
+import docking.action.MenuData;
 import docking.tool.ToolConstants;
 import docking.widgets.filechooser.GhidraFileChooser;
-import ghidra.framework.model.*;
+import ghidra.framework.model.Project;
+import ghidra.framework.model.ToolChest;
+import ghidra.framework.model.ToolChestChangeListener;
+import ghidra.framework.model.ToolManager;
+import ghidra.framework.model.ToolSet;
+import ghidra.framework.model.ToolTemplate;
+import ghidra.framework.model.Workspace;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.framework.preferences.Preferences;
 import ghidra.framework.project.tool.GhidraToolTemplate;
@@ -211,8 +224,7 @@ class ToolActionManager implements ToolChestChangeListener {
 		}
 
 		List<String> list = dialog.getSelectedList();
-		for (int i = 0; i < list.size(); i++) {
-			String filename = list.get(i);
+		for (String filename : list) {
 			addDefaultTool(filename);
 		}
 	}
@@ -319,7 +331,7 @@ class ToolActionManager implements ToolChestChangeListener {
 		Workspace ws = plugin.getActiveWorkspace();
 
 		// create the running tool
-		PluginTool runningTool = (PluginTool) ws.createTool();
+		PluginTool runningTool = ws.createTool();
 
 		// whenever we create a new tool, the first thing the
 		// user will want to do is configure it, so automatically

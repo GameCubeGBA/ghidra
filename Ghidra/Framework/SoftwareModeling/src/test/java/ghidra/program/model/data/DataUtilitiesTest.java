@@ -18,13 +18,28 @@ package ghidra.program.model.data;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import generic.test.AbstractGTest;
 import ghidra.program.model.ProgramTestDouble;
-import ghidra.program.model.address.*;
-import ghidra.program.model.listing.*;
-import ghidra.program.model.mem.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.address.DefaultAddressFactory;
+import ghidra.program.model.address.GenericAddressSpace;
+import ghidra.program.model.listing.CodeUnit;
+import ghidra.program.model.listing.Data;
+import ghidra.program.model.listing.DataStub;
+import ghidra.program.model.listing.InstructionStub;
+import ghidra.program.model.listing.Listing;
+import ghidra.program.model.listing.ListingStub;
+import ghidra.program.model.listing.Program;
+import ghidra.program.model.mem.Memory;
+import ghidra.program.model.mem.MemoryBlock;
+import ghidra.program.model.mem.MemoryBlockStub;
+import ghidra.program.model.mem.MemoryStub;
 
 public class DataUtilitiesTest extends AbstractGTest {
 

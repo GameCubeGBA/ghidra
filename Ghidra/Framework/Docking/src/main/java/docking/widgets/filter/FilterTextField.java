@@ -15,10 +15,26 @@
  */
 package docking.widgets.filter;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -139,11 +155,7 @@ public class FilterTextField extends JPanel {
 	}
 
 	private void flashFilterBorder() {
-		if (!hasText || !isEditable()) {
-			return;
-		}
-
-		if ((System.currentTimeMillis() - lastFlashTime) < getMinimumTimeBetweenFlashes()) {
+		if (!hasText || !isEditable() || ((System.currentTimeMillis() - lastFlashTime) < getMinimumTimeBetweenFlashes())) {
 			return;
 		}
 
@@ -368,7 +380,7 @@ public class FilterTextField extends JPanel {
 // Inner Classes
 //==================================================================================================
 
-	private class TraversalKeyListener implements KeyListener {
+	private static class TraversalKeyListener implements KeyListener {
 		private final Component component;
 
 		private TraversalKeyListener(Component component) {

@@ -25,8 +25,8 @@ import docking.action.KeyBindingData;
 import docking.action.MenuData;
 import docking.widgets.OptionDialog;
 import docking.widgets.OptionDialogBuilder;
-import ghidra.framework.main.datatable.ProjectDataContext;
 import ghidra.framework.main.datatable.FrontendProjectTreeAction;
+import ghidra.framework.main.datatable.ProjectDataContext;
 import ghidra.framework.model.DomainFile;
 import ghidra.framework.model.DomainFolder;
 import ghidra.util.HTMLUtilities;
@@ -105,10 +105,7 @@ public class ProjectDataDeleteAction extends FrontendProjectTreeAction {
 
 	@Override
 	protected boolean isEnabledForContext(ProjectDataContext context) {
-		if (!context.hasOneOrMoreFilesAndFolders()) {
-			return false;
-		}
-		if (context.isReadOnlyProject()) {
+		if (!context.hasOneOrMoreFilesAndFolders() || context.isReadOnlyProject()) {
 			return false;
 		}
 		return !context.containsRootFolder();

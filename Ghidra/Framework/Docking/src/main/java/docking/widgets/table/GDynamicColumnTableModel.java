@@ -15,15 +15,26 @@
  */
 package docking.widgets.table;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.TableCellRenderer;
 
-import docking.widgets.table.sort.*;
-import ghidra.docking.settings.*;
+import docking.widgets.table.sort.ColumnRenderedValueBackupComparator;
+import docking.widgets.table.sort.DefaultColumnComparator;
+import docking.widgets.table.sort.RowBasedColumnComparator;
+import ghidra.docking.settings.Settings;
+import ghidra.docking.settings.SettingsDefinition;
+import ghidra.docking.settings.SettingsImpl;
 import ghidra.framework.plugintool.ServiceProvider;
 import ghidra.util.Msg;
 import ghidra.util.SystemUtilities;
@@ -211,8 +222,7 @@ public abstract class GDynamicColumnTableModel<ROW_TYPE, DATA_SOURCE>
 	@SuppressWarnings("unchecked") // the column provides the values itself; safe cast
 	protected Comparator<Object> createSortComparatorForColumn(int columnIndex) {
 		DynamicTableColumn<ROW_TYPE, ?, ?> column = getColumn(columnIndex);
-		Comparator<Object> comparator = (Comparator<Object>) column.getComparator();
-		return comparator;
+		return (Comparator<Object>) column.getComparator();
 	}
 
 	/**
@@ -220,11 +230,7 @@ public abstract class GDynamicColumnTableModel<ROW_TYPE, DATA_SOURCE>
 	 */
 	@Override
 	public void stateChanged(ChangeEvent e) {
-		if (ignoreSettingChanges) {
-			return;
-		}
-
-		if (resortIfNeeded(e)) {
+		if (ignoreSettingChanges || resortIfNeeded(e)) {
 			return;
 		}
 

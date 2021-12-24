@@ -15,14 +15,18 @@
  */
 package docking.widgets.tree.support;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Iterator;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import docking.widgets.tree.*;
+import docking.widgets.tree.GTestNode;
+import docking.widgets.tree.GTree;
+import docking.widgets.tree.GTreeNode;
 import generic.test.AbstractGenericTest;
 
 /**

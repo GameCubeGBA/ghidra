@@ -51,8 +51,8 @@ public class GlobalSymbolMap {
 		program = f.getFunction().getProgram();
 		func = f;
 		symbolTable = program.getSymbolTable();
-		addrMappedSymbols = new HashMap<Address, HighSymbol>();
-		symbolMap = new HashMap<Long, HighSymbol>();
+		addrMappedSymbols = new HashMap<>();
+		symbolMap = new HashMap<>();
 		uniqueSymbolId = 0;
 	}
 

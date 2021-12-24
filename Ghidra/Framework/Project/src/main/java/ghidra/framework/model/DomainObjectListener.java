@@ -34,5 +34,5 @@ public interface DomainObjectListener extends EventListener {
      * @param ev event containing the change record and type of change that
      * was made
      */
-    public void domainObjectChanged(DomainObjectChangedEvent ev);
+    void domainObjectChanged(DomainObjectChangedEvent ev);
 }

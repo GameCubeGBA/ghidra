@@ -32,16 +32,19 @@ public class SetIterator<T> implements IteratorSTL<T> {
 		this.node = node;
 		this.erased = erased;
 	}
+	@Override
 	public void assign( IteratorSTL<T> otherIterator ) {
 		SetIterator<T> other = (SetIterator<T>) otherIterator;
 		this.tree = other.tree;
 		this.node = other.node;
 		this.erased = other.erased;
 	}
+	@Override
 	public IteratorSTL<T> copy() {
-		return new SetIterator<T>( tree, node, erased);
+		return new SetIterator<>( tree, node, erased);
 	}
 	
+	@Override
 	public IteratorSTL<T> decrement() {
 		if (node == null && tree.isEmpty()) {
 			throw new IndexOutOfBoundsException();
@@ -56,6 +59,7 @@ public class SetIterator<T> implements IteratorSTL<T> {
 		return this;
 	}
 
+	@Override
 	public T get() {
 		if (erased) {
 			throw new IndexOutOfBoundsException("element erased");
@@ -66,6 +70,7 @@ public class SetIterator<T> implements IteratorSTL<T> {
 		return node.getKey();
 	}
 
+	@Override
 	public IteratorSTL<T> increment() {
 		if (!erased && node == null) {
 			throw new IndexOutOfBoundsException();
@@ -77,10 +82,12 @@ public class SetIterator<T> implements IteratorSTL<T> {
 		return this;
 	}
 
+	@Override
 	public void insert(T value) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public boolean isBegin() {
 		if (erased) {
 			throw new RuntimeException("Iterater in invalid state");
@@ -88,6 +95,7 @@ public class SetIterator<T> implements IteratorSTL<T> {
 		return node == tree.getFirst();
 	}
 
+	@Override
 	public boolean isEnd() {
 		if (erased) {
 			throw new RuntimeException("Iterater in invalid state");
@@ -95,6 +103,7 @@ public class SetIterator<T> implements IteratorSTL<T> {
 		return node == null;
 	}
 
+	@Override
 	public void set(T value) {
 		throw new UnsupportedOperationException();
 	}
@@ -117,9 +126,11 @@ public class SetIterator<T> implements IteratorSTL<T> {
 	public int hashCode() {
 		return tree.hashCode();
 	}
+	@Override
 	public IteratorSTL<T> decrement( int n ) {
 		throw new UnsupportedOperationException();
 	}
+	@Override
 	public IteratorSTL<T> increment( int n ) {
 		throw new UnsupportedOperationException();
 	}

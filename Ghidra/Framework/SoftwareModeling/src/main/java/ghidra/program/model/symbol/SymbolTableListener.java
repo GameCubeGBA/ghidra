@@ -27,7 +27,7 @@ public interface SymbolTableListener {
 	 * Notification that the given symbol has been added.
 	 * @param symbol the symbol that was added.
 	 */
-	public void symbolAdded(SourceType symbol);
+	void symbolAdded(SourceType symbol);
 	
 	/**
 	 * Notification that a symbol was removed.
@@ -36,40 +36,40 @@ public interface SymbolTableListener {
 	 * @param isLocal true if the symbol was in the scope
 	 * of a function
 	 */
-	public void symbolRemoved(Address addr, String name, boolean isLocal);
+	void symbolRemoved(Address addr, String name, boolean isLocal);
 
 	/**
 	 * Notification that the given symbol was renamed.
 	 * @param symbol symbol that was renamed
 	 * @param oldName old name of the symbol
 	 */
-	public void symbolRenamed(SourceType symbol, String oldName);
+	void symbolRenamed(SourceType symbol, String oldName);
 
 	/**
 	 * Notification the the given symbol was set as the primary symbol.
 	 * @param symbol the symbol that is now primary.
 	 */
-	public void primarySymbolSet(SourceType symbol);
+	void primarySymbolSet(SourceType symbol);
 
 	/**
 	 * Notification that the scope on a symbol changed.
 	 * @param symbol the symbol whose scope has changed.
 	 */
-	public void symbolScopeChanged(SourceType symbol);
+	void symbolScopeChanged(SourceType symbol);
 
 	/**
 	 * Notification that an external entry point was added at the
 	 * given address.
 	 * @param addr the address that made an external entry point.
 	 */
-	public void externalEntryPointAdded(Address addr);
+	void externalEntryPointAdded(Address addr);
 
 	/**
 	 * Notification that an external entry point was removed from the given
 	 * address.
 	 * @param addr the address the removed as an external entry point.
 	 */
-	public void externalEntryPointRemoved(Address addr);
+	void externalEntryPointRemoved(Address addr);
 
 	/**
 	 * Notification that the association between a reference and a 
@@ -77,12 +77,12 @@ public interface SymbolTableListener {
 	 * @param symbol affected symbol
 	 * @param ref affected reference
 	 */
-	public void associationAdded(SourceType symbol, Reference ref);
+	void associationAdded(SourceType symbol, Reference ref);
 
 	/**
 	 * Notification that the association between the given reference and
 	 * any symbol was removed.
 	 * @param ref the reference that had a symbol association removed.
 	 */
-	public void associationRemoved(Reference ref);
+	void associationRemoved(Reference ref);
 }

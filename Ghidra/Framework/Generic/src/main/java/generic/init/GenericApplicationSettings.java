@@ -15,10 +15,10 @@
  */
 package generic.init;
 
+import java.io.File;
+
 import ghidra.framework.Application;
 import utility.application.ApplicationSettings;
-
-import java.io.File;
 
 public class GenericApplicationSettings extends ApplicationSettings {
 	@Override

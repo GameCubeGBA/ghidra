@@ -226,7 +226,6 @@ public class Path implements Comparable<Path> {
 			int length = userHome.length();
 			String relativePath = absolutePath.substring(length);
 			absolutePath = USER_HOME + relativePath;
-			return absolutePath.replace('\\', '/');
 		}
 
 		return absolutePath.replace('\\', '/');

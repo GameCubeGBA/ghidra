@@ -20,8 +20,12 @@ package ghidra.program.model.symbol;
 import java.util.Iterator;
 import java.util.List;
 
-import ghidra.program.model.address.*;
-import ghidra.util.exception.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressIterator;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.DuplicateNameException;
+import ghidra.util.exception.InvalidInputException;
 import ghidra.util.task.TaskMonitor;
 
 /**
@@ -43,7 +47,7 @@ public interface EquateTable {
 	 * @throws InvalidInputException if name contains blank characters,
 	 * is zero length, or is null
 	 */
-	public Equate createEquate(String name, long value)
+	Equate createEquate(String name, long value)
 			throws DuplicateNameException, InvalidInputException;
 
 	/**
@@ -51,7 +55,7 @@ public interface EquateTable {
 	 * @param name the name of the equate to remove.
 	 * @return true if the equate existed, false otherwise.
 	 */
-	public boolean removeEquate(String name);
+	boolean removeEquate(String name);
 
 	/**
 	 * Removes all equates defined in the given range.
@@ -60,7 +64,7 @@ public interface EquateTable {
 	 * @param monitor task monitor to cancel the remove operation
 	 * @throws CancelledException if the operation was cancelled.
 	 */
-	public void deleteAddressRange(Address start, Address end, TaskMonitor monitor)
+	void deleteAddressRange(Address start, Address end, TaskMonitor monitor)
 			throws CancelledException;
 
 	/**
@@ -68,7 +72,7 @@ public interface EquateTable {
 	 * @param name the of the equate to be retrieved
 	 * @return the equate
 	 */
-	public Equate getEquate(String name);
+	Equate getEquate(String name);
 
 	/**
 	 * Returns the first equate found that is associated with the given 
@@ -78,7 +82,7 @@ public interface EquateTable {
 	 * @param value the value where the equate is used.
 	 * @return the equate or null if there is no such equate.
 	 */
-	public Equate getEquate(Address reference, int opndPosition, long value);
+	Equate getEquate(Address reference, int opndPosition, long value);
 
 	/**
 	 * Returns the equates (one for each scalar) at the given reference address 
@@ -87,7 +91,7 @@ public interface EquateTable {
 	 * @param opndPosition the operand index of the operand where the equate is used.
 	 * @return the list of equates or empty list if there is no such equate.
 	 */
-	public List<Equate> getEquates(Address reference, int opndPosition);
+	List<Equate> getEquates(Address reference, int opndPosition);
 
 	/**
 	 * Returns the equates (one for each scalar and opIndex) at the given reference address.
@@ -95,27 +99,27 @@ public interface EquateTable {
 	 * @param reference address where the equate is used.
 	 * @return the list of equates or empty list if there is no such equate.
 	 */
-	public List<Equate> getEquates(Address reference);
+	List<Equate> getEquates(Address reference);
 
 	/**
 	 * Returns an address iterator over all the addresses where
 	 * equates have been set.
 	 * @return the iterator
 	 */
-	public AddressIterator getEquateAddresses();
+	AddressIterator getEquateAddresses();
 
 	/**
 	 * Returns all equates defined for value.
 	 * @param value the value to get all equates for.
 	 * @return the equates
 	 */
-	public List<Equate> getEquates(long value);
+	List<Equate> getEquates(long value);
 
 	/**
 	 * Returns an iterator over all equates.
 	 * @return the iterator
 	 */
-	public Iterator<Equate> getEquates();
+	Iterator<Equate> getEquates();
 
 	/**
 	 * Return an address iterator over each address with an
@@ -124,7 +128,7 @@ public interface EquateTable {
 	 * @param start start address
 	 * @return an AddressIterator over addresses with defined equate references
 	 */
-	public AddressIterator getEquateAddresses(Address start);
+	AddressIterator getEquateAddresses(Address start);
 
 	/**
 	 * Return an address iterator over each address with an
@@ -133,6 +137,6 @@ public interface EquateTable {
 	 * @param asv the address set
 	 * @return AddressIterator over addresses with defined equate references
 	 */
-	public AddressIterator getEquateAddresses(AddressSetView asv);
+	AddressIterator getEquateAddresses(AddressSetView asv);
 
 }

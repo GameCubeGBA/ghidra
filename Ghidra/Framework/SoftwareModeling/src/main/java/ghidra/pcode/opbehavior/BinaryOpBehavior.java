@@ -16,9 +16,9 @@
  */
 package ghidra.pcode.opbehavior;
 
-import ghidra.pcode.utils.Utils;
-
 import java.math.BigInteger;
+
+import ghidra.pcode.utils.Utils;
 
 public abstract class BinaryOpBehavior extends OpBehavior {
 

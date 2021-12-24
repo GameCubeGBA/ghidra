@@ -15,7 +15,13 @@
  */
 package ghidra.framework.plugintool.util;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.jdom.Element;
@@ -201,11 +207,8 @@ public class PluginClassManager {
 					if (!excludedClasses.contains(pluginClass)) {
 						classNames.add(pluginClass);
 					}
-				}
-				else {
-					if (includedClasses.contains(pluginClass)) {
-						classNames.add(pluginClass);
-					}
+				} else if (includedClasses.contains(pluginClass)) {
+					classNames.add(pluginClass);
 				}
 			}
 		}

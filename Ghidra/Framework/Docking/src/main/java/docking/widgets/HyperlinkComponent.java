@@ -19,10 +19,14 @@ import java.awt.BorderLayout;
 import java.awt.Rectangle;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
-import javax.swing.*;
-import javax.swing.event.HyperlinkEvent;
+import javax.swing.BorderFactory;
+import javax.swing.JEditorPane;
+import javax.swing.JPanel;
+import javax.swing.JTextPane;
 import javax.swing.event.HyperlinkListener;
 import javax.swing.text.DefaultCaret;
 
@@ -54,17 +58,14 @@ public class HyperlinkComponent extends JPanel {
 
 		textPane.setCaret(new NonScrollingCaret());
 
-		textPane.addHyperlinkListener(new HyperlinkListener() {
-			@Override
-			public void hyperlinkUpdate(HyperlinkEvent e) {
-				String anchorText = e.getDescription();
-				List<HyperlinkListener> list = hyperlinkListeners.get(anchorText);
-				if (list == null) {
-					return;
-				}
-				for (HyperlinkListener hyperlinkListener : list) {
-					hyperlinkListener.hyperlinkUpdate(e);
-				}
+		textPane.addHyperlinkListener(e -> {
+			String anchorText = e.getDescription();
+			List<HyperlinkListener> list = hyperlinkListeners.get(anchorText);
+			if (list == null) {
+				return;
+			}
+			for (HyperlinkListener hyperlinkListener : list) {
+				hyperlinkListener.hyperlinkUpdate(e);
 			}
 		});
 
@@ -83,7 +84,7 @@ public class HyperlinkComponent extends JPanel {
 		// getPreferredSize() calls.
 		textPane.setPreferredSize(getPreferredSize());
 
-		hyperlinkListeners = new HashMap<String, List<HyperlinkListener>>();
+		hyperlinkListeners = new HashMap<>();
 	}
 
 	/**
@@ -94,7 +95,7 @@ public class HyperlinkComponent extends JPanel {
 	 *        manipulated by the user.
 	 */
 	public void addHyperlinkListener(String anchorName, HyperlinkListener listener) {
-        List<HyperlinkListener> list = hyperlinkListeners.computeIfAbsent(anchorName, k -> new ArrayList<HyperlinkListener>());
+        List<HyperlinkListener> list = hyperlinkListeners.computeIfAbsent(anchorName, k -> new ArrayList<>());
 
         list.add(listener);
 	}

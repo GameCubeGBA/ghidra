@@ -15,9 +15,13 @@
  */
 package ghidra.util.datastruct;
 
-import ghidra.util.Msg;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.NoSuchElementException;
 
-import java.util.*;
+import ghidra.util.Msg;
 
 
 /**
@@ -61,6 +65,7 @@ public class LongArrayList implements List<Long> {
 	/**
 	 * @see java.util.List#add(java.lang.Object)
 	 */
+	@Override
 	public boolean add(Long value) {
 		add(size, value);
 		return true;
@@ -70,6 +75,7 @@ public class LongArrayList implements List<Long> {
 	/**
 	 * @see java.util.List#add(int, java.lang.Object)
 	 */
+	@Override
 	public void add(int index, Long value) {
 		add(index, value.longValue());
 	}
@@ -91,7 +97,8 @@ public class LongArrayList implements List<Long> {
 		size++;
     }
 
-    public Long remove(int index) {
+    @Override
+	public Long remove(int index) {
     	if (index < 0 || index >= size) {
     		throw new IndexOutOfBoundsException();
     	}
@@ -107,7 +114,8 @@ public class LongArrayList implements List<Long> {
     /**
      * @see java.util.List#get(int)
      */
-    public Long get(int index) {
+    @Override
+	public Long get(int index) {
     	if (index < 0 || index >= size) {
     		throw new IndexOutOfBoundsException();
     	}
@@ -122,6 +130,7 @@ public class LongArrayList implements List<Long> {
 	/**
 	 * @see LongArraySubList#set(int, long)
 	 */
+	@Override
 	public Long set(int index, Long value) {
     	if (index < 0 || index >= size) {
     		throw new IndexOutOfBoundsException();
@@ -134,6 +143,7 @@ public class LongArrayList implements List<Long> {
 	/**
 	 * @see LongArraySubList#clear()
 	 */
+	@Override
 	public void clear() {
 		size = 0;
 		longs = new long[MIN_SIZE];
@@ -142,6 +152,7 @@ public class LongArrayList implements List<Long> {
 	/**
 	 * @see LongArraySubList#size()
 	 */
+	@Override
 	public int size() {
 		return size;
 	}
@@ -149,6 +160,7 @@ public class LongArrayList implements List<Long> {
 	/**
 	 * @see LongArraySubList#toArray()
 	 */
+	@Override
 	public Long [] toArray() {
 		Long[] values = new Long[size];
 		for(int i=0;i<size;i++) {
@@ -201,6 +213,7 @@ public class LongArrayList implements List<Long> {
 	}
 
 
+	@Override
 	public boolean remove(Object value) {
 		if (!(value instanceof Long)) {
 			return false;
@@ -215,6 +228,7 @@ public class LongArrayList implements List<Long> {
 		return false;
 	}
 
+	@Override
 	public int indexOf(Object value) {
 		if (!(value instanceof Long)) {
 			return -1;
@@ -227,14 +241,17 @@ public class LongArrayList implements List<Long> {
 		}		
 		return -1;
 	}
+	@Override
 	public List<Long> subList(int startIndex, int endIndex) {
 		return new LongArraySubList(this, startIndex, endIndex);
 	}
 	
+	@Override
 	public boolean addAll(Collection<? extends Long> c) {
 		return addAll(size(), c);
 	}
 
+	@Override
 	public boolean addAll(int index, Collection<? extends Long> c) {
 		int newSize = size + c.size();
 		long[] newValues = new long[newSize];
@@ -250,10 +267,12 @@ public class LongArrayList implements List<Long> {
 		return true;
 	}
 
+	@Override
 	public boolean contains(Object value) {
 		return indexOf(value) >= 0;
 	}
 
+	@Override
 	public boolean containsAll(Collection<?> c) {
 		Iterator<?> it = c.iterator();
 		while(it.hasNext()) {
@@ -264,14 +283,17 @@ public class LongArrayList implements List<Long> {
 		return true;
 	}
 
+	@Override
 	public boolean isEmpty() {
 		return size() == 0;
 	}
 
+	@Override
 	public Iterator<Long> iterator() {
 		return new LongArrayListIterator(this, 0);
 	}
 
+	@Override
 	public int lastIndexOf(Object value) {
 		if (!(value instanceof Long)) {
 			return -1;
@@ -285,14 +307,17 @@ public class LongArrayList implements List<Long> {
 		return -1;
 	}
 
+	@Override
 	public ListIterator<Long> listIterator() {
 		return new LongArrayListIterator(this, 0);
 	}
 
+	@Override
 	public ListIterator<Long> listIterator(int index) {
 		return new LongArrayListIterator(this, index);
 	}
 
+	@Override
 	public boolean removeAll(Collection<?> c) {
 		boolean changed = false;
 		Iterator<?> it = c.iterator();
@@ -305,6 +330,7 @@ public class LongArrayList implements List<Long> {
 	
 	}
 
+	@Override
 	public boolean retainAll(Collection<?> c) {
 		long[] newValues = new long[longs.length];
 		int newIndex = 0;
@@ -330,6 +356,7 @@ public class LongArrayList implements List<Long> {
 			this.endIndex = endIndex;
 		}
 
+		@Override
 		public boolean add(Long value) {
 			backingList.add(endIndex++, value);
 			return true;
@@ -338,6 +365,7 @@ public class LongArrayList implements List<Long> {
 			backingList.add(endIndex++, value);
 		}
 
+		@Override
 		public void add(int index, Long value) {
 	    	if (index < 0 || index > (endIndex-startIndex)) {
 	    		throw new IndexOutOfBoundsException();
@@ -353,6 +381,7 @@ public class LongArrayList implements List<Long> {
 			endIndex++;
 		}
 
+		@Override
 		public Long remove(int index) {
 	    	if (index < 0 || index >= (endIndex-startIndex)) {
 	    		throw new IndexOutOfBoundsException();
@@ -361,6 +390,7 @@ public class LongArrayList implements List<Long> {
 	    	return backingList.remove(startIndex+index);
 		}
 
+		@Override
 		public Long get(int index) {
 	    	if (index < 0 || index >= (endIndex-startIndex)) {
 	    		throw new IndexOutOfBoundsException();
@@ -375,6 +405,7 @@ public class LongArrayList implements List<Long> {
 	    	backingList.set(startIndex+index, value);
 		}
 
+		@Override
 		public void clear() {
 			for(int i=startIndex;i<endIndex;i++) {
 				backingList.remove(startIndex);
@@ -382,10 +413,12 @@ public class LongArrayList implements List<Long> {
 			endIndex = startIndex;
 		}
 
+		@Override
 		public int size() {
 			return endIndex-startIndex;
 		}
 
+		@Override
 		public Long[] toArray() {
 			int size = size();
 			Long[] values = new Long[size];
@@ -395,6 +428,7 @@ public class LongArrayList implements List<Long> {
 			return values;
 		}
 
+		@Override
 		public boolean remove(Object value) {
 			if (!(value instanceof Long)) {
 				return false;
@@ -419,22 +453,26 @@ public class LongArrayList implements List<Long> {
 			return -1;		
 		}
 
+		@Override
 		public boolean addAll(Collection<? extends Long> c) {
 			backingList.addAll(endIndex, c);
 			endIndex += c.size();
 			return true;
 		}
 
+		@Override
 		public boolean addAll(int index, Collection<? extends Long> c) {
 			backingList.addAll(startIndex+index, c);
 			endIndex += c.size();
 			return true;
 		}
 
+		@Override
 		public boolean contains(Object o) {
 			return indexOf(o) >= 0;
 		}
 
+		@Override
 		public boolean containsAll(Collection<?> c) {
 			Iterator<?> it = c.iterator();
 			while(it.hasNext()) {
@@ -445,6 +483,7 @@ public class LongArrayList implements List<Long> {
 			return true;
 		}
 
+		@Override
 		public int indexOf(Object value) {
 			if (!(value instanceof Long)) {
 				return -1;
@@ -458,14 +497,17 @@ public class LongArrayList implements List<Long> {
 			return -1;
 		}
 
+		@Override
 		public boolean isEmpty() {
 			return size() == 0;
 		}
 
+		@Override
 		public Iterator<Long> iterator() {
 			return new LongArrayListIterator(this, 0);
 		}
 
+		@Override
 		public int lastIndexOf(Object value) {
 			if (!(value instanceof Long)) {
 				return -1;
@@ -479,14 +521,17 @@ public class LongArrayList implements List<Long> {
 			return -1;
 		}
 
+		@Override
 		public ListIterator<Long> listIterator() {
 			return new LongArrayListIterator(this, 0);
 		}
 
+		@Override
 		public ListIterator<Long> listIterator(int index) {
 			return new LongArrayListIterator(this, index);
 		}
 
+		@Override
 		public boolean removeAll(Collection<?> c) {
 			boolean changed = false;
 			Iterator<?> it = c.iterator();
@@ -498,6 +543,7 @@ public class LongArrayList implements List<Long> {
 			return changed;
 		}
 
+		@Override
 		public boolean retainAll(Collection<?> c) {
 			boolean changed = false;
 			Iterator<Long> it = iterator();
@@ -511,6 +557,7 @@ public class LongArrayList implements List<Long> {
 			return changed;
 		}
 
+		@Override
 		public Long set(int index, Long element) {
 			if (index < 0 || index >= size()) {
 				throw new IllegalArgumentException();
@@ -520,10 +567,12 @@ public class LongArrayList implements List<Long> {
 			return oldValue;
 		}
 
+		@Override
 		public List<Long> subList(int fromIndex, int toIndex) {
 			return new LongArraySubList(backingList,startIndex+fromIndex, startIndex+toIndex);
 		}
 
+		@Override
 		@SuppressWarnings("unchecked") // unchecked casts
 		public <T> T[] toArray(T[] a) {
 	        if (a.length < size()) {
@@ -540,6 +589,7 @@ public class LongArrayList implements List<Long> {
 
 	}
 
+	@Override
 	@SuppressWarnings("unchecked") // unchecked cast
 	public <T> T[] toArray(T[] a) {
         if (a.length < size) {
@@ -573,18 +623,22 @@ class LongArrayListIterator implements ListIterator<Long> {
 		this.nextIndex = startIndex;
 	}
 	
+	@Override
 	public void add(Long o) {
 		list.add(nextIndex, o);
 	}
 
+	@Override
 	public boolean hasNext() {
 		return nextIndex < list.size();
 	}
 
+	@Override
 	public boolean hasPrevious() {
 		return nextIndex > 0;
 	}
 
+	@Override
 	public Long next() {
 		if (!hasNext()) {
 			throw new NoSuchElementException();
@@ -593,10 +647,12 @@ class LongArrayListIterator implements ListIterator<Long> {
 		return list.get(nextIndex++);
 	}
 
+	@Override
 	public int nextIndex() {
 		return nextIndex;
 	}
 
+	@Override
 	public Long previous() {
 		if (!hasPrevious()) {
 			throw new NoSuchElementException();
@@ -605,10 +661,12 @@ class LongArrayListIterator implements ListIterator<Long> {
 		return list.get(--nextIndex);
 	}
 
+	@Override
 	public int previousIndex() {
 		return nextIndex-1;
 	}
 
+	@Override
 	public void remove() {
 		if (lastReturnedIndex == -1) {
 			throw new IllegalStateException();
@@ -620,6 +678,7 @@ class LongArrayListIterator implements ListIterator<Long> {
 		lastReturnedIndex = -1;
 	}
 
+	@Override
 	public void set(Long o) {
 		if (lastReturnedIndex == -1) {
 			throw new IllegalStateException();

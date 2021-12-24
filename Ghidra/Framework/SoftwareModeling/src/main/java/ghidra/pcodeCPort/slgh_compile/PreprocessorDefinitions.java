@@ -20,9 +20,9 @@ import generic.stl.Pair;
 
 public interface PreprocessorDefinitions {
     // true indicates it was found
-    public Pair<Boolean, String> lookup(String key);
+    Pair<Boolean, String> lookup(String key);
     
-    public void undefine(String key);
+    void undefine(String key);
     
-    public void set(String key, String value);
+    void set(String key, String value);
 }

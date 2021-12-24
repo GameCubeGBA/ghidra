@@ -44,7 +44,7 @@ public class InstructHash {
 		block = bl;
 		instruction = inst;
 		nGrams = null;
-		hashEntries = new Hashtable<Hash,HashEntry>();
+		hashEntries = new Hashtable<>();
 	}
 
 	/**
@@ -67,7 +67,7 @@ public class InstructHash {
 	 * Clear out structures associated with the main sort
 	 */
 	protected void clearSort() {
-		hashEntries = new Hashtable<Hash,HashEntry>();
+		hashEntries = new Hashtable<>();
 	}
 
 	/**

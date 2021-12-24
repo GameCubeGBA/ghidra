@@ -30,10 +30,10 @@ import ghidra.xml.XmlPullParser;
  */
 public interface InjectPayload {
 
-	public static final int CALLFIXUP_TYPE = 1;
-	public static final int CALLOTHERFIXUP_TYPE = 2;
-	public static final int CALLMECHANISM_TYPE = 3;
-	public static final int EXECUTABLEPCODE_TYPE = 4;
+	int CALLFIXUP_TYPE = 1;
+	int CALLOTHERFIXUP_TYPE = 2;
+	int CALLMECHANISM_TYPE = 3;
+	int EXECUTABLEPCODE_TYPE = 4;
 
 	public static class InjectParameter {
 		private String name;
@@ -65,10 +65,7 @@ public interface InjectPayload {
 		@Override
 		public boolean equals(Object obj) {
 			InjectParameter op2 = (InjectParameter) obj;
-			if (index != op2.index || size != op2.size) {
-				return false;
-			}
-			if (!name.equals(op2.name)) {
+			if (index != op2.index || size != op2.size || !name.equals(op2.name)) {
 				return false;
 			}
 			return true;
@@ -78,54 +75,53 @@ public interface InjectPayload {
 		public int hashCode() {
 			int hash = name.hashCode();
 			hash = 79 * hash + index;
-			hash = 79 * hash + size;
-			return hash;
+			return 79 * hash + size;
 		}
 	}
 
 	/**
 	 * @return formal name for this injection
 	 */
-	public String getName();
+	String getName();
 
 	/**
 	 * @return the type of this injection:  CALLFIXUP_TYPE, CALLMECHANISM_TYPE, etc.
 	 */
-	public int getType();
+	int getType();
 
 	/**
 	 * @return a String describing the source of this payload
 	 */
-	public String getSource();
+	String getSource();
 
 	/**
 	 * @return number of parameters from the original call which should be truncated
 	 */
-	public int getParamShift();
+	int getParamShift();
 
 	/**
 	 * @return array of any input parameters for this inject
 	 */
-	public InjectParameter[] getInput();
+	InjectParameter[] getInput();
 
 	/**
 	 * @return array of any output parameters for this inject
 	 */
-	public InjectParameter[] getOutput();
+	InjectParameter[] getOutput();
 
 	/**
 	 * If parsing a payload (from XML) fails, a placeholder payload may be substituted and
 	 * this method returns true for the substitute.  In all other cases, this returns false.
 	 * @return true if this is a placeholder for a payload with parse errors.
 	 */
-	public boolean isErrorPlaceholder();
+	boolean isErrorPlaceholder();
 
 	/**
 	 * Given a context, send the p-code payload to the emitter
 	 * @param context is the context for injection
 	 * @param emit is the object accumulating the final p-code
 	 */
-	public void inject(InjectContext context, PcodeEmit emit);
+	void inject(InjectContext context, PcodeEmit emit);
 
 	/**
 	 * A convenience function wrapping the inject method, to produce the final set
@@ -134,23 +130,23 @@ public interface InjectPayload {
 	 * @param con is the context for injection
 	 * @return the array of PcodeOps
 	 */
-	public PcodeOp[] getPcode(Program program, InjectContext con);
+	PcodeOp[] getPcode(Program program, InjectContext con);
 
 	/**
 	 * @return true if the injected p-code falls thru
 	 */
-	public boolean isFallThru();
+	boolean isFallThru();
 
 	/**
 	 * @return true if this inject's COPY operations should be treated as incidental
 	 */
-	public boolean isIncidentalCopy();
+	boolean isIncidentalCopy();
 
 	/**
 	 * Write out configuration parameters as a \<pcode> XML tag
 	 * @param buffer is the stream to write to
 	 */
-	public void saveXml(StringBuilder buffer);
+	void saveXml(StringBuilder buffer);
 
 	/**
 	 * Restore the payload from an XML stream.  The root expected document is
@@ -159,5 +155,5 @@ public interface InjectPayload {
 	 * @param language is used to resolve registers and address spaces
 	 * @throws XmlParseException for badly formed XML
 	 */
-	public void restoreXml(XmlPullParser parser, SleighLanguage language) throws XmlParseException;
+	void restoreXml(XmlPullParser parser, SleighLanguage language) throws XmlParseException;
 }

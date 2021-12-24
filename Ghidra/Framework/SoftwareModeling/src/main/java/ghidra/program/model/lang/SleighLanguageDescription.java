@@ -15,9 +15,13 @@
  */
 package ghidra.program.model.lang;
 
-import generic.jar.ResourceFile;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Set;
 
-import java.util.*;
+import generic.jar.ResourceFile;
 
 /**
  * Class for holding Language identifiers

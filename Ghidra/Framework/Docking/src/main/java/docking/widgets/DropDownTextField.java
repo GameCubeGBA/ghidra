@@ -15,14 +15,49 @@
  */
 package docking.widgets;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Window;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 
-import javax.swing.*;
+import javax.swing.AbstractListModel;
+import javax.swing.BorderFactory;
+import javax.swing.DefaultListSelectionModel;
+import javax.swing.JComponent;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.JWindow;
+import javax.swing.KeyStroke;
+import javax.swing.ListSelectionModel;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
-import javax.swing.event.*;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
+import javax.swing.event.CellEditorListener;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -181,11 +216,7 @@ public class DropDownTextField<T> extends JTextField implements GComponent {
 	@Override
 	protected boolean processKeyBinding(KeyStroke ks, KeyEvent e, int condition, boolean pressed) {
 
-		if (handleEscapeKey(ks, e, condition, pressed)) {
-			return true;
-		}
-
-		if (handleEnterKey(ks, e, condition, pressed)) {
+		if (handleEscapeKey(ks, e, condition, pressed) || handleEnterKey(ks, e, condition, pressed)) {
 			return true;
 		}
 		return super.processKeyBinding(ks, e, condition, pressed);
@@ -209,11 +240,7 @@ public class DropDownTextField<T> extends JTextField implements GComponent {
 	}
 
 	private boolean handleEnterKey(KeyStroke ks, KeyEvent e, int condition, boolean pressed) {
-		if ((condition != JComponent.WHEN_FOCUSED) || (ks.getKeyCode() != KeyEvent.VK_ENTER)) {
-			return false; // enter key not pressed!
-		}
-
-		if (ignoreEnterKeyPress) {
+		if ((condition != JComponent.WHEN_FOCUSED) || (ks.getKeyCode() != KeyEvent.VK_ENTER) || ignoreEnterKeyPress) {
 			return false;
 		}
 
@@ -882,13 +909,9 @@ public class DropDownTextField<T> extends JTextField implements GComponent {
 			int index = list.getSelectedIndex();
 			int listSize = list.getModel().getSize();
 
-			if (index < 0) { // no selection
+			if ((index < 0) || (index == listSize - 1)) { // no selection
 				index = 0;
-			}
-			else if (index == listSize - 1) { // last element selected - wrap
-				index = 0;
-			}
-			else { // just increment
+			} else { // just increment
 				index++;
 			}
 
@@ -944,7 +967,7 @@ public class DropDownTextField<T> extends JTextField implements GComponent {
 		}
 	}
 
-	private class NoSelectionAllowedListSelectionModel extends DefaultListSelectionModel {
+	private static class NoSelectionAllowedListSelectionModel extends DefaultListSelectionModel {
 
 		@Override
 		public void setSelectionMode(int selectionMode) {

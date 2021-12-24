@@ -25,15 +25,15 @@ public interface ToolChestChangeListener {
     /**
      * ToolConfig was added to the project toolchest
      */
-    public void toolTemplateAdded(ToolTemplate tool);
+    void toolTemplateAdded(ToolTemplate tool);
 
     /**
      * ToolSet was added to the project toolchest
      */
-    public void toolSetAdded(ToolSet toolset);
+    void toolSetAdded(ToolSet toolset);
 
     /**
      * ToolConfig was removed from the project toolchest
      */
-    public void toolRemoved(String toolName);
+    void toolRemoved(String toolName);
 }

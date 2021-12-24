@@ -16,7 +16,9 @@
 package ghidra.program.util;
 
 import ghidra.program.model.address.Address;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.CodeUnit;
+import ghidra.program.model.listing.Data;
+import ghidra.program.model.listing.Program;
 
 /**
  * The <CODE>BytesFieldLocation</CODE> class provides specific information

@@ -26,21 +26,21 @@ public interface DomainFolderChangeListener {
 	 * Notification that a folder is added to parent.
 	 * @param folder domain folder which was just added.
 	 */
-	public void domainFolderAdded(DomainFolder folder);
+	void domainFolderAdded(DomainFolder folder);
 
 	/**
 	 * Notification that a file is added to parent folder. You can
 	 * get the parent from the file.
 	 * @param file domain file which was just added.
 	 */
-	public void domainFileAdded(DomainFile file);
+	void domainFileAdded(DomainFile file);
 
 	/**
 	 * Notification that a domain folder is removed.
 	 * @param parent domain folder which contained the folder that was just removed.
 	 * @param name the name of the folder that was removed.
 	 */
-	public void domainFolderRemoved(DomainFolder parent, String name);
+	void domainFolderRemoved(DomainFolder parent, String name);
 
 	/**
 	 * Notification that a file was removed
@@ -48,40 +48,40 @@ public interface DomainFolderChangeListener {
 	 * @param name the name of the file that was removed.
 	 * @param fileID file ID or null
 	 */
-	public void domainFileRemoved(DomainFolder parent, String name, String fileID);
+	void domainFileRemoved(DomainFolder parent, String name, String fileID);
 
 	/**
 	 * Notify listeners when a domain folder is renamed.
 	 * @param folder folder that was renamed
 	 * @param oldName old name of folder
 	 */
-	public void domainFolderRenamed(DomainFolder folder, String oldName);
+	void domainFolderRenamed(DomainFolder folder, String oldName);
 
 	/**
 	 * Notification that the domain file was renamed.
 	 * @param file file that was renamed
 	 * @param oldName old name of the file
 	 */
-	public void domainFileRenamed(DomainFile file, String oldName);
+	void domainFileRenamed(DomainFile file, String oldName);
 
 	/**
 	 * Notification that the domain folder was moved.
 	 * @param folder the folder (after move)
 	 * @param oldParent original parent folder
 	 */
-	public void domainFolderMoved(DomainFolder folder, DomainFolder oldParent);
+	void domainFolderMoved(DomainFolder folder, DomainFolder oldParent);
 
 	/**
 	 * Notification that the domain file was moved.
 	 * @param file the file (after move)
 	 * @param oldParent original parent folder
 	 */
-	public void domainFileMoved(DomainFile file, DomainFolder oldParent, String oldName);
+	void domainFileMoved(DomainFile file, DomainFolder oldParent, String oldName);
 
 	/**
 	 * Notification that the setActive() method on the folder was called.
 	 */
-	public void domainFolderSetActive(DomainFolder folder);
+	void domainFolderSetActive(DomainFolder folder);
 
 	/**
 	 * Notification that the status for a domain file has changed.
@@ -89,7 +89,7 @@ public interface DomainFolderChangeListener {
 	 * @param fileIDset if true indicates that the previously missing fileID has been
 	 * established for the specified file.
 	 */
-	public void domainFileStatusChanged(DomainFile file, boolean fileIDset);
+	void domainFileStatusChanged(DomainFile file, boolean fileIDset);
 
 	/**
 	 * Notification that a new version of the domain object exists and the
@@ -100,19 +100,19 @@ public interface DomainFolderChangeListener {
 	 * @param file file whose object was replaced
 	 * @param oldObject old object that was replaced
 	 */
-	public void domainFileObjectReplaced(DomainFile file, DomainObject oldObject);
+	void domainFileObjectReplaced(DomainFile file, DomainObject oldObject);
 
 	/**
 	 * Notification that a domain file has been opened for update.
 	 * @param file domain file
 	 * @param object domain object open for update
 	 */
-	public void domainFileObjectOpenedForUpdate(DomainFile file, DomainObject object);
+	void domainFileObjectOpenedForUpdate(DomainFile file, DomainObject object);
 
 	/**
 	 * Notification that a domain file previously open for update is in the process of closing.
 	 * @param file domain file
 	 * @param object domain object which was open for update
 	 */
-	public void domainFileObjectClosed(DomainFile file, DomainObject object);
+	void domainFileObjectClosed(DomainFile file, DomainObject object);
 }

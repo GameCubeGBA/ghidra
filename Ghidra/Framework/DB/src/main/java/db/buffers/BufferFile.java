@@ -59,13 +59,13 @@ public interface BufferFile {
 	 * @param value parameter value
 	 * @throws IOException
 	 */
-	public void setParameter(String name, int value) throws IOException;
+	void setParameter(String name, int value) throws IOException;
 	
 	/**
 	 * Deletes all parameters
 	 * @throws IOException
 	 */
-	public void clearParameters() throws IOException;
+	void clearParameters() throws IOException;
 	
 	/**
 	 * Returns a list of all parameter names.

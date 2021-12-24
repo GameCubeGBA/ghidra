@@ -22,7 +22,9 @@ import javax.swing.tree.TreePath;
 
 import docking.ActionContext;
 import ghidra.framework.main.datatable.ProjectTreeContext;
-import ghidra.framework.model.*;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.DomainFolder;
+import ghidra.framework.model.ProjectData;
 
 /**
  * Context specific to the DataTreeDialog.

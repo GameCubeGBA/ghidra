@@ -17,14 +17,14 @@
 package generic.timer;
 
 public interface GhidraTimer {
-	public void start();
-	public void stop();
-	public void setDelay(int delay);
-	public void setInitialDelay(int initialDelay);
-	public void setRepeats(boolean repeats);
-	public boolean isRepeats();
-	public boolean isRunning();
-	public int getDelay();
-	public int getInitialDelay();
-	public void setTimerCallback(TimerCallback callback);
+	void start();
+	void stop();
+	void setDelay(int delay);
+	void setInitialDelay(int initialDelay);
+	void setRepeats(boolean repeats);
+	boolean isRepeats();
+	boolean isRunning();
+	int getDelay();
+	int getInitialDelay();
+	void setTimerCallback(TimerCallback callback);
 }

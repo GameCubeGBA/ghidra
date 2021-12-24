@@ -15,14 +15,32 @@
  */
 package docking.widgets.conditiontestpanel;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.GridLayout;
+import java.awt.Insets;
+import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.Scrollable;
+import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 
@@ -144,8 +162,7 @@ public class ConditionTestPanel extends JPanel {
 		detailsLabel = new ScrollableLabel();
 
 		detailsLabel.setVerticalAlignment(SwingConstants.TOP);
-		JScrollPane scroll = new JScrollPane(detailsLabel);
-		return scroll;
+		return new JScrollPane(detailsLabel);
 	}
 
 	private Component buildTestPanel() {
@@ -270,7 +287,7 @@ public class ConditionTestPanel extends JPanel {
 // Inner Classes
 //==================================================================================================
 
-	private class ScrollableLabel extends GDHtmlLabel implements Scrollable {
+	private static class ScrollableLabel extends GDHtmlLabel implements Scrollable {
 
 		@Override
 		public Dimension getPreferredScrollableViewportSize() {

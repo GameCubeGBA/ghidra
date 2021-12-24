@@ -16,6 +16,8 @@
  */
 package ghidra.framework.main.datatree;
 
+import java.io.IOException;
+
 import ghidra.framework.client.ClientUtil;
 import ghidra.framework.main.AppInfo;
 import ghidra.framework.model.DomainFile;
@@ -24,8 +26,6 @@ import ghidra.util.Msg;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.Task;
 import ghidra.util.task.TaskMonitor;
-
-import java.io.IOException;
 
 class CopyFileVersionTask extends Task {
 

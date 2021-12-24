@@ -19,7 +19,13 @@ import static util.CollectionUtils.nonNull;
 
 import java.awt.Point;
 import java.awt.geom.Point2D;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.collections4.IterableUtils;
 
@@ -189,8 +195,7 @@ public abstract class DefaultVisualGraph<V extends VisualVertex,
 
 		Collection<E> in = getInEdges(v);
 		Collection<E> out = getOutEdges(v);
-		Iterable<E> concatenated = Iterables.concat(in, out);
-		return concatenated;
+		return Iterables.concat(in, out);
 	}
 
 	/**
@@ -204,14 +209,12 @@ public abstract class DefaultVisualGraph<V extends VisualVertex,
 
 		Collection<E> outs = nonNull(getOutEdges(start));
 		Collection<E> ins = nonNull(getInEdges(end));
-		Set<E> unique = new HashSet<>();
-		unique.addAll(outs);
+		Set<E> unique = new HashSet<>(outs);
 		unique.addAll(ins);
 
-		Iterable<E> filtered = IterableUtils.filteredIterable(unique, e -> {
+		return IterableUtils.filteredIterable(unique, e -> {
 			return e.getStart().equals(start) && e.getEnd().equals(end);
 		});
-		return filtered;
 	}
 
 //==================================================================================================

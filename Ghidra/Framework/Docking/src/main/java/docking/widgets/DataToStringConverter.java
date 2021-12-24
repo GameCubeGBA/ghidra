@@ -17,13 +17,8 @@
 package docking.widgets;
 
 public interface DataToStringConverter<T> {
-	public static DataToStringConverter<String> stringDataToStringConverter =
-		new DataToStringConverter<String>() {
-			@Override
-			public String getString(String t) {
-				return t;
-			}
-		};
+	DataToStringConverter<String> stringDataToStringConverter =
+		t -> t;
 
-	public String getString(T t);
+	String getString(T t);
 }

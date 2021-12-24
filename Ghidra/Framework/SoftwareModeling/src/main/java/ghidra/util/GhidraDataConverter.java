@@ -28,7 +28,7 @@ public interface GhidraDataConverter extends DataConverter {
 	 * @param isBigEndian boolean flag, true means big endian
 	 * @return static GhidraDataConverter instance
 	 */
-	public static GhidraDataConverter getInstance(boolean isBigEndian) {
+	static GhidraDataConverter getInstance(boolean isBigEndian) {
 		return isBigEndian ? GhidraBigEndianDataConverter.INSTANCE
 				: GhidraLittleEndianDataConverter.INSTANCE;
 	}
@@ -41,7 +41,7 @@ public interface GhidraDataConverter extends DataConverter {
 	 * @return short value
 	 * @throws MemoryAccessException if failed to read 2-bytes at the specified offset
 	 */
-	public short getShort(MemBuffer buf, int offset) throws MemoryAccessException;
+	short getShort(MemBuffer buf, int offset) throws MemoryAccessException;
 
 	/**
 	 * Generate a int value by invoking buf.getBytes at the specified offset.
@@ -51,7 +51,7 @@ public interface GhidraDataConverter extends DataConverter {
 	 * @return int value
 	 * @throws MemoryAccessException if failed to read 4-bytes at the specified offset
 	 */
-	public int getInt(MemBuffer buf, int offset) throws MemoryAccessException;
+	int getInt(MemBuffer buf, int offset) throws MemoryAccessException;
 
 	/**
 	 * Generate a long value by invoking buf.getBytes at the specified offset.
@@ -61,7 +61,7 @@ public interface GhidraDataConverter extends DataConverter {
 	 * @return long value
 	 * @throws MemoryAccessException if failed to read 8-bytes at the specified offset
 	 */
-	public long getLong(MemBuffer buf, int offset) throws MemoryAccessException;
+	long getLong(MemBuffer buf, int offset) throws MemoryAccessException;
 
 	/**
 	 * Generate a BigInteger value by invoking buf.getBytes at the specified offset.
@@ -74,7 +74,7 @@ public interface GhidraDataConverter extends DataConverter {
 	 * @throws MemoryAccessException if failed to read specified number of bytes
 	 * at the specified offset
 	 */
-	public BigInteger getBigInteger(MemBuffer buf, int offset, int size, boolean signed)
+	BigInteger getBigInteger(MemBuffer buf, int offset, int size, boolean signed)
 			throws MemoryAccessException;
 	
 }

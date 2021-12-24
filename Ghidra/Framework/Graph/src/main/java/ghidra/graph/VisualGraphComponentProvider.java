@@ -17,16 +17,27 @@ package ghidra.graph;
 
 import java.awt.Component;
 import java.awt.event.MouseEvent;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
-import docking.*;
+import docking.ActionContext;
+import docking.ComponentProvider;
+import docking.Tool;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.picking.PickedState;
 import ghidra.framework.options.SaveState;
 import ghidra.graph.featurette.VgSatelliteFeaturette;
 import ghidra.graph.featurette.VisualGraphFeaturette;
-import ghidra.graph.viewer.*;
-import ghidra.graph.viewer.actions.*;
+import ghidra.graph.viewer.GraphComponent;
+import ghidra.graph.viewer.GraphViewer;
+import ghidra.graph.viewer.GraphViewerUtils;
+import ghidra.graph.viewer.VisualEdge;
+import ghidra.graph.viewer.VisualGraphView;
+import ghidra.graph.viewer.VisualVertex;
+import ghidra.graph.viewer.actions.VgActionContext;
+import ghidra.graph.viewer.actions.VgSatelliteContext;
+import ghidra.graph.viewer.actions.VgVertexContext;
 import ghidra.graph.viewer.event.mouse.VertexMouseInfo;
 
 /**
@@ -238,8 +249,7 @@ public abstract class VisualGraphComponentProvider<V extends VisualVertex,
 			return null;
 		}
 
-		V vertex = info.getVertex();
-		return vertex;
+		return info.getVertex();
 	}
 
 	private GraphViewer<V, E> getPrimaryGraphViewer(Object source) {

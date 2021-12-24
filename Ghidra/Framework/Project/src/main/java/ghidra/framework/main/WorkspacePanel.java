@@ -15,19 +15,29 @@
  */
 package ghidra.framework.main;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Dimension;
 import java.awt.event.ItemEvent;
 import java.beans.PropertyChangeEvent;
 import java.util.HashMap;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
+import javax.swing.JComboBox;
+import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 import docking.help.Help;
 import docking.help.HelpService;
 import docking.widgets.combobox.GComboBox;
 import docking.widgets.dialogs.InputDialog;
-import ghidra.framework.model.*;
+import ghidra.framework.model.Project;
+import ghidra.framework.model.ToolManager;
+import ghidra.framework.model.ToolTemplate;
+import ghidra.framework.model.Workspace;
+import ghidra.framework.model.WorkspaceChangeListener;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.util.HelpLocation;
 import ghidra.util.Msg;
@@ -183,7 +193,7 @@ class WorkspacePanel extends JPanel implements WorkspaceChangeListener {
 
 		// if this is a workspace name change, update our running
 		// tools map so we can identify the runningToolsPanel properly
-		if (eventPropertyName.equals(ToolManager.WORKSPACE_NAME_PROPERTY)) {
+		if (ToolManager.WORKSPACE_NAME_PROPERTY.equals(eventPropertyName)) {
 			String oldName = (String) event.getOldValue();
 			String newName = (String) event.getNewValue();
 			renameWorkspace(activeWorkspace, oldName, newName);
@@ -199,7 +209,7 @@ class WorkspacePanel extends JPanel implements WorkspaceChangeListener {
 			Icon icon = tool.getIconURL().getIcon();
 			String workspaceName = activeWorkspace.getName();
 			RunningToolsPanel rtp = runningToolsMap.get(workspaceName);
-			if (eventPropertyName.equals(PluginTool.TOOL_NAME_PROPERTY)) {
+			if (PluginTool.TOOL_NAME_PROPERTY.equals(eventPropertyName)) {
 				rtp.toolNameChanged(tool);
 			}
 			else {

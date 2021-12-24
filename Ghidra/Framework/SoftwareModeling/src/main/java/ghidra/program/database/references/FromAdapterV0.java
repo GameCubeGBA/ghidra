@@ -17,12 +17,18 @@ package ghidra.program.database.references;
 
 import java.io.IOException;
 
-import db.*;
+import db.DBHandle;
+import db.DBRecord;
+import db.Table;
 import db.util.ErrorHandler;
 import ghidra.program.database.DBObjectCache;
 import ghidra.program.database.ProgramDB;
-import ghidra.program.database.map.*;
-import ghidra.program.model.address.*;
+import ghidra.program.database.map.AddressKeyAddressIterator;
+import ghidra.program.database.map.AddressKeyIterator;
+import ghidra.program.database.map.AddressMap;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressIterator;
+import ghidra.program.model.address.AddressSetView;
 import ghidra.util.exception.VersionException;
 
 class FromAdapterV0 extends FromAdapter {

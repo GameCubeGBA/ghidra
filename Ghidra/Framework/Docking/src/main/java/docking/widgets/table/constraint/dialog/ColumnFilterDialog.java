@@ -15,23 +15,42 @@
  */
 package docking.widgets.table.constraint.dialog;
 
-import java.awt.*;
-import java.util.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JViewport;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.border.CompoundBorder;
 
 import org.apache.commons.lang3.StringUtils;
 
-import docking.*;
-import docking.action.*;
+import docking.ActionContext;
+import docking.DialogComponentProvider;
+import docking.DockingWindowManager;
+import docking.action.DockingAction;
+import docking.action.DockingActionIf;
+import docking.action.ToolBarData;
 import docking.widgets.OptionDialog;
 import docking.widgets.dialogs.InputDialog;
 import docking.widgets.label.GLabel;
 import docking.widgets.table.GTableFilterPanel;
 import docking.widgets.table.RowObjectFilterModel;
-import docking.widgets.table.columnfilter.*;
+import docking.widgets.table.columnfilter.ColumnBasedTableFilter;
+import docking.widgets.table.columnfilter.ColumnFilterSaveManager;
+import docking.widgets.table.columnfilter.LogicOperation;
 import docking.widgets.table.constrainteditor.ColumnConstraintEditor;
 import generic.util.WindowUtilities;
 import ghidra.util.HelpLocation;

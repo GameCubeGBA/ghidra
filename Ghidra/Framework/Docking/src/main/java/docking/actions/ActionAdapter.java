@@ -31,7 +31,7 @@ import docking.action.DockingActionIf;
 public class ActionAdapter implements Action, PropertyChangeListener {
 
 	private final DockingActionIf dockingAction;
-	private List<PropertyChangeListener> listeners = new ArrayList<PropertyChangeListener>();
+	private List<PropertyChangeListener> listeners = new ArrayList<>();
 	private ActionContextProvider contextProvider;
 	private Action defaultAction;
 
@@ -63,19 +63,15 @@ public class ActionAdapter implements Action, PropertyChangeListener {
 
 	@Override
 	public Object getValue(String key) {
-		if (key.equals(NAME)) {
+		if (NAME.equals(key)) {
 			return dockingAction.getName();
 		}
-		else if (key.equals(SHORT_DESCRIPTION)) {
+		else if (SHORT_DESCRIPTION.equals(key) || LONG_DESCRIPTION.equals(key)) {
 			return dockingAction.getDescription();
-		}
-		else if (key.equals(LONG_DESCRIPTION)) {
-			return dockingAction.getDescription();
-		}
-		else if (key.equals(SMALL_ICON)) {
+		} else if (SMALL_ICON.equals(key)) {
 			return getIcon();
 		}
-		else if (key.equals(ACCELERATOR_KEY)) {
+		else if (ACCELERATOR_KEY.equals(key)) {
 			return dockingAction.getKeyBinding();
 		}
 		return null;

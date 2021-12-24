@@ -18,7 +18,9 @@ package ghidra.program.database.oldfunction;
 import java.io.IOException;
 import java.util.Iterator;
 
-import db.*;
+import db.DBHandle;
+import db.DBRecord;
+import db.RecordIterator;
 import db.util.ErrorHandler;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.database.data.DataTypeManagerDB;
@@ -29,10 +31,19 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSetView;
 import ghidra.program.model.data.DataType;
 import ghidra.program.model.data.Pointer;
-import ghidra.program.model.listing.*;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.listing.Parameter;
+import ghidra.program.model.listing.StackFrame;
+import ghidra.program.model.listing.Variable;
+import ghidra.program.model.symbol.SourceType;
+import ghidra.program.model.symbol.Symbol;
+import ghidra.program.model.symbol.SymbolTable;
+import ghidra.program.model.symbol.SymbolUtilities;
 import ghidra.util.Msg;
-import ghidra.util.exception.*;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.DuplicateNameException;
+import ghidra.util.exception.InvalidInputException;
+import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
 
 /**
@@ -179,10 +190,7 @@ public class OldFunctionManager implements ErrorHandler {
 				}
 			}
 		}
-		catch (OverlappingFunctionException e) {
-			throw new AssertException(e);
-		}
-		catch (InvalidInputException e) {
+		catch (OverlappingFunctionException | InvalidInputException e) {
 			throw new AssertException(e);
 		}
 		finally {

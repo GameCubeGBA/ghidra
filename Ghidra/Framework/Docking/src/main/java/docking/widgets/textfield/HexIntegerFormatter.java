@@ -67,7 +67,7 @@ public class HexIntegerFormatter extends IntegerFormatter {
 	protected static class HexAllowedPositiveValueIntgerDocumentFilterWrapper extends
 			PosiviteValueIntegerDocumentFilterWrapper {
 
-		private Set<Character> hexCharacterSet = new HashSet<Character>();
+		private Set<Character> hexCharacterSet = new HashSet<>();
 
 		HexAllowedPositiveValueIntgerDocumentFilterWrapper(Format format,
 				DocumentFilter wrappedFilter) {

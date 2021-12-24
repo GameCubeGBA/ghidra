@@ -18,10 +18,17 @@ package ghidra.program.model.pcode;
 import java.util.ArrayList;
 
 import ghidra.program.database.symbol.CodeSymbol;
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.address.OverlayAddressSpace;
 import ghidra.program.model.listing.Function;
 import ghidra.program.model.listing.Program;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.Namespace;
+import ghidra.program.model.symbol.SourceType;
+import ghidra.program.model.symbol.Symbol;
+import ghidra.program.model.symbol.SymbolIterator;
+import ghidra.program.model.symbol.SymbolTable;
 import ghidra.util.exception.InvalidInputException;
 import ghidra.util.xml.SpecXmlUtils;
 import ghidra.xml.XmlElement;
@@ -89,7 +96,7 @@ public class JumpTable {
 		}
 	}
 
-	public class BasicOverride {
+	public static class BasicOverride {
 		private Address[] destlist;		// List of jump destinations, must be addresses of instructions
 
 		public BasicOverride(ArrayList<Address> dlist) {
@@ -149,10 +156,7 @@ public class JumpTable {
 	}
 
 	public boolean isEmpty() {
-		if (addressTable == null) {
-			return true;
-		}
-		if (addressTable.length == 0) {
+		if ((addressTable == null) || (addressTable.length == 0)) {
 			return true;
 		}
 		return false;
@@ -181,7 +185,7 @@ public class JumpTable {
 			parser.end(addrel);
 
 			while (parser.peek().isStart()) {
-				if (parser.peek().getName().equals("dest")) {
+				if ("dest".equals(parser.peek().getName())) {
 					XmlElement subel = parser.start("dest");
 					Address caseAddr =
 						translateOverlayAddress(AddressXML.readXML(subel, addrFactory));
@@ -193,7 +197,7 @@ public class JumpTable {
 					}
 					parser.end(subel);
 				}
-				else if (parser.peek().getName().equals("loadtable")) {
+				else if ("loadtable".equals(parser.peek().getName())) {
 					LoadTable loadtable = new LoadTable();
 					loadtable.restoreXml(parser, addrFactory);
 					ldTable.add(loadtable);
@@ -293,7 +297,7 @@ public class JumpTable {
 				continue;
 			}
 			Address addr = sym.getAddress();
-			if (sym.getName().equals("switch")) {
+			if ("switch".equals(sym.getName())) {
 				branchind = addr;
 			}
 			else if (sym.getName().startsWith("case")) {

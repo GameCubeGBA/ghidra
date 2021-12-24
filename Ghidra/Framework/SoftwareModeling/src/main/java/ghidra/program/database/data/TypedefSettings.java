@@ -16,6 +16,7 @@
 package ghidra.program.database.data;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import ghidra.docking.settings.Settings;
@@ -40,6 +41,7 @@ class TypedefSettings implements Settings {
 	/* (non-Javadoc)
 	 * @see ghidra.program.model.data.Settings#clearAllSettings()
 	 */
+	@Override
 	public void clearAllSettings() {
 		defaultSettings.clearAllSettings();
 	}
@@ -47,6 +49,7 @@ class TypedefSettings implements Settings {
 	/* (non-Javadoc)
 	 * @see ghidra.program.model.data.Settings#clearSetting(java.lang.String)
 	 */
+	@Override
 	public void clearSetting(String name) {
 		defaultSettings.clearSetting(name);
 	}
@@ -54,6 +57,7 @@ class TypedefSettings implements Settings {
 	/* (non-Javadoc)
 	 * @see ghidra.program.model.data.Settings#getByteArray(java.lang.String)
 	 */
+	@Override
 	public byte[] getByteArray(String name) {
 		byte[] b = instanceSettings.getByteArray(name);
 		if (b == null) {
@@ -65,6 +69,7 @@ class TypedefSettings implements Settings {
 	/* (non-Javadoc)
 	 * @see ghidra.program.model.data.Settings#getLong(java.lang.String)
 	 */
+	@Override
 	public Long getLong(String name) {
 		Long value = instanceSettings.getLong(name);
 		if (value == null) {
@@ -76,16 +81,15 @@ class TypedefSettings implements Settings {
 	/* (non-Javadoc)
 	 * @see ghidra.program.model.data.Settings#getNames()
 	 */
+	@Override
 	public String[] getNames() {
-		List<String> list = new ArrayList<String>();
+		List<String> list = new ArrayList<>();
 		String[] instNames = instanceSettings.getNames();
-		for (int i = 0; i < instNames.length; i++) {
-			list.add(instNames[i]);
-		}
+		Collections.addAll(list, instNames);
 		String[] defNames = defaultSettings.getNames();
-		for (int i = 0; i < defNames.length; i++) {
-			if (!list.contains(defNames[i])) {
-				list.add(defNames[i]);
+		for (String defName : defNames) {
+			if (!list.contains(defName)) {
+				list.add(defName);
 			}
 		}
 		String[] names = new String[list.size()];
@@ -95,6 +99,7 @@ class TypedefSettings implements Settings {
 	/* (non-Javadoc)
 	 * @see ghidra.program.model.data.Settings#getString(java.lang.String)
 	 */
+	@Override
 	public String getString(String name) {
 		String value = instanceSettings.getString(name);
 		if (value == null) {
@@ -106,6 +111,7 @@ class TypedefSettings implements Settings {
 	/* (non-Javadoc)
 	 * @see ghidra.program.model.data.Settings#getValue(java.lang.String)
 	 */
+	@Override
 	public Object getValue(String name) {
 		Object value = instanceSettings.getValue(name);
 		if (value == null) {
@@ -117,6 +123,7 @@ class TypedefSettings implements Settings {
 	/* (non-Javadoc)
 	 * @see ghidra.program.model.data.Settings#isEmpty()
 	 */
+	@Override
 	public boolean isEmpty() {
 		return instanceSettings.isEmpty() && defaultSettings.isEmpty();
 	}
@@ -124,6 +131,7 @@ class TypedefSettings implements Settings {
 	/* (non-Javadoc)
 	 * @see ghidra.program.model.data.Settings#setByteArray(java.lang.String, byte[])
 	 */
+	@Override
 	public void setByteArray(String name, byte[] value) {
 		defaultSettings.setByteArray(name, value);
 	}
@@ -131,6 +139,7 @@ class TypedefSettings implements Settings {
 	/* (non-Javadoc)
 	 * @see ghidra.program.model.data.Settings#setLong(java.lang.String, long)
 	 */
+	@Override
 	public void setLong(String name, long value) {
 		defaultSettings.setLong(name, value);
 	}
@@ -138,6 +147,7 @@ class TypedefSettings implements Settings {
 	/* (non-Javadoc)
 	 * @see ghidra.program.model.data.Settings#setString(java.lang.String, java.lang.String)
 	 */
+	@Override
 	public void setString(String name, String value) {
 		defaultSettings.setString(name, value);
 	}
@@ -145,6 +155,7 @@ class TypedefSettings implements Settings {
 	/* (non-Javadoc)
 	 * @see ghidra.program.model.data.Settings#setValue(java.lang.String, java.lang.Object)
 	 */
+	@Override
 	public void setValue(String name, Object value) {
 		defaultSettings.setValue(name, value);
 	}
@@ -152,6 +163,7 @@ class TypedefSettings implements Settings {
 	/**
 	 * @see ghidra.docking.settings.Settings#getDefaultSettings()
 	 */
+	@Override
 	public Settings getDefaultSettings() {
 		return defaultSettings;
 	}

@@ -24,21 +24,21 @@ public interface CustomOption {
 	 * implementation and should be ignored by {@link #readState(SaveState)}
 	 * implementation
 	 */
-	public final String CUSTOM_OPTION_CLASS_NAME_KEY = "CUSTOM_OPTION_CLASS";
+	String CUSTOM_OPTION_CLASS_NAME_KEY = "CUSTOM_OPTION_CLASS";
 
 	/**
 	 * Concrete subclass of WrappedOption should read all of its
 	 * state from the given saveState object.
 	 * @param saveState container of state information
 	 */
-	public void readState(SaveState saveState);
+	void readState(SaveState saveState);
 
 	/**
 	 * Concrete subclass of WrappedOption should write all of its
 	 * state to the given saveState object.
 	 * @param saveState container of state information
 	 */
-	public void writeState(SaveState saveState);
+	void writeState(SaveState saveState);
 
 	/**
 	 * CustomOption should implement this method to provide a formatted 
@@ -47,7 +47,6 @@ public interface CustomOption {
 	 * and {@link Options#getDefaultValueAsString(String)}.
 	 * @return option value as string
 	 */
-	@Override
-	public String toString();
+	@Override String toString();
 
 }

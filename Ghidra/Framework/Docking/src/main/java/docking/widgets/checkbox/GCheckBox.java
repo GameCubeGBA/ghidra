@@ -15,7 +15,9 @@
  */
 package docking.widgets.checkbox;
 
-import javax.swing.*;
+import javax.swing.Action;
+import javax.swing.Icon;
+import javax.swing.JCheckBox;
 
 import docking.widgets.GComponent;
 

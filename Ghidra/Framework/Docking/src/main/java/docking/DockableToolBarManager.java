@@ -20,10 +20,21 @@ import java.awt.FlowLayout;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.SwingUtilities;
 
-import docking.action.*;
-import docking.menu.*;
+import docking.action.DockingAction;
+import docking.action.DockingActionIf;
+import docking.action.KeyBindingType;
+import docking.action.ToolBarData;
+import docking.menu.MenuGroupMap;
+import docking.menu.MenuHandler;
+import docking.menu.MenuManager;
+import docking.menu.ToolBarItemManager;
+import docking.menu.ToolBarManager;
 import ghidra.util.exception.AssertException;
 import ghidra.util.task.SwingUpdateManager;
 import resources.ResourceManager;

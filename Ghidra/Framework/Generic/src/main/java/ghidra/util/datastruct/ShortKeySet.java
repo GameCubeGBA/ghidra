@@ -27,57 +27,57 @@ public interface ShortKeySet {
     /**
      * Returns the number of keys currently in the set.
      */
-    public int size();
+    int size();
 
     /**
      * Determines if a given key is in the set.
      * @param key the key whose presence is to be tested.
      * @return true if the key is in the set.
      */
-    public boolean containsKey(short key);
+    boolean containsKey(short key);
 
     /**
      * Returns the first (lowest) key in the set.
      */
-    public short getFirst();
+    short getFirst();
 
     /**
      * Returns the last (highest) key in the set.
      */
-    public short getLast();
+    short getLast();
 
     /**
      *  Adds a key to the set.
      * @param key the key to add to the set.
      */
-    public void put(short key);
+    void put(short key);
 
     /**
      *  Removes the key from the set.
      * @param key the key to remove from the set.
      */
-    public boolean remove(short key);
+    boolean remove(short key);
 
     /**
      * Removes all keys from the set.
      */
-    public void removeAll();
+    void removeAll();
 
     /**
      * finds the next key that is in the set that is greater than the given key.
      * @param key the key for which to find the next key after.
      */
-    public short getNext(short key);
+    short getNext(short key);
 
     /**
      * finds the previous key that is in the set that is less than the given key.
      * @param key the key for which to find the previous key.
      */
-    public short getPrevious(short key);
+    short getPrevious(short key);
 
     /**
      *  Checks if the set is empty.
      * @return true if the set is empty.
      */
-    public boolean isEmpty();
+    boolean isEmpty();
 }

@@ -16,16 +16,16 @@
  */
 package ghidra.program.model.data;
 
-import ghidra.program.model.mem.MemBuffer;
-import ghidra.program.model.mem.MemoryAccessException;
-
 import java.util.Arrays;
 import java.util.zip.CRC32;
+
+import ghidra.program.model.mem.MemBuffer;
+import ghidra.program.model.mem.MemoryAccessException;
 
 class PngResource {
 
 	private static final int MAX_CHUNK_SIZE = 10 * 1024 * 1024;
-	private static final byte[] IEND = new byte[] { 'I', 'E', 'N', 'D' };
+	private static final byte[] IEND = { 'I', 'E', 'N', 'D' };
 
 	private MemBuffer buf;
 	private int bufOffset;

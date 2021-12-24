@@ -15,7 +15,9 @@
  */
 package ghidra.util.datastruct;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 import ghidra.util.graph.DependencyGraph;
 import ghidra.util.graph.DeterministicDependencyGraph;
@@ -77,7 +79,7 @@ public class DependencyGraphPerformanceTest {
 		System.out.println(timer);
 	}
 
-	private class Timer {
+	private static class Timer {
 		private String testName;
 		private List<Long> times = new ArrayList<>();
 
@@ -107,7 +109,7 @@ public class DependencyGraphPerformanceTest {
 		}
 	}
 
-	private class DependencyRelation {
+	private static class DependencyRelation {
 		public String dependent;
 		public String dependee;
 

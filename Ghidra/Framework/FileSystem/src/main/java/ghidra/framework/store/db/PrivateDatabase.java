@@ -15,10 +15,21 @@
  */
 package ghidra.framework.store.db;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 
-import db.*;
-import db.buffers.*;
+import db.DBFileListener;
+import db.DBHandle;
+import db.Database;
+import db.buffers.BufferFile;
+import db.buffers.BufferMgr;
+import db.buffers.LocalBufferFile;
+import db.buffers.LocalManagedBufferFile;
+import db.buffers.ManagedBufferFile;
 import ghidra.framework.store.local.ItemSerializer;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
@@ -101,10 +112,8 @@ public class PrivateDatabase extends Database {
 			success = true;
 		}
 		finally {
-			if (!success) {
-				if (dbDirCreated) {
-					deleteDir(dbDir);
-				}
+			if (!success && dbDirCreated) {
+				deleteDir(dbDir);
 			}
 		}
 	}

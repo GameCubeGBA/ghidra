@@ -15,7 +15,10 @@
  */
 package ghidra.util.graph.attributes;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
 
 import ghidra.util.graph.KeyIndexableSet;
 import ghidra.util.graph.KeyedObject;
@@ -122,7 +125,6 @@ public class StringAttribute<T extends KeyedObject> extends Attribute<T> {
 						return returnValue;
 					}
 					if ((ko1.key() - ko2.key()) < 0) {
-						return -1;
 					}
 					else if ((ko1.key() - ko2.key()) > 0) {
 						return +1;

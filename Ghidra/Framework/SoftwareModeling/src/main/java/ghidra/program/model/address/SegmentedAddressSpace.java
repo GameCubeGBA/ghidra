@@ -325,8 +325,7 @@ public class SegmentedAddressSpace extends GenericAddressSpace {
 	 */
 	public int getNextOpenSegment(Address addr) {
 		int res = (int) addr.getOffset();	// The "flat" offset (presumably real-mode encoded)
-		res = (res >> 4) + 1;
-		return res;
+		return (res >> 4) + 1;
 	}
 
 	/**

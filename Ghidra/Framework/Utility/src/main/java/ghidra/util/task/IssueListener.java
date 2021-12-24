@@ -19,5 +19,5 @@ package ghidra.util.task;
 import ghidra.util.Issue;
 
 public interface IssueListener {
-	public void issueReported(Issue issue);
+	void issueReported(Issue issue);
 }

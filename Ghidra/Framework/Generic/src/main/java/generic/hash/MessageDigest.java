@@ -24,43 +24,43 @@ public interface MessageDigest {
 	 * implementation details.
 	 * @return the name of the algorithm
 	 */
-	public String getAlgorithm();
+	String getAlgorithm();
 
 	/**
 	 * Returns the length of the digest in bytes.
 	 * @return the digest length in bytes
 	 */
-	public int getDigestLength();
+	int getDigestLength();
 
 	/**
 	 * Updates the digest using the specified byte.
 	 * @param input the byte with which to update the digest
 	 */
-	public void update(byte input);
+	void update(byte input);
 
 	/**
 	 * Updates the digest using the specified short.
 	 * @param input the short with which to update the digest (big endian)
 	 */
-	public void update(short input);
+	void update(short input);
 
 	/**
 	 * Updates the digest using the specified int.
 	 * @param input the int with which to update the digest (big endian)
 	 */
-	public void update(int input);
+	void update(int input);
 
 	/**
 	 * Updates the digest using the specified long.
 	 * @param input the long with which to update the digest (big endian)
 	 */
-	public void update(long input);
+	void update(long input);
 
 	/**
 	 * Updates the digest using the specified array of bytes. Do not use a monitor
 	 * @param input the array of bytes
 	 */
-	public void update(byte[] input);
+	void update(byte[] input);
 
 	/**
 	 * Updates the digest using the specified array of bytes, starting at the
@@ -69,7 +69,7 @@ public interface MessageDigest {
 	 * @param offset the offset to start from in the array of bytes
 	 * @param len the number of bytes to use, starting at offset
 	 */
-	public void update(byte[] input, int offset, int len);
+	void update(byte[] input, int offset, int len);
 
 	/**
 	 * Updates the digest using the specified array of bytes.
@@ -77,7 +77,7 @@ public interface MessageDigest {
 	 * @param monitor the monitor to check during loops
 	 * @throws CancelledException 
 	 */
-	public void update(byte[] input, TaskMonitor monitor) throws CancelledException;
+	void update(byte[] input, TaskMonitor monitor) throws CancelledException;
 
 	/**
 	 * Updates the digest using the specified array of bytes, starting at the
@@ -88,7 +88,7 @@ public interface MessageDigest {
 	 * @param monitor the monitor to check during loops
 	 * @throws CancelledException 
 	 */
-	public void update(byte[] input, int offset, int len, TaskMonitor monitor)
+	void update(byte[] input, int offset, int len, TaskMonitor monitor)
 			throws CancelledException;
 
 	/**
@@ -96,7 +96,7 @@ public interface MessageDigest {
 	 * padding.  The digest is reset after this call is made.
 	 * @return the array of bytes for the resulting hash value
 	 */
-	public byte[] digest();
+	byte[] digest();
 
 	/**
 	 * Completes the hash computation by performing final operations such as
@@ -104,7 +104,7 @@ public interface MessageDigest {
 	 * value.  The digest is reset after this call is made.
 	 * @return the digest value as a long value
 	 */
-	public long digestLong();
+	long digestLong();
 
 	/**
 	 * Completes the hash computation by performing final operations such as
@@ -114,10 +114,10 @@ public interface MessageDigest {
 	 * @param len number of bytes within buf allocated for the digest
 	 * @return the number of bytes placed into buf
 	 */
-	public int digest(byte[] buf, int offset, int len);
+	int digest(byte[] buf, int offset, int len);
 
 	/**
 	 * Resets the digest for further use.
 	 */
-	public void reset();
+	void reset();
 }

@@ -20,7 +20,11 @@ import java.util.Vector;
 
 import ghidra.util.Msg;
 import ghidra.util.exception.NoValueException;
-import ghidra.util.graph.attributes.*;
+import ghidra.util.graph.attributes.AttributeManager;
+import ghidra.util.graph.attributes.DoubleAttribute;
+import ghidra.util.graph.attributes.IntegerAttribute;
+import ghidra.util.graph.attributes.ObjectAttribute;
+import ghidra.util.graph.attributes.StringAttribute;
 
 /**
  * Title: Dominator
@@ -167,7 +171,7 @@ public class Dominator extends DirectedGraph //implements Weighted
 	 */
 	public Vertex allPathsContain(Vector pathSet, Vertex v, Vector path) {
 		int candIndex = path.indexOf(v) - 1;
-		if (!(candIndex >= 0)) {
+		if ((candIndex < 0)) {
 			return v;
 		}
 		Vertex candidate = (Vertex) path.elementAt(candIndex--);
@@ -388,9 +392,7 @@ public class Dominator extends DirectedGraph //implements Weighted
 	public String getType(KeyedObject o) {
 		String type = null;
 
-		type = vertexType.getValue(o);
-
-		return type;
+		return vertexType.getValue(o);
 	}
 
 	// sets the weight of a vertex

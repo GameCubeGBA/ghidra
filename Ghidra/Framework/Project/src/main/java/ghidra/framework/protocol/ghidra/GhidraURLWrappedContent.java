@@ -16,13 +16,15 @@
  */
 package ghidra.framework.protocol.ghidra;
 
-import ghidra.framework.model.*;
-import ghidra.util.InvalidNameException;
-import ghidra.util.exception.NotFoundException;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.DomainFolder;
+import ghidra.framework.model.ProjectData;
+import ghidra.util.InvalidNameException;
+import ghidra.util.exception.NotFoundException;
 
 /**
  * <code>GhidraURLWrappedContent</code> provides controlled access to a Ghidra folder/file
@@ -42,7 +44,7 @@ public class GhidraURLWrappedContent {
 
 	private final GhidraURLConnection c;
 
-	private List<Object> consumers = new ArrayList<Object>();
+	private List<Object> consumers = new ArrayList<>();
 
 	private ProjectData projectData;
 	private Object refObject;

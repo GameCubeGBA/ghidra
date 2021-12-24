@@ -18,11 +18,28 @@ package docking.widgets.table;
 import java.awt.Component;
 import java.awt.Rectangle;
 import java.beans.PropertyChangeListener;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.Icon;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.BevelBorder;
-import javax.swing.event.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.TableColumnModelEvent;
+import javax.swing.event.TableColumnModelListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 
@@ -31,10 +48,15 @@ import org.jdom.Element;
 import docking.ActionContext;
 import docking.DockingWindowManager;
 import docking.help.HelpService;
-import docking.menu.*;
+import docking.menu.ActionState;
+import docking.menu.MultiStateDockingAction;
+import docking.menu.NonToolbarMultiStateAction;
 import docking.widgets.EmptyBorderButton;
 import docking.widgets.EventTrigger;
-import docking.widgets.filter.*;
+import docking.widgets.filter.FilterListener;
+import docking.widgets.filter.FilterOptions;
+import docking.widgets.filter.FilterOptionsEditorDialog;
+import docking.widgets.filter.FilterTextField;
 import docking.widgets.label.GDLabel;
 import docking.widgets.table.columnfilter.ColumnBasedTableFilter;
 import docking.widgets.table.columnfilter.ColumnFilterSaveManager;
@@ -179,7 +201,7 @@ public class GTableFilterPanel<ROW_OBJECT> extends JPanel {
 	};
 
 	private PropertyChangeListener badProgrammingPropertyChangeListener = evt -> {
-		if (evt.getPropertyName().equals("model")) {
+		if ("model".equals(evt.getPropertyName())) {
 			throw new AssertException("HEY!  You can't change the model once you've " +
 				"made the commitment to use a filter panel!...duh!");
 		}
@@ -685,8 +707,7 @@ public class GTableFilterPanel<ROW_OBJECT> extends JPanel {
 	 * @return the row object matching the given index
 	 */
 	public ROW_OBJECT getRowObject(int viewRow) {
-		ROW_OBJECT rowObject = textFilterModel.getRowObject(viewRow);
-		return rowObject;
+		return textFilterModel.getRowObject(viewRow);
 	}
 
 	/**
@@ -987,8 +1008,7 @@ public class GTableFilterPanel<ROW_OBJECT> extends JPanel {
 		String filterName = "Filter"; // this catches xyzFilterPane and xyzFilterTable
 		StackTraceElement[] filteredTrace =
 			ReflectionUtilities.filterStackTrace(stackTrace, filterName);
-		String clientName = filteredTrace[0].getClassName();
-		return clientName;
+		return filteredTrace[0].getClassName();
 	}
 
 //==================================================================================================

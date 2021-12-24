@@ -111,7 +111,8 @@ public class BitTree implements ShortKeySet, Serializable {
     /**
      * Removes all keys from the set.
      */
-    public void removeAll() {
+    @Override
+	public void removeAll() {
         Arrays.fill(bits,0);
         numKeys = 0;
     }
@@ -119,7 +120,8 @@ public class BitTree implements ShortKeySet, Serializable {
     /**
      * Returns the number of keys currently in the set.
      */
-    public int size() {
+    @Override
+	public int size() {
         return numKeys;
     }
 
@@ -129,7 +131,8 @@ public class BitTree implements ShortKeySet, Serializable {
      * @exception IndexOutOfBoundsException if the given key is not
      * in the range [0, size-1].
      */
-    public void put(short key) {
+    @Override
+	public void put(short key) {
 
         if ((key < 0) || (key >= size)) {
             throw new IndexOutOfBoundsException();
@@ -166,7 +169,8 @@ public class BitTree implements ShortKeySet, Serializable {
      * @exception IndexOutOfBoundsException if the given key is not
      * in the range [0, size-1].
      */
-    public boolean remove(short key) {
+    @Override
+	public boolean remove(short key) {
 
         if ((key < 0) || (key >= size)) {
             throw new IndexOutOfBoundsException();
@@ -189,10 +193,7 @@ public class BitTree implements ShortKeySet, Serializable {
         // nodes are "off".
         while(nodeIndex != 1) {
             nodeIndex /= 2;
-            if (!isBitSet(nodeIndex)) {
-                return true;
-            }
-            if (isBitSet(nodeIndex*2) || isBitSet(nodeIndex*2+1)) {
+            if (!isBitSet(nodeIndex) || isBitSet(nodeIndex*2) || isBitSet(nodeIndex*2+1)) {
                 return true;
             }
             clearBit(nodeIndex);
@@ -205,7 +206,8 @@ public class BitTree implements ShortKeySet, Serializable {
      * @param key the key to check if it is in this set.
      * @return true if the key is in the set.
      */
-    public boolean containsKey(short key) {
+    @Override
+	public boolean containsKey(short key) {
         if ((key < 0) || (key >= size)) {
             return false;
         }
@@ -220,7 +222,8 @@ public class BitTree implements ShortKeySet, Serializable {
      * @exception IndexOutOfBoundsException if the given key is not
      * in the range [0, size-1].
      */
-    public short getNext(short key) {
+    @Override
+	public short getNext(short key) {
         if ((key < 0) || (key >= size)) {
             throw new IndexOutOfBoundsException();
         }
@@ -237,14 +240,12 @@ public class BitTree implements ShortKeySet, Serializable {
 
             // if we are the left child see if my sibling on the right is on.
             // if so, then the next key must be in that subtree.
-            if (odd == 0) {
-                if (isBitSet(nodeIndex+1)) {
-                    // we found a right sibling that is "on", set nodeIndex to
-                    // that node.
-                    nodeIndex++;
-                    break;
-                }
-            }
+            if ((odd == 0) && isBitSet(nodeIndex+1)) {
+			    // we found a right sibling that is "on", set nodeIndex to
+			    // that node.
+			    nodeIndex++;
+			    break;
+			}
             nodeIndex = nodeIndex/2;
         }
 
@@ -279,7 +280,8 @@ public class BitTree implements ShortKeySet, Serializable {
      * @exception IndexOutOfBoundsException if the given key is not
      * in the range [0, size-1].
      */
-    public short getPrevious(short key) {
+    @Override
+	public short getPrevious(short key) {
         if ((key < 0) || (key >= size)) {
             throw new IndexOutOfBoundsException();
         }
@@ -296,12 +298,10 @@ public class BitTree implements ShortKeySet, Serializable {
 
             // if we are the right child see if my sibling on the left is "on".
             // if so, then the previous key must be in that subtree.
-            if (odd == 1) {
-                if (isBitSet(nodeIndex-1)) {
-                    nodeIndex--;
-                    break;
-                }
-            }
+            if ((odd == 1) && isBitSet(nodeIndex-1)) {
+			    nodeIndex--;
+			    break;
+			}
             nodeIndex = nodeIndex/2;
         }
         // If we went all the way to the root then there is no previous key, return -1.
@@ -324,14 +324,16 @@ public class BitTree implements ShortKeySet, Serializable {
      *  Checks if the set is empty.
      * @return true if the set is empty.
      */
-    public boolean isEmpty() {
+    @Override
+	public boolean isEmpty() {
         return numKeys == 0;
     }
 
     /**
      * Returns the first (lowest) key in the set.
      */
-    public short getFirst() {
+    @Override
+	public short getFirst() {
         // if the 0 key is in the set, then return it.
         if(containsKey((short)0)) {
             return (short)0;
@@ -343,7 +345,8 @@ public class BitTree implements ShortKeySet, Serializable {
     /**
      * Returns the last (highest) key in the set.
      */
-    public short getLast() {
+    @Override
+	public short getLast() {
         // if the highest possible key is in the set, return it.
         if(containsKey((short)(size-1))) {
             return (short)(size-1);

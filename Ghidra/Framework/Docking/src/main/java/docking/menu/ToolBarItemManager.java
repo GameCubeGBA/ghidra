@@ -15,15 +15,22 @@
  */
 package docking.menu;
 
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import javax.swing.JButton;
 import javax.swing.SwingUtilities;
 
-import docking.*;
-import docking.action.*;
+import docking.ActionContext;
+import docking.ComponentProvider;
+import docking.DockingWindowManager;
+import docking.action.DockingActionIf;
+import docking.action.ToggleDockingActionIf;
+import docking.action.ToolBarData;
 
 /**
  * Class to manager toolbar buttons.
@@ -92,20 +99,20 @@ public class ToolBarItemManager implements PropertyChangeListener, ActionListene
 			return;
 		}
 		String name = e.getPropertyName();
-		if (name.equals(DockingActionIf.ENABLEMENT_PROPERTY)) {
+		if (DockingActionIf.ENABLEMENT_PROPERTY.equals(name)) {
 			toolBarButton.setEnabled(((Boolean) e.getNewValue()).booleanValue());
 		}
-		else if (name.equals(DockingActionIf.DESCRIPTION_PROPERTY)) {
+		else if (DockingActionIf.DESCRIPTION_PROPERTY.equals(name)) {
 			DockingToolBarUtils.setToolTipText(toolBarButton, toolBarAction);
 		}
-		else if (name.equals(DockingActionIf.TOOLBAR_DATA_PROPERTY)) {
+		else if (DockingActionIf.TOOLBAR_DATA_PROPERTY.equals(name)) {
 			ToolBarData toolBarData = (ToolBarData) e.getNewValue();
 			toolBarButton.setIcon(toolBarData == null ? null : toolBarData.getIcon());
 		}
-		else if (name.equals(ToggleDockingActionIf.SELECTED_STATE_PROPERTY)) {
+		else if (ToggleDockingActionIf.SELECTED_STATE_PROPERTY.equals(name)) {
 			toolBarButton.setSelected((Boolean) e.getNewValue());
 		}
-		else if (name.equals(DockingActionIf.KEYBINDING_DATA_PROPERTY)) {
+		else if (DockingActionIf.KEYBINDING_DATA_PROPERTY.equals(name)) {
 			DockingToolBarUtils.setToolTipText(toolBarButton, toolBarAction);
 		}
 	}
@@ -137,9 +144,7 @@ public class ToolBarItemManager implements PropertyChangeListener, ActionListene
 
 		ComponentProvider provider = getComponentProvider();
 		ActionContext context = provider == null ? null : provider.getActionContext(null);
-		final ActionContext actionContext =
-			context == null ? new ActionContext(provider, null) : context;
-		return actionContext;
+		return context == null ? new ActionContext(provider, null) : context;
 	}
 
 	@Override

@@ -16,30 +16,102 @@
 package ghidra.program.database.code;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Stack;
 
-import db.*;
+import db.DBConstants;
+import db.DBHandle;
+import db.DBRecord;
+import db.RecordIterator;
 import db.util.ErrorHandler;
-import ghidra.program.database.*;
+import ghidra.program.database.DBObjectCache;
+import ghidra.program.database.ManagerDB;
+import ghidra.program.database.ProgramDB;
 import ghidra.program.database.data.DataTypeManagerDB;
-import ghidra.program.database.map.*;
-import ghidra.program.database.properties.*;
+import ghidra.program.database.map.AddressKeyAddressIterator;
+import ghidra.program.database.map.AddressKeyIterator;
+import ghidra.program.database.map.AddressMap;
+import ghidra.program.database.properties.IntPropertyMapDB;
+import ghidra.program.database.properties.LongPropertyMapDB;
+import ghidra.program.database.properties.PropertyMapDB;
+import ghidra.program.database.properties.VoidPropertyMapDB;
 import ghidra.program.database.symbol.SymbolManager;
 import ghidra.program.disassemble.Disassembler;
 import ghidra.program.disassemble.DisassemblerMessageListener;
-import ghidra.program.model.address.*;
-import ghidra.program.model.data.*;
-import ghidra.program.model.lang.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressIterator;
+import ghidra.program.model.address.AddressOutOfBoundsException;
+import ghidra.program.model.address.AddressOverflowException;
+import ghidra.program.model.address.AddressRange;
+import ghidra.program.model.address.AddressRangeImpl;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.address.EmptyAddressIterator;
+import ghidra.program.model.address.SegmentedAddress;
+import ghidra.program.model.data.Array;
+import ghidra.program.model.data.BitFieldDataType;
+import ghidra.program.model.data.Composite;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.DataTypeComponent;
+import ghidra.program.model.data.DefaultDataType;
+import ghidra.program.model.data.Dynamic;
+import ghidra.program.model.data.DynamicDataType;
+import ghidra.program.model.data.FactoryDataType;
+import ghidra.program.model.data.FunctionDefinition;
+import ghidra.program.model.data.PointerDataType;
+import ghidra.program.model.data.Structure;
+import ghidra.program.model.data.TypeDef;
+import ghidra.program.model.lang.InstructionBlock;
+import ghidra.program.model.lang.InstructionError;
 import ghidra.program.model.lang.InstructionError.InstructionErrorType;
-import ghidra.program.model.listing.*;
-import ghidra.program.model.mem.*;
-import ghidra.program.model.symbol.*;
-import ghidra.program.model.util.*;
+import ghidra.program.model.lang.InstructionPrototype;
+import ghidra.program.model.lang.InstructionSet;
+import ghidra.program.model.lang.ProcessorContextView;
+import ghidra.program.model.lang.Register;
+import ghidra.program.model.lang.RegisterValue;
+import ghidra.program.model.listing.CodeUnit;
+import ghidra.program.model.listing.CodeUnitIterator;
+import ghidra.program.model.listing.CommentHistory;
+import ghidra.program.model.listing.ContextChangeException;
+import ghidra.program.model.listing.Data;
+import ghidra.program.model.listing.DataIterator;
+import ghidra.program.model.listing.FlowOverride;
+import ghidra.program.model.listing.Instruction;
+import ghidra.program.model.listing.InstructionIterator;
+import ghidra.program.model.listing.Listing;
+import ghidra.program.model.listing.Program;
+import ghidra.program.model.listing.ProgramContext;
+import ghidra.program.model.mem.MemBuffer;
+import ghidra.program.model.mem.Memory;
+import ghidra.program.model.mem.MemoryBlock;
+import ghidra.program.model.mem.MemoryBufferImpl;
+import ghidra.program.model.symbol.EquateTable;
+import ghidra.program.model.symbol.ExternalLocation;
+import ghidra.program.model.symbol.FlowType;
+import ghidra.program.model.symbol.RefType;
+import ghidra.program.model.symbol.RefTypeFactory;
+import ghidra.program.model.symbol.Reference;
+import ghidra.program.model.symbol.ReferenceManager;
+import ghidra.program.model.symbol.SourceType;
+import ghidra.program.model.symbol.Symbol;
+import ghidra.program.model.symbol.SymbolTable;
+import ghidra.program.model.util.CodeUnitInsertionException;
+import ghidra.program.model.util.PropertyMap;
+import ghidra.program.model.util.PropertyMapManager;
 import ghidra.program.util.ChangeManager;
-import ghidra.util.*;
-import ghidra.util.exception.*;
+import ghidra.util.Lock;
+import ghidra.util.Msg;
+import ghidra.util.SystemUtilities;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.NoValueException;
+import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * Class to manage database tables for data and instructions.
@@ -516,10 +588,7 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 							int dsCount = protoInstr.getDelaySlotDepth();
 							while (dsCount-- != 0 && instructionIterator.hasNext()) {
 								Instruction dsProtoInstr = instructionIterator.next();
-								if (!dsProtoInstr.isInDelaySlot()) {
-									break; // throw new AssertException();
-								}
-								if (skipDelaySlots.contains(dsProtoInstr.getAddress())) {
+								if (!dsProtoInstr.isInDelaySlot() || skipDelaySlots.contains(dsProtoInstr.getAddress())) {
 									break;
 								}
 								delaySlotStack.push(dsProtoInstr);
@@ -829,9 +898,7 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 				// For now dummy back an undefined.
 				return getUndefinedDataDB(address, addr);
 			}
-			// Dummy back a Data for the data type.
-			DataDB dataDB = new DataDB(this, null, addr, address, addr, dataType);
-			return dataDB;
+			return new DataDB(this, null, addr, address, addr, dataType);
 		}
 		return getCodeUnitAt(addr);
 	}
@@ -1059,9 +1126,7 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 						// For now dummy back an undefined.
 						return getUndefinedDataDB(address, addr);
 					}
-					// Dummy back a Data for the data type.
-					DataDB dataDB = new DataDB(this, null, addr, address, addr, dataType);
-					return dataDB;
+					return new DataDB(this, null, addr, address, addr, dataType);
 				}
 			}
 			catch (IOException e) {
@@ -1108,7 +1173,7 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 		Address start = forward ? address : program.getMinAddress();
 		Address end = forward ? program.getMaxAddress() : address;
 
-		if (property.equals(CodeUnit.COMMENT_PROPERTY)) {
+		if (CodeUnit.COMMENT_PROPERTY.equals(property)) {
 			try {
 				AddressKeyIterator iter = commentAdapter.getKeys(start, end, forward);
 				return new CodeUnitKeyIterator(this, iter, forward);
@@ -1117,7 +1182,7 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 				program.dbError(e);
 			}
 		}
-		else if (property.equals(CodeUnit.INSTRUCTION_PROPERTY)) {
+		else if (CodeUnit.INSTRUCTION_PROPERTY.equals(property)) {
 			try {
 				AddressKeyIterator iter = instAdapter.getKeys(start, end, forward);
 				return new CodeUnitKeyIterator(this, iter, forward);
@@ -1126,7 +1191,7 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 				program.dbError(e);
 			}
 		}
-		else if (property.equals(CodeUnit.DEFINED_DATA_PROPERTY)) {
+		else if (CodeUnit.DEFINED_DATA_PROPERTY.equals(property)) {
 			try {
 				AddressKeyIterator iter = dataAdapter.getKeys(start, end, forward);
 				return new CodeUnitKeyIterator(this, iter, forward);
@@ -1182,7 +1247,7 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 			return CodeUnitIterator.EMPTY_ITERATOR;
 		}
 
-		if (property.equals(CodeUnit.COMMENT_PROPERTY)) {
+		if (CodeUnit.COMMENT_PROPERTY.equals(property)) {
 			try {
 				AddressKeyIterator iter = commentAdapter.getKeys(addrSetView, forward);
 				return new CodeUnitKeyIterator(this, iter, forward);
@@ -1191,7 +1256,7 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 				program.dbError(e);
 			}
 		}
-		if (property.equals(CodeUnit.INSTRUCTION_PROPERTY)) {
+		if (CodeUnit.INSTRUCTION_PROPERTY.equals(property)) {
 			try {
 				AddressKeyIterator iter = instAdapter.getKeys(addrSetView, forward);
 				return new CodeUnitKeyIterator(this, iter, forward);
@@ -1200,7 +1265,7 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 				program.dbError(e);
 			}
 		}
-		if (property.equals(CodeUnit.DEFINED_DATA_PROPERTY)) {
+		if (CodeUnit.DEFINED_DATA_PROPERTY.equals(property)) {
 			try {
 				AddressKeyIterator iter = dataAdapter.getKeys(addrSetView, forward);
 				return new CodeUnitKeyIterator(this, iter, forward);
@@ -1338,11 +1403,8 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 			if (cu == null) {
 				DBRecord rec = dataAdapter.getRecord(addr);
 				return getDataDB(rec);
-			}
-			else if (cu instanceof Data) {
-				if (((Data) cu).isDefined()) {
-					return (DataDB) cu;
-				}
+			} else if ((cu instanceof Data) && ((Data) cu).isDefined()) {
+				return (DataDB) cu;
 			}
 		}
 		catch (IOException e) {
@@ -1482,10 +1544,8 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 	public Data getDataBefore(Address addr) {
 		CodeUnitIterator it = getCodeUnits(addr, false);
 		CodeUnit cu = it.next();
-		if (cu != null && !cu.getMinAddress().equals(addr)) {
-			if (cu instanceof Data) {
-				return (Data) cu;
-			}
+		if ((cu != null && !cu.getMinAddress().equals(addr)) && (cu instanceof Data)) {
+			return (Data) cu;
 		}
 		while (it.hasNext()) {
 			cu = it.next();
@@ -1623,10 +1683,8 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 			}
 			data = getDefinedDataBefore(addr);
 
-			if (data != null) {
-				if (data.contains(addr)) {
-					return data;
-				}
+			if ((data != null) && data.contains(addr)) {
+				return data;
 			}
 			return null;
 		}
@@ -1832,9 +1890,7 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 				// For now dummy back an undefined.
 				return getUndefinedDataDB(address, addr);
 			}
-			// Dummy back a Data for the data type.
-			DataDB dataDB = new DataDB(this, null, addr, address, addr, dataType);
-			return dataDB;
+			return new DataDB(this, null, addr, address, addr, dataType);
 		}
 		return null;
 	}
@@ -2179,16 +2235,10 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 		}
 
 		long offset = toAddr.getOffset();
-		if (offset == 0 || offset == toAddr.getAddressSpace().getMaxAddress().getOffset()) {
-			return; // treat 0 and all f's as uninitialized pointer value
-		}
-
 		// for 64 bit programs, make sure we are creating pointers on random bytes which would
 		// pollute our 32 bit segment map and make Ghidra run poorly.
-		if (toAddr.getAddressSpace().getSize() > 32) {
-			if (exceedsLimitOn64BitAddressSegments(longSegmentAddressList, toAddr)) {
-				return; // don't add the reference - probably garbage
-			}
+		if (offset == 0 || offset == toAddr.getAddressSpace().getMaxAddress().getOffset() || ((toAddr.getAddressSpace().getSize() > 32) && exceedsLimitOn64BitAddressSegments(longSegmentAddressList, toAddr))) {
+			return; // don't add the reference - probably garbage
 		}
 
 		addDataReference(data.getMinAddress(), toAddr, true);
@@ -2635,16 +2685,7 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 	 * @return true if all the addresses in the range have undefined data.
 	 */
 	public boolean isUndefined(Address start, Address end) {
-		if (!start.getAddressSpace().equals(end.getAddressSpace())) {
-			return false;
-		}
-		if (!program.getMemory().contains(start, end)) {
-			return false;
-		}
-		if (getInstructionContaining(start) != null) {
-			return false;
-		}
-		if (getDefinedDataContaining(start) != null) {
+		if (!start.getAddressSpace().equals(end.getAddressSpace()) || !program.getMemory().contains(start, end) || (getInstructionContaining(start) != null) || (getDefinedDataContaining(start) != null)) {
 			return false;
 		}
 		AddressRange range = new AddressRangeImpl(start, end);
@@ -2772,8 +2813,7 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 				int protoID = rec.getIntValue(InstDBAdapter.PROTO_ID_COL);
 				byte flags = rec.getByteValue(InstDBAdapter.FLAGS_COL);
 				InstructionPrototype proto = protoMgr.getPrototype(protoID);
-				inst = new InstructionDB(this, cache, address, addr, proto, flags);
-				return inst;
+				return new InstructionDB(this, cache, address, addr, proto, flags);
 			}
 			return null;
 		}
@@ -2799,8 +2839,7 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 				Address address = addrMap.decodeAddress(addr);
 				long datatypeID = rec.getLongValue(DataDBAdapter.DATA_TYPE_ID_COL);
 				DataType dt = dataManager.getDataType(datatypeID);
-				data = new DataDB(this, cache, addr, address, addr, dt);
-				return data;
+				return new DataDB(this, cache, addr, address, addr, dt);
 			}
 			return null;
 
@@ -3163,8 +3202,7 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 	DataType getDataType(DBRecord dataRecord) {
 		if (dataRecord != null) {
 			long datatypeID = dataRecord.getLongValue(DataDBAdapter.DATA_TYPE_ID_COL);
-			DataType dt = dataManager.getDataType(datatypeID);
-			return dt;
+			return dataManager.getDataType(datatypeID);
 		}
 		return null;
 	}
@@ -3190,14 +3228,9 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 				if (address instanceof SegmentedAddress) {
 					address = normalize((SegmentedAddress) address, program.getMemory());
 				}
-				DataDB data =
-					new DataDB(this, cache, addr, address, addr, DefaultDataType.dataType);
-				return data;
-			}
-			else if (cu instanceof Data) {
-				if (!((Data) cu).isDefined()) {
-					return (DataDB) cu;
-				}
+				return new DataDB(this, cache, addr, address, addr, DefaultDataType.dataType);
+			} else if ((cu instanceof Data) && !((Data) cu).isDefined()) {
+				return (DataDB) cu;
 			}
 			return null;
 		}

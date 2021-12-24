@@ -15,6 +15,8 @@
  */
 package ghidra.program.util;
 
+import java.util.Objects;
+
 import ghidra.framework.options.SaveState;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
@@ -86,25 +88,19 @@ public class FunctionNameFieldLocation extends FunctionSignatureFieldLocation {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((functionName == null) ? 0 : functionName.hashCode());
-		return result;
+		return prime * result + ((functionName == null) ? 0 : functionName.hashCode());
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
+		if (!super.equals(obj) || (getClass() != obj.getClass()))
 			return false;
 		FunctionNameFieldLocation other = (FunctionNameFieldLocation) obj;
-		if (functionName == null) {
-			if (other.functionName != null)
-				return false;
-		}
-		else if (!functionName.equals(other.functionName))
+		if (!Objects.equals(functionName, other.functionName)) {
 			return false;
+		}
 		return true;
 	}
 

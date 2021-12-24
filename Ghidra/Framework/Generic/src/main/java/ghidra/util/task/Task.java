@@ -20,7 +20,9 @@ import java.util.Set;
 
 import javax.swing.SwingConstants;
 
-import ghidra.util.*;
+import ghidra.util.Msg;
+import ghidra.util.Swing;
+import ghidra.util.TaskUtilities;
 import ghidra.util.exception.CancelledException;
 
 /**

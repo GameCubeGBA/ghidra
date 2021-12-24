@@ -21,8 +21,8 @@ import javax.swing.ImageIcon;
 
 public interface Playable {
 
-	public ImageIcon getImageIcon();
+	ImageIcon getImageIcon();
 	
-	public void clicked(MouseEvent e);
+	void clicked(MouseEvent e);
 	
 }

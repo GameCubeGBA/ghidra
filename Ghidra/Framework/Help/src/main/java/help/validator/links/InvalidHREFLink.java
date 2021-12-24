@@ -16,9 +16,10 @@
  */
 package help.validator.links;
 
-import help.validator.model.HREF;
-
 import java.nio.file.Path;
+import java.util.Objects;
+
+import help.validator.model.HREF;
 
 public abstract class InvalidHREFLink implements InvalidLink {
 
@@ -28,7 +29,7 @@ public abstract class InvalidHREFLink implements InvalidLink {
 	InvalidHREFLink(HREF href, String message) {
 		this.href = href;
 		this.message = message;
-		if (Boolean.parseBoolean(System.getProperty("ghidra.help.failfast"))) {
+		if (Boolean.getBoolean("ghidra.help.failfast")) {
 			throw new RuntimeException(message + ": " + href);
 		}
 	}
@@ -54,11 +55,7 @@ public abstract class InvalidHREFLink implements InvalidLink {
 
 	@Override
 	public int compareTo(InvalidLink other) {
-		if (other == null) {
-			return 1;
-		}
-
-		if (!(other instanceof InvalidHREFLink)) {
+		if ((other == null) || !(other instanceof InvalidHREFLink)) {
 			return 1; // always put us below other types of Invalid Links
 		}
 		InvalidHREFLink otherLink = (InvalidHREFLink) other;
@@ -95,11 +92,7 @@ public abstract class InvalidHREFLink implements InvalidLink {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((href == null) ? 0 : href.hashCode());
-		result = prime * result + ((message == null) ? 0 : message.hashCode());
-		return result;
+		return Objects.hash(href, message);
 	}
 
 	@Override
@@ -107,28 +100,15 @@ public abstract class InvalidHREFLink implements InvalidLink {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
 		}
 
 		InvalidHREFLink other = (InvalidHREFLink) obj;
-		if (href == null) {
-			if (other.href != null) {
-				return false;
-			}
-		}
-		else if (!href.equals(other.href)) {
+		if (!Objects.equals(href, other.href)) {
 			return false;
 		}
-		if (message == null) {
-			if (other.message != null) {
-				return false;
-			}
-		}
-		else if (!message.equals(other.message)) {
+		if (!Objects.equals(message, other.message)) {
 			return false;
 		}
 		return true;

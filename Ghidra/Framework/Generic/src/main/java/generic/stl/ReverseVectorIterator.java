@@ -16,7 +16,7 @@
  */
 package generic.stl;
 
-import java.util.*;
+import java.util.ArrayList;
 
 class ReverseVectorIterator<T> extends VectorIterator<T> {
 	public ReverseVectorIterator(ArrayList<T> data, int index) {
@@ -99,7 +99,7 @@ class ReverseVectorIterator<T> extends VectorIterator<T> {
 	
 	@Override
     public IteratorSTL<T> copy() {
-		return new ReverseVectorIterator<T>(data, index);
+		return new ReverseVectorIterator<>(data, index);
 	}
 	
 	@Override

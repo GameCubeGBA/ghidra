@@ -33,8 +33,8 @@ import ghidra.util.exception.NotFoundException;
  */
 public interface ProjectManager {
 
-	public static final String APPLICATION_TOOL_EXTENSION = ".tcd";// default extension for tools
-	public static final String APPLICATION_TOOLS_DIR_NAME = "tools";//tools directory name 
+	String APPLICATION_TOOL_EXTENSION = ".tcd";// default extension for tools
+	String APPLICATION_TOOLS_DIR_NAME = "tools";//tools directory name 
 
 	/**
 	 * Create a project on the local filesystem.
@@ -46,59 +46,59 @@ public interface ProjectManager {
 	 * @return the new project
 	 * @throws IOException if user cannot access/write the project location
 	 */
-	public Project createProject(ProjectLocator projectLocator, RepositoryAdapter repAdapter,
+	Project createProject(ProjectLocator projectLocator, RepositoryAdapter repAdapter,
 			boolean remember) throws IOException;
 
 	/**
 	 * Get list of projects that user most recently opened.
 	 * @return list of project URLs 
 	 */
-	public ProjectLocator[] getRecentProjects();
+	ProjectLocator[] getRecentProjects();
 
 	/**
 	 * Get list of projects that user most recently viewed.
 	 * @return list of project URLs 
 	 */
-	public URL[] getRecentViewedProjects();
+	URL[] getRecentViewedProjects();
 
 	/**
 	 * Get the project that is currently open.
 	 * @return currently open project, return null if there is no
 	 * project opened
 	 */
-	public Project getActiveProject();
+	Project getActiveProject();
 
 	/**
 	 * Get the last opened (active) project.
 	 * @return project last opened by the user; returns NULL if a project
 	 * was never opened OR the last opened project is no longer valid
 	 */
-	public ProjectLocator getLastOpenedProject();
+	ProjectLocator getLastOpenedProject();
 
 	/**
 	 * Set the projectLocator of last opened (active) project; this projectLocator is returned
 	 * in the getLastOpenedProject() method.
 	 * @param projectLocator project location of last project that was opened
 	 */
-	public void setLastOpenedProject(ProjectLocator projectLocator);
+	void setLastOpenedProject(ProjectLocator projectLocator);
 
 	/**
 	 * Keep the projectLocator on the list of known projects.
 	 * @param projectLocator project location
 	 */
-	public void rememberProject(ProjectLocator projectLocator);
+	void rememberProject(ProjectLocator projectLocator);
 
 	/**
 	 * Keep the url on the list of known projects.
 	 * @param url project identifier
 	 */
-	public void rememberViewedProject(URL url);
+	void rememberViewedProject(URL url);
 
 	/**
 	 * Remove the project url from the list of known viewed projects.
 	 * @param url project identifier
 	 */
-	public void forgetViewedProject(URL url);
+	void forgetViewedProject(URL url);
 
 	/**
 	 * Open a project from the file system. Add the project url
@@ -112,7 +112,7 @@ public interface ProjectManager {
 	 * @throws NotOwnerException if the project owner is not the user
 	 * @throws LockException if the project is already opened by another user
 	 */
-	public Project openProject(ProjectLocator projectLocator, boolean doRestore, boolean resetOwner)
+	Project openProject(ProjectLocator projectLocator, boolean doRestore, boolean resetOwner)
 			throws NotFoundException, NotOwnerException, LockException;
 
 	/**
@@ -121,13 +121,13 @@ public interface ProjectManager {
 	 * @param projectLocator project location
 	 * @return false if no project was deleted.
 	 */
-	public boolean deleteProject(ProjectLocator projectLocator);
+	boolean deleteProject(ProjectLocator projectLocator);
 
 	/**
 	 * Returns true if a project with the given projectLocator exists.
 	 * @param projectLocator project location
 	 */
-	public boolean projectExists(ProjectLocator projectLocator);
+	boolean projectExists(ProjectLocator projectLocator);
 
 	/**
 	 * Establish a connection to the given host and port number. 
@@ -136,18 +136,18 @@ public interface ProjectManager {
 	 * @param forceConnect if true and currently not connected, an attempt will be be to connect
 	 * @return a handle to the remote server containing shared repositories
 	 */
-	public RepositoryServerAdapter getRepositoryServerAdapter(String host, int portNumber,
+	RepositoryServerAdapter getRepositoryServerAdapter(String host, int portNumber,
 			boolean forceConnect);
 
 	/**
 	 * Get the information that was last used to access a repository
 	 * managed by a Ghidra server.
 	 */
-	public ServerInfo getMostRecentServerInfo();
+	ServerInfo getMostRecentServerInfo();
 
 	/**
 	 * Return the user's ToolChest
 	 */
-	public ToolChest getUserToolChest();
+	ToolChest getUserToolChest();
 
 }

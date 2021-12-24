@@ -16,12 +16,19 @@
 package ghidra.framework.main.datatable;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
-import docking.widgets.table.*;
+import docking.widgets.table.AbstractDynamicTableColumn;
+import docking.widgets.table.DynamicTableColumn;
+import docking.widgets.table.TableColumnDescriptor;
 import docking.widgets.table.threaded.ThreadedTableModel;
 import ghidra.docking.settings.Settings;
-import ghidra.framework.model.*;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.DomainFolder;
+import ghidra.framework.model.ProjectData;
 import ghidra.framework.plugintool.ServiceProvider;
 import ghidra.util.InvalidNameException;
 import ghidra.util.Msg;
@@ -161,7 +168,7 @@ public class ProjectDataTableModel extends ThreadedTableModel<DomainFileInfo, Pr
 // Inner Classes
 //==================================================================================================
 
-	private class DomainFileTypeColumn
+	private static class DomainFileTypeColumn
 	extends AbstractDynamicTableColumn<DomainFileInfo, DomainFileType, ProjectData> {
 
 		@Override
@@ -181,7 +188,7 @@ public class ProjectDataTableModel extends ThreadedTableModel<DomainFileInfo, Pr
 		}
 	}
 
-	private class DomainFileNameColumn
+	private static class DomainFileNameColumn
 	extends AbstractDynamicTableColumn<DomainFileInfo, String, ProjectData> {
 
 		@Override
@@ -202,7 +209,7 @@ public class ProjectDataTableModel extends ThreadedTableModel<DomainFileInfo, Pr
 		}
 	}
 
-	private class ModificationDateColumn
+	private static class ModificationDateColumn
 	extends AbstractDynamicTableColumn<DomainFileInfo, Date, ProjectData> {
 
 		@Override
@@ -223,7 +230,7 @@ public class ProjectDataTableModel extends ThreadedTableModel<DomainFileInfo, Pr
 		}
 	}
 
-	private class DomainFilePathColumn
+	private static class DomainFilePathColumn
 	extends AbstractDynamicTableColumn<DomainFileInfo, String, ProjectData> {
 
 		@Override

@@ -16,23 +16,35 @@
  */
 package ghidra.pcodeCPort.slgh_compile.regression;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Iterator;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import org.antlr.runtime.RecognitionException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jdom.JDOMException;
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 import generic.jar.ResourceFile;
 import generic.test.AbstractGenericTest;
 import generic.test.category.NightlyCategory;
-import ghidra.framework.*;
+import ghidra.framework.Application;
+import ghidra.framework.LoggingInitialization;
+import ghidra.framework.OperatingSystem;
+import ghidra.framework.Platform;
 import ghidra.pcodeCPort.slgh_compile.SleighCompileLauncher;
 
 @Category(NightlyCategory.class)
@@ -64,7 +76,7 @@ public class SleighCompileRegressionTest extends AbstractGenericTest {
 	@Test
 	public void testExternal() throws Exception {
 
-		StringBuffer summary = new StringBuffer();
+		StringBuilder summary = new StringBuilder();
 
 		LoggingInitialization.initializeLoggingSystem();
 		List<ResourceFile> inputs = getSlaspecFiles();
@@ -126,8 +138,7 @@ public class SleighCompileRegressionTest extends AbstractGenericTest {
 		new IOThread(process.getInputStream()).start();
 		new IOThread(process.getErrorStream()).start();
 
-		int retval = process.waitFor();
-		return retval;
+		return process.waitFor();
 	}
 
 	private String getCppSleighCompilerForArch() throws FileNotFoundException {
@@ -142,7 +153,7 @@ public class SleighCompileRegressionTest extends AbstractGenericTest {
 		return file.getAbsolutePath();
 	}
 
-	private class IOThread extends Thread {
+	private static class IOThread extends Thread {
 		private BufferedReader shellOutput;
 
 		public IOThread(InputStream input) {
@@ -212,14 +223,11 @@ public class SleighCompileRegressionTest extends AbstractGenericTest {
 							targetLineNumber + ":\nEXPECTED:\n" + target + "\nACTUAL:\n" + actual,
 						target.equals(actual));
 					continue;
-				}
-				else if (!bothSpace) {
-					// expected absent trailing space in Java version
-					if (!TPLMATCH.matcher(actual).find()) {
-						ok &= itsOK("difference (space!) on actual line " + actualLineNumber +
-							", target line " + targetLineNumber + ":\nEXPECTED:\n" + target +
-							"\nACTUAL:\n" + actual, false);
-					}
+				} else // expected absent trailing space in Java version
+				if (!bothSpace && !TPLMATCH.matcher(actual).find()) {
+					ok &= itsOK("difference (space!) on actual line " + actualLineNumber +
+						", target line " + targetLineNumber + ":\nEXPECTED:\n" + target +
+						"\nACTUAL:\n" + actual, false);
 				}
 
 				while (actualIsSpace) {
@@ -250,9 +258,7 @@ public class SleighCompileRegressionTest extends AbstractGenericTest {
 	}
 
 	private List<ResourceFile> getSlaspecFiles() {
-		List<ResourceFile> allSlaspecFiles =
-			Application.findFilesByExtensionInApplication(".slaspec");
-		return allSlaspecFiles;
+		return Application.findFilesByExtensionInApplication(".slaspec");
 
 //		Predicate<ResourceFile> predicate = new Predicate<ResourceFile>() {
 //			@Override

@@ -17,7 +17,10 @@ package ghidra;
 
 import java.io.File;
 import java.lang.instrument.Instrumentation;
-import java.net.*;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLClassLoader;
 
 import ghidra.util.Msg;
 

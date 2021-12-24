@@ -16,6 +16,8 @@
  */
 package generic.stl;
 
+import java.util.Objects;
+
 import ghidra.util.SystemUtilities;
 
 public class Pair<T1, T2> {
@@ -23,7 +25,7 @@ public class Pair<T1, T2> {
 	public final T2 second;
 
 	public static <T1, T2> Pair<T1, T2> emptyPair() {
-		return new Pair<T1, T2>(null, null);
+		return new Pair<>(null, null);
 	}
 
 	public Pair(T1 key, T2 value) {
@@ -38,11 +40,7 @@ public class Pair<T1, T2> {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((first == null) ? 0 : first.hashCode());
-		result = prime * result + ((second == null) ? 0 : second.hashCode());
-		return result;
+		return Objects.hash(first, second);
 	}
 
 	@Override
@@ -50,10 +48,7 @@ public class Pair<T1, T2> {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
 		}
 		@SuppressWarnings("unchecked")

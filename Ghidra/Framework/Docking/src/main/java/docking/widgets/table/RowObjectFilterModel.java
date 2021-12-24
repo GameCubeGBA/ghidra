@@ -40,21 +40,21 @@ public interface RowObjectFilterModel<ROW_OBJECT> extends RowObjectTableModel<RO
 	 *
 	 * <p>Most tables do not have enough data for this to have a significant impact.
 	 */
-	public static String SUB_FILTERING_DISABLED_PROPERTY = "tables.subfilter.disabled";
+	String SUB_FILTERING_DISABLED_PROPERTY = "tables.subfilter.disabled";
 
-	public void setTableFilter(TableFilter<ROW_OBJECT> filter);
+	void setTableFilter(TableFilter<ROW_OBJECT> filter);
 
-	public TableFilter<ROW_OBJECT> getTableFilter();
+	TableFilter<ROW_OBJECT> getTableFilter();
 
-	public boolean isFiltered();
+	boolean isFiltered();
 
-	public int getUnfilteredRowCount();
+	int getUnfilteredRowCount();
 
-	public List<ROW_OBJECT> getUnfilteredData();
+	List<ROW_OBJECT> getUnfilteredData();
 
-	public int getModelRow(int viewRow);
+	int getModelRow(int viewRow);
 
-	public int getViewRow(int modelRow);
+	int getViewRow(int modelRow);
 
 	/**
 	 * Returns the view index of the given item.  When filtered, this is the index is the smaller,
@@ -67,7 +67,7 @@ public interface RowObjectFilterModel<ROW_OBJECT> extends RowObjectTableModel<RO
 	 * @param t the item 
 	 * @return the view index
 	 */
-	public int getViewIndex(ROW_OBJECT t);
+	int getViewIndex(ROW_OBJECT t);
 
 	/**
 	 * Returns the model index of the given item.  When filtered, this is the index is the larger,
@@ -80,5 +80,5 @@ public interface RowObjectFilterModel<ROW_OBJECT> extends RowObjectTableModel<RO
 	 * @param t the item 
 	 * @return the model index
 	 */
-	public int getModelIndex(ROW_OBJECT t);
+	int getModelIndex(ROW_OBJECT t);
 }

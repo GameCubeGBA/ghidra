@@ -15,7 +15,9 @@
  */
 package ghidra.graph;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * A directed graph that need not be constructed explicitly
@@ -41,7 +43,7 @@ public interface GImplicitDirectedGraph<V, E extends GEdge<V>> {
 	 * @param v the destination vertex
 	 * @return the in-edges to the given vertex
 	 */
-	public Collection<E> getInEdges(V v);
+	Collection<E> getInEdges(V v);
 
 	/**
 	 * Compute the incident edges that start at the given vertex
@@ -52,7 +54,7 @@ public interface GImplicitDirectedGraph<V, E extends GEdge<V>> {
 	 * @param v the source vertex
 	 * @return the out-edges from the given vertex
 	 */
-	public Collection<E> getOutEdges(V v);
+	Collection<E> getOutEdges(V v);
 
 	/**
 	 * Compute a vertex's predecessors
@@ -65,7 +67,7 @@ public interface GImplicitDirectedGraph<V, E extends GEdge<V>> {
 	 * @param v the destination vertex
 	 * @return the predecessors
 	 */
-	public default Collection<V> getPredecessors(V v) {
+	default Collection<V> getPredecessors(V v) {
 		Set<V> result = new LinkedHashSet<>();
 		for (E edge : getInEdges(v)) {
 			result.add(edge.getStart());
@@ -84,7 +86,7 @@ public interface GImplicitDirectedGraph<V, E extends GEdge<V>> {
 	 * @param v the source vertex
 	 * @return the successors
 	 */
-	public default Collection<V> getSuccessors(V v) {
+	default Collection<V> getSuccessors(V v) {
 		Set<V> result = new LinkedHashSet<>();
 		for (E edge : getOutEdges(v)) {
 			result.add(edge.getEnd());
@@ -98,5 +100,5 @@ public interface GImplicitDirectedGraph<V, E extends GEdge<V>> {
 	 * Usually, this returns the cached (explored) portion of the graph
 	 * @return a "copy" of this implicit graph
 	 */
-	public GDirectedGraph<V, E> copy();
+	GDirectedGraph<V, E> copy();
 }

@@ -17,23 +17,36 @@ package ghidra.test;
 
 import java.awt.Window;
 import java.beans.PropertyChangeListener;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Set;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.event.ChangeListener;
 
 import org.jdom.Element;
 
-import docking.*;
+import docking.ComponentProvider;
+import docking.DialogComponentProvider;
+import docking.DockingContextListener;
+import docking.DockingWindowManager;
 import docking.action.DockingActionIf;
 import docking.actions.DockingToolActions;
 import docking.actions.PopupActionProvider;
 import docking.util.image.ToolIconURL;
-import ghidra.framework.model.*;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.DomainObject;
+import ghidra.framework.model.Project;
+import ghidra.framework.model.ToolListener;
+import ghidra.framework.model.ToolTemplate;
 import ghidra.framework.options.ToolOptions;
 import ghidra.framework.plugintool.PluginEvent;
 import ghidra.framework.plugintool.PluginTool;
-import ghidra.framework.plugintool.util.*;
+import ghidra.framework.plugintool.util.PluginClassManager;
+import ghidra.framework.plugintool.util.ServiceListener;
+import ghidra.framework.plugintool.util.UndoRedoToolState;
 import ghidra.program.model.listing.Program;
 
 public class DummyTool extends PluginTool {

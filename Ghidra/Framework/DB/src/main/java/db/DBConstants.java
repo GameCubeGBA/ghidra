@@ -17,9 +17,9 @@
 package db;
 
 public interface DBConstants {
-	public int CREATE = 0;
-	public int UPDATE = 1;
-	public int READ_ONLY = 2;
-	public int UPGRADE = 3;
+	int CREATE = 0;
+	int UPDATE = 1;
+	int READ_ONLY = 2;
+	int UPGRADE = 3;
 
 }

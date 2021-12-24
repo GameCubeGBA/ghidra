@@ -16,19 +16,19 @@
  */
 package ghidra.pcodeCPort.slghpattern;
 
-import generic.stl.IteratorSTL;
-import generic.stl.VectorSTL;
-import ghidra.pcodeCPort.context.ParserWalker;
-
 import java.io.PrintStream;
 import java.util.Iterator;
 import java.util.List;
 
 import org.jdom.Element;
 
+import generic.stl.IteratorSTL;
+import generic.stl.VectorSTL;
+import ghidra.pcodeCPort.context.ParserWalker;
+
 public class OrPattern extends Pattern {
 
-	private VectorSTL<DisjointPattern> orlist = new VectorSTL<DisjointPattern>();
+	private VectorSTL<DisjointPattern> orlist = new VectorSTL<>();
 
 	public OrPattern() {
 	} // For use with restoreXml
@@ -121,7 +121,7 @@ public class OrPattern extends Pattern {
 
 	@Override
 	public Pattern doAnd(Pattern b, int sa) {
-		VectorSTL<DisjointPattern> newlist = new VectorSTL<DisjointPattern>();
+		VectorSTL<DisjointPattern> newlist = new VectorSTL<>();
 		if (b instanceof OrPattern) {
 			OrPattern b2 = (OrPattern) b;
 			IteratorSTL<DisjointPattern> iter, iter2;
@@ -165,7 +165,7 @@ public class OrPattern extends Pattern {
 
 	@Override
 	public Pattern doOr(Pattern b, int sa) {
-		VectorSTL<DisjointPattern> newlist = new VectorSTL<DisjointPattern>();
+		VectorSTL<DisjointPattern> newlist = new VectorSTL<>();
 		IteratorSTL<DisjointPattern> iter;
 
 		for (iter = orlist.begin(); !iter.isEnd(); iter.increment()) {
@@ -205,7 +205,7 @@ public class OrPattern extends Pattern {
 			}
 		}
 
-		VectorSTL<DisjointPattern> newlist = new VectorSTL<DisjointPattern>();
+		VectorSTL<DisjointPattern> newlist = new VectorSTL<>();
 		for (iter = orlist.begin(); !iter.isEnd(); iter.increment()) {// Look for alwaysFalse
 			if (!iter.get().alwaysFalse()) {
 				newlist.push_back((DisjointPattern) iter.get().simplifyClone());

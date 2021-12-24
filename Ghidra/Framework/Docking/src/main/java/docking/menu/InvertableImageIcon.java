@@ -16,8 +16,13 @@
  */
 package docking.menu;
 
-import java.awt.*;
-import java.awt.image.*;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.image.FilteredImageSource;
+import java.awt.image.ImageProducer;
+import java.awt.image.RGBImageFilter;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -63,6 +68,7 @@ class InvertableImageIcon implements Icon {
 	/**
 	 * @see javax.swing.Icon#getIconHeight()
 	 */
+	@Override
 	public int getIconHeight() {
 		return icon.getIconHeight();
 	}
@@ -70,6 +76,7 @@ class InvertableImageIcon implements Icon {
 	/**
 	 * @see javax.swing.Icon#getIconWidth()
 	 */
+	@Override
 	public int getIconWidth() {
 		return icon.getIconWidth();
 	}
@@ -77,6 +84,7 @@ class InvertableImageIcon implements Icon {
 	/**
 	 * @see javax.swing.Icon#paintIcon(java.awt.Component, java.awt.Graphics, int, int)
 	 */
+	@Override
 	public void paintIcon(Component c, Graphics g, int x, int y) {
 		icon.paintIcon(c, g, x, y);
 	}

@@ -15,6 +15,8 @@
  */
 package ghidra.graph;
 
+import java.util.Objects;
+
 import ghidra.util.SystemUtilities;
 
 public class DefaultGEdge<V> implements GEdge<V> {
@@ -44,11 +46,7 @@ public class DefaultGEdge<V> implements GEdge<V> {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((end == null) ? 0 : end.hashCode());
-		result = prime * result + ((start == null) ? 0 : start.hashCode());
-		return result;
+		return Objects.hash(end, start);
 	}
 
 	@Override
@@ -56,10 +54,7 @@ public class DefaultGEdge<V> implements GEdge<V> {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
 		}
 

@@ -17,13 +17,26 @@ package ghidra.program.database;
 
 import java.io.IOException;
 import java.math.BigInteger;
-import java.util.*;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
-import db.*;
+import db.DBConstants;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.Schema;
+import db.StringField;
+import db.Table;
 import ghidra.app.plugin.processors.sleigh.SleighLanguage;
 import ghidra.framework.Application;
 import ghidra.framework.data.DomainObjectAdapterDB;
-import ghidra.framework.model.*;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.DomainObject;
+import ghidra.framework.model.DomainObjectChangeRecord;
 import ghidra.framework.options.Options;
 import ghidra.framework.store.FileSystem;
 import ghidra.framework.store.LockException;
@@ -42,20 +55,77 @@ import ghidra.program.database.properties.DBPropertyMapManager;
 import ghidra.program.database.references.ReferenceDBManager;
 import ghidra.program.database.register.ProgramRegisterContextDB;
 import ghidra.program.database.reloc.RelocationManager;
-import ghidra.program.database.symbol.*;
+import ghidra.program.database.symbol.EquateManager;
+import ghidra.program.database.symbol.NamespaceManager;
+import ghidra.program.database.symbol.SymbolManager;
+import ghidra.program.database.symbol.VariableSymbolDB;
 import ghidra.program.database.util.AddressSetPropertyMapDB;
-import ghidra.program.model.address.*;
-import ghidra.program.model.lang.*;
-import ghidra.program.model.listing.*;
-import ghidra.program.model.mem.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressFormatException;
+import ghidra.program.model.address.AddressOutOfBoundsException;
+import ghidra.program.model.address.AddressOverflowException;
+import ghidra.program.model.address.AddressRange;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.address.GlobalNamespace;
+import ghidra.program.model.address.OldGenericNamespaceAddress;
+import ghidra.program.model.address.OverlayAddressSpace;
+import ghidra.program.model.lang.BasicCompilerSpec;
+import ghidra.program.model.lang.CompilerSpec;
+import ghidra.program.model.lang.CompilerSpecID;
+import ghidra.program.model.lang.CompilerSpecNotFoundException;
+import ghidra.program.model.lang.Language;
+import ghidra.program.model.lang.LanguageCompilerSpecPair;
+import ghidra.program.model.lang.LanguageID;
+import ghidra.program.model.lang.LanguageNotFoundException;
+import ghidra.program.model.lang.OldLanguageMappingService;
+import ghidra.program.model.lang.Register;
+import ghidra.program.model.lang.RegisterValue;
+import ghidra.program.model.listing.BookmarkManager;
+import ghidra.program.model.listing.ContextChangeException;
+import ghidra.program.model.listing.Function;
+import ghidra.program.model.listing.FunctionManager;
+import ghidra.program.model.listing.FunctionTag;
+import ghidra.program.model.listing.IncompatibleLanguageException;
+import ghidra.program.model.listing.InstructionIterator;
+import ghidra.program.model.listing.Listing;
+import ghidra.program.model.listing.Program;
+import ghidra.program.model.listing.ProgramChangeSet;
+import ghidra.program.model.listing.ProgramContext;
+import ghidra.program.model.listing.ProgramUserData;
+import ghidra.program.model.mem.Memory;
+import ghidra.program.model.mem.MemoryBlock;
+import ghidra.program.model.mem.MemoryConflictException;
 import ghidra.program.model.pcode.Varnode;
 import ghidra.program.model.reloc.RelocationTable;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.EquateTable;
+import ghidra.program.model.symbol.ExternalManager;
+import ghidra.program.model.symbol.Namespace;
+import ghidra.program.model.symbol.ReferenceManager;
+import ghidra.program.model.symbol.Symbol;
+import ghidra.program.model.symbol.SymbolTable;
+import ghidra.program.model.symbol.SymbolType;
 import ghidra.program.model.util.AddressSetPropertyMap;
 import ghidra.program.model.util.PropertyMapManager;
-import ghidra.program.util.*;
-import ghidra.util.*;
-import ghidra.util.exception.*;
+import ghidra.program.util.ChangeManager;
+import ghidra.program.util.CodeUnitPropertyChangeRecord;
+import ghidra.program.util.CodeUnitUserDataChangeRecord;
+import ghidra.program.util.DefaultLanguageService;
+import ghidra.program.util.LanguageTranslator;
+import ghidra.program.util.LanguageTranslatorFactory;
+import ghidra.program.util.OldLanguageFactory;
+import ghidra.program.util.ProgramChangeRecord;
+import ghidra.program.util.ProgramUtilities;
+import ghidra.program.util.UserDataChangeRecord;
+import ghidra.util.Msg;
+import ghidra.util.StringUtilities;
+import ghidra.util.UniversalID;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.DuplicateNameException;
+import ghidra.util.exception.RollbackException;
+import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
 
 /**
@@ -139,8 +209,8 @@ public class ProgramDB extends DomainObjectAdapterDB implements Program, ChangeM
 	private static final String EXECUTE_FORMAT = "Execute Format";
 	private static final String IMAGE_OFFSET = "Image Offset";
 
-	private final static Field[] COL_FIELDS = new Field[] { StringField.INSTANCE };
-	private final static String[] COL_TYPES = new String[] { "Value" };
+	private final static Field[] COL_FIELDS = { StringField.INSTANCE };
+	private final static String[] COL_TYPES = { "Value" };
 	private final static Schema SCHEMA =
 		new Schema(0, StringField.INSTANCE, "Key", COL_FIELDS, COL_TYPES);
 
@@ -1312,7 +1382,7 @@ public class ProgramDB extends DomainObjectAdapterDB implements Program, ChangeM
 		lock.acquire();
 		try {
 			Address currentImageBase = getImageBase();
-			if (!(commit && imageBaseOverride) && base.equals(currentImageBase)) {
+			if ((!commit || !imageBaseOverride) && base.equals(currentImageBase)) {
 				return;
 			}
 // image base can be changed with overlays - they simply will not move.
@@ -2172,10 +2242,7 @@ public class ProgramDB extends DomainObjectAdapterDB implements Program, ChangeM
 	 */
 	private void repairARMContext(int oldLanguageVersion, int oldLanguageMinorVersion,
 			LanguageTranslator translator, TaskMonitor monitor) throws CancelledException {
-		if (!(language instanceof SleighLanguage)) {
-			return;
-		}
-		if (oldLanguageVersion != 1 || oldLanguageMinorVersion >= 6) {
+		if (!(language instanceof SleighLanguage) || oldLanguageVersion != 1 || oldLanguageMinorVersion >= 6) {
 			return;
 		}
 		monitor.setMessage("Checking ARM Context...");

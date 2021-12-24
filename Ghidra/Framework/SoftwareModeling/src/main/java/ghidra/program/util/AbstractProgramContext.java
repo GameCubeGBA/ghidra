@@ -18,7 +18,9 @@ package ghidra.program.util;
 import java.util.Arrays;
 import java.util.List;
 
-import ghidra.program.model.lang.*;
+import ghidra.program.model.lang.Language;
+import ghidra.program.model.lang.Register;
+import ghidra.program.model.lang.RegisterValue;
 import ghidra.program.model.listing.DefaultProgramContext;
 import ghidra.program.model.listing.ProgramContext;
 

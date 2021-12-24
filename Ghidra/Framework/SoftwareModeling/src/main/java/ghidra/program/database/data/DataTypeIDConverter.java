@@ -15,14 +15,19 @@
  */
 package ghidra.program.database.data;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Iterator;
 
 import ghidra.GhidraApplicationLayout;
 import ghidra.GhidraLaunchable;
 import ghidra.framework.Application;
 import ghidra.framework.ApplicationConfiguration;
-import ghidra.program.model.data.*;
+import ghidra.program.model.data.BuiltInDataType;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.FileDataTypeManager;
 import ghidra.util.NumericUtilities;
 import ghidra.util.UniversalID;
 import ghidra.util.datastruct.LongLongHashtable;
@@ -78,11 +83,7 @@ public class DataTypeIDConverter implements GhidraLaunchable {
 		try {
 			loadMap(idMapFile);
 		}
-		catch (InvalidInputException e) {
-			e.printStackTrace();
-			return;
-		}
-		catch (IOException e) {
+		catch (InvalidInputException | IOException e) {
 			e.printStackTrace();
 			return;
 		}
@@ -98,10 +99,7 @@ public class DataTypeIDConverter implements GhidraLaunchable {
 
 			oldFileArchive.saveAs(outFile, newFileID);
 		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-		catch (NoValueException e) {
+		catch (IOException | NoValueException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -118,9 +116,7 @@ public class DataTypeIDConverter implements GhidraLaunchable {
 		// followed by a space and then a new ID in Hex.
 		idMap = new LongLongHashtable();
 		FileReader reader = new FileReader(idMapFile);
-		BufferedReader bufferedReader = null;
-		try {
-			bufferedReader = new BufferedReader(reader);
+		try (BufferedReader bufferedReader = new BufferedReader(reader)) {
 			String line;
 			while ((line = bufferedReader.readLine()) != null) {
 				// Parse the two hex Data Type Universal IDs from the line.
@@ -142,16 +138,8 @@ public class DataTypeIDConverter implements GhidraLaunchable {
 //					Long.toHexString(newID));
 			}
 		}
-		catch (NumberFormatException e) {
+		catch (NumberFormatException | IOException e) {
 			e.printStackTrace();
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-		finally {
-			if (bufferedReader != null) {
-				bufferedReader.close();
-			}
 		}
 	}
 

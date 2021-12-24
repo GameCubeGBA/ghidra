@@ -16,9 +16,15 @@
 package docking.widgets.numberformat;
 
 import java.awt.Toolkit;
-import java.text.*;
+import java.text.DecimalFormat;
+import java.text.Format;
+import java.text.ParseException;
 
-import javax.swing.text.*;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
+import javax.swing.text.DocumentFilter;
+import javax.swing.text.NumberFormatter;
 
 class BoundedRangeDecimalFormatter extends NumberFormatter {
 
@@ -106,14 +112,10 @@ class BoundedRangeDecimalFormatter extends NumberFormatter {
 		}
 
 		private boolean isValidText(String text) {
-			if (".".equals(text) || "".equals(text)) {
-				return true; // special case, let the decimal through
-			}
-			
 			// Another special case; let the '-' through if it's
 			// the first character (user is entering a negative number). But 
 			// only allow this if the lower bound is negative.
-			if (text.equals("-") && lowerRangeValue < 0) {
+			if (".".equals(text) || "".equals(text) || ("-".equals(text) && lowerRangeValue < 0)) {
 				return true;
 			}
 

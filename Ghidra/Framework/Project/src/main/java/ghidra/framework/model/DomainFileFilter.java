@@ -30,5 +30,5 @@ public interface DomainFileFilter {
      * @return  <code>true</code> if and only if <code>df</code>
      * 
      */
-    public boolean accept(DomainFile df);
+    boolean accept(DomainFile df);
 }

@@ -19,27 +19,27 @@ package ghidra.xml;
 import java.util.Map;
 
 public interface XmlElement {
-	public int getLevel();
+	int getLevel();
 
-	public boolean isStart();
+	boolean isStart();
 
-	public boolean isEnd();
+	boolean isEnd();
 
-	public boolean isContent();
+	boolean isContent();
 
-	public String getName();
+	String getName();
 
-	public Map<String, String> getAttributes();
+	Map<String, String> getAttributes();
 
-	public boolean hasAttribute(String key);
+	boolean hasAttribute(String key);
 
-	public String getAttribute(String key);
+	String getAttribute(String key);
 
-	public String getText();
+	String getText();
 
-	public int getColumnNumber();
+	int getColumnNumber();
 
-	public int getLineNumber();
+	int getLineNumber();
 
-	public void setAttribute(String key, String value);
+	void setAttribute(String key, String value);
 }

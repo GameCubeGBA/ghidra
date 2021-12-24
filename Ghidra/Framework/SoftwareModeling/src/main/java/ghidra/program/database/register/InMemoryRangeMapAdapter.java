@@ -16,7 +16,9 @@
  */
 package ghidra.program.database.register;
 
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressRange;
+import ghidra.program.model.address.AddressRangeIterator;
 import ghidra.program.model.lang.Register;
 import ghidra.program.model.lang.RegisterValue;
 import ghidra.program.util.LanguageTranslator;
@@ -28,7 +30,7 @@ public class InMemoryRangeMapAdapter implements RangeMapAdapter {
 	private AddressRangeObjectMap<byte[]> rangeMap;
 
 	public InMemoryRangeMapAdapter() {
-		rangeMap = new AddressRangeObjectMap<byte[]>();
+		rangeMap = new AddressRangeObjectMap<>();
 	}
 
 	/**
@@ -44,7 +46,7 @@ public class InMemoryRangeMapAdapter implements RangeMapAdapter {
 	 */
 	@Override
 	public void clearAll() {
-		rangeMap = new AddressRangeObjectMap<byte[]>();
+		rangeMap = new AddressRangeObjectMap<>();
 	}
 
 	/**
@@ -127,7 +129,7 @@ public class InMemoryRangeMapAdapter implements RangeMapAdapter {
 			return;
 		}
 
-		AddressRangeObjectMap<byte[]> newRangeMap = new AddressRangeObjectMap<byte[]>();
+		AddressRangeObjectMap<byte[]> newRangeMap = new AddressRangeObjectMap<>();
 		AddressRangeIterator addressRangeIterator = rangeMap.getAddressRangeIterator();
 		while (addressRangeIterator.hasNext()) {
 			monitor.checkCanceled();

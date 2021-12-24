@@ -15,12 +15,12 @@
  */
 package ghidra.program.database.code;
 
+import java.util.Iterator;
+
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressIterator;
 import ghidra.program.model.listing.Listing;
 import ghidra.program.model.listing.Program;
-
-import java.util.Iterator;
 
 /**
  * Filters the given address iterator to only return addresses that have a comment of the given type

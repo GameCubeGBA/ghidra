@@ -15,32 +15,72 @@
  */
 package docking.widgets.table;
 
-import static docking.DockingUtils.*;
-import static docking.action.MenuData.*;
-import static java.awt.event.InputEvent.*;
+import static docking.DockingUtils.CONTROL_KEY_MODIFIER_MASK;
+import static docking.action.MenuData.NO_MNEMONIC;
+import static java.awt.event.InputEvent.SHIFT_DOWN_MASK;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.table.*;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import javax.swing.JTable;
+import javax.swing.KeyStroke;
+import javax.swing.ListSelectionModel;
+import javax.swing.ToolTipManager;
+import javax.swing.TransferHandler;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
+import javax.swing.event.TableColumnModelEvent;
+import javax.swing.event.TableColumnModelListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
 
-import docking.*;
-import docking.action.*;
+import docking.ActionContext;
+import docking.DockingWindowManager;
+import docking.Tool;
+import docking.action.ComponentBasedDockingAction;
+import docking.action.DockingAction;
+import docking.action.KeyBindingData;
+import docking.action.MenuData;
 import docking.actions.KeyBindingUtils;
 import docking.actions.ToolActions;
 import docking.widgets.AutoLookup;
 import docking.widgets.OptionDialog;
 import docking.widgets.dialogs.SettingsDialog;
 import docking.widgets.filechooser.GhidraFileChooser;
-import ghidra.docking.settings.*;
+import ghidra.docking.settings.Settings;
+import ghidra.docking.settings.SettingsDefinition;
+import ghidra.docking.settings.SettingsImpl;
 import ghidra.framework.preferences.Preferences;
-import ghidra.util.*;
+import ghidra.util.HTMLUtilities;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
 import ghidra.util.exception.AssertException;
 import resources.ResourceManager;
 
@@ -335,12 +375,7 @@ public class GTable extends JTable {
 			autoLookupListener = new KeyAdapter() {
 				@Override
 				public void keyPressed(KeyEvent e) {
-					if (enableActionKeyBindings) {
-						// actions will consume key bindings, so don't process them
-						return;
-					}
-
-					if (getRowCount() == 0) {
+					if (enableActionKeyBindings || (getRowCount() == 0)) {
 						return;
 					}
 
@@ -438,10 +473,8 @@ public class GTable extends JTable {
 			public void mousePressed(MouseEvent e) {
 				if (e.getButton() == MouseEvent.BUTTON3) {
 					int row = rowAtPoint(e.getPoint());
-					if (row >= 0) {
-						if (!isRowSelected(row)) {
-							setRowSelectionInterval(row, row);
-						}
+					if ((row >= 0) && !isRowSelected(row)) {
+						setRowSelectionInterval(row, row);
 					}
 				}
 			}
@@ -503,11 +536,7 @@ public class GTable extends JTable {
 	}
 
 	private int calculatePreferredRowHeight() {
-		if (userDefinedRowHeight != 16) { // default size
-			return userDefinedRowHeight; // prefer user-defined settings
-		}
-
-		if (getColumnCount() == 0) {
+		if ((userDefinedRowHeight != 16) || (getColumnCount() == 0)) {
 			return userDefinedRowHeight; // no columns yet defined
 		}
 
@@ -758,9 +787,7 @@ public class GTable extends JTable {
 					return HTMLUtilities.toHTML(string);
 				}
 
-				// render contents literally, wrapped in HTML
-				String html = HTMLUtilities.toLiteralHTMLForTooltip(string);
-				return html;
+				return HTMLUtilities.toLiteralHTMLForTooltip(string);
 			}
 		}
 		return null;
@@ -1029,8 +1056,7 @@ public class GTable extends JTable {
 		}
 
 		Object value = getCellValue(row, column);
-		Object updated = maybeConvertValue(value);
-		return updated;
+		return maybeConvertValue(value);
 	}
 
 	private Object getCellValue(int row, int viewColumn) {
@@ -1052,8 +1078,7 @@ public class GTable extends JTable {
 		}
 
 		String asString = value.toString();
-		String converted = HTMLUtilities.fromHTML(asString);
-		return converted;
+		return HTMLUtilities.fromHTML(asString);
 	}
 
 	/**
@@ -1109,7 +1134,7 @@ public class GTable extends JTable {
 
 	private void copyColumns(int... copyColumns) {
 
-		int[] originalColumns = new int[0];
+		int[] originalColumns = {};
 		boolean wasAllowed = getColumnSelectionAllowed();
 		if (wasAllowed) {
 			originalColumns = getSelectedColumns();

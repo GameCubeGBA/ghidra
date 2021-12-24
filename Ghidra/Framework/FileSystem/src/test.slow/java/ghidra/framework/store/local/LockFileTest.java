@@ -19,7 +19,9 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.util.Msg;

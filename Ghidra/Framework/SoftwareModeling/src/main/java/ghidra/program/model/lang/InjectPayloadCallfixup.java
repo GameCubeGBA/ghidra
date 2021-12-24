@@ -21,7 +21,9 @@ import java.util.List;
 import ghidra.app.plugin.processors.sleigh.SleighLanguage;
 import ghidra.app.plugin.processors.sleigh.template.ConstructTpl;
 import ghidra.util.xml.SpecXmlUtils;
-import ghidra.xml.*;
+import ghidra.xml.XmlElement;
+import ghidra.xml.XmlParseException;
+import ghidra.xml.XmlPullParser;
 
 public class InjectPayloadCallfixup extends InjectPayloadSleigh {
 
@@ -78,7 +80,7 @@ public class InjectPayloadCallfixup extends InjectPayloadSleigh {
 		boolean pcodeSubtag = false;
 		while (parser.peek().isStart()) {
 			String elname = parser.peek().getName();
-			if (elname.equals("target")) {
+			if ("target".equals(elname)) {
 				XmlElement subel = parser.start();
 				String targetName = subel.getAttribute("name");
 				if (targetName == null) {
@@ -87,7 +89,7 @@ public class InjectPayloadCallfixup extends InjectPayloadSleigh {
 				targetSymbolNames.add(targetName);
 				parser.end(subel);
 			}
-			else if (elname.equals("pcode")) {
+			else if ("pcode".equals(elname)) {
 				super.restoreXml(parser, language);
 				pcodeSubtag = true;
 			}
@@ -116,7 +118,6 @@ public class InjectPayloadCallfixup extends InjectPayloadSleigh {
 		for (String target : targetSymbolNames) {
 			hash = 79 * hash + target.hashCode();
 		}
-		hash = 79 * hash + super.hashCode();
-		return hash;
+		return 79 * hash + super.hashCode();
 	}
 }

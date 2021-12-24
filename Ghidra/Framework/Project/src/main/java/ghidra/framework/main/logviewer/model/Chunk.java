@@ -41,7 +41,7 @@ public class Chunk {
 	//
 	// Note that the line numbers in this map do NOT correspond to line numbers within the file, 
 	// only within the chunk. 
-	public Map<Integer, Pair> rowToFilePositionMap = new HashMap<Integer, Pair>();
+	public Map<Integer, Pair> rowToFilePositionMap = new HashMap<>();
 
 	// Keeps track of the number of text lines represented by this chunk. This should always match
 	// the ChunkModel.MAX_NUM_LINES var, except when reading the end of the file when 

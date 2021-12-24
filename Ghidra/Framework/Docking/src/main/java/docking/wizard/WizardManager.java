@@ -15,12 +15,26 @@
  */
 package docking.wizard;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.io.IOException;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.Icon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
 import docking.DialogComponentProvider;
@@ -29,7 +43,9 @@ import docking.help.Help;
 import docking.help.HelpService;
 import docking.widgets.EmptyBorderButton;
 import docking.widgets.label.GDLabel;
-import ghidra.util.*;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
+import ghidra.util.SystemUtilities;
 import resources.ResourceManager;
 
 /**
@@ -81,6 +97,7 @@ public class WizardManager extends DialogComponentProvider implements WizardPane
 	/**
 	 * @see java.awt.Window#dispose()
 	 */
+	@Override
 	public void dispose() {
 		if (currWizPanel != null) {
 			currWizPanel.removeWizardPanelListener(this);

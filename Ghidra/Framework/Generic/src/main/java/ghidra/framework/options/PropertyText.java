@@ -17,8 +17,9 @@
 package ghidra.framework.options;
 
 // Support for a PropertyEditor that uses text.
-
-import java.beans.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyEditor;
 
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
@@ -48,12 +49,9 @@ public class PropertyText extends JTextField {
 		editor = pe;
 		getDocument().addDocumentListener(new UpdateDocumentListener());
 
-		editor.addPropertyChangeListener(new PropertyChangeListener() {
-			@Override
-			public void propertyChange(PropertyChangeEvent evt) {
-				if (!isEditing) {
-					setText(editor.getAsText());
-				}
+		editor.addPropertyChangeListener(evt -> {
+			if (!isEditing) {
+				setText(editor.getAsText());
 			}
 		});
 	}

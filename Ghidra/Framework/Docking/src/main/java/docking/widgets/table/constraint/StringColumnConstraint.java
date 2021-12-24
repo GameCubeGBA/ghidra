@@ -19,7 +19,9 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import docking.widgets.table.constrainteditor.*;
+import docking.widgets.table.constrainteditor.AutocompletingStringConstraintEditor;
+import docking.widgets.table.constrainteditor.ColumnConstraintEditor;
+import docking.widgets.table.constrainteditor.StringConstraintEditor;
 import ghidra.util.HTMLUtilities;
 import ghidra.util.UserSearchUtils;
 
@@ -135,11 +137,7 @@ public abstract class StringColumnConstraint implements ColumnConstraint<String>
 		if (o == this) {
 			return true;
 		}
-		if (o == null) {
-			return false;
-		}
-
-		if (!(getClass().equals(o.getClass()))) {
+		if ((o == null) || !(getClass().equals(o.getClass()))) {
 			return false;
 		}
 

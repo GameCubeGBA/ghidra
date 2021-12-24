@@ -15,7 +15,11 @@
  */
 package ghidra.util.layout;
 
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Insets;
+import java.awt.LayoutManager;
 
 /**
  * This layout arranges components in rows, putting as many components as possible on a
@@ -94,10 +98,8 @@ public class RowColumnLayout implements LayoutManager {
 
 		int height = numRows * compHeight + (numRows - 1) * vgap;
 		int width = numCols * compWidth + (numCols - 1) * hgap;
-		Dimension d = new Dimension(width + insets.left + insets.right + 2,
+		return new Dimension(width + insets.left + insets.right + 2,
 			height + insets.top + insets.bottom + 2);
-
-		return d;
 	}
 
 	/**

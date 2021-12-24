@@ -15,7 +15,10 @@
  */
 package ghidra.framework.project;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.jar.JarOutputStream;
 import java.util.zip.ZipEntry;
 
@@ -66,7 +69,7 @@ class ProjectJarWriter extends JarWriter {
 		int numRead = 0;
 		//Create a zip entry and write it out along with its data.
 		String name = baseFile.getName();
-		if (name.equals(PROPERTIES_FILE_NAME)) {
+		if (PROPERTIES_FILE_NAME.equals(name)) {
 			name = ORIGINAL_PROPERTIES_FILE_NAME;
 		}
 		ZipEntry entry = new ZipEntry(jarPath + name);

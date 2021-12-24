@@ -21,7 +21,9 @@ import static org.junit.Assert.assertTrue;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
-import javax.swing.*;
+import javax.swing.JLabel;
+import javax.swing.JProgressBar;
+import javax.swing.Timer;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -39,13 +41,7 @@ public class GProgressBarTest extends AbstractDockingTest {
 	@Before
 	public void setUp() throws Exception {
 
-		cancelledListener = new CancelledListener() {
-
-			@Override
-			public void cancelled() {
-				cancelled = true;
-			}
-		};
+		cancelledListener = () -> cancelled = true;
 		progressBar = new GProgressBar(cancelledListener, true, true, true, 10.0f);
 	}
 
@@ -108,34 +104,19 @@ public class GProgressBarTest extends AbstractDockingTest {
 
 	private int getProgress(final JProgressBar jProgressBar) {
 		final AtomicInteger result = new AtomicInteger();
-		runSwing(new Runnable() {
-			@Override
-			public void run() {
-				result.set(jProgressBar.getValue());
-			}
-		});
+		runSwing(() -> result.set(jProgressBar.getValue()));
 		return result.get();
 	}
 
 	private int getMaximum(final JProgressBar jProgressBar) {
 		final AtomicInteger result = new AtomicInteger();
-		runSwing(new Runnable() {
-			@Override
-			public void run() {
-				result.set(jProgressBar.getMaximum());
-			}
-		});
+		runSwing(() -> result.set(jProgressBar.getMaximum()));
 		return result.get();
 	}
 
 	private String getMessage(final JLabel label) {
-		final AtomicReference<String> result = new AtomicReference<String>();
-		runSwing(new Runnable() {
-			@Override
-			public void run() {
-				result.set(label.getText());
-			}
-		});
+		final AtomicReference<String> result = new AtomicReference<>();
+		runSwing(() -> result.set(label.getText()));
 		return result.get();
 	}
 

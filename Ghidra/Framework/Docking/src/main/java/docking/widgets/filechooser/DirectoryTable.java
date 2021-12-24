@@ -18,20 +18,30 @@
  */
 package docking.widgets.filechooser;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Component;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.JLabel;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.table.TableColumn;
 
 import docking.event.mouse.GMouseListenerAdapter;
 import docking.widgets.AutoLookup;
 import docking.widgets.GenericDateCellRenderer;
-import docking.widgets.table.*;
+import docking.widgets.table.GTable;
+import docking.widgets.table.GTableAutoLookup;
+import docking.widgets.table.GTableCellRenderer;
+import docking.widgets.table.GTableCellRenderingData;
 import utilities.util.FileUtilities;
 
 class DirectoryTable extends GTable implements GhidraFileChooserDirectoryModelIf {
@@ -93,14 +103,7 @@ class DirectoryTable extends GTable implements GhidraFileChooserDirectoryModelIf
 				e.consume();
 
 				int[] selectedRows = getSelectedRows();
-				if (selectedRows.length == 0) {
-					chooser.okCallback();
-					// this implies the user has somehow put focus into the table, but has not
-					// made a selection...just let the chooser decide what to do
-					return;
-				}
-
-				if (selectedRows.length > 1) {
+				if ((selectedRows.length == 0) || (selectedRows.length > 1)) {
 					// let the chooser decide what to do with multiple rows selected
 					chooser.okCallback();
 					return;

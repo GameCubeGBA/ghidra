@@ -20,5 +20,5 @@ public interface FileBasedIcon {
 	 * Get the name of the image which in most cases will be the associated data file path. 
 	 * @return icon name/path
 	 */
-	public String getFilename();
+	String getFilename();
 }

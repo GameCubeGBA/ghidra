@@ -34,9 +34,7 @@ public class AssemblyNumericTerminal extends AssemblyTerminal {
 	public static final String PREFIX_OCT = "0";
 
 	/** Some suggestions, other than labels, to provide */
-	protected static final Collection<String> suggestions = Arrays.asList(new String[] { //
-		"0", "1", "0x0", "+0x0", "-0x0", "01" //
-	});
+	protected static final Collection<String> suggestions = Arrays.asList("0", "1", "0x0", "+0x0", "-0x0", "01");
 	/** The maximum number of labels to suggest */
 	protected static final int MAX_LABEL_SUGGESTIONS = 10;
 
@@ -176,10 +174,7 @@ public class AssemblyNumericTerminal extends AssemblyTerminal {
 			}
 			// TODO: I'd really like to know whether or not the printpiece can take a signed value.
 			if (bitsize != 0 && bitsize != 64) {
-				if (val < (-1L) << (bitsize - 1)) {
-					return Collections.emptySet();
-				}
-				if (val >= 1L << bitsize) {
+				if ((val < (-1L) << (bitsize - 1)) || (val >= 1L << bitsize)) {
 					return Collections.emptySet();
 				}
 			}

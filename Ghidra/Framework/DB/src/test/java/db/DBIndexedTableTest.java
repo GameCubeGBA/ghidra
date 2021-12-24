@@ -15,15 +15,26 @@
  */
 package db;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.Random;
 
-import org.junit.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
-import db.buffers.*;
+import db.buffers.BufferFile;
+import db.buffers.BufferFileManager;
+import db.buffers.LocalManagedBufferFile;
 import generic.test.AbstractGenericTest;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
@@ -1061,7 +1072,7 @@ public class DBIndexedTableTest extends AbstractGenericTest {
 		return --startIx;
 	}
 
-	private class RecColumnComparator implements Comparator<DBRecord> {
+	private static class RecColumnComparator implements Comparator<DBRecord> {
 
 		final int columnIx;
 

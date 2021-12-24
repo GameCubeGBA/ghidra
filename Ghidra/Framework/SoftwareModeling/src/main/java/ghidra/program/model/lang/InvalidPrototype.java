@@ -16,6 +16,8 @@
  */
 package ghidra.program.model.lang;
 
+import java.util.ArrayList;
+
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.UniqueAddressFactory;
 import ghidra.program.model.mem.MemBuffer;
@@ -26,14 +28,12 @@ import ghidra.program.model.scalar.Scalar;
 import ghidra.program.model.symbol.FlowType;
 import ghidra.program.model.symbol.RefType;
 
-import java.util.ArrayList;
-
 /**
  * Class to represent an invalid instruction prototype.
  */
 public class InvalidPrototype implements InstructionPrototype, ParserContext {
 
-	private final static Address[] emptyAddresses = new Address[0];
+	private final static Address[] emptyAddresses = {};
 
 	private Language language;
 

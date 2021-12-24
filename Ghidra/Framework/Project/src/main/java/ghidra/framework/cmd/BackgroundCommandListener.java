@@ -24,6 +24,6 @@ public interface BackgroundCommandListener {
 	 * Notification that the given BackgroundCommand has completed.
 	 * @param cmd background command that has completed
 	 */
-	public void commandCompleted(BackgroundCommand cmd);
+	void commandCompleted(BackgroundCommand cmd);
 }
  

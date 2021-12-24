@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 class Counter {
-	HashMap<String,Count> map = new HashMap<String,Count>();
+	HashMap<String,Count> map = new HashMap<>();
 
 	void clear() {
 		map.clear();
@@ -53,7 +53,7 @@ class Counter {
 		count.increment();
 	}
 
-	private class Count {
+	private static class Count {
 		int count = 0;
 		void increment() {
 			count++;

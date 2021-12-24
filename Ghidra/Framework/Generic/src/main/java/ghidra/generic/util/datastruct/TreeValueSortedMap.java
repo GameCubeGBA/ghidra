@@ -15,7 +15,21 @@
  */
 package ghidra.generic.util.datastruct;
 
-import java.util.*;
+import java.util.AbstractCollection;
+import java.util.AbstractMap;
+import java.util.AbstractSet;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.Set;
 
 import org.apache.commons.collections4.comparators.ComparableComparator;
 
@@ -435,19 +449,16 @@ public class TreeValueSortedMap<K, V> extends AbstractMap<K, V> implements Value
 				else {
 					parent.lChild = null;
 				}
+			} else if (lChild != null) {
+				parent.rChild = lChild;
+				lChild.parent = parent;
+			}
+			else if (rChild != null) {
+				parent.rChild = rChild;
+				rChild.parent = parent;
 			}
 			else {
-				if (lChild != null) {
-					parent.rChild = lChild;
-					lChild.parent = parent;
-				}
-				else if (rChild != null) {
-					parent.rChild = rChild;
-					rChild.parent = parent;
-				}
-				else {
-					parent.rChild = null;
-				}
+				parent.rChild = null;
 			}
 			if (lChild != null && rChild != null) {
 				prev.rChild = rChild;
@@ -1658,15 +1669,8 @@ public class TreeValueSortedMap<K, V> extends AbstractMap<K, V> implements Value
 	 * @return true if the node need not be moved
 	 */
 	private boolean isOrdered(Node n) {
-		if (n.prev != null) {
-			if (comparator.compare(n.prev.val, n.val) > 0) {
-				return false;
-			}
-		}
-		if (n.next != null) {
-			if (comparator.compare(n.next.val, n.val) < 0) {
-				return false;
-			}
+		if (((n.prev != null) && (comparator.compare(n.prev.val, n.val) > 0)) || ((n.next != null) && (comparator.compare(n.next.val, n.val) < 0))) {
+			return false;
 		}
 		return true;
 	}

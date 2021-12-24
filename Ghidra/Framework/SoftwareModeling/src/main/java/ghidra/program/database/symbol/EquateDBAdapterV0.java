@@ -17,8 +17,15 @@ package ghidra.program.database.symbol;
 
 import java.io.IOException;
 
-import db.*;
-import ghidra.util.exception.*;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.RecordIterator;
+import db.StringField;
+import db.Table;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.NotFoundException;
+import ghidra.util.exception.VersionException;
 
 /**
  * Implementation for Version 0 of the adapter that accesses the 

@@ -19,8 +19,14 @@
  */
 package ghidra.app.plugin.processors.sleigh.expression;
 
-import ghidra.app.plugin.processors.sleigh.*;
-import ghidra.app.plugin.processors.sleigh.symbol.*;
+import ghidra.app.plugin.processors.sleigh.ConstructState;
+import ghidra.app.plugin.processors.sleigh.Constructor;
+import ghidra.app.plugin.processors.sleigh.ParserWalker;
+import ghidra.app.plugin.processors.sleigh.SleighException;
+import ghidra.app.plugin.processors.sleigh.SleighLanguage;
+import ghidra.app.plugin.processors.sleigh.symbol.OperandSymbol;
+import ghidra.app.plugin.processors.sleigh.symbol.SubtableSymbol;
+import ghidra.app.plugin.processors.sleigh.symbol.TripleSymbol;
 import ghidra.program.model.mem.MemoryAccessException;
 import ghidra.util.xml.SpecXmlUtils;
 import ghidra.xml.XmlElement;
@@ -50,10 +56,7 @@ public class OperandValue extends PatternValue {
 			return false;
 		}
 		OperandValue that = (OperandValue) obj;
-		if (this.index != that.index) {
-			return false;
-		}
-		if (!this.ct.equals(that.ct)) {
+		if ((this.index != that.index) || !this.ct.equals(that.ct)) {
 			return false;
 		}
 		return true;
@@ -110,8 +113,7 @@ public class OperandValue extends PatternValue {
 		ConstructState tempstate = new ConstructState(null);
 		ParserWalker newwalker = new ParserWalker(walker.getParserContext());
 		newwalker.setOutOfBandState(ct, index, tempstate, walker);
-		long res = patexp.getValue(newwalker);
-		return res;
+		return patexp.getValue(newwalker);
 	}
 
 	/* (non-Javadoc)

@@ -140,10 +140,7 @@ public class ApplicationVersion implements Comparable<ApplicationVersion> {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
 		}
 		ApplicationVersion other = (ApplicationVersion) obj;

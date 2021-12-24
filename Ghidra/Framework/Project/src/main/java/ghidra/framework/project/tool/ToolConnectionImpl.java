@@ -15,7 +15,10 @@
  */
 package ghidra.framework.project.tool;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
 import org.jdom.Element;
 
@@ -184,7 +187,7 @@ class ToolConnectionImpl implements ToolConnection, ToolListener {
 			Element elem = (Element) iter.next();
 			String name = elem.getAttributeValue("NAME");
 			String state = elem.getAttributeValue("CONNECTED");
-			boolean connected = (state != null && state.equalsIgnoreCase("true"));
+			boolean connected = (state != null && "true".equalsIgnoreCase(state));
 			connectHt.put(name, (connected ? CONNECTED : DISCONNECTED));
 			if (connected && !listenerAdded) {
 				producerTool.addToolListener(this);
@@ -266,8 +269,7 @@ class ToolConnectionImpl implements ToolConnection, ToolListener {
 		producerList.retainAll(consumerList);
 		consumerList.retainAll(producerList);
 
-		for (int i = 0; i < producerList.size(); i++) {
-			String event = producerList.get(i);
+		for (String event : producerList) {
 			if (!connectHt.contains(event)) {
 				connectHt.put(event, DISCONNECTED);
 			}

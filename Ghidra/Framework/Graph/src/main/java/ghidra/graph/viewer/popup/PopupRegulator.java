@@ -17,9 +17,15 @@ package ghidra.graph.viewer.popup;
 
 import java.awt.Component;
 import java.awt.Window;
-import java.awt.event.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 
-import javax.swing.*;
+import javax.swing.JComponent;
+import javax.swing.JToolTip;
+import javax.swing.MenuSelectionManager;
+import javax.swing.Timer;
 
 import docking.widgets.PopupWindow;
 
@@ -122,11 +128,7 @@ public class PopupRegulator<V, E> {
 	}
 
 	private void showPopupForMouseEvent(MouseEvent event) {
-		if (!showPopups) {
-			return;
-		}
-
-		if (event == null) {
+		if (!showPopups || (event == null)) {
 			return;
 		}
 

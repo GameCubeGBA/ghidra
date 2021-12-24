@@ -28,7 +28,7 @@ public interface GraphJob {
 	 * 
 	 * @param listener the listener this job is expected to call when its work is finished
 	 */
-	public void execute(GraphJobListener listener);
+	void execute(GraphJobListener listener);
 
 	/**
 	 * Returns true if the job can be told to stop running, but to still perform any final 
@@ -36,7 +36,7 @@ public interface GraphJob {
 	 * 
 	 * @return true if the job can be shortcut
 	 */
-	public boolean canShortcut();
+	boolean canShortcut();
 
 	/**
 	 * Tells this job to stop running, but to still perform any final work before being done.
@@ -45,16 +45,16 @@ public interface GraphJob {
 	 * work before returning from this method.  If that cannot be done in a timely manner, then
 	 * your {@link #canShortcut()} should return false.
 	 */
-	public void shortcut();
+	void shortcut();
 
 	/**
 	 * Returns true if this job has finished its work
 	 * @return true if this job has finished its work
 	 */
-	public boolean isFinished();
+	boolean isFinished();
 
 	/**
 	 * Call to immediately stop this job, ignoring any exceptions or state issues that arise.
 	 */
-	public void dispose();
+	void dispose();
 }

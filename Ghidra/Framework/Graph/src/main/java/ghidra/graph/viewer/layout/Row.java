@@ -16,7 +16,10 @@
 package ghidra.graph.viewer.layout;
 
 import java.awt.geom.Point2D;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -144,14 +147,12 @@ public class Row<V> {
 		Integer start = verticesByColumn.firstKey();
 		Integer n = getColumnCount();
 		IntStream columnIndexes = IntStream.range(start, start + n);
-		List<V> vertices = 
-			columnIndexes
-			.mapToObj(col -> verticesByColumn.get(col))
-			.filter(v -> v != null)
-			.collect(Collectors.toList())
-			;
+		
 		//@formatter:on
-		return vertices;
+		return columnIndexes
+		.mapToObj(col -> verticesByColumn.get(col))
+		.filter(v -> v != null)
+		.collect(Collectors.toList());
 	}
 
 	public int getPaddedHeight(boolean isCondensed) {

@@ -18,7 +18,9 @@ package ghidra.framework.options;
 // Support for PropertyEditors that use tags.
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.beans.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyEditor;
 
 import javax.swing.JComboBox;
 
@@ -50,18 +52,15 @@ public class PropertySelector extends JComboBox<String> implements ItemListener 
 		addItemListener(this);
 		invalidate();
 
-		propertyEditor.addPropertyChangeListener(new PropertyChangeListener() {
-			@Override
-			public void propertyChange(PropertyChangeEvent evt) {
-				String value = propertyEditor.getAsText();
-				if (!value.equals(getSelectedItem())) {
-					notifyEditorOfChanges = false;
-					try {
-						setSelectedItem(value);
-					}
-					finally {
-						notifyEditorOfChanges = true;
-					}
+		propertyEditor.addPropertyChangeListener(evt -> {
+			String value = propertyEditor.getAsText();
+			if (!value.equals(getSelectedItem())) {
+				notifyEditorOfChanges = false;
+				try {
+					setSelectedItem(value);
+				}
+				finally {
+					notifyEditorOfChanges = true;
 				}
 			}
 		});

@@ -15,14 +15,26 @@
  */
 package generic.concurrent;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
-import org.junit.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.util.task.TaskMonitor;
@@ -772,12 +784,11 @@ public class ConcurrentQTest extends AbstractGenericTest {
 			catch (InterruptedException e) {
 				return null;
 			}
-			TestResult result = new TestResult(item.name, Thread.currentThread().getName());
-			return result;
+			return new TestResult(item.name, Thread.currentThread().getName());
 		}
 	}
 
-	private class TestListener implements QItemListener<TestItem, TestResult> {
+	private static class TestListener implements QItemListener<TestItem, TestResult> {
 		List<QResult<TestItem, TestResult>> list = new ArrayList<>();
 
 		@Override
@@ -786,7 +797,7 @@ public class ConcurrentQTest extends AbstractGenericTest {
 		}
 	}
 
-	private class TestItem {
+	private static class TestItem {
 		protected String name;
 		private long waitTime;
 		private boolean fail;
@@ -815,7 +826,7 @@ public class ConcurrentQTest extends AbstractGenericTest {
 		}
 	}
 
-	private class TestResult {
+	private static class TestResult {
 		private String testItemName;
 		private String threadName;
 
@@ -914,7 +925,7 @@ public class ConcurrentQTest extends AbstractGenericTest {
 
 	}
 
-	private class CheckpointRunner {
+	private static class CheckpointRunner {
 		private CountDownLatch startedLatch = new CountDownLatch(1);
 		private CountDownLatch finishedLatch = new CountDownLatch(1);
 		private AtomicReference<Exception> unexpectedException = new AtomicReference<>();

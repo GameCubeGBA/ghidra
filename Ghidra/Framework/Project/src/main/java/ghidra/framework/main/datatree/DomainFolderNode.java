@@ -16,13 +16,17 @@
 package ghidra.framework.main.datatree;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import javax.swing.Icon;
 
 import docking.widgets.tree.GTreeLazyNode;
 import docking.widgets.tree.GTreeNode;
-import ghidra.framework.model.*;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.DomainFileFilter;
+import ghidra.framework.model.DomainFolder;
 import ghidra.util.InvalidNameException;
 import ghidra.util.Msg;
 import resources.ResourceManager;
@@ -123,7 +127,7 @@ public class DomainFolderNode extends GTreeLazyNode implements Cuttable {
 
 	@Override
 	protected List<GTreeNode> generateChildren() {
-		List<GTreeNode> children = new ArrayList<GTreeNode>();
+		List<GTreeNode> children = new ArrayList<>();
 		if (domainFolder != null) {
 			DomainFolder[] folders = domainFolder.getFolders();
 			for (DomainFolder folder : folders) {

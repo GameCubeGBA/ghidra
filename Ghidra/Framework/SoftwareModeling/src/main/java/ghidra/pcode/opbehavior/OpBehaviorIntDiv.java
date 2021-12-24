@@ -15,10 +15,10 @@
  */
 package ghidra.pcode.opbehavior;
 
+import java.math.BigInteger;
+
 import ghidra.pcode.utils.Utils;
 import ghidra.program.model.pcode.PcodeOp;
-
-import java.math.BigInteger;
 
 public class OpBehaviorIntDiv extends BinaryOpBehavior {
 
@@ -62,8 +62,7 @@ public class OpBehaviorIntDiv extends BinaryOpBehavior {
 	public BigInteger evaluateBinary(int sizeout, int sizein, BigInteger in1, BigInteger in2) {
 		if (sizein <= 0 || in2.signum() == 0)
 			return BigInteger.ZERO;
-		BigInteger res = in1.divide(in2);
-		return res;
+		return in1.divide(in2);
 	}
 
 }

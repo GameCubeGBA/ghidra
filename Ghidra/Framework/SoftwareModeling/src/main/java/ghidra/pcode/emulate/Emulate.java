@@ -22,24 +22,27 @@ import ghidra.app.plugin.processors.sleigh.SleighLanguage;
 import ghidra.pcode.error.LowlevelError;
 import ghidra.pcode.memstate.MemoryState;
 import ghidra.pcode.memstate.UniqueMemoryBank;
-import ghidra.pcode.opbehavior.*;
+import ghidra.pcode.opbehavior.BinaryOpBehavior;
+import ghidra.pcode.opbehavior.OpBehavior;
+import ghidra.pcode.opbehavior.UnaryOpBehavior;
 import ghidra.pcode.pcoderaw.PcodeOpRaw;
 import ghidra.program.disassemble.Disassembler;
-import ghidra.program.model.address.*;
-import ghidra.program.model.lang.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressOverflowException;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.lang.GhidraLanguagePropertyKeys;
+import ghidra.program.model.lang.InstructionBlock;
+import ghidra.program.model.lang.InstructionError;
+import ghidra.program.model.lang.Language;
+import ghidra.program.model.lang.Register;
+import ghidra.program.model.lang.RegisterValue;
 import ghidra.program.model.listing.Instruction;
 import ghidra.program.model.pcode.PcodeOp;
 import ghidra.program.model.pcode.Varnode;
 import ghidra.util.Msg;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
-/// \brief A SLEIGH based implementation of the Emulate interface
-///
-/// This implementation uses a Translate object to translate machine instructions into
-/// pcode and caches pcode ops for later use by the emulator.  The pcode is cached as soon
-/// as the execution address is set, either explicitly, or via branches and fallthrus.  There
-/// are additional methods for inspecting the pcode ops in the current instruction as a sequence.
 
 public class Emulate {
 

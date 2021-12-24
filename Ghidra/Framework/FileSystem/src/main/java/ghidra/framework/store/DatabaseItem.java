@@ -16,11 +16,10 @@
  */
 package ghidra.framework.store;
 
-import ghidra.util.exception.FileInUseException;
-
 import java.io.IOException;
 
 import db.buffers.ManagedBufferFile;
+import ghidra.util.exception.FileInUseException;
 
 /**
  * <code>DatabaseItem</code> corresponds to a private or versioned 

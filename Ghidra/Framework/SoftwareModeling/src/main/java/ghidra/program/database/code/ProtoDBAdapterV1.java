@@ -15,11 +15,13 @@
  */
 package ghidra.program.database.code;
 
-import ghidra.program.database.util.DatabaseVersionException;
-
 import java.io.IOException;
 
-import db.*;
+import db.DBHandle;
+import db.DBRecord;
+import db.RecordIterator;
+import db.Table;
+import ghidra.program.database.util.DatabaseVersionException;
 
 /**
  * Implements version 1 of the ProtoDBAdapter interface.
@@ -36,6 +38,7 @@ class ProtoDBAdapterV1 implements ProtoDBAdapter {
 	/**
 	 * @see ghidra.program.database.code.ProtoDBAdapter#getVersion()
 	 */
+	@Override
 	public int getVersion() {
 		return 1;
 	}
@@ -43,6 +46,7 @@ class ProtoDBAdapterV1 implements ProtoDBAdapter {
 	/**
 	 * @see ghidra.program.database.code.ProtoDBAdapter#getNumRecords()
 	 */
+	@Override
 	public int getNumRecords() throws IOException {
 		return table.getRecordCount();
 	}
@@ -62,6 +66,7 @@ class ProtoDBAdapterV1 implements ProtoDBAdapter {
 	/**
 	 * @see ghidra.program.database.code.ProtoDBAdapter#createRecord(int, byte[])
 	 */
+	@Override
 	public void createRecord(int protoID, long addr, byte[] b, boolean inDelaySlot)
 			throws IOException {
 
@@ -75,6 +80,7 @@ class ProtoDBAdapterV1 implements ProtoDBAdapter {
 	/**
 	 * @see ghidra.program.database.code.ProtoDBAdapter#getKey()
 	 */
+	@Override
 	public long getKey() throws IOException {
 		return table.getKey();
 	}
@@ -82,6 +88,7 @@ class ProtoDBAdapterV1 implements ProtoDBAdapter {
 	/**
 	 * @see ghidra.program.database.code.ProtoDBAdapter#getRecord(int)
 	 */
+	@Override
 	public DBRecord getRecord(int protoId) throws IOException {
 		return table.getRecord(protoId);
 	}
@@ -89,6 +96,7 @@ class ProtoDBAdapterV1 implements ProtoDBAdapter {
 	/**
 	 * @see ghidra.program.database.code.ProtoDBAdapter#getRecords()
 	 */
+	@Override
 	public RecordIterator getRecords() throws IOException {
 		return table.iterator();
 	}
@@ -96,6 +104,7 @@ class ProtoDBAdapterV1 implements ProtoDBAdapter {
 	/**s
 	 * @see ghidra.program.database.code.ProtoDBAdapter#deleteAll()
 	 */
+	@Override
 	public void deleteAll() throws IOException {
 		table.deleteAll();
 	}

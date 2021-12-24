@@ -17,7 +17,7 @@
 package ghidra.framework.main.datatree;
 
 public interface Cuttable {
-	public void setIsCut(boolean b);
-	public boolean isCut();
+	void setIsCut(boolean b);
+	boolean isCut();
 
 }

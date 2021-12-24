@@ -16,12 +16,12 @@
  */
 package ghidra.pcodeCPort.slghpattern;
 
-import ghidra.pcodeCPort.context.ParserWalker;
-
 import java.io.PrintStream;
 import java.util.List;
 
 import org.jdom.Element;
+
+import ghidra.pcodeCPort.context.ParserWalker;
 
 public class InstructionPattern extends DisjointPattern {
 
@@ -92,11 +92,7 @@ public class InstructionPattern extends DisjointPattern {
 
 	@Override
 	public Pattern doAnd(Pattern b, int sa) {
-		if (b.numDisjoint() > 0) {
-			return b.doAnd(this, -sa);
-		}
-
-		if (b instanceof CombinePattern) {
+		if ((b.numDisjoint() > 0) || (b instanceof CombinePattern)) {
 			return b.doAnd(this, -sa);
 		}
 		if (b instanceof ContextPattern) {
@@ -128,11 +124,7 @@ public class InstructionPattern extends DisjointPattern {
 
 	@Override
 	public Pattern commonSubPattern(Pattern b, int sa) {
-		if (b.numDisjoint() > 0) {
-			return b.commonSubPattern(this, -sa);
-		}
-
-		if (b instanceof CombinePattern) {
+		if ((b.numDisjoint() > 0) || (b instanceof CombinePattern)) {
 			return b.commonSubPattern(this, -sa);
 		}
 		if (b instanceof ContextPattern) {
@@ -158,11 +150,7 @@ public class InstructionPattern extends DisjointPattern {
 
 	@Override
 	public Pattern doOr(Pattern b, int sa) {
-		if (b.numDisjoint() > 0) {
-			return b.doOr(this, -sa);
-		}
-
-		if (b instanceof CombinePattern) {
+		if ((b.numDisjoint() > 0) || (b instanceof CombinePattern)) {
 			return b.doOr(this, -sa);
 		}
 		DisjointPattern res1 = (DisjointPattern) simplifyClone();

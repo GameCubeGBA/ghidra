@@ -16,6 +16,12 @@
  */
 package ghidra.pcodeCPort.slghsymbol;
 
+import java.io.PrintStream;
+import java.util.Iterator;
+import java.util.List;
+
+import org.jdom.Element;
+
 import generic.stl.VectorSTL;
 import ghidra.pcodeCPort.context.FixedHandle;
 import ghidra.pcodeCPort.context.ParserWalker;
@@ -26,14 +32,8 @@ import ghidra.pcodeCPort.translate.BadDataError;
 import ghidra.pcodeCPort.utils.XmlUtils;
 import ghidra.sleigh.grammar.Location;
 
-import java.io.PrintStream;
-import java.util.Iterator;
-import java.util.List;
-
-import org.jdom.Element;
-
 public class ValueMapSymbol extends ValueSymbol {
-	private VectorSTL<Long> valuetable = new VectorSTL<Long>();
+	private VectorSTL<Long> valuetable = new VectorSTL<>();
 	private boolean tableisfilled;
 
 	public ValueMapSymbol(Location location) {
@@ -42,7 +42,7 @@ public class ValueMapSymbol extends ValueSymbol {
 
 	public ValueMapSymbol(Location location, String nm, PatternValue pv, VectorSTL<Long> vt) {
 		super(location, nm, pv);
-		valuetable = new VectorSTL<Long>(vt);
+		valuetable = new VectorSTL<>(vt);
 		checkTableFill();
 	}
 

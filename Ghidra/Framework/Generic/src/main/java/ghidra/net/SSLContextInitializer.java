@@ -17,7 +17,11 @@ package ghidra.net;
 
 import java.security.SecureRandom;
 
-import javax.net.ssl.*;
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.KeyManager;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
 
 import generic.random.SecureRandomFactory;
 import ghidra.framework.ModuleInitializer;

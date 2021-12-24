@@ -27,11 +27,11 @@ import javax.swing.event.TableModelListener;
  */
 public interface SelectionManager extends ListSelectionModel, TableModelListener {
 
-	public void addSelectionManagerListener(SelectionManagerListener listener);
+	void addSelectionManagerListener(SelectionManagerListener listener);
 
-	public void removeSelectionManagerListener(SelectionManagerListener listener);
+	void removeSelectionManagerListener(SelectionManagerListener listener);
 
-	public void clearSavedSelection();
+	void clearSavedSelection();
 
-	public void dispose();
+	void dispose();
 }

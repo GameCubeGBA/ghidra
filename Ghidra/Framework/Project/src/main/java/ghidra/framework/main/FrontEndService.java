@@ -28,11 +28,11 @@ public interface FrontEndService {
 	 * Adds the specified listener to the front-end tool.
 	 * @param l the project listener
 	 */
-	public void addProjectListener(ProjectListener l);
+	void addProjectListener(ProjectListener l);
 
 	/**
 	 * Removes the specified listener from the front-end tool.
 	 * @param l the project listener
 	 */
-	public void removeProjectListener(ProjectListener l);
+	void removeProjectListener(ProjectListener l);
 }

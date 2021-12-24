@@ -24,7 +24,12 @@ import javax.swing.JButton;
 
 import docking.ActionContext;
 import docking.DockingWindowManager;
-import docking.action.*;
+import docking.action.DockingAction;
+import docking.action.DockingActionIf;
+import docking.action.MenuData;
+import docking.action.MultiActionDockingActionIf;
+import docking.action.ToggleDockingAction;
+import docking.action.ToolBarData;
 import docking.widgets.EventTrigger;
 import ghidra.util.HelpLocation;
 import ghidra.util.SystemUtilities;

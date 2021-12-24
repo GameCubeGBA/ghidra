@@ -16,13 +16,13 @@
  */
 package docking.wizard;
 
-import ghidra.util.HelpLocation;
-
 import java.awt.Component;
 import java.awt.LayoutManager;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
+
+import ghidra.util.HelpLocation;
 
 /** 
  * Base class that implements some methods of the WizardPanel, but not
@@ -32,7 +32,7 @@ import javax.swing.JPanel;
  */
 public abstract class AbstractWizardJPanel extends JPanel implements WizardPanel {
 
-    protected ArrayList<WizardPanelListener> listeners = new ArrayList<WizardPanelListener>();
+    protected ArrayList<WizardPanelListener> listeners = new ArrayList<>();
 
 	/**
 	 * Default constructor.
@@ -65,10 +65,12 @@ public abstract class AbstractWizardJPanel extends JPanel implements WizardPanel
 	/**
 	 * @see docking.wizard.WizardPanel#getPanel()
 	 */
+	@Override
 	public JPanel getPanel() {
 		return this;
 	}
 
+	@Override
 	public Component getDefaultFocusComponent() {
 	    return null; // no preferred focus component by default
 	}
@@ -76,13 +78,15 @@ public abstract class AbstractWizardJPanel extends JPanel implements WizardPanel
 	/**
 	 * @see docking.wizard.WizardPanel#getHelpLocation()
 	 */
-    public HelpLocation getHelpLocation() {
+    @Override
+	public HelpLocation getHelpLocation() {
         return null;
     }
 
 	/**
 	 * @see docking.wizard.WizardPanel#addWizardPanelListener(WizardPanelListener)
 	 */
+	@Override
 	public void addWizardPanelListener(WizardPanelListener l) {
         if (!listeners.contains(l)) {
             listeners.add(l);
@@ -92,6 +96,7 @@ public abstract class AbstractWizardJPanel extends JPanel implements WizardPanel
 	/**
 	 * @see docking.wizard.WizardPanel#removeWizardPanelListener(WizardPanelListener)
 	 */
+	@Override
 	public void removeWizardPanelListener(WizardPanelListener l) {
         listeners.remove(l);
 	}
@@ -100,8 +105,7 @@ public abstract class AbstractWizardJPanel extends JPanel implements WizardPanel
 	 * Notification that something on the panel has changed.
 	 */
     public void notifyListenersOfValidityChanged() {
-        for (int i = 0; i < listeners.size() ; ++i) {
-            WizardPanelListener wpl = listeners.get(i);
+        for (WizardPanelListener wpl : listeners) {
             wpl.validityChanged();
         }
     }
@@ -111,8 +115,7 @@ public abstract class AbstractWizardJPanel extends JPanel implements WizardPanel
 	 * @param msg message to display
 	 */
     public void notifyListenersOfStatusMessage(String msg) {
-        for (int i = 0; i < listeners.size() ; ++i) {
-            WizardPanelListener wpl = listeners.get(i);
+        for (WizardPanelListener wpl : listeners) {
             wpl.setStatusMessage(msg);
         }
     }

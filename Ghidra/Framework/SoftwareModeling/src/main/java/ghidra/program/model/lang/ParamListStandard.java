@@ -20,13 +20,21 @@ import java.util.ArrayList;
 import ghidra.app.plugin.processors.sleigh.VarnodeData;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSpace;
-import ghidra.program.model.data.*;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.DataTypeManager;
+import ghidra.program.model.data.Pointer;
+import ghidra.program.model.data.TypeDef;
+import ghidra.program.model.data.VoidDataType;
+import ghidra.program.model.listing.AutoParameterType;
+import ghidra.program.model.listing.Program;
+import ghidra.program.model.listing.VariableStorage;
 import ghidra.program.model.pcode.Varnode;
 import ghidra.util.SystemUtilities;
 import ghidra.util.exception.InvalidInputException;
 import ghidra.util.xml.SpecXmlUtils;
-import ghidra.xml.*;
+import ghidra.xml.XmlElement;
+import ghidra.xml.XmlParseException;
+import ghidra.xml.XmlPullParser;
 
 /**
  * Standard analysis for parameter lists
@@ -87,11 +95,8 @@ public class ParamListStandard implements ParamList {
 		}
 		for (ParamEntry element : entry) {
 			int grp = element.getGroup();
-			if (status[grp] < 0) {
-				continue;
-			}
-			if ((element.getType() != ParamEntry.TYPE_UNKNOWN) &&
-				(ParamEntry.getMetatype(tp) != element.getType())) {
+			if ((status[grp] < 0) || ((element.getType() != ParamEntry.TYPE_UNKNOWN) &&
+				(ParamEntry.getMetatype(tp) != element.getType()))) {
 				continue;		// Wrong type
 			}
 
@@ -213,17 +218,13 @@ public class ParamListStandard implements ParamList {
 		buffer.append(">\n");
 		int curgroup = -1;
 		for (ParamEntry el : entry) {
-			if (curgroup >= 0) {
-				if (!el.isGrouped() || el.getGroup() != curgroup) {
-					buffer.append("</group>\n");
-					curgroup = -1;
-				}
+			if ((curgroup >= 0) && (!el.isGrouped() || el.getGroup() != curgroup)) {
+				buffer.append("</group>\n");
+				curgroup = -1;
 			}
-			if (el.isGrouped()) {
-				if (curgroup < 0) {
-					buffer.append("<group>\n");
-					curgroup = el.getGroup();
-				}
+			if (el.isGrouped() && (curgroup < 0)) {
+				buffer.append("<group>\n");
+				curgroup = el.getGroup();
 			}
 			el.saveXml(buffer);
 			buffer.append('\n');
@@ -310,19 +311,17 @@ public class ParamListStandard implements ParamList {
 			if (!el.isStart()) {
 				break;
 			}
-			if (el.getName().equals("pentry")) {
+			if ("pentry".equals(el.getName())) {
 				parsePentry(parser, cspec, pe, numgroup, splitFloat, false);
 			}
-			else if (el.getName().equals("group")) {
+			else if ("group".equals(el.getName())) {
 				parseGroup(parser, cspec, pe, numgroup, splitFloat);
 			}
 		}
 		// Check that any pentry tags with join storage don't overlap following tags
 		for (ParamEntry curEntry : pe) {
-			if (curEntry.isNonOverlappingJoin()) {
-				if (curEntry.countJoinOverlap(pe) != 1) {
-					throw new XmlParseException("pentry tag must be listed after all its overlaps");
-				}
+			if (curEntry.isNonOverlappingJoin() && (curEntry.countJoinOverlap(pe) != 1)) {
+				throw new XmlParseException("pentry tag must be listed after all its overlaps");
 			}
 		}
 		parser.end(mainel);
@@ -344,18 +343,14 @@ public class ParamListStandard implements ParamList {
 	public Long getStackParameterOffset() {
 		for (ParamEntry element : entry) {
 			ParamEntry pentry = element;
-			if (pentry.isExclusion()) {
-				continue;
-			}
-			if (!pentry.getSpace().isStackSpace()) {
+			if (pentry.isExclusion() || !pentry.getSpace().isStackSpace()) {
 				continue;
 			}
 			long res = pentry.getAddressBase();
 			if (pentry.isReverseStack()) {
 				res += pentry.getSize();
 			}
-			res = pentry.getSpace().truncateOffset(res);
-			return res;
+			return pentry.getSpace().truncateOffset(res);
 		}
 		return null;
 	}
@@ -383,13 +378,7 @@ public class ParamListStandard implements ParamList {
 	@Override
 	public boolean equals(Object obj) {
 		ParamListStandard op2 = (ParamListStandard) obj;
-		if (!SystemUtilities.isArrayEqual(entry, op2.entry)) {
-			return false;
-		}
-		if (numgroup != op2.numgroup || pointermax != op2.pointermax) {
-			return false;
-		}
-		if (!SystemUtilities.isEqual(spacebase, op2.spacebase)) {
+		if (!SystemUtilities.isArrayEqual(entry, op2.entry) || numgroup != op2.numgroup || pointermax != op2.pointermax || !SystemUtilities.isEqual(spacebase, op2.spacebase)) {
 			return false;
 		}
 		if (thisbeforeret != op2.thisbeforeret) {

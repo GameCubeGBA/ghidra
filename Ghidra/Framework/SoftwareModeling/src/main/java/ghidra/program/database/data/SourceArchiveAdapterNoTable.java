@@ -15,17 +15,16 @@
  */
 package ghidra.program.database.data;
 
-import ghidra.program.model.data.DataTypeManager;
-import ghidra.program.model.data.SourceArchive;
-import ghidra.util.UniversalID;
-import ghidra.util.exception.VersionException;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import db.DBHandle;
 import db.DBRecord;
+import ghidra.program.model.data.DataTypeManager;
+import ghidra.program.model.data.SourceArchive;
+import ghidra.util.UniversalID;
+import ghidra.util.exception.VersionException;
 
 /**
  * Adapter needed for a read-only version of data type manager that is not going
@@ -72,7 +71,7 @@ class SourceArchiveAdapterNoTable extends SourceArchiveAdapter {
 
 	@Override
 	List<DBRecord> getRecords() {
-		List<DBRecord> records = new ArrayList<DBRecord>();
+		List<DBRecord> records = new ArrayList<>();
 		records.add(LOCAL_RECORD);
 		return records;
 	}

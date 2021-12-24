@@ -19,7 +19,11 @@ import java.awt.event.MouseEvent;
 
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import ghidra.graph.VisualGraph;
-import ghidra.graph.viewer.*;
+import ghidra.graph.viewer.GraphViewer;
+import ghidra.graph.viewer.SatelliteGraphViewer;
+import ghidra.graph.viewer.VisualEdge;
+import ghidra.graph.viewer.VisualGraphViewUpdater;
+import ghidra.graph.viewer.VisualVertex;
 
 /**
  * An interface to provide a common set of methods for classes that could not otherwise 
@@ -31,9 +35,8 @@ import ghidra.graph.viewer.*;
  */
 public interface VisualGraphMousePlugin<V extends VisualVertex, E extends VisualEdge<V>> {
 
-	public default VisualizationViewer<V, E> getViewer(MouseEvent e) {
-		GraphViewer<V, E> viewer = getGraphViewer(e);
-		return viewer;
+	default VisualizationViewer<V, E> getViewer(MouseEvent e) {
+		return getGraphViewer(e);
 	}
 
 	/**
@@ -43,7 +46,7 @@ public interface VisualGraphMousePlugin<V extends VisualVertex, E extends Visual
 	 * @return the viewer
 	 */
 	@SuppressWarnings("unchecked")
-	public default GraphViewer<V, E> getGraphViewer(MouseEvent e) {
+	default GraphViewer<V, E> getGraphViewer(MouseEvent e) {
 		VisualizationViewer<V, E> viewer = (VisualizationViewer<V, E>) e.getSource();
 
 		// is this the satellite viewer? 
@@ -52,8 +55,7 @@ public interface VisualGraphMousePlugin<V extends VisualVertex, E extends Visual
 		}
 
 		if (viewer instanceof GraphViewer) {
-			GraphViewer<V, E> graphViewer = (GraphViewer<V, E>) viewer;
-			return graphViewer;
+			return (GraphViewer<V, E>) viewer;
 		}
 
 		throw new IllegalStateException("Do not have a master or satellite GraphViewer");
@@ -67,7 +69,7 @@ public interface VisualGraphMousePlugin<V extends VisualVertex, E extends Visual
 	 * @return the viewer
 	 */
 	@SuppressWarnings("unchecked")
-	public default SatelliteGraphViewer<V, E> getSatelliteGraphViewer(MouseEvent e) {
+	default SatelliteGraphViewer<V, E> getSatelliteGraphViewer(MouseEvent e) {
 
 		VisualizationViewer<V, E> viewer = (VisualizationViewer<V, E>) e.getSource();
 
@@ -85,10 +87,9 @@ public interface VisualGraphMousePlugin<V extends VisualVertex, E extends Visual
 	 * @param e the mouse event from which to get the viewer
 	 * @return the updater
 	 */
-	public default VisualGraphViewUpdater<V, E> getViewUpdater(MouseEvent e) {
+	default VisualGraphViewUpdater<V, E> getViewUpdater(MouseEvent e) {
 		GraphViewer<V, E> viewer = getGraphViewer(e);
-		VisualGraphViewUpdater<V, E> updater = viewer.getViewUpdater();
-		return updater;
+		return viewer.getViewUpdater();
 	}
 
 	/**
@@ -97,15 +98,14 @@ public interface VisualGraphMousePlugin<V extends VisualVertex, E extends Visual
 	 * @param viewer the viewer
 	 * @return the updater
 	 */
-	public default VisualGraphViewUpdater<V, E> getViewUpdater(GraphViewer<V, E> viewer) {
-		VisualGraphViewUpdater<V, E> updater = viewer.getViewUpdater();
-		return updater;
+	default VisualGraphViewUpdater<V, E> getViewUpdater(GraphViewer<V, E> viewer) {
+		return viewer.getViewUpdater();
 	}
 
 	/**
 	 * Signals to perform any cleanup when this plugin is going away
 	 */
-	public default void dispose() {
+	default void dispose() {
 		// stub
 	}
 }

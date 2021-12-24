@@ -16,22 +16,25 @@
  */
 package docking.wizard;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 public class WizardState<T> implements Cloneable {
-	private Map<T, Object> map = new HashMap<T, Object>();
-	private Map<T, Set<T>> dependentMap = new HashMap<T, Set<T>>();
+	private Map<T, Object> map = new HashMap<>();
+	private Map<T, Set<T>> dependentMap = new HashMap<>();
 
     @Override
     protected Object clone() {
-        WizardState<T> anakin = new WizardState<T>();
-        anakin.map = new HashMap<T, Object>(map);
+        WizardState<T> anakin = new WizardState<>();
+        anakin.map = new HashMap<>(map);
         Set<Entry<T,Set<T>>> entrySet = dependentMap.entrySet();
         for (Entry<T, Set<T>> entry : entrySet) {
             T key = entry.getKey();
             Set<T> value = entry.getValue();
-            anakin.dependentMap.put(key, new HashSet<T>(value));
+            anakin.dependentMap.put(key, new HashSet<>(value));
         }
         return anakin;
     }
@@ -55,10 +58,7 @@ public class WizardState<T> implements Cloneable {
 	public void put(T key, Object value) {
 	    if (map.containsKey(key)) {
 	        Object oldValue = map.get(key);
-	        if (oldValue == value) {
-	            return;
-	        }
-	        if (oldValue != null && oldValue.equals(value)) {
+	        if ((oldValue == value) || (oldValue != null && oldValue.equals(value))) {
 	            return;
 	        }
 	    }
@@ -86,7 +86,7 @@ public class WizardState<T> implements Cloneable {
 	 * to be cleared.
 	 */
 	public void addDependency(T dependent, T predecessor) {
-        Set<T> dependents = dependentMap.computeIfAbsent(predecessor, k -> new HashSet<T>());
+        Set<T> dependents = dependentMap.computeIfAbsent(predecessor, k -> new HashSet<>());
         dependents.add(dependent);
 	}
 

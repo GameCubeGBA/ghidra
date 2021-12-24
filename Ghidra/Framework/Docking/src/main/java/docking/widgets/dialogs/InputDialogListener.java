@@ -26,6 +26,6 @@ public interface InputDialogListener {
 	 * @return true if the input is valid; the dialog will be popped down;
 	 * false means that the dialog will remain displayed.
 	 */
-	public boolean inputIsValid(InputDialog dialog);
+	boolean inputIsValid(InputDialog dialog);
 
 }

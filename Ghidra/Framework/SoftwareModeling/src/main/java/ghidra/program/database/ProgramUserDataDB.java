@@ -16,27 +16,56 @@
 package ghidra.program.database;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 
-import db.*;
+import db.DBConstants;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.IntField;
+import db.RecordIterator;
+import db.Schema;
+import db.StringField;
+import db.Table;
 import ghidra.framework.data.ContentHandler;
 import ghidra.framework.data.DomainObjectAdapterDB;
 import ghidra.framework.store.FileSystem;
 import ghidra.framework.store.LockException;
 import ghidra.program.database.map.AddressMapDB;
 import ghidra.program.database.mem.MemoryMapDB;
-import ghidra.program.database.properties.*;
+import ghidra.program.database.properties.IntPropertyMapDB;
+import ghidra.program.database.properties.LongPropertyMapDB;
+import ghidra.program.database.properties.ObjectPropertyMapDB;
+import ghidra.program.database.properties.StringPropertyMapDB;
+import ghidra.program.database.properties.VoidPropertyMapDB;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressFactory;
-import ghidra.program.model.lang.*;
+import ghidra.program.model.lang.Language;
+import ghidra.program.model.lang.LanguageID;
+import ghidra.program.model.lang.LanguageNotFoundException;
 import ghidra.program.model.listing.ProgramUserData;
-import ghidra.program.model.util.*;
-import ghidra.program.util.*;
+import ghidra.program.model.util.IntPropertyMap;
+import ghidra.program.model.util.LongPropertyMap;
+import ghidra.program.model.util.ObjectPropertyMap;
+import ghidra.program.model.util.PropertyMap;
+import ghidra.program.model.util.StringPropertyMap;
+import ghidra.program.model.util.VoidPropertyMap;
+import ghidra.program.util.ChangeManager;
+import ghidra.program.util.ChangeManagerAdapter;
+import ghidra.program.util.DefaultLanguageService;
+import ghidra.program.util.LanguageTranslator;
+import ghidra.program.util.LanguageTranslatorFactory;
+import ghidra.program.util.OldLanguageFactory;
 import ghidra.util.Msg;
 import ghidra.util.Saveable;
-import ghidra.util.exception.*;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.PropertyTypeMismatchException;
+import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * <code>ProgramUserDataDB</code> stores user data associated with a specific program.
@@ -65,8 +94,8 @@ class ProgramUserDataDB extends DomainObjectAdapterDB implements ProgramUserData
 	private static final int UPGRADE_REQUIRED_BEFORE_VERSION = 1;
 
 	private static final String TABLE_NAME = "ProgramUserData";
-	private final static Field[] COL_FIELDS = new Field[] { StringField.INSTANCE };
-	private final static String[] COL_NAMES = new String[] { "Value" };
+	private final static Field[] COL_FIELDS = { StringField.INSTANCE };
+	private final static String[] COL_NAMES = { "Value" };
 	private final static Schema SCHEMA =
 		new Schema(0, StringField.INSTANCE, "Key", COL_FIELDS, COL_NAMES);
 	private static final int VALUE_COL = 0;
@@ -76,10 +105,10 @@ class ProgramUserDataDB extends DomainObjectAdapterDB implements ProgramUserData
 	private static final String LANGUAGE_ID = "Language ID";
 
 	private static final String REGISTRY_TABLE_NAME = "PropertyRegistry";
-	private final static Field[] REGISTRY_COL_FIELDS = new Field[] { StringField.INSTANCE,
+	private final static Field[] REGISTRY_COL_FIELDS = { StringField.INSTANCE,
 		StringField.INSTANCE, IntField.INSTANCE, StringField.INSTANCE };
 	private final static String[] REGISTRY_COL_NAMES =
-		new String[] { "Owner", "PropertyName", "PropertyType", "SaveableClass" };
+		{ "Owner", "PropertyName", "PropertyType", "SaveableClass" };
 	private final static Schema REGISTRY_SCHEMA =
 		new Schema(0, "ID", REGISTRY_COL_FIELDS, REGISTRY_COL_NAMES);
 	private static final int PROPERTY_OWNER_COL = 0;
@@ -94,7 +123,7 @@ class ProgramUserDataDB extends DomainObjectAdapterDB implements ProgramUserData
 	private static final int PROPERTY_TYPE_SAVEABLE = 4;
 
 	private static final String[] PROPERTY_TYPES =
-		new String[] { "String", "Long", "Int", "Boolean", "Object" };
+		{ "String", "Long", "Int", "Boolean", "Object" };
 
 	private ProgramDB program;
 	private Table table;
@@ -105,7 +134,7 @@ class ProgramUserDataDB extends DomainObjectAdapterDB implements ProgramUserData
 	private Language language;
 	private LanguageTranslator languageUpgradeTranslator;
 	private AddressFactory addressFactory;
-	private HashMap<Long, PropertyMap> propertyMaps = new HashMap<Long, PropertyMap>();
+	private HashMap<Long, PropertyMap> propertyMaps = new HashMap<>();
 	private HashSet<String> propertyMapOwners = null;
 
 	private final ChangeManager changeMgr = new ChangeManagerAdapter() {
@@ -575,7 +604,7 @@ class ProgramUserDataDB extends DomainObjectAdapterDB implements ProgramUserData
 
 	@Override
 	public synchronized List<PropertyMap> getProperties(String owner) {
-		List<PropertyMap> list = new ArrayList<PropertyMap>();
+		List<PropertyMap> list = new ArrayList<>();
 		try {
 			for (Field key : registryTable.findRecords(new StringField(owner),
 				PROPERTY_OWNER_COL)) {
@@ -593,7 +622,7 @@ class ProgramUserDataDB extends DomainObjectAdapterDB implements ProgramUserData
 	public synchronized List<String> getPropertyOwners() {
 		if (propertyMapOwners == null) {
 			try {
-				propertyMapOwners = new HashSet<String>();
+				propertyMapOwners = new HashSet<>();
 				RecordIterator recIter = registryTable.iterator();
 				while (recIter.hasNext()) {
 					DBRecord rec = recIter.next();
@@ -605,7 +634,7 @@ class ProgramUserDataDB extends DomainObjectAdapterDB implements ProgramUserData
 				dbError(e);
 			}
 		}
-		return new ArrayList<String>(propertyMapOwners);
+		return new ArrayList<>(propertyMapOwners);
 	}
 
 	@Override

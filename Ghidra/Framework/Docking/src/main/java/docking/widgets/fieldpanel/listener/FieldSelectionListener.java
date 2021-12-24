@@ -29,5 +29,5 @@ public interface FieldSelectionListener {
 	 * @param selection the new selection.
 	 * @param trigger indicates the cause of the selection changing
 	 */
-	public void selectionChanged(FieldSelection selection, EventTrigger trigger);
+	void selectionChanged(FieldSelection selection, EventTrigger trigger);
 }

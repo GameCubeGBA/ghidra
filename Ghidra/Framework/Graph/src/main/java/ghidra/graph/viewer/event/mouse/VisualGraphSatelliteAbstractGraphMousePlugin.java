@@ -21,9 +21,13 @@ import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 
-import edu.uci.ics.jung.visualization.*;
+import edu.uci.ics.jung.visualization.MultiLayerTransformer;
+import edu.uci.ics.jung.visualization.RenderContext;
+import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.SatelliteVisualizationViewer;
-import ghidra.graph.viewer.*;
+import ghidra.graph.viewer.VisualEdge;
+import ghidra.graph.viewer.VisualGraphViewUpdater;
+import ghidra.graph.viewer.VisualVertex;
 
 public abstract class VisualGraphSatelliteAbstractGraphMousePlugin<V extends VisualVertex, E extends VisualEdge<V>>
 		extends VisualGraphAbstractGraphMousePlugin<V, E> {
@@ -77,8 +81,7 @@ public abstract class VisualGraphSatelliteAbstractGraphMousePlugin<V extends Vis
 		// ...now translate the shape from the shared layout space to the satellite view space
 		MultiLayerTransformer satelliteMultiLayerTransformer =
 			satelliteViewer.getRenderContext().getMultiLayerTransformer();
-		Shape lenInSatelliteViewSpace = satelliteMultiLayerTransformer.transform(lensInLayoutSpace);
-		return lenInSatelliteViewSpace;
+		return satelliteMultiLayerTransformer.transform(lensInLayoutSpace);
 	}
 
 	protected Point translateSatelliteViewPointToLayoutPoint(VisualizationViewer<V, E> viewer,

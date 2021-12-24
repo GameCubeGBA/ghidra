@@ -15,7 +15,9 @@
  */
 package ghidra.framework.project.tool;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 import org.jdom.Element;
 
@@ -35,7 +37,7 @@ class WorkspaceImpl implements Workspace {
 
 	private String name;
 	private ToolManagerImpl toolManager;
-	private Set<PluginTool> runningTools = new HashSet<PluginTool>(TYPICAL_NUM_RUNNING_TOOLS);
+	private Set<PluginTool> runningTools = new HashSet<>(TYPICAL_NUM_RUNNING_TOOLS);
 	private boolean isActive;
 
 	WorkspaceImpl(String name, ToolManagerImpl toolManager) {
@@ -154,7 +156,7 @@ class WorkspaceImpl implements Workspace {
 		}
 
 		String activeStr = root.getAttributeValue("ACTIVE");
-		isActive = (activeStr != null && activeStr.equalsIgnoreCase("true"));
+		isActive = (activeStr != null && "true".equalsIgnoreCase(activeStr));
 
 		String defaultTool = System.getProperty("ghidra.defaulttool");
 		if (defaultTool != null && !defaultTool.isEmpty()) {

@@ -16,28 +16,30 @@
  */
 package ghidra.program.database;
 
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetView;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
 public interface IntRangeMap {
 
-	public void setValue(AddressSetView addresses, int value);
+	void setValue(AddressSetView addresses, int value);
 
-	public void setValue(Address start, Address end, int value);
+	void setValue(Address start, Address end, int value);
 
-	public Integer getValue(Address address);
+	Integer getValue(Address address);
 
-	public AddressSet getAddressSet();
+	AddressSet getAddressSet();
 
-	public AddressSet getAddressSet(int value);
+	AddressSet getAddressSet(int value);
 
-	public void clearValue(AddressSetView addresses);
+	void clearValue(AddressSetView addresses);
 
-	public void clearValue(Address start, Address end);
+	void clearValue(Address start, Address end);
 
-	public void clearAll();
+	void clearAll();
 
-	public void moveAddressRange(Address fromAddr, Address toAddr, long length, TaskMonitor monitor)
+	void moveAddressRange(Address fromAddr, Address toAddr, long length, TaskMonitor monitor)
 			throws CancelledException;
 }

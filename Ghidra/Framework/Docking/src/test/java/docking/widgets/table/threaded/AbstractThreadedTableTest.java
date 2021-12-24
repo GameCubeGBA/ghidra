@@ -15,8 +15,12 @@
  */
 package docking.widgets.table.threaded;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.awt.BorderLayout;
 import java.awt.Rectangle;
@@ -27,11 +31,16 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.table.JTableHeader;
 
-import org.junit.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
 
 import docking.DockingUtils;
 import docking.test.AbstractDockingTest;
-import docking.widgets.table.*;
+import docking.widgets.table.ColumnSortState;
+import docking.widgets.table.GTable;
+import docking.widgets.table.SortedTableModel;
+import docking.widgets.table.TableSortState;
 
 public abstract class AbstractThreadedTableTest extends AbstractDockingTest {
 

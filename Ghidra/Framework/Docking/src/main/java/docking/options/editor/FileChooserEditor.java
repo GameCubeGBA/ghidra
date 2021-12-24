@@ -21,14 +21,19 @@ import java.awt.event.MouseListener;
 import java.beans.PropertyEditorSupport;
 import java.io.File;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import docking.widgets.filechooser.GhidraFileChooserMode;
 import org.apache.commons.lang3.StringUtils;
 
 import docking.widgets.filechooser.GhidraFileChooser;
+import docking.widgets.filechooser.GhidraFileChooserMode;
 
 /**
  * Bean editor to show a text field and a browse button to bring

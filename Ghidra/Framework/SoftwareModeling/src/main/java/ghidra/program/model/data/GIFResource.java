@@ -16,11 +16,11 @@
  */
 package ghidra.program.model.data;
 
-import ghidra.program.model.mem.MemBuffer;
-
 import java.io.IOException;
 import java.nio.ByteOrder;
 import java.util.Arrays;
+
+import ghidra.program.model.mem.MemBuffer;
 
 /**
  * Class for determining the size of a GIF image. It loads just enough of the GIF information to 

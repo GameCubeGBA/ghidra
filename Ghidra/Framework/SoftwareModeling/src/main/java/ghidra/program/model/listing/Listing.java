@@ -19,15 +19,23 @@ import java.util.Iterator;
 import java.util.List;
 
 import ghidra.program.database.function.OverlappingFunctionException;
-import ghidra.program.model.address.*;
-import ghidra.program.model.data.*;
-import ghidra.program.model.lang.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressIterator;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.DataTypeConflictException;
+import ghidra.program.model.data.DataTypeManager;
+import ghidra.program.model.lang.InstructionPrototype;
+import ghidra.program.model.lang.InstructionSet;
+import ghidra.program.model.lang.ProcessorContextView;
 import ghidra.program.model.mem.MemBuffer;
 import ghidra.program.model.symbol.Namespace;
 import ghidra.program.model.symbol.SourceType;
 import ghidra.program.model.util.CodeUnitInsertionException;
 import ghidra.program.model.util.PropertyMap;
-import ghidra.util.exception.*;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.DuplicateNameException;
+import ghidra.util.exception.InvalidInputException;
 import ghidra.util.task.TaskMonitor;
 
 /**
@@ -42,7 +50,7 @@ public interface Listing {
 	 * @param addr the address to look for a codeUnit.
 	 * @return the codeUnit that begins at the given address
 	 */
-	public CodeUnit getCodeUnitAt(Address addr);
+	CodeUnit getCodeUnitAt(Address addr);
 
 	/**
 	 * get the code unit that contains the given address.
@@ -50,7 +58,7 @@ public interface Listing {
 	 * @param addr the address to look for a codeUnit.
 	 * @return the codeUnit that contains the given address
 	 */
-	public CodeUnit getCodeUnitContaining(Address addr);
+	CodeUnit getCodeUnitContaining(Address addr);
 
 	/**
 	 * get the next code unit that starts an an address that is greater than the
@@ -61,7 +69,7 @@ public interface Listing {
 	 * @return the next CodeUnit found while searching forward from addr or null
 	 *         if none found.
 	 */
-	public CodeUnit getCodeUnitAfter(Address addr);
+	CodeUnit getCodeUnitAfter(Address addr);
 
 	/**
 	 * get the next code unit that starts at an address that is less than the
@@ -72,7 +80,7 @@ public interface Listing {
 	 * @return The first codeUnit found while searching backwards from addr or
 	 *         null if none found.
 	 */
-	public CodeUnit getCodeUnitBefore(Address addr);
+	CodeUnit getCodeUnitBefore(Address addr);
 
 	/**
 	 * Get an iterator that contains all code units in the program which have
@@ -86,7 +94,7 @@ public interface Listing {
 	 * @return a CodeUnitIterator that returns all code units from the indicated
 	 *         start address that have the specified property type defined.
 	 */
-	public CodeUnitIterator getCodeUnitIterator(String property, boolean forward);
+	CodeUnitIterator getCodeUnitIterator(String property, boolean forward);
 
 	/**
 	 * Get an iterator that contains the code units which have the specified
@@ -106,7 +114,7 @@ public interface Listing {
 	 * @return a CodeUnitIterator that returns all code units from the indicated
 	 *         start address that have the specified property type defined.
 	 */
-	public CodeUnitIterator getCodeUnitIterator(String property, Address addr, boolean forward);
+	CodeUnitIterator getCodeUnitIterator(String property, Address addr, boolean forward);
 
 	/**
 	 * Get an iterator that contains the code units which have the specified
@@ -121,7 +129,7 @@ public interface Listing {
 	 * @return a CodeUnitIterator that returns all code units from the indicated
 	 *         address set that have the specified property type defined.
 	 */
-	public CodeUnitIterator getCodeUnitIterator(String property, AddressSetView addrSet,
+	CodeUnitIterator getCodeUnitIterator(String property, AddressSetView addrSet,
 			boolean forward);
 
 	/**
@@ -133,7 +141,7 @@ public interface Listing {
 	 * @return a CodeUnitIterator that returns all code units from the indicated
 	 *         address set that have the specified comment type defined
 	 */
-	public CodeUnitIterator getCommentCodeUnitIterator(int commentType, AddressSetView addrSet);
+	CodeUnitIterator getCommentCodeUnitIterator(int commentType, AddressSetView addrSet);
 
 	/**
 	 * Get a forward iterator over addresses that have the specified comment
@@ -146,7 +154,7 @@ public interface Listing {
 	 * @return an AddressIterator that returns all addresses from the indicated
 	 *         address set that have the specified comment type defined
 	 */
-	public AddressIterator getCommentAddressIterator(int commentType, AddressSetView addrSet,
+	AddressIterator getCommentAddressIterator(int commentType, AddressSetView addrSet,
 			boolean forward);
 
 	/**
@@ -158,7 +166,7 @@ public interface Listing {
 	 * @return an AddressIterator that returns all addresses from the indicated
 	 *         address set that have any type of comment.
 	 */
-	public AddressIterator getCommentAddressIterator(AddressSetView addrSet, boolean forward);
+	AddressIterator getCommentAddressIterator(AddressSetView addrSet, boolean forward);
 
 	/**
 	 * Get the comment for the given type at the specified address.
@@ -171,7 +179,7 @@ public interface Listing {
 	 * @throws IllegalArgumentException if type is not one of the types of
 	 *             comments supported
 	 */
-	public String getComment(int commentType, Address address);
+	String getComment(int commentType, Address address);
 
 	/**
 	 * Set the comment for the given comment type at the specified address.
@@ -183,7 +191,7 @@ public interface Listing {
 	 * @throws IllegalArgumentException if type is not one of the types of
 	 *             comments supported
 	 */
-	public void setComment(Address address, int commentType, String comment);
+	void setComment(Address address, int commentType, String comment);
 
 	/**
 	 * get a CodeUnit iterator that will iterate over the entire address space.
@@ -191,7 +199,7 @@ public interface Listing {
 	 * @param forward true means get iterator in forward direction
 	 * @return a CodeUnitIterator in forward direction
 	 */
-	public CodeUnitIterator getCodeUnits(boolean forward);
+	CodeUnitIterator getCodeUnits(boolean forward);
 
 	/**
 	 * Returns an iterator of the code units in this listing (in proper
@@ -206,7 +214,7 @@ public interface Listing {
 	 * @param forward true means get iterator in forward direction
 	 * @return a CodeUnitIterator positioned just before addr.
 	 */
-	public CodeUnitIterator getCodeUnits(Address addr, boolean forward);
+	CodeUnitIterator getCodeUnits(Address addr, boolean forward);
 
 	/**
 	 * Get an iterator over the address range(s). Only code units whose start
@@ -218,7 +226,7 @@ public interface Listing {
 	 * @return a CodeUnitIterator that is restricted to the give
 	 *         AddressRangeSet.
 	 */
-	public CodeUnitIterator getCodeUnits(AddressSetView addrSet, boolean forward);
+	CodeUnitIterator getCodeUnits(AddressSetView addrSet, boolean forward);
 
 	/**
 	 * get the Instruction that starts at the given address. If no Instruction
@@ -228,7 +236,7 @@ public interface Listing {
 	 * @return the Instruction object that starts at addr; or null if no
 	 *         Instructions starts at addr.
 	 */
-	public Instruction getInstructionAt(Address addr);
+	Instruction getInstructionAt(Address addr);
 
 	/**
 	 * get the Instruction that contains the given address. If an Instruction is
@@ -239,7 +247,7 @@ public interface Listing {
 	 * @return the Instruction object that contains addr; or null if no
 	 *         Instructions contain addr.
 	 */
-	public Instruction getInstructionContaining(Address addr);
+	Instruction getInstructionContaining(Address addr);
 
 	/**
 	 * get the closest Instruction that starts at an address that is greater
@@ -248,7 +256,7 @@ public interface Listing {
 	 * @param addr The address at which to begin the forward search.
 	 * @return the next Instruction whose starting address is greater than addr.
 	 */
-	public Instruction getInstructionAfter(Address addr);
+	Instruction getInstructionAfter(Address addr);
 
 	/**
 	 * get the closest Instruction that starts at an address that is less than
@@ -257,7 +265,7 @@ public interface Listing {
 	 * @param addr The address at which to begin the backward search.
 	 * @return the closest Instruction whose starting address is less than addr.
 	 */
-	public Instruction getInstructionBefore(Address addr);
+	Instruction getInstructionBefore(Address addr);
 
 	/**
 	 * get an Instruction iterator that will iterate over the entire address
@@ -267,7 +275,7 @@ public interface Listing {
 	 * @return an InstructionIterator that iterates over all instructions in the
 	 *         program.
 	 */
-	public InstructionIterator getInstructions(boolean forward);
+	InstructionIterator getInstructions(boolean forward);
 
 	/**
 	 * Returns an iterator of the instructions in this listing (in proper
@@ -283,7 +291,7 @@ public interface Listing {
 	 * @return an InstructionIterator that iterates over all Instruction objects
 	 *         in the given address range set.
 	 */
-	public InstructionIterator getInstructions(Address addr, boolean forward);
+	InstructionIterator getInstructions(Address addr, boolean forward);
 
 	/**
 	 * Get an Instruction iterator over the address range(s). Only instructions
@@ -295,7 +303,7 @@ public interface Listing {
 	 * @return a DataIterator that iterates over all defined and undefined Data
 	 *         objects in the given address range set.
 	 */
-	public InstructionIterator getInstructions(AddressSetView addrSet, boolean forward);
+	InstructionIterator getInstructions(AddressSetView addrSet, boolean forward);
 
 	/**
 	 * get the Data (Defined or Undefined) that starts at the given address.
@@ -304,7 +312,7 @@ public interface Listing {
 	 * @return the Data object that starts at addr; or null if no Data
 	 *         objects(defined or undefined) start at addr.
 	 */
-	public Data getDataAt(Address addr);
+	Data getDataAt(Address addr);
 
 	/**
 	 * Gets the data object that is at or contains the given address or null if
@@ -314,7 +322,7 @@ public interface Listing {
 	 * @return the Data object containing the given address or null if there is
 	 *         no data that contains the address.
 	 */
-	public Data getDataContaining(Address addr);
+	Data getDataContaining(Address addr);
 
 	/**
 	 * get the closest Data object that starts at an address that is greater
@@ -323,7 +331,7 @@ public interface Listing {
 	 * @param addr the address at which to begin the forward search.
 	 * @return the next Data object whose starting address is greater than addr.
 	 */
-	public Data getDataAfter(Address addr);
+	Data getDataAfter(Address addr);
 
 	/**
 	 * get the closest Data object that starts at an address that is less than
@@ -332,7 +340,7 @@ public interface Listing {
 	 * @param addr The address at which to begin the backward search.
 	 * @return the closest Data object whose starting address is less than addr.
 	 */
-	public Data getDataBefore(Address addr);
+	Data getDataBefore(Address addr);
 
 	/**
 	 * get a Data iterator that will iterate over the entire address space;
@@ -342,7 +350,7 @@ public interface Listing {
 	 * @return a DataIterator that iterates over all defined and undefined Data
 	 *         object in the program.
 	 */
-	public DataIterator getData(boolean forward);
+	DataIterator getData(boolean forward);
 
 	/**
 	 * Returns an iterator of the data in this listing (in proper sequence),
@@ -357,7 +365,7 @@ public interface Listing {
 	 * @return a DataIterator that iterates over all Data objects in the given
 	 *         address range set.
 	 */
-	public DataIterator getData(Address addr, boolean forward);
+	DataIterator getData(Address addr, boolean forward);
 
 	/**
 	 * Get an iterator over the address range(s). Only data whose start
@@ -369,7 +377,7 @@ public interface Listing {
 	 * @return a DataIterator that iterates over all defined and undefined Data
 	 *         objects in the given address range set.
 	 */
-	public DataIterator getData(AddressSetView addrSet, boolean forward);
+	DataIterator getData(AddressSetView addrSet, boolean forward);
 
 	/**
 	 * get the Data (defined) object that starts at the given address. If no
@@ -379,7 +387,7 @@ public interface Listing {
 	 * @return a Data object that starts at addr, or null if no Data object has
 	 *         been defined to start at addr.
 	 */
-	public Data getDefinedDataAt(Address addr);
+	Data getDefinedDataAt(Address addr);
 
 	/**
 	 * get the Data object that starts at the given address. If no Data objects
@@ -389,7 +397,7 @@ public interface Listing {
 	 *            object.
 	 * @return the defined Data object containing addr.
 	 */
-	public Data getDefinedDataContaining(Address addr);
+	Data getDefinedDataContaining(Address addr);
 
 	/**
 	 *
@@ -400,7 +408,7 @@ public interface Listing {
 	 * @return the next defined Data object whose starting address is greater
 	 *         than addr.
 	 */
-	public Data getDefinedDataAfter(Address addr);
+	Data getDefinedDataAfter(Address addr);
 
 	/**
 	 * get the closest defined Data object that starts at an address that is
@@ -410,7 +418,7 @@ public interface Listing {
 	 * @return the closest defined Data object whose starting address is less
 	 *         than addr.
 	 */
-	public Data getDefinedDataBefore(Address addr);
+	Data getDefinedDataBefore(Address addr);
 
 	/**
 	 * get a Data iterator that will iterate over the entire address space;
@@ -420,7 +428,7 @@ public interface Listing {
 	 * @return a DataIterator that iterates over all defined Data objects in the
 	 *         program.
 	 */
-	public DataIterator getDefinedData(boolean forward);
+	DataIterator getDefinedData(boolean forward);
 
 	/**
 	 * Returns an iterator of the defined data in this listing (in proper
@@ -436,7 +444,7 @@ public interface Listing {
 	 * @return a DataIterator that iterates over all defined Data objects in the
 	 *         given address range set.
 	 */
-	public DataIterator getDefinedData(Address addr, boolean forward);
+	DataIterator getDefinedData(Address addr, boolean forward);
 
 	/**
 	 * Get an iterator over the address range(s). Only defined data whose start
@@ -448,7 +456,7 @@ public interface Listing {
 	 * @return a DataIterator that iterates over all defined Data objects in the
 	 *         given address range set.
 	 */
-	public DataIterator getDefinedData(AddressSetView addrSet, boolean forward);
+	DataIterator getDefinedData(AddressSetView addrSet, boolean forward);
 
 	/**
 	 * get the Data (undefined) object that starts at the given address.
@@ -457,7 +465,7 @@ public interface Listing {
 	 * @return a default DataObject if bytes exist at addr and nothing has been
 	 *         defined to exist there. Otherwise returns null.
 	 */
-	public Data getUndefinedDataAt(Address addr);
+	Data getUndefinedDataAt(Address addr);
 
 	/**
 	 * Get the undefined Data object that starts at an address that is greater
@@ -469,7 +477,7 @@ public interface Listing {
 	 * @return the next undefined Data object whose starting address is greater
 	 *         than addr.
 	 */
-	public Data getUndefinedDataAfter(Address addr, TaskMonitor monitor);
+	Data getUndefinedDataAfter(Address addr, TaskMonitor monitor);
 
 	/**
 	 * Get the undefined Data object that falls within the set. This operation
@@ -481,7 +489,7 @@ public interface Listing {
 	 * @return the next undefined Data object whose starting address falls
 	 *         within the addresSet.
 	 */
-	public Data getFirstUndefinedData(AddressSetView set, TaskMonitor monitor);
+	Data getFirstUndefinedData(AddressSetView set, TaskMonitor monitor);
 
 	/**
 	 * get the closest undefined Data object that starts at an address that is
@@ -493,7 +501,7 @@ public interface Listing {
 	 * @return the closest undefined Data object whose starting address is less
 	 *         than addr.
 	 */
-	public Data getUndefinedDataBefore(Address addr, TaskMonitor monitor);
+	Data getUndefinedDataBefore(Address addr, TaskMonitor monitor);
 
 	/**
 	 * Get the address set which corresponds to all undefined code units within
@@ -507,7 +515,7 @@ public interface Listing {
 	 * @return address set corresponding to undefined code units
 	 * @throws CancelledException if monitor cancelled
 	 */
-	public AddressSetView getUndefinedRanges(AddressSetView set, boolean initializedMemoryOnly,
+	AddressSetView getUndefinedRanges(AddressSetView set, boolean initializedMemoryOnly,
 			TaskMonitor monitor) throws CancelledException;
 
 	/**
@@ -517,7 +525,7 @@ public interface Listing {
 	 * @return the next instruction or defined data at an address higher than
 	 *         the given address.
 	 */
-	public CodeUnit getDefinedCodeUnitAfter(Address addr);
+	CodeUnit getDefinedCodeUnitAfter(Address addr);
 
 	/**
 	 * Returns the closest instruction or defined data that starts before the
@@ -527,7 +535,7 @@ public interface Listing {
 	 * @return the closest instruction or defined data at an address below the
 	 *         given address.
 	 */
-	public CodeUnit getDefinedCodeUnitBefore(Address addr);
+	CodeUnit getDefinedCodeUnitBefore(Address addr);
 
 	/**
 	 * Get an iterator over all the composite data objects (Arrays, Structures,
@@ -538,7 +546,7 @@ public interface Listing {
 	 *            address and iterates backwards.
 	 * @return an iterator over all the composite data objects.
 	 */
-	public DataIterator getCompositeData(boolean forward);
+	DataIterator getCompositeData(boolean forward);
 
 	/**
 	 * Get an iterator over all the composite data objects (Arrays, Structures,
@@ -549,7 +557,7 @@ public interface Listing {
 	 * @return an iterator over all the composite data objects starting with the
 	 *         given address.
 	 */
-	public DataIterator getCompositeData(Address start, boolean forward);
+	DataIterator getCompositeData(Address start, boolean forward);
 
 	/**
 	 * Get an iterator over all the composite data objects (Arrays, Structures,
@@ -560,21 +568,21 @@ public interface Listing {
 	 * @return an iterator over all the composite data objects in the given
 	 *         address set.
 	 */
-	public DataIterator getCompositeData(AddressSetView addrSet, boolean forward);
+	DataIterator getCompositeData(AddressSetView addrSet, boolean forward);
 
 	/**
 	 * Returns an iterator over all user defined property names.
 	 *
 	 * @return an iterator over all user defined property names.
 	 */
-	public Iterator<String> getUserDefinedProperties();
+	Iterator<String> getUserDefinedProperties();
 
 	/**
 	 * Removes the entire property from the program
 	 *
 	 * @param propertyName the name of the property to remove.
 	 */
-	public void removeUserDefinedProperty(String propertyName);
+	void removeUserDefinedProperty(String propertyName);
 
 	/**
 	 * Returns the PropertyMap associated with the given name
@@ -582,7 +590,7 @@ public interface Listing {
 	 * @param propertyName the property name
 	 * @return PropertyMap the propertyMap object.
 	 */
-	public PropertyMap getPropertyMap(String propertyName);
+	PropertyMap getPropertyMap(String propertyName);
 
 	/**
 	 * Creates a new Instruction object at the given address. The specified
@@ -602,7 +610,7 @@ public interface Listing {
 	 * @exception CodeUnitInsertionException thrown if the new Instruction would
 	 *                overlap and existing Instruction or defined data.
 	 */
-	public Instruction createInstruction(Address addr, InstructionPrototype prototype,
+	Instruction createInstruction(Address addr, InstructionPrototype prototype,
 			MemBuffer memBuf, ProcessorContextView context) throws CodeUnitInsertionException;
 
 	/**
@@ -621,7 +629,7 @@ public interface Listing {
 	 *         set if conflict errors occurred. Such conflict errors will be
 	 *         recorded within the InstructionSet and its InstructionBlocks.
 	 */
-	public AddressSetView addInstructions(InstructionSet instructionSet, boolean overwrite)
+	AddressSetView addInstructions(InstructionSet instructionSet, boolean overwrite)
 			throws CodeUnitInsertionException;
 
 	/**
@@ -638,7 +646,7 @@ public interface Listing {
 	 * @throws DataTypeConflictException if the given datatype conflicts (same
 	 *             name, but not equal) with an existing datatype.
 	 */
-	public Data createData(Address addr, DataType dataType, int length)
+	Data createData(Address addr, DataType dataType, int length)
 			throws CodeUnitInsertionException, DataTypeConflictException;
 
 	/**
@@ -654,7 +662,7 @@ public interface Listing {
 	 * @throws DataTypeConflictException if the given datatype conflicts (same
 	 *             name, but not equal) with an existing datatype.
 	 */
-	public Data createData(Address addr, DataType dataType)
+	Data createData(Address addr, DataType dataType)
 			throws CodeUnitInsertionException, DataTypeConflictException;
 
 	/**
@@ -667,7 +675,7 @@ public interface Listing {
 	 * @param endAddr the end address of the area to be cleared.
 	 * @param clearContext clear context register values if true
 	 */
-	public void clearCodeUnits(Address startAddr, Address endAddr, boolean clearContext);
+	void clearCodeUnits(Address startAddr, Address endAddr, boolean clearContext);
 
 	/**
 	 * Clears any code units in the given range returning everything to "db"s,
@@ -681,7 +689,7 @@ public interface Listing {
 	 * @param monitor monitor that can be used to cancel the clear operation
 	 * @throws CancelledException if the operation was cancelled.
 	 */
-	public void clearCodeUnits(Address startAddr, Address endAddr, boolean clearContext,
+	void clearCodeUnits(Address startAddr, Address endAddr, boolean clearContext,
 			TaskMonitor monitor) throws CancelledException;
 
 	/**
@@ -692,7 +700,7 @@ public interface Listing {
 	 * @return boolean true if the given range is in memory and has no
 	 *         instructions or defined data.
 	 */
-	public boolean isUndefined(Address start, Address end);
+	boolean isUndefined(Address start, Address end);
 
 	/**
 	 * Clears the comments in the given range.
@@ -700,7 +708,7 @@ public interface Listing {
 	 * @param startAddr the start address of the range to be cleared
 	 * @param endAddr the end address of the range to be cleard
 	 */
-	public void clearComments(Address startAddr, Address endAddr);
+	void clearComments(Address startAddr, Address endAddr);
 
 	/**
 	 * Clears the properties in the given range.
@@ -710,7 +718,7 @@ public interface Listing {
 	 * @param monitor task monitor for cancelling operation.
 	 * @throws CancelledException if the operation was cancelled.
 	 */
-	public void clearProperties(Address startAddr, Address endAddr, TaskMonitor monitor)
+	void clearProperties(Address startAddr, Address endAddr, TaskMonitor monitor)
 			throws CancelledException;
 
 	/**
@@ -722,7 +730,7 @@ public interface Listing {
 	 * @param monitor used for tracking progress and cancelling the clear
 	 *            operation.
 	 */
-	public void clearAll(boolean clearContext, TaskMonitor monitor);
+	void clearAll(boolean clearContext, TaskMonitor monitor);
 
 	/**
 	 * Returns the fragment containing the given address.
@@ -733,7 +741,7 @@ public interface Listing {
 	 *
 	 * @return will return null if the address is not in the program.
 	 */
-	public ProgramFragment getFragment(String treeName, Address addr);
+	ProgramFragment getFragment(String treeName, Address addr);
 
 	/**
 	 * Returns the module with the given name.
@@ -744,7 +752,7 @@ public interface Listing {
 	 *
 	 * @return will return null if there is no module with the given name.
 	 */
-	public ProgramModule getModule(String treeName, String name);
+	ProgramModule getModule(String treeName, String name);
 
 	/**
 	 * Returns the fragment with the given name.
@@ -755,7 +763,7 @@ public interface Listing {
 	 *
 	 * @return will return null if there is no fragment with the given name.
 	 */
-	public ProgramFragment getFragment(String treeName, String name);
+	ProgramFragment getFragment(String treeName, String name);
 
 	/**
 	 * Create a new tree that will be identified by the given name. By default,
@@ -768,7 +776,7 @@ public interface Listing {
 	 * @throws DuplicateNameException if a tree with the given name already
 	 *             exists
 	 */
-	public ProgramModule createRootModule(String treeName) throws DuplicateNameException;
+	ProgramModule createRootModule(String treeName) throws DuplicateNameException;
 
 	/**
 	 * Gets the root module for a tree in this listing.
@@ -778,7 +786,7 @@ public interface Listing {
 	 * @return the root module for the listing; returns null if there is no tree
 	 *         rooted at a module with the given name.
 	 */
-	public ProgramModule getRootModule(String treeName);
+	ProgramModule getRootModule(String treeName);
 
 	/**
 	 * Returns the root module of the program tree with the given name;
@@ -786,7 +794,7 @@ public interface Listing {
 	 * @param treeID id of the program tree
 	 * @return the root module of the specified tree.
 	 */
-	public ProgramModule getRootModule(long treeID);
+	ProgramModule getRootModule(long treeID);
 
 	/**
 	 * Returns the root module for the default program tree. This would be the
@@ -794,14 +802,14 @@ public interface Listing {
 	 *
 	 * @return the root module for the oldest existing program tree.
 	 */
-	public ProgramModule getDefaultRootModule();
+	ProgramModule getDefaultRootModule();
 
 	/**
 	 * Get the names of all the trees defined in this listing.
 	 *
 	 * @return the names of all program trees defined in the program.
 	 */
-	public String[] getTreeNames();
+	String[] getTreeNames();
 
 	/**
 	 * Remove the tree rooted at the given name.
@@ -810,7 +818,7 @@ public interface Listing {
 	 * @return true if the tree was removed; return false if this is the last
 	 *         tree for the program; cannot delete the last tree.
 	 */
-	public boolean removeTree(String treeName);
+	boolean removeTree(String treeName);
 
 	/**
 	 * Rename the tree. This method does not change the root module's name only
@@ -821,7 +829,7 @@ public interface Listing {
 	 * @throws DuplicateNameException if newName already exists for a root
 	 *             module
 	 */
-	public void renameTree(String oldName, String newName) throws DuplicateNameException;
+	void renameTree(String oldName, String newName) throws DuplicateNameException;
 
 	/**
 	 * gets the total number of CodeUnits (Instructions, defined Data, and
@@ -829,28 +837,28 @@ public interface Listing {
 	 *
 	 * @return the total number of CodeUnits in the listing.
 	 */
-	public long getNumCodeUnits();
+	long getNumCodeUnits();
 
 	/**
 	 * gets the total number of defined Data objects in the listing.
 	 *
 	 * @return the total number of defined Data objects in the listing.
 	 */
-	public long getNumDefinedData();
+	long getNumDefinedData();
 
 	/**
 	 * gets the total number of Instructions in the listing.
 	 *
 	 * @return number of Instructions
 	 */
-	public long getNumInstructions();
+	long getNumInstructions();
 
 	/**
 	 * Get the data type manager for the program.
 	 * 
 	 * @return the datatype manager for the program.
 	 */
-	public DataTypeManager getDataTypeManager();
+	DataTypeManager getDataTypeManager();
 
 	/**
 	 * Create a function with an entry point and a body of addresses.
@@ -864,7 +872,7 @@ public interface Listing {
 	 * @throws OverlappingFunctionException if the given body overlaps with an
 	 *             existing function.
 	 */
-	public Function createFunction(String name, Address entryPoint, AddressSetView body,
+	Function createFunction(String name, Address entryPoint, AddressSetView body,
 			SourceType source) throws InvalidInputException, OverlappingFunctionException;
 
 	/**
@@ -881,7 +889,7 @@ public interface Listing {
 	 * @throws OverlappingFunctionException if the given body overlaps with an
 	 *             existing function.
 	 */
-	public Function createFunction(String name, Namespace nameSpace, Address entryPoint,
+	Function createFunction(String name, Namespace nameSpace, Address entryPoint,
 			AddressSetView body, SourceType source)
 			throws InvalidInputException, OverlappingFunctionException;
 
@@ -890,7 +898,7 @@ public interface Listing {
 	 *
 	 * @param entryPoint entry point of function to be removed.
 	 */
-	public void removeFunction(Address entryPoint);
+	void removeFunction(Address entryPoint);
 
 	/**
 	 * Get a function with a given entry point.
@@ -898,7 +906,7 @@ public interface Listing {
 	 * @param entryPoint entry point of the function
 	 * @return function at the entry point
 	 */
-	public Function getFunctionAt(Address entryPoint);
+	Function getFunctionAt(Address entryPoint);
 
 	/**
 	 * Returns a list of all global functions with the given name.
@@ -906,7 +914,7 @@ public interface Listing {
 	 * @param name the name of the functions to retrieve.
 	 * @return a list of all global functions with the given name.
 	 */
-	public List<Function> getGlobalFunctions(String name);
+	List<Function> getGlobalFunctions(String name);
 
 	/**
 	 * Returns a list of all functions with the given name in the given
@@ -918,7 +926,7 @@ public interface Listing {
 	 * @param name the name of the functions to retrieve.
 	 * @return a list of all global functions with the given name.
 	 */
-	public List<Function> getFunctions(String namespace, String name);
+	List<Function> getFunctions(String namespace, String name);
 
 	/**
 	 * Get a function containing an address.
@@ -926,14 +934,14 @@ public interface Listing {
 	 * @param addr the address to search.
 	 * @return function containing this address, null otherwise
 	 */
-	public Function getFunctionContaining(Address addr);
+	Function getFunctionContaining(Address addr);
 
 	/**
 	 * Get an iterator over all external functions
 	 * 
 	 * @return an iterator over all currently defined external functions.
 	 */
-	public FunctionIterator getExternalFunctions();
+	FunctionIterator getExternalFunctions();
 
 	/**
 	 * Get an iterator over all functions
@@ -942,7 +950,7 @@ public interface Listing {
 	 *            backwards address order
 	 * @return an iterator over all currently defined functions.
 	 */
-	public FunctionIterator getFunctions(boolean forward);
+	FunctionIterator getFunctions(boolean forward);
 
 	/**
 	 * Get an iterator over all functions starting at address
@@ -952,7 +960,7 @@ public interface Listing {
 	 *            backwards address order
 	 * @return an iterator over functions
 	 */
-	public FunctionIterator getFunctions(Address start, boolean forward);
+	FunctionIterator getFunctions(Address start, boolean forward);
 
 	/**
 	 * Get an iterator over all functions with entry points in the address set.
@@ -962,7 +970,7 @@ public interface Listing {
 	 *            backwards address order
 	 * @return an iterator over functions
 	 */
-	public FunctionIterator getFunctions(AddressSetView asv, boolean forward);
+	FunctionIterator getFunctions(AddressSetView asv, boolean forward);
 
 	/**
 	 * Check if an address is contained in a function
@@ -970,7 +978,7 @@ public interface Listing {
 	 * @param addr address to test
 	 * @return true if this address is in one or more functions
 	 */
-	public boolean isInFunction(Address addr);
+	boolean isInFunction(Address addr);
 
 	/**
 	 * Get the comment history for comments at the given address.
@@ -979,6 +987,6 @@ public interface Listing {
 	 * @param commentType comment type defined in CodeUnit
 	 * @return array of comment history records
 	 */
-	public CommentHistory[] getCommentHistory(Address addr, int commentType);
+	CommentHistory[] getCommentHistory(Address addr, int commentType);
 
 }

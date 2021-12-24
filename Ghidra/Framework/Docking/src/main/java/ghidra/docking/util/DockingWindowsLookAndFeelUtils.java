@@ -17,18 +17,35 @@ package ghidra.docking.util;
 
 import java.awt.Dimension;
 import java.awt.Font;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map.Entry;
+import java.util.Set;
 
-import javax.swing.*;
+import javax.swing.Action;
+import javax.swing.InputMap;
+import javax.swing.KeyStroke;
+import javax.swing.LookAndFeel;
+import javax.swing.RepaintManager;
+import javax.swing.UIDefaults;
+import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.plaf.ComponentUI;
 
 import ghidra.docking.util.painting.GRepaintManager;
 import ghidra.framework.OperatingSystem;
 import ghidra.framework.Platform;
 import ghidra.framework.preferences.Preferences;
-import ghidra.util.*;
+import ghidra.util.BeginningOfLineAction;
+import ghidra.util.DeleteToEndOfWordAction;
+import ghidra.util.DeleteToStartOfWordAction;
+import ghidra.util.EndOfLineAction;
+import ghidra.util.Msg;
+import ghidra.util.SelectBeginningOfLineAction;
+import ghidra.util.SelectEndOfLineAction;
+import ghidra.util.SystemUtilities;
 
 /**
  * A utility class to manage LookAndFeel (LaF) settings.
@@ -97,8 +114,7 @@ public class DockingWindowsLookAndFeelUtils {
 		boolean useHistoricalValue = true;
 		String useInvertedColorsString = Preferences.getProperty(USE_INVERTED_COLORS_KEY,
 			Boolean.FALSE.toString(), useHistoricalValue);
-		boolean useInvertedColors = Boolean.parseBoolean(useInvertedColorsString);
-		return useInvertedColors;
+		return Boolean.parseBoolean(useInvertedColorsString);
 	}
 
 	/**
@@ -163,7 +179,7 @@ public class DockingWindowsLookAndFeelUtils {
 	}
 
 	private static String findLookAndFeelClassName(String lookAndFeelName) {
-		if (lookAndFeelName.equalsIgnoreCase(SYSTEM_LOOK_AND_FEEL)) {
+		if (SYSTEM_LOOK_AND_FEEL.equalsIgnoreCase(lookAndFeelName)) {
 			return UIManager.getSystemLookAndFeelClassName();
 		}
 

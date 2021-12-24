@@ -20,5 +20,5 @@ package ghidra.graph.job;
  */
 public interface GraphJobListener {
 
-	public void jobFinished(GraphJob job);
+	void jobFinished(GraphJob job);
 }

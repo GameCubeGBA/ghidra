@@ -67,6 +67,7 @@ public class OptionsDialog extends DialogComponentProvider {
 		setFocusComponent(panel.getFocusComponent());
 	}
 
+	@Override
 	public void dispose() {
 		panel.dispose();
 	}
@@ -104,10 +105,8 @@ public class OptionsDialog extends DialogComponentProvider {
 
 	@Override
 	protected void okCallback() {
-		if (hasChanges) {
-			if (!applyChanges()) {
-				return; // don't close on failure
-			}
+		if (hasChanges && !applyChanges()) {
+			return; // don't close on failure
 		}
 		close();
 	}
@@ -148,7 +147,7 @@ public class OptionsDialog extends DialogComponentProvider {
 	class OptionsPropertyChangeListener implements PropertyChangeListener {
 		@Override
 		public void propertyChange(PropertyChangeEvent evt) {
-			if (evt.getPropertyName().equals("apply.enabled")) {
+			if ("apply.enabled".equals(evt.getPropertyName())) {
 				setHasChanges((Boolean) evt.getNewValue());
 			}
 		}

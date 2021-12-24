@@ -21,7 +21,14 @@ import db.DBRecord;
 import ghidra.docking.settings.Settings;
 import ghidra.docking.settings.SettingsDefinition;
 import ghidra.program.database.DBObjectCache;
-import ghidra.program.model.data.*;
+import ghidra.program.model.data.Array;
+import ghidra.program.model.data.ArrayDataType;
+import ghidra.program.model.data.CategoryPath;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.DataTypeDisplayOptions;
+import ghidra.program.model.data.DataTypeManager;
+import ghidra.program.model.data.Dynamic;
+import ghidra.program.model.data.FactoryDataType;
 import ghidra.program.model.mem.MemBuffer;
 import ghidra.util.InvalidNameException;
 import ghidra.util.UniversalID;
@@ -209,10 +216,7 @@ class ArrayDB extends DataTypeDB implements Array {
 			return false;
 		}
 		DataType dataType = getDataType();
-		if (!dataType.isEquivalent(array.getDataType())) {
-			return false;
-		}
-		if (dataType instanceof Dynamic && getElementLength() != array.getElementLength()) {
+		if (!dataType.isEquivalent(array.getDataType()) || (dataType instanceof Dynamic && getElementLength() != array.getElementLength())) {
 			return false;
 		}
 		return true;

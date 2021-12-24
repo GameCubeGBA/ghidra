@@ -17,8 +17,8 @@
 package ghidra.program.model.data;
 
 public interface DataTypeDisplayOptions {
-	public static int MAX_LABEL_STRING_LENGTH = 32;
-	public static DataTypeDisplayOptions DEFAULT = new DataTypeDisplayOptions() {
+	int MAX_LABEL_STRING_LENGTH = 32;
+	DataTypeDisplayOptions DEFAULT = new DataTypeDisplayOptions() {
 		@Override
 		public boolean useAbbreviatedForm() {
 			return false;
@@ -30,7 +30,7 @@ public interface DataTypeDisplayOptions {
 		}
 	};
 
-	public int getLabelStringLength();
+	int getLabelStringLength();
 
-	public boolean useAbbreviatedForm();
+	boolean useAbbreviatedForm();
 }

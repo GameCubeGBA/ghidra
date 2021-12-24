@@ -15,10 +15,15 @@
  */
 package ghidra.framework.main.datatree;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import docking.widgets.tree.GTreeNode;
-import ghidra.framework.model.*;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.DomainFolder;
+import ghidra.framework.model.DomainFolderChangeListener;
+import ghidra.framework.model.DomainObject;
 
 /**
  * Class to handle changes when a domain folder changes; updates the
@@ -46,10 +51,8 @@ class ChangeManager implements DomainFolderChangeListener {
 
 		List<GTreeNode> children = folderNode.getChildren();
 		for (GTreeNode child : children) {
-			if (child instanceof DomainFileNode) {
-				if (child.getName().equals(name)) {
-					folderNode.removeNode(child);
-				}
+			if ((child instanceof DomainFileNode) && child.getName().equals(name)) {
+				folderNode.removeNode(child);
 			}
 		}
 	}
@@ -58,7 +61,7 @@ class ChangeManager implements DomainFolderChangeListener {
 	public void domainFolderRemoved(DomainFolder parent, String name) {
 		updateFolderNode(parent);
 
-		ArrayList<String> folderPath = new ArrayList<String>();
+		ArrayList<String> folderPath = new ArrayList<>();
 		getFolderPath(parent, folderPath);
 		folderPath.add(name);
 
@@ -100,11 +103,9 @@ class ChangeManager implements DomainFolderChangeListener {
 		}
 		DomainFolder parent = file.getParent();
 		DomainFolderNode folderNode = findDomainFolderNode(parent, true);
-		if (folderNode != null) {
-			if (folderNode.isLoaded()) {
-				DomainFileNode newNode = new DomainFileNode(file);
-				addNode(folderNode, newNode);
-			}
+		if ((folderNode != null) && folderNode.isLoaded()) {
+			DomainFileNode newNode = new DomainFileNode(file);
+			addNode(folderNode, newNode);
 		}
 	}
 
@@ -164,7 +165,7 @@ class ChangeManager implements DomainFolderChangeListener {
 	}
 
 	private DomainFolderNode findDomainFolderNode(DomainFolder df, boolean lazy) {
-		ArrayList<String> folderPath = new ArrayList<String>();
+		ArrayList<String> folderPath = new ArrayList<>();
 		getFolderPath(df, folderPath);
 		return findDomainFolderNode(folderPath, lazy);
 	}
@@ -212,10 +213,7 @@ class ChangeManager implements DomainFolderChangeListener {
 
 	private DomainFileNode findDomainFileNode(DomainFile domainFile, boolean lazy) {
 		DomainFolderNode folderNode = findDomainFolderNode(domainFile.getParent(), lazy);
-		if (folderNode == null) {
-			return null;
-		}
-		if (lazy && !folderNode.isLoaded()) {
+		if ((folderNode == null) || (lazy && !folderNode.isLoaded())) {
 			return null; // not visited 
 		}
 
@@ -240,11 +238,8 @@ class ChangeManager implements DomainFolderChangeListener {
 				if (folder.getFile(child.getName()) == null) {
 					folderNode.removeNode(child);
 				}
-			}
-			else if (child instanceof DomainFolderNode) {
-				if (folder.getFolder(child.getName()) == null) {
-					folderNode.removeNode(child);
-				}
+			} else if ((child instanceof DomainFolderNode) && (folder.getFolder(child.getName()) == null)) {
+				folderNode.removeNode(child);
 			}
 		}
 	}

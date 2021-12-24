@@ -30,7 +30,7 @@ public interface VersionedDBListener {
 	 * @param minVersion minimum available version
 	 * @param currentVersion current/latest version
 	 */
-	public void versionsChanged(int minVersion, int currentVersion);
+	void versionsChanged(int minVersion, int currentVersion);
 
 	/**
 	 * A new database version has been created.
@@ -42,14 +42,14 @@ public interface VersionedDBListener {
 	 * @return true if version is allowed, if false is returned 
 	 * the version will be removed.
 	 */
-	public boolean versionCreated(VersionedDatabase db, int version, long time, String comment,
+	boolean versionCreated(VersionedDatabase db, int version, long time, String comment,
 			long checkinId);
 
 	/**
 	 * A version has been deleted.
 	 * @param version
 	 */
-	public void versionDeleted(int version);
+	void versionDeleted(int version);
 
 	/**
 	 * Returns the checkout version associated with the specified
@@ -58,13 +58,13 @@ public interface VersionedDBListener {
 	 * @param checkoutId
 	 * @return checkout version
 	 */
-	public int getCheckoutVersion(long checkoutId) throws IOException;
+	int getCheckoutVersion(long checkoutId) throws IOException;
 
 	/**
 	 * Terminate the specified checkout.
 	 * A new version may or may not have been created.
 	 * @param checkoutId
 	 */
-	public void checkinCompleted(long checkoutId);
+	void checkinCompleted(long checkoutId);
 
 }

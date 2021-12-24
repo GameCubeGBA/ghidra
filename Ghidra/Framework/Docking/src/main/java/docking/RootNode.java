@@ -15,13 +15,29 @@
  */
 package docking;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Frame;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Window;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JComponent;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JMenuBar;
+import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
 import org.jdom.Element;
 
@@ -472,7 +488,7 @@ class RootNode extends WindowNode {
 		while (elementIterator.hasNext()) {
 			Element elem = (Element) elementIterator.next();
 
-			if (elem.getName().equals("WINDOW_NODE")) {
+			if ("WINDOW_NODE".equals(elem.getName())) {
 				Node node = new DetachedWindowNode(elem, winMgr, this, dropTargetFactory,
 					restoredPlaceholders);
 				DetachedWindowNode windowNode = (DetachedWindowNode) node;
@@ -554,11 +570,7 @@ class RootNode extends WindowNode {
 	}
 
 	public void clearStatusMessages() {
-		if (statusBar == null) {
-			return;
-		}
-
-		if (statusBar == null) {
+		if ((statusBar == null) || (statusBar == null)) {
 			return;
 		}
 

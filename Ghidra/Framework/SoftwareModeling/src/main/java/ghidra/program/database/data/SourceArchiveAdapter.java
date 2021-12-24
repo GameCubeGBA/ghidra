@@ -19,7 +19,10 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
-import db.*;
+import db.DBConstants;
+import db.DBHandle;
+import db.DBRecord;
+import db.Schema;
 import ghidra.program.model.data.SourceArchive;
 import ghidra.util.UniversalID;
 import ghidra.util.exception.VersionException;

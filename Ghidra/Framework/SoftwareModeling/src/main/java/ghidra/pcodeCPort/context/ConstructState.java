@@ -17,13 +17,13 @@
 package ghidra.pcodeCPort.context;
 
 import generic.stl.VectorSTL;
-import ghidra.pcodeCPort.slghsymbol.*;
+import ghidra.pcodeCPort.slghsymbol.Constructor;
 
 
 public class ConstructState {
   public Constructor ct;
   public FixedHandle hand = new FixedHandle();
-  public VectorSTL<ConstructState> resolve = new VectorSTL<ConstructState>();
+  public VectorSTL<ConstructState> resolve = new VectorSTL<>();
   public ConstructState parent;
   public int length;			// Length of this instantiation of the constructor
   public int offset;			// Absolute offset (from start of instruction)

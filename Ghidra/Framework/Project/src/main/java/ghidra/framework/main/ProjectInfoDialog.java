@@ -20,7 +20,12 @@ import java.awt.FlowLayout;
 import java.io.File;
 import java.io.IOException;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 
 import docking.DialogComponentProvider;
@@ -31,17 +36,28 @@ import docking.widgets.label.GDLabel;
 import docking.widgets.label.GLabel;
 import docking.wizard.WizardManager;
 import ghidra.app.util.GenericHelpTopics;
-import ghidra.framework.client.*;
+import ghidra.framework.client.ClientUtil;
+import ghidra.framework.client.NotConnectedException;
+import ghidra.framework.client.RepositoryAdapter;
 import ghidra.framework.data.ConvertFileSystem;
-import ghidra.framework.model.*;
+import ghidra.framework.model.Project;
+import ghidra.framework.model.ProjectLocator;
+import ghidra.framework.model.ServerInfo;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.framework.remote.User;
-import ghidra.framework.store.local.*;
-import ghidra.util.*;
+import ghidra.framework.store.local.IndexedLocalFileSystem;
+import ghidra.framework.store.local.IndexedV1LocalFileSystem;
+import ghidra.framework.store.local.LocalFileSystem;
+import ghidra.framework.store.local.MangledLocalFileSystem;
+import ghidra.util.HTMLUtilities;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.layout.PairLayout;
 import ghidra.util.layout.VerticalLayout;
-import ghidra.util.task.*;
+import ghidra.util.task.Task;
+import ghidra.util.task.TaskLauncher;
+import ghidra.util.task.TaskMonitor;
 import resources.ResourceManager;
 
 /**
@@ -163,7 +179,7 @@ public class ProjectInfoDialog extends DialogComponentProvider {
 
 		changeConvertButton = new JButton(repository != null ? CHANGE : CONVERT);
 		changeConvertButton.addActionListener(e -> {
-			if (changeConvertButton.getText().equals(CONVERT)) {
+			if (CONVERT.equals(changeConvertButton.getText())) {
 				convertToShared();
 			}
 			else {
@@ -428,7 +444,7 @@ public class ProjectInfoDialog extends DialogComponentProvider {
 		wm.showWizard(getComponent());
 		RepositoryAdapter rep = panelManager.getProjectRepository();
 		if (rep != null) {
-			StringBuffer confirmMsg = new StringBuffer();
+			StringBuilder confirmMsg = new StringBuilder();
 			confirmMsg.append("All version history on your files will be\n" +
 				"lost after your project is converted.\n" +
 				"Do you want to convert your project?\n");

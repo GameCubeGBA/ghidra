@@ -15,17 +15,24 @@
  */
 package ghidra.graph;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 import org.junit.Test;
 
-import docking.*;
+import docking.ComponentProvider;
+import docking.DockingWindowManager;
+import docking.FakeDockingTool;
+import docking.Tool;
 import docking.action.DockingActionIf;
 import docking.action.ToggleDockingAction;
-import ghidra.graph.graphs.*;
+import ghidra.graph.graphs.AbstractTestVertex;
+import ghidra.graph.graphs.LabelTestVertex;
+import ghidra.graph.graphs.TestEdge;
 import ghidra.graph.support.TestVisualGraph;
 import ghidra.graph.support.TextAreaTestVertex;
 import ghidra.graph.viewer.AbstractVisualGraphTest;

@@ -15,15 +15,20 @@
  */
 package ghidra.program.database.code;
 
-import ghidra.program.database.map.*;
-import ghidra.program.model.address.*;
+import java.io.IOException;
+
+import db.DBHandle;
+import db.DBRecord;
+import db.RecordIterator;
+import db.Table;
+import ghidra.program.database.map.AddressKeyIterator;
+import ghidra.program.database.map.AddressKeyRecordIterator;
+import ghidra.program.database.map.AddressMap;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressSetView;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
-
-import java.io.IOException;
-
-import db.*;
 
 /**
  * Version 0 adapter for the instruction table.
@@ -140,7 +145,7 @@ class InstDBAdapterV0 extends InstDBAdapter {
 	@Override
 	RecordIterator getRecords(Address start, Address end, boolean atStart) throws IOException {
 		return new RecordIteratorAdapter(new AddressKeyRecordIterator(instTable, addrMap,
-			atStart ? start : end, atStart ? true : false));
+			atStart ? start : end, atStart == true));
 	}
 
 	/**
@@ -225,6 +230,7 @@ class InstDBAdapterV0 extends InstDBAdapter {
 		/**
 		 * @see ghidra.framework.store.db.RecordIterator#delete()
 		 */
+		@Override
 		public boolean delete() throws IOException {
 			return false;
 		}
@@ -232,6 +238,7 @@ class InstDBAdapterV0 extends InstDBAdapter {
 		/**
 		 * @see ghidra.framework.store.db.RecordIterator#hasNext()
 		 */
+		@Override
 		public boolean hasNext() throws IOException {
 			return it.hasNext();
 		}
@@ -239,6 +246,7 @@ class InstDBAdapterV0 extends InstDBAdapter {
 		/**
 		 * @see ghidra.framework.store.db.RecordIterator#hasPrevious()
 		 */
+		@Override
 		public boolean hasPrevious() throws IOException {
 			return it.hasPrevious();
 		}
@@ -246,6 +254,7 @@ class InstDBAdapterV0 extends InstDBAdapter {
 		/**
 		 * @see ghidra.framework.store.db.RecordIterator#next()
 		 */
+		@Override
 		public DBRecord next() throws IOException {
 			DBRecord rec = it.next();
 			return adaptRecord(rec);
@@ -254,6 +263,7 @@ class InstDBAdapterV0 extends InstDBAdapter {
 		/**
 		 * @see ghidra.framework.store.db.RecordIterator#previous()
 		 */
+		@Override
 		public DBRecord previous() throws IOException {
 			DBRecord rec = it.previous();
 			return adaptRecord(rec);

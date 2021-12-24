@@ -15,10 +15,11 @@
  */
 package help.validator.links;
 
+import java.nio.file.Path;
+import java.util.Objects;
+
 import help.validator.location.HelpModuleCollection;
 import help.validator.model.TOCItem;
-
-import java.nio.file.Path;
 
 public class MissingTOCTargetIDInvalidLink implements InvalidLink {
 
@@ -73,11 +74,7 @@ public class MissingTOCTargetIDInvalidLink implements InvalidLink {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((help == null) ? 0 : help.hashCode());
-		result = prime * result + ((item == null) ? 0 : item.hashCode());
-		return result;
+		return Objects.hash(help, item);
 	}
 
 	@Override
@@ -85,28 +82,15 @@ public class MissingTOCTargetIDInvalidLink implements InvalidLink {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
 		}
 
 		MissingTOCTargetIDInvalidLink other = (MissingTOCTargetIDInvalidLink) obj;
-		if (help == null) {
-			if (other.help != null) {
-				return false;
-			}
-		}
-		else if (!help.equals(other.help)) {
+		if (!Objects.equals(help, other.help)) {
 			return false;
 		}
-		if (item == null) {
-			if (other.item != null) {
-				return false;
-			}
-		}
-		else if (!item.equals(other.item)) {
+		if (!Objects.equals(item, other.item)) {
 			return false;
 		}
 		return true;

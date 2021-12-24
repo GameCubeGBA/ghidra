@@ -82,13 +82,11 @@ public class DefaultViewToIndexMapper implements ViewToIndexMapper {
 
 	@Override
 	public int getScrollValue(BigInteger startIndex, BigInteger endIndex, int startY, int endY) {
-		if (!endValidated) {
-			if (endIndex.equals(lastIndex) && endY<=screenHeight) {
-				lastStartIndex = startIndex;
-				lastStartY = startY;
-				xFactor = startIndex.doubleValue()/(viewHeight - screenHeight);
-				endValidated = true;
-			}
+		if (!endValidated && (endIndex.equals(lastIndex) && endY<=screenHeight)) {
+			lastStartIndex = startIndex;
+			lastStartY = startY;
+			xFactor = startIndex.doubleValue()/(viewHeight - screenHeight);
+			endValidated = true;
 		}
 
 		if (startIndex.equals(BigInteger.ZERO) && startY == 0) {

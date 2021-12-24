@@ -18,12 +18,16 @@ package docking.action;
 import java.awt.event.InputEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 import javax.swing.Action;
 import javax.swing.KeyStroke;
 
-import docking.*;
+import docking.ComponentProvider;
+import docking.DockingKeyBindingAction;
+import docking.Tool;
 import ghidra.util.ReservedKeyBindings;
 import ghidra.util.exception.AssertException;
 
@@ -147,11 +151,7 @@ public class KeyBindingsManager implements PropertyChangeListener {
 	 * using keystroke specified instead of that specified by the action
 	 */
 	private void removeKeyBinding(KeyStroke keyStroke, DockingActionIf action) {
-		if (keyStroke == null) {
-			return;
-		}
-
-		if (ReservedKeyBindings.isReservedKeystroke(keyStroke)) {
+		if ((keyStroke == null) || ReservedKeyBindings.isReservedKeystroke(keyStroke)) {
 			return;
 		}
 
@@ -171,7 +171,7 @@ public class KeyBindingsManager implements PropertyChangeListener {
 	public void propertyChange(PropertyChangeEvent evt) {
 		String name = evt.getPropertyName();
 		DockingActionIf action = (DockingActionIf) evt.getSource();
-		if (!name.equals(DockingActionIf.KEYBINDING_DATA_PROPERTY)) {
+		if (!DockingActionIf.KEYBINDING_DATA_PROPERTY.equals(name)) {
 			return;
 		}
 

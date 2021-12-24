@@ -18,13 +18,19 @@ package docking;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
 
-import docking.action.*;
-import docking.menu.*;
+import docking.action.DockingActionIf;
+import docking.action.MenuData;
+import docking.action.ToggleDockingActionIf;
+import docking.menu.MenuGroupMap;
+import docking.menu.MenuHandler;
+import docking.menu.MenuManager;
 
 public class DialogComponentProviderPopupActionManager {
 
@@ -107,7 +113,7 @@ public class DialogComponentProviderPopupActionManager {
 // Inner Classes
 //==================================================================================================
 
-	private class PopupMenuHandler extends MenuHandler {
+	private static class PopupMenuHandler extends MenuHandler {
 		private final ActionContext actionContext;
 
 		public PopupMenuHandler(ActionContext context) {

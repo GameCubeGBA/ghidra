@@ -18,7 +18,10 @@ package ghidra.app.util;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.datatransfer.DataFlavor;
-import java.awt.dnd.*;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDragEvent;
+import java.awt.dnd.DropTargetDropEvent;
 import java.awt.event.ContainerEvent;
 import java.awt.event.ContainerListener;
 import java.util.LinkedHashMap;
@@ -43,7 +46,7 @@ public class FileOpenDropHandler implements DropTargetHandler, Droppable, Contai
 
 	// note: we wish to maintain insertion order
 	private static LinkedHashMap<DataFlavor, FileOpenDataFlavorHandler> handlers =
-		new LinkedHashMap<DataFlavor, FileOpenDataFlavorHandler>();
+		new LinkedHashMap<>();
 
 	private DropTgtAdapter dropTargetAdapter;
 	private DropTarget globalDropTarget;

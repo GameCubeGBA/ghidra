@@ -33,7 +33,7 @@ public interface AnnotationHandler extends ExtensionPoint {
 	 * @param member the name of the member of the Enum
 	 * @return the prefix for type Enum
 	 */
-	public String getPrefix(Enum e, String member);
+	String getPrefix(Enum e, String member);
 
 	/**
 	 * Returns the suffix for type Enum
@@ -41,7 +41,7 @@ public interface AnnotationHandler extends ExtensionPoint {
 	 * @param member the name of the member of the Enum
 	 * @return the suffix for type Enum
 	 */
-	public String getSuffix(Enum e, String member);
+	String getSuffix(Enum e, String member);
 
 	/**
 	 * Returns the prefix for type Composite
@@ -49,7 +49,7 @@ public interface AnnotationHandler extends ExtensionPoint {
 	 * @param dtc the name of the member of the Composite
 	 * @return the prefix for type Composite
 	 */
-	public String getPrefix(Composite c, DataTypeComponent dtc);
+	String getPrefix(Composite c, DataTypeComponent dtc);
 
 	/**
 	 * Returns the suffix for type Composite
@@ -57,30 +57,30 @@ public interface AnnotationHandler extends ExtensionPoint {
 	 * @param dtc the name of the member of the Composite
 	 * @return the suffix for type Composite
 	 */
-	public String getSuffix(Composite c, DataTypeComponent dtc);
+	String getSuffix(Composite c, DataTypeComponent dtc);
 
 	/**
 	 * Returns the description of the specific handler
 	 * @return the description of the specific handler
 	 */
-	public String getDescription();
+	String getDescription();
 
 	/** 
 	 * Returns the name of the C-like language that this handler supports
 	 * @return the name of the C-like language that this handler supports
 	 */
-	public String getLanguageName();
+	String getLanguageName();
 
 	/**
 	 * Returns an array of known extensions for the output file type.  If no extensions are 
 	 * preferred, the an empty array should be returned.
 	 * @return an array of known extensions for the output file type.
 	 */
-	public String[] getFileExtensions();
+	String[] getFileExtensions();
 
 	/**
 	 * Returns a string description of this handler.
 	 * @return a string description of this handler
 	 */
-	public String toString();
+	@Override String toString();
 }

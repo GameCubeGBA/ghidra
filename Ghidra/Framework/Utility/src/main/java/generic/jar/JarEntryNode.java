@@ -18,7 +18,10 @@ package generic.jar;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -36,10 +39,10 @@ public class JarEntryNode {
 		if (childMap == null) {
 			return null;
 		}
-		if (childName.equals(".")) {
+		if (".".equals(childName)) {
 			return this;
 		}
-		if (childName.equals("..")) {
+		if ("..".equals(childName)) {
 			return parent;
 		}
 		return childMap.get(childName);
@@ -50,7 +53,7 @@ public class JarEntryNode {
 		if (file == null) {
 			file = new JarEntryNode(this, childName);
 			if (childMap == null) {
-				childMap = new HashMap<String, JarEntryNode>();
+				childMap = new HashMap<>();
 			}
 			childMap.put(childName, file);
 		}
@@ -69,7 +72,7 @@ public class JarEntryNode {
 		if (childMap == null) {
 			return null;
 		}
-		return new ArrayList<JarEntryNode>(childMap.values());
+		return new ArrayList<>(childMap.values());
 	}
 
 	public String getName() {

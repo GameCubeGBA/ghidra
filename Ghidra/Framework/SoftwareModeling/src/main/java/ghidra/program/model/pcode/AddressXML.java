@@ -19,8 +19,12 @@ import java.util.ArrayList;
 
 import org.xml.sax.Attributes;
 
-import ghidra.program.model.address.*;
-import ghidra.program.model.lang.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.lang.CompilerSpec;
+import ghidra.program.model.lang.Language;
+import ghidra.program.model.lang.Register;
 import ghidra.util.xml.SpecXmlUtils;
 import ghidra.xml.XmlElement;
 import ghidra.xml.XmlParseException;
@@ -174,7 +178,7 @@ public class AddressXML {
 	public static AddressXML restoreXml(XmlElement el, CompilerSpec cspec)
 			throws XmlParseException {
 		AddressXML result;
-		if (el.getName().equals("register")) {
+		if ("register".equals(el.getName())) {
 			String regName = el.getAttribute("name");
 			if (regName == null) {
 				throw new XmlParseException("Missing pentry register name");
@@ -224,7 +228,7 @@ public class AddressXML {
 	 */
 	public static AddressXML restoreXml(XmlElement el, Language language) throws XmlParseException {
 		AddressXML result;
-		if (el.getName().equals("register")) {
+		if ("register".equals(el.getName())) {
 			String regName = el.getAttribute("name");
 			if (regName == null) {
 				throw new XmlParseException("Missing register name");
@@ -432,8 +436,7 @@ public class AddressXML {
 			attrstart += 6;
 			int attrend = addrxml.indexOf('\"', attrstart);
 			if (attrend > attrstart) {
-				int size = SpecXmlUtils.decodeInt(addrxml.substring(attrstart, attrend));
-				return size;
+				return SpecXmlUtils.decodeInt(addrxml.substring(attrstart, attrend));
 			}
 		}
 		return 0;
@@ -453,13 +456,13 @@ public class AddressXML {
 	 */
 	public static Address readXML(XmlElement el, AddressFactory addrFactory) {
 		String localName = el.getName();
-		if (localName.equals("spaceid")) {
+		if ("spaceid".equals(localName)) {
 			AddressSpace spc = addrFactory.getAddressSpace(el.getAttribute("name"));
 			int spaceid = spc.getSpaceID();
 			spc = addrFactory.getConstantSpace();
 			return spc.getAddress(spaceid);
 		}
-		else if (localName.equals("iop")) {
+		else if ("iop".equals(localName)) {
 			int ref = SpecXmlUtils.decodeInt(el.getAttribute("value"));
 			AddressSpace spc = addrFactory.getConstantSpace();
 			return spc.getAddress(ref);
@@ -490,13 +493,13 @@ public class AddressXML {
 	 * @return the scanned address
 	 */
 	public static Address readXML(String localName, Attributes attr, AddressFactory addrFactory) {
-		if (localName.equals("spaceid")) {
+		if ("spaceid".equals(localName)) {
 			AddressSpace spc = addrFactory.getAddressSpace(attr.getValue("name"));
 			int spaceid = spc.getSpaceID();
 			spc = addrFactory.getConstantSpace();
 			return spc.getAddress(spaceid);
 		}
-		else if (localName.equals("iop")) {
+		else if ("iop".equals(localName)) {
 			int ref = SpecXmlUtils.decodeInt(attr.getValue("value"));
 			AddressSpace spc = addrFactory.getConstantSpace();
 			return spc.getAddress(ref);
@@ -521,11 +524,9 @@ public class AddressXML {
 	 */
 	public static void appendAttributes(StringBuilder buf, Address addr) {
 		AddressSpace space = addr.getAddressSpace();
-		if (space.isOverlaySpace()) {
-			if (space.getType() != AddressSpace.TYPE_OTHER) {
-				space = space.getPhysicalSpace();
-				addr = space.getAddress(addr.getOffset());
-			}
+		if (space.isOverlaySpace() && (space.getType() != AddressSpace.TYPE_OTHER)) {
+			space = space.getPhysicalSpace();
+			addr = space.getAddress(addr.getOffset());
 		}
 		SpecXmlUtils.encodeStringAttribute(buf, "space", space.getName());
 		SpecXmlUtils.encodeUnsignedIntegerAttribute(buf, "offset", addr.getUnsignedOffset());
@@ -540,11 +541,9 @@ public class AddressXML {
 	 */
 	public static void appendAttributes(StringBuilder buf, Address addr, int size) {
 		AddressSpace space = addr.getAddressSpace();
-		if (space.isOverlaySpace()) {
-			if (space.getType() != AddressSpace.TYPE_OTHER) {
-				space = space.getPhysicalSpace();
-				addr = space.getAddress(addr.getOffset());
-			}
+		if (space.isOverlaySpace() && (space.getType() != AddressSpace.TYPE_OTHER)) {
+			space = space.getPhysicalSpace();
+			addr = space.getAddress(addr.getOffset());
 		}
 		SpecXmlUtils.encodeStringAttribute(buf, "space", space.getName());
 		SpecXmlUtils.encodeUnsignedIntegerAttribute(buf, "offset", addr.getUnsignedOffset());

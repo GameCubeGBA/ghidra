@@ -15,7 +15,13 @@
  */
 package ghidra.program.model.data;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import ghidra.docking.settings.Settings;
 import ghidra.program.model.data.AlignedStructurePacker.StructurePackResult;
@@ -159,8 +165,7 @@ public class StructureDataType extends CompositeDataTypeImpl implements Structur
 		if (index >= 0) {
 			DataTypeComponent dtc = components.get(index);
 			index = backupToFirstComponentContainingOffset(index, offset);
-			dtc = components.get(index);
-			return dtc;
+			return components.get(index);
 		}
 		index = -index - 1;
 		if (index < components.size()) {
@@ -380,7 +385,6 @@ public class StructureDataType extends CompositeDataTypeImpl implements Structur
 					offsetAdjustment -= dtc.getLength();
 				}
 				--ordinalAdjustment;
-				lastDefinedOrdinal = ordinal;
 			}
 			else {
 
@@ -388,8 +392,8 @@ public class StructureDataType extends CompositeDataTypeImpl implements Structur
 					shiftOffset(dtc, ordinalAdjustment, offsetAdjustment);
 				}
 				newComponents.add(dtc);
-				lastDefinedOrdinal = ordinal;
 			}
+			lastDefinedOrdinal = ordinal;
 		}
 		if (treeSet != null) {
 			// Identify removed filler after last defined component

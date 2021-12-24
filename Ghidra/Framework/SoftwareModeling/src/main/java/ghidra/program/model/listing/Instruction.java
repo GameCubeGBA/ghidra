@@ -19,8 +19,13 @@ import java.util.List;
 
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.UniqueAddressFactory;
-import ghidra.program.model.lang.*;
+import ghidra.program.model.lang.InstructionContext;
+import ghidra.program.model.lang.InstructionPrototype;
+import ghidra.program.model.lang.OperandType;
+import ghidra.program.model.lang.ProcessorContext;
+import ghidra.program.model.lang.Register;
 import ghidra.program.model.pcode.PcodeOp;
+import ghidra.program.model.pcode.PcodeOverride;
 import ghidra.program.model.symbol.FlowType;
 import ghidra.program.model.symbol.RefType;
 
@@ -29,25 +34,25 @@ import ghidra.program.model.symbol.RefType;
  */
 public interface Instruction extends CodeUnit, ProcessorContext {
 
-	public static final int INVALID_DEPTH_CHANGE = InstructionPrototype.INVALID_DEPTH_CHANGE; // 2^24
+	int INVALID_DEPTH_CHANGE = InstructionPrototype.INVALID_DEPTH_CHANGE; // 2^24
 
 	/**
 	 * Get the prototype for this instruction.
 	 */
-	public InstructionPrototype getPrototype();
+	InstructionPrototype getPrototype();
 
 	/**
 	 * If operand is a pure Register, return the register.
 	 * @param opIndex index of the operand.
 	 * @return A register if the operand represents a register.
 	 */
-	public Register getRegister(int opIndex);
+	Register getRegister(int opIndex);
 
 	/**
 	 * Get objects used by this operand (Address, Scalar, Register ...)
 	 * @param opIndex index of the operand.
 	 */
-	public Object[] getOpObjects(int opIndex);
+	Object[] getOpObjects(int opIndex);
 
 	/**
 	 * Get the Input objects used by this instruction.
@@ -55,7 +60,7 @@ public interface Instruction extends CodeUnit, ProcessorContext {
 	 * 
 	 * @return an array of objects that are used by this instruction
 	 */
-	public Object[] getInputObjects();
+	Object[] getInputObjects();
 
 	/**
 	 * Get the Result objects produced/affected by this instruction
@@ -63,7 +68,7 @@ public interface Instruction extends CodeUnit, ProcessorContext {
 	 * 
 	 * @return an array of objects that are affected by this instruction
 	 */
-	public Object[] getResultObjects();
+	Object[] getResultObjects();
 
 	/**
 	 * Get the operand representation for the given operand index without markup.
@@ -72,7 +77,7 @@ public interface Instruction extends CodeUnit, ProcessorContext {
 	 * 
 	 * @return operand represented as a string.
 	 */
-	public String getDefaultOperandRepresentation(int opIndex);
+	String getDefaultOperandRepresentation(int opIndex);
 
 	/**
 	 * Get the operand representation for the given operand index.
@@ -82,7 +87,7 @@ public interface Instruction extends CodeUnit, ProcessorContext {
 	 * 
 	 * @return ArrayList of pieces of the operand representation.  Unsupported languages may return null.
 	 */
-	public List<Object> getDefaultOperandRepresentationList(int opIndex);
+	List<Object> getDefaultOperandRepresentationList(int opIndex);
 
 	/**
 	 * Get the separator strings between an operand.
@@ -93,7 +98,7 @@ public interface Instruction extends CodeUnit, ProcessorContext {
 	 * @param opIndex valid values are 0 thru numOperands+1
 	 * @return separator string, or null if there is no string
 	 */
-	public String getSeparator(int opIndex);
+	String getSeparator(int opIndex);
 
 	/**
 	 * Get the type of a specific operand.
@@ -103,13 +108,13 @@ public interface Instruction extends CodeUnit, ProcessorContext {
 	 *
 	 * @see OperandType
 	 */
-	public int getOperandType(int opIndex);
+	int getOperandType(int opIndex);
 
 	/**
 	 * Get the operand reference type for the given operand index.
 	 * @param index operand index
 	 */
-	public RefType getOperandRefType(int index);
+	RefType getOperandRefType(int index);
 
 	/**
 	 * Get default fall-through offset in bytes from start of instruction to the
@@ -117,21 +122,21 @@ public interface Instruction extends CodeUnit, ProcessorContext {
 	 * instructions contained with delay slots.
 	 * @return default fall-through offset or zero (0) if instruction has no fallthrough
 	 */
-	public int getDefaultFallThroughOffset();
+	int getDefaultFallThroughOffset();
 
 	/**
 	 * Get the default fallthrough for this instruction.
 	 * This accounts for any instructions contained with delay slots.
 	 * @return fall-through address or null if instruction has no default fallthrough
 	 */
-	public Address getDefaultFallThrough();
+	Address getDefaultFallThrough();
 
 	/**
 	 * Get the fallthrough for this instruction, factoring in
 	 * any fallthrough override and delay slotted instructions.
 	 * @return fall-through address or null if instruction has no fallthrough
 	 */
-	public Address getFallThrough();
+	Address getFallThrough();
 
 	/**
 	 * Get the Address for the instruction that fell through to
@@ -139,7 +144,7 @@ public interface Instruction extends CodeUnit, ProcessorContext {
 	 * This is useful for handling instructions that are found
 	 * in a delay slot.
 	 */
-	public Address getFallFrom();
+	Address getFallFrom();
 
 	/**
 	 * Get an array of Address objects for all flows other than
@@ -148,7 +153,7 @@ public interface Instruction extends CodeUnit, ProcessorContext {
 	 * @return flow addresses or null if there are no flows
 	 * 
 	 */
-	public Address[] getFlows();
+	Address[] getFlows();
 
 	/**
 	 * Get an array of Address objects for all default flows established
@@ -156,34 +161,34 @@ public interface Instruction extends CodeUnit, ProcessorContext {
 	 * @return flow addresses or null if there are no flows
 	 * 
 	 */
-	public Address[] getDefaultFlows();
+	Address[] getDefaultFlows();
 
 	/**
 	 * Get the flow type of this instruction (how this
 	 * instruction flows to the next instruction).
 	 */
-	public FlowType getFlowType();
+	FlowType getFlowType();
 
 	/**
 	 * Returns true if this instruction has no execution flow other than fall-through.
 	 */
-	public boolean isFallthrough();
+	boolean isFallthrough();
 
 	/**
 	 * Returns true if this instruction has a fall-through flow.
 	 */
-	public boolean hasFallthrough();
+	boolean hasFallthrough();
 
 	/**
 	 * Returns the flow override which may have been set on this instruction.
 	 */
-	public FlowOverride getFlowOverride();
+	FlowOverride getFlowOverride();
 
 	/**
 	 * Set the flow override for this instruction.
 	 * @param flowOverride
 	 */
-	public void setFlowOverride(FlowOverride flowOverride);
+	void setFlowOverride(FlowOverride flowOverride);
 
 	/**
 	 * Get an array of PCode operations (micro code) that this instruction
@@ -192,7 +197,7 @@ public interface Instruction extends CodeUnit, ProcessorContext {
 	 * @return an array of Pcode operations,
 	 *         a zero length array if the language does not support PCode
 	 */
-	public PcodeOp[] getPcode();
+	PcodeOp[] getPcode();
 
 	/**
 	 * Get an array of PCode operations (micro code) that this instruction
@@ -208,7 +213,7 @@ public interface Instruction extends CodeUnit, ProcessorContext {
 	 * @return an array of Pcode operations,
 	 *         a zero length array if the language does not support PCode
 	 */
-	public PcodeOp[] getPcode(boolean includeOverrides);
+	PcodeOp[] getPcode(boolean includeOverrides);
 
 	/**
 	 * Get an array of PCode operations (micro code) that a particular operand
@@ -219,7 +224,7 @@ public interface Instruction extends CodeUnit, ProcessorContext {
 	 * @return an array of PCode operations,
 	 *         a zero length array if the language does not support PCode
 	 */
-	public PcodeOp[] getPcode(int opIndex);
+	PcodeOp[] getPcode(int opIndex);
 
 	/**
 	 * Get the number of delay slot instructions for this
@@ -229,45 +234,45 @@ public interface Instruction extends CodeUnit, ProcessorContext {
 	 * returns an integer instead of a boolean in case some other
 	 * processor executes more than one instruction from a delay slot.
 	 */
-	public int getDelaySlotDepth();
+	int getDelaySlotDepth();
 
 	/**
 	 * Return true if this instruction was disassembled in a delay slot
 	 */
-	public boolean isInDelaySlot();
+	boolean isInDelaySlot();
 
 	/**
 	 * Get the instruction following this one in address order.
 	 */
-	public Instruction getNext();
+	Instruction getNext();
 
 	/**
 	 * Get the instruction before this one in address order.
 	 */
-	public Instruction getPrevious();
+	Instruction getPrevious();
 
 	/**
 	 * Overrides the instruction's default fallthrough address to the given address.
 	 * The given address may be null to indicate that the instruction has no fallthrough.
 	 * @param addr the address to be used as this instructions fallthrough address.  May be null.
 	 */
-	public void setFallThrough(Address addr);
+	void setFallThrough(Address addr);
 
 	/**
 	 * Restores this instruction's fallthrough address back to the default fallthrough
 	 * for this instruction.
 	 *
 	 */
-	public void clearFallThroughOverride();
+	void clearFallThroughOverride();
 
 	/**
 	 * Returns true if this instructions fallthrough has been overriden.
 	 */
-	public boolean isFallThroughOverridden();
+	boolean isFallThroughOverridden();
 
 	/**
 	 * @return the instruction context for this instruction
 	 */
-	public InstructionContext getInstructionContext();
+	InstructionContext getInstructionContext();
 
 }

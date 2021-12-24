@@ -17,23 +17,44 @@ package ghidra.program.model.data;
 
 import static ghidra.program.model.data.EndianSettingsDefinition.ENDIAN;
 import static ghidra.program.model.data.RenderUnicodeSettingsDefinition.RENDER;
-import static ghidra.program.model.data.StringLayoutEnum.*;
+import static ghidra.program.model.data.StringLayoutEnum.FIXED_LEN;
+import static ghidra.program.model.data.StringLayoutEnum.NULL_TERMINATED_BOUNDED;
+import static ghidra.program.model.data.StringLayoutEnum.NULL_TERMINATED_UNBOUNDED;
+import static ghidra.program.model.data.StringLayoutEnum.PASCAL_255;
+import static ghidra.program.model.data.StringLayoutEnum.PASCAL_64k;
 import static ghidra.program.model.data.TranslationSettingsDefinition.TRANSLATION;
 
-import java.nio.*;
-import java.nio.charset.*;
-import java.util.*;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.CharBuffer;
+import java.nio.charset.CharacterCodingException;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetEncoder;
+import java.nio.charset.MalformedInputException;
+import java.nio.charset.UnmappableCharacterException;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import generic.stl.Pair;
-import ghidra.docking.settings.*;
+import ghidra.docking.settings.Settings;
+import ghidra.docking.settings.SettingsDefinition;
+import ghidra.docking.settings.SettingsImpl;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressOutOfBoundsException;
 import ghidra.program.model.data.RenderUnicodeSettingsDefinition.RENDER_ENUM;
 import ghidra.program.model.data.StringRenderParser.StringParseException;
 import ghidra.program.model.lang.Endian;
 import ghidra.program.model.listing.Data;
-import ghidra.program.model.mem.*;
-import ghidra.util.*;
+import ghidra.program.model.mem.ByteMemBufferImpl;
+import ghidra.program.model.mem.MemBuffer;
+import ghidra.program.model.mem.MemoryAccessException;
+import ghidra.program.model.mem.WrappedMemBuffer;
+import ghidra.util.BigEndianDataConverter;
+import ghidra.util.DataConverter;
+import ghidra.util.LittleEndianDataConverter;
+import ghidra.util.Msg;
+import ghidra.util.StringUtilities;
 
 /**
  * Represents an instance of a string in a {@link MemBuffer}.
@@ -372,7 +393,7 @@ public class StringDataInstance {
 
 	private boolean isBadCharSize() {
 		return (paddedCharSize < 1 || paddedCharSize > 8) ||
-			!(charSize == 1 || charSize == 2 || charSize == 4) || (paddedCharSize < charSize);
+			((charSize != 1) && (charSize != 2) && (charSize != 4)) || (paddedCharSize < charSize);
 	}
 
 	private boolean isProbe() {
@@ -536,9 +557,7 @@ public class StringDataInstance {
 			return StringDataInstance.UNKNOWN_DOT_DOT_DOT;
 		}
 		AdjustedCharsetInfo aci = getAdjustedCharsetInfo(stringBytes);
-		String str = convertBytesToString(stringBytes, aci);
-
-		return str;
+		return convertBytesToString(stringBytes, aci);
 	}
 
 	private byte[] getStringBytes() {
@@ -1024,10 +1043,8 @@ public class StringDataInstance {
 			return NULL_INSTANCE;
 		}
 		int newLength = Math.max(0, length - byteOffset);
-		StringDataInstance sub = new StringDataInstance(this, getOffcutLayout(),
+		return new StringDataInstance(this, getOffcutLayout(),
 			new WrappedMemBuffer(buf, byteOffset), newLength, charsetName);
-
-		return sub;
 	}
 
 	/**

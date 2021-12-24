@@ -15,9 +15,15 @@
  */
 package ghidra.framework;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Objects;
+import java.util.Properties;
 
 import generic.jar.ResourceFile;
 
@@ -131,8 +137,7 @@ public class ApplicationProperties extends Properties {
 		}
 
 		ResourceFile resourceFile = new ResourceFile(propsFile);
-		ApplicationProperties properties = new ApplicationProperties(resourceFile);
-		return properties;
+		return new ApplicationProperties(resourceFile);
 	}
 
 	/**

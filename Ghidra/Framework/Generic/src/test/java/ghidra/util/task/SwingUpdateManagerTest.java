@@ -15,7 +15,9 @@
  */
 package ghidra.util.task;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -181,16 +183,13 @@ public class SwingUpdateManagerTest extends AbstractGenericTest {
 		CountDownLatch endLatch = new CountDownLatch(1);
 		AtomicBoolean exception = new AtomicBoolean();
 
-		runSwing(new Runnable() {
-			@Override
-			public void run() {
-				startLatch.countDown();
-				try {
-					endLatch.await(10, TimeUnit.SECONDS);
-				}
-				catch (InterruptedException e) {
-					exception.set(true);
-				}
+		runSwing(() -> {
+			startLatch.countDown();
+			try {
+				endLatch.await(10, TimeUnit.SECONDS);
+			}
+			catch (InterruptedException e) {
+				exception.set(true);
 			}
 		}, false);
 
@@ -282,12 +281,6 @@ public class SwingUpdateManagerTest extends AbstractGenericTest {
 	}
 
 	private SwingUpdateManager createUpdateManager(int min, int max) {
-		return new SwingUpdateManager(min, max, new Runnable() {
-
-			@Override
-			public void run() {
-				runnableCalled++;
-			}
-		});
+		return new SwingUpdateManager(min, max, () -> runnableCalled++);
 	}
 }

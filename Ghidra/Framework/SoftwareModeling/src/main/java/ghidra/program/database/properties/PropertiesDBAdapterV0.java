@@ -15,11 +15,14 @@
  */
 package ghidra.program.database.properties;
 
-import ghidra.util.exception.VersionException;
-
 import java.io.IOException;
 
-import db.*;
+import db.DBHandle;
+import db.DBRecord;
+import db.RecordIterator;
+import db.StringField;
+import db.Table;
+import ghidra.util.exception.VersionException;
 
 class PropertiesDBAdapterV0 implements PropertiesDBAdapter {
 
@@ -36,6 +39,7 @@ class PropertiesDBAdapterV0 implements PropertiesDBAdapter {
 	/**
 	 * @see ghidra.program.database.properties.PropertiesDBAdapter#iterator()
 	 */
+	@Override
 	public RecordIterator getRecords() throws IOException {
 		return propertiesTable.iterator();
 	}
@@ -43,6 +47,7 @@ class PropertiesDBAdapterV0 implements PropertiesDBAdapter {
 	/**
 	 * @see ghidra.program.database.properties.PropertiesDBAdapter#createRecord(java.lang.String, byte, java.lang.String)
 	 */
+	@Override
 	public void putRecord(String propertyName, byte type, String objClassName) throws IOException {
 		DBRecord rec =
 			DBPropertyMapManager.PROPERTIES_SCHEMA.createRecord(new StringField(propertyName));
@@ -57,6 +62,7 @@ class PropertiesDBAdapterV0 implements PropertiesDBAdapter {
 	/**
 	 * @see ghidra.program.database.properties.PropertiesDBAdapter#removeRecord(java.lang.String)
 	 */
+	@Override
 	public void removeRecord(String propertyName) throws IOException {
 		propertiesTable.deleteRecord(new StringField(propertyName));
 	}

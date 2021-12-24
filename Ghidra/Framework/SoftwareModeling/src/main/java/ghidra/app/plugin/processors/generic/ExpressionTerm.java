@@ -15,11 +15,11 @@
  */
 package ghidra.app.plugin.processors.generic;
 
-import ghidra.program.model.address.AddressSpace;
-import ghidra.program.model.mem.MemBuffer;
-
 import java.io.Serializable;
 import java.util.Hashtable;
+
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.mem.MemBuffer;
 
 // TODO needs documentation
 /**

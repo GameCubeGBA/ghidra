@@ -21,7 +21,10 @@ import java.util.List;
 import javax.swing.JButton;
 
 import docking.ActionContext;
-import docking.action.*;
+import docking.action.DockingAction;
+import docking.action.DockingActionIf;
+import docking.action.MenuData;
+import docking.action.MultiActionDockingActionIf;
 
 /**
  * A class that supports multiple sub-actions, as well as a primary action.  This is useful for

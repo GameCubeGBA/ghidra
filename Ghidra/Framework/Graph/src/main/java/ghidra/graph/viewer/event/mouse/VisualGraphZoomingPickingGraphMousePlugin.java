@@ -19,7 +19,11 @@ import java.awt.Cursor;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 
-import ghidra.graph.viewer.*;
+import ghidra.graph.viewer.GraphViewer;
+import ghidra.graph.viewer.GraphViewerUtils;
+import ghidra.graph.viewer.VisualEdge;
+import ghidra.graph.viewer.VisualGraphViewUpdater;
+import ghidra.graph.viewer.VisualVertex;
 
 /**
  * A handler to zoom nodes when double-clicked.  If the vertex is zoomed out, then we will zoom
@@ -38,15 +42,7 @@ public class VisualGraphZoomingPickingGraphMousePlugin<V extends VisualVertex, E
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		if (!checkModifiers(e)) {
-			return;
-		}
-
-		if (e.getClickCount() != 2) {
-			return;
-		}
-
-		if (!checkForVertex(e)) {
+		if (!checkModifiers(e) || (e.getClickCount() != 2) || !checkForVertex(e)) {
 			return; // no vertex clicked, nothing to do
 		}
 

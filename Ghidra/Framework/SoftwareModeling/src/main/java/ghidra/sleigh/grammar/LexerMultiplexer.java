@@ -15,7 +15,10 @@
  */
 package ghidra.sleigh.grammar;
 
-import java.util.*;
+import java.util.Deque;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Set;
 
 import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenSource;

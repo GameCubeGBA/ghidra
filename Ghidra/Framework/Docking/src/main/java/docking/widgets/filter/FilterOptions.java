@@ -251,7 +251,7 @@ public class FilterOptions {
 	}
 
 	public String getFilterDescription() {
-		StringBuffer buf = new StringBuffer("<html>");
+		StringBuilder buf = new StringBuilder("<html>");
 		buf.append("<b>Filter Settings:</b>");
 		buf.append("<br>");
 

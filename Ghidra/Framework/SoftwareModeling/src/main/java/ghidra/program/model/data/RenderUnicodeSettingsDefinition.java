@@ -29,7 +29,7 @@ public class RenderUnicodeSettingsDefinition extends JavaEnumSettingsDefinition<
 
 		private final String s;
 
-		private RENDER_ENUM(String s) {
+		RENDER_ENUM(String s) {
 			this.s = s;
 		}
 

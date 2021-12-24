@@ -86,8 +86,7 @@ public abstract class VersionControlTask extends Task {
 	 */
 	protected void checkFilesInUse() {
 		filesInUse = false;
-		for (int i = 0; i < list.size(); i++) {
-			DomainFile df = list.get(i);
+		for (DomainFile df : list) {
 			if (df.getConsumers().size() > 0) {
 				filesInUse = true;
 				return;
@@ -96,8 +95,7 @@ public abstract class VersionControlTask extends Task {
 	}
 
 	protected boolean checkFilesForUnsavedChanges() {
-		for (int i = 0; i < list.size(); i++) {
-			DomainFile df = list.get(i);
+		for (DomainFile df : list) {
 			if (df.modifiedSinceCheckout()) {
 				return true;
 			}

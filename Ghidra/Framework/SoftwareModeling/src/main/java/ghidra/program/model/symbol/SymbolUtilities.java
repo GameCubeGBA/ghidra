@@ -15,17 +15,36 @@
  */
 package ghidra.program.model.symbol;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.function.Consumer;
 
-import ghidra.program.model.address.*;
-import ghidra.program.model.data.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressFormatException;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.address.SegmentedAddress;
+import ghidra.program.model.address.SegmentedAddressSpace;
+import ghidra.program.model.data.BuiltInDataType;
+import ghidra.program.model.data.BuiltInDataTypeClassExclusionFilter;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.DataTypeDisplayOptions;
 import ghidra.program.model.lang.Register;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.CircularDependencyException;
+import ghidra.program.model.listing.CodeUnit;
+import ghidra.program.model.listing.Data;
+import ghidra.program.model.listing.Function;
+import ghidra.program.model.listing.Instruction;
+import ghidra.program.model.listing.Listing;
+import ghidra.program.model.listing.Program;
+import ghidra.program.model.listing.VariableStorage;
 import ghidra.program.model.pcode.Varnode;
 import ghidra.util.classfinder.ClassFilter;
 import ghidra.util.classfinder.ClassSearcher;
-import ghidra.util.exception.*;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.DuplicateNameException;
+import ghidra.util.exception.InvalidInputException;
 
 /**
  * Class with static methods to deal with symbol strings.
@@ -316,10 +335,7 @@ public class SymbolUtilities {
 	}
 
 	private static boolean isHexDigit(char c) {
-		if (c >= '0' && c <= '9') {
-			return true;
-		}
-		if (c >= 'a' && c <= 'f') {
+		if ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f')) {
 			return true;
 		}
 		if (c >= 'A' && c <= 'F') {
@@ -644,7 +660,7 @@ public class SymbolUtilities {
 	}
 
 	private static String buildSpaceName(String[] pieces, int start, int end) {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		buf.append(pieces[start]);
 		for (int i = start + 1; i <= end; i++) {
 			buf.append(UNDERSCORE);
@@ -655,8 +671,7 @@ public class SymbolUtilities {
 
 	public static String getAddressString(Address addr) {
 		String addrString = addr.toString();
-		addrString = addrString.replace(':', '_');
-		return addrString;
+		return addrString.replace(':', '_');
 	}
 
 	public static String getDefaultParamName(int ordinal) {
@@ -682,7 +697,7 @@ public class SymbolUtilities {
 
 	public static String getDefaultLocalName(Program program, int stackOffset, int firstUseOffset) {
 		boolean stackGrowsNegative = program.getCompilerSpec().stackGrowsNegative();
-		boolean reservedArea = stackGrowsNegative ? (stackOffset >= 0) : (stackOffset < 0);
+		boolean reservedArea = stackGrowsNegative == (stackOffset >= 0);
 		stackOffset = Math.abs(stackOffset);
 		String name = (reservedArea ? Function.DEFAULT_LOCAL_RESERVED_PREFIX
 				: Function.DEFAULT_LOCAL_PREFIX) +

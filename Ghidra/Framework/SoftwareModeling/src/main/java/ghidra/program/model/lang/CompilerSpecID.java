@@ -15,6 +15,8 @@
  */
 package ghidra.program.model.lang;
 
+import java.util.Objects;
+
 /**
  * Represents an opinion's compiler (gcc, borlandcpp, etc).
  */
@@ -49,10 +51,7 @@ public class CompilerSpecID implements Comparable<CompilerSpecID> {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -60,19 +59,11 @@ public class CompilerSpecID implements Comparable<CompilerSpecID> {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (!(obj instanceof CompilerSpecID)) {
+		if ((obj == null) || !(obj instanceof CompilerSpecID)) {
 			return false;
 		}
 		final CompilerSpecID other = (CompilerSpecID) obj;
-		if (id == null) {
-			if (other.id != null) {
-				return false;
-			}
-		}
-		else if (!id.equals(other.id)) {
+		if (!Objects.equals(id, other.id)) {
 			return false;
 		}
 		return true;

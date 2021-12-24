@@ -16,9 +16,10 @@
  */
 package ghidra.pcodeCPort.sleighbase;
 
-import generic.stl.SetSTL;
-import ghidra.pcodeCPort.slghsymbol.*;
 import java.util.Comparator;
+
+import generic.stl.SetSTL;
+import ghidra.pcodeCPort.slghsymbol.VarnodeSymbol;
 
 
 
@@ -29,6 +30,7 @@ public class address_set extends SetSTL<VarnodeSymbol>{
 	
 }
 class VarnodeSymbolCompare implements Comparator<VarnodeSymbol> {
+	@Override
 	public int compare( VarnodeSymbol op1, VarnodeSymbol op2 ) {
 		return op1.getFixedVarnode().compareTo(op2.getFixedVarnode());
 	}

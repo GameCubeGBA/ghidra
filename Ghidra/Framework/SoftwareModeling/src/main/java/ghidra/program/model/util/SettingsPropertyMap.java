@@ -27,13 +27,13 @@ public interface SettingsPropertyMap extends PropertyMap {
 	 * @param addr address for the property
 	 * @param value value of the property
 	 */
-	public void add(Address addr, Settings value);
+	void add(Address addr, Settings value);
 		
 	/**
 	 * Get the Settings object value at the given address.
 	 * @param addr the address from where to get the int value
 	 * @return Settings object or null if property not found at addr.
 	 */
-	public Settings getSettings(Address addr);
+	Settings getSettings(Address addr);
 
 }

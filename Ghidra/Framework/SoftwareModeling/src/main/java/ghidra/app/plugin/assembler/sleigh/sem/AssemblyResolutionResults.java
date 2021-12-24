@@ -15,7 +15,10 @@
  */
 package ghidra.app.plugin.assembler.sleigh.sem;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import org.apache.commons.collections4.set.AbstractSetDecorator;
 

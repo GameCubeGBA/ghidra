@@ -15,11 +15,24 @@
  */
 package docking.widgets.filechooser;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Point;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 
-import javax.swing.*;
+import javax.swing.AbstractCellEditor;
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.table.TableCellEditor;
 
@@ -100,12 +113,7 @@ class FileEditor extends AbstractCellEditor implements TableCellEditor {
 			// make sure the name field gets the focus, not the container
 			@Override
 			public void requestFocus() {
-				SwingUtilities.invokeLater(new Runnable() {
-					@Override
-					public void run() {
-						nameField.requestFocus();
-					}
-				});
+				SwingUtilities.invokeLater(() -> nameField.requestFocus());
 			}
 		};
 

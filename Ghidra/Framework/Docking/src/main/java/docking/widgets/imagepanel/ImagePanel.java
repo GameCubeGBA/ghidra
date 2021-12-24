@@ -15,12 +15,29 @@
  */
 package docking.widgets.imagepanel;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
 import java.awt.geom.AffineTransform;
 import java.util.Arrays;
 
-import javax.swing.*;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
 import docking.widgets.label.GIconLabel;
 import resources.icons.EmptyIcon;
@@ -32,7 +49,7 @@ import resources.icons.EmptyIcon;
 public class ImagePanel extends JPanel {
 
 	// If this array is changed, ensure compatibility with ImagePanelTest
-	public static final float[] ZOOM_LEVELS = new float[] {
+	public static final float[] ZOOM_LEVELS = {
 		// @formatter:off
 		
 		// shrinking scales
@@ -304,8 +321,7 @@ public class ImagePanel extends JPanel {
 		double cx = bounds.getCenterX();
 		double cy = bounds.getCenterY();
 
-		Point p = new Point(bounds.x + (int) cx, bounds.y + (int) cy);
-		return p;
+		return new Point(bounds.x + (int) cx, bounds.y + (int) cy);
 	}
 
 	/**
@@ -329,11 +345,7 @@ public class ImagePanel extends JPanel {
 	 */
 	public void zoomIn(Point center) {
 
-		if (!isImageZoomEnabled()) {
-			return;
-		}
-
-		if (!canZoomIn()) {
+		if (!isImageZoomEnabled() || !canZoomIn()) {
 			return;
 		}
 
@@ -377,11 +389,7 @@ public class ImagePanel extends JPanel {
 	 */
 	public void zoomOut(Point center) {
 
-		if (!isImageZoomEnabled()) {
-			return;
-		}
-
-		if (!canZoomOut()) {
+		if (!isImageZoomEnabled() || !canZoomOut()) {
 			return;
 		}
 
@@ -476,11 +484,7 @@ public class ImagePanel extends JPanel {
 
 	private void translateImage(int dX, int dY) {
 
-		if (!isImageTranslationEnabled()) {
-			return;
-		}
-
-		if (dX == 0 && dY == 0) {
+		if (!isImageTranslationEnabled() || (dX == 0 && dY == 0)) {
 			return;
 		}
 

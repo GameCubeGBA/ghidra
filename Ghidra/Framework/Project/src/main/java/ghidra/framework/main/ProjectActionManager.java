@@ -18,7 +18,9 @@ package ghidra.framework.main;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import docking.ActionContext;
 import docking.ComponentProvider;
@@ -30,11 +32,17 @@ import docking.widgets.PasswordChangeDialog;
 import docking.widgets.filechooser.GhidraFileChooser;
 import ghidra.framework.client.ClientUtil;
 import ghidra.framework.client.RepositoryAdapter;
-import ghidra.framework.model.*;
+import ghidra.framework.model.Project;
+import ghidra.framework.model.ProjectLocator;
+import ghidra.framework.model.ServerInfo;
+import ghidra.framework.model.ToolManager;
+import ghidra.framework.model.Workspace;
 import ghidra.framework.preferences.Preferences;
 import ghidra.framework.protocol.ghidra.GhidraURL;
 import ghidra.framework.remote.User;
-import ghidra.util.*;
+import ghidra.util.HashUtilities;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
 
 class ProjectActionManager {
 	private final static String CLOSE_ALL_OPEN_VIEWS = "Close All Read-Only Views";
@@ -479,7 +487,7 @@ class ProjectActionManager {
 	 * @throws IllegalArgumentException if urlPath is invalid
 	 */
 	private void closeView(String urlPath) {
-		if (urlPath.equals(CLOSE_ALL_OPEN_VIEWS)) {
+		if (CLOSE_ALL_OPEN_VIEWS.equals(urlPath)) {
 			closeAllViews();
 			return;
 		}

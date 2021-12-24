@@ -17,7 +17,9 @@ package ghidra.graph.support;
 
 import java.util.Collection;
 
-import ghidra.graph.graphs.*;
+import ghidra.graph.graphs.AbstractTestVertex;
+import ghidra.graph.graphs.DefaultVisualGraph;
+import ghidra.graph.graphs.TestEdge;
 
 /**
  * A visual graph implementation used for testing.

@@ -20,7 +20,9 @@ import ghidra.program.database.DBObjectCache;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.CircularDependencyException;
 import ghidra.program.model.listing.Library;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.Namespace;
+import ghidra.program.model.symbol.SourceType;
+import ghidra.program.model.symbol.SymbolType;
 import ghidra.program.util.ChangeManager;
 import ghidra.program.util.ProgramLocation;
 import ghidra.util.Msg;
@@ -94,6 +96,7 @@ public class LibrarySymbol extends SymbolDB {
 					oldPath, newPath);
 	}
 
+	@Override
 	public SymbolType getSymbolType() {
 		return SymbolType.LIBRARY;
 	}
@@ -119,6 +122,7 @@ public class LibrarySymbol extends SymbolDB {
 	/**
 	 * @see ghidra.program.model.symbol.Symbol#getProgramLocation()
 	 */
+	@Override
 	public ProgramLocation getProgramLocation() {
 		// TODO Auto-generated method stub
 		return null;

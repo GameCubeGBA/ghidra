@@ -19,14 +19,39 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressIterator;
+import ghidra.program.model.address.AddressOutOfBoundsException;
+import ghidra.program.model.address.AddressOverflowException;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetView;
 import ghidra.program.model.data.DataType;
 import ghidra.program.model.data.PointerDataType;
-import ghidra.program.model.lang.*;
-import ghidra.program.model.listing.*;
-import ghidra.program.model.mem.*;
+import ghidra.program.model.lang.InstructionPrototype;
+import ghidra.program.model.lang.InsufficientBytesException;
+import ghidra.program.model.lang.Language;
+import ghidra.program.model.lang.Register;
+import ghidra.program.model.lang.RegisterValue;
+import ghidra.program.model.lang.UnknownContextException;
+import ghidra.program.model.lang.UnknownInstructionException;
+import ghidra.program.model.listing.ContextChangeException;
+import ghidra.program.model.listing.Data;
+import ghidra.program.model.listing.Function;
+import ghidra.program.model.listing.Instruction;
+import ghidra.program.model.listing.Program;
+import ghidra.program.model.listing.ProgramContext;
+import ghidra.program.model.mem.ByteMemBufferImpl;
+import ghidra.program.model.mem.DumbMemBufferImpl;
+import ghidra.program.model.mem.MemBuffer;
+import ghidra.program.model.mem.Memory;
+import ghidra.program.model.mem.MemoryAccessException;
+import ghidra.program.model.mem.MemoryBlock;
 import ghidra.program.model.pcode.PcodeOp;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.FlowType;
+import ghidra.program.model.symbol.RefType;
+import ghidra.program.model.symbol.Reference;
+import ghidra.program.model.symbol.Symbol;
+import ghidra.program.model.symbol.SymbolType;
 import ghidra.util.Msg;
 
 /**
@@ -292,9 +317,7 @@ public class PseudoDisassembler {
 		if (!(objVal instanceof Address)) {
 			return null;
 		}
-		Address ptrAddr = (Address) objVal;
-
-		return ptrAddr;
+		return (Address) objVal;
 	}
 
 	/**
@@ -360,8 +383,7 @@ public class PseudoDisassembler {
 	 * @return true if the entry point leads to valid code
 	 */
 	public boolean isValidCode(Address entryPoint) {
-		boolean valid = checkValidSubroutine(entryPoint, true, false);
-		return valid;
+		return checkValidSubroutine(entryPoint, true, false);
 	}
 
 	/**
@@ -379,8 +401,7 @@ public class PseudoDisassembler {
 	 * @return true if the entry point leads to valid code
 	 */
 	public boolean isValidCode(Address entryPoint, PseudoDisassemblerContext context) {
-		boolean valid = checkValidSubroutine(entryPoint, context, true, false);
-		return valid;
+		return checkValidSubroutine(entryPoint, context, true, false);
 	}
 
 	/**
@@ -442,10 +463,7 @@ public class PseudoDisassembler {
 				}
 			}
 		}
-		catch (MemoryAccessException e1) {
-			return body;
-		}
-		catch (AddressOutOfBoundsException e2) {
+		catch (MemoryAccessException | AddressOutOfBoundsException e2) {
 			return body;
 		}
 
@@ -521,13 +539,7 @@ public class PseudoDisassembler {
 				target = newTarget;
 			}
 		}
-		catch (InsufficientBytesException e) {
-			processor.process(null);
-		}
-		catch (UnknownInstructionException e) {
-			processor.process(null);
-		}
-		catch (UnknownContextException e) {
+		catch (InsufficientBytesException | UnknownInstructionException | UnknownContextException e) {
 			processor.process(null);
 		}
 
@@ -607,10 +619,7 @@ public class PseudoDisassembler {
 				return false;
 			}
 		}
-		catch (MemoryAccessException e1) {
-			return false;
-		}
-		catch (AddressOutOfBoundsException e2) {
+		catch (MemoryAccessException | AddressOutOfBoundsException e2) {
 			return false;
 		}
 
@@ -637,7 +646,7 @@ public class PseudoDisassembler {
 					//    it is probably a JUMP to an external function.
 					MemoryBlock block = memory.getBlock(target);
 					if (block == null || block.isInitialized() ||
-						!block.getName().equals(MemoryBlock.EXTERNAL_BLOCK_NAME)) {
+						!MemoryBlock.EXTERNAL_BLOCK_NAME.equals(block.getName())) {
 						return false;
 					}
 					targetList.remove(target);
@@ -772,15 +781,13 @@ public class PseudoDisassembler {
 								}
 							}
 							// if respecting execute flag on memory, test to make sure we did flow into non-execute memory
-							if (respectExecuteFlag && !execSet.isEmpty() &&
-								!execSet.contains(flow)) {
-								if (!flow.isExternalAddress()) {
-									MemoryBlock block = memory.getBlock(flow);
-									// flowing into non-executable, but readable memory is bad
-									if (block != null && block.isRead() &&
-										!MemoryBlock.EXTERNAL_BLOCK_NAME.equals(block.getName())) {
-										return false;
-									}
+							if ((respectExecuteFlag && !execSet.isEmpty() &&
+								!execSet.contains(flow)) && !flow.isExternalAddress()) {
+								MemoryBlock block = memory.getBlock(flow);
+								// flowing into non-executable, but readable memory is bad
+								if (block != null && block.isRead() &&
+									!MemoryBlock.EXTERNAL_BLOCK_NAME.equals(block.getName())) {
+									return false;
 								}
 							}
 						}
@@ -789,12 +796,7 @@ public class PseudoDisassembler {
 				target = newTarget;
 			}
 		}
-		catch (
-
-		InsufficientBytesException e) {
-			return false;
-		}
-		catch (UnknownInstructionException e) {
+		catch (InsufficientBytesException | UnknownInstructionException e) {
 			return false;
 		}
 		catch (UnknownContextException e) {
@@ -835,16 +837,13 @@ public class PseudoDisassembler {
 			if (program != null) {
 				func = program.getFunctionManager().getFunctionAt(flows[0]);
 			}
-		}
-		else {
-			if (flowType.isComputed() & !flowType.isConditional()) {
-				for (int opIndex = 0; opIndex < instr.getNumOperands(); opIndex++) {
-					RefType operandRefType = instr.getOperandRefType(opIndex);
-					if (operandRefType.isIndirect()) {
-						Address addr = instr.getAddress(opIndex);
-						if (addr != null) {
-							func = program.getFunctionManager().getReferencedFunction(addr);
-						}
+		} else if (flowType.isComputed() & !flowType.isConditional()) {
+			for (int opIndex = 0; opIndex < instr.getNumOperands(); opIndex++) {
+				RefType operandRefType = instr.getOperandRefType(opIndex);
+				if (operandRefType.isIndirect()) {
+					Address addr = instr.getAddress(opIndex);
+					if (addr != null) {
+						func = program.getFunctionManager().getReferencedFunction(addr);
 					}
 				}
 			}
@@ -877,14 +876,10 @@ public class PseudoDisassembler {
 
 		// check that body does not wander into non-executable memory
 		AddressSetView execSet = memory.getExecuteSet();
-		if (respectExecuteFlag && !execSet.isEmpty() && !execSet.contains(body)) {
-			return false;
-		}
-
 		// check that the body traversed to a terminal does not
 		//   have any anomolies in it.
 		//   Existing Instructions/Data
-		if (program.getListing().getDefinedData(body, true).hasNext()) {
+		if ((respectExecuteFlag && !execSet.isEmpty() && !execSet.contains(body)) || program.getListing().getDefinedData(body, true).hasNext()) {
 			return false;
 		}
 
@@ -951,10 +946,7 @@ public class PseudoDisassembler {
 			return addr;
 		}
 		Register lowBitCodeMode = program.getRegister(LOW_BIT_CODE_MODE_REGISTER_NAME);
-		if (lowBitCodeMode == null) {
-			return addr;
-		}
-		if ((addr.getOffset() & 1) == 0) {
+		if ((lowBitCodeMode == null) || ((addr.getOffset() & 1) == 0)) {
 			return addr;
 		}
 		return addr.getNewAddress(addr.getOffset() & ~0x1);

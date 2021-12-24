@@ -26,7 +26,13 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.data.AbstractFloatDataType;
 import ghidra.program.model.data.DataType;
 import ghidra.program.model.lang.Register;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.Function;
+import ghidra.program.model.listing.Parameter;
+import ghidra.program.model.listing.Program;
+import ghidra.program.model.listing.Variable;
+import ghidra.program.model.listing.VariableSizeException;
+import ghidra.program.model.listing.VariableStorage;
+import ghidra.program.model.listing.VariableUtilities;
 import ghidra.program.model.pcode.Varnode;
 import ghidra.program.model.symbol.SourceType;
 import ghidra.program.model.symbol.Symbol;
@@ -348,10 +354,7 @@ public abstract class VariableDB implements Variable {
 
 		Variable otherVar = (Variable) obj;
 
-		if (!isEquivalent(otherVar)) {
-			return false;
-		}
-		if (!StringUtils.equals(getName(), otherVar.getName())) {
+		if (!isEquivalent(otherVar) || !StringUtils.equals(getName(), otherVar.getName())) {
 			return false;
 		}
 		return StringUtils.equals(getComment(), otherVar.getComment());
@@ -370,11 +373,8 @@ public abstract class VariableDB implements Variable {
 		if (otherVar == this) {
 			return true;
 		}
-		if ((otherVar instanceof Parameter) != (this instanceof Parameter)) {
-			return false;
-		}
-		if ((this instanceof Parameter) &&
-			((Parameter) this).getOrdinal() != ((Parameter) otherVar).getOrdinal()) {
+		if (((otherVar instanceof Parameter) != (this instanceof Parameter)) || ((this instanceof Parameter) &&
+			((Parameter) this).getOrdinal() != ((Parameter) otherVar).getOrdinal())) {
 			return false;
 		}
 		// If we have a VariableImpl or either function is using custom variable storage

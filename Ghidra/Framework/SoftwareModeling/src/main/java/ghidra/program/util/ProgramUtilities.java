@@ -15,15 +15,33 @@
  */
 package ghidra.program.util;
 
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.WeakHashMap;
+
 import ghidra.program.model.address.Address;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.CodeUnit;
+import ghidra.program.model.listing.Data;
+import ghidra.program.model.listing.Function;
+import ghidra.program.model.listing.Listing;
+import ghidra.program.model.listing.Parameter;
+import ghidra.program.model.listing.Program;
 import ghidra.program.model.mem.MemoryAccessException;
-import ghidra.program.model.symbol.*;
-import ghidra.util.*;
+import ghidra.program.model.symbol.ExternalLocation;
+import ghidra.program.model.symbol.Reference;
+import ghidra.program.model.symbol.SourceType;
+import ghidra.program.model.symbol.Symbol;
+import ghidra.program.model.symbol.SymbolTable;
+import ghidra.program.model.symbol.SymbolType;
+import ghidra.util.BigEndianDataConverter;
+import ghidra.util.DataConverter;
+import ghidra.util.LittleEndianDataConverter;
+import ghidra.util.Msg;
+import ghidra.util.NumericUtilities;
+import ghidra.util.SystemUtilities;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.exception.InvalidInputException;
-
-import java.util.*;
 
 /**
  * General utility class that provides convenience methods
@@ -35,7 +53,7 @@ public class ProgramUtilities {
 	}
 
 	/** The read-only program icon. */
-	private static Map<Program, Object> openProgramsWeakMap = new WeakHashMap<Program, Object>();
+	private static Map<Program, Object> openProgramsWeakMap = new WeakHashMap<>();
 
 	public static DataConverter getDataConverter(Program program) {
 		if (program.getMemory().isBigEndian()) {
@@ -80,7 +98,6 @@ public class ProgramUtilities {
 				return program.getAddressFactory().getStackSpace().getAddress(offset);
 			}
 			catch (NumberFormatException e) {
-				return null;
 			}
 		}
 		return null;
@@ -96,7 +113,7 @@ public class ProgramUtilities {
 	 */
 	public static String getByteCodeString(CodeUnit cu) {
 		int length = cu.getLength();
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		for (int i = 0; i < length; i++) {
 			if (i != 0) {
 				buffer.append(" ");
@@ -166,10 +183,7 @@ public class ProgramUtilities {
 			extFunc.setVarArgs(func.hasVarArgs());
 			functionSymbol.delete();
 		}
-		catch (InvalidInputException e) {
-			Msg.error(ProgramUtilities.class, "Unexpected Exception", e);
-		}
-		catch (DuplicateNameException e) {
+		catch (InvalidInputException | DuplicateNameException e) {
 			Msg.error(ProgramUtilities.class, "Unexpected Exception", e);
 		}
 	}

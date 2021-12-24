@@ -15,7 +15,9 @@
  */
 package ghidra.util.task;
 
-import static javax.swing.SwingConstants.*;
+import static javax.swing.SwingConstants.CENTER;
+import static javax.swing.SwingConstants.LEADING;
+import static javax.swing.SwingConstants.TRAILING;
 
 import java.awt.Component;
 import java.util.Objects;

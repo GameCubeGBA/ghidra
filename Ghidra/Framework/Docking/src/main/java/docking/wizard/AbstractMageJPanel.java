@@ -16,14 +16,14 @@
  */
 package docking.wizard;
 
-import ghidra.util.HelpLocation;
-import ghidra.util.datastruct.WeakDataStructureFactory;
-import ghidra.util.datastruct.WeakSet;
-
 import java.awt.Component;
 import java.awt.LayoutManager;
 
 import javax.swing.JPanel;
+
+import ghidra.util.HelpLocation;
+import ghidra.util.datastruct.WeakDataStructureFactory;
+import ghidra.util.datastruct.WeakSet;
 
 public abstract class AbstractMageJPanel<T> extends JPanel implements MagePanel<T> {
 	protected WeakSet<WizardPanelListener> listeners =

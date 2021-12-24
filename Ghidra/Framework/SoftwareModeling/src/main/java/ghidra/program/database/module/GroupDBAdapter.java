@@ -17,8 +17,8 @@ package ghidra.program.database.module;
 
 import java.io.IOException;
 
-import db.Field;
 import db.DBRecord;
+import db.Field;
 import ghidra.util.exception.DuplicateNameException;
 
 /**

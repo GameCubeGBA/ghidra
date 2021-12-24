@@ -15,7 +15,12 @@
  */
 package ghidra.program.model.lang;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class BasicLanguageDescription implements LanguageDescription {
 	private final LanguageID languageId;
@@ -33,19 +38,14 @@ public class BasicLanguageDescription implements LanguageDescription {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((languageId == null) ? 0 : languageId.hashCode());
-		return result;
+		return Objects.hash(languageId);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof LanguageDescription))
+		if ((obj == null) || !(obj instanceof LanguageDescription))
 			return false;
 		final LanguageDescription other = (LanguageDescription) obj;
 		if (languageId == null) {
@@ -78,7 +78,7 @@ public class BasicLanguageDescription implements LanguageDescription {
 		this.languageId = id;
 		this.instructionEndian = instructionEndian;
 
-		compatibleCompilerSpecs = new LinkedHashMap<CompilerSpecID, CompilerSpecDescription>();
+		compatibleCompilerSpecs = new LinkedHashMap<>();
 		for (CompilerSpecDescription compilerSpecDescription : compilerSpecs) {
 			compatibleCompilerSpecs.put(compilerSpecDescription.getCompilerSpecID(),
 				compilerSpecDescription);
@@ -86,10 +86,12 @@ public class BasicLanguageDescription implements LanguageDescription {
 		this.externalNames = externalNames;
 	}
 
+	@Override
 	public String getDescription() {
 		return description;
 	}
 
+	@Override
 	public Endian getEndian() {
 		return endian;
 	}
@@ -104,34 +106,42 @@ public class BasicLanguageDescription implements LanguageDescription {
 		return languageId;
 	}
 
+	@Override
 	public int getMinorVersion() {
 		return minorVersion;
 	}
 
+	@Override
 	public int getVersion() {
 		return version;
 	}
 
+	@Override
 	public Processor getProcessor() {
 		return processor;
 	}
 
+	@Override
 	public int getSize() {
 		return size;
 	}
 
+	@Override
 	public String getVariant() {
 		return variant;
 	}
 
+	@Override
 	public boolean isDeprecated() {
 		return deprecated;
 	}
 
+	@Override
 	public List<CompilerSpecDescription> getCompatibleCompilerSpecDescriptions() {
-		return new ArrayList<CompilerSpecDescription>(compatibleCompilerSpecs.values());
+		return new ArrayList<>(compatibleCompilerSpecs.values());
 	}
 
+	@Override
 	public CompilerSpecDescription getCompilerSpecDescriptionByID(CompilerSpecID compilerSpecID)
 			throws CompilerSpecNotFoundException {
 		CompilerSpecDescription compilerSpecDescription =
@@ -161,7 +171,7 @@ public class BasicLanguageDescription implements LanguageDescription {
 		if (key != null && this.externalNames != null) {
 			List<String> localResults = externalNames.get(key);
 			if (localResults != null) {
-				result = new ArrayList<String>(localResults);
+				result = new ArrayList<>(localResults);
 			}
 		}
 		return result;

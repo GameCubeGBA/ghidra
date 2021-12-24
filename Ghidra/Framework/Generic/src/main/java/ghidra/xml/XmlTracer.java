@@ -25,5 +25,5 @@ public interface XmlTracer {
 	 * @param traceMessage the trace message
 	 * @param throwableIfAvailable an exception if we're encountering one (or null)
 	 */
-	public void trace(Locator locator, String traceMessage, Throwable throwableIfAvailable);
+	void trace(Locator locator, String traceMessage, Throwable throwableIfAvailable);
 }

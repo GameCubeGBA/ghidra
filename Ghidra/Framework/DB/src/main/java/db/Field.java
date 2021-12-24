@@ -54,7 +54,7 @@ import db.buffers.DataBuffer;
  */
 public abstract class Field implements Comparable<Field> {
 
-	public static final Field[] EMPTY_ARRAY = new Field[0];
+	public static final Field[] EMPTY_ARRAY = {};
 
 	/**
 	 * Field type for ByteField
@@ -552,10 +552,7 @@ public abstract class Field implements Comparable<Field> {
 	 * @return true if field can be indexed
 	 */
 	public static boolean canIndex(Field field) {
-		if (field == null) {
-			return false;
-		}
-		if (field instanceof IndexField) {
+		if ((field == null) || (field instanceof IndexField)) {
 			return false;
 		}
 		return !field.isSameType(BooleanField.INSTANCE) && !field.isSameType(ByteField.INSTANCE);

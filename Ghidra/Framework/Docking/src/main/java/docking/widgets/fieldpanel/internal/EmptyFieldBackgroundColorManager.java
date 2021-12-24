@@ -25,19 +25,22 @@ import docking.widgets.fieldpanel.support.Highlight;
 
 public class EmptyFieldBackgroundColorManager implements FieldBackgroundColorManager {
 	public static final FieldBackgroundColorManager EMPTY_INSTANCE = new EmptyFieldBackgroundColorManager();
-	public static final List<Highlight> EMPTY_HIGHLIGHT_LIST = new ArrayList<Highlight>();
+	public static final List<Highlight> EMPTY_HIGHLIGHT_LIST = new ArrayList<>();
 
 	private EmptyFieldBackgroundColorManager() {
 	}
 
+	@Override
 	public List<Highlight> getSelectionHighlights(int row) {
 		return EMPTY_HIGHLIGHT_LIST;
 	}
 
+	@Override
 	public Color getBackgroundColor() {
 		return null;
 	}
 
+	@Override
 	public Color getPaddingColor(int padIndex) {
 		return null;
 	}

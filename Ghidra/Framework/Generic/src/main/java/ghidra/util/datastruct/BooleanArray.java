@@ -50,7 +50,7 @@ public class BooleanArray implements Array, Serializable {
         int bitNum = index % 8;
 
         if (byteNum >= bytes.length) {
-            if (value == false) {
+            if (!value) {
                 return;
             }
             adjustArray(Math.max(byteNum+1,bytes.length*2));
@@ -88,7 +88,8 @@ public class BooleanArray implements Array, Serializable {
     /** Sets the value at the given index to 0.
      * @param index the index to set to 0.
      */
-    public void remove(int index) {
+    @Override
+	public void remove(int index) {
         put(index,false);
     }
     /** Returns the boolean at the given index
@@ -123,7 +124,8 @@ public class BooleanArray implements Array, Serializable {
     /**
      * Returns the index of the last non-null or non-zero element in the array.
      */
-    public int getLastNonEmptyIndex() {
+    @Override
+	public int getLastNonEmptyIndex() {
         return lastNonZeroIndex;
     }
 
@@ -131,7 +133,8 @@ public class BooleanArray implements Array, Serializable {
 	 * 
 	 * @see ghidra.util.datastruct.Array#copyDataTo(int, ghidra.util.datastruct.DataTable, int, int)
 	 */
-    public void copyDataTo(int index, DataTable table, int toIndex, int toCol) {
+    @Override
+	public void copyDataTo(int index, DataTable table, int toIndex, int toCol) {
     	table.putBoolean(toIndex, toCol, get(index));
     }
 

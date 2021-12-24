@@ -16,16 +16,36 @@
 package ghidra.app.util;
 
 import java.math.BigInteger;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.ConcurrentModificationException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressOutOfBoundsException;
+import ghidra.program.model.address.AddressOverflowException;
 import ghidra.program.model.lang.Register;
 import ghidra.program.model.listing.CodeUnit;
 import ghidra.program.model.listing.Program;
-import ghidra.program.model.mem.*;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.mem.MemBuffer;
+import ghidra.program.model.mem.Memory;
+import ghidra.program.model.mem.MemoryAccessException;
+import ghidra.program.model.mem.MemoryBlock;
+import ghidra.program.model.symbol.ExternalReference;
+import ghidra.program.model.symbol.RefType;
+import ghidra.program.model.symbol.Reference;
+import ghidra.program.model.symbol.ReferenceIterator;
+import ghidra.program.model.symbol.ReferenceManager;
+import ghidra.program.model.symbol.SourceType;
+import ghidra.program.model.symbol.StackReference;
+import ghidra.program.model.symbol.Symbol;
+import ghidra.program.model.symbol.SymbolTable;
 import ghidra.program.model.util.TypeMismatchException;
-import ghidra.util.*;
+import ghidra.util.GhidraBigEndianDataConverter;
+import ghidra.util.GhidraLittleEndianDataConverter;
+import ghidra.util.Saveable;
 import ghidra.util.exception.NoValueException;
 import ghidra.util.prop.PropertyVisitor;
 
@@ -39,15 +59,15 @@ abstract class PseudoCodeUnit implements CodeUnit {
 	protected Program program;
 	protected int length;
 
-	protected final static Address[] emptyAddrArray = new Address[0];
+	protected final static Address[] emptyAddrArray = {};
 
 	protected int hash;
 	protected byte[] bytes;
 	protected boolean isBigEndian;
 
-	protected final static Reference[] emptyMemRefs = new Reference[0];
+	protected final static Reference[] emptyMemRefs = {};
 
-	protected Map<Integer, String> comments = new HashMap<Integer, String>();
+	protected Map<Integer, String> comments = new HashMap<>();
 
 	protected ReferenceManager refMgr;
 
@@ -796,12 +816,10 @@ abstract class PseudoCodeUnit implements CodeUnit {
 	public Reference[] getReferencesFrom() {
 		if (refMgr != null)
 			return refMgr.getReferencesFrom(address);
-		ArrayList<Reference> list = new ArrayList<Reference>();
+		ArrayList<Reference> list = new ArrayList<>();
 		for (int i = 0; i < getNumOperands(); i++) {
 			Reference[] refs = getOperandReferences(i);
-			for (int j = 0; j < refs.length; j++) {
-				list.add(refs[j]);
-			}
+			Collections.addAll(list, refs);
 		}
 		return list.toArray(emptyMemRefs);
 	}

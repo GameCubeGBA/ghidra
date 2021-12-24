@@ -16,7 +16,9 @@
 package ghidra.util.exception;
 
 import java.io.PrintStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  * Use an instance of this class as the cause when you need to record several causes of an
@@ -32,7 +34,7 @@ import java.util.*;
  */
 public class MultipleCauses extends Throwable {
 	// The collection of causes
-	private Collection<Throwable> causes = new ArrayList<Throwable>();
+	private Collection<Throwable> causes = new ArrayList<>();
 
 	/**
 	 * Constructs a new MultipleCauses wrapper with no causes
@@ -119,6 +121,7 @@ public class MultipleCauses extends Throwable {
 	/**
 	 * Use addCause instead
 	 */
+	@Override
 	public synchronized Throwable initCause(Throwable cause) {
 		throw new UnsupportedOperationException("Use addCause instead");
 	}
@@ -129,10 +132,8 @@ public class MultipleCauses extends Throwable {
 
 	public static boolean hasMultiple(Throwable e) {
 		Throwable cause = e.getCause();
-		if (cause != null) {
-			if (cause instanceof MultipleCauses) {
-				return true;
-			}
+		if ((cause != null) && (cause instanceof MultipleCauses)) {
+			return true;
 		}
 		return false;
 	}
@@ -145,12 +146,10 @@ public class MultipleCauses extends Throwable {
 	public static void printTree(PrintStream out, String prefix, Throwable e) {
 		out.print(prefix);
 		e.printStackTrace(out);
-		if (hasMultiple(e)) {
-			if (e.getCause() != null) {
-				MultipleCauses report = (MultipleCauses) e.getCause();
-				for (Throwable t : report.getCauses()) {
-					printTree(out, prefix + ">", t);
-				}
+		if (hasMultiple(e) && (e.getCause() != null)) {
+			MultipleCauses report = (MultipleCauses) e.getCause();
+			for (Throwable t : report.getCauses()) {
+				printTree(out, prefix + ">", t);
 			}
 		}
 	}

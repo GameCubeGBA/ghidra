@@ -16,9 +16,9 @@
  */
 package ghidra.framework.cmd;
 
-import ghidra.framework.model.DomainObject;
-
 import java.util.ArrayList;
+
+import ghidra.framework.model.DomainObject;
 
 /**
  * Implementation for multiple commands that are done as a unit.
@@ -39,7 +39,7 @@ public class CompoundCmd implements Command {
 	 * @param name the name of the command
 	 */
 	public CompoundCmd(String name) {
-		cmds = new ArrayList<Command>();
+		cmds = new ArrayList<>();
 		this.name = name;
 	}
 
@@ -47,9 +47,9 @@ public class CompoundCmd implements Command {
 	/* 
 	 * @see ghidra.framework.cmd.Command#applyTo(ghidra.framework.model.DomainObject)
 	 */
+	@Override
 	public boolean applyTo(DomainObject obj) {
-		for(int i = 0;i<cmds.size();i++) {
-			Command cmd = cmds.get(i);
+		for (Command cmd : cmds) {
 			if (!cmd.applyTo(obj)) {
 				statusMsg = cmd.getStatusMsg();
 				return false;
@@ -61,6 +61,7 @@ public class CompoundCmd implements Command {
 	/*
 	 * @see ghidra.framework.cmd.Command#getStatusMsg()
 	 */
+	@Override
 	public String getStatusMsg() {
 		return statusMsg;
 	}
@@ -68,6 +69,7 @@ public class CompoundCmd implements Command {
 	/*
 	 * @see ghidra.framework.cmd.Command#getName()
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}

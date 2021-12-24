@@ -17,9 +17,17 @@ package utilities.util;
 
 import static generic.test.AbstractGTest.assertListEqualsArrayOrdered;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.List;
@@ -29,7 +37,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import generic.jar.ResourceFile;
-import generic.test.AbstractGenericTest;
+import generic.test.AbstractGTest;
 import ghidra.framework.OperatingSystem;
 import ghidra.framework.Platform;
 import utilities.util.FileResolutionResult.FileResolutionStatus;
@@ -110,7 +118,7 @@ public class FileUtilitiesTest {
 
 		ResourceFile file = createNestedTempFile("/a/b/c/d/");
 		String path = file.getAbsolutePath();
-		String invalidPath = path.replaceAll("a/b/c", "A/b/C");
+		String invalidPath = path.replace("a/b/c", "A/b/C");
 		ResourceFile badCaseFile = new ResourceFile(invalidPath);
 		FileResolutionResult result = FileUtilities.existsAndIsCaseDependent(badCaseFile);
 		assertEquals(FileResolutionStatus.NotProperlyCaseDependent, result.getStatus());
@@ -174,13 +182,12 @@ public class FileUtilitiesTest {
 
 	private ResourceFile createNestedTempFile(String path) throws Exception {
 
-		String tmpdir = AbstractGenericTest.getTestDirectoryPath();
+		String tmpdir = AbstractGTest.getTestDirectoryPath();
 		String parentPath = tmpdir + path;
 		File parentDir = new File(parentPath);
 		FileUtilities.mkdirs(parentDir);
 		File tempFile = File.createTempFile("FileUtilitiesTest", ".txt", parentDir);
-		ResourceFile resourceFile = new ResourceFile(tempFile);
-		return resourceFile;
+		return new ResourceFile(tempFile);
 	}
 
 	@Test

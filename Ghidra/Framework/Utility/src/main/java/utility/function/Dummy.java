@@ -15,7 +15,9 @@
  */
 package utility.function;
 
-import java.util.function.*;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
  * A utility class to help create dummy stub functional interfaces

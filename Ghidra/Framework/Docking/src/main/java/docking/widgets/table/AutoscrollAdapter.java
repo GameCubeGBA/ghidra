@@ -16,14 +16,19 @@
  */
 package docking.widgets.table;
 
-import ghidra.framework.OperatingSystem;
-import ghidra.framework.Platform;
-
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Insets;
+import java.awt.MouseInfo;
+import java.awt.Point;
+import java.awt.PointerInfo;
+import java.awt.Rectangle;
 import java.awt.dnd.Autoscroll;
 
 import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
+
+import ghidra.framework.OperatingSystem;
+import ghidra.framework.Platform;
 
 /**
  * Helper class for autoscrolling on a component.

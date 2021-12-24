@@ -28,7 +28,7 @@ interface WhitespaceHandler {
 	 * @param offset the offset in the string at which to start
 	 * @return the number of contiguous spaces
 	 */
-	public int countSpaces(String s, int offset);
+	int countSpaces(String s, int offset);
 
 	/**
 	 * Trim the given string (or don't, it's up to the implementation).
@@ -36,5 +36,5 @@ interface WhitespaceHandler {
 	 * @param s the string
 	 * @return the trimmed string
 	 */
-	public String trim(String s);
+	String trim(String s);
 }

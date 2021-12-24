@@ -16,10 +16,26 @@
  */
 package docking;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Frame;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
+import javax.swing.JWindow;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -68,17 +84,15 @@ public class EditWindow extends JWindow {
 		active = state;
 		super.setVisible(state);
 		
-		if (!state) {
-			if (comp != null) {
-				comp.removeComponentListener(compListener);
-				if (comp instanceof JTabbedPane) {
-					((JTabbedPane)comp).removeChangeListener(compListener);
-				}
-				Frame frame = mgr.getRootFrame();
-				frame.removeComponentListener(compListener);
-				comp = null;
-				listener = null;
+		if (!state && (comp != null)) {
+			comp.removeComponentListener(compListener);
+			if (comp instanceof JTabbedPane) {
+				((JTabbedPane)comp).removeChangeListener(compListener);
 			}
+			Frame frame = mgr.getRootFrame();
+			frame.removeComponentListener(compListener);
+			comp = null;
+			listener = null;
 		}
 	}
 	
@@ -152,14 +166,12 @@ public class EditWindow extends JWindow {
                 }
 			}
 		});
-		textField.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (listener != null) {
-					String text = textField.getText();
-					EditListener l = listener;
-					close();
-					l.editCompleted(text);
-				}
+		textField.addActionListener(e -> {
+			if (listener != null) {
+				String text = textField.getText();
+				EditListener l = listener;
+				close();
+				l.editCompleted(text);
 			}
 		});
 
@@ -171,6 +183,7 @@ public class EditWindow extends JWindow {
 		/*
 		 * @see java.awt.event.ComponentListener#componentHidden(java.awt.event.ComponentEvent)
 		 */
+		@Override
 		public void componentHidden(ComponentEvent e) {
 			close();
 		}
@@ -178,6 +191,7 @@ public class EditWindow extends JWindow {
 		/*
 		 * @see java.awt.event.ComponentListener#componentResized(java.awt.event.ComponentEvent)
 		 */
+		@Override
 		public void componentResized(ComponentEvent e) {
 			close();
 		}
@@ -185,12 +199,14 @@ public class EditWindow extends JWindow {
 		/*
 		 * @see java.awt.event.ComponentListener#componentShown(java.awt.event.ComponentEvent)
 		 */
+		@Override
 		public void componentShown(ComponentEvent e) {
 		}
 	
 		/*
 		 * @see java.awt.event.ComponentListener#componentMoved(java.awt.event.ComponentEvent)
 		 */
+		@Override
 		public void componentMoved(ComponentEvent e) {
 			if (comp != null && comp.isVisible()) {
 				setLocation();
@@ -200,6 +216,7 @@ public class EditWindow extends JWindow {
 		/*
 		 * @see javax.swing.event.ChangeListener#stateChanged(javax.swing.event.ChangeEvent)
 		 */
+		@Override
 		public void stateChanged(ChangeEvent e) {
 			close();
 		}

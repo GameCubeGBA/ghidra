@@ -26,11 +26,11 @@ public interface CustomOptionsEditor {
 	 * Gets the names of the options that this editor is editing. 
 	 * @return the names of the options that this editor is editing; may not be null.
 	 */
-	public String[] getOptionNames();
+	String[] getOptionNames();
 
 	/**
 	 * Gets the descriptions of the options that this editor is editing.
 	 * @return the descriptions of the options that this editor is editing; may be null.
 	 */
-	public String[] getOptionDescriptions();
+	String[] getOptionDescriptions();
 }

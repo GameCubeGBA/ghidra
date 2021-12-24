@@ -25,37 +25,37 @@ import ghidra.util.exception.DuplicateNameException;
 public interface DataTypeComponent {
 
 	/** The default prefix for the name of a component. */
-	public final static String DEFAULT_FIELD_NAME_PREFIX = "field";
+	String DEFAULT_FIELD_NAME_PREFIX = "field";
 
 	/**
 	 * Returns the dataType in this component.
 	 * @return the dataType in this component
 	 */
-	public DataType getDataType();
+	DataType getDataType();
 
 	/**
 	 * returns the dataType that contains this component.
 	 * @return the dataType that contains this component.
 	 */
-	public DataType getParent();
+	DataType getParent();
 
 	/**
 	 * Determine if the specified component corresponds to a bit-field.
 	 * @return true if bit-field else false
 	 */
-	public boolean isBitFieldComponent();
+	boolean isBitFieldComponent();
 
 	/**
 	 * Determine if the specified component corresponds to a zero-length bit-field.
 	 * @return true if zero-length bit-field else false
 	 */
-	public boolean isZeroBitFieldComponent();
+	boolean isZeroBitFieldComponent();
 
 	/**
 	 * Get the ordinal position within the parent dataType.
 	 * @return ordinal of this component within the parent data type.
 	 */
-	public int getOrdinal();
+	int getOrdinal();
 
 	/**
 	 * Get the byte offset of where this component begins relative to the start of the parent
@@ -63,7 +63,7 @@ public interface DataTypeComponent {
 	 * @return offset of start of component relative to the start of the parent
 	 * data type. 
 	 */
-	public int getOffset();
+	int getOffset();
 
 	/**
 	 * Get the byte offset of where this component ends relative to the start of the parent
@@ -71,7 +71,7 @@ public interface DataTypeComponent {
 	 * @return offset of end of component relative to the start of the parent
 	 * data type.
 	 */
-	public int getEndOffset();
+	int getEndOffset();
 
 	/**
 	 * Get the length of this component.  Zero-length components will report a length of 0
@@ -79,37 +79,37 @@ public interface DataTypeComponent {
 	 * bit-field components may appear to overlap at the byte-level. 
 	 * @return the length of this component
 	 */
-	public int getLength();
+	int getLength();
 
 	/**
 	 * Get the comment for this dataTypeComponent.
 	 * @return component comment string or null if one has not been set
 	 */
-	public String getComment();
+	String getComment();
 
 	/**
 	 * Gets the default settings for this data type component.
 	 * @return a Settings object that is the set of default values for this dataType component
 	 */
-	public Settings getDefaultSettings();
+	Settings getDefaultSettings();
 
 	/**
 	 * Set default settings for this dataType.
 	 * @param settings the new default settings.
 	 */
-	public void setDefaultSettings(Settings settings);
+	void setDefaultSettings(Settings settings);
 
 	/**
 	 * Sets the comment for the component.
 	 * @param comment this components comment or null to clear comment.
 	 */
-	public void setComment(String comment);
+	void setComment(String comment);
 
 	/**
 	 * Get the name of the field name as a component of a Data Type.
 	 * @return the name as a component of another Data Type.
 	 */
-	public String getFieldName();
+	String getFieldName();
 
 	/**
 	 * Sets the field name. If the field name is empty it will be set to null,
@@ -121,13 +121,13 @@ public interface DataTypeComponent {
 	 * @throws DuplicateNameException if another component of the parent has
 	 * the specified field name.
 	 */
-	public void setFieldName(String fieldName) throws DuplicateNameException;
+	void setFieldName(String fieldName) throws DuplicateNameException;
 
 	/**
 	 * Returns a default Field name.  Used only if a field name is not set.
 	 * @return default field name
 	 */
-	public default String getDefaultFieldName() {
+	default String getDefaultFieldName() {
 		if (isZeroBitFieldComponent()) {
 			return "";
 		}
@@ -148,7 +148,7 @@ public interface DataTypeComponent {
 	 * @param dtc the dataTypeComponent being tested for equivalence.
 	 * @return true if the given dataTypeComponent is equivalent to this dataTypeComponent.
 	 */
-	public boolean isEquivalent(DataTypeComponent dtc);
+	boolean isEquivalent(DataTypeComponent dtc);
 
 	/**
 	 * Determine if the specified dataType will be treated as a zero-length component
@@ -159,7 +159,7 @@ public interface DataTypeComponent {
 	 * @param dataType datatype to be evaluated
 	 * @return true if zero-length component 
 	 */
-	public static boolean usesZeroLengthComponent(DataType dataType) {
+	static boolean usesZeroLengthComponent(DataType dataType) {
 		if (dataType.isZeroLength()) {
 			if (dataType instanceof TypeDef) {
 				// need to check base type since TypeDef always returns false for isNotYetDefined()

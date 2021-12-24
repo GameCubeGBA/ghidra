@@ -15,7 +15,10 @@
  */
 package ghidra.program.model.pcode;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
 
 import generic.hash.SimpleCRC32;
 import ghidra.program.model.address.Address;
@@ -98,7 +101,7 @@ public class DynamicHash {
 	 * in the sub-graph.  The edge can either be from an input Varnode to the PcodeOp
 	 * that reads it, or from a PcodeOp to the Varnode it defines.
 	 */
-	private class ToOpEdge implements Comparable<ToOpEdge> {
+	private static class ToOpEdge implements Comparable<ToOpEdge> {
 		private PcodeOp op;
 		private int slot;			// slot containing varnode we are coming from
 
@@ -162,10 +165,10 @@ public class DynamicHash {
 	private long hash;
 
 	private DynamicHash() {
-		markop = new ArrayList<PcodeOp>();
-		markvn = new ArrayList<Varnode>();
-		vnedge = new ArrayList<Varnode>();
-		opedge = new ArrayList<ToOpEdge>();
+		markop = new ArrayList<>();
+		markvn = new ArrayList<>();
+		vnedge = new ArrayList<>();
+		opedge = new ArrayList<>();
 	}
 
 	/**
@@ -227,7 +230,7 @@ public class DynamicHash {
 		vnproc = 0;
 		opproc = 0;
 		opedgeproc = 0;
-		markset = new HashSet<Object>();
+		markset = new HashSet<>();
 
 		vnedge.add(root);
 		gatherUnmarkedVn();
@@ -296,8 +299,8 @@ public class DynamicHash {
 			}
 		}
 
-		for (int i = 0; i < opedge.size(); ++i) {
-			reg = opedge.get(i).hash(reg);
+		for (ToOpEdge element : opedge) {
+			reg = element.hash(reg);
 		}
 
 		// Build the final 64-bit hash
@@ -308,10 +311,7 @@ public class DynamicHash {
 		for (ct = 0; ct < opedge.size(); ++ct) {	// Find op that is directly attached to -root- i.e. not a skip op
 			op = opedge.get(ct).getOp();
 			slot = opedge.get(ct).getSlot();
-			if ((slot < 0) && (op.getOutput() == root)) {
-				break;
-			}
-			if ((slot >= 0) && (op.getInput(slot) == root)) {
+			if (((slot < 0) && (op.getOutput() == root)) || ((slot >= 0) && (op.getInput(slot) == root))) {
 				break;
 			}
 		}
@@ -336,9 +336,9 @@ public class DynamicHash {
 	}
 
 	private void uniqueHash(Varnode root, PcodeSyntaxTree fd) {
-		ArrayList<Varnode> vnlist = new ArrayList<Varnode>();
-		ArrayList<Varnode> vnlist2 = new ArrayList<Varnode>();
-		ArrayList<Varnode> champion = new ArrayList<Varnode>();
+		ArrayList<Varnode> vnlist = new ArrayList<>();
+		ArrayList<Varnode> vnlist2 = new ArrayList<>();
+		ArrayList<Varnode> champion = new ArrayList<>();
 		int method;
 		long tmphash = 0;
 		Address tmpaddr = null;
@@ -366,13 +366,11 @@ public class DynamicHash {
 					}
 				}
 			}
-			if (vnlist2.size() <= maxduplicates) {
-				if ((champion.size() == 0) || (vnlist2.size() < champion.size())) {
-					champion = vnlist2;
-					vnlist2 = new ArrayList<Varnode>();
-					if (champion.size() == 1) {
-						break;		// Current hash is unique
-					}
+			if ((vnlist2.size() <= maxduplicates) && ((champion.size() == 0) || (vnlist2.size() < champion.size()))) {
+				champion = vnlist2;
+				vnlist2 = new ArrayList<>();
+				if (champion.size() == 1) {
+					break;		// Current hash is unique
 				}
 			}
 		}
@@ -420,7 +418,7 @@ public class DynamicHash {
 			return; // no descendants
 		}
 
-		ArrayList<ToOpEdge> newedge = new ArrayList<ToOpEdge>();
+		ArrayList<ToOpEdge> newedge = new ArrayList<>();
 
 		while (iter.hasNext()) {
 			PcodeOp op = iter.next();
@@ -491,8 +489,8 @@ public class DynamicHash {
 		int total = getTotalFromHash(h);
 		int pos = getPositionFromHash(h);
 		h = clearTotalPosition(h);
-		ArrayList<Varnode> vnlist = new ArrayList<Varnode>();
-		ArrayList<Varnode> vnlist2 = new ArrayList<Varnode>();
+		ArrayList<Varnode> vnlist = new ArrayList<>();
+		ArrayList<Varnode> vnlist2 = new ArrayList<>();
 		gatherFirstLevelVars(vnlist, fd, addr, h);
 		for (int i = 0; i < vnlist.size(); ++i) {
 			Varnode tmpvn = vnlist.get(i);
@@ -525,12 +523,10 @@ public class DynamicHash {
 				if (vn != null) {
 					if (isnotattached) {		// If original varnode was not attached to (this) op
 						op = vn.getLoneDescend();
-						if (op != null) {
-							if (transtable[op.getOpcode()] == 0) {	// Check for skip op
-								vn = op.getOutput();
-								if (vn == null) {
-									continue;
-								}
+						if ((op != null) && (transtable[op.getOpcode()] == 0)) {	// Check for skip op
+							vn = op.getOutput();
+							if (vn == null) {
+								continue;
 							}
 						}
 					}

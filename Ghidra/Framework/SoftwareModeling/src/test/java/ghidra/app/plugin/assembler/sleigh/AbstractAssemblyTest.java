@@ -17,25 +17,48 @@ package ghidra.app.plugin.assembler.sleigh;
 
 import static org.junit.Assert.fail;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.apache.commons.collections4.MultiValuedMap;
 import org.junit.After;
 import org.junit.Before;
 
 import generic.test.AbstractGenericTest;
-import ghidra.app.plugin.assembler.*;
-import ghidra.app.plugin.assembler.sleigh.parse.*;
-import ghidra.app.plugin.assembler.sleigh.sem.*;
+import ghidra.app.plugin.assembler.Assembler;
+import ghidra.app.plugin.assembler.Assemblers;
+import ghidra.app.plugin.assembler.AssemblySelector;
+import ghidra.app.plugin.assembler.AssemblySemanticException;
+import ghidra.app.plugin.assembler.AssemblySyntaxException;
+import ghidra.app.plugin.assembler.sleigh.parse.AssemblyParseAcceptResult;
+import ghidra.app.plugin.assembler.sleigh.parse.AssemblyParseErrorResult;
+import ghidra.app.plugin.assembler.sleigh.parse.AssemblyParseResult;
+import ghidra.app.plugin.assembler.sleigh.sem.AssemblyDefaultContext;
+import ghidra.app.plugin.assembler.sleigh.sem.AssemblyPatternBlock;
+import ghidra.app.plugin.assembler.sleigh.sem.AssemblyResolution;
+import ghidra.app.plugin.assembler.sleigh.sem.AssemblyResolutionResults;
+import ghidra.app.plugin.assembler.sleigh.sem.AssemblyResolvedConstructor;
+import ghidra.app.plugin.assembler.sleigh.sem.AssemblyResolvedError;
 import ghidra.app.plugin.assembler.sleigh.tree.AssemblyParseTreeNode;
 import ghidra.app.plugin.assembler.sleigh.util.DbgTimer;
-import ghidra.app.plugin.processors.sleigh.*;
+import ghidra.app.plugin.processors.sleigh.SleighInstructionPrototype;
+import ghidra.app.plugin.processors.sleigh.SleighLanguage;
+import ghidra.app.plugin.processors.sleigh.SleighLanguageProvider;
 import ghidra.app.util.PseudoInstruction;
 import ghidra.generic.util.datastruct.TreeSetValuedTreeMap;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressOverflowException;
-import ghidra.program.model.lang.*;
-import ghidra.program.model.mem.*;
+import ghidra.program.model.lang.InstructionPrototype;
+import ghidra.program.model.lang.InsufficientBytesException;
+import ghidra.program.model.lang.LanguageID;
+import ghidra.program.model.lang.UnknownInstructionException;
+import ghidra.program.model.mem.ByteMemBufferImpl;
+import ghidra.program.model.mem.MemBuffer;
+import ghidra.program.model.mem.MemoryAccessException;
 import ghidra.util.Msg;
 import ghidra.util.NumericUtilities;
 

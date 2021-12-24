@@ -25,12 +25,12 @@ import javax.swing.ImageIcon;
  */
 public interface BookmarkType {
 
-	public static final String NOTE = "Note";
-	public static final String INFO = "Info";
-	public static final String ERROR = "Error";
-	public static final String WARNING = "Warning";
-	public static final String ANALYSIS = "Analysis";
-	public static final String ALL_TYPES = "All Bookmark Types";
+	String NOTE = "Note";
+	String INFO = "Info";
+	String ERROR = "Error";
+	String WARNING = "Warning";
+	String ANALYSIS = "Analysis";
+	String ALL_TYPES = "All Bookmark Types";
 
 	/**
 	 * Returns the type as a string

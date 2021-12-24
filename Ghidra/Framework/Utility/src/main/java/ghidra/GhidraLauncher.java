@@ -15,8 +15,23 @@
  */
 package ghidra;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import generic.jar.ResourceFile;
@@ -129,8 +144,7 @@ public class GhidraLauncher {
 			addPatchPaths(classpathList, layout.getPatchDir());
 			addModuleJarPaths(classpathList, modules);
 		}
-		classpathList = orderClasspath(classpathList, modules);
-		return classpathList;
+		return orderClasspath(classpathList, modules);
 	}
 
 	/**
@@ -238,7 +252,7 @@ public class GhidraLauncher {
 	 * @return A list of discovered jar paths, sorted by jar file name
 	 */
 	public static List<String> findJarsInDir(ResourceFile dir) {
-		Set<ResourceFile> set = new TreeSet<>((a, b) -> a.getName().compareTo(b.getName()));
+		Set<ResourceFile> set = new TreeSet<>(Comparator.comparing(ResourceFile::getName));
 		ResourceFile[] names = dir.listFiles();
 		if (names != null) {
 			for (ResourceFile file : names) {

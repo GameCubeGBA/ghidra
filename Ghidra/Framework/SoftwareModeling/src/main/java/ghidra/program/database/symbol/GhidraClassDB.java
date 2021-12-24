@@ -18,7 +18,9 @@ package ghidra.program.database.symbol;
 import ghidra.program.model.address.AddressSetView;
 import ghidra.program.model.listing.CircularDependencyException;
 import ghidra.program.model.listing.GhidraClass;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.Namespace;
+import ghidra.program.model.symbol.SourceType;
+import ghidra.program.model.symbol.Symbol;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.exception.InvalidInputException;
 
@@ -111,10 +113,7 @@ class GhidraClassDB implements GhidraClass {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (obj.getClass() != getClass()) {
+		if ((obj == null) || (obj.getClass() != getClass())) {
 			return false;
 		}
 		GhidraClassDB gc = (GhidraClassDB) obj;

@@ -16,7 +16,7 @@
 package docking.wizard;
 
 public interface MagePanel<T> extends WizardPanel {
-	public void addDependencies(WizardState<T> state);
+	void addDependencies(WizardState<T> state);
 
 	/**
 	 * Enter and leave panel for pretend; take your state from the state object and then add
@@ -25,7 +25,7 @@ public interface MagePanel<T> extends WizardPanel {
 	 * @param state the state object
 	 * @return displayability
 	 */
-	public WizardPanelDisplayability getPanelDisplayabilityAndUpdateState(WizardState<T> state);
+	WizardPanelDisplayability getPanelDisplayabilityAndUpdateState(WizardState<T> state);
 
 	/**
 	 * Enter panel for real; take your state from the state object and then
@@ -35,13 +35,13 @@ public interface MagePanel<T> extends WizardPanel {
 	 * return to the very first panel - unless we are the first panel in which case we
 	 * should abort the wizard.
 	 */
-	public void enterPanel(WizardState<T> state) throws IllegalPanelStateException;
+	void enterPanel(WizardState<T> state) throws IllegalPanelStateException;
 
 	/**
 	 * Leave panel for real; inject your external state into the state object.
 	 * @param state the state object
 	 */
-	public void leavePanel(WizardState<T> state);
+	void leavePanel(WizardState<T> state);
 
 	/**
 	 * Updates the state object, being passed as a parameter, with the current state information 
@@ -50,10 +50,10 @@ public interface MagePanel<T> extends WizardPanel {
 	 * information, but doesn't set it and therefore wouldn't change it in the state object.
 	 * @param state the state object to update
 	 */
-	public void updateStateObjectWithPanelInfo(WizardState<T> state);
+	void updateStateObjectWithPanelInfo(WizardState<T> state);
 
 	/**
 	 * Called when the wizard is cancelled or otherwise finished being shown
 	 */
-	public void dispose();
+	void dispose();
 }

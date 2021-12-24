@@ -23,5 +23,5 @@ public interface TextFilterFactory {
 	 * @param text the text used to create the filter
 	 * @return the filter
 	 */
-	public TextFilter getTextFilter(String text);
+	TextFilter getTextFilter(String text);
 }

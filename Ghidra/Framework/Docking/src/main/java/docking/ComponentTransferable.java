@@ -15,7 +15,11 @@
  */
 package docking;
 
-import java.awt.datatransfer.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.ClipboardOwner;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 
 import org.apache.logging.log4j.LogManager;
@@ -57,6 +61,7 @@ class ComponentTransferable implements Transferable, ClipboardOwner {
 	/**
 	 * Return all data flavors that this class supports.
 	 */
+	@Override
 	public synchronized DataFlavor []getTransferDataFlavors() {
 		return flavors;
 	}
@@ -64,6 +69,7 @@ class ComponentTransferable implements Transferable, ClipboardOwner {
 	/**
 	 * Return whether the specifed data flavor is supported.
 	 */
+	@Override
 	public boolean isDataFlavorSupported(DataFlavor f) {
 		return f == localComponentProviderFlavor;
 	}
@@ -71,6 +77,7 @@ class ComponentTransferable implements Transferable, ClipboardOwner {
 	/**
 	 * Return the transfer data with the given data flavor.
 	 */
+	@Override
 	public synchronized Object getTransferData(DataFlavor f) 
 		throws UnsupportedFlavorException, IOException {
             
@@ -91,6 +98,7 @@ class ComponentTransferable implements Transferable, ClipboardOwner {
 	/**
 	 * ClipboardOwner interface method.
 	 */
+	@Override
 	public void lostOwnership(Clipboard clipboard, Transferable contents) {
 	}
 

@@ -27,9 +27,15 @@ import docking.DockingUtils;
 import edu.uci.ics.jung.algorithms.layout.GraphElementAccessor;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.graph.Graph;
-import edu.uci.ics.jung.visualization.*;
+import edu.uci.ics.jung.visualization.MultiLayerTransformer;
+import edu.uci.ics.jung.visualization.RenderContext;
+import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.picking.PickedState;
-import ghidra.graph.viewer.*;
+import ghidra.graph.viewer.GraphViewer;
+import ghidra.graph.viewer.GraphViewerUtils;
+import ghidra.graph.viewer.VisualEdge;
+import ghidra.graph.viewer.VisualGraphViewUpdater;
+import ghidra.graph.viewer.VisualVertex;
 
 public class VisualGraphPickingGraphMousePlugin<V extends VisualVertex, E extends VisualEdge<V>>
 		extends JungPickingGraphMousePlugin<V, E> implements VisualGraphMousePlugin<V, E> {
@@ -78,10 +84,8 @@ public class VisualGraphPickingGraphMousePlugin<V extends VisualVertex, E extend
 	private void increaseDragRectangle(MouseEvent e) {
 		Point2D out = e.getPoint();
 		int theModifiers = e.getModifiersEx();
-		if (theModifiers == addToSelectionModifiers || theModifiers == modifiers) {
-			if (down != null) {
-				rect.setFrameFromDiagonal(down, out);
-			}
+		if ((theModifiers == addToSelectionModifiers || theModifiers == modifiers) && (down != null)) {
+			rect.setFrameFromDiagonal(down, out);
 		}
 	}
 

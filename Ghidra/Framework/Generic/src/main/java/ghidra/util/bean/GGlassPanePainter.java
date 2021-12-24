@@ -21,5 +21,5 @@ import java.awt.Graphics;
 
 public interface GGlassPanePainter {
 
-    public void paint( GGlassPane glassPane, Graphics graphics );
+    void paint( GGlassPane glassPane, Graphics graphics );
 }

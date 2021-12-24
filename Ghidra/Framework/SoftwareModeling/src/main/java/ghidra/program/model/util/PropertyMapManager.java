@@ -16,13 +16,13 @@
  */
 package ghidra.program.model.util;
 
+import java.util.Iterator;
+
 import ghidra.program.model.address.Address;
 import ghidra.util.Saveable;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.task.TaskMonitor;
-
-import java.util.Iterator;
 
 /**
  *
@@ -36,7 +36,7 @@ public interface PropertyMapManager {
 	 * @exception DuplicateNameException thrown if a PropertyMap already
 	 * exists with that name. 
 	 */
-	public IntPropertyMap createIntPropertyMap(String propertyName) throws DuplicateNameException;
+	IntPropertyMap createIntPropertyMap(String propertyName) throws DuplicateNameException;
 
 	/**
 	 * Creates a new LongPropertyMap with the given name.
@@ -44,7 +44,7 @@ public interface PropertyMapManager {
 	 * @exception DuplicateNameException thrown if a PropertyMap already
 	 * exists with that name. 
 	 */
-	public LongPropertyMap createLongPropertyMap(String propertyName) throws DuplicateNameException;
+	LongPropertyMap createLongPropertyMap(String propertyName) throws DuplicateNameException;
 
 	/**
 	 * Creates a new StringPropertyMap with the given name.
@@ -52,7 +52,7 @@ public interface PropertyMapManager {
 	 * @exception DuplicateNameException thrown if a PropertyMap already
 	 * exists with that name.
 	 */
-	public StringPropertyMap createStringPropertyMap(String propertyName)
+	StringPropertyMap createStringPropertyMap(String propertyName)
 			throws DuplicateNameException;
 
 	/**
@@ -61,7 +61,7 @@ public interface PropertyMapManager {
 	 * @exception DuplicateNameException thrown if a PropertyMap already
 	 * exists with that name.
 	 */
-	public ObjectPropertyMap createObjectPropertyMap(String propertyName,
+	ObjectPropertyMap createObjectPropertyMap(String propertyName,
 			Class<? extends Saveable> objectClass) throws DuplicateNameException;
 
 	/**
@@ -70,14 +70,14 @@ public interface PropertyMapManager {
 	 * @exception DuplicateNameException thrown if a PropertyMap already
 	 * exists with that name.
 	 */
-	public VoidPropertyMap createVoidPropertyMap(String propertyName) throws DuplicateNameException;
+	VoidPropertyMap createVoidPropertyMap(String propertyName) throws DuplicateNameException;
 
 	/**
 	 * Returns the PropertyMap with the given name or null if no PropertyMap
 	 * exists with that name.
 	 * @param propertyName the name of the property to retrieve.
 	 */
-	public PropertyMap getPropertyMap(String propertyName);
+	PropertyMap getPropertyMap(String propertyName);
 
 	/**
 	 * Returns the IntPropertyMap associated with the given name.
@@ -85,7 +85,7 @@ public interface PropertyMapManager {
 	 * @throws TypeMismatchException if a propertyMap named propertyName
 	 * exists but is not an IntPropertyMap.
 	 */
-	public IntPropertyMap getIntPropertyMap(String propertyName);
+	IntPropertyMap getIntPropertyMap(String propertyName);
 
 	/**
 	 * Returns the LongPropertyMap associated with the given name.
@@ -93,7 +93,7 @@ public interface PropertyMapManager {
 	 * @throws TypeMismatchException if a propertyMap named propertyName
 	 * exists but is not an LongPropertyMap.
 	 */
-	public LongPropertyMap getLongPropertyMap(String propertyName);
+	LongPropertyMap getLongPropertyMap(String propertyName);
 
 	/**
 	 * Returns the StringPropertyMap associated with the given name.
@@ -101,7 +101,7 @@ public interface PropertyMapManager {
 	 * @throws TypeMismatchException if a propertyMap named propertyName
 	 * exists but is not a StringPropertyMap.
 	 */
-	public StringPropertyMap getStringPropertyMap(String propertyName);
+	StringPropertyMap getStringPropertyMap(String propertyName);
 
 	/**
 	 * Returns the ObjectPropertyMap associated with the given name.
@@ -109,7 +109,7 @@ public interface PropertyMapManager {
 	 * @throws TypeMismatchException if a propertyMap named propertyName
 	 * exists but is not an ObjectPropertyMap.
 	 */
-	public ObjectPropertyMap getObjectPropertyMap(String propertyName);
+	ObjectPropertyMap getObjectPropertyMap(String propertyName);
 
 	/**
 	 * Returns the VoidPropertyMap associated with the given name.
@@ -117,26 +117,26 @@ public interface PropertyMapManager {
 	 * @throws TypeMismatchException if a propertyMap named propertyName
 	 * exists but is not a VoidPropertyMap.
 	 */
-	public VoidPropertyMap getVoidPropertyMap(String propertyName);
+	VoidPropertyMap getVoidPropertyMap(String propertyName);
 
 	/**
 	 * Removes the PropertyMap with the given name.
 	 * @param propertyName the name of the property to remove.
 	 * @return true if a PropertyMap with that name was found (and removed)
 	 */
-	public boolean removePropertyMap(String propertyName);
+	boolean removePropertyMap(String propertyName);
 
 	/**
 	 * Returns an iterator over the names of all existing PropertyMaps.
 	 */
-	public Iterator<String> propertyManagers();
+	Iterator<String> propertyManagers();
 
 	/**
 	 * Removes any property at the given address from all defined 
 	 * PropertyMaps.
 	 * @param addr the address at which to remove all property values.
 	 */
-	public void removeAll(Address addr);
+	void removeAll(Address addr);
 
 	/**
 	 * Removes all properties in the given range from all user 
@@ -148,7 +148,7 @@ public interface PropertyMapManager {
 	 * @param monitor monitors progress
 	 * @throws CancelledException if the user cancelled the operation.
 	 */
-	public void removeAll(Address startAddr, Address endAddr, TaskMonitor monitor)
+	void removeAll(Address startAddr, Address endAddr, TaskMonitor monitor)
 			throws CancelledException;
 
 }

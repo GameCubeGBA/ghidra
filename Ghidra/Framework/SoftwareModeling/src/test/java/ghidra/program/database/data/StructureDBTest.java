@@ -15,16 +15,51 @@
  */
 package ghidra.program.database.data;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.List;
 
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.google.common.collect.Sets;
 
 import generic.test.AbstractGTest;
-import ghidra.program.model.data.*;
+import ghidra.program.model.data.Array;
+import ghidra.program.model.data.ArrayDataType;
+import ghidra.program.model.data.ByteDataType;
+import ghidra.program.model.data.CharDataType;
+import ghidra.program.model.data.CompositeTestUtils;
+import ghidra.program.model.data.DWordDataType;
+import ghidra.program.model.data.DataOrganizationImpl;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.DataTypeComponent;
+import ghidra.program.model.data.DataTypeConflictHandler;
+import ghidra.program.model.data.DataTypeDependencyException;
+import ghidra.program.model.data.FloatDataType;
+import ghidra.program.model.data.IntegerDataType;
+import ghidra.program.model.data.InvalidDataTypeException;
+import ghidra.program.model.data.LongDataType;
+import ghidra.program.model.data.Pointer;
+import ghidra.program.model.data.Pointer32DataType;
+import ghidra.program.model.data.QWordDataType;
+import ghidra.program.model.data.ShortDataType;
+import ghidra.program.model.data.StandAloneDataTypeManager;
+import ghidra.program.model.data.StringDataType;
+import ghidra.program.model.data.Structure;
+import ghidra.program.model.data.StructureDataType;
+import ghidra.program.model.data.TypeDef;
+import ghidra.program.model.data.TypedefDataType;
+import ghidra.program.model.data.Undefined1DataType;
+import ghidra.program.model.data.Union;
+import ghidra.program.model.data.UnionDataType;
+import ghidra.program.model.data.WordDataType;
 import ghidra.util.InvalidNameException;
 import ghidra.util.task.TaskMonitor;
 import ghidra.util.task.TaskMonitorAdapter;

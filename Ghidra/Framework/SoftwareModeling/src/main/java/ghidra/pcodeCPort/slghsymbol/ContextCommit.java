@@ -16,13 +16,15 @@
  */
 package ghidra.pcodeCPort.slghsymbol;
 
-import ghidra.pcodeCPort.context.ParserWalkerChange;
-import ghidra.pcodeCPort.sleighbase.SleighBase;
-import ghidra.pcodeCPort.utils.*;
-
 import java.io.PrintStream;
 
 import org.jdom.Element;
+
+import ghidra.pcodeCPort.context.ParserWalkerChange;
+import ghidra.pcodeCPort.sleighbase.SleighBase;
+import ghidra.pcodeCPort.utils.MutableInt;
+import ghidra.pcodeCPort.utils.Utils;
+import ghidra.pcodeCPort.utils.XmlUtils;
 
 public class ContextCommit extends ContextChange {
 

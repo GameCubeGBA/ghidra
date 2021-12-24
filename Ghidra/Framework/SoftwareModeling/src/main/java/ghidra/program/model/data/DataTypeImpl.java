@@ -16,18 +16,24 @@
 package ghidra.program.model.data;
 
 import java.lang.ref.WeakReference;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.function.Consumer;
 
-import ghidra.docking.settings.*;
-import ghidra.util.*;
+import ghidra.docking.settings.Settings;
+import ghidra.docking.settings.SettingsDefinition;
+import ghidra.docking.settings.SettingsImpl;
+import ghidra.util.InvalidNameException;
+import ghidra.util.UniversalID;
+import ghidra.util.UniversalIdGenerator;
 
 /**
  * Base implementation for dataTypes.
  */
 public abstract class DataTypeImpl extends AbstractDataType {
 
-	private final static SettingsDefinition[] EMPTY_DEFINITIONS = new SettingsDefinition[0];
+	private final static SettingsDefinition[] EMPTY_DEFINITIONS = {};
 	protected Settings defaultSettings;
 	private List<WeakReference<DataType>> parentList;
 	private UniversalID universalID;

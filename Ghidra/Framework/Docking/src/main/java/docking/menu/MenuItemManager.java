@@ -16,7 +16,10 @@
 package docking.menu;
 
 import java.awt.Component;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -25,7 +28,10 @@ import javax.swing.JMenuItem;
 import javax.swing.event.ChangeListener;
 
 import docking.ActionContext;
-import docking.action.*;
+import docking.action.DockingActionIf;
+import docking.action.KeyBindingData;
+import docking.action.MenuData;
+import docking.action.ToggleDockingActionIf;
 import ghidra.util.Msg;
 import ghidra.util.StringUtilities;
 
@@ -156,22 +162,18 @@ class MenuItemManager implements ManagedMenuItem, PropertyChangeListener, Action
 		}
 
 		String name = e.getPropertyName();
-		if (isPopup && name.equals(DockingActionIf.POPUP_MENU_DATA_PROPERTY)) {
+		if ((isPopup && DockingActionIf.POPUP_MENU_DATA_PROPERTY.equals(name)) || (!isPopup && DockingActionIf.MENUBAR_DATA_PROPERTY.equals(name))) {
 			updateMenuItem();
-		}
-		else if (!isPopup && name.equals(DockingActionIf.MENUBAR_DATA_PROPERTY)) {
-			updateMenuItem();
-		}
-		else if (name.equals(DockingActionIf.ENABLEMENT_PROPERTY)) {
+		} else if (DockingActionIf.ENABLEMENT_PROPERTY.equals(name)) {
 			menuItem.setEnabled(((Boolean) e.getNewValue()).booleanValue());
 			menuItem.repaint();
 		}
-		else if (name.equals(DockingActionIf.KEYBINDING_DATA_PROPERTY)) {
+		else if (DockingActionIf.KEYBINDING_DATA_PROPERTY.equals(name)) {
 			KeyBindingData newData = (KeyBindingData) e.getNewValue();
 			menuItem.setAccelerator(newData == null ? null : newData.getKeyBinding());
 			menuItem.revalidate();
 		}
-		else if (name.equals(ToggleDockingActionIf.SELECTED_STATE_PROPERTY)) {
+		else if (ToggleDockingActionIf.SELECTED_STATE_PROPERTY.equals(name)) {
 			menuItem.setSelected(((Boolean) e.getNewValue()).booleanValue());
 			menuItem.revalidate();
 		}

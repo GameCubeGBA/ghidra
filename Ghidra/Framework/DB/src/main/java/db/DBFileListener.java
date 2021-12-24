@@ -27,6 +27,6 @@ public interface DBFileListener {
 	 * @param db
 	 * @param version
 	 */
-	public void versionCreated(Database db, int version);
+	void versionCreated(Database db, int version);
 	
 }

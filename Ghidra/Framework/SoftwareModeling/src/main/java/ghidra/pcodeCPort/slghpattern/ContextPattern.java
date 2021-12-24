@@ -16,12 +16,12 @@
  */
 package ghidra.pcodeCPort.slghpattern;
 
-import ghidra.pcodeCPort.context.ParserWalker;
-
 import java.io.PrintStream;
 import java.util.List;
 
 import org.jdom.Element;
+
+import ghidra.pcodeCPort.context.ParserWalker;
 
 public class ContextPattern extends DisjointPattern {
 

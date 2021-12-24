@@ -16,14 +16,19 @@
  */
 package ghidra.framework.data;
 
-import ghidra.framework.model.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+
+import ghidra.framework.model.AbortedTransactionListener;
+import ghidra.framework.model.DomainObject;
+import ghidra.framework.model.Transaction;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.util.Msg;
 import ghidra.util.SystemUtilities;
 import ghidra.util.datastruct.WeakDataStructureFactory;
 import ghidra.util.datastruct.WeakSet;
-
-import java.util.*;
 
 /**
  * <code>DomainObjectDBTransaction</code> represents an atomic undoable operation performed
@@ -55,8 +60,8 @@ class DomainObjectDBTransaction implements Transaction {
 		this.domainObject = domainObject;
 		this.id = id;
 		baseId = getNextBaseId();
-		list = new ArrayList<TransactionEntry>();
-		toolStates = new HashMap<PluginTool, ToolState>();
+		list = new ArrayList<>();
+		toolStates = new HashMap<>();
 		getToolStates();
 	}
 
@@ -82,18 +87,15 @@ class DomainObjectDBTransaction implements Transaction {
 		if (toolStates.isEmpty()) {
 			return;
 		}
-		SystemUtilities.runSwingLater(new Runnable() {
-			@Override
-			public void run() {
-				// flush events blocks so that current tool state and domain object are 
-				// consistent prior to restore tool state
-				domainObject.flushEvents();
-				if (beforeState) {
-					restoreToolStatesAfterUndo(domainObject);
-				}
-				else {
-					restoreToolStatesAfterRedo(domainObject);
-				}
+		SystemUtilities.runSwingLater(() -> {
+			// flush events blocks so that current tool state and domain object are 
+			// consistent prior to restore tool state
+			domainObject.flushEvents();
+			if (beforeState) {
+				restoreToolStatesAfterUndo(domainObject);
+			}
+			else {
+				restoreToolStatesAfterRedo(domainObject);
 			}
 		});
 	}
@@ -171,8 +173,7 @@ class DomainObjectDBTransaction implements Transaction {
 
 	private void restoreToolStatesAfterUndo(DomainObject object) {
 		List<Object> consumers = object.getConsumerList();
-		for (int i = 0; i < consumers.size(); i++) {
-			Object obj = consumers.get(i);
+		for (Object obj : consumers) {
 			if (obj instanceof PluginTool) {
 				PluginTool tool = (PluginTool) obj;
 				ToolState toolState = toolStates.get(tool);
@@ -185,8 +186,7 @@ class DomainObjectDBTransaction implements Transaction {
 
 	private void restoreToolStatesAfterRedo(DomainObject object) {
 		List<Object> consumers = object.getConsumerList();
-		for (int i = 0; i < consumers.size(); i++) {
-			Object obj = consumers.get(i);
+		for (Object obj : consumers) {
 			if (obj instanceof PluginTool) {
 				PluginTool tool = (PluginTool) obj;
 				ToolState toolState = toolStates.get(tool);
@@ -221,7 +221,7 @@ class DomainObjectDBTransaction implements Transaction {
 	 */
 	@Override
 	public ArrayList<String> getOpenSubTransactions() {
-		ArrayList<String> subTxList = new ArrayList<String>();
+		ArrayList<String> subTxList = new ArrayList<>();
 		Iterator<TransactionEntry> iter = list.iterator();
 		while (iter.hasNext()) {
 			TransactionEntry entry = iter.next();
@@ -244,8 +244,7 @@ class DomainObjectDBTransaction implements Transaction {
 
 	void initAfterState(DomainObject object) {
 		List<Object> consumers = object.getConsumerList();
-		for (int i = 0; i < consumers.size(); i++) {
-			Object obj = consumers.get(i);
+		for (Object obj : consumers) {
 			if (obj instanceof PluginTool) {
 				PluginTool tool = (PluginTool) obj;
 				ToolState toolState = toolStates.get(tool);

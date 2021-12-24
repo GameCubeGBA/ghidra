@@ -15,7 +15,9 @@
  */
 package docking.widgets.table;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.Objects;
 
 public class TableSortingContext<T> {
 
@@ -95,12 +97,7 @@ public class TableSortingContext<T> {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-// see the equals methods		
-//		result = prime * result + ((comparator == null) ? 0 : comparator.hashCode());
-		result = prime * result + ((sortState == null) ? 0 : sortState.hashCode());
-		return result;
+		return Objects.hash(sortState);
 	}
 
 	@Override

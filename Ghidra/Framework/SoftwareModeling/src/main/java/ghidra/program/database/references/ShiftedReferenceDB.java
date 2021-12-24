@@ -18,7 +18,9 @@ package ghidra.program.database.references;
 
 import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.RefType;
+import ghidra.program.model.symbol.ShiftedReference;
+import ghidra.program.model.symbol.SourceType;
 
 class ShiftedReferenceDB extends MemReferenceDB implements ShiftedReference {
 
@@ -31,6 +33,7 @@ class ShiftedReferenceDB extends MemReferenceDB implements ShiftedReference {
 	/**
 	 * @see ghidra.program.model.symbol.ShiftedReference#getShift()
 	 */
+	@Override
 	public int getShift() {
 		return (int) offsetOrShift;
 	}
@@ -38,6 +41,7 @@ class ShiftedReferenceDB extends MemReferenceDB implements ShiftedReference {
 	/**
 	 * @see ghidra.program.model.symbol.ShiftedReference#getValue()
 	 */
+	@Override
 	public long getValue() {
 		return toAddr.getOffset() >> (int) offsetOrShift;
 	}
@@ -47,10 +51,7 @@ class ShiftedReferenceDB extends MemReferenceDB implements ShiftedReference {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (!(obj instanceof ShiftedReference)) {
-			return false;
-		}
-		if (!super.equals(obj)) {
+		if (!(obj instanceof ShiftedReference) || !super.equals(obj)) {
 			return false;
 		}
 		ShiftedReference ref = (ShiftedReference) obj;

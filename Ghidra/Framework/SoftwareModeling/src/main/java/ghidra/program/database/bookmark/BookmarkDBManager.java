@@ -17,26 +17,49 @@ package ghidra.program.database.bookmark;
 
 import java.awt.Color;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.swing.ImageIcon;
 
 import org.apache.commons.lang3.StringUtils;
 
-import db.*;
+import db.DBConstants;
+import db.DBFieldIterator;
+import db.DBHandle;
+import db.DBRecord;
+import db.RecordIterator;
+import db.Table;
 import db.util.ErrorHandler;
-import generic.util.*;
-import ghidra.program.database.*;
+import generic.util.MultiIterator;
+import generic.util.PeekableIterator;
+import generic.util.WrappingPeekableIterator;
+import ghidra.program.database.DBObjectCache;
+import ghidra.program.database.ManagerDB;
+import ghidra.program.database.ProgramDB;
 import ghidra.program.database.map.AddressIndexPrimaryKeyIterator;
 import ghidra.program.database.map.AddressMap;
 import ghidra.program.database.util.DatabaseTableUtils;
 import ghidra.program.database.util.EmptyRecordIterator;
-import ghidra.program.model.address.*;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressIterator;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.listing.Bookmark;
+import ghidra.program.model.listing.BookmarkManager;
+import ghidra.program.model.listing.BookmarkType;
+import ghidra.program.model.listing.Program;
 import ghidra.program.util.ChangeManager;
 import ghidra.util.Lock;
 import ghidra.util.datastruct.ObjectArray;
-import ghidra.util.exception.*;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.ClosedException;
+import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
 
 public class BookmarkDBManager implements BookmarkManager, ErrorHandler, ManagerDB {
@@ -50,7 +73,7 @@ public class BookmarkDBManager implements BookmarkManager, ErrorHandler, Manager
 
 	private boolean upgrade = false;
 
-	private Map<String, BookmarkType> typesByName = new TreeMap<String, BookmarkType>();
+	private Map<String, BookmarkType> typesByName = new TreeMap<>();
 	private ObjectArray typesArray = new ObjectArray();
 	private Lock lock;
 
@@ -73,7 +96,7 @@ public class BookmarkDBManager implements BookmarkManager, ErrorHandler, Manager
 		bookmarkTypeAdapter = BookmarkTypeDBAdapter.getAdapter(handle, openMode);
 		int[] types = bookmarkTypeAdapter.getTypeIds();
 		bookmarkAdapter = BookmarkDBAdapter.getAdapter(handle, openMode, types, addrMap, monitor);
-		cache = new DBObjectCache<BookmarkDB>(100);
+		cache = new DBObjectCache<>(100);
 	}
 
 	@Override
@@ -474,7 +497,7 @@ public class BookmarkDBManager implements BookmarkManager, ErrorHandler, Manager
 		lock.acquire();
 		try {
 			int n = typesArray.getLastNonEmptyIndex();
-			List<Bookmark> list = new ArrayList<Bookmark>();
+			List<Bookmark> list = new ArrayList<>();
 			for (int i = 0; i <= n; i++) {
 				BookmarkTypeDB bmt = (BookmarkTypeDB) typesArray.get(i);
 				if (bmt != null && bmt.hasBookmarks()) {
@@ -512,7 +535,7 @@ public class BookmarkDBManager implements BookmarkManager, ErrorHandler, Manager
 		lock.acquire();
 		try {
 			Bookmark[] bookmarks = null;
-			List<Bookmark> list = new ArrayList<Bookmark>();
+			List<Bookmark> list = new ArrayList<>();
 			BookmarkType bmt = getBookmarkType(type);
 			if (bmt != null && bmt.hasBookmarks()) {
 				getBookmarks(address, bmt.getTypeId(), list);
@@ -681,18 +704,18 @@ public class BookmarkDBManager implements BookmarkManager, ErrorHandler, Manager
 	@Override
 	public Iterator<Bookmark> getBookmarksIterator(Address startAddress, boolean forward) {
 
-		List<PeekableIterator<Bookmark>> list = new ArrayList<PeekableIterator<Bookmark>>();
+		List<PeekableIterator<Bookmark>> list = new ArrayList<>();
 		int n = typesArray.getLastNonEmptyIndex();
 		for (int i = 0; i <= n; i++) {
 			BookmarkTypeDB bmt = (BookmarkTypeDB) typesArray.get(i);
 			if (bmt != null && bmt.hasBookmarks()) {
 				Iterator<Bookmark> bookmarksIterator =
 					getBookmarksIterator(startAddress, bmt, forward);
-				list.add(new WrappingPeekableIterator<Bookmark>(bookmarksIterator));
+				list.add(new WrappingPeekableIterator<>(bookmarksIterator));
 			}
 		}
 
-		return new MultiIterator<Bookmark>(list, forward);
+		return new MultiIterator<>(list, forward);
 	}
 
 	@Override
@@ -880,7 +903,7 @@ public class BookmarkDBManager implements BookmarkManager, ErrorHandler, Manager
 		Iterator<Bookmark> bookmarkIt;
 
 		TotalIterator() {
-			List<BookmarkTypeDB> list = new ArrayList<BookmarkTypeDB>();
+			List<BookmarkTypeDB> list = new ArrayList<>();
 			int n = typesArray.getLastNonEmptyIndex();
 			for (int i = 0; i <= n; i++) {
 				BookmarkTypeDB bmt = (BookmarkTypeDB) typesArray.get(i);

@@ -18,7 +18,12 @@
  */
 package docking.widgets.textfield;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -28,7 +33,9 @@ import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JTextField;
-import javax.swing.event.*;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import docking.util.GraphicsUtils;
 import ghidra.util.SystemUtilities;

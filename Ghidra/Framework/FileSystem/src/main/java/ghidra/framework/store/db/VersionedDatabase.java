@@ -15,16 +15,27 @@
  */
 package ghidra.framework.store.db;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import db.DBHandle;
 import db.Database;
-import db.buffers.*;
+import db.buffers.BufferFile;
+import db.buffers.BufferFileManager;
+import db.buffers.LocalBufferFile;
+import db.buffers.LocalManagedBufferFile;
 import ghidra.framework.store.local.ItemSerializer;
-import ghidra.util.exception.*;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.DuplicateFileException;
+import ghidra.util.exception.FileInUseException;
 import ghidra.util.task.TaskMonitor;
 
 /**
@@ -132,10 +143,8 @@ public class VersionedDatabase extends Database {
 			success = true;
 		}
 		finally {
-			if (!success) {
-				if (dbDirCreated) {
-					deleteDir(dbDir);
-				}
+			if (!success && dbDirCreated) {
+				deleteDir(dbDir);
 			}
 		}
 	}

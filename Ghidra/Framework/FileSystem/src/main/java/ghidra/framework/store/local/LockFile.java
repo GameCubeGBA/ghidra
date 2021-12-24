@@ -15,14 +15,21 @@
  */
 package ghidra.framework.store.local;
 
-import ghidra.util.*;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileFilter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Date;
+import java.util.Random;
+
+import ghidra.util.Msg;
+import ghidra.util.NamingUtilities;
+import ghidra.util.SystemUtilities;
 import ghidra.util.exception.AssertException;
 import ghidra.util.timer.GTimer;
 import ghidra.util.timer.GTimerMonitor;
-
-import java.io.*;
-import java.util.Date;
-import java.util.Random;
 
 /**
  * Provides for the creation and management of a named lock file. Keep in mind
@@ -135,17 +142,14 @@ public class LockFile {
 	 * @return true if any lock exists within dir for the given entity name.
 	 */
 	private static boolean hasAnyLock(File dir, final String mangledName) {
-		FileFilter filter = new FileFilter() {
-			@Override
-			public boolean accept(File pathname) {
-				String fname = pathname.getName();
-				if (fname.startsWith(mangledName) && fname.endsWith(LOCK)) {
-					String s =
-						fname.substring(mangledName.length(), fname.length() - LOCK.length());
-					return s.indexOf('.') == 0 && s.indexOf('.', 1) < 0;
-				}
-				return false;
+		FileFilter filter = pathname -> {
+			String fname = pathname.getName();
+			if (fname.startsWith(mangledName) && fname.endsWith(LOCK)) {
+				String s =
+					fname.substring(mangledName.length(), fname.length() - LOCK.length());
+				return s.indexOf('.') == 0 && s.indexOf('.', 1) < 0;
 			}
+			return false;
 		};
 		File[] files = dir.listFiles(filter);
 		return files != null && files.length != 0;
@@ -172,12 +176,12 @@ public class LockFile {
 		File[] files = dir.listFiles();
 		if (files == null)
 			return false;
-		for (int i = 0; i < files.length; i++) {
-			if (files[i].isDirectory()) {
-				if (containsLock(files[i]))
+		for (File file : files) {
+			if (file.isDirectory()) {
+				if (containsLock(file))
 					return true;
 			}
-			else if (files[i].getName().endsWith(LOCK)) {
+			else if (file.getName().endsWith(LOCK)) {
 				return true;
 			}
 		}

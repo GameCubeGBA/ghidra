@@ -24,9 +24,13 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 
-import docking.wizard.*;
+import docking.wizard.PanelManager;
+import docking.wizard.WizardManager;
+import docking.wizard.WizardPanel;
 import ghidra.app.util.GenericHelpTopics;
-import ghidra.framework.client.*;
+import ghidra.framework.client.NotConnectedException;
+import ghidra.framework.client.RepositoryAdapter;
+import ghidra.framework.client.RepositoryServerAdapter;
 import ghidra.framework.model.ProjectManager;
 import ghidra.framework.model.ServerInfo;
 import ghidra.framework.plugintool.PluginTool;
@@ -89,11 +93,7 @@ class SetupProjectPanelManager implements PanelManager {
 
 	@Override
 	public boolean hasNextPanel() {
-		if (currentWizardPanel == serverPanel) {
-			return true;
-		}
-
-		if (currentWizardPanel == repositoryPanel && repositoryPanel.createRepository()) {
+		if ((currentWizardPanel == serverPanel) || (currentWizardPanel == repositoryPanel && repositoryPanel.createRepository())) {
 			return true;
 		}
 		return false;

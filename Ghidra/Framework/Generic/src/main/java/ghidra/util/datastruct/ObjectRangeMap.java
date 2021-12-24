@@ -15,7 +15,9 @@
  */
 package ghidra.util.datastruct;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Associates objects with long index ranges.
@@ -28,7 +30,7 @@ public class ObjectRangeMap <T> {
 	 * Constructs a new ObjectRangeMap
 	 */
 	public ObjectRangeMap() {
-		ranges = new ArrayList<ObjectValueRange<T>>();
+		ranges = new ArrayList<>();
 	}
 
 	/**
@@ -62,7 +64,7 @@ public class ObjectRangeMap <T> {
 	 */
 	public synchronized void setObject(long start, long end, T object) {
 		lastRange = null;
-		ObjectValueRange<T> newRange = new ObjectValueRange<T>(start, end, object);
+		ObjectValueRange<T> newRange = new ObjectValueRange<>(start, end, object);
 	
 		// if ranges list is empty, just add the new entry
 		if (ranges.isEmpty()) {
@@ -99,11 +101,11 @@ public class ObjectRangeMap <T> {
 		
 		if (valuesEqual(range.getValue(), object)) { // merge records
 			ranges.remove(insertionIndex);
-			newRange = new ObjectValueRange<T>(newRange.getStart(), range.getEnd(), object);
+			newRange = new ObjectValueRange<>(newRange.getStart(), range.getEnd(), object);
 		}
 		// overwrite the old record to start past the end of the new range
 		else {
-			ranges.set(insertionIndex, new ObjectValueRange<T>(newEnd+1, range.getEnd(), range.getValue()));
+			ranges.set(insertionIndex, new ObjectValueRange<>(newEnd+1, range.getEnd(), range.getValue()));
 		}
 			
 		return newRange;
@@ -133,15 +135,15 @@ public class ObjectRangeMap <T> {
 		
 		if (valuesEqual(previousRange.getValue(), object)) {  // same objects, merge
 			ranges.remove(pos);
-			newRange = new ObjectValueRange<T>(oldStart, Math.max(oldEnd, end), object);
+			newRange = new ObjectValueRange<>(oldStart, Math.max(oldEnd, end), object);
 		}		
 		// break previous record into sub-ranges that exclude the new range
 		else {  
-			ranges.set(pos, new ObjectValueRange<T>(oldStart, start-1, oldValue));
+			ranges.set(pos, new ObjectValueRange<>(oldStart, start-1, oldValue));
 			
 			// previous range extends past the new range
 			if (previousRange.getEnd() > end) {
-				ranges.add(pos+1, new ObjectValueRange<T>(end+1, oldEnd, oldValue));
+				ranges.add(pos+1, new ObjectValueRange<>(end+1, oldEnd, oldValue));
 			}
 		}
 		
@@ -161,11 +163,11 @@ public class ObjectRangeMap <T> {
 		if (pos >= 0) {
 			ObjectValueRange<T> range = ranges.get(pos);
 			if (range.getEnd() >= start) {				// truncate previous range if it needed
-				ranges.set(pos, new ObjectValueRange<T>(range.getStart(), start-1, range.getValue()));
+				ranges.set(pos, new ObjectValueRange<>(range.getStart(), start-1, range.getValue()));
 			}
 			if (range.getEnd() > end) {					// create leftover if previous range extends
 														// beyond cleared area.
-				ranges.add(pos+1, new ObjectValueRange<T>(end+1, range.getEnd(), range.getValue()));
+				ranges.add(pos+1, new ObjectValueRange<>(end+1, range.getEnd(), range.getValue()));
 			}
 		}
 		
@@ -180,7 +182,7 @@ public class ObjectRangeMap <T> {
 				break;
 			}
 			else {										// intersects, fixup start
-				ranges.set(pos, new ObjectValueRange<T>(end+1, range.getEnd(), range.getValue()));
+				ranges.set(pos, new ObjectValueRange<>(end+1, range.getEnd(), range.getValue()));
 			}
 		}
 	}
@@ -270,10 +272,12 @@ public class ObjectRangeMap <T> {
 	class SimpleIndexRangeIterator implements IndexRangeIterator {
 		int pos = 0;
 
+		@Override
 		public boolean hasNext() {
 			return pos < ranges.size();
 		}
 
+		@Override
 		public IndexRange next() {
 			ObjectValueRange<T> valueRange = ranges.get(pos++);
 			return new IndexRange(valueRange.getStart(), valueRange.getEnd());
@@ -308,10 +312,12 @@ public class ObjectRangeMap <T> {
 			}
 		}
 		
+		@Override
 		public boolean hasNext() {
 			return nextRange != null;
 		}
 
+		@Override
 		public IndexRange next() {
 			IndexRange retRange = nextRange;
 			if (nextRange != null) {

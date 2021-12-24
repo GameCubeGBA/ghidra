@@ -23,7 +23,9 @@ import java.util.List;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.visualization.Layer;
 import edu.uci.ics.jung.visualization.RenderContext;
-import ghidra.graph.viewer.*;
+import ghidra.graph.viewer.GraphViewerUtils;
+import ghidra.graph.viewer.VisualEdge;
+import ghidra.graph.viewer.VisualVertex;
 import ghidra.graph.viewer.edge.VisualEdgeRenderer;
 
 public class ArticulatedEdgeRenderer<V extends VisualVertex, E extends VisualEdge<V>>

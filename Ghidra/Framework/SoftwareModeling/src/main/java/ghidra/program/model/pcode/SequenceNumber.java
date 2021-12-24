@@ -15,9 +15,12 @@
  */
 package ghidra.program.model.pcode;
 
-import ghidra.program.model.address.*;
-import ghidra.util.xml.*;
-import ghidra.xml.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.util.xml.SpecXmlUtils;
+import ghidra.xml.XmlElement;
+import ghidra.xml.XmlPullParser;
 
 /**
  * 
@@ -107,6 +110,7 @@ public class SequenceNumber implements Comparable<SequenceNumber> {
 	/* (non-Javadoc)
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
+	@Override
 	public int compareTo(SequenceNumber sq)  {
 		int val = pc.compareTo(sq.pc);
 		if (val != 0) return val;

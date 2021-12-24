@@ -17,5 +17,5 @@
 package generic.continues;
 
 public interface ExceptionHandler {
-	public void handle(Throwable e) throws Throwable;
+	void handle(Throwable e) throws Throwable;
 }

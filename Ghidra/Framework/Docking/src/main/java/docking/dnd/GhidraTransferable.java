@@ -16,11 +16,17 @@
  */
 package docking.dnd;
 
-import ghidra.util.Msg;
-
-import java.awt.datatransfer.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.ClipboardOwner;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import ghidra.util.Msg;
 
 
 public class GhidraTransferable implements Transferable, ClipboardOwner {
@@ -54,12 +60,13 @@ public class GhidraTransferable implements Transferable, ClipboardOwner {
 	 * @param dataList the array of DragDropNodes being transfered.
 	 */
 	public GhidraTransferable(List<?> dataList) {
-		this.dataList = new ArrayList<Object>(dataList);
+		this.dataList = new ArrayList<>(dataList);
 	}
 
 	/**
 	 * Return all data flavors that this class supports.
 	 */
+	@Override
 	public synchronized DataFlavor []getTransferDataFlavors() {
 		return flavors;
 	}
@@ -68,6 +75,7 @@ public class GhidraTransferable implements Transferable, ClipboardOwner {
 	 * Return whether the specifed data flavor is supported.
 	 * @param f the DataFlavor to check if supported.
 	 */
+	@Override
 	public boolean isDataFlavorSupported(DataFlavor f) {
 		return flavorList.contains(f);
 	}
@@ -76,6 +84,7 @@ public class GhidraTransferable implements Transferable, ClipboardOwner {
 	 * Return the transfer data with the given data flavor.
 	 * @param f the DataFlavor for which to get a Transferable.
 	 */
+	@Override
 	public synchronized Object getTransferData(DataFlavor f)
 	throws UnsupportedFlavorException, IOException {
 
@@ -99,6 +108,7 @@ public class GhidraTransferable implements Transferable, ClipboardOwner {
 	 * @param clipboard the system clipboard.
 	 * @param contents the Transferable lost in the clipboard.
 	 */
+	@Override
 	public void lostOwnership(Clipboard clipboard, Transferable contents) {
 	}
 

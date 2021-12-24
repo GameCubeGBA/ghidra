@@ -30,7 +30,7 @@ public class ObjectRangeMapTest extends AbstractGenericTest {
 	
 @Test
     public void testGetSet() {
-		ObjectRangeMap<Object> map = new ObjectRangeMap<Object>();
+		ObjectRangeMap<Object> map = new ObjectRangeMap<>();
 		Object obj = new Object();
 		map.setObject(10,20,obj);
 		assertEquals(null, map.getObject(0));
@@ -42,7 +42,7 @@ public class ObjectRangeMapTest extends AbstractGenericTest {
 	}
 @Test
     public void testGetSet2() {
-		ObjectRangeMap<Object> map = new ObjectRangeMap<Object>();
+		ObjectRangeMap<Object> map = new ObjectRangeMap<>();
 		Object obj1 = new Object();
 		Object obj2 = new Object();
 		map.setObject(10,60,obj1);
@@ -58,7 +58,7 @@ public class ObjectRangeMapTest extends AbstractGenericTest {
 	}
 @Test
     public void testGetSet3() {
-		ObjectRangeMap<Object> map = new ObjectRangeMap<Object>();
+		ObjectRangeMap<Object> map = new ObjectRangeMap<>();
 		Object obj1 = new Object();
 		Object obj2 = new Object();
 		map.setObject(10,60,obj1);
@@ -74,7 +74,7 @@ public class ObjectRangeMapTest extends AbstractGenericTest {
 	}
 @Test
     public void testGetSet4() {
-		ObjectRangeMap<Object> map = new ObjectRangeMap<Object>();
+		ObjectRangeMap<Object> map = new ObjectRangeMap<>();
 		Object obj1 = new Object();
 		Object obj2 = new Object();
 		map.setObject(10,60,obj1);
@@ -90,7 +90,7 @@ public class ObjectRangeMapTest extends AbstractGenericTest {
 	}
 @Test
     public void testGetSet5() {
-		ObjectRangeMap<Object> map = new ObjectRangeMap<Object>();
+		ObjectRangeMap<Object> map = new ObjectRangeMap<>();
 		Object obj1 = new Object();
 		Object obj2 = new Object();
 		map.setObject(10,60,obj1);
@@ -105,7 +105,7 @@ public class ObjectRangeMapTest extends AbstractGenericTest {
 	}
 @Test
     public void testGetSet6() {
-		ObjectRangeMap<Object> map = new ObjectRangeMap<Object>();
+		ObjectRangeMap<Object> map = new ObjectRangeMap<>();
 		Object obj1 = new Object();
 		Object obj2 = new Object();
 		map.setObject(10,60,obj1);
@@ -119,7 +119,7 @@ public class ObjectRangeMapTest extends AbstractGenericTest {
 	}
 @Test
     public void testGetSet7() {
-		ObjectRangeMap<Object> map = new ObjectRangeMap<Object>();
+		ObjectRangeMap<Object> map = new ObjectRangeMap<>();
 		Object obj1 = new Object();
 		Object obj2 = new Object();
 		map.setObject(10,60,obj1);
@@ -135,7 +135,7 @@ public class ObjectRangeMapTest extends AbstractGenericTest {
 	}
 @Test
     public void testGetSet8() {
-		ObjectRangeMap<Object> map = new ObjectRangeMap<Object>();
+		ObjectRangeMap<Object> map = new ObjectRangeMap<>();
 		Object obj1 = new Object();
 		Object obj2 = new Object();
 		map.setObject(10,60,obj1);
@@ -151,7 +151,7 @@ public class ObjectRangeMapTest extends AbstractGenericTest {
 	}
 @Test
     public void testGetSet9() {
-		ObjectRangeMap<Object> map = new ObjectRangeMap<Object>();
+		ObjectRangeMap<Object> map = new ObjectRangeMap<>();
 		Object obj1 = new Object();
 		Object obj2 = new Object();
 		map.setObject(20,30,obj1);
@@ -173,7 +173,7 @@ public class ObjectRangeMapTest extends AbstractGenericTest {
 	}
 @Test
     public void testClear() {
-		ObjectRangeMap<Object> map = new ObjectRangeMap<Object>();
+		ObjectRangeMap<Object> map = new ObjectRangeMap<>();
 		Object obj1 = new Object();
 		map.setObject(20,50,obj1);
 		map.clearRange(10,29);
@@ -185,7 +185,7 @@ public class ObjectRangeMapTest extends AbstractGenericTest {
 	}
 @Test
     public void testClear2() {
-		ObjectRangeMap<Object> map = new ObjectRangeMap<Object>();
+		ObjectRangeMap<Object> map = new ObjectRangeMap<>();
 		Object obj1 = new Object();
 		map.setObject(20,50,obj1);
 		map.clearRange(41,60);
@@ -197,7 +197,7 @@ public class ObjectRangeMapTest extends AbstractGenericTest {
 	}
 @Test
     public void testClear3() {
-		ObjectRangeMap<Object> map = new ObjectRangeMap<Object>();
+		ObjectRangeMap<Object> map = new ObjectRangeMap<>();
 		Object obj1 = new Object();
 		map.setObject(20,50,obj1);
 		map.clearRange(30,40);
@@ -212,7 +212,7 @@ public class ObjectRangeMapTest extends AbstractGenericTest {
 	}
 @Test
     public void testClear4() {
-		ObjectRangeMap<Object> map = new ObjectRangeMap<Object>();
+		ObjectRangeMap<Object> map = new ObjectRangeMap<>();
 		Object obj1 = new Object();
 		map.setObject(20,50,obj1);
 		map.clearRange(10,60);
@@ -227,7 +227,7 @@ public class ObjectRangeMapTest extends AbstractGenericTest {
 	}
 @Test
     public void testClear5() {
-		ObjectRangeMap<Object> map = new ObjectRangeMap<Object>();
+		ObjectRangeMap<Object> map = new ObjectRangeMap<>();
 		Object obj1 = new Object();
 		map.setObject(20,50,obj1);
 		map.clearRange(10,15);
@@ -238,7 +238,7 @@ public class ObjectRangeMapTest extends AbstractGenericTest {
 	}
 @Test
     public void testClear6() {
-		ObjectRangeMap<Object> map = new ObjectRangeMap<Object>();
+		ObjectRangeMap<Object> map = new ObjectRangeMap<>();
 		Object obj1 = new Object();
 		map.setObject(20,50,obj1);
 		map.clearRange(70,80);
@@ -249,7 +249,7 @@ public class ObjectRangeMapTest extends AbstractGenericTest {
 	}
 @Test
     public void testClear7() {
-		ObjectRangeMap<Object> map = new ObjectRangeMap<Object>();
+		ObjectRangeMap<Object> map = new ObjectRangeMap<>();
 		Object obj1 = new Object();
 		map.setObject(20,50,obj1);
 		map.clearRange(20,50);
@@ -260,7 +260,7 @@ public class ObjectRangeMapTest extends AbstractGenericTest {
 	}
 @Test
     public void testGetClear8() {
-		ObjectRangeMap<Object> map = new ObjectRangeMap<Object>();
+		ObjectRangeMap<Object> map = new ObjectRangeMap<>();
 		Object obj1 = new Object();
 		map.setObject(20,30,obj1);
 		map.setObject(40,50,obj1);
@@ -282,7 +282,7 @@ public class ObjectRangeMapTest extends AbstractGenericTest {
 	
 @Test
     public void testContains() {
-		ObjectRangeMap<Object> map = new ObjectRangeMap<Object>();
+		ObjectRangeMap<Object> map = new ObjectRangeMap<>();
 		Object obj1 = new Object();
 		map.setObject(20,30,obj1);
 		map.setObject(40,50,obj1);
@@ -307,7 +307,7 @@ public class ObjectRangeMapTest extends AbstractGenericTest {
 	}
 @Test
     public void testIterator() {
-		ObjectRangeMap<Object> map = new ObjectRangeMap<Object>();
+		ObjectRangeMap<Object> map = new ObjectRangeMap<>();
 		Object obj1 = new Object();
 		map.setObject(20,30,obj1);
 		map.setObject(40,50,obj1);
@@ -337,7 +337,7 @@ public class ObjectRangeMapTest extends AbstractGenericTest {
 	}
 @Test
     public void testIterator2() {
-		ObjectRangeMap<Object> map = new ObjectRangeMap<Object>();
+		ObjectRangeMap<Object> map = new ObjectRangeMap<>();
 		Object obj1 = new Object();
 		map.setObject(20,30,obj1);
 		map.setObject(40,50,obj1);
@@ -368,7 +368,7 @@ public class ObjectRangeMapTest extends AbstractGenericTest {
 
 @Test
     public void testIterator3() {
-		ObjectRangeMap<Object> map = new ObjectRangeMap<Object>();
+		ObjectRangeMap<Object> map = new ObjectRangeMap<>();
 		Object obj1 = new Object();
 		map.setObject(20,30,obj1);
 		map.setObject(40,50,obj1);
@@ -381,7 +381,7 @@ public class ObjectRangeMapTest extends AbstractGenericTest {
 	}
 @Test
     public void testIterator4() {
-		ObjectRangeMap<Object> map = new ObjectRangeMap<Object>();
+		ObjectRangeMap<Object> map = new ObjectRangeMap<>();
 		Object obj1 = new Object();
 		map.setObject(20,30,obj1);
 		map.setObject(40,50,obj1);
@@ -394,7 +394,7 @@ public class ObjectRangeMapTest extends AbstractGenericTest {
 	}
 @Test
     public void testIterator5() {
-		ObjectRangeMap<Object> map = new ObjectRangeMap<Object>();
+		ObjectRangeMap<Object> map = new ObjectRangeMap<>();
 		Object obj1 = new Object();
 		map.setObject(20,30,obj1);
 		map.setObject(40,50,obj1);
@@ -412,7 +412,7 @@ public class ObjectRangeMapTest extends AbstractGenericTest {
 	}
 @Test
     public void testIterator6() {
-		ObjectRangeMap<Object> map = new ObjectRangeMap<Object>();
+		ObjectRangeMap<Object> map = new ObjectRangeMap<>();
 		Object obj1 = new Object();
 		map.setObject(20,30,obj1);
 		map.setObject(40,50,obj1);
@@ -430,7 +430,7 @@ public class ObjectRangeMapTest extends AbstractGenericTest {
 	}
 @Test
     public void testIterator7() {
-		ObjectRangeMap<Object> map = new ObjectRangeMap<Object>();
+		ObjectRangeMap<Object> map = new ObjectRangeMap<>();
 		Object obj1 = new Object();
 		map.setObject(20,30,obj1);
 		map.setObject(40,50,obj1);
@@ -452,7 +452,7 @@ public class ObjectRangeMapTest extends AbstractGenericTest {
 	}
 @Test
     public void testIterator8() {
-		ObjectRangeMap<Object> map = new ObjectRangeMap<Object>();
+		ObjectRangeMap<Object> map = new ObjectRangeMap<>();
 		Object obj1 = new Object();
 		map.setObject(20,30,obj1);
 		map.setObject(40,50,obj1);
@@ -470,7 +470,7 @@ public class ObjectRangeMapTest extends AbstractGenericTest {
 	}
 @Test
     public void testIterator9() {
-		ObjectRangeMap<Object> map = new ObjectRangeMap<Object>();
+		ObjectRangeMap<Object> map = new ObjectRangeMap<>();
 		Object obj1 = new Object();
 		map.setObject(20,30,obj1);
 		map.setObject(40,50,obj1);

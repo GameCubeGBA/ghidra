@@ -15,6 +15,12 @@
  */
 package ghidra.pcodeCPort.slghsymbol;
 
+import java.io.PrintStream;
+import java.util.Iterator;
+import java.util.List;
+
+import org.jdom.Element;
+
 import generic.stl.IteratorSTL;
 import generic.stl.VectorSTL;
 import ghidra.pcodeCPort.context.SleighError;
@@ -22,16 +28,10 @@ import ghidra.pcodeCPort.sleighbase.SleighBase;
 import ghidra.pcodeCPort.utils.XmlUtils;
 import ghidra.sleigh.grammar.Location;
 
-import java.io.PrintStream;
-import java.util.Iterator;
-import java.util.List;
-
-import org.jdom.Element;
-
 public class SymbolTable {
 
-	private VectorSTL<SleighSymbol> symbollist = new VectorSTL<SleighSymbol>();
-	private VectorSTL<SymbolScope> table = new VectorSTL<SymbolScope>();
+	private VectorSTL<SleighSymbol> symbollist = new VectorSTL<>();
+	private VectorSTL<SymbolScope> table = new VectorSTL<>();
 	private SymbolScope curscope;
 
 	public SymbolTable() {
@@ -51,7 +51,7 @@ public class SymbolTable {
 	}
 
 	public VectorSTL<SleighSymbol> getUnsoughtSymbols() {
-		VectorSTL<SleighSymbol> result = new VectorSTL<SleighSymbol>();
+		VectorSTL<SleighSymbol> result = new VectorSTL<>();
 		IteratorSTL<SleighSymbol> siter;
 		for (siter = symbollist.begin(); !siter.isEnd(); siter.increment()) {
 			SleighSymbol sleighSymbol = siter.get();
@@ -138,7 +138,7 @@ public class SymbolTable {
 		return a.id;
 	}
 
-	private static final String NEWLINE = System.getProperty("line.separator");
+	private static final String NEWLINE = System.lineSeparator();
 
 	@Override
 	public String toString() {
@@ -235,7 +235,7 @@ public class SymbolTable {
 		Iterator<?> iter = list.iterator();
 		for (int i = 0; i < table.size(); ++i) { // Restore the scopes
 			Element subel = (Element) iter.next();
-			if (!subel.getName().equals("scope")) {
+			if (!"scope".equals(subel.getName())) {
 				throw new SleighError("Misnumbered symbol scopes", null);
 			}
 			int id = XmlUtils.decodeUnknownInt(subel.getAttributeValue("id"));
@@ -267,40 +267,40 @@ public class SymbolTable {
 		// future if you so wish (of course, all the saveXml...need
 		// to be updated properly too)
 		Location location = null;
-		if (el.getName().equals("userop_head")) {
+		if ("userop_head".equals(el.getName())) {
 			sym = new UserOpSymbol(location);
 		}
-		else if (el.getName().equals("epsilon_sym_head")) {
+		else if ("epsilon_sym_head".equals(el.getName())) {
 			sym = new EpsilonSymbol(location);
 		}
-		else if (el.getName().equals("value_sym_head")) {
+		else if ("value_sym_head".equals(el.getName())) {
 			sym = new ValueSymbol(location);
 		}
-		else if (el.getName().equals("valuemap_sym_head")) {
+		else if ("valuemap_sym_head".equals(el.getName())) {
 			sym = new ValueMapSymbol(location);
 		}
-		else if (el.getName().equals("name_sym_head")) {
+		else if ("name_sym_head".equals(el.getName())) {
 			sym = new NameSymbol(location);
 		}
-		else if (el.getName().equals("varnode_sym_head")) {
+		else if ("varnode_sym_head".equals(el.getName())) {
 			sym = new VarnodeSymbol(location);
 		}
-		else if (el.getName().equals("context_sym_head")) {
+		else if ("context_sym_head".equals(el.getName())) {
 			sym = new ContextSymbol(location);
 		}
-		else if (el.getName().equals("varlist_sym_head")) {
+		else if ("varlist_sym_head".equals(el.getName())) {
 			sym = new VarnodeListSymbol(location);
 		}
-		else if (el.getName().equals("operand_sym_head")) {
+		else if ("operand_sym_head".equals(el.getName())) {
 			sym = new OperandSymbol(location);
 		}
-		else if (el.getName().equals("start_sym_head")) {
+		else if ("start_sym_head".equals(el.getName())) {
 			sym = new StartSymbol(location);
 		}
-		else if (el.getName().equals("end_sym_head")) {
+		else if ("end_sym_head".equals(el.getName())) {
 			sym = new EndSymbol(location);
 		}
-		else if (el.getName().equals("subtable_sym_head")) {
+		else if ("subtable_sym_head".equals(el.getName())) {
 			sym = new SubtableSymbol(location);
 		}
 		else {
@@ -379,8 +379,8 @@ public class SymbolTable {
 	// Renumber all the scopes and symbols
 	// so that there are no gaps
 	private void renumber() {
-		VectorSTL<SymbolScope> newtable = new VectorSTL<SymbolScope>();
-		VectorSTL<SleighSymbol> newsymbol = new VectorSTL<SleighSymbol>();
+		VectorSTL<SymbolScope> newtable = new VectorSTL<>();
+		VectorSTL<SleighSymbol> newsymbol = new VectorSTL<>();
 
 		// First renumber the scopes
 		SymbolScope scope = null;

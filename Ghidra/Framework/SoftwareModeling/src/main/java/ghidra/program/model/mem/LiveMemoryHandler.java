@@ -26,7 +26,7 @@ public interface LiveMemoryHandler {
 	/**
 	 * Called when the memory map is re-initializing. Usually after an undo or redo.
 	 */
-	public void clearCache();
+	void clearCache();
 
 	/**
 	 * Gets the byte at the given address.
@@ -34,7 +34,7 @@ public interface LiveMemoryHandler {
 	 * @return the byte at the given address.
 	 * @throws MemoryAccessException if the byte can't be read.
 	 */
-	public byte getByte(Address addr) throws MemoryAccessException;
+	byte getByte(Address addr) throws MemoryAccessException;
 	
 	/**
 	 * Get the bytes at the given address and size and put them into the destination buffer.
@@ -45,7 +45,7 @@ public interface LiveMemoryHandler {
 	 * @return the number of bytes placed into the given buffer.
 	 * @throws MemoryAccessException if the bytes can't be read.
 	 */
-	public int getBytes(Address address, byte[] buffer, int startIndex, int size) throws MemoryAccessException;
+	int getBytes(Address address, byte[] buffer, int startIndex, int size) throws MemoryAccessException;
 
 	/**
 	 * Writes the given byte value to the address in memory.
@@ -53,7 +53,7 @@ public interface LiveMemoryHandler {
 	 * @param value the value to set at the given address.
 	 * @throws MemoryAccessException if the value can not be written to the memory.
 	 */
-	public void putByte(Address address, byte value) throws MemoryAccessException;
+	void putByte(Address address, byte value) throws MemoryAccessException;
 	
 	/**
 	 * Writes the given bytes to memory starting at the given address.
@@ -64,18 +64,18 @@ public interface LiveMemoryHandler {
 	 * @return the number of bytes written to memory.
 	 * @throws MemoryAccessException if the bytes can't be written to memory.
 	 */
-	public int putBytes(Address address, byte[] source, int startIndex, int size) throws MemoryAccessException;
+	int putBytes(Address address, byte[] source, int startIndex, int size) throws MemoryAccessException;
 
 	/**
 	 * Adds a LiveMemoryListener to this handler.  The listener will be notified when memory
 	 * bytes change.
 	 * @param listener the listener to be notified of memory byte value changes.
 	 */
-	public void addLiveMemoryListener(LiveMemoryListener listener);
+	void addLiveMemoryListener(LiveMemoryListener listener);
 	
 	/**
 	 * Removes the LiveMemoryListener from this handler.
 	 * @param listener the listener to be removed.
 	 */
-	public void removeLiveMemoryListener(LiveMemoryListener listener);
+	void removeLiveMemoryListener(LiveMemoryListener listener);
 }

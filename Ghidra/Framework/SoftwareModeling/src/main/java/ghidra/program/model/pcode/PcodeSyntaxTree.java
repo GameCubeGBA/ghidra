@@ -15,9 +15,13 @@
  */
 package ghidra.program.model.pcode;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressSpace;
 import ghidra.program.model.data.DataType;
 import ghidra.program.model.lang.UnknownInstructionException;
 import ghidra.program.model.listing.VariableStorage;
@@ -53,7 +57,7 @@ public class PcodeSyntaxTree implements PcodeFactory {
 		joinAllocate = 0;
 		opbank = new PcodeOpBank();
 		vbank = new VarnodeBank();
-		bblocks = new ArrayList<PcodeBlockBasic>();
+		bblocks = new ArrayList<>();
 		uniqId = 0;
 	}
 
@@ -64,7 +68,7 @@ public class PcodeSyntaxTree implements PcodeFactory {
 		joinAllocate = 0;
 		vbank.clear();
 		opbank.clear();
-		bblocks = new ArrayList<PcodeBlockBasic>();
+		bblocks = new ArrayList<>();
 		uniqId = 0;
 	}
 
@@ -111,7 +115,7 @@ public class PcodeSyntaxTree implements PcodeFactory {
 	 */
 	@Override
 	public VariableStorage readXMLVarnodePieces(XmlElement el, Address addr) throws PcodeXMLException, InvalidInputException {
-		ArrayList<Varnode> list = new ArrayList<Varnode>();
+		ArrayList<Varnode> list = new ArrayList<>();
 		int index = 1;
 		String nextPiece = "piece" + index;
 		while (el.hasAttribute(nextPiece)) {
@@ -162,7 +166,7 @@ public class PcodeSyntaxTree implements PcodeFactory {
 			}
 		}
 		if (joinmap == null) {
-			joinmap = new HashMap<Integer,VariableStorage>();
+			joinmap = new HashMap<>();
 		}
 		joinmap.put(offObject, storage);
 		return storage;
@@ -343,8 +347,7 @@ public class PcodeSyntaxTree implements PcodeFactory {
 		} catch (InvalidInputException e) {
 			return null;
 		}
-		Varnode vn = newVarnode(logicalSize, addr);
-		return vn;
+		return newVarnode(logicalSize, addr);
 	}
 
 	@Override
@@ -359,7 +362,7 @@ public class PcodeSyntaxTree implements PcodeFactory {
 	}
 
 	private void buildVarnodeRefs() {
-		refmap = new HashMap<Integer, Varnode>((int) (1.5 * vbank.size()));
+		refmap = new HashMap<>((int) (1.5 * vbank.size()));
 		Iterator<?> iter = vbank.locRange();			// Iterate over all varnodes
 		while (iter.hasNext()) {
 			VarnodeAST vn = (VarnodeAST) iter.next();
@@ -410,7 +413,7 @@ public class PcodeSyntaxTree implements PcodeFactory {
 	}
 
 	private void buildOpRefs() {
-		oprefmap = new HashMap<Integer, PcodeOp>((int) (1.5 * opbank.size()));
+		oprefmap = new HashMap<>((int) (1.5 * opbank.size()));
 		Iterator<?> iter = opbank.allOrdered();
 		while (iter.hasNext()) {
 			PcodeOp op = (PcodeOp) iter.next();
@@ -577,7 +580,7 @@ public class PcodeSyntaxTree implements PcodeFactory {
 		BlockMap blockMap = new BlockMap(addrFactory);
 		while (parser.peek().isStart()) {
 			XmlElement subel = parser.peek();
-			if (subel.getName().equals("block")) {
+			if ("block".equals(subel.getName())) {
 				readBasicBlockXML(parser, blockMap);		// Read a basic block and all its PcodeOps				
 			}
 			else {

@@ -15,7 +15,9 @@
  */
 package docking.util;
 
-import java.awt.*;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import javax.swing.JComponent;
 import javax.swing.plaf.basic.BasicGraphicsUtils;

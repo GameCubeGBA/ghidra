@@ -45,6 +45,7 @@ class NamespaceDB implements Namespace {
 	/**
 	 * @see ghidra.program.model.symbol.Namespace#getSymbol()
 	 */
+	@Override
 	public Symbol getSymbol() {
 		return symbol;
 	}
@@ -52,6 +53,7 @@ class NamespaceDB implements Namespace {
 	/**
 	 * @see ghidra.program.model.symbol.Namespace#getName()
 	 */
+	@Override
 	public String getName() {
 		return symbol.getName();
 	}
@@ -59,6 +61,7 @@ class NamespaceDB implements Namespace {
 	/**
 	 * @see ghidra.program.model.symbol.Namespace#getID()
 	 */
+	@Override
 	public long getID() {
 		return symbol.getID();
 	}
@@ -66,6 +69,7 @@ class NamespaceDB implements Namespace {
 	/**
 	 * @see ghidra.program.model.symbol.Namespace#getParentNamespace()
 	 */
+	@Override
 	public Namespace getParentNamespace() {
 		return symbol.getParentNamespace();
 	}
@@ -73,6 +77,7 @@ class NamespaceDB implements Namespace {
 	/**
 	 * @see ghidra.program.model.symbol.Namespace#getBody()
 	 */
+	@Override
 	public AddressSetView getBody() {
 		return namespaceMgr.getAddressSet(this);
 	}
@@ -80,6 +85,7 @@ class NamespaceDB implements Namespace {
 	/**
 	 * @see ghidra.program.model.symbol.Namespace#getName(boolean)
 	 */
+	@Override
 	public String getName(boolean includeNamespacePath) {
 		return symbol.getName(includeNamespacePath);
 	}
@@ -89,10 +95,7 @@ class NamespaceDB implements Namespace {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (obj.getClass() != getClass()) {
+		if ((obj == null) || (obj.getClass() != getClass())) {
 			return false;
 		}
 		NamespaceDB nameSpace = (NamespaceDB) obj;
@@ -103,6 +106,7 @@ class NamespaceDB implements Namespace {
 	/**
 	 * @see ghidra.program.model.symbol.Namespace#setParentNamespace(ghidra.program.model.symbol.Namespace)
 	 */
+	@Override
 	public void setParentNamespace(Namespace parentNamespace) throws DuplicateNameException,
 			InvalidInputException, CircularDependencyException {
 		symbol.setNamespace(parentNamespace);

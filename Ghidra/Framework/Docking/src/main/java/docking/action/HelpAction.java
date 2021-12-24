@@ -15,11 +15,19 @@
  */
 package docking.action;
 
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.KeyboardFocusManager;
+import java.awt.Window;
 
 import javax.swing.KeyStroke;
 
-import docking.*;
+import docking.ActionContext;
+import docking.ComponentPlaceholder;
+import docking.ComponentProvider;
+import docking.DialogComponentProvider;
+import docking.DockingDialog;
+import docking.DockingWindowManager;
 import docking.help.HelpService;
 import ghidra.util.HelpLocation;
 import ghidra.util.SystemUtilities;

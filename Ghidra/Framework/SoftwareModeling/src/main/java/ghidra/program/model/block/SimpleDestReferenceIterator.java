@@ -15,14 +15,20 @@
  */
 package ghidra.program.model.block;
 
+import java.util.LinkedList;
+
 import ghidra.program.model.address.Address;
-import ghidra.program.model.listing.*;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.listing.CodeUnit;
+import ghidra.program.model.listing.Data;
+import ghidra.program.model.listing.Instruction;
+import ghidra.program.model.listing.Listing;
+import ghidra.program.model.symbol.FlowType;
+import ghidra.program.model.symbol.RefType;
+import ghidra.program.model.symbol.Reference;
+import ghidra.program.model.symbol.ReferenceIterator;
 import ghidra.util.Msg;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
-
-import java.util.LinkedList;
 
 /**
  *  This iterator is implemented by getting the flows from the instruction
@@ -33,7 +39,7 @@ import java.util.LinkedList;
 public class SimpleDestReferenceIterator implements CodeBlockReferenceIterator {	
 	
     // queue of discovered destination block references
-	private LinkedList<CodeBlockReferenceImpl> blockRefQueue = new LinkedList<CodeBlockReferenceImpl>();
+	private LinkedList<CodeBlockReferenceImpl> blockRefQueue = new LinkedList<>();
 	private TaskMonitor monitor;
 
     /**
@@ -53,7 +59,8 @@ public class SimpleDestReferenceIterator implements CodeBlockReferenceIterator {
     /**
      * @see ghidra.program.model.block.CodeBlockReferenceIterator#next()
      */
-    public CodeBlockReference next() throws CancelledException {
+    @Override
+	public CodeBlockReference next() throws CancelledException {
     	monitor.checkCanceled();
     	return blockRefQueue.isEmpty() ? null : blockRefQueue.removeFirst();
     }
@@ -61,7 +68,8 @@ public class SimpleDestReferenceIterator implements CodeBlockReferenceIterator {
     /**
      * @see ghidra.program.model.block.CodeBlockReferenceIterator#hasNext()
      */
-    public boolean hasNext() throws CancelledException {
+    @Override
+	public boolean hasNext() throws CancelledException {
     	monitor.checkCanceled();
 		return !blockRefQueue.isEmpty();
     }
@@ -247,13 +255,13 @@ public class SimpleDestReferenceIterator implements CodeBlockReferenceIterator {
 
 			// Follow pointer - could have multiple references 			
 			Reference[] refs = primitive.getReferencesFrom();
-			for (int i = 0; i < refs.length; i++) {
+			for (Reference ref : refs) {
 				
 				monitor.checkCanceled();
 				
 				CodeBlock destBlock = null;
 				
-				Address toAddr = refs[i].getToAddress();
+				Address toAddr = ref.getToAddress();
 				if (toAddr.isMemoryAddress()) {
 				
 					CodeUnit cu = listing.getCodeUnitAt(toAddr);

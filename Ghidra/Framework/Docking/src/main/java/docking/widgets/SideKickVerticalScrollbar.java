@@ -15,10 +15,19 @@
  */
 package docking.widgets;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.LayoutManager;
+import java.awt.Rectangle;
 import java.awt.event.AdjustmentListener;
 
-import javax.swing.*;
+import javax.swing.BoundedRangeModel;
+import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JViewport;
+import javax.swing.Scrollable;
 import javax.swing.plaf.ScrollBarUI;
 
 /**

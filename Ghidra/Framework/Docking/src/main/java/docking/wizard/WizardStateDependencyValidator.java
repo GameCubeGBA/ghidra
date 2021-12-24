@@ -15,15 +15,18 @@
  */
 package docking.wizard;
 
-import ghidra.util.SystemUtilities;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
-import java.util.*;
+import ghidra.util.SystemUtilities;
 
 public class WizardStateDependencyValidator<T> {
 	
-	private Set<T> dependentSet = new HashSet<T>();
-	private Map<T, Set<T>> dependentMap = new HashMap<T, Set<T>>();
-	private Map<T, Object> valueMap = new HashMap<T, Object>();
+	private Set<T> dependentSet = new HashSet<>();
+	private Map<T, Set<T>> dependentMap = new HashMap<>();
+	private Map<T, Object> valueMap = new HashMap<>();
 	
 	/**
 	 * Registers a dependency from one property state to another.  If the predecessor is null, then
@@ -36,7 +39,7 @@ public class WizardStateDependencyValidator<T> {
 	public void addDependency(T dependent, T predecessor) {
 		dependentSet.add(dependent);
 		if (predecessor != null) {
-            Set<T> dependents = dependentMap.computeIfAbsent(predecessor, k -> new HashSet<T>());
+            Set<T> dependents = dependentMap.computeIfAbsent(predecessor, k -> new HashSet<>());
             dependents.add(dependent);
 		}
 	}
@@ -49,7 +52,7 @@ public class WizardStateDependencyValidator<T> {
 	 * @return the set of property keys whose values should be (re)computed.
 	 */
 	public Set<T> findAffectedDependants(WizardState<T> globalState) {
-		Set<T> affectedDependendants = new HashSet<T>();
+		Set<T> affectedDependendants = new HashSet<>();
 		
 		for ( T predecessor : dependentMap.keySet() ) {
 			Object globalValue = globalState.get( predecessor );

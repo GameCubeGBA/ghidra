@@ -30,24 +30,24 @@ public interface AttributedGraphExporter extends ExtensionPoint {
 	 * @param file the file to export to
 	 * @throws IOException if there is an error exporting the graph
 	 */
-	public void exportGraph(AttributedGraph graph, File file) throws IOException;
+	void exportGraph(AttributedGraph graph, File file) throws IOException;
 
 	/**
 	 * Returns the suggested file extension to use for this exporter
 	 * @return the suggested file extension to use for this exporter
 	 */
-	public String getFileExtension();
+	String getFileExtension();
 
 	/**
 	 * Returns the name of this exporter
 	 * @return the name of this exporter
 	 */
-	public String getName();
+	String getName();
 
 	/**
 	 * Returns a description of the exporter
 	 * @return a description of the exporter
 	 */
-	public String getDesciption();
+	String getDesciption();
 
 }

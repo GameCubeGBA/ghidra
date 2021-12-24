@@ -110,8 +110,7 @@ public class CommentFieldLocation extends CodeUnitLocation {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + Arrays.hashCode(comment);
-		result = prime * result + type;
-		return result;
+		return prime * result + type;
 	}
 
 	@Override
@@ -119,10 +118,7 @@ public class CommentFieldLocation extends CodeUnitLocation {
 		if (this == obj) {
 			return true;
 		}
-		if (!super.equals(obj)) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if (!super.equals(obj) || (getClass() != obj.getClass())) {
 			return false;
 		}
 		CommentFieldLocation other = (CommentFieldLocation) obj;

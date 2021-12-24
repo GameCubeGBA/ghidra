@@ -20,7 +20,9 @@ import java.util.List;
 
 import javax.swing.Icon;
 
-import docking.widgets.filter.*;
+import docking.widgets.filter.FilterOptions;
+import docking.widgets.filter.TermSplitter;
+import docking.widgets.filter.TextFilter;
 import docking.widgets.tree.support.GTreeFilter;
 import ghidra.util.FilterTransformer;
 

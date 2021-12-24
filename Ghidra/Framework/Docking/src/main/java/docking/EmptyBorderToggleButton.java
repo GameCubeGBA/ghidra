@@ -20,7 +20,11 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import javax.swing.*;
+import javax.swing.Action;
+import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
+import javax.swing.DefaultButtonModel;
+import javax.swing.Icon;
 
 import docking.action.DockingActionIf;
 import docking.action.ToolBarData;
@@ -106,16 +110,16 @@ public class EmptyBorderToggleButton extends EmptyBorderButton {
 
 	protected void doPropertyChange(PropertyChangeEvent e) {
 		String name = e.getPropertyName();
-		if (name.equals("enabled")) {
+		if ("enabled".equals(name)) {
 			setEnabled(((Boolean) e.getNewValue()).booleanValue());
 		}
-		else if (name.equals(Action.SHORT_DESCRIPTION)) {
+		else if (Action.SHORT_DESCRIPTION.equals(name)) {
 			setToolTipText((String) e.getNewValue());
 		}
-		else if (name.equals(Action.SMALL_ICON)) {
+		else if (Action.SMALL_ICON.equals(name)) {
 			setIcon((Icon) e.getNewValue());
 		}
-		else if (name.equals("CheckBoxState")) {
+		else if ("CheckBoxState".equals(name)) {
 			updateBorder();
 		}
 	}
@@ -171,8 +175,7 @@ public class EmptyBorderToggleButton extends EmptyBorderButton {
 		}
 
 		group.setSelected(buttonModel, b);
-		boolean isSelected = group.isSelected(buttonModel);
-		return isSelected;
+		return group.isSelected(buttonModel);
 	}
 
 	/**

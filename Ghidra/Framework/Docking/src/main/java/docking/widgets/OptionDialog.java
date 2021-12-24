@@ -20,15 +20,25 @@ import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.UIManager;
 
 import docking.DialogComponentProvider;
 import docking.DockingWindowManager;
 import docking.widgets.checkbox.GCheckBox;
-import docking.widgets.dialogs.*;
+import docking.widgets.dialogs.InputDialog;
+import docking.widgets.dialogs.InputWithChoicesDialog;
+import docking.widgets.dialogs.MultiLineInputDialog;
 import docking.widgets.label.GHtmlLabel;
 import docking.widgets.label.GIconLabel;
-import ghidra.util.*;
+import ghidra.util.HTMLUtilities;
+import ghidra.util.Msg;
+import ghidra.util.Swing;
 import ghidra.util.exception.AssertException;
 
 /**
@@ -322,7 +332,7 @@ public class OptionDialog extends DialogComponentProvider {
 		if (addCancel) {
 			addCancelButton();
 			buttons.add(cancelButton);
-			if (options.size() == 1 && options.get(0).equals("Yes")) {
+			if (options.size() == 1 && "Yes".equals(options.get(0))) {
 				setCancelButtonText("No");
 			}
 		}
@@ -494,7 +504,7 @@ public class OptionDialog extends DialogComponentProvider {
 	public static int showOptionDialogWithCancelAsDefaultButton(Component parent, String title,
 			String message, String option1, int messageType) {
 
-		String defaultButton = option1.equals("Yes") ? "No" : "Cancel";
+		String defaultButton = "Yes".equals(option1) ? "No" : "Cancel";
 
 		return Swing.runNow(() -> {
 			OptionDialog info =

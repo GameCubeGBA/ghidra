@@ -15,30 +15,64 @@
  */
 package docking;
 
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Dialog;
+import java.awt.Frame;
+import java.awt.Image;
+import java.awt.KeyboardFocusManager;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
+import java.awt.Window;
 import java.awt.event.HierarchyEvent;
 import java.awt.event.HierarchyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
+import java.util.Set;
 
-import javax.swing.*;
+import javax.swing.Action;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.KeyStroke;
+import javax.swing.MenuElement;
+import javax.swing.MenuSelectionManager;
+import javax.swing.SwingUtilities;
 
 import org.apache.commons.collections4.map.LazyMap;
 import org.jdom.Element;
 
 import docking.action.DockingActionIf;
-import docking.actions.*;
+import docking.actions.DockingToolActions;
+import docking.actions.PopupActionProvider;
+import docking.actions.ToolActions;
 import docking.help.HelpService;
 import docking.widgets.PasswordDialog;
 import generic.util.WindowUtilities;
 import ghidra.framework.OperatingSystem;
 import ghidra.framework.Platform;
 import ghidra.framework.options.PreferenceState;
-import ghidra.util.*;
-import ghidra.util.datastruct.*;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
+import ghidra.util.Swing;
+import ghidra.util.SystemUtilities;
+import ghidra.util.datastruct.LRUSet;
+import ghidra.util.datastruct.WeakDataStructureFactory;
+import ghidra.util.datastruct.WeakSet;
 import ghidra.util.exception.AssertException;
 import ghidra.util.task.SwingUpdateManager;
 import util.CollectionUtils;
@@ -782,24 +816,20 @@ public class DockingWindowManager implements PropertyChangeListener, Placeholder
 
 			window.setVisible(false);
 			window.setVisible(true);
-		}
-		else if (operatingSystem == OperatingSystem.LINUX) {
-			//
-			// Handle the window being minimized (Linux doesn't always raise the window when
-			// calling setVisible()
-			//
-			if (window instanceof Frame) {
-				Frame frame = (Frame) window;
-				int state = frame.getState();
-				if ((state & Frame.ICONIFIED) == Frame.ICONIFIED) {
-					frame.setState(Frame.NORMAL);
+		} else {
+			if (operatingSystem == OperatingSystem.LINUX) {
+				//
+				// Handle the window being minimized (Linux doesn't always raise the window when
+				// calling setVisible()
+				//
+				if (window instanceof Frame) {
+					Frame frame = (Frame) window;
+					int state = frame.getState();
+					if ((state & Frame.ICONIFIED) == Frame.ICONIFIED) {
+						frame.setState(Frame.NORMAL);
+					}
 				}
 			}
-
-			window.toFront();
-		}
-		else {
-			// mac - it actually works on the mac
 			window.toFront();
 		}
 	}
@@ -883,11 +913,8 @@ public class DockingWindowManager implements PropertyChangeListener, Placeholder
 			if (requestFocus) {
 				setNextFocusPlaceholder(placeholder);
 			}
-		}
-		else {
-			if (focusedPlaceholder == placeholder) {
-				clearFocusedComponent();
-			}
+		} else if (focusedPlaceholder == placeholder) {
+			clearFocusedComponent();
 		}
 
 		scheduleUpdate();
@@ -1054,10 +1081,7 @@ public class DockingWindowManager implements PropertyChangeListener, Placeholder
 	synchronized void clearCurrentOrPendingFocusForRemovedPlaceholder(
 			ComponentPlaceholder placeholder) {
 
-		if (focusedPlaceholder == placeholder) {
-			clearFocusedComponent();
-		}
-		else if (nextFocusedPlaceholder == placeholder) {
+		if ((focusedPlaceholder == placeholder) || (nextFocusedPlaceholder == placeholder)) {
 			clearFocusedComponent();
 		}
 	}
@@ -1176,7 +1200,7 @@ public class DockingWindowManager implements PropertyChangeListener, Placeholder
 		}
 
 		String text = menu.getText();
-		return text.equals(COMPONENT_MENU_NAME);
+		return COMPONENT_MENU_NAME.equals(text);
 	}
 
 	private JMenu getMenuForSelection(MenuElement[] selectedPath) {
@@ -1273,12 +1297,7 @@ public class DockingWindowManager implements PropertyChangeListener, Placeholder
 	}
 
 	private void updateFocus() {
-		if (updatePending()) {
-			// we will get called again
-			return;
-		}
-
-		if (root == null) {
+		if (updatePending() || (root == null)) {
 			// This method is called from invokeLater(); we may have been disposed since then
 			return;
 		}
@@ -1485,11 +1504,7 @@ public class DockingWindowManager implements PropertyChangeListener, Placeholder
 
 		DockableComponent dockableComponent =
 			getDockableComponentForFocusOwner(win, newFocusComponent);
-		if (dockableComponent == null) {
-			return;
-		}
-
-		if (!ensureDockableComponentContainsFocusOwner(newFocusComponent, dockableComponent)) {
+		if ((dockableComponent == null) || !ensureDockableComponentContainsFocusOwner(newFocusComponent, dockableComponent)) {
 			// This implies we have made a call that will change the focus, which means
 			// will be back here again or we are in some special case and we do not want to
 			// do any more focus work
@@ -1648,12 +1663,8 @@ public class DockingWindowManager implements PropertyChangeListener, Placeholder
 		}
 
 		WindowNode node = root.getNodeForWindow(win);
-		if (node != null) {
-			return true;
-		}
-
 		// see if the given window is a child of the root node's frame
-		if (SwingUtilities.isDescendingFrom(win, rootFrame)) {
+		if ((node != null) || SwingUtilities.isDescendingFrom(win, rootFrame)) {
 			return true;
 		}
 		return false;
@@ -1765,13 +1776,11 @@ public class DockingWindowManager implements PropertyChangeListener, Placeholder
 			bestParent = getBestNonModalParent(provider, bestParent);
 		}
 
-		if (bestParent == null) {
-			// Special case: allow transient password dialogs to parent to the active window.  This
-			// allows the password dialog to stay open over the application splash screen.  (This
-			// is described in getParentWindow(), which is called above.)
-			if (provider instanceof PasswordDialog) {
-				bestParent = getJavaActiveWindow();
-			}
+		// Special case: allow transient password dialogs to parent to the active window.  This
+		// allows the password dialog to stay open over the application splash screen.  (This
+		// is described in getParentWindow(), which is called above.)
+		if ((bestParent == null) && (provider instanceof PasswordDialog)) {
+			bestParent = getJavaActiveWindow();
 		}
 
 		if (bestParent != null && !bestParent.isShowing()) {
@@ -1808,14 +1817,7 @@ public class DockingWindowManager implements PropertyChangeListener, Placeholder
 
 		int activeId = activeProvider.getId();
 		int providerId = providerToShow.getId();
-		if (providerId < activeId) {
-			// The provider being shown is older than the active window--do not parent the provider
-			// to that window.  The older age suggests that the new provider was shown on a delay
-			// and should really be considered to live behind the active modal dialog.
-			return bestParent;
-		}
-
-		if (activeProvider.isTransient()) {
+		if ((providerId < activeId) || activeProvider.isTransient()) {
 			// This prevents transient modal dialogs from being parents to non-modal dialogs.  This
 			// can cause the non-modal dialog to be closed when the transient modal dialog goes
 			// away.  There is the possibility of the non-modal dialog being blocked if not parented
@@ -1956,10 +1958,7 @@ public class DockingWindowManager implements PropertyChangeListener, Placeholder
 	private static Window getJavaActiveWindow() {
 		KeyboardFocusManager kfm = KeyboardFocusManager.getCurrentKeyboardFocusManager();
 		Window activeWindow = kfm.getActiveWindow();
-		if (activeWindow == null) {
-			return null;
-		}
-		if (!activeWindow.isShowing()) {
+		if ((activeWindow == null) || !activeWindow.isShowing()) {
 			return null; // don't let non-showing windows be considered active
 		}
 		return activeWindow;
@@ -2384,7 +2383,7 @@ public class DockingWindowManager implements PropertyChangeListener, Placeholder
 	 * placeholder is activated too frequently, this class will emphasize that window, under the
 	 * assumption that the user doesn't see the window.
 	 */
-	private class ActivatedInfo {
+	private static class ActivatedInfo {
 
 		private long lastCalledTimestamp;
 		private ComponentPlaceholder lastActivatedPlaceholder;

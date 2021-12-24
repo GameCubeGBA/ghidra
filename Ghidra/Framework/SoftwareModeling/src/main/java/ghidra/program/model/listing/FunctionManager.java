@@ -38,7 +38,7 @@ public interface FunctionManager extends ManagerDB {
 	 * Returns this manager's program
 	 * @return the program
 	 */
-	public Program getProgram();
+	Program getProgram();
 
 	/**
 	 * Gets the names associated with each of the current calling conventions associated with this
@@ -47,28 +47,28 @@ public interface FunctionManager extends ManagerDB {
 	 *
 	 * @return the calling convention names.
 	 */
-	public List<String> getCallingConventionNames();
+	List<String> getCallingConventionNames();
 
 	/**
 	 * Gets the default calling convention's prototype model in this program.
 	 *
 	 * @return the default calling convention prototype model or null.
 	 */
-	public PrototypeModel getDefaultCallingConvention();
+	PrototypeModel getDefaultCallingConvention();
 
 	/**
 	 * Gets the prototype model of the calling convention with the specified name in this program
 	 * @param name the calling convention name
 	 * @return the named function calling convention prototype model or null.
 	 */
-	public PrototypeModel getCallingConvention(String name);
+	PrototypeModel getCallingConvention(String name);
 
 	/**
 	 * Gets all the calling convention prototype models in this program that have names.
 	 *
 	 * @return the function calling convention prototype models.
 	 */
-	public PrototypeModel[] getCallingConventions();
+	PrototypeModel[] getCallingConventions();
 
 	/**
 	 * Create a function with the given body at entry point within the global namespace.
@@ -82,7 +82,7 @@ public interface FunctionManager extends ManagerDB {
 	 * @throws OverlappingFunctionException if the address set of the body overlaps an existing
 	 *             function
 	 */
-	public Function createFunction(String name, Address entryPoint, AddressSetView body,
+	Function createFunction(String name, Address entryPoint, AddressSetView body,
 			SourceType source) throws InvalidInputException, OverlappingFunctionException;
 
 	/**
@@ -98,7 +98,7 @@ public interface FunctionManager extends ManagerDB {
 	 * @throws OverlappingFunctionException if the address set of the body overlaps an existing
 	 *             function
 	 */
-	public Function createFunction(String name, Namespace nameSpace, Address entryPoint,
+	Function createFunction(String name, Namespace nameSpace, Address entryPoint,
 			AddressSetView body, SourceType source)
 			throws InvalidInputException, OverlappingFunctionException;
 
@@ -115,7 +115,7 @@ public interface FunctionManager extends ManagerDB {
 	 * @throws OverlappingFunctionException if the address set of the body overlaps an existing
 	 *             function
 	 */
-	public Function createThunkFunction(String name, Namespace nameSpace, Address entryPoint,
+	Function createThunkFunction(String name, Namespace nameSpace, Address entryPoint,
 			AddressSetView body, Function thunkedFunction, SourceType source)
 			throws OverlappingFunctionException;
 
@@ -123,21 +123,21 @@ public interface FunctionManager extends ManagerDB {
 	 * Returns the total number of functions in the program including external functions
 	 * @return the count
 	 */
-	public int getFunctionCount();
+	int getFunctionCount();
 
 	/**
 	 * Remove a function defined at entryPoint
 	 * @param entryPoint the entry point
 	 * @return true if the function was removed
 	 */
-	public boolean removeFunction(Address entryPoint);
+	boolean removeFunction(Address entryPoint);
 
 	/**
 	 * Get the function at entryPoint
 	 * @param entryPoint the entry point
 	 * @return null if there is no function at entryPoint
 	 */
-	public Function getFunctionAt(Address entryPoint);
+	Function getFunctionAt(Address entryPoint);
 
 	/**
 	 * Get the function which resides at the specified address or is referenced from the specified 
@@ -146,7 +146,7 @@ public interface FunctionManager extends ManagerDB {
 	 * @param address function address or address of pointer to a function.
 	 * @return referenced function or null
 	 */
-	public Function getReferencedFunction(Address address);
+	Function getReferencedFunction(Address address);
 
 	/**
 	 * Get a function containing an address.
@@ -154,14 +154,14 @@ public interface FunctionManager extends ManagerDB {
 	 * @param addr address within the function
 	 * @return function containing this address, null otherwise
 	 */
-	public Function getFunctionContaining(Address addr);
+	Function getFunctionContaining(Address addr);
 
 	/**
 	 * Returns an iterator over all non-external functions in address (entry point) order
 	 * @param forward true means to iterate in ascending address order
 	 * @return the iterator
 	 */
-	public FunctionIterator getFunctions(boolean forward);
+	FunctionIterator getFunctions(boolean forward);
 
 	/**
 	 * Get an iterator over non-external functions starting at an address and ordered by entry
@@ -171,7 +171,7 @@ public interface FunctionManager extends ManagerDB {
 	 * @param forward true means to iterate in ascending address order
 	 * @return an iterator over functions.
 	 */
-	public FunctionIterator getFunctions(Address start, boolean forward);
+	FunctionIterator getFunctions(Address start, boolean forward);
 
 	/**
 	 * Get an iterator over functions with entry points in the specified address set. Function are
@@ -181,7 +181,7 @@ public interface FunctionManager extends ManagerDB {
 	 * @param forward true means to iterate in ascending address order
 	 * @return an iterator over functions.
 	 */
-	public FunctionIterator getFunctions(AddressSetView asv, boolean forward);
+	FunctionIterator getFunctions(AddressSetView asv, boolean forward);
 
 	/**
 	 * Returns an iterator over all REAL functions in address (entry point) order (real functions
@@ -190,7 +190,7 @@ public interface FunctionManager extends ManagerDB {
 	 * @param forward true means to iterate in ascending address order
 	 * @return the iterator
 	 */
-	public FunctionIterator getFunctionsNoStubs(boolean forward);
+	FunctionIterator getFunctionsNoStubs(boolean forward);
 
 	/**
 	 * Get an iterator over REAL functions starting at an address and ordered by entry address (real
@@ -201,7 +201,7 @@ public interface FunctionManager extends ManagerDB {
 	 *
 	 * @return an iterator over functions.
 	 */
-	public FunctionIterator getFunctionsNoStubs(Address start, boolean forward);
+	FunctionIterator getFunctionsNoStubs(Address start, boolean forward);
 
 	/**
 	 * Get an iterator over REAL functions with entry points in the specified address set (real
@@ -212,14 +212,14 @@ public interface FunctionManager extends ManagerDB {
 	 * @param forward true means to iterate in ascending address order
 	 * @return an iterator over functions.
 	 */
-	public FunctionIterator getFunctionsNoStubs(AddressSetView asv, boolean forward);
+	FunctionIterator getFunctionsNoStubs(AddressSetView asv, boolean forward);
 
 	/**
 	 * Get an iterator over all external functions. Functions returned have no particular order.
 	 *
 	 * @return an iterator over external functions
 	 */
-	public FunctionIterator getExternalFunctions();
+	FunctionIterator getExternalFunctions();
 
 	/**
 	 * Check if this address contains a function.
@@ -228,7 +228,7 @@ public interface FunctionManager extends ManagerDB {
 	 *
 	 * @return true if this address is contained in a function.
 	 */
-	public boolean isInFunction(Address addr);
+	boolean isInFunction(Address addr);
 
 	/**
 	 * Return an iterator over functions that overlap the given address set.
@@ -236,7 +236,7 @@ public interface FunctionManager extends ManagerDB {
 	 * @param set address set of interest
 	 * @return iterator over Functions
 	 */
-	public Iterator<Function> getFunctionsOverlapping(AddressSetView set);
+	Iterator<Function> getFunctionsOverlapping(AddressSetView set);
 
 	/**
 	 * Attempts to determine which if any of the local functions variables are referenced by the
@@ -251,7 +251,7 @@ public interface FunctionManager extends ManagerDB {
 	 * @param isRead true if the reference is a read reference
 	 * @return referenced variable or null if one not found
 	 */
-	public Variable getReferencedVariable(Address instrAddr, Address storageAddr, int size,
+	Variable getReferencedVariable(Address instrAddr, Address storageAddr, int size,
 			boolean isRead);
 
 	/**
@@ -259,13 +259,13 @@ public interface FunctionManager extends ManagerDB {
 	 * @param key function symbol key
 	 * @return function object or null if not found
 	 */
-	public Function getFunction(long key);
+	Function getFunction(long key);
 
 	/**
 	 * Returns the function tag manager
 	 * @return the function tag manager
 	 */
-	public FunctionTagManager getFunctionTagManager();
+	FunctionTagManager getFunctionTagManager();
 
 	/**
 	 * Clears all data caches
@@ -273,8 +273,7 @@ public interface FunctionManager extends ManagerDB {
 	 * tell that its not necessary.  If this flag is true, then all managers should clear
 	 * their cache no matter what.
 	 */
-	@Override
-	public void invalidateCache(boolean all); // note: redeclared to not throw an exception
+	@Override void invalidateCache(boolean all); // note: redeclared to not throw an exception
 
 	/**
 	 * Move all objects within an address range to a new location

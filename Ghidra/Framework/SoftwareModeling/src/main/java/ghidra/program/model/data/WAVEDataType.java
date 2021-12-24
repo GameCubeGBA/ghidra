@@ -19,7 +19,11 @@ import java.awt.event.MouseEvent;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-import javax.sound.sampled.*;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 
 import ghidra.docking.settings.Settings;
@@ -29,11 +33,11 @@ import ghidra.util.Msg;
 import resources.ResourceManager;
 
 public class WAVEDataType extends BuiltIn implements Dynamic {
-	public static byte[] MAGIC = new byte[] { (byte) 'R', (byte) 'I', (byte) 'F', (byte) 'F',
+	public static byte[] MAGIC = { (byte) 'R', (byte) 'I', (byte) 'F', (byte) 'F',
 		(byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 'W', (byte) 'A', (byte) 'V',
 		(byte) 'E', (byte) 'f', (byte) 'm', (byte) 't' };
 
-	public static byte[] MAGIC_MASK = new byte[] { (byte) 0xff, (byte) 0xff, (byte) 0xff,
+	public static byte[] MAGIC_MASK = { (byte) 0xff, (byte) 0xff, (byte) 0xff,
 		(byte) 0xff, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0xff, (byte) 0xff,
 		(byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0xff, (byte) 0xff };
 
@@ -139,8 +143,7 @@ public class WAVEDataType extends BuiltIn implements Dynamic {
 			Msg.error(this, "WAVE-Sound error: " + "Not enough bytes!");
 			return null;
 		}
-		WAVEData waveData = new WAVEData(data);
-		return waveData;
+		return new WAVEData(data);
 	}
 
 	@Override

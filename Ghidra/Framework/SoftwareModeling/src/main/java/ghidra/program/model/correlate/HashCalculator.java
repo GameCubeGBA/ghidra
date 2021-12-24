@@ -30,5 +30,5 @@ public interface HashCalculator {
 	 * @return the final hash value
 	 * @throws MemoryAccessException 
 	 */
-	public int calcHash(int startHash,Instruction inst) throws MemoryAccessException;
+	int calcHash(int startHash,Instruction inst) throws MemoryAccessException;
 }

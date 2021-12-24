@@ -23,6 +23,6 @@ import ghidra.framework.model.DomainFile;
  */
 public interface DomainFileBasedDataTypeManager extends FileBasedDataTypeManager {
 
-	public DomainFile getDomainFile();
+	DomainFile getDomainFile();
 
 }

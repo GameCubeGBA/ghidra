@@ -15,17 +15,48 @@
  */
 package ghidra.program.model.pcode;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.TreeMap;
 
-import ghidra.program.model.address.*;
-import ghidra.program.model.data.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressOverflowException;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.address.SegmentedAddressSpace;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.DataTypeManager;
+import ghidra.program.model.data.DataUtilities;
+import ghidra.program.model.data.DefaultDataType;
+import ghidra.program.model.data.FunctionDefinitionDataType;
+import ghidra.program.model.data.ParameterDefinition;
+import ghidra.program.model.data.Undefined;
 import ghidra.program.model.lang.Register;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.Data;
+import ghidra.program.model.listing.Function;
 import ghidra.program.model.listing.Function.FunctionUpdateType;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.listing.FunctionSignature;
+import ghidra.program.model.listing.Listing;
+import ghidra.program.model.listing.LocalVariableImpl;
+import ghidra.program.model.listing.Parameter;
+import ghidra.program.model.listing.ParameterImpl;
+import ghidra.program.model.listing.Program;
+import ghidra.program.model.listing.Variable;
+import ghidra.program.model.listing.VariableFilter;
+import ghidra.program.model.listing.VariableStorage;
+import ghidra.program.model.listing.VariableUtilities;
+import ghidra.program.model.symbol.Namespace;
+import ghidra.program.model.symbol.RefType;
+import ghidra.program.model.symbol.SourceType;
+import ghidra.program.model.symbol.Symbol;
+import ghidra.program.model.symbol.SymbolTable;
+import ghidra.program.model.symbol.SymbolUtilities;
 import ghidra.program.model.util.CodeUnitInsertionException;
 import ghidra.util.Msg;
-import ghidra.util.exception.*;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.DuplicateNameException;
+import ghidra.util.exception.InvalidInputException;
+import ghidra.util.exception.UsrException;
 
 /**
  * <code>HighFunctionDBUtil</code> provides various methods for updating the state of a
@@ -98,7 +129,7 @@ public class HighFunctionDBUtil {
 		Program program = function.getProgram();
 		DataTypeManager dtm = program.getDataTypeManager();
 		LocalSymbolMap symbolMap = highFunction.getLocalSymbolMap();
-		List<Parameter> params = new ArrayList<Parameter>();
+		List<Parameter> params = new ArrayList<>();
 		int paramCnt = symbolMap.getNumParams();
 		for (int i = 0; i < paramCnt; ++i) {
 			HighSymbol param = symbolMap.getParamSymbol(i);
@@ -172,11 +203,7 @@ public class HighFunctionDBUtil {
 		Symbol sym = func.getProgram().getSymbolTable().getVariableSymbol(newName, func);
 
 		// no problem if no symbol, or symbol is at this address
-		if (sym == null || sym.isDynamic()) {
-			return;
-		}
-
-		if (ignoreVariable != null && sym.equals(ignoreVariable.getSymbol())) {
+		if (sym == null || sym.isDynamic() || (ignoreVariable != null && sym.equals(ignoreVariable.getSymbol()))) {
 			return;
 		}
 
@@ -284,10 +311,8 @@ public class HighFunctionDBUtil {
 				continue;
 			}
 			// Note: assumes there is only one hash method used for unique locals
-			if (((DynamicEntry) entry).getHash() == hash) {
-				if (symbol.getHighVariable() != null) {
-					return true;		// Hash successfully attached to a variable
-				}
+			if ((((DynamicEntry) entry).getHash() == hash) && (symbol.getHighVariable() != null)) {
+				return true;		// Hash successfully attached to a variable
 			}
 		}
 		return false;
@@ -301,7 +326,7 @@ public class HighFunctionDBUtil {
 	 * @return an array of all Variables intended to be merged.
 	 */
 	private static Variable[] gatherMergeSet(Function function, Variable seed) {
-		TreeMap<String, Variable> nameMap = new TreeMap<String, Variable>();
+		TreeMap<String, Variable> nameMap = new TreeMap<>();
 		for (Variable var : function.getAllVariables()) {
 			nameMap.put(var.getName(), var);
 		}
@@ -314,15 +339,9 @@ public class HighFunctionDBUtil {
 		Variable currentVar = nameMap.get(baseName);
 		int index = 0;
 		boolean sawSeed = false;
-		ArrayList<Variable> mergeArray = new ArrayList<Variable>();
+		ArrayList<Variable> mergeArray = new ArrayList<>();
 		for (;;) {
-			if (currentVar == null) {
-				break;
-			}
-			if (!currentVar.getDataType().equals(dataType)) {
-				break;
-			}
-			if (index != 0 && currentVar instanceof Parameter) {
+			if ((currentVar == null) || !currentVar.getDataType().equals(dataType) || (index != 0 && currentVar instanceof Parameter)) {
 				break;
 			}
 			if (index != 0 && currentVar.hasStackStorage()) {
@@ -415,11 +434,9 @@ public class HighFunctionDBUtil {
 
 		int slot = param.getCategoryIndex();
 		Parameter[] parameters = function.getParameters();
-		if (slot < parameters.length) {
-			if (parameters[slot].isAutoParameter()) {
-				throw new InvalidInputException(
-					"Cannot modify auto-parameter: " + parameters[slot].getName());
-			}
+		if ((slot < parameters.length) && parameters[slot].isAutoParameter()) {
+			throw new InvalidInputException(
+				"Cannot modify auto-parameter: " + parameters[slot].getName());
 		}
 		if (slot >= parameters.length ||
 			!parameters[slot].getVariableStorage().equals(param.getStorage())) {

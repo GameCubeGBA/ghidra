@@ -26,8 +26,7 @@ interface FieldKeyNode extends BTreeNode {
 	/**
 	 * @return the parent node or null if this is the root
 	 */
-	@Override
-	public FieldKeyInteriorNode getParent();
+	@Override FieldKeyInteriorNode getParent();
 
 	/**
 	 * Get the leaf node which contains the specified key.
@@ -35,21 +34,21 @@ interface FieldKeyNode extends BTreeNode {
 	 * @return leaf node
 	 * @throws IOException thrown if an IO error occurs
 	 */
-	public FieldKeyRecordNode getLeafNode(Field key) throws IOException;
+	FieldKeyRecordNode getLeafNode(Field key) throws IOException;
 
 	/**
 	 * Get the left-most leaf node within the tree.
 	 * @return left-most leaf node.
 	 * @throws IOException thrown if IO error occurs
 	 */
-	abstract FieldKeyRecordNode getLeftmostLeafNode() throws IOException;
+	FieldKeyRecordNode getLeftmostLeafNode() throws IOException;
 
 	/**
 	 * Get the right-most leaf node within the tree.
 	 * @return right-most leaf node.
 	 * @throws IOException thrown if IO error occurs
 	 */
-	abstract FieldKeyRecordNode getRightmostLeafNode() throws IOException;
+	FieldKeyRecordNode getRightmostLeafNode() throws IOException;
 
 	/**
 	 * Performs a fast in-place key comparison of the specified key
@@ -60,6 +59,6 @@ interface FieldKeyNode extends BTreeNode {
 	 * the store key, or +1 if k has a value greater than the stored key located
 	 * at keyIndex.
 	 */
-	abstract int compareKeyField(Field k, int keyIndex);
+	int compareKeyField(Field k, int keyIndex);
 
 }

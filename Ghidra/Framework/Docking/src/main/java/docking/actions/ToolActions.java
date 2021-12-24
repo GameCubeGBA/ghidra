@@ -17,7 +17,13 @@ package docking.actions;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,11 +36,24 @@ import org.apache.commons.collections4.map.LazyMap;
 
 import com.google.common.collect.Iterators;
 
-import docking.*;
-import docking.action.*;
+import docking.ActionToGuiHelper;
+import docking.ComponentProvider;
+import docking.Tool;
+import docking.action.DockingActionIf;
+import docking.action.HelpAction;
+import docking.action.KeyBindingData;
+import docking.action.KeyBindingType;
+import docking.action.KeyBindingsManager;
+import docking.action.ShowContextMenuAction;
+import docking.action.ShowFocusCycleAction;
+import docking.action.ShowFocusInfoAction;
 import docking.tool.util.DockingToolConstants;
-import ghidra.framework.options.*;
-import ghidra.util.*;
+import ghidra.framework.options.OptionType;
+import ghidra.framework.options.OptionsChangeListener;
+import ghidra.framework.options.ToolOptions;
+import ghidra.util.Msg;
+import ghidra.util.ReservedKeyBindings;
+import ghidra.util.SystemUtilities;
 import ghidra.util.exception.AssertException;
 import util.CollectionUtils;
 
@@ -390,7 +409,7 @@ public class ToolActions implements DockingToolActions, PropertyChangeListener {
 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		if (!evt.getPropertyName().equals(DockingActionIf.KEYBINDING_DATA_PROPERTY)) {
+		if (!DockingActionIf.KEYBINDING_DATA_PROPERTY.equals(evt.getPropertyName())) {
 			return;
 		}
 

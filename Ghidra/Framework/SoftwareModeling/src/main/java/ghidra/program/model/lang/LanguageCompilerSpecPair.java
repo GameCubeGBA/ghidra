@@ -15,6 +15,8 @@
  */
 package ghidra.program.model.lang;
 
+import java.util.Objects;
+
 import ghidra.program.util.DefaultLanguageService;
 
 /**
@@ -182,11 +184,7 @@ public final class LanguageCompilerSpecPair implements Comparable<LanguageCompil
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((compilerSpecID == null) ? 0 : compilerSpecID.hashCode());
-		result = prime * result + ((languageID == null) ? 0 : languageID.hashCode());
-		return result;
+		return Objects.hash(compilerSpecID, languageID);
 	}
 
 	@Override
@@ -194,27 +192,14 @@ public final class LanguageCompilerSpecPair implements Comparable<LanguageCompil
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (!(obj instanceof LanguageCompilerSpecPair)) {
+		if ((obj == null) || !(obj instanceof LanguageCompilerSpecPair)) {
 			return false;
 		}
 		final LanguageCompilerSpecPair other = (LanguageCompilerSpecPair) obj;
-		if (compilerSpecID == null) {
-			if (other.compilerSpecID != null) {
-				return false;
-			}
-		}
-		else if (!compilerSpecID.equals(other.compilerSpecID)) {
+		if (!Objects.equals(compilerSpecID, other.compilerSpecID)) {
 			return false;
 		}
-		if (languageID == null) {
-			if (other.languageID != null) {
-				return false;
-			}
-		}
-		else if (!languageID.equals(other.languageID)) {
+		if (!Objects.equals(languageID, other.languageID)) {
 			return false;
 		}
 		return true;

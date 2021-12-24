@@ -15,12 +15,26 @@
  */
 package ghidra.framework.main;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Arrays;
+import java.util.Comparator;
 
-import javax.swing.*;
+import javax.swing.DefaultListModel;
+import javax.swing.JCheckBox;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ListCellRenderer;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -167,11 +181,7 @@ class ToolConnectionPanel extends JPanel implements ListSelectionListener {
 		// clear the event list
 		eventList.setModel(new DefaultListModel<>());
 
-		if (consumer == null || producer == null) {
-			return;
-		}
-
-		if (producer.getName().equals(consumer.getName())) {
+		if (consumer == null || producer == null || producer.getName().equals(consumer.getName())) {
 			return;
 		}
 
@@ -234,10 +244,7 @@ class ToolConnectionPanel extends JPanel implements ListSelectionListener {
 		if (e.getClickCount() == 1) {
 			JList<?> list = (JList<?>) e.getSource();
 			int index = list.locationToIndex(e.getPoint());
-			if (index < 0) {
-				return;
-			}
-			if (!checkboxes[index].isEnabled()) {
+			if ((index < 0) || !checkboxes[index].isEnabled()) {
 				return;
 			}
 
@@ -284,9 +291,7 @@ class ToolConnectionPanel extends JPanel implements ListSelectionListener {
 		consumerModel.removeAllElements();
 		PluginTool[] tools = toolManager.getConsumerTools();
 
-		Arrays.sort(tools, (t1, t2) -> {
-			return t1.getName().compareTo(t2.getName());
-		});
+		Arrays.sort(tools, Comparator.comparing(PluginTool::getName));
 
 		for (PluginTool tool : tools) {
 			consumerModel.addElement(tool);
@@ -301,9 +306,7 @@ class ToolConnectionPanel extends JPanel implements ListSelectionListener {
 		producerModel.removeAllElements();
 		PluginTool[] tools = toolManager.getProducerTools();
 
-		Arrays.sort(tools, (t1, t2) -> {
-			return t1.getName().compareTo(t2.getName());
-		});
+		Arrays.sort(tools, Comparator.comparing(PluginTool::getName));
 
 		for (PluginTool tool : tools) {
 			producerModel.addElement(tool);

@@ -15,16 +15,24 @@
  */
 package ghidra.framework.model;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 import javax.swing.Icon;
 
 import ghidra.framework.data.CheckinHandler;
-import ghidra.framework.store.*;
+import ghidra.framework.store.FolderItem;
+import ghidra.framework.store.ItemCheckoutStatus;
+import ghidra.framework.store.Version;
 import ghidra.util.InvalidNameException;
-import ghidra.util.exception.*;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.DuplicateFileException;
+import ghidra.util.exception.FileInUseException;
+import ghidra.util.exception.UserAccessException;
+import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
 
 /**
@@ -40,30 +48,30 @@ public interface DomainFile extends Comparable<DomainFile> {
 	* the private file or check-out file if one exists, or the latest version from the
 	* version controlled file system. 
 	*/
-	public static final int DEFAULT_VERSION = FolderItem.LATEST_VERSION;
+	int DEFAULT_VERSION = FolderItem.LATEST_VERSION;
 
 	/**
 	 * Event property name for Read-only setting.
 	 */
-	public final static String READ_ONLY_PROPERTY = "READ_ONLY";
+	String READ_ONLY_PROPERTY = "READ_ONLY";
 
 	/**
 	 * Get the name of  the StoredObj that is associated with the data.
 	 * @return the name
 	 */
-	public String getName();
+	String getName();
 
 	/**
 	 * Check for existence of domain file.
 	 * @return true if file exists.  A proxy domain file will always return false.
 	 */
-	public boolean exists();
+	boolean exists();
 
 	/**
 	 * Returns a unique file-ID 
 	 * @return the ID
 	 */
-	public String getFileID();
+	String getFileID();
 
 	/**
 	 * Set the name on this domain file.
@@ -75,37 +83,37 @@ public interface DomainFile extends Comparable<DomainFile> {
 	 * @throws FileInUseException if this file is in-use / checked-out.
 	 * @throws IOException thrown if an IO or access error occurs.
 	 */
-	public DomainFile setName(String newName) throws InvalidNameException, IOException;
+	DomainFile setName(String newName) throws InvalidNameException, IOException;
 
 	/**
 	 * Returns the path name to the domain object.
 	 * @return the path name
 	 */
-	public String getPathname();
+	String getPathname();
 
 	/**
 	 * Returns the local storage location for the project that this DomainFile belongs to.
 	 * @return the location
 	 */
-	public ProjectLocator getProjectLocator();
+	ProjectLocator getProjectLocator();
 
 	/**
 	 * Returns content-type string
 	 * @return the content type
 	 */
-	public String getContentType();
+	String getContentType();
 
 	/**
 	 * Returns the underlying Class for the domain object in this domain file.
 	 * @return the class
 	 */
-	public Class<? extends DomainObject> getDomainObjectClass();
+	Class<? extends DomainObject> getDomainObjectClass();
 
 	/**
 	 * Get the parent domain folder for this domain file.
 	 * @return the parent
 	 */
-	public DomainFolder getParent();
+	DomainFolder getParent();
 
 	/**
 	 * Returns changes made to versioned file by others since checkout was performed.
@@ -114,7 +122,7 @@ public interface DomainFile extends Comparable<DomainFile> {
 	 * @throws IOException if a folder item access error occurs or change set was 
 	 * produced by newer version of software and can not be read
 	 */
-	public ChangeSet getChangesByOthersSinceCheckout() throws VersionException, IOException;
+	ChangeSet getChangesByOthersSinceCheckout() throws VersionException, IOException;
 
 	/**
 	 * Opens and returns the current domain object.  If the domain object is already opened,
@@ -140,7 +148,7 @@ public interface DomainFile extends Comparable<DomainFile> {
 	 * @throws IOException thrown if an IO or access error occurs.
 	 * @throws CancelledException if monitor cancelled operation
 	 */
-	public DomainObject getDomainObject(Object consumer, boolean okToUpgrade, boolean okToRecover,
+	DomainObject getDomainObject(Object consumer, boolean okToUpgrade, boolean okToRecover,
 			TaskMonitor monitor) throws VersionException, IOException, CancelledException;
 
 	/**
@@ -148,7 +156,7 @@ public interface DomainFile extends Comparable<DomainFile> {
 	 * @param consumer the consumer that will use the object.
 	 * @return the already opened domainObject or null if it is not currently open.
 	 */
-	public DomainObject getOpenedDomainObject(Object consumer);
+	DomainObject getOpenedDomainObject(Object consumer);
 
 	/**
 	 * Returns a "read-only" version of the domain object.  "Read-only" means that the domain
@@ -168,7 +176,7 @@ public interface DomainFile extends Comparable<DomainFile> {
 	 * @throws IOException thrown if an IO or access error occurs.
 	 * @throws CancelledException if monitor cancelled operation
 	 */
-	public DomainObject getReadOnlyDomainObject(Object consumer, int version, TaskMonitor monitor)
+	DomainObject getReadOnlyDomainObject(Object consumer, int version, TaskMonitor monitor)
 			throws VersionException, IOException, CancelledException;
 
 	/**
@@ -186,7 +194,7 @@ public interface DomainFile extends Comparable<DomainFile> {
 	 * @throws IOException thrown if an IO or access error occurs.
 	 * @throws CancelledException if monitor cancelled operation
 	 */
-	public DomainObject getImmutableDomainObject(Object consumer, int version, TaskMonitor monitor)
+	DomainObject getImmutableDomainObject(Object consumer, int version, TaskMonitor monitor)
 			throws VersionException, IOException, CancelledException;
 
 	/**
@@ -197,21 +205,21 @@ public interface DomainFile extends Comparable<DomainFile> {
 	 * @throws IOException thrown if an IO error occurs.
 	 * @throws CancelledException if monitor cancelled operation
 	 */
-	public void save(TaskMonitor monitor) throws IOException, CancelledException;
+	void save(TaskMonitor monitor) throws IOException, CancelledException;
 
 	/**
 	 * Return whether this domain object can be saved (i.e., updated/overwritten).
 	 * @return true if the user is the owner AND the file is in
 	 * the active project AND the file is not read-only.
 	 */
-	public boolean canSave();
+	boolean canSave();
 
 	/**
 	 * Prior to invoking getDomainObject, this method can be used to determine if
 	 * unsaved changes can be recovered on the next open.
 	 * @return true if recovery data exists.
 	 */
-	public boolean canRecover();
+	boolean canRecover();
 
 	/**
 	 * If the file has an updatable domain object with unsaved changes, generate a recovery 
@@ -220,19 +228,19 @@ public interface DomainFile extends Comparable<DomainFile> {
 	 * snapshot, or snapshot was cancelled.
 	 * @throws IOException if there is an exception saving the snapshot
 	 */
-	public boolean takeRecoverySnapshot() throws IOException;
+	boolean takeRecoverySnapshot() throws IOException;
 
 	/**
 	 *  Returns true if this file is in a writable project.
 	 * @return true if writable
 	 */
-	public boolean isInWritableProject();
+	boolean isInWritableProject();
 
 	/**
 	 * Get a long value representing the time when the data was last modified.
 	 * @return the time
 	 */
-	public long getLastModifiedTime();
+	long getLastModifiedTime();
 
 	/**
 	 * Get the state based Icon image for the domain file based upon its content class.
@@ -240,50 +248,50 @@ public interface DomainFile extends Comparable<DomainFile> {
 	 * not enabled
 	 * @return image icon
 	 */
-	public Icon getIcon(boolean disabled);
+	Icon getIcon(boolean disabled);
 
 	/**
 	 * Returns true if this is a checked-out file.
 	 * @return true if checked-out
 	 */
-	public boolean isCheckedOut();
+	boolean isCheckedOut();
 
 	/**
 	 * Returns true if this a checked-out file with exclusive access.
 	 * @return true if checked-out exclusively
 	 */
-	public boolean isCheckedOutExclusive();
+	boolean isCheckedOutExclusive();
 
 	/**
 	 * Returns true if this is a checked-out file which has been modified since it was checked-out.
 	 * @return true if modified since check-out
 	 */
-	public boolean modifiedSinceCheckout();
+	boolean modifiedSinceCheckout();
 
 	/**
 	 * Returns true if this file may be checked-out from the associated repository.
 	 * User's with read-only repository access will not have checkout ability.
 	 * @return true if can checkout
 	 */
-	public boolean canCheckout();
+	boolean canCheckout();
 
 	/**
 	 * Returns true if this file may be checked-in to the associated repository.
 	 * @return true if can check-in
 	 */
-	public boolean canCheckin();
+	boolean canCheckin();
 
 	/**
 	 * Returns true if this file can be merged with the current versioned file.
 	 * @return true if can merge
 	 */
-	public boolean canMerge();
+	boolean canMerge();
 
 	/**
 	 * Returns true if this private file may be added to the associated repository.
 	 * @return true if can add to the repository
 	 */
-	public boolean canAddToRepository();
+	boolean canAddToRepository();
 
 	/**
 	 * Sets the object to read-only.  This method may only be invoked
@@ -292,58 +300,58 @@ public interface DomainFile extends Comparable<DomainFile> {
 	 * file may be updated.
 	 * @throws IOException thrown if an IO error occurs.
 	 */
-	public void setReadOnly(boolean state) throws IOException;
+	void setReadOnly(boolean state) throws IOException;
 
 	/**
 	 * Returns whether the object is read-only. From a framework point of view a read-only object 
 	 * can never be changed.
 	 * @return true if read-only
 	 */
-	public boolean isReadOnly();
+	boolean isReadOnly();
 
 	/**
 	 * Returns true if the versioned filesystem can be used to store this files content type.
 	 * @return true if supports version control
 	 */
-	public boolean isVersionControlSupported();
+	boolean isVersionControlSupported();
 
 	/**
 	 * Return true if this is a versioned database, else false
 	 * @return true if versioned
 	 */
-	public boolean isVersioned();
+	boolean isVersioned();
 
 	/**
 	 * Returns true if the file is versioned but a private copy also exists.
 	 * @return true if hijacked
 	 */
-	public boolean isHijacked();
+	boolean isHijacked();
 
 	/**
 	 * Return the latest version
 	 * @return the version
 	 */
-	public int getLatestVersion();
+	int getLatestVersion();
 
 	/**
 	 * Returns true if this file represents the latest version of the associated domain object.
 	 * @return true if the latest version
 	 */
-	public boolean isLatestVersion();
+	boolean isLatestVersion();
 
 	/**
 	 * Return either the latest version if the file is not checked-out or the version that
 	 * was checked-out or a specific version that was requested.
 	 * @return the version
 	 */
-	public int getVersion();
+	int getVersion();
 
 	/**
 	 * Returns list of all available versions.
 	 * @return the versions
 	 * @throws IOException if there is an exception getting the history
 	 */
-	public Version[] getVersionHistory() throws IOException;
+	Version[] getVersionHistory() throws IOException;
 
 	/** 
 	 * Adds this private file to version control.
@@ -355,7 +363,7 @@ public interface DomainFile extends Comparable<DomainFile> {
 	 * private.
 	 * @throws CancelledException if the monitor cancelled the operation
 	 */
-	public void addToVersionControl(String comment, boolean keepCheckedOut, TaskMonitor monitor)
+	void addToVersionControl(String comment, boolean keepCheckedOut, TaskMonitor monitor)
 			throws IOException, CancelledException;
 
 	/**
@@ -369,7 +377,7 @@ public interface DomainFile extends Comparable<DomainFile> {
 	 * @throws IOException thrown if an IO or access error occurs.
 	 * @throws CancelledException if task monitor cancelled operation.
 	 */
-	public boolean checkout(boolean exclusive, TaskMonitor monitor)
+	boolean checkout(boolean exclusive, TaskMonitor monitor)
 			throws IOException, CancelledException;
 
 	/**
@@ -384,7 +392,7 @@ public interface DomainFile extends Comparable<DomainFile> {
 	 * sometime after doing a checkout.
 	 * @throws CancelledException if task monitor cancelled operation
 	 */
-	public void checkin(CheckinHandler checkinHandler, boolean okToUpgrade, TaskMonitor monitor)
+	void checkin(CheckinHandler checkinHandler, boolean okToUpgrade, TaskMonitor monitor)
 			throws IOException, VersionException, CancelledException;
 
 	/**
@@ -396,7 +404,7 @@ public interface DomainFile extends Comparable<DomainFile> {
 	 * If okToUpgrade was false, check exception to see if it can be upgraded
 	 * @throws CancelledException if task monitor cancelled operation
 	 */
-	public void merge(boolean okToUpgrade, TaskMonitor monitor)
+	void merge(boolean okToUpgrade, TaskMonitor monitor)
 			throws IOException, VersionException, CancelledException;
 
 	/**
@@ -406,7 +414,7 @@ public interface DomainFile extends Comparable<DomainFile> {
 	 * @throws FileInUseException if this file is in-use / checked-out.
 	 * @throws IOException thrown if file is not checked-out or an IO / access error occurs.
 	 */
-	public void undoCheckout(boolean keep) throws IOException;
+	void undoCheckout(boolean keep) throws IOException;
 
 	/**
 	 * Forcefully terminate a checkout for the associated versioned file.
@@ -415,21 +423,21 @@ public interface DomainFile extends Comparable<DomainFile> {
 	 * @param checkoutId checkout ID
 	 * @throws IOException if an IO or access error occurs
 	 */
-	public void terminateCheckout(long checkoutId) throws IOException;
+	void terminateCheckout(long checkoutId) throws IOException;
 
 	/**
 	 * Get a list of checkouts by all users for the associated versioned file.
 	 * @return list of checkouts
 	 * @throws IOException if an IO or access error occurs
 	 */
-	public ItemCheckoutStatus[] getCheckouts() throws IOException;
+	ItemCheckoutStatus[] getCheckouts() throws IOException;
 
 	/**
 	 * Get checkout status associated with a versioned file.
 	 * @return checkout status or null if not checked-out to current associated project.
 	 * @throws IOException if an IO or access error occurs
 	 */
-	public ItemCheckoutStatus getCheckoutStatus() throws IOException;
+	ItemCheckoutStatus getCheckoutStatus() throws IOException;
 
 	/**
 	 * Delete the entire database for this file, including any version files.
@@ -437,7 +445,7 @@ public interface DomainFile extends Comparable<DomainFile> {
 	 * @throws UserAccessException if the user does not have permission to delete the file.
 	 * @throws IOException thrown if an IO or access error occurs.
 	 */
-	public void delete() throws IOException;
+	void delete() throws IOException;
 
 	/**
 	 * Deletes a specific version of a file from the versioned filesystem.  
@@ -462,7 +470,7 @@ public interface DomainFile extends Comparable<DomainFile> {
 	 * @throws FileInUseException if this file is in-use / checked-out.
 	 * @throws IOException thrown if an IO or access error occurs.
 	 */
-	public DomainFile moveTo(DomainFolder newParent) throws IOException;
+	DomainFile moveTo(DomainFolder newParent) throws IOException;
 
 	/**
 	 * Copy this file into the newParent folder as a private file.
@@ -473,7 +481,7 @@ public interface DomainFile extends Comparable<DomainFile> {
 	 * @throws IOException thrown if an IO or access error occurs.
 	 * @throws CancelledException if task monitor cancelled operation.
 	 */
-	public DomainFile copyTo(DomainFolder newParent, TaskMonitor monitor)
+	DomainFile copyTo(DomainFolder newParent, TaskMonitor monitor)
 			throws IOException, CancelledException;
 
 	/**
@@ -485,32 +493,32 @@ public interface DomainFile extends Comparable<DomainFile> {
 	 * @throws IOException thrown if an IO or access error occurs.
 	 * @throws CancelledException if task monitor cancelled operation.
 	 */
-	public DomainFile copyVersionTo(int version, DomainFolder destFolder, TaskMonitor monitor)
+	DomainFile copyVersionTo(int version, DomainFolder destFolder, TaskMonitor monitor)
 			throws IOException, CancelledException;
 
 	/**
 	 * Get the list of consumers (Objects) for this domain file.
 	 * @return empty array list if there are no consumers
 	 */
-	public List<?> getConsumers();
+	List<?> getConsumers();
 
 	/**
 	 * Return whether the domain object in this domain file has changed.
 	 * @return true if changed
 	 */
-	public boolean isChanged();
+	boolean isChanged();
 
 	/**
 	 * Returns true if there is an open domainObject for this file.
 	 * @return true if open
 	 */
-	public boolean isOpen();
+	boolean isOpen();
 
 	/**
 	 * Returns true if the domain object in this domain file exists and has an open transaction.
 	 * @return true if busy
 	 */
-	public boolean isBusy();
+	boolean isBusy();
 
 	/**
 	 * Pack domain file into specified file.
@@ -520,7 +528,7 @@ public interface DomainFile extends Comparable<DomainFile> {
 	 * @throws IOException if there is an exception packing the file
 	 * @throws CancelledException if monitor cancels operation
 	 */
-	public void packFile(File file, TaskMonitor monitor) throws IOException, CancelledException;
+	void packFile(File file, TaskMonitor monitor) throws IOException, CancelledException;
 
 	/**
 	 * Returns an ordered map containing the metadata that has been associated with the 
@@ -529,7 +537,7 @@ public interface DomainFile extends Comparable<DomainFile> {
 	 * @return a map containing the metadata that has been associated with the corresponding domain 
 	 * object.
 	 */
-	public Map<String, String> getMetadata();
+	Map<String, String> getMetadata();
 
 	/**
 	 * Returns the length of this domain file.  This size is the minimum disk space
@@ -538,6 +546,6 @@ public interface DomainFile extends Comparable<DomainFile> {
 	 * @return file length
 	 * @throws IOException thrown if IO or access error occurs
 	 */
-	public long length() throws IOException;
+	long length() throws IOException;
 
 }

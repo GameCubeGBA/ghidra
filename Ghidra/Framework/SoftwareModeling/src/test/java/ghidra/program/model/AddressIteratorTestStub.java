@@ -16,11 +16,11 @@
  */
 package ghidra.program.model;
 
-import ghidra.program.model.address.Address;
-import ghidra.program.model.address.AddressIterator;
-
 import java.util.Collection;
 import java.util.Iterator;
+
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressIterator;
 
 public class AddressIteratorTestStub implements AddressIterator {
 	private Iterator<Address> iterator;

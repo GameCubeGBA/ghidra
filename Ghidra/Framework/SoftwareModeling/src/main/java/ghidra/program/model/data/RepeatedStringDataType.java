@@ -43,10 +43,12 @@ public class RepeatedStringDataType extends RepeatCountDataType {
 	/**
 	 * @see ghidra.program.model.data.DataType#getDescription()
 	 */
+	@Override
 	public String getDescription() {
 		return "Repeated String";
 	}
 
+	@Override
 	public DataType clone(DataTypeManager dtm) {
 		if (dtm == getDataTypeManager()) {
 			return this;

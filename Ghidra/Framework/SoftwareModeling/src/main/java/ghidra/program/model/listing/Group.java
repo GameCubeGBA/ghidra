@@ -27,21 +27,21 @@ public interface Group {
 	 * 
 	 * @return may be null.
 	 */
-	public String getComment();
+	String getComment();
 
 	/**
 	 * Sets the comment to associate with this fragment.
 	 * 
 	 * @param comment the comment.
 	 */
-    public void setComment(String comment);
+    void setComment(String comment);
 
 	/**
 	 * Obtains the name that has been associated with this fragment. A fragment will
 	 * always have a name and it will be unique within the set of all fragment and
 	 * module names.
 	 */
-    public String getName();
+    String getName();
 
 	/**
 	 * Sets the name of this fragment.
@@ -52,7 +52,7 @@ public interface Group {
 	 *                   thrown if the name being set is already in use by another fragment or a
 	 *                   module.
 	 */
-    public void setName(String name) throws DuplicateNameException;
+    void setName(String name) throws DuplicateNameException;
 	
 	/**
 	 * Returns whether this fragment contains the given code unit.<P>
@@ -61,7 +61,7 @@ public interface Group {
 	 * 
 	 * @return true if the code unit is in the fragment, false otherwise.
 	 */
-    public boolean contains(CodeUnit codeUnit);
+    boolean contains(CodeUnit codeUnit);
 
 	/**
 	 * Obtains the number of parent's of this fragment. If a fragment is in a module
@@ -71,21 +71,21 @@ public interface Group {
 	 * 
 	 * @return the number of parents of this fragment.
 	 */
-    public int getNumParents();
+    int getNumParents();
 
 	/**
 	 * Returns a list of the modules which are parents for this group.
 	 */
-    public ProgramModule[] getParents();
+    ProgramModule[] getParents();
 
 	/**
 	 * Returns the names of the modules which are parents to this
 	 * fragment.
 	 */
-    public String[] getParentNames();
+    String[] getParentNames();
     
 	/**
 	 * Returns the name of the tree that this group belongs to.
 	 */
-    public String getTreeName();
+    String getTreeName();
 }

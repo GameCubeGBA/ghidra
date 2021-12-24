@@ -72,11 +72,8 @@ class FileCountStatistics {
 
 	public void showReport(Component parent) {
 		// don't show results if only one file processed.
-		if (getTotalProcessed() == 1) {
-			return;
-		}
 		// don't show results if all selected files deleted
-		if (deleted == fileCount) {
+		if ((getTotalProcessed() == 1) || (deleted == fileCount)) {
 			return;
 		}
 

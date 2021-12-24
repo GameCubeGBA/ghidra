@@ -22,10 +22,10 @@ import docking.widgets.tree.GTreeNode;
 import ghidra.util.FilterTransformer;
 
 public class DefaultGTreeDataTransformer implements FilterTransformer<GTreeNode> {
-	private ThreadLocal<List<String>> localizedResults = new ThreadLocal<List<String>>() {
+	private ThreadLocal<List<String>> localizedResults = new ThreadLocal<>() {
 		@Override
 		protected java.util.List<String> initialValue() {
-			return new ArrayList<String>();
+			return new ArrayList<>();
 		}
 	};
 

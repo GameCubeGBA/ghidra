@@ -15,7 +15,9 @@
  */
 package ghidra.generic.util.datastruct;
 
-import java.util.*;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 import org.apache.commons.collections4.multimap.AbstractSetValuedMap;
 

@@ -15,9 +15,9 @@
  */
 package ghidra.program.util;
 
-import generic.algorithms.Lcs;
-
 import java.util.List;
+
+import generic.algorithms.Lcs;
 
 public class CodeUnitLCS extends Lcs<CodeUnitContainer> {
 

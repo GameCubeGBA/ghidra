@@ -15,7 +15,9 @@
  */
 package docking.widgets.fieldpanel.field;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,7 +28,10 @@ import org.apache.commons.lang3.StringUtils;
 
 import docking.widgets.fieldpanel.internal.FieldBackgroundColorManager;
 import docking.widgets.fieldpanel.internal.PaintContext;
-import docking.widgets.fieldpanel.support.*;
+import docking.widgets.fieldpanel.support.DefaultRowColLocation;
+import docking.widgets.fieldpanel.support.Highlight;
+import docking.widgets.fieldpanel.support.HighlightFactory;
+import docking.widgets.fieldpanel.support.RowColLocation;
 import generic.json.Json;
 
 /**
@@ -570,7 +575,7 @@ public class VerticalLayoutTextField implements TextField {
 		return 0;
 	}
 
-	private class FieldRow {
+	private static class FieldRow {
 		private TextField field;
 		private int dataRow;
 		private int screenRow;

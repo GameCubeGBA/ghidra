@@ -76,25 +76,25 @@ public interface ToolTemplate {
 	 * 
 	 * @return the ToolConfig saved as an XML element
 	 */
-	public Element saveToXml();
+	Element saveToXml();
 
 	/**
 	 * Restore this object from a saved XML element.
 	 * 
 	 * @param root element to restore this object into
 	 */
-	public void restoreFromXml(Element root);
+	void restoreFromXml(Element root);
 
 	/**
 	 * Creates a tool like only this template knows how.
 	 * @param project the project in which the tool will be living.
 	 * @return a new tool for this template implementation.
 	 */
-	public PluginTool createTool(Project project);
+	PluginTool createTool(Project project);
 
 	/**
 	 * This returns the XML element that represents the tool part of the overall XML hierarchy.
 	 * @return the XML element that represents the tool part of the overall XML hierarchy.
 	 */
-	public Element getToolElement();
+	Element getToolElement();
 }

@@ -21,7 +21,7 @@ public class ShutdownHookRegistry {
 
 	private static boolean hookInstalled = false;
 
-	private static TreeSet<ShutdownHook> hooks = new TreeSet<ShutdownHook>();
+	private static TreeSet<ShutdownHook> hooks = new TreeSet<>();
 
 	/**
 	 * Install a shutdown hook at the specified priority.  If the hook has no specific 
@@ -54,11 +54,7 @@ public class ShutdownHookRegistry {
 		if (hookInstalled) {
 			return;
 		}
-		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-			public void run() {
-				notifyHooks();
-			}
-		}, "Shutdown Hook Registry Notifier"));
+		Runtime.getRuntime().addShutdownHook(new Thread((Runnable) () -> notifyHooks(), "Shutdown Hook Registry Notifier"));
 		hookInstalled = true;
 	}
 

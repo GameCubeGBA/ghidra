@@ -19,19 +19,31 @@ import static docking.test.AbstractDockingTest.triggerEnter;
 import static docking.test.AbstractDockingTest.triggerKey;
 import static generic.test.AbstractGTest.sleep;
 import static generic.test.AbstractGenericTest.runSwing;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.event.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.Timer;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import generic.test.AbstractGTest;
 import generic.test.AbstractGenericTest;
 import utility.function.Callback;
 
@@ -291,7 +303,7 @@ public class FilterTextFieldTest {
 
 	private void waitForTimer() {
 		Timer timer = filter.getFlashTimer();
-		AbstractGenericTest.waitForCondition(() -> {
+		AbstractGTest.waitForCondition(() -> {
 			boolean running = runSwing(() -> timer.isRunning());
 			return !running;
 		}, "Timed-out waiting for flash timer to finish");
@@ -301,7 +313,7 @@ public class FilterTextFieldTest {
 // Inner Classes
 //==================================================================================================	
 
-	private class BackgroundColorSpy {
+	private static class BackgroundColorSpy {
 		List<Color> bgColorChanges = new ArrayList<>();
 
 		void reset() {
@@ -322,7 +334,7 @@ public class FilterTextFieldTest {
 		}
 	}
 
-	private class EnterListener implements Callback {
+	private static class EnterListener implements Callback {
 
 		private int callCount;
 
@@ -336,7 +348,7 @@ public class FilterTextFieldTest {
 		}
 	}
 
-	private class TestFilterListener implements FilterListener {
+	private static class TestFilterListener implements FilterListener {
 
 		private String filterText;
 

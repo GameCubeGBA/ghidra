@@ -18,13 +18,19 @@ package ghidra.util;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
-import generic.util.*;
+import generic.util.MultiIterator;
+import generic.util.PeekableIterator;
+import generic.util.WrappingPeekableIterator;
 import ghidra.util.exception.AssertException;
 
 // for list creation operations
@@ -386,8 +392,7 @@ public class MultiIteratorTest extends AbstractGenericTest {
 			final int prime = 31;
 			int result = 1;
 			result = prime * result + getOuterType().hashCode();
-			result = prime * result + ((name == null) ? 0 : name.hashCode());
-			return result;
+			return prime * result + ((name == null) ? 0 : name.hashCode());
 		}
 
 		@Override
@@ -395,10 +400,7 @@ public class MultiIteratorTest extends AbstractGenericTest {
 			if (this == obj) {
 				return true;
 			}
-			if (obj == null) {
-				return false;
-			}
-			if (getClass() != obj.getClass()) {
+			if ((obj == null) || (getClass() != obj.getClass())) {
 				return false;
 			}
 
@@ -407,12 +409,7 @@ public class MultiIteratorTest extends AbstractGenericTest {
 				return false;
 			}
 
-			if (name == null) {
-				if (other.name != null) {
-					return false;
-				}
-			}
-			else if (!name.equals(other.name)) {
+			if (!Objects.equals(name, other.name)) {
 				return false;
 			}
 			return true;
@@ -428,14 +425,14 @@ public class MultiIteratorTest extends AbstractGenericTest {
 		}
 	}
 
-	private class TestItemComparator implements Comparator<TestItem> {
+	private static class TestItemComparator implements Comparator<TestItem> {
 		@Override
 		public int compare(TestItem t1, TestItem t2) {
 			return t1.name.compareTo(t2.name);
 		}
 	}
 
-	private class NumberPeekableIterator implements PeekableIterator<Integer> {
+	private static class NumberPeekableIterator implements PeekableIterator<Integer> {
 
 		private int current = 0;
 		private int[] values;

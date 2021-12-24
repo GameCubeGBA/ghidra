@@ -15,7 +15,9 @@
  */
 package ghidra.util.datastruct;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,7 +33,7 @@ public class RedBlackTreeTest extends AbstractGenericTest {
 
     @Before
     public void setUp() throws Exception {
-		tree = new RedBlackTree<Integer, String>();
+		tree = new RedBlackTree<>();
 
 		tree.put(5, "five");
 		tree.put(10, "ten");
@@ -147,7 +149,7 @@ public class RedBlackTreeTest extends AbstractGenericTest {
 
 @Test
     public void testDepth() {
-		tree = new RedBlackTree<Integer, String>();
+		tree = new RedBlackTree<>();
 		tree.put(1, "one");
 		tree.put(2, "two");
 		tree.put(3, "three");
@@ -161,7 +163,7 @@ public class RedBlackTreeTest extends AbstractGenericTest {
 
 		assertEquals(4, getTreeDepth(tree));
 
-		tree = new RedBlackTree<Integer, String>();
+		tree = new RedBlackTree<>();
 		tree.put(10, "ten");
 		tree.put(9, "nine");
 		tree.put(8, "eight");

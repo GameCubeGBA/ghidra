@@ -22,7 +22,9 @@ import java.awt.Rectangle;
 
 import org.junit.Test;
 
-import ghidra.graph.graphs.*;
+import ghidra.graph.graphs.AbstractTestVertex;
+import ghidra.graph.graphs.LabelTestVertex;
+import ghidra.graph.graphs.TestEdge;
 import ghidra.graph.support.TestVisualGraph;
 import ghidra.util.Msg;
 

@@ -19,7 +19,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigInteger;
 
-import ghidra.app.emulator.memory.*;
+import ghidra.app.emulator.memory.EmulatorLoadData;
+import ghidra.app.emulator.memory.MemoryLoadImage;
+import ghidra.app.emulator.memory.ProgramMappedLoadImage;
+import ghidra.app.emulator.memory.ProgramMappedMemory;
 import ghidra.app.emulator.state.DumpMiscState;
 import ghidra.app.emulator.state.RegisterState;
 import ghidra.framework.store.LockException;
@@ -27,9 +30,20 @@ import ghidra.pcode.emulate.BreakCallBack;
 import ghidra.pcode.emulate.EmulateExecutionState;
 import ghidra.pcode.memstate.MemoryFaultHandler;
 import ghidra.pcode.memstate.MemoryState;
-import ghidra.program.model.address.*;
-import ghidra.program.model.lang.*;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressOverflowException;
+import ghidra.program.model.address.AddressRange;
+import ghidra.program.model.address.AddressRangeImpl;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.lang.Language;
+import ghidra.program.model.lang.ProcessorContext;
+import ghidra.program.model.lang.Register;
+import ghidra.program.model.lang.RegisterValue;
+import ghidra.program.model.listing.Instruction;
+import ghidra.program.model.listing.Program;
+import ghidra.program.model.listing.ProgramContext;
 import ghidra.program.model.mem.MemoryBlock;
 import ghidra.program.model.mem.MemoryConflictException;
 import ghidra.util.DataConverter;
@@ -665,7 +679,7 @@ public class EmulatorHelper implements MemoryFaultHandler, EmulatorConfiguration
 		return null;
 	}
 
-	private class MemoryWriteTracker extends MemoryAccessFilter {
+	private static class MemoryWriteTracker extends MemoryAccessFilter {
 
 		AddressSet writeSet = new AddressSet();
 

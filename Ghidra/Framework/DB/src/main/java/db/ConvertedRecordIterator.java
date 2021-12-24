@@ -41,6 +41,7 @@ public abstract class ConvertedRecordIterator implements RecordIterator {
 	/**
 	 * @see db.RecordIterator#delete()
 	 */
+	@Override
 	public boolean delete() throws IOException {
 		if (!deleteAllowed) {
 			throw new UnsupportedOperationException("record delete not allowed");
@@ -51,6 +52,7 @@ public abstract class ConvertedRecordIterator implements RecordIterator {
 	/**
 	 * @see db.RecordIterator#hasNext()
 	 */
+	@Override
 	public boolean hasNext() throws IOException {
 		return originalIterator.hasNext();
 	}
@@ -58,6 +60,7 @@ public abstract class ConvertedRecordIterator implements RecordIterator {
 	/**
 	 * @see db.RecordIterator#hasPrevious()
 	 */
+	@Override
 	public boolean hasPrevious() throws IOException {
 		return originalIterator.hasPrevious();
 	}
@@ -65,6 +68,7 @@ public abstract class ConvertedRecordIterator implements RecordIterator {
 	/**
 	 * @see db.RecordIterator#next()
 	 */
+	@Override
 	public DBRecord next() throws IOException {
 		return convertRecord(originalIterator.next());
 	}
@@ -72,6 +76,7 @@ public abstract class ConvertedRecordIterator implements RecordIterator {
 	/**
 	 * @see db.RecordIterator#previous()
 	 */
+	@Override
 	public DBRecord previous() throws IOException {
 		return convertRecord(originalIterator.previous());
 	}

@@ -15,10 +15,10 @@
  * limitations under the License.
  */
 package ghidra.util.datastruct;
-import ghidra.util.exception.NoValueException;
-
 import java.io.Serializable;
 import java.util.Iterator;
+
+import ghidra.util.exception.NoValueException;
 
 /**
  *     Class that implements a hashtable with String keys and int values.

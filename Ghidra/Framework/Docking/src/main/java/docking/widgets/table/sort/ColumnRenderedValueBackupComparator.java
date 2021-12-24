@@ -15,11 +15,13 @@
  */
 package docking.widgets.table.sort;
 
-import static ghidra.util.table.column.GColumnRenderer.ColumnConstraintFilterMode.*;
+import static ghidra.util.table.column.GColumnRenderer.ColumnConstraintFilterMode.ALLOW_CONSTRAINTS_FILTER_ONLY;
 
 import java.util.Comparator;
 
-import docking.widgets.table.*;
+import docking.widgets.table.DynamicColumnTableModel;
+import docking.widgets.table.DynamicTableColumn;
+import docking.widgets.table.TableComparators;
 import ghidra.docking.settings.Settings;
 import ghidra.util.table.column.GColumnRenderer;
 
@@ -47,12 +49,10 @@ public class ColumnRenderedValueBackupComparator<T> implements Comparator<Object
 		DynamicTableColumn<T, ?, ?> column = model.getColumn(sortColumn);
 		@SuppressWarnings("unchecked")
 		GColumnRenderer<Object> renderer = (GColumnRenderer<Object>) column.getColumnRenderer();
-		if (renderer != null) {
-			if (renderer.getColumnConstraintFilterMode() == ALLOW_CONSTRAINTS_FILTER_ONLY) {
-				// this implies that the column has signaled that it does not support 
-				// filtering/sorting using its rendered value
-				supportsColumnSorting = false;
-			}
+		if ((renderer != null) && (renderer.getColumnConstraintFilterMode() == ALLOW_CONSTRAINTS_FILTER_ONLY)) {
+			// this implies that the column has signaled that it does not support 
+			// filtering/sorting using its rendered value
+			supportsColumnSorting = false;
 		}
 	}
 

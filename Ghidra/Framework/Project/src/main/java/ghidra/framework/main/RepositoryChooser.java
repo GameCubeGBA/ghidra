@@ -17,20 +17,39 @@ package ghidra.framework.main;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import javax.swing.*;
-import javax.swing.event.*;
+import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultListModel;
+import javax.swing.Icon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.MouseInputAdapter;
 
 import docking.DialogComponentProvider;
 import docking.widgets.button.GRadioButton;
 import docking.widgets.label.GDLabel;
 import docking.widgets.label.GLabel;
 import docking.widgets.list.GList;
-import ghidra.framework.client.*;
+import ghidra.framework.client.ClientUtil;
+import ghidra.framework.client.NotConnectedException;
+import ghidra.framework.client.RepositoryServerAdapter;
 import ghidra.framework.model.ServerInfo;
 import ghidra.framework.protocol.ghidra.GhidraURL;
 import ghidra.framework.remote.GhidraServerHandle;
@@ -75,23 +94,13 @@ class RepositoryChooser extends DialogComponentProvider {
 
 		serverInfoComponent = new ServerInfoComponent();
 		serverInfoComponent.setStatusListener(this);
-		serverInfoComponent.setChangeListener(new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				serverInfoChanged();
-			}
-		});
+		serverInfoComponent.setChangeListener(e -> serverInfoChanged());
 		topPanel.add(serverInfoComponent, BorderLayout.CENTER);
 
 		queryButton = new JButton(REFRESH_ICON);
 		queryButton.setToolTipText("Refresh Repository Names List");
 		setDefaultButton(queryButton);
-		queryButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				queryServer();
-			}
-		});
+		queryButton.addActionListener(e -> queryServer());
 		JPanel buttonPanel = new JPanel(new MiddleLayout());
 		buttonPanel.add(queryButton);
 		topPanel.add(buttonPanel, BorderLayout.EAST);
@@ -106,12 +115,7 @@ class RepositoryChooser extends DialogComponentProvider {
 		listModel = new DefaultListModel<>();
 		nameList = new GList<>(listModel);
 		nameList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		nameList.addListSelectionListener(new ListSelectionListener() {
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				selectionChanged();
-			}
-		});
+		nameList.addListSelectionListener(e -> selectionChanged());
 
 		nameList.addMouseListener(new MouseInputAdapter() {
 			@Override
@@ -177,15 +181,12 @@ class RepositoryChooser extends DialogComponentProvider {
 		JPanel radioButtonPanel = new JPanel(new PairLayout(5, 5));
 		radioButtonPanel.setBorder(BorderFactory.createTitledBorder("Repository Specification"));
 
-		ChangeListener choiceListener = new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				Object src = e.getSource();
-				if (src instanceof JRadioButton) {
-					JRadioButton choiceButton = (JRadioButton) src;
-					if (choiceButton.isSelected()) {
-						choiceActivated(choiceButton);
-					}
+		ChangeListener choiceListener = e -> {
+			Object src = e.getSource();
+			if (src instanceof JRadioButton) {
+				JRadioButton choiceButton = (JRadioButton) src;
+				if (choiceButton.isSelected()) {
+					choiceActivated(choiceButton);
 				}
 			}
 		};

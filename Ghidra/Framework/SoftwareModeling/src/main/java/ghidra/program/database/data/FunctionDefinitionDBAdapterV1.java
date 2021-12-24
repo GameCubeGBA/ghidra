@@ -18,7 +18,15 @@ package ghidra.program.database.data;
 import java.io.IOException;
 import java.util.Date;
 
-import db.*;
+import db.ByteField;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.LongField;
+import db.RecordIterator;
+import db.Schema;
+import db.StringField;
+import db.Table;
 import ghidra.program.model.data.GenericCallingConvention;
 import ghidra.util.Msg;
 import ghidra.util.UniversalID;
@@ -161,8 +169,8 @@ class FunctionDefinitionDBAdapterV1 extends FunctionDefinitionDBAdapter {
 		Field[] keys = table.findRecords(new LongField(datatypeID.getValue()),
 			V1_FUNCTION_DEF_UNIVERSAL_DT_ID_COL);
 
-		for (int i = 0; i < keys.length; i++) {
-			DBRecord record = table.getRecord(keys[i]);
+		for (Field key : keys) {
+			DBRecord record = table.getRecord(key);
 			if (record.getLongValue(V1_FUNCTION_DEF_SOURCE_ARCHIVE_ID_COL) == sourceID.getValue()) {
 				return record;
 			}

@@ -19,7 +19,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import db.buffers.ManagedBufferFileHandle;
-import ghidra.framework.store.*;
+import ghidra.framework.store.CheckoutType;
+import ghidra.framework.store.ItemCheckoutStatus;
+import ghidra.framework.store.Version;
 import ghidra.util.InvalidNameException;
 import ghidra.util.SystemUtilities;
 import ghidra.util.exception.DuplicateFileException;
@@ -32,7 +34,7 @@ public interface RepositoryHandle {
 
 	// TODO: NOTE! Debugging client or sever garbage collection delays could
 	// cause handle to be disposed prematurely.
-	public final static int CLIENT_CHECK_PERIOD = SystemUtilities.isInTestingMode() ? 1000 : 30000;
+	int CLIENT_CHECK_PERIOD = SystemUtilities.isInTestingMode() ? 1000 : 30000;
 
 	/**
 	 * Returns the name of this repository.

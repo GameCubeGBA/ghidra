@@ -15,10 +15,20 @@
  */
 package ghidra.program.database.function;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.ConcurrentModificationException;
 
 import ghidra.program.model.data.DataType;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.Function;
+import ghidra.program.model.listing.LocalVariableImpl;
+import ghidra.program.model.listing.Parameter;
+import ghidra.program.model.listing.StackFrame;
+import ghidra.program.model.listing.StackVariableComparator;
+import ghidra.program.model.listing.Variable;
+import ghidra.program.model.listing.VariableFilter;
+import ghidra.program.model.listing.VariableStorage;
+import ghidra.program.model.listing.VariableUtilities;
 import ghidra.program.model.pcode.Varnode;
 import ghidra.program.model.symbol.SourceType;
 import ghidra.util.exception.DuplicateNameException;
@@ -157,7 +167,7 @@ class FunctionStackFrame implements StackFrame {
 		function.manager.lock.acquire();
 		try {
 			checkIsValid();
-			ArrayList<Variable> list = new ArrayList<Variable>();
+			ArrayList<Variable> list = new ArrayList<>();
 			for (Variable variable : variables) {
 				if (!(variable instanceof Parameter)) {
 					list.add(variable);
@@ -180,7 +190,7 @@ class FunctionStackFrame implements StackFrame {
 		function.manager.lock.acquire();
 		try {
 			checkIsValid();
-			ArrayList<Parameter> list = new ArrayList<Parameter>();
+			ArrayList<Parameter> list = new ArrayList<>();
 			for (Variable variable : variables) {
 				if (variable instanceof Parameter) {
 					list.add((Parameter) variable);
@@ -541,8 +551,7 @@ class FunctionStackFrame implements StackFrame {
 		if (baseOffset == null) {
 			return false;
 		}
-		return (stackGrowsNegative && offset >= baseOffset) ||
-			(!stackGrowsNegative && offset < baseOffset);
+		return stackGrowsNegative == offset >= baseOffset;
 	}
 
 	/**

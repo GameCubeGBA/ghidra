@@ -15,7 +15,10 @@
  */
 package docking;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Rectangle;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.net.InetAddress;
@@ -24,12 +27,22 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 
 import docking.widgets.ScrollableTextArea;
 import docking.widgets.label.GHtmlLabel;
 import docking.widgets.label.GIconLabel;
-import docking.widgets.table.*;
+import docking.widgets.table.AbstractDynamicTableColumnStub;
+import docking.widgets.table.GDynamicColumnTableModel;
+import docking.widgets.table.GTable;
+import docking.widgets.table.GTableFilterPanel;
+import docking.widgets.table.TableColumnDescriptor;
 import generic.json.Json;
 import generic.util.WindowUtilities;
 import ghidra.docking.settings.Settings;
@@ -169,7 +182,7 @@ public class ErrLogDialog extends AbstractErrDialog {
 		detailsButton = new JButton(isShowingDetails ? CLOSE : DETAIL);
 		detailsButton.addActionListener(e -> {
 			String label = detailsButton.getText();
-			showDetails(label.equals(DETAIL));
+			showDetails(DETAIL.equals(label));
 		});
 
 		detailsPane = new ErrorDetailsSplitPane();
@@ -280,7 +293,7 @@ public class ErrLogDialog extends AbstractErrDialog {
 						return;
 					}
 					Rectangle localBounds = getBounds();
-					if (!detailsButton.getText().equals(DETAIL)) {
+					if (!DETAIL.equals(detailsButton.getText())) {
 						openedSize = new Dimension(localBounds.width, localBounds.height);
 					}
 				}
@@ -310,11 +323,7 @@ public class ErrLogDialog extends AbstractErrDialog {
 		@Override
 		public Dimension getPreferredSize() {
 			Dimension superSize = super.getPreferredSize();
-			if (detailsButton.getText().equals(DETAIL)) {
-				return superSize;
-			}
-
-			if (openedSize == null) {
+			if (DETAIL.equals(detailsButton.getText()) || (openedSize == null)) {
 				return superSize;
 			}
 

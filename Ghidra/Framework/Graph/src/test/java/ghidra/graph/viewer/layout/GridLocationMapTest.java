@@ -253,7 +253,7 @@ public class GridLocationMapTest {
 		List<Row<V>> rows = locations.rows();
 		Row<V> row = getRow(rows, rowIndex);
 		assertEquals("Row " + rowIndex + " has wrong column count", size,
-			(int) row.getColumnCount());
+			row.getColumnCount());
 		assertEquals(startColumnIndex, (int) row.getStartColumn());
 	}
 
@@ -279,18 +279,18 @@ public class GridLocationMapTest {
 	}
 
 	private void assertCoordinates(V v, int row, int col) {
-		assertEquals("Row not set for '" + v + "'", row, (int) locations.row(v));
-		assertEquals("Column not set for '" + v + "'", col, (int) locations.col(v));
+		assertEquals("Row not set for '" + v + "'", row, locations.row(v));
+		assertEquals("Column not set for '" + v + "'", col, locations.col(v));
 	}
 
-	private class V extends TestVertex {
+	private static class V extends TestVertex {
 
 		protected V(String name) {
 			super(name);
 		}
 	}
 
-	private class E extends TestEdge {
+	private static class E extends TestEdge {
 
 		public E(V start, V end) {
 			super(start, end);

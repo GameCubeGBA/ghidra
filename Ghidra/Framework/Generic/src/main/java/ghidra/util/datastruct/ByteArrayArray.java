@@ -106,7 +106,8 @@ public class ByteArrayArray implements Array, Serializable {
      * @param index index of the array to be removed
      * @throws IndexOutOfBoundsException if the index is negative
      */
-    public void remove(int index) {
+    @Override
+	public void remove(int index) {
         try {
             if (starts[index] > 0) {
                 totalSpaceAllocated -= lengths[index];
@@ -212,14 +213,16 @@ public class ByteArrayArray implements Array, Serializable {
 	 * 
 	 * @see ghidra.util.datastruct.Array#getLastNonEmptyIndex()
 	 */
-    public int getLastNonEmptyIndex() {
+    @Override
+	public int getLastNonEmptyIndex() {
         return lastStart;
     }
 	/**
 	 * 
 	 * @see ghidra.util.datastruct.Array#copyDataTo(int, DataTable, int, int)
 	 */
-    public void copyDataTo(int index, DataTable table, int toIndex, int toCol) {
+    @Override
+	public void copyDataTo(int index, DataTable table, int toIndex, int toCol) {
     	table.putByteArray(toIndex, toCol, get(index));
     }
 

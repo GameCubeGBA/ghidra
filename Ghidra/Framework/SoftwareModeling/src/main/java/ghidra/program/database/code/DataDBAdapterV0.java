@@ -15,16 +15,22 @@
  */
 package ghidra.program.database.code;
 
-import ghidra.program.database.map.*;
+import java.io.IOException;
+
+import db.DBHandle;
+import db.DBRecord;
+import db.RecordIterator;
+import db.Table;
+import ghidra.program.database.map.AddressKeyIterator;
+import ghidra.program.database.map.AddressKeyRecordIterator;
+import ghidra.program.database.map.AddressMap;
+import ghidra.program.database.map.AddressRecordDeleter;
 import ghidra.program.database.util.DatabaseTableUtils;
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressSetView;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
-
-import java.io.IOException;
-
-import db.*;
 
 /**
  * Version 0 implementation for the Data table.

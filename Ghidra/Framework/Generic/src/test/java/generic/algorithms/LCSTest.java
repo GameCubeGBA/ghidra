@@ -84,7 +84,7 @@ public class LCSTest extends AbstractGenericTest {
 		return charList;
 	}
 
-	private class StringLcs extends Lcs<Character> {
+	private static class StringLcs extends Lcs<Character> {
 
 		private String x;
 		private String y;

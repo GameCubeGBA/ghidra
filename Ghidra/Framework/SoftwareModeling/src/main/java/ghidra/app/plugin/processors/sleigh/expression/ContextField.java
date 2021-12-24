@@ -57,13 +57,7 @@ public class ContextField extends PatternValue {
 			return false;
 		}
 		ContextField that = (ContextField) obj;
-		if (this.startbit != that.startbit) {
-			return false;
-		}
-		if (this.endbit != that.endbit) {
-			return false;
-		}
-		if (this.signbit != that.signbit) {
+		if ((this.startbit != that.startbit) || (this.endbit != that.endbit) || (this.signbit != that.signbit)) {
 			return false;
 		}
 		return true;

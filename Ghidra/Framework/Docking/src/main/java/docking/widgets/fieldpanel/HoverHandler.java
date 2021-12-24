@@ -16,7 +16,9 @@
 package docking.widgets.fieldpanel;
 
 import java.awt.Rectangle;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 
 import javax.swing.Timer;
 import javax.swing.ToolTipManager;

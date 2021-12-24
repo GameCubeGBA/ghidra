@@ -29,7 +29,7 @@ public interface DynamicColumnTableModel<ROW_TYPE>
 	 * @param index the model index of the column (this can differ from the view index)
 	 * @return the column
 	 */
-	public DynamicTableColumn<ROW_TYPE, ?, ?> getColumn(int index);
+	DynamicTableColumn<ROW_TYPE, ?, ?> getColumn(int index);
 
 	/**
 	 * Returns the model index for the given column
@@ -37,5 +37,5 @@ public interface DynamicColumnTableModel<ROW_TYPE>
 	 * @param column the column
 	 * @return the model index
 	 */
-	public int getColumnIndex(DynamicTableColumn<ROW_TYPE, ?, ?> column);
+	int getColumnIndex(DynamicTableColumn<ROW_TYPE, ?, ?> column);
 }

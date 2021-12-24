@@ -99,7 +99,7 @@ class ExtensionDetailsPanel extends AbstractDetailsPanel {
 		insertRowTitle(buffer, "Version");
 
 		String version = details.getVersion();
-		if (version.equals("@extversion@")) {
+		if ("@extversion@".equals(version)) {
 			insertRowValue(buffer, "", versionAttrSet);
 		}
 		else {

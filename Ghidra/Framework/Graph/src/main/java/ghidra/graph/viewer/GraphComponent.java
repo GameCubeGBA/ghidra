@@ -15,12 +15,46 @@
  */
 package ghidra.graph.viewer;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.AlphaComposite;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Composite;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.LinearGradientPaint;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Shape;
+import java.awt.Window;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.InputEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.geom.Point2D;
-import java.util.*;
+import java.util.Collection;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.ToolTipManager;
 
 import com.google.common.base.Function;
 
@@ -33,8 +67,10 @@ import docking.widgets.PopupWindow;
 import docking.widgets.label.GIconLabel;
 import edu.uci.ics.jung.algorithms.layout.GraphElementAccessor;
 import edu.uci.ics.jung.algorithms.layout.Layout;
-import edu.uci.ics.jung.visualization.*;
+import edu.uci.ics.jung.visualization.MultiLayerTransformer;
+import edu.uci.ics.jung.visualization.RenderContext;
 import edu.uci.ics.jung.visualization.VisualizationServer.Paintable;
+import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.AbstractGraphMousePlugin;
 import edu.uci.ics.jung.visualization.decorators.PickableVertexPaintTransformer;
 import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
@@ -44,8 +80,14 @@ import edu.uci.ics.jung.visualization.renderers.Renderer;
 import edu.uci.ics.jung.visualization.util.Caching;
 import ghidra.graph.VisualGraph;
 import ghidra.graph.event.VisualGraphChangeListener;
-import ghidra.graph.viewer.edge.*;
-import ghidra.graph.viewer.event.mouse.*;
+import ghidra.graph.viewer.edge.VisualEdgeRenderer;
+import ghidra.graph.viewer.edge.VisualGraphEdgeSatelliteRenderer;
+import ghidra.graph.viewer.edge.VisualGraphEdgeStrokeTransformer;
+import ghidra.graph.viewer.edge.VisualGraphPathHighlighter;
+import ghidra.graph.viewer.event.mouse.VertexMouseInfo;
+import ghidra.graph.viewer.event.mouse.VisualGraphHoverMousePlugin;
+import ghidra.graph.viewer.event.mouse.VisualGraphMousePlugin;
+import ghidra.graph.viewer.event.mouse.VisualGraphPluggableGraphMouse;
 import ghidra.graph.viewer.event.picking.GPickedState;
 import ghidra.graph.viewer.event.picking.PickListener;
 import ghidra.graph.viewer.layout.LayoutListener;
@@ -54,7 +96,10 @@ import ghidra.graph.viewer.options.ViewRestoreOption;
 import ghidra.graph.viewer.options.VisualGraphOptions;
 import ghidra.graph.viewer.satellite.CachingSatelliteGraphViewer;
 import ghidra.graph.viewer.shape.VisualGraphShapePickSupport;
-import ghidra.graph.viewer.vertex.*;
+import ghidra.graph.viewer.vertex.VertexClickListener;
+import ghidra.graph.viewer.vertex.VertexFocusListener;
+import ghidra.graph.viewer.vertex.VisualGraphVertexShapeTransformer;
+import ghidra.graph.viewer.vertex.VisualVertexRenderer;
 import ghidra.util.HTMLUtilities;
 import ghidra.util.HelpLocation;
 import ghidra.util.exception.AssertException;
@@ -283,11 +328,8 @@ public class GraphComponent<V extends VisualVertex, E extends VisualEdge<V>, G e
 	protected SatelliteGraphViewer<V, E> createSatelliteGraphViewer(GraphViewer<V, E> masterViewer,
 			Dimension viewerSize) {
 
-		SatelliteGraphViewer<V, E> viewer =
-			isReallyBigData() ? new CachingSatelliteGraphViewer<>(masterViewer, viewerSize)
-					: new SatelliteGraphViewer<>(masterViewer, viewerSize);
-
-		return viewer;
+		return isReallyBigData() ? new CachingSatelliteGraphViewer<>(masterViewer, viewerSize)
+				: new SatelliteGraphViewer<>(masterViewer, viewerSize);
 	}
 
 	private SatelliteGraphViewer<V, E> buildSatelliteViewer(GraphViewer<V, E> masterViewer,
@@ -862,8 +904,7 @@ public class GraphComponent<V extends VisualVertex, E extends VisualEdge<V>, G e
 	}
 
 	public RenderContext<V, E> getRenderContext() {
-		RenderContext<V, E> context = primaryViewer.getRenderContext();
-		return context;
+		return primaryViewer.getRenderContext();
 	}
 
 	public G getGraph() {
@@ -994,14 +1035,14 @@ public class GraphComponent<V extends VisualVertex, E extends VisualEdge<V>, G e
 			int startX = 0;
 			int startY = bottomY - 5; // add some padding
 
-			Color[] colors = new Color[] { backgroundColor, primaryViewer.getBackground() };
+			Color[] colors = { backgroundColor, primaryViewer.getBackground() };
 
 			int backgroundHeight = (stringBounds.height * 3);
 			int backgroundWidth = viewerBounds.width;
 			int backgroundX = startX;
 			int backgroundY = bottomY - backgroundHeight;
 
-			float[] fractions = new float[] { 0.0f, .95f };
+			float[] fractions = { 0.0f, .95f };
 			int upperY = backgroundY;
 			LinearGradientPaint bottomToTopGradiant = new LinearGradientPaint(
 				new Point(startX, startY), new Point(startX, upperY), fractions, colors);
@@ -1158,15 +1199,7 @@ public class GraphComponent<V extends VisualVertex, E extends VisualEdge<V>, G e
 		@Override
 		public void mousePressed(MouseEvent e) {
 
-			if (!checkModifiers(e)) {
-				return;
-			}
-
-			if (e.getClickCount() != 2) {
-				return;
-			}
-
-			if (!onVertex(e)) {
+			if (!checkModifiers(e) || (e.getClickCount() != 2) || !onVertex(e)) {
 				return; // no vertex clicked, nothing to do
 			}
 

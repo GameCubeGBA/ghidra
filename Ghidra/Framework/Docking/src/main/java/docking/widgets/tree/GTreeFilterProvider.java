@@ -16,26 +16,25 @@
  */
 package docking.widgets.tree;
 
-import ghidra.util.FilterTransformer;
-
 import javax.swing.JComponent;
 
 import docking.DockingWindowManager;
 import docking.widgets.tree.support.GTreeFilter;
+import ghidra.util.FilterTransformer;
 
 public interface GTreeFilterProvider {
-	public JComponent getFilterComponent();
+	JComponent getFilterComponent();
 
-	public GTreeFilter getFilter();
+	GTreeFilter getFilter();
 
-	public void setEnabled(boolean enabled);
+	void setEnabled(boolean enabled);
 
-	public void setFilterText(String text);
+	void setFilterText(String text);
 
-	public String getFilterText();
+	String getFilterText();
 
-	public void setDataTransformer(FilterTransformer<GTreeNode> transformer);
+	void setDataTransformer(FilterTransformer<GTreeNode> transformer);
 
-	public void loadFilterPreference(DockingWindowManager windowManager, String uniquePreferenceKey);
+	void loadFilterPreference(DockingWindowManager windowManager, String uniquePreferenceKey);
 
 }

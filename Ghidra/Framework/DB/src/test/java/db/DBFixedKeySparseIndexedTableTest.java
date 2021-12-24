@@ -15,14 +15,20 @@
  */
 package db;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
 
-import org.junit.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
-import db.buffers.*;
+import db.buffers.BufferFile;
+import db.buffers.BufferFileManager;
+import db.buffers.LocalManagedBufferFile;
 import generic.test.AbstractGenericTest;
 import ghidra.util.exception.CancelledException;
 import utilities.util.FileUtilities;

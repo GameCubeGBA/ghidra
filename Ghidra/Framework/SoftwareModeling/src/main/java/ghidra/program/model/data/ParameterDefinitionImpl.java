@@ -16,7 +16,9 @@
 package ghidra.program.model.data;
 
 import ghidra.program.database.data.DataTypeUtilities;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.Parameter;
+import ghidra.program.model.listing.Variable;
+import ghidra.program.model.listing.VariableUtilities;
 import ghidra.program.model.symbol.SymbolUtilities;
 import ghidra.util.exception.InvalidInputException;
 
@@ -134,13 +136,7 @@ public class ParameterDefinitionImpl implements ParameterDefinition {
 
 	@Override
 	public boolean isEquivalent(Variable variable) {
-		if (variable == null) {
-			return false;
-		}
-		if (!(variable instanceof Parameter)) {
-			return false;
-		}
-		if (ordinal != ((Parameter) variable).getOrdinal()) {
+		if ((variable == null) || !(variable instanceof Parameter) || (ordinal != ((Parameter) variable).getOrdinal())) {
 			return false;
 		}
 		return DataTypeUtilities.isSameOrEquivalentDataType(dataType, variable.getDataType());
@@ -148,10 +144,7 @@ public class ParameterDefinitionImpl implements ParameterDefinition {
 
 	@Override
 	public boolean isEquivalent(ParameterDefinition parm) {
-		if (parm == null) {
-			return false;
-		}
-		if (ordinal != parm.getOrdinal()) {
+		if ((parm == null) || (ordinal != parm.getOrdinal())) {
 			return false;
 		}
 		return DataTypeUtilities.isSameOrEquivalentDataType(dataType, parm.getDataType());

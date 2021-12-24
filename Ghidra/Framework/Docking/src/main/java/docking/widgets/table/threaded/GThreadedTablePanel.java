@@ -18,7 +18,11 @@ package docking.widgets.table.threaded;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
-import javax.swing.*;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
+import javax.swing.Timer;
 
 import docking.widgets.EmptyBorderButton;
 import docking.widgets.label.GLabel;

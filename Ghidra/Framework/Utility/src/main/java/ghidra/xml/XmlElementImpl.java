@@ -47,14 +47,17 @@ public class XmlElementImpl implements XmlElement {
 		this.lineNumber = lineNumber;
 	}
 
+	@Override
 	public int getColumnNumber() {
 		return columnNumber;
 	}
 
+	@Override
 	public int getLineNumber() {
 		return lineNumber;
 	}
 
+	@Override
 	public boolean hasAttribute(String key) {
 		if (attributes == null) {
 			return false;
@@ -62,6 +65,7 @@ public class XmlElementImpl implements XmlElement {
 		return attributes.containsKey(key);
 	}
 
+	@Override
 	public String getAttribute(String key) {
 		if (attributes == null) {
 			return null;
@@ -69,34 +73,42 @@ public class XmlElementImpl implements XmlElement {
 		return attributes.get(key);
 	}
 
+	@Override
 	public LinkedHashMap<String, String> getAttributes() {
-		return attributes == null ? null : new LinkedHashMap<String, String>(attributes);
+		return attributes == null ? null : new LinkedHashMap<>(attributes);
 	}
 
+	@Override
 	public void setAttribute(String key, String value) {
 		attributes.put(key, value);
 	}
 
+	@Override
 	public int getLevel() {
 		return level;
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}
 
+	@Override
 	public String getText() {
 		return text;
 	}
 
+	@Override
 	public boolean isContent() {
 		return isContent;
 	}
 
+	@Override
 	public boolean isEnd() {
 		return isEnd;
 	}
 
+	@Override
 	public boolean isStart() {
 		return isStart;
 	}

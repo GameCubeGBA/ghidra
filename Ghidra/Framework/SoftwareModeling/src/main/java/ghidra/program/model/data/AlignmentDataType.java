@@ -51,20 +51,14 @@ public class AlignmentDataType extends BuiltIn implements Dynamic {
 			while (length < MAX_LENGTH) {
 				byte b = buf.getByte(length);
 				Address addr = buf.getAddress().add(length);
-				if (listing != null && (listing.getDefinedDataAt(addr) != null ||
-					listing.getInstructionAt(addr) != null)) {
-					break;
-				}
-				if (b != startByte) {
+				if ((listing != null && (listing.getDefinedDataAt(addr) != null ||
+					listing.getInstructionAt(addr) != null)) || (b != startByte)) {
 					break;
 				}
 				++length;
 			}
 		}
-		catch (MemoryAccessException e) {
-			// stop counting
-		}
-		catch (AddressOutOfBoundsException exc) {
+		catch (MemoryAccessException | AddressOutOfBoundsException exc) {
 			// stop counting
 		}
 		return length > 0 ? length : -1;

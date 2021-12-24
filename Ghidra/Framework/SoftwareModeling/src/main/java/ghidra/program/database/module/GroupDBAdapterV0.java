@@ -17,8 +17,15 @@ package ghidra.program.database.module;
 
 import java.io.IOException;
 
-import db.*;
-import ghidra.util.exception.*;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.LongField;
+import db.StringField;
+import db.Table;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.DuplicateNameException;
+import ghidra.util.exception.VersionException;
 
 /**
  *
@@ -106,8 +113,8 @@ class GroupDBAdapterV0 implements GroupDBAdapter {
 	public DBRecord getParentChildRecord(long parentID, long childID) throws IOException {
 		Field[] keys =
 			parentChildTable.findRecords(new LongField(parentID), TreeManager.PARENT_ID_COL);
-		for (int i = 0; i < keys.length; i++) {
-			DBRecord pcRec = parentChildTable.getRecord(keys[i]);
+		for (Field key : keys) {
+			DBRecord pcRec = parentChildTable.getRecord(key);
 			if (pcRec.getLongValue(TreeManager.CHILD_ID_COL) == childID) {
 				return pcRec;
 			}

@@ -26,15 +26,15 @@ public interface KeyIndexableSet<T extends KeyedObject> {
 	/** The modification number is a counter for the number of changes
 	 * the KeyIndexableSet has undergone since its creation. 
 	 */
-  public long getModificationNumber();
+  long getModificationNumber();
   
   /** Returns the number of KeyedObjects in this KeyIndexableSet */
-  public int size();
+  int size();
   
   /** Returns the number of KeyedObjects this KeyIndexableSet can
    * hold without growing. 
    */
-  public int capacity();
+  int capacity();
   
   /** Adds a KeyedObject to this KeyIndexableSet. The set will increase
    * in capacity if needed.
@@ -42,30 +42,30 @@ public interface KeyIndexableSet<T extends KeyedObject> {
    * if the KeyedObject is null or already in the KeyIndexableSet or addition
    * fails for some other reason.
    */
-  public boolean add( T o );
+  boolean add( T o );
   
   /** Remove a KeyedObject from this KeyIndexableSet. 
    * @return true if the KeyedObject was sucessfully removed. Returns false
    * if the KeyedObject was not in the KeyIndexablrSet.
    */
-  public boolean remove( T o );
+  boolean remove( T o );
   
   /** Returns true if this KeyIndexableSet contains the specified KeyedObject.
    */
-  public boolean contains( T o );
+  boolean contains( T o );
   
   /** Returns an iterator for this KeyIndexableSet which uses the
    * hasNext()/next() style. See GraphIterator. */
-  public GraphIterator<T> iterator();
+  GraphIterator<T> iterator();
 
 	/** Returns the elements of this KeyIndexableSet as an array of
 	 * KeyedObjects.
 	 */
-  public T[] toArray();
+  T[] toArray();
   
   /** Returns the KeyedObject with the specified key in this KeyIndexableSet.
    * Returns null if the Set contains no object with that key.
    */
-  public T getKeyedObject( long key);
+  T getKeyedObject( long key);
 
 }

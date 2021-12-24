@@ -16,7 +16,7 @@
  */
 package ghidra.pcodeCPort.slghsymbol;
 
-import ghidra.pcodeCPort.slghpatexpress.*;
+import ghidra.pcodeCPort.slghpatexpress.PatternValue;
 import ghidra.sleigh.grammar.Location;
 
 public abstract class FamilySymbol extends TripleSymbol {

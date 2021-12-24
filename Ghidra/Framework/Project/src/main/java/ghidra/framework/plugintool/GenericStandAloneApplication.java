@@ -22,8 +22,8 @@ import ghidra.framework.model.ToolServices;
  */
 public interface GenericStandAloneApplication {
 
-	public ToolServices getToolServices();
+	ToolServices getToolServices();
 
-	public void exit();
+	void exit();
 
 }

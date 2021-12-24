@@ -16,9 +16,12 @@
  */
 package ghidra.util.graph;
 
-import ghidra.util.exception.NoValueException;
+import java.util.ConcurrentModificationException;
+import java.util.HashSet;
+import java.util.NoSuchElementException;
+import java.util.Set;
 
-import java.util.*;
+import ghidra.util.exception.NoValueException;
 
 
 /** Container class for a set of edges (ghidra.util.graph.Edge). 
@@ -66,7 +69,8 @@ class EdgeSet implements KeyIndexableSet<Edge> {
   /** Removes an edge from this EdgeSet. Returns true if and only if the
    *   edge was in the EdgeSet and was sucessfully removed.
    */
-  public boolean remove( Edge e )
+  @Override
+public boolean remove( Edge e )
   {
       if( e == null )
       {
@@ -146,7 +150,8 @@ class EdgeSet implements KeyIndexableSet<Edge> {
    *   If the edge is already in the graph return false and do nothing. 
    *  @return true if and only if the edge was sucessfully added.
    */
-  public boolean add( Edge e )
+  @Override
+public boolean add( Edge e )
   {
       if( contains(e) )
       {
@@ -202,7 +207,8 @@ class EdgeSet implements KeyIndexableSet<Edge> {
   }
 
   /** Return true if and only if the edge is contained in this EdgeSet. */
-  public boolean contains( Edge edge )
+  @Override
+public boolean contains( Edge edge )
   {
 	  return edgeIndices.contains( edge.key() );
   }
@@ -298,7 +304,8 @@ class EdgeSet implements KeyIndexableSet<Edge> {
 
 
   /** Returns the current number of edges within this edge set. */
-  public int size()
+  @Override
+public int size()
   {
       return this.edgeIndices.size();
   }
@@ -325,7 +332,8 @@ class EdgeSet implements KeyIndexableSet<Edge> {
   }
 
   /** Returns the number of edges this edge set can hold without growing. */
-  public int capacity()
+  @Override
+public int capacity()
   {
       return this.capacity;
   }
@@ -401,13 +409,15 @@ class EdgeSet implements KeyIndexableSet<Edge> {
   }
 
   /** Returns an iterator for this EdgeSet. */
-  public GraphIterator<Edge> iterator()
+  @Override
+public GraphIterator<Edge> iterator()
   {
       return new EdgeSetIterator();
   }
 
   /** Used to test if edges have been added or removed from this edge set. */
-  public long getModificationNumber()
+  @Override
+public long getModificationNumber()
   {
      return this.modificationNumber;
   }
@@ -415,13 +425,13 @@ class EdgeSet implements KeyIndexableSet<Edge> {
   /* (non-Javadoc)
    * @see ghidra.util.graph.KeyIndexableSet#getKeyedObject(long)
    */
-  public Edge getKeyedObject(long key)
+  @Override
+public Edge getKeyedObject(long key)
   {
 	  if (edgeIndices.contains(key)) {
 		  try {
 			  return edges[edgeIndices.get(key)];
 		  } catch (Exception e) {
-			  return null;
 		  }
 	  }
 	  return null; 
@@ -445,7 +455,7 @@ class EdgeSet implements KeyIndexableSet<Edge> {
   public Set<Edge> toSet()
   {
       GraphIterator<Edge> i = this.iterator();
-      Set<Edge> s = new HashSet<Edge>( this.size() );
+      Set<Edge> s = new HashSet<>( this.size() );
       while( i.hasNext() )
       {
           s.add( i.next() );
@@ -454,7 +464,8 @@ class EdgeSet implements KeyIndexableSet<Edge> {
   }
 
 	/** @return array of Edges contained in this EdgeSet */
-  public Edge[] toArray()
+  @Override
+public Edge[] toArray()
   {
       Edge[] theEdges = new Edge[this.size()];
       int i=0, cnt = 0;
@@ -504,7 +515,8 @@ class EdgeSet implements KeyIndexableSet<Edge> {
     /** @return true if and only if a call to next() will return a valid edge. 
      * @throws ConcurrentModificationException 
      */
-    public boolean hasNext() throws ConcurrentModificationException
+    @Override
+	public boolean hasNext() throws ConcurrentModificationException
     {
         if( edgeSetModificationNumber != getModificationNumber() )
         {
@@ -521,7 +533,8 @@ class EdgeSet implements KeyIndexableSet<Edge> {
      * @throws ConcurrentModificationException
      * @throws NoSuchElementException if there is no next edge.
      */
-    public Edge next() throws ConcurrentModificationException
+    @Override
+	public Edge next() throws ConcurrentModificationException
     {
         if( edgeSetModificationNumber != getModificationNumber() )
         {
@@ -537,7 +550,8 @@ class EdgeSet implements KeyIndexableSet<Edge> {
     }
 
     /** Removes the edge returned by the most recent call to next(). */
-    public boolean remove() throws ConcurrentModificationException
+    @Override
+	public boolean remove() throws ConcurrentModificationException
     {
         boolean removed;
         if( edgeSetModificationNumber != getModificationNumber() )

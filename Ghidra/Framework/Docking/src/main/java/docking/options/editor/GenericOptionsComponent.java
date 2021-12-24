@@ -16,12 +16,12 @@
  */
 package docking.options.editor;
 
-import ghidra.framework.options.EditorState;
-
 import java.awt.Dimension;
 import java.util.List;
 
 import javax.swing.JPanel;
+
+import ghidra.framework.options.EditorState;
 
 public abstract class GenericOptionsComponent extends JPanel {
 	protected final EditorState editorState;

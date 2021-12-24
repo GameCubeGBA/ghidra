@@ -16,11 +16,17 @@
 package ghidra.framework.client;
 
 import java.awt.Component;
-import java.io.*;
+import java.io.Console;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
 
-import javax.security.auth.callback.*;
+import javax.security.auth.callback.ChoiceCallback;
+import javax.security.auth.callback.NameCallback;
+import javax.security.auth.callback.PasswordCallback;
 
 import ghidra.framework.remote.AnonymousCallback;
 import ghidra.framework.remote.SSHSignatureCallback;

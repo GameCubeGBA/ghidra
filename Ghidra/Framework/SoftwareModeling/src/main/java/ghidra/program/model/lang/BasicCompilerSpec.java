@@ -20,16 +20,37 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.math.BigInteger;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeMap;
 
-import org.xml.sax.*;
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 import generic.jar.ResourceFile;
 import generic.stl.Pair;
-import ghidra.app.plugin.processors.sleigh.*;
-import ghidra.program.model.address.*;
-import ghidra.program.model.data.*;
+import ghidra.app.plugin.processors.sleigh.SleighException;
+import ghidra.app.plugin.processors.sleigh.SleighLanguage;
+import ghidra.app.plugin.processors.sleigh.SleighLanguageValidator;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressRange;
+import ghidra.program.model.address.AddressRangeImpl;
+import ghidra.program.model.address.AddressRangeIterator;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.address.GenericAddressSpace;
+import ghidra.program.model.address.OverlayAddressSpace;
+import ghidra.program.model.data.DataOrganization;
+import ghidra.program.model.data.DataOrganizationImpl;
+import ghidra.program.model.data.GenericCallingConvention;
 import ghidra.program.model.listing.DefaultProgramContext;
 import ghidra.program.model.listing.Parameter;
 import ghidra.program.model.pcode.AddressXML;
@@ -37,7 +58,10 @@ import ghidra.program.model.pcode.Varnode;
 import ghidra.util.Msg;
 import ghidra.util.SystemUtilities;
 import ghidra.util.xml.SpecXmlUtils;
-import ghidra.xml.*;
+import ghidra.xml.XmlElement;
+import ghidra.xml.XmlParseException;
+import ghidra.xml.XmlPullParser;
+import ghidra.xml.XmlPullParserFactory;
 
 /**
  * BasicCompilerSpec implements the CompilerSpec interface based on static information
@@ -142,10 +166,8 @@ public class BasicCompilerSpec implements CompilerSpec {
 		catch (SleighException e) {
 			parseException = e;
 			Throwable cause = e.getCause();		// Recover the cause (from the validator exception)
-			if (cause != null) {
-				if (cause instanceof SAXException || cause instanceof IOException) {
-					parseException = (Exception) cause;
-				}
+			if ((cause != null) && (cause instanceof SAXException || cause instanceof IOException)) {
+				parseException = (Exception) cause;
 			}
 		}
 		catch (IOException | SAXException | XmlParseException e) {
@@ -208,7 +230,7 @@ public class BasicCompilerSpec implements CompilerSpec {
 	 * @return the error handler object
 	 */
 	protected static ErrorHandler getErrorHandler(String docTitle) {
-		ErrorHandler errHandler = new ErrorHandler() {
+		return new ErrorHandler() {
 			@Override
 			public void error(SAXParseException exception) throws SAXException {
 				throw exception;
@@ -224,7 +246,6 @@ public class BasicCompilerSpec implements CompilerSpec {
 				Msg.warn(this, "Warning parsing '" + docTitle + "'", exception);
 			}
 		};
-		return errHandler;
 	}
 
 	private void initialize(String srcName, XmlPullParser parser) throws XmlParseException {
@@ -440,7 +461,7 @@ public class BasicCompilerSpec implements CompilerSpec {
 		else {
 			space = language.getAddressFactory().getAddressSpace(spaceName);
 		}
-		if (spaceName.equals(OTHER_SPACE_NAME)) {
+		if (OTHER_SPACE_NAME.equals(spaceName)) {
 			space = AddressSpace.OTHER_SPACE;
 		}
 		if (space == null) {
@@ -557,11 +578,8 @@ public class BasicCompilerSpec implements CompilerSpec {
 			buffer.append("</default_proto>\n");
 		}
 		for (PrototypeModel model : allmodels) {
-			if (model == defaultModel) {
-				continue;		// Already emitted
-			}
-			if (copiedThisModel && model.hasThisPointer() &&
-				model.name.equals(CALLING_CONVENTION_thiscall)) {
+			if ((model == defaultModel) || (copiedThisModel && model.hasThisPointer() &&
+				CALLING_CONVENTION_thiscall.equals(model.name))) {
 				continue;		// Don't need to emit the copy
 			}
 			model.saveXml(buffer, pcodeInject);
@@ -604,34 +622,34 @@ public class BasicCompilerSpec implements CompilerSpec {
 		parser.start("compiler_spec");
 		while (parser.peek().isStart()) {
 			String name = parser.peek().getName();
-			if (name.equals("properties")) {
+			if ("properties".equals(name)) {
 				restoreProperties(parser);
 			}
-			else if (name.equals("data_organization")) {
+			else if ("data_organization".equals(name)) {
 				dataOrganization.restoreXml(parser);
 			}
-			else if (name.equals("callfixup")) {
+			else if ("callfixup".equals(name)) {
 				String nm = parser.peek().getAttribute("name");
 				pcodeInject.restoreXmlInject(sourceName, nm, InjectPayload.CALLFIXUP_TYPE, parser);
 			}
-			else if (name.equals("callotherfixup")) {
+			else if ("callotherfixup".equals(name)) {
 				String nm = parser.peek().getAttribute("targetop");
 				pcodeInject.restoreXmlInject(sourceName, nm, InjectPayload.CALLOTHERFIXUP_TYPE,
 					parser);
 			}
-			else if (name.equals("context_data")) {
+			else if ("context_data".equals(name)) {
 				ContextSetting.parseContextData(ctxsetting, parser, this);
 			}
-			else if (name.equals("stackpointer")) {
+			else if ("stackpointer".equals(name)) {
 				setStackPointer(parser);
 			}
-			else if (name.equals("spacebase")) {
+			else if ("spacebase".equals(name)) {
 				restoreSpaceBase(parser);
 			}
-			else if (name.equals("global")) {
+			else if ("global".equals(name)) {
 				restoreMemoryTags("global", parser, globalSet);
 			}
-			else if (name.equals("default_proto")) {
+			else if ("default_proto".equals(name)) {
 				parser.start();
 				PrototypeModel model = addPrototypeModel(modelList, parser);
 				parser.end();
@@ -640,57 +658,57 @@ public class BasicCompilerSpec implements CompilerSpec {
 					seenDefault = true;
 				}
 			}
-			else if (name.equals("prototype")) {
+			else if ("prototype".equals(name)) {
 				PrototypeModel model = addPrototypeModel(modelList, parser);
 				if (defaultName == null) {
 					defaultName = model.name;
 				}
 			}
-			else if (name.equals("resolveprototype")) {
+			else if ("resolveprototype".equals(name)) {
 				addPrototypeModel(modelList, parser);
 			}
-			else if (name.equals("eval_current_prototype")) {
+			else if ("eval_current_prototype".equals(name)) {
 				evalCurrentPrototype = parser.start().getAttribute("name");
 				parser.end();
 			}
-			else if (name.equals("eval_called_prototype")) {
+			else if ("eval_called_prototype".equals(name)) {
 				evalCalledPrototype = parser.start().getAttribute("name");
 				parser.end();
 			}
-			else if (name.equals("segmentop")) {
+			else if ("segmentop".equals(name)) {
 				String source = "cspec: " + language.getLanguageID().getIdAsString();
 				InjectPayloadSleigh payload = new InjectPayloadSegment(source);
 				payload.restoreXml(parser, language);
 				pcodeInject.registerInject(payload);
 			}
-			else if (name.equals("aggressivetrim")) {
+			else if ("aggressivetrim".equals(name)) {
 				XmlElement el = parser.start();
 				aggressiveTrim = SpecXmlUtils.decodeBoolean(el.getAttribute("signext"));
 				parser.end(el);
 			}
-			else if (name.equals("prefersplit")) {
+			else if ("prefersplit".equals(name)) {
 				restorePreferSplit(parser);
 			}
-			else if (name.equals("nohighptr")) {
+			else if ("nohighptr".equals(name)) {
 				noHighPtr = new AddressSet();
 				restoreMemoryTags("nohighptr", parser, noHighPtr);
 			}
-			else if (name.equals("readonly")) {
+			else if ("readonly".equals(name)) {
 				readOnlySet = new AddressSet();
 				restoreMemoryTags("readonly", parser, readOnlySet);
 			}
-			else if (name.equals("returnaddress")) {
+			else if ("returnaddress".equals(name)) {
 				restoreReturnAddress(parser);
 			}
-			else if (name.equals("funcptr")) {
+			else if ("funcptr".equals(name)) {
 				XmlElement subel = parser.start();
 				funcPtrAlign = SpecXmlUtils.decodeInt(subel.getAttribute("align"));
 				parser.end(subel);
 			}
-			else if (name.equals("deadcodedelay")) {
+			else if ("deadcodedelay".equals(name)) {
 				restoreDeadCodeDelay(parser);
 			}
-			else if (name.equals("inferptrbounds")) {
+			else if ("inferptrbounds".equals(name)) {
 				restoreInferPtrBounds(parser);
 			}
 			else {
@@ -727,7 +745,7 @@ public class BasicCompilerSpec implements CompilerSpec {
 		parser.start();
 		while (parser.peek().isStart()) {
 			XmlElement el = parser.start();
-			if (el.getName().equals("property")) {
+			if ("property".equals(el.getName())) {
 				String key = el.getAttribute("key");
 				String value = el.getAttribute("value");
 				properties.put(key, value);
@@ -863,7 +881,7 @@ public class BasicCompilerSpec implements CompilerSpec {
 		while (parser.peek().isStart()) {
 			XmlElement subel = parser.start();
 			String name = subel.getName();
-			if (name.equals("range") || name.equals("register")) {
+			if ("range".equals(name) || "register".equals(name)) {
 				String spcName = subel.getAttribute("space");
 				if (spcName != null && spaceBases != null && spaceBases.containsKey(spcName)) {
 					readExtraRange(subel, spcName, tagName);
@@ -887,7 +905,7 @@ public class BasicCompilerSpec implements CompilerSpec {
 	private void restorePreferSplit(XmlPullParser parser) throws XmlParseException {
 		XmlElement el = parser.start();
 		String styleString = el.getAttribute("style");
-		if (styleString == null || !styleString.equals("inhalf")) {
+		if (styleString == null || !"inhalf".equals(styleString)) {
 			throw new XmlParseException("Unknown prefersplit strategy");
 		}
 		preferSplit = new ArrayList<>();
@@ -986,10 +1004,10 @@ public class BasicCompilerSpec implements CompilerSpec {
 			reverseJustifyStack = getBooleanValue(reverseJustifyStr);
 		}
 		String growth = el.getAttribute("growth");
-		if (growth == null || growth.equals("negative")) {
+		if (growth == null || "negative".equals(growth)) {
 			stackGrowsNegative = true;
 		}
-		else if (growth.equals("positive")) {
+		else if ("positive".equals(growth)) {
 			stackGrowsNegative = false;
 		}
 		else {
@@ -1020,7 +1038,7 @@ public class BasicCompilerSpec implements CompilerSpec {
 	private PrototypeModel addPrototypeModel(List<PrototypeModel> modelList, XmlPullParser parser)
 			throws XmlParseException {
 		PrototypeModel model;
-		if (parser.peek().getName().equals("resolveprototype")) {
+		if ("resolveprototype".equals(parser.peek().getName())) {
 			PrototypeModelMerged mergemodel = new PrototypeModelMerged();
 			mergemodel.restoreXml(parser, modelList);
 			model = mergemodel;
@@ -1135,13 +1153,7 @@ public class BasicCompilerSpec implements CompilerSpec {
 	@Override
 	public boolean equals(Object obj) {
 		BasicCompilerSpec op2 = (BasicCompilerSpec) obj;
-		if (aggressiveTrim != op2.aggressiveTrim || copiedThisModel != op2.copiedThisModel) {
-			return false;
-		}
-		if (!dataOrganization.equals(op2.dataOrganization)) {
-			return false;
-		}
-		if (!ctxsetting.equals(op2.ctxsetting)) {
+		if (aggressiveTrim != op2.aggressiveTrim || copiedThisModel != op2.copiedThisModel || !dataOrganization.equals(op2.dataOrganization) || !ctxsetting.equals(op2.ctxsetting)) {
 			return false;
 		}
 		if (!SystemUtilities.isEqual(deadCodeDelay, op2.deadCodeDelay)) {
@@ -1237,7 +1249,6 @@ public class BasicCompilerSpec implements CompilerSpec {
 	@Override
 	public int hashCode() {
 		int hash = language.getLanguageID().hashCode();
-		hash = 79 * description.getCompilerSpecID().hashCode() + hash;
-		return hash;
+		return 79 * description.getCompilerSpecID().hashCode() + hash;
 	}
 }

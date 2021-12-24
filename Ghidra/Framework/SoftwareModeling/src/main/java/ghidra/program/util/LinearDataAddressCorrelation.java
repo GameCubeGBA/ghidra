@@ -15,7 +15,9 @@
  */
 package ghidra.program.util;
 
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressRange;
+import ghidra.program.model.address.AddressRangeImpl;
 import ghidra.program.model.listing.Data;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;

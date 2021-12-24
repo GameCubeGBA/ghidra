@@ -24,8 +24,7 @@ package ghidra.program.model.data;
  */
 public interface Union extends Composite {
 
-	@Override
-	public Union clone(DataTypeManager dtm);
+	@Override Union clone(DataTypeManager dtm);
 
 	/**
 	 * Inserts a new bitfield at the specified ordinal position in this union.
@@ -46,7 +45,7 @@ public interface Union extends Composite {
 	 * @throws IndexOutOfBoundsException if ordinal is less than 0 or greater than the 
 	 * current number of components.
 	 */
-	public DataTypeComponent insertBitField(int ordinal, DataType baseDataType, int bitSize,
+	DataTypeComponent insertBitField(int ordinal, DataType baseDataType, int bitSize,
 			String componentName, String comment)
 			throws InvalidDataTypeException, IndexOutOfBoundsException;
 }

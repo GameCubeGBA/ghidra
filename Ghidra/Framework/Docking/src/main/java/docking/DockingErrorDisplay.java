@@ -24,7 +24,13 @@ import org.apache.commons.text.WordUtils;
 
 import docking.widgets.OkDialog;
 import docking.widgets.OptionDialog;
-import ghidra.util.*;
+import ghidra.util.ConsoleErrorDisplay;
+import ghidra.util.ErrorDisplay;
+import ghidra.util.ErrorLogger;
+import ghidra.util.HTMLUtilities;
+import ghidra.util.MessageType;
+import ghidra.util.StringUtilities;
+import ghidra.util.Swing;
 import ghidra.util.exception.MultipleCauses;
 import ghidra.util.html.HtmlLineSplitter;
 

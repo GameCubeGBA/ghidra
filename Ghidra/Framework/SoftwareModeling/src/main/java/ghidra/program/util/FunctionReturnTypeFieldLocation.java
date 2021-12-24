@@ -17,6 +17,8 @@
 
 package ghidra.program.util;
 
+import java.util.Objects;
+
 import ghidra.framework.options.SaveState;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
@@ -96,25 +98,19 @@ public class FunctionReturnTypeFieldLocation extends FunctionSignatureFieldLocat
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((returnTypeStr == null) ? 0 : returnTypeStr.hashCode());
-		return result;
+		return prime * result + ((returnTypeStr == null) ? 0 : returnTypeStr.hashCode());
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
+		if (!super.equals(obj) || (getClass() != obj.getClass()))
 			return false;
 		FunctionReturnTypeFieldLocation other = (FunctionReturnTypeFieldLocation) obj;
-		if (returnTypeStr == null) {
-			if (other.returnTypeStr != null)
-				return false;
-		}
-		else if (!returnTypeStr.equals(other.returnTypeStr))
+		if (!Objects.equals(returnTypeStr, other.returnTypeStr)) {
 			return false;
+		}
 		return true;
 	}
 

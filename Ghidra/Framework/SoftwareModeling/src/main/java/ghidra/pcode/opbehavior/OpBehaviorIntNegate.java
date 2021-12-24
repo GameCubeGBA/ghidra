@@ -16,11 +16,11 @@
  */
 package ghidra.pcode.opbehavior;
 
+import java.math.BigInteger;
+
 import ghidra.pcode.utils.Utils;
 import ghidra.program.model.pcode.PcodeOp;
 import ghidra.util.exception.AssertException;
-
-import java.math.BigInteger;
 
 public class OpBehaviorIntNegate extends UnaryOpBehavior {
 
@@ -30,8 +30,7 @@ public class OpBehaviorIntNegate extends UnaryOpBehavior {
 
 	@Override
 	public long evaluateUnary(int sizeout, int sizein, long in1) {
-		long res = Utils.uintb_negate(in1, sizein);
-		return res;
+		return Utils.uintb_negate(in1, sizein);
 	}
 
 	@Override

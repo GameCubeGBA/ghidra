@@ -16,18 +16,39 @@
 package ghidra.app.plugin.processors.sleigh;
 
 import java.math.BigInteger;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import ghidra.app.plugin.processors.sleigh.SleighParserContext.ContextSet;
-import ghidra.app.plugin.processors.sleigh.expression.*;
+import ghidra.app.plugin.processors.sleigh.expression.BinaryExpression;
+import ghidra.app.plugin.processors.sleigh.expression.ContextField;
+import ghidra.app.plugin.processors.sleigh.expression.OperandValue;
+import ghidra.app.plugin.processors.sleigh.expression.PatternExpression;
+import ghidra.app.plugin.processors.sleigh.expression.TokenField;
+import ghidra.app.plugin.processors.sleigh.expression.UnaryExpression;
 import ghidra.app.plugin.processors.sleigh.pattern.PatternBlock;
-import ghidra.app.plugin.processors.sleigh.symbol.*;
+import ghidra.app.plugin.processors.sleigh.symbol.OperandSymbol;
+import ghidra.app.plugin.processors.sleigh.symbol.SubtableSymbol;
+import ghidra.app.plugin.processors.sleigh.symbol.Symbol;
+import ghidra.app.plugin.processors.sleigh.symbol.TripleSymbol;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSpace;
-import ghidra.program.model.lang.*;
+import ghidra.program.model.lang.InstructionContext;
+import ghidra.program.model.lang.Language;
+import ghidra.program.model.lang.ParserContext;
+import ghidra.program.model.lang.ProcessorContextView;
+import ghidra.program.model.lang.Register;
+import ghidra.program.model.lang.RegisterValue;
+import ghidra.program.model.lang.UnknownContextException;
+import ghidra.program.model.lang.UnknownInstructionException;
 import ghidra.program.model.listing.Program;
 import ghidra.program.model.listing.ProgramContext;
-import ghidra.program.model.mem.*;
+import ghidra.program.model.mem.MemBuffer;
+import ghidra.program.model.mem.MemoryAccessException;
+import ghidra.program.model.mem.MemoryBufferImpl;
 import ghidra.program.model.scalar.Scalar;
 import ghidra.util.StringUtilities;
 
@@ -41,7 +62,7 @@ public class SleighDebugLogger {
 		VERBOSE, MASKS_ONLY
 	}
 
-	private StringBuffer buffer = new StringBuffer();
+	private StringBuilder buffer = new StringBuilder();
 	private int indentLevel = 0;
 	private String indent = "";
 	private boolean atLineStart = true;
@@ -53,12 +74,12 @@ public class SleighDebugLogger {
 	private SleighDebugMode mode;
 
 	private PatternGroup mainGroup = new PatternGroup(null, null);
-	private Map<String, PatternGroup> mainSubGroups = new HashMap<String, PatternGroup>();
+	private Map<String, PatternGroup> mainSubGroups = new HashMap<>();
 	private PatternGroup currentGroup = mainGroup;
 	private int currentDepth = 0;
 
 	private byte[] instructionMask;
-	private List<byte[]> operandMasks = new ArrayList<byte[]>();
+	private List<byte[]> operandMasks = new ArrayList<>();
 
 	private ProcessorContextView context;
 	private SleighInstructionPrototype prototype;
@@ -214,7 +235,7 @@ public class SleighDebugLogger {
 	 */
 	public List<String> getConstructorLineNumbers() {
 
-		List<String> list = new ArrayList<String>();
+		List<String> list = new ArrayList<>();
 		if (prototype == null) {
 			return list;
 		}
@@ -420,7 +441,7 @@ public class SleighDebugLogger {
 	}
 
 	private String getIndent() {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		for (int i = 0; i < indentLevel; i++) {
 			buf.append("   ");
 		}
@@ -598,10 +619,7 @@ public class SleighDebugLogger {
 	 */
 	public void dumpContextPattern(int[] maskvec, int[] valvec, int byteOffset,
 			SleighParserContext pos) {
-		if (!isVerboseEnabled()) {
-			return;
-		}
-		if (contextBaseRegister == null) {
+		if (!isVerboseEnabled() || (contextBaseRegister == null)) {
 			return;
 		}
 
@@ -949,7 +967,7 @@ public class SleighDebugLogger {
 	 * @return binary formatted bytes
 	 */
 	public static String getFormattedBytes(byte[] value) {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		for (int i = 0; i < value.length; i++) {
 			String byteStr = StringUtilities.pad(Integer.toBinaryString(value[i] & 0xff), '0', 8);
 			buf.append(byteStr);
@@ -1207,7 +1225,7 @@ public class SleighDebugLogger {
 
 	private static String getPrototypeRepresentation(SleighInstructionPrototype proto,
 			InstructionContext instrContext) {
-		StringBuffer stringBuffer = new StringBuffer();
+		StringBuilder stringBuffer = new StringBuilder();
 		stringBuffer.append(proto.getMnemonic(instrContext));
 		int n = proto.getNumOperands();
 		for (int i = 0; i < n; i++) {
@@ -1224,7 +1242,7 @@ public class SleighDebugLogger {
 		if (opList == null) {
 			return "<UNSUPPORTED>";
 		}
-		StringBuffer strBuf = new StringBuffer();
+		StringBuilder strBuf = new StringBuilder();
 		for (Object opElem : opList) {
 			if (opElem instanceof Address) {
 				Address opAddr = (Address) opElem;

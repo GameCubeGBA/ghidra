@@ -18,8 +18,12 @@ package ghidra.pcodeCPort.slgh_compile;
 import generic.stl.IteratorSTL;
 import generic.stl.VectorSTL;
 import ghidra.pcodeCPort.opcodes.OpCode;
-import ghidra.pcodeCPort.semantics.*;
+import ghidra.pcodeCPort.semantics.ConstTpl;
 import ghidra.pcodeCPort.semantics.ConstTpl.const_type;
+import ghidra.pcodeCPort.semantics.HandleTpl;
+import ghidra.pcodeCPort.semantics.OpTpl;
+import ghidra.pcodeCPort.semantics.PcodeBuilder;
+import ghidra.pcodeCPort.semantics.VarnodeTpl;
 import ghidra.sleigh.grammar.Location;
 
 public class MacroBuilder extends PcodeBuilder {
@@ -28,7 +32,7 @@ public class MacroBuilder extends PcodeBuilder {
 	private Location location;
 	private boolean haserror = false;
 	private VectorSTL<OpTpl> outvec = null;
-	private VectorSTL<HandleTpl> params = new VectorSTL<HandleTpl>();
+	private VectorSTL<HandleTpl> params = new VectorSTL<>();
 
 	public MacroBuilder(SleighCompile sl,Location loc,VectorSTL<OpTpl> ovec, int lbcnt) {
 		super(lbcnt);

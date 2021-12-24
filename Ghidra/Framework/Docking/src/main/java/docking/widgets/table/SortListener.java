@@ -17,5 +17,5 @@
 package docking.widgets.table;
 
 public interface SortListener {
-	public void modelSorted(TableSortState sortState);
+	void modelSorted(TableSortState sortState);
 }

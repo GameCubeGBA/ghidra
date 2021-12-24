@@ -16,23 +16,23 @@
 package ghidra.util;
 
 public interface ErrorLogger {
-	public void trace(Object originator, Object message);
+	void trace(Object originator, Object message);
 
-	public void trace(Object originator, Object message, Throwable throwable);
+	void trace(Object originator, Object message, Throwable throwable);
 
-	public void debug(Object originator, Object message);
+	void debug(Object originator, Object message);
 
-	public void debug(Object originator, Object message, Throwable throwable);
+	void debug(Object originator, Object message, Throwable throwable);
 
-	public void info(Object originator, Object message);
+	void info(Object originator, Object message);
 
-	public void info(Object originator, Object message, Throwable throwable);
+	void info(Object originator, Object message, Throwable throwable);
 
-	public void warn(Object originator, Object message);
+	void warn(Object originator, Object message);
 
-	public void warn(Object originator, Object message, Throwable throwable);
+	void warn(Object originator, Object message, Throwable throwable);
 
-	public void error(Object originator, Object message);
+	void error(Object originator, Object message);
 
-	public void error(Object originator, Object message, Throwable throwable);
+	void error(Object originator, Object message, Throwable throwable);
 }

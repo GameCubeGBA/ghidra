@@ -15,7 +15,10 @@
  */
 package ghidra.framework.main.logviewer.model;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.io.UnsupportedEncodingException;
 
 /**
  * 
@@ -104,8 +107,7 @@ public class ReverseLineReader {
 
 			if (i == -1) {
 				raf.seek(0);
-				String str = bufToString();
-				return str;
+				return bufToString();
 			}
 
 			byte c = linePlus[i];

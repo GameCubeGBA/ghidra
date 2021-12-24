@@ -30,7 +30,7 @@ public enum OperatingSystem {
 	private String operatingSystemName;
 	private String operatingSystemProperty = System.getProperty("os.name");
 	
-	private OperatingSystem(String operatingSystemName) {
+	OperatingSystem(String operatingSystemName) {
 		this.operatingSystemName = operatingSystemName;
 	}
 

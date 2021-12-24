@@ -15,20 +15,29 @@
  */
 package ghidra.framework.store.db;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
 
-import ghidra.util.task.TaskMonitor;
-import org.junit.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
-import db.*;
+import db.DBRecord;
+import db.Field;
+import db.Schema;
+import db.StringField;
+import db.Table;
 import db.buffers.BufferFile;
 import db.buffers.LocalBufferFile;
 import generic.jar.ResourceFile;
 import generic.test.AbstractGenericTest;
-import ghidra.util.task.TaskMonitorAdapter;
+import ghidra.util.task.TaskMonitor;
 import utilities.util.FileUtilities;
 
 public class PackedDatabaseTest extends AbstractGenericTest {

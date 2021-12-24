@@ -15,12 +15,20 @@
  */
 package docking;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.swing.JMenuBar;
 
 import docking.action.DockingActionIf;
-import docking.menu.*;
+import docking.menu.MenuBarManager;
+import docking.menu.MenuGroupMap;
+import docking.menu.MenuHandler;
+import docking.menu.ToolBarManager;
 
 public class WindowActionManager {
 	private Map<DockingActionIf, DockingActionProxy> actionToProxyMap;

@@ -22,5 +22,5 @@ package ghidra.util.graph;
 public interface KeyedObject
 {
    /** Returns the key for this KeyedObject. */
-   public long key();
+   long key();
 }

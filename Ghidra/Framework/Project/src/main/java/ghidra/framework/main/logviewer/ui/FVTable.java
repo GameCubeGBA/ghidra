@@ -17,20 +17,45 @@ package ghidra.framework.main.logviewer.ui;
 
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import javax.swing.*;
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
+import javax.swing.InputMap;
+import javax.swing.JTable;
+import javax.swing.KeyStroke;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
 import docking.widgets.table.GTable;
-import ghidra.framework.main.logviewer.event.*;
+import ghidra.framework.main.logviewer.event.ArrowDownAction;
+import ghidra.framework.main.logviewer.event.ArrowDownSelectionAction;
+import ghidra.framework.main.logviewer.event.ArrowUpAction;
+import ghidra.framework.main.logviewer.event.ArrowUpSelectionAction;
+import ghidra.framework.main.logviewer.event.EndAction;
+import ghidra.framework.main.logviewer.event.FVEvent;
 import ghidra.framework.main.logviewer.event.FVEvent.EventType;
-import ghidra.framework.main.logviewer.model.*;
+import ghidra.framework.main.logviewer.event.FVEventListener;
+import ghidra.framework.main.logviewer.event.HomeAction;
+import ghidra.framework.main.logviewer.event.PageDownAction;
+import ghidra.framework.main.logviewer.event.PageDownSelectionAction;
+import ghidra.framework.main.logviewer.event.PageUpAction;
+import ghidra.framework.main.logviewer.event.PageUpSelectionAction;
+import ghidra.framework.main.logviewer.model.Chunk;
+import ghidra.framework.main.logviewer.model.ChunkModel;
+import ghidra.framework.main.logviewer.model.ChunkReader;
+import ghidra.framework.main.logviewer.model.Pair;
 import ghidra.util.Msg;
 
 /**
@@ -714,16 +739,10 @@ public class FVTable extends GTable
 				eventListener.send(decrementEvt);
 				return;
 			}
-		}
-
-		// See if the first row is selected; if so, and we're dragging down, we need to load a new
-		// chunk;
-		else if (e.getLocationOnScreen().getY() > tableBottom) {
-			if (IntStream.of(selectedRows).anyMatch(x -> x == (getRowCount() - 1))) {
-				FVEvent incrementEvt = new FVEvent(EventType.INCREMENT_AND_ADD_SELECTION, 1);
-				eventListener.send(incrementEvt);
-				return;
-			}
+		} else if ((e.getLocationOnScreen().getY() > tableBottom) && IntStream.of(selectedRows).anyMatch(x -> x == (getRowCount() - 1))) {
+			FVEvent incrementEvt = new FVEvent(EventType.INCREMENT_AND_ADD_SELECTION, 1);
+			eventListener.send(incrementEvt);
+			return;
 		}
 	}
 

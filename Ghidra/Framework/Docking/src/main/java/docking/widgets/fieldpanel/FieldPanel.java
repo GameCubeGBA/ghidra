@@ -15,15 +15,36 @@
  */
 package docking.widgets.fieldpanel;
 
-import static docking.widgets.EventTrigger.*;
+import static docking.widgets.EventTrigger.INTERNAL_ONLY;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.math.BigInteger;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JViewport;
+import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -32,10 +53,27 @@ import docking.DockingUtils;
 import docking.util.GraphicsUtils;
 import docking.widgets.EventTrigger;
 import docking.widgets.fieldpanel.field.Field;
-import docking.widgets.fieldpanel.internal.*;
+import docking.widgets.fieldpanel.internal.AnchoredLayoutHandler;
+import docking.widgets.fieldpanel.internal.CursorBlinker;
+import docking.widgets.fieldpanel.internal.DefaultBackgroundColorModel;
+import docking.widgets.fieldpanel.internal.LayoutBackgroundColorManager;
+import docking.widgets.fieldpanel.internal.LayoutColorMapFactory;
 import docking.widgets.fieldpanel.internal.PaintContext;
-import docking.widgets.fieldpanel.listener.*;
-import docking.widgets.fieldpanel.support.*;
+import docking.widgets.fieldpanel.listener.FieldInputListener;
+import docking.widgets.fieldpanel.listener.FieldLocationListener;
+import docking.widgets.fieldpanel.listener.FieldMouseListener;
+import docking.widgets.fieldpanel.listener.FieldSelectionListener;
+import docking.widgets.fieldpanel.listener.IndexMapper;
+import docking.widgets.fieldpanel.listener.LayoutListener;
+import docking.widgets.fieldpanel.listener.LayoutModelListener;
+import docking.widgets.fieldpanel.listener.ViewListener;
+import docking.widgets.fieldpanel.support.AnchoredLayout;
+import docking.widgets.fieldpanel.support.BackgroundColorModel;
+import docking.widgets.fieldpanel.support.FieldLocation;
+import docking.widgets.fieldpanel.support.FieldRange;
+import docking.widgets.fieldpanel.support.FieldSelection;
+import docking.widgets.fieldpanel.support.HoverProvider;
+import docking.widgets.fieldpanel.support.ViewerPosition;
 import docking.widgets.indexedscrollpane.IndexScrollListener;
 import docking.widgets.indexedscrollpane.IndexedScrollable;
 import ghidra.util.Msg;
@@ -879,11 +917,9 @@ public class FieldPanel extends JPanel
 			layouts = layoutHandler.positionLayoutsAroundAnchor(index, yPos);
 			notifyScrollListenerViewChangedAndRepaint();
 		}
-		if (xPos != currentViewXpos) {
-			if (viewport != null) {
-				Point viewPosition = viewport.getViewPosition();
-				viewport.setViewPosition(new Point(xPos, viewPosition.y));
-			}
+		if ((xPos != currentViewXpos) && (viewport != null)) {
+			Point viewPosition = viewport.getViewPosition();
+			viewport.setViewPosition(new Point(xPos, viewPosition.y));
 		}
 	}
 
@@ -919,10 +955,7 @@ public class FieldPanel extends JPanel
 		BigInteger firstDisplayedIndex = layouts.get(0).getIndex();
 		BigInteger lastDisplayedIndex = layouts.get(layouts.size() - 1).getIndex();
 
-		if (end.compareTo(firstDisplayedIndex) < 0) { // changes are all before currently displayed
-			return;
-		}
-		if (start.compareTo(lastDisplayedIndex) > 0) { // changes are all after currently displayed
+		if ((end.compareTo(firstDisplayedIndex) < 0) || (start.compareTo(lastDisplayedIndex) > 0)) { // changes are all after currently displayed
 			return;
 		}
 		BigInteger anchorIndex = firstDisplayedIndex;
@@ -1348,7 +1381,7 @@ public class FieldPanel extends JPanel
 	}
 
 	interface KeyAction {
-		public void handleKeyEvent(KeyEvent event);
+		void handleKeyEvent(KeyEvent event);
 	}
 
 	class UpKeyAction implements KeyAction {
@@ -1934,12 +1967,8 @@ public class FieldPanel extends JPanel
 		private boolean doSetCursorPosition(BigInteger index, int fieldNum, int row, int col,
 				EventTrigger trigger) {
 			currentField = null;
-			if (!cursorOn) {
-				return false;
-			}
-
 			// Make sure the position is valid
-			if ((index.compareTo(BigInteger.ZERO) < 0) ||
+			if (!cursorOn || (index.compareTo(BigInteger.ZERO) < 0) ||
 				(index.compareTo(model.getNumIndexes()) >= 0)) {
 				return false;
 			}

@@ -16,20 +16,37 @@
 package ghidra.program.database.symbol;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
-import db.*;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.RecordIterator;
 import db.util.ErrorHandler;
-import ghidra.program.database.*;
+import ghidra.program.database.DBObjectCache;
+import ghidra.program.database.ManagerDB;
+import ghidra.program.database.ProgramDB;
 import ghidra.program.database.map.AddressKeyAddressIterator;
 import ghidra.program.database.map.AddressMap;
-import ghidra.program.model.address.*;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressIterator;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.address.EmptyAddressIterator;
+import ghidra.program.model.symbol.Equate;
+import ghidra.program.model.symbol.EquateReference;
+import ghidra.program.model.symbol.EquateTable;
 import ghidra.program.util.ChangeManager;
 import ghidra.program.util.EquateInfo;
 import ghidra.util.Lock;
 import ghidra.util.UniversalID;
-import ghidra.util.exception.*;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.DuplicateNameException;
+import ghidra.util.exception.InvalidInputException;
+import ghidra.util.exception.NotFoundException;
+import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
 
 /**

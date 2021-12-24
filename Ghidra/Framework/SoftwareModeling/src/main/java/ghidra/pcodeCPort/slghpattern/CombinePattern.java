@@ -16,12 +16,12 @@
  */
 package ghidra.pcodeCPort.slghpattern;
 
-import ghidra.pcodeCPort.context.ParserWalker;
-
 import java.io.PrintStream;
 import java.util.List;
 
 import org.jdom.Element;
+
+import ghidra.pcodeCPort.context.ParserWalker;
 
 public class CombinePattern extends DisjointPattern {
 
@@ -65,10 +65,7 @@ public class CombinePattern extends DisjointPattern {
 
 	@Override
 	public boolean isMatch(ParserWalker pos) {
-		if (!instr.isMatch(pos)) {
-			return false;
-		}
-		if (!context.isMatch(pos)) {
+		if (!instr.isMatch(pos) || !context.isMatch(pos)) {
 			return false;
 		}
 		return true;
@@ -96,21 +93,18 @@ public class CombinePattern extends DisjointPattern {
 			ContextPattern c = (ContextPattern) context.doAnd(b2.context, 0);
 			InstructionPattern i = (InstructionPattern) instr.doAnd(b2.instr, sa);
 			tmp = new CombinePattern(c, i);
+		} else if (b instanceof InstructionPattern) {
+			InstructionPattern b3 = (InstructionPattern) b;
+			InstructionPattern i = (InstructionPattern) instr.doAnd(b3, sa);
+			tmp = new CombinePattern((ContextPattern) context.simplifyClone(), i);
 		}
-		else {
-			if (b instanceof InstructionPattern) {
-				InstructionPattern b3 = (InstructionPattern) b;
-				InstructionPattern i = (InstructionPattern) instr.doAnd(b3, sa);
-				tmp = new CombinePattern((ContextPattern) context.simplifyClone(), i);
+		else { // Must be a ContextPattern
+			ContextPattern c = (ContextPattern) context.doAnd(b, 0);
+			InstructionPattern newpat = (InstructionPattern) instr.simplifyClone();
+			if (sa < 0) {
+				newpat.shiftInstruction(-sa);
 			}
-			else { // Must be a ContextPattern
-				ContextPattern c = (ContextPattern) context.doAnd(b, 0);
-				InstructionPattern newpat = (InstructionPattern) instr.simplifyClone();
-				if (sa < 0) {
-					newpat.shiftInstruction(-sa);
-				}
-				tmp = new CombinePattern(c, newpat);
-			}
+			tmp = new CombinePattern(c, newpat);
 		}
 		return tmp;
 	}
@@ -128,16 +122,13 @@ public class CombinePattern extends DisjointPattern {
 			ContextPattern c = (ContextPattern) context.commonSubPattern(b2.context, 0);
 			InstructionPattern i = (InstructionPattern) instr.commonSubPattern(b2.instr, sa);
 			tmp = new CombinePattern(c, i);
+		} else if (b instanceof InstructionPattern) {
+			InstructionPattern b3 = (InstructionPattern) b;
+			tmp = instr.commonSubPattern(b3, sa);
 		}
 		else {
-			if (b instanceof InstructionPattern) {
-				InstructionPattern b3 = (InstructionPattern) b;
-				tmp = instr.commonSubPattern(b3, sa);
-			}
-			else {
-				// Must be a ContextPattern
-				tmp = context.commonSubPattern(b, 0);
-			}
+			// Must be a ContextPattern
+			tmp = context.commonSubPattern(b, 0);
 		}
 		return tmp;
 	}

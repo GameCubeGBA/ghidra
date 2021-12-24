@@ -51,10 +51,7 @@ public class VersionControlShowHistoryAction extends VersionControlAction {
 	@Override
 	public boolean isEnabledForContext(DomainFileContext context) {
 		List<DomainFile> domainFiles = context.getSelectedFiles();
-		if (domainFiles.size() != 1) {
-			return false;
-		}
-		if (isFileSystemBusy()) {
+		if ((domainFiles.size() != 1) || isFileSystemBusy()) {
 			return false; // don't block; we should get called again later
 		}
 
@@ -67,11 +64,7 @@ public class VersionControlShowHistoryAction extends VersionControlAction {
 	 */
 	private void showHistory(List<DomainFile> domainFiles) {
 
-		if (!checkRepositoryConnected()) {
-			return;
-		}
-
-		if (domainFiles.size() != 1) {
+		if (!checkRepositoryConnected() || (domainFiles.size() != 1)) {
 			return;
 		}
 

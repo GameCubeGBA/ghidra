@@ -33,7 +33,7 @@ public interface AddressCorrelator {
 	 * @return an AddressCorrelation that represents a mapping of the addresses from the
 	 * source function to the destination function.
 	 */
-	public AddressCorrelation correlate(Function sourceFunction, Function destinationFunction);
+	AddressCorrelation correlate(Function sourceFunction, Function destinationFunction);
 
 	/**
 	 * Returns an address mapping from one piece of data to another.
@@ -42,23 +42,23 @@ public interface AddressCorrelator {
 	 * @return an AddressCorrelation that represents a mapping of the addresses from the
 	 * source data to the destination data.
 	 */
-	public AddressCorrelation correlate(Data sourceData, Data destinationData);
+	AddressCorrelation correlate(Data sourceData, Data destinationData);
 
 	/**
 	 * Returns the current Option settings for this correlator.
 	 * @return the current Option settings for this correlator.
 	 */
-	public ToolOptions getOptions();
+	ToolOptions getOptions();
 
 	/**
 	 * Sets the options to use for this correlator.
 	 * @param options the options to use for this correlator.
 	 */
-	public void setOptions(ToolOptions options);
+	void setOptions(ToolOptions options);
 
 	/**
 	 * Returns the options with the default settings for this correlator.
 	 * @return  the options with the default settings for this correlator.
 	 */
-	public Options getDefaultOptions();
+	Options getDefaultOptions();
 }

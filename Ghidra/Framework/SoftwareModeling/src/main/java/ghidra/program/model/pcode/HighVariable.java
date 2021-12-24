@@ -157,7 +157,7 @@ public abstract class HighVariable {
 
 		type = null;
 
-		ArrayList<Varnode> vnlist = new ArrayList<Varnode>();
+		ArrayList<Varnode> vnlist = new ArrayList<>();
 		if (parser.peek().isStart()) {
 			type = function.getDataTypeManager().readXMLDataType(parser);
 		}
@@ -183,10 +183,7 @@ public abstract class HighVariable {
 	 * @return true if this needs dynamic storage
 	 */
 	public boolean requiresDynamicStorage() {
-		if (represent.isUnique()) {
-			return true;		// Temporary Varnodes always need dynamic storage
-		}
-		if (represent.getAddress().isStackAddress() && !represent.isAddrTied()) {
+		if (represent.isUnique() || (represent.getAddress().isStackAddress() && !represent.isAddrTied())) {
 			return true;
 		}
 		return false;

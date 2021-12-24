@@ -15,10 +15,17 @@
  */
 package ghidra.framework.main.datatree;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.JPanel;
 import javax.swing.JTree;
@@ -29,12 +36,17 @@ import docking.ActionContext;
 import docking.ComponentProvider;
 import docking.help.Help;
 import docking.help.HelpService;
-import docking.widgets.tree.*;
+import docking.widgets.tree.GTree;
+import docking.widgets.tree.GTreeNode;
+import docking.widgets.tree.GTreeTask;
 import docking.widgets.tree.support.DepthFirstIterator;
 import docking.widgets.tree.support.GTreeSelectionListener;
 import ghidra.framework.main.FrontEndPlugin;
 import ghidra.framework.main.FrontEndTool;
-import ghidra.framework.model.*;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.DomainFileFilter;
+import ghidra.framework.model.DomainFolder;
+import ghidra.framework.model.ProjectData;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.util.HelpLocation;
 import ghidra.util.exception.CancelledException;
@@ -371,7 +383,7 @@ public class ProjectDataTreePanel extends JPanel {
 		String[] pathsArray = new String[expandedPaths.size()];
 		Iterator<TreePath> iterator = expandedPaths.iterator();
 		for (int counter = 0; iterator.hasNext(); counter++) {
-			StringBuffer buffy = new StringBuffer();
+			StringBuilder buffy = new StringBuilder();
 			TreePath treePath = iterator.next();
 			Object[] path = treePath.getPath();
 			for (Object object : path) {
@@ -461,10 +473,7 @@ public class ProjectDataTreePanel extends JPanel {
 	}
 
 	public void checkOpen(MouseEvent e) {
-		if (tool == null) { // dialog use
-			return;
-		}
-		if (e.getButton() != MouseEvent.BUTTON1 || e.getClickCount() != 2) {
+		if ((tool == null) || e.getButton() != MouseEvent.BUTTON1 || e.getClickCount() != 2) {
 			return;
 		}
 

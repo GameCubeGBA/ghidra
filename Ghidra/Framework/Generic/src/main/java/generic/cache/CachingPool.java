@@ -15,7 +15,9 @@
  */
 package generic.cache;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.Objects;
 
 import ghidra.util.timer.GTimer;
 import ghidra.util.timer.GTimerMonitor;
@@ -41,7 +43,7 @@ public class CachingPool<T> {
 
 	private boolean isDisposed;
 	private BasicFactory<T> factory;
-	private Deque<T> cache = new ArrayDeque<T>();
+	private Deque<T> cache = new ArrayDeque<>();
 
 	private long disposeTimeout = TIMEOUT;
 	private GTimerMonitor timerMonitor;

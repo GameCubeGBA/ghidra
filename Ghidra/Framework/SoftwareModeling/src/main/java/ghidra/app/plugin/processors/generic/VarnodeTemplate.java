@@ -18,7 +18,9 @@ package ghidra.app.plugin.processors.generic;
 import java.io.Serializable;
 import java.util.HashMap;
 
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressSpace;
 import ghidra.program.model.pcode.Varnode;
 
 /**
@@ -130,10 +132,7 @@ public class VarnodeTemplate implements Serializable {
     public boolean equals(Object o) {
 		if (o.getClass() != VarnodeTemplate.class) return false;
 		VarnodeTemplate vt = (VarnodeTemplate) o;
-		if (vt.hashCode() != hashCode) return false;
-		if (!vt.space().equals(this.space)) return false;
-		if (!vt.offset().equals(this.offset)) return false;
-		if (!vt.size().equals(this.size)) return false;
+		if ((vt.hashCode() != hashCode) || !vt.space().equals(this.space) || !vt.offset().equals(this.offset) || !vt.size().equals(this.size)) return false;
 		return true;
 	}
 

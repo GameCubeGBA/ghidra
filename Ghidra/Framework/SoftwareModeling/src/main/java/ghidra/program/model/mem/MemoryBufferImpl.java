@@ -17,7 +17,9 @@ package ghidra.program.model.mem;
 
 import java.math.BigInteger;
 
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressOutOfBoundsException;
+import ghidra.program.model.address.AddressOverflowException;
 import ghidra.util.GhidraDataConverter;
 
 /**
@@ -82,16 +84,14 @@ public class MemoryBufferImpl implements MutableMemBuffer {
 
 	@Override
 	public void setPosition(Address addr) {
-		if (minOffset <= maxOffset) {
-			if (addr.getAddressSpace().equals(startAddr.getAddressSpace())) {
-				long diff = addr.subtract(startAddr);
-				if (diff >= minOffset && diff < maxOffset - threshold) {
-					startAddr = addr;
-					minOffset -= (int) diff;
-					maxOffset -= (int) diff;
-					startAddrIndex += diff;
-					return;
-				}
+		if ((minOffset <= maxOffset) && addr.getAddressSpace().equals(startAddr.getAddressSpace())) {
+			long diff = addr.subtract(startAddr);
+			if (diff >= minOffset && diff < maxOffset - threshold) {
+				startAddr = addr;
+				minOffset -= (int) diff;
+				maxOffset -= (int) diff;
+				startAddrIndex += diff;
+				return;
 			}
 		}
 		startAddr = addr;

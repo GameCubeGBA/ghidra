@@ -91,8 +91,7 @@ public class CombinePattern extends DisjointPattern {
 			res1.shiftInstruction(-sa);
 		else
 			res2.shiftInstruction(sa);
-		OrPattern tmp = new OrPattern(res1, res2);
-		return tmp;
+		return new OrPattern(res1, res2);
 	}
 
 	/* (non-Javadoc)
@@ -108,19 +107,16 @@ public class CombinePattern extends DisjointPattern {
 			ContextPattern c = (ContextPattern) context.doAnd(((CombinePattern) b).context, 0);
 			InstructionPattern i = (InstructionPattern) instr.doAnd(((CombinePattern) b).instr, sa);
 			tmp = new CombinePattern(c, i);
+		} else if (b instanceof InstructionPattern) {
+			InstructionPattern i = (InstructionPattern) instr.doAnd(b, sa);
+			tmp = new CombinePattern((ContextPattern) context.simplifyClone(), i);
 		}
-		else {
-			if (b instanceof InstructionPattern) {
-				InstructionPattern i = (InstructionPattern) instr.doAnd(b, sa);
-				tmp = new CombinePattern((ContextPattern) context.simplifyClone(), i);
-			}
-			else {		// Must be a ContextPattern
-				ContextPattern c = (ContextPattern) context.doAnd(b, 0);
-				InstructionPattern newpat = (InstructionPattern) instr.simplifyClone();
-				if (sa < 0)
-					newpat.shiftInstruction(-sa);
-				tmp = new CombinePattern(c, newpat);
-			}
+		else {		// Must be a ContextPattern
+			ContextPattern c = (ContextPattern) context.doAnd(b, 0);
+			InstructionPattern newpat = (InstructionPattern) instr.simplifyClone();
+			if (sa < 0)
+				newpat.shiftInstruction(-sa);
+			tmp = new CombinePattern(c, newpat);
 		}
 		return tmp;
 	}

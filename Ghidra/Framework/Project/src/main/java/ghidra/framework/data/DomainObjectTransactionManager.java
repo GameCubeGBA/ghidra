@@ -18,7 +18,12 @@ package ghidra.framework.data;
 import java.io.IOException;
 import java.util.LinkedList;
 
-import ghidra.framework.model.*;
+import ghidra.framework.model.AbortedTransactionListener;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.DomainObject;
+import ghidra.framework.model.DomainObjectChangeRecord;
+import ghidra.framework.model.Transaction;
+import ghidra.framework.model.TransactionListener;
 import ghidra.util.Msg;
 import ghidra.util.SystemUtilities;
 import ghidra.util.datastruct.WeakDataStructureFactory;

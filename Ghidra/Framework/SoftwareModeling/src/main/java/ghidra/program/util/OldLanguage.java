@@ -15,18 +15,53 @@
  */
 package ghidra.program.util;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
-import org.jdom.*;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXNotRecognizedException;
 
 import generic.jar.ResourceFile;
 import ghidra.app.plugin.processors.generic.MemoryBlockDefinition;
-import ghidra.program.model.address.*;
-import ghidra.program.model.lang.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.address.DefaultAddressFactory;
+import ghidra.program.model.address.GenericAddressSpace;
+import ghidra.program.model.address.SegmentedAddressSpace;
+import ghidra.program.model.lang.BasicCompilerSpecDescription;
+import ghidra.program.model.lang.BasicLanguageDescription;
+import ghidra.program.model.lang.CompilerSpec;
+import ghidra.program.model.lang.CompilerSpecDescription;
+import ghidra.program.model.lang.CompilerSpecID;
+import ghidra.program.model.lang.CompilerSpecNotFoundException;
+import ghidra.program.model.lang.Endian;
+import ghidra.program.model.lang.InstructionPrototype;
+import ghidra.program.model.lang.InvalidPrototype;
+import ghidra.program.model.lang.Language;
+import ghidra.program.model.lang.LanguageCompilerSpecPair;
+import ghidra.program.model.lang.LanguageDescription;
+import ghidra.program.model.lang.LanguageID;
+import ghidra.program.model.lang.OldLanguageMappingService;
+import ghidra.program.model.lang.ParallelInstructionLanguageHelper;
+import ghidra.program.model.lang.Processor;
+import ghidra.program.model.lang.ProcessorContext;
+import ghidra.program.model.lang.Register;
+import ghidra.program.model.lang.RegisterBuilder;
+import ghidra.program.model.lang.RegisterManager;
 import ghidra.program.model.listing.DefaultProgramContext;
 import ghidra.program.model.mem.MemBuffer;
 import ghidra.program.model.util.AddressLabelInfo;
@@ -42,7 +77,7 @@ class OldLanguage implements Language {
 	private AddressFactory addressFactory;
 	private RegisterManager registerMgr;
 	private List<CompilerSpecDescription> associatedCompilerSpecs =
-		new ArrayList<CompilerSpecDescription>();
+		new ArrayList<>();
 
 	private final ResourceFile oldLangFile;
 
@@ -203,13 +238,7 @@ class OldLanguage implements Language {
 			parseOldLanguage(root, descriptionOnly);
 
 		}
-		catch (SAXNotRecognizedException e) {
-			throw new IOException("Failed to parse old language: " + oldLangFile, e);
-		}
-		catch (JDOMException e) {
-			throw new IOException("Failed to parse old language: " + oldLangFile, e);
-		}
-		catch (SAXException e) {
+		catch (JDOMException | SAXException e) {
 			throw new IOException("Failed to parse old language: " + oldLangFile, e);
 		}
 		finally {
@@ -327,8 +356,8 @@ class OldLanguage implements Language {
 			throw new SAXException(
 				"Missing required " + element.getName() + " '" + name + "' attribute");
 		}
-		boolean val = valStr.equalsIgnoreCase("yes") | valStr.equalsIgnoreCase("true");
-		if (!val && !valStr.equalsIgnoreCase("no") & !valStr.equalsIgnoreCase("false")) {
+		boolean val = "yes".equalsIgnoreCase(valStr) | "true".equalsIgnoreCase(valStr);
+		if (!val && !"no".equalsIgnoreCase(valStr) & !"false".equalsIgnoreCase(valStr)) {
 			throw new SAXException(
 				"invalid boolean attribute value " + name + "=\"" + valStr + "\"");
 		}
@@ -450,7 +479,7 @@ class OldLanguage implements Language {
 
 	private AddressFactory parseAddressSpaces(Element element) throws SAXException {
 		AddressSpace defaultSpace = null;
-		List<AddressSpace> list = new ArrayList<AddressSpace>();
+		List<AddressSpace> list = new ArrayList<>();
 		List<?> children = element.getChildren();
 		Iterator<?> iter = children.iterator();
 		int unique = 0; // used by old address map
@@ -536,7 +565,7 @@ class OldLanguage implements Language {
 			Element childElement = (Element) iter.next();
 			String elementName = childElement.getName();
 			String text = childElement.getText().trim();
-			if (elementName.equals("name")) {
+			if ("name".equals(elementName)) {
 				LanguageCompilerSpecPair pair =
 					OldLanguageMappingService.lookupMagicString(text, false);
 				if (pair != null) {
@@ -547,16 +576,16 @@ class OldLanguage implements Language {
 					throw new SAXException("Failed to map old language name: " + text);
 				}
 			}
-			else if (elementName.equals("id")) {
+			else if ("id".equals(elementName)) {
 				id = new LanguageID(text);
 			}
-			else if (elementName.equals("processor")) {
+			else if ("processor".equals(elementName)) {
 				processor = Processor.findOrPossiblyCreateProcessor(text);
 			}
-			else if (elementName.equals("variant")) {
+			else if ("variant".equals(elementName)) {
 				variant = text;
 			}
-			else if (elementName.equals("size")) {
+			else if ("size".equals(elementName)) {
 				try {
 					size = Integer.parseInt(text);
 				}
@@ -570,7 +599,7 @@ class OldLanguage implements Language {
 		}
 
 		// An empty compiler spec list indicates that the "id" element was specified
-		List<CompilerSpecDescription> complierSpecList = new ArrayList<CompilerSpecDescription>();
+		List<CompilerSpecDescription> complierSpecList = new ArrayList<>();
 		if (compilerSpecID != null) {
 			complierSpecList.add(
 				new BasicCompilerSpecDescription(compilerSpecID, compilerSpecID.getIdAsString()));
@@ -624,7 +653,7 @@ class OldLanguage implements Language {
 
 	@Override
 	public List<CompilerSpecDescription> getCompatibleCompilerSpecDescriptions() {
-		return new ArrayList<CompilerSpecDescription>(associatedCompilerSpecs);
+		return new ArrayList<>(associatedCompilerSpecs);
 	}
 
 	@Override

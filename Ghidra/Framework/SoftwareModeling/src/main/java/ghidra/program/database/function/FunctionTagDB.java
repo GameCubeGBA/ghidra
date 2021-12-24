@@ -186,8 +186,7 @@ public class FunctionTagDB extends DatabaseObject implements FunctionTag {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((getComment() == null) ? 0 : getComment().hashCode());
-		result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
-		return result;
+		return prime * result + ((getName() == null) ? 0 : getName().hashCode());
 	}
 
 	@Override
@@ -195,10 +194,7 @@ public class FunctionTagDB extends DatabaseObject implements FunctionTag {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (!(obj instanceof FunctionTag)) {
+		if ((obj == null) || !(obj instanceof FunctionTag)) {
 			return false;
 		}
 

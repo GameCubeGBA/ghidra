@@ -23,7 +23,10 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Random;
 
-import org.junit.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import generic.test.AbstractGenericTest;
 import ghidra.util.Msg;

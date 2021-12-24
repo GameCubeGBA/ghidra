@@ -20,7 +20,6 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.symbol.FlowType;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  *  CodeBlockReferenceImpl implements a CodeBlockReference.
@@ -114,11 +113,9 @@ public class CodeBlockReferenceImpl implements CodeBlockReference {
 			//        address then got the block starting at from the model,
 			//        you would get null, so maybe the model should be changed
 			//        to return a block at this address....
-			if (blockNeeded == null) {
-				if (model instanceof SimpleBlockModel) {
-					blockNeeded =
-						((SimpleBlockModel) model).createSimpleDataBlock(addrInBlock, addrInBlock);
-				}
+			if ((blockNeeded == null) && (model instanceof SimpleBlockModel)) {
+				blockNeeded =
+					((SimpleBlockModel) model).createSimpleDataBlock(addrInBlock, addrInBlock);
 			}
 		}
 		return blockNeeded;

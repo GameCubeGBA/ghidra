@@ -18,20 +18,29 @@ package ghidra.program.model.pcode;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.xml.sax.*;
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 import ghidra.program.model.address.Address;
 import ghidra.program.model.data.DataType;
 import ghidra.program.model.data.VoidDataType;
-import ghidra.program.model.lang.*;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.lang.CompilerSpec;
+import ghidra.program.model.lang.Language;
+import ghidra.program.model.lang.PrototypeModel;
+import ghidra.program.model.listing.Function;
 import ghidra.program.model.listing.Function.FunctionUpdateType;
+import ghidra.program.model.listing.Parameter;
+import ghidra.program.model.listing.ParameterImpl;
+import ghidra.program.model.listing.Variable;
 import ghidra.program.model.symbol.SourceType;
 import ghidra.util.Msg;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.exception.InvalidInputException;
 import ghidra.util.xml.SpecXmlUtils;
-import ghidra.xml.*;
+import ghidra.xml.XmlElement;
+import ghidra.xml.XmlPullParser;
+import ghidra.xml.XmlPullParserFactory;
 
 /**
  * 
@@ -142,7 +151,7 @@ public class HighParamID extends PcodeSyntaxTree {
 		}
 		while (!parser.peek().isEnd()) {
 			XmlElement subel = parser.peek();
-			if (subel.getName().equals("addr")) {
+			if ("addr".equals(subel.getName())) {
 				subel = parser.start("addr");
 				functionaddress = AddressXML.readXML(subel, getAddressFactory());
 				parser.end(subel);
@@ -152,11 +161,11 @@ public class HighParamID extends PcodeSyntaxTree {
 					throw new PcodeXMLException("Mismatched address in function tag");
 				}
 			}
-			else if (subel.getName().equals("proto")) {
+			else if ("proto".equals(subel.getName())) {
 				subel = parser.start("proto");
 				modelname = subel.getAttribute("model");
 				String val = subel.getAttribute("extrapop");
-				if (val.equals("unknown")) {
+				if ("unknown".equals(val)) {
 					protoextrapop = PrototypeModel.UNKNOWN_EXTRAPOP;
 				}
 				else {
@@ -164,10 +173,10 @@ public class HighParamID extends PcodeSyntaxTree {
 				}
 				parser.end(subel);
 			}
-			else if (subel.getName().equals("input")) {
+			else if ("input".equals(subel.getName())) {
 				parseParamMeasureXML(parser, inputlist, "input");
 			}
-			else if (subel.getName().equals("output")) {
+			else if ("output".equals(subel.getName())) {
 				parseParamMeasureXML(parser, outputlist, "output");
 			}
 			else {
@@ -229,9 +238,7 @@ public class HighParamID extends PcodeSyntaxTree {
 	static public XmlPullParser stringTree(String xml, ErrorHandler handler)
 			throws PcodeXMLException {
 		try {
-			XmlPullParser parser =
-				XmlPullParserFactory.create(xml, "Decompiler Result Parser", handler, false);
-			return parser;
+			return XmlPullParserFactory.create(xml, "Decompiler Result Parser", handler, false);
 		}
 		catch (Exception e) {
 			throw new PcodeXMLException("XML parsing error: " + e.getMessage(), e);
@@ -268,7 +275,7 @@ public class HighParamID extends PcodeSyntaxTree {
 					dataType = dtManage.findUndefined(vn.getSize());
 				}
 				//Msg.debug(this, "func: " + func.getName() + " -- type: " + dataType.getName());
-				if (!(dataType == null || dataType instanceof VoidDataType)) {
+				if (((dataType != null) && !(dataType instanceof VoidDataType))) {
 					func.setReturn(dataType, buildStorage(vn), SourceType.ANALYSIS);
 				}
 			}
@@ -316,10 +323,7 @@ public class HighParamID extends PcodeSyntaxTree {
 			}
 
 		}
-		catch (InvalidInputException e) {
-			Msg.error(this, e.getMessage());
-		}
-		catch (DuplicateNameException e) {
+		catch (InvalidInputException | DuplicateNameException e) {
 			Msg.error(this, e.getMessage());
 		}
 	}

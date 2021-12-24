@@ -18,5 +18,5 @@ package ghidra.program.database.util;
 import db.DBRecord;
 
 public interface RecordFilter {
-	public boolean matches(DBRecord record);
+	boolean matches(DBRecord record);
 }

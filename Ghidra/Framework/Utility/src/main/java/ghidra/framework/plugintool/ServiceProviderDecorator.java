@@ -15,7 +15,9 @@
  */
 package ghidra.framework.plugintool;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 import ghidra.framework.plugintool.util.ServiceListener;
 

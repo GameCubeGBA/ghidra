@@ -16,11 +16,15 @@
 package ghidra.graph.viewer.event.mouse;
 
 import java.awt.Point;
-import java.awt.event.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 
 import docking.DockingUtils;
 import edu.uci.ics.jung.visualization.control.AbstractGraphMousePlugin;
-import ghidra.graph.viewer.*;
+import ghidra.graph.viewer.VisualEdge;
+import ghidra.graph.viewer.VisualGraphViewUpdater;
+import ghidra.graph.viewer.VisualVertex;
 
 public class VisualGraphScreenPositioningPlugin<V extends VisualVertex, E extends VisualEdge<V>>
 		extends AbstractGraphMousePlugin

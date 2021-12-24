@@ -357,7 +357,7 @@ public final class OperandType {
 	 * @return the string rep
 	 */
 	public static String toString(int operandType) {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 
 		//*******************************
 
@@ -461,7 +461,7 @@ public final class OperandType {
 		return buf.toString();
 	}
 
-	private static void append(StringBuffer buf, String str) {
+	private static void append(StringBuilder buf, String str) {
 		if (buf.length() > 0) {
 			buf.append(" | ");
 		}

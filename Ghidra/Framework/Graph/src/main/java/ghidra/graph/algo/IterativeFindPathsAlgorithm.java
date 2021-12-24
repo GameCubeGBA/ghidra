@@ -15,7 +15,17 @@
  */
 package ghidra.graph.algo;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.Stack;
 
 import org.apache.commons.collections4.map.LazyMap;
 import org.apache.commons.collections4.set.ListOrderedSet;
@@ -132,8 +142,7 @@ public class IterativeFindPathsAlgorithm<V, E extends GEdge<V>>
 
 		blockedSet.remove(v);
 		setStatus(v, STATUS.WAITING);
-		Set<V> set = blockedBackEdgesMap.get(v);
-		return set;
+		return blockedBackEdgesMap.get(v);
 	}
 
 	private void blockBackEdge(V u, V v) {
@@ -235,8 +244,7 @@ public class IterativeFindPathsAlgorithm<V, E extends GEdge<V>>
 				return null;
 			}
 
-			Node node = new Node(this, unexplored.pop());
-			return node;
+			return new Node(this, unexplored.pop());
 		}
 
 		@Override

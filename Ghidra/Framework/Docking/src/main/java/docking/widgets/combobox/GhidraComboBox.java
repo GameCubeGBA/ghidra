@@ -18,13 +18,24 @@ package docking.widgets.combobox;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Vector;
 
-import javax.swing.*;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.ActionMap;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.plaf.ComboBoxUI;
-import javax.swing.text.*;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultStyledDocument;
 
 import docking.widgets.GComponent;
 
@@ -114,12 +125,7 @@ public class GhidraComboBox<E> extends JComboBox<E> implements GComponent {
 		Object object = getEditor().getEditorComponent();
 		if (object instanceof JTextField) {
 			JTextField textField = (JTextField) object;
-			textField.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					notifyActionListeners(e);
-				}
-			});
+			textField.addActionListener(e -> notifyActionListeners(e));
 			textField.setDocument(new InterceptedInputDocument());
 			textField.getDocument().addDocumentListener(new DocumentListener() {
 				@Override
@@ -308,10 +314,7 @@ public class GhidraComboBox<E> extends JComboBox<E> implements GComponent {
 	}
 
 	private String matchHistory(String input) {
-		if (setSelectedFlag) {
-			return null;
-		}
-		if (input == null) {
+		if (setSelectedFlag || (input == null)) {
 			return null;
 		}
 		int count = getItemCount();

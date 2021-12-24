@@ -72,7 +72,7 @@ public final class SimpleCRC32 {
 		755167117
 	};
 
-	public static final int hashOneByte(int hashcode,int val) {
+	public static int hashOneByte(int hashcode,int val) {
 		return crc32tab[(hashcode ^ val)&0xff] ^ (hashcode>>>8);
 	}
 }

@@ -15,8 +15,13 @@
  */
 package docking.actions;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map.Entry;
+import java.util.Objects;
+import java.util.Set;
+import java.util.WeakHashMap;
 
 import javax.swing.KeyStroke;
 
@@ -26,7 +31,10 @@ import org.apache.commons.lang3.StringUtils;
 
 import docking.ActionContext;
 import docking.DockingWindowManager;
-import docking.action.*;
+import docking.action.DockingAction;
+import docking.action.DockingActionIf;
+import docking.action.KeyBindingData;
+import docking.action.KeyBindingType;
 import docking.tool.ToolConstants;
 import ghidra.framework.options.OptionsChangeListener;
 import ghidra.framework.options.ToolOptions;
@@ -205,8 +213,7 @@ public class SharedStubKeyBindingAction extends DockingAction implements Options
 	}
 
 	private KeyStroke getKeyStrokeFromOptions(KeyStroke validatedKeyStroke) {
-		KeyStroke ks = keyBindingOptions.getKeyStroke(getFullName(), validatedKeyStroke);
-		return ks;
+		return keyBindingOptions.getKeyStroke(getFullName(), validatedKeyStroke);
 	}
 
 	private KeyStroke getKeyStroke(KeyBindingData data) {

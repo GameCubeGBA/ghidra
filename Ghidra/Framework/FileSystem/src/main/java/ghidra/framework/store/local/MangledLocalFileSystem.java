@@ -15,12 +15,16 @@
  */
 package ghidra.framework.store.local;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
 import ghidra.framework.store.FolderNotEmptyException;
-import ghidra.util.*;
+import ghidra.util.InvalidNameException;
+import ghidra.util.NamingUtilities;
+import ghidra.util.ReadOnlyException;
 import ghidra.util.exception.DuplicateFileException;
 import utilities.util.FileUtilities;
 
@@ -237,10 +241,8 @@ public class MangledLocalFileSystem extends LocalFileSystem {
 			throw new FileNotFoundException(folderPath + " does not exist or is not a directory");
 		}
 		String[] contents = file.list();
-		if (contents.length != 0) {
-			if (contents.length > 1 || !".properties".equals(contents[0])) {
-				throw new FolderNotEmptyException(folderPath + " is not empty");
-			}
+		if ((contents.length != 0) && (contents.length > 1 || !".properties".equals(contents[0]))) {
+			throw new FolderNotEmptyException(folderPath + " is not empty");
 		}
 		FileUtilities.deleteDir(file);
 
@@ -382,7 +384,7 @@ public class MangledLocalFileSystem extends LocalFileSystem {
 	 */
 	private String toSystemDependantSeparator(String path) {
 		int n = path.length();
-		StringBuffer sb = new StringBuffer(n - 1);
+		StringBuilder sb = new StringBuilder(n - 1);
 		for (int i = 1; i < n; i++) {
 			char c = path.charAt(i);
 			c = (c == SEPARATOR_CHAR) ? File.separatorChar : c;

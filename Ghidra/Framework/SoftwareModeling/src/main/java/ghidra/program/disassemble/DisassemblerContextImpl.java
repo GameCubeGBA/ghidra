@@ -15,13 +15,22 @@
  */
 package ghidra.program.disassemble;
 
-import ghidra.program.model.address.*;
-import ghidra.program.model.lang.*;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressOverflowException;
+import ghidra.program.model.address.AddressRange;
+import ghidra.program.model.lang.DisassemblerContext;
+import ghidra.program.model.lang.Register;
+import ghidra.program.model.lang.RegisterValue;
 import ghidra.program.model.listing.ContextChangeException;
 import ghidra.program.model.listing.ProgramContext;
-
-import java.math.BigInteger;
-import java.util.*;
 
 /**
  * Maintains processor state information during disassembly and analysis.  Tracks register state 
@@ -94,12 +103,12 @@ public class DisassemblerContextImpl implements DisassemblerContext {
 		this.contextRegister = programContext.getBaseContextRegister();
 // TODO: Can contextRegister be null ??
 		contextRegisterValue = new RegisterValue(contextRegister);
-		registerStateMap = new HashMap<Register, RegisterValue>();
+		registerStateMap = new HashMap<>();
 
-		futureFlowRegisterStateMaps = new HashMap<Address, Map<Address, Map<Register, RegisterValue>>>();
+		futureFlowRegisterStateMaps = new HashMap<>();
 		
 		// add a flow for the default Address.NO_ADDRESS
-		noAddressFutureRegisterStateMap = new HashMap<Address, Map<Register, RegisterValue>>();
+		noAddressFutureRegisterStateMap = new HashMap<>();
 		futureFlowRegisterStateMaps.put(Address.NO_ADDRESS, noAddressFutureRegisterStateMap);
 	}
 
@@ -170,7 +179,7 @@ public class DisassemblerContextImpl implements DisassemblerContext {
 	 * @param destAddr the address at which to save the current processor state.
 	 */
 	public ArrayList<RegisterValue> mergeToFutureFlowState(Address fromAddr, Address destAddr) {
-		ArrayList<RegisterValue> collisionList = new ArrayList<RegisterValue>();
+		ArrayList<RegisterValue> collisionList = new ArrayList<>();
 		if (destAddr.equals(currentAddress)) {
 			return collisionList;
 		}
@@ -451,7 +460,7 @@ public class DisassemblerContextImpl implements DisassemblerContext {
 		if (fromAddr == Address.NO_ADDRESS) {
 			// for NO_ADDRESS flow from, always look up by the destAddr,
 
-            stateMap = futureRegisterStateMap.computeIfAbsent(destAddr, k -> new HashMap<Register, RegisterValue>());
+            stateMap = futureRegisterStateMap.computeIfAbsent(destAddr, k -> new HashMap<>());
 
 			// didn't find a flow from map, create it
         } else {
@@ -460,7 +469,7 @@ public class DisassemblerContextImpl implements DisassemblerContext {
 
 			// didn't find a flow to map, create it
 			if (futureRegisterStateMap == null) {
-				futureRegisterStateMap = new HashMap<Address, Map<Register, RegisterValue>>();
+				futureRegisterStateMap = new HashMap<>();
 				futureFlowRegisterStateMaps.put(destAddr,
 						futureRegisterStateMap);
 			} else {
@@ -469,7 +478,7 @@ public class DisassemblerContextImpl implements DisassemblerContext {
 
 			// didn't find a flow from map, create it
 			if (stateMap == null) {
-				stateMap = new HashMap<Register, RegisterValue>();
+				stateMap = new HashMap<>();
 				futureRegisterStateMap.put(fromAddr, stateMap);
 			}
 		}

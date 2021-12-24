@@ -19,7 +19,11 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.util.NoSuchElementException;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import docking.DialogComponentProvider;
 import docking.widgets.combobox.GhidraComboBox;

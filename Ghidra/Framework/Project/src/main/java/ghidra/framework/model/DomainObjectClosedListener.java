@@ -20,5 +20,5 @@ package ghidra.framework.model;
  * An interface that allows for a callback when a {@link DomainObject} is closed.
  */
 public interface DomainObjectClosedListener {
-	public void domainObjectClosed();
+	void domainObjectClosed();
 }

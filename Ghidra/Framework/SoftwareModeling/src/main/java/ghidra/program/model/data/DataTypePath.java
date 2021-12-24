@@ -84,7 +84,7 @@ public class DataTypePath {
 	 * @return the full path
 	 */
 	public String getPath() {
-		StringBuffer buf = new StringBuffer(categoryPath.getPath());
+		StringBuilder buf = new StringBuilder(categoryPath.getPath());
 		if (buf.charAt(buf.length() - 1) != CategoryPath.DELIMITER_CHAR) {
 			buf.append(CategoryPath.DELIMITER_CHAR);
 		}
@@ -99,8 +99,7 @@ public class DataTypePath {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + categoryPath.hashCode();
-		result = prime * result + dataTypeName.hashCode();
-		return result;
+		return prime * result + dataTypeName.hashCode();
 	}
 
 	@Override
@@ -108,10 +107,7 @@ public class DataTypePath {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
 		}
 		DataTypePath other = (DataTypePath) obj;

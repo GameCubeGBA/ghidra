@@ -17,7 +17,7 @@
 package ghidra.pcodeCPort.slghpatexpress;
 
 import generic.stl.VectorSTL;
-import ghidra.pcodeCPort.utils.*;
+import ghidra.pcodeCPort.utils.MutableInt;
 import ghidra.sleigh.grammar.Location;
 
 

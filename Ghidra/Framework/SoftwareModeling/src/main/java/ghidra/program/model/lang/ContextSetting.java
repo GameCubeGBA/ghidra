@@ -23,7 +23,9 @@ import ghidra.app.plugin.processors.sleigh.SleighException;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.pcode.AddressXML;
 import ghidra.util.xml.SpecXmlUtils;
-import ghidra.xml.*;
+import ghidra.xml.XmlElement;
+import ghidra.xml.XmlParseException;
+import ghidra.xml.XmlPullParser;
 
 /**
  * Class for context configuration information as
@@ -111,16 +113,7 @@ public class ContextSetting {
 	@Override
 	public boolean equals(Object obj) {
 		ContextSetting op2 = (ContextSetting) obj;
-		if (!startAddr.equals(op2.startAddr)) {
-			return false;
-		}
-		if (!endAddr.equals(op2.endAddr)) {
-			return false;
-		}
-		if (!register.equals(op2.register)) {
-			return false;
-		}
-		if (!value.equals(op2.value)) {
+		if (!startAddr.equals(op2.startAddr) || !endAddr.equals(op2.endAddr) || !register.equals(op2.register) || !value.equals(op2.value)) {
 			return false;
 		}
 		return true;
@@ -131,18 +124,17 @@ public class ContextSetting {
 		int hash = startAddr.hashCode();
 		hash = 79 * hash + endAddr.hashCode();
 		hash = 79 * hash + register.hashCode();
-		hash = 79 * hash + value.hashCode();
-		return hash;
+		return 79 * hash + value.hashCode();
 	}
 
 	public static void parseContextSet(List<ContextSetting> resList, XmlPullParser parser,
 			CompilerSpec cspec) throws XmlParseException {
 		XmlElement el = parser.start();
 		boolean isContextReg;
-		if (el.getName().equals("context_set")) {
+		if ("context_set".equals(el.getName())) {
 			isContextReg = true;
 		}
-		else if (el.getName().equals("tracked_set")) {
+		else if ("tracked_set".equals(el.getName())) {
 			isContextReg = false;
 		}
 		else {

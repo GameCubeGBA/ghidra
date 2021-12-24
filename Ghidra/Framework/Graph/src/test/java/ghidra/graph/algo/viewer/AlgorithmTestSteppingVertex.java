@@ -15,12 +15,19 @@
  */
 package ghidra.graph.algo.viewer;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.RenderingHints;
+import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Ellipse2D.Double;
 import java.awt.image.BufferedImage;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
 
 import ghidra.graph.algo.GraphAlgorithmStatusListener.STATUS;
 import ghidra.graph.graphs.AbstractTestVertex;
@@ -142,17 +149,14 @@ public class AlgorithmTestSteppingVertex<V> extends AbstractTestVertex
 	@Override
 	public String toString() {
 		String statusString = status.toString();
-		if (wasEverInPath) {
-			statusString = "";
-		}
-		else if (status == STATUS.BLOCKED) {
+		if (wasEverInPath || (status == STATUS.BLOCKED)) {
 			statusString = "";
 		}
 
 		return v.toString() + " " + statusString;
 	}
 
-	private class ShapeImage {
+	private static class ShapeImage {
 		private Image image;
 		private Shape shape;
 		private String shapeName;

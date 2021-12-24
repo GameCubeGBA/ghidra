@@ -60,17 +60,20 @@ class EquateRefDB extends DatabaseObject implements EquateReference {
 		return record.getLongValue(EquateRefDBAdapter.EQUATE_ID_COL);
 	}
 
+	@Override
 	public Address getAddress() {
 		checkIsValid();
 		long addr = record.getLongValue(EquateRefDBAdapter.ADDR_COL);
 		return addrMap.decodeAddress(addr);
 	}
 
+	@Override
 	public short getOpIndex() {
 		checkIsValid();
 		return record.getShortValue(EquateRefDBAdapter.OP_INDEX_COL);
 	}
 
+	@Override
 	public long getDynamicHashValue() {
 		checkIsValid();
 		return record.getLongValue(EquateRefDBAdapter.HASH_COL);

@@ -17,12 +17,20 @@ package ghidra.program.database.references;
 
 import java.io.IOException;
 
-import db.*;
+import db.DBHandle;
+import db.DBRecord;
+import db.LongField;
+import db.RecordIterator;
+import db.Table;
 import db.util.ErrorHandler;
 import ghidra.program.database.DBObjectCache;
 import ghidra.program.database.ProgramDB;
-import ghidra.program.database.map.*;
-import ghidra.program.model.address.*;
+import ghidra.program.database.map.AddressIndexKeyIterator;
+import ghidra.program.database.map.AddressKeyAddressIterator;
+import ghidra.program.database.map.AddressMap;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressIterator;
+import ghidra.program.model.address.AddressSetView;
 import ghidra.program.model.symbol.RefTypeFactory;
 import ghidra.program.model.symbol.SourceType;
 import ghidra.util.exception.VersionException;

@@ -15,10 +15,10 @@
  * limitations under the License.
  */
 package ghidra.util.prop;
+import java.util.NoSuchElementException;
+
 import ghidra.util.LongIterator;
 import ghidra.util.datastruct.NoSuchIndexException;
-
-import java.util.NoSuchElementException;
 
 /**
  * Class to iterate over indexes of a PropertyMap.
@@ -83,7 +83,8 @@ class LongIteratorImpl implements LongIterator {
 	/**
 	 * Returns true if the iterator has more indexes.
 	 */
-    public boolean hasNext(){
+    @Override
+	public boolean hasNext(){
 
 		if (doesHaveNext) {
 			return true;
@@ -94,7 +95,8 @@ class LongIteratorImpl implements LongIterator {
 	/**
 	 * Returns the next index in the iterator.
 	 */
-    public long next() {
+    @Override
+	public long next() {
 		if (hasNext()) {
 			doesHaveNext = false;
             doesHavePrevious = true;
@@ -106,7 +108,8 @@ class LongIteratorImpl implements LongIterator {
 	/**
 	 * Return true if the iterator has a previous index.
 	 */
-    public boolean hasPrevious() {
+    @Override
+	public boolean hasPrevious() {
         if (doesHavePrevious) {
 			return true;
 		}
@@ -117,7 +120,8 @@ class LongIteratorImpl implements LongIterator {
 	/**
 	 * Returns the previous index in the iterator.
 	 */
-    public long previous() {
+    @Override
+	public long previous() {
         if (hasPrevious()) {
 			doesHavePrevious = false;
             doesHaveNext = true;

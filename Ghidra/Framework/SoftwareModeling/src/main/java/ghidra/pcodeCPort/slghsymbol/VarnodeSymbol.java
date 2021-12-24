@@ -22,7 +22,9 @@ import org.jdom.Element;
 
 import generic.util.UnsignedDataUtils;
 // A global varnode
-import ghidra.pcodeCPort.context.*;
+import ghidra.pcodeCPort.context.FixedHandle;
+import ghidra.pcodeCPort.context.ParserWalker;
+import ghidra.pcodeCPort.context.SleighError;
 import ghidra.pcodeCPort.pcoderaw.VarnodeData;
 import ghidra.pcodeCPort.semantics.ConstTpl;
 import ghidra.pcodeCPort.semantics.VarnodeTpl;

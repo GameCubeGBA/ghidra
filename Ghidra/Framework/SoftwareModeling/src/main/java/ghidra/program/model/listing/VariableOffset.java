@@ -17,12 +17,20 @@ package ghidra.program.model.listing;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import ghidra.program.model.address.Address;
-import ghidra.program.model.data.*;
+import ghidra.program.model.data.Array;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.DataTypeComponent;
+import ghidra.program.model.data.Pointer;
+import ghidra.program.model.data.Structure;
+import ghidra.program.model.data.TypeDef;
 import ghidra.program.model.lang.Register;
 import ghidra.program.model.scalar.Scalar;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.RefType;
+import ghidra.program.model.symbol.Reference;
+import ghidra.program.model.symbol.StackReference;
 import ghidra.util.SystemUtilities;
 
 /**
@@ -112,7 +120,7 @@ public class VariableOffset {
 	 */
 	@Override
 	public String toString() {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		for (Object obj : getObjects()) {
 			buf.append(obj.toString());
 		}
@@ -132,7 +140,7 @@ public class VariableOffset {
 	private List<Object> getObjects(boolean showScalarAdjustment) {
 
 		DataType dt = variable.getDataType();
-		StringBuffer name = new StringBuffer(variable.getName());
+		StringBuilder name = new StringBuilder(variable.getName());
 
 		long scalarAdjustment = 0;
 		if (showScalarAdjustment && (replacedElement instanceof Scalar)) {
@@ -246,15 +254,7 @@ public class VariableOffset {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (dataAccess ? 1231 : 1237);
-		result = prime * result + (includeScalarAdjustment ? 1231 : 1237);
-		result = prime * result + (indirect ? 1231 : 1237);
-		result = prime * result + (int) (offset ^ (offset >>> 32));
-		result = prime * result + ((replacedElement == null) ? 0 : replacedElement.hashCode());
-		result = prime * result + ((variable == null) ? 0 : variable.hashCode());
-		return result;
+		return Objects.hash(dataAccess, includeScalarAdjustment, indirect, offset, replacedElement, variable);
 	}
 
 	@Override
@@ -263,11 +263,7 @@ public class VariableOffset {
 			return true;
 		}
 
-		if (obj == null) {
-			return false;
-		}
-
-		if (getClass() != obj.getClass()) {
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
 		}
 

@@ -28,13 +28,13 @@ public interface ProcessorContextView {
 	 * @return the base processor context register or null if one
 	 * has not been defined
 	 */
-	public Register getBaseContextRegister();
+	Register getBaseContextRegister();
 
 	/**
 	 * Returns all the Registers for the processor as an unmodifiable list
 	 * @return all the Registers for the processor
 	 */
-	public List<Register> getRegisters();
+	List<Register> getRegisters();
 
 	/**
 	 * Get a Register given the name of a register
@@ -42,7 +42,7 @@ public interface ProcessorContextView {
 	 * @param name the name of the register.
 	 * @return The register with the given name.
 	 */
-	public Register getRegister(String name);
+	Register getRegister(String name);
 
 	/**
 	 * Get the contents of a processor register as a BigInteger object
@@ -50,7 +50,7 @@ public interface ProcessorContextView {
 	 * @return a BigInteger object containing the value of the register if a value exists,
 	 * otherwise null.
 	 */
-	public BigInteger getValue(Register register, boolean signed);
+	BigInteger getValue(Register register, boolean signed);
 
 	/**
 	 * Get the RegisterValue for the given register.
@@ -58,22 +58,22 @@ public interface ProcessorContextView {
 	 * @return RegisterValue object containing the value of the register if a value exists,
 	 * otherwise null.
 	 */
-	public RegisterValue getRegisterValue(Register register);
+	RegisterValue getRegisterValue(Register register);
 
 	/**
 	 * Returns true if a value is defined for the given register.
 	 * @param register the register to check for a value.
 	 * @return true if the given register has a value.
 	 */
-	public boolean hasValue(Register register);
+	boolean hasValue(Register register);
 
-	public static String dumpContextValue(RegisterValue value, String indent) {
+	static String dumpContextValue(RegisterValue value, String indent) {
 		StringBuilder buf = new StringBuilder();
 		dumpContextValue(value, indent, buf);
 		return buf.toString();
 	}
 
-	public static void dumpContextValue(RegisterValue value, String indent, StringBuilder buf) {
+	static void dumpContextValue(RegisterValue value, String indent, StringBuilder buf) {
 		if (indent == null) {
 			indent = "";
 		}

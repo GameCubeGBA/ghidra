@@ -29,19 +29,19 @@ public interface MutableMemBuffer extends MemBuffer {
 	 * @param displacement the amount to adjust the pointer by.
 	 * @throws AddressOverflowException if displacement would cause the buffer position to wrap.
 	 */
-	public void advance(int displacement) throws AddressOverflowException;
+	void advance(int displacement) throws AddressOverflowException;
 
 	/**
 	 * Sets the Address to which offset of 0 points to.
 	 *
 	 * @param addr the new base Address.
 	 */
-	public void setPosition(Address addr);
+	void setPosition(Address addr);
 
 	/**
 	 * Create a cloned copy of this MutableMemBuffer
 	 * 
 	 * @return new cloned instance of this buffer object
 	 */
-	public MutableMemBuffer clone();
+	MutableMemBuffer clone();
 }

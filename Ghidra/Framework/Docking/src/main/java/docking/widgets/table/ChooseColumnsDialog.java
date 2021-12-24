@@ -15,14 +15,27 @@
  */
 package docking.widgets.table;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.*;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-import javax.swing.*;
-import javax.swing.table.*;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableColumnModel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
 
 import docking.DialogComponentProvider;
 import ghidra.util.HelpLocation;
@@ -33,7 +46,7 @@ public class ChooseColumnsDialog extends DialogComponentProvider {
 	private GTable ghidraTable;
 
 	private List<TableColumnWrapper> columnList;
-	private Map<TableColumn, Boolean> selectedMap = new HashMap<TableColumn, Boolean>();
+	private Map<TableColumn, Boolean> selectedMap = new HashMap<>();
 	private final GTableColumnModel columnModel;
 
 	private boolean wasCancelled;
@@ -76,20 +89,10 @@ public class ChooseColumnsDialog extends DialogComponentProvider {
 
 		JPanel buttonPanel = new JPanel();
 		JButton selectAllButton = new JButton("Select All");
-		selectAllButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setAllSelected(true);
-			}
-		});
+		selectAllButton.addActionListener(e -> setAllSelected(true));
 
 		JButton deselectAllButton = new JButton("Deselect All");
-		deselectAllButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setAllSelected(false);
-			}
-		});
+		deselectAllButton.addActionListener(e -> setAllSelected(false));
 
 		buttonPanel.add(selectAllButton);
 		buttonPanel.add(deselectAllButton);
@@ -116,7 +119,7 @@ public class ChooseColumnsDialog extends DialogComponentProvider {
 
 	private void initialize() {
 		List<TableColumn> columns = CollectionUtils.asList(columnModel.getColumns());
-		columnList = new ArrayList<TableColumnWrapper>(columns.size());
+		columnList = new ArrayList<>(columns.size());
 		for (TableColumn column : columns) {
 			boolean visible = columnModel.isVisible(column);
 			selectedMap.put(column, visible);
@@ -156,7 +159,7 @@ public class ChooseColumnsDialog extends DialogComponentProvider {
 			return null;
 		}
 
-		List<Integer> columnIndices = new ArrayList<Integer>();
+		List<Integer> columnIndices = new ArrayList<>();
 		for (TableColumnWrapper columnWrapper : columnList) {
 			if (selectedMap.get(columnWrapper.getTableColumn())) {
 				TableColumn column = columnWrapper.getTableColumn();
@@ -200,14 +203,13 @@ public class ChooseColumnsDialog extends DialogComponentProvider {
 			}
 
 			if (isSelected) {
-				return renderer;
 			}
 
 			return renderer;
 		}
 	}
 
-	private class TableColumnWrapper {
+	private static class TableColumnWrapper {
 		private final TableColumn column;
 
 		TableColumnWrapper(TableColumn column) {

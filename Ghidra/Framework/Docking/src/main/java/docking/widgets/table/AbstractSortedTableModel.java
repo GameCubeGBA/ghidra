@@ -15,7 +15,9 @@
  */
 package docking.widgets.table;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.TableModel;
@@ -161,11 +163,7 @@ public abstract class AbstractSortedTableModel<T> extends AbstractGTableModel<T>
 		for (ColumnSortState state : tableSortState) {
 
 			int index = state.getColumnModelIndex();
-			if (!isSortable(index)) {
-				return false; // the state wants to sort on an unsortable column
-			}
-
-			if (index >= columnCount) {
+			if (!isSortable(index) || (index >= columnCount)) {
 				return false; // requested a column that is larger than the number of columns
 			}
 		}
@@ -202,12 +200,8 @@ public abstract class AbstractSortedTableModel<T> extends AbstractGTableModel<T>
 	}
 
 	private void doSetTableSortState(final TableSortState newSortState) {
-		if (newSortState.equals(pendingSortState)) {
-			return; // there is an upcoming sort that matches the current request
-		}
-
 		// no pending event, is the current state different?
-		if (newSortState.equals(sortState) && pendingSortState == null) {
+		if (newSortState.equals(pendingSortState) || (newSortState.equals(sortState) && pendingSortState == null)) {
 			return; // the current state matches our request
 		}
 
@@ -470,8 +464,7 @@ public abstract class AbstractSortedTableModel<T> extends AbstractGTableModel<T>
 				return result;
 			}
 
-			result = nextComparator.compare(t1, t2);
-			return result;
+			return nextComparator.compare(t1, t2);
 		}
 	}
 
@@ -513,7 +506,7 @@ public abstract class AbstractSortedTableModel<T> extends AbstractGTableModel<T>
 		}
 	}
 
-	private class StringBasedBackupRowToColumnComparator implements Comparator<Object> {
+	private static class StringBasedBackupRowToColumnComparator implements Comparator<Object> {
 
 		@Override
 		public int compare(Object c1, Object c2) {

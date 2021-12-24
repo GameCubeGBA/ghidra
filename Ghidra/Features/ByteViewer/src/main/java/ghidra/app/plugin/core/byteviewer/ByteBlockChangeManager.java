@@ -39,8 +39,6 @@ public class ByteBlockChangeManager {
 	private static String OLD_VALUE = "OldValue";
 	private static String NEW_VALUE = "NewValue";
 
-	private int dummy = 4;
-
 	/**
 	 * Construct new change manager.
 	 */

@@ -16,8 +16,9 @@
  */
 package ghidra.pcodeCPort.slghsymbol;
 
-import generic.stl.SetSTL;
 import java.util.Comparator;
+
+import generic.stl.SetSTL;
 
 
 
@@ -28,6 +29,7 @@ public class SymbolTree extends SetSTL<SleighSymbol>{
 
 }
 class SymbolCompare implements Comparator<SleighSymbol> {
+	@Override
 	public int compare( SleighSymbol o1, SleighSymbol o2 ) {
 		return o1.getName().compareTo(o2.getName());
 	}

@@ -77,17 +77,14 @@ public class FunctionRepeatableCommentFieldLocation extends FunctionLocation {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + Arrays.hashCode(commentArray);
-		return result;
+		return prime * result + Arrays.hashCode(commentArray);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
+		if (!super.equals(obj) || (getClass() != obj.getClass()))
 			return false;
 		FunctionRepeatableCommentFieldLocation other = (FunctionRepeatableCommentFieldLocation) obj;
 		if (!Arrays.equals(commentArray, other.commentArray))

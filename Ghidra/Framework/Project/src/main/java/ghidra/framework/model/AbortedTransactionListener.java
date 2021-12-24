@@ -17,5 +17,5 @@
 package ghidra.framework.model;
 
 public interface AbortedTransactionListener {
-	public void transactionAborted(long transactionID);
+	void transactionAborted(long transactionID);
 }

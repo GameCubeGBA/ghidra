@@ -61,7 +61,7 @@ public enum GenericCallingConvention {
 
 	private final String declarationName;
 
-	private GenericCallingConvention(String declarationName) {
+	GenericCallingConvention(String declarationName) {
 		this.declarationName = declarationName;
 	}
 

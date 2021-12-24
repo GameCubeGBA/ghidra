@@ -15,28 +15,85 @@
  */
 package ghidra.app.plugin.processors.sleigh;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.math.BigInteger;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.antlr.runtime.RecognitionException;
 import org.jdom.JDOMException;
-import org.xml.sax.*;
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 import generic.jar.ResourceFile;
 import generic.stl.Pair;
 import ghidra.app.plugin.processors.generic.MemoryBlockDefinition;
 import ghidra.app.plugin.processors.sleigh.expression.ContextField;
 import ghidra.app.plugin.processors.sleigh.expression.PatternValue;
-import ghidra.app.plugin.processors.sleigh.symbol.*;
+import ghidra.app.plugin.processors.sleigh.symbol.ContextSymbol;
+import ghidra.app.plugin.processors.sleigh.symbol.SubtableSymbol;
+import ghidra.app.plugin.processors.sleigh.symbol.Symbol;
+import ghidra.app.plugin.processors.sleigh.symbol.SymbolTable;
+import ghidra.app.plugin.processors.sleigh.symbol.UseropSymbol;
+import ghidra.app.plugin.processors.sleigh.symbol.VarnodeListSymbol;
+import ghidra.app.plugin.processors.sleigh.symbol.VarnodeSymbol;
 import ghidra.framework.Application;
 import ghidra.pcodeCPort.sleighbase.SleighBase;
 import ghidra.pcodeCPort.slgh_compile.SleighCompileLauncher;
-import ghidra.program.model.address.*;
-import ghidra.program.model.lang.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.address.DefaultAddressFactory;
+import ghidra.program.model.address.GenericAddressSpace;
+import ghidra.program.model.address.OverlayAddressSpace;
+import ghidra.program.model.address.ProtectedAddressSpace;
+import ghidra.program.model.address.SegmentedAddressSpace;
+import ghidra.program.model.lang.BasicCompilerSpec;
+import ghidra.program.model.lang.CompilerSpec;
+import ghidra.program.model.lang.CompilerSpecDescription;
+import ghidra.program.model.lang.CompilerSpecID;
+import ghidra.program.model.lang.CompilerSpecNotFoundException;
+import ghidra.program.model.lang.ContextSetting;
+import ghidra.program.model.lang.Endian;
+import ghidra.program.model.lang.GhidraLanguagePropertyKeys;
+import ghidra.program.model.lang.InjectPayloadJumpAssist;
+import ghidra.program.model.lang.InjectPayloadSegment;
+import ghidra.program.model.lang.InjectPayloadSleigh;
+import ghidra.program.model.lang.InstructionPrototype;
+import ghidra.program.model.lang.InsufficientBytesException;
+import ghidra.program.model.lang.Language;
+import ghidra.program.model.lang.LanguageDescription;
+import ghidra.program.model.lang.LanguageID;
+import ghidra.program.model.lang.NestedDelaySlotException;
+import ghidra.program.model.lang.ParallelInstructionLanguageHelper;
+import ghidra.program.model.lang.Processor;
+import ghidra.program.model.lang.ProcessorContext;
+import ghidra.program.model.lang.Register;
+import ghidra.program.model.lang.RegisterBuilder;
+import ghidra.program.model.lang.RegisterManager;
+import ghidra.program.model.lang.RegisterValue;
+import ghidra.program.model.lang.SleighLanguageDescription;
+import ghidra.program.model.lang.UnknownInstructionException;
 import ghidra.program.model.listing.DefaultProgramContext;
 import ghidra.program.model.mem.MemBuffer;
 import ghidra.program.model.mem.MemoryAccessException;
@@ -45,10 +102,15 @@ import ghidra.program.model.util.AddressLabelInfo;
 import ghidra.program.model.util.ProcessorSymbolType;
 import ghidra.sleigh.grammar.SleighPreprocessor;
 import ghidra.sleigh.grammar.SourceFileIndexer;
-import ghidra.util.*;
+import ghidra.util.ManualEntry;
+import ghidra.util.Msg;
+import ghidra.util.SystemUtilities;
 import ghidra.util.task.TaskMonitor;
 import ghidra.util.xml.SpecXmlUtils;
-import ghidra.xml.*;
+import ghidra.xml.XmlElement;
+import ghidra.xml.XmlParseException;
+import ghidra.xml.XmlPullParser;
+import ghidra.xml.XmlPullParserFactory;
 import utilities.util.FileResolutionResult;
 import utilities.util.FileUtilities;
 
@@ -387,11 +449,9 @@ public class SleighLanguage implements Language {
 	@Override
 	public InstructionPrototype parse(MemBuffer buf, ProcessorContext context, boolean inDelaySlot)
 			throws InsufficientBytesException, UnknownInstructionException {
-		if (alignment != 1) {
-			if (buf.getAddress().getOffset() % alignment != 0) {
-				throw new UnknownInstructionException(
-					"Instructions must be aligned on " + alignment + "byte boundary.");
-			}
+		if ((alignment != 1) && (buf.getAddress().getOffset() % alignment != 0)) {
+			throw new UnknownInstructionException(
+				"Instructions must be aligned on " + alignment + "byte boundary.");
 		}
 
 		SleighInstructionPrototype res = null;
@@ -519,10 +579,7 @@ public class SleighLanguage implements Language {
 			try {
 				initialize(description);
 			}
-			catch (SAXException e) {
-				throw new IOException(e.getMessage());
-			}
-			catch (UnknownInstructionException e) {
+			catch (SAXException | UnknownInstructionException e) {
 				throw new IOException(e.getMessage());
 			}
 		}
@@ -557,7 +614,7 @@ public class SleighLanguage implements Language {
 		XmlPullParser parser = XmlPullParserFactory.create(specFile, SPEC_ERR_HANDLER, false);
 		try {
 			XmlElement nextElement = parser.peek();
-			while (nextElement != null && !nextElement.getName().equals("segmented_address")) {
+			while (nextElement != null && !"segmented_address".equals(nextElement.getName())) {
 				parser.next(); // skip element
 				nextElement = parser.peek();
 			}
@@ -635,7 +692,7 @@ public class SleighLanguage implements Language {
 		XmlElement el = parser.start("processor_spec");
 		while (parser.peek().isStart()) {
 			String elName = parser.peek().getName();
-			if (elName.equals("properties")) {
+			if ("properties".equals(elName)) {
 				XmlElement subel = parser.start();
 				while (!parser.peek().isEnd()) {
 					XmlElement next = parser.start("property");
@@ -646,12 +703,12 @@ public class SleighLanguage implements Language {
 				}
 				parser.end(subel);
 			}
-			else if (elName.equals("programcounter")) {
+			else if ("programcounter".equals(elName)) {
 				XmlElement subel = parser.start();
 				setProgramCounter(subel.getAttribute("register"));
 				parser.end(subel);
 			}
-			else if (elName.equals("data_space")) {
+			else if ("data_space".equals(elName)) {
 				XmlElement subel = parser.start();
 				setDefaultDataSpace(subel.getAttribute("space"));
 				String overrideString = subel.getAttribute("ptr_wordsize");
@@ -664,13 +721,13 @@ public class SleighLanguage implements Language {
 				}
 				parser.end(subel);
 			}
-			else if (elName.equals("context_data")) {
+			else if ("context_data".equals(elName)) {
 				XmlElement subel = parser.start();
 				while (!parser.peek().isEnd()) {
 					XmlElement next = parser.start();
-					boolean isContext = next.getName().equals("context_set");
+					boolean isContext = "context_set".equals(next.getName());
 					Pair<Address, Address> range = parseRange(next);
-					while (parser.peek().getName().equals("set")) {
+					while ("set".equals(parser.peek().getName())) {
 						XmlElement set = parser.start();
 						String name = set.getAttribute("name");
 						String sValue = set.getAttribute("val");
@@ -706,11 +763,11 @@ public class SleighLanguage implements Language {
 				}
 				parser.end(subel);
 			}
-			else if (elName.equals("volatile")) {
+			else if ("volatile".equals(elName)) {
 				XmlElement subel = parser.start();
-				while (!parser.peek().getName().equals("volatile")) {
+				while (!"volatile".equals(parser.peek().getName())) {
 					XmlElement next = parser.start();
-					if (next.getName().equals("register")) {
+					if ("register".equals(next.getName())) {
 						throw new SleighException("no support for volatile registers yet");
 					}
 					Pair<Address, Address> range = parseRange(next);
@@ -723,7 +780,7 @@ public class SleighLanguage implements Language {
 				}
 				parser.end(subel);
 			}
-			else if (elName.equals("jumpassist")) {
+			else if ("jumpassist".equals(elName)) {
 				XmlElement subel = parser.start();
 				String source = "pspec: " + getLanguageID().getIdAsString();
 				String name = subel.getAttribute("name");
@@ -734,9 +791,9 @@ public class SleighLanguage implements Language {
 				}
 				parser.end(subel);
 			}
-			else if (elName.equals("register_data")) {
+			else if ("register_data".equals(elName)) {
 				XmlElement subel = parser.start();
-				while (parser.peek().getName().equals("register")) {
+				while ("register".equals(parser.peek().getName())) {
 					XmlElement reg = parser.start();
 					String registerName = reg.getAttribute("name");
 					String registerRename = reg.getAttribute("rename");
@@ -784,9 +841,9 @@ public class SleighLanguage implements Language {
 				}
 				parser.end(subel);
 			}
-			else if (elName.equals("default_symbols")) {
+			else if ("default_symbols".equals(elName)) {
 				XmlElement subel = parser.start();
-				while (parser.peek().getName().equals("symbol")) {
+				while ("symbol".equals(parser.peek().getName())) {
 					XmlElement symbol = parser.start();
 					String labelName = symbol.getAttribute("name");
 					String addressString = symbol.getAttribute("address");
@@ -808,10 +865,10 @@ public class SleighLanguage implements Language {
 				}
 				parser.end(subel);
 			}
-			else if (elName.equals("default_memory_blocks")) {
+			else if ("default_memory_blocks".equals(elName)) {
 				XmlElement subel = parser.start();
 				List<MemoryBlockDefinition> list = new ArrayList<>();
-				while (parser.peek().getName().equals("memory_block")) {
+				while ("memory_block".equals(parser.peek().getName())) {
 					XmlElement mblock = parser.start();
 					list.add(new MemoryBlockDefinition(mblock));
 					// skip the end tag
@@ -821,27 +878,19 @@ public class SleighLanguage implements Language {
 				defaultMemoryBlocks = new MemoryBlockDefinition[list.size()];
 				list.toArray(defaultMemoryBlocks);
 			}
-			else if (elName.equals("incidentalcopy")) {
+			else if ("incidentalcopy".equals(elName) || "inferptrbounds".equals(elName)) {
 				XmlElement subel = parser.start();
 				while (parser.peek().isStart()) {
 					parser.discardSubTree();
 				}
 				parser.end(subel);
-			}
-			else if (elName.equals("inferptrbounds")) {
-				XmlElement subel = parser.start();
-				while (parser.peek().isStart()) {
-					parser.discardSubTree();
-				}
-				parser.end(subel);
-			}
-			else if (elName.equals("segmentop")) {
+			} else if ("segmentop".equals(elName)) {
 				String source = "pspec: " + getLanguageID().getIdAsString();
 				InjectPayloadSleigh payload = new InjectPayloadSegment(source);
 				payload.restoreXml(parser, this);
 				addAdditionInject(payload);
 			}
-			else if (elName.equals("segmented_address")) {
+			else if ("segmented_address".equals(elName)) {
 				XmlElement subel = parser.start();
 				parser.end(subel);
 			}
@@ -940,7 +989,7 @@ public class SleighLanguage implements Language {
 		//spacetable.put("OTHER", AddressSpace.OTHER_SPACE);
 		default_space = null;
 		XmlElement subel = parser.peek();
-		if (subel.getName().equals("space_other")) {	// tag must be present
+		if ("space_other".equals(subel.getName())) {	// tag must be present
 			parser.discardSubTree();	// We don't process it
 			// Instead the ProgramAddressFactory maps in the static OTHER_SPACE automatically 
 		}
@@ -955,7 +1004,7 @@ public class SleighLanguage implements Language {
 			int size = SpecXmlUtils.decodeInt(subel.getAttribute("size"));
 
 			int type = AddressSpace.TYPE_UNKNOWN;
-			if (typename.equals("space")) {
+			if ("space".equals(typename)) {
 				if (delay > 0) {
 					type = AddressSpace.TYPE_RAM;
 				}
@@ -963,7 +1012,7 @@ public class SleighLanguage implements Language {
 					type = AddressSpace.TYPE_REGISTER;
 				}
 			}
-			else if (typename.equals("space_unique")) {
+			else if ("space_unique".equals(typename)) {
 				type = AddressSpace.TYPE_UNIQUE;
 			}
 			if (type == AddressSpace.TYPE_UNKNOWN) {
@@ -987,7 +1036,7 @@ public class SleighLanguage implements Language {
 					throw new SleighException(
 						"Segmented space does not support truncation: " + name);
 				}
-				if (segmentType.equals("protected")) {
+				if ("protected".equals(segmentType)) {
 					spc = new ProtectedAddressSpace(name, index);
 				}
 				else {

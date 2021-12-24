@@ -17,10 +17,15 @@ package docking.options.editor;
 
 import java.awt.Component;
 import java.beans.PropertyEditorSupport;
-import java.text.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.swing.*;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  * Non-editable Editor for date and time; creates a text field for the string version of the date.

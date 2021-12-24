@@ -19,7 +19,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;

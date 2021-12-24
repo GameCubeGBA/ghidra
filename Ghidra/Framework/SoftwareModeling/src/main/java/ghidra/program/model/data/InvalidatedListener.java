@@ -24,5 +24,5 @@ public interface InvalidatedListener {
 	 * Called when the given <code>dataTypeManager</code>'s cache has been invalidated.
 	 * @param dataTypeManager The manager whose cache has been invalidated.
 	 */
-	public void dataTypeManagerInvalidated(DataTypeManager dataTypeManager);
+	void dataTypeManagerInvalidated(DataTypeManager dataTypeManager);
 }

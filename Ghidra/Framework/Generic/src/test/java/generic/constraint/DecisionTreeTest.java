@@ -89,7 +89,7 @@ public class DecisionTreeTest extends AbstractGenericTest {
 
 	@Before
 	public void setUp() throws Exception {
-		decisionTree = new DecisionTree<Color>();
+		decisionTree = new DecisionTree<>();
 		decisionTree.registerConstraintType("BLUE", BlueColorConstraint.class);
 		decisionTree.registerConstraintType("GREEN", GreenColorConstraint.class);
 		decisionTree.registerConstraintType("RED", RedColorConstraint.class);
@@ -223,10 +223,7 @@ public class DecisionTreeTest extends AbstractGenericTest {
 
 		@Override
 		public boolean equals(Object obj) {
-			if (obj == null) {
-				return false;
-			}
-			if (obj.getClass() != getClass()) {
+			if ((obj == null) || (obj.getClass() != getClass())) {
 				return false;
 			}
 			RedColorConstraint other = (RedColorConstraint) obj;
@@ -259,10 +256,7 @@ public class DecisionTreeTest extends AbstractGenericTest {
 
 		@Override
 		public boolean equals(Object obj) {
-			if (obj == null) {
-				return false;
-			}
-			if (obj.getClass() != getClass()) {
+			if ((obj == null) || (obj.getClass() != getClass())) {
 				return false;
 			}
 			GreenColorConstraint other = (GreenColorConstraint) obj;
@@ -295,10 +289,7 @@ public class DecisionTreeTest extends AbstractGenericTest {
 
 		@Override
 		public boolean equals(Object obj) {
-			if (obj == null) {
-				return false;
-			}
-			if (obj.getClass() != getClass()) {
+			if ((obj == null) || (obj.getClass() != getClass())) {
 				return false;
 			}
 			BlueColorConstraint other = (BlueColorConstraint) obj;

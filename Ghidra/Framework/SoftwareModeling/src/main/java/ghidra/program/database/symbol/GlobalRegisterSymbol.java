@@ -18,7 +18,6 @@ package ghidra.program.database.symbol;
 import db.DBRecord;
 import ghidra.program.database.DBObjectCache;
 import ghidra.program.model.address.Address;
-import ghidra.program.model.lang.Register;
 import ghidra.program.model.symbol.Namespace;
 import ghidra.program.model.symbol.SymbolType;
 import ghidra.program.util.ProgramLocation;
@@ -44,6 +43,7 @@ public class GlobalRegisterSymbol extends SymbolDB {
 	/**
 	 * @see ghidra.program.model.symbol.Symbol#getSymbolType()
 	 */
+	@Override
 	public SymbolType getSymbolType() {
 		return SymbolType.GLOBAL_VAR;
 	}
@@ -56,9 +56,9 @@ public class GlobalRegisterSymbol extends SymbolDB {
 	/**
 	 * @see ghidra.program.model.symbol.Symbol#getObject()
 	 */
+	@Override
 	public Object getObject() {
-		Register reg = symbolMgr.getProgram().getRegister(getAddress());
-		return reg;
+		return symbolMgr.getProgram().getRegister(getAddress());
 	}
 
 	/**
@@ -72,6 +72,7 @@ public class GlobalRegisterSymbol extends SymbolDB {
 	/**
 	 * @see ghidra.program.model.symbol.Symbol#getProgramLocation()
 	 */
+	@Override
 	public ProgramLocation getProgramLocation() {
 		return null;
 	}

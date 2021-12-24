@@ -15,14 +15,31 @@
  */
 package docking;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Frame;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Window;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
-import javax.swing.*;
+import javax.swing.JComponent;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JMenuBar;
+import javax.swing.JRootPane;
+import javax.swing.WindowConstants;
 
 import org.jdom.Element;
 
@@ -229,7 +246,7 @@ class DetachedWindowNode extends WindowNode {
 		List<String> titles = generateTitles(placeholders);
 
 		boolean firstItem = true;
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		for (String title : titles) {
 			if (!firstItem) {
 				buf.append(", ");
@@ -295,7 +312,7 @@ class DetachedWindowNode extends WindowNode {
 				finalTitles.add(titles.get(0));
 			}
 			else {
-				StringBuffer buffy = new StringBuffer(providerName);
+				StringBuilder buffy = new StringBuilder(providerName);
 				buffy.append(" [ ");
 				boolean firstItem = true;
 				for (String title : titles) {

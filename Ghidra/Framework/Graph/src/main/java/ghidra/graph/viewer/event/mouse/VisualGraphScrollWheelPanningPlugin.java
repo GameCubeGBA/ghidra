@@ -16,11 +16,17 @@
 package ghidra.graph.viewer.event.mouse;
 
 import java.awt.Point;
-import java.awt.event.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 
 import docking.DockingUtils;
 import edu.uci.ics.jung.visualization.control.AbstractGraphMousePlugin;
-import ghidra.graph.viewer.*;
+import ghidra.graph.viewer.GraphViewer;
+import ghidra.graph.viewer.GraphViewerUtils;
+import ghidra.graph.viewer.VisualEdge;
+import ghidra.graph.viewer.VisualGraphViewUpdater;
+import ghidra.graph.viewer.VisualVertex;
 import ghidra.graph.viewer.options.VisualGraphOptions;
 
 //@formatter:off
@@ -98,7 +104,7 @@ public class VisualGraphScrollWheelPanningPlugin<V extends VisualVertex,
 		int eventModifiers = e.getModifiersEx();
 		if (scrollWheelPans) {
 			// scrolling will pan if *not* modified (modified in this case means to zoom)
-			return !((scrollWheelModifierToggle & eventModifiers) == scrollWheelModifierToggle);
+			return ((scrollWheelModifierToggle & eventModifiers) != scrollWheelModifierToggle);
 		}
 
 		// scrolling *will* pan only when modified (unmodified in this case means to zoom)

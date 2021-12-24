@@ -16,14 +16,14 @@
  */
 package ghidra.pcode.utils;
 
+import java.math.BigInteger;
+
 import ghidra.util.BigEndianDataConverter;
 import ghidra.util.LittleEndianDataConverter;
 
-import java.math.BigInteger;
-
 public class Utils {
 
-	public static final String endl = System.getProperty("line.separator");
+	public static final String endl = System.lineSeparator();
 
 	private static long[] uintbmasks = { 0, 0xff, 0xffff, 0xffffff, 0xffffffffL, 0xffffffffffL,
 		0xffffffffffffL, 0xffffffffffffffL, 0xffffffffffffffffL };

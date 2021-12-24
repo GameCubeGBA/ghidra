@@ -103,10 +103,7 @@ public abstract class CompositeDataTypeImpl extends GenericDataType implements C
 			length = -1; // force use of datatype size
 		}
 		int dtLength = dataType.getLength();
-		if (length <= 0) {
-			length = dtLength;
-		}
-		else if (dtLength > 0 && dtLength < length) {
+		if ((length <= 0) || (dtLength > 0 && dtLength < length)) {
 			length = dtLength;
 		}
 		if (length <= 0) {

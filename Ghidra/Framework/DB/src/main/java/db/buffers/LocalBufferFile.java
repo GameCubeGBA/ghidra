@@ -15,14 +15,32 @@
  */
 package db.buffers;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedInputStream;
+import java.io.Closeable;
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileFilter;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.RandomAccessFile;
+import java.io.SyncFailedException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Random;
 
 import ghidra.util.BigEndianDataConverter;
 import ghidra.util.Msg;
 import ghidra.util.datastruct.IntSet;
-import ghidra.util.exception.*;
-import ghidra.util.task.*;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.ClosedException;
+import ghidra.util.exception.DuplicateFileException;
+import ghidra.util.task.CancelledListener;
+import ghidra.util.task.TaskMonitor;
 
 /**
  * <code>LocalBufferFile</code> implements a BufferFile as block-oriented
@@ -115,7 +133,7 @@ public class LocalBufferFile implements BufferFile {
 	 * writable buffer file, this list is flushed to the file when either close or
 	 * setReadOnly is invoked.
 	 */
-	private int[] freeIndexes = new int[0];
+	private int[] freeIndexes = {};
 
 	/**
 	 * <code>file</code> is the underlying storage file for this buffer file.
@@ -1510,10 +1528,8 @@ public class LocalBufferFile implements BufferFile {
 		public boolean accept(File file) {
 			if (file.isFile()) {
 				String name = file.getName();
-				if (prefix == null || name.indexOf(prefix) == 0) {
-					if (ext == null || name.endsWith(ext)) {
-						return true;
-					}
+				if ((prefix == null || name.indexOf(prefix) == 0) && (ext == null || name.endsWith(ext))) {
+					return true;
 				}
 			}
 			return false;

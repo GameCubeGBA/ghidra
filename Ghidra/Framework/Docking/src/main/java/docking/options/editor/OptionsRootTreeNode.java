@@ -15,7 +15,9 @@
  */
 package docking.options.editor;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import javax.swing.JComponent;
 
@@ -40,7 +42,7 @@ class OptionsRootTreeNode extends OptionsTreeNode {
 		if (options == null) {
 			return super.generateChildren();
 		}
-		List<GTreeNode> list = new ArrayList<GTreeNode>();
+		List<GTreeNode> list = new ArrayList<>();
 		for (Options option : options) {
 			list.add(new OptionsTreeNode(option));
 		}

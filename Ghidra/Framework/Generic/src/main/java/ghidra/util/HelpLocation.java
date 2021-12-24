@@ -17,6 +17,7 @@ package ghidra.util;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Objects;
 
 import resources.ResourceManager;
 
@@ -100,7 +101,7 @@ public class HelpLocation {
 		if (str == null) {
 			return str;
 		}
-		StringBuffer buf = new StringBuffer(str);
+		StringBuilder buf = new StringBuilder(str);
 		int n = buf.length();
 		for (int i = 0; i < n; i++) {
 			char c = buf.charAt(i);
@@ -159,10 +160,7 @@ public class HelpLocation {
 
 		filename = topicPath + ".html";
 		fileURL = ResourceManager.getResource("/help/topics/" + filename);
-		if (fileURL != null) {
-			return fileURL;
-		}
-		return null;
+		return fileURL;
 	}
 
 	/**
@@ -218,8 +216,7 @@ public class HelpLocation {
 		result = prime * result + ((topic == null) ? 0 : topic.hashCode());
 
 		URL helpURL = getURL();
-		result = prime * result + ((helpURL == null) ? 0 : helpURL.hashCode());
-		return result;
+		return prime * result + ((helpURL == null) ? 0 : helpURL.hashCode());
 	}
 
 	@Override
@@ -227,45 +224,22 @@ public class HelpLocation {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
 		}
 		HelpLocation other = (HelpLocation) obj;
-		if (anchor == null) {
-			if (other.anchor != null) {
-				return false;
-			}
-		}
-		else if (!anchor.equals(other.anchor)) {
+		if (!Objects.equals(anchor, other.anchor)) {
 			return false;
 		}
-		if (id == null) {
-			if (other.id != null) {
-				return false;
-			}
-		}
-		else if (!id.equals(other.id)) {
+		if (!Objects.equals(id, other.id)) {
 			return false;
 		}
-		if (topic == null) {
-			if (other.topic != null) {
-				return false;
-			}
-		}
-		else if (!topic.equals(other.topic)) {
+		if (!Objects.equals(topic, other.topic)) {
 			return false;
 		}
 
 		URL helpURL = getURL();
-		if (helpURL == null) {
-			if (other.getURL() != null) {
-				return false;
-			}
-		}
-		else if (!helpURL.equals(other.getURL())) {
+		if (!Objects.equals(helpURL, other.getURL())) {
 			return false;
 		}
 		return true;
@@ -292,8 +266,7 @@ public class HelpLocation {
 		Throwable throwable = new Throwable();
 		StackTraceElement[] stackTrace = throwable.getStackTrace();
 
-		String information = getInceptionInformationFromTheFirstClassThatIsNotUs(stackTrace);
-		return information;
+		return getInceptionInformationFromTheFirstClassThatIsNotUs(stackTrace);
 	}
 
 	private static String getInceptionInformationFromTheFirstClassThatIsNotUs(

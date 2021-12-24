@@ -15,13 +15,19 @@
  */
 package ghidra.program.model.block;
 
+import java.util.LinkedList;
+
 import ghidra.program.model.address.Address;
-import ghidra.program.model.listing.*;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.listing.Data;
+import ghidra.program.model.listing.Instruction;
+import ghidra.program.model.listing.Listing;
+import ghidra.program.model.symbol.FlowType;
+import ghidra.program.model.symbol.RefType;
+import ghidra.program.model.symbol.Reference;
+import ghidra.program.model.symbol.ReferenceIterator;
+import ghidra.program.model.symbol.ReferenceManager;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
-
-import java.util.LinkedList;
 
 /**
  * SimpleSourceReferenceIterator is a unidirectional iterator over the <CODE>CodeBlockReference</CODE>s
@@ -33,7 +39,7 @@ import java.util.LinkedList;
 public class SimpleSourceReferenceIterator implements CodeBlockReferenceIterator {
 	
     // queue of discovered source block references
-	private LinkedList<CodeBlockReferenceImpl> blockRefQueue = new LinkedList<CodeBlockReferenceImpl>();
+	private LinkedList<CodeBlockReferenceImpl> blockRefQueue = new LinkedList<>();
 	private TaskMonitor monitor;
 
     /**
@@ -53,7 +59,8 @@ public class SimpleSourceReferenceIterator implements CodeBlockReferenceIterator
     /**
      * @see ghidra.program.model.block.CodeBlockReferenceIterator#next()
      */
-    public CodeBlockReference next() throws CancelledException {
+    @Override
+	public CodeBlockReference next() throws CancelledException {
     	monitor.checkCanceled();
     	return (blockRefQueue.isEmpty() ? null : blockRefQueue.removeFirst());
     }
@@ -61,7 +68,8 @@ public class SimpleSourceReferenceIterator implements CodeBlockReferenceIterator
     /**
      * @see ghidra.program.model.block.CodeBlockReferenceIterator#hasNext()
      */
-    public boolean hasNext() throws CancelledException {
+    @Override
+	public boolean hasNext() throws CancelledException {
     	monitor.checkCanceled();
 		return !blockRefQueue.isEmpty();
     }
@@ -118,8 +126,8 @@ public class SimpleSourceReferenceIterator implements CodeBlockReferenceIterator
         Address[] entryPts = block.getStartAddresses();
 
 		// Check references to all entry points - very special case to have more than one
-    	for (int n = 0; n < entryPts.length; n++) {
-     		ReferenceIterator iter = refMgr.getReferencesTo(entryPts[n]);
+    	for (Address entryPt : entryPts) {
+     		ReferenceIterator iter = refMgr.getReferencesTo(entryPt);
     		while (iter.hasNext()) {
     			Reference ref = iter.next();
     			RefType refType = ref.getReferenceType();
@@ -132,7 +140,7 @@ public class SimpleSourceReferenceIterator implements CodeBlockReferenceIterator
     				queueDestReference(
     					blockRefQueue,
     					block, 
-            			entryPts[n],
+            			entryPt,
             			ref.getFromAddress(),
             			(FlowType)refType,
             			monitor);
@@ -217,10 +225,7 @@ public class SimpleSourceReferenceIterator implements CodeBlockReferenceIterator
 				Address fromAddr = ref.getFromAddress();
 				Instruction instr = listing.getInstructionAt(fromAddr);
 								
-				if (instr == null)
-					continue;
-				
-				if (rt == RefType.READ && !instr.getFlowType().isComputed())
+				if ((instr == null) || (rt == RefType.READ && !instr.getFlowType().isComputed()))
 					continue;
 
 				queueDestReference(blockRefQueue, destBlock, destRef.getToAddress(), fromAddr,

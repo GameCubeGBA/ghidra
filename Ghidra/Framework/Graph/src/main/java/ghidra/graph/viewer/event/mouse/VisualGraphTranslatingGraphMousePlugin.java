@@ -17,14 +17,23 @@ package ghidra.graph.viewer.event.mouse;
 
 import java.awt.Cursor;
 import java.awt.Point;
-import java.awt.event.*;
+import java.awt.event.InputEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.geom.Point2D;
 
-import edu.uci.ics.jung.visualization.*;
+import edu.uci.ics.jung.visualization.Layer;
+import edu.uci.ics.jung.visualization.MultiLayerTransformer;
+import edu.uci.ics.jung.visualization.RenderContext;
+import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.AbstractGraphMousePlugin;
 import edu.uci.ics.jung.visualization.control.TranslatingGraphMousePlugin;
 import edu.uci.ics.jung.visualization.transform.MutableTransformer;
-import ghidra.graph.viewer.*;
+import ghidra.graph.viewer.GraphViewer;
+import ghidra.graph.viewer.GraphViewerUtils;
+import ghidra.graph.viewer.VisualEdge;
+import ghidra.graph.viewer.VisualVertex;
 
 /**
  * Note: this class is based on {@link TranslatingGraphMousePlugin}.
@@ -92,11 +101,7 @@ public class VisualGraphTranslatingGraphMousePlugin<V extends VisualVertex, E ex
 	public void mouseDragged(MouseEvent e) {
 		GraphViewer<V, E> viewer = getGraphViewer(e);
 		boolean accepted = checkModifiers(e);
-		if (!accepted) {
-			return;
-		}
-
-		if (!isHandlingEvent) {
+		if (!accepted || !isHandlingEvent) {
 			return;
 		}
 
@@ -125,15 +130,7 @@ public class VisualGraphTranslatingGraphMousePlugin<V extends VisualVertex, E ex
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		if (isHandlingEvent) {
-			return;
-		}
-
-		if (!isInDraggingArea(e)) {
-			return;
-		}
-
-		if (!checkModifiersForCursor(e)) {
+		if (isHandlingEvent || !isInDraggingArea(e) || !checkModifiersForCursor(e)) {
 			return;
 		}
 
@@ -177,11 +174,7 @@ public class VisualGraphTranslatingGraphMousePlugin<V extends VisualVertex, E ex
 
 		// make sure we are not over a graph or edge
 		Point p = e.getPoint();
-		if (GraphViewerUtils.getVertexFromPointInViewSpace(viewer, p) != null) {
-			return false;
-		}
-
-		if (GraphViewerUtils.getEdgeFromPointInViewSpace(viewer, p) != null) {
+		if ((GraphViewerUtils.getVertexFromPointInViewSpace(viewer, p) != null) || (GraphViewerUtils.getEdgeFromPointInViewSpace(viewer, p) != null)) {
 			return false;
 		}
 

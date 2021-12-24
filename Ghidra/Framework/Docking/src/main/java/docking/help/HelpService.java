@@ -26,7 +26,7 @@ import ghidra.util.HelpLocation;
  */
 public interface HelpService {
 
-	public static final String DUMMY_HELP_SET_NAME = "Dummy_HelpSet.hs";
+	String DUMMY_HELP_SET_NAME = "Dummy_HelpSet.hs";
 
 	/**
 	 * Display the Help content identified by the help object.
@@ -37,7 +37,7 @@ public interface HelpService {
 	 * 
 	 * @see #registerHelp(Object, HelpLocation)
 	 */
-	public void showHelp(Object helpObject, boolean infoOnly, Component parent);
+	void showHelp(Object helpObject, boolean infoOnly, Component parent);
 
 	/**
 	 * Display the help page for the given URL.  This is a specialty method for displaying
@@ -48,7 +48,7 @@ public interface HelpService {
 	 * @param url the URL to display
 	 * @see #showHelp(Object, boolean, Component)
 	 */
-	public void showHelp(URL url);
+	void showHelp(URL url);
 
 	/**
 	 * Signals to the help system to ignore the given object when searching for and validating 
@@ -56,7 +56,7 @@ public interface HelpService {
 	 * 
 	 * @param helpObject the object to exclude from the help system.
 	 */
-	public void excludeFromHelp(Object helpObject);
+	void excludeFromHelp(Object helpObject);
 
 	/**
 	 * Returns true if the given object is meant to be ignored by the help system
@@ -65,7 +65,7 @@ public interface HelpService {
 	 * @return true if ignored
 	 * @see #excludeFromHelp(Object)
 	 */
-	public boolean isExcludedFromHelp(Object helpObject);
+	boolean isExcludedFromHelp(Object helpObject);
 
 	/**
 	 * Register help for a specific object.  
@@ -76,7 +76,7 @@ public interface HelpService {
 	 * @param helpObject the object to associate the specified help location with
 	 * @param helpLocation help content location
 	 */
-	public void registerHelp(Object helpObject, HelpLocation helpLocation);
+	void registerHelp(Object helpObject, HelpLocation helpLocation);
 
 	/**
 	 * Removes this object from the help system.  This method is useful, for example, 
@@ -85,7 +85,7 @@ public interface HelpService {
 	 * 
 	 * @param helpObject the object for which to clear help
 	 */
-	public void clearHelp(Object helpObject);
+	void clearHelp(Object helpObject);
 
 	/**
 	 * Returns the registered (via {@link #registerHelp(Object, HelpLocation)} help 
@@ -96,7 +96,7 @@ public interface HelpService {
 	 * @return the registered HelpLocation
 	 * @see #registerHelp(Object, HelpLocation)
 	 */
-	public HelpLocation getHelpLocation(Object object);
+	HelpLocation getHelpLocation(Object object);
 
 	/**
 	 * Returns true if the help system has been initialized properly; false if help does not
@@ -105,5 +105,5 @@ public interface HelpService {
 	 * @return true if the help system has found the applications help content and has finished
 	 *         initializing
 	 */
-	public boolean helpExists();
+	boolean helpExists();
 }

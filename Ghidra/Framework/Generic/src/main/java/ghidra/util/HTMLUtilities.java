@@ -15,7 +15,10 @@
  */
 package ghidra.util;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -271,13 +274,7 @@ public class HTMLUtilities {
 	 * @return true if the text cannot be correctly broken into lines
 	 */
 	public static boolean isUnbreakableHTML(String text) {
-		if (text.contains(HTML_SPACE) && !text.contains(" ")) {
-			// this can happen if the client has called a method on this class that turns spaces
-			// to the HTML_SPACE
-			return true;
-		}
-
-		if (text.contains(HTML_NEW_LINE)) {
+		if ((text.contains(HTML_SPACE) && !text.contains(" ")) || text.contains(HTML_NEW_LINE)) {
 			// this implies the client has already broken lines in their preferred location
 			return true;
 		}
@@ -384,7 +381,7 @@ public class HTMLUtilities {
 
 		Pattern p = Pattern.compile("<!-- LINK CONTENT=\"(.*?)\" -->");
 
-		StringBuffer buffy = new StringBuffer();
+		StringBuilder buffy = new StringBuilder();
 		Matcher matcher = p.matcher(text);
 		while (matcher.find()) {
 			String content = matcher.group(1);
@@ -396,8 +393,7 @@ public class HTMLUtilities {
 		matcher.appendTail(buffy);
 
 		String pass1 = buffy.toString();
-		String pass2 = pass1.replaceAll(LINK_PLACEHOLDER_CLOSE, "</A>");
-		return pass2;
+		return pass1.replace(LINK_PLACEHOLDER_CLOSE, "</A>");
 	}
 
 	/**
@@ -409,8 +405,7 @@ public class HTMLUtilities {
 	 */
 	public static String toHTML(String text) {
 		int noMax = 0;
-		String html = toWrappedHTML(text, noMax);
-		return html;
+		return toWrappedHTML(text, noMax);
 	}
 
 	/**
@@ -474,9 +469,7 @@ public class HTMLUtilities {
 			text = text.substring(0, MAX_TOOLTIP_LENGTH) + "...";
 		}
 
-		String html =
-			toHTMLWithLineWrappingAndEncoding(text, DEFAULT_TOOLTIP_MAX_LINE_LENGTH, false);
-		return html;
+		return toHTMLWithLineWrappingAndEncoding(text, DEFAULT_TOOLTIP_MAX_LINE_LENGTH, false);
 	}
 
 	/**
@@ -541,53 +534,54 @@ public class HTMLUtilities {
 		}
 		for (; i < text.length(); i++) {
 			char c = text.charAt(i);
-			if (c == '\r') {
+			switch (c) {
+			case '\r':
 				// Strip CR and reset column
 				col = 0;
 				continue;
-			}
-			else if (c == '\n') {
+			case '\n':
 				buffer.append(c);
 				col = 0;
 				continue;
-			}
-			else if (c == '\t') {
+			case '\t':
 				int cnt = TAB_SIZE - (col % TAB_SIZE);
 				for (int k = 0; k < cnt; k++) {
 					buffer.append(HTML_SPACE);
 				}
 				col = 0;
 				continue;
-			}
-			else if (c == ' ') {
+			case ' ':
 				buffer.append(HTML_SPACE);
-			}
-			else if (c < ' ') {
-				// Strip other non-printing chars
-				continue;
-			}
-			else if (c > 0x7F) {
-				buffer.append("&#x");
-				buffer.append(Integer.toString(c, 16).toUpperCase());
-				buffer.append(";");
-			}
-			else {
-				switch (c) {
-					case '&':
-						buffer.append("&amp;");
-						break;
-					case '<':
-						buffer.append("&lt;");
-						break;
-					case '>':
-						buffer.append("&gt;");
-						break;
-					case 0x7F:
-						break;
-					default:
-						buffer.append(c);
-						break;
+				break;
+			default:
+				if (c < ' ') {
+					// Strip other non-printing chars
+					continue;
 				}
+				else if (c > 0x7F) {
+					buffer.append("&#x");
+					buffer.append(Integer.toString(c, 16).toUpperCase());
+					buffer.append(";");
+				}
+				else {
+					switch (c) {
+						case '&':
+							buffer.append("&amp;");
+							break;
+						case '<':
+							buffer.append("&lt;");
+							break;
+						case '>':
+							buffer.append("&gt;");
+							break;
+						case 0x7F:
+							break;
+						default:
+							buffer.append(c);
+							break;
+					}
+				}
+				break;
 			}
 			++col;
 		}
@@ -667,8 +661,7 @@ public class HTMLUtilities {
 	 * @return the updated text
 	 */
 	public static String toLiteralHTML(String text, int maxLineLength) {
-		String html = toHTMLWithLineWrappingAndEncoding(text, maxLineLength, true);
-		return html;
+		return toHTMLWithLineWrappingAndEncoding(text, maxLineLength, true);
 	}
 
 	private static String toHTMLWithLineWrappingAndEncoding(String text, int maxLineLength,
@@ -686,8 +679,7 @@ public class HTMLUtilities {
 			}
 		}
 
-		String html = wrapAsHTML(buffy.toString());
-		return html;
+		return wrapAsHTML(buffy.toString());
 	}
 
 	/**
@@ -790,7 +782,7 @@ public class HTMLUtilities {
 		String raw = g.getBuffer();
 		raw = raw.trim(); // I can't see any reason to keep leading/trailing newlines/whitespace
 
-		String updated = replaceKnownSpecialCharacters(raw);
+		
 
 		//
 		// Unfortunately, the label adds odd artifacts to the output, like newlines after
@@ -801,7 +793,7 @@ public class HTMLUtilities {
 		//       need for this call is found, this can be revisited. 
 		//       (see history for condense() code)
 		// String condensed = condense(updated);
-		return updated;
+		return replaceKnownSpecialCharacters(raw);
 	}
 
 	/**

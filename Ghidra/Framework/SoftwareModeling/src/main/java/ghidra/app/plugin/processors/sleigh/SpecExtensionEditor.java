@@ -20,7 +20,9 @@ import java.beans.PropertyChangeListener;
 
 import javax.swing.JComponent;
 
-import ghidra.framework.options.*;
+import ghidra.framework.options.EditorStateFactory;
+import ghidra.framework.options.Options;
+import ghidra.framework.options.OptionsEditor;
 import ghidra.program.database.ProgramDB;
 import ghidra.util.exception.InvalidInputException;
 import ghidra.util.task.TaskMonitor;

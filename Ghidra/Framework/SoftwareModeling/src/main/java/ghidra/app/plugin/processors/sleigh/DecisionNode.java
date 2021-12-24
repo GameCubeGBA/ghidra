@@ -100,8 +100,7 @@ public class DecisionNode {
 			debugInstructionBitsDecision(debug, walker, val);
 		}
 
-		Constructor c = children[val].resolve(walker, debug);
-		return c;
+		return children[val].resolve(walker, debug);
 	}
 
 	private void debugContextBitsDecision(SleighDebugLogger debug, ParserWalker walker, int val) {
@@ -156,12 +155,7 @@ public class DecisionNode {
 	}
 
 	private static final Comparator<Constructor> debugInstructionComparator =
-		new Comparator<Constructor>() {
-			@Override
-			public int compare(Constructor c1, Constructor c2) {
-				return c1.getLineno() - c2.getLineno();
-			}
-		};
+		(c1, c2) -> c1.getLineno() - c2.getLineno();
 
 	private void dumpDecendentConstructors(List<Constructor> clist) {
 		if (bitsize == 0) { // The node is terminal
@@ -238,14 +232,14 @@ public class DecisionNode {
 //		num = 0;
 		XmlElement subel = parser.peek();
 		while (!subel.isEnd()) {
-			if (subel.getName().equals("pair")) {
+			if ("pair".equals(subel.getName())) {
 				XmlElement start = parser.start();
 				int id = SpecXmlUtils.decodeInt(subel.getAttribute("id"));
 				conlist.add(sub.getConstructor(id));
 				patlist.add(DisjointPattern.restoreDisjoint(parser));
 				parser.end(start);
 			}
-			else if (subel.getName().equals("decision")) {
+			else if ("decision".equals(subel.getName())) {
 				DecisionNode subnode = new DecisionNode();
 				subnode.restoreXml(parser, this, sub);
 				childlist.add(subnode);

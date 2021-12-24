@@ -24,5 +24,5 @@ package generic.cache;
  * @param <V> the value returned for the given key
  */
 public interface Factory<K, V> {
-	public V get(K key);
+	V get(K key);
 }

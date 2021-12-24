@@ -20,7 +20,22 @@ import java.io.IOException;
 import db.DBRecord;
 import ghidra.docking.settings.Settings;
 import ghidra.program.database.DBObjectCache;
-import ghidra.program.model.data.*;
+import ghidra.program.model.data.AlignmentType;
+import ghidra.program.model.data.BitFieldDataType;
+import ghidra.program.model.data.Composite;
+import ghidra.program.model.data.CompositeInternal;
+import ghidra.program.model.data.DataOrganization;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.DataTypeComponent;
+import ghidra.program.model.data.DataTypeConflictHandler;
+import ghidra.program.model.data.DataTypeDependencyException;
+import ghidra.program.model.data.Dynamic;
+import ghidra.program.model.data.FactoryDataType;
+import ghidra.program.model.data.InvalidDataTypeException;
+import ghidra.program.model.data.PackingType;
+import ghidra.program.model.data.Pointer;
+import ghidra.program.model.data.Undefined1DataType;
+import ghidra.program.model.data.Union;
 import ghidra.program.model.mem.MemBuffer;
 import ghidra.util.UniversalID;
 import ghidra.util.exception.AssertException;
@@ -78,10 +93,7 @@ abstract class CompositeDB extends DataTypeDB implements CompositeInternal {
 			length = -1; // force use of datatype size
 		}
 		int dtLength = dataType.getLength();
-		if (length <= 0) {
-			length = dtLength;
-		}
-		else if (dtLength > 0 && dtLength < length) {
+		if ((length <= 0) || (dtLength > 0 && dtLength < length)) {
 			length = dtLength;
 		}
 		if (length <= 0) {

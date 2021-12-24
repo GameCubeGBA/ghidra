@@ -16,10 +16,17 @@
  */
 package ghidra.framework.store.local;
 
-import ghidra.framework.store.Version;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
+import java.util.StringTokenizer;
 
-import java.io.*;
-import java.util.*;
+import ghidra.framework.store.Version;
 
 /**
  * <code>HistoryManager</code> manages version data for a versioned LocalFolderItem.
@@ -250,13 +257,13 @@ class HistoryManager {
 	 */
 	private void readHistoryFile() throws IOException {
 
-		ArrayList<Version> list = new ArrayList<Version>();
+		ArrayList<Version> list = new ArrayList<>();
 		minVersion = 0;
 		curVersion = 0;
 
 		File historyFile = getHistoryFile();
 		BufferedReader in = new BufferedReader(new FileReader(historyFile));
-		try {
+		try (in) {
 			String line = in.readLine();
 			while (line != null) {
 				Version ver;
@@ -279,9 +286,6 @@ class HistoryManager {
 				line = in.readLine();
 			}
 		}
-		finally {
-			in.close();
-		}
 
 		versions = new Version[list.size()];
 		list.toArray(versions);
@@ -298,8 +302,8 @@ class HistoryManager {
 			tmpFile.delete();
 
 			BufferedWriter out = new BufferedWriter(new FileWriter(tmpFile));
-			for (int i = 0; i < versions.length; i++) {
-				out.write(encodeVersion(versions[i]));
+			for (Version version : versions) {
+				out.write(encodeVersion(version));
 				out.newLine();
 			}
 			out.close();
@@ -351,7 +355,7 @@ class HistoryManager {
 	 * @return
 	 */
 	private String encodeVersion(Version ver) {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		buf.append(ver.getVersion());
 		buf.append(';');
 		buf.append(ver.getUser());
@@ -386,7 +390,7 @@ class HistoryManager {
 	 * @param text text string to be escaped
 	 * @param buf output buffer
 	 */
-	private void encodeString(String text, StringBuffer buf) {
+	private void encodeString(String text, StringBuilder buf) {
 		if (text == null) {
 			return;
 		}
@@ -420,7 +424,7 @@ class HistoryManager {
 		if (text == null) {
 			return "";
 		}
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		boolean controlChar = false;
 		for (int i = 0; i < text.length(); i++) {
 			char next = text.charAt(i);

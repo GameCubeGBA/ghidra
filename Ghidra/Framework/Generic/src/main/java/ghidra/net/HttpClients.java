@@ -47,10 +47,8 @@ public class HttpClients {
 	 * @throws IOException if error in PKI settings or crypto configuration 
 	 */
 	public static HttpClient.Builder newHttpClientBuilder() throws IOException {
-		if (!ApplicationKeyManagerFactory.initialize()) {
-			if (ApplicationKeyManagerFactory.getKeyStore() != null) {
-				throw new IOException("Failed to initialize PKI certificate keystore");
-			}
+		if (!ApplicationKeyManagerFactory.initialize() && (ApplicationKeyManagerFactory.getKeyStore() != null)) {
+			throw new IOException("Failed to initialize PKI certificate keystore");
 		}
 
 		try {

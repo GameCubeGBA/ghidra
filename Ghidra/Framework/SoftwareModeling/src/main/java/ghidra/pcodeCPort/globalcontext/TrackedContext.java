@@ -16,14 +16,14 @@
  */
 package ghidra.pcodeCPort.globalcontext;
 
-import ghidra.pcodeCPort.address.*;
-import ghidra.pcodeCPort.pcoderaw.*;
-import ghidra.pcodeCPort.translate.*;
-import ghidra.pcodeCPort.utils.*;
-
 import java.io.PrintStream;
 
 import org.jdom.Element;
+
+import ghidra.pcodeCPort.address.Address;
+import ghidra.pcodeCPort.pcoderaw.VarnodeData;
+import ghidra.pcodeCPort.translate.Translate;
+import ghidra.pcodeCPort.utils.XmlUtils;
 
 
 

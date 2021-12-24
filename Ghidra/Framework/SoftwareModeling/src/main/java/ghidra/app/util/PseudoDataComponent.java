@@ -20,8 +20,12 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressOverflowException;
 import ghidra.program.model.data.DataType;
 import ghidra.program.model.data.DataTypeComponent;
-import ghidra.program.model.listing.*;
-import ghidra.program.model.mem.*;
+import ghidra.program.model.listing.CodeUnit;
+import ghidra.program.model.listing.Data;
+import ghidra.program.model.listing.Program;
+import ghidra.program.model.mem.MemBuffer;
+import ghidra.program.model.mem.MemoryAccessException;
+import ghidra.program.model.mem.WrappedMemBuffer;
 
 /**
  * <code>DataComponent</code> provides Data and CodeUnit access to Struct and Array components.
@@ -128,7 +132,7 @@ class PseudoDataComponent extends PseudoData {
 	}
 
 	private String getComponentName(String parentPath) {
-		StringBuffer nameBuffer = new StringBuffer();
+		StringBuilder nameBuffer = new StringBuilder();
 		if (parentPath != null && parentPath.length() > 0) {
 			nameBuffer.append(parentPath);
 			if (component != null) { // not an array?

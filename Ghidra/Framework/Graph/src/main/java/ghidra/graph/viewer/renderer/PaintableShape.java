@@ -15,7 +15,10 @@
  */
 package ghidra.graph.viewer.renderer;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Shape;
+import java.awt.Stroke;
 import java.util.Objects;
 
 /**

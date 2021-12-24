@@ -36,16 +36,16 @@ public class FieldPanelCoordinator implements ViewListener {
 	public FieldPanelCoordinator(FieldPanel[] panels) {
 		this.panels = new FieldPanel[panels.length];
 		System.arraycopy(panels, 0, this.panels, 0, panels.length);
-		for(int i=0;i<panels.length;i++) {
-			addListeners(panels[i]);
+		for (FieldPanel panel : panels) {
+			addListeners(panel);
 		}
 	}
 	/**
 	 * Cleans up resources.
 	 */
 	public void dispose() {
-		for(int i=0;i<panels.length;i++) {
-			removeListeners(panels[i]);
+		for (FieldPanel panel : panels) {
+			removeListeners(panel);
 		}
 		panels = null;
 	}
@@ -71,9 +71,9 @@ public class FieldPanelCoordinator implements ViewListener {
 		removeListeners(fp);
 		FieldPanel[] newPanels = new FieldPanel[panels.length-1];
 		int j = 0;
-		for(int i=0;i<panels.length;i++) {
-			if (panels[i] != fp) {
-				newPanels[j++] = panels[i];
+		for (FieldPanel panel : panels) {
+			if (panel != fp) {
+				newPanels[j++] = panel;
 			}
 		}
 		panels = newPanels;
@@ -84,9 +84,9 @@ public class FieldPanelCoordinator implements ViewListener {
 		if (valuesChanging) return;
 		valuesChanging = true;
 		try {
-			for(int i=0;i<panels.length;i++) {
-				if (panels[i] != fp) {
-					panels[i].setViewerPosition(index, xPos, yPos);
+			for (FieldPanel panel : panels) {
+				if (panel != fp) {
+					panel.setViewerPosition(index, xPos, yPos);
 				}
 			}
 		}finally {

@@ -15,13 +15,24 @@
  */
 package ghidra.framework.main;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.ListCellRenderer;
+import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
 import docking.DialogComponentProvider;
@@ -34,7 +45,9 @@ import ghidra.framework.plugintool.PluginTool;
 import ghidra.util.HelpLocation;
 import ghidra.util.Msg;
 import ghidra.util.exception.CancelledException;
-import ghidra.util.task.*;
+import ghidra.util.task.Task;
+import ghidra.util.task.TaskLauncher;
+import ghidra.util.task.TaskMonitor;
 
 /**
  * Modal dialog to display a list of domain objects that have changed.
@@ -80,20 +93,12 @@ public class SaveDataDialog extends DialogComponentProvider {
 		yesButton = new JButton("Save");
 		yesButton.setMnemonic('S');
 		addButton(yesButton);
-		yesButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent evt) {
-				okCallback();
-			}
-		});
+		yesButton.addActionListener(evt -> okCallback());
 		noButton = new JButton("Don't Save");
 		noButton.setMnemonic('n');
-		noButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent evt) {
-				operationCompleted = true;
-				close();
-			}
+		noButton.addActionListener(evt -> {
+			operationCompleted = true;
+			close();
 		});
 		addButton(noButton);
 		addCancelButton();
@@ -201,19 +206,9 @@ public class SaveDataDialog extends DialogComponentProvider {
 	 * Add listeners to the buttons.
 	 */
 	private void addListeners() {
-		selectAllButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				selectAll();
-			}
-		});
+		selectAllButton.addActionListener(e -> selectAll());
 
-		deselectAllButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				deselectAll();
-			}
-		});
+		deselectAllButton.addActionListener(e -> deselectAll());
 
 	}
 
@@ -378,17 +373,9 @@ public class SaveDataDialog extends DialogComponentProvider {
 			}
 			if (operationCompleted) {
 				try {
-					SwingUtilities.invokeAndWait(new Runnable() {
-						@Override
-						public void run() {
-							close();
-						}
-					});
+					SwingUtilities.invokeAndWait(() -> close());
 				}
-				catch (InterruptedException e) {
-					// don't care?
-				}
-				catch (InvocationTargetException e) {
+				catch (InterruptedException | InvocationTargetException e) {
 					// don't care?
 				}
 			}
@@ -401,12 +388,7 @@ public class SaveDataDialog extends DialogComponentProvider {
 		 * Refresh the list of files that need saving.
 		 */
 		private void updateList() {
-			Runnable r = new Runnable() {
-				@Override
-				public void run() {
-					initList();
-				}
-			};
+			Runnable r = () -> initList();
 			try {
 				SwingUtilities.invokeAndWait(r);
 			}

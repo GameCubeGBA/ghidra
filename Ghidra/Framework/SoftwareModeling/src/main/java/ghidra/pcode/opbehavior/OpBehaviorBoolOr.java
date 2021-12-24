@@ -16,9 +16,9 @@
  */
 package ghidra.pcode.opbehavior;
 
-import ghidra.program.model.pcode.PcodeOp;
-
 import java.math.BigInteger;
+
+import ghidra.program.model.pcode.PcodeOp;
 
 public class OpBehaviorBoolOr extends BinaryOpBehavior {
 
@@ -28,14 +28,12 @@ public class OpBehaviorBoolOr extends BinaryOpBehavior {
 
 	@Override
 	public long evaluateBinary(int sizeout, int sizein, long in1, long in2) {
-		long res = in1 | in2;
-		return res;
+		return in1 | in2;
 	}
 
 	@Override
 	public BigInteger evaluateBinary(int sizeout, int sizein, BigInteger in1, BigInteger in2) {
-		BigInteger res = in1.or(in2);
-		return res;
+		return in1.or(in2);
 	}
 
 }

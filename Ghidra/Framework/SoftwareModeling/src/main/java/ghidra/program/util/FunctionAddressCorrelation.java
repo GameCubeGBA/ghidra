@@ -28,12 +28,12 @@ public interface FunctionAddressCorrelation extends ListingAddressCorrelation {
 	 * Gets the first function for this address correlator.
 	 * @return the first function.
 	 */
-	public Function getFirstFunction();
+	Function getFirstFunction();
 
 	/**
 	 * Gets the second function for this address correlator.
 	 * @return the second function.
 	 */
-	public Function getSecondFunction();
+	Function getSecondFunction();
 
 }

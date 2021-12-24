@@ -15,36 +15,87 @@
  */
 package docking.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
-import java.awt.*;
-import java.awt.datatransfer.*;
-import java.awt.event.*;
+import java.awt.AWTEvent;
+import java.awt.AWTException;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dialog;
+import java.awt.Frame;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.Window;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.Collections;
+import java.util.ConcurrentModificationException;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
-import javax.swing.*;
+import javax.swing.AbstractButton;
+import javax.swing.Action;
+import javax.swing.Icon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComponent;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JRadioButton;
+import javax.swing.JTabbedPane;
+import javax.swing.JToggleButton;
+import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
 import javax.swing.text.JTextComponent;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.junit.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
 
-import docking.*;
+import docking.AbstractErrDialog;
+import docking.ActionContext;
+import docking.ComponentPlaceholder;
+import docking.ComponentProvider;
+import docking.DialogComponentProvider;
+import docking.DockableComponent;
+import docking.DockingDialog;
+import docking.DockingErrorDisplay;
+import docking.DockingWindowManager;
+import docking.EmptyBorderToggleButton;
+import docking.Tool;
 import docking.action.DockingActionIf;
 import docking.action.ToggleDockingActionIf;
 import docking.actions.DockingToolActions;
 import docking.dnd.GClipboard;
 import docking.framework.DockingApplicationConfiguration;
 import docking.menu.DialogToolbarButton;
-import docking.widgets.*;
+import docking.widgets.MultiLineLabel;
+import docking.widgets.OkDialog;
+import docking.widgets.OptionDialog;
 import docking.widgets.filechooser.GhidraFileChooser;
 import docking.widgets.table.threaded.ThreadedTableModel;
 import docking.widgets.tree.GTree;
@@ -54,7 +105,9 @@ import generic.test.ConcurrentTestExceptionHandler;
 import generic.util.image.ImageUtils;
 import ghidra.GhidraTestApplicationLayout;
 import ghidra.framework.ApplicationConfiguration;
-import ghidra.util.*;
+import ghidra.util.ConsoleErrorDisplay;
+import ghidra.util.ErrorDisplay;
+import ghidra.util.Msg;
 import ghidra.util.exception.AssertException;
 import ghidra.util.task.SwingUpdateManager;
 import ghidra.util.worker.Worker;
@@ -475,8 +528,7 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 	private static String getDebugTitleForWindow(Window window) {
 		String defaultTitle = "<no title> - id = " + System.identityHashCode(window) +
 			"; class = " + window.getClass().getSimpleName();
-		String title = getDebugTitleForWindow(window, defaultTitle);
-		return title;
+		return getDebugTitleForWindow(window, defaultTitle);
 	}
 
 	private static String getDebugTitleForWindow(Window window, String defaultTitle) {
@@ -684,11 +736,7 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 	protected static <T extends DialogComponentProvider> T getDialogComponentProvider(Window window,
 			Class<T> ghidraClass) {
 
-		if (!(window instanceof DockingDialog)) {
-			return null;
-		}
-
-		if (!window.isShowing()) {
+		if (!(window instanceof DockingDialog) || !window.isShowing()) {
 			return null;
 		}
 
@@ -728,11 +776,7 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 		}
 
 		T t = windowManager.getComponentProvider(clazz);
-		if (t != null) {
-			return t;
-		}
-
-		return null;
+		return t;
 	}
 
 	/**
@@ -750,8 +794,7 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 		DockingWindowManager dwm = findActiveDockingWindowManager();
 		assertNotNull("Unable to find a DockingWindowManager - is there a tool showing?", dwm);
 
-		T provider = doWaitForComponentProvider(dwm, clazz);
-		return provider;
+		return doWaitForComponentProvider(dwm, clazz);
 	}
 
 	/**
@@ -770,8 +813,7 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 		DockingWindowManager dwm = findActiveDockingWindowManager();
 		assertNotNull("Unable to find a DockingWindowManager - is there a tool showing?", dwm);
 
-		T provider = doWaitForComponentProvider(dwm, clazz, title);
-		return provider;
+		return doWaitForComponentProvider(dwm, clazz, title);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -1202,8 +1244,7 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 	public static DockingActionIf getLocalAction(ComponentProvider provider, String actionName) {
 		Tool tool = provider.getTool();
 		DockingToolActions toolActions = tool.getToolActions();
-		DockingActionIf action = toolActions.getLocalAction(provider, actionName);
-		return action;
+		return toolActions.getLocalAction(provider, actionName);
 	}
 
 	/**
@@ -1804,8 +1845,7 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 		Transferable t = c.getContents(null);
 
 		try {
-			String text = (String) t.getTransferData(DataFlavor.stringFlavor);
-			return text;
+			return (String) t.getTransferData(DataFlavor.stringFlavor);
 		}
 		catch (UnsupportedFlavorException e) {
 			Msg.error(this, "Unsupported data flavor - 'string'.  Supported flavors: ");
@@ -2241,7 +2281,7 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 
 		yieldToSwing();
 
-		Image i = runSwing(() -> {
+		return runSwing(() -> {
 			try {
 				return doCreateRenderedImage(c);
 			}
@@ -2249,7 +2289,6 @@ public abstract class AbstractDockingTest extends AbstractGenericTest {
 				throw new RuntimeException(e);
 			}
 		});
-		return i;
 	}
 
 	private static Image doCreateRenderedImage(Component c) {

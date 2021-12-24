@@ -19,9 +19,15 @@
  */
 package ghidra.app.plugin.processors.sleigh.symbol;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
-import ghidra.app.plugin.processors.sleigh.*;
+import ghidra.app.plugin.processors.sleigh.Constructor;
+import ghidra.app.plugin.processors.sleigh.ParserWalker;
+import ghidra.app.plugin.processors.sleigh.SleighDebugLogger;
+import ghidra.app.plugin.processors.sleigh.SleighLanguage;
 import ghidra.app.plugin.processors.sleigh.expression.PatternExpression;
 import ghidra.app.plugin.processors.sleigh.expression.PatternValue;
 import ghidra.program.model.lang.UnknownInstructionException;
@@ -48,9 +54,10 @@ public class NameSymbol extends ValueSymbol {
 		long min = getPatternValue().minValue();
 		long max = getPatternValue().maxValue();
 		tableisfilled = (min >= 0) && (max < nametable.length);
-		for (int i = 0; i < nametable.length; ++i) {
-			if (null == nametable[i]) {
+		for (String element : nametable) {
+			if (null == element) {
 				tableisfilled = false;
+				break;
 			}
 		}
 	}

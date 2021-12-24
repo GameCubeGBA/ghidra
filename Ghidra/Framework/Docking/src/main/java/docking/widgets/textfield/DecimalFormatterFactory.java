@@ -18,7 +18,7 @@ package docking.widgets.textfield;
 
 import java.text.DecimalFormat;
 
-import javax.swing.*;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFormattedTextField.AbstractFormatter;
 import javax.swing.JFormattedTextField.AbstractFormatterFactory;
 import javax.swing.text.NumberFormatter;

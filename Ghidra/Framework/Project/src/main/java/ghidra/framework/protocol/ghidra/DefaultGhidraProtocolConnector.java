@@ -74,12 +74,10 @@ public class DefaultGhidraProtocolConnector extends GhidraProtocolConnector {
 
 		if (repositoryAdapter.isConnected()) {
 			responseCode = GhidraURLConnection.GHIDRA_OK;
-			if (!repositoryAdapter.getUser().hasWritePermission()) {
-				if (!readOnly) {
-					this.readOnly = true; // write access not permitted
-					Msg.warn(this,
-						"User does not have write permission for repository: " + repositoryName);
-				}
+			if (!repositoryAdapter.getUser().hasWritePermission() && !readOnly) {
+				this.readOnly = true; // write access not permitted
+				Msg.warn(this,
+					"User does not have write permission for repository: " + repositoryName);
 			}
 			resolveItemPath();
 		}

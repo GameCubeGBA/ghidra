@@ -32,6 +32,7 @@ public class ContextCommit implements ContextChange {
 		sym = null;
 	}
 
+	@Override
 	public void apply(ParserWalker walker, SleighDebugLogger debug) throws MemoryAccessException {
 		walker.getParserContext().addCommit(walker.getState(), sym, num, mask);
 		if (debug != null) {
@@ -40,6 +41,7 @@ public class ContextCommit implements ContextChange {
 		}
 	}
 
+	@Override
 	public void restoreXml(XmlPullParser parser, SleighLanguage lang) {
 		XmlElement el = parser.start("commit");
 		int id = SpecXmlUtils.decodeInt(el.getAttribute("id"));

@@ -16,11 +16,13 @@
  */
 package ghidra.framework.options;
 
-import ghidra.util.exception.AssertException;
-
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyEditor;
+
+import ghidra.util.exception.AssertException;
 
 public class NoRegisteredEditorPropertyEditor implements PropertyEditor {
 

@@ -15,7 +15,11 @@
  */
 package ghidra.util.datastruct;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 public class CopyOnReadWeakSet<T> extends WeakSet<T> {
 

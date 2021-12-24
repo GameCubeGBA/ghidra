@@ -135,10 +135,7 @@ public class DBRecord implements Comparable<DBRecord> {
 		if (otherSchema == this.schema) {
 			return true;
 		}
-		if (fieldValues.length != otherSchema.getFieldCount()) {
-			return false;
-		}
-		if (!key.isSameType(otherSchema.getKeyFieldType())) {
+		if ((fieldValues.length != otherSchema.getFieldCount()) || !key.isSameType(otherSchema.getKeyFieldType())) {
 			return false;
 		}
 		Field[] otherFields = otherSchema.getFields();

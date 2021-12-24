@@ -22,7 +22,10 @@ import javax.swing.ImageIcon;
 
 import docking.tool.ToolConstants;
 import ghidra.framework.client.RepositoryAdapter;
-import ghidra.framework.model.*;
+import ghidra.framework.model.DomainFileFilter;
+import ghidra.framework.model.DomainFolder;
+import ghidra.framework.model.ProjectData;
+import ghidra.framework.model.ServerInfo;
 import resources.ResourceManager;
 
 public class DomainFolderRootNode extends DomainFolderNode {

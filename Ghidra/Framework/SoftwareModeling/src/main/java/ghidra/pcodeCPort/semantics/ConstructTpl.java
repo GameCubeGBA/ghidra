@@ -16,11 +16,15 @@
 package ghidra.pcodeCPort.semantics;
 
 import java.io.PrintStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import org.jdom.Element;
 
-import generic.stl.*;
+import generic.stl.IteratorSTL;
+import generic.stl.Pair;
+import generic.stl.VectorSTL;
 import ghidra.pcodeCPort.opcodes.OpCode;
 import ghidra.pcodeCPort.space.AddrSpace;
 import ghidra.pcodeCPort.translate.Translate;
@@ -32,7 +36,7 @@ public class ConstructTpl {
 	public final Location loc;
 	protected int delayslot;
 	protected int numlabels; // Number of label templates
-	protected VectorSTL<OpTpl> vec = new VectorSTL<OpTpl>();
+	protected VectorSTL<OpTpl> vec = new VectorSTL<>();
 	protected HandleTpl result;
 
 	public ConstructTpl(Location loc) {
@@ -111,14 +115,14 @@ public class ConstructTpl {
 		OpTpl op;
 		VarnodeTpl indvn;
 		IteratorSTL<OpTpl> iter;
-		ArrayList<Location> locations = new ArrayList<Location>();
+		ArrayList<Location> locations = new ArrayList<>();
 		for (iter = vec.begin(); !iter.isEnd(); iter.increment()) {
 			op = iter.get();
 			locations.add(op.location);
 			if (op.getOpcode() == OpCode.CPUI_MULTIEQUAL) { // was BUILD
 				int index = (int) op.getIn(0).getOffset().getReal();
 				if (check.get(index) != 0) {
-					return new Pair<Integer, Location>(check.get(index), op.location);
+					return new Pair<>(check.get(index), op.location);
 				}
 				check.set(index, 1);
 			}
@@ -134,7 +138,7 @@ public class ConstructTpl {
 				vec.insert(vec.begin(), op);
 			}
 		}
-		return new Pair<Integer, Location>(0, null);
+		return new Pair<>(0, null);
 	}
 
 	public boolean buildOnly() {
@@ -252,7 +256,7 @@ public class ConstructTpl {
 		List<?> list = el.getChildren();
 		Iterator<?> it = list.iterator();
 		Element child = (Element) it.next();
-		if (child.getName().equals("null")) {
+		if ("null".equals(child.getName())) {
 			result = null;
 		}
 		else {

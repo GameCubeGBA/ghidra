@@ -16,7 +16,7 @@
  */
 package ghidra.app.util.importer;
 
-import generic.continues.*;
+import generic.continues.ContinuesFactory;
 
 public class MessageLogContinuesFactory {
     public static ContinuesFactory create(MessageLog log) {

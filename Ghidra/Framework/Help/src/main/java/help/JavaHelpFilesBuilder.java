@@ -15,15 +15,22 @@
  */
 package help;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Collection;
+import java.util.Date;
+import java.util.Iterator;
+
 import ghidra.util.exception.AssertException;
 import help.validator.LinkDatabase;
 import help.validator.location.HelpModuleCollection;
 import help.validator.model.AnchorDefinition;
 import help.validator.model.GhidraTOCFile;
-
-import java.io.*;
-import java.nio.file.*;
-import java.util.*;
 
 /**
  * This class:
@@ -72,7 +79,7 @@ public class JavaHelpFilesBuilder {
 		LogFileWriter errorLog = createLogFile();
 
 		boolean hasErrors = false;
-		StringBuffer shortErrorDescription = new StringBuffer();
+		StringBuilder shortErrorDescription = new StringBuilder();
 		try {
 			generateMapFile(help);
 		}
@@ -127,7 +134,7 @@ public class JavaHelpFilesBuilder {
 			Files.delete(mapFile);
 		}
 		PrintWriter out = new LogFileWriter(mapFile);
-		try {
+		try (out) {
 			out.println("<?xml version='1.0' encoding='ISO-8859-1' ?>");
 			out.println("<!doctype MAP public \"-//Sun Microsystems Inc.//DTD JavaHelp Map Version 1.0//EN\">");
 			out.println("<!-- Auto-generated on " + (new Date()).toString() + " : Do Not Edit -->");
@@ -154,9 +161,6 @@ public class JavaHelpFilesBuilder {
 			out.println("</map>");
 			message("\tfinished generating map file");
 		}
-		finally {
-			out.close();
-		}
 	}
 
 	private String relativize(Path parent, String anchorTarget) {
@@ -176,8 +180,7 @@ public class JavaHelpFilesBuilder {
 
 		Path relative = anchorPath.subpath(1, anchorPath.getNameCount());
 		String relativePath = relative.toString();
-		String normalized = relativePath.replaceAll("\\\\", "/");
-		return normalized;
+		return relativePath.replace('\\', '/');
 	}
 
 	private void generateTOCFile(LinkDatabase database, HelpModuleCollection help)
@@ -193,7 +196,7 @@ public class JavaHelpFilesBuilder {
 // Inner Classes
 //==================================================================================================    
 
-	private class LogFileWriter extends PrintWriter {
+	private static class LogFileWriter extends PrintWriter {
 		private final Path file;
 
 		LogFileWriter(Path logFile) throws IOException {

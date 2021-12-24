@@ -24,7 +24,12 @@ import javax.swing.Icon;
 import docking.action.KeyBindingData;
 import docking.action.MenuData;
 import docking.widgets.tree.GTreeNode;
-import ghidra.framework.main.datatree.*;
+import ghidra.framework.main.datatree.Cuttable;
+import ghidra.framework.main.datatree.DataTree;
+import ghidra.framework.main.datatree.DataTreeClipboardUtils;
+import ghidra.framework.main.datatree.DomainFolderNode;
+import ghidra.framework.main.datatree.FrontEndProjectTreeContext;
+import ghidra.framework.main.datatree.PasteFileTask;
 import ghidra.util.Msg;
 import ghidra.util.task.TaskLauncher;
 import resources.ResourceManager;
@@ -49,10 +54,7 @@ public class ProjectDataPasteAction extends ProjectDataCopyCutBaseAction {
 
 	@Override
 	protected boolean isEnabledForContext(FrontEndProjectTreeContext context) {
-		if (!context.hasExactlyOneFileOrFolder()) {
-			return false;
-		}
-		if (!context.isInActiveProject()) {
+		if (!context.hasExactlyOneFileOrFolder() || !context.isInActiveProject()) {
 			return false;
 		}
 		GTreeNode node = (GTreeNode) context.getContextObject();
@@ -135,7 +137,7 @@ public class ProjectDataPasteAction extends ProjectDataCopyCutBaseAction {
 		boolean listChanged = removeDecendantsFromList(list);
 
 		boolean resetClipboard = false;
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 
 		for (int i = 0; i < list.size(); i++) {
 			GTreeNode tnode = list.get(i);
@@ -146,11 +148,8 @@ public class ProjectDataPasteAction extends ProjectDataCopyCutBaseAction {
 					removeNodeFromList = true;
 					sb.append(
 						"File " + tnode.getName() + " already exists at " + tnode.getParent());
-				}
-				else if (tnode instanceof DomainFolderNode) {
-					if (destNode.isAncestor(tnode)) {
-						removeNodeFromList = true;
-					}
+				} else if ((tnode instanceof DomainFolderNode) && destNode.isAncestor(tnode)) {
+					removeNodeFromList = true;
 				}
 			}
 			else if (tnode.getParent() == null || destNode == tnode) {
@@ -165,21 +164,17 @@ public class ProjectDataPasteAction extends ProjectDataCopyCutBaseAction {
 					--i;
 				}
 				resetClipboard = true;
-				if (tnode.getParent() != null) {
-					if (tnode instanceof Cuttable) {
-						((Cuttable) tnode).setIsCut(false);
-					}
+				if ((tnode.getParent() != null) && (tnode instanceof Cuttable)) {
+					((Cuttable) tnode).setIsCut(false);
 				}
 			}
 		}
-		if (resetClipboard || listChanged) {
-			if (sb.length() > 0) {
-				String title = isCutOperation ? "Cannot Move File(s)" : "Cannot Copy File(s)";
-				String action = isCutOperation ? "moved" : "copied";
+		if ((resetClipboard || listChanged) && (sb.length() > 0)) {
+			String title = isCutOperation ? "Cannot Move File(s)" : "Cannot Copy File(s)";
+			String action = isCutOperation ? "moved" : "copied";
 
-				Msg.showWarn(getClass(), tree, title,
-					"The following file(s) could not be " + action + ":\n" + sb.toString());
-			}
+			Msg.showWarn(getClass(), tree, title,
+				"The following file(s) could not be " + action + ":\n" + sb.toString());
 		}
 	}
 
@@ -209,10 +204,8 @@ public class ProjectDataPasteAction extends ProjectDataCopyCutBaseAction {
 
 	private boolean isCutOperation(List<GTreeNode> list) {
 		for (GTreeNode node : list) {
-			if (node instanceof Cuttable) {
-				if (((Cuttable) node).isCut()) {
-					return true;
-				}
+			if ((node instanceof Cuttable) && ((Cuttable) node).isCut()) {
+				return true;
 			}
 		}
 		return false;

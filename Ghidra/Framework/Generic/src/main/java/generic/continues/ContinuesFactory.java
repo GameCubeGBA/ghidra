@@ -37,7 +37,7 @@ public class ContinuesFactory implements GenericFactory {
 		try {
 			Object thing;
 			if (!enabled) {
-				Constructor<?> c = type.getConstructor(new Class<?>[0]);
+				Constructor<?> c = type.getConstructor();
 				thing = c.newInstance(args);
 			}
 			else {

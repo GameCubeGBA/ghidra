@@ -19,7 +19,9 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
 import docking.ActionContext;
-import docking.action.*;
+import docking.action.DockingAction;
+import docking.action.KeyBindingData;
+import docking.action.MenuData;
 import docking.tool.ToolConstants;
 import ghidra.framework.OperatingSystem;
 import ghidra.framework.Platform;

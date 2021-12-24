@@ -29,26 +29,26 @@ public interface ColumnData<T> {
 	 *
 	 * @return  the name of the column being filtered.
 	 */
-	public String getColumnName();
+	String getColumnName();
 
 	/**
 	 * Returns the number of column values (unfiltered table row count)
 	 *
 	 * @return the number of column values (unfiltered table row count)
 	 */
-	public int getCount();
+	int getCount();
 
 	/**
 	 * Returns the column value for the given row.
 	 * @param row the row for which to get the column value.
 	 * @return the column value for the given row.
 	 */
-	public T getColumnValue(int row);
+	T getColumnValue(int row);
 
 	/**
 	 * Returns the table's DataSource.
 	 * @return  the table's DataSource.
 	 */
-	public Object getTableDataSource();
+	Object getTableDataSource();
 
 }

@@ -17,8 +17,6 @@ package docking.util;
 
 import java.awt.Component;
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.Icon;
@@ -42,25 +40,22 @@ public class AnimatedIcon implements Icon {
 	public AnimatedIcon(List<? extends Icon> icons, int frameDelay, int framesToSkip) {
 		this.iconList = icons;
 		this.skipFrames = framesToSkip;
-		timer = new Timer(frameDelay, new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (--paintCounter <= 0) {
-					timer.stop();
-					return;
-				}
+		timer = new Timer(frameDelay, e -> {
+			if (--paintCounter <= 0) {
+				timer.stop();
+				return;
+			}
 
-				if (skipFrameCount > 0) {
-					skipFrameCount--;
-					return;
-				}
-				if (++currentIconIndex >= iconList.size()) {
-					currentIconIndex = 0;
-					skipFrameCount = skipFrames;
-				}
-				if (component != null) {
-					component.repaint();
-				}
+			if (skipFrameCount > 0) {
+				skipFrameCount--;
+				return;
+			}
+			if (++currentIconIndex >= iconList.size()) {
+				currentIconIndex = 0;
+				skipFrameCount = skipFrames;
+			}
+			if (component != null) {
+				component.repaint();
 			}
 		});
 

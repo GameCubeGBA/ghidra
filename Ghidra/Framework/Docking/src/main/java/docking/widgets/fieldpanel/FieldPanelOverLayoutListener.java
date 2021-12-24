@@ -25,5 +25,5 @@ public interface FieldPanelOverLayoutListener {
 	 * The manager is about to layout a component over a field in the panel
 	 * @param ev the event describing the layout
 	 */
-	public void fieldLayout(FieldPanelOverLayoutEvent ev);
+	void fieldLayout(FieldPanelOverLayoutEvent ev);
 }

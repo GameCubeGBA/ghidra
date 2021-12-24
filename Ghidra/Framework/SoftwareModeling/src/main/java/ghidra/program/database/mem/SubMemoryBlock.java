@@ -18,7 +18,10 @@ package ghidra.program.database.mem;
 import java.io.IOException;
 
 import db.DBRecord;
-import ghidra.program.model.mem.*;
+import ghidra.program.model.mem.MemoryAccessException;
+import ghidra.program.model.mem.MemoryBlock;
+import ghidra.program.model.mem.MemoryBlockSourceInfo;
+import ghidra.program.model.mem.MemoryBlockType;
 
 /**
  * Interface for the various types of memory block sections.  They are used by a {@link MemoryBlockDB}

@@ -16,11 +16,11 @@
  */
 package ghidra.framework.project;
 
+import java.io.File;
+
 import generic.util.FileLocker;
 import generic.util.LockFactory;
 import ghidra.framework.model.ProjectLocator;
-
-import java.io.File;
 
 /**
  * A simple delegate for creating and using locks in Ghidra.

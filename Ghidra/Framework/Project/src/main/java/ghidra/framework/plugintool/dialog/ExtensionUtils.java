@@ -15,10 +15,28 @@
  */
 package ghidra.framework.plugintool.dialog;
 
-import java.io.*;
-import java.nio.file.*;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.attribute.PosixFilePermission;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Properties;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
@@ -394,10 +412,8 @@ public class ExtensionUtils {
 					String path = entry.getName();
 					path = path.replace('\\', '/');
 					int separatorCount = StringUtils.countMatches(entry.getName(), '/');
-					if (separatorCount == 1) {
-						if (entry.getName().endsWith(PROPERTIES_FILE_NAME)) {
-							return true;
-						}
+					if ((separatorCount == 1) && entry.getName().endsWith(PROPERTIES_FILE_NAME)) {
+						return true;
 					}
 				}
 
@@ -435,11 +451,7 @@ public class ExtensionUtils {
 			return false;
 		}
 
-		if (file.isDirectory()) {
-			return false;
-		}
-
-		if (file.length() < 4) {
+		if (file.isDirectory() || (file.length() < 4)) {
 			return false;
 		}
 
@@ -487,7 +499,7 @@ public class ExtensionUtils {
 			// The given directory didn't contain the file, so search the immediate children.
 			if (tempFiles != null && !tempFiles.isEmpty()) {
 				for (ResourceFile rFile : tempFiles) {
-					if (rFile.isDirectory() && !rFile.getName().equals("Skeleton")) {
+					if (rFile.isDirectory() && !"Skeleton".equals(rFile.getName())) {
 						ResourceFile pf = findExtensionPropertyFile(rFile);
 						if (pf != null) {
 							propertyFiles.add(pf);
@@ -589,7 +601,7 @@ public class ExtensionUtils {
 					}
 				}
 
-				if (installed.get() == false) {
+				if (!installed.get()) {
 					Msg.showError(null, null, "Installation Error", "Error installing extension [" +
 						file.getName() + "]." + " " + e.getExceptionType());
 				}

@@ -18,7 +18,9 @@ package docking.widgets.dialogs;
 import java.awt.BorderLayout;
 import java.awt.Insets;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 import docking.DialogComponentProvider;
 import docking.DockingUtils;

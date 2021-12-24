@@ -15,7 +15,10 @@
  */
 package ghidra.program.model.data;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 import ghidra.util.InvalidNameException;
 import ghidra.util.UniversalID;
@@ -30,40 +33,40 @@ public interface DataTypeManager {
 	/**
 	 * ID for the default (undefined) data type.
 	 */
-	public static long DEFAULT_DATATYPE_ID = 0;
+	long DEFAULT_DATATYPE_ID = 0;
 
 	/**
 	 * ID if data type type is not known in this data type manager.
 	 */
-	public static long NULL_DATATYPE_ID = -1;
+	long NULL_DATATYPE_ID = -1;
 
 	/**
 	 * ID if data type type is BAD.
 	 */
-	public static long BAD_DATATYPE_ID = -2;
+	long BAD_DATATYPE_ID = -2;
 
 	/**
 	 * Name of the category for the build in data types.
 	 */
-	public final static String BUILT_IN_DATA_TYPES_NAME = "BuiltInTypes";
+	String BUILT_IN_DATA_TYPES_NAME = "BuiltInTypes";
 
-	public final long LOCAL_ARCHIVE_KEY = 0;
-	public final long BUILT_IN_ARCHIVE_KEY = 1;
-	public final UniversalID LOCAL_ARCHIVE_UNIVERSAL_ID = new UniversalID(LOCAL_ARCHIVE_KEY);
-	public final UniversalID BUILT_IN_ARCHIVE_UNIVERSAL_ID = new UniversalID(BUILT_IN_ARCHIVE_KEY);
+	long LOCAL_ARCHIVE_KEY = 0;
+	long BUILT_IN_ARCHIVE_KEY = 1;
+	UniversalID LOCAL_ARCHIVE_UNIVERSAL_ID = new UniversalID(LOCAL_ARCHIVE_KEY);
+	UniversalID BUILT_IN_ARCHIVE_UNIVERSAL_ID = new UniversalID(BUILT_IN_ARCHIVE_KEY);
 
 	/**
 	 * Returns the universal ID for this dataType manager
 	 * @return the universal ID for this dataType manager
 	 */
-	public UniversalID getUniversalID();
+	UniversalID getUniversalID();
 
 	/**
 	 * Returns true if the given category path exists in this datatype manager
 	 * @param path the path
 	 * @return true if the given category path exists in this datatype manager
 	 */
-	public boolean containsCategory(CategoryPath path);
+	boolean containsCategory(CategoryPath path);
 
 	/**
 	 * Returns a unique name not currently used by any other dataType or category
@@ -73,7 +76,7 @@ public interface DataTypeManager {
 	 * @param baseName the base name to be made unique
 	 * @return a unique name starting with baseName
 	 */
-	public String getUniqueName(CategoryPath path, String baseName);
+	String getUniqueName(CategoryPath path, String baseName);
 
 	/**
 	 * Returns a dataType that is "in" (ie suitable implementation) this
@@ -84,7 +87,7 @@ public interface DataTypeManager {
 	 * @param handler used to resolve conflicts with existing dataTypes.
 	 * @return an equivalent dataType that "belongs" to this dataTypeManager.
 	 */
-	public DataType resolve(DataType dataType, DataTypeConflictHandler handler);
+	DataType resolve(DataType dataType, DataTypeConflictHandler handler);
 
 	/**
 	 * Returns a data type after adding it to this data manager.
@@ -95,7 +98,7 @@ public interface DataTypeManager {
 	 * @param handler used to resolve conflicts with existing dataTypes.
 	 * @return an equivalent dataType that "belongs" to this dataTypeManager.
 	 */
-	public DataType addDataType(DataType dataType, DataTypeConflictHandler handler);
+	DataType addDataType(DataType dataType, DataTypeConflictHandler handler);
 
 	/**
 	 * Sequentially adds a collection of datatypes to this data manager.
@@ -109,33 +112,33 @@ public interface DataTypeManager {
 	 * @param monitor task monitor
 	 * @throws CancelledException if monitor is cancelled
 	 */
-	public void addDataTypes(Collection<DataType> dataTypes, DataTypeConflictHandler handler,
+	void addDataTypes(Collection<DataType> dataTypes, DataTypeConflictHandler handler,
 			TaskMonitor monitor) throws CancelledException;
 
 	/**
 	 * Returns an iterator over all the dataTypes in this manager
 	 * @return an iterator over all the dataTypes in this manager
 	 */
-	public Iterator<DataType> getAllDataTypes();
+	Iterator<DataType> getAllDataTypes();
 
 	/**
 	 * Adds all data types to the specified list.]
 	 * 
 	 * @param list the result list into which the types will be placed
 	 */
-	public void getAllDataTypes(List<DataType> list);
+	void getAllDataTypes(List<DataType> list);
 
 	/**
 	 * Returns an iterator over all structures in this manager
 	 * @return the iterator
 	 */
-	public Iterator<Structure> getAllStructures();
+	Iterator<Structure> getAllStructures();
 
 	/**
 	 * Returns an iterator over all composite data types (structures and unions) in this manager
 	 * @return the iterator
 	 */
-	public Iterator<Composite> getAllComposites();
+	Iterator<Composite> getAllComposites();
 
 	/**
 	 * Begin searching at the root category for all data types with the
@@ -144,7 +147,7 @@ public interface DataTypeManager {
 	 * @param name name of the data type
 	 * @param list list that will be populated with matching DataType objects
 	 */
-	public void findDataTypes(String name, List<DataType> list);
+	void findDataTypes(String name, List<DataType> list);
 
 	/**
 	 * Begin searching at the root category for all data types with names
@@ -154,7 +157,7 @@ public interface DataTypeManager {
 	 * @param caseSensitive true if the match is case sensitive
 	 * @param monitor task monitor to cancel the search
 	 */
-	public void findDataTypes(String name, List<DataType> list, boolean caseSensitive,
+	void findDataTypes(String name, List<DataType> list, boolean caseSensitive,
 			TaskMonitor monitor);
 
 	/**
@@ -168,7 +171,7 @@ public interface DataTypeManager {
 	 * @throws DataTypeDependencyException if the replacement datatype depends on
 	 * the existing dataType;
 	 */
-	public DataType replaceDataType(DataType existingDt, DataType replacementDt,
+	DataType replaceDataType(DataType existingDt, DataType replacementDt,
 			boolean updateCategoryPath) throws DataTypeDependencyException;
 
 	/**
@@ -185,7 +188,7 @@ public interface DataTypeManager {
 	 * @param dataTypePath path
 	 * @return the dataType or null if it isn't found
 	 */
-	public DataType getDataType(String dataTypePath);
+	DataType getDataType(String dataTypePath);
 
 	/**
 	 * Gets the dataType for the given path. See {@link #getDataType(String)} for details.
@@ -193,15 +196,14 @@ public interface DataTypeManager {
 	 * @return dataType at the given path
 	 * @deprecated use {@link #getDataType(String)} or better yet {@link #getDataType(DataTypePath)}
 	 */
-	@Deprecated
-	public DataType findDataType(String dataTypePath);
+	@Deprecated DataType findDataType(String dataTypePath);
 
 	/**
 	 * Find the dataType for the given dataTypePath.
 	 * @param dataTypePath the DataTypePath for the datatype
 	 * @return the datatype for the given path.
 	 */
-	public DataType getDataType(DataTypePath dataTypePath);
+	DataType getDataType(DataTypePath dataTypePath);
 
 	/**
 	* Returns the dataTypeId for the given dataType.  If the dataType is not
@@ -210,7 +212,7 @@ public interface DataTypeManager {
 	 * @param dt the data type
 	 * @return the ID of the resolved type
 	*/
-	public long getResolvedID(DataType dt);
+	long getResolvedID(DataType dt);
 
 	/**
 	 * Returns the dataTypeId for the given dataType.  If the dataType does not exist,
@@ -219,7 +221,7 @@ public interface DataTypeManager {
 	 * @param dt the datatype to get an id for
 	 * @return the ID of the type
 	 */
-	public long getID(DataType dt);
+	long getID(DataType dt);
 
 	/**
 	 * Returns the dataType associated with the given dataTypeId or null if the dataTypeId is
@@ -228,7 +230,7 @@ public interface DataTypeManager {
 	 * @param dataTypeID the ID
 	 * @return the type
 	 */
-	public DataType getDataType(long dataTypeID);
+	DataType getDataType(long dataTypeID);
 
 	/**
 	 * Returns the Category with the given id
@@ -236,7 +238,7 @@ public interface DataTypeManager {
 	 * @param categoryID id of the desired category
 	 * @return the category
 	 */
-	public Category getCategory(long categoryID);
+	Category getCategory(long categoryID);
 
 	/**
 	 * Get the category that has the given path
@@ -244,7 +246,7 @@ public interface DataTypeManager {
 	 * @param path the path
 	 * @return the category if defined, otherwise null
 	 */
-	public Category getCategory(CategoryPath path);
+	Category getCategory(CategoryPath path);
 
 	/**
 	 * Notification when data type is changed.
@@ -252,19 +254,19 @@ public interface DataTypeManager {
 	 * @param isAutoChange true if change was an automatic change in response to
 	 * another datatype's change (e.g., size, alignment).
 	 */
-	public void dataTypeChanged(DataType dataType, boolean isAutoChange);
+	void dataTypeChanged(DataType dataType, boolean isAutoChange);
 
 	/**
 	 * Add a listener that is notified when the dataTypeManger changes.
 	 * @param l the listener
 	 */
-	public void addDataTypeManagerListener(DataTypeManagerChangeListener l);
+	void addDataTypeManagerListener(DataTypeManagerChangeListener l);
 
 	/**
 	 * Remove the DataTypeManger change listener.
 	 * @param l the listener
 	 */
-	public void removeDataTypeManagerListener(DataTypeManagerChangeListener l);
+	void removeDataTypeManagerListener(DataTypeManagerChangeListener l);
 
 	/**
 	 * Adds a listener that will be notified when this manager's cache is invalidated.  This will
@@ -272,13 +274,13 @@ public interface DataTypeManager {
 	 * during an undo or a redo.
 	 * @param listener The listener to add
 	 */
-	public void addInvalidatedListener(InvalidatedListener listener);
+	void addInvalidatedListener(InvalidatedListener listener);
 
 	/**
 	 * Removes a previously added InvalidatedListener
 	 * @param listener the listener to remove.
 	 */
-	public void removeInvalidatedListener(InvalidatedListener listener);
+	void removeInvalidatedListener(InvalidatedListener listener);
 
 	/**
 	 * Remove the given datatype from this manager
@@ -286,7 +288,7 @@ public interface DataTypeManager {
 	 * @param monitor the task monitor
 	 * @return true if the data type existed and was removed
 	 */
-	public boolean remove(DataType dataType, TaskMonitor monitor);
+	boolean remove(DataType dataType, TaskMonitor monitor);
 
 	/**
 	 * Return true if the given dataType exists in this data type manager
@@ -294,7 +296,7 @@ public interface DataTypeManager {
 	 * @param dataType the type
 	 * @return true if the type is in this manager
 	 */
-	public boolean contains(DataType dataType);
+	boolean contains(DataType dataType);
 
 	/**
 	 * Create a category for the given path; returns the current category if it already exits
@@ -302,7 +304,7 @@ public interface DataTypeManager {
 	 * @param path the path
 	 * @return the category
 	 */
-	public Category createCategory(CategoryPath path);
+	Category createCategory(CategoryPath path);
 
 	/**
 	 * Gets the data type with the indicated name in the indicated category.
@@ -310,51 +312,51 @@ public interface DataTypeManager {
 	 * @param name the data type's name
 	 * @return the data type.
 	 */
-	public DataType getDataType(CategoryPath path, String name);
+	DataType getDataType(CategoryPath path, String name);
 
 	/**
 	 * Returns this data type manager's name
 	 * @return the name
 	 */
-	public String getName();
+	String getName();
 
 	/**
 	 * Sets this data type manager's name
 	 * @param name the new name
 	 * @throws InvalidNameException if the given name is invalid (such as when null or empty)
 	 */
-	public void setName(String name) throws InvalidNameException;
+	void setName(String name) throws InvalidNameException;
 
 	/**
 	 * Starts a transaction for making changes in this data type manager.
 	 * @param description a short description of the changes to be made.
 	 * @return the transaction ID
 	 */
-	public int startTransaction(String description);
+	int startTransaction(String description);
 
 	/**
 	 * Returns true if this DataTypeManager can be modified.
 	 * @return true if this DataTypeMangaer can be modified.
 	 */
-	public boolean isUpdatable();
+	boolean isUpdatable();
 
 	/**
 	 * Ends the current transaction
 	 * @param transactionID id of the transaction to end
 	 * @param commit true if changes are committed, false if changes in transaction are revoked
 	 */
-	public void endTransaction(int transactionID, boolean commit);
+	void endTransaction(int transactionID, boolean commit);
 
 	/**
 	 * Force all pending notification events to be flushed
 	 * @throws IllegalStateException if the client is holding this object's lock
 	 */
-	public void flushEvents();
+	void flushEvents();
 
 	/**
 	 * Closes this dataType manager
 	 */
-	public void close();
+	void close();
 
 	/**
 	 * Returns a default sized pointer to the given datatype.  The pointer size is established
@@ -363,7 +365,7 @@ public interface DataTypeManager {
 	 * @param datatype the pointed to data type
 	 * @return the pointer
 	 */
-	public Pointer getPointer(DataType datatype);
+	Pointer getPointer(DataType datatype);
 
 	/**
 	 * Returns a pointer of the given size to the given datatype.
@@ -374,13 +376,13 @@ public interface DataTypeManager {
 	 * @param size the size of the pointer to be created or -1 for a default sized pointer
 	 * @return the pointer
 	 */
-	public Pointer getPointer(DataType datatype, int size);
+	Pointer getPointer(DataType datatype, int size);
 
 	/**
 	 * Returns the root category Manager
 	 * @return the category
 	 */
-	public Category getRootCategory();
+	Category getRootCategory();
 
 	/**
 	 * Returns true if the given datatype has been designated as a favorite. If the datatype
@@ -388,7 +390,7 @@ public interface DataTypeManager {
 	 * @param datatype the datatype to check.
 	 * @return true if the given datatype is a favorite in this manager.
 	 */
-	public boolean isFavorite(DataType datatype);
+	boolean isFavorite(DataType datatype);
 
 	/**
 	 * Sets the given dataType to be either a favorite or not a favorite.
@@ -396,48 +398,48 @@ public interface DataTypeManager {
 	 * @param isFavorite true if the datatype is to be a favorite or false otherwise.
 	 * @throws IllegalArgumentException if the given datatype does not belong to this manager.
 	 */
-	public void setFavorite(DataType datatype, boolean isFavorite);
+	void setFavorite(DataType datatype, boolean isFavorite);
 
 	/**
 	 * Returns a list of datatypes that have been designated as favorites.
 	 * @return the list of favorite datatypes in this manager.
 	 */
-	public List<DataType> getFavorites();
+	List<DataType> getFavorites();
 
 	/**
 	 * Returns the total number of data type categories
 	 * @return the count
 	 */
-	public int getCategoryCount();
+	int getCategoryCount();
 
 	/**
 	 * Returns the total number of defined data types.
 	 * @param includePointersAndArrays if true all pointers and array data types will be included
 	 * @return the count
 	 */
-	public int getDataTypeCount(boolean includePointersAndArrays);
+	int getDataTypeCount(boolean includePointersAndArrays);
 
 	/**
 	 * Adds all enum value names that match the given value, to the given set.
 	 * @param value the value to look for enum name matches
 	 * @param enumValueNames the set to add matches to.
 	 */
-	public void findEnumValueNames(long value, Set<String> enumValueNames);
+	void findEnumValueNames(long value, Set<String> enumValueNames);
 
-	public DataType getDataType(SourceArchive sourceArchive, UniversalID datatypeID);
+	DataType getDataType(SourceArchive sourceArchive, UniversalID datatypeID);
 
 	/**
 	 * Get's the data type with the matching universal data type id.
 	 * @param datatypeID The universal id of the data type to search for
 	 * @return The data type with the matching UUID, or null if no such data type can be found.
 	 */
-	public DataType findDataTypeForID(UniversalID datatypeID);
+	DataType findDataTypeForID(UniversalID datatypeID);
 
 	/**
 	 * Returns the timestamp of the last time this manager was changed
 	 * @return the timestamp
 	 */
-	public long getLastChangeTimeForMyManager();
+	long getLastChangeTimeForMyManager();
 
 	/**
 	 * Returns the source archive for the given ID
@@ -445,13 +447,13 @@ public interface DataTypeManager {
 	 * @param sourceID the ID
 	 * @return the archive; null if the ID is null; null if the archive does not exist
 	 */
-	public SourceArchive getSourceArchive(UniversalID sourceID);
+	SourceArchive getSourceArchive(UniversalID sourceID);
 
 	/**
 	 * Returns this manager's archive type
 	 * @return the type
 	 */
-	public ArchiveType getType();
+	ArchiveType getType();
 
 	/**
 	 * Returns all data types within this manager that have as their source the given archive
@@ -459,13 +461,13 @@ public interface DataTypeManager {
 	 * @param sourceArchive the archive
 	 * @return the types
 	 */
-	public List<DataType> getDataTypes(SourceArchive sourceArchive);
+	List<DataType> getDataTypes(SourceArchive sourceArchive);
 
 	/**
 	 * Returns the source archive for this manager
 	 * @return the archive; null if the ID is null; null if the archive does not exist
 	 */
-	public SourceArchive getLocalSourceArchive();
+	SourceArchive getLocalSourceArchive();
 
 	/**
 	 * Change the given data type so that its source archive is the given archive
@@ -473,14 +475,14 @@ public interface DataTypeManager {
 	 * @param datatype the type
 	 * @param archive the archive
 	 */
-	public void associateDataTypeWithArchive(DataType datatype, SourceArchive archive);
+	void associateDataTypeWithArchive(DataType datatype, SourceArchive archive);
 
 	/**
 	 * If the indicated data type is associated with a source archive, this will remove the
 	 * association and the data type will become local to this data type manager.
 	 * @param datatype the data type to be disassociated from a source archive.
 	 */
-	public void disassociate(DataType datatype);
+	void disassociate(DataType datatype);
 
 	/**
 	 * Updates the name associated with a source archive in this data type manager.
@@ -489,7 +491,7 @@ public interface DataTypeManager {
 	 * @return true if the name associated with the source data type archive was changed.
 	 * false if it wasn't changed.
 	 */
-	public boolean updateSourceArchiveName(String archiveFileID, String name);
+	boolean updateSourceArchiveName(String archiveFileID, String name);
 
 	/**
 	 * Updates the name associated with a source archive in this data type manager.
@@ -498,20 +500,20 @@ public interface DataTypeManager {
 	 * @return true if the name associated with the source data type archive was changed.
 	 * false if it wasn't changed.
 	 */
-	public boolean updateSourceArchiveName(UniversalID sourceID, String name);
+	boolean updateSourceArchiveName(UniversalID sourceID, String name);
 
 	/**
 	 * Get the data organization associated with this data type manager.  Note that the
 	 * DataOrganization settings may not be changed dynamically.
 	 * @return data organization (will never be null)
 	 */
-	public DataOrganization getDataOrganization();
+	DataOrganization getDataOrganization();
 
 	/**
 	 * Returns a list of source archives not including the builtin or the program's archive.
 	 * @return a list of source archives not including the builtin or the program's archive.
 	 */
-	public List<SourceArchive> getSourceArchives();
+	List<SourceArchive> getSourceArchives();
 
 	/**
 	 * Removes the source archive from this manager.  This will disassociate all data types in
@@ -519,19 +521,19 @@ public interface DataTypeManager {
 	 * 
 	 * @param sourceArchive the archive
 	 */
-	public void removeSourceArchive(SourceArchive sourceArchive);
+	void removeSourceArchive(SourceArchive sourceArchive);
 
 	/**
 	 * Returns or creates a persisted version of the given source archive
 	 * @param sourceArchive the archive
 	 * @return the archive
 	 */
-	public SourceArchive resolveSourceArchive(SourceArchive sourceArchive);
+	SourceArchive resolveSourceArchive(SourceArchive sourceArchive);
 
 	/**
 	 * Returns the data types within this data type manager that contain the specified data type.
 	 * @param dataType the data type
 	 * @return a set of data types that contain the specified data type.
 	 */
-	public Set<DataType> getDataTypesContaining(DataType dataType);
+	Set<DataType> getDataTypesContaining(DataType dataType);
 }

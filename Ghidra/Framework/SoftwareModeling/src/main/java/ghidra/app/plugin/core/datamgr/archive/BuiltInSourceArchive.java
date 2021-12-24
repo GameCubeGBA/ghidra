@@ -15,7 +15,9 @@
  */
 package ghidra.app.plugin.core.datamgr.archive;
 
-import ghidra.program.model.data.*;
+import ghidra.program.model.data.ArchiveType;
+import ghidra.program.model.data.DataTypeManager;
+import ghidra.program.model.data.SourceArchive;
 import ghidra.util.UniversalID;
 
 public class BuiltInSourceArchive implements SourceArchive {

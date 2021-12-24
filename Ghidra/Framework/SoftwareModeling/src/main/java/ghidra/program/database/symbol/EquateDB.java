@@ -32,7 +32,9 @@ import ghidra.program.model.symbol.Equate;
 import ghidra.program.model.symbol.EquateReference;
 import ghidra.util.Lock;
 import ghidra.util.UniversalID;
-import ghidra.util.exception.*;
+import ghidra.util.exception.DuplicateNameException;
+import ghidra.util.exception.InvalidInputException;
+import ghidra.util.exception.NotFoundException;
 
 /**
  * Database object for an Equate.

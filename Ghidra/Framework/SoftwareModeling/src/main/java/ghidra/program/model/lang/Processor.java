@@ -16,9 +16,10 @@
  */
 package ghidra.program.model.lang;
 
-import ghidra.program.util.DefaultLanguageService;
-
 import java.util.HashMap;
+import java.util.Objects;
+
+import ghidra.program.util.DefaultLanguageService;
 
 public class Processor implements Comparable<Processor> {
 
@@ -26,7 +27,7 @@ public class Processor implements Comparable<Processor> {
 
 	private static synchronized void initialize() {
 		if (instances == null) {
-			instances = new HashMap<String, Processor>();
+			instances = new HashMap<>();
 		}
 	}
 
@@ -74,8 +75,8 @@ public class Processor implements Comparable<Processor> {
 		this.name = name;
 	}
 
-	static interface RegisterHook {
-		public void register(String name);
+	interface RegisterHook {
+		void register(String name);
 	}
 
 	private static RegisterHook registerHook = null;
@@ -98,27 +99,19 @@ public class Processor implements Comparable<Processor> {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		return result;
+		return Objects.hash(name);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if ((obj == null) || (getClass() != obj.getClass()))
 			return false;
 		Processor other = (Processor) obj;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		}
-		else if (!name.equals(other.name))
+		if (!Objects.equals(name, other.name)) {
 			return false;
+		}
 		return true;
 	}
 

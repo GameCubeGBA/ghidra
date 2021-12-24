@@ -65,9 +65,9 @@ public class StringUtilities {
 		Pattern.compile("^\"((?:[^\\\\\"]|\\\\.)*)\"$");
 
 	/**
-	 * The platform specific string that is the line separator.
-	 */
-	public final static String LINE_SEPARATOR = System.getProperty("line.separator");
+	* The platform specific string that is the line separator.
+	*/
+	public final static String LINE_SEPARATOR = System.lineSeparator();
 
 	public static final int UNICODE_REPLACEMENT = 0xFFFD;
 
@@ -456,16 +456,12 @@ public class StringUtilities {
 	 *         given length is a whole word.
 	 */
 	public static boolean isWholeWord(String text, int startIndex, int length) {
-		if (startIndex > 0) {
-			if (Character.isJavaIdentifierPart(text.charAt(startIndex - 1))) {
-				return false;
-			}
+		if ((startIndex > 0) && Character.isJavaIdentifierPart(text.charAt(startIndex - 1))) {
+			return false;
 		}
 		int endIndex = startIndex + length;
-		if (endIndex < text.length()) {
-			if (Character.isJavaIdentifierPart(text.charAt(endIndex))) {
-				return false;
-			}
+		if ((endIndex < text.length()) && Character.isJavaIdentifierPart(text.charAt(endIndex))) {
+			return false;
 		}
 
 		return true;
@@ -493,7 +489,7 @@ public class StringUtilities {
 			return null;
 		}
 
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 
 		int linepos = 0;
 
@@ -566,8 +562,7 @@ public class StringUtilities {
 	 */
 	public static String toFixedSize(String s, char pad, int size) {
 		String trimmed = trim(s, size + ELLIPSES.length());
-		String padded = pad(trimmed, pad, -size);
-		return padded;
+		return pad(trimmed, pad, -size);
 	}
 
 	/**
@@ -697,8 +692,7 @@ public class StringUtilities {
 
 		int wordIndex = start + 1;
 		String substring = s.substring(wordIndex, end);
-		WordLocation wordLocation = new WordLocation(s, substring.trim(), wordIndex);
-		return wordLocation;
+		return new WordLocation(s, substring.trim(), wordIndex);
 	}
 
 	/**
@@ -769,8 +763,7 @@ public class StringUtilities {
 
 		String escaped = Pattern.quote(separator);
 		String[] parts = s.split(escaped);
-		String last = parts[parts.length - 1];
-		return last;
+		return parts[parts.length - 1];
 	}
 
 	/**
@@ -811,8 +804,7 @@ public class StringUtilities {
 		}
 
 		String asString = o.toString();
-		String indented = indentLines(asString, "\t");
-		return indented;
+		return indentLines(asString, "\t");
 	}
 
 	/**
@@ -1119,7 +1111,7 @@ public class StringUtilities {
 		}
 
 		private final int width;
-		private StringBuffer result = new StringBuffer();
+		private StringBuilder result = new StringBuilder();
 		private int len = 0;
 
 		public LineWrapper(int width) {

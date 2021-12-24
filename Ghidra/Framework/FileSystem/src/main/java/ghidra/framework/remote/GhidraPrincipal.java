@@ -42,6 +42,7 @@ public class GhidraPrincipal implements Principal, java.io.Serializable {
 	/*
 	 * @see java.security.Principal#getName()
 	 */
+	@Override
 	public String getName() {
 		return username;
 	}

@@ -15,8 +15,14 @@
  */
 package generic.jar;
 
-import java.io.*;
-import java.net.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,7 +36,7 @@ import java.util.Map;
 public class ResourceFile implements Comparable<ResourceFile> {
 	private static final String JAR_FILE_PREFIX = "jar:file:";
 	private Resource resource;
-	private static Map<String, JarResource> jarRootsMap = new HashMap<String, JarResource>();
+	private static Map<String, JarResource> jarRootsMap = new HashMap<>();
 
 	/**
 	 * Construct a ResourceFile that represents a normal file in the file system.

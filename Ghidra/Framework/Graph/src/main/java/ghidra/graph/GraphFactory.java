@@ -24,6 +24,6 @@ public class GraphFactory {
 	}
 
 	public static <V, E extends GEdge<V>> GDirectedGraph<V, E> createDirectedGraph() {
-		return new JungDirectedGraph<V, E>();
+		return new JungDirectedGraph<>();
 	}
 }

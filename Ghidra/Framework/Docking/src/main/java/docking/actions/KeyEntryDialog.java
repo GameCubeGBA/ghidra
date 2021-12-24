@@ -15,16 +15,38 @@
  */
 package docking.actions;
 
-import java.awt.*;
-import java.util.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
-import javax.swing.*;
-import javax.swing.text.*;
+import javax.swing.Action;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
+import javax.swing.KeyStroke;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
+import javax.swing.text.TabSet;
+import javax.swing.text.TabStop;
 
 import docking.DialogComponentProvider;
 import docking.KeyEntryTextField;
-import docking.action.*;
+import docking.action.DockingActionIf;
+import docking.action.KeyBindingData;
+import docking.action.MultipleKeyAction;
 import docking.tool.ToolConstants;
 import docking.widgets.label.GIconLabel;
 import ghidra.util.HelpLocation;
@@ -206,9 +228,7 @@ public class KeyEntryDialog extends DialogComponentProvider {
 		String ksName = KeyBindingUtils.parseKeyStroke(ks);
 		try {
 			doc.insertString(0, "Actions mapped to " + ksName + "\n\n", textAttrSet);
-			for (int i = 0; i < list.size(); i++) {
-				DockingActionIf a = list.get(i);
-
+			for (DockingActionIf a : list) {
 				String collisionStr = "\t" + a.getName() + " (" + a.getOwnerDescription() + ")\n";
 				int offset = doc.getLength();
 				doc.insertString(offset, collisionStr, textAttrSet);

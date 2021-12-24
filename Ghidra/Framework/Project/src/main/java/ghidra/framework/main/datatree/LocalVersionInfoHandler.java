@@ -21,9 +21,13 @@ import java.io.IOException;
 
 import docking.widgets.tree.GTreeNode;
 import ghidra.app.util.FileOpenDataFlavorHandler;
-import ghidra.framework.client.*;
+import ghidra.framework.client.ClientUtil;
+import ghidra.framework.client.NotConnectedException;
+import ghidra.framework.client.RepositoryAdapter;
 import ghidra.framework.main.GetVersionedObjectTask;
-import ghidra.framework.model.*;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.DomainFolder;
+import ghidra.framework.model.DomainObject;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.util.task.TaskLauncher;
 

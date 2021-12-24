@@ -19,11 +19,27 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-import db.*;
-import ghidra.program.database.map.*;
+import db.ByteField;
+import db.DBFieldIterator;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.IntField;
+import db.KeyToRecordIterator;
+import db.LongField;
+import db.RecordIterator;
+import db.Schema;
+import db.StringField;
+import db.Table;
+import ghidra.program.database.map.AddressIndexKeyIterator;
+import ghidra.program.database.map.AddressIndexPrimaryKeyIterator;
+import ghidra.program.database.map.AddressMap;
+import ghidra.program.database.map.AddressRecordDeleter;
 import ghidra.program.database.util.EmptyRecordIterator;
 import ghidra.program.database.util.RecordFilter;
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.address.AddressSpace;
 import ghidra.program.model.symbol.SourceType;
 import ghidra.program.model.symbol.SymbolType;
 import ghidra.util.exception.CancelledException;
@@ -325,7 +341,7 @@ class SymbolDatabaseAdapterV3 extends SymbolDatabaseAdapter {
 	}
 
 	private class AnchoredSymbolRecordFilter implements RecordFilter {
-		private Set<Address> set = new HashSet<Address>();
+		private Set<Address> set = new HashSet<>();
 
 		@Override
 		public boolean matches(DBRecord record) {

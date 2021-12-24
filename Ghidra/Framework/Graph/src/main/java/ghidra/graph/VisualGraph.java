@@ -19,7 +19,9 @@ import java.awt.Point;
 import java.util.Set;
 
 import ghidra.graph.event.VisualGraphChangeListener;
-import ghidra.graph.viewer.*;
+import ghidra.graph.viewer.GraphComponent;
+import ghidra.graph.viewer.VisualEdge;
+import ghidra.graph.viewer.VisualVertex;
 import ghidra.graph.viewer.event.picking.GPickedState;
 import ghidra.graph.viewer.layout.LayoutListener.ChangeType;
 import ghidra.graph.viewer.layout.VisualGraphLayout;
@@ -59,7 +61,7 @@ public interface VisualGraph<V extends VisualVertex, E extends VisualEdge<V>>
 	 * @param point the new location
 	 * @param changeType the type of change
 	 */
-	public void vertexLocationChanged(V v, Point point, ChangeType changeType);
+	void vertexLocationChanged(V v, Point point, ChangeType changeType);
 
 	/**
 	 * Returns the focused vertex; null if no vertex has focus.  Focus is equivalent to 
@@ -68,7 +70,7 @@ public interface VisualGraph<V extends VisualVertex, E extends VisualEdge<V>>
 	 * 
 	 * @return the focused vertex
 	 */
-	public V getFocusedVertex();
+	V getFocusedVertex();
 
 	/**
 	 * Sets the given vertex to be focused or not
@@ -82,12 +84,12 @@ public interface VisualGraph<V extends VisualVertex, E extends VisualEdge<V>>
 	 * @param v the focused vertex
 	 * @param b true for focused; false for not focused
 	 */
-	public void setVertexFocused(V v, boolean b);
+	void setVertexFocused(V v, boolean b);
 
 	/**
 	 * Clears any selected vertices as well as the focused vertex
 	 */
-	public void clearSelectedVertices();
+	void clearSelectedVertices();
 
 	/**
 	 * Selects the given vertices
@@ -100,28 +102,28 @@ public interface VisualGraph<V extends VisualVertex, E extends VisualEdge<V>>
 	 * 
 	 * @param vertices the vertices
 	 */
-	public void setSelectedVertices(Set<V> vertices);
+	void setSelectedVertices(Set<V> vertices);
 
 	/**
 	 * Returns the selected vertices.
 	 * 
 	 * @return the selected vertices
 	 */
-	public Set<V> getSelectedVertices();
+	Set<V> getSelectedVertices();
 
 	/**
 	 * Adds the given listener to this graph
 	 * 
 	 * @param l the listener
 	 */
-	public void addGraphChangeListener(VisualGraphChangeListener<V, E> l);
+	void addGraphChangeListener(VisualGraphChangeListener<V, E> l);
 
 	/**
 	 * Removes the given listener from this graph
 	 * 
 	 * @param l the listener
 	 */
-	public void removeGraphChangeListener(VisualGraphChangeListener<V, E> l);
+	void removeGraphChangeListener(VisualGraphChangeListener<V, E> l);
 
 	/**
 	 * Returns the layout that has been applied to the graph.  The graph does not need its 
@@ -131,9 +133,9 @@ public interface VisualGraph<V extends VisualVertex, E extends VisualEdge<V>>
 	 * 
 	 * @return the layout applied to the graph
 	 */
-	public VisualGraphLayout<V, E> getLayout();
+	VisualGraphLayout<V, E> getLayout();
 
 	@Override
 	// overridden to redefine the return type
-	public VisualGraph<V, E> copy();
+ VisualGraph<V, E> copy();
 }

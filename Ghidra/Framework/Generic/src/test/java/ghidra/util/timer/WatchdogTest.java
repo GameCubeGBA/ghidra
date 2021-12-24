@@ -15,7 +15,8 @@
  */
 package ghidra.util.timer;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -23,7 +24,6 @@ import org.junit.Test;
 
 import generic.test.AbstractGTest;
 import ghidra.util.Msg;
-import ghidra.util.timer.Watchdog;
 
 public class WatchdogTest extends AbstractGTest {
 

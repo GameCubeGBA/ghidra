@@ -24,5 +24,5 @@ public interface PathHighlighterWorkPauser {
 	 * True if work should not happen; false for normal path highlighting operations
 	 * @return if work should not happen
 	 */
-	public boolean isPaused();
+	boolean isPaused();
 }

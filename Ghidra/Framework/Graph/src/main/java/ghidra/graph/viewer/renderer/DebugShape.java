@@ -15,7 +15,12 @@
  */
 package ghidra.graph.viewer.renderer;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -88,12 +93,7 @@ public class DebugShape<V, E> implements Paintable {
 	private boolean shapeIsOutdated() {
 		if (drawingIterationID != drawingIterationCounter.get()) {
 			// we are no longer drawing this shape
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					viewer.removePostRenderPaintable(DebugShape.this);
-				}
-			});
+			SwingUtilities.invokeLater(() -> viewer.removePostRenderPaintable(DebugShape.this));
 			return true;
 		}
 		return false;

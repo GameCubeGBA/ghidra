@@ -15,7 +15,11 @@
  */
 package ghidra.util.layout;
 
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Insets;
+import java.awt.LayoutManager;
 import java.io.Serializable;
 
 /**
@@ -44,8 +48,8 @@ public class StretchLayout implements LayoutManager, Serializable {
 		Component[] comps = container.getComponents();
 		int maxWidth = 0;
 		int maxHeight = 0;
-		for (int i = 0; i < comps.length; i++) {
-			Dimension size = new Dimension(comps[i].getPreferredSize());
+		for (Component comp : comps) {
+			Dimension size = new Dimension(comp.getPreferredSize());
 			maxWidth = Math.max(maxWidth, size.width);
 			maxHeight = Math.max(maxHeight, size.height);
 		}
@@ -78,8 +82,8 @@ public class StretchLayout implements LayoutManager, Serializable {
 			height = 0;
 		try {
 			Component[] comps = container.getComponents();
-			for (int i = 0; i < comps.length; i++) {
-				comps[i].setBounds(insets.left, insets.top, width, height);
+			for (Component comp : comps) {
+				comp.setBounds(insets.left, insets.top, width, height);
 			}
 		}
 		catch (Exception e) {

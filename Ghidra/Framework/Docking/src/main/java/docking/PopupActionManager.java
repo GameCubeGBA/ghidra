@@ -20,14 +20,20 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.JPopupMenu;
 
 import org.apache.commons.collections4.IteratorUtils;
 
-import docking.action.*;
-import docking.menu.*;
+import docking.action.DockingActionIf;
+import docking.action.DockingActionProviderIf;
+import docking.action.MenuData;
+import docking.menu.MenuGroupMap;
+import docking.menu.MenuHandler;
+import docking.menu.MenuManager;
 
 public class PopupActionManager implements PropertyChangeListener {
 	private List<DockingActionIf> popupActions = new ArrayList<>();

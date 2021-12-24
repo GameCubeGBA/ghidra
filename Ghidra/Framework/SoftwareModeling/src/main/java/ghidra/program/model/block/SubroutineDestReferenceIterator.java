@@ -16,13 +16,13 @@
  */
 package ghidra.program.model.block;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import ghidra.program.model.address.Address;
 import ghidra.program.model.symbol.FlowType;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
-
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * SubroutineDestReferenceIterator is a unidirectional iterator over 
@@ -31,7 +31,7 @@ import java.util.List;
 public class SubroutineDestReferenceIterator implements CodeBlockReferenceIterator {
 
     // queue of discovered destination block references
-	private LinkedList<CodeBlockReference> blockRefQueue = new LinkedList<CodeBlockReference>();
+	private LinkedList<CodeBlockReference> blockRefQueue = new LinkedList<>();
 	
 	private TaskMonitor monitor;
 
@@ -51,7 +51,8 @@ public class SubroutineDestReferenceIterator implements CodeBlockReferenceIterat
     /**
      * @see ghidra.program.model.block.CodeBlockReferenceIterator#next()
      */
-    public CodeBlockReference next() throws CancelledException {
+    @Override
+	public CodeBlockReference next() throws CancelledException {
     	monitor.checkCanceled();
     	return blockRefQueue.isEmpty() ? null : blockRefQueue.removeFirst();
     }
@@ -59,7 +60,8 @@ public class SubroutineDestReferenceIterator implements CodeBlockReferenceIterat
     /**
      * @see ghidra.program.model.block.CodeBlockReferenceIterator#hasNext()
      */
-    public boolean hasNext() throws CancelledException {
+    @Override
+	public boolean hasNext() throws CancelledException {
     	monitor.checkCanceled();
 		return !blockRefQueue.isEmpty();
     }
@@ -117,15 +119,9 @@ public class SubroutineDestReferenceIterator implements CodeBlockReferenceIterat
 						addBlockRef = true;
 					}
 				}
-				else if (refFlowType.isCall()) {
+				else if (refFlowType.isCall() || ((refFlowType.isJump() || refFlowType.isFallthrough()) && !block.contains(destAddr))) {
 					// Add all forward CALL references to queue
 					addBlockRef = true;
-                }
-                else if (refFlowType.isJump() || refFlowType.isFallthrough()) {		
-                	// Add forward external JUMP and FALL-THROUGH references to queue
-                	if (!block.contains(destAddr)) {
-                		addBlockRef = true;
-                    }
                 }
 				if (addBlockRef) {
 					queueDestReferences(blockRefQueue,

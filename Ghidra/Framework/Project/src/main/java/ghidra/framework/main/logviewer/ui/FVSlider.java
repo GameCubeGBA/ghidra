@@ -15,17 +15,39 @@
  */
 package ghidra.framework.main.logviewer.ui;
 
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.io.IOException;
 import java.util.Iterator;
 
-import javax.swing.*;
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
+import javax.swing.InputMap;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.JSlider;
+import javax.swing.KeyStroke;
+import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import ghidra.framework.main.logviewer.event.*;
+import ghidra.framework.main.logviewer.event.ArrowDownAction;
+import ghidra.framework.main.logviewer.event.ArrowUpAction;
+import ghidra.framework.main.logviewer.event.EndAction;
+import ghidra.framework.main.logviewer.event.FVEvent;
 import ghidra.framework.main.logviewer.event.FVEvent.EventType;
-import ghidra.framework.main.logviewer.model.*;
+import ghidra.framework.main.logviewer.event.FVEventListener;
+import ghidra.framework.main.logviewer.event.HomeAction;
+import ghidra.framework.main.logviewer.event.PageDownAction;
+import ghidra.framework.main.logviewer.event.PageUpAction;
+import ghidra.framework.main.logviewer.model.Chunk;
+import ghidra.framework.main.logviewer.model.ChunkModel;
+import ghidra.framework.main.logviewer.model.ChunkReader;
+import ghidra.framework.main.logviewer.model.Pair;
 import ghidra.util.Msg;
 
 /**
@@ -192,12 +214,10 @@ public class FVSlider extends JSlider
 				//
 				// If both conditions are met, we just automatically load the bottom
 				// of the file and view that in the viewport.
-				if (lastLineRow != -1) {
-					if (lastLineRow - sliderRow < numRowsVisible) {
-						FVEvent scrollEndEvt = new FVEvent(EventType.SCROLL_END, false);
-						eventListener.send(scrollEndEvt);
-						return;
-					}
+				if ((lastLineRow != -1) && (lastLineRow - sliderRow < numRowsVisible)) {
+					FVEvent scrollEndEvt = new FVEvent(EventType.SCROLL_END, false);
+					eventListener.send(scrollEndEvt);
+					return;
 				}
 			}
 			catch (IOException e1) {

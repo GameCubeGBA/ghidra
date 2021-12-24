@@ -16,14 +16,14 @@
  */
 package ghidra.pcodeCPort.slghpatexpress;
 
-import generic.stl.VectorSTL;
-import ghidra.pcodeCPort.translate.*;
-import ghidra.sleigh.grammar.Location;
-
 import java.io.PrintStream;
 import java.util.List;
 
 import org.jdom.Element;
+
+import generic.stl.VectorSTL;
+import ghidra.pcodeCPort.translate.Translate;
+import ghidra.sleigh.grammar.Location;
 
 
 public abstract class BinaryExpression extends PatternExpression {

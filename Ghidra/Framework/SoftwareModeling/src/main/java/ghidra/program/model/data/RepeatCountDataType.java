@@ -18,7 +18,9 @@ package ghidra.program.model.data;
 import ghidra.docking.settings.Settings;
 import ghidra.program.model.address.AddressOutOfBoundsException;
 import ghidra.program.model.address.AddressOverflowException;
-import ghidra.program.model.mem.*;
+import ghidra.program.model.mem.MemBuffer;
+import ghidra.program.model.mem.MemoryAccessException;
+import ghidra.program.model.mem.MemoryBufferImpl;
 import ghidra.util.Msg;
 
 /**
@@ -82,6 +84,7 @@ public abstract class RepeatCountDataType extends DynamicDataType {
 	/* (non-Javadoc)
 	 * @see ghidra.program.model.data.DataType#getValue(ghidra.program.model.mem.MemBuffer, ghidra.program.model.lang.ProcessorContext, ghidra.program.model.data.Settings, int)
 	 */
+	@Override
 	public Object getValue(MemBuffer buf, Settings settings, int length) {
 		return null;
 	}
@@ -89,6 +92,7 @@ public abstract class RepeatCountDataType extends DynamicDataType {
 	/* (non-Javadoc)
 	 * @see ghidra.program.model.data.DataType#getRepresentation(ghidra.program.model.mem.MemBuffer, ghidra.program.model.lang.ProcessorContext, ghidra.program.model.data.Settings, int)
 	 */
+	@Override
 	public String getRepresentation(MemBuffer buf, Settings settings, int length) {
 		return "";
 	}
@@ -96,6 +100,7 @@ public abstract class RepeatCountDataType extends DynamicDataType {
 	/* (non-Javadoc)
 	 * @see ghidra.program.model.data.DataType#getMnemonic(ghidra.program.model.data.Settings)
 	 */
+	@Override
 	public String getMnemonic(Settings settings) {
 		return name;
 	}

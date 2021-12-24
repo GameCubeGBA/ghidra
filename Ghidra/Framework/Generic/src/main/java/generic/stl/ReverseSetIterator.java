@@ -24,7 +24,7 @@ public class ReverseSetIterator<T> extends SetIterator<T> {
 	
 	@Override
     public IteratorSTL<T> copy() {
-		return new ReverseSetIterator<T>( tree, node);
+		return new ReverseSetIterator<>( tree, node);
 	}
 	
 	

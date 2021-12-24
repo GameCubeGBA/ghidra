@@ -20,13 +20,21 @@ import java.awt.Font;
 import java.beans.PropertyEditor;
 import java.io.File;
 import java.lang.reflect.Constructor;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 import javax.swing.KeyStroke;
 
 import org.jdom.Element;
 
-import ghidra.util.*;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
+import ghidra.util.Swing;
+import ghidra.util.SystemUtilities;
 import ghidra.util.bean.opteditor.OptionsVetoException;
 import ghidra.util.exception.AssertException;
 
@@ -219,10 +227,7 @@ public class ToolOptions extends AbstractOptions {
 		if (obj == null) {
 			return false;
 		}
-		if (obj instanceof Enum) {
-			return true;
-		}
-		if (obj instanceof byte[]) {
+		if ((obj instanceof Enum) || (obj instanceof byte[])) {
 			return true;
 		}
 		return PRIMITIVE_CLASSES.contains(obj.getClass());
@@ -327,10 +332,7 @@ public class ToolOptions extends AbstractOptions {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
 		}
 		ToolOptions other = (ToolOptions) obj;

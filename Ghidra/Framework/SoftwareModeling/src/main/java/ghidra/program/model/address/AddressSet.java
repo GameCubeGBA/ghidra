@@ -15,7 +15,10 @@
  */
 package ghidra.program.model.address;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 import ghidra.program.model.listing.Program;
 import ghidra.util.datastruct.RedBlackEntry;
@@ -355,10 +358,7 @@ public class AddressSet implements AddressSetView {
 	 * @param addressSet set of addresses to remove from this set.
 	 */
 	public final void delete(AddressSetView addressSet) {
-		if (addressSet == null || addressSet.getNumAddressRanges() == 0) {
-			return;
-		}
-		if (isEmpty()) {
+		if (addressSet == null || addressSet.getNumAddressRanges() == 0 || isEmpty()) {
 			return;
 		}
 
@@ -389,7 +389,7 @@ public class AddressSet implements AddressSetView {
 	 * @return a string displaying the ranges in this set.
 	 */
 	public String printRanges() {
-		StringBuffer buffy = new StringBuffer("[");
+		StringBuilder buffy = new StringBuilder("[");
 		for (AddressRange range : this) {
 			buffy.append(range);
 			buffy.append(" ");
@@ -478,12 +478,8 @@ public class AddressSet implements AddressSetView {
 		}
 		AddressSetView set = (AddressSetView) obj;
 
-		if (this.getNumAddresses() != set.getNumAddresses()) {
-			return false;
-		}
-
 		// if don't have same number of ranges, not equal
-		if (this.getNumAddressRanges() != set.getNumAddressRanges()) {
+		if ((this.getNumAddresses() != set.getNumAddresses()) || (this.getNumAddressRanges() != set.getNumAddressRanges())) {
 			return false;
 		}
 
@@ -796,12 +792,10 @@ public class AddressSet implements AddressSetView {
 	}
 
 	private AddressSet intersectRange(Address start, Address end, AddressSet set) {
-		if (!start.getAddressSpace().equals(end.getAddressSpace())) {
-			if (start.compareTo(end) > 0) {
-				Address tmp = start;
-				start = end;
-				end = tmp;
-			}
+		if (!start.getAddressSpace().equals(end.getAddressSpace()) && (start.compareTo(end) > 0)) {
+			Address tmp = start;
+			start = end;
+			end = tmp;
 		}
 		if (start.compareTo(end) > 0) {
 			throw new IllegalArgumentException("Start address must be less than or equal to " +
@@ -1233,7 +1227,7 @@ public class AddressSet implements AddressSetView {
 		return successor;
 	}
 
-	private class AddressRangeIteratorAdapter implements AddressRangeIterator {
+	private static class AddressRangeIteratorAdapter implements AddressRangeIterator {
 
 		private Iterator<RedBlackEntry<Address, Address>> iterator;
 
@@ -1282,12 +1276,11 @@ public class AddressSet implements AddressSetView {
 			RedBlackEntry<Address, Address> entry = it.next();
 			if (start != null && contains(entry, start)) {
 				nextAddr = start;
-				endAddr = forward ? entry.getValue() : entry.getKey();
 			}
 			else {
 				nextAddr = forward ? entry.getKey() : entry.getValue();
-				endAddr = forward ? entry.getValue() : entry.getKey();
 			}
+			endAddr = forward ? entry.getValue() : entry.getKey();
 		}
 
 		private ListIterator<RedBlackEntry<Address, Address>> getIteratorContainingOrAfter(
@@ -1384,11 +1377,8 @@ public class AddressSet implements AddressSetView {
 	 * @param toAddr only addresses greater than toAddr will be left in the set.
 	 */
 	public void deleteFromMin(Address toAddr) {
-		if (isEmpty()) {
-			return;
-		}
 		// check if toAddr is already before the start of the set
-		if (toAddr.compareTo(getMinAddress()) < 0) {
+		if (isEmpty() || (toAddr.compareTo(getMinAddress()) < 0)) {
 			return;
 		}
 		delete(getMinAddress(), toAddr);
@@ -1402,12 +1392,8 @@ public class AddressSet implements AddressSetView {
 	 * @param fromAddr only addresses less than fromAddr will be left in the set.
 	 */
 	public void deleteToMax(Address fromAddr) {
-		if (isEmpty()) {
-			return;
-		}
-
 		// check if endAddr is already past the end of the set
-		if (fromAddr.compareTo(getMaxAddress()) > 0) {
+		if (isEmpty() || (fromAddr.compareTo(getMaxAddress()) > 0)) {
 			return;
 		}
 		delete(fromAddr, getMaxAddress());

@@ -18,7 +18,13 @@ package ghidra.program.database.properties;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
-import db.*;
+import db.DBConstants;
+import db.DBHandle;
+import db.DBRecord;
+import db.ObjectStorageAdapterDB;
+import db.RecordIterator;
+import db.Schema;
+import db.Table;
 import db.util.ErrorHandler;
 import ghidra.program.database.map.AddressMap;
 import ghidra.program.model.address.Address;
@@ -27,7 +33,9 @@ import ghidra.program.util.ChangeManager;
 import ghidra.util.Msg;
 import ghidra.util.Saveable;
 import ghidra.util.classfinder.ClassTranslator;
-import ghidra.util.exception.*;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.VersionException;
 import ghidra.util.prop.PropertyVisitor;
 import ghidra.util.task.TaskMonitor;
 
@@ -72,11 +80,7 @@ public class ObjectPropertyMapDB extends PropertyMapDB implements ObjectProperty
 				tokenInstance = saveableObjectClass.getConstructor().newInstance();
 			}
 		}
-		catch (InstantiationException e) {
-			throw new RuntimeException(
-				saveableObjectClass.getName() + " must provide public default constructor");
-		}
-		catch (IllegalAccessException e) {
+		catch (InstantiationException | IllegalAccessException e) {
 			throw new RuntimeException(
 				saveableObjectClass.getName() + " must provide public default constructor");
 		} catch (NoSuchMethodException e) {

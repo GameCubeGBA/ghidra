@@ -16,7 +16,7 @@
 package ghidra.sleigh.grammar;
 
 public interface ExpressionEnvironment {
-    public String lookup(String variable);
-    public boolean equals(String lhs, String rhs);
-    public void reportError(String msg);
+    String lookup(String variable);
+    boolean equals(String lhs, String rhs);
+    void reportError(String msg);
 }

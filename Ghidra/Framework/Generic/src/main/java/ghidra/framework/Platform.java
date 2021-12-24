@@ -149,7 +149,7 @@ public enum Platform {
 
 	private final String executableExtension;
 
-	private Platform(OperatingSystem operatingSystem, Architecture architecture,
+	Platform(OperatingSystem operatingSystem, Architecture architecture,
 			String directoryName, String libraryExtension, String executableExtension) {
 		this.operatingSystem = operatingSystem;
 		this.architecture = architecture;
@@ -198,7 +198,7 @@ public enum Platform {
 	 * @return additional library paths
 	 */
 	public List<String> getAdditionalLibraryPaths() {
-		List<String> paths = new ArrayList<String>();
+		List<String> paths = new ArrayList<>();
 		if (operatingSystem == OperatingSystem.LINUX) {
 			paths.add("/bin");
 			paths.add("/lib");
@@ -234,10 +234,8 @@ public enum Platform {
 	}
 
 	private static boolean matchesCurrentPlatform(Platform platform) {
-		if (platform.operatingSystem == OperatingSystem.CURRENT_OPERATING_SYSTEM) {
-			if (platform.architecture == Architecture.CURRENT_ARCHITECTURE) {
-				return true;
-			}
+		if ((platform.operatingSystem == OperatingSystem.CURRENT_OPERATING_SYSTEM) && (platform.architecture == Architecture.CURRENT_ARCHITECTURE)) {
+			return true;
 		}
 		return false;
 	}

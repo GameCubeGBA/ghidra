@@ -15,7 +15,7 @@
  */
 package ghidra.program.model.listing;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -24,8 +24,15 @@ import generic.jar.ResourceFile;
 import generic.test.AbstractGenericTest;
 import ghidra.framework.Application;
 import ghidra.program.database.ProgramDB;
-import ghidra.program.model.data.*;
-import ghidra.program.model.lang.*;
+import ghidra.program.model.data.ArrayDataType;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.PointerDataType;
+import ghidra.program.model.data.TypedefDataType;
+import ghidra.program.model.lang.CompilerSpec;
+import ghidra.program.model.lang.Language;
+import ghidra.program.model.lang.LanguageID;
+import ghidra.program.model.lang.LanguageNotFoundException;
+import ghidra.program.model.lang.LanguageService;
 import ghidra.program.util.DefaultLanguageService;
 
 public class VariableUtilitiesTest extends AbstractGenericTest {
@@ -43,8 +50,7 @@ public class VariableUtilitiesTest extends AbstractGenericTest {
 		ResourceFile ldefFile = Application.getModuleDataFile("Toy", "languages/toy.ldefs");
 		if (ldefFile != null) {
 			LanguageService languageService = DefaultLanguageService.getLanguageService(ldefFile);
-			Language language = languageService.getLanguage(new LanguageID(languageName));
-			return language;
+			return languageService.getLanguage(new LanguageID(languageName));
 		}
 		throw new LanguageNotFoundException("Unsupported test language: " + languageName);
 	}

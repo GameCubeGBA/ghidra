@@ -30,6 +30,6 @@ public interface ColumnConstraintProvider extends ExtensionPoint {
 	 * feature to filter tables based on column values.
 	 * @return a collection of ColumnConstraints to be added as possible column filters.
 	 */
-	public Collection<ColumnConstraint<?>> getColumnConstraints();
+	Collection<ColumnConstraint<?>> getColumnConstraints();
 
 }

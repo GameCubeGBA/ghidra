@@ -16,6 +16,7 @@
  */
 package ghidra.util.classfinder;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,10 +25,8 @@ public class ClassExclusionFilter implements ClassFilter {
 	private Set<Class<?>> exclusionSet;
 
 	public ClassExclusionFilter(Class<?>... exclusions) {
-		exclusionSet = new HashSet<Class<?>>();
-		for (Class<?> class1 : exclusions) {
-			exclusionSet.add(class1);
-		}
+		exclusionSet = new HashSet<>();
+		Collections.addAll(exclusionSet, exclusions);
 	}
 
 	@Override

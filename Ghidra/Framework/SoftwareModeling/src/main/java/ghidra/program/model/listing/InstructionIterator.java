@@ -29,12 +29,10 @@ public interface InstructionIterator extends Iterator<Instruction>, Iterable<Ins
 	/**
 	 * Returns true if the iteration has more elements.
 	 */
-	@Override
-	public boolean hasNext();
+	@Override boolean hasNext();
 
 	/**
 	 * Return the next instruction in the iteration.
 	 */
-	@Override
-	public Instruction next();
+	@Override Instruction next();
 }

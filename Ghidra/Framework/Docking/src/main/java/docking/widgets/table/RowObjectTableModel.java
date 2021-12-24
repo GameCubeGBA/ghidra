@@ -28,7 +28,7 @@ import javax.swing.table.TableModel;
  */
 public interface RowObjectTableModel<T> extends TableModel {
 
-	public static TableModel unwrap(TableModel m) {
+	static TableModel unwrap(TableModel m) {
 
 		TableModel model = m;
 		while (model instanceof TableModelWrapper) {
@@ -41,7 +41,7 @@ public interface RowObjectTableModel<T> extends TableModel {
 	 * Returns the name of this model
 	 * @return the name of this model
 	 */
-	public String getName();
+	String getName();
 
 	/**
 	 * Returns the row object for the given row.  This is the row in the UI.  For models that
@@ -51,7 +51,7 @@ public interface RowObjectTableModel<T> extends TableModel {
 	 * @param viewRow the row for which to return a row object.
 	 * @return the row object
 	 */
-	public T getRowObject(int viewRow);
+	T getRowObject(int viewRow);
 
 	/**
 	 * Returns the row number for the given object.
@@ -67,7 +67,7 @@ public interface RowObjectTableModel<T> extends TableModel {
 	 * @param t the object
 	 * @return the row number
 	 */
-	public int getRowIndex(T t);
+	int getRowIndex(T t);
 
 	/**
 	 * Implementors should return the current data of the model.  For models that support
@@ -78,7 +78,7 @@ public interface RowObjectTableModel<T> extends TableModel {
 	 * a list backed by the array ({@link Arrays#asList(Object...)}).
 	 * @return the model data.
 	 */
-	public List<T> getModelData();
+	List<T> getModelData();
 
 	/**
 	 * Implementors are expected to return a value at the given column index for the specified
@@ -89,10 +89,10 @@ public interface RowObjectTableModel<T> extends TableModel {
 	 * @param columnIndex The column index for which a value is requested.
 	 * @return a value at the given column index for the specified row object.
 	 */
-	public Object getColumnValueForRow(T t, int columnIndex);
+	Object getColumnValueForRow(T t, int columnIndex);
 
 	/**
 	 * Sends an event to all listeners that all the data inside of this model may have changed.
 	 */
-	public void fireTableDataChanged();
+	void fireTableDataChanged();
 }

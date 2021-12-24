@@ -15,13 +15,15 @@
  */
 package ghidra.program.model.data;
 
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.TreeMap;
 
 import ghidra.docking.settings.Settings;
 import ghidra.docking.settings.SettingsDefinition;
-import ghidra.pcode.floatformat.*;
+import ghidra.pcode.floatformat.BigFloat;
+import ghidra.pcode.floatformat.FloatFormat;
+import ghidra.pcode.floatformat.FloatFormatFactory;
+import ghidra.pcode.floatformat.UnsupportedFloatFormatException;
 import ghidra.pcode.utils.Utils;
 import ghidra.program.model.mem.MemBuffer;
 
@@ -83,8 +85,7 @@ public abstract class AbstractFloatDataType extends BuiltIn {
 				return doubleValue;
 			}
 			BigInteger value = Utils.bytesToBigInteger(bytes, len, buf.isBigEndian(), false);
-			BigDecimal decValue = floatFormat.round(floatFormat.getHostFloat(value));
-			return decValue;
+			return floatFormat.round(floatFormat.getHostFloat(value));
 		}
 		catch (UnsupportedFloatFormatException e) {
 			return null;
@@ -195,7 +196,7 @@ public abstract class AbstractFloatDataType extends BuiltIn {
 	private synchronized static TreeMap<Integer, AbstractFloatDataType> getFloatTypes() {
 		if (floatTypes == null) {
 			// unsupported sizes filled-in with a null
-			floatTypes = new TreeMap<Integer, AbstractFloatDataType>();
+			floatTypes = new TreeMap<>();
 			floatTypes.put(2, Float2DataType.dataType);
 			floatTypes.put(4, Float4DataType.dataType);
 			floatTypes.put(8, Float8DataType.dataType);
@@ -250,7 +251,7 @@ public abstract class AbstractFloatDataType extends BuiltIn {
 		if (dtm != null) {
 			DataOrganization dataOrganization = dtm.getDataOrganization();
 			if (dataOrganization != null) {
-				newFloatMap = new TreeMap<Integer, AbstractFloatDataType>();
+				newFloatMap = new TreeMap<>();
 				newFloatMap.put(dataOrganization.getFloatSize(),
 					(AbstractFloatDataType) FloatDataType.dataType.clone(dtm));
 				if (!newFloatMap.containsKey(dataOrganization.getDoubleSize())) {

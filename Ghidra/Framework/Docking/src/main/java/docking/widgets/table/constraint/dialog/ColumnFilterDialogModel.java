@@ -15,15 +15,22 @@
  */
 package docking.widgets.table.constraint.dialog;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-import javax.swing.event.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.TableColumnModelEvent;
+import javax.swing.event.TableColumnModelListener;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 import docking.widgets.table.GDynamicColumnTableModel;
 import docking.widgets.table.RowObjectFilterModel;
-import docking.widgets.table.columnfilter.*;
+import docking.widgets.table.columnfilter.ColumnBasedTableFilter;
+import docking.widgets.table.columnfilter.ColumnConstraintSet;
+import docking.widgets.table.columnfilter.LogicOperation;
 import docking.widgets.table.constrainteditor.ColumnConstraintEditor;
 import ghidra.util.datastruct.WeakDataStructureFactory;
 import ghidra.util.datastruct.WeakSet;
@@ -207,10 +214,7 @@ public class ColumnFilterDialogModel<R> {
 	 * is invalid.
 	 */
 	public ColumnBasedTableFilter<R> getTableColumnFilter() {
-		if (!isValid()) {
-			return null;
-		}
-		if (filterRows.isEmpty()) {
+		if (!isValid() || filterRows.isEmpty()) {
 			return null;
 		}
 		ColumnBasedTableFilter<R> tableColumnFilter = new ColumnBasedTableFilter<>(tableModel);

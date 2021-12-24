@@ -21,7 +21,22 @@ import org.junit.Before;
 import org.junit.Test;
 
 import generic.test.AbstractGTest;
-import ghidra.program.model.data.*;
+import ghidra.program.model.data.BitFieldDataType;
+import ghidra.program.model.data.ByteDataType;
+import ghidra.program.model.data.CharDataType;
+import ghidra.program.model.data.EnumDataType;
+import ghidra.program.model.data.IntegerDataType;
+import ghidra.program.model.data.LongDataType;
+import ghidra.program.model.data.LongLongDataType;
+import ghidra.program.model.data.QWordDataType;
+import ghidra.program.model.data.ShortDataType;
+import ghidra.program.model.data.StandAloneDataTypeManager;
+import ghidra.program.model.data.TypeDef;
+import ghidra.program.model.data.TypedefDataType;
+import ghidra.program.model.data.UnsignedIntegerDataType;
+import ghidra.program.model.data.UnsignedLongDataType;
+import ghidra.program.model.data.UnsignedLongLongDataType;
+import ghidra.program.model.data.UnsignedShortDataType;
 
 public class BitFieldDBDataTypeTest extends AbstractGTest {
 

@@ -21,7 +21,9 @@ import java.util.List;
 
 import org.jdom.Element;
 
-import ghidra.pcodeCPort.context.*;
+import ghidra.pcodeCPort.context.FixedHandle;
+import ghidra.pcodeCPort.context.ParserWalker;
+import ghidra.pcodeCPort.context.SleighError;
 import ghidra.pcodeCPort.semantics.VarnodeTpl;
 import ghidra.pcodeCPort.sleighbase.SleighBase;
 import ghidra.pcodeCPort.slghpatexpress.OperandValue;

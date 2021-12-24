@@ -15,7 +15,11 @@
  */
 package ghidra.program.database;
 
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.address.DefaultAddressFactory;
+import ghidra.program.model.address.OverlayAddressSpace;
 import ghidra.program.model.lang.CompilerSpec;
 import ghidra.program.model.lang.Language;
 import ghidra.util.NumericUtilities;
@@ -198,7 +202,7 @@ public class ProgramAddressFactory extends DefaultAddressFactory {
 			return overlayName;
 		}
 		String baseName = overlayName.substring(0, index);
-		return overlayName.equals(baseName + '.' + value) ? baseName : overlayName;
+		return (baseName + '.' + value).equals(overlayName) ? baseName : overlayName;
 	}
 
 	/**
@@ -211,7 +215,7 @@ public class ProgramAddressFactory extends DefaultAddressFactory {
 	 */
 	private String fixupOverlaySpaceName(String blockName) {
 		int len = blockName.length();
-		StringBuffer buf = new StringBuffer(len);
+		StringBuilder buf = new StringBuilder(len);
 		for (int i = 0; i < len; i++) {
 			char c = blockName.charAt(i);
 			if (c == ':' || c <= 0x20) {

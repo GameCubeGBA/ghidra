@@ -15,19 +15,23 @@
  */
 package db;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
-import ghidra.util.task.TaskMonitor;
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import db.buffers.BufferFile;
 import generic.test.AbstractGenericTest;
 import ghidra.framework.store.DatabaseItem;
 import ghidra.framework.store.FolderItem;
 import ghidra.framework.store.local.LocalFileSystem;
-import ghidra.util.task.TaskMonitorAdapter;
+import ghidra.util.task.TaskMonitor;
 import utilities.util.FileUtilities;
 
 public class RecoveryDBTest extends AbstractGenericTest {

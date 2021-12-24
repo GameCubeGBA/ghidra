@@ -15,9 +15,15 @@
  */
 package ghidra.framework.task.gui;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import docking.widgets.list.GListCellRenderer;
 import ghidra.framework.task.GTaskManager;

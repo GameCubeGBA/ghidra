@@ -15,7 +15,13 @@
  */
 package docking;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import docking.action.DockingActionIf;
 
@@ -257,11 +263,9 @@ class PlaceholderManager {
 			}
 
 			String testGroup = placeholder.getGroup();
-			if (group.startsWith(testGroup)) {
-				if (bestMatchPlaceholder == null ||
-					testGroup.length() > bestMatchPlaceholder.getGroup().length()) {
-					bestMatchPlaceholder = placeholder;
-				}
+			if (group.startsWith(testGroup) && (bestMatchPlaceholder == null ||
+				testGroup.length() > bestMatchPlaceholder.getGroup().length())) {
+				bestMatchPlaceholder = placeholder;
 			}
 		}
 

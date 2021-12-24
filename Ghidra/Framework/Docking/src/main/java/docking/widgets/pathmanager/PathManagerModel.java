@@ -16,12 +16,13 @@
  */
 package docking.widgets.pathmanager;
 
-import generic.util.Path;
-
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
+
+import generic.util.Path;
 
 class PathManagerModel extends AbstractTableModel {
 
@@ -29,7 +30,7 @@ class PathManagerModel extends AbstractTableModel {
 	final static int COLUMN_PATH = 1;
 
 	private PathManager mgr;
-	private List<Path> paths = new ArrayList<Path>();
+	private List<Path> paths = new ArrayList<>();
 
 	PathManagerModel(PathManager mgr, List<Path> paths) {
 		super();
@@ -39,7 +40,7 @@ class PathManagerModel extends AbstractTableModel {
 	}
 
 	private List<Path> dedupPaths(List<Path> newPaths) {
-		List<Path> dedupedPaths = new ArrayList<Path>();
+		List<Path> dedupedPaths = new ArrayList<>();
 		for (Path path : newPaths) {
 			if (!dedupedPaths.contains(path)) {
 				dedupedPaths.add(path);
@@ -53,11 +54,11 @@ class PathManagerModel extends AbstractTableModel {
 	}
 
 	List<Path> getAllPaths() {
-		return new ArrayList<Path>(paths);
+		return new ArrayList<>(paths);
 	}
 
 	List<Path> getPaths() {
-		List<Path> list = new ArrayList<Path>();
+		List<Path> list = new ArrayList<>();
 		for (Path path : paths) {
 			if (path.isEnabled()) {
 				list.add(path);
@@ -67,16 +68,14 @@ class PathManagerModel extends AbstractTableModel {
 	}
 
 	void setPaths(List<Path> paths) {
-		this.paths = new ArrayList<Path>(paths);
+		this.paths = new ArrayList<>(paths);
 		fireTableDataChanged();
 	}
 
 	void setPaths(Path[] pathsArr) {
 		paths.clear();
-		paths = new ArrayList<Path>();
-		for (int i = 0; i < pathsArr.length; i++) {
-			paths.add(pathsArr[i]);
-		}
+		paths = new ArrayList<>();
+		Collections.addAll(paths, pathsArr);
 		fireTableDataChanged();
 	}
 
@@ -110,9 +109,9 @@ class PathManagerModel extends AbstractTableModel {
 	}
 
 	void remove(int[] selectedRows) {
-		List<Path> list = new ArrayList<Path>();
-		for (int i = 0; i < selectedRows.length; i++) {
-			list.add(paths.get(selectedRows[i]));
+		List<Path> list = new ArrayList<>();
+		for (int selectedRow : selectedRows) {
+			list.add(paths.get(selectedRow));
 		}
 		for (Path path : list) {
 			if (path.isEditable()) {

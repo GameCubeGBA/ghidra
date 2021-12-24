@@ -18,7 +18,9 @@ package ghidra.program.model.pcode;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.data.DataType;
 import ghidra.program.model.lang.DynamicVariableStorage;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.listing.AutoParameterType;
+import ghidra.program.model.listing.Program;
+import ghidra.program.model.listing.VariableStorage;
 import ghidra.program.model.symbol.Namespace;
 import ghidra.program.model.symbol.Symbol;
 import ghidra.util.exception.InvalidInputException;
@@ -467,7 +469,7 @@ public class HighSymbol {
 		while (parser.peek().isStart()) {
 			XmlElement el = parser.peek();
 			SymbolEntry entry;
-			if (el.getName().equals("hash")) {
+			if ("hash".equals(el.getName())) {
 				entry = new DynamicEntry(this);
 			}
 			else if (this instanceof HighCodeSymbol) {
@@ -510,7 +512,7 @@ public class HighSymbol {
 		HighSymbol res = null;
 		parser.start("mapsym");
 		XmlElement symel = parser.peek();
-		if (symel.getName().equals("equatesymbol")) {
+		if ("equatesymbol".equals(symel.getName())) {
 			res = new EquateSymbol(high);
 		}
 		else if (isGlobal) {
@@ -523,7 +525,7 @@ public class HighSymbol {
 		res.restoreXML(parser);
 		while (parser.peek().isStart()) {
 			SymbolEntry entry;
-			if (parser.peek().getName().equals("hash")) {
+			if ("hash".equals(parser.peek().getName())) {
 				entry = new DynamicEntry(res);
 			}
 			else {

@@ -58,7 +58,7 @@ public class DefaultDropDownSelectionDataModelTest extends AbstractGenericTest {
 		assertEquals("bace", matchingData.get(1).getName());
 	}
 
-	private class TestType {
+	private static class TestType {
 		private String name;
 
 		TestType(String name) {

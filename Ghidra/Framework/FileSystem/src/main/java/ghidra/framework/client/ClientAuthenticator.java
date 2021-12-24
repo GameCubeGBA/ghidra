@@ -18,7 +18,9 @@ package ghidra.framework.client;
 import java.awt.Component;
 import java.net.Authenticator;
 
-import javax.security.auth.callback.*;
+import javax.security.auth.callback.ChoiceCallback;
+import javax.security.auth.callback.NameCallback;
+import javax.security.auth.callback.PasswordCallback;
 
 import ghidra.framework.remote.AnonymousCallback;
 import ghidra.framework.remote.SSHSignatureCallback;
@@ -30,7 +32,7 @@ public interface ClientAuthenticator extends KeyStorePasswordProvider {
 	 * Get a standard Java authenticator for HTTP and other standard network connections
 	 * @return authenticator object
 	 */
-	public Authenticator getAuthenticator();
+	Authenticator getAuthenticator();
 
 	/**
 	 * Process Ghidra Server password authentication callbacks.
@@ -50,7 +52,7 @@ public interface ClientAuthenticator extends KeyStorePasswordProvider {
 	 * @see AnonymousCallback#setAnonymousAccessRequested(boolean)
 	 * @return
 	 */
-	public boolean processPasswordCallbacks(String title, String serverType, String serverName,
+	boolean processPasswordCallbacks(String title, String serverType, String serverName,
 			NameCallback nameCb, PasswordCallback passCb, ChoiceCallback choiceCb,
 			AnonymousCallback anonymousCb, String loginError);
 
@@ -60,7 +62,7 @@ public interface ClientAuthenticator extends KeyStorePasswordProvider {
 	 * @param message
 	 * @return return true if reconnect should be attempted
 	 */
-	public boolean promptForReconnect(Component parent, final String message);
+	boolean promptForReconnect(Component parent, final String message);
 
 	/**
 	 * Get new user password
@@ -70,12 +72,12 @@ public interface ClientAuthenticator extends KeyStorePasswordProvider {
 	 * @return new password or null if password should not be changed, 
 	 * if not null array will be cleared by caller
 	 */
-	public char[] getNewPassword(Component parent, String serverInfo, String username);
+	char[] getNewPassword(Component parent, String serverInfo, String username);
 
 	/**
 	 * @return true if SSH private key is available for authentication
 	 */
-	public boolean isSSHKeyAvailable();
+	boolean isSSHKeyAvailable();
 
 	/**
 	 * Process Ghidra Server SSH authentication callbacks.
@@ -85,7 +87,7 @@ public interface ClientAuthenticator extends KeyStorePasswordProvider {
 	 * @param sshCb provides authentication token to be signed with private key, @see SSHAuthenticationCallback#sign(SSHPrivateKey)
 	 * @return
 	 */
-	public boolean processSSHSignatureCallbacks(String serverName, NameCallback nameCb,
+	boolean processSSHSignatureCallbacks(String serverName, NameCallback nameCb,
 			SSHSignatureCallback sshCb);
 
 }

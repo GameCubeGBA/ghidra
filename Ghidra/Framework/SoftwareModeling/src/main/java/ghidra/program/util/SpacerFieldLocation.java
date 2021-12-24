@@ -17,6 +17,8 @@
 
 package ghidra.program.util;
 
+import java.util.Objects;
+
 import ghidra.framework.options.SaveState;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
@@ -71,25 +73,19 @@ public class SpacerFieldLocation extends CodeUnitLocation {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((text == null) ? 0 : text.hashCode());
-		return result;
+		return prime * result + ((text == null) ? 0 : text.hashCode());
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
+		if (!super.equals(obj) || (getClass() != obj.getClass()))
 			return false;
 		SpacerFieldLocation other = (SpacerFieldLocation) obj;
-		if (text == null) {
-			if (other.text != null)
-				return false;
-		}
-		else if (!text.equals(other.text))
+		if (!Objects.equals(text, other.text)) {
 			return false;
+		}
 		return true;
 	}
 

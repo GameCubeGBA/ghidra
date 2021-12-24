@@ -16,16 +16,16 @@
  */
 package generic.constraint;
 
-import ghidra.util.xml.XmlAttributeException;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import ghidra.util.xml.XmlAttributeException;
 
 /**
  * Convenience class that converts XML attributes into typed property values.
  */
 public class ConstraintData {
-	private Map<String, String> map = new HashMap<String, String>();
+	private Map<String, String> map = new HashMap<>();
 
 	public ConstraintData(Map<String, String> mappings) {
 		map.putAll(mappings);
@@ -66,10 +66,10 @@ public class ConstraintData {
 		String value = getValue(name, "boolean");
 
 		value = value.toLowerCase();
-		if (value.equals("true")) {
+		if ("true".equals(value)) {
 			return true;
 		}
-		if (value.equals("false")) {
+		if ("false".equals(value)) {
 			return false;
 		}
 		throw new XmlAttributeException("Expected boolean value for attribute \"" + name +

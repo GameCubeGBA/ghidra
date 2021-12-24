@@ -16,16 +16,28 @@
 package ghidra.program.database.module;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
-import db.Field;
 import db.DBRecord;
+import db.Field;
 import ghidra.program.database.DBObjectCache;
 import ghidra.program.database.DatabaseObject;
-import ghidra.program.model.address.*;
-import ghidra.program.model.listing.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.listing.CircularDependencyException;
+import ghidra.program.model.listing.CodeUnit;
+import ghidra.program.model.listing.DuplicateGroupException;
+import ghidra.program.model.listing.Group;
+import ghidra.program.model.listing.ProgramFragment;
+import ghidra.program.model.listing.ProgramModule;
 import ghidra.util.Lock;
-import ghidra.util.exception.*;
+import ghidra.util.exception.DuplicateNameException;
+import ghidra.util.exception.NotEmptyException;
+import ghidra.util.exception.NotFoundException;
 
 /**
  *
@@ -334,12 +346,12 @@ class ModuleDB extends DatabaseObject implements ProgramModule {
 	public AddressSetView getAddressSet() {
 		AddressSet set = new AddressSet();
 		Group[] children = getChildren();
-		for (int i = 0; i < children.length; i++) {
-			if (children[i] instanceof ProgramFragment) {
-				set.add((ProgramFragment) children[i]);
+		for (Group child : children) {
+			if (child instanceof ProgramFragment) {
+				set.add((ProgramFragment) child);
 			}
 			else {
-				ProgramModule m = (ProgramModule) children[i];
+				ProgramModule m = (ProgramModule) child;
 				set.add(m.getAddressSet());
 			}
 		}
@@ -701,10 +713,10 @@ class ModuleDB extends DatabaseObject implements ProgramModule {
 	 */
 	private List<DBRecord> getParentChildRecords() throws IOException {
 		Field[] keys = adapter.getParentChildKeys(key, TreeManager.PARENT_ID_COL);
-		List<DBRecord> list = new ArrayList<DBRecord>();
+		List<DBRecord> list = new ArrayList<>();
 		Comparator<DBRecord> c = new ParentChildRecordComparator();
-		for (int i = 0; i < keys.length; i++) {
-			DBRecord rec = adapter.getParentChildRecord(keys[i].getLongValue());
+		for (Field key2 : keys) {
+			DBRecord rec = adapter.getParentChildRecord(key2.getLongValue());
 			int index = Collections.binarySearch(list, rec, c);
 			if (index < 0) {
 				index = -index - 1;
@@ -743,8 +755,7 @@ class ModuleDB extends DatabaseObject implements ProgramModule {
 	private Address findFirstAddress(ModuleDB module) {
 		try {
 			List<DBRecord> list = module.getParentChildRecords();
-			for (int i = 0; i < list.size(); i++) {
-				DBRecord rec = list.get(i);
+			for (DBRecord rec : list) {
 				long childID = rec.getLongValue(TreeManager.CHILD_ID_COL);
 				if (childID < 0) {
 					FragmentDB frag = moduleMgr.getFragmentDB(-childID);
@@ -800,8 +811,7 @@ class ModuleDB extends DatabaseObject implements ProgramModule {
 
 		try {
 			List<DBRecord> list = module.getParentChildRecords();
-			for (int i = 0; i < list.size(); i++) {
-				DBRecord rec = list.get(i);
+			for (DBRecord rec : list) {
 				long childID = rec.getLongValue(TreeManager.CHILD_ID_COL);
 				Address childMinAddr = null;
 				if (childID < 0) {
@@ -814,10 +824,7 @@ class ModuleDB extends DatabaseObject implements ProgramModule {
 					ModuleDB m = moduleMgr.getModuleDB(childID);
 					childMinAddr = findMinAddress(m, addr);
 				}
-				if (childMinAddr != null && minAddr == null) {
-					minAddr = childMinAddr;
-				}
-				else if (childMinAddr != null && childMinAddr.compareTo(minAddr) < 0) {
+				if ((childMinAddr != null && minAddr == null) || (childMinAddr != null && childMinAddr.compareTo(minAddr) < 0)) {
 					minAddr = childMinAddr;
 				}
 			}
@@ -834,8 +841,7 @@ class ModuleDB extends DatabaseObject implements ProgramModule {
 
 		try {
 			List<DBRecord> list = module.getParentChildRecords();
-			for (int i = 0; i < list.size(); i++) {
-				DBRecord rec = list.get(i);
+			for (DBRecord rec : list) {
 				long childID = rec.getLongValue(TreeManager.CHILD_ID_COL);
 				Address childMaxAddr = null;
 				if (childID < 0) {
@@ -848,10 +854,7 @@ class ModuleDB extends DatabaseObject implements ProgramModule {
 					ModuleDB m = moduleMgr.getModuleDB(childID);
 					childMaxAddr = findMaxAddress(m, addr);
 				}
-				if (childMaxAddr != null && maxAddr == null) {
-					maxAddr = childMaxAddr;
-				}
-				else if (childMaxAddr != null && childMaxAddr.compareTo(maxAddr) > 0) {
+				if ((childMaxAddr != null && maxAddr == null) || (childMaxAddr != null && childMaxAddr.compareTo(maxAddr) > 0)) {
 					maxAddr = childMaxAddr;
 				}
 			}
@@ -875,7 +878,7 @@ class ModuleDB extends DatabaseObject implements ProgramModule {
 		}
 	}
 
-	private class ParentChildRecordComparator implements Comparator<DBRecord> {
+	private static class ParentChildRecordComparator implements Comparator<DBRecord> {
 
 		@Override
 		public int compare(DBRecord r1, DBRecord r2) {

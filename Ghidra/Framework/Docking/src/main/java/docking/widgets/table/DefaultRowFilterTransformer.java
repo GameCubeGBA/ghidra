@@ -15,7 +15,9 @@
  */
 package docking.widgets.table;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 import javax.swing.table.TableColumnModel;
 
@@ -49,13 +51,7 @@ public class DefaultRowFilterTransformer<ROW_OBJECT> implements RowFilterTransfo
 
 	protected String getStringValue(ROW_OBJECT rowObject, int column) {
 		// we have to account for 'magic' hidden columns
-		if (columnModel instanceof GTableColumnModel) {
-			if (!((GTableColumnModel) columnModel).isVisible(column)) {
-				return null;
-			}
-		}
-
-		if (columnUsesConstraintFilteringOnly(column)) {
+		if (((columnModel instanceof GTableColumnModel) && !((GTableColumnModel) columnModel).isVisible(column)) || columnUsesConstraintFilteringOnly(column)) {
 			// This allows columns to be ignored for default text filtering while still being
 			// filterable through the column constraints API
 			return null;
@@ -83,10 +79,7 @@ public class DefaultRowFilterTransformer<ROW_OBJECT> implements RowFilterTransfo
 	private GColumnRenderer<Object> getColumnRenderer(
 			DynamicColumnTableModel<ROW_OBJECT> columnBasedModel, int columnIndex) {
 		DynamicTableColumn<ROW_OBJECT, ?, ?> column = columnBasedModel.getColumn(columnIndex);
-		@SuppressWarnings("unchecked")
-		GColumnRenderer<Object> columnRenderer =
-			(GColumnRenderer<Object>) column.getColumnRenderer();
-		return columnRenderer;
+		return (GColumnRenderer<Object>) column.getColumnRenderer();
 	}
 
 	@Override
@@ -100,10 +93,7 @@ public class DefaultRowFilterTransformer<ROW_OBJECT> implements RowFilterTransfo
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
 		}
 

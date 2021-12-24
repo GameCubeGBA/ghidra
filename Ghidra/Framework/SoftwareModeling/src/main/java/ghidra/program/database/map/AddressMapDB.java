@@ -16,13 +16,30 @@
 package ghidra.program.database.map;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
 
 import db.DBConstants;
 import db.DBHandle;
 import ghidra.program.database.map.AddressMapDBAdapter.AddressMapEntry;
 import ghidra.program.database.mem.MemoryMapDB;
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressOutOfBoundsException;
+import ghidra.program.model.address.AddressRange;
+import ghidra.program.model.address.AddressRangeImpl;
+import ghidra.program.model.address.AddressRangeIterator;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.address.KeyRange;
+import ghidra.program.model.address.OldGenericNamespaceAddress;
+import ghidra.program.model.address.SegmentedAddress;
+import ghidra.program.model.address.SegmentedAddressSpace;
 import ghidra.program.model.lang.Language;
 import ghidra.program.model.mem.MemoryBlock;
 import ghidra.program.model.symbol.Namespace;
@@ -98,7 +115,7 @@ public class AddressMapDB implements AddressMap {
 	private Address[] sortedBaseStartAddrs; // these are normalized addrs
 	private Address[] sortedBaseEndAddrs;
 	private List<KeyRange> allKeyRanges; // all existing key ranges (includes non-absolute memory, and external space) 
-	private HashMap<Address, Integer> addrToIndexMap = new HashMap<Address, Integer>();
+	private HashMap<Address, Integer> addrToIndexMap = new HashMap<>();
 
 	private long baseImageOffset; // pertains to default address space only
 	private List<AddressRange> segmentedRanges; // when using segmented memory, this list contains	
@@ -118,75 +135,66 @@ public class AddressMapDB implements AddressMap {
 	/**
 	 * Comparator used to search the sorted normalized base address list with a de-normalized address.
 	 */
-	private Comparator<Address> normalizingAddressComparator = new Comparator<Address>() {
-		@Override
-		public int compare(Address normalizedAddr, Address addr) {
-			// Handle baseOffset shift for DefaultAddressSpace only
-			AddressSpace space = addr.getAddressSpace();
-			int comp = normalizedAddr.getAddressSpace().compareTo(space);
-			if (comp == 0) {
-				// Same address space - assumes unsigned space
-				long maxOffset = space.getMaxAddress().getOffset();
-				long otherOffset = addr.getOffset() - baseImageOffset;
-				long offset = normalizedAddr.getOffset();
-				if (space.getSize() == 64) {
-					// Address space offsets are 64-bit unsigned
-					// wrapping of otherOffset handled automatically
-					if (offset < 0 && otherOffset >= 0) {
-						return 1;
-					}
-					else if (offset >= 0 && otherOffset < 0) {
-						return -1;
-					}
-				}
-				else if (otherOffset < 0) {
-					// wrap normalized otherOffset within space for spaces smaller than 64-bits
-					otherOffset += maxOffset + 1;
-				}
-				long diff = offset - otherOffset;
-				if (diff > 0) {
+	private Comparator<Address> normalizingAddressComparator = (normalizedAddr, addr) -> {
+		// Handle baseOffset shift for DefaultAddressSpace only
+		AddressSpace space = addr.getAddressSpace();
+		int comp = normalizedAddr.getAddressSpace().compareTo(space);
+		if (comp == 0) {
+			// Same address space - assumes unsigned space
+			long maxOffset = space.getMaxAddress().getOffset();
+			long otherOffset = addr.getOffset() - baseImageOffset;
+			long offset = normalizedAddr.getOffset();
+			if (space.getSize() == 64) {
+				// Address space offsets are 64-bit unsigned
+				// wrapping of otherOffset handled automatically
+				if (offset < 0 && otherOffset >= 0) {
 					return 1;
 				}
-				if (diff < 0) {
+				else if (offset >= 0 && otherOffset < 0) {
 					return -1;
 				}
 			}
-			return comp;
+			else if (otherOffset < 0) {
+				// wrap normalized otherOffset within space for spaces smaller than 64-bits
+				otherOffset += maxOffset + 1;
+			}
+			long diff = offset - otherOffset;
+			if (diff > 0) {
+				return 1;
+			}
+			if (diff < 0) {
+				return -1;
+			}
 		}
+		return comp;
 	};
 
 	/**
 	 * Comparator used to identify if an addr occurs before or after the 
 	 * start of a key range.
 	 */
-	private Comparator<Object> addressInsertionKeyRangeComparator = new Comparator<Object>() {
-		@Override
-		public int compare(Object keyRangeObj, Object addrObj) {
-			KeyRange range = (KeyRange) keyRangeObj;
-			Address addr = (Address) addrObj;
+	private Comparator<Object> addressInsertionKeyRangeComparator = (keyRangeObj, addrObj) -> {
+		KeyRange range = (KeyRange) keyRangeObj;
+		Address addr = (Address) addrObj;
 
-			Address min = decodeAddress(range.minKey);
-			if (min.compareTo(addr) > 0) {
-				return 1;
-			}
+		Address min = decodeAddress(range.minKey);
+		if (min.compareTo(addr) > 0) {
+			return 1;
+		}
 
-			Address max = decodeAddress(range.maxKey);
-			if (max.compareTo(addr) < 0) {
-				return -1;
-			}
+		Address max = decodeAddress(range.maxKey);
+		if (max.compareTo(addr) < 0) {
+			return -1;
+		}
+		return 0;
+	};
+	private static Comparator<Object> ADDRESS_RANGE_COMPARATOR = (o1, o2) -> {
+		AddressRange range = (AddressRange) o1;
+		Address addr = (Address) o2;
+		if (range.contains(addr)) {
 			return 0;
 		}
-	};
-	private static Comparator<Object> ADDRESS_RANGE_COMPARATOR = new Comparator<Object>() {
-		@Override
-		public int compare(Object o1, Object o2) {
-			AddressRange range = (AddressRange) o1;
-			Address addr = (Address) o2;
-			if (range.contains(addr)) {
-				return 0;
-			}
-			return range.getMinAddress().compareTo(addr);
-		}
+		return range.getMinAddress().compareTo(addr);
 	};
 
 	/**
@@ -223,7 +231,7 @@ public class AddressMapDB implements AddressMap {
 			return; // if not segmented, we don't care
 		}
 		MemoryBlock[] blocks = mem.getBlocks();
-		segmentedRanges = new ArrayList<AddressRange>(blocks.length);
+		segmentedRanges = new ArrayList<>(blocks.length);
 		for (MemoryBlock block : blocks) {
 			segmentedRanges.add(new AddressRangeImpl(block.getStart(), block.getEnd()));
 		}
@@ -410,16 +418,13 @@ public class AddressMapDB implements AddressMap {
 			// Check for match
 			Address base = sortedBaseStartAddrs[search];
 			if (base.hasSameAddressSpace(addr) && normalizedBaseOffset == base.getOffset()) {
-				int index = addrToIndexMap.get(base);
-				return index;
+				return addrToIndexMap.get(base);
 			}
 		}
-		if (indexOperation == INDEX_MATCH_OR_PREVIOUS) {
-			if (search >= 0) {
-				Address base = sortedBaseStartAddrs[search];
-				int index = addrToIndexMap.get(base);
-				return -index - 1;
-			}
+		if ((indexOperation == INDEX_MATCH_OR_PREVIOUS) && (search >= 0)) {
+			Address base = sortedBaseStartAddrs[search];
+			int index = addrToIndexMap.get(base);
+			return -index - 1;
 		}
 		if (indexOperation == INDEX_MATCH_OR_NEXT) {
 			int nextIndex = search + 1;
@@ -706,11 +711,9 @@ public class AddressMapDB implements AddressMap {
 		if (useOldAddrMap) {
 			throw new IllegalStateException();
 		}
-		if (base instanceof SegmentedAddress) {
-			if (((SegmentedAddress) base).getSegmentOffset() != 0) {
-				throw new IllegalArgumentException(
-					"Segmented base address must have a 0 segment offset");
-			}
+		if ((base instanceof SegmentedAddress) && (((SegmentedAddress) base).getSegmentOffset() != 0)) {
+			throw new IllegalArgumentException(
+				"Segmented base address must have a 0 segment offset");
 		}
 		baseImageOffset = base.getOffset();
 	}
@@ -748,7 +751,7 @@ public class AddressMapDB implements AddressMap {
 		if (useOldAddrMap) {
 			return oldAddrMap.getKeyRanges(start, end, absolute);
 		}
-		ArrayList<KeyRange> keyRangeList = new ArrayList<KeyRange>();
+		ArrayList<KeyRange> keyRangeList = new ArrayList<>();
 		addKeyRanges(keyRangeList, start, end, absolute, create);
 		return keyRangeList;
 	}
@@ -770,7 +773,7 @@ public class AddressMapDB implements AddressMap {
 		if (useOldAddrMap) {
 			return oldAddrMap.getKeyRanges(set, absolute, create);
 		}
-		ArrayList<KeyRange> keyRangeList = new ArrayList<KeyRange>();
+		ArrayList<KeyRange> keyRangeList = new ArrayList<>();
 		if (set == null) {
 			if (create) {
 				throw new IllegalArgumentException(
@@ -782,7 +785,7 @@ public class AddressMapDB implements AddressMap {
 						keyRangeList);
 					allKeyRanges = keyRangeList;
 				}
-				return new ArrayList<KeyRange>(allKeyRanges);
+				return new ArrayList<>(allKeyRanges);
 			}
 			set = getAllMemoryAndExternalAddresses();
 		}
@@ -930,7 +933,7 @@ public class AddressMapDB implements AddressMap {
 			LanguageTranslator translator) throws IOException {
 
 		List<AddressMapEntry> entries = adapter.getEntries();
-		List<AddressMapEntry> newEntries = new ArrayList<AddressMapEntry>();
+		List<AddressMapEntry> newEntries = new ArrayList<>();
 
 		AddressFactory oldAddressFactory = this.addrFactory;
 
@@ -942,7 +945,6 @@ public class AddressMapDB implements AddressMap {
 
 		for (AddressMapEntry entry : entries) {
 			if (entry.deleted) {
-				newEntries.add(entry);
 			}
 			else {
 				AddressSpace oldSpace = oldAddressFactory.getAddressSpace(entry.name);
@@ -956,8 +958,8 @@ public class AddressMapDB implements AddressMap {
 						entry.deleted = true;
 					}
 				}
-				newEntries.add(entry);
 			}
+			newEntries.add(entry);
 		}
 		adapter.setEntries(newEntries);
 

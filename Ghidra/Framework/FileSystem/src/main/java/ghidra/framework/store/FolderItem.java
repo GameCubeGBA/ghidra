@@ -31,27 +31,27 @@ public interface FolderItem {
 	/**
 	 * Underlying file is an unknown/unsupported type.
 	 */
-	public static final int UNKNOWN_FILE_TYPE = -1;
+	int UNKNOWN_FILE_TYPE = -1;
 
 	/**
 	 * Underlying file is a Database
 	 */
-	public static final int DATABASE_FILE_TYPE = 0;
+	int DATABASE_FILE_TYPE = 0;
 
 	/**
 	 * Underlying file is serialized data file
 	 */
-	public static final int DATAFILE_FILE_TYPE = 1;
+	int DATAFILE_FILE_TYPE = 1;
 
 	/**
 	 * Default checkout ID used when a checkout is not applicable.
 	 */
-	public static final long DEFAULT_CHECKOUT_ID = -1;
+	long DEFAULT_CHECKOUT_ID = -1;
 
 	/**
 	 * Default file version number used to indicate the latest/current version.
 	 */
-	public static final int LATEST_VERSION = -1;
+	int LATEST_VERSION = -1;
 
 	/**
 	 * Return The display name for this item.
@@ -288,12 +288,12 @@ public interface FolderItem {
 	 * @throws IOException
 	 * @throws CancelledException if monitor cancels operation
 	 */
-	public void output(File outputFile, int version, TaskMonitor monitor) throws IOException,
+	void output(File outputFile, int version, TaskMonitor monitor) throws IOException,
 			CancelledException;
 
 	/**
 	 * Returns this instance after refresh or null if item no longer exists
 	 */
-	public FolderItem refresh() throws IOException;
+	FolderItem refresh() throws IOException;
 
 }

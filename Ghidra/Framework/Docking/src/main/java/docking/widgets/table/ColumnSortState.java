@@ -15,6 +15,8 @@
  */
 package docking.widgets.table;
 
+import java.util.Objects;
+
 import org.jdom.Element;
 
 /**
@@ -43,7 +45,7 @@ public class ColumnSortState {
 		}
 
 		public static SortDirection getSortDirection(String direction) {
-			if (direction.equals("ascending")) {
+			if ("ascending".equals(direction)) {
 				return ASCENDING;
 			}
 			return DESCENDING;
@@ -84,19 +86,13 @@ public class ColumnSortState {
 	}
 
 	public ColumnSortState createFlipState() {
-		ColumnSortState newSortState = new ColumnSortState(columnModelIndex,
+		return new ColumnSortState(columnModelIndex,
 			isAscending() ? SortDirection.DESCENDING : SortDirection.ASCENDING, sortOrder_OneBased);
-		return newSortState;
 	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + columnModelIndex;
-		result = prime * result + ((sortDirection == null) ? 0 : sortDirection.hashCode());
-		result = prime * result + sortOrder_OneBased;
-		return result;
+		return Objects.hash(columnModelIndex, sortDirection, sortOrder_OneBased);
 	}
 
 	@Override
@@ -105,11 +101,7 @@ public class ColumnSortState {
 			return true;
 		}
 
-		if (obj == null) {
-			return false;
-		}
-
-		if (getClass() != obj.getClass()) {
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
 		}
 
@@ -118,12 +110,7 @@ public class ColumnSortState {
 			return false;
 		}
 
-		if (sortDirection == null) {
-			if (other.sortDirection != null) {
-				return false;
-			}
-		}
-		else if (!sortDirection.equals(other.sortDirection)) {
+		if (!Objects.equals(sortDirection, other.sortDirection)) {
 			return false;
 		}
 

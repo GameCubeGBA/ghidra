@@ -15,12 +15,19 @@
  */
 package ghidra.graph.viewer;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
-import java.awt.*;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Shape;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
-import java.awt.geom.*;
+import java.awt.geom.GeneralPath;
+import java.awt.geom.PathIterator;
+import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import java.util.Collection;
 import java.util.List;
 
@@ -29,9 +36,13 @@ import org.junit.Test;
 import edu.uci.ics.jung.algorithms.layout.KKLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import generic.test.AbstractGTest;
-import ghidra.graph.graphs.*;
-import ghidra.graph.support.*;
+import ghidra.graph.graphs.AbstractTestVertex;
+import ghidra.graph.graphs.LabelTestVertex;
+import ghidra.graph.graphs.TestEdge;
+import ghidra.graph.support.TestLayoutProvider;
+import ghidra.graph.support.TestVertexTooltipProvider;
 import ghidra.graph.support.TestVertexTooltipProvider.SpyTooltip;
+import ghidra.graph.support.TestVisualGraph;
 
 public class GraphViewerTest extends AbstractVisualGraphTest {
 
@@ -223,11 +234,9 @@ public class GraphViewerTest extends AbstractVisualGraphTest {
 			Rectangle2D pickArea = new Rectangle2D.Double(testPoint.getX() - size / 2,
 				testPoint.getY() - size / 2, size, size);
 
-			if (edgeShape.intersects(pickArea)) {
-				if (!intersectsAnyVertex(pickArea)) {
-					// found a point that hits the edge and not the vertex
-					return testPoint;
-				}
+			if (edgeShape.intersects(pickArea) && !intersectsAnyVertex(pickArea)) {
+				// found a point that hits the edge and not the vertex
+				return testPoint;
 			}
 		}
 

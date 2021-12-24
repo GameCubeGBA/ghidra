@@ -25,11 +25,11 @@ public interface ShiftedReference extends Reference {
 	 * Returns the left shift amount.
 	 * @return the shift
 	 */
-	public int getShift();
+	int getShift();
 
 	/**
 	 * Returns the base value.
 	 * @return the value
 	 */
-	public long getValue();
+	long getValue();
 }

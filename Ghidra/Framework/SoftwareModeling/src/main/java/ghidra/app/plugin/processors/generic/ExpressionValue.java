@@ -16,9 +16,9 @@
  */
 package ghidra.app.plugin.processors.generic;
 
-import ghidra.program.model.mem.*;
-
 import java.io.Serializable;
+
+import ghidra.program.model.mem.MemBuffer;
 
 /**
  * 

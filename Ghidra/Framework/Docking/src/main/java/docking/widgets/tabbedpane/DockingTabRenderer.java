@@ -15,10 +15,26 @@
  */
 package docking.widgets.tabbedpane;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Point;
+import java.awt.event.ActionListener;
+import java.awt.event.HierarchyEvent;
+import java.awt.event.HierarchyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
-import javax.swing.*;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.Icon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import javax.swing.SwingUtilities;
 
 import docking.widgets.EmptyBorderButton;
 import docking.widgets.label.GDLabel;
@@ -306,11 +322,7 @@ public class DockingTabRenderer extends JPanel {
 		}
 
 		private boolean consumePopup(MouseEvent e) {
-			if (renameListener == null) {
-				return false;
-			}
-
-			if (!e.isPopupTrigger()) {
+			if ((renameListener == null) || !e.isPopupTrigger()) {
 				return false;
 			}
 
@@ -326,7 +338,7 @@ public class DockingTabRenderer extends JPanel {
 	 * we are, tabbed panes that are larger than the the renderer will not get mouse events that
 	 * are over the tab, but not the renderer.
 	 */
-	private class TabContainerForwardingMouseListener extends MouseAdapter {
+	private static class TabContainerForwardingMouseListener extends MouseAdapter {
 
 		private final JTabbedPane tabbedPane;
 

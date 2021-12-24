@@ -15,12 +15,21 @@
  */
 package docking.widgets.dialogs;
 
-import java.awt.event.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.Arrays;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.text.*;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
+import javax.swing.text.PlainDocument;
 
 import docking.DialogComponentProvider;
 import docking.widgets.label.GLabel;
@@ -211,10 +220,8 @@ public class InputDialog extends DialogComponentProvider {
 			inputValues[v] = textFields[v].getText();
 		}
 
-		if (listener != null) {
-			if (!listener.inputIsValid(this)) {
-				return;
-			}
+		if ((listener != null) && !listener.inputIsValid(this)) {
+			return;
 		}
 		close();
 	}
@@ -222,9 +229,7 @@ public class InputDialog extends DialogComponentProvider {
 	@Override
 	protected void cancelCallback() {
 		isCanceled = true;
-		for (int v = 0; v < inputValues.length; v++) {
-			inputValues[v] = null;
-		}
+		Arrays.fill(inputValues, null);
 
 		close();
 	}

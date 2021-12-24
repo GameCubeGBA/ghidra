@@ -16,9 +16,9 @@
  */
 package ghidra.program.database.bookmark;
 
+import db.DBHandle;
 import ghidra.program.database.map.AddressMap;
 import ghidra.util.exception.VersionException;
-import db.DBHandle;
 
 /**
  * 

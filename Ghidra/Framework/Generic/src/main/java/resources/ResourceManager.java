@@ -18,22 +18,41 @@ package resources;
 import java.awt.Image;
 import java.awt.MediaTracker;
 import java.awt.image.BufferedImage;
-import java.io.*;
-import java.net.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.StringTokenizer;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.stream.Collectors;
 
-import javax.swing.*;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.RepaintManager;
 
 import org.apache.commons.lang3.StringUtils;
 
 import generic.Images;
 import ghidra.util.Msg;
 import ghidra.util.SystemUtilities;
-import resources.icons.*;
+import resources.icons.DisabledImageIconWrapper;
+import resources.icons.FileBasedIcon;
+import resources.icons.ImageIconWrapper;
+import resources.icons.ScaledImageIconWrapper;
 import utility.module.ModuleUtilities;
 
 /**
@@ -75,8 +94,7 @@ public class ResourceManager {
 			return url;
 		}
 
-		url = getResource(getTestSearchPaths(), filename);
-		return url;
+		return getResource(getTestSearchPaths(), filename);
 	}
 
 	/**
@@ -176,8 +194,7 @@ public class ResourceManager {
 		Set<String> testNames = doGetResourceNames(getTestSearchPaths(), dirName, extension);
 		names.addAll(testNames);
 
-		Set<URL> urls = names.stream().map(name -> getResource(name)).collect(Collectors.toSet());
-		return urls;
+		return names.stream().map(name -> getResource(name)).collect(Collectors.toSet());
 	}
 
 	/**

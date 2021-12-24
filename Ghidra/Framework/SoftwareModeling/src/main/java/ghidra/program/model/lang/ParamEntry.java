@@ -15,18 +15,25 @@
  */
 package ghidra.program.model.lang;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.Map.Entry;
 
 import ghidra.app.plugin.processors.sleigh.VarnodeData;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.AddressSpace;
-import ghidra.program.model.data.*;
+import ghidra.program.model.data.AbstractFloatDataType;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.Pointer;
+import ghidra.program.model.data.TypeDef;
 import ghidra.program.model.pcode.AddressXML;
 import ghidra.program.model.pcode.Varnode;
 import ghidra.util.SystemUtilities;
 import ghidra.util.xml.SpecXmlUtils;
-import ghidra.xml.*;
+import ghidra.xml.XmlElement;
+import ghidra.xml.XmlParseException;
+import ghidra.xml.XmlPullParser;
 
 public class ParamEntry {
 	private static final int FORCE_LEFT_JUSTIFY = 1;	// Big endian values are left justified within their slot
@@ -131,13 +138,7 @@ public class ParamEntry {
 	}
 
 	public boolean contains(ParamEntry op2) {
-		if ((type != TYPE_UNKNOWN) && (op2.type != type)) {
-			return false;
-		}
-		if (spaceid != op2.spaceid) {
-			return false;
-		}
-		if (unsignedCompare(op2.addressbase, addressbase)) {
+		if (((type != TYPE_UNKNOWN) && (op2.type != type)) || (spaceid != op2.spaceid) || unsignedCompare(op2.addressbase, addressbase)) {
 			return false;
 		}
 		long op2end = op2.addressbase + op2.size - 1;
@@ -181,10 +182,7 @@ public class ParamEntry {
 			return -1;
 		}
 		long endaddr = startaddr + sz - 1;
-		if (unsignedCompare(endaddr, startaddr)) {
-			return -1;		// Don't allow wrap around
-		}
-		if (unsignedCompare(addressbase + size - 1, endaddr)) {
+		if (unsignedCompare(endaddr, startaddr) || unsignedCompare(addressbase + size - 1, endaddr)) {
 			return -1;
 		}
 		startaddr -= addressbase;
@@ -240,10 +238,7 @@ public class ParamEntry {
 			return slotnum;
 		}
 		if (alignment == 0) {		// If not an aligned entry (allowing multiple slots)
-			if (slotnum != 0) {
-				return slotnum;	// Can only allocate slot 0
-			}
-			if (sz > size) {
+			if ((slotnum != 0) || (sz > size)) {
 				return slotnum;		// Check on maximum size
 			}
 			res.space = spaceid;
@@ -400,46 +395,42 @@ public class ParamEntry {
 		while (iter.hasNext()) {
 			Entry<String, String> entry = iter.next();
 			String name = entry.getKey();
-			if (name.equals("minsize")) {
+			if ("minsize".equals(name)) {
 				minsize = SpecXmlUtils.decodeInt(entry.getValue());
 			}
-			else if (name.equals("size")) {	// old style
+			else if ("size".equals(name) || "align".equals(name)) {	// old style
 				alignment = SpecXmlUtils.decodeInt(entry.getValue());
-			}
-			else if (name.equals("align")) {
-				alignment = SpecXmlUtils.decodeInt(entry.getValue());
-			}
-			else if (name.equals("maxsize")) {
+			} else if ("maxsize".equals(name)) {
 				size = SpecXmlUtils.decodeInt(entry.getValue());
 			}
-			else if (name.equals("metatype")) {		// Not implemented at the moment
+			else if ("metatype".equals(name)) {		// Not implemented at the moment
 				String meta = entry.getValue();
 				// TODO:  Currently only supporting "float", "ptr", and "unknown" metatypes
 				if ((meta != null)) {
-					if (meta.equals("float")) {
+					if ("float".equals(meta)) {
 						type = TYPE_FLOAT;
 					}
-					else if (meta.equals("ptr")) {
+					else if ("ptr".equals(meta)) {
 						type = TYPE_PTR;
 					}
 				}
 			}
-			else if (name.equals("extension")) {
+			else if ("extension".equals(name)) {
 				flags &= ~(SMALLSIZE_ZEXT | SMALLSIZE_SEXT | SMALLSIZE_INTTYPE | SMALLSIZE_FLOAT);
 				String value = entry.getValue();
-				if (value.equals("sign")) {
+				if ("sign".equals(value)) {
 					flags |= SMALLSIZE_SEXT;
 				}
-				else if (value.equals("zero")) {
+				else if ("zero".equals(value)) {
 					flags |= SMALLSIZE_ZEXT;
 				}
-				else if (value.equals("inttype")) {
+				else if ("inttype".equals(value)) {
 					flags |= SMALLSIZE_INTTYPE;
 				}
-				else if (value.equals("float")) {
+				else if ("float".equals(value)) {
 					flags |= SMALLSIZE_FLOAT;
 				}
-				else if (!value.equals("none")) {
+				else if (!"none".equals(value)) {
 					throw new XmlParseException("Bad extension attribute: " + value);
 				}
 			}
@@ -480,11 +471,9 @@ public class ParamEntry {
 		}
 		if (!cspec.stackGrowsNegative()) {
 			flags |= REVERSE_STACK;
-			if (alignment != 0) {
-				if ((size % alignment) != 0) {
-					throw new XmlParseException(
-						"For positive stack growth, <pentry> size must match alignment");
-				}
+			if ((alignment != 0) && ((size % alignment) != 0)) {
+				throw new XmlParseException(
+					"For positive stack growth, <pentry> size must match alignment");
 			}
 		}
 		if (grouped) {
@@ -503,10 +492,7 @@ public class ParamEntry {
 		if (size != op2.size || minsize != op2.minsize || alignment != op2.alignment) {
 			return false;
 		}
-		if (type != op2.type || flags != op2.flags) {
-			return false;
-		}
-		if (numslots != op2.numslots) {
+		if (type != op2.type || flags != op2.flags || (numslots != op2.numslots)) {
 			return false;
 		}
 		if (group != op2.group || groupsize != op2.groupsize) {
@@ -565,10 +551,7 @@ public class ParamEntry {
 	 */
 	public static int justifiedContainAddress(AddressSpace spc1, long offset1, int sz1,
 			AddressSpace spc2, long offset2, int sz2, boolean forceleft, boolean isBigEndian) {
-		if (spc1 != spc2) {
-			return -1;
-		}
-		if (unsignedCompare(offset2, offset1)) {
+		if ((spc1 != spc2) || unsignedCompare(offset2, offset1)) {
 			return -1;
 		}
 		long off1 = offset1 + (sz1 - 1);

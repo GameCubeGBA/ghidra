@@ -16,9 +16,9 @@
  */
 package ghidra.program.model.lang;
 
-import ghidra.program.model.listing.ContextChangeException;
-
 import java.math.BigInteger;
+
+import ghidra.program.model.listing.ContextChangeException;
 
 /**
  * Defines the interface for an object containing the state
@@ -32,20 +32,20 @@ public interface ProcessorContext extends ProcessorContextView {
 	 * @param value the value for the register (null is not permitted).
 	 * @throws ContextChangeException an illegal attempt to change context was made
 	 */
-	public void setValue(Register register, BigInteger value) throws ContextChangeException;
+	void setValue(Register register, BigInteger value) throws ContextChangeException;
 
 	/**
 	 * Sets the specified register value within this context.
 	 * @param value register value
 	 * @throws ContextChangeException an illegal attempt to change context was made
 	 */
-	public void setRegisterValue(RegisterValue value) throws ContextChangeException;
+	void setRegisterValue(RegisterValue value) throws ContextChangeException;
 
 	/**
 	 * Clears the register within this context.
 	 * @param register register to be cleared.
 	 * @throws ContextChangeException an illegal attempt to change context was made
 	 */
-	public void clearRegister(Register register) throws ContextChangeException;
+	void clearRegister(Register register) throws ContextChangeException;
 
 }

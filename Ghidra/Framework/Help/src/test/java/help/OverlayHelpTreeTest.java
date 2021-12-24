@@ -15,13 +15,17 @@
  */
 package help;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,8 +34,15 @@ import javax.help.HelpSet;
 import org.junit.Test;
 
 import help.validator.LinkDatabase;
-import help.validator.location.*;
-import help.validator.model.*;
+import help.validator.location.HelpModuleCollection;
+import help.validator.location.HelpModuleLocation;
+import help.validator.location.HelpModuleLocationTestDouble;
+import help.validator.model.GhidraTOCFile;
+import help.validator.model.GhidraTOCFileTestDouble;
+import help.validator.model.TOCItem;
+import help.validator.model.TOCItemDefinition;
+import help.validator.model.TOCItemExternal;
+import help.validator.model.TOCItemReference;
 
 public class OverlayHelpTreeTest {
 
@@ -416,7 +427,7 @@ public class OverlayHelpTreeTest {
 		}
 	}
 
-	private class TOCItemProviderTestStub implements TOCItemProvider {
+	private static class TOCItemProviderTestStub implements TOCItemProvider {
 
 		Map<String, TOCItemExternal> externals = new HashMap<>();
 		Map<String, TOCItemDefinition> definitions = new HashMap<>();
@@ -443,7 +454,7 @@ public class OverlayHelpTreeTest {
 
 	}
 
-	private class LinkDatabaseTestStub extends LinkDatabase {
+	private static class LinkDatabaseTestStub extends LinkDatabase {
 
 		public LinkDatabaseTestStub(HelpModuleLocation loc) {
 			super(HelpModuleCollection.fromHelpLocations(Collections.singleton(loc)));
@@ -455,7 +466,7 @@ public class OverlayHelpTreeTest {
 		}
 	}
 
-	private class OverlayHelpModuleLocationTestStub extends HelpModuleLocationTestDouble {
+	private static class OverlayHelpModuleLocationTestStub extends HelpModuleLocationTestDouble {
 
 		OverlayHelpModuleLocationTestStub(GhidraTOCFileDummy toc) {
 			super(Paths.get("/fake/help"));
@@ -484,7 +495,7 @@ public class OverlayHelpTreeTest {
 
 	}
 
-	private class GhidraTOCFileDummy extends GhidraTOCFileTestDouble {
+	private static class GhidraTOCFileDummy extends GhidraTOCFileTestDouble {
 
 		public GhidraTOCFileDummy(Path path) {
 			super(path);

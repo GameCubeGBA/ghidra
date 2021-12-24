@@ -15,7 +15,10 @@
  */
 package ghidra.app.plugin.processors.sleigh;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import generic.jar.ResourceFile;
 import ghidra.framework.Application;
@@ -26,7 +29,7 @@ public class ModuleDefinitionsMap {
 	public static synchronized Map<String, String> getModuleMap() {
 		if (moduleMap == null) {
 			Collection<ResourceFile> moduleRootDirectories = Application.getModuleRootDirectories();
-			moduleMap = new HashMap<String, String>();
+			moduleMap = new HashMap<>();
 			for (ResourceFile resourceFile : moduleRootDirectories) {
 				moduleMap.put(resourceFile.getName(), resourceFile.getAbsolutePath());
 			}

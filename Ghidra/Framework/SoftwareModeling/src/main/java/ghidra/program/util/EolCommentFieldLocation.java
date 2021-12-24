@@ -62,17 +62,14 @@ public class EolCommentFieldLocation extends CommentFieldLocation {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + currentCommentRow;
-		return result;
+		return prime * result + currentCommentRow;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
+		if (!super.equals(obj) || (getClass() != obj.getClass()))
 			return false;
 		EolCommentFieldLocation other = (EolCommentFieldLocation) obj;
 		if (currentCommentRow != other.currentCommentRow)

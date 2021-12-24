@@ -15,7 +15,9 @@
  */
 package docking.widgets.tree;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.ConcurrentModificationException;
+import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.swing.JTree;
@@ -172,7 +174,7 @@ abstract class CoreGTreeNode implements Cloneable {
 			for (GTreeNode node : childList) {
 				node.setParent((GTreeNode) this);
 			}
-			children = new CopyOnWriteArrayList<GTreeNode>(childList);
+			children = new CopyOnWriteArrayList<>(childList);
 		}
 
 		if (oldChildren != null) {

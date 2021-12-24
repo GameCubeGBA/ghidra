@@ -16,8 +16,8 @@
  */
 package ghidra.util.bean.opteditor;
 
-import ghidra.framework.options.ToolOptions;
 import ghidra.framework.options.OptionsChangeListener;
+import ghidra.framework.options.ToolOptions;
 
 /**
  * Intended to be thrown from 

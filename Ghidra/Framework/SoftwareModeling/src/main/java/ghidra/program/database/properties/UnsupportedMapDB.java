@@ -18,14 +18,16 @@ package ghidra.program.database.properties;
 
 import java.io.IOException;
 
+import db.DBHandle;
+import db.util.ErrorHandler;
 import ghidra.program.database.map.AddressMap;
 import ghidra.program.model.address.Address;
 import ghidra.program.util.ChangeManager;
-import ghidra.util.exception.*;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.VersionException;
 import ghidra.util.prop.PropertyVisitor;
 import ghidra.util.task.TaskMonitor;
-import db.DBHandle;
-import db.util.ErrorHandler;
 
 /**
  * This class provides a dummy map for an unsupported map.
@@ -55,6 +57,7 @@ public class UnsupportedMapDB extends PropertyMapDB {
 	/**
 	 * @see ghidra.program.model.util.PropertyMap#applyValue(ghidra.util.prop.PropertyVisitor, ghidra.program.model.address.Address)
 	 */
+	@Override
 	public void applyValue(PropertyVisitor visitor, Address addr) {
 		throw new AssertException();
 	}
@@ -62,6 +65,7 @@ public class UnsupportedMapDB extends PropertyMapDB {
 	/**
 	 * @see ghidra.program.model.util.PropertyMap#getObject(ghidra.program.model.address.Address)
 	 */
+	@Override
 	public Object getObject(Address addr) {
 		return null;
 	}

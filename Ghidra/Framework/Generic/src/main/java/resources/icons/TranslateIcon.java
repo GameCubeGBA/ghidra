@@ -38,14 +38,17 @@ public class TranslateIcon implements Icon {
 	/**
 	 * @see javax.swing.Icon#paintIcon(java.awt.Component, java.awt.Graphics, int, int)
 	 */
+	@Override
 	public void paintIcon(Component c, Graphics g, int x, int y) {
 		icon.paintIcon(c, g, x + translateX, y + translateY);
 	}
 
+	@Override
 	public int getIconHeight() {
 		return icon.getIconHeight();
 	}
 
+	@Override
 	public int getIconWidth() {
 		return icon.getIconWidth();
 	}

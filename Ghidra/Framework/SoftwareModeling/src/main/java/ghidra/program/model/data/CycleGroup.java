@@ -16,7 +16,10 @@
 package ghidra.program.model.data;
 
 import java.awt.event.KeyEvent;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import javax.swing.KeyStroke;
 
@@ -162,8 +165,7 @@ public class CycleGroup {
 	 * data types in the list.
 	 */
 	private boolean exists(DataType dt) {
-		for (int i = 0; i < dataList.size(); i++) {
-			DataType d = dataList.get(i);
+		for (DataType d : dataList) {
 			if (dt.isEquivalent(d)) {
 				return true;
 			}

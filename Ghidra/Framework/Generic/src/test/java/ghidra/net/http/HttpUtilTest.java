@@ -15,11 +15,10 @@
  */
 package ghidra.net.http;
 
-import java.util.Properties;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.Properties;
 
 public class HttpUtilTest {
 	public static void main(String[] args) {
@@ -36,9 +35,6 @@ public class HttpUtilTest {
 		try {
 			HttpUtil.getFile(urlStr, properties, true, f);
 			System.out.println("getFile completed: " + f);
-		}
-		catch (MalformedURLException e) {
-			e.printStackTrace();
 		}
 		catch (IOException e) {
 			e.printStackTrace();

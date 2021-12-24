@@ -15,7 +15,10 @@
  */
 package docking.util.image;
 
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Rectangle;
 
 import javax.swing.SwingUtilities;
 

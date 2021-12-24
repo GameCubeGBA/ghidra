@@ -26,9 +26,9 @@ import java.util.Comparator;
  * @param <E> the type of the edge
  */
 public interface GEdgeWeightMetric<E extends GEdge<?>> {
-	public static final GEdgeWeightMetric<?> UNIT_METRIC = (GEdge<?> e) -> 1;
+	GEdgeWeightMetric<?> UNIT_METRIC = (GEdge<?> e) -> 1;
 
-	public static final GEdgeWeightMetric<?> NATURAL_METRIC =
+	GEdgeWeightMetric<?> NATURAL_METRIC =
 		(GEdge<?> e) -> ((GWeightedEdge<?>) e).getWeight();
 
 	/**
@@ -36,7 +36,7 @@ public interface GEdgeWeightMetric<E extends GEdge<?>> {
 	 * @return the metric
 	 */
 	@SuppressWarnings("unchecked")
-	public static <V, E extends GEdge<V>> GEdgeWeightMetric<E> unitMetric() {
+	static <V, E extends GEdge<V>> GEdgeWeightMetric<E> unitMetric() {
 		return (GEdgeWeightMetric<E>) UNIT_METRIC;
 	}
 
@@ -48,7 +48,7 @@ public interface GEdgeWeightMetric<E extends GEdge<?>> {
 	 * @return the metric
 	 */
 	@SuppressWarnings("unchecked")
-	public static <V, E extends GEdge<V>> GEdgeWeightMetric<E> naturalMetric() {
+	static <V, E extends GEdge<V>> GEdgeWeightMetric<E> naturalMetric() {
 		return (GEdgeWeightMetric<E>) NATURAL_METRIC;
 	}
 
@@ -57,5 +57,5 @@ public interface GEdgeWeightMetric<E extends GEdge<?>> {
 	 * @param e the edge
 	 * @return the weight
 	 */
-	public double computeWeight(E e);
+	double computeWeight(E e);
 }

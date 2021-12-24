@@ -15,7 +15,9 @@
  */
 package generic.constraint;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.collections4.map.HashedMap;
 
@@ -29,9 +31,9 @@ import ghidra.xml.XmlParseException;
  * @param <T> the type of objects that the constraint operates on.
  */
 public class DecisionNode<T> {
-	private Map<String, PropertyValue> propertyMap = new HashedMap<String, PropertyValue>();
+	private Map<String, PropertyValue> propertyMap = new HashedMap<>();
 	private Constraint<T> constraint;
-	private List<DecisionNode<T>> children = new ArrayList<DecisionNode<T>>();
+	private List<DecisionNode<T>> children = new ArrayList<>();
 	private DecisionNode<T> parent;
 
 	public DecisionNode(Constraint<T> constraint, DecisionNode<T> parent) {
@@ -45,7 +47,7 @@ public class DecisionNode<T> {
 				return child;
 			}
 		}
-		DecisionNode<T> newChild = new DecisionNode<T>(newConstraint, this);
+		DecisionNode<T> newChild = new DecisionNode<>(newConstraint, this);
 		children.add(newChild);
 		return newChild;
 	}
@@ -88,7 +90,7 @@ public class DecisionNode<T> {
 
 	@Override
 	public String toString() {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		List<String> decisionPath = getDecisionPath();
 		for (String string : decisionPath) {
 			buf.append("/");

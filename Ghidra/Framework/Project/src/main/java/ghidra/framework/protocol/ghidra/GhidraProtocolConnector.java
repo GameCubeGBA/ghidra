@@ -21,7 +21,9 @@ import java.net.URL;
 
 import org.apache.commons.lang3.StringUtils;
 
-import ghidra.framework.client.*;
+import ghidra.framework.client.NotConnectedException;
+import ghidra.framework.client.RepositoryAdapter;
+import ghidra.framework.client.RepositoryServerAdapter;
 import ghidra.framework.store.FileSystem;
 
 /**

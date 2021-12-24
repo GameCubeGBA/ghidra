@@ -15,7 +15,10 @@
  */
 package ghidra.program.model.data;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 import org.apache.commons.collections4.CollectionUtils;
 
@@ -123,7 +126,7 @@ public class CategoryPath implements Comparable<CategoryPath> {
 	// constructor, called with a single argument that would not be escaped, would conflict with
 	// this constructor, which requires an escaped argument. 
 	public CategoryPath(String path) {
-		if (path == null || path.length() == 0 || path.equals(DELIMITER_STRING)) {
+		if (path == null || path.length() == 0 || DELIMITER_STRING.equals(path)) {
 			// parent can only be null for ROOT
 			parent = null;
 			name = "";
@@ -209,27 +212,14 @@ public class CategoryPath implements Comparable<CategoryPath> {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
 		}
 		CategoryPath other = (CategoryPath) obj;
-		if (name == null) {
-			if (other.name != null) {
-				return false;
-			}
-		}
-		else if (!name.equals(other.name)) {
+		if (!Objects.equals(name, other.name)) {
 			return false;
 		}
-		if (parent == null) {
-			if (other.parent != null) {
-				return false;
-			}
-		}
-		else if (!parent.equals(other.parent)) {
+		if (!Objects.equals(parent, other.parent)) {
 			return false;
 		}
 		return true;
@@ -237,11 +227,7 @@ public class CategoryPath implements Comparable<CategoryPath> {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((parent == null) ? 0 : parent.hashCode());
-		return result;
+		return Objects.hash(name, parent);
 	}
 
 	/**

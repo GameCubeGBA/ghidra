@@ -50,7 +50,7 @@ public interface LayoutProvider<V extends VisualVertex,
 	 * @return the new layout
 	 * @throws CancelledException if the monitor was cancelled
 	 */
-	public VisualGraphLayout<V, E> getLayout(G graph, TaskMonitor monitor)
+	VisualGraphLayout<V, E> getLayout(G graph, TaskMonitor monitor)
 			throws CancelledException;
 
 	/**
@@ -58,7 +58,7 @@ public interface LayoutProvider<V extends VisualVertex,
 	 * 
 	 * @return the name of this layout
 	 */
-	public String getLayoutName();
+	String getLayoutName();
 
 	/**
 	 * Returns an icon that can be used to show the provider a menu or toolbar.  This may 
@@ -66,7 +66,7 @@ public interface LayoutProvider<V extends VisualVertex,
 	 * 
 	 * @return an icon that can be used to show the provider a menu or toolbar
 	 */
-	public Icon getActionIcon();
+	Icon getActionIcon();
 
 	/**
 	 * Returns an arbitrary value that is relative to other LayoutProviders.  The higher the 
@@ -74,6 +74,6 @@ public interface LayoutProvider<V extends VisualVertex,
 	 * 
 	 * @return the priority
 	 */
-	public int getPriorityLevel();
+	int getPriorityLevel();
 
 }

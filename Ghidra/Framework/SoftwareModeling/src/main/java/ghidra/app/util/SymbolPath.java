@@ -15,11 +15,16 @@
  */
 package ghidra.app.util;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 import ghidra.program.model.address.GlobalNamespace;
 import ghidra.program.model.listing.Library;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.Namespace;
+import ghidra.program.model.symbol.Symbol;
+import ghidra.program.model.symbol.SymbolUtilities;
 
 /**
  * A convenience object for parsing a namespace path to a symbol.
@@ -100,13 +105,9 @@ public class SymbolPath implements Comparable<SymbolPath> {
 	public SymbolPath(Symbol symbol, boolean excludeLibrary) {
 		symbolName = symbol.getName();
 		Namespace parentNamespace = symbol.getParentNamespace();
-		if (parentNamespace == null || parentNamespace.isGlobal()) {
+		if ((parentNamespace == null || parentNamespace.isGlobal()) || (excludeLibrary && (parentNamespace instanceof Library))) {
 			parentPath = null;
-		}
-		else if (excludeLibrary && (parentNamespace instanceof Library)) {
-			parentPath = null;
-		}
-		else {
+		} else {
 			parentPath = new SymbolPath(parentNamespace.getSymbol());
 		}
 	}
@@ -201,11 +202,7 @@ public class SymbolPath implements Comparable<SymbolPath> {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((parentPath == null) ? 0 : parentPath.hashCode());
-		result = prime * result + ((symbolName == null) ? 0 : symbolName.hashCode());
-		return result;
+		return Objects.hash(parentPath, symbolName);
 	}
 
 	@Override
@@ -213,10 +210,7 @@ public class SymbolPath implements Comparable<SymbolPath> {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
 		}
 		SymbolPath other = (SymbolPath) obj;
@@ -283,11 +277,8 @@ public class SymbolPath implements Comparable<SymbolPath> {
 	 * @return the given path if it is not global; otherwise returns null.
 	 */
 	private SymbolPath checkGlobal(SymbolPath path) {
-		if (path == null) {
-			return null;
-		}
-		if (path.parentPath == null &&
-			path.getName().equalsIgnoreCase(GlobalNamespace.GLOBAL_NAMESPACE_NAME)) {
+		if ((path == null) || (path.parentPath == null &&
+			GlobalNamespace.GLOBAL_NAMESPACE_NAME.equalsIgnoreCase(path.getName()))) {
 			return null;
 		}
 		return path;

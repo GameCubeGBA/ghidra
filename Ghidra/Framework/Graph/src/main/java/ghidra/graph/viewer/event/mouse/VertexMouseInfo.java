@@ -15,17 +15,26 @@
  */
 package ghidra.graph.viewer.event.mouse;
 
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import java.util.Objects;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.SwingUtilities;
 
-import edu.uci.ics.jung.visualization.*;
+import edu.uci.ics.jung.visualization.Layer;
+import edu.uci.ics.jung.visualization.MultiLayerTransformer;
+import edu.uci.ics.jung.visualization.RenderContext;
 import edu.uci.ics.jung.visualization.picking.PickedState;
 import edu.uci.ics.jung.visualization.transform.MutableTransformer;
-import ghidra.graph.viewer.*;
+import ghidra.graph.viewer.GraphViewer;
+import ghidra.graph.viewer.GraphViewerUtils;
+import ghidra.graph.viewer.VisualEdge;
+import ghidra.graph.viewer.VisualVertex;
 import ghidra.graph.viewer.event.picking.GPickedState;
 
 /**
@@ -68,11 +77,7 @@ public class VertexMouseInfo<V extends VisualVertex, E extends VisualEdge<V>> {
 	}
 
 	public Cursor getCursorForClickedComponent() {
-		if (isGrabArea()) {
-			return HAND_CURSOR;
-		}
-
-		if (!isVertexSelected()) {
+		if (isGrabArea() || !isVertexSelected()) {
 			return HAND_CURSOR;
 		}
 		return DEFAULT_CURSOR;

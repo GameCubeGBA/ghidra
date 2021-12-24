@@ -19,7 +19,10 @@ package ghidra.program.database.register;
 import java.util.Iterator;
 
 import ghidra.program.database.map.AddressMap;
-import ghidra.program.model.address.*;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressRange;
+import ghidra.program.model.address.AddressRangeImpl;
+import ghidra.program.model.address.AddressRangeIterator;
 import ghidra.util.datastruct.IndexRange;
 import ghidra.util.datastruct.IndexRangeIterator;
 
@@ -38,10 +41,12 @@ public class IndexToAddressRangeIteratorAdapter implements AddressRangeIterator 
 		this.it = it;
 	}
 
+	@Override
 	public Iterator<AddressRange> iterator() {
 		return this;
 	}
 
+	@Override
 	public void remove() {
 		throw new UnsupportedOperationException();
 	}
@@ -49,6 +54,7 @@ public class IndexToAddressRangeIteratorAdapter implements AddressRangeIterator 
 	/**
 	 * @see ghidra.program.model.address.AddressRangeIterator#hasNext()
 	 */
+	@Override
 	public boolean hasNext() {
 		return it.hasNext();
 	}
@@ -56,6 +62,7 @@ public class IndexToAddressRangeIteratorAdapter implements AddressRangeIterator 
 	/**
 	 * @see ghidra.program.model.address.AddressRangeIterator#next()
 	 */
+	@Override
 	public AddressRange next() {
 		IndexRange indexRange = it.next();
 		Address start = map.decodeAddress(indexRange.getStart());

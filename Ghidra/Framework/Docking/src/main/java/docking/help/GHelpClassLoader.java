@@ -73,11 +73,7 @@ public class GHelpClassLoader extends ClassLoader {
 
 		// installation/release usage--data is inside of a jar file
 		URL URL = ResourceManager.getResource("help/" + name);
-		if (URL != null) {
-			return URL;
-		}
-
-		return null;
+		return URL;
 	}
 
 	private URL findInModuleDirectory(String name) {

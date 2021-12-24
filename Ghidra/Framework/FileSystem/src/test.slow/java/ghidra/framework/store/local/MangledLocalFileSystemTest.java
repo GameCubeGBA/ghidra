@@ -15,11 +15,14 @@
  */
 package ghidra.framework.store.local;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.Test;
@@ -37,10 +40,8 @@ public class MangledLocalFileSystemTest extends AbstractLocalFileSystemTest {
 
 		testFilePaths();
 
-		List<String> names = new ArrayList<String>();
-		for (String itemName : fs.getItemNames("/a/x/bbb")) {
-			names.add(itemName);
-		}
+		List<String> names = new ArrayList<>();
+		Collections.addAll(names, fs.getItemNames("/a/x/bbb"));
 
 		((MangledLocalFileSystem) fs).convertToIndexedLocalFileSystem();
 

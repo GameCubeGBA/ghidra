@@ -23,7 +23,10 @@ import java.util.Enumeration;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import javax.help.*;
+import javax.help.HelpBroker;
+import javax.help.HelpSet;
+import javax.help.HelpSetException;
+import javax.help.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -190,11 +193,7 @@ public class GHelpSet extends HelpSet {
 			LOG.trace("No URL found in any HelpSet for ID: " + id);
 
 			URL = tryToCreateURLFromID(id.id);
-			if (URL != null) {
-				return URL;
-			}
-
-			return null;
+			return URL;
 		}
 
 		/**
@@ -210,8 +209,7 @@ public class GHelpSet extends HelpSet {
 				return fileURL;
 			}
 
-			URL rawURL = createRawURL(id);
-			return rawURL;
+			return createRawURL(id);
 		}
 
 		private URL createRawURL(String id) {
@@ -258,8 +256,7 @@ public class GHelpSet extends HelpSet {
 			// this allows us to find files by using relative paths (e.g., 'docs/WhatsNew.html'
 			// will get resolved relative to the installation directory in a build).
 			ResourceFile installDir = Application.getInstallationDirectory();
-			ResourceFile helpFile = new ResourceFile(installDir, id);
-			return helpFile;
+			return new ResourceFile(installDir, id);
 		}
 
 		@Override
@@ -306,12 +303,8 @@ public class GHelpSet extends HelpSet {
 			}
 
 			URL url = tryToCreateURLFromID(id);
-			if (url != null) {
-				return true; // ignore this id; it is valid
-			}
-
 			// no url for ID
-			if (SystemUtilities.isInDevelopmentMode()) {
+			if ((url != null) || SystemUtilities.isInDevelopmentMode()) {
 				// ignore external files that do not exist in dev mode
 				return true;
 			}

@@ -15,10 +15,20 @@
  */
 package ghidra.graph.viewer;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Shape;
+import java.awt.Window;
 import java.awt.geom.Point2D;
 import java.util.Collection;
 import java.util.Set;
@@ -36,8 +46,12 @@ import edu.uci.ics.jung.visualization.RenderContext;
 import generic.test.AbstractGenericTest;
 import generic.test.TestUtils;
 import generic.util.WindowUtilities;
-import ghidra.graph.graphs.*;
-import ghidra.graph.support.*;
+import ghidra.graph.graphs.AbstractTestVertex;
+import ghidra.graph.graphs.LabelTestVertex;
+import ghidra.graph.graphs.TestEdge;
+import ghidra.graph.support.TestLayoutProvider;
+import ghidra.graph.support.TestVisualGraph;
+import ghidra.graph.support.TextAreaTestVertex;
 import ghidra.util.Msg;
 import util.CollectionUtils;
 
@@ -243,10 +257,8 @@ public class GraphComponentTest extends AbstractVisualGraphTest {
 		Point2D p = v.getLocation();
 		assertNotNull(p);
 
-		if (Double.compare(p.getX(), 0d) == 0) {
-			if (Double.compare(p.getY(), 0d) == 0) {
-				fail("Vertex location not initialized");
-			}
+		if ((Double.compare(p.getX(), 0d) == 0) && (Double.compare(p.getY(), 0d) == 0)) {
+			fail("Vertex location not initialized");
 		}
 	}
 

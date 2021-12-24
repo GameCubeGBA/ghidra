@@ -16,10 +16,13 @@
 package ghidra.framework.main.logviewer.ui;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
 import docking.widgets.checkbox.GCheckBox;
 import ghidra.framework.main.logviewer.event.FVEvent;
@@ -49,7 +52,7 @@ public class ReloadDialog extends JDialog {
 
 		this.eventListener = eventListener;
 
-		Object[] options = new Object[] { createContent() };
+		Object[] options = { createContent() };
 		JOptionPane optionPane = new JOptionPane("File has changed. Reload?",
 			JOptionPane.WARNING_MESSAGE, JOptionPane.YES_NO_OPTION, null, options);
 
@@ -81,28 +84,18 @@ public class ReloadDialog extends JDialog {
 
 		// When the user selects the YES button they're indicating they want to reload the file, so
 		// fire off an event to do so, making sure to save the checkbox status.
-		yesBtn.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				FVEvent reloadEvt = new FVEvent(EventType.RELOAD_FILE, null);
-				eventListener.send(reloadEvt);
-				setVisible(false);
-				showUpdateWarning = !(checkbox.isSelected());
-			}
-
+		yesBtn.addActionListener(e -> {
+			FVEvent reloadEvt = new FVEvent(EventType.RELOAD_FILE, null);
+			eventListener.send(reloadEvt);
+			setVisible(false);
+			showUpdateWarning = !(checkbox.isSelected());
 		});
 
 		// When the NO button is selected, we just need to close the warning dialog
 		// and return, making sure to save the checkbox status.
-		noBtn.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				showUpdateWarning = !(checkbox.isSelected());
-			}
-
+		noBtn.addActionListener(e -> {
+			setVisible(false);
+			showUpdateWarning = !(checkbox.isSelected());
 		});
 
 		return contentPane;

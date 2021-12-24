@@ -22,7 +22,7 @@ public class SaveableString implements Saveable {
 
 	private String string;
 
-	private Class<?>[] fields = new Class<?>[] { String.class };
+	private Class<?>[] fields = { String.class };
 
 	public SaveableString(String string) {
 		if (string == null) {

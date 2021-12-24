@@ -17,7 +17,12 @@ package ghidra.framework.plugintool;
 
 import java.awt.Image;
 import java.awt.Taskbar;
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -27,8 +32,12 @@ import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 import org.jdom.output.XMLOutputter;
 
-import docking.framework.*;
-import ghidra.framework.*;
+import docking.framework.ApplicationInformationDisplayFactory;
+import docking.framework.DockingApplicationConfiguration;
+import docking.framework.DockingApplicationLayout;
+import ghidra.framework.Application;
+import ghidra.framework.ApplicationProperties;
+import ghidra.framework.PluggableServiceRegistry;
 import ghidra.framework.model.ToolServices;
 import ghidra.util.Msg;
 import ghidra.util.SystemUtilities;
@@ -211,8 +220,7 @@ public abstract class StandAloneApplication implements GenericStandAloneApplicat
 			}
 
 			SAXBuilder sax = XmlUtilities.createSecureSAXBuilder(false, false);
-			Element root = sax.build(instream).getRootElement();
-			return root;
+			return sax.build(instream).getRootElement();
 		}
 		catch (Exception e) {
 			Msg.showError(getClass(), null, "Error Reading Tool",
@@ -231,8 +239,7 @@ public abstract class StandAloneApplication implements GenericStandAloneApplicat
 		try {
 			fileInputStream = new FileInputStream(savedToolFile.getAbsolutePath());
 			SAXBuilder sax = XmlUtilities.createSecureSAXBuilder(false, false);
-			Element root = sax.build(fileInputStream).getRootElement();
-			return root;
+			return sax.build(fileInputStream).getRootElement();
 		}
 		catch (Exception e) {
 			Msg.showError(getClass(), null, "Error Reading Tool",

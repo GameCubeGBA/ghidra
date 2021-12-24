@@ -19,8 +19,13 @@ import java.awt.Desktop;
 import java.awt.Image;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.*;
-import java.net.*;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.StringReader;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Collection;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -30,15 +35,28 @@ import javax.swing.ImageIcon;
 import javax.swing.JEditorPane;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
-import javax.swing.text.*;
-import javax.swing.text.html.*;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
+import javax.swing.text.Element;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.View;
+import javax.swing.text.ViewFactory;
+import javax.swing.text.html.HTML;
 import javax.swing.text.html.HTML.Tag;
+import javax.swing.text.html.HTMLDocument;
+import javax.swing.text.html.HTMLEditorKit;
+import javax.swing.text.html.ImageView;
+import javax.swing.text.html.StyleSheet;
 
 import generic.jar.ResourceFile;
 import ghidra.framework.Application;
 import ghidra.framework.preferences.Preferences;
 import ghidra.util.Msg;
-import resources.*;
+import resources.IconProvider;
+import resources.Icons;
+import resources.ResourceManager;
 import utilities.util.FileUtilities;
 
 /**
@@ -214,21 +232,11 @@ public class GHelpHTMLEditorKit extends HTMLEditorKit {
 			return createURLWithAnchor(newUrl, anchor);
 		}
 
-		//
-		// The item was not found by the ResourceManager (i.e., it is not in a 'resources' 
-		// directory).  See if it may be a relative link to a build's installation root (like
-		// a file in <install dir>/docs).
-		// 
-		newUrl = findApplicationfile(HREF);
-		return newUrl;
+		return findApplicationfile(HREF);
 	}
 
 	private URL createURLWithAnchor(URL anchorlessURL, String anchor) {
-		if (anchorlessURL == null) {
-			return anchorlessURL;
-		}
-
-		if (anchor == null) {
+		if ((anchorlessURL == null) || (anchor == null)) {
 			// nothing to do
 			return anchorlessURL;
 		}
@@ -277,7 +285,7 @@ public class GHelpHTMLEditorKit extends HTMLEditorKit {
 			return null;
 		}
 
-		StringBuffer buffy = new StringBuffer();
+		StringBuilder buffy = new StringBuilder();
 		try {
 			List<String> lines = FileUtilities.getLines(url);
 			for (String line : lines) {
@@ -290,11 +298,10 @@ public class GHelpHTMLEditorKit extends HTMLEditorKit {
 			Msg.debug(this, "Unable to read the lines of the help style sheet: " + url);
 		}
 
-		StringReader reader = new StringReader(buffy.toString());
-		return reader;
+		return new StringReader(buffy.toString());
 	}
 
-	private void changePixels(String line, int amount, StringBuffer buffy) {
+	private void changePixels(String line, int amount, StringBuilder buffy) {
 
 		Matcher matcher = FONT_SIZE_PATTERN.matcher(line);
 		while (matcher.find()) {
@@ -309,8 +316,7 @@ public class GHelpHTMLEditorKit extends HTMLEditorKit {
 	private String adjustFontSize(String sizeString) {
 		try {
 			int size = Integer.parseInt(sizeString);
-			String adjusted = Integer.toString(size + fontSizeModifier);
-			return adjusted;
+			return Integer.toString(size + fontSizeModifier);
 		}
 		catch (NumberFormatException e) {
 			Msg.debug(this, "Unable to parse font size string '" + sizeString + "'");
@@ -443,12 +449,7 @@ public class GHelpHTMLEditorKit extends HTMLEditorKit {
 		@Override
 		public Image getImage() {
 			Image superImage = super.getImage();
-			if (image == null) {
-				// no custom image
-				return superImage;
-			}
-
-			if (isLoading()) {
+			if ((image == null) || isLoading()) {
 				return superImage;
 			}
 
@@ -485,8 +486,7 @@ public class GHelpHTMLEditorKit extends HTMLEditorKit {
 				return installImageFromJavaCode(srcString);
 			}
 
-			URL url = doGetImageURL(srcString);
-			return url;
+			return doGetImageURL(srcString);
 		}
 
 		private URL installImageFromJavaCode(String srcString) {
@@ -499,8 +499,7 @@ public class GHelpHTMLEditorKit extends HTMLEditorKit {
 			ImageIcon imageIcon = iconProvider.getIcon();
 			this.image = imageIcon.getImage();
 
-			URL url = iconProvider.getOrCreateUrl();
-			return url;
+			return iconProvider.getOrCreateUrl();
 		}
 
 		private URL doGetImageURL(String srcString) {
@@ -518,10 +517,7 @@ public class GHelpHTMLEditorKit extends HTMLEditorKit {
 				// check below
 			}
 
-			// Try the ResourceManager.  This will work for images that start with GHelp 
-			// relative link syntax such as 'help/', 'help/topics/' and 'images/'
-			URL resource = ResourceManager.getResource(srcString);
-			return resource;
+			return ResourceManager.getResource(srcString);
 		}
 
 		private boolean isJavaCode(String src) {

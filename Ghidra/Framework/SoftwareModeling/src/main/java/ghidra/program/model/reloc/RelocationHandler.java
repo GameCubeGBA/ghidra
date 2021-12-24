@@ -37,7 +37,7 @@ public interface RelocationHandler extends ExtensionPoint {
 	 * @param program the program to relocation
 	 * @return true if this relocation handler can relocate the given program
 	 */
-	public boolean canRelocate(Program program);
+	boolean canRelocate(Program program);
 
 	/**
 	 * 
@@ -46,7 +46,7 @@ public interface RelocationHandler extends ExtensionPoint {
 	 * @param monitor
 	 * @throws MemoryAccessException
 	 */
-	public void relocate(Program program, Address newImageBase, TaskMonitor monitor) throws MemoryAccessException;
+	void relocate(Program program, Address newImageBase, TaskMonitor monitor) throws MemoryAccessException;
 
 	/**
 	 * Relocates the memory block to the new start address.
@@ -57,8 +57,8 @@ public interface RelocationHandler extends ExtensionPoint {
 	 * @param monitor
 	 * @throws MemoryAccessException
 	 */
-	public void relocate(Program program, MemoryBlock block, Address newStartAddress, TaskMonitor monitor) throws MemoryAccessException;
+	void relocate(Program program, MemoryBlock block, Address newStartAddress, TaskMonitor monitor) throws MemoryAccessException;
 
 
-	public void performRelocation(Program program, Relocation relocation, TaskMonitor monitor) throws MemoryAccessException;
+	void performRelocation(Program program, Relocation relocation, TaskMonitor monitor) throws MemoryAccessException;
 }

@@ -39,7 +39,7 @@ public class FixedSizeMRUCachingFactory<K, V> implements Factory<K, V> {
 
 	public FixedSizeMRUCachingFactory(Factory<K, V> factory, int size) {
 		this.delegate = factory;
-		this.cache = new LRUMap<K, V>(size);
+		this.cache = new LRUMap<>(size);
 	}
 
 	@Override

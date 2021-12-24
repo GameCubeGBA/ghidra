@@ -16,23 +16,78 @@
 package ghidra.program.database.function;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import db.DBRecord;
-import ghidra.program.database.*;
+import ghidra.program.database.DBObjectCache;
+import ghidra.program.database.DatabaseObject;
+import ghidra.program.database.ProgramDB;
 import ghidra.program.database.data.DataTypeManagerDB;
 import ghidra.program.database.external.ExternalManagerDB;
 import ghidra.program.database.map.AddressMap;
-import ghidra.program.database.symbol.*;
-import ghidra.program.model.address.*;
-import ghidra.program.model.data.*;
-import ghidra.program.model.lang.*;
-import ghidra.program.model.listing.*;
-import ghidra.program.model.symbol.*;
+import ghidra.program.database.symbol.SymbolDB;
+import ghidra.program.database.symbol.SymbolManager;
+import ghidra.program.database.symbol.VariableSymbolDB;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressIterator;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.DataTypeManager;
+import ghidra.program.model.data.FunctionDefinitionDataType;
+import ghidra.program.model.data.GenericCallingConvention;
+import ghidra.program.model.data.Pointer;
+import ghidra.program.model.data.TypeDef;
+import ghidra.program.model.data.Undefined;
+import ghidra.program.model.data.VoidDataType;
+import ghidra.program.model.lang.CompilerSpec;
+import ghidra.program.model.lang.InjectPayload;
+import ghidra.program.model.lang.PrototypeModel;
+import ghidra.program.model.listing.AutoParameterImpl;
+import ghidra.program.model.listing.AutoParameterType;
+import ghidra.program.model.listing.BookmarkType;
+import ghidra.program.model.listing.CircularDependencyException;
+import ghidra.program.model.listing.CodeUnit;
+import ghidra.program.model.listing.Function;
+import ghidra.program.model.listing.FunctionManager;
+import ghidra.program.model.listing.FunctionSignature;
+import ghidra.program.model.listing.FunctionTag;
+import ghidra.program.model.listing.GhidraClass;
+import ghidra.program.model.listing.LocalVariableImpl;
+import ghidra.program.model.listing.Parameter;
+import ghidra.program.model.listing.ParameterImpl;
+import ghidra.program.model.listing.Program;
+import ghidra.program.model.listing.StackFrame;
+import ghidra.program.model.listing.Variable;
+import ghidra.program.model.listing.VariableFilter;
+import ghidra.program.model.listing.VariableSizeException;
+import ghidra.program.model.listing.VariableStorage;
+import ghidra.program.model.listing.VariableUtilities;
+import ghidra.program.model.symbol.ExternalLocation;
+import ghidra.program.model.symbol.Namespace;
+import ghidra.program.model.symbol.Reference;
+import ghidra.program.model.symbol.ReferenceIterator;
+import ghidra.program.model.symbol.ReferenceManager;
+import ghidra.program.model.symbol.SourceType;
+import ghidra.program.model.symbol.Symbol;
+import ghidra.program.model.symbol.SymbolIterator;
+import ghidra.program.model.symbol.SymbolTable;
+import ghidra.program.model.symbol.SymbolType;
+import ghidra.program.model.symbol.SymbolUtilities;
 import ghidra.program.model.util.StringPropertyMap;
 import ghidra.program.util.ChangeManager;
-import ghidra.util.*;
-import ghidra.util.exception.*;
+import ghidra.util.Msg;
+import ghidra.util.StringUtilities;
+import ghidra.util.SystemUtilities;
+import ghidra.util.exception.AssertException;
+import ghidra.util.exception.DuplicateNameException;
+import ghidra.util.exception.InvalidInputException;
 import ghidra.util.task.TaskMonitor;
 
 /**
@@ -517,7 +572,7 @@ public class FunctionDB extends DatabaseObject implements Function {
 				loadVariables();
 			}
 
-			StringBuffer buf = new StringBuffer();
+			StringBuilder buf = new StringBuilder();
 			ReturnParameterDB rtn = getReturn();
 			buf.append(formalSignature ? rtn.getFormalDataType().getDisplayName()
 					: rtn.getDataType().getDisplayName());
@@ -1585,14 +1640,12 @@ public class FunctionDB extends DatabaseObject implements Function {
 			}
 
 			boolean hasCustomStorage = hasCustomVariableStorage();
-			if (hasCustomStorage) {
-				if (validateEnabled && var.hasStackStorage()) {
-					int stackOffset = (int) var.getLastStorageVarnode().getOffset();
-					if (!frame.isParameterOffset(stackOffset)) {
-						throw new InvalidInputException(
-							"Variable contains invalid stack parameter offset: " + var.getName() +
-								"  offset " + stackOffset);
-					}
+			if (hasCustomStorage && (validateEnabled && var.hasStackStorage())) {
+				int stackOffset = (int) var.getLastStorageVarnode().getOffset();
+				if (!frame.isParameterOffset(stackOffset)) {
+					throw new InvalidInputException(
+						"Variable contains invalid stack parameter offset: " + var.getName() +
+							"  offset " + stackOffset);
 				}
 			}
 
@@ -1799,11 +1852,7 @@ public class FunctionDB extends DatabaseObject implements Function {
 		manager.lock.acquire();
 		try {
 			startUpdate();
-			if (!checkIsValid()) {
-				return;
-			}
-
-			if (isBadVariable(symbol)) {
+			if (!checkIsValid() || isBadVariable(symbol)) {
 				// don't do anything here with bad variable symbol
 				return;
 			}
@@ -2512,11 +2561,11 @@ public class FunctionDB extends DatabaseObject implements Function {
 	@Override
 	public PrototypeModel getCallingConvention() {
 		String name = getCallingConventionName();
-		if (name == null || name.equals(Function.UNKNOWN_CALLING_CONVENTION_STRING)) {
+		if (name == null || Function.UNKNOWN_CALLING_CONVENTION_STRING.equals(name)) {
 			return null;
 		}
 		FunctionManager functionMgr = getFunctionManager();
-		if (name.equals(Function.DEFAULT_CALLING_CONVENTION_STRING)) {
+		if (Function.DEFAULT_CALLING_CONVENTION_STRING.equals(name)) {
 			return functionMgr.getDefaultCallingConvention();
 		}
 		return functionMgr.getCallingConvention(name);
@@ -2771,9 +2820,7 @@ public class FunctionDB extends DatabaseObject implements Function {
 			Address address = addressIterator.next();
 			Reference[] referencesFrom = referenceManager.getReferencesFrom(address);
 			if (referencesFrom != null) {
-				for (Reference reference : referencesFrom) {
-					set.add(reference);
-				}
+				Collections.addAll(set, referencesFrom);
 			}
 		}
 		return set;

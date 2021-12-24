@@ -189,11 +189,7 @@ public abstract class AutoLookup {
 	private boolean isIgnorableKeyEvent(KeyEvent event) {
 
 		// ignore modified keys, except for SHIFT
-		if (!isUnmodifiedOrShift(event.getModifiersEx())) {
-			return true;
-		}
-
-		if (event.isActionKey() || event.getKeyChar() == KeyEvent.CHAR_UNDEFINED ||
+		if (!isUnmodifiedOrShift(event.getModifiersEx()) || event.isActionKey() || event.getKeyChar() == KeyEvent.CHAR_UNDEFINED ||
 			Character.isISOControl(event.getKeyChar())) {
 			return true;
 		}
@@ -240,15 +236,11 @@ public abstract class AutoLookup {
 		if (textMatches(text, index, col)) {
 			return index;
 		}
-		if (index - 1 >= 0) {
-			if (textMatches(text, index - 1, col)) {
-				return index - 1;
-			}
+		if ((index - 1 >= 0) && textMatches(text, index - 1, col)) {
+			return index - 1;
 		}
-		if (index + 1 < getRowCount()) {
-			if (textMatches(text, index + 1, col)) {
-				return index + 1;
-			}
+		if ((index + 1 < getRowCount()) && textMatches(text, index + 1, col)) {
+			return index + 1;
 		}
 
 		return -1;

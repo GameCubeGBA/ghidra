@@ -17,8 +17,14 @@ package ghidra.program.database.code;
 
 import java.io.IOException;
 
-import db.*;
-import ghidra.program.database.map.*;
+import db.DBHandle;
+import db.DBRecord;
+import db.LongField;
+import db.RecordIterator;
+import db.Table;
+import ghidra.program.database.map.AddressKeyRecordIterator;
+import ghidra.program.database.map.AddressMap;
+import ghidra.program.database.map.AddressRecordDeleter;
 import ghidra.program.model.address.Address;
 import ghidra.util.SystemUtilities;
 import ghidra.util.exception.VersionException;

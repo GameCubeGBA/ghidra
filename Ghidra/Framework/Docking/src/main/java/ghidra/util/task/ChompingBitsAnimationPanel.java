@@ -20,7 +20,9 @@ import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.Icon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import docking.util.AnimatedIcon;
 import resources.ResourceManager;

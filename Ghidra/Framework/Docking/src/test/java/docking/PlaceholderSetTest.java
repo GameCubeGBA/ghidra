@@ -15,7 +15,9 @@
  */
 package docking;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Set;
 
@@ -101,7 +103,7 @@ public class PlaceholderSetTest extends AbstractGenericTest {
 // Inner Classes	
 //=================================================================================================	
 
-	private class DummyInstaller implements PlaceholderInstaller {
+	private static class DummyInstaller implements PlaceholderInstaller {
 
 		@Override
 		public void installPlaceholder(ComponentPlaceholder placeholder, WindowPosition position) {
@@ -114,7 +116,7 @@ public class PlaceholderSetTest extends AbstractGenericTest {
 		}
 	}
 
-	private class TestProvider extends ComponentProvider {
+	private static class TestProvider extends ComponentProvider {
 		JLabel label = new GDLabel();
 
 		public TestProvider() {

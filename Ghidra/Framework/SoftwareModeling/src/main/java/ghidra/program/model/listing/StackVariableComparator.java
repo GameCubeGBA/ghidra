@@ -47,10 +47,7 @@ public class StackVariableComparator implements Comparator<Object> {
 			}
 			return 1;
 		}
-		if (offset2 == null) {
-			return -1;
-		}
-		if (offset1 < offset2) {
+		if ((offset2 == null) || (offset1 < offset2)) {
 			return -1;
 		}
 		if (offset2 < offset1) {

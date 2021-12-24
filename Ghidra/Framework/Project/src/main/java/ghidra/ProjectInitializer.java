@@ -19,6 +19,7 @@ package ghidra;
 import ghidra.framework.ModuleInitializer;
 
 public class ProjectInitializer implements ModuleInitializer {
+	@Override
 	public void run() {
 
 		// Register "ghidra" URL protocol Handler

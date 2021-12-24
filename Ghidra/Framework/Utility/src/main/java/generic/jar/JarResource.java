@@ -15,14 +15,20 @@
  */
 package generic.jar;
 
-import ghidra.util.Msg;
-import ghidra.util.exception.AssertException;
-
-import java.io.*;
-import java.net.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import ghidra.util.Msg;
+import ghidra.util.exception.AssertException;
 import utilities.util.FileUtilities;
 import utility.application.ApplicationSettings;
 
@@ -116,7 +122,7 @@ public class JarResource implements Resource {
 		if (!isDirectory()) {
 			return null;
 		}
-		List<ResourceFile> fileList = new ArrayList<ResourceFile>();
+		List<ResourceFile> fileList = new ArrayList<>();
 		List<JarEntryNode> children = node.getChildren();
 		for (JarEntryNode jarEntryNode : children) {
 			ResourceFile file = new ResourceFile(new JarResource(root, jarEntryNode));
@@ -171,7 +177,7 @@ public class JarResource implements Resource {
 		if (split.length == 1) {
 			return null;
 		}
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		buf.append(split[0]);
 		for (int i = 1; i < split.length; i++) {
 			buf.append("/");

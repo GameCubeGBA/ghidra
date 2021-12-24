@@ -31,7 +31,9 @@ import ghidra.util.Msg;
 import ghidra.util.SystemUtilities;
 import ghidra.util.datastruct.WeakDataStructureFactory;
 import ghidra.util.datastruct.WeakSet;
-import ghidra.util.exception.*;
+import ghidra.util.exception.DuplicateFileException;
+import ghidra.util.exception.DuplicateNameException;
+import ghidra.util.exception.UserAccessException;
 
 /**
  * <code>RepositoryServerAdapter</code> provides a persistent wrapper for a 
@@ -129,10 +131,8 @@ public class RepositoryServerAdapter {
 	public synchronized boolean connect() throws NotConnectedException {
 		connectCancelled = false;
 
-		if (serverHandle != null) {
-			if (verifyConnection()) {
-				return true;
-			}
+		if ((serverHandle != null) && verifyConnection()) {
+			return true;
 		}
 
 		Throwable cause = null;

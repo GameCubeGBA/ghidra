@@ -15,9 +15,15 @@
  */
 package ghidra.graph.algo;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
-import ghidra.graph.*;
+import ghidra.graph.GDirectedGraph;
+import ghidra.graph.GEdge;
+import ghidra.graph.GraphAlgorithms;
 
 /**
  * Processes the given graph depth first and records that order of the vertices.

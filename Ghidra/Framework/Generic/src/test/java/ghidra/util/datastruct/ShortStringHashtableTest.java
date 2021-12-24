@@ -81,12 +81,9 @@ public class ShortStringHashtableTest extends AbstractGenericTest {
                 if (i%10 != 0) {
                     Assert.fail("hashtable contains key "+i+", but it shouldn't");
                 }
-            }
-            else {
-                if (i%10 == 0) {
-                    Assert.fail("hashtable should contain key "+i+", but it doesn't");
-                }
-            }
+            } else if (i%10 == 0) {
+			    Assert.fail("hashtable should contain key "+i+", but it doesn't");
+			}
         }
     }
 
@@ -97,35 +94,30 @@ public class ShortStringHashtableTest extends AbstractGenericTest {
                 Assert.fail("Value at key "+key+" should be null! "+
                         "Instead it contains "+ht.get(key));
             }
-        }
-        else {
-            if (!ht.get(key).equals(value)) {
-                Assert.fail("Value at key "+key+" should be "+value+
-                        " but instead is "+ht.get(key));
-            }
-        }
+        } else if (!ht.get(key).equals(value)) {
+		    Assert.fail("Value at key "+key+" should be "+value+
+		            " but instead is "+ht.get(key));
+		}
     }
 
     public static void testContains(ShortStringHashtable ht, short[] keys, String test) {
 
-        for(int i=0;i<keys.length;i++) {
-            if (!ht.contains(keys[i])) {
-                Assert.fail("hastable should contain key "+keys[i]+", but it doesn't");
+        for (short key : keys) {
+            if (!ht.contains(key)) {
+                Assert.fail("hastable should contain key "+key+", but it doesn't");
             }
         }
 
         for(int i= 0;i<=5000;i++) {
-            if (ht.contains((short)i)) {
-                if (!contains(keys,(short)i)) {
-                    Assert.fail("hashtable contains key "+i+", but it shouldn't");
-                }
-            }
+            if (ht.contains((short)i) && !contains(keys,(short)i)) {
+			    Assert.fail("hashtable contains key "+i+", but it shouldn't");
+			}
         }
     }
 
     public static boolean contains(short[] keys, short key) {
-        for(int i=0;i<keys.length;i++) {
-            if (keys[i] == key) {
+        for (short key2 : keys) {
+            if (key2 == key) {
                 return true;
             }
         }

@@ -15,11 +15,17 @@
  */
 package ghidra.program.database.register;
 
-import ghidra.program.model.address.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressRange;
+import ghidra.program.model.address.AddressRangeImpl;
+import ghidra.program.model.address.AddressRangeIterator;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
-
-import java.util.*;
 
 /**
  * Associates objects with address ranges.
@@ -32,7 +38,7 @@ public class AddressRangeObjectMap<T> {
 	 * Constructs a new ObjectRangeMap
 	 */
 	public AddressRangeObjectMap() {
-		ranges = new ArrayList<AddressValueRange<T>>();
+		ranges = new ArrayList<>();
 	}
 
 	/**
@@ -70,7 +76,7 @@ public class AddressRangeObjectMap<T> {
 		if (length <= 0) {
 			return;
 		}
-		AddressRangeObjectMap<T> tmpMap = new AddressRangeObjectMap<T>();
+		AddressRangeObjectMap<T> tmpMap = new AddressRangeObjectMap<>();
 
 		Address fromEndAddr = fromAddr.add(length - 1);
 		for (AddressRange range : getAddressRangeIterator(fromAddr, fromEndAddr)) {
@@ -104,7 +110,7 @@ public class AddressRangeObjectMap<T> {
 	 */
 	public synchronized void setObject(Address start, Address end, T object) {
 		lastRange = null;
-		AddressValueRange<T> newRange = new AddressValueRange<T>(start, end, object);
+		AddressValueRange<T> newRange = new AddressValueRange<>(start, end, object);
 
 		// if ranges list is empty, just add the new entry
 		if (ranges.isEmpty()) {
@@ -145,11 +151,11 @@ public class AddressRangeObjectMap<T> {
 
 		if (valuesEqual(range.getValue(), object)) { // merge records
 			ranges.remove(insertionIndex);
-			newRange = new AddressValueRange<T>(newRange.getStart(), range.getEnd(), object);
+			newRange = new AddressValueRange<>(newRange.getStart(), range.getEnd(), object);
 		}
 		// overwrite the old record to start past the end of the new range
 		else {
-			ranges.set(insertionIndex, new AddressValueRange<T>(newEnd.next(), range.getEnd(),
+			ranges.set(insertionIndex, new AddressValueRange<>(newEnd.next(), range.getEnd(),
 				range.getValue()));
 		}
 
@@ -180,15 +186,15 @@ public class AddressRangeObjectMap<T> {
 
 		if (valuesEqual(previousRange.getValue(), object)) {  // same objects, merge
 			ranges.remove(pos);
-			newRange = new AddressValueRange<T>(oldStart, getMax(oldEnd, end), object);
+			newRange = new AddressValueRange<>(oldStart, getMax(oldEnd, end), object);
 		}
 		// break previous record into sub-ranges that exclude the new range
 		else {
-			ranges.set(pos, new AddressValueRange<T>(oldStart, start.previous(), oldValue));
+			ranges.set(pos, new AddressValueRange<>(oldStart, start.previous(), oldValue));
 
 			// previous range extends past the new range
 			if (previousRange.getEnd().compareTo(end) > 0) {
-				ranges.add(pos + 1, new AddressValueRange<T>(end.next(), oldEnd, oldValue));
+				ranges.add(pos + 1, new AddressValueRange<>(end.next(), oldEnd, oldValue));
 			}
 		}
 
@@ -217,12 +223,12 @@ public class AddressRangeObjectMap<T> {
 			AddressValueRange<T> range = ranges.get(pos);
 			if (range.getEnd().compareTo(start) >= 0) {				// truncate previous range if it needed
 				ranges.set(pos,
-					new AddressValueRange<T>(range.getStart(), start.previous(), range.getValue()));
+					new AddressValueRange<>(range.getStart(), start.previous(), range.getValue()));
 			}
 			if (range.getEnd().compareTo(end) > 0) {					// create leftover if previous range extends
 				// beyond cleared area.
 				ranges.add(pos + 1,
-					new AddressValueRange<T>(end.next(), range.getEnd(), range.getValue()));
+					new AddressValueRange<>(end.next(), range.getEnd(), range.getValue()));
 			}
 		}
 
@@ -238,7 +244,7 @@ public class AddressRangeObjectMap<T> {
 			}
 			else {										// intersects, fixup start
 				ranges.set(pos,
-					new AddressValueRange<T>(end.next(), range.getEnd(), range.getValue()));
+					new AddressValueRange<>(end.next(), range.getEnd(), range.getValue()));
 			}
 		}
 	}

@@ -17,18 +17,29 @@ package ghidra.graph.viewer.renderer;
 
 import java.awt.Color;
 import java.awt.geom.Point2D;
-import java.util.*;
+import java.util.Collection;
+import java.util.ConcurrentModificationException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import com.google.common.base.Function;
 
 import edu.uci.ics.jung.algorithms.layout.Layout;
-import edu.uci.ics.jung.visualization.*;
+import edu.uci.ics.jung.visualization.Layer;
+import edu.uci.ics.jung.visualization.MultiLayerTransformer;
+import edu.uci.ics.jung.visualization.RenderContext;
 import edu.uci.ics.jung.visualization.layout.ObservableCachingLayout;
 import edu.uci.ics.jung.visualization.renderers.Renderer;
 import edu.uci.ics.jung.visualization.transform.shape.GraphicsDecorator;
-import ghidra.graph.viewer.*;
+import ghidra.graph.viewer.GraphViewerUtils;
+import ghidra.graph.viewer.VisualEdge;
+import ghidra.graph.viewer.VisualVertex;
 import ghidra.graph.viewer.edge.BasicEdgeLabelRenderer;
-import ghidra.graph.viewer.layout.*;
+import ghidra.graph.viewer.layout.Column;
+import ghidra.graph.viewer.layout.LayoutLocationMap;
+import ghidra.graph.viewer.layout.Row;
+import ghidra.graph.viewer.layout.VisualGraphLayout;
 
 /**
  * This was created to add the ability to paint selected vertices above other vertices.  We need

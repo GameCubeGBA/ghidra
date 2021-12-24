@@ -26,7 +26,7 @@ public interface Callback {
 	 * Creates a dummy callback function.  This is useful to avoid using <code>null</code>.
 	 * @return a dummy callback function
 	 */
-	public static Callback dummy() {
+	static Callback dummy() {
 		return () -> {
 			// no-op
 		};
@@ -39,7 +39,7 @@ public interface Callback {
 	 * @param c the callback function to check for <code>null</code>
 	 * @return a non-null callback function
 	 */
-	public static Callback dummyIfNull(Callback c) {
+	static Callback dummyIfNull(Callback c) {
 		if (c == null) {
 			return dummy();
 		}
@@ -49,5 +49,5 @@ public interface Callback {
 	/**
 	 * The method that will be called.
 	 */
-	public void call();
+	void call();
 }

@@ -24,11 +24,11 @@ public interface TrackedTaskListener {
      * A callback for when a Task is starting to be tracked.
      * @param task The task being tracked.
      */
-    public void taskAdded( Task task );
+    void taskAdded( Task task );
     
     /**
      * A callback when a task is no longer being tracked.
      * @param task The task that is no longer tracked.
      */
-    public void taskRemoved( Task task );
+    void taskRemoved( Task task );
 }

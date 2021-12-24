@@ -16,13 +16,17 @@
  */
 package generic.io;
 
-import ghidra.util.Msg;
-import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
-
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.jar.JarOutputStream;
 import java.util.zip.ZipEntry;
+
+import ghidra.util.Msg;
+import ghidra.util.task.TaskMonitor;
 
 /**
  * JarWriter is a class for writing to a jar output stream.
@@ -135,22 +139,22 @@ public class JarWriter {
 	public boolean outputRecursively(File baseFile, String jarPath, TaskMonitor monitor) {
 
 		boolean succeeded = true;
-		File[] subFiles = new File[0];
+		File[] subFiles = {};
 
 		if (baseFile.isDirectory()) {
 			subFiles = baseFile.listFiles();
-			for (int i = 0; i < subFiles.length; i++) {
+			for (File subFile : subFiles) {
 				if (monitor.isCancelled()) {
 					break;
 				}
 				String newPath = jarPath + baseFile.getName() + File.separator;
-				succeeded = outputRecursively(subFiles[i], newPath, monitor) && succeeded;
+				succeeded = outputRecursively(subFile, newPath, monitor) && succeeded;
 			}
 		}
 		else {
 			String name = baseFile.getName();
-			for (int i = 0; i < excludedExtensions.length; i++) {
-				if (name.endsWith(excludedExtensions[i])) {
+			for (String excludedExtension : excludedExtensions) {
+				if (name.endsWith(excludedExtension)) {
 					return true;
 				}
 			}
@@ -181,9 +185,6 @@ public class JarWriter {
 			JarWriter writer = new JarWriter(jarOut);
 			writer.outputRecursively(new File(args[0]), "", TaskMonitor.DUMMY);
 			jarOut.close();
-		}
-		catch (FileNotFoundException e) {
-			e.printStackTrace();
 		}
 		catch (IOException e) {
 			e.printStackTrace();

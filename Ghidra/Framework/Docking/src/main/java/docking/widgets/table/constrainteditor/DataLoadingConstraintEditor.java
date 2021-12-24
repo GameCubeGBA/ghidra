@@ -18,11 +18,19 @@
  */
 package docking.widgets.table.constrainteditor;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Component;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JLayer;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import docking.DisabledComponentLayerFactory;
 import docking.widgets.EmptyBorderButton;
@@ -32,7 +40,11 @@ import docking.widgets.table.constraint.ColumnData;
 import ghidra.util.HTMLUtilities;
 import ghidra.util.Msg;
 import ghidra.util.layout.ColumnLayout;
-import ghidra.util.task.*;
+import ghidra.util.task.Task;
+import ghidra.util.task.TaskBuilder;
+import ghidra.util.task.TaskListener;
+import ghidra.util.task.TaskMonitor;
+import ghidra.util.task.TaskMonitorComponent;
 import resources.Icons;
 
 /**

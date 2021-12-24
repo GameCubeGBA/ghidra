@@ -21,11 +21,26 @@ import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
-import db.*;
+import db.DBConstants;
+import db.DBHandle;
+import db.DBRecord;
+import db.Field;
+import db.LongField;
+import db.RecordIterator;
+import db.Schema;
+import db.StringField;
+import db.Table;
 import ghidra.program.database.map.AddressMap;
-import ghidra.program.database.util.*;
-import ghidra.program.model.address.*;
-import ghidra.program.model.symbol.*;
+import ghidra.program.database.util.AndQuery;
+import ghidra.program.database.util.FieldMatchQuery;
+import ghidra.program.database.util.Query;
+import ghidra.program.database.util.QueryRecordIterator;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.symbol.Namespace;
+import ghidra.program.model.symbol.SourceType;
+import ghidra.program.model.symbol.SymbolType;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
@@ -77,8 +92,7 @@ abstract class SymbolDatabaseAdapter {
 		}
 
 		try {
-			SymbolDatabaseAdapter adapter = new SymbolDatabaseAdapterV3(dbHandle, addrMap, false);
-			return adapter;
+			return new SymbolDatabaseAdapterV3(dbHandle, addrMap, false);
 		}
 		catch (VersionException e) {
 			if (!e.isUpgradable() || openMode == DBConstants.UPDATE) {

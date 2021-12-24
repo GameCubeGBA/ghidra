@@ -15,7 +15,9 @@
  */
 package ghidra.framework.main.datatable;
 
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.Icon;
 
@@ -118,7 +120,7 @@ public class DomainFileInfo {
 		if (metadata == null) {
 			metadata = domainFile.getMetadata();
 			if (metadata == null) {
-				metadata = new HashMap<String, String>();
+				metadata = new HashMap<>();
 			}
 		}
 		return metadata;

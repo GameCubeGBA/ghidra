@@ -31,7 +31,7 @@ public enum Architecture {
 	private String[] supportedArchitectureNames;
 	private String architectureName = System.getProperty("os.arch");
 
-	private Architecture(String ... architectures) {
+	Architecture(String ... architectures) {
 		supportedArchitectureNames = architectures;
 	}
 	

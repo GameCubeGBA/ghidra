@@ -15,15 +15,28 @@
  */
 package ghidra.pcodeCPort.slgh_compile;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.stream.Collectors;
 
-import org.antlr.runtime.*;
+import org.antlr.runtime.ANTLRStringStream;
+import org.antlr.runtime.CharStream;
+import org.antlr.runtime.RecognitionException;
+import org.antlr.runtime.UnbufferedTokenStream;
 import org.antlr.runtime.tree.CommonTreeNodeStream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jdom.*;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.JDOMException;
 
 import generic.stl.VectorSTL;
 import ghidra.app.plugin.processors.sleigh.SleighException;
@@ -32,14 +45,33 @@ import ghidra.pcode.utils.MessageFormattingUtils;
 import ghidra.pcodeCPort.address.Address;
 import ghidra.pcodeCPort.context.SleighError;
 import ghidra.pcodeCPort.error.LowlevelError;
-import ghidra.pcodeCPort.semantics.*;
+import ghidra.pcodeCPort.semantics.ConstructTpl;
+import ghidra.pcodeCPort.semantics.OpTpl;
+import ghidra.pcodeCPort.semantics.VarnodeTpl;
 import ghidra.pcodeCPort.sleighbase.SleighBase;
-import ghidra.pcodeCPort.slghsymbol.*;
+import ghidra.pcodeCPort.slghsymbol.EndSymbol;
+import ghidra.pcodeCPort.slghsymbol.FlowDestSymbol;
+import ghidra.pcodeCPort.slghsymbol.FlowRefSymbol;
+import ghidra.pcodeCPort.slghsymbol.LabelSymbol;
+import ghidra.pcodeCPort.slghsymbol.MacroSymbol;
+import ghidra.pcodeCPort.slghsymbol.OperandSymbol;
+import ghidra.pcodeCPort.slghsymbol.SectionSymbol;
+import ghidra.pcodeCPort.slghsymbol.SleighSymbol;
+import ghidra.pcodeCPort.slghsymbol.SpaceSymbol;
+import ghidra.pcodeCPort.slghsymbol.StartSymbol;
+import ghidra.pcodeCPort.slghsymbol.symbol_type;
 import ghidra.pcodeCPort.space.AddrSpace;
 import ghidra.pcodeCPort.utils.XmlUtils;
 import ghidra.pcodeCPort.xml.DocumentStorage;
-import ghidra.sleigh.grammar.*;
+import ghidra.sleigh.grammar.BailoutException;
+import ghidra.sleigh.grammar.LineArrayListWriter;
+import ghidra.sleigh.grammar.Location;
+import ghidra.sleigh.grammar.ParsingEnvironment;
+import ghidra.sleigh.grammar.SleighCompiler;
+import ghidra.sleigh.grammar.SleighLexer;
+import ghidra.sleigh.grammar.SleighParser;
 import ghidra.sleigh.grammar.SleighParser_SemanticParser.semantic_return;
+import ghidra.sleigh.grammar.SleighRecognizerConstants;
 import ghidra.util.exception.AssertException;
 
 public class PcodeParser extends PcodeCompile {
@@ -229,7 +261,7 @@ public class PcodeParser extends PcodeCompile {
 			List<?> list = el.getChildren();
 			Iterator<?> iter = list.iterator();
 			Element child = (Element) iter.next();
-			while (child.getName().equals("floatformat")) {
+			while ("floatformat".equals(child.getName())) {
 				child = (Element) iter.next(); // skip over
 			}
 			restoreXmlSpaces(child);
@@ -333,10 +365,7 @@ public class PcodeParser extends PcodeCompile {
 		catch (RecognitionException e) {
 			throw new SleighException("Semantic compilation error: " + e.getMessage(), e);
 		}
-		catch (BailoutException e) {
-			throw new SleighException("Unrecoverable error(s), halting compilation", e);
-		}
-		catch (NullPointerException e) {
+		catch (BailoutException | NullPointerException e) {
 			throw new SleighException("Unrecoverable error(s), halting compilation", e);
 		}
 		finally {
@@ -363,9 +392,7 @@ public class PcodeParser extends PcodeCompile {
 
 	@Override
 	public SectionVector standaloneSection(ConstructTpl main) {
-		// Create SectionVector for just the main rtl section with no named sections
-		SectionVector res = new SectionVector(main, null);
-		return res;
+		return new SectionVector(main, null);
 	}
 
 	@Override

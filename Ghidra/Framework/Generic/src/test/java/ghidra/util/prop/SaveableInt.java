@@ -23,7 +23,7 @@ import ghidra.util.Saveable;
  */
 public class SaveableInt  implements Saveable {
 	private int i;
-	private Class<?>[] fields = new Class<?>[] {
+	private Class<?>[] fields = {
         Integer.class
     };
 	
@@ -61,10 +61,7 @@ public class SaveableInt  implements Saveable {
 	}
 	@Override
     public boolean equals(Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (!(obj instanceof SaveableInt)) {
+		if ((obj == null) || !(obj instanceof SaveableInt)) {
 			return false;
 		}
 		return i == ((SaveableInt)obj).i;

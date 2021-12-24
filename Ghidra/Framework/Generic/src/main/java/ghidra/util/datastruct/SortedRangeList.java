@@ -15,7 +15,11 @@
  */
 package ghidra.util.datastruct;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.NoSuchElementException;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * Provides a list of integer ranges that are maintained in sorted order. 
@@ -186,10 +190,8 @@ public class SortedRangeList implements Iterable<Range> {
 	public boolean contains(int value) {
 		Range key = new Range(value, value);
 		SortedSet<Range> head = set.headSet(key);
-		if (!head.isEmpty()) {
-			if (head.last().max >= value) {
-				return true;
-			}
+		if (!head.isEmpty() && (head.last().max >= value)) {
+			return true;
 		}
 		return set.contains(key);
 	}
@@ -344,7 +346,7 @@ public class SortedRangeList implements Iterable<Range> {
 	 */
 	@Override
 	public String toString() {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		Iterator<Range> it = getRanges();
 		if (it.hasNext()) {
 			Range r = it.next();

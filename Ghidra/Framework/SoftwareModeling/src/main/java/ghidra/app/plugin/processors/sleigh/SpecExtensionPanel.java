@@ -15,36 +15,59 @@
  */
 package ghidra.app.plugin.processors.sleigh;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.KeyboardFocusManager;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.table.*;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
 
 import org.xml.sax.SAXException;
 
 import docking.widgets.OptionDialog;
 import docking.widgets.filechooser.GhidraFileChooser;
-import docking.widgets.table.*;
+import docking.widgets.table.AbstractGTableModel;
+import docking.widgets.table.GTable;
+import docking.widgets.table.GTableCellRenderer;
+import docking.widgets.table.GTableCellRenderingData;
 import ghidra.framework.preferences.Preferences;
 import ghidra.framework.store.LockException;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.database.SpecExtension;
 import ghidra.program.database.SpecExtension.DocInfo;
-import ghidra.program.model.lang.*;
+import ghidra.program.model.lang.CompilerSpec;
+import ghidra.program.model.lang.InjectPayload;
+import ghidra.program.model.lang.PcodeInjectLibrary;
+import ghidra.program.model.lang.PrototypeModel;
+import ghidra.program.model.lang.PrototypeModelMerged;
 import ghidra.util.Msg;
 import ghidra.util.Swing;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.filechooser.GhidraFileChooserModel;
 import ghidra.util.filechooser.GhidraFileFilter;
-import ghidra.util.task.*;
+import ghidra.util.task.Task;
+import ghidra.util.task.TaskLauncher;
+import ghidra.util.task.TaskMonitor;
 import ghidra.xml.XmlParseException;
 
 public class SpecExtensionPanel extends JPanel {
@@ -79,7 +102,7 @@ public class SpecExtensionPanel extends JPanel {
 
 		private String formalName;
 
-		private Status(String nm) {
+		Status(String nm) {
 			formalName = nm;
 		}
 	}
@@ -439,17 +462,14 @@ public class SpecExtensionPanel extends JPanel {
 	private static String fileToString(File file) throws IOException {
 		FileReader inputReader = new FileReader(file);
 		BufferedReader reader = new BufferedReader(inputReader);
-		try {
-			StringBuffer buffer = new StringBuffer();
+		try (reader) {
+			StringBuilder buffer = new StringBuilder();
 			String line = null;
 			while ((line = reader.readLine()) != null) {
 				buffer.append(line);
 				buffer.append('\n');
 			}
 			return buffer.toString();
-		}
-		finally {
-			reader.close();
 		}
 	}
 
@@ -585,10 +605,7 @@ public class SpecExtensionPanel extends JPanel {
 
 	private void exportExtension() {
 		CompilerElement compilerElement = getSelectedCompilerElement();
-		if (compilerElement == null) {
-			return;
-		}
-		if (!compilerElement.isExisting()) {
+		if ((compilerElement == null) || !compilerElement.isExisting()) {
 			return;		// Only export existing elements
 		}
 		String suggestedName = compilerElement.name + PREFERENCES_FILE_EXTENSION;

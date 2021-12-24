@@ -17,7 +17,14 @@ package ghidra.util.classfinder;
 
 import java.io.File;
 import java.lang.reflect.Modifier;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -190,13 +197,7 @@ public class ClassFinder {
 	 * @return True if the given class is an extension point of interest; otherwise, false.
 	 */
 	public static boolean isClassOfInterest(Class<?> c) {
-		if (Modifier.isAbstract(c.getModifiers())) {
-			return false;
-		}
-		if (c.getEnclosingClass() != null && !Modifier.isStatic(c.getModifiers())) {
-			return false;
-		}
-		if (!Modifier.isPublic(c.getModifiers())) {
+		if (Modifier.isAbstract(c.getModifiers()) || (c.getEnclosingClass() != null && !Modifier.isStatic(c.getModifiers())) || !Modifier.isPublic(c.getModifiers())) {
 			return false;
 		}
 		if (ExtensionPointProperties.Util.isExcluded(c)) {

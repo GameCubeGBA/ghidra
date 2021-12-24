@@ -20,7 +20,10 @@ import java.util.Date;
 import javax.swing.JLabel;
 import javax.swing.table.TableCellRenderer;
 
-import docking.widgets.table.*;
+import docking.widgets.table.DisplayStringProvider;
+import docking.widgets.table.DynamicTableColumn;
+import docking.widgets.table.GTable;
+import docking.widgets.table.RowFilterTransformer;
 import docking.widgets.table.constraint.ColumnConstraint;
 import docking.widgets.table.constraint.dialog.ColumnFilterDialog;
 import ghidra.docking.settings.Settings;
@@ -103,7 +106,7 @@ public interface GColumnRenderer<T> extends TableCellRenderer {
 	 * be available as a filter, along with any other column constraints.
 	 * @return the mode
 	 */
-	public default ColumnConstraintFilterMode getColumnConstraintFilterMode() {
+	default ColumnConstraintFilterMode getColumnConstraintFilterMode() {
 		return ColumnConstraintFilterMode.ALLOW_RENDERER_STRING_FILTER_ONLY;
 	}
 
@@ -117,7 +120,7 @@ public interface GColumnRenderer<T> extends TableCellRenderer {
 	 * @param settings any settings the converter may need to convert the type
 	 * @return the unformatted String version of what is rendered in the table cell on screen
 	 */
-	public String getFilterString(T t, Settings settings);
+	String getFilterString(T t, Settings settings);
 
 	/**
 	 * A convenience method for primitive-based/wrapper-based renderers to signal that they
@@ -131,7 +134,7 @@ public interface GColumnRenderer<T> extends TableCellRenderer {
 	 * @return the new exception
 	 * @see AbstractWrapperTypeColumnRenderer
 	 */
-	public default AssertException createWrapperTypeException() {
+	default AssertException createWrapperTypeException() {
 		return new AssertException("Wrapper column type not expected to be filtered as a String");
 	}
 }

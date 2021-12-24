@@ -17,7 +17,9 @@ package docking.widgets.table.constrainteditor;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.time.*;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
@@ -78,11 +80,7 @@ public class DateValueConstraintEditor extends AbstractColumnConstraintEditor<Lo
 	}
 
 	private static boolean isValidDate(LocalDate date) {
-		if (date == null) {
-			return false;
-		}
-
-		if (date == DateColumnConstraintProvider.DEFAULT_DATE) {
+		if ((date == null) || (date == DateColumnConstraintProvider.DEFAULT_DATE)) {
 			return false;
 		}
 		// the DateColumnConstraintProvider.DEFAULT_DATE is a made-up illegal Date so that

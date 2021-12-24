@@ -15,18 +15,44 @@
  */
 package ghidra.framework.store.local;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
-import java.io.*;
-import java.util.*;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
-import db.*;
+import db.DBHandle;
+import db.Field;
+import db.IntField;
+import db.Schema;
 import db.buffers.BufferFile;
-import generic.test.*;
-import ghidra.framework.store.*;
+import generic.test.AbstractGTest;
+import generic.test.AbstractGenericTest;
+import generic.test.TestUtils;
+import ghidra.framework.store.DataFileItem;
+import ghidra.framework.store.DatabaseItem;
+import ghidra.framework.store.FileSystemEventManager;
+import ghidra.framework.store.FileSystemListener;
+import ghidra.framework.store.FolderItem;
+import ghidra.framework.store.FolderNotEmptyException;
 import ghidra.util.InvalidNameException;
 import ghidra.util.PropertyFile;
 import ghidra.util.exception.CancelledException;
@@ -345,9 +371,7 @@ public abstract class AbstractLocalFileSystemTest extends AbstractGenericTest {
 		byte[] dataBytes = data.getBytes();
 
 		List<String> names = new ArrayList<>();
-		for (String itemName : fs.getItemNames("/")) {
-			names.add(itemName);
-		}
+		Collections.addAll(names, fs.getItemNames("/"));
 
 		fs.dispose();
 		fs = LocalFileSystem.getLocalFileSystem(projectDir.getAbsolutePath(), false, false, false,
@@ -941,14 +965,7 @@ public abstract class AbstractLocalFileSystemTest extends AbstractGenericTest {
 class MyEvent {
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((newName == null) ? 0 : newName.hashCode());
-		result = prime * result + ((newParentPath == null) ? 0 : newParentPath.hashCode());
-		result = prime * result + ((op == null) ? 0 : op.hashCode());
-		result = prime * result + ((parentPath == null) ? 0 : parentPath.hashCode());
-		return result;
+		return Objects.hash(name, newName, newParentPath, op, parentPath);
 	}
 
 	@Override

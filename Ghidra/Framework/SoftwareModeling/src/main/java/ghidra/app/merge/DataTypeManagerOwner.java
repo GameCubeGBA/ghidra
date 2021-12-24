@@ -24,5 +24,5 @@ public interface DataTypeManagerOwner {
 	 * Gets the associated data type manager.
 	 * @return the data type manager.
 	 */
-	public DataTypeManager getDataTypeManager();
+	DataTypeManager getDataTypeManager();
 }

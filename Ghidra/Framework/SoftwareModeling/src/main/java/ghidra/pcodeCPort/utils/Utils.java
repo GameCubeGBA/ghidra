@@ -16,7 +16,7 @@
  */
 package ghidra.pcodeCPort.utils;
 
-import ghidra.pcodeCPort.context.*;
+import ghidra.pcodeCPort.context.SleighError;
 import ghidra.sleigh.grammar.Location;
 
 public class Utils {
@@ -207,7 +207,7 @@ public class Utils {
 			return decodedString;
 		}
 
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		int missingLength = padLength - decodedString.length();
 		for ( int i = 0; i < missingLength; i++ ) {
 			buffer.append( "0" );
@@ -220,10 +220,7 @@ public class Utils {
 		if ( v1 == v2 ) {
 			return 0;
 		}
-		if ( v1 >= 0 && v2 >= 0 ) {
-			return v1 < v2 ? -1 : 1;
-		}
-		if ( v1 < 0 && v2 < 0 ) {
+		if ( (v1 >= 0 && v2 >= 0) || (v1 < 0 && v2 < 0) ) {
 			return v1 < v2 ? -1 : 1;
 		}
 		if ( v1 < 0 ) {
@@ -235,10 +232,7 @@ public class Utils {
 		if ( v1 == v2 ) {
 			return 0;
 		}
-		if ( v1 >= 0 && v2 >= 0 ) {
-			return v1 < v2 ? -1 : 1;
-		}
-		if ( v1 < 0 && v2 < 0 ) {
+		if ( (v1 >= 0 && v2 >= 0) || (v1 < 0 && v2 < 0) ) {
 			return v1 < v2 ? -1 : 1;
 		}
 		if ( v1 < 0 ) {

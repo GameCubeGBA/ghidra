@@ -15,21 +15,31 @@
  */
 package ghidra.program.database.mem;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
-import db.*;
+import db.DBBuffer;
+import db.DBConstants;
+import db.DBHandle;
 import db.buffers.BufferFile;
 import generic.jar.ResourceFile;
 import generic.test.AbstractGenericTest;
 import ghidra.framework.Application;
 import ghidra.framework.store.db.PrivateDatabase;
 import ghidra.program.database.ProgramDB;
-import ghidra.program.model.lang.*;
+import ghidra.program.model.lang.CompilerSpec;
+import ghidra.program.model.lang.Language;
+import ghidra.program.model.lang.LanguageID;
+import ghidra.program.model.lang.LanguageNotFoundException;
+import ghidra.program.model.lang.LanguageService;
 import ghidra.program.model.listing.Program;
 import ghidra.program.model.mem.Memory;
 import ghidra.program.util.DefaultLanguageService;
@@ -297,8 +307,7 @@ public class FileBytesTest extends AbstractGenericTest {
 		ResourceFile ldefFile = Application.getModuleDataFile("Toy", "languages/toy.ldefs");
 		if (ldefFile != null) {
 			LanguageService languageService = DefaultLanguageService.getLanguageService(ldefFile);
-			Language language = languageService.getLanguage(new LanguageID(languageName));
-			return language;
+			return languageService.getLanguage(new LanguageID(languageName));
 		}
 		throw new LanguageNotFoundException("Unsupported test language: " + languageName);
 	}

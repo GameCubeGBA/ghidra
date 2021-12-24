@@ -16,14 +16,14 @@
  */
 package docking.options.editor;
 
-import ghidra.framework.ModuleInitializer;
-import ghidra.framework.options.EnumEditor;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.beans.PropertyEditorManager;
 import java.io.File;
 import java.util.Date;
+
+import ghidra.framework.ModuleInitializer;
+import ghidra.framework.options.EnumEditor;
 
 public class EditorInitializer implements ModuleInitializer {
 

@@ -22,7 +22,9 @@ import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.JFrame;
 
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import docking.test.AbstractDockingTest;
 import resources.ResourceManager;

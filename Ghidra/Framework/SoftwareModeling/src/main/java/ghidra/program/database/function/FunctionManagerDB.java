@@ -16,31 +16,72 @@
 package ghidra.program.database.function;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 
-import db.*;
+import db.DBConstants;
+import db.DBHandle;
+import db.DBRecord;
+import db.RecordIterator;
 import generic.FilteredIterator;
 import ghidra.program.database.DBObjectCache;
 import ghidra.program.database.ProgramDB;
 import ghidra.program.database.code.CodeManager;
 import ghidra.program.database.external.ExternalLocationDB;
 import ghidra.program.database.map.AddressMap;
-import ghidra.program.database.symbol.*;
-import ghidra.program.model.address.*;
-import ghidra.program.model.data.*;
-import ghidra.program.model.lang.*;
-import ghidra.program.model.listing.*;
+import ghidra.program.database.symbol.NamespaceManager;
+import ghidra.program.database.symbol.OverlappingNamespaceException;
+import ghidra.program.database.symbol.SymbolDB;
+import ghidra.program.database.symbol.SymbolManager;
+import ghidra.program.database.symbol.VariableSymbolDB;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressFactory;
+import ghidra.program.model.address.AddressIterator;
+import ghidra.program.model.address.AddressSet;
+import ghidra.program.model.address.AddressSetView;
+import ghidra.program.model.address.AddressSpace;
+import ghidra.program.model.data.AbstractIntegerDataType;
+import ghidra.program.model.data.DataType;
+import ghidra.program.model.data.Pointer;
+import ghidra.program.model.data.Undefined;
+import ghidra.program.model.lang.CompilerSpec;
+import ghidra.program.model.lang.PrototypeModel;
+import ghidra.program.model.lang.Register;
+import ghidra.program.model.listing.CodeUnit;
+import ghidra.program.model.listing.Data;
+import ghidra.program.model.listing.Function;
+import ghidra.program.model.listing.FunctionIterator;
+import ghidra.program.model.listing.FunctionManager;
+import ghidra.program.model.listing.FunctionTag;
+import ghidra.program.model.listing.FunctionTagManager;
+import ghidra.program.model.listing.Instruction;
+import ghidra.program.model.listing.Parameter;
+import ghidra.program.model.listing.Variable;
+import ghidra.program.model.listing.VariableStorage;
 import ghidra.program.model.mem.MemoryBlock;
 import ghidra.program.model.pcode.HighFunction;
-import ghidra.program.model.symbol.*;
+import ghidra.program.model.symbol.Namespace;
+import ghidra.program.model.symbol.Reference;
+import ghidra.program.model.symbol.ReferenceManager;
+import ghidra.program.model.symbol.SourceType;
+import ghidra.program.model.symbol.Symbol;
+import ghidra.program.model.symbol.SymbolIterator;
+import ghidra.program.model.symbol.SymbolType;
+import ghidra.program.model.symbol.SymbolUtilities;
 import ghidra.program.model.util.PropertyMapManager;
 import ghidra.program.model.util.StringPropertyMap;
 import ghidra.program.util.ChangeManager;
 import ghidra.program.util.LanguageTranslator;
 import ghidra.util.Lock;
 import ghidra.util.Msg;
-import ghidra.util.exception.*;
+import ghidra.util.exception.CancelledException;
+import ghidra.util.exception.DuplicateNameException;
+import ghidra.util.exception.InvalidInputException;
+import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
 
 /**
@@ -71,7 +112,7 @@ public class FunctionManagerDB implements FunctionManager {
 	private Predicate<Function> functionFilter = f -> {
 		if (f != null) {
 			CodeUnit codeUnitAt = program.getListing().getCodeUnitAt(f.getEntryPoint());
-			if (codeUnitAt != null && codeUnitAt instanceof Instruction) {
+			if (codeUnitAt instanceof Instruction) {
 				return true;
 			}
 		}
@@ -183,10 +224,10 @@ public class FunctionManagerDB implements FunctionManager {
 	 * @throws InvalidInputException
 	 */
 	byte getCallingConventionID(String name) throws InvalidInputException, IOException {
-		if (name == null || name.equals(Function.UNKNOWN_CALLING_CONVENTION_STRING)) {
+		if (name == null || Function.UNKNOWN_CALLING_CONVENTION_STRING.equals(name)) {
 			return CallingConventionDBAdapter.UNKNOWN_CALLING_CONVENTION_ID;
 		}
-		else if (name.equals(Function.DEFAULT_CALLING_CONVENTION_STRING)) {
+		else if (Function.DEFAULT_CALLING_CONVENTION_STRING.equals(name)) {
 			return CallingConventionDBAdapter.DEFAULT_CALLING_CONVENTION_ID;
 		}
 		Byte id = callingConventionNameToIDMap.get(name);
@@ -233,10 +274,7 @@ public class FunctionManagerDB implements FunctionManager {
 	@Override
 	public PrototypeModel getCallingConvention(String name) {
 		CompilerSpec compilerSpec = program.getCompilerSpec();
-		if (compilerSpec == null) {
-			return null;
-		}
-		if (Function.UNKNOWN_CALLING_CONVENTION_STRING.equals(name)) {
+		if ((compilerSpec == null) || Function.UNKNOWN_CALLING_CONVENTION_STRING.equals(name)) {
 			return null;
 		}
 		if (Function.DEFAULT_CALLING_CONVENTION_STRING.equals(name)) {

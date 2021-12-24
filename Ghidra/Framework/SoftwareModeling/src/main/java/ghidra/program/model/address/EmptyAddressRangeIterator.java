@@ -25,6 +25,7 @@ public class EmptyAddressRangeIterator implements AddressRangeIterator {
 	/**
 	 * @see ghidra.program.model.address.AddressIterator#next()
 	 */
+	@Override
 	public AddressRange next() {
 		return null;
 	}
@@ -32,6 +33,7 @@ public class EmptyAddressRangeIterator implements AddressRangeIterator {
 	/**
 	 * @see ghidra.program.model.address.AddressIterator#hasNext()
 	 */
+	@Override
 	public boolean hasNext() {
 		return false;
 	}
@@ -39,6 +41,7 @@ public class EmptyAddressRangeIterator implements AddressRangeIterator {
 	/**
 	 * @see java.util.Iterator#remove()
 	 */
+	@Override
 	public void remove() {
 		throw new UnsupportedOperationException();
 	}

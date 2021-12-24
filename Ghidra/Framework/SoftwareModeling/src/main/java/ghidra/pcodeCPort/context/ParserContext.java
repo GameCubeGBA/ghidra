@@ -20,7 +20,10 @@ import generic.stl.VectorSTL;
 import ghidra.app.plugin.processors.sleigh.SleighException;
 import ghidra.pcodeCPort.address.Address;
 import ghidra.pcodeCPort.globalcontext.ContextCache;
-import ghidra.pcodeCPort.slghsymbol.*;
+import ghidra.pcodeCPort.slghsymbol.Constructor;
+import ghidra.pcodeCPort.slghsymbol.OperandSymbol;
+import ghidra.pcodeCPort.slghsymbol.TripleSymbol;
+import ghidra.pcodeCPort.slghsymbol.symbol_type;
 import ghidra.pcodeCPort.space.AddrSpace;
 import ghidra.pcodeCPort.translate.BadDataError;
 
@@ -35,10 +38,10 @@ public class ParserContext {
 	private int[] context; // Pointer to local context
 	private int contextsize; // Number of entries in context array
 	private ContextCache contcache; // Interface for getting/setting context
-	private VectorSTL<ContextSet> contextcommit = new VectorSTL<ContextSet>();
+	private VectorSTL<ContextSet> contextcommit = new VectorSTL<>();
 	private Address addr; // Address of start of instruction
 	private Address naddr; // Address of next instruction
-	private VectorSTL<ConstructState> state = new VectorSTL<ConstructState>(); // Current resolved
+	private VectorSTL<ConstructState> state = new VectorSTL<>(); // Current resolved
 																				// instruction
 	ConstructState base_state;
 	private ConstructState point; // Current substate

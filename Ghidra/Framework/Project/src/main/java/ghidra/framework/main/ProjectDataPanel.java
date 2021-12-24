@@ -22,7 +22,11 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
+import javax.swing.JTabbedPane;
+import javax.swing.SwingConstants;
 
 import docking.ActionContext;
 import docking.ComponentProvider;
@@ -31,7 +35,10 @@ import docking.help.HelpService;
 import docking.widgets.tabbedpane.DockingTabRenderer;
 import ghidra.framework.main.datatable.ProjectDataTablePanel;
 import ghidra.framework.main.datatree.ProjectDataTreePanel;
-import ghidra.framework.model.*;
+import ghidra.framework.model.Project;
+import ghidra.framework.model.ProjectData;
+import ghidra.framework.model.ProjectLocator;
+import ghidra.framework.model.ProjectManager;
 import ghidra.framework.options.SaveState;
 import ghidra.util.HelpLocation;
 import ghidra.util.Msg;

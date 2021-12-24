@@ -17,11 +17,18 @@ package ghidra.program.model.mem;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import ghidra.framework.store.LockException;
-import ghidra.program.database.mem.*;
-import ghidra.program.model.address.*;
+import ghidra.program.database.mem.AddressSourceInfo;
+import ghidra.program.database.mem.ByteMappingScheme;
+import ghidra.program.database.mem.FileBytes;
+import ghidra.program.model.address.Address;
+import ghidra.program.model.address.AddressOutOfBoundsException;
+import ghidra.program.model.address.AddressOverflowException;
+import ghidra.program.model.address.AddressSetView;
 import ghidra.program.model.listing.Program;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.NotFoundException;
@@ -32,34 +39,34 @@ import ghidra.util.task.TaskMonitor;
  */
 public interface Memory extends AddressSetView {
 
-	static final int GBYTE_SHIFT_FACTOR = 30;
-	static long GBYTE = 1L << GBYTE_SHIFT_FACTOR;
+	int GBYTE_SHIFT_FACTOR = 30;
+	long GBYTE = 1L << GBYTE_SHIFT_FACTOR;
 
 	/**
 	 * Maximum size of all memory blocks, 16-GByte (see {@link #getAllInitializedAddressSet()}).
 	 * This restriction is somewhat arbitrary but is established to prevent an excessive
 	 * number of memory map segments which can have a negative impact on performance.
 	 */
-	public static final int MAX_BINARY_SIZE_GB = 16;
-	public static final long MAX_BINARY_SIZE = (long) MAX_BINARY_SIZE_GB << GBYTE_SHIFT_FACTOR;
+	int MAX_BINARY_SIZE_GB = 16;
+	long MAX_BINARY_SIZE = (long) MAX_BINARY_SIZE_GB << GBYTE_SHIFT_FACTOR;
 
 	/**
 	 * The current max size of a memory block. 
 	 */
-	public static final int MAX_BLOCK_SIZE_GB = 16;  // set to 16 because anything larger, ghidra bogs down
-	public static final long MAX_BLOCK_SIZE = (long) MAX_BLOCK_SIZE_GB << GBYTE_SHIFT_FACTOR;
+	int MAX_BLOCK_SIZE_GB = 16;  // set to 16 because anything larger, ghidra bogs down
+	long MAX_BLOCK_SIZE = (long) MAX_BLOCK_SIZE_GB << GBYTE_SHIFT_FACTOR;
 
 	/**
 	 * Returns the program that this memory belongs to.
 	 */
-	public Program getProgram();
+	Program getProgram();
 
 	/**
 	 * Returns the set of addresses which correspond to all the "loaded" memory blocks that have
 	 * initialized data.  This does not include initialized memory blocks that contain data from
 	 * the program's file header such as debug sections.
 	 */
-	public AddressSetView getLoadedAndInitializedAddressSet();
+	AddressSetView getLoadedAndInitializedAddressSet();
 
 	/**
 	 * Returns the set of addresses which correspond to all memory blocks that have
@@ -68,36 +75,35 @@ public interface Memory extends AddressSetView {
 	 * such as debug sections.  Use {@link #getLoadedAndInitializedAddressSet} if you only want
 	 * the addressed of the loaded in memory blocks.
 	 */
-	public AddressSetView getAllInitializedAddressSet();
+	AddressSetView getAllInitializedAddressSet();
 
 	/**
 	 * Use {@link #getLoadedAndInitializedAddressSet} instead.
 	 * @deprecated
 	 */
-	@Deprecated
-	public AddressSetView getInitializedAddressSet();
+	@Deprecated AddressSetView getInitializedAddressSet();
 
 	/**
 	 * Returns the set of addresses which correspond to the executable memory.
 	 */
-	public AddressSetView getExecuteSet();
+	AddressSetView getExecuteSet();
 
 	/**
 	 * Returns true if the memory is bigEndian, false otherwise.
 	 */
-	public boolean isBigEndian();
+	boolean isBigEndian();
 
 	/**
 	 * Sets the live memory handler
 	 * @param handler the live memory handler
 	 */
-	public void setLiveMemoryHandler(LiveMemoryHandler handler);
+	void setLiveMemoryHandler(LiveMemoryHandler handler);
 
 	/**
 	 * Returns the live memory handler instance used by this memory.
 	 * @return the live memory handler
 	 */
-	public LiveMemoryHandler getLiveMemoryHandler();
+	LiveMemoryHandler getLiveMemoryHandler();
 
 	/**
 	 * Returns true if exclusive lock exists and memory blocks may be
@@ -127,7 +133,7 @@ public interface Memory extends AddressSetView {
 	 * @throws CancelledException user cancelled operation
 	 * @throws IllegalArgumentException if invalid block name specified
 	 */
-	public MemoryBlock createInitializedBlock(String name, Address start, InputStream is,
+	MemoryBlock createInitializedBlock(String name, Address start, InputStream is,
 			long length, TaskMonitor monitor, boolean overlay)
 			throws LockException, MemoryConflictException, AddressOverflowException,
 			CancelledException, IllegalArgumentException;
@@ -152,7 +158,7 @@ public interface Memory extends AddressSetView {
 	 * @throws IllegalArgumentException if invalid block name specified
 	 * @throws CancelledException user cancelled operation
 	 */
-	public MemoryBlock createInitializedBlock(String name, Address start, long size,
+	MemoryBlock createInitializedBlock(String name, Address start, long size,
 			byte initialValue, TaskMonitor monitor, boolean overlay)
 			throws LockException, IllegalArgumentException, MemoryConflictException,
 			AddressOverflowException, CancelledException;
@@ -178,7 +184,7 @@ public interface Memory extends AddressSetView {
 	 * is out of bounds for the specified fileBytes.
 	 * @throws IllegalArgumentException if invalid block name specified
 	 */
-	public MemoryBlock createInitializedBlock(String name, Address start, FileBytes fileBytes,
+	MemoryBlock createInitializedBlock(String name, Address start, FileBytes fileBytes,
 			long offset, long size, boolean overlay) throws LockException, IllegalArgumentException,
 			MemoryConflictException, AddressOverflowException;
 
@@ -199,7 +205,7 @@ public interface Memory extends AddressSetView {
 	 * address space
 	 * @throws IllegalArgumentException if invalid block name specified
 	 */
-	public MemoryBlock createUninitializedBlock(String name, Address start, long size,
+	MemoryBlock createUninitializedBlock(String name, Address start, long size,
 			boolean overlay) throws LockException, IllegalArgumentException,
 			MemoryConflictException, AddressOverflowException;
 
@@ -223,7 +229,7 @@ public interface Memory extends AddressSetView {
 	 * @throws AddressOverflowException if block specification exceeds bounds of address space
 	 * @throws IllegalArgumentException if invalid block name specified
 	 */
-	public MemoryBlock createBitMappedBlock(String name, Address start, Address mappedAddress,
+	MemoryBlock createBitMappedBlock(String name, Address start, Address mappedAddress,
 			long length, boolean overlay) throws LockException, MemoryConflictException,
 			AddressOverflowException, IllegalArgumentException;
 
@@ -246,7 +252,7 @@ public interface Memory extends AddressSetView {
 	 * @throws AddressOverflowException if block specification exceeds bounds of address space
 	 * @throws IllegalArgumentException if invalid block name
 	 */
-	public MemoryBlock createByteMappedBlock(String name, Address start, Address mappedAddress,
+	MemoryBlock createByteMappedBlock(String name, Address start, Address mappedAddress,
 			long length, ByteMappingScheme byteMappingScheme, boolean overlay) throws LockException,
 			MemoryConflictException, AddressOverflowException, IllegalArgumentException;
 
@@ -268,7 +274,7 @@ public interface Memory extends AddressSetView {
 	 * @throws AddressOverflowException if block specification exceeds bounds of address space
 	 * @throws IllegalArgumentException if invalid block name
 	 */
-	default public MemoryBlock createByteMappedBlock(String name, Address start,
+	default MemoryBlock createByteMappedBlock(String name, Address start,
 			Address mappedAddress, long length, boolean overlay) throws LockException,
 			MemoryConflictException, AddressOverflowException, IllegalArgumentException {
 		return createByteMappedBlock(name, start, mappedAddress, length, null, overlay);
@@ -291,7 +297,7 @@ public interface Memory extends AddressSetView {
 	 * beyond the end of the address space.
 	 * @throws IllegalArgumentException if invalid block name specifiede
 	 */
-	public MemoryBlock createBlock(MemoryBlock block, String name, Address start, long length)
+	MemoryBlock createBlock(MemoryBlock block, String name, Address start, long length)
 			throws LockException, IllegalArgumentException, MemoryConflictException,
 			AddressOverflowException;
 
@@ -302,12 +308,12 @@ public interface Memory extends AddressSetView {
 	 * @param monitor monitor that is used to cancel the remove operation
 	 * @throws LockException if exclusive lock not in place (see haveLock())
 	 */
-	public void removeBlock(MemoryBlock block, TaskMonitor monitor) throws LockException;
+	void removeBlock(MemoryBlock block, TaskMonitor monitor) throws LockException;
 
 	/**
 	 * Get the memory size in bytes.
 	 */
-	public long getSize();
+	long getSize();
 
 	/**
 	 * Returns the Block which contains addr.
@@ -315,19 +321,19 @@ public interface Memory extends AddressSetView {
 	 * @param addr a valid data Address.
 	 * @return the block containing addr; null if addr is not a valid location.
 	 */
-	public MemoryBlock getBlock(Address addr);
+	MemoryBlock getBlock(Address addr);
 
 	/**
 	 * Returns the Block with the specified blockName
 	 * @param blockName the name of the requested block
 	 * @return the Block with the specified blockName
 	 */
-	public MemoryBlock getBlock(String blockName);
+	MemoryBlock getBlock(String blockName);
 
 	/**
 	 * Returns an array containing all the memory blocks.
 	 */
-	public MemoryBlock[] getBlocks();
+	MemoryBlock[] getBlocks();
 
 	/**
 	 * Move the memory block containing source address to the destination
@@ -344,7 +350,7 @@ public interface Memory extends AddressSetView {
 	 * @throws NotFoundException if memoryBlock does not exist in
 	 *   this memory.
 	 */
-	public void moveBlock(MemoryBlock block, Address newStartAddr, TaskMonitor monitor)
+	void moveBlock(MemoryBlock block, Address newStartAddr, TaskMonitor monitor)
 			throws LockException, MemoryBlockException, MemoryConflictException,
 			AddressOverflowException, NotFoundException;
 
@@ -361,7 +367,7 @@ public interface Memory extends AddressSetView {
 	 * @throws AddressOutOfBoundsException thrown if address is
 	 * not in the block
 	 */
-	public void split(MemoryBlock block, Address addr)
+	void split(MemoryBlock block, Address addr)
 			throws MemoryBlockException, LockException, NotFoundException;
 
 	/**
@@ -374,7 +380,7 @@ public interface Memory extends AddressSetView {
 	 * @throws MemoryBlockException thrown if the blocks are
 	 * not contiguous in the address space,
 	 */
-	public MemoryBlock join(MemoryBlock blockOne, MemoryBlock blockTwo)
+	MemoryBlock join(MemoryBlock blockOne, MemoryBlock blockTwo)
 			throws LockException, MemoryBlockException, NotFoundException;
 
 	/**
@@ -387,10 +393,10 @@ public interface Memory extends AddressSetView {
 	 * at the same address as block or if the block lengths are not
 	 * the same.
 	 */
-	public MemoryBlock convertToInitialized(MemoryBlock unitializedBlock, byte initialValue)
+	MemoryBlock convertToInitialized(MemoryBlock unitializedBlock, byte initialValue)
 			throws LockException, MemoryBlockException, NotFoundException;
 
-	public MemoryBlock convertToUninitialized(MemoryBlock itializedBlock)
+	MemoryBlock convertToUninitialized(MemoryBlock itializedBlock)
 			throws MemoryBlockException, NotFoundException, LockException;
 
 	/**
@@ -407,7 +413,7 @@ public interface Memory extends AddressSetView {
 	  * @return The address of where the first match is found. Null is returned
 	  * if there is no match.
 	  */
-	public Address findBytes(Address addr, byte[] bytes, byte[] masks, boolean forward,
+	Address findBytes(Address addr, byte[] bytes, byte[] masks, boolean forward,
 			TaskMonitor monitor);
 
 	/**
@@ -428,7 +434,7 @@ public interface Memory extends AddressSetView {
 	  * @return The address of where the first match is found. Null is returned
 	  * if there is no match.
 	  */
-	public Address findBytes(Address startAddr, Address endAddr, byte[] bytes, byte[] masks,
+	Address findBytes(Address startAddr, Address endAddr, byte[] bytes, byte[] masks,
 			boolean forward, TaskMonitor monitor);
 
 	/**
@@ -439,7 +445,7 @@ public interface Memory extends AddressSetView {
 	 * @throws MemoryAccessException if the address is
 	 * not contained in any memory block.
 	 */
-	public byte getByte(Address addr) throws MemoryAccessException;
+	byte getByte(Address addr) throws MemoryAccessException;
 
 	/**
 	 * Get dest.length number of bytes starting at the given address.
@@ -451,7 +457,7 @@ public interface Memory extends AddressSetView {
 	 * @throws MemoryAccessException if the starting address is
 	 * not contained in any memory block.
 	 */
-	public int getBytes(Address addr, byte[] dest) throws MemoryAccessException;
+	int getBytes(Address addr, byte[] dest) throws MemoryAccessException;
 
 	/**
 	 * Get size number of bytes starting at the given address and populates
@@ -466,7 +472,7 @@ public interface Memory extends AddressSetView {
 	 * @throws MemoryAccessException if the starting address is
 	 * not contained in any memory block or is an uninitialized location.
 	 */
-	public int getBytes(Address addr, byte[] dest, int destIndex, int size)
+	int getBytes(Address addr, byte[] dest, int destIndex, int size)
 			throws MemoryAccessException;
 
 	/**
@@ -476,7 +482,7 @@ public interface Memory extends AddressSetView {
 	 * @return the short.
 	 * @throws MemoryAccessException if not all needed bytes are contained in initialized memory.
 	 */
-	public short getShort(Address addr) throws MemoryAccessException;
+	short getShort(Address addr) throws MemoryAccessException;
 
 	/**
 	 * Get the short at addr using the specified endian order.
@@ -488,7 +494,7 @@ public interface Memory extends AddressSetView {
 	 *
 	 * @throws MemoryAccessException if not all needed bytes are contained in initialized memory.
 	 */
-	public short getShort(Address addr, boolean bigEndian) throws MemoryAccessException;
+	short getShort(Address addr, boolean bigEndian) throws MemoryAccessException;
 
 	/**
 	 * Get dest.length number of shorts starting at the given address.
@@ -500,7 +506,7 @@ public interface Memory extends AddressSetView {
 	 * If the number of retrievable bytes is odd, the final byte will be discarded.
 	 * @throws MemoryAccessException if not all needed bytes are contained in initialized memory.
 	 */
-	public int getShorts(Address addr, short[] dest) throws MemoryAccessException;
+	int getShorts(Address addr, short[] dest) throws MemoryAccessException;
 
 	/**
 	 * Get dest.length number of shorts starting at the given address.
@@ -514,7 +520,7 @@ public interface Memory extends AddressSetView {
 	 * If the number of retrievable bytes is odd, the final byte will be discarded.
 	 * @throws MemoryAccessException if not all needed bytes are contained in initialized memory.
 	 */
-	public int getShorts(Address addr, short[] dest, int dIndex, int nElem)
+	int getShorts(Address addr, short[] dest, int dIndex, int nElem)
 			throws MemoryAccessException;
 
 	/**
@@ -531,7 +537,7 @@ public interface Memory extends AddressSetView {
 	 * If the number of retrievable bytes is odd, the final byte will be discarded.
 	 * @throws MemoryAccessException if not all needed bytes are contained in initialized memory.
 	 */
-	public int getShorts(Address addr, short[] dest, int dIndex, int nElem, boolean isBigEndian)
+	int getShorts(Address addr, short[] dest, int dIndex, int nElem, boolean isBigEndian)
 			throws MemoryAccessException;
 
 	/**
@@ -542,7 +548,7 @@ public interface Memory extends AddressSetView {
 	 *
 	 * @throws MemoryAccessException if not all needed bytes are contained in initialized memory.
 	 */
-	public int getInt(Address addr) throws MemoryAccessException;
+	int getInt(Address addr) throws MemoryAccessException;
 
 	/**
 	 * Get the int at addr using the specified endian order.
@@ -554,7 +560,7 @@ public interface Memory extends AddressSetView {
 	 *
 	 * @throws MemoryAccessException if not all needed bytes are contained in initialized memory.
 	 */
-	public int getInt(Address addr, boolean bigEndian) throws MemoryAccessException;
+	int getInt(Address addr, boolean bigEndian) throws MemoryAccessException;
 
 	/**
 	 * Get dest.length number of ints starting at the given address.
@@ -567,7 +573,7 @@ public interface Memory extends AddressSetView {
 	 * @throws MemoryAccessException if the starting address is
 	 * not contained in any memory block.
 	 */
-	public int getInts(Address addr, int[] dest) throws MemoryAccessException;
+	int getInts(Address addr, int[] dest) throws MemoryAccessException;
 
 	/**
 	 * Get dest.length number of ints starting at the given address.
@@ -581,7 +587,7 @@ public interface Memory extends AddressSetView {
 	 * If the number of retrievable bytes is not 0 mod 4, the final byte(s) will be discarded.
 	 * @throws MemoryAccessException if not all needed bytes are contained in initialized memory.
 	 */
-	public int getInts(Address addr, int[] dest, int dIndex, int nElem)
+	int getInts(Address addr, int[] dest, int dIndex, int nElem)
 			throws MemoryAccessException;
 
 	/**
@@ -598,7 +604,7 @@ public interface Memory extends AddressSetView {
 	 * If the number of retrievable bytes is not 0 mod 4, the final byte(s) will be discarded.
 	 * @throws MemoryAccessException if not all needed bytes are contained in initialized memory.
 	 */
-	public int getInts(Address addr, int[] dest, int dIndex, int nElem, boolean isBigEndian)
+	int getInts(Address addr, int[] dest, int dIndex, int nElem, boolean isBigEndian)
 			throws MemoryAccessException;
 
 	/**
@@ -609,7 +615,7 @@ public interface Memory extends AddressSetView {
 	 *
 	 * @throws MemoryAccessException if not all needed bytes are contained in initialized memory.
 	 */
-	public long getLong(Address addr) throws MemoryAccessException;
+	long getLong(Address addr) throws MemoryAccessException;
 
 	/**
 	 * Get the long at addr in the specified endian order.
@@ -621,7 +627,7 @@ public interface Memory extends AddressSetView {
 	 *
 	 * @throws MemoryAccessException if not all needed bytes are contained in initialized memory.
 	 */
-	public long getLong(Address addr, boolean bigEndian) throws MemoryAccessException;
+	long getLong(Address addr, boolean bigEndian) throws MemoryAccessException;
 
 	/**
 	 * Get dest.length number of longs starting at the given address.
@@ -633,7 +639,7 @@ public interface Memory extends AddressSetView {
 	 * If the number of retrievable bytes is not 0 mod 8, the final byte(s) will be discarded.
 	 * @throws MemoryAccessException if not all needed bytes are contained in initialized memory.
 	 */
-	public int getLongs(Address addr, long[] dest) throws MemoryAccessException;
+	int getLongs(Address addr, long[] dest) throws MemoryAccessException;
 
 	/**
 	 * Get dest.length number of longs starting at the given address.
@@ -647,7 +653,7 @@ public interface Memory extends AddressSetView {
 	 * If the number of retrievable bytes is not 0 mod 8, the final byte(s) will be discarded.
 	 * @throws MemoryAccessException if not all needed bytes are contained in initialized memory.
 	 */
-	public int getLongs(Address addr, long[] dest, int dIndex, int nElem)
+	int getLongs(Address addr, long[] dest, int dIndex, int nElem)
 			throws MemoryAccessException;
 
 	/**
@@ -664,7 +670,7 @@ public interface Memory extends AddressSetView {
 	 * If the number of retrievable bytes is not 0 mod 8, the final byte(s) will be discarded.
 	 * @throws MemoryAccessException if not all needed bytes are contained in initialized memory.
 	 */
-	public int getLongs(Address addr, long[] dest, int dIndex, int nElem, boolean isBigEndian)
+	int getLongs(Address addr, long[] dest, int dIndex, int nElem, boolean isBigEndian)
 			throws MemoryAccessException;
 
 	/**
@@ -675,7 +681,7 @@ public interface Memory extends AddressSetView {
 	 *
 	 * @throws MemoryAccessException if writing is not allowed.
 	 */
-	public void setByte(Address addr, byte value) throws MemoryAccessException;
+	void setByte(Address addr, byte value) throws MemoryAccessException;
 
 	/**
 	 * Write size bytes from values at addr.
@@ -684,7 +690,7 @@ public interface Memory extends AddressSetView {
 	 * @param source the bytes to write.
 	 * @throws MemoryAccessException if writing is not allowed.
 	 */
-	public void setBytes(Address addr, byte[] source) throws MemoryAccessException;
+	void setBytes(Address addr, byte[] source) throws MemoryAccessException;
 
 	/**
 	 * Write an array of bytes.  This should copy size bytes or fail!
@@ -695,7 +701,7 @@ public interface Memory extends AddressSetView {
 	 * @param size the number of bytes to fill.
 	 * @throws MemoryAccessException if writing is not allowed.
 	 */
-	public void setBytes(Address addr, byte[] source, int sIndex, int size)
+	void setBytes(Address addr, byte[] source, int sIndex, int size)
 			throws MemoryAccessException;
 
 	/**
@@ -706,7 +712,7 @@ public interface Memory extends AddressSetView {
 	 *
 	 * @throws MemoryAccessException if writing is not allowed.
 	 */
-	public void setShort(Address addr, short value) throws MemoryAccessException;
+	void setShort(Address addr, short value) throws MemoryAccessException;
 
 	/**
 	 * Write short at addr in the specified endian order.
@@ -717,7 +723,7 @@ public interface Memory extends AddressSetView {
 	 * big endian order
 	 * @throws MemoryAccessException if writing is not allowed.
 	 */
-	public void setShort(Address addr, short value, boolean bigEndian) throws MemoryAccessException;
+	void setShort(Address addr, short value, boolean bigEndian) throws MemoryAccessException;
 
 	/**
 	 * Write int at addr.
@@ -727,7 +733,7 @@ public interface Memory extends AddressSetView {
 	 *
 	 * @throws MemoryAccessException if writing is not allowed.
 	 */
-	public void setInt(Address addr, int value) throws MemoryAccessException;
+	void setInt(Address addr, int value) throws MemoryAccessException;
 
 	/**
 	 * Write int at addr in the specified endian order.
@@ -739,7 +745,7 @@ public interface Memory extends AddressSetView {
 	 *
 	 * @throws MemoryAccessException if writing is not allowed.
 	 */
-	public void setInt(Address addr, int value, boolean bigEndian) throws MemoryAccessException;
+	void setInt(Address addr, int value, boolean bigEndian) throws MemoryAccessException;
 
 	/**
 	 * Write long at addr.
@@ -749,7 +755,7 @@ public interface Memory extends AddressSetView {
 	 *
 	 * @throws MemoryAccessException if writing is not allowed.
 	 */
-	public void setLong(Address addr, long value) throws MemoryAccessException;
+	void setLong(Address addr, long value) throws MemoryAccessException;
 
 	/**
 	 * Write long at addr in the specified endian order.
@@ -761,7 +767,7 @@ public interface Memory extends AddressSetView {
 	 *
 	 * @throws MemoryAccessException if writing is not allowed.
 	 */
-	public void setLong(Address addr, long value, boolean bigEndian) throws MemoryAccessException;
+	void setLong(Address addr, long value, boolean bigEndian) throws MemoryAccessException;
 
 	/**
 	 * Stores a sequence of bytes into the program.  Typically, this method is used by importers
@@ -777,14 +783,14 @@ public interface Memory extends AddressSetView {
 	 * @throws CancelledException if the user cancelled this operation. Note: the database will
 	 * be stable, but the buffers may contain 0s instead of the actual bytes.
 	 */
-	public FileBytes createFileBytes(String filename, long offset, long size, InputStream is,
+	FileBytes createFileBytes(String filename, long offset, long size, InputStream is,
 			TaskMonitor monitor) throws IOException, CancelledException;
 
 	/**
 	 * Returns a list of all the stored original file bytes objects
 	 * @return a list of all the stored original file bytes objects
 	 */
-	public List<FileBytes> getAllFileBytes();
+	List<FileBytes> getAllFileBytes();
 
 	/**
 	 * Deletes a stored sequence of file bytes.  The file bytes can only be deleted if there
@@ -795,7 +801,7 @@ public interface Memory extends AddressSetView {
 	 * FileBytes or it is invalid then it will not be deleted and false will be returned.
 	 * @throws IOException if there was an error updating the database.
 	 */
-	public boolean deleteFileBytes(FileBytes fileBytes) throws IOException;
+	boolean deleteFileBytes(FileBytes fileBytes) throws IOException;
 
 	/**
 	 * Returns information ({@link AddressSourceInfo}) about the byte source at the given address.
@@ -803,7 +809,7 @@ public interface Memory extends AddressSetView {
 	 * @return information ({@link AddressSourceInfo}) about the byte source at the given address or
 	 * null if the address is not in memory.
 	 */
-	public AddressSourceInfo getAddressSourceInfo(Address address);
+	AddressSourceInfo getAddressSourceInfo(Address address);
 
 	/**
 	 * Validate the given block name: cannot be null, cannot be an empty string, 
@@ -815,7 +821,7 @@ public interface Memory extends AddressSetView {
 	 * @param name memory block name
 	 * @return true if name is valid else false
 	 */
-	public static boolean isValidMemoryBlockName(String name) {
+	static boolean isValidMemoryBlockName(String name) {
 		if (name == null || name.length() == 0) {
 			return false;
 		}
@@ -834,7 +840,7 @@ public interface Memory extends AddressSetView {
 	 *   addresses
 	 * @return a {@link List} of {@link Address}es that are associated with the provided file offset 
 	 */
-	public default List<Address> locateAddressesForFileOffset(long fileOffset) {
+	default List<Address> locateAddressesForFileOffset(long fileOffset) {
 		List<Address> list = new ArrayList<>();
 		for (MemoryBlock memBlock : getBlocks()) {
 			for (MemoryBlockSourceInfo info : memBlock.getSourceInfos()) {
@@ -856,7 +862,7 @@ public interface Memory extends AddressSetView {
 	 * @return a list of addresses that are associated with the given
 	 * FileBytes and offset 
 	 */
-	public default List<Address> locateAddressesForFileBytesOffset(FileBytes fileBytes, long offset) {
+	default List<Address> locateAddressesForFileBytesOffset(FileBytes fileBytes, long offset) {
 		List<Address> list = new ArrayList<>();
 		for (MemoryBlock memBlock : getBlocks()) {
 			for (MemoryBlockSourceInfo info : memBlock.getSourceInfos()) {

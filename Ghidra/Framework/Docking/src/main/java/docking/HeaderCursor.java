@@ -15,7 +15,10 @@
  */
 package docking;
 
-import java.awt.*;
+import java.awt.Cursor;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.dnd.DragSource;
 import java.awt.image.BufferedImage;
 

@@ -15,7 +15,16 @@
  */
 package util;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -57,17 +66,11 @@ public class CollectionUtils {
 	@SafeVarargs
 	public static <T> Set<T> asSet(T... items) {
 		Set<T> set = new HashSet<>();
-		if (items == null) {
+		if ((items == null) || (items.length == 1 && items[0] == null)) {
 			return set;
 		}
 
-		if (items.length == 1 && items[0] == null) {
-			return set;
-		}
-
-		for (T e : items) {
-			set.add(e);
-		}
+		Collections.addAll(set, items);
 		return set;
 	}
 
@@ -138,17 +141,11 @@ public class CollectionUtils {
 	@SafeVarargs
 	public static <T> List<T> asList(T... items) {
 		List<T> list = new ArrayList<>();
-		if (items == null) {
+		if ((items == null) || (items.length == 1 && items[0] == null)) {
 			return list;
 		}
 
-		if (items.length == 1 && items[0] == null) {
-			return list;
-		}
-
-		for (T arrayElement : items) {
-			list.add(arrayElement);
-		}
+		Collections.addAll(list, items);
 
 		return list;
 	}
@@ -429,9 +426,8 @@ public class CollectionUtils {
 	 */
 	@SafeVarargs
 	public static <T> Stream<T> asStream(Iterable<T>... iterables) {
-		Stream<T> s = Stream.of(iterables)
+		return Stream.of(iterables)
 				.flatMap(e -> StreamSupport.stream(e.spliterator(), false));
-		return s;
 	}
 
 	/**

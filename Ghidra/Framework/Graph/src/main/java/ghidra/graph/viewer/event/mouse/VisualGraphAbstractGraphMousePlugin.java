@@ -16,7 +16,10 @@
 package ghidra.graph.viewer.event.mouse;
 
 import java.awt.Cursor;
-import java.awt.event.*;
+import java.awt.event.InputEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.geom.Point2D;
 
 import edu.uci.ics.jung.algorithms.layout.GraphElementAccessor;
@@ -24,7 +27,9 @@ import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.control.AbstractGraphMousePlugin;
 import edu.uci.ics.jung.visualization.picking.PickedState;
-import ghidra.graph.viewer.*;
+import ghidra.graph.viewer.GraphViewerUtils;
+import ghidra.graph.viewer.VisualEdge;
+import ghidra.graph.viewer.VisualVertex;
 
 /**
  * Usage Notes:
@@ -116,7 +121,7 @@ public abstract class VisualGraphAbstractGraphMousePlugin<V extends VisualVertex
 			return false;
 		}
 
-		if (pickedVertexState.isPicked(vertex) == false) {
+		if (!pickedVertexState.isPicked(vertex)) {
 			pickedVertexState.clear();
 			pickedVertexState.pick(vertex, true);
 		}
@@ -130,7 +135,7 @@ public abstract class VisualGraphAbstractGraphMousePlugin<V extends VisualVertex
 			return false;
 		}
 
-		if (pickedVertexState.isPicked(edge) == false) {
+		if (!pickedVertexState.isPicked(edge)) {
 			pickedVertexState.clear();
 			pickedVertexState.pick(edge, true);
 		}

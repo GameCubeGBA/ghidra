@@ -15,7 +15,10 @@
  */
 package ghidra.program.database.code;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -121,8 +124,7 @@ class StringDiffUtils {
 
 		List<Line> toDo = list.subList(start, end);
 		boolean newlineNeeded = true; // we are at the end--need a newline
-		StringDiff insert = createInsert(toDo, insertIndex, newlineNeeded);
-		return insert;
+		return createInsert(toDo, insertIndex, newlineNeeded);
 	}
 
 	private static StringDiff createInsert(List<Line> lines, int insertIndex) {
@@ -158,8 +160,7 @@ class StringDiffUtils {
 
 		List<Line> toDo = list.subList(start, end);
 		boolean includeLastNewline = false; // we are at the end--do not include artificial newline
-		StringDiff delete = createDelete(toDo, includeLastNewline);
-		return delete;
+		return createDelete(toDo, includeLastNewline);
 	}
 
 	private static StringDiff createDelete(List<Line> lines) {
@@ -306,11 +307,7 @@ class StringDiffUtils {
 
 		@Override
 		public int hashCode() {
-			final int prime = 31;
-			int result = 1;
-			result = prime * result + start;
-			result = prime * result + ((text == null) ? 0 : text.hashCode());
-			return result;
+			return Objects.hash(start, text);
 		}
 
 		@Override
@@ -318,22 +315,14 @@ class StringDiffUtils {
 			if (this == obj) {
 				return true;
 			}
-			if (obj == null) {
-				return false;
-			}
-			if (getClass() != obj.getClass()) {
+			if ((obj == null) || (getClass() != obj.getClass())) {
 				return false;
 			}
 			Line other = (Line) obj;
 			if (start != other.start) {
 				return false;
 			}
-			if (text == null) {
-				if (other.text != null) {
-					return false;
-				}
-			}
-			else if (!text.equals(other.text)) {
+			if (!Objects.equals(text, other.text)) {
 				return false;
 			}
 			return true;

@@ -16,7 +16,10 @@
 package docking.widgets.filechooser;
 
 import java.io.File;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
 
 import docking.widgets.table.AbstractSortedTableModel;
 
@@ -28,7 +31,7 @@ class DirectoryTableModel extends AbstractSortedTableModel<File> {
 	final static int TIME_COL = 2;
 
 	private GhidraFileChooser chooser;
-	private File[] files = new File[0];
+	private File[] files = {};
 
 	DirectoryTableModel(GhidraFileChooser chooser) {
 		super(FILE_COL);
@@ -140,11 +143,7 @@ class DirectoryTableModel extends AbstractSortedTableModel<File> {
 
 	@Override
 	public void setValueAt(Object aValue, int row, int column) {
-		if (row < 0 || row >= files.length) {
-			return;
-		}
-
-		if (aValue == null) {
+		if (row < 0 || row >= files.length || (aValue == null)) {
 			return;
 		}
 

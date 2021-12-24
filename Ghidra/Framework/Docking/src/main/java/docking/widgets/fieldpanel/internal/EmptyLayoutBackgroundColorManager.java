@@ -28,18 +28,22 @@ public class EmptyLayoutBackgroundColorManager implements LayoutBackgroundColorM
 		this.background = background;
 	}
 
+	@Override
 	public FieldBackgroundColorManager getFieldBackgroundColorManager(int fieldNum) {
 		return EmptyFieldBackgroundColorManager.EMPTY_INSTANCE;
 	}
 
+	@Override
 	public Color getBackgroundColor() {
 		return background;
 	}
 
+	@Override
 	public Color getPaddingColor(int gap) {
 		return null;
 	}
 
+	@Override
 	public Color getBackgroundColor(FieldLocation location) {
 		return background;
 	}

@@ -16,12 +16,12 @@
  */
 package docking.widgets.table;
 
-import ghidra.util.SystemUtilities;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.table.TableModel;
+
+import ghidra.util.SystemUtilities;
 
 /**
  * An object that represents a row in a table.  Most tables used in the system create tables that
@@ -54,7 +54,7 @@ public class RowObject {
 		return rowObject;
 	}
 
-	List<Object> values = new ArrayList<Object>();
+	List<Object> values = new ArrayList<>();
 	int hash = -1;
 
 	void addElement(Object object) {
@@ -68,11 +68,7 @@ public class RowObject {
 			return true;
 		}
 
-		if (obj == null) {
-			return false;
-		}
-
-		if (getClass() != obj.getClass()) {
+		if ((obj == null) || (getClass() != obj.getClass())) {
 			return false;
 		}
 

@@ -27,5 +27,5 @@ public interface DisplayStringProvider {
 	 * Returns a display String suitable for user consumption
 	 * @return a display String suitable for user consumption
 	 */
-	public String getDisplayString();
+	String getDisplayString();
 }

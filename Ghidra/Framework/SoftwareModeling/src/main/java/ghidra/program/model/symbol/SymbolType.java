@@ -15,6 +15,8 @@
  */
 package ghidra.program.model.symbol;
 
+import java.util.Objects;
+
 import ghidra.program.model.address.Address;
 import ghidra.program.model.address.GlobalNamespace;
 import ghidra.program.model.listing.Function;
@@ -30,11 +32,8 @@ public abstract class SymbolType {
 		public boolean isValidParent(Program program, Namespace parent, Address symbolAddr,
 				boolean isExternalSymbol) {
 			boolean externalParent = parent.isExternal();
-			if (symbolAddr.isExternalAddress() != externalParent) {
-				return false;
-			}
-			if (parent.getID() != Namespace.GLOBAL_NAMESPACE_ID &&
-				program != parent.getSymbol().getProgram()) {
+			if ((symbolAddr.isExternalAddress() != externalParent) || (parent.getID() != Namespace.GLOBAL_NAMESPACE_ID &&
+				program != parent.getSymbol().getProgram())) {
 				return false;
 			}
 			// CODE symbol may not have an external function parent
@@ -92,11 +91,8 @@ public abstract class SymbolType {
 				boolean isExternalSymbol) {
 			// Uses NO_ADDRESS - External address not used
 			boolean isExternalParent = parent.isExternal();
-			if (isExternalSymbol != isExternalParent) {
-				return false;
-			}
-			if (parent.getID() != Namespace.GLOBAL_NAMESPACE_ID &&
-				program != parent.getSymbol().getProgram()) {
+			if ((isExternalSymbol != isExternalParent) || (parent.getID() != Namespace.GLOBAL_NAMESPACE_ID &&
+				program != parent.getSymbol().getProgram())) {
 				return false;
 			}
 			// NAMESPACE can not be contained within a function or a class
@@ -121,11 +117,8 @@ public abstract class SymbolType {
 		public boolean isValidParent(Program program, Namespace parent, Address symbolAddr,
 				boolean isExternalSymbol) {
 			// Uses NO_ADDRESS - External address not used
-			if (isExternalSymbol != parent.isExternal()) {
-				return false;
-			}
-			if (parent.getID() != Namespace.GLOBAL_NAMESPACE_ID &&
-				program != parent.getSymbol().getProgram()) {
+			if ((isExternalSymbol != parent.isExternal()) || (parent.getID() != Namespace.GLOBAL_NAMESPACE_ID &&
+				program != parent.getSymbol().getProgram())) {
 				return false;
 			}
 			// CLASS can not be contained within a function
@@ -154,11 +147,8 @@ public abstract class SymbolType {
 		@Override
 		public boolean isValidParent(Program program, Namespace parent, Address symbolAddr,
 				boolean isExternalSymbol) {
-			if (symbolAddr.isExternalAddress() != parent.isExternal()) {
-				return false;
-			}
-			if (parent.getID() != Namespace.GLOBAL_NAMESPACE_ID &&
-				program != parent.getSymbol().getProgram()) {
+			if ((symbolAddr.isExternalAddress() != parent.isExternal()) || (parent.getID() != Namespace.GLOBAL_NAMESPACE_ID &&
+				program != parent.getSymbol().getProgram())) {
 				return false;
 			}
 			// FUNCTION can not be contained within a function
@@ -354,12 +344,7 @@ public abstract class SymbolType {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (isNamespace ? 1231 : 1237);
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + value;
-		return result;
+		return Objects.hash(isNamespace, name, value);
 	}
 
 	@Override
@@ -367,22 +352,14 @@ public abstract class SymbolType {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null) {
-			return false;
-		}
-		if (!(obj instanceof SymbolType)) {
+		if ((obj == null) || !(obj instanceof SymbolType)) {
 			return false;
 		}
 		SymbolType other = (SymbolType) obj;
 		if (isNamespace != other.isNamespace) {
 			return false;
 		}
-		if (name == null) {
-			if (other.name != null) {
-				return false;
-			}
-		}
-		else if (!name.equals(other.name)) {
+		if (!Objects.equals(name, other.name)) {
 			return false;
 		}
 		if (value != other.value) {

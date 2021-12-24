@@ -25,26 +25,26 @@ public interface VisualGraphChangeListener<V, E> {
 	 * 
 	 * @param vertices the added vertices
 	 */
-	public void verticesAdded(Iterable<V> vertices);
+	void verticesAdded(Iterable<V> vertices);
 
 	/**
 	 * Called when the given vertices have been removed from the graph
 	 * 
 	 * @param vertices the removed vertices
 	 */
-	public void verticesRemoved(Iterable<V> vertices);
+	void verticesRemoved(Iterable<V> vertices);
 
 	/**
 	 * Called when the given edges have been added from the graph
 	 * 
 	 * @param edges the added edges
 	 */
-	public void edgesAdded(Iterable<E> edges);
+	void edgesAdded(Iterable<E> edges);
 
 	/**
 	 * Called when the given edges have been removed from the graph
 	 * 
 	 * @param edges the removed edges
 	 */
-	public void edgesRemoved(Iterable<E> edges);
+	void edgesRemoved(Iterable<E> edges);
 }

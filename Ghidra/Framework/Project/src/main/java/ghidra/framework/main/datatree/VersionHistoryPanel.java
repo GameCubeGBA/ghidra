@@ -15,9 +15,16 @@
  */
 package ghidra.framework.main.datatree;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.datatransfer.Transferable;
-import java.awt.dnd.*;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DragGestureEvent;
+import java.awt.dnd.DragSource;
+import java.awt.dnd.DragSourceDropEvent;
+import java.awt.dnd.DragSourceListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -25,25 +32,44 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 import docking.ActionContext;
-import docking.action.*;
-import docking.dnd.*;
+import docking.action.DockingAction;
+import docking.action.DockingActionIf;
+import docking.action.MenuData;
+import docking.dnd.DragGestureAdapter;
+import docking.dnd.DragSrcAdapter;
+import docking.dnd.Draggable;
 import docking.widgets.OptionDialog;
-import docking.widgets.table.*;
+import docking.widgets.table.GTable;
+import docking.widgets.table.GTableCellRenderer;
+import docking.widgets.table.GTableCellRenderingData;
+import docking.widgets.table.GTableHeaderRenderer;
 import ghidra.app.util.GenericHelpTopics;
 import ghidra.framework.client.ClientUtil;
 import ghidra.framework.main.GetVersionedObjectTask;
-import ghidra.framework.model.*;
+import ghidra.framework.model.DomainFile;
+import ghidra.framework.model.DomainObject;
+import ghidra.framework.model.Project;
+import ghidra.framework.model.ToolChest;
+import ghidra.framework.model.ToolTemplate;
 import ghidra.framework.plugintool.PluginTool;
 import ghidra.framework.store.ItemCheckoutStatus;
 import ghidra.framework.store.Version;
-import ghidra.util.*;
-import ghidra.util.task.*;
+import ghidra.util.DateUtils;
+import ghidra.util.HTMLUtilities;
+import ghidra.util.HelpLocation;
+import ghidra.util.Msg;
+import ghidra.util.task.Task;
+import ghidra.util.task.TaskLauncher;
+import ghidra.util.task.TaskMonitor;
 
 /**
  * Panel that shows version history in a JTable
@@ -227,16 +253,16 @@ public class VersionHistoryPanel extends JPanel implements Draggable {
 			column.setHeaderRenderer(headRenderer);
 			column.setCellRenderer(cellRenderer);
 			String name = (String) column.getIdentifier();
-			if (name.equals(VersionHistoryTableModel.VERSION)) {
+			if (VersionHistoryTableModel.VERSION.equals(name)) {
 				column.setPreferredWidth(80);
 			}
-			else if (name.equals(VersionHistoryTableModel.DATE)) {
+			else if (VersionHistoryTableModel.DATE.equals(name)) {
 				column.setPreferredWidth(210);
 			}
-			else if (name.equals(VersionHistoryTableModel.COMMENTS)) {
+			else if (VersionHistoryTableModel.COMMENTS.equals(name)) {
 				column.setPreferredWidth(250);
 			}
-			else if (name.equals(VersionHistoryTableModel.USER)) {
+			else if (VersionHistoryTableModel.USER.equals(name)) {
 				column.setPreferredWidth(125);
 			}
 		}
@@ -419,15 +445,7 @@ public class VersionHistoryPanel extends JPanel implements Draggable {
 		@Override
 		public boolean isEnabledForContext(ActionContext context) {
 			MouseEvent mouseEvent = context.getMouseEvent();
-			if (mouseEvent == null) {
-				return false;
-			}
-
-			if (context.getSourceComponent() != table) {
-				return false;
-			}
-
-			if (domainFile == null) {
+			if ((mouseEvent == null) || (context.getSourceComponent() != table) || (domainFile == null)) {
 				return false;
 			}
 
