@@ -27,15 +27,15 @@ import ghidra.util.task.TaskMonitor;
 
 public class TestDataKeyModel extends ThreadedTableModelStub<Long> {
 
-	final static int ROWCOUNT = 12;
+	static final int ROWCOUNT = 12;
 
-	public final static int BYTE_COL = 0;
-	public final static int SHORT_COL = 1;
-	public final static int INT_COL = 2;
-	public final static int LONG_COL = 3;
-	public final static int FLOAT_COL = 4;
-	public final static int DOUBLE_COL = 5;
-	public final static int STRING_COL = 6;
+	public static final int BYTE_COL = 0;
+	public static final int SHORT_COL = 1;
+	public static final int INT_COL = 2;
+	public static final int LONG_COL = 3;
+	public static final int FLOAT_COL = 4;
+	public static final int DOUBLE_COL = 5;
+	public static final int STRING_COL = 6;
 
 	private Byte[] bytes = {Byte.valueOf((byte) 0x09), Byte.valueOf((byte) 0x03),
             Byte.valueOf((byte) 0x0c), Byte.valueOf((byte) 0x55), Byte.valueOf((byte) 0x00), Byte.valueOf((byte) 0xdf),

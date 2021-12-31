@@ -38,8 +38,7 @@ public class PrototypeModelMerged extends PrototypeModel {
 	private PrototypeModel[] modellist;			// models we are trying to distinguish between
 
 	public PrototypeModelMerged() {
-		super();
-		modellist = null;
+        modellist = null;
 	}
 
 	/* (non-Javadoc)

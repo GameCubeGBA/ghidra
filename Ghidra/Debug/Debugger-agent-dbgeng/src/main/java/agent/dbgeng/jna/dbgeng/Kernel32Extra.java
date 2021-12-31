@@ -47,7 +47,7 @@ public interface Kernel32Extra extends StdCallLibrary {
 		boolean invoke(DWORD dwCtrlType);
 	}
 
-	public static class PROCESSENTRY32W extends Structure {
+	class PROCESSENTRY32W extends Structure {
 		public static class ByReference extends PROCESSENTRY32W implements Structure.ByReference {
 		}
 
@@ -81,7 +81,7 @@ public interface Kernel32Extra extends StdCallLibrary {
 		}
 	}
 
-	public static class THREADENTRY32 extends Structure {
+	class THREADENTRY32 extends Structure {
 		public static class ByReference extends THREADENTRY32 implements Structure.ByReference {
 		}
 

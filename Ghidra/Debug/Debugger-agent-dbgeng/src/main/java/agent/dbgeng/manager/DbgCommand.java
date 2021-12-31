@@ -50,12 +50,12 @@ public interface DbgCommand<T> {
 	 * @param state Dbg's state
 	 * @return true if it can be executed, false otherwise
 	 */
-	public boolean validInState(DbgState state);
+    boolean validInState(DbgState state);
 
 	/**
 	 * Invoke the command
 	 */
-	public void invoke();
+    void invoke();
 
 	/**
 	 * Handle an event that ocurred during the execution of this command
@@ -64,7 +64,7 @@ public interface DbgCommand<T> {
 	 * @param pending a copy of the executing command instance
 	 * @return true if the command is now ready to be completed
 	 */
-	public boolean handle(DbgEvent<?> evt, DbgPendingCommand<?> pending);
+    boolean handle(DbgEvent<?> evt, DbgPendingCommand<?> pending);
 
 	/**
 	 * Called when the manager believes this command is finished executing
@@ -74,6 +74,6 @@ public interface DbgCommand<T> {
 	 * @param pending a copy of the now-finished-executing command instance
 	 * @return the object "returned" by the command
 	 */
-	public T complete(DbgPendingCommand<?> pending);
+    T complete(DbgPendingCommand<?> pending);
 
 }

@@ -25,8 +25,7 @@ import generic.test.AbstractGenericTest;
 public class AlgorithmsTest extends AbstractGenericTest {
 
 	public AlgorithmsTest() {
-		super();
-	}
+    }
 @Test
     public void testLowerBoundAndUpperBound() {
 		VectorSTL<Integer> a = new VectorSTL<>();

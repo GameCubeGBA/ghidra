@@ -32,13 +32,13 @@ import resources.ResourceManager;
  */
 public class MoveUpAction extends CompositeEditorTableAction {
 
-	private final static ImageIcon ICON = ResourceManager.loadImage("images/up.png");
-	public final static String ACTION_NAME = "Move Components Up";
-	private final static String GROUP_NAME = COMPONENT_ACTION_GROUP;
-	private final static String DESCRIPTION = "Move selected components up";
-	private final static String[] POPUP_PATH = new String[] { ACTION_NAME };
+	private static final ImageIcon ICON = ResourceManager.loadImage("images/up.png");
+	public static final String ACTION_NAME = "Move Components Up";
+	private static final String GROUP_NAME = COMPONENT_ACTION_GROUP;
+	private static final String DESCRIPTION = "Move selected components up";
+	private static final String[] POPUP_PATH = new String[] { ACTION_NAME };
 
-	private final static KeyStroke KEY_STROKE =
+	private static final KeyStroke KEY_STROKE =
 		KeyStroke.getKeyStroke(KeyEvent.VK_UP, InputEvent.ALT_DOWN_MASK);
 
 	public MoveUpAction(CompositeEditorProvider provider) {

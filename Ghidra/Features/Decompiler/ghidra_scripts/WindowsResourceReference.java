@@ -255,7 +255,7 @@ public class WindowsResourceReference extends GhidraScript {
 		HashSet<Address> doneRoutines = new HashSet<>();
 
 		//Have a list of routines found based on symbol lookups
-		while (routines.size() > 0) {
+		while (!routines.isEmpty()) {
 			// get the next routine to lookup
 			Address addr = routines.remove(0);
 			paramIndex = paramIndexes.remove(0);
@@ -613,27 +613,23 @@ public class WindowsResourceReference extends GhidraScript {
 		if (defUseList == null || defUseList.size() <= 0) {
 			return value;
 		}
-		Iterator<PcodeOp> iterator = defUseList.iterator();
-		while (iterator.hasNext()) {
-			PcodeOp pcodeOp = iterator.next();
-			int opcode = pcodeOp.getOpcode();
-			switch (opcode) {
-				case PcodeOp.INT_AND:
-					if (pcodeOp.getInput(0).isConstant()) {
-						value = value & pcodeOp.getInput(0).getOffset();
-					}
-					else if (pcodeOp.getInput(1).isConstant()) {
-						value = value & pcodeOp.getInput(1).getOffset();
-					}
-					else {
-						throw new InvalidInputException(
-							" Unhandled Pcode OP " + pcodeOp.toString());
-					}
-					break;
-				default:
-					throw new InvalidInputException(" Unhandled Pcode OP " + pcodeOp.toString());
-			}
-		}
+        for (PcodeOp pcodeOp : defUseList) {
+            int opcode = pcodeOp.getOpcode();
+            switch (opcode) {
+                case PcodeOp.INT_AND:
+                    if (pcodeOp.getInput(0).isConstant()) {
+                        value = value & pcodeOp.getInput(0).getOffset();
+                    } else if (pcodeOp.getInput(1).isConstant()) {
+                        value = value & pcodeOp.getInput(1).getOffset();
+                    } else {
+                        throw new InvalidInputException(
+                                " Unhandled Pcode OP " + pcodeOp.toString());
+                    }
+                    break;
+                default:
+                    throw new InvalidInputException(" Unhandled Pcode OP " + pcodeOp.toString());
+            }
+        }
 
 		return value;
 	}
@@ -741,11 +737,8 @@ public class WindowsResourceReference extends GhidraScript {
 		if ("abcdef".indexOf(charAt) >= 0) {
 			return true;
 		}
-		if ("ABCDEF".indexOf(charAt) >= 0) {
-			return true;
-		}
-		return false;
-	}
+        return "ABCDEF".indexOf(charAt) >= 0;
+    }
 
 	// Decompiler stuff
 

@@ -35,7 +35,7 @@ public class BundleStatus implements Comparable<BundleStatus> {
 
 	BundleStatus(ResourceFile bundleFile, boolean enabled, boolean readOnly, String bundleLoc) {
 		this.file = bundleFile;
-		type = GhidraBundle.getType(getFile());
+		type = GhidraBundle.getType(file);
 		this.location = bundleLoc;
 		this.enabled = enabled;
 		this.readOnly = readOnly;

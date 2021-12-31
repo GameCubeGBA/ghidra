@@ -48,8 +48,7 @@ public class FallThroughActionTest extends AbstractGhidraHeadedIntegrationTest
 	private static final String CLEAR_FALLTHROUGH = "Clear Fallthroughs";
 
 	public FallThroughActionTest() {
-		super();
-	}
+    }
 
 	@Before
 	public void setUp() throws Exception {

@@ -23,7 +23,7 @@ import agent.dbgmodel.jna.dbgmodel.IUnknownEx;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IDebugHostStatus extends IUnknownEx {
-	final IID IID_IDEBUG_HOST_STATUS = new IID("4F3E1CE2-86B2-4C7A-9C65-D0A9D0EECF44");
+	IID IID_IDEBUG_HOST_STATUS = new IID("4F3E1CE2-86B2-4C7A-9C65-D0A9D0EECF44");
 
 	enum VTIndices implements VTableIndex {
 		POLL_USER_INTERRUPT, //

@@ -102,7 +102,7 @@ public abstract class LocationDescriptor {
 	}
 
 	protected boolean domainObjectChanged(DomainObjectChangedEvent changeEvent) {
-		if (getHomeAddress() == null) {
+		if (homeAddress == null) {
 			return true;
 		}
 
@@ -113,7 +113,7 @@ public abstract class LocationDescriptor {
 			switch (eventType) {
 				case ChangeManager.DOCR_MEMORY_BLOCK_MOVED:
 				case ChangeManager.DOCR_MEMORY_BLOCK_REMOVED:
-					if (program.getMemory().contains(getHomeAddress())) {
+					if (program.getMemory().contains(homeAddress)) {
 						checkForAddressChange(domainObjectRecord);
 						return true;
 					}
@@ -126,7 +126,7 @@ public abstract class LocationDescriptor {
 				case ChangeManager.DOCR_MEM_REFERENCE_ADDED:
 					ProgramChangeRecord changeRecord = (ProgramChangeRecord) domainObjectRecord;
 					Reference ref = (Reference) changeRecord.getNewValue();
-					if (refersToAddress(ref, getHomeAddress())) {
+					if (refersToAddress(ref, homeAddress)) {
 						checkForAddressChange(domainObjectRecord);
 						return true;
 					}
@@ -134,7 +134,7 @@ public abstract class LocationDescriptor {
 				case ChangeManager.DOCR_MEM_REFERENCE_REMOVED:
 					changeRecord = (ProgramChangeRecord) domainObjectRecord;
 					ref = (Reference) changeRecord.getOldValue();
-					if (refersToAddress(ref, getHomeAddress())) {
+					if (refersToAddress(ref, homeAddress)) {
 						checkForAddressChange(domainObjectRecord);
 						return true;
 					}
@@ -143,7 +143,7 @@ public abstract class LocationDescriptor {
 				case ChangeManager.DOCR_SYMBOL_ASSOCIATION_REMOVED:
 					changeRecord = (ProgramChangeRecord) domainObjectRecord;
 					ref = (Reference) changeRecord.getObject();
-					if (refersToAddress(ref, getHomeAddress())) {
+					if (refersToAddress(ref, homeAddress)) {
 						checkForAddressChange(domainObjectRecord);
 						return true;
 					}
@@ -248,7 +248,7 @@ public abstract class LocationDescriptor {
 	 * reference addresses or if it matches the home address.
 	 */
 	protected boolean isInAddresses(Address address) {
-		return referencesContain(address) || getHomeAddress().equals(address);
+		return referencesContain(address) || homeAddress.equals(address);
 	}
 
 	Program getProgram() {

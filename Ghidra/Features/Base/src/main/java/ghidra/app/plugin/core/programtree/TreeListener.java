@@ -24,10 +24,10 @@ public interface TreeListener {
     /**
      * Called when the view changes.
      */
-    public void treeViewChanged(ChangeEvent e);
+    void treeViewChanged(ChangeEvent e);
     
     /**
      * Notification for going to the given address.
      */
-    public void goTo(Address addr);
+    void goTo(Address addr);
 }

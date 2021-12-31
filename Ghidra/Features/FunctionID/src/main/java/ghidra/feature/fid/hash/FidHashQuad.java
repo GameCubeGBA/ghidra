@@ -24,24 +24,24 @@ public interface FidHashQuad {
 	 * Returns the actual number of code units used to compute the full hash value.
 	 * @return the number of code units for the full hash
 	 */
-	public short getCodeUnitSize();
+    short getCodeUnitSize();
 
 	/**
 	 * Returns the full hash value.
 	 * @return the full hash value
 	 */
-	public long getFullHash();
+    long getFullHash();
 
 	/**
 	 * Returns the ADDITIONAL number of code units, past the number used for the full hash,
 	 * used to compute the specific hash value.
 	 * @return the ADDITIONAL number of code units for the specific hash
 	 */
-	public byte getSpecificHashAdditionalSize();
+    byte getSpecificHashAdditionalSize();
 
 	/**
 	 * Returns the specific hash value.
 	 * @return the specific hash value
 	 */
-	public long getSpecificHash();
+    long getSpecificHash();
 }

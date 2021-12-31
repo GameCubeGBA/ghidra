@@ -23,13 +23,13 @@ import ghidra.program.model.data.*;
 import ghidra.util.exception.DuplicateNameException;
 
 public class ThreadStatePPC extends ThreadState {
-	public final static int PPC_THREAD_STATE = 1;
-	public final static int PPC_FLOAT_STATE = 2;
-	public final static int PPC_EXCEPTION_STATE = 3;
-	public final static int PPC_VECTOR_STATE = 4;
-	public final static int PPC_THREAD_STATE64 = 5;
-	public final static int PPC_EXCEPTION_STATE64 = 6;
-	public final static int THREAD_STATE_NONE = 7;
+	public static final int PPC_THREAD_STATE = 1;
+	public static final int PPC_FLOAT_STATE = 2;
+	public static final int PPC_EXCEPTION_STATE = 3;
+	public static final int PPC_VECTOR_STATE = 4;
+	public static final int PPC_THREAD_STATE64 = 5;
+	public static final int PPC_EXCEPTION_STATE64 = 6;
+	public static final int THREAD_STATE_NONE = 7;
 
 	/** Instruction address register (PC) */
 	public long srr0;

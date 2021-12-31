@@ -31,25 +31,21 @@ import ghidra.program.model.symbol.LabelHistory;
 public class LabelMgrPluginScreenShots extends GhidraScreenShotGenerator {
 
 	public LabelMgrPluginScreenShots() {
-		super();
-	}
+    }
 
 	@Test
 	public void testAddLabel() {
 		final AddEditDialog dialog = new AddEditDialog("Edit Label at 100122591", tool);
-		runSwing(new Runnable() {
-			@Override
-			public void run() {
-				JComboBox combo = (JComboBox) getInstanceField("labelNameChoices", dialog);
-				combo.setSelectedItem("reset");
-				combo = (JComboBox) getInstanceField("namespaceChoices", dialog);
-				combo.addItem("MyFunction");
-				combo.setSelectedItem("MyFunction");
-				JCheckBox checkbox = (JCheckBox) getInstanceField("primaryCheckBox", dialog);
-				checkbox.setSelected(true);
-				checkbox.setEnabled(false);
-			}
-		});
+		runSwing((Runnable) () -> {
+            JComboBox combo = (JComboBox) getInstanceField("labelNameChoices", dialog);
+            combo.setSelectedItem("reset");
+            combo = (JComboBox) getInstanceField("namespaceChoices", dialog);
+            combo.addItem("MyFunction");
+            combo.setSelectedItem("MyFunction");
+            JCheckBox checkbox = (JCheckBox) getInstanceField("primaryCheckBox", dialog);
+            checkbox.setSelected(true);
+            checkbox.setEnabled(false);
+        });
 		showDialogWithoutBlocking(tool, dialog);
 		captureDialog();
 	}
@@ -59,12 +55,7 @@ public class LabelMgrPluginScreenShots extends GhidraScreenShotGenerator {
 		EditFieldNameDialog dialog =
 			new EditFieldNameDialog("Edit Field Name: struct.field2", tool);
 		final JTextField textField = (JTextField) getInstanceField("fieldName", dialog);
-		runSwing(new Runnable() {
-			@Override
-			public void run() {
-				textField.setText("field2");
-			}
-		});
+		runSwing((Runnable) () -> textField.setText("field2"));
 		showDialogWithoutBlocking(tool, dialog);
 		captureDialog();
 	}
@@ -81,13 +72,10 @@ public class LabelMgrPluginScreenShots extends GhidraScreenShotGenerator {
 		LabelMgrPlugin plugin = getPlugin(tool, LabelMgrPlugin.class);
 		final OperandLabelDialog dialog = new OperandLabelDialog(plugin);
 		final GhidraComboBox combo = (GhidraComboBox) getInstanceField("myChoice", dialog);
-		runSwing(new Runnable() {
-			@Override
-			public void run() {
-				dialog.setTitle("Set Label at 004a671");
-				combo.setSelectedItem("LAB_0040a671");
-			}
-		});
+		runSwing((Runnable) () -> {
+            dialog.setTitle("Set Label at 004a671");
+            combo.setSelectedItem("LAB_0040a671");
+        });
 		showDialogWithoutBlocking(tool, dialog);
 		captureDialog(350, 116);
 	}

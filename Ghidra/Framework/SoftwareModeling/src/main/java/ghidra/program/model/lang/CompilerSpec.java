@@ -50,7 +50,7 @@ public interface CompilerSpec {
 	 * use-cases, when the true model isn't known.  The CompilerSpec maintains a specific
 	 * default PrototypeModel to be used for each use-case label.
 	 */
-	public enum EvaluationModelType {
+    enum EvaluationModelType {
 		EVAL_CURRENT,			// A PrototypeModel used to evaluate the "current" function
 		EVAL_CALLED				// A PrototypeModel used to evaluate a "called" function
 	}

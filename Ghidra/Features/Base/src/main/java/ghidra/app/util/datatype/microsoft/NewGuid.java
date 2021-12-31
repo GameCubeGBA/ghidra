@@ -87,27 +87,27 @@ public class NewGuid {
 	    if (name != null && useName) {
 	    	return name;
 	    }
-        String retVal = type.toString()+delim;
-		retVal += Conv.toHexString((int)data[0])+delim;
-		retVal += Conv.toHexString((short)(data[1]))+delim;
-		retVal += Conv.toHexString((short)(data[1]>>16))+delim;
+        StringBuilder retVal = new StringBuilder(type.toString() + delim);
+		retVal.append(Conv.toHexString((int) data[0])).append(delim);
+		retVal.append(Conv.toHexString((short) (data[1]))).append(delim);
+		retVal.append(Conv.toHexString((short) (data[1] >> 16))).append(delim);
 		for (int i = 0; i < 4; i++) {
-		    retVal += Conv.toHexString((byte)(data[2]>>i*8)); 
-		    if (i == 1) retVal += delim;
+		    retVal.append(Conv.toHexString((byte) (data[2] >> i * 8)));
+		    if (i == 1) retVal.append(delim);
 		}
 		for (int i = 0; i < 4; i++) {
-		    retVal += Conv.toHexString((byte)(data[3]>>i*8)); 
+		    retVal.append(Conv.toHexString((byte) (data[3] >> i * 8)));
 		}
-		return retVal;
+		return retVal.toString();
 	}
 	
 	
 	public boolean isOK() {
-	    for (int i = 0; i < data.length; i++) {
-	        if ((data[i] != 0) || (data[i] != 0xFFFFFFFFL)) {
-	            return true;
-	        }
-	    }
+        for (long datum : data) {
+            if ((datum != 0) || (datum != 0xFFFFFFFFL)) {
+                return true;
+            }
+        }
 	    return false;
 	}
 	
@@ -116,8 +116,7 @@ public class NewGuid {
         if (bytes.length < offset+size) return false;
         if ((bytes[offset+7] == (byte)0x0)  && (bytes[offset+8] == (byte)0xC0) && (bytes[offset+15] == (byte)0x46))         		return true;
         if ((bytes[offset+7] >= (byte)0x10) && (bytes[offset+7] <= (byte)0x12) && ((bytes[offset+8] & (byte)0xC0) == (byte)0x80)) 	return true;
-        if (((bytes[offset+7] & (byte)0xF0) == (byte)0x40) && ((bytes[offset+8] & (byte)0xC0) == (byte)0x80))                     	return true;
-        return false;
+        return ((bytes[offset + 7] & (byte) 0xF0) == (byte) 0x40) && ((bytes[offset + 8] & (byte) 0xC0) == (byte) 0x80);
     }
     
     public static boolean isZeroGUID(byte [] bytes, int offset) {

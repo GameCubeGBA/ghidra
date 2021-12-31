@@ -33,13 +33,13 @@ public interface VTAssociation {
 	 * Returns the type of the association.  Either Function or Data.
 	 * @return the type of the association.  Either Function or Data.
 	 */
-	public VTAssociationType getType();
+    VTAssociationType getType();
 
 	/**
 	 * Returns the VTSession that this association belongs to.
 	 * @return the VTSession that this association belongs to.
 	 */
-	public VTSession getSession();
+    VTSession getSession();
 
 	/**
 	 * Returns a list of markup items for this association.
@@ -47,7 +47,7 @@ public interface VTAssociation {
 	 * @return a list of markup items for this association.
 	 * @throws CancelledException if the operation was cancelled via the monitor.
 	 */
-	public Collection<VTMarkupItem> getMarkupItems(TaskMonitor monitor) throws CancelledException;
+    Collection<VTMarkupItem> getMarkupItems(TaskMonitor monitor) throws CancelledException;
 
 	/**
 	 * Returns true if this association is accepted and has one or more markup items that have
@@ -55,19 +55,19 @@ public interface VTAssociation {
 	 * @return true if this association is accepted and has one or more markup items that have
 	 * been applied.
 	 */
-	public boolean hasAppliedMarkupItems();
+    boolean hasAppliedMarkupItems();
 
 	/**
 	 * Returns the address of the function or data item in the source program for this association.
 	 * @return the address of the function or data item in the source program for this association.
 	 */
-	public Address getSourceAddress();
+    Address getSourceAddress();
 
 	/**
 	 * Returns the address of the function or data item in the source program for this association.
 	 * @return the address of the function or data item in the source program for this association.
 	 */
-	public Address getDestinationAddress();
+    Address getDestinationAddress();
 
 	/**
 	 * Returns a collection of VTAssociations that have either the same source address or the same
@@ -75,7 +75,7 @@ public interface VTAssociation {
 	 * @return  a collection of VTAssociations that have either the same source address or the same
 	 * destination address.
 	 */
-	public Collection<VTAssociation> getRelatedAssociations();
+    Collection<VTAssociation> getRelatedAssociations();
 
 	/**
 	 * Sets the markup status of this association.  This method is used by the
@@ -83,7 +83,7 @@ public interface VTAssociation {
 	 * of its markup items.
 	 * @param markupItemsStatus the markup items
 	 */
-	public void setMarkupStatus(VTAssociationMarkupStatus markupItemsStatus);
+    void setMarkupStatus(VTAssociationMarkupStatus markupItemsStatus);
 
 	/**
 	 * Returns the status of the markup items for this association.
@@ -91,14 +91,14 @@ public interface VTAssociation {
 	 *
 	 * @return the status of the markup items for this association.
 	 */
-	public VTAssociationMarkupStatus getMarkupStatus();
+    VTAssociationMarkupStatus getMarkupStatus();
 
 	/**
 	 * Returns the current status of this association. One of AVAILABLE, ACCEPTED, BLOCKED,
 	 *  or REJECTED.  See {@link VTAssociationStatus} for details.
 	 * @return  the current status of this association. One of AVAILABLE, ACCEPTED, BLOCKED, or REJECTED.
 	 */
-	public VTAssociationStatus getStatus();
+    VTAssociationStatus getStatus();
 
 	/**
 	 * A convenience method to accept the given association without actually performing an apply.
@@ -106,7 +106,7 @@ public interface VTAssociation {
 	 * @throws VTAssociationStatusException if the given association is
 	 *         {@link VTAssociationStatus#BLOCKED}
 	 */
-	public void setAccepted() throws VTAssociationStatusException;
+    void setAccepted() throws VTAssociationStatusException;
 
 	/**
 	 * Clears the state of the given association from {@link VTAssociationStatus#ACCEPTED}
@@ -120,13 +120,13 @@ public interface VTAssociation {
 	 *         <b>or</b> if the given assocation's markup item manager contains markup items that
 	 *         have been applied.
 	 */
-	public void clearStatus() throws VTAssociationStatusException;
+    void clearStatus() throws VTAssociationStatusException;
 
 	/**
 	 * Sets the status of this association to {@link VTAssociationStatus#REJECTED}.
 	 * @throws VTAssociationStatusException if the association is accepted.
 	 */
-	public void setRejected() throws VTAssociationStatusException;
+    void setRejected() throws VTAssociationStatusException;
 
 	/**
 	 * Returns the current vote count which is an application settable field which should generally
@@ -135,13 +135,13 @@ public interface VTAssociation {
 	 * have incremented the votes.
 	 * @return the current number of facts that support this association
 	 */
-	public int getVoteCount();
+    int getVoteCount();
 
 	/**
 	 * Sets the vote count for this association which should be used to indicate the number of
 	 * supporting facts for this association
 	 * @param voteCount the new vote count for this association.
 	 */
-	public void setVoteCount(int voteCount);
+    void setVoteCount(int voteCount);
 
 }

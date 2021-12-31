@@ -58,7 +58,7 @@ public class DBCachedObjectStoreFactory {
 		VT getValue(OT obj);
 	}
 
-	public static abstract class AbstractDBFieldCodec<VT, OT extends DBAnnotatedObject, FT extends db.Field>
+	public abstract static class AbstractDBFieldCodec<VT, OT extends DBAnnotatedObject, FT extends db.Field>
 			implements DBFieldCodec<VT, OT, FT> {
 		protected final Class<VT> valueType;
 		protected final Class<OT> objectType;

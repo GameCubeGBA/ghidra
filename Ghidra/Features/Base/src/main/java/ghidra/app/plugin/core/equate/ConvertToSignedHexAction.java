@@ -20,7 +20,7 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.scalar.Scalar;
 
 public class ConvertToSignedHexAction extends AbstractConvertAction {
-	public final static String ACTION_NAME = "Convert To Signed Hex";
+	public static final String ACTION_NAME = "Convert To Signed Hex";
 
 	public ConvertToSignedHexAction(EquatePlugin plugin) {
 		super(plugin, ACTION_NAME, true);

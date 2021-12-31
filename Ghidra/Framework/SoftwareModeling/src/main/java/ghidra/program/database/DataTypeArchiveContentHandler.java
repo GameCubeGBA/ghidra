@@ -48,8 +48,8 @@ public class DataTypeArchiveContentHandler extends DBContentHandler {
 
 	private static ImageIcon DATA_TYPE_ARCHIVE_ICON;
 
-	private final static String PROGRAM_ICON_PATH = "images/closedBookBlue.png";
-	public final static String DATA_TYPE_ARCHIVE_CONTENT_TYPE = "Archive";
+	private static final String PROGRAM_ICON_PATH = "images/closedBookBlue.png";
+	public static final String DATA_TYPE_ARCHIVE_CONTENT_TYPE = "Archive";
 
 	@Override
 	public long createFile(FileSystem fs, FileSystem userfs, String path, String name,

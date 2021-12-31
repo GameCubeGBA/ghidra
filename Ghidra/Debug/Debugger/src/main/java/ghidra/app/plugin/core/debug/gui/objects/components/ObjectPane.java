@@ -24,28 +24,28 @@ import ghidra.dbg.target.TargetObject;
 
 public interface ObjectPane {
 
-	public ObjectContainer getContainer();
+	ObjectContainer getContainer();
 
-	public TargetObject getTargetObject();
+	TargetObject getTargetObject();
 
-	public TargetObject getSelectedObject();
+	TargetObject getSelectedObject();
 
-	public JComponent getComponent();
+	JComponent getComponent();
 
-	public JComponent getPrincipalComponent();
+	JComponent getPrincipalComponent();
 
-	public List<? extends Object> update(ObjectContainer container);
+	List<? extends Object> update(ObjectContainer container);
 
-	public void signalDataChanged(ObjectContainer container);
+	void signalDataChanged(ObjectContainer container);
 
-	public void signalContentsChanged(ObjectContainer container);
+	void signalContentsChanged(ObjectContainer container);
 
-	public void signalUpdate(ObjectContainer container);
+	void signalUpdate(ObjectContainer container);
 
-	public String getName();
+	String getName();
 
-	public void setFocus(TargetObject object, TargetObject focused);
+	void setFocus(TargetObject object, TargetObject focused);
 
-	public void setRoot(ObjectContainer root, TargetObject targetObject);
+	void setRoot(ObjectContainer root, TargetObject targetObject);
 
 }

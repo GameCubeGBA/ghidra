@@ -42,9 +42,9 @@ import ghidra.util.exception.DuplicateNameException;
  * 
  */
 public class ImportDescriptor implements StructConverter, ByteArrayConverter {
-    public final static String NAME = "IMAGE_IMPORT_DESCRIPTOR";
-    public final static int SIZEOF = 20; //bytes
-	public final static int NOT_BOUND = 0;
+    public static final String NAME = "IMAGE_IMPORT_DESCRIPTOR";
+    public static final int SIZEOF = 20; //bytes
+	public static final int NOT_BOUND = 0;
 
     private int characteristics;
     private int originalFirstThunk;

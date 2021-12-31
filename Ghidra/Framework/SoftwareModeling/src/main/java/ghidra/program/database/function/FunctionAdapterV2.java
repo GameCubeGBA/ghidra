@@ -51,7 +51,7 @@ class FunctionAdapterV2 extends FunctionAdapter {
 //		new String[] { "Return DataType ID", "StackPurge", "StackParamOffset", "StackReturnOffset",
 //			"StackLocalSize", "Flags", "Calling Convention ID" });
 
-	final static int SCHEMA_VERSION = 2;
+	static final int SCHEMA_VERSION = 2;
 
 	private Table table;
 

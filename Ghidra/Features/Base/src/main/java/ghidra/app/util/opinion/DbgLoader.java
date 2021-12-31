@@ -47,7 +47,7 @@ public class DbgLoader extends AbstractPeDebugLoader {
 	 * files permit debugging. DBG files also permit you to do OLE RPC
 	 * debugging. Microsoft Corporation. All rights reserved.
 	 */
-	public final static String DBG_NAME = "Debug Symbols (DBG)";
+    public static final String DBG_NAME = "Debug Symbols (DBG)";
 	private static final long MIN_BYTE_LENGTH = 46;
 
 	@Override
@@ -61,7 +61,7 @@ public class DbgLoader extends AbstractPeDebugLoader {
 		if (debug.getSignature() == SeparateDebugHeader.IMAGE_SEPARATE_DEBUG_SIGNATURE) {
 			long imageBase = Conv.intToLong(debug.getImageBase());
 			String machineName = debug.getMachineName();
-			for (QueryResult result : QueryOpinionService.query(getName(), machineName, null)) {
+			for (QueryResult result : QueryOpinionService.query(DBG_NAME, machineName, null)) {
 				loadSpecs.add(new LoadSpec(this, imageBase, result));
 			}
 			if (loadSpecs.isEmpty()) {

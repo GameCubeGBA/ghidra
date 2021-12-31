@@ -26,5 +26,5 @@ import java.util.List;
  */
 public interface ArchiveProvider {
 
-	public List<Archive> getArchives();
+	List<Archive> getArchives();
 }

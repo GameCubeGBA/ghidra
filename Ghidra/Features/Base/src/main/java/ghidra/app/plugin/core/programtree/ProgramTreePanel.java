@@ -50,8 +50,7 @@ class ProgramTreePanel extends JPanel implements ChangeListener {
 	 * Construct a new empty ProgramTree.
 	 */
 	ProgramTreePanel(String treeName, ProgramTreePlugin plugin) {
-		super();
-		this.plugin = plugin;
+        this.plugin = plugin;
 		create(treeName);
 		initialize();
 
@@ -162,14 +161,13 @@ class ProgramTreePanel extends JPanel implements ChangeListener {
 	GroupView getGroupView() {
 		ArrayList<TreePath> viewList = tree.getViewList();
 		ArrayList<GroupPath> list = new ArrayList<GroupPath>();
-		for (int i = 0; i < viewList.size(); i++) {
-			TreePath p = viewList.get(i);
-			ProgramNode node = (ProgramNode) p.getLastPathComponent();
-			GroupPath gp = node.getGroupPath();
-			if (gp != null) {
-				list.add(gp);
-			}
-		}
+        for (TreePath p : viewList) {
+            ProgramNode node = (ProgramNode) p.getLastPathComponent();
+            GroupPath gp = node.getGroupPath();
+            if (gp != null) {
+                list.add(gp);
+            }
+        }
 		GroupPath[] gps = new GroupPath[list.size()];
 		gps = list.toArray(gps);
 		return new GroupView(gps);
@@ -313,11 +311,6 @@ class ProgramTreePanel extends JPanel implements ChangeListener {
 				checkMouseEvent(e);
 			}
 		});
-		tree.addTreeSelectionListener(new TreeSelectionListener() {
-			@Override
-			public void valueChanged(TreeSelectionEvent e) {
-				fireSelectionEvent();
-			}
-		});
+		tree.addTreeSelectionListener(e -> fireSelectionEvent());
 	}
 }

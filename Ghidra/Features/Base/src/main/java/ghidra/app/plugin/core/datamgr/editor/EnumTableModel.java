@@ -27,13 +27,13 @@ import ghidra.util.NumericUtilities;
  */
 class EnumTableModel extends AbstractSortedTableModel<EnumEntry> {
 
-	final static int NAME_COL = 0;
-	final static int VALUE_COL = 1;
-	final static int COMMENT_COL = 2;
+	static final int NAME_COL = 0;
+	static final int VALUE_COL = 1;
+	static final int COMMENT_COL = 2;
 
-	final static String NAME = "Name";
-	final static String VALUE = "Value";
-	final static String COMMENT = "Comment";
+	static final String NAME = "Name";
+	static final String VALUE = "Value";
+	static final String COMMENT = "Comment";
 	private static String[] columnNames = { NAME, VALUE, COMMENT };
 
 	private EnumDataType enuum;
@@ -323,7 +323,7 @@ class EnumTableModel extends AbstractSortedTableModel<EnumEntry> {
 	}
 
 	private boolean isNameValid(String name) {
-		if (name == null || name.length() == 0) {
+		if (name == null || name.isEmpty()) {
 			editorPanel.setStatusMessage("Please enter a name");
 			return false;
 		}

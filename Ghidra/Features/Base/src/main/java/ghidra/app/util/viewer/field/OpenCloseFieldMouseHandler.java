@@ -23,7 +23,7 @@ import ghidra.program.util.ProgramLocation;
 import java.awt.event.MouseEvent;
 
 public class OpenCloseFieldMouseHandler implements FieldMouseHandlerExtension {
-	private final static Class<?>[] SUPPORTED_CLASSES = new Class[] { OpenCloseField.class };
+	private static final Class<?>[] SUPPORTED_CLASSES = new Class[] { OpenCloseField.class };
 
 	public boolean fieldElementClicked(Object clickedObject, Navigatable sourceNavigatable,
 			ProgramLocation location, MouseEvent mouseEvent, ServiceProvider serviceProvider) {

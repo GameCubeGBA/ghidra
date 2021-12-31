@@ -137,7 +137,7 @@ public class MachoPrelinkProgramBuilder extends MachoProgramBuilder {
 		// if has fileSetEntryCommands, that tells where the prelinked headers are
 		List<FileSetEntryCommand> fileSetEntries =
 			machoHeader.getLoadCommands(FileSetEntryCommand.class);
-		if (fileSetEntries != null && fileSetEntries.size() > 0) {
+		if (fileSetEntries != null && !fileSetEntries.isEmpty()) {
 			for (FileSetEntryCommand fileSetEntryCommand : fileSetEntries) {
 				prelinkMachoInfoList
 						.add(new PrelinkMachoInfo(provider, fileSetEntryCommand.getFileOffset(),
@@ -232,7 +232,7 @@ public class MachoPrelinkProgramBuilder extends MachoProgramBuilder {
 		}
 
 		// if pointer chains fixed by DyldChainedFixupsCommands, then all finished
-		if (loadCommands.size() > 0) {
+		if (!loadCommands.isEmpty()) {
 			return fixedAddresses;
 		}
 

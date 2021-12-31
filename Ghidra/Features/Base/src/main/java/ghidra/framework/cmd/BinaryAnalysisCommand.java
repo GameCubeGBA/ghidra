@@ -33,23 +33,23 @@ public interface BinaryAnalysisCommand extends ExtensionPoint {
 	 * @param program the domain object to inspect.
 	 * @return TRUE if this command can be applied
 	 */
-	public boolean canApply(Program program);
+    boolean canApply(Program program);
 	/**
 	 * Applies the command to the given domain object.
 	 * @param program domain object that this command is to be applied.
 	 * @param monitor the task monitor
 	 * @return true if the command applied successfully
 	 */
-	public boolean applyTo(Program program, TaskMonitor monitor) throws Exception;
+    boolean applyTo(Program program, TaskMonitor monitor) throws Exception;
 	/**
 	 * Returns the status message indicating the status of the command.
 	 * @return reason for failure, or null if the status of the command 
 	 *         was successful
 	 */
-	public MessageLog getMessages();
+    MessageLog getMessages();
 	/**
 	 * Returns the name of this command. 
 	 * @return the name of this command
 	 */
-	public String getName();
+    String getName();
 }

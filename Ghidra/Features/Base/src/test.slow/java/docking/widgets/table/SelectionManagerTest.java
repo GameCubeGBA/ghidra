@@ -56,8 +56,7 @@ public class SelectionManagerTest extends AbstractGhidraHeadedIntegrationTest {
 	private Logger logger;
 
 	public SelectionManagerTest() {
-		super();
-	}
+    }
 
 	@Before
 	public void setUp() throws Exception {

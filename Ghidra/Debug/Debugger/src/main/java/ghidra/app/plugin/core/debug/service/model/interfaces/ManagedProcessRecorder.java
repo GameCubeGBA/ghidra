@@ -17,6 +17,6 @@ package ghidra.app.plugin.core.debug.service.model.interfaces;
 
 public interface ManagedProcessRecorder extends AbstractTraceRecorder {
 
-	public AbstractRecorderMemory getProcessMemory();
+	AbstractRecorderMemory getProcessMemory();
 
 }

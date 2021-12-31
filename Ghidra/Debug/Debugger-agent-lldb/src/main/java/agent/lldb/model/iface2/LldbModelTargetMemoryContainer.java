@@ -23,12 +23,12 @@ import ghidra.program.model.address.Address;
 
 public interface LldbModelTargetMemoryContainer extends LldbModelTargetObject, TargetMemory {
 
-	public LldbModelTargetMemoryRegion getTargetMemory(SBMemoryRegionInfo region);
+	LldbModelTargetMemoryRegion getTargetMemory(SBMemoryRegionInfo region);
 
 	@Override
-	public CompletableFuture<byte[]> readMemory(Address address, int length);
+    CompletableFuture<byte[]> readMemory(Address address, int length);
 
 	@Override
-	public CompletableFuture<Void> writeMemory(Address address, byte[] data);
+    CompletableFuture<Void> writeMemory(Address address, byte[] data);
 
 }

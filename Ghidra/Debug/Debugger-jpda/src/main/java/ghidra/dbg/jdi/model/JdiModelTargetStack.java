@@ -104,7 +104,7 @@ public class JdiModelTargetStack extends JdiModelTargetObjectImpl
 	 * @return null
 	 */
 	protected CompletableFuture<?> update() {
-		if (!isObserved()) {
+		if (listeners.isEmpty()) {
 			return AsyncUtils.NIL;
 		}
 		return fetchElements(true).exceptionally(e -> {

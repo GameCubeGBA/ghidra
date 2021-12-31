@@ -17,8 +17,8 @@
 package ghidra.app.plugin.core.function.editor;
 
 interface ModelChangeListener {
-	public void dataChanged();		// tell the gui to refresh its data
+	void dataChanged();		// tell the gui to refresh its data
 
-	public void tableRowsChanged(); 		// tell the gui that row indexes are invalid 
+	void tableRowsChanged(); 		// tell the gui that row indexes are invalid
 	// so that cell editors can be cancelled
 }

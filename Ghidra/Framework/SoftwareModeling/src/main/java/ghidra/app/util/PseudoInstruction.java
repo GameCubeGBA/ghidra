@@ -65,7 +65,7 @@ import ghidra.util.exception.AssertException;
  */
 public class PseudoInstruction extends PseudoCodeUnit implements Instruction, InstructionContext {
 
-	private final static Address[] EMPTY_ADDR_ARRAY = {};
+	private static final Address[] EMPTY_ADDR_ARRAY = {};
 
 	private AddressFactory addrFactory;
 

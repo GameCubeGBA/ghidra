@@ -45,14 +45,14 @@ import resources.icons.TranslateIcon;
  */
 public class LabelFieldFactory extends FieldFactory {
 
-	private final static int MAX_OFFCUT_DISPLAY = 30; // arbitrary
+	private static final int MAX_OFFCUT_DISPLAY = 30; // arbitrary
 
-	public final static String FIELD_NAME = "Label";
-	public final static String OFFCUT_STYLE = "XRef Offcut Style";
-	public final static String GROUP_TITLE = "Labels Field";
-	public final static String DISPLAY_FUNCTION_LABEL =
+	public static final String FIELD_NAME = "Label";
+	public static final String OFFCUT_STYLE = "XRef Offcut Style";
+	public static final String GROUP_TITLE = "Labels Field";
+	public static final String DISPLAY_FUNCTION_LABEL =
 		GROUP_TITLE + Options.DELIMITER + "Display Function Label";
-	private final static String NAMESPACE_OPTIONS =
+	private static final String NAMESPACE_OPTIONS =
 		GROUP_TITLE + Options.DELIMITER + "Display Namespace";
 
 	// These icons would normally be static, but can't be because the class searcher loads this
@@ -172,7 +172,7 @@ public class LabelFieldFactory extends FieldFactory {
 		// if there is, then create a "OFF" label
 		//
 		List<Address> offcuts = getOffcutReferenceAddress(cu);
-		boolean hasOffcuts = offcuts.size() > 0;
+		boolean hasOffcuts = !offcuts.isEmpty();
 
 		// if there is only a function symbol and we are not showing function symbols, get out.
 		if (!hasOffcuts && symbols.length == 1 && func != null && !displayFunctionLabel) {
@@ -198,16 +198,16 @@ public class LabelFieldFactory extends FieldFactory {
 		int nextPos = 0;
 
 		if (hasOffcuts) {
-			for (int i = 0; i < offcuts.size(); i++) {
-				AttributedString as = getAttributedOffsetText(obj, cu, currAddr, offcuts.get(i));
-				if (as == null) {
-					as = new AttributedString(EMPTY_ICON,
-						SymbolUtilities.getDynamicOffcutName(currAddr),
-						inspector.getOffcutSymbolColor(),
-						getMetrics(inspector.getOffcutSymbolStyle()), false, null);
-				}
-				textElements[nextPos++] = new TextFieldElement(as, nextPos, 0);
-			}
+            for (Address offcut : offcuts) {
+                AttributedString as = getAttributedOffsetText(obj, cu, currAddr, offcut);
+                if (as == null) {
+                    as = new AttributedString(EMPTY_ICON,
+                            SymbolUtilities.getDynamicOffcutName(currAddr),
+                            inspector.getOffcutSymbolColor(),
+                            getMetrics(inspector.getOffcutSymbolStyle()), false, null);
+                }
+                textElements[nextPos++] = new TextFieldElement(as, nextPos, 0);
+            }
 		}
 
 		for (Symbol symbol : symbols) {

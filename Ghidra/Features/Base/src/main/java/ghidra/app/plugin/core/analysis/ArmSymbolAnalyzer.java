@@ -34,8 +34,8 @@ import ghidra.util.task.TaskMonitor;
 
 public class ArmSymbolAnalyzer extends AbstractAnalyzer {
 
-	private final static String NAME = "ARM Symbol";
-	private final static String DESCRIPTION =
+	private static final String NAME = "ARM Symbol";
+	private static final String DESCRIPTION =
 		"Analyze bytes for Thumb symbols and shift -1 as necessary.";
 
 	public ArmSymbolAnalyzer() {

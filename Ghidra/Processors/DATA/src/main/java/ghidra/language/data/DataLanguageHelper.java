@@ -21,7 +21,7 @@ import java.util.List;
 
 public final class DataLanguageHelper {
 
-	public final static LanguageCompilerSpecPair getLanguage( LanguageService languageService, int pointerSize, boolean isBigEndian ) throws LanguageNotFoundException {
+	public static final LanguageCompilerSpecPair getLanguage(LanguageService languageService, int pointerSize, boolean isBigEndian ) throws LanguageNotFoundException {
 		if ( pointerSize != 16 && pointerSize != 32 && pointerSize != 64 ) {
 			throw new LanguageNotFoundException("Unable to locate DATA language for pointer size:" + pointerSize );
 		}
@@ -35,7 +35,7 @@ public final class DataLanguageHelper {
 
         List<LanguageCompilerSpecPair> pairs = languageService.getLanguageCompilerSpecPairs( query );
 
-        if ( pairs.size() > 0 ) {
+        if (!pairs.isEmpty()) {
             if ( pairs.size() > 1 ) {
                 throw new LanguageNotFoundException( "Too many DATA languages" );
             }

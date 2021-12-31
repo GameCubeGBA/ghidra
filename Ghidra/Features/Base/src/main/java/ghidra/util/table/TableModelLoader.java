@@ -28,5 +28,5 @@ import ghidra.util.task.TaskMonitor;
  */
 public interface TableModelLoader<T> {
 
-	public void load(Accumulator<T> accumulator, TaskMonitor monitor) throws CancelledException;
+	void load(Accumulator<T> accumulator, TaskMonitor monitor) throws CancelledException;
 }

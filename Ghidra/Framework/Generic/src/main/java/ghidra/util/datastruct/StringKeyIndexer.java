@@ -31,7 +31,7 @@ import ghidra.util.exception.AssertException;
  */
 
 public class StringKeyIndexer implements Serializable {
-    private final static long serialVersionUID = 1;
+    private static final long serialVersionUID = 1;
 
     private static final int DEFAULT_CAPACITY = 13;
 

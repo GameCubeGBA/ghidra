@@ -388,13 +388,11 @@ public class DefaultProject implements Project {
 
 	@Override
 	public void close() {
-		Iterator<ProjectFileManager> iter = otherViews.values().iterator();
-		while (iter.hasNext()) {
-			ProjectFileManager dataMgr = iter.next();
-			if (dataMgr != null) {
-				dataMgr.dispose();
-			}
-		}
+        for (ProjectFileManager dataMgr : otherViews.values()) {
+            if (dataMgr != null) {
+                dataMgr.dispose();
+            }
+        }
 		otherViews.clear();
 
 		try {
@@ -511,7 +509,7 @@ public class DefaultProject implements Project {
 					sb.append("\n");
 				}
 			}
-			errorMsg = "Invalid XML loading project " + projectLocator + ":\n" + sb.toString();
+			errorMsg = "Invalid XML loading project " + projectLocator + ":\n" + sb;
 			error = e;
 		}
 		catch (NoClassDefFoundError e) {
@@ -671,11 +669,9 @@ public class DefaultProject implements Project {
 	@Override
 	public void releaseFiles(Object consumer) {
 		fileMgr.releaseDomainFiles(consumer);
-		Iterator<ProjectFileManager> it = otherViews.values().iterator();
-		while (it.hasNext()) {
-			ProjectFileManager mgr = it.next();
-			mgr.releaseDomainFiles(consumer);
-		}
+        for (ProjectFileManager mgr : otherViews.values()) {
+            mgr.releaseDomainFiles(consumer);
+        }
 		TransientDataManager.releaseFiles(consumer);
 	}
 }

@@ -109,22 +109,20 @@ public class FindRunsOfPointersScript extends GhidraScript {
 		}
 		// print out results
 		println("Table address      Dist bet ptrs     Num ptrs       Ref found");
-		for (int j = 0; j < tableArray.size(); j++) {
-			Table ptrTable = tableArray.get(j);
-			String refString = new String();
-			if (ptrTable.getRef() != null) {
-				refString = " at " + ptrTable.getRef().toString();
-				println("    " + ptrTable.getTopAddr().toString() + "             " +
-					ptrTable.getDistance() + "                " + ptrTable.getNumPointers() +
-					"            " + refString);
-			}
-			else if (searchNonRefd) {
-				refString = "No";
-				println("    " + ptrTable.getTopAddr().toString() + "             " +
-					ptrTable.getDistance() + "                " + ptrTable.getNumPointers() +
-					"            " + refString);
-			}
-		}
+        for (Table ptrTable : tableArray) {
+            String refString = new String();
+            if (ptrTable.getRef() != null) {
+                refString = " at " + ptrTable.getRef().toString();
+                println("    " + ptrTable.getTopAddr().toString() + "             " +
+                        ptrTable.getDistance() + "                " + ptrTable.getNumPointers() +
+                        "            " + refString);
+            } else if (searchNonRefd) {
+                refString = "No";
+                println("    " + ptrTable.getTopAddr().toString() + "             " +
+                        ptrTable.getDistance() + "                " + ptrTable.getNumPointers() +
+                        "            " + refString);
+            }
+        }
 		// TODO put in a navigatable table
 
 	}

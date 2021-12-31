@@ -142,7 +142,7 @@ public class CreatePdbXmlFilesScript extends GhidraScript {
 		int exitValue = currentProcess.waitFor();
 		String errorMessage = strBuilder.toString();
 
-		if (errorMessage.length() > 0) {
+		if (!errorMessage.isEmpty()) {
 			if (createdFile.isFile()) {
 				createdFile.delete();
 			}

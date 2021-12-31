@@ -257,7 +257,7 @@ public class SleighDebugLogger {
 		Constructor ct = walker.getConstructor();
 		String tableName = ct.getParent().getName();
 		List<String> printPieces = ct.getPrintPieces();
-		String name = printPieces.size() == 0 ? "\n" : printPieces.get(0);
+		String name = printPieces.isEmpty() ? "\n" : printPieces.get(0);
 		if (!"instruction".equals(tableName) || name.startsWith("\n")) {
 			name = tableName;
 		}
@@ -394,7 +394,7 @@ public class SleighDebugLogger {
 			atLineStart = true;
 			index = str.indexOf('\n');
 		}
-		if (str.length() != 0) {
+		if (!str.isEmpty()) {
 			checkLineStart();
 			buffer.append(str);
 		}
@@ -442,9 +442,7 @@ public class SleighDebugLogger {
 
 	private String getIndent() {
 		StringBuilder buf = new StringBuilder();
-		for (int i = 0; i < indentLevel; i++) {
-			buf.append("   ");
-		}
+        buf.append("   ".repeat(Math.max(0, indentLevel)));
 		return buf.toString();
 	}
 
@@ -483,7 +481,7 @@ public class SleighDebugLogger {
 		append(Integer.toString(c.getLineno()));
 		append("} ");
 		List<String> printPieces = c.getPrintPieces();
-		if (printPieces.size() == 0) {
+		if (printPieces.isEmpty()) {
 			for (int i = 0; i < c.getNumOperands(); i++) {
 				if (i != 0) {
 					append(", ");
@@ -1139,7 +1137,7 @@ public class SleighDebugLogger {
 			if (parentPath == null) {
 				return null;
 			}
-			if (parentPath.length() != 0) {
+			if (!parentPath.isEmpty()) {
 				parentPath += ".";
 			}
 			return parentPath + name;

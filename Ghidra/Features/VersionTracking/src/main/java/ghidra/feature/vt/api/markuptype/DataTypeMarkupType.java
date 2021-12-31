@@ -239,7 +239,7 @@ public class DataTypeMarkupType extends VTMarkupType {
 			String message =
 				"Data Type Markup cannot be applied because instructions exist where the data " +
 					"type is to be applied. Instructions must be cleared in the destination " +
-					"program from " + startAddress.toString() + " to " + endAddress.toString() +
+					"program from " + startAddress + " to " + endAddress +
 					" before this Data Type Markup can be applied.";
 			throw new VersionTrackingApplyException(message);
 		}
@@ -365,7 +365,7 @@ public class DataTypeMarkupType extends VTMarkupType {
 		Address endAddress = destinationAddress.add(newLength - 1);
 		String message =
 			"Couldn't apply Data Type Markup from source address " + sourceAddress.toString() +
-				" to destination address " + destinationAddress.toString() + e.getMessage() + ".";
+				" to destination address " + destinationAddress + e.getMessage() + ".";
 		if (newLength > oldLength) {
 			message += " Any Defined Data must be cleared in the destination program from " +
 				startAddress.toString() + " to " + endAddress.toString() +

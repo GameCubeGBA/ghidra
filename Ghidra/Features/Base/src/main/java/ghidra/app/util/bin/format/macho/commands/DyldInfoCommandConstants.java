@@ -20,61 +20,61 @@ public final class DyldInfoCommandConstants {
 	/*
 	 * The following are used to encode rebasing information
 	 */
-	public final static int REBASE_TYPE_POINTER                           = 1;
-	public final static int REBASE_TYPE_TEXT_ABSOLUTE32                   = 2;
-	public final static int REBASE_TYPE_TEXT_PCREL32                      = 3;
+    public static final int REBASE_TYPE_POINTER                           = 1;
+	public static final int REBASE_TYPE_TEXT_ABSOLUTE32                   = 2;
+	public static final int REBASE_TYPE_TEXT_PCREL32                      = 3;
 
-	public final static int REBASE_OPCODE_MASK                                 = 0xF0;
-	public final static int REBASE_IMMEDIATE_MASK                              = 0x0F;
-	public final static int REBASE_OPCODE_DONE                                 = 0x00;
-	public final static int REBASE_OPCODE_SET_TYPE_IMM                         = 0x10;
-	public final static int REBASE_OPCODE_SET_SEGMENT_AND_OFFSET_ULEB          = 0x20;
-	public final static int REBASE_OPCODE_ADD_ADDR_ULEB                        = 0x30;
-	public final static int REBASE_OPCODE_ADD_ADDR_IMM_SCALED                  = 0x40;
-	public final static int REBASE_OPCODE_DO_REBASE_IMM_TIMES                  = 0x50;
-	public final static int REBASE_OPCODE_DO_REBASE_ULEB_TIMES                 = 0x60;
-	public final static int REBASE_OPCODE_DO_REBASE_ADD_ADDR_ULEB              = 0x70;
-	public final static int REBASE_OPCODE_DO_REBASE_ULEB_TIMES_SKIPPING_ULEB   = 0x80;
+	public static final int REBASE_OPCODE_MASK                                 = 0xF0;
+	public static final int REBASE_IMMEDIATE_MASK                              = 0x0F;
+	public static final int REBASE_OPCODE_DONE                                 = 0x00;
+	public static final int REBASE_OPCODE_SET_TYPE_IMM                         = 0x10;
+	public static final int REBASE_OPCODE_SET_SEGMENT_AND_OFFSET_ULEB          = 0x20;
+	public static final int REBASE_OPCODE_ADD_ADDR_ULEB                        = 0x30;
+	public static final int REBASE_OPCODE_ADD_ADDR_IMM_SCALED                  = 0x40;
+	public static final int REBASE_OPCODE_DO_REBASE_IMM_TIMES                  = 0x50;
+	public static final int REBASE_OPCODE_DO_REBASE_ULEB_TIMES                 = 0x60;
+	public static final int REBASE_OPCODE_DO_REBASE_ADD_ADDR_ULEB              = 0x70;
+	public static final int REBASE_OPCODE_DO_REBASE_ULEB_TIMES_SKIPPING_ULEB   = 0x80;
 
 	/*
 	 * The following are used to encode binding information
 	 */
-	public final static int BIND_TYPE_POINTER           = 1;
-	public final static int BIND_TYPE_TEXT_ABSOLUTE32   = 2;
-	public final static int BIND_TYPE_TEXT_PCREL32      = 3;
+    public static final int BIND_TYPE_POINTER           = 1;
+	public static final int BIND_TYPE_TEXT_ABSOLUTE32   = 2;
+	public static final int BIND_TYPE_TEXT_PCREL32      = 3;
 
-	public final static int BIND_SPECIAL_DYLIB_SELF             =  0;
-	public final static int BIND_SPECIAL_DYLIB_MAIN_EXECUTABLE  = -1;
-	public final static int BIND_SPECIAL_DYLIB_FLAT_LOOKUP      = -2;
+	public static final int BIND_SPECIAL_DYLIB_SELF             =  0;
+	public static final int BIND_SPECIAL_DYLIB_MAIN_EXECUTABLE  = -1;
+	public static final int BIND_SPECIAL_DYLIB_FLAT_LOOKUP      = -2;
 
-	public final static int BIND_SYMBOL_FLAGS_WEAK_IMPORT          = 0x1;
-	public final static int BIND_SYMBOL_FLAGS_NON_WEAK_DEFINITION  = 0x8;
+	public static final int BIND_SYMBOL_FLAGS_WEAK_IMPORT          = 0x1;
+	public static final int BIND_SYMBOL_FLAGS_NON_WEAK_DEFINITION  = 0x8;
 
-	public final static int BIND_OPCODE_MASK                                   = 0xF0;
-	public final static int BIND_IMMEDIATE_MASK                                = 0x0F;
-	public final static int BIND_OPCODE_DONE                                   = 0x00;
-	public final static int BIND_OPCODE_SET_DYLIB_ORDINAL_IMM                  = 0x10;
-	public final static int BIND_OPCODE_SET_DYLIB_ORDINAL_ULEB                 = 0x20;
-	public final static int BIND_OPCODE_SET_DYLIB_SPECIAL_IMM                  = 0x30;
-	public final static int BIND_OPCODE_SET_SYMBOL_TRAILING_FLAGS_IMM          = 0x40;
-	public final static int BIND_OPCODE_SET_TYPE_IMM                           = 0x50;
-	public final static int BIND_OPCODE_SET_ADDEND_SLEB                        = 0x60;
-	public final static int BIND_OPCODE_SET_SEGMENT_AND_OFFSET_ULEB            = 0x70;
-	public final static int BIND_OPCODE_ADD_ADDR_ULEB                          = 0x80;
-	public final static int BIND_OPCODE_DO_BIND                                = 0x90;
-	public final static int BIND_OPCODE_DO_BIND_ADD_ADDR_ULEB                  = 0xA0;
-	public final static int BIND_OPCODE_DO_BIND_ADD_ADDR_IMM_SCALED            = 0xB0;
-	public final static int BIND_OPCODE_DO_BIND_ULEB_TIMES_SKIPPING_ULEB       = 0xC0;
-	public final static int BIND_OPCODE_THREADED                               = 0xD0;
+	public static final int BIND_OPCODE_MASK                                   = 0xF0;
+	public static final int BIND_IMMEDIATE_MASK                                = 0x0F;
+	public static final int BIND_OPCODE_DONE                                   = 0x00;
+	public static final int BIND_OPCODE_SET_DYLIB_ORDINAL_IMM                  = 0x10;
+	public static final int BIND_OPCODE_SET_DYLIB_ORDINAL_ULEB                 = 0x20;
+	public static final int BIND_OPCODE_SET_DYLIB_SPECIAL_IMM                  = 0x30;
+	public static final int BIND_OPCODE_SET_SYMBOL_TRAILING_FLAGS_IMM          = 0x40;
+	public static final int BIND_OPCODE_SET_TYPE_IMM                           = 0x50;
+	public static final int BIND_OPCODE_SET_ADDEND_SLEB                        = 0x60;
+	public static final int BIND_OPCODE_SET_SEGMENT_AND_OFFSET_ULEB            = 0x70;
+	public static final int BIND_OPCODE_ADD_ADDR_ULEB                          = 0x80;
+	public static final int BIND_OPCODE_DO_BIND                                = 0x90;
+	public static final int BIND_OPCODE_DO_BIND_ADD_ADDR_ULEB                  = 0xA0;
+	public static final int BIND_OPCODE_DO_BIND_ADD_ADDR_IMM_SCALED            = 0xB0;
+	public static final int BIND_OPCODE_DO_BIND_ULEB_TIMES_SKIPPING_ULEB       = 0xC0;
+	public static final int BIND_OPCODE_THREADED                               = 0xD0;
 
 	/*
 	 * The following are used on the flags byte of a terminal node
 	 * in the export information.
 	 */
-	public final static int EXPORT_SYMBOL_FLAGS_KIND_MASK                      = 0x03;
-	public final static int EXPORT_SYMBOL_FLAGS_KIND_REGULAR                   = 0x00;
-	public final static int EXPORT_SYMBOL_FLAGS_KIND_THREAD_LOCAL              = 0x01;
-	public final static int EXPORT_SYMBOL_FLAGS_WEAK_DEFINITION                = 0x04;
-	public final static int EXPORT_SYMBOL_FLAGS_INDIRECT_DEFINITION            = 0x08;
-	public final static int EXPORT_SYMBOL_FLAGS_HAS_SPECIALIZATIONS            = 0x10;
+    public static final int EXPORT_SYMBOL_FLAGS_KIND_MASK                      = 0x03;
+	public static final int EXPORT_SYMBOL_FLAGS_KIND_REGULAR                   = 0x00;
+	public static final int EXPORT_SYMBOL_FLAGS_KIND_THREAD_LOCAL              = 0x01;
+	public static final int EXPORT_SYMBOL_FLAGS_WEAK_DEFINITION                = 0x04;
+	public static final int EXPORT_SYMBOL_FLAGS_INDIRECT_DEFINITION            = 0x08;
+	public static final int EXPORT_SYMBOL_FLAGS_HAS_SPECIALIZATIONS            = 0x10;
 }

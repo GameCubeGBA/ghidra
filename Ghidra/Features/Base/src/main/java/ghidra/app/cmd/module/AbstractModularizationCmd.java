@@ -250,17 +250,15 @@ public abstract class AbstractModularizationCmd extends BackgroundCommand {
 	}
 
 	protected ProgramFragment createFragment(ProgramModule root, CodeBlock block) {
-		boolean done = false;
-		String blockName = block.getName();
-		while (!done) {
+		StringBuilder blockName = new StringBuilder(block.getName());
+		while (true) {
 			try {
-				return root.createFragment(blockName);
+				return root.createFragment(blockName.toString());
 			}
 			catch (DuplicateNameException e) {
-				blockName += "*";
+				blockName.append("*");
 			}
 		}
-		return null;
 	}
 
 	protected ProgramModule createModule(ProgramModule parent, String moduleName) {
@@ -270,8 +268,7 @@ public abstract class AbstractModularizationCmd extends BackgroundCommand {
 				return parent.createModule(moduleName);
 			}
 			catch (DuplicateNameException e) {
-				++index;
-				moduleName = moduleName + "(" + index + ")";
+				moduleName = moduleName + "(" + ++index + ")";
 			}
 		}
 	}

@@ -19,7 +19,7 @@ import ghidra.app.util.bin.format.elf.ElfHeader;
 import ghidra.app.util.bin.format.elf.ElfLoadHelper;
 import ghidra.util.classfinder.ExtensionPoint;
 
-abstract public class ElfExtension extends ElfLoadAdapter implements ExtensionPoint {
+public abstract class ElfExtension extends ElfLoadAdapter implements ExtensionPoint {
 
 	@Override
 	public abstract boolean canHandle(ElfHeader elf);

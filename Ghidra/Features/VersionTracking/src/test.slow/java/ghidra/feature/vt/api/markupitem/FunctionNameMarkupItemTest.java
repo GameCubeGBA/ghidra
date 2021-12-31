@@ -42,8 +42,7 @@ import ghidra.util.exception.InvalidInputException;
 public class FunctionNameMarkupItemTest extends AbstractVTMarkupItemTest {
 
 	public FunctionNameMarkupItemTest() {
-		super();
-	}
+    }
 
 	@Test
 	public void testFindAndApplyMarkupItem_ReplaceDefault_WithDefaultDestinationName()

@@ -34,8 +34,7 @@ public class CliTableDeclSecurity extends CliAbstractTable {
 		public int permissionSetIndex;
 		
 		public CliDeclSecurityRow(short action, int parentIndex, int permissionSetIndex) {
-			super();
-			this.action = action;
+            this.action = action;
 			this.parentIndex = parentIndex;
 			this.permissionSetIndex = permissionSetIndex;
 		}

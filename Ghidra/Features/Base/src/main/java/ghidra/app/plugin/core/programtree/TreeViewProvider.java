@@ -46,10 +46,10 @@ class TreeViewProvider implements ViewProviderService {
 	private ViewManagerService viewManagerService;
 	private ProgramTreePlugin plugin;
 
-	private final static String NUMBER_OF_GROUPS = "NumberOfGroups";
-	private final static String GROUP_NAME = "GroupName";
+	private static final String NUMBER_OF_GROUPS = "NumberOfGroups";
+	private static final String GROUP_NAME = "GroupName";
 
-	private final static int DELAY = 500;
+	private static final int DELAY = 500;
 
 	public TreeViewProvider(String treeName, final ProgramTreePlugin plugin) {
 

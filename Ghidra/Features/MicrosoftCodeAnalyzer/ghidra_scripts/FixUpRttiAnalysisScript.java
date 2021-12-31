@@ -173,10 +173,7 @@ public class FixUpRttiAnalysisScript extends GhidraScript {
 
 		clearListing(address, address.add(sizeOfDt));
 		Data completeObjectLocator = createData(address, completeObjLocatorDataType);
-		if (completeObjectLocator == null) {
-			return null;
-		}
-		return completeObjectLocator;
+        return completeObjectLocator;
 	}
 
 	/**
@@ -237,10 +234,7 @@ public class FixUpRttiAnalysisScript extends GhidraScript {
 
 		clearListing(baseClassDescriptorAddress, baseClassDescriptorAddress.add(sizeOfDt));
 		Data baseClassDescArray = createData(baseClassDescriptorAddress, baseClassDescriptor);
-		if (baseClassDescArray == null) {
-			return null;
-		}
-		return baseClassDescArray;
+        return baseClassDescArray;
 	}
 
 	/**
@@ -306,31 +300,29 @@ public class FixUpRttiAnalysisScript extends GhidraScript {
 
 		List<Address> classHierarchyDescriptorAddresses = new ArrayList<Address>();
 
-		Iterator<Symbol> baseClassDescriptorIterator = baseClassDescriptors.iterator();
-		while (baseClassDescriptorIterator.hasNext()) {
-			monitor.checkCanceled();
-			Symbol symbol = baseClassDescriptorIterator.next();
-			Address classHierarchyDescriptorAddress = createClassHierarchyDescriptor(
-				symbol.getAddress().add(24), symbol.getParentNamespace());
+        for (Symbol baseClassDescriptor : baseClassDescriptors) {
+            monitor.checkCanceled();
+            Symbol symbol = baseClassDescriptor;
+            Address classHierarchyDescriptorAddress = createClassHierarchyDescriptor(
+                    symbol.getAddress().add(24), symbol.getParentNamespace());
 
-			if (classHierarchyDescriptorAddress != null &&
-				!classHierarchyDescriptorAddresses.contains(classHierarchyDescriptorAddress)) {
-				classHierarchyDescriptorAddresses.add(classHierarchyDescriptorAddress);
-			}
+            if (classHierarchyDescriptorAddress != null &&
+                    !classHierarchyDescriptorAddresses.contains(classHierarchyDescriptorAddress)) {
+                classHierarchyDescriptorAddresses.add(classHierarchyDescriptorAddress);
+            }
 
-		}
+        }
 
-		Iterator<Symbol> completeObjectLocatorIterator = completeObjectLocators.iterator();
-		while (completeObjectLocatorIterator.hasNext()) {
-			monitor.checkCanceled();
-			Symbol symbol = completeObjectLocatorIterator.next();
-			Address classHierarchyDescriptorAddress = createClassHierarchyDescriptor(
-				symbol.getAddress().add(16), symbol.getParentNamespace());
-			if (classHierarchyDescriptorAddress != null &&
-				!classHierarchyDescriptorAddresses.contains(classHierarchyDescriptorAddress)) {
-				classHierarchyDescriptorAddresses.add(classHierarchyDescriptorAddress);
-			}
-		}
+        for (Symbol completeObjectLocator : completeObjectLocators) {
+            monitor.checkCanceled();
+            Symbol symbol = completeObjectLocator;
+            Address classHierarchyDescriptorAddress = createClassHierarchyDescriptor(
+                    symbol.getAddress().add(16), symbol.getParentNamespace());
+            if (classHierarchyDescriptorAddress != null &&
+                    !classHierarchyDescriptorAddresses.contains(classHierarchyDescriptorAddress)) {
+                classHierarchyDescriptorAddresses.add(classHierarchyDescriptorAddress);
+            }
+        }
 
 		return classHierarchyDescriptorAddresses;
 
@@ -396,10 +388,7 @@ public class FixUpRttiAnalysisScript extends GhidraScript {
 			classHierarchyDescriptorAddress.add(sizeOfDt));
 
 		Data classHierarchyStructure = createData(classHierarchyDescriptorAddress, classHDatatype);
-		if (classHierarchyStructure == null) {
-			return null;
-		}
-		return classHierarchyStructure;
+        return classHierarchyStructure;
 	}
 
 	/**
@@ -417,46 +406,44 @@ public class FixUpRttiAnalysisScript extends GhidraScript {
 
 		List<Address> baseClassArrayAddresses = new ArrayList<Address>();
 
-		Iterator<Address> classHierarchyDescriptorIterator = classHierarchyDescriptors.iterator();
+        for (Address classHierarchyDescriptor : classHierarchyDescriptors) {
 
-		while (classHierarchyDescriptorIterator.hasNext()) {
+            monitor.checkCanceled();
 
-			monitor.checkCanceled();
+            Address classHierarchyDescriptorAddress = classHierarchyDescriptor;
+            Symbol classHierarchyDescriptorSymbol =
+                    symbolTable.getPrimarySymbol(classHierarchyDescriptorAddress);
+            Namespace classNamespace = classHierarchyDescriptorSymbol.getParentNamespace();
 
-			Address classHierarchyDescriptorAddress = classHierarchyDescriptorIterator.next();
-			Symbol classHierarchyDescriptorSymbol =
-				symbolTable.getPrimarySymbol(classHierarchyDescriptorAddress);
-			Namespace classNamespace = classHierarchyDescriptorSymbol.getParentNamespace();
+            int numBaseClasses = getInt(classHierarchyDescriptorAddress.add(8));
 
-			int numBaseClasses = getInt(classHierarchyDescriptorAddress.add(8));
+            Address baseClassArrayAddress =
+                    getReferencedAddress(classHierarchyDescriptorAddress.add(12));
 
-			Address baseClassArrayAddress =
-				getReferencedAddress(classHierarchyDescriptorAddress.add(12));
+            Data baseClassDescArray = getDataAt(baseClassArrayAddress);
 
-			Data baseClassDescArray = getDataAt(baseClassArrayAddress);
+            if (baseClassDescArray != null && baseClassDescArray.isArray()) {
+                baseClassArrayAddresses.add(baseClassArrayAddress);
+                continue;
+            }
 
-			if (baseClassDescArray != null && baseClassDescArray.isArray()) {
-				baseClassArrayAddresses.add(baseClassArrayAddress);
-				continue;
-			}
+            baseClassDescArray = createBaseClassArray(baseClassArrayAddress, numBaseClasses);
+            if (baseClassDescArray != null && baseClassDescArray.isArray()) {
+                Symbol primarySymbol = symbolTable.getPrimarySymbol(baseClassArrayAddress);
+                if (primarySymbol == null ||
+                        !primarySymbol.getName().contains(RTTI_BASE_CLASS_ARRAY_LABEL)) {
 
-			baseClassDescArray = createBaseClassArray(baseClassArrayAddress, numBaseClasses);
-			if (baseClassDescArray != null && baseClassDescArray.isArray()) {
-				Symbol primarySymbol = symbolTable.getPrimarySymbol(baseClassArrayAddress);
-				if (primarySymbol == null ||
-					!primarySymbol.getName().contains(RTTI_BASE_CLASS_ARRAY_LABEL)) {
+                    symbolTable.createLabel(baseClassArrayAddress, RTTI_BASE_CLASS_ARRAY_LABEL,
+                            classNamespace, SourceType.ANALYSIS);
+                }
+                baseClassArrayAddresses.add(baseClassArrayAddress);
+                createBaseClassDescriptors(baseClassArrayAddress, numBaseClasses, classNamespace);
+                continue;
+            }
 
-					symbolTable.createLabel(baseClassArrayAddress, RTTI_BASE_CLASS_ARRAY_LABEL,
-						classNamespace, SourceType.ANALYSIS);
-				}
-				baseClassArrayAddresses.add(baseClassArrayAddress);
-				createBaseClassDescriptors(baseClassArrayAddress, numBaseClasses, classNamespace);
-				continue;
-			}
-
-			println("Failed to create a baseClassDescArray structure at " +
-				baseClassArrayAddress.toString());
-		}
+            println("Failed to create a baseClassDescArray structure at " +
+                    baseClassArrayAddress.toString());
+        }
 		return baseClassArrayAddresses;
 	}
 
@@ -497,10 +484,7 @@ public class FixUpRttiAnalysisScript extends GhidraScript {
 		clearListing(baseClassArrayAddress, baseClassArrayAddress.add(numBaseClasses * sizeOfDt));
 		Data baseClassDescArray = createData(baseClassArrayAddress, baseClassDescArrayDT);
 
-		if (baseClassDescArray == null) {
-			return null;
-		}
-		return baseClassDescArray;
+        return baseClassDescArray;
 	}
 
 	/**
@@ -518,65 +502,64 @@ public class FixUpRttiAnalysisScript extends GhidraScript {
 
 		List<Symbol> vftables = new ArrayList<Symbol>();
 
-		Iterator<Symbol> iterator = completeObjectLocatorSymbols.iterator();
-		while (iterator.hasNext()) {
-			monitor.checkCanceled();
-			Symbol completeObjectLocatorSymbol = iterator.next();
+        for (Symbol objectLocatorSymbol : completeObjectLocatorSymbols) {
+            monitor.checkCanceled();
+            Symbol completeObjectLocatorSymbol = objectLocatorSymbol;
 
-			Address completeObjectLocatorAddress = completeObjectLocatorSymbol.getAddress();
+            Address completeObjectLocatorAddress = completeObjectLocatorSymbol.getAddress();
 
-			Namespace classNamespace = completeObjectLocatorSymbol.getParentNamespace();
-			if (classNamespace.equals(globalNamespace)) {
-				println("no class namespace for " + completeObjectLocatorAddress.toString());
-				continue;
-			}
+            Namespace classNamespace = completeObjectLocatorSymbol.getParentNamespace();
+            if (classNamespace.equals(globalNamespace)) {
+                println("no class namespace for " + completeObjectLocatorAddress.toString());
+                continue;
+            }
 
-			Reference[] referencesTo = getReferencesTo(completeObjectLocatorAddress);
-			if (referencesTo.length == 0) {
-				println("no refs to " + completeObjectLocatorAddress.toString());
-				continue;
-			}
+            Reference[] referencesTo = getReferencesTo(completeObjectLocatorAddress);
+            if (referencesTo.length == 0) {
+                println("no refs to " + completeObjectLocatorAddress.toString());
+                continue;
+            }
 
-			for (Reference refTo : referencesTo) {
-				Address vftableMetaPointer = refTo.getFromAddress();
-				if (vftableMetaPointer == null) {
-					println("can't retrieve meta address");
-					continue;
-				}
-				Address vftableAddress = vftableMetaPointer.add(defaultPointerSize);
-				if (vftableAddress == null) {
-					println("can't retrieve vftable address");
-					continue;
-				}
+            for (Reference refTo : referencesTo) {
+                Address vftableMetaPointer = refTo.getFromAddress();
+                if (vftableMetaPointer == null) {
+                    println("can't retrieve meta address");
+                    continue;
+                }
+                Address vftableAddress = vftableMetaPointer.add(defaultPointerSize);
+                if (vftableAddress == null) {
+                    println("can't retrieve vftable address");
+                    continue;
+                }
 
-				// if not created, create vftable meta pointer label
+                // if not created, create vftable meta pointer label
 
-				if (getGivenSymbol(vftableAddress, VFTABLE_META_PTR_LABEL,
-					classNamespace) == null) {
+                if (getGivenSymbol(vftableAddress, VFTABLE_META_PTR_LABEL,
+                        classNamespace) == null) {
 
-					symbolTable.createLabel(vftableMetaPointer, VFTABLE_META_PTR_LABEL,
-						classNamespace, SourceType.ANALYSIS);
-				}
+                    symbolTable.createLabel(vftableMetaPointer, VFTABLE_META_PTR_LABEL,
+                            classNamespace, SourceType.ANALYSIS);
+                }
 
-				// if not created, create vftable label
-				Symbol vftableSymbol =
-					getGivenSymbol(vftableAddress, VFTABLE_LABEL, classNamespace);
-				if (vftableSymbol == null) {
+                // if not created, create vftable label
+                Symbol vftableSymbol =
+                        getGivenSymbol(vftableAddress, VFTABLE_LABEL, classNamespace);
+                if (vftableSymbol == null) {
 
-					vftableSymbol = symbolTable.createLabel(vftableAddress, VFTABLE_LABEL,
-						classNamespace, SourceType.ANALYSIS);
+                    vftableSymbol = symbolTable.createLabel(vftableAddress, VFTABLE_LABEL,
+                            classNamespace, SourceType.ANALYSIS);
 
-					if (vftableSymbol == null) {
-						continue;
-					}
-				}
+                    if (vftableSymbol == null) {
+                        continue;
+                    }
+                }
 
-				if (!vftables.contains(vftableSymbol)) {
-					vftables.add(vftableSymbol);
-				}
+                if (!vftables.contains(vftableSymbol)) {
+                    vftables.add(vftableSymbol);
+                }
 
-			}
-		}
+            }
+        }
 		return vftables;
 	}
 

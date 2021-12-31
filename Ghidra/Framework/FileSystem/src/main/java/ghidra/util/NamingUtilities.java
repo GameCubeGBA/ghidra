@@ -28,11 +28,11 @@ public final class NamingUtilities {
 	/**
 	 * Max length for a name.
 	 */
-	public final static int MAX_NAME_LENGTH = 60;
+    public static final int MAX_NAME_LENGTH = 60;
 
-	private final static char MANGLE_CHAR = '_';
+	private static final char MANGLE_CHAR = '_';
 
-	private final static Set<Character> VALID_NAME_SET = CollectionUtils.asSet('.', '-', ' ', '_');
+	private static final Set<Character> VALID_NAME_SET = CollectionUtils.asSet('.', '-', ' ', '_');
 
 	private NamingUtilities() {
 	}

@@ -223,7 +223,7 @@ public class AutoAnalysisManager implements DomainObjectListener, DomainObjectCl
 		 *then inherit it's properties.
 		 */
 		Options options = program.getOptions(Program.ANALYSIS_PROPERTIES);
-		analyzer.optionsChanged(options.getOptions(analyzer.getName()), getProgram());
+		analyzer.optionsChanged(options.getOptions(analyzer.getName()), program);
 
 		BackgroundCommand cmd = new OneShotAnalysisCommand(analyzer, set, log);
 		schedule(cmd, analyzer.getPriority().priority());
@@ -958,16 +958,13 @@ public class AutoAnalysisManager implements DomainObjectListener, DomainObjectCl
 		}
 
 		PluginTool anyTool = null;
-		Iterator<PluginTool> iterator = toolSet.iterator();
-		while (iterator.hasNext()) {
-			PluginTool tool = iterator.next();
-
-			anyTool = tool;
-			JFrame toolFrame = tool.getToolFrame();
-			if (toolFrame != null && toolFrame.isActive()) {
-				return tool;
-			}
-		}
+        for (PluginTool tool : toolSet) {
+            anyTool = tool;
+            JFrame toolFrame = tool.getToolFrame();
+            if (toolFrame != null && toolFrame.isActive()) {
+                return tool;
+            }
+        }
 
 		return anyTool;
 	}

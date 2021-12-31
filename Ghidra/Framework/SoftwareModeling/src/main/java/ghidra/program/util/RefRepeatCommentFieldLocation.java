@@ -57,8 +57,7 @@ public class RefRepeatCommentFieldLocation extends CommentFieldLocation {
 	 * an end-of-line field location from XML.
 	 */
 	public RefRepeatCommentFieldLocation() {
-		super();
-	}
+    }
 
 	public Address getReferencedRepeatableAddress() {
 		return refRepeatAddress;
@@ -85,11 +84,8 @@ public class RefRepeatCommentFieldLocation extends CommentFieldLocation {
 		RefRepeatCommentFieldLocation other = (RefRepeatCommentFieldLocation) obj;
 		if (currentCommentRow != other.currentCommentRow)
 			return false;
-		if (!Objects.equals(refRepeatAddress, other.refRepeatAddress)) {
-			return false;
-		}
-		return true;
-	}
+        return Objects.equals(refRepeatAddress, other.refRepeatAddress);
+    }
 
 	@Override
 	public void restoreState(Program p, SaveState obj) {

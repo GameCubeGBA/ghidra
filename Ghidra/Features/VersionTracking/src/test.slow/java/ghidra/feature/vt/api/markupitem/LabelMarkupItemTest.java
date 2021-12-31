@@ -39,8 +39,7 @@ import ghidra.util.exception.InvalidInputException;
 public class LabelMarkupItemTest extends AbstractVTMarkupItemTest {
 
 	public LabelMarkupItemTest() {
-		super();
-	}
+    }
 
 	@Test
 	public void testFindAndApplyMarkupItem_Add_MultipleSourceLabel_WithNoExistingDestinationLabels()

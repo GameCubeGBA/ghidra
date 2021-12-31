@@ -59,13 +59,13 @@ abstract class PseudoCodeUnit implements CodeUnit {
 	protected Program program;
 	protected int length;
 
-	protected final static Address[] emptyAddrArray = {};
+	protected static final Address[] emptyAddrArray = {};
 
 	protected int hash;
 	protected byte[] bytes;
 	protected boolean isBigEndian;
 
-	protected final static Reference[] emptyMemRefs = {};
+	protected static final Reference[] emptyMemRefs = {};
 
 	protected Map<Integer, String> comments = new HashMap<>();
 
@@ -550,7 +550,7 @@ abstract class PseudoCodeUnit implements CodeUnit {
 	public boolean isSuccessor(CodeUnit codeUnit) {
 		Address min = codeUnit.getMinAddress();
 
-		return this.getMaxAddress().isSuccessor(min);
+		return this.maxAddress.isSuccessor(min);
 	}
 
 	@Override
@@ -652,7 +652,7 @@ abstract class PseudoCodeUnit implements CodeUnit {
 	 */
 	@Override
 	public boolean contains(Address testAddr) {
-		Address endAddr = address.addWrap(getLength() - 1);
+		Address endAddr = address.addWrap(length - 1);
 		return address.compareTo(testAddr) <= 0 && testAddr.compareTo(endAddr) <= 0;
 	}
 

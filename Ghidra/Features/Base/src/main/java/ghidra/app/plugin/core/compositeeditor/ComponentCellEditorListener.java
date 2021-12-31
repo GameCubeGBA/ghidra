@@ -21,10 +21,10 @@ package ghidra.app.plugin.core.compositeeditor;
  * to the panel that it should try to stop editing the current cell and move to the indicated cell.
  */
 interface ComponentCellEditorListener {
-    static int NEXT = 1;
-    static int PREVIOUS = 2;
-    static int UP = 3;
-    static int DOWN = 4;
+    int NEXT = 1;
+    int PREVIOUS = 2;
+    int UP = 3;
+    int DOWN = 4;
     
     void moveCellEditor(int direction, String value);
     

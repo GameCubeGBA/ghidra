@@ -56,8 +56,7 @@ public class EquateMergeManager2Test extends AbstractListingMergeManagerTest {
 	 * @param arg0
 	 */
 	public EquateMergeManager2Test() {
-		super();
-	}
+    }
 
 	@Test
 	public void testAddDiffPickLatest() throws Exception {

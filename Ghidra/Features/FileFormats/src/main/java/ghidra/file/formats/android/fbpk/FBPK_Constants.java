@@ -20,15 +20,15 @@ import ghidra.program.model.mem.Memory;
 
 public final class FBPK_Constants {
 
-	public final static String FBPK = "FBPK";
-	public final static String FBPT = "FBPT";
-	public final static String PARTITION_TABLE = "partition table";
-	public final static String LAST_PARTITION_ENTRY = "last_parti";
+	public static final String FBPK = "FBPK";
+	public static final String FBPT = "FBPT";
+	public static final String PARTITION_TABLE = "partition table";
+	public static final String LAST_PARTITION_ENTRY = "last_parti";
 
-	public final static int PARTITION_TYPE_DIRECTORY = 0;
-	public final static int PARTITION_TYPE_FILE = 1;
-	public final static int NAME_MAX_LENGTH = 36;
-	public final static int VERSION_MAX_LENGTH = 68;
+	public static final int PARTITION_TYPE_DIRECTORY = 0;
+	public static final int PARTITION_TYPE_FILE = 1;
+	public static final int NAME_MAX_LENGTH = 36;
+	public static final int VERSION_MAX_LENGTH = 68;
 
 	public static boolean isFBPK(Program program) {
 		try {

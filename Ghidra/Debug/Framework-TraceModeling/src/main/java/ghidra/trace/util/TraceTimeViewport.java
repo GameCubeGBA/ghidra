@@ -27,13 +27,13 @@ import ghidra.program.model.address.*;
  */
 public interface TraceTimeViewport {
 
-	public interface Occlusion<T> {
+	interface Occlusion<T> {
 		boolean occluded(T object, AddressRange range, Range<Long> span);
 
 		void remove(T object, AddressSet remains, Range<Long> span);
 	}
 
-	public interface QueryOcclusion<T> extends Occlusion<T> {
+	interface QueryOcclusion<T> extends Occlusion<T> {
 		@Override
 		default boolean occluded(T object, AddressRange range, Range<Long> span) {
 			for (T found : query(range, span)) {
@@ -69,7 +69,7 @@ public interface TraceTimeViewport {
 		void removeItem(AddressSet remains, T t);
 	}
 
-	public interface RangeQueryOcclusion<T> extends QueryOcclusion<T> {
+	interface RangeQueryOcclusion<T> extends QueryOcclusion<T> {
 		@Override
 		default boolean itemOccludes(AddressRange range, T t) {
 			return range(t).intersects(range);
@@ -83,7 +83,7 @@ public interface TraceTimeViewport {
 		AddressRange range(T t);
 	}
 
-	public interface SetQueryOcclusion<T> extends QueryOcclusion<T> {
+	interface SetQueryOcclusion<T> extends QueryOcclusion<T> {
 		@Override
 		default boolean itemOccludes(AddressRange range, T t) {
 			return set(t).intersects(range.getMinAddress(), range.getMaxAddress());

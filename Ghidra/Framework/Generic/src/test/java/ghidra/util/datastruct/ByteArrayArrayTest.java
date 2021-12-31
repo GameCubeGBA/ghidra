@@ -37,7 +37,6 @@ public class ByteArrayArrayTest extends AbstractGenericTest {
 
     /** Creates new ArrayArrayTest */
     public ByteArrayArrayTest() {
-        super();
     }
 @Test
     public void testSimpleGetPut() {

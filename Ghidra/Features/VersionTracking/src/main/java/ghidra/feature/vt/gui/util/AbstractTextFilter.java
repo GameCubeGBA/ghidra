@@ -154,7 +154,7 @@ public abstract class AbstractTextFilter<T> extends Filter<T> {
 
 	protected boolean passesNameFilterImpl(VTAssociation association) {
 		String filterText = getTextFieldText();
-		if (filterText == null || filterText.trim().length() == 0) {
+		if (filterText == null || filterText.trim().isEmpty()) {
 			return true; // no text for this filter
 		}
 
@@ -170,11 +170,8 @@ public abstract class AbstractTextFilter<T> extends Filter<T> {
 
 		address = association.getDestinationAddress();
 		symbolText = getSymbolText(address);
-		if (symbolText.toLowerCase().contains(filterText.toLowerCase())) {
-			return true;
-		}
-		return false;
-	}
+        return symbolText.toLowerCase().contains(filterText.toLowerCase());
+    }
 
 	protected String getSymbolText(Address address) {
 		VTSession session = controller.getSession();

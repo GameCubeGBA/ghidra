@@ -268,7 +268,7 @@ public class FillOutStructureCmd extends BackgroundCommand {
 	private void pushIntoCalls() {
 		AddressSet doneSet = new AddressSet();
 
-		while (addressToCallInputMap.size() > 0) {
+		while (!addressToCallInputMap.isEmpty()) {
 			currentCallDepth += 1;
 			if (currentCallDepth > maxCallDepth) {
 				return;
@@ -276,21 +276,18 @@ public class FillOutStructureCmd extends BackgroundCommand {
 			HashMap<Address, Address> savedList = addressToCallInputMap;
 			addressToCallInputMap = new HashMap<>();
 			Set<Address> keys = savedList.keySet();
-			Iterator<Address> keyIter = keys.iterator();
-			while (keyIter.hasNext()) {
-				Address addr = keyIter.next();
-
-				if (doneSet.contains(addr)) {
-					continue;
-				}
-				doneSet.addRange(addr, addr);
-				Function func = currentProgram.getFunctionManager().getFunctionAt(addr);
-				Address storageAddr = savedList.get(addr);
-				HighVariable paramHighVar = computeHighVariable(storageAddr, func);
-				if (paramHighVar != null) {
-					fillOutStructureDef(paramHighVar);
-				}
-			}
+            for (Address addr : keys) {
+                if (doneSet.contains(addr)) {
+                    continue;
+                }
+                doneSet.addRange(addr, addr);
+                Function func = currentProgram.getFunctionManager().getFunctionAt(addr);
+                Address storageAddr = savedList.get(addr);
+                HighVariable paramHighVar = computeHighVariable(storageAddr, func);
+                if (paramHighVar != null) {
+                    fillOutStructureDef(paramHighVar);
+                }
+            }
 		}
 	}
 
@@ -563,11 +560,8 @@ public class FillOutStructureCmd extends BackgroundCommand {
 		if (offset < 0) {
 			return false; // offsets shouldn't be negative
 		}
-		if (offset > 0x1000) {
-			return false; // Arbitrary size cut-off to prevent creating huge structures
-		}
-		return true;
-	}
+        return offset <= 0x1000; // Arbitrary size cut-off to prevent creating huge structures
+    }
 
 	/**
 	 * Get the data-type associated with a Varnode.  If the Varnode is produce by a CAST p-code
@@ -770,7 +764,7 @@ public class FillOutStructureCmd extends BackgroundCommand {
 	/**
 	 * Class to create pair between an offset and its related PcodeOp
 	 */
-	static public class OffsetPcodeOpPair {
+    public static class OffsetPcodeOpPair {
 
 		private Long offset;
 		private PcodeOp pcodeOp;

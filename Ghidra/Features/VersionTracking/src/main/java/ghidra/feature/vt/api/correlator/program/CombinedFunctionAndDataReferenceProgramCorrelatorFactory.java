@@ -28,8 +28,7 @@ public class CombinedFunctionAndDataReferenceProgramCorrelatorFactory
 		extends VTAbstractReferenceProgramCorrelatorFactory {
 
 	public CombinedFunctionAndDataReferenceProgramCorrelatorFactory() {
-		super();
-		setName("Combined Function and Data Reference Match");
+        setName("Combined Function and Data Reference Match");
 		correlatorDescription =
 			"Matches functions based on the accepted data and function matches they have in common.";
 

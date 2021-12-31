@@ -273,11 +273,11 @@ public class ProgramMergeFilter {
 	 */
 	public boolean isSet() {
 		int num = filterFlags.length;
-		for (int i = 0; i < num; i++) {
-			if (filterFlags[i] != IGNORE) {
-				return true;
-			}
-		}
+        for (int filterFlag : filterFlags) {
+            if (filterFlag != IGNORE) {
+                return true;
+            }
+        }
 		return false;
 	}
 
@@ -291,11 +291,8 @@ public class ProgramMergeFilter {
 	 * @return true if the type is a valid merge difference type(s).
 	 */
 	private boolean validateType(int type) {
-		if ((type >= 0) && (type < Math.pow(2, (NUM_PRIMARY_TYPES)))) {
-			return true;
-		}
-		return false;
-	}
+        return (type >= 0) && (type < Math.pow(2, (NUM_PRIMARY_TYPES)));
+    }
 
 	/** validateFilter determines whether or not the filter is one of our valid
 	 *  predefiend values.
@@ -365,7 +362,7 @@ public class ProgramMergeFilter {
 	 * @param filter IGNORE, REPLACE, or MERGE. Indicates whether to include none, 
 	 * one, or both programs' differences of the specified type.
 	 */
-	synchronized public void setFilter(int type, int filter) {
+    public synchronized void setFilter(int type, int filter) {
 		// Validate the filter.
 		if (!validateType(type)) {
 			Msg.error(this, "setFilter: Invalid type.");

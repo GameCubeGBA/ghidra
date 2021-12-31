@@ -33,7 +33,7 @@ public interface ByteStreamCharMatcher {
 	 * @return true if the given byte triggered a sequence match.  Note that this byte may not be
 	 * a part of the recognized sequence. 
 	 */
-	public boolean add(byte b);
+    boolean add(byte b);
 
 	/**
 	 * Tells the matcher that there are no more contiguous bytes.  If the current state of the 
@@ -42,17 +42,17 @@ public interface ByteStreamCharMatcher {
 	 * 
 	 * @return true if there is a valid sequence at the end of the stream. 
 	 */
-	public boolean endSequence();
+    boolean endSequence();
 
 	/**
 	 * Returns the currently recognized sequence which only exists immediately after an add or
 	 * end sequence is called with a return value of true.
 	 * @return
 	 */
-	public Sequence getSequence();
+    Sequence getSequence();
 
 	/**
 	 * Resets the internal state of this ByteMatcher so that it can be reused against another byte stream.
 	 */
-	public void reset();
+    void reset();
 }

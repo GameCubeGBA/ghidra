@@ -33,7 +33,7 @@ import ghidra.program.util.ProgramSelection;
  */
 public class CompareFunctionsFromListingAction extends CompareFunctionsAction {
 
-	private final static String FUNCTION_MENU_SUBGROUP = "Function";
+	private static final String FUNCTION_MENU_SUBGROUP = "Function";
 
 	/**
 	 * Constructor

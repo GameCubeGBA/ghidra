@@ -54,8 +54,8 @@ import resources.ResourceManager;
  * Helper class to manage actions on the Tool menu.
  */
 class ToolActionManager implements ToolChestChangeListener {
-	private final static int TYPICAL_NUM_TOOLS_IN_TOOLCHEST = 5;
-	private final static int NEWTOOL_ACCELERATOR = KeyEvent.VK_T;
+	private static final int TYPICAL_NUM_TOOLS_IN_TOOLCHEST = 5;
+	private static final int NEWTOOL_ACCELERATOR = KeyEvent.VK_T;
 
 	private static final String MENU_ITEM_CREATE_TOOL = "&Create Tool..."; // Group: ATools	
 	private static final String MENU_ITEM_RUN_TOOL = "&Run Tool"; // Group: BTools	
@@ -240,12 +240,10 @@ class ToolActionManager implements ToolChestChangeListener {
 	}
 
 	private void enableActions(Map<String, DockingAction> map, boolean enabled) {
-		Iterator<String> iter = map.keySet().iterator();
-		while (iter.hasNext()) {
-			String name = iter.next();
-			DockingAction action = map.get(name);
-			action.setEnabled(enabled);
-		}
+        for (String name : map.keySet()) {
+            DockingAction action = map.get(name);
+            action.setEnabled(enabled);
+        }
 	}
 
 	private void populateToolMenus(Project activeProject) {
@@ -271,12 +269,10 @@ class ToolActionManager implements ToolChestChangeListener {
 	}
 
 	private void removeActions(Map<String, DockingAction> map) {
-		Iterator<String> iter = map.keySet().iterator();
-		while (iter.hasNext()) {
-			String toolName = iter.next();
-			DockingAction action = map.get(toolName);
-			tool.removeAction(action);
-		}
+        for (String toolName : map.keySet()) {
+            DockingAction action = map.get(toolName);
+            tool.removeAction(action);
+        }
 		map.clear();
 	}
 
@@ -370,7 +366,7 @@ class ToolActionManager implements ToolChestChangeListener {
 
 		// create default disable menu items if the number of tools
 		// in toolchest is now zero
-		if (runToolActionMap.size() == 0) {
+		if (runToolActionMap.isEmpty()) {
 			createPlaceHolderActions();
 		}
 	}

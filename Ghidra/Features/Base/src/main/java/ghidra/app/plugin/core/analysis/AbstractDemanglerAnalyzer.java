@@ -186,10 +186,8 @@ public abstract class AbstractDemanglerAnalyzer extends AbstractAnalyzer {
 		// need to be broken
 		if (symbol.getSymbolType() == SymbolType.FUNCTION) {
 			Function function = (Function) symbol.getObject();
-			if (!function.isThunk() &&
-				function.getSignatureSource().isHigherPriorityThan(SourceType.ANALYSIS)) {
-				return true;
-			}
+            return !function.isThunk() &&
+                    function.getSignatureSource().isHigherPriorityThan(SourceType.ANALYSIS);
 		}
 
 		return false;

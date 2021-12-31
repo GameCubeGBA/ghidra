@@ -48,9 +48,9 @@ import resources.ResourceManager;
 class PluginInstallerTableModel
 		extends ThreadedTableModel<PluginDescription, List<PluginDescription>> {
 
-	final static int INSTALLED_COL = 0;
-	final static int STATUS_COL = 1;
-	final static int NAME_COL = 2;
+	static final int INSTALLED_COL = 0;
+	static final int STATUS_COL = 1;
+	static final int NAME_COL = 2;
 
 	public static final Icon EXPERIMENTAL_ICON = ResourceManager.loadImage("images/warning.png");
 	public static final Icon DEV_ICON = Icons.STRONG_WARNING_ICON;

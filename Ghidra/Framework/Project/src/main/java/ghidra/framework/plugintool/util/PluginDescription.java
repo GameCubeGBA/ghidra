@@ -228,11 +228,8 @@ public class PluginDescription implements Comparable<PluginDescription> {
 			return false;
 		}
 		PluginDescription other = (PluginDescription) obj;
-		if (!Objects.equals(pluginClass, other.pluginClass)) {
-			return false;
-		}
-		return true;
-	}
+        return Objects.equals(pluginClass, other.pluginClass);
+    }
 
 	@Override
 	public String toString() {

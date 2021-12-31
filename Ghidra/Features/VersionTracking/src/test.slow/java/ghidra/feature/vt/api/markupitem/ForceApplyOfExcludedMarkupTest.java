@@ -64,8 +64,7 @@ public class ForceApplyOfExcludedMarkupTest extends AbstractFunctionSignatureMar
 	//  call_Strncpy 0x00411ab0   FUN... 0x00411a90    3 params w/ matching types
 
 	public ForceApplyOfExcludedMarkupTest() {
-		super();
-	}
+    }
 
 	@Test
 	public void testForceApplyForExcludedFunctionName() throws Exception {
@@ -219,7 +218,7 @@ public class ForceApplyOfExcludedMarkupTest extends AbstractFunctionSignatureMar
 		// Test Apply of Comment Markup
 		List<VTMarkupItem> commentMarkupItems =
 			getSpecificTypeOfMarkup(commentMarkupClass, testMatch, true);
-		assertTrue(commentMarkupItems.size() > 0);
+		assertTrue(!commentMarkupItems.isEmpty());
 		forceMarkup(commentMarkupItems);
 
 		// Verify the markup was applied.

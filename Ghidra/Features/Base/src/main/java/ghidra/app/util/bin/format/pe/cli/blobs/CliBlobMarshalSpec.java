@@ -165,7 +165,7 @@ public class CliBlobMarshalSpec extends CliBlob {
 
 	public static class CliNativeTypeDataType extends EnumDataType {
 
-		public final static CliNativeTypeDataType dataType = new CliNativeTypeDataType();
+		public static final CliNativeTypeDataType dataType = new CliNativeTypeDataType();
 
 		public CliNativeTypeDataType() {
 			super(new CategoryPath(PATH), "NativeType", 1);
@@ -178,7 +178,7 @@ public class CliBlobMarshalSpec extends CliBlob {
 
 	public static class CliSafeArrayElemTypeDataType extends EnumDataType {
 
-		public final static CliNativeTypeDataType dataType = new CliNativeTypeDataType();
+		public static final CliNativeTypeDataType dataType = new CliNativeTypeDataType();
 
 		public CliSafeArrayElemTypeDataType() {
 			super(new CategoryPath(PATH), "ElemType", 1);

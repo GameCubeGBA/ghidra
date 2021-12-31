@@ -128,11 +128,11 @@ import resources.ResourceManager;
 public class FrontEndPlugin extends Plugin
 		implements FrontEndService, RemoteAdapterListener, ProgramaticUseOnly {
 
-	private final static String TITLE_PREFIX = "Ghidra: ";
-	private final static String EXPORT_TOOL_ACTION_NAME = "Export Tool";
-	private final static String DELETE_TOOL_ACTION_NAME = "Delete Tool";
-	private final static String CLOSE_TOOL_ACTION_NAME = "Close Tool";
-	private final static String PROPERTIES_ACTION_NAME = "Configure Plugins";
+	private static final String TITLE_PREFIX = "Ghidra: ";
+	private static final String EXPORT_TOOL_ACTION_NAME = "Export Tool";
+	private static final String DELETE_TOOL_ACTION_NAME = "Delete Tool";
+	private static final String CLOSE_TOOL_ACTION_NAME = "Close Tool";
+	private static final String PROPERTIES_ACTION_NAME = "Configure Plugins";
 
 	private JPanel mainGuiPanel;
 	private ProjectToolBar toolBar;
@@ -816,11 +816,8 @@ public class FrontEndPlugin extends Plugin
 				if (model.isDirectory(pathname)) {
 					return !lowerCaseName.endsWith(ProjectLocator.getProjectDirExtension());
 				}
-				if (lowerCaseName.endsWith(ProjectLocator.getProjectExtension())) {
-					return true;
-				}
-				return false;
-			}
+                return lowerCaseName.endsWith(ProjectLocator.getProjectExtension());
+            }
 		});
 		fileChooser.rescanCurrentDirectory();
 		return fileChooser;

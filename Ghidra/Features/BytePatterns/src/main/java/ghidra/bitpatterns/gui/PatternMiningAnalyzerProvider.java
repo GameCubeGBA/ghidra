@@ -88,11 +88,8 @@ public class PatternMiningAnalyzerProvider extends ByteSequenceAnalyzerProvider 
 				if (lastSelectedObjects == null) {
 					return false;
 				}
-				if (lastSelectedObjects.isEmpty()) {
-					return false;
-				}
-				return true;
-			}
+                return !lastSelectedObjects.isEmpty();
+            }
 
 			@Override
 			public boolean isAddToPopup(ActionContext context) {

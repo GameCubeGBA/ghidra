@@ -40,8 +40,7 @@ public class GhidraTableFilterTest extends AbstractGhidraHeadedIntegrationTest {
 	private DockingWindowManager winMgr;
 
 	public GhidraTableFilterTest() {
-		super();
-	}
+    }
 
 	@Before
 	public void setUp() throws Exception {

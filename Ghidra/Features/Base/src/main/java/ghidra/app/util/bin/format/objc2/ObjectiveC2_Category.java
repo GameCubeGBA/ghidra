@@ -26,7 +26,7 @@ import ghidra.program.model.symbol.Namespace;
 import ghidra.util.exception.DuplicateNameException;
 
 public class ObjectiveC2_Category implements StructConverter {
-	public final static String NAME = "category_t";
+	public static final String NAME = "category_t";
 
 	private ObjectiveC2_State _state;
 	private long _index;
@@ -172,7 +172,7 @@ public class ObjectiveC2_Category implements StructConverter {
 	}
 
 	public void applyTo() throws Exception {
-		Address address = ObjectiveC1_Utilities.toAddress(_state.program, getIndex());
+		Address address = ObjectiveC1_Utilities.toAddress(_state.program, _index);
 
 		try {
 			ObjectiveC1_Utilities.applyData(_state.program, toDataType(), address);
@@ -181,7 +181,7 @@ public class ObjectiveC2_Category implements StructConverter {
 
 		try {
 			Namespace categoryNamespace = ObjectiveC1_Utilities.createNamespace(_state.program, ObjectiveC1_Constants.NAMESPACE, ObjectiveC2_Category.NAME);
-			ObjectiveC1_Utilities.createSymbol(_state.program, categoryNamespace, getName(), address);
+			ObjectiveC1_Utilities.createSymbol(_state.program, categoryNamespace, name, address);
 		}
 		catch (Exception e) {}
 

@@ -46,6 +46,6 @@ public interface MarginProvider {
 	 * @param x the horizontal coordinate.
 	 * @param y the vertical coordinate.
 	 */
-	public MarkerLocation getMarkerLocation(int x, int y);
+    MarkerLocation getMarkerLocation(int x, int y);
 
 }

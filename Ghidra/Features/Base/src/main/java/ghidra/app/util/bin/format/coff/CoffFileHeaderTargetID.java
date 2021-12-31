@@ -18,11 +18,11 @@ package ghidra.app.util.bin.format.coff;
 
 public final class CoffFileHeaderTargetID {
 
-	public final static int TIC2xx_TARGET_ID      = 0x0092;
-	public final static int  TIC5X_TARGET_ID      = 0x0092;
-	public final static int  TIC80_TARGET_ID      = 0x0095;
-	public final static int TIC54X_TARGET_ID      = 0x0098;
-	public final static int TIC64X_TARGET_ID      = 0x0099;
-	public final static int TIC55X_TARGET_ID      = 0x009c;
-	public final static int TIC27X_TARGET_ID      = 0x009d;
+	public static final int TIC2xx_TARGET_ID      = 0x0092;
+	public static final int  TIC5X_TARGET_ID      = 0x0092;
+	public static final int  TIC80_TARGET_ID      = 0x0095;
+	public static final int TIC54X_TARGET_ID      = 0x0098;
+	public static final int TIC64X_TARGET_ID      = 0x0099;
+	public static final int TIC55X_TARGET_ID      = 0x009c;
+	public static final int TIC27X_TARGET_ID      = 0x009d;
 }

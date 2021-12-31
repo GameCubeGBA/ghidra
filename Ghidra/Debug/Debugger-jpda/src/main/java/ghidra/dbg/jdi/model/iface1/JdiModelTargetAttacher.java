@@ -31,9 +31,9 @@ import ghidra.dbg.target.TargetAttacher;
 public interface JdiModelTargetAttacher extends JdiModelTargetObject, TargetAttacher {
 
 	@Override
-	public CompletableFuture<Void> attach(TargetAttachable attachable);
+    CompletableFuture<Void> attach(TargetAttachable attachable);
 
 	@Override
-	public CompletableFuture<Void> attach(long pid);
+    CompletableFuture<Void> attach(long pid);
 
 }

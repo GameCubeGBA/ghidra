@@ -32,12 +32,12 @@ import resources.ResourceManager;
  */
 public class DuplicateAction extends CompositeEditorTableAction {
 
-	private final static ImageIcon ICON = ResourceManager.loadImage("images/DuplicateData.png");
-	public final static String ACTION_NAME = "Duplicate Component";
-	private final static String GROUP_NAME = COMPONENT_ACTION_GROUP;
-	private final static String DESCRIPTION = "Duplicate the selected component";
-	private final static String[] POPUP_PATH = new String[] { ACTION_NAME };
-	private final static KeyStroke KEY_STROKE =
+	private static final ImageIcon ICON = ResourceManager.loadImage("images/DuplicateData.png");
+	public static final String ACTION_NAME = "Duplicate Component";
+	private static final String GROUP_NAME = COMPONENT_ACTION_GROUP;
+	private static final String DESCRIPTION = "Duplicate the selected component";
+	private static final String[] POPUP_PATH = new String[] { ACTION_NAME };
+	private static final KeyStroke KEY_STROKE =
 		KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.ALT_DOWN_MASK);
 
 	public DuplicateAction(CompositeEditorProvider provider) {

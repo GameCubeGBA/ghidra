@@ -27,8 +27,8 @@ public class RedBlackKeySet implements ShortKeySet, Serializable {
 
 	private transient RBNode root;
 	private transient int size;
-	private static final byte RED = (byte) 0;
-	private static final byte BLACK = (byte) 1;
+	private static final byte RED = 0;
+	private static final byte BLACK = 1;
 	private int maxKey;
 
 	// RedBlack Tree node

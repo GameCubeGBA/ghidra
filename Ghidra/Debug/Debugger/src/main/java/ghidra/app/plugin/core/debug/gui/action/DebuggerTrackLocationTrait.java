@@ -184,11 +184,8 @@ public class DebuggerTrackLocationTrait {
 		if (!Objects.equals(a.getThread(), b.getThread())) {
 			return false;
 		}
-		if (!Objects.equals(a.getFrame(), b.getFrame())) {
-			return false;
-		}
-		return true;
-	}
+        return Objects.equals(a.getFrame(), b.getFrame());
+    }
 
 	public void setSpec(LocationTrackingSpec spec) {
 		// TODO: What if action == null?

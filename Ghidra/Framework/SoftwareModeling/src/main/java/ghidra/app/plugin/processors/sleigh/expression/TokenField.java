@@ -60,11 +60,8 @@ public class TokenField extends PatternValue {
 			return false;
 		}
 		TokenField that = (TokenField) obj;
-		if ((this.bitstart != that.bitstart) || (this.bitend != that.bitend) || (this.signbit != that.signbit) || (this.bigendian != that.bigendian)) {
-			return false;
-		}
-		return true;
-	}
+        return (this.bitstart == that.bitstart) && (this.bitend == that.bitend) && (this.signbit == that.signbit) && (this.bigendian == that.bigendian);
+    }
 
 	/* (non-Javadoc)
 	 * @see ghidra.app.plugin.processors.sleigh.expression.PatternValue#minValue()

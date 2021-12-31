@@ -211,7 +211,7 @@ public class FGEdgeImpl implements FGEdge {
 
 	@Override
 	public String toString() {
-		return "(" + getStart() + " -> " + getEnd() + ")";
+		return "(" + startVertex + " -> " + destinationVertex + ")";
 	}
 
 }

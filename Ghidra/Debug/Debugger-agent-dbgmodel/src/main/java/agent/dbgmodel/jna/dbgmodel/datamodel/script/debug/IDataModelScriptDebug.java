@@ -26,7 +26,7 @@ import agent.dbgmodel.jna.dbgmodel.IUnknownEx;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IDataModelScriptDebug extends IUnknownEx {
-	final IID IID_IDATA_MODEL_SCRIPT_DEBUG = new IID("DE8E0945-9750-4471-AB76-A8F79D6EC350");
+	IID IID_IDATA_MODEL_SCRIPT_DEBUG = new IID("DE8E0945-9750-4471-AB76-A8F79D6EC350");
 
 	enum VTIndices implements VTableIndex {
 		GET_DEBUG_STATE, //

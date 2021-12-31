@@ -23,7 +23,7 @@ import java.io.Serializable;
  * 
  */
 public class BooleanArray implements Array, Serializable {
-    private final static long serialVersionUID = 1;
+    private static final long serialVersionUID = 1;
     private static final int MIN_SIZE = 4;
     private static final int[]  ONBITS = {0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80 };
     private static final int[] OFFBITS = {0xFE, 0xFD, 0xFB, 0xF7, 0xEF, 0xDF, 0xBF, 0x7F };

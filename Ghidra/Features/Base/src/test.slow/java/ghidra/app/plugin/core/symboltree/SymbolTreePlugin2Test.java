@@ -226,7 +226,7 @@ public class SymbolTreePlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 		for (int i = 0; i < count - 1; i++) {
 			GTreeNode n = ghidraNode.getChild(i);
 			Symbol s = ((SymbolNode) n).getSymbol();
-			assertFalse(s.getName().equals("AnotherLocal"));
+			assertFalse("AnotherLocal".equals(s.getName()));
 		}
 
 		// test undo/redo
@@ -239,7 +239,7 @@ public class SymbolTreePlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 		for (int i = 0; i < count - 1; i++) {
 			GTreeNode n = ghidraNode.getChild(i);
 			Symbol s = ((SymbolNode) n).getSymbol();
-			if (s.getName().equals("AnotherLocal")) {
+			if ("AnotherLocal".equals(s.getName())) {
 				found = true;
 				break;
 			}

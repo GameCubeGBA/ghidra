@@ -20,7 +20,7 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.scalar.Scalar;
 
 public class ConvertToUnsignedHexAction extends AbstractConvertAction {
-	public final static String ACTION_NAME = "Convert To Unsigned Hex";
+	public static final String ACTION_NAME = "Convert To Unsigned Hex";
 
 	public ConvertToUnsignedHexAction(EquatePlugin plugin) {
 		super(plugin, ACTION_NAME, false);

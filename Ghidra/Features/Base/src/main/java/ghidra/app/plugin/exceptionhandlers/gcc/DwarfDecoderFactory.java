@@ -98,7 +98,7 @@ public class DwarfDecoderFactory {
 		}
 	}
 
-	private static abstract class AbstractSignedDwarEHfDecoder extends AbstractDwarfEHDecoder {
+	private abstract static class AbstractSignedDwarEHfDecoder extends AbstractDwarfEHDecoder {
 
 		public AbstractSignedDwarEHfDecoder(DwarfEHDataApplicationMode mode, boolean isIndirect) {
 			super(mode, isIndirect);
@@ -110,7 +110,7 @@ public class DwarfDecoderFactory {
 		}
 	}
 
-	private static abstract class AbstractUnsignedDwarfEHDecoder extends AbstractDwarfEHDecoder {
+	private abstract static class AbstractUnsignedDwarfEHDecoder extends AbstractDwarfEHDecoder {
 
 		public AbstractUnsignedDwarfEHDecoder(DwarfEHDataApplicationMode mode, boolean isIndirect) {
 			super(mode, isIndirect);

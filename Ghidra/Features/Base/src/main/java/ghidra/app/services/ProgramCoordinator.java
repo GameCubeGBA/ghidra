@@ -69,7 +69,7 @@ public abstract class ProgramCoordinator {
 		return null;
 	}
 
-	abstract protected Program findProgramInProject(String path);
+	protected abstract Program findProgramInProject(String path);
 
 	protected Program findProgramInFolder(DomainFolder folder, String path) {
 		DomainFolder[] subFolders = folder.getFolders();
@@ -176,5 +176,5 @@ public abstract class ProgramCoordinator {
 		return folder;
 	}
 
-	abstract protected String getPrivateRoot();
+	protected abstract String getPrivateRoot();
 }

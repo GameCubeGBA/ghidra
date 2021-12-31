@@ -67,8 +67,8 @@ import ghidra.util.task.SwingUpdateManager;
 //@formatter:on
 public class DataPlugin extends Plugin implements DataService {
 
-	final static int BACKGROUND_SELECTION_THRESHOLD = 2048;
-	final static DataType POINTER_DATA_TYPE = new PointerDataType();
+	static final int BACKGROUND_SELECTION_THRESHOLD = 2048;
+	static final DataType POINTER_DATA_TYPE = new PointerDataType();
 
 	private static final String BASIC_DATA_GROUP = "BasicData";
 	private static final String DATA_MENU_POPUP_PATH = "Data";
@@ -407,12 +407,8 @@ public class DataPlugin extends Plugin implements DataService {
 		// If only sized Undefined types are found then overwrite them.
 		Data definedData =
 			DataUtilities.getNextNonUndefinedDataAfter(program, start, blockMaxAddress);
-		if (dataExists(program, dataType, definedData, start, end)) {
-			return false; // status updated in 'dataExists()' call
-		}
-
-		return true;
-	}
+        return !dataExists(program, dataType, definedData, start, end); // status updated in 'dataExists()' call
+    }
 
 	private boolean canConvertPointer(DataType dataType, Data existingData,
 			boolean convertPointers) {
@@ -517,12 +513,10 @@ public class DataPlugin extends Plugin implements DataService {
 	 * Get rid of the dynamically created list of data types
 	 */
 	private void clearActions(List<DataAction> actions) {
-		Iterator<DataAction> iter = actions.iterator();
-		while (iter.hasNext()) {
-			DockingAction action = iter.next();
-			tool.removeAction(action);
-			action.dispose();
-		}
+        for (DockingAction action : actions) {
+            tool.removeAction(action);
+            action.dispose();
+        }
 		actions.clear();
 	}
 
@@ -745,10 +739,7 @@ public class DataPlugin extends Plugin implements DataService {
 			return false;
 		}
 		Data pdata = data.getParent();
-		if (pdata != null && pdata.isArray()) {
-			return false;
-		}
-		return true;
-	}
+        return pdata == null || !pdata.isArray();
+    }
 
 }

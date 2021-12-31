@@ -41,10 +41,9 @@ public class DeleteSpacePropertyScript extends GhidraScript {
 			}
 			String str = list.size() > 1? " addresses." : " address.";
 			println("Removed space property from "+ list.size() + str);
-			for (int i=0; i<list.size(); i++) {
-				Address addr = list.get(i);
-				map.remove(addr);
-			}
+            for (Address addr : list) {
+                map.remove(addr);
+            }
 		}
 		else {
 			println("No space properties were found.");

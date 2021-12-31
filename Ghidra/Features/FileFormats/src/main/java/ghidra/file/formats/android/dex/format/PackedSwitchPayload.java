@@ -24,7 +24,7 @@ import java.io.IOException;
 
 public class PackedSwitchPayload implements StructConverter {
 
-	public final static short MAGIC = 0x0100;
+	public static final short MAGIC = 0x0100;
 
 	private short ident;
 	private short size;

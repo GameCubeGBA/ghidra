@@ -485,7 +485,7 @@ public class FunctionComparisonPanel extends JPanel implements ChangeListener {
 		if (currentComponentName != null) {
 			saveState.putString(prefix + COMPARISON_VIEW_DISPLAYED, getCurrentComponentName());
 		}
-		saveState.putBoolean(prefix + CODE_COMPARISON_LOCK_SCROLLING_TOGETHER, isScrollingSynced());
+		saveState.putBoolean(prefix + CODE_COMPARISON_LOCK_SCROLLING_TOGETHER, syncScrolling);
 		ListingCodeComparisonPanel dualListingPanel = getDualListingPanel();
 		if (dualListingPanel != null) {
 			dualListingPanel.writeConfigState(prefix, saveState);
@@ -567,7 +567,7 @@ public class FunctionComparisonPanel extends JPanel implements ChangeListener {
 	 * between the two views
 	 */
 	public void setScrollingSyncState(boolean syncScrolling) {
-		if (isScrollingSynced() == syncScrolling) {
+		if (this.syncScrolling == syncScrolling) {
 			return;
 		}
 		toggleScrollLockAction.setSelected(syncScrolling);

@@ -25,11 +25,11 @@ import ghidra.util.datastruct.ListenerSet;
 
 public class ExpanderArrowPanel extends JPanel {
 	// TODO: Can I make this consistent with the UI LaF
-	protected final static Polygon ARROW =
+    protected static final Polygon ARROW =
 		new Polygon(new int[] { 5, -5, -5 }, new int[] { 0, -5, 5 }, 3);
-	protected final static Dimension SIZE = new Dimension(16, 16);
-	protected final static int ANIM_MILLIS = 80;
-	protected final static int FRAME_MILLIS = 30; // Approx 30 fps
+	protected static final Dimension SIZE = new Dimension(16, 16);
+	protected static final int ANIM_MILLIS = 80;
+	protected static final int FRAME_MILLIS = 30; // Approx 30 fps
 
 	private final ListenerSet<ExpanderArrowExpansionListener> listeners =
 		new ListenerSet<>(ExpanderArrowExpansionListener.class);

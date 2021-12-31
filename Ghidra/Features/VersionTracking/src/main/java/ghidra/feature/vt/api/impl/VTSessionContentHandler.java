@@ -39,7 +39,7 @@ public class VTSessionContentHandler extends DBContentHandler {
 	private static ImageIcon ICON = ResourceManager
 			.getScaledIcon(ResourceManager.loadImage("images/start-here_16.png"), 16, 16);
 
-	public final static String CONTENT_TYPE = "VersionTracking";
+	public static final String CONTENT_TYPE = "VersionTracking";
 
 	@Override
 	public long createFile(FileSystem fs, FileSystem userfs, String path, String name,

@@ -40,8 +40,7 @@ public class CliTableParam extends CliAbstractTable {
 		private static final int PARAMATTRIBUTES_UNUSED = 0xCFE0;
 
 		public CliParamRow(short flags, short sequence, int nameIndex) {
-			super();
-			this.flags = flags;
+            this.flags = flags;
 			this.sequence = sequence;
 			this.nameIndex = nameIndex;
 		}

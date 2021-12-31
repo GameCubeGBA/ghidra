@@ -303,7 +303,7 @@ class CategoryDB extends DatabaseObject implements Category {
 	}
 
 	private void testName(String categoryName) throws InvalidNameException {
-		if (categoryName == null || categoryName.length() == 0) {
+		if (categoryName == null || categoryName.isEmpty()) {
 			throw new InvalidNameException("Name cannot be null or zero length");
 		}
 	}

@@ -31,8 +31,7 @@ public class CliTableFieldLayout extends CliAbstractTable {
 		public int fieldIndex;
 		
 		public CliFieldLayoutRow(int offset, int fieldIndex) {
-			super();
-			this.offset = offset;
+            this.offset = offset;
 			this.fieldIndex = fieldIndex;
 		}
 

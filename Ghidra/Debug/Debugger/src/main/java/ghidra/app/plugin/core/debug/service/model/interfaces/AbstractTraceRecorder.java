@@ -20,12 +20,12 @@ import ghidra.trace.model.Trace;
 
 public interface AbstractTraceRecorder {
 
-	public Trace getTrace();
+	Trace getTrace();
 
-	public long getSnap();
+	long getSnap();
 
-	public DebuggerMemoryMapper getMemoryMapper();
+	DebuggerMemoryMapper getMemoryMapper();
 
-	public ManagedBreakpointRecorder getBreakpointRecorder();
+	ManagedBreakpointRecorder getBreakpointRecorder();
 
 }

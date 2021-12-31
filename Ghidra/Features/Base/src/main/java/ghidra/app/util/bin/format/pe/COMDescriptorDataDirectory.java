@@ -31,7 +31,7 @@ import ghidra.util.task.TaskMonitor;
  * This value has been renamed to IMAGE_DIRECTORY_ENTRY_COMHEADER.
  */
 public class COMDescriptorDataDirectory extends DataDirectory {
-	private final static String NAME = "IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR";
+	private static final String NAME = "IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR";
 
 	private ImageCor20Header header;
 

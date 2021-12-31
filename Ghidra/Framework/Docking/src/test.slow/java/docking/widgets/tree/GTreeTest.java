@@ -457,7 +457,7 @@ public class GTreeTest extends AbstractDockingTest {
 
 		expandedPaths = gTree.getExpandedPaths(gTree.getViewRoot());
 		assertTrue("Did not get expanded paths after calling expand paths",
-			expandedPaths.size() > 0);
+                !expandedPaths.isEmpty());
 		assertExpaned(expandedPaths, node.getParent());
 	}
 

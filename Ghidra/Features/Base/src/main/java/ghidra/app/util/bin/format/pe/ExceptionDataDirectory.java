@@ -27,7 +27,7 @@ import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.task.TaskMonitor;
 
 public class ExceptionDataDirectory extends DataDirectory {
-    private final static String NAME = "IMAGE_DIRECTORY_ENTRY_EXCEPTION";
+    private static final String NAME = "IMAGE_DIRECTORY_ENTRY_EXCEPTION";
 
 	static ExceptionDataDirectory createExceptionDataDirectory(
             NTHeader ntHeader, FactoryBundledWithBinaryReader reader)
@@ -54,10 +54,7 @@ public class ExceptionDataDirectory extends DataDirectory {
 	@Override
 	public boolean parse() {
 		int ptr = getPointer();
-		if (ptr < 0) {
-			return false;
-		}
-		return true;
+        return ptr >= 0;
     }
 
 	@Override

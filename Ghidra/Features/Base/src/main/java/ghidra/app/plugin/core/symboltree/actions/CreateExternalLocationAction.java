@@ -51,9 +51,7 @@ public class CreateExternalLocationAction extends SymbolTreeContextAction {
 		TreePath[] selectionPaths = context.getSelectedSymbolTreePaths();
 		if (selectionPaths.length == 1) {
 			Object object = selectionPaths[0].getLastPathComponent();
-			if (object instanceof LibrarySymbolNode || object instanceof ImportsCategoryNode) {
-				return true;
-			}
+            return object instanceof LibrarySymbolNode || object instanceof ImportsCategoryNode;
 		}
 		return false;
 	}

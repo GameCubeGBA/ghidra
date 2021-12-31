@@ -106,7 +106,7 @@ public class CreateGhidraScriptWizard extends Wizard implements INewWizard {
 			throws InvocationTargetException {
 		try {
 			info("Creating " + scriptName + " in " + scriptFolder.toString());
-			monitor.beginTask("Creating " + scriptName + " in " + scriptFolder.toString(), 1);
+			monitor.beginTask("Creating " + scriptName + " in " + scriptFolder, 1);
 
 			IFile scriptFile = GhidraScriptUtils.createGhidraScript(scriptFolder, scriptName,
 				scriptAuthor, scriptCategory, scriptDescription, monitor);

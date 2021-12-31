@@ -194,7 +194,7 @@ class ProgramListPanel extends JPanel {
 		allDataList.addAll(hiddenList);
 		allDataList.addAll(shownList);
 
-		boolean hasFilter = filterText.trim().length() != 0;
+		boolean hasFilter = !filterText.trim().isEmpty();
 		if (hasFilter) {
 			String lowerCaseFilterText = filterText.toLowerCase();
 			for (Iterator<Program> iterator = allDataList.iterator(); iterator.hasNext();) {
@@ -222,12 +222,12 @@ class ProgramListPanel extends JPanel {
 
 	private void initListModel() {
 		listModel.clear();
-		for (int i = 0; i < hiddenList.size(); i++) {
-			listModel.addElement(hiddenList.get(i));
-		}
-		for (int i = 0; i < shownList.size(); i++) {
-			listModel.addElement(shownList.get(i));
-		}
+        for (Program value : hiddenList) {
+            listModel.addElement(value);
+        }
+        for (Program program : shownList) {
+            listModel.addElement(program);
+        }
 	}
 
 	private class ProgramListCellRenderer extends GListCellRenderer<Program> {

@@ -24,7 +24,7 @@ import agent.dbgmodel.jna.dbgmodel.DbgModelNative.LOCATION;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IDebugHostData extends IDebugHostBaseClass {
-	final IID IID_IDEBUG_HOST_DATA = new IID("A3D64993-826C-44fa-897D-926F2FE7AD0B");
+	IID IID_IDEBUG_HOST_DATA = new IID("A3D64993-826C-44fa-897D-926F2FE7AD0B");
 
 	enum VTIndicesX implements VTableIndex {
 		GET_LOCATION_KIND, //

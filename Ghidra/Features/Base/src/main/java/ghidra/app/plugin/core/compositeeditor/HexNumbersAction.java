@@ -28,9 +28,9 @@ import docking.menu.DockingCheckboxMenuItemUI;
  */
 public class HexNumbersAction extends CompositeEditorTableAction implements ToggleDockingActionIf {
 
-	public final static String ACTION_NAME = "Show Numbers In Hex";
-	private final static String GROUP_NAME = DATA_ACTION_GROUP;
-	private final static String DESCRIPTION = "Show Numbers in Hexadecimal";
+	public static final String ACTION_NAME = "Show Numbers In Hex";
+	private static final String GROUP_NAME = DATA_ACTION_GROUP;
+	private static final String DESCRIPTION = "Show Numbers in Hexadecimal";
 	private static String[] PATH = new String[] { DESCRIPTION };
 	private boolean isSelected;
 

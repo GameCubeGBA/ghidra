@@ -22,11 +22,11 @@ import ghidra.comm.util.BitmaskUniverse;
  * A wrapper for breakpoint variations
  */
 public interface DebugBreakpoint {
-	public static enum BreakType {
+	enum BreakType {
 		CODE, DATA, TIME, INLINE;
 	}
 
-	public static class BreakFullType {
+	class BreakFullType {
 		public final BreakType breakType;
 
 		public BreakFullType(BreakType breakType) {
@@ -34,7 +34,7 @@ public interface DebugBreakpoint {
 		}
 	}
 
-	public static enum BreakFlags implements BitmaskUniverse {
+	enum BreakFlags implements BitmaskUniverse {
 		GO_ONLY(1 << 0), //
 		DEFERRED(1 << 1), //
 		ENABLED(1 << 2), //
@@ -54,7 +54,7 @@ public interface DebugBreakpoint {
 		}
 	}
 
-	public static enum BreakAccess implements BitmaskUniverse {
+	enum BreakAccess implements BitmaskUniverse {
 		READ(1 << 0), //
 		WRITE(1 << 1), //
 		EXECUTE(1 << 2), //
@@ -73,7 +73,7 @@ public interface DebugBreakpoint {
 		}
 	}
 
-	public static class BreakDataParameters {
+	class BreakDataParameters {
 		public int size;
 		public BitmaskSet<BreakAccess> access;
 

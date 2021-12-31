@@ -42,7 +42,7 @@ import java.io.InputStream;
  * </pre>
  */
 public class SectionHeader implements StructConverter {
-	public final static int NO_NAME_OFFSET = -1;
+	public static final int NO_NAME_OFFSET = -1;
 
 	private BinaryReader _reader;
 	private String _name;
@@ -117,7 +117,7 @@ public class SectionHeader implements StructConverter {
 			throw new IOException("Attempt to unpack a section that is not packed.");
 		}
 		try (InputStream input = getData()) {
-			byte[] data = new byte[getUnpackedLength()];
+			byte[] data = new byte[unpackedLength];
 			int index = 0;
 			while (index < data.length) {
 				if (monitor.isCancelled()) {

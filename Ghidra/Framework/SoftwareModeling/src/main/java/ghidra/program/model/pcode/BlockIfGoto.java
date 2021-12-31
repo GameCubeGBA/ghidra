@@ -37,8 +37,7 @@ public class BlockIfGoto extends BlockGraph {
 	private int gototype;               // type of goto 1=plaingoto 2=break 3=continue
 	
 	public BlockIfGoto() {
-		super();
-		blocktype = PcodeBlock.IFGOTO;
+        blocktype = PcodeBlock.IFGOTO;
 		gototarget = null;
 		gototype = 1;
 	}

@@ -33,8 +33,7 @@ public class CopyOnWriteWeakSetTest extends AbstractGenericTest {
 	private List<Listener> listeners = new ArrayList<>();
 
 	public CopyOnWriteWeakSetTest() {
-		super();
-	}
+    }
 
 @Test
     public void testIterationWithModification_Add() throws InterruptedException {

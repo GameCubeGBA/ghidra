@@ -178,16 +178,14 @@ class ViewPanel extends JPanel implements ChangeListener {
 		tabbedPane.setSelectedComponent(c); // causes a state change event
 
 		updateLocalActions(v);
-		Iterator<String> iter = map.keySet().iterator();
-		while (iter.hasNext()) {
+        for (String key : map.keySet()) {
 
-			String key = iter.next();
-			ViewProviderService vps = map.get(key);
-			JComponent comp = vps.getViewComponent();
-			if (c != comp) {
-				vps.setHasFocus(false);
-			}
-		}
+            ViewProviderService vps = map.get(key);
+            JComponent comp = vps.getViewComponent();
+            if (c != comp) {
+                vps.setHasFocus(false);
+            }
+        }
 		return true;
 	}
 
@@ -225,14 +223,12 @@ class ViewPanel extends JPanel implements ChangeListener {
 	}
 
 	ViewProviderService getViewProviderForComponent(Component component) {
-		Iterator<String> iter = map.keySet().iterator();
-		while (iter.hasNext()) {
-			String name = iter.next();
-			ViewProviderService v = map.get(name);
-			if (v.getViewComponent() == component) {
-				return v;
-			}
-		}
+        for (String name : map.keySet()) {
+            ViewProviderService v = map.get(name);
+            if (v.getViewComponent() == component) {
+                return v;
+            }
+        }
 		return null;
 	}
 
@@ -357,20 +353,17 @@ class ViewPanel extends JPanel implements ChangeListener {
 	 */
 	private void viewChanged() {
 		JComponent c = (JComponent) tabbedPane.getSelectedComponent();
-		Iterator<String> iter = map.keySet().iterator();
-		while (iter.hasNext()) {
+        for (String key : map.keySet()) {
 
-			String key = iter.next();
-			ViewProviderService v = map.get(key);
-			if (c == v.getViewComponent()) {
-				v.setHasFocus(true);
-				provider.viewChanged(v.getCurrentView());
-				updateLocalActions(v);
-			}
-			else {
-				v.setHasFocus(false);
-			}
-		}
+            ViewProviderService v = map.get(key);
+            if (c == v.getViewComponent()) {
+                v.setHasFocus(true);
+                provider.viewChanged(v.getCurrentView());
+                updateLocalActions(v);
+            } else {
+                v.setHasFocus(false);
+            }
+        }
 		if (c == null) {
 			updateLocalActions(null);
 		}
@@ -475,7 +468,7 @@ class ViewPanel extends JPanel implements ChangeListener {
 		@Override
 		public void editCompleted(String newName) {
 
-			if (newName.length() == 0) {
+			if (newName.isEmpty()) {
 
 				Msg.showError(getClass(), null, "Invalid Name", "Please enter a valid name.");
 

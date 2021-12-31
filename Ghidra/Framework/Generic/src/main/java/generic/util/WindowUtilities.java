@@ -328,12 +328,12 @@ public class WindowUtilities {
 	 * @return true if there are one or more modal dialogs displayed in the current JVM.
 	 */
 	public static boolean areModalDialogsVisible() {
-		return getOpenModalDialogs().size() > 0;
+		return !getOpenModalDialogs().isEmpty();
 	}
 
 	public static Dialog findModalestDialog() {
 		List<Dialog> openModalDialogs = getOpenModalDialogs();
-		if (openModalDialogs.size() == 0) {
+		if (openModalDialogs.isEmpty()) {
 			return null;
 		}
 

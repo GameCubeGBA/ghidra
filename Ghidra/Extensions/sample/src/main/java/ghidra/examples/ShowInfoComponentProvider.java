@@ -30,8 +30,8 @@ import ghidra.program.util.ProgramLocation;
 import resources.ResourceManager;
 
 public class ShowInfoComponentProvider extends ComponentProviderAdapter {
-	private final static ImageIcon CLEAR_ICON = ResourceManager.loadImage("images/erase16.png");
-	private final static ImageIcon INFO_ICON = ResourceManager.loadImage("images/information.png");
+	private static final ImageIcon CLEAR_ICON = ResourceManager.loadImage("images/erase16.png");
+	private static final ImageIcon INFO_ICON = ResourceManager.loadImage("images/information.png");
 
 	private JPanel panel;
 	private JTextArea textArea;

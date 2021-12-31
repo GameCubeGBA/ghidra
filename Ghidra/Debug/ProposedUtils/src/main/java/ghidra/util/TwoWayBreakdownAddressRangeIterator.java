@@ -136,7 +136,7 @@ public class TwoWayBreakdownAddressRangeIterator
 				: truncateRange(rng.getMaxAddress(), rng.getMinAddress());
 	}
 
-	private void findSuitable(PeekableIterator<AddressRange> it) {
+	private void suitable(PeekableIterator<AddressRange> it) {
 		while (it.hasNext() && cmp(getEnd(it.peek()), cur) < 0) {
 			it.next();
 		}
@@ -147,8 +147,8 @@ public class TwoWayBreakdownAddressRangeIterator
 		if (cur == null) {
 			return null;
 		}
-		findSuitable(lit);
-		findSuitable(rit);
+		suitable(lit);
+		suitable(rit);
 
 		boolean ln = lit.hasNext();
 		boolean rn = rit.hasNext();

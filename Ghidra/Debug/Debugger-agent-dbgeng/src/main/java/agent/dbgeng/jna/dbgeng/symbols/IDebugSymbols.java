@@ -24,7 +24,7 @@ import agent.dbgeng.jna.dbgeng.DbgEngNative.DEBUG_MODULE_PARAMETERS;
 import agent.dbgeng.jna.dbgeng.UnknownWithUtils.VTableIndex;
 
 public interface IDebugSymbols extends IUnknown {
-	final IID IID_IDEBUG_SYMBOLS = new IID("8c31e98c-983a-48a5-9016-6fe5d667a950");
+	IID IID_IDEBUG_SYMBOLS = new IID("8c31e98c-983a-48a5-9016-6fe5d667a950");
 
 	enum VTIndices implements VTableIndex {
 		GET_SYMBOL_OPTIONS, //

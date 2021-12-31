@@ -356,14 +356,14 @@ public class VTDualListingHighlightProvider implements HighlightProvider {
 		String destinationComment =
 			(destinationValue != null) ? destinationValue.getString() : null;
 
-		if (sourceComment != null && sourceComment.length() > 0) {
+		if (sourceComment != null && !sourceComment.isEmpty()) {
 			Highlight sourceHighlight =
 				getHighlight(text, cursorTextOffset, markupItem, sourceComment);
 			if (sourceHighlight != null) {
 				highlightList.add(sourceHighlight);
 			}
 		}
-		if (destinationComment != null && destinationComment.length() > 0) {
+		if (destinationComment != null && !destinationComment.isEmpty()) {
 			Highlight destinationHighlight =
 				getHighlight(text, cursorTextOffset, markupItem, destinationComment);
 			if (destinationHighlight != null) {
@@ -854,21 +854,16 @@ public class VTDualListingHighlightProvider implements HighlightProvider {
 		Program destinationProgram = session.getDestinationProgram();
 		if (program == sourceProgram) {
 			Address markupFunctionAddress = association.getSourceAddress();
-			if (!variableFunctionAddress.equals(markupFunctionAddress)) {
-				return false;
-			}
+            return variableFunctionAddress.equals(markupFunctionAddress);
 		}
 		else if (program == destinationProgram) {
 			Address markupFunctionAddress = association.getDestinationAddress();
-			if (!variableFunctionAddress.equals(markupFunctionAddress)) {
-				return false;
-			}
+            return variableFunctionAddress.equals(markupFunctionAddress);
 		}
 		else {
 			return false;
 		}
-		return true;
-	}
+    }
 
 	private void addParametersHighlight(String text, int cursorTextOffset,
 			VTMarkupItem parameterMarkupItem, ArrayList<Highlight> highlightList) {

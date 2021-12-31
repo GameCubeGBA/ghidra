@@ -100,13 +100,13 @@ public abstract class SingleValueColumnConstraint<T> implements ColumnConstraint
 	@SuppressWarnings("unchecked")
 	@Override
 	public Class<T> getColumnType() {
-		T t = getConstraintValue();
+		T t = constraintValue;
 		return (Class<T>) t.getClass();
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(this.getClass(), getConstraintValue());
+		return Objects.hash(this.getClass(), constraintValue);
 	}
 
 	@Override
@@ -120,7 +120,7 @@ public abstract class SingleValueColumnConstraint<T> implements ColumnConstraint
 
 		SingleValueColumnConstraint<?> otherConstraint = (SingleValueColumnConstraint<?>) o;
 
-		return getConstraintValue().equals(otherConstraint.getConstraintValue());
+		return constraintValue.equals(otherConstraint.constraintValue);
 
 	}
 

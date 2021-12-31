@@ -1356,7 +1356,7 @@ public class SymbolTablePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		}
 
 		String text = getText(field);
-		while (text.length() > 0) {
+		while (!text.isEmpty()) {
 			text = text.substring(0, text.length() - 1);
 			typeBackspaceOnComponent(field);
 

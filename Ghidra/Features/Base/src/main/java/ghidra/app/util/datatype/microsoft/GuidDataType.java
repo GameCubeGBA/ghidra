@@ -43,7 +43,7 @@ public class GuidDataType extends BuiltIn {
 	/**
 	 * Provides a definition of a GUID within a program.
 	 */
-	private final static long serialVersionUID = 1;
+    private static final long serialVersionUID = 1;
 	private static final String NAME = "GUID";
 
 	private static final EndianSettingsDefinition ENDIAN = EndianSettingsDefinition.DEF;
@@ -119,27 +119,27 @@ public class GuidDataType extends BuiltIn {
 			conv.getBytes((int) data[i], bytes, i * 4);
 		}
 
-		String retVal;
-		retVal = Conv.toHexString((int) data[0]) + delim;
-		retVal += Conv.toHexString((short) (data[1])) + delim;
-		retVal += Conv.toHexString((short) (data[1] >> 16)) + delim;
+		StringBuilder retVal;
+		retVal = new StringBuilder(Conv.toHexString((int) data[0]) + delim);
+		retVal.append(Conv.toHexString((short) (data[1]))).append(delim);
+		retVal.append(Conv.toHexString((short) (data[1] >> 16))).append(delim);
 		for (int i = 0; i < 4; i++) {
-			retVal += Conv.toHexString((byte) (data[2] >> i * 8));
+			retVal.append(Conv.toHexString((byte) (data[2] >> i * 8)));
 			if (i == 1) {
-				retVal += delim;
+				retVal.append(delim);
 			}
 		}
 		for (int i = 0; i < 4; i++) {
-			retVal += Conv.toHexString((byte) (data[3] >> i * 8));
+			retVal.append(Conv.toHexString((byte) (data[3] >> i * 8)));
 		}
 //		retVal = retVal.toUpperCase();
 		if (guidName == null) {
-			guidName = getGuidName(retVal);
+			guidName = getGuidName(retVal.toString());
 		}
 		if (guidName != null) {
 			return guidName + " " + retVal;
 		}
-		return retVal;
+		return retVal.toString();
 	}
 
 	private String getGuidName(String guidString) {

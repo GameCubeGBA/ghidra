@@ -27,8 +27,7 @@ public class IntIndexManagerTest extends AbstractGenericTest {
 	 * @param arg0
 	 */
 	public IntIndexManagerTest() {
-		super();
-	}
+    }
 	
     /**
      * regression test driver

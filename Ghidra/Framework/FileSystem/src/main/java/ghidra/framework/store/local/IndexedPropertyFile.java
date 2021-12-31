@@ -26,8 +26,8 @@ import ghidra.util.exception.DuplicateFileException;
 
 public class IndexedPropertyFile extends PropertyFile {
 
-	public final static String NAME_PROPERTY = "NAME";
-	public final static String PARENT_PATH_PROPERTY = "PARENT";
+	public static final String NAME_PROPERTY = "NAME";
+	public static final String PARENT_PATH_PROPERTY = "PARENT";
 
 	/**
 	 * Construct a new or existing PropertyFile.

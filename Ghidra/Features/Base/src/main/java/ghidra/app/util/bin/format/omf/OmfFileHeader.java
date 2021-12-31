@@ -130,13 +130,13 @@ public class OmfFileHeader extends OmfRecord {
 	 */
 	public void sortSegmentDataBlocks() {
 		if (extraSeg != null) {
-			for(int i=0;i<extraSeg.size();++i) {
-				segments.add(extraSeg.get(i));
-			}
+            for (OmfSegmentHeader omfSegmentHeader : extraSeg) {
+                segments.add(omfSegmentHeader);
+            }
 		}
-		for(int i=0;i<segments.size();++i) {
-			segments.get(i).sortData();
-		}
+        for (OmfSegmentHeader segment : segments) {
+            segment.sortData();
+        }
 	}
 
 	/**
@@ -200,13 +200,13 @@ public class OmfFileHeader extends OmfRecord {
 	 * @throws OmfException if any name indices are malformed
 	 */
 	public void resolveNames() throws OmfException {
-		for(int i=0;i<segments.size();++i) {
-			segments.get(i).resolveNames(nameList);
-		}
+        for (OmfSegmentHeader segment : segments) {
+            segment.resolveNames(nameList);
+        }
 		// extraSeg segments already have names
-		for(int i=0;i<groups.size();++i) {
-			groups.get(i).resolveNames(nameList);
-		}
+        for (OmfGroupRecord group : groups) {
+            group.resolveNames(nameList);
+        }
 	}
 	
 	/**
@@ -386,19 +386,18 @@ public class OmfFileHeader extends OmfRecord {
 	 */
 	public static void doLinking(long startAddress,ArrayList<OmfSegmentHeader> segments,ArrayList<OmfGroupRecord> groups) throws OmfException {
 		// Link anything in groups first
-		for (int i = 0; i < groups.size(); ++i) {
-			OmfGroupRecord group = groups.get(i);
-			group.setStartAddress(startAddress);
-			for (int j = 0; j < group.numSegments(); ++j) {
-				int index = group.getSegmentIndex(j);
-				try {
-					OmfSegmentHeader segment = segments.get(index - 1);
-					startAddress = segment.relocateSegment(startAddress, -1);
-				} catch (IndexOutOfBoundsException ex) {
-					throw new OmfException(ex.getMessage());
-				}
-			}
-		}
+        for (OmfGroupRecord group : groups) {
+            group.setStartAddress(startAddress);
+            for (int j = 0; j < group.numSegments(); ++j) {
+                int index = group.getSegmentIndex(j);
+                try {
+                    OmfSegmentHeader segment = segments.get(index - 1);
+                    startAddress = segment.relocateSegment(startAddress, -1);
+                } catch (IndexOutOfBoundsException ex) {
+                    throw new OmfException(ex.getMessage());
+                }
+            }
+        }
 		
 		// Fill in any remaining segments
 		for(int i=0;i<segments.size();++i) {
@@ -450,11 +449,8 @@ public class OmfFileHeader extends OmfRecord {
 		}
 		int len = reader.readNextShort() & 0xffff;
 		int stringlen = reader.readNextByte() & 0xff;
-		if (len != stringlen + 2) {
-			return false;
-		}
-		return true;
-	}
+        return len == stringlen + 2;
+    }
 	
 	/**
 	 * Create a reader for a specific OMF file

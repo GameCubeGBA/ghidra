@@ -26,7 +26,7 @@ import java.util.ArrayList;
 
 public interface FuncDB<T> {
 
-	public ArrayList<T> query(Function func) throws CancelledException;
+	ArrayList<T> query(Function func) throws CancelledException;
 
 	void restoreXml(XmlPullParser parser);
 

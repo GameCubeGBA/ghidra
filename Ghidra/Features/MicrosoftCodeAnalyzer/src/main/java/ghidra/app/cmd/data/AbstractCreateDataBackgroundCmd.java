@@ -257,11 +257,8 @@ public abstract class AbstractCreateDataBackgroundCmd<T extends AbstractCreateDa
 		Data dataAt = listing.getDataAt(startAddress);
 		DataTypeManager dataTypeManager = program.getDataTypeManager();
 		DataType resolvedDt = dataTypeManager.resolve(dt, DataTypeConflictHandler.DEFAULT_HANDLER);
-		if (dataAt != null && dataAt.getDataType() == resolvedDt) {
-			return true; // Already set to the desired data type.
-		}
-		return false;
-	}
+        return dataAt != null && dataAt.getDataType() == resolvedDt; // Already set to the desired data type.
+    }
 
 	/**
 	 * Creates references, symbols, and functions for this data type as indicated by the options.
@@ -365,7 +362,7 @@ public abstract class AbstractCreateDataBackgroundCmd<T extends AbstractCreateDa
 	 * 
 	 * @return the address of the data item being created.
 	 */
-	final protected Address getDataAddress() {
+    protected final Address getDataAddress() {
 		return address;
 	}
 
@@ -375,7 +372,7 @@ public abstract class AbstractCreateDataBackgroundCmd<T extends AbstractCreateDa
 	 * 
 	 * @param addr set the current data address
 	 */
-	final protected void setDataAddress(Address addr) {
+    protected final void setDataAddress(Address addr) {
 		address = addr;
 	}
 }

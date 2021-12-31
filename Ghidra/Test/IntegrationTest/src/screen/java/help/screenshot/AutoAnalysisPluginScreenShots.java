@@ -29,8 +29,7 @@ import ghidra.util.task.TaskMonitor;
 public class AutoAnalysisPluginScreenShots extends GhidraScreenShotGenerator {
 
 	public AutoAnalysisPluginScreenShots() {
-		super();
-	}
+    }
 
 	@Override
 	public void loadDefaultTool() {
@@ -122,12 +121,7 @@ public class AutoAnalysisPluginScreenShots extends GhidraScreenShotGenerator {
 			monitor.initialize(100);
 			monitor.setProgress(65);
 			monitor.setMessage("Applying Function Signatures");
-			runSwing(new Runnable() {
-				@Override
-				public void run() {
-					invokeInstanceMethod("update", monitor);
-				}
-			});
+			runSwing((Runnable) () -> invokeInstanceMethod("update", monitor));
 
 			start.countDown();
 			try {

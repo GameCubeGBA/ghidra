@@ -48,24 +48,24 @@ public class PostCommentFieldFactory extends FieldFactory {
 
 	public static final String FIELD_NAME = "Post-Comment";
 
-	private final static String GROUP_TITLE = "Format Code";
-	private final static String FIELD_GROUP_TITLE = "Post-comments Field";
-	public final static String ENABLE_WORD_WRAP_MSG =
+	private static final String GROUP_TITLE = "Format Code";
+	private static final String FIELD_GROUP_TITLE = "Post-comments Field";
+	public static final String ENABLE_WORD_WRAP_MSG =
 		FIELD_GROUP_TITLE + Options.DELIMITER + "Enable Word Wrapping";
-	public final static String ENABLE_ALWAYS_SHOW_AUTOMATIC_MSG =
+	public static final String ENABLE_ALWAYS_SHOW_AUTOMATIC_MSG =
 		FIELD_GROUP_TITLE + Options.DELIMITER + "Always Show the Automatic Comment";
 
-	final static String FLAG_FUNCTION_EXIT_OPTION =
+	static final String FLAG_FUNCTION_EXIT_OPTION =
 		GROUP_TITLE + Options.DELIMITER + "Flag Function Exits";
-	final static String FLAG_TERMINATOR_OPTION =
+	static final String FLAG_TERMINATOR_OPTION =
 		GROUP_TITLE + Options.DELIMITER + "Flag Jumps and Returns";
-	final static String LINES_AFTER_BLOCKS_OPTION =
+	static final String LINES_AFTER_BLOCKS_OPTION =
 		GROUP_TITLE + Options.DELIMITER + "Lines After Basic Blocks";
 
 	static String DEFAULT_FLAG_COMMENT;
 
-	final static String FUN_EXIT_FLAG_LEADER = "********** ";
-	final static String FUN_EXIT_FLAG_TAIL = " Exit ********** ";
+	static final String FUN_EXIT_FLAG_LEADER = "********** ";
+	static final String FUN_EXIT_FLAG_TAIL = " Exit ********** ";
 
 	private boolean flagJMPsRETs;
 	private boolean flagFunctionExits;
@@ -255,7 +255,7 @@ public class PostCommentFieldFactory extends FieldFactory {
 				}
 			}
 		}
-		if (comments.size() > 0) {
+		if (!comments.isEmpty()) {
 			return comments.toArray(new String[0]);
 		}
 		return null;
@@ -549,9 +549,7 @@ public class PostCommentFieldFactory extends FieldFactory {
 		}
 		// Initialize dashed separator lines
 		StringBuffer sb = new StringBuffer();
-		for (int i = 0; i < 80; i++) {
-			sb.append("-");
-		}
+        sb.append("-".repeat(80));
 		DEFAULT_FLAG_COMMENT = sb.toString();
 
 	}

@@ -25,8 +25,7 @@ import generic.test.AbstractGenericTest;
 public class ObjectRangeMapTest extends AbstractGenericTest {
 
 	public ObjectRangeMapTest() {
-		super();
-	}
+    }
 	
 @Test
     public void testGetSet() {

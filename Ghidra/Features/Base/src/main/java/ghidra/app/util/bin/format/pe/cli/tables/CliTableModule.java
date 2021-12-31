@@ -34,8 +34,7 @@ public class CliTableModule extends CliAbstractTable {
 		
 		public CliModuleRow(short generation, int nameIndex, int mvIdIndex, int encIdIndex,
 				int encBaseIdIndex) {
-			super();
-			this.generation = generation;
+            this.generation = generation;
 			this.nameIndex = nameIndex;
 			this.mvIdIndex = mvIdIndex;
 			this.encIdIndex = encIdIndex;

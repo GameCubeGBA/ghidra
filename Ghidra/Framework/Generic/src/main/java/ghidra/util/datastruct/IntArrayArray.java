@@ -27,7 +27,7 @@ import java.io.Serializable;
  * Array of int[] that grows as needed.
  */
 public class IntArrayArray implements Array, Serializable {
-    private final static long serialVersionUID = 1;
+    private static final long serialVersionUID = 1;
     static final int MIN_SIZE = 4;
     int[] ints;
     int[] starts;

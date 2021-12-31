@@ -31,7 +31,7 @@ import ghidra.program.util.*;
  */
 public class ThunkedFunctionFieldMouseHandler implements FieldMouseHandlerExtension {
 
-	private final static Class<?>[] SUPPORTED_CLASSES = new Class[] {
+	private static final Class<?>[] SUPPORTED_CLASSES = new Class[] {
 		ThunkedFunctionFieldLocation.class, FunctionNameFieldLocation.class };
 
 	@Override

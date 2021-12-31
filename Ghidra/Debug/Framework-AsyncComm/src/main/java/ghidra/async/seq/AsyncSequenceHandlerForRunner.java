@@ -40,7 +40,7 @@ public interface AsyncSequenceHandlerForRunner<R> extends AsyncHandlerCanExit<R>
 	 * @param exc the exception if completed exceptionally
 	 * @return null
 	 */
-	public Void next(Void v, Throwable exc);
+    Void next(Void v, Throwable exc);
 
 	/**
 	 * Do like {@link #next(Void, Throwable)}, but ignore the result of a subordinate task
@@ -58,7 +58,7 @@ public interface AsyncSequenceHandlerForRunner<R> extends AsyncHandlerCanExit<R>
 	 * @param exc the exception if completed exceptionally
 	 * @return null
 	 */
-	public default Void nextIgnore(Object result, Throwable exc) {
+	default Void nextIgnore(Object result, Throwable exc) {
 		return next(null, exc);
 	}
 }

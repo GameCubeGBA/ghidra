@@ -47,9 +47,7 @@ public class CreateTypeDefAction extends AbstractTypeDefAction {
 		DataTypeManager dataTypeManager = dataType.getDataTypeManager();
 		if (dataTypeManager instanceof BuiltInDataTypeManager) {
 			DataTypeManager manager = plugin.getProgramDataTypeManager();
-			if (manager == null) {
-				return false; // no program open; can't work from the built-in in this case
-			}
+            return manager != null; // no program open; can't work from the built-in in this case
 		}
 
 		return true;

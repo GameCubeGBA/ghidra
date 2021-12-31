@@ -20,7 +20,7 @@ import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
 public interface FunctionHasher {
-	public long hash(Function function, TaskMonitor monitor) throws CancelledException;
+	long hash(Function function, TaskMonitor monitor) throws CancelledException;
 
-	public int commonBitCount(Function funcA, Function funcB, TaskMonitor monitor);
+	int commonBitCount(Function funcA, Function funcB, TaskMonitor monitor);
 }

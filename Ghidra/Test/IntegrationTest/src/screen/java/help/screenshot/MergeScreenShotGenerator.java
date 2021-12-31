@@ -31,8 +31,7 @@ public class MergeScreenShotGenerator extends GhidraScreenShotGenerator {
 
 	public MergeScreenShotGenerator(String testFilename, String testNameStr,
 			MergeTestFacilitator mtf, TestName testName) {
-		super();
-		this.testName = testName;
+        this.testName = testName;
 		this.testFilename = testFilename;
 		this.mtf = mtf;
 		

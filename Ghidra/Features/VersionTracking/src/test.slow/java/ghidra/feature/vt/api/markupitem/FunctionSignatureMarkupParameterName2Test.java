@@ -61,8 +61,7 @@ public class FunctionSignatureMarkupParameterName2Test extends AbstractFunctionS
 	//  Gadget::use 00411570    FUN... 00411560
 
 	public FunctionSignatureMarkupParameterName2Test() {
-		super();
-	}
+    }
 
 	@Test
 	public void testUserPriorityNameReplace_UserSrc_DefaultDest() throws Exception {

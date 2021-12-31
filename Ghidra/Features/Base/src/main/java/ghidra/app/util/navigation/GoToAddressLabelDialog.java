@@ -169,7 +169,7 @@ public class GoToAddressLabelDialog extends DialogComponentProvider implements G
 	/**
 	 * Builds the main panel for this dialog.
 	 */
-	final protected JPanel buildMainPanel() {
+    protected final JPanel buildMainPanel() {
 
 		JPanel inner = new JPanel();
 		GridBagLayout gl = new GridBagLayout();
@@ -186,26 +186,18 @@ public class GoToAddressLabelDialog extends DialogComponentProvider implements G
 		DockingWindowManager.setHelpLocation(hyperlink,
 			new HelpLocation(HelpTopics.NAVIGATION, "gotoexpression"));
 
-		hyperlink.addHyperlinkListener(ANCHOR_NAME, new HyperlinkListener() {
-			@Override
-			public void hyperlinkUpdate(HyperlinkEvent e) {
-				if (e.getEventType() != HyperlinkEvent.EventType.ACTIVATED) {
-					return;
-				}
-				showExpressionHelp();
-			}
-		});
+		hyperlink.addHyperlinkListener(ANCHOR_NAME, e -> {
+            if (e.getEventType() != HyperlinkEvent.EventType.ACTIVATED) {
+                return;
+            }
+            showExpressionHelp();
+        });
 		inner.add(hyperlink);
 		inner.add(hyperlink, gbc);
 
 		comboBox = new GhidraComboBox<>();
 		comboBox.setEditable(true);
-		comboBox.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				okCallback();
-			}
-		});
+		comboBox.addActionListener(e -> okCallback());
 		gbc.insets = new Insets(2, 5, 2, 0);
 		gbc.gridx = 0;
 		gbc.gridy = 1;
@@ -244,11 +236,11 @@ public class GoToAddressLabelDialog extends DialogComponentProvider implements G
 	private void readHistory(SaveState saveState) {
 		String[] strs = saveState.getStrings("GO_TO_HISTORY", null);
 		if (strs != null) {
-			for (int i = 0; i < strs.length; i++) {
-				if (!history.contains(strs[i])) {
-					history.add(strs[i]);
-				}
-			}
+            for (String str : strs) {
+                if (!history.contains(str)) {
+                    history.add(str);
+                }
+            }
 			truncateHistoryAsNeeded();
 			updateCombo();
 		}
@@ -282,7 +274,7 @@ public class GoToAddressLabelDialog extends DialogComponentProvider implements G
 			input = parseNumber(input);
 		}
 
-		if (input.length() == 0) {
+		if (input.isEmpty()) {
 			escapeCallback();
 			return;
 		}

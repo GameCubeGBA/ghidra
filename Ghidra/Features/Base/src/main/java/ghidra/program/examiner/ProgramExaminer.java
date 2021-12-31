@@ -107,7 +107,7 @@ public class ProgramExaminer {
 		}
 	}
 
-	public synchronized static void initializeGhidra() throws GhidraException {
+	public static synchronized void initializeGhidra() throws GhidraException {
 		if (!Application.isInitialized()) {
 			ApplicationLayout layout;
 			try {
@@ -198,11 +198,8 @@ public class ProgramExaminer {
 		if (dataType instanceof IconResourceDataType) {
 			return true;
 		}
-		if (dataType instanceof JPEGDataType) {
-			return true;
-		}
-		return false;
-	}
+        return dataType instanceof JPEGDataType;
+    }
 
 //==================================================================================================
 // static methods

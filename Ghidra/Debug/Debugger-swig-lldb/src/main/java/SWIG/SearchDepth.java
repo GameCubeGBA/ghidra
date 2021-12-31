@@ -12,14 +12,14 @@
 package SWIG;
 
 public final class SearchDepth {
-  public final static SearchDepth eSearchDepthInvalid = new SearchDepth("eSearchDepthInvalid", lldbJNI.eSearchDepthInvalid_get());
-  public final static SearchDepth eSearchDepthTarget = new SearchDepth("eSearchDepthTarget");
-  public final static SearchDepth eSearchDepthModule = new SearchDepth("eSearchDepthModule");
-  public final static SearchDepth eSearchDepthCompUnit = new SearchDepth("eSearchDepthCompUnit");
-  public final static SearchDepth eSearchDepthFunction = new SearchDepth("eSearchDepthFunction");
-  public final static SearchDepth eSearchDepthBlock = new SearchDepth("eSearchDepthBlock");
-  public final static SearchDepth eSearchDepthAddress = new SearchDepth("eSearchDepthAddress");
-  public final static SearchDepth kLastSearchDepthKind = new SearchDepth("kLastSearchDepthKind", lldbJNI.kLastSearchDepthKind_get());
+  public static final SearchDepth eSearchDepthInvalid = new SearchDepth("eSearchDepthInvalid", lldbJNI.eSearchDepthInvalid_get());
+  public static final SearchDepth eSearchDepthTarget = new SearchDepth("eSearchDepthTarget");
+  public static final SearchDepth eSearchDepthModule = new SearchDepth("eSearchDepthModule");
+  public static final SearchDepth eSearchDepthCompUnit = new SearchDepth("eSearchDepthCompUnit");
+  public static final SearchDepth eSearchDepthFunction = new SearchDepth("eSearchDepthFunction");
+  public static final SearchDepth eSearchDepthBlock = new SearchDepth("eSearchDepthBlock");
+  public static final SearchDepth eSearchDepthAddress = new SearchDepth("eSearchDepthAddress");
+  public static final SearchDepth kLastSearchDepthKind = new SearchDepth("kLastSearchDepthKind", lldbJNI.kLastSearchDepthKind_get());
 
   public final int swigValue() {
     return swigValue;
@@ -32,9 +32,9 @@ public final class SearchDepth {
   public static SearchDepth swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-    for (int i = 0; i < swigValues.length; i++)
-      if (swigValues[i].swigValue == swigValue)
-        return swigValues[i];
+      for (SearchDepth value : swigValues)
+          if (value.swigValue == swigValue)
+              return value;
     throw new IllegalArgumentException("No enum " + SearchDepth.class + " with value " + swigValue);
   }
 

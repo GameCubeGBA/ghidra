@@ -151,21 +151,21 @@ public class CliSigStandAloneMethod extends CliAbstractSig {
 
 	@Override
 	public String getRepresentationCommon(CliStreamMetadata stream, boolean isShort) {
-		String rep = getRepresentationOf(retType, stream, isShort) + " fn(";
+		StringBuilder rep = new StringBuilder(getRepresentationOf(retType, stream, isShort) + " fn(");
 
 		for (CliParam param : params) {
 			if (param == null) {
-				rep += "unidentified_param_type, ";
+				rep.append("unidentified_param_type, ");
 			}
 			else {
-				rep += getRepresentationOf(param, stream, isShort) + ", ";
+				rep.append(getRepresentationOf(param, stream, isShort)).append(", ");
 			}
 		}
 		if (params.length > 0) {
-			rep = rep.substring(0, rep.length() - 2); // Take off last comma+space
+			rep = new StringBuilder(rep.substring(0, rep.length() - 2)); // Take off last comma+space
 		}
-		rep += ")";
-		return rep;
+		rep.append(")");
+		return rep.toString();
 	}
 
 }

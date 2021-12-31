@@ -39,30 +39,30 @@ import ghidra.program.util.ProgramSelection;
  */
 public interface FGVertex extends VisualVertex {
 
-	static final Color TOOLTIP_BACKGROUND_COLOR = new Color(255, 255, 230);
+	Color TOOLTIP_BACKGROUND_COLOR = new Color(255, 255, 230);
 
-	public FGVertex cloneVertex(FGController newController);
+	FGVertex cloneVertex(FGController newController);
 
 	/** A chance for this vertex to save off changed settings */
-	public void writeSettings(FunctionGraphVertexAttributes settings);
+    void writeSettings(FunctionGraphVertexAttributes settings);
 
 	/** A chance for this vertex to read in stored settings */
-	public void readSettings(FunctionGraphVertexAttributes settings);
+    void readSettings(FunctionGraphVertexAttributes settings);
 
-	public void restoreColor(Color color);
+	void restoreColor(Color color);
 
-	public Color getUserDefinedColor();
+	Color getUserDefinedColor();
 
-	public FGVertexType getVertexType();
+	FGVertexType getVertexType();
 
 	/**
 	 * Sets the vertex type.  This can only be called once.  Repeated calls will except.
 	 * 
 	 * @param vertexType the type
 	 */
-	public void setVertexType(FGVertexType vertexType);
+    void setVertexType(FGVertexType vertexType);
 
-	public Address getVertexAddress();
+	Address getVertexAddress();
 
 	/**
 	 * Returns true if this vertex is considered an entry.  Normally, a vertex is considered
@@ -72,25 +72,25 @@ public interface FGVertex extends VisualVertex {
 	 * 
 	 * @return true if this vertex is an entry
 	 */
-	public boolean isEntry();
+    boolean isEntry();
 
-	public FlowType getFlowType();
+	FlowType getFlowType();
 
-	public AddressSetView getAddresses();
+	AddressSetView getAddresses();
 
-	public Program getProgram();
+	Program getProgram();
 
-	public ListingModel getListingModel(Address address);
+	ListingModel getListingModel(Address address);
 
-	public Color getDefaultBackgroundColor();
+	Color getDefaultBackgroundColor();
 
-	public Color getBackgroundColor();
+	Color getBackgroundColor();
 
-	public Color getSelectionColor();
+	Color getSelectionColor();
 
-	public void setBackgroundColor(Color color);
+	void setBackgroundColor(Color color);
 
-	public void clearColor();
+	void clearColor();
 
 	/**
 	 * Signals to this vertex that it is associated with a group
@@ -98,53 +98,53 @@ public interface FGVertex extends VisualVertex {
 	 * @param groupInfo the new group info for this vertex; null if the vertex is no longer part
 	 *        of a group 
 	 */
-	public void updateGroupAssociationStatus(GroupHistoryInfo groupInfo);
+    void updateGroupAssociationStatus(GroupHistoryInfo groupInfo);
 
 	/**
 	 * The group info for this vertex if it is in a group; null if not in a group
 	 * @return the group info or null
 	 */
-	public GroupHistoryInfo getGroupInfo();
+    GroupHistoryInfo getGroupInfo();
 
 	/**
 	 * Returns true if this vertex is a member of an uncollapsed group
 	 * @return true if this vertex is a member of an uncollapsed group
 	 */
-	public boolean isUncollapsedGroupMember();
+    boolean isUncollapsedGroupMember();
 
-	public String getTitle();
+	String getTitle();
 
-	public String getToolTipText(MouseEvent event);
+	String getToolTipText(MouseEvent event);
 
-	public JComponent getToolTipComponentForEdge(FGEdge edge);
+	JComponent getToolTipComponentForEdge(FGEdge edge);
 
-	public JComponent getToolTipComponentForVertex();
+	JComponent getToolTipComponentForVertex();
 
-	public boolean isDefaultBackgroundColor();
+	boolean isDefaultBackgroundColor();
 
-	public Rectangle getBounds();
+	Rectangle getBounds();
 
-	public boolean containsProgramLocation(ProgramLocation location);
+	boolean containsProgramLocation(ProgramLocation location);
 
-	public boolean containsAddress(Address address);
+	boolean containsAddress(Address address);
 
-	public void setProgramLocation(ProgramLocation location);
+	void setProgramLocation(ProgramLocation location);
 
-	public void setProgramSelection(ProgramSelection selection);
+	void setProgramSelection(ProgramSelection selection);
 
-	public ProgramSelection getProgramSelection();
+	ProgramSelection getProgramSelection();
 
 	/**
 	 * Returns any selected text within the vertex that does not span multiple fields
 	 * @return the text
 	 */
-	public String getTextSelection();
+    String getTextSelection();
 
-	public void setProgramHighlight(ProgramSelection highlight);
+	void setProgramHighlight(ProgramSelection highlight);
 
-	public ProgramLocation getProgramLocation();
+	ProgramLocation getProgramLocation();
 
-	public Rectangle getCursorBounds();
+	Rectangle getCursorBounds();
 
 	/**
 	 * Edits the label for the vertex.  This could be the label for the minimum address of the
@@ -153,7 +153,7 @@ public interface FGVertex extends VisualVertex {
 	 * 
 	 * @param component the parent component of any shown dialogs
 	 */
-	public void editLabel(JComponent component);
+    void editLabel(JComponent component);
 
 	/**
 	 * Returns true if the clicked component is or is inside of the header of the vertex
@@ -161,7 +161,7 @@ public interface FGVertex extends VisualVertex {
 	 * @param clickedComponent the clicked component
 	 * @return true if the clicked component is or is inside of the header of the vertex
 	 */
-	public boolean isHeaderClick(Component clickedComponent);
+    boolean isHeaderClick(Component clickedComponent);
 
 	/**
 	 * Signals that this vertex is being rendered such that it takes up the entire graph 
@@ -169,7 +169,7 @@ public interface FGVertex extends VisualVertex {
 	 *
 	 * @return true if full-screen
 	 */
-	public boolean isFullScreenMode();
+    boolean isFullScreenMode();
 
 	/**
 	 * Sets whether this vertex is in full-screen mode.  When in full-screen, a larger 
@@ -178,30 +178,30 @@ public interface FGVertex extends VisualVertex {
 	 * 
 	 * @param fullScreen true for full-screen
 	 */
-	public void setFullScreenMode(boolean fullScreen);
+    void setFullScreenMode(boolean fullScreen);
 
 	/**
 	 * Returns the full-screen view of this vertex. 
 	 * @return the full-screen view
 	 */
-	public Component getMaximizedViewComponent();
+    Component getMaximizedViewComponent();
 
 	/**
 	 * Signals to rebuild this vertex's data model.  This call will not do any real work 
 	 * if the model is not 'dirty'.
 	 */
-	public void refreshModel();
+    void refreshModel();
 
 	/**
 	 * Triggers a refresh of the visual components of this vertex, such as the title.
 	 */
-	public void refreshDisplay();
+    void refreshDisplay();
 
 	/**
 	 * Refresh the vertex's display information if the given address is the vertex entry point
 	 * @param address the addresses
 	 */
-	public void refreshDisplayForAddress(Address address);
+    void refreshDisplayForAddress(Address address);
 
 	/**
 	 * Tells this vertex whether it is showing.  This actually overrides the underlying 
@@ -213,9 +213,9 @@ public interface FGVertex extends VisualVertex {
 	 * 
 	 * @param isShowing true if the component is showing
 	 */
-	public void setShowing(boolean isShowing);
+    void setShowing(boolean isShowing);
 
 	@Override
-	public void dispose();
+    void dispose();
 
 }

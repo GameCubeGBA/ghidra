@@ -17,6 +17,6 @@ package ghidra.app.util.bin.format.macho.commands;
 
 public final class DynamicSymbolTableConstants {
 
-	public final static int INDIRECT_SYMBOL_LOCAL  = 0x80000000;
-	public final static int INDIRECT_SYMBOL_ABS    = 0x40000000;
+	public static final int INDIRECT_SYMBOL_LOCAL  = 0x80000000;
+	public static final int INDIRECT_SYMBOL_ABS    = 0x40000000;
 }

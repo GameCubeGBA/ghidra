@@ -42,8 +42,7 @@ public class VTAssociationDBTest extends VTBaseTestCase {
 	private int testTransactionID;
 
 	public VTAssociationDBTest() {
-		super();
-	}
+    }
 
 	@Override
 	@Before

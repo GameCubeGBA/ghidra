@@ -37,7 +37,7 @@ import ghidra.util.table.field.OutgoingReferenceEndpoint;
  */
 public class MnemonicFieldMouseHandler implements FieldMouseHandlerExtension {
 
-	private final static Class<?>[] SUPPORTED_CLASSES = new Class[] { MnemonicFieldLocation.class };
+	private static final Class<?>[] SUPPORTED_CLASSES = new Class[] { MnemonicFieldLocation.class };
 
 	@Override
 	public boolean fieldElementClicked(Object clickedObject, Navigatable sourceNavigatable,

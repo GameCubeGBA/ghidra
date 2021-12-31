@@ -37,11 +37,8 @@ public class CheckImagesTest {
 			if (!f.getName().endsWith(".png")) {
 				return false;
 			}
-			if (f.length() != 0) {
-				return false;
-			}
-			return true;
-		}).collect(Collectors.toSet());
+            return f.length() == 0;
+        }).collect(Collectors.toSet());
 		assertEquals(Set.of(), missing);
 	}
 }

@@ -492,16 +492,16 @@ public class LocationReferencesPlugin3Test extends AbstractLocationReferencesTes
 		ReferenceIterator referencesIterator = referenceManager.getReferencesTo(toAddress);
 
 		Reference reference = null;
-		for (; referencesIterator.hasNext();) {
-			Reference currentReference = referencesIterator.next();
-			Address refFromAddress = currentReference.getFromAddress();
-			if (refFromAddress.equals(fromAddress)) {
-				reference = currentReference;
-				break;
-			}
-		}
+        while (referencesIterator.hasNext()) {
+            Reference currentReference = referencesIterator.next();
+            Address refFromAddress = currentReference.getFromAddress();
+            if (refFromAddress.equals(fromAddress)) {
+                reference = currentReference;
+                break;
+            }
+        }
 
-		RemoveReferenceCmd removeRefCommand = new RemoveReferenceCmd(reference);
+        RemoveReferenceCmd removeRefCommand = new RemoveReferenceCmd(reference);
 		assertTrue("Unable to delete reference to: " + toAddress,
 			applyCmd(program, removeRefCommand));
 	}

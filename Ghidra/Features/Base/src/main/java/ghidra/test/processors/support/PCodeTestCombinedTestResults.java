@@ -370,7 +370,7 @@ public class PCodeTestCombinedTestResults {
 			w.print(
 				"<td class=\"GroupHead\" valign=\"middle\" colspan=\"" + namedTestColumns.length +
 					"\" style=\"max-width:" + groupWidth[groupIndex] + ";\">&nbsp;");
-			if (groupName.length() != 0) {
+			if (!groupName.isEmpty()) {
 				w.print(HTMLUtilities.friendlyEncodeHTML(groupName));
 			}
 			w.println("</td>");

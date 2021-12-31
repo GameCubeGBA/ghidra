@@ -29,7 +29,7 @@ import ghidra.dbg.agent.AgentWindow;
 import ghidra.util.Msg;
 
 public interface GdbGadpServer extends AutoCloseable {
-	public static void main(String[] args) throws Exception {
+	static void main(String[] args) throws Exception {
 		try {
 			new Runner().run(args);
 		}
@@ -39,11 +39,11 @@ public interface GdbGadpServer extends AutoCloseable {
 		}
 	}
 
-	public static GdbGadpServer newInstance(SocketAddress addr) throws IOException {
+	static GdbGadpServer newInstance(SocketAddress addr) throws IOException {
 		return new GdbGadpServerImpl(addr);
 	}
 
-	public class Runner {
+	class Runner {
 		private String gdbCmd = "gdb";
 		private List<String> gdbArgs = new ArrayList<>();
 		private InetSocketAddress bindTo;
@@ -192,14 +192,14 @@ public interface GdbGadpServer extends AutoCloseable {
 	 * 
 	 * @throws IOException if an I/O error occurs
 	 */
-	public void consoleLoop() throws IOException;
+    void consoleLoop() throws IOException;
 
 	/**
 	 * Close all SCTL connections and ports, and terminate the GDB session
 	 * 
 	 * @throws IOException if an I/O error occurs
 	 */
-	public void terminate() throws IOException;
+    void terminate() throws IOException;
 
 	/**
 	 * Calls {@link #terminate()}

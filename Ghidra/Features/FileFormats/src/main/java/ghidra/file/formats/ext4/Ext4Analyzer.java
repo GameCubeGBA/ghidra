@@ -63,11 +63,8 @@ public class Ext4Analyzer extends FileFormatAnalyzer {
 		} catch (IOException e ) {
 			// ignore
 		}
-		if( magic != (short)0xef53 ) {
-			return false;
-		}
-		return true;
-	}
+        return magic == (short) 0xef53;
+    }
 
 	@Override
 	public boolean isPrototype() {

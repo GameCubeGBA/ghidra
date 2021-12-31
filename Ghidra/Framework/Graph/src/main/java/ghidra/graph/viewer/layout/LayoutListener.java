@@ -25,7 +25,7 @@ import java.awt.geom.Point2D;
  */
 public interface LayoutListener<V, E> {
 
-	public enum ChangeType {
+	enum ChangeType {
 		USER,      		// real changes that should be tracked 
 		TRANSIENT,  	// transient changes that can be ignored
 		RESTORE			// changes that happen when re-serializing saved locations

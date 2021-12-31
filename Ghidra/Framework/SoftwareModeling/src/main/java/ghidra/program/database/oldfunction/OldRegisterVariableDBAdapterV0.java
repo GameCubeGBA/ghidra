@@ -32,7 +32,7 @@ import ghidra.util.exception.VersionException;
  * 
  */
 class OldRegisterVariableDBAdapterV0 extends OldRegisterVariableDBAdapter {
-	final static int SCHEMA_VERSION = 0;
+	static final int SCHEMA_VERSION = 0;
 
 	// Register Variables Table Columns
 	static final int V0_REG_VAR_FUNCTION_KEY_COL = 0;

@@ -293,11 +293,9 @@ public class TextEditorComponentProvider extends ComponentProviderAdapter {
 		defaultFont = (Font) editor.getValue();
 
 		List<TextEditorComponentProvider> values = plugin.getEditors();
-		Iterator<TextEditorComponentProvider> iterator = values.iterator();
-		while (iterator.hasNext()) {
-			TextEditorComponentProvider editorComponent = iterator.next();
-			editorComponent.textarea.setFont(defaultFont);
-		}
+        for (TextEditorComponentProvider editorComponent : values) {
+            editorComponent.textarea.setFont(defaultFont);
+        }
 	}
 
 	private void save() {

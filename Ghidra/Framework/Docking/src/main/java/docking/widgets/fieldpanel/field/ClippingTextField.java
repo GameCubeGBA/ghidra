@@ -116,12 +116,9 @@ public class ClippingTextField implements TextField {
 
 	@Override
 	public boolean contains(int x, int y) {
-		if ((x >= startX) && (x < startX + width) && (y >= -textElement.getHeightAbove()) &&
-			(y < textElement.getHeightBelow())) {
-			return true;
-		}
-		return false;
-	}
+        return (x >= startX) && (x < startX + width) && (y >= -textElement.getHeightAbove()) &&
+                (y < textElement.getHeightBelow());
+    }
 
 	@Override
 	public int getCol(int row, int x) {

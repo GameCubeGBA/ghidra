@@ -53,9 +53,9 @@ import ghidra.util.timer.GTimerMonitor;
 public class TaskDialog extends DialogComponentProvider implements TaskMonitor {
 
 	/** Amount of time to wait before showing the monitor dialog */
-	private final static int MAX_DELAY = 200000;
+    private static final int MAX_DELAY = 200000;
 
-	public final static int DEFAULT_WIDTH = 275;
+	public static final int DEFAULT_WIDTH = 275;
 
 	/*
 	 * Note: all paths of finishing should end up calling this runnable.

@@ -258,12 +258,11 @@ public class DecompilerUtils {
 		for (int i = 0; i < fields.length; i++) {
 			ClangTextField f = (ClangTextField) fields[i];
 			List<ClangToken> fieldTokens = f.getTokens();
-			for (int j = 0; j < fieldTokens.size(); j++) {
-				ClangNode fieldToken = fieldTokens.get(j);
-				if (queryTokens.contains(fieldToken)) {
-					return i;
-				}
-			}
+            for (ClangNode fieldToken : fieldTokens) {
+                if (queryTokens.contains(fieldToken)) {
+                    return i;
+                }
+            }
 		}
 		return -1;
 	}
@@ -354,10 +353,9 @@ public class DecompilerUtils {
 	public static AddressSet findClosestAddressSet(Program program, AddressSpace functionSpace,
 			List<ClangToken> tokenList) {
 		AddressSet addressSet = new AddressSet();
-		for (int i = 0; i < tokenList.size(); ++i) {
-			ClangToken tok = tokenList.get(i);
-			addTokenAddressRangeToSet(addressSet, tok, functionSpace);
-		}
+        for (ClangToken tok : tokenList) {
+            addTokenAddressRangeToSet(addressSet, tok, functionSpace);
+        }
 
 		// If no tokens are addressed - look for something on the same line
 		if (addressSet.isEmpty()) {
@@ -574,35 +572,34 @@ public class DecompilerUtils {
 		}
 
 		Stack<ClangSyntaxToken> braceStack = new Stack<>();
-		for (int i = 0; i < list.size(); ++i) {
-			ClangToken token = (ClangToken) list.get(i);
-			if (token instanceof ClangSyntaxToken) {
-				ClangSyntaxToken syntaxToken = (ClangSyntaxToken) token;
+        for (ClangNode clangNode : list) {
+            ClangToken token = (ClangToken) clangNode;
+            if (token instanceof ClangSyntaxToken) {
+                ClangSyntaxToken syntaxToken = (ClangSyntaxToken) token;
 
-				if (startToken == syntaxToken) {
-					// found our starting token, take the current value on the stack
-					ClangSyntaxToken matchingBrace = braceStack.pop();
-					return matchingBrace;
-				}
+                if (startToken == syntaxToken) {
+                    // found our starting token, take the current value on the stack
+                    ClangSyntaxToken matchingBrace = braceStack.pop();
+                    return matchingBrace;
+                }
 
-				if (!isBrace(syntaxToken)) {
-					continue;
-				}
+                if (!isBrace(syntaxToken)) {
+                    continue;
+                }
 
-				if (braceStack.isEmpty()) {
-					braceStack.push(syntaxToken);
-					continue;
-				}
+                if (braceStack.isEmpty()) {
+                    braceStack.push(syntaxToken);
+                    continue;
+                }
 
-				ClangSyntaxToken lastToken = braceStack.peek();
-				if (isMatchingBrace(lastToken, syntaxToken)) {
-					braceStack.pop();
-				}
-				else {
-					braceStack.push(syntaxToken);
-				}
-			}
-		}
+                ClangSyntaxToken lastToken = braceStack.peek();
+                if (isMatchingBrace(lastToken, syntaxToken)) {
+                    braceStack.pop();
+                } else {
+                    braceStack.push(syntaxToken);
+                }
+            }
+        }
 		return null;
 	}
 

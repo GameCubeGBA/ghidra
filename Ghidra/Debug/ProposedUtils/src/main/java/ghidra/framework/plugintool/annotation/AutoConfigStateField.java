@@ -25,7 +25,7 @@ public @interface AutoConfigStateField {
 	@SuppressWarnings("rawtypes")
 	Class<? extends ConfigFieldCodec> codec() default DefaultConfigFieldCodec.class;
 
-	static abstract class DefaultConfigFieldCodec<T> implements ConfigFieldCodec<T> {
+	abstract class DefaultConfigFieldCodec<T> implements ConfigFieldCodec<T> {
 		public DefaultConfigFieldCodec() {
 			throw new AssertionError();
 		}

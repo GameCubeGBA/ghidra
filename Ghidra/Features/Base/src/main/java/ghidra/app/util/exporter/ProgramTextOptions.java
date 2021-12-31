@@ -23,51 +23,51 @@ import ghidra.framework.options.SaveState;
 
 class ProgramTextOptions {
 
-	final static String OPTION_WIDTH = "Width";
-	final static String OPTION_WIDTH_ADDR = " Address ";
-	final static String OPTION_WIDTH_BYTES = " Bytes ";
-	final static String OPTION_WIDTH_PREMNEMONIC = " PreMnemonic ";
-	final static String OPTION_WIDTH_MNEMONIC = " Mnemonic ";
-	final static String OPTION_WIDTH_OPERAND = " Operand ";
-	final static String OPTION_WIDTH_EOL = " End of Line ";
-	final static String OPTION_WIDTH_LABEL = " Labels ";
-	final static String OPTION_WIDTH_REF = " References ";
-	final static String OPTION_WIDTH_DATA_FIELD = " Data Field Name ";
+	static final String OPTION_WIDTH = "Width";
+	static final String OPTION_WIDTH_ADDR = " Address ";
+	static final String OPTION_WIDTH_BYTES = " Bytes ";
+	static final String OPTION_WIDTH_PREMNEMONIC = " PreMnemonic ";
+	static final String OPTION_WIDTH_MNEMONIC = " Mnemonic ";
+	static final String OPTION_WIDTH_OPERAND = " Operand ";
+	static final String OPTION_WIDTH_EOL = " End of Line ";
+	static final String OPTION_WIDTH_LABEL = " Labels ";
+	static final String OPTION_WIDTH_REF = " References ";
+	static final String OPTION_WIDTH_DATA_FIELD = " Data Field Name ";
 
-	final static String OPTION_SHOW = "Show";
-	final static String OPTION_SHOW_COMMENTS = " Comments ";
-	final static String OPTION_SHOW_PROPERTIES = " Properties ";
-	final static String OPTION_SHOW_STRUCTURES = " Structures ";
-	final static String OPTION_SHOW_UNDEFINED = " Undefined Data ";
-	final static String OPTION_SHOW_REF_HEADER = " Ref Headers ";
-	final static String OPTION_SHOW_BACK_REFS = " Back Refs ";
-	final static String OPTION_SHOW_FORWARD_REFS = " Forward Refs ";
-	final static String OPTION_SHOW_FUNCTIONS = " Functions ";
-	final static String OPTION_SHOW_BLOCK_NAMES = " Block Names ";
+	static final String OPTION_SHOW = "Show";
+	static final String OPTION_SHOW_COMMENTS = " Comments ";
+	static final String OPTION_SHOW_PROPERTIES = " Properties ";
+	static final String OPTION_SHOW_STRUCTURES = " Structures ";
+	static final String OPTION_SHOW_UNDEFINED = " Undefined Data ";
+	static final String OPTION_SHOW_REF_HEADER = " Ref Headers ";
+	static final String OPTION_SHOW_BACK_REFS = " Back Refs ";
+	static final String OPTION_SHOW_FORWARD_REFS = " Forward Refs ";
+	static final String OPTION_SHOW_FUNCTIONS = " Functions ";
+	static final String OPTION_SHOW_BLOCK_NAMES = " Block Names ";
 
-	final static String OPTION_ADV = "Advanced";
-	final static String OPTION_ADV_LABEL_SUFFIX = " Label Suffix ";
-	final static String OPTION_ADV_COMMENT_SUFFIX = " Comment Prefix ";
+	static final String OPTION_ADV = "Advanced";
+	static final String OPTION_ADV_LABEL_SUFFIX = " Label Suffix ";
+	static final String OPTION_ADV_COMMENT_SUFFIX = " Comment Prefix ";
 
-	private final static int DEFAULT_ADDR_WIDTH = 16;
-	private final static int DEFAULT_BYTES_WIDTH = 12;
-	private final static int DEFAULT_LABEL_WIDTH = 30;
-	private final static int DEFAULT_PREMNEMONIC_WIDTH = 4;
-	private final static int DEFAULT_MNEMONIC_WIDTH = 12;
-	private final static int DEFAULT_OPERAND_WIDTH = 40;
-	private final static int DEFAULT_EOL_WIDTH = 40;
-	private final static int DEFAULT_REF_HEADER_WIDTH = 13;
-	private final static int DEFAULT_REF_WIDTH = 40;
-	private final static int DEFAULT_STACK_VAR_PRENAME_WIDTH = 10;
-	private final static int DEFAULT_STACK_VAR_NAME_WIDTH = 15;
-	private final static int DEFAULT_STACK_VAR_DATATYPE_WIDTH = 15;
-	private final static int DEFAULT_STACK_VAR_OFFSET_WIDTH = 8;
-	private final static int DEFAULT_STACK_VAR_COMMENT_WIDTH = 20;
-	private final static int DEFAULT_STACK_VAR_XREF_WIDTH = 50;
-	private final static int DEFAULT_DATA_FIELD_NAME_WIDTH = 12;
+	private static final int DEFAULT_ADDR_WIDTH = 16;
+	private static final int DEFAULT_BYTES_WIDTH = 12;
+	private static final int DEFAULT_LABEL_WIDTH = 30;
+	private static final int DEFAULT_PREMNEMONIC_WIDTH = 4;
+	private static final int DEFAULT_MNEMONIC_WIDTH = 12;
+	private static final int DEFAULT_OPERAND_WIDTH = 40;
+	private static final int DEFAULT_EOL_WIDTH = 40;
+	private static final int DEFAULT_REF_HEADER_WIDTH = 13;
+	private static final int DEFAULT_REF_WIDTH = 40;
+	private static final int DEFAULT_STACK_VAR_PRENAME_WIDTH = 10;
+	private static final int DEFAULT_STACK_VAR_NAME_WIDTH = 15;
+	private static final int DEFAULT_STACK_VAR_DATATYPE_WIDTH = 15;
+	private static final int DEFAULT_STACK_VAR_OFFSET_WIDTH = 8;
+	private static final int DEFAULT_STACK_VAR_COMMENT_WIDTH = 20;
+	private static final int DEFAULT_STACK_VAR_XREF_WIDTH = 50;
+	private static final int DEFAULT_DATA_FIELD_NAME_WIDTH = 12;
 
-	private final static String DEFAULT_LABEL_SUFFIX = ":";
-	private final static String DEFAULT_COMMENT_PREFIX = ";";
+	private static final String DEFAULT_LABEL_SUFFIX = ":";
+	private static final String DEFAULT_COMMENT_PREFIX = ";";
 
 	private boolean isHTML;
 
@@ -240,20 +240,20 @@ class ProgramTextOptions {
 	}
 
 	void writeConfigState(SaveState saveState) {
-		saveState.putInt("ADDR_WIDTH", getAddrWidth());
-		saveState.putInt("BYTES_WIDTH", getBytesWidth());
-		saveState.putInt("LABEL_WIDTH", getLabelWidth());
-		saveState.putInt("PREMNEMONIC_WIDTH", getPreMnemonicWidth());
-		saveState.putInt("MNEMONIC_WIDTH", getMnemonicWidth());
-		saveState.putInt("OPERAND_WIDTH", getOperandWidth());
-		saveState.putInt("EOL_WIDTH", getEolWidth());
-		saveState.putInt("REF_WIDTH", getRefWidth());
-		saveState.putInt("DATA_FIELD_NAME_WIDTH", getDataFieldNameWidth());
+		saveState.putInt("ADDR_WIDTH", addrWidth);
+		saveState.putInt("BYTES_WIDTH", bytesWidth);
+		saveState.putInt("LABEL_WIDTH", labelWidth);
+		saveState.putInt("PREMNEMONIC_WIDTH", preMnemonicWidth);
+		saveState.putInt("MNEMONIC_WIDTH", mnemonicWidth);
+		saveState.putInt("OPERAND_WIDTH", operandWidth);
+		saveState.putInt("EOL_WIDTH", eolWidth);
+		saveState.putInt("REF_WIDTH", refWidth);
+		saveState.putInt("DATA_FIELD_NAME_WIDTH", dataFieldNameWidth);
 
-		saveState.putString("LABEL_SUFFIX", getLabelSuffix());
-		saveState.putString("COMMENT_PREFIX", getCommentPrefix());
+		saveState.putString("LABEL_SUFFIX", labelSuffix);
+		saveState.putString("COMMENT_PREFIX", commentPrefix);
 
-		saveState.putBoolean("INCLUDE_BLOCKNAMES", isShowBlockNameInOperands());
+		saveState.putBoolean("INCLUDE_BLOCKNAMES", showBlockNameInOperands);
 	}
 
 	void readConfigState(SaveState saveState) {

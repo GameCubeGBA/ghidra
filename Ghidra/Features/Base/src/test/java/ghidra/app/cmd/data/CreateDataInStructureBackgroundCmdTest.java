@@ -43,8 +43,7 @@ public class CreateDataInStructureBackgroundCmdTest extends AbstractGenericTest 
 	 * @param arg0
 	 */
 	public CreateDataInStructureBackgroundCmdTest() {
-		super();
-	}
+    }
 
 	@Before
 	public void setUp() throws Exception {

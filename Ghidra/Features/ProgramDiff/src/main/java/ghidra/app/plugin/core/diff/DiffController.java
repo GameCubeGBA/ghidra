@@ -361,7 +361,7 @@ public class DiffController {
 	}
 
 	private void recomputeDiffs(TaskMonitor monitor) throws ProgramConflictException {
-		recomputeDiffs(getLimitedAddressSet(), monitor);
+		recomputeDiffs(p1LimitSet, monitor);
 	}
 
 	private void recomputeDiffs(AddressSetView newLimitSet, TaskMonitor monitor)
@@ -386,17 +386,15 @@ public class DiffController {
 	}
 
 	public void locationChanged(Address program1Location) {
-		for (int i = 0; i < listenerList.size(); i++) {
-			DiffControllerListener listener = listenerList.get(i);
-			listener.diffLocationChanged(this, program1Location);
-		}
+        for (DiffControllerListener listener : listenerList) {
+            listener.diffLocationChanged(this, program1Location);
+        }
 	}
 
 	public void differencesChanged(TaskMonitor monitor) {
-		for (int i = 0; i < listenerList.size(); i++) {
-			DiffControllerListener listener = listenerList.get(i);
-			listener.differencesChanged(this);
-		}
+        for (DiffControllerListener listener : listenerList) {
+            listener.differencesChanged(this);
+        }
 	}
 
 }

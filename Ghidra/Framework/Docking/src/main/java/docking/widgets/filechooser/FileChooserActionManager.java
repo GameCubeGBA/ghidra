@@ -27,7 +27,7 @@ import docking.action.DockingAction;
 import docking.action.MenuData;
 
 class FileChooserActionManager {
-	private final static String OWNER = "Ghidra File Chooser";
+	private static final String OWNER = "Ghidra File Chooser";
 
 	private GhidraFileChooser chooser;
 	private DockingAction renameAction;

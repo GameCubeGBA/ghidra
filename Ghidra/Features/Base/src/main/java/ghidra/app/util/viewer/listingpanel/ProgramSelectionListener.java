@@ -30,5 +30,5 @@ public interface ProgramSelectionListener {
 	 * Called whenever the program slection changes.
 	 * @param selection the new program selection.
 	 */
-	public void programSelectionChanged(ProgramSelection selection);
+    void programSelectionChanged(ProgramSelection selection);
 }

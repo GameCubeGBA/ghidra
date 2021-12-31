@@ -169,12 +169,12 @@ public class Option {
 		}
 		if (Boolean.class.isAssignableFrom(getValueClass())) {
 			Boolean b = null;
-			if (str.equalsIgnoreCase("true") || str.equalsIgnoreCase("t") ||
-				str.equalsIgnoreCase("yes") || str.equalsIgnoreCase("y")) {
+			if ("true".equalsIgnoreCase(str) || "t".equalsIgnoreCase(str) ||
+				"yes".equalsIgnoreCase(str) || "y".equalsIgnoreCase(str)) {
 				b = true;
 			}
-			else if (str.equalsIgnoreCase("false") || str.equalsIgnoreCase("f") ||
-				str.equalsIgnoreCase("no") || str.equalsIgnoreCase("n")) {
+			else if ("false".equalsIgnoreCase(str) || "f".equalsIgnoreCase(str) ||
+				"no".equalsIgnoreCase(str) || "n".equalsIgnoreCase(str)) {
 				b = false;
 			}
 			if (b == null) {
@@ -200,7 +200,7 @@ public class Option {
 				else {
 					if (addressFactory == null) {
 						throw new RuntimeException("Attempted to use Address type option (" +
-							getName() + ") without specifying Address Factory");
+                                name + ") without specifying Address Factory");
 					}
 					newAddr = addressFactory.getDefaultAddressSpace().getAddress(str);
 				}

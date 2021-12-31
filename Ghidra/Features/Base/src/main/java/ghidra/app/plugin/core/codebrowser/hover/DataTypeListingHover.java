@@ -109,7 +109,7 @@ public class DataTypeListingHover extends AbstractConfigurableHover implements L
 			if (hasInvalidStorage) {
 				warningMsg += "WARNING! Invalid Storage";
 			}
-			if (warningMsg.length() != 0) {
+			if (!warningMsg.isEmpty()) {
 				String errorText =
 					"<HTML><center><font color=\"red\">" + warningMsg + "!</font></center><BR>";
 				toolTipText = toolTipText.replace("<HTML>", errorText);

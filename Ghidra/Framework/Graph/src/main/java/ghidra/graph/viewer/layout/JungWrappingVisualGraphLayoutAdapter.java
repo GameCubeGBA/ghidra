@@ -213,32 +213,32 @@ public class JungWrappingVisualGraphLayoutAdapter<V extends VisualVertex,
 	@Override
 	public void removeLayoutListener(LayoutListener<V, E> listener) {
 		Iterator<WeakReference<LayoutListener<V, E>>> iterator = listeners.iterator();
-		for (; iterator.hasNext();) {
-			WeakReference<LayoutListener<V, E>> reference = iterator.next();
-			LayoutListener<V, E> layoutListener = reference.get();
-			if (layoutListener == null) {
-				iterator.remove();
-			}
+        while (iterator.hasNext()) {
+            WeakReference<LayoutListener<V, E>> reference = iterator.next();
+            LayoutListener<V, E> layoutListener = reference.get();
+            if (layoutListener == null) {
+                iterator.remove();
+            }
 
-			if (layoutListener == listener) {
-				iterator.remove();
-			}
-		}
-	}
+            if (layoutListener == listener) {
+                iterator.remove();
+            }
+        }
+    }
 
 	private void fireVertexLocationChanged(V vertex, Point2D point, ChangeType type) {
 		Iterator<WeakReference<LayoutListener<V, E>>> iterator = listeners.iterator();
-		for (; iterator.hasNext();) {
-			WeakReference<LayoutListener<V, E>> reference = iterator.next();
-			LayoutListener<V, E> layoutListener = reference.get();
-			if (layoutListener == null) {
-				iterator.remove();
-				continue;
-			}
+        while (iterator.hasNext()) {
+            WeakReference<LayoutListener<V, E>> reference = iterator.next();
+            LayoutListener<V, E> layoutListener = reference.get();
+            if (layoutListener == null) {
+                iterator.remove();
+                continue;
+            }
 
-			layoutListener.vertexLocationChanged(vertex, point, type);
-		}
-	}
+            layoutListener.vertexLocationChanged(vertex, point, type);
+        }
+    }
 
 	@Override
 	public void setLocation(V v, Point2D location) {

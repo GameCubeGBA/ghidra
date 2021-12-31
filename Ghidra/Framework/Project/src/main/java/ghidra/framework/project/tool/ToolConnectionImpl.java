@@ -42,8 +42,8 @@ class ToolConnectionImpl implements ToolConnection, ToolListener {
 	private StringIntHashtable connectHt; // maps event -> int value 1 if
 	// tools are connected, int value 0 if tools are not connected
 
-	private final static int CONNECTED = 1;
-	private final static int DISCONNECTED = 0;
+	private static final int CONNECTED = 1;
+	private static final int DISCONNECTED = 0;
 
 	private boolean listenerAdded; // set to true the first time a
 	// connection is made for any event
@@ -182,18 +182,17 @@ class ToolConnectionImpl implements ToolConnection, ToolListener {
 	public void restoreFromXml(Element root) {
 		listenerAdded = false;
 
-		Iterator<?> iter = root.getChildren("EVENT").iterator();
-		while (iter.hasNext()) {
-			Element elem = (Element) iter.next();
-			String name = elem.getAttributeValue("NAME");
-			String state = elem.getAttributeValue("CONNECTED");
-			boolean connected = (state != null && "true".equalsIgnoreCase(state));
-			connectHt.put(name, (connected ? CONNECTED : DISCONNECTED));
-			if (connected && !listenerAdded) {
-				producerTool.addToolListener(this);
-				listenerAdded = true;
-			}
-		}
+        for (Object o : root.getChildren("EVENT")) {
+            Element elem = (Element) o;
+            String name = elem.getAttributeValue("NAME");
+            String state = elem.getAttributeValue("CONNECTED");
+            boolean connected = (state != null && "true".equalsIgnoreCase(state));
+            connectHt.put(name, (connected ? CONNECTED : DISCONNECTED));
+            if (connected && !listenerAdded) {
+                producerTool.addToolListener(this);
+                listenerAdded = true;
+            }
+        }
 	}
 
 	/**

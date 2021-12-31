@@ -38,8 +38,7 @@ public class PcodeBlockBasic extends PcodeBlock {
 	private AddressSet cover;								// Addresses of instructions making up the block
 	
 	PcodeBlockBasic() {
-		super();
-		blocktype = PcodeBlock.BASIC;
+        blocktype = PcodeBlock.BASIC;
 		oplist = new ListLinked<>();
 		cover = new AddressSet();
 	}

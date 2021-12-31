@@ -29,7 +29,7 @@ import mdemangler.MDParsableItem;
 public class MDEFIModifier extends MDParsableItem {
 	public static final char SPACE = ' ';
 
-	public final static String PTR64 = "__ptr64";
+	public static final String PTR64 = "__ptr64";
 	private static final String UNALIGNED = "__unaligned";
 	private static final String RESTRICT = "__restrict";
 

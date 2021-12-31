@@ -24,7 +24,7 @@ import ghidra.program.model.mem.MemoryAccessException;
 import ghidra.util.exception.DuplicateNameException;
 
 public class PefDebug implements StructConverter {
-	public final static int SIZEOF = 0x12;
+	public static final int SIZEOF = 0x12;
 
 	private int unknown;
 	private int type;
@@ -78,11 +78,8 @@ public class PefDebug implements StructConverter {
 		if (distance > 0xffff) {
 			return false;
 		}
-		if (nameLength <= 0 || nameLength > 255) {
-			return false;
-		}
-		return true;
-	}
+        return nameLength > 0 && nameLength <= 255;
+    }
 
 	public DataType toDataType() throws DuplicateNameException {
 		String structureName = "PEF_Debug_0x"+Integer.toHexString(nameLength);

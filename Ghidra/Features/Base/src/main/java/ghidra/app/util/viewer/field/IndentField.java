@@ -221,11 +221,8 @@ public class IndentField implements ListingField {
 
 	@Override
 	public boolean contains(int x, int y) {
-		if ((x < startX) || (x >= startX + fieldWidth) || (y < startY) || (y >= startY + height)) {
-			return false;
-		}
-		return true;
-	}
+        return (x >= startX) && (x < startX + fieldWidth) && (y >= startY) && (y < startY + height);
+    }
 
 	@Override
 	public int getNumDataRows() {

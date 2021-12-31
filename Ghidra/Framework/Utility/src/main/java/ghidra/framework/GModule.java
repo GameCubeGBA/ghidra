@@ -180,11 +180,8 @@ public class GModule {
 
 	private boolean shouldSearch(ResourceFile child) {
 		String childName = child.getName();
-		if (EXCLUDED_DIRECTORY_NAMES.contains(childName) || dataSearchIgnoreDirs.contains(childName)) {
-			return false;
-		}
-		return true;
-	}
+        return !EXCLUDED_DIRECTORY_NAMES.contains(childName) && !dataSearchIgnoreDirs.contains(childName);
+    }
 
 	public String getName() {
 		return moduleRoot.getName();

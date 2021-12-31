@@ -58,7 +58,7 @@ public abstract class VTMatchTagDBAdapter {
 			ColumnDescription[] columns = ColumnDescription.values();
 			Field[] fields = new Field[columns.length];
 			for (int i = 0; i < fields.length; i++) {
-				fields[i] = columns[i].getColumnField();
+				fields[i] = columns[i].columnField;
 			}
 			return fields;
 		}

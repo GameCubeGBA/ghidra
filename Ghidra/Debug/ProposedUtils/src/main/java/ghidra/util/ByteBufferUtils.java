@@ -31,7 +31,7 @@ public interface ByteBufferUtils {
 	 * @param capacity the new capacity, greater or equal to the buffer's limit
 	 * @return the new buffer
 	 */
-	public static ByteBuffer resize(ByteBuffer buf, int capacity) {
+	static ByteBuffer resize(ByteBuffer buf, int capacity) {
 		if (capacity < buf.limit()) {
 			throw new IllegalArgumentException("New capacity must fit current contents");
 		}
@@ -50,7 +50,7 @@ public interface ByteBufferUtils {
 	 * @param buf the buffer
 	 * @return the new buffer
 	 */
-	public static ByteBuffer upsize(ByteBuffer buf) {
+	static ByteBuffer upsize(ByteBuffer buf) {
 		return resize(buf, buf.capacity() * 2);
 	}
 
@@ -68,7 +68,7 @@ public interface ByteBufferUtils {
 	 * @return true if matches, false otherwise
 	 * @throws IllegalArgumentException if {@code mask} and {@code a} have unequal capacities
 	 */
-	public static boolean maskedEquals(ByteBuffer mask, ByteBuffer a, ByteBuffer b) {
+	static boolean maskedEquals(ByteBuffer mask, ByteBuffer a, ByteBuffer b) {
 		int len = a.capacity();
 		if (mask != null && mask.capacity() != len) {
 			throw new IllegalArgumentException("mask and a must have equal capacities");

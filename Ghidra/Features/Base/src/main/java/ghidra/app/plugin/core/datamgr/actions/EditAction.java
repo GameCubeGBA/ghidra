@@ -61,12 +61,8 @@ public class EditAction extends DockingAction {
 		}
 
 		DataTypeNode dataTypeNode = (DataTypeNode) node;
-		if (dataTypeNode.hasCustomEditor()) {
-			return true;
-		}
-
-		return false;
-	}
+        return dataTypeNode.hasCustomEditor();
+    }
 
 	@Override
 	public void actionPerformed(ActionContext context) {

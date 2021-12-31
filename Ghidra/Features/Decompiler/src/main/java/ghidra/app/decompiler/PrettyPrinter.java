@@ -30,7 +30,7 @@ public class PrettyPrinter {
 	/**
 	 * The indent string to use when printing.
 	 */
-	public final static String INDENT_STRING = " ";
+    public static final String INDENT_STRING = " ";
 
 	private Function function;
 	private ClangTokenGroup tokgroup;
@@ -50,7 +50,7 @@ public class PrettyPrinter {
     private void padEmptyLines() {
         for (ClangLine line : lines) {
 			ArrayList<ClangToken> tokenList = line.getAllTokens();
-			if (tokenList.size() == 0) {
+			if (tokenList.isEmpty()) {
 				ClangToken spacer = ClangToken.buildSpacer(null, line.getIndent(), INDENT_STRING);
 				spacer.setLineParent( line );
                 tokenList.add(0, spacer);
@@ -122,7 +122,7 @@ public class PrettyPrinter {
 		for (int i = 0 ; i < nChildren ; ++i) {
 			ClangNode node = tokgroup.Child(i);
 			if (node instanceof ClangFuncProto) {
-				return node.toString()+";";
+				return node +";";
 			}
 		}
 		return null;

@@ -372,13 +372,13 @@ public class ByteSequenceRowObject {
 	 * @return merged sequences
 	 */
 	public static DittedBitSequence merge(List<ByteSequenceRowObject> rowObjects) {
-		if (rowObjects == null || rowObjects.size() == 0) {
+		if (rowObjects == null || rowObjects.isEmpty()) {
 			return null;
 		}
 
 		List<DittedBitSequence> dittedSeqs = new ArrayList<>();
 		for (ByteSequenceRowObject currentRow : rowObjects) {
-			DittedBitSequence currentSeq = new DittedBitSequence(currentRow.getSequence(), true);
+			DittedBitSequence currentSeq = new DittedBitSequence(currentRow.byteSequence, true);
 			dittedSeqs.add(currentSeq);
 		}
 		DittedBitSequence currentMerge = dittedSeqs.get(0);

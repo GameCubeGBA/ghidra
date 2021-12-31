@@ -40,7 +40,7 @@ import java.io.*;
  * 
  */
 public class OMFSegMapDesc {
-    final static int IMAGE_SIZEOF_OMF_SEG_MAP_DESC = 20;
+    static final int IMAGE_SIZEOF_OMF_SEG_MAP_DESC = 20;
 
     private short  flags;
     private short  ovl;

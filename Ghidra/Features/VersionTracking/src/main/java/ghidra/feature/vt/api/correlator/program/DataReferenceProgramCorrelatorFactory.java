@@ -28,8 +28,7 @@ public class DataReferenceProgramCorrelatorFactory
 		extends VTAbstractReferenceProgramCorrelatorFactory {
 
 	public DataReferenceProgramCorrelatorFactory() {
-		super();
-		setName("Data Reference Match");
+        setName("Data Reference Match");
 		correlatorDescription =
 			"Matches functions by the accepted data matches they have in common.";
 

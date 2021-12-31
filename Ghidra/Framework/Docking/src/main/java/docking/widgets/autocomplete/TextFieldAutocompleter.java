@@ -335,7 +335,7 @@ public class TextFieldAutocompleter<T> {
 		}
 		String text = getPrefix(focus);
 		final Collection<T> completions = model.computeCompletions(text);
-		if (completions == null || completions.size() == 0) {
+		if (completions == null || completions.isEmpty()) {
 			setCompletionListVisible(false);
 			return;
 		}
@@ -732,7 +732,7 @@ public class TextFieldAutocompleter<T> {
 				return;
 			}
 			Collection<T> comp = model.computeCompletions(before);
-			if (comp == null || comp.size() == 0) {
+			if (comp == null || comp.isEmpty()) {
 				return;
 			}
 			else if (comp.size() == 1) {

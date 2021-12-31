@@ -32,5 +32,5 @@ import ghidra.dbg.target.TargetLauncher.TargetCmdLineLauncher;
 public interface LldbModelTargetLauncher extends LldbModelTargetObject, TargetCmdLineLauncher {
 
 	@Override
-	public CompletableFuture<Void> launch(List<String> args);
+    CompletableFuture<Void> launch(List<String> args);
 }

@@ -60,7 +60,7 @@ abstract class OldFunctionDBAdapter {
 	/**
 	 * @param handle
 	 */
-	abstract protected void deleteTable(DBHandle handle) throws IOException;
+    protected abstract void deleteTable(DBHandle handle) throws IOException;
 
 	/**
 	 * Returns a count of functions records.

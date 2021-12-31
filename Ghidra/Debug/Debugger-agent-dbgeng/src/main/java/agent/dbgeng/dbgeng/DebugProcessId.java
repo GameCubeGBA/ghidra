@@ -43,11 +43,8 @@ public class DebugProcessId implements Comparable<DebugProcessId> {
 			return false;
 		}
 		DebugProcessId that = (DebugProcessId) obj;
-		if (this.id != that.id) {
-			return false;
-		}
-		return true;
-	}
+        return this.id == that.id;
+    }
 
 	@Override
 	public int compareTo(DebugProcessId that) {

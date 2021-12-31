@@ -18,6 +18,6 @@ package ghidra.util.ascii;
 
 public interface CharSetRecognizer {
 
-	public boolean contains(int c);
+	boolean contains(int c);
 
 }

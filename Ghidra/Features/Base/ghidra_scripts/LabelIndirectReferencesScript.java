@@ -59,39 +59,36 @@ public class LabelIndirectReferencesScript extends GhidraScript {
 		}
 
 		// Check that data with user symbols are found
-		if (dataAddrSet.size() == 0) {
+		if (dataAddrSet.isEmpty()) {
 			popup("No data with user symbols were found.");
 			return;
 		}
 
 		println("Number of data items with user symbols found: " + dataAddrSet.size());
 
-		for (int i = 0; i < dataAddrSet.size(); i++) {
-			Address dataAddr = dataAddrSet.get(i);
+        for (Address dataAddr : dataAddrSet) {
+            List<Address> allRefAddrs = new ArrayList<Address>();
+            allRefAddrs = findAllReferences(dataAddr, monitor);
+            if (allRefAddrs == null) {
+                println("User cancelled script");
+                return;
+            }
 
-			List<Address> allRefAddrs = new ArrayList<Address>();
-			allRefAddrs = findAllReferences(dataAddr, monitor);
-			if (allRefAddrs == null) {
-				println("User cancelled script");
-				return;
-			}
-
-			// Loop through refs to see which that have references to them (ie a label there)
-			for (int j = 0; j < allRefAddrs.size(); j++) {
-				Address refFromAddr = allRefAddrs.get(j);
-				if (listing.getInstructionContaining(refFromAddr) == null) {
-					// if the reference to the data is not inside an instruction Code Unit get the references to the data references
-					Reference[] refRef = getReferencesTo(refFromAddr);
-					// if there are references to the ptr_dataAddr then put a ptr_data label on it
-					if (refRef.length > 0) {
-						String newLabel = "ptr_" + listing.getDataAt(dataAddr).getLabel() + "_" +
-							allRefAddrs.get(j);
-						println(newLabel);
-						symbolTable.createLabel(allRefAddrs.get(j), newLabel, SourceType.ANALYSIS);
-					}
-				}
-			}
-		}
+            // Loop through refs to see which that have references to them (ie a label there)
+            for (Address refFromAddr : allRefAddrs) {
+                if (listing.getInstructionContaining(refFromAddr) == null) {
+                    // if the reference to the data is not inside an instruction Code Unit get the references to the data references
+                    Reference[] refRef = getReferencesTo(refFromAddr);
+                    // if there are references to the ptr_dataAddr then put a ptr_data label on it
+                    if (refRef.length > 0) {
+                        String newLabel = "ptr_" + listing.getDataAt(dataAddr).getLabel() + "_" +
+                                refFromAddr;
+                        println(newLabel);
+                        symbolTable.createLabel(refFromAddr, newLabel, SourceType.ANALYSIS);
+                    }
+                }
+            }
+        }
 	}
 
 	public List<Address> findAllReferences(Address addr, TaskMonitor taskMonitor) {

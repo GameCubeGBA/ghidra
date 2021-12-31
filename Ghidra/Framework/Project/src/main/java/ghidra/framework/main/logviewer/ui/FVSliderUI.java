@@ -90,11 +90,9 @@ public class FVSliderUI extends BasicSliderUI {
 			return;
 		}
 		long bytesInView = 0;
-		Iterator<Chunk> iter = model.iterator();
-		while (iter.hasNext()) {
-			Chunk chunk = iter.next();
-			bytesInView += (chunk.end - chunk.start);
-		}
+        for (Chunk chunk : model) {
+            bytesInView += (chunk.end - chunk.start);
+        }
 		long bytesPerLine = bytesInView / rows;
 		long totalLinesInFile = fileSize / bytesPerLine;
 

@@ -310,7 +310,7 @@ public class DefaultLanguageService implements LanguageService, ChangeListener {
 	public static List<String> getDefinedExternalToolNames(String languageId, String tool,
 			boolean includeDeprecated) {
 		List<String> returnValue = null;
-		if (languageId != null && languageId.length() > 0 && tool != null && tool.length() > 0) {
+		if (languageId != null && !languageId.isEmpty() && tool != null && !tool.isEmpty()) {
 			List<LanguageDescription> languageDescriptions =
 				DefaultLanguageService.getLanguageService().getLanguageDescriptions(
 					includeDeprecated);

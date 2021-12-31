@@ -35,5 +35,5 @@ public interface ListingBackgroundColorModel extends BackgroundColorModel {
 	 * @param listingPanel the {@link ListingPanel} that changed and where the new {@link AddressIndexMap}
 	 * and {@link Program} can be retrieved.
 	 */
-	public void modelDataChanged(ListingPanel listingPanel);
+    void modelDataChanged(ListingPanel listingPanel);
 }

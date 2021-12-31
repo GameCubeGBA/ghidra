@@ -27,24 +27,24 @@ public interface FunctionAssociationContext {
 	 * Gets the source function selected in the table
 	 * @return the selected source function or null
 	 */
-	public Function getSelectedSourceFunction();
+    Function getSelectedSourceFunction();
 
 	/**
 	 * Gets the destination function selected in the table
 	 * @return the selected destination function or null
 	 */
-	public Function getSelectionDestinationFunction();
+    Function getSelectionDestinationFunction();
 
 	/**
 	 * Gets the match for the source and destination functions if it exists.
 	 * @return the match or null if there isn't a match.
 	 */
-	public VTMatch getExistingMatch();
+    VTMatch getExistingMatch();
 
 	/**
 	 * Determines if a function match can be created for the selected source and destination.
 	 * @return true if the indicated match doesn't currently exist and can be created.
 	 */
-	public boolean canCreateMatch();
+    boolean canCreateMatch();
 
 }

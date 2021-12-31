@@ -23,8 +23,8 @@ import ghidra.util.task.TaskMonitor;
 
 public interface FunctionAlgorithm extends ExtensionPoint {
 
-	public int score(Function function, TaskMonitor monitor) throws CancelledException;
+	int score(Function function, TaskMonitor monitor) throws CancelledException;
 
-	public String getName();
+	String getName();
 
 }

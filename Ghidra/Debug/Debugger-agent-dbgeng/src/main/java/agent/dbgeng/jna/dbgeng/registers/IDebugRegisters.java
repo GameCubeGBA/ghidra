@@ -26,7 +26,7 @@ import agent.dbgeng.jna.dbgeng.UnknownWithUtils.VTableIndex;
 import com.sun.jna.platform.win32.COM.IUnknown;
 
 public interface IDebugRegisters extends IUnknown {
-	final IID IID_IDEBUG_REGISTERS = new IID("ce289126-9e84-45a7-937e-67bb18691493");
+	IID IID_IDEBUG_REGISTERS = new IID("ce289126-9e84-45a7-937e-67bb18691493");
 
 	enum VTIndices implements VTableIndex {
 		GET_NUMBER_REGISTERS, //

@@ -311,7 +311,7 @@ public class OmfSegmentHeader extends OmfRecord {
 		
 		// Once we know the class name, we can make some educated guesses about read/write/exec permissions
 		isReadable = true;
-		if (className.equals("CODE") || className.equals("code")) {
+		if ("CODE".equals(className) || "code".equals(className)) {
 			isCode = true;
 			isWritable = false;
 			isExecutable = true;
@@ -367,8 +367,7 @@ public class OmfSegmentHeader extends OmfRecord {
 		private int dataUpNext;		// Index of next data section OmfIteratedData/OmfEnumeratedData to be buffered 
 		
 		public SectionStream(BinaryReader reader, MessageLog log) throws IOException {
-			super();
-			this.reader = reader;
+            this.reader = reader;
 			this.log = log;
 			pointer = 0;
 			dataUpNext = 0;

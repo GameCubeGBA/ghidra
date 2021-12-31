@@ -333,7 +333,7 @@ public class FollowFlowProgramBuilder extends ProgramBuilder {
 		int distance = to - from - thisInstructionsSize;
 
 		byte[] bytes = new byte[thisInstructionsSize];
-		bytes[0] = (byte) 0x74; // Conditional Jump.(jump short if equal)
+		bytes[0] = 0x74; // Conditional Jump.(jump short if equal)
 		bytes[1] = (byte) distance;
 		clearCodeUnits(fromString, endString, false);
 		setBytes(fromString, bytes, true);

@@ -46,7 +46,7 @@ import ghidra.util.HelpLocation;
 )
 //@formatter:on
 public class StringTablePlugin extends ProgramPlugin {
-	final static String SEARCH_ACTION_NAME = "Search for Strings";
+	static final String SEARCH_ACTION_NAME = "Search for Strings";
 
 	private List<StringTableProvider> transientProviders = new ArrayList<>();
 

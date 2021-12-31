@@ -82,7 +82,7 @@ public abstract class AbstractScalarOperandHover extends AbstractConfigurableHov
 			List<String> reprs = new ArrayList<>();
 			for (Settings setting : INTEGER_SETTINGS) {
 				String repr = type.getRepresentation(memBuffer, setting, type.getLength());
-				if (repr.equals("??")) {
+				if ("??".equals(repr)) {
 					repr = HTMLUtilities.HTML_SPACE;
 				}
 				reprs.add(repr);
@@ -259,10 +259,7 @@ public abstract class AbstractScalarOperandHover extends AbstractConfigurableHov
 
 	@Override
 	protected boolean isValidTooltipContent(String content) {
-		if (content == null || content.length() < HTMLUtilities.HTML.length()) {
-			return false;
-		}
-		return true;
-	}
+        return content != null && content.length() >= HTMLUtilities.HTML.length();
+    }
 
 }

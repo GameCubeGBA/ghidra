@@ -52,8 +52,7 @@ public class AcyclicCallGraphBuilderTest extends AbstractGenericTest {
 	Program program = createProgram();
 
 	public AcyclicCallGraphBuilderTest() {
-		super();
-	}
+    }
 
 	private void node(int functionID, int... destFunctionIDs) {
 		Address address = functionAddress(functionID);

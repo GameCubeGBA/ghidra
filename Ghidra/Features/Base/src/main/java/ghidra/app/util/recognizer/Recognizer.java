@@ -31,7 +31,7 @@ public interface Recognizer extends ExtensionPoint {
      * @return the maximum number of bytes needed to send to this recognizer in
      *         the recognize(...) method
      */
-    public int numberOfBytesRequired();
+    int numberOfBytesRequired();
 
     /**
      * Ask the recognizer to recognize some bytes. Return a description String
@@ -43,7 +43,7 @@ public interface Recognizer extends ExtensionPoint {
      * @return a String description of the recognition, or null if it is not
      *         recognized
      */
-    public String recognize(byte[] bytes);
+    String recognize(byte[] bytes);
 
     /**
      * Return the recognizer priority; for instance, a GZIP/TAR recognizer
@@ -55,5 +55,5 @@ public interface Recognizer extends ExtensionPoint {
      * 
      * @return the recognizer priority
      */
-    public int getPriority();
+    int getPriority();
 }

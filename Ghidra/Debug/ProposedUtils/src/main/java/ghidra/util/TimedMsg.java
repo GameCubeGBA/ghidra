@@ -20,8 +20,8 @@ import java.util.function.BiConsumer;
 public class TimedMsg {
 	private static long last = 0;
 
-	private synchronized static void doMsg(BiConsumer<Object, String> msg, Object originator,
-			String message) {
+	private static synchronized void doMsg(BiConsumer<Object, String> msg, Object originator,
+                                           String message) {
 		if (last == 0) {
 			last = System.currentTimeMillis();
 			msg.accept(originator, "(started) " + message);

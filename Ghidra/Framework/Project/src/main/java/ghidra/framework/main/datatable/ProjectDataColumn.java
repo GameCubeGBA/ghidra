@@ -24,9 +24,9 @@ public abstract class ProjectDataColumn<T> extends
 		AbstractDynamicTableColumn<DomainFileInfo, T, ProjectData> implements ExtensionPoint,
 		Comparable<ProjectDataColumn<?>> {
 
-	abstract public boolean isDefaultColumn();
+	public abstract boolean isDefaultColumn();
 
-	abstract public int getPriority();
+	public abstract int getPriority();
 
 	@Override
 	public int compareTo(ProjectDataColumn<?> other) {

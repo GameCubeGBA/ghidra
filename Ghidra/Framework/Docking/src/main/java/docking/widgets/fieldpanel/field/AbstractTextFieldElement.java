@@ -32,7 +32,7 @@ import docking.widgets.fieldpanel.support.RowColLocation;
  * 
  */
 
-abstract public class AbstractTextFieldElement implements FieldElement {
+public abstract class AbstractTextFieldElement implements FieldElement {
 
 	/** the attributed string displayed by this field element */
 	protected AttributedString attributedString;

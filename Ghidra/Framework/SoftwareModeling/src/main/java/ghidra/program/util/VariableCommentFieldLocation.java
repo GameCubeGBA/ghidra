@@ -65,8 +65,7 @@ public class VariableCommentFieldLocation extends VariableLocation {
 	 * Should only be used by XML restoration.
 	 */
 	public VariableCommentFieldLocation() {
-		super();
-	}
+    }
 
 	/**
 	 * Return the function variable comment string at this location.
@@ -89,11 +88,8 @@ public class VariableCommentFieldLocation extends VariableLocation {
 		if (!super.equals(obj) || (getClass() != obj.getClass()))
 			return false;
 		VariableCommentFieldLocation other = (VariableCommentFieldLocation) obj;
-		if (!Objects.equals(comment, other.comment)) {
-			return false;
-		}
-		return true;
-	}
+        return Objects.equals(comment, other.comment);
+    }
 
 	@Override
 	public void restoreState(Program p, SaveState obj) {

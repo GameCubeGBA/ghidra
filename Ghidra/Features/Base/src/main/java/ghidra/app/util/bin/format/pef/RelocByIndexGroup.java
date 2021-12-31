@@ -36,19 +36,19 @@ public class RelocByIndexGroup extends Relocation {
 	 * points to just past the modified word, and <code>importindex</code> 
 	 * is set to <code>index+1</code>.
 	 */
-	public final static int kPEFRelocSmByImport = 0;
+    public static final int kPEFRelocSmByImport = 0;
 	/**
 	 * This "RelocSmSetSectC" (CDIS) instruction sets the variable <code>sectionC</code> 
 	 * to the memory address of the instantiated section 
 	 * specified by <code>index</code>.
 	 */
-	public final static int kPEFRelocSmSetSectC = 1;
+    public static final int kPEFRelocSmSetSectC = 1;
 	/**
 	 * This "RelocSmSetSectD" (DTIS) instruction sets the variable <code>sectionD</code>
 	 * to the memory adddress of the instantiated section 
 	 * specified by <code>index</code>.
 	 */
-	public final static int kPEFRelocSmSetSectD = 2;
+    public static final int kPEFRelocSmSetSectD = 2;
 	/**
 	 * This "RelocSmBySection" (SECN) instruction adds the address of the instantiated 
 	 * section specified by <code>index</code> to the word 
@@ -56,7 +56,7 @@ public class RelocByIndexGroup extends Relocation {
 	 * execution, <code>relocAddress</code> points to just 
 	 * past the modified word.
 	 */
-	public final static int kPEFRelocSmBySection = 3;
+    public static final int kPEFRelocSmBySection = 3;
 
 	private int subopcode;
 	private int index;

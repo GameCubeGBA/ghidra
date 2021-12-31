@@ -35,7 +35,7 @@ public interface InjectPayload {
 	int CALLMECHANISM_TYPE = 3;
 	int EXECUTABLEPCODE_TYPE = 4;
 
-	public static class InjectParameter {
+	class InjectParameter {
 		private String name;
 		private int index;
 		private int size;
@@ -65,11 +65,8 @@ public interface InjectPayload {
 		@Override
 		public boolean equals(Object obj) {
 			InjectParameter op2 = (InjectParameter) obj;
-			if (index != op2.index || size != op2.size || !name.equals(op2.name)) {
-				return false;
-			}
-			return true;
-		}
+            return index == op2.index && size == op2.size && name.equals(op2.name);
+        }
 
 		@Override
 		public int hashCode() {

@@ -118,7 +118,7 @@ public class OatDexFile_Android12 extends OatDexFile {
 
 		Address dataAddress = address.add(_offset);
 
-		program.getListing().setComment(dataAddress, CodeUnit.PLATE_COMMENT, getDexFileLocation());
+		program.getListing().setComment(dataAddress, CodeUnit.PLATE_COMMENT, canonical_dex_file_location_);
 		program.getListing().clearCodeUnits(dataAddress, dataAddress, false, monitor);
 		Data data = program.getListing().createData(dataAddress, toDataType());
 

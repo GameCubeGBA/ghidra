@@ -29,7 +29,7 @@ import java.io.Serializable;
  * Array of float[] that grows as needed.
  */
 public class FloatArrayArray implements Array, Serializable {
-	public final static long serialVersionUID = 1;
+	public static final long serialVersionUID = 1;
 
     static final int MIN_SIZE = 4;
     float[] floats;

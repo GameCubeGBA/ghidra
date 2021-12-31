@@ -381,11 +381,8 @@ public class ParamListStandard implements ParamList {
 		if (!SystemUtilities.isArrayEqual(entry, op2.entry) || numgroup != op2.numgroup || pointermax != op2.pointermax || !SystemUtilities.isEqual(spacebase, op2.spacebase)) {
 			return false;
 		}
-		if (thisbeforeret != op2.thisbeforeret) {
-			return false;
-		}
-		return true;
-	}
+        return thisbeforeret == op2.thisbeforeret;
+    }
 
 	@Override
 	public int hashCode() {

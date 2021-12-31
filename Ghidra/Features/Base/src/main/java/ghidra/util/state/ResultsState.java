@@ -392,17 +392,14 @@ public class ResultsState {
 	}
 
 	private static Comparator<Object> CONTEXT_STATE_SET_SEQUENCE_COMPARATOR =
-		new Comparator<Object>() {
-			@Override
-			public int compare(Object o1, Object o2) {
-				ContextStateSet set = (ContextStateSet) o1;
-				SequenceNumber seq = (SequenceNumber) o2;
-				if (set.seqRange.contains(seq)) {
-					return 0;
-				}
-				return set.seqRange.getStart().compareTo(seq);
-			}
-		};
+            (o1, o2) -> {
+                ContextStateSet set = (ContextStateSet) o1;
+                SequenceNumber seq = (SequenceNumber) o2;
+                if (set.seqRange.contains(seq)) {
+                    return 0;
+                }
+                return set.seqRange.getStart().compareTo(seq);
+            };
 
 	private static class BranchDestination {
 		private final SequenceNumber source; // null used for initial entry flow only
@@ -435,8 +432,7 @@ public class ResultsState {
 		private final Address destAddr;
 
 		public InlineCallException(Address destAddr) {
-			super();
-			this.destAddr = destAddr;
+            this.destAddr = destAddr;
 		}
 
 		public Address getInlineCallAddress() {

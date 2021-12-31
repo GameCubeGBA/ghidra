@@ -594,7 +594,7 @@ public class GhidraServer extends UnicastRemoteObject implements GhidraServerHan
 					hostname = s.substring(3);
 				}
 				hostname = hostname.trim();
-				if (hostname.length() == 0 || hostname.startsWith("-")) {
+				if (hostname.isEmpty() || hostname.startsWith("-")) {
 					displayUsage("Missing -ip hostname");
 					System.exit(-1);
 				}
@@ -610,7 +610,7 @@ public class GhidraServer extends UnicastRemoteObject implements GhidraServerHan
 					bindIp = s.substring(2);
 				}
 				bindIp = bindIp.trim();
-				if (bindIp.length() == 0 || bindIp.startsWith("-")) {
+				if (bindIp.isEmpty() || bindIp.startsWith("-")) {
 					displayUsage("Missing -i interface bind address");
 					System.exit(-1);
 				}
@@ -625,16 +625,16 @@ public class GhidraServer extends UnicastRemoteObject implements GhidraServerHan
 			else if (s.startsWith("-d") && s.length() > 2) { // Login Domain
 				loginDomain = s.substring(2);
 			}
-			else if (s.equals("-u")) {
+			else if ("-u".equals(s)) {
 				nameCallbackAllowed = true;
 			}
-			else if (s.equals("-n")) {
+			else if ("-n".equals(s)) {
 				InetNameLookup.setLookupEnabled(true);
 			}
-			else if (s.equals("-anonymous")) {
+			else if ("-anonymous".equals(s)) {
 				allowAnonymousAccess = true;
 			}
-			else if (s.equals("-ssh")) {
+			else if ("-ssh".equals(s)) {
 				altSSHLoginAllowed = true;
 			}
 			else if (s.startsWith("-e")) { // default password expiration (days)
@@ -674,7 +674,7 @@ public class GhidraServer extends UnicastRemoteObject implements GhidraServerHan
 					System.exit(-1);
 				}
 			}
-			else if (s.equals("-autoProvision")) {
+			else if ("-autoProvision".equals(s)) {
 				autoProvision = true;
 			}
 			else {
@@ -956,14 +956,14 @@ public class GhidraServer extends UnicastRemoteObject implements GhidraServerHan
 						line = line.substring(0, ix);
 					}
 					line = line.trim();
-					if (line.length() == 0) {
+					if (line.isEmpty()) {
 						continue;
 					}
 					if (!line.endsWith(";")) {
 						throw new IllegalArgumentException(
 							"all filter statements must end with `;`");
 					}
-					if (line.length() != 0) {
+					if (!line.isEmpty()) {
 						buf.append(line);
 					}
 				}

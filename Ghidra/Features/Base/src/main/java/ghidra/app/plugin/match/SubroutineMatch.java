@@ -75,11 +75,10 @@ public class SubroutineMatch {
 			}
 			Address [] newOne = new Address[cnt];
 			cnt = 0;
-			for( int i=0; i< progAAddrs.length; i++ )
-			{
-				if( progAAddrs[i] != null)
-					newOne[cnt++] = progAAddrs[i];
-			}
+            for (Address progAAddr : progAAddrs) {
+                if (progAAddr != null)
+                    newOne[cnt++] = progAAddr;
+            }
 			this.progAAddrs = newOne;
 		} else {
 			for( int i=0; i< progBAddrs.length; i++ )
@@ -91,11 +90,10 @@ public class SubroutineMatch {
 			}
 			Address [] newOne = new Address[cnt];
 			cnt = 0;
-			for( int i=0; i< progBAddrs.length; i++ )
-			{
-				if( progBAddrs[i] != null)
-					newOne[cnt++] = progBAddrs[i];
-			}
+            for (Address progBAddr : progBAddrs) {
+                if (progBAddr != null)
+                    newOne[cnt++] = progBAddr;
+            }
 			this.progBAddrs = newOne;
 		}
 		return false;
@@ -117,20 +115,16 @@ public class SubroutineMatch {
 	
 	private boolean isOneToOne()
 	{
-		if(progAAddrs.length == 1 && progBAddrs.length == 1)
-			return true;
-		return false;
-	}
+        return progAAddrs.length == 1 && progBAddrs.length == 1;
+    }
 	
 	@Override
     public String toString(){
-		String str = reason + " ";
-		for( int i=0; i<progAAddrs.length; i++)
-			str += progAAddrs[i] + ",";
-		str += " --- ";
-		for( int i=0; i<progBAddrs.length; i++)
-			str += progBAddrs[i] + ",";
-		return str;
+		StringBuilder str = new StringBuilder(reason + " ");
+        for (Address progAAddr : progAAddrs) str.append(progAAddr).append(",");
+		str.append(" --- ");
+        for (Address progBAddr : progBAddrs) str.append(progBAddr).append(",");
+		return str.toString();
 	}
 
 }

@@ -292,11 +292,8 @@ public class ProgramDiff {
 	 * Return true if the programs to compare have matching memory maps.
 	 */
 	public boolean memoryMatches() {
-		if (pgmMemComp.hasMemoryDifferences()) {
-			return false;
-		}
-		return true;
-	}
+        return !pgmMemComp.hasMemoryDifferences();
+    }
 
 	/** Returns a copy of this ProgramDiff.
 	 *  @return the copy of this ProgramDiff or null if a
@@ -439,7 +436,7 @@ public class ProgramDiff {
 	 * The addresses in this address set are derived from program1.
 	 * @throws CancelledException if the user cancelled the Diff.
 	 */
-	synchronized public AddressSetView getDifferences(TaskMonitor monitor)
+    public synchronized AddressSetView getDifferences(TaskMonitor monitor)
 			throws CancelledException {
 		return getDifferences(pdf, monitor);
 	}
@@ -463,7 +460,7 @@ public class ProgramDiff {
 	 * The addresses in this address set are derived from program1.
 	 * @throws CancelledException if the user cancelled the Diff.
 	 */
-	synchronized public AddressSetView getDifferences(ProgramDiffFilter filter, TaskMonitor monitor)
+    public synchronized AddressSetView getDifferences(ProgramDiffFilter filter, TaskMonitor monitor)
 			throws CancelledException {
 		cancelled = false;
 		if (monitor == null) {
@@ -574,7 +571,7 @@ public class ProgramDiff {
 	 * The addresses in this address set are derived from program1.
 	 * @throws CancelledException if the user cancelled the Diff.
 	 */
-	synchronized public AddressSetView getUserDefinedDiffs(String property, AddressSetView addrs,
+    public synchronized AddressSetView getUserDefinedDiffs(String property, AddressSetView addrs,
 			TaskMonitor monitor) throws CancelledException {
 		// Handle case where the class for a Saveable property is missing.
 		if ((listing1.getPropertyMap(property) instanceof UnsupportedMapDB) ||
@@ -596,7 +593,7 @@ public class ProgramDiff {
 	 * The addresses in this address set are derived from program1.
 	 * @throws CancelledException if the user cancelled the Diff.
 	 */
-	synchronized public AddressSetView getTypeDiffs(int diffType, AddressSetView addrs,
+    public synchronized AddressSetView getTypeDiffs(int diffType, AddressSetView addrs,
 			TaskMonitor monitor) throws ProgramConflictException, CancelledException {
 		AddressSetView as = new AddressSet();
 		monitor.setProgress(0);
@@ -694,7 +691,7 @@ public class ProgramDiff {
 	 * Returns null if the diff is not limited (i.e. the entire program is being diffed).
 	 * The addresses in the returned address set are derived from program1.
 	 */
-	synchronized public AddressSetView getLimitedAddressSet() {
+    public synchronized AddressSetView getLimitedAddressSet() {
 		return checkAddressSet;
 	}
 
@@ -715,7 +712,7 @@ public class ProgramDiff {
 	 * null indicates no current restrictions.
 	 * The addresses in the returned address set are derived from program1.
 	 */
-	synchronized public AddressSetView getRestrictedAddressSet() {
+    public synchronized AddressSetView getRestrictedAddressSet() {
 		return restrictAddressSet;
 	}
 
@@ -742,7 +739,7 @@ public class ProgramDiff {
 	 * having any differences.
 	 * The addresses in this address set are derived from program1.
 	 */
-	synchronized public AddressSetView getIgnoreAddressSet() {
+    public synchronized AddressSetView getIgnoreAddressSet() {
 		return ignoreAddressSet;
 	}
 
@@ -752,7 +749,7 @@ public class ProgramDiff {
 	 * @param addrs the set of addresses to add to the current ignore set.
 	 * The addresses in this address set should be derived from program1.
 	 */
-	synchronized public void ignore(AddressSetView addrs) {
+    public synchronized void ignore(AddressSetView addrs) {
 		ignoreAddressSet.add(addrs);
 		if (diffsToReturn != null) {
 			diffsToReturn.delete(addrs);
@@ -784,7 +781,7 @@ public class ProgramDiff {
 	 * button could have been pressed.
 	 * @return true if the last <CODE>getDifferences</CODE> call was cancelled.
 	 */
-	synchronized public boolean isCancelled() {
+    public synchronized boolean isCancelled() {
 		return cancelled;
 	}
 
@@ -795,7 +792,7 @@ public class ProgramDiff {
 	 * to be checked
 	 * @throws CancelledException if the getDifferences() task has been canceled by the user.
 	 */
-	synchronized public void checkCancelled(TaskMonitor monitor) throws CancelledException {
+    public synchronized void checkCancelled(TaskMonitor monitor) throws CancelledException {
 		if (cancelled) {
 			throw new CancelledException();
 		}
@@ -810,7 +807,7 @@ public class ProgramDiff {
 	 * Print the differences that have been found so far by calls to
 	 * <CODE>getDifferences</CODE>.
 	 */
-	synchronized public void printDifferences() {
+    public synchronized void printDifferences() {
 		Msg.info(this, "");
 		if (cancelled) {
 			Msg.info(this, "\nThe last getDifferences was cancelled.");
@@ -827,7 +824,7 @@ public class ProgramDiff {
 	 * COMMENT_DIFFS, REFERENCE_DIFFS, USER_DEFINED_DIFFS,
 	 * SYMBOL_DIFFS, EQUATE_DIFFS, PROGRAM_CONTEXT_DIFFS.
 	 */
-	synchronized public void printKnownDifferences(int type) {
+    public synchronized void printKnownDifferences(int type) {
 		Msg.info(this, "\n" + ProgramDiffFilter.typeToName(type) + " differences:");
 		AddressSet diffs = new AddressSet();
 		int[] pt = ProgramDiffFilter.getPrimaryTypes();
@@ -850,7 +847,7 @@ public class ProgramDiff {
 	 * COMMENT_DIFFS, REFERENCE_DIFFS, USER_DEFINED_DIFFS,
 	 * SYMBOL_DIFFS, EQUATE_DIFFS, PROGRAM_CONTEXT_DIFFS.
 	 */
-	synchronized public void printKnownDifferencesByType(int type) {
+    public synchronized void printKnownDifferencesByType(int type) {
 		int[] pt = ProgramDiffFilter.getPrimaryTypes();
 		for (int element : pt) {
 			Msg.info(this, "\n" + ProgramDiffFilter.typeToName(element) + " differences:");
@@ -1308,20 +1305,19 @@ public class ProgramDiff {
 			}
 		}
 		int numProps = list.size();
-		for (int i = 0; i < numProps; i++) {
-			String property = list.get(i);
-			if (property.equals("Bookmarks")) {
-				continue; // ignore bookmarks as properties, since the bookmark diff gets these.
-			}
-			// Handle case where the class for a Saveable property is missing.
-			if ((listing1.getPropertyMap(property) instanceof UnsupportedMapDB) ||
-				(listing2.getPropertyMap(property) instanceof UnsupportedMapDB)) {
-				continue; // ignore property that isn't supported.
-			}
-			// Get the differences for each user defined property type.
-			differences.add(getCuiDiffs(property, addressSet,
-				new UserDefinedComparator(program1, program2, property), monitor));
-		}
+        for (String property : list) {
+            if ("Bookmarks".equals(property)) {
+                continue; // ignore bookmarks as properties, since the bookmark diff gets these.
+            }
+            // Handle case where the class for a Saveable property is missing.
+            if ((listing1.getPropertyMap(property) instanceof UnsupportedMapDB) ||
+                    (listing2.getPropertyMap(property) instanceof UnsupportedMapDB)) {
+                continue; // ignore property that isn't supported.
+            }
+            // Get the differences for each user defined property type.
+            differences.add(getCuiDiffs(property, addressSet,
+                    new UserDefinedComparator(program1, program2, property), monitor));
+        }
 		return differences;
 	}
 
@@ -1815,12 +1811,12 @@ public class ProgramDiff {
 		/** Returns the first program for this diff.
 		 * @return the first program.
 		 */
-		public Program getProgramOne();
+        Program getProgramOne();
 
 		/** Returns the second program for this diff.
 		 * @return the second program.
 		 */
-		public Program getProgramTwo();
+        Program getProgramTwo();
 
 		/** Compares two like objects to determine whether the first is effectively
 		 *  less than (comes before it in memory), equal to (at the same spot
@@ -1831,7 +1827,7 @@ public class ProgramDiff {
 		 *          0 if the objects are at the same spot in memory.
 		 *          1 if the first comes after the second in memory.
 		 */
-		public int compare(Object obj1, Object obj2);
+        int compare(Object obj1, Object obj2);
 
 		/** Returns whether the objects are the same with respect to the
 		 *  program difference type this comparator is interested in.
@@ -1840,7 +1836,7 @@ public class ProgramDiff {
 		 * @return true if the objects are the same with respect to the type
 		 * this comparator is interested in.
 		 */
-		public boolean isSame(Object obj1, Object obj2);
+        boolean isSame(Object obj1, Object obj2);
 
 		/** Returns the addresses that are to indicate the difference of this
 		 *  comparison type for this object.
@@ -1850,12 +1846,12 @@ public class ProgramDiff {
 		 * of this comparison type.
 		 * The addresses in this address set are derived from the specified program.
 		 */
-		public AddressSet getAddressSet(Object obj, Program program);
+        AddressSet getAddressSet(Object obj, Program program);
 	}
 
 	/** Provides a means for comparing programs to determine their differences.
 	 */
-	static abstract class ProgramDiffComparatorImpl implements ProgramDiffComparator {
+    abstract static class ProgramDiffComparatorImpl implements ProgramDiffComparator {
 		/** The first program for the diff. */
 		protected Program program1;
 		/** The second program for the diff. */
@@ -2244,11 +2240,11 @@ public class ProgramDiff {
 		return var1.getName().equals(var2.getName());
 	}
 
-	static public boolean equivalentFunctions(Function f1, Function f2) {
+	public static boolean equivalentFunctions(Function f1, Function f2) {
 		return equivalentFunctions(f1, f2, false);
 	}
 
-	static public boolean equivalentFunctions(Function f1, Function f2, boolean ignoreName) {
+	public static boolean equivalentFunctions(Function f1, Function f2, boolean ignoreName) {
 		if (f1 == f2) {
 			return true;
 		}
@@ -2316,12 +2312,9 @@ public class ProgramDiff {
 		if (!equivalentVariableArrays(f1.getParameters(), f2.getParameters(), hasCustomStorage)) {
 			return false;
 		}
-		if (!f1IsExternal &&
-			!equivalentVariableArrays(f1.getLocalVariables(), f2.getLocalVariables(), false)) {
-			return false;
-		}
-		return true;
-	}
+        return f1IsExternal ||
+                equivalentVariableArrays(f1.getLocalVariables(), f2.getLocalVariables(), false);
+    }
 
 	/**
 	 * Compares two thunk functions from different programs to determine if they are 
@@ -3155,11 +3148,8 @@ public class ProgramDiff {
 		Address fallThrough1 = i1.getFallThrough();
 		Address fallThrough1As2 =
 			SimpleDiffUtility.getCompatibleAddress(program1, fallThrough1, program2);
-		if (!SystemUtilities.isEqual(i2.getFallThrough(), fallThrough1As2)) {
-			return false;
-		}
-		return true;
-	}
+        return SystemUtilities.isEqual(i2.getFallThrough(), fallThrough1As2);
+    }
 
 	/** Provides comparisons between two defined data code units.
 	 */
@@ -3190,12 +3180,8 @@ public class ProgramDiff {
 				return false;
 			}
 			// Detect that data type name or path differs?
-			if (!dt1.getPathName().equals(dt2.getPathName())) {
-				return false;
-			}
-
-			return true;
-		}
+            return dt1.getPathName().equals(dt2.getPathName());
+        }
 	}
 
 	/** An IteratorWrapper provides a common class for accessing the methods
@@ -3315,11 +3301,8 @@ public class ProgramDiff {
 
 		Symbol p1Parent = p1Symbol.getParentSymbol();
 		Symbol p2Parent = p2Symbol.getParentSymbol();
-		if (!equivalentSymbols(p1, p2, p1Parent, p2Parent)) {
-			return false;
-		}
-		return true;
-	}
+        return equivalentSymbols(p1, p2, p1Parent, p2Parent);
+    }
 
 	static boolean equivalentSymbols(AddressTranslator p2ToP1Translator, Symbol p1Symbol,
 			Symbol p2Symbol) {
@@ -3365,10 +3348,7 @@ public class ProgramDiff {
 
 		Symbol p1Parent = p1Symbol.getParentSymbol();
 		Symbol p2Parent = p2Symbol.getParentSymbol();
-		if (!equivalentSymbols(p2ToP1Translator, p1Parent, p2Parent)) {
-			return false;
-		}
-		return true;
-	}
+        return equivalentSymbols(p2ToP1Translator, p1Parent, p2Parent);
+    }
 
 }

@@ -164,16 +164,13 @@ public class ExternalProgramMerger implements MergeResolver, ListingMergeConstan
 	void showResolveInfo() {
 		if (infoBuf.length() > 0) {
 			try {
-				SwingUtilities.invokeAndWait(new Runnable() {
-					@Override
-					public void run() {
-						String title = getConflictType() + " Merge Information";
-						String msg = infoBuf.toString();
-						ReadTextDialog dialog = new ReadTextDialog(title, msg);
-						mergeManager.getMergeTool().showDialog(dialog,
-							mergeManager.getMergeTool().getToolFrame());
-					}
-				});
+				SwingUtilities.invokeAndWait(() -> {
+                    String title = getConflictType() + " Merge Information";
+                    String msg = infoBuf.toString();
+                    ReadTextDialog dialog = new ReadTextDialog(title, msg);
+                    mergeManager.getMergeTool().showDialog(dialog,
+                        mergeManager.getMergeTool().getToolFrame());
+                });
 			}
 			catch (InterruptedException e) {
 				throw new AssertException(e);
@@ -777,7 +774,7 @@ public class ExternalProgramMerger implements MergeResolver, ListingMergeConstan
 	 * @see ghidra.app.merge.listing.ListingMerger#hasConflict(ghidra.program.model.address.Address)
 	 */
 	public boolean hasConflict() {
-		return (extPgms.size() > 0);
+		return (!extPgms.isEmpty());
 	}
 
 	/* (non-Javadoc)
@@ -876,14 +873,11 @@ public class ExternalProgramMerger implements MergeResolver, ListingMergeConstan
 
 	private void clearConflictPanel() {
 		try {
-			SwingUtilities.invokeAndWait(new Runnable() {
-				@Override
-				public void run() {
-					if (conflictPanel != null) {
-						conflictPanel.clear();
-					}
-				}
-			});
+			SwingUtilities.invokeAndWait(() -> {
+                if (conflictPanel != null) {
+                    conflictPanel.clear();
+                }
+            });
 		}
 		catch (InterruptedException e) {
 			Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);

@@ -150,7 +150,7 @@ abstract class CodeUnitDB extends DatabaseObject implements CodeUnit, ProcessorC
 	 * does NOT indicate existence and a record query may be required.
 	 * @return true if removal of code unit has been confirmed
 	 */
-	abstract protected boolean hasBeenDeleted(DBRecord record);
+    protected abstract boolean hasBeenDeleted(DBRecord record);
 
 	@Override
 	public void addMnemonicReference(Address refAddr, RefType refType, SourceType sourceType) {

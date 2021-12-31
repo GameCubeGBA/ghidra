@@ -121,7 +121,7 @@ public class LocalSymbolServerTest extends AbstractGenericTest {
 		assertEquals(2, results.size());
 		assertFalse(results.stream()
 				.map(symbolFileLocation -> symbolFileLocation.getFileInfo().getUniqueName())
-				.anyMatch(s -> !s.equals("11223344")));
+				.anyMatch(s -> !"11223344".equals(s)));
 	}
 
 	@Test

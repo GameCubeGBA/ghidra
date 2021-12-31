@@ -101,11 +101,11 @@ public class CompositeDataTypeHTMLRepresentation extends HTMLDataTypeRepresentat
 	protected List<ValidatableLine> buildAlignmentText(Composite dataType) {
 		List<ValidatableLine> list = new ArrayList<>();
 		String alignStr = CompositeInternal.getMinAlignmentString(dataType);
-		if (alignStr != null && alignStr.length() != 0) {
+		if (alignStr != null && !alignStr.isEmpty()) {
 			list.add(new TextLine(alignStr));
 		}
 		String packStr = CompositeInternal.getPackingString(dataType);
-		if (packStr != null && packStr.length() != 0) {
+		if (packStr != null && !packStr.isEmpty()) {
 			list.add(new TextLine(packStr));
 		}
 		return list;
@@ -156,18 +156,16 @@ public class CompositeDataTypeHTMLRepresentation extends HTMLDataTypeRepresentat
 		int lineCount = 0;
 
 		// warnings
-		Iterator<String> warnings = warningLines.iterator();
-		for (; warnings.hasNext();) {
-			String warning = warnings.next();
-			String warningLine = wrapStringInColor(warning, Color.RED);
+        for (String warning : warningLines) {
+            String warningLine = wrapStringInColor(warning, Color.RED);
 
-			//@formatter:off
-			append(fullHtml, truncatedHtml, lineCount, warningLine, 
-                                                       BR,
-                                                       BR);
-			//@formatter:on
-			lineCount++;
-		}
+            //@formatter:off
+            append(fullHtml, truncatedHtml, lineCount, warningLine,
+                    BR,
+                    BR);
+            //@formatter:on
+            lineCount++;
+        }
 
 		//@formatter:off
 		append(fullHtml, truncatedHtml, lineCount, ALIGNMENT_VALUE_PREFIX,
@@ -181,7 +179,7 @@ public class CompositeDataTypeHTMLRepresentation extends HTMLDataTypeRepresentat
 
 		// header
 		Iterator<ValidatableLine> iterator = headerContent.iterator();
-		for (; iterator.hasNext();) {
+		while (iterator.hasNext()) {
 			TextLine line = (TextLine) iterator.next();
 			String text = line.getText();
 			if (trim) {
@@ -221,7 +219,7 @@ public class CompositeDataTypeHTMLRepresentation extends HTMLDataTypeRepresentat
 
 			StringBuilder lineBuffer = new StringBuilder();
 			DataTypeLine line = (DataTypeLine) iterator.next();
-			String typeName = generateTypeName(line, trim);
+			String typeName = generateTypeName(line);
 
 			int fieldLength = ToolTipUtils.LINE_LENGTH / 2;
 			String fieldName = line.getName();
@@ -274,24 +272,20 @@ public class CompositeDataTypeHTMLRepresentation extends HTMLDataTypeRepresentat
 		}
 
 		// Alignment
-		String alignmentLine = "";
-		Iterator<ValidatableLine> alignmentIterator = alignmentText.iterator();
-		for (; alignmentIterator.hasNext();) {
-			TextLine line = (TextLine) alignmentIterator.next();
-			alignmentLine += HTML_SPACE + wrapStringInColor(line.getText(), line.getTextColor());
+		StringBuilder alignmentLine = new StringBuilder();
+		for (ValidatableLine validatableLine : alignmentText) {
+			TextLine line = (TextLine) validatableLine;
+			alignmentLine.append(HTML_SPACE).append(wrapStringInColor(line.getText(), line.getTextColor()));
 		}
 
 		// close the table, the structure and then the HTML
-		StringBuilder trailingLines = new StringBuilder();
-		trailingLines.append(TABLE_CLOSE)
-				.append("}")
-				.append(TT_OPEN)
-				.append(alignmentLine)
-				.append(
-					TT_CLOSE)
-				.append(BR);
 
-		String trailingString = trailingLines.toString();
+		String trailingString = TABLE_CLOSE +
+				"}" +
+				TT_OPEN +
+				alignmentLine +
+				TT_CLOSE +
+				BR;
 		fullHtml.append(trailingString);
 		truncatedHtml.append(trailingString);
 
@@ -321,12 +315,9 @@ public class CompositeDataTypeHTMLRepresentation extends HTMLDataTypeRepresentat
 		}
 	}
 
-	private static String generateTypeName(DataTypeLine line, boolean trim) {
+	private static String generateTypeName(DataTypeLine line) {
 
-		String type = line.getType();
-		if (true) {
-			type = truncateAsNecessary(line.getType());
-		}
+		String type = truncateAsNecessary(line.getType());
 		type = friendlyEncodeHTML(type);
 		type = wrapStringInColor(type, line.getTypeColor());
 
@@ -339,8 +330,7 @@ public class CompositeDataTypeHTMLRepresentation extends HTMLDataTypeRepresentat
 		//
 		DataType dt = line.getDataType();
 		DataTypeUrl url = new DataTypeUrl(dt);
-		String wrapped = HTMLUtilities.wrapWithLinkPlaceholder(type, url.toString());
-		return wrapped;
+		return wrapWithLinkPlaceholder(type, url.toString());
 	}
 
 	protected static StringBuilder addAlignmentValue(String alignmentValueString,

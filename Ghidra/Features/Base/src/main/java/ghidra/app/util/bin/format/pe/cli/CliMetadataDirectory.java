@@ -33,7 +33,7 @@ import ghidra.util.task.TaskMonitor;
  */
 public class CliMetadataDirectory extends DataDirectory {
 
-	private final static String NAME = "CLI_METADATA_DIRECTORY";
+	private static final String NAME = "CLI_METADATA_DIRECTORY";
 
 	private CliMetadataRoot metadataRoot;
 

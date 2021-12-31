@@ -39,8 +39,7 @@ public class VectorRegisterPspecTest extends AbstractGenericTest {
 	 * Constructor
 	 */
 	public VectorRegisterPspecTest() {
-		super();
-	}
+    }
 
 	@Test
 	public void testPspecParsing_x64() throws Exception {

@@ -27,8 +27,7 @@ public class LongIntHashtableTest extends AbstractGenericTest {
 	 * @param arg0
 	 */
 	public LongIntHashtableTest() {
-		super();
-	}
+    }
 
 @Test
     public void testLongIntHashtable() {

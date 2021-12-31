@@ -48,7 +48,7 @@ public class DisplayableLabel implements DisplayStringProvider, Comparable<Displ
 		if (otherDisplayableLabel == null) {
 			return 1;
 		}
-		Symbol otherSymbol = otherDisplayableLabel.getSymbol();
+		Symbol otherSymbol = otherDisplayableLabel.symbol;
 		if (symbol == null) {
 			return (otherSymbol == null) ? 0 : -1;
 		}

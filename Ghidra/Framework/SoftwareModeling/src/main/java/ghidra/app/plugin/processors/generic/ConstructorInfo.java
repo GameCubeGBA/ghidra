@@ -31,13 +31,13 @@ import ghidra.program.model.symbol.RefType;
 public class ConstructorInfo {
 	private int length;						// length of the constructor
 	private int flowFlags;					// flags indicating the type of branching within this constructor
-	public final static int RETURN=1;
-	public final static int CALL_INDIRECT=2;
-	public final static int BRANCH_INDIRECT=4;
-	public final static int CALL=8;
-	public final static int JUMPOUT=16;
-	public final static int NO_FALLTHRU=32;		// Flow cannot come out bottom of constructor
-	public final static int BRANCH_TO_END=64;
+	public static final int RETURN=1;
+	public static final int CALL_INDIRECT=2;
+	public static final int BRANCH_INDIRECT=4;
+	public static final int CALL=8;
+	public static final int JUMPOUT=16;
+	public static final int NO_FALLTHRU=32;		// Flow cannot come out bottom of constructor
+	public static final int BRANCH_TO_END=64;
 	
 	public ConstructorInfo(int ln,int fl) { length = ln; flowFlags = fl; }
 	public int getFlowFlags() { return flowFlags; }

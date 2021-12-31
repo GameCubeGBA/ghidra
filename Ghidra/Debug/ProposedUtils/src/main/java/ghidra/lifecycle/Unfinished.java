@@ -25,7 +25,7 @@ package ghidra.lifecycle;
  * case, or an interface mixin....
  */
 public interface Unfinished {
-	public class TODOException extends UnsupportedOperationException {
+	class TODOException extends UnsupportedOperationException {
 		public TODOException(String message) {
 			super(message);
 		}

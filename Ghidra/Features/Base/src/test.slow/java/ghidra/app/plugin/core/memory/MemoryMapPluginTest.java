@@ -101,14 +101,9 @@ public class MemoryMapPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		Set<DockingActionIf> actions = getActionsByOwner(tool, plugin.getName());
 		for (DockingActionIf action : actions) {
 			String name = action.getName();
-			if (name.equals("Add Block") || name.equals("Set Image Base") ||
-				name.equals("Memory Map") || name.equals("Close Window") ||
-				name.contains("Table")) {
-				assertActionEnabled(action, getActionContext(), true);
-			}
-			else {
-				assertActionEnabled(action, getActionContext(), false);
-			}
+            assertActionEnabled(action, getActionContext(), "Add Block".equals(name) || "Set Image Base".equals(name) ||
+                    "Memory Map".equals(name) || "Close Window".equals(name) ||
+                    name.contains("Table"));
 		}
 
 	}
@@ -121,7 +116,7 @@ public class MemoryMapPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		Set<DockingActionIf> actions = getActionsByOwner(tool, plugin.getName());
 		for (DockingActionIf action : actions) {
 			String name = action.getName();
-			if (name.equals("Memory Map") || name.equals("Close Window")) {
+			if ("Memory Map".equals(name) || "Close Window".equals(name)) {
 				continue;
 			}
 			assertActionEnabled(action, getActionContext(), false);

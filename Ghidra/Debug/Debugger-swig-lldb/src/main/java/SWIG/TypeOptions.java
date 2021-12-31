@@ -12,17 +12,17 @@
 package SWIG;
 
 public final class TypeOptions {
-  public final static TypeOptions eTypeOptionNone = new TypeOptions("eTypeOptionNone", lldbJNI.eTypeOptionNone_get());
-  public final static TypeOptions eTypeOptionCascade = new TypeOptions("eTypeOptionCascade", lldbJNI.eTypeOptionCascade_get());
-  public final static TypeOptions eTypeOptionSkipPointers = new TypeOptions("eTypeOptionSkipPointers", lldbJNI.eTypeOptionSkipPointers_get());
-  public final static TypeOptions eTypeOptionSkipReferences = new TypeOptions("eTypeOptionSkipReferences", lldbJNI.eTypeOptionSkipReferences_get());
-  public final static TypeOptions eTypeOptionHideChildren = new TypeOptions("eTypeOptionHideChildren", lldbJNI.eTypeOptionHideChildren_get());
-  public final static TypeOptions eTypeOptionHideValue = new TypeOptions("eTypeOptionHideValue", lldbJNI.eTypeOptionHideValue_get());
-  public final static TypeOptions eTypeOptionShowOneLiner = new TypeOptions("eTypeOptionShowOneLiner", lldbJNI.eTypeOptionShowOneLiner_get());
-  public final static TypeOptions eTypeOptionHideNames = new TypeOptions("eTypeOptionHideNames", lldbJNI.eTypeOptionHideNames_get());
-  public final static TypeOptions eTypeOptionNonCacheable = new TypeOptions("eTypeOptionNonCacheable", lldbJNI.eTypeOptionNonCacheable_get());
-  public final static TypeOptions eTypeOptionHideEmptyAggregates = new TypeOptions("eTypeOptionHideEmptyAggregates", lldbJNI.eTypeOptionHideEmptyAggregates_get());
-  public final static TypeOptions eTypeOptionFrontEndWantsDereference = new TypeOptions("eTypeOptionFrontEndWantsDereference", lldbJNI.eTypeOptionFrontEndWantsDereference_get());
+  public static final TypeOptions eTypeOptionNone = new TypeOptions("eTypeOptionNone", lldbJNI.eTypeOptionNone_get());
+  public static final TypeOptions eTypeOptionCascade = new TypeOptions("eTypeOptionCascade", lldbJNI.eTypeOptionCascade_get());
+  public static final TypeOptions eTypeOptionSkipPointers = new TypeOptions("eTypeOptionSkipPointers", lldbJNI.eTypeOptionSkipPointers_get());
+  public static final TypeOptions eTypeOptionSkipReferences = new TypeOptions("eTypeOptionSkipReferences", lldbJNI.eTypeOptionSkipReferences_get());
+  public static final TypeOptions eTypeOptionHideChildren = new TypeOptions("eTypeOptionHideChildren", lldbJNI.eTypeOptionHideChildren_get());
+  public static final TypeOptions eTypeOptionHideValue = new TypeOptions("eTypeOptionHideValue", lldbJNI.eTypeOptionHideValue_get());
+  public static final TypeOptions eTypeOptionShowOneLiner = new TypeOptions("eTypeOptionShowOneLiner", lldbJNI.eTypeOptionShowOneLiner_get());
+  public static final TypeOptions eTypeOptionHideNames = new TypeOptions("eTypeOptionHideNames", lldbJNI.eTypeOptionHideNames_get());
+  public static final TypeOptions eTypeOptionNonCacheable = new TypeOptions("eTypeOptionNonCacheable", lldbJNI.eTypeOptionNonCacheable_get());
+  public static final TypeOptions eTypeOptionHideEmptyAggregates = new TypeOptions("eTypeOptionHideEmptyAggregates", lldbJNI.eTypeOptionHideEmptyAggregates_get());
+  public static final TypeOptions eTypeOptionFrontEndWantsDereference = new TypeOptions("eTypeOptionFrontEndWantsDereference", lldbJNI.eTypeOptionFrontEndWantsDereference_get());
 
   public final int swigValue() {
     return swigValue;
@@ -35,9 +35,9 @@ public final class TypeOptions {
   public static TypeOptions swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-    for (int i = 0; i < swigValues.length; i++)
-      if (swigValues[i].swigValue == swigValue)
-        return swigValues[i];
+      for (TypeOptions value : swigValues)
+          if (value.swigValue == swigValue)
+              return value;
     throw new IllegalArgumentException("No enum " + TypeOptions.class + " with value " + swigValue);
   }
 

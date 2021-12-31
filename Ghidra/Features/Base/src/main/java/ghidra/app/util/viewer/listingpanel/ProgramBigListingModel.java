@@ -199,7 +199,7 @@ public class ProgramBigListingModel implements ListingModel, FormatModelListener
 			dataList = null;
 		}
 
-		if (list.size() > 0) {
+		if (!list.isEmpty()) {
 			return new MultiRowLayout(list.toArray(new RowLayout[list.size()]), indexSize);
 		}
 		else if (cu != null) {
@@ -343,9 +343,7 @@ public class ProgramBigListingModel implements ListingModel, FormatModelListener
 		if (cu instanceof Data) {
 			Data data = (Data) cu;
 			if (data.getNumComponents() > 0) {
-				if (openCloseMgr.isOpen(data.getMinAddress())) {
-					return true;
-				}
+                return openCloseMgr.isOpen(data.getMinAddress());
 			}
 		}
 		return false;

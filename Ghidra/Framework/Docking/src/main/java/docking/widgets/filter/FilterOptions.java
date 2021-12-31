@@ -34,7 +34,7 @@ public class FilterOptions {
 	private static final Icon REG_EX_ICON = ResourceManager.loadImage("images/page_excel.png");
 	private static final Icon NOT_ICON = ResourceManager.loadImage("images/bullet_delete.png");
 
-	final static Map<Character, String> DELIMITER_NAME_MAP = new HashMap<>(20);
+	static final Map<Character, String> DELIMITER_NAME_MAP = new HashMap<>(20);
 
 	// Any non-alphanumeric char can be used as a delimiter.
 	static {
@@ -215,7 +215,7 @@ public class FilterOptions {
 	}
 
 	public TermSplitter getTermSplitter() {
-		if (isMultiterm()) {
+		if (multiTerm) {
 			return new CharacterTermSplitter(delimitingCharacter);
 		}
 		return null;
@@ -309,11 +309,11 @@ public class FilterOptions {
 		buf.append("Multi-Term: ");
 		buf.append("</td>");
 		buf.append("<td>");
-		buf.append(isMultiterm() ? "YES" : "NO");
+		buf.append(multiTerm ? "YES" : "NO");
 		buf.append("</td>");
 		buf.append("</tr>");
 
-		if (isMultiterm()) {
+		if (multiTerm) {
 			buf.append("<tr>");
 			buf.append("<td>");
 			buf.append("&nbsp;");
@@ -322,7 +322,7 @@ public class FilterOptions {
 			buf.append("</td>");
 			buf.append("<td>");
 
-			char delim = getDelimitingCharacter();
+			char delim = delimitingCharacter;
 			String delimName = DELIMITER_NAME_MAP.get(delim);
 
 			buf.append("'").append(delim).append("'").append("&nbsp; <i>(").append(

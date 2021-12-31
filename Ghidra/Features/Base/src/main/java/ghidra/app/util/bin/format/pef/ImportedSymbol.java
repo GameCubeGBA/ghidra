@@ -23,7 +23,7 @@ import ghidra.util.exception.DuplicateNameException;
 import java.io.IOException;
 
 public class ImportedSymbol extends AbstractSymbol {
-	public final static int SIZEOF = 4;
+	public static final int SIZEOF = 4;
 
 	private int symbolClass;
 	private int symbolNameOffset;

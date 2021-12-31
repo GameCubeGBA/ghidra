@@ -1685,12 +1685,6 @@ public class GdbManagerImpl implements GdbManager {
 	}
 
 	@Override
-	@Deprecated
-	public CompletableFuture<Void> claimStopped() {
-		return execute(new GdbClaimStopped(this));
-	}
-
-	@Override
 	public CompletableFuture<GdbInferior> addInferior() {
 		return execute(new GdbAddInferiorCommand(this));
 	}

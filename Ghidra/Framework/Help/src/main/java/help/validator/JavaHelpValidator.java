@@ -252,12 +252,8 @@ public class JavaHelpValidator {
 		Path imagePath = img.getImageFile();
 		String imageFilename = imagePath.getFileName().toString();
 
-		if (realFilename.equals(imageFilename)) {
-			return true;
-		}
-
-		return false;
-	}
+        return realFilename.equals(imageFilename);
+    }
 
 	private Path removeRedundantHelp(Path root, Path p) {
 		// this is the 'help system syntax'; may need to chop off 'help'

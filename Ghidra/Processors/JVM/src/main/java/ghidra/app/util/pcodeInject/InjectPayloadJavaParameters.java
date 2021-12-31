@@ -145,7 +145,7 @@ public class InjectPayloadJavaParameters implements InjectPayload {
 		paramCategories.addAll(DescriptorDecoder.getParameterCategories(descriptor));
 		int numOps = paramCategories.size();
 
-		if (paramCategories.size() == 0) {
+		if (paramCategories.isEmpty()) {
 			//no this pointer, no parameters: nothing to do
 			return new PcodeOp[0];
 		}
@@ -216,7 +216,7 @@ public class InjectPayloadJavaParameters implements InjectPayload {
 	public void restoreXml(XmlPullParser parser, SleighLanguage language) throws XmlParseException {
 		XmlElement el = parser.start();
 		String injectString = el.getAttribute("inject");
-		if (injectString == null || !injectString.equals("uponentry")) {
+		if (injectString == null || !"uponentry".equals(injectString)) {
 			throw new XmlParseException("Expecting inject=\"uponentry\" attribute");
 		}
 		boolean isDynamic = SpecXmlUtils.decodeBoolean(el.getAttribute("dynamic"));

@@ -34,13 +34,12 @@ public abstract class AbstractClassicProcessor {
 	protected Program program;
 
 	protected AbstractClassicProcessor(MachHeader header, Program program) {
-		super();
-		this.header = header;
+        this.header = header;
 		this.program = program;
 	}
 
-	final public void perform(String segmentName, String sectionName, long addressValue,
-			String fromDylib, NList nList, boolean isWeak, TaskMonitor monitor) throws Exception {
+	public final void perform(String segmentName, String sectionName, long addressValue,
+                              String fromDylib, NList nList, boolean isWeak, TaskMonitor monitor) throws Exception {
 
 //		if ( SystemUtilities.isInDevelopmentMode() ) {
 //			System.out.println( "CLASSIC: " +segmentName + " " + sectionName + " " +

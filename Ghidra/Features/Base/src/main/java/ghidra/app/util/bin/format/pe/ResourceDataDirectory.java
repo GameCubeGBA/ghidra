@@ -41,27 +41,27 @@ import ghidra.util.task.TaskMonitor;
  * Points to the root resource directory.
  */
 public class ResourceDataDirectory extends DataDirectory {
-	private final static String NAME = "IMAGE_DIRECTORY_ENTRY_RESOURCE";
+	private static final String NAME = "IMAGE_DIRECTORY_ENTRY_RESOURCE";
 	/**
 	 * The size of a resource directory entry, in bytes.
 	 */
-	public final static int IMAGE_SIZEOF_RESOURCE_DIRECTORY_ENTRY = 8;
+    public static final int IMAGE_SIZEOF_RESOURCE_DIRECTORY_ENTRY = 8;
 	/**
 	 * The size of a resource directory, in bytes.
 	 */
-	public final static int IMAGE_SIZEOF_RESOURCE_DIRECTORY = 16;
+    public static final int IMAGE_SIZEOF_RESOURCE_DIRECTORY = 16;
 	/**
 	 * A flag indicating that a resources is a string.
 	 */
-	public final static int IMAGE_RESOURCE_NAME_IS_STRING = 0x80000000;
+    public static final int IMAGE_RESOURCE_NAME_IS_STRING = 0x80000000;
 	/**
 	 * A flag indicating that a resources is a directory.
 	 */
-	public final static int IMAGE_RESOURCE_DATA_IS_DIRECTORY = 0x80000000;
+    public static final int IMAGE_RESOURCE_DATA_IS_DIRECTORY = 0x80000000;
 	/**
 	 * A lookup table to obtain a string name for a resource type.
 	 */
-	public final static String[] PREDEFINED_RESOURCE_NAMES = { "0", "Cursor", "Bitmap", "Icon",
+    public static final String[] PREDEFINED_RESOURCE_NAMES = { "0", "Cursor", "Bitmap", "Icon",
 		"Menu", "Dialog", "StringTable", "FontDir", "Font", "Accelerator", "RC_Data",
 		"MessageTable", "GroupCursor", "13", "GroupIcon", "15", "Version", "DialogInclude", "18",
 		"PlugAndPlay", "VXD", "ANI_Cursor", "ANI_Icon", "HTML", "Manifest" };
@@ -69,93 +69,93 @@ public class ResourceDataDirectory extends DataDirectory {
 	/**
 	 * Not defined in documentation but PNGs and WAVs are both this type
 	 */
-	public final static byte RT_NOTDEFINED = 0;
+    public static final byte RT_NOTDEFINED = 0;
 	/**
 	/**
 	 * Hardware-dependent cursor resource.
 	 */
-	public final static byte RT_CURSOR = 1;
+    public static final byte RT_CURSOR = 1;
 	/**
 	 * Bitmap resource.
 	 */
-	public final static byte RT_BITMAP = 2;
+    public static final byte RT_BITMAP = 2;
 	/**
 	 * Hardware-dependent icon resource.
 	 */
-	public final static byte RT_ICON = 3;
+    public static final byte RT_ICON = 3;
 	/**
 	 * Menu resource.
 	 */
-	public final static byte RT_MENU = 4;
+    public static final byte RT_MENU = 4;
 	/**
 	 * Dialog box.
 	 */
-	public final static byte RT_DIALOG = 5;
+    public static final byte RT_DIALOG = 5;
 	/**
 	 * String-table entry.
 	 */
-	public final static byte RT_STRING = 6;
+    public static final byte RT_STRING = 6;
 	/**
 	 * Font directory resource.
 	 */
-	public final static byte RT_FONTDIR = 7;
+    public static final byte RT_FONTDIR = 7;
 	/**
 	 * Font resource.
 	 */
-	public final static byte RT_FONT = 8;
+    public static final byte RT_FONT = 8;
 	/**
 	 * Accelerator table.
 	 */
-	public final static byte RT_ACCELERATOR = 9;
+    public static final byte RT_ACCELERATOR = 9;
 	/**
 	 * Application-defined resource (raw data).
 	 */
-	public final static byte RT_RCDATA = 10;
+    public static final byte RT_RCDATA = 10;
 	/**
 	 * Message-table entry.
 	 */
-	public final static byte RT_MESSAGETABLE = 11;
+    public static final byte RT_MESSAGETABLE = 11;
 	/**
 	 * Hardware-independent cursor resource.
 	 */
-	public final static byte RT_GROUP_CURSOR = 12;
+    public static final byte RT_GROUP_CURSOR = 12;
 	// 13 is not defined...
 	/**
 	 * Hardware-independent icon resource.
 	 */
-	public final static byte RT_GROUP_ICON = 14;
+    public static final byte RT_GROUP_ICON = 14;
 	// 15 is not defined...
 	/**
 	 * Version resource.
 	 */
-	public final static byte RT_VERSION = 16;
+    public static final byte RT_VERSION = 16;
 
-	public final static byte RT_DLGINCLUDE = 17;
+	public static final byte RT_DLGINCLUDE = 17;
 	// 18 is not defined...
 	/**
 	 * Plug and Play resource.
 	 */
-	public final static byte RT_PLUGPLAY = 19;
+    public static final byte RT_PLUGPLAY = 19;
 	/**
 	 * VXD resource.
 	 */
-	public final static byte RT_VXD = 20;
+    public static final byte RT_VXD = 20;
 	/**
 	 * Animated cursor resource.
 	 */
-	public final static byte RT_ANICURSOR = 21;
+    public static final byte RT_ANICURSOR = 21;
 	/**
 	 * Animated icon resource.
 	 */
-	public final static byte RT_ANIICON = 22;
+    public static final byte RT_ANIICON = 22;
 	/**
 	 * HTML resource.
 	 */
-	public final static byte RT_HTML = 23;
+    public static final byte RT_HTML = 23;
 	/**
 	 * Manifest resource
 	 */
-	public final static byte RT_MANIFEST = 24;
+    public static final byte RT_MANIFEST = 24;
 
 	private ResourceDirectory rootDirectory;
 
@@ -532,13 +532,13 @@ public class ResourceDataDirectory extends DataDirectory {
 		DumbMemBufferImpl buffer = new DumbMemBufferImpl(data.getMemory(), data.getAddress());
 
 		StringBuilder comment = new StringBuilder();
-		if (data.getBaseDataType().getName().equals("DialogResource")) {
+		if ("DialogResource".equals(data.getBaseDataType().getName())) {
 
 			int offset = 0;
 			//get first structure
 			Data componentAt = data.getComponentAt(offset);
 			if (componentAt.isStructure() &&
-				componentAt.getBaseDataType().getName().equals("DLGTEMPLATE")) {
+				"DLGTEMPLATE".equals(componentAt.getBaseDataType().getName())) {
 
 				//determine if 3 or 5 components after initial structure
 				int numAfter = 3;
@@ -555,22 +555,22 @@ public class ResourceDataDirectory extends DataDirectory {
 					offset += componentAt.getLength();
 					componentAt = data.getComponentAt(offset);
 					comment.append("\n" + afterTemplate[i] + ": ");
-					if (componentAt.getBaseDataType().getName().equals("short")) {
+					if ("short".equals(componentAt.getBaseDataType().getName())) {
 						comment.append(componentAt.getDefaultValueRepresentation());
 					}
-					if (componentAt.getBaseDataType().getName().equals("short[1]")) {
+					if ("short[1]".equals(componentAt.getBaseDataType().getName())) {
 						if (buffer.getShort(offset) == 0x0000) {
 							comment.append(templateType0[i]);
 						}
 					}
-					if (componentAt.getBaseDataType().getName().equals("short[2]")) {
+					if ("short[2]".equals(componentAt.getBaseDataType().getName())) {
 						if ((buffer.getShort(offset) & 0xffff) == 0xffff) {
 							int ordinal = buffer.getShort(offset + 2);
 							comment.append("External Ordinal Number " + ordinal);
 						}
 					}
 
-					if (componentAt.getBaseDataType().getName().equals("unicode")) {
+					if ("unicode".equals(componentAt.getBaseDataType().getName())) {
 						comment.append(
 							fixupStringRepForDisplay(componentAt.getDefaultValueRepresentation()));
 					}
@@ -580,7 +580,7 @@ public class ResourceDataDirectory extends DataDirectory {
 				while (currentItem < numItems) {
 					offset += componentAt.getLength();
 					componentAt = data.getComponentAt(offset);
-					if (componentAt.getBaseDataType().getName().equals("DLGITEMTEMPLATE")) {
+					if ("DLGITEMTEMPLATE".equals(componentAt.getBaseDataType().getName())) {
 						currentItem++;
 						comment.append("\nItem " + currentItem + ": ");
 						//loop over three items after each item structure
@@ -606,7 +606,7 @@ public class ResourceDataDirectory extends DataDirectory {
 								}
 							}
 
-							if (componentAt.getBaseDataType().getName().equals("unicode")) {
+							if ("unicode".equals(componentAt.getBaseDataType().getName())) {
 								comment.append(fixupStringRepForDisplay(
 									componentAt.getDefaultValueRepresentation()));
 							}
@@ -637,7 +637,7 @@ public class ResourceDataDirectory extends DataDirectory {
 		DumbMemBufferImpl buffer = new DumbMemBufferImpl(data.getMemory(), data.getAddress());
 
 		StringBuilder comment = new StringBuilder();
-		if (data.getBaseDataType().getName().equals("MenuResource")) {
+		if ("MenuResource".equals(data.getBaseDataType().getName())) {
 
 			//get first structure
 
@@ -647,7 +647,7 @@ public class ResourceDataDirectory extends DataDirectory {
 				DataType dt = data.getComponent(i).getBaseDataType();
 				int offset = data.getComponent(i).getRootOffset();
 
-				if (dt.getName().equals("MENUITEM_TEMPLATE_HEADER")) {
+				if ("MENUITEM_TEMPLATE_HEADER".equals(dt.getName())) {
 
 					int version = buffer.getShort(offset);
 					if (version != 0x0000) {
@@ -660,7 +660,7 @@ public class ResourceDataDirectory extends DataDirectory {
 					}
 
 				}
-				if (dt.getName().equals("word")) {
+				if ("word".equals(dt.getName())) {
 					short option = buffer.getShort(offset);
 
 					if (option == MF_POPUP) {
@@ -675,7 +675,7 @@ public class ResourceDataDirectory extends DataDirectory {
 						i++; //skip the mtID
 					}
 				}
-				if (dt.getName().equals("unicode")) {
+				if ("unicode".equals(dt.getName())) {
 					if (topLevel) {
 						comment.append("\n");
 					}

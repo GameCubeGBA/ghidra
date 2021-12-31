@@ -36,7 +36,7 @@ public interface ConsoleService {
 	 * @param originator  a descriptive name of the message creator
 	 * @param message     the message to appear in the console
 	 */
-	public void addMessage(String originator, String message);
+    void addMessage(String originator, String message);
 
 	/**
 	 * Appends an error message to the console text area.
@@ -45,57 +45,57 @@ public interface ConsoleService {
 	 * @param originator  a descriptive name of the message creator
 	 * @param message     the message to appear in the console
 	 */
-	public void addErrorMessage(String originator, String message);
+    void addErrorMessage(String originator, String message);
 
 	/**
 	 * Appends an exception to the console text area.
 	 * @param originator  a descriptive name of the message creator
 	 * @param exc         the exception 
 	 */
-	public void addException(String originator, Exception exc);
+    void addException(String originator, Exception exc);
 
 	/**
 	 * Clears all messages from the console.
 	 */
-	public void clearMessages();
+    void clearMessages();
 
 	/**
 	 * Prints the message into the console.
 	 * @param msg the messages to print into the console
 	 */
-	public void print(String msg);
+    void print(String msg);
 
 	/**
 	 * Prints the messages into the console followed by a line feed.
 	 * @param msg the message to print into the console
 	 */
-	public void println(String msg);
+    void println(String msg);
 
 	/**
 	 * Prints the error message into the console.
 	 * It will be displayed in red.
 	 * @param errmsg the error message to print into the console
 	 */
-	public void printError(String errmsg);
+    void printError(String errmsg);
 
 	/**
 	 * Prints the error message into the console followed by a line feed.
 	 * It will be displayed in red.
 	 * @param errmsg the error message to print into the console
 	 */
-	public void printlnError(String errmsg);
+    void printlnError(String errmsg);
 
 	/**
 	 * Returns a print writer object to use as standard output.
 	 * @return a print writer object to use as standard output
 	 */
-	public PrintWriter getStdOut();
+    PrintWriter getStdOut();
 
 	/**
 	 * Returns a print writer object to use as standard error.
 	 * @return a print writer object to use as standard error
 	 */
-	public PrintWriter getStdErr();
+    PrintWriter getStdErr();
 
 	/**
 	 * Returns number of characters of currently 
@@ -112,7 +112,7 @@ public interface ConsoleService {
 	 * 
 	 * @throws UnsupportedOperationException
 	 */
-	public int getTextLength();
+    int getTextLength();
 
 	/**
 	 * Fetches the text contained within the given portion 
@@ -131,5 +131,5 @@ public interface ConsoleService {
 	 * 
 	 * @throws UnsupportedOperationException
 	 */
-	public String getText(int offset, int length);
+    String getText(int offset, int length);
 }

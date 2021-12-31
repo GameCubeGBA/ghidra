@@ -173,11 +173,8 @@ public class ClassModuleTree {
 			if (!Objects.equals(module, other.module)) {
 				return false;
 			}
-			if (!Objects.equals(name, other.name)) {
-				return false;
-			}
-			return true;
-		}
+            return Objects.equals(name, other.name);
+        }
 
 		public void setModule(String moduleName) {
 			this.module = moduleName;
@@ -188,7 +185,7 @@ public class ClassModuleTree {
 				return "";
 			}
 			String parentPath = parent.getPath();
-			if (parentPath.length() == 0) {
+			if (parentPath.isEmpty()) {
 				return name;
 			}
 			return parentPath + "/" + name;

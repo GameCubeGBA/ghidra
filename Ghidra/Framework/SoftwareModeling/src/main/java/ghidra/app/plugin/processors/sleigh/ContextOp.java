@@ -80,9 +80,7 @@ public class ContextOp implements ContextChange {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("ctx&");
-		for (int i = 0; i < num; i++) {
-			sb.append("SS:SS:SS:SS:");
-		}
+        sb.append("SS:SS:SS:SS:".repeat(Math.max(0, num)));
 		sb.append(NumericUtilities.convertMaskToHexString(mask, 8, false, 2, ":"));
 		sb.append(" := ");
 		sb.append(patexp);

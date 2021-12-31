@@ -52,8 +52,7 @@ public class RecoveryDBTest extends AbstractGenericTest {
 	 * @param arg0
 	 */
 	public RecoveryDBTest() {
-		super();
-	}
+    }
 
 	@Before
 	public void setUp() throws Exception {

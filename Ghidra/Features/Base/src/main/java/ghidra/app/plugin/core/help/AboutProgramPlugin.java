@@ -51,8 +51,8 @@ import ghidra.util.HelpLocation;
 )
 //@formatter:on
 public class AboutProgramPlugin extends Plugin implements FrontEndable {
-	public final static String PLUGIN_NAME = "AboutProgramPlugin";
-	public final static String ACTION_NAME = "About Program";
+	public static final String PLUGIN_NAME = "AboutProgramPlugin";
+	public static final String ACTION_NAME = "About Program";
 
 	private DockingAction aboutAction;
 

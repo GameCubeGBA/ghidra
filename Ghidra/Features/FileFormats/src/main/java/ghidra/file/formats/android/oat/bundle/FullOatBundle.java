@@ -228,7 +228,7 @@ public class FullOatBundle implements OatBundle {
 			if (dexName.startsWith(CLASSES) && dexName.endsWith(DEX)) {
 				String indexString =
 					dexName.substring(CLASSES.length(), dexName.length() - DEX.length());
-				if (indexString.length() == 0) {//this case is where name is "classes.dex"
+				if (indexString.isEmpty()) {//this case is where name is "classes.dex"
 					return 0;
 				}
 				//this case handles classes2.dex, classes3.dex, ... classesN.dex 

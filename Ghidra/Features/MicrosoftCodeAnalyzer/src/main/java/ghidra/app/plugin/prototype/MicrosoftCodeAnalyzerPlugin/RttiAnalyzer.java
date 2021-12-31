@@ -170,7 +170,7 @@ public class RttiAnalyzer extends AbstractAnalyzer {
 			getRtti4Addresses(program, dataBlocks, rtti0Locations, validationOptions, monitor);
 
 		// create all found RTTI4 tables at once
-		if (rtti4Addresses.size() > 0) {
+		if (!rtti4Addresses.isEmpty()) {
 			CreateRtti4BackgroundCmd cmd = new CreateRtti4BackgroundCmd(rtti4Addresses, dataBlocks,
 				validationOptions, applyOptions);
 			cmd.applyTo(program, monitor);

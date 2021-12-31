@@ -42,7 +42,7 @@ public interface AsyncLoopHandlerForSecond<R> extends AsyncHandlerCanExit<R> {
 	 * @param exc the exception if completed exceptionally
 	 * @return null
 	 */
-	public Void repeat(Void v, Throwable exc);
+    Void repeat(Void v, Throwable exc);
 
 	/**
 	 * Re-execute the producer action or exit conditionally, or complete exceptionally
@@ -62,7 +62,7 @@ public interface AsyncLoopHandlerForSecond<R> extends AsyncHandlerCanExit<R> {
 	 * @param exc the exception if completed exceptionally
 	 * @return null
 	 */
-	public default Void repeatWhile(Boolean b, Throwable exc) {
+	default Void repeatWhile(Boolean b, Throwable exc) {
 		return exc == null && b == Boolean.TRUE ? repeat(null, exc) : exit(null, exc);
 	}
 
@@ -85,14 +85,14 @@ public interface AsyncLoopHandlerForSecond<R> extends AsyncHandlerCanExit<R> {
 	 * @param exc the exception if completed exceptionally
 	 * @return null
 	 */
-	public default Void repeatIgnore(Object v, Throwable exc) {
+	default Void repeatIgnore(Object v, Throwable exc) {
 		return repeat(null, exc);
 	}
 
 	/**
 	 * Re-execute the loop
 	 */
-	public default void repeat() {
+	default void repeat() {
 		repeat(null, null);
 	}
 
@@ -101,7 +101,7 @@ public interface AsyncLoopHandlerForSecond<R> extends AsyncHandlerCanExit<R> {
 	 * 
 	 * @param b the value of the predicate
 	 */
-	public default void repeatWhile(boolean b) {
+	default void repeatWhile(boolean b) {
 		repeatWhile(b, null);
 	}
 }

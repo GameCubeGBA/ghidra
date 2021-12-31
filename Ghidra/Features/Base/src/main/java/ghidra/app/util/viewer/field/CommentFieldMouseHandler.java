@@ -29,7 +29,7 @@ import ghidra.util.StringUtilities;
  */
 public class CommentFieldMouseHandler implements FieldMouseHandlerExtension {
 
-	private final static Class<?>[] SUPPORTED_CLASSES =
+	private static final Class<?>[] SUPPORTED_CLASSES =
 		new Class[] { CommentFieldLocation.class, EolCommentFieldLocation.class,
 			PlateFieldLocation.class, AutomaticCommentFieldLocation.class,
 			MemoryBlockStartFieldLocation.class };

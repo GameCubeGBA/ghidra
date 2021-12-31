@@ -56,11 +56,8 @@ public class AssemblyParseToken extends AssemblyParseTreeNode {
 			return false;
 		}
 		AssemblyParseToken that = (AssemblyParseToken) obj;
-		if (!this.term.equals(that.term) || !this.str.equals(that.str)) {
-			return false;
-		}
-		return true;
-	}
+        return this.term.equals(that.term) && this.str.equals(that.str);
+    }
 
 	/**
 	 * Get the portion of the input comprising the token
@@ -77,7 +74,7 @@ public class AssemblyParseToken extends AssemblyParseTreeNode {
 
 	@Override
 	protected void print(PrintStream out, String indent) {
-		out.println(indent + term + " := " + toString());
+		out.println(indent + term + " := " + this);
 	}
 
 	@Override

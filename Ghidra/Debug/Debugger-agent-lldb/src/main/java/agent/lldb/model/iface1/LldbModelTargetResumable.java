@@ -30,6 +30,6 @@ import ghidra.dbg.target.TargetResumable;
 public interface LldbModelTargetResumable extends LldbModelTargetObject, TargetResumable {
 
 	@Override
-	public CompletableFuture<Void> resume();
+    CompletableFuture<Void> resume();
 
 }

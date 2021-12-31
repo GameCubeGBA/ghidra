@@ -50,8 +50,7 @@ implements IWorkbenchPreferencePage {
 	private Button removeButton;
 
 	public GhidraProjectCreatorPreferencePage() {
-		super();
-	}
+    }
 
 	@Override
 	public void init(IWorkbench workbench) {
@@ -226,7 +225,7 @@ implements IWorkbenchPreferencePage {
 		}
 		String layoutVersion = applicationProperties.getProperty(
 			ApplicationProperties.APPLICATION_LAYOUT_VERSION_PROPERTY);
-		if (layoutVersion == null || !layoutVersion.equals("1")) {
+		if (layoutVersion == null || !"1".equals(layoutVersion)) {
 			// We can be smarter about this check and what we support later, once the layout version 
 			// actually changes.
 			throw new IOException(

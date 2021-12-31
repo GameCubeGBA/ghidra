@@ -121,20 +121,18 @@ class FilterAction extends ToggleDockingAction {
 	 */
 	synchronized ArrayList<String> getSelectedTypes() {
 		ArrayList<String> list = new ArrayList<>();
-		Iterator<String> iter = typeEnabledMap.keySet().iterator();
-		while (iter.hasNext()) {
-			String type = iter.next();
-			Boolean lEnabled = typeEnabledMap.get(type);
-			if (lEnabled != null && typeEnabledMap.get(type).booleanValue()) {
-				list.add(type);
-			}
-		}
+        for (String type : typeEnabledMap.keySet()) {
+            Boolean lEnabled = typeEnabledMap.get(type);
+            if (lEnabled != null && typeEnabledMap.get(type).booleanValue()) {
+                list.add(type);
+            }
+        }
 		return list;
 	}
 
 	synchronized void selectTypes(ArrayList<String> list) {
-		for (int i = 0; i < list.size(); i++) {
-			typeEnabledMap.put(list.get(i), Boolean.TRUE);
+		for (String s : list) {
+			typeEnabledMap.put(s, Boolean.TRUE);
 		}
 		if (dialog != null) {
 			dialog.selectTypes(list);
@@ -222,15 +220,13 @@ class FilterAction extends ToggleDockingAction {
 		}
 
 		void selectTypes(ArrayList<String> list) {
-			for (int i = 0; i < list.size(); i++) {
-				String type = list.get(i);
+			for (String type : list) {
 				selectCheckBox(type);
 			}
 		}
 
 		private void selectCheckBox(String typeName) {
-			for (int i = 0; i < checkboxes.size(); i++) {
-				JCheckBox cb = checkboxes.get(i);
+			for (JCheckBox cb : checkboxes) {
 				if (cb.getText().equals(typeName)) {
 					cb.setSelected(true);
 					return;
@@ -258,11 +254,9 @@ class FilterAction extends ToggleDockingAction {
 
 			enableButton.addChangeListener(e -> {
 				boolean lenabled = enableButton.isSelected();
-				Iterator<JCheckBox> itr = checkboxes.iterator();
-				while (itr.hasNext()) {
-					JCheckBox curCheckbox = itr.next();
-					curCheckbox.setEnabled(lenabled);
-				}
+                for (JCheckBox curCheckbox : checkboxes) {
+                    curCheckbox.setEnabled(lenabled);
+                }
 
 				selectAllButton.setEnabled(isEnabled());
 				selectNoneButton.setEnabled(isEnabled());
@@ -285,19 +279,17 @@ class FilterAction extends ToggleDockingAction {
 			selectAllButton = new JButton("Select All");
 			selectAllButton.setMnemonic('A');
 			selectAllButton.addActionListener(evt -> {
-				Iterator<JCheckBox> itr = checkboxes.iterator();
-				while (itr.hasNext()) {
-					itr.next().setSelected(true);
-				}
+                for (JCheckBox checkbox : checkboxes) {
+                    checkbox.setSelected(true);
+                }
 			});
 			typeButtonPanel.add(selectAllButton);
 			selectNoneButton = new JButton("Select None");
 			selectNoneButton.setMnemonic('N');
 			selectNoneButton.addActionListener(evt -> {
-				Iterator<JCheckBox> itr = checkboxes.iterator();
-				while (itr.hasNext()) {
-					itr.next().setSelected(false);
-				}
+                for (JCheckBox checkbox : checkboxes) {
+                    checkbox.setSelected(false);
+                }
 			});
 			typeButtonPanel.add(selectNoneButton);
 
@@ -362,12 +354,10 @@ class FilterAction extends ToggleDockingAction {
 			}
 			else {
 				if (!filteredTextExists()) {//Typed Incorrectly, so show nothing...
-					Iterator<String> itr = typeEnabledMap.keySet().iterator();
-					while (itr.hasNext()) {
-						String curType = itr.next();
-						Boolean lEnabled = typeEnabledMap.get(curType);
-						createCheckBox(curType, curType, lEnabled);
-					}
+                    for (String curType : typeEnabledMap.keySet()) {
+                        Boolean lEnabled = typeEnabledMap.get(curType);
+                        createCheckBox(curType, curType, lEnabled);
+                    }
 				}
 			}
 			repaint();
@@ -381,7 +371,7 @@ class FilterAction extends ToggleDockingAction {
 		}
 
 		private boolean filteredTextExists() {
-			return (((getFilteredText() != null) && (getFilteredText().length() > 0)) ? true
+			return (((getFilteredText() != null) && (!getFilteredText().isEmpty())) ? true
 					: false);
 		}
 
@@ -406,14 +396,12 @@ class FilterAction extends ToggleDockingAction {
 			if (filteredTextExists()) {
 				String filteredText = getFilteredText();
 				Set<Entry<String, Boolean>> entrySet = typeEnabledMap.entrySet();
-				Iterator<Entry<String, Boolean>> iteratorIndex = entrySet.iterator();
-				while (iteratorIndex.hasNext()) {
-					Entry<String, Boolean> entry = iteratorIndex.next();
-					String checkboxName = entry.getKey();
-					if (StringUtils.containsIgnoreCase(checkboxName, filteredText)) {
-						checkboxNameList.add(checkboxName);
-					}
-				}
+                for (Entry<String, Boolean> entry : entrySet) {
+                    String checkboxName = entry.getKey();
+                    if (StringUtils.containsIgnoreCase(checkboxName, filteredText)) {
+                        checkboxNameList.add(checkboxName);
+                    }
+                }
 			}
 			filteredList = checkboxNameList;
 			buildCheckBoxList();

@@ -239,11 +239,8 @@ public class HelpLocation {
 		}
 
 		URL helpURL = getURL();
-		if (!Objects.equals(helpURL, other.getURL())) {
-			return false;
-		}
-		return true;
-	}
+        return Objects.equals(helpURL, other.getURL());
+    }
 
 	/**
 	 * Returns information describing how/where this help location was created.  This value may

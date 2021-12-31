@@ -32,7 +32,7 @@ public class PcRelative31AddressDataType extends BuiltIn {
 
 	private static SettingsDefinition[] SETTINGS_DEFS = { FORMAT, PADDING };
 
-	public final static PcRelative31AddressDataType dataType = new PcRelative31AddressDataType();
+	public static final PcRelative31AddressDataType dataType = new PcRelative31AddressDataType();
 
 	/**
 	 * Creates a PC relative address data type using the bottom 31 bits.

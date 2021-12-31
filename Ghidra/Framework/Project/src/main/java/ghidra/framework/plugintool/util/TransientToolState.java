@@ -30,24 +30,20 @@ public class TransientToolState {
 	 */
 	public TransientToolState(List<Plugin> plugins) {
 		states = new ArrayList<>();
-		Iterator<Plugin> it = plugins.iterator();
-		while(it.hasNext()) {
-			Plugin plugin = it.next();
-			Object state = plugin.getTransientState();
-			if (state != null) {
-				states.add(new PluginState(plugin, state));
-			}
-		}
+        for (Plugin plugin : plugins) {
+            Object state = plugin.getTransientState();
+            if (state != null) {
+                states.add(new PluginState(plugin, state));
+            }
+        }
     }
     /**
      * Restore the tool's state.
      */
 	public void restoreTool() {
-		Iterator<PluginState> it = states.iterator();
-		while(it.hasNext()) {
-			PluginState ps = it.next();
-			ps.restore();
-		}
+        for (PluginState ps : states) {
+            ps.restore();
+        }
 	}
 	
 	private static class PluginState {

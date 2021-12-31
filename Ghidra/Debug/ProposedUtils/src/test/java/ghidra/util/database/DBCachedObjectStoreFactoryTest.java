@@ -689,8 +689,8 @@ public class DBCachedObjectStoreFactoryTest {
 		myDO.release(this);
 	}
 
-	public static abstract class AbstractObject extends DBAnnotatedObject {
-		final static String FIELD_COLUMN_NAME = "MyField";
+	public abstract static class AbstractObject extends DBAnnotatedObject {
+		static final String FIELD_COLUMN_NAME = "MyField";
 
 		@DBAnnotatedColumn(FIELD_COLUMN_NAME)
 		static DBObjectColumn FIELD_COLUMN;

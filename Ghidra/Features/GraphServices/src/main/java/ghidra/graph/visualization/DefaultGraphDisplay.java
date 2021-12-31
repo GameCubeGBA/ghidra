@@ -1234,7 +1234,7 @@ public class DefaultGraphDisplay implements GraphDisplay {
 
 		Collection<Point> points = vertices.stream().map(layoutModel).collect(Collectors.toList());
 
-		if (points.size() > 0) {
+		if (!points.isEmpty()) {
 			// center the selected vertices
 			Point p = Point.centroidOf(points);
 			return new Point2D.Double(p.x, p.y);

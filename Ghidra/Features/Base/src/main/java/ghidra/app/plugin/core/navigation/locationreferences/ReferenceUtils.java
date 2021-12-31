@@ -57,11 +57,8 @@ public final class ReferenceUtils {
 		}
 
 		// not external, it must then be in memory
-		if (!p.getMemory().contains(a)) {
-			return false;
-		}
-		return true;
-	}
+        return p.getMemory().contains(a);
+    }
 
 	/**
 	 * Returns addresses that reference the item at the given location.
@@ -154,12 +151,8 @@ public final class ReferenceUtils {
 			cu = getDeepestDataContaining(address, program);
 		}
 
-		if (cu.getMinAddress().equals(address)) {
-			return false;
-		}
-
-		return true;
-	}
+        return !cu.getMinAddress().equals(address);
+    }
 
 	/**
 	 * Returns all references (locations) that use the given datatype.
@@ -1144,12 +1137,9 @@ public final class ReferenceUtils {
 			return false;
 		}
 
-		if (DataTypeManager.BUILT_IN_ARCHIVE_UNIVERSAL_ID.equals(
-			sourceArchive.getSourceArchiveID())) {
-			return true;
-		}
-		return false;
-	}
+        return DataTypeManager.BUILT_IN_ARCHIVE_UNIVERSAL_ID.equals(
+                sourceArchive.getSourceArchiveID());
+    }
 
 	/**
 	 * Returns all references to the given variable

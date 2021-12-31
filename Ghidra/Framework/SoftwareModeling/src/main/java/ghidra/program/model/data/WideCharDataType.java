@@ -23,11 +23,11 @@ import ghidra.program.model.scalar.Scalar;
 import ghidra.util.StringUtilities;
 
 public class WideCharDataType extends BuiltIn implements ArrayStringable, DataTypeWithCharset {
-	final static SettingsDefinition[] DEFAULT_WIDE_CHAR_SETTINGS = {
+	static final SettingsDefinition[] DEFAULT_WIDE_CHAR_SETTINGS = {
 		EndianSettingsDefinition.DEF, RenderUnicodeSettingsDefinition.RENDER };
 
 	/** A statically defined WideCharDataType instance. */
-	public final static WideCharDataType dataType = new WideCharDataType();
+    public static final WideCharDataType dataType = new WideCharDataType();
 
 	public WideCharDataType() {
 		this(null);

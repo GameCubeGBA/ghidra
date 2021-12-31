@@ -25,13 +25,13 @@ import ghidra.util.HelpLocation;
  */
 public interface LocationReferencesService {
 
-	public static final String MENU_GROUP = "References";
+	String MENU_GROUP = "References";
 
 	/**
 	 * Returns the help location for help content that describes this service.
 	 * @return the help location for help content that describes this service.
 	 */
-	public HelpLocation getHelpLocation();
+    HelpLocation getHelpLocation();
 
 	/**
 	 * Shows a ComponentProvider containing a table of references that refer to the given
@@ -40,6 +40,6 @@ public interface LocationReferencesService {
 	 * @param navigatable The navigatable in which the references should be shown
 	 * @throws NullPointerException if <tt>location</tt> is null.
 	 */
-	public void showReferencesToLocation(ProgramLocation location, Navigatable navigatable);
+    void showReferencesToLocation(ProgramLocation location, Navigatable navigatable);
 
 }

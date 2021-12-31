@@ -29,8 +29,7 @@ public class WeakValueHashMap<K, V> extends AbstractWeakValueMap<K, V> {
 	 * Constructs a new weak map
 	 */
 	public WeakValueHashMap() {
-		super();
-		refMap = new HashMap<>();
+        refMap = new HashMap<>();
 	}
 
 	/**
@@ -39,8 +38,7 @@ public class WeakValueHashMap<K, V> extends AbstractWeakValueMap<K, V> {
 	 * @param initialSize the initial size of the backing map
 	 */
 	public WeakValueHashMap(int initialSize) {
-		super();
-		refMap = new HashMap<>(initialSize);
+        refMap = new HashMap<>(initialSize);
 	}
 
 	@Override

@@ -18,5 +18,5 @@ package ghidra.app.plugin.core.stackeditor;
 
 public interface StackEditorOptionManager {
 
-	public abstract boolean showStackNumbersInHex();
+	boolean showStackNumbersInHex();
 }

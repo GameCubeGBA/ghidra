@@ -21,36 +21,36 @@ public class GenericHelpTopics {
 	/**
 	 * Help Topic for "About."
 	 */
-	public final static String ABOUT = "About";
+    public static final String ABOUT = "About";
 
 	/**
 	 * Name of options for the help topic for the front end
 	 * (Project Window).
 	 */
-	public final static String FRONT_END = "FrontEndPlugin";
+    public static final String FRONT_END = "FrontEndPlugin";
 
 	/**
 	 * Help Topic for the glossary.
 	 */
-	public final static String GLOSSARY = "Glossary";
+    public static final String GLOSSARY = "Glossary";
 
 	/**
 	 * Help for Intro topics.
 	 */
-	public final static String INTRO = "Intro";
+    public static final String INTRO = "Intro";
 
 	/**
 	 * Help Topic for the project repository.
 	 */
-	public final static String REPOSITORY = "Repository";
+    public static final String REPOSITORY = "Repository";
 
 	/**
 	 * Help Topic for the version control.
 	 */
-	public final static String VERSION_CONTROL = "VersionControl";
+    public static final String VERSION_CONTROL = "VersionControl";
 
 	/**
 	 * Help Topic for tools.
 	 */
-	public final static String TOOL = ToolConstants.TOOL_HELP_TOPIC;
+    public static final String TOOL = ToolConstants.TOOL_HELP_TOPIC;
 }

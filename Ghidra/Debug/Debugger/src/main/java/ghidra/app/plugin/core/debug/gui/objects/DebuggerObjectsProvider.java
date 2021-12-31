@@ -266,7 +266,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 
 		targetMap = new LinkedMap<String, ObjectContainer>();
 		refSet = new HashSet<>();
-		getRoot().propagateProvider(this);
+		root.propagateProvider(this);
 
 		this.autoServiceWiring = AutoService.wireServicesConsumed(plugin, this);
 		this.autoOptionsWiring = AutoOptions.wireOptions(plugin, this);
@@ -327,10 +327,10 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 	private void buildMainPanel() throws Exception {
 		mainPanel = new JPanel(new BorderLayout());
 		if (asTree) {
-			addTree(getRoot());
+			addTree(root);
 		}
 		else {
-			addTable(getRoot());
+			addTable(root);
 		}
 
 		launchDialog = new DebuggerMethodInvocationDialog(tool, "Launch", "Launch",
@@ -474,9 +474,9 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 	public void refresh(TargetObject targetObject) {
 		if (pane != null) {
 			Swing.runIfSwingOrRunLater(() -> {
-				pane.setRoot(getRoot(), targetObject);
-				getRoot().propagateProvider(getRoot().getProvider());
-				pane.signalUpdate(getRoot());
+				pane.setRoot(root, targetObject);
+				root.propagateProvider(root.getProvider());
+				pane.signalUpdate(root);
 			});
 		}
 	}
@@ -586,11 +586,8 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 	//   might (?) not return the same thing.  Remedy?
 	public TargetObject getSelectedObject() {
 		TargetObject selectedObject = pane.getSelectedObject();
-		if (selectedObject != null) {
-			return selectedObject;
-		}
-		return null;
-	}
+        return selectedObject;
+    }
 
 	public void addTree(ObjectContainer container) {
 		ObjectTree objTree = new ObjectTree(container);
@@ -694,8 +691,8 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 			}
 			if (targetObject instanceof TargetInterpreter) {
 				TargetInterpreter interpreter = (TargetInterpreter) targetObject;
-				getPlugin().showConsole(interpreter);
-				DebugModelConventions.findSuitable(TargetFocusScope.class, targetObject)
+				plugin.showConsole(interpreter);
+				DebugModelConventions.suitable(TargetFocusScope.class, targetObject)
 						.thenAccept(f -> {
 							setFocus(f, targetObject);
 						});
@@ -775,7 +772,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 
 	@Override
 	public void closeComponent() {
-		TargetObject targetObject = getRoot().getTargetObject();
+		TargetObject targetObject = root.getTargetObject();
 		if (targetObject != null) {
 			targetObject.removeListener(getListener());
 		}
@@ -811,7 +808,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 		for (String link : path) {
 			ppath.add(link);
 		}
-		if (path.size() == 0) {
+		if (path.isEmpty()) {
 			return null;
 		}
 		ppath.remove(path.size() - 1);
@@ -844,13 +841,13 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 		if (object == null) {
 			return false;
 		}
-		if (isLocalOnly()) {
+		if (selectionOnly) {
 			return clazz.isInstance(object);
 		}
 		TargetObject result = null;
 		try {
 			result =
-				DebugModelConventions.findSuitable(clazz, object).get(100, TimeUnit.MILLISECONDS);
+				DebugModelConventions.suitable(clazz, object).get(100, TimeUnit.MILLISECONDS);
 		}
 		catch (Exception e) {
 			// IGNORE
@@ -1356,8 +1353,8 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 		if (obj == null && fallbackRoot) {
 			obj = root.getTargetObject();
 		}
-		if (!isLocalOnly()) {
-			DebugModelConventions.findSuitable(cls, obj).thenCompose(t -> {
+		if (!selectionOnly) {
+			DebugModelConventions.suitable(cls, obj).thenCompose(t -> {
 				return func.apply(t);
 			}).exceptionally(DebuggerResources.showError(getComponent(), errorMsg));
 		}
@@ -1425,7 +1422,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 			return;
 		}
 		// NB. This doesn't really mean anything in local-only actions mode
-		DebugModelConventions.findSuitable(TargetAttacher.class, obj).thenCompose(attacher -> {
+		DebugModelConventions.suitable(TargetAttacher.class, obj).thenCompose(attacher -> {
 			return attacher.attach((TargetAttachable) obj);
 		}).exceptionally(DebuggerResources.showError(getComponent(), "Couldn't re-attach"));
 	}
@@ -1547,7 +1544,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 
 	public void initiateConsole(ActionContext context) {
 		performAction(context, false, TargetInterpreter.class, interpreter -> {
-			getPlugin().showConsole(interpreter);
+			plugin.showConsole(interpreter);
 			return AsyncUtils.NIL;
 		}, "Couldn't show interpreter");
 	}
@@ -1560,7 +1557,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 		if (ignoreState) {
 			return true;
 		}
-		if (isLocalOnly()) {
+		if (selectionOnly) {
 			if (object instanceof TargetExecutionStateful) {
 				TargetExecutionStateful stateful = (TargetExecutionStateful) object;
 				TargetExecutionState executionState = stateful.getExecutionState();
@@ -1571,7 +1568,7 @@ public class DebuggerObjectsProvider extends ComponentProviderAdapter
 		}
 		TargetObject result = null;
 		try {
-			result = DebugModelConventions.findSuitable(TargetExecutionStateful.class, object)
+			result = DebugModelConventions.suitable(TargetExecutionStateful.class, object)
 					.get(100, TimeUnit.MILLISECONDS);
 		}
 		catch (Exception e) {

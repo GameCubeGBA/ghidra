@@ -43,7 +43,7 @@ class ShiftedReferenceDB extends MemReferenceDB implements ShiftedReference {
 	 */
 	@Override
 	public long getValue() {
-		return toAddr.getOffset() >> (int) offsetOrShift;
+		return toAddr.getOffset() >> offsetOrShift;
 	}
 
 	/**

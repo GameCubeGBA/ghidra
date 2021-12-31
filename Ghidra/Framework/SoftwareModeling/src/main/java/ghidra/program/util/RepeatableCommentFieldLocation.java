@@ -50,8 +50,7 @@ public class RepeatableCommentFieldLocation extends CommentFieldLocation {
 	 * an end-of-line field location from XML.
 	 */
 	public RepeatableCommentFieldLocation() {
-		super();
-	}
+    }
 
 	public int getCurrentCommentRow() {
 		return currentCommentRow;
@@ -71,10 +70,8 @@ public class RepeatableCommentFieldLocation extends CommentFieldLocation {
 		if (!super.equals(obj) || (getClass() != obj.getClass()))
 			return false;
 		RepeatableCommentFieldLocation other = (RepeatableCommentFieldLocation) obj;
-		if (currentCommentRow != other.currentCommentRow)
-			return false;
-		return true;
-	}
+        return currentCommentRow == other.currentCommentRow;
+    }
 
 	@Override
 	public void restoreState(Program p, SaveState obj) {

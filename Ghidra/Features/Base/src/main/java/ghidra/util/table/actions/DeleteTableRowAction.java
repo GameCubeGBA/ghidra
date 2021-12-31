@@ -155,11 +155,8 @@ public class DeleteTableRowAction extends DockingAction {
 		}
 
 		ThreadedTableModel<?, ?> threadedModel = (ThreadedTableModel<?, ?>) model;
-		if (threadedModel.isBusy()) {
-			return true;
-		}
-		return false;
-	}
+        return threadedModel.isBusy();
+    }
 
 	private void selectRow(TableModel model, final int row) {
 		Swing.runLater(() -> {

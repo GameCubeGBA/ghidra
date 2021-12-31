@@ -24,25 +24,25 @@ public final class StatementProgramInstructions {
 
 	//Standard Opcodes
 
-	public final static int DW_LNS_copy = 1;
-	public final static int DW_LNS_advance_pc = 2;
-	public final static int DW_LNS_advance_line = 3;
-	public final static int DW_LNS_set_file = 4;
-	public final static int DW_LNS_set_column = 5;
-	public final static int DW_LNS_negate_statement = 6;
-	public final static int DW_LNS_set_basic_block = 7;
-	public final static int DW_LNS_const_add_pc = 8;
-	public final static int DW_LNS_fixed_advanced_pc = 9;
+	public static final int DW_LNS_copy = 1;
+	public static final int DW_LNS_advance_pc = 2;
+	public static final int DW_LNS_advance_line = 3;
+	public static final int DW_LNS_set_file = 4;
+	public static final int DW_LNS_set_column = 5;
+	public static final int DW_LNS_negate_statement = 6;
+	public static final int DW_LNS_set_basic_block = 7;
+	public static final int DW_LNS_const_add_pc = 8;
+	public static final int DW_LNS_fixed_advanced_pc = 9;
 
-	public final static int DW_LNS_set_prologue_end = 10;
-	public final static int DW_LNS_set_epilog_begin = 11;
-	public final static int DW_LNS_set_isa = 12;
+	public static final int DW_LNS_set_prologue_end = 10;
+	public static final int DW_LNS_set_epilog_begin = 11;
+	public static final int DW_LNS_set_isa = 12;
 
 	//Extended Opcodes
 
-	public final static int DW_LNE_end_sequence = 1;
-	public final static int DW_LNE_set_address = 2;
-	public final static int DW_LNE_define_file = 3;
+	public static final int DW_LNE_end_sequence = 1;
+	public static final int DW_LNE_set_address = 2;
+	public static final int DW_LNE_define_file = 3;
 
 	private BinaryReader reader;
 	private StateMachine machine;

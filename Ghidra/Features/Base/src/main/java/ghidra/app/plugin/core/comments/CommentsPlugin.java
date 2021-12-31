@@ -48,11 +48,11 @@ import ghidra.util.HelpLocation;
 public class CommentsPlugin extends Plugin implements OptionsChangeListener {
 
 	// Delete Comments Action info
-	private final static String[] DELETE_MENUPATH = new String[] { "Comments", "Delete" };
+    private static final String[] DELETE_MENUPATH = new String[] { "Comments", "Delete" };
 
-	private final static String[] HISTORY_MENUPATH = { "Comments", "Show History..." };
+	private static final String[] HISTORY_MENUPATH = { "Comments", "Show History..." };
 
-	private final static String OPTION_NAME = "Enter accepts comment";
+	private static final String OPTION_NAME = "Enter accepts comment";
 
 	private DockingAction editAction;
 	private DockingAction deleteAction;
@@ -107,11 +107,11 @@ public class CommentsPlugin extends Plugin implements OptionsChangeListener {
 
 	void updateComments(CodeUnit cu, String preComment, String postComment, String eolComment,
 			String plateComment, String repeatableComment) {
-		preComment = (preComment.length() == 0) ? null : preComment;
-		postComment = (postComment.length() == 0) ? null : postComment;
-		eolComment = (eolComment.length() == 0) ? null : eolComment;
-		plateComment = (plateComment.length() == 0) ? null : plateComment;
-		repeatableComment = (repeatableComment.length() == 0) ? null : repeatableComment;
+		preComment = (preComment.isEmpty()) ? null : preComment;
+		postComment = (postComment.isEmpty()) ? null : postComment;
+		eolComment = (eolComment.isEmpty()) ? null : eolComment;
+		plateComment = (plateComment.isEmpty()) ? null : plateComment;
+		repeatableComment = (repeatableComment.isEmpty()) ? null : repeatableComment;
 
 		Command cmd = new SetCommentsCmd(cu.getMinAddress(), preComment, postComment, eolComment,
 			plateComment, repeatableComment);

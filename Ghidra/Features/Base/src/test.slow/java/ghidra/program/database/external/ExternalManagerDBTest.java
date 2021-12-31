@@ -40,8 +40,7 @@ public class ExternalManagerDBTest extends AbstractGhidraHeadedIntegrationTest {
 	private int transactionID;
 
 	public ExternalManagerDBTest() {
-		super();
-	}
+    }
 
 	@Before
 	public void setUp() throws Exception {

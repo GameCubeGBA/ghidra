@@ -23,7 +23,7 @@ import agent.dbgmodel.jna.dbgmodel.DbgModelNative.LOCATION;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IDebugHostMemory2 extends IDebugHostMemory1 {
-	final IID IID_IDEBUG_HOST_MEMORY2 = new IID("EEA033DE-38F6-416b-A251-1D3771001270");
+	IID IID_IDEBUG_HOST_MEMORY2 = new IID("EEA033DE-38F6-416b-A251-1D3771001270");
 
 	enum VTIndices2 implements VTableIndex {
 		LINEARIZE_LOCATION, //

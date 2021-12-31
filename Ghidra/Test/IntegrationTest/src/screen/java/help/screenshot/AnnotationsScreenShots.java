@@ -24,8 +24,7 @@ import ghidra.app.util.viewer.field.EolCommentFieldFactory;
 public class AnnotationsScreenShots extends GhidraScreenShotGenerator {
 
 	public AnnotationsScreenShots() {
-		super();
-	}
+    }
 
 	@Test
 	public void testCommentDialogURLExample() {

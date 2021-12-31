@@ -31,7 +31,6 @@ package ghidra.program.model.pcode;
 public class BlockSwitch extends BlockGraph {
 
 	public BlockSwitch() {
-		super();
-		blocktype = PcodeBlock.SWITCH;
+        blocktype = PcodeBlock.SWITCH;
 	}
 }

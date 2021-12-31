@@ -118,10 +118,9 @@ public class ExecuteDiffDialog extends DialogComponentProvider {
 			Toolkit.getDefaultToolkit().beep();
 			return;
 		}
-		for (int i = 0; i < listenerList.size(); i++) {
-			ActionListener listener = listenerList.get(i);
-			listener.actionPerformed(new ActionEvent(this, 0, DIFF_ACTION));
-		}
+        for (ActionListener listener : listenerList) {
+            listener.actionPerformed(new ActionEvent(this, 0, DIFF_ACTION));
+        }
 		close();
 	}
 
@@ -340,22 +339,12 @@ public class ExecuteDiffDialog extends DialogComponentProvider {
 	}
 
 	private void createSelectAllButton() {
-		selectAllButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setSelectAll(true);
-			}
-		});
+		selectAllButton.addActionListener(e -> setSelectAll(true));
 		selectAllButton.setMnemonic('S');
 	}
 
 	private void createDeselectAllButton() {
-		deselectAllButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setSelectAll(false);
-			}
-		});
+		deselectAllButton.addActionListener(e -> setSelectAll(false));
 		deselectAllButton.setMnemonic('D');
 	}
 

@@ -51,7 +51,7 @@ public interface DebuggerStaticMappingService {
 	/**
 	 * A proposed mapping of module to program
 	 */
-	public interface ModuleMapProposal {
+    interface ModuleMapProposal {
 
 		/**
 		 * Flatten proposals into a single collection of entries
@@ -91,7 +91,7 @@ public interface DebuggerStaticMappingService {
 		 * @param entries the entries to filter
 		 * @return the filtered entries
 		 */
-		public static Set<ModuleMapEntry> removeOverlapping(Collection<ModuleMapEntry> entries) {
+		static Set<ModuleMapEntry> removeOverlapping(Collection<ModuleMapEntry> entries) {
 			return entries.stream().filter(e -> {
 				TraceStaticMappingManager manager = e.module.getTrace().getStaticMappingManager();
 				return manager.findAllOverlapping(e.moduleRange, e.module.getLifespan()).isEmpty();
@@ -138,7 +138,7 @@ public interface DebuggerStaticMappingService {
 	/**
 	 * A proposed map of sections to program memory blocks
 	 */
-	public interface SectionMapProposal {
+    interface SectionMapProposal {
 
 		/**
 		 * Flatten proposals into a single collection of entries
@@ -178,7 +178,7 @@ public interface DebuggerStaticMappingService {
 		 * @param entries the entries to filter
 		 * @return the filtered entries
 		 */
-		public static Set<SectionMapEntry> removeOverlapping(Collection<SectionMapEntry> entries) {
+		static Set<SectionMapEntry> removeOverlapping(Collection<SectionMapEntry> entries) {
 			return entries.stream().filter(e -> {
 				TraceStaticMappingManager manager = e.section.getTrace().getStaticMappingManager();
 				Range<Long> moduleLifespan = e.section.getModule().getLifespan();
@@ -235,7 +235,7 @@ public interface DebuggerStaticMappingService {
 	/**
 	 * A module-program entry in a proposed module map
 	 */
-	public static class ModuleMapEntry {
+    class ModuleMapEntry {
 		/**
 		 * Check if a block should be included in size computations or analyzed for proposals
 		 * 
@@ -254,11 +254,8 @@ public interface DebuggerStaticMappingService {
 				// TODO: Determine how to handle these.
 				return false;
 			}
-			if (MemoryBlock.EXTERNAL_BLOCK_NAME.equals(block.getName())) {
-				return false;
-			}
-			return true;
-		}
+            return !MemoryBlock.EXTERNAL_BLOCK_NAME.equals(block.getName());
+        }
 
 		/**
 		 * Compute the "size" of an image
@@ -310,15 +307,12 @@ public interface DebuggerStaticMappingService {
 				return false;
 			}
 			ModuleMapEntry that = (ModuleMapEntry) obj;
-			if (this.module != that.module) {
-				return false;
-			}
+            return this.module == that.module;
 			/*if (this.program != that.program) {
 				return false;
 			}*/
 			// imageSize is derived
-			return true;
-		}
+        }
 
 		@Override
 		public int hashCode() {
@@ -379,7 +373,7 @@ public interface DebuggerStaticMappingService {
 	/**
 	 * A section-block entry in a proposed section map
 	 */
-	public static class SectionMapEntry {
+    class SectionMapEntry {
 		private final TraceSection section;
 		private Program program;
 		private MemoryBlock block;
@@ -408,17 +402,14 @@ public interface DebuggerStaticMappingService {
 				return false;
 			}
 			SectionMapEntry that = (SectionMapEntry) obj;
-			if (this.section != that.section) {
-				return false;
-			}
+            return this.section == that.section;
 			/*if (this.program != that.program) {
 				return false;
 			}
 			if (this.block != that.block) {
 				return false;
 			}*/
-			return true;
-		}
+        }
 
 		@Override
 		public int hashCode() {
@@ -492,7 +483,7 @@ public interface DebuggerStaticMappingService {
 	 * <p>
 	 * Note, the natural order is by the <em>destination</em> address.
 	 */
-	public class MappedAddressRange implements Comparable<MappedAddressRange> {
+    class MappedAddressRange implements Comparable<MappedAddressRange> {
 
 		private final AddressRange srcRange;
 		private final AddressRange dstRange;
@@ -604,11 +595,8 @@ public interface DebuggerStaticMappingService {
 				return c;
 			}
 			c = this.srcRange.compareTo(that.srcRange);
-			if (c != 0) {
-				return c;
-			}
-			return 0;
-		}
+            return c;
+        }
 
 		@Override
 		public boolean equals(Object obj) {
@@ -619,11 +607,8 @@ public interface DebuggerStaticMappingService {
 			if (!this.dstRange.equals(that.dstRange)) {
 				return false;
 			}
-			if (!this.srcRange.equals(that.srcRange)) {
-				return false;
-			}
-			return true;
-		}
+            return this.srcRange.equals(that.srcRange);
+        }
 
 		@Override
 		public int hashCode() {

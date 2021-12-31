@@ -92,11 +92,8 @@ public abstract class RTTIDataType extends DynamicDataType {
 			return true;
 		}
 		data = listing.getDefinedDataAfter(startAddress);
-		if (data != null && data.getMinAddress().compareTo(endAddress) <= 0) {
-			return true;
-		}
-		return false;
-	}
+        return data != null && data.getMinAddress().compareTo(endAddress) <= 0;
+    }
 
 	/**
 	 * Determines if an instruction is already defined between the start and end address.
@@ -111,10 +108,7 @@ public abstract class RTTIDataType extends DynamicDataType {
 			return true;
 		}
 		instruction = listing.getInstructionAfter(startAddress);
-		if (instruction != null && instruction.getMinAddress().compareTo(endAddress) <= 0) {
-			return true;
-		}
-		return false;
-	}
+        return instruction != null && instruction.getMinAddress().compareTo(endAddress) <= 0;
+    }
 
 }

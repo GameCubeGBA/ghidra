@@ -30,8 +30,7 @@ abstract class PrimitiveField extends Field {
 	 * Abstract PrimitiveField Constructor for a mutable instance
 	 */
 	PrimitiveField() {
-		super();
-	}
+    }
 
 	/**
 	 * Abstract PrimitiveField Constructor
@@ -65,7 +64,7 @@ abstract class PrimitiveField extends Field {
 	@Override
 	public String toString() {
 		String nullState = "";
-		if (isNull()) {
+		if (isNull) {
 			nullState = "(NULL)";
 		}
 		return getClass().getSimpleName() + nullState + ": " + getValueAsString();

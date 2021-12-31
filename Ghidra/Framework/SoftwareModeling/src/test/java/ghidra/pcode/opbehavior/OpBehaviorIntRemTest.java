@@ -25,8 +25,7 @@ import ghidra.pcode.error.LowlevelError;
 public class OpBehaviorIntRemTest extends AbstractOpBehaviorTest {
 
 	public OpBehaviorIntRemTest() {
-		super();
-	}
+    }
 
 	@Test
 	public void testEvaluateBinaryLong() {

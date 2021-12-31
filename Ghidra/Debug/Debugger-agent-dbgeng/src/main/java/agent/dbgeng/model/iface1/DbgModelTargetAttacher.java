@@ -36,7 +36,7 @@ import ghidra.util.Msg;
 public interface DbgModelTargetAttacher extends DbgModelTargetObject, TargetAttacher {
 
 	@Override
-	public default CompletableFuture<Void> attach(TargetAttachable attachable) {
+    default CompletableFuture<Void> attach(TargetAttachable attachable) {
 		DbgModelTargetAvailable available =
 			getModel().assertMine(DbgModelTargetAvailable.class, attachable);
 		// TODO: This and the below new DbgProcessImpl seem to do the same thing
@@ -50,7 +50,7 @@ public interface DbgModelTargetAttacher extends DbgModelTargetObject, TargetAtta
 	}
 
 	@Override
-	public default CompletableFuture<Void> attach(long pid) {
+    default CompletableFuture<Void> attach(long pid) {
 		DbgProcess process = new DbgProcessImpl(getManager());
 		return getModel().gateFuture(process.attach(pid).exceptionally(exc -> {
 			Msg.error(this, "attach failed");

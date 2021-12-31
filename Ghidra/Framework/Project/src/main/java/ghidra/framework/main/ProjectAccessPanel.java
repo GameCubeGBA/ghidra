@@ -303,12 +303,7 @@ public class ProjectAccessPanel extends AbstractWizardJPanel {
 
 			if (selectedUserNames.isEmpty()) {
 				enabled = false;
-			} else if ((selectedUserNames.size() == 1) && selectedUserNames.get(0).equals(currentUser)) {
-				enabled = false;
-			}
-			else {
-				enabled = true;
-			}
+			} else enabled = (selectedUserNames.size() != 1) || !selectedUserNames.get(0).equals(currentUser);
 
 			removeButton.setEnabled(enabled);
 		}

@@ -31,8 +31,7 @@ public class FixedSizeStack<E> extends Stack<E> {
 	 * @param maxSize the max size of the stack
 	 */
 	public FixedSizeStack(int maxSize) {
-		super();
-		this.maxSize = maxSize;
+        this.maxSize = maxSize;
 	}
 
 	@Override

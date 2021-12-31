@@ -237,9 +237,9 @@ public class OptionsDialogTest extends AbstractGhidraHeadedIntegrationTest {
 				simpleName = simpleName.substring(pos + 1);
 			}
 			// skip options that are "not simple", i.e. have custom editors
-			if (simpleName.equals("Display Namespace") ||
-				simpleName.equals("Array Display Options") ||
-				simpleName.equals("Address Display Options")) {
+			if ("Display Namespace".equals(simpleName) ||
+				"Array Display Options".equals(simpleName) ||
+				"Address Display Options".equals(simpleName)) {
 				continue;
 			}
 
@@ -800,7 +800,7 @@ public class OptionsDialogTest extends AbstractGhidraHeadedIntegrationTest {
 		int addressIndex = -1;
 		for (int i = 0; i < listModel.getSize(); i++) {
 			ScreenElement element = (ScreenElement) listModel.getElementAt(i);
-			if (element.getName().equals("Address")) {
+			if ("Address".equals(element.getName())) {
 				addressIndex = i;
 				break;
 			}
@@ -1011,7 +1011,7 @@ public class OptionsDialogTest extends AbstractGhidraHeadedIntegrationTest {
 		// TODO change to getAction("Edit Options")
 		Set<DockingActionIf> list = pluginTool.getAllActions();
 		for (DockingActionIf action : list) {
-			if (action.getName().equals("Edit Options")) {
+			if ("Edit Options".equals(action.getName())) {
 				performAction(action, false);
 				break;
 			}

@@ -111,7 +111,7 @@ class FileNode extends GTreeNode implements FileData {
 			return tempName;
 		}
 		String name = file.getName();
-		if (name.length() > 0) {
+		if (!name.isEmpty()) {
 			return name;
 		}
 		return file.getName();
@@ -237,10 +237,9 @@ class DragNDropHandler implements GTreeDragNDropHandler {
 		Msg.info(this, "Dropped the following Files onto " + destUserData);
 		try {
 			List<?> list = (List<?>) transferable.getTransferData(DataFlavor.javaFileListFlavor);
-			Iterator<?> it = list.iterator();
-			while (it.hasNext()) {
-				Msg.info(this, "\t" + it.next());
-			}
+            for (Object o : list) {
+                Msg.info(this, "\t" + o);
+            }
 		}
 		catch (UnsupportedFlavorException | IOException e) {
 		}
@@ -268,11 +267,10 @@ class DragNDropHandler implements GTreeDragNDropHandler {
 		}
 		else if (flavor.equals(DataFlavor.stringFlavor)) {
 			StringBuilder buf = new StringBuilder();
-			Iterator<?> it = dragUserData.iterator();
-			while (it.hasNext()) {
-				buf.append(it.next().toString());
-				buf.append("\n");
-			}
+            for (GTreeNode dragUserDatum : dragUserData) {
+                buf.append(dragUserDatum.toString());
+                buf.append("\n");
+            }
 			return buf.toString();
 		}
 		return null;

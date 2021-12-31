@@ -33,5 +33,5 @@ public interface TargetResumable extends TargetObject {
 	 * 
 	 * @return a future which completes upon successful resumption
 	 */
-	public CompletableFuture<Void> resume();
+    CompletableFuture<Void> resume();
 }

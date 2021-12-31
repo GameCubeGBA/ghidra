@@ -109,7 +109,7 @@ public class TagFilter extends AncillaryFilter<VTMatch> {
 	private void updateTags(Map<String, VTMatchTag> allTags) {
 		fireStatusChanged(getFilterStatus());
 
-		if (excludedTags.size() == 0) {
+		if (excludedTags.isEmpty()) {
 			excludedTagsLabel.setText(ALL_TAGS_INCLUDED);
 			return;
 		}
@@ -159,7 +159,7 @@ public class TagFilter extends AncillaryFilter<VTMatch> {
 	@Override
 	public FilterShortcutState getFilterShortcutState() {
 
-		if (excludedTags.size() == 0) {
+		if (excludedTags.isEmpty()) {
 			return FilterShortcutState.ALWAYS_PASSES;
 		}
 
@@ -253,7 +253,7 @@ public class TagFilter extends AncillaryFilter<VTMatch> {
 
 	@Override
 	public FilterEditingStatus getFilterStatus() {
-		if (excludedTags.size() != 0) {
+		if (!excludedTags.isEmpty()) {
 			return APPLIED;
 		}
 		return NONE;
@@ -267,14 +267,12 @@ public class TagFilter extends AncillaryFilter<VTMatch> {
 
 	private void removeOldTags() {
 		Map<String, VTMatchTag> allTags = getAllTags();
-		Iterator<VTMatchTag> iterator = excludedTags.values().iterator();
-		for (; iterator.hasNext();) {
-			VTMatchTag tag = iterator.next();
-			if (!allTags.containsKey(tag.getName())) {
-				// not in the new session
-				excludedTags.remove(tag.getName());
-			}
-		}
+        for (VTMatchTag tag : excludedTags.values()) {
+            if (!allTags.containsKey(tag.getName())) {
+                // not in the new session
+                excludedTags.remove(tag.getName());
+            }
+        }
 	}
 
 	@Override
@@ -297,12 +295,8 @@ public class TagFilter extends AncillaryFilter<VTMatch> {
 		// consists of: 'cat', 'dog', 'mouse'.  We would then be a sub-filter if the other 
 		// filter's set consists of: 'cat', 'dog'.
 		//
-		if (names.containsAll(otherNames)) {
-			return true;
-		}
-
-		return false;
-	}
+        return names.containsAll(otherNames);
+    }
 
 	@Override
 	public String toString() {

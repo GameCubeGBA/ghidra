@@ -31,7 +31,7 @@ import ghidra.util.task.TaskMonitor;
 
 public class HCS12ConstantAnalyzer extends ConstantPropagationAnalyzer {
 
-	private final static String PROCESSOR_NAME = "HCS12";
+	private static final String PROCESSOR_NAME = "HCS12";
 
 	public HCS12ConstantAnalyzer() {
 		super(PROCESSOR_NAME);
@@ -42,12 +42,8 @@ public class HCS12ConstantAnalyzer extends ConstantPropagationAnalyzer {
 		boolean canAnalyze = program.getLanguage().getProcessor()
 				.equals(Processor.findOrPossiblyCreateProcessor(PROCESSOR_NAME));
 
-		if (!canAnalyze) {
-			return false;
-		}
-
-		return true;
-	}
+        return canAnalyze;
+    }
 	
 	private long hcs12TranslatePagedAddress(long addrWordOffset) {
 		
@@ -141,7 +137,7 @@ public class HCS12ConstantAnalyzer extends ConstantPropagationAnalyzer {
 					}
 					String opName = instr.getProgram().getLanguage().getUserDefinedOpName(
 						(int) op.getInput(0).getOffset());
-					if (opName != null && opName.equals("segment") && numin > 2) {
+					if (opName != null && "segment".equals(opName) && numin > 2) {
 						// assume this is a poorly created segment op addr
 						long high = address.getOffset() >> 16;
 						long low = address.getOffset() & 0xffff;

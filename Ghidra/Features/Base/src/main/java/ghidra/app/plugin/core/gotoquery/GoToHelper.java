@@ -461,11 +461,8 @@ public class GoToHelper {
 	private Program findGoToProgram(Program currentProgram, Address address) {
 		// we need to try and find a suitable program
 		Program goToProgram = findProgramContaining(currentProgram, address);
-		if (goToProgram == null) {
-			return null;
-		}
 
-		return goToProgram;
+        return goToProgram;
 	}
 
 	private Program findProgramContaining(Program currentProgram, Address addr) {

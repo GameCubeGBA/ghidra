@@ -42,6 +42,6 @@ public interface GFileSystemProbeByteProvider extends GFileSystemProbe {
 	 * @throws IOException if there is an error reading files.
 	 * @throws CancelledException if the user cancels
 	 */
-	public boolean probe(ByteProvider byteProvider, FileSystemService fsService,
-			TaskMonitor monitor) throws IOException, CancelledException;
+    boolean probe(ByteProvider byteProvider, FileSystemService fsService,
+                  TaskMonitor monitor) throws IOException, CancelledException;
 }

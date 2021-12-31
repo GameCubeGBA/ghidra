@@ -33,11 +33,8 @@ public class DeleteBreakpointActionItem implements BreakpointActionItem {
 			return false;
 		}
 		DeleteBreakpointActionItem that = (DeleteBreakpointActionItem) obj;
-		if (this.deletable != that.deletable) {
-			return false;
-		}
-		return true;
-	}
+        return this.deletable == that.deletable;
+    }
 
 	@Override
 	public int hashCode() {

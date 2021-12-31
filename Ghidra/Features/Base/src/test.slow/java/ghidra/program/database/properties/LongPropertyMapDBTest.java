@@ -53,8 +53,7 @@ public class LongPropertyMapDBTest extends AbstractGhidraHeadedIntegrationTest i
 	 * @param arg0
 	 */
 	public LongPropertyMapDBTest() {
-		super();
-	}
+    }
 
 	/*
 	 * @see TestCase#setUp()

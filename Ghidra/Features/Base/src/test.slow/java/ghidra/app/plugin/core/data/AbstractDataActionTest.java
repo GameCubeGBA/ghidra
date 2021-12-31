@@ -982,11 +982,11 @@ public abstract class AbstractDataActionTest extends AbstractGhidraHeadedIntegra
 			bytes[i] = (byte) val;
 			val = val >> 8;
 		}
-		String str = (new BigInteger(bytes)).toString(16).toUpperCase();
+		StringBuilder str = new StringBuilder((new BigInteger(bytes)).toString(16).toUpperCase());
 		if (padded) {
 			int digits = 2 * byteCnt;
 			for (int i = str.length(); i < digits; i++) {
-				str = "0" + str;
+				str.insert(0, "0");
 			}
 		}
 		return str + "h";
@@ -998,22 +998,22 @@ public abstract class AbstractDataActionTest extends AbstractGhidraHeadedIntegra
 			bytes[i] = (byte) val;
 			val = val >> 8;
 		}
-		String str = (new BigInteger(bytes)).toString(8).toUpperCase();
+		StringBuilder str = new StringBuilder((new BigInteger(bytes)).toString(8).toUpperCase());
 		if (padded) {
 			int digits = ((8 * byteCnt) + 2) / 3;
 			for (int i = str.length(); i < digits; i++) {
-				str = "0" + str;
+				str.insert(0, "0");
 			}
 		}
 		return str + "o";
 	}
 
 	protected String getBinaryString(long val, int byteCnt, boolean padded) {
-		String str = Long.toBinaryString(val);
+		StringBuilder str = new StringBuilder(Long.toBinaryString(val));
 		if (padded) {
 			int digits = 8 * byteCnt;
 			for (int i = str.length(); i < digits; i++) {
-				str = "0" + str;
+				str.insert(0, "0");
 			}
 		}
 		return str + "b";
@@ -1455,7 +1455,7 @@ public abstract class AbstractDataActionTest extends AbstractGhidraHeadedIntegra
 		}
 		catch (Throwable t) {
 			t.printStackTrace();
-			Assert.fail("Action '" + name + "' failed: " + t.toString());
+			Assert.fail("Action '" + name + "' failed: " + t);
 		}
 
 	}

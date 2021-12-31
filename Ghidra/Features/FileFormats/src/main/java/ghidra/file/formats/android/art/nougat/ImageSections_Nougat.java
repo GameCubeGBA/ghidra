@@ -20,16 +20,16 @@ import ghidra.file.formats.android.art.ArtHeader;
 import ghidra.file.formats.android.art.ArtImageSections;
 
 public class ImageSections_Nougat extends ArtImageSections {
-	public final static int kSectionObjects = 0;
-	public final static int kSectionArtFields = 1;
-	public final static int kSectionArtMethods = 2;
-	public final static int kSectionRuntimeMethods = 3;
-	public final static int kSectionIMTConflictTables = 4;
-	public final static int kSectionDexCacheArrays = 5;
-	public final static int kSectionInternedStrings = 6;
-	public final static int kSectionClassTable = 7;
-	public final static int kSectionImageBitmap = 8;
-	public final static int kSectionCount = 9;  // Number of elements in enum.
+	public static final int kSectionObjects = 0;
+	public static final int kSectionArtFields = 1;
+	public static final int kSectionArtMethods = 2;
+	public static final int kSectionRuntimeMethods = 3;
+	public static final int kSectionIMTConflictTables = 4;
+	public static final int kSectionDexCacheArrays = 5;
+	public static final int kSectionInternedStrings = 6;
+	public static final int kSectionClassTable = 7;
+	public static final int kSectionImageBitmap = 8;
+	public static final int kSectionCount = 9;  // Number of elements in enum.
 
 	public ImageSections_Nougat(BinaryReader reader, ArtHeader header) {
 		super(reader, header);

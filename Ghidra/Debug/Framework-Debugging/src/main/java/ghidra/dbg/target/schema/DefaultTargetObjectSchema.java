@@ -77,11 +77,8 @@ public class DefaultTargetObjectSchema
 			if (this.isFixed != that.isFixed) {
 				return false;
 			}
-			if (this.isHidden != that.isHidden) {
-				return false;
-			}
-			return true;
-		}
+            return this.isHidden == that.isHidden;
+        }
 
 		@Override
 		public int hashCode() {
@@ -286,11 +283,8 @@ public class DefaultTargetObjectSchema
 		if (!Objects.equals(this.defaultAttributeSchema, that.defaultAttributeSchema)) {
 			return false;
 		}
-		if (!Objects.equals(this.attributeResync, that.attributeResync)) {
-			return false;
-		}
-		return true;
-	}
+        return Objects.equals(this.attributeResync, that.attributeResync);
+    }
 
 	@Override
 	public int hashCode() {

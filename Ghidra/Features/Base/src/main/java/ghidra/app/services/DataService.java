@@ -33,7 +33,7 @@ public interface DataService {
 	 * @param context the context containing program, location, and selection information
 	 * @return true if create data is allowed, else false.
 	 */
-	public boolean isCreateDataAllowed(ListingActionContext context);
+    boolean isCreateDataAllowed(ListingActionContext context);
 
 	/**
 	 * Apply the given data type at a location.
@@ -44,6 +44,6 @@ public interface DataService {
 	 *        conflicts
 	 * @return true if the data could be created at the current location
 	 */
-	public boolean createData(DataType dt, ListingActionContext context,
-			boolean enableConflictHandling);
+    boolean createData(DataType dt, ListingActionContext context,
+                       boolean enableConflictHandling);
 }

@@ -282,11 +282,8 @@ public class FunctionUtility {
 		}
 		CompilerSpec compilerSpec1 = program1.getCompilerSpec();
 		CompilerSpec compilerSpec2 = program2.getCompilerSpec();
-		if (compilerSpec1.getCompilerSpecID() != compilerSpec2.getCompilerSpecID()) {
-			return false;
-		}
-		return true;
-	}
+        return compilerSpec1.getCompilerSpecID() == compilerSpec2.getCompilerSpecID();
+    }
 
 	private static String determineCallingConventionName(Function destinationFunction,
 			Function sourceFunction, boolean sameLanguage) {

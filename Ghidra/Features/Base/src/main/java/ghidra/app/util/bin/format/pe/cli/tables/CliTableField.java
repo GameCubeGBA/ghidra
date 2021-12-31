@@ -48,8 +48,7 @@ public class CliTableField extends CliAbstractTable {
 		public int typeDefOwnerIndex = TYPEDEF_OWNER_INIT_VALUE;
 
 		public CliFieldRow(short flags, int nameIndex, int sigIndex) {
-			super();
-			this.flags = flags;
+            this.flags = flags;
 			this.nameIndex = nameIndex;
 			this.sigIndex = sigIndex;
 		}

@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -292,7 +293,7 @@ public class IndexedLocalFileSystem extends LocalFileSystem {
 
 		File tempIndexFile = new File(root, TMP_INDEX_FILE);
 		tempIndexFile.delete();
-		PrintWriter indexWriter = new PrintWriter(tempIndexFile, "UTF8");
+		PrintWriter indexWriter = new PrintWriter(tempIndexFile, StandardCharsets.UTF_8);
 		try {
 			int version = getIndexImplementationVersion();
 			if (version != 0) {
@@ -419,7 +420,7 @@ public class IndexedLocalFileSystem extends LocalFileSystem {
 	 */
 	private static int getIndexVersion(String firstIndexLine) {
 		int indexVersion = -1;
-		if (firstIndexLine != null && firstIndexLine.length() != 0) {
+		if (firstIndexLine != null && !firstIndexLine.isEmpty()) {
 			if (firstIndexLine.startsWith(INDEX_VERSION_PREFIX)) {
 				String versionStr = firstIndexLine.substring(INDEX_VERSION_PREFIX.length());
 				try {
@@ -443,7 +444,7 @@ public class IndexedLocalFileSystem extends LocalFileSystem {
 		BufferedReader indexReader = null;
 		try {
 			indexReader = new BufferedReader(new InputStreamReader(
-				new BufferedInputStream(new FileInputStream(indexFile)), "UTF8"));
+				new BufferedInputStream(new FileInputStream(indexFile)), StandardCharsets.UTF_8));
 			return getIndexVersion(indexReader.readLine());
 		}
 		finally {
@@ -482,7 +483,7 @@ public class IndexedLocalFileSystem extends LocalFileSystem {
 		BufferedReader indexReader = null;
 		try {
 			indexReader = new BufferedReader(new InputStreamReader(
-				new BufferedInputStream(new FileInputStream(indexFile)), "UTF8"));
+				new BufferedInputStream(new FileInputStream(indexFile)), StandardCharsets.UTF_8));
 			String line = indexReader.readLine();
 			if (checkIndexVersion(line)) {
 				// version line consumed - read next line
@@ -981,7 +982,7 @@ public class IndexedLocalFileSystem extends LocalFileSystem {
 		indexJournal.open();
 		try {
 			Folder folder = getFolder(folderPath, GetFolderOption.READ_ONLY);
-			if (folder.folders.size() != 0 || folder.items.size() != 0) {
+			if (!folder.folders.isEmpty() || !folder.items.isEmpty()) {
 				throw new FolderNotEmptyException(folderPath + " is not empty");
 			}
 
@@ -1422,7 +1423,7 @@ public class IndexedLocalFileSystem extends LocalFileSystem {
 				throw new ReadOnlyException();
 			}
 			journalWriter = new PrintWriter(new BufferedWriter(
-				new OutputStreamWriter(new FileOutputStream(journalFile, true), "UTF8")));
+				new OutputStreamWriter(new FileOutputStream(journalFile, true), StandardCharsets.UTF_8)));
 		}
 
 		private void replayJournal() throws IndexReadException {
@@ -1431,7 +1432,7 @@ public class IndexedLocalFileSystem extends LocalFileSystem {
 			BufferedReader journalReader = null;
 			try {
 				journalReader = new BufferedReader(new InputStreamReader(
-					new BufferedInputStream(new FileInputStream(journalFile)), "UTF8"));
+					new BufferedInputStream(new FileInputStream(journalFile)), StandardCharsets.UTF_8));
 				String line;
 				while ((line = journalReader.readLine()) != null) {
 					++lineNum;

@@ -51,7 +51,7 @@ import javax.swing.event.ChangeListener;
  */
 class UserDefinedPropertyMerger extends AbstractListingMerger {
 
-	final static String USER_DEFINED_PHASE = "User Defined Properties";
+	static final String USER_DEFINED_PHASE = "User Defined Properties";
 	private PropertyMapManager latestPMM;
 	private PropertyMapManager myPMM;
 	private PropertyMapManager originalPMM;
@@ -253,7 +253,7 @@ class UserDefinedPropertyMerger extends AbstractListingMerger {
 		while (myProps.hasNext()) {
 			String propName = myProps.next();
 			// Only add the names we don't have yet.
-			if (!list.contains(propName) && !propName.equals("Bookmarks")) {
+			if (!list.contains(propName) && !"Bookmarks".equals(propName)) {
 				list.add(propName);
 			}
 		}
@@ -272,12 +272,11 @@ class UserDefinedPropertyMerger extends AbstractListingMerger {
 	 */
 	public int getConflictCount(Address addr) {
 		int count = 0;
-		for (int i = 0; i < conflictSets.length; i++) {
-			AddressSet addrSet = conflictSets[i];
-			if (addrSet.contains(addr)) {
-				count++;
-			}
-		}
+        for (AddressSet addrSet : conflictSets) {
+            if (addrSet.contains(addr)) {
+                count++;
+            }
+        }
 		return count;
 	}
 
@@ -440,37 +439,29 @@ class UserDefinedPropertyMerger extends AbstractListingMerger {
 		this.propertyName = userDefinedPropertyName;
 		this.currentAddress = addr;
 		try {
-			final ChangeListener changeListener = new ChangeListener() {
-				public void stateChanged(ChangeEvent e) {
-					conflictOption = conflictPanel.getSelectedOptions();
-					if (conflictOption == ASK_USER) {
-						if (mergeManager != null) {
-							mergeManager.setApplyEnabled(false);
-						}
-						return;
-					}
-					if (mergeManager != null) {
-						mergeManager.clearStatusText();
-					}
-					merge(UserDefinedPropertyMerger.this.propertyName,
-						UserDefinedPropertyMerger.this.currentAddress, conflictOption);
-					if (mergeManager != null) {
-						mergeManager.setApplyEnabled(true);
-					}
-				}
-			};
-			SwingUtilities.invokeAndWait(new Runnable() {
-				public void run() {
-					setupConflictsPanel(listingPanel, UserDefinedPropertyMerger.this.propertyName,
-						UserDefinedPropertyMerger.this.currentAddress, changeListener);
-				}
-			});
-			SwingUtilities.invokeLater(new Runnable() {
-				public void run() {
-					listingPanel.clearAllBackgrounds();
-					listingPanel.paintAllBackgrounds(new AddressSet(addr, addr));
-				}
-			});
+			final ChangeListener changeListener = e -> {
+                conflictOption = conflictPanel.getSelectedOptions();
+                if (conflictOption == ASK_USER) {
+                    if (mergeManager != null) {
+                        mergeManager.setApplyEnabled(false);
+                    }
+                    return;
+                }
+                if (mergeManager != null) {
+                    mergeManager.clearStatusText();
+                }
+                merge(UserDefinedPropertyMerger.this.propertyName,
+                    UserDefinedPropertyMerger.this.currentAddress, conflictOption);
+                if (mergeManager != null) {
+                    mergeManager.setApplyEnabled(true);
+                }
+            };
+			SwingUtilities.invokeAndWait(() -> setupConflictsPanel(listingPanel, UserDefinedPropertyMerger.this.propertyName,
+                UserDefinedPropertyMerger.this.currentAddress, changeListener));
+			SwingUtilities.invokeLater(() -> {
+                listingPanel.clearAllBackgrounds();
+                listingPanel.paintAllBackgrounds(new AddressSet(addr, addr));
+            });
 		}
 		catch (InterruptedException e) {
 		}

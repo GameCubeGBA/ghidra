@@ -45,8 +45,8 @@ class DnDMoveManager {
                          int dropAction, int relativeMousePos) {
 
         // must be able to drop all nodes, or none at all
-        for ( int i = 0; i < dropNodes.length; i++ ) {
-            if ( !canDropNode( destinationNode, dropNodes[i], dropAction, relativeMousePos ) ) {
+        for (ProgramNode dropNode : dropNodes) {
+            if (!canDropNode(destinationNode, dropNode, dropAction, relativeMousePos)) {
                 return false;
             }
         }
@@ -80,9 +80,7 @@ class DnDMoveManager {
             if (destModule.contains(dropNode.getModule())) {
                 return false;
             }
-            if (dropModule.isDescendant(destModule)) {
-                return false;
-            }
+            return !dropModule.isDescendant(destModule);
         }
         return true;
     }
@@ -112,16 +110,15 @@ class DnDMoveManager {
 		}
 		
 		try {
-		    
-            for ( int i = 0; i < dropNodes.length; i++ ) {            
+
+            for (ProgramNode dropNode : dropNodes) {
                 boolean ok = true;
-                
+
                 // this is a normal drag/drop on the node
                 if (destNode.isFragment()) {
-                    ok = addToFragment(destNode, dropNodes[i]);
-                }
-                else {
-                    addToModule(destNode, dropNodes[i], dropAction);
+                    ok = addToFragment(destNode, dropNode);
+                } else {
+                    addToModule(destNode, dropNode, dropAction);
                 }
                 if (ok) {
                     tree.addSelectionPath(destNode.getTreePath());
@@ -152,11 +149,8 @@ class DnDMoveManager {
             return true;   // Fragment -> Fragment means Merge Fragments
         }
         ProgramModule dropModule = dropNode.getModule();
-        if (dropModule.isDescendant(destNode.getFragment())) {
-            return false;
-        }
-        return true; // Module -> Fragment means flatten Module, i.e.,
-                     // move all code units from descendant fragments to
+        return !dropModule.isDescendant(destNode.getFragment());// Module -> Fragment means flatten Module, i.e.,
+// move all code units from descendant fragments to
                     // destination fragment...
 	}
 	

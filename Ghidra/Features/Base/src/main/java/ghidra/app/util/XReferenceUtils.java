@@ -33,7 +33,7 @@ public class XReferenceUtils {
 
 	// Methods in this class treat -1 as a key to return all references and
 	// not cap the result set.
-	private final static int ALL_REFS = -1;
+    private static final int ALL_REFS = -1;
 
 	/**
 	 * Returns an array containing the first <b><code>max</code></b>
@@ -44,7 +44,7 @@ public class XReferenceUtils {
 	 * 
 	 * @return array first <b><code>max</code></b> xrefs to the code unit
 	 */
-	public final static List<Reference> getXReferences(CodeUnit cu, int max) {
+    public static final List<Reference> getXReferences(CodeUnit cu, int max) {
 		Program program = cu.getProgram();
 		if (program == null) {
 			Collections.emptyList();

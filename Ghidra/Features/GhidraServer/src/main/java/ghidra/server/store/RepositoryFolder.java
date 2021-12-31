@@ -58,7 +58,7 @@ public class RepositoryFolder {
 	 * RepositoryFolder name comparator
 	 */
 	private static Comparator<RepositoryFolder> FOLDER_NAME_COMPARATOR =
-		(f1, f2) -> f1.getName().compareTo(f2.getName());
+		(f1, f2) -> f1.name.compareTo(f2.name);
 
 	/**
 	 * Constructor for non-root folders
@@ -95,21 +95,20 @@ public class RepositoryFolder {
 	private void init() throws IOException {
 		String path = getPathname();
 		String[] names = fileSystem.getFolderNames(path);
-		for (int i = 0; i < names.length; i++) {
-			RepositoryFolder subfolder =
-				new RepositoryFolder(repository, fileSystem, this, names[i]);
-			folderMap.put(names[i], subfolder);
-		}
+        for (String value : names) {
+            RepositoryFolder subfolder =
+                    new RepositoryFolder(repository, fileSystem, this, value);
+            folderMap.put(value, subfolder);
+        }
 		names = fileSystem.getItemNames(path);
-		for (int i = 0; i < names.length; i++) {
-			try {
-				RepositoryFile rf = new RepositoryFile(repository, fileSystem, this, names[i]);
-				fileMap.put(names[i], rf);
-			}
-			catch (FileNotFoundException e) {
-				// Skip
-			}
-		}
+        for (String s : names) {
+            try {
+                RepositoryFile rf = new RepositoryFile(repository, fileSystem, this, s);
+                fileMap.put(s, rf);
+            } catch (FileNotFoundException e) {
+                // Skip
+            }
+        }
 	}
 
 	/**

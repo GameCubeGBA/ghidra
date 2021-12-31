@@ -152,7 +152,7 @@ public class DWARFFunctionImporter {
 			catch (Throwable th) {
 				Msg.error(this,
 					"Error when processing DWARF information for DIE " + diea.getHexOffset(), th);
-				Msg.info(this, "DIE info:\n" + diea.toString());
+				Msg.info(this, "DIE info:\n" + diea);
 			}
 		}
 		logImportErrorSummary();
@@ -181,12 +181,8 @@ public class DWARFFunctionImporter {
 		// any fixups applied by lower level code
 		DWARFNumericAttribute attr =
 			diea.getAttribute(DWARFAttribute.DW_AT_low_pc, DWARFNumericAttribute.class);
-		if (attr != null && attr.getUnsignedValue() == 0) {
-			return true;
-		}
-
-		return false;
-	}
+        return attr != null && attr.getUnsignedValue() == 0;
+    }
 
 	private void markAllChildrenAsProcessed(DebugInfoEntry die) {
 		for (DebugInfoEntry child : die.getChildren()) {
@@ -327,7 +323,7 @@ public class DWARFFunctionImporter {
 				Msg.error(this,
 					"Failed to get function signature information, leaving undefined: " +
 						gfunc.getName() + "@" + gfunc.getEntryPoint());
-				Msg.debug(this, "DIE info: " + diea.toString());
+				Msg.debug(this, "DIE info: " + diea);
 				return;
 			}
 
@@ -387,7 +383,7 @@ public class DWARFFunctionImporter {
 				commitLocal(gfunc, dfunc.local.get(i));
 			}
 
-			if (dfunc.retval != null || params.size() > 0) {
+			if (dfunc.retval != null || !params.isEmpty()) {
 				// Add the function signature definition into the data type manager
 // TODO:				createFunctionDefinition(dfunc, infopath);
 
@@ -450,7 +446,7 @@ public class DWARFFunctionImporter {
 			return new ParameterImpl(name, dt, currentProgram);
 		}
 		catch (InvalidInputException e) {
-			Msg.debug(this, "Failed to create parameter for " + diea.toString());
+			Msg.debug(this, "Failed to create parameter for " + diea);
 		}
 		return null;
 	}
@@ -896,11 +892,8 @@ public class DWARFFunctionImporter {
 			return false;
 		}
 		int dataTypeLen = dataType.getLength();
-		if (dataTypeLen > 0 && dataTypeLen != data.getLength()) {
-			return false;
-		}
-		return true;
-	}
+        return dataTypeLen <= 0 || dataTypeLen == data.getLength();
+    }
 
 	private boolean isEnumDataTypeCompatibleWithExistingData(Enum enumDT, Address address) {
 		Listing listing = currentProgram.getListing();
@@ -916,11 +909,8 @@ public class DWARFFunctionImporter {
 		if (dataDT instanceof BooleanDataType) {
 			return false;
 		}
-		if (dataDT.getLength() != enumDT.getLength()) {
-			return false;
-		}
-		return true;
-	}
+        return dataDT.getLength() == enumDT.getLength();
+    }
 
 	private boolean isDataTypeCompatibleWithExistingData(DataType dataType, Address address) {
 		if (DataUtilities.isUndefinedRange(currentProgram, address,
@@ -1048,16 +1038,16 @@ public class DWARFFunctionImporter {
 				return 0;
 			}
 			Object[] resultObjects = instruction.getResultObjects();
-			for (int i = 0; i < resultObjects.length; i++) {
-				if (!(resultObjects[i] instanceof Register)) {
-					continue;
-				}
-				Register outReg = (Register) resultObjects[i];
-				if (register.equals(outReg)) {
-					long offset = instruction.getMinAddress().getOffset() - funcAddr;
-					return (int) offset;
-				}
-			}
+            for (Object resultObject : resultObjects) {
+                if (!(resultObject instanceof Register)) {
+                    continue;
+                }
+                Register outReg = (Register) resultObject;
+                if (register.equals(outReg)) {
+                    long offset = instruction.getMinAddress().getOffset() - funcAddr;
+                    return (int) offset;
+                }
+            }
 		}
 		// return the offset from the function entry to the real first use
 		return 0;
@@ -1442,7 +1432,7 @@ public class DWARFFunctionImporter {
 		}
 		if (hasConflict) {
 			appendComment(func.getEntryPoint().add(dvar.lexicalOffset), CodeUnit.EOL_COMMENT,
-				"Scope for omitted local variable " + var.toString() + " starts here", "; ");
+				"Scope for omitted local variable " + var + " starts here", "; ");
 			return;
 		}
 

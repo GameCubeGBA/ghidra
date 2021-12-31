@@ -34,26 +34,26 @@ public interface TargetTogglable extends TargetObject {
 	 * @return true if enabled, false otherwise
 	 */
 	@TargetAttributeType(name = ENABLED_ATTRIBUTE_NAME, required = true, hidden = true)
-	public default boolean isEnabled() {
+    default boolean isEnabled() {
 		return getTypedAttributeNowByName(ENABLED_ATTRIBUTE_NAME, Boolean.class, false);
 	}
 
 	/**
 	 * Disable this object
 	 */
-	public CompletableFuture<Void> disable();
+    CompletableFuture<Void> disable();
 
 	/**
 	 * Enable this object
 	 */
-	public CompletableFuture<Void> enable();
+    CompletableFuture<Void> enable();
 
 	/**
 	 * Enable or disable this object
 	 * 
 	 * @param enabled true to enable, false to disable
 	 */
-	public default CompletableFuture<Void> toggle(boolean enabled) {
+	default CompletableFuture<Void> toggle(boolean enabled) {
 		return enabled ? enable() : disable();
 	}
 }

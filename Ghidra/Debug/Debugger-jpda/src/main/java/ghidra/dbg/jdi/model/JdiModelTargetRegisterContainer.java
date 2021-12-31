@@ -137,7 +137,7 @@ public class JdiModelTargetRegisterContainer extends JdiModelTargetObjectImpl
 	}
 
 	protected CompletableFuture<?> update() {
-		if (!isObserved()) {
+		if (listeners.isEmpty()) {
 			return AsyncUtils.NIL;
 		}
 		return fetchElements(true).exceptionally(e -> {

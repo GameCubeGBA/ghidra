@@ -77,7 +77,7 @@ public class PowerPCDisassembleCommand extends DisassembleCommand {
 	}
 
 	@Override
-	synchronized public boolean applyTo(DomainObject obj, TaskMonitor monitor) {
+    public synchronized boolean applyTo(DomainObject obj, TaskMonitor monitor) {
 		Program program = (Program) obj;
 
 		disassemblyPerformed = false;

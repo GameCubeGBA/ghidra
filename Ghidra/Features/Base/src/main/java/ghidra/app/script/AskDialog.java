@@ -30,11 +30,11 @@ import ghidra.framework.preferences.Preferences;
 import ghidra.util.NumericUtilities;
 
 public class AskDialog<T> extends DialogComponentProvider {
-	public final static int STRING = 0;
-	public final static int INT = 1;
-	public final static int LONG = 2;
-	public final static int DOUBLE = 3;
-	public final static int BYTES = 4;
+	public static final int STRING = 0;
+	public static final int INT = 1;
+	public static final int LONG = 2;
+	public static final int DOUBLE = 3;
+	public static final int BYTES = 4;
 
 	private int type;
 	private boolean isCanceled;
@@ -153,7 +153,7 @@ public class AskDialog<T> extends DialogComponentProvider {
 		else {
 			switch (type) {
 				case STRING: {
-					if (textField.getText().length() == 0) {
+					if (textField.getText().isEmpty()) {
 						setStatusText("Please enter a valid STRING.");
 						return;
 					}
@@ -268,10 +268,10 @@ public class AskDialog<T> extends DialogComponentProvider {
 		if (text == null) {
 			return null;
 		}
-		if (text.equalsIgnoreCase("pi")) {
+		if ("pi".equalsIgnoreCase(text)) {
 			return Math.PI;
 		}
-		if (text.equalsIgnoreCase("e")) {
+		if ("e".equalsIgnoreCase(text)) {
 			return Math.E;
 		}
 		return Double.valueOf(text);

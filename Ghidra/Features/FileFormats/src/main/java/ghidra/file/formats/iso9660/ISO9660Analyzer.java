@@ -56,12 +56,9 @@ public class ISO9660Analyzer extends AbstractAnalyzer {
 	public boolean canAnalyze(Program program) {
 
 		Offset result = checkSignatures(program);
-		if (result.equals(Offset.NotFound)) {
-			return false;
-		}
-		return true;
+        return !result.equals(Offset.NotFound);
 
-	}
+    }
 
 	private Offset checkSignatures(Program program) {
 		int magicLen = ISO9660Constants.MAGIC_BYTES.length;
@@ -405,32 +402,29 @@ public class ISO9660Analyzer extends AbstractAnalyzer {
 		//Enumeration over the indexes of the path tables in the table
 
 		Set<Integer> pathTableIndexes = pathTableMap.keySet();
-		Iterator<Integer> pathIter = pathTableIndexes.iterator();
 
-		while (pathIter.hasNext()) {
+        for (int pathTableIndex : pathTableIndexes) {
 
-			//Index of current path table
-			int pathTableIndex = pathIter.next();
+            //Index of current path table
+            //Logical block size of current path table
+            short logicalBlockSize = pathTableMap.get(pathTableIndex);
 
-			//Logical block size of current path table
-			short logicalBlockSize = pathTableMap.get(pathTableIndex);
+            //Calculate address from logical index
+            int pathAddress = logicalBlockSize * pathTableIndex;
 
-			//Calculate address from logical index
-			int pathAddress = logicalBlockSize * pathTableIndex;
+            //Move reader to the path table address
+            reader.setPointerIndex(pathAddress);
 
-			//Move reader to the path table address
-			reader.setPointerIndex(pathAddress);
+            ISO9660PathTable pathTable = new ISO9660PathTable(reader, littleEndian);
+            DataType pathTableDataType = pathTable.toDataType();
 
-			ISO9660PathTable pathTable = new ISO9660PathTable(reader, littleEndian);
-			DataType pathTableDataType = pathTable.toDataType();
+            Address volumeAddress = toAddress(program, pathTable.getVolumeIndex());
 
-			Address volumeAddress = toAddress(program, pathTable.getVolumeIndex());
-
-			setPlateComment(program, volumeAddress, pathTable.toString());
-			Data pathTableData = createData(program, volumeAddress, pathTableDataType);
-			createFragment(program, module, pathTableDataType.getName(),
-				pathTableData.getMinAddress(), pathTableData.getMaxAddress().next());
-		}
+            setPlateComment(program, volumeAddress, pathTable.toString());
+            Data pathTableData = createData(program, volumeAddress, pathTableDataType);
+            createFragment(program, module, pathTableDataType.getName(),
+                    pathTableData.getMinAddress(), pathTableData.getMaxAddress().next());
+        }
 	}
 
 	/*

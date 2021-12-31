@@ -31,8 +31,7 @@ public class CliTableAssemblyOS extends CliAbstractTable {
 		public int osMinorVersion;
 		
 		public CliAssemblyOSRow(int osPlatformID, int osMajorVersion, int osMinorVersion) {
-			super();
-			this.osPlatformID = osPlatformID;
+            this.osPlatformID = osPlatformID;
 			this.osMajorVersion = osMajorVersion;
 			this.osMinorVersion = osMinorVersion;
 		}

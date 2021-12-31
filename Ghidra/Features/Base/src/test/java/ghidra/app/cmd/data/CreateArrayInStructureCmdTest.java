@@ -43,8 +43,7 @@ public class CreateArrayInStructureCmdTest extends AbstractGenericTest {
 	 * @param arg0
 	 */
 	public CreateArrayInStructureCmdTest() {
-		super();
-	}
+    }
 
 	@Before
 	public void setUp() throws Exception {

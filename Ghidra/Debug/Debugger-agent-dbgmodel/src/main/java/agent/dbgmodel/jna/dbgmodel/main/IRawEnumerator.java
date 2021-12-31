@@ -25,7 +25,7 @@ import agent.dbgmodel.jna.dbgmodel.IUnknownEx;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IRawEnumerator extends IUnknownEx {
-	final IID IID_IRAW_ENUMERATOR = new IID("E13613F9-3A3C-40b5-8F48-1E5EBFB9B21B");
+	IID IID_IRAW_ENUMERATOR = new IID("E13613F9-3A3C-40b5-8F48-1E5EBFB9B21B");
 
 	enum VTIndices implements VTableIndex {
 		RESET, //

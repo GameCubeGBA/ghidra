@@ -48,11 +48,8 @@ class BookmarkRowObject implements Comparable<BookmarkRowObject> {
 			return false;
 		}
 		BookmarkRowObject other = (BookmarkRowObject) obj;
-		if (key != other.key) {
-			return false;
-		}
-		return true;
-	}
+        return key == other.key;
+    }
 
 	@Override
 	public int compareTo(BookmarkRowObject o) {

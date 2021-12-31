@@ -22,9 +22,9 @@ import ghidra.program.model.symbol.*;
 
 public class Update8051 extends GhidraScript {
 
-	private final static String SFR = "SFR";
-	private final static String BITS = "BITS";
-	private final static String SFR_BITS = "SFR-BITS";
+	private static final String SFR = "SFR";
+	private static final String BITS = "BITS";
+	private static final String SFR_BITS = "SFR-BITS";
 	
     @Override
     public void run() throws Exception {

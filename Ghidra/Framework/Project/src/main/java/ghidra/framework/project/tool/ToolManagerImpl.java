@@ -50,9 +50,9 @@ import ghidra.util.exception.DuplicateNameException;
  */
 public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
 
-	private final static int TYPICAL_NUM_WORKSPACES = 3;
-	private final static int TYPICAL_NUM_TOOLS = 5;
-	private final static int TYPICAL_NUM_CONNECTIONS = 10;
+	private static final int TYPICAL_NUM_WORKSPACES = 3;
+	private static final int TYPICAL_NUM_TOOLS = 5;
+	private static final int TYPICAL_NUM_CONNECTIONS = 10;
 
 	private enum ToolSaveStatus {
 		AUTO_SAVE_MODE, ASK_SAVE_MODE,
@@ -124,7 +124,7 @@ public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
 		List<PluginTool> list = namesMap.get(toolName);
 		SystemUtilities.assertTrue(list != null, "Attempted to remove tool that's not there");
 		list.remove(tool);
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			namesMap.remove(toolName);
 			toolStatusMap.remove(toolName);
 		}
@@ -197,7 +197,7 @@ public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
 	public Workspace createWorkspace(String name) throws DuplicateNameException {
 		// if passed in the default "untitled" name, or no name at all,
 		// then bump up the name with the "one-up" number to create a new one
-		if (name == null || name.length() == 0) {
+		if (name == null || name.isEmpty()) {
 			name = DEFAULT_WORKSPACE_NAME;
 		}
 		if (isDefaultWorkspaceName(name)) {
@@ -263,7 +263,7 @@ public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
 		// set the oldest workspace to now be the active workspace;
 		// if this is the last workspace, then create a new "empty"
 		// workspace which is the project default
-		if (workspaces.size() == 0) {
+		if (workspaces.isEmpty()) {
 			try {
 				createWorkspace(DEFAULT_WORKSPACE_NAME);
 			}
@@ -297,12 +297,10 @@ public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
 			WorkspaceImpl ws = (WorkspaceImpl) element;
 			root.addContent(ws.saveToXml());
 		}
-		Iterator<String> keys = connectMap.keySet().iterator();
-		while (keys.hasNext()) {
-			String key = keys.next();
-			ToolConnectionImpl tc = connectMap.get(key);
-			root.addContent(tc.saveToXml());
-		}
+        for (String key : connectMap.keySet()) {
+            ToolConnectionImpl tc = connectMap.get(key);
+            root.addContent(tc.saveToXml());
+        }
 		// reset the changed state back to "unchanged"
 		changedWorkspaces.clear();
 		activeWorkspaceChanged = false;
@@ -368,18 +366,16 @@ public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
 	 */
 	public boolean hasChanged() {
 		// check the connections for changes
-		Iterator<String> keys = connectMap.keySet().iterator();
-		while (keys.hasNext()) {
-			String key = keys.next();
-			ToolConnectionImpl tc = connectMap.get(key);
-			if (tc.hasChanged()) {
-				return true;
-			}
-		}
+        for (String key : connectMap.keySet()) {
+            ToolConnectionImpl tc = connectMap.get(key);
+            if (tc.hasChanged()) {
+                return true;
+            }
+        }
 
 		// have the workspaces added/removed any tools?
 		// or has the active workspace changed?
-		return ((changedWorkspaces.size() > 0) || activeWorkspaceChanged);
+		return ((!changedWorkspaces.isEmpty()) || activeWorkspaceChanged);
 	}
 
 	/**
@@ -456,16 +452,14 @@ public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
 	 * Debug method for printing out the list of connections.
 	 */
 	public void dumpConnectionList() {
-		Iterator<String> keys = connectMap.keySet().iterator();
-		while (keys.hasNext()) {
-			String key = keys.next();
-			ToolConnection tc = connectMap.get(key);
-			Msg.debug(this, key + "==> ");
-			String[] events = tc.getEvents();
-			for (String event : events) {
-				Msg.debug(this, "\t isConnected for " + event + "? = " + tc.isConnected(event));
-			}
-		}
+        for (String key : connectMap.keySet()) {
+            ToolConnection tc = connectMap.get(key);
+            Msg.debug(this, key + "==> ");
+            String[] events = tc.getEvents();
+            for (String event : events) {
+                Msg.debug(this, "\t isConnected for " + event + "? = " + tc.isConnected(event));
+            }
+        }
 	}
 
 	@Override
@@ -689,7 +683,7 @@ public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
 
 		PluginTool lastTool = list.get(list.size() - 2);	// the last one is the one we just added above
 		String instanceName = lastTool.getInstanceName();
-		if (instanceName.length() == 0) {
+		if (instanceName.isEmpty()) {
 			return "2";
 		}
 
@@ -785,11 +779,8 @@ public class ToolManagerImpl implements ToolManager, PropertyChangeListener {
 		if (!name.startsWith(DEFAULT_WORKSPACE_NAME)) {
 			return false;
 		}
-		if (DEFAULT_WORKSPACE_NAME.equals(name) || name.startsWith(DEFAULT_WORKSPACE_NAME + " (")) {
-			return true;
-		}
-		return false;
-	}
+        return DEFAULT_WORKSPACE_NAME.equals(name) || name.startsWith(DEFAULT_WORKSPACE_NAME + " (");
+    }
 
 	private String getUniqueWorkspaceName() {
 		String name = DEFAULT_WORKSPACE_NAME;

@@ -124,7 +124,7 @@ import ghidra.util.task.TaskMonitor;
  * full benefit of the {@link #equivalenceCache} and {@link #resolveCache}.</li>
  * </ul>
  */
-abstract public class DataTypeManagerDB implements DataTypeManager {
+public abstract class DataTypeManagerDB implements DataTypeManager {
 
 	static long ROOT_CATEGORY_ID = 0;
 
@@ -531,39 +531,33 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 	 */
 	private void initializedParentChildTable() {
 		buildSortedDataTypeList();
-		Iterator<DataType> it = sortedDataTypes.iterator();
-		while (it.hasNext()) {
-			DataType dt = it.next();
-			if (dt instanceof Array) {
-				((Array) dt).getDataType().addParent(dt);
-			}
-			else if (dt instanceof Pointer) {
-				DataType pdt = ((Pointer) dt).getDataType();
-				if (pdt != null) {
-					pdt.addParent(dt);
-				}
-			}
-			else if (dt instanceof TypeDef) {
-				((TypeDef) dt).getDataType().addParent(dt);
-			}
-			else if (dt instanceof Composite) {
-				DataTypeComponent[] comps = ((Composite) dt).getDefinedComponents();
-				for (DataTypeComponent comp : comps) {
-					comp.getDataType().addParent(dt);
-				}
-			}
-			else if (dt instanceof FunctionDefinition) {
-				FunctionDefinition funDef = (FunctionDefinition) dt;
-				DataType retType = funDef.getReturnType();
-				if (retType != null) {
-					retType.addParent(dt);
-				}
-				ParameterDefinition[] vars = funDef.getArguments();
-				for (ParameterDefinition var : vars) {
-					var.getDataType().addParent(dt);
-				}
-			}
-		}
+        for (DataType dt : sortedDataTypes) {
+            if (dt instanceof Array) {
+                ((Array) dt).getDataType().addParent(dt);
+            } else if (dt instanceof Pointer) {
+                DataType pdt = ((Pointer) dt).getDataType();
+                if (pdt != null) {
+                    pdt.addParent(dt);
+                }
+            } else if (dt instanceof TypeDef) {
+                ((TypeDef) dt).getDataType().addParent(dt);
+            } else if (dt instanceof Composite) {
+                DataTypeComponent[] comps = ((Composite) dt).getDefinedComponents();
+                for (DataTypeComponent comp : comps) {
+                    comp.getDataType().addParent(dt);
+                }
+            } else if (dt instanceof FunctionDefinition) {
+                FunctionDefinition funDef = (FunctionDefinition) dt;
+                DataType retType = funDef.getReturnType();
+                if (retType != null) {
+                    retType.addParent(dt);
+                }
+                ParameterDefinition[] vars = funDef.getArguments();
+                for (ParameterDefinition var : vars) {
+                    var.getDataType().addParent(dt);
+                }
+            }
+        }
 	}
 
 	/**
@@ -576,9 +570,9 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 		return dbHandle.isTransactionActive();
 	}
 
-	abstract protected String getDomainFileID();
+	protected abstract String getDomainFileID();
 
-	abstract protected String getPath();
+	protected abstract String getPath();
 
 	private void buildSortedDataTypeList() {
 		if (sortedDataTypes != null) {
@@ -867,7 +861,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 			if (sourceArchive != null && sourceArchive.getArchiveType() == ArchiveType.BUILT_IN) {
 				resolvedDataType = resolveBuiltIn(dataType, currentHandler);
 			}
-			else if ((sourceArchive == null || dataType.getUniversalID() == null) || (!sourceArchive.getSourceArchiveID().equals(getUniversalID()) &&
+			else if ((sourceArchive == null || dataType.getUniversalID() == null) || (!sourceArchive.getSourceArchiveID().equals(universalID) &&
 				sourceArchive.getArchiveType() == ArchiveType.PROGRAM)) {
 				// if the dataType has no source or it has no ID (datatypes with no ID are
 				// always local i.e. pointers)
@@ -1416,15 +1410,13 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 			buildSortedDataTypeList();
 			// make copy of sortedDataTypes list before iterating as dt.dataTypeReplaced may
 			// call back into this class and cause a modification to the sortedDataTypes list.
-			Iterator<DataType> it = new ArrayList<>(sortedDataTypes).iterator();
-			while (it.hasNext()) {
-				DataType dt = it.next();
-				dt.dataTypeReplaced(existingDt, newDt);
-			}
+            for (DataType dt : new ArrayList<>(sortedDataTypes)) {
+                dt.dataTypeReplaced(existingDt, newDt);
+            }
 		}
 	}
 
-	abstract protected void replaceDataTypeIDs(long oldID, long newID);
+	protected abstract void replaceDataTypeIDs(long oldID, long newID);
 
 	/**
 	 * Replace one source archive (oldDTM) with another (newDTM). Any data types
@@ -1479,7 +1471,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 
 	@Override
 	public void findDataTypes(String name, List<DataType> list) {
-		if (name == null || name.length() == 0) {
+		if (name == null || name.isEmpty()) {
 			return;
 		}
 		if (name.equals(DataType.DEFAULT.getName())) {
@@ -1511,7 +1503,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 	@Override
 	public void findDataTypes(String name, List<DataType> list, boolean caseSensitive,
 			TaskMonitor monitor) {
-		if (name == null || name.length() == 0) {
+		if (name == null || name.isEmpty()) {
 			return;
 		}
 		if (name.equals(DataType.DEFAULT.getName())) {
@@ -1705,11 +1697,9 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 			deletedIds.addFirst(l);
 		}
 
-		Iterator<Long> it = deletedIds.iterator();
-		while (it.hasNext()) {
-			Long l = it.next();
-			deleteDataType(l.longValue());
-		}
+        for (Long l : deletedIds) {
+            deleteDataType(l.longValue());
+        }
 
 		try {
 			deleteDataTypeIDs(deletedIds, monitor);
@@ -1781,7 +1771,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 			sourceArchive = resolveSourceArchive(sourceArchive);
 			UniversalID id = sourceArchive == null ? DataTypeManager.LOCAL_ARCHIVE_UNIVERSAL_ID
 					: sourceArchive.getSourceArchiveID();
-			if (id.equals(getUniversalID())) {
+			if (id.equals(universalID)) {
 				id = DataTypeManager.LOCAL_ARCHIVE_UNIVERSAL_ID;
 			}
 			if (id == DataTypeManager.LOCAL_ARCHIVE_UNIVERSAL_ID) {
@@ -1838,7 +1828,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 		idsToDelete.add(Long.valueOf(id));
 	}
 
-	abstract protected void deleteDataTypeIDs(LinkedList<Long> deletedIds, TaskMonitor monitor)
+	protected abstract void deleteDataTypeIDs(LinkedList<Long> deletedIds, TaskMonitor monitor)
 			throws CancelledException;
 
 	private void notifyDeleted(long dataTypeID) {
@@ -2367,7 +2357,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 				// this is a new non-associated dataType, assign it a new universalID
 				id = UniversalIdGenerator.nextID();
 			}
-			else if (!sourceArchive.getSourceArchiveID().equals(getUniversalID())) {
+			else if (!sourceArchive.getSourceArchiveID().equals(universalID)) {
 				// if its not me, use its sourceArchiveID. Otherwise it is local.
 				sourceArchiveIdValue = sourceArchive.getSourceArchiveID().getValue();
 			}
@@ -2432,7 +2422,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 			long sourceArchiveIdValue, long universalIdValue)
 			throws IOException {
 		try {
-			if (name == null || name.length() == 0) {
+			if (name == null || name.isEmpty()) {
 				throw new IllegalArgumentException("Data type must have a valid name");
 			}
 			creatingDataType++;
@@ -2501,7 +2491,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 	private TypeDef createTypeDef(TypeDef typedef, String name, Category cat,
 			long sourceArchiveIdValue, long universalIdValue)
 			throws IOException {
-		if (name == null || name.length() == 0) {
+		if (name == null || name.isEmpty()) {
 			throw new IllegalArgumentException("Data type must have a valid name");
 		}
 		DataType dataType = resolve(typedef.getDataType(), getDependencyConflictHandler());
@@ -2516,7 +2506,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 	private Union createUnion(UnionInternal union, String name, CategoryDB category,
 			long sourceArchiveIdValue, long universalIdValue)
 			throws IOException {
-		if (name == null || name.length() == 0) {
+		if (name == null || name.isEmpty()) {
 			throw new IllegalArgumentException("Data type must have a valid name");
 		}
 		try {
@@ -2548,7 +2538,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 
 	private Enum createEnum(Enum enumm, String name, Category cat, long sourceArchiveIdValue,
 			long universalIdValue) throws IOException {
-		if (name == null || name.length() == 0) {
+		if (name == null || name.isEmpty()) {
 			throw new IllegalArgumentException("Data type must have a valid name");
 		}
 		DBRecord record = enumAdapter.createRecord(name, enumm.getDescription(), cat.getID(),
@@ -2598,7 +2588,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 	}
 
 	private void updateLastChangeTime() {
-		SourceArchive mySourceArchive = getSourceArchive(getUniversalID());
+		SourceArchive mySourceArchive = getSourceArchive(universalID);
 		if (mySourceArchive == null) {
 			return;
 		}
@@ -2626,11 +2616,8 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 	}
 
 	private boolean isOtherAndNotBuiltIn(SourceArchive sourceArchive) {
-		if ((sourceArchive.getSourceArchiveID() == LOCAL_ARCHIVE_UNIVERSAL_ID) || (sourceArchive.getSourceArchiveID() == universalID) || (sourceArchive.getSourceArchiveID() == BUILT_IN_ARCHIVE_UNIVERSAL_ID)) {
-			return false;
-		}
-		return true;
-	}
+        return (sourceArchive.getSourceArchiveID() != LOCAL_ARCHIVE_UNIVERSAL_ID) && (sourceArchive.getSourceArchiveID() != universalID) && (sourceArchive.getSourceArchiveID() != BUILT_IN_ARCHIVE_UNIVERSAL_ID);
+    }
 
 	public SourceArchive getSourceArchive(String fileID) {
 		for (SourceArchive archive : getSourceArchivesFromCache()) {
@@ -2658,7 +2645,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 
 	@Override
 	public SourceArchive getLocalSourceArchive() {
-		return getSourceArchive(getUniversalID());
+		return getSourceArchive(universalID);
 	}
 
 	private synchronized SourceArchive getSourceArchiveFromCache(UniversalID sourceID) {
@@ -2753,7 +2740,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 
 	private FunctionDefinition createFunctionDefinition(FunctionDefinition funDef, String name,
 			CategoryDB cat, long sourceArchiveIdValue, long universalIdValue) throws IOException {
-		if (name == null || name.length() == 0) {
+		if (name == null || name.isEmpty()) {
 			throw new IllegalArgumentException("Data type must have a valid name");
 		}
 		try {
@@ -3096,12 +3083,9 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 	}
 
 	private boolean isAllowedNumberType(Object value) {
-		if ((value instanceof Long) || (value instanceof Integer) || (value instanceof Short)
-				|| (value instanceof Byte)) {
-			return true;
-		}
-		return false;
-	}
+        return (value instanceof Long) || (value instanceof Integer) || (value instanceof Short)
+                || (value instanceof Byte);
+    }
 
 	/**
 	 * Get the long value for an instance setting.
@@ -3602,10 +3586,10 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 		try {
 			List<?> addrKeyRanges = addrMap.getKeyRanges(startAddr, endAddr, false);
 			int cnt = addrKeyRanges.size();
-			for (int i = 0; i < cnt; i++) {
-				KeyRange kr = (KeyRange) addrKeyRanges.get(i);
-				instanceSettingsAdapter.delete(kr.minKey, kr.maxKey, monitor);
-			}
+            for (Object addrKeyRange : addrKeyRanges) {
+                KeyRange kr = (KeyRange) addrKeyRange;
+                instanceSettingsAdapter.delete(kr.minKey, kr.maxKey, monitor);
+            }
 		}
 		catch (IOException e) {
 			dbError(e);
@@ -3743,7 +3727,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 
 	@Override
 	public long getLastChangeTimeForMyManager() {
-		SourceArchive archive = getSourceArchive(getUniversalID());
+		SourceArchive archive = getSourceArchive(universalID);
 		if (archive != null) {
 			return archive.getLastSyncTime();
 		}
@@ -4092,7 +4076,7 @@ abstract public class DataTypeManagerDB implements DataTypeManager {
 			// null value indicates isEquivalent in progress between the two
 			// datatypes - perform simplified equivalence check
 			if (cache.contains(key)) {
-				if (dataType.getUniversalID().equals(getUniversalID())) {
+				if (dataType.getUniversalID().equals(universalID)) {
 					return true;
 				}
 				return DataTypeUtilities.equalsIgnoreConflict(dataTypeDB.getPathName(),

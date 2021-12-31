@@ -26,7 +26,7 @@ import agent.dbgeng.jna.dbgeng.DbgEngNative.DEBUG_VALUE;
 import agent.dbgeng.jna.dbgeng.UnknownWithUtils.VTableIndex;
 
 public interface IDebugControl4 extends IDebugControl3 {
-	final IID IID_IDEBUG_CONTROL4 = new IID("94e60ce9-9b41-4b19-9fc0-6d9eb35272b3");
+	IID IID_IDEBUG_CONTROL4 = new IID("94e60ce9-9b41-4b19-9fc0-6d9eb35272b3");
 
 	enum VTIndices4 implements VTableIndex {
 		GET_LOG_FILE_WIDE, //

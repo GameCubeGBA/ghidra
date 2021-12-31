@@ -24,8 +24,8 @@ import ghidra.server.UserManager;
 
 public interface AuthenticationModule {
 
-	public static final String USERNAME_CALLBACK_PROMPT = "User ID";
-	public static final String PASSWORD_CALLBACK_PROMPT = "Password";
+	String USERNAME_CALLBACK_PROMPT = "User ID";
+	String PASSWORD_CALLBACK_PROMPT = "Password";
 
 	/**
 	 * Complete the authentication process.

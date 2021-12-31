@@ -12,10 +12,10 @@
 package SWIG;
 
 public final class ByteOrder {
-  public final static ByteOrder eByteOrderInvalid = new ByteOrder("eByteOrderInvalid", lldbJNI.eByteOrderInvalid_get());
-  public final static ByteOrder eByteOrderBig = new ByteOrder("eByteOrderBig", lldbJNI.eByteOrderBig_get());
-  public final static ByteOrder eByteOrderPDP = new ByteOrder("eByteOrderPDP", lldbJNI.eByteOrderPDP_get());
-  public final static ByteOrder eByteOrderLittle = new ByteOrder("eByteOrderLittle", lldbJNI.eByteOrderLittle_get());
+  public static final ByteOrder eByteOrderInvalid = new ByteOrder("eByteOrderInvalid", lldbJNI.eByteOrderInvalid_get());
+  public static final ByteOrder eByteOrderBig = new ByteOrder("eByteOrderBig", lldbJNI.eByteOrderBig_get());
+  public static final ByteOrder eByteOrderPDP = new ByteOrder("eByteOrderPDP", lldbJNI.eByteOrderPDP_get());
+  public static final ByteOrder eByteOrderLittle = new ByteOrder("eByteOrderLittle", lldbJNI.eByteOrderLittle_get());
 
   public final int swigValue() {
     return swigValue;
@@ -28,9 +28,9 @@ public final class ByteOrder {
   public static ByteOrder swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-    for (int i = 0; i < swigValues.length; i++)
-      if (swigValues[i].swigValue == swigValue)
-        return swigValues[i];
+      for (ByteOrder value : swigValues)
+          if (value.swigValue == swigValue)
+              return value;
     throw new IllegalArgumentException("No enum " + ByteOrder.class + " with value " + swigValue);
   }
 

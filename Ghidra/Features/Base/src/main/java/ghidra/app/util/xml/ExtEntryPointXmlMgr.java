@@ -55,7 +55,7 @@ class ExtEntryPointXmlMgr {
 				throw new CancelledException();	
 			}
 			element = parser.peek();
-			if (!element.getName().equals("PROGRAM_ENTRY_POINT")) {
+			if (!"PROGRAM_ENTRY_POINT".equals(element.getName())) {
 				break;
 			}
 			element = parser.next();    	
@@ -100,19 +100,18 @@ class ExtEntryPointXmlMgr {
 		monitor.setMessage("Sorting ENTRY POINTS ...");
 		Collections.sort(list);
 		monitor.setMessage("Writing ENTRY POINTS ...");
-		Iterator<Address> listIter = list.iterator();
-		while (listIter.hasNext()) {
-			if (monitor.isCancelled()) {
-				throw new CancelledException();	
-			}
-		    Address addr = listIter.next();
-			if (set == null || set.contains(addr)) {
-				XmlAttributes attrs = new XmlAttributes();
-				attrs.addAttribute("ADDRESS", addr.toString()); 
-				writer.startElement("PROGRAM_ENTRY_POINT", attrs);
-				writer.endElement("PROGRAM_ENTRY_POINT");
-			}
-		}
+        for (Address address : list) {
+            if (monitor.isCancelled()) {
+                throw new CancelledException();
+            }
+            Address addr = address;
+            if (set == null || set.contains(addr)) {
+                XmlAttributes attrs = new XmlAttributes();
+                attrs.addAttribute("ADDRESS", addr.toString());
+                writer.startElement("PROGRAM_ENTRY_POINT", attrs);
+                writer.endElement("PROGRAM_ENTRY_POINT");
+            }
+        }
 		writer.endElement("PROGRAM_ENTRY_POINTS");
 	}
 

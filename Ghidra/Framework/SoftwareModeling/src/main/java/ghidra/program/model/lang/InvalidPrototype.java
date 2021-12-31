@@ -33,7 +33,7 @@ import ghidra.program.model.symbol.RefType;
  */
 public class InvalidPrototype implements InstructionPrototype, ParserContext {
 
-	private final static Address[] emptyAddresses = {};
+	private static final Address[] emptyAddresses = {};
 
 	private Language language;
 
@@ -41,8 +41,7 @@ public class InvalidPrototype implements InstructionPrototype, ParserContext {
 	 * Construct a new invalid instruction prototype.
 	 */
 	public InvalidPrototype(Language lang) {
-		super();
-		language = lang;
+        language = lang;
 	}
 
 	@Override

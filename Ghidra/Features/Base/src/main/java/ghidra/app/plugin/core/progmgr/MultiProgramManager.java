@@ -100,14 +100,12 @@ class MultiProgramManager implements DomainObjectListener, TransactionListener {
 	void dispose() {
 		tool.getProject().getProjectData().removeDomainFolderChangeListener(folderListener);
 		fireActivatedEvent(null);
-		Iterator<Program> it = programMap.keySet().iterator();
-		while (it.hasNext()) {
-			Program p = it.next();
-			p.removeListener(this);
-			p.removeTransactionListener(this);
-			fireCloseEvents(p);
-			p.release(tool);
-		}
+        for (Program p : programMap.keySet()) {
+            p.removeListener(this);
+            p.removeTransactionListener(this);
+            fireCloseEvents(p);
+            p.release(tool);
+        }
 		programMap.clear();
 		openProgramList.clear();
 		tool.setSubTitle("");
@@ -146,13 +144,11 @@ class MultiProgramManager implements DomainObjectListener, TransactionListener {
 	}
 
 	private ProgramInfo findNextCurrent() {
-		Iterator<ProgramInfo> iter = openProgramList.iterator();
-		while (iter.hasNext()) {
-			ProgramInfo pi = iter.next();
-			if (pi.visible) {
-				return pi;
-			}
-		}
+        for (ProgramInfo pi : openProgramList) {
+            if (pi.visible) {
+                return pi;
+            }
+        }
 		return null;
 	}
 
@@ -160,12 +156,12 @@ class MultiProgramManager implements DomainObjectListener, TransactionListener {
 		Program currentProgram = getCurrentProgram();
 		ArrayList<Program> list = new ArrayList<>();
 		int size = openProgramList.size();
-		for (int index = 0; index < size; index++) {
-			Program program = openProgramList.get(index).program;
-			if (currentProgram != program) {
-				list.add(program);
-			}
-		}
+        for (ProgramInfo programInfo : openProgramList) {
+            Program program = programInfo.program;
+            if (currentProgram != program) {
+                list.add(program);
+            }
+        }
 		return list.toArray(new Program[list.size()]);
 	}
 
@@ -198,13 +194,11 @@ class MultiProgramManager implements DomainObjectListener, TransactionListener {
 	}
 
 	Program getProgram(Address addr) {
-		Iterator<ProgramInfo> it = openProgramList.iterator();
-		while (it.hasNext()) {
-			ProgramInfo pi = it.next();
-			if (pi.program.getMemory().contains(addr)) {
-				return pi.program;
-			}
-		}
+        for (ProgramInfo pi : openProgramList) {
+            if (pi.program.getMemory().contains(addr)) {
+                return pi.program;
+            }
+        }
 		return null;
 	}
 

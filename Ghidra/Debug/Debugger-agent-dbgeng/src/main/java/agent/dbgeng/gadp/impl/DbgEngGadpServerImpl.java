@@ -36,8 +36,7 @@ public class DbgEngGadpServerImpl implements DbgEngGadpServer {
 	protected final GadpSide server;
 
 	public DbgEngGadpServerImpl(SocketAddress addr) throws IOException {
-		super();
-		this.model = new DbgModelImpl();
+        this.model = new DbgModelImpl();
 		this.server = new GadpSide(model, addr);
 	}
 

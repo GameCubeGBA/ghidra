@@ -43,7 +43,7 @@ import ghidra.util.task.TaskLauncher;
 import ghidra.util.task.TaskMonitor;
 
 public final class GTableToCSV {
-	final static String TITLE = "Export to CSV";
+	static final String TITLE = "Export to CSV";
 
 	public static void writeCSV(File file, GTable table) {
 		ConvertTask task = new ConvertTask(file, table);

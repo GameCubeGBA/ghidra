@@ -47,7 +47,7 @@ public class EventValidator
 		Observation inDestroyed(String event);
 	}
 
-	static abstract class AbstractObservation implements Observation {
+	abstract static class AbstractObservation implements Observation {
 		private final String event;
 		private final TargetObject object;
 

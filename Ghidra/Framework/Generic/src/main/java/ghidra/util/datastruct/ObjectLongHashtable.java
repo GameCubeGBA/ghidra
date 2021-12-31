@@ -33,7 +33,7 @@ public class ObjectLongHashtable<T> {
      * Default constructor creates a table with an initial default capacity.
      */
     public ObjectLongHashtable() {
-        this((short)3);
+        this(3);
     }
 
     /**
@@ -92,10 +92,7 @@ public class ObjectLongHashtable<T> {
      * @return true if key is found and removed, false otherwise.
      */
     public boolean remove(Object key) {
-        if (indexer.remove(key) < 0) {
-            return false;
-        }
-        return true;
+        return indexer.remove(key) >= 0;
     }
 
     /**

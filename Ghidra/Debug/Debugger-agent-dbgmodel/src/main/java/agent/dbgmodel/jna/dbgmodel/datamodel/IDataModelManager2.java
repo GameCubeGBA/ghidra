@@ -25,7 +25,7 @@ import com.sun.jna.ptr.PointerByReference;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IDataModelManager2 extends IDataModelManager1 {
-	final IID IID_IDATA_MODEL_MANAGER2 = new IID("F412C5EA-2284-4622-A660-A697160D3312");
+	IID IID_IDATA_MODEL_MANAGER2 = new IID("F412C5EA-2284-4622-A660-A697160D3312");
 
 	enum VTIndices2 implements VTableIndex {
 		ACQUIRE_SUBNAMESPACE, //

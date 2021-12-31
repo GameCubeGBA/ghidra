@@ -17,7 +17,7 @@ package ghidra.app.util.bin.format.pdb2.pdbreader;
 
 import ghidra.app.util.bin.format.pdb2.pdbreader.symbol.*;
 
-abstract public class RecordNumber {
+public abstract class RecordNumber {
 
 	public static final int T_NOTYPE = 0; // TODO: consider T_NOTYPE constant elsewhere
 	public static final int T_VOID = 3; // TODO: consider T_VOID constant elsewhere
@@ -117,7 +117,7 @@ abstract public class RecordNumber {
 
 	@Override
 	public String toString() {
-		return String.format("%s[%d]", getCategory().name(), getNumber());
+		return String.format("%s[%d]", getCategory().name(), number);
 	}
 
 	@Override
@@ -141,11 +141,8 @@ abstract public class RecordNumber {
 			return false;
 		}
 		RecordNumber other = (RecordNumber) obj;
-		if (number != other.number || getCategory() != other.getCategory()) {
-			return false;
-		}
-		return true;
-	}
+        return number == other.number && getCategory() == other.getCategory();
+    }
 
 //--------------------------------------------------------------------------------------------------
 

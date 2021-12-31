@@ -21,11 +21,11 @@ import ghidra.file.formats.ios.img3.AbstractImg3Tag;
 import java.io.IOException;
 
 public class KBagTag extends AbstractImg3Tag {
-	public final static String MAGIC = "KBAG";
+	public static final String MAGIC = "KBAG";
 
-	public final static int AES_128  =  0x080;
-	public final static int AES_192  =  0x0c0;
-	public final static int AES_256  =  0x100;
+	public static final int AES_128  =  0x080;
+	public static final int AES_192  =  0x0c0;
+	public static final int AES_256  =  0x100;
 
 	private int     iv_key_crypt_state;
 	private int     aes_type;

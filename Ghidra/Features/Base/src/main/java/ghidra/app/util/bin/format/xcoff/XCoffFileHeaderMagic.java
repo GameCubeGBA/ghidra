@@ -19,23 +19,23 @@ package ghidra.app.util.bin.format.xcoff;
 public final class XCoffFileHeaderMagic {
 
 	/** XCOFF32 */
-	public final static short MAGIC_XCOFF32      =  0x01df;
+    public static final short MAGIC_XCOFF32      =  0x01df;
 	/** XCOFF64 - discontinued AIX */
-	public final static short MAGIC_XCOFF64_OLD  =  0x01ef;
+    public static final short MAGIC_XCOFF64_OLD  =  0x01ef;
 	/** XCOFF64 */
-	public final static short MAGIC_XCOFF64      =  0x01f7;
+    public static final short MAGIC_XCOFF64      =  0x01f7;
 
-	public final static boolean isMatch(short magic) {
+	public static final boolean isMatch(short magic) {
 		return magic == MAGIC_XCOFF32 ||
                magic == MAGIC_XCOFF64_OLD ||
                magic == MAGIC_XCOFF64;
 	}
 
-	public final static boolean is32bit(XCoffFileHeader header) {
+	public static final boolean is32bit(XCoffFileHeader header) {
 		return header.getMagic() == MAGIC_XCOFF32;
 	}
 
-	public final static boolean is64bit(XCoffFileHeader header) {
+	public static final boolean is64bit(XCoffFileHeader header) {
 		return header.getMagic() == MAGIC_XCOFF64_OLD || header.getMagic() == MAGIC_XCOFF64;
 	}
 }

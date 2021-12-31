@@ -101,7 +101,7 @@ public class TrampolineSymbolApplier extends MsSymbolApplier {
 		CreateFunctionCmd funCmd = new CreateFunctionCmd(startAddress);
 		if (!funCmd.applyTo(applicator.getProgram(), applicator.getCancelOnlyWrappingMonitor())) {
 			applicator.appendLogMsg("Failed to apply function at address " +
-				startAddress.toString() + "; attempting to use possible existing function");
+                    startAddress + "; attempting to use possible existing function");
 		}
 		return funCmd.getFunction();
 	}

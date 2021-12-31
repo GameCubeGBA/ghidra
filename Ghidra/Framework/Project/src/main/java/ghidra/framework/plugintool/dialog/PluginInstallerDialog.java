@@ -225,8 +225,7 @@ public class PluginInstallerDialog extends DialogComponentProvider {
 	private class StatusCellRenderer extends GTableCellRenderer {
 
 		public StatusCellRenderer() {
-			super();
-			setHorizontalAlignment(SwingConstants.CENTER);
+            setHorizontalAlignment(SwingConstants.CENTER);
 		}
 
 		@Override

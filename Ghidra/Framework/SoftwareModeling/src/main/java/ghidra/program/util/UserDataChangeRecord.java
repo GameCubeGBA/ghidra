@@ -19,7 +19,7 @@ import ghidra.framework.model.DomainObjectChangeRecord;
 
 public class UserDataChangeRecord extends DomainObjectChangeRecord {
 
-    private final static long serialVersionUID = 1;
+    private static final long serialVersionUID = 1;
     private Object oldValue;
     private Object newValue;
     private String propertyName;

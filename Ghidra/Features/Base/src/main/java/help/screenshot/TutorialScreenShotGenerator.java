@@ -25,8 +25,7 @@ public class TutorialScreenShotGenerator extends AbstractScreenShotGenerator {
 	//
 
 	public TutorialScreenShotGenerator() {
-		super();
-	}
+    }
 
 	/**
 	 * @deprecated

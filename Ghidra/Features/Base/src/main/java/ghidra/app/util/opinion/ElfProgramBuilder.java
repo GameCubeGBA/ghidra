@@ -1688,7 +1688,7 @@ class ElfProgramBuilder extends MemorySectionResolver implements ElfLoadHelper {
 		// Add versioned symbol as comment only
 		Address address = s.getAddress();
 		String comment = listing.getComment(CodeUnit.PRE_COMMENT, address);
-		if (comment == null || comment.length() == 0) {
+		if (comment == null || comment.isEmpty()) {
 			comment = symName;
 		}
 		else {
@@ -2916,7 +2916,7 @@ class ElfProgramBuilder extends MemorySectionResolver implements ElfLoadHelper {
 
 	@Override
 	public Long getGOTValue() {
-		ElfHeader header = getElfHeader();
+		ElfHeader header = elf;
 		ElfDynamicTable dynamic = header.getDynamicTable();
 		if (dynamic != null && dynamic.containsDynamicValue(ElfDynamicType.DT_PLTGOT)) {
 			try {
@@ -3233,7 +3233,7 @@ class ElfProgramBuilder extends MemorySectionResolver implements ElfLoadHelper {
 		long maxSectionSizeBytes = Memory.MAX_BLOCK_SIZE;
 
 		if (dataLength > maxSectionSizeBytes) {
-			float sizeGB = (float) dataLength / (float) Memory.GBYTE;
+			float sizeGB = (float) dataLength / Memory.GBYTE;
 			String msg = "Truncating " + formatFloat(sizeGB, 1) + " GByte '" + sectionName +
 				"' section to " + maxSectionSizeGBytes + " GByte fixed size limit";
 			log("ERROR: " + msg);

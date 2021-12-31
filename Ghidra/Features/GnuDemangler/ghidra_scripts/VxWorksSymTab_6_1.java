@@ -182,7 +182,7 @@ public class VxWorksSymTab_6_1 extends GhidraScript {
 					case 8: // Local BSS
 					case 9: // Global BSS
 						// Data: log the symbol & create a Ghidra symbol at symLocAddr
-						output.println(symLocAddr.toString() + "\t" + symName);
+						output.println(symLocAddr + "\t" + symName);
 						createLabel(symLocAddr, symName, true);
 						if (symDemangledName != null) {
 							new DemanglerCmd(symLocAddr, symName).applyTo(currentProgram, monitor);
@@ -196,7 +196,7 @@ public class VxWorksSymTab_6_1 extends GhidraScript {
 					case 4: // Local .text
 					case 5: // Global .text
 						// Code: log the symbol, disassemble, & create/name function
-						output.println(symLocAddr.toString() + "\t" + symName);
+						output.println(symLocAddr + "\t" + symName);
 						goTo(symLocAddr);
 						disassemble(symLocAddr);
 						createFunction(symLocAddr, symName);

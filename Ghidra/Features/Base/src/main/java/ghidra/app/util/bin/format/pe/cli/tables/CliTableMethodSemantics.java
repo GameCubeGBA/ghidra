@@ -36,8 +36,7 @@ public class CliTableMethodSemantics extends CliAbstractTable {
 		public int associationIndex;
 		
 		public CliMethodSemanticsRow(short semantics, int methodIndex, int associationIndex) {
-			super();
-			this.semantics = semantics;
+            this.semantics = semantics;
 			this.methodIndex = methodIndex;
 			this.associationIndex = associationIndex;
 		}

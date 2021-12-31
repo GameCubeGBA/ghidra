@@ -28,8 +28,7 @@ public class DWARFExpressionException extends Exception {
 	private int step = -1;
 
 	public DWARFExpressionException() {
-		super();
-	}
+    }
 
 	public DWARFExpressionException(String message, DWARFExpression expr, int step) {
 		this(message, expr, step, null);

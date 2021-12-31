@@ -104,7 +104,7 @@ public class YAFFS2Utils {
 	/**
 		no Magic Bytes, so check for an empty directory in the first header
 	 */
-	public final static boolean isYAFFS2Image(Program program) {
+    public static final boolean isYAFFS2Image(Program program) {
 		byte[] bytes = new byte[YAFFS2Constants.MAGIC_SIZE];
 		try {
 			Address address = program.getMinAddress();

@@ -34,15 +34,15 @@ public interface DebugClient extends DebugClientReentrant {
 	 *
 	 * @return a new client
 	 */
-	public static DebugClient debugCreate() {
+	static DebugClient debugCreate() {
 		return new DebugClientImpl();
 	}
 
-	public static enum ExecutionState {
+	enum ExecutionState {
 		RUNNING, STOPPED;
 	}
 
-	public static enum DebugStatus {
+	enum DebugStatus {
 		NO_CHANGE(false, null, 13), //
 		GO(true, ExecutionState.RUNNING, 10), //
 		GO_HANDLED(true, ExecutionState.RUNNING, 9), //
@@ -115,7 +115,7 @@ public interface DebugClient extends DebugClientReentrant {
 		*/
 	}
 
-	public static enum SessionStatus {
+	enum SessionStatus {
 		ACTIVE, //
 		END_SESSION_ACTIVE_TERMINATE,//
 		END_SESSION_ACTIVE_DETACH, //
@@ -127,7 +127,7 @@ public interface DebugClient extends DebugClientReentrant {
 		;
 	}
 
-	public static enum ChangeSessionState implements BitmaskUniverse {
+	enum ChangeSessionState implements BitmaskUniverse {
 		SESSION_ALL(0xffffffff), //
 		SESSION_BREAKPOINT_CHANGED(SBTarget.eBroadcastBitBreakpointChanged), //
 		SESSION_MODULE_LOADED(SBTarget.eBroadcastBitModulesLoaded), //
@@ -148,7 +148,7 @@ public interface DebugClient extends DebugClientReentrant {
 		}
 	}
 
-	public static enum ChangeProcessState implements BitmaskUniverse {
+	enum ChangeProcessState implements BitmaskUniverse {
 		PROCESS_ALL(0xffffffff), //
 		PROCESS_STATE_CHANGED(SBProcess.eBroadcastBitStateChanged), //
 		PROCESS_INTERRUPT(SBProcess.eBroadcastBitInterrupt), //
@@ -170,7 +170,7 @@ public interface DebugClient extends DebugClientReentrant {
 		}
 	}
 
-	public static enum ChangeThreadState implements BitmaskUniverse {
+	enum ChangeThreadState implements BitmaskUniverse {
 		THREAD_ALL(0xffffffff), //
 		THREAD_STACK_CHANGED(SBThread.eBroadcastBitStackChanged), //
 		THREAD_SUSPENDED(SBThread.eBroadcastBitThreadSuspended), //
@@ -191,7 +191,7 @@ public interface DebugClient extends DebugClientReentrant {
 		}
 	}
 
-	public static enum DebugAttachFlags implements BitmaskUniverse {
+	enum DebugAttachFlags implements BitmaskUniverse {
 		DEFAULT(0), //
 		NONINVASIVE(1 << 0), //
 		EXISTING(1 << 1), //
@@ -213,7 +213,7 @@ public interface DebugClient extends DebugClientReentrant {
 		}
 	}
 
-	public static enum DebugCreateFlags implements BitmaskUniverse {
+	enum DebugCreateFlags implements BitmaskUniverse {
 		LAUNCH_DEFAULT(0), //
 		LAUNCH_EXEC(1 << 0), //
 		LAUNCH_DEBUG(1 << 1), //
@@ -242,7 +242,7 @@ public interface DebugClient extends DebugClientReentrant {
 		}
 	}
 
-	public enum DebugEndSessionFlags {
+	enum DebugEndSessionFlags {
 		DEBUG_END_PASSIVE(0x00000000),
 		DEBUG_END_ACTIVE_TERMINATE(0x00000001),
 		DEBUG_END_ACTIVE_DETACH(0x00000002),
@@ -260,7 +260,7 @@ public interface DebugClient extends DebugClientReentrant {
 		}
 	}
 
-	public enum DebugOutputFlags {
+	enum DebugOutputFlags {
 		DEBUG_OUTPUT_NORMAL(0x1), //
 		DEBUG_OUTPUT_ERROR(0x2), //
 		DEBUG_OUTPUT_WARNING(0x4), //
@@ -283,14 +283,14 @@ public interface DebugClient extends DebugClientReentrant {
 		}
 	}
 
-	public static String getModelKey(Object modelObject) {
+	static String getModelKey(Object modelObject) {
 		if (modelObject == null) {
 			return null;
 		}
 		return modelObject.getClass() + ":" + getId(modelObject);
 	}
 
-	public static String getId(Object modelObject) {
+	static String getId(Object modelObject) {
 		if (modelObject instanceof SBTarget) {
 			SBTarget session = (SBTarget) modelObject;
 			return Integer.toHexString(session.GetProcess().GetProcessID().intValue());
@@ -346,7 +346,7 @@ public interface DebugClient extends DebugClientReentrant {
 		throw new RuntimeException("Unknown object " + modelObject.getClass());
 	}
 
-	public static TargetExecutionState convertState(StateType state) {
+	static TargetExecutionState convertState(StateType state) {
 		switch (state.swigValue()) {
 			case 0:	// eStateInvalid
 				return TargetExecutionState.RUNNING;
@@ -372,7 +372,7 @@ public interface DebugClient extends DebugClientReentrant {
 	}
 
 	@Override
-	public SBListener getListener();
+    SBListener getListener();
 
 	/**
 	 * The the ID for the local server
@@ -418,10 +418,10 @@ public interface DebugClient extends DebugClientReentrant {
 
 	boolean getInterrupt();
 
-	public void setManager(LldbManager manager);
+	void setManager(LldbManager manager);
 
-	public void addBroadcaster(Object process);
+	void addBroadcaster(Object process);
 
-	public void execute(String command);
+	void execute(String command);
 
 }

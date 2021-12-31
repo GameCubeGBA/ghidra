@@ -20,10 +20,10 @@ import ghidra.program.model.address.Address;
 
 public interface ExecutionListener extends TestLogger {
 
-	public void stepCompleted(EmulatorTestRunner testRunner);
+	void stepCompleted(EmulatorTestRunner testRunner);
 
-	public void logWrite(EmulatorTestRunner testRunner, Address address, int size, byte[] values);
+	void logWrite(EmulatorTestRunner testRunner, Address address, int size, byte[] values);
 
-	public void logRead(EmulatorTestRunner testRunner, Address address, int size, byte[] values);
+	void logRead(EmulatorTestRunner testRunner, Address address, int size, byte[] values);
 
 }

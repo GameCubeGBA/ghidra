@@ -25,7 +25,7 @@ import docking.widgets.fieldpanel.support.Highlight;
  */
 public interface HighlightProvider {
 
-	public static final Highlight[] EMPTY_HIGHLIGHT = new Highlight[0];
+	Highlight[] EMPTY_HIGHLIGHT = new Highlight[0];
 
 	/**
 	 * Get the highlights appropriate for the given text, object, and FieldFactory class.
@@ -37,7 +37,7 @@ public interface HighlightProvider {
 	 * @return an array of highlight objects that indicate the location within the text string to
 	 * be highlighted.
 	 */
-	public Highlight[] getHighlights(String text, Object obj,
-			Class<? extends FieldFactory> fieldFactoryClass, int cursorTextOffset);
+    Highlight[] getHighlights(String text, Object obj,
+                              Class<? extends FieldFactory> fieldFactoryClass, int cursorTextOffset);
 
 }

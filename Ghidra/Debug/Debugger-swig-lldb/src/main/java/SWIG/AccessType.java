@@ -12,11 +12,11 @@
 package SWIG;
 
 public final class AccessType {
-  public final static AccessType eAccessNone = new AccessType("eAccessNone");
-  public final static AccessType eAccessPublic = new AccessType("eAccessPublic");
-  public final static AccessType eAccessPrivate = new AccessType("eAccessPrivate");
-  public final static AccessType eAccessProtected = new AccessType("eAccessProtected");
-  public final static AccessType eAccessPackage = new AccessType("eAccessPackage");
+  public static final AccessType eAccessNone = new AccessType("eAccessNone");
+  public static final AccessType eAccessPublic = new AccessType("eAccessPublic");
+  public static final AccessType eAccessPrivate = new AccessType("eAccessPrivate");
+  public static final AccessType eAccessProtected = new AccessType("eAccessProtected");
+  public static final AccessType eAccessPackage = new AccessType("eAccessPackage");
 
   public final int swigValue() {
     return swigValue;
@@ -29,9 +29,9 @@ public final class AccessType {
   public static AccessType swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-    for (int i = 0; i < swigValues.length; i++)
-      if (swigValues[i].swigValue == swigValue)
-        return swigValues[i];
+    for (AccessType value : swigValues)
+      if (value.swigValue == swigValue)
+        return value;
     throw new IllegalArgumentException("No enum " + AccessType.class + " with value " + swigValue);
   }
 

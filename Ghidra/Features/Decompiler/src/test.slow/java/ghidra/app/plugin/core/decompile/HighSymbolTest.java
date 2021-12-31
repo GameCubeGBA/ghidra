@@ -387,7 +387,7 @@ public class HighSymbolTest extends AbstractDecompilerTest {
 		ClangTextField line = getLineContaining("if (param");
 		FieldLocation loc = loc(line.getLineNumber(), 20);
 		ClangToken token = line.getToken(loc);
-		assertTrue(token.getText().equals("0b01010011"));
+		assertTrue("0b01010011".equals(token.getText()));
 		HighVariable variable = token.getHighVariable();
 		assertTrue(variable instanceof HighConstant);
 		HighSymbol highSymbol = variable.getSymbol();
@@ -413,7 +413,7 @@ public class HighSymbolTest extends AbstractDecompilerTest {
 		ClangTextField line = getLineContaining(",DAT_010056a8");
 		FieldLocation loc = loc(line.getLineNumber(), 23);
 		ClangToken token = line.getToken(loc);
-		assertTrue(token.getText().equals("141"));
+		assertTrue("141".equals(token.getText()));
 		HighVariable variable = token.getHighVariable();
 		assertTrue(variable instanceof HighConstant);
 		HighSymbol highSymbol = variable.getSymbol();

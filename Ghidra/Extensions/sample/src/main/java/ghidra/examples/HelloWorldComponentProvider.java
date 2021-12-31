@@ -31,8 +31,8 @@ import ghidra.util.Msg;
 import resources.ResourceManager;
 
 public class HelloWorldComponentProvider extends ComponentProviderAdapter {
-	private final static String PREV_IMAGE = "images/information.png";
-	private final static HelpLocation HELP = new HelpLocation("SampleHelpTopic",
+	private static final String PREV_IMAGE = "images/information.png";
+	private static final HelpLocation HELP = new HelpLocation("SampleHelpTopic",
 		"SampleHelpTopic_Anchor_Name");
 	private MyButton activeButtonObj;
 	private JPanel mainPanel;
@@ -99,11 +99,8 @@ public class HelloWorldComponentProvider extends ComponentProviderAdapter {
 			public boolean isAddToPopup(ActionContext context) {
 				// popup only if menu is over MyButton (to demo context--this is created below
 				// in getActionContext(MouseEvent))
-				if (context.getContextObject() instanceof MyButton) {
-					return true;
-				}
-				return false;
-			}
+                return context.getContextObject() instanceof MyButton;
+            }
 		};
 		popupAction.setEnabled(true);
 		popupAction.setPopupMenuData(new MenuData(new String[] { "Example of Popup" }));
@@ -151,13 +148,7 @@ public class HelloWorldComponentProvider extends ComponentProviderAdapter {
 			super(name);
 			setBorder(BorderFactory.createEmptyBorder(10, 5, 10, 5));
 
-			addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					announce("Hello World");
-				}
-			});
+			addActionListener(e -> announce("Hello World"));
 		}
 	}
 }

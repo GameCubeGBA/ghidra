@@ -31,7 +31,7 @@ import java.util.List;
  */
 public class CodeUnitInfo {
 
-	private final static long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	private static final String[] emptyStringArray = new String[0];
 	private static final int[] emptyIntArray = new int[0];
 	private static final Address[] emptyAddrArray = new Address[0];
@@ -91,25 +91,22 @@ public class CodeUnitInfo {
 		List<SourceType> scopeSymSourceList = new ArrayList<SourceType>();
 		List<String> otherSymList = new ArrayList<String>();
 		List<SourceType> otherSymSourceList = new ArrayList<SourceType>();
-		for (int i = 0; i < symbols.length; i++) {
-			SymbolType symbolType = symbols[i].getSymbolType();
-			if (symbols[i].isDynamic()) {
-				hasDynamicSymbol = true;
-			}
-			else if (symbols[i].isPrimary()) {
-				primarySymbolName = symbols[i].getName();
-				primarySymbolSource = symbols[i].getSource();
-				primarySymbolInFunctionScope = (symbolType == SymbolType.FUNCTION);
-			}
-			else if (symbolType == SymbolType.FUNCTION) {
-				scopeSymList.add(symbols[i].getName());
-				scopeSymSourceList.add(symbols[i].getSource());
-			}
-			else {
-				otherSymList.add(symbols[i].getName());
-				otherSymSourceList.add(symbols[i].getSource());
-			}
-		}
+        for (Symbol symbol : symbols) {
+            SymbolType symbolType = symbol.getSymbolType();
+            if (symbol.isDynamic()) {
+                hasDynamicSymbol = true;
+            } else if (symbol.isPrimary()) {
+                primarySymbolName = symbol.getName();
+                primarySymbolSource = symbol.getSource();
+                primarySymbolInFunctionScope = (symbolType == SymbolType.FUNCTION);
+            } else if (symbolType == SymbolType.FUNCTION) {
+                scopeSymList.add(symbol.getName());
+                scopeSymSourceList.add(symbol.getSource());
+            } else {
+                otherSymList.add(symbol.getName());
+                otherSymSourceList.add(symbol.getSource());
+            }
+        }
 		functionScopeSymbolNames = new String[scopeSymList.size()];
 		scopeSymList.toArray(functionScopeSymbolNames);
 		functionScopeSymbolSources = new SourceType[scopeSymSourceList.size()];
@@ -387,19 +384,19 @@ public class CodeUnitInfo {
 	 */
 	private void setNonStackVarInfo(Variable[] vars) {
 		int variableIndex = 0;
-		for (int i = 0; i < vars.length; i++) {
-			if (vars[i].isStackVariable()) {
-				continue; // skip stack variables
-			}
-			varNames[variableIndex] = vars[i].getName();
-			varSources[variableIndex] = vars[i].getSource();
-			Varnode firstVarnode = vars[i].getFirstStorageVarnode();
-			varAddrs[variableIndex] =
-				firstVarnode != null ? firstVarnode.getAddress() : Address.NO_ADDRESS;
-			varFUOffsets[variableIndex] = vars[i].getFirstUseOffset();
-			varComments[variableIndex] = vars[i].getComment();
-			++variableIndex;
-		}
+        for (Variable var : vars) {
+            if (var.isStackVariable()) {
+                continue; // skip stack variables
+            }
+            varNames[variableIndex] = var.getName();
+            varSources[variableIndex] = var.getSource();
+            Varnode firstVarnode = var.getFirstStorageVarnode();
+            varAddrs[variableIndex] =
+                    firstVarnode != null ? firstVarnode.getAddress() : Address.NO_ADDRESS;
+            varFUOffsets[variableIndex] = var.getFirstUseOffset();
+            varComments[variableIndex] = var.getComment();
+            ++variableIndex;
+        }
 	}
 //    
 //    private void writeObject( ObjectOutputStream oos ) throws IOException {

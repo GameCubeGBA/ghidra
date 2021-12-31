@@ -34,8 +34,7 @@ public class CliTableTypeRef extends CliAbstractTable {
 		public int typeNamespaceIndex;
 		
 		public CliTypeRefRow(int resolutionScopeIndex, int typeNameIndex, int typeNamespaceIndex) {
-			super();
-			this.resolutionScopeIndex = resolutionScopeIndex;
+            this.resolutionScopeIndex = resolutionScopeIndex;
 			this.typeNameIndex = typeNameIndex;
 			this.typeNamespaceIndex = typeNamespaceIndex;
 		}

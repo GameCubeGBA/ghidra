@@ -150,9 +150,7 @@ public class DebuggerRegistersProviderTest extends AbstractGhidraHeadedDebuggerG
 
 		waitFor(() -> {
 			TraceThread thread = recorder.getTraceThread(mb.testThread1);
-			if (thread == null) {
-				return false;
-			}
+            return thread != null;
 			/*
 			DebuggerRegisterMapper mapper = recorder.getRegisterMapper(thread);
 			if (mapper == null) {
@@ -162,8 +160,7 @@ public class DebuggerRegistersProviderTest extends AbstractGhidraHeadedDebuggerG
 				return false;
 			}
 			*/
-			return true;
-		});
+        });
 		return recorder;
 	}
 

@@ -34,8 +34,7 @@ public class MemoryByteIteratorTest extends AbstractGhidraHeadedIntegrationTest 
 	 * @param arg0
 	 */
 	public MemoryByteIteratorTest() {
-		super();
-	}
+    }
 	private Address addr(String a) {
 		return af.getAddress(a);
 	}

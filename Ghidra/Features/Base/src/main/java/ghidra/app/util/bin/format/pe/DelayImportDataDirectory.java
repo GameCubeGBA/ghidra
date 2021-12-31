@@ -37,7 +37,7 @@ import ghidra.util.task.TaskMonitor;
  * See DELAYIMP.H from Visual C++. 
  */
 public class DelayImportDataDirectory extends DataDirectory {
-    private final static String NAME = "IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT";
+    private static final String NAME = "IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT";
 
     private DelayImportDescriptor [] descriptors; 
 
@@ -202,20 +202,19 @@ public class DelayImportDataDirectory extends DataDirectory {
 			throws DataTypeConflictException, DuplicateNameException {
 
 		Map<ThunkData, ImportByName> map = descriptor.getImportByNameMap();
-		Iterator<ThunkData> thunks = map.keySet().iterator();
-		while (thunks.hasNext()) {
-			if (monitor.isCancelled()) {
-				return;
-			}
-			ThunkData thunk = thunks.next();
-			long thunkPtr = va(thunk.getAddressOfData(), isBinary);
-			if (!descriptor.isUsingRVA()) {
-				thunkPtr -= ntHeader.getOptionalHeader().getImageBase();
-			}
-			Address thunkAddress = space.getAddress(thunkPtr);
-			ImportByName ibn = map.get(thunk);
-			PeUtils.createData(program, thunkAddress, ibn.toDataType(), log);
-		}
+        for (ThunkData thunkData : map.keySet()) {
+            if (monitor.isCancelled()) {
+                return;
+            }
+            ThunkData thunk = thunkData;
+            long thunkPtr = va(thunk.getAddressOfData(), isBinary);
+            if (!descriptor.isUsingRVA()) {
+                thunkPtr -= ntHeader.getOptionalHeader().getImageBase();
+            }
+            Address thunkAddress = space.getAddress(thunkPtr);
+            ImportByName ibn = map.get(thunk);
+            PeUtils.createData(program, thunkAddress, ibn.toDataType(), log);
+        }
 	}
 
 	private void markupThunk(Program program, 

@@ -177,7 +177,7 @@ public class ZLIB {
         return compressedBOS;
 	}
 
-	public final static boolean isZLIB( ByteProvider provider ) {
+	public static final boolean isZLIB(ByteProvider provider ) {
 		try {
 			byte [] bytes = provider.readBytes( 0, 2  );
 			if ( Arrays.equals( bytes, ZLIB_COMPRESSION_NO_LOW ) ) {

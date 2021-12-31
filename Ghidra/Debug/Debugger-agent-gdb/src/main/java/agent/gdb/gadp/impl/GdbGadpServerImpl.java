@@ -35,8 +35,7 @@ public class GdbGadpServerImpl implements GdbGadpServer {
 	protected final GadpSide server;
 
 	public GdbGadpServerImpl(SocketAddress addr) throws IOException {
-		super();
-		// TODO: Select Linux or Windows factory based on host OS
+        // TODO: Select Linux or Windows factory based on host OS
 		this.model = new GdbModelImpl(new LinuxPtyFactory());
 		this.server = new GadpSide(model, addr);
 	}

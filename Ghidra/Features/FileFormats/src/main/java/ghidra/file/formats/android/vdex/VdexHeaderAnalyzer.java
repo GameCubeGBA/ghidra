@@ -29,7 +29,7 @@ import ghidra.util.task.TaskMonitor;
 
 public class VdexHeaderAnalyzer extends FileFormatAnalyzer {
 
-	private final static DataType BYTE = new ByteDataType();
+	private static final DataType BYTE = new ByteDataType();
 
 	@Override
 	public String getName() {

@@ -80,12 +80,7 @@ public class ColorizingPlugin extends ProgramPlugin implements DomainObjectListe
 	private NextColorRangeAction nextAction;
 	private PreviousColorRangeAction previousAction;
 
-	private SwingUpdateManager updateManager = new SwingUpdateManager(1000, new Runnable() {
-		@Override
-		public void run() {
-			doUpdate();
-		}
-	});
+	private SwingUpdateManager updateManager = new SwingUpdateManager(1000, () -> doUpdate());
 
 	public ColorizingPlugin(PluginTool tool) {
 		super(tool, true, true);
@@ -208,11 +203,8 @@ public class ColorizingPlugin extends ProgramPlugin implements DomainObjectListe
 
 			@Override
 			public boolean isEnabledForContext(ActionContext context) {
-				if (!(context instanceof ListingActionContext)) {
-					return false;
-				}
-				return true;
-			}
+                return context instanceof ListingActionContext;
+            }
 		};
 		setColorAction.setPopupMenuData(new MenuData(new String[] { MENU_PULLRIGHT, "Set Color" },
 			null, group, MenuData.NO_MNEMONIC, Integer.toString(subgroup++)));

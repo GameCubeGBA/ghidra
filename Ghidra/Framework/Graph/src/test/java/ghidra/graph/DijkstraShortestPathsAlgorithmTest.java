@@ -65,11 +65,8 @@ public class DijkstraShortestPathsAlgorithmTest {
 				return false;
 			}
 			TestEdge that = (TestEdge) obj;
-			if (!this.start.equals(that.start) || !this.end.equals(that.end)) {
-				return false;
-			}
-			return true;
-		}
+            return this.start.equals(that.start) && this.end.equals(that.end);
+        }
 
 		@Override
 		public String toString() {

@@ -86,11 +86,8 @@ public class DebuggerTargetsProvider extends ComponentProviderAdapter {
 			if (myActionContext.getIfModelService() != null) {
 				return true;
 			}
-			if (myActionContext.getIfDebuggerModel() != null) {
-				return true;
-			}
-			return false;
-		}
+            return myActionContext.getIfDebuggerModel() != null;
+        }
 	}
 
 	protected class ConnectAction extends AbstractConnectAction {

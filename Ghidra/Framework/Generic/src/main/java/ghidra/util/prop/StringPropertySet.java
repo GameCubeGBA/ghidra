@@ -25,7 +25,7 @@ import java.io.ObjectOutputStream;
  *
  */
 public class StringPropertySet extends PropertySet {
-    private final static long serialVersionUID = 1;
+    private static final long serialVersionUID = 1;
 	/**
 	 * Constructor for StringPropertySet.
 	 * @param name the name associated with this property set.

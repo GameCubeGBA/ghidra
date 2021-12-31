@@ -122,9 +122,7 @@ class EditReferencesModel extends AbstractSortedTableModel<Reference> {
 			if (toAddr.isMemoryAddress()) {
 				return true;
 			}
-			if (columnIndex == REF_TYPE_COL) {
-				return true;
-			}
+            return columnIndex == REF_TYPE_COL;
 		}
 		return false;
 	}

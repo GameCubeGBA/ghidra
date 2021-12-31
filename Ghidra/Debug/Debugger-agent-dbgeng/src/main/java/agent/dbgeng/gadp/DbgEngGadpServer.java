@@ -29,7 +29,7 @@ import ghidra.dbg.agent.AgentWindow;
 import ghidra.util.Msg;
 
 public interface DbgEngGadpServer extends AutoCloseable {
-	public static final String DEFAULT_DBGSRV_TRANSPORT = "tcp:port=11200";
+	String DEFAULT_DBGSRV_TRANSPORT = "tcp:port=11200";
 
 	/**
 	 * The entry point for the SCTL-DBGENG server in stand-alone mode
@@ -41,7 +41,7 @@ public interface DbgEngGadpServer extends AutoCloseable {
 	 * @throws ExecutionException
 	 * @throws InterruptedException
 	 */
-	public static void main(String[] args) throws Exception {
+	static void main(String[] args) throws Exception {
 		try {
 			new DbgEngRunner().run(args);
 		}
@@ -60,14 +60,14 @@ public interface DbgEngGadpServer extends AutoCloseable {
 	 * @return the server instance
 	 * @throws IOException
 	 */
-	public static DbgEngGadpServer newInstance(SocketAddress addr) throws IOException {
+	static DbgEngGadpServer newInstance(SocketAddress addr) throws IOException {
 		return new DbgEngGadpServerImpl(addr);
 	}
 
 	/**
 	 * Runs the server from the command line
 	 */
-	public class DbgEngRunner {
+    class DbgEngRunner {
 		protected InetSocketAddress bindTo;
 		protected List<String> dbgengArgs = new ArrayList<>();
 		protected byte busId = 1;
@@ -225,7 +225,7 @@ public interface DbgEngGadpServer extends AutoCloseable {
 	 * 
 	 * @throws IOException if an I/O error occurs
 	 */
-	public void terminate() throws IOException;
+    void terminate() throws IOException;
 
 	/**
 	 * Check if the server is running
@@ -236,7 +236,7 @@ public interface DbgEngGadpServer extends AutoCloseable {
 	 * 
 	 * @returns true if the server is currently running.
 	 */
-	public boolean isRunning();
+    boolean isRunning();
 
 	/**
 	 * Calls {@link #terminate()}

@@ -29,8 +29,8 @@ public interface LldbModelTargetAccessConditioned
 		extends LldbModelTargetObject, TargetAccessConditioned {
 
 	@Override
-	public boolean isAccessible();
+    boolean isAccessible();
 
-	public void setAccessible(boolean accessible);
+	void setAccessible(boolean accessible);
 
 }

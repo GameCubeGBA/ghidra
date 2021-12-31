@@ -41,9 +41,9 @@ import utilities.util.FileUtilities;
  */
 class InfoPanel extends JPanel {
 
-	private final static Color RED = new Color(199, 0, 0);
+	private static final Color RED = new Color(199, 0, 0);
 
-	private final static int MARGIN = 10;
+	private static final int MARGIN = 10;
 
 	private String version;
 	private String marking;
@@ -51,10 +51,10 @@ class InfoPanel extends JPanel {
 
 	private Color bgColor; // background color for all panels
 	private int imageWidth;
-	private final static String SPLASH_FILENAME = "splash.txt";
-	private final static String CLOUD_REV_FILENAME = "images/cloudbarReversed.jpg";
-	private final static String GHIDRA_FILENAME = "images/GHIDRA_Splash.png";
-	private final static String CLOUD_FILENAME = "images/cloudbar.jpg";
+	private static final String SPLASH_FILENAME = "splash.txt";
+	private static final String CLOUD_REV_FILENAME = "images/cloudbarReversed.jpg";
+	private static final String GHIDRA_FILENAME = "images/GHIDRA_Splash.png";
+	private static final String CLOUD_FILENAME = "images/cloudbar.jpg";
 
 	InfoPanel() {
 		getAboutInfo();

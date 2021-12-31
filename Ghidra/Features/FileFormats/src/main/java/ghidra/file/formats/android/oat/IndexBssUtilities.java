@@ -21,13 +21,13 @@ package ghidra.file.formats.android.oat;
  */
 public final class IndexBssUtilities {
 
-	public final static int indexMask(int index_bits) {
+	public static final int indexMask(int index_bits) {
 		int kAllOnes = -1;
 		// Handle `index_bits == 32u` explicitly; shifting uint32_t left by 32 is undefined behavior.
 		return (index_bits == 32) ? kAllOnes : ~(kAllOnes << index_bits);
 	}
 
-	public final static int intIndexBits(int number_of_indexes) {
+	public static final int intIndexBits(int number_of_indexes) {
 		return minimumBitsToStore(number_of_indexes - 1);
 	}
 

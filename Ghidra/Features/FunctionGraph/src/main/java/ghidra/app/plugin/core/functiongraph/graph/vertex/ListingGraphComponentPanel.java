@@ -513,7 +513,7 @@ public class ListingGraphComponentPanel extends AbstractGraphComponentPanel {
 	JComponent getToolTipComponentForVertex() {
 		Address address = getPreviewAddress(true);
 		initializeToolTipComponent(address);
-		tooltipTitleLabel.setText(getTitle());
+		tooltipTitleLabel.setText(title);
 		return toolTipComponent;
 	}
 
@@ -534,10 +534,10 @@ public class ListingGraphComponentPanel extends AbstractGraphComponentPanel {
 		initializeToolTipComponent(address);
 
 		if (isDestinationVertex) {
-			tooltipTitleLabel.setText("To: " + getTitle());
+			tooltipTitleLabel.setText("To: " + title);
 		}
 		else {
-			tooltipTitleLabel.setText("From: " + getTitle());
+			tooltipTitleLabel.setText("From: " + title);
 		}
 
 		previewListingPanel.getFieldPanel()
@@ -712,8 +712,7 @@ public class ListingGraphComponentPanel extends AbstractGraphComponentPanel {
 
 	private class ListingHoverAdapter extends ListingHoverProvider {
 		public ListingHoverAdapter() {
-			super();
-		}
+        }
 
 		@Override
 		protected void showPopup(JComponent comp, Field field, MouseEvent event,

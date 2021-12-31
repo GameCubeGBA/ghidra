@@ -40,8 +40,7 @@ public class UnappliedMarkupItemStorageDBTest extends VTBaseTestCase {
 	private int testTransactionID;
 
 	public UnappliedMarkupItemStorageDBTest() {
-		super();
-	}
+    }
 
 	@Override
 	@Before

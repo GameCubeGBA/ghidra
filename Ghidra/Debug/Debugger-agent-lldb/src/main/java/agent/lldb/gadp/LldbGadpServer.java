@@ -38,7 +38,7 @@ public interface LldbGadpServer extends AutoCloseable {
 	 * @throws ExecutionException
 	 * @throws InterruptedException
 	 */
-	public static void main(String[] args) throws Exception {
+	static void main(String[] args) throws Exception {
 		new LldbRunner().run(args);
 	}
 
@@ -50,14 +50,14 @@ public interface LldbGadpServer extends AutoCloseable {
 	 * @return the server instance
 	 * @throws IOException
 	 */
-	public static LldbGadpServer newInstance(SocketAddress addr) throws IOException {
+	static LldbGadpServer newInstance(SocketAddress addr) throws IOException {
 		return new LldbGadpServerImpl(addr);
 	}
 
 	/**
 	 * Runs the server from the command line
 	 */
-	public class LldbRunner {
+    class LldbRunner {
 		protected InetSocketAddress bindTo;
 		protected List<String> lldbArgs = new ArrayList<>();
 		protected byte busId = 1;
@@ -163,7 +163,7 @@ public interface LldbGadpServer extends AutoCloseable {
 	 * 
 	 * @throws IOException if an I/O error occurs
 	 */
-	public void terminate() throws IOException;
+    void terminate() throws IOException;
 
 	/**
 	 * Check if the server is running
@@ -174,7 +174,7 @@ public interface LldbGadpServer extends AutoCloseable {
 	 * 
 	 * @returns true if the server is currently running.
 	 */
-	public boolean isRunning();
+    boolean isRunning();
 
 	/**
 	 * Calls {@link #terminate()}

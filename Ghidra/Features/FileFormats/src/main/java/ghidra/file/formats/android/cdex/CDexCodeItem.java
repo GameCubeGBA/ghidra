@@ -29,24 +29,24 @@ import ghidra.util.exception.DuplicateNameException;
  */
 public class CDexCodeItem extends CodeItem {
 
-	public final static short kRegistersSizeShift = 12;
-	public final static short kInsSizeShift = 8;
-	public final static short kOutsSizeShift = 4;
-	public final static short kTriesSizeSizeShift = 0;
-	public final static short kInsnsSizeShift = 5;
+	public static final short kRegistersSizeShift = 12;
+	public static final short kInsSizeShift = 8;
+	public static final short kOutsSizeShift = 4;
+	public static final short kTriesSizeSizeShift = 0;
+	public static final short kInsnsSizeShift = 5;
 
-	public final static short kBitPreHeaderRegisterSize = 0;
-	public final static short kBitPreHeaderInsSize = 1;
-	public final static short kBitPreHeaderOutsSize = 2;
-	public final static short kBitPreHeaderTriesSize = 3;
-	public final static short kBitPreHeaderInsnsSize = 4;
-	public final static short kFlagPreHeaderRegisterSize = 0x1 << kBitPreHeaderRegisterSize;
-	public final static short kFlagPreHeaderInsSize = 0x1 << kBitPreHeaderInsSize;
-	public final static short kFlagPreHeaderOutsSize = 0x1 << kBitPreHeaderOutsSize;
-	public final static short kFlagPreHeaderTriesSize = 0x1 << kBitPreHeaderTriesSize;
-	public final static short kFlagPreHeaderInsnsSize = 0x1 << kBitPreHeaderInsnsSize;
+	public static final short kBitPreHeaderRegisterSize = 0;
+	public static final short kBitPreHeaderInsSize = 1;
+	public static final short kBitPreHeaderOutsSize = 2;
+	public static final short kBitPreHeaderTriesSize = 3;
+	public static final short kBitPreHeaderInsnsSize = 4;
+	public static final short kFlagPreHeaderRegisterSize = 0x1 << kBitPreHeaderRegisterSize;
+	public static final short kFlagPreHeaderInsSize = 0x1 << kBitPreHeaderInsSize;
+	public static final short kFlagPreHeaderOutsSize = 0x1 << kBitPreHeaderOutsSize;
+	public static final short kFlagPreHeaderTriesSize = 0x1 << kBitPreHeaderTriesSize;
+	public static final short kFlagPreHeaderInsnsSize = 0x1 << kBitPreHeaderInsnsSize;
 
-	public final static short kFlagPreHeaderCombined =
+	public static final short kFlagPreHeaderCombined =
 		kFlagPreHeaderRegisterSize | kFlagPreHeaderInsSize | kFlagPreHeaderOutsSize |
 			kFlagPreHeaderTriesSize | kFlagPreHeaderInsnsSize;
 
@@ -54,9 +54,8 @@ public class CDexCodeItem extends CodeItem {
 	private short insns_count_and_flags_;
 
 	public CDexCodeItem(BinaryReader reader) throws IOException {
-		super();
 
-		long startIndex = reader.getPointerIndex();//used for reading preheaders...
+        long startIndex = reader.getPointerIndex();//used for reading preheaders...
 
 		/*
 		 * Packed code item data,

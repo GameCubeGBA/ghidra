@@ -37,8 +37,7 @@ import ghidra.program.model.lang.LanguageCompilerSpecPair;
 public class ImporterPluginScreenShots extends GhidraScreenShotGenerator {
 
 	public ImporterPluginScreenShots() {
-		super();
-	}
+    }
 
 	@Test
 	public void testImporterDialog() throws Exception {

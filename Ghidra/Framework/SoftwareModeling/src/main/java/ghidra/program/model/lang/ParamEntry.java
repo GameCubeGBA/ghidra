@@ -146,11 +146,8 @@ public class ParamEntry {
 		if (unsignedCompare(end, op2end)) {
 			return false;
 		}
-		if (alignment != op2.alignment) {
-			return false;
-		}
-		return true;
-	}
+        return alignment == op2.alignment;
+    }
 
 	public int justifiedContain(Address addr, int sz) {
 		if (joinrec != null) {
@@ -391,53 +388,42 @@ public class ParamEntry {
 		groupsize = 1;				// default
 
 		XmlElement el = parser.start("pentry");
-		Iterator<Entry<String, String>> iter = el.getAttributes().entrySet().iterator();
-		while (iter.hasNext()) {
-			Entry<String, String> entry = iter.next();
-			String name = entry.getKey();
-			if ("minsize".equals(name)) {
-				minsize = SpecXmlUtils.decodeInt(entry.getValue());
-			}
-			else if ("size".equals(name) || "align".equals(name)) {	// old style
-				alignment = SpecXmlUtils.decodeInt(entry.getValue());
-			} else if ("maxsize".equals(name)) {
-				size = SpecXmlUtils.decodeInt(entry.getValue());
-			}
-			else if ("metatype".equals(name)) {		// Not implemented at the moment
-				String meta = entry.getValue();
-				// TODO:  Currently only supporting "float", "ptr", and "unknown" metatypes
-				if ((meta != null)) {
-					if ("float".equals(meta)) {
-						type = TYPE_FLOAT;
-					}
-					else if ("ptr".equals(meta)) {
-						type = TYPE_PTR;
-					}
-				}
-			}
-			else if ("extension".equals(name)) {
-				flags &= ~(SMALLSIZE_ZEXT | SMALLSIZE_SEXT | SMALLSIZE_INTTYPE | SMALLSIZE_FLOAT);
-				String value = entry.getValue();
-				if ("sign".equals(value)) {
-					flags |= SMALLSIZE_SEXT;
-				}
-				else if ("zero".equals(value)) {
-					flags |= SMALLSIZE_ZEXT;
-				}
-				else if ("inttype".equals(value)) {
-					flags |= SMALLSIZE_INTTYPE;
-				}
-				else if ("float".equals(value)) {
-					flags |= SMALLSIZE_FLOAT;
-				}
-				else if (!"none".equals(value)) {
-					throw new XmlParseException("Bad extension attribute: " + value);
-				}
-			}
-			else {
-				throw new XmlParseException("Unknown paramentry attribute: " + name);
-			}
-		}
+        for (Entry<String, String> entry : el.getAttributes().entrySet()) {
+            String name = entry.getKey();
+            if ("minsize".equals(name)) {
+                minsize = SpecXmlUtils.decodeInt(entry.getValue());
+            } else if ("size".equals(name) || "align".equals(name)) {    // old style
+                alignment = SpecXmlUtils.decodeInt(entry.getValue());
+            } else if ("maxsize".equals(name)) {
+                size = SpecXmlUtils.decodeInt(entry.getValue());
+            } else if ("metatype".equals(name)) {        // Not implemented at the moment
+                String meta = entry.getValue();
+                // TODO:  Currently only supporting "float", "ptr", and "unknown" metatypes
+                if ((meta != null)) {
+                    if ("float".equals(meta)) {
+                        type = TYPE_FLOAT;
+                    } else if ("ptr".equals(meta)) {
+                        type = TYPE_PTR;
+                    }
+                }
+            } else if ("extension".equals(name)) {
+                flags &= ~(SMALLSIZE_ZEXT | SMALLSIZE_SEXT | SMALLSIZE_INTTYPE | SMALLSIZE_FLOAT);
+                String value = entry.getValue();
+                if ("sign".equals(value)) {
+                    flags |= SMALLSIZE_SEXT;
+                } else if ("zero".equals(value)) {
+                    flags |= SMALLSIZE_ZEXT;
+                } else if ("inttype".equals(value)) {
+                    flags |= SMALLSIZE_INTTYPE;
+                } else if ("float".equals(value)) {
+                    flags |= SMALLSIZE_FLOAT;
+                } else if (!"none".equals(value)) {
+                    throw new XmlParseException("Bad extension attribute: " + value);
+                }
+            } else {
+                throw new XmlParseException("Unknown paramentry attribute: " + name);
+            }
+        }
 		if (minsize < 1 || size < minsize) {
 			throw new XmlParseException(
 				"paramentry size not specified properly: minsize=" + minsize + " maxsize=" + size);
@@ -498,11 +484,8 @@ public class ParamEntry {
 		if (group != op2.group || groupsize != op2.groupsize) {
 			return false;
 		}
-		if (!SystemUtilities.isArrayEqual(joinrec, op2.joinrec)) {
-			return false;
-		}
-		return true;
-	}
+        return SystemUtilities.isArrayEqual(joinrec, op2.joinrec);
+    }
 
 	@Override
 	public int hashCode() {

@@ -29,8 +29,7 @@ public class StringKeyIndexerTest extends AbstractGenericTest {
 	 * @param arg0
 	 */
 	public StringKeyIndexerTest() {
-		super();
-	}
+    }
 
 @Test
     public void testStringKeyIndexer() {
@@ -178,7 +177,7 @@ public class StringKeyIndexerTest extends AbstractGenericTest {
             }
             hashSet.remove(key);
         }
-        if (hashSet.size() != 0) {
+        if (!hashSet.isEmpty()) {
             Assert.fail("Expeced iterator to contain 100 Keys and got "+(100 - hashSet.size()));
         }
 

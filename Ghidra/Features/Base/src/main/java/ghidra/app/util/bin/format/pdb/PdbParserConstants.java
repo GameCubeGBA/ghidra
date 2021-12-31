@@ -29,30 +29,30 @@ public class PdbParserConstants {
 	/**
 	 * Option key which indicates if PDB has been loaded/applied to program (Boolean).
 	 */
-	public final static String PDB_LOADED    = "PDB Loaded";
+    public static final String PDB_LOADED    = "PDB Loaded";
 
 	/**
 	 * Option key which indicates PDB filename or path as specified by loaded program (String).
 	 */
-	public final static String PDB_FILE      = "PDB File";
+    public static final String PDB_FILE      = "PDB File";
 
 	/**
 	 * Option key which indicates PDB Age as specified by loaded program (String, hex value without 0x prefix).
 	 */
-	public final static String PDB_AGE = "PDB Age";
+    public static final String PDB_AGE = "PDB Age";
 
 	/**
 	 * Option key which indicates PDB Signature as specified by loaded program (String).
 	 */
-	public final static String PDB_SIGNATURE = "PDB Signature";
+    public static final String PDB_SIGNATURE = "PDB Signature";
 
 	/**
 	 * Option key which indicates PDB Version as specified by loaded program (String).
 	 */
-	public final static String PDB_VERSION   = "PDB Version";
+    public static final String PDB_VERSION   = "PDB Version";
 
 	/**
 	 * Option key which indicates PDB GUID as specified by loaded program (String).
 	 */
-	public final static String PDB_GUID      = "PDB GUID";
+    public static final String PDB_GUID      = "PDB GUID";
 }

@@ -109,11 +109,8 @@ public class Processor implements Comparable<Processor> {
 		if ((obj == null) || (getClass() != obj.getClass()))
 			return false;
 		Processor other = (Processor) obj;
-		if (!Objects.equals(name, other.name)) {
-			return false;
-		}
-		return true;
-	}
+        return Objects.equals(name, other.name);
+    }
 
 	@Override
 	public int compareTo(Processor p) {

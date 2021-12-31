@@ -26,5 +26,5 @@ import ghidra.framework.plugintool.ServiceInfo;
 @ServiceInfo(defaultProvider = CodeBrowserPlugin.class)
 public interface CodeFormatService {
 
-	public FormatManager getFormatManager();
+	FormatManager getFormatManager();
 }

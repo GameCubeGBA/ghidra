@@ -29,16 +29,16 @@ import ghidra.framework.store.Version;
  */
 class VersionHistoryTableModel extends AbstractSortedTableModel<Version> {
 
-	final static String DATE = "Version Date";
-	final static String VERSION = "Version";
-	final static String USER = "User";
-	final static String COMMENTS = "Comments";
+	static final String DATE = "Version Date";
+	static final String VERSION = "Version";
+	static final String USER = "User";
+	static final String COMMENTS = "Comments";
 
 	// columns used in the getValueAt() method
-	final static int VERSION_COL = 0;
-	final static int DATE_COL = 1;
-	final static int USER_COL = 2;
-	final static int COMMENTS_COL = 3;
+    static final int VERSION_COL = 0;
+	static final int DATE_COL = 1;
+	static final int USER_COL = 2;
+	static final int COMMENTS_COL = 3;
 
 	private String[] columnNames = { VERSION, DATE, USER, COMMENTS };
 

@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.util.Date;
 
 public class NSDate extends NSObject {
-	public final static long EPOCH = 978307200000L;//Sun Dec 31 19:00:00 EST 2000
+	public static final long EPOCH = 978307200000L;//Sun Dec 31 19:00:00 EST 2000
 
 	private double value;
 

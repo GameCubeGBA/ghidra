@@ -22,7 +22,7 @@ import ghidra.framework.model.DomainObjectChangeRecord;
  */
 public class VersionTrackingChangeRecord extends DomainObjectChangeRecord {
 
-	private final static long serialVersionUID = 1;
+	private static final long serialVersionUID = 1;
 
 	private Object affectedObj; // may be null
 

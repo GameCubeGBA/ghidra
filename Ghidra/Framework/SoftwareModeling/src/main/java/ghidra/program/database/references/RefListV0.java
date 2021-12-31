@@ -339,7 +339,7 @@ class RefListV0 extends RefList {
 	}
 
 	private byte findHighestRefLevel(byte currentRefLevel) {
-		byte maxLevel = (byte) -1;
+		byte maxLevel = -1;
 		ReferenceIterator it = getRefs();
 		while (it.hasNext()) {
 			Reference ref = it.next();

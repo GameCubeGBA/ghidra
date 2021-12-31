@@ -23,7 +23,7 @@ public class SignedQWordDataType extends AbstractIntegerDataType {
 	private static final long serialVersionUID = 1L;
 
 	/** A statically defined SignedQWordDataType instance.*/
-	public final static SignedQWordDataType dataType = new SignedQWordDataType();
+    public static final SignedQWordDataType dataType = new SignedQWordDataType();
 
 	public SignedQWordDataType() {
 		this(null);

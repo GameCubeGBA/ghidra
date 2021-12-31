@@ -29,35 +29,35 @@ import ghidra.util.Conv;
 public class ResourceType {
 	//0x00 is not defined...?
 	/**Constant indicating cursor resource type.*/
-	public final static short RT_CURSOR = 0x01;
+    public static final short RT_CURSOR = 0x01;
 	/**Constant indicating bitmap resource type.*/
-	public final static short RT_BITMAP = 0x02;
+    public static final short RT_BITMAP = 0x02;
 	/**Constant indicating icon resource type.*/
-	public final static short RT_ICON = 0x03;
+    public static final short RT_ICON = 0x03;
 	/**Constant indicating menu resource type.*/
-	public final static short RT_MENU = 0x04;
+    public static final short RT_MENU = 0x04;
 	/**Constant indicating dialog resource type.*/
-	public final static short RT_DIALOG = 0x05;
+    public static final short RT_DIALOG = 0x05;
 	/**Constant indicating string resource type.*/
-	public final static short RT_STRING = 0x06;
+    public static final short RT_STRING = 0x06;
 	/**Constant indicating font directory resource type.*/
-	public final static short RT_FONTDIR = 0x07;
+    public static final short RT_FONTDIR = 0x07;
 	/**Constant indicating font resource type.*/
-	public final static short RT_FONT = 0x08;
+    public static final short RT_FONT = 0x08;
 	/**Constant indicating an accelerator resource type.*/
-	public final static short RT_ACCELERATOR = 0x09;
+    public static final short RT_ACCELERATOR = 0x09;
 	/**Constant indicating RC data resource type.*/
-	public final static short RT_RCDATA = 0x0a;
+    public static final short RT_RCDATA = 0x0a;
 	/**Constant indicating message table resource type.*/
-	public final static short RT_MESSAGETABLE = 0x0b;
+    public static final short RT_MESSAGETABLE = 0x0b;
 	/**Constant indicating cursor group resource type.*/
-	public final static short RT_GROUP_CURSOR = 0x0c;
+    public static final short RT_GROUP_CURSOR = 0x0c;
 	//0x0d is not defined...?
 	/**Constant indicating icon group resource type.*/
-	public final static short RT_GROUP_ICON = 0x0e;
+    public static final short RT_GROUP_ICON = 0x0e;
 	//0x0f is not defined...?
 	/**Constant indicating version resource type.*/
-	public final static byte RT_VERSION = 0x10;
+    public static final byte RT_VERSION = 0x10;
 
 	private short typeID;    //if >= 0x8000, then 
 	private short count;     //number of resources of this type

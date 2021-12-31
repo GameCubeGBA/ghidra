@@ -24,7 +24,7 @@ import ghidra.framework.Platform;
  * and avoiding duplicate directories.
  */
 public class LibrarySearchPathManager {
-	public final static String CURRENT_DIRECTORY = ".";
+	public static final String CURRENT_DIRECTORY = ".";
 
 	private static List<String> pathList = createPathList();
 

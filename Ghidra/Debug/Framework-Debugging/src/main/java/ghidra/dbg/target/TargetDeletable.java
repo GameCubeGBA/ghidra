@@ -30,5 +30,5 @@ public interface TargetDeletable extends TargetObject {
 	 * 
 	 * @return a future which completes when the request is processed
 	 */
-	public CompletableFuture<Void> delete();
+    CompletableFuture<Void> delete();
 }

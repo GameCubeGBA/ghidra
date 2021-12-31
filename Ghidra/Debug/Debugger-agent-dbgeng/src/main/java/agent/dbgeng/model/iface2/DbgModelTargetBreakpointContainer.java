@@ -55,8 +55,8 @@ public interface DbgModelTargetBreakpointContainer extends DbgModelTargetObject,
 	public void breakpointHit(DbgBreakpointInfo info, DbgCause cause);
 	*/
 
-	public default CompletableFuture<Void> doPlaceBreakpoint(Set<TargetBreakpointKind> kinds,
-			Function<DbgBreakpointType, CompletableFuture<?>> placer) {
+	default CompletableFuture<Void> doPlaceBreakpoint(Set<TargetBreakpointKind> kinds,
+                                                      Function<DbgBreakpointType, CompletableFuture<?>> placer) {
 		AsyncFence fence = new AsyncFence();
 		if (kinds.contains(TargetBreakpointKind.READ) &&
 			kinds.contains(TargetBreakpointKind.WRITE)) {
@@ -78,14 +78,14 @@ public interface DbgModelTargetBreakpointContainer extends DbgModelTargetObject,
 	}
 
 	@Override
-	public default CompletableFuture<Void> placeBreakpoint(String expression,
-			Set<TargetBreakpointKind> kinds) {
+    default CompletableFuture<Void> placeBreakpoint(String expression,
+                                                    Set<TargetBreakpointKind> kinds) {
 		return doPlaceBreakpoint(kinds, t -> getManager().insertBreakpoint(expression, t));
 	}
 
 	@Override
-	public default CompletableFuture<Void> placeBreakpoint(AddressRange range,
-			Set<TargetBreakpointKind> kinds) {
+    default CompletableFuture<Void> placeBreakpoint(AddressRange range,
+                                                    Set<TargetBreakpointKind> kinds) {
 		// TODO: Consider how to translate address spaces
 		long offset = range.getMinAddress().getOffset();
 		int len = (int) range.getLength();

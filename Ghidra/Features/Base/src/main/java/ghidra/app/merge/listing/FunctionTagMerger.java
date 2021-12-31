@@ -574,37 +574,29 @@ public class FunctionTagMerger implements MergeResolver, ListingMergeConstants {
 	private void showMergePanel(long id, TaskMonitor monitor) {
 
 		try {
-			final ChangeListener changeListener = new ChangeListener() {
-				@Override
-				public void stateChanged(ChangeEvent e) {
-					conflictOption = conflictPanel.getSelectedOptions();
-					if (conflictOption == ASK_USER || conflictOption == CANCELED) {
-						if (mergeManager != null) {
-							mergeManager.setApplyEnabled(false);
-						}
-						return;
-					}
-					if (mergeManager != null) {
-						mergeManager.clearStatusText();
-					}
-					try {
-						merge(conflictOption, monitor);
-						if (mergeManager != null) {
-							mergeManager.setApplyEnabled(true);
-						}
-					}
-					catch (CancelledException e1) {
-						// user cancel - no need to log
-					}
+			final ChangeListener changeListener = e -> {
+                conflictOption = conflictPanel.getSelectedOptions();
+                if (conflictOption == ASK_USER || conflictOption == CANCELED) {
+                    if (mergeManager != null) {
+                        mergeManager.setApplyEnabled(false);
+                    }
+                    return;
+                }
+                if (mergeManager != null) {
+                    mergeManager.clearStatusText();
+                }
+                try {
+                    merge(conflictOption, monitor);
+                    if (mergeManager != null) {
+                        mergeManager.setApplyEnabled(true);
+                    }
+                }
+                catch (CancelledException e1) {
+                    // user cancel - no need to log
+                }
 
-				}
-			};
-			SwingUtilities.invokeAndWait(new Runnable() {
-				@Override
-				public void run() {
-					setupConflictPanel(id, changeListener, monitor);
-				}
-			});
+            };
+			SwingUtilities.invokeAndWait(() -> setupConflictPanel(id, changeListener, monitor));
 		}
 		catch (InterruptedException | InvocationTargetException e) {
 			Msg.error(this, "Unexpected error showing merge panel for tag " + id, e);

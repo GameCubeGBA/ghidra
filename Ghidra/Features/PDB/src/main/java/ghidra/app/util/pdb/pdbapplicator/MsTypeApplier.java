@@ -227,11 +227,8 @@ public abstract class MsTypeApplier {
 		if (index != other.index) {
 			return false;
 		}
-		if (!msType.getClass().getSimpleName().equals(other.msType.getClass().getSimpleName())) {
-			return false;
-		}
-		return true;
-	}
+        return msType.getClass().getSimpleName().equals(other.msType.getClass().getSimpleName());
+    }
 
 	protected void waitSetPut(MsTypeApplier applier) {
 		waitSet.add(applier);

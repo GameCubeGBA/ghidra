@@ -48,7 +48,7 @@ import ghidra.util.classfinder.ClassSearcher;
  */
 public abstract class DomainObjectAdapter implements DomainObject {
 
-	protected final static String DEFAULT_NAME = "untitled";
+	protected static final String DEFAULT_NAME = "untitled";
 
 	private static Class<?> defaultDomainObjClass; // Domain object implementation mapped to unknown content type
 	private static HashMap<String, ContentHandler> contentHandlerTypeMap; // maps content-type string to handler
@@ -112,7 +112,7 @@ public abstract class DomainObjectAdapter implements DomainObject {
 				throw new IllegalArgumentException(
 					"Attempted to release domain object with unknown consumer: " + consumer);
 			}
-			if (consumers.size() != 0) {
+			if (!consumers.isEmpty()) {
 				return;
 			}
 		}
@@ -403,7 +403,7 @@ public abstract class DomainObjectAdapter implements DomainObject {
 
 	boolean hasConsumers() {
 		synchronized (consumers) {
-			return consumers.size() > 0;
+			return !consumers.isEmpty();
 		}
 	}
 
@@ -490,7 +490,7 @@ public abstract class DomainObjectAdapter implements DomainObject {
 		ClassSearcher.addChangeListener(contentHandlerUpdateListener);
 	}
 
-	private synchronized static void getContentHandlers() {
+	private static synchronized void getContentHandlers() {
 		contentHandlerClassMap = new HashMap<>();
 		contentHandlerTypeMap = new HashMap<>();
 

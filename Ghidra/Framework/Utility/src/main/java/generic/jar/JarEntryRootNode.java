@@ -82,11 +82,8 @@ public class JarEntryRootNode extends JarEntryNode {
 		@Override
 		public boolean accepts(JarEntry jarEntry) {
 			String name = jarEntry.getName();
-			if (name.endsWith(".class") || name.endsWith(".png") || name.endsWith(".gif")) {
-				return false;
-			}
-			return true;
-		}
+            return !name.endsWith(".class") && !name.endsWith(".png") && !name.endsWith(".gif");
+        }
 
 	}
 }

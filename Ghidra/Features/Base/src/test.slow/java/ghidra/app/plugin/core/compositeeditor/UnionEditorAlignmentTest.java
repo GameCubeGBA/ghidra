@@ -112,16 +112,11 @@ public class UnionEditorAlignmentTest extends AbstractUnionEditorTest {
 		// Check enablement.
 		CompositeEditorTableAction[] pActions = provider.getActions();
 		for (CompositeEditorTableAction pAction : pActions) {
-			if ((pAction instanceof FavoritesAction) ||
-				(pAction instanceof CycleGroupAction) ||
-				(pAction instanceof EditFieldAction) ||
-				(pAction instanceof PointerAction) ||
-				(pAction instanceof HexNumbersAction) || (pAction instanceof ApplyAction)) {
-				checkEnablement(pAction, true);
-			}
-			else {
-				checkEnablement(pAction, false);
-			}
+            checkEnablement(pAction, (pAction instanceof FavoritesAction) ||
+                    (pAction instanceof CycleGroupAction) ||
+                    (pAction instanceof EditFieldAction) ||
+                    (pAction instanceof PointerAction) ||
+                    (pAction instanceof HexNumbersAction) || (pAction instanceof ApplyAction));
 		}
 
 		assertEquals(true, unionModel.viewComposite.isDefaultAligned());

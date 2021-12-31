@@ -33,27 +33,27 @@ public class BrowserCodeUnitFormatOptions extends CodeUnitFormatOptions
 	/**
 	 * Option for whether to show explicit register variable mark-ups in the operand
 	 */
-	private final static String REGISTER_VARIABLE_MARKUP_OPTION =
+    private static final String REGISTER_VARIABLE_MARKUP_OPTION =
 		GhidraOptions.OPERAND_GROUP_TITLE + Options.DELIMITER +
 			"Markup Register Variable References";
 
 	/**
 	 * Option for whether to show stack variable mark-ups in the operand
 	 */
-	private final static String STACK_VARIABLE_MARKUP_OPTION =
+    private static final String STACK_VARIABLE_MARKUP_OPTION =
 		GhidraOptions.OPERAND_GROUP_TITLE + Options.DELIMITER + "Markup Stack Variable References";
 
 	/**
 	 * Option for whether to include implied stack variable mark-ups in the operand
 	 */
-	private final static String INFERRED_VARIABLE_MARKUP_OPTION =
+    private static final String INFERRED_VARIABLE_MARKUP_OPTION =
 		GhidraOptions.OPERAND_GROUP_TITLE + Options.DELIMITER +
 			"Markup Inferred Variable References";
 
 	/**
 	 * Option for whether to show extended reference mark-ups in the operand.
 	 */
-	private final static String ALWAYS_SHOW_PRIMARY_REFERENCE_MARKUP_OPTION =
+    private static final String ALWAYS_SHOW_PRIMARY_REFERENCE_MARKUP_OPTION =
 		GhidraOptions.OPERAND_GROUP_TITLE + Options.DELIMITER + "Always Show Primary Reference";
 
 	/**
@@ -61,20 +61,20 @@ public class BrowserCodeUnitFormatOptions extends CodeUnitFormatOptions
 	 * to show pointer's referenced symbol instead of symbol at pointer.  When applied the 
 	 * resulting label will be preceded by -&gt;.
 	 */
-	private final static String FOLLOW_POINTER_REFERENCE_MARKUP_OPTION =
+    private static final String FOLLOW_POINTER_REFERENCE_MARKUP_OPTION =
 		GhidraOptions.OPERAND_GROUP_TITLE + Options.DELIMITER +
 			"Follow Read or Indirect Pointer References";
 
 	/**
 	 * Option for whether to show scalar reference adjustments in the operand.
 	 */
-	private final static String SCALAR_ADJUSTMENT_OPTION = GhidraOptions.OPERAND_GROUP_TITLE +
+    private static final String SCALAR_ADJUSTMENT_OPTION = GhidraOptions.OPERAND_GROUP_TITLE +
 		Options.DELIMITER + "Include Scalar Reference Adjustment";
 
 	/**
 	 * Option which controls the display of name-space prefixes
 	 */
-	private final static String NAMESPACE_OPTIONS =
+    private static final String NAMESPACE_OPTIONS =
 		GhidraOptions.OPERAND_GROUP_TITLE + Options.DELIMITER + "Display Namespace";
 	private static final String NAMESPACE_OPTIONS_DESCRIPTIONS =
 		"Adjusts the Operands Field namespace display";
@@ -82,10 +82,10 @@ public class BrowserCodeUnitFormatOptions extends CodeUnitFormatOptions
 	/**
 	 * Option which controls the display of data mutability in the mnemonic representation
 	 */
-	private final static String SHOW_MUTABILITY_OPTION =
+    private static final String SHOW_MUTABILITY_OPTION =
 		GhidraOptions.MNEMONIC_GROUP_TITLE + Options.DELIMITER + "Show Data Mutability";
 
-	private final static String SHOW_OFFCUT_INFO_OPTION =
+	private static final String SHOW_OFFCUT_INFO_OPTION =
 		GhidraOptions.OPERAND_GROUP_TITLE + Options.DELIMITER + "Show Offcut Information";
 
 	private WeakSet<ChangeListener> listeners = WeakDataStructureFactory.createCopyOnReadWeakSet();
@@ -186,7 +186,7 @@ public class BrowserCodeUnitFormatOptions extends CodeUnitFormatOptions
 			}
 			if (namespaceOption.isUseLocalPrefixOverride()) {
 				localPrefixOverride = namespaceOption.getLocalPrefixText().trim();
-				if (localPrefixOverride.length() == 0) {
+				if (localPrefixOverride.isEmpty()) {
 					localPrefixOverride = null;
 				}
 			}

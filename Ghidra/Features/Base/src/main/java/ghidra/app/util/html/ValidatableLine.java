@@ -27,17 +27,17 @@ import java.awt.Color;
  */
 public interface ValidatableLine {
 
-	public static final Color INVALID_COLOR = Color.RED;
+	Color INVALID_COLOR = Color.RED;
 
-	public void updateColor(ValidatableLine otherLine, Color invalidColor);
+	void updateColor(ValidatableLine otherLine, Color invalidColor);
 
-	public boolean isDiffColored();
+	boolean isDiffColored();
 
-	public boolean matches(ValidatableLine otherLine);
+	boolean matches(ValidatableLine otherLine);
 
-	public ValidatableLine copy();
+	ValidatableLine copy();
 
-	public String getText();
+	String getText();
 
 	/**
 	 * Sets the other line that this line is validated against.  The other line may be a full, 
@@ -45,7 +45,7 @@ public interface ValidatableLine {
 	 * 
 	 * @param line the line against which this line is validated
 	 */
-	public void setValidationLine(ValidatableLine line);
+    void setValidationLine(ValidatableLine line);
 
 	/**
 	 * True means that this line has been matched against another line, <b>regardless of whether 
@@ -53,5 +53,5 @@ public interface ValidatableLine {
 	 * 
 	 * @return true if this line has been matched against another line
 	 */
-	public boolean isValidated();
+    boolean isValidated();
 }

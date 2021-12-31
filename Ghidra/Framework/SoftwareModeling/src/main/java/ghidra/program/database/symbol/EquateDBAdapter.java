@@ -37,14 +37,14 @@ import ghidra.util.task.TaskMonitor;
  */
 abstract class EquateDBAdapter {
 
-	final static String EQUATES_TABLE_NAME = "Equates";
+	static final String EQUATES_TABLE_NAME = "Equates";
 
 	static final Schema EQUATES_SCHEMA =
 		new Schema(0, "Key", new Field[] { StringField.INSTANCE, LongField.INSTANCE },
 			new String[] { "Equate Name", "Equate Value" });
 
-	final static int NAME_COL = 0;
-	final static int VALUE_COL = 1;
+	static final int NAME_COL = 0;
+	static final int VALUE_COL = 1;
 
 	static EquateDBAdapter getAdapter(DBHandle dbHandle, int openMode, TaskMonitor monitor)
 			throws VersionException, IOException {

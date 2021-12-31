@@ -32,7 +32,7 @@ import ghidra.util.LockHold;
 
 public interface DBTraceDataAdapter extends DBTraceCodeUnitAdapter, DataAdapterMinimal,
 		DataAdapterFromDataType, DataAdapterFromSettings, TraceData {
-	static String[] EMPTY_STRING_ARRAY = new String[] {};
+	String[] EMPTY_STRING_ARRAY = new String[] {};
 
 	@Override
 	DBTraceDataAdapter getRoot();

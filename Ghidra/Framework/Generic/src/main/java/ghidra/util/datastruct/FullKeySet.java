@@ -48,10 +48,7 @@ public class FullKeySet implements ShortKeySet, Serializable {
 	 */
     @Override
 	public boolean containsKey(short key) {
-        if ((key >= 0) &&(key < numKeys)) {
-            return true;
-        }
-        return false;
+        return (key >= 0) && (key < numKeys);
     }
 
 	/**

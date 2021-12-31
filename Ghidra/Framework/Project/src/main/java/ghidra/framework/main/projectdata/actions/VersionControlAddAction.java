@@ -105,21 +105,20 @@ public class VersionControlAddAction extends VersionControlAction {
 				changedList.add(domainFile);
 			}
 		}
-		if (changedList.size() > 0) {
+		if (!changedList.isEmpty()) {
 			ChangedFilesDialog dialog = new ChangedFilesDialog(tool, changedList);
 			dialog.setCancelToolTipText("Cancel Add to Version Control");
 			if (!dialog.showDialog()) { // blocks until the user hits Save or Cancel
 				tool.setStatusInfo("Add to version control canceled");
 				return;
 			}
-			for (int i = 0; i < changedList.size(); i++) {
-				DomainFile df = changedList.get(i);
+			for (DomainFile df : changedList) {
 				if (df.isChanged()) {
 					list.remove(df);
 				}
 			}
 		}
-		if (list.size() > 0) {
+		if (!list.isEmpty()) {
 			AddToVersionControlTask task = new AddToVersionControlTask(list, tool);
 			tool.execute(task);
 		}

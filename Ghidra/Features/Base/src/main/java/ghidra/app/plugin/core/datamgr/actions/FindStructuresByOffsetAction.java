@@ -143,11 +143,8 @@ public class FindStructuresByOffsetAction extends DockingAction {
 
 			@Override
 			public boolean hasNext() {
-				if (index >= length) {
-					return false;
-				}
-				return true;
-			}
+                return index < length;
+            }
 
 			@Override
 			public Integer next() {

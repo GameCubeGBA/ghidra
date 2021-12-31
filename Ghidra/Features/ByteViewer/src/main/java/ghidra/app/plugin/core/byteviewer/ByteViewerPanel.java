@@ -87,8 +87,7 @@ public class ByteViewerPanel extends JPanel
 	 * Constructor
 	 */
 	protected ByteViewerPanel(ByteViewerComponentProvider provider) {
-		super();
-		this.provider = provider;
+        this.provider = provider;
 		bytesPerLine = ByteViewerComponentProvider.DEFAULT_BYTES_PER_LINE;
 		viewList = new ArrayList<>();
 		indexMap = new IndexMap();
@@ -110,9 +109,8 @@ public class ByteViewerPanel extends JPanel
 			height += dim.height;
 		}
 		boolean addHeight = true;
-		for (int i = 0; i < viewList.size(); i++) {
+		for (ByteViewerComponent c : viewList) {
 
-			ByteViewerComponent c = viewList.get(i);
 			Dimension d = c.getPreferredSize();
 			width += d.width;
 			width += 2; // for separator
@@ -184,40 +182,35 @@ public class ByteViewerPanel extends JPanel
 	 */
 	void setCurrentCursorColor(Color c) {
 		currentCursorColor = c;
-		for (int i = 0; i < viewList.size(); i++) {
-			ByteViewerComponent comp = viewList.get(i);
+		for (ByteViewerComponent comp : viewList) {
 			comp.setCurrentCursorColor(c);
 		}
 	}
 
 	void setCurrentCursorLineColor(Color c) {
 		currentCursorLineColor = c;
-		for (int i = 0; i < viewList.size(); i++) {
-			ByteViewerComponent comp = viewList.get(i);
+		for (ByteViewerComponent comp : viewList) {
 			comp.setCurrentCursorLineColor(c);
 		}
 	}
 
 	void setHighlightButton(int highlightButton) {
 		this.highlightButton = highlightButton;
-		for (int i = 0; i < viewList.size(); i++) {
-			ByteViewerComponent comp = viewList.get(i);
+		for (ByteViewerComponent comp : viewList) {
 			comp.setHighlightButton(highlightButton);
 		}
 	}
 
 	void setMouseButtonHighlightColor(Color color) {
 		this.highlightColor = color;
-		for (int i = 0; i < viewList.size(); i++) {
-			ByteViewerComponent comp = viewList.get(i);
+		for (ByteViewerComponent comp : viewList) {
 			comp.setMouseButtonHighlightColor(color);
 		}
 	}
 
 	void setCursorColor(Color c) {
 		cursorColor = c;
-		for (int i = 0; i < viewList.size(); i++) {
-			ByteViewerComponent comp = viewList.get(i);
+		for (ByteViewerComponent comp : viewList) {
 			comp.setNonFocusCursorColor(c);
 		}
 	}
@@ -227,8 +220,7 @@ public class ByteViewerPanel extends JPanel
 	 */
 	void setSeparatorColor(Color c) {
 		indexFactory.setMissingValueColor(c);
-		for (int i = 0; i < viewList.size(); i++) {
-			ByteViewerComponent comp = viewList.get(i);
+		for (ByteViewerComponent comp : viewList) {
 			comp.setSeparatorColor(c);
 		}
 	}
@@ -237,8 +229,7 @@ public class ByteViewerPanel extends JPanel
 	 * Set the color of the cursor when the byte viewer is not in focus.
 	 */
 	void setNonFocusCursorColor(Color c) {
-		for (int i = 0; i < viewList.size(); i++) {
-			ByteViewerComponent comp = viewList.get(i);
+		for (ByteViewerComponent comp : viewList) {
 			comp.setNonFocusCursorColor(c);
 		}
 	}
@@ -277,13 +268,11 @@ public class ByteViewerPanel extends JPanel
 		// Do the following loop twice - once with update off and then with update on.
 		// need to do this because all the byte view components must have their models 
 		// updated before any one of them tells their dependents about the change.
-		for (int i = 0; i < viewList.size(); i++) {
-			ByteViewerComponent c = viewList.get(i);
+		for (ByteViewerComponent c : viewList) {
 			c.enableIndexUpdate(false);
 			c.setIndexMap(indexMap);
 		}
-		for (int i = 0; i < viewList.size(); i++) {
-			ByteViewerComponent c = viewList.get(i);
+		for (ByteViewerComponent c : viewList) {
 			c.enableIndexUpdate(true);
 			c.setIndexMap(indexMap);
 		}
@@ -298,8 +287,7 @@ public class ByteViewerPanel extends JPanel
 	 * Set the selection for all the views.
 	 */
 	void setViewerSelection(ByteBlockSelection selection) {
-		for (int i = 0; i < viewList.size(); i++) {
-			ByteViewerComponent c = viewList.get(i);
+		for (ByteViewerComponent c : viewList) {
 			c.setViewerSelection(selection);
 		}
 	}
@@ -320,8 +308,7 @@ public class ByteViewerPanel extends JPanel
 	 * Set the highlight for all the views.
 	 */
 	void setViewerHighlight(ByteBlockSelection highlight) {
-		for (int i = 0; i < viewList.size(); i++) {
-			ByteViewerComponent c = viewList.get(i);
+		for (ByteViewerComponent c : viewList) {
 			c.setViewerHighlight(highlight);
 		}
 	}
@@ -353,8 +340,7 @@ public class ByteViewerPanel extends JPanel
 	void setCursorLocation(ByteBlock block, BigInteger index, int column) {
 
 		int modelIndex = -1;
-		for (int i = 0; i < viewList.size(); i++) {
-			ByteViewerComponent c = viewList.get(i);
+		for (ByteViewerComponent c : viewList) {
 			modelIndex = c.setViewerCursorLocation(block, index, column);
 		}
 		if (modelIndex >= 0) {
@@ -406,7 +392,7 @@ public class ByteViewerPanel extends JPanel
 	ByteViewerComponent addView(String viewName, DataFormatModel model, boolean editMode,
 			boolean updateViewPosition) {
 
-		if (viewList.size() != 0) {
+		if (!viewList.isEmpty()) {
 			addingView = true;
 		}
 		final ViewerPosition vp = getViewerPosition();
@@ -476,7 +462,7 @@ public class ByteViewerPanel extends JPanel
 			currentView = null;
 		}
 
-		if (viewList.size() > 0) {
+		if (!viewList.isEmpty()) {
 			currentView = viewList.get(0);
 		}
 		comp.dispose();
@@ -499,8 +485,7 @@ public class ByteViewerPanel extends JPanel
 	 * Set the cursor color on the current view to show that it is in edit mode.
 	 */
 	void setEditMode(boolean editMode) {
-		for (int i = 0; i < viewList.size(); i++) {
-			ByteViewerComponent c = viewList.get(i);
+		for (ByteViewerComponent c : viewList) {
 			c.setEditMode(editMode);
 		}
 	}
@@ -520,8 +505,7 @@ public class ByteViewerPanel extends JPanel
 	 * Force the current view to be refreshed.
 	 */
 	void refreshView() {
-		for (int i = 0; i < viewList.size(); i++) {
-			ByteViewerComponent c = viewList.get(i);
+		for (ByteViewerComponent c : viewList) {
 			c.refreshView();
 		}
 //        PluginEvent lastSelectionEvent = plugin.getLastSelectionEvent();
@@ -571,14 +555,13 @@ public class ByteViewerPanel extends JPanel
 	 * @throws InvalidInputException if a model cannot support the bytesPerLine value
 	 */
 	void checkBytesPerLine(int numBytesPerLine) throws InvalidInputException {
-		for (int i = 0; i < viewList.size(); i++) {
-			ByteViewerComponent c = viewList.get(i);
+		for (ByteViewerComponent c : viewList) {
 			DataFormatModel model = c.getDataModel();
 			int groupSize = model.getGroupSize();
 			if (groupSize > 0) {
 				if (numBytesPerLine % groupSize != 0) {
 					throw new InvalidInputException(
-						"Bytes Per Line not divisible by Group Size[" + groupSize + "].");
+							"Bytes Per Line not divisible by Group Size[" + groupSize + "].");
 				}
 			}
 		}
@@ -633,8 +616,7 @@ public class ByteViewerPanel extends JPanel
 			}
 			insertionField.setText(locRep);
 		}
-		for (int i = 0; i < viewList.size(); i++) {
-			ByteViewerComponent c = viewList.get(i);
+		for (ByteViewerComponent c : viewList) {
 			if (source == c) {
 				continue;
 			}
@@ -652,8 +634,7 @@ public class ByteViewerPanel extends JPanel
 	void updateSelection(ByteViewerComponent source, ByteBlockSelection selection) {
 		provider.updateSelection(selection);
 
-		for (int i = 0; i < viewList.size(); i++) {
-			ByteViewerComponent c = viewList.get(i);
+		for (ByteViewerComponent c : viewList) {
 			if (source == c) {
 				continue;
 			}
@@ -721,8 +702,7 @@ public class ByteViewerPanel extends JPanel
 		BigInteger offset = vp.getOffset();
 		ViewerPosition vpos = vp.getViewerPosition();
 
-		for (int i = 0; i < viewList.size(); i++) {
-			ByteViewerComponent c = viewList.get(i);
+		for (ByteViewerComponent c : viewList) {
 			c.returnToView(block, offset, vpos);
 		}
 		indexPanel.setViewerPosition(vpos.getIndex(), vpos.getXOffset(), vpos.getYOffset());
@@ -763,8 +743,7 @@ public class ByteViewerPanel extends JPanel
 	 */
 	void setFontMetrics(FontMetrics fm) {
 		this.fm = fm;
-		for (int i = 0; i < viewList.size(); i++) {
-			ByteViewerComponent c = viewList.get(i);
+		for (ByteViewerComponent c : viewList) {
 			c.setFontMetrics(fm);
 		}
 		indexFactory = new IndexFieldFactory(fm);
@@ -785,8 +764,7 @@ public class ByteViewerPanel extends JPanel
 	 */
 	void setEditColor(Color editColor) {
 		this.editColor = editColor;
-		for (int i = 0; i < viewList.size(); i++) {
-			ByteViewerComponent c = viewList.get(i);
+		for (ByteViewerComponent c : viewList) {
 			c.setEditColor(editColor);
 		}
 	}
@@ -809,7 +787,7 @@ public class ByteViewerPanel extends JPanel
 
 		setLayout(new BorderLayout(10, 0));
 
-		columnHeader = new ByteViewerHeader(this);
+		columnHeader = new ByteViewerHeader();
 
 		fm = getFontMetrics(ByteViewerComponentProvider.DEFAULT_FONT);
 		fontHeight = fm.getHeight();
@@ -828,7 +806,7 @@ public class ByteViewerPanel extends JPanel
 		scrollp = new IndexedScrollPane(compPanel);
 		scrollp.setWheelScrollingEnabled(false);
 
-		columnHeader = new ByteViewerHeader(this);
+		columnHeader = new ByteViewerHeader();
 		columnHeader.addColumnModelListener(this);
 
 		columnHeader.addColumn(ByteViewerComponentProvider.DEFAULT_INDEX_NAME, indexPanel);
@@ -924,8 +902,7 @@ public class ByteViewerPanel extends JPanel
 			block = info.getBlock();
 			offset = info.getOffset();
 		}
-		for (int i = 0; i < viewList.size(); i++) {
-			ByteViewerComponent c = viewList.get(i);
+		for (ByteViewerComponent c : viewList) {
 			c.setIndexMap(indexMap);
 			if (info != null) {
 				c.setViewerCursorLocation(block, offset, info.getColumn());
@@ -938,8 +915,7 @@ public class ByteViewerPanel extends JPanel
 	 * Clear the selection.
 	 */
 	private void clearSelection() {
-		for (int i = 0; i < viewList.size(); i++) {
-			ByteViewerComponent c = viewList.get(i);
+		for (ByteViewerComponent c : viewList) {
 			c.clearViewerSelection();
 		}
 	}
@@ -1067,7 +1043,7 @@ public class ByteViewerPanel extends JPanel
 
 	protected AddressSetView computeVisibleAddresses(List<AnchoredLayout> layouts) {
 		// Kind of gross, but current component will do
-		ByteViewerComponent component = getCurrentComponent();
+		ByteViewerComponent component = currentView;
 		if (component == null || blockSet == null) {
 			return new AddressSet();
 		}

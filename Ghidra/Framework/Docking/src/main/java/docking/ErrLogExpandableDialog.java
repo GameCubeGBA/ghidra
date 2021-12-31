@@ -321,7 +321,7 @@ public class ErrLogExpandableDialog extends AbstractErrDialog {
 
 		boolean doesIndent();
 
-		public static class Util {
+		class Util {
 			public static final String INDENTATION = "    ";
 
 			public static String collectReportText(GTreeNode cur,
@@ -332,9 +332,7 @@ public class ErrLogExpandableDialog extends AbstractErrDialog {
 					String text = nwt.getReportText();
 					if (text != null) {
 						b.append('\n');
-						for (int i = 0; i < indent; i++) {
-							b.append(INDENTATION);
-						}
+                        b.append(INDENTATION.repeat(Math.max(0, indent)));
 						b.append(nwt.getReportText());
 					}
 					if (nwt.doesIndent()) {

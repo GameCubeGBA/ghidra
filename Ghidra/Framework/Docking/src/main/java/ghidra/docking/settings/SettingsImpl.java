@@ -27,7 +27,7 @@ import javax.swing.event.ChangeListener;
  * Basic implementation of the Settings object
  */
 public class SettingsImpl implements Settings, Serializable {
-	private final static long serialVersionUID = 1;
+	private static final long serialVersionUID = 1;
 
 	private Map<String, Object> map;
 	private Settings defaultSettings;

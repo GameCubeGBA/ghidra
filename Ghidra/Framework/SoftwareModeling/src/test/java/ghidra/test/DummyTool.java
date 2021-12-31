@@ -50,7 +50,7 @@ import ghidra.framework.plugintool.util.UndoRedoToolState;
 import ghidra.program.model.listing.Program;
 
 public class DummyTool extends PluginTool {
-	private final static String DEFAULT_NAME = "untitled";
+	private static final String DEFAULT_NAME = "untitled";
 	private String name = DEFAULT_NAME;
 	private String instanceName;
 	private String description;

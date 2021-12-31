@@ -36,7 +36,7 @@ import ghidra.framework.Platform;
  */
 public class AutoscrollAdapter implements Autoscroll {
 
-	private final static int MARGIN = 30;
+	private static final int MARGIN = 30;
 	private JComponent component;
 	private int scrollIncrement;
 

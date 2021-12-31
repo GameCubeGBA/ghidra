@@ -26,7 +26,7 @@ import agent.dbgmodel.jna.dbgmodel.IUnknownEx;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IDynamicKeyProviderConcept extends IUnknownEx {
-	final IID IID_IDYNAMIC_KEY_PROVIDER_CONCEPT = new IID("E7983FA1-80A7-498c-988F-518DDC5D4025");
+	IID IID_IDYNAMIC_KEY_PROVIDER_CONCEPT = new IID("E7983FA1-80A7-498c-988F-518DDC5D4025");
 
 	enum VTIndices implements VTableIndex {
 		GET_KEY, //

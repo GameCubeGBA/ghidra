@@ -74,8 +74,7 @@ public class MultipleLabelsRenderer extends AbstractGhidraColumnRenderer<Symbol[
 	 * @param type indicates whether this is a source or destination renderer
 	 */
 	public MultipleLabelsRenderer(MultipleLabelsRendererType type) {
-		super();
-		this.type = type;
+        this.type = type;
 	}
 
 	@Override

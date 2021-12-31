@@ -76,8 +76,7 @@ public abstract class AbstractStackEditorTest extends AbstractEditorTest {
 	private final boolean positiveStack;
 
 	public AbstractStackEditorTest(boolean positiveStack) {
-		super();
-		this.positiveStack = positiveStack;
+        this.positiveStack = positiveStack;
 		compilerSpecID = positiveStack ? "posStack" : "default";
 		languageName = languageName.replace("default", compilerSpecID);
 	}

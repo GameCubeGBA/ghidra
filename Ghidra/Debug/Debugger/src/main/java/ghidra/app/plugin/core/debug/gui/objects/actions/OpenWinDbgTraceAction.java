@@ -66,24 +66,21 @@ public class OpenWinDbgTraceAction extends ImportExportAsAction {
 		if (f == null) {
 			return;
 		}
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				String[] args = new String[2];
-				args[0] = ".opendump";
-				args[1] = f.getAbsolutePath();
-				AtomicReference<TargetLauncher> launcher = new AtomicReference<>();
-				AsyncUtils.sequence(TypeSpec.VOID).then(seq -> {
-					TargetObject obj = provider.getObjectFromContext(context);
-					DebugModelConventions.findSuitable(TargetLauncher.class, obj).handle(seq::next);
-				}, launcher).then(seq -> {
-					launcher.get()
-							.launch(Map.of(TargetCmdLineLauncher.CMDLINE_ARGS_NAME, args))
-							.handle(seq::next);
-					seq.exit();
-				}).finish();
-			}
-		});
+		SwingUtilities.invokeLater(() -> {
+            String[] args = new String[2];
+            args[0] = ".opendump";
+            args[1] = f.getAbsolutePath();
+            AtomicReference<TargetLauncher> launcher = new AtomicReference<>();
+            AsyncUtils.sequence(TypeSpec.VOID).then(seq -> {
+                TargetObject obj = provider.getObjectFromContext(context);
+                DebugModelConventions.suitable(TargetLauncher.class, obj).handle(seq::next);
+            }, launcher).then(seq -> {
+                launcher.get()
+                        .launch(Map.of(TargetCmdLineLauncher.CMDLINE_ARGS_NAME, args))
+                        .handle(seq::next);
+                seq.exit();
+            }).finish();
+        });
 	}
 
 }

@@ -53,11 +53,7 @@ public class IntelHexRecordWriter {
         }
 
         if (isSegmented == null) {
-            if (address.getAddressSpace() instanceof SegmentedAddressSpace) {
-                isSegmented = true;
-            } else {
-                isSegmented = false;
-            }
+            isSegmented = address.getAddressSpace() instanceof SegmentedAddressSpace;
         }
 
         long offset;
@@ -131,7 +127,7 @@ public class IntelHexRecordWriter {
 		// Before finalizing things, write out any remaining bytes that haven't yet been written, if
 		// the user has specified to do so via the drop extra bytes option (false = 
     	// write out everything).
-		if (bytes.size() > 0 && !dropExtraBytes) {
+		if (!bytes.isEmpty() && !dropExtraBytes) {
 			emitData();
 		}
 

@@ -22,6 +22,6 @@ import ghidra.dbg.target.TargetSymbolNamespace;
 public interface LldbModelTargetSymbolContainer
 		extends LldbModelTargetObject, TargetSymbolNamespace {
 
-	public LldbModelTargetSymbolImpl getTargetSymbol(SBSymbol symbol);
+	LldbModelTargetSymbolImpl getTargetSymbol(SBSymbol symbol);
 
 }

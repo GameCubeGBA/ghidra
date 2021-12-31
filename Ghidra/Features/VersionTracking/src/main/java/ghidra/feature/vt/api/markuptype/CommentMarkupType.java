@@ -93,7 +93,7 @@ public abstract class CommentMarkupType extends VTMarkupType {
 
 		// Ignore any empty comments.
 		String sourceComment = sourceListing.getComment(getCodeUnitCommentType(), commentAddress);
-		boolean hasSourceComment = (sourceComment != null) && (sourceComment.length() > 0);
+		boolean hasSourceComment = (sourceComment != null) && (!sourceComment.isEmpty());
 		if (!hasSourceComment) {
 			return; // nothing to apply
 		}

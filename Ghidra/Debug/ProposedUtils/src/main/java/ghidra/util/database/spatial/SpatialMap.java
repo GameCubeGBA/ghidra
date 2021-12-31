@@ -21,7 +21,7 @@ import java.util.Collections;
 import java.util.Map.Entry;
 
 public interface SpatialMap<DS extends BoundedShape<?>, T, Q> {
-	static class EmptySpatialMap<DS extends BoundedShape<?>, T, Q> implements SpatialMap<DS, T, Q> {
+	class EmptySpatialMap<DS extends BoundedShape<?>, T, Q> implements SpatialMap<DS, T, Q> {
 		@Override
 		public T put(DS shape, T value) {
 			throw new IllegalArgumentException();

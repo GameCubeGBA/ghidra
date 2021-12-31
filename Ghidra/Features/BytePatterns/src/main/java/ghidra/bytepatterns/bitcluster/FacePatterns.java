@@ -87,7 +87,7 @@ public class FacePatterns {
 	private void cluster(TreeSet<Face> edgesConsidered) {
 		HashMap<String, Face> added = new HashMap<String, Face>();		//For keeping track of clusters clustered.
 		//Among the edges considered, choose the best one and combine clusters. Or eliminate useless edges.
-		while (edgesConsidered.size() > 0) {
+		while (!edgesConsidered.isEmpty()) {
 			Face bestEdge = edgesConsidered.last();
 			//Check to make sure this is a good edge to add (not already included, etc.).
 			if (bestEdge.meetsCriteria(this.patterns, added)) {
@@ -107,7 +107,7 @@ public class FacePatterns {
 	}
 	
 	//Recursively creates the edge list under a node in a DAG.
-	static private HashSet<String> edgize(Face node) {
+    private static HashSet<String> edgize(Face node) {
 		HashSet<String> result = new HashSet<String>();
 		for (Face kid : node.getChildren()) {
 			result.add(node.strID + "," + kid.strID);			//"vertex1,vertex2" a directed edge
@@ -131,12 +131,12 @@ public class FacePatterns {
 	//Sends a list of faces to a file (as a list of ditted bit sequences).
 	public void outputTopPatterns(Writer writer) throws IOException {
 		for (Face f : patterns) {
-			writer.write(f.strID + '\t' + f.getWeight() + '\t' + ((Double) f.ratioFilled()).toString() + "\n");
+			writer.write(f.strID + '\t' + f.getWeight() + '\t' + ((Double) f.ratioFilled()) + "\n");
 		}
 	}
 
 	//Samples a list of byte sequences.
-	static private ArrayList<byte[]> sample(ArrayList<byte[]> li, int numOfSamples) {
+    private static ArrayList<byte[]> sample(ArrayList<byte[]> li, int numOfSamples) {
 		ArrayList<byte[]> result = new ArrayList<byte[]>();
 		Random rand = new Random();
 		for (int s = 0; s < numOfSamples; s++) {

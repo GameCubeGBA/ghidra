@@ -24,7 +24,7 @@ import ghidra.framework.plugintool.util.OptionsService;
 import ghidra.util.HelpLocation;
 
 public class EditPropertiesAction extends DockingAction {
-	private final static String OPTIONS_TITLE = "Decompiler";
+	private static final String OPTIONS_TITLE = "Decompiler";
 
 	private final PluginTool tool;
 

@@ -46,9 +46,7 @@ public class VersionExceptionHandler {
 		}
 		if (domainFile.isCheckedOut()) {
 			userChoice = showWarningDialog(parent, filename, contentType, actionName);
-			if (userChoice != OptionDialog.OPTION_ONE) {
-				return false;
-			}
+            return userChoice == OptionDialog.OPTION_ONE;
 		}
 
 		return true;

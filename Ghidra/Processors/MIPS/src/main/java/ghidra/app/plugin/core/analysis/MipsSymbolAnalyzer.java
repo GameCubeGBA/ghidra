@@ -33,8 +33,8 @@ import ghidra.util.task.TaskMonitor;
 
 public class MipsSymbolAnalyzer extends AbstractAnalyzer {
 
-	private final static String NAME = "MIPS Symbol";
-	private final static String DESCRIPTION =
+	private static final String NAME = "MIPS Symbol";
+	private static final String DESCRIPTION =
 		"Analyze bytes for Mips16 symbols and shift -1 as necessary.";
 
 	public MipsSymbolAnalyzer() {

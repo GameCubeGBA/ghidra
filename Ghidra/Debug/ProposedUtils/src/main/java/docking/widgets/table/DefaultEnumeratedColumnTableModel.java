@@ -24,26 +24,26 @@ import docking.widgets.table.DefaultEnumeratedColumnTableModel.EnumeratedTableCo
 public class DefaultEnumeratedColumnTableModel<C extends Enum<C> & EnumeratedTableColumn<C, ? super R>, R>
 		extends AbstractSortedTableModel<R> implements EnumeratedColumnTableModel<R> {
 	// NOTE: If I need to track indices, addSortListener
-	public static interface EnumeratedTableColumn<C extends Enum<C>, R> {
-		public Class<?> getValueClass();
+	public interface EnumeratedTableColumn<C extends Enum<C>, R> {
+		Class<?> getValueClass();
 
-		public Object getValueOf(R row);
+		Object getValueOf(R row);
 
-		public String getHeader();
+		String getHeader();
 
-		default public void setValueOf(R row, Object value) {
+		default void setValueOf(R row, Object value) {
 			throw new UnsupportedOperationException("Cell is not editable");
 		}
 
-		default public boolean isEditable(R row) {
+		default boolean isEditable(R row) {
 			return false;
 		}
 
-		default public boolean isSortable() {
+		default boolean isSortable() {
 			return true;
 		}
 
-		default public SortDirection defaultSortDirection() {
+		default SortDirection defaultSortDirection() {
 			return SortDirection.ASCENDING;
 		}
 	}

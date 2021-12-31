@@ -29,8 +29,7 @@ import ghidra.program.model.listing.*;
 public class CommentWindowPluginScreenShots extends GhidraScreenShotGenerator {
 
 	public CommentWindowPluginScreenShots() {
-		super();
-	}
+    }
 
 	@Test
 	public void testCommentsWindow() throws Exception {

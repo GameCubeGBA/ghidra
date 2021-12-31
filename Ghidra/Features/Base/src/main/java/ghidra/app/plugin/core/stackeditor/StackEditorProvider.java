@@ -265,9 +265,7 @@ public class StackEditorProvider extends CompositeEditorProvider implements Doma
 		}
 		else if (affectedValue instanceof Function) {
 			Address changedEntry = ((Function) affectedValue).getEntryPoint();
-			if (changedEntry.equals(function.getEntryPoint())) {
-				return true;
-			}
+            return changedEntry.equals(function.getEntryPoint());
 		}
 
 		return false;

@@ -332,7 +332,7 @@ public class CodeBrowserClipboardProvider extends ByteCopier
 					}
 
 					//Add the layout for the present address
-					Layout layout = getListingModel().getLayout(curAddress, false);
+					Layout layout = model.getLayout(curAddress, false);
 					if (layout != null) {
 						LayoutBackgroundColorManager layoutColorMap =
 							new EmptyLayoutBackgroundColorManager(PAINT_CONTEXT.getBackground());
@@ -340,7 +340,7 @@ public class CodeBrowserClipboardProvider extends ByteCopier
 						g.flush();
 					}
 					// may be null
-					curAddress = getListingModel().getAddressAfter(curAddress);
+					curAddress = model.getAddressAfter(curAddress);
 				}
 			}
 
@@ -603,12 +603,8 @@ public class CodeBrowserClipboardProvider extends ByteCopier
 		else if (currentLocation instanceof MnemonicFieldLocation) {
 			return true;
 		}
-		else if (currentLocation instanceof VariableLocation) {
-			return true;
-		}
-
-		return false;
-	}
+		else return currentLocation instanceof VariableLocation;
+    }
 
 	@Override
 	public boolean enablePaste() {

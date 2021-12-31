@@ -372,7 +372,7 @@ public class ToolTipUtils {
 				psb.append("</td></tr>");
 			}
 		}
-		buffy.append(psb.toString());
+		buffy.append(psb);
 		buffy.append("</table>");
 	}
 

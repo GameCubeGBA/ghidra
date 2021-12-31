@@ -18,6 +18,6 @@ package ghidra.app.decompiler.component;
 
 public interface DecompileResultsListener {
 
-	public void setDecompileData(DecompileData decompileData);
+	void setDecompileData(DecompileData decompileData);
 
 }

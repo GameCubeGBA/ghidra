@@ -77,20 +77,20 @@ class ExternalLibXmlMgr {
 		monitor.setMessage("Writing EXTERNAL LIBRARIES ...");
 		writer.startElement("EXT_LIBRARY_TABLE");
 		String[] externalNames = extManager.getExternalLibraryNames();
-		for (int i = 0; i < externalNames.length; ++i) {
-			if (monitor.isCancelled()) {
-				throw new CancelledException();
-			}
-			String path = extManager.getExternalLibraryPath(externalNames[i]);
-			if (path == null) {
-				path = "";
-			}
-			XmlAttributes attrs = new XmlAttributes();
-			attrs.addAttribute("NAME", externalNames[i]);
-			attrs.addAttribute("PATH", path);
-			writer.startElement("EXT_LIBRARY", attrs);
-			writer.endElement("EXT_LIBRARY");
-		}
+        for (String externalName : externalNames) {
+            if (monitor.isCancelled()) {
+                throw new CancelledException();
+            }
+            String path = extManager.getExternalLibraryPath(externalName);
+            if (path == null) {
+                path = "";
+            }
+            XmlAttributes attrs = new XmlAttributes();
+            attrs.addAttribute("NAME", externalName);
+            attrs.addAttribute("PATH", path);
+            writer.startElement("EXT_LIBRARY", attrs);
+            writer.endElement("EXT_LIBRARY");
+        }
 		writer.endElement("EXT_LIBRARY_TABLE");
 	}
 

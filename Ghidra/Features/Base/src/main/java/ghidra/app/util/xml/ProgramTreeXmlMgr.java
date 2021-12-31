@@ -104,23 +104,23 @@ class ProgramTreeXmlMgr {
 		writer.startElement("PROGRAM_TREES");
 		String[] treeNames = listing.getTreeNames();
 
-		for (int i = 0; i < treeNames.length; i++) {
-			if (monitor.isCancelled()) {
-				throw new CancelledException();
-			}
-			XmlAttributes attrs = new XmlAttributes();
-			attrs.addAttribute("NAME", treeNames[i]);
-			writer.startElement("TREE", attrs);
+        for (String name : treeNames) {
+            if (monitor.isCancelled()) {
+                throw new CancelledException();
+            }
+            XmlAttributes attrs = new XmlAttributes();
+            attrs.addAttribute("NAME", name);
+            writer.startElement("TREE", attrs);
 
-			ProgramModule root = listing.getRootModule(treeNames[i]);
+            ProgramModule root = listing.getRootModule(name);
 
-			ArrayList<ProgramModule> writtenModules = new ArrayList<ProgramModule>();
-			ArrayList<ProgramFragment> writtenFragments = new ArrayList<ProgramFragment>();
+            ArrayList<ProgramModule> writtenModules = new ArrayList<ProgramModule>();
+            ArrayList<ProgramFragment> writtenFragments = new ArrayList<ProgramFragment>();
 
-			writeModule(writer, addrs, root, writtenModules, writtenFragments);
+            writeModule(writer, addrs, root, writtenModules, writtenFragments);
 
-			writer.endElement("TREE");
-		}
+            writer.endElement("TREE");
+        }
 		writer.endElement("PROGRAM_TREES");
 	}
 
@@ -155,9 +155,9 @@ class ProgramTreeXmlMgr {
 
 			while (!monitor.isCancelled()) {
 				String elementName = element.getName();
-				if (elementName.equals("FRAGMENT") || elementName.equals("MODULE") ||
-					elementName.equals("FOLDER")) {
-					if (elementName.equals("FRAGMENT")) {
+				if ("FRAGMENT".equals(elementName) || "MODULE".equals(elementName) ||
+					"FOLDER".equals(elementName)) {
+					if ("FRAGMENT".equals(elementName)) {
 						if (element.isStart()) {
 							processFragment(element, parser);
 						}
@@ -246,7 +246,7 @@ class ProgramTreeXmlMgr {
 
 		while (!monitor.isCancelled()) {
 			String elementName = element.getName();
-			if (elementName.equals("ADDRESS_RANGE")) {
+			if ("ADDRESS_RANGE".equals(elementName)) {
 				if (element.isStart()) {
 					String startStr = element.getAttribute("START");
 					String endStr = element.getAttribute("END");
@@ -275,23 +275,21 @@ class ProgramTreeXmlMgr {
 	 */
 	private void removeEmptyFragments(ProgramModule module) {
 		Group[] groups = module.getChildren();
-		for (int i = 0; i < groups.length; i++) {
-			if (groups[i] instanceof ProgramFragment) {
-				String name = groups[i].getName();
-				if (!fragmentNameList.contains(name)) {
-					try {
-						module.removeChild(name);
-					}
-					catch (NotEmptyException e) {
-						log.appendMsg("Warning: Extra Program Tree fragment '" + name +
-							"' did not exist in imported XML file");
-					}
-				}
-			}
-			else {
-				removeEmptyFragments((ProgramModule) groups[i]);
-			}
-		}
+        for (Group group : groups) {
+            if (group instanceof ProgramFragment) {
+                String name = group.getName();
+                if (!fragmentNameList.contains(name)) {
+                    try {
+                        module.removeChild(name);
+                    } catch (NotEmptyException e) {
+                        log.appendMsg("Warning: Extra Program Tree fragment '" + name +
+                                "' did not exist in imported XML file");
+                    }
+                }
+            } else {
+                removeEmptyFragments((ProgramModule) group);
+            }
+        }
 	}
 
 	private void writeModule(XmlWriter writer, AddressSetView addrs, ProgramModule parent,
@@ -308,14 +306,13 @@ class ProgramTreeXmlMgr {
 		if (!writtenModules.contains(parent)) {
 			writtenModules.add(parent);
 			Group[] kids = parent.getChildren();
-			for (int i = 0; i < kids.length; i++) {
-				if (kids[i] instanceof ProgramModule) {
-					writeModule(writer, addrs, (ProgramModule) kids[i], writtenModules, writtenFragments);
-				}
-				else {
-					writeFragment(writer, addrs, (ProgramFragment) kids[i], writtenFragments);
-				}
-			}
+            for (Group kid : kids) {
+                if (kid instanceof ProgramModule) {
+                    writeModule(writer, addrs, (ProgramModule) kid, writtenModules, writtenFragments);
+                } else {
+                    writeFragment(writer, addrs, (ProgramFragment) kid, writtenFragments);
+                }
+            }
 		}
 		if (writeTag) {
 			writer.endElement("FOLDER");

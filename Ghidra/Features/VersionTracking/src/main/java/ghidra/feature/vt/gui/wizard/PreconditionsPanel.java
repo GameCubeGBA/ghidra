@@ -49,22 +49,14 @@ public class PreconditionsPanel extends AbstractMageJPanel<VTWizardStateKey> imp
 		runButtonPanel.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
 		runButtonPanel.setLayout(new FlowLayout());
 		JButton runTestsButton = new JButton("Run Precondition Checks");
-		runTestsButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				conditionsTestPanel.runTests();
-			}
-		});
+		runTestsButton.addActionListener(e -> conditionsTestPanel.runTests());
 		runButtonPanel.add(runTestsButton);
 
 		JButton skipTestsButton = new JButton("Skip");
-		skipTestsButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				conditionsTestPanel.skipTests();
-				wizardManager.getWizardManager().next();
-			}
-		});
+		skipTestsButton.addActionListener(e -> {
+            conditionsTestPanel.skipTests();
+            wizardManager.getWizardManager().next();
+        });
 		runButtonPanel.add(skipTestsButton);
 
 		add(runButtonPanel, BorderLayout.SOUTH);
@@ -122,13 +114,10 @@ public class PreconditionsPanel extends AbstractMageJPanel<VTWizardStateKey> imp
 			getConditionTests(sourceProgram, destinationProgram, existingResults);
 		Collections.sort(list, new ConditionsComparator());
 		ConditionTestPanel panel = new ConditionTestPanel(list);
-		panel.addListener(new ConditionTestListener() {
-			@Override
-			public void testsCompleted() {
-				state.put(VTWizardStateKey.PRECONDITION_CHECKS_RUN, Boolean.valueOf(testsDone));
-				testsDone();
-			}
-		});
+		panel.addListener(() -> {
+            state.put(VTWizardStateKey.PRECONDITION_CHECKS_RUN, Boolean.valueOf(testsDone));
+            testsDone();
+        });
 		return panel;
 	}
 

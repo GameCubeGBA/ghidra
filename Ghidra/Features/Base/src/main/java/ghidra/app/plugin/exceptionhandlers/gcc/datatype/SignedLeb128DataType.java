@@ -25,7 +25,7 @@ import ghidra.program.model.data.DataTypeManager;
 public class SignedLeb128DataType extends AbstractLeb128DataType {
 
 	/** A statically defined SignedLeb128DataType instance.*/
-	public final static SignedLeb128DataType dataType = new SignedLeb128DataType();
+    public static final SignedLeb128DataType dataType = new SignedLeb128DataType();
 
 	/**
 	 * Creates a signed little endian base 128 integer data type.

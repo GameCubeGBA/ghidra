@@ -36,6 +36,6 @@ public interface ProgramLocationTableColumn<ROW_TYPE, COLUMN_TYPE>
      * @param serviceProvider the plugin tool associated with the table.
      * @return the address associated with the field.
      */
-    public ProgramLocation getProgramLocation(ROW_TYPE rowObject, 
-            Settings settings, Program program, ServiceProvider serviceProvider);
+    ProgramLocation getProgramLocation(ROW_TYPE rowObject,
+                                       Settings settings, Program program, ServiceProvider serviceProvider);
 }

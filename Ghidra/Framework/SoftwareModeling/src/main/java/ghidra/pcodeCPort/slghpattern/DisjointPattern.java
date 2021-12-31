@@ -68,9 +68,7 @@ public abstract class DisjointPattern extends Pattern {
 		a = getBlock(true);
 		b = op2.getBlock(true);
 		if (b != null && !b.alwaysTrue()) { // a must match existing block
-			if ((a == null) || !a.specializes(b)) {
-				return false;
-			}
+            return (a != null) && a.specializes(b);
 		}
 		return true;
 	}
@@ -92,15 +90,11 @@ public abstract class DisjointPattern extends Pattern {
 		b = op2.getBlock(true);
 		if (b != null) { // a must match existing block
 			if (a == null) {
-				if (!b.alwaysTrue())
-					return false;
+                return b.alwaysTrue();
 			}
-			else if (!a.identical(b))
-				return false;
-		} else if ((a != null) && (!a.alwaysTrue()))
-			return false;
-		return true;
-	}
+			else return a.identical(b);
+		} else return (a == null) || (a.alwaysTrue());
+    }
 
 	public static boolean resolveIntersectBlock(PatternBlock bl1, PatternBlock bl2,
 			PatternBlock thisblock) {

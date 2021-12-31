@@ -72,8 +72,8 @@ import resources.ResourceManager;
 //@formatter:on
 public class SymbolTablePlugin extends Plugin implements DomainObjectListener {
 
-	final static Cursor WAIT_CURSOR = new Cursor(Cursor.WAIT_CURSOR);
-	final static Cursor NORM_CURSOR = new Cursor(Cursor.DEFAULT_CURSOR);
+	static final Cursor WAIT_CURSOR = new Cursor(Cursor.WAIT_CURSOR);
+	static final Cursor NORM_CURSOR = new Cursor(Cursor.DEFAULT_CURSOR);
 
 	private DockingAction openRefsAction;
 	private DockingAction deleteAction;

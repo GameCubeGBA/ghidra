@@ -22,12 +22,12 @@ import ghidra.app.util.bin.ByteProvider;
 
 public final class BootImageHeaderFactory {
 
-	public final static BootImageHeader getBootImageHeader(ByteProvider provider,
-			boolean littleEndian) throws IOException {
+	public static final BootImageHeader getBootImageHeader(ByteProvider provider,
+                                                           boolean littleEndian) throws IOException {
 		return getBootImageHeader(new BinaryReader(provider, littleEndian));
 	}
 
-	public final static BootImageHeader getBootImageHeader(BinaryReader reader) throws IOException {
+	public static final BootImageHeader getBootImageHeader(BinaryReader reader) throws IOException {
 
 		if (!BootImageUtil.isBootImage(reader)) {
 			throw new IOException("BootImageHeader magic not found.");

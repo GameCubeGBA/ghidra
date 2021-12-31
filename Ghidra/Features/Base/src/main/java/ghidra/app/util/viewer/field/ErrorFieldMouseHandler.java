@@ -28,7 +28,7 @@ import java.awt.event.MouseEvent;
  */
 public class ErrorFieldMouseHandler implements FieldMouseHandlerExtension {
 
-	private final static Class<?>[] SUPPORTED_CLASSES = new Class[] { ErrorListingField.class };
+	private static final Class<?>[] SUPPORTED_CLASSES = new Class[] { ErrorListingField.class };
 
 	@Override
 	public boolean fieldElementClicked(Object clickedObject, Navigatable sourceNavigatable,

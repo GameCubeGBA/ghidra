@@ -25,12 +25,12 @@ public interface PatternFactory {
 	 * @param nm name of action to find
 	 * @return match action with the given name, null otherwise
 	 */
-	public MatchAction getMatchActionByName(String nm);
+    MatchAction getMatchActionByName(String nm);
 
 	/**
 	 * Get a named post match rule by name
 	 * @param nm name of the post rule
 	 * @return the post rule with the name, null otherwise
 	 */
-	public PostRule getPostRuleByName(String nm);
+    PostRule getPostRuleByName(String nm);
 }

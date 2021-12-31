@@ -34,7 +34,7 @@ public interface ColorizingService {
 	 * @param suggestedColor The initial color to select; may be null
 	 * @return the user chosen color or null if the user cancelled the operation
 	 */
-	public Color getColorFromUser(Color suggestedColor);
+    Color getColorFromUser(Color suggestedColor);
 
 	/**
 	 * Returns the most recently used color.   Returns null if the user has not chosen any colors
@@ -42,7 +42,7 @@ public interface ColorizingService {
 	 * 
 	 * @return the most recently used color; null if not set
 	 */
-	public Color getMostRecentColor();
+    Color getMostRecentColor();
 
 	/**
 	 * Gets the recently used colors.  These are the colors that users have picked in recent 
@@ -51,7 +51,7 @@ public interface ColorizingService {
 	 * 
 	 * @return the recently used colors.
 	 */
-	public List<Color> getRecentColors();
+    List<Color> getRecentColors();
 
 	/**
 	 * Sets the background color for the given address range.  This color data gets saved with
@@ -64,7 +64,7 @@ public interface ColorizingService {
 	 * @see #clearBackgroundColor(Address, Address)
 	 * @see #getBackgroundColor(Address)
 	 */
-	public void setBackgroundColor(Address min, Address max, Color color);
+    void setBackgroundColor(Address min, Address max, Color color);
 
 	/**
 	 * Sets the background color for the given address range for the current program.  
@@ -77,7 +77,7 @@ public interface ColorizingService {
 	 * @see #clearBackgroundColor(AddressSetView)
 	 * @see #getBackgroundColor(Address)
 	 */
-	public void setBackgroundColor(AddressSetView set, Color color);
+    void setBackgroundColor(AddressSetView set, Color color);
 
 	/**
 	 * Returns the color applied at the given address.
@@ -88,13 +88,13 @@ public interface ColorizingService {
 	 * @see #setBackgroundColor(Address, Address, Color)
 	 * @see #clearBackgroundColor(Address, Address)
 	 */
-	public Color getBackgroundColor(Address address);
+    Color getBackgroundColor(Address address);
 
 	/**
 	 * Returns a set of addresses where colors are applied.
 	 * @return a set of addresses where colors are applied.
 	 */
-	public AddressSetView getAllBackgroundColorAddresses();
+    AddressSetView getAllBackgroundColorAddresses();
 
 	/**
 	 * Returns all addresses that have the given color applied.
@@ -102,7 +102,7 @@ public interface ColorizingService {
 	 * @param color The applied color for which to check
 	 * @return all addresses that have the given color applied.
 	 */
-	public AddressSetView getBackgroundColorAddresses(Color color);
+    AddressSetView getBackgroundColorAddresses(Color color);
 
 	/**
 	 * Clears any applied colors over the given address range.
@@ -112,7 +112,7 @@ public interface ColorizingService {
 	 * 
 	 * @see #setBackgroundColor(Address, Address, Color)
 	 */
-	public void clearBackgroundColor(Address min, Address max);
+    void clearBackgroundColor(Address min, Address max);
 
 	/**
 	 * Clears any applied colors over the given address set.
@@ -121,7 +121,7 @@ public interface ColorizingService {
 	 * 
 	 * @see #setBackgroundColor(AddressSetView, Color)
 	 */
-	public void clearBackgroundColor(AddressSetView set);
+    void clearBackgroundColor(AddressSetView set);
 
 	/**
 	 * Clears all background colors set on the current program.
@@ -129,5 +129,5 @@ public interface ColorizingService {
 	 * @see #setBackgroundColor(Address, Address, Color)
 	 * @see #clearBackgroundColor(Address, Address)
 	 */
-	public void clearAllBackgroundColors();
+    void clearAllBackgroundColors();
 }

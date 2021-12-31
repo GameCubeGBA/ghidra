@@ -107,7 +107,7 @@ public class IMG implements Comparable<IMG> {
 		}
 
 		// check file
-		Path otherSourceFile = other.getSourceFile();
+		Path otherSourceFile = other.sourceFile;
 		if (!sourceFile.equals(otherSourceFile)) {
 			return sourceFile.toUri().compareTo(otherSourceFile.toUri());
 		}
@@ -117,8 +117,8 @@ public class IMG implements Comparable<IMG> {
 			return lineNumber - other.lineNumber;
 		}
 
-		Path myHelpPath = getHelpPath();
-		Path otherHelpPath = other.getHelpPath();
+		Path myHelpPath = imgFile;
+		Path otherHelpPath = other.imgFile;
 		if (myHelpPath != null && otherHelpPath != null) {
 			int result = myHelpPath.compareTo(otherHelpPath);
 			if (result != 0) {

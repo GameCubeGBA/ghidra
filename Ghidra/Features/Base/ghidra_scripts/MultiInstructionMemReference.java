@@ -210,11 +210,8 @@ public class MultiInstructionMemReference extends GhidraScript {
 						return true;
 					}
 				}
-				if (addSymbolicRefs(input, context, instr, list)) {
-					return true;
-				}
-				return false;
-			}
+                return addSymbolicRefs(input, context, instr, list);
+            }
 
 
 			/**
@@ -229,17 +226,17 @@ public class MultiInstructionMemReference extends GhidraScript {
 			 */
 			private boolean getRefsForOperand(VarnodeContext context, Instruction instr, List<Object> list, int opIndex) {
 				Object[] opObjects = instr.getOpObjects(opIndex);
-				for (int indexOpObj = 0; indexOpObj < opObjects.length; indexOpObj++) {
-					if (!(opObjects[indexOpObj] instanceof Register)) {
+				for (Object opObject : opObjects) {
+					if (!(opObject instanceof Register)) {
 						continue;
 					}
-					Register reg = (Register) opObjects[indexOpObj];
+					Register reg = (Register) opObject;
 
 					// if operand has a single register and this isn't it
 					if (singleRegister != null && !reg.equals(singleRegister)) {
 						continue;
 					}
-					
+
 					// check that the register is on the correct input/output list
 					if (!list.contains(reg)) {
 						continue;
@@ -253,7 +250,7 @@ public class MultiInstructionMemReference extends GhidraScript {
 						continue;
 					}
 					long offset = uval.longValue();
-					
+
 					AddressSpace space = instr.getMinAddress().getAddressSpace();
 					Address addr = space.getTruncatedAddress(offset, true);
 
@@ -306,7 +303,7 @@ public class MultiInstructionMemReference extends GhidraScript {
 				if (comment.replace('\'',' ').contains(markup.replace('\'',' '))) {
 					return false;
 				}
-				comment = (comment.trim().length()==0 ? markup : comment + "\n" + markup);
+				comment = (comment.trim().isEmpty() ? markup : comment + "\n" + markup);
 				instr.setComment(Instruction.EOL_COMMENT, comment);
 				return false;
 			}

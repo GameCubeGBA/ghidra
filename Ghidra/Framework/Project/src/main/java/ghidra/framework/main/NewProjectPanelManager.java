@@ -71,7 +71,7 @@ class NewProjectPanelManager implements PanelManager {
 	private String statusMessage;
 	private PluginTool tool;
 
-	final static Border EMPTY_BORDER = BorderFactory.createEmptyBorder(80, 120, 0, 120);
+	static final Border EMPTY_BORDER = BorderFactory.createEmptyBorder(80, 120, 0, 120);
 
 	NewProjectPanelManager(FrontEndTool tool) {
 		projectTypePanel = new ProjectTypePanel(this);
@@ -93,14 +93,11 @@ class NewProjectPanelManager implements PanelManager {
 		if (repositoryPanel == null) {
 			return false;
 		}
-		if (repositoryPanel.isValidInformation() &&
-			(projectAccessPanel == null ||
-				projectAccessPanel != null && projectAccessPanel.isValidInformation()) &&
-			selectProjectPanel.isValidInformation()) {
-			return true;
-		}
-		return false;
-	}
+        return repositoryPanel.isValidInformation() &&
+                (projectAccessPanel == null ||
+                        projectAccessPanel != null && projectAccessPanel.isValidInformation()) &&
+                selectProjectPanel.isValidInformation();
+    }
 
 	@Override
 	public boolean hasNextPanel() {

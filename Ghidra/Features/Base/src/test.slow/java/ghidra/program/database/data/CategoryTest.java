@@ -62,8 +62,7 @@ public class CategoryTest extends AbstractGhidraHeadedIntegrationTest {
 	private CategoryTestListener eventRecordingListener;
 
 	public CategoryTest() {
-		super();
-	}
+    }
 
 	/*
 	 * @see TestCase#setUp()
@@ -402,12 +401,7 @@ public class CategoryTest extends AbstractGhidraHeadedIntegrationTest {
 			assertTrue(dts[i].isEquivalent(newdts[i]));
 		}
 		DataType[] d = s.getDataTypes();
-		Arrays.sort(d, new Comparator<DataType>() {
-			@Override
-			public int compare(DataType o1, DataType o2) {
-				return o1.getName().compareTo(o2.getName());
-			}
-		});
+		Arrays.sort(d, (o1, o2) -> o1.getName().compareTo(o2.getName()));
 		assertEquals(dts.length, d.length);
 		assertTrue(newdts[0] == d[0]);
 	}

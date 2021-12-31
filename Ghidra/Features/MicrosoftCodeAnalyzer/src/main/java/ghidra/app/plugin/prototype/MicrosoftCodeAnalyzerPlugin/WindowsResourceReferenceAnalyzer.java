@@ -41,12 +41,12 @@ public class WindowsResourceReferenceAnalyzer extends AbstractAnalyzer {
 
 	boolean scriptWasFound = false;
 
-	private final static String OPTION_NAME_CREATE_BOOKMARKS = "Create Analysis Bookmarks";
+	private static final String OPTION_NAME_CREATE_BOOKMARKS = "Create Analysis Bookmarks";
 
 	private static final String OPTION_DESCRIPTION_CREATE_BOOKMARKS =
 		"Select this check box if you want this analyzer to create analysis bookmarks when items of interest are created/identified by the analyzer.";
 
-	private final static boolean OPTION_DEFAULT_CREATE_BOOKMARKS_ENABLED = true;
+	private static final boolean OPTION_DEFAULT_CREATE_BOOKMARKS_ENABLED = true;
 
 	private boolean createBookmarksEnabled = OPTION_DEFAULT_CREATE_BOOKMARKS_ENABLED;
 
@@ -60,11 +60,8 @@ public class WindowsResourceReferenceAnalyzer extends AbstractAnalyzer {
 	@Override
 	public boolean canAnalyze(Program program) {
 		String format = program.getExecutableFormat();
-		if (format.equals(PeLoader.PE_NAME)) {
-			return true;
-		}
-		return false;
-	}
+        return format.equals(PeLoader.PE_NAME);
+    }
 
 	@Override
 	public boolean added(Program program, AddressSetView set, TaskMonitor monitor, MessageLog log)

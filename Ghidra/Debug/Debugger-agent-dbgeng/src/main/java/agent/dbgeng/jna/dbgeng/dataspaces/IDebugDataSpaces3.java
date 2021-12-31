@@ -20,7 +20,7 @@ import com.sun.jna.platform.win32.Guid.IID;
 import agent.dbgeng.jna.dbgeng.UnknownWithUtils.VTableIndex;
 
 public interface IDebugDataSpaces3 extends IDebugDataSpaces2 {
-	final IID IID_IDEBUG_DATA_SPACES3 = new IID("23f79d6c-8aaf-4f7c-a607-9995f5407e63");
+	IID IID_IDEBUG_DATA_SPACES3 = new IID("23f79d6c-8aaf-4f7c-a607-9995f5407e63");
 
 	enum VTIndices3 implements VTableIndex {
 		READ_IMAGE_NT_HEADERS, //

@@ -48,9 +48,9 @@ public class LookAndFeelPlugin extends Plugin implements FrontEndOnly, OptionsCh
 
 	private String selectedLookAndFeel;
 	private boolean useInvertedColors;
-	public final static String LOOK_AND_FEEL_NAME = "Swing Look And Feel";
-	private final static String USE_INVERTED_COLORS_NAME = "Use Inverted Colors";
-	private final static String OPTIONS_TITLE = ToolConstants.TOOL_OPTIONS;
+	public static final String LOOK_AND_FEEL_NAME = "Swing Look And Feel";
+	private static final String USE_INVERTED_COLORS_NAME = "Use Inverted Colors";
+	private static final String OPTIONS_TITLE = ToolConstants.TOOL_OPTIONS;
 
 	private static boolean issuedLafNotification;
 	private static boolean issuedPreferredDarkThemeLafNotification;

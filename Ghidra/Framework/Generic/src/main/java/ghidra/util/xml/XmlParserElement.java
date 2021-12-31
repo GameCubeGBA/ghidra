@@ -60,21 +60,19 @@ public class XmlParserElement {
 		if (!textEquals) {
 			return false;
 		}
-		Iterator<String> iter = attrsMap.keySet().iterator();
-		while (iter.hasNext()) {
-			String lname = iter.next();
-			Object thisValue = this.attrsMap.get(lname);
-			Object thatValue = that.attrsMap.get(lname);
-			if (thisValue == null && thatValue != null) {
-				return false;
-			}
-			if (thisValue != null && thatValue == null) {
-				return false;
-			}
-			if (thisValue != null && !thisValue.equals(thatValue)) {
-				return false;
-			}
-		}
+        for (String lname : attrsMap.keySet()) {
+            Object thisValue = this.attrsMap.get(lname);
+            Object thatValue = that.attrsMap.get(lname);
+            if (thisValue == null && thatValue != null) {
+                return false;
+            }
+            if (thisValue != null && thatValue == null) {
+                return false;
+            }
+            if (thisValue != null && !thisValue.equals(thatValue)) {
+                return false;
+            }
+        }
 		return true;
 	}
 

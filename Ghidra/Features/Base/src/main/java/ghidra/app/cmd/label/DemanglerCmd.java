@@ -33,8 +33,7 @@ public class DemanglerCmd extends BackgroundCommand {
 	private String mangled;
 	private String result;
 	private DemangledObject demangledObject;
-	private static List<Demangler> demanglers;
-	private DemanglerOptions options;
+    private DemanglerOptions options;
 
 	public DemanglerCmd(Address addr, String mangled) {
 		this(addr, mangled, new DemanglerOptions());
@@ -122,7 +121,7 @@ public class DemanglerCmd extends BackgroundCommand {
 		String message = e.getMessage();
 		if (message == null) {
 			setStatusMsg("Unable to demangle symbol at " + addr.toString() + "; name: " + mangled +
-				".  Message: " + e.toString());
+				".  Message: " + e);
 		}
 		else {
 			setStatusMsg("Unable to demangle symbol at " + addr.toString() + "; name: " + mangled +
@@ -140,10 +139,11 @@ public class DemanglerCmd extends BackgroundCommand {
 		return demangledObject;
 	}
 
-	private static List<Demangler> getDemanglers() {
-		if (demanglers == null) {
-			demanglers = ClassSearcher.getInstances(Demangler.class);
-		}
-		return demanglers;
+    private static final class DemanglersHolder {
+        private static final List<Demangler> demanglers = ClassSearcher.getInstances(Demangler.class);
+    }
+
+    private static List<Demangler> getDemanglers() {
+        return DemanglersHolder.demanglers;
 	}
 }

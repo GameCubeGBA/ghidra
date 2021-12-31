@@ -94,7 +94,7 @@ public class GTreeEventTest extends AbstractDockingTest {
 
 	private void assertEvent(GTreeNode viewB, EventType eventType) {
 
-		assertTrue(events.size() > 0);
+		assertTrue(!events.isEmpty());
 		TreeEvent event = events.get(0);
 		assertEquals(eventType, event.eventType);
 		TreePath path = event.getTreePath();

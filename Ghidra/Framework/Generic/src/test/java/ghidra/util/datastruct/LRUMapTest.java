@@ -37,8 +37,7 @@ public class LRUMapTest extends AbstractGenericTest {
 	private LRUMap<String, String> map;
 
 	public LRUMapTest() {
-		super();
-	}
+    }
 
 	@Before
 	public void setUp() throws Exception {

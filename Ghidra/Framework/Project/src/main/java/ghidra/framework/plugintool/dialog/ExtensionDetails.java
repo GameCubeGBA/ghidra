@@ -89,11 +89,8 @@ public class ExtensionDetails implements Comparable<ExtensionDetails> {
 			return false;
 		}
 		ExtensionDetails other = (ExtensionDetails) obj;
-		if (!Objects.equals(name, other.name)) {
-			return false;
-		}
-		return true;
-	}
+        return Objects.equals(name, other.name);
+    }
 
 	/**
 	 * Returns the location where this extension is installed. If the extension is 

@@ -351,11 +351,11 @@ public class SBProcess {
     return lldbJNI.SBProcess___str__(swigCPtr, this);
   }
 
-  public final static int eBroadcastBitStateChanged = lldbJNI.SBProcess_eBroadcastBitStateChanged_get();
-  public final static int eBroadcastBitInterrupt = lldbJNI.SBProcess_eBroadcastBitInterrupt_get();
-  public final static int eBroadcastBitSTDOUT = lldbJNI.SBProcess_eBroadcastBitSTDOUT_get();
-  public final static int eBroadcastBitSTDERR = lldbJNI.SBProcess_eBroadcastBitSTDERR_get();
-  public final static int eBroadcastBitProfileData = lldbJNI.SBProcess_eBroadcastBitProfileData_get();
-  public final static int eBroadcastBitStructuredData = lldbJNI.SBProcess_eBroadcastBitStructuredData_get();
+  public static final int eBroadcastBitStateChanged = lldbJNI.SBProcess_eBroadcastBitStateChanged_get();
+  public static final int eBroadcastBitInterrupt = lldbJNI.SBProcess_eBroadcastBitInterrupt_get();
+  public static final int eBroadcastBitSTDOUT = lldbJNI.SBProcess_eBroadcastBitSTDOUT_get();
+  public static final int eBroadcastBitSTDERR = lldbJNI.SBProcess_eBroadcastBitSTDERR_get();
+  public static final int eBroadcastBitProfileData = lldbJNI.SBProcess_eBroadcastBitProfileData_get();
+  public static final int eBroadcastBitStructuredData = lldbJNI.SBProcess_eBroadcastBitStructuredData_get();
 
 }

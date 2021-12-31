@@ -51,11 +51,11 @@ public class SeparateDebugHeader implements OffsetValidator {
 	/**
 	 * The magic number for separate debug files.
 	 */
-	public final static int IMAGE_SEPARATE_DEBUG_SIGNATURE = 0x4944; //ID
+    public static final int IMAGE_SEPARATE_DEBUG_SIGNATURE = 0x4944; //ID
 	/**
 	 * The magic number for separate debug files on MAC.
 	 */
-	public final static int IMAGE_SEPARATE_DEBUG_SIGNATURE_MAC = 0x4449; //DI
+    public static final int IMAGE_SEPARATE_DEBUG_SIGNATURE_MAC = 0x4449; //DI
 
 	private short signature;
 	private short flags;
@@ -122,7 +122,7 @@ public class SeparateDebugHeader implements OffsetValidator {
 		List<String> exportedNameslist = new ArrayList<>();
 		while (true) {
 			String str = reader.readAsciiString(tmp);
-			if (str == null || str.length() == 0) {
+			if (str == null || str.isEmpty()) {
 				break;
 			}
 			tmp += str.length() + 1;
@@ -259,14 +259,14 @@ public class SeparateDebugHeader implements OffsetValidator {
 
 	@Override
 	public boolean checkPointer(long ptr) {
-		for (int i = 0; i < sections.length; ++i) {
-			long rawSize = sections[i].getSizeOfRawData() & Conv.INT_MASK;
-			long rawPtr = sections[i].getPointerToRawData() & Conv.INT_MASK;
+        for (SectionHeader section : sections) {
+            long rawSize = section.getSizeOfRawData() & Conv.INT_MASK;
+            long rawPtr = section.getPointerToRawData() & Conv.INT_MASK;
 
-			if (ptr >= rawPtr && ptr <= rawPtr + rawSize) { // <= allows data after the last section, which is OK
-				return true;
-			}
-		}
+            if (ptr >= rawPtr && ptr <= rawPtr + rawSize) { // <= allows data after the last section, which is OK
+                return true;
+            }
+        }
 		return false;
 	}
 

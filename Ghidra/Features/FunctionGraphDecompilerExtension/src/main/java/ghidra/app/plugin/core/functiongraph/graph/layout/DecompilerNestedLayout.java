@@ -949,9 +949,7 @@ public class DecompilerNestedLayout extends AbstractFGLayout {
 		}
 
 		StringBuilder buffy = new StringBuilder();
-		for (int i = 0; i < depth * 2; i++) {
-			buffy.append(' ');
-		}
+        buffy.append(" ".repeat(Math.max(0, depth * 2)));
 
 		buffy.append(' ');
 		return buffy.toString();
@@ -1000,22 +998,22 @@ public class DecompilerNestedLayout extends AbstractFGLayout {
 
 		BlockGraph blockGraph = new BlockGraph();
 		BidiMap<CodeBlock, PcodeBlock> bidiMap = new DualHashBidiMap<>();
-		for (; iterator.hasNext();) {
-			taskMonitor.checkCanceled();
+        while (iterator.hasNext()) {
+            taskMonitor.checkCanceled();
 
-			CodeBlock codeBlock = iterator.next();
-			FGVertex vertex = getVertex(jungGraph, codeBlock.getMinAddress());
-			if (vertex == null) {
-				// this is unusual; can happen if the program is being changed while this is running
-				continue;
-			}
+            CodeBlock codeBlock = iterator.next();
+            FGVertex vertex = getVertex(jungGraph, codeBlock.getMinAddress());
+            if (vertex == null) {
+                // this is unusual; can happen if the program is being changed while this is running
+                continue;
+            }
 
-			PcodeBlock pcodeBlock = new BlockCopy(vertex, codeBlock.getMinAddress());
-			bidiMap.put(codeBlock, pcodeBlock);
-			blockGraph.addBlock(pcodeBlock);
-		}
+            PcodeBlock pcodeBlock = new BlockCopy(vertex, codeBlock.getMinAddress());
+            bidiMap.put(codeBlock, pcodeBlock);
+            blockGraph.addBlock(pcodeBlock);
+        }
 
-		for (CodeBlock block : bidiMap.keySet()) {
+        for (CodeBlock block : bidiMap.keySet()) {
 			taskMonitor.checkCanceled();
 
 			CodeBlockReferenceIterator destinations = block.getDestinations(taskMonitor);
@@ -1117,7 +1115,7 @@ public class DecompilerNestedLayout extends AbstractFGLayout {
 		private int edgeOffset;
 		private Map<FGVertex, Vertex2d> cache =
 			LazyMap.lazyMap(new HashMap<>(), v -> new Vertex2d(v, vertexShaper,
-				vertexLayoutLocations, layoutToGridMap, getEdgeOffset()));
+				vertexLayoutLocations, layoutToGridMap, edgeOffset));
 
 		Vertex2dFactory(VisualGraphVertexShapeTransformer<FGVertex> transformer,
 				Map<FGVertex, Point2D> vertexLayoutLocations,

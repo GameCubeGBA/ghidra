@@ -38,11 +38,8 @@ public class AssemblyResolvedError extends AssemblyResolution {
 			return false;
 		}
 		AssemblyResolvedError that = (AssemblyResolvedError) obj;
-		if (!this.error.equals(that.error)) {
-			return false;
-		}
-		return true;
-	}
+        return this.error.equals(that.error);
+    }
 
 	/**
 	 * @see AssemblyResolution#error(String, String, List)

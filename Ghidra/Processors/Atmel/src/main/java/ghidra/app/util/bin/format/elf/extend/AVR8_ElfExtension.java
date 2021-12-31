@@ -47,12 +47,9 @@ public class AVR8_ElfExtension extends ElfExtension {
 
 	@Override
 	public boolean canHandle(ElfHeader elf) {
-		if (elf.e_machine() != ElfConstants.EM_AVR) {
-			return false;
-		}
+        return elf.e_machine() == ElfConstants.EM_AVR;
 		// TODO: limit to specific architectures?
-		return true;
-	}
+    }
 
 	@Override
 	public boolean canHandle(ElfLoadHelper elfLoadHelper) {

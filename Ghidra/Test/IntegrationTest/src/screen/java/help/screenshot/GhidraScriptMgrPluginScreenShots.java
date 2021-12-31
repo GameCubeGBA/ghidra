@@ -37,8 +37,7 @@ import ghidra.util.HelpLocation;
 public class GhidraScriptMgrPluginScreenShots extends GhidraScreenShotGenerator {
 
 	public GhidraScriptMgrPluginScreenShots() {
-		super();
-	}
+    }
 
 	@Override
 	public void setUp() throws Exception {

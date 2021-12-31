@@ -31,7 +31,7 @@ public class MicrosoftDemanglerAnalyzer extends AbstractDemanglerAnalyzer {
 		"After a function is created, this analyzer will attempt to demangle " +
 			"the name and apply datatypes to parameters.";
 
-	private final static String OPTION_NAME_APPLY_SIGNATURE = "Apply Function Signatures";
+	private static final String OPTION_NAME_APPLY_SIGNATURE = "Apply Function Signatures";
 	private static final String OPTION_DESCRIPTION_APPLY_SIGNATURE =
 		"Apply any recovered function signature, in addition to the function name";
 	private boolean applyFunctionSignature = true;

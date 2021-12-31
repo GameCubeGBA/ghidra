@@ -26,7 +26,7 @@ public interface StructureEditorModelListener extends CompositeEditorModelListen
 	 *
 	 * @param type the new packing state: FREE_FORM, ALIGN, PACK, PACK2, PACK4, or PACK8.
 	 */
-	public abstract void internalAlignmentStateChanged(boolean aligned);
+    void internalAlignmentStateChanged(boolean aligned);
 
 	/**
 	 * Called whenever the structure data type editor internal packing state changes
@@ -35,6 +35,6 @@ public interface StructureEditorModelListener extends CompositeEditorModelListen
 	 *
 	 * @param type the new packing state: FREE_FORM, ALIGN, PACK, PACK2, PACK4, or PACK8.
 	 */
-	public abstract void packStateChanged(long packingValue);
+    void packStateChanged(long packingValue);
 
 }

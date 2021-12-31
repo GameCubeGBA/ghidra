@@ -28,7 +28,7 @@ import ghidra.util.xml.XmlUtilities;
 
 public class InstructionSequence {
 
-	final static String XML_ELEMENT_NAME = "InstructionSequence";
+	static final String XML_ELEMENT_NAME = "InstructionSequence";
 
 	private String[] instructions;
 	private Integer[] sizes;
@@ -181,9 +181,7 @@ public class InstructionSequence {
 			if (other.getCommaSeparatedOperands() != null) {
 				return false;
 			}
-			if (other.getCommaSeparatedOperands() == null) {
-				return false;
-			}
+            return other.getCommaSeparatedOperands() != null;
 		}
 		return true;
 	}

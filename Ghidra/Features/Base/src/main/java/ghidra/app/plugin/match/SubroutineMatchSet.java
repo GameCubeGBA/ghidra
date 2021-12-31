@@ -50,8 +50,7 @@ public class SubroutineMatchSet extends ArrayList<SubroutineMatch> {
 	 */
 	public SubroutineMatchSet(Program aProgram, CodeBlockModel aModel, Program bProgram,
 			CodeBlockModel bModel) {
-		super();
-		this.aProgram = aProgram;
+        this.aProgram = aProgram;
 		this.bProgram = bProgram;
 		this.aSymbolTable = aProgram.getSymbolTable();
 		this.bSymbolTable = bProgram.getSymbolTable();

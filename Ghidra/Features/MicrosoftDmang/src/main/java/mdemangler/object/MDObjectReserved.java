@@ -48,11 +48,11 @@ public class MDObjectReserved extends MDObject {
 	 * @return The <b><code>String</code></b> containing the digits.
 	 */
 	protected static String parseDigits(MDMang dmang) {
-		String ret = "";
+		StringBuilder ret = new StringBuilder();
 		while ((dmang.peek() >= '0') && (dmang.peek() <= '9')) {
-			ret += dmang.getAndIncrement();
+			ret.append(dmang.getAndIncrement());
 		}
-		return ret;
+		return ret.toString();
 	}
 }
 

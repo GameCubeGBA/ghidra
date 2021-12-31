@@ -23,7 +23,7 @@ import agent.dbgmodel.jna.dbgmodel.IUnknownEx;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IDebugHost extends IUnknownEx {
-	final IID IID_IDEBUG_HOST = new IID("B8C74943-6B2C-4eeb-B5C5-35D378A6D99D");
+	IID IID_IDEBUG_HOST = new IID("B8C74943-6B2C-4eeb-B5C5-35D378A6D99D");
 
 	enum VTIndices implements VTableIndex {
 		GET_HOST_DEFINED_INTERFACE, //

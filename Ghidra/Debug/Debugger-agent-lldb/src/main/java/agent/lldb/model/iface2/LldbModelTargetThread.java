@@ -35,11 +35,11 @@ public interface LldbModelTargetThread extends //
 		LldbEventsListenerAdapter, //
 		LldbModelSelectableObject {
 
-	public default SBThread getThread() {
+	default SBThread getThread() {
 		return (SBThread) getModelObject();
 	}
 
-	public default void threadStateChangedSpecific(StateType state, LldbReason reason) {
+	default void threadStateChangedSpecific(StateType state, LldbReason reason) {
 		TargetRegisterContainer container =
 			(TargetRegisterContainer) getCachedAttribute("Registers");
 		TargetRegisterBank bank = (TargetRegisterBank) container.getCachedAttribute("User");
@@ -49,14 +49,14 @@ public interface LldbModelTargetThread extends //
 	}
 
 	@Override
-	public default CompletableFuture<Void> setActive() {
+    default CompletableFuture<Void> setActive() {
 		LldbManagerImpl manager = getManager();
 		SBThread thread = getThread();
 		return manager.execute(new LldbSetActiveThreadCommand(manager, thread, -1));
 	}
 
-	public LldbModelTargetStackImpl getStack();
+	LldbModelTargetStackImpl getStack();
 
-	public String getExecutingProcessorType();
+	String getExecutingProcessorType();
 
 }

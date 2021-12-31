@@ -31,8 +31,7 @@ public class CliTableNestedClass extends CliAbstractTable {
 		public int enclosingClassIndex;
 		
 		public CliNestedClassRow(int nestedClassIndex, int enclosingClassIndex) {
-			super();
-			this.nestedClassIndex = nestedClassIndex;
+            this.nestedClassIndex = nestedClassIndex;
 			this.enclosingClassIndex = enclosingClassIndex;
 		}
 

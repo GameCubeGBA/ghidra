@@ -68,8 +68,7 @@ public class ExternalMergerAddTest extends AbstractExternalMergerTest {
 	protected static final Reference ExternalReference = null;
 
 	public ExternalMergerAddTest() {
-		super();
-	}
+    }
 
 	@Override
 	protected ProgramMultiUserMergeManager createMergeManager(ProgramChangeSet resultChangeSet,

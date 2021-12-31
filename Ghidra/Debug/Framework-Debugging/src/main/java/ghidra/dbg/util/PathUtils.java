@@ -175,11 +175,11 @@ public enum PathUtils {
 	}
 
 	protected static class PathParser {
-		protected final static Pattern LBRACKET = Pattern.compile("\\[");
-		protected final static Pattern RBRACKET = Pattern.compile("\\]");
-		protected final static Pattern BRACKETED = Pattern.compile("\\[.*?\\]");
-		protected final static Pattern LPAREN = Pattern.compile("\\(");
-		protected final static Pattern RPAREN = Pattern.compile("\\)");
+		protected static final Pattern LBRACKET = Pattern.compile("\\[");
+		protected static final Pattern RBRACKET = Pattern.compile("\\]");
+		protected static final Pattern BRACKETED = Pattern.compile("\\[.*?\\]");
+		protected static final Pattern LPAREN = Pattern.compile("\\(");
+		protected static final Pattern RPAREN = Pattern.compile("\\)");
 
 		protected final CharBuffer buf;
 		protected final Pattern sep;
@@ -256,7 +256,7 @@ public enum PathUtils {
 
 		protected List<String> parse() {
 			String first = parseName();
-			if (first.length() != 0) {
+			if (!first.isEmpty()) {
 				result.add(first);
 			}
 			while (buf.hasRemaining()) {

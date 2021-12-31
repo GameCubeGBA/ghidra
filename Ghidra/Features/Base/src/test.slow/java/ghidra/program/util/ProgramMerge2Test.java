@@ -61,8 +61,7 @@ public class ProgramMerge2Test extends AbstractGhidraHeadedIntegrationTest {
 	int txId2;
 
 	public ProgramMerge2Test() {
-		super();
-	}
+    }
 
 	@Before
 	public void setUp() throws Exception {

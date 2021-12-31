@@ -99,11 +99,8 @@ public class ExporterPlugin extends Plugin implements FrontEndable {
 					return false;
 				}
 				List<DomainFile> selectedFiles = context.getSelectedFiles();
-				if (selectedFiles.size() != 1) {
-					return false;
-				}
-				return true;
-			}
+                return selectedFiles.size() == 1;
+            }
 		};
 		action.setPopupMenuData(new MenuData(new String[] { "Export..." }, "Export"));
 		action.setDescription(getPluginDescription().getDescription());

@@ -20,8 +20,7 @@ package agent.dbgeng.dbgeng.err;
  */
 public class DbgEngException extends Exception {
 	public DbgEngException() {
-		super();
-	}
+    }
 
 	public DbgEngException(String message) {
 		super(message);

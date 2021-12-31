@@ -53,17 +53,17 @@ public class OldLanguageFactory {
 	private HashMap<LanguageTag, OldLanguage> languageMap = new HashMap<>();
 	private HashMap<LanguageID, OldLanguage> latestVersionMap =
 		new HashMap<>();
-	private static OldLanguageFactory oldLanguageFactory;
-	private int badFileCount = 0;
+    private int badFileCount = 0;
 
-	/**
+    private static final class OldLanguageFactoryHolder {
+        private static final OldLanguageFactory oldLanguageFactory = new OldLanguageFactory();
+    }
+
+    /**
 	 * Returns the single instance of the OldLanguageFactory.
 	 */
 	public static OldLanguageFactory getOldLanguageFactory() {
-		if (oldLanguageFactory == null) {
-			oldLanguageFactory = new OldLanguageFactory();
-		}
-		return oldLanguageFactory;
+        return OldLanguageFactoryHolder.oldLanguageFactory;
 	}
 
 	private OldLanguageFactory() {

@@ -32,15 +32,14 @@ import ghidra.framework.model.ToolTemplate;
  * Toolbar that shows icons for the tools in the user's tool chest.
  */
 class ProjectToolBar extends JToolBar implements ToolChestChangeListener {
-	private final static int TYPICAL_NUM_TOOLS = 5;
+	private static final int TYPICAL_NUM_TOOLS = 5;
 
 	private Map<String, ToolButton> toolButtonMap;
 	private FrontEndPlugin plugin;
 	private FrontEndTool tool;
 
 	ProjectToolBar(FrontEndPlugin plugin) {
-		super();
-		this.plugin = plugin;
+        this.plugin = plugin;
 		tool = ((FrontEndTool) plugin.getTool());
 		toolButtonMap = new HashMap<>(TYPICAL_NUM_TOOLS);
 
@@ -98,11 +97,9 @@ class ProjectToolBar extends JToolBar implements ToolChestChangeListener {
 
 	private void clear() {
 		this.removeAll();
-		Iterator<ToolButton> it = toolButtonMap.values().iterator();
-		while (it.hasNext()) {
-			ToolButton tb = it.next();
-			tb.dispose();
-		}
+        for (ToolButton tb : toolButtonMap.values()) {
+            tb.dispose();
+        }
 		toolButtonMap.clear();
 
 		if (tool.isVisible()) {

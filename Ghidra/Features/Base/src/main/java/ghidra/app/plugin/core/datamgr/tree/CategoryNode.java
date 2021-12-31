@@ -74,13 +74,9 @@ public class CategoryNode extends DataTypeTreeNode {
 			return true;
 		}
 
-		if (filterState.filterPointers() && (dataType instanceof Pointer) &&
-			!(dataType.getDataTypeManager() instanceof BuiltInDataTypeManager)) {
-			return true;
-		}
-
-		return false;
-	}
+        return filterState.filterPointers() && (dataType instanceof Pointer) &&
+                !(dataType.getDataTypeManager() instanceof BuiltInDataTypeManager);
+    }
 
 	@Override
 	public int compareTo(GTreeNode node) {

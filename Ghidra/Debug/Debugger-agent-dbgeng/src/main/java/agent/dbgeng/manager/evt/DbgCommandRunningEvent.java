@@ -20,8 +20,7 @@ import agent.dbgeng.manager.DbgState;
 public class DbgCommandRunningEvent extends AbstractDbgCompletedCommandEvent {
 
 	public DbgCommandRunningEvent() {
-		super();
-	}
+    }
 
 	@Override
 	public DbgState newState() {

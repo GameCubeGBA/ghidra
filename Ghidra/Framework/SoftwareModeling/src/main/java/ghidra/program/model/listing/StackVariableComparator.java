@@ -24,9 +24,8 @@ import java.util.Comparator;
  * 
  */
 public class StackVariableComparator implements Comparator<Object> {
-	private static StackVariableComparator acomp = null;
 
-	/**
+    /**
 	 * Compares a stack variable offsets. One or both objects must be
 	 * a StackVariable.
 	 * @param obj1 a StackVariable or Integer
@@ -73,13 +72,14 @@ public class StackVariableComparator implements Comparator<Object> {
 		}
 	}
 
-	/**
+    private static final class AcompHolder {
+        private static final StackVariableComparator acomp = new StackVariableComparator();
+    }
+
+    /**
 	 * Returns a shared instance of a StackVariableComparator.
 	 */
 	public static StackVariableComparator get() {
-		if (acomp == null) {
-			acomp = new StackVariableComparator();
-		}
-		return (acomp);
+        return (AcompHolder.acomp);
 	}
 }

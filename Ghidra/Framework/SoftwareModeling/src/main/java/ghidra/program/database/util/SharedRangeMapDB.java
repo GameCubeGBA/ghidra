@@ -47,8 +47,8 @@ public class SharedRangeMapDB {
 
 	//private int modCount;
 
-	private final static String RANGES_TABLE_NAME_PREFIX = "Shared Ranges - ";
-	private final static String MAP_TABLE_NAME_PREFIX = "Shared Map - ";
+	private static final String RANGES_TABLE_NAME_PREFIX = "Shared Ranges - ";
+	private static final String MAP_TABLE_NAME_PREFIX = "Shared Map - ";
 
 	private static final Schema RANGES_SCHEMA = createRangesSchema();
 	private static final Schema MAP_SCHEMA = createMapSchema();

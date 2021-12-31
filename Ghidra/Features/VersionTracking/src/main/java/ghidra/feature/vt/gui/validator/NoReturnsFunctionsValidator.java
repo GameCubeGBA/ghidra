@@ -46,7 +46,7 @@ public class NoReturnsFunctionsValidator extends VTPreconditionValidator {
 		if (!monitor.isCancelled()) {
 			int diff = Math.abs(numSource - numDest);
 			int max = Math.max(numSource, numDest);
-			float percent = (float) diff / (float) max;
+			float percent = (float) diff / max;
 			if (percent > threshold) {
 				status = ConditionStatus.Warning;
 				warnings.append(sourceProgram.getDomainFile().getName() + " and " +

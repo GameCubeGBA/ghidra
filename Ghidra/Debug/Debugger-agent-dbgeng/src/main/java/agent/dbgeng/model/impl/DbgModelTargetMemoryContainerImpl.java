@@ -147,13 +147,13 @@ public class DbgModelTargetMemoryContainerImpl extends DbgModelTargetObjectImpl
 		}
 		ByteBuffer buf = ByteBuffer.allocate(length);
 		long offset = address.getOffset();
-		if (!manager.isKernelMode() || address.getAddressSpace().getName().equals("ram")) {
+		if (!manager.isKernelMode() || "ram".equals(address.getAddressSpace().getName())) {
 			return manager.execute(new DbgReadMemoryCommand(manager, offset, buf, buf.remaining()))
 					.thenApply(set -> {
 						return readAssist(address, buf, offset, set);
 					});
 		}
-		if (address.getAddressSpace().getName().equals("phys")) {
+		if ("phys".equals(address.getAddressSpace().getName())) {
 			return manager
 					.execute(
 						new DbgReadPhysicalMemoryCommand(manager, offset, buf, buf.remaining()))
@@ -161,7 +161,7 @@ public class DbgModelTargetMemoryContainerImpl extends DbgModelTargetObjectImpl
 						return readAssist(address, buf, offset, set);
 					});
 		}
-		if (address.getAddressSpace().getName().equals("ctrl")) {
+		if ("ctrl".equals(address.getAddressSpace().getName())) {
 			int processor = 0;
 			return manager
 					.execute(
@@ -170,7 +170,7 @@ public class DbgModelTargetMemoryContainerImpl extends DbgModelTargetObjectImpl
 						return readAssist(address, buf, offset, set);
 					});
 		}
-		if (address.getAddressSpace().getName().equals("bus")) {
+		if ("bus".equals(address.getAddressSpace().getName())) {
 			int busDataType = 0;
 			int busNumber = 0;
 			int slotNumber = 0;
@@ -181,7 +181,7 @@ public class DbgModelTargetMemoryContainerImpl extends DbgModelTargetObjectImpl
 						return readAssist(address, buf, offset, set);
 					});
 		}
-		if (address.getAddressSpace().getName().equals("io")) {
+		if ("io".equals(address.getAddressSpace().getName())) {
 			int interfaceType = 0;
 			int busNumber = 0;
 			int addresSpace = 0;
@@ -192,7 +192,7 @@ public class DbgModelTargetMemoryContainerImpl extends DbgModelTargetObjectImpl
 						return readAssist(address, buf, offset, set);
 					});
 		}
-		if (address.getAddressSpace().getName().equals("debug")) {
+		if ("debug".equals(address.getAddressSpace().getName())) {
 			return manager
 					.execute(new DbgReadDebuggerDataCommand(manager, offset, buf, buf.remaining()))
 					.thenApply(set -> {
@@ -215,13 +215,13 @@ public class DbgModelTargetMemoryContainerImpl extends DbgModelTargetObjectImpl
 		}
 		ByteBuffer buf = ByteBuffer.wrap(data);
 		long offset = address.getOffset();
-		if (!manager.isKernelMode() || address.getAddressSpace().getName().equals("ram")) {
+		if (!manager.isKernelMode() || "ram".equals(address.getAddressSpace().getName())) {
 			return manager.execute(new DbgWriteMemoryCommand(manager, offset, buf, buf.remaining()))
 					.thenAccept(___ -> {
 						writeAssist(address, data);
 					});
 		}
-		if (address.getAddressSpace().getName().equals("phys")) {
+		if ("phys".equals(address.getAddressSpace().getName())) {
 			return manager
 					.execute(
 						new DbgWritePhysicalMemoryCommand(manager, offset, buf, buf.remaining()))
@@ -229,7 +229,7 @@ public class DbgModelTargetMemoryContainerImpl extends DbgModelTargetObjectImpl
 						writeAssist(address, data);
 					});
 		}
-		if (address.getAddressSpace().getName().equals("ctrl")) {
+		if ("ctrl".equals(address.getAddressSpace().getName())) {
 			int processor = 0;
 			return manager
 					.execute(new DbgWriteControlCommand(manager, offset, buf, buf.remaining(),
@@ -238,7 +238,7 @@ public class DbgModelTargetMemoryContainerImpl extends DbgModelTargetObjectImpl
 						writeAssist(address, data);
 					});
 		}
-		if (address.getAddressSpace().getName().equals("bus")) {
+		if ("bus".equals(address.getAddressSpace().getName())) {
 			int busDataType = 0;
 			int busNumber = 0;
 			int slotNumber = 0;
@@ -249,7 +249,7 @@ public class DbgModelTargetMemoryContainerImpl extends DbgModelTargetObjectImpl
 						writeAssist(address, data);
 					});
 		}
-		if (address.getAddressSpace().getName().equals("io")) {
+		if ("io".equals(address.getAddressSpace().getName())) {
 			int interfaceType = 0;
 			int busNumber = 0;
 			int addresSpace = 0;

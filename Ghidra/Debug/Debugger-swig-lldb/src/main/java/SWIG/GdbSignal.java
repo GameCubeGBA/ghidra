@@ -12,12 +12,12 @@
 package SWIG;
 
 public final class GdbSignal {
-  public final static GdbSignal eGdbSignalBadAccess = new GdbSignal("eGdbSignalBadAccess", lldbJNI.eGdbSignalBadAccess_get());
-  public final static GdbSignal eGdbSignalBadInstruction = new GdbSignal("eGdbSignalBadInstruction", lldbJNI.eGdbSignalBadInstruction_get());
-  public final static GdbSignal eGdbSignalArithmetic = new GdbSignal("eGdbSignalArithmetic", lldbJNI.eGdbSignalArithmetic_get());
-  public final static GdbSignal eGdbSignalEmulation = new GdbSignal("eGdbSignalEmulation", lldbJNI.eGdbSignalEmulation_get());
-  public final static GdbSignal eGdbSignalSoftware = new GdbSignal("eGdbSignalSoftware", lldbJNI.eGdbSignalSoftware_get());
-  public final static GdbSignal eGdbSignalBreakpoint = new GdbSignal("eGdbSignalBreakpoint", lldbJNI.eGdbSignalBreakpoint_get());
+  public static final GdbSignal eGdbSignalBadAccess = new GdbSignal("eGdbSignalBadAccess", lldbJNI.eGdbSignalBadAccess_get());
+  public static final GdbSignal eGdbSignalBadInstruction = new GdbSignal("eGdbSignalBadInstruction", lldbJNI.eGdbSignalBadInstruction_get());
+  public static final GdbSignal eGdbSignalArithmetic = new GdbSignal("eGdbSignalArithmetic", lldbJNI.eGdbSignalArithmetic_get());
+  public static final GdbSignal eGdbSignalEmulation = new GdbSignal("eGdbSignalEmulation", lldbJNI.eGdbSignalEmulation_get());
+  public static final GdbSignal eGdbSignalSoftware = new GdbSignal("eGdbSignalSoftware", lldbJNI.eGdbSignalSoftware_get());
+  public static final GdbSignal eGdbSignalBreakpoint = new GdbSignal("eGdbSignalBreakpoint", lldbJNI.eGdbSignalBreakpoint_get());
 
   public final int swigValue() {
     return swigValue;
@@ -30,9 +30,9 @@ public final class GdbSignal {
   public static GdbSignal swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-    for (int i = 0; i < swigValues.length; i++)
-      if (swigValues[i].swigValue == swigValue)
-        return swigValues[i];
+      for (GdbSignal value : swigValues)
+          if (value.swigValue == swigValue)
+              return value;
     throw new IllegalArgumentException("No enum " + GdbSignal.class + " with value " + swigValue);
   }
 

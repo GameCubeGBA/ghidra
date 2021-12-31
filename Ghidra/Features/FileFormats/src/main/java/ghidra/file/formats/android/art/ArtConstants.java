@@ -24,25 +24,25 @@ import ghidra.program.model.mem.MemoryBlock;
  */
 public final class ArtConstants {
 
-	public final static String ART_NAME = "Android Runtime (ART)";
+	public static final String ART_NAME = "Android Runtime (ART)";
 
-	public final static String MAGIC = "art\n";
+	public static final String MAGIC = "art\n";
 
-	public final static int VERSION_LENGTH = 4;
+	public static final int VERSION_LENGTH = 4;
 
-	public final static String VERSION_KITKAT_RELEASE = "005";
-	public final static String VERSION_LOLLIPOP_RELEASE = "009";
-	public final static String VERSION_LOLLIPOP_MR1_WFC_RELEASE = "012";
-	public final static String VERSION_MARSHMALLOW_RELEASE = "017";
-	public final static String VERSION_NOUGAT_RELEASE = "029";
-	public final static String VERSION_NOUGAT_MR2_PIXEL_RELEASE = "030";
-	public final static String VERSION_OREO_RELEASE = "043";
-	public final static String VERSION_OREO_DR1_RELEASE = "044";
-	public final static String VERSION_OREO_MR1_RELEASE = "046";
-	public final static String VERSION_PIE_RELEASE = "056";
-	public final static String VERSION_10_RELEASE = "074";//Q
-	public final static String VERSION_11_RELEASE = "085";//R
-	public final static String VERSION_12_RELEASE = "099";//S
+	public static final String VERSION_KITKAT_RELEASE = "005";
+	public static final String VERSION_LOLLIPOP_RELEASE = "009";
+	public static final String VERSION_LOLLIPOP_MR1_WFC_RELEASE = "012";
+	public static final String VERSION_MARSHMALLOW_RELEASE = "017";
+	public static final String VERSION_NOUGAT_RELEASE = "029";
+	public static final String VERSION_NOUGAT_MR2_PIXEL_RELEASE = "030";
+	public static final String VERSION_OREO_RELEASE = "043";
+	public static final String VERSION_OREO_DR1_RELEASE = "044";
+	public static final String VERSION_OREO_MR1_RELEASE = "046";
+	public static final String VERSION_PIE_RELEASE = "056";
+	public static final String VERSION_10_RELEASE = "074";//Q
+	public static final String VERSION_11_RELEASE = "085";//R
+	public static final String VERSION_12_RELEASE = "099";//S
 
 	//	"005",// kitkat-release
 	//	"009",// lollipop-release
@@ -62,7 +62,7 @@ public final class ArtConstants {
 	/**
 	 * NOTE: only going to support RELEASE versions
 	 */
-	public final static String[] SUPPORTED_VERSIONS = new String[] {
+    public static final String[] SUPPORTED_VERSIONS = new String[] {
 		//@formatter:off
 		VERSION_KITKAT_RELEASE,
 		VERSION_LOLLIPOP_RELEASE, 
@@ -80,7 +80,7 @@ public final class ArtConstants {
 		//@formatter:on 
 	};
 
-	public final static boolean isSupportedVersion(String version) {
+	public static final boolean isSupportedVersion(String version) {
 		for (String supportedVersion : SUPPORTED_VERSIONS) {
 			if (supportedVersion.equals(version)) {
 				return true;
@@ -89,7 +89,7 @@ public final class ArtConstants {
 		return false;
 	}
 
-	public final static boolean isART(Program program) {
+	public static final boolean isART(Program program) {
 		if (program != null) {
 			for (MemoryBlock block : program.getMemory().getBlocks()) {
 				try {
@@ -108,7 +108,7 @@ public final class ArtConstants {
 		return false;
 	}
 
-	public final static Address findART(Program program) {
+	public static final Address findART(Program program) {
 		if (program != null) {
 			for (MemoryBlock block : program.getMemory().getBlocks()) {
 				try {

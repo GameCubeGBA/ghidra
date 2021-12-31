@@ -65,11 +65,10 @@ class ToolConnectionPanel extends JPanel implements ListSelectionListener {
 	private GCheckBox[] checkboxes;
 	private String[] eventNames;
 
-	private final static String msgSource = "Tool Connection";
+	private static final String msgSource = "Tool Connection";
 
 	ToolConnectionPanel(ToolConnectionDialog toolDialog, ToolManager toolManager) {
-		super();
-		this.toolDialog = toolDialog;
+        this.toolDialog = toolDialog;
 		this.toolManager = toolManager;
 		initialize();
 	}

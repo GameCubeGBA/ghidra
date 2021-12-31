@@ -24,7 +24,7 @@ import java.util.Objects;
  */
 public class User implements Comparable<User>, Serializable {
 
-	public final static long serialVersionUID = 2L;
+	public static final long serialVersionUID = 2L;
 
 	/**
 	 * Name associated with anonymous user
@@ -34,19 +34,19 @@ public class User implements Comparable<User>, Serializable {
 	/**
 	 * Value corresponding to Read-only permission for a repository user.
 	 */
-	public final static int READ_ONLY = 0;
+    public static final int READ_ONLY = 0;
 
 	/**
 	 * Value corresponding to Write permission for a repository user.
 	 */
-	public final static int WRITE = 1;
+    public static final int WRITE = 1;
 
 	/**
 	 * Value corresponding to Administrative permission for a repository user.
 	 */
-	public final static int ADMIN = 2;
+    public static final int ADMIN = 2;
 
-	private final static String[] types = { "read-only", "write", "admin" };
+	private static final String[] types = { "read-only", "write", "admin" };
 
 	private int permission;
 	private String name;
@@ -128,10 +128,8 @@ public class User implements Comparable<User>, Serializable {
 		if (!Objects.equals(name, other.name)) {
 			return false;
 		}
-		if (permission != other.permission)
-			return false;
-		return true;
-	}
+        return permission == other.permission;
+    }
 
 	@Override
 	public int compareTo(User other) {

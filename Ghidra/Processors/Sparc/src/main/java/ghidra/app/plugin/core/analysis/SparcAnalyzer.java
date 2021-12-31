@@ -34,7 +34,7 @@ import ghidra.util.task.TaskMonitor;
 
 public class SparcAnalyzer extends ConstantPropagationAnalyzer {
 
-	private final static String PROCESSOR_NAME = "Sparc";
+	private static final String PROCESSOR_NAME = "Sparc";
 
 	public SparcAnalyzer() {
 		super(PROCESSOR_NAME);
@@ -59,15 +59,15 @@ public class SparcAnalyzer extends ConstantPropagationAnalyzer {
 
 			Instruction instr = program.getListing().getInstructionAt(flowStart);
 			// special case for leaf PIC call
-			if (instr.getMnemonicString().equals("retl")) {
+			if ("retl".equals(instr.getMnemonicString())) {
 				Instruction dInstr =
 					program.getListing().getInstructionAfter(instr.getMinAddress());
-				if (dInstr.getMnemonicString().equals("_add")) {
+				if ("_add".equals(dInstr.getMnemonicString())) {
 					Register r0 = dInstr.getRegister(0);
 					Register r1 = dInstr.getRegister(1);
 					Register r2 = dInstr.getRegister(2);
 					// add some register to the o7 register.  This is just getting offset of current location
-					if (r0 != null && r0.getName().equals("o7") && r1 != null && r1.equals(r2)) {
+					if (r0 != null && "o7".equals(r0.getName()) && r1 != null && r1.equals(r2)) {
 						func.setInline(true);
 					}
 				}

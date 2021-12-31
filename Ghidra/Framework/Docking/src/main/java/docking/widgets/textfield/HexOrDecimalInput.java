@@ -158,7 +158,7 @@ public class HexOrDecimalInput extends JTextField {
 	}
 
 	private Long computeValueFromString(String text) {
-		if (text.length() == 0) {
+		if (text.isEmpty()) {
 			return null;
 		}
 
@@ -183,8 +183,7 @@ public class HexOrDecimalInput extends JTextField {
 	private class MyDocument extends PlainDocument {
 
 		private MyDocument() {
-			super();
-		}
+        }
 
 		/**
 		 * @see javax.swing.text.Document#insertString(int, java.lang.String, javax.swing.text.AttributeSet)
@@ -218,7 +217,7 @@ public class HexOrDecimalInput extends JTextField {
 		public void remove(int offs, int len) throws BadLocationException {
 			super.remove(offs, len);
 			String newText = HexOrDecimalInput.this.getText();
-			if (newText.length() == 0 || "-".equals(newText)) {
+			if (newText.isEmpty() || "-".equals(newText)) {
 				currentValue = null;
 			}
 			else {
@@ -243,11 +242,8 @@ public class HexOrDecimalInput extends JTextField {
 			if (isHexMode && c >= 'a' && c <= 'f') {
 				return true;
 			}
-			if (isHexMode && c >= 'A' && c <= 'F') {
-				return true;
-			}
-			return false;
-		}
+            return isHexMode && c >= 'A' && c <= 'F';
+        }
 	}
 
 //	public static void main(String[] args) throws Exception {

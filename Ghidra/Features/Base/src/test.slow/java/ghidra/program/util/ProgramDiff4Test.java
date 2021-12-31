@@ -48,8 +48,7 @@ public class ProgramDiff4Test extends AbstractProgramDiffTest {
 
 	/** Creates new ProgramDiffTest */
 	public ProgramDiff4Test() {
-		super();
-	}
+    }
 
 	/**
 	 * @see TestCase#setUp()

@@ -81,15 +81,10 @@ public class StructureEditorUnlockedEnablementTest extends AbstractStructureEdit
 
 		// Check enablement.
 		for (CompositeEditorTableAction action : actions) {
-			if ((action instanceof FavoritesAction) || (action instanceof CycleGroupAction) ||
-				(action instanceof EditFieldAction) || (action instanceof InsertUndefinedAction) ||
-				(action instanceof AddBitFieldAction) || (action instanceof PointerAction) ||
-				(action instanceof HexNumbersAction) || (action instanceof ApplyAction)) {
-				checkEnablement(action, true);
-			}
-			else {
-				checkEnablement(action, false);
-			}
+            checkEnablement(action, (action instanceof FavoritesAction) || (action instanceof CycleGroupAction) ||
+                    (action instanceof EditFieldAction) || (action instanceof InsertUndefinedAction) ||
+                    (action instanceof AddBitFieldAction) || (action instanceof PointerAction) ||
+                    (action instanceof HexNumbersAction) || (action instanceof ApplyAction));
 		}
 	}
 
@@ -115,15 +110,10 @@ public class StructureEditorUnlockedEnablementTest extends AbstractStructureEdit
 
 		// Check enablement on blank line selected.
 		for (CompositeEditorTableAction action : actions) {
-			if ((action instanceof FavoritesAction) || (action instanceof CycleGroupAction) ||
-				(action instanceof EditFieldAction) || (action instanceof InsertUndefinedAction) ||
-				(action instanceof AddBitFieldAction) || (action instanceof PointerAction) ||
-				(action instanceof HexNumbersAction)) {
-				checkEnablement(action, true);
-			}
-			else {
-				checkEnablement(action, false);
-			}
+            checkEnablement(action, (action instanceof FavoritesAction) || (action instanceof CycleGroupAction) ||
+                    (action instanceof EditFieldAction) || (action instanceof InsertUndefinedAction) ||
+                    (action instanceof AddBitFieldAction) || (action instanceof PointerAction) ||
+                    (action instanceof HexNumbersAction));
 		}
 	}
 
@@ -158,17 +148,17 @@ public class StructureEditorUnlockedEnablementTest extends AbstractStructureEdit
 				FavoritesAction favoritesAction = (FavoritesAction) action;
 				String name = favoritesAction.getName();
 				checkEnablement(action,
-					name.equals("byte") || name.equals("char") || name.equals("string") ||
-						name.equals("TerminatedCString") || name.equals("TerminatedUnicode"));
+					"byte".equals(name) || "char".equals(name) || "string".equals(name) ||
+						"TerminatedCString".equals(name) || "TerminatedUnicode".equals(name));
 			}
 			else if (action instanceof CycleGroupAction) {
 				CycleGroupAction cycleGroupAction = (CycleGroupAction) action;
 				String name = cycleGroupAction.getName();
 				checkEnablement(action,
-					name.equals("Cycle: byte,word,dword,qword") ||
-						name.equals("Cycle: float,double") ||
-						name.equals("Cycle: char,string,unicode") || name.equals("char") ||
-						name.equals("string"));
+					"Cycle: byte,word,dword,qword".equals(name) ||
+						"Cycle: float,double".equals(name) ||
+						"Cycle: char,string,unicode".equals(name) || "char".equals(name) ||
+						"string".equals(name));
 			}
 			else {
 				checkEnablement(action, false);
@@ -197,17 +187,17 @@ public class StructureEditorUnlockedEnablementTest extends AbstractStructureEdit
 				FavoritesAction favoritesAction = (FavoritesAction) action;
 				String name = favoritesAction.getName();
 				checkEnablement(action,
-					name.equals("byte") || name.equals("char") || name.equals("string") ||
-						name.equals("TerminatedCString") || name.equals("TerminatedUnicode"));
+					"byte".equals(name) || "char".equals(name) || "string".equals(name) ||
+						"TerminatedCString".equals(name) || "TerminatedUnicode".equals(name));
 			}
 			else if (action instanceof CycleGroupAction) {
 				CycleGroupAction cycleGroupAction = (CycleGroupAction) action;
 				String name = cycleGroupAction.getName();
 				checkEnablement(action,
-					name.equals("Cycle: byte,word,dword,qword") ||
-						name.equals("Cycle: float,double") ||
-						name.equals("Cycle: char,string,unicode") || name.equals("char") ||
-						name.equals("string"));
+					"Cycle: byte,word,dword,qword".equals(name) ||
+						"Cycle: float,double".equals(name) ||
+						"Cycle: char,string,unicode".equals(name) || "char".equals(name) ||
+						"string".equals(name));
 			}
 			else {
 				checkEnablement(action, false);
@@ -237,21 +227,21 @@ public class StructureEditorUnlockedEnablementTest extends AbstractStructureEdit
 				FavoritesAction favoritesAction = (FavoritesAction) action;
 				String name = favoritesAction.getName();
 				checkEnablement(action,
-					name.equals("byte") || name.equals("word") || name.equals("dword") ||
-						name.equals("qword") || name.equals("int") || name.equals("long") ||
-						name.equals("uint") || name.equals("ulong") || name.equals("float") ||
-						name.equals("double") || name.equals("longdouble") || name.equals("char") ||
-						name.equals("string") || name.equals("TerminatedCString") ||
-						name.equals("TerminatedUnicode") || name.equals("pointer"));
+					"byte".equals(name) || "word".equals(name) || "dword".equals(name) ||
+						"qword".equals(name) || "int".equals(name) || "long".equals(name) ||
+						"uint".equals(name) || "ulong".equals(name) || "float".equals(name) ||
+						"double".equals(name) || "longdouble".equals(name) || "char".equals(name) ||
+						"string".equals(name) || "TerminatedCString".equals(name) ||
+						"TerminatedUnicode".equals(name) || "pointer".equals(name));
 			}
 			else if (action instanceof CycleGroupAction) {
 				CycleGroupAction cycleGroupAction = (CycleGroupAction) action;
 				String name = cycleGroupAction.getName();
 				checkEnablement(action,
-					name.equals("Cycle: byte,word,dword,qword") ||
-						name.equals("Cycle: float,double") ||
-						name.equals("Cycle: char,string,unicode") || name.equals("char") ||
-						name.equals("string"));
+					"Cycle: byte,word,dword,qword".equals(name) ||
+						"Cycle: float,double".equals(name) ||
+						"Cycle: char,string,unicode".equals(name) || "char".equals(name) ||
+						"string".equals(name));
 			}
 			else {
 				checkEnablement(action, false);
@@ -266,15 +256,10 @@ public class StructureEditorUnlockedEnablementTest extends AbstractStructureEdit
 		// Check enablement on last component selected.
 		setSelection(new int[] { model.getNumComponents() });
 		for (CompositeEditorTableAction action : actions) {
-			if ((action instanceof FavoritesAction) || (action instanceof CycleGroupAction) ||
-				(action instanceof EditFieldAction) || (action instanceof InsertUndefinedAction) ||
-				(action instanceof AddBitFieldAction) || (action instanceof PointerAction) ||
-				(action instanceof HexNumbersAction)) {
-				checkEnablement(action, true);
-			}
-			else {
-				checkEnablement(action, false);
-			}
+            checkEnablement(action, (action instanceof FavoritesAction) || (action instanceof CycleGroupAction) ||
+                    (action instanceof EditFieldAction) || (action instanceof InsertUndefinedAction) ||
+                    (action instanceof AddBitFieldAction) || (action instanceof PointerAction) ||
+                    (action instanceof HexNumbersAction));
 		}
 	}
 

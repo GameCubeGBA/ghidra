@@ -19,7 +19,7 @@ import docking.widgets.fieldpanel.FieldPanel;
 import docking.widgets.fieldpanel.internal.LineLockedFieldPanelCoordinator;
 import ghidra.program.util.ProgramLocation;
 
-abstract public class DualDecompilerFieldPanelCoordinator extends LineLockedFieldPanelCoordinator {
+public abstract class DualDecompilerFieldPanelCoordinator extends LineLockedFieldPanelCoordinator {
 
 	public DualDecompilerFieldPanelCoordinator(
 			DecompilerCodeComparisonPanel<? extends DualDecompilerFieldPanelCoordinator> dualDecompilerPanel) {
@@ -27,7 +27,7 @@ abstract public class DualDecompilerFieldPanelCoordinator extends LineLockedFiel
 			dualDecompilerPanel.getRightDecompilerPanel().getFieldPanel() });
 	}
 
-	abstract public void leftLocationChanged(ProgramLocation leftLocation);
+	public abstract void leftLocationChanged(ProgramLocation leftLocation);
 
-	abstract public void rightLocationChanged(ProgramLocation rightLocation);
+	public abstract void rightLocationChanged(ProgramLocation rightLocation);
 }

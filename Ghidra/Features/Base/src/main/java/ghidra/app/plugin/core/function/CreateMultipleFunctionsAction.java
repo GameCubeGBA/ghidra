@@ -70,10 +70,7 @@ class CreateMultipleFunctionsAction extends ListingContextAction {
 
 	@Override
 	protected boolean isEnabledForContext(ListingActionContext context) {
-		if (!context.hasSelection()) {
-			return false;
-		}
-		return true;
-	}
+        return context.hasSelection();
+    }
 
 }

@@ -25,8 +25,7 @@ public class VariableXRefHeaderFieldLocation extends VariableXRefFieldLocation {
 	 * Should only be used for XML restoring.
 	 */
 	public VariableXRefHeaderFieldLocation() {
-		super();
-	}
+    }
 
 	/**
 	 * Creates a variable xref field program location

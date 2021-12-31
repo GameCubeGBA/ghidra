@@ -151,7 +151,7 @@ public class ProgramDiffFilter {
      * @param filter filter indicating the additional types of differences
      * to look for between the programs.
      */
-    synchronized public void addToFilter(ProgramDiffFilter filter) {
+    public synchronized void addToFilter(ProgramDiffFilter filter) {
         filterFlags |= filter.filterFlags;
     }
 
@@ -164,7 +164,7 @@ public class ProgramDiffFilter {
      * <BR>i.e. CODE_UNIT_DIFFS | SYMBOL_DIFFS
 	 * @param filter true if you want to determine differences of the specified type.
 	 */
-	synchronized public void setFilter(int type, boolean filter) {
+    public synchronized void setFilter(int type, boolean filter) {
 		if (filter) {
 			filterFlags |= type;
 		}
