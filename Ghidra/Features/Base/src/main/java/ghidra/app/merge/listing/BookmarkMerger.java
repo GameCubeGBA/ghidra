@@ -45,7 +45,7 @@ import javax.swing.event.ChangeListener;
  */
 class BookmarkMerger extends AbstractListingMerger {
 
-	final static String BOOKMARKS_PHASE = "Bookmarks";
+	static final String BOOKMARKS_PHASE = "Bookmarks";
 	private VerticalChoicesPanel conflictPanel;
 	private String type;
 	private String category;
@@ -123,14 +123,14 @@ class BookmarkMerger extends AbstractListingMerger {
 
 			// Check the Original Bookmarks
 			Bookmark[] bookmarks = originalBookmarkMgr.getBookmarks(addr);
-			for (int i = 0; i < bookmarks.length; i++) {
-				checkOriginalBookmark(monitor, addr, bookmarks[i]);
-			}
+            for (Bookmark value : bookmarks) {
+                checkOriginalBookmark(monitor, addr, value);
+            }
 			//Check any bookmarks that were added to MY program at the address.
 			bookmarks = myBookmarkMgr.getBookmarks(addr);
-			for (int i = 0; i < bookmarks.length; i++) {
-				checkAddedBookmark(monitor, addr, bookmarks[i]);
-			}
+            for (Bookmark bookmark : bookmarks) {
+                checkAddedBookmark(monitor, addr, bookmark);
+            }
 		}
 		updateProgress(100, "Done auto-merging Bookmarks and determining conflicts.");
 	}
@@ -447,21 +447,19 @@ class BookmarkMerger extends AbstractListingMerger {
 		boolean askUser = chosenConflictOption == ASK_USER;
 		ArrayList<BookmarkUid> list = conflicts.get(addr);
 		int size = list.size();
-		for (int i = 0; i < size; i++) {
-			BookmarkUid bmuid = list.get(i);
-			// If we have a bookmark choice then a "Use For All" has already occurred.
-			if ((bookmarkChoice == ASK_USER) && askUser && mergeManager != null) {
-				showMergePanel(listingPanel, bmuid.address, bmuid.bookmarkType,
-					bmuid.bookmarkCategory, monitor);
-				monitor.checkCanceled();
-			}
-			else {
-				int optionToUse =
-					(bookmarkChoice == ASK_USER) ? chosenConflictOption : bookmarkChoice;
-				merge(bmuid.address, bmuid.bookmarkType, bmuid.bookmarkCategory, optionToUse,
-					monitor);
-			}
-		}
+        for (BookmarkUid bmuid : list) {
+            // If we have a bookmark choice then a "Use For All" has already occurred.
+            if ((bookmarkChoice == ASK_USER) && askUser && mergeManager != null) {
+                showMergePanel(listingPanel, bmuid.address, bmuid.bookmarkType,
+                        bmuid.bookmarkCategory, monitor);
+                monitor.checkCanceled();
+            } else {
+                int optionToUse =
+                        (bookmarkChoice == ASK_USER) ? chosenConflictOption : bookmarkChoice;
+                merge(bmuid.address, bmuid.bookmarkType, bmuid.bookmarkCategory, optionToUse,
+                        monitor);
+            }
+        }
 		resolvedSet.addRange(addr, addr);
 	}
 
@@ -488,28 +486,22 @@ class BookmarkMerger extends AbstractListingMerger {
 		this.currentMonitor = monitor;
 		try {
 			final ChangeListener changeListener = new BookmarkMergeChangeListener();
-			SwingUtilities.invokeAndWait(new Runnable() {
-				@Override
-				public void run() {
-					VerticalChoicesPanel panel =
-						getConflictsPanel(BookmarkMerger.this.currentAddress,
-							BookmarkMerger.this.type, BookmarkMerger.this.category, changeListener);
+			SwingUtilities.invokeAndWait(() -> {
+                VerticalChoicesPanel panel =
+                    getConflictsPanel(BookmarkMerger.this.currentAddress,
+                        BookmarkMerger.this.type, BookmarkMerger.this.category, changeListener);
 
-					boolean useForAll = (bookmarkChoice != ASK_USER);
-					conflictPanel.setUseForAll(useForAll);
-					conflictPanel.setConflictType("Bookmark");
+                boolean useForAll = (bookmarkChoice != ASK_USER);
+                conflictPanel.setUseForAll(useForAll);
+                conflictPanel.setConflictType("Bookmark");
 
-					listingPanel.setBottomComponent(panel);
-				}
-			});
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					Address addressToPaint = BookmarkMerger.this.currentAddress;
-					listingPanel.clearAllBackgrounds();
-					listingPanel.paintAllBackgrounds(new AddressSet(addressToPaint, addressToPaint));
-				}
-			});
+                listingPanel.setBottomComponent(panel);
+            });
+			SwingUtilities.invokeLater(() -> {
+                Address addressToPaint = BookmarkMerger.this.currentAddress;
+                listingPanel.clearAllBackgrounds();
+                listingPanel.paintAllBackgrounds(new AddressSet(addressToPaint, addressToPaint));
+            });
 		}
 		catch (InterruptedException e) {
 		}

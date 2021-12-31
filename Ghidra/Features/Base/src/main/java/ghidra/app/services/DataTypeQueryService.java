@@ -31,7 +31,7 @@ public interface DataTypeQueryService {
 	 * 
 	 * @return the open data type managers.
 	 */
-	public DataTypeManager[] getDataTypeManagers();
+    DataTypeManager[] getDataTypeManagers();
 
 	/**
 	 * Gets the sorted list of all datatypes known by this service via it's owned DataTypeManagers.
@@ -39,7 +39,7 @@ public interface DataTypeQueryService {
 	 * as changes are made.
 	 * @return the sorted list of known data types.
 	 */
-	public List<DataType> getSortedDataTypeList();
+    List<DataType> getSortedDataTypeList();
 
 	/**
 	 * Obtain the preferred datatype which corresponds to the specified 
@@ -52,6 +52,6 @@ public interface DataTypeQueryService {
 	 * @return the preferred data type (e.g., chosen by the user) or null if no match found 
 	 * or selection was cancelled by user.
 	 */
-	public DataType getDataType(String filterText);
+    DataType getDataType(String filterText);
 
 }

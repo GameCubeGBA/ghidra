@@ -59,37 +59,30 @@ public abstract class CodeUnitDetails {
 		Address min = cu.getMinAddress();
 		Address max = cu.getMaxAddress();
 		String addrRangeStr = min + ((min.equals(max)) ? "" : " - " + max);
-		String cuRep;
+		StringBuilder cuRep;
 		if (cu instanceof Data) {
-			cuRep = ((Data) cu).getDataType().getPathName();
+			cuRep = new StringBuilder(((Data) cu).getDataType().getPathName());
 		}
 		else if (cu instanceof Instruction) {
 			Instruction inst = (Instruction) cu;
 			boolean removedFallThrough =
 				inst.isFallThroughOverridden() && (inst.getFallThrough() == null);
 			boolean hasFlowOverride = inst.getFlowOverride() != FlowOverride.NONE;
-			cuRep = cu.toString();
+			cuRep = new StringBuilder(cu.toString());
 			if (removedFallThrough) {
-				cuRep +=
-					NEW_LINE + indent + getSpaces(addrRangeStr.length()) + "    " +
-						"Removed FallThrough";
+				cuRep.append(NEW_LINE).append(indent).append(getSpaces(addrRangeStr.length())).append("    ").append("Removed FallThrough");
 			}
 			else if (inst.isFallThroughOverridden()) {
 				Reference[] refs = cu.getReferencesFrom();
 				// Show the fallthrough override.
-				for (int i = 0; i < refs.length; i++) {
-					if (refs[i].getReferenceType().isFallthrough()) {
-						cuRep +=
-							NEW_LINE + indent + getSpaces(addrRangeStr.length()) + "    " +
-								"FallThrough Override: " +
-								DiffUtility.getUserToAddressString(inst.getProgram(), refs[i]);
+				for (Reference ref : refs) {
+					if (ref.getReferenceType().isFallthrough()) {
+						cuRep.append(NEW_LINE).append(indent).append(getSpaces(addrRangeStr.length())).append("    ").append("FallThrough Override: ").append(DiffUtility.getUserToAddressString(inst.getProgram(), ref));
 					}
 				}
 			}
 			if (hasFlowOverride) {
-				cuRep +=
-					NEW_LINE + indent + getSpaces(addrRangeStr.length()) + "    " +
-						"Flow Override: " + inst.getFlowOverride();
+				cuRep.append(NEW_LINE).append(indent).append(getSpaces(addrRangeStr.length())).append("    ").append("Flow Override: ").append(inst.getFlowOverride());
 			}
 			// Commented the following out, since we may want the hash code in the future.
 //			cuRep +=
@@ -98,7 +91,7 @@ public abstract class CodeUnitDetails {
 //					Integer.toHexString(inst.getPrototype().hashCode());
 		}
 		else {
-			cuRep = cu.toString();
+			cuRep = new StringBuilder(cu.toString());
 		}
 		buf.append(indent + addrRangeStr + "    " + cuRep + NEW_LINE);
 		return buf.toString();
@@ -146,15 +139,13 @@ public abstract class CodeUnitDetails {
 			return indent + "None";
 		}
 		StringBuffer buf = new StringBuffer();
-		for (int i = 0; i < refs.length; i++) {
-			if (refs[i].isExternalReference()) {
-				buf.append(indent + "External Reference " + getRefInfo(pgm, refs[i]) + NEW_LINE);
-			}
-			else if (refs[i].isStackReference()) {
-				buf.append(indent + "Stack Reference " + getRefInfo(pgm, refs[i]) + NEW_LINE);
-			}
-			else {
-				buf.append(indent + "Reference " + getRefInfo(pgm, refs[i]) + NEW_LINE);
+		for (Reference ref : refs) {
+			if (ref.isExternalReference()) {
+				buf.append(indent + "External Reference " + getRefInfo(pgm, ref) + NEW_LINE);
+			} else if (ref.isStackReference()) {
+				buf.append(indent + "Stack Reference " + getRefInfo(pgm, ref) + NEW_LINE);
+			} else {
+				buf.append(indent + "Reference " + getRefInfo(pgm, ref) + NEW_LINE);
 			}
 		}
 		return buf.toString();
@@ -165,9 +156,7 @@ public abstract class CodeUnitDetails {
 			return "";
 		}
 		StringBuffer buf = new StringBuffer(numSpaces);
-		for (int i = 0; i < numSpaces; i++) {
-			buf.append(" ");
-		}
+		buf.append(" ".repeat(numSpaces));
 		return buf.toString();
 	}
 

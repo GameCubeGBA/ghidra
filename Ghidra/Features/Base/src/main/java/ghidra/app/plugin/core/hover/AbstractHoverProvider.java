@@ -47,8 +47,7 @@ public abstract class AbstractHoverProvider implements HoverProvider {
 	protected final String windowName;
 
 	public AbstractHoverProvider(String windowName) {
-		super();
-		this.windowName = windowName;
+        this.windowName = windowName;
 	}
 
 	protected void addHoverService(HoverService hoverService) {

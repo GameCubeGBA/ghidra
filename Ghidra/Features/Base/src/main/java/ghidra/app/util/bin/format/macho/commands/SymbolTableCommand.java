@@ -180,14 +180,14 @@ public class SymbolTableCommand extends LoadCommand {
 				Address address = baseAddress.getNewAddress(getStartIndex());
 				api.createData(address, toDataType());
 
-				if (getStringTableSize() > 0) {
-					Address stringTableStart = baseAddress.getNewAddress(getStringTableOffset());
+				if (strsize > 0) {
+					Address stringTableStart = baseAddress.getNewAddress(stroff);
 					api.createFragment(parentModule, "string_table", stringTableStart,
-						getStringTableSize());
+                            strsize);
 				}
 
 				int symbolIndex = 0;
-				Address symbolStartAddr = baseAddress.getNewAddress(getSymbolOffset());
+				Address symbolStartAddr = baseAddress.getNewAddress(symoff);
 				long offset = 0;
 				for (NList symbol : symbols) {
 					if (monitor.isCancelled()) {
@@ -199,7 +199,7 @@ public class SymbolTableCommand extends LoadCommand {
 					Data symbolData = api.createData(symbolAddr, symbolDT);
 
 					Address stringAddress = baseAddress.getNewAddress(
-						getStringTableOffset() + symbol.getStringTableIndex());
+						stroff + symbol.getStringTableIndex());
 					Data stringData = api.createAsciiString(stringAddress);
 					String string = (String) stringData.getValue();
 
@@ -219,7 +219,7 @@ public class SymbolTableCommand extends LoadCommand {
 					++symbolIndex;
 				}
 
-				if (getNumberOfSymbols() > 0) {
+				if (nsyms > 0) {
 					api.createFragment(parentModule, "symbols", symbolStartAddr, offset);
 				}
 			}

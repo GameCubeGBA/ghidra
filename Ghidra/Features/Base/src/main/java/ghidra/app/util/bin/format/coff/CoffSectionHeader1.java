@@ -25,9 +25,8 @@ import ghidra.app.util.bin.BinaryReader;
 class CoffSectionHeader1 extends CoffSectionHeader {
 
 	CoffSectionHeader1(BinaryReader reader, CoffFileHeader header) throws IOException {
-		super();
 
-		this._header = header;
+        this._header = header;
 
 		readName(reader);
 

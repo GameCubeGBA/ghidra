@@ -42,8 +42,7 @@ import ghidra.util.exception.NotYetImplementedException;
  */
 public class UnimplementedConstructor extends ConstructorPcodeTemplate {
 	public UnimplementedConstructor() {
-		super();
-		try {
+        try {
 			optimize();					// Set the default flowtype
 		}
 		catch(Exception e) {}

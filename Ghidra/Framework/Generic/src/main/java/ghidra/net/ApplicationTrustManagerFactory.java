@@ -66,9 +66,8 @@ public class ApplicationTrustManagerFactory {
 	 * issue which occurs during testing.
 	 */
 	private static X509TrustManager trustManager;
-	private static TrustManager[] wrappedTrustManagers;
 
-	private static boolean hasCAs;
+    private static boolean hasCAs;
 	private static Exception caError;
 
 	/**
@@ -78,22 +77,22 @@ public class ApplicationTrustManagerFactory {
 		// no instantiation - static methods only
 	}
 
-	/**
+    private static final class WrappedTrustManagersHolder {
+        private static final TrustManager[] wrappedTrustManagers = new WrappedTrustManager[]{new WrappedTrustManager()};
+    }
+
+    /**
 	 * Initialize trustManagers if <i>ghidra.cacerts</i> property or preference was specified, 
 	 * otherwise an "open" trust manager will be established.  If an error occurs processing
 	 * a specified cacerts file, a "closed" trust policy will be adopted.
 	 */
 	private static void init() {
 
-		if (wrappedTrustManagers == null) {
-			wrappedTrustManagers = new WrappedTrustManager[] { new WrappedTrustManager() };
-		}
-
-		String cacertsPath = System.getProperty(GHIDRA_CACERTS_PATH_PROPERTY);
-		if (cacertsPath == null || cacertsPath.length() == 0) {
+        String cacertsPath = System.getProperty(GHIDRA_CACERTS_PATH_PROPERTY);
+		if (cacertsPath == null || cacertsPath.isEmpty()) {
 			// check user preferences if cacerts not set via system property
 			cacertsPath = Preferences.getProperty(GHIDRA_CACERTS_PATH_PROPERTY);
-			if (cacertsPath == null || cacertsPath.length() == 0) {
+			if (cacertsPath == null || cacertsPath.isEmpty()) {
 				Msg.info(ApplicationTrustManagerFactory.class,
 					"Trust manager disabled, cacerts have not been set");
 				trustManager = new OpenTrustManager();
@@ -165,7 +164,7 @@ public class ApplicationTrustManagerFactory {
 		if (trustManager == null) {
 			init();
 		}
-		return wrappedTrustManagers.clone();
+		return WrappedTrustManagersHolder.wrappedTrustManagers.clone();
 	}
 
 	/**

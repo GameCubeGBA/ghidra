@@ -53,7 +53,7 @@ public class OverlayRange {
 	 * @return true if this range contains the specific index
 	 */
 	public boolean containsIndex(int index) {
-		return index >= getStartIndex() && index <= getEndIndex();
+		return index >= overlayIndex && index <= getEndIndex();
 	}
 
 	/**

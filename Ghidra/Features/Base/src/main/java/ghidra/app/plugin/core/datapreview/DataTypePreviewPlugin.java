@@ -499,8 +499,8 @@ public class DataTypePreviewPlugin extends ProgramPlugin {
 	}
 
 	/*for testing*/ class DTPPTableModel extends AbstractSortedTableModel<Preview> {
-		final static int NAME_COL = 0;
-		final static int PREVIEW_COL = 1;
+		static final int NAME_COL = 0;
+		static final int PREVIEW_COL = 1;
 
 		private List<Preview> data = new ArrayList<>();
 
@@ -572,15 +572,13 @@ public class DataTypePreviewPlugin extends ProgramPlugin {
 		boolean removeAll(DataType deletedDataType) {
 			boolean removed = false;
 			ArrayList<Preview> clone = new ArrayList<>(data);
-			Iterator<Preview> iter = clone.iterator();
-			while (iter.hasNext()) {
-				Object obj = iter.next();
-				Preview preview = (Preview) obj;
-				if (preview.getDataType().equals(deletedDataType)) {
-					data.remove(preview);
-					removed = true;
-				}
-			}
+            for (Object obj : clone) {
+                Preview preview = (Preview) obj;
+                if (preview.getDataType().equals(deletedDataType)) {
+                    data.remove(preview);
+                    removed = true;
+                }
+            }
 			if (removed) {
 				fireTableDataChanged();
 			}
@@ -608,13 +606,11 @@ public class DataTypePreviewPlugin extends ProgramPlugin {
 		}
 
 		private boolean contains(DataType dt) {
-			Iterator<Preview> iter = data.iterator();
-			while (iter.hasNext()) {
-				Preview p = iter.next();
-				if (p.getDataType().equals(dt) || p.getDataType().isEquivalent(dt)) {
-					return true;
-				}
-			}
+            for (Preview p : data) {
+                if (p.getDataType().equals(dt) || p.getDataType().isEquivalent(dt)) {
+                    return true;
+                }
+            }
 			return false;
 		}
 

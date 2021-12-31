@@ -19,6 +19,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assume.assumeFalse;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -79,7 +80,7 @@ public class SshPtyTest extends AbstractGhidraHeadedIntegrationTest {
 		try (SshPty pty = factory.openpty()) {
 			PtySession bash = pty.getChild().session(new String[] { "bash" }, null);
 			OutputStream out = pty.getParent().getOutputStream();
-			out.write("exit\n".getBytes("UTF-8"));
+			out.write("exit\n".getBytes(StandardCharsets.UTF_8));
 			out.flush();
 			new StreamPumper(pty.getParent().getInputStream(), System.out).start();
 			assertEquals(0, bash.waitExited());

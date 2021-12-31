@@ -35,7 +35,7 @@ public interface ProgramTableModel {
      * @param column the column
      * @return a program location corresponding the given row and column
      */
-	public ProgramLocation getProgramLocation(int row, int column);
+    ProgramLocation getProgramLocation(int row, int column);
 
 	/**
 	 * Returns a program selection corresponding to the 
@@ -44,11 +44,11 @@ public interface ProgramTableModel {
 	 * @param rows the currently selected rows.
 	 * @return a program selection
 	 */
-	public ProgramSelection getProgramSelection(int[] rows);
+    ProgramSelection getProgramSelection(int[] rows);
 	
 	/**
 	 * Returns the program associated with this ProgramTableModel.
 	 * @return the program associated with this ProgramTableModel.
 	 */
-	public Program getProgram();
+    Program getProgram();
 }

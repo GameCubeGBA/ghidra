@@ -44,8 +44,8 @@ import ghidra.util.Msg;
  */
 public class RTTI0DataType extends RTTIDataType {
 
-	private final static long serialVersionUID = 1;
-	private final static int VF_TABLE_POINTER_OFFSET = 0;
+	private static final long serialVersionUID = 1;
+	private static final int VF_TABLE_POINTER_OFFSET = 0;
 
 	/**
 	 * Creates a dynamic Type Descriptor data type.
@@ -334,13 +334,9 @@ public class RTTI0DataType extends RTTIDataType {
 			return false;
 		}
 
-		if (!validationOptions.shouldIgnoreDefinedData() &&
-			containsDefinedData(listing, startAddress, endAddress)) {
-			return false;
-		}
-
-		return true;
-	}
+        return validationOptions.shouldIgnoreDefinedData() ||
+                !containsDefinedData(listing, startAddress, endAddress);
+    }
 
 	/**
 	 * Gets the total length of the data created when this data type is placed at the indicated

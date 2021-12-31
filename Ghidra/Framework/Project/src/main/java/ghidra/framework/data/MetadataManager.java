@@ -26,8 +26,8 @@ import db.StringField;
 import db.Table;
 
 class MetadataManager {
-	private final static String TABLE_NAME = "Metadata";
-    private final static Schema SCHEMA = new Schema(0,"ID", 
+	private static final String TABLE_NAME = "Metadata";
+    private static final Schema SCHEMA = new Schema(0,"ID",
     		new Class[] {StringField.class, StringField.class},
     		new String[] {"Key", "Value"});
 

@@ -26,9 +26,9 @@ import ghidra.util.task.TaskMonitor;
 
 class PdbDataTypeParser {
 
-	private final static String NO_TYPE = "<NoType>";
+	private static final String NO_TYPE = "<NoType>";
 
-	private final static WrappedDataType NO_TYPE_DATATYPE =
+	private static final WrappedDataType NO_TYPE_DATATYPE =
 		new WrappedDataType(new TypedefDataType(NO_TYPE, Undefined1DataType.dataType), false, true);
 
 	private DataTypeManager programDataTypeMgr;
@@ -174,7 +174,7 @@ class PdbDataTypeParser {
 		// should be case-sensitive
 		datatype = datatype.trim();
 
-		if (datatype == null || datatype.length() == 0) {
+		if (datatype == null || datatype.isEmpty()) {
 			return null;
 		}
 

@@ -17,13 +17,13 @@ package ghidra.file.formats.lzss;
 
 public final class LzssConstants {
 
-	public final static int     SIGNATURE_COMPRESSION       = 0x636f6d70;
-	public final static byte [] SIGNATURE_COMPRESSION_BYTES = { 'c', 'o', 'm', 'p' };
+	public static final int     SIGNATURE_COMPRESSION       = 0x636f6d70;
+	public static final byte [] SIGNATURE_COMPRESSION_BYTES = { 'c', 'o', 'm', 'p' };
 
-	public final static int     SIGNATURE_LZSS              = 0x6c7a7373;
-	public final static byte [] SIGNATURE_LZSS_BYTES        = { 'l', 'z', 's', 's' };
+	public static final int     SIGNATURE_LZSS              = 0x6c7a7373;
+	public static final byte [] SIGNATURE_LZSS_BYTES        = { 'l', 'z', 's', 's' };
 
-	public final static int     PADDING_LENGTH              = 0x16c;
+	public static final int     PADDING_LENGTH              = 0x16c;
 
-	public final static int     HEADER_LENGTH               = 4 + 4 + 4 + 4 + 4 + PADDING_LENGTH;
+	public static final int     HEADER_LENGTH               = 4 + 4 + 4 + 4 + 4 + PADDING_LENGTH;
 }

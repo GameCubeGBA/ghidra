@@ -65,7 +65,7 @@ class SetupProjectPanelManager implements PanelManager {
 	private String statusMessage;
 	private PluginTool tool;
 
-	final static Border EMPTY_BORDER = BorderFactory.createEmptyBorder(80, 120, 0, 120);
+	static final Border EMPTY_BORDER = BorderFactory.createEmptyBorder(80, 120, 0, 120);
 
 	SetupProjectPanelManager(PluginTool tool, ServerInfo serverInfo) {
 		serverPanel = new ServerInfoPanel(this);
@@ -93,11 +93,8 @@ class SetupProjectPanelManager implements PanelManager {
 
 	@Override
 	public boolean hasNextPanel() {
-		if ((currentWizardPanel == serverPanel) || (currentWizardPanel == repositoryPanel && repositoryPanel.createRepository())) {
-			return true;
-		}
-		return false;
-	}
+        return (currentWizardPanel == serverPanel) || (currentWizardPanel == repositoryPanel && repositoryPanel.createRepository());
+    }
 
 	@Override
 	public boolean hasPreviousPanel() {

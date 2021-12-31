@@ -15,19 +15,19 @@ public class GBinaryReader {
     /**
      * The size of a BYTE in Java.
      */
-    public final static int SIZEOF_BYTE = 1;
+    public static final int SIZEOF_BYTE = 1;
     /**
      * The size of a SHORT in Java.
      */
-    public final static int SIZEOF_SHORT = 2;
+    public static final int SIZEOF_SHORT = 2;
     /**
      * The size of an INTEGER in Java.
      */
-    public final static int SIZEOF_INT = 4;
+    public static final int SIZEOF_INT = 4;
     /**
      * The size of a LONG in Java.
      */
-    public final static int SIZEOF_LONG = 8;
+    public static final int SIZEOF_LONG = 8;
 
     private GByteProvider provider;
     private GDataConverter converter;

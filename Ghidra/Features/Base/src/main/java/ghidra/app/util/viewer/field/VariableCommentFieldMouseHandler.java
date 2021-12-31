@@ -26,7 +26,7 @@ import ghidra.util.StringUtilities;
 
 public class VariableCommentFieldMouseHandler extends CommentFieldMouseHandler {
 
-	private final static Class<?>[] SUPPORTED_CLASSES =
+	private static final Class<?>[] SUPPORTED_CLASSES =
 		new Class[] { VariableCommentFieldLocation.class };
 
 	@Override

@@ -162,14 +162,14 @@ public class ClassDefItem implements StructConverter {
 			builder.append("Class Index: 0x" + Integer.toHexString(index) + "\n");
 		}
 		builder.append(
-			"Class: " + DexUtil.convertTypeIndexToString(header, getClassIndex()) + "\n");
-		builder.append("Class Access Flags:\n" + AccessFlags.toString(getAccessFlags()) + "\n");
+			"Class: " + DexUtil.convertTypeIndexToString(header, classIndex) + "\n");
+		builder.append("Class Access Flags:\n" + AccessFlags.toString(accessFlags) + "\n");
 		builder.append(
-			"Superclass: " + DexUtil.convertTypeIndexToString(header, getSuperClassIndex()) + "\n");
+			"Superclass: " + DexUtil.convertTypeIndexToString(header, superClassIndex) + "\n");
 
-		if (getInterfacesOffset() > 0) {
+		if (interfacesOffset > 0) {
 			builder.append("Interfaces: " + "\n");
-			TypeList interfaces = getInterfaces();
+			TypeList interfaces = _interfaces;
 			for (TypeItem type : interfaces.getItems()) {
 				monitor.checkCanceled();
 				builder.append(
@@ -177,9 +177,9 @@ public class ClassDefItem implements StructConverter {
 			}
 		}
 
-		if (getSourceFileIndex() > 0) {
+		if (sourceFileIndex > 0) {
 			builder.append(
-				"Source File: " + DexUtil.convertToString(header, getSourceFileIndex()) + "\n");
+				"Source File: " + DexUtil.convertToString(header, sourceFileIndex) + "\n");
 		}
 
 		return builder.toString();

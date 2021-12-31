@@ -81,17 +81,17 @@ public class InstructionSearchUtils {
 		String[] byteStrs = hex.split("(?<=\\G.{2})");
 
 		// This is the final string we'll be returning.
-		String retString = "";
+		StringBuilder retString = new StringBuilder();
 
 		// Loop over the byte strings, converting each one to a binary string.
 		for (String byteStr : byteStrs) {
 			int bint = Integer.parseInt(byteStr, 16);
 			String bin = Integer.toBinaryString(bint);
 			bin = padZeros(bin);
-			retString += bin;
+			retString.append(bin);
 		}
 
-		return retString;
+		return retString.toString();
 	}
 
 	/**
@@ -175,7 +175,7 @@ public class InstructionSearchUtils {
 	 */
 	public static String formatSearchString(String searchStr, String mask)
 			throws InvalidInputException {
-		String retStr = "";
+		StringBuilder retStr = new StringBuilder();
 
 		if (searchStr.length() != mask.length()) {
 			throw new InvalidInputException("mask and search string not the same length.");
@@ -185,20 +185,20 @@ public class InstructionSearchUtils {
 			char valChar = searchStr.charAt(i);
 			char maskChar = mask.charAt(i);
 			if (valChar == '1') {
-				retStr += "1";
+				retStr.append("1");
 			}
 			else if (valChar == '0' && maskChar == '1') {
-				retStr += "0";
+				retStr.append("0");
 			}
 			else if (valChar == '0' && maskChar == '0') {
-				retStr += ".";
+				retStr.append(".");
 			}
 			else {
-				retStr += "0";
+				retStr.append("0");
 			}
 		}
 
-		return retStr;
+		return retStr.toString();
 	}
 
 	/**

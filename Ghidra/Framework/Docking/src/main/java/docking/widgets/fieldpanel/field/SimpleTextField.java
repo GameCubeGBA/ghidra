@@ -198,11 +198,8 @@ public class SimpleTextField implements Field {
 	@Override
 	public boolean isValid(int row, int col) {
 
-		if ((row != 0) || (col < 0) || (col > numCols - 1)) {
-			return false;
-		}
-		return true;
-	}
+        return (row == 0) && (col >= 0) && (col <= numCols - 1);
+    }
 
 	@Override
 	public void paint(JComponent c, Graphics g, PaintContext context,
@@ -228,7 +225,7 @@ public class SimpleTextField implements Field {
 			int endCol = highlight.getEnd();
 			int x1 = findX(startCol);
 			int x2 = endCol >= text.length() ? width : findX(endCol);
-			g.fillRect(startX + x1, -getHeightAbove(), x2 - x1, getHeight());
+			g.fillRect(startX + x1, -heightAbove, x2 - x1, getHeight());
 		}
 	}
 
@@ -241,7 +238,7 @@ public class SimpleTextField implements Field {
 				int start = findX(startCol);
 				int end = findX(endCol + 1);
 				g.setColor(c);
-				g.fillRect(startX + start, -getHeightAbove(), end - start, getHeight());
+				g.fillRect(startX + start, -heightAbove, end - start, getHeight());
 			}
 		}
 	}
@@ -292,11 +289,8 @@ public class SimpleTextField implements Field {
 	 */
 	@Override
 	public boolean contains(int x, int y) {
-		if ((x >= startX) && (x < startX + width) && (y >= -heightAbove) && (y < heightBelow)) {
-			return true;
-		}
-		return false;
-	}
+        return (x >= startX) && (x < startX + width) && (y >= -heightAbove) && (y < heightBelow);
+    }
 
 	/**
 	 * Set the foreground color for this field.

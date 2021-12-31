@@ -33,8 +33,7 @@ public class CliTableInterfaceImpl extends CliAbstractTable {
 		public int interfaceIndex;
 		
 		public CliInterfaceImplRow(int classIndex, int interfaceIndex) {
-			super();
-			this.classIndex = classIndex;
+            this.classIndex = classIndex;
 			this.interfaceIndex = interfaceIndex;
 		}
 

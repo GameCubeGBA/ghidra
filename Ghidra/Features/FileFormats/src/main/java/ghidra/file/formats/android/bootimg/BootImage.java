@@ -70,12 +70,12 @@ public class BootImage implements StructConverter {
 	}
 
 	public int getKernelOffset() {
-		return getPageSize();
+		return pageSize;
 	}
 
 	public int getKernelSizePageAligned() {
-		int remainder = getPageSize() - (getKernelSize() % getPageSize());
-		return getKernelSize() + remainder;
+		int remainder = pageSize - (kernelSize % pageSize);
+		return kernelSize + remainder;
 	}
 
 	public int getRamDiskSize() {
@@ -91,8 +91,8 @@ public class BootImage implements StructConverter {
 	}
 
 	public int getRamDiskSizePageAligned() {
-		int remainder = getPageSize() - (getRamDiskSize() % getPageSize());
-		return getRamDiskSize() + remainder;
+		int remainder = pageSize - (ramDiskSize % pageSize);
+		return ramDiskSize + remainder;
 	}
 
 	public int getSecondStageSize() {
@@ -104,12 +104,12 @@ public class BootImage implements StructConverter {
 	}
 
 	public int getSecondStageOffset() {
-		return getRamDiskOffset() + (getRamDiskSizePageAligned() * getPageSize());
+		return getRamDiskOffset() + (getRamDiskSizePageAligned() * pageSize);
 	}
 
 	public int getSecondStageSizePageAligned() {
-		int remainder = getPageSize() - (getSecondStageSize() % getPageSize());
-		return getSecondStageSize() + remainder;
+		int remainder = pageSize - (secondStageSize % pageSize);
+		return secondStageSize + remainder;
 	}
 
 	public int getTagsAddress() {

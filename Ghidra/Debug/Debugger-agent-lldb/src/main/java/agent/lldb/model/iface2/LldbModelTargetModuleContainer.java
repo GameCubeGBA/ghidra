@@ -27,12 +27,12 @@ public interface LldbModelTargetModuleContainer
 		extends LldbModelTargetEventScope, TargetModuleContainer {
 
 	@Override
-	public CompletableFuture<? extends TargetModule> addSyntheticModule(String name);
+    CompletableFuture<? extends TargetModule> addSyntheticModule(String name);
 
-	public LldbModelTargetModule getTargetModule(SBModule module);
+	LldbModelTargetModule getTargetModule(SBModule module);
 
-	public void libraryLoaded(DebugModuleInfo info, int index);
+	void libraryLoaded(DebugModuleInfo info, int index);
 
-	public void libraryUnloaded(DebugModuleInfo info, int index);
+	void libraryUnloaded(DebugModuleInfo info, int index);
 
 }

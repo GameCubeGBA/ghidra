@@ -24,13 +24,13 @@ import docking.widgets.table.DisplayStringProvider;
 
 public interface DisplayableOffset extends DisplayStringProvider, Comparable<DisplayableOffset> {
 
-	public static String NO_OFFSET = "No Offset";
+	String NO_OFFSET = "No Offset";
 
-	public String getDisplayString();
+	String getDisplayString();
 
-	public Address getAddress();
+	Address getAddress();
 
-	public long getOffset();
+	long getOffset();
 
-	public BigInteger getOffsetAsBigInteger();
+	BigInteger getOffsetAsBigInteger();
 }

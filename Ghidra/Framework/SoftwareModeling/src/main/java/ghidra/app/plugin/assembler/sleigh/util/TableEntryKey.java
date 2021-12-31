@@ -54,11 +54,8 @@ public class TableEntryKey implements Comparable<TableEntryKey> {
 			return false;
 		}
 		TableEntryKey ek = (TableEntryKey) that;
-		if ((this.state != ek.state) || !this.sym.equals(ek.sym)) {
-			return false;
-		}
-		return true;
-	}
+        return (this.state == ek.state) && this.sym.equals(ek.sym);
+    }
 
 	@Override
 	public int compareTo(TableEntryKey that) {

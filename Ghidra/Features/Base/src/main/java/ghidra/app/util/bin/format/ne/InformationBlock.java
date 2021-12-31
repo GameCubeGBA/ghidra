@@ -72,96 +72,96 @@ public class InformationBlock {
 	/**
 	 * Program flags: no auto data segments
 	 */
-	public final static byte FLAGS_PROG_NO_AUTO_DATA = (byte) 0x00;
+    public static final byte FLAGS_PROG_NO_AUTO_DATA = 0x00;
 	/**
 	 * Program flags: single data segment
 	 */
-	public final static byte FLAGS_PROG_SINGLE_DATA = (byte) 0x01;
+    public static final byte FLAGS_PROG_SINGLE_DATA = 0x01;
 	/**
 	 * Program flags: multiple data segments
 	 */
-	public final static byte FLAGS_PROG_MULTIPLE_DATA = (byte) 0x02;
+    public static final byte FLAGS_PROG_MULTIPLE_DATA = 0x02;
 
-	public final static byte FLAGS_PROG_GLOBAL_INIT = (byte) 0x04;
-	public final static byte FLAGS_PROG_PROTECTED_MODE = (byte) 0x08;
-	public final static byte FLAGS_PROG_8086 = (byte) 0x10;
-	public final static byte FLAGS_PROG_80286 = (byte) 0x20;
-	public final static byte FLAGS_PROG_80386 = (byte) 0x40;
-	public final static byte FLAGS_PROG_80x87 = (byte) 0x80;
+	public static final byte FLAGS_PROG_GLOBAL_INIT = 0x04;
+	public static final byte FLAGS_PROG_PROTECTED_MODE = 0x08;
+	public static final byte FLAGS_PROG_8086 = 0x10;
+	public static final byte FLAGS_PROG_80286 = 0x20;
+	public static final byte FLAGS_PROG_80386 = 0x40;
+	public static final byte FLAGS_PROG_80x87 = (byte) 0x80;
 
 	/**
 	 * Is application full screen?
 	 */
-	public final static byte FLAGS_APP_FULL_SCREEN = (byte) 0x01;
+    public static final byte FLAGS_APP_FULL_SCREEN = 0x01;
 	/**
 	 * Is application compatible with Windows Program Manager?
 	 */
-	public final static byte FLAGS_APP_WIN_PM_COMPATIBLE = (byte) 0x02;
+    public static final byte FLAGS_APP_WIN_PM_COMPATIBLE = 0x02;
 	/**
 	 * Does application use Windows Program Manager?
 	 */
-	public final static byte FLAGS_APP_WINDOWS_PM = (byte) 0x03;
+    public static final byte FLAGS_APP_WINDOWS_PM = 0x03;
 	/**
 	 * Does the first segment contain code that loads the application?
 	 */
-	public final static byte FLAGS_APP_LOAD_CODE = (byte) 0x08;
-	public final static byte FLAGS_APP_LINK_ERRS = (byte) 0x20;
-	public final static byte FLAGS_APP_NONCONFORMING_PROG = (byte) 0x40;
-	public final static byte FLAGS_APP_LIBRARY_MODULE = (byte) 0x80;
+    public static final byte FLAGS_APP_LOAD_CODE = 0x08;
+	public static final byte FLAGS_APP_LINK_ERRS = 0x20;
+	public static final byte FLAGS_APP_NONCONFORMING_PROG = 0x40;
+	public static final byte FLAGS_APP_LIBRARY_MODULE = (byte) 0x80;
 
 	/**
 	 * Unknown executable type
 	 */
-	public final static byte EXETYPE_UNKNOWN = (byte) 0x00;
+    public static final byte EXETYPE_UNKNOWN = 0x00;
 	/**
 	 * OS/2 executable
 	 */
-	public final static byte EXETYPE_OS2 = (byte) 0x01;
+    public static final byte EXETYPE_OS2 = 0x01;
 	/**
 	 * Windows executable
 	 */
-	public final static byte EXETYPE_WINDOWS = (byte) 0x02;
+    public static final byte EXETYPE_WINDOWS = 0x02;
 	/**
 	 * European DOS 4.x executable
 	 */
-	public final static byte EXETYPE_EUROPEAN_DOS_4 = (byte) 0x04;
+    public static final byte EXETYPE_EUROPEAN_DOS_4 = 0x04;
 	/**
 	 * Reserved executable Type
 	 */
-	public final static byte EXETYPE_RESERVED4 = (byte) 0x08;
+    public static final byte EXETYPE_RESERVED4 = 0x08;
 	/**
 	 * Windows 386 executable
 	 */
-	public final static byte EXETYPE_WINDOWS_386 = (byte) 0x04;
+    public static final byte EXETYPE_WINDOWS_386 = 0x04;
 	/**
 	 * Borland Operating System Services executable
 	 */
-	public final static byte EXETYPE_BOSS = (byte) 0x05;
+    public static final byte EXETYPE_BOSS = 0x05;
 	/**
 	 * Pharlap 286 OS/2 executable
 	 */
-	public final static byte EXETYPE_PHARLAP_286_OS2 = (byte) 0x81;
+    public static final byte EXETYPE_PHARLAP_286_OS2 = (byte) 0x81;
 	/**
 	 * Pharlap 386 Windows executable
 	 */
-	public final static byte EXETYPE_PHARLAP_286_WIN = (byte) 0x82;
+    public static final byte EXETYPE_PHARLAP_286_WIN = (byte) 0x82;
 
 	/**
 	 * Supports long names
 	 */
-	public final static byte OTHER_FLAGS_SUPPORTS_LONG_NAMES = (byte) 0x00;
+    public static final byte OTHER_FLAGS_SUPPORTS_LONG_NAMES = 0x00;
 	/**
 	 * Protected mode
 	 */
-	public final static byte OTHER_FLAGS_PROTECTED_MODE = (byte) 0x01;
+    public static final byte OTHER_FLAGS_PROTECTED_MODE = 0x01;
 	/**
 	 * Proportional font
 	 */
-	public final static byte OTHER_FLAGS_PROPORTIONAL_FONT = (byte) 0x02;
+    public static final byte OTHER_FLAGS_PROPORTIONAL_FONT = 0x02;
 	/**
 	 * Gangload area
 	 */
-	public final static byte OTHER_FLAGS_GANGLOAD_AREA = (byte) 0x04;
+    public static final byte OTHER_FLAGS_GANGLOAD_AREA = 0x04;
 
 	private short ne_magic;        // Magic number
 	private byte ne_ver;           // Version number

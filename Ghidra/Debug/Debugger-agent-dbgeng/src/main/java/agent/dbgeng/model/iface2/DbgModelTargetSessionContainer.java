@@ -22,13 +22,13 @@ public interface DbgModelTargetSessionContainer
 		extends DbgModelTargetObject, DbgEventsListenerAdapter {
 
 	@Override
-	public default void sessionAdded(DbgSession session, DbgCause cause) {
+    default void sessionAdded(DbgSession session, DbgCause cause) {
 		//refresh();
 	}
 
 	@Override
-	public void sessionRemoved(DebugSessionId sessionId, DbgCause cause);
+    void sessionRemoved(DebugSessionId sessionId, DbgCause cause);
 
-	public DbgModelTargetSession getTargetSession(DbgSession session);
+	DbgModelTargetSession getTargetSession(DbgSession session);
 
 }

@@ -143,7 +143,7 @@ public class DBTraceCommentAdapter
 	}
 
 	public static String[] arrayFromComment(String comment) {
-		return comment == null || comment.length() == 0 ? EMPTY_STRING_ARRAY : comment.split("\n");
+		return comment == null || comment.isEmpty() ? EMPTY_STRING_ARRAY : comment.split("\n");
 	}
 
 	public String getComment(long snap, Address address, int commentType) {

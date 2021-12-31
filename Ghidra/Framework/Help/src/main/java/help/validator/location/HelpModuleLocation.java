@@ -168,7 +168,7 @@ public abstract class HelpModuleLocation {
 			Collection<HelpFile> helpFiles = helpTopic.getHelpFiles();
 			for (HelpFile helpFile : helpFiles) {
 				Map<String, List<AnchorDefinition>> anchors = helpFile.getDuplicateAnchorsByID();
-				if (anchors.size() > 0) {
+				if (!anchors.isEmpty()) {
 					map.put(helpFile, anchors);
 				}
 			}
@@ -181,7 +181,7 @@ public abstract class HelpModuleLocation {
 		for (HelpTopic helpTopic : helpTopics) {
 			List<AnchorDefinition> duplicateDefinitions =
 				getDuplicateTopicAnchorDefinitions(helpTopic);
-			if (duplicateDefinitions.size() > 0) {
+			if (!duplicateDefinitions.isEmpty()) {
 				map.put(helpTopic, duplicateDefinitions);
 			}
 		}

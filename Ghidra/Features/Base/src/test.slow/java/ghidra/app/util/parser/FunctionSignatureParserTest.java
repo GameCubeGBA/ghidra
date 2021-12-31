@@ -416,7 +416,7 @@ public class FunctionSignatureParserTest extends AbstractGhidraHeadedIntegration
 	}
 
 	private DataType createDataType(String name) {
-		if (name.equals("int")) {
+		if ("int".equals(name)) {
 			return new IntegerDataType();
 		}
 		return new StructureDataType(name, 2);

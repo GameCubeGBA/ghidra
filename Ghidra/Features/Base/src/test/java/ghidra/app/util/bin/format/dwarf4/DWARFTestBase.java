@@ -310,14 +310,13 @@ public class DWARFTestBase extends AbstractGhidraHeadedIntegrationTest {
 		DebugInfoEntry arrayType = new DIECreator(DW_TAG_array_type)
 				.addRef(DW_AT_type, baseTypeDIE)
 				.create(dcu);
-		for (int dimIndex = 0; dimIndex < dimensions.length; dimIndex++) {
-			int dim = dimensions[dimIndex];
-			DIECreator dimDIE = new DIECreator(DW_TAG_subrange_type).setParent(arrayType);
-			if (dim != -1 || !elideEmptyDimRangeValue) {
-				dimDIE.addInt(DW_AT_upper_bound, dimensions[dimIndex]);
-			}
-			dimDIE.create(dcu);
-		}
+        for (int dim : dimensions) {
+            DIECreator dimDIE = new DIECreator(DW_TAG_subrange_type).setParent(arrayType);
+            if (dim != -1 || !elideEmptyDimRangeValue) {
+                dimDIE.addInt(DW_AT_upper_bound, dim);
+            }
+            dimDIE.create(dcu);
+        }
 		return arrayType;
 	}
 

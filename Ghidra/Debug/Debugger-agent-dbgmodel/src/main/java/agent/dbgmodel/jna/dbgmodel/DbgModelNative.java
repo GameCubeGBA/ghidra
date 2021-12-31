@@ -37,7 +37,7 @@ public interface DbgModelNative extends StdCallLibrary {
 
 	HRESULT DebugCreateEx(REFIID InterfaceId, DWORD DbgEngOptions, PointerByReference Interface);
 
-	public static enum ModelObjectKind {
+	enum ModelObjectKind {
 		OBJECT_PROPERTY_ACCESSOR,
 		OBJECT_CONTEXT,
 		OBJECT_TARGET_OBJECT,
@@ -50,7 +50,7 @@ public interface DbgModelNative extends StdCallLibrary {
 		OBJECT_KEY_REFERENCE;
 	}
 
-	public static enum SymbolKind {
+	enum SymbolKind {
 		SYMBOL,
 		SYMBOL_MODULE,
 		SYMBOL_TYPE,
@@ -62,7 +62,7 @@ public interface DbgModelNative extends StdCallLibrary {
 		SYMBOL_FUNCTION;
 	}
 
-	public static enum TypeKind {
+	enum TypeKind {
 		TYPE_UDT,
 		TYPE_POINTER,
 		TYPE_MEMBER_POINTER,
@@ -73,7 +73,7 @@ public interface DbgModelNative extends StdCallLibrary {
 		TYPE_INTRINSIC;
 	}
 
-	public static enum IntrinsicKind {
+	enum IntrinsicKind {
 		INTRINSIC_VOID,
 		INTRINSIC_BOOL,
 		INTRINSIC_CHAR,
@@ -88,11 +88,11 @@ public interface DbgModelNative extends StdCallLibrary {
 		INTRINSIC_CHAR32;
 	}
 
-	public static enum PointerKind {
+	enum PointerKind {
 		POINTER_STANDARD, POINTER_REFERENCE, POINTER_VALUE_REFERENCE, POINTER_CX_HAT;
 	}
 
-	public static enum CallingConventionKind {
+	enum CallingConventionKind {
 		CALLING_CONVENTION_UNKNOWN,
 		CALLING_CONVENTION_CDECL,
 		CALLING_CONVENTION_FASTCALL,
@@ -101,11 +101,11 @@ public interface DbgModelNative extends StdCallLibrary {
 		CALLING_CONVENTION_THISCALL;
 	}
 
-	public static enum LocationKind {
+	enum LocationKind {
 		LOCATION_MEMBER, LOCATION_STATIC, LOCATION_CONSTANT, LOCATION_NONE;
 	}
 
-	public static enum PreferredFormat {
+	enum PreferredFormat {
 		FORMAT_NONE,
 		FORMAT_SINGLE_CHARACTER,
 		FORMAT_QUOTED_STRING,
@@ -124,7 +124,7 @@ public interface DbgModelNative extends StdCallLibrary {
 		FORMAT_QUOTED_UTF32_STRING;
 	}
 
-	public static class LOCATION extends Structure {
+	class LOCATION extends Structure {
 		public static class ByReference extends LOCATION
 				implements Structure.ByReference {
 		}
@@ -155,13 +155,12 @@ public interface DbgModelNative extends StdCallLibrary {
 		}
 	}
 
-	public static class ARRAY_DIMENSION extends Structure {
+	class ARRAY_DIMENSION extends Structure {
 		public static class ByReference extends ARRAY_DIMENSION
 				implements Structure.ByReference {
 
 			public ByReference() {
-				super();
-				// TODO Auto-generated constructor stub
+                // TODO Auto-generated constructor stub
 			}
 		}
 

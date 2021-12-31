@@ -12,45 +12,45 @@
 package SWIG;
 
 public final class LanguageType {
-  public final static LanguageType eLanguageTypeUnknown = new LanguageType("eLanguageTypeUnknown", lldbJNI.eLanguageTypeUnknown_get());
-  public final static LanguageType eLanguageTypeC89 = new LanguageType("eLanguageTypeC89", lldbJNI.eLanguageTypeC89_get());
-  public final static LanguageType eLanguageTypeC = new LanguageType("eLanguageTypeC", lldbJNI.eLanguageTypeC_get());
-  public final static LanguageType eLanguageTypeAda83 = new LanguageType("eLanguageTypeAda83", lldbJNI.eLanguageTypeAda83_get());
-  public final static LanguageType eLanguageTypeC_plus_plus = new LanguageType("eLanguageTypeC_plus_plus", lldbJNI.eLanguageTypeC_plus_plus_get());
-  public final static LanguageType eLanguageTypeCobol74 = new LanguageType("eLanguageTypeCobol74", lldbJNI.eLanguageTypeCobol74_get());
-  public final static LanguageType eLanguageTypeCobol85 = new LanguageType("eLanguageTypeCobol85", lldbJNI.eLanguageTypeCobol85_get());
-  public final static LanguageType eLanguageTypeFortran77 = new LanguageType("eLanguageTypeFortran77", lldbJNI.eLanguageTypeFortran77_get());
-  public final static LanguageType eLanguageTypeFortran90 = new LanguageType("eLanguageTypeFortran90", lldbJNI.eLanguageTypeFortran90_get());
-  public final static LanguageType eLanguageTypePascal83 = new LanguageType("eLanguageTypePascal83", lldbJNI.eLanguageTypePascal83_get());
-  public final static LanguageType eLanguageTypeModula2 = new LanguageType("eLanguageTypeModula2", lldbJNI.eLanguageTypeModula2_get());
-  public final static LanguageType eLanguageTypeJava = new LanguageType("eLanguageTypeJava", lldbJNI.eLanguageTypeJava_get());
-  public final static LanguageType eLanguageTypeC99 = new LanguageType("eLanguageTypeC99", lldbJNI.eLanguageTypeC99_get());
-  public final static LanguageType eLanguageTypeAda95 = new LanguageType("eLanguageTypeAda95", lldbJNI.eLanguageTypeAda95_get());
-  public final static LanguageType eLanguageTypeFortran95 = new LanguageType("eLanguageTypeFortran95", lldbJNI.eLanguageTypeFortran95_get());
-  public final static LanguageType eLanguageTypePLI = new LanguageType("eLanguageTypePLI", lldbJNI.eLanguageTypePLI_get());
-  public final static LanguageType eLanguageTypeObjC = new LanguageType("eLanguageTypeObjC", lldbJNI.eLanguageTypeObjC_get());
-  public final static LanguageType eLanguageTypeObjC_plus_plus = new LanguageType("eLanguageTypeObjC_plus_plus", lldbJNI.eLanguageTypeObjC_plus_plus_get());
-  public final static LanguageType eLanguageTypeUPC = new LanguageType("eLanguageTypeUPC", lldbJNI.eLanguageTypeUPC_get());
-  public final static LanguageType eLanguageTypeD = new LanguageType("eLanguageTypeD", lldbJNI.eLanguageTypeD_get());
-  public final static LanguageType eLanguageTypePython = new LanguageType("eLanguageTypePython", lldbJNI.eLanguageTypePython_get());
-  public final static LanguageType eLanguageTypeOpenCL = new LanguageType("eLanguageTypeOpenCL", lldbJNI.eLanguageTypeOpenCL_get());
-  public final static LanguageType eLanguageTypeGo = new LanguageType("eLanguageTypeGo", lldbJNI.eLanguageTypeGo_get());
-  public final static LanguageType eLanguageTypeModula3 = new LanguageType("eLanguageTypeModula3", lldbJNI.eLanguageTypeModula3_get());
-  public final static LanguageType eLanguageTypeHaskell = new LanguageType("eLanguageTypeHaskell", lldbJNI.eLanguageTypeHaskell_get());
-  public final static LanguageType eLanguageTypeC_plus_plus_03 = new LanguageType("eLanguageTypeC_plus_plus_03", lldbJNI.eLanguageTypeC_plus_plus_03_get());
-  public final static LanguageType eLanguageTypeC_plus_plus_11 = new LanguageType("eLanguageTypeC_plus_plus_11", lldbJNI.eLanguageTypeC_plus_plus_11_get());
-  public final static LanguageType eLanguageTypeOCaml = new LanguageType("eLanguageTypeOCaml", lldbJNI.eLanguageTypeOCaml_get());
-  public final static LanguageType eLanguageTypeRust = new LanguageType("eLanguageTypeRust", lldbJNI.eLanguageTypeRust_get());
-  public final static LanguageType eLanguageTypeC11 = new LanguageType("eLanguageTypeC11", lldbJNI.eLanguageTypeC11_get());
-  public final static LanguageType eLanguageTypeSwift = new LanguageType("eLanguageTypeSwift", lldbJNI.eLanguageTypeSwift_get());
-  public final static LanguageType eLanguageTypeJulia = new LanguageType("eLanguageTypeJulia", lldbJNI.eLanguageTypeJulia_get());
-  public final static LanguageType eLanguageTypeDylan = new LanguageType("eLanguageTypeDylan", lldbJNI.eLanguageTypeDylan_get());
-  public final static LanguageType eLanguageTypeC_plus_plus_14 = new LanguageType("eLanguageTypeC_plus_plus_14", lldbJNI.eLanguageTypeC_plus_plus_14_get());
-  public final static LanguageType eLanguageTypeFortran03 = new LanguageType("eLanguageTypeFortran03", lldbJNI.eLanguageTypeFortran03_get());
-  public final static LanguageType eLanguageTypeFortran08 = new LanguageType("eLanguageTypeFortran08", lldbJNI.eLanguageTypeFortran08_get());
-  public final static LanguageType eLanguageTypeMipsAssembler = new LanguageType("eLanguageTypeMipsAssembler", lldbJNI.eLanguageTypeMipsAssembler_get());
-  public final static LanguageType eLanguageTypeExtRenderScript = new LanguageType("eLanguageTypeExtRenderScript", lldbJNI.eLanguageTypeExtRenderScript_get());
-  public final static LanguageType eNumLanguageTypes = new LanguageType("eNumLanguageTypes");
+  public static final LanguageType eLanguageTypeUnknown = new LanguageType("eLanguageTypeUnknown", lldbJNI.eLanguageTypeUnknown_get());
+  public static final LanguageType eLanguageTypeC89 = new LanguageType("eLanguageTypeC89", lldbJNI.eLanguageTypeC89_get());
+  public static final LanguageType eLanguageTypeC = new LanguageType("eLanguageTypeC", lldbJNI.eLanguageTypeC_get());
+  public static final LanguageType eLanguageTypeAda83 = new LanguageType("eLanguageTypeAda83", lldbJNI.eLanguageTypeAda83_get());
+  public static final LanguageType eLanguageTypeC_plus_plus = new LanguageType("eLanguageTypeC_plus_plus", lldbJNI.eLanguageTypeC_plus_plus_get());
+  public static final LanguageType eLanguageTypeCobol74 = new LanguageType("eLanguageTypeCobol74", lldbJNI.eLanguageTypeCobol74_get());
+  public static final LanguageType eLanguageTypeCobol85 = new LanguageType("eLanguageTypeCobol85", lldbJNI.eLanguageTypeCobol85_get());
+  public static final LanguageType eLanguageTypeFortran77 = new LanguageType("eLanguageTypeFortran77", lldbJNI.eLanguageTypeFortran77_get());
+  public static final LanguageType eLanguageTypeFortran90 = new LanguageType("eLanguageTypeFortran90", lldbJNI.eLanguageTypeFortran90_get());
+  public static final LanguageType eLanguageTypePascal83 = new LanguageType("eLanguageTypePascal83", lldbJNI.eLanguageTypePascal83_get());
+  public static final LanguageType eLanguageTypeModula2 = new LanguageType("eLanguageTypeModula2", lldbJNI.eLanguageTypeModula2_get());
+  public static final LanguageType eLanguageTypeJava = new LanguageType("eLanguageTypeJava", lldbJNI.eLanguageTypeJava_get());
+  public static final LanguageType eLanguageTypeC99 = new LanguageType("eLanguageTypeC99", lldbJNI.eLanguageTypeC99_get());
+  public static final LanguageType eLanguageTypeAda95 = new LanguageType("eLanguageTypeAda95", lldbJNI.eLanguageTypeAda95_get());
+  public static final LanguageType eLanguageTypeFortran95 = new LanguageType("eLanguageTypeFortran95", lldbJNI.eLanguageTypeFortran95_get());
+  public static final LanguageType eLanguageTypePLI = new LanguageType("eLanguageTypePLI", lldbJNI.eLanguageTypePLI_get());
+  public static final LanguageType eLanguageTypeObjC = new LanguageType("eLanguageTypeObjC", lldbJNI.eLanguageTypeObjC_get());
+  public static final LanguageType eLanguageTypeObjC_plus_plus = new LanguageType("eLanguageTypeObjC_plus_plus", lldbJNI.eLanguageTypeObjC_plus_plus_get());
+  public static final LanguageType eLanguageTypeUPC = new LanguageType("eLanguageTypeUPC", lldbJNI.eLanguageTypeUPC_get());
+  public static final LanguageType eLanguageTypeD = new LanguageType("eLanguageTypeD", lldbJNI.eLanguageTypeD_get());
+  public static final LanguageType eLanguageTypePython = new LanguageType("eLanguageTypePython", lldbJNI.eLanguageTypePython_get());
+  public static final LanguageType eLanguageTypeOpenCL = new LanguageType("eLanguageTypeOpenCL", lldbJNI.eLanguageTypeOpenCL_get());
+  public static final LanguageType eLanguageTypeGo = new LanguageType("eLanguageTypeGo", lldbJNI.eLanguageTypeGo_get());
+  public static final LanguageType eLanguageTypeModula3 = new LanguageType("eLanguageTypeModula3", lldbJNI.eLanguageTypeModula3_get());
+  public static final LanguageType eLanguageTypeHaskell = new LanguageType("eLanguageTypeHaskell", lldbJNI.eLanguageTypeHaskell_get());
+  public static final LanguageType eLanguageTypeC_plus_plus_03 = new LanguageType("eLanguageTypeC_plus_plus_03", lldbJNI.eLanguageTypeC_plus_plus_03_get());
+  public static final LanguageType eLanguageTypeC_plus_plus_11 = new LanguageType("eLanguageTypeC_plus_plus_11", lldbJNI.eLanguageTypeC_plus_plus_11_get());
+  public static final LanguageType eLanguageTypeOCaml = new LanguageType("eLanguageTypeOCaml", lldbJNI.eLanguageTypeOCaml_get());
+  public static final LanguageType eLanguageTypeRust = new LanguageType("eLanguageTypeRust", lldbJNI.eLanguageTypeRust_get());
+  public static final LanguageType eLanguageTypeC11 = new LanguageType("eLanguageTypeC11", lldbJNI.eLanguageTypeC11_get());
+  public static final LanguageType eLanguageTypeSwift = new LanguageType("eLanguageTypeSwift", lldbJNI.eLanguageTypeSwift_get());
+  public static final LanguageType eLanguageTypeJulia = new LanguageType("eLanguageTypeJulia", lldbJNI.eLanguageTypeJulia_get());
+  public static final LanguageType eLanguageTypeDylan = new LanguageType("eLanguageTypeDylan", lldbJNI.eLanguageTypeDylan_get());
+  public static final LanguageType eLanguageTypeC_plus_plus_14 = new LanguageType("eLanguageTypeC_plus_plus_14", lldbJNI.eLanguageTypeC_plus_plus_14_get());
+  public static final LanguageType eLanguageTypeFortran03 = new LanguageType("eLanguageTypeFortran03", lldbJNI.eLanguageTypeFortran03_get());
+  public static final LanguageType eLanguageTypeFortran08 = new LanguageType("eLanguageTypeFortran08", lldbJNI.eLanguageTypeFortran08_get());
+  public static final LanguageType eLanguageTypeMipsAssembler = new LanguageType("eLanguageTypeMipsAssembler", lldbJNI.eLanguageTypeMipsAssembler_get());
+  public static final LanguageType eLanguageTypeExtRenderScript = new LanguageType("eLanguageTypeExtRenderScript", lldbJNI.eLanguageTypeExtRenderScript_get());
+  public static final LanguageType eNumLanguageTypes = new LanguageType("eNumLanguageTypes");
 
   public final int swigValue() {
     return swigValue;
@@ -63,9 +63,9 @@ public final class LanguageType {
   public static LanguageType swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-    for (int i = 0; i < swigValues.length; i++)
-      if (swigValues[i].swigValue == swigValue)
-        return swigValues[i];
+      for (LanguageType value : swigValues)
+          if (value.swigValue == swigValue)
+              return value;
     throw new IllegalArgumentException("No enum " + LanguageType.class + " with value " + swigValue);
   }
 

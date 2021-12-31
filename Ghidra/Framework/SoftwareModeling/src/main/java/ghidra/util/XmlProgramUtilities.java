@@ -31,7 +31,7 @@ public class XmlProgramUtilities {
 	    AddressSpace space = addr.getAddressSpace();
 	    if (space instanceof OverlayAddressSpace) {
 	        OverlayAddressSpace oSpace = (OverlayAddressSpace)space;
-	        return oSpace.toString()+oSpace.getOverlayedSpace().toString()+addr.toString(false);
+	        return oSpace +oSpace.getOverlayedSpace().toString()+addr.toString(false);
 	    }
 	    return addr.toString();
 	}

@@ -17,7 +17,7 @@
 package ghidra.app.util.bin.format.macos.cfm;
 
 public class CFragArchitecture {
-	public final static String kPowerPCCFragArch      = "pwpc";
-	public final static String kMotorola68KCFragArch  = "m68k";
-	public final static String kAnyCFragArch          = "????";//0x3F3F3F3F;
+	public static final String kPowerPCCFragArch      = "pwpc";
+	public static final String kMotorola68KCFragArch  = "m68k";
+	public static final String kAnyCFragArch          = "????";//0x3F3F3F3F;
 }

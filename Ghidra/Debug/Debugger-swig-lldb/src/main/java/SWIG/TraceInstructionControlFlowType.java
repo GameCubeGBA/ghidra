@@ -12,11 +12,11 @@
 package SWIG;
 
 public final class TraceInstructionControlFlowType {
-  public final static TraceInstructionControlFlowType eTraceInstructionControlFlowTypeInstruction = new TraceInstructionControlFlowType("eTraceInstructionControlFlowTypeInstruction", lldbJNI.eTraceInstructionControlFlowTypeInstruction_get());
-  public final static TraceInstructionControlFlowType eTraceInstructionControlFlowTypeBranch = new TraceInstructionControlFlowType("eTraceInstructionControlFlowTypeBranch", lldbJNI.eTraceInstructionControlFlowTypeBranch_get());
-  public final static TraceInstructionControlFlowType eTraceInstructionControlFlowTypeTakenBranch = new TraceInstructionControlFlowType("eTraceInstructionControlFlowTypeTakenBranch", lldbJNI.eTraceInstructionControlFlowTypeTakenBranch_get());
-  public final static TraceInstructionControlFlowType eTraceInstructionControlFlowTypeCall = new TraceInstructionControlFlowType("eTraceInstructionControlFlowTypeCall", lldbJNI.eTraceInstructionControlFlowTypeCall_get());
-  public final static TraceInstructionControlFlowType eTraceInstructionControlFlowTypeReturn = new TraceInstructionControlFlowType("eTraceInstructionControlFlowTypeReturn", lldbJNI.eTraceInstructionControlFlowTypeReturn_get());
+  public static final TraceInstructionControlFlowType eTraceInstructionControlFlowTypeInstruction = new TraceInstructionControlFlowType("eTraceInstructionControlFlowTypeInstruction", lldbJNI.eTraceInstructionControlFlowTypeInstruction_get());
+  public static final TraceInstructionControlFlowType eTraceInstructionControlFlowTypeBranch = new TraceInstructionControlFlowType("eTraceInstructionControlFlowTypeBranch", lldbJNI.eTraceInstructionControlFlowTypeBranch_get());
+  public static final TraceInstructionControlFlowType eTraceInstructionControlFlowTypeTakenBranch = new TraceInstructionControlFlowType("eTraceInstructionControlFlowTypeTakenBranch", lldbJNI.eTraceInstructionControlFlowTypeTakenBranch_get());
+  public static final TraceInstructionControlFlowType eTraceInstructionControlFlowTypeCall = new TraceInstructionControlFlowType("eTraceInstructionControlFlowTypeCall", lldbJNI.eTraceInstructionControlFlowTypeCall_get());
+  public static final TraceInstructionControlFlowType eTraceInstructionControlFlowTypeReturn = new TraceInstructionControlFlowType("eTraceInstructionControlFlowTypeReturn", lldbJNI.eTraceInstructionControlFlowTypeReturn_get());
 
   public final int swigValue() {
     return swigValue;
@@ -29,9 +29,9 @@ public final class TraceInstructionControlFlowType {
   public static TraceInstructionControlFlowType swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-    for (int i = 0; i < swigValues.length; i++)
-      if (swigValues[i].swigValue == swigValue)
-        return swigValues[i];
+      for (TraceInstructionControlFlowType value : swigValues)
+          if (value.swigValue == swigValue)
+              return value;
     throw new IllegalArgumentException("No enum " + TraceInstructionControlFlowType.class + " with value " + swigValue);
   }
 

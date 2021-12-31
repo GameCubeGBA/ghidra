@@ -468,7 +468,7 @@ public class DBTraceMemorySpace implements Unfinished, TraceMemorySpace, DBTrace
 	protected Collection<Entry<TraceAddressSnapRange, TraceMemoryState>> doGetStates(long snap,
 			AddressRange range) {
 		// TODO: A better way to handle memory-mapped registers?
-		if (getAddressSpace().isRegisterSpace() && !range.getAddressSpace().isRegisterSpace()) {
+		if (space.isRegisterSpace() && !range.getAddressSpace().isRegisterSpace()) {
 			return trace.getMemoryManager().getStates(snap, range);
 		}
 		return stateMapSpace.reduce(TraceAddressSnapRangeQuery.intersecting(range.getMinAddress(),

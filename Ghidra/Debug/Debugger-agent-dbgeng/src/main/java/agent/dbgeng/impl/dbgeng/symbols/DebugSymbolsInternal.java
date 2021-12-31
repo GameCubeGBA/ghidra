@@ -29,7 +29,7 @@ import agent.dbgeng.jna.dbgeng.symbols.*;
 import ghidra.util.datastruct.WeakValueHashMap;
 
 public interface DebugSymbolsInternal extends DebugSymbols {
-	final Map<Pointer, DebugSymbolsInternal> CACHE = new WeakValueHashMap<>();
+	Map<Pointer, DebugSymbolsInternal> CACHE = new WeakValueHashMap<>();
 
 	static DebugSymbolsInternal instanceFor(WrapIDebugSymbols symbols) {
 		return DbgEngUtil.lazyWeakCache(CACHE, symbols, DebugSymbolsImpl1::new);

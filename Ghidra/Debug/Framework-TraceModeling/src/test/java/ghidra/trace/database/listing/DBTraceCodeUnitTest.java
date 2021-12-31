@@ -91,11 +91,8 @@ public class DBTraceCodeUnitTest extends AbstractGhidraHeadlessIntegrationTest
 			if (this.f1 != that.f1) {
 				return false;
 			}
-			if (!Objects.equals(this.f2, that.f2)) {
-				return false;
-			}
-			return true;
-		}
+            return Objects.equals(this.f2, that.f2);
+        }
 
 		@Override
 		public int hashCode() {

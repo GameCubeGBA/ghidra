@@ -21,14 +21,14 @@ import ghidra.util.classfinder.ExtensionPoint;
 
 public interface ExternalDisassembler extends ExtensionPoint {
 
-	public String getDisassembly(CodeUnit cu) throws Exception;
+	String getDisassembly(CodeUnit cu) throws Exception;
 
-	public String getDisassemblyDisplayPrefix(CodeUnit cu) throws Exception;
+	String getDisassemblyDisplayPrefix(CodeUnit cu) throws Exception;
 
-	public String getDisassemblyOfBytes(Language language, boolean isBigEndian, long address,
-			byte[] byteString) throws Exception;
+	String getDisassemblyOfBytes(Language language, boolean isBigEndian, long address,
+                                 byte[] byteString) throws Exception;
 
-	public boolean isSupportedLanguage(Language language);
+	boolean isSupportedLanguage(Language language);
 
-	public void destroy();
+	void destroy();
 }

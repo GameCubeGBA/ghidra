@@ -149,7 +149,7 @@ public class StringAndScores {
 	public boolean equals(Object obj) {
 		if (obj instanceof StringAndScores) {
 			StringAndScores other = (StringAndScores) obj;
-			return getOriginalString().equals(other.getOriginalString());
+			return originalString.equals(other.originalString);
 		}
 		return false;
 	}
@@ -162,16 +162,16 @@ public class StringAndScores {
 	@Override
 	public String toString() {
 
-		String outStr =
-			"OrigString =" + originalString + ",ScoredString =" + scoredString + ",ASCII =";
+		StringBuilder outStr =
+                new StringBuilder("OrigString =" + originalString + ",ScoredString =" + scoredString + ",ASCII =");
 
 		for (int code : asciiCodesForString) {
-			outStr += code + " ";
+			outStr.append(code).append(" ");
 		}
 
-		outStr += ",ngScore =" + ngramScore + ", threshold = " + scoreThreshold;
+		outStr.append(",ngScore =").append(ngramScore).append(", threshold = ").append(scoreThreshold);
 
-		return outStr;
+		return outStr.toString();
 	}
 
 	public String summaryToString() {

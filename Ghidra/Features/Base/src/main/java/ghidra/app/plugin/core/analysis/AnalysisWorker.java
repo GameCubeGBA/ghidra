@@ -39,7 +39,7 @@ public interface AnalysisWorker {
 	 * @throws Exception if worker exception occurs
 	 * @see AutoAnalysisManager#scheduleWorker(AnalysisWorker, Object, boolean, TaskMonitor)
 	 */
-	public boolean analysisWorkerCallback(Program program, Object workerContext, TaskMonitor monitor)
+    boolean analysisWorkerCallback(Program program, Object workerContext, TaskMonitor monitor)
 			throws Exception, CancelledException;
 
 	/**
@@ -47,6 +47,6 @@ public interface AnalysisWorker {
 	 * Name should be very short.
 	 * @return worker name
 	 */
-	public String getWorkerName();
+    String getWorkerName();
 
 }

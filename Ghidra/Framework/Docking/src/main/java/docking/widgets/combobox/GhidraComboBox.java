@@ -79,8 +79,7 @@ public class GhidraComboBox<E> extends JComboBox<E> implements GComponent {
 	 * Default constructor.
 	 */
 	public GhidraComboBox() {
-		super();
-		init();
+        init();
 	}
 
 	/**
@@ -286,31 +285,27 @@ public class GhidraComboBox<E> extends JComboBox<E> implements GComponent {
 	}
 
 	private void notifyActionListeners(ActionEvent e) {
-		Iterator<ActionListener> iter = listeners.iterator();
-		while (iter.hasNext()) {
-			iter.next().actionPerformed(e);
-		}
+        for (ActionListener listener : listeners) {
+            listener.actionPerformed(e);
+        }
 	}
 
 	private void notifyInsert(DocumentEvent e) {
-		Iterator<DocumentListener> iter = docListeners.iterator();
-		while (iter.hasNext()) {
-			iter.next().insertUpdate(e);
-		}
+        for (DocumentListener docListener : docListeners) {
+            docListener.insertUpdate(e);
+        }
 	}
 
 	private void notifyChanged(DocumentEvent e) {
-		Iterator<DocumentListener> iter = docListeners.iterator();
-		while (iter.hasNext()) {
-			iter.next().changedUpdate(e);
-		}
+        for (DocumentListener docListener : docListeners) {
+            docListener.changedUpdate(e);
+        }
 	}
 
 	private void notifyRemove(DocumentEvent e) {
-		Iterator<DocumentListener> iter = docListeners.iterator();
-		while (iter.hasNext()) {
-			iter.next().removeUpdate(e);
-		}
+        for (DocumentListener docListener : docListeners) {
+            docListener.removeUpdate(e);
+        }
 	}
 
 	private String matchHistory(String input) {

@@ -227,7 +227,7 @@ paintText( g2, textColor, textPosition );
     }
 
 private void paintText( Graphics2D graphics, Color color, double textPosition ) { 
-    if ( text == null || text.trim().length() == 0 ) {
+    if ( text == null || text.trim().isEmpty()) {
         return;
     }
     
@@ -431,13 +431,10 @@ private void paintText( Graphics2D graphics, Color color, double textPosition ) 
         mainPanel.add( scrollPane, BorderLayout.CENTER );
         
         JButton button = new JButton( "Start" );
-        button.addActionListener(new ActionListener() {
-            
-            public void actionPerformed( ActionEvent event ) {
-                frame.setGlassPane(progressPanel);                    
-                progressPanel.start();
-            }
-        } );
+        button.addActionListener(event -> {
+            frame.setGlassPane(progressPanel);
+            progressPanel.start();
+        });
         mainPanel.add( button, BorderLayout.SOUTH );
                 
         frame.setSize( 400, 400 );

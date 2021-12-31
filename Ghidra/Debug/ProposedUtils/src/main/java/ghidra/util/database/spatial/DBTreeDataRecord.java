@@ -25,7 +25,7 @@ public abstract class DBTreeDataRecord<DS extends BoundedShape<NS>, NS extends B
 		extends DBTreeRecord<DS, NS> {
 	protected interface RecordEntry<DS extends BoundedShape<NS>, NS extends BoundingShape<NS>, T>
 			extends Entry<DS, T> {
-		public DBTreeDataRecord<DS, NS, T> asRecord();
+		DBTreeDataRecord<DS, NS, T> asRecord();
 
 		default boolean doEquals(Object obj) {
 			if (!(obj instanceof Entry)) {
@@ -36,11 +36,8 @@ public abstract class DBTreeDataRecord<DS extends BoundedShape<NS>, NS extends B
 			if (!Objects.equals(this.getKey(), that.getKey())) {
 				return false;
 			}
-			if (!Objects.equals(this.getValue(), that.getValue())) {
-				return false;
-			}
-			return true;
-		}
+            return Objects.equals(this.getValue(), that.getValue());
+        }
 
 		default int doHashCode() {
 			return Objects.hashCode(this.getKey()) ^ Objects.hashCode(this.getValue());

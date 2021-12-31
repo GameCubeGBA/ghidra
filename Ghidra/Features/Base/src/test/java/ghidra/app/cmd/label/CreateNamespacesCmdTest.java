@@ -45,8 +45,7 @@ public class CreateNamespacesCmdTest extends AbstractGenericTest {
 	 *
 	 */
 	public CreateNamespacesCmdTest() {
-		super();
-	}
+    }
 
 	@Before
 	public void setUp() throws Exception {
@@ -59,7 +58,7 @@ public class CreateNamespacesCmdTest extends AbstractGenericTest {
 
 		Namespace globalNamespace = program.getGlobalNamespace();
 		assertTrue("The global namespace does not exist.",
-			globalNamespace.getName().equals("Global"));
+			"Global".equals(globalNamespace.getName()));
 		SymbolTable symbolTable = program.getSymbolTable();
 
 		// 1

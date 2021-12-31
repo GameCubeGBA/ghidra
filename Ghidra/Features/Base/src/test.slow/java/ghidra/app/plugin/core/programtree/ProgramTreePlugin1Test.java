@@ -615,12 +615,12 @@ public class ProgramTreePlugin1Test extends AbstractProgramTreePluginTest {
 		nodes = findNodes(m2.getName());
 		assertEquals(5, nodes.length);
 		ArrayList<?> nodeList = tree.getNodeList();
-		for (int i = 0; i < nodeList.size(); i++) {
-			node = (ProgramNode) nodeList.get(i);
-			if (node.getAllowsChildren() && !node.isLeaf()) {
-				assertTrue(tree.isExpanded(node.getTreePath()));
-			}
-		}
+        for (Object o : nodeList) {
+            node = (ProgramNode) o;
+            if (node.getAllowsChildren() && !node.isLeaf()) {
+                assertTrue(tree.isExpanded(node.getTreePath()));
+            }
+        }
 	}
 
 	@Test
@@ -661,12 +661,12 @@ public class ProgramTreePlugin1Test extends AbstractProgramTreePluginTest {
 		collapseNode(root);
 		buildNodeList();
 		ArrayList<?> nodeList = tree.getNodeList();
-		for (int i = 0; i < nodeList.size(); i++) {
-			node = (ProgramNode) nodeList.get(i);
-			if (node.getAllowsChildren() && !node.isLeaf()) {
-				assertTrue(!tree.isExpanded(node.getTreePath()));
-			}
-		}
+        for (Object o : nodeList) {
+            node = (ProgramNode) o;
+            if (node.getAllowsChildren() && !node.isLeaf()) {
+                assertTrue(!tree.isExpanded(node.getTreePath()));
+            }
+        }
 	}
 
 	@Test
@@ -1065,7 +1065,7 @@ public class ProgramTreePlugin1Test extends AbstractProgramTreePluginTest {
 		assertEquals(origEvCount - 1 + dllsCount, count);
 
 		for (int i = 0; i < count; i++) {
-			assertTrue(!((ProgramNode) nodes[0].getChildAt(i)).getName().equals("DLLs"));
+			assertTrue(!"DLLs".equals(((ProgramNode) nodes[0].getChildAt(i)).getName()));
 		}
 		assertNull(program.getListing().getModule("Main Tree", "DLLs"));
 

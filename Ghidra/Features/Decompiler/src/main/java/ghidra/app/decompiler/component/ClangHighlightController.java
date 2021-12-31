@@ -291,10 +291,7 @@ public abstract class ClangHighlightController {
 		Color secondary = secondaryHl == null ? null : secondaryHl.getColor();
 
 		if (primary == null) {
-			if (secondary == null) {
-				return null;
-			}
-			return secondary;
+            return secondary;
 		}
 
 		if (secondary == null) {

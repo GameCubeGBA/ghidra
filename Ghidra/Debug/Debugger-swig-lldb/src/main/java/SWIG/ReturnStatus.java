@@ -12,14 +12,14 @@
 package SWIG;
 
 public final class ReturnStatus {
-  public final static ReturnStatus eReturnStatusInvalid = new ReturnStatus("eReturnStatusInvalid");
-  public final static ReturnStatus eReturnStatusSuccessFinishNoResult = new ReturnStatus("eReturnStatusSuccessFinishNoResult");
-  public final static ReturnStatus eReturnStatusSuccessFinishResult = new ReturnStatus("eReturnStatusSuccessFinishResult");
-  public final static ReturnStatus eReturnStatusSuccessContinuingNoResult = new ReturnStatus("eReturnStatusSuccessContinuingNoResult");
-  public final static ReturnStatus eReturnStatusSuccessContinuingResult = new ReturnStatus("eReturnStatusSuccessContinuingResult");
-  public final static ReturnStatus eReturnStatusStarted = new ReturnStatus("eReturnStatusStarted");
-  public final static ReturnStatus eReturnStatusFailed = new ReturnStatus("eReturnStatusFailed");
-  public final static ReturnStatus eReturnStatusQuit = new ReturnStatus("eReturnStatusQuit");
+  public static final ReturnStatus eReturnStatusInvalid = new ReturnStatus("eReturnStatusInvalid");
+  public static final ReturnStatus eReturnStatusSuccessFinishNoResult = new ReturnStatus("eReturnStatusSuccessFinishNoResult");
+  public static final ReturnStatus eReturnStatusSuccessFinishResult = new ReturnStatus("eReturnStatusSuccessFinishResult");
+  public static final ReturnStatus eReturnStatusSuccessContinuingNoResult = new ReturnStatus("eReturnStatusSuccessContinuingNoResult");
+  public static final ReturnStatus eReturnStatusSuccessContinuingResult = new ReturnStatus("eReturnStatusSuccessContinuingResult");
+  public static final ReturnStatus eReturnStatusStarted = new ReturnStatus("eReturnStatusStarted");
+  public static final ReturnStatus eReturnStatusFailed = new ReturnStatus("eReturnStatusFailed");
+  public static final ReturnStatus eReturnStatusQuit = new ReturnStatus("eReturnStatusQuit");
 
   public final int swigValue() {
     return swigValue;
@@ -32,9 +32,9 @@ public final class ReturnStatus {
   public static ReturnStatus swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-    for (int i = 0; i < swigValues.length; i++)
-      if (swigValues[i].swigValue == swigValue)
-        return swigValues[i];
+      for (ReturnStatus value : swigValues)
+          if (value.swigValue == swigValue)
+              return value;
     throw new IllegalArgumentException("No enum " + ReturnStatus.class + " with value " + swigValue);
   }
 

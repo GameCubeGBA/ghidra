@@ -28,7 +28,6 @@ public class ByteBlockAccessException extends UsrException {
      * <p>Constructs an ByteBlockAccessException with no detail message.<p>
      */
     public ByteBlockAccessException() {
-        super();
     }
     
     

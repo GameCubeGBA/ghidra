@@ -23,7 +23,7 @@ import agent.dbgmodel.jna.dbgmodel.IUnknownEx;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IDataModelScriptDebugBreakpointEnumerator extends IUnknownEx {
-	final IID IID_IDATA_MODEL_SCRIPT_DEBUG_BREAKPOINT_ENUMERATOR =
+	IID IID_IDATA_MODEL_SCRIPT_DEBUG_BREAKPOINT_ENUMERATOR =
 		new IID("39484A75-B4F3-4799-86DA-691AFA57B299");
 
 	enum VTIndices implements VTableIndex {

@@ -96,20 +96,14 @@ class DataTypeComparePanel extends JPanel {
 	private void syncScrollers(JScrollPane leftScrollPane, JScrollPane rightScrollPane) {
 		final JViewport viewport1 = leftScrollPane.getViewport();
 		final JViewport viewport2 = rightScrollPane.getViewport();
-		viewport1.addChangeListener(new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				int y = viewport1.getViewPosition().y;
-				viewport2.setViewPosition(new Point(0, y));
-			}
-		});
-		viewport2.addChangeListener(new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				int y = viewport2.getViewPosition().y;
-				viewport1.setViewPosition(new Point(0, y));
-			}
-		});
+		viewport1.addChangeListener(e -> {
+            int y = viewport1.getViewPosition().y;
+            viewport2.setViewPosition(new Point(0, y));
+        });
+		viewport2.addChangeListener(e -> {
+            int y = viewport2.getViewPosition().y;
+            viewport1.setViewPosition(new Point(0, y));
+        });
 	}
 
 	/**

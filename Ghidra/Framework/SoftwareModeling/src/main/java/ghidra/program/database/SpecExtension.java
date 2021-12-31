@@ -91,10 +91,10 @@ import ghidra.xml.XmlPullParserFactory;
  */
 public class SpecExtension {
 
-	public final static String SPEC_EXTENSION = "Specification Extensions";
-	public final static String FORMAT_VERSION_OPTIONNAME = "FormatVersion";
-	public final static String VERSION_COUNTER_OPTIONNAME = "VersionCounter";
-	public final static int FORMAT_VERSION = 1;		// Current version of specification XML format
+	public static final String SPEC_EXTENSION = "Specification Extensions";
+	public static final String FORMAT_VERSION_OPTIONNAME = "FormatVersion";
+	public static final String VERSION_COUNTER_OPTIONNAME = "VersionCounter";
+	public static final int FORMAT_VERSION = 1;		// Current version of specification XML format
 	private ProgramDB program;
 	private SleighLanguageValidator cspecValidator = null;
 
@@ -376,7 +376,7 @@ public class SpecExtension {
 	 * @return true if the name is valid
 	 */
 	public static boolean isValidFormalName(String formalName) {
-		if (formalName.length() == 0) {
+		if (formalName.isEmpty()) {
 			return false;
 		}
 		for (int i = 0; i < formalName.length(); ++i) {

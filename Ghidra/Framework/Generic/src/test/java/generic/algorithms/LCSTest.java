@@ -90,8 +90,7 @@ public class LCSTest extends AbstractGenericTest {
 		private String y;
 
 		public StringLcs(String x, String y) {
-			super();
-			this.x = x;
+            this.x = x;
 			this.y = y;
 		}
 

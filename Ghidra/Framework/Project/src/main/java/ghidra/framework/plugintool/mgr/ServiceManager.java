@@ -88,10 +88,9 @@ public class ServiceManager {
 	}
 
 	private void notifyServiceAdded(Class<?> interfaceClass, Object service) {
-		Iterator<?> it = serviceListeners.iterator();
-		while (it.hasNext()) {
-			((ServiceListener) it.next()).serviceAdded(interfaceClass, service);
-		}
+        for (ServiceListener serviceListener : serviceListeners) {
+            serviceListener.serviceAdded(interfaceClass, service);
+        }
 	}
 
 	/**
@@ -129,7 +128,7 @@ public class ServiceManager {
 		List<Object> list = servicesByInterface.get(interfaceClass);
 		if (list != null) {
 			list.remove(service);
-			if (list.size() == 0) {
+			if (list.isEmpty()) {
 				servicesByInterface.remove(interfaceClass);
 			}
 		}

@@ -16,6 +16,7 @@
 package ghidra.app.plugin.core.string;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class StringModel {
@@ -91,14 +92,6 @@ public class StringModel {
 		totalNumTrigrams = numTrigrams;
 	}
 
-	public void setTrigramCounts(int[][][] asciiTrigrams, int[][] beginTrigram, int[][] endTrigram,
-			long numTrigrams) {
-		asciiTrigramStorage = asciiTrigrams;
-		beginStringTrigramStorage = beginTrigram;
-		endStringTrigramStorage = endTrigram;
-		totalNumTrigrams = numTrigrams;
-	}
-
 	public int[][][] getTrigramCounts() {
 		return asciiTrigramStorage;
 	}
@@ -115,97 +108,4 @@ public class StringModel {
 		return totalNumTrigrams;
 	}
 
-	public void writeTrigramModelFile(String trigramFilename, List<String> trainingFiles,
-			String modelType, File outputPath) throws IOException {
-
-		// Create desired output filepath
-		File outputFile = new File(outputPath, trigramFilename);
-
-		// Store information about "special" characters that will need to be clarified
-		// in comments
-		HashSet<Integer> commentsNeeded = new HashSet<Integer>();
-
-		for (int i = 0; i < 128; i++) {
-			for (int j = 0; j < 128; j++) {
-				for (int k = 0; k < 128; k++) {
-					if (asciiTrigramStorage[i][j][k] > 0) {
-						if (asciiNumToDescription.containsKey(i)) {
-							commentsNeeded.add(i);
-						}
-						if (asciiNumToDescription.containsKey(j)) {
-							commentsNeeded.add(j);
-						}
-						if (asciiNumToDescription.containsKey(k)) {
-							commentsNeeded.add(k);
-						}
-					}
-				}
-			}
-		}
-
-		try (BufferedWriter out =
-				new BufferedWriter(
-					new OutputStreamWriter(new FileOutputStream(outputFile), "ASCII"))) {
-
-			out.write("# Model Type: " + modelType);
-			out.newLine();
-
-			for (String trFile : trainingFiles) {
-				out.write("# Training file: " + trFile);
-				out.newLine();
-			}
-
-			out.write("# [^] denotes beginning of string");
-			out.newLine();
-			out.write("# [$] denotes end of string");
-			out.newLine();
-
-			for (Integer asciiNum : commentsNeeded) {
-				String[] charDetails = asciiNumToDescription.get(asciiNum);
-				out.write("# " + charDetails[0] + " denotes " + charDetails[1]);
-				out.newLine();
-			}
-			out.newLine();
-
-			for (int i = 0; i < 128; i++) {
-				for (int j = 0; j < 128; j++) {
-					for (int k = 0; k < 128; k++) {
-						if (asciiTrigramStorage[i][j][k] > 0) {
-							out.write(textReps[i] + "\t" + textReps[j] + "\t" + textReps[k] + "\t" +
-								asciiTrigramStorage[i][j][k]);
-							out.newLine();
-						}
-					}
-				}
-			}
-
-			for (int i = 0; i < 128; i++) {
-				for (int j = 0; j < 128; j++) {
-					if (beginStringTrigramStorage[i][j] != 0) {
-						out.write("[^]\t" + textReps[i] + "\t" + textReps[j] + "\t" +
-							beginStringTrigramStorage[i][j]);
-						out.newLine();
-					}
-				}
-			}
-
-			for (int i = 0; i < 128; i++) {
-				for (int j = 0; j < 128; j++) {
-					if (endStringTrigramStorage[i][j] != 0) {
-						out.write(textReps[i] + "\t" + textReps[j] + "\t[$]\t" +
-							endStringTrigramStorage[i][j]);
-						out.newLine();
-					}
-				}
-			}
-		}
-		catch (UnsupportedEncodingException e) {
-			System.err.println("Error creating String Model file: " + e.toString());
-			System.exit(0);
-		}
-		catch (FileNotFoundException e) {
-			System.err.println("Error creating String Model file: " + e.toString());
-			System.exit(0);
-		}
-	}
 }

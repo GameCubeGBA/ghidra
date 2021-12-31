@@ -44,7 +44,7 @@ import ghidra.util.table.field.OutgoingReferenceEndpoint;
  */
 public class OperandFieldMouseHandler implements FieldMouseHandlerExtension {
 
-	private final static Class<?>[] SUPPORTED_CLASSES = new Class[] { OperandFieldLocation.class };
+	private static final Class<?>[] SUPPORTED_CLASSES = new Class[] { OperandFieldLocation.class };
 
 	@Override
 	public boolean fieldElementClicked(Object clickedObject, Navigatable navigatable,
@@ -402,11 +402,8 @@ public class OperandFieldMouseHandler implements FieldMouseHandlerExtension {
 		}
 
 		Address goToAddr = getAddressForOpObject(opObjects.get(subOpIndex), codeUnit);
-		if (goToAddr != null && goToService.goTo(navigatable, goToAddr)) {
-			return true;
-		}
-		return false;
-	}
+        return goToAddr != null && goToService.goTo(navigatable, goToAddr);
+    }
 
 	private boolean handleData(Data data, Navigatable navigatable, GoToService goToService) {
 		Object value = data.getValue();

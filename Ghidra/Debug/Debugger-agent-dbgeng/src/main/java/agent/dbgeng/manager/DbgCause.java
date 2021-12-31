@@ -27,7 +27,7 @@ import agent.dbgeng.manager.cmd.DbgPendingCommand;
  * {@link DbgPendingCommand} as the cause.
  */
 public interface DbgCause {
-	public enum Causes implements DbgCause {
+	enum Causes implements DbgCause {
 		UNCLAIMED;
 	}
 }

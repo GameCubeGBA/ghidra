@@ -42,12 +42,12 @@ public class InstructionTableModel extends DefaultTableModel
 
 		// Register this model as a subscriber to each DO. This ensures that when a DO is updated (eg:
 		// masked or unmasked), this model will be notified and can update its state.
-		for (int i = 0; i < tableContentsDO.length; i++) {
-			for (int j = 0; j < tableContentsDO[i].length; j++) {
-				InstructionTableDataObject dataObj = tableContentsDO[i][j];
-				dataObj.register(this);
-			}
-		}
+        for (InstructionTableDataObject[] instructionTableDataObjects : tableContentsDO) {
+            for (int j = 0; j < instructionTableDataObjects.length; j++) {
+                InstructionTableDataObject dataObj = instructionTableDataObjects[j];
+                dataObj.register(this);
+            }
+        }
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })

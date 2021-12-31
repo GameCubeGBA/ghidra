@@ -53,7 +53,7 @@ class DirectoryListModel extends AbstractListModel<File> {
 		int size = fileList.size();
 		fileList.clear();
 		fireIntervalRemoved(this, 0, size);
-		if (newFileList.size() != 0) {
+		if (!newFileList.isEmpty()) {
 			fileList.addAll(newFileList);
 			fireIntervalAdded(this, 0, fileList.size() - 1);
 		}

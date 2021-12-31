@@ -76,8 +76,7 @@ public class MultiLineLabel extends JPanel {
 	 * @param alignment alignment of label, LEFT, CENTER, or RIGHT
 	 */
 	public MultiLineLabel(String label, int margin_width, int margin_height, int alignment) {
-		super();
-		setDoubleBuffered(false);
+        setDoubleBuffered(false);
 		newLabel(label);
 		this.margin_width = margin_width;
 		this.margin_height = margin_height;

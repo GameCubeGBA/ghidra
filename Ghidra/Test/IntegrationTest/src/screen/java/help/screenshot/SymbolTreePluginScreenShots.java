@@ -30,8 +30,7 @@ import ghidra.program.model.symbol.*;
 public class SymbolTreePluginScreenShots extends GhidraScreenShotGenerator {
 
 	public SymbolTreePluginScreenShots() {
-		super();
-	}
+    }
 
 	@Test
 	public void testSymbolTree() {

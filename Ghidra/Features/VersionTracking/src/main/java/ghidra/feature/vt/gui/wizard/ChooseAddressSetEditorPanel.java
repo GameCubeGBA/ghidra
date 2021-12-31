@@ -134,26 +134,9 @@ public class ChooseAddressSetEditorPanel extends JPanel {
 		myRangesButton.setToolTipText("Limit the address ranges from the " + name +
 			" program to those that I am specifying here.");
 
-		entireProgramButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ev) {
-				choseEntireProgram();
-			}
-
-		});
-		toolSelectionButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ev) {
-				choseToolSelection();
-			}
-
-		});
-		myRangesButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ev) {
-				choseMyRanges();
-			}
-		});
+		entireProgramButton.addActionListener(ev -> choseEntireProgram());
+		toolSelectionButton.addActionListener(ev -> choseToolSelection());
+		myRangesButton.addActionListener(ev -> choseMyRanges());
 
 		chooseSourcePanel.add(entireProgramButton);
 		chooseSourcePanel.add(toolSelectionButton);
@@ -196,12 +179,7 @@ public class ChooseAddressSetEditorPanel extends JPanel {
 		bottomButtons.setLayout(new MiddleLayout());
 
 		removeRangeButton = new JButton("Remove Selected Range(s)");
-		removeRangeButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				removeRange();
-			}
-		});
+		removeRangeButton.addActionListener(e -> removeRange());
 
 		bottomButtons.add(removeRangeButton);
 		return bottomButtons;
@@ -210,21 +188,11 @@ public class ChooseAddressSetEditorPanel extends JPanel {
 	private Component createRangeListPanel() {
 
 		addRangeButton = new JButton(ADD_ICON);
-		addRangeButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				showAddRangeDialog();
-			}
-		});
+		addRangeButton.addActionListener(e -> showAddRangeDialog());
 		addRangeButton.setToolTipText("Add the range to the set of included addresses");
 
 		subtractRangeButton = new JButton(SUBTRACT_ICON);
-		subtractRangeButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				showSubtractRangeDialog();
-			}
-		});
+		subtractRangeButton.addActionListener(e -> showSubtractRangeDialog());
 		subtractRangeButton.setToolTipText("Remove the range from the set of included addresses");
 
 		JPanel buttonPanel = new JPanel();
@@ -237,12 +205,7 @@ public class ChooseAddressSetEditorPanel extends JPanel {
 		listModel = new AddressSetListModel(myCurrentAddressSet.toList());
 		list = new GList<>(listModel);
 		list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		list.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				validateRemoveButton();
-			}
-		});
+		list.getSelectionModel().addListSelectionListener(e -> validateRemoveButton());
 		JScrollPane scrollPane = new JScrollPane(list);
 
 		JPanel panel = new JPanel(new BorderLayout());
@@ -255,24 +218,14 @@ public class ChooseAddressSetEditorPanel extends JPanel {
 	}
 
 	protected void showAddRangeDialog() {
-		AddressRangeListener addListener = new AddressRangeListener() {
-			@Override
-			public void processAddressRange(Address minAddress, Address maxAddress) {
-				addRange(minAddress, maxAddress);
-			}
-		};
+		AddressRangeListener addListener = (minAddress, maxAddress) -> addRange(minAddress, maxAddress);
 		AddRemoveAddressRangeDialog addRangeDialog =
 			new AddRemoveAddressRangeDialog("Add", name, program, addListener);
 		tool.showDialog(addRangeDialog, this.getRootPane());
 	}
 
 	protected void showSubtractRangeDialog() {
-		AddressRangeListener subtractListener = new AddressRangeListener() {
-			@Override
-			public void processAddressRange(Address minAddress, Address maxAddress) {
-				subtractRange(minAddress, maxAddress);
-			}
-		};
+		AddressRangeListener subtractListener = (minAddress, maxAddress) -> subtractRange(minAddress, maxAddress);
 		AddRemoveAddressRangeDialog removeRangeDialog =
 			new AddRemoveAddressRangeDialog("Remove", name, program, subtractListener);
 		tool.showDialog(removeRangeDialog, this.getRootPane());
@@ -289,10 +242,10 @@ public class ChooseAddressSetEditorPanel extends JPanel {
 	private synchronized void removeRange() {
 		int[] selectedIndices = list.getSelectedIndices();
 		AddressSet removeRanges = new AddressSet();
-		for (int i = 0; i < selectedIndices.length; i++) {
-			AddressRange addressRange = listModel.getElementAt(selectedIndices[i]);
-			removeRanges.add(addressRange);
-		}
+        for (int selectedIndex : selectedIndices) {
+            AddressRange addressRange = listModel.getElementAt(selectedIndex);
+            removeRanges.add(addressRange);
+        }
 		myCurrentAddressSet.delete(removeRanges);
 		listModel.setData(myCurrentAddressSet.toList());
 		list.clearSelection();

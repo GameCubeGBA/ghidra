@@ -44,7 +44,7 @@ public class MemoryBlockMap implements AddressPixelMap {
 		for (MemoryBlock block : blocks) {
 			totalSize += block.getSize();
 		}
-		addressesPerPixel = (float) totalSize / (float) width;
+		addressesPerPixel = (float) totalSize / width;
 		for (int i = 0; i < blocks.length; i++) {
 			pixels[i] = Math.round(blocks[i].getSize() / addressesPerPixel);
 		}

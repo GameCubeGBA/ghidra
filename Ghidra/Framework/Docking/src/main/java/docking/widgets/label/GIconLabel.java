@@ -53,8 +53,7 @@ public class GIconLabel extends GLabel implements GComponent {
 	 * <p>
 	 */
 	public GIconLabel() {
-		super();
-	}
+    }
 
 	/**
 	 * Creates a immutable label with the specified image, 

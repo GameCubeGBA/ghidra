@@ -95,13 +95,10 @@ public class CreateLabelsFromEnumsTest extends AbstractGhidraHeadedIntegrationTe
 	public void tearDown() throws Exception {
 
 		plugin.getEditorManager().dismissEditors(null);// Close all editors that might be open.
-		executeOnSwingWithoutBlocking(new Runnable() {
-			@Override
-			public void run() {
-				ProgramManager pm = tool.getService(ProgramManager.class);
-				pm.closeProgram();
-			}
-		});
+		executeOnSwingWithoutBlocking(() -> {
+            ProgramManager pm = tool.getService(ProgramManager.class);
+            pm.closeProgram();
+        });
 
 		// this handles the save changes dialog and potential analysis dialogs
 		closeAllWindows();
@@ -440,12 +437,7 @@ public class CreateLabelsFromEnumsTest extends AbstractGhidraHeadedIntegrationTe
 	}
 
 	private void createLabels(final DockingActionIf action) {
-		executeOnSwingWithoutBlocking(new Runnable() {
-			@Override
-			public void run() {
-				DataTypeTestUtils.performAction(action, program, tree);
-			}
-		});
+		executeOnSwingWithoutBlocking(() -> DataTypeTestUtils.performAction(action, program, tree));
 
 		waitForSwing();
 		waitForTree();

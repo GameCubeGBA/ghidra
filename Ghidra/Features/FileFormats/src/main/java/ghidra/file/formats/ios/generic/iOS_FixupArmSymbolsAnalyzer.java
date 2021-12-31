@@ -119,9 +119,7 @@ public class iOS_FixupArmSymbolsAnalyzer extends AbstractAnalyzer {
 			if (string.startsWith("iBEC")) {
 				return true;
 			}
-			if (string.startsWith("iBSS")) {
-				return true;
-			}
+            return string.startsWith("iBSS");
 		}
 
 		return false;

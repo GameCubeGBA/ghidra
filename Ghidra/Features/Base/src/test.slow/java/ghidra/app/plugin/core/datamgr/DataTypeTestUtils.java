@@ -38,18 +38,18 @@ import utilities.util.FileUtilities;
 public class DataTypeTestUtils {
 
 	private static final String ARCHIVE_FILE_EXTENSION = FileDataTypeManager.SUFFIX;
-	private static File tempArchiveDir;
-	static DataTypeArchiveGTree archiveTree;
+    static DataTypeArchiveGTree archiveTree;
 
 	private DataTypeTestUtils() {
 		// utils class
 	}
 
-	private static File getTempDir() throws IOException {
-		if (tempArchiveDir == null) {
-			tempArchiveDir = AbstractGenericTest.createTempDirectory("archive.db.dir");
-		}
-		return tempArchiveDir;
+    private static final class TempArchiveDirHolder {
+        private static final File tempArchiveDir = AbstractGenericTest.createTempDirectory("archive.db.dir");
+    }
+
+    private static File getTempDir() throws IOException {
+        return TempArchiveDirHolder.tempArchiveDir;
 	}
 
 	// copies the default test archive into a local version

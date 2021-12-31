@@ -39,8 +39,7 @@ public class PropertyBoolean extends JCheckBox implements ItemListener {
 	 * to show in the text field
 	 */
 	public PropertyBoolean(PropertyEditor pe) {
-		super();
-		setSelected((Boolean) pe.getValue());
+        setSelected((Boolean) pe.getValue());
 
 		editor = pe;
 		addItemListener(this);

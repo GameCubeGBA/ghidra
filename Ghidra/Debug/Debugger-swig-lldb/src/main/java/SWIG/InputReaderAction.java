@@ -12,14 +12,14 @@
 package SWIG;
 
 public final class InputReaderAction {
-  public final static InputReaderAction eInputReaderActivate = new InputReaderAction("eInputReaderActivate");
-  public final static InputReaderAction eInputReaderAsynchronousOutputWritten = new InputReaderAction("eInputReaderAsynchronousOutputWritten");
-  public final static InputReaderAction eInputReaderReactivate = new InputReaderAction("eInputReaderReactivate");
-  public final static InputReaderAction eInputReaderDeactivate = new InputReaderAction("eInputReaderDeactivate");
-  public final static InputReaderAction eInputReaderGotToken = new InputReaderAction("eInputReaderGotToken");
-  public final static InputReaderAction eInputReaderInterrupt = new InputReaderAction("eInputReaderInterrupt");
-  public final static InputReaderAction eInputReaderEndOfFile = new InputReaderAction("eInputReaderEndOfFile");
-  public final static InputReaderAction eInputReaderDone = new InputReaderAction("eInputReaderDone");
+  public static final InputReaderAction eInputReaderActivate = new InputReaderAction("eInputReaderActivate");
+  public static final InputReaderAction eInputReaderAsynchronousOutputWritten = new InputReaderAction("eInputReaderAsynchronousOutputWritten");
+  public static final InputReaderAction eInputReaderReactivate = new InputReaderAction("eInputReaderReactivate");
+  public static final InputReaderAction eInputReaderDeactivate = new InputReaderAction("eInputReaderDeactivate");
+  public static final InputReaderAction eInputReaderGotToken = new InputReaderAction("eInputReaderGotToken");
+  public static final InputReaderAction eInputReaderInterrupt = new InputReaderAction("eInputReaderInterrupt");
+  public static final InputReaderAction eInputReaderEndOfFile = new InputReaderAction("eInputReaderEndOfFile");
+  public static final InputReaderAction eInputReaderDone = new InputReaderAction("eInputReaderDone");
 
   public final int swigValue() {
     return swigValue;
@@ -32,9 +32,9 @@ public final class InputReaderAction {
   public static InputReaderAction swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-    for (int i = 0; i < swigValues.length; i++)
-      if (swigValues[i].swigValue == swigValue)
-        return swigValues[i];
+      for (InputReaderAction value : swigValues)
+          if (value.swigValue == swigValue)
+              return value;
     throw new IllegalArgumentException("No enum " + InputReaderAction.class + " with value " + swigValue);
   }
 

@@ -18,17 +18,17 @@ package ghidra.app.util.bin.format.coff;
 
 public final class CoffSymbolSectionNumber {
 	/** special symbolic debugging symbol */
-	public final static short N_DEBUG     = -2;
+    public static final short N_DEBUG     = -2;
 	/** absolute symbols */
-	public final static short N_ABS       = -1;
+    public static final short N_ABS       = -1;
 	/** undefined external symbol */
-	public final static short N_UNDEf     =  0;
+    public static final short N_UNDEf     =  0;
 	/** .text section symbol */
-	public final static short N_TEXT      =  1;
+    public static final short N_TEXT      =  1;
 	/** .data section symbol */
-	public final static short N_DATA      =  2;
+    public static final short N_DATA      =  2;
 	/** .bss section symbol */
-	public final static short N_BSS       =  3;
+    public static final short N_BSS       =  3;
 
 	/*
 	 * NOTE:

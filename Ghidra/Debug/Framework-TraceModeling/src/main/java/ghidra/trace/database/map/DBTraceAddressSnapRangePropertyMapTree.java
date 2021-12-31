@@ -52,7 +52,7 @@ public class DBTraceAddressSnapRangePropertyMapTree<T, DR extends AbstractDBTrac
 		protected static final byte CHILD_COUNT_MASK = 0x3f;
 		protected static final int CHILD_COUNT_SHIFT = 0;
 		protected static final byte CHILD_COUNT_CLEAR =
-			(byte) ~(CHILD_COUNT_MASK << CHILD_COUNT_SHIFT);
+                ~(CHILD_COUNT_MASK << CHILD_COUNT_SHIFT);
 
 		static final String PARENT_COLUMN_NAME = "Parent";
 		static final String MIN_ADDRESS_COLUMN_NAME = "MinAddress";
@@ -204,7 +204,7 @@ public class DBTraceAddressSnapRangePropertyMapTree<T, DR extends AbstractDBTrac
 		}
 	}
 
-	public static abstract class AbstractDBTraceAddressSnapRangePropertyMapData<T>
+	public abstract static class AbstractDBTraceAddressSnapRangePropertyMapData<T>
 			extends DBTreeDataRecord<TraceAddressSnapRange, TraceAddressSnapRange, T>
 			implements TraceAddressSnapRange {
 		static final String PARENT_COLUMN_NAME = "Parent";
@@ -367,11 +367,8 @@ public class DBTraceAddressSnapRangePropertyMapTree<T, DR extends AbstractDBTrac
 			if (thisVal == this || thatVal == that) {
 				return false;
 			}
-			if (!thisVal.equals(thatVal)) {
-				return false;
-			}
-			return true;
-		}
+            return thisVal.equals(thatVal);
+        }
 
 		@Override
 		public int hashCode() {
@@ -401,11 +398,8 @@ public class DBTraceAddressSnapRangePropertyMapTree<T, DR extends AbstractDBTrac
 			if (!r1.contains(shape.getX1(), shape.getY1())) {
 				return false;
 			}
-			if (!r2.contains(shape.getX2(), shape.getY2())) {
-				return false;
-			}
-			return true;
-		}
+            return r2.contains(shape.getX2(), shape.getY2());
+        }
 
 		@Override
 		protected TraceAddressSnapRangeQuery create(TraceAddressSnapRange ir1,

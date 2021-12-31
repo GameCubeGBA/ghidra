@@ -45,8 +45,7 @@ public class AddressSetPropertyMapTest extends AbstractGhidraHeadedIntegrationTe
 	private String mapName;
 
 	public AddressSetPropertyMapTest() {
-		super();
-	}
+    }
 
 	private Program buildProgram(String programName) throws Exception {
 		ProgramBuilder builder = new ProgramBuilder(programName, ProgramBuilder._TOY);

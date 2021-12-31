@@ -34,17 +34,16 @@ public abstract class PluginPackage implements ExtensionPoint, Comparable<Plugin
 	public static final int EXAMPLES_PRIORITY = 10;
 	public static final int EXPERIMENTAL_PRIORITY = 12;
 
-	private static Map<String, PluginPackage> packageMap;
+    private static final class PackageMapHolder {
+        private static final Map<String, PluginPackage> packageMap = createPackageMap();
+    }
 
-	public static PluginPackage getPluginPackage(String packageName) {
-		if (packageMap == null) {
-			packageMap = createPackageMap();
-		}
-		PluginPackage pluginPackage = packageMap.get(packageName.toLowerCase());
+    public static PluginPackage getPluginPackage(String packageName) {
+        PluginPackage pluginPackage = PackageMapHolder.packageMap.get(packageName.toLowerCase());
 		if (pluginPackage == null) {
 			Msg.warn(PluginPackage.class,
 				"Can't find plugin package for " + packageName + "! Creating stub...");
-			pluginPackage = packageMap.get(MiscellaneousPluginPackage.NAME.toLowerCase());
+			pluginPackage = PackageMapHolder.packageMap.get(MiscellaneousPluginPackage.NAME.toLowerCase());
 		}
 		return pluginPackage;
 	}
@@ -58,7 +57,7 @@ public abstract class PluginPackage implements ExtensionPoint, Comparable<Plugin
 			try {
 				pluginPackage = class1.getConstructor().newInstance();
 
-				String name = pluginPackage.getName().toLowerCase();
+				String name = pluginPackage.name.toLowerCase();
 				if (map.containsKey(name)) {
 					Msg.error(PluginPackage.class, "PluginPackage already exist for name: " + name);
 				}

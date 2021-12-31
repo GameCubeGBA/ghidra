@@ -24,7 +24,7 @@ import agent.dbgmodel.jna.dbgmodel.IUnknownEx;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IStringDisplayableConcept extends IUnknownEx {
-	final IID IID_ISTRING_DISPLAYABLE_CONCEPT = new IID("D28E8D70-6C00-4205-940D-501016601EA3");
+	IID IID_ISTRING_DISPLAYABLE_CONCEPT = new IID("D28E8D70-6C00-4205-940D-501016601EA3");
 
 	enum VTIndices implements VTableIndex {
 		TO_DISPLAY_STRING, //

@@ -430,11 +430,8 @@ public class SetEquateDialog extends DialogComponentProvider {
 
 		// If text field equals only one match, use that match.
 		EquateRowObject match = getMatchFromTable(equateFromFilter);
-		if (match != null) {
-			return match;
-		}
-		return null;
-	}
+        return match;
+    }
 
 	private EquateRowObject getMatchFromTable(String name) {
 		//@formatter:off
@@ -673,11 +670,8 @@ public class SetEquateDialog extends DialogComponentProvider {
 			if (!getOuterType().equals(other.getOuterType())) {
 				return false;
 			}
-			if (enoom == null || !enoom.isEquivalent(other.getEnumDataType())) {
-				return false;
-			}
-			return true;
-		}
+            return enoom != null && enoom.isEquivalent(other.enoom);
+        }
 
 		private SetEquateDialog getOuterType() {
 			return SetEquateDialog.this;

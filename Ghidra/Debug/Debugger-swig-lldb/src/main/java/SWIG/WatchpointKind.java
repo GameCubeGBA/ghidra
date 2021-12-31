@@ -12,8 +12,8 @@
 package SWIG;
 
 public final class WatchpointKind {
-  public final static WatchpointKind eWatchpointKindWrite = new WatchpointKind("eWatchpointKindWrite", lldbJNI.eWatchpointKindWrite_get());
-  public final static WatchpointKind eWatchpointKindRead = new WatchpointKind("eWatchpointKindRead", lldbJNI.eWatchpointKindRead_get());
+  public static final WatchpointKind eWatchpointKindWrite = new WatchpointKind("eWatchpointKindWrite", lldbJNI.eWatchpointKindWrite_get());
+  public static final WatchpointKind eWatchpointKindRead = new WatchpointKind("eWatchpointKindRead", lldbJNI.eWatchpointKindRead_get());
 
   public final int swigValue() {
     return swigValue;
@@ -26,9 +26,9 @@ public final class WatchpointKind {
   public static WatchpointKind swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-    for (int i = 0; i < swigValues.length; i++)
-      if (swigValues[i].swigValue == swigValue)
-        return swigValues[i];
+      for (WatchpointKind value : swigValues)
+          if (value.swigValue == swigValue)
+              return value;
     throw new IllegalArgumentException("No enum " + WatchpointKind.class + " with value " + swigValue);
   }
 

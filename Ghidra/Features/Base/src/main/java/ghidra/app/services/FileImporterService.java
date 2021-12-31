@@ -33,12 +33,12 @@ public interface FileImporterService {
 	 * @param folder the Ghidra project folder to store the imported file.
 	 * @param file the file to import.
 	 */
-	public void importFile(DomainFolder folder, File file);
+    void importFile(DomainFolder folder, File file);
 
 	/**
 	 * Imports the given files into the specified Ghidra project folder.
 	 * @param folder the Ghidra project folder to store the imported files.
 	 * @param files the files to import.
 	 */
-	public void importFiles(DomainFolder folder, List<File> files);
+    void importFiles(DomainFolder folder, List<File> files);
 }

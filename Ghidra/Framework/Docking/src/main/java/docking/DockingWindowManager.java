@@ -92,7 +92,7 @@ import util.CollectionUtils;
  */
 public class DockingWindowManager implements PropertyChangeListener, PlaceholderInstaller {
 
-	final static String COMPONENT_MENU_NAME = "Window";
+	static final String COMPONENT_MENU_NAME = "Window";
 
 	private static DockingActionIf actionUnderMouse;
 	private static Object objectUnderMouse;
@@ -231,23 +231,19 @@ public class DockingWindowManager implements PropertyChangeListener, Placeholder
 			return null;
 		}
 
-		Iterator<DockingWindowManager> iter = instances.iterator();
-		while (iter.hasNext()) {
-			DockingWindowManager winMgr = iter.next();
-			if (winMgr.root.getFrame() == win) {
-				return winMgr;
-			}
+        for (DockingWindowManager winMgr : instances) {
+            if (winMgr.root.getFrame() == win) {
+                return winMgr;
+            }
 
-			List<DetachedWindowNode> detachedWindows = winMgr.root.getDetachedWindows();
-			List<DetachedWindowNode> safeAccessCopy = new LinkedList<>(detachedWindows);
-			Iterator<DetachedWindowNode> windowIterator = safeAccessCopy.iterator();
-			while (windowIterator.hasNext()) {
-				DetachedWindowNode dw = windowIterator.next();
-				if (dw.getWindow() == win) {
-					return winMgr;
-				}
-			}
-		}
+            List<DetachedWindowNode> detachedWindows = winMgr.root.getDetachedWindows();
+            List<DetachedWindowNode> safeAccessCopy = new LinkedList<>(detachedWindows);
+            for (DetachedWindowNode dw : safeAccessCopy) {
+                if (dw.getWindow() == win) {
+                    return winMgr;
+                }
+            }
+        }
 
 		return null;
 	}
@@ -1664,11 +1660,8 @@ public class DockingWindowManager implements PropertyChangeListener, Placeholder
 
 		WindowNode node = root.getNodeForWindow(win);
 		// see if the given window is a child of the root node's frame
-		if ((node != null) || SwingUtilities.isDescendingFrom(win, rootFrame)) {
-			return true;
-		}
-		return false;
-	}
+        return (node != null) || SwingUtilities.isDescendingFrom(win, rootFrame);
+    }
 
 	/**
 	 * Shows the dialog using the tool's currently active window as a parent
@@ -2133,37 +2126,31 @@ public class DockingWindowManager implements PropertyChangeListener, Placeholder
 		if (includeMain) {
 			winList.add(root.getMainWindow());
 		}
-		Iterator<DetachedWindowNode> it = root.getDetachedWindows().iterator();
-		while (it.hasNext()) {
-			DetachedWindowNode node = it.next();
-			Window win = node.getWindow();
-			if (win != null) {
-				winList.add(win);
-			}
-		}
+        for (DetachedWindowNode node : root.getDetachedWindows()) {
+            Window win = node.getWindow();
+            if (win != null) {
+                winList.add(win);
+            }
+        }
 		return winList;
 	}
 
 	void iconify() {
 		List<Window> winList = getWindows(false);
-		Iterator<Window> it = winList.iterator();
-		while (it.hasNext()) {
-			Window w = it.next();
-			if (w instanceof Frame) {
-				w.setVisible(false);
-			}
-		}
+        for (Window w : winList) {
+            if (w instanceof Frame) {
+                w.setVisible(false);
+            }
+        }
 	}
 
 	void deIconify() {
 		List<Window> winList = getWindows(false);
-		Iterator<Window> it = winList.iterator();
-		while (it.hasNext()) {
-			Window w = it.next();
-			if (w instanceof Frame) {
-				w.setVisible(true);
-			}
-		}
+        for (Window w : winList) {
+            if (w instanceof Frame) {
+                w.setVisible(true);
+            }
+        }
 	}
 
 	/**

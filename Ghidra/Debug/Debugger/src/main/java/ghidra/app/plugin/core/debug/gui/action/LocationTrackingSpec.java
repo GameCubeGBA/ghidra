@@ -59,7 +59,7 @@ public interface LocationTrackingSpec extends ExtensionPoint {
 
 	Private PRIVATE = new Private();
 
-	public static class TrackingSpecConfigFieldCodec
+	class TrackingSpecConfigFieldCodec
 			implements ConfigFieldCodec<LocationTrackingSpec> {
 		@Override
 		public LocationTrackingSpec read(SaveState state, String name,
@@ -82,11 +82,8 @@ public interface LocationTrackingSpec extends ExtensionPoint {
 		if (space.getFrameLevel() != current.getFrame()) {
 			return false;
 		}
-		if (!range.getLifespan().contains(current.getSnap())) {
-			return false;
-		}
-		return true;
-	}
+        return range.getLifespan().contains(current.getSnap());
+    }
 
 	static LocationTrackingSpec fromConfigName(String name) {
 		synchronized (PRIVATE) {

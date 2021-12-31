@@ -22,16 +22,16 @@ import ghidra.program.model.mem.MemoryBlock;
 
 public interface AddressPixelMap {
 
-	public void createMapping(int width);
+	void createMapping(int width);
 
-	public Address getAddress(int pixel);
+	Address getAddress(int pixel);
 
-	public int getPixel(Address address);
+	int getPixel(Address address);
 
-	public MemoryBlock[] getBlocks();
+	MemoryBlock[] getBlocks();
 
-	public Rectangle getBlockPosition(MemoryBlock memoryBlock);
+	Rectangle getBlockPosition(MemoryBlock memoryBlock);
 
-	public void clear();
+	void clear();
 
 }

@@ -18,7 +18,7 @@ package ghidra.program.model.data;
 import ghidra.docking.settings.Settings;
 
 public class IconMaskResourceDataType extends IconResourceDataType {
-	private final static long serialVersionUID = 1;
+	private static final long serialVersionUID = 1;
 
 	public IconMaskResourceDataType() {
 		this(null, "IconMaskResource", null);

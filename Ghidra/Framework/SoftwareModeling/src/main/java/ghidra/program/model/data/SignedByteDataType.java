@@ -25,7 +25,7 @@ public class SignedByteDataType extends AbstractIntegerDataType {
 	private static final long serialVersionUID = 1L;
 
 	/** A statically defined SignedByteDataType instance.*/
-	public final static SignedByteDataType dataType = new SignedByteDataType();
+    public static final SignedByteDataType dataType = new SignedByteDataType();
 
 	public SignedByteDataType() {
 		this(null);

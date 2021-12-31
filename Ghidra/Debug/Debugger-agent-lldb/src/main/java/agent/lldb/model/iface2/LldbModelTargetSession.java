@@ -41,7 +41,7 @@ public interface LldbModelTargetSession extends //
 	LldbModelTargetModuleContainer getModules();
 
 	@Override
-	public default void consoleOutput(String output, int mask) {
+    default void consoleOutput(String output, int mask) {
 
 		Channel chan = TargetConsole.Channel.STDOUT;
 		if (((mask & DebugOutputFlags.DEBUG_OUTPUT_ERROR.getValue()) //
@@ -57,7 +57,7 @@ public interface LldbModelTargetSession extends //
 	}
 
 	@Override
-	public default void promptChanged(String prompt) {
+    default void promptChanged(String prompt) {
 		changeAttributes(List.of(), Map.of( //
 			PROMPT_ATTRIBUTE_NAME, prompt //
 		), "Refreshed");

@@ -36,8 +36,7 @@ public class CodeUnitMergeManager5Test extends AbstractListingMergeManagerTest {
 	 * @param arg0
 	 */
 	public CodeUnitMergeManager5Test() {
-		super();
-	}
+    }
 
 @Test
     public void testByteCuDiff() throws Exception {

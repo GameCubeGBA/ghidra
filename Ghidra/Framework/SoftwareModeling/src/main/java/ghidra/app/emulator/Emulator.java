@@ -368,7 +368,7 @@ public class Emulator {
 	 * @return true if halted at a breakpoint
 	 */
 	public boolean isAtBreakpoint() {
-		return getHalt() && emulator.getExecutionState() == EmulateExecutionState.BREAKPOINT;
+		return emuHalt && emulator.getExecutionState() == EmulateExecutionState.BREAKPOINT;
 	}
 
 	/**
@@ -433,7 +433,7 @@ public class Emulator {
 			Iterator<Instruction> iterator = block.iterator();
 			while (iterator.hasNext() && count != 0) {
 				Instruction instr = iterator.next();
-				disassembly.add(instr.getAddressString(false, true) + " " + instr.toString());
+				disassembly.add(instr.getAddressString(false, true) + " " + instr);
 				lastInstr = instr;
 				--count;
 			}

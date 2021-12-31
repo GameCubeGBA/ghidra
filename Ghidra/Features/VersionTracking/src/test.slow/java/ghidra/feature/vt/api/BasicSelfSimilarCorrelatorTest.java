@@ -23,8 +23,7 @@ import ghidra.program.model.symbol.*;
 
 public class BasicSelfSimilarCorrelatorTest extends AbstractSelfSimilarCorrelatorTest {
 	public BasicSelfSimilarCorrelatorTest() {
-		super();
-	}
+    }
 
 @Test
     public void testExactBytes() throws Exception {

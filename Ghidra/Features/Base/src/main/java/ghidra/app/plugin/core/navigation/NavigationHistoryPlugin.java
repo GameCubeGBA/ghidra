@@ -78,7 +78,7 @@ public class NavigationHistoryPlugin extends Plugin
 	private Map<Navigatable, HistoryList> historyListMap = new HashMap<>();
 	private static final int ABSOLUTE_MAX_HISTORY_SIZE = 100;
 	private static final int ABSOLUTE_MIN_HISTORY_SIZE = 10;
-	final static int MAX_HISTORY_SIZE = 30;
+	static final int MAX_HISTORY_SIZE = 30;
 	private int maxHistorySize = MAX_HISTORY_SIZE;
 
 	private SaveState dataSaveState;

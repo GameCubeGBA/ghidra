@@ -71,7 +71,7 @@ import ghidra.program.util.ProgramSelection;
 public class DisassemblerPlugin extends Plugin {
 
 	// action info
-	final static String GROUP_NAME = "Disassembly";
+    static final String GROUP_NAME = "Disassembly";
 
 	// actions
 	private DockingAction disassembleRestrictedAction;

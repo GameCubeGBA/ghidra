@@ -20,6 +20,6 @@ import com.sun.jna.platform.win32.COM.IUnknown;
 
 public interface IUnknownEx extends IUnknown {
 
-	public Pointer getPointer();
+	Pointer getPointer();
 
 }

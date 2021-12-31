@@ -114,10 +114,8 @@ public class CopyAction extends DockingAction {
 		GTreeTransferHandler dragNDropHandler = gTree.getDragNDropHandler();
 		Transferable contents = new GTreeNodeTransferable(dragNDropHandler, list);
 
-		clipboard.setContents(contents, new ClipboardOwner() {
-			public void lostOwnership(Clipboard currentClipboard, Transferable transferable) {
-				// we don't care
-			}
-		});
+		clipboard.setContents(contents, (currentClipboard, transferable) -> {
+            // we don't care
+        });
 	}
 }

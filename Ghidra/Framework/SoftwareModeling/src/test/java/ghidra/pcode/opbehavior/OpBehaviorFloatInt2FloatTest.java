@@ -29,8 +29,7 @@ import ghidra.pcode.utils.Utils;
 public class OpBehaviorFloatInt2FloatTest extends AbstractOpBehaviorTest {
 
 	public OpBehaviorFloatInt2FloatTest() {
-		super();
-	}
+    }
 
 	@Test
 	public void testEvaluateBinaryLong() {

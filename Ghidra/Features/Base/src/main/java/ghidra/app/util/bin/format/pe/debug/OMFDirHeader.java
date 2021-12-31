@@ -34,7 +34,7 @@ import java.io.*;
  * 
  */
 class OMFDirHeader {
-    final static int IMAGE_SIZEOF_OMF_DIR_HEADER = 16;
+    static final int IMAGE_SIZEOF_OMF_DIR_HEADER = 16;
 
     private short cbDirHeader;
     private short cbDirEntry;

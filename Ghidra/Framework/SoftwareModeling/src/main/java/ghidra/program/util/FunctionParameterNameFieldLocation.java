@@ -71,11 +71,8 @@ public class FunctionParameterNameFieldLocation extends FunctionParameterFieldLo
 		if (!super.equals(obj) || (getClass() != obj.getClass()))
 			return false;
 		FunctionParameterNameFieldLocation other = (FunctionParameterNameFieldLocation) obj;
-		if (!Objects.equals(parameterName, other.parameterName)) {
-			return false;
-		}
-		return true;
-	}
+        return Objects.equals(parameterName, other.parameterName);
+    }
 
 	@Override
 	public void saveState(SaveState obj) {

@@ -39,8 +39,7 @@ public class BookmarkEditCmdTest extends AbstractGhidraHeadedIntegrationTest {
 	private ProgramBuilder builder;
 
 	public BookmarkEditCmdTest() {
-		super();
-	}
+    }
 
     @Before
     public void setUp() throws Exception {
@@ -101,17 +100,15 @@ public class BookmarkEditCmdTest extends AbstractGhidraHeadedIntegrationTest {
 
 		ArrayList<Bookmark> list = getBookmarks(bookmarkManager);
 		assertEquals(originalList.size() + addrs.length, list.size());
-		Iterator<Bookmark> iter = list.iterator();
-		while (iter.hasNext()) {
-			Bookmark bm = iter.next();
-			if (originalList.contains(bm))
-				continue;// skip old bookmarks	
-			int ix = getAddressIndex(addrs, bm.getAddress());
-			addrs[ix] = null;
-			assertEquals("Type" + ix, bm.getTypeString());
-			assertEquals("Cat" + ix, bm.getCategory());
-			assertEquals("Cmt" + ix, bm.getComment());
-		}
+    for (Bookmark bm : list) {
+        if (originalList.contains(bm))
+            continue;// skip old bookmarks
+        int ix = getAddressIndex(addrs, bm.getAddress());
+        addrs[ix] = null;
+        assertEquals("Type" + ix, bm.getTypeString());
+        assertEquals("Cat" + ix, bm.getCategory());
+        assertEquals("Cmt" + ix, bm.getComment());
+    }
 
 	}
 

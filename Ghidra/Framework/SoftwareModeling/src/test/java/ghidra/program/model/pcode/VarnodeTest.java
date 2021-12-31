@@ -142,8 +142,7 @@ public class VarnodeTest extends AbstractGenericTest {
 	}
 
 	public VarnodeTest() {
-		super();
-	}
+    }
 
 @Test
     public void testRamIntersects() {

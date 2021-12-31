@@ -25,8 +25,7 @@ public abstract class AbstractProgramBasedDynamicTableColumn<ROW_TYPE, COLUMN_TY
 	// just a stub/marker to mark our DATA_SOURCE as the Program type
 
 	public AbstractProgramBasedDynamicTableColumn() {
-		super();
-	}
+    }
 
 	public AbstractProgramBasedDynamicTableColumn(String uniqueID) {
 		super(uniqueID);

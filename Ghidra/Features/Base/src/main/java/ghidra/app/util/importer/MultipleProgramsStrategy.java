@@ -21,37 +21,26 @@ import ghidra.program.model.listing.Program;
 import java.util.List;
 
 public interface MultipleProgramsStrategy {
-    public static final MultipleProgramsStrategy ALL_PROGRAMS = new MultipleProgramsStrategy() {
-        public List<Program> handlePrograms(List<Program> programs,
-                Object consumer) {
-            return programs;
+    MultipleProgramsStrategy ALL_PROGRAMS = (programs, consumer) -> programs;
+
+    MultipleProgramsStrategy ONE_PROGRAM_OR_EXCEPTION = (programs, consumer) -> {
+        if (programs != null && programs.size() > 1) {
+            for (Program program : programs) {
+                program.release(consumer);
+            }
+            throw new MultipleProgramsException();
         }
+        return programs;
     };
 
-    public static final MultipleProgramsStrategy ONE_PROGRAM_OR_EXCEPTION = new MultipleProgramsStrategy() {
-        public List<Program> handlePrograms(List<Program> programs,
-                Object consumer) {
-            if (programs != null && programs.size() > 1) {
-                for (Program program : programs) {
-                    program.release(consumer);
-                }
-                throw new MultipleProgramsException();
+    MultipleProgramsStrategy ONE_PROGRAM_OR_NULL = (programs, consumer) -> {
+        if (programs != null && programs.size() > 1) {
+            for (Program program : programs) {
+                program.release(consumer);
             }
-            return programs;
+            return null;
         }
-    };
-
-    public static final MultipleProgramsStrategy ONE_PROGRAM_OR_NULL = new MultipleProgramsStrategy() {
-        public List<Program> handlePrograms(List<Program> programs,
-                Object consumer) {
-            if (programs != null && programs.size() > 1) {
-                for (Program program : programs) {
-                    program.release(consumer);
-                }
-                return null;
-            }
-            return programs;
-        }
+        return programs;
     };
 
     List<Program> handlePrograms(List<Program> programs, Object consumer);

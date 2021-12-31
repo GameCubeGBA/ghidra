@@ -167,16 +167,13 @@ public class DBTraceBookmark extends AbstractDBTraceAddressSnapRangePropertyMapD
 		if (result != 0) {
 			return result;
 		}
-		result = this.getTypeString().compareTo(that.getTypeString());
+		result = this.typeName.compareTo(that.getTypeString());
 		if (result != 0) {
 			return result;
 		}
-		result = this.getComment().compareTo(that.getComment());
-		if (result != 0) {
-			return result;
-		}
-		return 0;
-	}
+		result = this.comment.compareTo(that.getComment());
+        return result;
+    }
 
 	@Override
 	public String toString() {

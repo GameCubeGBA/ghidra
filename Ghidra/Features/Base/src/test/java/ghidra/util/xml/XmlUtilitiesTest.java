@@ -31,8 +31,7 @@ public class XmlUtilitiesTest extends AbstractGenericTest {
 	 * @param arg0
 	 */
 	public XmlUtilitiesTest() {
-		super();
-	}
+    }
 
 	@Test
 	public void testXmlToBytes() {

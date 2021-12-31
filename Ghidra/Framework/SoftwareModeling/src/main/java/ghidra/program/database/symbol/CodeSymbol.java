@@ -262,7 +262,7 @@ public class CodeSymbol extends SymbolDB {
 			}
 			return source;
 		}
-		if (newName == null || newName.length() == 0 || SymbolUtilities.isReservedDynamicLabelName(
+		if (newName == null || newName.isEmpty() || SymbolUtilities.isReservedDynamicLabelName(
 			newName, symbolMgr.getProgram().getAddressFactory())) {
 			return SourceType.DEFAULT;
 		}

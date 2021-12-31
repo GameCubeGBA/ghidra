@@ -194,7 +194,7 @@ public class FunctionTagMergeTest extends AbstractListingMergeManagerTest {
 		// Get the result program and check that we have:
 		// 1. The tag exists in Result.
 		assertTrue(isTagInProgram(TAG_NAME_A, mtf.getResultProgram()));
-		assertTrue(getTagComment(TAG_NAME_A, mtf.getResultProgram()).equals("comment B"));
+		assertTrue("comment B".equals(getTagComment(TAG_NAME_A, mtf.getResultProgram())));
 	}
 
 	/**
@@ -254,7 +254,7 @@ public class FunctionTagMergeTest extends AbstractListingMergeManagerTest {
 		// Get the result program and check that we have:
 		// 1. The tag exists in Result.
 		assertTrue(isTagInProgram(TAG_NAME_A, mtf.getResultProgram()));
-		assertTrue(getTagComment(TAG_NAME_A, mtf.getResultProgram()).equals("comment C"));
+		assertTrue("comment C".equals(getTagComment(TAG_NAME_A, mtf.getResultProgram())));
 	}
 
 	/**

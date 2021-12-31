@@ -82,17 +82,17 @@ public class CliSigMethodSpec extends CliAbstractSig {
 
 	@Override
 	public String getRepresentationCommon(CliStreamMetadata stream, boolean isShort) {
-		String typesRep = "";
+		StringBuilder typesRep = new StringBuilder();
 		for (CliSigType type : types) {
 			if (type == null) {
-				typesRep += "unidentified_param_type, ";
+				typesRep.append("unidentified_param_type, ");
 			}
 			else {
-				typesRep += getRepresentationOf(type, stream, isShort) + ", ";
+				typesRep.append(getRepresentationOf(type, stream, isShort)).append(", ");
 			}
 		}
 		if (types.length > 0) {
-			typesRep = typesRep.substring(0, typesRep.length() - 2); // Take off last comma+space
+			typesRep = new StringBuilder(typesRep.substring(0, typesRep.length() - 2)); // Take off last comma+space
 		}
 		String rep = String.format("GenericInst %d %s", genArgCount, typesRep);
 		return rep;

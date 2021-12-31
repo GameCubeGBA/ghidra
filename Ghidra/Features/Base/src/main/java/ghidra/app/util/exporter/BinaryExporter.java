@@ -59,11 +59,11 @@ public class BinaryExporter extends Exporter {
 
 		//skip blocks that are not initialized...
 		MemoryBlock[] blocks = memory.getBlocks();
-		for (int i = 0; i < blocks.length; ++i) {
-			if (!blocks[i].isInitialized()) {
-				set.delete(new AddressRangeImpl(blocks[i].getStart(), blocks[i].getEnd()));
-			}
-		}
+        for (MemoryBlock block : blocks) {
+            if (!block.isInitialized()) {
+                set.delete(new AddressRangeImpl(block.getStart(), block.getEnd()));
+            }
+        }
 
 		try {
 			AddressRangeIterator iter = set.getAddressRanges();

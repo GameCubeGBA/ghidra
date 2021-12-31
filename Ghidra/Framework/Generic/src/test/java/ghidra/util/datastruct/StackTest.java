@@ -37,8 +37,7 @@ public class StackTest extends AbstractGenericTest {
 	private Stack<String> stack4;
 
 	public StackTest() {
-		super();
-	}
+    }
 
 	@Before
 	public void setUp() {

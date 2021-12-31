@@ -157,10 +157,10 @@ class OatHeader_Marshmallow extends OatHeader {
 			structure.add(STRING, key.length() + 1, "key_value_store_[" + i + "].key", null);
 			structure.add(STRING, value.length() + 1, "key_value_store_[" + i + "].value", null);
 		}
-		for (int i = 0; i < oatDexFileList.size(); ++i) {
-			DataType dataType = oatDexFileList.get(i).toDataType();
-			structure.add(dataType, dataType.getName(), null);
-		}
+        for (OatDexFile oatDexFile : oatDexFileList) {
+            DataType dataType = oatDexFile.toDataType();
+            structure.add(dataType, dataType.getName(), null);
+        }
 		structure.setCategoryPath(new CategoryPath("/oat"));
 		return structure;
 	}

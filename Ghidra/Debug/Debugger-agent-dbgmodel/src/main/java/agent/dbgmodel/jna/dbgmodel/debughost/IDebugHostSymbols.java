@@ -26,7 +26,7 @@ import agent.dbgmodel.jna.dbgmodel.DbgModelNative.LOCATION;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IDebugHostSymbols extends IUnknownEx {
-	final IID IID_IDEBUG_HOST_SYMBOLS = new IID("854FD751-C2E1-4eb2-B525-6619CB97A588");
+	IID IID_IDEBUG_HOST_SYMBOLS = new IID("854FD751-C2E1-4eb2-B525-6619CB97A588");
 
 	enum VTIndices implements VTableIndex {
 		CREATE_MODULE_SIGNATURE, //

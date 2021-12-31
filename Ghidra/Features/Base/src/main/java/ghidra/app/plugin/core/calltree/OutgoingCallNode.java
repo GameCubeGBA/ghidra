@@ -190,11 +190,8 @@ public abstract class OutgoingCallNode extends CallNode {
 
 		Symbol extSym = program.getSymbolTable().getPrimarySymbol(ref.getToAddress());
 		SymbolType symbolType = extSym.getSymbolType();
-		if (symbolType == SymbolType.FUNCTION) {
-			return true;
-		}
-		return false;
-	}
+        return symbolType == SymbolType.FUNCTION;
+    }
 
 	@Override
 	public Address getSourceAddress() {

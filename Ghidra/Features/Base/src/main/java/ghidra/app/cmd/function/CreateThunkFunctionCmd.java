@@ -310,7 +310,7 @@ public class CreateThunkFunctionCmd extends BackgroundCommand {
 				CreateThunkFunctionCmd extThunkCmd =
 					new CreateThunkFunctionCmd(referencedFunctionAddr, false);
 				if (extThunkCmd.applyTo(program)) {
-					f = extThunkCmd.getThunkFunction();
+					f = extThunkCmd.thunkFunction;
 				}
 			}
 		}
@@ -390,7 +390,7 @@ public class CreateThunkFunctionCmd extends BackgroundCommand {
 			return extLoc.getFunction();
 		}
 
-		Msg.debug(this, "Converting external location to a function: " + extLoc.toString());
+		Msg.debug(this, "Converting external location to a function: " + extLoc);
 		return extLoc.createFunction();
 	}
 
@@ -534,12 +534,9 @@ public class CreateThunkFunctionCmd extends BackgroundCommand {
 		// 8-bit registers are normally flag registers
 		//   for 16-bit address spaces, the registers may be too small, so don't allow
 		//   non-use of an 8-bit register
-		boolean allow8bitNonUse = true;
-		if (program.getAddressFactory().getDefaultAddressSpace().getSize() <= 16) {
-			allow8bitNonUse = false;
-		}
+		boolean allow8bitNonUse = program.getAddressFactory().getDefaultAddressSpace().getSize() > 16;
 
-		// only go three instructions deep
+        // only go three instructions deep
 		// keep a list of outputs and inputs
 		// if inputs are used, get rid of them
 		// if only output is the PC, and small registers, assume OK
@@ -657,9 +654,7 @@ public class CreateThunkFunctionCmd extends BackgroundCommand {
 		if ((flowType.isJump() && !flowType.isConditional())) {
 			Address[] flows = instr.getFlows();
 			// allow a jump of 4 instructions forward.
-			if (flows.length == 1 && Math.abs(flows[0].subtract(instr.getMinAddress())) <= 4) {
-				return true;
-			}
+            return flows.length == 1 && Math.abs(flows[0].subtract(instr.getMinAddress())) <= 4;
 		}
 		return false;
 	}
@@ -694,7 +689,7 @@ public class CreateThunkFunctionCmd extends BackgroundCommand {
 			}
 
 			// if not checking for sideEffect registers set, or there are no side-effects
-			if (!checkForSideEffects || setRegisters.size() == 0) {
+			if (!checkForSideEffects || setRegisters.isEmpty()) {
 				flowingAddr = getFlowingAddress(program, instr);
 			}
 		}
@@ -858,10 +853,7 @@ public class CreateThunkFunctionCmd extends BackgroundCommand {
 	public static boolean isThunk(Program program, Function func) {
 		Address entry = func.getEntryPoint();
 
-		if (getThunkedAddr(program, entry) == null) {
-			return false;
-		}
-		return true;
-	}
+        return getThunkedAddr(program, entry) != null;
+    }
 
 }

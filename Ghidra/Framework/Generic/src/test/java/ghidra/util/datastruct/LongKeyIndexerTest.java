@@ -26,8 +26,7 @@ public class LongKeyIndexerTest extends AbstractGenericTest {
 	 * @param arg0
 	 */
 	public LongKeyIndexerTest() {
-		super();
-	}
+    }
 
 @Test
     public void testLongKeyIndexer() {

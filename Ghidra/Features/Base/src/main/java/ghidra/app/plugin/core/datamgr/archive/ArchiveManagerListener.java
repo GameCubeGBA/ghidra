@@ -34,11 +34,11 @@ public interface ArchiveManagerListener {
 	 * Called when the edited state of the archive has changed, for example, when an archive
 	 * has had a data type or category added or removed.
 	 */
-	public void archiveStateChanged(Archive archive);
+    void archiveStateChanged(Archive archive);
 
 	/**
 	 * Called when the {@link DataTypeManager} of the archive has changed.  This can happen when
 	 * an archive is locked or unlocked.
 	 */
-	public void archiveDataTypeManagerChanged(Archive archive);
+    void archiveDataTypeManagerChanged(Archive archive);
 }

@@ -57,12 +57,8 @@ public class DeleteAction extends DockingAction {
 			return false;
 		}
 
-		if (containsUndeletableNodes(selectionPaths)) {
-			return false;
-		}
-
-		return true;
-	}
+        return !containsUndeletableNodes(selectionPaths);
+    }
 
 	@Override
 	public boolean isEnabledForContext(ActionContext context) {

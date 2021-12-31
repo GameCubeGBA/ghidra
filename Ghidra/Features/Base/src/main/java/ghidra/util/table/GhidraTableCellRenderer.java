@@ -99,7 +99,7 @@ public class GhidraTableCellRenderer extends GTableCellRenderer {
 		Symbol s = program.getSymbolTable().getPrimarySymbol(extAddr);
 		ExternalLocation extLoc = program.getExternalManager().getExternalLocation(s);
 		String path = program.getExternalManager().getExternalLibraryPath(extLoc.getLibraryName());
-		return (path != null && path.length() > 0);
+		return (path != null && !path.isEmpty());
 	}
 
 	private boolean isValueOutOfMemoryAddress(TableModel model, Object value) {

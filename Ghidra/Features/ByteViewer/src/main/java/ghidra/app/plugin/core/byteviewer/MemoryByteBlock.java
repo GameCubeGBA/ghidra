@@ -255,23 +255,6 @@ public class MemoryByteBlock implements ByteBlock {
 		return (int) (start.getOffset() % radix);
 	}
 
-	private Address getMappedAddress(Address addr) {
-		MemoryBlock memBlock = memory.getBlock(addr);
-		if (memBlock != null && memBlock.getType() == MemoryBlockType.BYTE_MAPPED) {
-			try {
-				MemoryBlockSourceInfo info = memBlock.getSourceInfos().get(0);
-				AddressRange mappedRange = info.getMappedRange().get();
-				ByteMappingScheme byteMappingScheme = info.getByteMappingScheme().get();
-				addr = byteMappingScheme.getMappedSourceAddress(mappedRange.getMinAddress(),
-					addr.subtract(memBlock.getStart()));
-			}
-			catch (AddressOverflowException e) {
-				// ignore
-			}
-		}
-		return addr;
-	}
-
 	/**
 	 * Get the address based on the index.
 	 */

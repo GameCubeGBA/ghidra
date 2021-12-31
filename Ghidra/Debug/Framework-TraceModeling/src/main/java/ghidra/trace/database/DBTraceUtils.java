@@ -65,11 +65,8 @@ public enum DBTraceUtils {
 			if (this.offset != that.offset) {
 				return false;
 			}
-			if (this.snap != that.snap) {
-				return false;
-			}
-			return true;
-		}
+            return this.snap == that.snap;
+        }
 
 		@Override
 		public int hashCode() {

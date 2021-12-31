@@ -131,13 +131,13 @@ public class ListSelectionTableDialog<T> extends DialogComponentProvider {
 	public T show(Component parent) {
 		setSelectionMode(false);
 		DockingWindowManager.showDialog(parent, this);
-		return getSelectedItem();
+		return selectedValue;
 	}
 
 	public List<T> showSelectMultiple(Component parent) {
 		setSelectionMode(true);
 		DockingWindowManager.showDialog(parent, this);
-		return getSelectedItems();
+		return selectedValues;
 	}
 
 	/**

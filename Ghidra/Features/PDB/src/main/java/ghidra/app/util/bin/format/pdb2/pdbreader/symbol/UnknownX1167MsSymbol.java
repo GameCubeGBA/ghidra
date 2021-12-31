@@ -90,7 +90,7 @@ public class UnknownX1167MsSymbol extends AbstractUnknownMsSymbol {
 		builder.append(String.format("\nunknownUnsignedShort1: %04X", unknownUnsignedShort1));
 		builder.append(String.format("\nunknownUnsignedShort2: %04X", unknownUnsignedShort2));
 		builder.append(String.format("\nunknownUnsignedShort3: %04X", unknownUnsignedShort3));
-		builder.append(String.format("\nString: %s", getStringData()));
+		builder.append(String.format("\nString: %s", string));
 	}
 
 	@Override

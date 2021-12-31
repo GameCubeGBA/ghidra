@@ -65,12 +65,8 @@ public class RejectMatchAction extends DockingAction {
 		}
 		VTMatchContext matchContext = (VTMatchContext) context;
 		List<VTMatch> matches = matchContext.getSelectedMatches();
-		if (matches.size() == 0) {
-			return false;
-		}
-
-		return true;
-	}
+        return !matches.isEmpty();
+    }
 
 	@Override
 	public boolean isAddToPopup(ActionContext context) {

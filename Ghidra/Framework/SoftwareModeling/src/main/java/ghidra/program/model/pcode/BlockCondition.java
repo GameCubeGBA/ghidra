@@ -32,8 +32,7 @@ public class BlockCondition extends BlockGraph {
 	private int opcode;			// Type of boolean operation
 	
 	public BlockCondition() {
-		super();
-		blocktype = PcodeBlock.CONDITION;
+        blocktype = PcodeBlock.CONDITION;
 		opcode = PcodeOp.BOOL_AND;
 	}
 	

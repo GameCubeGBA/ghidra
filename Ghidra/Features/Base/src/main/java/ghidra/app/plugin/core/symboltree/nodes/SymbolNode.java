@@ -41,8 +41,7 @@ public class SymbolNode extends SymbolTreeNode {
 	private boolean isCut;
 
 	SymbolNode(Program program, Symbol symbol) {
-		super();
-		this.program = program;
+        this.program = program;
 		this.symbol = symbol;
 	}
 
@@ -165,7 +164,7 @@ public class SymbolNode extends SymbolTreeNode {
 	public GTreeNode findSymbolTreeNode(SymbolNode key, boolean loadChildren,
 			TaskMonitor taskMonitor) {
 
-		Symbol searchSymbol = key.getSymbol();
+		Symbol searchSymbol = key.symbol;
 		if (symbol == searchSymbol) {
 			return this;
 		}

@@ -41,8 +41,7 @@ public class SymbolUtilities2Test extends AbstractGhidraHeadedIntegrationTest {
 	private Listing listing;
 
 	public SymbolUtilities2Test() {
-		super();
-	}
+    }
 
 	@Before
 	public void setUp() throws Exception {

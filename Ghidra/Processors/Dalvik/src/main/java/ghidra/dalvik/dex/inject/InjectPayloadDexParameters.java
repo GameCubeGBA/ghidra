@@ -40,8 +40,8 @@ import ghidra.xml.*;
  *
  */
 public class InjectPayloadDexParameters implements InjectPayload {
-	public final static int INPUT_REGISTER_START = 0x100;
-	public final static int REGISTER_START = 0x1000;
+	public static final int INPUT_REGISTER_START = 0x100;
+	public static final int REGISTER_START = 0x1000;
 	private String name;
 	private String sourceName;
 	private InjectParameter[] noParams;
@@ -190,7 +190,7 @@ public class InjectPayloadDexParameters implements InjectPayload {
 	public void restoreXml(XmlPullParser parser, SleighLanguage language) throws XmlParseException {
 		XmlElement el = parser.start();
 		String injectString = el.getAttribute("inject");
-		if (injectString == null || !injectString.equals("uponentry")) {
+		if (injectString == null || !"uponentry".equals(injectString)) {
 			throw new XmlParseException("Expecting inject=\"uponentry\" attribute");
 		}
 		boolean isDynamic = SpecXmlUtils.decodeBoolean(el.getAttribute("dynamic"));

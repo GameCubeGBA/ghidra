@@ -78,11 +78,8 @@ public abstract class DebuggerReadsMemoryTrait {
 			}
 			TraceRecorder recorder = current.getRecorder();
 			// TODO: Either allow partial, or provide action to intersect with accessible
-			if (!recorder.getAccessibleProcessMemory().contains(selection)) {
-				return false;
-			}
-			return true;
-		}
+            return recorder.getAccessibleProcessMemory().contains(selection);
+        }
 
 		public void updateEnabled(ActionContext context) {
 			setEnabled(isEnabledForContext(context));
@@ -170,11 +167,8 @@ public abstract class DebuggerReadsMemoryTrait {
 		if (!Objects.equals(a.getTime(), b.getTime())) {
 			return false;
 		}
-		if (!Objects.equals(a.getRecorder(), b.getRecorder())) {
-			return false;
-		}
-		return true;
-	}
+        return Objects.equals(a.getRecorder(), b.getRecorder());
+    }
 
 	protected void addNewTraceListener() {
 		if (current.getTrace() != null) {

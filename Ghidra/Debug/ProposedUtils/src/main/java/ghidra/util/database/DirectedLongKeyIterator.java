@@ -22,8 +22,8 @@ import com.google.common.collect.Range;
 import db.Table;
 
 public interface DirectedLongKeyIterator extends DirectedIterator<Long> {
-	public static AbstractDirectedLongKeyIterator getIterator(Table table, Range<Long> keyRange,
-			Direction direction) throws IOException {
+	static AbstractDirectedLongKeyIterator getIterator(Table table, Range<Long> keyRange,
+                                                       Direction direction) throws IOException {
 		long min = DirectedIterator.toIteratorMin(keyRange);
 		long max = DirectedIterator.toIteratorMax(keyRange);
 		if (direction == Direction.FORWARD) {

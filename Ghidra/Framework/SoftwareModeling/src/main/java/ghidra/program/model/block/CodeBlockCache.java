@@ -28,8 +28,7 @@ import ghidra.program.model.address.AddressObjectMap;
 class CodeBlockCache extends AddressObjectMap {
 
 	CodeBlockCache() {
-		super();
-	}
+    }
 	
     /**
      * Get the cached block whose first entry-point is addr. 

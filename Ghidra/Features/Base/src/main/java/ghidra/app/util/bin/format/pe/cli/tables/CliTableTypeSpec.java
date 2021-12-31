@@ -40,8 +40,7 @@ public class CliTableTypeSpec extends CliAbstractTable {
 		public int signatureIndex;
 
 		public CliTypeSpecRow(int signatureIndex) {
-			super();
-			this.signatureIndex = signatureIndex;
+            this.signatureIndex = signatureIndex;
 		}
 
 		@Override

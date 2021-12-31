@@ -19,6 +19,6 @@ import ghidra.dbg.target.TargetAggregate;
 
 public interface LldbModelTargetDebugContainer extends LldbModelTargetObject, TargetAggregate {
 	
-	public LldbModelTargetBreakpointContainer getBreakpoints();
+	LldbModelTargetBreakpointContainer getBreakpoints();
 
 }

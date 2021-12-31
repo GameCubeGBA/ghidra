@@ -29,7 +29,7 @@ public interface TargetEventScope extends TargetObject {
 
 	String EVENT_OBJECT_ATTRIBUTE_NAME = PREFIX_INVISIBLE + "event_thread";
 
-	public enum TargetEventType {
+	enum TargetEventType {
 		/**
 		 * The session has stopped for an unspecified reason
 		 */
@@ -121,7 +121,7 @@ public interface TargetEventScope extends TargetObject {
 	 * @return the thread or reference
 	 */
 	@TargetAttributeType(name = EVENT_OBJECT_ATTRIBUTE_NAME, hidden = true)
-	public default TargetThread getEventThread() {
+    default TargetThread getEventThread() {
 		return getTypedAttributeNowByName(EVENT_OBJECT_ATTRIBUTE_NAME, TargetThread.class, null);
 	}
 }

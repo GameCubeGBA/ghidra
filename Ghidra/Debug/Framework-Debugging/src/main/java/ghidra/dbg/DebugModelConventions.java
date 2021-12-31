@@ -55,55 +55,6 @@ public enum DebugModelConventions {
 	 * Search for a suitable object implementing the given interface, starting at a given seed.
 	 * 
 	 * <p>
-	 * This performs an n-up-1-down search starting at the given seed, seeking an object which
-	 * implements the given interface. The 1-down part is only applied from objects implementing
-	 * {@link TargetAggregate}. See {@link TargetObject} for the specifics of expected model
-	 * conventions.
-	 * 
-	 * <p>
-	 * Note that many a debugger target object interface type require a self-referential {@code T}
-	 * parameter referring to the implementing class type. To avoid referring to a particular
-	 * implementation, it becomes necessary to leave {@code T} as {@code ?}, but that can never
-	 * satisfy the constraints of this method. To work around this, such interfaces must provide a
-	 * static {@code tclass} field, which can properly satisfy the type constraints of this method
-	 * for such self-referential type variables. The returned value must be ascribed to the
-	 * wild-carded type, because the work-around involves a hidden class. Perhaps a little verbose
-	 * (hey, it's Java!), the following is the recommended pattern, e.g., to discover the
-	 * environment of a given process:
-	 * 
-	 * <pre>
-	 * CompletableFuture<? extends TargetEnvironment<?>> futureEnv =
-	 * 	DebugModelConventions.findSuitable(TargetEnvironment.tclass, aProcess);
-	 * </pre>
-	 * 
-	 * @param <T> the desired interface type.
-	 * @param iface the (probably {@code tclass}) of the desired interface type
-	 * @param seed the starting object
-	 * @return a future which completes with the discovered object or completes with null, if not
-	 *         found.
-	 * @deprecated use {@link #suitable(Class, TargetObject)} instead
-	 */
-	@Deprecated(forRemoval = true)
-	public static <T extends TargetObject> CompletableFuture<T> findSuitable(Class<T> iface,
-			TargetObject seed) {
-		if (iface.isAssignableFrom(seed.getClass())) {
-			return CompletableFuture.completedFuture(iface.cast(seed));
-		}
-		if (seed instanceof TargetAggregate) {
-			return findInAggregate(iface, seed).thenCompose(agg -> {
-				if (agg.size() == 1) {
-					return CompletableFuture.completedFuture(agg.iterator().next());
-				}
-				return findParentSuitable(iface, seed);
-			});
-		}
-		return findParentSuitable(iface, seed);
-	}
-
-	/**
-	 * Search for a suitable object implementing the given interface, starting at a given seed.
-	 * 
-	 * <p>
 	 * This performs an n-up-m-down search starting at the given seed, seeking an object which
 	 * implements the given interface. The m-down part is only applied from objects implementing
 	 * {@link TargetAggregate}. See {@link TargetObject} for the specifics of expected model
@@ -156,7 +107,7 @@ public enum DebugModelConventions {
 		if (parent == null) {
 			return AsyncUtils.nil();
 		}
-		return findSuitable(iface, parent);
+		return suitable(iface, parent);
 	}
 
 	/**
@@ -279,7 +230,7 @@ public enum DebugModelConventions {
 	 * Find the nearest ancestor which implements the given interface.
 	 * 
 	 * <p>
-	 * This is similar to {@link #findSuitable(Class, TargetObject)}, except without the 1-down
+	 * This is similar to {@link #suitable(Class, TargetObject)}, except without the 1-down
 	 * rule.
 	 * 
 	 * @param <T> the type of the required interface
@@ -823,7 +774,7 @@ public enum DebugModelConventions {
 	 */
 	public static CompletableFuture<Void> requestActivation(TargetObject obj) {
 		CompletableFuture<? extends TargetActiveScope> futureActivator =
-			DebugModelConventions.findSuitable(TargetActiveScope.class, obj);
+			DebugModelConventions.suitable(TargetActiveScope.class, obj);
 		return futureActivator.thenCompose(activator -> {
 			if (activator == null) {
 				return AsyncUtils.NIL;
@@ -843,7 +794,7 @@ public enum DebugModelConventions {
 	 */
 	public static CompletableFuture<Void> requestFocus(TargetObject obj) {
 		CompletableFuture<? extends TargetFocusScope> futureScope =
-			DebugModelConventions.findSuitable(TargetFocusScope.class, obj);
+			DebugModelConventions.suitable(TargetFocusScope.class, obj);
 		return futureScope.thenCompose(scope -> {
 			if (scope == null) {
 				return AsyncUtils.NIL;

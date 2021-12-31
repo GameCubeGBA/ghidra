@@ -287,7 +287,7 @@ public class FVTable extends GTable
 
 				List<String> lines = reader.readNextChunk();
 
-				if (lines.size() == 0) {
+				if (lines.isEmpty()) {
 					return;
 				}
 
@@ -359,7 +359,7 @@ public class FVTable extends GTable
 
 				List<String> lines = reader.readNextChunk();
 
-				if (lines.size() == 0) {
+				if (lines.isEmpty()) {
 					return;
 				}
 
@@ -422,7 +422,7 @@ public class FVTable extends GTable
 			try {
 
 				List<String> lines = reader.readPreviousChunk();
-				if (lines.size() == 0) {
+				if (lines.isEmpty()) {
 					return;
 				}
 
@@ -497,7 +497,7 @@ public class FVTable extends GTable
 			// of the file and should just stop.
 			try {
 				List<String> lines = reader.readPreviousChunk();
-				if (lines.size() == 0) {
+				if (lines.isEmpty()) {
 					return;
 				}
 

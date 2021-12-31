@@ -52,7 +52,7 @@ public abstract class ObjectiveC_Method implements StructConverter {
 		if (implementation == 0) {
 			return;
 		}
-		if (getName() == null && getName().length() == 0) {
+		if (getName() == null && getName().isEmpty()) {
 			return;
 		}
 

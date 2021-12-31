@@ -117,7 +117,7 @@ public class RegionDescriptor {
 	 * @return the call site table
 	 */
 	public LSDACallSiteTable getCallSiteTable() {
-		LSDATable lsda = getLSDATable();
+		LSDATable lsda = lsdaTable;
 		if (lsda == null) {
 			return null;
 		}
@@ -129,7 +129,7 @@ public class RegionDescriptor {
 	 * @return the action table or null if it hasn't been set for this region
 	 */
 	public LSDAActionTable getActionTable() {
-		LSDATable lsda = getLSDATable();
+		LSDATable lsda = lsdaTable;
 		if (lsda == null) {
 			return null;
 		}
@@ -141,7 +141,7 @@ public class RegionDescriptor {
 	 * @return the LSDA type table or null if it hasn't been set for this region
 	 */
 	public LSDATypeTable getTypeTable() {
-		LSDATable lsda = getLSDATable();
+		LSDATable lsda = lsdaTable;
 		if (lsda == null) {
 			return null;
 		}

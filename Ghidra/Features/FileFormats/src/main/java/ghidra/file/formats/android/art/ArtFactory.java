@@ -40,7 +40,7 @@ public final class ArtFactory {
 	 * @throws IOException should an error occur during reading or parsing
 	 * @throws UnsupportedArtVersionException when the provided version is invalid or not yet implemented.
 	 */
-	public final static ArtHeader newArtHeader(BinaryReader reader)
+    public static final ArtHeader newArtHeader(BinaryReader reader)
 			throws IOException, UnsupportedArtVersionException {
 		String magic = new String(reader.readByteArray(0, ArtConstants.MAGIC.length()));
 		String version = reader.readAsciiString(4, 4);

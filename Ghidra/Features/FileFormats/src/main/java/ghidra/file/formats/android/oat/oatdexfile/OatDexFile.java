@@ -30,25 +30,25 @@ public abstract class OatDexFile implements StructConverter {
 	 * Returns the path string (not null terminated).
 	 * @return the path string (not null terminated)
 	 */
-	abstract public String getDexFileLocation();
+    public abstract String getDexFileLocation();
 
 	/**
 	 * Returns the checksum of the embedded dex files.
 	 * @return the checksum of the embedded dex files
 	 */
-	abstract public int getDexFileChecksum();
+    public abstract int getDexFileChecksum();
 
 	/**
 	 * Returns the offset to the dex files, relative to the OATDATA symbol.
 	 * @return the offset to the dex files
 	 */
-	abstract public int getDexFileOffset();
+    public abstract int getDexFileOffset();
 
 	/**
 	 * Returns the embedded DEX header.
 	 * @return the embedded DEX header
 	 */
-	abstract public DexHeader getDexHeader();
+    public abstract DexHeader getDexHeader();
 
 	/**
 	 * Annotates the listing with data structures related to this object.
@@ -58,13 +58,13 @@ public abstract class OatDexFile implements StructConverter {
 	 * @param log the message log
 	 * @throws Exception if any error occur during markup
 	 */
-	abstract public void markup(OatHeader oatHeader, Program program, TaskMonitor monitor,
+    public abstract void markup(OatHeader oatHeader, Program program, TaskMonitor monitor,
 			MessageLog log) throws Exception;
 
 	/**
 	 * Is the DEX header stored in an external file (e.g. VDEX files).
 	 * @return true if the DEX header is stored externally
 	 */
-	abstract public boolean isDexHeaderExternal();
+    public abstract boolean isDexHeaderExternal();
 
 }

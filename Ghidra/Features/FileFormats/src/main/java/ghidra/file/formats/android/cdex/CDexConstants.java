@@ -29,35 +29,35 @@ import ghidra.program.model.listing.Program;
  */
 public final class CDexConstants {
 
-	public final static String NAME = "Compact Dalvik Executable (CDEX)";
+	public static final String NAME = "Compact Dalvik Executable (CDEX)";
 
 	/**
 	 * <pre>
 	 * static constexpr uint8_t kDexMagic[kDexMagicSize] = { 'c', 'd', 'e', 'x' };
 	 * </pre>
 	 */
-	public final static String MAGIC = "cdex";
+    public static final String MAGIC = "cdex";
 
 	/**
 	 * <pre>
 	 * static constexpr uint8_t kDexMagicVersion[] = {'0', '0', '1', '\0'};
 	 * </pre>
 	 */
-	public final static String VERSION_001 = "001";
+    public static final String VERSION_001 = "001";
 
 	/**
 	 * <pre>
 	 * static constexpr uint8_t kDexMagicVersion[] = {'0', '0', '2', '\0'};
 	 * </pre>
 	 */
-	public final static String VERSION_002 = "002";
+    public static final String VERSION_002 = "002";
 
 	/**
 	 * Returns true if the given program contain CDEX information.
 	 * @param program the program to inspect
 	 * @return true if the given program contain CDEX information
 	 */
-	public final static boolean isCDEX(Program program) {
+    public static final boolean isCDEX(Program program) {
 		if (program != null) {
 			try {
 				byte[] bytes = new byte[MAGIC.length()];

@@ -20,8 +20,7 @@ import ghidra.program.model.listing.Program;
 public abstract class AbstractSelfSimilarCorrelatorTest extends AbstractCorrelatorTest {
 
 	public AbstractSelfSimilarCorrelatorTest() {
-		super();
-	}
+    }
 
 	@Override
 	protected final Program getSourceProgram() {

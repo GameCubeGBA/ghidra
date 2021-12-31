@@ -32,9 +32,9 @@ import ghidra.dbg.target.TargetAttacher;
 public interface LldbModelTargetAttacher extends LldbModelTargetObject, TargetAttacher {
 
 	@Override
-	public CompletableFuture<Void> attach(TargetAttachable attachable);
+    CompletableFuture<Void> attach(TargetAttachable attachable);
 
 	@Override
-	public CompletableFuture<Void> attach(long pid);
+    CompletableFuture<Void> attach(long pid);
 	
 }

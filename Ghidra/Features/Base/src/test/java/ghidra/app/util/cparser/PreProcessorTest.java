@@ -19,6 +19,7 @@ import static org.junit.Assert.*;
 
 import java.io.ByteArrayOutputStream;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 import org.junit.Test;
 
@@ -30,8 +31,7 @@ import ghidra.program.model.data.Enum;
 public class PreProcessorTest extends AbstractGenericTest {
 
 	public PreProcessorTest() {
-		super();
-	}
+    }
 
 	@Test
 	public void testHeaderParsing() throws Exception {
@@ -59,10 +59,10 @@ public class PreProcessorTest extends AbstractGenericTest {
 		parser.parse(url.getFile());
 
 		// Uncomment to print out parse results
-		System.err.println(baos.toString());
+		System.err.println(baos);
 
-		String results = baos.toString("ASCII");
-		int end = results.lastIndexOf(";") + 1;
+		String results = baos.toString(StandardCharsets.US_ASCII);
+		int end = results.lastIndexOf(';') + 1;
 		String endStr = results.substring(end - 9, end);
 		assertEquals("theEnd();", endStr);
 

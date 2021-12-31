@@ -38,8 +38,7 @@ import ghidra.program.model.mem.*;
 public class DataTypeMarkupItemTest extends AbstractVTMarkupItemTest {
 
 	public DataTypeMarkupItemTest() {
-		super();
-	}
+    }
 
 	@Test
 	public void testReplaceDataTypeWhereNone() throws Exception {

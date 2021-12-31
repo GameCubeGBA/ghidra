@@ -23,7 +23,7 @@ import java.util.Arrays;
 
 public final class DmgUtil {
 
-	public final static boolean isDMG(Program program) {
+	public static final boolean isDMG(Program program) {
 		if (program != null) {
 			Address address = program.getMinAddress();
 			if (address != null) {

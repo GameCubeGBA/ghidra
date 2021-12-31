@@ -29,7 +29,7 @@ import java.io.Serializable;
  * Array of shorts that grows as needed.
  */
 public class ShortArray implements Array, Serializable {
-	private final static long serialVersionUID = 1;
+	private static final long serialVersionUID = 1;
 
     static final int MIN_SIZE = 4;
     short[] shorts;
@@ -70,7 +70,7 @@ public class ShortArray implements Array, Serializable {
 		if (index >= shorts.length) {
 			return;
 		}
-        shorts[index] = (short)0;
+        shorts[index] = 0;
         if (index == lastNonZeroIndex) {
             lastNonZeroIndex = findLastNonZeroIndex();
         }

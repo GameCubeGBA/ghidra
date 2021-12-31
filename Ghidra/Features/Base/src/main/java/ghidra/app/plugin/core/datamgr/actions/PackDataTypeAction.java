@@ -47,11 +47,8 @@ public class PackDataTypeAction extends DockingAction {
 			dataType instanceof MissingBuiltInDataType) {
 			return false;
 		}
-		if (!node.isModifiable()) {
-			return false;
-		}
-		return true;
-	}
+        return node.isModifiable();
+    }
 
 	@Override
 	public boolean isEnabledForContext(ActionContext context) {

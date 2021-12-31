@@ -50,7 +50,7 @@ public class ConcurrentTestExceptionHandler implements UncaughtExceptionHandler 
 		});
 	}
 
-	public synchronized static void handle(Thread thread, Throwable t) {
+	public static synchronized void handle(Thread thread, Throwable t) {
 
 		if (!enabled) {
 			return;
@@ -91,19 +91,19 @@ public class ConcurrentTestExceptionHandler implements UncaughtExceptionHandler 
 		return StringUtils.containsAny(message, IGNORABLE_ERROR_MESSAGES);
 	}
 
-	public synchronized static void clear() {
+	public static synchronized void clear() {
 		throwables.clear();
 	}
 
-	public synchronized static void enable() {
+	public static synchronized void enable() {
 		enabled = true;
 	}
 
-	public synchronized static void disable() {
+	public static synchronized void disable() {
 		enabled = false;
 	}
 
-	public synchronized static boolean isEnabled() {
+	public static synchronized boolean isEnabled() {
 		return enabled;
 	}
 

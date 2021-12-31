@@ -31,9 +31,9 @@ import ghidra.util.exception.AssertException;
  */
 public class EditBitFieldAction extends CompositeEditorTableAction {
 
-	public final static String ACTION_NAME = "Edit Bitfield";
-	private final static String GROUP_NAME = BITFIELD_ACTION_GROUP;
-	private final static String DESCRIPTION = "Edit an existing bitfield";
+	public static final String ACTION_NAME = "Edit Bitfield";
+	private static final String GROUP_NAME = BITFIELD_ACTION_GROUP;
+	private static final String DESCRIPTION = "Edit an existing bitfield";
 	private static String[] POPUP_PATH = new String[] { ACTION_NAME };
 
 	public EditBitFieldAction(CompositeEditorProvider provider) {

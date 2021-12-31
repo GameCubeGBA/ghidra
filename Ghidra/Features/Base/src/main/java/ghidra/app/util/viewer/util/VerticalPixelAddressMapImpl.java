@@ -36,8 +36,7 @@ public class VerticalPixelAddressMapImpl implements VerticalPixelAddressMap {
 	 * @param map the map containing the addresses by index
 	 */
 	public VerticalPixelAddressMapImpl(List<AnchoredLayout> layouts, AddressIndexMap map) {
-		super();
-		this.layouts = layouts;
+        this.layouts = layouts;
 		this.map = map;
 	}
 

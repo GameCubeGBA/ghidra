@@ -35,8 +35,7 @@ public class AddressMapDB32BitTest extends AbstractAddressMapDBTestClass {
 	 * @param arg0
 	 */
 	public AddressMapDB32BitTest() {
-		super();
-	}
+    }
 	
 	@Override
     protected Program createTestProgram() throws Exception {

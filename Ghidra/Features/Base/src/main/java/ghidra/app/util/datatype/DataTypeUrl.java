@@ -161,11 +161,8 @@ public class DataTypeUrl {
 			return false;
 		}
 
-		if (!Objects.equals(dataTypeName, other.dataTypeName)) {
-			return false;
-		}
-		return true;
-	}
+        return Objects.equals(dataTypeName, other.dataTypeName);
+    }
 
 	@Override
 	public String toString() {

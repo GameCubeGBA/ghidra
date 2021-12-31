@@ -62,11 +62,8 @@ public class AssemblyParseNumericToken extends AssemblyParseToken {
 			return false;
 		}
 		AssemblyParseNumericToken that = (AssemblyParseNumericToken) obj;
-		if (!this.term.equals(that.term) || !this.str.equals(that.str) || (this.val != that.val)) {
-			return false;
-		}
-		return true;
-	}
+        return this.term.equals(that.term) && this.str.equals(that.str) && (this.val == that.val);
+    }
 
 	@Override
 	public String toString() {

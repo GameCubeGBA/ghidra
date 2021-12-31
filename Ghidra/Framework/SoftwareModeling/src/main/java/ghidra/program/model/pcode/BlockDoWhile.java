@@ -28,7 +28,6 @@ package ghidra.program.model.pcode;
 public class BlockDoWhile extends BlockGraph {
 
 	public BlockDoWhile() {
-		super();
-		blocktype = PcodeBlock.DOWHILE;
+        blocktype = PcodeBlock.DOWHILE;
 	}
 }

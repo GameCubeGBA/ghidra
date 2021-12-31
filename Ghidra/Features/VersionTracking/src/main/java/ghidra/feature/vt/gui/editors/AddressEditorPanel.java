@@ -30,8 +30,7 @@ import javax.swing.JPanel;
 public abstract class AddressEditorPanel extends JPanel {
 
 	public AddressEditorPanel() {
-		super();
-	}
+    }
 
 	public AddressEditorPanel(boolean isDoubleBuffered) {
 		super(isDoubleBuffered);

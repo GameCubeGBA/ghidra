@@ -121,14 +121,12 @@ public class AboutDomainObjectUtils {
 		}
 		addInfo(aboutPanel, "Readonly:", Boolean.toString(domainFile.isReadOnly()));
 
-		Iterator<String> it = metadata.keySet().iterator();
-		while (it.hasNext()) {
-			String key = it.next();
-			String value = metadata.get(key);
-			addInfo(aboutPanel, key + ":", value);
-		}
+        for (String key : metadata.keySet()) {
+            String value = metadata.get(key);
+            addInfo(aboutPanel, key + ":", value);
+        }
 
-		if (additionalInfo != null && additionalInfo.length() > 0) {
+		if (additionalInfo != null && !additionalInfo.isEmpty()) {
 			JTextArea auxArea = new JTextArea(additionalInfo);
 			auxArea.setFont(font);
 			DockingUtils.setTransparent(auxArea);

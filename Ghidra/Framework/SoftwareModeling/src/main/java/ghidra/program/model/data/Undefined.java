@@ -20,7 +20,7 @@ package ghidra.program.model.data;
  */
 public abstract class Undefined extends BuiltIn {
 
-	private final static long serialVersionUID = 1;
+	private static final long serialVersionUID = 1;
 
 	protected Undefined(String name, DataTypeManager dtm) {
 		super(CategoryPath.ROOT, name, dtm);
@@ -28,7 +28,7 @@ public abstract class Undefined extends BuiltIn {
 
 	private static Undefined[] undefinedTypes;
 
-	private synchronized static Undefined[] getUndefinedTypes() {
+	private static synchronized Undefined[] getUndefinedTypes() {
 		if (undefinedTypes == null) {
 			undefinedTypes =
 				new Undefined[] { Undefined1DataType.dataType, Undefined2DataType.dataType,

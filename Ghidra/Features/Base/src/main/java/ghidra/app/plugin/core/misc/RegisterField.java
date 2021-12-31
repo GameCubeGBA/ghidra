@@ -108,7 +108,7 @@ public class RegisterField extends JTextField {
         }
 
         /// if the value is no longer valid, then clear the value
-        if ( !isValidValue( getValue() ) ) {
+        if ( !isValidValue(currentValue) ) {
             doSetValue( null );
         }
     }
@@ -142,10 +142,7 @@ public class RegisterField extends JTextField {
     	if (l1 != null) {
     		return l1.equals(l2);
     	}
-    	else if (l2 != null) {
-    		return false;
-    	}
-    	return true;
+    	else return l2 == null;
     }
 	private void setTextField(String text) {
         if ( doc == null ) {
@@ -164,7 +161,7 @@ public class RegisterField extends JTextField {
 	private boolean processText() {
 		String text = getText();
 	
-		if (text.length() == 0){
+		if (text.isEmpty()){
 			if (currentValue != null) {
 				currentValue = null;
 				notifyListeners();
@@ -172,7 +169,7 @@ public class RegisterField extends JTextField {
 			return true;
 		}
 		
-		if (text.equals("0x") || text.equals("0X")) {
+		if ("0x".equals(text) || "0X".equals(text)) {
 		 	if ((currentValue == null) || (currentValue.longValue() != 0)) {
 				currentValue = Long.valueOf(0);
 				notifyListeners();

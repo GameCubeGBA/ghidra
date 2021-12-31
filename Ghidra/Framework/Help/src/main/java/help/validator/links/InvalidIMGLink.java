@@ -98,9 +98,6 @@ public class InvalidIMGLink implements InvalidLink {
 		if (!Objects.equals(img, other.img)) {
 			return false;
 		}
-		if (!Objects.equals(message, other.message)) {
-			return false;
-		}
-		return true;
-	}
+        return Objects.equals(message, other.message);
+    }
 }

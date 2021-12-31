@@ -20,7 +20,7 @@ import com.sun.jna.platform.win32.Guid.IID;
 import agent.dbgeng.jna.dbgeng.UnknownWithUtils.VTableIndex;
 
 public interface IDebugDataSpaces4 extends IDebugDataSpaces3 {
-	final IID IID_IDEBUG_DATA_SPACES4 = new IID("d98ada1f-29e9-4ef5-a6c0-e53349883212");
+	IID IID_IDEBUG_DATA_SPACES4 = new IID("d98ada1f-29e9-4ef5-a6c0-e53349883212");
 
 	enum VTIndices4 implements VTableIndex {
 		GET_OFFSET_INFORMATION, //

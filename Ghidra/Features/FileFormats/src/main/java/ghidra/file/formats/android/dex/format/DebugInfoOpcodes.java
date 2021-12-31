@@ -21,18 +21,18 @@ package ghidra.file.formats.android.dex.format;
  */
 public final class DebugInfoOpcodes {
 
-	public final static byte DBG_END_SEQUENCE = 0x00;
-	public final static byte DBG_ADVANCE_PC = 0x01;
-	public final static byte DBG_ADVANCE_LINE = 0x02;
-	public final static byte DBG_START_LOCAL = 0x03;
-	public final static byte DBG_START_LOCAL_EXTENDED = 0x04;
-	public final static byte DBG_END_LOCAL = 0x05;
-	public final static byte DBG_RESTART_LOCAL = 0x06;
-	public final static byte DBG_SET_PROLOGUE_END = 0x07;
-	public final static byte DBG_SET_EPILOGUE_BEGIN = 0x08;
-	public final static byte DBG_SET_FILE = 0x09;
-	public final static byte DBG_FIRST_SPECIAL = 0x0a;
-	public final static byte DBG_LINE_BASE = -4;
-	public final static byte DBG_LINE_RANGE = 15;
+	public static final byte DBG_END_SEQUENCE = 0x00;
+	public static final byte DBG_ADVANCE_PC = 0x01;
+	public static final byte DBG_ADVANCE_LINE = 0x02;
+	public static final byte DBG_START_LOCAL = 0x03;
+	public static final byte DBG_START_LOCAL_EXTENDED = 0x04;
+	public static final byte DBG_END_LOCAL = 0x05;
+	public static final byte DBG_RESTART_LOCAL = 0x06;
+	public static final byte DBG_SET_PROLOGUE_END = 0x07;
+	public static final byte DBG_SET_EPILOGUE_BEGIN = 0x08;
+	public static final byte DBG_SET_FILE = 0x09;
+	public static final byte DBG_FIRST_SPECIAL = 0x0a;
+	public static final byte DBG_LINE_BASE = -4;
+	public static final byte DBG_LINE_RANGE = 15;
 
 }

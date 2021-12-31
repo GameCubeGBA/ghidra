@@ -243,11 +243,9 @@ public class UserAdmin {
 		PrintWriter pw = new PrintWriter(new BufferedOutputStream(new FileOutputStream(cmdFile)));
 		boolean success = false;
 		try {
-			Iterator<String> it = cmdList.iterator();
-			while (it.hasNext()) {
-				String cmd = it.next();
-				pw.println(cmd);
-			}
+            for (String cmd : cmdList) {
+                pw.println(cmd);
+            }
 			pw.close();
 			if (!cmdFile.renameTo(new File(cmdFile.getParentFile(), cmdFilename))) {
 				throw new IOException("file error");

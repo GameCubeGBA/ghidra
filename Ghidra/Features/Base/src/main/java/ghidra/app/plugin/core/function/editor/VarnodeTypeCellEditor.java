@@ -59,22 +59,15 @@ class VarnodeTypeCellEditor extends AbstractCellEditor implements TableCellEdito
 
 		combo.setSelectedItem(value);
 
-		combo.addItemListener(new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				stopCellEditing();
-				jTable.editCellAt(editRow, editCol + 1);
-			}
-		});
+		combo.addItemListener(e -> {
+            stopCellEditing();
+            jTable.editCellAt(editRow, editCol + 1);
+        });
 
-		SwingUtilities.invokeLater(new Runnable() {
-
-			@Override
-			public void run() {
-				combo.showPopup();
-				combo.requestFocus();
-			}
-		});
+		SwingUtilities.invokeLater(() -> {
+            combo.showPopup();
+            combo.requestFocus();
+        });
 		return combo;
 	}
 

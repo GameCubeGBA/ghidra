@@ -27,7 +27,7 @@ import ghidra.program.model.mem.MemoryAccessException;
  */
 public class DwarfEncodingModeDataType extends BuiltIn {
 
-	public final static DwarfEncodingModeDataType dataType = new DwarfEncodingModeDataType();
+	public static final DwarfEncodingModeDataType dataType = new DwarfEncodingModeDataType();
 
 	/**
 	 * Data type whose value indicates the type of Dwarf encoding used for other data.

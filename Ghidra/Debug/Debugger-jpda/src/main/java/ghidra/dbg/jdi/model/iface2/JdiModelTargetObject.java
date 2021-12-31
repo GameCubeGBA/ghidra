@@ -38,27 +38,27 @@ public interface JdiModelTargetObject extends TargetObject, InvalidatableTargetO
 	String THIS_OBJECT_ATTRIBUTE_NAME = "This";
 	String LOCATION_ATTRIBUTE_NAME = "Location";
 
-	public JdiModelImpl getModelImpl();
+	JdiModelImpl getModelImpl();
 
-	public default JdiManager getManager() {
+	default JdiManager getManager() {
 		return getModelImpl().getManager();
 	}
 
-	public default CompletableFuture<Void> init(Map<String, Object> map) {
+	default CompletableFuture<Void> init(Map<String, Object> map) {
 		return CompletableFuture.completedFuture(null);
 	}
 
 	@Override
-	public CompletableFuture<? extends Map<String, ? extends TargetObject>> fetchElements();
+    CompletableFuture<? extends Map<String, ? extends TargetObject>> fetchElements();
 
 	@Override
-	public CompletableFuture<? extends Map<String, ?>> fetchAttributes();
+    CompletableFuture<? extends Map<String, ?>> fetchAttributes();
 
-	public Delta<?, ?> changeAttributes(List<String> remove, Map<String, ?> add, String reason);
+	Delta<?, ?> changeAttributes(List<String> remove, Map<String, ?> add, String reason);
 
-	public ListenerSet<DebuggerModelListener> getListeners();
+	ListenerSet<DebuggerModelListener> getListeners();
 
-	public default JdiModelTargetObject getInstance(Mirror object) {
+	default JdiModelTargetObject getInstance(Mirror object) {
 		JdiModelTargetObject targetObject = getTargetObject(object);
 		if (targetObject == null) {
 			if (object instanceof ThreadReference) {
@@ -94,7 +94,7 @@ public interface JdiModelTargetObject extends TargetObject, InvalidatableTargetO
 		return targetObject;
 	}
 
-	public default boolean acceptsElement(String schemaName) {
+	default boolean acceptsElement(String schemaName) {
 		TargetObjectSchema schema = this.getSchema();
 		if (schema.equals(EnumerableTargetObjectSchema.ANY)) {
 			return true;
@@ -103,8 +103,8 @@ public interface JdiModelTargetObject extends TargetObject, InvalidatableTargetO
 		return s.toString().equals(schemaName);
 	}
 
-	public JdiModelTargetObject getTargetObject(Object object);
+	JdiModelTargetObject getTargetObject(Object object);
 
-	public Object getObject();
+	Object getObject();
 
 }

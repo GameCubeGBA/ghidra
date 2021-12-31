@@ -134,9 +134,9 @@ public class DyldCacheSlideInfo2 extends DyldCacheSlideInfoCommon {
 		long pageSize = getPageSize();
 		long pageStartsCount = getPageStartsCount();
 
-		long deltaMask = getDeltaMask();
+		long deltaMask = delta_mask;
 		long deltaShift = Long.numberOfTrailingZeros(deltaMask);
-		long valueAdd = getValueAdd();
+		long valueAdd = value_add;
 
 		short[] pageEntries = getPageStarts();
 		short[] extraEntries = getPageExtras();

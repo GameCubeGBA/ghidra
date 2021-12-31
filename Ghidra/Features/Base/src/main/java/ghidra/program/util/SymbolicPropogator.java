@@ -68,10 +68,10 @@ public class SymbolicPropogator {
 
 	protected boolean debug = false;
 
-	private final static NotFoundException valueTooBigException =
+	private static final NotFoundException valueTooBigException =
 		new NotFoundException("Value too big to fit in Scalar");
 
-	private final static NotFoundException divideByZeroException =
+	private static final NotFoundException divideByZeroException =
 		new NotFoundException("Divide by zero");
 
 	private long pointerMask;
@@ -372,8 +372,7 @@ public class SymbolicPropogator {
 
 		public SavedFlowState(VarnodeContext vContext, Address source, Address destination,
 				boolean continueAfterHittingFlow) {
-			super();
-			this.source = source;
+            this.source = source;
 			this.destination = destination;
 			this.continueAfterHittingFlow = continueAfterHittingFlow;
 			vContext.pushMemState();
@@ -978,7 +977,7 @@ public class SymbolicPropogator {
 						// if this is a segment op, emulate the segmenting for now.
 						String opName = this.program.getLanguage()
 								.getUserDefinedOpName((int) in[0].getOffset());
-						if (opName.equals("segment") && in.length > 2) {
+						if ("segment".equals(opName) && in.length > 2) {
 							checkSegmented(out, in[1], in[2], mustClearAll);
 						}
 						else if (out != null) {
@@ -1551,11 +1550,8 @@ public class SymbolicPropogator {
 			return false;
 		}
 		int opcode = pcodeOp.getOpcode();
-		if (opcode == PcodeOp.STORE || opcode == PcodeOp.LOAD) {
-			return false;
-		}
-		return true;
-	}
+        return opcode != PcodeOp.STORE && opcode != PcodeOp.LOAD;
+    }
 
 	private Address resolveFunctionReference(Address addr) {
 		Address extAddr = null;
@@ -1908,12 +1904,9 @@ public class SymbolicPropogator {
 	 */
 	private boolean checkPossibleOffsetAddr(long offset) {
 		long maxAddrOffset = this.pointerMask;
-		if ((offset >= 0 && offset < _POINTER_MIN_BOUNDS) ||
-			(Math.abs(maxAddrOffset - offset) < _POINTER_MIN_BOUNDS)) {
-			return false;
-		}
-		return true;
-	}
+        return (offset < 0 || offset >= _POINTER_MIN_BOUNDS) &&
+                (Math.abs(maxAddrOffset - offset) >= _POINTER_MIN_BOUNDS);
+    }
 
 	private void addStoredReferences(VarnodeContext vContext, Instruction instruction,
 			Varnode storageLocation, Varnode valueToStore, TaskMonitor monitor) {
@@ -2313,7 +2306,7 @@ public class SymbolicPropogator {
 				opIndex = instruction.getNumOperands() - 1;
 				// if it is invisible, don't put anything here.  Just put it on the mnemonic
 				List<Object> list = instruction.getDefaultOperandRepresentationList(opIndex);
-				if (list == null || list.size() == 0) {
+				if (list == null || list.isEmpty()) {
 					opIndex = -1;
 				}
 				// if is external, and any refs, just throw the ref on the mnemonic
@@ -2391,9 +2384,7 @@ public class SymbolicPropogator {
 
 				// if not at the top of an instruction flow, don't do it
 				Function func = program.getFunctionManager().getFunctionContaining(target);
-				if (func != null && !func.getEntryPoint().equals(target)) {
-					return false;
-				}
+                return func == null || func.getEntryPoint().equals(target);
 			}
 		}
 		return true;
@@ -2487,13 +2478,12 @@ public class SymbolicPropogator {
 					long baseRegVal = 0;
 					long offset_residue_pos = wordOffset; // subtract all register values and add constants, check for zero
 					long offset_residue_neg = wordOffset; // subtract all registers and subtract constants, check for zero
-					for (int idx = 0; idx < len; idx++) {
-						Object obj = list.get(idx);
+					for (Object obj : list) {
 						if (obj instanceof Scalar) {
 							long val = ((Scalar) obj).getUnsignedValue();
 							// sort of a hack, for memory that is not byte addressable
 							if (val == wordOffset || val == (wordOffset >> 1) ||
-								(val + baseRegVal) == wordOffset) {
+									(val + baseRegVal) == wordOffset) {
 								opIndex = i;
 								foundExactValue = true;
 								break;

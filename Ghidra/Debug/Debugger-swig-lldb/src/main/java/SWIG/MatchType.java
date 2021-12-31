@@ -12,9 +12,9 @@
 package SWIG;
 
 public final class MatchType {
-  public final static MatchType eMatchTypeNormal = new MatchType("eMatchTypeNormal");
-  public final static MatchType eMatchTypeRegex = new MatchType("eMatchTypeRegex");
-  public final static MatchType eMatchTypeStartsWith = new MatchType("eMatchTypeStartsWith");
+  public static final MatchType eMatchTypeNormal = new MatchType("eMatchTypeNormal");
+  public static final MatchType eMatchTypeRegex = new MatchType("eMatchTypeRegex");
+  public static final MatchType eMatchTypeStartsWith = new MatchType("eMatchTypeStartsWith");
 
   public final int swigValue() {
     return swigValue;
@@ -27,9 +27,9 @@ public final class MatchType {
   public static MatchType swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-    for (int i = 0; i < swigValues.length; i++)
-      if (swigValues[i].swigValue == swigValue)
-        return swigValues[i];
+      for (MatchType value : swigValues)
+          if (value.swigValue == swigValue)
+              return value;
     throw new IllegalArgumentException("No enum " + MatchType.class + " with value " + swigValue);
   }
 

@@ -30,5 +30,5 @@ public interface FidHasher {
 	 * @return the FID hash quad (all 4 hashes at once) or null if there aren't enough code units
 	 * @throws MemoryAccessException if the function body has an inaccessible code unit
 	 */
-	public FidHashQuad hash(Function func) throws MemoryAccessException;
+    FidHashQuad hash(Function func) throws MemoryAccessException;
 }

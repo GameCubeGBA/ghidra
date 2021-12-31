@@ -514,7 +514,7 @@ class MemSearchDialog extends DialogComponentProvider {
 			formatGroup.add(formatButton);
 			formatButton.addActionListener(formatButtonListener);
 			formatPanel.add(formatButton);
-			if (element.getName().equals("Binary") && isMnemonic) {
+			if ("Binary".equals(element.getName()) && isMnemonic) {
 				formatButton.setSelected(true);
 				currentFormat = element;
 			}
@@ -685,7 +685,7 @@ class MemSearchDialog extends DialogComponentProvider {
 	private void updateSearchData() {
 		currentFormat.setEndieness(bigEndian.isSelected());
 		SearchData inputData = currentFormat.getSearchData(valueField.getText());
-		if (valueField.getText().trim().length() != 0 && inputData.isValidInputData()) {
+		if (!valueField.getText().trim().isEmpty() && inputData.isValidInputData()) {
 			updateSearchData(inputData);
 		}
 		else {
@@ -762,7 +762,7 @@ class MemSearchDialog extends DialogComponentProvider {
 			String afterOffset = currentText.substring(len + offs, currentText.length());
 			String proposedResult = beforeOffset + afterOffset;
 
-			if (proposedResult.length() == 0) {
+			if (proposedResult.isEmpty()) {
 				updateSearchData(DEFAULT_SEARCH_DATA);
 				super.remove(offs, len);
 				return;
@@ -792,13 +792,11 @@ class MemSearchDialog extends DialogComponentProvider {
 		}
 
 		private String findHistoryMatchString(String input) {
-			Iterator<String> itr = history.iterator();
-			while (itr.hasNext()) {
-				String historyString = itr.next();
-				if (historyString.startsWith(input)) {
-					return historyString;
-				}
-			}
+            for (String historyString : history) {
+                if (historyString.startsWith(input)) {
+                    return historyString;
+                }
+            }
 			return null;
 		}
 	}

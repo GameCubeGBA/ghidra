@@ -34,7 +34,7 @@ public interface TargetProcess extends TargetObject {
 	String PID_ATTRIBUTE_NAME = PREFIX_INVISIBLE + "pid";
 
 	@TargetAttributeType(name = PID_ATTRIBUTE_NAME, hidden = true)
-	public default Long getPid() {
+    default Long getPid() {
 		return getTypedAttributeNowByName(PID_ATTRIBUTE_NAME, Long.class, null);
 	}
 }

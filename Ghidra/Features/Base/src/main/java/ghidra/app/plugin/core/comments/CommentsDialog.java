@@ -414,11 +414,8 @@ public class CommentsDialog extends DialogComponentProvider implements KeyListen
 		if (!plateComment.equals(plateField.getText())) {
 			return true;
 		}
-		if (!repeatableComment.equals(repeatableField.getText())) {
-			return true;
-		}
-		return false;
-	}
+        return !repeatableComment.equals(repeatableField.getText());
+    }
 
 	private JTextArea getSelectedTextArea() {
 		int index = tab.getSelectedIndex();

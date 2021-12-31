@@ -120,8 +120,8 @@ public class RegisterTree implements Comparable<RegisterTree> {
 	 * @return The parent path of this RegisterTree.
 	 */
 	public String getParentRegisterPath() {
-		RegisterTree parentTree = getParent();
-		if (parentTree == null || (parentTree.getRegister() == null)) {
+		RegisterTree parentTree = parent;
+		if (parentTree == null || (parentTree.register == null)) {
 			return null;
 		}
 
@@ -137,10 +137,10 @@ public class RegisterTree implements Comparable<RegisterTree> {
 		String parentPath = getParentRegisterPath();
 
 		if (parentPath != null) {
-			return parentPath + SEPARATOR + getRegister().getName();
+			return parentPath + SEPARATOR + register.getName();
 		}
 
-		return getRegister().getName();
+		return register.getName();
 	}
 
 	/**
@@ -175,10 +175,10 @@ public class RegisterTree implements Comparable<RegisterTree> {
 	 */
 	public void remove(Register reg) {
 		RegisterTree tree = getRegisterTree(reg);
-		if ((tree == null) || (tree.getParent() == null)) {
+		if ((tree == null) || (tree.parent == null)) {
 			return;
 		}
-		tree.getParent().children.remove(tree);
+		tree.parent.children.remove(tree);
 	}
 
 	/**

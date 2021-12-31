@@ -46,8 +46,7 @@ public class CliTableConstant extends CliAbstractTable {
 		public int valueIndex;
 
 		public CliConstantRow(byte type, byte reserved, int parentIndex, int valueIndex) {
-			super();
-			this.type = type;
+            this.type = type;
 			this.reserved = reserved;
 			this.parentIndex = parentIndex;
 			this.valueIndex = valueIndex;

@@ -59,28 +59,28 @@ import ghidra.util.task.SwingUpdateManager;
 )
 //@formatter:on
 public class FunctionPlugin extends Plugin implements DataService {
-	final static DataType POINTER_DATA_TYPE = new PointerDataType();
+	static final DataType POINTER_DATA_TYPE = new PointerDataType();
 
-	public final static String FUNCTION_MENU_SUBGROUP = "Function";
-	public final static String THUNK_FUNCTION_MENU_SUBGROUP = "FunctionThunk";
-	public final static String FUNCTION_MENU_PULLRIGHT = "Function";
+	public static final String FUNCTION_MENU_SUBGROUP = "Function";
+	public static final String THUNK_FUNCTION_MENU_SUBGROUP = "FunctionThunk";
+	public static final String FUNCTION_MENU_PULLRIGHT = "Function";
 
-	public final static String VARIABLE_MENU_SUBGROUP = "FunctionVariable";
-	public final static String VARIABLE_MENU_PULLRIGHT = "Function Variables";
+	public static final String VARIABLE_MENU_SUBGROUP = "FunctionVariable";
+	public static final String VARIABLE_MENU_PULLRIGHT = "Function Variables";
 
 //	public final static String SIGNATURE_MENU_SUBGROUP = "FunctionSignature";
 //	public final static String SIGNATURE_MENU_PULLRIGHT = "Function Signature";
 
-	public final static String FUNCTION_SUBGROUP_BEGINNING = "A_Beginning";
-	public final static String FUNCTION_SUBGROUP_MIDDLE = "M_Middle";
+	public static final String FUNCTION_SUBGROUP_BEGINNING = "A_Beginning";
+	public static final String FUNCTION_SUBGROUP_MIDDLE = "M_Middle";
 
 	public static final String SET_DATA_TYPE_PULLRIGHT = "Set Data Type";
 
-	public final static String STACK_MENU_SUBGROUP = "Stack";
+	public static final String STACK_MENU_SUBGROUP = "Stack";
 
-	private final static String SET_DATA_TYPE_MENU_PATH = "Set DataType";
-	final static String SET_RETURN_TYPE_MENU_PATH = "Set Return Type";
-	private final static String SET_PARAMETER_TYPE_MENU_PATH = "Set Parameter Type";
+	private static final String SET_DATA_TYPE_MENU_PATH = "Set DataType";
+	static final String SET_RETURN_TYPE_MENU_PATH = "Set Return Type";
+	private static final String SET_PARAMETER_TYPE_MENU_PATH = "Set Parameter Type";
 
 	private CreateFunctionAction createFunctionAction;
 	private CreateExternalFunctionAction createExternalFunctionAction;
@@ -173,10 +173,9 @@ public class FunctionPlugin extends Plugin implements DataService {
 	 * Add the cycle group actions
 	 */
 	private void addCycleGroupActions() {
-		for (int i = 0; i < cgActions.size(); i++) {
-			DockingAction action = cgActions.get(i);
-			tool.removeAction(action);
-		}
+        for (DockingAction action : cgActions) {
+            tool.removeAction(action);
+        }
 		cgActions.clear();
 
 		for (CycleGroup group : CycleGroup.ALL_CYCLE_GROUPS) {
@@ -355,19 +354,14 @@ public class FunctionPlugin extends Plugin implements DataService {
 			return false;
 		}
 
-		if (location instanceof FunctionThunkFieldLocation ||
-			location instanceof FunctionCallingConventionFieldLocation ||
-			location instanceof FunctionInlineFieldLocation ||
-			location instanceof FunctionNameFieldLocation ||
-			location instanceof FunctionNoReturnFieldLocation ||
-			location instanceof FunctionInlineFieldLocation) {
-
-			// these locations don't have types
-			return false;
-		}
-
-		return true;
-	}
+        // these locations don't have types
+        return !(location instanceof FunctionThunkFieldLocation) &&
+                !(location instanceof FunctionCallingConventionFieldLocation) &&
+                !(location instanceof FunctionInlineFieldLocation) &&
+                !(location instanceof FunctionNameFieldLocation) &&
+                !(location instanceof FunctionNoReturnFieldLocation) &&
+                !(location instanceof FunctionInlineFieldLocation);
+    }
 
 	String getDataActionMenuName(ProgramLocation location) {
 		if (location instanceof FunctionParameterFieldLocation) {
@@ -469,9 +463,7 @@ public class FunctionPlugin extends Plugin implements DataService {
 			if (cursorIsInSelection) {
 				return true;
 			}
-			else if (program.getListing().getInstructionContaining(addr) != null) {
-				return true;
-			}
+			else return program.getListing().getInstructionContaining(addr) != null;
 		}
 		return false;
 	}

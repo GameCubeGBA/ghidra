@@ -84,8 +84,7 @@ public class DecisionTreeTest extends AbstractGenericTest {
 	private DecisionTree<Color> decisionTree;
 
 	public DecisionTreeTest() {
-		super();
-	}
+    }
 
 	@Before
 	public void setUp() throws Exception {

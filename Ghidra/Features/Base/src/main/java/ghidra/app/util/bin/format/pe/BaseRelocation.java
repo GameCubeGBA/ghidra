@@ -43,31 +43,31 @@ public class BaseRelocation implements StructConverter, ByteArrayConverter {
 	/**
 	 * The name to use when converting into a structure data type.
 	 */
-    public final static String NAME = "IMAGE_BASE_RELOCATION";
+    public static final String NAME = "IMAGE_BASE_RELOCATION";
     /**
      * The size of the <code>IMAGE_BASE_RELOCATION</code> in bytes.
      */
-    public final static int IMAGE_SIZEOF_BASE_RELOCATION = 8;
+    public static final int IMAGE_SIZEOF_BASE_RELOCATION = 8;
 
-	public final static int IMAGE_REL_BASED_NOOP             =  0;
-    public final static int IMAGE_REL_BASED_ABSOLUTE          =  0;
-    public final static int IMAGE_REL_BASED_HIGH              =  1;
-    public final static int IMAGE_REL_BASED_LOW               =  2;
-    public final static int IMAGE_REL_BASED_HIGHLOW           =  3;
-    public final static int IMAGE_REL_BASED_HIGHADJ           =  4;
+	public static final int IMAGE_REL_BASED_NOOP             =  0;
+    public static final int IMAGE_REL_BASED_ABSOLUTE          =  0;
+    public static final int IMAGE_REL_BASED_HIGH              =  1;
+    public static final int IMAGE_REL_BASED_LOW               =  2;
+    public static final int IMAGE_REL_BASED_HIGHLOW           =  3;
+    public static final int IMAGE_REL_BASED_HIGHADJ           =  4;
 
-    public final static int IMAGE_REL_BASED_MIPS_JMPADDR      =  5;
-    public final static int IMAGE_REL_BASED_SECTION           =  6;
-    public final static int IMAGE_REL_BASED_REL32             =  7;
-    public final static int IMAGE_REL_BASED_MIPS_JMPADDR16    =  9;
-    public final static int IMAGE_REL_BASED_IA64_IMM64        =  9;
-    public final static int IMAGE_REL_BASED_DIR64             = 10;
-    public final static int IMAGE_REL_BASED_HIGH3ADJ          = 11;
+    public static final int IMAGE_REL_BASED_MIPS_JMPADDR      =  5;
+    public static final int IMAGE_REL_BASED_SECTION           =  6;
+    public static final int IMAGE_REL_BASED_REL32             =  7;
+    public static final int IMAGE_REL_BASED_MIPS_JMPADDR16    =  9;
+    public static final int IMAGE_REL_BASED_IA64_IMM64        =  9;
+    public static final int IMAGE_REL_BASED_DIR64             = 10;
+    public static final int IMAGE_REL_BASED_HIGH3ADJ          = 11;
 
 	/**
 	 * Names of the available base relocations.
 	 */
-    public final static String [] TYPE_STRINGS = {
+    public static final String [] TYPE_STRINGS = {
                         "ABSOLUTE",             // 0
                         "HIGH",                 // 1
                         "LOW",                  // 2
@@ -198,11 +198,11 @@ public class BaseRelocation implements StructConverter, ByteArrayConverter {
 		pos += BinaryReader.SIZEOF_INT;
 		dc.getBytes(sizeOfBlock, bytes, pos);
 		pos += BinaryReader.SIZEOF_INT;
-		for (int i = 0; i < typeOffsetList.size(); i++) {
-			short typeOffset = typeOffsetList.get(i).typeOffset;
-			dc.getBytes(typeOffset, bytes, pos);
-			pos += BinaryReader.SIZEOF_SHORT;
-		}
+        for (TypeOffset offset : typeOffsetList) {
+            short typeOffset = offset.typeOffset;
+            dc.getBytes(typeOffset, bytes, pos);
+            pos += BinaryReader.SIZEOF_SHORT;
+        }
 		return bytes;
 	}
 

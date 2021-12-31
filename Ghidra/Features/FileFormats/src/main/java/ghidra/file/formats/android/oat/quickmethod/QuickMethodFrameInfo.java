@@ -38,7 +38,7 @@ import ghidra.util.exception.DuplicateNameException;
  */
 public class QuickMethodFrameInfo implements StructConverter {
 
-	final static int SIZE = 12;
+	static final int SIZE = 12;
 
 	private int frame_size_in_bytes_;
 	private int core_spill_mask_;

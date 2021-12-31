@@ -31,8 +31,7 @@ public class CliTableFieldRVA extends CliAbstractTable {
 		public int fieldIndex;
 		
 		public CliFieldRVARow(int rva, int fieldIndex) {
-			super();
-			this.rva = rva;
+            this.rva = rva;
 			this.fieldIndex = fieldIndex;
 		}
 

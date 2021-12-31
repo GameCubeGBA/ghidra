@@ -153,11 +153,11 @@ public class MsfStream {
 	 * @return {@link String} containing the pretty output.
 	 */
 	public String dump(int maxOut) {
-		int outputLength = Math.min(getLength(), maxOut);
+		int outputLength = Math.min(streamLength, maxOut);
 		StringBuilder builder = new StringBuilder();
 		builder.append("Length: ");
-		builder.append(getLength());
-		builder.append(String.format(" (0x%08x)", getLength()));
+		builder.append(streamLength);
+		builder.append(String.format(" (0x%08x)", streamLength));
 		// If length is zero or negative (e.g., -1), done.
 		if (outputLength <= 0) {
 			return "";

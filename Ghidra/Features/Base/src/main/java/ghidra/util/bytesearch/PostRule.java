@@ -27,12 +27,12 @@ public interface PostRule {
 	 * @param matchoffset offset of the match
 	 * @return true if the PostRule is satisfied
 	 */
-	public boolean apply(Pattern pat, long matchoffset);
+    boolean apply(Pattern pat, long matchoffset);
 
 	/**
 	 * Can restore state of instance PostRule from XML
 	 * 
 	 * @param parser XML pull parser
 	 */
-	public void restoreXml(XmlPullParser parser);
+    void restoreXml(XmlPullParser parser);
 }

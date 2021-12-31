@@ -108,72 +108,63 @@ public class DBCachedObjectIndex<K, T extends DBAnnotatedObject> {
 	}
 
 	public Iterable<K> keys() {
-		return new Iterable<>() {
-			@Override
-			public Iterator<K> iterator() {
-				try {
-					Iterator<T> valueIterator = store.iterator(columnIndex, fieldRange, direction);
-					return new Iterator<>() {
-						@Override
-						public boolean hasNext() {
-							return valueIterator.hasNext();
-						}
+		return () -> {
+            try {
+                Iterator<T> valueIterator = store.iterator(columnIndex, fieldRange, direction);
+                return new Iterator<>() {
+                    @Override
+                    public boolean hasNext() {
+                        return valueIterator.hasNext();
+                    }
 
-						@Override
-						public K next() {
-							T value = valueIterator.next();
-							return codec.getValue(value);
-						}
-					};
-				}
-				catch (IOException e) {
-					errHandler.dbError(e);
-					return null;
-				}
-			}
-		};
+                    @Override
+                    public K next() {
+                        T value = valueIterator.next();
+                        return codec.getValue(value);
+                    }
+                };
+            }
+            catch (IOException e) {
+                errHandler.dbError(e);
+                return null;
+            }
+        };
 	}
 
 	public Iterable<T> values() {
-		return new Iterable<>() {
-			@Override
-			public Iterator<T> iterator() {
-				try {
-					return store.iterator(columnIndex, fieldRange, direction);
-				}
-				catch (IOException e) {
-					errHandler.dbError(e);
-					return null;
-				}
-			}
-		};
+		return () -> {
+            try {
+                return store.iterator(columnIndex, fieldRange, direction);
+            }
+            catch (IOException e) {
+                errHandler.dbError(e);
+                return null;
+            }
+        };
 	}
 
 	public Iterable<Entry<K, T>> entries() {
-		return new Iterable<>() {
-			@Override
-			public Iterator<Entry<K, T>> iterator() {
-				try {
-					Iterator<T> valueIterator = store.iterator(columnIndex, fieldRange, direction);
-					return new Iterator<>() {
-						@Override
-						public boolean hasNext() {
-							return valueIterator.hasNext();
-						}
+		return () -> {
+            try {
+                Iterator<T> valueIterator = store.iterator(columnIndex, fieldRange, direction);
+                return new Iterator<>() {
+                    @Override
+                    public boolean hasNext() {
+                        return valueIterator.hasNext();
+                    }
 
-						@Override
-						public Entry<K, T> next() {
-							T value = valueIterator.next();
-							return Map.entry(codec.getValue(value), value);
-						}
-					};
-				}
-				catch (IOException e) {
-					errHandler.dbError(e);
-					return null;
-				}
-			}
-		};
+                    @Override
+                    public Entry<K, T> next() {
+                        T value = valueIterator.next();
+                        return Map.entry(codec.getValue(value), value);
+                    }
+                };
+            }
+            catch (IOException e) {
+                errHandler.dbError(e);
+                return null;
+            }
+        };
 	}
 
 	protected static <T> T firstOf(Iterable<T> of) {

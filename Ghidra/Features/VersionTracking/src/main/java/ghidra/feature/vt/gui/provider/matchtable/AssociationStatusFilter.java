@@ -34,12 +34,7 @@ public class AssociationStatusFilter extends CheckBoxBasedAncillaryFilter<VTMatc
 
 	@Override
 	protected void createCheckBoxInfos() {
-		ItemListener listener = new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				fireStatusChanged(getFilterStatus());
-			}
-		};
+		ItemListener listener = e -> fireStatusChanged(getFilterStatus());
 
 		VTAssociationStatus[] values = VTAssociationStatus.values();
 		for (VTAssociationStatus status : values) {

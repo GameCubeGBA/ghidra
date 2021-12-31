@@ -21,7 +21,7 @@ import javax.swing.KeyStroke;
 
 public class PointerDataAction extends DataAction {
 
-	private final static KeyStroke POINTER_KEY_BINDING = KeyStroke.getKeyStroke(KeyEvent.VK_P, 0);
+	private static final KeyStroke POINTER_KEY_BINDING = KeyStroke.getKeyStroke(KeyEvent.VK_P, 0);
 
 	public PointerDataAction(DataPlugin plugin) {
 		super(DataPlugin.POINTER_DATA_TYPE, plugin);

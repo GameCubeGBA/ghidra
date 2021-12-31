@@ -35,14 +35,14 @@ public interface NavigationHistoryService {
 	 * If there is no "next" location, the history list remains unchanged.
 	 * @param navigatable the navigatable to be navigated
 	 */
-	public void next(Navigatable navigatable);
+    void next(Navigatable navigatable);
 
 	/**
 	 * Positions the "current" location to the previous location in the history list.
 	 * If there is no "previous" location, the history list remains unchanged.
 	 * @param navigatable the navigatable to be navigated
 	 */
-	public void previous(Navigatable navigatable);
+    void previous(Navigatable navigatable);
 
 	/** 
 	 * Navigates to the given location in the "next" list.  If the location is not in the list, then
@@ -51,7 +51,7 @@ public interface NavigationHistoryService {
 	 * @param navigatable the navigatable to be navigated
 	 * @param location The location within the "next" list to which to go 
 	 */
-	public void next(Navigatable navigatable, LocationMemento location);
+    void next(Navigatable navigatable, LocationMemento location);
 
 	/** 
 	 * Navigates to the given location in the "previous" list.  If the location is not in 
@@ -60,7 +60,7 @@ public interface NavigationHistoryService {
 	 * @param navigatable the navigatable to be navigated
 	 * @param location The location within the "previous" list to which to go. 
 	 */
-	public void previous(Navigatable navigatable, LocationMemento location);
+    void previous(Navigatable navigatable, LocationMemento location);
 
 	/**
 	 * Positions the "current" location to the next location which is in a different function
@@ -68,7 +68,7 @@ public interface NavigationHistoryService {
 	 * If we are not inside any function, performs like "next".
 	 * @param navigatable the navigatable to be navigated
 	 */
-	public void nextFunction(Navigatable navigatable);
+    void nextFunction(Navigatable navigatable);
 
 	/**
 	 * Positions the "previous" location to the next location which is in a different function
@@ -76,7 +76,7 @@ public interface NavigationHistoryService {
 	 * If we are not inside any function, performs like "next".
 	 * @param navigatable the navigatable to be navigated
 	 */
-	public void previousFunction(Navigatable navigatable);
+    void previousFunction(Navigatable navigatable);
 
 	/**
 	 * Returns the LocationMemento objects in the "previous" list
@@ -84,7 +84,7 @@ public interface NavigationHistoryService {
 	 * @param navigatable the navigatable to be navigated
 	 * @return the LocationMemento objects in the "previous" list
 	 */
-	public List<LocationMemento> getPreviousLocations(Navigatable navigatable);
+    List<LocationMemento> getPreviousLocations(Navigatable navigatable);
 
 	/**
 	 * Returns the LocationMemento objects in the "next" list
@@ -92,7 +92,7 @@ public interface NavigationHistoryService {
 	 * @param navigatable the navigatable to be navigated
 	 * @return the LocationMemento objects in the "next" list
 	 */
-	public List<LocationMemento> getNextLocations(Navigatable navigatable);
+    List<LocationMemento> getNextLocations(Navigatable navigatable);
 
 	/**
 	 * Returns true if there is a valid "next" location in the history list.
@@ -100,7 +100,7 @@ public interface NavigationHistoryService {
 	 * @param navigatable the navigatable to be navigated
 	 * @return true if there is a "next" location
 	 */
-	public boolean hasNext(Navigatable navigatable);
+    boolean hasNext(Navigatable navigatable);
 
 	/**
 	 * Returns true if there is a valid "previous" location in the history list
@@ -108,21 +108,21 @@ public interface NavigationHistoryService {
 	 * @param navigatable the navigatable to be navigated
 	 * @return true if there is a "previous" location
 	 */
-	public boolean hasPrevious(Navigatable navigatable);
+    boolean hasPrevious(Navigatable navigatable);
 
 	/**
 	 * Returns true if there is a valid "next" function location in the history list
 	 * @param navigatable Navigatable object we are looking at
 	 * @return true if there is a valid "next" function location 
 	 */
-	public boolean hasNextFunction(Navigatable navigatable);
+    boolean hasNextFunction(Navigatable navigatable);
 
 	/**
 	 * Returns true if there is a valid "previous" function location in the history list
 	 * @param navigatable Navigatable object we are looking at
 	 * @return true if there is a valid "previous" function location 
 	 */
-	public boolean hasPreviousFunction(Navigatable navigatable);
+    boolean hasPreviousFunction(Navigatable navigatable);
 
 	/**
 	 * Adds the given locationMomento to the list of previous locations.  Clears the list
@@ -130,12 +130,12 @@ public interface NavigationHistoryService {
 	 * 
 	 * @param navigatable the navigatable to be navigated
 	 */
-	public void addNewLocation(Navigatable navigatable);
+    void addNewLocation(Navigatable navigatable);
 
 	/**
 	 * Removes all visited locations from the history list
 	 * 
 	 * @param navigatable the navigatable to be navigated
 	 */
-	public void clear(Navigatable navigatable);
+    void clear(Navigatable navigatable);
 }

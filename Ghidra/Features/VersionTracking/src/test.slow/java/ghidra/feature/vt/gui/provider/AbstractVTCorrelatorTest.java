@@ -77,8 +77,7 @@ public abstract class AbstractVTCorrelatorTest extends AbstractGhidraHeadedInteg
 	protected WizardManager wizardManager;
 
 	public AbstractVTCorrelatorTest(String sourceProgLoc, String destProgLoc) {
-		super();
-		this.sourceProgLoc = sourceProgLoc;
+        this.sourceProgLoc = sourceProgLoc;
 		this.destProgLoc = destProgLoc;
 	}
 
@@ -234,11 +233,8 @@ public abstract class AbstractVTCorrelatorTest extends AbstractGhidraHeadedInteg
 
 	protected boolean isMatch(Address srcAddr, Address destAddr, VTMatchSet vtMatchSet) {
 
-		if (vtMatchSet.getMatches(srcAddr, destAddr).size() > 0) {
-			return true;
-		}
-		return false;
-	}
+        return !vtMatchSet.getMatches(srcAddr, destAddr).isEmpty();
+    }
 
 	protected Address addr(Program program, String address) {
 		AddressFactory addrFactory = program.getAddressFactory();
@@ -371,7 +367,7 @@ public abstract class AbstractVTCorrelatorTest extends AbstractGhidraHeadedInteg
 			}
 		}
 		if (buffy.length() > 0) {
-			return "The following matches were " + type + ": " + buffy.toString();
+			return "The following matches were " + type + ": " + buffy;
 		}
 		return "No " + type + " matches!";
 	}

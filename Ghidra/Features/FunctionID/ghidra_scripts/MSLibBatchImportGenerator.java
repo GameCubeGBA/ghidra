@@ -125,18 +125,18 @@ public class MSLibBatchImportGenerator extends GhidraScript {
 
 	private static String getDestFolder(DomainFolder destRoot, File importRoot, File file) {
 		String relativePath = getRelativePath(importRoot, file);
-		String result = destRoot.getPathname();
+		StringBuilder result = new StringBuilder(destRoot.getPathname());
 		for (String s : relativePath.split("/")) {
 			if (s.isEmpty()) {
 				continue;
 			}
 			s = destRoot.getProjectData().makeValidName(s);
-			if (!result.endsWith("/")) {
-				result += "/";
+			if (!result.toString().endsWith("/")) {
+				result.append("/");
 			}
-			result += s;
+			result.append(s);
 		}
-		return result;
+		return result.toString();
 	}
 
 	/**
@@ -165,7 +165,7 @@ public class MSLibBatchImportGenerator extends GhidraScript {
 		// MS windows filesystems are case-insensitive.
 		Map<File, File> normalizedLibs = new HashMap<>();
 		for (File file : files) {
-			if (file.isFile() && getFileExt(file).toLowerCase().equals("lib")) {
+			if (file.isFile() && "lib".equals(getFileExt(file).toLowerCase())) {
 				File normalizedFile = new File(directory, file.getName().toLowerCase());
 				normalizedLibs.put(normalizedFile, file);
 			}

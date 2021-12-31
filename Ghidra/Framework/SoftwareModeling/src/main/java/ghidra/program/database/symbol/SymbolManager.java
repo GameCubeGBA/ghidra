@@ -119,7 +119,7 @@ public class SymbolManager implements SymbolTable, ManagerDB {
 	private AddressMapImpl dynamicSymbolAddressMap;
 
 	private Lock lock;
-	final static Symbol[] NO_SYMBOLS = new SymbolDB[0];
+	static final Symbol[] NO_SYMBOLS = new SymbolDB[0];
 
 	/**
 	 * Creates a new Symbol manager.
@@ -516,7 +516,7 @@ public class SymbolManager implements SymbolTable, ManagerDB {
 				"A symbol named " + name + " already exists at this address!");
 		}
 
-		if ((name.length() == 0) || type.allowsDuplicates()) {
+		if ((name.isEmpty()) || type.allowsDuplicates()) {
 			return;
 		}
 
@@ -652,7 +652,7 @@ public class SymbolManager implements SymbolTable, ManagerDB {
 						return false; // Can't remove default function symbol.
 					}
 					name = SymbolUtilities.getDefaultFunctionName(addr);
-					parentNamespace = getProgram().getGlobalNamespace();
+					parentNamespace = program.getGlobalNamespace();
 					source = SourceType.DEFAULT;
 				}
 				else {
@@ -695,11 +695,9 @@ public class SymbolManager implements SymbolTable, ManagerDB {
 		while (symIt.hasNext()) {
 			list.add(symIt.next());
 		}
-		Iterator<Symbol> it = list.iterator();
-		while (it.hasNext()) {
-			Symbol s = it.next();
-			s.delete();
-		}
+        for (Symbol s : list) {
+            s.delete();
+        }
 	}
 
 	/**
@@ -1475,11 +1473,9 @@ public class SymbolManager implements SymbolTable, ManagerDB {
 					DBRecord rec = iter.next();
 					symbols.add(getSymbol(rec));
 				}
-				Iterator<SymbolDB> it = symbols.iterator();
-				while (it.hasNext()) {
-					SymbolDB s = it.next();
-					s.delete();
-				}
+                for (SymbolDB s : symbols) {
+                    s.delete();
+                }
 			}
 			catch (IOException e) {
 				dbError(e);

@@ -31,8 +31,7 @@ import ghidra.test.ToyProgramBuilder;
 public class ViewStringsPluginScreenShots extends GhidraScreenShotGenerator {
 
 	public ViewStringsPluginScreenShots() {
-		super();
-	}
+    }
 
 	@Override
 	public void loadProgram() throws Exception {

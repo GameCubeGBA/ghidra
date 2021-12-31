@@ -175,11 +175,8 @@ public class DropTgtAdapter implements DropTargetListener {
 		
 		// Does the event's transferable have a flavor that this drop target accepts?
 		// Does the target component allow the drop.
-		if (((da & dropActions) == 0) || !isDragFlavorSupported(e) || !dropComponent.isDropOk(e)) {
-			return false;
-		}
-		return true;
-	}
+        return ((da & dropActions) != 0) && isDragFlavorSupported(e) && dropComponent.isDropOk(e);
+    }
 
 	/**
 	 * Returns true if the drop target can accept the data flavor that is to be dropped

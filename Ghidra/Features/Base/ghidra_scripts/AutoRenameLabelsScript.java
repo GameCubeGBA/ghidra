@@ -56,7 +56,7 @@ public class AutoRenameLabelsScript extends GhidraScript {
 		if (cmd.size() > 0) {
 			if (!cmd.applyTo(currentProgram)) {
 				String msg = cmd.getStatusMsg();
-				if (msg != null && msg.length() > 0) {
+				if (msg != null && !msg.isEmpty()) {
 					setToolStatusMessage(msg, true);
 				}
 			}

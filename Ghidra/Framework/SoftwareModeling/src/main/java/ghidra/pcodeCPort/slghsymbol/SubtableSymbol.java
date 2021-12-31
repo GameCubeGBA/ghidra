@@ -161,19 +161,17 @@ public class SubtableSymbol extends TripleSymbol {
 		construct.reserve(numct);
 
 		List<?> children = el.getChildren();
-		Iterator<?> iter = children.iterator();
-		while (iter.hasNext()) {
-			Element child = (Element) iter.next();
-			if ("constructor".equals(child.getName())) {
-				Constructor ct = new Constructor(null);
-				addConstructor(ct);
-				ct.restoreXml(child, trans);
-			}
-			else if ("decision".equals(child.getName())) {
-				decisiontree = new DecisionNode();
-				decisiontree.restoreXml(child, null, this);
-			}
-		}
+        for (Object o : children) {
+            Element child = (Element) o;
+            if ("constructor".equals(child.getName())) {
+                Constructor ct = new Constructor(null);
+                addConstructor(ct);
+                ct.restoreXml(child, trans);
+            } else if ("decision".equals(child.getName())) {
+                decisiontree = new DecisionNode();
+                decisiontree.restoreXml(child, null, this);
+            }
+        }
 		pattern = null;
 		beingbuilt = false;
 		errors = false;

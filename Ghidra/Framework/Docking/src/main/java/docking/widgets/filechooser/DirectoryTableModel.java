@@ -26,9 +26,9 @@ import docking.widgets.table.AbstractSortedTableModel;
 class DirectoryTableModel extends AbstractSortedTableModel<File> {
 	private static final long serialVersionUID = 1L;
 
-	final static int FILE_COL = 0;
-	final static int SIZE_COL = 1;
-	final static int TIME_COL = 2;
+	static final int FILE_COL = 0;
+	static final int SIZE_COL = 1;
+	static final int TIME_COL = 2;
 
 	private GhidraFileChooser chooser;
 	private File[] files = {};

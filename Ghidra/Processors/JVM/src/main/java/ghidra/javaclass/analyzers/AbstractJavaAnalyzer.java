@@ -36,8 +36,8 @@ import ghidra.util.task.TaskMonitor;
 public abstract class AbstractJavaAnalyzer implements Analyzer {
 
 	@Override
-	final public boolean added(Program program, AddressSetView set, TaskMonitor monitor,
-			MessageLog log) throws CancelledException {
+    public final boolean added(Program program, AddressSetView set, TaskMonitor monitor,
+                               MessageLog log) throws CancelledException {
 		try {
 			return analyze(program, set, monitor, log);
 		}
@@ -49,28 +49,28 @@ public abstract class AbstractJavaAnalyzer implements Analyzer {
 	}
 
 	@Override
-	final public void analysisEnded(Program program) {
+    public final void analysisEnded(Program program) {
 	}
 
 	@Override
-	final public void registerOptions(Options options, Program program) {
+    public final void registerOptions(Options options, Program program) {
 	}
 
 	@Override
-	final public void optionsChanged(Options propertyList, Program program) {
+    public final void optionsChanged(Options propertyList, Program program) {
 	}
 
 	@Override
-	final public boolean removed(Program program, AddressSetView set, TaskMonitor monitor,
-			MessageLog log) throws CancelledException {
+    public final boolean removed(Program program, AddressSetView set, TaskMonitor monitor,
+                                 MessageLog log) throws CancelledException {
 		return false;
 	}
 
-	final public void restoreDefaultOptions(Options propertyList, Program program) {
+	public final void restoreDefaultOptions(Options propertyList, Program program) {
 	}
 
 	@Override
-	final public boolean supportsOneTimeAnalysis() {
+    public final boolean supportsOneTimeAnalysis() {
 		return false;
 	}
 

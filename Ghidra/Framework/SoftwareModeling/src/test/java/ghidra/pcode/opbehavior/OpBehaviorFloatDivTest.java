@@ -26,8 +26,7 @@ import ghidra.pcode.floatformat.FloatFormatFactory;
 public class OpBehaviorFloatDivTest extends AbstractOpBehaviorTest {
 
 	public OpBehaviorFloatDivTest() {
-		super();
-	}
+    }
 
 	@Test
 	public void testEvaluateBinaryLong() {

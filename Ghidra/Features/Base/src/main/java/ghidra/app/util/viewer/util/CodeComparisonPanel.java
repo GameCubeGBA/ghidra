@@ -348,7 +348,7 @@ public abstract class CodeComparisonPanel<T extends FieldPanelCoordinator> exten
 	 * @param syncScrolling true means synchronize scrolling and location between the two views.
 	 */
 	public void setScrollingSyncState(boolean syncScrolling) {
-		if (isScrollingSynced() == syncScrolling) {
+		if (this.syncScrolling == syncScrolling) {
 			return;
 		}
 		this.syncScrolling = syncScrolling;

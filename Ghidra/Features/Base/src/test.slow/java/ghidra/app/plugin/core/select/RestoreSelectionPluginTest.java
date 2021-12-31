@@ -44,8 +44,7 @@ public class RestoreSelectionPluginTest extends AbstractGhidraHeadedIntegrationT
 	private CodeBrowserPlugin cb;
 
 	public RestoreSelectionPluginTest() {
-		super();
-	}
+    }
 
 	@Before
 	public void setUp() throws Exception {

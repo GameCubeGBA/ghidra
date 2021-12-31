@@ -157,11 +157,8 @@ public class BitFieldDataType extends AbstractDataType {
 		if (baseDataType instanceof TypeDef) {
 			baseDataType = ((TypeDef) baseDataType).getBaseDataType();
 		}
-		if ((baseDataType instanceof Enum) || (baseDataType instanceof AbstractIntegerDataType)) {
-			return true;
-		}
-		return false;
-	}
+        return (baseDataType instanceof Enum) || (baseDataType instanceof AbstractIntegerDataType);
+    }
 
 	@Override
 	public void addParent(DataType dt) {
@@ -331,7 +328,7 @@ public class BitFieldDataType extends AbstractDataType {
 		StringBuilder sbuf = new StringBuilder();
 		sbuf.append(Integer.toString(effectiveBitSize));
 		sbuf.append("-bit ");
-		DataType dt = getBaseDataType();
+		DataType dt = baseDataType;
 		sbuf.append(dt.getDisplayName());
 		sbuf.append(" bitfield");
 		if (effectiveBitSize != bitSize) {

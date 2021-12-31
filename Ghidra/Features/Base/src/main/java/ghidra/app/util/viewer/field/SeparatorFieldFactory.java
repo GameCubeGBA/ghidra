@@ -67,9 +67,7 @@ public class SeparatorFieldFactory extends FieldFactory {
 		}
 		int numChars = width / getMetrics().charWidth(sepChar);
 		sb.setLength(0);
-		for (int i = 0; i < numChars; i++) {
-			sb.append(sepChar);
-		}
+        sb.append(String.valueOf(sepChar).repeat(Math.max(0, numChars)));
 
 		AttributedString as = new AttributedString(sb.toString(), color, getMetrics());
 		FieldElement text = new TextFieldElement(as, 0, 0);

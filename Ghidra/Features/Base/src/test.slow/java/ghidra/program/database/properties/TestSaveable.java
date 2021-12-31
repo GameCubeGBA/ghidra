@@ -189,11 +189,8 @@ class TestSaveable implements Saveable {
 		else if (!strValue.equals(other.strValue)) {
 			return false;
 		}
-		if (!Arrays.equals(strValues, other.strValues)) {
-			return false;
-		}
-		return true;
-	}
+        return Arrays.equals(strValues, other.strValues);
+    }
 	
 	/**
 	 * @see ghidra.util.Saveable#getSchemaVersion()

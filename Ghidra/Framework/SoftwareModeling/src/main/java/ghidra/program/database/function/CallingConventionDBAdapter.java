@@ -28,8 +28,8 @@ import ghidra.util.task.TaskMonitor;
  * Adapter to access the Function Calling Conventions tables.
  */
 abstract class CallingConventionDBAdapter {
-	static final byte UNKNOWN_CALLING_CONVENTION_ID = (byte) 0;
-	static final byte DEFAULT_CALLING_CONVENTION_ID = (byte) 1;
+	static final byte UNKNOWN_CALLING_CONVENTION_ID = 0;
+	static final byte DEFAULT_CALLING_CONVENTION_ID = 1;
 
 	static final Schema CALLING_CONVENTION_SCHEMA =
 		CallingConventionDBAdapterV0.V0_CALLING_CONVENTION_SCHEMA;

@@ -77,7 +77,7 @@ public abstract class AbstractLocalSymbolInOptimizedCodeMsSymbol extends Abstrac
 		myBuilder.append(String.format("%08X ", typeRecordNumber.getNumber()));
 		localVariableFlags.emit(myBuilder);
 		builder.append(
-			String.format("%s: %s, %s", getSymbolTypeName(), myBuilder.toString(), name));
+			String.format("%s: %s, %s", getSymbolTypeName(), myBuilder, name));
 	}
 
 }

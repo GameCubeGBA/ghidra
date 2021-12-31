@@ -31,7 +31,7 @@ public interface EclipseIntegrationService {
 	 * 
 	 * @return The Eclipse Integration options.
 	 */
-	public ToolOptions getEclipseIntegrationOptions();
+    ToolOptions getEclipseIntegrationOptions();
 
 	/**
 	 * Gets the Eclipse executable file.
@@ -39,7 +39,7 @@ public interface EclipseIntegrationService {
 	 * @return The Eclipse executable file.
 	 * @throws FileNotFoundException if the executable file does not exist.
 	 */
-	public File getEclipseExecutableFile() throws FileNotFoundException;
+    File getEclipseExecutableFile() throws FileNotFoundException;
 
 	/**
 	 * Gets the Eclipse workspace directory.  If it is defined, the directory may or may not exist.
@@ -48,7 +48,7 @@ public interface EclipseIntegrationService {
 	 * @return The Eclipse workspace directory. The directory may or may not exist.  Could return
 	 *   null if the workspace directory is undefined.
 	 */
-	public File getEclipseWorkspaceDir();
+    File getEclipseWorkspaceDir();
 
 	/**
 	 * Checks to see if a feature is installed in Eclipse.
@@ -57,7 +57,7 @@ public interface EclipseIntegrationService {
 	 * @return True if the specified feature is installed.
 	 * @throws FileNotFoundException if Eclipse is not installed.
 	 */
-	public boolean isEclipseFeatureInstalled(FilenameFilter filter) throws FileNotFoundException;
+    boolean isEclipseFeatureInstalled(FilenameFilter filter) throws FileNotFoundException;
 
 	/**
 	 * Attempts to connect to Eclipse on the given port.  This may result in Eclipse
@@ -68,14 +68,14 @@ public interface EclipseIntegrationService {
 	 * @return The (possibly failed) connection.  Check the status of the {@link EclipseConnection}
 	 *   for details on the connection.
 	 */
-	public EclipseConnection connectToEclipse(int port);
+    EclipseConnection connectToEclipse(int port);
 
 	/**
 	 * Offers to install GhidraDev into Eclipse's dropins directory.
 	 * 
 	 * @param monitor The task monitor used to cancel the installation.
 	 */
-	public void offerGhidraDevInstallation(TaskMonitor monitor);
+    void offerGhidraDevInstallation(TaskMonitor monitor);
 
 	/**
 	 * Displays the given Eclipse related error message in an error dialog.
@@ -85,5 +85,5 @@ public interface EclipseIntegrationService {
 	 *   options; otherwise, false.
 	 * @param t An optional throwable to tie to the message.
 	 */
-	public void handleEclipseError(String error, boolean askAboutOptions, Throwable t);
+    void handleEclipseError(String error, boolean askAboutOptions, Throwable t);
 }

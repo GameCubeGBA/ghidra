@@ -30,8 +30,8 @@ import ghidra.framework.plugintool.PluginTool;
 import resources.ResourceManager;
 
 public class DomainEventComponentProvider extends ComponentProviderAdapter {
-	final static int LIMIT = 200;
-	private final static ImageIcon ICON = ResourceManager.loadImage("images/monitor.png");
+	static final int LIMIT = 200;
+	private static final ImageIcon ICON = ResourceManager.loadImage("images/monitor.png");
 
 	private JTextArea textArea;
 	private JScrollPane scrollPane;
@@ -109,11 +109,10 @@ public class DomainEventComponentProvider extends ComponentProviderAdapter {
 			}
 			textArea.setText("");
 			int length = 0;
-			for (int i = 0; i < eventList.size(); i++) {
-				String str = eventList.get(i);
-				textArea.append(str);
-				length += str.length();
-			}
+            for (String str : eventList) {
+                textArea.append(str);
+                length += str.length();
+            }
 			textArea.setCaretPosition(length);
 		}
 	}

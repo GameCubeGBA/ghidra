@@ -22,5 +22,5 @@ import ghidra.program.model.address.Address;
 import java.util.List;
 
 public interface DecompilerReducer<R, D> {
-	public R reduce(List<DominantPair<Address, D>> list);
+	R reduce(List<DominantPair<Address, D>> list);
 }

@@ -2787,12 +2787,8 @@ public class GhidraFileChooserTest extends AbstractDockingTest {
 
 	private File[] listFiles(File dir, String namePattern) {
 		File[] newFolderFiles = homeDir.listFiles((FileFilter) fileToCheck -> {
-			if (!fileToCheck.isDirectory() || !fileToCheck.getName().startsWith(namePattern)) {
-				return false;
-			}
-
-			return true;
-		});
+            return fileToCheck.isDirectory() && fileToCheck.getName().startsWith(namePattern);
+        });
 		return ArrayUtils.nullToEmpty(newFolderFiles, File[].class);
 	}
 

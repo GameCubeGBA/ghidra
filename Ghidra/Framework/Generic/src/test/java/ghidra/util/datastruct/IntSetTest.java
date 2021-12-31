@@ -25,8 +25,7 @@ import generic.test.AbstractGenericTest;
 public class IntSetTest extends AbstractGenericTest {
 
 	public IntSetTest() {
-		super();
-	}
+    }
 
 @Test
     public void testBasic() {

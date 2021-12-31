@@ -53,7 +53,7 @@ public class SubsToFuncsScript extends GhidraScript {
 						SourceType.USER_DEFINED);
 				}
 				catch (Exception e) {
-					errorBuf.append(e.toString() + "\n");
+					errorBuf.append(e + "\n");
 				}
 			}
 		}

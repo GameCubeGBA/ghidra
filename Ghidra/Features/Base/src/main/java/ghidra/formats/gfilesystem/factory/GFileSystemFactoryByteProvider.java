@@ -44,7 +44,7 @@ public interface GFileSystemFactoryByteProvider<FSTYPE extends GFileSystem>
 	 * @throws IOException if there is an error reading files.
 	 * @throws CancelledException if the user cancels
 	 */
-	public FSTYPE create(FSRLRoot targetFSRL, ByteProvider byteProvider,
-			FileSystemService fsService, TaskMonitor monitor)
+    FSTYPE create(FSRLRoot targetFSRL, ByteProvider byteProvider,
+                  FileSystemService fsService, TaskMonitor monitor)
 			throws IOException, CancelledException;
 }

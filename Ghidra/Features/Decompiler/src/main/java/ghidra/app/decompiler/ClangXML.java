@@ -72,7 +72,7 @@ public abstract class ClangXML {			// Placeholder for CLANG XML identifiers
    
    public static ClangTokenGroup buildClangTree(XmlPullParser parser,HighFunction hfunc) {
 		ClangTokenGroup docroot;
-		if (parser.peek().getName().equals("function"))
+		if ("function".equals(parser.peek().getName()))
 			docroot = new ClangFunction(null,hfunc);
 		else
 			docroot = new ClangTokenGroup(null);

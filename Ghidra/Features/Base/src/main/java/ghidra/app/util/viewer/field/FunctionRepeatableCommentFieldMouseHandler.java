@@ -28,7 +28,7 @@ import ghidra.util.StringUtilities;
  * A handler to process {@link FunctionRepeatableCommentFieldLocation}.
  */
 public class FunctionRepeatableCommentFieldMouseHandler extends CommentFieldMouseHandler {
-	private final static Class<?>[] SUPPORTED_CLASSES =
+	private static final Class<?>[] SUPPORTED_CLASSES =
 		new Class[] { FunctionRepeatableCommentFieldLocation.class };
 
 	@Override

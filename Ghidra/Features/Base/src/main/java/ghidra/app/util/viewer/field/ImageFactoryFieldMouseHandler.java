@@ -25,7 +25,7 @@ import java.awt.event.MouseEvent;
 
 public class ImageFactoryFieldMouseHandler implements FieldMouseHandlerExtension {
 
-	private final static Class<?>[] SUPPORTED_CLASSES = new Class[] { ImageFactoryField.class };
+	private static final Class<?>[] SUPPORTED_CLASSES = new Class[] { ImageFactoryField.class };
 
 	@Override
 	public boolean fieldElementClicked(Object clickedObject, Navigatable navigatable,

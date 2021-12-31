@@ -35,8 +35,7 @@ public class CodeUnitMergeManager2Test extends AbstractListingMergeManagerTest {
 	 * @param arg0
 	 */
 	public CodeUnitMergeManager2Test() {
-		super();
-	}
+    }
 
 @Test
     public void testInstrMyDataUndef() throws Exception {

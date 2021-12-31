@@ -23,7 +23,7 @@ import agent.dbgeng.jna.dbgeng.UnknownWithUtils.VTableIndex;
 import agent.dbgeng.jna.dbgeng.WinNTExtra.MEMORY_BASIC_INFORMATION64;
 
 public interface IDebugDataSpaces2 extends IDebugDataSpaces {
-	final IID IID_IDEBUG_DATA_SPACES2 = new IID("7a5e852f-96e9-468f-ac1b-0b3addc4a049");
+	IID IID_IDEBUG_DATA_SPACES2 = new IID("7a5e852f-96e9-468f-ac1b-0b3addc4a049");
 
 	enum VTIndices2 implements VTableIndex {
 		VIRTUAL_TO_PHYSICAL, //

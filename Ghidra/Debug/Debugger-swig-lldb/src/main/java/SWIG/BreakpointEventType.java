@@ -12,19 +12,19 @@
 package SWIG;
 
 public final class BreakpointEventType {
-  public final static BreakpointEventType eBreakpointEventTypeInvalidType = new BreakpointEventType("eBreakpointEventTypeInvalidType", lldbJNI.eBreakpointEventTypeInvalidType_get());
-  public final static BreakpointEventType eBreakpointEventTypeAdded = new BreakpointEventType("eBreakpointEventTypeAdded", lldbJNI.eBreakpointEventTypeAdded_get());
-  public final static BreakpointEventType eBreakpointEventTypeRemoved = new BreakpointEventType("eBreakpointEventTypeRemoved", lldbJNI.eBreakpointEventTypeRemoved_get());
-  public final static BreakpointEventType eBreakpointEventTypeLocationsAdded = new BreakpointEventType("eBreakpointEventTypeLocationsAdded", lldbJNI.eBreakpointEventTypeLocationsAdded_get());
-  public final static BreakpointEventType eBreakpointEventTypeLocationsRemoved = new BreakpointEventType("eBreakpointEventTypeLocationsRemoved", lldbJNI.eBreakpointEventTypeLocationsRemoved_get());
-  public final static BreakpointEventType eBreakpointEventTypeLocationsResolved = new BreakpointEventType("eBreakpointEventTypeLocationsResolved", lldbJNI.eBreakpointEventTypeLocationsResolved_get());
-  public final static BreakpointEventType eBreakpointEventTypeEnabled = new BreakpointEventType("eBreakpointEventTypeEnabled", lldbJNI.eBreakpointEventTypeEnabled_get());
-  public final static BreakpointEventType eBreakpointEventTypeDisabled = new BreakpointEventType("eBreakpointEventTypeDisabled", lldbJNI.eBreakpointEventTypeDisabled_get());
-  public final static BreakpointEventType eBreakpointEventTypeCommandChanged = new BreakpointEventType("eBreakpointEventTypeCommandChanged", lldbJNI.eBreakpointEventTypeCommandChanged_get());
-  public final static BreakpointEventType eBreakpointEventTypeConditionChanged = new BreakpointEventType("eBreakpointEventTypeConditionChanged", lldbJNI.eBreakpointEventTypeConditionChanged_get());
-  public final static BreakpointEventType eBreakpointEventTypeIgnoreChanged = new BreakpointEventType("eBreakpointEventTypeIgnoreChanged", lldbJNI.eBreakpointEventTypeIgnoreChanged_get());
-  public final static BreakpointEventType eBreakpointEventTypeThreadChanged = new BreakpointEventType("eBreakpointEventTypeThreadChanged", lldbJNI.eBreakpointEventTypeThreadChanged_get());
-  public final static BreakpointEventType eBreakpointEventTypeAutoContinueChanged = new BreakpointEventType("eBreakpointEventTypeAutoContinueChanged", lldbJNI.eBreakpointEventTypeAutoContinueChanged_get());
+  public static final BreakpointEventType eBreakpointEventTypeInvalidType = new BreakpointEventType("eBreakpointEventTypeInvalidType", lldbJNI.eBreakpointEventTypeInvalidType_get());
+  public static final BreakpointEventType eBreakpointEventTypeAdded = new BreakpointEventType("eBreakpointEventTypeAdded", lldbJNI.eBreakpointEventTypeAdded_get());
+  public static final BreakpointEventType eBreakpointEventTypeRemoved = new BreakpointEventType("eBreakpointEventTypeRemoved", lldbJNI.eBreakpointEventTypeRemoved_get());
+  public static final BreakpointEventType eBreakpointEventTypeLocationsAdded = new BreakpointEventType("eBreakpointEventTypeLocationsAdded", lldbJNI.eBreakpointEventTypeLocationsAdded_get());
+  public static final BreakpointEventType eBreakpointEventTypeLocationsRemoved = new BreakpointEventType("eBreakpointEventTypeLocationsRemoved", lldbJNI.eBreakpointEventTypeLocationsRemoved_get());
+  public static final BreakpointEventType eBreakpointEventTypeLocationsResolved = new BreakpointEventType("eBreakpointEventTypeLocationsResolved", lldbJNI.eBreakpointEventTypeLocationsResolved_get());
+  public static final BreakpointEventType eBreakpointEventTypeEnabled = new BreakpointEventType("eBreakpointEventTypeEnabled", lldbJNI.eBreakpointEventTypeEnabled_get());
+  public static final BreakpointEventType eBreakpointEventTypeDisabled = new BreakpointEventType("eBreakpointEventTypeDisabled", lldbJNI.eBreakpointEventTypeDisabled_get());
+  public static final BreakpointEventType eBreakpointEventTypeCommandChanged = new BreakpointEventType("eBreakpointEventTypeCommandChanged", lldbJNI.eBreakpointEventTypeCommandChanged_get());
+  public static final BreakpointEventType eBreakpointEventTypeConditionChanged = new BreakpointEventType("eBreakpointEventTypeConditionChanged", lldbJNI.eBreakpointEventTypeConditionChanged_get());
+  public static final BreakpointEventType eBreakpointEventTypeIgnoreChanged = new BreakpointEventType("eBreakpointEventTypeIgnoreChanged", lldbJNI.eBreakpointEventTypeIgnoreChanged_get());
+  public static final BreakpointEventType eBreakpointEventTypeThreadChanged = new BreakpointEventType("eBreakpointEventTypeThreadChanged", lldbJNI.eBreakpointEventTypeThreadChanged_get());
+  public static final BreakpointEventType eBreakpointEventTypeAutoContinueChanged = new BreakpointEventType("eBreakpointEventTypeAutoContinueChanged", lldbJNI.eBreakpointEventTypeAutoContinueChanged_get());
 
   public final int swigValue() {
     return swigValue;
@@ -37,9 +37,9 @@ public final class BreakpointEventType {
   public static BreakpointEventType swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-    for (int i = 0; i < swigValues.length; i++)
-      if (swigValues[i].swigValue == swigValue)
-        return swigValues[i];
+      for (BreakpointEventType value : swigValues)
+          if (value.swigValue == swigValue)
+              return value;
     throw new IllegalArgumentException("No enum " + BreakpointEventType.class + " with value " + swigValue);
   }
 

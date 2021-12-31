@@ -118,8 +118,8 @@ public class Disassembler implements DisassemblerConflictHandler {
 
 	public static final int MAX_REPEAT_PATTERN_LENGTH = 16;
 
-	private final static int NUM_ADDRS_FOR_NOTIFICATION = 1024;
-	private final static int INSTRUCTION_SET_SIZE_LIMIT = 2048;
+	private static final int NUM_ADDRS_FOR_NOTIFICATION = 1024;
+	private static final int INSTRUCTION_SET_SIZE_LIMIT = 2048;
 
 	protected final Language language;
 	protected final AddressFactory addrFactory;
@@ -1390,7 +1390,7 @@ public class Disassembler implements DisassemblerConflictHandler {
 			return true;
 		}
 		String callFixupStr = func.getCallFixup();
-		if (callFixupStr == null || callFixupStr.length() == 0) {
+		if (callFixupStr == null || callFixupStr.isEmpty()) {
 			return false;
 		}
 		PcodeInjectLibrary pcodeInjectLibrary = program.getCompilerSpec().getPcodeInjectLibrary();

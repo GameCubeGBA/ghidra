@@ -37,19 +37,17 @@ public class AnalysisTaskList {
 	private String name;
 
 	private static Comparator<AnalysisScheduler> priorityComparator =
-		new Comparator<AnalysisScheduler>() {
-			public int compare(AnalysisScheduler as1, AnalysisScheduler as2) {
-				Analyzer a1 = as1.getAnalyzer();
-				Analyzer a2 = as2.getAnalyzer();
-				int c = a1.getPriority().priority() - a2.getPriority().priority();
-				if (c == 0) {
-					// Keep ordering deterministic since same
-					// priority could be used by multiple analyzers
-					c = a1.getName().compareTo(a2.getName());
-				}
-				return c;
-			}
-		};
+            (as1, as2) -> {
+                Analyzer a1 = as1.getAnalyzer();
+                Analyzer a2 = as2.getAnalyzer();
+                int c = a1.getPriority().priority() - a2.getPriority().priority();
+                if (c == 0) {
+                    // Keep ordering deterministic since same
+                    // priority could be used by multiple analyzers
+                    c = a1.getName().compareTo(a2.getName());
+                }
+                return c;
+            };
 
 	public AnalysisTaskList(AutoAnalysisManager analysisMgr, String name) {
 		tasks = new CopyOnWriteArrayList<AnalysisScheduler>();
@@ -77,70 +75,54 @@ public class AnalysisTaskList {
 	}
 
 	public void notifyResume() {
-		Iterator<AnalysisScheduler> iter = tasks.iterator();
-		while (iter.hasNext()) {
-			AnalysisScheduler scheduler = iter.next();
-			scheduler.schedule();
-		}
+        for (AnalysisScheduler scheduler : tasks) {
+            scheduler.schedule();
+        }
 	}
 
 	public void notifyAdded(Address addr) {
-		Iterator<AnalysisScheduler> iter = tasks.iterator();
-		while (iter.hasNext()) {
-			AnalysisScheduler scheduler = iter.next();
-			scheduler.added(addr);
-		}
+        for (AnalysisScheduler scheduler : tasks) {
+            scheduler.added(addr);
+        }
 	}
 
 	public void notifyAdded(AddressSetView set) {
-		Iterator<AnalysisScheduler> iter = tasks.iterator();
-		while (iter.hasNext()) {
-			AnalysisScheduler scheduler = iter.next();
-			scheduler.added(set);
-		}
+        for (AnalysisScheduler scheduler : tasks) {
+            scheduler.added(set);
+        }
 	}
 
 	public void notifyRemoved(AddressSetView set) {
-		Iterator<AnalysisScheduler> iter = tasks.iterator();
-		while (iter.hasNext()) {
-			AnalysisScheduler scheduler = iter.next();
-			scheduler.removed(set);
-		}
+        for (AnalysisScheduler scheduler : tasks) {
+            scheduler.removed(set);
+        }
 	}
 
 	public void notifyRemoved(Address addr) {
-		Iterator<AnalysisScheduler> iter = tasks.iterator();
-		while (iter.hasNext()) {
-			AnalysisScheduler scheduler = iter.next();
-			scheduler.removed(addr);
-		}
+        for (AnalysisScheduler scheduler : tasks) {
+            scheduler.removed(addr);
+        }
 	}
 
 	public void optionsChanged(Options options) {
-		Iterator<AnalysisScheduler> iter = tasks.iterator();
-		while (iter.hasNext()) {
-			AnalysisScheduler scheduler = iter.next();
-			scheduler.optionsChanged(options);
-		}
+        for (AnalysisScheduler scheduler : tasks) {
+            scheduler.optionsChanged(options);
+        }
 	}
 
 	public void registerOptions(Options options) {
-		Iterator<AnalysisScheduler> iter = tasks.iterator();
-		while (iter.hasNext()) {
-			AnalysisScheduler scheduler = iter.next();
-			scheduler.registerOptions(options);
-		}
+        for (AnalysisScheduler scheduler : tasks) {
+            scheduler.registerOptions(options);
+        }
 	}
 
 	/**
 	 * Notifies each analyzer in the list that the analysis session has ended.
 	 */
 	public void notifyAnalysisEnded(Program program) {
-		Iterator<AnalysisScheduler> iter = tasks.iterator();
-		while (iter.hasNext()) {
-			AnalysisScheduler scheduler = iter.next();
-			scheduler.getAnalyzer().analysisEnded(program);
-		}
+        for (AnalysisScheduler scheduler : tasks) {
+            scheduler.getAnalyzer().analysisEnded(program);
+        }
 	}
 
 }

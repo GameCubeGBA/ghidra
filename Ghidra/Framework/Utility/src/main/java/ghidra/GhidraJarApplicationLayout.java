@@ -15,22 +15,18 @@
  */
 package ghidra;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URL;
-import java.net.URLDecoder;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
 import generic.jar.ResourceFile;
 import ghidra.framework.ApplicationProperties;
 import ghidra.framework.GModule;
 import utility.application.ApplicationLayout;
 import utility.module.ModuleUtilities;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URL;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
 
 /**
  * The Ghidra jar application layout defines the customizable elements of the Ghidra application's 
@@ -45,8 +41,7 @@ public class GhidraJarApplicationLayout extends GhidraApplicationLayout {
 	 * @throws IOException if there was a problem getting the application properties or modules.
 	 */
 	public GhidraJarApplicationLayout() throws FileNotFoundException, IOException {
-		super();
-	}
+    }
 
 	@Override
 	public boolean inSingleJarMode() {
@@ -96,18 +91,9 @@ public class GhidraJarApplicationLayout extends GhidraApplicationLayout {
 	 * @param url The {@link URL}
 	 * @return A {@link ResourceFile} from the given {@link URL}
 	 */
-	private ResourceFile fromUrl(URL url) {
+	private static ResourceFile fromUrl(URL url) {
 		String urlString = url.toExternalForm();
-		try {
-			// Decode the URL to replace things like %20 with real spaces.
-			// Note: can't use URLDecoder.decode(String, Charset) because Utility must be 
-			// Java 1.8 compatible.
-			urlString = URLDecoder.decode(urlString, "UTF-8");
-		}
-		catch (UnsupportedEncodingException e) {
-			// Shouldn't happen, but failed to find UTF-8 encoding.
-			// Proceed without decoding, and hope for the best.
-		}
+		urlString = URLDecoder.decode(urlString, StandardCharsets.UTF_8);
 		return new ResourceFile(urlString);
 	}
 }

@@ -30,8 +30,7 @@ public class ExactSearchAddressIteratorTest extends AbstractGenericTest {
 	private AddressSpace space = new GenericAddressSpace("Bob", 32, AddressSpace.TYPE_RAM, 0);
 
 	public ExactSearchAddressIteratorTest() {
-		super();
-	}
+    }
 
 	@Test
 	public void testSingleIterator_Forward() {

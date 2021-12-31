@@ -199,7 +199,7 @@ public class PreviewTable extends AbstractInstructionTable {
 
 						// See if we only have a mnemonic and NO operands.  If so, then just add
 						// the mnemonic to the preview panel and increment our counter.
-						if (metadata.getOperands() == null || metadata.getOperands().size() == 0) {
+						if (metadata.getOperands() == null || metadata.getOperands().isEmpty()) {
 							MaskContainer maskContainer = metadata.getMaskContainer();
 							if (maskContainer != null && maskContainer.getValue() != null) {
 								instrSize = maskContainer.getValue().length;
@@ -408,33 +408,31 @@ public class PreviewTable extends AbstractInstructionTable {
 	private void refreshView() {
 
 		// Grab an iterator so we can process each preview string.
-		Iterator<Map.Entry<Integer, String>> it = previewStringMap.entrySet().iterator();
 
-		while (it.hasNext()) {
-			Map.Entry<Integer, String> pair = it.next();
-			Integer index = pair.getKey();
-			String instr = pair.getValue();
+        for (Map.Entry<Integer, String> pair : previewStringMap.entrySet()) {
+            Integer index = pair.getKey();
+            String instr = pair.getValue();
 
-			// Create a new string to hold the string we'll set in the table.
-			String previewString = "";
+            // Create a new string to hold the string we'll set in the table.
+            String previewString = "";
 
-			switch (currentView) {
-				case BINARY:
-					// If it's binary, just grab the value of the preview string
-					// in the map; they're stored there as binary so nothing to 
-					// do but format it with the correct mask settings.
-					previewString =
-						InstructionSearchUtils.addSpaceOnByteBoundary(instr, InputMode.BINARY);
-					break;
-				case HEX:
-					// For hex, we have to convert the binary string to hex, so use
-					// our utility...
-					previewString = InstructionSearchUtils.toHex(instr, true).toString();
-					break;
-			}
+            switch (currentView) {
+                case BINARY:
+                    // If it's binary, just grab the value of the preview string
+                    // in the map; they're stored there as binary so nothing to
+                    // do but format it with the correct mask settings.
+                    previewString =
+                            InstructionSearchUtils.addSpaceOnByteBoundary(instr, InputMode.BINARY);
+                    break;
+                case HEX:
+                    // For hex, we have to convert the binary string to hex, so use
+                    // our utility...
+                    previewString = InstructionSearchUtils.toHex(instr, true).toString();
+                    break;
+            }
 
-			setPreviewText(index, previewString);
-		}
+            setPreviewText(index, previewString);
+        }
 
 		repaint();
 	}
@@ -479,10 +477,10 @@ public class PreviewTable extends AbstractInstructionTable {
 				@Override
 				public void actionPerformed(ActionContext context) {
 					int[] selectedRows = PreviewTable.this.getSelectedRows();
-					String val = "";
+					StringBuilder val = new StringBuilder();
 					for (int selectedRow : selectedRows) {
 
-						val += getColumnValue(selectedRow, HEADER_COL_PREVIEW);
+						val.append(getColumnValue(selectedRow, HEADER_COL_PREVIEW));
 
 						String comment = searchData.getInstructions().get(selectedRow).getTextRep();
 
@@ -490,11 +488,11 @@ public class PreviewTable extends AbstractInstructionTable {
 							StringBuilder builder = new StringBuilder();
 							builder.append(val).append("\t").append("// ").append(comment).append(
 								"\n");
-							val = builder.toString();
+							val = new StringBuilder(builder.toString());
 						}
 					}
 
-					StringSelection sel = new StringSelection(val);
+					StringSelection sel = new StringSelection(val.toString());
 					Clipboard clip = GClipboard.getSystemClipboard();
 					clip.setContents(sel, null);
 				}
@@ -517,12 +515,12 @@ public class PreviewTable extends AbstractInstructionTable {
 			@Override
 			public void actionPerformed(ActionContext context) {
 				int[] selectedRows = PreviewTable.this.getSelectedRows();
-				String val = "";
+				StringBuilder val = new StringBuilder();
 				for (int selectedRow : selectedRows) {
-					val += getColumnValue(selectedRow, HEADER_COL_PREVIEW) + "\n";
+					val.append(getColumnValue(selectedRow, HEADER_COL_PREVIEW)).append("\n");
 				}
 
-				StringSelection sel = new StringSelection(val);
+				StringSelection sel = new StringSelection(val.toString());
 				Clipboard clip = GClipboard.getSystemClipboard();
 				clip.setContents(sel, null);
 			}
@@ -545,12 +543,12 @@ public class PreviewTable extends AbstractInstructionTable {
 			@Override
 			public void actionPerformed(ActionContext context) {
 				int[] selectedRows = PreviewTable.this.getSelectedRows();
-				String val = "";
+				StringBuilder val = new StringBuilder();
 				for (int selectedRow : selectedRows) {
-					val += getColumnValue(selectedRow, HEADER_COL_PREVIEW).replaceAll(" ", "");
+					val.append(getColumnValue(selectedRow, HEADER_COL_PREVIEW).replaceAll(" ", ""));
 				}
 
-				StringSelection sel = new StringSelection(val);
+				StringSelection sel = new StringSelection(val.toString());
 				Clipboard clip = GClipboard.getSystemClipboard();
 				clip.setContents(sel, null);
 			}

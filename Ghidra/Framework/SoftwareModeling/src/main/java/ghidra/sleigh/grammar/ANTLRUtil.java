@@ -31,9 +31,7 @@ import org.antlr.runtime.tree.Tree;
 public class ANTLRUtil {
 	static String indent(int n) {
 		StringBuilder sb = new StringBuilder();
-		for (int ii = 0; ii < n; ++ii) {
-			sb.append("    ");
-		}
+		sb.append("    ".repeat(Math.max(0, n)));
 		return sb.toString();
 	}
 

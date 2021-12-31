@@ -43,8 +43,7 @@ public class CliTableCustomAttribute extends CliAbstractTable {
 		public int valueIndex;
 
 		public CliCustomAttributeRow(int parentIndex, int typeIndex, int valueIndex) {
-			super();
-			this.parentIndex = parentIndex;
+            this.parentIndex = parentIndex;
 			this.typeIndex = typeIndex;
 			this.valueIndex = valueIndex;
 		}

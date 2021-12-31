@@ -132,11 +132,8 @@ public class MultipleCauses extends Throwable {
 
 	public static boolean hasMultiple(Throwable e) {
 		Throwable cause = e.getCause();
-		if ((cause != null) && (cause instanceof MultipleCauses)) {
-			return true;
-		}
-		return false;
-	}
+        return (cause != null) && (cause instanceof MultipleCauses);
+    }
 
 	public static void printTree(PrintStream out, Throwable e) {
 		printTree(out, "", e);
@@ -148,7 +145,7 @@ public class MultipleCauses extends Throwable {
 		e.printStackTrace(out);
 		if (hasMultiple(e) && (e.getCause() != null)) {
 			MultipleCauses report = (MultipleCauses) e.getCause();
-			for (Throwable t : report.getCauses()) {
+			for (Throwable t : report.causes) {
 				printTree(out, prefix + ">", t);
 			}
 		}

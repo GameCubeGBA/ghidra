@@ -77,12 +77,12 @@ public class HCS12ConventionAnalyzer extends AbstractAnalyzer {
 		}
 
 		// set the correct convention
-		if (mnemonic.equals("rtc")) {
+		if ("rtc".equals(mnemonic)) {
 			setPrototypeModel(program, instr, "__asmA_longcall");
 			return;
 		}
 
-		if (mnemonic.equals("rts")) {
+		if ("rts".equals(mnemonic)) {
 			setPrototypeModel(program, instr, "__asmA");
 			return;
 		}

@@ -114,12 +114,10 @@ public class OptionsManager implements OptionsService, OptionsChangeListener {
 	public ToolOptions[] getOptions() {
 		ToolOptions[] opt = new ToolOptions[optionsMap.size()];
 		int idx = 0;
-		Iterator<String> iter = optionsMap.keySet().iterator();
-		while (iter.hasNext()) {
-			String key = iter.next();
-			opt[idx] = optionsMap.get(key);
-			++idx;
-		}
+        for (String key : optionsMap.keySet()) {
+            opt[idx] = optionsMap.get(key);
+            ++idx;
+        }
 		Arrays.sort(opt, new OptionsComparator());
 		return opt;
 	}
@@ -131,14 +129,12 @@ public class OptionsManager implements OptionsService, OptionsChangeListener {
 	 */
 	public void deregisterOwner(Plugin ownerPlugin) {
 		List<String> deleteList = new ArrayList<>();
-		Iterator<String> iter = optionsMap.keySet().iterator();
-		while (iter.hasNext()) {
-			String key = iter.next();
-			ToolOptions opt = optionsMap.get(key);
-			if (opt.getOptionNames().isEmpty()) {
-				deleteList.add(opt.getName());
-			}
-		}
+        for (String key : optionsMap.keySet()) {
+            ToolOptions opt = optionsMap.get(key);
+            if (opt.getOptionNames().isEmpty()) {
+                deleteList.add(opt.getName());
+            }
+        }
 		removeUnusedOptions(deleteList);
 	}
 
@@ -149,14 +145,12 @@ public class OptionsManager implements OptionsService, OptionsChangeListener {
 	 */
 	public Element getConfigState() {
 		Element root = new Element("OPTIONS");
-		Iterator<String> iter = optionsMap.keySet().iterator();
-		while (iter.hasNext()) {
-			String key = iter.next();
-			ToolOptions opt = optionsMap.get(key);
-			if (hasNonDefaultValues(opt)) {
-				root.addContent(opt.getXmlRoot(false));
-			}
-		}
+        for (String key : optionsMap.keySet()) {
+            ToolOptions opt = optionsMap.get(key);
+            if (hasNonDefaultValues(opt)) {
+                root.addContent(opt.getXmlRoot(false));
+            }
+        }
 		return root;
 	}
 
@@ -173,15 +167,13 @@ public class OptionsManager implements OptionsService, OptionsChangeListener {
 	public void removeUnusedOptions() {
 		// 1st clean up any unused options before saving...
 		List<String> deleteList = new ArrayList<>();
-		Iterator<String> iter = optionsMap.keySet().iterator();
-		while (iter.hasNext()) {
-			String key = iter.next();
-			ToolOptions opt = optionsMap.get(key);
-			opt.removeUnusedOptions();
-			if (opt.getOptionNames().isEmpty()) {
-				deleteList.add(opt.getName());
-			}
-		}
+        for (String key : optionsMap.keySet()) {
+            ToolOptions opt = optionsMap.get(key);
+            opt.removeUnusedOptions();
+            if (opt.getOptionNames().isEmpty()) {
+                deleteList.add(opt.getName());
+            }
+        }
 		removeUnusedOptions(deleteList);
 	}
 
@@ -190,19 +182,17 @@ public class OptionsManager implements OptionsService, OptionsChangeListener {
 	 * @param root element to use to restore the Options objects
 	 */
 	public void setConfigState(Element root) {
-		Iterator<?> iter = root.getChildren().iterator();
-		while (iter.hasNext()) {
-			ToolOptions opt = new ToolOptions((Element) iter.next());
-			ToolOptions oldOptions = optionsMap.get(opt.getName());
-			if (oldOptions == null) {
-				opt.addOptionsChangeListener(this);
-			}
-			else {
-				opt.takeListeners(oldOptions);
-				opt.registerOptions(oldOptions);
-			}
-			optionsMap.put(opt.getName(), opt);
-		}
+        for (Object o : root.getChildren()) {
+            ToolOptions opt = new ToolOptions((Element) o);
+            ToolOptions oldOptions = optionsMap.get(opt.getName());
+            if (oldOptions == null) {
+                opt.addOptionsChangeListener(this);
+            } else {
+                opt.takeListeners(oldOptions);
+                opt.registerOptions(oldOptions);
+            }
+            optionsMap.put(opt.getName(), opt);
+        }
 	}
 
 	public void editOptions() {
@@ -227,7 +217,7 @@ public class OptionsManager implements OptionsService, OptionsChangeListener {
 
 	private OptionsDialog createOptionsDialog() {
 		OptionsDialog dialog = null;
-		if (optionsMap.size() == 0) {
+		if (optionsMap.isEmpty()) {
 			return null;
 		}
 

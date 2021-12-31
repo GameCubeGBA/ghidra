@@ -34,7 +34,7 @@ public interface ContextEvaluator {
 	 * 
 	 * @return true if evaluation should stop
 	 */
-	public boolean evaluateContextBefore(VarnodeContext context, Instruction instr);
+    boolean evaluateContextBefore(VarnodeContext context, Instruction instr);
 
 	/**
 	 * Evaluate the current instruction given the final context for the instruction

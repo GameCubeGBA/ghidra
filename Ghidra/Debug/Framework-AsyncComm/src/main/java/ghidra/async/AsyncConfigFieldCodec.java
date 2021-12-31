@@ -20,7 +20,7 @@ import ghidra.framework.plugintool.AutoConfigState.BooleanConfigFieldCodec;
 import ghidra.framework.plugintool.AutoConfigState.ConfigFieldCodec;
 
 public interface AsyncConfigFieldCodec {
-	static class GenericAsyncConfigFieldCodec<T>
+	class GenericAsyncConfigFieldCodec<T>
 			implements ConfigFieldCodec<AsyncReference<T, ?>> {
 		private ConfigFieldCodec<T> codec;
 
@@ -41,7 +41,7 @@ public interface AsyncConfigFieldCodec {
 		}
 	}
 
-	static class BooleanAsyncConfigFieldCodec
+	class BooleanAsyncConfigFieldCodec
 			extends GenericAsyncConfigFieldCodec<Boolean> {
 		public BooleanAsyncConfigFieldCodec() {
 			super(BooleanConfigFieldCodec.INSTANCE);

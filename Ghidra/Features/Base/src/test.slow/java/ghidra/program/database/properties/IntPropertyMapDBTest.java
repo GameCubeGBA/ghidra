@@ -55,8 +55,7 @@ public class IntPropertyMapDBTest extends AbstractGhidraHeadedIntegrationTest im
 	 * @param arg0
 	 */
 	public IntPropertyMapDBTest() {
-		super();
-	}
+    }
 
 	/*
 	 * @see TestCase#setUp()

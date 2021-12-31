@@ -20,10 +20,10 @@ import com.sun.jna.platform.win32.WinNT.HRESULT;
 import com.sun.jna.platform.win32.COM.Unknown;
 
 public class UnknownWithUtils extends Unknown {
-	public static interface VTableIndex {
+	public interface VTableIndex {
 		int getIndex();
 
-		public static <I extends Enum<I> & VTableIndex> int follow(Class<I> prev) {
+		static <I extends Enum<I> & VTableIndex> int follow(Class<I> prev) {
 			I[] all = prev.getEnumConstants();
 			int start = all[0].getIndex() - all[0].ordinal();
 			return all.length + start;

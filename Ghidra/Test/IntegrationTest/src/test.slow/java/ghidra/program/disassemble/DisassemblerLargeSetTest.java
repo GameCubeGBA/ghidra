@@ -77,7 +77,7 @@ public class DisassemblerLargeSetTest extends AbstractGhidraHeadlessIntegrationT
 		}
 
 		long endTime = System.currentTimeMillis();
-		System.out.println("Time: " + ((double) endTime - (double) startTime) / 1000.0);
+		System.out.println("Time: " + ((double) endTime - startTime) / 1000.0);
 	}
 
 	private Address addr(long offset) {

@@ -93,7 +93,7 @@ public class SplitPanel extends JPanel {
 						d2 = d4;
 					}
 					int prefWidth = d1.width + d2.width;
-					dividerPosition = (float) d1.width / (float) prefWidth;
+					dividerPosition = (float) d1.width / prefWidth;
 				}
 				else {
 					if (d3.height > 0 && d4.height > 0) {
@@ -101,7 +101,7 @@ public class SplitPanel extends JPanel {
 						d2 = d4;
 					}
 					int prefHeight = d1.height + d2.height;
-					dividerPosition = (float) d1.height / (float) prefHeight;
+					dividerPosition = (float) d1.height / prefHeight;
 				}
 			}
 
@@ -111,13 +111,13 @@ public class SplitPanel extends JPanel {
 				int dividerPixelPosition = Math.round(width * dividerPosition);
 
 				if (width <= minWidth) {
-					dividerPosition = (float) minSize1.width / (float) minWidth;
+					dividerPosition = (float) minSize1.width / minWidth;
 				}
 				else if (dividerPixelPosition <= minSize1.width) {
-					dividerPosition = (float) minSize1.width / (float) width;
+					dividerPosition = (float) minSize1.width / width;
 				}
 				else if (dividerPixelPosition >= width - minSize2.width) {
-					dividerPosition = (float) (width - minSize2.width) / (float) width;
+					dividerPosition = (float) (width - minSize2.width) / width;
 				}
 
 				dividerPixelPosition = Math.round(width * dividerPosition);
@@ -133,13 +133,13 @@ public class SplitPanel extends JPanel {
 				int dividerPixelPosition = Math.round(height * dividerPosition);
 
 				if (height <= minHeight) {
-					dividerPosition = (float) minSize1.height / (float) minHeight;
+					dividerPosition = (float) minSize1.height / minHeight;
 				}
 				else if (dividerPixelPosition <= minSize1.height) {
-					dividerPosition = (float) minSize1.height / (float) height;
+					dividerPosition = (float) minSize1.height / height;
 				}
 				else if (dividerPixelPosition >= height - minSize2.height) {
-					dividerPosition = (float) (height - minSize2.height) / (float) height;
+					dividerPosition = (float) (height - minSize2.height) / height;
 				}
 
 				dividerPixelPosition = Math.round(height * dividerPosition);
@@ -203,10 +203,10 @@ public class SplitPanel extends JPanel {
 				@Override
 				public void mouseDragged(MouseEvent e) {
 					if (isHorizontal) {
-						dividerPosition += (float) e.getX() / (float) SplitPanel.this.getWidth();
+						dividerPosition += (float) e.getX() / SplitPanel.this.getWidth();
 					}
 					else {
-						dividerPosition += (float) e.getY() / (float) SplitPanel.this.getHeight();
+						dividerPosition += (float) e.getY() / SplitPanel.this.getHeight();
 					}
 
 					SplitPanel.this.doLayout();

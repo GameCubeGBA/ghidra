@@ -366,14 +366,14 @@ public class TableData<ROW_OBJECT> implements Iterable<ROW_OBJECT> {
 	}
 
 	@Override
-	final public boolean equals(Object obj) {
+    public final boolean equals(Object obj) {
 		// Made final to ensure that nobody attempts to subclass this to check the contents 
 		// of 'data', as that could be expensive.
 		return super.equals(obj);
 	}
 
 	@Override
-	final public int hashCode() {
+    public final int hashCode() {
 		// Made final to match equals()
 		return super.hashCode();
 	}

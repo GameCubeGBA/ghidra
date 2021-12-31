@@ -47,11 +47,8 @@ public class ConstantValue extends PatternValue {
 			return false;
 		}
 		ConstantValue that = (ConstantValue) obj;
-		if (this.val != that.val) {
-			return false;
-		}
-		return true;
-	}
+        return this.val == that.val;
+    }
 
 	public ConstantValue() {
 		val = 0;

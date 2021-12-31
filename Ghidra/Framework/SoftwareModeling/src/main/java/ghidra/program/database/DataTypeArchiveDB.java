@@ -94,9 +94,9 @@ public class DataTypeArchiveDB extends DomainObjectAdapterDB
 
 	private static final String DEFAULT_POINTER_SIZE = "Default Pointer Size";
 
-	private final static Field[] COL_FIELDS = { StringField.INSTANCE };
-	private final static String[] COL_TYPES = { "Value" };
-	private final static Schema SCHEMA =
+	private static final Field[] COL_FIELDS = { StringField.INSTANCE };
+	private static final String[] COL_TYPES = { "Value" };
+	private static final Schema SCHEMA =
 		new Schema(0, StringField.INSTANCE, "Key", COL_FIELDS, COL_TYPES);
 
 	private ProjectDataTypeManager dataTypeManager;

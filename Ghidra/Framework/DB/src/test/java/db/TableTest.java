@@ -61,8 +61,7 @@ public class TableTest extends AbstractGenericTest {
 	private List<Integer> endKeys = new ArrayList<>();
 
 	public TableTest() {
-		super();
-	}
+    }
 
 	@Before
 	public void setUp() throws Exception {
@@ -261,9 +260,7 @@ public class TableTest extends AbstractGenericTest {
 	private String getRandomSizeString(int max) {
 		int size = (int) (Math.random() * max);
 		StringBuilder buf = new StringBuilder();
-		for (int i = 0; i < size; i++) {
-			buf.append(' ');
-		}
+        buf.append(" ".repeat(Math.max(0, size)));
 		return buf.toString();
 	}
 

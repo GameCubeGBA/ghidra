@@ -56,8 +56,7 @@ public class SizeAlignmentPanel extends JPanel {
 		private final int ALIGNMENT_COLUMN = 1;
 
 		SizeAlignmentTableModel() {
-			super();
-		}
+        }
 
 		@Override
 		public void addTableModelListener(TableModelListener l) {

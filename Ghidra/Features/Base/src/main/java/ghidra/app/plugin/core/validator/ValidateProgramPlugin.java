@@ -48,8 +48,8 @@ import ghidra.util.classfinder.ClassSearcher;
 )
 //@formatter:on
 public class ValidateProgramPlugin extends Plugin {
-	public final static String PLUGIN_NAME = "ValidateProgramPlugin";
-	public final static String ACTION_NAME = "Validate Program";
+	public static final String PLUGIN_NAME = "ValidateProgramPlugin";
+	public static final String ACTION_NAME = "Validate Program";
 
 	private DockingAction validateAction;
 

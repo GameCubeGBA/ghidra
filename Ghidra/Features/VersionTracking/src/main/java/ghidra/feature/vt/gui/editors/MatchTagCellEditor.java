@@ -55,27 +55,14 @@ public class MatchTagCellEditor extends AbstractCellEditor implements TableCellE
 		VTSession session = controller.getSession();
 		tag = match.getTag();
 		matchTagChoices = new MatchTagComboBox(session, matches, theTable, tag);
-		matchTagChoices.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				stopCellEditing();
-			}
-		});
+		matchTagChoices.addActionListener(e -> stopCellEditing());
 
-		matchTagChoices.addItemListener(new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				stopCellEditing();
-			}
-		});
+		matchTagChoices.addItemListener(e -> stopCellEditing());
 
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				matchTagChoices.showPopup();
-				matchTagChoices.requestFocus();
-			}
-		});
+		SwingUtilities.invokeLater(() -> {
+            matchTagChoices.showPopup();
+            matchTagChoices.requestFocus();
+        });
 
 		return matchTagChoices;
 	}

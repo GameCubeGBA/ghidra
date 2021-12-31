@@ -62,7 +62,7 @@ import ghidra.util.exception.DuplicateNameException;
  * </pre>
  */
 public class DebugCOFFSymbolAux implements StructConverter {
-    public final static byte IMAGE_SIZEOF_AUX_SYMBOL = 18;
+    public static final byte IMAGE_SIZEOF_AUX_SYMBOL = 18;
 
     private AuxSym sym;
     private AuxFile file;

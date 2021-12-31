@@ -30,7 +30,7 @@ import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.task.TaskMonitor;
 
 public class LoadConfigDataDirectory extends DataDirectory {
-    private final static String NAME = "IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG";
+    private static final String NAME = "IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG";
 
     private LoadConfigDirectory lcd;
 

@@ -145,11 +145,8 @@ public class DockingVisualVertex extends AbstractVisualVertex {
 
 	@Override
 	public boolean isGrabbable(Component c) {
-		if (c == textArea) {
-			return false;
-		}
-		return true;
-	}
+        return c != textArea;
+    }
 
 	@Override
 	public JComponent getComponent() {
@@ -208,10 +205,7 @@ public class DockingVisualVertex extends AbstractVisualVertex {
 			return false;
 		}
 		DockingVisualVertex other = (DockingVisualVertex) obj;
-		if (!Objects.equals(name, other.name)) {
-			return false;
-		}
-		return true;
-	}
+        return Objects.equals(name, other.name);
+    }
 
 }

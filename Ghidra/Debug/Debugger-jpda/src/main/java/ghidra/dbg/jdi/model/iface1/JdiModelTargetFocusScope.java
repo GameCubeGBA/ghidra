@@ -34,15 +34,15 @@ import ghidra.dbg.util.PathUtils;
 public interface JdiModelTargetFocusScope extends JdiModelTargetObject, TargetFocusScope {
 
 	@Override
-	public JdiModelSelectableObject getFocus();
+    JdiModelSelectableObject getFocus();
 
 	// NB: setFocus changes attributes - propagates up to client
-	public boolean setFocus(JdiModelSelectableObject sel);
+    boolean setFocus(JdiModelSelectableObject sel);
 
 	// NB: requestFocus request change in active object - propagates down to manager
 	//  (but, of course, may then cause change in state)
 	@Override
-	public default CompletableFuture<Void> requestFocus(TargetObject obj) {
+    default CompletableFuture<Void> requestFocus(TargetObject obj) {
 		getModel().assertMine(TargetObject.class, obj);
 		if (obj.equals(getFocus())) {
 			return CompletableFuture.completedFuture(null);

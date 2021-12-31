@@ -48,8 +48,7 @@ public class TagFilterTest extends VTBaseTestCase {
 	private VTControllerListener listener;
 
 	public TagFilterTest() {
-		super();
-	}
+    }
 
 	@Override
 	@Before
@@ -377,7 +376,7 @@ public class TagFilterTest extends VTBaseTestCase {
 	private VTMatch createMatch(VTSessionDB sessionDb) {
 		VTMatchInfo matchInfo = createRandomMatch(addr(), addr(), sessionDb);
 		List<VTMatchSet> matchSets = sessionDb.getMatchSets();
-		if (matchSets.size() == 0) {
+		if (matchSets.isEmpty()) {
 			sessionDb.createMatchSet(createProgramCorrelator(null, sessionDb.getSourceProgram(),
 				sessionDb.getDestinationProgram()));
 			matchSets = sessionDb.getMatchSets();
@@ -410,7 +409,7 @@ public class TagFilterTest extends VTBaseTestCase {
 
 		@Override
 		public int compareTo(VTMatchTag o) {
-			return getName().compareTo(o.getName());
+			return name.compareTo(o.getName());
 		}
 	}
 

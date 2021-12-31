@@ -172,7 +172,7 @@ public class BatchGroup {
 	 * @return boolean true if there are no applications in this group.
 	 */
 	public boolean isEmpty() {
-		return batchLoadConfigs.size() == 0;
+		return batchLoadConfigs.isEmpty();
 	}
 
 	/**

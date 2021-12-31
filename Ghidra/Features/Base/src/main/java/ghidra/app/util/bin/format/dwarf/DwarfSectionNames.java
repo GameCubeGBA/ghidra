@@ -20,8 +20,8 @@ import ghidra.app.util.opinion.*;
 import ghidra.program.model.listing.Program;
 
 public final class DwarfSectionNames {
-	private final static String MACHO_PREFIX = "__";
-	private final static String   ELF_PREFIX = ".";
+	private static final String MACHO_PREFIX = "__";
+	private static final String   ELF_PREFIX = ".";
 
 	private String prefix = "";
 

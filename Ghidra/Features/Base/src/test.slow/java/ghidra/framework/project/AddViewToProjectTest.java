@@ -32,10 +32,10 @@ import ghidra.test.ProjectTestUtils;
  */
 public class AddViewToProjectTest extends AbstractGhidraHeadlessIntegrationTest {
 
-	private final static String DIRECTORY_NAME = AbstractGenericTest.getTestDirectoryPath();
-	private final static String PROJECT_NAME1 = "TestAddViewToProject";
-	private final static String PROJECT_VIEW1 = "TestView1";
-	private final static String PROJECT_VIEW2 = "TestView2";
+	private static final String DIRECTORY_NAME = AbstractGenericTest.getTestDirectoryPath();
+	private static final String PROJECT_NAME1 = "TestAddViewToProject";
+	private static final String PROJECT_VIEW1 = "TestView1";
+	private static final String PROJECT_VIEW2 = "TestView2";
 
 	@Before
 	public void setUp() throws Exception {

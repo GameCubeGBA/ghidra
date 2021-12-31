@@ -79,9 +79,9 @@ public class KeyBindingsPanel extends JPanel {
 
 	private static final int STATUS_LABEL_HEIGHT = 60;
 
-	private final static int ACTION_NAME = 0;
-	private final static int KEY_BINDING = 1;
-	private final static int PLUGIN_NAME = 2;
+	private static final int ACTION_NAME = 0;
+	private static final int KEY_BINDING = 1;
+	private static final int PLUGIN_NAME = 2;
 
 	private static final int FONT_SIZE = 11;
 
@@ -127,13 +127,11 @@ public class KeyBindingsPanel extends JPanel {
 	}
 
 	public void apply() {
-		Iterator<String> iter = keyStrokesByFullName.keySet().iterator();
-		while (iter.hasNext()) {
-			String actionName = iter.next();
-			KeyStroke currentKeyStroke = keyStrokesByFullName.get(actionName);
-			KeyStroke originalKeyStroke = originalValues.get(actionName);
-			updateOptions(actionName, originalKeyStroke, currentKeyStroke);
-		}
+        for (String actionName : keyStrokesByFullName.keySet()) {
+            KeyStroke currentKeyStroke = keyStrokesByFullName.get(actionName);
+            KeyStroke originalKeyStroke = originalValues.get(actionName);
+            updateOptions(actionName, originalKeyStroke, currentKeyStroke);
+        }
 
 		changesMade(false);
 	}
@@ -157,15 +155,13 @@ public class KeyBindingsPanel extends JPanel {
 	}
 
 	public void cancel() {
-		Iterator<String> iter = originalValues.keySet().iterator();
-		while (iter.hasNext()) {
-			String actionName = iter.next();
-			KeyStroke originalKS = originalValues.get(actionName);
-			KeyStroke modifiedKS = keyStrokesByFullName.get(actionName);
-			if (modifiedKS != null && !modifiedKS.equals(originalKS)) {
-				keyStrokesByFullName.put(actionName, originalKS);
-			}
-		}
+        for (String actionName : originalValues.keySet()) {
+            KeyStroke originalKS = originalValues.get(actionName);
+            KeyStroke modifiedKS = keyStrokesByFullName.get(actionName);
+            if (modifiedKS != null && !modifiedKS.equals(originalKS)) {
+                keyStrokesByFullName.put(actionName, originalKS);
+            }
+        }
 		tableModel.fireTableDataChanged();
 	}
 
@@ -439,23 +435,21 @@ public class KeyBindingsPanel extends JPanel {
 	}
 
 	private void restoreDefaultKeybindings() {
-		Iterator<String> iter = keyStrokesByFullName.keySet().iterator();
-		while (iter.hasNext()) {
-			String actionName = iter.next();
-			List<DockingActionIf> actions = actionsByFullName.get(actionName);
-			if (actions.isEmpty()) {
-				throw new AssertException("No actions defined for " + actionName);
-			}
+        for (String actionName : keyStrokesByFullName.keySet()) {
+            List<DockingActionIf> actions = actionsByFullName.get(actionName);
+            if (actions.isEmpty()) {
+                throw new AssertException("No actions defined for " + actionName);
+            }
 
-			// pick one action, they are all conceptually the same
-			DockingActionIf action = actions.get(0);
-			KeyStroke currentKeyStroke = keyStrokesByFullName.get(actionName);
-			KeyBindingData defaultBinding = action.getDefaultKeyBindingData();
-			KeyStroke newKeyStroke =
-				(defaultBinding == null) ? null : defaultBinding.getKeyBinding();
+            // pick one action, they are all conceptually the same
+            DockingActionIf action = actions.get(0);
+            KeyStroke currentKeyStroke = keyStrokesByFullName.get(actionName);
+            KeyBindingData defaultBinding = action.getDefaultKeyBindingData();
+            KeyStroke newKeyStroke =
+                    (defaultBinding == null) ? null : defaultBinding.getKeyBinding();
 
-			updateOptions(actionName, currentKeyStroke, newKeyStroke);
-		}
+            updateOptions(actionName, currentKeyStroke, newKeyStroke);
+        }
 
 		// let the table know that changes may have been made
 		tableModel.fireTableDataChanged();
@@ -539,7 +533,7 @@ public class KeyBindingsPanel extends JPanel {
 		if (list == null) {
 			return;
 		}
-		if (list.size() > 0) {
+		if (!list.isEmpty()) {
 			StringBuilder sb = new StringBuilder();
 			sb.append("Actions mapped to key " + ksName + ":\n");
 			for (int i = 0; i < list.size(); i++) {
@@ -583,24 +577,22 @@ public class KeyBindingsPanel extends JPanel {
 		boolean changes = false;
 
 		// add each new key stroke mapping
-		Iterator<String> iterator = keyBindingsMap.keySet().iterator();
-		while (iterator.hasNext()) {
+        for (String name : keyBindingsMap.keySet()) {
 
-			String name = iterator.next();
-			KeyStroke keyStroke = keyBindingsMap.get(name);
-			keyStroke = KeyBindingUtils.validateKeyStroke(keyStroke);
+            KeyStroke keyStroke = keyBindingsMap.get(name);
+            keyStroke = KeyBindingUtils.validateKeyStroke(keyStroke);
 
-			// prevent non-existing keybindings from being added to Ghidra (this can happen
-			// when actions exist in the imported bindings, but have been removed from
-			// Ghidra
-			if (!keyStrokesByFullName.containsKey(name)) {
-				continue;
-			}
+            // prevent non-existing keybindings from being added to Ghidra (this can happen
+            // when actions exist in the imported bindings, but have been removed from
+            // Ghidra
+            if (!keyStrokesByFullName.containsKey(name)) {
+                continue;
+            }
 
-			// check to see if the key stroke results in a change and
-			// record that value
-			changes |= processKeyStroke(name, keyStroke);
-		}
+            // check to see if the key stroke results in a change and
+            // record that value
+            changes |= processKeyStroke(name, keyStroke);
+        }
 
 		if (changes) {
 			changesMade(true);

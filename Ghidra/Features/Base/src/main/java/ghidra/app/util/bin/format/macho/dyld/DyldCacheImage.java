@@ -25,12 +25,12 @@ public interface DyldCacheImage {
 	 * 
 	 * @return The address of the start of the image
 	 */
-	public long getAddress();
+    long getAddress();
 
 	/**
 	 * Gets the path of the image
 	 * 
 	 * @return The path of the image
 	 */
-	public String getPath();
+    String getPath();
 }

@@ -26,8 +26,7 @@ public class ObjectKeyIndexerTest extends AbstractGenericTest {
 	 * @param arg0
 	 */
 	public ObjectKeyIndexerTest() {
-		super();
-	}
+    }
 
 @Test
     public void testObjectKeyIndexer() {

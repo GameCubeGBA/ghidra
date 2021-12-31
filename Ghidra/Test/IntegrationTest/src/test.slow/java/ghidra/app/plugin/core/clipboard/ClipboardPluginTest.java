@@ -1194,10 +1194,7 @@ public class ClipboardPluginTest extends AbstractGhidraHeadedIntegrationTest {
 
 			@Override
 			public boolean isDataFlavorSupported(DataFlavor flavor) {
-				if (flavor.equals(DataFlavor.stringFlavor)) {
-					return true;
-				}
-				return false;
+				return flavor.equals(DataFlavor.stringFlavor);
 			}
 
 			@Override
@@ -1279,10 +1276,7 @@ public class ClipboardPluginTest extends AbstractGhidraHeadedIntegrationTest {
 
 			@Override
 			public boolean isDataFlavorSupported(DataFlavor flavor) {
-				if (flavor.equals(DataFlavor.stringFlavor)) {
-					return true;
-				}
-				return false;
+				return flavor.equals(DataFlavor.stringFlavor);
 			}
 
 			@Override
@@ -1581,17 +1575,17 @@ public class ClipboardPluginTest extends AbstractGhidraHeadedIntegrationTest {
 //==================================================================================================
 
 	interface ComponentProviderWrapper {
-		public Point getStartMouseDragLocation();
+		Point getStartMouseDragLocation();
 
-		public ActionContext getContext();
+		ActionContext getContext();
 
-		public Point getEndMouseDragLocation();
+		Point getEndMouseDragLocation();
 
-		public void clearSelection();
+		void clearSelection();
 
-		public void verifySelection();
+		void verifySelection();
 
-		public ComponentProvider getComponentProvider();
+		ComponentProvider getComponentProvider();
 	}
 
 	class ByteViewerWrapper implements ComponentProviderWrapper {

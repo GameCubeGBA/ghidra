@@ -83,7 +83,7 @@ public interface GColumnRenderer<T> extends TableCellRenderer {
 	 * An enum that signals how the advanced column filtering should work.   (This does not affect
 	 * the normal table filtering that happens via the filter text field).
 	 */
-	public enum ColumnConstraintFilterMode {
+    enum ColumnConstraintFilterMode {
 		//@formatter:off
 		
 		/** Use only {@link GColumnRenderer#getFilterString(Object, Settings)} value; no constraints */

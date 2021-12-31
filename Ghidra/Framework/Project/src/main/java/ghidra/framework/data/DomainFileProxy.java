@@ -116,14 +116,14 @@ public class DomainFileProxy implements DomainFile {
 	@Override
 	public String getPathname() {
 		if (parentPath == null || DomainFolder.SEPARATOR.equals(parentPath)) {
-			return DomainFolder.SEPARATOR + getName();
+			return DomainFolder.SEPARATOR + name;
 		}
-		return parentPath + DomainFolder.SEPARATOR + getName();
+		return parentPath + DomainFolder.SEPARATOR + name;
 	}
 
 	@Override
 	public int compareTo(DomainFile df) {
-		return getName().compareToIgnoreCase(df.getName());
+		return name.compareToIgnoreCase(df.getName());
 	}
 
 	@Override
@@ -150,7 +150,7 @@ public class DomainFileProxy implements DomainFile {
 
 	@Override
 	public String getContentType() {
-		DomainObjectAdapter dobj = getDomainObject();
+		DomainObjectAdapter dobj = domainObj;
 		if (dobj != null) {
 			try {
 				ContentHandler ch = DomainObjectAdapter.getContentHandler(dobj);
@@ -165,7 +165,7 @@ public class DomainFileProxy implements DomainFile {
 
 	@Override
 	public Class<? extends DomainObject> getDomainObjectClass() {
-		DomainObjectAdapter dobj = getDomainObject();
+		DomainObjectAdapter dobj = domainObj;
 		return dobj != null ? dobj.getClass() : null;
 	}
 
@@ -210,13 +210,13 @@ public class DomainFileProxy implements DomainFile {
 	}
 
 	public boolean isUsedExclusivelyBy(Object consumer) {
-		DomainObjectAdapter dobj = getDomainObject();
+		DomainObjectAdapter dobj = domainObj;
 		return dobj != null ? dobj.isUsedExclusivelyBy(consumer) : false;
 	}
 
 	@Override
 	public ArrayList<?> getConsumers() {
-		DomainObjectAdapter dobj = getDomainObject();
+		DomainObjectAdapter dobj = domainObj;
 		if (dobj != null) {
 			return dobj.getConsumerList();
 		}
@@ -232,7 +232,7 @@ public class DomainFileProxy implements DomainFile {
 	}
 
 	void release(Object consumer) {
-		DomainObjectAdapter dobj = getDomainObject();
+		DomainObjectAdapter dobj = domainObj;
 		if (dobj != null) {
 			try {
 				dobj.release(consumer);
@@ -253,7 +253,7 @@ public class DomainFileProxy implements DomainFile {
 	}
 
 	public boolean isUsedBy(Object consumer) {
-		DomainObjectAdapter dobj = getDomainObject();
+		DomainObjectAdapter dobj = domainObj;
 		if (dobj != null) {
 			return dobj.isUsedBy(consumer);
 		}
@@ -278,7 +278,7 @@ public class DomainFileProxy implements DomainFile {
 
 	@Override
 	public boolean isBusy() {
-		DomainObjectAdapter dobj = getDomainObject();
+		DomainObjectAdapter dobj = domainObj;
 		return dobj != null && !dobj.canLock();
 	}
 
@@ -316,12 +316,12 @@ public class DomainFileProxy implements DomainFile {
 	@Override
 	public DomainFile copyTo(DomainFolder newParent, TaskMonitor monitor)
 			throws IOException, CancelledException {
-		DomainObjectAdapter dobj = getDomainObject();
+		DomainObjectAdapter dobj = domainObj;
 		if (dobj == null) {
 			throw new ClosedException();
 		}
 		try {
-			return newParent.createFile(getName(), dobj, monitor);
+			return newParent.createFile(name, dobj, monitor);
 		}
 		catch (InvalidNameException e) {
 			throw new AssertException("Unexpected error", e);
@@ -406,7 +406,7 @@ public class DomainFileProxy implements DomainFile {
 
 	@Override
 	public DomainObject getOpenedDomainObject(Object consumer) {
-		DomainObjectAdapter dobj = getDomainObject();
+		DomainObjectAdapter dobj = domainObj;
 		if (dobj != null) {
 			dobj.addConsumer(consumer);
 		}
@@ -463,7 +463,7 @@ public class DomainFileProxy implements DomainFile {
 
 	@Override
 	public boolean isChanged() {
-		DomainObjectAdapter dobj = getDomainObject();
+		DomainObjectAdapter dobj = domainObj;
 		if (dobj != null) {
 			return dobj.isChanged();
 		}
@@ -472,7 +472,7 @@ public class DomainFileProxy implements DomainFile {
 
 	@Override
 	public boolean isOpen() {
-		DomainObjectAdapter dobj = getDomainObject();
+		DomainObjectAdapter dobj = domainObj;
 		return dobj != null && !dobj.isClosed();
 	}
 
@@ -495,7 +495,7 @@ public class DomainFileProxy implements DomainFile {
 
 	@Override
 	public Map<String, String> getMetadata() {
-		DomainObjectAdapter dobj = getDomainObject();
+		DomainObjectAdapter dobj = domainObj;
 		if (dobj != null) {
 			dobj.getMetadata();
 		}

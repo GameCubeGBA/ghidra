@@ -34,6 +34,6 @@ public interface CieSource {
 	 * @throws MemoryAccessException if memory for the CIE couldn't be read
 	 * @throws ExceptionHandlerFrameException if a problem was encountered
 	 */
-	public Cie getCie(Address currAddress)
+    Cie getCie(Address currAddress)
 			throws MemoryAccessException, ExceptionHandlerFrameException;
 }

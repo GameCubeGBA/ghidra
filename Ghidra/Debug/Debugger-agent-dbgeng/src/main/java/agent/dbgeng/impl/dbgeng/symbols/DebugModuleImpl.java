@@ -49,11 +49,8 @@ public class DebugModuleImpl implements DebugModule {
 		if (this.index != that.index) {
 			return false;
 		}
-		if (this.base != that.base) {
-			return false;
-		}
-		return true;
-	}
+        return this.base == that.base;
+    }
 
 	@Override
 	public String getName(DebugModuleName which) {

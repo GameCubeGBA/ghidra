@@ -23,7 +23,7 @@ import agent.dbgmodel.jna.dbgmodel.IUnknownEx;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IDebugHostSymbolEnumerator extends IUnknownEx {
-	final IID IID_IDEBUG_HOST_SYMBOL_ENUMERATOR = new IID("28D96C86-10A3-4976-B14E-EAEF4790AA1F");
+	IID IID_IDEBUG_HOST_SYMBOL_ENUMERATOR = new IID("28D96C86-10A3-4976-B14E-EAEF4790AA1F");
 
 	enum VTIndices implements VTableIndex {
 		RESET, //

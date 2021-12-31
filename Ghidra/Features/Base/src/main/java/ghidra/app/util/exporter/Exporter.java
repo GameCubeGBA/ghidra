@@ -35,8 +35,8 @@ import ghidra.util.task.TaskMonitor;
 /**
  * The interface that all exporters must implement.
  */
-abstract public class Exporter implements ExtensionPoint {
-	protected final static List<Option> EMPTY_OPTIONS = new ArrayList<>();
+public abstract class Exporter implements ExtensionPoint {
+	protected static final List<Option> EMPTY_OPTIONS = new ArrayList<>();
 
 	protected MessageLog log = new MessageLog();
 	protected ServiceProvider provider;
@@ -61,7 +61,7 @@ abstract public class Exporter implements ExtensionPoint {
 	 * Returns the display name of this exporter.
 	 * @return the display name of this exporter
 	 */
-	final public String getName() {
+    public final String getName() {
 		return name;
 	}
 
@@ -70,7 +70,7 @@ abstract public class Exporter implements ExtensionPoint {
 	 * For example, .html for .xml.
 	 * @return the default extension for this exporter
 	 */
-	final public String getDefaultFileExtension() {
+    public final String getDefaultFileExtension() {
 		return extension;
 	}
 
@@ -79,7 +79,7 @@ abstract public class Exporter implements ExtensionPoint {
 	 * It should return null only if no help documentation exists.
 	 * @return the help location for this exporter
 	 */
-	final public HelpLocation getHelpLocation() {
+    public final HelpLocation getHelpLocation() {
 		return help;
 	}
 
@@ -88,7 +88,7 @@ abstract public class Exporter implements ExtensionPoint {
 	 * The message log is used to log warnings and other non-critical messages.
 	 * @return the message log
 	 */
-	final public MessageLog getMessageLog() {
+    public final MessageLog getMessageLog() {
 		return log;
 	}
 
@@ -96,7 +96,7 @@ abstract public class Exporter implements ExtensionPoint {
 	 * Sets the exporter service provider.
 	 * @param provider the exporter service provider
 	 */
-	final public void setExporterServiceProvider(ServiceProvider provider) {
+    public final void setExporterServiceProvider(ServiceProvider provider) {
 		this.provider = provider;
 	}
 
@@ -127,7 +127,7 @@ abstract public class Exporter implements ExtensionPoint {
 	 * @param domainObjectService a service for retrieving the applicable domainObject.
 	 * @return the available options for this exporter
 	 */
-	abstract public List<Option> getOptions(DomainObjectService domainObjectService);
+    public abstract List<Option> getOptions(DomainObjectService domainObjectService);
 
 	/**
 	 * Sets the options. This method is not for defining the options, but
@@ -136,7 +136,7 @@ abstract public class Exporter implements ExtensionPoint {
 	 * @param options the option values for this exporter
 	 * @throws OptionException if invalid options are passed in
 	 */
-	abstract public void setOptions(List<Option> options) throws OptionException;
+    public abstract void setOptions(List<Option> options) throws OptionException;
 
 	/**
 	 * Actually does the work of exporting the program.
@@ -153,12 +153,12 @@ abstract public class Exporter implements ExtensionPoint {
 	 * @throws ExporterException
 	 * @throws IOException
 	 */
-	abstract public boolean export(File file, DomainObject domainObj, AddressSetView addrSet,
+    public abstract boolean export(File file, DomainObject domainObj, AddressSetView addrSet,
 			TaskMonitor monitor) throws ExporterException, IOException;
 
 	@Override
-	final public String toString() {
-		return getName();
+    public final String toString() {
+		return name;
 	}
 
 }

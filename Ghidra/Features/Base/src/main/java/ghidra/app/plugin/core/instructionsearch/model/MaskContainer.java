@@ -62,9 +62,9 @@ public class MaskContainer {
 	public String getMaskAsBinaryString() {
 		StringBuilder str = new StringBuilder();
 
-		for (int i = 0; i < mask.length; i++) {
-			str.append(InstructionSearchUtils.toBinaryString(mask[i]));
-		}
+        for (byte b : mask) {
+            str.append(InstructionSearchUtils.toBinaryString(b));
+        }
 
 		return str.toString();
 	}
@@ -90,9 +90,9 @@ public class MaskContainer {
 	public String getValueAsBinaryString() {
 		StringBuilder str = new StringBuilder();
 
-		for (int i = 0; i < value.length; i++) {
-			str.append(InstructionSearchUtils.toBinaryString(value[i]));
-		}
+        for (byte b : value) {
+            str.append(InstructionSearchUtils.toBinaryString(b));
+        }
 
 		return str.toString();
 	}
@@ -116,12 +116,12 @@ public class MaskContainer {
 		StringBuilder valueString = new StringBuilder();
 		StringBuilder maskString = new StringBuilder();
 
-		for (int i = 0; i < value.length; i++) {
-			valueString.append(InstructionSearchUtils.toBinaryString(value[i]));
-		}
-		for (int i = 0; i < mask.length; i++) {
-			maskString.append(InstructionSearchUtils.toBinaryString(mask[i]));
-		}
+        for (byte item : value) {
+            valueString.append(InstructionSearchUtils.toBinaryString(item));
+        }
+        for (byte b : mask) {
+            maskString.append(InstructionSearchUtils.toBinaryString(b));
+        }
 
 		String combinedString = "";
 		try {

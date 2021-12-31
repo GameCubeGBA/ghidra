@@ -24,7 +24,7 @@ import com.sun.jna.platform.win32.WinNT.HRESULT;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IDebugHostSymbol1 extends IDebugHostBaseClass {
-	final IID IID_IDEBUG_HOST_SYMBOL = new IID("0F819103-87DE-4e96-8277-E05CD441FB22");
+	IID IID_IDEBUG_HOST_SYMBOL = new IID("0F819103-87DE-4e96-8277-E05CD441FB22");
 
 	enum VTIndices1 implements VTableIndex {
 		COMPARE_AGAINST, //

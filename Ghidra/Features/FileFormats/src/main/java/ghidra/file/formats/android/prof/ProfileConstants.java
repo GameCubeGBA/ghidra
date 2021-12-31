@@ -32,28 +32,28 @@ import ghidra.app.util.bin.ByteProvider;
  */
 public final class ProfileConstants {
 
-	public final static byte[] kProfileMagic = { 'p', 'r', 'o', '\0' };
+	public static final byte[] kProfileMagic = { 'p', 'r', 'o', '\0' };
 
-	public final static int kProfileMagicLength = kProfileMagic.length;
+	public static final int kProfileMagicLength = kProfileMagic.length;
 
-	public final static byte[] kProfileVersion_008 = { '0', '0', '8', '\0' };
-	public final static byte[] kProfileVersion_009 = { '0', '0', '9', '\0' };
+	public static final byte[] kProfileVersion_008 = { '0', '0', '8', '\0' };
+	public static final byte[] kProfileVersion_009 = { '0', '0', '9', '\0' };
 	/**
 	 * Android 10
 	 * Android 11
 	 */
-	public final static byte[] kProfileVersion_010 = { '0', '1', '0', '\0' };
+    public static final byte[] kProfileVersion_010 = { '0', '1', '0', '\0' };
 
-	public final static byte[] kProfileVersionForBootImage_012 = { '0', '1', '2', '\0' };
+	public static final byte[] kProfileVersionForBootImage_012 = { '0', '1', '2', '\0' };
 
-	public final static String kDexMetadataProfileEntry = "primary.prof";
+	public static final String kDexMetadataProfileEntry = "primary.prof";
 
-	public final static byte[] kProfileVersionWithCounters = { '5', '0', '0', '\0' };
+	public static final byte[] kProfileVersionWithCounters = { '5', '0', '0', '\0' };
 
 	/**
 	 * Converts the byte array into String and trims it.
 	 */
-	public final static String toString(byte[] bytes) {
+    public static final String toString(byte[] bytes) {
 		return new String(bytes).trim();
 	}
 

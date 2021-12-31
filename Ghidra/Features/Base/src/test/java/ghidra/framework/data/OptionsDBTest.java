@@ -48,8 +48,7 @@ public class OptionsDBTest extends AbstractGenericTest {
 	}
 
 	public OptionsDBTest() {
-		super();
-	}
+    }
 
 	@Before
 	public void setUp() throws Exception {

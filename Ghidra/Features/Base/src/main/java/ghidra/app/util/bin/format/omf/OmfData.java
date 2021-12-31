@@ -27,12 +27,12 @@ public interface OmfData extends Comparable<OmfData> {
 	/**
 	 * @return the starting offset, within the loaded image, of this data
 	 */
-	public long getDataOffset();
+    long getDataOffset();
 
 	/**
 	 * @return the length of this data in bytes
 	 */
-	public int getLength();
+    int getLength();
 
 	/**
 	 * Create a byte array holding the data represented by this object. The length
@@ -41,10 +41,10 @@ public interface OmfData extends Comparable<OmfData> {
 	 * @return allocated and filled byte array
 	 * @throws IOException for problems accessing data through the reader
 	 */
-	public byte[] getByteArray(BinaryReader reader) throws IOException;
+    byte[] getByteArray(BinaryReader reader) throws IOException;
 
 	/**
 	 * @return true if this is a block entirely of zeroes
 	 */
-	public boolean isAllZeroes();
+    boolean isAllZeroes();
 }

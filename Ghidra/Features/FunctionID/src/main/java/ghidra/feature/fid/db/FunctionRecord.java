@@ -27,11 +27,11 @@ import ghidra.util.NumericUtilities;
  * Represents a function record in the FID database.
  */
 public class FunctionRecord extends DatabaseObject implements FidHashQuad {
-	public final static int HAS_TERMINATOR_FLAG = 1;
-	public final static int AUTO_PASS_FLAG = 2;
-	public final static int AUTO_FAIL_FLAG = 4;
-	public final static int FORCE_SPECIFIC_FLAG = 8;
-	public final static int FORCE_RELATION_FLAG = 16;
+	public static final int HAS_TERMINATOR_FLAG = 1;
+	public static final int AUTO_PASS_FLAG = 2;
+	public static final int AUTO_FAIL_FLAG = 4;
+	public static final int FORCE_SPECIFIC_FLAG = 8;
+	public static final int FORCE_RELATION_FLAG = 16;
 
 	/**
 	 * All values are stored in the record instead of memoized.
@@ -218,11 +218,8 @@ public class FunctionRecord extends DatabaseObject implements FidHashQuad {
 			return false;
 		}
 		FunctionRecord other = (FunctionRecord) obj;
-		if (getID() != other.getID()) {
-			return false;
-		}
-		return true;
-	}
+        return getID() == other.getID();
+    }
 
 	/**
 	 * Returns the library id for this function.

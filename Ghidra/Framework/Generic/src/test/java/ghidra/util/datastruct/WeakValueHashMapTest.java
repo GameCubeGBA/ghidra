@@ -24,8 +24,7 @@ import generic.test.AbstractGenericTest;
 public class WeakValueHashMapTest extends AbstractGenericTest {
 
 	public WeakValueHashMapTest() {
-		super();
-	}
+    }
 
 	@Test
 	public void testMap1() throws InterruptedException {
@@ -44,7 +43,7 @@ public class WeakValueHashMapTest extends AbstractGenericTest {
 			System.gc();
 			Thread.sleep(10);
 			cache.get(0);
-			if (cache.size() == 0) {
+			if (cache.isEmpty()) {
 				break;
 			}
 		}

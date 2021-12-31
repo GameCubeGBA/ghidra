@@ -12,11 +12,11 @@
 package SWIG;
 
 public final class ScriptLanguage {
-  public final static ScriptLanguage eScriptLanguageNone = new ScriptLanguage("eScriptLanguageNone", lldbJNI.eScriptLanguageNone_get());
-  public final static ScriptLanguage eScriptLanguagePython = new ScriptLanguage("eScriptLanguagePython");
-  public final static ScriptLanguage eScriptLanguageLua = new ScriptLanguage("eScriptLanguageLua");
-  public final static ScriptLanguage eScriptLanguageUnknown = new ScriptLanguage("eScriptLanguageUnknown");
-  public final static ScriptLanguage eScriptLanguageDefault = new ScriptLanguage("eScriptLanguageDefault", lldbJNI.eScriptLanguageDefault_get());
+  public static final ScriptLanguage eScriptLanguageNone = new ScriptLanguage("eScriptLanguageNone", lldbJNI.eScriptLanguageNone_get());
+  public static final ScriptLanguage eScriptLanguagePython = new ScriptLanguage("eScriptLanguagePython");
+  public static final ScriptLanguage eScriptLanguageLua = new ScriptLanguage("eScriptLanguageLua");
+  public static final ScriptLanguage eScriptLanguageUnknown = new ScriptLanguage("eScriptLanguageUnknown");
+  public static final ScriptLanguage eScriptLanguageDefault = new ScriptLanguage("eScriptLanguageDefault", lldbJNI.eScriptLanguageDefault_get());
 
   public final int swigValue() {
     return swigValue;
@@ -29,9 +29,9 @@ public final class ScriptLanguage {
   public static ScriptLanguage swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-    for (int i = 0; i < swigValues.length; i++)
-      if (swigValues[i].swigValue == swigValue)
-        return swigValues[i];
+      for (ScriptLanguage value : swigValues)
+          if (value.swigValue == swigValue)
+              return value;
     throw new IllegalArgumentException("No enum " + ScriptLanguage.class + " with value " + swigValue);
   }
 

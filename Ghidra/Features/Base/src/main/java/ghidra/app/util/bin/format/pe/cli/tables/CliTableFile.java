@@ -33,8 +33,7 @@ public class CliTableFile extends CliAbstractTable {
 		public int hashIndex;
 		
 		public CliFileRow(int flags, int nameIndex, int hashIndex) {
-			super();
-			this.flags = flags;
+            this.flags = flags;
 			this.nameIndex = nameIndex;
 			this.hashIndex = hashIndex;
 		}

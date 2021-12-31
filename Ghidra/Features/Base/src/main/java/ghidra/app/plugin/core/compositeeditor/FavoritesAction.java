@@ -26,7 +26,7 @@ import ghidra.util.exception.UsrException;
  */
 public class FavoritesAction extends CompositeEditorTableAction {
 
-	private final static String GROUP_NAME = DATA_ACTION_GROUP;
+	private static final String GROUP_NAME = DATA_ACTION_GROUP;
 	private DataType dataType;
 
 	/**

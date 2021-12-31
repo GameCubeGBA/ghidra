@@ -22,7 +22,7 @@ public class UnsignedInteger3DataType extends AbstractIntegerDataType {
 	private static final long serialVersionUID = 1L;
 
 	/** A statically defined UnsignedInteger3DataType instance.*/
-	public final static UnsignedInteger3DataType dataType = new UnsignedInteger3DataType();
+    public static final UnsignedInteger3DataType dataType = new UnsignedInteger3DataType();
 
 	static {
 		ClassTranslator.put("ghidra.program.model.data.ThreeByteDataType",

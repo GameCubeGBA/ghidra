@@ -39,8 +39,7 @@ import ghidra.util.table.GhidraProgramTableModel;
 public class NavigationScreenShots extends GhidraScreenShotGenerator {
 
 	public NavigationScreenShots() {
-		super();
-	}
+    }
 
 	@Test
 	public void testGoToDialog() {

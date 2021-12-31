@@ -30,15 +30,15 @@ public class EntryTableBundle {
     /**
      * Marker denoting an unused entry table bundle.
      */
-    public final static byte UNUSED = 0x00;
+    public static final byte UNUSED = 0x00;
     /**
      * Segment is moveable.
      */
-    public final static byte MOVEABLE = (byte) 0xff;
+    public static final byte MOVEABLE = (byte) 0xff;
     /**
      * Refers to a constant defined in module.
      */
-    public final static byte CONSTANT = (byte) 0xfe;
+    public static final byte CONSTANT = (byte) 0xfe;
 
     private byte count;
     private byte type;

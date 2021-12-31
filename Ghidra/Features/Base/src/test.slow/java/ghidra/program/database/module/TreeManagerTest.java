@@ -50,8 +50,7 @@ public class TreeManagerTest extends AbstractGhidraHeadedIntegrationTest {
 	 * @param arg0
 	 */
 	public TreeManagerTest() {
-		super();
-	}
+    }
 
 	/*
 	 * @see TestCase#setUp()

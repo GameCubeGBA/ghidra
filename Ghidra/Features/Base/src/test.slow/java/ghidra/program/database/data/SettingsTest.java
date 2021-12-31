@@ -49,8 +49,7 @@ public class SettingsTest extends AbstractGhidraHeadedIntegrationTest {
 	private int transactionID;
 
 	public SettingsTest() {
-		super();
-	}
+    }
 
 	@Before
 	public void setUp() throws Exception {

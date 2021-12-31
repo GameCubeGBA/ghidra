@@ -161,7 +161,7 @@ public interface ElfLoadHelper {
 	 * such as those contained with the dynamic table. (Applies to default address space only)
 	 * @return image base adjustment value
 	 */
-	public long getImageBaseWordAdjustmentOffset();
+    long getImageBaseWordAdjustmentOffset();
 
 	/**
 	 * Returns the appropriate .got (Global Offset Table) section address using the
@@ -170,7 +170,7 @@ public interface ElfLoadHelper {
 	 * will be used, otherwise null will be returned.
 	 * @return the .got section address offset
 	 */
-	public Long getGOTValue();
+    Long getGOTValue();
 
 	/**
 	 * <p>Get a free aligned address range within the program's memory block structure to facilitate 
@@ -187,7 +187,7 @@ public interface ElfLoadHelper {
 	 * @param purpose brief descriptive purpose of range.
 	 * @return address range or null if no unallocated range found
 	 */
-	public AddressRange allocateLinkageBlock(int alignment, int size, String purpose);
+    AddressRange allocateLinkageBlock(int alignment, int size, String purpose);
 
 	/**
 	 * <p>Get the original memory value at the specified address if a relocation was applied at the
@@ -200,7 +200,7 @@ public interface ElfLoadHelper {
 	 * @return original bytes value
 	 * @throws MemoryAccessException if memory read fails
 	 */
-	public long getOriginalValue(Address addr, boolean signExtend)
+    long getOriginalValue(Address addr, boolean signExtend)
 			throws MemoryAccessException;
 
 }

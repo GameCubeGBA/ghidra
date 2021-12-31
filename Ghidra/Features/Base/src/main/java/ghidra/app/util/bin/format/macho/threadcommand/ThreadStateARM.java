@@ -29,11 +29,11 @@ import ghidra.util.exception.DuplicateNameException;
  * @see <a href="https://opensource.apple.com/source/xnu/xnu-4570.71.2/osfmk/mach/arm/_structs.h.auto.html">mach/arm/_structs.h</a> 
  */
 public class ThreadStateARM extends ThreadState {
-	public final static int ARM_THREAD_STATE = 1;
-	public final static int ARM_VFP_STATE = 2;
-	public final static int ARM_EXCEPTION_STATE = 3;
-	public final static int ARM_DEBUG_STATE = 4;
-	public final static int THREAD_STATE_NONE = 5;
+	public static final int ARM_THREAD_STATE = 1;
+	public static final int ARM_VFP_STATE = 2;
+	public static final int ARM_EXCEPTION_STATE = 3;
+	public static final int ARM_DEBUG_STATE = 4;
+	public static final int THREAD_STATE_NONE = 5;
 
 	public int r0;
 	public int r1;

@@ -28,7 +28,7 @@ import java.util.List;
 
 public class PcodeFieldMouseHandler implements FieldMouseHandlerExtension {
 
-	private final static Class<?>[] SUPPORTED_CLASSES = new Class[] { PcodeFieldLocation.class };
+	private static final Class<?>[] SUPPORTED_CLASSES = new Class[] { PcodeFieldLocation.class };
 
 	@Override
 	public boolean fieldElementClicked(Object clickedObject, Navigatable sourceNavigatable,

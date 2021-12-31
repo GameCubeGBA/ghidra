@@ -91,14 +91,11 @@ public abstract class SymbolType {
 				boolean isExternalSymbol) {
 			// Uses NO_ADDRESS - External address not used
 			boolean isExternalParent = parent.isExternal();
-			if ((isExternalSymbol != isExternalParent) || (parent.getID() != Namespace.GLOBAL_NAMESPACE_ID &&
-				program != parent.getSymbol().getProgram())) {
-				return false;
-			}
+            return (isExternalSymbol == isExternalParent) && (parent.getID() == Namespace.GLOBAL_NAMESPACE_ID ||
+                    program == parent.getSymbol().getProgram());
 			// NAMESPACE can not be contained within a function or a class
 			//return !(parent instanceof Function) && !(parent instanceof GhidraClass);
-			return true;
-		}
+        }
 
 		@Override
 		public boolean isValidAddress(Program program, Address symbolAddress) {
@@ -362,10 +359,7 @@ public abstract class SymbolType {
 		if (!Objects.equals(name, other.name)) {
 			return false;
 		}
-		if (value != other.value) {
-			return false;
-		}
-		return true;
-	}
+        return value == other.value;
+    }
 
 }

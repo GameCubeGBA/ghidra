@@ -24,7 +24,7 @@ import java.io.Serializable;
 
 
 public class IntObjectHashtable<T> implements Serializable {
-    private final static long serialVersionUID = 1;
+    private static final long serialVersionUID = 1;
 
     private IntKeyIndexer indexer;    // allocates and manages index values for keys.
     private T[] values;               // array for holding the values.

@@ -63,7 +63,7 @@ public class ReportPercentDisassembled extends GhidraScript {
 		// dump the info
 		int total = instCount + dataCount;
 		if (numPossibleDis != 0) {
-			float coverage = (float) total / (float) numPossibleDis;
+			float coverage = (float) total / numPossibleDis;
 //	    	Msg.info(this,"execSetLen = " + numPossibleDis);
 //	    	Msg.info(this,"MyExecSetLen = " + myExecSetLen);
 //	    	Msg.info(this,"NumInsts = " + instCount);

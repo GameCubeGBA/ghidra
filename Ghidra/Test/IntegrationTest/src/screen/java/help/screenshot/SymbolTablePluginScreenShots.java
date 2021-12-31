@@ -34,8 +34,7 @@ import ghidra.app.plugin.core.symtable.SymbolTablePlugin;
 public class SymbolTablePluginScreenShots extends GhidraScreenShotGenerator {
 
 	public SymbolTablePluginScreenShots() {
-		super();
-	}
+    }
 
 	@Test
 	public void testCaptureRefs_To() {

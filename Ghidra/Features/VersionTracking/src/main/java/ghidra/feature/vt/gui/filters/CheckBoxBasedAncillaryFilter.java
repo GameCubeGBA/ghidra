@@ -245,12 +245,8 @@ public abstract class CheckBoxBasedAncillaryFilter<T> extends AncillaryFilter<T>
 		// consists of: 'cat', 'dog', and 'mouse', since our items will be in the results of 
 		// that filter.
 		//
-		if (otherNames.containsAll(names)) {
-			return true;
-		}
-
-		return false;
-	}
+        return otherNames.containsAll(names);
+    }
 
 	@Override
 	public String toString() {

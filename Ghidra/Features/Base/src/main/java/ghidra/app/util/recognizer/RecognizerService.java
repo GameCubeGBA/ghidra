@@ -21,11 +21,7 @@ import ghidra.util.classfinder.ClassSearcher;
 import java.util.*;
 
 public class RecognizerService {
-	private static final Comparator<Recognizer> DESCENDING = new Comparator<Recognizer>() {
-		public int compare(Recognizer o1, Recognizer o2) {
-			return o2.getPriority() - o1.getPriority();
-		}
-	};
+	private static final Comparator<Recognizer> DESCENDING = (o1, o2) -> o2.getPriority() - o1.getPriority();
 
 	public static List<Recognizer> getAllRecognizers() {
 		List<Recognizer> results = new ArrayList<Recognizer>();

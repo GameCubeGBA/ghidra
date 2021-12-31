@@ -285,7 +285,7 @@ public class FieldSelection implements Iterable<FieldRange> {
 	* @param selection field selection to intersect.
 	*/
 	public final void intersect(FieldSelection selection) {
-		if (selection == null || this.ranges.size() == 0 || selection.ranges.size() == 0) {
+		if (selection == null || this.ranges.isEmpty() || selection.ranges.isEmpty()) {
 			clear();
 			return;
 		}
@@ -305,7 +305,7 @@ public class FieldSelection implements Iterable<FieldRange> {
 	 * @param selection the selection to intersect with.
 	 */
 	public final FieldSelection findIntersection(FieldSelection selection) {
-		if (selection == null || this.ranges.size() == 0 || selection.ranges.size() == 0) {
+		if (selection == null || this.ranges.isEmpty() || selection.ranges.isEmpty()) {
 			return new FieldSelection();
 		}
 
@@ -326,7 +326,7 @@ public class FieldSelection implements Iterable<FieldRange> {
 	 * field selection.
 	 */
 	public final void delete(FieldSelection selection) {
-		if (selection == null || this.ranges.size() == 0 || selection.ranges.size() == 0) {
+		if (selection == null || this.ranges.isEmpty() || selection.ranges.isEmpty()) {
 			return;
 		}
 
@@ -423,7 +423,7 @@ public class FieldSelection implements Iterable<FieldRange> {
 	}
 
 	public boolean isEmpty() {
-		return ranges.size() == 0;
+		return ranges.isEmpty();
 	}
 
 	public FieldSelection intersect(int index) {

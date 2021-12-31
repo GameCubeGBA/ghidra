@@ -30,49 +30,49 @@ public interface BlockModelService {
 	 * Type for a simple block model.
 	 * @see ghidra.program.model.block.SimpleBlockModel
 	 */
-	public static final int BASIC_MODEL = 1;
+    int BASIC_MODEL = 1;
 
 	/**
 	 * Type for a subroutine block model.
 	 */
-	public static final int SUBROUTINE_MODEL = 2;
+    int SUBROUTINE_MODEL = 2;
 
 	/**
 	 * Name of the implementation for a Simple block model.
 	 */
-	public static final String SIMPLE_BLOCK_MODEL_NAME = SimpleBlockModel.NAME;
+    String SIMPLE_BLOCK_MODEL_NAME = SimpleBlockModel.NAME;
 
 	/**
 	 * Name of the implementation for a subroutine with multiple entry points.
 	 */
-	public static final String MULTI_ENTRY_SUBROUTINE_MODEL_NAME = MultEntSubModel.NAME;
+    String MULTI_ENTRY_SUBROUTINE_MODEL_NAME = MultEntSubModel.NAME;
 
 	/**
 	 * Name of the implementation for a subroutine that has a unique entry
 	 * point, which may share code with other subroutines.
 	 */
-	public static final String ISOLATED_ENTRY_SUBROUTINE_MODEL_NAME = IsolatedEntrySubModel.ISOLATED_MODEL_NAME;
+    String ISOLATED_ENTRY_SUBROUTINE_MODEL_NAME = IsolatedEntrySubModel.ISOLATED_MODEL_NAME;
 
 	/**
 	 * Name of the implementation for an overlapped subroutine model.
 	 */
-	public static final String OVERLAPPED_SUBROUTINE_MODEL_NAME = OverlapCodeSubModel.OVERLAP_MODEL_NAME;
+    String OVERLAPPED_SUBROUTINE_MODEL_NAME = OverlapCodeSubModel.OVERLAP_MODEL_NAME;
 
 	/**
 	 * Name of the implementation for a subroutine that does not share code
 	 * with other subroutines and may have one or more entry points.
 	 */
-	public static final String PARTITIONED_SUBROUTINE_MODEL_NAME = PartitionCodeSubModel.NAME;
+    String PARTITIONED_SUBROUTINE_MODEL_NAME = PartitionCodeSubModel.NAME;
 
 	/**
 	 * Default basic block model (Simple Block Model)
 	 */
-	public static final String DEFAULT_BLOCK_MODEL_NAME = SIMPLE_BLOCK_MODEL_NAME;
+    String DEFAULT_BLOCK_MODEL_NAME = SIMPLE_BLOCK_MODEL_NAME;
 
 	/**
 	 * Default subroutine model (M-Model)
 	 */
-	public static final String DEFAULT_SUBROUTINE_MODEL_NAME = MULTI_ENTRY_SUBROUTINE_MODEL_NAME;
+    String DEFAULT_SUBROUTINE_MODEL_NAME = MULTI_ENTRY_SUBROUTINE_MODEL_NAME;
 
 
 	/**
@@ -82,13 +82,13 @@ public interface BlockModelService {
 	 * are assumed to be basic block models.
 	 * @param modelName name of model
 	 */
-	public void registerModel(Class<? extends CodeBlockModel> modelClass, String modelName);
+    void registerModel(Class<? extends CodeBlockModel> modelClass, String modelName);
 
 	/**
 	 * Deregister a model.
 	 * @param modelClass code block model class.
 	 */
-	public void unregisterModel(Class<? extends CodeBlockModel> modelClass);
+    void unregisterModel(Class<? extends CodeBlockModel> modelClass);
 
 	/**
 	 * Get new instance of the active Basic Block model for the current program.
@@ -96,7 +96,7 @@ public interface BlockModelService {
 	 * @deprecated use getActiveBlockModel(Program) instead
 	 */
 	@Deprecated
-	public CodeBlockModel getActiveBlockModel();
+    CodeBlockModel getActiveBlockModel();
 
 	/**
 	 * Get new instance of the active Basic Block model for the current program.
@@ -105,14 +105,14 @@ public interface BlockModelService {
 	 * @deprecated use getActiveBlockModel(Program, boolean) instead
 	 */
 	@Deprecated
-	public CodeBlockModel getActiveBlockModel(boolean includeExternals);
+    CodeBlockModel getActiveBlockModel(boolean includeExternals);
 
 	/**
 	 * Get new instance of the active Basic Block model.
 	 * @param program program to associate with the block model
 	 * @return new Basic Block model instance or null if program is null
 	 */
-	public CodeBlockModel getActiveBlockModel(Program program);
+    CodeBlockModel getActiveBlockModel(Program program);
 
 	/**
 	 * Get new instance of the active Basic Block model.
@@ -120,13 +120,13 @@ public interface BlockModelService {
 	 * @param includeExternals externals are included if true
 	 * @return new Basic Block model instance or null if program is null
 	 */
-	public CodeBlockModel getActiveBlockModel(Program program, boolean includeExternals);
+    CodeBlockModel getActiveBlockModel(Program program, boolean includeExternals);
 
 	/**
 	 * Get the name of the active Basic Block model.
 	 * @return active block model name
 	 */
-	public String getActiveBlockModelName();
+    String getActiveBlockModelName();
 
 	/**
 	 * Get new instance of the active Subroutine Block model for the current program.
@@ -134,7 +134,7 @@ public interface BlockModelService {
 	 * @deprecated use getActiveSubroutineModel(Program) instead
 	 */
 	@Deprecated
-	public CodeBlockModel getActiveSubroutineModel();
+    CodeBlockModel getActiveSubroutineModel();
 
 	/**
 	 * Get new instance of the active Subroutine Block model for the current program.
@@ -143,14 +143,14 @@ public interface BlockModelService {
 	 * @deprecated use getActiveSubroutineModel(Program) instead
 	 */
 	@Deprecated
-	public CodeBlockModel getActiveSubroutineModel(boolean includeExternals);
+    CodeBlockModel getActiveSubroutineModel(boolean includeExternals);
 
 	/**
 	 * Get new instance of the active Subroutine Block model.
 	 * @param program program associated with the block model.
 	 * @return new Subroutine Block model instance or null if program is null
 	 */
-	public CodeBlockModel getActiveSubroutineModel(Program program);
+    CodeBlockModel getActiveSubroutineModel(Program program);
 
 	/**
 	 * Get new instance of the active Subroutine Block model.
@@ -158,13 +158,13 @@ public interface BlockModelService {
 	 * @param includeExternals externals are included if true
 	 * @return new Subroutine Block model instance or null if program is null
 	 */
-	public CodeBlockModel getActiveSubroutineModel(Program program, boolean includeExternals);
+    CodeBlockModel getActiveSubroutineModel(Program program, boolean includeExternals);
 
 	/**
 	 * Get the name of the active Subroutine model.
 	 * @return active subroutine model name
 	 */
-	public String getActiveSubroutineModelName();
+    String getActiveSubroutineModelName();
 
 	/**
 	 * Get new instance of the specified block model.
@@ -174,7 +174,7 @@ public interface BlockModelService {
 	 * @deprecated use getNewModelByName(String, Program) instead
 	 */
 	@Deprecated
-	public CodeBlockModel getNewModelByName(String modelName)
+    CodeBlockModel getNewModelByName(String modelName)
 			throws NotFoundException;
 
 	/**
@@ -186,7 +186,7 @@ public interface BlockModelService {
 	 * @deprecated use getNewModelByName(String, Program, boolean) instead
 	 */
 	@Deprecated
-	public CodeBlockModel getNewModelByName(String modelName, boolean includeExternals)
+    CodeBlockModel getNewModelByName(String modelName, boolean includeExternals)
 			throws NotFoundException;
 
 	/**
@@ -196,7 +196,7 @@ public interface BlockModelService {
 	 * @return new model instance or null if program is null
 	 * @throws NotFoundException if specified model is not registered
 	 */
-	public CodeBlockModel getNewModelByName(String modelName, Program program)
+    CodeBlockModel getNewModelByName(String modelName, Program program)
 			throws NotFoundException;
 
 	/**
@@ -207,7 +207,7 @@ public interface BlockModelService {
 	 * @return new model instance or null if program is null
 	 * @throws NotFoundException if specified model is not registered
 	 */
-	public CodeBlockModel getNewModelByName(String modelName, Program program, boolean includeExternals)
+    CodeBlockModel getNewModelByName(String modelName, Program program, boolean includeExternals)
 			throws NotFoundException;
 
 	/**
@@ -219,18 +219,18 @@ public interface BlockModelService {
 	 * @param modelType type of model (ANY_MODEL, BASIC_MODEL or SUBROUTINE_MODEL)
 	 * @return array of model names
 	 */
-	public String[] getAvailableModelNames(int modelType);
+    String[] getAvailableModelNames(int modelType);
 
 	/**
 	 * Add service listener.
 	 * @param listener listener to add
 	 */
-	public void addListener(BlockModelServiceListener listener);
+    void addListener(BlockModelServiceListener listener);
 
 	/**
 	 * Remove service listener.
 	 * @param listener to remove
 	 */
-	public void removeListener(BlockModelServiceListener listener);
+    void removeListener(BlockModelServiceListener listener);
 
 }

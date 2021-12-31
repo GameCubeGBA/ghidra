@@ -19,5 +19,5 @@ import ghidra.framework.plugintool.ServiceInfo;
 
 @ServiceInfo(defaultProvider=KitchenSinkPlugin.class)
 public interface HelloWorldService{
-    public void sayHello();
+    void sayHello();
 }

@@ -123,12 +123,7 @@ public class BindProcessor extends AbstractDyldInfoProcessor {
 				}
 				case DyldInfoCommandConstants.BIND_OPCODE_SET_SYMBOL_TRAILING_FLAGS_IMM: {
 					bind.symbolName = readString( byteServer, monitor );
-					if ( ( immediate & DyldInfoCommandConstants.BIND_SYMBOL_FLAGS_WEAK_IMPORT ) != 0 ) {
-						bind.setWeak( true );
-					}
-					else {
-						bind.setWeak( false );
-					}
+                    bind.setWeak((immediate & DyldInfoCommandConstants.BIND_SYMBOL_FLAGS_WEAK_IMPORT) != 0);
 					break;
 				}
 				case DyldInfoCommandConstants.BIND_OPCODE_SET_TYPE_IMM: {

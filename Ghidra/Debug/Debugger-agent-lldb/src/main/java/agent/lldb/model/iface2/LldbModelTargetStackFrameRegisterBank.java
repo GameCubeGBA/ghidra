@@ -33,6 +33,6 @@ import ghidra.dbg.target.schema.TargetObjectSchema.ResyncMode;
 public interface LldbModelTargetStackFrameRegisterBank
 		extends LldbModelTargetRegisterBank {
 
-	public LldbModelTargetRegister getTargetRegister(SBValue register);
+	LldbModelTargetRegister getTargetRegister(SBValue register);
 
 }

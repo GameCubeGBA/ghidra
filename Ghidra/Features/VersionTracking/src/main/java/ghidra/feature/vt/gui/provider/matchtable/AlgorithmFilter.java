@@ -43,24 +43,18 @@ public class AlgorithmFilter extends CheckBoxBasedAncillaryFilter<VTMatch> {
 	protected JPanel createFilterPanel(JPanel checkBoxPanel) {
 
 		JButton selectButton = new JButton("Select All");
-		selectButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				for (CheckBoxInfo<VTMatch> info : checkBoxInfos) {
-					info.getCheckBox().setSelected(true);
-				}
-			}
-		});
+		selectButton.addActionListener(e -> {
+            for (CheckBoxInfo<VTMatch> info : checkBoxInfos) {
+                info.getCheckBox().setSelected(true);
+            }
+        });
 
 		JButton deselectButton = new JButton("Deselect All");
-		deselectButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				for (CheckBoxInfo<VTMatch> info : checkBoxInfos) {
-					info.getCheckBox().setSelected(false);
-				}
-			}
-		});
+		deselectButton.addActionListener(e -> {
+            for (CheckBoxInfo<VTMatch> info : checkBoxInfos) {
+                info.getCheckBox().setSelected(false);
+            }
+        });
 
 		JPanel southPanel = new JPanel();
 		southPanel.add(selectButton);
@@ -77,12 +71,7 @@ public class AlgorithmFilter extends CheckBoxBasedAncillaryFilter<VTMatch> {
 	protected void createCheckBoxInfos() {
 		List<String> algorithmNames = getKnowAlgorithms();
 
-		ItemListener listener = new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				fireStatusChanged(getFilterStatus());
-			}
-		};
+		ItemListener listener = e -> fireStatusChanged(getFilterStatus());
 
 		for (String name : algorithmNames) {
 			GCheckBox checkBox = new GCheckBox(name, true);

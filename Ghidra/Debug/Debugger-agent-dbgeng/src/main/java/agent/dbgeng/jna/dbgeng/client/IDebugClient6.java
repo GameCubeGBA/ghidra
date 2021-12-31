@@ -22,7 +22,7 @@ import agent.dbgeng.jna.dbgeng.UnknownWithUtils.VTableIndex;
 import agent.dbgeng.jna.dbgeng.event.IDebugEventContextCallbacks;
 
 public interface IDebugClient6 extends IDebugClient5 {
-	final IID IID_IDEBUG_CLIENT6 = new IID("fd28b4c5-c498-4686-a28e-62cad2154eb3");
+	IID IID_IDEBUG_CLIENT6 = new IID("fd28b4c5-c498-4686-a28e-62cad2154eb3");
 
 	enum VTIndices6 implements VTableIndex {
 		SET_EVENT_CONTEXT_CALLBACKS, //

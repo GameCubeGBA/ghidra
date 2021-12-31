@@ -23,8 +23,8 @@ package ghidra.program.model.address;
  */
 public class ProtectedAddressSpace extends SegmentedAddressSpace {
 
-	private final static int PROTECTEDMODE_SIZE = 32;
-	private final static int PROTECTEDMODE_OFFSETSIZE = 16;
+	private static final int PROTECTEDMODE_SIZE = 32;
+	private static final int PROTECTEDMODE_OFFSETSIZE = 16;
 
 	private int offsetSize;		// Number of bits in the segment offset
 	private long offsetMask;	// Mask for retrieving the segment offset

@@ -28,9 +28,9 @@ import ghidra.util.exception.AssertException;
  */
 public class AddBitFieldAction extends CompositeEditorTableAction {
 
-	public final static String ACTION_NAME = "Add Bitfield";
-	private final static String GROUP_NAME = BITFIELD_ACTION_GROUP;
-	private final static String DESCRIPTION =
+	public static final String ACTION_NAME = "Add Bitfield";
+	private static final String GROUP_NAME = BITFIELD_ACTION_GROUP;
+	private static final String DESCRIPTION =
 		"Add a bitfield at the position of a selected component";
 	private static String[] POPUP_PATH = new String[] { ACTION_NAME };
 

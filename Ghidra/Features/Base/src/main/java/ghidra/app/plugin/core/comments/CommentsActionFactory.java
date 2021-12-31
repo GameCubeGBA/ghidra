@@ -120,7 +120,7 @@ public class CommentsActionFactory {
 
     private static class EditCommentsAction extends SetCommentsAction {
         // Edit Comments Action info
-        private final static String[] EDIT_MENUPATH = new String[] {
+        private static final String[] EDIT_MENUPATH = new String[] {
                 "Comments", "Set..." };
 
         EditCommentsAction(CommentsDialog dialog, String name) {

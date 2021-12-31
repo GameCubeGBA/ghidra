@@ -69,11 +69,11 @@ public class ModuleSortPlugin extends ProgramPlugin {
 	public static final int SORT_BY_ADDRESS = 2;
 
 	// Sort by Address Action info
-	private final static String[] SORT_BY_ADDR_MENUPATH = new String[] { "Sort", "by Address" };
+    private static final String[] SORT_BY_ADDR_MENUPATH = new String[] { "Sort", "by Address" };
 	private ModuleSortAction sortByAddrAction;
 
 	// Sort by Address Action info
-	private final static String[] SORT_BY_NAME_MENUPATH = new String[] { "Sort", "by Name" };
+    private static final String[] SORT_BY_NAME_MENUPATH = new String[] { "Sort", "by Name" };
 	private ModuleSortAction sortByNameAction;
 
 	public ModuleSortPlugin(PluginTool tool) {
@@ -273,10 +273,8 @@ public class ModuleSortPlugin extends ProgramPlugin {
 			if (activeObj != null && activeObj instanceof ProgramNode) {
 				ProgramNode node = (ProgramNode) activeObj;
 
-				if (node.getProgram() != null && node.isModule() &&
-					node.getTree().getSelectionCount() == 1) {
-					return true;
-				}
+                return node.getProgram() != null && node.isModule() &&
+                        node.getTree().getSelectionCount() == 1;
 			}
 			return false;
 		}

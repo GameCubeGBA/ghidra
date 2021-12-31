@@ -178,9 +178,9 @@ class RegisterMergeManager implements ListingMergeConstants {
 		conflictSet = new AddressSet();
 		rvrs = rc.getConflicts(setToCheck, monitor);
 		if (rvrs.length > 0) {
-			for (int j = 0; j < rvrs.length; j++) {
-				conflictSet.add(rvrs[j]);
-			}
+            for (AddressRange rvr : rvrs) {
+                conflictSet.add(rvr);
+            }
 		}
 		autoSet = setToCheck.subtract(conflictSet);
 	}
@@ -321,38 +321,29 @@ class RegisterMergeManager implements ListingMergeConstants {
 		this.min = minAddress;
 		this.max = maxAddress;
 		try {
-			final ChangeListener changeListener = new ChangeListener() {
-				@Override
-				public void stateChanged(ChangeEvent e) {
-					conflictOption = conflictPanel.getSelectedOptions();
-					if (conflictOption == ASK_USER) {
-						if (mergeManager != null) {
-							mergeManager.setApplyEnabled(false);
-						}
-						return;
-					}
-					if (mergeManager != null) {
-						mergeManager.clearStatusText();
-						mergeManager.setApplyEnabled(true);
-					}
-				}
-			};
-			SwingUtilities.invokeAndWait(new Runnable() {
-				@Override
-				public void run() {
-					VerticalChoicesPanel panel =
-						getConflictsPanel(minAddress, maxAddress, latestValue, myValue,
-							originalValue, changeListener);
-					listingMergePanel.setBottomComponent(panel);
-				}
-			});
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					listingMergePanel.clearAllBackgrounds();
-					listingMergePanel.paintAllBackgrounds(new AddressSet(minAddress, maxAddress));
-				}
-			});
+			final ChangeListener changeListener = e -> {
+                conflictOption = conflictPanel.getSelectedOptions();
+                if (conflictOption == ASK_USER) {
+                    if (mergeManager != null) {
+                        mergeManager.setApplyEnabled(false);
+                    }
+                    return;
+                }
+                if (mergeManager != null) {
+                    mergeManager.clearStatusText();
+                    mergeManager.setApplyEnabled(true);
+                }
+            };
+			SwingUtilities.invokeAndWait(() -> {
+                VerticalChoicesPanel panel =
+                    getConflictsPanel(minAddress, maxAddress, latestValue, myValue,
+                        originalValue, changeListener);
+                listingMergePanel.setBottomComponent(panel);
+            });
+			SwingUtilities.invokeLater(() -> {
+                listingMergePanel.clearAllBackgrounds();
+                listingMergePanel.paintAllBackgrounds(new AddressSet(minAddress, maxAddress));
+            });
 		}
 		catch (InterruptedException e) {
 		}

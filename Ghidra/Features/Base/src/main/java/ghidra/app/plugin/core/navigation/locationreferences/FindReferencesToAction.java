@@ -100,15 +100,11 @@ public class FindReferencesToAction extends ListingContextAction {
 		AddressLocationDescriptor addressDescriptor = (AddressLocationDescriptor) descriptor;
 		Address homeAddress = addressDescriptor.getHomeAddress();
 		Address actionAddress = context.getAddress();
-		if (actionAddress.equals(homeAddress)) {
-			// A bit of guilty knowledge here: this is handled by another action, the
-			// FindReferencesToAddressAction. For that situation, we don't want two actions 
-			// appearing in the popup menu.
-			return false;
-		}
-
-		return true;
-	}
+        // A bit of guilty knowledge here: this is handled by another action, the
+        // FindReferencesToAddressAction. For that situation, we don't want two actions
+        // appearing in the popup menu.
+        return !actionAddress.equals(homeAddress);
+    }
 
 	private void updateMenuName(LocationDescriptor descriptor) {
 

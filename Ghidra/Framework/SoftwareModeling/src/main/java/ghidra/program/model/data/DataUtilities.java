@@ -51,7 +51,7 @@ public final class DataUtilities {
 	 * @return true if name is valid, else false
 	 */
 	public static boolean isValidDataTypeName(String name) {
-		if (name == null || name.length() == 0) {
+		if (name == null || name.isEmpty()) {
 			return false;
 		}
 

@@ -200,7 +200,7 @@ public class InvokeMethods {
 				break;
 			default:
 				throw new IllegalArgumentException(
-					"Unimplemented JavaMethodType: " + type.toString());
+					"Unimplemented JavaMethodType: " + type);
 		}
 	}
 }

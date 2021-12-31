@@ -25,7 +25,7 @@ public class ByteDataType extends AbstractIntegerDataType {
 	private static final long serialVersionUID = 1L;
 
 	/** A statically defined ByteDataType instance.*/
-	public final static ByteDataType dataType = new ByteDataType();
+    public static final ByteDataType dataType = new ByteDataType();
 
 	public ByteDataType() {
 		this(null);

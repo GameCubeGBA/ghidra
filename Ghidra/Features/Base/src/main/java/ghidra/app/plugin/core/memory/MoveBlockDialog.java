@@ -108,7 +108,7 @@ public class MoveBlockDialog extends DialogComponentProvider implements MoveBloc
 			lengthLabel.setText(model.getLengthString());
 			tool.showDialog(this, tool.getComponentProvider(PluginConstants.MEMORY_MAP));
 		}
-		else if (message.length() == 0) {
+		else if (message.isEmpty()) {
 			setOkEnabled(true);
 		}
 	}

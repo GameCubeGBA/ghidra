@@ -334,7 +334,7 @@ public class JdiModelTargetVM extends JdiModelTargetObjectImpl implements //
 		if (vm.process() == null) {
 			return vm.toString();
 		}
-		String name = "VM(" + JdiModelTargetProcess.getUniqueId(vm.process()) + ") ";
+		StringBuilder name = new StringBuilder("VM(" + JdiModelTargetProcess.getUniqueId(vm.process()) + ") ");
 		Info info = vm.process().info();
 		Optional<String[]> arguments = info.arguments();
 		if (!arguments.isEmpty()) {
@@ -342,7 +342,7 @@ public class JdiModelTargetVM extends JdiModelTargetObjectImpl implements //
 			for (String arg : args) {
 				if (!arg.startsWith("-")) {
 					String[] split = arg.split("/");
-					name += split.length == 0 ? arg : split[split.length - 1];
+					name.append(split.length == 0 ? arg : split[split.length - 1]);
 				}
 			}
 		}

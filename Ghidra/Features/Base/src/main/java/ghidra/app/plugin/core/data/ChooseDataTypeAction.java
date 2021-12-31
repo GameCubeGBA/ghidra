@@ -35,7 +35,7 @@ public class ChooseDataTypeAction extends DockingAction {
 
 	private DataPlugin plugin;
 	private static final KeyStroke KEY_BINDING = KeyStroke.getKeyStroke(KeyEvent.VK_T, 0);
-	private final static String ACTION_NAME = "Choose Data Type";
+	private static final String ACTION_NAME = "Choose Data Type";
 
 	public ChooseDataTypeAction(DataPlugin plugin) {
 		super(ACTION_NAME, plugin.getName(), KeyBindingType.SHARED);

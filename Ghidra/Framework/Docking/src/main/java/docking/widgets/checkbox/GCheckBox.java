@@ -40,8 +40,7 @@ public class GCheckBox extends JCheckBox implements GComponent {
 	 * <p>
 	 */
 	public GCheckBox() {
-		super();
-		init();
+        init();
 	}
 
 	/**

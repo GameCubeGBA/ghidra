@@ -22,7 +22,7 @@ import ghidra.trace.model.Trace;
 
 public interface TraceSymbolManager {
 
-	static Comparator<TraceSymbol> PRIMALITY_COMPARATOR = (a, b) -> {
+	Comparator<TraceSymbol> PRIMALITY_COMPARATOR = (a, b) -> {
 		boolean aFunc = a instanceof TraceFunctionSymbol;
 		boolean bFunc = b instanceof TraceFunctionSymbol;
 		if (aFunc && !bFunc) {

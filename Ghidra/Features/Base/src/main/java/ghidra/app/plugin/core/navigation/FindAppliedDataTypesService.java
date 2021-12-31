@@ -29,7 +29,7 @@ public interface FindAppliedDataTypesService {
 	 * 
 	 * @param dataType The datatype which to base the search upon.
 	 */
-	public void findAndDisplayAppliedDataTypeAddresses(DataType dataType);
+    void findAndDisplayAppliedDataTypeAddresses(DataType dataType);
 
 	/**
 	 * Tells this service to find all places where the given datatype is defined <b>and</b> will
@@ -38,5 +38,5 @@ public interface FindAppliedDataTypesService {
 	 * @param dataType The datatype which to base the search upon.
 	 * @param fieldName the sub-field for which to search
 	 */
-	public void findAndDisplayAppliedDataTypeAddresses(Composite dataType, String fieldName);
+    void findAndDisplayAppliedDataTypeAddresses(Composite dataType, String fieldName);
 }

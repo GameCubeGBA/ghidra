@@ -12,12 +12,12 @@
 package SWIG;
 
 public final class InstrumentationRuntimeType {
-  public final static InstrumentationRuntimeType eInstrumentationRuntimeTypeAddressSanitizer = new InstrumentationRuntimeType("eInstrumentationRuntimeTypeAddressSanitizer", lldbJNI.eInstrumentationRuntimeTypeAddressSanitizer_get());
-  public final static InstrumentationRuntimeType eInstrumentationRuntimeTypeThreadSanitizer = new InstrumentationRuntimeType("eInstrumentationRuntimeTypeThreadSanitizer", lldbJNI.eInstrumentationRuntimeTypeThreadSanitizer_get());
-  public final static InstrumentationRuntimeType eInstrumentationRuntimeTypeUndefinedBehaviorSanitizer = new InstrumentationRuntimeType("eInstrumentationRuntimeTypeUndefinedBehaviorSanitizer", lldbJNI.eInstrumentationRuntimeTypeUndefinedBehaviorSanitizer_get());
-  public final static InstrumentationRuntimeType eInstrumentationRuntimeTypeMainThreadChecker = new InstrumentationRuntimeType("eInstrumentationRuntimeTypeMainThreadChecker", lldbJNI.eInstrumentationRuntimeTypeMainThreadChecker_get());
-  public final static InstrumentationRuntimeType eInstrumentationRuntimeTypeSwiftRuntimeReporting = new InstrumentationRuntimeType("eInstrumentationRuntimeTypeSwiftRuntimeReporting", lldbJNI.eInstrumentationRuntimeTypeSwiftRuntimeReporting_get());
-  public final static InstrumentationRuntimeType eNumInstrumentationRuntimeTypes = new InstrumentationRuntimeType("eNumInstrumentationRuntimeTypes");
+  public static final InstrumentationRuntimeType eInstrumentationRuntimeTypeAddressSanitizer = new InstrumentationRuntimeType("eInstrumentationRuntimeTypeAddressSanitizer", lldbJNI.eInstrumentationRuntimeTypeAddressSanitizer_get());
+  public static final InstrumentationRuntimeType eInstrumentationRuntimeTypeThreadSanitizer = new InstrumentationRuntimeType("eInstrumentationRuntimeTypeThreadSanitizer", lldbJNI.eInstrumentationRuntimeTypeThreadSanitizer_get());
+  public static final InstrumentationRuntimeType eInstrumentationRuntimeTypeUndefinedBehaviorSanitizer = new InstrumentationRuntimeType("eInstrumentationRuntimeTypeUndefinedBehaviorSanitizer", lldbJNI.eInstrumentationRuntimeTypeUndefinedBehaviorSanitizer_get());
+  public static final InstrumentationRuntimeType eInstrumentationRuntimeTypeMainThreadChecker = new InstrumentationRuntimeType("eInstrumentationRuntimeTypeMainThreadChecker", lldbJNI.eInstrumentationRuntimeTypeMainThreadChecker_get());
+  public static final InstrumentationRuntimeType eInstrumentationRuntimeTypeSwiftRuntimeReporting = new InstrumentationRuntimeType("eInstrumentationRuntimeTypeSwiftRuntimeReporting", lldbJNI.eInstrumentationRuntimeTypeSwiftRuntimeReporting_get());
+  public static final InstrumentationRuntimeType eNumInstrumentationRuntimeTypes = new InstrumentationRuntimeType("eNumInstrumentationRuntimeTypes");
 
   public final int swigValue() {
     return swigValue;
@@ -30,9 +30,9 @@ public final class InstrumentationRuntimeType {
   public static InstrumentationRuntimeType swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-    for (int i = 0; i < swigValues.length; i++)
-      if (swigValues[i].swigValue == swigValue)
-        return swigValues[i];
+      for (InstrumentationRuntimeType value : swigValues)
+          if (value.swigValue == swigValue)
+              return value;
     throw new IllegalArgumentException("No enum " + InstrumentationRuntimeType.class + " with value " + swigValue);
   }
 

@@ -43,7 +43,7 @@ public interface TargetSection extends TargetObject {
 	 * @return the owning module
 	 */
 	@TargetAttributeType(name = MODULE_ATTRIBUTE_NAME, required = true, fixed = true, hidden = true)
-	public default TargetModule getModule() {
+    default TargetModule getModule() {
 		return getTypedAttributeNowByName(MODULE_ATTRIBUTE_NAME, TargetModule.class, null);
 	}
 
@@ -56,7 +56,7 @@ public interface TargetSection extends TargetObject {
 	 * @return the range
 	 */
 	@TargetAttributeType(name = RANGE_ATTRIBUTE_NAME, required = true, fixed = true)
-	public default AddressRange getRange() {
+    default AddressRange getRange() {
 		return getTypedAttributeNowByName(RANGE_ATTRIBUTE_NAME, AddressRange.class, null);
 	}
 
@@ -65,7 +65,7 @@ public interface TargetSection extends TargetObject {
 	 * 
 	 * @return the start
 	 */
-	public default Address getStart() {
+	default Address getStart() {
 		return getRange().getMinAddress();
 	}
 
@@ -74,7 +74,7 @@ public interface TargetSection extends TargetObject {
 	 * 
 	 * @return the end
 	 */
-	public default Address getEnd() {
+	default Address getEnd() {
 		return getRange().getMaxAddress();
 	}
 }

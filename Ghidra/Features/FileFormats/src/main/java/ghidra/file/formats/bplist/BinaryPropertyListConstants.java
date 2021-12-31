@@ -17,9 +17,9 @@ package ghidra.file.formats.bplist;
 
 public final class BinaryPropertyListConstants {
 
-	public final static String BINARY_PLIST_MAGIC = "bplist";
+	public static final String BINARY_PLIST_MAGIC = "bplist";
 
-	public final static int TRAILER_SIZE = 32;
+	public static final int TRAILER_SIZE = 32;
 
-	public final static int MAJOR_VERSION_0 = '0';
+	public static final int MAJOR_VERSION_0 = '0';
 }

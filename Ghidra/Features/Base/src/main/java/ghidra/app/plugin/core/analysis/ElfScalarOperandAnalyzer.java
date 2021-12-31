@@ -62,7 +62,7 @@ public class ElfScalarOperandAnalyzer extends ScalarOperandAnalyzer {
 	protected boolean addReference(Program program, Instruction instr, int opIndex,
 			AddressSpace space, Scalar scalar) {
 		if (program.getExecutableFormat().equals(ElfLoader.ELF_NAME)) {
-			if (instr.getMnemonicString().equalsIgnoreCase("add")) {
+			if ("add".equalsIgnoreCase(instr.getMnemonicString())) {
 				try {
 					Address gotAddr = instr.getMinAddress().add(scalar.getUnsignedValue());
 					MemoryBlock block = program.getMemory().getBlock(gotAddr);
@@ -75,7 +75,7 @@ public class ElfScalarOperandAnalyzer extends ScalarOperandAnalyzer {
 				catch (AddressOutOfBoundsException e) {
 				}
 			}
-			else if (instr.getMnemonicString().equalsIgnoreCase("push")) {
+			else if ("push".equalsIgnoreCase(instr.getMnemonicString())) {
 				MemoryBlock block = program.getMemory().getBlock(instr.getMinAddress());
 				if (block.getName().contains(".plt")) {
 					return false;

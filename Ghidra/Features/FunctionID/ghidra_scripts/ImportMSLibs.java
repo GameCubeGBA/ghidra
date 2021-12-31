@@ -38,8 +38,8 @@ import ghidra.util.task.CancelOnlyWrappingTaskMonitor;
 import ghidra.util.task.TaskMonitor;
 
 public class ImportMSLibs extends GhidraScript {
-	final static Predicate<Loader> LOADER_FILTER = new SingleLoaderFilter(MSCoffLoader.class);
-	final static LoadSpecChooser LOADSPEC_CHOOSER = new CsHintLoadSpecChooser("windows");
+	static final Predicate<Loader> LOADER_FILTER = new SingleLoaderFilter(MSCoffLoader.class);
+	static final LoadSpecChooser LOADSPEC_CHOOSER = new CsHintLoadSpecChooser("windows");
 
 	@Override
 	protected void run() throws Exception {

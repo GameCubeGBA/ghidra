@@ -23,7 +23,7 @@ package agent.dbgeng.dbgeng;
 @FunctionalInterface
 public interface DebugInputCallbacks {
 
-	public void startInput(long bufferSize);
+	void startInput(long bufferSize);
 
 	default void endInput() {
 		// Optional implementation

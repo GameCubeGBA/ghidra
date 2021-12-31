@@ -38,32 +38,32 @@ public abstract class VdexHeader implements StructConverter {
 		magic_ = new String(reader.readNextByteArray(VdexConstants.MAGIC.length()));
 	}
 
-	final public String getMagic() {
+	public final String getMagic() {
 		return magic_;
 	}
 
-	final public String getVerifierDepsVersion() {
+	public final String getVerifierDepsVersion() {
 		return verifier_deps_version_;
 	}
 
-	abstract public void parse(BinaryReader reader, TaskMonitor monitor)
+	public abstract void parse(BinaryReader reader, TaskMonitor monitor)
 			throws IOException, CancelledException;
 
-	final public long getDexStartOffset(int index) {
+	public final long getDexStartOffset(int index) {
 		return dexHeaderStartsList.get(index);
 	}
 
-	abstract public int getVerifierDepsSize();
+	public abstract int getVerifierDepsSize();
 
-	abstract public int getQuickeningInfoSize();
+	public abstract int getQuickeningInfoSize();
 
-	abstract public int[] getDexChecksums();
+	public abstract int[] getDexChecksums();
 
 	/**
 	 * Returns the list of DEX headers contained in this VDEX.
 	 * Could return empty list depending on version of VDEX.
 	 */
-	final public List<DexHeader> getDexHeaderList() {
+    public final List<DexHeader> getDexHeaderList() {
 		return dexHeaderList;
 	}
 
@@ -71,11 +71,11 @@ public abstract class VdexHeader implements StructConverter {
 	 * Returns the VDEX String Table.
 	 * Note: Could be NULL.
 	 */
-	final public VdexStringTable getStringTable() {
+    public final VdexStringTable getStringTable() {
 		return stringTable;
 	}
 
-	abstract public boolean isDexHeaderEmbeddedInDataType();
+	public abstract boolean isDexHeaderEmbeddedInDataType();
 
-	abstract public DexSectionHeader_002 getDexSectionHeader_002();
+	public abstract DexSectionHeader_002 getDexSectionHeader_002();
 }

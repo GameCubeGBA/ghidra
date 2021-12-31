@@ -40,8 +40,7 @@ public class GHtmlCheckBox extends JCheckBox implements GComponent {
 	 * <p>
 	 */
 	public GHtmlCheckBox() {
-		super();
-	}
+    }
 
 	/**
 	 * Creates a check box with an icon, with HTML rendering allowed.

@@ -28,8 +28,8 @@ import docking.action.KeyBindingData;
  */
 abstract class ProgramTreeAction extends DockingAction {
 
-    final static int SINGLE_SELECTION=0;
-    final static int MULTI_SELECTION=1;
+    static final int SINGLE_SELECTION=0;
+    static final int MULTI_SELECTION=1;
 
     private int selectionType;
 

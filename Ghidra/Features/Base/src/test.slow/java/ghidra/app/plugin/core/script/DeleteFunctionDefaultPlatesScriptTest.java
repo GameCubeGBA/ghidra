@@ -97,7 +97,7 @@ public class DeleteFunctionDefaultPlatesScriptTest extends AbstractGhidraHeadedI
 		while (iter.hasNext()) {
 			Function f = iter.next();
 			String[] comments = f.getCommentAsArray();
-			if (comments != null && comments.length == 1 && comments[0].equals(" FUNCTION")) {
+			if (comments != null && comments.length == 1 && " FUNCTION".equals(comments[0])) {
 				list.add(f.getEntryPoint());
 			}
 		}
@@ -109,11 +109,10 @@ public class DeleteFunctionDefaultPlatesScriptTest extends AbstractGhidraHeadedI
 		program.flushEvents();
 		waitForPostedSwingRunnables();
 
-		for (int i = 0; i < list.size(); i++) {
-			Address addr = list.get(i);
-			Function f = listing.getFunctionAt(addr);
-			assertNull(f.getComment());
-		}
+        for (Address addr : list) {
+            Function f = listing.getFunctionAt(addr);
+            assertNull(f.getComment());
+        }
 	}
 
 	@Test
@@ -131,7 +130,7 @@ public class DeleteFunctionDefaultPlatesScriptTest extends AbstractGhidraHeadedI
 		while (iter.hasNext()) {
 			Function f = iter.next();
 			String[] comments = f.getCommentAsArray();
-			if (comments != null && comments.length == 1 && comments[0].equals(" FUNCTION")) {
+			if (comments != null && comments.length == 1 && " FUNCTION".equals(comments[0])) {
 				list.add(f.getEntryPoint());
 			}
 		}
@@ -143,11 +142,10 @@ public class DeleteFunctionDefaultPlatesScriptTest extends AbstractGhidraHeadedI
 		program.flushEvents();
 		waitForPostedSwingRunnables();
 
-		for (int i = 0; i < list.size(); i++) {
-			Address addr = list.get(i);
-			Function f = listing.getFunctionAt(addr);
-			assertNull(f.getComment());
-		}
+        for (Address addr : list) {
+            Function f = listing.getFunctionAt(addr);
+            assertNull(f.getComment());
+        }
 	}
 
 	private Address getAddr(int offset) {

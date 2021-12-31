@@ -41,7 +41,7 @@ public class ProjectExperimentsTest extends AbstractGhidraHeadedIntegrationTest 
 		return String.format("%s(%08x)", obj, System.identityHashCode(obj));
 	}
 
-	public static abstract class AbstractRecordingListener {
+	public abstract static class AbstractRecordingListener {
 		private final Deque<String> log = new LinkedList<>();
 
 		public synchronized void clear() {

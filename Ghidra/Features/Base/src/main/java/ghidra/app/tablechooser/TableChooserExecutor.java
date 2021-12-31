@@ -28,7 +28,7 @@ public interface TableChooserExecutor {
 	 * @return A short name suitable for display in the "apply" button that indicates what the "apply"
 	 * action does.
 	 */
-	public String getButtonName();
+    String getButtonName();
 
 	/**
 	 * Applies this executors action to the given rowObject.  Return true if the given object 
@@ -40,5 +40,5 @@ public interface TableChooserExecutor {
 	 * @param rowObject the AddressRowObject to be executed upon
 	 * @return true if the rowObject should be removed from the table, false otherwise
 	 */
-	public boolean execute(AddressableRowObject rowObject);
+    boolean execute(AddressableRowObject rowObject);
 }

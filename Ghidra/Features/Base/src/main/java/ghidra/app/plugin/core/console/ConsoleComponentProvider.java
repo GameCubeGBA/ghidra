@@ -239,7 +239,7 @@ public class ConsoleComponentProvider extends ComponentProviderAdapter
 				}
 			}
 			String text = doc.getText(startIndex + 1, endIndex - startIndex);
-			if (text == null || text.trim().length() == 0) {
+			if (text == null || text.trim().isEmpty()) {
 				return null;
 			}
 			return new ConsoleWord(text.trim(), startIndex + 1, endIndex);

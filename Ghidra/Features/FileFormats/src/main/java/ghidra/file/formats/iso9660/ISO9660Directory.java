@@ -137,15 +137,15 @@ public class ISO9660Directory implements StructConverter {
 			"\n");
 		buff.append("Extended Attribute Record Length: 0x" +
 			Integer.toHexString(extendedAttributeRecordLen) + "\n");
-		buff.append("Extent Location: 0x" + Integer.toHexString(getLocationOfExtentLE()) + "\n");
-		buff.append("Data Length: 0x" + Integer.toHexString(getDataLengthLE()) + "\n");
+		buff.append("Extent Location: 0x" + Integer.toHexString(locationOfExtentLE) + "\n");
+		buff.append("Data Length: 0x" + Integer.toHexString(dataLengthLE) + "\n");
 		buff.append("Recording Date/Time: " + createDateTimeString(recordingDateTime) + "\n");
 		buff.append(getFileFlagString() + "\n");
 		buff.append("File Unit Size Interleaved Mode: 0x" + Integer.toHexString(fileUnitSize) +
 			"\n");
 		buff.append("Interleave Gap Size: 0x" + Integer.toHexString(interleaveGapSize) + "\n");
 		buff.append("Volume Sequence Number: 0x" +
-			Integer.toHexString(getVolumeSequenceNumberLE()) + "\n");
+			Integer.toHexString(volumeSequenceNumberLE) + "\n");
 		buff.append("Length of File Identifier: 0x" + Integer.toHexString(fileIdentLength) + "\n");
 		buff.append("File Identifier: " + new String(fileIdentifier).trim() + "\n");
 		if (paddingFieldPresent) {
@@ -160,21 +160,18 @@ public class ISO9660Directory implements StructConverter {
 	 * of visible not null ascii characters otherwise returns null
 	 */
 	private String analyzeName(byte[] bArr) {
-		for (int i = 0; i < bArr.length; i++) {
-			if (bArr[i] < 32) {
-				return null;
-			}
-		}
+        for (byte b : bArr) {
+            if (b < 32) {
+                return null;
+            }
+        }
 		String tmp = new String(bArr);
 		return tmp;
 	}
 
 	public boolean isDirectoryFlagSet() {
-		if (getFlagBit(fileFlag, ISO9660Constants.DIRECTORY_FLAG) == 1) {
-			return true;
-		}
-		return false;
-	}
+        return getFlagBit(fileFlag, ISO9660Constants.DIRECTORY_FLAG) == 1;
+    }
 
 	ByteProvider getByteProvider(ByteProvider provider, long logicalBlockSize, FSRL fsrl) {
 
@@ -246,12 +243,9 @@ public class ISO9660Directory implements StructConverter {
 		i6 = byteArray[5];        // Second of minute
 
 		// The buffer contains an invalid timezone offset.
-		boolean validBuffer = true;
-		if (timeOffset < -48 || timeOffset > 52) {
-			validBuffer = false;
-		}
+		boolean validBuffer = timeOffset >= -48 && timeOffset <= 52;
 
-		// The buffer contains an invalid date/time.
+        // The buffer contains an invalid date/time.
 		try {
 			LocalDateTime.of(i1, i2, i3, i4, i5, i6);
 		} catch (DateTimeException exception) {

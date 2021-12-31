@@ -117,10 +117,9 @@ public class ViewManagerComponentProvider extends ComponentProviderAdapter
 
 	@Override
 	public void viewChanged(AddressSetView addrSet) {
-		for (int i = 0; i < listeners.size(); i++) {
-			ViewChangeListener l = listeners.get(i);
-			l.viewChanged(addrSet);
-		}
+        for (ViewChangeListener l : listeners) {
+            l.viewChanged(addrSet);
+        }
 	}
 
 	@Override

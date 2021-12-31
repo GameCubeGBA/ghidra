@@ -490,27 +490,27 @@ public class PcodeOp {
 	 */
 	@Override
 	public String toString() {
-		String s;
+		StringBuilder s;
 		if (output != null) {
-			s = output.toString();
+			s = new StringBuilder(output.toString());
 		}
 		else {
-			s = " --- ";
+			s = new StringBuilder(" --- ");
 		}
-		s += " " + getMnemonic() + " ";
+		s.append(" ").append(getMnemonic()).append(" ");
 		for (int i = 0; i < input.length; i++) {
 			if (input[i] == null) {
-				s += "null";
+				s.append("null");
 			}
 			else {
-				s += input[i].toString();
+				s.append(input[i].toString());
 			}
 
 			if (i < input.length - 1) {
-				s += " , ";
+				s.append(" , ");
 			}
 		}
-		return s;
+		return s.toString();
 	}
 
 	/* (non-Javadoc)
@@ -542,7 +542,7 @@ public class PcodeOp {
 	 * @param op operation code
 	 * @return String representation of p-code operation
 	 */
-	public final static String getMnemonic(int op) {
+    public static final String getMnemonic(int op) {
 		switch (op) {
 			case UNIMPLEMENTED:
 				return "UNIMPLEMENTED";

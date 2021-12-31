@@ -29,8 +29,7 @@ import generic.test.AbstractGenericTest;
 public class CountLatchTest extends AbstractGenericTest {
 
 	public CountLatchTest() {
-		super();
-	}
+    }
 
 	@Test
 	public void testNoWaitInitially() throws InterruptedException {

@@ -61,17 +61,17 @@ import ghidra.util.task.TaskMonitorAdapter;
 
 public class CommentsPluginTest extends AbstractGhidraHeadedIntegrationTest {
 
-	private final static int[] TYPES = new int[] { CodeUnit.EOL_COMMENT, CodeUnit.PRE_COMMENT,
+	private static final int[] TYPES = new int[] { CodeUnit.EOL_COMMENT, CodeUnit.PRE_COMMENT,
 		CodeUnit.POST_COMMENT, CodeUnit.PLATE_COMMENT, CodeUnit.REPEATABLE_COMMENT, };
 
-	private final static String PRE = "This is a PRE comment.";
-	private final static String POST = "This is a POST comment.";
-	private final static String EOL = "This is a EOL comment.";
-	private final static String PLATE = "This is a PLATE comment.";
-	private final static String REPEAT = "This is a REPEATABLE comment.";
+	private static final String PRE = "This is a PRE comment.";
+	private static final String POST = "This is a POST comment.";
+	private static final String EOL = "This is a EOL comment.";
+	private static final String PLATE = "This is a PLATE comment.";
+	private static final String REPEAT = "This is a REPEATABLE comment.";
 
-	private final static String PRE_U = PRE + "\n\nUPDATED";
-	private final static String EOL_U = EOL + "\n\nUPDATED";
+	private static final String PRE_U = PRE + "\n\nUPDATED";
+	private static final String EOL_U = EOL + "\n\nUPDATED";
 
 	private TestEnv env;
 	private PluginTool tool;
@@ -961,18 +961,16 @@ public class CommentsPluginTest extends AbstractGhidraHeadedIntegrationTest {
 	private void resetFormatOptions(CodeBrowserPlugin codeBrowserPlugin) {
 		Options fieldOptions = codeBrowserPlugin.getFormatManager().getFieldOptions();
 		List<String> names = fieldOptions.getOptionNames();
-		for (int i = 0; i < names.size(); i++) {
-			String name = names.get(i);
-			if (!name.startsWith("Format Code")) {
-				continue;
-			}
-			if (name.contains("Show ") || name.contains("Flag ")) {
-				fieldOptions.setBoolean(name, false);
-			}
-			else if (name.contains("Lines")) {
-				fieldOptions.setInt(name, 0);
-			}
-		}
+        for (String name : names) {
+            if (!name.startsWith("Format Code")) {
+                continue;
+            }
+            if (name.contains("Show ") || name.contains("Flag ")) {
+                fieldOptions.setBoolean(name, false);
+            } else if (name.contains("Lines")) {
+                fieldOptions.setInt(name, 0);
+            }
+        }
 		waitForSwing();
 		codeBrowserPlugin.updateNow();
 	}

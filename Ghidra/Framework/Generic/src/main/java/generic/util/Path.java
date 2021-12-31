@@ -113,7 +113,7 @@ public class Path implements Comparable<Path> {
 		this.isReadOnly = isReadOnly;
 	}
 
-	static private ResourceFile resolveGhidraHome(String scriptPath) {
+	private static ResourceFile resolveGhidraHome(String scriptPath) {
 		ResourceFile pathFile = null;
 		for (ResourceFile root : Application.getApplicationRootDirectories()) {
 			int length = GHIDRA_HOME.length();
@@ -209,7 +209,7 @@ public class Path implements Comparable<Path> {
 	 * @param file the file to translate
 	 * @return the path as a string .
 	 */
-	static public String toPathString(ResourceFile file) {
+    public static String toPathString(ResourceFile file) {
 		String userHome = System.getProperty("user.home");
 		String absolutePath = file.getAbsolutePath();
 		for (ResourceFile appRoot : Application.getApplicationRootDirectories()) {

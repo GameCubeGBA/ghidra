@@ -164,12 +164,7 @@ public class MachoProcessBindScript extends GhidraScript {
 					}
 					case DyldInfoCommandConstants.BIND_OPCODE_SET_SYMBOL_TRAILING_FLAGS_IMM: {
 						bind.symbolName = readString( byteServer );
-						if ( ( immediate & DyldInfoCommandConstants.BIND_SYMBOL_FLAGS_WEAK_IMPORT ) != 0 ) {
-							bind.weak = true;
-						}
-						else {
-							bind.weak = false;
-						}
+                        bind.weak = (immediate & DyldInfoCommandConstants.BIND_SYMBOL_FLAGS_WEAK_IMPORT) != 0;
 						break;
 					}
 					case DyldInfoCommandConstants.BIND_OPCODE_SET_TYPE_IMM: {
@@ -201,7 +196,7 @@ public class MachoProcessBindScript extends GhidraScript {
 			}
 			buffer.append( (char) ( b & 0xff ) );
 		}
-		System.out.println( buffer.toString() );
+		System.out.println(buffer);
 		return buffer.toString();
 	}
 

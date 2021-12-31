@@ -46,8 +46,8 @@ import ghidra.util.exception.AssertException;
 public class StackEditorManagerPlugin extends Plugin
 		implements OptionsChangeListener, StackEditorOptionManager {
 
-	private final static String EDITOR_NAME = "Stack Editor";
-	private final static String HEX_NUMBERS_OPTION_NAME =
+	private static final String EDITOR_NAME = "Stack Editor";
+	private static final String HEX_NUMBERS_OPTION_NAME =
 		EDITOR_NAME + Options.DELIMITER + "Show Numbers In Hex";
 	private EditStackAction editStackAction;
 	private StackEditorManager editorMgr;

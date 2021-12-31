@@ -30,8 +30,7 @@ import ghidra.util.exception.AssertException;
 public class StackEditorScreenShots extends GhidraScreenShotGenerator {
 
 	public StackEditorScreenShots() {
-		super();
-	}
+    }
 
 	@Test
 	public void testStackEditor() throws Exception {
@@ -87,7 +86,7 @@ public class StackEditorScreenShots extends GhidraScreenShotGenerator {
 			int columnIndex = -1;
 			int rowIndex = -1;
 			for (int i1 = 0; i1 < columnCount; i1++) {
-				if (model.getColumnName(i1).equals("Name")) {
+				if ("Name".equals(model.getColumnName(i1))) {
 					columnIndex = i1;
 					break;
 				}

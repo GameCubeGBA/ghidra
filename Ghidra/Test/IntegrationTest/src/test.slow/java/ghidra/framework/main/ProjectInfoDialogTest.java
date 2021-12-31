@@ -49,8 +49,7 @@ public class ProjectInfoDialogTest extends AbstractGhidraHeadedIntegrationTest {
 	private ProjectInfoDialog dialog;
 
 	public ProjectInfoDialogTest() {
-		super();
-	}
+    }
 
 	@Before
 	public void setUp() throws Exception {

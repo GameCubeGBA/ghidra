@@ -47,7 +47,7 @@ import resources.ResourceManager;
  *
  */
 class MemoryMapProvider extends ComponentProviderAdapter {
-	private final static int MAX_SIZE = 256;
+	private static final int MAX_SIZE = 256;
 
 	private JPanel mainPanel;
 	private GTable memTable;
@@ -65,15 +65,15 @@ class MemoryMapProvider extends ComponentProviderAdapter {
 
 	private MemoryMapPlugin plugin = null;
 
-	private final static String ADD_IMAGE = "images/Plus.png";
-	private final static String MOVE_IMAGE = "images/move.png";
-	private final static String SPLIT_IMAGE = "images/verticalSplit.png";
-	private final static String EXPAND_UP_IMAGE = "images/collapse.gif";
-	private final static String EXPAND_DOWN_IMAGE = "images/expand.gif";
-	private final static String MERGE_IMAGE = "images/Merge.png";
-	private final static String DELETE_IMAGE = "images/edit-delete.png";
-	private final static String IMAGE_BASE = "images/house.png";
-	final static String MEMORY_IMAGE = "images/memory16.gif";
+	private static final String ADD_IMAGE = "images/Plus.png";
+	private static final String MOVE_IMAGE = "images/move.png";
+	private static final String SPLIT_IMAGE = "images/verticalSplit.png";
+	private static final String EXPAND_UP_IMAGE = "images/collapse.gif";
+	private static final String EXPAND_DOWN_IMAGE = "images/expand.gif";
+	private static final String MERGE_IMAGE = "images/Merge.png";
+	private static final String DELETE_IMAGE = "images/edit-delete.png";
+	private static final String IMAGE_BASE = "images/house.png";
+	static final String MEMORY_IMAGE = "images/memory16.gif";
 
 	private Program program;
 	private MemoryMapManager memManager;
@@ -352,19 +352,9 @@ class MemoryMapProvider extends ComponentProviderAdapter {
 				return;
 			}
 
-			if (block.getStart().getOffset() == 0) {
-				expandUpAction.setEnabled(false);
-			}
-			else {
-				expandUpAction.setEnabled(true);
-			}
+            expandUpAction.setEnabled(block.getStart().getOffset() != 0);
 			Address endAddr = block.getEnd();
-			if (endAddr.equals(endAddr.getAddressSpace().getMaxAddress())) {
-				expandDownAction.setEnabled(false);
-			}
-			else {
-				expandDownAction.setEnabled(true);
-			}
+            expandDownAction.setEnabled(!endAddr.equals(endAddr.getAddressSpace().getMaxAddress()));
 		}
 	}
 

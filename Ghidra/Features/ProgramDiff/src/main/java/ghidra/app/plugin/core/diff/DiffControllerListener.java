@@ -23,9 +23,9 @@ import ghidra.program.model.address.Address;
  */
 public interface DiffControllerListener {
 	
-	public abstract void diffLocationChanged(DiffController diffControl, 
-											 Address location);
+	void diffLocationChanged(DiffController diffControl,
+                             Address location);
 	
-	public abstract void differencesChanged(DiffController diffControl);
+	void differencesChanged(DiffController diffControl);
 	
 }

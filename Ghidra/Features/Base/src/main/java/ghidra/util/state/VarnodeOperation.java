@@ -93,22 +93,22 @@ public class VarnodeOperation extends Varnode {
 		if (pcodeOp.getOpcode() == PcodeOp.INDIRECT) {
 			return getIndirectString(null);
 		}
-		String s = pcodeOp.getMnemonic() + " ";
+		StringBuilder s = new StringBuilder(pcodeOp.getMnemonic() + " ");
 		for (int i = 0; i < inputValues.length; i++) {
 			if (inputValues[i] == null) {
-				s += "null";
+				s.append("null");
 			}
 			else if (inputValues[i] instanceof VarnodeOperation) {
-				s += "{" + inputValues[i].toString() + "}";
+				s.append("{").append(inputValues[i].toString()).append("}");
 			}
 			else {
-				s += inputValues[i].toString();
+				s.append(inputValues[i].toString());
 			}
 			if (i < inputValues.length - 1) {
-				s += ", ";
+				s.append(", ");
 			}
 		}
-		return s;
+		return s.toString();
 	}
 
 	@Override
@@ -116,31 +116,31 @@ public class VarnodeOperation extends Varnode {
 		if (pcodeOp.getOpcode() == PcodeOp.INDIRECT) {
 			return getIndirectString(language);
 		}
-		String s = pcodeOp.getMnemonic() + " ";
+		StringBuilder s = new StringBuilder(pcodeOp.getMnemonic() + " ");
 		for (int i = 0; i < inputValues.length; i++) {
 			if (i == 0 &&
 				(pcodeOp.getOpcode() == PcodeOp.LOAD || pcodeOp.getOpcode() == PcodeOp.STORE)) {
 				AddressSpace space =
 					language.getAddressFactory().getAddressSpace((int) inputValues[0].getOffset());
 				if (space != null) {
-					s += "[" + space.getName() + "], ";
+					s.append("[").append(space.getName()).append("], ");
 					continue;
 				}
 			}
 			if (inputValues[i] == null) {
-				s += "null";
+				s.append("null");
 			}
 			else if (inputValues[i] instanceof VarnodeOperation) {
-				s += "{" + inputValues[i].toString(language) + "}";
+				s.append("{").append(inputValues[i].toString(language)).append("}");
 			}
 			else {
-				s += inputValues[i].toString(language);
+				s.append(inputValues[i].toString(language));
 			}
 			if (i < inputValues.length - 1) {
-				s += ", ";
+				s.append(", ");
 			}
 		}
-		return s;
+		return s.toString();
 	}
 
 	@Override

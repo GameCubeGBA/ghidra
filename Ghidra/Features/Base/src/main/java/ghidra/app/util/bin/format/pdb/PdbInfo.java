@@ -36,7 +36,7 @@ public interface PdbInfo {
 	 * @return new PdbInfoCodeView or PdbInfoDotNet object
 	 * @throws IOException if error
 	 */
-	public static PdbInfo read(BinaryReader reader, long offset) throws IOException {
+	static PdbInfo read(BinaryReader reader, long offset) throws IOException {
 		if (PdbInfoCodeView.isMatch(reader, offset)) {
 			return PdbInfoCodeView.read(reader, offset);
 		}

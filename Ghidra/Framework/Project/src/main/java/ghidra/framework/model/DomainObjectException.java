@@ -82,7 +82,7 @@ public class DomainObjectException extends RuntimeException {
 	@Override
 	public String toString() {
 		if (t != null) {
-			return getClass().getName() + " caused by: " + t.toString();
+			return getClass().getName() + " caused by: " + t;
 		}
 		return super.toString();
 	}

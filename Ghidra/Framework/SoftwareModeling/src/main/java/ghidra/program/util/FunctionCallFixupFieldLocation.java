@@ -74,11 +74,8 @@ public class FunctionCallFixupFieldLocation extends FunctionLocation {
 		if (!super.equals(obj) || (getClass() != obj.getClass()))
 			return false;
 		FunctionCallFixupFieldLocation other = (FunctionCallFixupFieldLocation) obj;
-		if (!Objects.equals(callFixupName, other.callFixupName)) {
-			return false;
-		}
-		return true;
-	}
+        return Objects.equals(callFixupName, other.callFixupName);
+    }
 
 	@Override
 	public String toString() {

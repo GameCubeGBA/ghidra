@@ -24,23 +24,23 @@ import java.util.List;
 
 public interface FGColorProvider {
 
-	public boolean isUsingCustomColors();
+	boolean isUsingCustomColors();
 
-	public List<Color> getRecentColors();
+	List<Color> getRecentColors();
 
-	public Color getMostRecentColor();
+	Color getMostRecentColor();
 
-	public Color getColorFromUser(Color oldColor);
+	Color getColorFromUser(Color oldColor);
 
-	public void savePluginColors(SaveState saveState);
+	void savePluginColors(SaveState saveState);
 
-	public void loadPluginColor(SaveState saveState);
+	void loadPluginColor(SaveState saveState);
 
-	public void saveVertexColors(FGVertex vertex, FunctionGraphVertexAttributes settings);
+	void saveVertexColors(FGVertex vertex, FunctionGraphVertexAttributes settings);
 
-	public void loadVertexColors(FGVertex vertex, FunctionGraphVertexAttributes settings);
+	void loadVertexColors(FGVertex vertex, FunctionGraphVertexAttributes settings);
 
-	public void setVertexColor(FGVertex vertex, Color newColor);
+	void setVertexColor(FGVertex vertex, Color newColor);
 
-	public void clearVertexColor(FGVertex vertex);
+	void clearVertexColor(FGVertex vertex);
 }

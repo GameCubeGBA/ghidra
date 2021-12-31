@@ -22,8 +22,8 @@ interface TestLogger {
 
 	void logState(EmulatorTestRunner testRunner);
 
-	public void logState(EmulatorTestRunner emulatorTestRunner, Address dumpAddr, int dumpSize,
-			int elementSize, DumpFormat elementFormat, String comment);
+	void logState(EmulatorTestRunner emulatorTestRunner, Address dumpAddr, int dumpSize,
+                  int elementSize, DumpFormat elementFormat, String comment);
 
 	void log(PCodeTestGroup testGroup, String msg);
 

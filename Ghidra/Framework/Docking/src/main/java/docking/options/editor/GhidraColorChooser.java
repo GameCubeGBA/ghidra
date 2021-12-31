@@ -41,8 +41,7 @@ public class GhidraColorChooser extends JColorChooser {
 	private String activeTabName;
 
 	public GhidraColorChooser() {
-		super();
-	}
+    }
 
 	public GhidraColorChooser(Color initialColor) {
 		super(initialColor);
@@ -131,7 +130,7 @@ public class GhidraColorChooser extends JColorChooser {
 	}
 
 	private void maybeInstallSettableColorSwatchChooserPanel() {
-		if (recentColorCache.size() == 0) {
+		if (recentColorCache.isEmpty()) {
 			return;
 		}
 

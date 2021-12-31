@@ -72,10 +72,7 @@ class FunctionEdge {
 			return false;
 		}
 
-		if (!Objects.equals(start, other.start)) {
-			return false;
-		}
-		return true;
-	}
+        return Objects.equals(start, other.start);
+    }
 
 }

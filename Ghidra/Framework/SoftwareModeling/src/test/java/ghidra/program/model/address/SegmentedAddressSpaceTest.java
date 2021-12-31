@@ -35,8 +35,7 @@ public class SegmentedAddressSpaceTest extends AbstractGenericTest {
 	private SegmentedAddressSpace space;
 
 	public SegmentedAddressSpaceTest() {
-		super();
-	}
+    }
 
     @Before
     public void setUp() {

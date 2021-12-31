@@ -144,19 +144,13 @@ final class ParameterDefinitionDB implements ParameterDefinition {
 
 	@Override
 	public boolean isEquivalent(Variable otherVar) {
-		if ((otherVar == null) || !(otherVar instanceof Parameter) || (getOrdinal() != ((Parameter) otherVar).getOrdinal()) || !DataTypeUtilities.isSameOrEquivalentDataType(getDataType(), otherVar.getDataType())) {
-			return false;
-		}
-		return true;
-	}
+        return (otherVar != null) && otherVar instanceof Parameter && (getOrdinal() == ((Parameter) otherVar).getOrdinal()) && DataTypeUtilities.isSameOrEquivalentDataType(getDataType(), otherVar.getDataType());
+    }
 
 	@Override
 	public boolean isEquivalent(ParameterDefinition parm) {
-		if ((parm == null) || (getOrdinal() != parm.getOrdinal()) || !DataTypeUtilities.isSameOrEquivalentDataType(getDataType(), parm.getDataType())) {
-			return false;
-		}
-		return true;
-	}
+        return (parm != null) && (getOrdinal() == parm.getOrdinal()) && DataTypeUtilities.isSameOrEquivalentDataType(getDataType(), parm.getDataType());
+    }
 
 	@Override
 	public int compareTo(ParameterDefinition p) {

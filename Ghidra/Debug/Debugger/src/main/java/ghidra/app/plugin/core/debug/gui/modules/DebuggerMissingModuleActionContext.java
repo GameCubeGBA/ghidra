@@ -47,9 +47,6 @@ public class DebuggerMissingModuleActionContext extends ActionContext {
 			return false;
 		}
 		DebuggerMissingModuleActionContext that = (DebuggerMissingModuleActionContext) obj;
-		if (!this.module.equals(that.module)) {
-			return false;
-		}
-		return true;
-	}
+        return this.module.equals(that.module);
+    }
 }

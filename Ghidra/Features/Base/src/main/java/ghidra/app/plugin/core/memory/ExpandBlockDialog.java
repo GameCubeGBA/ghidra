@@ -44,11 +44,11 @@ import ghidra.util.layout.PairLayout;
  */
 class ExpandBlockDialog extends DialogComponentProvider implements ChangeListener {
 
-	final static int EXPAND_UP = 0;
-	final static int EXPAND_DOWN = 1;
+	static final int EXPAND_UP = 0;
+	static final int EXPAND_DOWN = 1;
 
-	private final static String EXPAND_UP_TITLE = "Expand Block Up";
-	private final static String EXPAND_DOWN_TITLE = "Expand Block Down";
+	private static final String EXPAND_UP_TITLE = "Expand Block Up";
+	private static final String EXPAND_DOWN_TITLE = "Expand Block Down";
 	private int dialogType;
 	private AddressFactory addrFactory;
 	private AddressInput startAddressInput;
@@ -91,19 +91,16 @@ class ExpandBlockDialog extends DialogComponentProvider implements ChangeListene
 	@Override
 	protected void okCallback() {
 
-		Runnable doExpand = new Runnable() {
-			@Override
-			public void run() {
-				if (model.execute()) {
-					close();
-				}
-				else {
-					setStatusText(model.getMessage());
-					setOkEnabled(false);
-				}
-				rootPanel.setCursor(Cursor.getDefaultCursor());
-			}
-		};
+		Runnable doExpand = () -> {
+            if (model.execute()) {
+                close();
+            }
+            else {
+                setStatusText(model.getMessage());
+                setOkEnabled(false);
+            }
+            rootPanel.setCursor(Cursor.getDefaultCursor());
+        };
 
 		rootPanel.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 		SwingUtilities.invokeLater(doExpand);
@@ -165,12 +162,7 @@ class ExpandBlockDialog extends DialogComponentProvider implements ChangeListene
 		endAddressInput.addChangeListener(new AddressChangeListener());
 		lengthField.setChangeListener(new LengthChangeListener());
 
-		ActionListener al = new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setStatusText("");
-			}
-		};
+		ActionListener al = e -> setStatusText("");
 		startField.addActionListener(al);
 		endField.addActionListener(al);
 		lengthField.addActionListener(al);
@@ -253,7 +245,7 @@ class ExpandBlockDialog extends DialogComponentProvider implements ChangeListene
 
 		String message = model.getMessage();
 		setStatusText(message);
-		setOkEnabled(message.length() == 0);
+		setOkEnabled(message.isEmpty());
 		lengthField.setValue(Long.valueOf(model.getLength()));
 		Address startAddr = model.getStartAddress();
 		Address endAddr = model.getEndAddress();

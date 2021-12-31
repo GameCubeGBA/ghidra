@@ -43,8 +43,7 @@ import ghidra.util.table.GhidraTable;
 public class DataTypeManagerPluginScreenShots extends GhidraScreenShotGenerator {
 
 	public DataTypeManagerPluginScreenShots() {
-		super();
-	}
+    }
 
 	@Override
 	public void setUp() throws Exception {

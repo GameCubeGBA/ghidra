@@ -58,8 +58,8 @@ public class PropertyManagerPlugin extends ProgramPlugin implements DomainObject
 
 	private static final ImageIcon propIcon = ResourceManager.loadImage("images/searchm_pink.gif");
 
-	final static String DISPLAY_ACTION_NAME = "Display Property Viewer";
-	final static String PROPERTY_MARKER_NAME = "Property Locations";
+	static final String DISPLAY_ACTION_NAME = "Display Property Viewer";
+	static final String PROPERTY_MARKER_NAME = "Property Locations";
 
 	private PropertyManagerProvider propertyViewProvider;
     private MarkerService markerService;
@@ -81,13 +81,11 @@ public class PropertyManagerPlugin extends ProgramPlugin implements DomainObject
 		markerService = tool.getService(MarkerService.class);
 
 
-		updateTimer = new Timer(500, new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (propertyViewProvider != null && propertyViewProvider.isVisible()) {
-					propertyViewProvider.refresh();
-				}
-			}
-		});
+		updateTimer = new Timer(500, e -> {
+            if (propertyViewProvider != null && propertyViewProvider.isVisible()) {
+                propertyViewProvider.refresh();
+            }
+        });
 		updateTimer.setRepeats(false);
 	}
 

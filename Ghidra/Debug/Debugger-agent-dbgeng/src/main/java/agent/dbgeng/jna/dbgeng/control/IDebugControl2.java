@@ -20,7 +20,7 @@ import com.sun.jna.platform.win32.Guid.IID;
 import agent.dbgeng.jna.dbgeng.UnknownWithUtils.VTableIndex;
 
 public interface IDebugControl2 extends IDebugControl {
-	final IID IID_IDEBUG_CONTROL2 = new IID("d4366723-44df-4bed-8c7e-4c05424f4588");
+	IID IID_IDEBUG_CONTROL2 = new IID("d4366723-44df-4bed-8c7e-4c05424f4588");
 
 	enum VTIndices2 implements VTableIndex {
 		GET_CURRENT_TIME_DATE, //

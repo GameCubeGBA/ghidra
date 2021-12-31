@@ -21,12 +21,12 @@ import ghidra.program.model.symbol.Symbol;
 
 public interface SymbolFilter {
 
-	public boolean accepts(Symbol s, Program p);
+	boolean accepts(Symbol s, Program p);
 
-	public boolean acceptsOnlyCodeSymbols();
+	boolean acceptsOnlyCodeSymbols();
 
-	public boolean acceptsDefaultLabelSymbols();
+	boolean acceptsDefaultLabelSymbols();
 
-	public boolean acceptsAll();
+	boolean acceptsAll();
 
 }

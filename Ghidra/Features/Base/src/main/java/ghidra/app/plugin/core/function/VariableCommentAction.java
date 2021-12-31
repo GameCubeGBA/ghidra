@@ -95,10 +95,7 @@ class VariableCommentAction extends ListingContextAction {
 		}
 		VariableLocation varLoc = (VariableLocation) loc;
 		Variable var = varLoc.getVariable();
-		if (var == null || varLoc.isReturn()) {
-			return false;
-		}
-		return true;
-	}
+        return var != null && !varLoc.isReturn();
+    }
 
 }

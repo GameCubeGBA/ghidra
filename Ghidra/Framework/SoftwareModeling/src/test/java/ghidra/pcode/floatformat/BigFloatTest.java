@@ -29,8 +29,7 @@ import generic.test.AbstractGenericTest;
 
 public class BigFloatTest extends AbstractGenericTest {
 	public BigFloatTest() {
-		super();
-	}
+    }
 
 	@Test
 	public void testIEEEFloatRepresentation() {
@@ -115,12 +114,12 @@ public class BigFloatTest extends AbstractGenericTest {
 	}
 
 	// used for testing one-argument operations
-	final static int NUM_RANDOM_TEST_VALUES_UNARY = 1000;
+    static final int NUM_RANDOM_TEST_VALUES_UNARY = 1000;
 	// used for each operand of two-argument operations
-	final static int NUM_RANDOM_TEST_VALUES_BINARY = 100;
+    static final int NUM_RANDOM_TEST_VALUES_BINARY = 100;
 
-	final static List<Float> testFloatList;
-	final static List<Float> testFloatShortList;
+	static final List<Float> testFloatList;
+	static final List<Float> testFloatShortList;
 	static {
 		Random rand = new Random(1);
 
@@ -146,8 +145,8 @@ public class BigFloatTest extends AbstractGenericTest {
 			testFloatList.subList(0, specialValues.size() + NUM_RANDOM_TEST_VALUES_BINARY);
 	}
 
-	final static List<Double> testDoubleList;
-	final static List<Double> testDoubleShortList;
+	static final List<Double> testDoubleList;
+	static final List<Double> testDoubleShortList;
 	static {
 		Random rand = new Random(1);
 

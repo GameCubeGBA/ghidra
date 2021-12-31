@@ -30,26 +30,26 @@ public interface GdbEvent<T> extends GdbCause {
 	 * 
 	 * @return the information
 	 */
-	public T getInfo();
+    T getInfo();
 
 	/**
 	 * Use {@link GdbPendingCommand#claim(GdbEvent)} instead
 	 * 
 	 * @param cause the cause
 	 */
-	public void claim(GdbPendingCommand<?> cause);
+    void claim(GdbPendingCommand<?> cause);
 
 	/**
 	 * If claimed, get the cause of this event
 	 * 
 	 * @return the cause
 	 */
-	public GdbCause getCause();
+    GdbCause getCause();
 
 	/**
 	 * Use {@link GdbPendingCommand#steal(GdbEvent)} instead
 	 */
-	public void steal();
+    void steal();
 
 	/**
 	 * Check if this event is stolen
@@ -58,12 +58,12 @@ public interface GdbEvent<T> extends GdbCause {
 	 * 
 	 * @return true if stolen, false otherwise
 	 */
-	public boolean isStolen();
+    boolean isStolen();
 
 	/**
 	 * If this event implies a new GDB state, get that state
 	 * 
 	 * @return the new state, or null for no change
 	 */
-	public GdbState newState();
+    GdbState newState();
 }

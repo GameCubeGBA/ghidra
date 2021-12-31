@@ -26,7 +26,6 @@ public class UsrException extends Exception {
      * Construct a new UsrException with no message
      */
     public UsrException() {
-        super();
     }
     
     /**

@@ -20,7 +20,7 @@ public class Integer3DataType extends AbstractIntegerDataType {
 	private static final long serialVersionUID = 1L;
 
 	/** A statically defined Integer3DataType instance.*/
-	public final static Integer3DataType dataType = new Integer3DataType();
+    public static final Integer3DataType dataType = new Integer3DataType();
 
 	public Integer3DataType() {
 		this(null);

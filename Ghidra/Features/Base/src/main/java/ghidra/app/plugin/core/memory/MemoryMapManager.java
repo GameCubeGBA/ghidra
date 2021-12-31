@@ -169,9 +169,7 @@ class MemoryMapManager {
 					"K extra bytes in memory.\n" +
 					"Do you really want to merge the selected Memory Block(s)?",
 				"Merge Blocks", OptionDialog.QUESTION_MESSAGE);
-			if (option == 0) {
-				return false;
-			}
+            return option != 0;
 		}
 		return true;
 	}

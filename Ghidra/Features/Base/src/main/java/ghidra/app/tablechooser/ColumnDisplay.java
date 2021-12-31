@@ -23,9 +23,9 @@ import java.util.Comparator;
  * @param <COLUMN_TYPE> column type
  */
 public interface ColumnDisplay<COLUMN_TYPE> extends Comparator<AddressableRowObject> {
-	public COLUMN_TYPE getColumnValue(AddressableRowObject rowObject);
+	COLUMN_TYPE getColumnValue(AddressableRowObject rowObject);
 
-	public String getColumnName();
+	String getColumnName();
 
-	public Class<COLUMN_TYPE> getColumnClass();
+	Class<COLUMN_TYPE> getColumnClass();
 }

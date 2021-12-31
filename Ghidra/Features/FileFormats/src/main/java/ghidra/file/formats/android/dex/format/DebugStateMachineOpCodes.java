@@ -22,7 +22,7 @@ public final class DebugStateMachineOpCodes {
 	 * Terminates a debug info sequence for a code_item
 	 * </pre>
 	 */
-	public final static byte DBG_END_SEQUENCE = 0x00;
+    public static final byte DBG_END_SEQUENCE = 0x00;
 	/**
 	 * <pre>
 	 * Advances the address register without emitting a positions entry
@@ -32,7 +32,7 @@ public final class DebugStateMachineOpCodes {
 	 * uleb128 addr_diff
 	 * </pre>
 	 */
-	public final static byte DBG_ADVANCE_PC = 0x01;
+    public static final byte DBG_ADVANCE_PC = 0x01;
 	/**
 	 * <pre>
 	 * Advances the line register without emitting a positions entry
@@ -42,7 +42,7 @@ public final class DebugStateMachineOpCodes {
 	 * sleb128 line_diff
 	 * </pre>
 	 */
-	public final static byte DBG_ADVANCE_LINE = 0x02;
+    public static final byte DBG_ADVANCE_LINE = 0x02;
 	/**
 	 * <pre>
 	 * Introduces a local variable at the current address. Either name_idx or type_idx may be NO_INDEX to indicate that that value is unknown. 
@@ -56,7 +56,7 @@ public final class DebugStateMachineOpCodes {
 	 * 	type_idx: type index of the type
 	 * </pre>
 	 */
-	public final static byte DBG_START_LOCAL = 0x03;
+    public static final byte DBG_START_LOCAL = 0x03;
 	/**
 	 * <pre>
 	 * Introduces a local with a type signature at the current address. 
@@ -76,7 +76,7 @@ public final class DebugStateMachineOpCodes {
 	 *  uleb128p1 sig_idx
 	 * </pre>
 	 */
-	public final static byte DBG_START_LOCAL_EXTENDED = 0x04;
+    public static final byte DBG_START_LOCAL_EXTENDED = 0x04;
 	/**
 	 * <pre>
 	 * Marks a currently-live local variable as out of scope at the current address 
@@ -85,7 +85,7 @@ public final class DebugStateMachineOpCodes {
 	 * 
 	 * uleb128 register_num
 	 */
-	public final static byte DBG_END_LOCAL = 0x05;
+    public static final byte DBG_END_LOCAL = 0x05;
 	/**
 	 * <pre>
 	 * Re-introduces a local variable at the current address. The name and type are the same as the last local that was live in the specified register. 
@@ -96,7 +96,7 @@ public final class DebugStateMachineOpCodes {
 	 * 
 	 * </pre>
 	 */
-	public final static byte DBG_RESTART_LOCAL = 0x06;
+    public static final byte DBG_RESTART_LOCAL = 0x06;
 	/**
 	 * <pre>
 	 * Sets the prologue_end state machine register, indicating that the next position 
@@ -105,7 +105,7 @@ public final class DebugStateMachineOpCodes {
 	 * The prologue_end register is cleared by any special (>= 0x0a) opcode.
 	 * </pre>
 	 */
-	public final static byte DBG_SET_PROLOGUE_END = 0x07;
+    public static final byte DBG_SET_PROLOGUE_END = 0x07;
 	/**
 	 * <pre>
 	 * Sets the epilogue_begin state machine register, indicating that 
@@ -115,7 +115,7 @@ public final class DebugStateMachineOpCodes {
 	 * The epilogue_begin register is cleared by any special (>= 0x0a) opcode.
 	 * </pre>
 	 */
-	public final static byte DBG_SET_EPILOGUE_BEGIN = 0x08;
+    public static final byte DBG_SET_EPILOGUE_BEGIN = 0x08;
 	/**
 	 * <pre>
 	 * Indicates that all subsequent line number entries make reference to this source file name, instead of the default name specified in code_item 
@@ -125,7 +125,7 @@ public final class DebugStateMachineOpCodes {
 	 * uleb128p1 name_idx
 	 * </pre>
 	 */
-	public final static byte DBG_SET_FILE = 0x09;
+    public static final byte DBG_SET_FILE = 0x09;
 
 	/**
 	 * <pre>
@@ -134,7 +134,7 @@ public final class DebugStateMachineOpCodes {
 	 * Special Opcodes 0x0a...0xff (none) advances the line and address registers, emits a position entry, and clears prologue_end and epilogue_begin. See below for description.
 	 * </pre>
 	 */
-	public final static boolean isSpecialOpCode(byte opcode) {
+    public static final boolean isSpecialOpCode(byte opcode) {
 		return (opcode & 0xff) >= 0xa && (opcode & 0xff) <= 0xff;
 	}
 

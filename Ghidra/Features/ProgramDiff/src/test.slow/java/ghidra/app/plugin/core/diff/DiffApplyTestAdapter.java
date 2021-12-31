@@ -50,8 +50,7 @@ public class DiffApplyTestAdapter extends DiffTestAdapter {
 	JComboBox<?> functionTagApplyCB;
 
 	public DiffApplyTestAdapter() {
-		super();
-	}
+    }
 
 	/**
 	 * Sets the indicated combo box selection to "Ignore".
@@ -61,7 +60,7 @@ public class DiffApplyTestAdapter extends DiffTestAdapter {
 		runSwing(() -> {
 			ComboBoxModel<?> model = comboBox.getModel();
 			for (int i = 0; i < model.getSize(); i++) {
-				if (model.getElementAt(i).toString().equals("Ignore")) {
+				if ("Ignore".equals(model.getElementAt(i).toString())) {
 					comboBox.setSelectedIndex(i);
 					break;
 				}
@@ -78,7 +77,7 @@ public class DiffApplyTestAdapter extends DiffTestAdapter {
 		runSwing(() -> {
 			ComboBoxModel<?> model = comboBox.getModel();
 			for (int i = 0; i < model.getSize(); i++) {
-				if (model.getElementAt(i).toString().equals("Replace")) {
+				if ("Replace".equals(model.getElementAt(i).toString())) {
 					comboBox.setSelectedIndex(i);
 					break;
 				}
@@ -95,7 +94,7 @@ public class DiffApplyTestAdapter extends DiffTestAdapter {
 		runSwing(() -> {
 			ComboBoxModel<?> model = comboBox.getModel();
 			for (int i = 0; i < model.getSize(); i++) {
-				if (model.getElementAt(i).toString().equals("Merge")) {
+				if ("Merge".equals(model.getElementAt(i).toString())) {
 					comboBox.setSelectedIndex(i);
 					break;
 				}
@@ -112,7 +111,7 @@ public class DiffApplyTestAdapter extends DiffTestAdapter {
 		runSwing(() -> {
 			ComboBoxModel<?> model = comboBox.getModel();
 			for (int i = 0; i < model.getSize(); i++) {
-				if (model.getElementAt(i).toString().equals("Merge & Set Primary")) {
+				if ("Merge & Set Primary".equals(model.getElementAt(i).toString())) {
 					comboBox.setSelectedIndex(i);
 					break;
 				}
@@ -232,11 +231,11 @@ public class DiffApplyTestAdapter extends DiffTestAdapter {
 		StringBuffer buf = new StringBuffer();
 		if (!missingFromSelection.isEmpty()) {
 			buf.append("\nSelection expected the following addresses but they are missing: \n" +
-				missingFromSelection.toString());
+                    missingFromSelection);
 		}
 		if (!unexpectedlySelected.isEmpty()) {
 			buf.append("\nSelection unexpectedly contains the following addresses: \n" +
-				unexpectedlySelected.toString());
+                    unexpectedlySelected);
 		}
 		if (buf.length() > 0) {
 			String message = buf.toString();

@@ -43,7 +43,7 @@ public class DynamicHash {
 
 	// Table for how to hash opcodes, lumps certain operators (i.e. AND SUB PTRADD PTRSUB) into one hash
 	// zero indicates the operator should be skipped
-	public final static int[] transtable = { 0, PcodeOp.COPY, PcodeOp.LOAD, PcodeOp.STORE,
+    public static final int[] transtable = { 0, PcodeOp.COPY, PcodeOp.LOAD, PcodeOp.STORE,
 		PcodeOp.BRANCH, PcodeOp.CBRANCH, PcodeOp.BRANCHIND,
 
 		PcodeOp.CALL,
@@ -281,7 +281,7 @@ public class DynamicHash {
 				break;
 		}
 
-		if (opedge.size() == 0) {
+		if (opedge.isEmpty()) {
 			hash = 0;
 			addrresult = null;
 			return;
@@ -355,18 +355,17 @@ public class DynamicHash {
 			vnlist.clear();
 			vnlist2.clear();
 			gatherFirstLevelVars(vnlist, fd, tmpaddr, tmphash);
-			for (int i = 0; i < vnlist.size(); ++i) {
-				Varnode tmpvn = vnlist.get(i);
+			for (Varnode tmpvn : vnlist) {
 				clear();
 				calcHash(tmpvn, method);
-				if (hash == tmphash) {		// Hash collision
+				if (hash == tmphash) {        // Hash collision
 					vnlist2.add(tmpvn);
 					if (vnlist2.size() > maxduplicates) {
 						break;
 					}
 				}
 			}
-			if ((vnlist2.size() <= maxduplicates) && ((champion.size() == 0) || (vnlist2.size() < champion.size()))) {
+			if ((vnlist2.size() <= maxduplicates) && ((champion.isEmpty()) || (vnlist2.size() < champion.size()))) {
 				champion = vnlist2;
 				vnlist2 = new ArrayList<>();
 				if (champion.size() == 1) {
@@ -374,7 +373,7 @@ public class DynamicHash {
 				}
 			}
 		}
-		if (champion.size() == 0) {
+		if (champion.isEmpty()) {
 			hash = 0;
 			addrresult = Address.NO_ADDRESS;	// Couldn't find a unique hash
 			return;
@@ -492,11 +491,10 @@ public class DynamicHash {
 		ArrayList<Varnode> vnlist = new ArrayList<>();
 		ArrayList<Varnode> vnlist2 = new ArrayList<>();
 		gatherFirstLevelVars(vnlist, fd, addr, h);
-		for (int i = 0; i < vnlist.size(); ++i) {
-			Varnode tmpvn = vnlist.get(i);
+		for (Varnode tmpvn : vnlist) {
 			dhash.clear();
 			dhash.calcHash(tmpvn, method);
-			if (dhash.getHash() == h) {
+			if (dhash.hash == h) {
 				vnlist2.add(tmpvn);
 			}
 		}
@@ -627,7 +625,7 @@ public class DynamicHash {
 						tmp = newtmp;
 					}
 					DynamicHash dynamicHash = new DynamicHash(op,i);
-					tmp[count] = dynamicHash.getHash();
+					tmp[count] = dynamicHash.hash;
 					if (tmp[count] != 0) {
 						count += 1;
 					}

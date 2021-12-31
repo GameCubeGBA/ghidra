@@ -36,7 +36,7 @@ import ghidra.util.task.TaskMonitor;
 // See https://docs.microsoft.com/en-us/windows/desktop/debug/pe-format
 
 public class SecurityDataDirectory extends DataDirectory implements ByteArrayConverter {
-    private final static String NAME = "IMAGE_DIRECTORY_ENTRY_SECURITY";
+    private static final String NAME = "IMAGE_DIRECTORY_ENTRY_SECURITY";
 
     private SecurityCertificate [] certificates;
 

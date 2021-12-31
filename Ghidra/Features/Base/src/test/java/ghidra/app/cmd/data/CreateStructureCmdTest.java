@@ -40,8 +40,7 @@ public class CreateStructureCmdTest extends AbstractGenericTest {
 	 * @param arg0
 	 */
 	public CreateStructureCmdTest() {
-		super();
-	}
+    }
 
 	@Before
 	public void setUp() throws Exception {

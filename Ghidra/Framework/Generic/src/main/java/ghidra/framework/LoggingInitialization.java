@@ -40,7 +40,7 @@ public class LoggingInitialization {
 	private static File SCRIPT_LOG_FILE = null;
 	private static File APPLICATION_LOG_FILE = null;
 
-	public synchronized static void initializeLoggingSystem() {
+	public static synchronized void initializeLoggingSystem() {
 
 		if (INITIALIZED) {
 			return;
@@ -145,7 +145,7 @@ public class LoggingInitialization {
 	 * Returns the default file used for logging messages.
 	 * @return the file
 	 */
-	public synchronized static File getApplicationLogFile() {
+    public static synchronized File getApplicationLogFile() {
 		if (APPLICATION_LOG_FILE == null) {
 			throw new AssertException(
 				"Before logging system is used you must call Application.initializeApplication() " +
@@ -161,7 +161,7 @@ public class LoggingInitialization {
 	 * 
 	 * @param file The file to use as the application log file
 	 */
-	synchronized static void setApplicationLogFile(File file) {
+    static synchronized void setApplicationLogFile(File file) {
 		if (APPLICATION_LOG_FILE != null && !SystemUtilities.isInTestingMode()) {
 			// don't throw the exception so that we may can continue to work
 			System.err.println("Cannot change the log file once it has been " +
@@ -184,7 +184,7 @@ public class LoggingInitialization {
 	 * Returns the default file used for logging messages.
 	 * @return the file
 	 */
-	public synchronized static File getScriptLogFile() {
+    public static synchronized File getScriptLogFile() {
 		if (SCRIPT_LOG_FILE == null) {
 			throw new AssertException(
 				"Must call Application.initializeApplication before logging system is used");
@@ -198,7 +198,7 @@ public class LoggingInitialization {
 	 * 
 	 * @param file The file to use as the application log file
 	 */
-	synchronized static void setScriptLogFile(File file) {
+    static synchronized void setScriptLogFile(File file) {
 		if (SCRIPT_LOG_FILE != null && !SystemUtilities.isInTestingMode()) {
 			// don't throw the exception so that we may can continue to work
 			System.err.println("Cannot change the log file once it has been " +

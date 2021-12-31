@@ -44,9 +44,7 @@ public abstract class AbstractDbgCommand<T> implements DbgCommand<T> {
 	@Override
 	public boolean handle(DbgEvent<?> evt, DbgPendingCommand<?> pending) {
 		if (evt instanceof DbgCommandDoneEvent) {
-			if (pending.getCommand().equals(((DbgCommandDoneEvent) evt).getCmd())) {
-				return true;
-			}
+            return pending.getCommand().equals(((DbgCommandDoneEvent) evt).getCmd());
 		}
 		return false;
 	}

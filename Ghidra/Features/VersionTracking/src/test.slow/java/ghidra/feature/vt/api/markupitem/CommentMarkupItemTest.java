@@ -38,8 +38,7 @@ import ghidra.program.model.listing.*;
 public class CommentMarkupItemTest extends AbstractVTMarkupItemTest {
 
 	public CommentMarkupItemTest() {
-		super();
-	}
+    }
 
 @Test
     public void testFindAndApplyMarkupItem_Merge_WithNonNullDestinationValue() throws Exception {

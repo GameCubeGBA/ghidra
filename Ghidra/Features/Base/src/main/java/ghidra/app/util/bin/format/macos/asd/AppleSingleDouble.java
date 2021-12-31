@@ -27,10 +27,10 @@ import java.util.List;
 
 public class AppleSingleDouble implements StructConverter {
 
-	public final static int SINGLE_MAGIC_NUMBER = 0x00051600;
-	public final static int DOUBLE_MAGIC_NUMBER = 0x00051607;
+	public static final int SINGLE_MAGIC_NUMBER = 0x00051600;
+	public static final int DOUBLE_MAGIC_NUMBER = 0x00051607;
 
-	private final static int FILLER_LEN = 16;
+	private static final int FILLER_LEN = 16;
 
 	private int     magicNumber;
 	private int     versionNumber;

@@ -669,18 +669,13 @@ public class FollowFlow {
 	private boolean shouldFollowFlow(FlowType currentFlowType) {
 		boolean shouldFollowFlow = true;
 		// Determine whether or not to follow this particular flow.
-		if ((!followAllFlow) &&
-			((currentFlowType.equals(RefType.COMPUTED_CALL) && !followComputedCall) ||
-				(currentFlowType.equals(RefType.COMPUTED_JUMP) && !followComputedJump) ||
-				(currentFlowType.equals(RefType.CONDITIONAL_JUMP) && !followConditionalJump) ||
-				(currentFlowType.equals(RefType.UNCONDITIONAL_JUMP) && !followUnconditionalJump) ||
-				(currentFlowType.equals(RefType.CONDITIONAL_CALL) && !followConditionalCall) ||
-				(currentFlowType.equals(RefType.UNCONDITIONAL_CALL) && !followUnconditionalCall) || (currentFlowType.equals(RefType.INDIRECTION) && !followPointers))) {
-			shouldFollowFlow = false;
-		}
-		else {
-			shouldFollowFlow = true;
-		}
+        shouldFollowFlow = (followAllFlow) ||
+                ((!currentFlowType.equals(RefType.COMPUTED_CALL) || followComputedCall) &&
+                        (!currentFlowType.equals(RefType.COMPUTED_JUMP) || followComputedJump) &&
+                        (!currentFlowType.equals(RefType.CONDITIONAL_JUMP) || followConditionalJump) &&
+                        (!currentFlowType.equals(RefType.UNCONDITIONAL_JUMP) || followUnconditionalJump) &&
+                        (!currentFlowType.equals(RefType.CONDITIONAL_CALL) || followConditionalCall) &&
+                        (!currentFlowType.equals(RefType.UNCONDITIONAL_CALL) || followUnconditionalCall) && (!currentFlowType.equals(RefType.INDIRECTION) || followPointers));
 		return shouldFollowFlow;
 	}
 
@@ -697,20 +692,20 @@ public class FollowFlow {
 		Reference[] refsFrom = instr.getReferencesFrom();
 		int length = refsFrom.length;
 		List<Address> list = new ArrayList<>(length);
-		for (int i = 0; i < length; i++) {
-			RefType refType = refsFrom[i].getReferenceType();
-			if (refType.isFlow() && shouldFollowFlow((FlowType) refType)) {
-				Address toAddr = refsFrom[i].getToAddress();
-				if (!followIntoFunction) {
-					SymbolTable symbolTable = program.getSymbolTable();
-					Symbol primarySymbol = symbolTable.getPrimarySymbol(toAddr);
-					if (primarySymbol.getSymbolType() == SymbolType.FUNCTION) {
-						continue;
-					}
-				}
-				list.add(toAddr);
-			}
-		}
+        for (Reference reference : refsFrom) {
+            RefType refType = reference.getReferenceType();
+            if (refType.isFlow() && shouldFollowFlow((FlowType) refType)) {
+                Address toAddr = reference.getToAddress();
+                if (!followIntoFunction) {
+                    SymbolTable symbolTable = program.getSymbolTable();
+                    Symbol primarySymbol = symbolTable.getPrimarySymbol(toAddr);
+                    if (primarySymbol.getSymbolType() == SymbolType.FUNCTION) {
+                        continue;
+                    }
+                }
+                list.add(toAddr);
+            }
+        }
 		return list.toArray(new Address[list.size()]);
 	}
 

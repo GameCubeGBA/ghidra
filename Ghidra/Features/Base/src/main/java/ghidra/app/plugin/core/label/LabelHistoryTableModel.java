@@ -27,25 +27,25 @@ import ghidra.program.model.symbol.LabelHistory;
 class LabelHistoryTableModel extends AbstractSortedTableModel<LabelHistory> {
 	private static final long serialVersionUID = 1L;
 
-	final static String ADDRESS = "Address";
-	final static String ACTION = "Action";
-	final static String LABEL = "Label";
-	final static String USER = "User";
-	final static String DATE = "Modification Date";
+	static final String ADDRESS = "Address";
+	static final String ACTION = "Action";
+	static final String LABEL = "Label";
+	static final String USER = "User";
+	static final String DATE = "Modification Date";
 
 	// columns used in the getValueAt() method
 	// Note: the address column may not exist
-	private final static int ADDRESS_COL = 0;
-	private final static int ACTION_COL = 1;
-	private final static int LABEL_COL = 2;
-	private final static int USER_COL = 3;
-	private final static int DATE_COL = 4;
+    private static final int ADDRESS_COL = 0;
+	private static final int ACTION_COL = 1;
+	private static final int LABEL_COL = 2;
+	private static final int USER_COL = 3;
+	private static final int DATE_COL = 4;
 
 	private String[] columnNames = { ADDRESS, ACTION, LABEL, USER, DATE };
 
 	private int[] columnNumbers = { ADDRESS_COL, ACTION_COL, LABEL_COL, USER_COL, DATE_COL };
 
-	private final static String[] ACTION_NAMES = { "Add", "Remove", "Rename" };
+	private static final String[] ACTION_NAMES = { "Add", "Remove", "Rename" };
 
 	private List<LabelHistory> historyList;
 	private boolean showAddress;

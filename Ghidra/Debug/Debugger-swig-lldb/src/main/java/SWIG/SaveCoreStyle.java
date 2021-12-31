@@ -12,10 +12,10 @@
 package SWIG;
 
 public final class SaveCoreStyle {
-  public final static SaveCoreStyle eSaveCoreUnspecified = new SaveCoreStyle("eSaveCoreUnspecified", lldbJNI.eSaveCoreUnspecified_get());
-  public final static SaveCoreStyle eSaveCoreFull = new SaveCoreStyle("eSaveCoreFull", lldbJNI.eSaveCoreFull_get());
-  public final static SaveCoreStyle eSaveCoreDirtyOnly = new SaveCoreStyle("eSaveCoreDirtyOnly", lldbJNI.eSaveCoreDirtyOnly_get());
-  public final static SaveCoreStyle eSaveCoreStackOnly = new SaveCoreStyle("eSaveCoreStackOnly", lldbJNI.eSaveCoreStackOnly_get());
+  public static final SaveCoreStyle eSaveCoreUnspecified = new SaveCoreStyle("eSaveCoreUnspecified", lldbJNI.eSaveCoreUnspecified_get());
+  public static final SaveCoreStyle eSaveCoreFull = new SaveCoreStyle("eSaveCoreFull", lldbJNI.eSaveCoreFull_get());
+  public static final SaveCoreStyle eSaveCoreDirtyOnly = new SaveCoreStyle("eSaveCoreDirtyOnly", lldbJNI.eSaveCoreDirtyOnly_get());
+  public static final SaveCoreStyle eSaveCoreStackOnly = new SaveCoreStyle("eSaveCoreStackOnly", lldbJNI.eSaveCoreStackOnly_get());
 
   public final int swigValue() {
     return swigValue;
@@ -28,9 +28,9 @@ public final class SaveCoreStyle {
   public static SaveCoreStyle swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-    for (int i = 0; i < swigValues.length; i++)
-      if (swigValues[i].swigValue == swigValue)
-        return swigValues[i];
+      for (SaveCoreStyle value : swigValues)
+          if (value.swigValue == swigValue)
+              return value;
     throw new IllegalArgumentException("No enum " + SaveCoreStyle.class + " with value " + swigValue);
   }
 

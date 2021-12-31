@@ -58,8 +58,8 @@ class ExtensionTableModel extends ThreadedTableModel<ExtensionDetails, List<Exte
 
 	/** We don't care about the ordering of other columns, but the install/uninstall checkbox should be 
 	 the first one and the name col is our initial sort column. */
-	final static int INSTALLED_COL = 0;
-	final static int NAME_COL = 1;
+    static final int INSTALLED_COL = 0;
+	static final int NAME_COL = 1;
 
 	/** This is the data source for the model. Whatever is here will be displayed in the table. */
 	private List<ExtensionDetails> extensions = new ArrayList<>();

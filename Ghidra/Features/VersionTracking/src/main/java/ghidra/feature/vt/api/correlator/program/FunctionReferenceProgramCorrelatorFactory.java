@@ -27,8 +27,7 @@ import ghidra.program.model.listing.Program;
 public class FunctionReferenceProgramCorrelatorFactory
 		extends VTAbstractReferenceProgramCorrelatorFactory {
 	public FunctionReferenceProgramCorrelatorFactory() {
-		super();
-		setName("Function Reference Match");
+        setName("Function Reference Match");
 		correlatorDescription =
 			"Matches functions by the accepted function matches they have in common.";
 

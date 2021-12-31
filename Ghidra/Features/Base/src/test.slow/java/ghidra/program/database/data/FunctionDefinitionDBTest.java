@@ -32,8 +32,7 @@ public class FunctionDefinitionDBTest extends AbstractGhidraHeadedIntegrationTes
 	private FunctionDefinition functionDt;
 
 	public FunctionDefinitionDBTest() {
-		super();
-	}
+    }
 
 	private void startTransaction() {
 		transactionID = program.startTransaction("Test");

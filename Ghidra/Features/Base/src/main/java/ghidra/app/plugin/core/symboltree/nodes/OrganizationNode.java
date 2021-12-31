@@ -187,7 +187,7 @@ public class OrganizationNode extends SymbolTreeNode {
 
 	@Override
 	public String getToolTip() {
-		return "Contains labels that start with \"" + getName() + "\" (" + totalCount + ")";
+		return "Contains labels that start with \"" + baseName + "\" (" + totalCount + ")";
 	}
 
 	@Override
@@ -224,7 +224,7 @@ public class OrganizationNode extends SymbolTreeNode {
 			return;
 		}
 
-		int index = Collections.binarySearch(getChildren(), newNode, getChildrenComparator());
+		int index = Collections.binarySearch(getChildren(), newNode, COMPARATOR);
 		if (index >= 0) {
 			// found a match
 			GTreeNode matchingNode = getChild(index);

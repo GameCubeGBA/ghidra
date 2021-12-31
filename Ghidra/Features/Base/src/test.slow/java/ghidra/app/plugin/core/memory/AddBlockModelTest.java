@@ -50,8 +50,7 @@ public class AddBlockModelTest extends AbstractGhidraHeadedIntegrationTest
 	 * @param name
 	 */
 	public AddBlockModelTest() {
-		super();
-	}
+    }
 
 	private Program buildProgram(String programName) throws Exception {
 		ProgramBuilder builder = new ProgramBuilder(programName, ProgramBuilder._TOY);
@@ -157,7 +156,7 @@ public class AddBlockModelTest extends AbstractGhidraHeadedIntegrationTest
 	public void testBadName() {
 		model.setBlockName(">/== test");
 		assertTrue(!model.isValidInfo());
-		assertTrue(model.getMessage().length() > 0);
+		assertTrue(!model.getMessage().isEmpty());
 	}
 
 	@Test
@@ -265,7 +264,7 @@ public class AddBlockModelTest extends AbstractGhidraHeadedIntegrationTest
 	public void testInvalidNameSetting() {
 		model.setBlockName("");
 		assertTrue(!model.isValidInfo());
-		assertTrue(model.getMessage().length() > 0);
+		assertTrue(!model.getMessage().isEmpty());
 	}
 
 	@Test

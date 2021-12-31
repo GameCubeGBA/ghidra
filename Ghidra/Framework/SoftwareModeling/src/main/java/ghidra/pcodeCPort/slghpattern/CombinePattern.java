@@ -65,11 +65,8 @@ public class CombinePattern extends DisjointPattern {
 
 	@Override
 	public boolean isMatch(ParserWalker pos) {
-		if (!instr.isMatch(pos) || !context.isMatch(pos)) {
-			return false;
-		}
-		return true;
-	}
+        return instr.isMatch(pos) && context.isMatch(pos);
+    }
 
 	@Override
 	public boolean alwaysTrue() {

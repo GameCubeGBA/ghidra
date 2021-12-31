@@ -17,5 +17,5 @@
 package ghidra.program.util.string;
 
 public interface FoundStringCallback {
-	public void stringFound(FoundString foundString);
+	void stringFound(FoundString foundString);
 }

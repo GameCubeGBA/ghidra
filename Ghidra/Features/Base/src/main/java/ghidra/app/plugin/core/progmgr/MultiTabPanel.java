@@ -38,19 +38,19 @@ import resources.ResourceManager;
  */
 public class MultiTabPanel extends JPanel {
 
-	private final static Color SELECTED_TAB_COLOR = new Color(120, 140, 189);
-	private final static Color HIGHLIGHTED_TAB_COLOR = SELECTED_TAB_COLOR.brighter();
-	private final static Icon EMPTY16_ICON = ResourceManager.loadImage("images/EmptyIcon16.gif");
-	private final static Icon EMPTY8_ICON = ResourceManager.loadImage("images/empty8x16.png");
-	private final static Icon CLOSE_ICON = ResourceManager.loadImage("images/x.gif");
-	private final static Icon HIGHLIGHT_CLOSE_ICON = ResourceManager.loadImage("images/pinkX.gif");
-	private final static Icon LIST_ICON = ResourceManager.loadImage("images/VCRFastForward.gif");
-	private final static Icon TRANSIENT_ICON = ResourceManager.loadImage("images/link.png", 8, 16);
+	private static final Color SELECTED_TAB_COLOR = new Color(120, 140, 189);
+	private static final Color HIGHLIGHTED_TAB_COLOR = SELECTED_TAB_COLOR.brighter();
+	private static final Icon EMPTY16_ICON = ResourceManager.loadImage("images/EmptyIcon16.gif");
+	private static final Icon EMPTY8_ICON = ResourceManager.loadImage("images/empty8x16.png");
+	private static final Icon CLOSE_ICON = ResourceManager.loadImage("images/x.gif");
+	private static final Icon HIGHLIGHT_CLOSE_ICON = ResourceManager.loadImage("images/pinkX.gif");
+	private static final Icon LIST_ICON = ResourceManager.loadImage("images/VCRFastForward.gif");
+	private static final Icon TRANSIENT_ICON = ResourceManager.loadImage("images/link.png", 8, 16);
 
-	private final static Color TEXT_SELECTION_COLOR = Color.WHITE;
-	private final static Color TEXT_NON_SELECTION_COLOR = UIManager.getColor("Tree.textForeground");
-	private final static Color BG_SELECTION_COLOR = SELECTED_TAB_COLOR;
-	private final static Color BG_NON_SELECTION_COLOR = UIManager.getColor("Panel.background");
+	private static final Color TEXT_SELECTION_COLOR = Color.WHITE;
+	private static final Color TEXT_NON_SELECTION_COLOR = UIManager.getColor("Tree.textForeground");
+	private static final Color BG_SELECTION_COLOR = SELECTED_TAB_COLOR;
+	private static final Color BG_NON_SELECTION_COLOR = UIManager.getColor("Panel.background");
 
 	private static final Font LABEL_FONT = new Font("Tahoma", Font.PLAIN, 11);
 	private static final Font LIST_LABEL_FONT = new Font("Tahoma", Font.BOLD, 9);
@@ -80,8 +80,7 @@ public class MultiTabPanel extends JPanel {
 	private boolean ignoreFocus;
 
 	MultiTabPanel(MultiTabPlugin multiTabPlugin) {
-		super();
-		this.multiTabPlugin = multiTabPlugin;
+        this.multiTabPlugin = multiTabPlugin;
 		setLayout(new HorizontalLayout(0));
 
 		// we use a linked map to maintain insertion order
@@ -126,8 +125,8 @@ public class MultiTabPanel extends JPanel {
 		currentProgram = null;
 		ArrayList<Program> list = new ArrayList<>(linkedProgramMap.keySet());
 
-		for (int i = 0; i < list.size(); i++) {
-			doRemoveProgram(list.get(i));
+		for (Program program : list) {
+			doRemoveProgram(program);
 		}
 		linkedProgramMap.clear();
 		visibleTabList.clear();
@@ -431,7 +430,7 @@ public class MultiTabPanel extends JPanel {
 	}
 
 	private int getNextProgramIndex(int visibleListIndex, boolean forwardDirection) {
-		boolean hasHiddenPrograms = hiddenTabList.size() != 0;
+		boolean hasHiddenPrograms = !hiddenTabList.isEmpty();
 
 		if (forwardDirection) {
 			visibleListIndex++;

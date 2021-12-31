@@ -27,8 +27,7 @@ public class MemoryBlockException extends MemoryAccessException {
 	 *
 	 */
 	public MemoryBlockException() {
-		super();
-	}
+    }
 	/**
 	 * Constructs a new MemoryBlockException with a detailed message.
 	 * @param msg detailed message

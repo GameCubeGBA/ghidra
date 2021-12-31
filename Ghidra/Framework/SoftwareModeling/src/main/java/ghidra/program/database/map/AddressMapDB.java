@@ -64,46 +64,46 @@ import ghidra.util.task.TaskMonitor;
 
 public class AddressMapDB implements AddressMap {
 
-	final static int ADDR_TYPE_SIZE = 4;
-	private final static long ADDR_TYPE_SHIFT = 64 - ADDR_TYPE_SIZE;
-	private final static int ADDR_TYPE_MASK = (1 << ADDR_TYPE_SIZE) - 1;
+	static final int ADDR_TYPE_SIZE = 4;
+	private static final long ADDR_TYPE_SHIFT = 64 - ADDR_TYPE_SIZE;
+	private static final int ADDR_TYPE_MASK = (1 << ADDR_TYPE_SIZE) - 1;
 
 	//private final static long ID_OFFSET_MASK = (1 << ADDR_TYPE_SHIFT) - 1;
 
-	final static int ADDR_OFFSET_SIZE = 32;
-	private final static long MAX_OFFSET = (1L << ADDR_OFFSET_SIZE) - 1;
-	final static long ADDR_OFFSET_MASK = MAX_OFFSET;
-	final static long BASE_MASK = ~ADDR_OFFSET_MASK;
+	static final int ADDR_OFFSET_SIZE = 32;
+	private static final long MAX_OFFSET = (1L << ADDR_OFFSET_SIZE) - 1;
+	static final long ADDR_OFFSET_MASK = MAX_OFFSET;
+	static final long BASE_MASK = ~ADDR_OFFSET_MASK;
 
-	private final static int HASH_OFFSET_SIZE = AddressSpace.HASH_SPACE.getSize(); // 60
-	private final static long HASH_OFFSET_MASK = (1L << HASH_OFFSET_SIZE) - 1;
+	private static final int HASH_OFFSET_SIZE = AddressSpace.HASH_SPACE.getSize(); // 60
+	private static final long HASH_OFFSET_MASK = (1L << HASH_OFFSET_SIZE) - 1;
 
-	private final static int ID_SIZE = 64 - ADDR_TYPE_SIZE - ADDR_OFFSET_SIZE;
-	private final static int ID_MASK = (1 << ID_SIZE) - 1;
+	private static final int ID_SIZE = 64 - ADDR_TYPE_SIZE - ADDR_OFFSET_SIZE;
+	private static final int ID_MASK = (1 << ID_SIZE) - 1;
 
-	private final static int OLD_ADDRESS_KEY_TYPE = 0x0;
-	private final static int ABSOLUTE_ADDR_TYPE = 0x1; // uses base ID to identify 32-bit segment base address
-	private final static int RELOCATABLE_ADDR_TYPE = 0x2; // uses base ID to identify 32-bit segment base address
-	private final static int REGISTER_ADDR_TYPE = 0x3;
-	private final static int STACK_ADDR_TYPE = 0x4;
-	private final static int EXTERNAL_ADDR_TYPE = 0x5;
-	private final static int VARIABLE_ADDR_TYPE = 0x6;
-	private final static int HASH_ADDR_TYPE = 0x7; // corresponds to static HASH_SPACE with 60-bit offset
+	private static final int OLD_ADDRESS_KEY_TYPE = 0x0;
+	private static final int ABSOLUTE_ADDR_TYPE = 0x1; // uses base ID to identify 32-bit segment base address
+	private static final int RELOCATABLE_ADDR_TYPE = 0x2; // uses base ID to identify 32-bit segment base address
+	private static final int REGISTER_ADDR_TYPE = 0x3;
+	private static final int STACK_ADDR_TYPE = 0x4;
+	private static final int EXTERNAL_ADDR_TYPE = 0x5;
+	private static final int VARIABLE_ADDR_TYPE = 0x6;
+	private static final int HASH_ADDR_TYPE = 0x7; // corresponds to static HASH_SPACE with 60-bit offset
 
-	private final static int NO_ADDR_TYPE = 0xf;
+	private static final int NO_ADDR_TYPE = 0xf;
 
-	private final static long RELOCATABLE_ADDR_TYPE_LONG =
+	private static final long RELOCATABLE_ADDR_TYPE_LONG =
 		(long) RELOCATABLE_ADDR_TYPE << ADDR_TYPE_SHIFT;
-	private final static long ABSOLUTE_ADDR_TYPE_LONG =
+	private static final long ABSOLUTE_ADDR_TYPE_LONG =
 		(long) ABSOLUTE_ADDR_TYPE << ADDR_TYPE_SHIFT;
-	private final static long REGISTER_ADDR_TYPE_LONG =
+	private static final long REGISTER_ADDR_TYPE_LONG =
 		(long) REGISTER_ADDR_TYPE << ADDR_TYPE_SHIFT;
-	private final static long STACK_ADDR_TYPE_LONG = (long) STACK_ADDR_TYPE << ADDR_TYPE_SHIFT;
-	private final static long EXTERNAL_ADDR_TYPE_LONG =
+	private static final long STACK_ADDR_TYPE_LONG = (long) STACK_ADDR_TYPE << ADDR_TYPE_SHIFT;
+	private static final long EXTERNAL_ADDR_TYPE_LONG =
 		(long) EXTERNAL_ADDR_TYPE << ADDR_TYPE_SHIFT;
-	private final static long VARIABLE_ADDR_TYPE_LONG =
+	private static final long VARIABLE_ADDR_TYPE_LONG =
 		(long) VARIABLE_ADDR_TYPE << ADDR_TYPE_SHIFT;
-	private final static long HASH_ADDR_TYPE_LONG = (long) HASH_ADDR_TYPE << ADDR_TYPE_SHIFT;
+	private static final long HASH_ADDR_TYPE_LONG = (long) HASH_ADDR_TYPE << ADDR_TYPE_SHIFT;
 
 	private AddressFactory addrFactory;
 	private boolean readOnly;

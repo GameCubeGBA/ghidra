@@ -28,25 +28,25 @@ import ghidra.framework.options.Options;
  */
 public interface VTControllerListener {
 
-	public void sessionChanged(VTSession session);
+	void sessionChanged(VTSession session);
 
 	/**
 	 * Indicates that the version tracking match that is selected has changed.
 	 * @param matchInfo the matchInfo for the match that is now selected or null
 	 * if no item is selected or multiple matches are selected.
 	 */
-	public void matchSelected(MatchInfo matchInfo);
+    void matchSelected(MatchInfo matchInfo);
 
-	public void sessionUpdated(DomainObjectChangedEvent ev);
+	void sessionUpdated(DomainObjectChangedEvent ev);
 
 	/**
 	 * Indicates that the version tracking mark-up item that is selected has changed.
 	 * @param markupItem the mark-up item that is now selected or null
 	 * if no item is selected or multiple mark-up items are selected.
 	 */
-	public void markupItemSelected(VTMarkupItem markupItem);
+    void markupItemSelected(VTMarkupItem markupItem);
 
-	public void optionsChanged(Options options);
+	void optionsChanged(Options options);
 
-	public void disposed();
+	void disposed();
 }

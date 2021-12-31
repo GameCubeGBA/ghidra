@@ -12,16 +12,16 @@
 package SWIG;
 
 public final class WatchpointEventType {
-  public final static WatchpointEventType eWatchpointEventTypeInvalidType = new WatchpointEventType("eWatchpointEventTypeInvalidType", lldbJNI.eWatchpointEventTypeInvalidType_get());
-  public final static WatchpointEventType eWatchpointEventTypeAdded = new WatchpointEventType("eWatchpointEventTypeAdded", lldbJNI.eWatchpointEventTypeAdded_get());
-  public final static WatchpointEventType eWatchpointEventTypeRemoved = new WatchpointEventType("eWatchpointEventTypeRemoved", lldbJNI.eWatchpointEventTypeRemoved_get());
-  public final static WatchpointEventType eWatchpointEventTypeEnabled = new WatchpointEventType("eWatchpointEventTypeEnabled", lldbJNI.eWatchpointEventTypeEnabled_get());
-  public final static WatchpointEventType eWatchpointEventTypeDisabled = new WatchpointEventType("eWatchpointEventTypeDisabled", lldbJNI.eWatchpointEventTypeDisabled_get());
-  public final static WatchpointEventType eWatchpointEventTypeCommandChanged = new WatchpointEventType("eWatchpointEventTypeCommandChanged", lldbJNI.eWatchpointEventTypeCommandChanged_get());
-  public final static WatchpointEventType eWatchpointEventTypeConditionChanged = new WatchpointEventType("eWatchpointEventTypeConditionChanged", lldbJNI.eWatchpointEventTypeConditionChanged_get());
-  public final static WatchpointEventType eWatchpointEventTypeIgnoreChanged = new WatchpointEventType("eWatchpointEventTypeIgnoreChanged", lldbJNI.eWatchpointEventTypeIgnoreChanged_get());
-  public final static WatchpointEventType eWatchpointEventTypeThreadChanged = new WatchpointEventType("eWatchpointEventTypeThreadChanged", lldbJNI.eWatchpointEventTypeThreadChanged_get());
-  public final static WatchpointEventType eWatchpointEventTypeTypeChanged = new WatchpointEventType("eWatchpointEventTypeTypeChanged", lldbJNI.eWatchpointEventTypeTypeChanged_get());
+  public static final WatchpointEventType eWatchpointEventTypeInvalidType = new WatchpointEventType("eWatchpointEventTypeInvalidType", lldbJNI.eWatchpointEventTypeInvalidType_get());
+  public static final WatchpointEventType eWatchpointEventTypeAdded = new WatchpointEventType("eWatchpointEventTypeAdded", lldbJNI.eWatchpointEventTypeAdded_get());
+  public static final WatchpointEventType eWatchpointEventTypeRemoved = new WatchpointEventType("eWatchpointEventTypeRemoved", lldbJNI.eWatchpointEventTypeRemoved_get());
+  public static final WatchpointEventType eWatchpointEventTypeEnabled = new WatchpointEventType("eWatchpointEventTypeEnabled", lldbJNI.eWatchpointEventTypeEnabled_get());
+  public static final WatchpointEventType eWatchpointEventTypeDisabled = new WatchpointEventType("eWatchpointEventTypeDisabled", lldbJNI.eWatchpointEventTypeDisabled_get());
+  public static final WatchpointEventType eWatchpointEventTypeCommandChanged = new WatchpointEventType("eWatchpointEventTypeCommandChanged", lldbJNI.eWatchpointEventTypeCommandChanged_get());
+  public static final WatchpointEventType eWatchpointEventTypeConditionChanged = new WatchpointEventType("eWatchpointEventTypeConditionChanged", lldbJNI.eWatchpointEventTypeConditionChanged_get());
+  public static final WatchpointEventType eWatchpointEventTypeIgnoreChanged = new WatchpointEventType("eWatchpointEventTypeIgnoreChanged", lldbJNI.eWatchpointEventTypeIgnoreChanged_get());
+  public static final WatchpointEventType eWatchpointEventTypeThreadChanged = new WatchpointEventType("eWatchpointEventTypeThreadChanged", lldbJNI.eWatchpointEventTypeThreadChanged_get());
+  public static final WatchpointEventType eWatchpointEventTypeTypeChanged = new WatchpointEventType("eWatchpointEventTypeTypeChanged", lldbJNI.eWatchpointEventTypeTypeChanged_get());
 
   public final int swigValue() {
     return swigValue;
@@ -34,9 +34,9 @@ public final class WatchpointEventType {
   public static WatchpointEventType swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-    for (int i = 0; i < swigValues.length; i++)
-      if (swigValues[i].swigValue == swigValue)
-        return swigValues[i];
+      for (WatchpointEventType value : swigValues)
+          if (value.swigValue == swigValue)
+              return value;
     throw new IllegalArgumentException("No enum " + WatchpointEventType.class + " with value " + swigValue);
   }
 

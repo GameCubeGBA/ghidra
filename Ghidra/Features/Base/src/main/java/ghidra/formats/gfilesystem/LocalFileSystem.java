@@ -332,10 +332,7 @@ public class LocalFileSystem implements GFileSystem, GFileHashProvider {
 			else if (!path.equals(other.path)) {
 				return false;
 			}
-			if (timestamp != other.timestamp) {
-				return false;
-			}
-			return true;
-		}
+            return timestamp == other.timestamp;
+        }
 	}
 }

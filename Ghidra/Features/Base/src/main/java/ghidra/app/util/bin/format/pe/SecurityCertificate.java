@@ -44,13 +44,13 @@ public class SecurityCertificate implements StructConverter {
 	/**
 	 * The name to use when converting into a structure data type.
 	 */
-	public final static String NAME = "WIN_CERTIFICATE";
+    public static final String NAME = "WIN_CERTIFICATE";
 
     //
     // Currently, the only defined certificate revision is WIN_CERT_REVISION_1_0
     //
-    public final static int WIN_CERT_REVISION_1_0 = 0x0100;
-    public final static int WIN_CERT_REVISION_2_0 = 0x0200;
+    public static final int WIN_CERT_REVISION_1_0 = 0x0100;
+    public static final int WIN_CERT_REVISION_2_0 = 0x0200;
 
     //
     // Possible certificate types are specified by the following values
@@ -58,19 +58,19 @@ public class SecurityCertificate implements StructConverter {
     /**
      * bCertificate contains an X.509 Certificate.
      */
-    public final static int WIN_CERT_TYPE_X509             = 0x0001;
+    public static final int WIN_CERT_TYPE_X509             = 0x0001;
     /**
      * bCertificate contains a PKCS SignedData structure.
      */
-    public final static int WIN_CERT_TYPE_PKCS_SIGNED_DATA = 0x0002;
+    public static final int WIN_CERT_TYPE_PKCS_SIGNED_DATA = 0x0002;
     /**
      * Reserved.
      */
-    public final static int WIN_CERT_TYPE_RESERVED_1       = 0x0003;
+    public static final int WIN_CERT_TYPE_RESERVED_1       = 0x0003;
     /**
      * bCertificate contains PKCS1_MODULE_SIGN fields.
      */
-    public final static int WIN_CERT_TYPE_PKCS1_SIGN      = 0x0009;
+    public static final int WIN_CERT_TYPE_PKCS1_SIGN      = 0x0009;
 
     private int dwLength;
     private short wRevision;

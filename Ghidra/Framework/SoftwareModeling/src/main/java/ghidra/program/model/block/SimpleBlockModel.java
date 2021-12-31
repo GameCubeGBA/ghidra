@@ -77,7 +77,7 @@ import ghidra.util.task.TaskMonitor;
 public class SimpleBlockModel implements CodeBlockModel {
 
 	public static final String NAME = "Simple Block";
-	protected final static CodeBlock[] emptyArray = {};
+	protected static final CodeBlock[] emptyArray = {};
 
 	protected Program program;
 	protected Listing listing;

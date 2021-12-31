@@ -32,8 +32,7 @@ import generic.test.AbstractGenericTest;
 public class PlaceholderSetTest extends AbstractGenericTest {
 
 	public PlaceholderSetTest() {
-		super();
-	}
+    }
 
 	@Test
 	public void testDedupingRestoredPlaceholders_OnlyOneHidden() {

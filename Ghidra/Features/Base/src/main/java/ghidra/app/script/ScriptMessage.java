@@ -44,7 +44,7 @@ public class ScriptMessage implements Message {
 	public String getFormat() {
 		// special message used by filter when 'useRawMsg="true"'; this is the "raw" message used
 		// by log4j when running its filter
-		return "Format:GhidraScript" + getFormattedMessage();
+		return "Format:GhidraScript" + message;
 	}
 
 	@Override

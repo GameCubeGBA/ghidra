@@ -45,8 +45,7 @@ public class MatchSet extends HashSet<Match>
 	 */
 	public MatchSet( String thisProgramName, String otherProgramName )
 	{
-		super();
-		this.thisName = thisProgramName;
+        this.thisName = thisProgramName;
 		this.otherName = otherProgramName;
 	}
 		

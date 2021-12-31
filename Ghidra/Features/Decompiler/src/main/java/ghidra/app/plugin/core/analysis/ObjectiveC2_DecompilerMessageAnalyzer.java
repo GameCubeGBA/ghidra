@@ -134,7 +134,7 @@ public class ObjectiveC2_DecompilerMessageAnalyzer extends AbstractAnalyzer {
 			currentMethodName = null;
 			PcodeOpAST op = pcodeOps.next();
 			String mnemonic = op.getMnemonic();
-			if (mnemonic == null || (!mnemonic.equals("CALL") && !mnemonic.equals("CALLIND"))) {
+			if (mnemonic == null || (!"CALL".equals(mnemonic) && !"CALLIND".equals(mnemonic))) {
 				continue;
 			}
 			Varnode[] inputs = op.getInputs();
@@ -377,7 +377,7 @@ public class ObjectiveC2_DecompilerMessageAnalyzer extends AbstractAnalyzer {
 		HighVariable highVar = input.getHigh();
 		if (highVar != null) {
 			name = highVar.getName();
-			if (name != null && name.equals("param_1")) {
+			if (name != null && "param_1".equals(name)) {
 				if (numInputs == 1) {
 					if (isClass) {
 						Namespace namespace = function.getParentNamespace();
@@ -735,11 +735,8 @@ public class ObjectiveC2_DecompilerMessageAnalyzer extends AbstractAnalyzer {
 		Address address = function.getEntryPoint();
 		Memory memory = program.getMemory();
 		MemoryBlock block = memory.getBlock(address);
-		if (block.getName().equals("__text")) {
-			return true;
-		}
-		return false;
-	}
+        return "__text".equals(block.getName());
+    }
 
 	private boolean isClass(int index, boolean isStret) {
 		boolean isClass;
@@ -782,9 +779,7 @@ public class ObjectiveC2_DecompilerMessageAnalyzer extends AbstractAnalyzer {
 				return false;
 			}
 			Function function = program.getListing().getFunctionAt(address);
-			if (function.getName().equals("_objc_msgSendSuper2")) {
-				return true;
-			}
+            return "_objc_msgSendSuper2".equals(function.getName());
 		}
 		return false;
 	}
@@ -804,63 +799,49 @@ public class ObjectiveC2_DecompilerMessageAnalyzer extends AbstractAnalyzer {
 
 	private boolean isClassNameBlock(MemoryBlock block) {
 		if (block != null) {
-			if (block.getName().equals("__objc_classname")) {
-				return true;
-			}
+            return "__objc_classname".equals(block.getName());
 		}
 		return false;
 	}
 
 	private boolean isCStringBlock(MemoryBlock block) {
 		if (block != null) {
-			if (block.getName().equals(SectionNames.TEXT_CSTRING)) {
-				return true;
-			}
+            return block.getName().equals(SectionNames.TEXT_CSTRING);
 		}
 		return false;
 	}
 
 	private boolean isCFStringBlock(MemoryBlock block) {
 		if (block != null) {
-			if (block.getName().equals("__cfstring")) {
-				return true;
-			}
+            return "__cfstring".equals(block.getName());
 		}
 		return false;
 	}
 
 	private boolean isDataBlock(MemoryBlock block) {
 		if (block != null) {
-			if (block.getName().equals("__data")) {
-				return true;
-			}
+            return "__data".equals(block.getName());
 		}
 		return false;
 	}
 
 	private boolean isObjcDataBlock(MemoryBlock block) {
 		if (block != null) {
-			if (block.getName().equals("__objc_data")) {
-				return true;
-			}
+            return "__objc_data".equals(block.getName());
 		}
 		return false;
 	}
 
 	private boolean isIvarBlock(MemoryBlock block) {
 		if (block != null) {
-			if (block.getName().equals("__objc_ivar")) {
-				return true;
-			}
+            return "__objc_ivar".equals(block.getName());
 		}
 		return false;
 	}
 
 	private boolean isObjcConstBlock(MemoryBlock block) {
 		if (block != null) {
-			if (block.getName().equals(ObjectiveC2_Constants.OBJC2_CONST)) {
-				return true;
-			}
+            return block.getName().equals(ObjectiveC2_Constants.OBJC2_CONST);
 		}
 		return false;
 	}

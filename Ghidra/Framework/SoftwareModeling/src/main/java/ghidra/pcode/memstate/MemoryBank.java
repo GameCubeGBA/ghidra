@@ -233,7 +233,7 @@ public abstract class MemoryBank {
 			if (cursize != 0) {
 				// Handle incomplete read from current page 
 				skip += initializedByteCount;
-				if (faultHandler.uninitializedRead(getSpace().getAddress(offalign + skip), cursize,
+				if (faultHandler.uninitializedRead(space.getAddress(offalign + skip), cursize,
 					page.data, skip)) {
 					page.setInitialized(skip, cursize);
 				}

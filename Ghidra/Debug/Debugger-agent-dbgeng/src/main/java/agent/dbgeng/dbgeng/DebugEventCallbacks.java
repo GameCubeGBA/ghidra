@@ -31,7 +31,7 @@ import ghidra.comm.util.BitmaskUniverse;
  * purport to return a {@link DebugStatus}, the returned value is ignored by {@code dbgeng.dll}.
  */
 public interface DebugEventCallbacks {
-	public static enum DebugEvent implements BitmaskUniverse {
+	enum DebugEvent implements BitmaskUniverse {
 		BREAKPOINT(1 << 0), //
 		EXCEPTION(1 << 1), //
 		CREATE_THREAD(1 << 2), //
@@ -64,7 +64,7 @@ public interface DebugEventCallbacks {
 	 */
 	@Target(ElementType.METHOD)
 	@Retention(RetentionPolicy.RUNTIME)
-	static @interface ForInterest {
+    @interface ForInterest {
 		/**
 		 * The flag corresponding to the annotated callback method
 		 * 

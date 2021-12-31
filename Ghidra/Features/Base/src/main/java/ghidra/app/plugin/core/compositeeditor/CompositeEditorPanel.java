@@ -1035,7 +1035,7 @@ public abstract class CompositeEditorPanel extends JPanel
 	 */
 	@Override
 	public void statusChanged(String message, boolean beep) {
-		if ((message == null) || (message.length() == 0)) {
+		if ((message == null) || (message.isEmpty())) {
 			message = " ";
 		}
 		setStatus(message);

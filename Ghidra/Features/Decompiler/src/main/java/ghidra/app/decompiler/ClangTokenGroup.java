@@ -154,21 +154,19 @@ public class ClangTokenGroup implements ClangNode, Iterable<ClangNode> {
 	public String toString() {
 		String lastTokenStr = null;
 		StringBuffer buffer = new StringBuffer();
-		Iterator<ClangNode> iter = tokgroup.iterator();
-		while (iter.hasNext()) {
-			ClangNode node = iter.next();
-			String tokenStr = node.toString();
-			if (tokenStr.length() == 0) {
-				continue;
-			}
-			if (lastTokenStr != null && isLetterDigitOrUnderscore(tokenStr.charAt(0)) &&
-				isLetterDigitOrUnderscore(lastTokenStr.charAt(lastTokenStr.length() - 1))) {
-				// avoid concatenating names together
-				buffer.append(' ');
-			}
-			lastTokenStr = tokenStr;
-			buffer.append(tokenStr);
-		}
+        for (ClangNode node : tokgroup) {
+            String tokenStr = node.toString();
+            if (tokenStr.isEmpty()) {
+                continue;
+            }
+            if (lastTokenStr != null && isLetterDigitOrUnderscore(tokenStr.charAt(0)) &&
+                    isLetterDigitOrUnderscore(lastTokenStr.charAt(lastTokenStr.length() - 1))) {
+                // avoid concatenating names together
+                buffer.append(' ');
+            }
+            lastTokenStr = tokenStr;
+            buffer.append(tokenStr);
+        }
 		return buffer.toString();
 	}
 

@@ -45,7 +45,7 @@ import ghidra.dbg.target.schema.TargetAttributeType;
 @DebuggerTargetObjectIface("BreakpointSpec")
 public interface TargetBreakpointSpec extends TargetObject, /*@Transitional*/ TargetTogglable {
 
-	public enum TargetBreakpointKind {
+	enum TargetBreakpointKind {
 		/**
 		 * A read breakpoint, likely implemented in hardware
 		 */
@@ -81,7 +81,7 @@ public interface TargetBreakpointSpec extends TargetObject, /*@Transitional*/ Ta
 	 * @return a reference to the container
 	 */
 	@TargetAttributeType(name = CONTAINER_ATTRIBUTE_NAME, required = true, hidden = true)
-	public default TargetBreakpointSpecContainer getContainer() {
+    default TargetBreakpointSpecContainer getContainer() {
 		return getTypedAttributeNowByName(CONTAINER_ATTRIBUTE_NAME,
 			TargetBreakpointSpecContainer.class,
 			null);
@@ -97,7 +97,7 @@ public interface TargetBreakpointSpec extends TargetObject, /*@Transitional*/ Ta
 	 * @return the expression
 	 */
 	@TargetAttributeType(name = EXPRESSION_ATTRIBUTE_NAME, required = true, hidden = true)
-	public default String getExpression() {
+    default String getExpression() {
 		return getTypedAttributeNowByName(EXPRESSION_ATTRIBUTE_NAME, String.class, "");
 	}
 
@@ -107,7 +107,7 @@ public interface TargetBreakpointSpec extends TargetObject, /*@Transitional*/ Ta
 	 * @return the kinds
 	 */
 	@TargetAttributeType(name = KINDS_ATTRIBUTE_NAME, required = true, hidden = true)
-	public default TargetBreakpointKindSet getKinds() {
+    default TargetBreakpointKindSet getKinds() {
 		return getTypedAttributeNowByName(KINDS_ATTRIBUTE_NAME, TargetBreakpointKindSet.class,
 			TargetBreakpointKindSet.EMPTY);
 	}
@@ -123,16 +123,16 @@ public interface TargetBreakpointSpec extends TargetObject, /*@Transitional*/ Ta
 	 * 
 	 * @param action the action to execute
 	 */
-	public void addAction(TargetBreakpointAction action);
+    void addAction(TargetBreakpointAction action);
 
 	/**
 	 * Remove an action from this breakpoint
 	 * 
 	 * @param action the action to remove
 	 */
-	public void removeAction(TargetBreakpointAction action);
+    void removeAction(TargetBreakpointAction action);
 
-	public interface TargetBreakpointAction {
+	interface TargetBreakpointAction {
 		/**
 		 * An effective breakpoint from this specification trapped execution
 		 * 
@@ -156,7 +156,7 @@ public interface TargetBreakpointSpec extends TargetObject, /*@Transitional*/ Ta
 	 *           Overriding that behavior is not yet supported.
 	 * @return the effective breakpoints
 	 */
-	public default CompletableFuture< //
+	default CompletableFuture< //
 			? extends Collection<? extends TargetBreakpointLocation>> getLocations() {
 		if (this instanceof TargetBreakpointLocation) {
 			return CompletableFuture.completedFuture(List.of((TargetBreakpointLocation) this));

@@ -77,8 +77,8 @@ class AddBlockDialog extends DialogComponentProvider implements ChangeListener {
 	private boolean updatingInitializedRB;
 	private CardLayout initializedTypeCardLayout;
 
-	private final static String MAPPED = "Mapped";
-	private final static String UNMAPPED = "Unmapped";
+	private static final String MAPPED = "Mapped";
+	private static final String UNMAPPED = "Unmapped";
 	private static final String UNITIALIZED = "UNITIALIZED";
 	private static final String INITIALIZED = "INITIALIZED";
 	private static final String FILE_BYTES = "FILE_BYTES";

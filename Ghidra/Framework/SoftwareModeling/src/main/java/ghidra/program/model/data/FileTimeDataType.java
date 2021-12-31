@@ -35,7 +35,7 @@ public class FileTimeDataType extends BuiltIn {
 		ClassTranslator.put("ghidra.program.model.data.FileTime", FileTimeDataType.class.getName());
 	}
 
-	private final static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	private static final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private static Date epochData;
 
 	static {

@@ -37,8 +37,7 @@ public class BlockMultiGoto extends BlockGraph {
 	protected ArrayList<PcodeBlock> targets;
 	
 	public BlockMultiGoto() {
-		super();
-		targets = new ArrayList<>();
+        targets = new ArrayList<>();
 		blocktype = PcodeBlock.MULTIGOTO;
 	}
 	

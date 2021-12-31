@@ -92,7 +92,7 @@ public class FileDropDownSelectionDataModel implements DropDownTextFieldDataMode
 
 	@Override
 	public List<File> getMatchingData(String searchText) {
-		if (searchText == null || searchText.length() == 0) {
+		if (searchText == null || searchText.isEmpty()) {
 			return Collections.emptyList();
 		}
 

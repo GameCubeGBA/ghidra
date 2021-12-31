@@ -57,8 +57,7 @@ public class ProgramManagerPluginScreenShots extends GhidraScreenShotGenerator
 	private boolean keepCheckedOut = true;
 
 	public ProgramManagerPluginScreenShots() {
-		super();
-	}
+    }
 
 	@Test
 	public void testClosedTab() throws Exception {

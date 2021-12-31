@@ -233,12 +233,11 @@ public class OrPattern extends Pattern {
 	@Override
 	public void restoreXml(Element el) {
 		List<?> list = el.getChildren();
-		Iterator<?> iter = list.iterator();
-		while (iter.hasNext()) {
-			Element element = (Element) iter.next();
-			DisjointPattern pat = DisjointPattern.restoreDisjoint(element);
-			orlist.push_back(pat);
-		}
+        for (Object o : list) {
+            Element element = (Element) o;
+            DisjointPattern pat = DisjointPattern.restoreDisjoint(element);
+            orlist.push_back(pat);
+        }
 	}
 
 }

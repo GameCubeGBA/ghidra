@@ -34,19 +34,19 @@ import ghidra.dbg.util.PathUtils;
 public interface LldbModelTargetFocusScope extends LldbModelTargetObject, TargetFocusScope {
 
 	@Override
-	public LldbModelSelectableObject getFocus();
+    LldbModelSelectableObject getFocus();
 
 	// NB: setFocus changes attributes - propagates up to client
-	public boolean setFocus(LldbModelSelectableObject sel);
+    boolean setFocus(LldbModelSelectableObject sel);
 
 	// NB: requestFocus request change in focused object - propagates down to manager
 	//  (but, of course, may then cause change in state)
 	@Override
-	public default CompletableFuture<Void> requestFocus(TargetObject obj) {
+    default CompletableFuture<Void> requestFocus(TargetObject obj) {
 		return getModel().gateFuture(getManager().requestFocus(this, obj));
 	}
 
-	public default CompletableFuture<Void> doRequestFocus(TargetObject obj) {
+	default CompletableFuture<Void> doRequestFocus(TargetObject obj) {
 		if (getManager().isWaiting()) {
 			return AsyncUtils.NIL;
 		}

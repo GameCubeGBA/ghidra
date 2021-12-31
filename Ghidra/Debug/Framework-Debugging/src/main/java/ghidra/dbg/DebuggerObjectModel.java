@@ -65,9 +65,9 @@ import ghidra.util.Msg;
  * risk deadlocking Ghidra's UI.
  */
 public interface DebuggerObjectModel {
-	public static final TypeSpec<Map<String, ? extends TargetObject>> ELEMENT_MAP_TYPE =
+	TypeSpec<Map<String, ? extends TargetObject>> ELEMENT_MAP_TYPE =
 		TypeSpec.auto();
-	public static final TypeSpec<Map<String, ?>> ATTRIBUTE_MAP_TYPE = TypeSpec.auto();
+	TypeSpec<Map<String, ?>> ATTRIBUTE_MAP_TYPE = TypeSpec.auto();
 
 	/**
 	 * Check that a given {@link TargetObject} interface has a name
@@ -82,7 +82,7 @@ public interface DebuggerObjectModel {
 	 * @return the name of the interface
 	 * @throws IllegalArgumentException if the interface is not annotated
 	 */
-	public static String requireIfaceName(Class<? extends TargetObject> iface) {
+	static String requireIfaceName(Class<? extends TargetObject> iface) {
 		DebuggerTargetObjectIface annot = iface.getAnnotation(DebuggerTargetObjectIface.class);
 		if (annot == null) {
 			throw new IllegalArgumentException(iface + " has no @" +
@@ -100,7 +100,7 @@ public interface DebuggerObjectModel {
 	 * @return the non-null value
 	 * @throws DebuggerModelNoSuchPathException if -val- is null
 	 */
-	public static <T> T requireNonNull(T val, List<String> path) {
+	static <T> T requireNonNull(T val, List<String> path) {
 		if (val == null) {
 			throw new DebuggerModelNoSuchPathException("Path " + path + " does not exist");
 		}
@@ -124,8 +124,8 @@ public interface DebuggerObjectModel {
 	 * @throws DebuggerModelNoSuchPathException if -obj- is null
 	 * @throws DebuggerModelTypeException if -obj- does not support -iface-
 	 */
-	public static <T extends TargetObject> T requireIface(Class<T> iface, TargetObject obj,
-			List<String> path) {
+	static <T extends TargetObject> T requireIface(Class<T> iface, TargetObject obj,
+                                                   List<String> path) {
 		requireNonNull(obj, path);
 		String name = requireIfaceName(iface);
 		if (iface.isAssignableFrom(obj.getClass())) {
@@ -139,7 +139,7 @@ public interface DebuggerObjectModel {
 	 * 
 	 * @return the description
 	 */
-	public default String getBrief() {
+	default String getBrief() {
 		return toString();
 	}
 
@@ -157,14 +157,14 @@ public interface DebuggerObjectModel {
 	 * @param listener the listener
 	 * @param replay true to replay object tree events (doesn't include register or memory caches)
 	 */
-	public void addModelListener(DebuggerModelListener listener, boolean replay);
+    void addModelListener(DebuggerModelListener listener, boolean replay);
 
 	/**
 	 * Add a listener for model events, without replay
 	 * 
 	 * @param listener the listener
 	 */
-	public default void addModelListener(DebuggerModelListener listener) {
+	default void addModelListener(DebuggerModelListener listener) {
 		addModelListener(listener, false);
 	}
 
@@ -173,7 +173,7 @@ public interface DebuggerObjectModel {
 	 * 
 	 * @param listener the listener
 	 */
-	public void removeModelListener(DebuggerModelListener listener);
+    void removeModelListener(DebuggerModelListener listener);
 
 	/**
 	 * Check if the model believes it is alive
@@ -184,7 +184,7 @@ public interface DebuggerObjectModel {
 	 * 
 	 * @return true if alive
 	 */
-	public boolean isAlive();
+    boolean isAlive();
 
 	/**
 	 * Get the schema of this model, i.e., the schema of its root object.
@@ -197,7 +197,7 @@ public interface DebuggerObjectModel {
 	 * 
 	 * @return the root schema
 	 */
-	public default TargetObjectSchema getRootSchema() {
+	default TargetObjectSchema getRootSchema() {
 		return EnumerableTargetObjectSchema.OBJECT;
 	}
 
@@ -212,7 +212,7 @@ public interface DebuggerObjectModel {
 	 * @param content some content to optionally incorporate into the test
 	 * @return a future that completes when the daemon is verified to be alive
 	 */
-	public CompletableFuture<Void> ping(String content);
+    CompletableFuture<Void> ping(String content);
 
 	/**
 	 * Check that a given reference (or object) belongs to this model
@@ -247,24 +247,24 @@ public interface DebuggerObjectModel {
 	 * @param refresh true to invalidate caches involved in handling this request
 	 * @return a future map of attributes
 	 */
-	public CompletableFuture<? extends Map<String, ?>> fetchObjectAttributes(List<String> path,
-			boolean refresh);
+    CompletableFuture<? extends Map<String, ?>> fetchObjectAttributes(List<String> path,
+                                                                      boolean refresh);
 
 	/**
 	 * Fetch the attributes of the given model path, without refreshing
 	 * 
 	 * @see #fetchObjectAttributes(List, boolean)
 	 */
-	public default CompletableFuture<? extends Map<String, ?>> fetchObjectAttributes(
-			List<String> path) {
+	default CompletableFuture<? extends Map<String, ?>> fetchObjectAttributes(
+            List<String> path) {
 		return fetchObjectAttributes(path, false);
 	}
 
 	/**
 	 * @see #fetchObjectAttributes(List)
 	 */
-	public default CompletableFuture<? extends Map<String, ?>> fetchObjectAttributes(
-			String... path) {
+	default CompletableFuture<? extends Map<String, ?>> fetchObjectAttributes(
+            String... path) {
 		return fetchObjectAttributes(List.of(path));
 	}
 
@@ -279,24 +279,24 @@ public interface DebuggerObjectModel {
 	 * @param refresh true to invalidate caches involved in handling this request
 	 * @return a future map of elements
 	 */
-	public CompletableFuture<? extends Map<String, ? extends TargetObject>> fetchObjectElements(
-			List<String> path, boolean refresh);
+    CompletableFuture<? extends Map<String, ? extends TargetObject>> fetchObjectElements(
+            List<String> path, boolean refresh);
 
 	/**
 	 * Fetch the elements of the given model path, without refreshing
 	 * 
 	 * @see #fetchObjectElements(List, boolean)
 	 */
-	public default CompletableFuture<? extends Map<String, ? extends TargetObject>> fetchObjectElements(
-			List<String> path) {
+	default CompletableFuture<? extends Map<String, ? extends TargetObject>> fetchObjectElements(
+            List<String> path) {
 		return fetchObjectElements(path, false);
 	}
 
 	/**
 	 * @see #fetchObjectElements(List)
 	 */
-	public default CompletableFuture<? extends Map<String, ? extends TargetObject>> fetchObjectElements(
-			String... path) {
+	default CompletableFuture<? extends Map<String, ? extends TargetObject>> fetchObjectElements(
+            String... path) {
 		return fetchObjectElements(List.of(path));
 	}
 
@@ -312,14 +312,14 @@ public interface DebuggerObjectModel {
 	 * 
 	 * @return a future which completes with the root
 	 */
-	public CompletableFuture<? extends TargetObject> fetchModelRoot();
+    CompletableFuture<? extends TargetObject> fetchModelRoot();
 
 	/**
 	 * Get the root object of the model
 	 * 
 	 * @return the root or {@code null} if it hasn't been created, yet
 	 */
-	public TargetObject getModelRoot();
+    TargetObject getModelRoot();
 
 	/**
 	 * Fetch the value at the given path
@@ -327,7 +327,7 @@ public interface DebuggerObjectModel {
 	 * @param path the path of the value
 	 * @return a future completing with the value or with {@code null} if the path does not exist
 	 */
-	public CompletableFuture<?> fetchModelValue(List<String> path);
+    CompletableFuture<?> fetchModelValue(List<String> path);
 
 	/**
 	 * Fetch a model value, optionally refreshing caches along the path
@@ -346,12 +346,12 @@ public interface DebuggerObjectModel {
 	 * @param refresh true to refresh caches
 	 * @return the found value, or {@code null} if it does not exist
 	 */
-	public CompletableFuture<?> fetchModelValue(List<String> path, boolean refresh);
+    CompletableFuture<?> fetchModelValue(List<String> path, boolean refresh);
 
 	/**
 	 * @see #fetchModelValue(List)
 	 */
-	public default CompletableFuture<?> fetchModelValue(String... path) {
+	default CompletableFuture<?> fetchModelValue(String... path) {
 		return fetchModelValue(List.of(path));
 	}
 
@@ -366,7 +366,7 @@ public interface DebuggerObjectModel {
 	 * @param path the path
 	 * @return the value
 	 */
-	public default Object getModelValue(List<String> path) {
+	default Object getModelValue(List<String> path) {
 		Object cur = getModelRoot();
 		for (String key : path) {
 			if (cur == null) {
@@ -398,8 +398,8 @@ public interface DebuggerObjectModel {
 	 * @return a future completing with the object or with {@code null} if it does not exist
 	 * @throws DebuggerModelTypeException if the value at the path is not a {@link TargetObject}
 	 */
-	public default CompletableFuture<? extends TargetObject> fetchModelObject(List<String> path,
-			boolean refresh) {
+	default CompletableFuture<? extends TargetObject> fetchModelObject(List<String> path,
+                                                                       boolean refresh) {
 		return fetchModelValue(path, refresh).thenApply(v -> {
 			if (v == null) {
 				return null;
@@ -422,7 +422,7 @@ public interface DebuggerObjectModel {
 	 * 
 	 * @return a future that completes with the object or with {@code null} if it doesn't exist
 	 */
-	public default CompletableFuture<? extends TargetObject> fetchModelObject(List<String> path) {
+	default CompletableFuture<? extends TargetObject> fetchModelObject(List<String> path) {
 		return fetchModelObject(path, false);
 	}
 
@@ -437,7 +437,7 @@ public interface DebuggerObjectModel {
 	 * @param path the path of the object
 	 * @return the object or {@code null} if it doesn't exist
 	 */
-	public TargetObject getModelObject(List<String> path);
+    TargetObject getModelObject(List<String> path);
 
 	/**
 	 * Get all created objects matching a given predicate
@@ -449,20 +449,20 @@ public interface DebuggerObjectModel {
 	 * @param predicate the predicate
 	 * @return the set of matching objects
 	 */
-	public Set<TargetObject> getModelObjects(Predicate<? super TargetObject> predicate);
+    Set<TargetObject> getModelObjects(Predicate<? super TargetObject> predicate);
 
 	/**
 	 * @see #fetchModelObject(List)
 	 */
 	@Deprecated
-	public default CompletableFuture<? extends TargetObject> fetchModelObject(String... path) {
+    default CompletableFuture<? extends TargetObject> fetchModelObject(String... path) {
 		return fetchModelObject(List.of(path));
 	}
 
 	/**
 	 * @see #getModelObject(List)
 	 */
-	public default TargetObject getModelObject(String... path) {
+	default TargetObject getModelObject(String... path) {
 		return getModelObject(List.of(path));
 	}
 
@@ -475,7 +475,7 @@ public interface DebuggerObjectModel {
 	 * @param path the path of the attribute
 	 * @return a future that completes with the value or with {@code null} if it does not exist
 	 */
-	public default CompletableFuture<?> fetchObjectAttribute(List<String> path) {
+	default CompletableFuture<?> fetchObjectAttribute(List<String> path) {
 		return fetchModelObject(PathUtils.parent(path)).thenApply(
 			parent -> parent == null ? null : parent.fetchAttribute(PathUtils.getKey(path)));
 	}
@@ -483,7 +483,7 @@ public interface DebuggerObjectModel {
 	/**
 	 * @see #fetchObjectAttribute(List)
 	 */
-	public default CompletableFuture<?> getObjectAttribute(String... path) {
+	default CompletableFuture<?> getObjectAttribute(String... path) {
 		return fetchObjectAttribute(List.of(path));
 	}
 
@@ -499,7 +499,7 @@ public interface DebuggerObjectModel {
 	 * 
 	 * @return the factory
 	 */
-	public AddressFactory getAddressFactory();
+    AddressFactory getAddressFactory();
 
 	/**
 	 * TODO Document me
@@ -507,7 +507,7 @@ public interface DebuggerObjectModel {
 	 * @param name
 	 * @return
 	 */
-	default public AddressSpace getAddressSpace(String name) {
+    default AddressSpace getAddressSpace(String name) {
 		return getAddressFactory().getAddressSpace(name);
 	}
 
@@ -518,7 +518,7 @@ public interface DebuggerObjectModel {
 	 * @param offset
 	 * @return
 	 */
-	public default Address getAddress(String space, long offset) {
+	default Address getAddress(String space, long offset) {
 		if (Address.NO_ADDRESS.getAddressSpace().getName().equals(space)) {
 			return Address.NO_ADDRESS;
 		}
@@ -533,7 +533,7 @@ public interface DebuggerObjectModel {
 	 * object. If the objects are proxies, just the proxies' caches are cleared. Again, this does
 	 * not apply to caches for the objects' children.
 	 */
-	public void invalidateAllLocalCaches();
+    void invalidateAllLocalCaches();
 
 	/**
 	 * Close the session and dispose the model
@@ -543,7 +543,7 @@ public interface DebuggerObjectModel {
 	 * 
 	 * @return a future which completes when the session is closed
 	 */
-	public CompletableFuture<Void> close();
+    CompletableFuture<Void> close();
 
 	/**
 	 * A convenience for reporting errors conditionally

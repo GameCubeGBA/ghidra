@@ -23,8 +23,7 @@ import org.junit.Test;
 public class OpBehaviorBoolNegateTest extends AbstractOpBehaviorTest {
 
 	public OpBehaviorBoolNegateTest() {
-		super();
-	}
+    }
 
 @Test
     public void testEvaluateBinaryLong() {

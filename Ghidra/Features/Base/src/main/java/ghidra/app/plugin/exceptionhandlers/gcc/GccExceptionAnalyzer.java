@@ -104,11 +104,11 @@ public class GccExceptionAnalyzer extends AbstractAnalyzer {
 	public boolean canAnalyze(Program program) {
 
 		boolean isGcc =
-			program.getCompilerSpec().getCompilerSpecID().getIdAsString().equalsIgnoreCase("gcc");
+			"gcc".equalsIgnoreCase(program.getCompilerSpec().getCompilerSpecID().getIdAsString());
 
 		boolean isDefault =
-			program.getCompilerSpec().getCompilerSpecID().getIdAsString().equalsIgnoreCase(
-				"default");
+			"default".equalsIgnoreCase(
+                    program.getCompilerSpec().getCompilerSpecID().getIdAsString());
 
 		if (!isGcc && !isDefault) {
 			return false;

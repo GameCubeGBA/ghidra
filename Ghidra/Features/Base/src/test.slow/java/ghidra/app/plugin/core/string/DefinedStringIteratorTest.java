@@ -36,8 +36,7 @@ public class DefinedStringIteratorTest extends AbstractGhidraHeadlessIntegration
 	private ArrayDataType arrayDataType;
 
 	public DefinedStringIteratorTest() {
-		super();
-	}
+    }
 
 	@Before
 	public void setUp() throws Exception {

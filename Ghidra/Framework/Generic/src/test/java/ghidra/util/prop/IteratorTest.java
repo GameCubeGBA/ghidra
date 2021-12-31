@@ -29,8 +29,7 @@ public class IteratorTest extends AbstractGenericTest {
 
 
 	public IteratorTest() {
-		super();
-	}
+    }
 
 @Test
     public void testAll() {

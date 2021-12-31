@@ -23,7 +23,7 @@ import java.io.Serializable;
  */
 public class GroupView implements Serializable {
 
-    private final static long serialVersionUID = 1;
+    private static final long serialVersionUID = 1;
  
     private GroupPath []paths;
 

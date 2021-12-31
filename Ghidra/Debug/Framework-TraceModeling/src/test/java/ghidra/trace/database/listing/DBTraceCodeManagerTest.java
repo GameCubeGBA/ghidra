@@ -62,8 +62,7 @@ public class DBTraceCodeManagerTest extends AbstractGhidraHeadlessIntegrationTes
 		public static final NoMaxStringDataType dataType = new NoMaxStringDataType();
 
 		public NoMaxStringDataType() {
-			super();
-		}
+        }
 
 		public NoMaxStringDataType(DataTypeManager dtm) {
 			super(dtm);

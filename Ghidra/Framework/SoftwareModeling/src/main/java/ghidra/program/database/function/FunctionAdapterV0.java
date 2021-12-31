@@ -26,7 +26,7 @@ import ghidra.util.exception.VersionException;
 
 class FunctionAdapterV0 extends FunctionAdapter {
 
-	final static int SCHEMA_VERSION = 0;
+	static final int SCHEMA_VERSION = 0;
 
 	// NOTE: The following commented out declarations are hereto indicate this version's schema.
 

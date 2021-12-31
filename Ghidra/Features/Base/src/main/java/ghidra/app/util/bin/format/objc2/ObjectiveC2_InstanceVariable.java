@@ -99,14 +99,14 @@ public class ObjectiveC2_InstanceVariable implements StructConverter {
 	}
 
 	public void applyTo(Namespace namespace) throws Exception {
-		if (getOffset() == 0) {
+		if (offset == 0) {
 			return;
 		}
-		if (getName() == null && getName().length() == 0) {
+		if (name == null && name.isEmpty()) {
 			return;
 		}
-		Address address = _state.program.getAddressFactory().getDefaultAddressSpace().getAddress(getOffset());
-		ObjectiveC1_Utilities.createSymbol(_state.program, namespace, getName(), address);
+		Address address = _state.program.getAddressFactory().getDefaultAddressSpace().getAddress(offset);
+		ObjectiveC1_Utilities.createSymbol(_state.program, namespace, name, address);
 		_state.variableMap.put(address, this);
 	}
 }

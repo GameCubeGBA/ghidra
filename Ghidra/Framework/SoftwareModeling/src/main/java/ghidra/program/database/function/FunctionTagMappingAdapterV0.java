@@ -34,14 +34,14 @@ import ghidra.util.exception.VersionException;
  */
 class FunctionTagMappingAdapterV0 extends FunctionTagMappingAdapter implements DBListener {
 
-	final static int SCHEMA_VERSION = 0;
+	static final int SCHEMA_VERSION = 0;
 
 	// The two columns for this table, one for the function ID, one for the
 	// tag ID.
 	public static final int V0_FUNCTION_ID_COL = 0;
 	public static final int V0_TAG_ID_COL = 1;
 
-	final static Schema SCHEMA =
+	static final Schema SCHEMA =
 		new Schema(CURRENT_VERSION, "ID", new Field[] { LongField.INSTANCE, LongField.INSTANCE },
 			new String[] { "Function ID", "Tag ID" });
 

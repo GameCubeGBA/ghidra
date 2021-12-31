@@ -272,7 +272,7 @@ public class ProgramLocation implements Comparable<ProgramLocation> {
 			Class<?> locClass = Class.forName(className);
 			ProgramLocation loc = (ProgramLocation) locClass.getConstructor().newInstance();
 			loc.restoreState(program, saveState);
-			if (loc.getAddress() != null) {
+			if (loc.addr != null) {
 				return loc;
 			}
 			// no address, it must be in a removed block; we can't use it
@@ -308,7 +308,7 @@ public class ProgramLocation implements Comparable<ProgramLocation> {
 		}
 		if (refAddr != null) {
 			buf.append(", refAddr=");
-			buf.append(refAddr.toString());
+			buf.append(refAddr);
 		}
 		if (componentPath != null && componentPath.length != 0) {
 			buf.append(", componentPath=");

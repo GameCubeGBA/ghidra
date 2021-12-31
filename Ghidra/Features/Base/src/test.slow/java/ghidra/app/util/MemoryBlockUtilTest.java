@@ -44,8 +44,7 @@ public class MemoryBlockUtilTest extends AbstractGhidraHeadedIntegrationTest {
 	private MessageLog log;
 
 	public MemoryBlockUtilTest() {
-		super();
-	}
+    }
 
 	@Before
 	public void setUp() throws Exception {

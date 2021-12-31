@@ -33,7 +33,7 @@ public final class OatHeaderFactory {
 	 * @throws IOException if OAT header cannot be created from reader
 	 * @throws UnsupportedOatVersionException when the provided version is invalid or not yet implemented.
 	 */
-	public final static OatHeader newOatHeader(BinaryReader reader)
+    public static final OatHeader newOatHeader(BinaryReader reader)
 			throws IOException, UnsupportedOatVersionException {
 		String magic = new String(reader.readByteArray(0, OatConstants.MAGIC.length()));
 		String version = reader.readAsciiString(4, 4);
@@ -70,8 +70,8 @@ public final class OatHeaderFactory {
 		throw new UnsupportedOatVersionException(magic, version);
 	}
 
-	public final static void parseOatHeader(OatHeader oatHeader, Program oatProgram,
-			BinaryReader reader, TaskMonitor monitor, MessageLog log)
+	public static final void parseOatHeader(OatHeader oatHeader, Program oatProgram,
+                                            BinaryReader reader, TaskMonitor monitor, MessageLog log)
 			throws UnsupportedOatVersionException, IOException {
 
 		OatBundle bundle = OatBundleFactory.getOatBundle(oatProgram, oatHeader, monitor, log);

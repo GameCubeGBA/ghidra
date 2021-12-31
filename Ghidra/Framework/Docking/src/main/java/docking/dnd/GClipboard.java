@@ -29,17 +29,16 @@ import java.awt.datatransfer.Clipboard;
  */
 public class GClipboard {
 
-	private static Clipboard systemClipboard;
+    private static final class SystemClipboardHolder {
+        private static final Clipboard systemClipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+    }
 
-	/**
+    /**
 	 * Returns the clipboard that should be used by the current JVM
 	 * @return the clipboard
 	 */
 	public static Clipboard getSystemClipboard() {
-		if (systemClipboard == null) {
-			systemClipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-		}
-		return systemClipboard;
+        return SystemClipboardHolder.systemClipboard;
 	}
 
 	private GClipboard() {

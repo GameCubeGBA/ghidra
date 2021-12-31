@@ -18,9 +18,9 @@ package ghidra.javaclass.format;
 
 public final class JavaClassConstants {
 
-	public final static int MAGIC = 0xcafebabe;
+	public static final int MAGIC = 0xcafebabe;
 
-	public final static byte[] MAGIC_BYTES = { (byte) 0xca, (byte) 0xfe, (byte) 0xba, (byte) 0xbe };
+	public static final byte[] MAGIC_BYTES = { (byte) 0xca, (byte) 0xfe, (byte) 0xba, (byte) 0xbe };
 
 	// Table 6.1. Array type codes
 

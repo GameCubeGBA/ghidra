@@ -37,12 +37,12 @@ import agent.gdb.pty.linux.LinuxPtyFactory;
  * been executed.
  */
 public interface GdbManager extends AutoCloseable, GdbConsoleOperations, GdbBreakpointInsertions {
-	public static final String DEFAULT_GDB_CMD = "/usr/bin/gdb";
+	String DEFAULT_GDB_CMD = "/usr/bin/gdb";
 
 	/**
 	 * Possible values for {@link GdbThread#step(StepCmd)}
 	 */
-	public enum StepCmd {
+    enum StepCmd {
 		FINISH("finish"),
 		NEXT("next"),
 		NEXTI("nexti", "next-instruction"),
@@ -84,7 +84,7 @@ public interface GdbManager extends AutoCloseable, GdbConsoleOperations, GdbBrea
 	 * @throws ExecutionException
 	 * @throws IOException
 	 */
-	public static void main(String[] args)
+	static void main(String[] args)
 			throws InterruptedException, ExecutionException, IOException {
 		// TODO: Choose factory by host OS
 		try (GdbManager mgr = newInstance(new LinuxPtyFactory())) {
@@ -94,7 +94,7 @@ public interface GdbManager extends AutoCloseable, GdbConsoleOperations, GdbBrea
 		}
 	}
 
-	public enum Channel {
+	enum Channel {
 		STDOUT, STDERR;
 	}
 
@@ -103,7 +103,7 @@ public interface GdbManager extends AutoCloseable, GdbConsoleOperations, GdbBrea
 	 * 
 	 * @return the manager
 	 */
-	public static GdbManager newInstance(PtyFactory ptyFactory) {
+	static GdbManager newInstance(PtyFactory ptyFactory) {
 		return new GdbManagerImpl(ptyFactory);
 	}
 
@@ -122,7 +122,7 @@ public interface GdbManager extends AutoCloseable, GdbConsoleOperations, GdbBrea
 	 * 
 	 * @param newLine the line separator to use
 	 */
-	public void setNewLine(String newLine);
+    void setNewLine(String newLine);
 
 	/**
 	 * Set to UNIX-style (CR) line terminator
@@ -388,18 +388,6 @@ public interface GdbManager extends AutoCloseable, GdbConsoleOperations, GdbBrea
 	 * @return a future which completes when GDB presents a prompt
 	 */
 	CompletableFuture<Void> waitForPrompt();
-
-	/**
-	 * A dummy command which claims as cause a stopped event and waits for the next prompt
-	 * 
-	 * <p>
-	 * This is used to squelch normal processing of a stopped event until the next prompt
-	 * 
-	 * @return a future which completes when the "command" has finished execution
-	 * @deprecated I don't see this being used anywhere. Probably defunct.
-	 */
-	@Deprecated
-	CompletableFuture<Void> claimStopped();
 
 	/**
 	 * Add an inferior

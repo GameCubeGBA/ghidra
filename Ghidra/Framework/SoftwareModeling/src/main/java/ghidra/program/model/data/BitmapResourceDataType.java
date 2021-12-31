@@ -42,7 +42,7 @@ public class BitmapResourceDataType extends DynamicDataType implements Resource 
 			BitmapResourceDataType.class.getName());
 	}
 
-	private final static long serialVersionUID = 1;
+	private static final long serialVersionUID = 1;
 
 	public BitmapResourceDataType() {
 		this(null, "BitmapResource", null);

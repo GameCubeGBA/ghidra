@@ -236,7 +236,7 @@ public class CopyPasteFunctionInfoTest extends AbstractGhidraHeadedIntegrationTe
 		Parameter[] vars = func.getParameters();
 		for (Parameter element : vars) {
 			String varName = element.getName();
-			if (varName.equals("param_7") || varName.equals("param_9")) {
+			if ("param_7".equals(varName) || "param_9".equals(varName)) {
 				toolOne.execute(
 					new SetVariableCommentCmd(element, "my stack comment for " + varName),
 					programOne);
@@ -269,7 +269,7 @@ public class CopyPasteFunctionInfoTest extends AbstractGhidraHeadedIntegrationTe
 		int occ = 0;
 		for (Parameter var : vars) {
 			String varName = var.getName();
-			if (varName.equals("param_7") || varName.equals("param_9")) {
+			if ("param_7".equals(varName) || "param_9".equals(varName)) {
 				assertTrue(cb.goToField(addr, VariableCommentFieldFactory.FIELD_NAME, occ++, 0, 0));
 				ListingTextField f = (ListingTextField) cb.getCurrentField();
 				assertEquals(var.getComment(), f.getText());
@@ -287,7 +287,7 @@ public class CopyPasteFunctionInfoTest extends AbstractGhidraHeadedIntegrationTe
 		Variable[] vars = func.getVariables(VariableFilter.PARAMETER_FILTER);
 		for (Variable element : vars) {
 			String varName = element.getName();
-			if (varName.equals("param_1") || varName.equals("param_3")) {
+			if ("param_1".equals(varName) || "param_3".equals(varName)) {
 				toolOne.execute(
 					new SetVariableNameCmd(element, "my_" + varName, SourceType.USER_DEFINED),
 					programOne);
@@ -363,7 +363,7 @@ public class CopyPasteFunctionInfoTest extends AbstractGhidraHeadedIntegrationTe
 		Parameter[] vars = func.getParameters();
 		for (Parameter element : vars) {
 			String varName = element.getName();
-			if (varName.equals("param_10") || varName.equals("param_18")) {
+			if ("param_10".equals(varName) || "param_18".equals(varName)) {
 				toolOne.execute(
 					new SetVariableCommentCmd(element, "my stack comment for " + varName),
 					programOne);
@@ -481,18 +481,16 @@ public class CopyPasteFunctionInfoTest extends AbstractGhidraHeadedIntegrationTe
 
 	private void resetOptions() {
 		List<String> names = fieldOptions2.getOptionNames();
-		for (int i = 0; i < names.size(); i++) {
-			String name = names.get(i);
-			if (!name.startsWith("Format Code")) {
-				continue;
-			}
-			if (name.contains("Show ") || name.contains("Flag ")) {
-				fieldOptions2.setBoolean(name, false);
-			}
-			else if (name.contains("Lines")) {
-				fieldOptions2.setInt(name, 0);
-			}
-		}
+        for (String name : names) {
+            if (!name.startsWith("Format Code")) {
+                continue;
+            }
+            if (name.contains("Show ") || name.contains("Flag ")) {
+                fieldOptions2.setBoolean(name, false);
+            } else if (name.contains("Lines")) {
+                fieldOptions2.setInt(name, 0);
+            }
+        }
 		waitForSwing();
 		CodeBrowserPlugin cb = getPlugin(toolTwo, CodeBrowserPlugin.class);
 		cb.updateNow();

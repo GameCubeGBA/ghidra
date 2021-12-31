@@ -43,11 +43,8 @@ public enum ProxyUtilities {
 			// NOTE: Method#equals(Method) does NOT use == for this
 			return false;
 		}
-		if (!Arrays.equals(m1.getParameterTypes(), m2.getParameterTypes())) {
-			return false;
-		}
-		return true;
-	}
+        return Arrays.equals(m1.getParameterTypes(), m2.getParameterTypes());
+    }
 
 	public static MethodHandle getSuperMethodHandle(Method method) throws IllegalAccessException {
 		return getSuperMethodHandle(method, MethodHandles.lookup());

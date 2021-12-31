@@ -38,12 +38,11 @@ public abstract class StringEvent {
 
 	protected FoundString findRowSlowWay(StringTableModel model) {
 		List<FoundString> modelData = model.getModelData();
-		for (int row = 0; row < modelData.size(); row++) {
-			FoundString string = modelData.get(row);
-			if (overlaps(string)) {
-				return string;
-			}
-		}
+        for (FoundString string : modelData) {
+            if (overlaps(string)) {
+                return string;
+            }
+        }
 		return null;
 	}
 

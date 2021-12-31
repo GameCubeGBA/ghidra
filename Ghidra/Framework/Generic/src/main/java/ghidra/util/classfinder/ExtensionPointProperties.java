@@ -30,12 +30,12 @@ public @interface ExtensionPointProperties {
 	/**
 	 * Default {@link ExtensionPoint} priority.  Higher values represent higher priorities.
 	 */
-	final static int DEFAULT_PRIORITY = 1;
+    int DEFAULT_PRIORITY = 1;
 
 	/**
 	 * Default behavior for an {@link ExtensionPoint} being discoverable
 	 */
-	final static boolean DEFAULT_EXCLUDE = false;
+    boolean DEFAULT_EXCLUDE = false;
 
 	/**
 	 * {@link ExtensionPoint} priority.  Higher values represent higher priorities.
@@ -54,7 +54,7 @@ public @interface ExtensionPointProperties {
 	/**
 	 * Utility methods for working with {@link ExtensionPointProperties}
 	 */
-	public static class Util {
+    class Util {
 
 		/**
 		 * Gets whether or not the {@link ExtensionPoint} will be excluded from being discovered

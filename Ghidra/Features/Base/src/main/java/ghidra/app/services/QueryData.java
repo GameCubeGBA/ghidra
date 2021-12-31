@@ -22,8 +22,7 @@ public class QueryData {
 	private final boolean includeDynamicLables;
 
 	public QueryData(String queryString, boolean caseSensitive, boolean includeDynamicLables) {
-		super();
-		this.queryString = queryString;
+        this.queryString = queryString;
 		this.caseSensitive = caseSensitive;
 		this.includeDynamicLables = includeDynamicLables;
 	}

@@ -23,7 +23,7 @@ import java.io.IOException;
 
 public final class EntryFactory {
 
-	public final static Object getEntry(BinaryReader reader, EntryDescriptor descriptor) throws IOException {
+	public static final Object getEntry(BinaryReader reader, EntryDescriptor descriptor) throws IOException {
 		long oldIndex = reader.getPointerIndex();
 		try {
 			reader.setPointerIndex(descriptor.getOffset());

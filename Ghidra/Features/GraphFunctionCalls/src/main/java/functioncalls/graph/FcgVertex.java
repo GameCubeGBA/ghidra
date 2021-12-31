@@ -388,7 +388,7 @@ public class FcgVertex extends AbstractVisualVertex implements VertexShapeProvid
 		}
 
 		// collapsing
-		if (!isOutgoingExpanded()) {
+		if (!outgoingExpanded) {
 			throw new IllegalStateException("Vertex cannot be collapsed: " + this);
 		}
 	}
@@ -403,7 +403,7 @@ public class FcgVertex extends AbstractVisualVertex implements VertexShapeProvid
 		}
 
 		// collapsing
-		if (!isIncomingExpanded()) {
+		if (!incomingExpanded) {
 			throw new IllegalStateException("Vertex cannot be collapsed: " + this);
 		}
 	}
@@ -449,12 +449,12 @@ public class FcgVertex extends AbstractVisualVertex implements VertexShapeProvid
 	public boolean isExpanded() {
 		FcgDirection direction = level.getDirection();
 		if (direction.isSource()) {
-			return isIncomingExpanded() && isOutgoingExpanded();
+			return incomingExpanded && outgoingExpanded;
 		}
 		if (direction.isIn()) {
-			return isIncomingExpanded();
+			return incomingExpanded;
 		}
-		return isOutgoingExpanded();
+		return outgoingExpanded;
 	}
 
 	/**

@@ -955,10 +955,10 @@ public class ProgramMerge implements PropertyVisitor {
 		for (int opIndex = 0; opIndex < Program.MAX_OPERANDS; opIndex++) {
 			List<Equate> originList = originEt.getEquates(originAddress, opIndex);
 			Equate originEquate =
-				(originList.size() > 0) ? originList.get(originList.size() - 1) : null;
+				(!originList.isEmpty()) ? originList.get(originList.size() - 1) : null;
 			List<Equate> resultList = resultEt.getEquates(resultAddress, opIndex);
 			Equate resultEquate =
-				(resultList.size() > 0) ? resultList.get(resultList.size() - 1) : null;
+				(!resultList.isEmpty()) ? resultList.get(resultList.size() - 1) : null;
 			if ((originEquate == null && resultEquate == null) ||
 				(resultEquate != null && resultEquate.equals(originEquate))) {
 				continue; // Do nothing.
@@ -1721,29 +1721,27 @@ public class ProgramMerge implements PropertyVisitor {
 		// Now discard any tags we've been told to remove.
 		if (discardTags != null) {
 			Set<String> tagNames = getTagNames(discardTags);
-			Iterator<FunctionTag> iter = resultTags.iterator();
-			while (iter.hasNext()) {
-				FunctionTag tag = iter.next();
-				if (tagNames.contains(tag.getName())) {
-					resultFunction.removeTag(tag.getName());
+            for (FunctionTag tag : resultTags) {
+                if (tagNames.contains(tag.getName())) {
+                    resultFunction.removeTag(tag.getName());
 
-					// Interesting Case Alert!
-					//
-					// This merge case will only occur when one user has deleted a tag and the
-					// other has decided to add it to a function. So with that in mind, the following
-					// situation is possible:
-					//
-					// If the merge panel is up and the user selects to keep the version that
-					// has the tag, THEN subsequently selects the option where the tag was
-					// deleted, we have a problem. When the first option was selected the tag
-					// would have been added to the Result database in two places: the tag table
-					// itself, and the tag mapping table. So if the user then opts for the other
-					// option, we have to not only remove it from the mapping table, but also
-					// from the tag table. HOWEVER, we should only remove it from the tag table
-					// if no other function is using it.
-					removeTagIfUnassigned(tag);
-				}
-			}
+                    // Interesting Case Alert!
+                    //
+                    // This merge case will only occur when one user has deleted a tag and the
+                    // other has decided to add it to a function. So with that in mind, the following
+                    // situation is possible:
+                    //
+                    // If the merge panel is up and the user selects to keep the version that
+                    // has the tag, THEN subsequently selects the option where the tag was
+                    // deleted, we have a problem. When the first option was selected the tag
+                    // would have been added to the Result database in two places: the tag table
+                    // itself, and the tag mapping table. So if the user then opts for the other
+                    // option, we have to not only remove it from the mapping table, but also
+                    // from the tag table. HOWEVER, we should only remove it from the tag table
+                    // if no other function is using it.
+                    removeTagIfUnassigned(tag);
+                }
+            }
 		}
 
 		// And add back any tags we've been told to keep.
@@ -2209,11 +2207,8 @@ public class ProgramMerge implements PropertyVisitor {
 
 	private boolean isThunkFunction(Address originEntryPoint) {
 		Function originFunction = originListing.getFunctionAt(originEntryPoint);
-		if (originFunction != null && originFunction.isThunk()) {
-			return true;
-		}
-		return false;
-	}
+        return originFunction != null && originFunction.isThunk();
+    }
 
 	class FunctionAddressIterator implements AddressIterator {
 		FunctionIterator functionIterator;
@@ -3773,7 +3768,7 @@ public class ProgramMerge implements PropertyVisitor {
 				else if (books2.length > 1) {
 					throw new AssertException("Error in program '" + resultProgram.getName() +
 						"'- Shouldn't be multiple notes at a single address. Address=" +
-						originAddress.toString());
+                            originAddress);
 				}
 			}
 			else {
@@ -3849,7 +3844,7 @@ public class ProgramMerge implements PropertyVisitor {
 				propNames = origCu.propertyNames();
 				while (propNames.hasNext()) {
 					propertyName = propNames.next();
-					if (propertyName.equals("Bookmarks")) {
+					if ("Bookmarks".equals(propertyName)) {
 						continue; // ignore bookmarks as properties, since the bookmark merge gets these.
 					}
 					// Handle case where the class for a Saveable property is missing.

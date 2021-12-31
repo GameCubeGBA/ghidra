@@ -37,8 +37,7 @@ public class BookmarkMergeManagerTest extends AbstractListingMergeManagerTest {
 	 * @param arg0
 	 */
 	public BookmarkMergeManagerTest() {
-		super();
-	}
+    }
 
 @Test
     public void testAddLatest() throws Exception {

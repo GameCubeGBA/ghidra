@@ -156,12 +156,9 @@ public class GraphClassesScript extends GhidraScript {
 
 				String parentName = getClassName(description);
 
-				boolean isVirtualParent = false;
-				if (parentName.contains("virtual")) {
-					isVirtualParent = true;
-				}
+				boolean isVirtualParent = parentName.contains("virtual");
 
-				parentName = parentName.replace("virtual", "");
+                parentName = parentName.replace("virtual", "");
 				parentName = parentName.replace(" ", "");
 
 				// first try to get parent structure from inside child structure

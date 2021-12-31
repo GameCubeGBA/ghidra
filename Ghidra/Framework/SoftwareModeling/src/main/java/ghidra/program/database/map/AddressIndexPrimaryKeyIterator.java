@@ -110,7 +110,7 @@ public class AddressIndexPrimaryKeyIterator implements DBFieldIterator {
 		this.indexCol = indexCol;
 
 		keyRangeList = addrMap.getKeyRanges(set, absolute, false);
-		if (keyRangeList.size() == 0) {
+		if (keyRangeList.isEmpty()) {
 			return;
 		}
 
@@ -162,7 +162,7 @@ public class AddressIndexPrimaryKeyIterator implements DBFieldIterator {
 
 		keyRangeList = addrMap.getKeyRanges(null, absolute, false);
 		keyRangeIndex = addrMap.findKeyRange(keyRangeList, start);
-		if (keyRangeList.size() == 0) {
+		if (keyRangeList.isEmpty()) {
 			return;
 		}
 

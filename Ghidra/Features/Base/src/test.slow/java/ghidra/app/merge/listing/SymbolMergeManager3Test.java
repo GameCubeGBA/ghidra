@@ -41,8 +41,7 @@ public class SymbolMergeManager3Test extends AbstractListingMergeManagerTest {
 	 * @param arg0
 	 */
 	public SymbolMergeManager3Test() {
-		super();
-	}
+    }
 
 	@Test
 	public void testVariousNameNoConflictsInOverlay() throws Exception {

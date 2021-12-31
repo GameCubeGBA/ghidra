@@ -36,7 +36,7 @@ class OldStackVariableDBAdapterV0 extends OldStackVariableDBAdapter {
 
 	static final String STACK_VARS_TABLE_NAME = "Stack Variables";
 
-	final static int SCHEMA_VERSION = 0;
+	static final int SCHEMA_VERSION = 0;
 
 	// Stack Variables Table Columns
 	static final int V0_STACK_VAR_FUNCTION_KEY_COL = 0;

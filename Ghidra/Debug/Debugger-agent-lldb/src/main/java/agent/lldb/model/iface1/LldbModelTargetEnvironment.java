@@ -20,20 +20,20 @@ import ghidra.dbg.target.TargetEnvironment;
 
 public interface LldbModelTargetEnvironment extends LldbModelTargetObject, TargetEnvironment {
 
-	public void refreshInternal();
+	void refreshInternal();
 
 	@Override
-	public default String getArchitecture() {
+    default String getArchitecture() {
 		return getTypedAttributeNowByName(ARCH_ATTRIBUTE_NAME, String.class, "");
 	}
 
 	@Override
-	public default String getDebugger() {
+    default String getDebugger() {
 		return getTypedAttributeNowByName(DEBUGGER_ATTRIBUTE_NAME, String.class, "");
 	}
 
 	@Override
-	public default String getOperatingSystem() {
+    default String getOperatingSystem() {
 		return getTypedAttributeNowByName(OS_ATTRIBUTE_NAME, String.class, "");
 	}
 

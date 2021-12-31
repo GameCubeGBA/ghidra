@@ -35,7 +35,7 @@ public abstract class DbgEngUtil {
 	private DbgEngUtil() {
 	}
 
-	public static interface InterfaceSupplier {
+	public interface InterfaceSupplier {
 		HRESULT get(REFIID refiid, PointerByReference pClient);
 	}
 

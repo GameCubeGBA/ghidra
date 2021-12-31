@@ -154,12 +154,12 @@ public class EditExternalLocationDialog extends DialogComponentProvider {
 		}
 		String editName;
 		editName = externalLocation.getSymbol().getParentNamespace().getName(true);
-		boolean hasName = locationName != null && locationName.length() > 0;
+		boolean hasName = locationName != null && !locationName.isEmpty();
 		if (hasName) {
 			editName += "::" + locationName;
 		}
 		if (address != null) {
-			editName += " @ " + address.toString();
+			editName += " @ " + address;
 		}
 		return editName;
 	}

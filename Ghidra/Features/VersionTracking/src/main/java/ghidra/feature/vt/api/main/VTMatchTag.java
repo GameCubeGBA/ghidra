@@ -41,5 +41,5 @@ public interface VTMatchTag extends Comparable<VTMatchTag> {
 	 * Gets the user defined name this tag represents.
 	 * @return the tag name
 	 */
-	public String getName();
+    String getName();
 }

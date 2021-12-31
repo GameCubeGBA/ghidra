@@ -745,13 +745,13 @@ public abstract class AbstractConstraintsTree< //
 	protected void dump(Q query) {
 		visit(query, new TreeRecordVisitor() {
 			String getLevel(DBTreeRecord<?, ?> record) {
-				String level = "";
+				StringBuilder level = new StringBuilder();
 				NR parent = getParentOf(record);
 				while (parent != null) {
-					level = level + "  ";
+					level.append("  ");
 					parent = getParentOf(parent);
 				}
-				return level;
+				return level.toString();
 			}
 
 			@Override

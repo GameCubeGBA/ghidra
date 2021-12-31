@@ -44,14 +44,14 @@ dependencies {
 	runtimeOnly "msv:relaxngDatatype:20050913"
 	api "msv:isorelax:20050913"	
 	
-	testImplementation "org.jmockit:jmockit:1.44"	
+	testImplementation "org.jmockit:jmockit:1.49"	
 	
 	// Must specify the specific antlr implementation to use or it will default to trying to find
 	// version 2.7.7 (which we don't have)
 	antlr "org.antlr:antlr:3.5.2"
 	// need to add in the antlr dependencies for when we build from flat jar dirs
 	antlr "org.antlr:antlr-runtime:3.5.2"
-	antlr "org.antlr:ST4:4.0.8"
+	antlr "org.antlr:ST4:4.3.1"
 }	
 
 def genSrcDir = 'generated-src/antlr/main'

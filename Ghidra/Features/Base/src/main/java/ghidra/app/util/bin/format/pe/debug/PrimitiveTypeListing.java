@@ -26,354 +26,354 @@ public class PrimitiveTypeListing {
 
 	// Special Types
     /**Uncharacterized type (no type)*/
-    public final static short T_NOTYPE    = 0x0000;
+    public static final short T_NOTYPE    = 0x0000;
     /**Absolute symbol*/
-    public final static short T_ABS       = 0x0001;
+    public static final short T_ABS       = 0x0001;
     /**Segment Type*/
-    public final static short T_SEGMENT   = 0x0002;
+    public static final short T_SEGMENT   = 0x0002;
     /**VOID*/
-    public final static short T_VOID      = 0x0003;
+    public static final short T_VOID      = 0x0003;
     /**Near Pointer to a void*/
-    public final static short T_PVOID     = 0x0103;
+    public static final short T_PVOID     = 0x0103;
     /**Far pointer to a void*/
-    public final static short T_PFOID     = 0x0203;
+    public static final short T_PFOID     = 0x0203;
     /**Huge pointer to a VOID*/
-    public final static short T_PHVOID    = 0x0303;
+    public static final short T_PHVOID    = 0x0303;
     /**32-bit near pointer to a void*/
-    public final static short T_32PVOID   = 0x0403;
+    public static final short T_32PVOID   = 0x0403;
     /**32-bit far pointer to a void*/
-    public final static short T_32PFVOID  = 0x0503;
+    public static final short T_32PFVOID  = 0x0503;
     /**Basic 8-byte currency value*/
-    public final static short T_CURRENCY  = 0x0004;
+    public static final short T_CURRENCY  = 0x0004;
     /**Near basic string*/
-    public final static short T_NBASICSTR = 0x0005;
+    public static final short T_NBASICSTR = 0x0005;
     /**Far basic string*/
-    public final static short T_FBASICSTR = 0x0006;
+    public static final short T_FBASICSTR = 0x0006;
     /**Untranslated type record from Microsoft symbol format*/
-    public final static short T_NOTTRANS  = 0x0007;
+    public static final short T_NOTTRANS  = 0x0007;
     /**Bit*/
-    public final static short T_BIT       = 0x0060;
+    public static final short T_BIT       = 0x0060;
     /**Pascal CHAR*/
-    public final static short T_PASCHAR   = 0x0061;
+    public static final short T_PASCHAR   = 0x0061;
 	
 	// Character Types
     /**8-bit signed*/
-    public final static short T_CHAR       = 0x0010;
+    public static final short T_CHAR       = 0x0010;
     /**8-bit unsigned*/
-    public final static short T_UCHAR      = 0x0020;
+    public static final short T_UCHAR      = 0x0020;
     /**Near pointer to 8-bit signed*/
-    public final static short T_PCHAR      = 0x0110;
+    public static final short T_PCHAR      = 0x0110;
     /**Near pointer to 8-bit unsigned*/
-    public final static short T_PUCHAR	   = 0x0120;
+    public static final short T_PUCHAR	   = 0x0120;
     /**Far pointer to 8-bit signed*/
-    public final static short T_PFCHAR	   = 0x0210;
+    public static final short T_PFCHAR	   = 0x0210;
     /**Far pointer to 8-bit unsigned*/
-    public final static short T_PFUCHAR	   = 0x0220;
+    public static final short T_PFUCHAR	   = 0x0220;
     /**Huge pointer to 8-bit signed*/
-    public final static short T_PHCHAR	   = 0x0310;
+    public static final short T_PHCHAR	   = 0x0310;
     /**Huge pointer to 8-bit unsigned*/
-    public final static short T_PHUCHAR	   = 0x0320;
+    public static final short T_PHUCHAR	   = 0x0320;
     /**16:32 near pointer to 8-bit signed*/
-    public final static short T_32PCHAR	   = 0x0410;
+    public static final short T_32PCHAR	   = 0x0410;
     /**16:32 near pointer to 8-bit unsigned*/
-    public final static short T_32PUCHAR   = 0x0420;
+    public static final short T_32PUCHAR   = 0x0420;
     /**16:32 far pointer to 8-bit signed*/
-    public final static short T_32PFCHAR   = 0x0510;
+    public static final short T_32PFCHAR   = 0x0510;
     /**16:32 far pointer to 8-bit unsigned*/
-    public final static short T_32PFUCHAR  = 0x0520;
+    public static final short T_32PFUCHAR  = 0x0520;
 	
 	// Real Character Types
     /**Real char*/
-    public final static short T_RCHAR	  = 0x0070;
+    public static final short T_RCHAR	  = 0x0070;
     /**Near pointer to a real char*/
-    public final static short T_PRCHAR    = 0x0170;
+    public static final short T_PRCHAR    = 0x0170;
     /**Far pointer to a real char*/
-    public final static short T_PFRCHAR   = 0x0270;
+    public static final short T_PFRCHAR   = 0x0270;
     /**Huge pointer to a real char*/
-    public final static short T_PHRCHAR   = 0x0370;
+    public static final short T_PHRCHAR   = 0x0370;
     /**16:32 near pointer to a real char*/
-    public final static short T_32PRCHAR  = 0x0470;
+    public static final short T_32PRCHAR  = 0x0470;
     /**16:32 far pointer to a real char*/
-    public final static short T_32PFRCHAR = 0x0570;
+    public static final short T_32PFRCHAR = 0x0570;
 
 	// Wide Character Types
     /**wide char*/
-    public final static short T_WCHAR     = 0x0071;
+    public static final short T_WCHAR     = 0x0071;
     /**Near pointer to a wide char*/
-    public final static short T_PWCHAR    = 0x0171;
+    public static final short T_PWCHAR    = 0x0171;
     /**far pointer to a wide char*/
-    public final static short T_PFWCHAR   = 0x0271;
+    public static final short T_PFWCHAR   = 0x0271;
     /**Huge pointer to a wide char*/
-    public final static short T_PHWCHAR   = 0x0371;
+    public static final short T_PHWCHAR   = 0x0371;
     /**16:32 near pointer to a wide char*/
-    public final static short T_32PWCHAR  = 0x0471;
+    public static final short T_32PWCHAR  = 0x0471;
     /**16:32 far pointer to a wide char*/
-    public final static short T_32PFWCHAR = 0x0571;
+    public static final short T_32PFWCHAR = 0x0571;
 
 	// Real 16-bit Integer Types
     /**Real 16-bit signed short*/
-    public final static short T_INT2 	  = 0x0072;
+    public static final short T_INT2 	  = 0x0072;
     /**Real 16-bit unsigned short*/
-    public final static short T_UINT2 	  = 0x0073;
+    public static final short T_UINT2 	  = 0x0073;
     /**Near pointer to 16-bit signed short*/
-    public final static short T_PINT2 	  = 0x0172;
+    public static final short T_PINT2 	  = 0x0172;
     /**Near pointer to 16-bit unsigned short*/
-    public final static short T_PUINT2 	  = 0x0173;
+    public static final short T_PUINT2 	  = 0x0173;
     /**Far pointer to 16-bit signed short*/
-    public final static short T_PFINT2 	  = 0x0272;
+    public static final short T_PFINT2 	  = 0x0272;
     /**Far point to  16-bit unsigned short*/
-    public final static short T_PFUINT2   = 0x0273;
+    public static final short T_PFUINT2   = 0x0273;
     /**Huge pointer to 16-bit signed short*/
-    public final static short T_PHINT2    = 0x0372;
+    public static final short T_PHINT2    = 0x0372;
     /**Huge pointer to 16-bit unsigned short*/
-    public final static short T_PHUINT2   = 0x0373;
+    public static final short T_PHUINT2   = 0x0373;
     /**16:32 near pointer to 16-bit signed short*/
-    public final static short T_32PINT2   = 0x0472;
+    public static final short T_32PINT2   = 0x0472;
     /**16:32 near pointer to 16-bit unsigned short*/
-    public final static short T_32PUINT2  = 0x0473;
+    public static final short T_32PUINT2  = 0x0473;
     /**16:32 far pointer to 16-bit signed short*/
-    public final static short T_32PFINT2  = 0x0572;
+    public static final short T_32PFINT2  = 0x0572;
     /**16:32 far pointer to 16-bit unsigned short*/
-    public final static short T_32PFUINT2 = 0x0573;
+    public static final short T_32PFUINT2 = 0x0573;
 	
 	// 16-bit Short Types
     /**16-bit signed*/
-    public final static short T_SHORT      = 0x0011;
+    public static final short T_SHORT      = 0x0011;
     /**16-bit unsigned*/
-    public final static short T_USHORT     = 0x0021;
+    public static final short T_USHORT     = 0x0021;
     /**Near pointer to 16-bit signed*/
-    public final static short T_PSHORT     = 0x0111;
+    public static final short T_PSHORT     = 0x0111;
     /**Near pointer to 16-bit unsigned*/
-    public final static short T_PUSHORT    = 0x0121;
+    public static final short T_PUSHORT    = 0x0121;
     /**Far pointer to16-bit signed*/
-    public final static short T_PFSHORT    = 0x0211;
+    public static final short T_PFSHORT    = 0x0211;
     /**Far pointer to 16-bit unsigned*/
-    public final static short T_PFUSHORT   = 0x0221;
+    public static final short T_PFUSHORT   = 0x0221;
     /**Huge pointer to 16-bit signed*/
-    public final static short T_PHSHORT    = 0x0311;
+    public static final short T_PHSHORT    = 0x0311;
     /**Huge pointer 16-bit unsigned*/
-    public final static short T_PHUSHORT   = 0x0321;
+    public static final short T_PHUSHORT   = 0x0321;
     /**16:32 near pointer to 16-bit signed*/
-    public final static short T_32PSHORT   = 0x0411;
+    public static final short T_32PSHORT   = 0x0411;
     /**16:32 near pointer to 16-bit unsigned*/
-    public final static short T_32PUSHORT  = 0x0421;
+    public static final short T_32PUSHORT  = 0x0421;
     /**16:32 far pointer to 16-bit signed*/
-    public final static short T_32PFSHORT  = 0x0511;
+    public static final short T_32PFSHORT  = 0x0511;
     /**16:32 far pointer to 16-bit unsigned*/
-    public final static short T_32PFUSHORT = 0x0521;
+    public static final short T_32PFUSHORT = 0x0521;
 	
 	// Real 32-bit Integer Types
     /**Real 32-bit signed short*/
-    public final static short T_INT4      = 0x0074;
+    public static final short T_INT4      = 0x0074;
     /**Real 32-bit unsigned short*/
-    public final static short T_UINT4 	  = 0x0075;
+    public static final short T_UINT4 	  = 0x0075;
     /**Near pointer to 32-bit signed short*/
-    public final static short T_PINT4 	  = 0x0174;
+    public static final short T_PINT4 	  = 0x0174;
     /**Near pointer to 32-bit unsigned short*/
-    public final static short T_PUINT4 	  = 0x0175;
+    public static final short T_PUINT4 	  = 0x0175;
     /**Far pointer to 32-bit signed short*/
-    public final static short T_PFINT4 	  = 0x0274;
+    public static final short T_PFINT4 	  = 0x0274;
     /**Far pointer to 32-bit unsigned short*/
-    public final static short T_PFUINT4   = 0x0275;
+    public static final short T_PFUINT4   = 0x0275;
     /**Huge pointer to 32-bit signed short*/
-    public final static short T_PHINT4    = 0x0374;
+    public static final short T_PHINT4    = 0x0374;
     /**Huge pointer to 32-bit unsigned short*/
-    public final static short T_PHUINT4   = 0x0375;
+    public static final short T_PHUINT4   = 0x0375;
     /**16:32 near pointer to 32-bit signed short*/
-    public final static short T_32PINT4   = 0x0474;
+    public static final short T_32PINT4   = 0x0474;
     /**16:32 near pointer to 32-bit unsigned short*/
-    public final static short T_32PUINT4  = 0x0475;
+    public static final short T_32PUINT4  = 0x0475;
     /**16:32 far pointer to 32-bit signed short*/
-    public final static short T_32PFINT4  = 0x0574;
+    public static final short T_32PFINT4  = 0x0574;
     /**16:32 far pointer to 32-bit unsigned short*/
-    public final static short T_32PFUINT4 = 0x0575;
+    public static final short T_32PFUINT4 = 0x0575;
 	
 	// 32-bit Long Types
     /**32-bit signed*/
-    public final static short T_LONG 	  = 0x0012;
+    public static final short T_LONG 	  = 0x0012;
     /**32-bit unsigned*/
-    public final static short T_ULONG 	  = 0x0022;
+    public static final short T_ULONG 	  = 0x0022;
     /**Near pointer to 32-bit signed*/
-    public final static short T_PLONG 	  = 0x0112;
+    public static final short T_PLONG 	  = 0x0112;
     /**Near Pointer to 32-bit unsigned*/
-    public final static short T_PULONG 	  = 0x0122;
+    public static final short T_PULONG 	  = 0x0122;
     /**Far pointer to 32-bit signed*/
-    public final static short T_PFLONG 	  = 0x0212;
+    public static final short T_PFLONG 	  = 0x0212;
     /**Far pointer to 32-bit unsigned*/
-    public final static short T_PFULONG   = 0x0222;
+    public static final short T_PFULONG   = 0x0222;
     /**Huge pointer to 32-bit signed*/
-    public final static short T_PHLONG 	  = 0x0312;
+    public static final short T_PHLONG 	  = 0x0312;
     /**Huge pointer to 32-bit unsigned*/
-    public final static short T_PHULONG   = 0x0322;
+    public static final short T_PHULONG   = 0x0322;
     /**16:32 near pointer to 32-bit signed*/
-    public final static short T_32PLONG   = 0x0412;
+    public static final short T_32PLONG   = 0x0412;
     /**16:32 near pointer to 32-bit unsigned*/
-    public final static short T_32PULONG  = 0x0422;
+    public static final short T_32PULONG  = 0x0422;
     /**16:32 far pointer to 32-bit signed*/
-    public final static short T_P2PFLONG  = 0x0512;
+    public static final short T_P2PFLONG  = 0x0512;
     /**16:32 far pointer to 32-bit unsigned*/
-    public final static short T_32PFULONG = 0x0522;
+    public static final short T_32PFULONG = 0x0522;
 	
 	// Real 64-bit short Types
     /**64-bit signed*/
-    public final static short T_INT8 	  = 0x0076;
+    public static final short T_INT8 	  = 0x0076;
     /**64-bit unsigned*/
-    public final static short T_UINT8 	  = 0x0077;
+    public static final short T_UINT8 	  = 0x0077;
     /**Near pointer to 64-bit signed*/
-    public final static short T_PINT8 	  = 0x0176;
+    public static final short T_PINT8 	  = 0x0176;
     /**Near Pointer to 64-bit unsigned*/
-    public final static short T_PUINT8 	  = 0x0177;
+    public static final short T_PUINT8 	  = 0x0177;
     /**Far pointer to 64-bit signed*/
-    public final static short T_PFINT8 	  = 0x0276;
+    public static final short T_PFINT8 	  = 0x0276;
     /**Far pointer to 64-bit unsigned*/
-    public final static short T_PFUINT8   = 0x0277;
+    public static final short T_PFUINT8   = 0x0277;
     /**Huge pointer to 64-bit signed*/
-    public final static short T_PHINT8 	  = 0x0376;
+    public static final short T_PHINT8 	  = 0x0376;
     /**Huge pointer to 64-bit unsigned*/
-    public final static short T_PHUINT8   = 0x0377;
+    public static final short T_PHUINT8   = 0x0377;
     /**16:32 near pointer to 64-bit signed*/
-    public final static short T_32PINT8   = 0x0476;
+    public static final short T_32PINT8   = 0x0476;
     /**16:32 near pointer to 64-bit unsigned*/
-    public final static short T_32PUINT8  = 0x0477;
+    public static final short T_32PUINT8  = 0x0477;
     /**16:32 far pointer to 64-bit signed*/
-    public final static short T_32PFINT8  = 0x0576;
+    public static final short T_32PFINT8  = 0x0576;
     /**16:32 far pointer to 64-bit unsigned*/
-    public final static short T_32PFUINT8 = 0x0577;
+    public static final short T_32PFUINT8 = 0x0577;
 		
 	// 64-bit Integral Types
     /**64-bit signed*/
-    public final static short T_QUAD 	  = 0x0013;
+    public static final short T_QUAD 	  = 0x0013;
     /**64-bit unsigned*/
-    public final static short T_UQUAD 	  = 0x0023;
+    public static final short T_UQUAD 	  = 0x0023;
     /**Near pointer to 64-bit signed*/
-    public final static short T_PQUAD 	  = 0x0113;
+    public static final short T_PQUAD 	  = 0x0113;
     /**Near pointer to 64-bit unsigned*/
-    public final static short T_PUQUAD 	  = 0x0123;
+    public static final short T_PUQUAD 	  = 0x0123;
     /**Far pointer to 64-bit signed*/
-    public final static short T_PFQUAD 	  = 0x0213;
+    public static final short T_PFQUAD 	  = 0x0213;
     /**Far pointer to 64-bit unsigned*/
-    public final static short T_PFUQUAD   = 0x0223;
+    public static final short T_PFUQUAD   = 0x0223;
     /**Huge pointer to 64-bit signed*/
-    public final static short T_PHQUAD 	  = 0x0313;
+    public static final short T_PHQUAD 	  = 0x0313;
     /**Huge pointer to 64-bit unsigned*/
-    public final static short T_PHUQUAD   = 0x0323;
+    public static final short T_PHUQUAD   = 0x0323;
     /**16:32 near pointer to 64-bit signed*/
-    public final static short T_32PQUAD   = 0x0413;
+    public static final short T_32PQUAD   = 0x0413;
     /**16:32 near pointer to 64-bit unsigned*/
-    public final static short T_32PUQUAD  = 0x0423;
+    public static final short T_32PUQUAD  = 0x0423;
     /**16:32 far pointer to 64-bit signed*/
-    public final static short T_32PFQUAD  = 0x0513;
+    public static final short T_32PFQUAD  = 0x0513;
     /**16:32 far pointer to 64-bit unsigned*/
-    public final static short T_32PFUQUAD = 0x0523;
+    public static final short T_32PFUQUAD = 0x0523;
 	
 	// 32-bit Real Types
     /**32-bit real*/
-    public final static short T_REAL32     = 0x0040;
+    public static final short T_REAL32     = 0x0040;
     /**Near pointer to 32-bit real*/
-    public final static short T_PREAL32    = 0x0140;
+    public static final short T_PREAL32    = 0x0140;
     /**Far pointer to 32-bit real*/
-    public final static short T_PFREAL32   = 0x0240;
+    public static final short T_PFREAL32   = 0x0240;
     /**Huge pointer to 32-bit real*/
-    public final static short T_PHREAL32   = 0x0340;
+    public static final short T_PHREAL32   = 0x0340;
     /**16:32 near pointer to 32-bit real*/
-    public final static short T_32PREAL32  = 0x0440;
+    public static final short T_32PREAL32  = 0x0440;
     /**16:32 far pointer to 32-bit real*/
-    public final static short T_32PFREAL32 = 0x0540;
+    public static final short T_32PFREAL32 = 0x0540;
 	
 	// 64-bit Real Types
     /**64-bit real*/
-    public final static short T_REAL64     = 0x0041;
+    public static final short T_REAL64     = 0x0041;
     /**Near pointer to 64-bit real*/
-    public final static short T_PREAL64    = 0x0141;
+    public static final short T_PREAL64    = 0x0141;
     /**Far pointer to 64-bit real*/
-    public final static short T_PFREAL64   = 0x0241;
+    public static final short T_PFREAL64   = 0x0241;
     /**Huge pointer to 64-bit real*/
-    public final static short T_PHREAL64   = 0x0341;
+    public static final short T_PHREAL64   = 0x0341;
     /**16:32 near pointer to 64-bit real*/
-    public final static short T_32PREAL64  = 0x0441;
+    public static final short T_32PREAL64  = 0x0441;
     /**16:32 far pointer to 64-bit real*/
-    public final static short T_32PFREAL64 = 0x0541;
+    public static final short T_32PFREAL64 = 0x0541;
 	
 	// 32-bit Complex Types
     /**32-bit complex*/
-    public final static short T_CPLX32     = 0x0050;
+    public static final short T_CPLX32     = 0x0050;
     /**Near pointer to 32-bit complex*/
-    public final static short T_PCPLX32    = 0x0150;
+    public static final short T_PCPLX32    = 0x0150;
     /**Far pointer to 32-bit complex*/
-    public final static short T_PFCPLX32   = 0x0250;
+    public static final short T_PFCPLX32   = 0x0250;
     /**Huge pointer to 32-bit complex*/
-    public final static short T_PHCPLX32   = 0x0350;
+    public static final short T_PHCPLX32   = 0x0350;
     /**16:32 near pointer to 32-bit complex*/
-    public final static short T_32PCPLX32  = 0x0450;
+    public static final short T_32PCPLX32  = 0x0450;
     /**16:32 far pointer to 32-bit complex*/
-    public final static short T_32PFCPLX32 = 0x0550;
+    public static final short T_32PFCPLX32 = 0x0550;
 	
 	//64-bit Complex Types
     /**32-bit complex*/
-    public final static short T_CPLX64     = 0x0051;
+    public static final short T_CPLX64     = 0x0051;
     /**Near pointer to 64-bit complex*/
-    public final static short T_PCPLX64    = 0x0151;
+    public static final short T_PCPLX64    = 0x0151;
     /**Far Pointer to 64-bit complex*/
-    public final static short T_PFCPLX64   = 0x0251;
+    public static final short T_PFCPLX64   = 0x0251;
     /**Huge pointer to 64-bit complex*/
-    public final static short T_PHCPLX64   = 0x0351;
+    public static final short T_PHCPLX64   = 0x0351;
     /**16:32 near pointer to 64-bit complex*/
-    public final static short T_32PCPLX64  = 0x0451;
+    public static final short T_32PCPLX64  = 0x0451;
     /**16:32 far pointer to 64-bit complex*/
-    public final static short T_32PFCPLX64 = 0x0551;
+    public static final short T_32PFCPLX64 = 0x0551;
 	
 	// Boolean Types
     /**8-bit boolean*/
-    public final static short T_BOOL08     = 0x0030;
+    public static final short T_BOOL08     = 0x0030;
     /**16-bit boolean*/
-    public final static short T_BOOL16     = 0x0031;
+    public static final short T_BOOL16     = 0x0031;
     /**32-bit boolean*/
-    public final static short T_BOOL32     = 0x0032;
+    public static final short T_BOOL32     = 0x0032;
     /**64-bit boolean*/
-    public final static short T_BOOL64     = 0x0033;
+    public static final short T_BOOL64     = 0x0033;
     /**Near pointer to 8-bit boolean*/
-    public final static short T_PBOOL08    = 0x0130;
+    public static final short T_PBOOL08    = 0x0130;
     /**Near pointer to 16-bit boolean*/
-    public final static short T_PBOOL16    = 0x0131;
+    public static final short T_PBOOL16    = 0x0131;
     /**Near pointer to 32-bit boolean*/
-    public final static short T_PBOOL32    = 0x0132;
+    public static final short T_PBOOL32    = 0x0132;
     /**Near pointer to 64-bit boolean*/
-    public final static short T_PBOOL64    = 0x0133;
+    public static final short T_PBOOL64    = 0x0133;
     /**Far Pointer to 8-bit boolean*/
-    public final static short T_PFBOOL08   = 0x0230;
+    public static final short T_PFBOOL08   = 0x0230;
     /**Far Pointer to 16-bit boolean*/
-    public final static short T_PFBOOL16   = 0x0231;
+    public static final short T_PFBOOL16   = 0x0231;
     /**Far Pointer to 32-bit boolean*/
-    public final static short T_PFBOOL32   = 0x0232;
+    public static final short T_PFBOOL32   = 0x0232;
     /**Far Pointer to 64-bit boolean*/
-    public final static short T_PFBOOL64   = 0x0233;
+    public static final short T_PFBOOL64   = 0x0233;
     /**Huge pointer to 8-bit boolean*/
-    public final static short T_PHBOOL08   = 0x0330;
+    public static final short T_PHBOOL08   = 0x0330;
     /**Huge pointer to 16-bit boolean*/
-    public final static short T_PHBOOL16   = 0x0331;
+    public static final short T_PHBOOL16   = 0x0331;
     /**Huge pointer to 32-bit boolean*/
-    public final static short T_PHBOOL32   = 0x0332;
+    public static final short T_PHBOOL32   = 0x0332;
     /**Huge pointer to 64-bit boolean*/
-    public final static short T_PHBOOL64   = 0x0333;
+    public static final short T_PHBOOL64   = 0x0333;
     /**16:32 near pointer to 8-bit boolean*/
-    public final static short T_32PBOOL08  = 0x0430;
+    public static final short T_32PBOOL08  = 0x0430;
     /**16:32 near pointer to 16-bit boolean*/
-    public final static short T_32PBOOL16  = 0x0431;
+    public static final short T_32PBOOL16  = 0x0431;
     /**16:32 near pointer to 32-bit boolean*/
-    public final static short T_32PBOOL32  = 0x0432;
+    public static final short T_32PBOOL32  = 0x0432;
     /**16:32 near pointer to 64-bit boolean*/
-    public final static short T_32PBOOL64  = 0x0433;
+    public static final short T_32PBOOL64  = 0x0433;
     /**16:32 far pointer to 8-bit boolean*/
-    public final static short T_32PFBOOL08 = 0x0530;
+    public static final short T_32PFBOOL08 = 0x0530;
     /**16:32 far pointer to 16-bit boolean*/
-    public final static short T_32PFBOOL16 = 0x0531;
+    public static final short T_32PFBOOL16 = 0x0531;
     /**16:32 far pointer to 32-bit boolean*/
-    public final static short T_32PFBOOL32 = 0x0532;
+    public static final short T_32PFBOOL32 = 0x0532;
     /**16:32 far pointer to 64-bit boolean*/
-    public final static short T_32PFBOOL64 = 0x0533;
+    public static final short T_32PFBOOL64 = 0x0533;
 	
     /**HANDLE*/
-    public final static short T_HINSTANCE = 0x10fd;
+    public static final short T_HINSTANCE = 0x10fd;
 
 	public static DataType getDataType(short type) {
 

@@ -65,8 +65,7 @@ public class VariableTypeFieldLocation extends VariableLocation {
 	 * Should only be used by XML restoration.
 	 */
 	public VariableTypeFieldLocation() {
-		super();
-	}
+    }
 
 	/**
 	 * Return the function stack variable type string at this location.
@@ -97,11 +96,8 @@ public class VariableTypeFieldLocation extends VariableLocation {
 		if (!super.equals(obj) || (getClass() != obj.getClass()))
 			return false;
 		VariableTypeFieldLocation other = (VariableTypeFieldLocation) obj;
-		if (!Objects.equals(typeStr, other.typeStr)) {
-			return false;
-		}
-		return true;
-	}
+        return Objects.equals(typeStr, other.typeStr);
+    }
 
 	@Override
 	public void restoreState(Program p, SaveState obj) {

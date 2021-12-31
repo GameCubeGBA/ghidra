@@ -18,6 +18,6 @@ package ghidra.app.services;
 
 public interface BookmarkService {
 
-	public void setBookmarksVisible(boolean visible);
+	void setBookmarksVisible(boolean visible);
 
 }

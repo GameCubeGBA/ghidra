@@ -214,7 +214,7 @@ public class OSGiUtils {
 		}
 	}
 
-	static private boolean hasEvenQuoteCount(String s) {
+	private static boolean hasEvenQuoteCount(String s) {
 		return s.chars().filter(c -> c == '"').count() % 2 == 0;
 	}
 

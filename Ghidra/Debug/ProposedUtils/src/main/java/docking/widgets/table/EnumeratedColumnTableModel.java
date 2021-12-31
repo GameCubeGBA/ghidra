@@ -37,5 +37,5 @@ public interface EnumeratedColumnTableModel<R> extends RowObjectTableModel<R> {
 
 	R findFirst(Predicate<R> predicate);
 
-	public void clear();
+	void clear();
 }

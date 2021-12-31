@@ -35,7 +35,7 @@ import ghidra.util.Msg;
  */
 class CommentHistoryPanel extends JPanel {
 
-	private final static String NO_HISTORY = "No History Found";
+	private static final String NO_HISTORY = "No History Found";
 	private SimpleAttributeSet userAttrSet;
 	private SimpleAttributeSet dateAttrSet;
 	private SimpleAttributeSet textAttrSet;

@@ -25,7 +25,7 @@ public interface DebugRunningProcess {
 	/**
 	 * Description of a running process
 	 */
-	public static class Description {
+    class Description {
 		public static enum ProcessDescriptionFlags implements BitmaskUniverse {
 			NO_PATHS(1 << 0), //
 			NO_SERVICES(1 << 1), //

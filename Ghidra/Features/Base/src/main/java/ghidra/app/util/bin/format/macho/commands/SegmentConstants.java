@@ -19,13 +19,13 @@ package ghidra.app.util.bin.format.macho.commands;
 public final class SegmentConstants {
 
 	/** Read protection flag. */
-	public final static int PROTECTION_R = 0x1;
+    public static final int PROTECTION_R = 0x1;
 	/** Write protection flag. */
-	public final static int PROTECTION_W = 0x2;
+    public static final int PROTECTION_W = 0x2;
 	/** Execute protection flag. */
-	public final static int PROTECTION_X = 0x4;
+    public static final int PROTECTION_X = 0x4;
 
 	/** If this flag bit is set, the segment contains Apple protection. */
-	public final static int FLAG_APPLE_PROTECTED = 0x8;
+    public static final int FLAG_APPLE_PROTECTED = 0x8;
 
 }

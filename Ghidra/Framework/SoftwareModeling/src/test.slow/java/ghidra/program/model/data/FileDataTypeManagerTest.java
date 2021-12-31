@@ -89,7 +89,7 @@ public class FileDataTypeManagerTest extends AbstractGenericTest {
 
 				Assert.fail(
 					"Did not get exptected data types of byte, Typdef and Typedef.  Instead found:\n" +
-						buffy.toString());
+                            buffy);
 			}
 
 			assertTrue(dt1.isEquivalent(dtMgr.getDataType(CategoryPath.ROOT, "T1")));

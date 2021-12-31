@@ -88,11 +88,8 @@ public class VTAssociationPair {
 		else if (!sourceAddress.equals(other.sourceAddress)) {
 			return false;
 		}
-		if (type != other.type) {
-			return false;
-		}
-		return true;
-	}
+        return type == other.type;
+    }
 
 	@Override
 	public String toString() {

@@ -75,7 +75,7 @@ public interface TargetRegister extends TargetObject {
 	 * TODO: Instead of overriding getIndex, we should introduce getRegisterName.
 	 */
 	@Override
-	public default String getIndex() {
+    default String getIndex() {
 		return PathUtils.isIndex(getPath()) ? PathUtils.getIndex(getPath())
 				: PathUtils.getKey(getPath());
 	}

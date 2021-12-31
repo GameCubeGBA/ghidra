@@ -138,19 +138,16 @@ public class PopupActionManager implements PropertyChangeListener {
 		}
 
 		// Include global actions
-		Iterator<DockingActionIf> iter = popupActions.iterator();
-		while (iter.hasNext()) {
-			DockingActionIf action = iter.next();
+        for (DockingActionIf action : popupActions) {
+            MenuData popupMenuData = action.getPopupMenuData();
+            if (popupMenuData != null && action.isValidContext(actionContext) &&
+                    action.isAddToPopup(actionContext)) {
 
-			MenuData popupMenuData = action.getPopupMenuData();
-			if (popupMenuData != null && action.isValidContext(actionContext) &&
-				action.isAddToPopup(actionContext)) {
-
-				boolean isEnabled = action.isEnabledForContext(actionContext);
-				action.setEnabled(isEnabled);
-				menuMgr.addAction(action);
-			}
-		}
+                boolean isEnabled = action.isEnabledForContext(actionContext);
+                action.setEnabled(isEnabled);
+                menuMgr.addAction(action);
+            }
+        }
 
 		// Include local actions for focused component
 		while (localActions.hasNext()) {

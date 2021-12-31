@@ -31,7 +31,6 @@ package ghidra.program.model.pcode;
 public class BlockWhileDo extends BlockGraph {
 
 	public BlockWhileDo() {
-		super();
-		blocktype = PcodeBlock.WHILEDO;
+        blocktype = PcodeBlock.WHILEDO;
 	}
 }

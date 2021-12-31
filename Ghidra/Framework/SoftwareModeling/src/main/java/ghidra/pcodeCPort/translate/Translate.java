@@ -360,7 +360,7 @@ public abstract class Translate implements BasicSpaceProvider {
 				if (!"const".equals(spc.getName())) {
 					nametype_mismatch = true;
 				}
-				if (baselist.size() != 0) {
+				if (!baselist.isEmpty()) {
 					throw new LowlevelError("const space must be initialized first");
 				}
 				constantspace = spc;

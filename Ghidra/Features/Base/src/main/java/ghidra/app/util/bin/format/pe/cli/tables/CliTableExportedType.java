@@ -39,8 +39,7 @@ public class CliTableExportedType extends CliAbstractTable {
 		
 		public CliExportedTypeRow(int flags, int typeDefIdIndex, int typeNameIndex,
 				int typeNamespaceIndex, int implementationIndex) {
-			super();
-			this.flags = flags;
+            this.flags = flags;
 			this.typeDefIdIndex = typeDefIdIndex;
 			this.typeNameIndex = typeNameIndex;
 			this.typeNamespaceIndex = typeNamespaceIndex;

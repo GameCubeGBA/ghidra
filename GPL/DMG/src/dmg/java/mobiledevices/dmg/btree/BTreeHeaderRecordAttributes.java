@@ -10,8 +10,8 @@ package mobiledevices.dmg.btree;
  */
 public final class BTreeHeaderRecordAttributes {
 
-	public final static int kBTBadCloseMask = 0x00000001;
-	public final static int kBTBigKeysMask = 0x00000002;
-	public final static int kBTVariableIndexKeysMask = 0x00000004;
+	public static final int kBTBadCloseMask = 0x00000001;
+	public static final int kBTBigKeysMask = 0x00000002;
+	public static final int kBTVariableIndexKeysMask = 0x00000004;
 
 }

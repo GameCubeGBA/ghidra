@@ -33,11 +33,11 @@ import ghidra.util.exception.UsrException;
  */
 public class PointerAction extends CompositeEditorTableAction {
 
-	public final static String ACTION_NAME = "Create Pointer";
-	private final static String GROUP_NAME = COMPONENT_ACTION_GROUP;
-	private final static String DESCRIPTION = "Create a pointer(s) on the selection";
-	private final static DataType POINTER_DT = new PointerDataType();
-	private final static KeyStroke KEY_STROKE = KeyStroke.getKeyStroke(KeyEvent.VK_P, 0);
+	public static final String ACTION_NAME = "Create Pointer";
+	private static final String GROUP_NAME = COMPONENT_ACTION_GROUP;
+	private static final String DESCRIPTION = "Create a pointer(s) on the selection";
+	private static final DataType POINTER_DT = new PointerDataType();
+	private static final KeyStroke KEY_STROKE = KeyStroke.getKeyStroke(KeyEvent.VK_P, 0);
 
 	public PointerAction(CompositeEditorProvider provider) {
 		super(provider, EDIT_ACTION_PREFIX + ACTION_NAME, GROUP_NAME, null, null, null);

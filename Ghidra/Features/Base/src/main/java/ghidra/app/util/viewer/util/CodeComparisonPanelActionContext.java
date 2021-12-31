@@ -26,6 +26,6 @@ public interface CodeComparisonPanelActionContext {
 	 * Gets the CodeComparisonPanel associated with this context.
 	 * @return the code comparison panel.
 	 */
-	public abstract CodeComparisonPanel<? extends FieldPanelCoordinator> getCodeComparisonPanel();
+    CodeComparisonPanel<? extends FieldPanelCoordinator> getCodeComparisonPanel();
 
 }

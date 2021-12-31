@@ -54,15 +54,15 @@ import ghidra.util.task.TaskMonitor;
 )
 //@formatter:on
 public class CParserPlugin extends ProgramPlugin {
-	final static String PARSE_ACTION_NAME = "Import C DataTypes";
+	static final String PARSE_ACTION_NAME = "Import C DataTypes";
 
-	final static String USER_PROFILES_DIR =
+	static final String USER_PROFILES_DIR =
 		Application.getUserSettingsDirectory().getAbsolutePath() + File.separatorChar +
 			"parserprofiles";
 	private ParseDialog parseDialog;
 	private File userProfileDir;
 
-	final static String DESCRIPTION =
+	static final String DESCRIPTION =
 		"Parse C and C Header files, extracting data definitions and function signatures.";
 
 	public CParserPlugin(PluginTool plugintool) {
@@ -142,64 +142,6 @@ public class CParserPlugin extends ProgramPlugin {
 			parseDialog.toFront();
 		}
 		tool.showDialog(parseDialog);
-	}
-
-	public void doCParser() {
-
-		try {
-			// PreProcessor cpp = new PreProcessor("c:/Program Files/Microsoft
-			// Visual Studio/VC98/Include/stdio.h");
-			String filename1 = "c:/Program Files/Microsoft Visual Studio/VC98/Include/windows.h";
-			// String filename1 = "c:/Program Files/Microsoft Visual
-			// Studio/VC98/Include/stdio.h";
-			// String filename1 = "c:/dummy.h";
-			// String filename2 = "c:/Program Files/Microsoft Visual
-			// Studio/VC98/Include/winnt.h";
-			String[] args = { "-Ic:/Program Files/Microsoft Visual Studio/VC98/Include/",
-				// "-D_DLL",
-				"-D_M_IX86=500", "-D_MSC_VER=9090", "-D_WIN32_WINNT=0x0400",
-				"-D_WIN32_WINDOWS=0x400", "-D_INTEGRAL_MAX_BITS=32", "-D_X86_", "-D_WIN32" };
-			PreProcessor cpp = new PreProcessor();
-			ByteArrayOutputStream bos = new ByteArrayOutputStream();
-			cpp.setArgs(args);
-			OutputStream os = null;
-			try {
-				os = new FileOutputStream("c:/tmpwindows.h.out");
-			}
-			catch (FileNotFoundException e) {
-				Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-			}
-			PrintStream ps = new PrintStream(os);
-			System.setErr(ps);
-			System.setOut(ps);
-			cpp.setOutputStream(bos);
-			try {
-				cpp.parse(filename1);
-			}
-			catch (RuntimeException e) {
-				Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-			}
-
-			System.out.println(bos);
-
-			FileDataTypeManager dtMgr =
-				FileDataTypeManager.createFileArchive(new File("c:/parse.gdt"));
-			CParser cParser = new CParser(dtMgr, true, null);
-			ByteArrayInputStream bis = new ByteArrayInputStream(bos.toByteArray());
-			cParser.parse(bis);
-
-			try {
-				DataTypesXmlMgr.writeAsXMLForDebug(dtMgr, "c:/parse.xml");
-				dtMgr.save();
-				dtMgr.close();
-			}
-			catch (IOException e3) {
-				Msg.error(this, "Unexpected Exception: " + e3.getMessage(), e3);
-			}
-		}
-		catch (Exception e) {
-			Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);
-		}
 	}
 
 	// // Prints out all the types used in parsing the c source
@@ -294,15 +236,14 @@ public class CParserPlugin extends ProgramPlugin {
 			openDTmanagers = dtService.getDataTypeManagers();
 
 			ArrayList<DataTypeManager> list = new ArrayList<>();
-			String htmlNamesList = "";
-			for (int i = 0; i < openDTmanagers.length; i++) {
-				if (openDTmanagers[i] instanceof ProgramDataTypeManager) {
+			StringBuilder htmlNamesList = new StringBuilder();
+			for (DataTypeManager openDTmanager : openDTmanagers) {
+				if (openDTmanager instanceof ProgramDataTypeManager) {
 					continue;
 				}
-				list.add(openDTmanagers[i]);
-				if (!(openDTmanagers[i] instanceof BuiltInDataTypeManager)) {
-					htmlNamesList += "<li><b>" +
-						HTMLUtilities.escapeHTML(openDTmanagers[i].getName()) + "</b></li>";
+				list.add(openDTmanager);
+				if (!(openDTmanager instanceof BuiltInDataTypeManager)) {
+					htmlNamesList.append("<li><b>").append(HTMLUtilities.escapeHTML(openDTmanager.getName())).append("</b></li>");
 				}
 			}
 			openDTmanagers = list.toArray(new DataTypeManager[0]);
@@ -456,7 +397,7 @@ public class CParserPlugin extends ProgramPlugin {
 					case '-':
 						if (!parseQuote) {
 							String sarg = arg.toString().trim();
-							if (sarg.length() > 0) {
+							if (!sarg.isEmpty()) {
 								list.add(sarg);
 							}
 						}
@@ -465,7 +406,7 @@ public class CParserPlugin extends ProgramPlugin {
 				}
 			}
 			String sarg = arg.toString().trim();
-			if (sarg.length() > 0) {
+			if (!sarg.isEmpty()) {
 				list.add(sarg);
 			}
 		}

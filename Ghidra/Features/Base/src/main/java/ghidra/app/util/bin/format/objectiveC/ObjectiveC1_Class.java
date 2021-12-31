@@ -26,7 +26,7 @@ import ghidra.util.exception.DuplicateNameException;
 import java.io.IOException;
 
 public class ObjectiveC1_Class implements StructConverter {
-	public final static String NAME = "objc_class";
+	public static final String NAME = "objc_class";
 	public static final long SIZEOF = 0x30;
 
 	private ObjectiveC1_State _state;

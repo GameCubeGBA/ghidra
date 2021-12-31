@@ -24,7 +24,7 @@ import java.io.IOException;
 
 public class SparseSwitchPayload implements StructConverter {
 
-	public final static short MAGIC = 0x0200;
+	public static final short MAGIC = 0x0200;
 
 	private short ident;
 	private short size;
