@@ -16,6 +16,7 @@
 package ghidra.app.cmd.comments;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import ghidra.app.util.CodeUnitInfo;
@@ -359,17 +360,15 @@ public class CodeUnitInfoPasteCmd implements Command {
 	private String[] appendComment(String[] comment1, String[] comment2) {
 		// first check for duplicate comments
 		ArrayList<String> list = new ArrayList<String>();
-		for (int i = 0; i < comment2.length; i++) {
-			list.add(comment2[i]);
-		}
-		for (int i = 0; i < comment1.length; i++) {
-			for (int j = 0; j < list.size(); j++) {
-				if (comment1[i].equals(list.get(j))) {
-					list.remove(j);
-					--j;
-				}
-			}
-		}
+        list.addAll(Arrays.asList(comment2));
+        for (String s : comment1) {
+            for (int j = 0; j < list.size(); j++) {
+                if (s.equals(list.get(j))) {
+                    list.remove(j);
+                    --j;
+                }
+            }
+        }
 		comment2 = new String[list.size()];
 		comment2 = list.toArray(comment2);
 

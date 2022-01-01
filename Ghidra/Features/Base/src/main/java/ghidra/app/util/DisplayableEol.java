@@ -110,9 +110,7 @@ public class DisplayableEol {
 		while (iter.hasNext() && list.size() < maxReferences) {
 			Address fromAddress = iter.next();
 			Reference[] refs = referenceManager.getReferencesFrom(fromAddress);
-			for (Reference element : refs) {
-				list.add(element);
-			}
+            list.addAll(Arrays.asList(refs));
 		}
 		return list.toArray(new Reference[list.size()]);
 	}

@@ -397,9 +397,7 @@ public abstract class ProcessorEmulatorTestAdapter extends TestCase implements E
 
 	protected final void setIgnoredBlocks(String... blockNames) {
 		ignoredBlocks = new HashSet<>();
-		for (String name : blockNames) {
-			ignoredBlocks.add(name);
-		}
+        ignoredBlocks.addAll(Arrays.asList(blockNames));
 	}
 
 	private AddressSetView getRestrictedSearchSet(Program program) {

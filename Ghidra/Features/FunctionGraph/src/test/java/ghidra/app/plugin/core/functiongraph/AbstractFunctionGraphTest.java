@@ -984,14 +984,10 @@ public abstract class AbstractFunctionGraphTest extends AbstractGhidraHeadedInte
 
 		for (FGVertex vertex : groupVertices) {
 			Collection<FGEdge> inEdges = graph.getInEdges(vertex);
-			for (FGEdge edge : inEdges) {
-				ungroupedEdges.add(edge);
-			}
+			ungroupedEdges.addAll(inEdges);
 
 			Collection<FGEdge> outEdges = graph.getOutEdges(vertex);
-			for (FGEdge edge : outEdges) {
-				ungroupedEdges.add(edge);
-			}
+			ungroupedEdges.addAll(outEdges);
 		}
 	}
 
@@ -999,9 +995,7 @@ public abstract class AbstractFunctionGraphTest extends AbstractGhidraHeadedInte
 			FGVertex... vertices) {
 
 		Set<FGVertex> set = new HashSet<>();
-		for (FGVertex vertex : vertices) {
-			set.add(vertex);
-		}
+		set.addAll(Arrays.asList(vertices));
 		return addToGroup(groupedVertex, set);
 	}
 
@@ -1855,9 +1849,7 @@ public abstract class AbstractFunctionGraphTest extends AbstractGhidraHeadedInte
 	protected GroupedFunctionGraphVertex group(String groupName, FGVertex... vertices) {
 
 		HashSet<FGVertex> set = new HashSet<>();
-		for (FGVertex v : vertices) {
-			set.add(v);
-		}
+		set.addAll(Arrays.asList(vertices));
 
 		pickVertices(set);
 		GroupedFunctionGraphVertex groupVertex = group(set, groupName);
@@ -1957,9 +1949,7 @@ public abstract class AbstractFunctionGraphTest extends AbstractGhidraHeadedInte
 	private Set<FGVertex> selectVertices(FunctionGraph functionGraph, FGVertex... vertices) {
 
 		Set<FGVertex> set = new HashSet<>();
-		for (FGVertex vertex : vertices) {
-			set.add(vertex);
-		}
+		set.addAll(Arrays.asList(vertices));
 
 		pickVertices(set);
 

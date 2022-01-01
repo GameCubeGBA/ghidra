@@ -130,12 +130,7 @@ public class OmfFileHeader extends OmfRecord {
 	 */
 	public void sortSegmentDataBlocks() {
 		if (extraSeg != null) {
-			for(int i=0;i<extraSeg.size();++i) {
-				segments.add(extraSeg.get(i));
-			}
-		}
-		for(int i=0;i<segments.size();++i) {
-			segments.get(i).sortData();
+            segments.addAll(extraSeg);
 		}
 	}
 

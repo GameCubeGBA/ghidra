@@ -500,14 +500,10 @@ public class FGViewUpdater extends VisualGraphViewUpdater<FGVertex, FGEdge> {
 					"cannot group vertex--it is not in the graph: " + vertex.getTitle());
 			}
 
-			for (FGEdge edge : inEdges) {
-				ungroupedEdges.add(edge);
-			}
+            ungroupedEdges.addAll(inEdges);
 
 			Collection<FGEdge> outEdges = graph.getOutEdges(vertex);
-			for (FGEdge edge : outEdges) {
-				ungroupedEdges.add(edge);
-			}
+            ungroupedEdges.addAll(outEdges);
 		}
 	}
 
