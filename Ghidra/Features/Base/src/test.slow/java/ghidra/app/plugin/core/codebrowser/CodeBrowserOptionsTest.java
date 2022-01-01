@@ -232,7 +232,7 @@ public class CodeBrowserOptionsTest extends AbstractGhidraHeadedIntegrationTest 
 		cb.goToField(addr("0x1001000"), "Address", 0, 0);
 		ListingTextField btf = (ListingTextField) cb.getCurrentField();
 		String s = btf.getText();
-		assertTrue(s.indexOf(":") > 0);
+		assertTrue(s.indexOf(':') > 0);
 		afowo.setShowBlockName(false);
 		options.setCustomOption(names.get(0), afowo);
 		cb.updateNow();
@@ -906,7 +906,7 @@ public class CodeBrowserOptionsTest extends AbstractGhidraHeadedIntegrationTest 
 		cb.updateNow();
 		assertTrue(cb.goToField(addr("0x1003d9f"), "XRef", 0, 0));
 		ListingTextField btf = (ListingTextField) cb.getCurrentField();
-		assertTrue(btf.getText().indexOf("/") > 0);
+		assertTrue(btf.getText().indexOf('/') > 0);
 
 		options.setString(names.get(0), ",");
 		cb.updateNow();

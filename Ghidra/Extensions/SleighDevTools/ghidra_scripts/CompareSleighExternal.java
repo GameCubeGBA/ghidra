@@ -115,11 +115,11 @@ public class CompareSleighExternal extends GhidraScript {
 				continue;
 			}
 			
-			int start = str.indexOf(" ");
+			int start = str.indexOf(' ');
 
 			for (int opIndex = 0; opIndex < pinst.getNumOperands(); opIndex++) {
 				// try to parse the operand string from the instruction
-				int sepEnd = str.indexOf(",", start);
+				int sepEnd = str.indexOf(',', start);
 				
 				String extOp = getExtOpStr(str, start, sepEnd);
 				start = sepEnd + 1;
@@ -144,7 +144,7 @@ public class CompareSleighExternal extends GhidraScript {
 								continue;
 							}
 							// gotta move into next string, must be embedded comma
-							sepEnd = str.indexOf(",", start);
+							sepEnd = str.indexOf(',', start);
 							
 							extOp = getExtOpStr(str, start, sepEnd);
 							start = sepEnd + 1;

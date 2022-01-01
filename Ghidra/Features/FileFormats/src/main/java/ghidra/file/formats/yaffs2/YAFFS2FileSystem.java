@@ -71,11 +71,11 @@ public class YAFFS2FileSystem extends GFileSystemBase {
 	public List<GFile> getListing(GFile directory) throws IOException {
 		if (directory == null || directory.equals(root)) {
 			List<GFile> roots = new ArrayList<>();
-			for (Long objId : map.keySet()) {
-				GFile parentFile = map.get(objId).getParentFile();
+			for (GFileImpl gFile : map.values()) {
+				GFile parentFile = gFile.getParentFile();
 				if (parentFile != null) {
 					if (parentFile == root || parentFile.equals(root)) {
-						GFile file = map.get(objId);
+						GFile file = gFile;
 						roots.add(file);
 					}
 				}
@@ -83,13 +83,13 @@ public class YAFFS2FileSystem extends GFileSystemBase {
 			return roots;
 		}
 		List<GFile> fileList = new ArrayList<>();
-		for (Long objId : map.keySet()) {
-			GFile parentFile = map.get(objId).getParentFile();
+		for (GFileImpl gFile : map.values()) {
+			GFile parentFile = gFile.getParentFile();
 			if (parentFile == null) {
 				continue;
 			}
 			if (parentFile.equals(directory)) {
-				GFile file = map.get(objId);
+				GFile file = gFile;
 				fileList.add(file);
 			}
 		}

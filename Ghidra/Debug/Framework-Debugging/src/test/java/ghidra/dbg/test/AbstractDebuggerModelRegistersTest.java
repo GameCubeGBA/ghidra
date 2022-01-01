@@ -182,8 +182,8 @@ public abstract class AbstractDebuggerModelRegistersTest extends AbstractDebugge
 			read.keySet());
 
 		// NB. The specimen is not expected to control the register values. Just validate lengths
-		for (String name : exp.keySet()) {
-			assertEquals(exp.get(name).length, read.get(name).length);
+		for (Entry<String, byte[]> entry : exp.entrySet()) {
+			assertEquals(entry.getValue().length, read.get(entry.getKey()).length);
 		}
 
 		if (!isRegisterBankAlsoContainer()) {
@@ -219,8 +219,8 @@ public abstract class AbstractDebuggerModelRegistersTest extends AbstractDebugge
 		assertEquals("Not all registers were read, or extras were read", write.keySet(),
 			read.keySet());
 
-		for (String name : write.keySet()) {
-			assertArrayEquals(write.get(name), read.get(name));
+		for (Entry<String, byte[]> entry : write.entrySet()) {
+			assertArrayEquals(entry.getValue(), read.get(entry.getKey()));
 		}
 
 		if (!isRegisterBankAlsoContainer()) {

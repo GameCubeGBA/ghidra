@@ -39,7 +39,7 @@ public class NewGuid {
 	    this.type = type;
 	    
 	    String strippedGUID = GUID.replaceAll(delim, "");
-	    strippedGUID = strippedGUID.substring(0, strippedGUID.indexOf(" "));
+	    strippedGUID = strippedGUID.substring(0, strippedGUID.indexOf(' '));
 	    if (strippedGUID.length() != size*2) {
 	        Msg.error(this, "ERROR PARSING GUID: "+GUID);
 	    }
@@ -60,10 +60,10 @@ public class NewGuid {
 	    
 	    String left = GUID.substring(36);
 	    if (hasVersion) {
-	        int vpos = left.indexOf("v");
+	        int vpos = left.indexOf('v');
 	        if (vpos > 0) {
 		        left = left.substring(vpos);
-		        int sppos = left.indexOf(" ");
+		        int sppos = left.indexOf(' ');
 		        if (sppos > 0) {
 		        	version = left.substring(0, sppos);
 		        } else {
@@ -72,7 +72,7 @@ public class NewGuid {
 		        left = left.substring(version.length());
 	        }
 	    }
-	    name = left.substring(left.indexOf(" ")+1);
+	    name = left.substring(left.indexOf(' ')+1);
 	}
 	
 	public NewGuid(DataConverter conv, byte [] bytes, int offset) {

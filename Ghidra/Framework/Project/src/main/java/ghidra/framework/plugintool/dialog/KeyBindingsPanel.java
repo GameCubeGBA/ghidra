@@ -127,8 +127,9 @@ public class KeyBindingsPanel extends JPanel {
 	}
 
 	public void apply() {
-        for (String actionName : keyStrokesByFullName.keySet()) {
-            KeyStroke currentKeyStroke = keyStrokesByFullName.get(actionName);
+        for (Entry<String, KeyStroke> entry : keyStrokesByFullName.entrySet()) {
+            String actionName = entry.getKey();
+            KeyStroke currentKeyStroke = entry.getValue();
             KeyStroke originalKeyStroke = originalValues.get(actionName);
             updateOptions(actionName, originalKeyStroke, currentKeyStroke);
         }
@@ -155,8 +156,9 @@ public class KeyBindingsPanel extends JPanel {
 	}
 
 	public void cancel() {
-        for (String actionName : originalValues.keySet()) {
-            KeyStroke originalKS = originalValues.get(actionName);
+        for (Entry<String, KeyStroke> entry : originalValues.entrySet()) {
+            String actionName = entry.getKey();
+            KeyStroke originalKS = entry.getValue();
             KeyStroke modifiedKS = keyStrokesByFullName.get(actionName);
             if (modifiedKS != null && !modifiedKS.equals(originalKS)) {
                 keyStrokesByFullName.put(actionName, originalKS);
@@ -435,7 +437,8 @@ public class KeyBindingsPanel extends JPanel {
 	}
 
 	private void restoreDefaultKeybindings() {
-        for (String actionName : keyStrokesByFullName.keySet()) {
+        for (Entry<String, KeyStroke> entry : keyStrokesByFullName.entrySet()) {
+            String actionName = entry.getKey();
             List<DockingActionIf> actions = actionsByFullName.get(actionName);
             if (actions.isEmpty()) {
                 throw new AssertException("No actions defined for " + actionName);
@@ -443,7 +446,7 @@ public class KeyBindingsPanel extends JPanel {
 
             // pick one action, they are all conceptually the same
             DockingActionIf action = actions.get(0);
-            KeyStroke currentKeyStroke = keyStrokesByFullName.get(actionName);
+            KeyStroke currentKeyStroke = entry.getValue();
             KeyBindingData defaultBinding = action.getDefaultKeyBindingData();
             KeyStroke newKeyStroke =
                     (defaultBinding == null) ? null : defaultBinding.getKeyBinding();
@@ -577,9 +580,10 @@ public class KeyBindingsPanel extends JPanel {
 		boolean changes = false;
 
 		// add each new key stroke mapping
-        for (String name : keyBindingsMap.keySet()) {
+        for (Entry<String, KeyStroke> entry : keyBindingsMap.entrySet()) {
+            String name = entry.getKey();
 
-            KeyStroke keyStroke = keyBindingsMap.get(name);
+            KeyStroke keyStroke = entry.getValue();
             keyStroke = KeyBindingUtils.validateKeyStroke(keyStroke);
 
             // prevent non-existing keybindings from being added to Ghidra (this can happen

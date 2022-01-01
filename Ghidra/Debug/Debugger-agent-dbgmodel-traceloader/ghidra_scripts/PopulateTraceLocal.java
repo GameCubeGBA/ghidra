@@ -304,8 +304,9 @@ public class PopulateTraceLocal extends GhidraScript {
 									.getKeyValue(
 										"User")
 									.getKeyValueMap();
-						for (String rname : registers.keySet()) {
-							ModelObject r = registers.get(rname);
+						for (Map.Entry<String, ModelObject> entry : registers.entrySet()) {
+                            String rname = entry.getKey();
+                            ModelObject r = entry.getValue();
 							Register reg = reg(rname.toUpperCase());
 							if (reg != null) {
 								try {

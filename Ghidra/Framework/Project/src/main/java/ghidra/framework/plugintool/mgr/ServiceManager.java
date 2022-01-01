@@ -188,9 +188,9 @@ public class ServiceManager {
 	 */
 	public List<ServiceInterfaceImplementationPair> getAllServices() {
 		List<ServiceInterfaceImplementationPair> list = new ArrayList<>();
-		for (Class<?> serviceClass : servicesByInterface.keySet()) {
-			for (Object serviceImpl : servicesByInterface.get(serviceClass)) {
-				list.add(new ServiceInterfaceImplementationPair(serviceClass, serviceImpl));
+		for (Map.Entry<Class<?>, List<Object>> entry : servicesByInterface.entrySet()) {
+			for (Object serviceImpl : entry.getValue()) {
+				list.add(new ServiceInterfaceImplementationPair(entry.getKey(), serviceImpl));
 			}
 		}
 		return list;

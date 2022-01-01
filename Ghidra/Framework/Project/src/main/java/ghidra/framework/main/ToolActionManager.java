@@ -240,8 +240,7 @@ class ToolActionManager implements ToolChestChangeListener {
 	}
 
 	private void enableActions(Map<String, DockingAction> map, boolean enabled) {
-        for (String name : map.keySet()) {
-            DockingAction action = map.get(name);
+        for (DockingAction action : map.values()) {
             action.setEnabled(enabled);
         }
 	}
@@ -269,8 +268,7 @@ class ToolActionManager implements ToolChestChangeListener {
 	}
 
 	private void removeActions(Map<String, DockingAction> map) {
-        for (String toolName : map.keySet()) {
-            DockingAction action = map.get(toolName);
+        for (DockingAction action : map.values()) {
             tool.removeAction(action);
         }
 		map.clear();

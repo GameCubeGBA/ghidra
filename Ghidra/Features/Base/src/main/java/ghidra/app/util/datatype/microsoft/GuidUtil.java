@@ -151,7 +151,7 @@ public class GuidUtil {
 
 		boolean hasVersion = guidType.hasVersion();
 		guidNameLine = guidNameLine.replaceAll("\t", " ");
-		String guidString = guidNameLine.substring(0, guidNameLine.indexOf(" "));
+		String guidString = guidNameLine.substring(0, guidNameLine.indexOf(' '));
 		String strippedGUID = guidString.replaceAll(delim, "");
 		if (strippedGUID.length() != NUM_BYTES * 2) {
 			Msg.error(GuidUtil.class, "ERROR PARSING GUID: " + guidNameLine);
@@ -170,10 +170,10 @@ public class GuidUtil {
 
 		String left = guidNameLine.substring(36);
 		if (hasVersion) {
-			int vpos = left.indexOf("v");
+			int vpos = left.indexOf('v');
 			if (vpos > 0) {
 				left = left.substring(vpos);
-				int sppos = left.indexOf(" ");
+				int sppos = left.indexOf(' ');
 				if (sppos > 0) {
 					version = left.substring(0, sppos);
 				}
@@ -183,7 +183,7 @@ public class GuidUtil {
 				left = left.substring(version.length());
 			}
 		}
-		name = left.substring(left.indexOf(" ") + 1);
+		name = left.substring(left.indexOf(' ') + 1);
 		if (isOK(data)) {
 			if (!hasVersion) {
 				return new GuidInfo(guidString, name, guidType);

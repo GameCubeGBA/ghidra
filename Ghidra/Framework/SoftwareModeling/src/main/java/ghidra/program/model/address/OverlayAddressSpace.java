@@ -62,8 +62,8 @@ public class OverlayAddressSpace extends AbstractAddressSpace {
 	public Address getAddress(String addrString) throws AddressFormatException {
 		addrString = addrString.replace("::", ":");
 
-		int firstColonPos = addrString.indexOf(":");
-		int lastColonPos = addrString.lastIndexOf(":");
+		int firstColonPos = addrString.indexOf(':');
+		int lastColonPos = addrString.lastIndexOf(':');
 
 		if (firstColonPos != lastColonPos) {
 			String middleName = addrString.substring(firstColonPos + 1, lastColonPos);

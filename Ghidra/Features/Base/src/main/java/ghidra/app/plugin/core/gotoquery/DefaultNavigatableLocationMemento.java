@@ -79,11 +79,12 @@ public class DefaultNavigatableLocationMemento extends LocationMemento {
 	}
 
 	public void setMementos() {
-		for (Navigatable navigatable : mementos.keySet()) {
-			if (!navigatable.isVisible()) {
+		for (Map.Entry<Navigatable, LocationMemento> entry : mementos.entrySet()) {
+            Navigatable navigatable = entry.getKey();
+            if (!navigatable.isVisible()) {
 				continue;
 			}
-			LocationMemento memento = mementos.get(navigatable);
+			LocationMemento memento = entry.getValue();
 			navigatable.setMemento(memento);
 		}
 	}
@@ -96,10 +97,10 @@ public class DefaultNavigatableLocationMemento extends LocationMemento {
 			saveState.putLong("FOCUSED_NAV", focusedNavigatable.getInstanceID());
 		}
 		int index = 0;
-		for (Navigatable navigatable : mementos.keySet()) {
-			LocationMemento memento = mementos.get(navigatable);
+		for (Map.Entry<Navigatable, LocationMemento> entry : mementos.entrySet()) {
+			LocationMemento memento = entry.getValue();
 			SaveState mementoSaveState = new SaveState();
-			mementoSaveState.putLong("NAV_ID", navigatable.getInstanceID());
+			mementoSaveState.putLong("NAV_ID", entry.getKey().getInstanceID());
 			memento.saveState(mementoSaveState);
 			Element element = mementoSaveState.saveToXml();
 			saveState.putXmlElement("MEMENTO" + index, element);

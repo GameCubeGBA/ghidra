@@ -550,7 +550,7 @@ public class FrontEndPlugin extends Plugin
 				}
 				// if user enters the name of the project manually and leaves off
 				// the extension, try to open or create using the extension
-				else if (!create && filename.lastIndexOf(".") > path.lastIndexOf(File.separator)) {
+				else if (!create && filename.lastIndexOf('.') > path.lastIndexOf(File.separator)) {
 					// treat opening a file without the ghidra extension as an error
 					Msg.showError(getClass(), tool.getToolFrame(), "Invalid Project File",
 						"Cannot open '" + file.getName() + "' as a Ghidra Project");

@@ -297,7 +297,7 @@ public class JavaHelpValidator {
 		}
 
 		// strip off the extension
-		int index = path.lastIndexOf(".");
+		int index = path.lastIndexOf('.');
 		if (index != -1) {
 			path = path.substring(0, index);
 		}

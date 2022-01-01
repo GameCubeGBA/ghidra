@@ -457,9 +457,10 @@ public class PdbParser {
 		// create namespace and classes in an ordered fashion use tree map
 		monitor.setMessage("Define classes...");
 		monitor.initialize(namespaceMap.size());
-		for (SymbolPath path : namespaceMap.keySet()) {
-			monitor.checkCanceled();
-			boolean isClass = namespaceMap.get(path);
+		for (Map.Entry<SymbolPath, Boolean> entry : namespaceMap.entrySet()) {
+            SymbolPath path = entry.getKey();
+            monitor.checkCanceled();
+			boolean isClass = entry.getValue();
 			Namespace parentNamespace =
 				NamespaceUtils.getNonFunctionNamespace(program, path.getParent());
 			if (parentNamespace == null) {

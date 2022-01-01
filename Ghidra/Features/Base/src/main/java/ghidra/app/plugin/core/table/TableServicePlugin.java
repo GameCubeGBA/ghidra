@@ -184,11 +184,11 @@ public class TableServicePlugin extends ProgramPlugin
 	}
 
 	void remove(TableComponentProvider<?> provider) {
-        for (Program p : programMap.keySet()) {
-            List<TableComponentProvider<?>> list = programMap.get(p);
+        for (Map.Entry<Program, List<TableComponentProvider<?>>> entry : programMap.entrySet()) {
+            List<TableComponentProvider<?>> list = entry.getValue();
             if (list.remove(provider)) {
                 if (list.isEmpty()) {
-                    programMap.remove(p);
+                    programMap.remove(entry.getKey());
                     return;
                 }
             }
@@ -196,11 +196,11 @@ public class TableServicePlugin extends ProgramPlugin
 	}
 
 	void removeDialog(MyTableChooserDialog dialog) {
-        for (Program p : programToDialogMap.keySet()) {
-            List<TableChooserDialog> list = programToDialogMap.get(p);
+        for (Map.Entry<Program, List<TableChooserDialog>> entry : programToDialogMap.entrySet()) {
+            List<TableChooserDialog> list = entry.getValue();
             if (list.remove(dialog)) {
                 if (list.isEmpty()) {
-                    programToDialogMap.remove(p);
+                    programToDialogMap.remove(entry.getKey());
                     return;
                 }
             }

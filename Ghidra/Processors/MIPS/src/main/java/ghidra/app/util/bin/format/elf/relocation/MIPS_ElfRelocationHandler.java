@@ -1169,8 +1169,9 @@ public class MIPS_ElfRelocationHandler extends ElfRelocationHandler {
 				DataConverter converter =
 					program.getMemory().isBigEndian() ? BigEndianDataConverter.INSTANCE
 							: LittleEndianDataConverter.INSTANCE;
-				for (long symbolValue : gotMap.keySet()) {
-					Address addr = gotMap.get(symbolValue);
+				for (Map.Entry<Long, Address> entry : gotMap.entrySet()) {
+                    long symbolValue = entry.getKey();
+                    Address addr = entry.getValue();
 					byte[] bytes;
 					if (program.getDefaultPointerSize() == 4) {
 						bytes = converter.getBytes((int) symbolValue);

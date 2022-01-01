@@ -599,7 +599,7 @@ public class DefineTable {
 				boolean inString = false;
 				int quotePos = image.length();
 				do {
-					quotePos = image.lastIndexOf("\"", quotePos);
+					quotePos = image.lastIndexOf('"', quotePos);
 					if (quotePos > currIndex && quotePos >= 0) {
 						inString = !inString;
 					}

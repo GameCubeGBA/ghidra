@@ -179,9 +179,8 @@ class CheckoutManager {
 	 */
 	synchronized boolean isCheckedOut(int version) throws IOException {
 		validate();
-		for (long id : checkouts.keySet()) {
-			ItemCheckoutStatus coStatus = checkouts.get(id);
-			if (coStatus.getCheckoutVersion() == version) {
+		for (ItemCheckoutStatus coStatus : checkouts.values()) {
+            if (coStatus.getCheckoutVersion() == version) {
 				return true;
 			}
 		}

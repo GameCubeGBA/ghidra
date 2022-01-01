@@ -177,13 +177,8 @@ public abstract class AbstractClassicProcessor {
 
 	protected Section getSectionName(long address) {
 		List<Section> sections = header.getAllSections();
-		for (Section section : sections) {
-			if (section.getAddress() <= address &&
-				address < section.getAddress() + section.getSize()) {
-				return section;
-			}
-		}
-		return null;
+		return sections.stream().filter(section -> section.getAddress() <= address &&
+				address < section.getAddress() + section.getSize()).findFirst().orElse(null);
 		//throw new RuntimeException( "Classic bind: No section for specified address: " + Long.toHexString( address ) );
 	}
 

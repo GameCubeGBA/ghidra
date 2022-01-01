@@ -101,7 +101,7 @@ public class JarHelpModuleLocation extends HelpModuleLocation {
 		String uriString = helpDir.toUri().toString();
 		int start = uriString.indexOf("file:/");
 		String chopped = uriString.substring(start);
-		int end = chopped.indexOf("!");
+		int end = chopped.indexOf('!');
 		chopped = chopped.substring(0, end);
 		return new File(chopped);
 	}

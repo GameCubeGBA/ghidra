@@ -142,8 +142,8 @@ public class HDMAUtil {
 				}
 			}
 			if (str.endsWith("]")) {
-				indexStr = str.substring(str.indexOf("[") + 1, str.indexOf("]"));
-				str = str.substring(0, str.indexOf("["));
+				indexStr = str.substring(str.indexOf('[') + 1, str.indexOf(']'));
+				str = str.substring(0, str.indexOf('['));
 			}
 			Map<String, ModelObject> keyMap = target.getKeyValueMap();
 			if (keyMap.containsKey(str)) {

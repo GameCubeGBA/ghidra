@@ -57,12 +57,12 @@ public abstract class AbstractModelForLldbScenarioX64RegistersTest
 			m.findWithIndex(TargetRegisterContainer.class, "0", target.getPath()));
 		Map<List<String>, TargetRegisterBank> banks =
 			m.findAll(TargetRegisterBank.class, c.getPath(), true);
-		for (String name : toWrite.keySet()) {
+		for (Map.Entry<String, byte[]> entry : toWrite.entrySet()) {
 			for (TargetRegisterBank bank : banks.values()) {
 				Map<List<String>, TargetRegister> regs = m.findAll(TargetRegister.class,
-					bank.getPath(), pred -> pred.applyIndices(name), false);
+					bank.getPath(), pred -> pred.applyIndices(entry.getKey()), false);
 				for (TargetRegister reg : regs.values()) {
-					waitOn(bank.writeRegister(reg, toWrite.get(name)));
+					waitOn(bank.writeRegister(reg, entry.getValue()));
 				}
 			}
 		}

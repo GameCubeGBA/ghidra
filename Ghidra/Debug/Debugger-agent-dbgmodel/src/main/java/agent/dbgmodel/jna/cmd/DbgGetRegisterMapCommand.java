@@ -50,8 +50,9 @@ public class DbgGetRegisterMapCommand extends AbstractDbgCommand<Map<String, ?>>
 		npath.addAll(path);
 		Map<String, ModelObject> attributes = access.getAttributes(npath);
 		int i = 0;
-		for (String key : attributes.keySet()) {
-			ModelObject modelObject = attributes.get(key);
+		for (Map.Entry<String, ModelObject> entry : attributes.entrySet()) {
+            String key = entry.getKey();
+            ModelObject modelObject = entry.getValue();
 			DebugValue debugValue = access.getDebugValue(modelObject);
 			if (debugValue != null) {
 				DbgRegister register =

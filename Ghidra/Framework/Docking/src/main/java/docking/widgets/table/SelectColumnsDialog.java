@@ -139,8 +139,9 @@ public class SelectColumnsDialog extends DialogComponentProvider {
 			return;
 		}
 
-        for (TableColumn column : visibilityMap.keySet()) {
-            Boolean visible = visibilityMap.get(column);
+        for (Map.Entry<TableColumn, Boolean> entry : visibilityMap.entrySet()) {
+            TableColumn column = entry.getKey();
+            Boolean visible = entry.getValue();
             if (visible != columnModel.isVisible(column)) {
                 columnModel.setVisible(column, visible);
             }

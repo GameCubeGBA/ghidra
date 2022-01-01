@@ -151,14 +151,14 @@ public class BinaryPropertyListAnalyzer extends FileFormatAnalyzer {
 		}
 		// markup the NSObjects as a second pass
 		// because all need to be created first
-		for (NSObject object : objectMap.keySet()) {
+		for (Map.Entry<NSObject, Data> entry : objectMap.entrySet()) {
 			monitor.checkCanceled();
-			object.markup(objectMap.get(object), program, monitor);
+			entry.getKey().markup(entry.getValue(), program, monitor);
 		}
 		// markup the nested PLists
-		for (NSObject object : objectMap.keySet()) {
+		for (Map.Entry<NSObject, Data> entry : objectMap.entrySet()) {
 			monitor.checkCanceled();
-			handleNestedBinaryPlist(object, program, objectMap.get(object), monitor);
+			handleNestedBinaryPlist(entry.getKey(), program, entry.getValue(), monitor);
 		}
 	}
 

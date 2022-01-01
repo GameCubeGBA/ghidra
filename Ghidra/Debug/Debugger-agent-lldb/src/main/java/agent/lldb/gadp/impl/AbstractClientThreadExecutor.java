@@ -19,6 +19,7 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 import agent.lldb.lldb.DebugClient;
 import agent.lldb.lldb.DebugClient.DebugStatus;
@@ -134,11 +135,7 @@ public abstract class AbstractClientThreadExecutor extends AbstractExecutorServi
 	public List<Runnable> shutdownNow() {
 		shuttingDown = true;
 		thread.interrupt();
-		List<Runnable> left = new ArrayList<>(queue.size());
-		for (Entry ent : queue) {
-			left.add(ent.command);
-		}
-		return left;
+		return queue.stream().map(ent -> ent.command).collect(Collectors.toCollection(() -> new ArrayList<>(queue.size())));
 	}
 
 	@Override

@@ -432,7 +432,7 @@ public class SleighLanguageProvider implements LanguageProvider {
 	}
 
 	private String getFileNameFromPath(String fileNameOrRelativePath) {
-		int lastIndexOf = fileNameOrRelativePath.lastIndexOf("/");
+		int lastIndexOf = fileNameOrRelativePath.lastIndexOf('/');
 		if (lastIndexOf < 0) {
 			return fileNameOrRelativePath;
 		}

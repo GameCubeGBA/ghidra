@@ -66,7 +66,7 @@ class WrappedFont implements WrappedOption {
 	@Override
 	public void writeState(SaveState saveState) {
 		String family = font.getFamily();
-		int pos = family.indexOf(".");
+		int pos = family.indexOf('.');
 		if (pos > 0) {
 			family = family.substring(0, pos);
 		}

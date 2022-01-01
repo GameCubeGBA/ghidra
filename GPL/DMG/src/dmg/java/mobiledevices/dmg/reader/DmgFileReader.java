@@ -5,6 +5,7 @@ package mobiledevices.dmg.reader;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.catacombae.dmgextractor.encodings.encrypted.ReadableCEncryptedEncodingStream;
@@ -273,9 +274,7 @@ public class DmgFileReader implements Closeable {
 			if ( fileByPath != null ) {
 				if ( fileByPath.isFolder() ) {
 					FSEntry [] listEntries = fileByPath.asFolder().listEntries();
-					for ( FSEntry entry : listEntries ) {
-						list.add( entry );
-					}
+					list.addAll(Arrays.asList(listEntries));
 				}
 			}
 		}
@@ -287,7 +286,7 @@ public class DmgFileReader implements Closeable {
 	 * If the entry is actually a directory, then -1 is returned.
 	 */
 	public long getLength( FSEntry entry ) {
-		if ( entry != null & entry.isFile() ) {
+		if (entry != null && entry.isFile()) {
 			FSFork mainFork = entry.asFile().getMainFork();
 			if ( mainFork.getLength() > 0 ) {
 				return mainFork.getLength();
@@ -301,10 +300,10 @@ public class DmgFileReader implements Closeable {
 				}
 			}
 			catch (IOException e) {
-				return 1;//TODO lookup valid length in DECMPFS
+				return 1L;//TODO lookup valid length in DECMPFS
 			}
 		}
-		return -1;
+		return -1L;
 	}
 
 	/**

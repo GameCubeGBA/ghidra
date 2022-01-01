@@ -69,7 +69,7 @@ public class CollectFailedRelocations extends GhidraScript {
 					}
 					String category = bookmark.getCategory();
 					if (category.startsWith("Relocation_Type_")) {
-						String string = category.substring(category.lastIndexOf("_") + 1);
+						String string = category.substring(category.lastIndexOf('_') + 1);
 						try {
 							Integer number = Integer.parseInt(string);
 							result.put(number, domainFile.getPathname());

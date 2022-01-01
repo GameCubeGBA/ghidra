@@ -17,6 +17,7 @@ package ghidra.app.util.bin.format.pdb2.pdbreader.type;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import ghidra.app.util.bin.format.pdb2.pdbreader.*;
 
@@ -60,12 +61,7 @@ public abstract class AbstractArgumentsListMsType extends AbstractMsType {
 	@Override
 	public void emit(StringBuilder builder, Bind bind) {
 		DelimiterState ds = new DelimiterState("", ", ");
-		builder.append("(");
-		for (RecordNumber recNumber : argRecordNumbers) {
-			AbstractMsType type = pdb.getTypeRecord(recNumber);
-			builder.append(ds.out(true, type.toString()));
-		}
-		builder.append(")");
+		builder.append(argRecordNumbers.stream().map(recNumber -> pdb.getTypeRecord(recNumber)).map(type -> ds.out(true, type.toString())).collect(Collectors.joining("", "(", ")")));
 	}
 
 }

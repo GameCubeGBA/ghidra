@@ -443,7 +443,7 @@ public class DataTypeManagerPlugin extends ProgramPlugin
 
 		String extensionPrefix = "";
 		if (fullPath.startsWith(EXTENSIONS_PATH_PREFIX)) {
-			int index = fullPath.indexOf("/", EXTENSIONS_PATH_PREFIX.length() + 1);
+			int index = fullPath.indexOf('/', EXTENSIONS_PATH_PREFIX.length() + 1);
 			if (index >= 0) {
 				extensionPrefix =
 					fullPath.substring(EXTENSIONS_PATH_PREFIX.length() + 1, index) + ": ";

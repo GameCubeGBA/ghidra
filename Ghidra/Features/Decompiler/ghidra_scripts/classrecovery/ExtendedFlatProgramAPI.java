@@ -1106,7 +1106,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 
 	private boolean containsSimpleTemplate(String name) {
 
-		int indexOf = name.indexOf(",");
+		int indexOf = name.indexOf(',');
         return indexOf == -1;
     }
 
@@ -1284,7 +1284,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 		int lastComma = 0;
 		int nextComma = 0;
 		while (commaIndex > 0) {
-			nextComma = className.indexOf(",", lastComma);
+			nextComma = className.indexOf(',', lastComma);
 			// if it gets to the end before the given commaIndex then we can't shorten
 			// return whole thing
 			if (nextComma == -1) {

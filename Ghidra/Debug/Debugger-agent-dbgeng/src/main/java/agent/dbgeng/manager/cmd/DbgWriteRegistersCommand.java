@@ -48,9 +48,10 @@ public class DbgWriteRegistersCommand extends AbstractDbgCommand<Void> {
 		so.setCurrentThreadId(thread.getId());
 		DebugRegisters registers = manager.getRegisters();
 		Map<Integer, DebugValue> values = new LinkedHashMap<>();
-		for (DbgRegister r : regVals.keySet()) {
-			try {
-				BigInteger val = regVals.get(r);
+		for (Map.Entry<DbgRegister, BigInteger> entry : regVals.entrySet()) {
+            DbgRegister r = entry.getKey();
+            try {
+				BigInteger val = entry.getValue();
 				DebugRegisterDescription desc = registers.getDescription(r.getNumber());
 				byte[] bytes = new byte[desc.type.byteLength];
 				byte[] newBytes = val.toByteArray();

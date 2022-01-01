@@ -79,9 +79,10 @@ public class StackEditorManager implements EditorListener {
 	 * @return the stack frame editor provider or null if it isn't being edited.
 	 */
 	StackEditorProvider getProvider(Program program, String functionName) {
-        for (Function function : editorMap.keySet()) {
+        for (Map.Entry<Function, StackEditorProvider> entry : editorMap.entrySet()) {
+            Function function = entry.getKey();
             if (program == function.getProgram() && function.getName().equals(functionName)) {
-                return editorMap.get(function);
+                return entry.getValue();
             }
         }
 		return null;
@@ -120,9 +121,9 @@ public class StackEditorManager implements EditorListener {
 	 */
 	private boolean checkEditors(Program program) {
 
-        for (Function function : editorMap.keySet()) {
-            if (program == null || function.getProgram() == program) {
-                StackEditorProvider editor = editorMap.get(function);
+        for (Map.Entry<Function, StackEditorProvider> entry : editorMap.entrySet()) {
+            if (program == null || entry.getKey().getProgram() == program) {
+                StackEditorProvider editor = entry.getValue();
                 editor.show();
                 if (editor.needsSave()) {
                     if (!editor.checkForSave(true)) {

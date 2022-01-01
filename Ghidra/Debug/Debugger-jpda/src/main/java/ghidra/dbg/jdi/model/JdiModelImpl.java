@@ -208,10 +208,10 @@ public class JdiModelImpl extends AbstractDebuggerObjectModel {
 	}
 
 	public Method getMethodForAddress(Address address) {
-		for (String methodName : addressRangeByMethod.keySet()) {
-			AddressRange range = addressRangeByMethod.get(methodName);
+		for (Map.Entry<String, AddressRange> entry : addressRangeByMethod.entrySet()) {
+			AddressRange range = entry.getValue();
 			if (range.contains(address)) {
-				return methodsByKey.get(methodName);
+				return methodsByKey.get(entry.getKey());
 			}
 		}
 		return null;

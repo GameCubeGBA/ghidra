@@ -128,11 +128,7 @@ public abstract class AbstractBaseDBTraceCodeUnitsMemoryView<T extends DBTraceCo
 	}
 
 	public int size() {
-		int sum = 0;
-		for (M m : activeSpacesView) {
-			sum += m.size();
-		}
-		return sum;
+		return activeSpacesView.stream().mapToInt(AbstractBaseDBTraceCodeUnitsView::size).sum();
 	}
 
 	public T getBefore(long snap, Address address) {

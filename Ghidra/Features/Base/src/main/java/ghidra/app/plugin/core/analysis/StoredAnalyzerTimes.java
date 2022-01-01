@@ -50,8 +50,8 @@ public class StoredAnalyzerTimes implements CustomOption {
 
 	@Override
 	public void writeState(SaveState saveState) {
-		for (String taskName : taskTimes.keySet()) {
-			saveState.putLong(taskName, taskTimes.get(taskName));
+		for (Map.Entry<String, Long> entry : taskTimes.entrySet()) {
+			saveState.putLong(entry.getKey(), entry.getValue());
 		}
 	}
 

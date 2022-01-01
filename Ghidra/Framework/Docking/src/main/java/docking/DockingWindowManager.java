@@ -1210,8 +1210,9 @@ public class DockingWindowManager implements PropertyChangeListener, Placeholder
 
 	private void createActions(Map<String, List<ComponentPlaceholder>> map) {
 		List<ShowComponentAction> actionList = new ArrayList<>();
-		for (String subMenuName : map.keySet()) {
-			List<ComponentPlaceholder> placeholders = map.get(subMenuName);
+		for (Entry<String, List<ComponentPlaceholder>> entry : map.entrySet()) {
+            String subMenuName = entry.getKey();
+            List<ComponentPlaceholder> placeholders = entry.getValue();
 			for (ComponentPlaceholder placeholder : placeholders) {
 				ComponentProvider provider = placeholder.getProvider();
 				boolean isTransient = provider.isTransient();

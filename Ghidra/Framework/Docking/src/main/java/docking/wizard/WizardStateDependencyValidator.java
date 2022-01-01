@@ -54,11 +54,12 @@ public class WizardStateDependencyValidator<T> {
 	public Set<T> findAffectedDependants(WizardState<T> globalState) {
 		Set<T> affectedDependendants = new HashSet<>();
 		
-		for ( T predecessor : dependentMap.keySet() ) {
-			Object globalValue = globalState.get( predecessor );
+		for (Map.Entry<T, Set<T>> entry : dependentMap.entrySet()) {
+            T predecessor = entry.getKey();
+            Object globalValue = globalState.get( predecessor );
 			Object localValue = valueMap.get( predecessor );
 			if (!SystemUtilities.isEqual( globalValue, localValue )) {
-				affectedDependendants.addAll( dependentMap.get( predecessor ) );
+				affectedDependendants.addAll(entry.getValue());
 			}
 		}
 		for (T dependant : dependentSet) {

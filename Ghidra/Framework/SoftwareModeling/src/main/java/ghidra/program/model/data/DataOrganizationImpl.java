@@ -17,6 +17,7 @@ package ghidra.program.model.data;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import ghidra.program.model.lang.Language;
@@ -636,10 +637,10 @@ public class DataOrganizationImpl implements DataOrganization {
 		}
 		if (!sizeAlignmentMap.isEmpty()) {
 			buffer.append("<size_alignment_map>\n");
-			for (int key : sizeAlignmentMap.keySet()) {
+			for (Map.Entry<Integer, Integer> entry : sizeAlignmentMap.entrySet()) {
 				buffer.append("<entry");
-				int value = sizeAlignmentMap.get(key);
-				SpecXmlUtils.encodeSignedIntegerAttribute(buffer, "size", key);
+				int value = entry.getValue();
+				SpecXmlUtils.encodeSignedIntegerAttribute(buffer, "size", entry.getKey());
 				SpecXmlUtils.encodeSignedIntegerAttribute(buffer, "alignment", value);
 				buffer.append("/>\n");
 			}
@@ -780,8 +781,8 @@ public class DataOrganizationImpl implements DataOrganization {
 		if (keys.size() != op2keys.size()) {
 			return false;
 		}
-		for (int k : keys) {
-			if (!SystemUtilities.isEqual(sizeAlignmentMap.get(k), op2.sizeAlignmentMap.get(k))) {
+		for (Map.Entry<Integer, Integer> entry : sizeAlignmentMap.entrySet()) {
+			if (!SystemUtilities.isEqual(entry.getValue(), op2.sizeAlignmentMap.get(entry.getKey()))) {
 				return false;
 			}
 		}
@@ -808,8 +809,8 @@ public class DataOrganizationImpl implements DataOrganization {
 		hash = 79 * hash + pointerSize;
 		hash = 79 * hash + shortSize;
 		hash = 79 * hash + wideCharSize;
-		for (int k : sizeAlignmentMap.keySet()) {
-			hash = 79 * hash + sizeAlignmentMap.get(k);
+		for (Integer integer : sizeAlignmentMap.values()) {
+			hash = 79 * hash + integer;
 		}
 		return hash;
 	}

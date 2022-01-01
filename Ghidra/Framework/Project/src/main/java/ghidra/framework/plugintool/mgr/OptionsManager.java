@@ -114,8 +114,8 @@ public class OptionsManager implements OptionsService, OptionsChangeListener {
 	public ToolOptions[] getOptions() {
 		ToolOptions[] opt = new ToolOptions[optionsMap.size()];
 		int idx = 0;
-        for (String key : optionsMap.keySet()) {
-            opt[idx] = optionsMap.get(key);
+        for (ToolOptions toolOptions : optionsMap.values()) {
+            opt[idx] = toolOptions;
             ++idx;
         }
 		Arrays.sort(opt, new OptionsComparator());
@@ -129,8 +129,7 @@ public class OptionsManager implements OptionsService, OptionsChangeListener {
 	 */
 	public void deregisterOwner(Plugin ownerPlugin) {
 		List<String> deleteList = new ArrayList<>();
-        for (String key : optionsMap.keySet()) {
-            ToolOptions opt = optionsMap.get(key);
+        for (ToolOptions opt : optionsMap.values()) {
             if (opt.getOptionNames().isEmpty()) {
                 deleteList.add(opt.getName());
             }
@@ -145,8 +144,7 @@ public class OptionsManager implements OptionsService, OptionsChangeListener {
 	 */
 	public Element getConfigState() {
 		Element root = new Element("OPTIONS");
-        for (String key : optionsMap.keySet()) {
-            ToolOptions opt = optionsMap.get(key);
+        for (ToolOptions opt : optionsMap.values()) {
             if (hasNonDefaultValues(opt)) {
                 root.addContent(opt.getXmlRoot(false));
             }
@@ -167,8 +165,7 @@ public class OptionsManager implements OptionsService, OptionsChangeListener {
 	public void removeUnusedOptions() {
 		// 1st clean up any unused options before saving...
 		List<String> deleteList = new ArrayList<>();
-        for (String key : optionsMap.keySet()) {
-            ToolOptions opt = optionsMap.get(key);
+        for (ToolOptions opt : optionsMap.values()) {
             opt.removeUnusedOptions();
             if (opt.getOptionNames().isEmpty()) {
                 deleteList.add(opt.getName());

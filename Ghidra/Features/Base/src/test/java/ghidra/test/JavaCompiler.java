@@ -34,7 +34,7 @@ public class JavaCompiler {
 	 */
 	public void compile(File javaFile) { 
 		String name = javaFile.getName();
-		String className = name.substring(0, name.indexOf(".")) + ".class";
+		String className = name.substring(0, name.indexOf('.')) + ".class";
 		
 		File parent = javaFile.getParentFile();
 		String parentPath = parent.getAbsolutePath();

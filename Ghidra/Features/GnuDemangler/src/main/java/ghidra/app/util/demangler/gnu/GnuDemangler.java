@@ -171,7 +171,7 @@ public class GnuDemangler implements Demangler {
 	private boolean skip(String mangled, GnuDemanglerOptions options) {
 
 		// Ignore versioned symbols which are generally duplicated at the same address
-		if (mangled.indexOf("@") > 0) { // do not demangle versioned symbols
+		if (mangled.indexOf('@') > 0) { // do not demangle versioned symbols
 			return true;
 		}
 

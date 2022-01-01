@@ -348,15 +348,15 @@ public class EventManager {
 
 		List<Class<? extends PluginEvent>> unusedList = new ArrayList<>();
 
-        for (Class<? extends PluginEvent> eventClass : listenersByEventType.keySet()) {
-            Set<PluginEventListener> set = listenersByEventType.get(eventClass);
+        for (Map.Entry<Class<? extends PluginEvent>, Set<PluginEventListener>> entry : listenersByEventType.entrySet()) {
+            Set<PluginEventListener> set = entry.getValue();
             Iterator<PluginEventListener> it = set.iterator();
             while (it.hasNext()) {
                 PluginEventListener listener = it.next();
                 if (listener.getClass().getName().equals(className)) {
                     it.remove();
                     if (set.isEmpty()) {
-                        unusedList.add(eventClass);
+                        unusedList.add(entry.getKey());
                     }
                     break;
                 }

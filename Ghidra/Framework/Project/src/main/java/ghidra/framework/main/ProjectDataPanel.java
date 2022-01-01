@@ -255,9 +255,9 @@ class ProjectDataPanel extends JSplitPane {
 	}
 
 	private ProjectDataTreePanel getViewPanel(URL projectView) {
-		for (ProjectLocator locator : readOnlyViews.keySet()) {
-			if (projectView.equals(locator.getURL())) {
-				return readOnlyViews.get(locator);
+		for (Map.Entry<ProjectLocator, ProjectDataTreePanel> entry : readOnlyViews.entrySet()) {
+			if (projectView.equals(entry.getKey().getURL())) {
+				return entry.getValue();
 			}
 		}
 		return null;

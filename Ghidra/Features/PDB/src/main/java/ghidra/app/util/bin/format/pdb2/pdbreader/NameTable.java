@@ -278,17 +278,17 @@ public class NameTable {
 		}
 		builder.append("}\n");
 		builder.append("------------------------------------------------------------\n");
-		for (String name : streamNumbersByName.keySet()) {
-			builder.append(name);
+		for (Map.Entry<String, Integer> entry : streamNumbersByName.entrySet()) {
+			builder.append(entry.getKey());
 			builder.append(" : ");
-			builder.append(streamNumbersByName.get(name));
+			builder.append(entry.getValue());
 			builder.append("\n");
 		}
 		builder.append("------------------------------------------------------------\n");
-		for (int streamNumber : namesByStreamNumber.keySet()) {
-			builder.append(streamNumber);
+		for (Map.Entry<Integer, String> entry : namesByStreamNumber.entrySet()) {
+			builder.append((int) entry.getKey());
 			builder.append(" : ");
-			builder.append(namesByStreamNumber.get(streamNumber));
+			builder.append(entry.getValue());
 			builder.append("\n");
 		}
 		// TODO: output map entries for each table.

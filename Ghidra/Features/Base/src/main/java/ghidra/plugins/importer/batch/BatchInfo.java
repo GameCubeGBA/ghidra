@@ -369,10 +369,10 @@ public class BatchInfo {
 
 		try (ByteProvider provider = fsService.getByteProvider(fsrl, false, monitor)) {
 			LoaderMap loaderMap = pollLoadersForLoadSpecs(provider, fsrl, monitor);
-			for (Loader loader : loaderMap.keySet()) {
-				Collection<LoadSpec> loadSpecs = loaderMap.get(loader);
+			for (Entry<Loader, Collection<LoadSpec>> entry : loaderMap.entrySet()) {
+				Collection<LoadSpec> loadSpecs = entry.getValue();
 				BatchSegregatingCriteria bsc =
-					new BatchSegregatingCriteria(loader, loadSpecs, provider);
+					new BatchSegregatingCriteria(entry.getKey(), loadSpecs, provider);
 				BatchGroup batchGroup = groupsByCriteria.get(bsc);
 				if (batchGroup == null) {
 					batchGroup = new BatchGroup(bsc);
