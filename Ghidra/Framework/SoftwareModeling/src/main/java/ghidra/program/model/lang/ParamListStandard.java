@@ -49,6 +49,8 @@ public class ParamListStandard implements ParamList {
 	protected int resourceTwoStart;		// Group id starting the section resource section (or 0 if only one section)
 	protected ParamEntry[] entry;
 	protected AddressSpace spacebase;	// Space containing relative offset parameters
+	protected boolean isInput;
+	protected int returnstorageid;	// Index of the ParamEntry for the return storage pointer (default 1)
 
 	/**
 	 * Find the (first) entry containing range
@@ -155,11 +157,11 @@ public class ParamListStandard implements ParamList {
 			status[i] = 0;
 		}
 
-		if (addAutoParams && res.size() == 2) {	// Check for hidden parameters defined by the output list
+		if (addAutoParams && !isInput) {	// Check for hidden parameters defined by the output list
 			DataTypeManager dtm = prog.getDataTypeManager();
 			Pointer pointer = dtm.getPointer(proto[0]);
 			VariableStorage store = assignAddress(prog, pointer, status, true, false);
-			res.set(1, store);
+			res.set(returnstorageid, store);
 		}
 		for (int i = 1; i < proto.length; ++i) {
 			VariableStorage store;
@@ -204,7 +206,7 @@ public class ParamListStandard implements ParamList {
 	}
 
 	@Override
-	public void saveXml(StringBuilder buffer, boolean isInput) {
+	public void saveXml(StringBuilder buffer) {
 		buffer.append(isInput ? "<input" : "<output");
 		if (pointermax != 0) {
 			SpecXmlUtils.encodeSignedIntegerAttribute(buffer, "pointermax", pointermax);
@@ -214,6 +216,9 @@ public class ParamListStandard implements ParamList {
 		}
 		if (isInput && resourceTwoStart == 0) {
 			SpecXmlUtils.encodeBooleanAttribute(buffer, "separatefloat", false);
+		}
+		if (!isInput && returnstorageid != 1) {
+			SpecXmlUtils.encodeSignedIntegerAttribute(buffer, "returnstorageid", returnstorageid);
 		}
 		buffer.append(">\n");
 		int curgroup = -1;
@@ -291,8 +296,13 @@ public class ParamListStandard implements ParamList {
 		spacebase = null;
 		pointermax = 0;
 		thisbeforeret = false;
+		returnstorageid = 1;
 		boolean splitFloat = true;
+		
 		XmlElement mainel = parser.start();
+		
+		isInput = mainel.getName().equals("input");
+		
 		String attribute = mainel.getAttribute("pointermax");
 		if (attribute != null) {
 			pointermax = SpecXmlUtils.decodeInt(attribute);
@@ -304,6 +314,10 @@ public class ParamListStandard implements ParamList {
 		attribute = mainel.getAttribute("separatefloat");
 		if (attribute != null) {
 			splitFloat = SpecXmlUtils.decodeBoolean(attribute);
+		}
+		attribute = mainel.getAttribute("returnstorageid");
+		if (attribute != null) {
+			returnstorageid = SpecXmlUtils.decodeInt(attribute);
 		}
 		resourceTwoStart = splitFloat ? -1 : 0;
 		for (;;) {
