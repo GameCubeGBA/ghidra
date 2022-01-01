@@ -21,6 +21,7 @@ import ghidra.program.model.data.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public final class StructConverterUtil {
@@ -67,9 +68,7 @@ public final class StructConverterUtil {
 		if (clazz != null) {
 			fieldList.addAll( getFields(clazz.getSuperclass()) );
 			Field [] fields = clazz.getDeclaredFields();
-			for (Field field : fields) {
-				fieldList.add( field );
-			}
+            fieldList.addAll(Arrays.asList(fields));
 		}
 		return fieldList;
 	}

@@ -17,6 +17,7 @@ package ghidra.app.plugin.core.datamgr.tree;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.*;
@@ -289,9 +290,7 @@ public class DataTypeArchiveGTree extends GTree {
 		}
 
 		private void addEnumStrings(Enum enumm, List<String> results) {
-			for (String valueName : enumm.getNames()) {
-				results.add(valueName);
-			}
+            results.addAll(Arrays.asList(enumm.getNames()));
 
 			for (long value : enumm.getValues()) {
 				results.add(Long.toString(value));

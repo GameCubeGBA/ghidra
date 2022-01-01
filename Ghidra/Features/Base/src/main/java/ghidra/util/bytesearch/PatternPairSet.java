@@ -91,9 +91,7 @@ public class PatternPairSet {
 	 * @param postpats array to add this PatternPairSets post patterns into
 	 */
 	public void extractPostPatterns(ArrayList<Pattern> postpats) {
-        for (Pattern postPattern : postPatterns) {
-            postpats.add(postPattern);
-        }
+        postpats.addAll(postPatterns);
 	}
 
 	/**

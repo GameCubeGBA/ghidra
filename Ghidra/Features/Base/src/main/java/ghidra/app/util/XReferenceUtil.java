@@ -295,9 +295,7 @@ public class XReferenceUtil {
 		Program program = var.getFunction().getProgram();
 		ReferenceManager refMgr = program.getReferenceManager();
 		Reference[] vrefs = refMgr.getReferencesTo(var);
-		for (Reference vref : vrefs) {
-			results.add(vref);
-		}
+        results.addAll(Arrays.asList(vrefs));
 		return results;
 	}
 

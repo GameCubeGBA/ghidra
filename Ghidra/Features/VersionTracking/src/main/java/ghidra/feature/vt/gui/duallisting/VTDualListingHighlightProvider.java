@@ -201,9 +201,7 @@ public class VTDualListingHighlightProvider implements HighlightProvider {
 
 		List<Highlight> highlightList = new ArrayList<Highlight>();
 
-		for (Highlight highlight : highlights) {
-			highlightList.add(highlight);
-		}
+        highlightList.addAll(Arrays.asList(highlights));
 
 		highlightList.addAll(getListingHighlights(text, obj, fieldFactoryClass, cursorTextOffset));
 
