@@ -80,9 +80,10 @@ class OptionsDB extends AbstractOptions {
 		if (!super.getOptionNames().isEmpty()) {
 			throw new IllegalStateException("property list alterations not permitted");
 		}
-		for (String oldPath : propertyAlterations.keySet()) {
-			checkAlterationPath(oldPath, false);
-			String newPath = propertyAlterations.get(oldPath);
+		for (Map.Entry<String, String> entry : propertyAlterations.entrySet()) {
+            String oldPath = entry.getKey();
+            checkAlterationPath(oldPath, false);
+			String newPath = entry.getValue();
 			checkAlterationPath(newPath, true);
 			if (newPath == null || !moveProperties(oldPath, newPath)) {
 				removeProperties(oldPath);

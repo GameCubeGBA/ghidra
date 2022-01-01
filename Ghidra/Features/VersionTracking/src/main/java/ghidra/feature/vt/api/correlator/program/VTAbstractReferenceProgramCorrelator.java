@@ -422,12 +422,13 @@ public abstract class VTAbstractReferenceProgramCorrelator extends VTAbstractPro
 		int featureID = 1;
 
 		// score each match that passed the filter above
-		for (VTMatch match : sourceRefMap.keySet()) {
+		for (Entry<VTMatch, Set<Function>> entry : sourceRefMap.entrySet()) {
+            VTMatch match = entry.getKey();
 
-			monitor.checkCanceled();
+            monitor.checkCanceled();
 			monitor.incrementProgress(1);
 
-			if (sourceRefMap.get(match).isEmpty()) {
+			if (entry.getValue().isEmpty()) {
 				continue;
 			}
 
@@ -437,7 +438,7 @@ public abstract class VTAbstractReferenceProgramCorrelator extends VTAbstractPro
 			 */
 
 			// Compute entropy of the system for the given match
-			Set<Function> srcRefFuncs = new HashSet<>(sourceRefMap.get(match));
+			Set<Function> srcRefFuncs = new HashSet<>(entry.getValue());
 			Set<Function> destRefFuncs = new HashSet<>(destinationRefMap.get(match));
 
 			// take the average probability that the feature appears in any one function (in either
@@ -447,7 +448,7 @@ public abstract class VTAbstractReferenceProgramCorrelator extends VTAbstractPro
 			double weight = Math.sqrt(-Math.log(altPraw));
 
 			// By the construction above, there may be duplicate functions in the RefMaps
-			for (Function function : sourceRefMap.get(match)) {
+			for (Function function : entry.getValue()) {
 				LSHCosineVectorAccum vector =
 					srcVectorsByAddress.get(function.getEntryPoint());
 				vector.addHash(featureID, weight);
@@ -547,10 +548,10 @@ public abstract class VTAbstractReferenceProgramCorrelator extends VTAbstractPro
 		double pSwitch = 0.5;
 		double uniqueWeight = Math.sqrt(-Math.log(pSwitch)); //arbitrary weight used to provide negative correlation
 
-		for (Address addr : srcVectorsByAddress.keySet()) {
+		for (Entry<Address, LSHCosineVectorAccum> entry : srcVectorsByAddress.entrySet()) {
 
-			int totalRefs = countFunctionRefs(sourceProgram, addr);
-			LSHCosineVectorAccum srcVector = srcVectorsByAddress.get(addr);
+			int totalRefs = countFunctionRefs(sourceProgram, entry.getKey());
+			LSHCosineVectorAccum srcVector = entry.getValue();
 			int numEntries = srcVector.numEntries();
 			for (int i = 0; i < (totalRefs - numEntries); i++) {
 				srcVector.addHash(featureID, uniqueWeight);
@@ -558,10 +559,10 @@ public abstract class VTAbstractReferenceProgramCorrelator extends VTAbstractPro
 			}
 		}
 
-		for (Address addr : destVectorsByAddress.keySet()) {
+		for (Entry<Address, LSHCosineVectorAccum> entry : destVectorsByAddress.entrySet()) {
 
-			int totalRefs = countFunctionRefs(destinationProgram, addr);
-			LSHCosineVectorAccum dstVector = destVectorsByAddress.get(addr);
+			int totalRefs = countFunctionRefs(destinationProgram, entry.getKey());
+			LSHCosineVectorAccum dstVector = entry.getValue();
 			int numEntries = dstVector.numEntries();
 			for (int i = 0; i < (totalRefs - numEntries); i++) {
 				dstVector.addHash(featureID, uniqueWeight);

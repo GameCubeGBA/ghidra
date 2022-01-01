@@ -121,14 +121,12 @@ class FilterAction extends ToggleDockingAction {
 	 */
 	synchronized ArrayList<String> getSelectedTypes() {
 		ArrayList<String> list = new ArrayList<>();
-		Iterator<String> iter = typeEnabledMap.keySet().iterator();
-		while (iter.hasNext()) {
-			String type = iter.next();
-			Boolean lEnabled = typeEnabledMap.get(type);
-			if (lEnabled != null && typeEnabledMap.get(type).booleanValue()) {
-				list.add(type);
-			}
-		}
+        for (Entry<String, Boolean> entry : typeEnabledMap.entrySet()) {
+            Boolean lEnabled = entry.getValue();
+            if (lEnabled != null && entry.getValue().booleanValue()) {
+                list.add(entry.getKey());
+            }
+        }
 		return list;
 	}
 
@@ -362,12 +360,11 @@ class FilterAction extends ToggleDockingAction {
 			}
 			else {
 				if (!filteredTextExists()) {//Typed Incorrectly, so show nothing...
-					Iterator<String> itr = typeEnabledMap.keySet().iterator();
-					while (itr.hasNext()) {
-						String curType = itr.next();
-						Boolean lEnabled = typeEnabledMap.get(curType);
-						createCheckBox(curType, curType, lEnabled);
-					}
+                    for (Entry<String, Boolean> entry : typeEnabledMap.entrySet()) {
+                        String curType = entry.getKey();
+                        Boolean lEnabled = entry.getValue();
+                        createCheckBox(curType, curType, lEnabled);
+                    }
 				}
 			}
 			repaint();

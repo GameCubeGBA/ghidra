@@ -458,11 +458,9 @@ public class TreeManager implements ManagerDB {
 	public void addMemoryBlock(String name, AddressRange range) {
 		lock.acquire();
 		try {
-			Iterator<String> keys = treeMap.keySet().iterator();
-			while (keys.hasNext()) {
-				ModuleManager m = treeMap.get(keys.next());
-				m.addMemoryBlock(name, range);
-			}
+            for (ModuleManager m : treeMap.values()) {
+                m.addMemoryBlock(name, range);
+            }
 		}
 		catch (IOException e) {
 			errHandler.dbError(e);
@@ -481,14 +479,12 @@ public class TreeManager implements ManagerDB {
 			throws CancelledException {
 		lock.acquire();
 		try {
-			Iterator<String> keys = treeMap.keySet().iterator();
-			while (keys.hasNext()) {
-				if (monitor.isCancelled()) {
-					throw new CancelledException();
-				}
-				ModuleManager m = treeMap.get(keys.next());
-				m.removeMemoryBlock(startAddr, endAddr, monitor);
-			}
+            for (ModuleManager m : treeMap.values()) {
+                if (monitor.isCancelled()) {
+                    throw new CancelledException();
+                }
+                m.removeMemoryBlock(startAddr, endAddr, monitor);
+            }
 		}
 		catch (IOException e) {
 			errHandler.dbError(e);
@@ -627,11 +623,9 @@ public class TreeManager implements ManagerDB {
 			}
 			treeMap.put(treeName, mm);
 		}
-		Iterator<String> it = oldTreeMap.keySet().iterator();
-		while (it.hasNext()) {
-			ModuleManager mm = oldTreeMap.get(it.next());
-			mm.invalidateCache();
-		}
+        for (ModuleManager mm : oldTreeMap.values()) {
+            mm.invalidateCache();
+        }
 	}
 
 	private void findAdapters(DBHandle dbHandle) throws VersionException {
@@ -654,11 +648,9 @@ public class TreeManager implements ManagerDB {
 	}
 
 	public void setProgramName(String oldName, String newName) {
-		Iterator<String> it = treeMap.keySet().iterator();
-		while (it.hasNext()) {
-			ModuleManager mm = treeMap.get(it.next());
-			mm.setProgramName(oldName, newName);
-		}
+        for (ModuleManager mm : treeMap.values()) {
+            mm.setProgramName(oldName, newName);
+        }
 	}
 
 	void updateTreeRecord(DBRecord record) {

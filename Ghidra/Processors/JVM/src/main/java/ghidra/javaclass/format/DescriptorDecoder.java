@@ -83,7 +83,7 @@ public class DescriptorDecoder {
 	 */
 	public static JavaComputationalCategory getReturnCategoryOfMethodDescriptor(
 			String methodDescriptor) {
-		int closeParenIndex = methodDescriptor.indexOf(")");
+		int closeParenIndex = methodDescriptor.indexOf(')');
 		if (closeParenIndex == -1) {
 			throw new IllegalArgumentException("Invalid method descriptor: " + methodDescriptor);
 		}
@@ -101,7 +101,7 @@ public class DescriptorDecoder {
 	 */
 	public static DataType getReturnTypeOfMethodDescriptor(String methodDescriptor,
 			DataTypeManager dtManager) {
-		int closeParenIndex = methodDescriptor.indexOf(")");
+		int closeParenIndex = methodDescriptor.indexOf(')');
 		if (closeParenIndex == -1) {
 			throw new IllegalArgumentException("Invalid method descriptor: " + methodDescriptor);
 		}
@@ -151,7 +151,7 @@ public class DescriptorDecoder {
 	public static List<String> getTypeNameList(String methodDescriptor, boolean fullyQualifiedName,
 			boolean replaceSlash) {
 		ArrayList<String> typeNames = new ArrayList<>();
-		int closeParenIndex = methodDescriptor.indexOf(")");
+		int closeParenIndex = methodDescriptor.indexOf(')');
 		String argString = methodDescriptor.substring(1, closeParenIndex);
 		String currentParamTypeName;
 
@@ -166,7 +166,7 @@ public class DescriptorDecoder {
 				}
 				//advance past the base type of the array
 				if (argString.charAt(currentPosition) == 'L') {
-					int semiColonIndex = argString.indexOf(";", currentPosition);
+					int semiColonIndex = argString.indexOf(';', currentPosition);
 					currentPosition = semiColonIndex + 1;
 				}
 				else {
@@ -183,7 +183,7 @@ public class DescriptorDecoder {
 			//otherwise you only need to advance one character
 			switch (currentParam) {
 				case "L":
-					int semiColonIndex = argString.indexOf(";", currentPosition);
+					int semiColonIndex = argString.indexOf(';', currentPosition);
 					currentParamTypeName = getTypeNameFromDescriptor(
 						argString.substring(currentPosition, semiColonIndex + 1),
 						fullyQualifiedName, replaceSlash);
@@ -221,12 +221,12 @@ public class DescriptorDecoder {
 				}
 				return name;
 			}
-			int lastSlash = name.lastIndexOf("/");
+			int lastSlash = name.lastIndexOf('/');
 			//lastSlash+1 so the slash is not included in the name
 			return name.substring(lastSlash + 1, name.length());
 		}
 		if (descriptor.startsWith("[")) {
-			int dimension = descriptor.lastIndexOf("[") + 1;
+			int dimension = descriptor.lastIndexOf('[') + 1;
 			String baseType = getTypeNameFromDescriptor(descriptor.replace("[", ""),
 				fullyQualifiedName, replaceSlash);
 			StringBuilder sb = new StringBuilder(baseType);
@@ -320,7 +320,7 @@ public class DescriptorDecoder {
 	 * @return pointer data type
 	 */
 	public static DataType getPointerType(String descriptor, DataTypeManager dtManager) {
-		int lastBracket = descriptor.lastIndexOf("[");
+		int lastBracket = descriptor.lastIndexOf('[');
 		String baseTypeOfArray = descriptor.substring(lastBracket + 1, lastBracket + 2);
 		DataType baseType = null;
 		switch (baseTypeOfArray.charAt(0)) {
@@ -366,7 +366,7 @@ public class DescriptorDecoder {
 	 */
 	public static List<JavaComputationalCategory> getParameterCategories(String methodDescriptor) {
 		ArrayList<JavaComputationalCategory> categories = new ArrayList<>();
-		int closeParenIndex = methodDescriptor.indexOf(")");
+		int closeParenIndex = methodDescriptor.indexOf(')');
 		String argString = methodDescriptor.substring(1, closeParenIndex);
 		int currentPosition = 0;
 		int len = argString.length();
@@ -392,7 +392,7 @@ public class DescriptorDecoder {
 			//otherwise you only need to advance one character
 			switch (currentParam) {
 				case "L":
-					int semiColonIndex = argString.indexOf(";", currentPosition);
+					int semiColonIndex = argString.indexOf(';', currentPosition);
 					currentPosition = semiColonIndex + 1; //advance past ;
 					break;
 				case "[":
@@ -402,7 +402,7 @@ public class DescriptorDecoder {
 					}
 					//advance past the base type of the array
 					if (argString.charAt(currentPosition) == 'L') {
-						semiColonIndex = argString.indexOf(";", currentPosition);
+						semiColonIndex = argString.indexOf(';', currentPosition);
 						currentPosition = semiColonIndex + 1;
 					}
 					else {
@@ -425,7 +425,7 @@ public class DescriptorDecoder {
 	public static List<DataType> getDataTypeList(String methodDescriptor,
 			DataTypeManager dtManager) {
 		ArrayList<DataType> paramDataTypes = new ArrayList<>();
-		int closeParenIndex = methodDescriptor.indexOf(")");
+		int closeParenIndex = methodDescriptor.indexOf(')');
 		String argString = methodDescriptor.substring(1, closeParenIndex);
 		DataType currentParamType;
 
@@ -452,7 +452,7 @@ public class DescriptorDecoder {
 					currentPosition++;
 					break;
 				case BASE_TYPE_REFERENCE:
-					int semiColonIndex = argString.indexOf(";", currentPosition);
+					int semiColonIndex = argString.indexOf(';', currentPosition);
 					currentParam = argString.substring(currentPosition, semiColonIndex + 1);
 					currentPosition = semiColonIndex + 1;
 					break;

@@ -366,7 +366,7 @@ public class ImporterDialog extends DialogComponentProvider {
 	}
 
 	private DomainFolder getOrCreateImportFolder(DomainFolder parentFolder, String programPath) {
-		int lastIndexOf = programPath.lastIndexOf("/");
+		int lastIndexOf = programPath.lastIndexOf('/');
 		if (lastIndexOf < 0) {
 			return parentFolder;
 		}

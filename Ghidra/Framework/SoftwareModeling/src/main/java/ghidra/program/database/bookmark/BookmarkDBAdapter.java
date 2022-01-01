@@ -167,7 +167,7 @@ abstract class BookmarkDBAdapter {
 	}
 
 	static String demangleTypeCategory(String typeCategory) {
-		int ix = typeCategory.indexOf("/");
+		int ix = typeCategory.indexOf('/');
 		if (ix < 0) {
 			// Bad data - should not happen
 			return typeCategory;

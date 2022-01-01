@@ -165,7 +165,7 @@ public class PreviewTableCellData implements Comparable<PreviewTableCellData> {
 
 	private String getDataPath(Data data) {
 		String path = data.getComponentPathName();
-		int dotIndex = path.indexOf(".");
+		int dotIndex = path.indexOf('.');
 		if (dotIndex != -1) {
 			path = path.substring(dotIndex + 1);
 		}

@@ -556,7 +556,7 @@ public class VTDualListingHighlightProvider implements HighlightProvider {
 				(isSource || markupItem.canUnapply()) ? (FunctionNameStringable) markupItem.getSourceValue()
 						: (FunctionNameStringable) markupItem.getOriginalDestinationValue();
 			if (value != null) {
-				int parameterStart = text.indexOf("(");
+				int parameterStart = text.indexOf('(');
 				if (parameterStart < 0) {
 					parameterStart = text.length();
 				}
@@ -601,8 +601,8 @@ public class VTDualListingHighlightProvider implements HighlightProvider {
 		if (markupItem != null) {
 			int textLength = text.length();
 
-			int leftParenIndex = text.indexOf("(");
-			int rightParenIndex = text.indexOf(")");
+			int leftParenIndex = text.indexOf('(');
+			int rightParenIndex = text.indexOf(')');
 
 			int startReturnIndex = 0;
 			int endCallingConventionIndex = textLength - 1;

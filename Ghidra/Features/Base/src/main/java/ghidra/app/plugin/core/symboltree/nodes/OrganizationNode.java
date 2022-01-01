@@ -115,13 +115,13 @@ public class OrganizationNode extends SymbolTreeNode {
 		// otherwise, the nodes have been partitioned into groups with a common prefix
 		// loop through and create organization nodes for groups larger than one element
 		List<GTreeNode> children = new ArrayList<>();
-		for (String prefix : prefixMap.keySet()) {
+		for (Map.Entry<String, List<GTreeNode>> entry : prefixMap.entrySet()) {
 			monitor.checkCanceled();
 
-			List<GTreeNode> nodesSamePrefix = prefixMap.get(prefix);
+			List<GTreeNode> nodesSamePrefix = entry.getValue();
 
 			// all the nodes that don't have a common prefix get added directly
-			if (prefix.isEmpty()) {
+			if (entry.getKey().isEmpty()) {
 				children.addAll(nodesSamePrefix);
 			}
 			// groups with one entry, just add in the element directly

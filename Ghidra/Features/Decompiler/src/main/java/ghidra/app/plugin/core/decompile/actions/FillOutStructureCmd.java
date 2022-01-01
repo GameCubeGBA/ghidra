@@ -275,22 +275,19 @@ public class FillOutStructureCmd extends BackgroundCommand {
 			}
 			HashMap<Address, Address> savedList = addressToCallInputMap;
 			addressToCallInputMap = new HashMap<>();
-			Set<Address> keys = savedList.keySet();
-			Iterator<Address> keyIter = keys.iterator();
-			while (keyIter.hasNext()) {
-				Address addr = keyIter.next();
-
-				if (doneSet.contains(addr)) {
-					continue;
-				}
-				doneSet.addRange(addr, addr);
-				Function func = currentProgram.getFunctionManager().getFunctionAt(addr);
-				Address storageAddr = savedList.get(addr);
-				HighVariable paramHighVar = computeHighVariable(storageAddr, func);
-				if (paramHighVar != null) {
-					fillOutStructureDef(paramHighVar);
-				}
-			}
+            for (Entry<Address, Address> entry : savedList.entrySet()) {
+                Address addr = entry.getKey();
+                if (doneSet.contains(addr)) {
+                    continue;
+                }
+                doneSet.addRange(addr, addr);
+                Function func = currentProgram.getFunctionManager().getFunctionAt(addr);
+                Address storageAddr = entry.getValue();
+                HighVariable paramHighVar = computeHighVariable(storageAddr, func);
+                if (paramHighVar != null) {
+                    fillOutStructureDef(paramHighVar);
+                }
+            }
 		}
 	}
 

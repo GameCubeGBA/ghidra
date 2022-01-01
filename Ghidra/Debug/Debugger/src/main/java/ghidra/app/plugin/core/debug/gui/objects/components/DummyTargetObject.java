@@ -137,7 +137,7 @@ public class DummyTargetObject implements TargetObject {
 		}
 		String ret = path.get(path.size() - 1);
 		if (ret.endsWith("]")) {
-			ret = ret.substring(ret.indexOf("["));
+			ret = ret.substring(ret.indexOf('['));
 		}
 		return ret;
 	}

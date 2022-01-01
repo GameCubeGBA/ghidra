@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.RemovalNotification;
@@ -289,22 +290,10 @@ public abstract class AbstractConstraintsTree< //
 
 	protected Iterator<DR> iterator(NR node, Q query) {
 		if (node.getType().isLeaf()) {
-			List<DR> data = new ArrayList<>(node.getChildCount());
-			for (DR d : getDataChildrenOf(node)) {
-				if (query != null && !query.testData(d.getShape())) {
-					continue;
-				}
-				data.add(d);
-			}
+			List<DR> data = getDataChildrenOf(node).stream().filter(d -> query == null || query.testData(d.getShape())).collect(Collectors.toCollection(() -> new ArrayList<>(node.getChildCount())));
 			return data.iterator();
 		}
-		List<NR> nodes = new ArrayList<>(node.getChildCount());
-		for (NR n : getNodeChildrenOf(node)) {
-			if (query != null && query.testNode(n.getShape()) == QueryInclusion.NONE) {
-				continue;
-			}
-			nodes.add(n);
-		}
+		List<NR> nodes = getNodeChildrenOf(node).stream().filter(n -> query == null || query.testNode(n.getShape()) != QueryInclusion.NONE).collect(Collectors.toCollection(() -> new ArrayList<>(node.getChildCount())));
 		return NestedIterator.start(nodes.iterator(), n -> iterator(n, query));
 	}
 
@@ -846,21 +835,14 @@ public abstract class AbstractConstraintsTree< //
 		}
 
 		// Check that child count matches by counting over iterator
-		long actualChildCount = 0;
-		for (@SuppressWarnings("unused")
-		Object obj : getChildrenOf(n)) {
-			actualChildCount++;
-		}
+		long actualChildCount = getChildrenOf(n).stream().count();
 		if (actualChildCount != n.getChildCount()) {
 			throw new AssertionError("Parent's child count " + n.getChildCount() +
 				" does not match actual count " + actualChildCount);
 		}
 
 		// Check that data count matches by summing over iterator
-		long actualDataCount = 0;
-		for (DBTreeRecord<?, ?> r : getChildrenOf(n)) {
-			actualDataCount += r.getDataCount();
-		}
+		long actualDataCount = getChildrenOf(n).stream().mapToLong(DBTreeRecord::getDataCount).sum();
 		if (actualDataCount != n.getDataCount()) {
 			throw new AssertionError("Parent's data count " + n.getDataCount() +
 				" does not match actual sum " + actualDataCount);

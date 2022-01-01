@@ -135,7 +135,7 @@ public class JavaSourceFile {
 		}
 
 		// remove all text up to the first semicolon
-		text = text.substring(text.indexOf(";") + 1);
+		text = text.substring(text.indexOf(';') + 1);
 		lastLine.setText(text);
 	}
 

@@ -886,8 +886,8 @@ public class SymbolUtilities {
 	 */
 	public static String getCleanSymbolName(String symbolName, Address address) {
 
-		int indexOfAt = symbolName.lastIndexOf("@");
-		int indexOfUnderscore = symbolName.lastIndexOf("_");
+		int indexOfAt = symbolName.lastIndexOf('@');
+		int indexOfUnderscore = symbolName.lastIndexOf('_');
 
 		if (indexOfAt < 1 && indexOfUnderscore < 1) {
 			return symbolName;

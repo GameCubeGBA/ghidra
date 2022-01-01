@@ -97,8 +97,8 @@ public class LldbModelTargetBreakpointSpecImpl extends LldbModelTargetAbstractXp
 		String[] split = description.split(",");
 		if (split[1].contains("regex")) {
 			expression = split[1];
-			expression = expression.substring(expression.indexOf("'")+1);
-			expression = expression.substring(0, expression.indexOf("'"));
+			expression = expression.substring(expression.indexOf('\'')+1);
+			expression = expression.substring(0, expression.indexOf('\''));
 		}
 		this.changeAttributes(List.of(), List.of(), Map.of( //
 			DISPLAY_ATTRIBUTE_NAME, display = getDescription(0), //

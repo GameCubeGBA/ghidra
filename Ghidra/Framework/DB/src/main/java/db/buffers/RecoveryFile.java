@@ -17,12 +17,7 @@ package db.buffers;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 import ghidra.util.datastruct.IntIntHashtable;
 import ghidra.util.exception.AssertException;
@@ -597,12 +592,10 @@ class RecoveryFile {
 		recoveryFile.clearParameters();
 
 		// Restore recovery parameters
-		Iterator<String> iter = recoveryProps.keySet().iterator();
-		while (iter.hasNext()) {
-			String name = iter.next();
-			recoveryFile.setParameter(
-				name, recoveryProps.get(name).intValue());
-		}
+        for (Map.Entry<String, Integer> entry : recoveryProps.entrySet()) {
+            recoveryFile.setParameter(
+                    entry.getKey(), entry.getValue().intValue());
+        }
 	}
 
 	/**

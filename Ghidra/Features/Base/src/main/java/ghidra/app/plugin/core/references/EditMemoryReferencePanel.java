@@ -704,10 +704,10 @@ class EditMemoryReferencePanel extends EditReferencePanel {
 	}
 
 	void writeXmlDataState(Element element) {
-		for (Program program : addrHistoryMap.keySet()) {
+		for (Map.Entry<Program, List<Address>> entry : addrHistoryMap.entrySet()) {
 			Element programElement = new Element("ADDR_HISTORY");
-			programElement.setAttribute("PROGRAM", program.getDomainFile().toString());
-			List<Address> addressList = addrHistoryMap.get(program);
+			programElement.setAttribute("PROGRAM", entry.getKey().getDomainFile().toString());
+			List<Address> addressList = entry.getValue();
 			for (Address address : addressList) {
 				Element addrElement = new Element("ADDRESS");
 				addrElement.setAttribute("VALUE", address.toString());

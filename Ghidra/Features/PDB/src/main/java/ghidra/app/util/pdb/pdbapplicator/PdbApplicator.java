@@ -589,9 +589,9 @@ public class PdbApplicator {
 			categoryNames.add(moduleName);
 		}
 
-		int index = pdbFilename.lastIndexOf("\\");
+		int index = pdbFilename.lastIndexOf('\\');
 		if (index == -1) {
-			index = pdbFilename.lastIndexOf("/");
+			index = pdbFilename.lastIndexOf('/');
 		}
 		return new PdbCategories(pdbFilename.substring(index + 1), categoryNames);
 	}

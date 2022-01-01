@@ -1000,25 +1000,25 @@ public class DecompilerNestedLayout extends AbstractFGLayout {
 
 		BlockGraph blockGraph = new BlockGraph();
 		BidiMap<CodeBlock, PcodeBlock> bidiMap = new DualHashBidiMap<>();
-		for (; iterator.hasNext();) {
+        while (iterator.hasNext()) {
+            taskMonitor.checkCanceled();
+
+            CodeBlock codeBlock = iterator.next();
+            FGVertex vertex = getVertex(jungGraph, codeBlock.getMinAddress());
+            if (vertex == null) {
+                // this is unusual; can happen if the program is being changed while this is running
+                continue;
+            }
+
+            PcodeBlock pcodeBlock = new BlockCopy(vertex, codeBlock.getMinAddress());
+            bidiMap.put(codeBlock, pcodeBlock);
+            blockGraph.addBlock(pcodeBlock);
+        }
+
+        for (Map.Entry<CodeBlock, PcodeBlock> entry : bidiMap.entrySet()) {
 			taskMonitor.checkCanceled();
 
-			CodeBlock codeBlock = iterator.next();
-			FGVertex vertex = getVertex(jungGraph, codeBlock.getMinAddress());
-			if (vertex == null) {
-				// this is unusual; can happen if the program is being changed while this is running
-				continue;
-			}
-
-			PcodeBlock pcodeBlock = new BlockCopy(vertex, codeBlock.getMinAddress());
-			bidiMap.put(codeBlock, pcodeBlock);
-			blockGraph.addBlock(pcodeBlock);
-		}
-
-		for (CodeBlock block : bidiMap.keySet()) {
-			taskMonitor.checkCanceled();
-
-			CodeBlockReferenceIterator destinations = block.getDestinations(taskMonitor);
+			CodeBlockReferenceIterator destinations = entry.getKey().getDestinations(taskMonitor);
 			while (destinations.hasNext()) {
 				taskMonitor.checkCanceled();
 
@@ -1032,7 +1032,7 @@ public class DecompilerNestedLayout extends AbstractFGLayout {
 				}
 				CodeBlock destination = ref.getDestinationBlock();
 
-				PcodeBlock sourcePcodeBlock = bidiMap.get(block);
+				PcodeBlock sourcePcodeBlock = entry.getValue();
 				PcodeBlock destPcodeBlock = bidiMap.get(destination);
 				if (destPcodeBlock == null) {
 					continue;

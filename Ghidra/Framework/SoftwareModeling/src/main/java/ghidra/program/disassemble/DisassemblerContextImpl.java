@@ -150,12 +150,9 @@ public class DisassemblerContextImpl implements DisassemblerContext {
 					: contextRegisterValue);
 		setRegisterValue(fromAddr, destAddr, flowValue, false);
 
-		Iterator<Register> it = registerStateMap.keySet().iterator();
-		while (it.hasNext()) {
-			Register reg = it.next();
-			RegisterValue value = registerStateMap.get(reg);
-			setRegisterValue(fromAddr, destAddr, value, false);
-		}
+        for (RegisterValue value : registerStateMap.values()) {
+            setRegisterValue(fromAddr, destAddr, value, false);
+        }
 		return flowValue;
 	}
 
@@ -185,17 +182,15 @@ public class DisassemblerContextImpl implements DisassemblerContext {
 		}
 		setRegisterValue(fromAddr, destAddr, programContext.getFlowValue(contextRegisterValue), false);
 
-		Iterator<Register> it = registerStateMap.keySet().iterator();
-		while (it.hasNext()) {
-			Register reg = it.next();
-			RegisterValue value = registerStateMap.get(reg);
-			RegisterValue curValue = getRegisterValue(reg, fromAddr, destAddr);
-			// check if there already is a value
-			if (curValue != null && !value.equals(curValue)) {
-				collisionList.add(value);
-			}
-			setRegisterValue(fromAddr, destAddr, value, false);
-		}
+        for (Map.Entry<Register, RegisterValue> entry : registerStateMap.entrySet()) {
+            RegisterValue value = entry.getValue();
+            RegisterValue curValue = getRegisterValue(entry.getKey(), fromAddr, destAddr);
+            // check if there already is a value
+            if (curValue != null && !value.equals(curValue)) {
+                collisionList.add(value);
+            }
+            setRegisterValue(fromAddr, destAddr, value, false);
+        }
 
 		return collisionList;
 	}
@@ -394,8 +389,9 @@ public class DisassemblerContextImpl implements DisassemblerContext {
 
 		// update all other registers values in current state
 		if (futureStateMap != null) {
-			for (Register register : futureStateMap.keySet()) {
-				RegisterValue futureValue = futureStateMap.get(register);
+			for (Map.Entry<Register, RegisterValue> entry : futureStateMap.entrySet()) {
+                Register register = entry.getKey();
+                RegisterValue futureValue = entry.getValue();
 				RegisterValue currentValue = registerStateMap.get(register);
 				if (currentValue != null) {
 					futureValue = currentValue.combineValues(futureValue);
@@ -742,20 +738,17 @@ public class DisassemblerContextImpl implements DisassemblerContext {
 
 // TODO: Should disassembler context be used for anything other than the context-register ??
 
-		Iterator<Register> it = registerStateMap.keySet().iterator();
-		while (it.hasNext()) {
-			Register reg = it.next();
-			if (reg.isProcessorContext()) {
-				continue;
-			}
-			RegisterValue value = registerStateMap.get(reg);
-			try {
-				programContext.setRegisterValue(start, end, value);
-			}
-			catch (ContextChangeException e) {
-				// we should never be writing the context register
-			}
-		}
+        for (Map.Entry<Register, RegisterValue> entry : registerStateMap.entrySet()) {
+            if (entry.getKey().isProcessorContext()) {
+                continue;
+            }
+            RegisterValue value = entry.getValue();
+            try {
+                programContext.setRegisterValue(start, end, value);
+            } catch (ContextChangeException e) {
+                // we should never be writing the context register
+            }
+        }
 	}
 
 	@Override

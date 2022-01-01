@@ -51,8 +51,9 @@ public class JdiModelTargetValueMap extends JdiModelTargetObjectImpl {
 	protected CompletableFuture<Void> updateUsingValues(Map<LocalVariable, Value> byName) {
 		Map<String, JdiModelTargetValue> vals = new HashMap<>();
 		synchronized (this) {
-			for (LocalVariable key : byName.keySet()) {
-				Value val = byName.get(key);
+			for (Map.Entry<LocalVariable, Value> entry : byName.entrySet()) {
+                LocalVariable key = entry.getKey();
+                Value val = entry.getValue();
 				if (val != null) {
 					JdiModelTargetValue targetValue = getTargetValue(key, val);
 					vals.put(key.name(), targetValue);

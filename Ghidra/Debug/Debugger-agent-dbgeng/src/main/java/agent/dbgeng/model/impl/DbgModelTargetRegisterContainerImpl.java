@@ -124,10 +124,11 @@ public class DbgModelTargetRegisterContainerImpl extends DbgModelTargetObjectImp
 			return thread.readRegisters(toRead);
 		}).thenApply(vals -> {
 			Map<String, byte[]> result = new LinkedHashMap<>();
-			for (DbgRegister dbgReg : vals.keySet()) {
-				DbgModelTargetRegister reg = getTargetRegister(dbgReg);
+			for (Map.Entry<DbgRegister, BigInteger> entry : vals.entrySet()) {
+                DbgRegister dbgReg = entry.getKey();
+                DbgModelTargetRegister reg = getTargetRegister(dbgReg);
 				String oldval = (String) reg.getCachedAttributes().get(VALUE_ATTRIBUTE_NAME);
-				BigInteger value = vals.get(dbgReg);
+				BigInteger value = entry.getValue();
 				byte[] bytes = ConversionUtils.bigIntegerToBytes(dbgReg.getSize(), value);
 				result.put(dbgReg.getName(), bytes);
 				reg.changeAttributes(List.of(), Map.of( //

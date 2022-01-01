@@ -17,6 +17,8 @@ package ghidra.app.util.bin.format.pdb2.pdbreader.symbol;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import ghidra.app.util.bin.format.pdb2.pdbreader.*;
 
@@ -265,14 +267,10 @@ public abstract class AbstractCompile2MsSymbol extends AbstractMsSymbol {
 		builder.append(String.format("\n   Backend Version: Major = %d, Minor = %d, Build = %d",
 			backEndMajorVersionNumber, backEndMinorVersionNumber, backEndBuildVersionNumber));
 		builder.append("\n   Version String:" + compilerVersionString);
-		if ((stringList.size() & 0x0001) == 0x0001) {
+		if ((stringList.size() & 0x0001) != 0) {
 			return; // Some sort of problem that we are not dealing with.
 		}
-		builder.append("\nCommand block: \n");
-		for (int i = 0; i < stringList.size(); i += 2) {
-			builder.append(
-				String.format("   %s = '%s'\n", stringList.get(i), stringList.get(i + 1)));
-		}
+		builder.append(IntStream.iterate(0, i -> i < stringList.size(), i -> i + 2).mapToObj(i -> String.format("   %s = '%s'\n", stringList.get(i), stringList.get(i + 1))).collect(Collectors.joining("", "\nCommand block: \n", "")));
 	}
 
 	/**

@@ -370,9 +370,9 @@ public class DataTypeMergeManager implements MergeResolver {
 	}
 
 	private void fixupDirtyFlags() {
-		for (UniversalID sourceID : dirtyMap.keySet()) {
-			boolean isDirty = dirtyMap.get(sourceID).booleanValue();
-			SourceArchive sourceArchive = dtms[RESULT].getSourceArchive(sourceID);
+		for (Map.Entry<UniversalID, Boolean> entry : dirtyMap.entrySet()) {
+			boolean isDirty = entry.getValue().booleanValue();
+			SourceArchive sourceArchive = dtms[RESULT].getSourceArchive(entry.getKey());
 			if (sourceArchive.isDirty() != isDirty) {
 				sourceArchive.setDirtyFlag(isDirty);
 			}
@@ -3348,22 +3348,19 @@ public class DataTypeMergeManager implements MergeResolver {
 			if (map == null) {
 				return;
 			}
-			Set<Map<Long, DataType>> keySet = map.keySet();
-			Iterator<Map<Long, DataType>> iterator = keySet.iterator();
-			while (iterator.hasNext()) {
-				Map<Long, DataType> ht = iterator.next();
-				DataType dt = ht.get(id);
-				if (dt instanceof Composite) {
-					int[] indexArray = map.get(ht);
-					if (dt instanceof Union) {
-						cleanUpUnion(indexArray, (Union) dt);
-					}
-					else {
-						cleanUpStructure(indexArray, (Structure) dt);
-					}
-					map.remove(ht); // remove it from the map
-				}
-			}
+            for (Map.Entry<Map<Long, DataType>, int[]> entry : map.entrySet()) {
+                Map<Long, DataType> ht = entry.getKey();
+                DataType dt = ht.get(id);
+                if (dt instanceof Composite) {
+                    int[] indexArray = entry.getValue();
+                    if (dt instanceof Union) {
+                        cleanUpUnion(indexArray, (Union) dt);
+                    } else {
+                        cleanUpStructure(indexArray, (Structure) dt);
+                    }
+                    map.remove(ht); // remove it from the map
+                }
+            }
 			map = null;
 		}
 

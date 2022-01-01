@@ -75,8 +75,8 @@ public class PluginClassManager {
 
 	public void addXmlElementsForPlugins(Element root, List<Plugin> plugins) {
 		Map<PluginPackage, List<Plugin>> pluginPackageMap = buildPluginPackageMap(plugins);
-		for (PluginPackage pluginPackage : pluginPackageMap.keySet()) {
-			root.addContent(getPackageElement(pluginPackage, pluginPackageMap.get(pluginPackage)));
+		for (Map.Entry<PluginPackage, List<Plugin>> entry : pluginPackageMap.entrySet()) {
+			root.addContent(getPackageElement(entry.getKey(), entry.getValue()));
 		}
 	}
 

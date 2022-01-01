@@ -16,6 +16,7 @@
 package ghidra.program.model.data;
 
 import java.math.BigInteger;
+import java.util.Map;
 import java.util.TreeMap;
 
 import ghidra.docking.settings.Settings;
@@ -262,10 +263,11 @@ public abstract class AbstractFloatDataType extends BuiltIn {
 					newFloatMap.put(dataOrganization.getLongDoubleSize(),
 						(AbstractFloatDataType) LongDoubleDataType.dataType.clone(dtm));
 				}
-				for (int size : floatMap.keySet()) {
-					if (!newFloatMap.containsKey(size)) {
+				for (Map.Entry<Integer, AbstractFloatDataType> entry : floatMap.entrySet()) {
+                    int size = entry.getKey();
+                    if (!newFloatMap.containsKey(size)) {
 						newFloatMap.put(size,
-							(AbstractFloatDataType) floatMap.get(size).clone(dtm));
+							(AbstractFloatDataType) entry.getValue().clone(dtm));
 					}
 				}
 			}

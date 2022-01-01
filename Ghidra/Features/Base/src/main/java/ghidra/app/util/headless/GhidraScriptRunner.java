@@ -116,7 +116,7 @@ public class GhidraScriptRunner implements GhidraLaunchable {
 			// Get basename, assume that it ends in .java, since we've already covered the
 			// .class case
 			String baseScriptName = foundScript.getScriptName();
-			int lastIndexOf = baseScriptName.lastIndexOf(".");
+			int lastIndexOf = baseScriptName.lastIndexOf('.');
 			if (lastIndexOf > 0) {
 				baseScriptName = baseScriptName.substring(0, lastIndexOf);
 			}

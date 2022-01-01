@@ -238,15 +238,14 @@ public class GhidraProject {
 	 * that project. Also deletes the project if created as a temporary project.
 	 */
 	public void close() {
-		Iterator<Program> it = openPrograms.keySet().iterator();
-		while (it.hasNext()) {
-			Program p = it.next();
-			int id = (openPrograms.get(p)).intValue();
-			if (id >= 0) {
-				p.endTransaction(id, true);
-			}
-			p.release(this);
-		}
+        for (Map.Entry<Program, Integer> entry : openPrograms.entrySet()) {
+            Program p = entry.getKey();
+            int id = (entry.getValue()).intValue();
+            if (id >= 0) {
+                p.endTransaction(id, true);
+            }
+            p.release(this);
+        }
 
 		openPrograms.clear();
 		if (project != null) {

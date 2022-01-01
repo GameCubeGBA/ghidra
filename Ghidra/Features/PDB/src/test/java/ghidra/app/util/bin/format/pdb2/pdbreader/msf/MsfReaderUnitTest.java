@@ -483,21 +483,18 @@ public class MsfReaderUnitTest extends AbstractGenericTest {
 			PdbByteWriter writer = new PdbByteWriter();
 			writer.putInt(streamMap.size());
 			if (msf.ver == MsfVer.V200) {
-				for (int streamNumber : streamMap.keySet()) {
-					Stream stream = streamMap.get(streamNumber);
-					writer.putBytes(stream.serializeLengthAndMapTableAddress());
+				for (Stream stream : streamMap.values()) {
+                    writer.putBytes(stream.serializeLengthAndMapTableAddress());
 				}
 			}
 			else {
-				for (int streamNumber : streamMap.keySet()) {
-					Stream stream = streamMap.get(streamNumber);
-					writer.putBytes(stream.serializeLength());
+				for (Stream stream : streamMap.values()) {
+                    writer.putBytes(stream.serializeLength());
 				}
 			}
 
-			for (int streamNumber : streamMap.keySet()) {
-				Stream stream = streamMap.get(streamNumber);
-				writer.putBytes(stream.serializePageNumbers());
+			for (Stream stream : streamMap.values()) {
+                writer.putBytes(stream.serializePageNumbers());
 			}
 			return writer.get();
 		}

@@ -1127,12 +1127,12 @@ class ElfProgramBuilder extends MemorySectionResolver implements ElfLoadHelper {
 	}
 
 	private void allocateUndefinedSymbolData(HashMap<Address, Integer> dataAllocationMap) {
-		for (Address addr : dataAllocationMap.keySet()) {
+		for (Map.Entry<Address, Integer> entry : dataAllocationMap.entrySet()) {
 			// Create undefined data for each data/object symbol
-			Integer symbolSize = dataAllocationMap.get(addr);
+			Integer symbolSize = entry.getValue();
 			if (symbolSize != null) {
 				try {
-					createUndefined(addr, symbolSize);
+					createUndefined(entry.getKey(), symbolSize);
 				}
 				catch (CodeUnitInsertionException e) {
 					// ignore conflicts which can be caused by other markup
@@ -1655,7 +1655,7 @@ class ElfProgramBuilder extends MemorySectionResolver implements ElfLoadHelper {
 	private boolean processVersionedExternal(ElfSymbol elfSymbol) {
 
 		String symName = elfSymbol.getNameAsString();
-		int index = symName.indexOf("@");
+		int index = symName.indexOf('@');
 		if (index < 0) {
 			return false;
 		}
@@ -3167,7 +3167,7 @@ class ElfProgramBuilder extends MemorySectionResolver implements ElfLoadHelper {
 		String name = sym.getName();
 		Address addr = sym.getAddress();
 
-		if (name.indexOf("@") > 0) { // <sym>@<version> or <sym>@@<version>
+		if (name.indexOf('@') > 0) { // <sym>@<version> or <sym>@@<version>
 			return sym; // do not make versioned symbols primary
 		}
 

@@ -1136,12 +1136,9 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 
 	private boolean containsSimpleTemplate(String name) {
 
-		int indexOf = name.indexOf(",");
-		if (indexOf == -1) {
-			return true;
-		}
-		return false;
-	}
+		int indexOf = name.indexOf(',');
+        return indexOf == -1;
+    }
 
 	/**
 	 * Method to return the number of the given substrings contained in the given string
@@ -1323,7 +1320,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 		int lastComma = 0;
 		int nextComma = 0;
 		while (commaIndex > 0) {
-			nextComma = className.indexOf(",", lastComma);
+			nextComma = className.indexOf(',', lastComma);
 			// if it gets to the end before the given commaIndex then we can't shorten
 			// return whole thing
 			if (nextComma == -1) {

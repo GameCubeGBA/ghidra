@@ -126,7 +126,7 @@ public class ImportFromXMLAction extends ImportExportAsAction {
 	}
 
 	private String convertName(String name) {
-		return name.contains("_0x") ? "[" + name.substring(name.indexOf("_") + 1) + "]" : name;
+		return name.contains("_0x") ? "[" + name.substring(name.indexOf('_') + 1) + "]" : name;
 	}
 
 }

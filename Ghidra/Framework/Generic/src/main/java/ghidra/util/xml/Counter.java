@@ -36,11 +36,9 @@ class Counter {
 
 	int getTotalCount() {
 		int total = 0;
-		Iterator<String> iter = map.keySet().iterator();
-		while (iter.hasNext()) {
-			Count count = map.get(iter.next());
-			total += count.count;
-		}
+        for (Count count : map.values()) {
+            total += count.count;
+        }
 		return total;
 	}
 

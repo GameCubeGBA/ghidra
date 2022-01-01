@@ -862,7 +862,7 @@ public class ProgramDB extends DomainObjectAdapterDB implements Program, ChangeM
 
 	@Override
 	public Address[] parseAddress(String addrStr, boolean caseSensitive) {
-		int pos = addrStr.lastIndexOf(":");
+		int pos = addrStr.lastIndexOf(':');
 		if (pos >= 0) {
 			String spaceName = addrStr.substring(0, pos);
 			if (spaceName.endsWith(":")) {

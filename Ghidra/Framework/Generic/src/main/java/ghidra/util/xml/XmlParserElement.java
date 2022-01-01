@@ -20,6 +20,7 @@ import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import org.xml.sax.Attributes;
 
@@ -60,21 +61,19 @@ public class XmlParserElement {
 		if (!textEquals) {
 			return false;
 		}
-		Iterator<String> iter = attrsMap.keySet().iterator();
-		while (iter.hasNext()) {
-			String lname = iter.next();
-			Object thisValue = this.attrsMap.get(lname);
-			Object thatValue = that.attrsMap.get(lname);
-			if (thisValue == null && thatValue != null) {
-				return false;
-			}
-			if (thisValue != null && thatValue == null) {
-				return false;
-			}
-			if (thisValue != null && !thisValue.equals(thatValue)) {
-				return false;
-			}
-		}
+        for (Map.Entry<String, Object> entry : attrsMap.entrySet()) {
+            Object thisValue = entry.getValue();
+            Object thatValue = that.attrsMap.get(entry.getKey());
+            if (thisValue == null && thatValue != null) {
+                return false;
+            }
+            if (thisValue != null && thatValue == null) {
+                return false;
+            }
+            if (thisValue != null && !thisValue.equals(thatValue)) {
+                return false;
+            }
+        }
 		return true;
 	}
 

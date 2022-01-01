@@ -253,7 +253,7 @@ public class GraphClassesScript extends GhidraScript {
 		String testString = new String(string);
 		testString = testString.replace("::", "xx");
 
-		return testString.indexOf(":", 0);
+		return testString.indexOf(':', 0);
 
 	}
 

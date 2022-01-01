@@ -139,14 +139,13 @@ public class SelectColumnsDialog extends DialogComponentProvider {
 			return;
 		}
 
-		Iterator<TableColumn> iter = visibilityMap.keySet().iterator();
-		while (iter.hasNext()) {
-			TableColumn column = iter.next();
-			Boolean visible = visibilityMap.get(column);
-			if (visible != columnModel.isVisible(column)) {
-				columnModel.setVisible(column, visible);
-			}
-		}
+        for (Map.Entry<TableColumn, Boolean> entry : visibilityMap.entrySet()) {
+            TableColumn column = entry.getKey();
+            Boolean visible = entry.getValue();
+            if (visible != columnModel.isVisible(column)) {
+                columnModel.setVisible(column, visible);
+            }
+        }
 		close();
 	}
 

@@ -218,7 +218,7 @@ public class GHelpHTMLEditorKit extends HTMLEditorKit {
 	}
 
 	private URL getURLForHREFFromResources(String originalHREF) {
-		int anchorIndex = originalHREF.indexOf("#");
+		int anchorIndex = originalHREF.indexOf('#');
 		String HREF = originalHREF;
 		String anchor = null;
 		if (anchorIndex != -1) {

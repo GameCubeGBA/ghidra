@@ -204,13 +204,10 @@ public class ProgramTreePlugin extends ProgramPlugin
 	 */
 	@Override
 	public void dispose() {
-		Iterator<String> iter = providerMap.keySet().iterator();
-		while (iter.hasNext()) {
-			String treeName = iter.next();
-			TreeViewProvider provider = providerMap.get(treeName);
-			deregisterService(ViewProviderService.class, provider);
-			provider.dispose();
-		}
+        for (TreeViewProvider provider : providerMap.values()) {
+            deregisterService(ViewProviderService.class, provider);
+            provider.dispose();
+        }
 
 		goToService = null;
 		viewManagerService = null;
@@ -352,15 +349,13 @@ public class ProgramTreePlugin extends ProgramPlugin
 		HashMap<String, TreeViewProvider> map = new HashMap<>(providerMap);
 
 		// remove views from the map that are not in the providerList
-		Iterator<String> iter = map.keySet().iterator();
-		while (iter.hasNext()) {
-			String treeName = iter.next();
-			TreeViewProvider provider = map.get(treeName);
-			if (!providerList.contains(provider)) {
-				deregisterService(ViewProviderService.class, provider);
-				providerMap.remove(treeName);
-			}
-		}
+        for (Map.Entry<String, TreeViewProvider> entry : map.entrySet()) {
+            TreeViewProvider provider = entry.getValue();
+            if (!providerList.contains(provider)) {
+                deregisterService(ViewProviderService.class, provider);
+                providerMap.remove(entry.getKey());
+            }
+        }
 	}
 
 	/**
@@ -612,12 +607,9 @@ public class ProgramTreePlugin extends ProgramPlugin
 	 * fragment was moved; update all the view maps.
 	 */
 	void fragmentMoved() {
-		Iterator<String> iter = providerMap.keySet().iterator();
-		while (iter.hasNext()) {
-			String treeName = iter.next();
-			TreeViewProvider provider = providerMap.get(treeName);
-			provider.notifyListeners();
-		}
+        for (TreeViewProvider provider : providerMap.values()) {
+            provider.notifyListeners();
+        }
 	}
 
 	/**

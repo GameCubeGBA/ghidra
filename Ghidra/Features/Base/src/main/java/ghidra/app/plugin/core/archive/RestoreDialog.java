@@ -338,7 +338,7 @@ public class RestoreDialog extends DialogComponentProvider {
 	private GhidraFileChooser createFileChooser(String extension, String desc,
 			String filePathName) {
 		String exampleExtension = extension;
-		long lastIndex = extension.lastIndexOf(".");
+		long lastIndex = extension.lastIndexOf('.');
 		if (lastIndex >= 0) {
 			exampleExtension = extension.substring((int) (lastIndex + 1));
 		}

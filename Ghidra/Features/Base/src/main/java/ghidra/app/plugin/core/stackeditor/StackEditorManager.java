@@ -79,13 +79,12 @@ public class StackEditorManager implements EditorListener {
 	 * @return the stack frame editor provider or null if it isn't being edited.
 	 */
 	StackEditorProvider getProvider(Program program, String functionName) {
-		Iterator<Function> iter = editorMap.keySet().iterator();
-		while (iter.hasNext()) {
-			Function function = iter.next();
-			if (program == function.getProgram() && function.getName().equals(functionName)) {
-				return editorMap.get(function);
-			}
-		}
+        for (Map.Entry<Function, StackEditorProvider> entry : editorMap.entrySet()) {
+            Function function = entry.getKey();
+            if (program == function.getProgram() && function.getName().equals(functionName)) {
+                return entry.getValue();
+            }
+        }
 		return null;
 	}
 
@@ -122,19 +121,17 @@ public class StackEditorManager implements EditorListener {
 	 */
 	private boolean checkEditors(Program program) {
 
-		Iterator<Function> iter = editorMap.keySet().iterator();
-		while (iter.hasNext()) {
-			Function function = iter.next();
-			if (program == null || function.getProgram() == program) {
-				StackEditorProvider editor = editorMap.get(function);
-				editor.show();
-				if (editor.needsSave()) {
-					if (!editor.checkForSave(true)) {
-						return false;
-					}
-				}
-			}
-		}
+        for (Map.Entry<Function, StackEditorProvider> entry : editorMap.entrySet()) {
+            if (program == null || entry.getKey().getProgram() == program) {
+                StackEditorProvider editor = entry.getValue();
+                editor.show();
+                if (editor.needsSave()) {
+                    if (!editor.checkForSave(true)) {
+                        return false;
+                    }
+                }
+            }
+        }
 		return true;
 	}
 

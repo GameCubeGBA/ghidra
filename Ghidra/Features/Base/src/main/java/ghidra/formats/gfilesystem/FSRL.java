@@ -135,7 +135,7 @@ public class FSRL {
 		String proto = partStr.substring(0, colonSlashSlash);
 		String path = partStr.substring(colonSlashSlash + 3);
 
-		int paramStart = path.indexOf("?");
+		int paramStart = path.indexOf('?');
 		String md5 = null;
 		if (paramStart >= 0) {
 			String params = path.substring(paramStart + 1);

@@ -149,14 +149,12 @@ public class SoftCacheMap<K, V> implements Map<K, V> {
 	 */
 	@Override
 	public void putAll(Map<? extends K, ? extends V> t) {
-		Iterator<? extends K> it = t.keySet().iterator();
-		while (it.hasNext()) {
-			K key = it.next();
-			V value = t.get(key);
-			if (value != null) {
-				put(key, value);
-			}
-		}
+        for (Entry<? extends K, ? extends V> entry : t.entrySet()) {
+            V value = entry.getValue();
+            if (value != null) {
+                put(entry.getKey(), value);
+            }
+        }
 	}
 
 	/**

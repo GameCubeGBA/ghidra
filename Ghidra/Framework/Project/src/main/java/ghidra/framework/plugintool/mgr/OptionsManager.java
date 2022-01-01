@@ -114,12 +114,10 @@ public class OptionsManager implements OptionsService, OptionsChangeListener {
 	public ToolOptions[] getOptions() {
 		ToolOptions[] opt = new ToolOptions[optionsMap.size()];
 		int idx = 0;
-		Iterator<String> iter = optionsMap.keySet().iterator();
-		while (iter.hasNext()) {
-			String key = iter.next();
-			opt[idx] = optionsMap.get(key);
-			++idx;
-		}
+        for (ToolOptions toolOptions : optionsMap.values()) {
+            opt[idx] = toolOptions;
+            ++idx;
+        }
 		Arrays.sort(opt, new OptionsComparator());
 		return opt;
 	}
@@ -131,14 +129,11 @@ public class OptionsManager implements OptionsService, OptionsChangeListener {
 	 */
 	public void deregisterOwner(Plugin ownerPlugin) {
 		List<String> deleteList = new ArrayList<>();
-		Iterator<String> iter = optionsMap.keySet().iterator();
-		while (iter.hasNext()) {
-			String key = iter.next();
-			ToolOptions opt = optionsMap.get(key);
-			if (opt.getOptionNames().isEmpty()) {
-				deleteList.add(opt.getName());
-			}
-		}
+        for (ToolOptions opt : optionsMap.values()) {
+            if (opt.getOptionNames().isEmpty()) {
+                deleteList.add(opt.getName());
+            }
+        }
 		removeUnusedOptions(deleteList);
 	}
 
@@ -149,14 +144,11 @@ public class OptionsManager implements OptionsService, OptionsChangeListener {
 	 */
 	public Element getConfigState() {
 		Element root = new Element("OPTIONS");
-		Iterator<String> iter = optionsMap.keySet().iterator();
-		while (iter.hasNext()) {
-			String key = iter.next();
-			ToolOptions opt = optionsMap.get(key);
-			if (hasNonDefaultValues(opt)) {
-				root.addContent(opt.getXmlRoot(false));
-			}
-		}
+        for (ToolOptions opt : optionsMap.values()) {
+            if (hasNonDefaultValues(opt)) {
+                root.addContent(opt.getXmlRoot(false));
+            }
+        }
 		return root;
 	}
 
@@ -173,15 +165,12 @@ public class OptionsManager implements OptionsService, OptionsChangeListener {
 	public void removeUnusedOptions() {
 		// 1st clean up any unused options before saving...
 		List<String> deleteList = new ArrayList<>();
-		Iterator<String> iter = optionsMap.keySet().iterator();
-		while (iter.hasNext()) {
-			String key = iter.next();
-			ToolOptions opt = optionsMap.get(key);
-			opt.removeUnusedOptions();
-			if (opt.getOptionNames().isEmpty()) {
-				deleteList.add(opt.getName());
-			}
-		}
+        for (ToolOptions opt : optionsMap.values()) {
+            opt.removeUnusedOptions();
+            if (opt.getOptionNames().isEmpty()) {
+                deleteList.add(opt.getName());
+            }
+        }
 		removeUnusedOptions(deleteList);
 	}
 

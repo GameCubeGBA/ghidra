@@ -37,13 +37,14 @@ public class DbgListModulesCommand extends AbstractDbgCommand<Map<String, DbgMod
 	public Map<String, DbgModule> complete(DbgPendingCommand<?> pending) {
 		Map<String, DbgModule> modules = process.getKnownModules();
 		Set<String> cur = modules.keySet();
-		for (String id : updatedModules.keySet()) {
-			if (cur.contains(id)) {
+		for (Map.Entry<String, DebugModule> entry : updatedModules.entrySet()) {
+            String id = entry.getKey();
+            if (cur.contains(id)) {
 				continue; // Do nothing, we're in sync
 			}
 			// Need to create the thread as if we receive =thread-created
 			Msg.warn(this, "Resync: Was missing module: " + id);
-			DebugModuleInfo info = moduleInfo.get(updatedModules.get(id));
+			DebugModuleInfo info = moduleInfo.get(entry.getValue());
 			DbgModuleImpl module = new DbgModuleImpl(manager, process, info);
 			module.add();
 		}

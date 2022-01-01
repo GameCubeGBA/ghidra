@@ -119,9 +119,8 @@ public class AnchorManager {
 	}
 
 	private void cleanupDuplicateAnchors() {
-		Set<String> keySet = duplicateAnchorsById.keySet();
-		for (String id : keySet) {
-			List<AnchorDefinition> list = duplicateAnchorsById.get(id);
+        for (Map.Entry<String, List<AnchorDefinition>> entry : duplicateAnchorsById.entrySet()) {
+			List<AnchorDefinition> list = entry.getValue();
 			for (Iterator<AnchorDefinition> iterator = list.iterator(); iterator.hasNext();) {
 				AnchorDefinition anchorDefinition = iterator.next();
 				if (anchorDefinition.getLineNumber() < 0) {
@@ -134,7 +133,7 @@ public class AnchorManager {
 			// there are not really any duplicate definitions, so cleanup the list
 			if (list.size() == 1) {
 				list.clear();
-				duplicateAnchorsById.remove(id);
+				duplicateAnchorsById.remove(entry.getKey());
 			}
 		}
 	}

@@ -152,7 +152,7 @@ public class FieldUtils {
 			return 0;
 		}
 
-		int whiteSpacePosition = text.lastIndexOf(" ", wrapPosition - 1);
+		int whiteSpacePosition = text.lastIndexOf(' ', wrapPosition - 1);
 		if (whiteSpacePosition >= 0) {
 			return whiteSpacePosition;
 		}
