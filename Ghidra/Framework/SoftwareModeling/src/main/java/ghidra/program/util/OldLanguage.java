@@ -351,8 +351,8 @@ class OldLanguage implements Language {
 			throw new SAXException(
 				"Missing required " + element.getName() + " '" + name + "' attribute");
 		}
-		boolean val = "yes".equalsIgnoreCase(valStr) | "true".equalsIgnoreCase(valStr);
-		if (!val && !"no".equalsIgnoreCase(valStr) & !"false".equalsIgnoreCase(valStr)) {
+		boolean val = "yes".equalsIgnoreCase(valStr) || "true".equalsIgnoreCase(valStr);
+		if (!val && !"no".equalsIgnoreCase(valStr) && !"false".equalsIgnoreCase(valStr)) {
 			throw new SAXException(
 				"invalid boolean attribute value " + name + "=\"" + valStr + "\"");
 		}

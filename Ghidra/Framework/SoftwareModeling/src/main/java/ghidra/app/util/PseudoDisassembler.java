@@ -739,7 +739,7 @@ public class PseudoDisassembler {
 							// if jump target is the same as the fallthru
 							// Instructions with delay slots are allowed.
 							if (fallThru != null &&
-								address.equals(fallThru) & !instr.getPrototype().hasDelaySlots()) {
+                                    address.equals(fallThru) && !instr.getPrototype().hasDelaySlots()) {
 								return false;
 							}
 							// if this code jumps to an existing function, allow it
@@ -837,7 +837,7 @@ public class PseudoDisassembler {
 			if (program != null) {
 				func = program.getFunctionManager().getFunctionAt(flows[0]);
 			}
-		} else if (flowType.isComputed() & !flowType.isConditional()) {
+		} else if (flowType.isComputed() && !flowType.isConditional()) {
 			for (int opIndex = 0; opIndex < instr.getNumOperands(); opIndex++) {
 				RefType operandRefType = instr.getOperandRefType(opIndex);
 				if (operandRefType.isIndirect()) {
