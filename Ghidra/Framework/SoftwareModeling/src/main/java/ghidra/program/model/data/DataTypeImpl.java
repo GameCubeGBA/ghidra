@@ -17,6 +17,7 @@ package ghidra.program.model.data;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Consumer;
@@ -126,7 +127,7 @@ public abstract class DataTypeImpl extends AbstractDataType {
 	}
 
 	@Override
-	public DataType[] getParents() {
+	public Collection<DataType> getParents() {
 		List<DataType> parents = new ArrayList<>();
 		Iterator<WeakReference<DataType>> iterator = parentList.iterator();
 		while (iterator.hasNext()) {
@@ -139,8 +140,7 @@ public abstract class DataTypeImpl extends AbstractDataType {
 				parents.add(dataType);
 			}
 		}
-		DataType[] array = new DataType[parents.size()];
-		return parents.toArray(array);
+		return parents;
 	}
 
 	/**

@@ -532,8 +532,12 @@ public interface DataTypeManager {
 
 	/**
 	 * Returns the data types within this data type manager that contain the specified data type.
+	 * The specified dataType must belong to this datatype manager.  An empty set will be
+	 * returned for unsupported datatype instances.
 	 * @param dataType the data type
 	 * @return a set of data types that contain the specified data type.
+	 * @deprecated the method {@link DataType#getParents()} should be used instead.
+	 * Use of {@link Set} implementations for containing DataTypes is also inefficient.
 	 */
 	Set<DataType> getDataTypesContaining(DataType dataType);
 }

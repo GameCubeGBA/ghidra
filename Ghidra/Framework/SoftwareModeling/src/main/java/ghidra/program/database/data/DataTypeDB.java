@@ -463,10 +463,8 @@ abstract class DataTypeDB extends DatabaseObject implements DataType {
 	}
 
 	@Override
-	public DataType[] getParents() {
-		List<DataType> parents = dataMgr.getParentDataTypes(key);
-		DataType[] array = new DataType[parents.size()];
-		return parents.toArray(array);
+	public Collection<DataType> getParents() {
+		return dataMgr.getParentDataTypes(key);
 	}
 
 	@Override
