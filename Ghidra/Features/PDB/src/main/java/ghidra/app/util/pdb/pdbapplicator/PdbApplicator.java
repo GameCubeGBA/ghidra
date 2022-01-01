@@ -1433,8 +1433,8 @@ public class PdbApplicator {
 		try {
 			Namespace namespace = program.getGlobalNamespace();
 			if (symbolPathString.startsWith(THUNK_NAME_PREFIX)) {
-				symbolPathString = symbolPathString.substring(THUNK_NAME_PREFIX.length(),
-					symbolPathString.length());
+				symbolPathString = symbolPathString.substring(THUNK_NAME_PREFIX.length()
+                );
 			}
 			SymbolPath symbolPath = new SymbolPath(symbolPathString);
 			symbolPath = symbolPath.replaceInvalidChars();
@@ -1567,8 +1567,8 @@ public class PdbApplicator {
 		try {
 			Namespace namespace = program.getGlobalNamespace();
 			if (symbolPathString.startsWith(THUNK_NAME_PREFIX)) {
-				symbolPathString = symbolPathString.substring(THUNK_NAME_PREFIX.length(),
-					symbolPathString.length());
+				symbolPathString = symbolPathString.substring(THUNK_NAME_PREFIX.length()
+                );
 			}
 			SymbolPath symbolPath = new SymbolPath(symbolPathString);
 			symbolPath = symbolPath.replaceInvalidChars();

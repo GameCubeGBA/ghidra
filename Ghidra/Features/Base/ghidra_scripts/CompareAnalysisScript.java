@@ -142,7 +142,7 @@ public class CompareAnalysisScript extends GhidraScript {
 		// dump the info
 		int total = instCount + dataCount;
 		if (numPossibleDis != 0) {
-			float coverage = (float) total / (float) numPossibleDis;
+			float coverage = (float) total / numPossibleDis;
 //    	Msg.info(this,"execSetLen = " + numPossibleDis);
 //    	Msg.info(this,"MyExecSetLen = " + myExecSetLen);
 //    	Msg.info(this,"NumInsts = " + instCount);
@@ -389,14 +389,10 @@ public class CompareAnalysisScript extends GhidraScript {
 
 	boolean isString(String mnemonic) {
 
-		if (mnemonic.equals(new String("ds")) || mnemonic.equals(new String("unicode")) ||
-			mnemonic.equals(new String("p_unicode")) || mnemonic.equals(new String("p_string")) ||
-			mnemonic.equals(new String("p_string255")) || mnemonic.equals(new String("mbcs"))) {
-
-			return true;
-		}
-		return false;
-	}
+        return mnemonic.equals("ds") || mnemonic.equals("unicode") ||
+                mnemonic.equals("p_unicode") || mnemonic.equals("p_string") ||
+                mnemonic.equals("p_string255") || mnemonic.equals("mbcs");
+    }
 
 	boolean isSwitch(Symbol[] syms, String name) {
 		for (Symbol sym : syms) {

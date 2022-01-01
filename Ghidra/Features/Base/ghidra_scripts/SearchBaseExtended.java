@@ -191,8 +191,8 @@ public class SearchBaseExtended extends GhidraScript {
 		//Applies the filters provided through the controlList object to the instructions provided through the mnemonics and ops structures.
 		MaskValueCase finalSearchString = getFinalMaskAndValue(mnemonics, ops, controlList);
 
-		String valueString = new String();
-		String maskString = new String();
+		String valueString = "";
+		String maskString = "";
 
 		for (byte element : finalSearchString.value) {
 			valueString = valueString.concat(toHexString(element, true, false)) + " ";

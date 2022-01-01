@@ -80,13 +80,13 @@ public class NamespaceUtils {
 	 * @return namespace path excluding any library name
 	 */
 	public static String getNamespacePathWithoutLibrary(Namespace namespace) {
-		String str = new String();
+		StringBuilder str = new StringBuilder("");
 		while (namespace != null && !(namespace instanceof GlobalNamespace) &&
 			!(namespace instanceof Library)) {
-			str = namespace.getName() + Namespace.DELIMITER + str;
+			str.insert(0, namespace.getName() + Namespace.DELIMITER);
 			namespace = namespace.getParentNamespace();
 		}
-		return str;
+		return str.toString();
 	}
 
 	/**

@@ -88,7 +88,7 @@ public class DescriptorDecoder {
 			throw new IllegalArgumentException("Invalid method descriptor: " + methodDescriptor);
 		}
 		String returnDescriptor =
-			methodDescriptor.substring(closeParenIndex + 1, methodDescriptor.length());
+			methodDescriptor.substring(closeParenIndex + 1);
 		return DescriptorDecoder.getComputationalCategoryOfDescriptor(returnDescriptor);
 	}
 
@@ -106,7 +106,7 @@ public class DescriptorDecoder {
 			throw new IllegalArgumentException("Invalid method descriptor: " + methodDescriptor);
 		}
 		String returnDescriptor =
-			methodDescriptor.substring(closeParenIndex + 1, methodDescriptor.length());
+			methodDescriptor.substring(closeParenIndex + 1);
 		if (returnDescriptor.startsWith("[")) {
 			return getPointerType(returnDescriptor, dtManager);
 		}
@@ -200,7 +200,7 @@ public class DescriptorDecoder {
 
 		//now add the the name of the return type
 		String returnType =
-			methodDescriptor.substring(closeParenIndex + 1, methodDescriptor.length());
+			methodDescriptor.substring(closeParenIndex + 1);
 		typeNames.add(getTypeNameFromDescriptor(returnType, fullyQualifiedName, replaceSlash));
 		return typeNames;
 	}
@@ -223,7 +223,7 @@ public class DescriptorDecoder {
 			}
 			int lastSlash = name.lastIndexOf('/');
 			//lastSlash+1 so the slash is not included in the name
-			return name.substring(lastSlash + 1, name.length());
+			return name.substring(lastSlash + 1);
 		}
 		if (descriptor.startsWith("[")) {
 			int dimension = descriptor.lastIndexOf('[') + 1;

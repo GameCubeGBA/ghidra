@@ -65,16 +65,16 @@ public class DirData {
 		date = nizer.nextToken();
 		time = nizer.nextToken();
 		String dir = nizer.nextToken();
-		boolean isDirectory = dir.toLowerCase().equals("<dir>");
+		boolean isDirectory = "<dir>".equalsIgnoreCase(dir);
 
 		if (!isDirectory) {
-			String numStr = "";
+			StringBuilder numStr = new StringBuilder();
 			for (int i = 0; i < dir.length(); i++) {
 				if (dir.charAt(i) != ',') {
-					numStr += dir.charAt(i);
+					numStr.append(dir.charAt(i));
 				}
 			}
-			size = Integer.valueOf(numStr);
+			size = Integer.valueOf(numStr.toString());
 		}
 
 		name = nizer.nextToken();

@@ -1829,7 +1829,7 @@ public abstract class GhidraScript extends FlatProgramAPI {
 	private String join(String... input) {
 
 		char separator = ' ';
-		StringBuilder buffy = new StringBuilder("");
+		StringBuilder buffy = new StringBuilder();
 		for (String s : input) {
 			if (s == null) {
 				continue;

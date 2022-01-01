@@ -149,14 +149,14 @@ public class MDBaseTestConfiguration {
 			header.append(printHeaderTens);
 			remainingChars -= printHeaderTens.length();
 		}
-		header.append(printHeaderTens.substring(0, remainingChars));
+		header.append(printHeaderTens, 0, remainingChars);
 		remainingChars = length;
 		header.append("\n         ");
 		while (remainingChars > printHeaderOnes.length()) {
 			header.append(printHeaderOnes);
 			remainingChars -= printHeaderOnes.length();
 		}
-		header.append(printHeaderOnes.substring(0, remainingChars));
+		header.append(printHeaderOnes, 0, remainingChars);
 		return header.toString();
 	}
 

@@ -30,7 +30,7 @@ import ghidra.util.HelpLocation;
 
 public interface Options {
 	char DELIMITER = '.';
-	String DELIMITER_STRING = new String(new char[] { DELIMITER });
+	String DELIMITER_STRING = String.valueOf(DELIMITER);
 	String ILLEGAL_DELIMITER = DELIMITER_STRING + DELIMITER_STRING;
 
 	/**

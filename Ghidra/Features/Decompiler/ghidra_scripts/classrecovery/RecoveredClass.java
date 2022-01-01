@@ -90,7 +90,7 @@ public class RecoveredClass {
 	private boolean hasExistingClassStructure = false;
 	private Function vbaseDestructor = null;
 
-	private String shortenedTemplateName = new String();
+	private String shortenedTemplateName = "";
 
 	private static final int NONE = -1;
 

@@ -1284,7 +1284,7 @@ public abstract class ProcessorEmulatorTestAdapter extends TestCase implements E
 				continue;
 			}
 			Symbol s =
-				SymbolUtilities.getExpectedLabelOrFunctionSymbol(program, name, m -> m.toString()); // error ignored
+				SymbolUtilities.getExpectedLabelOrFunctionSymbol(program, name, m -> m.toString()); // TODO: Jetbrains suggest wrong removal of toString. Also, error ignored
 			if (s != null) {
 				return s;
 			}

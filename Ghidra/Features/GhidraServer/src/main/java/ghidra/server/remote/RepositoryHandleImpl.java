@@ -517,7 +517,7 @@ public class RepositoryHandleImpl extends UnicastRemoteObject implements RemoteR
 			RemoteBufferFileImpl.getOpenFileUsers(repository.getName(),
 				getPathname(parentPath, itemName));
 		if (openFileUsers != null) {
-			StringBuffer buf = new StringBuffer("");
+			StringBuffer buf = new StringBuffer();
 			for (String user : openFileUsers) {
 				if (buf.length() != 0) {
 					buf.append(", ");

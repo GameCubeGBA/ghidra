@@ -301,7 +301,7 @@ public class AbstractCreateDataTypeModelTest extends AbstractGenericTest {
 		if (indexOf != 0) {
 			throw new IllegalArgumentException("Hex address strings must start with 0x.");
 		}
-		String hexDigits = hexAddress.substring(2, hexAddress.length());
+		String hexDigits = hexAddress.substring(2);
 		int hexLength = hexDigits.length();
 		if (hexLength > numHexDigits) {
 			throw new IllegalArgumentException(

@@ -74,7 +74,7 @@ public class AgentWindow extends JFrame implements WindowListener, LogListener {
 		Swing.runIfSwingOrRunLater(() -> {
 			String allText = logArea.getText() + fMessage + "\n";
 			logArea.setText(
-				allText.substring(Math.max(0, allText.length() - MAX_LOG_CHARS), allText.length()));
+				allText.substring(Math.max(0, allText.length() - MAX_LOG_CHARS)));
 			JScrollBar vScroll = logScroll.getVerticalScrollBar();
 			vScroll.setValue(vScroll.getMaximum());
 		});

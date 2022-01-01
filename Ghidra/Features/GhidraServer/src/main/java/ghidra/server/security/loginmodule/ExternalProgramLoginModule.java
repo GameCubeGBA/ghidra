@@ -274,7 +274,7 @@ public class ExternalProgramLoginModule implements LoginModule {
 				.sorted()
 				.collect(Collectors.toList());
 		List<String> cmdArrayValues = new ArrayList<>();
-		cmdArrayValues.add(externalProgram.toString());
+		cmdArrayValues.add(externalProgram);
 		for (String argKey : argKeys) {
 			String val = options.get(argKey).toString();
 			cmdArrayValues.add(val);

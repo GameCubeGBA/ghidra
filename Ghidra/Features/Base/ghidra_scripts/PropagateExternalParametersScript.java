@@ -59,72 +59,65 @@ public class PropagateExternalParametersScript extends GhidraScript {
 		// use the 'results' to propagate param info to the local variables, data, and params of
 		// the calling function
 		//println("Processing propagation results - count: " + results.size());
-		for (int i = 0; i < results.size(); i++) {
-			PushedParamInfo ppi = results.get(i);
-			Instruction instr = listing.getInstructionAt(ppi.getAddress());
-			int opType = instr.getOperandType(0);
+        for (PushedParamInfo ppi : results) {
+            Instruction instr = listing.getInstructionAt(ppi.getAddress());
+            int opType = instr.getOperandType(0);
 
-			if (!instr.getOperandRefType(0).isData()) {
-				continue;
-			}
+            if (!instr.getOperandRefType(0).isData()) {
+                continue;
+            }
 
-			//If operand of pushed parameter points to data make a symbol and comment at that location
-			if (((opType & OperandType.ADDRESS) != 0) && (((opType & OperandType.DATA) != 0)) ||
-				((opType & OperandType.SCALAR) != 0) || ((opType & OperandType.DYNAMIC) != 0)) {
-				Reference[] refs = listing.getCodeUnitAt(ppi.getAddress()).getOperandReferences(0);
+            //If operand of pushed parameter points to data make a symbol and comment at that location
+            if (((opType & OperandType.ADDRESS) != 0) && (((opType & OperandType.DATA) != 0)) ||
+                    ((opType & OperandType.SCALAR) != 0) || ((opType & OperandType.DYNAMIC) != 0)) {
+                Reference[] refs = listing.getCodeUnitAt(ppi.getAddress()).getOperandReferences(0);
 
-				if ((refs.length > 0) && (refs[0].isMemoryReference())) {
-					Address dataAddress = refs[0].getToAddress();
+                if ((refs.length > 0) && (refs[0].isMemoryReference())) {
+                    Address dataAddress = refs[0].getToAddress();
 
-					DataType dt = null;
-					dt = ppi.getDataType();
-					Data data = getDataAt(dataAddress);
-					boolean isString = false;
-					if ((data != null) && data.hasStringValue()) {
-						isString = true;
-					}
+                    DataType dt = null;
+                    dt = ppi.getDataType();
+                    Data data = getDataAt(dataAddress);
+                    boolean isString = (data != null) && data.hasStringValue();
 
-					String symbolName = new String(ppi.getName() + "_" + dataAddress.toString());
-					String newComment = new String(
-						ppi.getName() + " parameter of " + ppi.getCalledFunctionName() + "\n");
+                    String symbolName = ppi.getName() + "_" + dataAddress.toString();
+                    String newComment = ppi.getName() + " parameter of " + ppi.getCalledFunctionName() + "\n";
 
-					List<Symbol> symbols = getSymbols(symbolName, null);
+                    List<Symbol> symbols = getSymbols(symbolName, null);
 
-					if (symbols.isEmpty() && !isString) {
-						createLabel(dataAddress, symbolName, true, SourceType.USER_DEFINED);
-					}
+                    if (symbols.isEmpty() && !isString) {
+                        createLabel(dataAddress, symbolName, true, SourceType.USER_DEFINED);
+                    }
 
-					String currentComment = getPlateComment(dataAddress);
-					if (currentComment == null) {
-						setPlateComment(dataAddress, newComment);
-					}
-					else if (!currentComment.contains(ppi.getCalledFunctionName())) {
-						setPlateComment(dataAddress, currentComment + newComment);
-					}
+                    String currentComment = getPlateComment(dataAddress);
+                    if (currentComment == null) {
+                        setPlateComment(dataAddress, newComment);
+                    } else if (!currentComment.contains(ppi.getCalledFunctionName())) {
+                        setPlateComment(dataAddress, currentComment + newComment);
+                    }
 
-					if ((data != null) &&
-						(listing.getCodeUnitAt(dataAddress)
-								.getMnemonicString()
-								.startsWith(
-									"undefined"))) {
-						clearListing(dataAddress);
-					}
-					if (listing.isUndefined(dataAddress, dataAddress.add(dt.getLength() - 1))) {
-						try {
-							createData(dataAddress, dt);
-							printf("Data Created at %s : %s ( %s )\n", dataAddress.toString(),
-								newComment.replace("\n", ""), ppi.getAddress().toString());
-						}
-						catch (Exception e) {
-							printf("Error making data: %s", e.toString());
-						}
-					}
+                    if ((data != null) &&
+                            (listing.getCodeUnitAt(dataAddress)
+                                    .getMnemonicString()
+                                    .startsWith(
+                                            "undefined"))) {
+                        clearListing(dataAddress);
+                    }
+                    if (listing.isUndefined(dataAddress, dataAddress.add(dt.getLength() - 1))) {
+                        try {
+                            createData(dataAddress, dt);
+                            printf("Data Created at %s : %s ( %s )\n", dataAddress.toString(),
+                                    newComment.replace("\n", ""), ppi.getAddress().toString());
+                        } catch (Exception e) {
+                            printf("Error making data: %s", e.toString());
+                        }
+                    }
 
-				}
+                }
 
-			}
+            }
 
-		}
+        }
 
 	} // end of run
 
@@ -141,7 +134,7 @@ public class PropagateExternalParametersScript extends GhidraScript {
 				continue;
 			}
 
-			if ((refMnemonic.equals(new String("JMP")) && (calledFromFunc.isThunk()))) {
+			if ((refMnemonic.equals("JMP") && (calledFromFunc.isThunk()))) {
 				//println(calledFromFunc.getName() + " is a thunk. Refs are:");
 				ReferenceIterator tempIter = refMan.getReferencesTo(calledFromFunc.getEntryPoint());
 				while (tempIter.hasNext()) {
@@ -150,7 +143,7 @@ public class PropagateExternalParametersScript extends GhidraScript {
 					String thunkRefMnemonic =
 						listing.getCodeUnitAt(thunkRefAddr).getMnemonicString();
 					Function thunkRefFunc = listing.getFunctionContaining(thunkRefAddr);
-					if ((thunkRefMnemonic.equals(new String("CALL")) && (thunkRefFunc != null))) {
+					if ((thunkRefMnemonic.equals("CALL") && (thunkRefFunc != null))) {
 						CodeUnitIterator cuIt =
 							getCodeUnitsFromFunctionStartToRef(thunkRefFunc, thunkRefAddr);
 						if (checkEnoughPushes(cuIt, params.length)) {
@@ -163,7 +156,7 @@ public class PropagateExternalParametersScript extends GhidraScript {
 					}
 				}
 			}
-			else if ((refMnemonic.equals(new String("CALL")))) {// not a thunk
+			else if ((refMnemonic.equals("CALL"))) {// not a thunk
 
 				CodeUnitIterator cuIt = getCodeUnitsFromFunctionStartToRef(calledFromFunc, refAddr);
 				if (checkEnoughPushes(cuIt, params.length)) {
@@ -250,19 +243,16 @@ public class PropagateExternalParametersScript extends GhidraScript {
 			if (numSkips > 0) {
 				numSkips--;
 			}
-			else if (cu.getMnemonicString().equals(new String("CALL"))) {
+			else if (cu.getMnemonicString().equals("CALL")) {
 				numParams += numParams(cu);
 			}
-			else if (cu.getMnemonicString().equals(new String("PUSH"))) {
+			else if (cu.getMnemonicString().equals("PUSH")) {
 				numPushes++;
 			}
 		}
 
-		if (numPushes >= numParams) {
-			return true;
-		}
-		return false; // not enough params between ref and top of function
-	}
+        return numPushes >= numParams;// not enough params between ref and top of function
+    }
 
 	void propogateParams(Parameter[] params, CodeUnitIterator cuIt, String extFuncName) {
 
@@ -285,11 +275,11 @@ public class PropagateExternalParametersScript extends GhidraScript {
 				hasBranch = true;
 			}
 
-			if (cu.getMnemonicString().equals(new String("CALL"))) {
+			if (cu.getMnemonicString().equals("CALL")) {
 				numSkips += numParams(cu);
 				//printf("numSkips = %d", numSkips);
 			}
-			else if (cu.getMnemonicString().equals(new String("PUSH"))) {
+			else if (cu.getMnemonicString().equals("PUSH")) {
 				if (numSkips > 0) {
 					numSkips--;
 				}

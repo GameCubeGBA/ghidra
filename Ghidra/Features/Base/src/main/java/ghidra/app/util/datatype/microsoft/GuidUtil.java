@@ -181,7 +181,7 @@ public class GuidUtil {
 					version = left.substring(0, sppos);
 				}
 				else {
-					version = left.substring(0);
+					version = left;
 				}
 				left = left.substring(version.length());
 			}

@@ -273,10 +273,10 @@ abstract class AbstractPeDebugLoader extends AbstractLibrarySupportLoader {
 						return;
 					}
 					if (offsets[j] == 0) {
-						System.out.println("");
+						System.out.println();
 					}
 					if (offsets[j] == 1) {
-						System.out.println("");
+						System.out.println();
 					}
 					if (offsets[j] > 0) {
 						addLineComment(addr.add(Conv.intToLong(offsets[j])),

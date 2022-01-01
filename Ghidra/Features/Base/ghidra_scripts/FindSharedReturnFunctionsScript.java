@@ -133,7 +133,7 @@ public class FindSharedReturnFunctionsScript extends GhidraScript {
 			@Override
 			public String getColumnValue(AddressableRowObject rowObject) {
 				SharedReturnLocations noReturnLocations = (SharedReturnLocations) rowObject;
-				return noReturnLocations.getStatus().toString();
+				return noReturnLocations.getStatus();
 			}
 		};
 

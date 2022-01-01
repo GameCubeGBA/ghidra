@@ -140,7 +140,7 @@ public class GListCellRenderer<E> extends AbstractGCellRenderer implements ListC
 		FontMetrics metrics = getFontMetrics(getFont());
 		int maxWidth = minWidth;
 		for (E item : items) {
-			String text = getItemText(item).toString();
+			String text = getItemText(item);
 			maxWidth = Math.max(maxWidth, metrics.stringWidth(text));
 		}
 		return new Dimension(maxWidth, Math.max(metrics.getHeight(), minHeight));

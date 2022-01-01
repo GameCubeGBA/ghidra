@@ -37,15 +37,15 @@ import ghidra.xml.XmlPullParser;
  * May contain links back to pcode object
  */
 public class ClangToken implements ClangNode {
-	public final static int KEYWORD_COLOR = 0;
-	public final static int TYPE_COLOR = 1;
-	public final static int FUNCTION_COLOR = 2;
-	public final static int COMMENT_COLOR = 3;
-	public final static int VARIABLE_COLOR = 4;
-	public final static int CONST_COLOR = 5;
-	public final static int PARAMETER_COLOR = 6;
-	public final static int GLOBAL_COLOR = 7;
-	public final static int DEFAULT_COLOR = 8;
+	public static final int KEYWORD_COLOR = 0;
+	public static final int TYPE_COLOR = 1;
+	public static final int FUNCTION_COLOR = 2;
+	public static final int COMMENT_COLOR = 3;
+	public static final int VARIABLE_COLOR = 4;
+	public static final int CONST_COLOR = 5;
+	public static final int PARAMETER_COLOR = 6;
+	public static final int GLOBAL_COLOR = 7;
+	public static final int DEFAULT_COLOR = 8;
 
 	private ClangNode parent;
 	private ClangLine lineparent;
@@ -165,8 +165,8 @@ public class ClangToken implements ClangNode {
 		list.add(this);
 	}
 
-	static public ClangToken buildToken(ClangNode par, XmlPullParser parser,
-			PcodeFactory pfactory) {
+	public static ClangToken buildToken(ClangNode par, XmlPullParser parser,
+                                        PcodeFactory pfactory) {
 		XmlElement node =
 			parser.start(ClangXML.VARIABLE, ClangXML.OP, ClangXML.SYNTAX, ClangXML.BREAK,
 				ClangXML.FUNCNAME, ClangXML.TYPE, ClangXML.COMMENT, ClangXML.LABEL, ClangXML.FIELD);
@@ -235,12 +235,10 @@ public class ClangToken implements ClangNode {
 		return DEFAULT_COLOR; // The default color
 	}
 
-	static public ClangToken buildSpacer(ClangNode par, int indent, String indentStr) {
-		String spacing = new String();
-		for (int i = 0; i < indent; ++i) {
-			spacing += indentStr;
-		}
-		return new ClangSyntaxToken(par, spacing);
+	public static ClangToken buildSpacer(ClangNode par, int indent, String indentStr) {
+		StringBuilder spacing = new StringBuilder("");
+		spacing.append(String.valueOf(indentStr).repeat(Math.max(0, indent)));
+		return new ClangSyntaxToken(par, spacing.toString());
 	}
 
 	@Override

@@ -145,7 +145,7 @@ public class FixupNoReturnFunctionsScript extends GhidraScript {
 			@Override
 			public String getColumnValue(AddressableRowObject rowObject) {
 				NoReturnLocations noReturnLocations = (NoReturnLocations) rowObject;
-				return noReturnLocations.getStatus().toString();
+				return noReturnLocations.getStatus();
 			}
 		};
 

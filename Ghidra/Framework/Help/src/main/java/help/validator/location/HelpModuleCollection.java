@@ -404,7 +404,7 @@ public class HelpModuleCollection implements TOCItemProvider {
 
 		@Override
 		public String toString() {
-			return path.toString();
+			return path;
 		}
 	}
 }

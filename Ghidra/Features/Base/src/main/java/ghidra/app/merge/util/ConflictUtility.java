@@ -225,7 +225,7 @@ public class ConflictUtility {
 				start = length;
 			}
 			else {
-				buf.append(text.substring(start, index));
+				buf.append(text, start, index);
 				buf.append("<br>");
 				start = index + 1;
 			}
