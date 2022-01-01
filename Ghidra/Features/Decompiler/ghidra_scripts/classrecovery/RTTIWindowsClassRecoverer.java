@@ -1372,7 +1372,7 @@ public class RTTIWindowsClassRecoverer extends RTTIClassRecoverer {
                 int vdisp = api.getInt(baseClassDescriptorAddress.add(16));
 
                 if (vbaseStructure.getComponentAt(vdisp) == null) {
-                    String classFieldName = new String();
+                    String classFieldName = "";
                     if (USE_SHORT_TEMPLATE_NAMES_IN_STRUCTURE_FIELDS &&
                             !baseClass.getShortenedTemplateName().isEmpty()) {
                         classFieldName = baseClass.getShortenedTemplateName();

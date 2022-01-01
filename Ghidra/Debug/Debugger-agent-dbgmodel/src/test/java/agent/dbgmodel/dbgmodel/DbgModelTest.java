@@ -266,9 +266,9 @@ public class DbgModelTest extends AbstractGhidraHeadlessIntegrationTest {
 				if (value.getKind().equals(ModelObjectKind.OBJECT_INTRINSIC)) {
 					desc += ":" + value.getIntrinsicValue();
 				}
-				if (!seen.contains(key.toString())) {
+				if (!seen.contains(key)) {
 					System.out.println(desc);
-					seen.add(key.toString());
+					seen.add(key);
 					enumerate(value, tab + " ");
 				}
 			}
@@ -710,11 +710,11 @@ public class DbgModelTest extends AbstractGhidraHeadlessIntegrationTest {
 				System.out.println("  Ctxt: " + module.getContext());
 				System.out.println(
 					"  Kind: " + SymbolKind.values()[module.getSymbolKind().ordinal()]);
-				System.out.println("  Load: " + module.getName().toString());
+				System.out.println("  Load: " + module.getName());
 				DebugHostModule1 containingModule = module.getContainingModule();
 				System.out.println("  CMod: " + containingModule);
 
-				System.out.println("   Img: " + module.getImageName(true).toString());
+				System.out.println("   Img: " + module.getImageName(true));
 				LOCATION base = module.getBaseLocation();
 				System.out.println("  Base: " + Long.toHexString(base.Offset.longValue()));
 				module.getVersion();
@@ -872,7 +872,7 @@ public class DbgModelTest extends AbstractGhidraHeadlessIntegrationTest {
 			sympath.getIntrinsicValue();
 			List<DebugHostModule1> modules2 = dbgmodel.getDebugHostModules();
 			for (DebugHostModule1 module : modules2) {
-				System.out.println(module.getName().toString());
+				System.out.println(module.getName());
 				System.out.println(module.getSymbolKind());
 
 				List<DebugSymbolId> symbol0 = client.getSymbols().getSymbolIdsByName("");

@@ -145,14 +145,14 @@ public class AssemblyThrasherDevScript extends GhidraScript {
 				PrintStream p = new PrintStream(buf);
 				e.printStackTrace(p);
 				bm.setBookmark(ins.getAddress(), BOOKMARK_FAIL, "Unfinished",
-					new String(buf.toByteArray()));
+                        buf.toString());
 			}
 			catch (Exception e) {
 				ByteArrayOutputStream buf = new ByteArrayOutputStream();
 				PrintStream p = new PrintStream(buf);
 				e.printStackTrace(p);
 				bm.setBookmark(ins.getAddress(), BOOKMARK_FAIL, "Severe Error",
-					new String(buf.toByteArray()));
+                        buf.toString());
 			}
 		}
 

@@ -65,7 +65,7 @@ public class DirData {
 		date = nizer.nextToken();
 		time = nizer.nextToken();
 		String dir = nizer.nextToken();
-		boolean isDirectory = "<dir>".equals(dir.toLowerCase());
+		boolean isDirectory = "<dir>".equalsIgnoreCase(dir);
 
 		if (!isDirectory) {
 			StringBuilder numStr = new StringBuilder();

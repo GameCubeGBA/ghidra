@@ -85,17 +85,17 @@ public class LaunchProperties {
 		StringBuilder sb = new StringBuilder();
 		List<String> vmargList = propertyMap.get(VMARGS);
 		if (vmargList != null) {
-			for (String arg : vmargList) {
+			vmargList.forEach(arg -> {
 				sb.append(arg);
 				sb.append(" ");
-			}
+			});
 		}
 		List<String> vmargPlatformList = propertyMap.get(VMARGS_PLATFORM);
 		if (vmargPlatformList != null) {
-			for (String arg : vmargPlatformList) {
+			vmargPlatformList.forEach(arg -> {
 				sb.append(arg);
 				sb.append(" ");
-			}
+			});
 		}
 		return sb.toString();
 	}
@@ -128,7 +128,7 @@ public class LaunchProperties {
 							"Error parsing line " + i + " of " + launchPropertiesFile, i);
 					}
 					String key = line.substring(0, equalsIndex).trim();
-					String value = line.substring(equalsIndex + 1, line.length()).trim();
+					String value = line.substring(equalsIndex + 1).trim();
                     List<String> valueList = map.computeIfAbsent(key, k -> new ArrayList<>());
                     if (!value.isEmpty()) {
 						valueList.add(value);

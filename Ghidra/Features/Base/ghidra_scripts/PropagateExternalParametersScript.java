@@ -80,9 +80,8 @@ public class PropagateExternalParametersScript extends GhidraScript {
                     Data data = getDataAt(dataAddress);
                     boolean isString = (data != null) && data.hasStringValue();
 
-                    String symbolName = new String(ppi.getName() + "_" + dataAddress.toString());
-                    String newComment = new String(
-                            ppi.getName() + " parameter of " + ppi.getCalledFunctionName() + "\n");
+                    String symbolName = ppi.getName() + "_" + dataAddress.toString();
+                    String newComment = ppi.getName() + " parameter of " + ppi.getCalledFunctionName() + "\n";
 
                     List<Symbol> symbols = getSymbols(symbolName, null);
 
@@ -135,7 +134,7 @@ public class PropagateExternalParametersScript extends GhidraScript {
 				continue;
 			}
 
-			if ((refMnemonic.equals(new String("JMP")) && (calledFromFunc.isThunk()))) {
+			if ((refMnemonic.equals("JMP") && (calledFromFunc.isThunk()))) {
 				//println(calledFromFunc.getName() + " is a thunk. Refs are:");
 				ReferenceIterator tempIter = refMan.getReferencesTo(calledFromFunc.getEntryPoint());
 				while (tempIter.hasNext()) {
@@ -144,7 +143,7 @@ public class PropagateExternalParametersScript extends GhidraScript {
 					String thunkRefMnemonic =
 						listing.getCodeUnitAt(thunkRefAddr).getMnemonicString();
 					Function thunkRefFunc = listing.getFunctionContaining(thunkRefAddr);
-					if ((thunkRefMnemonic.equals(new String("CALL")) && (thunkRefFunc != null))) {
+					if ((thunkRefMnemonic.equals("CALL") && (thunkRefFunc != null))) {
 						CodeUnitIterator cuIt =
 							getCodeUnitsFromFunctionStartToRef(thunkRefFunc, thunkRefAddr);
 						if (checkEnoughPushes(cuIt, params.length)) {
@@ -157,7 +156,7 @@ public class PropagateExternalParametersScript extends GhidraScript {
 					}
 				}
 			}
-			else if ((refMnemonic.equals(new String("CALL")))) {// not a thunk
+			else if ((refMnemonic.equals("CALL"))) {// not a thunk
 
 				CodeUnitIterator cuIt = getCodeUnitsFromFunctionStartToRef(calledFromFunc, refAddr);
 				if (checkEnoughPushes(cuIt, params.length)) {
@@ -244,10 +243,10 @@ public class PropagateExternalParametersScript extends GhidraScript {
 			if (numSkips > 0) {
 				numSkips--;
 			}
-			else if (cu.getMnemonicString().equals(new String("CALL"))) {
+			else if (cu.getMnemonicString().equals("CALL")) {
 				numParams += numParams(cu);
 			}
-			else if (cu.getMnemonicString().equals(new String("PUSH"))) {
+			else if (cu.getMnemonicString().equals("PUSH")) {
 				numPushes++;
 			}
 		}
@@ -276,11 +275,11 @@ public class PropagateExternalParametersScript extends GhidraScript {
 				hasBranch = true;
 			}
 
-			if (cu.getMnemonicString().equals(new String("CALL"))) {
+			if (cu.getMnemonicString().equals("CALL")) {
 				numSkips += numParams(cu);
 				//printf("numSkips = %d", numSkips);
 			}
-			else if (cu.getMnemonicString().equals(new String("PUSH"))) {
+			else if (cu.getMnemonicString().equals("PUSH")) {
 				if (numSkips > 0) {
 					numSkips--;
 				}

@@ -1045,7 +1045,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 			boolean insideBrackets = false;
 			int numOpenedBrackets = 0;
 			int index = 0;
-			String newCategoryName = new String();
+			String newCategoryName = "";
 			while (index < categoryName.length()) {
 				monitor.checkCanceled();
 
@@ -1191,7 +1191,7 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
                 // check for a simple internal to the template (ie just one item in it
                 // if that is the case then just keep the original name
                 if (containsSimpleTemplate(classWithSameShortName.getName())) {
-                    classWithSameShortName.addShortenedTemplatedName(new String());
+                    classWithSameShortName.addShortenedTemplatedName("");
                     classesWithSameShortnameIterator.remove();
                     classesToProcess.remove(classWithSameShortName);
                 }

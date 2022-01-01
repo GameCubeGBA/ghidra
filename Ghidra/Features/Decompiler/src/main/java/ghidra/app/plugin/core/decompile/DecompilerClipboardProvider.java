@@ -216,7 +216,7 @@ public class DecompilerClipboardProvider extends ByteCopier
 		int endPos = field.screenLocationToTextOffset(endRow, endColumn);
         buffer.append(" ".repeat(Math.max(0, startPos)));
 		if (startPos >= 0 && endPos >= startPos) {
-			buffer.append(field.getText().substring(startPos, endPos));
+			buffer.append(field.getText(), startPos, endPos);
 		}
 	}
 
@@ -239,7 +239,7 @@ public class DecompilerClipboardProvider extends ByteCopier
 		int endPos = field.screenLocationToTextOffset(endRow, endColumn);
 
 		if (startPos >= 0 && endPos >= startPos) {
-			buffer.append(field.getText().substring(startPos, endPos));
+			buffer.append(field.getText(), startPos, endPos);
 		}
 	}
 

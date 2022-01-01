@@ -41,8 +41,8 @@ public final class OdexConstants {
 	public static final boolean isOdexFile(ByteProvider provider) {
 		try {
 			String magic = new String(provider.readBytes(0, ODEX_MAGIC_LENGTH));
-			return ODEX_MAGIC_35.equals(new String(magic)) ||
-				ODEX_MAGIC_36.equals(new String(magic));
+			return ODEX_MAGIC_35.equals(magic) ||
+				ODEX_MAGIC_36.equals(magic);
 		}
 		catch (Exception e) {
 			// ignore

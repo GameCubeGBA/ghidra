@@ -389,7 +389,7 @@ public class SleighDebugLogger {
 		int index = str.indexOf('\n');
 		while (index >= 0) {
 			checkLineStart();
-			buffer.append(str.substring(0, index + 1));
+			buffer.append(str, 0, index + 1);
 			str = str.substring(index + 1);
 			atLineStart = true;
 			index = str.indexOf('\n');

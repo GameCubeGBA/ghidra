@@ -76,11 +76,11 @@ public class PdbByteWriterReaderTest extends AbstractGenericTest {
 		BigInteger numericValueTest7 = new BigInteger("789abcdef0123456", 16);
 		int numericCodeTest7 = 0x800a;
 
-		String stringTest1 = new String("abcd");
-		String stringTest2 = new String("efgh");
-		String stringTest3 = new String("ijkl");
-		String stringTest4 = new String("mnop");
-		String stringTest5 = new String("qrst");
+		String stringTest1 = "abcd";
+		String stringTest2 = "efgh";
+		String stringTest3 = "ijkl";
+		String stringTest4 = "mnop";
+		String stringTest5 = "qrst";
 
 		writer.putBytes(byteArrayTest1, byteArrayTest1.length);
 		writer.putUnsignedByte(byteValueTest1);

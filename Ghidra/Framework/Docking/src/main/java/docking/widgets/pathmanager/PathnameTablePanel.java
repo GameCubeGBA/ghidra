@@ -295,7 +295,7 @@ public class PathnameTablePanel extends JPanel {
 					fileExists = file.exists();
 				}
 
-				label.setText(pathName.toString());
+				label.setText(pathName);
 				Color fg = isSelected ? table.getSelectionForeground() : table.getForeground();
 				label.setForeground(!fileExists ? Color.RED : fg);
 

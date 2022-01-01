@@ -243,7 +243,7 @@ class StringDiffUtils {
 		StringBuilder buf = new StringBuilder(s.length());
 		for (StringDiff element : diffs) {
 			if (element.start > pos) {
-				buf.append(s.substring(pos, element.start));
+				buf.append(s, pos, element.start);
 				pos = element.start;
 			}
 

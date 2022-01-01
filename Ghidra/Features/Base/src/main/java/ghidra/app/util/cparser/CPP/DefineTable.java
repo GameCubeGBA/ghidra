@@ -516,7 +516,7 @@ public class DefineTable {
 			int end = endPos.get(i).intValue();
 			String value = subValue.get(i);
 
-			buf.append(substString.substring(startpos, begin));
+			buf.append(substString, startpos, begin);
 			buf.append(value);
 			startpos = end;
 		}

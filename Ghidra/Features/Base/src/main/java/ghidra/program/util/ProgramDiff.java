@@ -319,7 +319,7 @@ public class ProgramDiff {
 			diff.diffsToReturn = new AddressSet(this.diffsToReturn);
 			diff.filterChanged = this.filterChanged;
 			diff.sameProgramContext = this.sameProgramContext;
-			diff.warnings = (this.warnings == null) ? null : new String(this.warnings);
+			diff.warnings = (this.warnings == null) ? null : this.warnings;
 		}
 		catch (ProgramConflictException exc) {
 			Msg.error(this, "Unexpected Exception: " + exc.getMessage(), exc);

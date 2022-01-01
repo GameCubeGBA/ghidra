@@ -283,7 +283,7 @@ private static final String SAMPLE_STRING = "ABCabc \u00a9\u00ab\u00a7\u0429\u05
 			}
 
 			FontWrapper otherWrapper = (FontWrapper) obj;
-			return fontName.toLowerCase().equals(otherWrapper.fontName.toLowerCase());
+			return fontName.equalsIgnoreCase(otherWrapper.fontName);
 		}
 
 		@Override

@@ -159,7 +159,7 @@ public class SpecExtension {
 				default:
 					throw new SleighException("Unsupported extension type");
 			}
-			startPos = document.indexOf(tagAttribute, 0);
+			startPos = document.indexOf(tagAttribute);
 			if (startPos < 0) {
 				throw new SleighException("Could not find attribute: " + tagAttribute);
 			}

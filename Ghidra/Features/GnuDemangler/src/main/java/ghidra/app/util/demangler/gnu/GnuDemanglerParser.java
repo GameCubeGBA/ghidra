@@ -684,7 +684,7 @@ public class GnuDemanglerParser {
 			}
 		}
 		if (startIndex < parameterString.length()) {
-			String ps = parameterString.substring(startIndex, parameterString.length());
+			String ps = parameterString.substring(startIndex);
 			parameters.add(ps.trim());
 		}
 		return parameters;
@@ -1954,7 +1954,7 @@ public class GnuDemanglerParser {
 			CondensedString prefixString = new CondensedString(rawParameterPrefix);
 			String prefix = prefixString.getCondensedText();
 			int nameStart = Math.max(0, prefix.lastIndexOf(' '));
-			name = prefix.substring(nameStart, prefix.length()).trim();
+			name = prefix.substring(nameStart).trim();
 
 			// check for return type
 			if (nameStart > 0) {

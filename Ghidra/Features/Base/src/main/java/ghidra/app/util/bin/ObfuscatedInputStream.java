@@ -75,11 +75,11 @@ public class ObfuscatedInputStream extends InputStream {
 			System.err.println("De-Obfuscator Usage:");
 			System.err.println("\t" + ObfuscatedInputStream.class.getName() +
 				" obfuscated_input_filename_path plain_dest_output_filename_path");
-			System.err.println("");
+			System.err.println();
 			System.err.println("\tExample:");
 			System.err.println("\t\t" + ObfuscatedInputStream.class.getName() +
 				" /tmp/myuserid-Ghidra/fscache2/aa/bb/aabbccddeeff00112233445566778899 /tmp/aabbccddeeff00112233445566778899.plaintext");
-			System.err.println("");
+			System.err.println();
 			return;
 		}
 		File obfuscatedInputFile = new File(args[0]);

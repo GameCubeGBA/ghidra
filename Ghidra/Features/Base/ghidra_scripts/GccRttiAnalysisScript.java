@@ -115,7 +115,7 @@ public class GccRttiAnalysisScript extends GhidraScript {
 			boolean insideBrackets = false;
 			int numOpenedBrackets = 0;
 			int index = 0;
-			String newCategoryName = new String();
+			String newCategoryName = "";
 			while (index < categoryName.length()) {
 				monitor.checkCanceled();
 

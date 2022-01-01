@@ -337,7 +337,7 @@ public class DecompileDebug {
 		//First output all structures as zero size so to avoid any cyclic dependencies.
 		for (DataType dataType : TypeOrderer.getStructList()) {
 			debugStream.write(
-				(dtmanage.buildStructTypeZeroSizeOveride(dataType) + "\n").toString().getBytes());
+				(dtmanage.buildStructTypeZeroSizeOveride(dataType) + "\n").getBytes());
 		}
 		//Next, use the dependency stack to output types.
 		for (DataType dataType : TypeOrderer.getDependencyList()) {

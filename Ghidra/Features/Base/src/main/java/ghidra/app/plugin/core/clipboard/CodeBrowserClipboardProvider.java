@@ -344,7 +344,7 @@ public class CodeBrowserClipboardProvider extends ByteCopier
 				}
 			}
 
-			return createStringTransferable(g.getBuffer().toString());
+			return createStringTransferable(g.getBuffer());
 		}
 		catch (Exception e) {
 			String message = "Copy failed: " + ExceptionUtils.getMessage(e);

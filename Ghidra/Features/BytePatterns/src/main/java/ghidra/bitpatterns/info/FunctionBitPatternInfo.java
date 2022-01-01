@@ -347,7 +347,7 @@ public class FunctionBitPatternInfo {
 			sb.append(preInst);
 		}
 		sb.append("\nAddress: ");
-		sb.append(address.toString());
+		sb.append(address);
 		sb.append("\nfirstInstructions: ");
 		sb.append(firstInst.toString());
 		sb.append("\nfirstBytes: ");

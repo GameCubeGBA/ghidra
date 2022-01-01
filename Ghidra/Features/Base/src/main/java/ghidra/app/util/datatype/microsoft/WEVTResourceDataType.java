@@ -640,7 +640,7 @@ public class WEVTResourceDataType extends DynamicDataType {
 	private StructureDataType createEventDefinitionStructure(MemBuffer memBuffer, int tempOffset,
 			ArrayList<Integer> unknownDwordsOffsetList, ArrayList<Integer> numUnknownDwordsList)
 			throws MemoryAccessException {
-		String offsetString = new String();
+		String offsetString = "";
 		StructureDataType struct = new StructureDataType("Event Definitions", 0);
 		struct.add(WordDataType.dataType, 2, "Identifier", "");
 		tempOffset += 2;
@@ -694,7 +694,7 @@ public class WEVTResourceDataType extends DynamicDataType {
 	}
 
 	private String getOffsetAddressString(int offset, MemBuffer memBuffer) {
-		String offsetString = new String();
+		String offsetString = "";
 		if (offset > 0) {
 			Address offsetAddr = memBuffer.getAddress().add(offset);
 			offsetString = offsetString.concat("Address: " + offsetAddr.toString());

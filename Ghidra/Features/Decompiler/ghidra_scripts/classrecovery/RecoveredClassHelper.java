@@ -298,7 +298,7 @@ public class RecoveredClassHelper {
 			// can't just get all that contain vftable because that would get some strings
 			else {
 				String name = vftableSymbol.getName();
-				name = name.substring(1, name.length());
+				name = name.substring(1);
 				if (name.startsWith("vftable")) {
 					vftableSymbolList.add(vftableSymbol);
 				}
@@ -6803,7 +6803,7 @@ public class RecoveredClassHelper {
 				dataType = new Undefined1DataType();
 			}
 
-			String fieldName = new String();
+			String fieldName = "";
 			String comment = null;
 
 			// if the computed class struct has field name (ie from pdb) use it otherwise create one 
@@ -7548,11 +7548,11 @@ public class RecoveredClassHelper {
 		while (description.contains(":")) {
 			monitor.checkCanceled();
 
-			int indexOfColon = description.indexOf(':', 0);
+			int indexOfColon = description.indexOf(':');
 
 			description = description.substring(indexOfColon + 1);
 
-			int endOfBlock = description.indexOf(':', 0);
+			int endOfBlock = description.indexOf(':');
 			if (endOfBlock == -1) {
 				endOfBlock = description.length();
 			}

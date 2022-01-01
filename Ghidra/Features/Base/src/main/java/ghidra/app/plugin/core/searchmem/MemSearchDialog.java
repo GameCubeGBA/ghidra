@@ -725,7 +725,7 @@ class MemSearchDialog extends DialogComponentProvider {
 
 			String currentText = getText(0, getLength());
 			String beforeOffset = currentText.substring(0, offs);
-			String afterOffset = currentText.substring(offs, currentText.length());
+			String afterOffset = currentText.substring(offs);
 			String proposedText = beforeOffset + str + afterOffset;
 
 			// show history
@@ -759,7 +759,7 @@ class MemSearchDialog extends DialogComponentProvider {
 
 			String currentText = getText(0, getLength());
 			String beforeOffset = currentText.substring(0, offs);
-			String afterOffset = currentText.substring(len + offs, currentText.length());
+			String afterOffset = currentText.substring(len + offs);
 			String proposedResult = beforeOffset + afterOffset;
 
 			if (proposedResult.isEmpty()) {
