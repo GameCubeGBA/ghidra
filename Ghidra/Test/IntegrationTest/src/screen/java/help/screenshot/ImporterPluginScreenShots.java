@@ -127,7 +127,7 @@ public class ImporterPluginScreenShots extends GhidraScreenShotGenerator {
 		runSwing(() -> {
 			list.setCellRenderer(new DefaultListCellRenderer() {
 				@Override
-				public Component getListCellRendererComponent(JList<? extends Object> theList,
+				public Component getListCellRendererComponent(JList<?> theList,
 						Object value, int index, boolean isSelected, boolean cellHasFocus) {
 
 					JLabel renderer = (JLabel) super.getListCellRendererComponent(theList, value,

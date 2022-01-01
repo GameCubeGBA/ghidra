@@ -18,10 +18,10 @@ package docking.widgets.tree;
 import java.util.Map;
 
 public interface SearchableByObjectGTreeNode {
-	Map<? extends Object, ? extends GTreeNode> getObjectNodeMap();
+	Map<?, ? extends GTreeNode> getObjectNodeMap();
 
 	default GTreeNode findNodeForObject(Object obj) {
-		Map<? extends Object, ? extends GTreeNode> index = getObjectNodeMap();
+		Map<?, ? extends GTreeNode> index = getObjectNodeMap();
 		synchronized (index) {
 			GTreeNode node = index.get(obj);
 			if (node != null) {

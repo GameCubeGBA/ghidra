@@ -34,8 +34,8 @@ public class DefaultColumnComparator implements Comparator<Object> {
 			return TableComparators.compareWithNullValues(o1, o2);
 		}
 
-		Class<? extends Object> c1 = o1.getClass();
-		Class<? extends Object> c2 = o2.getClass();
+		Class<?> c1 = o1.getClass();
+		Class<?> c2 = o2.getClass();
 		if (String.class == c1 && String.class == c2) {
 			return compareAsStrings(o1, o2);
 		}

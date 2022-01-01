@@ -34,7 +34,7 @@ public interface ObjectPane {
 
 	JComponent getPrincipalComponent();
 
-	List<? extends Object> update(ObjectContainer container);
+	List<?> update(ObjectContainer container);
 
 	void signalDataChanged(ObjectContainer container);
 

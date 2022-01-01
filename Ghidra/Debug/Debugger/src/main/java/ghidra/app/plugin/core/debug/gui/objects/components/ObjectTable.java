@@ -125,7 +125,7 @@ public class ObjectTable<R> implements ObjectPane {
 	}
 
 	@Override
-	public List<? extends Object> update(ObjectContainer changed) {
+	public List<?> update(ObjectContainer changed) {
 		if (changed.equals(container) &&
 			((clazz.equals(ObjectElementRow.class) && changed.hasElements()) ||
 				(clazz.equals(ObjectAttributeRow.class) && !changed.hasElements()))) {
