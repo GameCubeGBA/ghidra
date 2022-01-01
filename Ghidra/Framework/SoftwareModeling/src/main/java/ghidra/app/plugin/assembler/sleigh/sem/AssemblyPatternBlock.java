@@ -20,6 +20,7 @@ import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.stream.IntStream;
 
 import ghidra.app.plugin.assembler.sleigh.expr.MaskedLong;
 import ghidra.app.plugin.assembler.sleigh.expr.SolverException;
@@ -90,9 +91,7 @@ public class AssemblyPatternBlock implements Comparable<AssemblyPatternBlock> {
 	 */
 	public static AssemblyPatternBlock fromBytes(int offset, byte[] vals) {
 		byte[] mask = new byte[vals.length];
-		for (int i = 0; i < mask.length; i++) {
-			mask[i] = -1;
-		}
+		IntStream.range(0, mask.length).forEach(i -> mask[i] = -1);
 		return new AssemblyPatternBlock(offset, mask, vals);
 	}
 
@@ -347,9 +346,7 @@ public class AssemblyPatternBlock implements Comparable<AssemblyPatternBlock> {
 		byte[] cmsk = new byte[buflen]; // To check for conflicts;
 
 		int diff = this.offset - newOffset;
-		for (int i = 0; i < this.mask.length; i++) {
-			cmsk[diff + i] = this.mask[i];
-		}
+		System.arraycopy(this.mask, 0, cmsk, diff, this.mask.length);
 		diff = that.offset - newOffset;
 		for (int i = 0; i < that.mask.length; i++) {
 			cmsk[diff + i] &= that.mask[i];

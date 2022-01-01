@@ -82,8 +82,8 @@ public class MaskImpl implements Mask, Serializable {
 			throw new IncompatibleMaskException();
 		for (int i = 0; i < mask.length; i++)
 			result[i] = (byte) (mask[i] & cde[i]);
-		for (int i = mask.length; i < cde.length; i++)
-			result[i] = cde[i];
+        if (cde.length - mask.length >= 0)
+            System.arraycopy(cde, mask.length, result, mask.length, cde.length - mask.length);
 		return result;
 	}
 

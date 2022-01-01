@@ -46,14 +46,12 @@ public class SubroutineMatch {
 		if( isA )
 		{
 			newOne = new Address[progAAddrs.length+1];
-			for( int i=0; i<progAAddrs.length; i++)
-				newOne[i] = progAAddrs[i];
+            System.arraycopy(progAAddrs, 0, newOne, 0, progAAddrs.length);
 			newOne[progAAddrs.length] = addr;
 			progAAddrs = newOne;
 		} else {
 			newOne = new Address[progBAddrs.length+1];
-			for( int i=0; i<progBAddrs.length; i++)
-				newOne[i] = progBAddrs[i];
+            System.arraycopy(progBAddrs, 0, newOne, 0, progBAddrs.length);
 			newOne[progBAddrs.length] = addr;
 			progBAddrs = newOne;			
 		}	

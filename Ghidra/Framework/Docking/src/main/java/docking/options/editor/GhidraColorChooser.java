@@ -151,10 +151,7 @@ public class GhidraColorChooser extends JColorChooser {
 		AbstractColorChooserPanel[] newChooserPanels =
 			new AbstractColorChooserPanel[chooserPanels.length];
 		newChooserPanels[0] = newSwatchPanel;
-		for (int i = 1; i < chooserPanels.length; i++) {
-			AbstractColorChooserPanel panel = chooserPanels[i];
-			newChooserPanels[i] = panel;
-		}
+        System.arraycopy(chooserPanels, 1, newChooserPanels, 1, chooserPanels.length - 1);
 
 		setChooserPanels(newChooserPanels);
 	}
