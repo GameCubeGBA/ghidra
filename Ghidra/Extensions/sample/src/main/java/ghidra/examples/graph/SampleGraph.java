@@ -34,13 +34,9 @@ public class SampleGraph extends FilteringVisualGraph<SampleVertex, SampleEdge> 
 	public SampleGraph copy() {
 		SampleGraph newGraph = new SampleGraph();
 
-		for (SampleVertex v : vertices.keySet()) {
-			newGraph.addVertex(v);
-		}
+		vertices.keySet().forEach(newGraph::addVertex);
 
-		for (SampleEdge e : edges.keySet()) {
-			newGraph.addEdge(e);
-		}
+		edges.keySet().forEach(newGraph::addEdge);
 
 		return newGraph;
 	}
