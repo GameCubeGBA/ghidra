@@ -276,7 +276,7 @@ public class CParserUtils {
 		int index = message.indexOf(columnMarker);
 		if (index >= 0) {
 			String remainder = message.substring(index + columnMarker.length());
-			int dotIndex = remainder.indexOf(".");
+			int dotIndex = remainder.indexOf('.');
 			String column = remainder.substring(0, dotIndex);
 
 			try {
