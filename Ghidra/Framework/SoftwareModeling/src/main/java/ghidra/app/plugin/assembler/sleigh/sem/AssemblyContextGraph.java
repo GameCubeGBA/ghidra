@@ -342,13 +342,6 @@ public class AssemblyContextGraph implements GImplicitDirectedGraph<Vertex, Edge
 					}
 					SubtableSymbol subtable = (SubtableSymbol) def;
 
-					// TODO: Remove this check, eventually
-					// NOTE: If pure recursion appears anywhere other than "instruction", this
-					// check will prevent it from being handled.
-					if (!from.subtable.equals(subtable.getName())) {
-						continue;
-					}
-
 					Vertex dest = new Vertex(inner, subtable.getName());
 					cachedVertices.add(dest);
 					Edge e = new Edge(sem, i, from, dest);
