@@ -25,6 +25,7 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.IntStream;
 
 import org.apache.commons.collections4.map.LazyMap;
 import org.apache.commons.lang3.StringUtils;
@@ -256,21 +257,20 @@ public class AssemblyParser {
 		// Merge rules from same general rule, ending in same state
 		mergers =
 			LazyMap.lazyMap(new LinkedHashMap<MergeKey, MergeValue>(), () -> new MergeValue());
-		int i = -1;
+		int i = 0;
 		for (AssemblyExtendedProduction prod : extendedGrammar) {
-			i++;
 			MergeValue entry = mergers.get(new MergeKey(prod.getFinalState(), prod.getAncestor()));
-			entry.merge(i, extff.getFollow(prod.getLHS()));
+			entry.merge(i++, extff.getFollow(prod.getLHS()));
 		}
 
 		// Write merged stuff to table as REDUCEs
 		for (Map.Entry<MergeKey, MergeValue> ent : mergers.entrySet()) {
-			for (AssemblyTerminal t : ent.getValue().follow) {
+			ent.getValue().follow.forEach(t -> {
 				AssemblyProduction prod = ent.getKey().prod;
 				if (!prod.getLHS().equals(grammar.getStart())) {
 					actions.putReduce(ent.getKey().finalState, t, prod);
 				}
-			}
+			});
 		}
 
 		// Make $ accept on any state with a completed start item.
@@ -491,7 +491,7 @@ public class AssemblyParser {
 			out.print(nt + "\t");
 		}
 		out.println();
-		for (int i = 0; i < states.size(); i++) {
+		IntStream.range(0, states.size()).forEachOrdered(i -> {
 			out.print(i + "\t");
 			for (AssemblyTerminal t : grammar.terminals()) {
 				out.print(StringUtils.join(actions.get(i, t), "/"));
@@ -502,21 +502,7 @@ public class AssemblyParser {
 				out.print("\t");
 			}
 			out.println();
-		}
-	}
-
-	/**
-	 * For debugging
-	 */
-	public void printStuff(PrintStream out) {
-		printGrammar(out);
-		printGeneralFF(out);
-		printLR0States(out);
-		printLR0TransitionTable(out);
-		printExtendedGrammar(out);
-		printExtendedFF(out);
-		printMergers(out);
-		printParseTable(out);
+		});
 	}
 
 	/**

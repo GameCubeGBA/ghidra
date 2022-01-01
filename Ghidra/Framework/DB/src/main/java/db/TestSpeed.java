@@ -112,9 +112,7 @@ class JavaBinarySearcher {
 	}
 	private byte[] get(byte[] buf, int start) {
 		byte[] data = new byte[8];
-		for(int i=0;i<8;i++) {
-			data[i] = buf[start+i];
-		}
+        System.arraycopy(buf, start + 0, data, 0, 8);
 		return data;
 	}
 }

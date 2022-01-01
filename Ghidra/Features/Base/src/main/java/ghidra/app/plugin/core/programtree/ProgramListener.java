@@ -418,9 +418,7 @@ class ProgramListener implements DomainObjectListener {
 		}
 		if (idx <= indexes.length - 1) {
 			int[] temp = new int[idx];
-			for (int i = 0; i < idx; i++) {
-				temp[i] = indexes[i];
-			}
+            System.arraycopy(indexes, 0, temp, 0, idx);
 			indexes = temp;
 		}
 		return indexes;

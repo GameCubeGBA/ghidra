@@ -36,14 +36,6 @@ public class AssemblyParseStateItem implements Comparable<AssemblyParseStateItem
 	private final int pos;
 
 	/**
-	 * Construct a new item starting at the far left of the given production
-	 * @param prod the production
-	 */
-	public AssemblyParseStateItem(AssemblyProduction prod) {
-		this(prod, 0);
-	}
-
-	/**
 	 * Construct a new item starting immediately before the symbol at the given position in the
 	 * given production
 	 * @param prod the production

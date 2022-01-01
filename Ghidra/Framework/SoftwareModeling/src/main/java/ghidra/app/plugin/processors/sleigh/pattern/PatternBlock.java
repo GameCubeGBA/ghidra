@@ -43,10 +43,8 @@ public class PatternBlock {
 		int delsize = end - start;
 		int newsize = array.length - delsize;
 		int[] res = new int[newsize];
-		for (int i = 0; i < start; ++i)
-			res[i] = array[i];
-		for (int i = end; i < array.length; ++i)
-			res[i - delsize] = array[i];
+        if (start >= 0) System.arraycopy(array, 0, res, 0, start);
+        if (array.length - end >= 0) System.arraycopy(array, end, res, end - delsize, array.length - end);
 		return res;
 	}
 

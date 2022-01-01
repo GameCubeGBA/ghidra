@@ -124,9 +124,7 @@ public class HighSymbol {
 		}
 		else {
 			SymbolEntry[] newList = new SymbolEntry[entryList.length + 1];
-			for (int i = 0; i < entryList.length; ++i) {
-				newList[i] = entryList[i];
-			}
+            System.arraycopy(entryList, 0, newList, 0, entryList.length);
 			newList[entryList.length] = entry;
 			entryList = newList;
 		}

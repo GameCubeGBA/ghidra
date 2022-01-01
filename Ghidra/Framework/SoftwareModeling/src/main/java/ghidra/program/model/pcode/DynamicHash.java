@@ -619,9 +619,7 @@ public class DynamicHash {
 					matchWithPossibleExtension(inputs[i].getOffset(), inputs[i].getSize(), value)) {
 					if (count >= tmp.length) {
 						long[] newtmp = new long[count + 10];
-						for(int j=0;j<tmp.length;++j) {
-							newtmp[j] = tmp[j];
-						}
+                        System.arraycopy(tmp, 0, newtmp, 0, tmp.length);
 						tmp = newtmp;
 					}
 					DynamicHash dynamicHash = new DynamicHash(op,i);
@@ -633,9 +631,7 @@ public class DynamicHash {
 			}
 		}
 		long[] res = new long[count];
-		for(int i=0;i<count;++i) {
-			res[i] = tmp[i];
-		}
+        System.arraycopy(tmp, 0, res, 0, count);
 		return res;
 	}
 }
