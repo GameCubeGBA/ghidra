@@ -49,7 +49,7 @@ public class CppExporter extends Exporter {
 	public static final String FUNCTION_TAG_FILTERS = "Function Tags to Filter";
 	public static final String FUNCTION_TAG_EXCLUDE = "Function Tags Excluded";
 
-	private static String EOL = System.getProperty("line.separator");
+	private static String EOL = System.lineSeparator();
 
 	private boolean isCreateHeaderFile = false;
 	private boolean isCreateCFile = true;

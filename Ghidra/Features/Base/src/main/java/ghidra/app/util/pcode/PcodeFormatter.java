@@ -35,7 +35,7 @@ import ghidra.util.Msg;
 
 public class PcodeFormatter {
 
-	private static String EOL = System.getProperty("line.separator");
+	private static String EOL = System.lineSeparator();
 
 	private int maxDisplayLines = 0; // no-limit by default
 	private boolean displayRawPcode = false;

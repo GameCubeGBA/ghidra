@@ -221,10 +221,8 @@ public class VersionControlCheckOutAction extends VersionControlAction {
 		}
 
 		private void showResultsMessage(List<DomainFile> allFiles, List<DomainFile> failedFiles) {
-
-			int total = allFiles.size();
 			if (failedFiles.isEmpty()) {
-				String s = "Checkout completed for " + total + " file(s)";
+				String s = "Checkout completed for " + allFiles.size() + " file(s)";
 				tool.setStatusInfo(s);
 				Msg.info(this, s);
 				return;
