@@ -108,7 +108,7 @@ public class DebuggerConnectionsNode extends AbstractDebuggerConnectionsNode
 	}
 
 	@Override
-	public Map<? extends Object, ? extends DebuggerModelNode> getObjectNodeMap() {
+	public Map<?, ? extends DebuggerModelNode> getObjectNodeMap() {
 		return models;
 	}
 }

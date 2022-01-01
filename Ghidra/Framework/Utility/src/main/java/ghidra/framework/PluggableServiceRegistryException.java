@@ -19,9 +19,9 @@ package ghidra.framework;
 public class PluggableServiceRegistryException extends RuntimeException {
 
     public PluggableServiceRegistryException(
-            Class<? extends Object> pluggableServiceClass,
-            Class<? extends Object> alreadyRegisteredPluggableServiceClass,
-            Class<? extends Object> pluggableServiceReplacementInstanceClass) {
+            Class<?> pluggableServiceClass,
+            Class<?> alreadyRegisteredPluggableServiceClass,
+            Class<?> pluggableServiceReplacementInstanceClass) {
         super(pluggableServiceClass.getCanonicalName()
                 + " already has registered instance of type "
                 + alreadyRegisteredPluggableServiceClass.getCanonicalName()

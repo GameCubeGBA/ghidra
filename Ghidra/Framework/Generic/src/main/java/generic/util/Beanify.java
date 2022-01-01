@@ -25,7 +25,7 @@ import java.util.Map;
 public class Beanify {
 	public static Map<String, Object> beanify(Object beany) {
 		LinkedHashMap<String, Object> result = new LinkedHashMap<>();
-		Class<? extends Object> bclass = beany.getClass();
+		Class<?> bclass = beany.getClass();
 		Method[] declaredMethods = bclass.getDeclaredMethods();
 		for (Method method : declaredMethods) {
 			String name = fix(method.getName());

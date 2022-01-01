@@ -82,7 +82,7 @@ public enum OptionType {
 		if (obj == null) {
 			return NO_TYPE;
 		}
-		Class<? extends Object> objClass = obj.getClass();
+		Class<?> objClass = obj.getClass();
 		for (OptionType type : values()) {
 			if (type == NO_TYPE) {
 				continue;

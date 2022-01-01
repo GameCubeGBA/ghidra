@@ -38,7 +38,7 @@ public class JdiModelTargetAttributesContainer extends JdiModelTargetObjectImpl
 		super(parent, name);
 	}
 
-	public void addAttributes(Map<String, ? extends Object> attrs) {
+	public void addAttributes(Map<String, ?> attrs) {
 		setAttributes(List.of(), attrs, "Initialized");
 	}
 

@@ -31,8 +31,8 @@ public class PluggableServiceRegistry {
 		}
 
 		Object registeredInstance = MAP.get(pluggableServiceClass);
-		Class<? extends Object> alreadyRegisteredClass = registeredInstance.getClass();
-		Class<? extends Object> replacementClass = replacementInstance.getClass();
+		Class<?> alreadyRegisteredClass = registeredInstance.getClass();
+		Class<?> replacementClass = replacementInstance.getClass();
 		if (alreadyRegisteredClass.isAssignableFrom(replacementClass)) {
 			// we're making the service more specific
 			MAP.put(pluggableServiceClass, replacementInstance);
