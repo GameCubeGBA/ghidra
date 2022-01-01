@@ -31,7 +31,7 @@ import ghidra.util.task.TaskMonitor;
 public abstract class GccAnalysisClass {
 
 	/* Class Constants */
-	public static final String NEWLINE = System.getProperty("line.separator");
+	public static final String NEWLINE = System.lineSeparator();
 
 	/* Class Members */
 	protected TaskMonitor monitor;

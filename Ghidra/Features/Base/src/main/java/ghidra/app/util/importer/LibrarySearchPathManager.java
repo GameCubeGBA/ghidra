@@ -15,7 +15,11 @@
  */
 package ghidra.app.util.importer;
 
-import java.util.*;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.StringTokenizer;
 
 import ghidra.framework.Platform;
 
@@ -24,11 +28,11 @@ import ghidra.framework.Platform;
  * and avoiding duplicate directories.
  */
 public class LibrarySearchPathManager {
-	public static final String CURRENT_DIRECTORY = ".";
+	private static final String CURRENT_DIRECTORY = ".";
 
 	private static List<String> pathList = createPathList();
 
-	private static boolean hasBeenRestored;
+	private static boolean hasBeenRestored = false;
 
 	private static List<String> createPathList() {
 		pathList = new ArrayList<>();
@@ -40,12 +44,10 @@ public class LibrarySearchPathManager {
 		addPath(CURRENT_DIRECTORY);//add current directory
 
 		List<String> paths = Platform.CURRENT_PLATFORM.getAdditionalLibraryPaths();
-		for (String path : paths) {
-			addPath(path);
-		}
+		paths.forEach(LibrarySearchPathManager::addPath);
 
 		String libpath = System.getProperty("java.library.path");
-		String libpathSep = System.getProperty("path.separator");
+		String libpathSep = File.pathSeparator;
 
 		StringTokenizer nizer = new StringTokenizer(libpath, libpathSep);
 		while (nizer.hasMoreTokens()) {
@@ -80,9 +82,7 @@ public class LibrarySearchPathManager {
 
 		pathList.clear();
 		addPath(CURRENT_DIRECTORY);//add current directory
-		for (String path : paths) {
-			addPath(path);
-		}
+		Arrays.stream(paths).forEach(LibrarySearchPathManager::addPath);
 	}
 
 	/**
@@ -103,6 +103,7 @@ public class LibrarySearchPathManager {
 		}
 
 		setLibraryPaths(paths);
+		hasBeenRestored = true;
 	}
 
 	/**
@@ -111,11 +112,11 @@ public class LibrarySearchPathManager {
 	 * @return true if the path was appended, false if the path was a duplicate
 	 */
 	public static boolean addPath(String path) {
-		if (pathList.indexOf(path) == -1) {
-			pathList.add(path);
-			return true;
+		if (pathList.contains(path)) {
+			return false;
 		}
-		return false;
+		pathList.add(path);
+		return true;
 	}
 
 	/**
@@ -124,23 +125,11 @@ public class LibrarySearchPathManager {
 	 * @return true if the path was appended, false if the path was a duplicate
 	 */
 	public static boolean addPathAt(int index, String path) {
-		if (pathList.indexOf(path) == -1) {
-			pathList.add(index, path);
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * Removes the path from the path search list.
-	 * @param path the path the remove
-	 * @return true if the path was removed, false if the path did not exist
-	 */
-	public static boolean removePath(String path) {
-		if (path.equals(CURRENT_DIRECTORY)) {
+		if (pathList.contains(path)) {
 			return false;
 		}
-		return pathList.remove(path);
+		pathList.add(index, path);
+		return true;
 	}
 
 	/**

@@ -170,18 +170,14 @@ public class AssemblyPatternBlock implements Comparable<AssemblyPatternBlock> {
 			buf.putInt(i * 4, vec[i]);
 		}
 		byte[] mask = new byte[nzlen];
-		for (int i = 0; i < datlen; i++) {
-			mask[i] = buf.get(i);
-		}
+		IntStream.range(0, datlen).forEach(i -> mask[i] = buf.get(i));
 
 		vec = block.getValueVector();
 		for (int i = 0; i < vec.length; i++) {
 			buf.putInt(i * 4, vec[i]);
 		}
 		byte[] vals = new byte[nzlen];
-		for (int i = 0; i < datlen; i++) {
-			vals[i] = buf.get(i);
-		}
+		IntStream.range(0, datlen).forEach(i -> vals[i] = buf.get(i));
 		return new AssemblyPatternBlock(offset, mask, vals);
 	}
 
@@ -390,13 +386,13 @@ public class AssemblyPatternBlock implements Comparable<AssemblyPatternBlock> {
 			}
 			return sb.substring(0, sb.length() - 1);
 		}
-		for (int i = 0; i < mask.length; i++) {
+		IntStream.range(0, mask.length).forEachOrdered(i -> {
 			if (i != 0) {
 				sb.append(':');
 			}
 			sb.append(NumericUtilities.convertMaskedValueToHexString(mask[i], vals[i], 2, false, 0,
-				null));
-		}
+					null));
+		});
 		return sb.toString();
 	}
 
@@ -420,14 +416,9 @@ public class AssemblyPatternBlock implements Comparable<AssemblyPatternBlock> {
 		AssemblyPatternBlock that = (AssemblyPatternBlock) obj;
 		int ckOffset = Math.min(this.offset, that.offset);
 		int length = Math.max(this.length(), that.length());
-		for (int i = ckOffset; i < length; i++) {
-			if ((checkRead(this.mask, i - this.offset, 0) != checkRead(that.mask, i - that.offset,
+		return IntStream.range(ckOffset, length).noneMatch(i -> (checkRead(this.mask, i - this.offset, 0) != checkRead(that.mask, i - that.offset,
 				0)) || (checkRead(this.vals, i - this.offset, 0) != checkRead(that.vals, i - that.offset,
-				0))) {
-				return false;
-			}
-		}
-		return true;
+				0)));
 	}
 
 	@Override
