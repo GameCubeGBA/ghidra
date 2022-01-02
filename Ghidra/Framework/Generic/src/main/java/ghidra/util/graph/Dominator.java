@@ -15,7 +15,6 @@
  */
 package ghidra.util.graph;
 
-import java.util.Iterator;
 import java.util.Vector;
 
 import ghidra.util.Msg;

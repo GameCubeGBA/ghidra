@@ -19,7 +19,6 @@ import java.io.File;
 import java.io.FileFilter;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 import ghidra.util.Msg;

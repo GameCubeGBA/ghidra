@@ -499,28 +499,23 @@ public class DirectedGraph {
 			DirectedGraph g = this.inducedSubgraph(nonDescendantVertices);
 			Iterator<Vertex> iter;
 			Set<Vertex>[] strongComponents = g.assignVerticesToStrongComponents();
-			int n = strongComponents.length;
-			for (int i = 0; i < n; i++) {
-				iter = strongComponents[i].iterator();
-				if (iter.hasNext()) {
-					u = iter.next();
-					Set<Vertex> parents = this.getParents(u);
-					while (iter.hasNext()) {
-						v = iter.next();
-						parents.addAll(this.getParents(v));
-						if (v.key() < u.key()) {
-							u = v;
-						}
-					}
-					if (strongComponents[i].containsAll(parents)) {
-						entryPointSet.add(u);
-					}
-				}
-			}
-		}
-		Iterator<Vertex> iter = entryPointSet.iterator();
-		while (iter.hasNext()) {
-			entryPoints.add(0, iter.next());
+            for (Set<Vertex> strongComponent : strongComponents) {
+                iter = strongComponent.iterator();
+                if (iter.hasNext()) {
+                    u = iter.next();
+                    Set<Vertex> parents = this.getParents(u);
+                    while (iter.hasNext()) {
+                        v = iter.next();
+                        parents.addAll(this.getParents(v));
+                        if (v.key() < u.key()) {
+                            u = v;
+                        }
+                    }
+                    if (strongComponent.containsAll(parents)) {
+                        entryPointSet.add(u);
+                    }
+                }
+            }
 		}
 		return entryPoints;
 	}

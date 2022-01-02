@@ -370,7 +370,7 @@ public class JavaHelpValidator {
 			if (!item.validate(linkDatabase)) {
 				if (item instanceof TOCItemReference) {
 					TOCItemReference reference = (TOCItemReference) item;
-					unresolvedLinks.add(new MissingTOCDefinitionInvalidLink(help, reference));
+					unresolvedLinks.add(new MissingTOCDefinitionInvalidLink(reference));
 				}
 				else {
 					String targetPath = item.getTargetAttribute();
