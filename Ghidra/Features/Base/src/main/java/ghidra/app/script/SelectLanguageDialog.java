@@ -24,7 +24,6 @@ import ghidra.util.SystemUtilities;
 public class SelectLanguageDialog extends DialogComponentProvider {
 
 	private NewLanguagePanel languagePanel;
-	private boolean actionComplete = false;
 	private LanguageCompilerSpecPair selectedLcsPair;
 	private boolean wasCancelled = false;
 
@@ -47,7 +46,6 @@ public class SelectLanguageDialog extends DialogComponentProvider {
 	@Override
 	protected void okCallback() {
 		if (checkInput()) {
-			actionComplete = true;
 			selectedLcsPair = languagePanel.getSelectedLcsPair();
 			close();
 		}
@@ -85,7 +83,6 @@ public class SelectLanguageDialog extends DialogComponentProvider {
 
 	private void showDialog() {
 		selectedLcsPair = null;
-		actionComplete = false;
 		DockingWindowManager.showDialog(null, this);
 	}
 }

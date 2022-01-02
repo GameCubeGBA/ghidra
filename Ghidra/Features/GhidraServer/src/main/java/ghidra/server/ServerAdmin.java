@@ -45,8 +45,6 @@ public class ServerAdmin implements GhidraLaunchable {
 	private static final String MIGRATE_COMMAND = "-migrate";
 	private static final String MIGRATE_ALL_COMMAND = "-migrate-all";
 
-	private boolean propertyUsed = false;
-
 	/**
 	 * Main method for launching the ServerAdmin Application via GhidraLauncher.
 	 * The following properties may be set:

@@ -212,8 +212,8 @@ class CheckoutManager {
 	synchronized ItemCheckoutStatus[] getAllCheckouts() throws IOException {
 		validate();
 		List<ItemCheckoutStatus> list = new ArrayList<>(checkouts.values());
-		Collections.sort(list, (a, b) -> (int) (a.getCheckoutId() - b.getCheckoutId()));
-		return list.toArray(new ItemCheckoutStatus[list.size()]);
+		list.sort((a, b) -> (int) (a.getCheckoutId() - b.getCheckoutId()));
+		return list.toArray(new ItemCheckoutStatus[0]);
 	}
 
 	/**

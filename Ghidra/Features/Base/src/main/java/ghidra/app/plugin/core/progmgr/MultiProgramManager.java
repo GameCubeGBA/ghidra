@@ -155,7 +155,6 @@ class MultiProgramManager implements DomainObjectListener, TransactionListener {
 	Program[] getOtherPrograms() {
 		Program currentProgram = getCurrentProgram();
 		ArrayList<Program> list = new ArrayList<>();
-		int size = openProgramList.size();
         for (ProgramInfo programInfo : openProgramList) {
             Program program = programInfo.program;
             if (currentProgram != program) {

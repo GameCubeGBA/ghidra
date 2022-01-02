@@ -111,11 +111,6 @@ public class SubroutineMatch {
 		return this.progBAddrs;
 	}
 	
-	private boolean isOneToOne()
-	{
-        return progAAddrs.length == 1 && progBAddrs.length == 1;
-    }
-	
 	@Override
     public String toString(){
 		StringBuilder str = new StringBuilder(reason + " ");

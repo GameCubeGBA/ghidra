@@ -36,7 +36,7 @@ public class AddressSetPartitioner implements Iterable<AddressRange> {
 		for (AddressRange addressRange : addressRanges) {
 			ranges.add(addressRange);
 		}
-		Collections.sort(ranges, MIN_ADDRESS_ASC);
+		ranges.sort(MIN_ADDRESS_ASC);
 		addressRangeCache = new ArrayList<AddressRange>();
 		while (!ranges.isEmpty()) {
 			AddressRange range = ranges.get(0);

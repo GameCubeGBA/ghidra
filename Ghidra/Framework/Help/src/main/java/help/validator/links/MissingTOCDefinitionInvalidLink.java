@@ -19,7 +19,6 @@ package help.validator.links;
 import java.nio.file.Path;
 import java.util.Objects;
 
-import help.validator.location.HelpModuleCollection;
 import help.validator.model.TOCItemReference;
 
 public class MissingTOCDefinitionInvalidLink implements InvalidLink {

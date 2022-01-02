@@ -52,7 +52,7 @@ public abstract class AbstractHoverProvider implements HoverProvider {
 
 	protected void addHoverService(HoverService hoverService) {
 		hoverServices.add(hoverService);
-		Collections.sort(hoverServices, HOVER_PRIORITY_COMPARATOR);
+		hoverServices.sort(HOVER_PRIORITY_COMPARATOR);
 	}
 
 	protected void removeHoverService(HoverService hoverService) {

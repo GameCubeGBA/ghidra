@@ -272,7 +272,6 @@ public class ProgramMergeFilter {
 	 * @return true if at least one type is set.
 	 */
 	public boolean isSet() {
-		int num = filterFlags.length;
         for (int filterFlag : filterFlags) {
             if (filterFlag != IGNORE) {
                 return true;

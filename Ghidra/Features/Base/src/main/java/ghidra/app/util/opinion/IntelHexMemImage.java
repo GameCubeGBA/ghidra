@@ -180,13 +180,12 @@ class IntelHexMemImage {
 		MessageLog log = new MessageLog();
 		//this code is required to allow hex lines to not appear
 		//in address order...
-		int count = 0;
 		AddressSetPartitioner partitioner = new AddressSetPartitioner(set, rangeMap, partitions);
 		HashMap<AddressRange, byte[]> myRangeMap =
 			new HashMap<AddressRange, byte[]>(partitioner.getPartionedRangeMap());
 		for (AddressRange blockRange : partitioner) {
-			Iterator<AddressRange> iter = myRangeMap.keySet().iterator();
 			HashSet<AddressRange> blockSet = new HashSet<AddressRange>();
+			Iterator<AddressRange> iter = myRangeMap.keySet().iterator();
 			while (iter.hasNext()) {
 				AddressRange range = iter.next();
 				if (blockRange.intersects(range)) {

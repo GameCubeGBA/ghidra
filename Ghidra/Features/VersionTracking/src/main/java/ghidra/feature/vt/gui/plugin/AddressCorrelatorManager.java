@@ -66,8 +66,7 @@ public class AddressCorrelatorManager {
 			ClassSearcher.getInstances(DiscoverableAddressCorrelator.class);
 		List<AddressCorrelator> addressCorrelatorList = new ArrayList<AddressCorrelator>(instances);
 
-		Collections.sort(addressCorrelatorList,
-			(o1, o2) -> o1.getClass().getSimpleName().compareTo(o2.getClass().getSimpleName()));
+		addressCorrelatorList.sort((o1, o2) -> o1.getClass().getSimpleName().compareTo(o2.getClass().getSimpleName()));
 
 		// Put the LastResortCorrelator in case a better address correlation isn't found.
 		addressCorrelatorList.add(new LastResortAddressCorrelator());
@@ -94,13 +93,7 @@ public class AddressCorrelatorManager {
 	}
 
 	private AddressCorrelation getDataCorrelator(Data source, Data destination) {
-		for (AddressCorrelator correlator : correlatorList) {
-			AddressCorrelation correlation = correlator.correlate(source, destination);
-			if (correlation != null) {
-				return correlation;
-			}
-		}
-		return null;
+		return correlatorList.stream().map(correlator -> correlator.correlate(source, destination)).filter(Objects::nonNull).findFirst().orElse(null);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -157,12 +150,7 @@ public class AddressCorrelatorManager {
 	}
 
 	public Options getOptions(Class<?> class1) {
-		for (AddressCorrelator correlator : correlatorList) {
-			if (class1.isAssignableFrom(correlator.getClass())) {
-				return correlator.getOptions();
-			}
-		}
-		return null;
+		return correlatorList.stream().filter(correlator -> class1.isAssignableFrom(correlator.getClass())).findFirst().map(AddressCorrelator::getOptions).orElse(null);
 	}
 
 	public void setOptions(Class<?> class1, Options options) {

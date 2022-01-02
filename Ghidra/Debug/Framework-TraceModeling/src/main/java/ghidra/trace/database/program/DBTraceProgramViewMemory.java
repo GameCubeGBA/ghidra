@@ -114,8 +114,8 @@ public class DBTraceProgramViewMemory extends AbstractDBTraceProgramViewMemory {
 		else {
 			forVisibleRegions(reg -> result.add(getRegionBlock(reg)));
 		}
-		Collections.sort(result, Comparator.comparing(b -> b.getStart()));
-		return result.toArray(new MemoryBlock[result.size()]);
+		result.sort(Comparator.comparing(MemoryBlock::getStart));
+		return result.toArray(new MemoryBlock[0]);
 	}
 
 	public void updateAddRegionBlock(DBTraceMemoryRegion region) {

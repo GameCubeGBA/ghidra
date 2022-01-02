@@ -313,8 +313,6 @@ public class StringsAnalyzer extends AbstractAnalyzer {
 				// code units when we change address spaces
 				instructionIterator = null;
 				definedDataIterator = null;
-				currInstrCU = null;
-				currDataCU = null;
 
 				findStrings(program, intersecting, minStringLength, startAlignment, requireNullEnd,
 					allCharWidths, monitor);

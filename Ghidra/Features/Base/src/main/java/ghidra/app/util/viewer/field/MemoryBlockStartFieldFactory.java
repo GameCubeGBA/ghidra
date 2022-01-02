@@ -260,23 +260,4 @@ public class MemoryBlockStartFieldFactory extends FieldFactory {
 
 		return elementsArray;
 	}
-
-	/**
-	 * Returns the length of the longest string in the given list.
-	 * 
-	 * @param lines
-	 * @return
-	 */
-	private int getLongestLineSize(String... lines) {
-
-		int longest = 0;
-		for (String line : lines) {
-			if (line.length() > longest) {
-				longest = line.length();
-			}
-		}
-		return longest;
-
-	}
-
 }

@@ -1896,18 +1896,6 @@ public class SymbolicPropogator {
 		return -1;
 	}
 
-	/**
-	 * check if the offset is large enough to possibly be an address
-	 *     It shouldn't be smaller than +- MIN_BOUNDS
-	 * @param offset assumed relative to another register
-	 * @return true if it could be an address
-	 */
-	private boolean checkPossibleOffsetAddr(long offset) {
-		long maxAddrOffset = this.pointerMask;
-        return (offset < 0 || offset >= _POINTER_MIN_BOUNDS) &&
-                (Math.abs(maxAddrOffset - offset) >= _POINTER_MIN_BOUNDS);
-    }
-
 	private void addStoredReferences(VarnodeContext vContext, Instruction instruction,
 			Varnode storageLocation, Varnode valueToStore, TaskMonitor monitor) {
 		if (!checkForStoredRefs) {

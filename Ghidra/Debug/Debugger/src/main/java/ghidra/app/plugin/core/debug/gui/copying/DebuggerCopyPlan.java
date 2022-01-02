@@ -328,7 +328,7 @@ public class DebuggerCopyPlan {
 		public static final List<Copier> VALUES;
 		static {
 			List<AllCopiers> asList = Arrays.asList(values());
-			Collections.sort(asList, Comparator.comparing(AllCopiers::getName));
+			asList.sort(Comparator.comparing(AllCopiers::getName));
 			VALUES = Collections.unmodifiableList(asList);
 		}
 

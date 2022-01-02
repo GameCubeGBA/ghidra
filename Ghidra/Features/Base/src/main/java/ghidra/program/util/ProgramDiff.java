@@ -28,7 +28,6 @@ import ghidra.program.model.util.TypeMismatchException;
 import ghidra.util.*;
 import ghidra.util.exception.*;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * {@code ProgramDiff} is a class for comparing two programs and
@@ -1304,7 +1303,6 @@ public class ProgramDiff {
 				list.add(propName);
 			}
 		}
-		int numProps = list.size();
         for (String property : list) {
             if ("Bookmarks".equals(property)) {
                 continue; // ignore bookmarks as properties, since the bookmark diff gets these.

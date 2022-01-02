@@ -17,14 +17,10 @@ package ghidra.app.util.viewer.field;
 
 import java.awt.Component;
 import java.awt.Container;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.beans.PropertyEditorSupport;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.label.GDLabel;
