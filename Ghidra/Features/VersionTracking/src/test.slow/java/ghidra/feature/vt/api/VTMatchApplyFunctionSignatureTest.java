@@ -105,7 +105,7 @@ public class VTMatchApplyFunctionSignatureTest extends AbstractGhidraHeadedInteg
 //		try {
 //			correlator =
 //				vtTestEnv.correlate(new ExactMatchInstructionsProgramCorrelatorFactory(), null,
-//					TaskMonitorAdapter.DUMMY_MONITOR);
+//					TaskMonitor.DUMMY);
 //		}
 //		catch (Exception e) {
 //			Assert.fail(e.getMessage());
