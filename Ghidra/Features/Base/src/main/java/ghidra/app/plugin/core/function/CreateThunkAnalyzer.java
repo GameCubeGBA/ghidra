@@ -56,7 +56,7 @@ public class CreateThunkAnalyzer extends FunctionAnalyzer {
 		HelpLocation helpLocation = new HelpLocation("AutoAnalysisPlugin",
 			"Auto_Analysis_Option_Instruction" + getAnalysisType());
 
-		options.registerOption(OPTION_NAME_CREATE_THUNKS_EARLY, createOnlyThunks, null,
+		options.registerOption(OPTION_NAME_CREATE_THUNKS_EARLY, createOnlyThunks, helpLocation,
 			OPTION_DESCRIPTION_CREATE_THUNKS_EARLY);
 	}
 
