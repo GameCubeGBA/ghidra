@@ -920,7 +920,7 @@ public class FormatManager implements OptionsChangeListener {
                 list.addAll(Arrays.asList(highlights));
 			}
 
-			return list.toArray(new Highlight[list.size()]);
+			return list.toArray(new Highlight[0]);
 		}
 
 		List<HighlightProvider> getHighlightProviders() {

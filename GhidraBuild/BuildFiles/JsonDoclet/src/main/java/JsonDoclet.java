@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.*;
 import javax.lang.model.type.DeclaredType;
+import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.ElementFilter;
 import javax.tools.Diagnostic.Kind;
@@ -373,13 +374,11 @@ public class JsonDoclet implements Doclet {
 	 * @return The short type name of the given {@link TypeMirror type}.
 	 */
 	private String getTypeShort(TypeMirror type) {
-		switch (type.getKind()) {
-			case DECLARED:
-				return ((DeclaredType) type).asElement().getSimpleName().toString();
-			default:
-				return type.toString();
-		}
-	}
+        if (type.getKind() == TypeKind.DECLARED) {
+            return ((DeclaredType) type).asElement().getSimpleName().toString();
+        }
+        return type.toString();
+    }
 
 	/**
 	 * Gets the comment from the given {@link DocTree}.

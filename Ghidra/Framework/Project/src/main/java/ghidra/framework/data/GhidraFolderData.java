@@ -603,7 +603,7 @@ class GhidraFolderData {
 		}
 
 		// refresh existing
-		for (String fileName : fileList.toArray(new String[fileList.size()])) {
+		for (String fileName : fileList.toArray(new String[0])) {
 			GhidraFileData fileData = fileDataCache.get(fileName);
 			if (fileData != null) {
 				try {

@@ -215,16 +215,13 @@ public class DockingWindowsLookAndFeelUtils {
 	 */
 	private static void fixupLookAndFeelIssues() {
 		LookAndFeel lookAndFeel = UIManager.getLookAndFeel();
-		switch (lookAndFeel.getName()) {
-			case NIMBUS_LOOK_AND_FEEL:
-				// fix scroll bar grabber disappearing.  See https://bugs.openjdk.java.net/browse/JDK-8134828
-				// This fix looks like it should not cause harm even if the bug is fixed on the jdk side.
-				UIDefaults defaults = UIManager.getDefaults();
-				defaults.put("ScrollBar.minimumThumbSize", new Dimension(30, 30));
+        if (NIMBUS_LOOK_AND_FEEL.equals(lookAndFeel.getName())) {// fix scroll bar grabber disappearing.  See https://bugs.openjdk.java.net/browse/JDK-8134828
+            // This fix looks like it should not cause harm even if the bug is fixed on the jdk side.
+            UIDefaults defaults = UIManager.getDefaults();
+            defaults.put("ScrollBar.minimumThumbSize", new Dimension(30, 30));
 
-				// (see NimbusDefaults for key values that can be changed here)
-				break;
-		}
+            // (see NimbusDefaults for key values that can be changed here)
+        }
 	}
 
 	private static void installGlobalLookAndFeelAttributes() {

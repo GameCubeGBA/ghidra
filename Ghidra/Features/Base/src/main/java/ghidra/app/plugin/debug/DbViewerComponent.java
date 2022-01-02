@@ -37,12 +37,7 @@ class DbViewerComponent extends JPanel {
 
 	private static Table[] NO_TABLES = new Table[0];
 
-	private static Comparator<Table> TABLE_NAME_COMPARATOR = new Comparator<>() {
-		@Override
-		public int compare(Table o1, Table o2) {
-			return (o1).getName().compareTo((o2).getName());
-		}
-	};
+	private static Comparator<Table> TABLE_NAME_COMPARATOR = Comparator.comparing(Table::getName);
 
 	private DBHandle dbh;
 	private DBListener dbListener;

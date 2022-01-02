@@ -25,11 +25,9 @@ final class AoutHeaderFactory {
 		if (header.getOptionalHeaderSize() == 0) {
 			return null;
 		}
-		switch (header.getMagic()) {
-			case CoffMachineType.IMAGE_FILE_MACHINE_R3000:
-				return new AoutHeaderMIPS(reader);
-			default:
-				return new AoutHeader(reader);
-		}
-	}
+        if (header.getMagic() == CoffMachineType.IMAGE_FILE_MACHINE_R3000) {
+            return new AoutHeaderMIPS(reader);
+        }
+        return new AoutHeader(reader);
+    }
 }

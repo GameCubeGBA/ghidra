@@ -17,6 +17,7 @@ package ghidra.app.util.bin.format.macho.dyld;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -160,8 +161,7 @@ public class DyldCacheLocalSymbolsInfo implements StructConverter {
 			}
 			// sort the entries by the index in the string table, so don't jump around reading
 			List<NList> sortedList = nlistList.stream()
-					.sorted((o1, o2) -> Integer.compare(o1.getStringTableIndex(),
-						o2.getStringTableIndex()))
+					.sorted(Comparator.comparingInt(NList::getStringTableIndex))
 					.collect(Collectors.toList());
 
 			// initialize the NList strings from string table
@@ -182,7 +182,7 @@ public class DyldCacheLocalSymbolsInfo implements StructConverter {
 		monitor.initialize(entriesCount);
 		reader.setPointerIndex(startIndex + entriesOffset);
 		try {
-			for (int i = 0; i < entriesCount; ++i) {
+			for (int i = entriesCount; i > 0; --i) {
 				localSymbolsEntryList.add(new DyldCacheLocalSymbolsEntry(reader));
 				monitor.checkCanceled();
 				monitor.incrementProgress(1);

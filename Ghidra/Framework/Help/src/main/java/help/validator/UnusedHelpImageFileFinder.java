@@ -22,17 +22,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -105,8 +95,7 @@ public class UnusedHelpImageFileFinder {
 		}
 
 		SortedSet<Path> set =
-			new TreeSet<>((f1, f2) -> f1.toUri().toString().toLowerCase().compareTo(
-				f2.toUri().toString().toLowerCase()));
+			new TreeSet<>(Comparator.comparing(f -> f.toUri().toString().toLowerCase()));
 		for (Path file : imageFiles) {
 			IMG img = fileToIMGMap.get(file);
 			if (img == null && !isExcludedImageFile(file)) {

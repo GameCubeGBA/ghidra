@@ -89,10 +89,7 @@ public String toString()
    */
   public static final Token newToken(int ofKind)
   {
-     switch(ofKind)
-     {
-       default : return new Token();
-     }
+      return new Token();
   }
 
 }

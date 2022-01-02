@@ -318,7 +318,7 @@ class DmgServerProcessManager implements Closeable {
 		argList.add(pathValue);// for Windows
 		argList.add(ldLibraryPathValue);// for Linux
 
-		return argList.toArray(new String[argList.size()]);
+		return argList.toArray(new String[0]);
 	}
 
 	private String getLibraryPathVariable(String pathKey, String pathValue) {

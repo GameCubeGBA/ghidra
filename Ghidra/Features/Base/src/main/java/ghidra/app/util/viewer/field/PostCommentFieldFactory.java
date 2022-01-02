@@ -517,7 +517,7 @@ public class PostCommentFieldFactory extends FieldFactory {
 				fields.add(new TextFieldElement(as, fields.size(), 0));
 			}
 		}
-		FieldElement[] elements = fields.toArray(new FieldElement[fields.size()]);
+		FieldElement[] elements = fields.toArray(new FieldElement[0]);
 
 		return ListingTextField.createMultilineTextField(this, proxy, elements, xStart, width,
 			Integer.MAX_VALUE, hlProvider);

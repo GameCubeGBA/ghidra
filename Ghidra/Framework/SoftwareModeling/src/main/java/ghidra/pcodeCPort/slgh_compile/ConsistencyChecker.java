@@ -67,13 +67,9 @@ class ConsistencyChecker {
 			vn = op.getIn(slot);
 		}
 
-		switch (vn.getSize().getType()) {
-			case handle:
-				handindex = vn.getSize().getHandleIndex();
-				opsym = ct.getOperand(handindex);
-				break;
-			default:
-				break;
+		if (vn.getSize().getType() == const_type.handle) {
+			handindex = vn.getSize().getHandleIndex();
+			opsym = ct.getOperand(handindex);
 		}
 		return opsym;
 	}

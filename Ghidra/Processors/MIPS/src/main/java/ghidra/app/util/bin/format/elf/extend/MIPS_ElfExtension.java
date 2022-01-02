@@ -596,19 +596,15 @@ public class MIPS_ElfExtension extends ElfExtension {
 
 				nextOptionAddr = nextOptionAddr.add(odkData.getLength());
 
-				switch (kind) {
-
-					case ODK_REGINFO:
-						processMipsRegInfo(elfLoadHelper, nextOptionAddr);
-						break;
-
-					default:
-						if (optionDataSize > 0) {
-							// consume unprocessed option description bytes
-							elfLoadHelper.createData(nextOptionAddr,
-								new ArrayDataType(ByteDataType.dataType, optionDataSize, 1));
-						}
-				}
+                if (kind == ODK_REGINFO) {
+                    processMipsRegInfo(elfLoadHelper, nextOptionAddr);
+                } else {
+                    if (optionDataSize > 0) {
+                        // consume unprocessed option description bytes
+                        elfLoadHelper.createData(nextOptionAddr,
+                                new ArrayDataType(ByteDataType.dataType, optionDataSize, 1));
+                    }
+                }
 
 				limit -= odkHeader.getLength() + optionDataSize;
 			}

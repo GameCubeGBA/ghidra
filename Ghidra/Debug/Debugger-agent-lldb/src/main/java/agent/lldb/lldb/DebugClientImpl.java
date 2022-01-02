@@ -120,8 +120,8 @@ public class DebugClientImpl implements DebugClient {
 			List<String> args, List<String> envp, String workingDir) {
 		SBError error = new SBError();
 		session = connectSession(fileName);
-		String[] argArr = args.toArray(new String[args.size()]);
-		String[] envArr = envp.isEmpty() ? null : envp.toArray(new String[envp.size()]);
+		String[] argArr = args.toArray(new String[0]);
+		String[] envArr = envp.isEmpty() ? null : envp.toArray(new String[0]);
 		SBProcess process = session.LaunchSimple(argArr, envArr, workingDir);
 		if (!error.Success()) {
 			Msg.error(this, error.GetType() + " for create process");
@@ -161,9 +161,9 @@ public class DebugClientImpl implements DebugClient {
 		File f = new File(fileName);  //hack to avoid /C:/
 		session = connectSession(f.getAbsolutePath());
 
-		String[] argArr = args.toArray(new String[args.size()]);
+		String[] argArr = args.toArray(new String[0]);
 		// null for envp means use the default environment
-		String[] envArr = envp.isEmpty() ? null : envp.toArray(new String[envp.size()]);
+		String[] envArr = envp.isEmpty() ? null : envp.toArray(new String[0]);
 		String pathSTDIN = pathsIO.get(0);
 		String pathSTDOUT = pathsIO.get(1);
 		String pathSTDERR = pathsIO.get(2);

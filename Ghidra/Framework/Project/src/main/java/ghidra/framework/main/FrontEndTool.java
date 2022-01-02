@@ -638,7 +638,7 @@ public class FrontEndTool extends PluginTool implements OptionsChangeListener {
 		}
 
 		try {
-			addPlugins(classNames.toArray(new String[classNames.size()]));
+			addPlugins(classNames.toArray(new String[0]));
 		}
 		catch (PluginException e) {
 			Msg.showError(this, getToolFrame(), "Plugin Error", "Error restoring front-end plugins",

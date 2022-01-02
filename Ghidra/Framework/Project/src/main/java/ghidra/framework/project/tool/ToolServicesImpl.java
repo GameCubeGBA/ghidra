@@ -477,7 +477,7 @@ class ToolServicesImpl implements ToolServices {
 				toolList.add(element);
 			}
 		}
-		return toolList.toArray(new PluginTool[toolList.size()]);
+		return toolList.toArray(new PluginTool[0]);
 	}
 
 	@Override

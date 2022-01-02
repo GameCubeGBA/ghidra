@@ -147,17 +147,15 @@ public class GatherParamPanel extends JPanel {
 		for (String string2 : parameters.keySet()) {//OMG!!
 			String key = string2;
 			ParamComponent pc = parameters.get(key);
-			switch (pc.getType()) {
-				case ADDRESS:
-					AddressInput addressInput = (AddressInput) pc.getDisplayComponent();
-					addressInput.setAddressFactory(state.getCurrentProgram().getAddressFactory());
-					addressInput.selectDefaultAddressSpace();
-					addressInput.select();
-					if (panelShown()) {
-						state.addEnvironmentVar(key, addressInput.getAddress());
-					}
-					break;
-			}
+            if (pc.getType() == ADDRESS) {
+                AddressInput addressInput = (AddressInput) pc.getDisplayComponent();
+                addressInput.setAddressFactory(state.getCurrentProgram().getAddressFactory());
+                addressInput.selectDefaultAddressSpace();
+                addressInput.select();
+                if (panelShown()) {
+                    state.addEnvironmentVar(key, addressInput.getAddress());
+                }
+            }
 		}
 	}
 

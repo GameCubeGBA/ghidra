@@ -85,7 +85,7 @@ public class MemoryDiff {
 		while(rangeIter.hasNext()) {
 			rangeList.add(rangeIter.next());
 		}
-		ranges = rangeList.toArray(new AddressRange[rangeList.size()]);
+		ranges = rangeList.toArray(new AddressRange[0]);
 	}
 	
 	/**
@@ -185,7 +185,7 @@ public class MemoryDiff {
 				rangeDiffs.add(range);
 			}
 		}
-		return rangeDiffs.toArray(new AddressRange[rangeDiffs.size()]);
+		return rangeDiffs.toArray(new AddressRange[0]);
 	}
 	
 	/**

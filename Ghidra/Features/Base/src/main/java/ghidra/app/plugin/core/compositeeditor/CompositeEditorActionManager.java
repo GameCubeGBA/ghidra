@@ -99,7 +99,7 @@ public class CompositeEditorActionManager {
 	 * @return the composite editor actions
 	 */
 	public CompositeEditorTableAction[] getEditorActions() {
-		return editorActions.toArray(new CompositeEditorTableAction[editorActions.size()]);
+		return editorActions.toArray(new CompositeEditorTableAction[0]);
 	}
 
 	/**
@@ -107,7 +107,7 @@ public class CompositeEditorActionManager {
 	 * @return the cycle group actions
 	 */
 	public CompositeEditorTableAction[] getFavoritesActions() {
-		return favoritesActions.toArray(new CompositeEditorTableAction[favoritesActions.size()]);
+		return favoritesActions.toArray(new CompositeEditorTableAction[0]);
 	}
 
 	/**
@@ -115,7 +115,7 @@ public class CompositeEditorActionManager {
 	 * @return the favorites actions
 	 */
 	public CompositeEditorTableAction[] getCycleGroupActions() {
-		return cycleGroupActions.toArray(new CompositeEditorTableAction[cycleGroupActions.size()]);
+		return cycleGroupActions.toArray(new CompositeEditorTableAction[0]);
 	}
 
 	/**
@@ -223,10 +223,10 @@ public class CompositeEditorActionManager {
 			return;
 		}
 		CompositeEditorTableAction[] cea =
-			actions.toArray(new CompositeEditorTableAction[actions.size()]);
-		for (int i = 0; i < length; i++) {
-			listeners.get(i).actionsAdded(cea);
-		}
+			actions.toArray(new CompositeEditorTableAction[0]);
+        for (EditorActionListener listener : listeners) {
+            listener.actionsAdded(cea);
+        }
 	}
 
 	private void notifyActionsRemoved(ArrayList<? extends CompositeEditorTableAction> actions) {
@@ -234,9 +234,9 @@ public class CompositeEditorActionManager {
 			return;
 		}
 		CompositeEditorTableAction[] cea =
-			actions.toArray(new CompositeEditorTableAction[actions.size()]);
-		for (int i = 0; i < length; i++) {
-			listeners.get(i).actionsRemoved(cea);
-		}
+			actions.toArray(new CompositeEditorTableAction[0]);
+        for (EditorActionListener listener : listeners) {
+            listener.actionsRemoved(cea);
+        }
 	}
 }

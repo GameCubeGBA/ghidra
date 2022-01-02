@@ -688,7 +688,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 
 		if (addresses.size() == 0)
 			return emptyFlow;
-		return addresses.toArray(new Address[addresses.size()]);
+		return addresses.toArray(new Address[0]);
 	}
 
 	@Override

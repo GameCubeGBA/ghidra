@@ -520,14 +520,11 @@ public class MachoProgramBuilder {
 
 	private void setRelocatableProperty() {
 		Options props = program.getOptions(Program.PROGRAM_INFO);
-		switch (machoHeader.getFileType()) {
-			case MachHeaderFileTypes.MH_EXECUTE:
-				props.setBoolean(RelocationTable.RELOCATABLE_PROP_NAME, false);
-				break;
-			default:
-				props.setBoolean(RelocationTable.RELOCATABLE_PROP_NAME, true);
-				break;
-		}
+        if (machoHeader.getFileType() == MachHeaderFileTypes.MH_EXECUTE) {
+            props.setBoolean(RelocationTable.RELOCATABLE_PROP_NAME, false);
+        } else {
+            props.setBoolean(RelocationTable.RELOCATABLE_PROP_NAME, true);
+        }
 	}
 
 	private void processLibraries() {

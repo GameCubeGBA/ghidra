@@ -141,7 +141,7 @@ public final class ObjectiveC1_TypeEncodings {
 			}
 			args.add(new ParameterDefinitionImpl(null, paramDT, null));
 		}
-		sig.setArguments(args.toArray(new ParameterDefinition[args.size()]));
+		sig.setArguments(args.toArray(new ParameterDefinition[0]));
 
 		new ApplyFunctionSignatureCmd(methodAddress, sig, SourceType.ANALYSIS).applyTo(program);
 
@@ -179,7 +179,7 @@ public final class ObjectiveC1_TypeEncodings {
 			arguments.add(parameter);
 		}
 
-		fSig.setArguments(arguments.toArray(new ParameterDefinition[arguments.size()]));
+		fSig.setArguments(arguments.toArray(new ParameterDefinition[0]));
 
 		return fSig;
 	}

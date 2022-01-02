@@ -321,11 +321,7 @@ public class DebugData {
 			//Processor target = pdb.getTargetProcessor();
 			PdbNewDebugInfo dbi = (PdbNewDebugInfo) pdb.getDebugInfo();
 			ImageFileMachine machine = dbi.getMachineType();
-			switch (machine) {
-                default:
-					break;
-			}
-		}
+        }
 	}
 
 	/**

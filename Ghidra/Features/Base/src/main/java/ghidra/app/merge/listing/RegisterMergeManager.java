@@ -536,7 +536,7 @@ class RegisterMergeManager implements ListingMergeConstants {
 				}
 				monitor.checkCanceled();
 			}
-			return conflicts.toArray(new AddressRange[conflicts.size()]);
+			return conflicts.toArray(new AddressRange[0]);
 		}
 	}
 }

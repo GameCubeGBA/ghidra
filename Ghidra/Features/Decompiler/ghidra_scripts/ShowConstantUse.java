@@ -763,27 +763,21 @@ public class ShowConstantUse extends GhidraScript {
 		if (defUseList == null || defUseList.size() <= 0) {
 			return value;
 		}
-		Iterator<PcodeOp> iterator = defUseList.iterator();
-		while (iterator.hasNext()) {
-			PcodeOp pcodeOp = iterator.next();
-			int opcode = pcodeOp.getOpcode();
-			switch (opcode) {
-				case PcodeOp.INT_AND:
-					if (pcodeOp.getInput(0).isConstant()) {
-						value = value & pcodeOp.getInput(0).getOffset();
-					}
-					else if (pcodeOp.getInput(1).isConstant()) {
-						value = value & pcodeOp.getInput(1).getOffset();
-					}
-					else {
-						throw new InvalidInputException(
-							" Unhandled Pcode OP " + pcodeOp.toString());
-					}
-					break;
-				default:
-					throw new InvalidInputException(" Unhandled Pcode OP " + pcodeOp.toString());
-			}
-		}
+        for (PcodeOp pcodeOp : defUseList) {
+            int opcode = pcodeOp.getOpcode();
+            if (opcode == PcodeOp.INT_AND) {
+                if (pcodeOp.getInput(0).isConstant()) {
+                    value = value & pcodeOp.getInput(0).getOffset();
+                } else if (pcodeOp.getInput(1).isConstant()) {
+                    value = value & pcodeOp.getInput(1).getOffset();
+                } else {
+                    throw new InvalidInputException(
+                            " Unhandled Pcode OP " + pcodeOp.toString());
+                }
+            } else {
+                throw new InvalidInputException(" Unhandled Pcode OP " + pcodeOp.toString());
+            }
+        }
 		return value;
 	}
 

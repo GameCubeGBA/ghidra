@@ -56,7 +56,7 @@ public class FRPathsModel extends AddressBasedTableModel<FRVertex> {
 
 	@Override
 	protected Comparator<FRVertex> createSortComparator(int columnIndex) {
-		return (o1, o2) -> path.indexOf(o1) - path.indexOf(o2);
+		return Comparator.comparingInt(o -> path.indexOf(o));
 	}
 
 	@Override

@@ -150,25 +150,22 @@ public class LldbModelTargetThreadContainerImpl extends LldbModelTargetObjectImp
 
 	@Override
 	public CompletableFuture<Void> writeConfigurationOption(String key, Object value) {
-		switch (key) {
-			case BASE_ATTRIBUTE_NAME:
-				if (value instanceof Integer) {
-					this.changeAttributes(List.of(), Map.of(BASE_ATTRIBUTE_NAME, value),
-						"Modified");
-					for (TargetObject child : getCachedElements().values()) {
-						if (child instanceof LldbModelTargetThreadImpl) {
-							LldbModelTargetThreadImpl targetThread =
-								(LldbModelTargetThreadImpl) child;
-							targetThread.setBase(value);
-						}
-					}
-				}
-				else {
-					throw new DebuggerIllegalArgumentException("Base should be numeric");
-				}
-			default:
-		}
-		return AsyncUtils.NIL;
+        if (BASE_ATTRIBUTE_NAME.equals(key)) {
+            if (value instanceof Integer) {
+                this.changeAttributes(List.of(), Map.of(BASE_ATTRIBUTE_NAME, value),
+                        "Modified");
+                for (TargetObject child : getCachedElements().values()) {
+                    if (child instanceof LldbModelTargetThreadImpl) {
+                        LldbModelTargetThreadImpl targetThread =
+                                (LldbModelTargetThreadImpl) child;
+                        targetThread.setBase(value);
+                    }
+                }
+            } else {
+                throw new DebuggerIllegalArgumentException("Base should be numeric");
+            }
+        }
+        return AsyncUtils.NIL;
 	}
 
 }

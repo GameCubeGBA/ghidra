@@ -500,7 +500,7 @@ public class CodeViewerProvider extends NavigatableComponentProviderAdapter
 			int p2 = pdp2.getPriority();
 			return p2 - p1;
 		});
-		dropProviders = list.toArray(new ProgramDropProvider[list.size()]);
+		dropProviders = list.toArray(new ProgramDropProvider[0]);
 		if (dropTargetAdapter == null) {
 			setUpDragDrop();
 		}
@@ -1065,7 +1065,7 @@ public class CodeViewerProvider extends NavigatableComponentProviderAdapter
 				listingHighlighter.getHighlights(text, obj, fieldFactoryClass, cursorTextOffset);
             list.addAll(Arrays.asList(highlights));
 
-			return list.toArray(new Highlight[list.size()]);
+			return list.toArray(new Highlight[0]);
 		}
 	}
 

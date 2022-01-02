@@ -199,8 +199,8 @@ public class ProgramBigListingModel implements ListingModel, FormatModelListener
 			dataList = null;
 		}
 
-		if (list.size() > 0) {
-			return new MultiRowLayout(list.toArray(new RowLayout[list.size()]), indexSize);
+		if (!list.isEmpty()) {
+			return new MultiRowLayout(list.toArray(new RowLayout[0]), indexSize);
 		}
 		else if (cu != null) {
 			ListingField f = dummyFactory.getField(new CodeUnitProxy(this, program, cu), 0);

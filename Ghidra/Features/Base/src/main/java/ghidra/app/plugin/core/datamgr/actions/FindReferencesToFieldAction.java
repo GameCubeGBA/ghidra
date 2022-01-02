@@ -105,7 +105,7 @@ public class FindReferencesToFieldAction extends DockingAction {
 			names.add(fieldName);
 		}
 
-		String[] array = names.toArray(new String[names.size()]);
+		String[] array = names.toArray(new String[0]);
 		String userChoice = OptionDialog.showInputChoiceDialog(null, "Choose Field",
 			"Find uses of '" + composite.getName() + "' field", array, null,
 			OptionDialog.QUESTION_MESSAGE);

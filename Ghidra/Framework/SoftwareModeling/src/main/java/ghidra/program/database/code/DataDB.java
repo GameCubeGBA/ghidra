@@ -882,7 +882,7 @@ class DataDB extends CodeUnitDB implements Data {
 			Reference[] refs = refMgr.getReferencesFrom(fromAddress);
 			Collections.addAll(list, refs);
 		}
-		return list.toArray(new Reference[list.size()]);
+		return list.toArray(new Reference[0]);
 	}
 
 	@Override

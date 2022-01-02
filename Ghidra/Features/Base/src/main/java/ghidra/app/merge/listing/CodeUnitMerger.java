@@ -308,7 +308,7 @@ class CodeUnitMerger extends AbstractListingMerger {
 				manualSet.add(addRange);
 			}
 		}
-		return list.toArray(new AddressRange[list.size()]);
+		return list.toArray(new AddressRange[0]);
 	}
 
 	/**

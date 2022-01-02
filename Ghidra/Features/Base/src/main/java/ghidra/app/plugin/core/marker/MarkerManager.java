@@ -647,7 +647,7 @@ public class MarkerManager implements MarkerService {
 			// separate the marker sets into grouped and non-grouped
 			List<List<MarkerSetImpl>> groupsList = extractManagerGroups(list);
 			Collections.sort(groupsList,
-				(ms1, ms2) -> ms1.get(0).getName().compareTo(ms2.get(0).getName()));
+                    Comparator.comparing(ms -> ms.get(0).getName()));
 			for (List<MarkerSetImpl> group : groupsList) {
 				ActivateMarkerGroupAction action =
 					new ActivateMarkerGroupAction(owner, group, navigationPanel, listOptions);
@@ -655,7 +655,7 @@ public class MarkerManager implements MarkerService {
 				tool.addAction(action);
 			}
 
-			Collections.sort(list, (ms1, ms2) -> ms1.getName().compareTo(ms2.getName()));
+			Collections.sort(list, Comparator.comparing(MarkerSetImpl::getName));
 			for (MarkerSetImpl mgr : list) {
 				ActivateMarkerAction action =
 					new ActivateMarkerAction(owner, mgr, navigationPanel, listOptions);

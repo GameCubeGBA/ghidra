@@ -880,7 +880,7 @@ public class AnnotationTest extends AbstractGhidraHeadedIntegrationTest {
 
 		@Override
 		public synchronized DomainFile[] getFiles() {
-			return folderFiles.toArray(new TestDummyDomainFile[folderFiles.size()]);
+			return folderFiles.toArray(new TestDummyDomainFile[0]);
 		}
 
 		@Override

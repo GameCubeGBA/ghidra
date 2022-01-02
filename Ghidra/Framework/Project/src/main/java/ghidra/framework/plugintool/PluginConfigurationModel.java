@@ -171,7 +171,7 @@ public class PluginConfigurationModel {
 				loadedPlugins.add(loadedPluginMap.get(pluginDescription));
 			}
 		}
-		tool.removePlugins(loadedPlugins.toArray(new Plugin[loadedPlugins.size()]));
+		tool.removePlugins(loadedPlugins.toArray(new Plugin[0]));
 		initLoadedPlugins();
 		listener.stateChanged(null);
 	}
@@ -186,7 +186,7 @@ public class PluginConfigurationModel {
 			}
 		}
 		try {
-			tool.addPlugins(pluginClasseNames.toArray(new String[pluginClasseNames.size()]));
+			tool.addPlugins(pluginClasseNames.toArray(new String[0]));
 		}
 		catch (PluginException e) {
 			Msg.showError(this, null, "Error Loading Plugin(s) ", e.getMessage(), e);

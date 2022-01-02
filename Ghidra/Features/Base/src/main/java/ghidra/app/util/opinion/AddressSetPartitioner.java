@@ -21,12 +21,7 @@ import ghidra.program.model.address.*;
 import java.util.*;
 
 public class AddressSetPartitioner implements Iterable<AddressRange> {
-	private static final Comparator<AddressRange> MIN_ADDRESS_ASC = new Comparator<AddressRange>() {
-		@Override
-		public int compare(AddressRange lhs, AddressRange rhs) {
-			return lhs.getMinAddress().compareTo(rhs.getMinAddress());
-		}
-	};
+	private static final Comparator<AddressRange> MIN_ADDRESS_ASC = Comparator.comparing(AddressRange::getMinAddress);
 
 	private final ArrayList<AddressRange> addressRangeCache;
 	private final HashMap<AddressRange, byte[]> rangeMapCache;

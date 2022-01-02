@@ -208,12 +208,10 @@ public abstract class AbstractSymbolInformation {
 		deserializeHashHeader(reader);
 
 		if (headerSignature == HEADER_SIGNATURE) {
-			switch (versionNumber) {
-				case GSI70:
-					deserializeGsi70HashTable(reader, monitor);
-					break;
-				default:
-					throw new PdbException("Unknown GSI Version Number");
+			if (versionNumber == GSI70) {
+				deserializeGsi70HashTable(reader, monitor);
+			} else {
+				throw new PdbException("Unknown GSI Version Number");
 			}
 		}
 		else {

@@ -652,7 +652,7 @@ public class DataTypeManagerHandler {
 
 	public void closeAllArchives() {
 		// this list will get modified as we close archives, so work from a copy
-		Archive[] archives = openArchives.toArray(new Archive[openArchives.size()]);
+		Archive[] archives = openArchives.toArray(new Archive[0]);
 		for (Archive archive : archives) {
 			archive.close();
 		}

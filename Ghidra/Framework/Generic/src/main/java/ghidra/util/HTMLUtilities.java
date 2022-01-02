@@ -794,13 +794,11 @@ public class HTMLUtilities {
 		StringBuilder buffy = new StringBuilder();
 
 		s.chars().forEach(c -> {
-			switch (c) {
-				case 0xA0:
-					buffy.append((char) 0x20);
-					break;
-				default:
-					buffy.append((char) c);
-			}
+            if (c == 0xA0) {
+                buffy.append((char) 0x20);
+            } else {
+                buffy.append((char) c);
+            }
 		});
 
 		return buffy.toString();

@@ -16,8 +16,9 @@
 package docking.widgets.table.constraint.dialog;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ListSelectionEvent;
@@ -164,21 +165,15 @@ public class ColumnFilterDialogModel<R> {
 	 * @return true if the model represents a valid filter.
 	 */
 	public boolean isValid() {
-		for (DialogFilterRow filterRow : filterRows) {
-			if (!filterRow.hasValidFilterValue()) {
-				return false;
-			}
-		}
-		return true;
+		return filterRows.stream().allMatch(DialogFilterRow::hasValidFilterValue);
 	}
 
 	/**
 	 * Callback from a DialogFilterRow to indicate that the structure of the filter row changed.  This includes
 	 * changing the column, or adding, deleting, changing filter conditions.
 	 *
-	 * @param filterRow the DialogFilterRow that changed.
 	 */
-	void dialogFilterRowChanged(DialogFilterRow filterRow) {
+	void dialogFilterRowChanged() {
 		notifyFilterChanged();
 	}
 
@@ -218,9 +213,7 @@ public class ColumnFilterDialogModel<R> {
 			return null;
 		}
 		ColumnBasedTableFilter<R> tableColumnFilter = new ColumnBasedTableFilter<>(tableModel);
-		for (DialogFilterRow filterRow : filterRows) {
-			filterRow.addToTableFilter(tableColumnFilter);
-		}
+		filterRows.forEach(filterRow -> filterRow.addToTableFilter(tableColumnFilter));
 		if (tableColumnFilter.isEquivalent(currentFilter)) {
 			return currentFilter;
 		}
@@ -245,9 +238,7 @@ public class ColumnFilterDialogModel<R> {
 	 */
 	public void clear() {
 		List<DialogFilterRow> temp = new ArrayList<>(filterRows);
-		for (DialogFilterRow filterRow : temp) {
-			deleteFilterRow(filterRow);
-		}
+		temp.forEach(this::deleteFilterRow);
 	}
 
 	/**
@@ -313,30 +304,15 @@ public class ColumnFilterDialogModel<R> {
 	}
 
 	private ColumnFilterData<?> getColumnFilterDataByModelIndex(int columnModelIndex) {
-		for (ColumnFilterData<?> columnFilterData : allFilters) {
-			if (columnFilterData.getColumnModelIndex() == columnModelIndex) {
-				return columnFilterData;
-			}
-		}
-		return null;
+		return allFilters.stream().filter(columnFilterData -> columnFilterData.getColumnModelIndex() == columnModelIndex).findFirst().map(columnFilterData -> columnFilterData).orElse(null);
 	}
 
 	private ColumnFilterData<?> getColumnFilterDataByViewIndex(int viewIndex) {
-		for (ColumnFilterData<?> columnFilterData : allFilters) {
-			if (columnFilterData.getViewIndex() == viewIndex) {
-				return columnFilterData;
-			}
-		}
-		return null;
+		return allFilters.stream().filter(columnFilterData -> columnFilterData.getViewIndex() == viewIndex).findFirst().map(columnFilterData -> columnFilterData).orElse(null);
 	}
 
 	private DialogFilterRow getFilterRowForColumnData(ColumnFilterData<?> columnFilterData) {
-		for (DialogFilterRow filterRow : filterRows) {
-			if (filterRow.getColumnFilterData().equals(columnFilterData)) {
-				return filterRow;
-			}
-		}
-		return null;
+		return filterRows.stream().filter(filterRow -> filterRow.getColumnFilterData().equals(columnFilterData)).findFirst().orElse(null);
 	}
 
 	private void notifyFilterChanged() {
@@ -346,15 +322,15 @@ public class ColumnFilterDialogModel<R> {
 	}
 
 	private void updateColumnViewIndices() {
-		for (int viewIndex = 0; viewIndex < columnModel.getColumnCount(); viewIndex++) {
+		IntStream.range(0, columnModel.getColumnCount()).forEach(viewIndex -> {
 			TableColumn column = columnModel.getColumn(viewIndex);
 			int modelIndex = column.getModelIndex();
 			ColumnFilterData<?> columnFilterData = getColumnFilterDataByModelIndex(modelIndex);
 			if (columnFilterData != null) {
 				columnFilterData.setViewIndex(viewIndex);
 			}
-		}
-		Collections.sort(allFilters, (o1, o2) -> o1.getViewIndex() - o2.getViewIndex());
+		});
+		allFilters.sort(Comparator.comparingInt(ColumnFilterData::getViewIndex));
 	}
 
 	public void setCurrentlyAppliedFilter(ColumnBasedTableFilter<R> tableColumnFilter) {

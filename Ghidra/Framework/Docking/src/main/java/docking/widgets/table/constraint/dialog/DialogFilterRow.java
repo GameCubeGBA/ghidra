@@ -73,7 +73,7 @@ public class DialogFilterRow {
 	 */
 	public void setColumnData(ColumnFilterData<?> columnData) {
 		doSetColumnData(columnData);
-		dialogModel.dialogFilterRowChanged(this);
+		dialogModel.dialogFilterRowChanged();
 	}
 
 	/**
@@ -149,7 +149,7 @@ public class DialogFilterRow {
 	}
 
 	void conditionSetChanged(DialogFilterConditionSet<?> conditionSet) {
-		dialogModel.dialogFilterRowChanged(this);
+		dialogModel.dialogFilterRowChanged();
 	}
 
 	RowObjectFilterModel<?> getTableModel() {

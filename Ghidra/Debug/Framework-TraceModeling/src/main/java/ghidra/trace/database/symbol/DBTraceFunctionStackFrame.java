@@ -298,7 +298,7 @@ public class DBTraceFunctionStackFrame implements StackFrame, Unfinished {
 					list.add((Parameter) v);
 				}
 			}
-			return list.toArray(new Parameter[list.size()]);
+			return list.toArray(new Parameter[0]);
 		}
 	}
 
@@ -312,7 +312,7 @@ public class DBTraceFunctionStackFrame implements StackFrame, Unfinished {
 					list.add((LocalVariable) v);
 				}
 			}
-			return list.toArray(new LocalVariable[list.size()]);
+			return list.toArray(new LocalVariable[0]);
 		}
 	}
 
