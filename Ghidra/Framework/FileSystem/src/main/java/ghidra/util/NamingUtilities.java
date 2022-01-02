@@ -102,11 +102,7 @@ public final class NamingUtilities {
 	 * @param name the name with an invalid character
 	 * @return the invalid character or 0 if no invalid character can be found
 	 * @see #isValidName(String)
-	 * @deprecated this method may be removed in a subsequent release due to 
-	 * limited use and applicability (project names and project file names have
-	 * different naming restrictions).
 	 */
-	@Deprecated
 	public static char findInvalidChar(String name) {
 		if (!name.isEmpty()) {
 			if (name.charAt(0) == '.') {

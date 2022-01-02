@@ -513,7 +513,7 @@ public class GNUExternalDisassembler implements ExternalDisassembler {
 	}
 
 	private String converBytesToString(byte[] bytes) {
-		String byteString = null;
+		String byteString = "";
 		for (byte thisByte : bytes) {
 			String thisByteString = Integer.toHexString(thisByte);
 			if (thisByteString.length() == 1) {

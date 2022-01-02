@@ -24,7 +24,6 @@ import java.awt.Dimension;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 /**

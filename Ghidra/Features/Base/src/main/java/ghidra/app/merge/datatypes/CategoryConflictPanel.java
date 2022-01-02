@@ -16,7 +16,6 @@
 package ghidra.app.merge.datatypes;
 
 import java.awt.BorderLayout;
-import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 import javax.swing.*;

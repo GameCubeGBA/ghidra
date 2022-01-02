@@ -665,26 +665,6 @@ class ReferenceMerger extends AbstractListingMerger {
 		}
 	}
 
-	/**
-	 * Replace the fallthroughs where possible. 
-	 * @param addressSet the address set where fallthroughs should be replaced
-	 * @param chosenConflictOption indicator of where to get references from (KEEP_ORIGINAL, KEEP_LATEST, KEEP_MY).
-	 * @param monitor task monitor
-	 * @throws CancelledException if user cancels.
-	 */
-	private void replaceFallThroughs(final AddressSetView addressSet,
-			final int chosenConflictOption, final TaskMonitor monitor) throws CancelledException {
-		if ((chosenConflictOption & KEEP_ORIGINAL) != 0) {
-			listingMergeMgr.mergeOriginal.replaceFallThroughs(addressSet, monitor);
-		}
-		else if ((chosenConflictOption & KEEP_LATEST) != 0) {
-			listingMergeMgr.mergeLatest.replaceFallThroughs(addressSet, monitor);
-		}
-		else if ((chosenConflictOption & KEEP_MY) != 0) {
-			listingMergeMgr.mergeMy.replaceFallThroughs(addressSet, monitor);
-		}
-	}
-
 	/* (non-Javadoc)
 	 * @see ghidra.app.merge.listing.ListingMerger#mergeConflicts(ghidra.app.merge.tool.ListingMergePanel, 
 	 * ghidra.program.model.address.Address, int, ghidra.util.task.TaskMonitor)

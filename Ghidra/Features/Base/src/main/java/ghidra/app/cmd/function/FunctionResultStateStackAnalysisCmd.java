@@ -31,7 +31,6 @@ import ghidra.util.Msg;
 import ghidra.util.exception.*;
 import ghidra.util.state.*;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * Command for analyzing the Stack; the command is run in the background.

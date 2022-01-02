@@ -37,8 +37,6 @@ import ghidra.util.task.TaskMonitor;
  * enough undefined bytes following to make a pointer.
  */
 public class CreateDataBackgroundCmd extends BackgroundCommand {
-	private static final int EVENT_LIMIT = 1000;
-
 	private AddressSetView addrSet;
 	private DataType newDataType;
 	private int bytesApplied = 0;

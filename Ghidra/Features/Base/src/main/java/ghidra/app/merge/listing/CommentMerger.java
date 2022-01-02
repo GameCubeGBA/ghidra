@@ -30,7 +30,6 @@ import ghidra.util.task.TaskMonitor;
 import java.lang.reflect.InvocationTargetException;
 
 import javax.swing.SwingUtilities;
-import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 /**

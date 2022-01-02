@@ -18,8 +18,6 @@ package ghidra.app.merge.datatypes;
 import java.awt.BorderLayout;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import docking.widgets.checkbox.GCheckBox;
 import ghidra.app.merge.MergeConstants;

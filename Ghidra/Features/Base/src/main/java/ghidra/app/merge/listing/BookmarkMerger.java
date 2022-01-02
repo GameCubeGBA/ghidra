@@ -446,22 +446,19 @@ class BookmarkMerger extends AbstractListingMerger {
 		// At address get the BookmarkUid ArrayList for each conflict.
 		boolean askUser = chosenConflictOption == ASK_USER;
 		ArrayList<BookmarkUid> list = conflicts.get(addr);
-		int size = list.size();
-		for (int i = 0; i < size; i++) {
-			BookmarkUid bmuid = list.get(i);
-			// If we have a bookmark choice then a "Use For All" has already occurred.
-			if ((bookmarkChoice == ASK_USER) && askUser && mergeManager != null) {
-				showMergePanel(listingPanel, bmuid.address, bmuid.bookmarkType,
-					bmuid.bookmarkCategory, monitor);
-				monitor.checkCanceled();
-			}
-			else {
-				int optionToUse =
-					(bookmarkChoice == ASK_USER) ? chosenConflictOption : bookmarkChoice;
-				merge(bmuid.address, bmuid.bookmarkType, bmuid.bookmarkCategory, optionToUse,
-					monitor);
-			}
-		}
+        for (BookmarkUid bmuid : list) {
+            // If we have a bookmark choice then a "Use For All" has already occurred.
+            if ((bookmarkChoice == ASK_USER) && askUser && mergeManager != null) {
+                showMergePanel(listingPanel, bmuid.address, bmuid.bookmarkType,
+                        bmuid.bookmarkCategory, monitor);
+                monitor.checkCanceled();
+            } else {
+                int optionToUse =
+                        (bookmarkChoice == ASK_USER) ? chosenConflictOption : bookmarkChoice;
+                merge(bmuid.address, bmuid.bookmarkType, bmuid.bookmarkCategory, optionToUse,
+                        monitor);
+            }
+        }
 		resolvedSet.addRange(addr, addr);
 	}
 

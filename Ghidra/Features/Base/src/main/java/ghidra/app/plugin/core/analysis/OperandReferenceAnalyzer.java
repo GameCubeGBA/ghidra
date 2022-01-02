@@ -95,17 +95,16 @@ public class OperandReferenceAnalyzer extends AbstractAnalyzer {
 	private static final String OPTION_DESCRIPTION_RESPECT_EXECUTE_FLAG =
 		"Respect Execute flag on memory blocks when checking entry points for code.";
 
-	private final static boolean OPTION_DEFAULT_ASCII_ENABLED = true;
-	private final static boolean OPTION_DEFAULT_UNICODE_ENABLED = true;
-	private final static boolean OPTION_DEFAULT_ALIGN_STRINGS_ENABLED = false;
-	private final static int OPTION_DEFAULT_MIN_STRING_LENGTH = 5;
-	private final static boolean OPTION_DEFAULT_POINTER_ENABLED = true;
-	private final static boolean OPTION_DEFAULT_RELOCATION_GUIDE_ENABLED = true;
-	private final static boolean OPTION_DEFAULT_SUBROUTINES_ENABLED = true;
-	private final static boolean OPTION_DEFAULT_ADDRESS_TABLES_ENABLED = true;
-	private final static boolean OPTION_DEFAULT_SWITCH_TABLE_ENABLED = false;
-	private final static int OPTION_DEFAULT_SWITCH_TABLE_ALIGNMENT = 1;
-	private final static boolean OPTION_DEFAULT_RESPECT_EXECUTE_ENABLED = true;
+	private static final boolean OPTION_DEFAULT_ASCII_ENABLED = true;
+	private static final boolean OPTION_DEFAULT_UNICODE_ENABLED = true;
+	private static final boolean OPTION_DEFAULT_ALIGN_STRINGS_ENABLED = false;
+	private static final int OPTION_DEFAULT_MIN_STRING_LENGTH = 5;
+	private static final boolean OPTION_DEFAULT_POINTER_ENABLED = true;
+	private static final boolean OPTION_DEFAULT_RELOCATION_GUIDE_ENABLED = true;
+	private static final boolean OPTION_DEFAULT_SUBROUTINES_ENABLED = true;
+	private static final boolean OPTION_DEFAULT_ADDRESS_TABLES_ENABLED = true;
+	private static final boolean OPTION_DEFAULT_SWITCH_TABLE_ENABLED = false;
+	private static final int OPTION_DEFAULT_SWITCH_TABLE_ALIGNMENT = 1;
 
 	private static final int MINIMUM_POTENTIAL_TABLE_SIZE = 3;
 	private final static int NOTIFICATION_INTERVAL = 256;
