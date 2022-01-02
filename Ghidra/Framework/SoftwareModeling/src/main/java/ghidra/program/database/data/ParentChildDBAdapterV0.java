@@ -29,8 +29,6 @@ import ghidra.util.exception.VersionException;
 
 class ParentChildDBAdapterV0 extends ParentChildAdapter {
 
-	private static final int VERSION = 0;
-
 	private static final int PARENT_COL = 0;
 	private static final int CHILD_COL = 1;
 	static final Schema V0_SCHEMA =
