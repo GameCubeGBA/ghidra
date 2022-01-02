@@ -15,12 +15,7 @@
  */
 package ghidra.app.plugin.core.references;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import docking.DialogComponentProvider;
 import docking.widgets.checkbox.GCheckBox;

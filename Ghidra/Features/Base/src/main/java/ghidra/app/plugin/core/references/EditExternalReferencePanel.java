@@ -17,7 +17,6 @@ package ghidra.app.plugin.core.references;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.event.*;
 import java.util.Arrays;
 
 import javax.swing.*;

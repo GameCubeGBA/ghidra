@@ -35,7 +35,6 @@ import ghidra.util.HelpLocation;
 public class ViewManagerComponentProvider extends ComponentProviderAdapter
 		implements ViewManagerService, ViewChangeListener {
 
-	private static final String OLD_NAME = "ProgramTreePlugin";
 	private static final String NAME = "Program Tree";
 
 	public static final String CURRENT_VIEW = "Current Viewname";

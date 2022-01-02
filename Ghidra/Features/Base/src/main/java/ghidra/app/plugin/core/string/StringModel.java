@@ -15,8 +15,6 @@
  */
 package ghidra.app.plugin.core.string;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class StringModel {

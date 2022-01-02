@@ -33,8 +33,6 @@ import ghidra.util.exception.InvalidInputException;
  * StackFrameDataType provides an editable copy of a function stack frame.
  */
 public class StackFrameDataType extends BiDirectionDataType {
-
-	private static final long serialVersionUID = 1L;
 	static String DUMMY_FUNCTION_NAME = "StackWithoutFunction";
 	private static final String UNKNOWN_PREFIX = "unknown_";
 	StackFrame stack;

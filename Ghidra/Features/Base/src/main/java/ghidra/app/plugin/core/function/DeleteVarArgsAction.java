@@ -31,7 +31,6 @@ import docking.action.MenuData;
  * Action that changes a Function so that it has VarArgs (a variable argument list).
  */
 public class DeleteVarArgsAction extends ListingContextAction {
-	private static final long serialVersionUID = 1L;
 	FunctionPlugin functionPlugin;
 
 	DeleteVarArgsAction(FunctionPlugin plugin) {

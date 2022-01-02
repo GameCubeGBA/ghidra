@@ -181,12 +181,6 @@ public class StringsAnalyzer extends AbstractAnalyzer {
 	private String trigramFile = "StringModel.sng";
 	private boolean isLowerCaseModel = false;
 
-	// TODO
-	private CodeUnitIterator instructionIterator;
-	private CodeUnitIterator definedDataIterator;
-	private CodeUnit currInstrCU, currDataCU;
-	private Address instrStart, instrEnd, dataStart, dataEnd;
-
 	public StringsAnalyzer() {
 		super(NAME, DESCRIPTION, AnalyzerType.BYTE_ANALYZER);
 		setDefaultEnablement(true);

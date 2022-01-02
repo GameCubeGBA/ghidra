@@ -16,8 +16,6 @@
 package ghidra.app.plugin.core.select;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.math.BigInteger;
 
 import javax.swing.*;
@@ -286,7 +284,6 @@ class SelectBlockDialog extends DialogComponentProvider {
 		Address currentAddress = navigatable.getLocation().getAddress();
 		length *= currentAddress.getAddressSpace().getAddressableUnitSize();
 
-		AddressFactory addressFactory = navigatable.getProgram().getAddressFactory();
 		AddressSet addressSet = new AddressSet(navigatable.getSelection());
 		if (addressSet.isEmpty()) {
 			addressSet.addRange(currentAddress, currentAddress);

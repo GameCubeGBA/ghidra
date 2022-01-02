@@ -16,14 +16,10 @@
 package ghidra.app.plugin.core.register;
 
 import java.awt.*;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.math.BigInteger;
 import java.util.Arrays;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import docking.DialogComponentProvider;
 import docking.widgets.combobox.GComboBox;

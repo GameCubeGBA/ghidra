@@ -444,14 +444,6 @@ public class GenerateOldLanguagePlugin extends Plugin implements FrontEndable {
 			}
 			return false;
 		}
-
-		boolean canMapSpaces() {
-			return canMapSpaces;
-		}
-
-		boolean canMapContext() {
-			return canMapContext;
-		}
 	}
 
 	/**
