@@ -137,7 +137,7 @@ public class TaskMonitorAdapter implements TaskMonitor {
 			cancelled = false;
 		}
 
-		// TODO this seems like a mistake, to notify of 'cancelled' when clearning 
+		// TODO this seems like a mistake, to notify of 'cancelled' when clearing 
 		notifyChangeListeners();
 	}
 
