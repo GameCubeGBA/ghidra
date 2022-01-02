@@ -1079,7 +1079,6 @@ class StructureDB extends CompositeDB implements StructureInternal {
 			int index = Collections.binarySearch(components, Integer.valueOf(offset),
 				OffsetComparator.INSTANCE);
 			if (index >= 0) {
-				DataTypeComponent dtc = components.get(index);
 				index = backupToFirstComponentContainingOffset(index, offset);
 				return components.get(index);
 			}
