@@ -83,7 +83,7 @@ public class MatchStatusUpdaterAssociationHook implements AssociationHook, VTCon
 
 //		MatchInfo matchInfo = controller.getMatchInfo(matches.get(0));
 //		Collection<VTMarkupItem> markupItems =
-//			matchInfo.getAppliableMarkupItems(TaskMonitorAdapter.DUMMY_MONITOR);
+//			matchInfo.getAppliableMarkupItems(TaskMonitor.DUMMY);
 
 		Collection<VTMarkupItem> markupItems;
 		try {

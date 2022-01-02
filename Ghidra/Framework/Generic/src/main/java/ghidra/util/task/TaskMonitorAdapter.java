@@ -34,14 +34,6 @@ public class TaskMonitorAdapter implements TaskMonitor {
 	private boolean cancelEnabled = false;
 	private volatile boolean cancelled;
 
-	/**
-	 * Provides a static instance of {@code TaskMonitorAdapter}
-	 * which is a non-cancellable task monitor with no visual components.
-	 * @deprecated use {@link TaskMonitor#DUMMY} instead
-	 */
-	@Deprecated
-	public static final TaskMonitor DUMMY_MONITOR = TaskMonitor.DUMMY;
-
 	public TaskMonitorAdapter() {
 		// do nothing
 	}

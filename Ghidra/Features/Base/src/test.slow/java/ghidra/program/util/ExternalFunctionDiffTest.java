@@ -292,11 +292,11 @@ public class ExternalFunctionDiffTest extends AbstractGhidraHeadedIntegrationTes
 //		expectedDifferences.addRange(addr(latestProgram, ), addr());
 //		// Perform the Diff and check the differences.
 //		ProgramDiff programDiff = new ProgramDiff(latestProgram, myProgram);
-//		AddressSetView differences = programDiff.getDifferences(TaskMonitorAdapter.DUMMY_MONITOR);
+//		AddressSetView differences = programDiff.getDifferences(TaskMonitor.DUMMY);
 //		assertEquals(expectedDifferences, differences);
 //		ProgramDiffFilter filter = new ProgramDiffFilter(ProgramDiffFilter.FUNCTION_DIFFS);
 //		AddressSetView functionDifferences =
-//			programDiff.getDifferences(filter, TaskMonitorAdapter.DUMMY_MONITOR);
+//			programDiff.getDifferences(filter, TaskMonitor.DUMMY);
 //		assertEquals(expectedDifferences, functionDifferences);
 //	}
 
