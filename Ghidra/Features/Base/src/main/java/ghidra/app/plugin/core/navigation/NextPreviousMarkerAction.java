@@ -237,21 +237,6 @@ public class NextPreviousMarkerAction extends MultiStateDockingAction<String> {
 				});*/
 	}
 
-	private void gotoAddress(ListingActionContext listingActionContext, Address address) {
-		if (address == null) {
-			tool.setStatusInfo("Unable to locate another " + getNavigationTypeName() +
-				" past the current range, in the current direction.");
-			return;
-		}
-		tool.clearStatusInfo();
-		GoToService service = tool.getService(GoToService.class);
-		if (service != null) {
-			Navigatable navigatable = listingActionContext.getNavigatable();
-			gotoAddress(service, navigatable, address);
-		}
-
-	}
-
 	public void setDirection(boolean isForward) {
 		this.isForward = isForward;
 		getMenuBarData().setMenuItemName(getMenuName());

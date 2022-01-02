@@ -18,7 +18,6 @@ package ghidra.app.plugin.core.programtree;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
-import java.util.Iterator;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;

@@ -194,20 +194,12 @@ public class LSDACallSiteRecord extends GccAnalysisClass {
 		return nextAddress;
 	}
 
-	private long getCallSitePosition() {
-		return callSitePosition;
-	}
-
 	/**
 	 * Get the call site addresses which make up the {@code try}.
 	 * @return the address range of the call site
 	 */
 	public AddressRange getCallSite() {
 		return callSiteRange;
-	}
-
-	private long getCallSiteLength() {
-		return callSiteLength;
 	}
 
 	/**

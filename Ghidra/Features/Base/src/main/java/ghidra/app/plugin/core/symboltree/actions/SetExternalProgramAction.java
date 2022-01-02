@@ -26,9 +26,6 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.symbol.ExternalManager;
 import ghidra.util.HelpLocation;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
 import javax.swing.tree.TreePath;

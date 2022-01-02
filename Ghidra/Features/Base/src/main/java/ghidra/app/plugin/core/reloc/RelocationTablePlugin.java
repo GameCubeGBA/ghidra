@@ -69,12 +69,6 @@ public class RelocationTablePlugin extends Plugin implements DomainObjectListene
 		tool.addLocalAction(provider, navigationAction);
 	}
 
-	private void doMakeSelection() {
-		ProgramSelection selection = provider.getTable().getProgramSelection();
-		PluginEvent event = new ProgramSelectionPluginEvent(getName(), selection, currentProgram);
-		firePluginEvent(event);
-	}
-
 	@Override
 	public void dispose() {
 		super.dispose();

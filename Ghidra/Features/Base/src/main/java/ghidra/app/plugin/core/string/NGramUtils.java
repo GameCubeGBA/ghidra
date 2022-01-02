@@ -207,57 +207,6 @@ public class NGramUtils {
 	}
 
 	/**
-	 * Initializes log probabilities based on counts from the given model.
-	 * 
-	 * @param model  Model object containing trigram counts
-	 */
-	private static void loadStringModels(StringModel model) {
-
-		int[][] beginTrigramCounts, endTrigramCounts;
-		int[][][] trigramCounts;
-		int copyLength;
-		long totalTrigrams;
-
-		// Make copies of models so as not to change the original model during smoothing
-		int[][] tempDoubleArr = model.getBeginTrigramCounts();
-		copyLength = tempDoubleArr.length;
-		beginTrigramCounts = new int[copyLength][];
-
-		for (int i = 0; i < copyLength; i++) {
-			beginTrigramCounts[i] = Arrays.copyOf(tempDoubleArr[i], tempDoubleArr[i].length);
-		}
-
-		tempDoubleArr = model.getEndTrigramCounts();
-		copyLength = tempDoubleArr.length;
-		endTrigramCounts = new int[copyLength][];
-
-		for (int i = 0; i < copyLength; i++) {
-			endTrigramCounts[i] = Arrays.copyOf(tempDoubleArr[i], tempDoubleArr[i].length);
-		}
-
-		int[][][] tempTripleArr = model.getTrigramCounts();
-		copyLength = tempTripleArr.length;
-		trigramCounts = new int[copyLength][][];
-
-		for (int i = 0; i < copyLength; i++) {
-			tempDoubleArr = tempTripleArr[i];
-			trigramCounts[i] = new int[tempDoubleArr.length][];
-
-			for (int j = 0; j < tempDoubleArr.length; j++) {
-				trigramCounts[i][j] = Arrays.copyOf(tempDoubleArr[j], tempDoubleArr[j].length);
-			}
-		}
-
-		totalTrigrams = model.getTotalNumTrigrams();
-
-		// Calculate log probabilities and smooth.
-		smoothCountsAndCalculateLogProbs(beginTrigramCounts, endTrigramCounts, trigramCounts,
-			totalTrigrams);
-
-		lastLoadedTrigramModel = "";
-	}
-
-	/**
 	 * Read in model files, smooth counts, and calculate log probabilities. 
 	 * 
 	 * @param charFileToSlurp  File containing character ngram counts
