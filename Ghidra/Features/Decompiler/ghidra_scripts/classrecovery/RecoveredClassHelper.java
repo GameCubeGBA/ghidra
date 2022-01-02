@@ -843,26 +843,6 @@ public class RecoveredClassHelper {
 	}
 
 	/**
-	 * Method to get a list of addresses that are references from the given address
-	 * @param address the given address
-	 * @return a list of addresses that are references from the given address 
-	 */
-	private List<Address> getReferenceFromAddresses(Address address) {
-
-		Reference[] referencesFrom = program.getReferenceManager().getReferencesFrom(address);
-
-		// get only the address references at the given address (ie no stack refs, ...)
-		List<Address> refFromAddresses = new ArrayList<Address>();
-		for (Reference referenceFrom : referencesFrom) {
-			if (referenceFrom.isMemoryReference()) {
-				refFromAddresses.add(referenceFrom.getToAddress());
-			}
-		}
-
-		return refFromAddresses;
-	}
-
-	/**
 	 * Retrieve the first stored vftable from the pcodeOps in the list 
 	 * @param storedPcodeOps list of offset/PcodeOp pairs
 	 * @return first referenced vftable address 

@@ -57,7 +57,7 @@ public class DecompileOptions {
 	private static final String ELIMINATE_UNREACHABLE_OPTIONSTRING =
 		"Analysis.Eliminate unreachable code";
 	private static final String ELIMINATE_UNREACHABLE_OPTIONDESCRIPTION =
-			"If set, branches and code that can never be executed are eliminated as dead code"
+			"If set, branches and code that can never be executed are eliminated as dead code";
 	private static final boolean ELIMINATE_UNREACHABLE_OPTIONDEFAULT = true;
 	private boolean eliminateUnreachable;
 
@@ -162,7 +162,7 @@ public class DecompileOptions {
 	private static final String INDENTWIDTH_OPTIONSTRING =
 		"Display.Number of characters per indent level";
 	private static final String INDENTWIDTH_OPTIONDESCRIPTION =
-			"Number of characters indented for each level of control-flow or scope nesting"
+			"Number of characters indented for each level of control-flow or scope nesting";
 	private static final int INDENTWIDTH_OPTIONDEFAULT = 2;	// Must match EmitXml::resetDefaultsInternal
 	private int indentwidth;
 
