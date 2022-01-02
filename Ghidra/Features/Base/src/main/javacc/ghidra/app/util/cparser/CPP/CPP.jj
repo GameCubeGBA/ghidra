@@ -250,7 +250,7 @@ public class PreProcessor {
 					case PreProcessor.ITEM:
 					case PreProcessor.MANIFEST:
 					case PreProcessor.VALUES:
-						if (isDef(this) == true) {
+						if (isDef(this)) {
 							PPToken repVal = (PPToken) getDef(this);
 						}
 						break;
@@ -368,10 +368,10 @@ public class PreProcessor {
 		}
 
 		boolean getTruth() {
-			if (contradict == false)
-				return truth;
-			else
+			if (contradict)
 				return !truth;
+			else
+				return truth;
 		}
 
 		void join() {
@@ -475,7 +475,7 @@ public class PreProcessor {
 		if (verboseLevel == 3 || verboseLevel == 6)
 			println(curFileStackTop() + "'" + def.beginLine + ": Defining: "
 					+ def.image);
-		if (emitExecSwitch == true) {
+		if (emitExecSwitch) {
 			defs.put(def.image, new PPToken(""));
 			// setDef(def.image, "");
 		}
@@ -486,7 +486,7 @@ public class PreProcessor {
 		if (verboseLevel == 4 || verboseLevel == 6)
 			println(curFileStackTop() + "'" + key.beginLine
 					+ ": Defining text: " + key.image + " = " + val.image);
-		if (emitExecSwitch == true) {
+		if (emitExecSwitch) {
 			// val.expand(false);
 			val.image = val.image.trim();
 			val.setPath(curFileStackTop());
@@ -509,7 +509,7 @@ public class PreProcessor {
 				}
 			}
 		}
-		if (emitExecSwitch == true) {
+		if (emitExecSwitch) {
 			defs.putArg(key.image, val);
 		}
 	}
@@ -519,7 +519,7 @@ public class PreProcessor {
 		if (verboseLevel == 5 || verboseLevel == 6)
 			println(curFileStackTop() + "'" + key.beginLine
 					+ ": Defining text: " + key.image + " = " + val.image);
-		if (emitExecSwitch == true) {
+		if (emitExecSwitch) {
 			setDef(key, val);
 		}
 		if (verboseLevel == 5 || verboseLevel == 6) {
@@ -535,7 +535,7 @@ public class PreProcessor {
 				}
 			}
 		}
-		if (emitExecSwitch == true) {
+		if (emitExecSwitch) {
 			setArg(key, marg);
 		}
 	}
@@ -546,7 +546,7 @@ public class PreProcessor {
 			Forget(def);
 		}
 		if (isDef(def)) {
-			if (emitExecSwitch == true) {
+			if (emitExecSwitch) {
 				defs.remove(def.image);
 			}
 		}
@@ -554,7 +554,7 @@ public class PreProcessor {
 
 	// Forget a macro from the substitution list
 	private void Forget(PPToken val) {
-		if (emitExecSwitch == true) {
+		if (emitExecSwitch) {
 			defs.removeArg(val.image);
 		}
 	}
@@ -658,7 +658,7 @@ public class PreProcessor {
 			print("Line " + def.beginLine + ": " + curFileStackTop()
 					+ " Check isNDef " + def.image);
 		}
-		if (defs.containsKey(def.image) == false) {
+		if (!defs.containsKey(def.image)) {
 			if (verboseLevel == 6)
 				println("True");
 			return true;
@@ -674,7 +674,7 @@ public class PreProcessor {
 			print("Line " + def.beginLine + ": " + curFileStackTop()
 					+ " Check isDef " + def.image);
 		}
-		if (defs.containsKey(def.image) == true) {
+		if (defs.containsKey(def.image)) {
 			if (verboseLevel == 6)
 				println("True");
 			return true;
@@ -691,7 +691,7 @@ public class PreProcessor {
 			print("Line " + arg.beginLine + ": " + curFileStackTop()
 					+ " Check isArg " + arg.image);
 		}
-		if (defs.isArg(arg.image) == true) {
+		if (defs.isArg(arg.image)) {
 			if (verboseLevel == 6)
 				println("True");
 			return true;
