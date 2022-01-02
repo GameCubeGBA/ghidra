@@ -326,7 +326,7 @@ public class StringTableProvider extends ComponentProviderAdapter implements Dom
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.add(buildTablePanel(), BorderLayout.CENTER);
 		makeStringsOptionsPanel = buildMakeStringOptionsPanel();
-		panel.add(makeStringsOptionsPanel, BorderLayout.SOUTH);
+		panel.add(makeStringsOptionsPanel, BorderLayout.PAGE_END);
 		panel.setPreferredSize(new Dimension(900, 600));
 		return panel;
 
@@ -359,7 +359,7 @@ public class StringTableProvider extends ComponentProviderAdapter implements Dom
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridy = 0;
 		gbc.gridx = 0;
-		gbc.anchor = GridBagConstraints.WEST;
+		gbc.anchor = GridBagConstraints.LINE_START;
 		panel.add(autoLabelCheckbox, gbc);
 
 		gbc.gridx = 1;
@@ -501,7 +501,7 @@ public class StringTableProvider extends ComponentProviderAdapter implements Dom
 		}
 	}
 
-	private class StringTable extends GhidraTable {
+	private static class StringTable extends GhidraTable {
 		public StringTable(ThreadedTableModel<FoundString, ?> model) {
 			super(model);
 		}
@@ -544,8 +544,8 @@ public class StringTableProvider extends ComponentProviderAdapter implements Dom
 		panel.add(threadedTablePanel, BorderLayout.CENTER);
 		JPanel bottomPanel = new JPanel(new BorderLayout());
 		bottomPanel.add(filterPanel, BorderLayout.CENTER);
-		bottomPanel.add(toggleShowMakeStringOptionsButton, BorderLayout.EAST);
-		panel.add(bottomPanel, BorderLayout.SOUTH);
+		bottomPanel.add(toggleShowMakeStringOptionsButton, BorderLayout.LINE_END);
+		panel.add(bottomPanel, BorderLayout.PAGE_END);
 
 		return panel;
 	}
@@ -596,7 +596,7 @@ public class StringTableProvider extends ComponentProviderAdapter implements Dom
 
 		if (makeStringsOptionsShowing) {
 			toggleShowMakeStringOptionsButton.setIcon(COLLAPSE_ICON);
-			mainPanel.add(makeStringsOptionsPanel, BorderLayout.SOUTH);
+			mainPanel.add(makeStringsOptionsPanel, BorderLayout.PAGE_END);
 		}
 		else {
 			toggleShowMakeStringOptionsButton.setIcon(EXPAND_ICON);
@@ -661,7 +661,7 @@ public class StringTableProvider extends ComponentProviderAdapter implements Dom
 		table.repaint();
 	}
 
-	private class DefinedColumnRenderer extends GTableCellRenderer {
+	private static class DefinedColumnRenderer extends GTableCellRenderer {
 
 		public DefinedColumnRenderer() {
 			setHorizontalAlignment(SwingConstants.CENTER);

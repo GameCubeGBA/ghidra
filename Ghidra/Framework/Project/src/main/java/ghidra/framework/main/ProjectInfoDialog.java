@@ -280,7 +280,7 @@ public class ProjectInfoDialog extends DialogComponentProvider {
 		help.registerHelp(connectionButton,
 			new HelpLocation(GenericHelpTopics.FRONT_END, "ConnectToServer"));
 
-		JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+		JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEADING, 0, 0));
 		buttonPanel.setBorder(BorderFactory.createEmptyBorder());
 		buttonPanel.add(connectionButton);
 		panel.add(buttonPanel);

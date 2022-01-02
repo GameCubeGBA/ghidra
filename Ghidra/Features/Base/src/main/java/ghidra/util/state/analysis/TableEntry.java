@@ -127,18 +127,12 @@ public class TableEntry extends Switch {
 		DataType primitiveDt;
 		switch (size) {
 			case 1:
-				primitiveDt = new ByteDataType();
+            case 8:
+            case 4:
+            case 2:
+                primitiveDt = new ByteDataType();
 				break;
-			case 2:
-				primitiveDt = new ByteDataType();
-				break;
-			case 4:
-				primitiveDt = new ByteDataType();
-				break;
-			case 8:
-				primitiveDt = new ByteDataType();
-				break;
-			default:
+            default:
 				return;
 		}
 		CreateDataCmd cmd = new CreateDataCmd(entryAddr, primitiveDt);

@@ -72,7 +72,7 @@ public class MultipleOptionsDialog<T> extends DialogComponentProvider {
 		JPanel panel = new JPanel(new GridLayout(0, 1));
 		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-		panel.add(new GLabel(message), BorderLayout.WEST);
+		panel.add(new GLabel(message), BorderLayout.LINE_START);
 
 		if (includeSelectAll) {
 			selectAllGroup = new SelectAllCheckBox();

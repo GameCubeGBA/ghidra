@@ -99,7 +99,8 @@ public class TimelinePanel<T, N extends Number & Comparable<N>> extends JPanel {
 	}
 
 	// TODO: Consider using a "TimelineCellRenderer"
-	public interface TimelineInfo<T, N extends Number & Comparable<N>> {
+	@FunctionalInterface
+    public interface TimelineInfo<T, N extends Number & Comparable<N>> {
 		Range<N> getRange(T t);
 
 		default String getLabel(T t) {
@@ -497,7 +498,7 @@ public class TimelinePanel<T, N extends Number & Comparable<N>> extends JPanel {
 	protected final FocusListener focusListener = new CellFocusListener();
 
 	public TimelinePanel() {
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		setFocusable(true);
 	}
 

@@ -27,7 +27,7 @@ import ghidra.util.exception.AssertException;
 import ghidra.util.exception.NoValueException;
 
 /**
- * <code>DBParms</code> manages 4-byte integer parameters associated with a database 
+ * {@code DBParms} manages 4-byte integer parameters associated with a database
  * and stored as the first buffer (ID 0) in the buffer file.  The maximum number of 
  * parameters is determined by the .
  */
@@ -168,7 +168,7 @@ class DBParms {
 	 * @throws ArrayIndexOutOfBoundsException if index outside of allocated
 	 * parameter space.
 	 */
-	int get(int parm) throws IOException, ArrayIndexOutOfBoundsException {
+	int get(int parm) throws IOException {
 		try {
 			return cache.get(parm);
 		}

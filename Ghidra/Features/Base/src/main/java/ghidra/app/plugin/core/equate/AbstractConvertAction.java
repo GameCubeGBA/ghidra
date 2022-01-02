@@ -149,10 +149,6 @@ public abstract class AbstractConvertAction extends ListingContextAction {
 		if (paddingSize <= 0) {
 			return baseString;
 		}
-		StringBuilder buf = new StringBuilder(baseString);
-		for (int i = 0; i < paddingSize; i++) {
-			buf.append(" ");
-		}
-		return buf.toString();
+		return baseString + " ".repeat(paddingSize);
 	}
 }

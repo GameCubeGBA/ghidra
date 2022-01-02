@@ -19,7 +19,7 @@ import ghidra.program.model.listing.Parameter;
 import ghidra.program.model.listing.Variable;
 
 /**
- * <code>ParameterDefinition</code> specifies a parameter which can be
+ * {@code ParameterDefinition} specifies a parameter which can be
  * used to specify a function definition.
  */
 public interface ParameterDefinition extends Comparable<ParameterDefinition> {

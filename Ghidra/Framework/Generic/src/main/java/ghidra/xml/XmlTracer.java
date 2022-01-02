@@ -18,6 +18,7 @@ package ghidra.xml;
 
 import org.xml.sax.Locator;
 
+@FunctionalInterface
 public interface XmlTracer {
 	/**
 	 * The trace callback.  Please be quick.

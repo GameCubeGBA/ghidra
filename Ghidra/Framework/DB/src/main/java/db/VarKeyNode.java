@@ -20,7 +20,7 @@ import java.io.IOException;
 import db.buffers.DataBuffer;
 
 /**
- * <code>VarKeyNode</code> is an abstract implementation of a BTree node
+ * {@code VarKeyNode} is an abstract implementation of a BTree node
  * which utilizes variable-length Field key values.
  * <pre>
  *   | NodeType(1) | KeyType(1) | KeyCount(4) | ...

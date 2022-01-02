@@ -17,6 +17,7 @@ package agent.gdb.manager.breakpoint;
 
 import java.util.concurrent.CompletableFuture;
 
+@FunctionalInterface
 public interface GdbBreakpointInsertions {
 	/**
 	 * Insert a breakpoint

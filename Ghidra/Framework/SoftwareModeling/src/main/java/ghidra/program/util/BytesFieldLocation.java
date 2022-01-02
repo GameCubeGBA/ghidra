@@ -21,7 +21,7 @@ import ghidra.program.model.listing.Data;
 import ghidra.program.model.listing.Program;
 
 /**
- * The <CODE>BytesFieldLocation</CODE> class provides specific information
+ * The {@code BytesFieldLocation} class provides specific information
  *  about the BYTES field within a program location.
 */
 

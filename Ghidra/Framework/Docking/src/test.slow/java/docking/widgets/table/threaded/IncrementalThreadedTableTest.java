@@ -621,7 +621,8 @@ public class IncrementalThreadedTableTest extends AbstractThreadedTableTest {
 // Inner Classes
 //==================================================================================================	
 
-	interface TestLoadingPolicy {
+	@FunctionalInterface
+    interface TestLoadingPolicy {
 		void load(TestDataKeyModel model, Accumulator<Long> accumulator, TaskMonitor monitor)
 				throws Exception;
 	}

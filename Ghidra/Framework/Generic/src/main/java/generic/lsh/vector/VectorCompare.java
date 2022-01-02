@@ -52,16 +52,15 @@ public class VectorCompare {
 
 	@Override
 	public String toString() {
-		StringBuilder buffer = new StringBuilder();
-		buffer.append("\nVectorCompare: ");
-		buffer.append("\n  Result of the dot product     = " + dotproduct);
-		buffer.append("\n  # of hashes in first vector   = " + acount);
-		buffer.append("\n  # of hashes in second vector  = " + bcount);
-		buffer.append("\n  # of hashes in common         = " + intersectcount);
-		buffer.append("\n  Minimum vector count          = " + min);
-		buffer.append("\n  Maximum vector count          = " + max);
-		buffer.append("\n  Number of hashes flipped      = " + numflip);
-		buffer.append("\n  Difference in # of hashes     = " + diff);
-		return buffer.toString();
+        String buffer = "\nVectorCompare: " +
+                "\n  Result of the dot product     = " + dotproduct +
+                "\n  # of hashes in first vector   = " + acount +
+                "\n  # of hashes in second vector  = " + bcount +
+                "\n  # of hashes in common         = " + intersectcount +
+                "\n  Minimum vector count          = " + min +
+                "\n  Maximum vector count          = " + max +
+                "\n  Number of hashes flipped      = " + numflip +
+                "\n  Difference in # of hashes     = " + diff;
+		return buffer;
 	}
 }

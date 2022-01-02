@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -49,7 +48,7 @@ import utilities.util.reflection.ReflectionUtilities;
  * made visible through the UI.
  * <p>
  * This model will also discover other system columns that understand how to render
- * <code>ROW_TYPE</code> data directly.  Also, if you create a {@link TableRowMapper mapper}(s) for
+ * {@code ROW_TYPE} data directly.  Also, if you create a {@link TableRowMapper mapper}(s) for
  * your row type, then this model will load columns for each type for which a mapper was created,
  * all as optional, hidden columns.
  * <p>
@@ -349,10 +348,6 @@ public abstract class GDynamicColumnTableModel<ROW_TYPE, DATA_SOURCE>
 	@Override
 	public int getDefaultColumnCount() {
 		return getDefaultTableColumns().size();
-	}
-
-	private List<DynamicTableColumn<ROW_TYPE, ?, ?>> getDefaultTableColumns() {
-		return defaultTableColumns;
 	}
 
 	@Override

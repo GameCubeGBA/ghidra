@@ -23,7 +23,7 @@ import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.exception.InvalidInputException;
 
 /**
- * <code>ExternalLocation</code> defines a location within an external
+ * {@code ExternalLocation} defines a location within an external
  * program (i.e., library).  The external program is uniquely identified
  * by a program name, and the location within the program is identified by
  * label, address or both.

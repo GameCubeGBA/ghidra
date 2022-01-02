@@ -21,6 +21,7 @@ import ghidra.program.model.address.AddressFactory;
  * Simple interface for getting an address factory. This is used to delay the opening of
  * a program until it is needed.
  */
+@FunctionalInterface
 public interface AddressFactoryService {
 	AddressFactory getAddressFactory();
 }

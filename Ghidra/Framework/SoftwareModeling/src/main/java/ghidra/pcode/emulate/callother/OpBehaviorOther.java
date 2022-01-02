@@ -19,6 +19,7 @@ package ghidra.pcode.emulate.callother;
 import ghidra.pcode.emulate.Emulate;
 import ghidra.program.model.pcode.Varnode;
 
+@FunctionalInterface
 public interface OpBehaviorOther {
 
 	/**

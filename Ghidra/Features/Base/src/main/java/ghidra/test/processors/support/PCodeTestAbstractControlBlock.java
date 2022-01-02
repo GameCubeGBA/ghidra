@@ -36,7 +36,7 @@ import ghidra.util.exception.AssertException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>PCodeTestAbstractControlBlock</code> data is models the general capabilities
+ * {@code PCodeTestAbstractControlBlock} data is models the general capabilities
  * of the TestInfo data structure which is used for different puposes as handled
  * by extensions of this class.
  */

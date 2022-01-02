@@ -87,7 +87,7 @@ class DataTypeSyncPanel extends JPanel {
 		syncTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tableFilterPanel = new GhidraTableFilterPanel<>(syncTable, tableModel);
 		add(sp, BorderLayout.CENTER);
-		add(tableFilterPanel, BorderLayout.SOUTH);
+		add(tableFilterPanel, BorderLayout.PAGE_END);
 		tableModel.fireTableDataChanged();
 
 		TableColumnModel columnModel = syncTable.getColumnModel();

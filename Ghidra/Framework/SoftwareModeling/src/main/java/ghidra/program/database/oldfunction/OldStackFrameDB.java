@@ -46,7 +46,7 @@ class OldStackFrameDB implements StackFrame {
 	private int returnStart;
 	private List<Variable> variables;
 
-	private OldFunctionDataDB function;
+	private final OldFunctionDataDB function;
 	private OldFunctionManager functionManager;
 	private OldStackVariableDBAdapter adapter;
 

@@ -16,7 +16,7 @@
 package db.buffers;
 
 /**
- * <code>ChangeMap</code> facilitates the decoding of change-data 
+ * {@code ChangeMap} facilitates the decoding of change-data
  * to determine if a specific buffer was modified by the 
  * corresponding buffer file version.
  * @see ChangeMapFile

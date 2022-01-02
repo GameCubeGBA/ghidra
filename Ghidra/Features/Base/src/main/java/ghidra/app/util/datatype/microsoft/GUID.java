@@ -30,7 +30,7 @@ import ghidra.util.*;
  * digits each, followed by one group of 12 hexadecimal digits. The 
  * following example shows the groupings of hexadecimal digits in a GUID.
  * <br>
- * <code>6B29FC40-CA47-1067-B31D-00DD010662DA</code>
+ * {@code 6B29FC40-CA47-1067-B31D-00DD010662DA}
  * <br>
  * <pre>
  * typedef struct _GUID {
@@ -166,23 +166,22 @@ public class GUID {
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(Conv.toHexString(data1));
-		sb.append("-");
-		sb.append(Conv.toHexString(data2));
-		sb.append("-");
-		sb.append(Conv.toHexString(data3));
-		sb.append("-");
-		sb.append(Conv.toHexString(data4[0]));
-		sb.append(Conv.toHexString(data4[1]));
-		sb.append("-");
-		sb.append(Conv.toHexString(data4[2]));
-		sb.append(Conv.toHexString(data4[3]));
-		sb.append(Conv.toHexString(data4[4]));
-		sb.append(Conv.toHexString(data4[5]));
-		sb.append(Conv.toHexString(data4[6]));
-		sb.append(Conv.toHexString(data4[7]));
-		return sb.toString();
+        String sb = Conv.toHexString(data1) +
+                "-" +
+                Conv.toHexString(data2) +
+                "-" +
+                Conv.toHexString(data3) +
+                "-" +
+                Conv.toHexString(data4[0]) +
+                Conv.toHexString(data4[1]) +
+                "-" +
+                Conv.toHexString(data4[2]) +
+                Conv.toHexString(data4[3]) +
+                Conv.toHexString(data4[4]) +
+                Conv.toHexString(data4[5]) +
+                Conv.toHexString(data4[6]) +
+                Conv.toHexString(data4[7]);
+		return sb;
 	}
 
 	/**

@@ -25,7 +25,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.Icon;
@@ -64,7 +63,7 @@ public class NewTestApp extends JPanel {
 		tree.setDragNDropHandler(new DragNDropHandler());
 		container.add(tree, BorderLayout.CENTER);
 		JButton button = new JButton("Push Me");
-		container.add(button, BorderLayout.SOUTH);
+		container.add(button, BorderLayout.PAGE_END);
 		frame.setSize(400, 600);
 		frame.setVisible(true);
 		button.addActionListener(e -> {
@@ -83,6 +82,7 @@ public class NewTestApp extends JPanel {
 	}
 }
 
+@FunctionalInterface
 interface FileData {
 	File getFile();
 }

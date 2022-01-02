@@ -242,7 +242,7 @@ public class WizardManager extends DialogComponentProvider implements WizardPane
 			e -> DockingWindowManager.getHelpService().showHelp(rootPanel, false, rootPanel));
 
 		JPanel titlePanel = new JPanel();
-		titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.X_AXIS));
+		titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.LINE_AXIS));
 		titlePanel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEtchedBorder(),
 			BorderFactory.createEmptyBorder(5, 5, 5, 5)));
 		titlePanel.add(titleLabel);
@@ -250,7 +250,7 @@ public class WizardManager extends DialogComponentProvider implements WizardPane
 		titlePanel.add(helpButton);
 
 		mainJPanel = new JPanel(new BorderLayout());
-		mainJPanel.add(titlePanel, BorderLayout.NORTH);
+		mainJPanel.add(titlePanel, BorderLayout.PAGE_START);
 		mainJPanel.add(scrollPane, BorderLayout.CENTER);
 
 		backButton = new JButton(BACK);

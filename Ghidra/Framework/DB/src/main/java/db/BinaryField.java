@@ -21,7 +21,7 @@ import java.util.Arrays;
 import db.buffers.DataBuffer;
 
 /**
- * <code>BinaryField</code> provides a wrapper for variable length binary data which is read or
+ * {@code BinaryField} provides a wrapper for variable length binary data which is read or
  * written to a Record. 
  */
 public class BinaryField extends Field {

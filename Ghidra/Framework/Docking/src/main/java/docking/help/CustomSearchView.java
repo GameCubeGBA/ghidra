@@ -62,7 +62,7 @@ public class CustomSearchView extends SearchView {
 		}
 	}
 
-	class CustomSearchNavigatorUI extends BasicSearchNavigatorUI {
+	static class CustomSearchNavigatorUI extends BasicSearchNavigatorUI {
 
 		private boolean hasResults;
 

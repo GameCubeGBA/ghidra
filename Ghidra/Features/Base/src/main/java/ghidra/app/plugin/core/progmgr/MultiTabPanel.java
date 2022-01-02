@@ -209,7 +209,7 @@ public class MultiTabPanel extends JPanel {
 	////////////////////////////////////////////////////////////
 
 	private TabPanel createProgramTab(final Program program, boolean isSelected) {
-		final JPanel labelPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 1));
+		final JPanel labelPanel = new JPanel(new FlowLayout(FlowLayout.LEADING, 0, 1));
 		labelPanel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 10));
 
 		JLabel nameLabel = new GDLabel();
@@ -268,7 +268,7 @@ public class MultiTabPanel extends JPanel {
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		gbc.anchor = GridBagConstraints.WEST;
+		gbc.anchor = GridBagConstraints.LINE_START;
 		gbc.weightx = 1.0;
 		gbl.setConstraints(labelPanel, gbc);
 		tabPanel.add(labelPanel);
@@ -276,7 +276,7 @@ public class MultiTabPanel extends JPanel {
 		gbc = new GridBagConstraints();
 		gbc.gridx = 1;
 		gbc.gridy = 0;
-		gbc.anchor = GridBagConstraints.NORTHEAST;
+		gbc.anchor = GridBagConstraints.FIRST_LINE_END;
 		gbl.setConstraints(iconLabel, gbc);
 		tabPanel.add(iconLabel);
 		tabPanel.setBorder(new BottomlessBevelBorder());
@@ -1051,7 +1051,7 @@ public class MultiTabPanel extends JPanel {
 
 	// a bevel border to paint only it's bottom edge, but with the highlight normally found at
 	// the top edge
-	class BottomOnlyBevelBorder extends BevelBorder {
+    static class BottomOnlyBevelBorder extends BevelBorder {
 		public BottomOnlyBevelBorder() {
 			super(RAISED);
 		}

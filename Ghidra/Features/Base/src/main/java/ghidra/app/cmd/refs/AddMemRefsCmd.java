@@ -24,7 +24,7 @@ import ghidra.program.model.symbol.*;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>AddMemRefsCmd</code> adds a set of memory references from a
+ * {@code AddMemRefsCmd} adds a set of memory references from a
  * specified address and opIndex to all code units identified by a 
  * set of addresses.
  */

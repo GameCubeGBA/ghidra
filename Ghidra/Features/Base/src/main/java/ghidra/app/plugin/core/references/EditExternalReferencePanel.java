@@ -122,10 +122,10 @@ class EditExternalReferencePanel extends EditReferencePanel {
 		JPanel pathPanel = new JPanel(new BorderLayout());
 		pathPanel.add(extLibPath, BorderLayout.CENTER);
 
-		JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+		JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEADING, 0, 0));
 		buttonPanel.add(clearButton);
 		buttonPanel.add(editButton);
-		pathPanel.add(buttonPanel, BorderLayout.EAST);
+		pathPanel.add(buttonPanel, BorderLayout.LINE_END);
 
 		topPanel.add(new GLabel("Path:", SwingConstants.RIGHT));
 		topPanel.add(pathPanel);

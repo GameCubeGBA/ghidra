@@ -28,7 +28,7 @@ import ghidra.util.Conv;
  * attrs.add("BAR", "foo");
  * attrs.add("PI", 3.14159);
  * </pre><br>
- * The output would be: <code>FIVE="0x20" BAR="foo" PI="3.14159".</code>
+ * The output would be: {@code FIVE="0x20" BAR="foo" PI="3.14159".}
  * 
  */
 public class XmlAttributes {

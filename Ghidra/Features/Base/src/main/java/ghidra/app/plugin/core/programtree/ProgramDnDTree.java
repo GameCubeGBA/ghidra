@@ -23,6 +23,7 @@ import java.awt.event.*;
 import java.io.IOException;
 import java.util.*;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import javax.swing.KeyStroke;
 import javax.swing.event.ChangeEvent;
@@ -1022,12 +1023,7 @@ public class ProgramDnDTree extends DragNDropTree {
 	void reorder(Group group, ProgramModule parentModule) {
 
 		Group[] children = parentModule.getChildren();
-		for (int i = 0; i < children.length; i++) {
-			if (children[i].equals(group)) {
-				reorder(group, parentModule, i);
-				return;
-			}
-		}
+		IntStream.range(0, children.length).filter(i -> children[i].equals(group)).findFirst().ifPresent(i -> reorder(group, parentModule, i));
 	}
 
 	/**
@@ -1154,7 +1150,7 @@ public class ProgramDnDTree extends DragNDropTree {
 			}
 			// if the path at the mouse pointer is in the selection OR
 			// the path is null, then adjust the multi-popup menu.
-			if ((selPath != null && isPathSelected(selPath)) || selPath == null) {
+			if (selPath == null || isPathSelected(selPath)) {
 				actionManager.adjustMultiActions();
 				return node;
 			}

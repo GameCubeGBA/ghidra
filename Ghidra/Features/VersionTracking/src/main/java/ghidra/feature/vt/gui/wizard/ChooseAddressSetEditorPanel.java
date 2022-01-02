@@ -97,7 +97,7 @@ public class ChooseAddressSetEditorPanel extends JPanel {
 
 		setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), name));
 
-		add(createChooseSourcePanel(), BorderLayout.NORTH);
+		add(createChooseSourcePanel(), BorderLayout.PAGE_START);
 		add(createRangeListPanel(), BorderLayout.CENTER);
 		switch (initialAddressSetChoice) {
 			case SELECTION:
@@ -231,8 +231,8 @@ public class ChooseAddressSetEditorPanel extends JPanel {
 		buttonPanel.add(addRangeButton);
 		buttonPanel.add(subtractRangeButton);
 		JPanel headerPanel = new JPanel(new BorderLayout());
-		headerPanel.add(new GLabel("Address Ranges:"), BorderLayout.WEST);
-		headerPanel.add(buttonPanel, BorderLayout.EAST);
+		headerPanel.add(new GLabel("Address Ranges:"), BorderLayout.LINE_START);
+		headerPanel.add(buttonPanel, BorderLayout.LINE_END);
 
 		listModel = new AddressSetListModel(myCurrentAddressSet.toList());
 		list = new GList<>(listModel);
@@ -247,9 +247,9 @@ public class ChooseAddressSetEditorPanel extends JPanel {
 
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
-		panel.add(headerPanel, BorderLayout.NORTH);
+		panel.add(headerPanel, BorderLayout.PAGE_START);
 		panel.add(scrollPane, BorderLayout.CENTER);
-		panel.add(createRemoveRangePanel(), BorderLayout.SOUTH);
+		panel.add(createRemoveRangePanel(), BorderLayout.PAGE_END);
 
 		return panel;
 	}

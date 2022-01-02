@@ -71,7 +71,7 @@ public abstract class AbstractTextFilter<T> extends Filter<T> {
 		textField.disableFocusEventProcessing();
 
 		JLabel label = new GDLabel(filterName + ": ");
-		panel.add(label, BorderLayout.WEST);
+		panel.add(label, BorderLayout.LINE_START);
 		panel.add(textField, BorderLayout.CENTER);
 
 		StatusLabel nameFieldStatusLabel = new StatusLabel(textField, defaultValue);

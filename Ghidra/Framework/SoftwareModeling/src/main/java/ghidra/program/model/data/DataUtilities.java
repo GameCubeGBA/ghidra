@@ -69,7 +69,7 @@ public final class DataUtilities {
 	}
 
 	/**
-	 * <code>ClearDataMode</code> specifies how conflicting data should be cleared
+	 * {@code ClearDataMode} specifies how conflicting data should be cleared
 	 * when creating/re-creating data
 	 */
 	public enum ClearDataMode {
@@ -276,30 +276,6 @@ public final class DataUtilities {
 			}
 		}
 		return extRef;
-	}
-
-	private static void validateCanCreateData(Address addr, ClearDataMode clearMode,
-			Listing listing, Data data) throws CodeUnitInsertionException {
-
-		if (data != null) {
-			return; // existing data; it us possible to create data
-		}
-
-		if (clearMode == ClearDataMode.CLEAR_ALL_CONFLICT_DATA ||
-			clearMode == ClearDataMode.CLEAR_ALL_UNDEFINED_CONFLICT_DATA) {
-
-			// allow offcut addr if CLEAR_ALL_CONFLICT_DATA
-			data = listing.getDataContaining(addr);
-			if (data != null && clearMode == ClearDataMode.CLEAR_ALL_UNDEFINED_CONFLICT_DATA &&
-				!Undefined.isUndefined(data.getDataType())) {
-				data = null; // force error
-			}
-		}
-
-		// null data implies that we cannot create data at this address
-		if (data == null) {
-			throw new CodeUnitInsertionException("Could not create Data at address " + addr);
-		}
 	}
 
 	private static void checkEnoughSpace(Program program, Address addr, int existingDataLen,

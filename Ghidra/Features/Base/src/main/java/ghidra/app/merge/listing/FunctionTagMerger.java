@@ -21,7 +21,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 import javax.swing.SwingUtilities;
-import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import ghidra.app.merge.*;
@@ -712,23 +711,20 @@ public class FunctionTagMerger implements MergeResolver, ListingMergeConstants {
 	 * @return
 	 */
 	private String getConflictInfo(TaskMonitor monitor) {
-		StringBuffer buf = new StringBuffer();
-		buf.append(
-			"<center><b>" + "Resolving conflict " + (monitor.getProgress() + 1) + " of " +
-				tagConflicts.size() + "</b></center>");
-		buf.append(HTMLUtilities.HTML_NEW_LINE);
-		buf.append("Tag Id:");
-		buf.append(HTMLUtilities.spaces(21));
-		buf.append(HTMLUtilities.colorString(Color.BLUE, String.valueOf(currentlyMergingTagID)));
-		buf.append(HTMLUtilities.HTML_NEW_LINE);
-		buf.append("Reason for Conflict:");
-		buf.append(HTMLUtilities.spaces(1));
-		buf.append(
-			HTMLUtilities.colorString(Color.BLUE, tagConflicts.get(currentlyMergingTagID)));
-		buf.append(HTMLUtilities.HTML_NEW_LINE);
-		buf.append(HTMLUtilities.HTML_NEW_LINE);
+        String buf = "<center><b>" + "Resolving conflict " + (monitor.getProgress() + 1) + " of " +
+                tagConflicts.size() + "</b></center>" +
+                HTMLUtilities.HTML_NEW_LINE +
+                "Tag Id:" +
+                HTMLUtilities.spaces(21) +
+                HTMLUtilities.colorString(Color.BLUE, String.valueOf(currentlyMergingTagID)) +
+                HTMLUtilities.HTML_NEW_LINE +
+                "Reason for Conflict:" +
+                HTMLUtilities.spaces(1) +
+                HTMLUtilities.colorString(Color.BLUE, tagConflicts.get(currentlyMergingTagID)) +
+                HTMLUtilities.HTML_NEW_LINE +
+                HTMLUtilities.HTML_NEW_LINE;
 
-		return buf.toString();
+		return buf;
 	}
 
 	/**

@@ -258,7 +258,7 @@ public class CommentsDialog extends DialogComponentProvider implements KeyListen
 		panel.add(tab, BorderLayout.CENTER);
 
 		JPanel auxiliaryControlPanel = new JPanel(new BorderLayout());
-		auxiliaryControlPanel.add(enterBox, BorderLayout.SOUTH);
+		auxiliaryControlPanel.add(enterBox, BorderLayout.PAGE_END);
 
 		AnnotationAdapterWrapper[] annotations = getAnnotationAdapterWrappers();
 		Arrays.sort(annotations);
@@ -275,9 +275,9 @@ public class CommentsDialog extends DialogComponentProvider implements KeyListen
 		JPanel annoPanel = new JPanel();
 		annoPanel.add(addAnnotationButton);
 		annoPanel.add(annotationsComboBox);
-		auxiliaryControlPanel.add(annoPanel, BorderLayout.NORTH);
+		auxiliaryControlPanel.add(annoPanel, BorderLayout.PAGE_START);
 
-		panel.add(auxiliaryControlPanel, BorderLayout.SOUTH);
+		panel.add(auxiliaryControlPanel, BorderLayout.PAGE_END);
 
 		preField = new JTextArea(5, 80) {
 			@Override
@@ -505,7 +505,7 @@ public class CommentsDialog extends DialogComponentProvider implements KeyListen
 		}
 	}
 
-	class AnnotationAdapterWrapper implements Comparable<AnnotationAdapterWrapper> {
+	static class AnnotationAdapterWrapper implements Comparable<AnnotationAdapterWrapper> {
 		private AnnotatedStringHandler handler;
 
 		public AnnotationAdapterWrapper(AnnotatedStringHandler handler) {

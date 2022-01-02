@@ -239,9 +239,9 @@ class FilterAction extends ToggleDockingAction {
 		private JComponent create() {
 
 			mainPanel = new JPanel();
-			mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+			mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
 
-			JPanel enablePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			JPanel enablePanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
 			ButtonGroup group = new ButtonGroup();
 			enableButton = new GRadioButton("Enabled", true);
 			enableButton.addKeyListener(listener);
@@ -268,7 +268,7 @@ class FilterAction extends ToggleDockingAction {
 				filterField.setEnabled(lenabled);
 			});
 
-			JPanel limitPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			JPanel limitPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
 			limitComboBox = new GhidraComboBox<>();
 			limitComboBox.addKeyListener(listener);
 			limitComboBox.setModel(new DefaultComboBoxModel<>(
@@ -301,7 +301,7 @@ class FilterAction extends ToggleDockingAction {
 
 			checkboxPanel = new JPanel();
 			checkboxPanel.setBackground(Color.WHITE);
-			checkboxPanel.setLayout(new BoxLayout(checkboxPanel, BoxLayout.Y_AXIS));
+			checkboxPanel.setLayout(new BoxLayout(checkboxPanel, BoxLayout.PAGE_AXIS));
 
 			buildCheckBoxList();
 
@@ -309,7 +309,7 @@ class FilterAction extends ToggleDockingAction {
 			scroller.setPreferredSize(new Dimension(checkboxPanel.getPreferredSize().width, 150));
 			typesPanel.add(scroller, BorderLayout.CENTER);
 			typesPanel.setBorder(BorderFactory.createTitledBorder("Enabled Data Types"));
-			typesPanel.add(typeButtonPanel, BorderLayout.SOUTH);
+			typesPanel.add(typeButtonPanel, BorderLayout.PAGE_END);
 			mainPanel.add(typesPanel);
 
 			JPanel filterBorderPanel = new JPanel(new GridLayout(1, 2, 5, 0));
@@ -319,7 +319,7 @@ class FilterAction extends ToggleDockingAction {
 			JPanel filterPanel = new JPanel(new BorderLayout());
 			filterField = new FilterTextField(checkboxPanel);
 			filterPanel.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
-			filterPanel.add(new GLabel("Filter:"), BorderLayout.WEST);
+			filterPanel.add(new GLabel("Filter:"), BorderLayout.LINE_START);
 
 			filterPanel.add(filterField, BorderLayout.CENTER);
 			filterField.addFilterListener(filterListener);

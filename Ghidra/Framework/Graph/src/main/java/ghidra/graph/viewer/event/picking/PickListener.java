@@ -17,6 +17,7 @@ package ghidra.graph.viewer.event.picking;
 
 import java.util.Set;
 
+@FunctionalInterface
 public interface PickListener<V> {
 
 	public enum EventSource {

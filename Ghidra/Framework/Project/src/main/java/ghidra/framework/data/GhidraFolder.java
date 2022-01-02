@@ -35,7 +35,7 @@ import ghidra.util.task.TaskMonitor;
 public class GhidraFolder implements DomainFolder {
 
 	private ProjectFileManager fileManager;
-	private LocalFileSystem fileSystem;
+	private final LocalFileSystem fileSystem;
 	private FileSystem versionedFileSystem;
 	private DomainFolderChangeListener listener;
 

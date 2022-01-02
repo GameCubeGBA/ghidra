@@ -29,11 +29,7 @@ public class EmptyTextLine extends TextLine implements PlaceHolderLine {
 	}
 
 	private static String buildDisplayText(int numberOfCharacters) {
-		StringBuffer buffy = new StringBuffer();
-		for (int i = 0; i < numberOfCharacters; i++) {
-			buffy.append(' ');
-		}
-		return buffy.toString();
+        return " ".repeat(Math.max(0, numberOfCharacters));
 	}
 
 	@Override

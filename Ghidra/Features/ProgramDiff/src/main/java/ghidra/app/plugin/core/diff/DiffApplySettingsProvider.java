@@ -366,10 +366,9 @@ public class DiffApplySettingsProvider extends ComponentProviderAdapter {
 		if (adjustingApplyFilter) {
 			return;
 		}
-		for (int i = 0; i < listenerList.size(); i++) {
-			ActionListener listener = listenerList.get(i);
-			listener.actionPerformed(new ActionEvent(this, 0, APPLY_FILTER_CHANGED_ACTION));
-		}
+        for (ActionListener listener : listenerList) {
+            listener.actionPerformed(new ActionEvent(this, 0, APPLY_FILTER_CHANGED_ACTION));
+        }
 	}
 
 	@Override
@@ -390,8 +389,8 @@ public class DiffApplySettingsProvider extends ComponentProviderAdapter {
 		return plugin;
 	}
 
-	class Choice extends JPanel implements Comparable<Choice> {
-		private final static long serialVersionUID = 1L;
+	static class Choice extends JPanel implements Comparable<Choice> {
+		private static final long serialVersionUID = 1L;
 		String type;
 		boolean allowMerge;
 		JLabel label;
@@ -415,7 +414,7 @@ public class DiffApplySettingsProvider extends ComponentProviderAdapter {
 			}
 			label = new GDLabel(" " + typeName + " ");
 			label.setHorizontalAlignment(SwingConstants.RIGHT);
-			add(applyCB, BorderLayout.EAST);
+			add(applyCB, BorderLayout.LINE_END);
 			add(label, BorderLayout.CENTER);
 		}
 
@@ -451,7 +450,7 @@ public class DiffApplySettingsProvider extends ComponentProviderAdapter {
 	}
 
 	class SymbolsChoice extends Choice {
-		private final static long serialVersionUID = 1L;
+		private static final long serialVersionUID = 1L;
 
 		public SymbolsChoice() {
 			super("Labels", true);
@@ -463,7 +462,7 @@ public class DiffApplySettingsProvider extends ComponentProviderAdapter {
 			applyCB.setName(type + " Diff Apply CB");
 			label = new GDLabel(" " + type + " ");
 			label.setHorizontalAlignment(SwingConstants.RIGHT);
-			add(applyCB, BorderLayout.EAST);
+			add(applyCB, BorderLayout.LINE_END);
 			add(label, BorderLayout.CENTER);
 		}
 	}

@@ -76,7 +76,7 @@ public class IntegerConstraintEditor<T extends Number> extends AbstractColumnCon
 
 		panel.add(spinner.getSpinner(), BorderLayout.CENTER);
 		statusLabel = new GDHtmlLabel();
-		panel.add(statusLabel, BorderLayout.SOUTH);
+		panel.add(statusLabel, BorderLayout.PAGE_END);
 		statusLabel.setForeground(Color.RED);
 		statusLabel.setHorizontalAlignment(SwingConstants.CENTER);
 

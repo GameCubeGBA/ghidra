@@ -419,7 +419,7 @@ public class ApplyMarkupPropertyEditor implements OptionsEditor {
 		panel.setLayout(new VerticalLayout(5));
 		panel.setToolTipText(PARAMETER_NAME_PRIORITY_TOOTIP);
 
-		Box buttonBox = new Box(BoxLayout.X_AXIS);
+		Box buttonBox = new Box(BoxLayout.LINE_AXIS);
 		JLabel highestPriorityLabel = new GDLabel(" Highest: ");
 		highestPriorityLabel.setToolTipText(HIGHEST_NAME_PRIORITY_TOOLTIP);
 		buttonBox.add(highestPriorityLabel);

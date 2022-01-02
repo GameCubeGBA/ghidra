@@ -18,7 +18,7 @@ package ghidra.program.model.data;
 import ghidra.program.model.lang.CompilerSpec;
 
 /**
- * <code>GenericCallingConvention</code> identifies the generic calling convention
+ * {@code GenericCallingConvention} identifies the generic calling convention
  * associated with a specific function definition.  This can be used to help identify
  * the appropriate compiler-specific function prototype (i.e., calling convention).
  */

@@ -74,7 +74,7 @@ public class HyperlinkComponent extends JPanel {
 
 		setText(htmlTextWithHyperlinks);
 
-		add(textPane, BorderLayout.NORTH);
+		add(textPane, BorderLayout.PAGE_START);
 
 		// Hack alert! For some reason this text pane will sometimes be 
 		// initialized with a height of zero. This prevents anything from 
@@ -90,8 +90,8 @@ public class HyperlinkComponent extends JPanel {
 	/**
 	 * Add a listener that will be called whenever hyperlink updates happen (hover, activate, etc).
 	 * 
-	 * @param anchorName The value in the <code>href</code> attribute of the anchor tag.
-	 * @param listener The listener to be called when the anchor(s) with a matching <code>href</code> is
+	 * @param anchorName The value in the {@code href} attribute of the anchor tag.
+	 * @param listener The listener to be called when the anchor(s) with a matching {@code href} is
 	 *        manipulated by the user.
 	 */
 	public void addHyperlinkListener(String anchorName, HyperlinkListener listener) {
@@ -150,7 +150,7 @@ public class HyperlinkComponent extends JPanel {
 // Inner Classes
 //==================================================================================================
 
-	private class NonScrollingCaret extends DefaultCaret {
+	private static class NonScrollingCaret extends DefaultCaret {
 
 		private NonScrollingCaret() {
 			setVisible(false);

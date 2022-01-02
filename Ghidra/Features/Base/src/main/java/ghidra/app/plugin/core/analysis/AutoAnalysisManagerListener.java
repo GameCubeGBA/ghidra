@@ -16,6 +16,7 @@
  */
 package ghidra.app.plugin.core.analysis;
 
+@FunctionalInterface
 public interface AutoAnalysisManagerListener {
 
 	void analysisEnded(AutoAnalysisManager manager);

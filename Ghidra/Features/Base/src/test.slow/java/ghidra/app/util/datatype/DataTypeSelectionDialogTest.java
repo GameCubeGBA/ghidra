@@ -443,7 +443,7 @@ public class DataTypeSelectionDialogTest extends AbstractGhidraHeadedIntegration
 		//
 		Category secondCategory = rootCategory.createCategory("testCategory2");
 		dataType = new CustomDataType(secondCategory.getCategoryPath(), crazyName, 2,
-			getProgramDataTypeManager(dataTypeManagers));
+				getProgramDataTypeManager(dataTypeManagers));
 		addDataType(secondCategory, dataType);
 
 		showDialogWithoutBlocking(tool, dialog);
@@ -1007,7 +1007,7 @@ public class DataTypeSelectionDialogTest extends AbstractGhidraHeadedIntegration
 	 * be hidden.  We need this due to focus issues encountered in parallel mode.  Once we removed
 	 * the focus-sensitive issues, we have to track being hidden using this mock method.
 	 */
-	private class SpyDropDownSelectionTextField<T extends DropDownTextField<T>> extends MockUp<T> {
+	private static class SpyDropDownSelectionTextField<T extends DropDownTextField<T>> extends MockUp<T> {
 
 		private volatile int hideId;
 
@@ -1021,7 +1021,7 @@ public class DataTypeSelectionDialogTest extends AbstractGhidraHeadedIntegration
 		}
 	}
 
-	private class ReportingDataListener implements DataTypeManagerChangeListener {
+	private static class ReportingDataListener implements DataTypeManagerChangeListener {
 
 		@Override
 		public void categoryAdded(DataTypeManager dtm, CategoryPath path) {
@@ -1094,7 +1094,7 @@ public class DataTypeSelectionDialogTest extends AbstractGhidraHeadedIntegration
 		}
 	}
 
-	private class CustomDataType extends StructureDataType {
+	private static class CustomDataType extends StructureDataType {
 		public CustomDataType(CategoryPath path, String name, int length, DataTypeManager dtm) {
 			super(path, name, length, dtm);
 		}
@@ -1179,12 +1179,12 @@ public class DataTypeSelectionDialogTest extends AbstractGhidraHeadedIntegration
 			new DataTypeSelectionEditor(tool, AllowedDataTypes.ALL);
 		editor.setPreferredDataTypeManager(program.getDataTypeManager());
 
-		editorPanel.add(panelUpdateField, BorderLayout.SOUTH);
-		editorPanel.add(editor.getEditorComponent(), BorderLayout.NORTH);
+		editorPanel.add(panelUpdateField, BorderLayout.PAGE_END);
+		editorPanel.add(editor.getEditorComponent(), BorderLayout.PAGE_START);
 
-		panel.add(updateField, BorderLayout.SOUTH);
+		panel.add(updateField, BorderLayout.PAGE_END);
 		panel.add(editorPanel, BorderLayout.CENTER);
-		panel.add(launchButton, BorderLayout.NORTH);
+		panel.add(launchButton, BorderLayout.PAGE_START);
 
 		frame.getContentPane().add(panel);
 		frame.setSize(300, 300);

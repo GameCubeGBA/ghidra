@@ -16,7 +16,7 @@
 package db;
 
 /**
- * <code>PrimitiveField</code> provides a base implementation for
+ * {@code PrimitiveField} provides a base implementation for
  * all primitive value {@link Field}s.  
  * <br>
  * When a {@link PrimitiveField} associated with a {@link SparseRecord} 

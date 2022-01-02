@@ -33,7 +33,7 @@ public abstract class RangeColumnConstraint<T> implements ColumnConstraint<T> {
 	 * This pattern is used to extract the minimum and maximum values from a range specification.
 	 *
 	 * <P> A range specification adheres to this format:
-	 * <code>'[' (whitespace)? (minimum value) (whitespace)? ',' (whitespace)? (maximum value) (whitespace)? ']'</code>
+	 * {@code '[' (whitespace)? (minimum value) (whitespace)? ',' (whitespace)? (maximum value) (whitespace)? ']'}
 	 *
 	 * <P> For example, matching values would be [ 10 , 20 ],  [10,20]
 	 * <p>
@@ -118,13 +118,12 @@ public abstract class RangeColumnConstraint<T> implements ColumnConstraint<T> {
 
 	@Override
 	public String getConstraintValueString() {
-		StringBuilder buf = new StringBuilder();
-		buf.append("[");
-		buf.append(editorProvider.toString(minValue));
-		buf.append(",");
-		buf.append(editorProvider.toString(maxValue));
-		buf.append("]");
-		return buf.toString();
+        String buf = "[" +
+                editorProvider.toString(minValue) +
+                "," +
+                editorProvider.toString(maxValue) +
+                "]";
+		return buf;
 	}
 
 	@Override

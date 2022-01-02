@@ -160,7 +160,7 @@ public abstract class MemorySectionResolver {
 		return new AddressRangeImpl(startAddress, endAddress);
 	}
 
-	private class AllocatedFileSectionRange {
+	private static class AllocatedFileSectionRange {
 
 		final MemorySection section;
 		final long rangeStartFileOffset;
@@ -204,7 +204,7 @@ public abstract class MemorySectionResolver {
 	/**
 	 * Indicates range supplied by another section (same file region mapping)
 	 */
-	private class ProxyAddressRange extends AddressRangeImpl {
+	private static class ProxyAddressRange extends AddressRangeImpl {
 		ProxyAddressRange(Address min, Address max) {
 			super(min, max);
 		}
@@ -213,7 +213,7 @@ public abstract class MemorySectionResolver {
 	/**
 	 * Indicates range must be converted to a named overlay 
 	 */
-	private class OverlayAddressRange extends AddressRangeImpl {
+	private static class OverlayAddressRange extends AddressRangeImpl {
 		OverlayAddressRange(Address min, Address max) {
 			super(min, max);
 		}
@@ -390,7 +390,7 @@ public abstract class MemorySectionResolver {
 				if (fileLoadRangeMap != null) {
 					long chunkFileOffset = section.getFileOffset() + sectionByteOffset;
 					AllocatedFileSectionRange allocatedFileRange =
-						new AllocatedFileSectionRange(section, chunkFileOffset, rangeSize, minAddr);
+                            new AllocatedFileSectionRange(section, chunkFileOffset, rangeSize, minAddr);
 					fileLoadRangeMap.setObject(chunkFileOffset, chunkFileOffset + rangeSize - 1,
 						allocatedFileRange);
 				}
@@ -489,11 +489,11 @@ public abstract class MemorySectionResolver {
 				// if conflict and fragmentation not permitted bump section into overlay
 				AddressRange physicalAddrRange = section.getPhysicalAddressRange();
 				rangeList.add(
-					new OverlayAddressRange(physicalAddrRange.getMinAddress(),
-						physicalAddrRange.getMaxAddress()));
+                        new OverlayAddressRange(physicalAddrRange.getMinAddress(),
+                                physicalAddrRange.getMaxAddress()));
 			}
 			AllocatedFileSectionRange fileRange = new AllocatedFileSectionRange(section,
-				section.getFileOffset(), section.length, targetMinPhysicalAddr);
+                    section.getFileOffset(), section.length, targetMinPhysicalAddr);
 			fileAllocationMap.setObject(targetMinPhysicalAddr, targetMaxPhysicalAddr, fileRange);
 			return rangeList;
 		}
@@ -638,12 +638,12 @@ public abstract class MemorySectionResolver {
 					if (conflictGapPhysicalAddrRangeStart != null) {
 						// add accumulated conflict gap
 						rangeList.add(new OverlayAddressRange(conflictGapPhysicalAddrRangeStart,
-							conflictGapPhysicalAddrRangeEnd));
+                                conflictGapPhysicalAddrRangeEnd));
 						conflictGapPhysicalAddrRangeStart = null;
 						conflictGapPhysicalAddrRangeEnd = null;
 					}
 					rangeList.add(new ProxyAddressRange(expectedPhysicalAddrRangeStart,
-						expectedPhysicalAddrRangeStart.add(rangeSize - 1)));
+                            expectedPhysicalAddrRangeStart.add(rangeSize - 1)));
 				}
 
 				filePos = fileOffsetRange.getEnd() + 1;
@@ -665,7 +665,7 @@ public abstract class MemorySectionResolver {
 			}
 			if (conflictGapPhysicalAddrRangeStart != null) {
 				rangeList.add(new OverlayAddressRange(conflictGapPhysicalAddrRangeStart,
-					conflictGapPhysicalAddrRangeEnd));
+                        conflictGapPhysicalAddrRangeEnd));
 			}
 			return fileOffset + conflictRangeSize;
 		}

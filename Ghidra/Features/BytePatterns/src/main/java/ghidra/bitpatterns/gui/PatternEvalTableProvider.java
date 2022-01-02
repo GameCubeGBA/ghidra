@@ -58,7 +58,7 @@ public class PatternEvalTableProvider extends ComponentProviderAdapter {
 	private void buildMainPanel(FunctionBitPatternsExplorerPlugin plugin, Program program,
 			PatternEvaluationStats stats) {
 		mainPanel = new JPanel();
-		BoxLayout topLayout = new BoxLayout(mainPanel, BoxLayout.Y_AXIS);
+		BoxLayout topLayout = new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS);
 		mainPanel.setLayout(topLayout);
 		JPanel patternPanel = new JPanel(new BorderLayout());
 		PatternEvalTabelModel patternEvalModel =
@@ -78,10 +78,10 @@ public class PatternEvalTableProvider extends ComponentProviderAdapter {
 		GhidraTableFilterPanel<PatternEvalRowObject> tableFilterPanel =
 			new GhidraTableFilterPanel<>(table, patternEvalModel);
 		patternPanel.add(threadedPanel, BorderLayout.CENTER);
-		patternPanel.add(tableFilterPanel, BorderLayout.SOUTH);
+		patternPanel.add(tableFilterPanel, BorderLayout.PAGE_END);
 
 		JPanel evalPanel = buildInfoPanel(stats);
-		patternPanel.add(evalPanel, BorderLayout.NORTH);
+		patternPanel.add(evalPanel, BorderLayout.PAGE_START);
 		mainPanel.add(patternPanel);
 
 		JPanel buttonPanel = new JPanel(new FlowLayout());

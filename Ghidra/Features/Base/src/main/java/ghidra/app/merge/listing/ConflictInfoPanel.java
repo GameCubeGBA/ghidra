@@ -26,7 +26,7 @@ import ghidra.program.model.address.*;
 import ghidra.util.HTMLUtilities;
 
 /**
- * <code>ConflictInfoPanel</code> appears above the 4 listings in the ListingMergeWindow.
+ * {@code ConflictInfoPanel} appears above the 4 listings in the ListingMergeWindow.
  * It indicates the current sub-phase of the ListingMerge (Code Units, Functions, Symbols, etc.).
  * It also indicates how many groups of conflicts to resolve (typically address ranges),
  * how many individual conflict need resolving for that address range,
@@ -48,7 +48,7 @@ public class ConflictInfoPanel extends JPanel {
 	private String registerName;
 
 	/**
-	 * Creates a new <code>ConflictInfoPanel</code> to use above the listings.
+	 * Creates a new {@code ConflictInfoPanel} to use above the listings.
 	 */
 	public ConflictInfoPanel() {
 		super();
@@ -62,8 +62,8 @@ public class ConflictInfoPanel extends JPanel {
 
 		westLabel = new GDHtmlLabel("<html></html>");
 		eastLabel = new GDHtmlLabel("<html></html>");
-		add(westLabel, BorderLayout.WEST);
-		add(eastLabel, BorderLayout.EAST);
+		add(westLabel, BorderLayout.LINE_START);
+		add(eastLabel, BorderLayout.LINE_END);
 	}
 
 	/**
@@ -114,10 +114,9 @@ public class ConflictInfoPanel extends JPanel {
 	}
 
 	private String getRegisterText() {
-		StringBuffer buf = new StringBuffer();
-		buf.append("Register: ");
-		buf.append(ConflictUtility.getEmphasizeString(registerName));
-        return buf.toString();
+        String buf = "Register: " +
+                ConflictUtility.getEmphasizeString(registerName);
+        return buf;
 	}
 
 	/**

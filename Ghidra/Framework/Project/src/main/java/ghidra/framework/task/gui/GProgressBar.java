@@ -147,12 +147,12 @@ public class GProgressBar extends JPanel {
 	}
 
 	/**
-	 * Sets the <code>indeterminate</code> property of the progress bar,
+	 * Sets the {@code indeterminate} property of the progress bar,
 	 * which determines whether the progress bar is in determinate
 	 * or indeterminate mode.
 	 * An indeterminate progress bar continuously displays animation
 	 * indicating that an operation of unknown length is occurring.
-	 * By default, this property is <code>false</code>.
+	 * By default, this property is {@code false}.
 	 * Some look and feels might not support indeterminate progress bars;
 	 * they will ignore this property.
 	 *
@@ -175,7 +175,7 @@ public class GProgressBar extends JPanel {
 		}
 		Runnable r = () -> {
 			if (showIcon) {
-				activeProgressPanel.add(imageLabel, BorderLayout.EAST);
+				activeProgressPanel.add(imageLabel, BorderLayout.LINE_END);
 			}
 			else {
 				activeProgressPanel.remove(imageLabel);
@@ -262,7 +262,7 @@ public class GProgressBar extends JPanel {
 		activeProgressPanel.add(progressPanel, BorderLayout.CENTER);
 		if (includeAnimatedIcon) {
 			createAnimatedIcon();
-			activeProgressPanel.add(imageLabel, BorderLayout.EAST);
+			activeProgressPanel.add(imageLabel, BorderLayout.LINE_END);
 		}
 
 		ImageIcon icon = Icons.STOP_ICON;
@@ -278,11 +278,11 @@ public class GProgressBar extends JPanel {
 
 		if (includeCancelButton) {
 			eastButtonPanel = new JPanel();
-			eastButtonPanel.setLayout(new BoxLayout(eastButtonPanel, BoxLayout.Y_AXIS));
+			eastButtonPanel.setLayout(new BoxLayout(eastButtonPanel, BoxLayout.PAGE_AXIS));
 			//	eastButtonPanel.add(Box.createVerticalGlue());
 			eastButtonPanel.add(cancelButton);
 			eastButtonPanel.add(Box.createVerticalGlue());
-			add(eastButtonPanel, BorderLayout.EAST);
+			add(eastButtonPanel, BorderLayout.LINE_END);
 		}
 	}
 

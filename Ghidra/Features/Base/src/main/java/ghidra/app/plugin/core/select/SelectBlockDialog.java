@@ -109,7 +109,7 @@ class SelectBlockDialog extends DialogComponentProvider {
 		main.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.insets = new Insets(2, 2, 2, 2);
-		gbc.anchor = GridBagConstraints.WEST;
+		gbc.anchor = GridBagConstraints.LINE_START;
 
 		forwardButton = new GRadioButton("Select Forward", true);
 		forwardButton.setName("forwardButton");

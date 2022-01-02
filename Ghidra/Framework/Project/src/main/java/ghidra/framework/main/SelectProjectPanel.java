@@ -193,7 +193,7 @@ class SelectProjectPanel extends AbstractWizardJPanel {
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		gbc.anchor = GridBagConstraints.EAST;
+		gbc.anchor = GridBagConstraints.LINE_END;
 		gbl.setConstraints(dirLabel, gbc);
 		outerPanel.add(dirLabel);
 
@@ -210,7 +210,7 @@ class SelectProjectPanel extends AbstractWizardJPanel {
 		gbc.gridx = 2;
 		gbc.insets.left = 5;
 		gbc.insets.bottom = 5;
-		gbc.anchor = GridBagConstraints.EAST;
+		gbc.anchor = GridBagConstraints.LINE_END;
 		gbl.setConstraints(browseButton, gbc);
 		outerPanel.add(browseButton);
 

@@ -140,20 +140,17 @@ class FallThroughDialog extends DialogComponentProvider implements ChangeListene
 			return;
 		}
 
-		Runnable r = new Runnable() {
-			@Override
-			public void run() {
-				Address addr = addrField.getAddress();
-				if (addr != null || addrField.getValue().length() == 0) {
-					model.setCurrentFallthrough(addr);
-				}
-				else {
-					setStatusText("Invalid Address");
-					setOkEnabled(false);
-					setApplyEnabled(false);
-				}
-			}
-		};
+		Runnable r = () -> {
+            Address addr = addrField.getAddress();
+            if (addr != null || addrField.getValue().isEmpty()) {
+                model.setCurrentFallthrough(addr);
+            }
+            else {
+                setStatusText("Invalid Address");
+                setOkEnabled(false);
+                setApplyEnabled(false);
+            }
+        };
 		SwingUtilities.invokeLater(r);
 	}
 
@@ -162,19 +159,9 @@ class FallThroughDialog extends DialogComponentProvider implements ChangeListene
 		panel.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
 		addrField = new AddressInput();
 		addrField.setAddressFactory(model.getProgram().getAddressFactory());
-		addrField.addChangeListener(new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				addressChanged();
-			}
-		});
-		addrField.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				model.setCurrentFallthrough(addrField.getAddress());
-			}
-		});
-		panel.add(createHomePanel(), BorderLayout.NORTH);
+		addrField.addChangeListener(e -> addressChanged());
+		addrField.addActionListener(e -> model.setCurrentFallthrough(addrField.getAddress()));
+		panel.add(createHomePanel(), BorderLayout.PAGE_START);
 		panel.add(createAddressPanel(), BorderLayout.CENTER);
 		return panel;
 	}
@@ -183,7 +170,7 @@ class FallThroughDialog extends DialogComponentProvider implements ChangeListene
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.setBorder(BorderFactory.createTitledBorder("Fallthrough Address"));
 
-		panel.add(addrField, BorderLayout.NORTH);
+		panel.add(addrField, BorderLayout.PAGE_START);
 		panel.add(createRadioButtonPanel(), BorderLayout.CENTER);
 		return panel;
 	}
@@ -202,15 +189,10 @@ class FallThroughDialog extends DialogComponentProvider implements ChangeListene
 		instLabel.setFont(monoFont);
 
 		homeButton = createButton("images/go-home.png", "Home");
-		homeButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				plugin.goTo(model.getAddress());
-			}
-		});
+		homeButton.addActionListener(e -> plugin.goTo(model.getAddress()));
 
 		JPanel innerPanel = new JPanel();
-		BoxLayout bl = new BoxLayout(innerPanel, BoxLayout.X_AXIS);
+		BoxLayout bl = new BoxLayout(innerPanel, BoxLayout.LINE_AXIS);
 		innerPanel.setLayout(bl);
 
 		innerPanel.add(Box.createHorizontalStrut(5));
@@ -227,26 +209,16 @@ class FallThroughDialog extends DialogComponentProvider implements ChangeListene
 	private JPanel createRadioButtonPanel() {
 
 		JPanel panel = new JPanel();
-		BoxLayout bl = new BoxLayout(panel, BoxLayout.X_AXIS);
+		BoxLayout bl = new BoxLayout(panel, BoxLayout.LINE_AXIS);
 		panel.setLayout(bl);
 
 		ButtonGroup group = new ButtonGroup();
 		defaultRB = new GRadioButton("Default", true);
-		defaultRB.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ev) {
-				model.defaultSelected();
-			}
-		});
+		defaultRB.addActionListener(ev -> model.defaultSelected());
 		defaultRB.setToolTipText("Use default fallthrough address");
 
 		userRB = new GRadioButton("User", false);
-		userRB.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ev) {
-				model.userSelected();
-			}
-		});
+		userRB.addActionListener(ev -> model.userSelected());
 		userRB.setToolTipText("Override default fallthrough address");
 
 		group.add(defaultRB);

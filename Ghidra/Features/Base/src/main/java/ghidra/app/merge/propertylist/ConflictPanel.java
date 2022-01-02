@@ -155,14 +155,14 @@ class ConflictPanel extends JPanel {
 		group.add(originalRB);
 
 		JPanel rbPanel = new JPanel();
-		rbPanel.setLayout(new BoxLayout(rbPanel, BoxLayout.Y_AXIS));
+		rbPanel.setLayout(new BoxLayout(rbPanel, BoxLayout.PAGE_AXIS));
 		rbPanel.add(latestRB);
 		rbPanel.add(myRB);
 		rbPanel.add(originalRB);
 
-		panel.add(namePanel, BorderLayout.NORTH);
+		panel.add(namePanel, BorderLayout.PAGE_START);
 		panel.add(rbPanel, BorderLayout.CENTER);
-		panel.add(createUseForAllCheckBox(), BorderLayout.SOUTH);
+		panel.add(createUseForAllCheckBox(), BorderLayout.PAGE_END);
 
 		ItemListener itemListener = new ItemListener() {
 			@Override

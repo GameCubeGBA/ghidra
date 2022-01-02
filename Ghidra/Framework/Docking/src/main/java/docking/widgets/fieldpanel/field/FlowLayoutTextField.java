@@ -30,8 +30,8 @@ public class FlowLayoutTextField extends VerticalLayoutTextField {
 
 	/**
 	 * This constructor will create a text field that will render one line of text. If
-	 * <code>metrics.stringWidth(text) &gt; width</code>, then the text will be wrapped.
-	 * If <code>text</code> contains the highlight string, then it will be highlighted using the
+	 * {@code metrics.stringWidth(text) > width}, then the text will be wrapped.
+	 * If {@code text} contains the highlight string, then it will be highlighted using the
 	 * highlight color.
 	 * 
 	 * @param textElements the AttributedStrings to display
@@ -49,8 +49,8 @@ public class FlowLayoutTextField extends VerticalLayoutTextField {
 
 	/**
 	 * This constructor will create a text field that will render one line of text. If
-	 * <code>metrics.stringWidth(text) &gt; width</code>, then the text will be wrapped.
-	 * If <code>text</code> contains the highlight string, then it will be highlighted using the
+	 * {@code metrics.stringWidth(text) > width}, then the text will be wrapped.
+	 * If {@code text} contains the highlight string, then it will be highlighted using the
 	 * highlight color.
 	 * 
 	 * @param elements the AttributedStrings to display

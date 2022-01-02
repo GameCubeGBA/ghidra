@@ -53,7 +53,7 @@ import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>ProgramContextDB</code> defines a processor context over an address 
+ * {@code ProgramContextDB} defines a processor context over an address
  * space using database range maps for storage.
  */
 public class OldProgramContextDB implements ProgramContext, DefaultProgramContext, ManagerDB {

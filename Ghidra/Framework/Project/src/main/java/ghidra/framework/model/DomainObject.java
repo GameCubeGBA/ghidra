@@ -27,10 +27,10 @@ import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <CODE>DomainObject</CODE> is the interface that must be supported by
- * data objects that are persistent. <CODE>DomainObject</CODE>s maintain an
- * association with a <CODE>DomainFile</CODE>. A <CODE>DomainObject</CODE> that
- * has never been saved will have a null <CODE>DomainFile</CODE>.
+ * {@code DomainObject} is the interface that must be supported by
+ * data objects that are persistent. {@code DomainObject}s maintain an
+ * association with a {@code DomainFile}. A <CODE>DomainObject</CODE> that
+ * has never been saved will have a null {@code DomainFile}.
  */
 public interface DomainObject {
 

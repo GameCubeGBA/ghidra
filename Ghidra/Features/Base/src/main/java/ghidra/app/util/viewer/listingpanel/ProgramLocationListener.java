@@ -22,6 +22,7 @@ import ghidra.program.util.ProgramLocation;
 /**
  * Listener interface for when the program location changes.
  */
+@FunctionalInterface
 public interface ProgramLocationListener {
 	/**
 	 * Called whenever the program location changes.

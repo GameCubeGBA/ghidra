@@ -21,7 +21,7 @@ import java.text.ParseException;
  * Class to more conveniently represent a Java version string.
  * <p>
  * Note: this class has a natural ordering that is inconsistent with equals 
- * (the <code>architecture</code> part of the version is disregarded in the 
+ * (the {@code architecture} part of the version is disregarded in the
  * {@link #compareTo(JavaVersion)} method).
  */
 public class JavaVersion implements Comparable<JavaVersion> {

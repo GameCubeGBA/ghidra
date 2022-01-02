@@ -18,10 +18,11 @@ package ghidra.program.model.data;
 /**
  * @see DataTypeManager
  */
+@FunctionalInterface
 public interface InvalidatedListener {
 
 	/**
-	 * Called when the given <code>dataTypeManager</code>'s cache has been invalidated.
+	 * Called when the given {@code dataTypeManager}'s cache has been invalidated.
 	 * @param dataTypeManager The manager whose cache has been invalidated.
 	 */
 	void dataTypeManagerInvalidated(DataTypeManager dataTypeManager);

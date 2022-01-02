@@ -820,7 +820,7 @@ public class GhidraJarBuilder implements GhidraLaunchable {
 
 	}
 
-	private class Zip {
+	private static class Zip {
 		private ZipOutputStream zipOut;
 		private TaskMonitor monitor;
 
@@ -921,12 +921,10 @@ public class GhidraJarBuilder implements GhidraLaunchable {
 		}
 		String invocationName = System.getProperty(INVOCATION_NAME_PROPERTY);
 
-		StringBuffer buf = new StringBuffer();
-		buf.append("\nUsage: ");
-		buf.append(invocationName != null ? invocationName : "GhidraJarBuilder");
-		buf.append(
-			" [-output <output file>] [-srczip <src zip output file>] [-bin <compiled classes dir>] [-main <main-class>]\n");
-		System.err.println(buf.toString());
+        String buf = "\nUsage: " +
+                (invocationName != null ? invocationName : "GhidraJarBuilder") +
+                " [-output <output file>] [-srczip <src zip output file>] [-bin <compiled classes dir>] [-main <main-class>]\n";
+		System.err.println(buf);
 		System.exit(0);
 	}
 
@@ -954,25 +952,25 @@ public class GhidraJarBuilder implements GhidraLaunchable {
 
 		for (int i = 0; i < args.length; i++) {
 			String arg = args[i];
-			if (arg.equals("-output")) {
+			if ("-output".equals(arg)) {
 				if (i == args.length - 1) {
 					usage(args);
 				}
 				outputFile = new File(args[++i]);
 			}
-			else if (arg.equals("-srczip")) {
+			else if ("-srczip".equals(arg)) {
 				if (i == args.length - 1) {
 					usage(args);
 				}
 				srczip = new File(args[++i]);
 			}
-			else if (arg.equals("-bin")) {
+			else if ("-bin".equals(arg)) {
 				if (i == args.length - 1) {
 					usage(args);
 				}
 				extraBinDir = new File(args[++i]);
 			}
-			else if (arg.equals("-main")) {
+			else if ("-main".equals(arg)) {
 				if (i == args.length - 1) {
 					usage(args);
 				}

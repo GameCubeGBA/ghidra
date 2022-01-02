@@ -44,20 +44,17 @@ public class AddressInput extends JPanel {
 	private JTextField spaceField;
 
 	private static final Comparator<AddressSpace> ADDRESS_SPACE_SORT_COMPARATOR =
-		new Comparator<>() {
-			@Override
-			public int compare(AddressSpace s1, AddressSpace s2) {
-				if (s1.isOverlaySpace()) {
-					if (!s2.isOverlaySpace()) {
-						return 1;
-					}
-				}
-				else if (s2.isOverlaySpace()) {
-					return -1;
-				}
-				return s1.getName().compareTo(s2.getName());
-			}
-		};
+            (s1, s2) -> {
+                if (s1.isOverlaySpace()) {
+                    if (!s2.isOverlaySpace()) {
+                        return 1;
+                    }
+                }
+                else if (s2.isOverlaySpace()) {
+                    return -1;
+                }
+                return s1.getName().compareTo(s2.getName());
+            };
 
 	/**
 	 * Constructor for AddressInput.
@@ -90,12 +87,7 @@ public class AddressInput extends JPanel {
 			}
 		});
 
-		combo.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent ev) {
-				stateChanged();
-			}
-		});
+		combo.addActionListener(ev -> stateChanged());
 	}
 
 	/**
@@ -154,7 +146,7 @@ public class AddressInput extends JPanel {
 	 * a valid address.
 	 */
 	public boolean hasInput() {
-		return textField.getText().length() != 0;
+		return !textField.getText().isEmpty();
 	}
 
 	/**
@@ -212,7 +204,7 @@ public class AddressInput extends JPanel {
 
 		if (model.getSize() > 1) {
 			if (!comboAdded) {
-				add(combo, BorderLayout.WEST);
+				add(combo, BorderLayout.LINE_START);
 				comboAdded = true;
 			}
 		}
@@ -288,8 +280,8 @@ public class AddressInput extends JPanel {
 
 			spaceField.setEnabled(false);
 			remove(combo);
-			add(spaceField, BorderLayout.WEST);
-			if (textField.getText().length() == 0) {
+			add(spaceField, BorderLayout.LINE_START);
+			if (textField.getText().isEmpty()) {
 				updateSpaceField = true;
 			}
 		}
@@ -353,7 +345,7 @@ public class AddressInput extends JPanel {
 	public void showAddressSpaceCombo(boolean showCombo) {
 		if (showCombo) {
 			if (!comboAdded) {
-				add(combo, BorderLayout.WEST);
+				add(combo, BorderLayout.LINE_START);
 				comboAdded = true;
 			}
 		}

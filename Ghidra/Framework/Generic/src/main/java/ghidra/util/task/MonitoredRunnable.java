@@ -19,6 +19,7 @@ package ghidra.util.task;
  * Similar to a {@link Runnable} except the {@link #monitoredRun(TaskMonitor) run}
  * method is given a monitor to report progress and check for cancellation.
  */
+@FunctionalInterface
 public interface MonitoredRunnable {
 	
     /**

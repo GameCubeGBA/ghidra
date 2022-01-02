@@ -211,16 +211,12 @@ public class HTMLUtilities {
 	}
 
 	/**
-	 * Creates a string with the indicated number of HTML space characters (<code>&#x26;nbsp;</code>).
+	 * Creates a string with the indicated number of HTML space characters ({@code &#x26;nbsp;}).
 	 * @param num the number of HTML spaces
 	 * @return the string o HTML spaces
 	 */
 	public static String spaces(int num) {
-		StringBuilder buf = new StringBuilder(HTML_SPACE.length() * num);
-		for (int i = 0; i < num; i++) {
-			buf.append(HTML_SPACE);
-		}
-		return buf.toString();
+        return String.valueOf(HTML_SPACE).repeat(Math.max(0, num));
 	}
 
 	/**
@@ -274,13 +270,9 @@ public class HTMLUtilities {
 	 * @return true if the text cannot be correctly broken into lines
 	 */
 	public static boolean isUnbreakableHTML(String text) {
-		if ((text.contains(HTML_SPACE) && !text.contains(" ")) || text.contains(HTML_NEW_LINE)) {
-			// this implies the client has already broken lines in their preferred location
-			return true;
-		}
-
-		return false;
-	}
+        // this implies the client has already broken lines in their preferred location
+        return (text.contains(HTML_SPACE) && !text.contains(" ")) || text.contains(HTML_NEW_LINE);
+    }
 
 	private static void logUnbreakableHTMLWarning() {
 		//
@@ -351,14 +343,14 @@ public class HTMLUtilities {
 
 	/**
 	 * Returns the given text wrapped in {@link #LINK_PLACEHOLDER_OPEN} and close tags.
-	 * If <code>foo</code> is passed for the HTML text, with a content value of <code>123456</code>, then
+	 * If {@code foo} is passed for the HTML text, with a content value of <code>123456</code>, then
 	 * the output will look like:
 	 * <pre>
 	 * 	&lt;!-- LINK CONTENT="123456" --&gt;foo&lt;!-- /LINK --&gt;
 	 * </pre>
 	 *
 	 * @param htmlText the HTML text to wrap
-	 * @param content the value that will be put into the <code>CONTENT</code> section of the
+	 * @param content the value that will be put into the {@code CONTENT} section of the
 	 * 		  generated HTML.  This can later be retrieved by clients transforming this text.
 	 * @return the wrapped text
 	 */
@@ -371,8 +363,8 @@ public class HTMLUtilities {
 
 	/**
 	 * Takes HTML text wrapped by {@link #wrapWithLinkPlaceholder(String, String)} and replaces
-	 * the custom link comment tags with HTML anchor (<code>A</code>) tags, where the <code>HREF</code>
-	 * value is the value that was in the <code>CONTENT</code> attribute.
+	 * the custom link comment tags with HTML anchor ({@code A}) tags, where the <code>HREF</code>
+	 * value is the value that was in the {@code CONTENT} attribute.
 	 *
 	 * @param text the text for which to replace the markup
 	 * @return the updated text
@@ -422,9 +414,9 @@ public class HTMLUtilities {
 	/**
 	 * Similar to {@link #toHTML(String)} in that it will wrap the given text in
 	 * HTML tags and split the content into multiple lines.  The difference is that this method
-	 * will split lines that pass the given maximum length <b>and</b> on <code>'\n'</code>
+	 * will split lines that pass the given maximum length <b>and</b> on {@code '\n'}
 	 * characters.  Alternatively, {@link #toHTML(String)} will only split the given
-	 * text on <code>'\n'</code> characters.
+	 * text on {@code '\n'} characters.
 	 *
 	 * @param text The text to convert
 	 * @param maxLineLength The maximum number of characters that should appear in a line;
@@ -545,9 +537,7 @@ public class HTMLUtilities {
 				continue;
 			case '\t':
 				int cnt = TAB_SIZE - (col % TAB_SIZE);
-				for (int k = 0; k < cnt; k++) {
-					buffer.append(HTML_SPACE);
-				}
+                buffer.append(String.valueOf(HTML_SPACE).repeat(cnt));
 				col = 0;
 				continue;
 			case ' ':
@@ -596,7 +586,7 @@ public class HTMLUtilities {
 	 * <p>
 	 * Calling this twice will result in text being double-escaped, which will not display correctly.
 	 * <p>
-	 * See also <code>StringEscapeUtils#escapeHtml3(String)</code> if you need quote-safe html encoding.
+	 * See also {@code StringEscapeUtils#escapeHtml3(String)} if you need quote-safe html encoding.
 	 * <p>
 	 *  
 	 * @param text plain-text that might have some characters that should NOT be interpreted as HTML
@@ -641,11 +631,8 @@ public class HTMLUtilities {
 	 * @return boolean true if character should be escaped
 	 */
 	public static boolean charNeedsHTMLEscaping(int codePoint) {
-		if (codePoint == '\n' || codePoint == '\t' || (' ' <= codePoint && codePoint < 0x7F)) {
-			return false;
-		}
-		return true;
-	}
+        return codePoint != '\n' && codePoint != '\t' && (' ' > codePoint || codePoint >= 0x7F);
+    }
 
 	/**
 	 * A convenience method to split the given HTML into lines, based on the given length, and
@@ -828,11 +815,10 @@ public class HTMLUtilities {
 	 * @return a string of the format rrrgggbbb.
 	 */
 	public static String toRGBString(Color color) {
-		StringBuilder buffy = new StringBuilder();
-		buffy.append(StringUtilities.pad(Integer.toString(color.getRed()), '0', 3));
-		buffy.append(StringUtilities.pad(Integer.toString(color.getGreen()), '0', 3));
-		buffy.append(StringUtilities.pad(Integer.toString(color.getBlue()), '0', 3));
-		return buffy.toString();
+        String buffy = StringUtilities.pad(Integer.toString(color.getRed()), '0', 3) +
+                StringUtilities.pad(Integer.toString(color.getGreen()), '0', 3) +
+                StringUtilities.pad(Integer.toString(color.getBlue()), '0', 3);
+		return buffy;
 	}
 
 	/**

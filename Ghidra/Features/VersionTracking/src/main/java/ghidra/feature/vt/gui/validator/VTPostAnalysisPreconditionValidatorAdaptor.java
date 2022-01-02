@@ -94,14 +94,13 @@ public abstract class VTPostAnalysisPreconditionValidatorAdaptor extends VTPreco
 	}
 
 	private String combine(String sourceMessage, String destinationMessage) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(sourceValidator.getProgram().getName());
-		sb.append(":\n");
-		sb.append(sourceMessage);
-		sb.append("\n");
-		sb.append(destinationValidator.getProgram().getName());
-		sb.append(":\n");
-		sb.append(destinationMessage);
-		return sb.toString();
+        String sb = sourceValidator.getProgram().getName() +
+                ":\n" +
+                sourceMessage +
+                "\n" +
+                destinationValidator.getProgram().getName() +
+                ":\n" +
+                destinationMessage;
+		return sb;
 	}
 }

@@ -20,6 +20,7 @@ import java.util.List;
 /**
  * Callback interface for validating a list of options with values.
  */
+@FunctionalInterface
 public interface OptionValidator {
 
 	/**

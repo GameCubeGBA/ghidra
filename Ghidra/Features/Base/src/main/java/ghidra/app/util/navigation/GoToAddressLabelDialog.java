@@ -109,7 +109,7 @@ public class GoToAddressLabelDialog extends DialogComponentProvider implements G
 		if (override != null) {
 			JComponent comp = override.getOverrideComponent();
 			if (comp != null) {
-				mainPanel.add(comp, BorderLayout.SOUTH);
+				mainPanel.add(comp, BorderLayout.PAGE_END);
 			}
 		}
 		setDialogEnabled(true);
@@ -176,7 +176,7 @@ public class GoToAddressLabelDialog extends DialogComponentProvider implements G
 		inner.setLayout(gl);
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.BOTH;
-		gbc.anchor = GridBagConstraints.WEST;
+		gbc.anchor = GridBagConstraints.LINE_START;
 		gbc.weightx = 1;
 		gbc.gridwidth = 2;
 		gbc.insets = new Insets(5, 5, 5, 5);
@@ -225,7 +225,7 @@ public class GoToAddressLabelDialog extends DialogComponentProvider implements G
 		mainPanel = new JPanel(new BorderLayout());
 		Border emptyBorder = BorderFactory.createEmptyBorder(5, 5, 0, 5);
 		mainPanel.setBorder(emptyBorder);
-		mainPanel.add(inner, BorderLayout.NORTH);
+		mainPanel.add(inner, BorderLayout.PAGE_START);
 
 		return mainPanel;
 	}

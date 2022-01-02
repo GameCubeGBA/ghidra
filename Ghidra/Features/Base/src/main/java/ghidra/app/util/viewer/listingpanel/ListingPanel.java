@@ -300,7 +300,7 @@ public class ListingPanel extends JPanel implements FieldMouseListener, FieldLoc
 
 	private void buildPanels() {
 		removeAll();
-		add(buildLeftComponent(), BorderLayout.WEST);
+		add(buildLeftComponent(), BorderLayout.LINE_START);
 		add(buildCenterComponent(), BorderLayout.CENTER);
 		JComponent overviewComponent = buildOverviewComponent();
 		if (overviewComponent != null) {

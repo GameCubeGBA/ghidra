@@ -37,7 +37,7 @@ import ghidra.util.exception.AssertException;
 import ghidra.util.exception.FileInUseException;
 
 /**
- * <code>RepositoryHandleImpl</code> provides a Repository handle to a
+ * {@code RepositoryHandleImpl} provides a Repository handle to a
  * remote user.
  */
 public class RepositoryHandleImpl extends UnicastRemoteObject implements RemoteRepositoryHandle,
@@ -51,9 +51,9 @@ public class RepositoryHandleImpl extends UnicastRemoteObject implements RemoteR
 	private String currentUser;
 	private Repository repository;
 	private HashMap<String, ItemCheckoutStatus> transientCheckouts;
-	private Object syncObject;
+	private final Object syncObject;
 
-	private LinkedList<RepositoryChangeEvent> eventQueue = new LinkedList<RepositoryChangeEvent>();
+	private final LinkedList<RepositoryChangeEvent> eventQueue = new LinkedList<RepositoryChangeEvent>();
 
 	/**
 	 * Construct a repository handle for a specific user.

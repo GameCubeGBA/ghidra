@@ -23,9 +23,11 @@ import ghidra.dbg.DebuggerObjectModel;
 import ghidra.dbg.target.TargetObject;
 import ghidra.dbg.util.PathPredicates;
 
+@FunctionalInterface
 public interface TestDebuggerModelProvider {
 	interface ModelHost extends AutoCloseable {
-		interface WithoutThreadValidation extends AutoCloseable {
+		@FunctionalInterface
+        interface WithoutThreadValidation extends AutoCloseable {
 		}
 
 		Map<String, Object> getFactoryOptions();

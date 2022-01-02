@@ -236,7 +236,7 @@ public class ListingDiffHighlightProvider implements HighlightProvider {
 		return isListing1;
 	}
 
-	private class Pair {
+	private static class Pair {
 
 		private int start;
 		private int end;

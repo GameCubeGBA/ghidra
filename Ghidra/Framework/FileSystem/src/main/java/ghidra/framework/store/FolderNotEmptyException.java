@@ -19,7 +19,7 @@ package ghidra.framework.store;
 import java.io.IOException;
 
 /**
- * <code>FolderNotEmptyException</code> is thrown when an attempt is
+ * {@code FolderNotEmptyException} is thrown when an attempt is
  * made to remove a Folder which is not empty.
  */
 public class FolderNotEmptyException extends IOException {

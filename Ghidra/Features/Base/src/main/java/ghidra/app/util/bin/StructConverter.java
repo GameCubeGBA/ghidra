@@ -26,6 +26,7 @@ import ghidra.util.exception.DuplicateNameException;
  * 
  * 
  */
+@FunctionalInterface
 public interface StructConverter {
 	/**
 	 * Reusable BYTE datatype.

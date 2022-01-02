@@ -39,7 +39,7 @@ public class GhidraSshPtyFactory implements PtyFactory {
 	public static final String DEFAULT_USERNAME = "user";
 	public static final String DEFAULT_CONFIG_FILE = "~/.ssh/config";
 
-	private class RequireTTYAlwaysConfig implements Config {
+	private static class RequireTTYAlwaysConfig implements Config {
 		private final Config delegate;
 
 		public RequireTTYAlwaysConfig(Config delegate) {

@@ -80,9 +80,9 @@ public abstract class TagListPanel extends JPanel {
 
 		titleLabel = new JLabel(title);
 		titleLabel.setBorder(BorderFactory.createEmptyBorder(3, 5, 0, 0));
-		add(titleLabel, BorderLayout.NORTH);
+		add(titleLabel, BorderLayout.PAGE_START);
 		add(tablePanel, BorderLayout.CENTER);
-		add(filterPanel, BorderLayout.SOUTH);
+		add(filterPanel, BorderLayout.PAGE_END);
 
 		table.addMouseListener(new MouseAdapter() {
 

@@ -23,22 +23,22 @@ public abstract class MDParsableItem {
 	protected MDMang dmang;
 
 	/**
-	 * Constructor for this item (this class) that can be parsed by <b><code>MDMang</code></b>.
-	 *  The <b><code>MDMang</code></b> argument is the worker for the demangler, which is used
+	 * Constructor for this item (this class) that can be parsed by <b>{@code MDMang}</b>.
+	 *  The <b>{@code MDMang}</b> argument is the worker for the demangler, which is used
 	 *  throughout the parsing and outputting of the object.
-	 * @param dmang the <b><code>MDMang</code></b> object (or derived type) for this MDParsableItem.
+	 * @param dmang the <b>{@code MDMang}</b> object (or derived type) for this MDParsableItem.
 	 */
 	public MDParsableItem(MDMang dmang) {
 		this.dmang = dmang;
 	}
 
 	/**
-	 * This is method can set the required <b><code>dmang</code></b> reference in this
+	 * This is method can set the required <b>{@code dmang}</b> reference in this
 	 *  class.  The normal way of setting this is through the constructor, which takes
 	 *  the appropriate argument.  But if this class is constructed with
-	 *  <b><code>newInstance()</code></b>, then we need a way to set the value.
-	 * @param dmang the <b><code>MDMang</code></b> (or derived) worker for this
-	 *  <b><code>MDParsableItem</code></b>.
+	 *  <b>{@code newInstance()}</b>, then we need a way to set the value.
+	 * @param dmang the <b>{@code MDMang}</b> (or derived) worker for this
+	 *  <b>{@code MDParsableItem}</b>.
 	 */
 	public void setMDMang(MDMang dmang) {
 		this.dmang = dmang;
@@ -51,17 +51,17 @@ public abstract class MDParsableItem {
 	}
 
 	/**
-	 * Constructor for this item (this class) that can be parsed by <b><code>MDMang</code></b>.
-	 *  The <b><code>MDMang</code></b> argument is the worker for the demangler, which is used
+	 * Constructor for this item (this class) that can be parsed by <b>{@code MDMang}</b>.
+	 *  The <b>{@code MDMang}</b> argument is the worker for the demangler, which is used
 	 *  throughout the parsing and outputting of the object.  The
-	 *  <b><code>startIndexOffset</code></b> is indicates how many characters have already
+	 *  <b>{@code startIndexOffset}</b> is indicates how many characters have already
 	 *  been read from the mangled string at this point from the start of the sequence of
 	 *  characters that led us to know that we had the object of this type.
 	 *   <p>
-	 *  This <b><code>startIndexOffset</code></b> value is used in the
-	 *   <b><code>MDMangParseInfo</code></b> derivative of <b><code>MDMang</code></b>.
-	 * @param dmang the <b><code>MDMang</code></b> (or derived) worker for this
-	 *  <b><code>MDParsableItem</code></b>.
+	 *  This <b>{@code startIndexOffset}</b> value is used in the
+	 *   <b>{@code MDMangParseInfo}</b> derivative of <b><code>MDMang</code></b>.
+	 * @param dmang the <b>{@code MDMang}</b> (or derived) worker for this
+	 *  <b>{@code MDParsableItem}</b>.
 	 * @param startIndexOffset the offset from the start of the determining sequence.
 	 */
 	public MDParsableItem(MDMang dmang, int startIndexOffset) {

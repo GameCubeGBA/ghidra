@@ -308,13 +308,12 @@ public enum OptionType {
 			String fontName = font.getFamily();
 			int style = font.getStyle();
 			int size = font.getSize();
-			StringBuilder buf = new StringBuilder();
-			buf.append(fontName);
-			buf.append("-");
-			buf.append(STYLES[style]);
-			buf.append("-");
-			buf.append(size);
-			return buf.toString();
+            String buf = fontName +
+                    "-" +
+                    STYLES[style] +
+                    "-" +
+                    size;
+			return buf;
 		}
 	}
 

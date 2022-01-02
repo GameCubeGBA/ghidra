@@ -24,7 +24,7 @@ import ghidra.util.exception.AssertException;
 import ghidra.util.exception.CancelledException;
 
 /**
- * <code>ChangeMapFile</code> tracks which buffers within a LocalBufferFile 
+ * {@code ChangeMapFile} tracks which buffers within a LocalBufferFile
  * have been modified between an older and newer version.  The older
  * file is also referred to as the target file.
  */

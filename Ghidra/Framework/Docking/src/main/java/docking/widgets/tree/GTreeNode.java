@@ -52,13 +52,13 @@ import util.CollectionUtils;
  *
  * <a id="usage"></a>Usage Notes:
  * <ul>
- * 	<li>The <b><code>equals()</code></b> method:  The <code>GTree</code> has the ability to remember expanded and
+ * 	<li>The <b>{@code equals()}</b> method:  The <code>GTree</code> has the ability to remember expanded and
  *      selected states.  This will only work if the nodes in the saved state can be matched
- *      with the nodes in the <code>GTree</code>.  Java will do this by using the <code>equals()</code> method.
- *      There is a potential problem with this usage.  If nodes within the <code>GTree</code> get rebuilt (
+ *      with the nodes in the {@code GTree}.  Java will do this by using the <code>equals()</code> method.
+ *      There is a potential problem with this usage.  If nodes within the {@code GTree} get rebuilt (
  *      i.e., new nodes are created), then, by default, the expanded and selected state
- *      feature will be unable to find the correct nodes, since the default <code>equals()</code>
- *      method on <code>GTreeNode</code> performs a comparison based upon instances.  To fix this problem,
+ *      feature will be unable to find the correct nodes, since the default {@code equals()}
+ *      method on {@code GTreeNode} performs a comparison based upon instances.  To fix this problem,
  *      the {@link #equals(Object)} method has been implemented such that nodes are considered equal if they have
  *      the same name (see {@link #getName()}). The {@link #hashCode()} method will return the hash of the name.  The name
  *      attribute was chosen because it should be the most unique and descriptive piece of information

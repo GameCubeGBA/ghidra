@@ -481,10 +481,9 @@ public class HelpBuildUtils {
 
 		switch (scheme) {
 			case "file":
-				return false;
-			case "jar":
-				return false;
-			default:
+            case "jar":
+                return false;
+            default:
 				break;
 		}
 		return true;
@@ -606,7 +605,8 @@ public class HelpBuildUtils {
 // Inner Classes
 //==================================================================================================    
 
-	public interface Stringizer<T> {
+	@FunctionalInterface
+    public interface Stringizer<T> {
 		String stringize(T obj);
 	}
 

@@ -25,7 +25,8 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.junit.Test;
 
 public class ListenerMapTest {
-	public interface DummyListener {
+	@FunctionalInterface
+    public interface DummyListener {
 		void event(String e);
 	}
 

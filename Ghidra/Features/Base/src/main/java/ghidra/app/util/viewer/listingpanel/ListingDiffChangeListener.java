@@ -19,6 +19,7 @@ package ghidra.app.util.viewer.listingpanel;
  * Interface defining a listener that gets notified when the ListingDiff's set of differences 
  * and unmatched addresses has changed.
  */
+@FunctionalInterface
 public interface ListingDiffChangeListener {
 
 	/**

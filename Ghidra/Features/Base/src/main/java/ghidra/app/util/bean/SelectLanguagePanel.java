@@ -110,12 +110,12 @@ public class SelectLanguagePanel extends JPanel {
 		});
 
 		JPanel filterPanel = new JPanel(new BorderLayout());
-		filterPanel.add(new GLabel("Filter:"), BorderLayout.WEST);
+		filterPanel.add(new GLabel("Filter:"), BorderLayout.LINE_START);
 		filterPanel.add(filterField, BorderLayout.CENTER);
 
 		setLayout(new BorderLayout(10, 10));
 		add(new JScrollPane(table), BorderLayout.CENTER);
-		add(filterPanel, BorderLayout.SOUTH);
+		add(filterPanel, BorderLayout.PAGE_END);
 
 		model.update();
 	}

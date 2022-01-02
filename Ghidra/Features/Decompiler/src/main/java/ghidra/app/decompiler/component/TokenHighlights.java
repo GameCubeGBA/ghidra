@@ -187,7 +187,7 @@ public class TokenHighlights implements Iterable<HighlightToken> {
 //==================================================================================================	
 
 	// a key that allows us to equate tokens that are not the same instance
-	private class TokenKey {
+	private static class TokenKey {
 		private ClangToken token;
 
 		TokenKey(ClangToken token) {

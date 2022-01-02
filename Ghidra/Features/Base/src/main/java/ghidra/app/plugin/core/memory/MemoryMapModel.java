@@ -360,9 +360,7 @@ class MemoryMapModel extends AbstractSortedTableModel<MemoryBlock> {
 					}
 					return;
 
-				case SOURCE:
-					break;
-				case COMMENT:
+                case COMMENT:
 					String cmt = block.getComment();
 					if (cmt == null || !cmt.equals(aValue)) {
 						String value = (String) aValue;
@@ -536,7 +534,7 @@ class MemoryMapModel extends AbstractSortedTableModel<MemoryBlock> {
 		return new MemoryMapComparator(columnIndex);
 	}
 
-	private class MemoryMapComparator implements Comparator<MemoryBlock> {
+	private static class MemoryMapComparator implements Comparator<MemoryBlock> {
 		private final int sortColumn;
 
 		public MemoryMapComparator(int sortColumn) {

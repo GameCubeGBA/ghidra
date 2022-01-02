@@ -38,7 +38,7 @@ import help.validator.location.HelpModuleCollection;
  * module paths and build the help for each module.  To build single modules, call this class
  * with only one module path.
  * <p>
- * Note: Help links must not be absolute.  They can be relative, including <code>. and ..</code>
+ * Note: Help links must not be absolute.  They can be relative, including {@code . and ..}
  * syntax.  Further, they can use the special help system syntax, which is:
  * <ul>
  * 	<li><code><b>help/topics/</b>topicName/Filename.html</code> for referencing help topic files
@@ -333,32 +333,19 @@ public class GHelpBuilder {
 	}
 
 	private static void printUsage() {
-		StringBuilder buffy = new StringBuilder();
-		// TODO: Complete this once the options are stable
+        // TODO: Complete this once the options are stable
 
-		buffy.append("Usage: ");
-		buffy.append(GHelpBuilder.class.getName()).append(" [-options] [inputs...]\n");
-		buffy.append("          (to build help for a Ghidra module)\n");
-		buffy.append("where options include:\n");
-		buffy.append("    ").append(OUTPUT_DIRECTORY_OPTION).append(" <output directory>\n");
-		buffy.append(
-			"                  REQUIRED to specify the output location of the built help\n");
-		buffy.append("    ").append(DEBUG_SWITCH).append("        to enable debugging output\n");
-		buffy.append("    ").append(IGNORE_INVALID_SWITCH).append("\n");
-		buffy.append("                  to continue despite broken links and anchors\n");
+        String buffy = "Usage: " +
+                GHelpBuilder.class.getName() + " [-options] [inputs...]\n" +
+                "          (to build help for a Ghidra module)\n" +
+                "where options include:\n" +
+                "    " + OUTPUT_DIRECTORY_OPTION + " <output directory>\n" +
+                "                  REQUIRED to specify the output location of the built help\n" +
+                "    " + DEBUG_SWITCH + "        to enable debugging output\n" +
+                "    " + IGNORE_INVALID_SWITCH + "\n" +
+                "                  to continue despite broken links and anchors\n";
 
-		errorMessage(buffy.toString());
-	}
-
-	private static void warningMessage(String... message) {
-		StringBuilder buffy = new StringBuilder();
-		buffy.append("\n");
-		buffy.append("              !!!!!     WARNING     !!!!!\n");
-		for (String string : message) {
-			buffy.append('\t').append('\t').append(string).append('\n');
-		}
-		buffy.append("\n");
-		errorMessage(buffy.toString());
+		errorMessage(buffy);
 	}
 
 	private static void printErrorMessage(String message) {

@@ -90,7 +90,7 @@ public class InstructionTablePanel extends JPanel {
 		instructionTable = new InstructionTable(numColumns + 1, plugin, dialog);
 		scrollPane = new JScrollPane(instructionTable);
 
-		workPanel.add(instructionTable.getToolbar(), BorderLayout.NORTH);
+		workPanel.add(instructionTable.getToolbar(), BorderLayout.PAGE_START);
 		workPanel.add(scrollPane, BorderLayout.CENTER);
 	}
 

@@ -134,7 +134,7 @@ public class GroupedFunctionGraphComponentPanel extends AbstractGraphComponentPa
 		setOpaque(true);
 		setBackground(defaultBackgroundColor);
 
-		add(genericHeader, BorderLayout.NORTH);
+		add(genericHeader, BorderLayout.PAGE_START);
 		add(contentPanel, BorderLayout.CENTER);
 
 		BevelBorder beveledBorder =

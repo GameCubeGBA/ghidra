@@ -94,7 +94,7 @@ public class ListSelectionTableDialog<T> extends DialogComponentProvider {
 		JScrollPane scroll = new JScrollPane(gTable);
 		filterPanel = new GTableFilterPanel<>(gTable, model);
 		panel.add(scroll, BorderLayout.CENTER);
-		panel.add(filterPanel, BorderLayout.SOUTH);
+		panel.add(filterPanel, BorderLayout.PAGE_END);
 		gTable.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {

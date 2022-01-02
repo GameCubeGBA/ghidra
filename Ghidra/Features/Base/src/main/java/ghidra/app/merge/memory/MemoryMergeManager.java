@@ -194,13 +194,13 @@ public class MemoryMergeManager implements MergeResolver {
 				throw new AssertException("Memory blocks have different lengths!");
 			}
 			if (isNameConflict(i)) {
-				conflictList.add(new ConflictInfo(i, true, false, false));
+				conflictList.add(new ConflictInfo(i, true, false));
 			}
 			if (isPermissionConflict(i)) {
-				conflictList.add(new ConflictInfo(i, false, true, false));
+				conflictList.add(new ConflictInfo(i, false, true));
 			}
 			if (isCommentConflict(i)) {
-				conflictList.add(new ConflictInfo(i, false, false, true));
+				conflictList.add(new ConflictInfo(i, false, false));
 			}
 		}
 		conflictCount = conflictList.size();
@@ -355,10 +355,10 @@ public class MemoryMergeManager implements MergeResolver {
 	}
 
 	private void handleConflict(ConflictInfo info) throws CancelledException {
-		String latestStr = null;
-		String myStr = null;
-		String origStr = null;
-		String title = null;
+		String latestStr;
+		String myStr;
+		String origStr;
+		String title;
 		String panelID = MemoryMergePanel.CONFLICT_PANEL_ID;
 
 		if (info.nameConflict) {
@@ -466,19 +466,17 @@ public class MemoryMergeManager implements MergeResolver {
 	}
 
 	private String getPermissionString(MemoryBlock block) {
-		StringBuffer sb = new StringBuffer();
-		sb.append("Read = ");
-		sb.append(block.isExecute());
-		sb.append(", ");
-		sb.append("Write = ");
-		sb.append(block.isWrite());
-		sb.append(", ");
-		sb.append("Execute = ");
-		sb.append(block.isExecute());
-		sb.append(", ");
-		sb.append("Volatile = ");
-		sb.append(block.isVolatile());
-		return sb.toString();
+		return "Read = " +
+				block.isExecute() +
+				", " +
+				"Write = " +
+				block.isWrite() +
+				", " +
+				"Execute = " +
+				block.isExecute() +
+				", " +
+				"Volatile = " +
+				block.isVolatile();
 	}
 
 	private void processBlockChanges(int index) throws CancelledException {
@@ -537,8 +535,7 @@ public class MemoryMergeManager implements MergeResolver {
 		}
 		if (!isCommentConflict(index)) {
 			String myComment = myBlocks[index].getComment();
-			if (myComment != null && !myComment.equals(origBlocks[index].getComment()) ||
-				(myComment == null)) {
+			if (myComment == null || !myComment.equals(origBlocks[index].getComment())) {
 				resultBlocks[index].setComment(myComment);
 				if (!progressUpdated) {
 					currentMonitor.setProgress(++progressIndex);
@@ -565,19 +562,16 @@ public class MemoryMergeManager implements MergeResolver {
 		return new String[][] { MEMORY_PHASE };
 	}
 
-	private class ConflictInfo {
+	private static class ConflictInfo {
 
 		int index;
 		boolean permissionConflict;
 		boolean nameConflict;
-		boolean commentConflict;
 
-		ConflictInfo(int index, boolean nameConflict, boolean permissionConflict,
-				boolean commentConflict) {
+		ConflictInfo(int index, boolean nameConflict, boolean permissionConflict) {
 			this.index = index;
 			this.nameConflict = nameConflict;
 			this.permissionConflict = permissionConflict;
-			this.commentConflict = commentConflict;
 		}
 	}
 }

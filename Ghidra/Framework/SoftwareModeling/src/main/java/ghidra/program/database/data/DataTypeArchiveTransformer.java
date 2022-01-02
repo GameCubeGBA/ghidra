@@ -805,7 +805,7 @@ public class DataTypeArchiveTransformer implements GhidraLaunchable {
 		monitorSize.width = filePanel.getPreferredSize().width;
 		monitorComponent.setPreferredSize(monitorSize);
 		monitorComponent.setVisible(true);
-		statusPanel.add(monitorComponent, BorderLayout.EAST);
+		statusPanel.add(monitorComponent, BorderLayout.LINE_END);
 		// Add the status message to the status area.
 		JLabel statusLabel = new GDLabel("    ");
 		statusPanel.add(statusLabel, BorderLayout.CENTER);

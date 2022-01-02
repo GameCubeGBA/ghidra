@@ -35,11 +35,7 @@ public class ClangLine {
 	}
 
 	public String getIndentString() {
-		StringBuffer buffer = new StringBuffer();
-		for (int i = 0; i < indent_level; i++) {
-			buffer.append(PrettyPrinter.INDENT_STRING);
-		}
-		return buffer.toString();
+        return PrettyPrinter.INDENT_STRING.repeat(Math.max(0, indent_level));
 	}
 
 	public int getIndent() {
@@ -82,7 +78,7 @@ public class ClangLine {
 			calloutTokens = Collections.emptyList();
 		}
 
-		StringBuilder buffy = new StringBuilder(getLineNumber() + ": ");
+		StringBuilder buffy = new StringBuilder(lineNumber + ": ");
 		for (ClangToken token : tokens) {
 
 			boolean isCallout = calloutTokens.contains(token);

@@ -92,10 +92,10 @@ public class ClearFlowDialog extends DialogComponentProvider {
 		panel = new JPanel();
 		panel.setLayout(new BorderLayout(10, 10));
 
-		panel.add(new GLabel("Clear Flow Options:"), BorderLayout.NORTH);
+		panel.add(new GLabel("Clear Flow Options:"), BorderLayout.PAGE_START);
 
 		JPanel cbPanel = new JPanel();
-		BoxLayout bl = new BoxLayout(cbPanel, BoxLayout.Y_AXIS);
+		BoxLayout bl = new BoxLayout(cbPanel, BoxLayout.PAGE_AXIS);
 		cbPanel.setLayout(bl);
 
 		symbolsCb = new GCheckBox("Clear Symbols");

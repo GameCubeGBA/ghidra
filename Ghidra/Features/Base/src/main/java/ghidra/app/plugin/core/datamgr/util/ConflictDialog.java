@@ -99,7 +99,7 @@ public class ConflictDialog extends DialogComponentProvider {
 		JPanel mainPanel = new JPanel();
 		mainPanel.setBorder(BorderFactory.createTitledBorder("Resolve Data Type Conflict"));
 
-		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
 
 		ItemListener listener = new ItemListener() {
 			@Override
@@ -137,7 +137,7 @@ public class ConflictDialog extends DialogComponentProvider {
 		mainPanel.add(replaceRB);
 		mainPanel.add(useExistingRB);
 
-		outerPanel.add(createLabelPanel(dtName, categoryPath), BorderLayout.NORTH);
+		outerPanel.add(createLabelPanel(dtName, categoryPath), BorderLayout.PAGE_START);
 		outerPanel.add(mainPanel, BorderLayout.CENTER);
 		return outerPanel;
 	}
@@ -145,7 +145,7 @@ public class ConflictDialog extends DialogComponentProvider {
 	private JPanel createLabelPanel(String dtName, String categoryPath) {
 		JPanel labelPanel = new JPanel();
 		labelPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 20));
-		BoxLayout bl = new BoxLayout(labelPanel, BoxLayout.X_AXIS);
+		BoxLayout bl = new BoxLayout(labelPanel, BoxLayout.LINE_AXIS);
 		labelPanel.setLayout(bl);
 		labelPanel.add(Box.createHorizontalStrut(5));
 		labelPanel.add(new GIconLabel(INFORM_ICON));

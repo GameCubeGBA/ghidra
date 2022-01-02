@@ -348,7 +348,7 @@ public class InstructionSearchDialog extends DialogComponentProvider implements 
 		mainPanel.add(tablePanel, BorderLayout.CENTER);
 
 		JPanel lowerPanel = new JPanel();
-		lowerPanel.setLayout(new BoxLayout(lowerPanel, BoxLayout.Y_AXIS));
+		lowerPanel.setLayout(new BoxLayout(lowerPanel, BoxLayout.PAGE_AXIS));
 
 		// Create the control panel, which contains the options for
 		// searching the whole program or the current selection.
@@ -359,7 +359,7 @@ public class InstructionSearchDialog extends DialogComponentProvider implements 
 		lowerPanel.add(controlPanel);
 		lowerPanel.add(messagePanel);
 
-		mainPanel.add(lowerPanel, BorderLayout.SOUTH);
+		mainPanel.add(lowerPanel, BorderLayout.PAGE_END);
 
 		return mainPanel;
 	}

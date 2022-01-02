@@ -200,7 +200,7 @@ public class FunctionReachabilityProvider extends ComponentProvider {
 		outputPanel.add(new JScrollPane(pathsTable));
 
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.add(inputPanel, BorderLayout.WEST);
+		panel.add(inputPanel, BorderLayout.LINE_START);
 		panel.add(outputPanel, BorderLayout.CENTER);
 
 		return panel;

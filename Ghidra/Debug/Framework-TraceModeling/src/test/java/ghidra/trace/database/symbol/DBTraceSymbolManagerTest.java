@@ -63,11 +63,13 @@ public class DBTraceSymbolManagerTest extends AbstractGhidraHeadlessIntegrationT
 		assertEquals(Namespace.GLOBAL_NAMESPACE_ID, global.getID());
 	}
 
-	interface NamedCreator {
+	@FunctionalInterface
+    interface NamedCreator {
 		void create(String name) throws Exception;
 	}
 
-	interface Temperametal {
+	@FunctionalInterface
+    interface Temperametal {
 		void run() throws Exception;
 	}
 

@@ -71,7 +71,7 @@ public abstract class AbstractAddressRangeFilter<T> extends AncillaryFilter<T>
 
 	private JComponent createComponent() {
 		final JPanel panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+		panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
 		panel.setBorder(BorderFactory.createTitledBorder("Address Range"));
 
 		//
@@ -82,7 +82,7 @@ public abstract class AbstractAddressRangeFilter<T> extends AncillaryFilter<T>
 		enableCheckBox.addItemListener(e -> enableFilter(enableCheckBox.isSelected()));
 		enableCheckBox.setSelected(true);
 		JPanel enablePanel = new JPanel(new BorderLayout());
-		enablePanel.add(enableCheckBox, BorderLayout.NORTH);
+		enablePanel.add(enableCheckBox, BorderLayout.PAGE_START);
 
 		// begin address field (long input field with hex)
 		lowerAddressRangeTextField = new FilterFormattedTextField(
@@ -567,7 +567,7 @@ public abstract class AbstractAddressRangeFilter<T> extends AncillaryFilter<T>
 		}
 	}
 
-	private class FormattedFieldComboBoxEditor implements ComboBoxEditor {
+	private static class FormattedFieldComboBoxEditor implements ComboBoxEditor {
 
 		private EventListenerList listeners = new EventListenerList();
 		private final FilterFormattedTextField textField;
@@ -613,7 +613,7 @@ public abstract class AbstractAddressRangeFilter<T> extends AncillaryFilter<T>
 		}
 	}
 
-	private class BackgroundColorChangeListener implements PropertyChangeListener {
+	private static class BackgroundColorChangeListener implements PropertyChangeListener {
 
 		private final JComboBox<?> comboBox;
 

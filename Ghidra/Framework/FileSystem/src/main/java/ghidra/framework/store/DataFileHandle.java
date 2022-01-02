@@ -18,7 +18,7 @@ package ghidra.framework.store;
 import java.io.IOException;
 
 /**
- * <code>DataFileHandle</code> provides a random-access handle to a file.
+ * {@code DataFileHandle} provides a random-access handle to a file.
  */
 public interface DataFileHandle {
 
@@ -29,7 +29,7 @@ public interface DataFileHandle {
 	boolean isReadOnly() throws IOException;
 	
     /**
-     * Reads <code>b.length</code> bytes from this file into the byte 
+     * Reads {@code b.length} bytes from this file into the byte
      * array, starting at the current file pointer. This method reads 
      * repeatedly from the file until the requested number of bytes are 
      * read. This method blocks until the requested number of bytes are 
@@ -43,7 +43,7 @@ public interface DataFileHandle {
     void read(byte[] b) throws IOException;
 
     /**
-     * Reads exactly <code>len</code> bytes from this file into the byte 
+     * Reads exactly {@code len} bytes from this file into the byte
      * array, starting at the current file pointer. This method reads 
      * repeatedly from the file until the requested number of bytes are 
      * read. This method blocks until the requested number of bytes are 
@@ -59,15 +59,15 @@ public interface DataFileHandle {
     void read(byte[] b, int off, int len) throws IOException;
 
     /**
-     * Attempts to skip over <code>n</code> bytes of input discarding the 
+     * Attempts to skip over {@code n} bytes of input discarding the
      * skipped bytes. 
      * <p>
      * 
      * This method may skip over some smaller number of bytes, possibly zero. 
      * This may result from any of a number of conditions; reaching end of 
-     * file before <code>n</code> bytes have been skipped is only one 
-     * possibility. This method never throws an <code>EOFException</code>. 
-     * The actual number of bytes skipped is returned.  If <code>n</code> 
+     * file before {@code n} bytes have been skipped is only one
+     * possibility. This method never throws an {@code EOFException}.
+     * The actual number of bytes skipped is returned.  If {@code n}
      * is negative, no bytes are skipped.
      *
      * @param      n   the number of bytes to be skipped.
@@ -80,13 +80,13 @@ public interface DataFileHandle {
      * Writes the specified byte to this file. The write starts at 
      * the current file pointer.
      *
-     * @param      b   the <code>byte</code> to be written.
+     * @param      b   the {@code byte} to be written.
      * @exception  IOException  if an I/O error occurs.
      */
     void write(int b) throws IOException;
 
     /**
-     * Writes <code>b.length</code> bytes from the specified byte array 
+     * Writes {@code b.length} bytes from the specified byte array
      * to this file, starting at the current file pointer. 
      *
      * @param      b   the data.
@@ -95,8 +95,8 @@ public interface DataFileHandle {
     void write(byte[] b) throws IOException;
 
     /**
-     * Writes <code>len</code> bytes from the specified byte array 
-     * starting at offset <code>off</code> to this file. 
+     * Writes {@code len} bytes from the specified byte array
+     * starting at offset {@code off} to this file.
      *
      * @param      b     the data.
      * @param      off   the start offset in the data.
@@ -116,8 +116,8 @@ public interface DataFileHandle {
      * @param      pos   the offset position, measured in bytes from the 
      *                   beginning of the file, at which to set the file 
      *                   pointer.
-     * @exception  IOException  if <code>pos</code> is less than 
-     *                          <code>0</code> or if an I/O error occurs.
+     * @exception  IOException  if {@code pos} is less than
+     *                          {@code 0} or if an I/O error occurs.
      */
     void seek(long pos) throws IOException;
 
@@ -133,14 +133,14 @@ public interface DataFileHandle {
      * Sets the length of this file.
      *
      * <p> If the present length of the file as returned by the
-     * <code>length</code> method is greater than the <code>newLength</code>
+     * {@code length} method is greater than the <code>newLength</code>
      * argument then the file will be truncated.  In this case, if the file
-     * offset as returned by the <code>getFilePointer</code> method is greater
-     * then <code>newLength</code> then after this method returns the offset
-     * will be equal to <code>newLength</code>.
+     * offset as returned by the {@code getFilePointer} method is greater
+     * then {@code newLength} then after this method returns the offset
+     * will be equal to {@code newLength}.
      *
      * <p> If the present length of the file as returned by the
-     * <code>length</code> method is smaller than the <code>newLength</code>
+     * {@code length} method is smaller than the <code>newLength</code>
      * argument then the file will be extended.  In this case, the contents of
      * the extended portion of the file are not defined.
      *

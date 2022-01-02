@@ -48,7 +48,8 @@ public class ConvertFileSystem implements GhidraLaunchable {
 		}
 	}
 
-	public interface MessageListener {
+	@FunctionalInterface
+    public interface MessageListener {
 		void println(String string);
 	}
 

@@ -143,13 +143,13 @@ public class ErrLogExpandableDialog extends AbstractErrDialog {
 					new Dimension(Short.MAX_VALUE, detailButton.getPreferredSize().height));
 				buttonBox.add(detailButton);
 			}
-			msgPanel.add(buttonBox, BorderLayout.EAST);
+			msgPanel.add(buttonBox, BorderLayout.LINE_END);
 
 			horizontalSpacer = Box.createVerticalStrut(10);
 			horizontalSpacer.setVisible(showingDetails);
-			msgPanel.add(horizontalSpacer, BorderLayout.SOUTH);
+			msgPanel.add(horizontalSpacer, BorderLayout.PAGE_END);
 		}
-		workPanel.add(msgPanel, BorderLayout.NORTH);
+		workPanel.add(msgPanel, BorderLayout.PAGE_START);
 
 		Box workBox = Box.createVerticalBox();
 		{

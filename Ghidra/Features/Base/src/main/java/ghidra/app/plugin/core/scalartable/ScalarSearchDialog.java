@@ -111,7 +111,7 @@ public class ScalarSearchDialog extends DialogComponentProvider {
 		JPanel newMainPanel = new JPanel();
 
 		newMainPanel.setLayout(new BorderLayout());
-		newMainPanel.add(buildSearchLayout(), BorderLayout.NORTH);
+		newMainPanel.add(buildSearchLayout(), BorderLayout.PAGE_START);
 
 		return newMainPanel;
 	}
@@ -122,8 +122,8 @@ public class ScalarSearchDialog extends DialogComponentProvider {
 
 		JPanel finalPanel = new JPanel(new BorderLayout());
 
-		finalPanel.add(searchLayout, BorderLayout.NORTH);
-		finalPanel.add(buildSelectionPanel(), BorderLayout.SOUTH);
+		finalPanel.add(searchLayout, BorderLayout.PAGE_START);
+		finalPanel.add(buildSelectionPanel(), BorderLayout.PAGE_END);
 
 		return finalPanel;
 	}
@@ -141,7 +141,7 @@ public class ScalarSearchDialog extends DialogComponentProvider {
 	private Component buildSelectionPanel() {
 
 		JPanel panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 		panel.setBorder(new TitledBorder("Search Scope"));
 
 		searchSelectionRadioButton = new GRadioButton("Search Selection");
@@ -168,7 +168,7 @@ public class ScalarSearchDialog extends DialogComponentProvider {
 
 		JPanel selectionPanel = new JPanel();
 		selectionPanel.setLayout(new BorderLayout());
-		selectionPanel.add(panel, BorderLayout.NORTH);
+		selectionPanel.add(panel, BorderLayout.PAGE_START);
 
 		HelpService helpService = DockingWindowManager.getHelpService();
 		helpService.registerHelp(selectionPanel,
@@ -289,22 +289,22 @@ public class ScalarSearchDialog extends DialogComponentProvider {
 
 			JPanel allScalarsPanel = new JPanel();
 			allScalarsPanel.setLayout(new BorderLayout());
-			allScalarsPanel.add(searchAllScalars, BorderLayout.NORTH);
+			allScalarsPanel.add(searchAllScalars, BorderLayout.PAGE_START);
 
 			rangeFilter = new RangeFilter();
-			allScalarsPanel.add(Box.createHorizontalStrut(18), BorderLayout.WEST);
+			allScalarsPanel.add(Box.createHorizontalStrut(18), BorderLayout.LINE_START);
 			allScalarsPanel.add(rangeFilter, BorderLayout.CENTER);
 
 			JPanel aScalarPanel = new JPanel();
 			aScalarPanel.setLayout(new BorderLayout());
-			aScalarPanel.add(searchAScalar, BorderLayout.NORTH);
+			aScalarPanel.add(searchAScalar, BorderLayout.PAGE_START);
 
 			exactValueField = new IntegerTextField(8);
 
-			aScalarPanel.add(Box.createHorizontalStrut(18), BorderLayout.WEST);
+			aScalarPanel.add(Box.createHorizontalStrut(18), BorderLayout.LINE_START);
 			aScalarPanel.add(exactValueField.getComponent(), BorderLayout.CENTER);
 
-			add(allScalarsPanel, BorderLayout.NORTH);
+			add(allScalarsPanel, BorderLayout.PAGE_START);
 			add(aScalarPanel, BorderLayout.CENTER);
 
 			searchAllScalars.setSelected(true);

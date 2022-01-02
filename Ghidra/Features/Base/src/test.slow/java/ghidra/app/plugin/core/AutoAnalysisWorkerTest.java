@@ -426,7 +426,7 @@ public class AutoAnalysisWorkerTest extends AbstractGhidraHeadedIntegrationTest 
 			new Object[] { cmd, priority });
 	}
 
-	private class SetTestPropertyCommand extends BackgroundCommand {
+	private static class SetTestPropertyCommand extends BackgroundCommand {
 		private final String property;
 		private final long delay;
 

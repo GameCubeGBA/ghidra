@@ -41,7 +41,7 @@ public abstract class AbstractByteViewerPlugin<P extends ProgramByteViewerCompon
 
 	protected P connectedProvider;
 
-	protected List<P> disconnectedProviders = new ArrayList<>();
+	protected final List<P> disconnectedProviders = new ArrayList<>();
 
 	public AbstractByteViewerPlugin(PluginTool tool) {
 		super(tool);

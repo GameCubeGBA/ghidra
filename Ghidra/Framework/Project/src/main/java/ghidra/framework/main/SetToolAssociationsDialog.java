@@ -140,7 +140,7 @@ class SetToolAssociationsDialog extends DialogComponentProvider {
 		buttonPanel.add(resetButton);
 
 		mainPanel.add(new JScrollPane(table), BorderLayout.CENTER);
-		mainPanel.add(buttonPanel, BorderLayout.SOUTH);
+		mainPanel.add(buttonPanel, BorderLayout.PAGE_END);
 
 		return mainPanel;
 	}

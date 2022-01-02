@@ -44,7 +44,7 @@ public class AgentWindow extends JFrame implements WindowListener, LogListener {
 		setLayout(new BorderLayout());
 		addWindowListener(this);
 		add(new JLabel("<html>This agent is listening at <b>" + localAddress +
-			"</b>. Close this window to terminate it.</html>"), BorderLayout.NORTH);
+			"</b>. Close this window to terminate it.</html>"), BorderLayout.PAGE_START);
 		logArea.setEditable(false);
 		logArea.setFont(Font.decode(Font.MONOSPACED));
 		logArea.setAutoscrolls(true);

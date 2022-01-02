@@ -18,6 +18,7 @@ package ghidra.program.disassemble;
 
 import ghidra.program.model.lang.InstructionError;
 
+@FunctionalInterface
 public interface DisassemblerConflictHandler {
 
 	void markInstructionError(InstructionError conflict);

@@ -67,8 +67,8 @@ public class DexHeader implements StructConverter {
 	private List<MethodIDItem> methods = new ArrayList<>();
 	private List<ClassDefItem> classDefs = new ArrayList<>();
 
-	private AddressCache methodXref = new AddressCache(); // Index to method address cache
-	private DataTypeCache typeXref = new DataTypeCache(); // Index to datatype cache
+	private final AddressCache methodXref = new AddressCache(); // Index to method address cache
+	private final DataTypeCache typeXref = new DataTypeCache(); // Index to datatype cache
 
 	private boolean parsed = false;
 
@@ -171,9 +171,9 @@ public class DexHeader implements StructConverter {
 	 * <br>
 	 * https://android.googlesource.com/platform/art/+/refs/heads/master/libdexfile/dex/dex_file.h
 	 * <br>
-	 * <code>
+	 * {@code
 	 * uint32_t map_off_ = 0;  // map list offset from data_off_
-	 * </code>
+	 * }
 	 * but it appears to only be true when dealing with compact dex files!
 	 * @return true if offsets in this DEX file are relative
 	 */
@@ -404,14 +404,13 @@ public class DexHeader implements StructConverter {
 			if (res == null) {
 				TypeIDItem typeIDItem = types.get(typeId);
 				String typeString = DexUtil.convertToString(this, typeIDItem.getDescriptorIndex());
-				if (typeString.length() != 0 && typeString.charAt(0) == 'L') {
-					StringBuilder buffer = new StringBuilder();
-					buffer.append(DexUtil.HANDLE_PATH);
-					buffer.append("group").append(typeId / 100);
-					buffer.append(CategoryPath.DELIMITER_CHAR);
-					buffer.append("type").append(typeId);
+				if (!typeString.isEmpty() && typeString.charAt(0) == 'L') {
+                    String buffer = DexUtil.HANDLE_PATH +
+                            "group" + typeId / 100 +
+                            CategoryPath.DELIMITER_CHAR +
+                            "type" + typeId;
 					DataType handleType =
-						program.getDataTypeManager().getDataType(buffer.toString());
+						program.getDataTypeManager().getDataType(buffer);
 					if (handleType instanceof TypeDef) {
 						res = new PointerDataType(((TypeDef) handleType).getDataType(),
 							program.getDataTypeManager());

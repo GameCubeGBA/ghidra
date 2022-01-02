@@ -229,10 +229,10 @@ public class FunctionTagProvider extends ComponentProviderAdapter
 
 		// BOTTOM PANEL
 		JPanel bottomPanel = new JPanel();
-		bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.X_AXIS));
+		bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.LINE_AXIS));
 		bottomPanel.add(createInputPanel());
 
-		mainPanel.add(bottomPanel, BorderLayout.SOUTH);
+		mainPanel.add(bottomPanel, BorderLayout.PAGE_END);
 		mainPanel.setPreferredSize(new Dimension(MIN_WIDTH, MIN_HEIGHT));
 
 		// CENTER PANEL
@@ -251,7 +251,7 @@ public class FunctionTagProvider extends ComponentProviderAdapter
 		targetPanel.setMinimumSize(new Dimension(0, 0));
 
 		JPanel wrapper = new JPanel();
-		wrapper.setLayout(new BoxLayout(wrapper, BoxLayout.X_AXIS));
+		wrapper.setLayout(new BoxLayout(wrapper, BoxLayout.LINE_AXIS));
 		wrapper.add(sourcePanel);
 		wrapper.add(buttonPanel);
 		wrapper.add(targetPanel);
@@ -498,7 +498,7 @@ public class FunctionTagProvider extends ComponentProviderAdapter
 		Border insideBorder = BorderFactory.createEmptyBorder(5, 2, 2, 2);
 		inputPanel.setBorder(BorderFactory.createCompoundBorder(outsideBorder, insideBorder));
 		inputPanel.setLayout(new BoxLayout(inputPanel, BoxLayout.LINE_AXIS));
-		inputPanel.add(new GLabel(" Create new tag(s):"), BorderLayout.WEST);
+		inputPanel.add(new GLabel(" Create new tag(s):"), BorderLayout.LINE_START);
 		inputPanel.add(Box.createHorizontalStrut(5));
 		inputPanel.add(tagInputField, BorderLayout.CENTER);
 

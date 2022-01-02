@@ -21,6 +21,7 @@ import ghidra.framework.plugintool.ServiceInfo;
  * Service for notifying others of object tree state changes.
  *
  */
+@FunctionalInterface
 @ServiceInfo(/* defaultProvider = NONE, */ description = "Object change notification")
 public interface ObjectUpdateService {
 

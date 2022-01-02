@@ -23,11 +23,8 @@ import java.awt.FontMetrics;
 import java.awt.Insets;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.ListIterator;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -50,7 +47,7 @@ import ghidra.util.datastruct.LongArrayList;
 import ghidra.util.layout.MaximizeSpecificColumnGridLayout;
 
 /**
- * <CODE>VerticalChoicesPanel</CODE> is a conflict panel for the Listing Merge.
+ * {@code VerticalChoicesPanel} is a conflict panel for the Listing Merge.
  * It lays out rows of information vertically in a table format. 
  * Each row can be a header row, an information row, a single choice row, 
  * or a multiple choice row.
@@ -89,7 +86,7 @@ public class VerticalChoicesPanel extends ConflictPanel {
 	private Insets textVsCheckBoxInsets;
 
 	/**
-	 * Creates an empty <CODE>VerticalChoicesPanel</CODE>
+	 * Creates an empty {@code VerticalChoicesPanel}
 	 */
 	public VerticalChoicesPanel() {
 		super();
@@ -110,7 +107,7 @@ public class VerticalChoicesPanel extends ConflictPanel {
 
 		headerLabel = new GDHtmlLabel(" ");
 		headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		add(headerLabel, BorderLayout.NORTH);
+		add(headerLabel, BorderLayout.PAGE_START);
 
 		rowComps = new ArrayList<>();
 		rows = new ArrayList<>();
@@ -146,7 +143,7 @@ public class VerticalChoicesPanel extends ConflictPanel {
 		textVsCheckBoxInsets = new Insets(DEFAULT_TOP + borderHeight, DEFAULT_LEFT,
 			DEFAULT_BOTTOM + borderHeight, DEFAULT_RIGHT);
 
-		add(createUseForAllCheckBox(), BorderLayout.SOUTH);
+		add(createUseForAllCheckBox(), BorderLayout.PAGE_END);
 	}
 
 	/**
@@ -164,7 +161,7 @@ public class VerticalChoicesPanel extends ConflictPanel {
 	void setHeader(String text) {
 		if (text != null && text.length() != 0) {
 			headerLabel.setText(ConflictUtility.wrapAsHTML(text));
-			add(headerLabel, BorderLayout.NORTH);
+			add(headerLabel, BorderLayout.PAGE_START);
 		}
 		else {
 			headerLabel.setText("");
@@ -471,7 +468,7 @@ public class VerticalChoicesPanel extends ConflictPanel {
 		return allChoicesAreResolved();
 	}
 
-	private class MyLabel extends GDHtmlLabel {
+	private static class MyLabel extends GDHtmlLabel {
 
 		/**
 		 * @param text the text of this label.

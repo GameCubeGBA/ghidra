@@ -131,26 +131,26 @@ class DataTypeMergePanel extends JPanel {
 		buttonGroup.add(myRB);
 		buttonGroup.add(originalRB);
 
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
 		countPanel = new ConflictCountPanel();
 		JPanel dtPanel = new JPanel();
-		dtPanel.setLayout(new BoxLayout(dtPanel, BoxLayout.X_AXIS));
+		dtPanel.setLayout(new BoxLayout(dtPanel, BoxLayout.LINE_AXIS));
 		dtPanel.add(createDataTypePanel(latestRB));
 		dtPanel.add(createDataTypePanel(myRB));
 		dtPanel.add(createDataTypePanel(originalRB));
 
 		JPanel innerPanel = new JPanel();
-		innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS));
+		innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.PAGE_AXIS));
 
 		innerPanel.add(createInfoPanel());
 		innerPanel.add(dtPanel);
 		innerPanel.add(Box.createVerticalStrut(10));
 
 		setLayout(new BorderLayout());
-		add(countPanel, BorderLayout.NORTH);
+		add(countPanel, BorderLayout.PAGE_START);
 		add(innerPanel, BorderLayout.CENTER);
-		add(createUseForAllCheckBox(), BorderLayout.SOUTH);
+		add(createUseForAllCheckBox(), BorderLayout.PAGE_END);
 	}
 
 	private JPanel createDataTypePanel(JRadioButton rb) {
@@ -165,7 +165,7 @@ class DataTypeMergePanel extends JPanel {
 		sp.getViewport().setPreferredSize(new Dimension(300, 400));
 
 		panel.add(sp);
-		panel.add(rb, BorderLayout.SOUTH);
+		panel.add(rb, BorderLayout.PAGE_END);
 		if (rb == latestRB) {
 			latestPanel = dtPanel;
 		}
@@ -191,7 +191,7 @@ class DataTypeMergePanel extends JPanel {
 
 		JPanel labelPanel = new JPanel();
 		labelPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 0, 0));
-		BoxLayout bl = new BoxLayout(labelPanel, BoxLayout.X_AXIS);
+		BoxLayout bl = new BoxLayout(labelPanel, BoxLayout.LINE_AXIS);
 		labelPanel.setLayout(bl);
 		labelPanel.add(Box.createHorizontalStrut(5));
 		labelPanel.add(imageLabel);

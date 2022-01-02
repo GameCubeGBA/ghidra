@@ -149,7 +149,7 @@ public class VTMarkupItemsTableProvider extends ComponentProviderAdapter
 
 		JPanel filterAreaPanel = createFilterArea();
 		markupItemsTablePanel.add(tablePanel, BorderLayout.CENTER);
-		markupItemsTablePanel.add(filterAreaPanel, BorderLayout.SOUTH);
+		markupItemsTablePanel.add(filterAreaPanel, BorderLayout.PAGE_END);
 
 		functionComparisonPanel =
 			new FunctionComparisonPanel(this, tool, (Function) null, (Function) null);
@@ -405,7 +405,7 @@ public class VTMarkupItemsTableProvider extends ComponentProviderAdapter
 			e -> tool.showDialog(ancillaryFilterDialog, component));
 		ancillaryFilterButton.setToolTipText("Filters Dialog");
 
-		parentPanel.add(ancillaryFilterButton, BorderLayout.EAST);
+		parentPanel.add(ancillaryFilterButton, BorderLayout.LINE_END);
 
 		HelpLocation filterHelpLocation =
 			new HelpLocation("VersionTrackingPlugin", "Markup_Filters");
@@ -942,7 +942,7 @@ public class VTMarkupItemsTableProvider extends ComponentProviderAdapter
 		}
 	}
 
-	private class MarkupItemThreadedTablePanel extends GhidraThreadedTablePanel<VTMarkupItem> {
+	private static class MarkupItemThreadedTablePanel extends GhidraThreadedTablePanel<VTMarkupItem> {
 		MarkupItemThreadedTablePanel(ThreadedTableModel<VTMarkupItem, ?> model) {
 			super(model);
 		}

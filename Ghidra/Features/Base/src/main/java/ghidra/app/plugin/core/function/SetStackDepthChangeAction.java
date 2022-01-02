@@ -30,7 +30,7 @@ import ghidra.program.model.symbol.Reference;
 import ghidra.util.HelpLocation;
 
 /**
- * <CODE>SetStackDepthChangeAction</CODE> allows the user to set a stack depth change value 
+ * {@code SetStackDepthChangeAction} allows the user to set a stack depth change value
  * at the current address.
  */
 class SetStackDepthChangeAction extends ListingContextAction {

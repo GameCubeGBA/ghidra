@@ -239,7 +239,7 @@ public class ColumnFilterData<T> implements Comparable<ColumnFilterData<T>> {
 	}
 
 	/**
-	 * This class allows us to turn client columns of type <code>T</code> to a String.  We use 
+	 * This class allows us to turn client columns of type {@code T} to a String.  We use
 	 * the renderer provided at construction time to generate a filter string when 
 	 * {@link #convert(Object)} is called.
 	 * 

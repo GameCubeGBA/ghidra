@@ -26,7 +26,7 @@ import ghidra.util.exception.*;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>CompositeMember</code> provides the ability to process PDB data-type records and 
+ * {@code CompositeMember} provides the ability to process PDB data-type records and
  * incrementally build-up composite structure and union data-types from a flattened offset-based 
  * list of members which may include embedded anonymous composite members.  Composite members 
  * correspond to either hard predefined data-types, or structure/union containers whose members

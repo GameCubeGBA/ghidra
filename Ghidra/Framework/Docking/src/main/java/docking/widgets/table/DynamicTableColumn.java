@@ -31,7 +31,7 @@ import ghidra.util.table.column.GColumnRenderer;
  * @param <ROW_TYPE> The row object class supported by this column
  * @param <COLUMN_TYPE> The column object class supported by this column
  * @param <DATA_SOURCE> The object class type that will be passed to 
- * 						see <code>getValue(ROW_TYPE, Settings, DATA_SOURCE, ServiceProvider)</code>
+ * 						see {@code getValue(ROW_TYPE, Settings, DATA_SOURCE, ServiceProvider)}
  */
 public interface DynamicTableColumn<ROW_TYPE, COLUMN_TYPE, DATA_SOURCE> {
 
@@ -127,7 +127,7 @@ public interface DynamicTableColumn<ROW_TYPE, COLUMN_TYPE, DATA_SOURCE> {
 
 	/**
 	 * If implemented, will return a comparator that knows how to sort values for this column.  
-	 * Implementors should return <code>null</code> if they do not wish to provider a comparator
+	 * Implementors should return {@code null} if they do not wish to provider a comparator
 	 * @return the comparator
 	 */
 	Comparator<COLUMN_TYPE> getComparator();

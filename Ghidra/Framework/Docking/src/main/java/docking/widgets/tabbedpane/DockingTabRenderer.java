@@ -78,7 +78,7 @@ public class DockingTabRenderer extends JPanel {
 		closeButton.setRolloverIcon(CLOSE_ICON);
 
 		JPanel container = new JPanel();
-		container.setLayout(new BoxLayout(container, BoxLayout.X_AXIS));
+		container.setLayout(new BoxLayout(container, BoxLayout.LINE_AXIS));
 		container.add(iconLabel);
 		container.add(Box.createHorizontalStrut(5));
 		container.add(titleLabel);

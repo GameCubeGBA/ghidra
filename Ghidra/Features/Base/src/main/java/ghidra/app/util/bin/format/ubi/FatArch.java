@@ -89,17 +89,16 @@ public class FatArch {
 
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
-		buffer.append("CPU Type: 0x" + Integer.toHexString(cputype));
-		buffer.append('\n');
-		buffer.append("CPU Sub Type: 0x" + Integer.toHexString(cpusubtype));
-		buffer.append('\n');
-		buffer.append("Offset: 0x" + Integer.toHexString(offset));
-		buffer.append('\n');
-		buffer.append("Size: 0x" + Integer.toHexString(size));
-		buffer.append('\n');
-		buffer.append("Align: 0x" + Integer.toHexString(align));
-		buffer.append('\n');
-		return buffer.toString();
+        String buffer = "CPU Type: 0x" + Integer.toHexString(cputype) +
+                '\n' +
+                "CPU Sub Type: 0x" + Integer.toHexString(cpusubtype) +
+                '\n' +
+                "Offset: 0x" + Integer.toHexString(offset) +
+                '\n' +
+                "Size: 0x" + Integer.toHexString(size) +
+                '\n' +
+                "Align: 0x" + Integer.toHexString(align) +
+                '\n';
+		return buffer;
 	}
 }

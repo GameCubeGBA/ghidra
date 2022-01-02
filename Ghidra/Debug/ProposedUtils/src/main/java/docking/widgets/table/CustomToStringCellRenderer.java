@@ -74,7 +74,7 @@ public class CustomToStringCellRenderer<T> extends AbstractGColumnRenderer<T> {
 	private final BiFunction<T, Settings, String> toString;
 
 	private final JPanel panelForSize = new JPanel();
-	private final BoxLayout layoutForSize = new BoxLayout(panelForSize, BoxLayout.Y_AXIS);
+	private final BoxLayout layoutForSize = new BoxLayout(panelForSize, BoxLayout.PAGE_AXIS);
 
 	public CustomToStringCellRenderer(Class<T> cls, BiFunction<T, Settings, String> toString,
 			boolean enableHtml) {

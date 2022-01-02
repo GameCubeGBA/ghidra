@@ -18,7 +18,7 @@ package ghidra.app.util.bin.format.pdb;
 import ghidra.util.exception.CancelledException;
 
 /**
- * <code>PdbMember</code> convey PDB member information used for datatype
+ * {@code PdbMember} convey PDB member information used for datatype
  * reconstruction.
  */
 public abstract class PdbMember {
@@ -29,7 +29,7 @@ public abstract class PdbMember {
 	final String memberComment;
 
 	/**
-	 * Construct <code>PdbMember</code>.
+	 * Construct {@code PdbMember}.
 	 * @param memberName member name
 	 * @param memberDataTypeName member datatype
 	 * @param memberOffset member offset within composite

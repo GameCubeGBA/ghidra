@@ -26,7 +26,7 @@ import ghidra.framework.store.ItemCheckoutStatus;
 import ghidra.framework.store.Version;
 
 /**
- * <code>RemoteFolderItem</code> provides an abstract FolderItem implementation
+ * {@code RemoteFolderItem} provides an abstract FolderItem implementation
  * for an item contained within a remote Repository.  
  */
 public abstract class RemoteFolderItem implements FolderItem {

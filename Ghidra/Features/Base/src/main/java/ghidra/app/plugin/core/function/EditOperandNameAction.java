@@ -31,7 +31,7 @@ import docking.action.KeyBindingData;
 import docking.action.MenuData;
 
 /**
- * <CODE>EditNameAction</CODE> allows the user to rename a function.
+ * {@code EditNameAction} allows the user to rename a function.
  * Action in FunctionPlugin.
  */
 class EditOperandNameAction extends ListingContextAction {

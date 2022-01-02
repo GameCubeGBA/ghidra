@@ -20,6 +20,7 @@ import java.util.List;
 
 import docking.widgets.fieldpanel.support.AnchoredLayout;
 
+@FunctionalInterface
 public interface LayoutListener {
 	void layoutsChanged(List<AnchoredLayout> layouts);
 }

@@ -27,6 +27,7 @@ import db.DBFieldIterator;
  *  
  * 
  */
+@FunctionalInterface
 public interface DBFieldAdapter {
 
 	/**

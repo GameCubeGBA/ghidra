@@ -157,7 +157,7 @@ public abstract class VTMatchOneToManyTableProvider extends ComponentProviderAda
 		matchDestinationTablePanel.add(tablePanel, BorderLayout.CENTER);
 
 		JPanel parentPanel = new JPanel(new BorderLayout());
-		parentPanel.add(localMatchInfoPanel, BorderLayout.NORTH);
+		parentPanel.add(localMatchInfoPanel, BorderLayout.PAGE_START);
 		parentPanel.add(matchDestinationTablePanel, BorderLayout.CENTER);
 
 		return parentPanel;
@@ -504,7 +504,7 @@ public abstract class VTMatchOneToManyTableProvider extends ComponentProviderAda
 		}
 	}
 
-	private class MatchThreadedTablePanel extends GhidraThreadedTablePanel<VTMatch> {
+	private static class MatchThreadedTablePanel extends GhidraThreadedTablePanel<VTMatch> {
 		MatchThreadedTablePanel(ThreadedTableModel<VTMatch, ?> model) {
 			super(model);
 		}

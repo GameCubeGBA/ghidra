@@ -53,7 +53,7 @@ public interface ToolChest {
      * Add tool template to the tool chest.
      * <br>
      * Note: If the given tool template name already exists in the project, then the name will 
-     * be altered by appending an underscore and a one-up value.  The <code>template</code>
+     * be altered by appending an underscore and a one-up value.  The {@code template}
      * parameter's name is also updated with then new name. 
      * <p>
      * To simply replace a tool with without changing its name, call 

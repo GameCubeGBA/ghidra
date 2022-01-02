@@ -16,13 +16,13 @@
 package ghidra.program.model.data;
 
 /**
- * <code>PackingType</code> specifies the pack setting which applies to a composite data type.
+ * {@code PackingType} specifies the pack setting which applies to a composite data type.
  * This can be DISABLED, DEFAULT, EXPLICIT.
  */
 public enum PackingType {
 	/**
 	 * <B>DISABLED</B> - indicates that automatic component placement should not be performed, with 
-	 * components placed at specified offsets and <code>undefined</code> components used to
+	 * components placed at specified offsets and {@code undefined} components used to
 	 * reflects padding/unused bytes.  This mode is commonly used when reverse-engineering a
 	 * composite since a complete and accurate definition may not be known.
 	 */

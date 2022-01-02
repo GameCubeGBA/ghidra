@@ -55,7 +55,7 @@ import resources.icons.TranslateIcon;
 
 /**
  * The header renderer for GhidraTable.
- * If the table model implements <code>SortedTableModel</code>, then
+ * If the table model implements {@code SortedTableModel}, then
  * an icon will be displayed in the header of the currently sorted
  * column representing ascending and descending order.
  */
@@ -92,7 +92,7 @@ public class GTableHeaderRenderer extends JPanel implements TableCellRenderer {
 
 		setLayout(new BorderLayout());
 		add(textLabel, BorderLayout.CENTER);
-		add(iconLabel, BorderLayout.EAST);
+		add(iconLabel, BorderLayout.LINE_END);
 
 		// controls spacing on multiple platforms
 		customBorder = new CustomPaddingBorder();
@@ -361,7 +361,7 @@ public class GTableHeaderRenderer extends JPanel implements TableCellRenderer {
 		}
 	}
 
-	private class NoRightSideLineBorder extends LineBorder {
+	private static class NoRightSideLineBorder extends LineBorder {
 		NoRightSideLineBorder(Color color) {
 			super(color);
 		}
@@ -374,7 +374,7 @@ public class GTableHeaderRenderer extends JPanel implements TableCellRenderer {
 		}
 	}
 
-	private class NoSidesLineBorder extends LineBorder {
+	private static class NoSidesLineBorder extends LineBorder {
 		NoSidesLineBorder(Color color) {
 			super(color);
 		}

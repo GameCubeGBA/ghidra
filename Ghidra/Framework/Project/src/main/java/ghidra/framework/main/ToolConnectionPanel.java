@@ -432,7 +432,7 @@ class ToolConnectionPanel extends JPanel implements ListSelectionListener {
 		for (int i = 0; i < row1.length; i++) {
 
 			gbc = new GridBagConstraints();
-			gbc.anchor = GridBagConstraints.NORTH;
+			gbc.anchor = GridBagConstraints.PAGE_START;
 			gbc.fill = GridBagConstraints.BOTH;
 			gbc.gridx = i;
 			gbc.gridy = 0;
@@ -446,7 +446,7 @@ class ToolConnectionPanel extends JPanel implements ListSelectionListener {
 		for (int i = 0; i < row2.length; i++) {
 
 			gbc = new GridBagConstraints();
-			gbc.anchor = GridBagConstraints.NORTH;
+			gbc.anchor = GridBagConstraints.PAGE_START;
 			gbc.fill = GridBagConstraints.BOTH;
 			gbc.gridx = i;
 			gbc.gridy = 1;

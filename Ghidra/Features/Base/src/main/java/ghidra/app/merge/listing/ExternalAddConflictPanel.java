@@ -246,7 +246,7 @@ class ExternalAddConflictPanel extends JPanel implements CodeFormatService {
 		buttonGroup.add(keepBothRB);
 		buttonGroup.add(mergeBothRB);
 
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
 		countPanel = new ConflictCountPanel();
 
@@ -266,7 +266,7 @@ class ExternalAddConflictPanel extends JPanel implements CodeFormatService {
 		centerPanel.add(splitPane, BorderLayout.CENTER);
 
 		setLayout(new BorderLayout());
-		add(countPanel, BorderLayout.NORTH);
+		add(countPanel, BorderLayout.PAGE_START);
 		add(centerPanel, BorderLayout.CENTER);
 	}
 
@@ -283,7 +283,7 @@ class ExternalAddConflictPanel extends JPanel implements CodeFormatService {
 
 		bottomComp = comp;
 		if (bottomComp != null) {
-			add(bottomComp, BorderLayout.SOUTH);
+			add(bottomComp, BorderLayout.PAGE_END);
 		}
 		invalidate();
 		repaint();

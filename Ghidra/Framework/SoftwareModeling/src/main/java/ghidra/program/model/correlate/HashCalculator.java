@@ -22,6 +22,7 @@ import ghidra.program.model.mem.MemoryAccessException;
  * Interface for hashing across sequences of Instructions in different ways 
  *
  */
+@FunctionalInterface
 public interface HashCalculator {
 	/**
 	 * Calculate a (partial) hash across a single instruction

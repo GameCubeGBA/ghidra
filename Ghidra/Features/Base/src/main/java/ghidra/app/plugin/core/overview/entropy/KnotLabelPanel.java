@@ -74,8 +74,6 @@ public class KnotLabelPanel extends JPanel {
 	}
 
 	private String getLabel(KnotRecord record) {
-		StringBuffer buf = new StringBuffer();
-		buf.append(record.name);
-		return buf.toString();
+        return record.name;
 	}
 }

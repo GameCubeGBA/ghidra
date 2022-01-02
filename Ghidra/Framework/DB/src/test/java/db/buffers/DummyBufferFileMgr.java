@@ -18,7 +18,7 @@ package db.buffers;
 import java.io.File;
 
 /**
- * <code>DummyBufferFileMgr</code> produces buffer file names and 
+ * {@code DummyBufferFileMgr} produces buffer file names and
  * tracks the current buffer file version.  No maintenance of buffer
  * files is provided.
  */

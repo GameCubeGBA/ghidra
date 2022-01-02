@@ -534,7 +534,7 @@ public class LoadPdbDialog extends DialogComponentProvider {
 		buttonGroup.add(msdiaParserButton);
 		buttonGroup.add(universalParserButton);
 
-		JPanel radioButtons = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel radioButtons = new JPanel(new FlowLayout(FlowLayout.LEADING));
 		radioButtons.add(universalParserButton);
 		radioButtons.add(msdiaParserButton);
 
@@ -670,7 +670,7 @@ public class LoadPdbDialog extends DialogComponentProvider {
 		box.add(parserOptionsPanel);
 
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.add(box, BorderLayout.NORTH);
+		panel.add(box, BorderLayout.PAGE_START);
 
 		overrideWorkPanel(panel);
 	}
@@ -685,9 +685,9 @@ public class LoadPdbDialog extends DialogComponentProvider {
 
 	private void layoutAdvanced() {
 		JPanel mainPanel = new JPanel(new BorderLayout());
-		mainPanel.add(programPdbPanel, BorderLayout.NORTH);
+		mainPanel.add(programPdbPanel, BorderLayout.PAGE_START);
 		mainPanel.add(symbolFilePanel, BorderLayout.CENTER);
-		mainPanel.add(parserOptionsPanel, BorderLayout.SOUTH);
+		mainPanel.add(parserOptionsPanel, BorderLayout.PAGE_END);
 
 		overrideWorkPanel(mainPanel);
 	}
@@ -856,11 +856,11 @@ public class LoadPdbDialog extends DialogComponentProvider {
 	static JPanel join(JComponent left, JComponent main, JComponent right) {
 		JPanel panel = new JPanel(new BorderLayout());
 		if (left != null) {
-			panel.add(left, BorderLayout.WEST);
+			panel.add(left, BorderLayout.LINE_START);
 		}
 		panel.add(main, BorderLayout.CENTER);
 		if (right != null) {
-			panel.add(right, BorderLayout.EAST);
+			panel.add(right, BorderLayout.LINE_END);
 		}
 
 		return panel;

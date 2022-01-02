@@ -422,7 +422,7 @@ public class DataTreeDialog extends DialogComponentProvider
 
 	/**
 	 * Define the Main panel for the dialog here.
-	 * @return JPanel the completed <CODE>Main Panel</CODE>
+	 * @return JPanel the completed {@code Main Panel}
 	 */
 	protected JPanel buildMainPanel() {
 
@@ -435,12 +435,12 @@ public class DataTreeDialog extends DialogComponentProvider
 		if (type == OPEN) {
 			JPanel comboPanel = createComboBoxPanel();
 
-			panel.add(comboPanel, BorderLayout.NORTH);
+			panel.add(comboPanel, BorderLayout.PAGE_START);
 		}
 		panel.add(dataTreePanel, BorderLayout.CENTER);
 
 		JPanel namePanel = createNamePanel();
-		panel.add(namePanel, BorderLayout.SOUTH);
+		panel.add(namePanel, BorderLayout.PAGE_END);
 
 		return panel;
 	}
@@ -550,24 +550,17 @@ public class DataTreeDialog extends DialogComponentProvider
 
 				switch (type) {
 					case OPEN:
-						// handled by valueChanged()
+                    case CHOOSE_FOLDER:
+                        // handled by valueChanged()
 						break;
 					case SAVE:
-						if (text == null || text.isEmpty()) {
+                    case CREATE:
+                        if (text == null || text.isEmpty()) {
 							DomainFile file = treePanel.getSelectedDomainFile();
 							okButton.setEnabled(file != null);
 						}
 						break;
-					case CREATE:
-						if (text == null || text.isEmpty()) {
-							DomainFile file = treePanel.getSelectedDomainFile();
-							okButton.setEnabled(file != null);
-						}
-						break;
-					case CHOOSE_FOLDER:
-						// handled by valueChanged()
-						break;
-					default:
+                    default:
 						throw new AssertException("Must handle new type!: " + type);
 				}
 

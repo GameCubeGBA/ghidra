@@ -23,7 +23,7 @@ import mdemangler.typeinfo.MDTypeInfo;
 import mdemangler.typeinfo.MDTypeInfoParser;
 
 /**
- * This class represents a derivative of an <b><code>MDObject</code></b> which is a C++ object.
+ * This class represents a derivative of an <b>{@code MDObject}</b> which is a C++ object.
  */
 public class MDObjectCPP extends MDObject {
 	protected MDHashedObject hashedObject;
@@ -200,7 +200,7 @@ public class MDObjectCPP extends MDObject {
 	 *  using the {@link MDMangObjectParser}.  This will need more study when more time is
 	 *  available.
 	 */
-	public class MDHashedObject extends MDParsableItem {
+	public static class MDHashedObject extends MDParsableItem {
 		private String hashString = "";
 		private MDQualification qualification; // We are making this dummy object
 

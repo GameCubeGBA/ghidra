@@ -32,7 +32,7 @@ import ghidra.util.table.column.AbstractGhidraColumnRenderer;
 public class ConsoleActionsCellRenderer extends AbstractGhidraColumnRenderer<ActionList> {
 
 	static void configureBox(JPanel box) {
-		box.setLayout(new BoxLayout(box, BoxLayout.X_AXIS));
+		box.setLayout(new BoxLayout(box, BoxLayout.LINE_AXIS));
 		box.setOpaque(true);
 		box.setAlignmentX(0.5f);
 	}

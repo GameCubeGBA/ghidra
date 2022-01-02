@@ -21,7 +21,7 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 
 /**
- * <CODE>DividerLocation</CODE> provides information about the location 
+ * {@code DividerLocation} provides information about the location
  * (within a program) of an object that represents some kind of a separation.
  */
 public class DividerLocation extends ProgramLocation {

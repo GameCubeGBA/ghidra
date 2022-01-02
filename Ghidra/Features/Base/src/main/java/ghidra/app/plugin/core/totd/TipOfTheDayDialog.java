@@ -100,14 +100,14 @@ class TipOfTheDayDialog extends DialogComponentProvider {
 
 		JLabel label = new GLabel("Did you know...", tipIcon, SwingConstants.LEFT);
 		label.setFont(new Font("dialog", Font.BOLD, 12));
-		panel.add(label, BorderLayout.NORTH);
+		panel.add(label, BorderLayout.PAGE_START);
 
 		panel.add(tipScroll, BorderLayout.CENTER);
 
 		JPanel panel2 = new JPanel(new BorderLayout(5, 5));
 		panel2.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		panel2.add(panel, BorderLayout.CENTER);
-		panel2.add(showTipsCheckbox, BorderLayout.SOUTH);
+		panel2.add(showTipsCheckbox, BorderLayout.PAGE_END);
 
 		addWorkPanel(panel2);
 	}

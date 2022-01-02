@@ -28,7 +28,8 @@ import ghidra.app.plugin.processors.sleigh.expression.PatternExpression;
  */
 public class MultExpressionSolver extends AbstractBinaryExpressionSolver<MultExpression> {
 
-	private interface SolverFunc {
+	@FunctionalInterface
+    private interface SolverFunc {
 		AssemblyResolution solve() throws NeedsBackfillException, SolverException;
 	}
 

@@ -36,7 +36,7 @@ import ghidra.util.task.TaskMonitor;
 class BackgroundCommandTask extends Task implements AbortedTransactionListener {
 
 	private BackgroundCommand cmd;
-	private ToolTaskManager taskMgr;
+	private final ToolTaskManager taskMgr;
 	private UndoableDomainObject obj;
 	private TaskMonitor taskMonitor;
 

@@ -79,10 +79,10 @@ public class SaveDialog extends DialogComponentProvider implements ListSelection
 		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		if (paths.size() != 0) {
 			panel.add(pathPanel, BorderLayout.CENTER);
-			panel.add(namePanel, BorderLayout.SOUTH);
+			panel.add(namePanel, BorderLayout.PAGE_END);
 		}
 		else {
-			panel.add(namePanel, BorderLayout.NORTH);
+			panel.add(namePanel, BorderLayout.PAGE_START);
 		}
 
 		addWorkPanel(panel);
@@ -100,7 +100,7 @@ public class SaveDialog extends DialogComponentProvider implements ListSelection
 		nameField.setText(scriptFile == null ? "" : scriptFile.getName());
 
 		JPanel panel = new JPanel(new BorderLayout(10, 10));
-		panel.add(new GLabel("Enter script file name:"), BorderLayout.NORTH);
+		panel.add(new GLabel("Enter script file name:"), BorderLayout.PAGE_START);
 		panel.add(nameField, BorderLayout.CENTER);
 		return panel;
 	}
@@ -126,7 +126,7 @@ public class SaveDialog extends DialogComponentProvider implements ListSelection
 
 		JPanel pathPanel = new JPanel(new BorderLayout());
 		MultiLineLabel mll = new MultiLineLabel("Please select a directory:");
-		pathPanel.add(mll, BorderLayout.NORTH);
+		pathPanel.add(mll, BorderLayout.PAGE_START);
 		pathPanel.add(listPanel, BorderLayout.CENTER);
 		return pathPanel;
 	}

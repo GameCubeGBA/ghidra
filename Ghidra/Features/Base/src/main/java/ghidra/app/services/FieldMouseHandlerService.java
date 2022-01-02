@@ -18,6 +18,7 @@ package ghidra.app.services;
 
 import ghidra.app.util.viewer.field.FieldMouseHandler;
 
+@FunctionalInterface
 public interface FieldMouseHandlerService {
 	void addFieldMouseHandler(FieldMouseHandler handler);
 }

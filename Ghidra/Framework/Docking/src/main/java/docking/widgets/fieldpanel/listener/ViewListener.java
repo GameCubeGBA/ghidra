@@ -22,6 +22,7 @@ import docking.widgets.fieldpanel.FieldPanel;
 /**
  * Listener interface for notification when the top of screen position changes.
  */
+@FunctionalInterface
 public interface ViewListener {
 	/**
 	 * Notifies the listener that the top of the screen has changed position.

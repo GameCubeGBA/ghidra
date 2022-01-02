@@ -75,16 +75,16 @@ public class AsciiSearchFormat extends SearchFormat {
 		escapeSequencesCkB.addActionListener(al);
 
 		JPanel stringOptionsPanel = new JPanel();
-		stringOptionsPanel.setLayout(new BoxLayout(stringOptionsPanel, BoxLayout.Y_AXIS));
+		stringOptionsPanel.setLayout(new BoxLayout(stringOptionsPanel, BoxLayout.PAGE_AXIS));
 		stringOptionsPanel.setBorder(new TitledBorder("Format Options"));
-		JPanel encodingOptionsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel encodingOptionsPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
 		encodingOptionsPanel.add(searchType);
 		encodingOptionsPanel.add(encodingCB);
 		stringOptionsPanel.add(encodingOptionsPanel);
-		JPanel caseSensitivePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel caseSensitivePanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
 		caseSensitivePanel.add(caseSensitiveCkB);
 		stringOptionsPanel.add(caseSensitivePanel);
-		JPanel escapeSequencesPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel escapeSequencesPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
 		escapeSequencesPanel.add(escapeSequencesCkB);
 		stringOptionsPanel.add(escapeSequencesPanel);
 		return stringOptionsPanel;

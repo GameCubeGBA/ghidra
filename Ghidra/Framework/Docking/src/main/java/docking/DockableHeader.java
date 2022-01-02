@@ -375,7 +375,7 @@ public class DockableHeader extends GenericHeader
 		}
 	}
 
-	private class MacDragCursorManager extends DragCursorManager {
+	private static class MacDragCursorManager extends DragCursorManager {
 
 		private Map<Component, Cursor> defaultCursors = new HashMap<>();
 		private Component componentUnderDrag;

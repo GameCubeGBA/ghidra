@@ -36,7 +36,7 @@ import ghidra.program.model.listing.FunctionSignature;
 import ghidra.util.exception.CancelledException;
 
 /**
- * <code>EditFunctionSignatureDialog</code> provides an abstract implementation 
+ * {@code EditFunctionSignatureDialog} provides an abstract implementation
  * a function signature editor.  Use of this editor requires the presence of the tool-based
  * datatype manager service.
  */
@@ -174,7 +174,7 @@ public abstract class AbstractEditFunctionSignatureDialog extends DialogComponen
 
 	private JPanel buildMainPanel() {
 		JPanel mainPanel = new JPanel();
-		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
 		mainPanel.setBorder(BorderFactory.createEmptyBorder(2, 5, 2, 2));
 		mainPanel.add(buildSignaturePanel());
 		mainPanel.add(buildAttributePanel());
@@ -191,7 +191,7 @@ public abstract class AbstractEditFunctionSignatureDialog extends DialogComponen
 
 	private JPanel buildSignaturePanel() {
 		JPanel signaturePanel = new JPanel();
-		signaturePanel.setLayout(new BoxLayout(signaturePanel, BoxLayout.X_AXIS));
+		signaturePanel.setLayout(new BoxLayout(signaturePanel, BoxLayout.LINE_AXIS));
 
 		signatureField = new JTextField(SIGNATURE_COLUMNS);
 		signatureLabel = new GDLabel("Signature:");
@@ -206,7 +206,7 @@ public abstract class AbstractEditFunctionSignatureDialog extends DialogComponen
 	private Component buildSpacerPanel() {
 		JPanel panel = new JPanel();
 
-		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+		panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
 		panel.add(Box.createVerticalStrut(20));
 
 		return panel;
@@ -214,7 +214,7 @@ public abstract class AbstractEditFunctionSignatureDialog extends DialogComponen
 
 	private JPanel buildAttributePanel() {
 		JPanel attributePanel = new JPanel();
-		attributePanel.setLayout(new BoxLayout(attributePanel, BoxLayout.X_AXIS));
+		attributePanel.setLayout(new BoxLayout(attributePanel, BoxLayout.LINE_AXIS));
 		attributePanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
 		installCallingConventionWidget(attributePanel);
@@ -257,7 +257,7 @@ public abstract class AbstractEditFunctionSignatureDialog extends DialogComponen
 		}
 
 		JPanel callFixupPanel = new JPanel();
-		callFixupPanel.setLayout(new BoxLayout(callFixupPanel, BoxLayout.X_AXIS));
+		callFixupPanel.setLayout(new BoxLayout(callFixupPanel, BoxLayout.LINE_AXIS));
 
 		callFixupComboBox = new GhidraComboBox<>();
 		callFixupComboBox.addItemListener(e -> {

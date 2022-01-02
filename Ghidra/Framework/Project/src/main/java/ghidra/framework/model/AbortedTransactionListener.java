@@ -16,6 +16,7 @@
  */
 package ghidra.framework.model;
 
+@FunctionalInterface
 public interface AbortedTransactionListener {
 	void transactionAborted(long transactionID);
 }

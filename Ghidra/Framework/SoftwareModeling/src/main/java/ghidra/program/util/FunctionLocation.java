@@ -27,8 +27,8 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.symbol.Reference;
 
 /**
- * <CODE>FunctionLocation</CODE> provides information about the location
- * in a program within a <CODE>Function</CODE>.
+ * {@code FunctionLocation} provides information about the location
+ * in a program within a {@code Function}.
  */
 public class FunctionLocation extends ProgramLocation {
 	protected Address functionAddr;

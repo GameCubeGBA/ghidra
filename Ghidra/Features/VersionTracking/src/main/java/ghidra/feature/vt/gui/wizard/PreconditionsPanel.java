@@ -67,7 +67,7 @@ public class PreconditionsPanel extends AbstractMageJPanel<VTWizardStateKey> imp
 		});
 		runButtonPanel.add(skipTestsButton);
 
-		add(runButtonPanel, BorderLayout.SOUTH);
+		add(runButtonPanel, BorderLayout.PAGE_END);
 	}
 
 	@Override
@@ -243,7 +243,7 @@ public class PreconditionsPanel extends AbstractMageJPanel<VTWizardStateKey> imp
 // Inner Classes
 //==================================================================================================
 
-	private class ConditionsComparator implements Comparator<ConditionTester> {
+	private static class ConditionsComparator implements Comparator<ConditionTester> {
 		@Override
 		public int compare(ConditionTester o1, ConditionTester o2) {
 			return o1.getName().compareTo(o2.getName());

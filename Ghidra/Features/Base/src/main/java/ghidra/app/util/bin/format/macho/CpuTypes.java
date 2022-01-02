@@ -59,15 +59,13 @@ public final class CpuTypes {
 	 */
 	public final static Processor getProcessor(int cpuType, int cpuSubtype) {
 		switch (cpuType) {
-			case CPU_TYPE_X86:        
-				return Processor.findOrPossiblyCreateProcessor("x86");
-			case CPU_TYPE_X86_64:     
-				return Processor.findOrPossiblyCreateProcessor("x86");
-			case CPU_TYPE_POWERPC:    
-				return Processor.findOrPossiblyCreateProcessor("PowerPC");
-			case CPU_TYPE_POWERPC64:  
-				return Processor.findOrPossiblyCreateProcessor("PowerPC");
-			case CPU_TYPE_I860:       
+			case CPU_TYPE_X86:
+            case CPU_TYPE_X86_64:
+                return Processor.findOrPossiblyCreateProcessor("x86");
+            case CPU_TYPE_POWERPC:
+            case CPU_TYPE_POWERPC64:
+                return Processor.findOrPossiblyCreateProcessor("PowerPC");
+            case CPU_TYPE_I860:
 				return Processor.findOrPossiblyCreateProcessor("i860");
 			case CPU_TYPE_SPARC:      
 				return Processor.findOrPossiblyCreateProcessor("Sparc");

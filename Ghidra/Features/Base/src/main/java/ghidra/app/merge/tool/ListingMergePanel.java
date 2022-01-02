@@ -208,7 +208,7 @@ public class ListingMergePanel extends JPanel
 		}
 		topComp = comp;
 		if (topComp != null) {
-			add(topComp, BorderLayout.NORTH);
+			add(topComp, BorderLayout.PAGE_START);
 		}
 
 		invalidate();
@@ -232,7 +232,7 @@ public class ListingMergePanel extends JPanel
 
 		bottomComp = comp;
 		if (bottomComp != null) {
-			add(bottomComp, BorderLayout.SOUTH);
+			add(bottomComp, BorderLayout.PAGE_END);
 		}
 		invalidate();
 		repaint();

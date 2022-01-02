@@ -39,21 +39,20 @@ public class SectionContribution600 extends AbstractSectionContribution {
 
 	@Override
 	String dumpInternals() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("isect: ");
-		builder.append(isect);
-		builder.append("\noffset: ");
-		builder.append(offset);
-		builder.append("\nlength: ");
-		builder.append(length);
-		builder.append(String.format("\ncharacteristics: 0X%08X", characteristics));
-		builder.append("\nimod: ");
-		builder.append(imod);
-		builder.append("\ndataCrc: ");
-		builder.append(dataCrc);
-		builder.append("\nrelocationCrc: ");
-		builder.append(relocationCrc);
-		return builder.toString();
+        String builder = "isect: " +
+                isect +
+                "\noffset: " +
+                offset +
+                "\nlength: " +
+                length +
+                String.format("\ncharacteristics: 0X%08X", characteristics) +
+                "\nimod: " +
+                imod +
+                "\ndataCrc: " +
+                dataCrc +
+                "\nrelocationCrc: " +
+                relocationCrc;
+		return builder;
 	}
 
 }

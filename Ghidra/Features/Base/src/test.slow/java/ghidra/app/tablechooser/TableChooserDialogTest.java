@@ -511,8 +511,9 @@ public class TableChooserDialogTest extends AbstractGhidraHeadedIntegrationTest 
 // Inner Classes
 //==================================================================================================
 
-	private interface TestExecutorDecision {
-		public boolean decide(AddressableRowObject rowObject);
+	@FunctionalInterface
+    private interface TestExecutorDecision {
+		boolean decide(AddressableRowObject rowObject);
 	}
 
 	private class SpyTableChooserExecutor implements TableChooserExecutor {
@@ -564,7 +565,7 @@ public class TableChooserDialogTest extends AbstractGhidraHeadedIntegrationTest 
 
 		@Override
 		public String toString() {
-			return getAddress().toString();
+			return addr.toString();
 		}
 	}
 
@@ -604,7 +605,7 @@ public class TableChooserDialogTest extends AbstractGhidraHeadedIntegrationTest 
 		}
 	}
 
-	private class TestAction extends DockingAction {
+	private static class TestAction extends DockingAction {
 
 		private int invoked;
 

@@ -70,7 +70,7 @@ public class ContextRegisterFilterInputDialog extends InputDialogComponentProvid
 	@Override
 	protected JPanel createPanel() {
 		JPanel panel = new JPanel();
-		BoxLayout boxLayout = new BoxLayout(panel, BoxLayout.Y_AXIS);
+		BoxLayout boxLayout = new BoxLayout(panel, BoxLayout.PAGE_AXIS);
 		panel.setLayout(boxLayout);
 		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		for (String currentRegister : extent.getContextRegisters()) {

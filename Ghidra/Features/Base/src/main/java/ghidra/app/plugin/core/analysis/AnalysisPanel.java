@@ -269,15 +269,15 @@ class AnalysisPanel extends JPanel implements PropertyChangeListener {
 		configureBorder(panel, "Analyzers");
 
 		panel.add(scrollPane, BorderLayout.CENTER);
-		panel.add(buttonPanel, BorderLayout.SOUTH);
+		panel.add(buttonPanel, BorderLayout.PAGE_END);
 		return panel;
 	}
 
 	private JPanel buildControlPanel() {
 		JPanel panel = new JPanel(new BorderLayout());
 
-		panel.add(buildButtonPanel(), BorderLayout.NORTH);
-		panel.add(buildOptionsComboBoxPanel(), BorderLayout.SOUTH);
+		panel.add(buildButtonPanel(), BorderLayout.PAGE_START);
+		panel.add(buildOptionsComboBoxPanel(), BorderLayout.PAGE_END);
 
 		return panel;
 	}
@@ -293,7 +293,7 @@ class AnalysisPanel extends JPanel implements PropertyChangeListener {
 		JButton saveButton = new JButton("Save...");
 		saveButton.setToolTipText("Saves the current editor settings to a named configuration");
 		saveButton.addActionListener(e -> saveCurrentOptionsConfiguration());
-		JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
 		buttonPanel.add(selectAllButton);
 		buttonPanel.add(deselectAllButton);
 		buttonPanel.add(resetButton);

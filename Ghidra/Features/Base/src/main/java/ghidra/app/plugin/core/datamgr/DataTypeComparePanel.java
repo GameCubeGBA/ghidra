@@ -87,8 +87,8 @@ class DataTypeComparePanel extends JPanel {
 		rightScrollPane.getVerticalScrollBar().setUnitIncrement(9);
 		leftPanel.add(leftScrollPane);
 		rightPanel.add(rightScrollPane);
-		leftPanel.add(leftPanelLabel, BorderLayout.NORTH);
-		rightPanel.add(rightPanelLabel, BorderLayout.NORTH);
+		leftPanel.add(leftPanelLabel, BorderLayout.PAGE_START);
+		rightPanel.add(rightPanelLabel, BorderLayout.PAGE_START);
 		syncScrollers(leftScrollPane, rightScrollPane);
 
 	}

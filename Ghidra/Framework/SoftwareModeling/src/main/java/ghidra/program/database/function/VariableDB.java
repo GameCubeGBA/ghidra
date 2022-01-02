@@ -194,15 +194,14 @@ public abstract class VariableDB implements Variable {
 
 	@Override
 	public String toString() {
-		StringBuilder strBuilder = new StringBuilder();
-		strBuilder.append("[");
-		strBuilder.append(getDataType().getName());
-		strBuilder.append(" ");
-		strBuilder.append(getName());
-		strBuilder.append("@");
-		strBuilder.append(getVariableStorage().toString());
-		strBuilder.append("]");
-		return strBuilder.toString();
+        String strBuilder = "[" +
+                getDataType().getName() +
+                " " +
+                getName() +
+                "@" +
+                getVariableStorage().toString() +
+                "]";
+		return strBuilder;
 	}
 
 	@Override

@@ -121,7 +121,7 @@ class LabelHistoryPanel extends JPanel {
 		}
 	}
 
-	private class LabelCellRenderer extends GTableCellRenderer {
+	private static class LabelCellRenderer extends GTableCellRenderer {
 		private static final long serialVersionUID = 1L;
 
 		private Font monoFont;

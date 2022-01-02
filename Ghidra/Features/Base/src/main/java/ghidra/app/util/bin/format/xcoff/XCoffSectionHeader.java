@@ -79,18 +79,17 @@ public final class XCoffSectionHeader implements StructConverter {
 
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
-		buffer.append("SECTION HEADER VALUES").append(NL);
-		buffer.append(new String(s_name)).append(NL);
-		buffer.append("s_paddr = ").append(s_paddr).append(NL);
-		buffer.append("s_vaddr = ").append(s_vaddr).append(NL);
-		buffer.append("s_size = ").append(s_size).append(NL);
-		buffer.append("s_scnptr = ").append(s_scnptr).append(NL);
-		buffer.append("s_relptr = ").append(s_relptr).append(NL);
-		buffer.append("s_lnnoptr = ").append(s_lnnoptr).append(NL);
-		buffer.append("s_nreloc = ").append(s_nreloc).append(NL);
-		buffer.append("s_nlnno = ").append(s_nlnno).append(NL);
-		buffer.append("s_flags = ").append(s_flags).append(NL);
-		return buffer.toString();
+        String buffer = "SECTION HEADER VALUES" + NL +
+                new String(s_name) + NL +
+                "s_paddr = " + s_paddr + NL +
+                "s_vaddr = " + s_vaddr + NL +
+                "s_size = " + s_size + NL +
+                "s_scnptr = " + s_scnptr + NL +
+                "s_relptr = " + s_relptr + NL +
+                "s_lnnoptr = " + s_lnnoptr + NL +
+                "s_nreloc = " + s_nreloc + NL +
+                "s_nlnno = " + s_nlnno + NL +
+                "s_flags = " + s_flags + NL;
+		return buffer;
 	}
 }

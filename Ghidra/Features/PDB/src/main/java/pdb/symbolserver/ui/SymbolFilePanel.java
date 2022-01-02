@@ -37,7 +37,8 @@ import pdb.symbolserver.FindOption;
  * Also allows the user to tweak search options.
  */
 class SymbolFilePanel extends JPanel {
-	interface SearchCallback {
+	@FunctionalInterface
+    interface SearchCallback {
 		void searchForPdbs(boolean allowRemote);
 	}
 	static final String SEARCH_OPTIONS_HELP_ANCHOR = "PDB_Search_Search_Options";
@@ -109,7 +110,7 @@ class SymbolFilePanel extends JPanel {
 
 	private void build() {
 		setBorder(BorderFactory.createTitledBorder("PDB Search"));
-		add(buildButtonPanel(), BorderLayout.NORTH);
+		add(buildButtonPanel(), BorderLayout.PAGE_START);
 		buildTable();	// don't add it yet
 		add(buildWelcomePanel(), BorderLayout.CENTER);
 	}
@@ -162,7 +163,7 @@ class SymbolFilePanel extends JPanel {
 		ignorePdbAge.setToolTipText("Find PDB with any age value (local locations only).");
 
 		JPanel panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+		panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
 
 		panel.add(new GLabel("Search Options:"));
 		panel.add(Box.createHorizontalStrut(10));

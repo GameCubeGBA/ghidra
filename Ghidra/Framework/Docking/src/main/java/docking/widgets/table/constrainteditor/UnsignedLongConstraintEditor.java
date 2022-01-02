@@ -63,7 +63,7 @@ public class UnsignedLongConstraintEditor extends AbstractColumnConstraintEditor
 
 		panel.add(field.getComponent(), BorderLayout.CENTER);
 		statusLabel = new GDHtmlLabel();
-		panel.add(statusLabel, BorderLayout.SOUTH);
+		panel.add(statusLabel, BorderLayout.PAGE_END);
 		statusLabel.setForeground(Color.RED);
 		statusLabel.setHorizontalAlignment(SwingConstants.CENTER);
 

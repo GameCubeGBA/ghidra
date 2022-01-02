@@ -158,7 +158,7 @@ public class RestoreDialog extends DialogComponentProvider {
 
 		// add the labels
 		//
-		gbc.anchor = GridBagConstraints.EAST;
+		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbl.setConstraints(archiveLabel, gbc);
@@ -195,7 +195,7 @@ public class RestoreDialog extends DialogComponentProvider {
 
 		// add the browse buttons
 		//
-		gbc.anchor = GridBagConstraints.WEST;
+		gbc.anchor = GridBagConstraints.LINE_START;
 		gbc.gridwidth = 1;
 		gbc.insets.left = 5;
 		gbc.insets.right = 5;

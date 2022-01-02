@@ -220,7 +220,7 @@ public class OpenFileRunnable implements Runnable {
 // Inner Classes
 //==================================================================================================
 
-	private class DisplayableIFile {
+	private static class DisplayableIFile {
 		private final IFile file;
 		private final String displayString;
 

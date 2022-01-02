@@ -96,11 +96,10 @@ public class AssignedVariableFieldFactory extends FieldFactory {
 				int firstUseOffset = var.getFirstUseOffset();
 				if (firstUseOffset != 0 && firstUseOffset >= minOffset &&
 					firstUseOffset <= maxOffset) {
-					StringBuffer buf = new StringBuffer("assign ");
-					buf.append(var.getVariableStorage().toString());
-					buf.append(" = ");
-					buf.append(var.getName());
-					AttributedString as = new AttributedString(buf.toString(), color, getMetrics());
+                    String buf = "assign " + var.getVariableStorage().toString() +
+                            " = " +
+                            var.getName();
+					AttributedString as = new AttributedString(buf, color, getMetrics());
 					elemenetList.add(new TextFieldElement(as, 0, 0));
 				}
 			}

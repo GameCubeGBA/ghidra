@@ -27,7 +27,7 @@ import ghidra.program.model.listing.Program;
 import ghidra.util.Msg;
 
 /**
- * <CODE>ProgramLocation</CODE> provides information about a location in a program in the most
+ * {@code ProgramLocation} provides information about a location in a program in the most
  * generic way.
  *
  * <p>

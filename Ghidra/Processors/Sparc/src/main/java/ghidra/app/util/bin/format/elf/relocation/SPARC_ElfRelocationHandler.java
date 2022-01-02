@@ -83,7 +83,8 @@ public class SPARC_ElfRelocationHandler extends ElfRelocationHandler {
 			case SPARC_ElfRelocationConstants.R_SPARC_JMP_SLOT:
 				// should copy address of symbol in EXTERNAL block
 			case SPARC_ElfRelocationConstants.R_SPARC_32:
-				newValue = (int) symbolValue + (int) addend;
+            case SPARC_ElfRelocationConstants.R_SPARC_UA32:
+                newValue = (int) symbolValue + (int) addend;
 				memory.setInt(relocationAddress, newValue);
 				break;
 			// we punt on this because it's not linked yet!
@@ -95,11 +96,7 @@ public class SPARC_ElfRelocationHandler extends ElfRelocationHandler {
 				newValue = (int) elf.getImageBase() + (int) addend;
 				memory.setInt(relocationAddress, newValue);
 				break;
-			case SPARC_ElfRelocationConstants.R_SPARC_UA32:
-				newValue = (int) symbolValue + (int) addend;
-				memory.setInt(relocationAddress, newValue);
-				break;
-			case SPARC_ElfRelocationConstants.R_SPARC_COPY:
+            case SPARC_ElfRelocationConstants.R_SPARC_COPY:
 				markAsWarning(program, relocationAddress, "R_SPARC_COPY", symbolName, symbolIndex,
 					"Runtime copy not supported", elfRelocationContext.getLog());
 				break;

@@ -292,7 +292,7 @@ public class OptionsGui extends JPanel {
 	private void buildPanel() {
 		setLayout(new BorderLayout());
 		add(buildColorChooserPanel(), BorderLayout.CENTER);
-		add(buildSelectionPanel(), BorderLayout.WEST);
+		add(buildSelectionPanel(), BorderLayout.LINE_START);
 	}
 
 	/**
@@ -303,7 +303,7 @@ public class OptionsGui extends JPanel {
 		colorChooser = new JColorChooser();
 		colorChooser.setPreviewPanel(new JPanel()); // no preview panel
 
-		panel.add(colorChooser, BorderLayout.NORTH);
+		panel.add(colorChooser, BorderLayout.PAGE_START);
 		panel.add(buildPreviewPanel(), BorderLayout.CENTER);
 		return panel;
 	}
@@ -320,9 +320,9 @@ public class OptionsGui extends JPanel {
 		Border border = BorderFactory.createCompoundBorder(
 			BorderFactory.createEmptyBorder(4, 4, 4, 4), BorderFactory.createEtchedBorder());
 		scrollPane.setBorder(BorderFactory.createTitledBorder(border, "Screen Element"));
-		panel.add(buildGlobalOptionsPanel(), BorderLayout.NORTH);
+		panel.add(buildGlobalOptionsPanel(), BorderLayout.PAGE_START);
 		panel.add(scrollPane, BorderLayout.CENTER);
-		panel.add(buildElementOptionsPanel(), BorderLayout.SOUTH);
+		panel.add(buildElementOptionsPanel(), BorderLayout.PAGE_END);
 		return panel;
 	}
 
@@ -347,7 +347,7 @@ public class OptionsGui extends JPanel {
 		fontSizeField = new GComboBox<>(IntStream.rangeClosed(6, 32).boxed().toArray(Integer[]::new));
 		fontSizeField.setBackground(Color.white);
 		panel1.add(fontSizeField);
-		panel.add(panel1, BorderLayout.NORTH);
+		panel.add(panel1, BorderLayout.PAGE_START);
 
 		JPanel panel2 = new JPanel(new FlowLayout());
 		JPanel subPanel = new JPanel(new GridLayout(1, 2, 2, 4));
@@ -356,7 +356,7 @@ public class OptionsGui extends JPanel {
 		subPanel.add(globalBoldCheckbox);
 		subPanel.add(globalItalicsCheckbox);
 		panel2.add(subPanel);
-		panel.add(panel2, BorderLayout.SOUTH);
+		panel.add(panel2, BorderLayout.PAGE_END);
 		return panel;
 
 	}
@@ -401,14 +401,14 @@ public class OptionsGui extends JPanel {
 		subPanel.add(customCheckbox);
 		subPanel.add(boldCheckbox);
 		subPanel.add(italicsCheckbox);
-		panel.add(subPanel, BorderLayout.SOUTH);
+		panel.add(subPanel, BorderLayout.PAGE_END);
 
 		subPanel = new JPanel(new BorderLayout());
 		subPanel.setBorder(BorderFactory.createTitledBorder(border, "Color"));
 		colorPanel = new JPanel();
 		colorPanel.setBackground(Color.white);
 		subPanel.add(colorPanel, BorderLayout.CENTER);
-		panel.add(subPanel, BorderLayout.NORTH);
+		panel.add(subPanel, BorderLayout.PAGE_START);
 		return panel;
 	}
 
@@ -905,7 +905,7 @@ public class OptionsGui extends JPanel {
 					underline, UNDERLINE.getColor());
 				FieldElement field = new TextFieldElement(as, 0, 0);
 				fields[fieldNum] =
-					new ScreenElementTextField(element, startPos, length, field, hlFactory);
+                        new ScreenElementTextField(element, startPos, length, field, hlFactory);
 				fieldNum++;
 				startPos += length;
 				maxWidth = Math.max(maxWidth, startPos);
@@ -920,7 +920,7 @@ public class OptionsGui extends JPanel {
 		}
 	}
 
-	private class ScreenElementTextField extends ClippingTextField {
+	private static class ScreenElementTextField extends ClippingTextField {
 		private ScreenElement screenElement;
 
 		ScreenElementTextField(ScreenElement screenElement, int startX, int length,

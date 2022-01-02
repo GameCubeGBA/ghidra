@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.util.NoSuchElementException;
 
 /**
- * <code>BufferFileHandle</code> facilitates access to a BufferFile
+ * {@code BufferFileHandle} facilitates access to a BufferFile
  */
 public interface BufferFileHandle {
 

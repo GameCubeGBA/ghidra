@@ -363,16 +363,15 @@ public class CoffSectionHeader implements StructConverter {
 
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
-		buffer.append(getName());
-		buffer.append(' ');
-		buffer.append("PhysAddr:0x" + Integer.toHexString(s_paddr));
-		buffer.append(' ');
-		buffer.append("Size:0x" + Integer.toHexString(s_size));
-		buffer.append(' ');
-		buffer.append("Flags:0x" + Integer.toHexString(s_flags));
-		buffer.append(' ');
-		return buffer.toString();
+        String buffer = s_name +
+                ' ' +
+                "PhysAddr:0x" + Integer.toHexString(s_paddr) +
+                ' ' +
+                "Size:0x" + Integer.toHexString(s_size) +
+                ' ' +
+                "Flags:0x" + Integer.toHexString(s_flags) +
+                ' ';
+		return buffer;
 	}
 
 	private static int getOffsetUnitSize(Language language, CoffSectionHeader section) {

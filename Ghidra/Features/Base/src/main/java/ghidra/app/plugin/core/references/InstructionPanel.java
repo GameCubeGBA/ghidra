@@ -238,7 +238,7 @@ class InstructionPanel extends JPanel implements ChangeListener {
 		}
 
 		innerPanel = new JPanel();
-		BoxLayout bl = new BoxLayout(innerPanel, BoxLayout.X_AXIS);
+		BoxLayout bl = new BoxLayout(innerPanel, BoxLayout.LINE_AXIS);
 		innerPanel.setLayout(bl);
 
 		if (goHomeAction != null) {

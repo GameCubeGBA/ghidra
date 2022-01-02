@@ -107,7 +107,7 @@ public class TextAreaTestVertex extends AbstractTestVertex {
 			}
 		});
 
-		mainPanel.add(genericHeader, BorderLayout.NORTH);
+		mainPanel.add(genericHeader, BorderLayout.PAGE_START);
 		mainPanel.add(textArea, BorderLayout.CENTER);
 	}
 

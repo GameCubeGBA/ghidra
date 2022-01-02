@@ -103,14 +103,14 @@ class RepositoryChooser extends DialogComponentProvider {
 		queryButton.addActionListener(e -> queryServer());
 		JPanel buttonPanel = new JPanel(new MiddleLayout());
 		buttonPanel.add(queryButton);
-		topPanel.add(buttonPanel, BorderLayout.EAST);
+		topPanel.add(buttonPanel, BorderLayout.LINE_END);
 
-		serverInfoPanel.add(topPanel, BorderLayout.NORTH);
+		serverInfoPanel.add(topPanel, BorderLayout.PAGE_START);
 
 		JPanel lowerPanel = new JPanel(new BorderLayout());
 		JLabel label = new GDLabel("Repository Names", SwingConstants.LEFT);
 		label.setBorder(BorderFactory.createEmptyBorder(0, 2, 0, 5));
-		lowerPanel.add(label, BorderLayout.NORTH);
+		lowerPanel.add(label, BorderLayout.PAGE_START);
 
 		listModel = new DefaultListModel<>();
 		nameList = new GList<>(listModel);
@@ -147,7 +147,7 @@ class RepositoryChooser extends DialogComponentProvider {
 		panel.add(new GLabel("URL:"));
 		panel.add(urlTextField);
 
-		urlPanel.add(panel, BorderLayout.NORTH);
+		urlPanel.add(panel, BorderLayout.PAGE_START);
 
 		return urlPanel;
 	}
@@ -204,7 +204,7 @@ class RepositoryChooser extends DialogComponentProvider {
 		panelChoices.add(serverInfoChoice);
 		panelChoices.add(urlChoice);
 
-		panel.add(radioButtonPanel, BorderLayout.NORTH);
+		panel.add(radioButtonPanel, BorderLayout.PAGE_START);
 
 		cardLayout = new CardLayout();
 		cardPanel = new JPanel(cardLayout);

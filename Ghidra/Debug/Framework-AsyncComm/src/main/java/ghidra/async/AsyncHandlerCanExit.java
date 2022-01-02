@@ -23,6 +23,7 @@ import java.util.function.BiFunction;
  *
  * @param <R> the type of result for the whole construct
  */
+@FunctionalInterface
 public interface AsyncHandlerCanExit<R> {
 	/**
 	 * Complete the whole loop

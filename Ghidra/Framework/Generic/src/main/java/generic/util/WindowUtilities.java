@@ -229,12 +229,12 @@ public class WindowUtilities {
 	}
 
 	/**
-	 * Creates a point that is centered over the given <code>parent</code> component, based upon
-	 * the size of the given <code>child</code>.
+	 * Creates a point that is centered over the given {@code parent} component, based upon
+	 * the size of the given {@code child}.
 	 * @param parent The component over which to center the child.
 	 * @param child The component which will be centered over the parent
-	 * @return a point that is centered over the given <code>parent</code> component, based upon
-	 * the size of the given <code>child</code>.
+	 * @return a point that is centered over the given {@code parent} component, based upon
+	 * the size of the given {@code child}.
 	 */
 	public static Point centerOnComponent(Component parent, Component child) {
 		Dimension parentSize = parent.getSize();
@@ -395,10 +395,10 @@ public class WindowUtilities {
 	}
 
 	/**
-	 * Returns a list of all <code>parent</code>'s descendant modal dialogs.
+	 * Returns a list of all {@code parent}'s descendant modal dialogs.
 	 *
 	 * @param parent the parent for which to find modal dialogs
-	 * @return a list of all <code>parent</code>'s descendant modal dialogs.
+	 * @return a list of all {@code parent}'s descendant modal dialogs.
 	 */
 	public static List<Dialog> getOpenModalDialogsFor(Frame parent) {
 		Objects.requireNonNull(parent);
@@ -493,14 +493,6 @@ public class WindowUtilities {
 			int width = fullBounds.width - Math.abs(insets.left + insets.right);
 			int height = fullBounds.height - Math.abs(insets.top + insets.bottom);
 			this.usableBounds = new Rectangle(x, y, width, height);
-		}
-
-		/**
-		 * Gets the full size of this bounds object, including the insets
-		 * @return the full size of this bounds object, including the insets
-		 */
-		Rectangle getFullBounds() {
-			return fullBounds;
 		}
 
 		/**

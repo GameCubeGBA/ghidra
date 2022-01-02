@@ -59,7 +59,7 @@ class FilterDialog extends DialogComponentProvider {
 		for (int i = 0; i < types.length; i++) {
 			buttons[i] = new GCheckBox();
 			JPanel p = new JPanel(new BorderLayout());
-			p.add(buttons[i], BorderLayout.WEST);
+			p.add(buttons[i], BorderLayout.LINE_START);
 			buttons[i].setSelected(provider.isShowingType(types[i].getTypeString()));
 			JLabel l =
 				new GLabel(types[i].getTypeString(), types[i].getIcon(), SwingConstants.LEFT);

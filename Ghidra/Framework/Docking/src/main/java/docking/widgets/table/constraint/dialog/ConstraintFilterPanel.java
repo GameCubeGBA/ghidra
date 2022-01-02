@@ -51,11 +51,11 @@ public class ConstraintFilterPanel extends JPanel {
 
 		setLayout(new BorderLayout());
 		add(buildMainPanel(), BorderLayout.CENTER);
-		add(buildButtonPanel(), BorderLayout.EAST);
+		add(buildButtonPanel(), BorderLayout.LINE_END);
 
 		Component detailPanel = buildDetailEditorPanel();
 		if (detailPanel != null) {
-			add(detailPanel, BorderLayout.SOUTH);
+			add(detailPanel, BorderLayout.PAGE_END);
 		}
 	}
 
@@ -103,7 +103,7 @@ public class ConstraintFilterPanel extends JPanel {
 		JButton button = new EmptyBorderButton(icon);
 		button.setToolTipText("Delete entry");
 		button.addActionListener(e -> constraintEntry.delete());
-		panel.add(button, BorderLayout.NORTH);
+		panel.add(button, BorderLayout.PAGE_START);
 		return panel;
 	}
 

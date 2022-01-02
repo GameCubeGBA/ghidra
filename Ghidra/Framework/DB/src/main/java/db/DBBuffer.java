@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * <code>DBBuffer</code> facilitates synchronized access to a ChainedBuffer.
+ * {@code DBBuffer} facilitates synchronized access to a ChainedBuffer.
  */
 public class DBBuffer {
 

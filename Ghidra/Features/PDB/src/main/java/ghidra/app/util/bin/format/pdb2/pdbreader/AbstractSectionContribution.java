@@ -84,11 +84,10 @@ public abstract class AbstractSectionContribution {
 	 * @return {@link String} of pretty output.
 	 */
 	String dump() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("SectionContribution-----------------------------------------\n");
-		builder.append(dumpInternals());
-		builder.append("\nEnd SectionContribution-------------------------------------\n");
-		return builder.toString();
+        String builder = "SectionContribution-----------------------------------------\n" +
+                dumpInternals() +
+                "\nEnd SectionContribution-------------------------------------\n";
+		return builder;
 	}
 
 }

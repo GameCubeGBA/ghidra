@@ -516,22 +516,21 @@ public class ScriptInfo {
 		String htmlKeyBinding = bold("Key Binding:") + space + getKeybindingToolTip();
 		String htmlMenuPath = bold("Menu Path:") + space + escapeHTML(toString(menupath));
 
-		StringBuilder buffer = new StringBuilder();
-		buffer.append("<h3>").append(space).append(escapeHTML(getName())).append("</h3>");
-		buffer.append(HTML_NEW_LINE);
-		buffer.append(space).append(htmlDescription);
-		buffer.append(HTML_NEW_LINE);
-		buffer.append(HTML_NEW_LINE);
-		buffer.append(space).append(htmlAuthor);
-		buffer.append(HTML_NEW_LINE);
-		buffer.append(space).append(htmlCategory);
-		buffer.append(HTML_NEW_LINE);
-		buffer.append(space).append(htmlKeyBinding);
-		buffer.append(HTML_NEW_LINE);
-		buffer.append(space).append(htmlMenuPath);
-		buffer.append(HTML_NEW_LINE);
-		buffer.append(HTML_NEW_LINE);
-		return wrapAsHTML(buffer.toString());
+        String buffer = "<h3>" + space + escapeHTML(getName()) + "</h3>" +
+                HTML_NEW_LINE +
+                space + htmlDescription +
+                HTML_NEW_LINE +
+                HTML_NEW_LINE +
+                space + htmlAuthor +
+                HTML_NEW_LINE +
+                space + htmlCategory +
+                HTML_NEW_LINE +
+                space + htmlKeyBinding +
+                HTML_NEW_LINE +
+                space + htmlMenuPath +
+                HTML_NEW_LINE +
+                HTML_NEW_LINE;
+		return wrapAsHTML(buffer);
 	}
 
 	private String getKeybindingToolTip() {

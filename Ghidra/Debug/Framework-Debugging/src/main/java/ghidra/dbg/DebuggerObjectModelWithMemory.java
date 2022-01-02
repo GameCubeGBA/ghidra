@@ -19,6 +19,7 @@ import ghidra.dbg.target.TargetMemory;
 import ghidra.dbg.target.TargetObject;
 import ghidra.program.model.address.Address;
 
+@FunctionalInterface
 public interface DebuggerObjectModelWithMemory {
 
 	TargetMemory getMemory(TargetObject target, Address address, int length);

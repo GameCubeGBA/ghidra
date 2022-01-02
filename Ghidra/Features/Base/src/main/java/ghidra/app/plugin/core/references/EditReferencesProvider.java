@@ -618,7 +618,7 @@ public class EditReferencesProvider extends ComponentProviderAdapter
 				}
 			});
 
-		panel.add(instrPanel, BorderLayout.NORTH);
+		panel.add(instrPanel, BorderLayout.PAGE_START);
 
 		refsTable = new GhidraTable(tableModel);
 		refsTable.setName("RefsTable");
@@ -851,7 +851,7 @@ public class EditReferencesProvider extends ComponentProviderAdapter
 //==================================================================================================	
 
 	/** Fun little storage object */
-	private class ReferenceInfo {
+	private static class ReferenceInfo {
 		private Program program;
 		private CodeUnit codeUnit;
 		private int opIndex = 0;

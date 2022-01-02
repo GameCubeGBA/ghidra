@@ -53,7 +53,7 @@ public class GdbDebuggerProgramLaunchOpinion implements DebuggerProgramLaunchOpi
 		}
 	}
 
-	protected class InVmGdbDebuggerProgramLaunchOffer
+	protected static class InVmGdbDebuggerProgramLaunchOffer
 			extends AbstractGdbDebuggerProgramLaunchOffer {
 		private static final String FACTORY_CLS_NAME = "agent.gdb.GdbInJvmDebuggerModelFactory";
 
@@ -73,7 +73,7 @@ public class GdbDebuggerProgramLaunchOpinion implements DebuggerProgramLaunchOpi
 		}
 	}
 
-	protected class GadpGdbDebuggerProgramLaunchOffer
+	protected static class GadpGdbDebuggerProgramLaunchOffer
 			extends AbstractGdbDebuggerProgramLaunchOffer {
 		private static final String FACTORY_CLS_NAME =
 			"agent.gdb.gadp.GdbLocalDebuggerModelFactory";
@@ -94,7 +94,7 @@ public class GdbDebuggerProgramLaunchOpinion implements DebuggerProgramLaunchOpi
 		}
 	}
 
-	protected class SshGdbDebuggerProgramLaunchOffer extends AbstractGdbDebuggerProgramLaunchOffer {
+	protected static class SshGdbDebuggerProgramLaunchOffer extends AbstractGdbDebuggerProgramLaunchOffer {
 		private static final String FACTORY_CLS_NAME = "agent.gdb.GdbOverSshDebuggerModelFactory";
 
 		public SshGdbDebuggerProgramLaunchOffer(Program program, PluginTool tool,

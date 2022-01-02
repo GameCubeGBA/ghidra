@@ -102,7 +102,7 @@ class NamePanel extends JPanel {
 		addToButtonGroup();
 
 		JPanel rbPanel = new JPanel();
-		rbPanel.setLayout(new BoxLayout(rbPanel, BoxLayout.Y_AXIS));
+		rbPanel.setLayout(new BoxLayout(rbPanel, BoxLayout.PAGE_AXIS));
 		rbPanel.add(keepOtherRB);
 		rbPanel.add(keepMyRB);
 		rbPanel.add(newTreeRB);

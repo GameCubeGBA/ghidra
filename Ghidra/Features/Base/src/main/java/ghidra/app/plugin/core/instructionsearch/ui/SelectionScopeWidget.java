@@ -128,7 +128,7 @@ public class SelectionScopeWidget extends ControlPanelWidget {
 	protected JPanel createContent() {
 
 		JPanel contentPanel = new JPanel();
-		contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.X_AXIS));
+		contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.LINE_AXIS));
 		contentPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
 		searchAllRB = createSearchRB(new SearchAllAction(), "Entire Program",

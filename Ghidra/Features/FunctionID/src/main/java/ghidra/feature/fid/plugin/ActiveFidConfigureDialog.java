@@ -60,12 +60,12 @@ public class ActiveFidConfigureDialog extends DialogComponentProvider {
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		panel.add(buildCheckboxPanelScroller(), BorderLayout.CENTER);
-		panel.add(buildButtonPanel(), BorderLayout.SOUTH);
+		panel.add(buildButtonPanel(), BorderLayout.PAGE_END);
 		return panel;
 	}
 
 	private Component buildButtonPanel() {
-		JPanel panel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		JPanel panel = new JPanel(new FlowLayout(FlowLayout.TRAILING));
 		JButton allButton = new JButton("Select All");
 		JButton noneButton = new JButton("Select None");
 		allButton.addActionListener(e -> selectAllCheckboxes(true));

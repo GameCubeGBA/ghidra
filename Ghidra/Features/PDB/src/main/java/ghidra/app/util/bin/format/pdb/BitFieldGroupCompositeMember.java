@@ -22,7 +22,7 @@ import ghidra.program.model.data.BitFieldDataType;
 import ghidra.program.model.data.DataType;
 
 /**
- * <code>BitFieldGroupCompositeMember</code> provides the ability to collect related 
+ * {@code BitFieldGroupCompositeMember} provides the ability to collect related
  * {@link DefaultCompositeMember} members within a group during the composite reconstruction
  * process.  
  */

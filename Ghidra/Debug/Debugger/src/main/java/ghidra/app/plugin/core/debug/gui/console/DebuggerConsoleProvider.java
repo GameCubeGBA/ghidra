@@ -290,7 +290,7 @@ public class DebuggerConsoleProvider extends ComponentProviderAdapter
 	protected GhidraTable logTable;
 	private GhidraTableFilterPanel<LogRow> logFilterPanel;
 
-	private Deque<LogRow> buffer = new ArrayDeque<>();
+	private final Deque<LogRow> buffer = new ArrayDeque<>();
 
 	private final JPanel mainPanel = new JPanel(new BorderLayout());
 
@@ -326,7 +326,7 @@ public class DebuggerConsoleProvider extends ComponentProviderAdapter
 		logTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		mainPanel.add(new JScrollPane(logTable));
 		logFilterPanel = new GhidraTableFilterPanel<>(logTable, logTableModel);
-		mainPanel.add(logFilterPanel, BorderLayout.NORTH);
+		mainPanel.add(logFilterPanel, BorderLayout.PAGE_START);
 
 		logTable.setRowHeight(ACTION_BUTTON_SIZE);
 		TableColumnModel columnModel = logTable.getColumnModel();

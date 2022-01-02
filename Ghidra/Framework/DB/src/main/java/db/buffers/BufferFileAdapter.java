@@ -23,7 +23,7 @@ import java.util.NoSuchElementException;
 import ghidra.util.Msg;
 
 /**
- * <code>BufferFileAdapter</code> provides a BufferFile implementation which
+ * {@code BufferFileAdapter} provides a BufferFile implementation which
  * wraps a BufferFileHandle.
  */
 public class BufferFileAdapter implements BufferFile {

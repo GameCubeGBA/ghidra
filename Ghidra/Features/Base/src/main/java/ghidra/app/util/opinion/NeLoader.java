@@ -196,40 +196,33 @@ public class NeLoader extends AbstractLibrarySupportLoader {
 		Address addr = memory.getMinAddress();
 		CodeUnit firstCU = listing.getCodeUnitAt(addr);
 
-		StringBuffer buffer = new StringBuffer();
+        String buffer = "Title:  " + nrnt.getTitle() + "\n" +
+                "Format: " + "New Executable (NE) Windows" + "\n" +
+                "CRC:    " + Conv.toHexString(ib.getChecksum()) + "\n" +
+                "\n" +
+                "Program Entry Point (CS:IP):   " + Conv.toHexString(ib.getEntryPointSegment()) + ":" +
+                Conv.toHexString(ib.getEntryPointOffset()) + "\n" +
+                "Initial Stack Pointer (SS:SP): " + Conv.toHexString(ib.getStackPointerSegment()) +
+                ":" + Conv.toHexString(ib.getStackPointerOffset()) + "\n" +
+                "Auto Data Segment Index:       " +
+                Conv.toHexString(ib.getAutomaticDataSegment()) + "\n" +
+                "Initial Heap Size:             " + Conv.toHexString(ib.getInitialHeapSize()) + "\n" +
+                "Initial Stack Size:            " + Conv.toHexString(ib.getInitialStackSize()) + "\n" +
+                "Minimum Code Swap Size:        " + Conv.toHexString(ib.getMinCodeSwapSize()) + "\n" +
+                "\n" +
+                "Linker Version:  " + ib.getVersion() + "." + ib.getRevision() + "\n" +
+                "Target OS:       " + ib.getTargetOpSysAsString() + "\n" +
+                "Windows Version: " + (ib.getExpectedWindowsVersion() >> 8) + "." +
+                (ib.getExpectedWindowsVersion() & 0xff) + "\n" +
+                "\n" +
+                "Program Flags:     " + Conv.toHexString(ib.getProgramFlags()) + "\n" +
+                ib.getProgramFlagsAsString() +
+                "Application Flags: " + Conv.toHexString(ib.getApplicationFlags()) + "\n" +
+                ib.getApplicationFlagsAsString() +
+                "Other Flags:       " + Conv.toHexString(ib.getOtherFlags()) + "\n" +
+                ib.getOtherFlagsAsString();
 
-		buffer.append("Title:  " + nrnt.getTitle() + "\n");
-		buffer.append("Format: " + "New Executable (NE) Windows" + "\n");
-		buffer.append("CRC:    " + Conv.toHexString(ib.getChecksum()) + "\n");
-		buffer.append("\n");
-		buffer.append(
-			"Program Entry Point (CS:IP):   " + Conv.toHexString(ib.getEntryPointSegment()) + ":" +
-				Conv.toHexString(ib.getEntryPointOffset()) + "\n");
-		buffer.append(
-			"Initial Stack Pointer (SS:SP): " + Conv.toHexString(ib.getStackPointerSegment()) +
-				":" + Conv.toHexString(ib.getStackPointerOffset()) + "\n");
-		buffer.append("Auto Data Segment Index:       " +
-			Conv.toHexString(ib.getAutomaticDataSegment()) + "\n");
-		buffer.append(
-			"Initial Heap Size:             " + Conv.toHexString(ib.getInitialHeapSize()) + "\n");
-		buffer.append(
-			"Initial Stack Size:            " + Conv.toHexString(ib.getInitialStackSize()) + "\n");
-		buffer.append(
-			"Minimum Code Swap Size:        " + Conv.toHexString(ib.getMinCodeSwapSize()) + "\n");
-		buffer.append("\n");
-		buffer.append("Linker Version:  " + ib.getVersion() + "." + ib.getRevision() + "\n");
-		buffer.append("Target OS:       " + ib.getTargetOpSysAsString() + "\n");
-		buffer.append("Windows Version: " + (ib.getExpectedWindowsVersion() >> 8) + "." +
-			(ib.getExpectedWindowsVersion() & 0xff) + "\n");
-		buffer.append("\n");
-		buffer.append("Program Flags:     " + Conv.toHexString(ib.getProgramFlags()) + "\n");
-		buffer.append(ib.getProgramFlagsAsString());
-		buffer.append("Application Flags: " + Conv.toHexString(ib.getApplicationFlags()) + "\n");
-		buffer.append(ib.getApplicationFlagsAsString());
-		buffer.append("Other Flags:       " + Conv.toHexString(ib.getOtherFlags()) + "\n");
-		buffer.append(ib.getOtherFlagsAsString());
-
-		firstCU.setComment(CodeUnit.PLATE_COMMENT, buffer.toString());
+		firstCU.setComment(CodeUnit.PLATE_COMMENT, buffer);
 	}
 
 	private void processSegmentTable(MessageLog log, InformationBlock ib, SegmentTable st,
@@ -270,28 +263,24 @@ public class NeLoader extends AbstractLibrarySupportLoader {
 					}
 				}
 
-				StringBuffer buff = new StringBuffer();
-				buff.append("Segment:    " + (i + 1) + "\n");
-				buff.append(
-					"Offset:     " + Conv.toHexString(segments[i].getOffsetShiftAligned()) + "\n");
-				buff.append("Length:     " + Conv.toHexString(segments[i].getLength()) + "\n");
-				buff.append(
-					"Min Alloc:  " + Conv.toHexString(segments[i].getMinAllocSize()) + "\n");
-				buff.append("Flags:      " + Conv.toHexString(segments[i].getFlagword()) + "\n");
-				buff.append(TAB + (segments[i].isCode() ? "Code" : "Data") + "\n");
-				buff.append((segments[i].isDiscardable() ? TAB + "Discardable" + "\n" : ""));
-				buff.append((segments[i].isExecuteOnly() ? TAB + "Execute Only" + "\n" : ""));
-				buff.append((segments[i].isLoaded() ? TAB + "Loaded" + "\n" : ""));
-				buff.append(
-					(segments[i].isLoaderAllocated() ? TAB + "LoaderAllocated" + "\n" : ""));
-				buff.append(TAB + (segments[i].isMoveable() ? "Moveable" : "Fixed") + "\n");
-				buff.append(TAB + (segments[i].isPreload() ? "Preload" : "LoadOnCall") + "\n");
-				buff.append(TAB +
-					(segments[i].isPure() ? "Pure (Shareable)" : "Impure (Non-shareable)") + "\n");
-				buff.append((segments[i].isReadOnly() ? TAB + "Read Only" + "\n" : ""));
-				buff.append((segments[i].is32bit() ? TAB + "Use 32 Bit" + "\n" : ""));
+                String buff = "Segment:    " + (i + 1) + "\n" +
+                        "Offset:     " + Conv.toHexString(segments[i].getOffsetShiftAligned()) + "\n" +
+                        "Length:     " + Conv.toHexString(segments[i].getLength()) + "\n" +
+                        "Min Alloc:  " + Conv.toHexString(segments[i].getMinAllocSize()) + "\n" +
+                        "Flags:      " + Conv.toHexString(segments[i].getFlagword()) + "\n" +
+                        TAB + (segments[i].isCode() ? "Code" : "Data") + "\n" +
+                        (segments[i].isDiscardable() ? TAB + "Discardable" + "\n" : "") +
+                        (segments[i].isExecuteOnly() ? TAB + "Execute Only" + "\n" : "") +
+                        (segments[i].isLoaded() ? TAB + "Loaded" + "\n" : "") +
+                        (segments[i].isLoaderAllocated() ? TAB + "LoaderAllocated" + "\n" : "") +
+                        TAB + (segments[i].isMoveable() ? "Moveable" : "Fixed") + "\n" +
+                        TAB + (segments[i].isPreload() ? "Preload" : "LoadOnCall") + "\n" +
+                        TAB +
+                        (segments[i].isPure() ? "Pure (Shareable)" : "Impure (Non-shareable)") + "\n" +
+                        (segments[i].isReadOnly() ? TAB + "Read Only" + "\n" : "") +
+                        (segments[i].is32bit() ? TAB + "Use 32 Bit" + "\n" : "");
 				CodeUnit cu = program.getListing().getCodeUnitAt(addr);
-				cu.setComment(CodeUnit.PRE_COMMENT, buff.toString());
+				cu.setComment(CodeUnit.PRE_COMMENT, buff);
 			}
 
 			for (Segment segment : segments) {
@@ -481,7 +470,7 @@ public class NeLoader extends AbstractLibrarySupportLoader {
 		return callnames;
 	}
 
-	private class CallNameComparator implements Comparator<String> {
+	private static class CallNameComparator implements Comparator<String> {
 		private int prefixLength = SymbolUtilities.ORDINAL_PREFIX.length();
 
 		@Override
@@ -704,13 +693,11 @@ public class NeLoader extends AbstractLibrarySupportLoader {
 				memory.setInt(address, (int) farAddr);
 				break;
 			}
-			case SegmentRelocation.TYPE_FAR_ADDR_48: {
+			case SegmentRelocation.TYPE_FAR_ADDR_48:
+            case SegmentRelocation.TYPE_OFFSET_32: {
 				break;
 			}
-			case SegmentRelocation.TYPE_OFFSET_32: {
-				break;
-			}
-		}
+        }
 		return value;
 	}
 

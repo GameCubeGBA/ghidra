@@ -21,7 +21,7 @@ public class SearchMnemonicsOpsConstScript extends SearchBaseExtended {
 
 	@Override
 	public void run() throws Exception {
-		setState(new SearchBaseExtended.SLMaskControl(true, true, true, true));
+		setState(new SLMaskControl(true, true, true, true));
 		loadSelectedInstructions();
 		executeSearch();
 	}

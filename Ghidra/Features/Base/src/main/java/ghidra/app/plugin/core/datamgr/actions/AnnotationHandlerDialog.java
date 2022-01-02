@@ -72,12 +72,8 @@ class AnnotationHandlerDialog extends DialogComponentProvider {
 		JPanel outerPanel = new JPanel(new BorderLayout());
 		
 		handlerComboBox = new GhidraComboBox<>(new Vector<AnnotationHandler>(handlerList));
-		handlerComboBox.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				okCallback();
-			}
-		});
-		outerPanel.add(handlerComboBox, BorderLayout.NORTH);
+		handlerComboBox.addActionListener(evt -> okCallback());
+		outerPanel.add(handlerComboBox, BorderLayout.PAGE_START);
 		return outerPanel;
 	}
 	

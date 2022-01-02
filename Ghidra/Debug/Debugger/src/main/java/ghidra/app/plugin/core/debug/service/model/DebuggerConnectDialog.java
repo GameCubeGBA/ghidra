@@ -193,7 +193,7 @@ public class DebuggerConnectDialog extends DialogComponentProvider
 		inner.add(description);
 		topBox.add(inner);
 
-		panel.add(topBox, BorderLayout.NORTH);
+		panel.add(topBox, BorderLayout.PAGE_START);
 
 		layout = new PairLayout(5, 5);
 		pairPanel = new JPanel(layout);

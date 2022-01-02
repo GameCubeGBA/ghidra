@@ -55,7 +55,8 @@ class SleighPcodeTraversal implements VisitorResults {
 	 * @see SleighPcodeTraversal#traverse(OnlyPcodeOpEntryVisitor)
 	 * NOTE: This is meant for internal use only
 	 */
-	interface OnlyPcodeOpEntryVisitor extends VisitorResults {
+    @FunctionalInterface
+    interface OnlyPcodeOpEntryVisitor extends VisitorResults {
 		int visit(OpTpl op);
 	}
 }

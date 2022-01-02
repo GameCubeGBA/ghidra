@@ -18,7 +18,8 @@ package ghidra.trace.util;
 public class MethodProtector {
 	private boolean inUse;
 
-	public interface TemperamentalCallable<E extends Throwable> {
+	@FunctionalInterface
+    public interface TemperamentalCallable<E extends Throwable> {
 		void run() throws E;
 	}
 

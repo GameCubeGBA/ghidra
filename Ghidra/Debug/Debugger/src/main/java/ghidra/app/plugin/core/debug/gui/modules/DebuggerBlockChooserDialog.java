@@ -156,7 +156,7 @@ public class DebuggerBlockChooserDialog extends DialogComponentProvider {
 		panel.add(new JScrollPane(table));
 
 		filterPanel = new GhidraTableFilterPanel<>(table, tableModel);
-		panel.add(filterPanel, BorderLayout.SOUTH);
+		panel.add(filterPanel, BorderLayout.PAGE_END);
 
 		addWorkPanel(panel);
 

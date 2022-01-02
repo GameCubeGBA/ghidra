@@ -202,8 +202,8 @@ public class RegisterValue {
 	 * where the given RegisterValue's value bits take precedence over this RegisterValue's value. 
 	 * 
 	 * Each value bit is determined as follows: 
-	 * If the mask bit in <code>otherValue</code> is "ON", then <code>otherValue</code>'s value bit is used. Otherwise,
-	 * <code>this</code> value bit used.
+	 * If the mask bit in {@code otherValue} is "ON", then <code>otherValue</code>'s value bit is used. Otherwise,
+	 * {@code this} value bit used.
 	 * 
 	 * The mask bits are OR'd together to form the new mask bits. 
 	 * 
@@ -555,16 +555,6 @@ public class RegisterValue {
 			}
 		}
 
-		return true;
-	}
-
-	private static boolean isMaskAllOn(byte[] bytes) {
-		int cnt = bytes.length / 2;
-		for (int i = 0; i < cnt; i++) {
-			if (bytes[i] != -1) {
-				return false;
-			}
-		}
 		return true;
 	}
 

@@ -74,7 +74,7 @@ public class ConditionTestPanel extends JPanel {
 	public ConditionTestPanel(List<ConditionTester> tests) {
 		super(new BorderLayout());
 		conditionTestModel = new ConditionTestModel(this, tests);
-		add(buildStatusPanel(), BorderLayout.NORTH);
+		add(buildStatusPanel(), BorderLayout.PAGE_START);
 		JSplitPane splitPane =
 			new JSplitPane(JSplitPane.VERTICAL_SPLIT, buildTestPanel(), buildDetailsPanel());
 		add(splitPane, BorderLayout.CENTER);
@@ -186,7 +186,7 @@ public class ConditionTestPanel extends JPanel {
 
 	private Component buildStatusPanel() {
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.add(createRunAndSummaryPanel(), BorderLayout.WEST);
+		panel.add(createRunAndSummaryPanel(), BorderLayout.LINE_START);
 		overallProgressBar = new OverallProgressBar();
 		panel.add(overallProgressBar);
 		return panel;
@@ -212,7 +212,7 @@ public class ConditionTestPanel extends JPanel {
 		JPanel buttonPanel = new JPanel(new BorderLayout());
 		buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 0));
 		buttonPanel.add(runButton);
-		panel.add(buttonPanel, BorderLayout.WEST);
+		panel.add(buttonPanel, BorderLayout.LINE_START);
 		panel.add(createSummaryPanel());
 		return panel;
 	}
@@ -318,7 +318,7 @@ public class ConditionTestPanel extends JPanel {
 
 	}
 
-	private class OverallProgressBar extends JPanel {
+	private static class OverallProgressBar extends JPanel {
 		private Color color;
 		private int maxProgress;
 		private int progress;
@@ -436,15 +436,13 @@ public class ConditionTestPanel extends JPanel {
 					icon = ERROR_ICON;
 					break;
 				case Cancelled:
-					icon = WARNING_ICON;
+                case Warning:
+                    icon = WARNING_ICON;
 					break;
 				case Passed:
 					icon = PASSED_ICON;
 					break;
-				case Warning:
-					icon = WARNING_ICON;
-					break;
-				case None:
+                case None:
 				case Skipped:
 					break;
 			}

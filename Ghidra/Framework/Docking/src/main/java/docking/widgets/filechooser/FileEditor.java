@@ -117,7 +117,7 @@ class FileEditor extends AbstractCellEditor implements TableCellEditor {
 			}
 		};
 
-		editor.add(iconLabel, BorderLayout.WEST);
+		editor.add(iconLabel, BorderLayout.LINE_START);
 		editor.add(nameField, BorderLayout.CENTER);
 
 		// match the spacing of non-editing cells

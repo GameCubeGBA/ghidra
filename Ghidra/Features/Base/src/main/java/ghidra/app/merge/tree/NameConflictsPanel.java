@@ -126,7 +126,7 @@ class NameConflictsPanel extends JPanel {
 		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
 		JPanel iconPanel = new JPanel();
-		iconPanel.setLayout(new BoxLayout(iconPanel, BoxLayout.X_AXIS));
+		iconPanel.setLayout(new BoxLayout(iconPanel, BoxLayout.LINE_AXIS));
 
 		conflictsLabel = new GDLabel("'My' name already exists in Latest Version");
 		ImageIcon icon = ResourceManager.loadImage("images/information.png");
@@ -149,12 +149,12 @@ class NameConflictsPanel extends JPanel {
 		group.add(originalRB);
 
 		JPanel rbPanel = new JPanel();
-		rbPanel.setLayout(new BoxLayout(rbPanel, BoxLayout.Y_AXIS));
+		rbPanel.setLayout(new BoxLayout(rbPanel, BoxLayout.PAGE_AXIS));
 		rbPanel.add(keepOtherRB);
 		rbPanel.add(addOrRenameRB);
 		rbPanel.add(originalRB);
 
-		panel.add(iconPanel, BorderLayout.NORTH);
+		panel.add(iconPanel, BorderLayout.PAGE_START);
 		panel.add(rbPanel, BorderLayout.CENTER);
 
 		add(panel);

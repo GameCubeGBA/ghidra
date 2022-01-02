@@ -151,7 +151,7 @@ public class PickProviderDialog extends DialogComponentProvider {
 		listPanel.setDoubleClickActionListener(e -> close());
 		JPanel workPanel = new JPanel(new BorderLayout());
 		MultiLineLabel mll = new MultiLineLabel("\nPlease select a script type:");
-		workPanel.add(mll, BorderLayout.NORTH);
+		workPanel.add(mll, BorderLayout.PAGE_START);
 		workPanel.add(listPanel, BorderLayout.CENTER);
 		return workPanel;
 	}

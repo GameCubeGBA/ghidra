@@ -868,7 +868,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 	}
 
 	private void setScope(final Namespace scope) {
-		runSwing(() -> namespacesComboBox.setSelectedItem(dialog.new NamespaceWrapper(scope)));
+		runSwing(() -> namespacesComboBox.setSelectedItem(new AddEditDialog.NamespaceWrapper(scope)));
 	}
 
 	private void addLabel(final Address addr) {

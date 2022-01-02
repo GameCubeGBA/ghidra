@@ -27,7 +27,7 @@ import ghidra.util.exception.NotFoundException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <CODE>MemoryDiff</CODE> determines where the memory differs between two programs as well as the
+ * {@code MemoryDiff} determines where the memory differs between two programs as well as the
  * types of differences.
  */
 public class MemoryDiff {

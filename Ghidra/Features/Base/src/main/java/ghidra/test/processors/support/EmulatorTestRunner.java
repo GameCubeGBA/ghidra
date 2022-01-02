@@ -626,7 +626,7 @@ public class EmulatorTestRunner {
 		HEX, DECIMAL, FLOAT;
 	}
 
-	private abstract class DumpPoint {
+	private abstract static class DumpPoint {
 		final Address breakAddr;
 		final int dumpSize;
 		final int elementSize;

@@ -113,7 +113,7 @@ class DockableToolBarManager {
 	}
 
 	JComponent getMenuCloseToolBar() {
-		JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+		JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEADING, 0, 0));
 		if (closeButtonManager == null) {
 			return panel;
 		}

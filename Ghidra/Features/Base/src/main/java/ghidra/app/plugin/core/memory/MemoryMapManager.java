@@ -235,7 +235,7 @@ class MemoryMapManager {
 		tool.executeBackgroundCommand(cmd, program);
 	}
 
-	private class SplitBlockCmd implements Command {
+	private static class SplitBlockCmd implements Command {
 
 		private MemoryBlock block;
 		private Address newStart;

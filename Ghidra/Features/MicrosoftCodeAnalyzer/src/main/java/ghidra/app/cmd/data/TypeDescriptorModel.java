@@ -543,7 +543,7 @@ public class TypeDescriptorModel extends AbstractCreateDataTypeModel {
 
 	/**
 	 * Determines the address where the TypeDescriptor structure would need to begin in order
-	 * for the type name to begin at the address specified by <code>typeNameAddress</code>.
+	 * for the type name to begin at the address specified by {@code typeNameAddress}.
 	 * @param program the program that would contain the TypeDescriptor.
 	 * @param typeNameAddress the address where the type descriptor name begins.
 	 * @return the base address of the TypeDescriptor or null.

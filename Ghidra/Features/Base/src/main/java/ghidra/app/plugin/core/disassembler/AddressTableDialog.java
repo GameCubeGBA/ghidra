@@ -159,7 +159,7 @@ public class AddressTableDialog extends DialogComponentProvider {
 		minLengthField.setName("Minimum Length");
 		minLengthField.setText(Integer.toString(DEFAULT_MINIMUM_TABLE_SIZE));
 
-		JPanel minLengthPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel minLengthPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
 		minLengthPanel.add(minLengthLabel);
 		minLengthPanel.add(minLengthField);
 
@@ -180,11 +180,11 @@ public class AddressTableDialog extends DialogComponentProvider {
 		skipLabel.setToolTipText("Number of bytes to skip between found addresses in a table.");
 		skipField.setText("0");
 
-		JPanel alignPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		JPanel alignPanel = new JPanel(new FlowLayout(FlowLayout.TRAILING));
 		alignPanel.add(alignLabel);
 		alignPanel.add(alignField);
 
-		JPanel skipPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		JPanel skipPanel = new JPanel(new FlowLayout(FlowLayout.TRAILING));
 		skipPanel.add(skipLabel);
 		skipPanel.add(skipField);
 
@@ -217,11 +217,11 @@ public class AddressTableDialog extends DialogComponentProvider {
 				"addresses in the current program.");
 		searchOptionsWestPanel.add(shiftedAddressButton);
 
-		searchOptionsPanel.add(optPanel, BorderLayout.EAST);
-		searchOptionsPanel.add(searchOptionsWestPanel, BorderLayout.WEST);
+		searchOptionsPanel.add(optPanel, BorderLayout.LINE_END);
+		searchOptionsPanel.add(searchOptionsWestPanel, BorderLayout.LINE_START);
 		JPanel findPanel = new JPanel(new FlowLayout());
 		findPanel.add(searchButton);
-		searchOptionsPanel.add(findPanel, BorderLayout.SOUTH);
+		searchOptionsPanel.add(findPanel, BorderLayout.PAGE_END);
 
 		JPanel makeOptionsPanel = new JPanel(new BorderLayout());
 		makeOptionsPanel.setBorder(BorderFactory.createTitledBorder("Make Table Options"));
@@ -277,8 +277,8 @@ public class AddressTableDialog extends DialogComponentProvider {
 		offsetPanel.add(viewOffsetLabel);
 		offsetPanel.add(viewOffset);
 
-		makeOptionsPanel.add(offsetPanel, BorderLayout.NORTH);
-		makeOptionsPanel.add(myButtonPanel, BorderLayout.SOUTH);
+		makeOptionsPanel.add(offsetPanel, BorderLayout.PAGE_START);
+		makeOptionsPanel.add(myButtonPanel, BorderLayout.PAGE_END);
 
 		// add panels to left panel
 		JPanel optionsPanel = new JPanel(new GridLayout(1, 2));
@@ -288,7 +288,7 @@ public class AddressTableDialog extends DialogComponentProvider {
 
 		// put sub-panels onto main panel    
 		mainPanel.add(resultsPanel, BorderLayout.CENTER);
-		mainPanel.add(optionsPanel, BorderLayout.SOUTH);
+		mainPanel.add(optionsPanel, BorderLayout.PAGE_END);
 
 		return mainPanel;
 	}

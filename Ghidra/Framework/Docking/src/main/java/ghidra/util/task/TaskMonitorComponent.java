@@ -194,13 +194,13 @@ public class TaskMonitorComponent extends JPanel implements TaskMonitor {
 	}
 
 	/**
-	 * Sets the <code>indeterminate</code> property of the progress bar,
+	 * Sets the {@code indeterminate} property of the progress bar,
 	 * which determines whether the progress bar is in determinate
 	 * or indeterminate mode.
 	 * <p>
 	 * An indeterminate progress bar continuously displays animation
 	 * indicating that an operation of unknown length is occurring.
-	 * By default, this property is <code>false</code>.
+	 * By default, this property is {@code false}.
 	 * Some look and feels might not support indeterminate progress bars;
 	 * they will ignore this property.
 	 *
@@ -276,10 +276,10 @@ public class TaskMonitorComponent extends JPanel implements TaskMonitor {
 	}
 
 	/**
-	 * Returns true if {@link #setIndeterminate(boolean)} with a value of <code>true</code> has
+	 * Returns true if {@link #setIndeterminate(boolean)} with a value of {@code true} has
 	 * been called.
 	 *
-	 * @return true if {@link #setIndeterminate(boolean)} with a value of <code>true</code> has
+	 * @return true if {@link #setIndeterminate(boolean)} with a value of {@code true} has
 	 * been called.
 	 */
 	@Override
@@ -322,7 +322,7 @@ public class TaskMonitorComponent extends JPanel implements TaskMonitor {
 		}
 
 		if (visible) {
-			add(cancelPanel, BorderLayout.EAST);
+			add(cancelPanel, BorderLayout.LINE_END);
 		}
 		else {
 			remove(cancelPanel);
@@ -343,7 +343,7 @@ public class TaskMonitorComponent extends JPanel implements TaskMonitor {
 		}
 		Runnable r = () -> {
 			if (visible) {
-				mainContentPanel.add(progressPanel, BorderLayout.EAST);
+				mainContentPanel.add(progressPanel, BorderLayout.LINE_END);
 			}
 			else {
 				mainContentPanel.remove(progressPanel);
@@ -433,7 +433,7 @@ public class TaskMonitorComponent extends JPanel implements TaskMonitor {
 
 	private synchronized void updateProgressPanel() {
 		if (showingProgress) {
-			progressBarPanel.add(progressBar, BorderLayout.NORTH);
+			progressBarPanel.add(progressBar, BorderLayout.PAGE_START);
 		}
 		else {
 			progressBarPanel.remove(progressBar);
@@ -495,7 +495,7 @@ public class TaskMonitorComponent extends JPanel implements TaskMonitor {
 
 		mainContentPanel = new JPanel(new BorderLayout());
 		mainContentPanel.add(progressBarPanel, BorderLayout.CENTER);
-		mainContentPanel.add(progressPanel, BorderLayout.EAST);
+		mainContentPanel.add(progressPanel, BorderLayout.LINE_END);
 
 		ImageIcon icon = Icons.STOP_ICON;
 		cancelButton = new EmptyBorderButton(icon);
@@ -510,11 +510,11 @@ public class TaskMonitorComponent extends JPanel implements TaskMonitor {
 
 		if (includeCancelButton) {
 			cancelPanel = new JPanel();
-			cancelPanel.setLayout(new BoxLayout(cancelPanel, BoxLayout.Y_AXIS));
+			cancelPanel.setLayout(new BoxLayout(cancelPanel, BoxLayout.PAGE_AXIS));
 			cancelPanel.add(Box.createVerticalGlue());
 			cancelPanel.add(cancelButton);
 			cancelPanel.add(Box.createVerticalGlue());
-			add(cancelPanel, BorderLayout.EAST);
+			add(cancelPanel, BorderLayout.LINE_END);
 		}
 	}
 }

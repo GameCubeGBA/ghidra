@@ -182,14 +182,13 @@ public class FunctionRecord extends DatabaseObject implements FidHashQuad {
 	 */
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(NumericUtilities.toHexString(getID()));
-		sb.append(" - ");
-		sb.append(getName());
-		sb.append(" (");
-		sb.append(NumericUtilities.toHexString(getLibraryID()));
-		sb.append(")");
-		return sb.toString();
+        String sb = NumericUtilities.toHexString(getID()) +
+                " - " +
+                getName() +
+                " (" +
+                NumericUtilities.toHexString(getLibraryID()) +
+                ")";
+		return sb;
 	}
 
 	/**

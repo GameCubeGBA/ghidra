@@ -17,13 +17,13 @@ package db.buffers;
 
 import java.io.IOException;
 
+@FunctionalInterface
 public interface BlockStreamHandle<T extends BlockStream> {
 
 	/**
 	 * Invoked by client to establish the remote connection and return 
 	 * the opened block stream.
 	 * @return connected/open block stream
-	 * @throws IOException
 	 */
 	T openBlockStream() throws IOException;
 	

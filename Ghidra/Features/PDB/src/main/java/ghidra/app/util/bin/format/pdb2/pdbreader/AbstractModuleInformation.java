@@ -215,42 +215,37 @@ public abstract class AbstractModuleInformation {
 	 * @return {@link String} of pretty output.
 	 */
 	String dump() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("ModuleInformation-------------------------------------------\n");
-		builder.append("modulePointer: ");
-		builder.append(modulePointer);
-		builder.append("\n");
-		builder.append(sectionContribution.dump());
-		builder.append("\nwrittenSinceOpen: ");
-		builder.append(writtenSinceOpen);
 
-		builder.append("\necSymbolicInformationEnabled: ");
-		builder.append(ecSymbolicInformationEnabled);
-
-		builder.append("\nspare: ");
-		builder.append(spare);
-		builder.append("\nindexToTSMList: ");
-		builder.append(indexToTSMList);
-		builder.append("\nstreamNumberDebugInformation: ");
-		builder.append(streamNumberDebugInformation);
-		builder.append("\nsizeLocalSymbolsDebugInformation: ");
-		builder.append(sizeLocalSymbolsDebugInformation);
-		builder.append("\nsizeLineNumberDebugInformation: ");
-		builder.append(sizeLineNumberDebugInformation);
-		builder.append("\nsizeC13StyleLineNumberInformation: ");
-		builder.append(sizeC13StyleLineNumberInformation);
-		builder.append("\nnumFilesContributing: ");
-		builder.append(numFilesContributing);
-
-		builder.append(dumpAdditionals());
-
-		builder.append("\nmoduleName: ");
-		builder.append(moduleName);
-		builder.append("\nobjectFileName: ");
-		builder.append(objectFileName);
-
-		builder.append("\nEnd ModuleInformation---------------------------------------\n");
-		return builder.toString();
+        String builder = "ModuleInformation-------------------------------------------\n" +
+                "modulePointer: " +
+                modulePointer +
+                "\n" +
+                sectionContribution.dump() +
+                "\nwrittenSinceOpen: " +
+                writtenSinceOpen +
+                "\necSymbolicInformationEnabled: " +
+                ecSymbolicInformationEnabled +
+                "\nspare: " +
+                spare +
+                "\nindexToTSMList: " +
+                indexToTSMList +
+                "\nstreamNumberDebugInformation: " +
+                streamNumberDebugInformation +
+                "\nsizeLocalSymbolsDebugInformation: " +
+                sizeLocalSymbolsDebugInformation +
+                "\nsizeLineNumberDebugInformation: " +
+                sizeLineNumberDebugInformation +
+                "\nsizeC13StyleLineNumberInformation: " +
+                sizeC13StyleLineNumberInformation +
+                "\nnumFilesContributing: " +
+                numFilesContributing +
+                dumpAdditionals() +
+                "\nmoduleName: " +
+                moduleName +
+                "\nobjectFileName: " +
+                objectFileName +
+                "\nEnd ModuleInformation---------------------------------------\n";
+		return builder;
 	}
 
 }

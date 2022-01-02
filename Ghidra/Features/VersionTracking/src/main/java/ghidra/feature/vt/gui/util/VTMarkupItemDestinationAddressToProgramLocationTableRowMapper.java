@@ -36,11 +36,11 @@ public class VTMarkupItemDestinationAddressToProgramLocationTableRowMapper exten
 			ProgramLocationTableColumn<ProgramLocation, COLUMN_TYPE> programColumn =
 				(ProgramLocationTableColumn<ProgramLocation, COLUMN_TYPE>) destinationColumn;
 			return new VTMarkupItemDestinationWrappedMappedProgramLocationTableColumn<COLUMN_TYPE>(
-				this, programColumn);
+					this, programColumn);
 		}
 
 		return new VTMarkupItemDestinationWrappedMappedTableColumn<COLUMN_TYPE>(this,
-			destinationColumn);
+				destinationColumn);
 	}
 
 	@Override
@@ -53,7 +53,7 @@ public class VTMarkupItemDestinationAddressToProgramLocationTableRowMapper exten
 		return null;
 	}
 
-	private class VTMarkupItemDestinationWrappedMappedProgramLocationTableColumn<COLUMN_TYPE>
+	private static class VTMarkupItemDestinationWrappedMappedProgramLocationTableColumn<COLUMN_TYPE>
 			extends MappedProgramLocationTableColumn<VTMarkupItem, ProgramLocation, COLUMN_TYPE> {
 
 		public VTMarkupItemDestinationWrappedMappedProgramLocationTableColumn(
@@ -79,7 +79,7 @@ public class VTMarkupItemDestinationAddressToProgramLocationTableRowMapper exten
 		}
 	}
 
-	private class VTMarkupItemDestinationWrappedMappedTableColumn<COLUMN_TYPE> extends
+	private static class VTMarkupItemDestinationWrappedMappedTableColumn<COLUMN_TYPE> extends
 			MappedTableColumn<VTMarkupItem, ProgramLocation, COLUMN_TYPE, Program> {
 
 		public VTMarkupItemDestinationWrappedMappedTableColumn(

@@ -20,7 +20,7 @@ import ghidra.program.model.mem.MemBuffer;
 import ghidra.program.model.mem.MemoryAccessException;
 
 /**
- * <code>InstructionContext</code> is utilized by a shared instruction prototype to
+ * {@code InstructionContext} is utilized by a shared instruction prototype to
  * access all relevant instruction data and context-register storage needed during 
  * instruction parse and semantic pcode generation. 
  */

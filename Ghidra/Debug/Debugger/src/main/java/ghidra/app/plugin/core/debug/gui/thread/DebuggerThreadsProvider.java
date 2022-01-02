@@ -556,7 +556,7 @@ public class DebuggerThreadsProvider extends ComponentProviderAdapter {
 		mainPanel.add(new JScrollPane(threadTable));
 
 		threadFilterPanel = new GhidraTableFilterPanel<>(threadTable, threadTableModel);
-		mainPanel.add(threadFilterPanel, BorderLayout.SOUTH);
+		mainPanel.add(threadFilterPanel, BorderLayout.PAGE_END);
 
 		threadTable.getSelectionModel().addListSelectionListener(this::threadRowSelected);
 		threadTable.addMouseListener(new MouseAdapter() {
@@ -602,7 +602,7 @@ public class DebuggerThreadsProvider extends ComponentProviderAdapter {
 			public void mouseReleased(MouseEvent e) {
 			}
 		});
-		mainPanel.add(traceTabs, BorderLayout.NORTH);
+		mainPanel.add(traceTabs, BorderLayout.PAGE_START);
 
 		TableColumnModel columnModel = threadTable.getColumnModel();
 		TableColumn colName = columnModel.getColumn(ThreadTableColumns.NAME.ordinal());

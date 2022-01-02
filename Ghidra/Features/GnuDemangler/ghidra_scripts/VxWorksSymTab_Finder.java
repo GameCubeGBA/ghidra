@@ -91,7 +91,7 @@ public class VxWorksSymTab_Finder extends GhidraScript {
 	// Contains a SYMBOL data type representing a VxWorks symbol table entry
 	// and several associated methods.
 	//------------------------------------------------------------------------
-	private class VxSymbol {
+	private static class VxSymbol {
 
 		StructureDataType dt = null;
 		int nameOffset = 0;

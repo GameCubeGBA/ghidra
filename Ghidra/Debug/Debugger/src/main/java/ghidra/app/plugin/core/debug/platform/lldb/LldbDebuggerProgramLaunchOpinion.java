@@ -52,7 +52,7 @@ public class LldbDebuggerProgramLaunchOpinion implements DebuggerProgramLaunchOp
 		}
 	}
 
-	protected class InVmLldbDebuggerProgramLaunchOffer
+	protected static class InVmLldbDebuggerProgramLaunchOffer
 			extends AbstractLldbDebuggerProgramLaunchOffer {
 		private static final String FACTORY_CLS_NAME = "agent.lldb.LldbInJvmDebuggerModelFactory";
 
@@ -72,7 +72,7 @@ public class LldbDebuggerProgramLaunchOpinion implements DebuggerProgramLaunchOp
 		}
 	}
 
-	protected class GadpLldbDebuggerProgramLaunchOffer
+	protected static class GadpLldbDebuggerProgramLaunchOffer
 			extends AbstractLldbDebuggerProgramLaunchOffer {
 		private static final String FACTORY_CLS_NAME =
 			"agent.lldb.gadp.LldbLocalDebuggerModelFactory";

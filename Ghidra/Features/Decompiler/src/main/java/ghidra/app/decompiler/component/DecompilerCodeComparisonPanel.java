@@ -373,7 +373,7 @@ public abstract class DecompilerCodeComparisonPanel<T extends DualDecompilerFiel
 		}
 		topComp = comp;
 		if (topComp != null) {
-			add(topComp, BorderLayout.NORTH);
+			add(topComp, BorderLayout.PAGE_START);
 		}
 		validate();
 	}
@@ -392,7 +392,7 @@ public abstract class DecompilerCodeComparisonPanel<T extends DualDecompilerFiel
 		validate(); // Since we are removing this while the panel is on the screen.
 		bottomComp = comp;
 		if (bottomComp != null) {
-			add(bottomComp, BorderLayout.SOUTH);
+			add(bottomComp, BorderLayout.PAGE_END);
 		}
 		validate(); // Since we are adding this while the panel is on the screen.
 	}

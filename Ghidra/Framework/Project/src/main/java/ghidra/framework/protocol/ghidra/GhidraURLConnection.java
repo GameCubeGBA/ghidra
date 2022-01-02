@@ -131,7 +131,7 @@ public class GhidraURLConnection extends URLConnection {
 	}
 
 	/**
-	 * Gets the repository name associated with this <code>GhidraURLConnection</code>.
+	 * Gets the repository name associated with this {@code GhidraURLConnection}.
 	 * 
 	 * @return the repository name or null if URL does not identify a specific repository
 	 */

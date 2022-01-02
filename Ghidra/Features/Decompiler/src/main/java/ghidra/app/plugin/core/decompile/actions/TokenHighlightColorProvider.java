@@ -22,6 +22,7 @@ import ghidra.app.decompiler.ClangToken;
 /**
  * Provides highlight color for the given token
  */
+@FunctionalInterface
 public interface TokenHighlightColorProvider {
 
 	/**

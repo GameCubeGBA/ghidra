@@ -260,12 +260,11 @@ public class DWARFLine {
 
 		@Override
 		public String toString() {
-			StringBuffer buffer = new StringBuffer();
-			buffer.append("Filename: ");
-			buffer.append(this.name);
-			buffer.append(" Length: ");
-			buffer.append(Long.toHexString(this.length));
-			return buffer.toString();
+            String buffer = "Filename: " +
+                    this.name +
+                    " Length: " +
+                    Long.toHexString(this.length);
+			return buffer;
 		}
 	}
 

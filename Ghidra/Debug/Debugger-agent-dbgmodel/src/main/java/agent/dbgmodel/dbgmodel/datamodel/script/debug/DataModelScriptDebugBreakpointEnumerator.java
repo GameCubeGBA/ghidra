@@ -20,5 +20,6 @@ import agent.dbgmodel.dbgmodel.UnknownEx;
 /**
  * A wrapper for {@code IDataModelScriptDebugBreakpointEnumerator} and its newer variants.
  */
+@FunctionalInterface
 public interface DataModelScriptDebugBreakpointEnumerator extends UnknownEx {
 }

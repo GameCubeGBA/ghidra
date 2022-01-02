@@ -106,7 +106,7 @@ public class DexToSmaliFileSystem extends GFileSystemBase {
 			new File(baseTempPath + File.separator + "ghidra_file_system_" + rand);
 
 		String bootClassPath = "core.jar:ext.jar:framework.jar:android.policy.jar:services.jar";
-		StringBuffer extraBootClassPathEntries = new StringBuffer();
+        String extraBootClassPathEntries = "";
 
 		List<String> bootClassPathDirs = new ArrayList<>();
 		bootClassPathDirs.add(".");
@@ -121,7 +121,7 @@ public class DexToSmaliFileSystem extends GFileSystemBase {
 
 		baksmali.disassembleDexFile(dexFileFile.getPath(), dexFile, isDeOdex,
 			tempOutputDirectory.getPath(), bootClassPathDirsArray, bootClassPath,
-			extraBootClassPathEntries.toString(), isNoParameterRegisters, isUseLocalsDirective,
+                extraBootClassPathEntries, isNoParameterRegisters, isUseLocalsDirective,
 			isUseSequentialLabels, isOutputDebugInfo, isAddCodeOffsets, isNoAccessorComments,
 			registerInfo, isVerify, isIgnoreErrors, inlineTable, isCheckPackagePrivateAccess);
 

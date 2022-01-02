@@ -911,7 +911,7 @@ public class ProgramBuilder {
 		ProgramModule m;
 		try {
 			ProgramModule rootModule = program.getListing().getRootModule(treeName);
-			if (modulePath == null || modulePath.length() == 0) {
+			if (modulePath == null || modulePath.isEmpty()) {
 				return rootModule;
 			}
 			String[] modules = modulePath.split("\\.");
@@ -1139,7 +1139,8 @@ public class ProgramBuilder {
 		}
 	}
 
-	private interface ExceptionalSupplier<R, E extends Exception> {
-		public R get() throws E;
+	@FunctionalInterface
+    private interface ExceptionalSupplier<R, E extends Exception> {
+		R get() throws E;
 	}
 }

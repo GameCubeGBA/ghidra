@@ -416,7 +416,7 @@ public class SpecExtensionPanel extends JPanel {
 		JPanel lowerPanel = createButtonPanel();
 		centerPanel.add(sp, BorderLayout.CENTER);
 		add(centerPanel, BorderLayout.CENTER);
-		add(lowerPanel, BorderLayout.SOUTH);
+		add(lowerPanel, BorderLayout.PAGE_END);
 	}
 
 	private static File getStartingDir() {
@@ -716,7 +716,7 @@ public class SpecExtensionPanel extends JPanel {
 			});
 		});
 
-		JPanel containerPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		JPanel containerPanel = new JPanel(new FlowLayout(FlowLayout.TRAILING));
 		containerPanel.add(importButton);
 		containerPanel.add(exportButton);
 		containerPanel.add(removeButton);

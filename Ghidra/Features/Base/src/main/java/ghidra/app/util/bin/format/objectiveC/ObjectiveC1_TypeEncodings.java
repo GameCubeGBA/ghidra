@@ -398,15 +398,12 @@ public final class ObjectiveC1_TypeEncodings {
 				DataType dt = parseDataType(buffer);
 				return new TypedefDataType("OUT " + dt.getDisplayName(), dt);
 			}
-			case _C_BYCOPY: {
+			case _C_BYCOPY:
+            case _C_BYREF: {
 				buffer.deleteCharAt(0);
 				return parseDataType(buffer);
 			}
-			case _C_BYREF: {
-				buffer.deleteCharAt(0);
-				return parseDataType(buffer);
-			}
-			case _C_ONEWAY: {
+            case _C_ONEWAY: {
 				buffer.deleteCharAt(0);
 				DataType dt = parseDataType(buffer);
 				return new TypedefDataType("ONEWAY " + dt.getDisplayName(), dt);

@@ -105,7 +105,7 @@ class MemoryMergePanel extends JPanel {
 		setLayout(new BorderLayout());
 
 		JPanel boxPanel = new JPanel();
-		boxPanel.setLayout(new BoxLayout(boxPanel, BoxLayout.Y_AXIS));
+		boxPanel.setLayout(new BoxLayout(boxPanel, BoxLayout.PAGE_AXIS));
 
 		cardLayout = new CardLayout();
 		cardPanel = new JPanel(cardLayout);
@@ -130,7 +130,7 @@ class MemoryMergePanel extends JPanel {
 		boxPanel.add(cardPanel);
 
 		add(boxPanel, BorderLayout.CENTER);
-		add(createUseForAllCheckBox(), BorderLayout.SOUTH);
+		add(createUseForAllCheckBox(), BorderLayout.PAGE_END);
 	}
 
 	private JCheckBox createUseForAllCheckBox() {

@@ -879,16 +879,16 @@ public class FrontEndPlugin extends Plugin
 		connectionLabel = new GLabel();
 		connectionIconPanel.add(connectionLabel);
 		connectionPanel.add(repositoryLabel, BorderLayout.CENTER);
-		connectionPanel.add(connectionIconPanel, BorderLayout.EAST);
+		connectionPanel.add(connectionIconPanel, BorderLayout.LINE_END);
 
 		// construct the main panel to contain the toolbar and
 		// data tree panels (active and read-only views)
 		JPanel mainPanel = new JPanel(new BorderLayout());
-		mainPanel.add(toolBar, BorderLayout.NORTH);
+		mainPanel.add(toolBar, BorderLayout.PAGE_START);
 		mainPanel.add(projectDataPanel, BorderLayout.CENTER);
 
 		JPanel bottomPane = new JPanel();
-		bottomPane.setLayout(new BoxLayout(bottomPane, BoxLayout.Y_AXIS));
+		bottomPane.setLayout(new BoxLayout(bottomPane, BoxLayout.PAGE_AXIS));
 		bottomPane.add(workspacePanel);
 		bottomPane.add(Box.createVerticalGlue());
 		bottomPane.add(Box.createVerticalStrut(2));
@@ -899,7 +899,7 @@ public class FrontEndPlugin extends Plugin
 
 		mainGuiPanel = new JPanel(new BorderLayout(5, 5));
 		mainGuiPanel.add(mainPanel, BorderLayout.CENTER);
-		mainGuiPanel.add(bottomPane, BorderLayout.SOUTH);
+		mainGuiPanel.add(bottomPane, BorderLayout.PAGE_END);
 	}
 
 	private void createToolButtonActions() {

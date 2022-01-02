@@ -444,7 +444,8 @@ public class FrontEndTestEnv {
 		}
 	}
 
-	public interface ModifyProgramCallback {
-		public void call(Program p) throws Exception;
+	@FunctionalInterface
+    public interface ModifyProgramCallback {
+		void call(Program p) throws Exception;
 	}
 }

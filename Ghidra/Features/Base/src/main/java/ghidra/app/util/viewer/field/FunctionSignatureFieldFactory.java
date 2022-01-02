@@ -216,7 +216,7 @@ public class FunctionSignatureFieldFactory extends FieldFactory {
 
 			if (i != lastParam) { // separator
 				textElements.add(
-					new FunctionSignatureFieldElement(commaSeparator, elementIndex, 0, startCol));
+						new FunctionSignatureFieldElement(commaSeparator, elementIndex, 0, startCol));
 				startCol += commaSeparator.length();
 				paramOffset += commaSeparator.length();
 				elementIndex++;
@@ -227,7 +227,7 @@ public class FunctionSignatureFieldFactory extends FieldFactory {
 		if (function.hasVarArgs()) {
 			if (params.length > 0) {
 				textElements.add(
-					new FunctionSignatureFieldElement(commaSeparator, elementIndex, 0, startCol));
+						new FunctionSignatureFieldElement(commaSeparator, elementIndex, 0, startCol));
 				startCol += commaSeparator.length();
 				paramOffset += commaSeparator.length();
 				elementIndex++;
@@ -436,7 +436,7 @@ public class FunctionSignatureFieldFactory extends FieldFactory {
 //==================================================================================================
 // Support FieldElement classes
 //==================================================================================================
-	class FunctionSignatureFieldElement extends AbstractTextFieldElement {
+static class FunctionSignatureFieldElement extends AbstractTextFieldElement {
 		int functionSigIndex;
 
 		/**

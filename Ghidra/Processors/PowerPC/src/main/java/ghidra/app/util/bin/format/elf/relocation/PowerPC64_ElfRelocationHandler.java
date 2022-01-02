@@ -110,7 +110,8 @@ public class PowerPC64_ElfRelocationHandler extends ElfRelocationHandler {
 					symbolIndex, "Runtime copy not supported", elfRelocationContext.getLog());
 				break;
 			case PowerPC64_ElfRelocationConstants.R_PPC64_ADDR32:
-				newValue = (int) (symbolValue + addend);
+            case PowerPC64_ElfRelocationConstants.R_PPC64_UADDR32:
+                newValue = (int) (symbolValue + addend);
 				memory.setInt(relocationAddress, newValue);
 				break;
 			case PowerPC64_ElfRelocationConstants.R_PPC64_ADDR24:
@@ -120,14 +121,12 @@ public class PowerPC64_ElfRelocationHandler extends ElfRelocationHandler {
 				memory.setInt(relocationAddress, newValue);
 				break;
 			case PowerPC64_ElfRelocationConstants.R_PPC64_ADDR16:
-				newValue = (int) (symbolValue + addend);
+            case PowerPC64_ElfRelocationConstants.R_PPC64_UADDR16:
+            case PowerPC64_ElfRelocationConstants.R_PPC64_ADDR16_LO:
+                newValue = (int) (symbolValue + addend);
 				memory.setShort(relocationAddress, (short) newValue);
 				break;
-			case PowerPC64_ElfRelocationConstants.R_PPC64_ADDR16_LO:
-				newValue = (int) (symbolValue + addend);
-				memory.setShort(relocationAddress, (short) newValue);
-				break;
-			case PowerPC64_ElfRelocationConstants.R_PPC64_TOC16_LO:
+            case PowerPC64_ElfRelocationConstants.R_PPC64_TOC16_LO:
 				newValue = (int) (symbolValue + addend - toc);
 				memory.setShort(relocationAddress, (short) newValue);
 				break;
@@ -211,15 +210,7 @@ public class PowerPC64_ElfRelocationHandler extends ElfRelocationHandler {
 					memory.setBytes(relocationAddress, bytes);
 				}
 				break;
-			case PowerPC64_ElfRelocationConstants.R_PPC64_UADDR32:
-				newValue = (int) (symbolValue + addend);
-				memory.setInt(relocationAddress, newValue);
-				break;
-			case PowerPC64_ElfRelocationConstants.R_PPC64_UADDR16:
-				newValue = (int) (symbolValue + addend);
-				memory.setShort(relocationAddress, (short) newValue);
-				break;
-			case PowerPC64_ElfRelocationConstants.R_PPC64_UADDR64:
+            case PowerPC64_ElfRelocationConstants.R_PPC64_UADDR64:
 			case PowerPC64_ElfRelocationConstants.R_PPC64_ADDR64:
 			case PowerPC64_ElfRelocationConstants.R_PPC64_GLOB_DAT:
 				if (addend != 0 && isUnsupportedExternalRelocation(program, relocationAddress,

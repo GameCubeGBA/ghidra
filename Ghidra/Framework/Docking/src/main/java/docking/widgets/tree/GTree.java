@@ -270,7 +270,7 @@ public class GTree extends JPanel implements BusyListener {
 
 		mouseListenerDelegate = createMouseListenerDelegate();
 		filterProvider = new DefaultGTreeFilterProvider(this);
-		add(filterProvider.getFilterComponent(), BorderLayout.SOUTH);
+		add(filterProvider.getFilterComponent(), BorderLayout.PAGE_END);
 	}
 
 	public void setCellRenderer(GTreeRenderer renderer) {
@@ -338,7 +338,7 @@ public class GTree extends JPanel implements BusyListener {
 	 * state.
 	 * <p>
 	 * <b>Note: </b>See the usage note at the header of this class concerning how tree state
-	 * is used relative to the <code>equals()</code> method.
+	 * is used relative to the {@code equals()} method.
 	 * @return the saved state
 	 */
 	public GTreeState getTreeState() {
@@ -354,7 +354,7 @@ public class GTree extends JPanel implements BusyListener {
 	 * state object.
 	 * <p>
 	 * <b>Note: </b>See the usage note at the header of this class concerning how tree state
-	 * is used relative to the <code>equals()</code> method.
+	 * is used relative to the {@code equals()} method.
 	 * 
 	 * @param state the state to restore
 	 *
@@ -671,7 +671,7 @@ public class GTree extends JPanel implements BusyListener {
 		add(mainPanel, BorderLayout.CENTER);
 		JComponent filterComponent = filterProvider.getFilterComponent();
 		if (filterComponent != null) {
-			add(filterComponent, BorderLayout.SOUTH);
+			add(filterComponent, BorderLayout.PAGE_END);
 		}
 		filterProvider.setDataTransformer(transformer);
 		updateModelFilter();
@@ -1051,7 +1051,7 @@ public class GTree extends JPanel implements BusyListener {
 	}
 
 	/**
-	 * Passing a value of <code>false</code> signals to disable the {@link JTree}'s default behavior
+	 * Passing a value of {@code false} signals to disable the {@link JTree}'s default behavior
 	 * of showing handles for leaf nodes until they are opened.
 	 *
 	 * @param enable False to disable the default JTree behavior
@@ -1071,7 +1071,7 @@ public class GTree extends JPanel implements BusyListener {
 	private void showProgressPanel(boolean show) {
 		if (show) {
 			progressPanel = monitor;
-			mainPanel.add(progressPanel, BorderLayout.SOUTH);
+			mainPanel.add(progressPanel, BorderLayout.PAGE_END);
 			progressPanel.invalidate();
 		}
 		else if (progressPanel != null) {

@@ -27,7 +27,7 @@ import ghidra.util.datastruct.IntIntHashtable;
 import ghidra.util.exception.NoValueException;
 
 /**
- * <code>VersionFileHandler</code> allows a set of VersionFile's to be used in
+ * {@code VersionFileHandler} allows a set of VersionFile's to be used in
  * the dynamic reconstruction of an older BufferFile.  In an attempt to
  * conserve file handles, only one VersionFile is held open at any point
  * in time.

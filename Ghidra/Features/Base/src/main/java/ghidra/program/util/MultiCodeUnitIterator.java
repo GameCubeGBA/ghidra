@@ -21,7 +21,7 @@ import ghidra.program.model.address.AddressSetView;
 import ghidra.program.model.listing.*;
 
 /**
- * <CODE>MultiCodeUnitIterator</CODE> is a class for iterating through multiple
+ * {@code MultiCodeUnitIterator} is a class for iterating through multiple
  * code unit iterators simultaneously. The next() method returns an array 
  * of code units, since a code unit can be obtained from neither, either, or
  * both of the original code unit iterators.

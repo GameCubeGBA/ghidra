@@ -167,8 +167,8 @@ public class MethodInfoJava implements StructConverter {
 	 * Return a text representation of this methods signature.  
 	 * Here are some examples:
 	 * <DL>
-	 *  <DD><CODE>"public int foo(int bar)"</CODE></DD>
-	 *  <DD><CODE>"public static final float foo(double bar)"</CODE></DD>
+	 *  <DD>{@code "public int foo(int bar)"}</DD>
+	 *  <DD>{@code "public static final float foo(double bar)"}</DD>
 	 * </DL>
 	 * Note: only access flags that map to Java modifier keywords are returned.
 	 * @param access the mask of flags denoting access permission.

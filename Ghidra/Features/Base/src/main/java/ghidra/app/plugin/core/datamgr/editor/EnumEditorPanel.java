@@ -315,7 +315,7 @@ class EnumEditorPanel extends JPanel {
 				.setCellEditor(
 					new EnumLongCellEditor());
 		table.setDefaultRenderer(String.class, cellRenderer);
-		add(createInfoPanel(), BorderLayout.SOUTH);
+		add(createInfoPanel(), BorderLayout.PAGE_END);
 
 	}
 
@@ -364,7 +364,7 @@ class EnumEditorPanel extends JPanel {
 	private JPanel createInfoPanel() {
 
 		JPanel outerPanel = new JPanel();
-		outerPanel.setLayout(new BoxLayout(outerPanel, BoxLayout.Y_AXIS));
+		outerPanel.setLayout(new BoxLayout(outerPanel, BoxLayout.PAGE_AXIS));
 		outerPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		JPanel descPanel = createDescriptionPanel();
 		outerPanel.add(createNamePanel());
@@ -381,7 +381,7 @@ class EnumEditorPanel extends JPanel {
 		nameField.setName("Name");
 
 		JPanel panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+		panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
 
 		JLabel label = new GLabel("Name:", SwingConstants.RIGHT);
 		label.setPreferredSize(new Dimension(descLabel.getPreferredSize()));
@@ -397,7 +397,7 @@ class EnumEditorPanel extends JPanel {
 		descField.setName("Description");
 
 		JPanel panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+		panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
 
 		descLabel = new GDLabel("Description:", SwingConstants.RIGHT);
 
@@ -410,7 +410,7 @@ class EnumEditorPanel extends JPanel {
 
 	private JPanel createCategoryPanel() {
 		JPanel panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+		panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
 
 		categoryField = new JTextField(24);
 		categoryField.setEditable(false);
@@ -499,7 +499,7 @@ class EnumEditorPanel extends JPanel {
 // Inner Classes
 //==================================================================================================	
 
-	private class EnumTable extends GhidraTable {
+	private static class EnumTable extends GhidraTable {
 		EnumTable(TableModel model) {
 			super(model);
 			setAutoEditEnabled(true);
@@ -621,7 +621,7 @@ class EnumEditorPanel extends JPanel {
 		}
 	}
 
-	private class EnumCellRenderer extends GTableCellRenderer {
+	private static class EnumCellRenderer extends GTableCellRenderer {
 		// Might just be kruft, now...
 	}
 }

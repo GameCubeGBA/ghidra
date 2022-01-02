@@ -1325,7 +1325,7 @@ public class CppCompositeType {
 	//----------------------------------------------------------------------------------------------
 	//----------------------------------------------------------------------------------------------
 	//----------------------------------------------------------------------------------------------
-	private abstract class BaseClass {
+	private abstract static class BaseClass {
 		// In the future, if CppClassType is a formal DataType, then we want to be able to get
 		// an already-formed unique class from the DTM.  There is no reason to have a base
 		// class duplicated as individually created components of DirectBaseClasses.
@@ -1356,10 +1356,9 @@ public class CppCompositeType {
 
 		@Override
 		public String toString() {
-			StringBuilder builder = new StringBuilder();
-			builder.append(attributes);
-			builder.append(baseClassType.getName());
-			return builder.toString();
+            String builder = attributes +
+                    baseClassType.getName();
+			return builder;
 		}
 
 		Composite getDirectDataType() {
@@ -1512,7 +1511,7 @@ public class CppCompositeType {
 	//TODO: look into nested type
 	//TODO: look into nested typedef
 
-	private abstract class AbstractMember {
+	private abstract static class AbstractMember {
 		private String memberName;
 		private DataType dataType;
 		private boolean isFlexibleArray;

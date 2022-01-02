@@ -25,7 +25,7 @@ import agent.gdb.pty.linux.LinuxPtyFactory;
 import ghidra.dbg.gadp.server.AbstractGadpServer;
 
 public class GdbGadpServerImpl implements GdbGadpServer {
-	public class GadpSide extends AbstractGadpServer {
+	public static class GadpSide extends AbstractGadpServer {
 		public GadpSide(GdbModelImpl model, SocketAddress addr) throws IOException {
 			super(model, addr);
 		}

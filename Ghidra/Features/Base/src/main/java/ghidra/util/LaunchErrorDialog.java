@@ -59,7 +59,7 @@ public class LaunchErrorDialog extends JDialog {
 
 		JPanel workPanel = new JPanel();
 		workPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-		workPanel.setLayout(new BoxLayout(workPanel, BoxLayout.Y_AXIS));
+		workPanel.setLayout(new BoxLayout(workPanel, BoxLayout.PAGE_AXIS));
 
 		JPanel innerPanel = createInnerWidgetPanel();
 		workPanel.add(Box.createVerticalGlue());
@@ -67,7 +67,7 @@ public class LaunchErrorDialog extends JDialog {
 		workPanel.add(Box.createVerticalGlue());
 
 		rootPanel.add(workPanel);
-		rootPanel.add(createButtonPanel(), BorderLayout.SOUTH);
+		rootPanel.add(createButtonPanel(), BorderLayout.PAGE_END);
 
 		return rootPanel;
 	}
@@ -114,7 +114,7 @@ public class LaunchErrorDialog extends JDialog {
 		widgetPanel.setMaximumSize(widgetPanel.getPreferredSize());
 
 		innerPanel.add(widgetPanel);
-		innerPanel.add(iconLabel, BorderLayout.WEST);
+		innerPanel.add(iconLabel, BorderLayout.LINE_START);
 
 		return innerPanel;
 	}

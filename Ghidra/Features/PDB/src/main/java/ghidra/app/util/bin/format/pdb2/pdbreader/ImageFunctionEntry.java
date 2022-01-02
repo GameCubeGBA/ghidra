@@ -69,13 +69,12 @@ public class ImageFunctionEntry {
 	 * @return the {@link String} output.
 	 */
 	String dump() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("ImageFunctionEntry------------------------------------------\n");
-		builder.append(String.format("startingAddress: 0X%08X\n", startingAddress));
-		builder.append(String.format("endingAddress: 0X%08X\n", endingAddress));
-		builder.append(String.format("endOfPrologueAddress: 0X%08X\n", endOfPrologueAddress));
-		builder.append("End ImageFunctionEntry--------------------------------------\n");
-		return builder.toString();
+        String builder = "ImageFunctionEntry------------------------------------------\n" +
+                String.format("startingAddress: 0X%08X\n", startingAddress) +
+                String.format("endingAddress: 0X%08X\n", endingAddress) +
+                String.format("endOfPrologueAddress: 0X%08X\n", endOfPrologueAddress) +
+                "End ImageFunctionEntry--------------------------------------\n";
+		return builder;
 	}
 
 }

@@ -66,7 +66,8 @@ public class GadpClientServerTest implements AsyncTestUtils {
 	public static final long TIMEOUT_MILLISECONDS =
 		SystemUtilities.isInTestingBatchMode() ? 5000 : Long.MAX_VALUE;
 
-	protected interface DecoratedAsyncByteChannel extends AsynchronousByteChannel {
+	@FunctionalInterface
+    protected interface DecoratedAsyncByteChannel extends AsynchronousByteChannel {
 		AsynchronousByteChannel getDelegate();
 
 		@Override

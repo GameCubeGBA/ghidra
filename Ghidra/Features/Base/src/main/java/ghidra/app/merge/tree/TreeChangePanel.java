@@ -91,11 +91,11 @@ class TreeChangePanel extends JPanel {
 		structurePanel.add(structureLabel);
 
 		JPanel labelPanel = new JPanel();
-		labelPanel.setLayout(new BoxLayout(labelPanel, BoxLayout.Y_AXIS));
+		labelPanel.setLayout(new BoxLayout(labelPanel, BoxLayout.PAGE_AXIS));
 		labelPanel.add(namePanel);
 		labelPanel.add(structurePanel);
 
-		panel.add(treeNameLabel, BorderLayout.NORTH);
+		panel.add(treeNameLabel, BorderLayout.PAGE_START);
 		panel.add(labelPanel, BorderLayout.CENTER);
 		add(panel);
 	}

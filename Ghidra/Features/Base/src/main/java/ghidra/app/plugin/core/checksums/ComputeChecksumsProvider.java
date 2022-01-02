@@ -99,7 +99,7 @@ public class ComputeChecksumsProvider extends ComponentProviderAdapter {
 		errorStatus.setHorizontalAlignment(SwingConstants.CENTER);
 		errorStatus.setForeground(Color.RED);
 		errorStatus.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
-		main.add(errorStatus, BorderLayout.SOUTH);
+		main.add(errorStatus, BorderLayout.PAGE_END);
 
 		return main;
 	}

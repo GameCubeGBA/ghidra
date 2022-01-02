@@ -31,7 +31,8 @@ public class ProxyUtilitiesTest {
 
 	}
 
-	interface AFeatureIf extends RootIf {
+	@FunctionalInterface
+    interface AFeatureIf extends RootIf {
 		String prependA();
 
 		default String callPrependA() {
@@ -39,22 +40,26 @@ public class ProxyUtilitiesTest {
 		}
 	}
 
-	interface BFeatureIf extends RootIf {
+	@FunctionalInterface
+    interface BFeatureIf extends RootIf {
 		String prependB();
 	}
 
-	interface ExtRootIf extends RootIf {
+	@FunctionalInterface
+    interface ExtRootIf extends RootIf {
 		String getCommonThing();
 	}
 
-	interface ExtAFeatureIf extends AFeatureIf, ExtRootIf {
+	@FunctionalInterface
+    interface ExtAFeatureIf extends AFeatureIf, ExtRootIf {
 		@Override
 		default String prependA() {
 			return "A: " + getCommonThing();
 		}
 	}
 
-	interface ExtBFeatureIf extends BFeatureIf, ExtRootIf {
+	@FunctionalInterface
+    interface ExtBFeatureIf extends BFeatureIf, ExtRootIf {
 		@Override
 		default String prependB() {
 			return "B: " + getCommonThing();

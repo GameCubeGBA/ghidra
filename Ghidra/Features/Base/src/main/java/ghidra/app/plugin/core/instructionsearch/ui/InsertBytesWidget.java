@@ -156,15 +156,15 @@ public class InsertBytesWidget extends DialogComponentProvider implements KeyLis
 
 		JPanel southPanel = new JPanel();
 		southPanel.setLayout(new BorderLayout());
-		southPanel.add(selectionModeWidget, BorderLayout.WEST);
+		southPanel.add(selectionModeWidget, BorderLayout.LINE_START);
 		southPanel.add(endianFlipWidget, BorderLayout.CENTER);
-		southPanel.add(msgPanel, BorderLayout.SOUTH);
+		southPanel.add(msgPanel, BorderLayout.PAGE_END);
 
 		// Use a border layout so we can put the text area in the CENTER location and have it
 		// grow automatically as the panel is resized.
 		contentPanel.setLayout(new BorderLayout());
 		contentPanel.add(scrollPane, BorderLayout.CENTER);
-		contentPanel.add(southPanel, BorderLayout.SOUTH);
+		contentPanel.add(southPanel, BorderLayout.PAGE_END);
 
 		return contentPanel;
 	}

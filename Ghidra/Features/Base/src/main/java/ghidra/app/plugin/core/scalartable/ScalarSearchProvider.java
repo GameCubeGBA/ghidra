@@ -225,11 +225,11 @@ public class ScalarSearchProvider extends ComponentProviderAdapter {
 		mainPanel.add(threadedTablePanel, BorderLayout.CENTER);
 
 		JPanel filterPanel = new JPanel(new BorderLayout());
-		filterPanel.add(filter, BorderLayout.NORTH);
+		filterPanel.add(filter, BorderLayout.PAGE_START);
 
-		filterPanel.add(new RangeFilterPanel(), BorderLayout.SOUTH);
+		filterPanel.add(new RangeFilterPanel(), BorderLayout.PAGE_END);
 
-		mainPanel.add(filterPanel, BorderLayout.SOUTH);
+		mainPanel.add(filterPanel, BorderLayout.PAGE_END);
 
 		return mainPanel;
 	}

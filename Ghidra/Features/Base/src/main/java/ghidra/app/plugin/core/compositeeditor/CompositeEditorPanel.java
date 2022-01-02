@@ -116,7 +116,7 @@ public abstract class CompositeEditorPanel extends JPanel
 			lowerPanel.add(infoPanel);
 		}
 		lowerPanel.add(createStatusPanel());
-		add(lowerPanel, BorderLayout.SOUTH);
+		add(lowerPanel, BorderLayout.PAGE_END);
 		model.addCompositeEditorModelListener(this);
 		setUpDragDrop();
 	}
@@ -137,10 +137,6 @@ public abstract class CompositeEditorPanel extends JPanel
 
 	public void addEditorModelListener(CompositeEditorModelListener listener) {
 		model.addCompositeEditorModelListener(listener);
-	}
-
-	public void removeEditorModelListener(CompositeEditorModelListener listener) {
-		model.removeCompositeEditorModelListener(listener);
 	}
 
 	private void setupTableCellRenderer() {
@@ -602,7 +598,7 @@ public abstract class CompositeEditorPanel extends JPanel
 			helpManager.registerHelp(searchPanel,
 				new HelpLocation("DataTypeEditors", "Searching_In_Editor"));
 		}
-		tablePanel.add(searchPanel, BorderLayout.SOUTH);
+		tablePanel.add(searchPanel, BorderLayout.PAGE_END);
 
 		add(tablePanel, BorderLayout.CENTER);
 
@@ -706,7 +702,7 @@ public abstract class CompositeEditorPanel extends JPanel
 
 	protected JPanel createNamedTextPanel(JTextField textField, String name) {
 		JPanel panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+		panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
 
 		JLabel label = new GLabel(name + ":", SwingConstants.RIGHT);
 		label.setPreferredSize(new Dimension(label.getPreferredSize()));
@@ -722,7 +718,7 @@ public abstract class CompositeEditorPanel extends JPanel
 
 	protected JPanel createHorizontalPanel(JComponent[] comps) {
 		JPanel panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+		panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
 		for (int i = 0; i < comps.length; i++) {
 			if (i > 0) {
 				panel.add(Box.createHorizontalStrut(10));
@@ -734,7 +730,7 @@ public abstract class CompositeEditorPanel extends JPanel
 
 	protected JPanel createVerticalPanel(JComponent[] comps) {
 		JPanel panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 		for (int i = 0; i < comps.length; i++) {
 			if (i > 0) {
 				panel.add(Box.createVerticalStrut(5));
@@ -743,12 +739,6 @@ public abstract class CompositeEditorPanel extends JPanel
 		}
 		return panel;
 	}
-
-	/****************************************************************************
-	 *
-	 * DragNDrop support
-	 *
-	 ****************************************************************************/
 
 	/** set up drag and drop and drop for the component edit area. */
 	private void setUpDragDrop() {
@@ -997,8 +987,6 @@ public abstract class CompositeEditorPanel extends JPanel
 	public void compositeEditStateChanged(int type) {
 		switch (type) {
 			case COMPOSITE_LOADED:
-				cancelCellEditing(); // Make sure a field isn't being edited.
-				break;
 			case NO_COMPOSITE_LOADED:
 				cancelCellEditing(); // Make sure a field isn't being edited.
 				break;
@@ -1069,7 +1057,7 @@ public abstract class CompositeEditorPanel extends JPanel
 				}
 			}
 		}
-		// wrap search search rows from beginning
+		// wrap search rows from beginning
 		for (int row = 0; row < currentRow; row++) {
 			for (int col = 0; col < colCount; col++) {
 				if (matchesSearch(searchText, row, col)) {
@@ -1117,7 +1105,7 @@ public abstract class CompositeEditorPanel extends JPanel
 		return value.toLowerCase().contains(searchText);
 	}
 
-	private String getString(Object object) {
+	private static String getString(Object object) {
 		if (object instanceof DataTypeInstance) {
 			return ((DataTypeInstance) object).getDataType().getName();
 		}
@@ -1181,7 +1169,7 @@ public abstract class CompositeEditorPanel extends JPanel
 		}
 
 		/**
-		 * Calls <code>fireEditingStopped</code> and returns true.
+		 * Calls {@code fireEditingStopped} and returns true.
 		 * @return true
 		 */
 		@Override
@@ -1305,7 +1293,7 @@ public abstract class CompositeEditorPanel extends JPanel
 			};
 			editorPanel.setLayout(new BorderLayout());
 			editorPanel.add(textField, BorderLayout.CENTER);
-			editorPanel.add(dataTypeChooserButton, BorderLayout.EAST);
+			editorPanel.add(dataTypeChooserButton, BorderLayout.LINE_END);
 		}
 
 		private void stopEdit(PluginTool tool) {
@@ -1476,7 +1464,7 @@ public abstract class CompositeEditorPanel extends JPanel
 		}
 	}
 
-	class CompositeTable extends GTable {
+	static class CompositeTable extends GTable {
 
 		public CompositeTable(TableModel dm) {
 			super(dm);
@@ -1486,7 +1474,7 @@ public abstract class CompositeEditorPanel extends JPanel
 		// overridden because the editor component was not being given focus
 		public Component prepareEditor(TableCellEditor editor, int row, int column) {
 			final Component component = super.prepareEditor(editor, row, column);
-			Swing.runLater(() -> component.requestFocus());
+			Swing.runLater(component::requestFocus);
 			return component;
 		}
 	}

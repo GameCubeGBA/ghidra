@@ -27,8 +27,8 @@ import ghidra.util.exception.DuplicateNameException;
 
 /**
  * A class to represent the 
- * <code>IMAGE_BOUND_IMPORT_DESCRIPTOR</code>
- * data structure defined in <b><code>winnt.h</code></b>.
+ * {@code IMAGE_BOUND_IMPORT_DESCRIPTOR}
+ * data structure defined in <b>{@code winnt.h}</b>.
  * <p>
  * <pre>
  * typedef struct _IMAGE_BOUND_IMPORT_DESCRIPTOR {
@@ -45,7 +45,7 @@ public class BoundImportDescriptor implements StructConverter, ByteArrayConverte
 	 */
     public final static String NAME = "IMAGE_BOUND_IMPORT_DESCRIPTOR";
 	/**
-	 * The size of the <code>IMAGE_BOUND_IMPORT_DESCRIPTOR</code> in bytes.
+	 * The size of the {@code IMAGE_BOUND_IMPORT_DESCRIPTOR} in bytes.
 	 */
     public final static int IMAGE_SIZEOF_BOUND_IMPORT_DESCRIPTOR = 8;
 

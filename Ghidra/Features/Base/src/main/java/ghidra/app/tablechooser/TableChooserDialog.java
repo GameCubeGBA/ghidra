@@ -119,7 +119,7 @@ public class TableChooserDialog extends DialogComponentProvider
 		GhidraTableFilterPanel<AddressableRowObject> filterPanel =
 			new GhidraTableFilterPanel<>(table, model);
 		panel.add(tablePanel, BorderLayout.CENTER);
-		panel.add(filterPanel, BorderLayout.SOUTH);
+		panel.add(filterPanel, BorderLayout.PAGE_END);
 		return panel;
 	}
 

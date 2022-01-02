@@ -606,12 +606,10 @@ public class SpecExtension {
 				checkCallotherFixup(doc);
 				break;
 			case MERGE_MODEL:
-				checkPrototype(doc);
+            case PROTOTYPE_MODEL:
+                checkPrototype(doc);
 				break;
-			case PROTOTYPE_MODEL:
-				checkPrototype(doc);
-				break;
-		}
+        }
 	}
 
 	/**
@@ -786,12 +784,10 @@ public class SpecExtension {
 				removeCallotherFixup(extName, monitor);
 				break;
 			case MERGE_MODEL:
-				removePrototype(extName, monitor);
+            case PROTOTYPE_MODEL:
+                removePrototype(extName, monitor);
 				break;
-			case PROTOTYPE_MODEL:
-				removePrototype(extName, monitor);
-				break;
-		}
+        }
 		specOptions.removeOption(optionName);
 		specOptions.setInt(SpecExtension.VERSION_COUNTER_OPTIONNAME, progVersion);
 		program.installExtensions();

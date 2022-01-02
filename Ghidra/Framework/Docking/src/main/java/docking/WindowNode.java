@@ -58,9 +58,9 @@ public abstract class WindowNode extends Node {
 		}
 		if (toolBar != null) {
 			toolBarPanel = new JPanel(new BorderLayout());
-			toolBarPanel.add(toolBar, BorderLayout.NORTH);
-			toolBarPanel.add(new JSeparator(SwingConstants.HORIZONTAL), BorderLayout.SOUTH);
-			rootPane.add(toolBarPanel, BorderLayout.NORTH);
+			toolBarPanel.add(toolBar, BorderLayout.PAGE_START);
+			toolBarPanel.add(new JSeparator(SwingConstants.HORIZONTAL), BorderLayout.PAGE_END);
+			rootPane.add(toolBarPanel, BorderLayout.PAGE_START);
 		}
 	}
 

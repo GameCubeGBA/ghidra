@@ -124,7 +124,7 @@ public class StorageAddressEditorDialog extends DialogComponentProvider
 
 	private JComponent buildMainPanel(DataTypeManagerService service) {
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.add(buildInfoPanel(service), BorderLayout.NORTH);
+		panel.add(buildInfoPanel(service), BorderLayout.PAGE_START);
 		panel.add(buildTablePanel(), BorderLayout.CENTER);
 		return panel;
 	}
@@ -229,7 +229,7 @@ public class StorageAddressEditorDialog extends DialogComponentProvider
 
 		JScrollPane scroll = new JScrollPane(varnodeTable);
 		panel.add(scroll, BorderLayout.CENTER);
-		panel.add(buildButtonPanel(), BorderLayout.EAST);
+		panel.add(buildButtonPanel(), BorderLayout.LINE_END);
 		return panel;
 	}
 

@@ -29,6 +29,7 @@ import java.awt.datatransfer.Transferable;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
@@ -121,10 +122,7 @@ public class AboutDomainObjectUtils {
 		}
 		addInfo(aboutPanel, "Readonly:", Boolean.toString(domainFile.isReadOnly()));
 
-        for (Map.Entry<String, String> entry : metadata.entrySet()) {
-            String value = entry.getValue();
-            addInfo(aboutPanel, entry.getKey() + ":", value);
-        }
+		metadata.forEach((key, value) -> addInfo(aboutPanel, key + ":", value));
 
 		if (additionalInfo != null && additionalInfo.length() > 0) {
 			JTextArea auxArea = new JTextArea(additionalInfo);
@@ -140,21 +138,19 @@ public class AboutDomainObjectUtils {
 			JScrollBar sb = sp.getVerticalScrollBar();
 			sb.setBorder(BorderFactory.createEtchedBorder());
 
-			contentPanel.add(sp, BorderLayout.SOUTH);
+			contentPanel.add(sp, BorderLayout.PAGE_END);
 		}
 
-		JPanel infoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 10));
+		JPanel infoPanel = new JPanel(new FlowLayout(FlowLayout.LEADING, 5, 10));
 		infoPanel.add(
 			new GIconLabel(OptionDialog.getIconForMessageType(OptionDialog.INFORMATION_MESSAGE)));
 
 		JPanel panel = new JPanel(new BorderLayout(5, 5));
-		panel.add(infoPanel, BorderLayout.WEST);
+		panel.add(infoPanel, BorderLayout.LINE_START);
 		panel.add(contentPanel, BorderLayout.CENTER);
 
 		Component[] comps = aboutPanel.getComponents();
-		for (Component comp : comps) {
-			comp.setFont(font);
-		}
+		Arrays.stream(comps).forEach(comp -> comp.setFont(font));
 		aboutPanel.invalidate();
 
 		panel.setPreferredSize(new Dimension(800, 800));

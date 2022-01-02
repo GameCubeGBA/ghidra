@@ -235,6 +235,7 @@ public abstract class AbstractGhidraHeadedDebuggerGUITest
 		waitForSwing();
 	}
 
+	@FunctionalInterface
 	public interface ExRunnable {
 		void run() throws Throwable;
 	}

@@ -25,6 +25,7 @@ import java.util.Comparator;
  * algorithms, e.g., shortest path.
  * @param <E> the type of the edge
  */
+@FunctionalInterface
 public interface GEdgeWeightMetric<E extends GEdge<?>> {
 	GEdgeWeightMetric<?> UNIT_METRIC = (GEdge<?> e) -> 1;
 

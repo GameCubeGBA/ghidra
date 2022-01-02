@@ -17,8 +17,6 @@ package ghidra.app.plugin.core.functioncompare;
 
 import java.awt.*;
 import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.util.Iterator;
 import java.util.Set;
 
 import javax.swing.*;
@@ -37,7 +35,7 @@ import ghidra.program.model.listing.Function;
  * boxes above the function display area that allows users to select which 
  * functions are to be compared.
  * <p>
- * Throughout this class the terms <code>source</code> and <code>target</code>
+ * Throughout this class the terms {@code source} and <code>target</code>
  * are used when referencing functions. This is because the model that backs 
  * this panel maintains a relationship between the functions being compared
  * such that each source function can only be compared to a specific set
@@ -73,7 +71,7 @@ public class MultiFunctionComparisonPanel extends FunctionComparisonPanel {
 		JPanel choicePanel = new JPanel(new GridLayout(1, 2));
 		choicePanel.add(createSourcePanel());
 		choicePanel.add(createTargetPanel());
-		add(choicePanel, BorderLayout.NORTH);
+		add(choicePanel, BorderLayout.PAGE_START);
 
 		// For the multi-panels we don't need to show the title of each
 		// comparison panel because the name of the function/data being shown 
@@ -307,7 +305,7 @@ public class MultiFunctionComparisonPanel extends FunctionComparisonPanel {
 	 * Cell renderer for combo boxes that changes the default display to show
 	 * both the function name and the program it comes from
 	 */
-	private class FunctionListCellRenderer extends DefaultListCellRenderer {
+	private static class FunctionListCellRenderer extends DefaultListCellRenderer {
 
 		@Override
 		public Component getListCellRendererComponent(JList<?> list, Object value, int index,

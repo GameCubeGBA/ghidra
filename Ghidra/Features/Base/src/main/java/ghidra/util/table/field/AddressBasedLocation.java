@@ -26,7 +26,7 @@ import ghidra.program.model.symbol.*;
 import ghidra.util.SystemUtilities;
 
 /**
- * <code>AddressBasedLocation</code> provides the ability to render and compare
+ * {@code AddressBasedLocation} provides the ability to render and compare
  * addresses (e.g., location table column). This may be necessary when working a
  * mixture of address types (e.g., memory, stack, register, variable, external)
  * with the need to render in a meaningful way. Generally, only memory addresses
@@ -137,14 +137,13 @@ public class AddressBasedLocation implements Comparable<AddressBasedLocation> {
 			// TODO: shifted references have never addressed concerns related to
 			// addressable unit size
 			ShiftedReference shiftedRef = (ShiftedReference) reference;
-			StringBuilder buf = new StringBuilder();
-			buf.append(address.toString());
-			buf.append("(0x");
-			buf.append(Long.toHexString(shiftedRef.getValue()));
-			buf.append("<<");
-			buf.append(Long.toString(shiftedRef.getShift()));
-			buf.append(")");
-			addrStr = buf.toString();
+            String buf = address +
+                    "(0x" +
+                    Long.toHexString(shiftedRef.getValue()) +
+                    "<<" +
+                    Long.toString(shiftedRef.getShift()) +
+                    ")";
+			addrStr = buf;
 		}
 		else {
 			addrStr = address.toString();
@@ -183,7 +182,7 @@ public class AddressBasedLocation implements Comparable<AddressBasedLocation> {
 		ExternalLocation extLoc = program.getExternalManager().getExternalLocation(symbol);
 		Address extAddr = extLoc.getAddress();
 		if (extAddr != null) {
-			return "External[" + extAddr.toString() + "]";
+			return "External[" + extAddr + "]";
 		}
 		return "External[ ? ]";
 	}

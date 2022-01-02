@@ -31,7 +31,7 @@ import ghidra.util.exception.*;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>ElfDefaultGotPltMarkup</code> provides the legacy/default implementation of ELF GOT/PLT processing 
+ * {@code ElfDefaultGotPltMarkup} provides the legacy/default implementation of ELF GOT/PLT processing
  * which handles a limited set of cases.  It is intended that over time this default implementation be 
  * eliminated although it may form the basis of an abstract implementation for specific processor
  * extensions.

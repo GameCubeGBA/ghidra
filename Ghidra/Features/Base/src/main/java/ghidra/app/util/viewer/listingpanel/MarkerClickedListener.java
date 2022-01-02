@@ -20,6 +20,7 @@ import ghidra.program.util.MarkerLocation;
 /**
  *  Interface for notifications when the user double-clicks in the marker margin
  */
+@FunctionalInterface
 public interface MarkerClickedListener {
 
 	/**

@@ -611,7 +611,7 @@ class ListingDisplaySearcher implements Searcher {
 // Inner Classes
 //==================================================================================================
 
-	private class MnemonicText {
+	private static class MnemonicText {
 		private String mnemonic;
 		private String text;
 

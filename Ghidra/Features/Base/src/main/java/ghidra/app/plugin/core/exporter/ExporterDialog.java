@@ -144,8 +144,8 @@ public class ExporterDialog extends DialogComponentProvider implements AddressFa
 		panel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
 		JPanel innerPanel = new JPanel(new VerticalLayout(5));
 		innerPanel.add(buildOptionsButton());
-		panel.add(buildSelectionCheckboxPanel(), BorderLayout.WEST);
-		panel.add(innerPanel, BorderLayout.EAST);
+		panel.add(buildSelectionCheckboxPanel(), BorderLayout.LINE_START);
+		panel.add(innerPanel, BorderLayout.LINE_END);
 		return panel;
 	}
 
@@ -235,7 +235,7 @@ public class ExporterDialog extends DialogComponentProvider implements AddressFa
 
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.add(filePathTextField, BorderLayout.CENTER);
-		panel.add(fileChooserButton, BorderLayout.EAST);
+		panel.add(fileChooserButton, BorderLayout.LINE_END);
 		return panel;
 	}
 

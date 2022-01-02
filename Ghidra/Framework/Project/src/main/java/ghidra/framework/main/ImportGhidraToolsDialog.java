@@ -129,7 +129,7 @@ class ImportGhidraToolsDialog extends DialogComponentProvider {
 		listPanel.setMouseListener(new ListMouseListener());
 
 		// Layout Main Panel
-		availableToolsPanel.add(buttonPanel, BorderLayout.EAST);
+		availableToolsPanel.add(buttonPanel, BorderLayout.LINE_END);
 		availableToolsPanel.add(listPanel, BorderLayout.CENTER);
 		availableToolsPanel.setBorder(new TitledBorder("Available Tools"));
 

@@ -116,9 +116,9 @@ public class SearchStringDialog extends DialogComponentProvider {
 	private JComponent buildWorkPanel() {
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-		panel.add(buildLeftPanel(), BorderLayout.WEST);
+		panel.add(buildLeftPanel(), BorderLayout.LINE_START);
 		panel.add(Box.createHorizontalStrut(10), BorderLayout.CENTER);
-		panel.add(buildRightPanel(), BorderLayout.EAST);
+		panel.add(buildRightPanel(), BorderLayout.LINE_END);
 
 		return panel;
 	}
@@ -129,9 +129,9 @@ public class SearchStringDialog extends DialogComponentProvider {
 	private Component buildLeftPanel() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
-		panel.add(buildOptionsPanelLeft(), BorderLayout.NORTH);
+		panel.add(buildOptionsPanelLeft(), BorderLayout.PAGE_START);
 		panel.add(Box.createVerticalStrut(15), BorderLayout.CENTER);
-		panel.add(buildMemoryBlocksPanel(), BorderLayout.SOUTH);
+		panel.add(buildMemoryBlocksPanel(), BorderLayout.PAGE_END);
 
 		return panel;
 	}
@@ -143,9 +143,9 @@ public class SearchStringDialog extends DialogComponentProvider {
 
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
-		panel.add(buildOptionsPanelRight(), BorderLayout.NORTH);
+		panel.add(buildOptionsPanelRight(), BorderLayout.PAGE_START);
 		panel.add(Box.createVerticalStrut(15), BorderLayout.CENTER);
-		panel.add(buildSelectionScopePanel(), BorderLayout.SOUTH);
+		panel.add(buildSelectionScopePanel(), BorderLayout.PAGE_END);
 
 		return panel;
 	}
@@ -224,7 +224,7 @@ public class SearchStringDialog extends DialogComponentProvider {
 		panel.add(modelLabel);
 
 		JPanel modelFieldPanel = new JPanel();
-		modelFieldPanel.setLayout(new BoxLayout(modelFieldPanel, BoxLayout.X_AXIS));
+		modelFieldPanel.setLayout(new BoxLayout(modelFieldPanel, BoxLayout.LINE_AXIS));
 		wordModelField = new JTextField("StringModel.sng");
 		wordModelField.setName("modelDefault");
 		modelFieldPanel.add(wordModelField);
@@ -264,7 +264,7 @@ public class SearchStringDialog extends DialogComponentProvider {
 	private JPanel buildMemoryBlocksPanel() {
 
 		JPanel panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 		panel.setBorder(BorderFactory.createTitledBorder("Memory Block Types"));
 
 		ButtonGroup memoryBlockGroup = new ButtonGroup();
@@ -294,7 +294,7 @@ public class SearchStringDialog extends DialogComponentProvider {
 	private JPanel buildSelectionScopePanel() {
 
 		JPanel panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 		panel.setBorder(new TitledBorder("Selection Scope"));
 
 		searchSelectionRB = new GRadioButton("Search Selection");
@@ -314,7 +314,7 @@ public class SearchStringDialog extends DialogComponentProvider {
 
 		JPanel selectionPanel = new JPanel();
 		selectionPanel.setLayout(new BorderLayout());
-		selectionPanel.add(panel, BorderLayout.NORTH);
+		selectionPanel.add(panel, BorderLayout.PAGE_START);
 
 		return selectionPanel;
 	}

@@ -85,14 +85,13 @@ public class XCoffSymbol {
 
 	@Override
     public String toString() {
-		StringBuffer buffer = new StringBuffer();
-		buffer.append("SYMBOL TABLE ENTRY").append(NL);
-		buffer.append("n_value = ").append(n_value).append(NL);
-		buffer.append("n_scnum = ").append(n_scnum).append(NL);
-		buffer.append("n_type = ").append(n_type).append(NL);
-		buffer.append("n_sclass = ").append(n_sclass).append(NL);
-		buffer.append("n_numaux = ").append(n_numaux).append(NL);
-		return buffer.toString();
+        String buffer = "SYMBOL TABLE ENTRY" + NL +
+                "n_value = " + n_value + NL +
+                "n_scnum = " + n_scnum + NL +
+                "n_type = " + n_type + NL +
+                "n_sclass = " + n_sclass + NL +
+                "n_numaux = " + n_numaux + NL;
+		return buffer;
 	}
 
 }

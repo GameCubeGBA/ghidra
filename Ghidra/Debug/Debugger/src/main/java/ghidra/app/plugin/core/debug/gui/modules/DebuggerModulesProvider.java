@@ -680,7 +680,7 @@ public class DebuggerModulesProvider extends ComponentProviderAdapter {
 		moduleTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		modulePanel.add(new JScrollPane(moduleTable));
 		moduleFilterPanel = new GhidraTableFilterPanel<>(moduleTable, moduleTableModel);
-		modulePanel.add(moduleFilterPanel, BorderLayout.SOUTH);
+		modulePanel.add(moduleFilterPanel, BorderLayout.PAGE_END);
 		mainPanel.setLeftComponent(modulePanel);
 
 		JPanel sectionPanel = new JPanel(new BorderLayout());
@@ -688,7 +688,7 @@ public class DebuggerModulesProvider extends ComponentProviderAdapter {
 		sectionTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		sectionPanel.add(new JScrollPane(sectionTable));
 		sectionFilterPanel = new GhidraTableFilterPanel<>(sectionTable, sectionTableModel);
-		sectionPanel.add(sectionFilterPanel, BorderLayout.SOUTH);
+		sectionPanel.add(sectionFilterPanel, BorderLayout.PAGE_END);
 		mainPanel.setRightComponent(sectionPanel);
 
 		mainPanel.setResizeWeight(0.5);

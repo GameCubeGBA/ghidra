@@ -122,8 +122,8 @@ public class FilterDialog extends DialogComponentProvider {
 		JPanel leftPanel = new JPanel(new VerticalLayout(20));
 		leftPanel.add(buildSourcePanel());
 		leftPanel.add(buildTypesPanel());
-		filterPanel.add(leftPanel, BorderLayout.WEST);
-		filterPanel.add(buildAdvancedPanel(), BorderLayout.EAST);
+		filterPanel.add(leftPanel, BorderLayout.LINE_START);
+		filterPanel.add(buildAdvancedPanel(), BorderLayout.LINE_END);
 		mainPanel.add(filterPanel);
 		mainPanel.add(advancedFilterCheckbox);
 		mainPanel.add(buildResetPanel());
@@ -195,10 +195,10 @@ public class FilterDialog extends DialogComponentProvider {
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.setBorder(BorderFactory.createTitledBorder("Symbol Types"));
 		panel.add(buildLabelTypesPanel("Label Symbols", filter.getLabelTypeFilterNames()),
-			BorderLayout.WEST);
+                BorderLayout.LINE_START);
 		panel.add(buildLabelTypesPanel("Non-label Symbols", filter.getNonLabelTypeFilterNames()),
-			BorderLayout.EAST);
-		panel.add(buildSelectButtonPanel(), BorderLayout.SOUTH);
+                BorderLayout.LINE_END);
+		panel.add(buildSelectButtonPanel(), BorderLayout.PAGE_END);
 		return panel;
 	}
 

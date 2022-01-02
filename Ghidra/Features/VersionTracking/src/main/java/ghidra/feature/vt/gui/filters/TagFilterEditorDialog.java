@@ -94,7 +94,7 @@ public class TagFilterEditorDialog extends DialogComponentProvider implements Ta
 		JPanel editPanel = new JPanel();
 		editPanel.add(editButton);
 
-		mainPanel.add(editPanel, BorderLayout.SOUTH);
+		mainPanel.add(editPanel, BorderLayout.PAGE_END);
 
 		return mainPanel;
 	}
@@ -162,7 +162,7 @@ public class TagFilterEditorDialog extends DialogComponentProvider implements Ta
 		}
 	}
 
-	private class TagInfo {
+	private static class TagInfo {
 		private boolean isIncluded;
 		private final VTMatchTag tag;
 
@@ -219,7 +219,7 @@ public class TagFilterEditorDialog extends DialogComponentProvider implements Ta
 				// let our color match that of the scroll pane our list is inside of
 				panel.setBackground(scrollPane.getBackground());
 
-				panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+				panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
 				panel.add(checkBox);
 				panel.add(Box.createHorizontalStrut(5));
 				panel.add(renderer);

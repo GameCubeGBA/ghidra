@@ -135,7 +135,7 @@ class CommentWindowProvider extends ComponentProviderAdapter {
 
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.add(threadedTablePanel, BorderLayout.CENTER);
-		panel.add(filterPanel, BorderLayout.SOUTH);
+		panel.add(filterPanel, BorderLayout.PAGE_END);
 
 		return panel;
 	}

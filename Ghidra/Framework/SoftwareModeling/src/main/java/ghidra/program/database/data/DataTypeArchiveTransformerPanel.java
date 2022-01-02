@@ -78,12 +78,12 @@ public class DataTypeArchiveTransformerPanel extends JPanel {
 				"The result will be saved to the destination archive.</HTML>");
 		label.setBorder(BorderFactory.createEmptyBorder(0, 0, 8, 0));
 		label.setHorizontalAlignment(SwingConstants.CENTER);
-		add(label, BorderLayout.NORTH);
+		add(label, BorderLayout.PAGE_START);
 	}
 
 	private void setupOldFileField() {
 		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.anchor = GridBagConstraints.WEST;
+		gbc.anchor = GridBagConstraints.LINE_START;
 		gbc.insets = new Insets(2, 2, 2, 2);
 		gbc.gridy = 0;
 		gbc.gridx = 0;
@@ -119,7 +119,7 @@ public class DataTypeArchiveTransformerPanel extends JPanel {
 
 	private void setupNewFileField() {
 		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.anchor = GridBagConstraints.WEST;
+		gbc.anchor = GridBagConstraints.LINE_START;
 		gbc.insets = new Insets(2, 2, 2, 2);
 		gbc.gridy = 1;
 		gbc.gridx = 0;
@@ -150,7 +150,7 @@ public class DataTypeArchiveTransformerPanel extends JPanel {
 	private void setupDestinationFileField() {
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.insets = new Insets(2, 2, 2, 2);
-		gbc.anchor = GridBagConstraints.WEST;
+		gbc.anchor = GridBagConstraints.LINE_START;
 		gbc.gridy = 2;
 		gbc.gridx = 0;
 		gbc.gridwidth = 1;

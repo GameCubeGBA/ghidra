@@ -30,7 +30,7 @@ import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <CODE>OverlapCodeSubModel</CODE> (O-model) defines subroutines with a
+ * {@code OverlapCodeSubModel} (O-model) defines subroutines with a
  * unique entry point, which may share code with other subroutines. Each entry-
  * point may either be a source or called entry-point and is identified using
  * the MultEntSubModel.  This model defines the set of addresses contained
@@ -53,7 +53,7 @@ public class OverlapCodeSubModel implements SubroutineBlockModel {
     protected MultEntSubModel modelM;
 
     /**
-     * Construct a <CODE>OverlapCodeSubModel</CODE> subroutine on a program.
+     * Construct a {@code OverlapCodeSubModel} subroutine on a program.
      * @param program program to create blocks from.
      */
     public OverlapCodeSubModel(Program program) {
@@ -61,7 +61,7 @@ public class OverlapCodeSubModel implements SubroutineBlockModel {
     }
     
     /**
-     * Construct a <CODE>OverlapCodeSubModel</CODE> subroutine on a program.
+     * Construct a {@code OverlapCodeSubModel} subroutine on a program.
      * @param program program to create blocks from.
      * @param includeExternals external blocks will be included if true
      */

@@ -173,7 +173,7 @@ public class QualifiedSelectionPlugin extends Plugin {
 	}
 
 	/**
-	 * <code>getUndefined</code> returns the undefined data associated with the selection
+	 * {@code getUndefined} returns the undefined data associated with the selection
 	 * or with the program if there isn't a selection.
 	 * 
 	 * @param taskMonitor The task monitor that will monitor task progress.
@@ -215,7 +215,7 @@ public class QualifiedSelectionPlugin extends Plugin {
 	}
 
 	/**
-	 * <code>getDefinedData</code> returns the defined data associated with the selection
+	 * {@code getDefinedData} returns the defined data associated with the selection
 	 * or with the program if there isn't a selection.
 	 * 
 	 * @param taskMonitor The task monitor that will monitor task progress.
@@ -241,7 +241,7 @@ public class QualifiedSelectionPlugin extends Plugin {
 	}
 
 	/**
-	 * <code>getInstructions</code> returns the instructions associated with the selection
+	 * {@code getInstructions} returns the instructions associated with the selection
 	 * or with the program if there isn't a selection.
 	 * 
 	 * @param taskMonitor The task monitor that will monitor task progress.

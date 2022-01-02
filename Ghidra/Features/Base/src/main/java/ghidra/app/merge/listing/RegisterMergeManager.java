@@ -33,11 +33,10 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 
 import javax.swing.SwingUtilities;
-import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 /**
- * <code>RegisterMergeManager</code> handles the merge for a single named register.
+ * {@code RegisterMergeManager} handles the merge for a single named register.
  */
 class RegisterMergeManager implements ListingMergeConstants {
 
@@ -169,8 +168,7 @@ class RegisterMergeManager implements ListingMergeConstants {
 			return; //This method only needs to be called once.
 		}
 		RegisterConflicts rc =
-			new RegisterConflicts(registerName, originalContext, latestContext, myContext,
-				resultContext);
+				new RegisterConflicts(registerName, originalContext, latestContext, myContext);
 		Memory resultMem = resultPgm.getMemory();
 		AddressSetView myDiffs =
 			rc.getRegisterDifferences(registerName, originalContext, myContext, mySet, monitor);
@@ -419,29 +417,29 @@ class RegisterMergeManager implements ListingMergeConstants {
 		return info;
 	}
 
-	private class RegisterConflicts {
+	private static class RegisterConflicts {
 
 		String conflictRegisterName;
 		ProgramContext conflictOriginalContext;
 		ProgramContext conflictLatestContext;
 		ProgramContext conflictMyContext;
-		ProgramContext conflictResultContext;
-		Register conflictOriginalReg;
+		// ProgramContext conflictResultContext;
+		// Register conflictOriginalReg;
 		Register conflictLatestReg;
 		Register conflictMyReg;
-		Register conflictResultReg;
+		// Register conflictResultReg;
 
 		RegisterConflicts(String registerName, ProgramContext originalContext,
-				ProgramContext latestContext, ProgramContext myContext, ProgramContext resultContext) {
+				ProgramContext latestContext, ProgramContext myContext) {
 			this.conflictRegisterName = registerName;
 			this.conflictOriginalContext = originalContext;
 			this.conflictLatestContext = latestContext;
 			this.conflictMyContext = myContext;
-			this.conflictResultContext = resultContext;
-			conflictOriginalReg = originalContext.getRegister(registerName);
+		//	this.conflictResultContext = resultContext;
+			// conflictOriginalReg = originalContext.getRegister(registerName);
 			conflictLatestReg = latestContext.getRegister(registerName);
 			conflictMyReg = myContext.getRegister(registerName);
-			conflictResultReg = resultContext.getRegister(registerName);
+		//	conflictResultReg = resultContext.getRegister(registerName);
 		}
 
 		/** Gets the addresses where the named register differs 

@@ -20,7 +20,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 /**
- * <code>BufferFileManager</code> provides an interface for a 
+ * {@code BufferFileManager} provides an interface for a
  * BufferFile manager who understands the storage for the various
  * versions of BufferFiles associated with a single database.
  */

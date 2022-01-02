@@ -201,15 +201,15 @@ public class DialogComponentProvider
 			statusProgPanel.add(statusPanel, DEFAULT);
 			statusProgPanel.add(taskMonitorComponent, PROGRESS);
 			progressCardLayout.show(statusProgPanel, DEFAULT);
-			mainPanel.add(statusProgPanel, BorderLayout.SOUTH);
+			mainPanel.add(statusProgPanel, BorderLayout.PAGE_END);
 		}
 		else if (includeStatus) {
-			mainPanel.add(statusPanel, BorderLayout.SOUTH);
+			mainPanel.add(statusPanel, BorderLayout.PAGE_END);
 		}
 		if (includeButtons) {
 			JPanel panel = new JPanel(new FlowLayout());
 			panel.add(buttonPanel);
-			rootPanel.add(panel, BorderLayout.SOUTH);
+			rootPanel.add(panel, BorderLayout.PAGE_END);
 		}
 		installEscapeAction();
 
@@ -969,7 +969,7 @@ public class DialogComponentProvider
 		// the message label not visible
 		int height = statusLabel.getPreferredSize().height;
 
-		panel.add(Box.createVerticalStrut(height), BorderLayout.WEST);
+		panel.add(Box.createVerticalStrut(height), BorderLayout.LINE_START);
 		panel.add(statusLabel, BorderLayout.CENTER);
 		return panel;
 	}
@@ -985,10 +985,10 @@ public class DialogComponentProvider
 	/**
 	 * Sets the horizontal position of the status label.
 	 * @param justification  One of the following constants
-	 *           defined in <code>SwingConstants</code>:
-	 *           <code>LEFT</code>,
-	 *           <code>CENTER</code> (the default for image-only labels),
-	 *           <code>RIGHT</code>,
+	 *           defined in {@code SwingConstants}:
+	 *           {@code LEFT},
+	 *           {@code CENTER} (the default for image-only labels),
+	 *           {@code RIGHT},
 	 */
 	public void setStatusJustification(int justification) {
 		statusLabel.setHorizontalAlignment(justification);
@@ -1060,7 +1060,7 @@ public class DialogComponentProvider
 
 	/**
 	 * Sets the button to make "Default" when the dialog is shown.  If no default button is
-	 * desired, then pass <code>null</code> as the <code>button</code> value.
+	 * desired, then pass {@code null} as the <code>button</code> value.
 	 * @param button the button to make default enabled.
 	 */
 	public void setDefaultButton(JButton button) {
@@ -1239,9 +1239,9 @@ public class DialogComponentProvider
 		}
 
 		if (toolbar == null) {
-			toolbar = new JPanel(new FlowLayout(FlowLayout.RIGHT, 2, 0));
+			toolbar = new JPanel(new FlowLayout(FlowLayout.TRAILING, 2, 0));
 			toolbar.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 10));
-			mainPanel.add(toolbar, BorderLayout.NORTH);
+			mainPanel.add(toolbar, BorderLayout.PAGE_START);
 		}
 
 		DialogToolbarButton button = new DialogToolbarButton(action, this);

@@ -71,17 +71,16 @@ public class Sequence {
 
 	@Override
 	public String toString() {
-		StringBuffer buf = new StringBuffer();
-		buf.append('(');
-		buf.append(start);
-		buf.append(',');
-		buf.append(end);
-		buf.append(',');
-		buf.append(stringDataType.getDisplayName());
-		buf.append(',');
-		buf.append(nullTerminated);
-		buf.append(')');
-		return buf.toString();
+        String buf = "(" +
+                start +
+                ',' +
+                end +
+                ',' +
+                stringDataType.getDisplayName() +
+                ',' +
+                nullTerminated +
+                ')';
+		return buf;
 	}
 
 	public int getLength() {

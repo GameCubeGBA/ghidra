@@ -186,7 +186,7 @@ class SearchTextDialog extends DialogComponentProvider {
 	private JPanel createMainPanel() {
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BorderLayout(10, 0));
-		mainPanel.add(createSearchPanel(), BorderLayout.NORTH);
+		mainPanel.add(createSearchPanel(), BorderLayout.PAGE_START);
 		mainPanel.add(createDetailsPanel(), BorderLayout.CENTER);
 		return mainPanel;
 	}
@@ -217,7 +217,7 @@ class SearchTextDialog extends DialogComponentProvider {
 		});
 
 		JPanel searchPanel = new JPanel();
-		BoxLayout bl = new BoxLayout(searchPanel, BoxLayout.X_AXIS);
+		BoxLayout bl = new BoxLayout(searchPanel, BoxLayout.LINE_AXIS);
 		searchPanel.setLayout(bl);
 		searchPanel.add(new GLabel("Search for:"));
 		searchPanel.add(Box.createHorizontalStrut(5));
@@ -235,7 +235,7 @@ class SearchTextDialog extends DialogComponentProvider {
 	private JPanel createDetailsPanel() {
 		JPanel detailsPanel = new JPanel(new BorderLayout());
 
-		detailsPanel.add(createSearchTypePanel(), BorderLayout.NORTH);
+		detailsPanel.add(createSearchTypePanel(), BorderLayout.PAGE_START);
 		detailsPanel.add(createDetailsGroupPanel(), BorderLayout.CENTER);
 
 		return detailsPanel;
@@ -273,7 +273,7 @@ class SearchTextDialog extends DialogComponentProvider {
 
 	private JPanel createFieldOptionsPanel() {
 		JPanel optionsPanel = new JPanel();
-		BoxLayout bl = new BoxLayout(optionsPanel, BoxLayout.Y_AXIS);
+		BoxLayout bl = new BoxLayout(optionsPanel, BoxLayout.PAGE_AXIS);
 		optionsPanel.setLayout(bl);
 
 		functionsCB = new GCheckBox("Functions");

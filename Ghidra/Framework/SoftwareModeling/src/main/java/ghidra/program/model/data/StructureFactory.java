@@ -52,7 +52,7 @@ public class StructureFactory {
 	 * @return A new structure not yet added to memory.
 	 * @throws IllegalArgumentException for the following conditions:
 	 *         <ul>
-	 *              <li>if <code>dataLength</code> is not greater than zero
+	 *              <li>if {@code dataLength} is not greater than zero
 	 *              <li>if the number of components to add exceeds the available
 	 *                  address space
 	 *              <li>if there are any instructions in the provided 
@@ -78,8 +78,8 @@ public class StructureFactory {
 	 * @return A new structure not yet added to memory.
 	 * @throws IllegalArgumentException for the following conditions:
 	 *         <ul>
-	 *              <li>if <code>structureName</code> is <code>null</code>
-	 *              <li>if <code>dataLength</code> is not greater than zero
+	 *              <li>if {@code structureName} is <code>null</code>
+	 *              <li>if {@code dataLength} is not greater than zero
 	 *              <li>if the number of components to add exceeds the available
 	 *                  address space
 	 *              <li>if there are any instructions in the provided 
@@ -151,8 +151,8 @@ public class StructureFactory {
 	 * @return A new structure not yet added to memory.
 	 * @throws IllegalArgumentException for the following conditions:
 	 *         <ul>
-	 *              <li>if the component at <code>fromPath</code> or the component
-	 *                  at <code>toPath</code> are null
+	 *              <li>if the component at {@code fromPath} or the component
+	 *                  at {@code toPath} are null
 	 *              <li>if there is not data to add to the structure
 	 *              <li>if the parent data type is not a structure
 	 *         </ul>
@@ -181,9 +181,9 @@ public class StructureFactory {
 	 * @return A new structure not yet added to memory.
 	 * @throws IllegalArgumentException for the following conditions:
 	 *         <ul>
-	 *              <li>if <code>structureName</code> is <code>null</code>
-	 *              <li>if the component at <code>fromPath</code> or the component
-	 *                  at <code>toPath</code> are null
+	 *              <li>if {@code structureName} is <code>null</code>
+	 *              <li>if the component at {@code fromPath} or the component
+	 *                  at {@code toPath} are null
 	 *              <li>if there is not data to add to the structure
 	 *              <li>if the parent data type is not a structure
 	 *         </ul>

@@ -16,6 +16,7 @@
  */
 package generic.continues;
 
+@FunctionalInterface
 public interface GenericFactory {
     Object create(Class<?> type, Object... args);
 }

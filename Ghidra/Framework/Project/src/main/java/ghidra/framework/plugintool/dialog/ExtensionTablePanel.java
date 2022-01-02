@@ -64,7 +64,7 @@ public class ExtensionTablePanel extends JPanel {
 		add(sp, BorderLayout.CENTER);
 
 		tableFilterPanel = new GTableFilterPanel<>(table, tableModel);
-		add(tableFilterPanel, BorderLayout.SOUTH);
+		add(tableFilterPanel, BorderLayout.PAGE_END);
 
 		HelpService help = Help.getHelpService();
 		help.registerHelp(table, new HelpLocation(GenericHelpTopics.FRONT_END, "Extensions"));

@@ -67,7 +67,7 @@ public class SelectChangedToolDialog extends DialogComponentProvider {
 		descriptionLabel.setIconTextGap(15);
 		descriptionLabel.setIcon(OptionDialog.getIconForMessageType(OptionDialog.WARNING_MESSAGE));
 		descriptionLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-		panel.add(descriptionLabel, BorderLayout.NORTH);
+		panel.add(descriptionLabel, BorderLayout.PAGE_START);
 		JScrollPane scrollPane = new JScrollPane(buildRadioButtonPanel());
 		scrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		panel.add(scrollPane);

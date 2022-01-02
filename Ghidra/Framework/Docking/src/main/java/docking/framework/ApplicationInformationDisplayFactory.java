@@ -132,7 +132,7 @@ public class ApplicationInformationDisplayFactory {
 		nameLabel.setFont(newFont);
 		nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		nameLabel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-		panel.add(nameLabel, BorderLayout.NORTH);
+		panel.add(nameLabel, BorderLayout.PAGE_START);
 
 		final JPanel imagePanel = new JPanel(new BorderLayout());
 		imagePanel.setBackground(background);

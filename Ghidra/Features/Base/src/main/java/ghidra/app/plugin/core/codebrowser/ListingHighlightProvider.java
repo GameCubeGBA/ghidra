@@ -550,7 +550,8 @@ public class ListingHighlightProvider
 		}
 	}
 
-	private interface WriteChecker {
+	@FunctionalInterface
+    private interface WriteChecker {
 		boolean hasWrite(Instruction instr);
 	}
 

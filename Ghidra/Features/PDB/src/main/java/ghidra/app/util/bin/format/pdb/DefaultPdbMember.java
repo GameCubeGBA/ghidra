@@ -22,7 +22,7 @@ import ghidra.util.NumericUtilities;
 import ghidra.util.exception.CancelledException;
 
 /**
- * <code>PdbMember</code> convey PDB member information used for datatype
+ * {@code PdbMember} convey PDB member information used for datatype
  * reconstruction. The <i>memberDataTypeName</i> is expected to include
  * namespace prefixes when relevant.  When representing bitfields the 
  * <i>memberName</i> is used to convey bit-size and bit-offset information

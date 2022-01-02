@@ -61,8 +61,8 @@ public class LengthFilter extends Filter<VTMatch> {
 		Border outsideBorder = BorderFactory.createBevelBorder(BevelBorder.LOWERED);
 		panel.setBorder(BorderFactory.createCompoundBorder(outsideBorder, paddingBorder));
 
-		panel.add(label, BorderLayout.WEST);
-		panel.add(textField, BorderLayout.EAST);
+		panel.add(label, BorderLayout.LINE_START);
+		panel.add(textField, BorderLayout.LINE_END);
 
 		final JLayeredPane layeredPane = new JLayeredPane();
 

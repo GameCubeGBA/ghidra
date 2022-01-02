@@ -50,7 +50,8 @@ public class GadpClientTest implements AsyncTestUtils {
 				.setAttributeResyncMode(ResyncMode.ONCE)
 				.buildAndAdd();
 
-	interface TestClientHandler {
+	@FunctionalInterface
+    interface TestClientHandler {
 		void handle(SocketChannel cli, GadpVersion version) throws Exception;
 	}
 

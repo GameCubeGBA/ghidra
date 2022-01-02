@@ -21,6 +21,7 @@ import ghidra.program.model.address.Address;
 
 import java.util.List;
 
+@FunctionalInterface
 public interface DecompilerReducer<R, D> {
 	public R reduce(List<DominantPair<Address, D>> list);
 }

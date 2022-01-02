@@ -138,8 +138,8 @@ public class FontPropertyEditor extends PropertyEditorSupport {
 			stylePanel.setLayout(new GridLayout(2, 1));
 			sizeAndStylePanel.setLayout(new BorderLayout());
 
-			topPanel.add(BorderLayout.WEST, fontPanel);
-			sizeAndStylePanel.add(BorderLayout.WEST, sizePanel);
+			topPanel.add(BorderLayout.LINE_START, fontPanel);
+			sizeAndStylePanel.add(BorderLayout.LINE_START, sizePanel);
 			sizeAndStylePanel.add(BorderLayout.CENTER, stylePanel);
 			topPanel.add(BorderLayout.CENTER, sizeAndStylePanel);
 
@@ -147,9 +147,9 @@ public class FontPropertyEditor extends PropertyEditorSupport {
 			fontStringLabel.setPreferredSize(new Dimension(350, 50));
 			fontStringLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			fontStringLabel.setFont(font);
-			topPanel.add(BorderLayout.SOUTH, fontStringLabel);
+			topPanel.add(BorderLayout.PAGE_END, fontStringLabel);
 
-			add(BorderLayout.NORTH, topPanel);
+			add(BorderLayout.PAGE_START, topPanel);
 
 			fontLabel = new GDLabel("Fonts");
 			Font newFont = getFont().deriveFont(1);
@@ -256,7 +256,7 @@ public class FontPropertyEditor extends PropertyEditorSupport {
 	}
 
 	// A wrapper class created so that the names of fonts are comparable ignoring case
-	private class FontWrapper implements Comparable<FontWrapper> {
+	private static class FontWrapper implements Comparable<FontWrapper> {
 		private final String fontName;
 
 		private FontWrapper(String fontName) {

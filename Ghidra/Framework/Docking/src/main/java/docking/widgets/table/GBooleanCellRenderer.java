@@ -72,11 +72,11 @@ public class GBooleanCellRenderer extends GTableCellRenderer {
 	}
 
 	/**
-	 * Sets the <code>Boolean</code> object for the cell being rendered to
-	 * <code>value</code>.
+	 * Sets the {@code Boolean} object for the cell being rendered to
+	 * {@code value}.
 	 *
 	 * @param value  the boolean value for this cell; if value is
-	 *          <code>null</code> it sets the text value "N/A"
+	 *          {@code null} it sets the text value "N/A"
 	 */
 	protected void setValue(Object value) {
 		if (value == null) {

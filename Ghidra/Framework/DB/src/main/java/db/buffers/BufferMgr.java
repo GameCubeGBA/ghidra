@@ -15,17 +15,6 @@
  */
 package db.buffers;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InterruptedIOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Stack;
-
 import db.DBChangeSet;
 import db.DBHandle;
 import db.buffers.LocalBufferFile.BufferFileFilter;
@@ -39,8 +28,13 @@ import ghidra.util.exception.CancelledException;
 import ghidra.util.exception.ClosedException;
 import ghidra.util.task.TaskMonitor;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InterruptedIOException;
+import java.util.*;
+
 /**
- * <code>BufferMgr</code> provides low-level buffer management and caching.
+ * {@code BufferMgr} provides low-level buffer management and caching.
  * Checkpointing and buffer versioning is supported along with an undo/redo
  * capability.
  */
@@ -76,7 +70,7 @@ public class BufferMgr {
 	private LocalBufferFile cacheFile;
 
 	private RecoveryMgr recoveryMgr;
-	private Object snapshotLock = new Object(); // Used to prevent BufferNode modifications during snapshot
+	private final Object snapshotLock = new Object(); // Used to prevent BufferNode modifications during snapshot
 	private boolean modifiedSinceSnapshot = false;
 	private boolean hasNonUndoableChanges = false;
 
@@ -99,8 +93,8 @@ public class BufferMgr {
 	private Stack<DataBuffer> freeBuffers = new Stack<>();
 
 	// Cache statistics data
-	private long cacheHits = 0; // buffer requests satisified by memory cache
-	private long cacheMisses = 0; // buffer requests not satisified by memory cache
+	private long cacheHits = 0L; // buffer requests satisified by memory cache
+	private long cacheMisses = 0L; // buffer requests not satisified by memory cache
 	private int lowWaterMark = -1; // lowest buffer cache point
 
 	/**
@@ -155,7 +149,7 @@ public class BufferMgr {
 
 	private PreCacheStatus preCacheStatus = PreCacheStatus.INIT;
 	private Thread preCacheThread; // only used once for original sourceFile (TODO: use currently not supported)
-	private Object preCacheLock = new Object();
+	private final Object preCacheLock = new Object();
 
 	/**
 	 * Construct a new buffer manager with no underlying source file using the
@@ -211,7 +205,7 @@ public class BufferMgr {
 	 * @throws IOException if source or cache file access error occurs
 	 */
 	private BufferMgr(BufferFile sourceFile, int requestedBufferSize, long approxCacheSize,
-			int maxUndos) throws FileNotFoundException, IOException {
+			int maxUndos) throws IOException {
 		bufferSize = requestedBufferSize;
 		if (sourceFile != null) {
 			this.sourceFile = sourceFile;
@@ -747,7 +741,7 @@ public class BufferMgr {
 		if (!(sourceFile instanceof BufferFileAdapter)) {
 			throw new UnsupportedOperationException("unsupported use of preCacheSourceFile");
 		}
-		Msg.trace(BufferMgr.this, "Pre-cache started...");
+		Msg.trace(this, "Pre-cache started...");
 		int cacheCount = 0;
 		BufferFileAdapter sourceAdapter = (BufferFileAdapter) sourceFile;
 		try (InputBlockStream inputBlockStream = sourceAdapter.getInputBlockStream()) {

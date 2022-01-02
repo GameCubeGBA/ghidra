@@ -28,6 +28,7 @@ import ghidra.program.util.ProgramLocation;
  * Listener that is notified when a mouse button is pressed.
  *
  */
+@FunctionalInterface
 public interface ButtonPressedListener {
 
 	/**

@@ -77,8 +77,8 @@ import ghidra.util.task.TaskMonitor;
  * In order to write a script:
  * <ol>
  * 	<li>Ghidra script must be written in Java.</li>
- * 	<li>Your script class must extend <code>ghidra.app.script.GhidraScript</code>.</li>
- * 	<li>You must implement the <code>run()</code> method. This is where you insert your
+ * 	<li>Your script class must extend {@code ghidra.app.script.GhidraScript}.</li>
+ * 	<li>You must implement the {@code run()} method. This is where you insert your
  * 			script-specific code.</li>
  * 	<li>You should create a description comment at the top of the file. Each description
  * 			line should start with &quot;//&quot;.</li>
@@ -102,13 +102,13 @@ import ghidra.util.task.TaskMonitor;
  * <p>All scripts, when run, will be handed the current state in the form of class instance 
  * variable. These variables are:
  * <ol>
- *   <li><code>currentProgram</code>: the active program</li>
- *   <li><code>currentAddress</code>: the address of the current cursor location in the tool</li>
- *   <li><code>currentLocation</code>: the program location of the current cursor location
+ *   <li>{@code currentProgram}: the active program</li>
+ *   <li>{@code currentAddress}: the address of the current cursor location in the tool</li>
+ *   <li>{@code currentLocation}: the program location of the current cursor location
  *   			in the tool, or null if no program location exists</li>
- *   <li><code>currentSelection</code>: the current selection in the tool, or null
+ *   <li>{@code currentSelection}: the current selection in the tool, or null
  *   			if no selection exists</li>
- *   <li><code>currentHighlight</code>: the current highlight in the tool, or null
+ *   <li>{@code currentHighlight}: the current highlight in the tool, or null
  *   			if no highlight exists</li>
  * </ol>
  * </blockquote>
@@ -704,7 +704,7 @@ public abstract class GhidraScript extends FlatProgramAPI {
 	 * Runs a script by name (allows current state to be changed by script).
 	 * <p>
 	 * It attempts to locate the script in the directories
-	 * defined in <code>GhidraScriptUtil.getScriptDirectories()</code>.
+	 * defined in {@code GhidraScriptUtil.getScriptDirectories()}.
 	 * <p>
 	 * The script being run uses the same {@link GhidraState} (e.g., script variables) as
 	 * this calling script.  Also, any changes to the state by the script being run will be
@@ -725,7 +725,7 @@ public abstract class GhidraScript extends FlatProgramAPI {
 	 * script).
 	 * <p>
 	 * It attempts to locate the script in the directories
-	 * defined in <code>GhidraScriptUtil.getScriptDirectories()</code>.
+	 * defined in {@code GhidraScriptUtil.getScriptDirectories()}.
 	 * <p>
 	 * The script being run uses the same {@link GhidraState} (e.g., script variables) as
 	 * this calling script.  Also, any changes to the state by the script being run will be
@@ -746,7 +746,7 @@ public abstract class GhidraScript extends FlatProgramAPI {
 	 * Runs a script by name (does not allow current state to change).
 	 * <p>
 	 * It attempts to locate the script in the directories
-	 * defined in <code>GhidraScriptUtil.getScriptDirectories()</code>.
+	 * defined in {@code GhidraScriptUtil.getScriptDirectories()}.
 	 * <p>
 	 * The script being run uses the same {@link GhidraState} (e.g., script variables) as
 	 * this calling script.  However, any changes to the state by the script being run will NOT
@@ -770,7 +770,7 @@ public abstract class GhidraScript extends FlatProgramAPI {
 	 * Runs a script by name using the given state.
 	 * <p>
 	 * It attempts to locate the script in the directories
-	 * defined in <code>GhidraScriptUtil.getScriptDirectories()</code>.
+	 * defined in {@code GhidraScriptUtil.getScriptDirectories()}.
 	 * <p>
 	 * The script being run uses the given {@link GhidraState} (e.g., script variables)
 	 * Any changes to the state by the script being run will be reflected in the given state
@@ -792,7 +792,7 @@ public abstract class GhidraScript extends FlatProgramAPI {
 	 * Runs a script by name with the given arguments using the given state.
 	 * <p>
 	 * It attempts to locate the script in the directories
-	 * defined in <code>GhidraScriptUtil.getScriptDirectories()</code>.
+	 * defined in {@code GhidraScriptUtil.getScriptDirectories()}.
 	 * <p>
 	 * The script being run uses the given {@link GhidraState} (e.g., script variables)
 	 * Any changes to the state by the script being run will be reflected in the given state
@@ -966,12 +966,12 @@ public abstract class GhidraScript extends FlatProgramAPI {
 	}
 
 	/**
-	 * A convenience method to print a formatted String using Java's <code>printf</code>
+	 * A convenience method to print a formatted String using Java's {@code printf}
 	 * feature, which is similar to that of the C programming language.
 	 * For a full description on Java's
-	 * <code>printf</code> usage, see {@link java.util.Formatter}.
+	 * {@code printf} usage, see {@link java.util.Formatter}.
 	 * <p>
-	 * For examples, see the included <code>FormatExampleScript</code>.
+	 * For examples, see the included {@code FormatExampleScript}.
 	 * <p>
 	 * <b><u>Note:</u> This method will not:</b>
 	 * <ul>
@@ -1550,8 +1550,8 @@ public abstract class GhidraScript extends FlatProgramAPI {
 
 	/**
 	 * Sets this script's highlight state (both the local variable
-	 * <code>currentHighlight</code> and the
-	 * <code>GhidraState</code>'s currentHighlight) to the given address set.  Also sets the tool's highlight
+	 * {@code currentHighlight} and the
+	 * {@code GhidraState}'s currentHighlight) to the given address set.  Also sets the tool's highlight
 	 * if the tool exists. (Same as calling setCurrentHightlight(set);
 	 * @param set the set of addresses to include in the highlight.  May be null.
 	 */
@@ -1874,8 +1874,8 @@ public abstract class GhidraScript extends FlatProgramAPI {
 	/**
 	 * Attempts to locate a value from script arguments
 	 *  or a script properties file using
-	 * the given <code>keys</code> as the lookup key for the latter.  The given <code>parser</code> will
-	 * be called to turn the String into a <code>T</code>.
+	 * the given {@code keys} as the lookup key for the latter.  The given <code>parser</code> will
+	 * be called to turn the String into a {@code T}.
 	 *
 	 * @param transformer the function to turn a String into a T
 	 * @param key the values used to create a key for lookup in the script properties file
@@ -1898,7 +1898,7 @@ public abstract class GhidraScript extends FlatProgramAPI {
 	 * @return null if no value was found in the aforementioned sources
 	 *
 	 * @throws IllegalArgumentException if the loaded String value cannot be parsed into a
-	 *                                  <code>T</code>.
+	 *                                  {@code T}.
 	 */
 	private <T> T loadAskValue(T defaultValue, StringTransformer<T> transformer, String key) {
 
@@ -1951,7 +1951,7 @@ public abstract class GhidraScript extends FlatProgramAPI {
 	/**
 	 * A generic method to execute user prompting for a value.  This method handles:
 	 * <ol>
-	 * 	<li>Checking for a previously chosen value; using the optional <code>defaultValue</code> as a fallback</li>
+	 * 	<li>Checking for a previously chosen value; using the optional {@code defaultValue} as a fallback</li>
 	 * 	<li>Calling the provided function to execute the client-specific ask UI</li>
 	 * 	<li>Storing the chosen result after the dialog is closed</li>
 	 * </ol>
@@ -1987,7 +1987,8 @@ public abstract class GhidraScript extends FlatProgramAPI {
 		return newValue;
 	}
 
-	private interface CancellableFunction<T, R> {
+	@FunctionalInterface
+    private interface CancellableFunction<T, R> {
 		R apply(T t) throws CancelledException;
 	}
 

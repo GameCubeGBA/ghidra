@@ -208,7 +208,7 @@ public interface Function extends Namespace {
 
 	/**
 	 * Get the function's effective signature.
-	 * This is equivalent to invoking <code>getSignature(false)</code> where auto-params and 
+	 * This is equivalent to invoking {@code getSignature(false)} where auto-params and
 	 * forced-indirect types will be reflected in the signature if present.
 	 * <br><br>WARNING! It is important to note that the calling convention may not be properly retained 
 	 * by the returned signature object if a non-generic calling convention is used by this function as 

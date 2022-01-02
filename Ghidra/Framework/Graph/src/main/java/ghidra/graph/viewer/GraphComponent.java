@@ -115,7 +115,7 @@ import util.CollectionUtils;
  * this class and override {@link #createPrimaryGraphViewer(VisualGraphLayout, Dimension)}
  * and {@link #createSatelliteGraphViewer(GraphViewer, Dimension)} as needed.   This allows
  * them to customize renderers and other viewer attributes.  To use the subclass, see the
- * {@link VisualGraphView} and its <code>installGraphViewer()</code> method.
+ * {@link VisualGraphView} and its {@code installGraphViewer()} method.
  * 
  * @param <V> the vertex type
  * @param <E> the edge type
@@ -516,7 +516,7 @@ public class GraphComponent<V extends VisualVertex, E extends VisualEdge<V>, G e
 		helpService.registerHelp(refreshButton,
 			new HelpLocation("FunctionGraphPlugin", "Stale_Graph"));
 
-		mainStalePanel.add(refreshButton, BorderLayout.WEST);
+		mainStalePanel.add(refreshButton, BorderLayout.LINE_START);
 
 		return mainStalePanel;
 	}

@@ -147,7 +147,7 @@ public class TestBigLayoutModel implements LayoutModel {
 		contentPane.add(scrollPanel);
 		JButton button = new JButton("Hit Me");
 		button.addActionListener(e -> model.updateData(1000, 2000));
-		contentPane.add(button, BorderLayout.SOUTH);
+		contentPane.add(button, BorderLayout.PAGE_END);
 		frame.pack();
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

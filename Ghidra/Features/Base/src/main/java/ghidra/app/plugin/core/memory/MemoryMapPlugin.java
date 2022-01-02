@@ -34,7 +34,7 @@ import ghidra.program.util.ChangeManager;
 import ghidra.program.util.ProgramLocation;
 
 /**
- * <CODE>MemoryMapPlugin</CODE> displays a memory map of all blocks in
+ * {@code MemoryMapPlugin} displays a memory map of all blocks in
  * the current program's memory.  Options for Adding, Editing, and Deleting
  * those memory blocks are available.
  */

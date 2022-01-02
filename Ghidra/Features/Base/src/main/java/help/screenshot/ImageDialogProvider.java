@@ -168,7 +168,7 @@ public class ImageDialogProvider extends DialogComponentProvider {
 		shapeCombo.addItem("Arrow");
 
 		JPanel jPanel = new JPanel(new BorderLayout());
-		jPanel.add(shapeCombo, BorderLayout.NORTH);
+		jPanel.add(shapeCombo, BorderLayout.PAGE_START);
 
 		JPanel imagePanel = new JPanel(new BorderLayout());
 
@@ -186,22 +186,22 @@ public class ImageDialogProvider extends DialogComponentProvider {
 			oldImageLabel = new GLabel("     Old image not found     ");
 		}
 
-		newLabelPanel.add(createImageLabelComponent("New Image"), BorderLayout.NORTH);
+		newLabelPanel.add(createImageLabelComponent("New Image"), BorderLayout.PAGE_START);
 		newLabelPanel.setBorder(BorderFactory.createLineBorder(Color.black, 20));
 		newLabelPanel.add(newImageLabel, BorderLayout.CENTER);
 
 		JPanel oldLabelPanel = new JPanel(new BorderLayout());
-		oldLabelPanel.add(createImageLabelComponent("Old Image"), BorderLayout.NORTH);
+		oldLabelPanel.add(createImageLabelComponent("Old Image"), BorderLayout.PAGE_START);
 		oldLabelPanel.setBorder(BorderFactory.createLineBorder(Color.black, 20));
 		oldLabelPanel.add(oldImageLabel, BorderLayout.CENTER);
 
-		imagePanel.add(oldLabelPanel, BorderLayout.WEST);
-		imagePanel.add(newLabelPanel, BorderLayout.EAST);
+		imagePanel.add(oldLabelPanel, BorderLayout.LINE_START);
+		imagePanel.add(newLabelPanel, BorderLayout.LINE_END);
 
 		jPanel.add(imagePanel, BorderLayout.CENTER);
 
 		textField = new JTextField();
-		jPanel.add(textField, BorderLayout.SOUTH);
+		jPanel.add(textField, BorderLayout.PAGE_END);
 
 		return jPanel;
 	}
@@ -248,7 +248,7 @@ public class ImageDialogProvider extends DialogComponentProvider {
 		}
 	}
 
-	private class ShapePainter implements GGlassPanePainter {
+	private static class ShapePainter implements GGlassPanePainter {
 		private Shape shape;
 		private Color color;
 

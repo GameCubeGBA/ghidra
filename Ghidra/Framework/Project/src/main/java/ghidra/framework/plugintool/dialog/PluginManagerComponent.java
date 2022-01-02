@@ -131,7 +131,7 @@ public class PluginManagerComponent extends JPanel implements ChangeListener, Sc
 			checkboxPanel.add(Box.createHorizontalStrut(10));
 			checkboxPanel.setPreferredSize(new Dimension(84, 70));
 			
-			add(checkboxPanel, BorderLayout.WEST);
+			add(checkboxPanel, BorderLayout.LINE_START);
 		}
 		
 		private void initializeLabelSection() {
@@ -184,7 +184,7 @@ public class PluginManagerComponent extends JPanel implements ChangeListener, Sc
 			descriptionlabel.setToolTipText(
 				HTMLUtilities.toWrappedHTML(pluginPackage.getDescription(), 80));
 			
-			add(descriptionlabel, BorderLayout.EAST);
+			add(descriptionlabel, BorderLayout.LINE_END);
 		}
 
 		protected void checkBoxClicked() {

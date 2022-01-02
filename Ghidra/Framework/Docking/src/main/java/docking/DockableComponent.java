@@ -104,7 +104,7 @@ public class DockableComponent extends JPanel implements ContainerListener {
 			setLayout(new BorderLayout());
 			header = new DockableHeader(this, isDocking);
 			if (placeholder.isHeaderShowing()) {
-				add(header, BorderLayout.NORTH);
+				add(header, BorderLayout.PAGE_START);
 			}
 
 			providerComp = initializeComponentPlaceholder(placeholder);

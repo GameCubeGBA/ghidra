@@ -17,6 +17,7 @@ package ghidra.dbg.test;
 
 import ghidra.dbg.test.AbstractDebuggerModelTest.DebuggerTestSpecimen;
 
+@FunctionalInterface
 public interface RequiresAttachSpecimen {
 
 	/**

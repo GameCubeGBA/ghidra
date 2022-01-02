@@ -194,7 +194,7 @@ public class SaveDataDialog extends DialogComponentProvider {
 		listPanel.setMouseListener(new ListMouseListener());
 
 		// Layout Main Panel
-		parentPanel.add(buttonPanel, BorderLayout.EAST);
+		parentPanel.add(buttonPanel, BorderLayout.LINE_END);
 		parentPanel.add(listPanel, BorderLayout.CENTER);
 		parentPanel.setBorder(new TitledBorder("Data"));
 

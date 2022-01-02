@@ -178,7 +178,7 @@ class MemoryMapProvider extends ComponentProviderAdapter {
 			enableOptions(model);
 		});
 
-		memPanel.add(new GLabel("Memory Blocks", SwingConstants.CENTER), BorderLayout.NORTH);
+		memPanel.add(new GLabel("Memory Blocks", SwingConstants.CENTER), BorderLayout.PAGE_START);
 		memPanel.add(memPane, BorderLayout.CENTER);
 
 		return memPanel;
@@ -672,7 +672,7 @@ class MemoryMapProvider extends ComponentProviderAdapter {
 // Inner Classes
 // ==================================================================================================
 
-	private class MemoryMapTable extends GhidraTable {
+	private static class MemoryMapTable extends GhidraTable {
 		MemoryMapTable(TableModel model) {
 			super(model);
 			setAutoEditEnabled(true);

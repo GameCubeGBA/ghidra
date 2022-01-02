@@ -21,6 +21,7 @@ import java.io.IOException;
 /**
  * Report database errors.
  */
+@FunctionalInterface
 public interface ErrorHandler {
 	
 	/**

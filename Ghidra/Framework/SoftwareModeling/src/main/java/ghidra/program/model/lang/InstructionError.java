@@ -207,21 +207,18 @@ public class InstructionError {
 	}
 
 	public static void dumpInstructionDifference(Instruction newInst, Instruction existingInstr) {
-		StringBuilder buf =
-			new StringBuilder("Instruction conflict details at " + newInst.getAddress());
-		buf.append("\n  New Instruction: ");
-		buf.append(getInstructionDetails(newInst));
-		buf.append("\n  Existing Instruction: ");
-		buf.append(getInstructionDetails(existingInstr));
-		Msg.debug(InstructionError.class, buf.toString());
+        String buf = "Instruction conflict details at " + newInst.getAddress() + "\n  New Instruction: " +
+                getInstructionDetails(newInst) +
+                "\n  Existing Instruction: " +
+                getInstructionDetails(existingInstr);
+		Msg.debug(InstructionError.class, buf);
 	}
 
 	private static String getInstructionDetails(Instruction instr) {
-		StringBuilder buf = new StringBuilder();
-		buf.append(instr.toString());
-		buf.append("\n");
-		buf.append(InstructionUtils.getFormattedContextRegisterValueBreakout(instr, "     "));
-		return buf.toString();
+        String buf = instr.toString() +
+                "\n" +
+                InstructionUtils.getFormattedContextRegisterValueBreakout(instr, "     ");
+		return buf;
 	}
 
 }

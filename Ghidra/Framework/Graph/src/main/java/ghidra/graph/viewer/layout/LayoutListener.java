@@ -23,6 +23,7 @@ import java.awt.geom.Point2D;
  * @param <V> the vertex type
  * @param <E> the edge type
  */
+@FunctionalInterface
 public interface LayoutListener<V, E> {
 
 	public enum ChangeType {

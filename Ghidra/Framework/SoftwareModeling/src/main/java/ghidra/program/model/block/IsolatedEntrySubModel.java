@@ -26,7 +26,7 @@ import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <CODE>IsolatedEntryCodeSubModel</CODE> (S-model) defines subroutines with a
+ * {@code IsolatedEntryCodeSubModel} (S-model) defines subroutines with a
  * unique entry point, which may share code with other subroutines. Each entry-
  * point may either be a source or called entry-point and is identified using
  * the MultEntSubModel. This model extends the OverlapCodeSubModel, redefining
@@ -44,7 +44,7 @@ public class IsolatedEntrySubModel extends OverlapCodeSubModel {
 	public static final String ISOLATED_MODEL_NAME = "Isolated Entry";
 	
     /**
-     * Construct a <CODE>IsolatedEntrySubModel</CODE> subroutine on a program.
+     * Construct a {@code IsolatedEntrySubModel} subroutine on a program.
      *
      * @param program program to create blocks from.
      */
@@ -53,7 +53,7 @@ public class IsolatedEntrySubModel extends OverlapCodeSubModel {
     }
     
     /**
-     * Construct a <CODE>IsolatedEntrySubModel</CODE> subroutine on a program.
+     * Construct a {@code IsolatedEntrySubModel} subroutine on a program.
      *
      * @param program program to create blocks from.
      * @param includeExternals externals are included if true

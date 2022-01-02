@@ -257,10 +257,9 @@ public class FunctionSignatureMarkupType extends FunctionEntryPointBasedAbstract
 				VTOptionDefines.DEFAULT_OPTION_FOR_FUNCTION_SIGNATURE);
 		switch (replaceDefaultChoice) {
 			case REPLACE:
-				return VTMarkupItemApplyActionType.REPLACE;
-			case WHEN_SAME_PARAMETER_COUNT:
-				return VTMarkupItemApplyActionType.REPLACE;
-			case EXCLUDE:
+            case WHEN_SAME_PARAMETER_COUNT:
+                return VTMarkupItemApplyActionType.REPLACE;
+            case EXCLUDE:
 			default:
 				return null;
 		}

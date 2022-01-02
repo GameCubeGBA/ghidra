@@ -121,7 +121,7 @@ public class PickToolDialog extends DialogComponentProvider {
 // Inner Classes
 //==================================================================================================
 
-	private class ToolTableModel extends AbstractSortedTableModel<ToolTemplate> {
+	private static class ToolTableModel extends AbstractSortedTableModel<ToolTemplate> {
 
 		private List<ToolTemplate> data;
 
@@ -188,7 +188,7 @@ public class PickToolDialog extends DialogComponentProvider {
 		}
 	}
 
-	private class ToolTemplateRenderer extends GTableCellRenderer {
+	private static class ToolTemplateRenderer extends GTableCellRenderer {
 		@Override
 		public Component getTableCellRendererComponent(GTableCellRenderingData data) {
 

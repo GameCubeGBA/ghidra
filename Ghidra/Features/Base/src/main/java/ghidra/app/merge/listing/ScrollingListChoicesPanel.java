@@ -33,7 +33,7 @@ import ghidra.app.merge.util.ConflictUtility;
 import ghidra.util.SystemUtilities;
 
 /**
- * <code>ScrollingListChoicesPanel</code> provides a table type of format for resolving
+ * {@code ScrollingListChoicesPanel} provides a table type of format for resolving
  * Each row that has choices represents the choices for a single conflict. Each conflict
  * choice has a corresponding radio button and scrolling table/list of text.
  */
@@ -73,7 +73,7 @@ public class ScrollingListChoicesPanel extends ConflictPanel {
 		setLayout(new BorderLayout());
 		headerLabel = new GDHtmlLabel(" ");
 		headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		add(headerLabel, BorderLayout.NORTH);
+		add(headerLabel, BorderLayout.PAGE_START);
 		setHeader(null);
 
 		buttonGroup = new ButtonGroup();
@@ -109,7 +109,7 @@ public class ScrollingListChoicesPanel extends ConflictPanel {
 		rowPanel.add(filler);
 
 		add(rowPanel, BorderLayout.CENTER);
-		add(createUseForAllCheckBox(), BorderLayout.SOUTH);
+		add(createUseForAllCheckBox(), BorderLayout.PAGE_END);
 	}
 
 	/**
@@ -127,7 +127,7 @@ public class ScrollingListChoicesPanel extends ConflictPanel {
 	void setHeader(String text) {
 		if (text != null && text.length() != 0) {
 			headerLabel.setText(ConflictUtility.wrapAsHTML(text));
-			add(headerLabel, BorderLayout.NORTH);
+			add(headerLabel, BorderLayout.PAGE_START);
 		}
 		else {
 			headerLabel.setText("");
@@ -257,7 +257,7 @@ class ListChoice extends JPanel {
 		rb = new GRadioButton("UNKNOWN");
 		rb.addItemListener(radioButtonListener);
 		group.add(rb);
-		add(rb, BorderLayout.NORTH);
+		add(rb, BorderLayout.PAGE_START);
 
 		model = new AbstractSortedTableModel<>() {
 			@Override

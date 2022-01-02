@@ -89,11 +89,11 @@ public class StatusBar extends JPanel {
 		setBorder(BorderFactory.createEmptyBorder(borderPadding, 0, 0, 0));
 
 		homeButtonPanel = new JPanel(new BorderLayout());
-		add(homeButtonPanel, BorderLayout.WEST);
+		add(homeButtonPanel, BorderLayout.LINE_START);
 
 		statusAreaPanel = new JPanel(new HorizontalLayout(0));
 		JPanel eastPanel = createEastPanel(statusAreaPanel);
-		add(eastPanel, BorderLayout.EAST);
+		add(eastPanel, BorderLayout.LINE_END);
 
 		statusLabel = new GDLabel(" ");
 		statusLabel.setOpaque(true);

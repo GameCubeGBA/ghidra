@@ -32,6 +32,7 @@ import docking.Tool;
  * @deprecated use {@link Tool}
  */
 // Note: this API is not likely used by forward-facing clients and can be removed in the next release
+@FunctionalInterface
 @Deprecated(since = "9.1", forRemoval = true)
 public interface DockingActionProviderIf {
 

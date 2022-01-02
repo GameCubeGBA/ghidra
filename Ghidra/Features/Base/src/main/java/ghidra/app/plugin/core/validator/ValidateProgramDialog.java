@@ -48,7 +48,7 @@ public class ValidateProgramDialog extends DialogComponentProvider {
 		runTestsButton.addActionListener(e -> conditionTestPanel.runTests());
 		runButtonPanel.add(runTestsButton);
 		mainPanel.add(conditionTestPanel, BorderLayout.CENTER);
-		mainPanel.add(runButtonPanel, BorderLayout.SOUTH);
+		mainPanel.add(runButtonPanel, BorderLayout.PAGE_END);
 
 		addWorkPanel(mainPanel);
 		addOKButton();

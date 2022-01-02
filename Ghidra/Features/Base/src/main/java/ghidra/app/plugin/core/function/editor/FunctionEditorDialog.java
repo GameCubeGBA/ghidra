@@ -168,7 +168,7 @@ public class FunctionEditorDialog extends DialogComponentProvider implements Mod
 	private JComponent buildMainPanel() {
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-		panel.add(buildPreview(), BorderLayout.NORTH);
+		panel.add(buildPreview(), BorderLayout.PAGE_START);
 		panel.add(buildCenterPanel(), BorderLayout.CENTER);
 		return panel;
 	}
@@ -176,9 +176,9 @@ public class FunctionEditorDialog extends DialogComponentProvider implements Mod
 	private JComponent buildCenterPanel() {
 		centerPanel = new JPanel(new BorderLayout());
 		centerPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
-		centerPanel.add(buildAttributePanel(), BorderLayout.NORTH);
+		centerPanel.add(buildAttributePanel(), BorderLayout.PAGE_START);
 		centerPanel.add(buildTable(), BorderLayout.CENTER);
-		centerPanel.add(buildBottomPanel(), BorderLayout.SOUTH);
+		centerPanel.add(buildBottomPanel(), BorderLayout.PAGE_END);
 		return centerPanel;
 	}
 
@@ -189,7 +189,7 @@ public class FunctionEditorDialog extends DialogComponentProvider implements Mod
 
 		JComponent callFixupField = createCallFixupComboPanel();
 		callFixupField.setBorder(BorderFactory.createTitledBorder(b, "Call Fixup:"));
-		panel.add(callFixupField, BorderLayout.WEST);
+		panel.add(callFixupField, BorderLayout.LINE_START);
 
 		Function thunkedFunction = model.getFunction().getThunkedFunction(false);
 		if (thunkedFunction != null) {
@@ -351,7 +351,7 @@ public class FunctionEditorDialog extends DialogComponentProvider implements Mod
 		leftPanel.setBorder(BorderFactory.createEmptyBorder(14, 0, 0, 10));
 
 		panel.add(leftPanel, BorderLayout.CENTER);
-		panel.add(buildTogglePanel(), BorderLayout.EAST);
+		panel.add(buildTogglePanel(), BorderLayout.LINE_END);
 		return panel;
 	}
 
@@ -433,7 +433,7 @@ public class FunctionEditorDialog extends DialogComponentProvider implements Mod
 		parameterTable.setDefaultRenderer(String.class, new VariableStringCellRenderer());
 		JScrollPane tableScroll = new JScrollPane(parameterTable);
 		panel.add(tableScroll, BorderLayout.CENTER);
-		panel.add(buildButtonPanel(), BorderLayout.EAST);
+		panel.add(buildButtonPanel(), BorderLayout.LINE_END);
 		return panel;
 	}
 
@@ -640,7 +640,7 @@ public class FunctionEditorDialog extends DialogComponentProvider implements Mod
 		}
 	}
 
-	private class ParameterDataTypeCellRenderer extends GTableCellRenderer {
+	private static class ParameterDataTypeCellRenderer extends GTableCellRenderer {
 		@Override
 		public Component getTableCellRendererComponent(GTableCellRenderingData data) {
 
@@ -733,7 +733,7 @@ public class FunctionEditorDialog extends DialogComponentProvider implements Mod
 		}
 	}
 
-	private class VariableStorageCellRenderer extends GTableCellRenderer {
+	private static class VariableStorageCellRenderer extends GTableCellRenderer {
 		@Override
 		public Component getTableCellRendererComponent(GTableCellRenderingData data) {
 
@@ -769,7 +769,7 @@ public class FunctionEditorDialog extends DialogComponentProvider implements Mod
 		}
 	}
 
-	private class VariableStringCellRenderer extends GTableCellRenderer {
+	private static class VariableStringCellRenderer extends GTableCellRenderer {
 		@Override
 		public Component getTableCellRendererComponent(GTableCellRenderingData data) {
 
@@ -801,7 +801,7 @@ public class FunctionEditorDialog extends DialogComponentProvider implements Mod
 		}
 	}
 
-	private class VerticalScrollablePanel extends JPanel implements Scrollable {
+	private static class VerticalScrollablePanel extends JPanel implements Scrollable {
 		public VerticalScrollablePanel() {
 			super(new BorderLayout());
 		}

@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
@@ -54,7 +53,7 @@ import ghidra.util.task.TaskMonitor;
 import ghidra.util.xml.XmlUtilities;
 
 /**
- * <code>SimpleLanguageTranslator</code> provides a simple translator which
+ * {@code SimpleLanguageTranslator} provides a simple translator which
  * derives its mappings from an XML translation specification file.
  */
 class SimpleLanguageTranslator extends LanguageTranslatorAdapter {

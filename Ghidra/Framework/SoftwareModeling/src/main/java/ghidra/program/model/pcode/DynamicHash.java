@@ -242,9 +242,7 @@ public class DynamicHash {
 		}
 
 		switch (method) {
-			case 0:
-				break;
-			case 1:
+            case 1:
 				gatherUnmarkedOp();
 				for (; opproc < markop.size(); ++opproc) {
 					buildOpUp(markop.get(opproc));

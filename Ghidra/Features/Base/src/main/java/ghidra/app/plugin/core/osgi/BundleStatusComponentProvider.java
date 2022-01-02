@@ -124,7 +124,7 @@ public class BundleStatusComponentProvider extends ComponentProviderAdapter {
 		JScrollPane scrollPane = new JScrollPane(bundleStatusTable);
 		scrollPane.getViewport().setBackground(bundleStatusTable.getBackground());
 
-		panel.add(filterPanel, BorderLayout.SOUTH);
+		panel.add(filterPanel, BorderLayout.PAGE_END);
 		panel.add(scrollPane, BorderLayout.CENTER);
 		panel.setPreferredSize(new Dimension(800, 400));
 	}

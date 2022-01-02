@@ -25,7 +25,7 @@ import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>VarKeyRecordNode</code> is an implementation of a BTree leaf node
+ * {@code VarKeyRecordNode} is an implementation of a BTree leaf node
  * which utilizes variable-length key values and stores variable-length records.
  * This type of node has the following layout within a single DataBuffer 
  * (field size in bytes):

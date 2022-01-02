@@ -307,7 +307,7 @@ public class SplashScreen extends JWindow {
 	private JPanel createMainPanel() {
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		mainPanel.setBackground(DEFAULT_BACKGROUND_COLOR);
-		mainPanel.add(createTitlePanel(), BorderLayout.NORTH);
+		mainPanel.add(createTitlePanel(), BorderLayout.PAGE_START);
 		mainPanel.add(createContentPanel(), BorderLayout.CENTER);
 		return mainPanel;
 	}
@@ -316,7 +316,7 @@ public class SplashScreen extends JWindow {
 		JPanel contentPanel = new JPanel(new BorderLayout());
 		contentPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
 		contentPanel.add(createInfoComponent(), BorderLayout.CENTER);
-		contentPanel.add(createStatusComponent(), BorderLayout.SOUTH);
+		contentPanel.add(createStatusComponent(), BorderLayout.PAGE_END);
 		return contentPanel;
 	}
 

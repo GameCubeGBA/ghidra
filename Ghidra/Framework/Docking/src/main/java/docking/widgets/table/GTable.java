@@ -85,11 +85,11 @@ import ghidra.util.exception.AssertException;
 import resources.ResourceManager;
 
 /**
- * A sub-class of <code>JTable</code> that provides navigation and auto-lookup.
+ * A sub-class of {@code JTable} that provides navigation and auto-lookup.
  * By default, both of these features are disabled.
  * <p>
  * Auto-lookup is only supported on one column and must be specified
- * using the <code>setAutoLookupColumn()</code> method.
+ * using the {@code setAutoLookupColumn()} method.
  * <p>
  * Auto-lookup allows a user to begin typing the first few letters
  * of a desired row. The table will attempt to locate the first row
@@ -98,7 +98,7 @@ import resources.ResourceManager;
  * typed letters will be flushed.
  * <p>
  * Auto-lookup is much faster if the underlying table model implements
- * <code>SortedTableModel</code>, because a binary search can used
+ * {@code SortedTableModel}, because a binary search can used
  * to locate the desired row. A linear search is used if the model is not sorted.
  * <p>
  * Other features provided:
@@ -297,7 +297,7 @@ public class GTable extends JTable {
 	}
 
 	/**
-	 * Returns the {@link SelectionManager} in use by this GTable.  <code>null</code> is returned
+	 * Returns the {@link SelectionManager} in use by this GTable.  {@code null} is returned
 	 * if the user has installed their own {@link ListSelectionModel}.
 	 * 
 	 * @return the selection manager
@@ -394,8 +394,8 @@ public class GTable extends JTable {
 	/**
 	 * Enables the keyboard actions to pass through this table and up the component hierarchy.
 	 * Specifically, passing true to this method allows unmodified keystrokes to work
-	 * in the tool when this table is focused.  Modified keystrokes, like <code>
-	 * Ctrl-C</code>, will work at all times.   Finally, if true is passed to this
+	 * in the tool when this table is focused.  Modified keystrokes, like {@code
+	 * Ctrl-C}, will work at all times.   Finally, if true is passed to this
 	 * method, then the {@link #setAutoLookupColumn(int) auto lookup} feature is
 	 * disabled.
 	 * 
@@ -411,8 +411,8 @@ public class GTable extends JTable {
 	 * Returns true if key strokes are used to trigger actions. 
 	 * 
 	 * <p>This method has a relationship with {@link #setAutoLookupColumn(int)}.  If this method 
-	 * returns <code>true</code>, then the auto-lookup feature is disabled.  If this method 
-	 * returns <code>false</code>, then the auto-lookup may or may not be enabled.
+	 * returns {@code true}, then the auto-lookup feature is disabled.  If this method
+	 * returns {@code false}, then the auto-lookup may or may not be enabled.
 	 *   
 	 * @return true if key strokes are used to trigger actions
 	 * @see #setActionsEnabled(boolean)
@@ -799,7 +799,7 @@ public class GTable extends JTable {
 	 * <ul>
 	 *     <li>Wrap tooltip text content with an &lt;html&gt; tag so that it is possible for
 	 *         the content to be formatted in a manner that is easier for the user read, and</li>
-	 *     <li>Enable any <code>default</code> {@link GTableCellRenderer} instances to render
+	 *     <li>Enable any {@code default} {@link GTableCellRenderer} instances to render
 	 *         HTML content, which they do not do by default.</li>
 	 * </ul>
 	 * <p>

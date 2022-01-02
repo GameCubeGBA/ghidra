@@ -148,22 +148,21 @@ public class RelocationInfo implements StructConverter {
 
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
-		buffer.append("Address:      " + Long.toHexString(r_address));
-		buffer.append('\n');
-		buffer.append("Value:        " + Integer.toHexString(r_value));
-		buffer.append('\n');
-		buffer.append("Scattered:    " + isScattered());
-		buffer.append('\n');
-		buffer.append("PC Relocated: " + isPcRelocated());
-		buffer.append('\n');
-		buffer.append("Length:       " + Integer.toHexString(r_length) + getLengthString());
-		buffer.append('\n');
-		buffer.append("External:     " + isExternal());
-		buffer.append('\n');
-		buffer.append("Type:         " + Integer.toHexString(r_type));
-		buffer.append('\n');
-		return buffer.toString();
+        String buffer = "Address:      " + Long.toHexString(r_address) +
+                '\n' +
+                "Value:        " + Integer.toHexString(r_value) +
+                '\n' +
+                "Scattered:    " + isScattered() +
+                '\n' +
+                "PC Relocated: " + isPcRelocated() +
+                '\n' +
+                "Length:       " + Integer.toHexString(r_length) + getLengthString() +
+                '\n' +
+                "External:     " + isExternal() +
+                '\n' +
+                "Type:         " + Integer.toHexString(r_type) +
+                '\n';
+		return buffer;
 	}
 
 	private String getLengthString() {

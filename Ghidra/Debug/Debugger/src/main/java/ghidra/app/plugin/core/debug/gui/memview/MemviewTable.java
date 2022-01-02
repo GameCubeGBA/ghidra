@@ -58,7 +58,7 @@ public class MemviewTable {
 		JScrollPane scrollPane = new JScrollPane(table);
 		filterPanel = new GhidraTableFilterPanel<>(table, model);
 		component.add(scrollPane, BorderLayout.CENTER);
-		component.add(filterPanel, BorderLayout.SOUTH);
+		component.add(filterPanel, BorderLayout.PAGE_END);
 		table.setAutoscrolls(true);
 
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {

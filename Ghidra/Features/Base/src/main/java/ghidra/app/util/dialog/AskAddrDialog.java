@@ -45,7 +45,7 @@ public class AskAddrDialog extends DialogComponentProvider {
 
 		JPanel panel = new JPanel(new BorderLayout(10, 10));
 		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-		panel.add(new GLabel(message), BorderLayout.WEST);
+		panel.add(new GLabel(message), BorderLayout.LINE_START);
 		panel.add(addrInput, BorderLayout.CENTER);
 
 		addWorkPanel(panel);

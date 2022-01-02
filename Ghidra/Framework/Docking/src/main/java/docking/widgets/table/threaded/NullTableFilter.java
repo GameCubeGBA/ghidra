@@ -19,7 +19,7 @@ import docking.widgets.table.TableFilter;
 
 /**
  * A table filter that represents the state of having no filter.  This allows us to not have to
- * use <code>null</code> to have multiple meanings.
+ * use {@code null} to have multiple meanings.
  *
  * @param <ROW_OBJECT> the type of the row of the table model using this filter
  */

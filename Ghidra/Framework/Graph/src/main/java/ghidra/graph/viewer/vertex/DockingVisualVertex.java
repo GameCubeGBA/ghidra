@@ -139,7 +139,7 @@ public class DockingVisualVertex extends AbstractVisualVertex {
 			}
 		});
 
-		mainPanel.add(genericHeader, BorderLayout.NORTH);
+		mainPanel.add(genericHeader, BorderLayout.PAGE_START);
 		mainPanel.add(textArea, BorderLayout.CENTER);
 	}
 

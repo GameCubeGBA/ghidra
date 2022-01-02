@@ -137,7 +137,7 @@ public class ExportFunctionInfoScriptTest extends AbstractGhidraHeadedIntegratio
 		waitForSwing();
 	}
 
-	private class TestJsonFunction {
+	private static class TestJsonFunction {
 		private String name;
 		private String entry;
 

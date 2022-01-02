@@ -15,6 +15,7 @@
  */
 package resources.icons;
 
+@FunctionalInterface
 public interface FileBasedIcon {
 	/**
 	 * Get the name of the image which in most cases will be the associated data file path. 

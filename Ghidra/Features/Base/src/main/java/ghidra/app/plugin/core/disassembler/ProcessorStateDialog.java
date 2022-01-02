@@ -77,7 +77,7 @@ public class ProcessorStateDialog extends DialogComponentProvider {
 		JScrollPane scrollPane = new JScrollPane(workPanel);
 		mainPanel.add(scrollPane, BorderLayout.CENTER);
 		JPanel radioPanel = new JPanel(new FlowLayout());
-		mainPanel.add(radioPanel, BorderLayout.SOUTH);
+		mainPanel.add(radioPanel, BorderLayout.PAGE_END);
 		GRadioButton hexButton = new GRadioButton("Hex");
 		GRadioButton decimalButton = new GRadioButton("Decimal");
 		hexButton.setSelected(true);

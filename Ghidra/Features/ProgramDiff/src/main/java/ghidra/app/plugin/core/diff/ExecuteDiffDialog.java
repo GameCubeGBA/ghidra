@@ -138,7 +138,7 @@ public class ExecuteDiffDialog extends DialogComponentProvider {
 		JPanel panel = new JPanel(new BorderLayout());
 		JPanel settingsPanel = new JPanel();
 		settingsPanel.add(createDiffPanel());
-		panel.add(settingsPanel, BorderLayout.NORTH);
+		panel.add(settingsPanel, BorderLayout.PAGE_START);
 		panel.add(createAddressPanel(), BorderLayout.CENTER);
 		setDiffFilter(diff);
 		return panel;
@@ -159,7 +159,7 @@ public class ExecuteDiffDialog extends DialogComponentProvider {
 		JPanel addressPanel = new JPanel(new BorderLayout());
 		Border border = BorderFactory.createEtchedBorder();
 		addressPanel.setBorder(new TitledBorder(border, ADDRESS_AREA_TITLE));
-		addressPanel.add(createLimitPanel(), BorderLayout.NORTH);
+		addressPanel.add(createLimitPanel(), BorderLayout.PAGE_START);
 		addressText = new JTextArea(5, 30);
 		addressText.setName("AddressTextArea");
 		addressText.setEditable(false);
@@ -229,7 +229,7 @@ public class ExecuteDiffDialog extends DialogComponentProvider {
 
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.add(checkBoxPanel, BorderLayout.CENTER);
-		panel.add(buttonPanel, BorderLayout.SOUTH);
+		panel.add(buttonPanel, BorderLayout.PAGE_END);
 
 		return panel;
 	}

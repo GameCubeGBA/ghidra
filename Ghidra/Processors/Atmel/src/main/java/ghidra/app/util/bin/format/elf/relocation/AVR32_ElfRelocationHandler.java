@@ -122,9 +122,8 @@ public class AVR32_ElfRelocationHandler extends ElfRelocationHandler {
 								currElfSymbolSize = 2;
 							}
 
-							StringBuffer newSectionNameBuff = new StringBuffer();
-							newSectionNameBuff.append("cpool.");
-							newSectionNameBuff.append(currElfSymbolName);
+                            String newSectionNameBuff = "cpool." +
+                                    currElfSymbolName;
 
 							StringBuffer newSectionTypeBuff = new StringBuffer();
 							newSectionTypeBuff.append("Constant Pool ");
@@ -146,7 +145,7 @@ public class AVR32_ElfRelocationHandler extends ElfRelocationHandler {
 							}
 							ElfLoadHelper loadHelper = elfRelocationContext.getLoadHelper();
 							MemoryBlockUtils.createInitializedBlock(program, false,
-								newSectionNameBuff.toString(), currNewAddress, currElfSymbolSize,
+                                    newSectionNameBuff, currNewAddress, currElfSymbolSize,
 								newSectionTypeBuff.toString(), "AVR32-ELF Loader", isReadable,
 								isWritable, isExecutable, loadHelper.getLog());
 						}

@@ -264,7 +264,7 @@ public class FunctionReachabilityTableModel
 
 	}
 
-	private class FromFunctionTableColumn
+	private static class FromFunctionTableColumn
 			extends AbstractDynamicTableColumn<FunctionReachabilityResult, String, Program> {
 
 		@Override
@@ -279,7 +279,7 @@ public class FunctionReachabilityTableModel
 		}
 	}
 
-	private class ToFunctionTableColumn
+	private static class ToFunctionTableColumn
 			extends AbstractDynamicTableColumn<FunctionReachabilityResult, String, Program> {
 
 		@Override
@@ -294,7 +294,7 @@ public class FunctionReachabilityTableModel
 		}
 	}
 
-	private class PathLengthTableColumn
+	private static class PathLengthTableColumn
 			extends AbstractDynamicTableColumn<FunctionReachabilityResult, Integer, Program> {
 		@Override
 		public String getColumnName() {

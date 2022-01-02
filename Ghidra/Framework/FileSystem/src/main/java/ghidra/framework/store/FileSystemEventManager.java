@@ -23,7 +23,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
 /**
- * <code>FileSystemListenerList</code> maintains a list of FileSystemListener's.
+ * {@code FileSystemListenerList} maintains a list of FileSystemListener's.
  * This class, acting as a FileSystemListener, simply relays each callback to
  * all FileSystemListener's within its list.  Employs either a synchronous 
  * and asynchronous notification mechanism.

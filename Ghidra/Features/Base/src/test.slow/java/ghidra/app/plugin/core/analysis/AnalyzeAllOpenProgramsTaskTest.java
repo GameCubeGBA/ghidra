@@ -402,7 +402,7 @@ public class AnalyzeAllOpenProgramsTaskTest extends AbstractGhidraHeadedIntegrat
 // Inner Classes
 //==================================================================================================
 
-	private class PluginToolStub extends PluginTool {
+	private static class PluginToolStub extends PluginTool {
 
 		private ToolOptions options = new ToolOptions(GhidraOptions.CATEGORY_AUTO_ANALYSIS);
 
@@ -433,7 +433,7 @@ public class AnalyzeAllOpenProgramsTaskTest extends AbstractGhidraHeadedIntegrat
 		}
 	}
 
-	private class AnalyzeProgramStrategySpy extends AnalyzeProgramStrategy {
+	private static class AnalyzeProgramStrategySpy extends AnalyzeProgramStrategy {
 
 		private Set<Program> analyzed = new HashSet<>();
 

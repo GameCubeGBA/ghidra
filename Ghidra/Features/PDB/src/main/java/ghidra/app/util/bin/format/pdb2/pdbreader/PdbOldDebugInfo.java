@@ -110,22 +110,21 @@ class PdbOldDebugInfo extends PdbDebugInfo {
 
 	@Override
 	protected void dumpHeader(Writer writer) throws IOException {
-		StringBuilder builder = new StringBuilder();
-		builder.append("streamNumberGlobalStaticSymbols: ");
-		builder.append(streamNumberGlobalStaticSymbolsHashMaybe);
-		builder.append("\nstreamNumberPublicStaticSymbols: ");
-		builder.append(streamNumberPublicStaticSymbolsHashMaybe);
-		builder.append("\nstreamNumberSymbolRecords: ");
-		builder.append(streamNumberSymbolRecords);
-		builder.append("\nlengthModuleInformationSubstream: ");
-		builder.append(lengthModuleInformationSubstream);
-		builder.append("\nlengthSectionContributionSubstream: ");
-		builder.append(lengthSectionContributionSubstream);
-		builder.append("\nlengthSectionMap: ");
-		builder.append(lengthSectionMap);
-		builder.append("\nlengthFileInformation: ");
-		builder.append(lengthFileInformation);
-		writer.write(builder.toString());
+        String builder = "streamNumberGlobalStaticSymbols: " +
+                streamNumberGlobalStaticSymbolsHashMaybe +
+                "\nstreamNumberPublicStaticSymbols: " +
+                streamNumberPublicStaticSymbolsHashMaybe +
+                "\nstreamNumberSymbolRecords: " +
+                streamNumberSymbolRecords +
+                "\nlengthModuleInformationSubstream: " +
+                lengthModuleInformationSubstream +
+                "\nlengthSectionContributionSubstream: " +
+                lengthSectionContributionSubstream +
+                "\nlengthSectionMap: " +
+                lengthSectionMap +
+                "\nlengthFileInformation: " +
+                lengthFileInformation;
+		writer.write(builder);
 	}
 
 	@Override

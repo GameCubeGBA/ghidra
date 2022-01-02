@@ -184,7 +184,8 @@ public class SymbolServerInstanceCreatorRegistry {
 	 * <p>
 	 * See {@link #createSymbolServerFromLocationString(String, SymbolServerInstanceCreatorContext)}
 	 */
-	public interface SymbolServerInstanceCreator {
+	@FunctionalInterface
+    public interface SymbolServerInstanceCreator {
 		/**
 		 * Creates a new {@link SymbolServer} instance using the specified location string
 		 * and the context available in the symbolServerInstanceCreatorContext.

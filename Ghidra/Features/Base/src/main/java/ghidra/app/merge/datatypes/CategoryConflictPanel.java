@@ -92,7 +92,7 @@ class CategoryConflictPanel extends JPanel {
 
 		JPanel labelPanel = new JPanel();
 		labelPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
-		labelPanel.setLayout(new BoxLayout(labelPanel, BoxLayout.X_AXIS));
+		labelPanel.setLayout(new BoxLayout(labelPanel, BoxLayout.LINE_AXIS));
 		labelPanel.add(new GLabel("Category: "));
 		labelPanel.add(Box.createHorizontalStrut(5));
 		labelPanel.add(categoryLabel);
@@ -108,12 +108,12 @@ class CategoryConflictPanel extends JPanel {
 		addToButtonGroup();
 
 		rbPanel = new JPanel();
-		rbPanel.setLayout(new BoxLayout(rbPanel, BoxLayout.Y_AXIS));
+		rbPanel.setLayout(new BoxLayout(rbPanel, BoxLayout.PAGE_AXIS));
 
 		rbPanel.add(latestRB);
 		rbPanel.add(myRB);
 		rbPanel.add(originalRB);
-		panel.add(labelPanel, BorderLayout.NORTH);
+		panel.add(labelPanel, BorderLayout.PAGE_START);
 		panel.add(rbPanel, BorderLayout.CENTER);
 
 		add(panel);

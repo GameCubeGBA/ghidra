@@ -31,7 +31,7 @@ import ghidra.util.task.TaskMonitor;
 import ghidra.util.task.TaskMonitorAdapter;
 
 /**
- * <CODE>ProgramDiff</CODE> is a class for comparing two programs and
+ * {@code ProgramDiff} is a class for comparing two programs and
  * determining where there are differences between them.
  * <P>
  * Currently, the differences can be determined if the two programs have
@@ -115,7 +115,7 @@ public class ProgramDiff {
 	private static final BookmarkComparator BOOKMARK_COMPARATOR = new BookmarkComparator();
 
 	/**
-	 * <CODE>ProgramDiff</CODE> is used to determine the addresses where
+	 * {@code ProgramDiff} is used to determine the addresses where
 	 * there are differences between two programs.
 	 * Possible differences are:
 	 * the actual bytes at an address, comments, labels, mnemonics,
@@ -137,7 +137,7 @@ public class ProgramDiff {
 	}
 
 	/**
-	 * <CODE>ProgramDiff</CODE> is used to determine the addresses where
+	 * {@code ProgramDiff} is used to determine the addresses where
 	 * there are differences between two programs.
 	 * Possible differences are:
 	 * the actual bytes at an address, comments, labels, mnemonics,
@@ -423,7 +423,7 @@ public class ProgramDiff {
 	}
 
 	/**
-	 * <CODE>getDifferences</CODE> is used to determine
+	 * {@code getDifferences} is used to determine
 	 * the addresses where there are differences between two programs using
 	 * the current filter. This
 	 * method only indicates that there is a difference at the address, not what
@@ -445,7 +445,7 @@ public class ProgramDiff {
 	}
 
 	/**
-	 * <CODE>getDifferences</CODE> is used to determine
+	 * {@code getDifferences} is used to determine
 	 * the addresses where there are differences between two programs. This
 	 * method only indicates that there is a difference at the address, not what
 	 * type of difference it is. Possible differences are:
@@ -517,7 +517,7 @@ public class ProgramDiff {
 	}
 
 	/**
-	 * <CODE>reDiffSubSet</CODE> re-determines the differences between the
+	 * {@code reDiffSubSet} re-determines the differences between the
 	 * two programs for the indicated address set.
 	 *
 	 * @param subSet the address set indicating which addresses should have
@@ -623,32 +623,32 @@ public class ProgramDiff {
 				monitorMsg = "Checking End of Line Comment Differences";
 				monitor.setMessage(monitorMsg);
 				as = getCommentDiffs(CodeUnit.EOL_COMMENT, addrs,
-					new CommentTypeComparator(program1, program2, CodeUnit.EOL_COMMENT), monitor);
+                        new CommentTypeComparator(program1, program2, CodeUnit.EOL_COMMENT), monitor);
 				break;
 			case ProgramDiffFilter.REPEATABLE_COMMENT_DIFFS:
 				monitorMsg = "Checking Repeatable Comment Differences";
 				monitor.setMessage(monitorMsg);
 				as = getCommentDiffs(CodeUnit.REPEATABLE_COMMENT, addrs,
-					new CommentTypeComparator(program1, program2, CodeUnit.REPEATABLE_COMMENT),
+                        new CommentTypeComparator(program1, program2, CodeUnit.REPEATABLE_COMMENT),
 					monitor);
 				break;
 			case ProgramDiffFilter.PRE_COMMENT_DIFFS:
 				monitorMsg = "Checking Pre-Comment Differences";
 				monitor.setMessage(monitorMsg);
 				as = getCommentDiffs(CodeUnit.PRE_COMMENT, addrs,
-					new CommentTypeComparator(program1, program2, CodeUnit.PRE_COMMENT), monitor);
+                        new CommentTypeComparator(program1, program2, CodeUnit.PRE_COMMENT), monitor);
 				break;
 			case ProgramDiffFilter.POST_COMMENT_DIFFS:
 				monitorMsg = "Checking Post-Comment Differences";
 				monitor.setMessage(monitorMsg);
 				as = getCommentDiffs(CodeUnit.POST_COMMENT, addrs,
-					new CommentTypeComparator(program1, program2, CodeUnit.POST_COMMENT), monitor);
+                        new CommentTypeComparator(program1, program2, CodeUnit.POST_COMMENT), monitor);
 				break;
 			case ProgramDiffFilter.PLATE_COMMENT_DIFFS:
 				monitorMsg = "Checking Plate Comment Differences";
 				monitor.setMessage(monitorMsg);
 				as = getCommentDiffs(CodeUnit.PLATE_COMMENT, addrs,
-					new CommentTypeComparator(program1, program2, CodeUnit.PLATE_COMMENT), monitor);
+                        new CommentTypeComparator(program1, program2, CodeUnit.PLATE_COMMENT), monitor);
 				break;
 			case ProgramDiffFilter.REFERENCE_DIFFS:
 				monitorMsg = "Checking Reference Differences";
@@ -761,7 +761,7 @@ public class ProgramDiff {
 
 	/**
 	 * Clear the set of addresses that are ignored. Ignored addresses will not
-	 * have differences reported by the <CODE>getDifferences</CODE> call.
+	 * have differences reported by the {@code getDifferences} call.
 	 */
 	synchronized void clearIgnoreAddressSet() {
 		this.ignoreAddressSet.clear();
@@ -779,10 +779,10 @@ public class ProgramDiff {
 	}
 
 	/**
-	 * Returns whether the last <CODE>getDifferences</CODE> call was cancelled.
+	 * Returns whether the last {@code getDifferences} call was cancelled.
 	 * If a TaskMonitor displays a progress dialog to the user, then the cancel
 	 * button could have been pressed.
-	 * @return true if the last <CODE>getDifferences</CODE> call was cancelled.
+	 * @return true if the last {@code getDifferences} call was cancelled.
 	 */
 	synchronized public boolean isCancelled() {
 		return cancelled;
@@ -808,7 +808,7 @@ public class ProgramDiff {
 
 	/**
 	 * Print the differences that have been found so far by calls to
-	 * <CODE>getDifferences</CODE>.
+	 * {@code getDifferences}.
 	 */
 	synchronized public void printDifferences() {
 		Msg.info(this, "");
@@ -821,7 +821,7 @@ public class ProgramDiff {
 
 	/**
 	 * Print the differences matching the types indicated that were found thus
-	 * far by all calls to <CODE>getDifferences</CODE>.
+	 * far by all calls to {@code getDifferences}.
 	 * @param type the type(s) of differences we want to see.
 	 * Valid types are: BYTE_DIFFS, CODE_UNIT_DIFFS,
 	 * COMMENT_DIFFS, REFERENCE_DIFFS, USER_DEFINED_DIFFS,
@@ -903,32 +903,32 @@ public class ProgramDiff {
 				monitorMsg = "Checking End of Line Comment Differences";
 				monitor.setMessage(monitorMsg);
 				as = getCommentDiffs(CodeUnit.EOL_COMMENT, checkAddressSet,
-					new CommentTypeComparator(program1, program2, CodeUnit.EOL_COMMENT), monitor);
+                        new CommentTypeComparator(program1, program2, CodeUnit.EOL_COMMENT), monitor);
 				break;
 			case ProgramDiffFilter.REPEATABLE_COMMENT_DIFFS:
 				monitorMsg = "Checking Repeatable Comment Differences";
 				monitor.setMessage(monitorMsg);
 				as = getCommentDiffs(CodeUnit.REPEATABLE_COMMENT, checkAddressSet,
-					new CommentTypeComparator(program1, program2, CodeUnit.REPEATABLE_COMMENT),
+                        new CommentTypeComparator(program1, program2, CodeUnit.REPEATABLE_COMMENT),
 					monitor);
 				break;
 			case ProgramDiffFilter.PRE_COMMENT_DIFFS:
 				monitorMsg = "Checking Pre-Comment Differences";
 				monitor.setMessage(monitorMsg);
 				as = getCommentDiffs(CodeUnit.PRE_COMMENT, checkAddressSet,
-					new CommentTypeComparator(program1, program2, CodeUnit.PRE_COMMENT), monitor);
+                        new CommentTypeComparator(program1, program2, CodeUnit.PRE_COMMENT), monitor);
 				break;
 			case ProgramDiffFilter.POST_COMMENT_DIFFS:
 				monitorMsg = "Checking Post-Comment Differences";
 				monitor.setMessage(monitorMsg);
 				as = getCommentDiffs(CodeUnit.POST_COMMENT, checkAddressSet,
-					new CommentTypeComparator(program1, program2, CodeUnit.POST_COMMENT), monitor);
+                        new CommentTypeComparator(program1, program2, CodeUnit.POST_COMMENT), monitor);
 				break;
 			case ProgramDiffFilter.PLATE_COMMENT_DIFFS:
 				monitorMsg = "Checking Plate Comment Differences";
 				monitor.setMessage(monitorMsg);
 				as = getCommentDiffs(CodeUnit.PLATE_COMMENT, checkAddressSet,
-					new CommentTypeComparator(program1, program2, CodeUnit.PLATE_COMMENT), monitor);
+                        new CommentTypeComparator(program1, program2, CodeUnit.PLATE_COMMENT), monitor);
 				break;
 			case ProgramDiffFilter.REFERENCE_DIFFS:
 				monitorMsg = "Checking Reference Differences";
@@ -1547,7 +1547,7 @@ public class ProgramDiff {
 	/** Determines the code unit addresses where there are differences of the
 	 * indicated type between program1 and program2.
 	 * @param cuiType the type of difference on the code unit. These are defined
-	 * in <CODE>CodeUnit</CODE>. (i.e. CodeUnit.EOL_COMMENT_PROPERTY).
+	 * in {@code CodeUnit}. (i.e. CodeUnit.EOL_COMMENT_PROPERTY).
 	 * @param addressSet the addresses to check for differences.
 	 * The addresses in this address set should be derived from program1.
 	 * @param c the comparator to use for determining where the differences are.
@@ -1571,7 +1571,7 @@ public class ProgramDiff {
 	/** Determines the code unit addresses where there are comment differences of the
 	 * indicated type between program1 and program2.
 	 * @param commentType the type of comment. These are defined
-	 * in <CODE>CodeUnit</CODE>. (i.e. CodeUnit.EOL_COMMENT).
+	 * in {@code CodeUnit}. (i.e. CodeUnit.EOL_COMMENT).
 	 * @param addressSet the addresses to check for differences.
 	 * The addresses in this address set should be derived from program1.
 	 * @param c the comparator to use for determining where the differences are.
@@ -1597,7 +1597,7 @@ public class ProgramDiff {
 	 * address set begin inside a code unit instead of at the beginning, the
 	 * entire code unit will be added to the address set.
 	 * @param cuiType the type of difference on the code unit. These are defined
-	 * in <CODE>CodeUnit</CODE>. (i.e. CodeUnit.EOL_COMMENT_PROPERTY).
+	 * in {@code CodeUnit}. (i.e. CodeUnit.EOL_COMMENT_PROPERTY).
 	 * @param addressSet the addresses to check for differences.
 	 * The addresses in this address set should be derived from program1.
 	 * @param c the comparator to use for determining where the differences are.
@@ -1868,7 +1868,7 @@ public class ProgramDiff {
 			this.program2 = program2;
 		}
 
-		/** Returns the first program being compared by this <CODE>ProgramDiff</CODE>.
+		/** Returns the first program being compared by this {@code ProgramDiff}.
 		 * @return the first program for the diff.
 		 */
 		@Override
@@ -1876,7 +1876,7 @@ public class ProgramDiff {
 			return program1;
 		}
 
-		/** Returns the second program being compared by this <CODE>ProgramDiff</CODE>.
+		/** Returns the second program being compared by this {@code ProgramDiff}.
 		 * @return the second program for the diff.
 		 */
 		@Override
@@ -2038,7 +2038,7 @@ public class ProgramDiff {
 
 	/** Used to compare the bookmarks in two programs.
 	 */
-	private class BookmarksComparator extends ProgramDiffComparatorImpl {
+	private static class BookmarksComparator extends ProgramDiffComparatorImpl {
 		/** The first program's bookmark manager. */
 		BookmarkManager bm1;
 		/** The second program's bookmark manager. */
@@ -2406,7 +2406,7 @@ public class ProgramDiff {
 
 	/** Used to compare the functions in two programs.
 	 */
-	private class FunctionComparator extends ProgramDiffComparatorImpl {
+	private static class FunctionComparator extends ProgramDiffComparatorImpl {
 		/** Constructor
 		 * @param program1 the first program
 		 * @param program2 the second program
@@ -2477,15 +2477,15 @@ public class ProgramDiff {
 	}
 
 	/** Abstract class for comparing two code units to determine if a particular program property
-	 * differs. It provides a default implementation of the <CODE>compare</CODE> method
+	 * differs. It provides a default implementation of the {@code compare} method
 	 * which compares the code unit minimum addresses. It also implements the
-	 * <CODE>getAddressSet</CODE> method, which gets the addresses for the specified
+	 * {@code getAddressSet} method, which gets the addresses for the specified
 	 * code unit.
-	 * Any class that extends this one must implement the <CODE>isSame</CODE> method.
+	 * Any class that extends this one must implement the {@code isSame} method.
 	 * isSame should compare the desired property of the two code units to determine
 	 * if it is equal in each.
 	 */
-	private abstract class CodeUnitComparator extends ProgramDiffComparatorImpl {
+	private abstract static class CodeUnitComparator extends ProgramDiffComparatorImpl {
 		/** Generic constructor for comparing program differences.
 		 * @param program1 the first program
 		 * @param program2 the second program
@@ -2544,7 +2544,7 @@ public class ProgramDiff {
 
 	/** Used to compare the comments of a particular type in two programs.
 	 */
-	private class CommentTypeComparator extends ProgramDiffComparatorImpl {
+	private static class CommentTypeComparator extends ProgramDiffComparatorImpl {
 		/**
 		 * the type of comment to compare
 		 * <br>CodeUnit.PLATE_COMMENT
@@ -3258,7 +3258,7 @@ public class ProgramDiff {
 
 	}
 
-	private class SymbolNameComparator implements Comparator<Symbol> {
+	private static class SymbolNameComparator implements Comparator<Symbol> {
 		SymbolNameComparator() {
 		}
 

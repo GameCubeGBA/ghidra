@@ -24,6 +24,7 @@ import java.awt.event.MouseEvent;
 /**
  * An interface for handling mouse clicks on {@link ghidra.util.bean.field.AnnotatedTextFieldElement}s.
  */
+@FunctionalInterface
 public interface AnnotatedMouseHandler {
     
     /**

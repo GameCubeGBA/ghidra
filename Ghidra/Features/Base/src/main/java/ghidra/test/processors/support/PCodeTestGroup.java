@@ -25,7 +25,7 @@ import ghidra.program.model.symbol.SymbolUtilities;
 import ghidra.util.Msg;
 
 /**
- * <code>PCodeTestGroup</code> identifies a test group function and its corresponding
+ * {@code PCodeTestGroup} identifies a test group function and its corresponding
  * PCodeTestGroupControlBlock.
  */
 public class PCodeTestGroup implements Comparable<PCodeTestGroup> {

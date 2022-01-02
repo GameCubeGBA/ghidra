@@ -386,7 +386,7 @@ public class GraphAlgorithms {
 
 	/**
 	 * Finds all the circuits, or cycles, in the given graph.  <B>This version
-	 * of <code>findCircuits()</code> takes a {@link TimeoutTaskMonitor}, which allows for the 
+	 * of {@code findCircuits()} takes a {@link TimeoutTaskMonitor}, which allows for the
 	 * client to control the duration of work.</B>   This is useful for finding paths on very
 	 * large, dense graphs.
 	 * 
@@ -409,7 +409,7 @@ public class GraphAlgorithms {
 	}
 
 	/**
-	 * Finds all paths from <code>start</code> to <code>end</code> in the given graph.
+	 * Finds all paths from {@code start} to <code>end</code> in the given graph.
 	 * 
 	 * <P><B><U>Warning:</U></B> for large, dense graphs (those with many interconnected 
 	 * vertices) this algorithm could run indeterminately, possibly causing the JVM to 
@@ -433,8 +433,8 @@ public class GraphAlgorithms {
 	}
 
 	/**
-	 * Finds all paths from <code>start</code> to <code>end</code> in the given graph.  <B>This version
-	 * of <code>findPaths()</code> takes a {@link TimeoutTaskMonitor}, which allows for the 
+	 * Finds all paths from {@code start} to <code>end</code> in the given graph.  <B>This version
+	 * of {@code findPaths()} takes a {@link TimeoutTaskMonitor}, which allows for the
 	 * client to control the duration of work.</B>   This is useful for finding paths on very
 	 * large, dense graphs.
 	 * 

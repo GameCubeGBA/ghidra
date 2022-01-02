@@ -87,13 +87,13 @@ class SetFlowOverrideAction extends ListingContextAction {
 			throws NoSuchElementException, CancelledException {
 
 		OverrideSelectionInspector inspectionTask =
-			new OverrideSelectionInspector(program, selection);
+                new OverrideSelectionInspector(program, selection);
 		new TaskLauncher(inspectionTask, null, 500);
 
 		return inspectionTask.isValidSelection();
 	}
 
-	private class OverrideSelectionInspector extends Task {
+	private static class OverrideSelectionInspector extends Task {
 
 		final AddressSet targetSet = new AddressSet();
 

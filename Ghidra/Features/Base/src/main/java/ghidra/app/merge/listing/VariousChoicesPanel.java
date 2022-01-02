@@ -21,10 +21,8 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -44,7 +42,7 @@ import ghidra.util.HTMLUtilities;
 import ghidra.util.layout.MaximizeSpecificColumnGridLayout;
 
 /**
- * <code>VariousChoicesPanel</code> provides a table type of format for resolving
+ * {@code VariousChoicesPanel} provides a table type of format for resolving
  * multiple conflicts in one panel. Each row that has choices represents the
  * choices for a single conflict. 
  * So each row can have multiple radio buttons or multiple check boxes.
@@ -92,7 +90,7 @@ public class VariousChoicesPanel extends ConflictPanel {
 		setLayout(new BorderLayout());
 		headerLabel = new GDHtmlLabel(" ");
 		headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		add(headerLabel, BorderLayout.NORTH);
+		add(headerLabel, BorderLayout.PAGE_START);
 		setHeader(null);
 		MyRadioButton rb = new MyRadioButton("W");
 		MyCheckBox cb = new MyCheckBox("W");
@@ -105,7 +103,7 @@ public class VariousChoicesPanel extends ConflictPanel {
 		checkBoxBorder =
 			BorderFactory.createEmptyBorder((checkBoxOffset > 0 ? checkBoxOffset : 0), 0, 0, 0);
 
-		add(createUseForAllCheckBox(), BorderLayout.SOUTH);
+		add(createUseForAllCheckBox(), BorderLayout.PAGE_END);
 		adjustUseForAllEnablement();
 	}
 
@@ -124,7 +122,7 @@ public class VariousChoicesPanel extends ConflictPanel {
 	void setHeader(String text) {
 		if (text != null && text.length() != 0) {
 			headerLabel.setText(ConflictUtility.wrapAsHTML(text));
-			add(headerLabel, BorderLayout.NORTH);
+			add(headerLabel, BorderLayout.PAGE_START);
 		}
 		else {
 			headerLabel.setText("");
@@ -513,7 +511,7 @@ public class VariousChoicesPanel extends ConflictPanel {
 		return rows.size() > 0;
 	}
 
-	private class MyLabel extends GLabel {
+	private static class MyLabel extends GLabel {
 
 		/**
 		 * @param text the text of this label.

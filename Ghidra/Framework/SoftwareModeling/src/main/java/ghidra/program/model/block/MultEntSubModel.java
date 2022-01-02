@@ -33,7 +33,7 @@ import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <CODE>MultEntSubModel</CODE> (M-model) defines subroutines which do not share code with
+ * {@code MultEntSubModel} (M-model) defines subroutines which do not share code with
  * any other subroutine and may have one or more entry points. Each entry-
  * points represent either a source or called entry-point.
  * <P>
@@ -56,7 +56,7 @@ public class MultEntSubModel implements SubroutineBlockModel {
 	protected final boolean includeExternals;
 
 	/**
-	 * Construct a <CODE>MultEntSubModel</CODE> for a program.
+	 * Construct a {@code MultEntSubModel} for a program.
 	 *
 	 * @param program program to create blocks from.
 	 */
@@ -65,7 +65,7 @@ public class MultEntSubModel implements SubroutineBlockModel {
 	}
 
 	/**
-	 * Construct a <CODE>MultEntSubModel</CODE> for a program.
+	 * Construct a {@code MultEntSubModel} for a program.
 	 * @param program program to create blocks from.
 	 * @param includeExternals external blocks will be included if true
 	 */
@@ -112,8 +112,8 @@ public class MultEntSubModel implements SubroutineBlockModel {
 	 *
 	 * @param   addr    Address inside the subroutine that we are seeking
 	 * @param monitor task monitor which allows user to cancel operation.
-	 * @return          The <CODE>CodeBlock</CODE> for a
-	 *                  <CODE>MultEntSubModel</CODE> Subroutine.
+	 * @return          The {@code CodeBlock} for a
+	 *                  {@code MultEntSubModel} Subroutine.
 	 * 					Null is returned if there is no instruction at addr.
 	 * @throws CancelledException if the monitor cancels the operation.
 	 **/

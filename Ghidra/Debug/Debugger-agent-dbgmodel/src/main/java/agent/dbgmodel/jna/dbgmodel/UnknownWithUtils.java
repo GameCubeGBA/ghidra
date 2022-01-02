@@ -245,10 +245,11 @@ public class UnknownWithUtils extends Unknown {
 
 	public static final RefAnalyzer ANALYZER = new DisabledRefAnalyzer();
 
-	public static interface VTableIndex {
+	@FunctionalInterface
+    public interface VTableIndex {
 		int getIndex();
 
-		public static <I extends Enum<I> & VTableIndex> int follow(Class<I> prev) {
+		static <I extends Enum<I> & VTableIndex> int follow(Class<I> prev) {
 			I[] all = prev.getEnumConstants();
 			int start = all[0].getIndex() - all[0].ordinal();
 			return all.length + start;

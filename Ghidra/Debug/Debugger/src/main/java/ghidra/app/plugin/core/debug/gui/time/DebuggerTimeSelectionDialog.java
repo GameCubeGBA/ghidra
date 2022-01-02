@@ -77,7 +77,7 @@ public class DebuggerTimeSelectionDialog extends DialogComponentProvider {
 			hbox.add(new JLabel("Ops: "));
 			hbox.add(opBack = new JButton(DebuggerResources.ICON_STEP_BACK));
 			hbox.add(opStep = new JButton(DebuggerResources.ICON_STEP_INTO));
-			workPanel.add(hbox, BorderLayout.NORTH);
+			workPanel.add(hbox, BorderLayout.PAGE_START);
 		}
 
 		tickBack.addActionListener(evt -> doStep(s -> s.steppedBackward(getTrace(), 1)));

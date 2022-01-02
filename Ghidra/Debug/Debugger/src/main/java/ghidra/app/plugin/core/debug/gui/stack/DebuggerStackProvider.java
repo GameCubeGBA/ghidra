@@ -275,7 +275,7 @@ public class DebuggerStackProvider extends ComponentProviderAdapter {
 		stackTable = new GhidraTable(stackTableModel);
 		mainPanel.add(new JScrollPane(stackTable));
 		stackFilterPanel = new GhidraTableFilterPanel<>(stackTable, stackTableModel);
-		mainPanel.add(stackFilterPanel, BorderLayout.SOUTH);
+		mainPanel.add(stackFilterPanel, BorderLayout.PAGE_END);
 
 		stackTable.getSelectionModel().addListSelectionListener(evt -> {
 			if (evt.getValueIsAdjusting()) {

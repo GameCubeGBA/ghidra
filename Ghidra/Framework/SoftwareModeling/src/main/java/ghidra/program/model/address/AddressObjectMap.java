@@ -23,17 +23,17 @@ import ghidra.util.prop.ObjectPropertySet;
 
 
 /**
- * <CODE>AddressObjectMap</CODE> maintains a mapping between addresses in the program
+ * {@code AddressObjectMap} maintains a mapping between addresses in the program
  * and Objects that have been discovered.
  * <P>
  * AddressObjectMap uses an ObjectPropertySet to track which addresses belong to
- * which Objects. If a range <CODE>[addr1,addr2]</CODE> is assigned to a Object
- * with id <CODE>ID</CODE> then <CODE>-ID</CODE> will be placed as the property value at
- * <CODE>addr1</CODE> and <CODE>ID</CODE> will be placed at <CODE>addr2</CODE>.
+ * which Objects. If a range {@code [addr1,addr2]} is assigned to a Object
+ * with id {@code ID} then <CODE>-ID</CODE> will be placed as the property value at
+ * {@code addr1} and <CODE>ID</CODE> will be placed at <CODE>addr2</CODE>.
  * In other words AddressObjectMap marks the beginning of a range belonging to an
  * Object with its id (a positive number) and the end with its
  * id (a negative number). A single address "range" will just have one entry
- * which will contain <CODE>-objID</CODE>.
+ * which will contain {@code -objID}.
  *
  * It is important to realize that the current implementation of this cache,
  * an address can only belong in one Object.  This could have bad effects
@@ -56,7 +56,7 @@ public class AddressObjectMap {
     private static final Object [] emptyArray = {};
 
     /**
-     * Creates a new <CODE>AddressObjectMap</CODE> object.
+     * Creates a new {@code AddressObjectMap} object.
      */
     public AddressObjectMap() {
     }

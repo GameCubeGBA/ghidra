@@ -56,7 +56,7 @@ public class MultiLineMessageDialog extends DialogComponentProvider {
 	 * If the text is too long to fit, a scroll bar will be used.
 	 * <p>
 	 * The text string can be plain text (with \n line breaks) or HTML (if the first
-	 * 6 characters of the string are <code>&lt;html&gt;</code>).
+	 * 6 characters of the string are {@code <html>}).
 	 * <p>
 	 * This method will not return until the user presses the OK button.
 	 * <p>
@@ -99,7 +99,7 @@ public class MultiLineMessageDialog extends DialogComponentProvider {
 		if (!StringUtils.isBlank(shortMessage)) {
 			JLabel shortMessageLabel = new GLabel(shortMessage);
 			shortMessageLabel.setBorder(BorderFactory.createEmptyBorder(10, 5, 10, 10));
-			workPanel.add(shortMessageLabel, BorderLayout.NORTH);
+			workPanel.add(shortMessageLabel, BorderLayout.PAGE_START);
 		}
 
 		if (StringUtils.isBlank(detailedMessage)) {
@@ -153,7 +153,7 @@ public class MultiLineMessageDialog extends DialogComponentProvider {
 		if (icon != null) {
 			JLabel iconLabel = new GIconLabel(icon);
 			iconLabel.setBorder(BorderFactory.createEmptyBorder(1, 10, 1, 10));
-			workPanel.add(iconLabel, BorderLayout.WEST);
+			workPanel.add(iconLabel, BorderLayout.LINE_START);
 		}
 
 		setTransient(true);

@@ -18,7 +18,7 @@ package ghidra.program.model.data;
 public abstract class DataTypeConflictHandler {
 
 	/**
-	 * <code>ConflictResolutionPolicy</code> indicates the conflict resolution policy
+	 * {@code ConflictResolutionPolicy} indicates the conflict resolution policy
 	 * which should be applied when any conflict is encountered
 	 */
 	public enum ConflictResolutionPolicy {
@@ -50,7 +50,7 @@ public abstract class DataTypeConflictHandler {
 	}
 
 	/**
-	 * <code>ConflictResult</code> indicates the resolution which should be
+	 * {@code ConflictResult} indicates the resolution which should be
 	 * applied to a specific conflict
 	 */
 	public enum ConflictResult {

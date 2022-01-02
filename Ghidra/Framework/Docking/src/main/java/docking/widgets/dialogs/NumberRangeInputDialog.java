@@ -111,7 +111,7 @@ public class NumberRangeInputDialog extends DialogComponentProvider {
 	}
 
 	/**
-		 * <code>show</code> displays the dialog, gets the user input
+		 * {@code show} displays the dialog, gets the user input
 		 *
 		 * @return false if the user cancelled the operation
 		 */
@@ -219,7 +219,7 @@ public class NumberRangeInputDialog extends DialogComponentProvider {
 		textField.setText(text);
 	}
 
-	private class MyHintTextField extends HintTextField {
+	private static class MyHintTextField extends HintTextField {
 
 		MyHintTextField(String hintText) {
 			super(hintText);

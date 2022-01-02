@@ -58,7 +58,7 @@ class GhidraFolderData {
 	 */
 	private DomainFolderChangeListener listener;
 
-	protected LocalFileSystem fileSystem;
+	protected final LocalFileSystem fileSystem;
 	protected FileSystem versionedFileSystem;
 
 	private GhidraFolderData parent;

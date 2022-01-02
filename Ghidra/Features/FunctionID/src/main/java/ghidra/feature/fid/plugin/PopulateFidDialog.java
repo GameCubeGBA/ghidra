@@ -160,7 +160,7 @@ public class PopulateFidDialog extends DialogComponentProvider {
 			}
 		});
 		symbolsFileTextField.getDocument().addUndoableEditListener(e -> updateOkEnablement());
-		panel.add(browseButton, BorderLayout.EAST);
+		panel.add(browseButton, BorderLayout.LINE_END);
 		return panel;
 	}
 
@@ -178,7 +178,7 @@ public class PopulateFidDialog extends DialogComponentProvider {
 			}
 		});
 		languageIdField.getDocument().addUndoableEditListener(e -> updateOkEnablement());
-		panel.add(browseButton, BorderLayout.EAST);
+		panel.add(browseButton, BorderLayout.LINE_END);
 		return panel;
 
 	}
@@ -230,7 +230,7 @@ public class PopulateFidDialog extends DialogComponentProvider {
 			}
 			updateOkEnablement();
 		});
-		panel.add(browseButton, BorderLayout.EAST);
+		panel.add(browseButton, BorderLayout.LINE_END);
 		return panel;
 	}
 

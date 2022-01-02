@@ -22,7 +22,7 @@ import db.buffers.DataBuffer;
 import ghidra.util.exception.AssertException;
 
 /**
- * <code>StringField</code> provides a wrapper for variable length String data which is read or
+ * {@code StringField} provides a wrapper for variable length String data which is read or
  * written to a Record. Strings are always encoded as UTF-8.
  */
 public final class StringField extends Field {

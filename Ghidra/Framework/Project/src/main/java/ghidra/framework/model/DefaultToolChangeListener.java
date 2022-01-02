@@ -19,6 +19,7 @@ package ghidra.framework.model;
 /**
  * Listener that is notified when the default tool specification changes.
  */
+@FunctionalInterface
 public interface DefaultToolChangeListener {
 
 	/**

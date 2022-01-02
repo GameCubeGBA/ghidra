@@ -33,6 +33,7 @@ import ghidra.util.Msg;
  * a reason that is not understood by the manager, then {@link GdbReason.Reasons#UNKNOWN} is given.
  * If no reason is provided, then {@link GdbReason.Reasons#NONE} is given.
  */
+@FunctionalInterface
 public interface GdbReason {
 	/**
 	 * A map of reason strings to reason classes

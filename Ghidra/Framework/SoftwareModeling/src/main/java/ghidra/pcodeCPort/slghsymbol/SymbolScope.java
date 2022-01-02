@@ -73,12 +73,11 @@ public class SymbolScope {
 
 	@Override
     public String toString() {
-	    StringBuilder sb = new StringBuilder();
-	    sb.append("[ ");
-	    sb.append(id);
-	    sb.append(": ");
-	    sb.append(tree);
-	    sb.append(" ]");
-	    return sb.toString();
+        String sb = "[ " +
+                id +
+                ": " +
+                tree +
+                " ]";
+	    return sb;
 	}
 }

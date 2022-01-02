@@ -42,7 +42,7 @@ class KeyBindingInputDialog extends DialogComponentProvider implements KeyEntryL
 
 		JPanel panel = new JPanel(new BorderLayout(10, 10));
 		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-		panel.add(new GLabel(scriptName), BorderLayout.NORTH);
+		panel.add(new GLabel(scriptName), BorderLayout.PAGE_START);
 		panel.add(kbField, BorderLayout.CENTER);
 
 		addWorkPanel(panel);

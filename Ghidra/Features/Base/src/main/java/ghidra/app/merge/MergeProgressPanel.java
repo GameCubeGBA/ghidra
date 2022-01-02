@@ -55,7 +55,7 @@ public class MergeProgressPanel extends JPanel {
 		Border outsideBorder = BorderFactory.createMatteBorder(0, 0, 2, 0, Color.BLUE);
 		Border compoundBorder = BorderFactory.createCompoundBorder(outsideBorder, insideBorder);
 		phasesTitlePanel.setBorder(compoundBorder);
-		BoxLayout bl = new BoxLayout(phasesTitlePanel, BoxLayout.X_AXIS);
+		BoxLayout bl = new BoxLayout(phasesTitlePanel, BoxLayout.LINE_AXIS);
 		phasesTitlePanel.setLayout(bl);
 		phasesTitlePanel.add(Box.createHorizontalStrut(5));
 		phasesTitlePanel.add(new GLabel("Merge Status"));
@@ -88,7 +88,7 @@ public class MergeProgressPanel extends JPanel {
 		JLabel imageLabel = new GIconLabel(DEFINED_ICON);
 		JPanel labelPanel = new JPanel();
 		labelPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-		BoxLayout bl = new BoxLayout(labelPanel, BoxLayout.X_AXIS);
+		BoxLayout bl = new BoxLayout(labelPanel, BoxLayout.LINE_AXIS);
 		labelPanel.setLayout(bl);
 		labelPanel.add(Box.createHorizontalStrut(INDENT_IN_PIXELS * phaseDepth));
 		labelPanel.add(Box.createHorizontalStrut(5));

@@ -241,7 +241,7 @@ public class MultipleSymbolStringable extends Stringable {
 //==================================================================================================
 // Inner Classes
 //==================================================================================================
-	private class NamespaceInfo {
+	private static class NamespaceInfo {
 		String name;
 		SymbolType symbolType;
 		SourceType sourceType;

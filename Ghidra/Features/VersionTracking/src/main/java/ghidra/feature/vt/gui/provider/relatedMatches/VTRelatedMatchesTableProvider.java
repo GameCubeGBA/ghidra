@@ -74,7 +74,7 @@ public class VTRelatedMatchesTableProvider extends ComponentProviderAdapter {
 				relatedMatchesTableModel);
 		JPanel markupItemsTablePanel = new JPanel(new BorderLayout());
 		markupItemsTablePanel.add(tablePanel, BorderLayout.CENTER);
-		markupItemsTablePanel.add(markupFilterPanel, BorderLayout.SOUTH);
+		markupItemsTablePanel.add(markupFilterPanel, BorderLayout.PAGE_END);
 
 		return markupItemsTablePanel;
 	}

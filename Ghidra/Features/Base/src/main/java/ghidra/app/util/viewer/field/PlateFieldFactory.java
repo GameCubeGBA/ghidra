@@ -48,8 +48,8 @@ public class PlateFieldFactory extends FieldFactory {
 	private static final String EMPTY_STRING = "";
 	public static final String FIELD_NAME = "Plate Comment";
 	public static final Color DEFAULT_COLOR = Color.BLUE;
-	private final static String FIELD_GROUP_TITLE = "Plate Comments Field";
-	public final static String ENABLE_WORD_WRAP_MSG =
+	private static final String FIELD_GROUP_TITLE = "Plate Comments Field";
+	public static final String ENABLE_WORD_WRAP_MSG =
 		FIELD_GROUP_TITLE + Options.DELIMITER + "Enable Word Wrapping";
 
 	/**
@@ -57,31 +57,31 @@ public class PlateFieldFactory extends FieldFactory {
 	 */
 	private static final int CONTENT_PADDING = 4;
 	private static final String ELLIPSIS = "...";
-	final static String FUNCTION_PLATE_COMMENT = " FUNCTION";
-	final static String THUNK_FUNCTION_PLATE_COMMENT = " THUNK FUNCTION";
-	final static String POINTER_TO_EXTERNAL_FUNCTION_COMMENT = " POINTER to EXTERNAL FUNCTION";
-	final static String POINTER_TO_NONEXTERNAL_FUNCTION_COMMENT = " POINTER to FUNCTION";
-	final static String CASE_PLATE_COMMENT = " CASE";
-	final static String EXT_ENTRY_PLATE_COMMENT = " EXTERNAL ENTRY";
-	final static String DEAD_CODE_PLATE_COMMENT = " DEAD";
-	final static String SUBROUTINE_PLATE_COMMENT = " SUBROUTINE";
-	final static String DEFAULT_PLATE_COMMENT = "  ";
+	static final String FUNCTION_PLATE_COMMENT = " FUNCTION";
+	static final String THUNK_FUNCTION_PLATE_COMMENT = " THUNK FUNCTION";
+	static final String POINTER_TO_EXTERNAL_FUNCTION_COMMENT = " POINTER to EXTERNAL FUNCTION";
+	static final String POINTER_TO_NONEXTERNAL_FUNCTION_COMMENT = " POINTER to FUNCTION";
+	static final String CASE_PLATE_COMMENT = " CASE";
+	static final String EXT_ENTRY_PLATE_COMMENT = " EXTERNAL ENTRY";
+	static final String DEAD_CODE_PLATE_COMMENT = " DEAD";
+	static final String SUBROUTINE_PLATE_COMMENT = " SUBROUTINE";
+	static final String DEFAULT_PLATE_COMMENT = "  ";
 
-	final static String GROUP_TITLE = "Format Code";
-	final static String SHOW_SUBROUTINE_PLATES_OPTION =
+	static final String GROUP_TITLE = "Format Code";
+	static final String SHOW_SUBROUTINE_PLATES_OPTION =
 		GROUP_TITLE + Options.DELIMITER + "  Show Subroutine Plates";
-	final static String SHOW_FUNCTION_PLATES_OPTION =
+	static final String SHOW_FUNCTION_PLATES_OPTION =
 		GROUP_TITLE + Options.DELIMITER + "  Show Function Plates";
-	final static String SHOW_TRANSITION_PLATES_OPTION =
+	static final String SHOW_TRANSITION_PLATES_OPTION =
 		GROUP_TITLE + Options.DELIMITER + "  Show Transition Plates";
-	final static String SHOW_EXT_ENTRY_PLATES_OPTION =
+	static final String SHOW_EXT_ENTRY_PLATES_OPTION =
 		GROUP_TITLE + Options.DELIMITER + "  Show External Entry Plates";
 
-	final static String LINES_BEFORE_FUNCTIONS_OPTION =
+	static final String LINES_BEFORE_FUNCTIONS_OPTION =
 		GROUP_TITLE + Options.DELIMITER + "Lines Before Functions";
-	final static String LINES_BEFORE_LABELS_OPTION =
+	static final String LINES_BEFORE_LABELS_OPTION =
 		GROUP_TITLE + Options.DELIMITER + "Lines Before Labels";
-	final static String LINES_BEFORE_PLATES_OPTION =
+	static final String LINES_BEFORE_PLATES_OPTION =
 		GROUP_TITLE + Options.DELIMITER + "Lines Before Plates";
 
 	private boolean initialized;
@@ -197,9 +197,7 @@ public class PlateFieldFactory extends FieldFactory {
 			Data data = dp.getObject();
 			int[] cpath = data.getComponentPath();
 			if (cpath.length > 0) {
-				if (cpath[cpath.length - 1] == 0) {
-					return true;
-				}
+                return cpath[cpath.length - 1] == 0;
 			}
 		}
 		return false;
@@ -328,14 +326,12 @@ public class PlateFieldFactory extends FieldFactory {
 				prefix.length() + element.length() + ellipsis.length());
 
 		return new FieldElementResult(
-			new CompositeFieldElement(new FieldElement[] { prefix, element, ellipsis, suffix }),
-			ellipsisLength > 0);
+                new CompositeFieldElement(new FieldElement[]{prefix, element, ellipsis, suffix}),
+                ellipsisLength > 0);
 	}
 
 	private void addPadding(StringBuilder buf, int count) {
-		for (int i = 0; i < count; i++) {
-			buf.append(' ');
-		}
+        buf.append(" ".repeat(Math.max(0, count)));
 	}
 
 	private void addBlankLines(List<FieldElement> elements, int numberBlankLines, CodeUnit cu) {
@@ -459,11 +455,7 @@ public class PlateFieldFactory extends FieldFactory {
 		int n = width / starWidth;
 
 		if (stars.length() != n) {
-			StringBuilder buf = new StringBuilder();
-			for (int i = 0; i < n; i++) {
-				buf.append('*');
-			}
-			stars = buf.toString();
+            stars = "*".repeat(Math.max(0, n));
 		}
 		return stars;
 	}
@@ -700,9 +692,7 @@ public class PlateFieldFactory extends FieldFactory {
 
 		StringBuilder sb = new StringBuilder();
 		sb.append("\n");
-		for (int i = 0; i < 19; i++) {
-			sb.append("|");
-		}
+        sb.append("|".repeat(19));
 
 		HelpLocation help = new HelpLocation(HelpTopics.CODE_BROWSER, "Format_Code");
 		options.getOptions(GROUP_TITLE).setOptionsHelpLocation(help);
@@ -800,7 +790,7 @@ public class PlateFieldFactory extends FieldFactory {
 		}
 	}
 
-	private class FieldElementResult {
+	private static class FieldElementResult {
 		private FieldElement element;
 		private boolean isClipped;
 

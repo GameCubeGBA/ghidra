@@ -161,7 +161,7 @@ public class VisualGraphView<V extends VisualVertex,
 	}
 
 	protected void setSouthComponent(JComponent component) {
-		viewPanel.add(component, BorderLayout.SOUTH);
+		viewPanel.add(component, BorderLayout.PAGE_END);
 	}
 
 	protected void removeSatellite() {
@@ -364,7 +364,7 @@ public class VisualGraphView<V extends VisualVertex,
 		messageLabel.setFont(font.deriveFont(22f)); // make a bit bigger for readability
 		messageLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		messageLabel.setFocusable(true); // we have to have something focusable in our provider
-		viewContentPanel.add(messageLabel, BorderLayout.NORTH);
+		viewContentPanel.add(messageLabel, BorderLayout.PAGE_START);
 		viewContentPanel.validate();
 		disposeViewer();
 	}

@@ -122,7 +122,7 @@ public class ColumnFilterArchiveDialog<R> extends DialogComponentProvider {
 	private JComponent buildFilterTable() {
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.add(buildFilterList(), BorderLayout.CENTER);
-		panel.add(buildActionPanel(), BorderLayout.SOUTH);
+		panel.add(buildActionPanel(), BorderLayout.PAGE_END);
 		return panel;
 	}
 
@@ -156,7 +156,7 @@ public class ColumnFilterArchiveDialog<R> extends DialogComponentProvider {
 		removeSelectedFiltersButton.addActionListener(e -> removeSelectedFilter());
 
 		JPanel buttonPanel = new JPanel(new BorderLayout());
-		buttonPanel.add(removeSelectedFiltersButton, BorderLayout.EAST);
+		buttonPanel.add(removeSelectedFiltersButton, BorderLayout.LINE_END);
 
 		return buttonPanel;
 	}

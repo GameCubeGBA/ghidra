@@ -91,7 +91,7 @@ class RelocationProvider extends ComponentProviderAdapter {
 		panel.add(threadedPanel, BorderLayout.CENTER);
 
 		tableFilterPanel = new GhidraTableFilterPanel<>(table, tableModel);
-		panel.add(tableFilterPanel, BorderLayout.SOUTH);
+		panel.add(tableFilterPanel, BorderLayout.PAGE_END);
 
 		return panel;
 	}

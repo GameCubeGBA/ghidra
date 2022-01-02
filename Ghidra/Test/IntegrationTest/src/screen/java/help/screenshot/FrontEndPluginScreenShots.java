@@ -279,7 +279,7 @@ public class FrontEndPluginScreenShots extends GhidraScreenShotGenerator {
 				new ProjectAccessPanel(knownUsers, "Bob", userList, "What", false, false, tool);
 
 			DummyDialogComponentProvider dialog =
-				new DummyDialogComponentProvider("Edit Project Access List for Demo", panel);
+                    new DummyDialogComponentProvider("Edit Project Access List for Demo", panel);
 
 			tool.showDialog(dialog);
 		});
@@ -605,7 +605,7 @@ public class FrontEndPluginScreenShots extends GhidraScreenShotGenerator {
 				false, tool);
 
 			DummyDialogComponentProvider dialog =
-				new DummyDialogComponentProvider("View Project Access List for Demo", panel);
+                    new DummyDialogComponentProvider("View Project Access List for Demo", panel);
 
 			tool.showDialog(dialog);
 		});
@@ -738,7 +738,7 @@ public class FrontEndPluginScreenShots extends GhidraScreenShotGenerator {
 
 	}
 
-	class DummyDialogComponentProvider extends DialogComponentProvider {
+	static class DummyDialogComponentProvider extends DialogComponentProvider {
 		DummyDialogComponentProvider(String title, JPanel mainPanel) {
 			super(title, false);
 			addWorkPanel(mainPanel);

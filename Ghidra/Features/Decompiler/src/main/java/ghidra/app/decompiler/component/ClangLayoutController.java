@@ -122,27 +122,27 @@ public class ClangLayoutController implements LayoutModel, LayoutModelListener {
 
 	@Override
 	public void modelSizeChanged(IndexMapper mapper) {
-		for (int i = 0; i < listeners.size(); ++i) {
-			listeners.get(i).modelSizeChanged(mapper);
+		for (LayoutModelListener listener : listeners) {
+			listener.modelSizeChanged(mapper);
 		}
 	}
 
 	public void modelChanged() {
-		for (int i = 0; i < listeners.size(); ++i) {
-			listeners.get(i).modelSizeChanged(IndexMapper.IDENTITY_MAPPER);
+		for (LayoutModelListener listener : listeners) {
+			listener.modelSizeChanged(IndexMapper.IDENTITY_MAPPER);
 		}
 	}
 
 	@Override
 	public void dataChanged(BigInteger start, BigInteger end) {
-		for (int i = 0; i < listeners.size(); ++i) {
-			listeners.get(i).dataChanged(start, end);
+		for (LayoutModelListener listener : listeners) {
+			listener.dataChanged(start, end);
 		}
 	}
 
 	public void layoutChanged() {
-		for (int i = 0; i < listeners.size(); ++i) {
-			listeners.get(i).dataChanged(BigInteger.ZERO, numIndexes);
+		for (LayoutModelListener listener : listeners) {
+			listener.dataChanged(BigInteger.ZERO, numIndexes);
 		}
 	}
 
@@ -316,7 +316,7 @@ public class ClangLayoutController implements LayoutModel, LayoutModelListener {
 			}
 		}
 		String finalLine = buf.toString();
-		if (finalLine.length() != 0) {
+		if (!finalLine.isEmpty()) {
 			res.add(finalLine);
 		}
 	}
@@ -336,11 +336,11 @@ public class ClangLayoutController implements LayoutModel, LayoutModelListener {
 		for (String element : errlines_init) {
 			splitToMaxWidthLines(errlines, element);
 		}
-		for (int i = 0; i < errlines.size(); ++i) {
+		for (String errline : errlines) {
 			ClangTokenGroup line = new ClangTokenGroup(docroot);
 			ClangBreak lineBreak = new ClangBreak(line, 1);
 			ClangSyntaxToken message =
-				new ClangSyntaxToken(line, errlines.get(i), ClangXML.COMMENT_COLOR);
+					new ClangSyntaxToken(line, errline, ClangXML.COMMENT_COLOR);
 			line.AddTokenGroup(lineBreak);
 			line.AddTokenGroup(message);
 			docroot.AddTokenGroup(line);
@@ -594,12 +594,9 @@ public class ClangLayoutController implements LayoutModel, LayoutModelListener {
 			int lineNumberLength = lineNumberString.length();
 			int padLength = maxNumberOfDigits - lineNumberLength;
 
-			StringBuffer buffy = new StringBuffer();
-			for (int i = 0; i < padLength; i++) {
-				buffy.append(' ');
-			}
-			buffy.append(lineNumberString).append(' '); // space for separation
-			return buffy.toString();
+            String buffy = " ".repeat(Math.max(0, padLength)) +
+                    lineNumberString + ' '; // space for separation
+            return buffy;
 		}
 
 		private static AttributedString createAttributedLineNumberString(int lineNumber,
@@ -650,7 +647,7 @@ public class ClangLayoutController implements LayoutModel, LayoutModelListener {
 		}
 	}
 
-	private class FieldNumberColumnPair {
+	private static class FieldNumberColumnPair {
 		private final int fieldNumber;
 		private final int column;
 

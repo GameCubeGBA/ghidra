@@ -34,7 +34,7 @@ import ghidra.util.HelpLocation;
 
 public interface AutoOptions {
 
-	static class CategoryAndName implements ComparableTupleRecord<CategoryAndName> {
+	class CategoryAndName implements ComparableTupleRecord<CategoryAndName> {
 		public static final List<Function<CategoryAndName, ? extends Comparable<?>>> ACCESSORS =
 			ImmutableList.of(CategoryAndName::getCategory, CategoryAndName::getName);
 
@@ -114,11 +114,12 @@ public interface AutoOptions {
 		// no attributes
 	}
 
-	public interface Wiring {
+	@FunctionalInterface
+    interface Wiring {
 		void dispose();
 	}
 
-	public static class WiringImpl implements Wiring {
+	class WiringImpl implements Wiring {
 		@SuppressWarnings("unused") // strong reference
 		private AutoOptionsListener<?> listener;
 
@@ -132,11 +133,11 @@ public interface AutoOptions {
 		}
 	}
 
-	public static Wiring wireOptions(Plugin plugin) {
+	static Wiring wireOptions(Plugin plugin) {
 		return wireOptions(plugin, plugin);
 	}
 
-	public static Wiring wireOptions(Plugin plugin, Object receiver) {
+	static Wiring wireOptions(Plugin plugin, Object receiver) {
 		registerOptionsDefined(plugin, receiver.getClass(), receiver);
 		return wireOptionsConsumed(plugin, receiver);
 	}
@@ -197,7 +198,7 @@ public interface AutoOptions {
 		}
 	}
 
-	public static HelpLocation getHelpLocation(String defaultTopic, HelpInfo annot) {
+	static HelpLocation getHelpLocation(String defaultTopic, HelpInfo annot) {
 		if (annot.topic().length == 0) {
 			return null;
 		}
@@ -210,7 +211,7 @@ public interface AutoOptions {
 		return new HelpLocation(topic, anchor);
 	}
 
-	public static Wiring wireOptionsConsumed(Plugin plugin, Object receiver) {
+	static Wiring wireOptionsConsumed(Plugin plugin, Object receiver) {
 		PluginTool tool = plugin.getTool();
 		AutoOptionsListener<?> listener = new AutoOptionsListener<>(plugin, receiver);
 		for (String category : listener.getCategories()) {

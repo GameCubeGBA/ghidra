@@ -55,7 +55,7 @@ class ColumnFilterPanel extends JPanel {
 
 		setLayout(new BorderLayout());
 		add(buildConstraintPanels(), BorderLayout.CENTER);
-		add(buildButtonPanel(), BorderLayout.EAST);
+		add(buildButtonPanel(), BorderLayout.LINE_END);
 		setBorder(
 			BorderFactory.createCompoundBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED),
 				BorderFactory.createEmptyBorder(3, 3, 3, 3)));
@@ -70,7 +70,7 @@ class ColumnFilterPanel extends JPanel {
 		JButton button = new EmptyBorderButton(icon);
 		button.setToolTipText("Add a column condition");
 		button.addActionListener(e -> filterEntry.addFilterCondition());
-		panel.add(button, BorderLayout.NORTH);
+		panel.add(button, BorderLayout.PAGE_START);
 
 		return panel;
 	}

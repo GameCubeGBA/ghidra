@@ -22,7 +22,7 @@ import db.buffers.ManagedBufferFile;
 import ghidra.util.exception.FileInUseException;
 
 /**
- * <code>DatabaseItem</code> corresponds to a private or versioned 
+ * {@code DatabaseItem} corresponds to a private or versioned
  * database within a FileSystem.  Methods are provided for opening
  * the underlying database as a BufferFile.
  */

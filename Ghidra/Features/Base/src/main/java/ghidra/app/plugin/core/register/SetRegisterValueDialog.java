@@ -106,7 +106,7 @@ public class SetRegisterValueDialog extends DialogComponentProvider {
 		JPanel panel = new JPanel(new GridBagLayout());
 
 		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.anchor = GridBagConstraints.WEST;
+		gbc.anchor = GridBagConstraints.LINE_START;
 		gbc.insets = new Insets(5, 5, 1, 5);
 		gbc.gridx = 0;
 		gbc.gridy = 0;
@@ -117,7 +117,7 @@ public class SetRegisterValueDialog extends DialogComponentProvider {
 		}
 		gbc.gridy = 2;
 
-		gbc.anchor = GridBagConstraints.NORTHWEST;
+		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
 		gbc.insets = new Insets(10, 5, 1, 5);
 		GLabel addressLabel = new GLabel("Address(es):");
 		addressLabel.setVerticalAlignment(SwingConstants.TOP);
@@ -125,7 +125,7 @@ public class SetRegisterValueDialog extends DialogComponentProvider {
 
 		gbc.insets = new Insets(5, 5, 1, 5);
 		gbc.weightx = 1.0;
-		gbc.anchor = GridBagConstraints.WEST;
+		gbc.anchor = GridBagConstraints.LINE_START;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.gridx = 1;
 		gbc.gridy = 0;

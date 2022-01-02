@@ -113,21 +113,21 @@ public class NewLanguagePanel extends JPanel {
 		JPanel innerPanel = new JPanel();
 		innerPanel.setLayout(new BorderLayout());
 		innerPanel.add(scrollPane, BorderLayout.CENTER);
-		innerPanel.add(tableFilterPanel, BorderLayout.SOUTH);
+		innerPanel.add(tableFilterPanel, BorderLayout.PAGE_END);
 
 		JPanel middlePanel = new JPanel();
 		middlePanel.setLayout(new BorderLayout());
 		middlePanel.add(innerPanel, BorderLayout.CENTER);
-		middlePanel.add(descriptionPanel, BorderLayout.SOUTH);
+		middlePanel.add(descriptionPanel, BorderLayout.PAGE_END);
 
 		JPanel outerPanel = new JPanel();
 		outerPanel.setLayout(new BorderLayout());
 		outerPanel.add(middlePanel, BorderLayout.CENTER);
-		outerPanel.add(recommendedCheckbox, BorderLayout.SOUTH);
+		outerPanel.add(recommendedCheckbox, BorderLayout.PAGE_END);
 
 		setLayout(new BorderLayout());
 		add(outerPanel, BorderLayout.CENTER);
-		add(formatLabel, BorderLayout.SOUTH);
+		add(formatLabel, BorderLayout.PAGE_END);
 	}
 
 	private void wireEverything() {

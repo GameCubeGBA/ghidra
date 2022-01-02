@@ -98,19 +98,23 @@ public class BigFloatTest extends AbstractGenericTest {
 		}
 	}
 
-	interface UnaryProc<T> {
+	@FunctionalInterface
+    interface UnaryProc<T> {
 		void apply(T a);
 	}
 
-	interface UnaryOp<T> {
+	@FunctionalInterface
+    interface UnaryOp<T> {
 		T apply(T a);
 	}
 
-	interface BinaryProc<T> {
+	@FunctionalInterface
+    interface BinaryProc<T> {
 		void apply(T a, T b);
 	}
 
-	interface BinaryOp<T> {
+	@FunctionalInterface
+    interface BinaryOp<T> {
 		T apply(T a, T b);
 	}
 

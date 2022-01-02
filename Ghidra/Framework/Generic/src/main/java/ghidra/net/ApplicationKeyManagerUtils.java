@@ -29,7 +29,6 @@ import java.security.KeyStore;
 import java.security.KeyStore.LoadStoreParameter;
 import java.security.KeyStore.PasswordProtection;
 import java.security.KeyStore.PrivateKeyEntry;
-import java.security.KeyStore.ProtectionParameter;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.Principal;
@@ -72,7 +71,7 @@ import ghidra.util.Msg;
 import ghidra.util.exception.AssertException;
 
 /**
- * <code>ApplicationKeyManagerUtils</code> provides public methods for utilizing
+ * {@code ApplicationKeyManagerUtils} provides public methods for utilizing
  * the application PKI key management, including access to trusted issuers
  * (i.e., CA certificates), token signing and validation, and the ability to
  * generate keystores for testing or when a self-signed certificate will

@@ -136,7 +136,7 @@ class EditMemoryReferencePanel extends EditReferencePanel {
 
 		JPanel addrPanel = new JPanel(new BorderLayout());
 		addrPanel.add(toAddressField, BorderLayout.CENTER);
-		addrPanel.add(addrHistoryButton, BorderLayout.EAST);
+		addrPanel.add(addrHistoryButton, BorderLayout.LINE_END);
 
 		add(offsetCheckbox);
 		add(offsetField);

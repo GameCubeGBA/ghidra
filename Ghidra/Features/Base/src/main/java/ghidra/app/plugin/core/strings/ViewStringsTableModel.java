@@ -223,12 +223,12 @@ class ViewStringsTableModel extends AddressBasedTableModel<ProgramLocation> {
 			return renderer;
 		}
 
-		private class DataValueCellRenderer extends AbstractGColumnRenderer<StringDataInstance> {
+		private static class DataValueCellRenderer extends AbstractGColumnRenderer<StringDataInstance> {
 
 			@Override
 			protected String getText(Object value) {
 				if (value instanceof StringDataInstance) {
-					return ((StringDataInstance) value).toString();
+					return value.toString();
 				}
 				return "";
 			}
@@ -273,7 +273,7 @@ class ViewStringsTableModel extends AddressBasedTableModel<ProgramLocation> {
 			return renderer;
 		}
 
-		private class StringRepCellRenderer extends AbstractGColumnRenderer<StringDataInstance> {
+		private static class StringRepCellRenderer extends AbstractGColumnRenderer<StringDataInstance> {
 
 			@Override
 			protected String getText(Object value) {

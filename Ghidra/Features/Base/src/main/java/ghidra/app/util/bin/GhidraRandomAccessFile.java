@@ -57,25 +57,25 @@ public class GhidraRandomAccessFile implements AutoCloseable {
 	 * but adds buffering to limit the amount.
 	 * <p>
 	 *
-	 * <a id="mode"></a><p> The <code>mode</code> argument specifies the access mode
+	 * <a id="mode"></a><p> The {@code mode} argument specifies the access mode
 	 * in which the file is to be opened.  The permitted values and their
 	 * meanings are:
 	 *
 	 * <blockquote><table><caption style="visibility:hidden;font-size:0px">Access mode permitted values and meanings</caption>
 	 * <tr><th><p style="text-align:left">Value</p></th><th><p style="text-align:left">Meaning</p></th></tr>
-	 * <tr><td style="vertical-align:top"><code>"r"</code></td>
-	 *     <td> Open for reading only.  Invoking any of the <code>write</code>
+	 * <tr><td style="vertical-align:top">{@code "r"}</td>
+	 *     <td> Open for reading only.  Invoking any of the {@code write}
 	 *     methods of the resulting object will cause an {@link
 	 *     java.io.IOException} to be thrown. </td></tr>
-	 * <tr><td style="vertical-align:top"><code>"rw"</code></td>
+	 * <tr><td style="vertical-align:top">{@code "rw"}</td>
 	 *     <td> Open for reading and writing.  If the file does not already
 	 *     exist then an attempt will be made to create it. </td></tr>
-	 * <tr><td style="vertical-align:top"><code>"rws"</code></td>
-	 *     <td> Open for reading and writing, as with <code>"rw"</code>, and also
+	 * <tr><td style="vertical-align:top">{@code "rws"}</td>
+	 *     <td> Open for reading and writing, as with {@code "rw"}, and also
 	 *     require that every update to the file's content or metadata be
 	 *     written synchronously to the underlying storage device.  </td></tr>
-	 * <tr><td style="vertical-align:top"><code>"rwd"&nbsp;&nbsp;</code></td>
-	 *     <td> Open for reading and writing, as with <code>"rw"</code>, and also
+	 * <tr><td style="vertical-align:top">{@code "rwd"&nbsp;&nbsp;}</td>
+	 *     <td> Open for reading and writing, as with {@code "rw"}, and also
 	 *     require that every update to the file's content be written
 	 *     synchronously to the underlying storage device. </td></tr>
 	 * </table></blockquote>
@@ -84,8 +84,8 @@ public class GhidraRandomAccessFile implements AutoCloseable {
 	 * @param      mode   the access mode, as described
 	 *                    <a href="#mode">above</a>
 	 * @exception  IllegalArgumentException  if the mode argument is not equal
-	 *               to one of <code>"r"</code>, <code>"rw"</code>, <code>"rws"</code>, or
-	 *               <code>"rwd"</code>
+	 *               to one of {@code "r"}, <code>"rw"</code>, <code>"rws"</code>, or
+	 *               {@code "rwd"}
 	 * @exception FileNotFoundException
 	 *					that name cannot be created, or if some other error occurs
 	 *            while opening or creating the file
@@ -141,8 +141,8 @@ public class GhidraRandomAccessFile implements AutoCloseable {
 	 * @param      pos   the offset position, measured in bytes from the
 	 *                   beginning of the file, at which to set the file
 	 *                   pointer.
-	 * @throws  IOException  if <code>pos</code> is less than
-	 *                          <code>0</code> or if an I/O error occurs.
+	 * @throws  IOException  if {@code pos} is less than
+	 *                          {@code 0} or if an I/O error occurs.
 	 */
 	public void seek(long pos) throws IOException {
 		checkOpen();
@@ -171,7 +171,7 @@ public class GhidraRandomAccessFile implements AutoCloseable {
 	 * is detected, or an exception is thrown.
 	 *
 	 * @return     the next byte of this file as a signed eight-bit
-	 *             <code>byte</code>.
+	 *             {@code byte}.
 	 * @exception  EOFException  if this file has reached the end.
 	 * @exception  IOException   if an I/O error occurs.
 	 */
@@ -182,13 +182,13 @@ public class GhidraRandomAccessFile implements AutoCloseable {
 	}
 
 	/**
-	 * Reads up to <code>b.length</code> bytes of data from this file
+	 * Reads up to {@code b.length} bytes of data from this file
 	 * into an array of bytes. This method blocks until at least one byte
 	 * of input is available.
 	 *
 	 * @param      b   the buffer into which the data is read.
 	 * @return     the total number of bytes read into the buffer, or
-	 *             <code>-1</code> if there is no more data because the end of
+	 *             {@code -1} if there is no more data because the end of
 	 *             this file has been reached.
 	 * @exception  IOException  if an I/O error occurs.
 	 */
@@ -198,7 +198,7 @@ public class GhidraRandomAccessFile implements AutoCloseable {
 	}
 
 	/**
-	 * Reads up to <code>length</code> bytes of data from this file into an
+	 * Reads up to {@code length} bytes of data from this file into an
 	 * array of bytes. This method blocks until at least one byte of input
 	 * is available.
 	 *
@@ -206,7 +206,7 @@ public class GhidraRandomAccessFile implements AutoCloseable {
 	 * @param      offset the start offset of the data.
 	 * @param      length the maximum number of bytes read.
 	 * @return     the total number of bytes read into the buffer, or
-	 *             <code>-1</code> if there is no more data because the end of
+	 *             {@code -1} if there is no more data because the end of
 	 *             the file has been reached.
 	 * @exception  IOException  if an I/O error occurs.
 	 */
@@ -244,7 +244,7 @@ public class GhidraRandomAccessFile implements AutoCloseable {
 	}
 
 	/**
-	 * Writes <code>b.length</code> bytes from the specified byte array
+	 * Writes {@code b.length} bytes from the specified byte array
 	 * to this file, starting at the current file pointer.
 	 * @param      b   the data.
 	 * @exception  IOException  if an I/O error occurs.

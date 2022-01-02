@@ -188,45 +188,43 @@ public class PdbNewDebugInfo extends PdbDebugInfo {
 
 	@Override
 	protected void dumpHeader(Writer writer) throws IOException {
-		StringBuilder builder = new StringBuilder();
-		builder.append("versionSignature: ");
-		builder.append(versionSignature);
-		builder.append("\nversionNumber: ");
-		builder.append(versionNumber);
-		builder.append("\nage: ");
-		builder.append(dbiAge);
-		builder.append("\nstreamNumberGlobalStaticSymbols: ");
-		builder.append(streamNumberGlobalStaticSymbolsHashMaybe);
-		builder.append(String.format("\nuniversalVersion: 0x%04x", universalVersion));
-		builder.append("\nstreamNumberPublicStaticSymbols: ");
-		builder.append(streamNumberPublicStaticSymbolsHashMaybe);
-		builder.append(String.format("\npdbDllBuildVersion: 0x%04x", pdbDllBuildVersion));
-		builder.append("\nstreamNumberSymbolRecords: ");
-		builder.append(streamNumberSymbolRecords);
-		builder.append(
-			String.format("\npdbDllReleaseBuildVersion: 0x%04x", pdbDllReleaseBuildVersion));
-		builder.append("\nlengthModuleInformationSubstream: ");
-		builder.append(lengthModuleInformationSubstream);
-		builder.append("\nlengthSectionContributionSubstream: ");
-		builder.append(lengthSectionContributionSubstream);
-		builder.append("\nlengthSectionMap: ");
-		builder.append(lengthSectionMap);
-		builder.append("\nlengthFileInformation: ");
-		builder.append(lengthFileInformation);
 
-		builder.append("\nlengthTypeServerMapSubstream: ");
-		builder.append(lengthTypeServerMapSubstream);
-		builder.append("\nindexOfMicrosoftFoundationClassTypeServer: ");
-		builder.append(indexOfMicrosoftFoundationClassTypeServer);
-		builder.append("\nlengthOptionalDebugHeader: ");
-		builder.append(lengthOptionalDebugHeader);
-		builder.append("\nlengthEditAndContinueSubstream: ");
-		builder.append(lengthEditAndContinueSubstream);
-		builder.append(String.format("\nflags: 0x%04x", flags));
-		builder.append(String.format("\nmachineType: %s", machineType.toString()));
-		builder.append("\npadReserve: ");
-		builder.append(padReserve);
-		writer.write(builder.toString());
+        String builder = "versionSignature: " +
+                versionSignature +
+                "\nversionNumber: " +
+                versionNumber +
+                "\nage: " +
+                dbiAge +
+                "\nstreamNumberGlobalStaticSymbols: " +
+                streamNumberGlobalStaticSymbolsHashMaybe +
+                String.format("\nuniversalVersion: 0x%04x", universalVersion) +
+                "\nstreamNumberPublicStaticSymbols: " +
+                streamNumberPublicStaticSymbolsHashMaybe +
+                String.format("\npdbDllBuildVersion: 0x%04x", pdbDllBuildVersion) +
+                "\nstreamNumberSymbolRecords: " +
+                streamNumberSymbolRecords +
+                String.format("\npdbDllReleaseBuildVersion: 0x%04x", pdbDllReleaseBuildVersion) +
+                "\nlengthModuleInformationSubstream: " +
+                lengthModuleInformationSubstream +
+                "\nlengthSectionContributionSubstream: " +
+                lengthSectionContributionSubstream +
+                "\nlengthSectionMap: " +
+                lengthSectionMap +
+                "\nlengthFileInformation: " +
+                lengthFileInformation +
+                "\nlengthTypeServerMapSubstream: " +
+                lengthTypeServerMapSubstream +
+                "\nindexOfMicrosoftFoundationClassTypeServer: " +
+                indexOfMicrosoftFoundationClassTypeServer +
+                "\nlengthOptionalDebugHeader: " +
+                lengthOptionalDebugHeader +
+                "\nlengthEditAndContinueSubstream: " +
+                lengthEditAndContinueSubstream +
+                String.format("\nflags: 0x%04x", flags) +
+                String.format("\nmachineType: %s", machineType.toString()) +
+                "\npadReserve: " +
+                padReserve;
+		writer.write(builder);
 	}
 
 	@Override

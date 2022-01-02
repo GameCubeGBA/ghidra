@@ -38,80 +38,77 @@ import ghidra.util.SystemUtilities;
  * Configuration options for the decompiler
  * This stores the options and can create an XML
  * string to be sent to the decompiler process
- *
- *
- *
  */
 public class DecompileOptions {
-	private final static String PREDICATE_OPTIONSTRING = "Analysis.Simplify predication";
-	private final static String PREDICATE_OPTIONDESCRIPTION =
+	private static final String PREDICATE_OPTIONSTRING = "Analysis.Simplify predication";
+	private static final String PREDICATE_OPTIONDESCRIPTION =
 		"If set, multiple conditionally executed instructions " +
 			"depending on one predicate will be combined into a single if/else statement";
-	private final static boolean PREDICATE_OPTIONDEFAULT = true;
+	private static final boolean PREDICATE_OPTIONDEFAULT = true;
 	private boolean predicate;
 
-	private final static String READONLY_OPTIONSTRING = "Analysis.Respect readonly flags";
-	private final static String READONLY_OPTIONDESCRIPTION =
+	private static final String READONLY_OPTIONSTRING = "Analysis.Respect readonly flags";
+	private static final String READONLY_OPTIONDESCRIPTION =
 		"If set, this option causes the decompiler to treat " +
 			"any values in memory marked read-only as constant values.";
-	private final static boolean READONLY_OPTIONDEFAULT = true;
+	private static final boolean READONLY_OPTIONDEFAULT = true;
 	private boolean readOnly;
 
-	private final static String ELIMINATE_UNREACHABLE_OPTIONSTRING =
+	private static final String ELIMINATE_UNREACHABLE_OPTIONSTRING =
 		"Analysis.Eliminate unreachable code";
-	private final static String ELIMINATE_UNREACHABLE_OPTIONDESCRIPTION =
-		"If set, branches and code that can never be executed are " + "eliminated as dead code";
-	private final static boolean ELIMINATE_UNREACHABLE_OPTIONDEFAULT = true;
+	private static final String ELIMINATE_UNREACHABLE_OPTIONDESCRIPTION =
+			"If set, branches and code that can never be executed are eliminated as dead code"
+	private static final boolean ELIMINATE_UNREACHABLE_OPTIONDEFAULT = true;
 	private boolean eliminateUnreachable;
 
-	private final static String SIMPLIFY_DOUBLEPRECISION_OPTIONSTRING =
+	private static final String SIMPLIFY_DOUBLEPRECISION_OPTIONSTRING =
 		"Analysis.Simplify extended integer operations";
-	private final static String SIMPLIFY_DOUBLEPRECISION_OPTIONDESCRIPTION =
+	private static final String SIMPLIFY_DOUBLEPRECISION_OPTIONDESCRIPTION =
 		"If set, integer operations which are split into high and low pieces are " +
 			"collapsed into a single logical operation";
-	private final static boolean SIMPLIFY_DOUBLEPRECISION_OPTIONDEFAULT = true;
+	private static final boolean SIMPLIFY_DOUBLEPRECISION_OPTIONDEFAULT = true;
 	private boolean simplifyDoublePrecision;
 
-	private final static String IGNOREUNIMPL_OPTIONSTRING =
+	private static final String IGNOREUNIMPL_OPTIONSTRING =
 		"Analysis.Ignore unimplemented instructions";
-	private final static String IGNOREUNIMPL_OPTIONDESCRIPTION =
+	private static final String IGNOREUNIMPL_OPTIONDESCRIPTION =
 		"If set, instructions which do not have a p-code translation implemented are " +
 			"treated as if they do nothing (like a NOP)";
-	private final static boolean IGNOREUNIMPL_OPTIONDEFAULT = false;	// Must match Architecture::resetDefaultsInternal
+	private static final boolean IGNOREUNIMPL_OPTIONDEFAULT = false;	// Must match Architecture::resetDefaultsInternal
 	private boolean ignoreunimpl;
 
-	private final static String INFERCONSTPTR_OPTIONSTRING = "Analysis.Infer constant pointers";
-	private final static String INFERCONSTPTR_OPTIONDESCRIPTION =
+	private static final String INFERCONSTPTR_OPTIONSTRING = "Analysis.Infer constant pointers";
+	private static final String INFERCONSTPTR_OPTIONDESCRIPTION =
 		"If set, constants which are not being explicitly used as pointers, but which can be interpreted " +
 			"as a legitimate address, will still be treated as having a pointer datatype";
-	private final static boolean INFERCONSTPTR_OPTIONDEFAULT = true;	// Must match Architecture::resetDefaultsInternal
+	private static final boolean INFERCONSTPTR_OPTIONDEFAULT = true;	// Must match Architecture::resetDefaultsInternal
 	private boolean inferconstptr;
 
-	private final static String ANALYZEFORLOOPS_OPTIONSTRING = "Analysis.Recover -for- loops";
-	private final static String ANALYZEFORLOOPS_OPTIONDESCRIPTION =
+	private static final String ANALYZEFORLOOPS_OPTIONSTRING = "Analysis.Recover -for- loops";
+	private static final String ANALYZEFORLOOPS_OPTIONDESCRIPTION =
 		"If set, the decompiler attempts to recover for-loop variables, including their initializer, condition, " +
 			"and incrementer statements. Loop variable bounds are displayed as a formal -for- loop header";
-	private final static boolean ANALYZEFORLOOPS_OPTIONDEFAULT = true;	// Must match Architecture::resetDefaultsInternal
+	private static final boolean ANALYZEFORLOOPS_OPTIONDEFAULT = true;	// Must match Architecture::resetDefaultsInternal
 	private boolean analyzeForLoops;
 
-	private final static String NULLTOKEN_OPTIONSTRING = "Display.Print 'NULL' for null pointers";
-	private final static String NULLTOKEN_OPTIONDESCRIPTION =
+	private static final String NULLTOKEN_OPTIONSTRING = "Display.Print 'NULL' for null pointers";
+	private static final String NULLTOKEN_OPTIONDESCRIPTION =
 		"If set, any zero valued pointer (null pointer) will " +
 			"be printed using the token 'NULL'. Otherwise, a cast " +
 			"of the number '0' is printed.";
-	private final static boolean NULLTOKEN_OPTIONDEFAULT = false;		// Must match PrintC::resetDefaultsPrintC
+	private static final boolean NULLTOKEN_OPTIONDEFAULT = false;		// Must match PrintC::resetDefaultsPrintC
 	private boolean nullToken;
 
-	private final static String INPLACEOP_OPTIONSTRING =
+	private static final String INPLACEOP_OPTIONSTRING =
 		"Analysis.Use inplace assignment operators";
-	private final static String INPLACEOP_OPTIONDESCRIPTION =
+	private static final String INPLACEOP_OPTIONDESCRIPTION =
 		"If set the inplace assignment operators will be used " +
 			"for appropriate expressions. '+='   '*='   '&='   '<<=' etc.";
-	private final static boolean INPLACEOP_OPTIONDEFAULT = false;	// Must match PrintC::resetDefaultsPrintC
+	private static final boolean INPLACEOP_OPTIONDEFAULT = false;	// Must match PrintC::resetDefaultsPrintC
 	private boolean inplaceTokens;
 
-	private final static String ALIASBLOCK_OPTIONSTRING = "Analysis.Alias Blocking";
-	private final static String ALIASBLOCK_OPTIONDESCRIPTION =
+	private static final String ALIASBLOCK_OPTIONSTRING = "Analysis.Alias Blocking";
+	private static final String ALIASBLOCK_OPTIONDESCRIPTION =
 		"Specify which data-types prevent a pointer alias from reaching across them on the stack.";
 
 	public enum AliasBlockEnum {
@@ -139,44 +136,44 @@ public class DecompileOptions {
 		}
 	}
 
-	private final static AliasBlockEnum ALIASBLOCK_OPTIONDEFAULT = AliasBlockEnum.Array;	// Must match Architecture::resetDefaultsInternal
+	private static final AliasBlockEnum ALIASBLOCK_OPTIONDEFAULT = AliasBlockEnum.Array;	// Must match Architecture::resetDefaultsInternal
 	private AliasBlockEnum aliasBlock;
 
-	private final static String CONVENTION_OPTIONSTRING = "Display.Print calling convention name";
-	private final static String CONVENTION_OPTIONDESCRIPTION =
-		"If set, the names of callling conventions (which differ " +
+	private static final String CONVENTION_OPTIONSTRING = "Display.Print calling convention name";
+	private static final String CONVENTION_OPTIONDESCRIPTION =
+		"If set, the names of calling conventions (when they differ " +
 			"from the default) will be printed as part of the function prototype.";
-	private final static boolean CONVENTION_OPTIONDEFAULT = true;	// Must match PrintC::resetDefaultsPrintC
+	private static final boolean CONVENTION_OPTIONDEFAULT = true;	// Must match PrintC::resetDefaultsPrintC
 	private boolean conventionPrint;
 
-	private final static String NOCAST_OPTIONSTRING = "Display.Disable printing of type casts";
-	private final static String NOCAST_OPTIONDESCRIPTION =
+	private static final String NOCAST_OPTIONSTRING = "Display.Disable printing of type casts";
+	private static final String NOCAST_OPTIONDESCRIPTION =
 		"If set, any C style type cast recovered by the decompiler will not be displayed. " +
 			"The resulting C syntax may not parse correctly.";
-	private final static boolean NOCAST_OPTIONDEFAULT = false;		// Must match PrintC::resetDefaultsPrintC
+	private static final boolean NOCAST_OPTIONDEFAULT = false;		// Must match PrintC::resetDefaultsPrintC
 	private boolean noCastPrint;
 
-	private final static String MAXWIDTH_OPTIONSTRING = "Display.Maximum characters in a code line";
-	private final static String MAXWIDTH_OPTIONDESCRIPTION =
-		"Maximum number of characters allowed per line before " + "before line breaks are forced.";
-	private final static int MAXWIDTH_OPTIONDEFAULT = 100;	// Must match EmitPrettyPrint::resetDefaultsPrettyPrint
+	private static final String MAXWIDTH_OPTIONSTRING = "Display.Maximum characters in a code line";
+	private static final String MAXWIDTH_OPTIONDESCRIPTION =
+			"Maximum number of characters allowed per line before line breaks are forced.";
+	private static final int MAXWIDTH_OPTIONDEFAULT = 100;	// Must match EmitPrettyPrint::resetDefaultsPrettyPrint
 	private int maxwidth;
 
-	private final static String INDENTWIDTH_OPTIONSTRING =
+	private static final String INDENTWIDTH_OPTIONSTRING =
 		"Display.Number of characters per indent level";
-	private final static String INDENTWIDTH_OPTIONDESCRIPTION =
-		"Number of characters indented for each level of control-flow " + "or scope nesting";
-	private final static int INDENTWIDTH_OPTIONDEFAULT = 2;	// Must match EmitXml::resetDefaultsInternal
+	private static final String INDENTWIDTH_OPTIONDESCRIPTION =
+			"Number of characters indented for each level of control-flow or scope nesting"
+	private static final int INDENTWIDTH_OPTIONDEFAULT = 2;	// Must match EmitXml::resetDefaultsInternal
 	private int indentwidth;
 
-	private final static String COMMENTINDENT_OPTIONSTRING = "Display.Comment line indent level";
-	private final static String COMMENTINDENT_OPTIONDESCRIPTION =
+	private static final String COMMENTINDENT_OPTIONSTRING = "Display.Comment line indent level";
+	private static final String COMMENTINDENT_OPTIONDESCRIPTION =
 		"Number of characters each line of comments is indented";
-	private final static int COMMENTINDENT_OPTIONDEFAULT = 20;	// Must match PrintLanguage::resetDefaultsInternal
+	private static final int COMMENTINDENT_OPTIONDEFAULT = 20;	// Must match PrintLanguage::resetDefaultsInternal
 	private int commentindent;
 
-	private final static String COMMENTSTYLE_OPTIONSTRING = "Display.Comment style";
-	private final static String COMMENTSTYLE_OPTIONDESCRIPTION =
+	private static final String COMMENTSTYLE_OPTIONSTRING = "Display.Comment style";
+	private static final String COMMENTSTYLE_OPTIONDESCRIPTION =
 		"Choice between either the C style comments /* */ or C++ style // ";
 	public static final int SUGGESTED_DECOMPILE_TIMEOUT_SECS = 30;
 	public static final int SUGGESTED_MAX_PAYLOAD_BYTES = 50;
@@ -198,47 +195,47 @@ public class DecompileOptions {
 		}
 	}
 
-	private final static CommentStyleEnum COMMENTSTYLE_OPTIONDEFAULT = CommentStyleEnum.CStyle;	// Must match PrintC::resetDefaultsPrintC
+	private static final CommentStyleEnum COMMENTSTYLE_OPTIONDEFAULT = CommentStyleEnum.CStyle;	// Must match PrintC::resetDefaultsPrintC
 	private CommentStyleEnum commentStyle;
 
-	private final static String COMMENTPRE_OPTIONSTRING = "Display.Display PRE comments";
-	private final static String COMMENTPRE_OPTIONDESCRIPTION =
+	private static final String COMMENTPRE_OPTIONSTRING = "Display.Display PRE comments";
+	private static final String COMMENTPRE_OPTIONDESCRIPTION =
 		"If set, disassembly pre-instruction (PRE) comments are displayed " +
 			"in the decompiler C output";
-	private final static boolean COMMENTPRE_OPTIONDEFAULT = true;	// Must match PrintLanguage::resetDefaultsInternal
+	private static final boolean COMMENTPRE_OPTIONDEFAULT = true;	// Must match PrintLanguage::resetDefaultsInternal
 	private boolean commentPREInclude;
 
-	private final static String COMMENTPLATE_OPTIONSTRING = "Display.Display PLATE comments";
-	private final static String COMMENTPLATE_OPTIONDESCRIPTION =
+	private static final String COMMENTPLATE_OPTIONSTRING = "Display.Display PLATE comments";
+	private static final String COMMENTPLATE_OPTIONDESCRIPTION =
 		"If set, disassembly plate comments are displayed " + "in the decompiler C output";
-	private final static boolean COMMENTPLATE_OPTIONDEFAULT = false;	// Must match PrintLanguage::resetDefaultsInternal
+	private static final boolean COMMENTPLATE_OPTIONDEFAULT = false;	// Must match PrintLanguage::resetDefaultsInternal
 	private boolean commentPLATEInclude;
 
-	private final static String COMMENTPOST_OPTIONSTRING = "Display.Display POST comments";
-	private final static String COMMENTPOST_OPTIONDESCRIPTION =
+	private static final String COMMENTPOST_OPTIONSTRING = "Display.Display POST comments";
+	private static final String COMMENTPOST_OPTIONDESCRIPTION =
 		"If set, disassembly post-instruction (POST) comments are displayed " +
 			"in the decompiler C output";
-	private final static boolean COMMENTPOST_OPTIONDEFAULT = false;	// Must match PrintLanguage::resetDefaultsInternal
+	private static final boolean COMMENTPOST_OPTIONDEFAULT = false;	// Must match PrintLanguage::resetDefaultsInternal
 	private boolean commentPOSTInclude;
 
-	private final static String COMMENTEOL_OPTIONSTRING = "Display.Display EOL comments";
-	private final static String COMMENTEOL_OPTIONDESCRIPTION =
+	private static final String COMMENTEOL_OPTIONSTRING = "Display.Display EOL comments";
+	private static final String COMMENTEOL_OPTIONDESCRIPTION =
 		"If set, disassembly end-of-line (EOL) comments are displayed " +
 			"in the decompiler C output";
-	private final static boolean COMMENTEOL_OPTIONDEFAULT = false;	// Must match PrintLanguage::resetDefaultsInternal
+	private static final boolean COMMENTEOL_OPTIONDEFAULT = false;	// Must match PrintLanguage::resetDefaultsInternal
 	private boolean commentEOLInclude;
 
-	private final static String COMMENTWARN_OPTIONSTRING = "Display.Display Warning comments";
-	private final static String COMMENTWARN_OPTIONDESCRIPTION =
+	private static final String COMMENTWARN_OPTIONSTRING = "Display.Display Warning comments";
+	private static final String COMMENTWARN_OPTIONDESCRIPTION =
 		"If set, warnings generated by the decompiler embedded in the displayed " +
 			"code as comments";
-	private final static boolean COMMENTWARN_OPTIONDEFAULT = true;	// Must match PrintLanguage::resetDefaultsInternal
+	private static final boolean COMMENTWARN_OPTIONDEFAULT = true;	// Must match PrintLanguage::resetDefaultsInternal
 	private boolean commentWARNInclude;
 
-	private final static String COMMENTHEAD_OPTIONSTRING = "Display.Display Header comment";
-	private final static String COMMENTHEAD_OPTIONDESCRIPTION =
+	private static final String COMMENTHEAD_OPTIONSTRING = "Display.Display Header comment";
+	private static final String COMMENTHEAD_OPTIONDESCRIPTION =
 		"If set, the entry point plate comment is displayed as " + "a function header comment.";
-	private final static boolean COMMENTHEAD_OPTIONDEFAULT = true;	// Must match PrintLanguage::resetDefaultsInternal
+	private static final boolean COMMENTHEAD_OPTIONDEFAULT = true;	// Must match PrintLanguage::resetDefaultsInternal
 	private boolean commentHeadInclude;
 
 	public enum NamespaceStrategy {
@@ -262,14 +259,14 @@ public class DecompileOptions {
 		}
 	}
 
-	private final static String NAMESPACE_OPTIONSTRING = "Display.Display Namespaces";
-	private final static String NAMESPACE_OPTIONDESCRIPTION =
+	private static final String NAMESPACE_OPTIONSTRING = "Display.Display Namespaces";
+	private static final String NAMESPACE_OPTIONDESCRIPTION =
 		"Choose how/if namespace tokens should be displayed along with symbol names";
-	private final static NamespaceStrategy NAMESPACE_OPTIONDEFAULT = NamespaceStrategy.Minimal;	// Must match PrintLanguage::resetDefaultsInternal
+	private static final NamespaceStrategy NAMESPACE_OPTIONDEFAULT = NamespaceStrategy.Minimal;	// Must match PrintLanguage::resetDefaultsInternal
 	private NamespaceStrategy namespaceStrategy;
 
-	private final static String INTEGERFORMAT_OPTIONSTRING = "Display.Integer format";
-	private final static String INTEGERFORMAT_OPTIONDESCRIPTION =
+	private static final String INTEGERFORMAT_OPTIONSTRING = "Display.Integer format";
+	private static final String INTEGERFORMAT_OPTIONDESCRIPTION =
 		"Choose how to display integers: as hexadecimal, decimal, or best fit";
 
 	public enum IntegerFormatEnum {
@@ -296,44 +293,44 @@ public class DecompileOptions {
 		}
 	}
 
-	private final static IntegerFormatEnum INTEGERFORMAT_OPTIONDEFAULT = IntegerFormatEnum.BestFit;		// Must match PrintLanguage::resetDefaultsInternal
+	private static final IntegerFormatEnum INTEGERFORMAT_OPTIONDEFAULT = IntegerFormatEnum.BestFit;		// Must match PrintLanguage::resetDefaultsInternal
 	private IntegerFormatEnum integerFormat;
 
-	private final static Color HIGHLIGHT_MIDDLE_MOUSE_DEF = new Color(255, 255, 0, 128);
+	private static final Color HIGHLIGHT_MIDDLE_MOUSE_DEF = new Color(255, 255, 0, 128);
 	private Color middleMouseHighlightColor;
 	private int middleMouseHighlightButton = MouseEvent.BUTTON2;
 
-	private final static String HIGHLIGHT_CURRENT_VARIABLE_MSG =
+	private static final String HIGHLIGHT_CURRENT_VARIABLE_MSG =
 		"Display.Color for Current Variable Highlight";
-	private final static Color HIGHLIGHT_CURRENT_VARIABLE_DEF = new Color(255, 255, 0, 128);
+	private static final Color HIGHLIGHT_CURRENT_VARIABLE_DEF = new Color(255, 255, 0, 128);
 	private Color currentVariableHighlightColor;
 
-	private final static String HIGHLIGHT_KEYWORD_MSG = "Display.Color for Keywords";
-	private final static Color HIGHLIGHT_KEYWORD_DEF = Color.decode("0x0001E6");
+	private static final String HIGHLIGHT_KEYWORD_MSG = "Display.Color for Keywords";
+	private static final Color HIGHLIGHT_KEYWORD_DEF = Color.decode("0x0001E6");
 	private Color keywordColor;
-	private final static String HIGHLIGHT_FUNCTION_MSG = "Display.Color for Function names";
-	private final static Color HIGHLIGHT_FUNCTION_DEF = Color.decode("0x0000FF");
+	private static final String HIGHLIGHT_FUNCTION_MSG = "Display.Color for Function names";
+	private static final Color HIGHLIGHT_FUNCTION_DEF = Color.decode("0x0000FF");
 	private Color functionColor;
-	private final static String HIGHLIGHT_COMMENT_MSG = "Display.Color for Comments";
-	private final static Color HIGHLIGHT_COMMENT_DEF = Color.decode("0x9600FF");
+	private static final String HIGHLIGHT_COMMENT_MSG = "Display.Color for Comments";
+	private static final Color HIGHLIGHT_COMMENT_DEF = Color.decode("0x9600FF");
 	private Color commentColor;
-	private final static String HIGHLIGHT_VARIABLE_MSG = "Display.Color for Variables";
-	private final static Color HIGHLIGHT_VARIABLE_DEF = Color.decode("0x999900");
+	private static final String HIGHLIGHT_VARIABLE_MSG = "Display.Color for Variables";
+	private static final Color HIGHLIGHT_VARIABLE_DEF = Color.decode("0x999900");
 	private Color variableColor;
-	private final static String HIGHLIGHT_CONST_MSG = "Display.Color for Constants";
-	private final static Color HIGHLIGHT_CONST_DEF = Color.decode("0x008E00");
+	private static final String HIGHLIGHT_CONST_MSG = "Display.Color for Constants";
+	private static final Color HIGHLIGHT_CONST_DEF = Color.decode("0x008E00");
 	private Color constantColor;
-	private final static String HIGHLIGHT_TYPE_MSG = "Display.Color for Types";
-	private final static Color HIGHLIGHT_TYPE_DEF = Color.decode("0x0033CC");
+	private static final String HIGHLIGHT_TYPE_MSG = "Display.Color for Types";
+	private static final Color HIGHLIGHT_TYPE_DEF = Color.decode("0x0033CC");
 	private Color typeColor;
-	private final static String HIGHLIGHT_PARAMETER_MSG = "Display.Color for Parameters";
-	private final static Color HIGHLIGHT_PARAMETER_DEF = Color.decode("0x9B009B");
+	private static final String HIGHLIGHT_PARAMETER_MSG = "Display.Color for Parameters";
+	private static final Color HIGHLIGHT_PARAMETER_DEF = Color.decode("0x9B009B");
 	private Color parameterColor;
-	private final static String HIGHLIGHT_GLOBAL_MSG = "Display.Color for Globals";
-	private final static Color HIGHLIGHT_GLOBAL_DEF = Color.decode("0x009999");
+	private static final String HIGHLIGHT_GLOBAL_MSG = "Display.Color for Globals";
+	private static final Color HIGHLIGHT_GLOBAL_DEF = Color.decode("0x009999");
 	private Color globalColor;
-	private final static String HIGHLIGHT_DEFAULT_MSG = "Display.Color Default";
-	private final static Color HIGHLIGHT_DEFAULT_DEF = Color.BLACK;
+	private static final String HIGHLIGHT_DEFAULT_MSG = "Display.Color Default";
+	private static final Color HIGHLIGHT_DEFAULT_DEF = Color.BLACK;
 	private Color defaultColor;
 
 	private static final String CODE_VIEWER_BACKGROUND_COLOR_MSG = "Display.Background Color";
@@ -345,20 +342,20 @@ public class DecompileOptions {
 	private static final Color SEARCH_HIGHLIGHT_DEF = new Color(100, 100, 255);
 	private Color defaultSearchHighlightColor = SEARCH_HIGHLIGHT_DEF;
 
-	final static String FONT_MSG = "Display.Font";
-	final static Font DEFAULT_FONT = new Font(Font.MONOSPACED, Font.PLAIN, 12);
+	static final String FONT_MSG = "Display.Font";
+	static final Font DEFAULT_FONT = new Font(Font.MONOSPACED, Font.PLAIN, 12);
 	private Font defaultFont;
 
-	private final static String CACHED_RESULTS_SIZE_MSG = "Cache Size (Functions)";
-	private final static int SUGGESTED_CACHED_RESULTS_SIZE = 10;
-	private final static String CACHE_RESULTS_DESCRIPTION =
+	private static final String CACHED_RESULTS_SIZE_MSG = "Cache Size (Functions)";
+	private static final int SUGGESTED_CACHED_RESULTS_SIZE = 10;
+	private static final String CACHE_RESULTS_DESCRIPTION =
 		"Number of Decompiled Functions to Cache in the Decompile Window";
 
-	private final static String LINE_NUMBER_MSG = "Display.Display Line Numbers";
-	private final static String DECOMPILE_TIMEOUT = "Decompiler Timeout (seconds)";
-	private final static String PAYLOAD_LIMIT = "Decompiler Max-Payload (MBytes)";
-	private final static String MAX_INSTRUCTIONS = "Max Instructions per Function";
-	private final static Boolean LINE_NUMBER_DEF = Boolean.TRUE;
+	private static final String LINE_NUMBER_MSG = "Display.Display Line Numbers";
+	private static final String DECOMPILE_TIMEOUT = "Decompiler Timeout (seconds)";
+	private static final String PAYLOAD_LIMIT = "Decompiler Max-Payload (MBytes)";
+	private static final String MAX_INSTRUCTIONS = "Max Instructions per Function";
+	private static final Boolean LINE_NUMBER_DEF = Boolean.TRUE;
 	private boolean displayLineNumbers;
 	private int decompileTimeoutSeconds;
 	private int payloadLimitMBytes;
@@ -672,7 +669,7 @@ public class DecompileOptions {
 		buf.append(" <");
 		buf.append(name);
 		buf.append('>');
-		if ((p2.length() == 0) && (p3.length() == 0)) {
+		if ((p2.isEmpty()) && (p3.isEmpty())) {
 			buf.append(p1);
 		}
 		else {
@@ -683,7 +680,7 @@ public class DecompileOptions {
 			buf.append("  <param2>");
 			buf.append(p2); // Print even if empty, as p3 isn't
 			buf.append("</param2>\n");
-			if (p3.length() != 0) {
+			if (!p3.isEmpty()) {
 				buf.append("  <param3>");
 				buf.append(p3);
 				buf.append("</param3>\n");

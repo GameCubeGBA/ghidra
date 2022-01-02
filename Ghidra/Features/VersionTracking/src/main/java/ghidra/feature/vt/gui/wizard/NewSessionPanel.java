@@ -210,7 +210,7 @@ public class NewSessionPanel extends AbstractMageJPanel<VTWizardStateKey> {
 		mainPanel.add(Box.createVerticalStrut(60), gbc);
 
 		setLayout(new BorderLayout());
-		add(mainPanel, BorderLayout.NORTH);
+		add(mainPanel, BorderLayout.PAGE_START);
 	}
 
 	private void initializePrograms(WizardState<VTWizardStateKey> state) {
@@ -498,7 +498,7 @@ public class NewSessionPanel extends AbstractMageJPanel<VTWizardStateKey> {
 	}
 
 	// simple object to track a domain file and its program
-	private class ProgramInfo {
+	private static class ProgramInfo {
 
 		private Program program;
 		private DomainFile file;

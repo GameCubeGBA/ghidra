@@ -17,6 +17,7 @@ package ghidra.dbg.jdi.manager;
 
 import ghidra.dbg.target.TargetConsole.Channel;
 
+@FunctionalInterface
 public interface JdiConsoleOutputListener {
 	/**
 	 * JDI outputted some text

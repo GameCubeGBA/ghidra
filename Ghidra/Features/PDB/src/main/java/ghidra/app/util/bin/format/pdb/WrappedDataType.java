@@ -18,7 +18,7 @@ package ghidra.app.util.bin.format.pdb;
 import ghidra.program.model.data.DataType;
 
 /**
- * <code>WrappedDataType</code> provide the ability to wrap 
+ * {@code WrappedDataType} provide the ability to wrap
  * a {@link DataType} with additional information not conveyed
  * by the datatype on its own. 
  * <P>

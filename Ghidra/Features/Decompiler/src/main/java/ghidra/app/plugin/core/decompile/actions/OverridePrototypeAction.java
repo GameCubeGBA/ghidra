@@ -254,7 +254,7 @@ public class OverridePrototypeAction extends AbstractDecompilerAction {
 		String signature = generateSignature(op, name, calledfunc);
 		PluginTool tool = context.getTool();
 		ProtoOverrideDialog dialog =
-			new ProtoOverrideDialog(tool, calledfunc != null ? calledfunc : func, signature, conv);
+                new ProtoOverrideDialog(tool, calledfunc != null ? calledfunc : func, signature, conv);
 		tool.showDialog(dialog);
 		FunctionDefinition fdef = dialog.getFunctionDefinition();
 		if (fdef == null) {
@@ -276,12 +276,12 @@ public class OverridePrototypeAction extends AbstractDecompilerAction {
 	}
 
 	/**
-	 * <code>ProtoOverrideDialog</code> provides the ability to edit the
+	 * {@code ProtoOverrideDialog} provides the ability to edit the
 	 * function signature associated with a specific function definition override
 	 * at a sub-function callsite.  
 	 * Use of this editor requires the presence of the tool-based datatype manager service.
 	 */
-	private class ProtoOverrideDialog extends EditFunctionSignatureDialog {
+	private static class ProtoOverrideDialog extends EditFunctionSignatureDialog {
 		private FunctionDefinition functionDefinition;
 		private final String initialSignature;
 		private final String initialConvention;

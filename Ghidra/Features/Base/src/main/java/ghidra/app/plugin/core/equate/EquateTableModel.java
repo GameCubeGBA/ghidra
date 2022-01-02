@@ -203,7 +203,7 @@ class EquateTableModel extends GDynamicColumnTableModel<Equate, Object> {
 
 	}
 
-	private class EquateValueColumn extends AbstractDynamicTableColumn<Equate, Long, Object> {
+	private static class EquateValueColumn extends AbstractDynamicTableColumn<Equate, Long, Object> {
 
 		public static final String NAME = "Value";
 
@@ -226,13 +226,12 @@ class EquateTableModel extends GDynamicColumnTableModel<Equate, Object> {
 
 			@Override
 			public String getFilterString(Long t, Settings settings) {
-				StringBuilder sb = new StringBuilder();
-				// @formatter:off
-				sb.append(Long.toHexString(t))
-				.append(" ")
-				.append(Long.toString(t));
+                // @formatter:off
+                String sb = Long.toHexString(t) +
+                        " " +
+                        Long.toString(t);
 				// @formatter:on
-				return sb.toString();
+				return sb;
 			}
 		};
 
@@ -262,7 +261,7 @@ class EquateTableModel extends GDynamicColumnTableModel<Equate, Object> {
 
 	}
 
-	private class EquateReferenceCountColumn
+	private static class EquateReferenceCountColumn
 	extends AbstractDynamicTableColumn<Equate, Integer, Object> {
 
 		public static final String NAME = "# Refs";
@@ -280,7 +279,7 @@ class EquateTableModel extends GDynamicColumnTableModel<Equate, Object> {
 
 	}
 
-	private class IsEnumBasedEquateColumn
+	private static class IsEnumBasedEquateColumn
 	extends AbstractDynamicTableColumn<Equate, Boolean, Object> {
 
 		public static final String NAME = "Is Enum-Based";

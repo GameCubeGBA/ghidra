@@ -70,25 +70,24 @@ public class SegmentMapDescription {
 	 * @return {@link String} of pretty output.
 	 */
 	protected String dump() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("SegmentMapDescription---------------------------------------");
-		builder.append("\nflags: ");
-		builder.append(flags);
-		builder.append("\novl: ");
-		builder.append(ovl);
-		builder.append("\ngroup: ");
-		builder.append(group);
-		builder.append("\nframe: ");
-		builder.append(frame);
-		builder.append("\nsegNameIndex: ");
-		builder.append(segNameIndex);
-		builder.append("; classNameIndex: ");
-		builder.append(classNameIndex);
-		builder.append("; segOffset: ");
-		builder.append(segOffset);
-		builder.append("; segLength: ");
-		builder.append(segLength);
-		return builder.toString();
+        String builder = "SegmentMapDescription---------------------------------------" +
+                "\nflags: " +
+                flags +
+                "\novl: " +
+                ovl +
+                "\ngroup: " +
+                group +
+                "\nframe: " +
+                frame +
+                "\nsegNameIndex: " +
+                segNameIndex +
+                "; classNameIndex: " +
+                classNameIndex +
+                "; segOffset: " +
+                segOffset +
+                "; segLength: " +
+                segLength;
+		return builder;
 	}
 
 }

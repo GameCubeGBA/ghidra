@@ -42,10 +42,10 @@ public class AnalysisStateInfo {
 	}
 
 	/**
-	 * Return previously stored <code>AnalysisState</code> of the specified analysisStateClass type 
+	 * Return previously stored {@code AnalysisState} of the specified analysisStateClass type
 	 * for the specified program.
 	 * @param program
-	 * @param analysisStateClass type of <code>AnalysisState</code>
+	 * @param analysisStateClass type of {@code AnalysisState}
 	 * @return analysis state or null if not previously stored via {@link #putAnalysisState(Program, AnalysisState)}
 	 */
 	@SuppressWarnings("unchecked") // putAnalysisState ensures that stored instance corresponds to key class

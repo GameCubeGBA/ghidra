@@ -481,19 +481,18 @@ public class PackedDatabaseCache {
 		}
 
 		String getMapEntry() {
-			StringBuilder buf = new StringBuilder();
-			buf.append(packedDbFilePath);
-			buf.append(MAP_SEPARATOR);
-			buf.append(dbDir.getName());
-			buf.append(MAP_SEPARATOR);
-			buf.append(Long.toHexString(lastModifiedTime));
-			buf.append(MAP_SEPARATOR);
-			buf.append(contentType);
-			buf.append(MAP_SEPARATOR);
-			buf.append(itemName);
-			buf.append(MAP_SEPARATOR);
-			buf.append(Long.toHexString(lastAccessTime));
-			return buf.toString();
+            String buf = packedDbFilePath +
+                    MAP_SEPARATOR +
+                    dbDir.getName() +
+                    MAP_SEPARATOR +
+                    Long.toHexString(lastModifiedTime) +
+                    MAP_SEPARATOR +
+                    contentType +
+                    MAP_SEPARATOR +
+                    itemName +
+                    MAP_SEPARATOR +
+                    Long.toHexString(lastAccessTime);
+			return buf;
 		}
 
 	}

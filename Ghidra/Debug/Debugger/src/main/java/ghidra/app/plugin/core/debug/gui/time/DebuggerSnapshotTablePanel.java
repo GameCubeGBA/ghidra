@@ -148,7 +148,7 @@ public class DebuggerSnapshotTablePanel extends JPanel {
 		add(new JScrollPane(snapshotTable));
 
 		snapshotFilterPanel = new GhidraTableFilterPanel<>(snapshotTable, snapshotTableModel);
-		add(snapshotFilterPanel, BorderLayout.SOUTH);
+		add(snapshotFilterPanel, BorderLayout.PAGE_END);
 
 		TableColumnModel columnModel = snapshotTable.getColumnModel();
 		TableColumn snapCol = columnModel.getColumn(SnapshotTableColumns.SNAP.ordinal());

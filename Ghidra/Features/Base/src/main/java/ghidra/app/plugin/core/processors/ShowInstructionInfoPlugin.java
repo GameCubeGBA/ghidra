@@ -261,30 +261,27 @@ public class ShowInstructionInfoPlugin extends ProgramPlugin {
 
 	private String buildMissingManualMessage(Language language, String filename,
 			String missingDescription) {
-		StringBuffer buf = new StringBuffer(HTMLUtilities.HTML);
-		buf.append("Ghidra could not find the processor manual for ").append(language);
-		buf.append(HTMLUtilities.BR);
-		buf.append(HTMLUtilities.BR);
-		buf.append(
-			"Note: The Ghidra distribution does not include some of the processor manuals due to copyright issues. ");
-		buf.append(HTMLUtilities.BR);
-		buf.append("Most of these manuals are readily available on-line.");
-		buf.append(HTMLUtilities.BR);
-		buf.append(HTMLUtilities.BR);
-		buf.append(
-			"To correct this issue, obtain the manual described below and place it at the specified location. ");
-		buf.append(HTMLUtilities.BR);
-		buf.append(HTMLUtilities.BR);
-		buf.append("Manual information: ");
-		buf.append(HTMLUtilities.bold(missingDescription));
-		buf.append(HTMLUtilities.BR);
-		buf.append(HTMLUtilities.BR);
-		buf.append("Location to place manual file: ");
-		buf.append(HTMLUtilities.bold(filename));
-		buf.append(HTMLUtilities.BR);
-		buf.append(HTMLUtilities.BR);
-		buf.append("Contact the Ghidra team if you have any problems.");
-		return buf.toString();
+        String buf = HTMLUtilities.HTML + "Ghidra could not find the processor manual for " + language +
+                HTMLUtilities.BR +
+                HTMLUtilities.BR +
+                "Note: The Ghidra distribution does not include some of the processor manuals due to copyright issues. " +
+                HTMLUtilities.BR +
+                "Most of these manuals are readily available on-line." +
+                HTMLUtilities.BR +
+                HTMLUtilities.BR +
+                "To correct this issue, obtain the manual described below and place it at the specified location. " +
+                HTMLUtilities.BR +
+                HTMLUtilities.BR +
+                "Manual information: " +
+                HTMLUtilities.bold(missingDescription) +
+                HTMLUtilities.BR +
+                HTMLUtilities.BR +
+                "Location to place manual file: " +
+                HTMLUtilities.bold(filename) +
+                HTMLUtilities.BR +
+                HTMLUtilities.BR +
+                "Contact the Ghidra team if you have any problems.";
+		return buf;
 	}
 
 	/**

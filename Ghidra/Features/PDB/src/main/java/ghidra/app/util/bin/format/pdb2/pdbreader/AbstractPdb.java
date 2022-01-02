@@ -590,9 +590,7 @@ public abstract class AbstractPdb implements AutoCloseable {
 	 * @return {@link String} of pretty output.
 	 */
 	String dumpStream(int streamNumber, int maxOut) {
-		StringBuilder builder = new StringBuilder();
-		builder.append(msf.getStream(streamNumber).dump(maxOut));
-		return builder.toString();
+        return msf.getStream(streamNumber).dump(maxOut);
 	}
 
 	//==============================================================================================
@@ -651,15 +649,14 @@ public abstract class AbstractPdb implements AutoCloseable {
 	 * @return {@link String} of pretty output.
 	 */
 	protected String dumpVersionSignatureAge() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("DirectoryHeader---------------------------------------------");
-		builder.append("\nversionNumber: ");
-		builder.append(versionNumber);
-		builder.append("\nsignature: ");
-		builder.append(Integer.toHexString(signature));
-		builder.append("\nage: ");
-		builder.append(pdbAge);
-		return builder.toString();
+        String builder = "DirectoryHeader---------------------------------------------" +
+                "\nversionNumber: " +
+                versionNumber +
+                "\nsignature: " +
+                Integer.toHexString(signature) +
+                "\nage: " +
+                pdbAge;
+		return builder;
 	}
 
 	/**

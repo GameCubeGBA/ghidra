@@ -519,7 +519,7 @@ public class GraphActionsTest extends AbstractGhidraHeadedIntegrationTest {
 
 	}
 
-	class GraphSpy {
+	static class GraphSpy {
 		AttributedVertex focusedVertex;
 		Set<AttributedVertex> selectedVertices;
 

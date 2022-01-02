@@ -177,7 +177,7 @@ public class DebuggerMemoryBytesProvider extends ProgramByteViewerComponentProvi
 		autoServiceWiring = AutoService.wireServicesConsumed(plugin, this);
 		createActions();
 		addDisplayListener(readsMemTrait.getDisplayListener());
-		decorationComponent.add(locationLabel, BorderLayout.NORTH);
+		decorationComponent.add(locationLabel, BorderLayout.PAGE_START);
 
 		goToTrait.goToCoordinates(current);
 		trackingTrait.goToCoordinates(current);

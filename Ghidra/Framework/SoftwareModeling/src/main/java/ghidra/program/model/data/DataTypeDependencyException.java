@@ -16,7 +16,7 @@
 package ghidra.program.model.data;
 
 /**
- * <code>DataTypeDependencyException</code> corresponds to a datatype dependency failure.
+ * {@code DataTypeDependencyException} corresponds to a datatype dependency failure.
  * This can occur under various situations, including when trying to replace a dataType 
  * with a dataType that depends on the dataType being replaced.  This error may also occur
  * when a datatype dependency can not be satisfied.

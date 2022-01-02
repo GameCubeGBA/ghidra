@@ -133,7 +133,7 @@ public class GraphExporterDialog extends DialogComponentProvider {
 
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.add(filePathTextField, BorderLayout.CENTER);
-		panel.add(fileChooserButton, BorderLayout.EAST);
+		panel.add(fileChooserButton, BorderLayout.LINE_END);
 		return panel;
 	}
 

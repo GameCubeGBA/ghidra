@@ -28,7 +28,7 @@ import ghidra.util.exception.DuplicateFileException;
 import ghidra.util.exception.UserAccessException;
 
 /**
- * <code>RepositoryHandle</code> provides access to a repository.
+ * {@code RepositoryHandle} provides access to a repository.
  */
 public interface RepositoryHandle {
 

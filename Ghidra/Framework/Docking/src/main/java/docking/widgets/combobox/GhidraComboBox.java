@@ -19,7 +19,6 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Vector;
 
 import javax.swing.AbstractAction;
@@ -169,7 +168,7 @@ public class GhidraComboBox<E> extends JComboBox<E> implements GComponent {
 	 * By default Ghidra disables the forwarding altogether, since most users of 
 	 * {@link GhidraComboBox} will add an action listener to handle &lt;Enter&gt; actions.
 	 * <p>
-	 * To re-enable the default behavior, set the <code>forwardEnter</code> value to true.
+	 * To re-enable the default behavior, set the {@code forwardEnter} value to true.
 	 *  
 	 * @param forwardEnter true to enable default &lt;Enter&gt; key handling.
 	 */

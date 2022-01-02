@@ -228,7 +228,7 @@ public class GhidraApplicationLayout extends ApplicationLayout {
 	 * Returns the directory where all Ghidra extension archives are stored.
 	 * This should be at the following location:<br>
 	 * <ul>
-	 * <li><code>[application root]/Extensions/Ghidra</code></li>
+	 * <li>{@code [application root]/Extensions/Ghidra}</li>
 	 * </ul>
 	 * 
 	 * @return the archive folder, or null if can't be determined
@@ -245,9 +245,9 @@ public class GhidraApplicationLayout extends ApplicationLayout {
 	 * Returns a prioritized list of directories where Ghidra extensions are installed. These 
 	 * should be at the following locations:<br>
 	 * <ul>
-	 * <li><code>[user settings dir]/Extensions</code></li>
-	 * <li><code>[application install dir]/Ghidra/Extensions</code></li>
-	 * <li><code>ghidra/Ghidra/Extensions</code> (development mode)</li>
+	 * <li>{@code [user settings dir]/Extensions}</li>
+	 * <li>{@code [application install dir]/Ghidra/Extensions}</li>
+	 * <li>{@code ghidra/Ghidra/Extensions} (development mode)</li>
 	 * </ul>
 	 * 
 	 * @return the install folder, or null if can't be determined

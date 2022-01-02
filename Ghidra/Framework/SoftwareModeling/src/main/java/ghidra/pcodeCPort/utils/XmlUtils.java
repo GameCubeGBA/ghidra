@@ -52,12 +52,10 @@ public class XmlUtils {
 		char firstc = boolString.charAt(0);
 		switch (firstc) {
 		case 't':
-			return true;
-		case '1':
-			return true;
-		case 'y':
-			return true;
-		default:
+            case 'y':
+            case '1':
+                return true;
+            default:
 			break;
 		}
 		return false;

@@ -88,16 +88,14 @@ public class FunctionBitPatternsGTree extends GTree {
 			int maxLevel = currentSeq.getInstructions().length;
 			String[] currentInsts = currentSeq.getInstructions();
 			for (int level = 0; level < maxLevel; level++) {
-				StringBuilder keyBuilder = new StringBuilder();
 
-				if (currentInsts[level] == null) {
+                if (currentInsts[level] == null) {
 					break;//out of instructions for this sequence
 				}
 
-				keyBuilder.append(currentSeq.getInstructions()[level]);
-				keyBuilder.append(":");
-				keyBuilder.append(Integer.toString(currentSeq.getSizes()[level]));
-				String key = keyBuilder.toString();
+                String key = currentSeq.getInstructions()[level] +
+                        ":" +
+                        Integer.toString(currentSeq.getSizes()[level]);
 
 				//make sure there is a map keys -> nodes for the current node
 				Map<String, GTreeNode> currentNodeChildMap = nodeMap.get(currentNode);

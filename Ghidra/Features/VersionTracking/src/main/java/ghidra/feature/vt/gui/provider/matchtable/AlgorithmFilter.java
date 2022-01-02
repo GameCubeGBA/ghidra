@@ -68,7 +68,7 @@ public class AlgorithmFilter extends CheckBoxBasedAncillaryFilter<VTMatch> {
 
 		JPanel parentPanel = new JPanel(new BorderLayout());
 		parentPanel.add(checkBoxPanel, BorderLayout.CENTER);
-		parentPanel.add(southPanel, BorderLayout.SOUTH);
+		parentPanel.add(southPanel, BorderLayout.PAGE_END);
 
 		return parentPanel;
 	}
@@ -111,7 +111,7 @@ public class AlgorithmFilter extends CheckBoxBasedAncillaryFilter<VTMatch> {
 // Inner Classes
 //==================================================================================================
 
-	private class AlgorithmNameCheckBoxInfo extends CheckBoxInfo<VTMatch> {
+	private static class AlgorithmNameCheckBoxInfo extends CheckBoxInfo<VTMatch> {
 
 		private final String algorithmName;
 

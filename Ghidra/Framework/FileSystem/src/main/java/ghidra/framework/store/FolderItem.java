@@ -22,7 +22,7 @@ import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>FolderItem</code> represents an individual file
+ * {@code FolderItem} represents an individual file
  * contained within a FileSystem and is uniquely identified 
  * by a path string.
  */

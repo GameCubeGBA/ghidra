@@ -130,11 +130,10 @@ public class SymbolGroup {
 	protected void dump(Writer writer) throws IOException {
 		writer.write("SymbolGroup-------------------------------------------------");
 		for (Map.Entry<Long, AbstractMsSymbol> entry : symbolsByOffset.entrySet()) {
-			StringBuilder builder = new StringBuilder();
-			builder.append("\n------------------------------------------------------------\n");
-			builder.append(String.format("Offset: 0X%08X\n", entry.getKey()));
-			builder.append(entry.getValue());
-			writer.write(builder.toString());
+            String builder = "\n------------------------------------------------------------\n" +
+                    String.format("Offset: 0X%08X\n", entry.getKey()) +
+                    entry.getValue();
+			writer.write(builder);
 		}
 		writer.write("\nEnd SymbolGroup---------------------------------------------\n");
 	}

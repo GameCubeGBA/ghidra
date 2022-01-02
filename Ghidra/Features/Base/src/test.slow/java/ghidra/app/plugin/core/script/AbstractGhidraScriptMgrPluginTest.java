@@ -1540,7 +1540,7 @@ public abstract class AbstractGhidraScriptMgrPluginTest
 // Inner Classes
 //==================================================================================================
 
-	protected class TaskListenerFlag implements TrackedTaskListener {
+	protected static class TaskListenerFlag implements TrackedTaskListener {
 
 		protected String taskName;
 		volatile boolean ended;
@@ -1568,7 +1568,7 @@ public abstract class AbstractGhidraScriptMgrPluginTest
 		}
 	}
 
-	protected class TestChangeProgramScript extends GhidraScript {
+	protected static class TestChangeProgramScript extends GhidraScript {
 
 		protected CountDownLatch startedLatch = new CountDownLatch(1);
 		protected CountDownLatch doneLatch = new CountDownLatch(1);

@@ -21,7 +21,7 @@ import db.buffers.DataBuffer;
 import ghidra.util.exception.AssertException;
 
 /**
- * <code>IndexField</code> provides a index table primary key {@link Field} 
+ * {@code IndexField} provides a index table primary key {@link Field}
  * implementation which wraps both the index field value (fixed or varaible length) 
  * and its' corresponding primary key (fixed or variable length). 
  */

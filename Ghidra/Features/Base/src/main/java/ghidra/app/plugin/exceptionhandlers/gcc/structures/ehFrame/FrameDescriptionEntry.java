@@ -24,7 +24,6 @@ import ghidra.app.plugin.exceptionhandlers.gcc.datatype.UnsignedLeb128DataType;
 import ghidra.app.plugin.exceptionhandlers.gcc.sections.CieSource;
 import ghidra.app.plugin.exceptionhandlers.gcc.sections.DebugFrameSection;
 import ghidra.app.plugin.exceptionhandlers.gcc.structures.gccexcepttable.LSDATable;
-import ghidra.app.util.opinion.ElfLoader;
 import ghidra.program.model.address.*;
 import ghidra.program.model.data.*;
 import ghidra.program.model.listing.*;
@@ -108,8 +107,8 @@ public class FrameDescriptionEntry extends GccAnalysisClass {
 
 	/**
 	 * Constructor for a frame descriptor entry.
-	 * <br>Note: The <code>create(Address)</code> method must be called after constructing a 
-	 * <code>FrameDescriptionEntry</code> to associate it with an address before any of its 
+	 * <br>Note: The {@code create(Address)} method must be called after constructing a
+	 * {@code FrameDescriptionEntry} to associate it with an address before any of its
 	 * "get..." methods are called.
 	 * 
 	 * @param monitor a status monitor for tracking progress and allowing cancelling when creating
@@ -393,8 +392,6 @@ public class FrameDescriptionEntry extends GccAnalysisClass {
 	 * @throws MemoryAccessException if the required memory can't be read
 	 */
 	private Address createCallFrameInstructions(Address addr) throws MemoryAccessException {
-		CreateArrayCmd arrayCmd = null;
-
 		// Create initial instructions array with remaining bytes.
 		int instructionLength = intLength - curSize;
 		ArrayDataType adt = new ArrayDataType(ByteDataType.dataType, instructionLength, BYTE_LEN);

@@ -39,20 +39,19 @@ class OptimizeRecord {
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("{writeop=");
-		sb.append(writeop);
-		sb.append(" readop=");
-		sb.append(readop);
-		sb.append(" inslot=");
-		sb.append(inslot);
-		sb.append(" writecount=");
-		sb.append(writecount);
-		sb.append(" readcount=");
-		sb.append(readcount);
-		sb.append(" opttype=");
-		sb.append(opttype);
-		sb.append("}");
-		return sb.toString();
+        String sb = "{writeop=" +
+                writeop +
+                " readop=" +
+                readop +
+                " inslot=" +
+                inslot +
+                " writecount=" +
+                writecount +
+                " readcount=" +
+                readcount +
+                " opttype=" +
+                opttype +
+                "}";
+		return sb;
 	}
 }

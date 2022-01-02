@@ -15,6 +15,7 @@
  */
 package generic.hash;
 
+@FunctionalInterface
 public interface MessageDigestFactory {
 	MessageDigest createDigest();
 }

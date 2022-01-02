@@ -154,7 +154,7 @@ public abstract class AbstractDecompilerFindReferencesActionTest extends Abstrac
 			findReferencesAction.isAddToPopup(context));
 	}
 
-	public class SpyDataTypeReferenceFinder<T extends DataTypeReferenceFinder> extends MockUp<T> {
+	public static class SpyDataTypeReferenceFinder<T extends DataTypeReferenceFinder> extends MockUp<T> {
 
 		private AtomicInteger dataTypeReferencesCallCount = new AtomicInteger();
 		private AtomicInteger compositeFieldReferencesCallCount = new AtomicInteger();
@@ -182,7 +182,7 @@ public abstract class AbstractDecompilerFindReferencesActionTest extends Abstrac
 		}
 	}
 
-	public class SpyLocationReferencesService<T extends LocationReferencesService>
+	public static class SpyLocationReferencesService<T extends LocationReferencesService>
 			extends MockUp<T> {
 
 		private AtomicInteger showReferencesCallCount = new AtomicInteger();

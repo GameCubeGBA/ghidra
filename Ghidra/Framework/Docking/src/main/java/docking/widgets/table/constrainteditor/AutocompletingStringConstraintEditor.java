@@ -69,7 +69,7 @@ public class AutocompletingStringConstraintEditor extends DataLoadingConstraintE
 		textField = new DropDownTextField<>(autocompleter, 100);
 		textField.setIgnoreEnterKeyPress(true);
 		textField.getDocument().addUndoableEditListener(e -> valueChanged());
-		panel.add(textField, BorderLayout.NORTH);
+		panel.add(textField, BorderLayout.PAGE_START);
 		textField.addActionListener(e -> textField.closeDropDownWindow());
 
 		return panel;

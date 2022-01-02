@@ -25,6 +25,7 @@ import java.util.function.Consumer;
  *
  * @param <T> the type of the input to the operation
  */
+@FunctionalInterface
 public interface TerminatingConsumer<T> extends Consumer<T> {
 
     default boolean terminationRequested() {

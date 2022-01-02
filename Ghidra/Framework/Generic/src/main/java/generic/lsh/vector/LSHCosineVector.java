@@ -475,9 +475,7 @@ public class LSHCosineVector implements LSHVector {
 
 	@Override
 	public void saveXml(Writer fwrite) throws IOException {
-		StringBuilder buf = new StringBuilder();
-		buf.append("<lshcosine>\n");
-		fwrite.append(buf.toString());
+        fwrite.append("<lshcosine>\n");
 		// The length is not stored as part of XML
 		for (HashEntry element : hash) {
 			element.saveXml(fwrite);

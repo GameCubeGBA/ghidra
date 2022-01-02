@@ -159,7 +159,7 @@ public class FunctionBitPatternsMainProvider extends ComponentProviderAdapter
 	private JComponent build() {
 		JPanel panel = new JPanel(new BorderLayout());
 
-		panel.add(buildControlPanel(), BorderLayout.NORTH);
+		panel.add(buildControlPanel(), BorderLayout.PAGE_START);
 		tabbedPane = new JTabbedPane();
 
 		firstInstPanel = new InstructionSequenceTreePanelBuilder(PatternType.FIRST);
@@ -215,9 +215,9 @@ public class FunctionBitPatternsMainProvider extends ComponentProviderAdapter
 
 	private Component buildControlPanel() {
 		JPanel controlPanel = new JPanel();
-		BoxLayout controlLayout = new BoxLayout(controlPanel, BoxLayout.Y_AXIS);
+		BoxLayout controlLayout = new BoxLayout(controlPanel, BoxLayout.PAGE_AXIS);
 		controlPanel.setLayout(controlLayout);
-		JPanel infoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel infoPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
 		infoPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		JPanel buttonPanel = new JPanel();
 		FlowLayout buttonPanelLayout = new FlowLayout(FlowLayout.CENTER);

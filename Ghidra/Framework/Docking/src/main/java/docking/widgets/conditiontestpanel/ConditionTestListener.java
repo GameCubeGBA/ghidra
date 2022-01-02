@@ -16,6 +16,7 @@
  */
 package docking.widgets.conditiontestpanel;
 
+@FunctionalInterface
 public interface ConditionTestListener {
 	void testsCompleted();
 }

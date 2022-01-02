@@ -42,16 +42,6 @@ public class DecompilerLocation extends ProgramLocation {
 	}
 
 	/**
-	 * Default constructor required for restoring a program location from XML.
-	 */
-	public DecompilerLocation() {
-	}
-
-	public Address getFunctionEntryPoint() {
-		return functionEntryPoint;
-	}
-
-	/**
 	 * Results from the decompilation
 	 * 
 	 * @return C-AST, DFG, and CFG object. null if there are no results attached to this location
@@ -149,16 +139,15 @@ public class DecompilerLocation extends ProgramLocation {
 
 	@Override
 	public String toString() {
-		StringBuilder buf = new StringBuilder();
-		buf.append(getClass().getSimpleName());
-		buf.append('@');
-		buf.append(addr.toString());
-		buf.append(", line=");
-		buf.append(lineNumber);
-		buf.append(", character=");
-		buf.append(charPos);
-		buf.append(", token=");
-		buf.append(tokenName);
-		return buf.toString();
+		String buf = getClass().getSimpleName() +
+				'@' +
+				addr.toString() +
+				", line=" +
+				lineNumber +
+				", character=" +
+				charPos +
+				", token=" +
+				tokenName;
+		return buf;
 	}
 }

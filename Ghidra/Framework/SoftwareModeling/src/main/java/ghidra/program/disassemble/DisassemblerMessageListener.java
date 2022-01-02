@@ -21,6 +21,7 @@ import ghidra.util.Msg;
 /**
  * Interface for reporting disassembly messages
  */
+@FunctionalInterface
 public interface DisassemblerMessageListener {
 	/**
 	 * Ignores all messages from the disassembler.

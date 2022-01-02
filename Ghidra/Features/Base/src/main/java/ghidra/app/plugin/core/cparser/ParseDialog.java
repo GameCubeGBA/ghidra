@@ -200,7 +200,7 @@ class ParseDialog extends DialogComponentProvider {
 		pathPanel.setPreferredSize(new Dimension(pathPanel.getPreferredSize().width, 200));
 		JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, pathPanel, optionsPanel);
 		splitPane.setResizeWeight(0.50);
-		mainPanel.add(comboPanel, BorderLayout.NORTH);
+		mainPanel.add(comboPanel, BorderLayout.PAGE_START);
 		mainPanel.add(splitPane, BorderLayout.CENTER);
 
 		setHelpLocation(new HelpLocation(plugin.getName(), "Parse_C_Source"));
@@ -693,7 +693,7 @@ class ParseDialog extends DialogComponentProvider {
 		return parseOptionsField.getText();
 	}
 
-	private class ComboBoxItem {
+	private static class ComboBoxItem {
 		private ResourceFile file;
 		private boolean isUserDefined;
 		private boolean isChanged;
