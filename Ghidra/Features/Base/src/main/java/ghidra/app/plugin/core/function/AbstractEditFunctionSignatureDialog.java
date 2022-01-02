@@ -410,19 +410,21 @@ public abstract class AbstractEditFunctionSignatureDialog extends DialogComponen
 	 */
 	protected final boolean isCallingConventionChanged() {
 		String current = getCallingConventionName();
-		if (current == null && this.getCallingConvention() == null) {
+		if (current != null)
+		{
+			return !current.equals(getCallingConvention());
+		}
+		if (this.getCallingConvention() == null) {
 			return false;
 		}
-		if (current == null && "default".equals(this.getCallingConvention())) {
+		if ("default".equals(this.getCallingConvention())) {
 			return false;
 		}
-		if (current == null && "unknown".equals(this.getCallingConvention())) {
+		if ("unknown".equals(this.getCallingConvention())) {
 			return false;
 		}
-		if (current == null) {
-			return true;
-		}
-        return !current.equals(getCallingConvention());
+
+		return true;
     }
 
 	@Override

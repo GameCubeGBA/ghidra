@@ -421,7 +421,7 @@ class LibrarySymbolTable {
                 String fowardSymName = export.getAttributeValue("FOWARDSYMBOL");
 
                 String noReturnStr = export.getAttributeValue("NO_RETURN");
-                boolean noReturn = noReturnStr != null && "y".equals(noReturnStr);
+                boolean noReturn = "y".equals(noReturnStr);
 
                 if (fowardLibName != null && !fowardLibName.isEmpty() &&
                         !fowardLibName.equals(tableName)) {
