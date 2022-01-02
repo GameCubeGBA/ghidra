@@ -309,11 +309,6 @@ public class StringsAnalyzer extends AbstractAnalyzer {
 				AddressSet intersecting =
 					searchSet.intersectRange(space.getMinAddress(), space.getMaxAddress());
 
-				// Initialize, because we don't want to use the same iterators or
-				// code units when we change address spaces
-				instructionIterator = null;
-				definedDataIterator = null;
-
 				findStrings(program, intersecting, minStringLength, startAlignment, requireNullEnd,
 					allCharWidths, monitor);
 			}
