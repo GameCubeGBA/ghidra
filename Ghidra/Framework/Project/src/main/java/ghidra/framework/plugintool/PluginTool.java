@@ -1165,9 +1165,9 @@ public abstract class PluginTool extends AbstractDockingTool {
 				}
 				break;
 			default:
+			// option 3 is don't save; just exit
 				break;
 			}
-			// option 3 is don't save; just exit
 		}
 		return true;
 	}

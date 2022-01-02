@@ -412,31 +412,29 @@ class LibrarySymbolTable {
 			version = root.getAttributeValue("VERSION");
 
 			List<Element> children = CollectionUtils.asList(root.getChildren(), Element.class);
-			Iterator<Element> iter = children.iterator();
-			while (iter.hasNext()) {
-				Element export = iter.next();
-				int ordinal = Integer.parseInt(export.getAttributeValue("ORDINAL"));
-				String name = export.getAttributeValue("NAME");
-				int purge = Integer.parseInt(export.getAttributeValue("PURGE"));
-				String comment = export.getAttributeValue("COMMENT");
-				String fowardLibName = export.getAttributeValue("FOWARDLIBRARY");
-				String fowardSymName = export.getAttributeValue("FOWARDSYMBOL");
+            for (Element export : children) {
+                int ordinal = Integer.parseInt(export.getAttributeValue("ORDINAL"));
+                String name = export.getAttributeValue("NAME");
+                int purge = Integer.parseInt(export.getAttributeValue("PURGE"));
+                String comment = export.getAttributeValue("COMMENT");
+                String fowardLibName = export.getAttributeValue("FOWARDLIBRARY");
+                String fowardSymName = export.getAttributeValue("FOWARDSYMBOL");
 
-				String noReturnStr = export.getAttributeValue("NO_RETURN");
-				boolean noReturn = noReturnStr != null && "y".equals(noReturnStr);
+                String noReturnStr = export.getAttributeValue("NO_RETURN");
+                boolean noReturn = "y".equals(noReturnStr);
 
-				if (fowardLibName != null && fowardLibName.length() > 0 &&
-					!fowardLibName.equals(tableName)) {
-					forwards.add(fowardLibName);
-				}
+                if (fowardLibName != null && !fowardLibName.isEmpty() &&
+                        !fowardLibName.equals(tableName)) {
+                    forwards.add(fowardLibName);
+                }
 
-				LibraryExportedSymbol sym = new LibraryExportedSymbol(tableName, size, ordinal,
-					name, fowardLibName, fowardSymName, purge, noReturn, comment);
+                LibraryExportedSymbol sym = new LibraryExportedSymbol(tableName, size, ordinal,
+                        name, fowardLibName, fowardSymName, purge, noReturn, comment);
 
-				exportList.add(sym);
-				symMap.put(name, sym);
-				ordMap.put(Integer.valueOf(ordinal), sym);
-			}
+                exportList.add(sym);
+                symMap.put(name, sym);
+                ordMap.put(Integer.valueOf(ordinal), sym);
+            }
 		}
 		catch (JDOMException e) {
 			throw new IOException(e);

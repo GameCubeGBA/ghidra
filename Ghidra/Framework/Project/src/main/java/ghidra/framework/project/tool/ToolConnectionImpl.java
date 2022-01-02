@@ -181,18 +181,17 @@ class ToolConnectionImpl implements ToolConnection, ToolListener {
 	public void restoreFromXml(Element root) {
 		listenerAdded = false;
 
-		Iterator<?> iter = root.getChildren("EVENT").iterator();
-		while (iter.hasNext()) {
-			Element elem = (Element) iter.next();
-			String name = elem.getAttributeValue("NAME");
-			String state = elem.getAttributeValue("CONNECTED");
-			boolean connected = (state != null && "true".equalsIgnoreCase(state));
-			connectHt.put(name, (connected ? CONNECTED : DISCONNECTED));
-			if (connected && !listenerAdded) {
-				producerTool.addToolListener(this);
-				listenerAdded = true;
-			}
-		}
+        for (Object o : root.getChildren("EVENT")) {
+            Element elem = (Element) o;
+            String name = elem.getAttributeValue("NAME");
+            String state = elem.getAttributeValue("CONNECTED");
+            boolean connected = "true".equalsIgnoreCase(state);
+            connectHt.put(name, (connected ? CONNECTED : DISCONNECTED));
+            if (connected && !listenerAdded) {
+                producerTool.addToolListener(this);
+                listenerAdded = true;
+            }
+        }
 	}
 
 	/**

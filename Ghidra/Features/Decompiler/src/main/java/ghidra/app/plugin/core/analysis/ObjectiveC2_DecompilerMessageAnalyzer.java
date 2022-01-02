@@ -377,7 +377,7 @@ public class ObjectiveC2_DecompilerMessageAnalyzer extends AbstractAnalyzer {
 		HighVariable highVar = input.getHigh();
 		if (highVar != null) {
 			name = highVar.getName();
-			if (name != null && name.equals("param_1")) {
+			if ("param_1".equals(name)) {
 				if (numInputs == 1) {
 					if (isClass) {
 						Namespace namespace = function.getParentNamespace();

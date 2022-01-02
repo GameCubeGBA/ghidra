@@ -712,11 +712,7 @@ class ToolButton extends EmptyBorderButton implements Draggable, Droppable {
 	}
 
 	private Icon generateIcon() {
-		Icon icon = template.getIcon();
-		if (isRunningTool()) {
-		}
-
-		return icon;
+		return template.getIcon();
 	}
 
 	private void setHelpLocation(String anchorTag) {
