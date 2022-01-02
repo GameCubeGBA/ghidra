@@ -642,16 +642,6 @@ public class DisassembledViewPlugin extends ProgramPlugin implements DomainObjec
 		}
 
 		/**
-		 * Returns the address described by this info.
-		 * 
-		 * @return Returns the address described by this info. 
-		 */
-		private Address getAddress() {
-
-			return wrappedAddress;
-		}
-
-		/**
 		 * Returns true if there is a {@link CodeUnit} for the address 
 		 * wrapped by this info.  If not, then we do not have a valid addreess.
 		 * 

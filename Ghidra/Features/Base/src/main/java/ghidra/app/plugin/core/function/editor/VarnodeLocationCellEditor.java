@@ -45,11 +45,9 @@ class VarnodeLocationCellEditor extends AbstractCellEditor implements TableCellE
 
 	private Comparator<Register> registerWrapperComparator = (r1, r2) -> r1.toString().compareToIgnoreCase(r2.toString());
 	private VarnodeInfo currentVarnode;
-	private int maxRegisterSize;
 
 	VarnodeLocationCellEditor(StorageAddressModel model) {
 		this.program = model.getProgram();
-		this.maxRegisterSize = program.getDefaultPointerSize();
 	}
 
 	@Override

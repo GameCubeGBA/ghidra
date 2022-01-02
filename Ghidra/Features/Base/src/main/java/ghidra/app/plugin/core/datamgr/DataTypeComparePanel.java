@@ -17,9 +17,7 @@ package ghidra.app.plugin.core.datamgr;
 
 import java.awt.*;
 
-import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
+import javax.swing.*;;
 
 import docking.widgets.label.GDHtmlLabel;
 import ghidra.app.util.ToolTipUtils;

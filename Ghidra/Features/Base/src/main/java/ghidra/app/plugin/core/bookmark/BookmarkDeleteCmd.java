@@ -21,7 +21,6 @@ import ghidra.program.model.address.*;
 import ghidra.program.model.listing.*;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 import java.util.Collections;
 import java.util.List;

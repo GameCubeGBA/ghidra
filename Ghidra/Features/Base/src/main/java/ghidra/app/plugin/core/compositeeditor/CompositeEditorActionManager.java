@@ -222,7 +222,6 @@ public class CompositeEditorActionManager {
 		if (actions.size() <= 0) {
 			return;
 		}
-		int length = listeners.size();
 		CompositeEditorTableAction[] cea =
 			actions.toArray(new CompositeEditorTableAction[actions.size()]);
         for (EditorActionListener listener : listeners) {
@@ -234,7 +233,6 @@ public class CompositeEditorActionManager {
 		if (actions.size() <= 0) {
 			return;
 		}
-		int length = listeners.size();
 		CompositeEditorTableAction[] cea =
 			actions.toArray(new CompositeEditorTableAction[actions.size()]);
         for (EditorActionListener listener : listeners) {

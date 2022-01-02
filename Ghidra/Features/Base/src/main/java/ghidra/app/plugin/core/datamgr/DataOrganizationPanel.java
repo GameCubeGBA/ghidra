@@ -18,8 +18,6 @@ package ghidra.app.plugin.core.datamgr;
 import java.awt.event.*;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.label.GLabel;

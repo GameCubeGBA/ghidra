@@ -191,11 +191,4 @@ public class CommentWindowPlugin extends ProgramPlugin implements DomainObjectLi
 		DockingAction selectionAction = new SelectionNavigationAction(this, provider.getTable());
 		tool.addLocalAction(provider, selectionAction);
 	}
-
-	private void selectComment(ProgramSelection selection) {
-		ProgramSelectionPluginEvent pspe =
-			new ProgramSelectionPluginEvent("Selection", selection, currentProgram);
-		firePluginEvent(pspe);
-		processEvent(pspe);
-	}
 }

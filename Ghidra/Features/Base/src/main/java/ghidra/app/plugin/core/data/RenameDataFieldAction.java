@@ -36,8 +36,6 @@ import docking.action.*;
  * Base class for comment actions to edit and delete comments.
  */
 class RenameDataFieldAction extends DockingAction {
-
-	private static final KeyStroke KEY_BINDING = KeyStroke.getKeyStroke(KeyEvent.VK_N,0);
 	private DataPlugin plugin;
 	private RenameDataFieldDialog dialog;
 	

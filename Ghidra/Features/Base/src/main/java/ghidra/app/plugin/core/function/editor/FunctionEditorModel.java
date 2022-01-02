@@ -585,7 +585,6 @@ public class FunctionEditorModel {
 				signatureTransformed = true;
 			}
 			autoParamCount = 0;
-			int paramCnt = parameters.size();
             for (ParamInfo paramInfo : parameters) {
                 DataType dt = paramInfo.getDataType();
                 VariableStorage storage = paramInfo.getStorage();

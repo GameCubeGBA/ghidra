@@ -40,7 +40,6 @@ class MemoryInputStream extends InputStream {
 			}
 	    }
 	    catch (MemoryAccessException e)  {
-	        StackTraceElement ste = e.getStackTrace()[0];
 	        throw new IOException(e.toString());
 	    }
 	    return -1;
