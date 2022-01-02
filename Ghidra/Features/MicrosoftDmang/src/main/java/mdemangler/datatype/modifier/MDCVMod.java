@@ -1025,13 +1025,9 @@ public class MDCVMod extends MDParsableItem {
 
 	public void insertF(StringBuilder builder) {
 		for (CvPrefix p : prefixList) {
-			switch (p) {
-				case unaligned:
-					dmang.insertSpacedString(builder, UNALIGNED);
-					break;
-				default:
-					break;
-			}
+            if (p == CvPrefix.unaligned) {
+                dmang.insertSpacedString(builder, UNALIGNED);
+            }
 		}
 	}
 

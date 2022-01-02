@@ -1024,7 +1024,7 @@ public class DecompilerClangTest extends AbstractDecompilerTest {
 			results.add(hl.getToken());
 		}
 
-		results.sort((t1, t2) -> indexInParent(t1) - indexInParent(t2));
+		results.sort(Comparator.comparingInt(this::indexInParent));
 		return results;
 	}
 

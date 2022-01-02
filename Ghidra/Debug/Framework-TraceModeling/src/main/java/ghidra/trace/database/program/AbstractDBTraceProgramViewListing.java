@@ -315,10 +315,10 @@ public abstract class AbstractDBTraceProgramViewListing implements TraceProgramV
 		if (containing == null) {
 			return doCreateUndefinedUnit(addr);
 		}
-		if (!containing.getMinAddress().equals(addr)) {
-			return null;
+		if (containing.getMinAddress().equals(addr)) {
+			return containing;
 		}
-		return containing;
+		return null;
 	}
 
 	@Override

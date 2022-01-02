@@ -299,26 +299,28 @@ public class ExporterDialog extends DialogComponentProvider implements AddressFa
 		List<Exporter> list = new ArrayList<>(ClassSearcher.getInstances(Exporter.class));
 		Class<? extends DomainObject> domainObjectClass = domainFile.getDomainObjectClass();
 		list.removeIf(exporter -> !exporter.canExportDomainObject(domainObjectClass));
-		Collections.sort(list, (o1, o2) -> o1.toString().compareTo(o2.toString()));
+		list.sort(Comparator.comparing(Exporter::toString));
 		return list;
 	}
 
 	private Exporter getDefaultExporter(List<Exporter> list) {
 
 		// first try the last one used
+		if (list.isEmpty())
+				return null;
 		for (Exporter exporter : list) {
 			if (lastUsedExporterName.equals(exporter.getName())) {
 				return exporter;
 			}
 		}
 
-		return list.isEmpty() ? null : list.get(0);
+		return list.get(0);
 	}
 
 	private void selectedFormatChanged() {
 		Exporter selectedExporter = getSelectedExporter();
 		if (selectedExporter != null) {
-			options = selectedExporter.getOptions(() -> getDomainObject(TaskMonitor.DUMMY));
+			options = selectedExporter.getOptions(() -> getDomainObject());
 		}
 		validate();
 		updateSelectionCheckbox();
@@ -407,20 +409,20 @@ public class ExporterDialog extends DialogComponentProvider implements AddressFa
 		}
 	}
 
-	private DomainObject getDomainObject(TaskMonitor taskMonitor) {
+	private DomainObject getDomainObject() {
 		if (domainObject == null) {
 			if (SystemUtilities.isEventDispatchThread()) {
 				TaskLauncher.launchModal("Opening File: " + domainFile.getName(),
-					monitor -> doOpenFile(monitor));
+					monitor -> doOpenFile());
 			}
 			else {
-				doOpenFile(taskMonitor);
+				doOpenFile();
 			}
 		}
 		return domainObject;
 	}
 
-	private void doOpenFile(TaskMonitor monitor) {
+	private void doOpenFile() {
 		try {
 			domainObject = domainFile.getImmutableDomainObject(this, DomainFile.DEFAULT_VERSION,
 				TaskMonitor.DUMMY);
@@ -437,7 +439,7 @@ public class ExporterDialog extends DialogComponentProvider implements AddressFa
 	 */
 	@Override
 	public AddressFactory getAddressFactory() {
-		DomainObject dobj = getDomainObject(TaskMonitor.DUMMY);
+		DomainObject dobj = getDomainObject();
 		if (dobj instanceof Program) {
 			return ((Program) domainObject).getAddressFactory();
 		}
@@ -469,7 +471,7 @@ public class ExporterDialog extends DialogComponentProvider implements AddressFa
 			exporter = getSelectedExporter();
 
 			exporter.setExporterServiceProvider(tool);
-			exportedDomainObject = getDomainObject(monitor);
+			exportedDomainObject = getDomainObject();
 			if (exportedDomainObject == null) {
 				return;
 			}

@@ -1064,8 +1064,7 @@ class FSBActionManager {
 			}
 			List<FileAttribute<?>> sortedAttribs = fattrs.getAttributes();
 			Collections.sort(sortedAttribs,
-				(o1, o2) -> Integer.compare(o1.getAttributeType().ordinal(),
-					o2.getAttributeType().ordinal()));
+                    Comparator.comparingInt(o -> o.getAttributeType().ordinal()));
 
 			FileAttributeTypeGroup group = null;
 			for (FileAttribute<?> attr : sortedAttribs) {

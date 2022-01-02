@@ -245,7 +245,7 @@ abstract class DataTypeLocationDescriptor extends LocationDescriptor {
 				}
 			}
 
-			return list.toArray(new Highlight[list.size()]);
+			return list.toArray(new Highlight[0]);
 		}
 
 		return EMPTY_HIGHLIGHTS;

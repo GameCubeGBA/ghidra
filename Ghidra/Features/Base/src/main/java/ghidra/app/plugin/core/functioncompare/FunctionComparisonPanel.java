@@ -508,7 +508,7 @@ public class FunctionComparisonPanel extends JPanel implements ChangeListener {
 			DockingAction[] actions = codeComparisonPanel.getActions();
             dockingActionList.addAll(Arrays.asList(actions));
 		}
-		return dockingActionList.toArray(new DockingAction[dockingActionList.size()]);
+		return dockingActionList.toArray(new DockingAction[0]);
 	}
 
 	/**
@@ -693,7 +693,7 @@ public class FunctionComparisonPanel extends JPanel implements ChangeListener {
 				}
 			}
 
-			codeComparisonPanels.sort((p1, p2) -> p1.getTitle().compareTo(p2.getTitle()));
+			codeComparisonPanels.sort(Comparator.comparing(CodeComparisonPanel::getTitle));
 		}
 		return codeComparisonPanels;
 	}

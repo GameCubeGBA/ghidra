@@ -1042,31 +1042,26 @@ public class BundleHost {
 					symbolicName, locationIdentifier);
 			}
 			GhidraBundle bundle;
-			switch (event.getType()) {
-				case BundleEvent.STARTED:
-					bundle = bundleMap.getBundleAtLocation(osgiBundle.getLocation());
-					if (bundle != null) {
-						fireBundleActivationChange(bundle, true);
-					}
-					else {
-						Msg.error(this,
-							String.format("Error, bundle event for non-GhidraBundle: %s\n",
-								osgiBundle.getLocation()));
-					}
-					break;
-				// force "inactive" updates for all other states
-				default:
-					bundle = bundleMap.getBundleAtLocation(osgiBundle.getLocation());
-					if (bundle != null) {
-						fireBundleActivationChange(bundle, false);
-					}
-					else {
-						Msg.error(this,
-							String.format("Error, bundle event for non-GhidraBundle: %s\n",
-								osgiBundle.getLocation()));
-					}
-					break;
-			}
+            if (event.getType() == BundleEvent.STARTED) {
+                bundle = bundleMap.getBundleAtLocation(osgiBundle.getLocation());
+                if (bundle != null) {
+                    fireBundleActivationChange(bundle, true);
+                } else {
+                    Msg.error(this,
+                            String.format("Error, bundle event for non-GhidraBundle: %s\n",
+                                    osgiBundle.getLocation()));
+                }
+                // force "inactive" updates for all other states
+            } else {
+                bundle = bundleMap.getBundleAtLocation(osgiBundle.getLocation());
+                if (bundle != null) {
+                    fireBundleActivationChange(bundle, false);
+                } else {
+                    Msg.error(this,
+                            String.format("Error, bundle event for non-GhidraBundle: %s\n",
+                                    osgiBundle.getLocation()));
+                }
+            }
 		}
 	}
 }

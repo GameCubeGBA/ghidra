@@ -401,7 +401,7 @@ public class CategoryTest extends AbstractGhidraHeadedIntegrationTest {
 			assertTrue(dts[i].isEquivalent(newdts[i]));
 		}
 		DataType[] d = s.getDataTypes();
-		Arrays.sort(d, (o1, o2) -> o1.getName().compareTo(o2.getName()));
+		Arrays.sort(d, Comparator.comparing(DataType::getName));
 		assertEquals(dts.length, d.length);
 		assertTrue(newdts[0] == d[0]);
 	}

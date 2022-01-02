@@ -41,7 +41,7 @@ public class FcgExpandingVertexCollection {
 
 	private Comparator<FcgVertex> sourceVertexComparator = this::compareVerticesByLayoutPosition;
 	private Comparator<FcgVertex> addressComparator =
-		(v1, v2) -> v1.getAddress().compareTo(v2.getAddress());
+			Comparator.comparing(FcgVertex::getAddress);
 
 	private Map<FcgVertex, TreeSet<FcgVertex>> newVerticesBySource = LazyMap.lazyMap(
 		new TreeMap<>(sourceVertexComparator), () -> new TreeSet<>(addressComparator));

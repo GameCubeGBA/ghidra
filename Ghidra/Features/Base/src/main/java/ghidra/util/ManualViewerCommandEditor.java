@@ -152,7 +152,7 @@ public class ManualViewerCommandEditor extends PropertyEditorSupport
 			}
 		}
 
-		return argumentList.toArray(new String[argumentList.size()]);
+		return argumentList.toArray(new String[0]);
 	}
 
 //==================================================================================================

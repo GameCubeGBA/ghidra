@@ -236,7 +236,7 @@ public class BookmarkProvider extends ComponentProviderAdapter {
 		List<String> showingTypes = new ArrayList<>();
         showingTypes.addAll(allTypes);
 
-		String[] strings = showingTypes.toArray(new String[showingTypes.size()]);
+		String[] strings = showingTypes.toArray(new String[0]);
 		saveState.putStrings(BOOKMARK_TYPES_ELEMENT_NAME, strings);
 	}
 

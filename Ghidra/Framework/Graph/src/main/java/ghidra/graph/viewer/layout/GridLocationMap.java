@@ -16,13 +16,8 @@
 package ghidra.graph.viewer.layout;
 
 import java.awt.Point;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import org.apache.commons.collections4.Factory;
 import org.apache.commons.collections4.map.LazyMap;
@@ -111,7 +106,7 @@ public class GridLocationMap<V, E> {
 		}
 
 		List<Row<V>> rows = new ArrayList<>(rowsByIndex.values());
-		rows.sort((r1, r2) -> r1.index - r2.index);
+		rows.sort(Comparator.comparingInt(r -> r.index));
 		return rows;
 	}
 

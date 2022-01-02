@@ -115,7 +115,7 @@ public abstract class AbstractDBTraceSymbolSingleTypeWithLocationView<T extends 
 					store.getObjectAt(DBTraceSymbolManager.unpackKey(id))));
 			}
 			rangeCache.sort(
-				Comparator.comparing(Entry::getValue, TraceSymbolManager.PRIMALITY_COMPARATOR));
+					Entry.comparingByValue(TraceSymbolManager.PRIMALITY_COMPARATOR));
 		}
 
 		@Override

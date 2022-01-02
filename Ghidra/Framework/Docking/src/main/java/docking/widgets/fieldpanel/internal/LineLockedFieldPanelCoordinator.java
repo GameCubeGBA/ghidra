@@ -105,7 +105,7 @@ public class LineLockedFieldPanelCoordinator extends FieldPanelCoordinator {
 				lineNumberList.add(lockedLineNumbers[i]);
 			}
 		}
-		lockedLineNumbers = lineNumberList.toArray(new BigInteger[lineNumberList.size()]);
+		lockedLineNumbers = lineNumberList.toArray(new BigInteger[0]);
 
 		// The super class will adjust the field panel array.
 		super.remove(fp);

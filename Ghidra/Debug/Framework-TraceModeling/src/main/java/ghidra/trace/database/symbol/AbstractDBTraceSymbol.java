@@ -242,7 +242,7 @@ public abstract class AbstractDBTraceSymbol extends DBAnnotatedObject
 				parent.doGetPath(list);
 			}
 			list.add(getName());
-			return list.toArray(new String[list.size()]);
+			return list.toArray(new String[0]);
 		}
 	}
 

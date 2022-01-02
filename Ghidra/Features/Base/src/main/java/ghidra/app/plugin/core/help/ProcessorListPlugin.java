@@ -237,10 +237,9 @@ public class ProcessorListPlugin extends Plugin implements FrontEndable {
 
 		@Override
 		public Object getColumnValueForRow(Processor p, int columnIndex) {
-			switch (columnIndex) {
-				case PROCESSOR_COL:
-					return p.toString();
-			}
+            if (columnIndex == PROCESSOR_COL) {
+                return p.toString();
+            }
 			return null;
 		}
 
@@ -271,19 +270,17 @@ public class ProcessorListPlugin extends Plugin implements FrontEndable {
 
 		@Override
 		public String getColumnName(int column) {
-			switch (column) {
-				case PROCESSOR_COL:
-					return "Processor";
-			}
+            if (column == PROCESSOR_COL) {
+                return "Processor";
+            }
 			return null;
 		}
 
 		@Override
 		public Class<?> getColumnClass(int columnIndex) {
-			switch (columnIndex) {
-				case PROCESSOR_COL:
-					return String.class;
-			}
+            if (columnIndex == PROCESSOR_COL) {
+                return String.class;
+            }
 			return Object.class;
 		}
 

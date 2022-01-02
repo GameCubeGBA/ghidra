@@ -96,13 +96,9 @@ public class MDEFIModifier extends MDParsableItem {
 		StringBuilder right = new StringBuilder();
 
 		for (CvPrefix p : prefixList) {
-			switch (p) {
-				case _UNALIGNED:
-					left.insert(0, UNALIGNED + SPACE);
-					break;
-				default:
-					break;
-			}
+            if (p == CvPrefix._UNALIGNED) {
+                left.insert(0, UNALIGNED + SPACE);
+            }
 		}
 //		ListIterator<cvPrefix> li = prefixList.listIterator(prefixList.size());
 //		while (li.hasPrevious()) {

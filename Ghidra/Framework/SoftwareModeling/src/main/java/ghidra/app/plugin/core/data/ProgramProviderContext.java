@@ -51,7 +51,7 @@ public class ProgramProviderContext implements DataTypeProviderContext {
 			list.add(dtc);
 			offset += dtc.getLength();
 		}
-		return list.toArray(new DataTypeComponent[list.size()]);
+		return list.toArray(new DataTypeComponent[0]);
 	}
 
 	@Override

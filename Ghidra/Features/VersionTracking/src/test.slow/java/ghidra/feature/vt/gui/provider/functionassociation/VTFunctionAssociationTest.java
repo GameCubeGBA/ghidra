@@ -175,9 +175,9 @@ public class VTFunctionAssociationTest extends AbstractGhidraHeadedIntegrationTe
 		assertEquals(sourceCount - sourceMatchCount, sourceTable.getRowCount());
 		assertEquals(destinationCount - destinationMatchCount, destinationTable.getRowCount());
 
-		Function[] sourceFunctions = sourceSet.toArray(new Function[sourceSet.size()]);
+		Function[] sourceFunctions = sourceSet.toArray(new Function[0]);
 		Function[] destinationFunctions =
-			destinationSet.toArray(new Function[destinationSet.size()]);
+			destinationSet.toArray(new Function[0]);
 		assertTrue(sourceFunctions.length > 0);
 		assertTrue(destinationFunctions.length > 0);
 
@@ -235,9 +235,9 @@ public class VTFunctionAssociationTest extends AbstractGhidraHeadedIntegrationTe
 		assertEquals(sourceCount - sourceMatchCount, sourceTable.getRowCount());
 		assertEquals(destinationCount - destinationMatchCount, destinationTable.getRowCount());
 
-		Function[] sourceFunctions = sourceSet.toArray(new Function[sourceSet.size()]);
+		Function[] sourceFunctions = sourceSet.toArray(new Function[0]);
 		Function[] destinationFunctions =
-			destinationSet.toArray(new Function[destinationSet.size()]);
+			destinationSet.toArray(new Function[0]);
 		assertTrue(sourceFunctions.length > 0);
 		assertTrue(destinationFunctions.length > 0);
 

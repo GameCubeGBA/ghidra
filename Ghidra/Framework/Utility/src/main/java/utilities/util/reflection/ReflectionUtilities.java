@@ -326,7 +326,7 @@ public class ReflectionUtilities {
 
 			list.add(element);
 		}
-		return list.toArray(new StackTraceElement[list.size()]);
+		return list.toArray(new StackTraceElement[0]);
 
 	}
 

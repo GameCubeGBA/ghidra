@@ -589,7 +589,7 @@ public class FlowArrowPlugin extends Plugin implements MarginProvider, OptionsCh
 		// Find references at the instructions on the screen
 		flowArrows = getFlowArrowsForScreenInstructions(flowSet);
 
-		Collections.sort(flowArrows, (a1, a2) -> (a1).end.compareTo((a2).end));
+		Collections.sort(flowArrows, Comparator.comparing(a -> (a).end));
 
 		computeAllArrowsDepth();
 

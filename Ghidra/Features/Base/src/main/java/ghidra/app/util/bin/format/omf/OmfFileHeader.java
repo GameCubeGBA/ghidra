@@ -271,19 +271,15 @@ public class OmfFileHeader extends OmfRecord {
 			if (initialCommentsOnly && (type != COMENT)) {
 				break;
 			}
-			switch(type) {
-			case COMENT:
-				byte commentClass = ((OmfCommentRecord)record).getCommentClass();
-				if (commentClass == (byte)0) {
-					header.translator = ((OmfCommentRecord)record).getValue();
-				}
-				else if (commentClass == (byte)0xA3) {
-					header.libModuleName = ((OmfCommentRecord)record).getValue();
-				}
-				break;
-			default:
-				break;		// Skip most records
-			}
+            // Skip most records
+            if (type == COMENT) {
+                byte commentClass = ((OmfCommentRecord) record).getCommentClass();
+                if (commentClass == (byte) 0) {
+                    header.translator = ((OmfCommentRecord) record).getValue();
+                } else if (commentClass == (byte) 0xA3) {
+                    header.libModuleName = ((OmfCommentRecord) record).getValue();
+                }
+            }
 		}
 		return header;
 	}

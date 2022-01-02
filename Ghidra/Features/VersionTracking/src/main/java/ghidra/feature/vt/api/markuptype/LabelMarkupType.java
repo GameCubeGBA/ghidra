@@ -123,7 +123,7 @@ public class LabelMarkupType extends VTMarkupType {
 			}
 			list.add(symbol);
 		}
-		return list.toArray(new Symbol[list.size()]);
+		return list.toArray(new Symbol[0]);
 	}
 
 //==================================================================================================

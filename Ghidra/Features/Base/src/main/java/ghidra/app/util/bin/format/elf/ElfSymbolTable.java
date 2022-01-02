@@ -17,8 +17,11 @@ package ghidra.app.util.bin.format.elf;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import ghidra.app.util.bin.ByteArrayConverter;
 import ghidra.app.util.bin.format.FactoryBundledWithBinaryReader;
@@ -110,12 +113,10 @@ public class ElfSymbolTable implements ElfFileSection, ByteArrayConverter {
 
 		// sort the entries by the index in the string table, so don't jump around reading
 		List<ElfSymbol> sortedList = symbolList.stream().sorted(
-			(o1, o2) -> Integer.compare(o1.getName(), o2.getName())).collect(Collectors.toList());
+				Comparator.comparingInt(ElfSymbol::getName)).collect(Collectors.toList());
 
 		// initialize the Symbol string names from string table
-		for (ElfSymbol sym : sortedList) {
-			sym.initSymbolName(reader, stringTable);
-		}
+		sortedList.forEach(sym -> sym.initSymbolName(reader, stringTable));
 
 		reader.setPointerIndex(ptr);
 
@@ -161,12 +162,7 @@ public class ElfSymbolTable implements ElfFileSection, ByteArrayConverter {
 	 * @return the index of the specified symbol
 	 */
 	public int getSymbolIndex(ElfSymbol symbol) {
-		for (int i = 0; i < symbols.length; i++) {
-			if (symbols[i].equals(symbol)) {
-				return i;
-			}
-		}
-		return -1;
+		return IntStream.range(0, symbols.length).filter(i -> symbols[i].equals(symbol)).findFirst().orElse(-1);
 	}
 
 	/**
@@ -175,12 +171,7 @@ public class ElfSymbolTable implements ElfFileSection, ByteArrayConverter {
 	 * @return the symbol at the specified address
 	 */
 	public ElfSymbol getSymbolAt(long addr) {
-		for (ElfSymbol symbol : symbols) {
-			if (symbol.getValue() == addr) {
-				return symbol;
-			}
-		}
-		return null;
+		return Arrays.stream(symbols).filter(symbol -> symbol.getValue() == addr).findFirst().orElse(null);
 	}
 
 	/**
@@ -188,12 +179,7 @@ public class ElfSymbolTable implements ElfFileSection, ByteArrayConverter {
 	 * @return all of the global symbols
 	 */
 	public ElfSymbol[] getGlobalSymbols() {
-		List<ElfSymbol> list = new ArrayList<>();
-		for (ElfSymbol symbol : symbols) {
-			if (symbol.getBind() == ElfSymbol.STB_GLOBAL) {
-				list.add(symbol);
-			}
-		}
+		List<ElfSymbol> list = Arrays.stream(symbols).filter(symbol -> symbol.getBind() == ElfSymbol.STB_GLOBAL).collect(Collectors.toList());
 		ElfSymbol[] array = new ElfSymbol[list.size()];
 		list.toArray(array);
 		return array;

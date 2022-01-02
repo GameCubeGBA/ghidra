@@ -172,15 +172,11 @@ public class FieldHeaderComp extends JPanel {
 			}
 		}
 
-		switch (state) {
-            case NEAR_EDGE:
-				setCursor(resizeCursor);
-				break;
-			default:
-				setCursor(defaultCursor);
-				break;
-
-		}
+        if (state == CursorState.NEAR_EDGE) {
+            setCursor(resizeCursor);
+        } else {
+            setCursor(defaultCursor);
+        }
 	}
 
 	/**

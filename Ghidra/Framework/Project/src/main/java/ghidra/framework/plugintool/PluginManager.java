@@ -114,7 +114,7 @@ class PluginManager {
 				badList.add(className);
 			}
 		}
-		Plugin[] pluginArray = list.toArray(new Plugin[list.size()]);
+		Plugin[] pluginArray = list.toArray(new Plugin[0]);
 		try {
 			addPlugins(pluginArray);
 		}
@@ -273,7 +273,7 @@ class PluginManager {
 
 		PluginException pe = null;
 		try {
-			addPlugins(classNames.toArray(new String[classNames.size()]));
+			addPlugins(classNames.toArray(new String[0]));
 		}
 		catch (PluginException e) {
 			pe = e;

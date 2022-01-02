@@ -152,7 +152,7 @@ public class DepthFirstSearch
         done = true;
         if( getAdditionalSeedsIfNeeded && !unseen.isEmpty() )
         {
-          seeds = unseen.toArray(new Vertex[unseen.size()]);
+          seeds = unseen.toArray(new Vertex[0]);
           done = false;
         }
       }while( !done );
@@ -225,7 +225,7 @@ public class DepthFirstSearch
         done = true;
         if( getAdditionalSeedsIfNeeded && !unseen.isEmpty() )
         {
-          seeds = unseen.toArray(new Vertex[unseen.size()]);
+          seeds = unseen.toArray(new Vertex[0]);
           done = false;
         }
       }while( !done );
@@ -309,7 +309,7 @@ public class DepthFirstSearch
         done = true;
         if( getAdditionalSeedsIfNeeded && !unseen.isEmpty() )
         {
-          seeds = unseen.toArray(new Vertex[unseen.size()]);
+          seeds = unseen.toArray(new Vertex[0]);
           done = false;
         }
       }while( !done );
@@ -340,7 +340,7 @@ public class DepthFirstSearch
    */
   public Edge[] backEdges()
   {
-      return backEdges.toArray(new Edge[backEdges.size()]);
+      return backEdges.toArray(new Edge[0]);
   }
 
   /** 
@@ -348,7 +348,7 @@ public class DepthFirstSearch
    */
   public Edge[] treeEdges()
   {
-      return treeEdges.toArray(new Edge[treeEdges.size()]);
+      return treeEdges.toArray(new Edge[0]);
   }
 
   /** 
@@ -385,7 +385,7 @@ public class DepthFirstSearch
    */
   public Vertex[] topologicalSort()
   {
-      return finishListInReverseOrder.toArray(new Vertex[finishListInReverseOrder.size()]);
+      return finishListInReverseOrder.toArray(new Vertex[0]);
   }
 
   /** 

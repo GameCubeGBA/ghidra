@@ -359,7 +359,7 @@ public class EolCommentFieldFactory extends FieldFactory {
 			elementList.addAll(autoCommentFieldElements);
 		}
 
-		FieldElement[] fieldElements = elementList.toArray(new FieldElement[elementList.size()]);
+		FieldElement[] fieldElements = elementList.toArray(new FieldElement[0]);
 		if (fieldElements.length == 0) {
 			return null;
 		}
@@ -432,7 +432,7 @@ public class EolCommentFieldFactory extends FieldFactory {
 		if (lastComment >= 0) {
 			list.add(comments[lastComment]);
 		}
-		comments = list.toArray(new String[list.size()]);
+		comments = list.toArray(new String[0]);
 		return comments;
 	}
 

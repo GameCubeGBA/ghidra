@@ -924,7 +924,7 @@ public class FcgProvider
 		Collections.reverse(result);
 
 		@SuppressWarnings("unchecked")
-		Iterable<FcgVertex>[] array = result.toArray(new Iterable[result.size()]);
+		Iterable<FcgVertex>[] array = result.toArray(new Iterable[0]);
 		return IterableUtils.chainedIterable(array);
 	}
 

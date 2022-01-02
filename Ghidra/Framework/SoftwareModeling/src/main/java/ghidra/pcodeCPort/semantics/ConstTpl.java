@@ -262,15 +262,12 @@ public class ConstTpl {
 				return walker.getCurSpace();
 			case handle: {
 				FixedHandle hand = walker.getFixedHandle(handle_index);
-				switch (select) {
-					case v_space:
-						if (hand.offset_space == null) {
-							return hand.space;
-						}
-						return hand.temp_space;
-					default:
-						break;
-				}
+                if (select == v_field.v_space) {
+                    if (hand.offset_space == null) {
+                        return hand.space;
+                    }
+                    return hand.temp_space;
+                }
 				break;
 			}
 			case spaceid:
@@ -289,13 +286,10 @@ public class ConstTpl {
 				return;
 			case handle: {
 				FixedHandle otherhand = walker.getFixedHandle(handle_index);
-				switch (select) {
-					case v_space:
-						hand.space = otherhand.space;
-						return;
-					default:
-						break;
-				}
+                if (select == v_field.v_space) {
+                    hand.space = otherhand.space;
+                    return;
+                }
 				break;
 			}
 			case spaceid:

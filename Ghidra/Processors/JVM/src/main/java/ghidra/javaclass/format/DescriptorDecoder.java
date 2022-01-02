@@ -181,19 +181,17 @@ public class DescriptorDecoder {
 			//advance to next type in argString
 			//if it's a reference, it starts with L and ends with a ;
 			//otherwise you only need to advance one character
-			switch (currentParam) {
-				case "L":
-					int semiColonIndex = argString.indexOf(';', currentPosition);
-					currentParamTypeName = getTypeNameFromDescriptor(
-						argString.substring(currentPosition, semiColonIndex + 1),
-						fullyQualifiedName, replaceSlash);
-					currentPosition = semiColonIndex + 1; //advance past ;
-					break;
-				default:
-					currentParamTypeName =
-						getTypeNameFromDescriptor(currentParam, fullyQualifiedName, replaceSlash);
-					currentPosition++;
-			}
+            if ("L".equals(currentParam)) {
+                int semiColonIndex = argString.indexOf(';', currentPosition);
+                currentParamTypeName = getTypeNameFromDescriptor(
+                        argString.substring(currentPosition, semiColonIndex + 1),
+                        fullyQualifiedName, replaceSlash);
+                currentPosition = semiColonIndex + 1; //advance past ;
+            } else {
+                currentParamTypeName =
+                        getTypeNameFromDescriptor(currentParam, fullyQualifiedName, replaceSlash);
+                currentPosition++;
+            }
 			typeNames.add(currentParamTypeName);
 
 		}

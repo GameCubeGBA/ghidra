@@ -27,13 +27,11 @@ public final class EntryFactory {
 		long oldIndex = reader.getPointerIndex();
 		try {
 			reader.setPointerIndex(descriptor.getOffset());
-			switch (descriptor.getEntryID()) {
-				case EntryDescriptorID.ENTRY_RESOURCE_FORK:
-					return new ResourceHeader(reader, descriptor);
-				default:
-					return null;
-			}
-		}
+            if (descriptor.getEntryID() == EntryDescriptorID.ENTRY_RESOURCE_FORK) {
+                return new ResourceHeader(reader, descriptor);
+            }
+            return null;
+        }
 		finally {
 			reader.setPointerIndex(oldIndex);
 		}

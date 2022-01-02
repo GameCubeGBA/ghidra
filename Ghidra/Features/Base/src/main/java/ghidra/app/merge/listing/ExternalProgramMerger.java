@@ -788,7 +788,7 @@ public class ExternalProgramMerger implements MergeResolver, ListingMergeConstan
 	 * Returns an array of symbol ID groups for all the external programs that are in conflict.
 	 */
 	public IDGroup[] getConflicts() {
-		return extPgms.toArray(new IDGroup[extPgms.size()]);
+		return extPgms.toArray(new IDGroup[0]);
 	}
 
 	/* (non-Javadoc)

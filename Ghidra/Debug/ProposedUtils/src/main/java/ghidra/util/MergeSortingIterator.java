@@ -101,7 +101,7 @@ public class MergeSortingIterator<T> implements PeekableIterator<T> {
 	 * <p>
 	 * The map of iterators is a map of entries, each giving a label and an iterator to be merged.
 	 * Each iterator must return values as sorted by the given comparator. The entries returned by
-	 * the combined iterator give the values in sorted order, but each has a the key indicating
+	 * the combined iterator give the values in sorted order, but each has a key indicating
 	 * which given iterator returned that value. Note that the returned entry may be re-used by the
 	 * underlying implementation, so users needing to keep the entry should create a copy.
 	 * 
@@ -113,7 +113,7 @@ public class MergeSortingIterator<T> implements PeekableIterator<T> {
 			Map<L, ? extends Iterator<? extends T>> iterMap, Comparator<T> comparator) {
 		Collection<LabeledIterator<L, T>> iterators =
 			Collections2.transform(iterMap.entrySet(), LabeledIterator::create);
-		Comparator<Entry<L, T>> comp = Comparator.comparing(Entry::getValue, comparator);
+		Comparator<Entry<L, T>> comp = Entry.comparingByValue(comparator);
 		return new MergeSortingIterator<Map.Entry<L, T>>(iterators, comp);
 	}
 
@@ -151,7 +151,7 @@ public class MergeSortingIterator<T> implements PeekableIterator<T> {
 	}
 
 	@Override
-	public T peek() throws NoSuchElementException {
+	public T peek() {
 		return queue.peek().peek();
 	}
 }

@@ -123,15 +123,13 @@ public class PcodeExecutor<T> {
 	}
 
 	protected void badOp(PcodeOp op) {
-		switch (op.getOpcode()) {
-			case PcodeOp.UNIMPLEMENTED:
-				throw new LowlevelError(
-					"Encountered an unimplemented instruction at " + op.getSeqnum().getTarget());
-			default:
-				throw new LowlevelError(
-					"Unsupported p-code op at " + op.getSeqnum().getTarget() + ": " + op);
-		}
-	}
+        if (op.getOpcode() == PcodeOp.UNIMPLEMENTED) {
+            throw new LowlevelError(
+                    "Encountered an unimplemented instruction at " + op.getSeqnum().getTarget());
+        }
+        throw new LowlevelError(
+                "Unsupported p-code op at " + op.getSeqnum().getTarget() + ": " + op);
+    }
 
 	public void stepOp(PcodeOp op, PcodeFrame frame, SleighUseropLibrary<T> library) {
 		OpBehavior b = OpBehaviorFactory.getOpBehavior(op.getOpcode());

@@ -58,7 +58,7 @@ public class DWARFAbbreviation
 			tmpAttrSpecs.add(prog.internAttributeSpec(attr));
 		}
 		DWARFAttributeSpecification[] attrSpecArray =
-			tmpAttrSpecs.toArray(new DWARFAttributeSpecification[tmpAttrSpecs.size()]);
+			tmpAttrSpecs.toArray(new DWARFAttributeSpecification[0]);
 
 		DWARFAbbreviation result = new DWARFAbbreviation(ac, tag,
 			hasChildren == DWARFChildren.DW_CHILDREN_yes, attrSpecArray);

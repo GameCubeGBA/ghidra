@@ -86,7 +86,7 @@ public class CharsetInfo {
 			readConfigFile();
 		}
 		addJVMAvailableCharsets();
-		this.charsetNames = charsetNamesList.toArray(new String[charsetNamesList.size()]);
+		this.charsetNames = charsetNamesList.toArray(new String[0]);
 	}
 
 	/**

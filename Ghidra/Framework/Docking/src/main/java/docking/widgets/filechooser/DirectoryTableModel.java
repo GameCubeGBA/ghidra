@@ -147,12 +147,10 @@ class DirectoryTableModel extends AbstractSortedTableModel<File> {
 			return;
 		}
 
-		switch (column) {
-			case FILE_COL:
-				files[row] = (File) aValue;
-				update();
-				break;
-		}
+        if (column == FILE_COL) {
+            files[row] = (File) aValue;
+            update();
+        }
 	}
 
 	void update() {

@@ -26,20 +26,16 @@ public final class ResourceTypeFactory {
 	public static final Object getResourceObject(BinaryReader reader, ResourceHeader header, ResourceType resourceType) throws IOException {
 		long oldIndex = reader.getPointerIndex();
 		try {
-			switch (resourceType.getType()) {
-				case ResourceTypes.TYPE_CFRG:
-				{
-					ReferenceListEntry referenceListEntry = resourceType.getReferenceList().get(0);
-					reader.setPointerIndex(header.getResourceDataOffset() + 
-							   header.getEntryDescriptor().getOffset() + 
-							   referenceListEntry.getDataOffset() + 
-							   4);
-					return new CFragResource(reader);
-				}
-				default:
-					return null;
-			}
-		}
+            if (resourceType.getType() == ResourceTypes.TYPE_CFRG) {
+                ReferenceListEntry referenceListEntry = resourceType.getReferenceList().get(0);
+                reader.setPointerIndex(header.getResourceDataOffset() +
+                        header.getEntryDescriptor().getOffset() +
+                        referenceListEntry.getDataOffset() +
+                        4);
+                return new CFragResource(reader);
+            }
+            return null;
+        }
 		finally {
 			reader.setPointerIndex(oldIndex);
 		}

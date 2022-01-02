@@ -301,7 +301,7 @@ public class DWARFDataTypeImporter {
 		FunctionDefinitionDataType funcDef =
 			new FunctionDefinitionDataType(dni.getParentCP(), dni.getName(), dataTypeManager);
 		funcDef.setReturnType(returnType.dataType);
-		funcDef.setArguments(params.toArray(new ParameterDefinition[params.size()]));
+		funcDef.setArguments(params.toArray(new ParameterDefinition[0]));
 
 		if (!diea.getHeadFragment().getChildren(DWARFTag.DW_TAG_unspecified_parameters).isEmpty()) {
 			funcDef.setVarArgs(true);
