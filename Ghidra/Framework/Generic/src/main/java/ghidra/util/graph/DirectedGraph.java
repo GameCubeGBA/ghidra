@@ -497,7 +497,6 @@ public class DirectedGraph {
 			DirectedGraph g = this.inducedSubgraph(nonDescendantVertices);
 			Iterator<Vertex> iter;
 			Set<Vertex>[] strongComponents = g.assignVerticesToStrongComponents();
-			int n = strongComponents.length;
             for (Set<Vertex> strongComponent : strongComponents) {
                 iter = strongComponent.iterator();
                 if (iter.hasNext()) {

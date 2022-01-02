@@ -503,7 +503,7 @@ public class HelpMissingScreenShotReportGenerator {
 			}
 
 			HelpModuleLocation helpDir = helpTopic.getHelpDirectory();
-			HelpTestFile testFile = new HelpTestFile(helpDir, helpTopic, screenshotFile, testName);
+			HelpTestFile testFile = new HelpTestFile(helpDir, helpTopic, testName);
 			Class<?> clazz = loadClass(screenshotFile);
 			parseScreenShotTests(testFile, clazz);
 		}
@@ -669,13 +669,11 @@ public class HelpMissingScreenShotReportGenerator {
 	private static class HelpTestFile implements Comparable<HelpTestFile> {
 		private String filename;
 		private HelpModuleLocation helpDir;
-		private Path filePath;
 		private HelpTopic helpTopic;
 
-		HelpTestFile(HelpModuleLocation helpDir, HelpTopic helpTopic, Path filePath, String filename) {
+		HelpTestFile(HelpModuleLocation helpDir, HelpTopic helpTopic, String filename) {
 			this.helpDir = helpDir;
 			this.helpTopic = helpTopic;
-			this.filePath = filePath;
 			this.filename = filename;
 		}
 

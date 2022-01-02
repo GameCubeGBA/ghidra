@@ -25,10 +25,8 @@ import help.validator.model.TOCItemReference;
 public class MissingTOCDefinitionInvalidLink implements InvalidLink {
 
 	private final TOCItemReference reference;
-	private final HelpModuleCollection help;
 
-	public MissingTOCDefinitionInvalidLink(HelpModuleCollection help, TOCItemReference reference) {
-		this.help = help;
+	public MissingTOCDefinitionInvalidLink(TOCItemReference reference) {
 		this.reference = reference;
 		if (Boolean.getBoolean("ghidra.help.failfast")) {
 			throw new RuntimeException(toString());
