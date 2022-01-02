@@ -21,7 +21,6 @@ import java.util.*;
 
 import ghidra.app.cmd.data.CreateDataCmd;
 import ghidra.app.cmd.label.AddLabelCmd;
-import ghidra.app.cmd.label.AddUniqueLabelCmd;
 import ghidra.app.util.MemoryBlockUtils;
 import ghidra.app.util.Option;
 import ghidra.app.util.bin.ByteProvider;

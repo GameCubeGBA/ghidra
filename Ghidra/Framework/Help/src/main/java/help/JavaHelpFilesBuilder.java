@@ -24,7 +24,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.Date;
-import java.util.Iterator;
 
 import ghidra.util.exception.AssertException;
 import help.validator.LinkDatabase;

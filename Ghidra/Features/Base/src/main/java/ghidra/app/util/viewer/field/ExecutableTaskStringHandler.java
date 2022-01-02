@@ -188,12 +188,5 @@ public class ExecutableTaskStringHandler implements AnnotatedStringHandler {
 				buffer = null;
 			}
 		}
-
-		String getIOData() {
-			if (buffer == null) {
-				return null;
-			}
-			return buffer.toString();
-		}
 	}
 }

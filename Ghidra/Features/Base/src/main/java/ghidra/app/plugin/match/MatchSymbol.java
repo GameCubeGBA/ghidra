@@ -311,10 +311,6 @@ public class MatchSymbol {
 			return symbolPath.getName();
 		}
 
-		boolean isMemorySymbol() {
-			return address.isMemoryAddress();
-		}
-
 		boolean isExternalSymbol() {
 			return address.isExternalAddress();
 		}

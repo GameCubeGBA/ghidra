@@ -16,11 +16,10 @@
 package ghidra.util;
 
 import java.awt.Component;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.beans.PropertyEditorSupport;
 import java.io.*;
 import java.util.*;
+import java.util.stream.IntStream;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -187,11 +186,7 @@ public class ManualViewerCommandEditor extends PropertyEditorSupport
 
 			String text = argumentsField.getText();
 			StringTokenizer tokenizer = new StringTokenizer(text, " ");
-			int size = tokenizer.countTokens();
-			String[] arguments = new String[size];
-			for (int i = 0; i < arguments.length; i++) {
-				arguments[i] = tokenizer.nextToken();
-			}
+			String[] arguments = IntStream.range(0, tokenizer.countTokens()).mapToObj(i -> tokenizer.nextToken()).toArray(String[]::new);
 			option.setCommandArguments(arguments);
 
 			option.setUrlReplacementString((String) fileFormatComboBox.getSelectedItem());

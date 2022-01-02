@@ -96,8 +96,7 @@ public class DataTypeIndexer {
 			task.run(TaskMonitor.DUMMY);
 		}
 
-		List<DataType> newList = task.getList();
-		return newList;
+		return task.getList();
 	}
 
 	// Note: purposefully not synchronized for speed
@@ -128,16 +127,13 @@ public class DataTypeIndexer {
 			monitor.initialize(dataTypeManagers.size());
 			monitor.setMessage("Preparing to index data types...");
 
-			Iterator<DataTypeManager> iterator = dataTypeManagers.iterator();
-			while (iterator.hasNext()) {
-				DataTypeManager dataTypeManager = iterator.next();
-
+			dataTypeManagers.forEach(dataTypeManager -> {
 				monitor.setMessage("Searching " + dataTypeManager.getName());
 				dataTypeManager.getAllDataTypes(list);
 				monitor.incrementProgress(1);
-			}
+			});
 
-			Collections.sort(list, dataTypeComparator);
+			list.sort(dataTypeComparator);
 		}
 
 		List<DataType> getList() {

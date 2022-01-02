@@ -113,13 +113,6 @@ public class SubroutineMatch {
 		return this.progBAddrs;
 	}
 	
-	private boolean isOneToOne()
-	{
-		if(progAAddrs.length == 1 && progBAddrs.length == 1)
-			return true;
-		return false;
-	}
-	
 	@Override
     public String toString(){
 		String str = reason + " ";

@@ -18,11 +18,8 @@ package ghidra.app.util.viewer.field;
 import ghidra.app.nav.Navigatable;
 import ghidra.framework.plugintool.ServiceProvider;
 import ghidra.program.model.listing.Program;
-import ghidra.program.util.ProgramLocation;
 import ghidra.util.bean.field.AnnotatedTextFieldElement;
 import ghidra.util.classfinder.ExtensionPoint;
-
-import java.awt.event.MouseEvent;
 
 import docking.widgets.fieldpanel.field.AttributedString;
 import docking.widgets.fieldpanel.field.FieldElement;

@@ -23,6 +23,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -141,11 +143,7 @@ class AnalysisPanel extends JPanel implements PropertyChangeListener {
 	private Options getNonDefaultProgramOptions() {
 		FileOptions options = new FileOptions("Current Program Options");
 		List<String> optionNames = analysisOptions.getOptionNames();
-		for (String optionName : optionNames) {
-			if (!analysisOptions.isDefaultValue(optionName)) {
-				options.putObject(optionName, analysisOptions.getObject(optionName, null));
-			}
-		}
+		optionNames.stream().filter(optionName -> !analysisOptions.isDefaultValue(optionName)).forEach(optionName -> options.putObject(optionName, analysisOptions.getObject(optionName, null)));
 		return options;
 	}
 
@@ -170,22 +168,19 @@ class AnalysisPanel extends JPanel implements PropertyChangeListener {
 		AutoAnalysisManager manager = AutoAnalysisManager.getAnalysisManager(program);
 
 		List<String> propertyNames = analysisOptions.getOptionNames();
-		Collections.sort(propertyNames, (o1, o2) -> o1.compareToIgnoreCase(o2));
-		for (String analyzerName : propertyNames) {
-			if (analyzerName.indexOf('.') == -1) {
-				if (analysisOptions.getType(analyzerName) != OptionType.BOOLEAN_TYPE) {
-					throw new AssertException(
+		propertyNames.sort((o1, o2) -> o1.compareToIgnoreCase(o2));
+		propertyNames.stream().filter(analyzerName -> analyzerName.indexOf('.') == -1).forEach(analyzerName -> {
+			if (analysisOptions.getType(analyzerName) != OptionType.BOOLEAN_TYPE) {
+				throw new AssertException(
 						"Analyzer enable property that is not boolean - " + analyzerName);
-				}
-
-				Analyzer analyzer = manager.getAnalyzer(analyzerName);
-				if (analyzer != null) {
-					boolean enabled = analysisOptions.getBoolean(analyzerName, false);
-					boolean defaultEnabled = analyzer.getDefaultEnablement(program);
-					states.add(new AnalyzerEnablementState(analyzer, enabled, defaultEnabled));
-				}
 			}
-		}
+			Analyzer analyzer = manager.getAnalyzer(analyzerName);
+			if (analyzer != null) {
+				boolean enabled = analysisOptions.getBoolean(analyzerName, false);
+				boolean defaultEnabled = analyzer.getDefaultEnablement(program);
+				states.add(new AnalyzerEnablementState(analyzer, enabled, defaultEnabled));
+			}
+		});
 		model.setData(states);
 	}
 
@@ -371,18 +366,16 @@ class AnalysisPanel extends JPanel implements PropertyChangeListener {
 	private FileOptions getCurrentOptionsAsFileOptions() {
 		FileOptions saveTo = new FileOptions("");
 		List<AnalyzerEnablementState> analyzerStates = model.getModelData();
-		for (AnalyzerEnablementState analyzerState : analyzerStates) {
+		analyzerStates.forEach(analyzerState -> {
 			String analyzerName = analyzerState.getName();
 			boolean enabled = analyzerState.isEnabled();
 			if (!Objects.equals(Boolean.valueOf(enabled),
-				analysisOptions.getDefaultValue(analyzerName))) {
+					analysisOptions.getDefaultValue(analyzerName))) {
 				saveTo.setBoolean(analyzerName, enabled);
 			}
-		}
+		});
 
-		for (EditorState editorState : editorList) {
-			editorState.applyNonDefaults(saveTo);
-		}
+		editorList.forEach(editorState -> editorState.applyNonDefaults(saveTo));
 		return saveTo;
 	}
 
@@ -399,9 +392,7 @@ class AnalysisPanel extends JPanel implements PropertyChangeListener {
 			model.fireTableRowsUpdated(0, model.getRowCount() - 1);
 		}
 
-		for (EditorState editorState : editorList) {
-			editorState.loadFrom(selectedOptions);
-		}
+		editorList.forEach(editorState -> editorState.loadFrom(selectedOptions));
 		updateDeleteButton();
 		currentNonDefaults = getCurrentOptionsAsFileOptions();
 	}
@@ -414,12 +405,7 @@ class AnalysisPanel extends JPanel implements PropertyChangeListener {
 	}
 
 	private Options findOptionsByName(String name) {
-		for (Options fileOptions : optionConfigurationChoices) {
-			if (fileOptions.getName().equals(name)) {
-				return fileOptions;
-			}
-		}
-		return STANDARD_DEFAULT_OPTIONS;
+		return Arrays.stream(optionConfigurationChoices).filter(fileOptions -> fileOptions.getName().equals(name)).findFirst().orElse(STANDARD_DEFAULT_OPTIONS);
 	}
 
 	private void configureEnabledColumnWidth(int width) {
@@ -511,12 +497,7 @@ class AnalysisPanel extends JPanel implements PropertyChangeListener {
 		if (changes) {
 			return true;
 		}
-		for (EditorState info : editorList) {
-			if (info.isValueChanged()) {
-				return true;
-			}
-		}
-		return false;
+		return editorList.stream().anyMatch(EditorState::isValueChanged);
 	}
 
 	/**
@@ -710,17 +691,12 @@ class AnalysisPanel extends JPanel implements PropertyChangeListener {
 		Options[] optionsArray = new FileOptions[savedDefaultsList.size() + 2]; // 2 standard configurations always present
 		optionsArray[CURRENT_PROGRAM_OPTIONS_CHOICE_INDEX] = currentProgramOptions;
 		optionsArray[STANDARD_OPTIONS_CHOICE_INDEX] = STANDARD_DEFAULT_OPTIONS;
-		for (int i = 0; i < savedDefaultsList.size(); i++) {
-			optionsArray[i + 2] = savedDefaultsList.get(i);
-		}
+		IntStream.range(0, savedDefaultsList.size()).forEach(i -> optionsArray[i + 2] = savedDefaultsList.get(i));
 		return optionsArray;
 	}
 
 	private String[] getSavedChoices() {
-		List<String> list = new ArrayList<>();
-		for (int i = 2; i < optionConfigurationChoices.length; i++) {
-			list.add(optionConfigurationChoices[i].getName());
-		}
+		List<String> list = IntStream.range(2, optionConfigurationChoices.length).mapToObj(i -> optionConfigurationChoices[i].getName()).collect(Collectors.toList());
 		String[] a = new String[list.size()];
 		list.toArray(a);
 		return a;
@@ -789,13 +765,7 @@ class AnalysisPanel extends JPanel implements PropertyChangeListener {
 		}
 
 		// get the tools from the most recent projects first
-		for (File ghidraUserDir : ghidraUserDirsByTime) {
-			File possible = new File(ghidraUserDir, ANALYZER_OPTIONS_SAVE_DIR);
-			if (possible.exists()) {
-				return possible;
-			}
-		}
-		return null;
+		return ghidraUserDirsByTime.stream().map(ghidraUserDir -> new File(ghidraUserDir, ANALYZER_OPTIONS_SAVE_DIR)).filter(File::exists).findFirst().orElse(null);
 	}
 
 	private boolean isUserConfiguration(Options options) {

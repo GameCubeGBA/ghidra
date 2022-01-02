@@ -16,7 +16,6 @@
 package ghidra.app.util.bin.format.pef;
 
 import ghidra.app.cmd.label.AddLabelCmd;
-import ghidra.app.cmd.label.AddUniqueLabelCmd;
 import ghidra.app.util.bin.BinaryReader;
 import ghidra.app.util.importer.MessageLog;
 import ghidra.program.model.address.Address;

@@ -158,10 +158,6 @@ public class NewLanguagePanel extends JPanel {
 
 	private boolean isOnShowAll = true;
 
-	private boolean isAllLcsPairsTableShowing() {
-		return isOnShowAll;
-	}
-
 	private boolean isRecommendedLcsPairsTableShowing() {
 		return !isOnShowAll;
 	}

@@ -214,12 +214,6 @@ public class BundleStatusTableModel
 		}
 	}
 
-	void fireBundleActivationChangeRequested(BundleStatus status, boolean newValue) {
-		for (BundleStatusChangeRequestListener listener : bundleStatusListeners) {
-			listener.bundleActivationChangeRequest(status, newValue);
-		}
-	}
-
 	/**
 	 * return the row objects corresponding an array of model row indices.  
 	 * 
@@ -227,10 +221,7 @@ public class BundleStatusTableModel
 	 * @return status objects
 	 */
 	public List<BundleStatus> getRowObjects(int[] modelRowIndices) {
-		List<BundleStatus> rows = new ArrayList<>(modelRowIndices.length);
-		for (int i : modelRowIndices) {
-			rows.add(getRowObject(i));
-		}
+		List<BundleStatus> rows = Arrays.stream(modelRowIndices).mapToObj(this::getRowObject).collect(Collectors.toCollection(() -> new ArrayList<>(modelRowIndices.length)));
 		return rows;
 	}
 
@@ -266,7 +257,7 @@ public class BundleStatusTableModel
 				return result;
 			}
 		};
-		Collections.sort(data, wrapper);
+		data.sort(wrapper);
 		sortCompleted(sortingContext);
 		if (changed.get()) {
 			notifyModelSorted(false);

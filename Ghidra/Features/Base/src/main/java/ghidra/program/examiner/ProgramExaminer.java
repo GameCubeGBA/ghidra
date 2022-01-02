@@ -35,7 +35,6 @@ import ghidra.program.model.mem.MemoryAccessException;
 import ghidra.program.util.DefaultLanguageService;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 import utility.application.ApplicationLayout;
 
 /**

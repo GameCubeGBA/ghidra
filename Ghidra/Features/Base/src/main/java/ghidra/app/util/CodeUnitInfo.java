@@ -30,8 +30,6 @@ import java.util.List;
  * another.
  */
 public class CodeUnitInfo {
-
-	private final static long serialVersionUID = 1L;
 	private static final String[] emptyStringArray = new String[0];
 	private static final int[] emptyIntArray = new int[0];
 	private static final Address[] emptyAddrArray = new Address[0];

@@ -19,7 +19,6 @@ import java.math.BigInteger;
 
 import ghidra.app.plugin.core.format.ByteBlock;
 import ghidra.app.plugin.core.format.ByteBlockAccessException;
-import ghidra.program.database.mem.ByteMappingScheme;
 import ghidra.program.model.address.*;
 import ghidra.program.model.listing.*;
 import ghidra.program.model.mem.*;

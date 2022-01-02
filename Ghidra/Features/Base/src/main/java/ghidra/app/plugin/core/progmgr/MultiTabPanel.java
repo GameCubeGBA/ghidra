@@ -70,8 +70,6 @@ public class MultiTabPanel extends JPanel {
 	private MultiTabPlugin multiTabPlugin;
 	private ProgramListPanel programListPanel;
 	private Border defaultListLabelBorder;
-	private Border noTabsBorder;
-	private Border tabbedBorder;
 	private JLabel showHiddenListLabel;
 	private JDialog listWindow;
 	private JTextField filterField;

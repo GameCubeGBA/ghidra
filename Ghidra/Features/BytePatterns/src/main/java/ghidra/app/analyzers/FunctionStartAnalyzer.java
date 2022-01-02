@@ -17,7 +17,7 @@ package ghidra.app.analyzers;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Arrays;
 
 import generic.jar.ResourceFile;
 import ghidra.app.cmd.function.CreateFunctionCmd;
@@ -106,18 +106,11 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 	 * Sets the {@link SequenceSearchState}. Use this method when you've created a 
 	 * {@link SequenceSearchState} that you want to apply to the program. If you don't set
 	 * the state explicitly, Ghidra will create one from the appropriate pattern file in
-	 * {@link SequenceSearchState#initialize}
+	 *
 	 * @param explicit
 	 */
 	public void setExplicitState(SequenceSearchState explicit) {
 		explicitState = explicit;
-	}
-
-	/**
-	 * Clears the explict state.
-	 */
-	public void clearExplicitState() {
-		explicitState = null;
 	}
 
 	/**
@@ -760,12 +753,7 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 	private boolean checkForExecuteBlock(Program program) {
 		MemoryBlock[] blocks = program.getMemory().getBlocks();
 
-		for (MemoryBlock block : blocks) {
-			if (block.isExecute()) {
-				return true;
-			}
-		}
-		return false;
+		return Arrays.stream(blocks).anyMatch(MemoryBlock::isExecute);
 	}
 
 	@Override

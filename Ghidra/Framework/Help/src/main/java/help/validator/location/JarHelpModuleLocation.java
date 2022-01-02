@@ -27,7 +27,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 import javax.help.HelpSet;
 import javax.help.HelpSetException;
@@ -42,7 +41,6 @@ public class JarHelpModuleLocation extends HelpModuleLocation {
 	 * format of 'helpDir': 
 	 * 	jar:file:///.../ghidra-prep/Ghidra/Features/Base/build/libs/Base.jar!/help
 	 */
-	private static final Pattern JAR_FILENAME_PATTERN = Pattern.compile(".*/(\\w*)\\.jar!/.*");
 
 	private static Map<String, String> env = new HashMap<>();
 	static {

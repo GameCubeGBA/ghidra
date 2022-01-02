@@ -28,7 +28,6 @@ import ghidra.program.model.util.TypeMismatchException;
 import ghidra.util.*;
 import ghidra.util.exception.*;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 
 /**
  * {@code ProgramDiff} is a class for comparing two programs and
@@ -1307,21 +1306,19 @@ public class ProgramDiff {
 				list.add(propName);
 			}
 		}
-		int numProps = list.size();
-		for (int i = 0; i < numProps; i++) {
-			String property = list.get(i);
-			if (property.equals("Bookmarks")) {
-				continue; // ignore bookmarks as properties, since the bookmark diff gets these.
-			}
-			// Handle case where the class for a Saveable property is missing.
-			if ((listing1.getPropertyMap(property) instanceof UnsupportedMapDB) ||
-				(listing2.getPropertyMap(property) instanceof UnsupportedMapDB)) {
-				continue; // ignore property that isn't supported.
-			}
-			// Get the differences for each user defined property type.
-			differences.add(getCuiDiffs(property, addressSet,
-				new UserDefinedComparator(program1, program2, property), monitor));
-		}
+        for (String property : list) {
+            if ("Bookmarks".equals(property)) {
+                continue; // ignore bookmarks as properties, since the bookmark diff gets these.
+            }
+            // Handle case where the class for a Saveable property is missing.
+            if ((listing1.getPropertyMap(property) instanceof UnsupportedMapDB) ||
+                    (listing2.getPropertyMap(property) instanceof UnsupportedMapDB)) {
+                continue; // ignore property that isn't supported.
+            }
+            // Get the differences for each user defined property type.
+            differences.add(getCuiDiffs(property, addressSet,
+                    new UserDefinedComparator(program1, program2, property), monitor));
+        }
 		return differences;
 	}
 

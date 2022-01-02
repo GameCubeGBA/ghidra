@@ -18,7 +18,6 @@ package ghidra.app.util.bin.format.pef;
 import java.util.*;
 
 import ghidra.app.cmd.label.AddLabelCmd;
-import ghidra.app.cmd.label.AddUniqueLabelCmd;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 import ghidra.program.model.mem.MemoryBlock;
