@@ -139,7 +139,7 @@ class BatchImportTableModel extends AbstractSortedTableModel<BatchGroup> {
 			case SELECTED:
 				boolean newValue = (Boolean) aValue;
 				// dont allow enable unless there is a lang chosen
-				if (newValue == true && row.getSelectedBatchGroupLoadSpec() == null) {
+				if (newValue  && row.getSelectedBatchGroupLoadSpec() == null) {
 					Msg.showWarn(this, null, "Missing language",
 						"Select a language for this group before enabling");
 					return;

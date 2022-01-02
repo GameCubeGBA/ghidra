@@ -64,7 +64,7 @@ public class GhidraSourceBundle extends GhidraBundle {
 	/*
 	 * Match the leftover part of a class file on removing the class name, e.g.
 	 * we've found "MyClass.java", so we match "MyClass.class" by removing "MyClass" then
-	 * computing IS_CLASS_FILE.test(".class") == true.  We  want to match inner 
+	 * computing IS_CLASS_FILE.test(".class") .  We  want to match inner 
 	 * class files like "MyClass$2.class" too, so IS_CLASS_FILE.test("$2.class") is also true.
 	 */
 	private static final Predicate<String> IS_CLASS_FILE =

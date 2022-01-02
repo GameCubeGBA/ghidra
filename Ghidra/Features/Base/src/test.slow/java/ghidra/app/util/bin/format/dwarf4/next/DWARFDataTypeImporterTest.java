@@ -53,7 +53,7 @@ public class DWARFDataTypeImporterTest extends DWARFTestBase {
 
 		DataType baseTypeDT = dwarfDTM.getDataType(baseDIE.getOffset(), null);
 		assertTrue(baseTypeDT instanceof AbstractIntegerDataType);
-		assertTrue(((AbstractIntegerDataType) baseTypeDT).isSigned() == true);
+		assertTrue(((AbstractIntegerDataType) baseTypeDT).isSigned() );
 	}
 
 	@Test
@@ -90,7 +90,7 @@ public class DWARFDataTypeImporterTest extends DWARFTestBase {
 
 		DataType baseTypeDT = dt.getBaseDataType();
 		assertTrue(baseTypeDT instanceof AbstractIntegerDataType);
-		assertTrue(((AbstractIntegerDataType) baseTypeDT).isSigned() == true);
+		assertTrue(((AbstractIntegerDataType) baseTypeDT).isSigned() );
 	}
 
 	@Test
@@ -104,7 +104,7 @@ public class DWARFDataTypeImporterTest extends DWARFTestBase {
 
 		assertEquals(4, baseTypeDT.getLength());
 		assertTrue(baseTypeDT instanceof AbstractIntegerDataType);
-		assertTrue(((AbstractIntegerDataType) baseTypeDT).isSigned() == true);
+		assertTrue(((AbstractIntegerDataType) baseTypeDT).isSigned() );
 	}
 
 	@Test

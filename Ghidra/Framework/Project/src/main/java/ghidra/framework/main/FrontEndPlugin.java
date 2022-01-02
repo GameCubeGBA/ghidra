@@ -530,7 +530,7 @@ public class FrontEndPlugin extends Plugin
 	 */
 	ProjectLocator chooseProject(GhidraFileChooser fileChooser, String mode,
 			String preferenceName) {
-		boolean create = ("Create".equals(mode)) == true;
+		boolean create = ("Create".equals(mode)) ;
 		fileChooser.setTitle(mode + " a Ghidra Project");
 		fileChooser.setApproveButtonText(mode + " Project");
 		fileChooser.setApproveButtonToolTipText(mode + " a Ghidra Project");

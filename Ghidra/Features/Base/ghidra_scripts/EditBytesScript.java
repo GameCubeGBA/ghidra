@@ -50,7 +50,7 @@ public class EditBytesScript extends GhidraScript {
 			activeAddr = currentLocation.getByteAddress();
 
 			containedInBlock = currentProgram.getMemory().getBlock(activeAddr).contains(endAddr);
-			if (containedInBlock == true) {
+			if (containedInBlock ) {
 				break;
 			}
 

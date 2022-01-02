@@ -6039,147 +6039,142 @@ public class RecoveredClassHelper {
 			throws CancelledException, InvalidInputException, DuplicateNameException,
 			CircularDependencyException {
 
-		Iterator<RecoveredClass> recoveredClassIterator = recoveredClasses.iterator();
+        for (RecoveredClass aClass : recoveredClasses) {
+            monitor.checkCanceled();
+            RecoveredClass recoveredClass = aClass;
 
-		while (recoveredClassIterator.hasNext()) {
-			monitor.checkCanceled();
-			RecoveredClass recoveredClass = recoveredClassIterator.next();
+            List<Function> inlineFunctionsList =
+                    new ArrayList<>(recoveredClass.getIndeterminateInlineList());
 
-			List<Function> inlineFunctionsList =
-				new ArrayList<>(recoveredClass.getIndeterminateInlineList());
+            for (Function value : inlineFunctionsList) {
+                monitor.checkCanceled();
 
-			Iterator<Function> inlineIterator = inlineFunctionsList.iterator();
-			while (inlineIterator.hasNext()) {
-				monitor.checkCanceled();
+                Function inlineFunction = value;
 
-				Function inlineFunction = inlineIterator.next();
+                // get the addresses in the function that refer to classes either by
+                // referencing a vftable in a class or by calling a function in a class
+                // TODO: add the atexit refs and then check them - make a map of atexit call to class map if not already
+                Map<Address, RecoveredClass> referenceToClassMap =
+                        getReferenceToClassMap(recoveredClass, inlineFunction);
+                List<Address> referencesToFunctions =
+                        extendedFlatAPI.getReferencesToFunctions(referenceToClassMap);
 
-				// get the addresses in the function that refer to classes either by 
-				// referencing a vftable in a class or by calling a function in a class
-				// TODO: add the atexit refs and then check them - make a map of atexit call to class map if not already
-				Map<Address, RecoveredClass> referenceToClassMap =
-					getReferenceToClassMap(recoveredClass, inlineFunction);
-				List<Address> referencesToFunctions =
-					extendedFlatAPI.getReferencesToFunctions(referenceToClassMap);
+                // if some of the references are to functions figure out if they are
+                // constructors destructors or add them to list of indetermined
+                boolean isConstructor = false;
+                boolean isDestructor = false;
+                List<Address> referenceToIndeterminates = new ArrayList<Address>();
 
-				// if some of the references are to functions figure out if they are 
-				// constructors destructors or add them to list of indetermined
-				boolean isConstructor = false;
-				boolean isDestructor = false;
-				List<Address> referenceToIndeterminates = new ArrayList<Address>();
+                if (!referencesToFunctions.isEmpty()) {
+                    for (Address referencesToFunction : referencesToFunctions) {
 
-				if (!referencesToFunctions.isEmpty()) {
-					Iterator<Address> functionReferenceIterator = referencesToFunctions.iterator();
-					while (functionReferenceIterator.hasNext()) {
+                        monitor.checkCanceled();
+                        Address functionReference = referencesToFunction;
+                        Function function =
+                                extendedFlatAPI.getReferencedFunction(functionReference, true);
+                        if (function == null) {
+                            continue;
+                        }
 
-						monitor.checkCanceled();
-						Address functionReference = functionReferenceIterator.next();
-						Function function =
-							extendedFlatAPI.getReferencedFunction(functionReference, true);
-						if (function == null) {
-							continue;
-						}
+                        if (allConstructors.contains(function) ||
+                                allInlinedConstructors.contains(function)) {
+                            isConstructor = true;
+                            continue;
+                        }
 
-						if (getAllConstructors().contains(function) ||
-							getAllInlinedConstructors().contains(function)) {
-							isConstructor = true;
-							continue;
-						}
+                        if (allDestructors.contains(function) ||
+                                allInlinedDestructors.contains(function)) {
+                            isDestructor = true;
+                            continue;
+                        }
 
-						if (getAllDestructors().contains(function) ||
-							getAllInlinedDestructors().contains(function)) {
-							isDestructor = true;
-							continue;
-						}
+                        // TODO: refactor to make this function and refactor method that uses
+                        // it to use function instead of refiguring it out
+                        referenceToIndeterminates.add(functionReference);
 
-						// TODO: refactor to make this function and refactor method that uses
-						// it to use function instead of refiguring it out
-						referenceToIndeterminates.add(functionReference);
+                    }
 
-					}
+                }
 
-				}
+                // if one or more is a constructor and none are destructors then the indeterminate
+                // inline is is an inlined constructor
+                if (isConstructor  && isDestructor == false) {
+                    processInlineConstructor(recoveredClass, inlineFunction, referenceToClassMap);
+                }
+                // if one or more is a destructor and none are constructors then the indeterminate
+                // inline is an inlined destructor
+                else if (isConstructor == false && isDestructor ) {
+                    processInlineDestructor(recoveredClass, inlineFunction, referenceToClassMap);
+                } else {
 
-				// if one or more is a constructor and none are destructors then the indeterminate
-				// inline is is an inlined constructor
-				if (isConstructor == true && isDestructor == false) {
-					processInlineConstructor(recoveredClass, inlineFunction, referenceToClassMap);
-				}
-				// if one or more is a destructor and none are constructors then the indeterminate
-				// inline is an inlined destructor
-				else if (isConstructor == false && isDestructor == true) {
-					processInlineDestructor(recoveredClass, inlineFunction, referenceToClassMap);
-				}
-				else {
+                    // otherwise, use pcode info to figure out if inlined constructor or destructor
+                    //If not already, make function a this call
+                    makeFunctionThiscall(inlineFunction);
 
-					// otherwise, use pcode info to figure out if inlined constructor or destructor
-					//If not already, make function a this call	
-					makeFunctionThiscall(inlineFunction);
+                    List<OffsetPcodeOpPair> loads = getLoadPcodeOpPairs(inlineFunction);
+                    List<OffsetPcodeOpPair> stores = getStorePcodeOpPairs(inlineFunction);
 
-					List<OffsetPcodeOpPair> loads = getLoadPcodeOpPairs(inlineFunction);
-					List<OffsetPcodeOpPair> stores = getStorePcodeOpPairs(inlineFunction);
+                    if (loads == null || stores == null) {
+                        Address firstVftableReferenceInFunction =
+                                getFirstVftableReferenceInFunction(inlineFunction);
+                        if (firstVftableReferenceInFunction == null) {
+                            continue;
+                        }
+                        FillOutStructureCmd fillOutStructureCmd =
+                                runFillOutStructureCmd(inlineFunction, firstVftableReferenceInFunction);
 
-					if (loads == null || stores == null) {
-						Address firstVftableReferenceInFunction =
-							getFirstVftableReferenceInFunction(inlineFunction);
-						if (firstVftableReferenceInFunction == null) {
-							continue;
-						}
-						FillOutStructureCmd fillOutStructureCmd =
-							runFillOutStructureCmd(inlineFunction, firstVftableReferenceInFunction);
+                        if (fillOutStructureCmd == null) {
+                            continue;
+                        }
 
-						if (fillOutStructureCmd == null) {
-							continue;
-						}
+                        loads = fillOutStructureCmd.getLoadPcodeOps();
+                        loads = removePcodeOpsNotInFunction(inlineFunction, loads);
+                        stores = fillOutStructureCmd.getStorePcodeOps();
+                        stores = removePcodeOpsNotInFunction(inlineFunction, stores);
 
-						loads = fillOutStructureCmd.getLoadPcodeOps();
-						loads = removePcodeOpsNotInFunction(inlineFunction, loads);
-						stores = fillOutStructureCmd.getStorePcodeOps();
-						stores = removePcodeOpsNotInFunction(inlineFunction, stores);
+                        updateFunctionToStorePcodeOpsMap(inlineFunction, stores);
+                        updateFunctionToLoadPcodeOpsMap(inlineFunction, loads);
 
-						updateFunctionToStorePcodeOpsMap(inlineFunction, stores);
-						updateFunctionToLoadPcodeOpsMap(inlineFunction, loads);
+                    }
 
-					}
+                    if (loads == null || stores == null) {
+                        continue;
+                    }
 
-					if (loads == null || stores == null) {
-						continue;
-					}
+                    // inlined constructor
+                    if (stores.size() > 1 && loads.isEmpty()) {
+                        processInlineConstructor(recoveredClass, inlineFunction,
+                                referenceToClassMap);
+                        isConstructor = true;
+                    }
 
-					// inlined constructor
-					if (stores.size() > 1 && loads.size() == 0) {
-						processInlineConstructor(recoveredClass, inlineFunction,
-							referenceToClassMap);
-						isConstructor = true;
-					}
+                    // inlined destructor
+                    else if (stores.size() == 1 && !loads.isEmpty()) {
+                        processInlineDestructor(recoveredClass, inlineFunction,
+                                referenceToClassMap);
+                        isDestructor = true;
+                    }
+                }
 
-					// inlined destructor
-					else if (stores.size() == 1 && loads.size() > 0) {
-						processInlineDestructor(recoveredClass, inlineFunction,
-							referenceToClassMap);
-						isDestructor = true;
-					}
-				}
+                if (!referenceToIndeterminates.isEmpty()) {
+                    // make the other referenced indeterminate c/d functions constructors
+                    if (isConstructor  && isDestructor == false) {
+                        createListedConstructorFunctions(referenceToClassMap,
+                                referenceToIndeterminates);
+                        continue;
+                    }
+                    // make the other referenced indeterminate c/d functions destructors
+                    if (isConstructor == false && isDestructor ) {
+                        createListedDestructorFunctions(referenceToClassMap,
+                                referenceToIndeterminates);
+                        continue;
+                    }
 
-				if (!referenceToIndeterminates.isEmpty()) {
-					// make the other referenced indeterminate c/d functions constructors
-					if (isConstructor == true && isDestructor == false) {
-						createListedConstructorFunctions(referenceToClassMap,
-							referenceToIndeterminates);
-						continue;
-					}
-					// make the other referenced indeterminate c/d functions destructors 
-					if (isConstructor == false && isDestructor == true) {
-						createListedDestructorFunctions(referenceToClassMap,
-							referenceToIndeterminates);
-						continue;
-					}
+                }
 
-				}
+            }
 
-			}
-
-		}
+        }
 	}
 
 
