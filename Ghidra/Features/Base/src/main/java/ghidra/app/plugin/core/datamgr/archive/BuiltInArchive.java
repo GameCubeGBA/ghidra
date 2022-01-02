@@ -31,11 +31,9 @@ public class BuiltInArchive implements Archive {
 
 	private static ImageIcon CLOSED_ICON = ResourceManager.loadImage("images/closedBookBrown.png");
 	private static ImageIcon OPEN_ICON = ResourceManager.loadImage("images/openBookBrown.png");
-	private DataTypeManagerHandler archiveManager;
 	private BuiltInDataTypeManager dataTypeManager;
 
-	BuiltInArchive(DataTypeManagerHandler archiveManager, BuiltInDataTypeManager dataTypeManager) {
-		this.archiveManager = archiveManager;
+	BuiltInArchive(BuiltInDataTypeManager dataTypeManager) {
 		this.dataTypeManager = dataTypeManager;
 	}
 

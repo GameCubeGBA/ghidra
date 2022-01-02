@@ -32,7 +32,6 @@ import ghidra.app.plugin.ProgramPlugin;
 import ghidra.app.services.DataTypeManagerService;
 import ghidra.app.util.cparser.C.CParser;
 import ghidra.app.util.cparser.CPP.PreProcessor;
-import ghidra.app.util.xml.DataTypesXmlMgr;
 import ghidra.framework.Application;
 import ghidra.framework.options.SaveState;
 import ghidra.framework.plugintool.PluginInfo;

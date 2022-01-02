@@ -23,7 +23,6 @@ import docking.action.MenuData;
 import docking.widgets.tree.GTree;
 import docking.widgets.tree.GTreeNode;
 import ghidra.app.cmd.function.CaptureFunctionDataTypesCmd;
-import ghidra.app.cmd.function.CaptureFunctionDataTypesListener;
 import ghidra.app.plugin.core.datamgr.DataTypeManagerPlugin;
 import ghidra.app.plugin.core.datamgr.DataTypesActionContext;
 import ghidra.app.plugin.core.datamgr.tree.*;

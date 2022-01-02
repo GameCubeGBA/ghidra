@@ -100,7 +100,7 @@ public class DataTypeManagerHandler {
 
 		dataTypeIndexer = new DataTypeIndexer();
 		dataTypeIndexer.addDataTypeManager(builtInDataTypesManager);
-		openArchives.add(new BuiltInArchive(this, builtInDataTypesManager));
+		openArchives.add(new BuiltInArchive(builtInDataTypesManager));
 
 		domainFileFilter = f -> {
 			Class<?> c = f.getDomainObjectClass();

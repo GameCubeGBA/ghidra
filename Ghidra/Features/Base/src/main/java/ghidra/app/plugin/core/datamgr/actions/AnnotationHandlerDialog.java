@@ -16,8 +16,6 @@
 package ghidra.app.plugin.core.datamgr.actions;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Vector;
 

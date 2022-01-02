@@ -50,11 +50,9 @@ class VarnodeLocationCellEditor extends AbstractCellEditor implements TableCellE
 		}
 	};
 	private VarnodeInfo currentVarnode;
-	private int maxRegisterSize;
 
 	VarnodeLocationCellEditor(StorageAddressModel model) {
 		this.program = model.getProgram();
-		this.maxRegisterSize = program.getDefaultPointerSize();
 	}
 
 	@Override
