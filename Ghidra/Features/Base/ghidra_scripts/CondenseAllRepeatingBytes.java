@@ -69,7 +69,7 @@ public class CondenseAllRepeatingBytes extends GhidraScript {
 			// if so, determine if there are more contiguous repeated bytes at that location
 			// if so, make array of bytes at that location with appropriate label
 			boolean isUndef;			
-			while (((currentAddr = find(start,repeatingBytes)) != null) && (sameMemoryBlock == true)){
+			while (((currentAddr = find(start,repeatingBytes)) != null) && (sameMemoryBlock )){
 					//println(currentAddr.toString() + " " + hexRepeatingByte);	
 					if(listing.isUndefined(currentAddr, currentAddr.addNoWrap(minRepeatLen-1))){
 					

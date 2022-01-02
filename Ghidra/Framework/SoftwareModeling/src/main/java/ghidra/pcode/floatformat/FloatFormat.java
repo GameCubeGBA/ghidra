@@ -440,7 +440,7 @@ public strictfp class FloatFormat {
 		int exp;
 		long fraction;
 
-		// handle the case where jbitimplied == true
+		// handle the case where jbitimplied 
 		if (jbitimplied) {
 			int lb_unscaled = leadBit(value.unscaled);
 			if (value.scale - value.fracbits + lb_unscaled >= 1 - bias) {
@@ -499,7 +499,7 @@ public strictfp class FloatFormat {
 		int exp;
 		BigInteger fraction;
 
-		// handle the case where jbitimplied == true
+		// handle the case where jbitimplied 
 		if (jbitimplied) {
 			int lb_unscaled = leadBit(value.unscaled);
 			if (value.scale - value.fracbits + lb_unscaled >= 1 - bias) {

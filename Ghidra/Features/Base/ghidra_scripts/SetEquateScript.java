@@ -99,7 +99,7 @@ public class SetEquateScript extends GhidraScript {
 		if (scalarFound == false && userScalarFound == false) {
 			println("No scalar values were found.");
 		}
-		else if (scalarFound == true && userScalarFound == false) {
+		else if (scalarFound  && userScalarFound == false) {
 			println("No " + scalarValue + " values were found");
 		}
 	}

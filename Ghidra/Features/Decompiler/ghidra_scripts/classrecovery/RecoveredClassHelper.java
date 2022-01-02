@@ -5960,12 +5960,12 @@ public class RecoveredClassHelper {
 
                 // if one or more is a constructor and none are destructors then the indeterminate
                 // inline is is an inlined constructor
-                if (isConstructor == true && isDestructor == false) {
+                if (isConstructor  && isDestructor == false) {
                     processInlineConstructor(recoveredClass, inlineFunction, referenceToClassMap);
                 }
                 // if one or more is a destructor and none are constructors then the indeterminate
                 // inline is an inlined destructor
-                else if (isConstructor == false && isDestructor == true) {
+                else if (isConstructor == false && isDestructor ) {
                     processInlineDestructor(recoveredClass, inlineFunction, referenceToClassMap);
                 } else {
 
@@ -6020,13 +6020,13 @@ public class RecoveredClassHelper {
 
                 if (!referenceToIndeterminates.isEmpty()) {
                     // make the other referenced indeterminate c/d functions constructors
-                    if (isConstructor == true && isDestructor == false) {
+                    if (isConstructor  && isDestructor == false) {
                         createListedConstructorFunctions(referenceToClassMap,
                                 referenceToIndeterminates);
                         continue;
                     }
                     // make the other referenced indeterminate c/d functions destructors
-                    if (isConstructor == false && isDestructor == true) {
+                    if (isConstructor == false && isDestructor ) {
                         createListedDestructorFunctions(referenceToClassMap,
                                 referenceToIndeterminates);
                         continue;
