@@ -16,7 +16,6 @@
 package ghidra.app.merge.memory;
 
 import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
 import javax.swing.*;
 import javax.swing.event.ChangeListener;

@@ -17,7 +17,6 @@
 package ghidra.util.xml;
 
 import java.util.HashMap;
-import java.util.Iterator;
 
 class Counter {
 	HashMap<String,Count> map = new HashMap<>();

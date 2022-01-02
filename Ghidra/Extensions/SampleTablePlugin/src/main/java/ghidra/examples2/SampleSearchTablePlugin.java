@@ -16,7 +16,6 @@
 package ghidra.examples2;
 
 import docking.ActionContext;
-import docking.ComponentProvider;
 import docking.action.DockingAction;
 import docking.action.MenuData;
 import ghidra.app.ExamplesPluginPackage;

@@ -35,7 +35,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.swing.SwingUtilities;
-import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 /**

@@ -25,7 +25,6 @@ import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 
 import help.validator.TagProcessor.TagProcessingState;

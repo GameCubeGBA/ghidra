@@ -446,7 +446,6 @@ class BookmarkMerger extends AbstractListingMerger {
 		// At address get the BookmarkUid ArrayList for each conflict.
 		boolean askUser = chosenConflictOption == ASK_USER;
 		ArrayList<BookmarkUid> list = conflicts.get(addr);
-		int size = list.size();
         for (BookmarkUid bmuid : list) {
             // If we have a bookmark choice then a "Use For All" has already occurred.
             if ((bookmarkChoice == ASK_USER) && askUser && mergeManager != null) {

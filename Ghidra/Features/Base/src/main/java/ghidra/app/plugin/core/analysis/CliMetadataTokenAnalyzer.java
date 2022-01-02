@@ -83,8 +83,6 @@ public class CliMetadataTokenAnalyzer extends AbstractAnalyzer {
 			CliMetadataRoot metadataRoot = new CliMetadataRoot(reader, 0);
 			metadataRoot.parse();
 
-			CliStreamMetadata metadataStream = metadataRoot.getMetadataStream();
-
 			success = processManagedInstructions(program, set, monitor, log, metadataRoot);
 		}
 		catch (IOException e) {

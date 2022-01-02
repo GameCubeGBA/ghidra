@@ -2911,10 +2911,6 @@ class SymbolMerger extends AbstractListingMerger {
 			return super.add(Long.valueOf(l));
 		}
 
-		public boolean contains(long l) {
-			return super.contains(Long.valueOf(l));
-		}
-
 		public boolean remove(long l) {
 			return super.remove(Long.valueOf(l));
 		}

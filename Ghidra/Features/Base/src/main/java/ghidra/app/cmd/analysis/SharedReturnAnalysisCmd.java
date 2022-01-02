@@ -316,40 +316,6 @@ public class SharedReturnAnalysisCmd extends BackgroundCommand {
 
 	}
 
-	private void checkAllJumpReferences(Program program, TaskMonitor monitor)
-			throws CancelledException {
-
-		SymbolTable symbolTable = program.getSymbolTable();
-
-		InstructionIterator instructionIter = program.getListing().getInstructions(set, true);
-		while (instructionIter.hasNext()) {
-			monitor.checkCanceled();
-			Instruction instr = instructionIter.next();
-			FlowType ft = instr.getFlowType();
-			if (!ft.isJump()) {
-				continue;
-			}
-			Reference ref = getSingleFlowReferenceFrom(instr);
-			if (ref == null) {
-				continue;
-			}
-			// if there is a function at this address, this is a thunk
-			//    Handle differently
-			if (program.getFunctionManager().getFunctionAt(instr.getMinAddress()) != null) {
-				continue;
-			}
-			Symbol s = symbolTable.getPrimarySymbol(ref.getToAddress());
-			if (s != null && s.getSymbolType() == SymbolType.FUNCTION) {
-				if (instr.getFlowOverride() != FlowOverride.NONE) {
-					continue;
-				}
-				SetFlowOverrideCmd cmd =
-					new SetFlowOverrideCmd(instr.getMinAddress(), FlowOverride.CALL_RETURN);
-				cmd.applyTo(program);
-			}
-		}
-	}
-
 	private void processFunctionJumpReferences(Program program, Address entry, TaskMonitor monitor)
 			throws CancelledException {
 

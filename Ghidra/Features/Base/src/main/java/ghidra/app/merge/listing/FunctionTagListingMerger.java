@@ -20,7 +20,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 import javax.swing.SwingUtilities;
-import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import ghidra.app.merge.tool.ListingMergePanel;

@@ -105,7 +105,6 @@ public class OperandReferenceAnalyzer extends AbstractAnalyzer {
 	private static final boolean OPTION_DEFAULT_ADDRESS_TABLES_ENABLED = true;
 	private static final boolean OPTION_DEFAULT_SWITCH_TABLE_ENABLED = false;
 	private static final int OPTION_DEFAULT_SWITCH_TABLE_ALIGNMENT = 1;
-	private static final boolean OPTION_DEFAULT_RESPECT_EXECUTE_ENABLED = true;
 
 	private static final int MINIMUM_POTENTIAL_TABLE_SIZE = 3;
 	private static final int NOTIFICATION_INTERVAL = 256;
