@@ -47,7 +47,7 @@ public abstract class DragNDropTree extends JTree implements Draggable, Droppabl
 
 	protected DropTarget dropTarget;
 	protected DropTgtAdapter dropTargetAdapter;
-	protected final ProgramNode root;
+	protected ProgramNode root;
 	protected ProgramTreeCellEditor cellEditor;
 	protected Color plafSelectionColor;
 	protected DnDTreeCellRenderer dndCellRenderer;

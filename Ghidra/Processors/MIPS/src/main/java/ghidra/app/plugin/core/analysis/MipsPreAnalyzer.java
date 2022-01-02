@@ -207,11 +207,8 @@ public class MipsPreAnalyzer extends AbstractAnalyzer {
 
 		BigInteger curvalue = program.getProgramContext().getValue(pairBitRegister,
 			start_inst.getMinAddress(), false);
-		boolean inPairBit = false;
-		if (curvalue != null) {
-			inPairBit = (curvalue.intValue() == 1);
-		}
-		if (inPairBit == true) {
+
+		if ((curvalue != null) && (curvalue.intValue() == 1)) {
 			return;
 		}
 

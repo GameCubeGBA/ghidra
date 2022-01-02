@@ -43,7 +43,7 @@ class InstDBAdapterV0 extends InstDBAdapter {
 	 * @param handle database handle
 	 */
 	@SuppressWarnings("unused")
-	InstDBAdapterV0(DBHandle handle, AddressMap addrMap) throws IOException, VersionException {
+	InstDBAdapterV0(DBHandle handle, AddressMap addrMap) throws VersionException {
 		this.addrMap = addrMap.getOldAddressMap();
 		instTable = handle.getTable(INSTRUCTION_TABLE_NAME);
 		if (instTable == null) {
@@ -58,7 +58,7 @@ class InstDBAdapterV0 extends InstDBAdapter {
 	 * @see ghidra.program.database.code.InstDBAdapter#createInstruction(long, int)
 	 */
 	@Override
-	void createInstruction(long addr, int protoID, byte flags) throws IOException {
+	void createInstruction(long addr, int protoID, byte flags) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -70,11 +70,8 @@ class InstDBAdapterV0 extends InstDBAdapter {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * @see ghidra.program.database.code.InstDBAdapter#deleteAll()
-	 */
 	@Override
-	void deleteAll() throws IOException {
+	void deleteAll() {
 		throw new UnsupportedOperationException();
 	}
 
@@ -104,9 +101,6 @@ class InstDBAdapterV0 extends InstDBAdapter {
 		return getRecord(addrMap.getKey(addr, false));
 	}
 
-	/**
-	 * @see ghidra.program.database.code.InstDBAdapter#getRecord(long)
-	 */
 	@Override
 	DBRecord getRecord(long addr) throws IOException {
 		return adaptRecord(instTable.getRecord(addr));
@@ -145,12 +139,9 @@ class InstDBAdapterV0 extends InstDBAdapter {
 	@Override
 	RecordIterator getRecords(Address start, Address end, boolean atStart) throws IOException {
 		return new RecordIteratorAdapter(new AddressKeyRecordIterator(instTable, addrMap,
-			atStart ? start : end, atStart == true));
+			atStart ? start : end, atStart));
 	}
 
-	/**
-	 * @see ghidra.program.database.code.InstDBAdapter#getRecordCount()
-	 */
 	@Override
 	int getRecordCount() throws IOException {
 		return instTable.getRecordCount();
@@ -271,20 +262,13 @@ class InstDBAdapterV0 extends InstDBAdapter {
 
 	}
 
-	/**
-	 * @see ghidra.program.database.code.InstDBAdapter#updateFlags(long, byte)
-	 */
 	@Override
-	void updateFlags(long addr, byte flags) throws IOException {
+	void updateFlags(long addr, byte flags) {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * @see ghidra.program.database.code.InstDBAdapter#moveAddressRange(ghidra.program.model.address.Address, ghidra.program.model.address.Address, long, ghidra.util.task.TaskMonitor)
-	 */
 	@Override
-	void moveAddressRange(Address fromAddr, Address toAddr, long length, TaskMonitor monitor)
-			throws CancelledException, IOException {
+	void moveAddressRange(Address fromAddr, Address toAddr, long length, TaskMonitor monitor) {
 		throw new UnsupportedOperationException();
 	}
 
