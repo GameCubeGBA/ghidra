@@ -783,7 +783,7 @@ protected static final int VAR_REMOVED = 0x200;
 		return 0;
 	}
 
-	class ParamInfoConflict {
+	static class ParamInfoConflict {
 		Address entry;
 		int ordinal;
 		int paramConflicts;
@@ -795,7 +795,7 @@ protected static final int VAR_REMOVED = 0x200;
 		}
 	}
 
-	class LocalVariableConflict {
+	static class LocalVariableConflict {
 		Address entry;
 		Variable[] vars;
 		int varConflicts;
@@ -1163,7 +1163,7 @@ protected static final int VAR_REMOVED = 0x200;
 		return varConflictList;
 	}
 
-	class FunctionAddressIterator implements AddressIterator {
+	static class FunctionAddressIterator implements AddressIterator {
 		FunctionIterator functionIterator;
 
 		FunctionAddressIterator(FunctionIterator funcIter) {

@@ -25,7 +25,7 @@ import agent.dbgmodel.model.impl.DbgModel2Impl;
 import ghidra.dbg.gadp.server.AbstractGadpServer;
 
 public class DbgModelGadpServerImpl implements DbgModelGadpServer {
-	public class GadpSide extends AbstractGadpServer {
+	public static class GadpSide extends AbstractGadpServer {
 		public GadpSide(AbstractDbgModel model, SocketAddress addr) throws IOException {
 			super(model, addr);
 		}

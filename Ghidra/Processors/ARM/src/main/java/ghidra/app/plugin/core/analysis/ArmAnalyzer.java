@@ -611,12 +611,10 @@ public class ArmAnalyzer extends ConstantPropagationAnalyzer {
 					dt = Undefined8DataType.dataType;
 					break;
 				case '3':
-					dt = Undefined4DataType.dataType;
+                case 'l':
+                    dt = Undefined4DataType.dataType;
 					break;
-				case 'l':
-					dt = Undefined4DataType.dataType;
-					break;
-				case 'w':
+                case 'w':
 				case 'h':
 					dt = Undefined2DataType.dataType;
 					break;

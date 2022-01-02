@@ -63,13 +63,12 @@ public class Pdb700 extends AbstractPdb {
 
 	@Override
 	public void dumpDirectory(Writer writer) throws IOException {
-		StringBuilder builder = new StringBuilder();
-		builder.append(dumpVersionSignatureAge());
-		builder.append("\n");
-		builder.append(dumpGUID());
-		builder.append("\n");
-		builder.append(dumpParameters());
-		writer.write(builder.toString());
+        String builder = dumpVersionSignatureAge() +
+                "\n" +
+                dumpGUID() +
+                "\n" +
+                dumpParameters();
+		writer.write(builder);
 	}
 
 	//==============================================================================================
@@ -83,10 +82,9 @@ public class Pdb700 extends AbstractPdb {
 		if (guid == null) {
 			return "";
 		}
-		StringBuilder builder = new StringBuilder();
-		builder.append("GUID: ");
-		builder.append(guid);
-		return builder.toString();
+        String builder = "GUID: " +
+                guid;
+		return builder;
 	}
 
 }

@@ -161,7 +161,7 @@ class FallThroughDialog extends DialogComponentProvider implements ChangeListene
 		addrField.setAddressFactory(model.getProgram().getAddressFactory());
 		addrField.addChangeListener(e -> addressChanged());
 		addrField.addActionListener(e -> model.setCurrentFallthrough(addrField.getAddress()));
-		panel.add(createHomePanel(), BorderLayout.NORTH);
+		panel.add(createHomePanel(), BorderLayout.PAGE_START);
 		panel.add(createAddressPanel(), BorderLayout.CENTER);
 		return panel;
 	}
@@ -170,7 +170,7 @@ class FallThroughDialog extends DialogComponentProvider implements ChangeListene
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.setBorder(BorderFactory.createTitledBorder("Fallthrough Address"));
 
-		panel.add(addrField, BorderLayout.NORTH);
+		panel.add(addrField, BorderLayout.PAGE_START);
 		panel.add(createRadioButtonPanel(), BorderLayout.CENTER);
 		return panel;
 	}
@@ -192,7 +192,7 @@ class FallThroughDialog extends DialogComponentProvider implements ChangeListene
 		homeButton.addActionListener(e -> plugin.goTo(model.getAddress()));
 
 		JPanel innerPanel = new JPanel();
-		BoxLayout bl = new BoxLayout(innerPanel, BoxLayout.X_AXIS);
+		BoxLayout bl = new BoxLayout(innerPanel, BoxLayout.LINE_AXIS);
 		innerPanel.setLayout(bl);
 
 		innerPanel.add(Box.createHorizontalStrut(5));
@@ -209,7 +209,7 @@ class FallThroughDialog extends DialogComponentProvider implements ChangeListene
 	private JPanel createRadioButtonPanel() {
 
 		JPanel panel = new JPanel();
-		BoxLayout bl = new BoxLayout(panel, BoxLayout.X_AXIS);
+		BoxLayout bl = new BoxLayout(panel, BoxLayout.LINE_AXIS);
 		panel.setLayout(bl);
 
 		ButtonGroup group = new ButtonGroup();

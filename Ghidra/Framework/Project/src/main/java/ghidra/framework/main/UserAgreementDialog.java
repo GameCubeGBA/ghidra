@@ -70,7 +70,7 @@ public class UserAgreementDialog extends DialogComponentProvider {
 		JLabel label = new GDLabel("Ghidra User Agreement", SwingConstants.CENTER);
 		label.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
 		label.setFont(font.deriveFont(Font.ITALIC, 22f));
-		panel.add(label, BorderLayout.NORTH);
+		panel.add(label, BorderLayout.PAGE_START);
 		panel.setBorder(BorderFactory.createEmptyBorder(10, 40, 40, 40));
 		JEditorPane editorPane = new JEditorPane();
 		editorPane.setEditorKit(new HTMLEditorKit());
@@ -84,7 +84,7 @@ public class UserAgreementDialog extends DialogComponentProvider {
 		panel.add(scrollPane, BorderLayout.CENTER);
 		JPanel checkBoxPanel = new JPanel(new VerticalLayout(10));
 		checkBoxPanel.setBorder(BorderFactory.createEmptyBorder(5, 10, 0, 10));
-		panel.add(checkBoxPanel, BorderLayout.SOUTH);
+		panel.add(checkBoxPanel, BorderLayout.PAGE_END);
 		return panel;
 	}
 

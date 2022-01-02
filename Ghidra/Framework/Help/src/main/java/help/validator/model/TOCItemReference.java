@@ -51,11 +51,10 @@ public class TOCItemReference extends TOCItem implements Comparable<TOCItemRefer
 	public String generateTOCItemTag(LinkDatabase linkDatabase, boolean isInlineTag, int indentLevel) {
 		String indent = INDENTS[indentLevel];
 
-		StringBuilder buildy = new StringBuilder();
-		buildy.append(indent).append("<!-- WARNING: Unresolved reference ID\n");
-		buildy.append(indent).append('\t').append(generateXMLString()).append("\n");
-		buildy.append(indent).append("-->");
-		return buildy.toString();
+        String buildy = indent + "<!-- WARNING: Unresolved reference ID\n" +
+                indent + '\t' + generateXMLString() + "\n" +
+                indent + "-->";
+		return buildy;
 	}
 
 	@Override

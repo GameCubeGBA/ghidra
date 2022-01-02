@@ -205,7 +205,7 @@ public interface Listing {
 	 * Returns an iterator of the code units in this listing (in proper
 	 * sequence), starting at the specified address. The specified address
 	 * indicates the first code unit that would be returned by an initial call
-	 * to the <code>next</code> method. An initial call to the <code>previous</code>
+	 * to the {@code next} method. An initial call to the <code>previous</code>
 	 * method would return the code unit with an address less than the specified
 	 * address.
 	 * <p>
@@ -281,7 +281,7 @@ public interface Listing {
 	 * Returns an iterator of the instructions in this listing (in proper
 	 * sequence), starting at the specified address. The specified address
 	 * indicates the first instruction that would be returned by an initial call
-	 * to the <code>next</code> method. An initial call to the <code>previous</code>
+	 * to the {@code next} method. An initial call to the <code>previous</code>
 	 * method would return the instruction with an address less than the
 	 * specified address.
 	 * <p>
@@ -355,8 +355,8 @@ public interface Listing {
 	/**
 	 * Returns an iterator of the data in this listing (in proper sequence),
 	 * starting at the specified address. The specified address indicates the
-	 * first Data that would be returned by an initial call to the <code>next</code>
-	 * method. An initial call to the <code>previous</code> method would return the
+	 * first Data that would be returned by an initial call to the {@code next}
+	 * method. An initial call to the {@code previous} method would return the
 	 * Data with an address less than the specified address.
 	 * <p>
 	 *
@@ -434,8 +434,8 @@ public interface Listing {
 	 * Returns an iterator of the defined data in this listing (in proper
 	 * sequence), starting at the specified address. The specified address
 	 * indicates the first defined Data that would be returned by an initial
-	 * call to the <code>next</code> method. An initial call to the
-	 * <code>previous</code> method would return the defined Data with an address
+	 * call to the {@code next} method. An initial call to the
+	 * {@code previous} method would return the defined Data with an address
 	 * less than the specified address.
 	 * <p>
 	 *
@@ -598,7 +598,7 @@ public interface Listing {
 	 * that the context be written immediately after creation of the instruction
 	 * and must be done with a single set operation on the program context. Once
 	 * a set context is done on the instruction address, any subsequent context
-	 * changes will result in a <code>ContextChangeException</code>
+	 * changes will result in a {@code ContextChangeException}
 	 *
 	 * @param addr the address at which to create an instruction
 	 * @param prototype the InstructionPrototype the describes the type of

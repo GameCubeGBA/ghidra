@@ -465,15 +465,14 @@ abstract class VariableImpl implements Variable {
 
 	@Override
 	public String toString() {
-		StringBuilder strBuilder = new StringBuilder();
-		strBuilder.append("[");
-		strBuilder.append(dataType.getName());
-		strBuilder.append(" ");
-		strBuilder.append(name);
-		strBuilder.append("@");
-		strBuilder.append(variableStorage.toString());
-		strBuilder.append("]");
-		return strBuilder.toString();
+        String strBuilder = "[" +
+                dataType.getName() +
+                " " +
+                name +
+                "@" +
+                variableStorage.toString() +
+                "]";
+		return strBuilder;
 	}
 
 	@Override

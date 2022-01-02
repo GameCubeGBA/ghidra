@@ -73,19 +73,18 @@ public class RepositoryChangeEvent implements Serializable {
 	@Override
 	public String toString() {
 		if (type >= 0 && type <= LAST_TYPE) {
-			StringBuilder buf = new StringBuilder();
-			buf.append("<");
-			buf.append(TYPES[type]);
-			buf.append(",parentPath=");
-			buf.append(parentPath);
-			buf.append(",name=");
-			buf.append(name);
-			buf.append(",newParentPath=");
-			buf.append(newParentPath);
-			buf.append(",newName=");
-			buf.append(newName);
-			buf.append(">");
-			return buf.toString();
+            String buf = "<" +
+                    TYPES[type] +
+                    ",parentPath=" +
+                    parentPath +
+                    ",name=" +
+                    name +
+                    ",newParentPath=" +
+                    newParentPath +
+                    ",newName=" +
+                    newName +
+                    ">";
+			return buf;
 		}
 		else if (type == REP_NULL_EVENT) {
 			return "<Null Event>";

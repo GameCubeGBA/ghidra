@@ -27,7 +27,7 @@ import ghidra.program.model.listing.Function;
 import ghidra.program.util.*;
 
 /**
- * <CODE>DeleteFunctionAction</CODE> allows the user to Delete a function at
+ * {@code DeleteFunctionAction} allows the user to Delete a function at
  * the entry point of the function.
  */
 class DeleteFunctionAction extends ListingContextAction {

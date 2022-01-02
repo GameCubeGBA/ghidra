@@ -30,6 +30,7 @@ import ghidra.async.AsyncUtils;
  * @param <E> the type of object consumed, i.e., provided by the controlling iterator
  * @param <T> the type of object produced, i.e., provided by the subordinate asynchronous task
  */
+@FunctionalInterface
 public interface AsyncLoopFirstActionConsumesAndProduces<R, E, T>
 		extends BiConsumer<E, AsyncLoopHandlerForFirst<R, T>> {
 	// Nothing

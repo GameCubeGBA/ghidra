@@ -100,9 +100,9 @@ public final class DexAnalysisState implements AnalysisState {
 	}
 
 	/**
-	 * Return persistent <code>DexAnalysisState</code> which corresponds to the specified program instance.
+	 * Return persistent {@code DexAnalysisState} which corresponds to the specified program instance.
 	 * @param program is the specified program instance
-	 * @return <code>DexAnalysisState</code> for specified program instance
+	 * @return {@code DexAnalysisState} for specified program instance
 	 * @throws IOException if there are problems during construction of the state object
 	 */
     public static synchronized DexAnalysisState getState(Program program) throws IOException {

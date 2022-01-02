@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import ghidra.program.model.mem.MemoryAccessException;
 import ghidra.util.exception.CancelledException;
 
+@FunctionalInterface
 public interface DisambiguateStrategy {
 	/**
 	 * Generate (possibly multiple) hashes that can be used to disambiguate an n-gram and its block from other

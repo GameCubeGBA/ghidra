@@ -95,7 +95,7 @@ public class FidSearchResultFrame extends JFrame implements FidQueryCloseListene
 
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		mainPanel.add(scrollPane, BorderLayout.CENTER);
-		mainPanel.add(filterPanel, BorderLayout.SOUTH);
+		mainPanel.add(filterPanel, BorderLayout.PAGE_END);
 
 		setJMenuBar(menuBar);
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);

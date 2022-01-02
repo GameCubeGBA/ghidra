@@ -213,7 +213,7 @@ public class DebuggerStaticMappingProvider extends ComponentProviderAdapter
 		mappingTable = new GTable(mappingTableModel);
 		mainPanel.add(new JScrollPane(mappingTable));
 		mappingFilterPanel = new GhidraTableFilterPanel<>(mappingTable, mappingTableModel);
-		mainPanel.add(mappingFilterPanel, BorderLayout.SOUTH);
+		mainPanel.add(mappingFilterPanel, BorderLayout.PAGE_END);
 
 		mappingTable.getSelectionModel().addListSelectionListener(evt -> {
 			myActionContext = new DebuggerStaticMappingActionContext(this,

@@ -17,6 +17,7 @@ package ghidra.trace.model;
 
 import ghidra.util.database.ObjectKey;
 
+@FunctionalInterface
 public interface TraceObject {
 	/**
 	 * Get an opaque unique id for this object, whose hash is immutable

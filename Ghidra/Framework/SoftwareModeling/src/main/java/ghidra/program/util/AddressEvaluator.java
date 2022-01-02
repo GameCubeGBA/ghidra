@@ -29,7 +29,7 @@ import ghidra.program.model.symbol.SymbolTable;
 import ghidra.util.NumericUtilities;
 
 /**
- * The <CODE>AddressEvaluator</CODE> class provides a way to evaluate a string
+ * The {@code AddressEvaluator} class provides a way to evaluate a string
  * that represents an address and resolve it to an address for a particular program.
  */
 public class AddressEvaluator {

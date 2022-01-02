@@ -24,6 +24,7 @@ import java.util.Arrays;
 import ghidra.util.NumericUtilities;
 
 //@ForDebugValueType(DebugValueType.INVALID)
+@FunctionalInterface
 public interface DebugValue {
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.TYPE)

@@ -19,7 +19,7 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 
 /**
- * The <CODE>FunctionStartParametersFieldLocation</CODE> class provides a field 
+ * The {@code FunctionStartParametersFieldLocation} class provides a field
  * for the open parenthesis of a function within a program location.
  */
 public class FunctionStartParametersFieldLocation extends FunctionSignatureFieldLocation {

@@ -22,6 +22,7 @@ import java.util.concurrent.CompletableFuture;
  * 
  * @see CachedMemory
  */
+@FunctionalInterface
 public interface MemoryWriter {
 	/**
 	 * Write target memory

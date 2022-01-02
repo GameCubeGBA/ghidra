@@ -68,7 +68,7 @@ public class DataTypeParser {
 	}
 
 	/**
-	 * <code>ProxyBitFieldDataType</code> provides acts as a proxy bitfield
+	 * {@code ProxyBitFieldDataType} provides acts as a proxy bitfield
 	 * whose specification may be used when defining a structure or 
 	 * union bitfield.  This datatype may not be directly applied to a program. 
 	 */

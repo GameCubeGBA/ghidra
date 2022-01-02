@@ -143,7 +143,7 @@ public class RepositoryPanel extends AbstractWizardJPanel {
 		buttonGroup = new ButtonGroup();
 
 		add(createListPanel(repositoryNames), BorderLayout.CENTER);
-		add(createNamePanel(), BorderLayout.SOUTH);
+		add(createNamePanel(), BorderLayout.PAGE_END);
 		addListeners();
 
 		if (readOnlyServerAccess) {
@@ -164,7 +164,7 @@ public class RepositoryPanel extends AbstractWizardJPanel {
 		JPanel innerPanel = new JPanel(new BorderLayout());
 		JLabel label = new GDLabel("Repository Names", SwingConstants.LEFT);
 		label.setBorder(BorderFactory.createEmptyBorder(0, 2, 0, 5));
-		innerPanel.add(label, BorderLayout.NORTH);
+		innerPanel.add(label, BorderLayout.PAGE_START);
 
 		listModel = new DefaultListModel<>();
 		for (String repositoryName : repositoryNames) {

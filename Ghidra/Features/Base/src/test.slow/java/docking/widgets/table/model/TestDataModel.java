@@ -70,16 +70,14 @@ public class TestDataModel extends AbstractSortedTableModel<DirData> {
 	public Class<?> getColumnClass(int columnIndex) {
 		switch (columnIndex) {
 			case 0:
-				return String.class;
-			case 1:
-				return String.class;
-			case 2:
+            case 4:
+            case 1:
+                return String.class;
+            case 2:
 				return Boolean.class;
 			case 3:
 				return Integer.class;
-			case 4:
-				return String.class;
-		}
+        }
 		return null;
 	}
 

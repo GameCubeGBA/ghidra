@@ -40,7 +40,7 @@ import ghidra.util.task.Task;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <CODE>GraphTask</CODE> is a threaded task creating either a block or call graph.
+ * {@code GraphTask} is a threaded task creating either a block or call graph.
  */
 public class BlockGraphTask extends Task {
 

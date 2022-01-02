@@ -144,7 +144,7 @@ class SplitBlockDialog extends DialogComponentProvider {
 		panelTwo.add(blockTwoLengthField);
 
 		JPanel mainPanel = new JPanel();
-		BoxLayout bl = new BoxLayout(mainPanel, BoxLayout.Y_AXIS);
+		BoxLayout bl = new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS);
 		mainPanel.setLayout(bl);
 		mainPanel.add(Box.createVerticalStrut(5));
 		mainPanel.add(panelOne);

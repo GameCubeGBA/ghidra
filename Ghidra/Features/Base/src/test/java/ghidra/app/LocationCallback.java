@@ -21,6 +21,7 @@ import ghidra.program.util.ProgramLocation;
 /**
  * 
  */
+@FunctionalInterface
 public interface LocationCallback {
 
 	void locationGenerated(ProgramLocation loc);

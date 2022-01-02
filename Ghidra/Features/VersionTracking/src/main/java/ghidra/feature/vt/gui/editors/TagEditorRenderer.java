@@ -223,7 +223,7 @@ public class TagEditorRenderer extends GListCellRenderer<TagState> {
 			// let our color match that of the scroll pane our list is inside of
 			panel.setBackground(scrollPane.getBackground());
 
-			panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+			panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
 			panel.add(tagIconLabel);
 			panel.add(Box.createHorizontalStrut(5));
 			panel.add(renderer);

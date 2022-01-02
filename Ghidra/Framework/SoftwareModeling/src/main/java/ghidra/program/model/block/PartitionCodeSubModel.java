@@ -15,7 +15,6 @@
  */
 package ghidra.program.model.block;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
 
@@ -40,7 +39,7 @@ import ghidra.util.graph.attributes.IntegerAttribute;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <CODE>PartitionCodeSubModel</CODE> (Model-P) defines subroutines which do not share code with
+ * {@code PartitionCodeSubModel} (Model-P) defines subroutines which do not share code with
  * other subroutines and may have one or more entry points.
  * Entry points represent anyone of a variety of flow entries, including a source, called, jump or
  * fall-through entry point.

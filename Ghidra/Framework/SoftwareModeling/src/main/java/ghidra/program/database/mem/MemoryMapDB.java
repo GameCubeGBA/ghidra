@@ -182,10 +182,10 @@ public class MemoryMapDB implements Memory, ManagerDB, LiveMemoryListener {
 	}
 
 	/**
-	 * Update the <code>allInitializedAddrSet</code> and <code>initializedLoadedAddrSet</code> with
+	 * Update the {@code allInitializedAddrSet} and <code>initializedLoadedAddrSet</code> with
 	 * relevant initialized addresses from the specified memory block. If block is not a
 	 * mapped-block and it may be a source to existing mapped-blocks then
-	 * <code>scanAllMappedBlocksIfNeeded</code> should be passed as <code>true</code> unless all
+	 * {@code scanAllMappedBlocksIfNeeded} should be passed as <code>true</code> unless all
 	 * mapped blocks will be processed separately.
 	 * 
 	 * @param block memory block

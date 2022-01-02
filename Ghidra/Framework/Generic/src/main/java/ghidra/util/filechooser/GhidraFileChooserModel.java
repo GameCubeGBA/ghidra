@@ -89,20 +89,20 @@ public interface GhidraFileChooserModel {
 	/**
 	 * Tests whether the file denoted by this abstract pathname is a
 	 * directory.
-	 * @return <code>true</code> if and only if the file denoted by this
+	 * @return {@code true} if and only if the file denoted by this
 	 *          abstract pathname exists <em>and</em> is a directory;
-	 *          <code>false</code> otherwise
+	 *          {@code false} otherwise
 	 */
 	boolean isDirectory(File file);
 
 	/**
 	 * Tests whether this abstract pathname is absolute.  The definition of
 	 * absolute pathname is system dependent.  On UNIX systems, a pathname is
-	 * absolute if its prefix is <code>"/"</code>.  On Microsoft Windows systems, a
+	 * absolute if its prefix is {@code "/"}.  On Microsoft Windows systems, a
 	 * pathname is absolute if its prefix is a drive specifier followed by
-	 * <code>"\\"</code>, or if its prefix is <code>"\\"</code>.
-	 * @return  <code>true</code> if this abstract pathname is absolute,
-	 *          <code>false</code> otherwise
+	 * {@code "\\"}, or if its prefix is <code>"\\"</code>.
+	 * @return  {@code true} if this abstract pathname is absolute,
+	 *          {@code false} otherwise
 	 */
 	boolean isAbsolute(File file);
 

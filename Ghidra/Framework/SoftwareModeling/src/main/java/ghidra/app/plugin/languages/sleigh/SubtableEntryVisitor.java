@@ -23,6 +23,7 @@ import ghidra.app.plugin.processors.sleigh.pattern.DisjointPattern;
  * 
  * @see SleighLanguages#traverseConstructors(SubtableSymbol, SubtableEntryVisitor)}
  */
+@FunctionalInterface
 public interface SubtableEntryVisitor extends VisitorResults {
 	/**
 	 * Callback to visit a constructor

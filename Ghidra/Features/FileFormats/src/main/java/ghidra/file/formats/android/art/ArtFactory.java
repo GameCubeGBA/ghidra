@@ -60,10 +60,9 @@ public final class ArtFactory {
 					case ArtConstants.VERSION_NOUGAT_MR2_PIXEL_RELEASE:
 						return new ArtHeader_NougatMR2Pixel(reader);
 					case ArtConstants.VERSION_OREO_RELEASE:
-						return new ArtHeader_Oreo(reader);
-					case ArtConstants.VERSION_OREO_DR1_RELEASE:
-						return new ArtHeader_Oreo(reader);//v043 and v044 are same format
-					case ArtConstants.VERSION_OREO_MR1_RELEASE:
+                    case ArtConstants.VERSION_OREO_DR1_RELEASE:
+                        return new ArtHeader_Oreo(reader);//v043 and v044 are same format
+                    case ArtConstants.VERSION_OREO_MR1_RELEASE:
 						return new ArtHeader_OreoMR1(reader);
 					case ArtConstants.VERSION_PIE_RELEASE:
 						return new ArtHeader_Pie(reader);

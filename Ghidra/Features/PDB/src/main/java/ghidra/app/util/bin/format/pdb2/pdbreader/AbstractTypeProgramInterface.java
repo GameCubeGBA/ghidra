@@ -506,33 +506,32 @@ public abstract class AbstractTypeProgramInterface implements TPI {
 		 * @return {@link String} of pretty output.
 		 */
 		protected String dump() {
-			StringBuilder builder = new StringBuilder();
-			builder.append("Hash--------------------------------------------------------");
-			builder.append("\nhashStreamNumber: ");
-			builder.append(hashStreamNumber);
-			builder.append("\nhashStreamNumberAuxiliary: ");
-			builder.append(hashStreamNumberAuxiliary);
-			builder.append("\nhashKeySize: ");
-			builder.append(hashKeySize);
-			builder.append("\nnumHashBins: ");
-			builder.append(numHashBins);
-			builder.append("\noffsetHashVals: ");
-			builder.append(offsetHashVals);
-			builder.append("\nlengthHashVals: ");
-			builder.append(lengthHashVals);
-			builder.append("\noffsetTypeIndexOffsetPairs: ");
-			builder.append(offsetTypeIndexOffsetPairs);
-			builder.append("\nlengthTypeIndexOffsetPairs: ");
-			builder.append(lengthTypeIndexOffsetPairs);
-			builder.append("\noffsetHashAdjustment: ");
-			builder.append(offsetHashAdjustment);
-			builder.append("\nlengthHashAdjustment: ");
-			builder.append(lengthHashAdjustment);
-			return builder.toString();
+            String builder = "Hash--------------------------------------------------------" +
+                    "\nhashStreamNumber: " +
+                    hashStreamNumber +
+                    "\nhashStreamNumberAuxiliary: " +
+                    hashStreamNumberAuxiliary +
+                    "\nhashKeySize: " +
+                    hashKeySize +
+                    "\nnumHashBins: " +
+                    numHashBins +
+                    "\noffsetHashVals: " +
+                    offsetHashVals +
+                    "\nlengthHashVals: " +
+                    lengthHashVals +
+                    "\noffsetTypeIndexOffsetPairs: " +
+                    offsetTypeIndexOffsetPairs +
+                    "\nlengthTypeIndexOffsetPairs: " +
+                    lengthTypeIndexOffsetPairs +
+                    "\noffsetHashAdjustment: " +
+                    offsetHashAdjustment +
+                    "\nlengthHashAdjustment: " +
+                    lengthHashAdjustment;
+			return builder;
 		}
 	}
 
-	private abstract class TiOff implements Comparable<TiOff> {
+	private abstract static class TiOff implements Comparable<TiOff> {
 		// Note that these should be unsigned 32-bit values from MSFT perspective, but we
 		// are falsely limiting them to signed (thus 31 bits).
 		protected int typeIndex;

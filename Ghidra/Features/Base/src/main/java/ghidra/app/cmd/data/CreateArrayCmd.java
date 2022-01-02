@@ -41,7 +41,7 @@ public class CreateArrayCmd implements Command {
 	 * A 0 element count is permitted but a minimum length will apply for all array instances.
 	 * @param dt the dataType of the elements in the array to be created.
 	 * @param elementLength the size of an element in the array.  Only used for Dynamic
-	 * datatype <code>dt</code> when {@link Dynamic#canSpecifyLength()} returns true.
+	 * datatype {@code dt} when {@link Dynamic#canSpecifyLength()} returns true.
 	 */	
 	public CreateArrayCmd(Address addr, int numElements, DataType dt, int elementLength) {
 		this.addr = addr;

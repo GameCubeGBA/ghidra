@@ -79,11 +79,10 @@ public class ContextRegisterInfo {
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(contextRegister);
-		sb.append(" ");
-		sb.append(value);
-		return sb.toString();
+        String sb = contextRegister +
+                " " +
+                value;
+		return sb;
 	}
 
 	@Override

@@ -23,7 +23,7 @@ import ghidra.program.model.listing.CodeUnit;
 import ghidra.program.model.listing.Program;
 
 /**
- * The <CODE>RefRepeatCommentFieldLocation</CODE> class contains specific location information
+ * The {@code RefRepeatCommentFieldLocation} class contains specific location information
  * within the Referenced Repeatable comments of an EOL comment field of a CodeUnitLocation object.
  */
 public class RefRepeatCommentFieldLocation extends CommentFieldLocation {

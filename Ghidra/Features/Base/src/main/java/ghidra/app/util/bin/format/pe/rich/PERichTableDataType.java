@@ -115,7 +115,7 @@ public class PERichTableDataType extends DynamicDataType {
 		return comps.toArray(new DataTypeComponent[comps.size()]);
 	}
 
-	private class PERichDanSDataType extends BuiltIn {
+	private static class PERichDanSDataType extends BuiltIn {
 		private final int mask;
 
 		public PERichDanSDataType(int mask) {
@@ -181,7 +181,7 @@ public class PERichTableDataType extends DynamicDataType {
 		}
 	}
 
-	private class PERichSignatureDataType extends BuiltIn {
+	private static class PERichSignatureDataType extends BuiltIn {
 
 		public PERichSignatureDataType() {
 			this(null);
@@ -245,7 +245,7 @@ public class PERichTableDataType extends DynamicDataType {
 		}
 	}
 
-	private class PERichXorDataType extends BuiltIn {
+	private static class PERichXorDataType extends BuiltIn {
 
 		private final int mask;
 

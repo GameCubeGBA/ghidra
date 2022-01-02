@@ -369,7 +369,7 @@ public class VTFunctionAssociationProvider extends ComponentProviderAdapter
 			}
 		});
 		statusPanel.add(statusLabel, BorderLayout.CENTER);
-		dualTablePanel.add(statusPanel, BorderLayout.SOUTH);
+		dualTablePanel.add(statusPanel, BorderLayout.PAGE_END);
 
 		functionComparisonPanel =
 			new FunctionComparisonPanel(this, tool, (Function) null, (Function) null);
@@ -492,9 +492,9 @@ public class VTFunctionAssociationProvider extends ComponentProviderAdapter
 		String sourceTitle = SOURCE_TITLE + " = " + sourceString;
 		sourceSessionLabel = new GDLabel(sourceTitle);
 		sourceSessionLabel.setBorder(BorderFactory.createEmptyBorder(0, 4, 0, 0));
-		sourceFunctionPanel.add(sourceSessionLabel, BorderLayout.NORTH);
+		sourceFunctionPanel.add(sourceSessionLabel, BorderLayout.PAGE_START);
 		sourceFunctionPanel.add(sourceThreadedTablePanel, BorderLayout.CENTER);
-		sourceFunctionPanel.add(sourceTableFilterPanel, BorderLayout.SOUTH);
+		sourceFunctionPanel.add(sourceTableFilterPanel, BorderLayout.PAGE_END);
 		return sourceFunctionPanel;
 	}
 
@@ -552,9 +552,9 @@ public class VTFunctionAssociationProvider extends ComponentProviderAdapter
 		String destinationTitle = DESTINATION_TITLE + " = " + destinationString;
 		destinationSessionLabel = new GDLabel(destinationTitle);
 		destinationSessionLabel.setBorder(BorderFactory.createEmptyBorder(0, 4, 0, 0));
-		destinationFunctionPanel.add(destinationSessionLabel, BorderLayout.NORTH);
+		destinationFunctionPanel.add(destinationSessionLabel, BorderLayout.PAGE_START);
 		destinationFunctionPanel.add(destinationThreadedTablePanel, BorderLayout.CENTER);
-		destinationFunctionPanel.add(destinationTableFilterPanel, BorderLayout.SOUTH);
+		destinationFunctionPanel.add(destinationTableFilterPanel, BorderLayout.PAGE_END);
 		return destinationFunctionPanel;
 	}
 

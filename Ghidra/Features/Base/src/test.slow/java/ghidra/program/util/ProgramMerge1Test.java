@@ -32,7 +32,7 @@ import ghidra.util.task.TaskMonitorAdapter;
 import junit.framework.TestCase;
 
 /**
- * <CODE>ProgramMergeTest</CODE> tests the <CODE>ProgramMerge</CODE> class
+ * {@code ProgramMergeTest} tests the <CODE>ProgramMerge</CODE> class
  * to verify it correctly applies various types of program differences from
  * program2 to program1.
  * The setup for this test class loads two programs that were saved to the

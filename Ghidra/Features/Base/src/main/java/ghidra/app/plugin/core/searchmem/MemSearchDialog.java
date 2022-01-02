@@ -334,7 +334,7 @@ class MemSearchDialog extends DialogComponentProvider {
 
 		JPanel searchPanel = new JPanel(new BorderLayout());
 		searchPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-		searchPanel.add(labelPanel, BorderLayout.WEST);
+		searchPanel.add(labelPanel, BorderLayout.LINE_START);
 		searchPanel.add(inputPanel, BorderLayout.CENTER);
 		return searchPanel;
 	}
@@ -353,19 +353,19 @@ class MemSearchDialog extends DialogComponentProvider {
 		JPanel newMainPanel = new JPanel();
 
 		newMainPanel.setLayout(new BorderLayout());
-		newMainPanel.add(buildSearchPanel(), BorderLayout.NORTH);
+		newMainPanel.add(buildSearchPanel(), BorderLayout.PAGE_START);
 		newMainPanel.add(buildOptionsPanel(), BorderLayout.CENTER);
 		advancedPanel = buildAdvancedPanel();
 
 		JPanel searchOptionsPanel = new JPanel(new BorderLayout());
-		newMainPanel.add(searchOptionsPanel, BorderLayout.SOUTH);
+		newMainPanel.add(searchOptionsPanel, BorderLayout.PAGE_END);
 
 		return newMainPanel;
 	}
 
 	private void setAdvancedPanelVisible(boolean visible) {
 		if (visible) {
-			mainPanel.add(advancedPanel, BorderLayout.EAST);
+			mainPanel.add(advancedPanel, BorderLayout.LINE_END);
 		}
 		else {
 			mainPanel.remove(advancedPanel);
@@ -384,7 +384,7 @@ class MemSearchDialog extends DialogComponentProvider {
 	private Container buildAdvancedPanel() {
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 10));
-		panel.add(createSeparatorPanel(), BorderLayout.WEST);
+		panel.add(createSeparatorPanel(), BorderLayout.LINE_START);
 		panel.add(buildAdvancedPanelContents());
 
 		return panel;
@@ -422,7 +422,7 @@ class MemSearchDialog extends DialogComponentProvider {
 		});
 
 		JPanel endianPanel = new JPanel();
-		endianPanel.setLayout(new BoxLayout(endianPanel, BoxLayout.Y_AXIS));
+		endianPanel.setLayout(new BoxLayout(endianPanel, BoxLayout.PAGE_AXIS));
 		endianPanel.add(littleEndian);
 		endianPanel.add(bigEndian);
 		endianPanel.setBorder(BorderFactory.createTitledBorder("Byte Order"));
@@ -447,7 +447,7 @@ class MemSearchDialog extends DialogComponentProvider {
 		undefinedCheckBox.addItemListener(stateListener);
 
 		JPanel codeUnitTypePanel = new JPanel();
-		codeUnitTypePanel.setLayout(new BoxLayout(codeUnitTypePanel, BoxLayout.Y_AXIS));
+		codeUnitTypePanel.setLayout(new BoxLayout(codeUnitTypePanel, BoxLayout.PAGE_AXIS));
 		codeUnitTypePanel.add(instructionsCheckBox);
 		codeUnitTypePanel.add(definedCheckBox);
 		codeUnitTypePanel.add(undefinedCheckBox);
@@ -458,7 +458,7 @@ class MemSearchDialog extends DialogComponentProvider {
 
 	private Component buildSelectionPanel() {
 		JPanel panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 		panel.setBorder(new TitledBorder("Selection Scope"));
 
 		searchSelectionRadioButton = new GRadioButton("Search Selection");
@@ -475,7 +475,7 @@ class MemSearchDialog extends DialogComponentProvider {
 
 		JPanel selectionPanel = new JPanel();
 		selectionPanel.setLayout(new BorderLayout());
-		selectionPanel.add(panel, BorderLayout.NORTH);
+		selectionPanel.add(panel, BorderLayout.PAGE_START);
 		return selectionPanel;
 	}
 
@@ -485,7 +485,7 @@ class MemSearchDialog extends DialogComponentProvider {
 		alignField.setName("Alignment");
 		alignField.setText("0");
 
-		JPanel alignPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		JPanel alignPanel = new JPanel(new FlowLayout(FlowLayout.TRAILING));
 		alignPanel.add(alignLabel);
 		alignPanel.add(alignField);
 		return alignPanel;
@@ -565,14 +565,14 @@ class MemSearchDialog extends DialogComponentProvider {
 		});
 		advancedButton.setFocusable(false);
 		JPanel advancedButtonPanel = new JPanel();
-		advancedButtonPanel.setLayout(new BoxLayout(advancedButtonPanel, BoxLayout.X_AXIS));
+		advancedButtonPanel.setLayout(new BoxLayout(advancedButtonPanel, BoxLayout.LINE_AXIS));
 		advancedButtonPanel.add(Box.createHorizontalGlue());
 		advancedButtonPanel.add(Box.createVerticalStrut(40));
 		advancedButtonPanel.add(advancedButton);
 
 		JPanel optionsPanel = new JPanel();
 		optionsPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 20, 10));
-		optionsPanel.setLayout(new BoxLayout(optionsPanel, BoxLayout.Y_AXIS));
+		optionsPanel.setLayout(new BoxLayout(optionsPanel, BoxLayout.PAGE_AXIS));
 		optionsPanel.add(northPanel);
 //		optionsPanel.add( southPanel );
 		optionsPanel.add(advancedButtonPanel);
@@ -598,14 +598,14 @@ class MemSearchDialog extends DialogComponentProvider {
 			"Searches all memory blocks including blocks that are not actually loaded in a running executable");
 
 		JPanel directionPanel = new JPanel();
-		directionPanel.setLayout(new BoxLayout(directionPanel, BoxLayout.Y_AXIS));
+		directionPanel.setLayout(new BoxLayout(directionPanel, BoxLayout.PAGE_AXIS));
 		directionPanel.add(loadedBlocks);
 		directionPanel.add(allBlocks);
 		directionPanel.setBorder(BorderFactory.createTitledBorder("Memory Block Types"));
 
 		JPanel extrasPanel = new JPanel();
 		extrasPanel.setLayout(new BorderLayout());
-		extrasPanel.add(directionPanel, BorderLayout.NORTH);
+		extrasPanel.add(directionPanel, BorderLayout.PAGE_START);
 		return extrasPanel;
 	}
 

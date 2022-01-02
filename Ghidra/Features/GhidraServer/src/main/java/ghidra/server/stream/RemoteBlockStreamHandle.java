@@ -28,7 +28,7 @@ import generic.random.SecureRandomFactory;
 import ghidra.util.StringUtilities;
 
 /**
- * <code>RemoteBlockStreamHandle</code> provides a serializable handle to a
+ * {@code RemoteBlockStreamHandle} provides a serializable handle to a
  * remote block stream. The handle is always instantiated by the server side and
  * passed to the client via remote serialization.
  * <p>
@@ -162,14 +162,13 @@ public abstract class RemoteBlockStreamHandle<T extends BlockStream> implements 
 	 * @see BlockStreamServer
 	 */
 	private String getStreamRequestHeader() {
-		StringBuilder buf = new StringBuilder();
-		buf.append(HEADER_PREFIX);
-		// streamID as 16-digit hex value
-		buf.append(StringUtilities.pad(Long.toHexString(streamID), '0', 16));
-		// authenticationToken as 16-digit hex value
-		buf.append(StringUtilities.pad(Long.toHexString(authenticationToken), '0', 16));
-		buf.append(HEADER_SUFFIX);
-		return buf.toString();
+        String buf = HEADER_PREFIX +
+                // streamID as 16-digit hex value
+                StringUtilities.pad(Long.toHexString(streamID), '0', 16) +
+                // authenticationToken as 16-digit hex value
+                StringUtilities.pad(Long.toHexString(authenticationToken), '0', 16) +
+                HEADER_SUFFIX;
+		return buf;
 	}
 
 	/**
@@ -184,12 +183,11 @@ public abstract class RemoteBlockStreamHandle<T extends BlockStream> implements 
 	 * @see BlockStreamServer
 	 */
 	private String getStreamTerminator() {
-		StringBuilder buf = new StringBuilder();
-		buf.append(TERM_PREFIX);
-		// streamID as 16-digit hex value
-		buf.append(StringUtilities.pad(Long.toHexString(streamID), '0', 16));
-		buf.append(TERM_SUFFIX);
-		return buf.toString();
+        String buf = TERM_PREFIX +
+                // streamID as 16-digit hex value
+                StringUtilities.pad(Long.toHexString(streamID), '0', 16) +
+                TERM_SUFFIX;
+		return buf;
 	}
 
 	/**
@@ -217,7 +215,7 @@ public abstract class RemoteBlockStreamHandle<T extends BlockStream> implements 
 	}
 
 	/**
-	 * <code>StreamRequest</code> is used to wrap the stream request
+	 * {@code StreamRequest} is used to wrap the stream request
 	 * registration data
 	 */
 	static class StreamRequest {

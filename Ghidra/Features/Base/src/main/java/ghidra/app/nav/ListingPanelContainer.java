@@ -64,7 +64,7 @@ public class ListingPanelContainer extends JPanel {
 		splitPane.setResizeWeight(0.5);
 		add(splitPane, BorderLayout.CENTER);
 		if (northComponent != null) {
-			add(northComponent, BorderLayout.NORTH);
+			add(northComponent, BorderLayout.PAGE_START);
 		}
 	}
 
@@ -78,7 +78,7 @@ public class ListingPanelContainer extends JPanel {
 		removeAll();
 		add(leftListingPanel);
 		if (northComponent != null) {
-			add(northComponent, BorderLayout.NORTH);
+			add(northComponent, BorderLayout.PAGE_START);
 		}
 	}
 
@@ -93,7 +93,7 @@ public class ListingPanelContainer extends JPanel {
 		}
 		northComponent = comp;
 		if (northComponent != null) {
-			add(northComponent, BorderLayout.NORTH);
+			add(northComponent, BorderLayout.PAGE_START);
 		}
 	}
 }

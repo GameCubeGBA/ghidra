@@ -183,10 +183,7 @@ public class EnumDataTypeHTMLRepresentation extends HTMLDataTypeRepresentation {
 			truncatedHtml.append(TAB).append(ELLIPSES).append(BR);
 		}
 
-		StringBuilder trailingLines = new StringBuilder();
-		trailingLines.append(BR).append("}").append(BR).append(TT_CLOSE);
-
-		String trailingString = trailingLines.toString();
+        String trailingString = BR + "}" + BR + TT_CLOSE;
 		fullHtml.append(trailingString);
 		truncatedHtml.append(trailingString);
 

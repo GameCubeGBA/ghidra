@@ -36,7 +36,7 @@ import ghidra.util.task.TaskMonitor;
  */
 public class Table {
 
-	private DBHandle db;
+	private final DBHandle db;
 
 	private TableRecord tableRecord;
 

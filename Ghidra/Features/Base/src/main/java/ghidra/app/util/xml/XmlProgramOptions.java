@@ -53,21 +53,21 @@ public class XmlProgramOptions {
 	/**
 	 * Used to signify that symbols should be overwritten when
 	 * necessary. This value is not being included in
-	 * the <code>ALL</code> constant.
+	 * the {@code ALL} constant.
 	 */
     public static final long OVERWRITE_SYMBOLS = 0x20000000L;
 
 	/**
 	 * Used to signify that references should be overwritten when
 	 * necessary. This value is not being included in
-	 * the <code>ALL</code> constant.
+	 * the {@code ALL} constant.
 	 */
     public static final long OVERWRITE_REFS = 0x40000000L;
 
 	/**
 	 * Used to signify that an existing program is being
 	 * updated. This value is not being included in
-	 * the <code>ALL</code> constant.
+	 * the {@code ALL} constant.
 	 */
     public static final long ADD_2_PROG = 0x80000000L;
 

@@ -99,9 +99,9 @@ public class MultiLineInputDialog extends DialogComponentProvider {
 		hintLabel.setFont(smallItalicFont);
 		hintLabel.setForeground(Color.LIGHT_GRAY);
 
-		dataPanel.add(messageLabel, BorderLayout.NORTH);
+		dataPanel.add(messageLabel, BorderLayout.PAGE_START);
 		dataPanel.add(new JScrollPane(inputTextArea), BorderLayout.CENTER);
-		dataPanel.add(hintLabel, BorderLayout.SOUTH);
+		dataPanel.add(hintLabel, BorderLayout.PAGE_END);
 
 		JLabel iconLabel = new GDLabel();
 		iconLabel.setIcon(icon);
@@ -112,11 +112,11 @@ public class MultiLineInputDialog extends DialogComponentProvider {
 
 		JPanel iconPanel = new JPanel(new BorderLayout());
 		iconPanel.add(iconLabel, BorderLayout.CENTER);
-		iconPanel.add(separatorPanel, BorderLayout.EAST);
+		iconPanel.add(separatorPanel, BorderLayout.LINE_END);
 
 		JPanel workPanel = new JPanel(new BorderLayout());
 		workPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-		workPanel.add(iconPanel, BorderLayout.WEST);
+		workPanel.add(iconPanel, BorderLayout.LINE_START);
 		workPanel.add(dataPanel, BorderLayout.CENTER);
 
 		return workPanel;

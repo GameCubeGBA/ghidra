@@ -167,17 +167,16 @@ public class SleighLanguageValidator {
 		if (verifierType != CSPECTAG_TYPE) {
 			throw new SleighException("Only cspec tag verification is supported");
 		}
-		StringBuilder buffer = new StringBuilder();
-		buffer.append("<compiler_spec>\n");
-		buffer.append("<default_proto>\n");
-		buffer.append("<prototype name=\"a\" extrapop=\"0\" stackshift=\"0\">\n");
-		buffer.append("<input/><output/>\n");
-		buffer.append("</prototype>\n");
-		buffer.append("</default_proto>\n");
-		buffer.append(document);
-		buffer.append("</compiler_spec>\n");
+        String buffer = "<compiler_spec>\n" +
+                "<default_proto>\n" +
+                "<prototype name=\"a\" extrapop=\"0\" stackshift=\"0\">\n" +
+                "<input/><output/>\n" +
+                "</prototype>\n" +
+                "</default_proto>\n" +
+                document +
+                "</compiler_spec>\n";
 		ErrorHandler errorHandler = new VerifierErrorHandler(title, 6);
-		StringReader reader = new StringReader(buffer.toString());
+		StringReader reader = new StringReader(buffer);
 
 		verifier.setErrorHandler(errorHandler);
 		try {

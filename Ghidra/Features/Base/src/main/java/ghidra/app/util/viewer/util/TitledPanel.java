@@ -66,13 +66,13 @@ public class TitledPanel extends JPanel {
 		title = titleLabel;
 		JLabel filler = new GDLabel();
 		filler.setPreferredSize(new Dimension(margin, filler.getPreferredSize().height));
-		titlePanel.add(filler, BorderLayout.WEST);
+		titlePanel.add(filler, BorderLayout.LINE_START);
 
 		titlePanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 		titlePanel.add(title, BorderLayout.CENTER);
-		titlePanel.add(iconPanel, BorderLayout.EAST);
+		titlePanel.add(iconPanel, BorderLayout.LINE_END);
 
-		add(titlePanel, BorderLayout.NORTH);
+		add(titlePanel, BorderLayout.PAGE_START);
 		add(panel, BorderLayout.CENTER);
 	}
 
@@ -109,7 +109,7 @@ public class TitledPanel extends JPanel {
 		}
 		if (comp != null) {
 			bottomComp = comp;
-			add(bottomComp, BorderLayout.SOUTH);
+			add(bottomComp, BorderLayout.PAGE_END);
 		}
 	}
 

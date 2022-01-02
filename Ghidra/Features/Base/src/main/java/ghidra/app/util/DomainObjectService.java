@@ -21,6 +21,7 @@ import ghidra.framework.model.DomainObject;
  * Simple interface for getting a DomainObject. This is used to delay the opening of
  * a domainObject until it is needed.
  */
+@FunctionalInterface
 public interface DomainObjectService {
 	DomainObject getDomainObject();
 }

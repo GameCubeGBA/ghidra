@@ -966,7 +966,8 @@ public class DBCachedObjectStore<T extends DBAnnotatedObject> implements ErrorHa
 		}
 	}
 
-	protected interface SupplierAllowsIOException<U> {
+	@FunctionalInterface
+    protected interface SupplierAllowsIOException<U> {
 		U get() throws IOException;
 	}
 
@@ -1053,10 +1054,7 @@ public class DBCachedObjectStore<T extends DBAnnotatedObject> implements ErrorHa
 	 */
 	@Override
 	public String toString() {
-		StringBuilder builder =
-			new StringBuilder("DBCachedObjectStore of " + objectType + ". Cache: ");
-		builder.append(StringUtils.join(cache.getCachedObjects(), ", "));
-		return builder.toString();
+        return "DBCachedObjectStore of " + objectType + ". Cache: " + StringUtils.join(cache.getCachedObjects(), ", ");
 	}
 
 	public void invalidateCache() {

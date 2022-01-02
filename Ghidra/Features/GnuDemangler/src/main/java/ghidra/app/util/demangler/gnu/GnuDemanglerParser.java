@@ -1418,7 +1418,7 @@ public class GnuDemanglerParser {
 // Inner Classes
 //==================================================================================================
 
-	private abstract class DemangledObjectBuilder {
+	private abstract static class DemangledObjectBuilder {
 
 		protected String demangled;
 
@@ -1889,7 +1889,7 @@ public class GnuDemanglerParser {
 	}
 
 	// {lambda(void const*, unsigned int)#1}
-	private class LambdaName {
+	private static class LambdaName {
 
 		private String fullText;
 		private String params;
@@ -1997,7 +1997,7 @@ public class GnuDemanglerParser {
 	 * <p>Generally, this class removes spaces within templates and parameter lists.   It will
 	 * remove some spaces, while converting some to underscores.
 	 */
-	private class CondensedString {
+	private static class CondensedString {
 
 		@SuppressWarnings("unused") // used by toString()
 		private String sourceText;
@@ -2094,7 +2094,7 @@ public class GnuDemanglerParser {
 	 * replaced with temporary values.   Clients can also use this class to get back the original
 	 * text.
 	 */
-	private abstract class ReplacedString {
+	private abstract static class ReplacedString {
 
 		static final String PLACEHOLDER = "REPLACEDSTRINGTEMPNAMEPLACEHOLDERVALUE";
 

@@ -29,7 +29,7 @@ import java.util.StringTokenizer;
 import ghidra.framework.store.Version;
 
 /**
- * <code>HistoryManager</code> manages version data for a versioned LocalFolderItem.
+ * {@code HistoryManager} manages version data for a versioned LocalFolderItem.
  * History data is maintained within the file 'historyt.dat' located within the
  * items data directory.
  */

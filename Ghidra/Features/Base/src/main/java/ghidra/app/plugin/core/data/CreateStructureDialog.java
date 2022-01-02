@@ -95,7 +95,7 @@ public class CreateStructureDialog extends DialogComponentProvider {
 
 	private JPanel buildMainPanel() {
 		JPanel mainPanel = new JPanel();
-		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
 
 		mainPanel.add(buildNameTextFieldPanel());
 		mainPanel.add(Box.createVerticalStrut(10));
@@ -110,7 +110,7 @@ public class CreateStructureDialog extends DialogComponentProvider {
 
 	private JPanel buildNameTextFieldPanel() {
 		JPanel namePanel = new JPanel();
-		namePanel.setLayout(new BoxLayout(namePanel, BoxLayout.Y_AXIS));
+		namePanel.setLayout(new BoxLayout(namePanel, BoxLayout.PAGE_AXIS));
 		nameBorder = BorderFactory.createTitledBorder("Create Structure By Name");
 		namePanel.setBorder(nameBorder);
 
@@ -171,7 +171,7 @@ public class CreateStructureDialog extends DialogComponentProvider {
 
 	private JPanel buildMatchingStructurePanel() {
 		JPanel structurePanel = new JPanel();
-		structurePanel.setLayout(new BoxLayout(structurePanel, BoxLayout.Y_AXIS));
+		structurePanel.setLayout(new BoxLayout(structurePanel, BoxLayout.PAGE_AXIS));
 		structureBorder = BorderFactory.createTitledBorder("Use Existing Structure");
 		structurePanel.setBorder(structureBorder);
 
@@ -244,7 +244,7 @@ public class CreateStructureDialog extends DialogComponentProvider {
 				return new Dimension(Integer.MAX_VALUE, getPreferredSize().height);
 			}
 		};
-		matchingStylePanel.setLayout(new BoxLayout(matchingStylePanel, BoxLayout.X_AXIS));
+		matchingStylePanel.setLayout(new BoxLayout(matchingStylePanel, BoxLayout.LINE_AXIS));
 		matchingStylePanel.setBorder(
 			new TitledBorder(BorderFactory.createEmptyBorder(), "Matching: "));
 
@@ -569,7 +569,7 @@ public class CreateStructureDialog extends DialogComponentProvider {
 
 	// this class is used instead of a cell renderer so that sorting will
 	// work on the table
-	/*package*/class StructureWrapper {
+	/*package*/static class StructureWrapper {
 		private Structure structure;
 
 		private StructureWrapper(Structure newStructure) {

@@ -38,7 +38,7 @@ public class GAddressRangeField extends JPanel {
 	private AddressFactory factory;
 
 	public GAddressRangeField() {
-		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+		setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
 
 		add(new JLabel("["));
 		fieldSpace.setFont(MONOSPACED);

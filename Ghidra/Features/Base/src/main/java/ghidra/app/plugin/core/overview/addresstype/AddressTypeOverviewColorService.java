@@ -50,7 +50,6 @@ public class AddressTypeOverviewColorService
 	private static final Color DEFAULT_UNDEFINED_COLOR = new Color(255, 51, 102);
 	private static final Color DEFAULT_UNINITIALIZED_COLOR = Color.BLACK;
 	private static final Color DEFAULT_EXTERNAL_REF_COLOR = new Color(255, 150, 150);
-	private static final Color DEFAULT_MARKER_COLOR = Color.WHITE;
 
 	Color instructionColor = DEFAULT_INSTRUCTION_COLOR;
 	Color dataColor = DEFAULT_DATA_COLOR;
@@ -88,17 +87,16 @@ public class AddressTypeOverviewColorService
 			return "";
 		}
 		AddressType addressType = getAddressType(address);
-		StringBuffer buffer = new StringBuffer();
-		buffer.append("<b>");
-		buffer.append(HTMLUtilities.escapeHTML(getName()));
-		buffer.append("</b>\n");
-		buffer.append(addressType.getDescription());
-		buffer.append(" (");
-		buffer.append(HTMLUtilities.escapeHTML(getBlockName(address)));
-		buffer.append(" ");
-		buffer.append(address);
-		buffer.append(" )");
-		return HTMLUtilities.toWrappedHTML(buffer.toString(), 0);
+        String buffer = "<b>" +
+                HTMLUtilities.escapeHTML(getName()) +
+                "</b>\n" +
+                addressType.getDescription() +
+                " (" +
+                HTMLUtilities.escapeHTML(getBlockName(address)) +
+                " " +
+                address +
+                " )";
+		return HTMLUtilities.toWrappedHTML(buffer, 0);
 	}
 
 	@Override
@@ -150,9 +148,7 @@ public class AddressTypeOverviewColorService
 		switch (addressType) {
 			case FUNCTION:
 				return functionColor;
-			case UNINITIALIZED:
-				return uninitializedColor;
-			case EXTERNAL_REF:
+            case EXTERNAL_REF:
 				return externalRefColor;
 			case INSTRUCTION:
 				return instructionColor;

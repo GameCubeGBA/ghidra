@@ -16,6 +16,7 @@
  */
 package docking.widgets.table;
 
+@FunctionalInterface
 public interface TableTextFilterFactory<ROW_OBJECT> {
 
 	/**

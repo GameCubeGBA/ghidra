@@ -39,6 +39,7 @@ import ghidra.util.classfinder.ExtensionPoint;
  * last-ditch effort when no opinion exists for the desired target. As such, one is never selected
  * automatically, and they are hidden from the manual record prompt by default.
  */
+@FunctionalInterface
 public interface DebuggerMappingOpinion extends ExtensionPoint {
 	/**
 	 * A comparator for sorting offers by decreasing confidence

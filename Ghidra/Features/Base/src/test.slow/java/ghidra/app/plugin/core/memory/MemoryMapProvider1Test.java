@@ -713,7 +713,7 @@ public class MemoryMapProvider1Test extends AbstractGhidraHeadedIntegrationTest 
 //			return a1.compareTo(a2);
 //		}
 //	}
-	private class StringComparator implements Comparator<String> {
+	private static class StringComparator implements Comparator<String> {
 		/* (non Javadoc)
 		 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
 		 */

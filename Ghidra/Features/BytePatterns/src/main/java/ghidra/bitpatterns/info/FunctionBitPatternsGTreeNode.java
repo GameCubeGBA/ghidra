@@ -120,12 +120,10 @@ public class FunctionBitPatternsGTreeNode extends GTreeNode {
 
 	@Override
 	public String getToolTip() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(count);
-		sb.append(" (");
-		sb.append(Double.toString(((Math.round(percentage * 10) * 1.0) / 10)));
-		sb.append("%)");
-		String tip = sb.toString();
+        String tip = count +
+                " (" +
+                Double.toString(((Math.round(percentage * 10) * 1.0) / 10)) +
+                "%)";
 		return tip;
 	}
 

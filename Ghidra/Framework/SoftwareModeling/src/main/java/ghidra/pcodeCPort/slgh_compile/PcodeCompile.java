@@ -882,12 +882,11 @@ public abstract class PcodeCompile {
     }
 
 	public static void entry(String name, Object... args) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(name).append("(");
-		sb.append(Arrays.stream(args).map(Object::toString).collect(Collectors.joining(", ")));
-		sb.append(")");
+        String sb = name + "(" +
+                Arrays.stream(args).map(Object::toString).collect(Collectors.joining(", ")) +
+                ")";
 
-		log.trace(sb.toString());
+		log.trace(sb);
 	}
 
 	static boolean isLocationIsh(Object o) {

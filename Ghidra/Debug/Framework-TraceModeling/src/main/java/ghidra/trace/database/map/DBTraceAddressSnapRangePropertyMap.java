@@ -54,7 +54,8 @@ public class DBTraceAddressSnapRangePropertyMap<T, DR extends AbstractDBTraceAdd
 		implements TraceAddressSnapRangePropertyMap<T>,
 		DBTraceDelegatingManager<DBTraceAddressSnapRangePropertyMapSpace<T, DR>> {
 
-	public interface DBTraceAddressSnapRangePropertyMapDataFactory<T, DR extends AbstractDBTraceAddressSnapRangePropertyMapData<T>> {
+	@FunctionalInterface
+    public interface DBTraceAddressSnapRangePropertyMapDataFactory<T, DR extends AbstractDBTraceAddressSnapRangePropertyMapData<T>> {
 		DR create(DBTraceAddressSnapRangePropertyMapTree<T, DR> tree, DBCachedObjectStore<DR> store,
 				DBRecord record);
 	}

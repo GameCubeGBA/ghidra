@@ -15,6 +15,7 @@
  */
 package ghidra.trace.util;
 
+@FunctionalInterface
 public interface TraceChangeManager {
 	void setChanged(TraceChangeRecord<?, ?> event);
 }

@@ -531,7 +531,7 @@ public abstract class AbstractEditorTest extends AbstractGhidraHeadedIntegration
 		}
 	}
 
-	protected class StatusListener extends CompositeEditorModelAdapter {
+	protected static class StatusListener extends CompositeEditorModelAdapter {
 		String status = null;
 		boolean beep = false;
 

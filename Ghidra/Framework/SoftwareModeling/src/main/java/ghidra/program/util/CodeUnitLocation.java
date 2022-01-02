@@ -21,13 +21,13 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 
 /**
- * <CODE>CodeUnitLocation</CODE> provides information about the location
- * in a program within a <CODE>CodeUnit</CODE>.
+ * {@code CodeUnitLocation} provides information about the location
+ * in a program within a {@code CodeUnit}.
  */
 public class CodeUnitLocation extends ProgramLocation {
 
 	/**
-	 * Create a new <CODE>CodeUnitLocation</CODE> for the given address.
+	 * Create a new {@code CodeUnitLocation} for the given address.
 	 * The address will be adjusted to the beginning of the code unit containing
 	 * that address(if it exists).  The original address can be retrieved using
 	 * the "getByteAddress()" method.
@@ -46,7 +46,7 @@ public class CodeUnitLocation extends ProgramLocation {
 	}
 
 	/**
-	 * Create a new <CODE>CodeUnitLocation</CODE> using the given information
+	 * Create a new {@code CodeUnitLocation} using the given information
 	 * @param program the program for obtaining the code unit
 	 * @param addr address of the location; should be on a code unit boundary.
 	 * @param byteAddr the address of specific byte within the code unit at the addr address.
@@ -63,7 +63,7 @@ public class CodeUnitLocation extends ProgramLocation {
 	}
 
 	/**
-	 * Create a new <CODE>CodeUnitLocation</CODE> for the given address.
+	 * Create a new {@code CodeUnitLocation} for the given address.
 	 * The address will be adjusted to the beginning of the code unit containing
 	 * that address(if it exists).  The original address can be retrieved using
 	 * the "getByteAddress()" method.

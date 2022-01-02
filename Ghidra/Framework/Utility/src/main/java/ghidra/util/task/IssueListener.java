@@ -18,6 +18,7 @@ package ghidra.util.task;
 
 import ghidra.util.Issue;
 
+@FunctionalInterface
 public interface IssueListener {
 	void issueReported(Issue issue);
 }

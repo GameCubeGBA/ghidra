@@ -37,7 +37,7 @@ import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>LocalDatabaseItem</code> provides a FolderItem implementation
+ * {@code LocalDatabaseItem} provides a FolderItem implementation
  * for a local database.  This item wraps an underlying VersionedDatabase
  * if the file-system is versioned, otherwise a PrivateDatabase is wrapped.
  * <p>
@@ -353,7 +353,7 @@ public class LocalDatabaseItem extends LocalFolderItem implements DatabaseItem {
 	}
 
 	/**
-	 * <code>LocalVersionedDbListener</code> provides a listener 
+	 * {@code LocalVersionedDbListener} provides a listener
 	 * which maintains checkout and history data in response to 
 	 * VersionedDatabase callbacks.
 	 */

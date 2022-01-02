@@ -34,16 +34,15 @@ public class SectionContribution200 extends AbstractSectionContribution {
 
 	@Override
 	String dumpInternals() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("isect: ");
-		builder.append(isect);
-		builder.append("\noffset: ");
-		builder.append(offset);
-		builder.append("\nlength: ");
-		builder.append(length);
-		builder.append("\nimod: ");
-		builder.append(imod);
-		return builder.toString();
+        String builder = "isect: " +
+                isect +
+                "\noffset: " +
+                offset +
+                "\nlength: " +
+                length +
+                "\nimod: " +
+                imod;
+		return builder;
 	}
 
 }

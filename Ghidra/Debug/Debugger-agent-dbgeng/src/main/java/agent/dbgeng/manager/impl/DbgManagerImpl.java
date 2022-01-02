@@ -1380,7 +1380,7 @@ public class DbgManagerImpl implements DbgManager {
 		}
 	}
 
-	class SavedFocus implements AutoCloseable {
+	static class SavedFocus implements AutoCloseable {
 		final DebugSystemObjects so;
 		DebugThreadId tid = null;
 

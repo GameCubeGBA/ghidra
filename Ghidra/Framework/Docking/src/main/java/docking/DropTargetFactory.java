@@ -21,6 +21,7 @@ import java.awt.Component;
 /** 
  * A factory for installing drop handlers onto components.
  */
+@FunctionalInterface
 public interface DropTargetFactory {
 
     /**

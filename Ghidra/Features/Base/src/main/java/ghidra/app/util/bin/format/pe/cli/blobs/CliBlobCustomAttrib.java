@@ -62,7 +62,7 @@ public class CliBlobCustomAttrib extends CliBlob {
 	private static final int CLIBLOBCUSTOMATTRIB_UTF8_LOW = 0x1F;
 	private static final int CLIBLOBCUSTOMATTRIB_UTF8_HIGH = 0x7F;
 
-	private class CliFixedArg {
+	private static class CliFixedArg {
 		private CliElementType elem;
 		private Object value;
 
@@ -80,7 +80,7 @@ public class CliBlobCustomAttrib extends CliBlob {
 		}
 	}
 
-	private class CliNamedArg {
+	private static class CliNamedArg {
 		private int fieldOrProp;
 		private CliElementType fieldOrPropType;
 		private String fieldOrPropName;
@@ -366,31 +366,29 @@ public class CliBlobCustomAttrib extends CliBlob {
 				CliElementType baseTypeCode = param.getType().baseTypeCode;
 				switch (baseTypeCode) {
 					case ELEMENT_TYPE_BOOLEAN:
-						addFixedArg(processFixedArgs, baseTypeCode, reader.readNextByte());
+
+                    case ELEMENT_TYPE_I1:
+                        addFixedArg(processFixedArgs, baseTypeCode, reader.readNextByte());
 						break;
 
 					case ELEMENT_TYPE_CHAR:
-						addFixedArg(processFixedArgs, baseTypeCode, reader.readNextShort());
+
+                    case ELEMENT_TYPE_I2:
+                        addFixedArg(processFixedArgs, baseTypeCode, reader.readNextShort());
 						break;
 
-					case ELEMENT_TYPE_I1:
-						addFixedArg(processFixedArgs, baseTypeCode, reader.readNextByte());
-						break;
-
-					case ELEMENT_TYPE_U1:
+                    case ELEMENT_TYPE_U1:
 						addFixedArg(processFixedArgs, baseTypeCode, reader.readNextUnsignedByte());
 						break;
 
-					case ELEMENT_TYPE_I2:
-						addFixedArg(processFixedArgs, baseTypeCode, reader.readNextShort());
-						break;
-
-					case ELEMENT_TYPE_U2:
+                    case ELEMENT_TYPE_U2:
 						addFixedArg(processFixedArgs, baseTypeCode, reader.readNextUnsignedShort());
 						break;
 
 					case ELEMENT_TYPE_I4:
-						addFixedArg(processFixedArgs, baseTypeCode, reader.readNextInt());
+
+                    case ELEMENT_TYPE_VALUETYPE:
+                        addFixedArg(processFixedArgs, baseTypeCode, reader.readNextInt());
 						break;
 
 					case ELEMENT_TYPE_U4:
@@ -400,7 +398,7 @@ public class CliBlobCustomAttrib extends CliBlob {
 					case ELEMENT_TYPE_I8:
 						addFixedArg(processFixedArgs, baseTypeCode, reader.readNextByte());
 						processFixedArgs.add(
-							new CliFixedArg(param.getType().baseTypeCode, reader.readNextLong()));
+                                new CliFixedArg(param.getType().baseTypeCode, reader.readNextLong()));
 						break;
 
 					case ELEMENT_TYPE_U8:
@@ -426,11 +424,7 @@ public class CliBlobCustomAttrib extends CliBlob {
 						}
 						break;
 
-					case ELEMENT_TYPE_VALUETYPE:
-						addFixedArg(processFixedArgs, baseTypeCode, reader.readNextInt());
-						break;
-
-					default:
+                    default:
 						Msg.info(this,
 							"A CustomAttrib with an unprocessed element type was deteceted: " +
 								param.getRepresentation());

@@ -26,7 +26,7 @@ import docking.action.KeyBindingData;
 
 
 /**
- * <CODE>ClearFunctionAction</CODE> allows the user to perform a clear of function data 
+ * {@code ClearFunctionAction} allows the user to perform a clear of function data
  * at the entry point of the function.
  * <p>
  * The actual work performed by this action depends upon the location of the cursor in the 

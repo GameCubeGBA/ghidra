@@ -31,6 +31,7 @@ import ghidra.util.task.TaskMonitor;
  * {@link GFileSystem} add-on interface to allow filesystems to override how image files
  * are converted into viewable {@link Icon} instances.
  */
+@FunctionalInterface
 public interface GIconProvider {
 
 	/**

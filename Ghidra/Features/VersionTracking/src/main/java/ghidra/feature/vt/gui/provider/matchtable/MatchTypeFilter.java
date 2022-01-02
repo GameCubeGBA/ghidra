@@ -49,7 +49,7 @@ public class MatchTypeFilter extends CheckBoxBasedAncillaryFilter<VTMatch> {
 // Inner Classes
 //==================================================================================================
 
-	private class AssociationTypeCheckBoxInfo extends CheckBoxInfo<VTMatch> {
+	private static class AssociationTypeCheckBoxInfo extends CheckBoxInfo<VTMatch> {
 
 		private VTAssociationType associationType;
 

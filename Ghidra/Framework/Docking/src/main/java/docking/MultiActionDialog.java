@@ -116,7 +116,7 @@ public class MultiActionDialog extends DialogComponentProvider {
 
 		innerPanel.setBorder(BorderFactory.createTitledBorder("Actions"));
 
-		JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEADING));
 
 		Icon icon = UIManager.getIcon("OptionPane.warningIcon");
 		panel.add(new GIconLabel(icon));
@@ -153,7 +153,7 @@ public class MultiActionDialog extends DialogComponentProvider {
 
 		innerPanel.add(listScrollPane, BorderLayout.CENTER);
 
-		mainPanel.add(panel, BorderLayout.NORTH);
+		mainPanel.add(panel, BorderLayout.PAGE_START);
 		mainPanel.add(innerPanel, BorderLayout.CENTER);
 		return mainPanel;
 	}

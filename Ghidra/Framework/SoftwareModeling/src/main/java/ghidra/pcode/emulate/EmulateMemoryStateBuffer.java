@@ -24,7 +24,7 @@ import ghidra.program.model.mem.Memory;
 import ghidra.program.model.mem.MemoryAccessException;
 
 /**
- * <code>MemoryStateBuffer</code> provides a MemBuffer for instruction parsing use
+ * {@code MemoryStateBuffer} provides a MemBuffer for instruction parsing use
  * which wraps an emulator MemoryState.  This implementation wraps all specified 
  * memory offsets within the associated address space.
  */

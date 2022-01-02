@@ -16,11 +16,9 @@
 package ghidra.program.model.data;
 
 /**
- * <code>Undefined</code> identifies an undefined data type
+ * {@code Undefined} identifies an undefined data type
  */
 public abstract class Undefined extends BuiltIn {
-
-	private static final long serialVersionUID = 1;
 
 	protected Undefined(String name, DataTypeManager dtm) {
 		super(CategoryPath.ROOT, name, dtm);

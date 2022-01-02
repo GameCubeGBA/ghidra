@@ -22,7 +22,7 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 
 /**
- * The <CODE>FunctionCallFixupFieldLocation</CODE> class provides specific information
+ * The {@code FunctionCallFixupFieldLocation} class provides specific information
  * about the Function call-fixup field within a program location.
  */
 public class FunctionCallFixupFieldLocation extends FunctionLocation {

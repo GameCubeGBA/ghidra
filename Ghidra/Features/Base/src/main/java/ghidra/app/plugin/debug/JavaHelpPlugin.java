@@ -247,7 +247,7 @@ public class JavaHelpPlugin extends Plugin implements FrontEndable {
 		out.println("     HELP-LOCATION: " + helpLoc);
 	}
 
-	private class HelpInfoObject implements Comparable<HelpInfoObject> {
+	private static class HelpInfoObject implements Comparable<HelpInfoObject> {
 
 		private Object helpObject;
 		private HelpLocation location;

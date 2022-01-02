@@ -25,8 +25,8 @@ import ghidra.program.model.listing.Variable;
 import ghidra.program.model.symbol.Symbol;
 
 /**
- * <CODE>VariableLocation</CODE> provides information about the location
- * on a variable within a <CODE>Function</CODE>.
+ * {@code VariableLocation} provides information about the location
+ * on a variable within a {@code Function}.
  */
 public class VariableLocation extends FunctionLocation {
 

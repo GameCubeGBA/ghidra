@@ -105,12 +105,11 @@ public class User implements Comparable<User>, Serializable {
 	 */
 	@Override
 	public String toString() {
-		StringBuilder buf = new StringBuilder();
-		buf.append(name);
-		buf.append(" (");
-		buf.append(types[permission]);
-		buf.append(")");
-		return buf.toString();
+        String buf = name +
+                " (" +
+                types[permission] +
+                ")";
+		return buf;
 	}
 
 	@Override

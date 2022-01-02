@@ -91,10 +91,6 @@ public class MDString extends MDParsableItem {
 		return byteString;
 	}
 
-	public boolean crcPass() {
-		return crcPass;
-	}
-
 	// Information gleaned from lists.cs.uiuc.edu/pipermail/cfe-commits/Week-of-
 	//  Mon-20150324/101952.html
 	// '??_C@_' <char-type> <literal-length> <encoded-crc> <encoded-string> '@'
@@ -139,11 +135,8 @@ public class MDString extends MDParsableItem {
 		crcNumber.parse();
 		crcVal = crcNumber.getValue().longValue();
 		switch (charType) {
-			case '0': // char string
-				typeSize = 1;
-				name = "`string'";
-				break;
-			case '1': // wchar_t string
+            // char string
+            case '1': // wchar_t string
 				typeSize = 2;
 				name = "`string'";
 				break;
@@ -264,7 +257,7 @@ public class MDString extends MDParsableItem {
 	 * This class is responsible for performing Cyclic Redundancy Check (CRC) calculations
 	 * using the CRC-32 polynomial and prefill.
 	 */
-	private class CrcChecker {
+	private static class CrcChecker {
 		long crc;
 
 		private long reflectBits(long val) {
@@ -280,13 +273,46 @@ public class MDString extends MDParsableItem {
 
 		private void crcCalc(byte val) {
 			long longByte = val;
-			for (int i = 0; i < 8; i++) {
-				crc <<= 1;
-				if ((((crc >> 32) ^ longByte) & 0x01L) != 0x00L) {
-					crc ^= 0x04c11db7L; // xor with polynomial
-				}
-				longByte >>= 1;
+			crc <<= 1;
+			if ((((crc >> 32) ^ longByte) & 0x01L) != 0x00L) {
+				crc ^= 0x04c11db7L; // xor with polynomial
 			}
+			longByte >>= 1;
+			crc <<= 1;
+			if ((((crc >> 32) ^ longByte) & 0x01L) != 0x00L) {
+				crc ^= 0x04c11db7L; // xor with polynomial
+			}
+			longByte >>= 1;
+			crc <<= 1;
+			if ((((crc >> 32) ^ longByte) & 0x01L) != 0x00L) {
+				crc ^= 0x04c11db7L; // xor with polynomial
+			}
+			longByte >>= 1;
+			crc <<= 1;
+			if ((((crc >> 32) ^ longByte) & 0x01L) != 0x00L) {
+				crc ^= 0x04c11db7L; // xor with polynomial
+			}
+			longByte >>= 1;
+			crc <<= 1;
+			if ((((crc >> 32) ^ longByte) & 0x01L) != 0x00L) {
+				crc ^= 0x04c11db7L; // xor with polynomial
+			}
+			longByte >>= 1;
+			crc <<= 1;
+			if ((((crc >> 32) ^ longByte) & 0x01L) != 0x00L) {
+				crc ^= 0x04c11db7L; // xor with polynomial
+			}
+			longByte >>= 1;
+			crc <<= 1;
+			if ((((crc >> 32) ^ longByte) & 0x01L) != 0x00L) {
+				crc ^= 0x04c11db7L; // xor with polynomial
+			}
+			longByte >>= 1;
+			crc <<= 1;
+			if ((((crc >> 32) ^ longByte) & 0x01L) != 0x00L) {
+				crc ^= 0x04c11db7L; // xor with polynomial
+			}
+			longByte >>= 1;
 		}
 
 		/**
@@ -310,5 +336,3 @@ public class MDString extends MDParsableItem {
 	}
 }
 
-/******************************************************************************/
-/******************************************************************************/

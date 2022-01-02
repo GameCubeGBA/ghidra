@@ -119,7 +119,7 @@ public class FileViewer extends JPanel implements Observer {
 
 		add(toolbar, BorderLayout.PAGE_START);
 		add(scrollPane, BorderLayout.CENTER);
-		add(slider, BorderLayout.EAST);
+		add(slider, BorderLayout.LINE_END);
 
 		// Subscribe to get FV events.
 		eventListener.addObserver(this);
@@ -203,7 +203,9 @@ public class FileViewer extends JPanel implements Observer {
 				break;
 
 			case FILE_CHANGED:
-				reloadFile();
+
+            case RELOAD_FILE:
+                reloadFile();
 				break;
 
 			case INCREMENT_SELECTION:
@@ -231,11 +233,7 @@ public class FileViewer extends JPanel implements Observer {
 				}
 				break;
 
-			case RELOAD_FILE:
-				reloadFile();
-				break;
-
-			case SCROLL_HOME:
+            case SCROLL_HOME:
 				viewTopOfFile();
 				setScrollLock(true);
 				break;

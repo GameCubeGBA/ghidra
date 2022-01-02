@@ -330,7 +330,7 @@ public class AssemblyDualTextField {
 			});
 			button.setActionCommand(CMD_EXHAUST);
 			controls.add(button);
-			content.add(controls, BorderLayout.SOUTH);
+			content.add(controls, BorderLayout.PAGE_END);
 		}
 
 	}
@@ -691,7 +691,7 @@ public class AssemblyDualTextField {
 	/**
 	 * A demonstration of the assembly GUI outside of Ghidra
 	 */
-	public class AssemblyDualTextFieldDemo implements GhidraLaunchable {
+	public static class AssemblyDualTextFieldDemo implements GhidraLaunchable {
 		public final LanguageID DEMO_LANG_ID = new LanguageID("x86:LE:64:default");
 		public final String ADDR_FORMAT = "@%08x:";
 		long curAddr = 0;
@@ -704,7 +704,7 @@ public class AssemblyDualTextField {
 			dialog.setLayout(new BorderLayout());
 
 			Box hbox = Box.createHorizontalBox();
-			dialog.add(hbox, BorderLayout.NORTH);
+			dialog.add(hbox, BorderLayout.PAGE_START);
 
 			JLabel addrlabel = new GDLabel(String.format(ADDR_FORMAT, curAddr));
 			hbox.add(addrlabel);

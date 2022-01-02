@@ -17,6 +17,7 @@
 package ghidra.util.task;
 
 
+@FunctionalInterface
 public interface BusyListener {
     void setBusy(boolean busy);
 }

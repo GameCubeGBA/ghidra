@@ -812,7 +812,7 @@ public class CategoryTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(newDt, ev.dt);
 	}
 
-	private class Event {
+	private static class Event {
 		String evName;
 		CategoryPath parent;
 		CategoryPath cat;
@@ -866,13 +866,13 @@ public class CategoryTest extends AbstractGhidraHeadedIntegrationTest {
 		public void dataTypeMoved(DataTypeManager dtm, DataTypePath oldPath, DataTypePath newPath) {
 			DataType dataType = dtm.getDataType(newPath);
 			events.add(new Event("DT Moved", newPath.getCategoryPath(), oldPath.getCategoryPath(),
-				null, dataType));
+                    null, dataType));
 		}
 
 		@Override
 		public void dataTypeRemoved(DataTypeManager dtm, DataTypePath path) {
 			events.add(new Event("DT Removed", path.getCategoryPath(), null,
-				path.getDataTypeName(), null));
+                    path.getDataTypeName(), null));
 		}
 
 		@Override

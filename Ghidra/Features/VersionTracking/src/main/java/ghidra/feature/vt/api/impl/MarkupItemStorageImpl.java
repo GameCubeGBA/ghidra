@@ -136,19 +136,18 @@ public class MarkupItemStorageImpl implements MarkupItemStorage {
 
 	@Override
 	public String toString() {
-		StringBuffer buffy = new StringBuffer();
-		buffy.append('\n').append(getClass().getSimpleName()).append('\n');
-		buffy.append('\t').append("Source Address          = ").append(sourceAddress).append('\n');
-		buffy.append('\t').append("Markup Type             = ").append(markupType).append('\n');
-		buffy.append('\t').append("Status                  = ").append(status).append('\n');
-		buffy.append('\t').append("Status Description      = ").append(statusDescription).append(
-			'\n');
-		buffy.append('\t').append("Source Value            = ").append(sourceValue).append(
-			'\n');
-		buffy.append('\t').append("Association             = ").append(association).append(
-			'\n');
+        String buffy = '\n' + getClass().getSimpleName() + '\n' +
+                '\t' + "Source Address          = " + sourceAddress + '\n' +
+                '\t' + "Markup Type             = " + markupType + '\n' +
+                '\t' + "Status                  = " + status + '\n' +
+                '\t' + "Status Description      = " + statusDescription +
+                '\n' +
+                '\t' + "Source Value            = " + sourceValue +
+                '\n' +
+                '\t' + "Association             = " + association +
+                '\n';
 
-		return buffy.toString();
+		return buffy;
 	}
 
 }

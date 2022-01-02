@@ -61,15 +61,15 @@ public interface MergeResolver {
 	 * Each outer array element represents a phase whose progress we wish to indicate.
 	 * <br>Examples:
 	 * <br>So for a simple phase which has no sub-phases return 
-	 * <code>
+	 * {@code
 	 * new String[][] {new String[] {"Phase A"}}
-	 * </code>
+	 * }
 	 * <br>So for a phase with 2 sub-phases return 
-	 * <code>
-	 * new String[][] { new String[] {"Phase A"}, 
+	 * {@code
+	 * new String[][] { new String[] {"Phase A"},
 	 *                  new String[] {"Phase A", "Sub-Phase 1},
 	 *                  new String[] {"Phase A", "Sub-Phase 2} }
-	 * </code>.
+	 * }.
 	 * @return an array of phases.
 	 */
     String[][] getPhases();

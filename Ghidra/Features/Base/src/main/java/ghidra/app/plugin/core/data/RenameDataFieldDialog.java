@@ -83,9 +83,9 @@ class RenameDataFieldDialog extends DialogComponentProvider {
 		Border border = BorderFactory.createTitledBorder("Data Field Name");
 		topPanel.setBorder(border);
 			
-		mainPanel.add(topPanel, BorderLayout.NORTH);
+		mainPanel.add(topPanel, BorderLayout.PAGE_START);
 
-		topPanel.add(recentChoices, BorderLayout.NORTH);
+		topPanel.add(recentChoices, BorderLayout.PAGE_START);
 
         choiceTextField = (JTextField)recentChoices.getEditor().getEditorComponent();
         setFocusComponent(choiceTextField);

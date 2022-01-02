@@ -16,8 +16,6 @@
 package db;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -41,11 +39,10 @@ import ghidra.util.Msg;
 import ghidra.util.filechooser.ExtensionFileFilter;
 import ghidra.util.layout.PairLayout;
 import ghidra.util.task.TaskMonitor;
-import ghidra.util.task.TaskMonitorAdapter;
 import utility.application.ApplicationLayout;
 
 /**
- * <code>DbViewer</code> is a diagnostic application for viewing a
+ * {@code DbViewer} is a diagnostic application for viewing a
  * Ghidra database.
  */
 public class DbViewer extends JFrame {
@@ -145,7 +142,7 @@ public class DbViewer extends JFrame {
 
 	private void createMainPanel() {
 		mainPanel = new JPanel(new BorderLayout());
-		JPanel northPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel northPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
 		JPanel subNorthPanel = new JPanel(new PairLayout(4, 10));
 		subNorthPanel.add(new GLabel("Database:"));
 		subNorthPanel.add(new GLabel(dbFile.getName()));
@@ -159,7 +156,7 @@ public class DbViewer extends JFrame {
 		combo.addActionListener(e -> updateTable());
 		subNorthPanel.add(combo);
 		northPanel.add(subNorthPanel);
-		mainPanel.add(northPanel, BorderLayout.NORTH);
+		mainPanel.add(northPanel, BorderLayout.PAGE_START);
 		getContentPane().add(mainPanel);
 		southPanel = createSouthPanel(tables[0]);
 		mainPanel.add(southPanel, BorderLayout.CENTER);
@@ -210,7 +207,7 @@ public class DbViewer extends JFrame {
 		}
 		JLabel statsLabel = new GDLabel(
 			recCnt + "   " + intNodeCnt + "   " + recNodeCnt + "   " + chainBufCnt + "   " + size);
-		panel.add(statsLabel, BorderLayout.SOUTH);
+		panel.add(statsLabel, BorderLayout.PAGE_END);
 
 		return panel;
 	}

@@ -29,7 +29,7 @@ public final class AddressLabelPair implements Serializable {
 	private String label;
 
 	/**
-	 * Creates a new <CODE>AddressLabelPair</CODE>.
+	 * Creates a new {@code AddressLabelPair}.
 	 * @param addr the address 
 	 * @param label the label
 	 */

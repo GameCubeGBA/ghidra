@@ -208,7 +208,7 @@ public class PathnameTablePanel extends JPanel {
 
 		JPanel buttonPanel = new JPanel(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.anchor = GridBagConstraints.NORTH;
+		gbc.anchor = GridBagConstraints.PAGE_START;
 		gbc.insets = new Insets(0, 0, 0, 0);
 		gbc.gridx = 0;
 		gbc.gridy = 0;
@@ -246,7 +246,7 @@ public class PathnameTablePanel extends JPanel {
 		setDefaultCellRenderer();
 
 		add(scrollPane, BorderLayout.CENTER);
-		add(buttonPanel, BorderLayout.EAST);
+		add(buttonPanel, BorderLayout.LINE_END);
 
 		ListSelectionModel selModel = pathnameTable.getSelectionModel();
 		selModel.addListSelectionListener(e -> {

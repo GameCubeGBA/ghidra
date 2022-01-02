@@ -45,7 +45,7 @@ import resources.icons.ImageIconWrapper;
 import utilities.util.reflection.ReflectionUtilities;
 
 /**
- * <code>DockingAction</code> defines a user action associated with a toolbar icon and/or
+ * {@code DockingAction} defines a user action associated with a toolbar icon and/or
  * menu item.  All actions must specify an action name which will be used to associate key bindings
  * and will be used as the popup menu item when needed.  This name should be unique across
  * the entire application.

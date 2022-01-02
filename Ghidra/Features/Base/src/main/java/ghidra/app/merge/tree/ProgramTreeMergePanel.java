@@ -118,12 +118,12 @@ class ProgramTreeMergePanel extends JPanel {
 		conflictPanel = createConflictPanel();
 
 		JPanel treePanel = new JPanel();
-		treePanel.setLayout(new BoxLayout(treePanel, BoxLayout.X_AXIS));
+		treePanel.setLayout(new BoxLayout(treePanel, BoxLayout.LINE_AXIS));
 		treePanel.add(panelOne);
 		treePanel.add(Box.createHorizontalStrut(10));
 		treePanel.add(panelTwo);
 
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		add(countPanel);
 		add(Box.createVerticalStrut(10));
 		add(treePanel);

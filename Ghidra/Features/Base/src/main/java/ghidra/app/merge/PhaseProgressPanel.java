@@ -100,7 +100,7 @@ public class PhaseProgressPanel extends JPanel {
 		messageIcon = new GIconLabel(INFORM_ICON);
 		messageIcon.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
 		messageLabel = new GDLabel(DEFAULT_INFO);
-		progressMessagePanel.add(messageIcon, BorderLayout.WEST);
+		progressMessagePanel.add(messageIcon, BorderLayout.LINE_START);
 		progressMessagePanel.add(messageLabel, BorderLayout.CENTER);
 		doSetMessage(DEFAULT_INFO);
 

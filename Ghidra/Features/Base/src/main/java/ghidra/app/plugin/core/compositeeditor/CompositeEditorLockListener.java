@@ -22,6 +22,7 @@ package ghidra.app.plugin.core.compositeeditor;
  * composite data editor. The lock/unlock mode controls whether or 
  * not the size of the composite data type being edited can change.
  */
+@FunctionalInterface
 public interface CompositeEditorLockListener {
     // Definitions of the types of state changes that can occur.
     int EDITOR_LOCKED = 1;

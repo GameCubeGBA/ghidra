@@ -32,12 +32,11 @@ public class TaskInfo extends AbstractTaskInfo {
 
 	@Override
 	protected String getLabelText() {
-		StringBuilder buf = new StringBuilder("Task: ");
-		buf.append(task.getDescription());
-		buf.append(" (");
-		buf.append(task.getPriority());
-		buf.append(")");
-		return buf.toString();
+        String buf = "Task: " + task.getDescription() +
+                " (" +
+                task.getPriority() +
+                ")";
+		return buf;
 	}
 
 	@Override

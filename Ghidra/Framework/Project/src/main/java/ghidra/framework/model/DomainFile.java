@@ -36,9 +36,9 @@ import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>DomainFile</code> provides a storage interface for project files.  A 
- * <code>DomainFile</code> is an immutable reference to file contained within a project.  The state 
- * of a <code>DomainFile</code> object does not track name/parent changes made to the referenced 
+ * {@code DomainFile} provides a storage interface for project files.  A
+ * {@code DomainFile} is an immutable reference to file contained within a project.  The state
+ * of a {@code DomainFile} object does not track name/parent changes made to the referenced
  * project file.
  */
 public interface DomainFile extends Comparable<DomainFile> {
@@ -198,7 +198,7 @@ public interface DomainFile extends Comparable<DomainFile> {
 			throws VersionException, IOException, CancelledException;
 
 	/**
-	 * Save the <CODE>DomainObject</CODE> associated with this file.
+	 * Save the {@code DomainObject} associated with this file.
 	 * @param monitor monitor for the task that is doing the save on the file
 	 * @throws FileInUseException if the file is open for update by someone else, or
 	 * a transient-read is in progress.

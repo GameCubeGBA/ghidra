@@ -88,7 +88,7 @@ public class XRefChooserDialog extends DialogComponentProvider {
 
 		filterPanel = new GhidraTableFilterPanel<>(table, model);
 		workPanel.add(new JScrollPane(table), BorderLayout.CENTER);
-		workPanel.add(filterPanel, BorderLayout.SOUTH);
+		workPanel.add(filterPanel, BorderLayout.PAGE_END);
 		return workPanel;
 	}
 

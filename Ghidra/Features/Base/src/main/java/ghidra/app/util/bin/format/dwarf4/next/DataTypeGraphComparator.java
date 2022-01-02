@@ -36,7 +36,8 @@ import ghidra.util.Msg;
  * at the resultant 'db' DataTypes that are created by the DataTypeManager.
  */
 public class DataTypeGraphComparator {
-	public interface DataTypePairObserver {
+	@FunctionalInterface
+    public interface DataTypePairObserver {
 
 		/**
 		 * Callback method called with a {@link DataType} from the first/left/src graph and

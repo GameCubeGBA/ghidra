@@ -101,11 +101,13 @@ public class DebuggerLogicalBreakpointServiceTest extends AbstractGhidraHeadedDe
 		}
 	}
 
-	protected interface ExceptionalSupplier<T, E extends Throwable> {
+	@FunctionalInterface
+    protected interface ExceptionalSupplier<T, E extends Throwable> {
 		T get() throws E;
 	}
 
-	protected interface ExceptionalRunnable<E extends Throwable> {
+	@FunctionalInterface
+    protected interface ExceptionalRunnable<E extends Throwable> {
 		void run() throws E;
 	}
 

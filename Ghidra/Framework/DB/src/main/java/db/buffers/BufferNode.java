@@ -17,7 +17,7 @@
 package db.buffers;
 
 /**
- * <code>BufferNode</code> is a DataBuffer wrapper which facilitates
+ * {@code BufferNode} is a DataBuffer wrapper which facilitates
  * linking node into various lists and status tracking.  
  * Linked lists supported, include:
  * <ul>
@@ -63,20 +63,20 @@ class BufferNode {
 	int diskCacheIndex = -1;
 	
 	/**
-	 * The <code>locked</code> flag is set true when the associated buffer has been
-	 * given out for update.  When the buffer is released, <code>locked</code> is set
+	 * The {@code locked} flag is set true when the associated buffer has been
+	 * given out for update.  When the buffer is released, {@code locked} is set
 	 * false.
 	 */
 	boolean locked = false;
 	
 	/**
-	 * The <code>empty</code> flag is set true when a buffer has been deleted and is
+	 * The {@code empty} flag is set true when a buffer has been deleted and is
 	 * available for re-use.  If false, the buffer has been allocated.
 	 */
 	boolean empty = false;
 	
 	/**
-	 * The <code>modified</code> flag is set true the first time it is modified
+	 * The {@code modified} flag is set true the first time it is modified
 	 * relative to the source file.  Once a save occurs to a buffer file, this can
 	 * be set false.  This flag remains false for original source buffers which
 	 * are not modified.
@@ -84,14 +84,14 @@ class BufferNode {
 	boolean modified = false;  // modification relative to original source file
 	
 	/**
-	 * The <code>isDirty</code> flag indicates that the associated buffer has been
+	 * The {@code isDirty} flag indicates that the associated buffer has been
 	 * modified since the last time it was written to the disk cache storage.
 	 * Once re-written to the disk cache, this flag is set to false.
 	 */
 	boolean isDirty = false;  // modification relative to cache file copy
 	
 	/**
-	 * The <code>snapshotTaken</code> flags are used by the RecoveryMgr to track if a 
+	 * The {@code snapshotTaken} flags are used by the RecoveryMgr to track if a
 	 * modified node has been written to the recovery file.
 	 */
 	boolean[] snapshotTaken = {false, false};

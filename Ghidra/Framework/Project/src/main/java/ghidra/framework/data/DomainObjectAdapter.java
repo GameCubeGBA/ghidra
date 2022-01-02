@@ -65,7 +65,7 @@ public abstract class DomainObjectAdapter implements DomainObject {
 	private Set<DomainObjectClosedListener> closeListeners =
 		new HashSet<>();
 
-	private ArrayList<Object> consumers;
+	private final ArrayList<Object> consumers;
 	protected Map<String, String> metadata = new LinkedHashMap<>();
 
 	// a flag indicating whether the domain object has changed

@@ -21,7 +21,7 @@ import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>AnalysisWorker</code> provides an analysis callback which will be 
+ * {@code AnalysisWorker} provides an analysis callback which will be
  * invoked while analysis is suspended.
  */
 public interface AnalysisWorker {

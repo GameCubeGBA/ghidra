@@ -64,16 +64,15 @@ class ConditionalHelper {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("{");
-        sb.append(inif ? "inif" : "!inif");
-        sb.append(":");
-        sb.append(sawelse ? "sawelse" : "!sawelse");
-        sb.append(":");
-        sb.append(handled ? "handled" : "!handled");
-        sb.append(":");
-        sb.append(copy ? "copy" : "!copy");
-        sb.append("}");
-        return sb.toString();
+        String sb = "{" +
+                (inif ? "inif" : "!inif") +
+                ":" +
+                (sawelse ? "sawelse" : "!sawelse") +
+                ":" +
+                (handled ? "handled" : "!handled") +
+                ":" +
+                (copy ? "copy" : "!copy") +
+                "}";
+        return sb;
     }
 }

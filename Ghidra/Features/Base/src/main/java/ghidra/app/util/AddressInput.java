@@ -204,7 +204,7 @@ public class AddressInput extends JPanel {
 
 		if (model.getSize() > 1) {
 			if (!comboAdded) {
-				add(combo, BorderLayout.WEST);
+				add(combo, BorderLayout.LINE_START);
 				comboAdded = true;
 			}
 		}
@@ -280,7 +280,7 @@ public class AddressInput extends JPanel {
 
 			spaceField.setEnabled(false);
 			remove(combo);
-			add(spaceField, BorderLayout.WEST);
+			add(spaceField, BorderLayout.LINE_START);
 			if (textField.getText().isEmpty()) {
 				updateSpaceField = true;
 			}
@@ -345,7 +345,7 @@ public class AddressInput extends JPanel {
 	public void showAddressSpaceCombo(boolean showCombo) {
 		if (showCombo) {
 			if (!comboAdded) {
-				add(combo, BorderLayout.WEST);
+				add(combo, BorderLayout.LINE_START);
 				comboAdded = true;
 			}
 		}

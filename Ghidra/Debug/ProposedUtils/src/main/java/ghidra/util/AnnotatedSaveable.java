@@ -188,7 +188,8 @@ public abstract class AnnotatedSaveable implements Saveable {
 		}
 	}
 
-	public interface FieldAccessorFactory extends Function<Field, FieldAccessor> {
+	@FunctionalInterface
+    public interface FieldAccessorFactory extends Function<Field, FieldAccessor> {
 	}
 
 	public static class AnnotatedSaveableException extends AssertionError {

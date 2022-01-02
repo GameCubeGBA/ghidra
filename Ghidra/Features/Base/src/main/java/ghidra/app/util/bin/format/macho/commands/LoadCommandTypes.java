@@ -34,7 +34,8 @@ public final class LoadCommandTypes {
 			MachHeader header) throws IOException, MachException {
 		int type = reader.peekNextInt();
 		switch (type) {
-			case LC_SEGMENT: {
+			case LC_SEGMENT:
+            case LC_SEGMENT_64: {
 				return SegmentCommand.createSegmentCommand(reader, header.is32bit());
 			}
 			case LC_SYMTAB: {
@@ -67,7 +68,10 @@ public final class LoadCommandTypes {
 			case LC_LOAD_DYLIB:
 			case LC_ID_DYLIB:
 			case LC_LOAD_UPWARD_DYLIB:
-			case LC_DYLD_ENVIRONMENT: {
+			case LC_DYLD_ENVIRONMENT:
+            case LC_LAZY_LOAD_DYLIB:
+            case LC_REEXPORT_DYLIB:
+            case LC_LOAD_WEAK_DYLIB: {
 				return DynamicLibraryCommand.createDynamicLibraryCommand(reader);
 			}
 			case LC_LOAD_DYLINKER:
@@ -77,7 +81,8 @@ public final class LoadCommandTypes {
 			case LC_PREBOUND_DYLIB: {
 				return PreboundDynamicLibraryCommand.createPreboundDynamicLibraryCommand(reader);
 			}
-			case LC_ROUTINES: {
+			case LC_ROUTINES:
+            case LC_ROUTINES_64: {
 				return RoutinesCommand.createRoutinesCommand(reader, header.is32bit());
 			}
 			case LC_SUB_FRAMEWORK: {
@@ -98,16 +103,7 @@ public final class LoadCommandTypes {
 			case LC_PREBIND_CKSUM: {
 				return PrebindChecksumCommand.createPrebindChecksumCommand(reader);
 			}
-			case LC_LOAD_WEAK_DYLIB: {
-				return DynamicLibraryCommand.createDynamicLibraryCommand(reader);
-			}
-			case LC_SEGMENT_64: {
-				return SegmentCommand.createSegmentCommand(reader, header.is32bit());
-			}
-			case LC_ROUTINES_64: {
-				return RoutinesCommand.createRoutinesCommand(reader, header.is32bit());
-			}
-			case LC_UUID: {
+            case LC_UUID: {
 				return UuidCommand.createUuidCommand(reader);
 			}
 			case LC_RPATH: {
@@ -121,10 +117,7 @@ public final class LoadCommandTypes {
 			case LC_DYLIB_CODE_SIGN_DRS: {
 				return LinkEditDataCommand.createLinkEditDataCommand(reader);
 			}
-			case LC_REEXPORT_DYLIB: {
-				return DynamicLibraryCommand.createDynamicLibraryCommand(reader);
-			}
-			case LC_ENCRYPTION_INFO: 
+            case LC_ENCRYPTION_INFO:
 			case LC_ENCRYPTION_INFO_64: {
 				return EncryptedInformationCommand.createEncryptedInformationCommand(reader,
 					header.is32bit());
@@ -145,10 +138,7 @@ public final class LoadCommandTypes {
 			case LC_SOURCE_VERSION: {
 				return SourceVersionCommand.createSourceVersionCommand(reader);
 			}
-			case LC_LAZY_LOAD_DYLIB: {
-				return DynamicLibraryCommand.createDynamicLibraryCommand(reader);
-			}
-			case LC_BUILD_VERSION: {
+            case LC_BUILD_VERSION: {
 				return BuildVersionCommand.createBuildVersionCommand(reader);
 			}
 			case LC_LINKER_OPTIONS: {

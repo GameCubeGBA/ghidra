@@ -71,9 +71,9 @@ class FunctionsXmlMgr {
 	 * are tagged as parameters.
 	 * <p>
 	 * DTD for the FUNCTION element:
-	 * <pre><code>
-	 * &lt;!ELEMENT FUNCTION (RETURN_TYPE?, ADDRESS_RANGE*, REGULAR_CMT?, REPEATABLE_CMT?, TYPEINFO_CMT?, STACK_FRAME?, REGISTER_VAR*)&gt;
-	 * </code></pre>
+	 * <pre>{@code
+	 * <!ELEMENT FUNCTION (RETURN_TYPE?, ADDRESS_RANGE*, REGULAR_CMT?, REPEATABLE_CMT?, TYPEINFO_CMT?, STACK_FRAME?, REGISTER_VAR*)>
+	 * }</pre>
 	 * <p>
 	 * @param parser the parser
 	 * @param overwriteConflicts true to overwrite any conflicts

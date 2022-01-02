@@ -236,9 +236,7 @@ public class ClangToken implements ClangNode {
 	}
 
 	public static ClangToken buildSpacer(ClangNode par, int indent, String indentStr) {
-		StringBuilder spacing = new StringBuilder("");
-		spacing.append(String.valueOf(indentStr).repeat(Math.max(0, indent)));
-		return new ClangSyntaxToken(par, spacing.toString());
+        return new ClangSyntaxToken(par, "" + String.valueOf(indentStr).repeat(Math.max(0, indent)));
 	}
 
 	@Override

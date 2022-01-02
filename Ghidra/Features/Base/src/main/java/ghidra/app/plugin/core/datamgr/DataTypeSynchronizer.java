@@ -324,41 +324,37 @@ public class DataTypeSynchronizer {
 		// this string allows us to force both tables to be the same width, which is 
 		// aesthetically pleasing
 		String spacerString = createHTMLSpacerString(htmlContent, otherContent);
-		StringBuilder buffy = new StringBuilder();
-		buffy.append("<HTML>");
 
-		// -we use CELLPADDING here to allow us to create a narrow column within the table
-		// -the CELLSPACING gives us some space around the narrow column
-		buffy.append("<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=5>");
+        String buffy = "<HTML>" +
 
-		buffy.append("<TR BORDER=LEFT>");
-		buffy.append("<TD VALIGN=\"TOP\">");
-		buffy.append("<B>").append(HTMLUtilities.escapeHTML(dataTypeManager.getName())).append(
-			"</B><HR NOSHADE>");
-		buffy.append(htmlContent);
+                // -we use CELLPADDING here to allow us to create a narrow column within the table
+                // -the CELLSPACING gives us some space around the narrow column
+                "<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=5>" +
+                "<TR BORDER=LEFT>" +
+                "<TD VALIGN=\"TOP\">" +
+                "<B>" + HTMLUtilities.escapeHTML(dataTypeManager.getName()) +
+                "</B><HR NOSHADE>" +
+                htmlContent +
 
-		// horizontal spacer below the inner table in order to force a minimum width
-		buffy.append("<TT>").append(spacerString).append("</TT>");
-		buffy.append("</TD>");
+                // horizontal spacer below the inner table in order to force a minimum width
+                "<TT>" + spacerString + "</TT>" +
+                "</TD>" +
 
-		// really narrow, black column that represents our table divider (like a vertical HR)
-		buffy.append("<TD WIDTH=\"1\" BGCOLOR=#000000>");
-		buffy.append("</TD>");
+                // really narrow, black column that represents our table divider (like a vertical HR)
+                "<TD WIDTH=\"1\" BGCOLOR=#000000>" +
+                "</TD>" +
+                "<TD VALIGN=\"TOP\">" +
+                "<B>" + HTMLUtilities.escapeHTML(sourceArchive.getName()) +
+                "</B><HR NOSHADE>" +
+                otherContent +
 
-		buffy.append("<TD VALIGN=\"TOP\">");
-		buffy.append("<B>").append(HTMLUtilities.escapeHTML(sourceArchive.getName())).append(
-			"</B><HR NOSHADE>");
+                // horizontal spacer below the inner table in order to force a minimum width
+                "<TT>" + spacerString + "</TT>" +
+                "</TD>" +
+                "</TR>" +
+                "</TABLE>";
 
-		buffy.append(otherContent);
-
-		// horizontal spacer below the inner table in order to force a minimum width
-		buffy.append("<TT>").append(spacerString).append("</TT>");
-		buffy.append("</TD>");
-		buffy.append("</TR>");
-
-		buffy.append("</TABLE>");
-
-		return buffy.toString();
+		return buffy;
 	}
 
 	private static HTMLDataTypeRepresentation getSourceHTMLRepresentation(DataType sourceDT,

@@ -148,12 +148,12 @@ public class InterpreterPanel extends JPanel implements OptionsChangeListener {
 
 		JPanel interior = new JPanel();
 		interior.setLayout(new BorderLayout());
-		interior.add(promptTextPane, BorderLayout.WEST);
+		interior.add(promptTextPane, BorderLayout.LINE_START);
 		interior.add(inputTextPane, BorderLayout.CENTER);
 
 		setLayout(new BorderLayout());
 		add(outputScrollPane, BorderLayout.CENTER);
-		add(interior, BorderLayout.SOUTH);
+		add(interior, BorderLayout.PAGE_END);
 
 		AbstractDocument document = (AbstractDocument) inputTextPane.getDocument();
 		document.setDocumentFilter(new DocumentFilter() {

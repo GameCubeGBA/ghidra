@@ -15,6 +15,7 @@
  */
 package docking.widgets.filter;
 
+@FunctionalInterface
 public interface TextFilterFactory {
 
 	/**

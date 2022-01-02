@@ -91,33 +91,29 @@ public class EnumColumnConstraint<T extends Enum<T>> implements ColumnConstraint
 	public String getConstraintValueTooltip() {
 		EnumConstraintEditor<T> editor = (EnumConstraintEditor<T>) getEditor(null);
 
-		StringBuilder buf = new StringBuilder();
+        String buf = "{" +
+                // @formatter:off
+                acceptableValues.stream()
+                        .map(editor::getElementDisplayName)
+                        .collect(Collectors.joining(", ")) +
+                // @formatter:on
 
-		buf.append("{");
-		// @formatter:off
-		buf.append(acceptableValues.stream()
-			.map(editor::getElementDisplayName)
-			.collect(Collectors.joining(", ")));
-		// @formatter:on
-
-		buf.append("}");
-		return buf.toString();
+                "}";
+		return buf;
 	}
 
 	@Override
 	public String getConstraintValueString() {
 
-		StringBuilder buf = new StringBuilder();
+        String buf = "{" +
+                // @formatter:off
+                acceptableValues.stream()
+                        .map(e -> e.toString())
+                        .collect(Collectors.joining(",")) +
+                // @formatter:on
 
-		buf.append("{");
-		// @formatter:off
-		buf.append(acceptableValues.stream()
-			.map(e ->  e.toString())
-			.collect(Collectors.joining(",")));
-		// @formatter:on
-
-		buf.append("}");
-		return buf.toString();
+                "}";
+		return buf;
 	}
 
 	@Override

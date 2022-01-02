@@ -16,6 +16,7 @@
  */
 package ghidra.app.util.viewer.listingpanel;
 
+@FunctionalInterface
 public interface StringSelectionListener {
 	void setStringSelection(String string);
 

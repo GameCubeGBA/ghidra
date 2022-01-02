@@ -84,9 +84,9 @@ public class FilterTextFieldTest {
 		};
 
 		JPanel mainPanel = new JPanel(new BorderLayout());
-		mainPanel.add(nonFocusComponent, BorderLayout.NORTH);
+		mainPanel.add(nonFocusComponent, BorderLayout.PAGE_START);
 		mainPanel.add(filterPartnerComponent, BorderLayout.CENTER);
-		mainPanel.add(filter, BorderLayout.SOUTH);
+		mainPanel.add(filter, BorderLayout.PAGE_END);
 
 		JFrame frame = new JFrame("Filter Text Field Test");
 		frame.setSize(400, 300);

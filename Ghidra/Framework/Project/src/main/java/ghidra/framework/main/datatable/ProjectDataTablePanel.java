@@ -484,7 +484,7 @@ public class ProjectDataTablePanel extends JPanel {
 		}
 	}
 
-	private class DateCellRenderer extends GTableCellRenderer {
+	private static class DateCellRenderer extends GTableCellRenderer {
 
 		@Override
 		public Component getTableCellRendererComponent(GTableCellRenderingData data) {
@@ -503,7 +503,7 @@ public class ProjectDataTablePanel extends JPanel {
 		}
 	}
 
-	private class TypeCellRenderer extends GTableCellRenderer {
+	private static class TypeCellRenderer extends GTableCellRenderer {
 
 		@Override
 		public Component getTableCellRendererComponent(GTableCellRenderingData data) {

@@ -68,7 +68,7 @@ class InfoPanel extends JPanel {
 	private void create() {
 		setLayout(new BorderLayout());
 		add(createImagePanel(), BorderLayout.CENTER);
-		add(createSouthPanel(), BorderLayout.SOUTH);
+		add(createSouthPanel(), BorderLayout.PAGE_END);
 		setBackground(bgColor);
 	}
 
@@ -137,7 +137,7 @@ class InfoPanel extends JPanel {
 		JPanel vPanel = new JPanel(new BorderLayout());
 		vPanel.setBackground(bgColor);
 		vPanel.add(buildVersionLabel(), BorderLayout.CENTER);
-		vPanel.add(buildJavaVersionComponent(), BorderLayout.SOUTH);
+		vPanel.add(buildJavaVersionComponent(), BorderLayout.PAGE_END);
 		return vPanel;
 	}
 
@@ -154,13 +154,13 @@ class InfoPanel extends JPanel {
 		ImageIcon cloudRevImage = ResourceManager.loadImage(CLOUD_REV_FILENAME);
 		if (cloudRevImage != null) {
 			JLabel cloudRevLabel = new GIconLabel(cloudRevImage);
-			panel.add(cloudRevLabel, BorderLayout.NORTH);
+			panel.add(cloudRevLabel, BorderLayout.PAGE_START);
 		}
 
 		ImageIcon cloudImage = ResourceManager.loadImage(CLOUD_FILENAME);
 		if (cloudImage != null) {
 			JLabel cloudLabel = new GIconLabel(cloudImage);
-			panel.add(cloudLabel, BorderLayout.SOUTH);
+			panel.add(cloudLabel, BorderLayout.PAGE_END);
 		}
 
 		panel.add(buildTextPanel(), BorderLayout.CENTER);

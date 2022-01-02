@@ -92,7 +92,7 @@ class InstructionInfoProvider extends ComponentProviderAdapter implements Domain
 	/**
 	 * Define the Main panel.
 	 *
-	 * @return JPanel the completed <CODE>Main Panel</CODE>
+	 * @return JPanel the completed {@code Main Panel}
 	 */
 	protected JPanel buildMainPanel(boolean isDynamic) {
 
@@ -120,7 +120,7 @@ class InstructionInfoProvider extends ComponentProviderAdapter implements Domain
 		dynamicUpdateCB.setAlignmentX(Component.CENTER_ALIGNMENT);
 		dynamicUpdateCB.addItemListener(e -> dynamicStateChanged());
 
-		mainPanel.add(dynamicUpdateCB, BorderLayout.SOUTH);
+		mainPanel.add(dynamicUpdateCB, BorderLayout.PAGE_END);
 		mainPanel.validate();
 
 		return mainPanel;

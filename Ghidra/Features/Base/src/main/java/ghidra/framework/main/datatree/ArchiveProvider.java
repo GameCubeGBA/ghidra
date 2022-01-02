@@ -24,6 +24,7 @@ import java.util.List;
  * An interface to be implemented by any class that can return a list of Archives.
  * For example, the tool's data type manager can return a list of archives within the project.
  */
+@FunctionalInterface
 public interface ArchiveProvider {
 
 	List<Archive> getArchives();

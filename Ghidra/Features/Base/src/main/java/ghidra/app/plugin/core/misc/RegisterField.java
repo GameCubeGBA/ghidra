@@ -264,7 +264,7 @@ public class RegisterField extends JTextField {
 	public static void main(String[] args) {
 		JFrame f = new JFrame("Test");
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.add(new JTextField("123"), BorderLayout.SOUTH);
+		panel.add(new JTextField("123"), BorderLayout.PAGE_END);
 		RegisterField rf = new RegisterField(1, Long.valueOf(1));
 		panel.add(rf, BorderLayout.CENTER);
 		f.getContentPane().add(panel);

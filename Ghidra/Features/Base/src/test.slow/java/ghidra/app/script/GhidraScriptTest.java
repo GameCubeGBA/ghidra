@@ -834,11 +834,11 @@ public class GhidraScriptTest extends AbstractGhidraHeadedIntegrationTest {
 		// nope
 	}
 
-	private class ATestInterface implements TestInterface {
+	private static class ATestInterface implements TestInterface {
 		// nope
 	}
 
-	private class BTestInterface implements TestInterface {
+	private static class BTestInterface implements TestInterface {
 		// nope
 	}
 
@@ -898,7 +898,7 @@ public class GhidraScriptTest extends AbstractGhidraHeadedIntegrationTest {
 		}
 	}
 
-	private class TestAddressableRowObject implements AddressableRowObject {
+	private static class TestAddressableRowObject implements AddressableRowObject {
 
 		private final Address address;
 

@@ -47,26 +47,25 @@ public class LazyBindState extends AbstractDyldInfoState {
 
 		File file = new File( getOrdinalName( ) );
 
-		StringBuffer buffer = new StringBuffer();
-		buffer.append(  getSegmentName( ) );
-		buffer.append( ' ' );
-		buffer.append( ' ' );
-		buffer.append(StringUtilities.pad(sectionName, ' ', -20));
-		buffer.append( ' ' );
-		buffer.append( ' ' );
-		buffer.append( sectionAddress );
-		buffer.append( ' ' );
-		buffer.append( ' ' );
-		buffer.append( Long.toHexString( lazyOffset ) );
-		buffer.append( ' ' );
-		buffer.append( ' ' );
-		buffer.append(StringUtilities.pad(file.getName(), ' ', -20));
-		buffer.append( ' ' );
-		buffer.append( ' ' );
-		buffer.append( symbolName );
-		buffer.append( ' ' );
-		buffer.append( ' ' );
-		return buffer.toString();
+        String buffer = getSegmentName() +
+                ' ' +
+                ' ' +
+                StringUtilities.pad(sectionName, ' ', -20) +
+                ' ' +
+                ' ' +
+                sectionAddress +
+                ' ' +
+                ' ' +
+                Long.toHexString(lazyOffset) +
+                ' ' +
+                ' ' +
+                StringUtilities.pad(file.getName(), ' ', -20) +
+                ' ' +
+                ' ' +
+                symbolName +
+                ' ' +
+                ' ';
+		return buffer;
 	}
 
 }

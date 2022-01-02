@@ -206,16 +206,14 @@ public class ProjectDataDeleteTask extends Task {
 			files += folderCount > 1 ? " and " + folderCount + " folders" : " and 1 folder";
 		}
 
-		StringBuilder buffy = new StringBuilder("<html>");
-		buffy.append("<div style='font-size: 110%; text-align: center;'>");
-		buffy.append("<span>");
-		buffy.append("Are you sure you want to <u>permanently</u> delete " + files + "?");
-		buffy.append("</span><br><br>");
-
-		buffy.append("<span style='color: red;'>");
-		buffy.append("There is no undo operation!");
-		buffy.append("</span>");
-		buffy.append("</div>");
+        String buffy = "<html>" + "<div style='font-size: 110%; text-align: center;'>" +
+                "<span>" +
+                "Are you sure you want to <u>permanently</u> delete " + files + "?" +
+                "</span><br><br>" +
+                "<span style='color: red;'>" +
+                "There is no undo operation!" +
+                "</span>" +
+                "</div>";
 
 		/*
 		msg +=
@@ -224,7 +222,7 @@ public class ProjectDataDeleteTask extends Task {
 				*/
 
 		int choice = OptionDialog.showOptionDialog(parentComponent, "Confirm Delete Files?",
-			buffy.toString(), "Delete Files", OptionDialog.QUESTION_MESSAGE, "Cancel");
+                buffy, "Delete Files", OptionDialog.QUESTION_MESSAGE, "Cancel");
 		return choice == OptionDialog.OPTION_ONE;
 	}
 

@@ -31,7 +31,8 @@ public abstract class DBDomainObjectSupport extends DomainObjectAdapterDB {
 
 	private VersionException versionExc;
 
-	protected interface ManagerSupplier<T> {
+	@FunctionalInterface
+    protected interface ManagerSupplier<T> {
 		T create(DBOpenMode openMode, TaskMonitor monitor)
 				throws IOException, VersionException, CancelledException;
 	}

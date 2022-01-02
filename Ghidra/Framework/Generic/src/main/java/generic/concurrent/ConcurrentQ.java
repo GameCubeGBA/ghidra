@@ -146,7 +146,7 @@ import ghidra.util.task.TaskMonitor;
  * 
  * @param <I> The type of the items to be processed.
  * @param <R> The type of objects resulting from processing an item; if you don't care about the
- *            return value, then make this value whatever you want, like <code>Object</code> or the
+ *            return value, then make this value whatever you want, like {@code Object} or the
  *            same value as {@code I} and return null from {@link QCallback#process(Object, TaskMonitor)}.
  */
 public class ConcurrentQ<I, R> {
@@ -303,12 +303,12 @@ public class ConcurrentQ<I, R> {
 
 	/**
 	 * Allows clients to use a bounded queue (such as a {@link LinkedBlockingQueue} to control
-	 * how many items get placed into this queue at one time.  Calling the <code>add</code> methods
+	 * how many items get placed into this queue at one time.  Calling the {@code add} methods
 	 * will place all items into the queue, which for a large number of items, can consume a
 	 * large amount of memory.  This method will block once the queue at maximum capacity,
 	 * continuing to add new items as existing items on the queue are processed.
 	 * <p>
-	 * To enable blocking on the queue when it is full, construct this <code>ConcurrentQ</code>
+	 * To enable blocking on the queue when it is full, construct this {@code ConcurrentQ}
 	 * with an instance of {@link BlockingQueue}.
 	 * 
 	 * @param iterator An iterator from which items will be taken.
@@ -426,7 +426,7 @@ public class ConcurrentQ<I, R> {
 	 * exception, then you should instead use {@link #waitForResults()}.  That method will return
 	 * all results, both with and without exceptions, which you can then process, including
 	 * checking for exceptions.  Note that to use {@link #waitForResults()} to examine exceptions,
-	 * you must have created this queue with <code>collectResults</code> as true.
+	 * you must have created this queue with {@code collectResults} as true.
 	 * 
 	 * @throws InterruptedException if interrupted while waiting for a result
 	 * @throws Exception any exception encountered while processing an item (this will cancel all

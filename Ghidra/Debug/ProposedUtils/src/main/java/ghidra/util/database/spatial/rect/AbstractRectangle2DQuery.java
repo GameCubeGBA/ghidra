@@ -27,7 +27,8 @@ public abstract class AbstractRectangle2DQuery< //
 		Q extends AbstractRectangle2DQuery<X, Y, DS, NS, Q>> //
 		implements Query<DS, NS> {
 
-	public interface QueryFactory<NS extends Rectangle2D<?, ?, NS>, Q extends AbstractRectangle2DQuery<?, ?, ?, NS, Q>> {
+	@FunctionalInterface
+    public interface QueryFactory<NS extends Rectangle2D<?, ?, NS>, Q extends AbstractRectangle2DQuery<?, ?, ?, NS, Q>> {
 		Q create(NS r1, NS r2, Rectangle2DDirection direction);
 	}
 

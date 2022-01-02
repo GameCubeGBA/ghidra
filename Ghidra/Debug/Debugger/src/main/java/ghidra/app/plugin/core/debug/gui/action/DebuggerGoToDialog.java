@@ -58,7 +58,7 @@ public class DebuggerGoToDialog extends DialogComponentProvider {
 				"<li><code>*:4 EAX</code></li>" +
 				"</ul></html>");
 		help.getMaximumSize().width = 400;
-		panel.add(help, BorderLayout.NORTH);
+		panel.add(help, BorderLayout.PAGE_START);
 		Box box = Box.createHorizontalBox();
 		box.setBorder(new EmptyBorder(16, 0, 0, 0));
 		panel.add(box);

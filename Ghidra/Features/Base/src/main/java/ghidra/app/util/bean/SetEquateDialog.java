@@ -353,9 +353,9 @@ public class SetEquateDialog extends DialogComponentProvider {
 		};
 		mainPanel.setLayout(new BorderLayout());
 		mainPanel.setSize(mainPanel.getPreferredSize());
-		mainPanel.add(northPanel, BorderLayout.NORTH);
+		mainPanel.add(northPanel, BorderLayout.PAGE_START);
 		mainPanel.add(tablePanel, BorderLayout.CENTER);
-		mainPanel.add(southPanel, BorderLayout.SOUTH);
+		mainPanel.add(southPanel, BorderLayout.PAGE_END);
 
 		return mainPanel;
 	}

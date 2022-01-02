@@ -172,7 +172,7 @@ public class PluginInstallerDialog extends DialogComponentProvider {
 		sp.getViewport().setBackground(table.getBackground());
 
 		pluginTablePanel.add(sp, BorderLayout.CENTER);
-		pluginTablePanel.add(tableFilterPanel, BorderLayout.SOUTH);
+		pluginTablePanel.add(tableFilterPanel, BorderLayout.PAGE_END);
 
 		// Restrict the size of the first couple columns - the default size is
 		// way too large. This is annoying but our table column classes don't have a nice
@@ -195,7 +195,7 @@ public class PluginInstallerDialog extends DialogComponentProvider {
 		table.getColumnModel()
 				.getColumn(PluginInstallerTableModel.STATUS_COL)
 				.setCellRenderer(
-					new StatusCellRenderer());
+                        new StatusCellRenderer());
 
 		HelpService help = Help.getHelpService();
 		help.registerHelp(table, new HelpLocation(GenericHelpTopics.TOOL, "PluginDialog"));
@@ -222,7 +222,7 @@ public class PluginInstallerDialog extends DialogComponentProvider {
 	/**
 	 * Renderer for the status column in the table.
 	 */
-	private class StatusCellRenderer extends GTableCellRenderer {
+	private static class StatusCellRenderer extends GTableCellRenderer {
 
 		public StatusCellRenderer() {
             setHorizontalAlignment(SwingConstants.CENTER);

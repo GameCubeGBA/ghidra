@@ -16,7 +16,7 @@
 package ghidra.app.util.bin.format;
 
 /**
- * <code>MemoryLoadable</code> is a marker interface which identifies a file format 
+ * {@code MemoryLoadable} is a marker interface which identifies a file format
  * object which uniquely identifies a memory loadable portion of a binary file.
  */
 public interface MemoryLoadable {

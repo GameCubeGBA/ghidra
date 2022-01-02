@@ -57,7 +57,7 @@ public class PortableExecutable {
 	/**
 	 * Constructs a new Portable Executable using the specified byte provider and layout.
 	 *  <p>
-	 * Same as calling <code>createFileAlignedPortableExecutable(factory, bp, layout, true, false)</code>
+	 * Same as calling {@code createFileAlignedPortableExecutable(factory, bp, layout, true, false)}
 	 * @param factory generic factory instance
 	 * @param bp the byte provider
 	 * @param layout specifies the layout of the underlying provider and governs RVA resolution

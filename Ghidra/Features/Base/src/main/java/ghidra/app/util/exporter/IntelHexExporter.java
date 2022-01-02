@@ -40,7 +40,7 @@ import ghidra.util.task.TaskMonitor;
  * <p>
  * The output defaults to lines of 16-bytes but this is configurable using the
  * {@link #recordSizeOption} attribute. This allows users to select any record size
- * up to the max of 0xFF. Users may also choose to <code>Drop Extra Bytes</code>, which will
+ * up to the max of 0xFF. Users may also choose to {@code Drop Extra Bytes}, which will
  * cause only lines that match the max record size to be printed; any other 
  * bytes will be dropped. If this option is not set, every byte will be represented in the output.
  */
@@ -125,7 +125,7 @@ public class IntelHexExporter extends Exporter {
 	 * <p>
 	 * Input may be specified in either decimal or hex.
 	 */
-	private class BoundedIntegerVerifier extends InputVerifier {
+	private static class BoundedIntegerVerifier extends InputVerifier {
 
 		@Override
 		public boolean verify(JComponent input) {
@@ -229,7 +229,7 @@ public class IntelHexExporter extends Exporter {
 
 	/**
 	 * Option for exporting Intel Hex records that allows users to specify a record size for the
-	 * output. Users may also optionally select the <code>Drop Extra Bytes</code> option that 
+	 * output. Users may also optionally select the {@code Drop Extra Bytes} option that
 	 * will cause only those records that match the maximum size to be output to the file.
 	 * 
 	 * @see RecordSizeComponent
@@ -285,13 +285,13 @@ public class IntelHexExporter extends Exporter {
 	 * Component that displays two widgets for setting export options: 
 	 * 
 	 * <ul>
-	 * <li><code>input</code>: a {@link HintTextField} for entering numeric digits; these 
+	 * <li>{@code input}: a {@link HintTextField} for entering numeric digits; these
 	 * represent the record size for each line of output</li>
 	 * <li>dropCb: a {@link JCheckBox} for specifying a setting that enforces that every line in 
 	 * the output matches the specified record size</li>
 	 * </ul>
 	 * 
-	 * Note: If the <code>Drop Extra Bytes</code> option is set, any bytes that are left over 
+	 * Note: If the {@code Drop Extra Bytes} option is set, any bytes that are left over
 	 * after outputting all lines that match the record size will be omitted from the output.
 	 */
 	private class RecordSizeComponent extends JPanel {
@@ -303,13 +303,13 @@ public class IntelHexExporter extends Exporter {
 			setLayout(new BorderLayout());
 
 			input = new HintTextField(Integer.toString(recordSize), false,
-				new BoundedIntegerVerifier());
+                    new BoundedIntegerVerifier());
 			dropCb = new GCheckBox("Align To Record Size");
 
 			input.setText(Integer.toString(recordSize));
 
 			add(input, BorderLayout.CENTER);
-			add(dropCb, BorderLayout.EAST);
+			add(dropCb, BorderLayout.LINE_END);
 		}
 
 		public int getValue() {

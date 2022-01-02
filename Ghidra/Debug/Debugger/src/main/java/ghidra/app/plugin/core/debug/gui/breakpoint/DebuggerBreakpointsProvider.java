@@ -864,7 +864,7 @@ public class DebuggerBreakpointsProvider extends ComponentProviderAdapter
 		breakpointPanel.add(new JScrollPane(breakpointTable));
 		breakpointTable.setAutoLookupColumn(LogicalBreakpointTableColumns.ADDRESS.ordinal());
 		breakpointFilterPanel = new GhidraTableFilterPanel<>(breakpointTable, breakpointTableModel);
-		breakpointPanel.add(breakpointFilterPanel, BorderLayout.SOUTH);
+		breakpointPanel.add(breakpointFilterPanel, BorderLayout.PAGE_END);
 		mainPanel.setLeftComponent(breakpointPanel);
 
 		JPanel locationPanel = new JPanel(new BorderLayout());
@@ -873,7 +873,7 @@ public class DebuggerBreakpointsProvider extends ComponentProviderAdapter
 		locationPanel.add(new JScrollPane(locationTable));
 		locationFilterPanel = new GhidraTableFilterPanel<>(locationTable, locationTableModel);
 		locationFilterPanel.setSecondaryFilter(filterLocationsBySelectedBreakpoints);
-		locationPanel.add(locationFilterPanel, BorderLayout.SOUTH);
+		locationPanel.add(locationFilterPanel, BorderLayout.PAGE_END);
 		mainPanel.setRightComponent(locationPanel);
 
 		mainPanel.setResizeWeight(0.5);

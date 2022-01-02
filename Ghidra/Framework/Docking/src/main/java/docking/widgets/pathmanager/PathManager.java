@@ -273,7 +273,7 @@ public class PathManager {
 		updateButtonsEnabled();
 
 		panel.add(scrollPane, BorderLayout.CENTER);
-		panel.add(buttonPanel, BorderLayout.EAST);
+		panel.add(buttonPanel, BorderLayout.LINE_END);
 		panel.setPreferredSize(new Dimension(400, 200));
 	}
 

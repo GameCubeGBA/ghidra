@@ -31,7 +31,7 @@ import ghidra.util.exception.*;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>ElfLoadAdapter</code> provides the base ELF load adapter implementation 
+ * {@code ElfLoadAdapter} provides the base ELF load adapter implementation
  * which may be extended to facilitate target specific behavior.
  */
 public class ElfLoadAdapter {

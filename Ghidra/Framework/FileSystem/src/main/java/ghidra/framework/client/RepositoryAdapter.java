@@ -40,14 +40,14 @@ import ghidra.util.datastruct.WeakSet;
 import ghidra.util.exception.UserAccessException;
 
 /**
- * <code>RepositoryAdapter</code> provides a persistent wrapper for a remote RepositoryHandle 
+ * {@code RepositoryAdapter} provides a persistent wrapper for a remote RepositoryHandle
  * which may become invalid if the remote connection were to fail.  Connection recovery is provided 
  * by any method call which must communicate with the server.
  */
 public class RepositoryAdapter implements RemoteAdapterListener {
 
 	private String name;
-	private RepositoryServerAdapter serverAdapter;
+	private final RepositoryServerAdapter serverAdapter;
 
 	private WeakSet<RemoteAdapterListener> listenerList =
 		WeakDataStructureFactory.createCopyOnWriteWeakSet();

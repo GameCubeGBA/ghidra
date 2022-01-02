@@ -116,7 +116,7 @@ public class FunctionTableModel extends AddressBasedTableModel<FunctionRowObject
 		}
 	}
 
-	private class FunctionKeyIterator implements LongIterator {
+	private static class FunctionKeyIterator implements LongIterator {
 		private FunctionIterator itr;
 
 		FunctionKeyIterator(FunctionManager functionMgr) {
@@ -168,7 +168,7 @@ public class FunctionTableModel extends AddressBasedTableModel<FunctionRowObject
 		return function != null ? function.getEntryPoint() : null;
 	}
 
-	private class NameTableColumn
+	private static class NameTableColumn
 			extends AbstractProgramBasedDynamicTableColumn<FunctionRowObject, String> {
 
 		@Override

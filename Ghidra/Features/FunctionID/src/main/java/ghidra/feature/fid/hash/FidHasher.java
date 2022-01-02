@@ -23,6 +23,7 @@ import ghidra.program.model.mem.MemoryAccessException;
  * FID system to hash a function for inclusion in a FID library, or for
  * searching the libraries for a match. 
  */
+@FunctionalInterface
 public interface FidHasher {
 	/**
 	 * Computes the hash for a given function.

@@ -80,7 +80,7 @@ public class ReloadDialog extends JDialog {
 		contentPane.add(buttonPanel, BorderLayout.CENTER);
 
 		JCheckBox checkbox = new GCheckBox("Do not show this message again.");
-		contentPane.add(checkbox, BorderLayout.SOUTH);
+		contentPane.add(checkbox, BorderLayout.PAGE_END);
 
 		// When the user selects the YES button they're indicating they want to reload the file, so
 		// fire off an event to do so, making sure to save the checkbox status.

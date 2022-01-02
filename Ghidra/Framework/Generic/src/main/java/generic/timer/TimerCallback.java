@@ -16,6 +16,7 @@
  */
 package generic.timer;
 
+@FunctionalInterface
 public interface TimerCallback {
 	void timerFired();
 }

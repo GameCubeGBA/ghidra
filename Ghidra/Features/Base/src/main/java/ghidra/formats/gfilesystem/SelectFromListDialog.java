@@ -124,7 +124,7 @@ public class SelectFromListDialog<T> extends DialogComponentProvider {
 
 		JPanel workPanel = new JPanel(new BorderLayout());
 		MultiLineLabel mll = new MultiLineLabel("\n" + prompt + ":");
-		workPanel.add(mll, BorderLayout.NORTH);
+		workPanel.add(mll, BorderLayout.PAGE_START);
 		workPanel.add(listPanel, BorderLayout.CENTER);
 		return workPanel;
 	}

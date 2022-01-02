@@ -78,10 +78,10 @@ public class InstructionSequenceTreePanelBuilder extends ContextRegisterFilterab
 		mainPanel = new JPanel(new BorderLayout());
 		treePanel = buildTreePanel();
 		buildCountPanel();
-		mainPanel.add(countPanel, BorderLayout.NORTH);
+		mainPanel.add(countPanel, BorderLayout.PAGE_START);
 		mainPanel.add(treePanel, BorderLayout.CENTER);
 		addPercentageFilterButtons();
-		mainPanel.add(getButtonPanel(), BorderLayout.SOUTH);
+		mainPanel.add(getButtonPanel(), BorderLayout.PAGE_END);
 		return mainPanel;
 	}
 

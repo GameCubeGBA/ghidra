@@ -435,7 +435,7 @@ private void paintText( Graphics2D graphics, Color color, double textPosition ) 
             frame.setGlassPane(progressPanel);
             progressPanel.start();
         });
-        mainPanel.add( button, BorderLayout.SOUTH );
+        mainPanel.add( button, BorderLayout.PAGE_END);
                 
         frame.setSize( 400, 400 );
         frame.setLocation( GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint() );

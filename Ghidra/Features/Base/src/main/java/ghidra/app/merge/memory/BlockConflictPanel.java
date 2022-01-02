@@ -83,7 +83,7 @@ class BlockConflictPanel extends JPanel {
 	}
 
 	private void create() {
-		BoxLayout bl = new BoxLayout(this, BoxLayout.Y_AXIS);
+		BoxLayout bl = new BoxLayout(this, BoxLayout.PAGE_AXIS);
 		setLayout(bl);
 
 		group = new ButtonGroup();

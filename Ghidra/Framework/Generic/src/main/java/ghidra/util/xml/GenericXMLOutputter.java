@@ -20,7 +20,7 @@ import org.jdom.output.Format.TextMode;
 import org.jdom.output.XMLOutputter;
 
 /**
- * A simple extension of <code>XMLOutputter</code> that sets default settings to fix common bugs.
+ * A simple extension of {@code XMLOutputter} that sets default settings to fix common bugs.
  */
 public class GenericXMLOutputter extends XMLOutputter {
 

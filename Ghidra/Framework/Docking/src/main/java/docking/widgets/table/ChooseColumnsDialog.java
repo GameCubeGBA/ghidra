@@ -100,7 +100,7 @@ public class ChooseColumnsDialog extends DialogComponentProvider {
 		JPanel panel = new JPanel(new BorderLayout());
 		JScrollPane scrollPane = new JScrollPane(ghidraTable);
 		panel.add(scrollPane);
-		panel.add(buttonPanel, BorderLayout.SOUTH);
+		panel.add(buttonPanel, BorderLayout.PAGE_END);
 		addWorkPanel(panel);
 		addOKButton();
 		addCancelButton();
@@ -179,7 +179,7 @@ public class ChooseColumnsDialog extends DialogComponentProvider {
 // Inner Classes
 //==================================================================================================	
 
-	private class Renderer extends GTableCellRenderer {
+	private static class Renderer extends GTableCellRenderer {
 		@Override
 		public Component getTableCellRendererComponent(GTableCellRenderingData data) {
 

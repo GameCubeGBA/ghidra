@@ -108,7 +108,7 @@ public class DataTypeChooserDialog extends DialogComponentProvider {
 		JPanel panel = new JPanel(new BorderLayout());
 		messageLabel = new GLabel("Choose the data type you wish to use.");
 		messageLabel.setBorder(BorderFactory.createEmptyBorder(2, 4, 2, 2));
-		panel.add(messageLabel, BorderLayout.NORTH);
+		panel.add(messageLabel, BorderLayout.PAGE_START);
 		panel.add(this.tree, BorderLayout.CENTER);
 
 		return panel;
@@ -225,7 +225,7 @@ public class DataTypeChooserDialog extends DialogComponentProvider {
 		}
 	}
 
-	private class SelectFirstNodeTask extends GTreeTask {
+	private static class SelectFirstNodeTask extends GTreeTask {
 
 		protected SelectFirstNodeTask(GTree tree) {
 			super(tree);

@@ -516,7 +516,8 @@ public class Emulate {
 					executeConditionalBranch(raw);
 					break;
 				case PcodeOp.BRANCHIND:
-					executeBranchind(raw);
+                case PcodeOp.RETURN:
+                    executeBranchind(raw);
 					break;
 				case PcodeOp.CALL:
 					executeCall(raw);
@@ -527,10 +528,7 @@ public class Emulate {
 				case PcodeOp.CALLOTHER:
 					executeCallother(raw);
 					break;
-				case PcodeOp.RETURN:
-					executeBranchind(raw);
-					break;
-				case PcodeOp.MULTIEQUAL:
+                case PcodeOp.MULTIEQUAL:
 					executeMultiequal(raw);
 					fallthruOp();
 					break;

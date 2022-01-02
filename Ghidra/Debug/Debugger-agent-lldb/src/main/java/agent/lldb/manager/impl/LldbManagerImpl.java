@@ -1489,7 +1489,7 @@ public class LldbManagerImpl implements LldbManager {
 		}
 	}
 
-	class SavedFocus implements AutoCloseable {
+	static class SavedFocus implements AutoCloseable {
 		Integer tid = null;
 
 		@Override

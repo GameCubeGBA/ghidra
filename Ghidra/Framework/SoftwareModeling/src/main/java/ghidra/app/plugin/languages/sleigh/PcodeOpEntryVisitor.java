@@ -26,6 +26,7 @@ import ghidra.app.plugin.processors.sleigh.template.OpTpl;
  * 
  * @see SleighLanguages#traverseAllPcodeOps(SleighLanguage, PcodeOpEntryVisitor)
  */
+@FunctionalInterface
 public interface PcodeOpEntryVisitor extends VisitorResults {
 	/**
 	 * Callback to visit a Pcode operation

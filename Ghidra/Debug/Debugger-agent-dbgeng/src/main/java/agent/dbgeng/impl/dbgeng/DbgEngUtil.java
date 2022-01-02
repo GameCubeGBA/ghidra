@@ -35,7 +35,8 @@ public abstract class DbgEngUtil {
 	private DbgEngUtil() {
 	}
 
-	public interface InterfaceSupplier {
+	@FunctionalInterface
+    public interface InterfaceSupplier {
 		HRESULT get(REFIID refiid, PointerByReference pClient);
 	}
 

@@ -22,7 +22,8 @@ import ghidra.framework.plugintool.util.AutoServiceListener;
 import ghidra.util.Msg;
 
 public interface AutoService {
-	interface Wiring {
+	@FunctionalInterface
+    interface Wiring {
 		void dispose();
 	}
 

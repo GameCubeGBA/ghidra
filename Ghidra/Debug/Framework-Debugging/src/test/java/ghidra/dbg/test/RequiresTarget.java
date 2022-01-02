@@ -19,6 +19,7 @@ import ghidra.dbg.target.TargetObject;
 import ghidra.dbg.target.TargetProcess;
 import ghidra.dbg.testutil.DebuggerModelTestUtils;
 
+@FunctionalInterface
 public interface RequiresTarget extends DebuggerModelTestUtils {
 
 	/**

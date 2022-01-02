@@ -101,7 +101,7 @@ public class UndoActionDialog extends DialogComponentProvider {
 
 	private JPanel buildMainPanel(String actionString, ImageIcon icon) {
 		JPanel innerPanel = new JPanel();
-		innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS));
+		innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.PAGE_AXIS));
 		innerPanel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
 
 		filePanel = new DomainFilesPanel(fileList, null);
@@ -110,7 +110,7 @@ public class UndoActionDialog extends DialogComponentProvider {
 		cbPanel.add(saveCopyCB);
 
 		JPanel iconPanel = new JPanel(new BorderLayout(10, 0));
-		iconPanel.add(new GIconLabel(icon), BorderLayout.WEST);
+		iconPanel.add(new GIconLabel(icon), BorderLayout.LINE_START);
 		iconPanel.add(
 			new GLabel("Undo " + actionString + " of the selected files:", SwingConstants.LEFT),
 			BorderLayout.CENTER);

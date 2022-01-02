@@ -104,7 +104,7 @@ public class AutoAnalysisPluginScreenShots extends GhidraScreenShotGenerator {
 // Inner Classes
 //==================================================================================================	
 
-	class TestBackgroundCommand extends BackgroundCommand {
+	static class TestBackgroundCommand extends BackgroundCommand {
 
 		private CountDownLatch start;
 		private CountDownLatch end;

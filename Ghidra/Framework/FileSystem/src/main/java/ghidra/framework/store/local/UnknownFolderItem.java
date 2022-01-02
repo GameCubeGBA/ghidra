@@ -25,7 +25,7 @@ import ghidra.util.PropertyFile;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>UnknownFolderItem</code> acts as a LocalFolderItem place-holder for 
+ * {@code UnknownFolderItem} acts as a LocalFolderItem place-holder for
  * items of an unknown type.
  */
 public class UnknownFolderItem extends LocalFolderItem {

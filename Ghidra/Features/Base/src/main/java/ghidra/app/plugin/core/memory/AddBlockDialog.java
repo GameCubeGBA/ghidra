@@ -43,7 +43,7 @@ import ghidra.util.layout.HorizontalLayout;
 import ghidra.util.layout.PairLayout;
 
 /**
- * <CODE>AddBlockDialog</CODE> manages the dialog for adding and
+ * {@code AddBlockDialog} manages the dialog for adding and
  * editing MemoryBlocks.
  */
 
@@ -116,16 +116,16 @@ class AddBlockDialog extends DialogComponentProvider implements ChangeListener {
 	private JComponent buildWorkPanel() {
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
-		panel.add(buildMainPanel(), BorderLayout.NORTH);
+		panel.add(buildMainPanel(), BorderLayout.PAGE_START);
 		panel.add(buildVariablePanel(), BorderLayout.CENTER);
 		return panel;
 	}
 
 	private Component buildMainPanel() {
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.add(buildBasicInfoPanel(), BorderLayout.NORTH);
+		panel.add(buildBasicInfoPanel(), BorderLayout.PAGE_START);
 		panel.add(buildPermissionsPanel(), BorderLayout.CENTER);
-		panel.add(buildTypesPanel(), BorderLayout.SOUTH);
+		panel.add(buildTypesPanel(), BorderLayout.PAGE_END);
 
 		return panel;
 	}
@@ -210,7 +210,7 @@ class AddBlockDialog extends DialogComponentProvider implements ChangeListener {
 
 	private Component buildUnmappedPanel() {
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.add(buildInitializedRadioButtonPanel(), BorderLayout.NORTH);
+		panel.add(buildInitializedRadioButtonPanel(), BorderLayout.PAGE_START);
 		panel.add(buildVariableInitializedPanel());
 		return panel;
 	}
@@ -467,7 +467,7 @@ class AddBlockDialog extends DialogComponentProvider implements ChangeListener {
 		baseAddrField.setName("Source Addr");
 		baseAddrField.addChangeListener(ev -> baseAddressChanged());
 		
-		JPanel schemePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel schemePanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
 		
 		schemeDestByteCountField = new IntegerTextField(4, 1);
 		schemeDestByteCountField.setAllowNegativeValues(false);

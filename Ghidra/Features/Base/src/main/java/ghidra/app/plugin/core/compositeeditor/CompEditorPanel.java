@@ -400,7 +400,7 @@ public class CompEditorPanel extends CompositeEditorPanel {
 		addMinimumAlignmentComponents();
 
 		GridBagConstraints gridBagConstraints = new GridBagConstraints();
-		gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
+		gridBagConstraints.anchor = GridBagConstraints.FIRST_LINE_START;
 		gridBagConstraints.fill = GridBagConstraints.NONE;
 		gridBagConstraints.weightx = 0;
 		gridBagConstraints.gridx = 5;
@@ -415,28 +415,28 @@ public class CompEditorPanel extends CompositeEditorPanel {
 	private void addMinimumAlignmentComponents() {
 		GridBagConstraints gridBagConstraints = new GridBagConstraints();
 
-		gridBagConstraints.anchor = GridBagConstraints.WEST;
+		gridBagConstraints.anchor = GridBagConstraints.LINE_START;
 		gridBagConstraints.fill = GridBagConstraints.NONE;
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 0;
 		gridBagConstraints.gridwidth = 2;
 		alignPanel.add(defaultAlignButton, gridBagConstraints);
 
-		gridBagConstraints.anchor = GridBagConstraints.WEST;
+		gridBagConstraints.anchor = GridBagConstraints.LINE_START;
 		gridBagConstraints.fill = GridBagConstraints.NONE;
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 1;
 		gridBagConstraints.gridwidth = 1;
 		alignPanel.add(explicitAlignButton, gridBagConstraints);
 
-		gridBagConstraints.anchor = GridBagConstraints.WEST;
+		gridBagConstraints.anchor = GridBagConstraints.LINE_START;
 		gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
 		gridBagConstraints.gridx = 1;
 		gridBagConstraints.gridy = 1;
 		gridBagConstraints.gridwidth = 1;
 		alignPanel.add(explicitAlignTextField, gridBagConstraints);
 
-		gridBagConstraints.anchor = GridBagConstraints.WEST;
+		gridBagConstraints.anchor = GridBagConstraints.LINE_START;
 		gridBagConstraints.fill = GridBagConstraints.NONE;
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 2;
@@ -561,12 +561,12 @@ public class CompEditorPanel extends CompositeEditorPanel {
 		JPanel actualAlignmentPanel = new JPanel(new BorderLayout());
 		actualAlignmentLabel = new GDLabel("Alignment:");
 		gridBagConstraints.insets = new Insets(2, 7, 2, 2);
-		gridBagConstraints.anchor = GridBagConstraints.EAST;
+		gridBagConstraints.anchor = GridBagConstraints.LINE_END;
 		gridBagConstraints.fill = GridBagConstraints.NONE;
 		gridBagConstraints.gridx = 2;
 		gridBagConstraints.gridy = 3;
 		actualAlignmentLabel.setToolTipText(actualAlignmentToolTip);
-		actualAlignmentPanel.add(actualAlignmentLabel, BorderLayout.EAST);
+		actualAlignmentPanel.add(actualAlignmentLabel, BorderLayout.LINE_END);
 		infoPanel.add(actualAlignmentPanel, gridBagConstraints);
 
 		actualAlignmentValueTextField = new JTextField(8);
@@ -623,7 +623,7 @@ public class CompEditorPanel extends CompositeEditorPanel {
 		addPackingComponents(innerPanel);
 
 		GridBagConstraints gridBagConstraints = new GridBagConstraints();
-		gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
+		gridBagConstraints.anchor = GridBagConstraints.FIRST_LINE_START;
 		gridBagConstraints.fill = GridBagConstraints.NONE;
 		gridBagConstraints.weightx = 0;
 		gridBagConstraints.gridx = 7;
@@ -637,28 +637,28 @@ public class CompEditorPanel extends CompositeEditorPanel {
 	private void addPackingComponents(JPanel gridPanel) {
 		GridBagConstraints gridBagConstraints = new GridBagConstraints();
 
-		gridBagConstraints.anchor = GridBagConstraints.WEST;
+		gridBagConstraints.anchor = GridBagConstraints.LINE_START;
 		gridBagConstraints.fill = GridBagConstraints.NONE;
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 0;
 		gridBagConstraints.gridwidth = 2;
 		gridPanel.add(defaultPackingButton, gridBagConstraints);
 
-		gridBagConstraints.anchor = GridBagConstraints.WEST;
+		gridBagConstraints.anchor = GridBagConstraints.LINE_START;
 		gridBagConstraints.fill = GridBagConstraints.NONE;
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 1;
 		gridBagConstraints.gridwidth = 1;
 		gridPanel.add(explicitPackingButton, gridBagConstraints);
 
-		gridBagConstraints.anchor = GridBagConstraints.WEST;
+		gridBagConstraints.anchor = GridBagConstraints.LINE_START;
 		gridBagConstraints.fill = GridBagConstraints.HORIZONTAL;
 		gridBagConstraints.gridx = 1;
 		gridBagConstraints.gridy = 1;
 		gridBagConstraints.gridwidth = 1;
 		gridPanel.add(explicitPackingTextField, gridBagConstraints);
 
-		gridBagConstraints.anchor = GridBagConstraints.WEST;
+		gridBagConstraints.anchor = GridBagConstraints.LINE_START;
 		gridBagConstraints.fill = GridBagConstraints.NONE;
 		gridBagConstraints.gridx = 0;
 		gridBagConstraints.gridy = 2;

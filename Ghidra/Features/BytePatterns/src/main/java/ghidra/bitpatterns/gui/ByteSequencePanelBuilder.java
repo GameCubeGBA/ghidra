@@ -116,9 +116,9 @@ public class ByteSequencePanelBuilder extends ContextRegisterFilterablePanelBuil
 		numSeqsField = new JTextField(25);
 		numSeqsField.setEditable(false);
 		numSeqsPanel.add(numSeqsField);
-		mainPanel.add(numSeqsPanel, BorderLayout.NORTH);
+		mainPanel.add(numSeqsPanel, BorderLayout.PAGE_START);
 
-		mainPanel.add(getButtonPanel(), BorderLayout.SOUTH);
+		mainPanel.add(getButtonPanel(), BorderLayout.PAGE_END);
 		byteSeqTable = new DisassembledByteSequenceTableModel(plugin, rowObjects);
 		filterTable = new GFilterTable<>(byteSeqTable);
 		mainPanel.add(filterTable, BorderLayout.CENTER, TABLE_INDEX);

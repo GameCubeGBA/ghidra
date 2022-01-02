@@ -21,6 +21,7 @@ import ghidra.app.decompiler.DecompInterface;
  * A callback interface that will be given a newly created {@link DecompInterface} to 
  * configure.
  */
+@FunctionalInterface
 public interface DecompileConfigurer {
 
 	/**

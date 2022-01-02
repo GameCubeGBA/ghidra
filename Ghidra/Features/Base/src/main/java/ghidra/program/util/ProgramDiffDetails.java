@@ -116,9 +116,7 @@ public class ProgramDiffDetails {
 
 	private static String getIndentString(int indentCount) {
 		int indentChars = indentCount * INDENT_SIZE;
-		StringBuffer buf = new StringBuffer(indentChars);
-        buf.append(" ".repeat(Math.max(0, indentChars)));
-		return buf.toString();
+        return " ".repeat(Math.max(0, indentChars));
 	}
 
 	/**
@@ -1879,7 +1877,7 @@ public class ProgramDiffDetails {
 		}
 	}
 
-	private class VariableLayout {
+	private static class VariableLayout {
 		int dtLen;
 		int offsetLen;
 		int firstUseLen;
@@ -2411,9 +2409,7 @@ public class ProgramDiffDetails {
 		if (numSpaces <= 0) {
 			return "";
 		}
-		StringBuffer buf = new StringBuffer(numSpaces);
-        buf.append(" ".repeat(numSpaces));
-		return buf.toString();
+        return " ".repeat(numSpaces);
 	}
 
 	private void addDiffHeader(String text) {

@@ -18,6 +18,7 @@ package docking.widgets.filter;
 /**
  * Interface for classes that need to split strings into a series of individual terms.
  */
+@FunctionalInterface
 public interface TermSplitter {
 
 	/**

@@ -113,7 +113,7 @@ import utilities.util.FileResolutionResult;
 import utilities.util.FileUtilities;
 
 /**
- * <code>SleighCompile</code> provides the ability to compile Sleigh language module (e.g., *.slaspec)
+ * {@code SleighCompile} provides the ability to compile Sleigh language module (e.g., *.slaspec)
  * files.
  */
 public class SleighCompile extends SleighBase {
@@ -144,16 +144,15 @@ public class SleighCompile extends SleighBase {
 	}
 
 	public static void entry(String name, Object... args) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(name).append("(");
-		// @formatter:off
-		sb.append(Arrays.stream(args)
-			.filter(a -> isLocationIsh(a))
-			.map(Object::toString)
-			.collect(Collectors.joining(", ")));
-		// @formatter:on
-		sb.append(")");
-		Msg.trace(SleighCompile.class, sb.toString());
+        String sb = name + "(" +
+                // @formatter:off
+                Arrays.stream(args)
+                        .filter(a -> isLocationIsh(a))
+                        .map(Object::toString)
+                        .collect(Collectors.joining(", ")) +
+                // @formatter:on
+                ")";
+		Msg.trace(SleighCompile.class, sb);
 	}
 
 	// Semantic pcode compiler

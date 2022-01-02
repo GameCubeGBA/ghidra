@@ -22,7 +22,7 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 
 /**
- * The <CODE>SubDataFieldLocation</CODE> class contains specific location information
+ * The {@code SubDataFieldLocation} class contains specific location information
  * within the Sub-data field of a CodeUnitLocation object.
  */
 public class SubDataFieldLocation extends CodeUnitLocation {

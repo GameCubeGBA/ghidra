@@ -85,7 +85,7 @@ public class FieldHeaderComp extends JPanel {
 		this.setMinimumSize(new Dimension(0, 2 * rowHeight));
 		renderPane = new CellRendererPane();
 
-		setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+		setLayout(new FlowLayout(FlowLayout.LEADING, 0, 0));
 
 		HelpService help = Help.getHelpService();
 		help.registerHelp(this, new HelpLocation("CodeBrowserPlugin", "Field_Formatter"));
@@ -173,10 +173,7 @@ public class FieldHeaderComp extends JPanel {
 		}
 
 		switch (state) {
-			case OVER_FIELD:
-				setCursor(defaultCursor);
-				break;
-			case NEAR_EDGE:
+            case NEAR_EDGE:
 				setCursor(resizeCursor);
 				break;
 			default:

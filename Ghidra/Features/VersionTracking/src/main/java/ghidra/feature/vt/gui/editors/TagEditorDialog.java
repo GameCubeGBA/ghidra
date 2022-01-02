@@ -129,7 +129,7 @@ deleteButton.setEnabled(selectedIndices != null && selectedIndices.length != 0);
 		editPanel.add(Box.createHorizontalStrut(5));
 		editPanel.add(deleteButton);
 
-		mainPanel.add(editPanel, BorderLayout.SOUTH);
+		mainPanel.add(editPanel, BorderLayout.PAGE_END);
 
 		return mainPanel;
 	}
@@ -155,7 +155,7 @@ deleteButton.setEnabled(selectedIndices != null && selectedIndices.length != 0);
 // Inner Classes
 //==================================================================================================
 
-	class TagStateListModel extends AbstractListModel<TagState> {
+	static class TagStateListModel extends AbstractListModel<TagState> {
 
 		private List<TagState> data = new ArrayList<TagState>();
 
@@ -356,7 +356,7 @@ deleteButton.setEnabled(selectedIndices != null && selectedIndices.length != 0);
 
 	}
 
-	private class VTMatchTagImpl implements VTMatchTag {
+	private static class VTMatchTagImpl implements VTMatchTag {
 
 		private final String name;
 

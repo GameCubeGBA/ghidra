@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 
 import javax.swing.SwingUtilities;
-import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import ghidra.app.merge.tool.ListingMergePanel;
@@ -313,7 +312,6 @@ class EquateMerger extends AbstractListingMerger {
 		// At address get the equate conflict ArrayList.
 		ArrayList<EquateConflict> list = conflicts.get(addr);
 		if (list != null) {
-			int len = list.size();
 			// merge each conflict at this address.
             for (EquateConflict equateConflict : list) {
                 // If we have a equate choice then a "Use For All" has already occurred.
@@ -470,11 +468,11 @@ class EquateMerger extends AbstractListingMerger {
 	}
 
 	/**
-	 * <code>EquateConflict</code> provides the information needed to retain 
+	 * {@code EquateConflict} provides the information needed to retain
 	 * and display an equate conflict to the user. It contains the address,
 	 * operand index, and scalar value.
 	 */
-	private class EquateConflict {
+	private static class EquateConflict {
 		Address address;
 		int opIndex;
 		Scalar scalar;

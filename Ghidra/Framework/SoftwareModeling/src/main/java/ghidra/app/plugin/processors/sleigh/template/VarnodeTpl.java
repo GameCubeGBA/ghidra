@@ -83,14 +83,13 @@ public class VarnodeTpl {
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(space);
-		sb.append('[');
-		sb.append(offset);
-		sb.append(':');
-		sb.append(size);
-		sb.append(']');
+        String sb = String.valueOf(space) +
+                '[' +
+                offset +
+                ':' +
+                size +
+                ']';
 
-		return sb.toString();
+		return sb;
 	}
 }

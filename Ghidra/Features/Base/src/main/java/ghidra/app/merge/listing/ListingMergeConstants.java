@@ -19,7 +19,7 @@ package ghidra.app.merge.listing;
 import ghidra.app.merge.MergeConstants;
 
 /**
- * <code>ListingMergeConstants</code> is an interface that provides constants 
+ * {@code ListingMergeConstants} is an interface that provides constants
  * that are used throughout all of the Listing merge managers for multi-user.
  */
 public interface ListingMergeConstants {

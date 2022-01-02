@@ -28,7 +28,7 @@ import ghidra.util.exception.DuplicateNameException;
 import utilities.util.FileUtilities;
 
 /**
- * <code>UserAdmin</code> is an Application for generating administrative 
+ * {@code UserAdmin} is an Application for generating administrative
  * commands to be processed by the UserManager.  Static methods are also 
  * provided which enable the UserManager to process such commands.
  */

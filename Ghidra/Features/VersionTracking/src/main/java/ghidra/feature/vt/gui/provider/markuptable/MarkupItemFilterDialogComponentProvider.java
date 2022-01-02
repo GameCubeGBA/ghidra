@@ -36,7 +36,7 @@ public class MarkupItemFilterDialogComponentProvider extends
 	@Override
 	protected JComponent buildFilterPanel() {
 		JPanel rowOnePanel = new JPanel();
-		rowOnePanel.setLayout(new BoxLayout(rowOnePanel, BoxLayout.X_AXIS));
+		rowOnePanel.setLayout(new BoxLayout(rowOnePanel, BoxLayout.LINE_AXIS));
 
 		// 
 		// row one

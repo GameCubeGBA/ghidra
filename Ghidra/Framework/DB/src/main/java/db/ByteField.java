@@ -20,7 +20,7 @@ import java.io.IOException;
 import db.buffers.DataBuffer;
 
 /**
- * <code>ByteField</code> provides a wrapper for single signed byte data 
+ * {@code ByteField} provides a wrapper for single signed byte data
  * which is read or written to a Record. 
  */
 public final class ByteField extends PrimitiveField {

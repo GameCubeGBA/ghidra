@@ -210,19 +210,19 @@ class MergeManagerProvider extends ComponentProviderAdapter {
 		nameLabel = new GDLabel("Merge Programs", SwingConstants.LEFT);
 
 		JPanel iconPanel = new JPanel();
-		new BoxLayout(iconPanel, BoxLayout.X_AXIS);
+		new BoxLayout(iconPanel, BoxLayout.LINE_AXIS);
 		iconPanel.add(Box.createHorizontalStrut(5));
 		iconPanel.add(new GIconLabel(MERGE_ICON));
 		iconPanel.add(Box.createHorizontalStrut(5));
 		iconPanel.add(nameLabel);
 
 		JPanel imagePanel = new JPanel(new BorderLayout());
-		imagePanel.add(iconPanel, BorderLayout.WEST);
+		imagePanel.add(iconPanel, BorderLayout.LINE_START);
 
-		mainPanel.add(imagePanel, BorderLayout.NORTH);
+		mainPanel.add(imagePanel, BorderLayout.PAGE_START);
 		mainPanel.add(conflictPanel, BorderLayout.CENTER);
 
-		mainPanel.add(createButtonPanel(), BorderLayout.SOUTH);
+		mainPanel.add(createButtonPanel(), BorderLayout.PAGE_END);
 		createDefaultPanel();
 		cardLayout.show(conflictPanel, DEFAULT_ID);
 		Dimension d = conflictPanel.getPreferredSize();

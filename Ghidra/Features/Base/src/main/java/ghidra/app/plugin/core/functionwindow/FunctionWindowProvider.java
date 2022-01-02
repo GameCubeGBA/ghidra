@@ -152,7 +152,7 @@ public class FunctionWindowProvider extends ComponentProviderAdapter {
 
 		JPanel container = new JPanel(new BorderLayout());
 		container.add(threadedTablePanel, BorderLayout.CENTER);
-		container.add(tableFilterPanel, BorderLayout.SOUTH);
+		container.add(tableFilterPanel, BorderLayout.PAGE_END);
 		return container;
 	}
 

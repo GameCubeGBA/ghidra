@@ -22,13 +22,13 @@ import ghidra.app.util.bin.format.FactoryBundledWithBinaryReader;
 import ghidra.util.*;
 
 /**
- * A class to represent the Elf<code>32</code>_Dyn data structure.
+ * A class to represent the Elf{@code 32}_Dyn data structure.
  * 
- * <pre><code>
+ * <pre>{@code
  * typedef  int32_t  Elf32_Sword;
  * typedef uint32_t  Elf32_Word;
  * typedef uint32_t  Elf32_Addr;
- * 
+ *
  *  typedef struct {
  *      Elf32_Sword     d_tag;
  *      union {
@@ -36,11 +36,11 @@ import ghidra.util.*;
  *          Elf32_Addr  d_ptr;
  *      } d_un;
  *  } Elf32_Dyn;
- * 
+ *
  * typedef   int64_t  Elf64_Sxword;
  * typedef  uint64_t  Elf64_Xword;
  * typedef  uint64_t  Elf64_Addr;
- * 
+ *
  * typedef struct {
  *     Elf64_Sxword	   d_tag;     //Dynamic entry type
  *     union {
@@ -48,8 +48,8 @@ import ghidra.util.*;
  *         Elf64_Addr  d_ptr;     //Address value
  *     } d_un;
  * } Elf64_Dyn;
- * 
- * </code></pre>
+ *
+ * }</pre>
  */
 public class ElfDynamic implements ByteArrayConverter {
 

@@ -214,21 +214,20 @@ public class FunctionSignatureStringable extends Stringable {
 		}
 
 		DataTypeManager dataTypeManager = desiredProgram.getDataTypeManager();
-		StringBuilder buildy = new StringBuilder();
-		buildy.append(getSavableFunctionSignatureSource()).append(DELIMITER);
-		buildy.append(getSavableIsInline()).append(DELIMITER);
-		buildy.append(getSavableHasNoReturn()).append(DELIMITER);
-		buildy.append(callingConventionName).append(DELIMITER);
-		buildy.append(getSavableCallFixup()).append(DELIMITER);
-		buildy.append(originalName).append(DELIMITER);
-		buildy.append(getSavableHasCustomStorage()).append(DELIMITER);
-		buildy.append(getSavableReturnType(dataTypeManager)).append(DELIMITER);
-		buildy.append(getSavableReturnStorage()).append(DELIMITER);
-		buildy.append(getSavableParameterStorage()).append(DELIMITER);
-		buildy.append(getSavableVarArgs()).append(DELIMITER);
-		buildy.append(Boolean.toString(isThisCall)).append(DELIMITER);
-		buildy.append(saveParameterInfos());
-		return buildy.toString();
+        String buildy = getSavableFunctionSignatureSource() + DELIMITER +
+                getSavableIsInline() + DELIMITER +
+                getSavableHasNoReturn() + DELIMITER +
+                callingConventionName + DELIMITER +
+                getSavableCallFixup() + DELIMITER +
+                originalName + DELIMITER +
+                getSavableHasCustomStorage() + DELIMITER +
+                getSavableReturnType(dataTypeManager) + DELIMITER +
+                getSavableReturnStorage() + DELIMITER +
+                getSavableParameterStorage() + DELIMITER +
+                getSavableVarArgs() + DELIMITER +
+                Boolean.toString(isThisCall) + DELIMITER +
+                saveParameterInfos();
+		return buildy;
 	}
 
 	private String getSavableReturnType(DataTypeManager dataTypeManager) {
@@ -256,10 +255,6 @@ public class FunctionSignatureStringable extends Stringable {
 
 	private String getSavableHasNoReturn() {
 		return Boolean.toString(hasNoReturn);
-	}
-
-	private String getSavableCallingConvention() {
-		return callingConventionName;
 	}
 
 	private String getSavableCallFixup() {
@@ -368,16 +363,8 @@ public class FunctionSignatureStringable extends Stringable {
 		}
 	}
 
-	private boolean isDefaultParameterName(String name) {
-		if (name == null) {
-			return true;
-		}
-		return SymbolUtilities.isDefaultParameterName(name);
-	}
-
 	private String saveParameterInfos() {
 		StringBuilder storageBuilder = new StringBuilder();
-		int nameCount = parameterInfos.size();
 		for (ParameterInfo parameterInfo : parameterInfos) {
 			String name = parameterInfo.name;
 			SourceType source = parameterInfo.source;
@@ -1044,7 +1031,7 @@ public class FunctionSignatureStringable extends Stringable {
 		}
 	}
 
-	private class ParameterInfo {
+	private static class ParameterInfo {
 
 		private final DataType dataType;
 		private final String name;
@@ -1114,15 +1101,14 @@ public class FunctionSignatureStringable extends Stringable {
 
 		@Override
 		public String toString() {
-			StringBuilder strBuilder = new StringBuilder();
-			strBuilder.append("[");
-			strBuilder.append(dataType.getName());
-			strBuilder.append(" ");
-			strBuilder.append(name);
-			strBuilder.append("@");
-			strBuilder.append(storage);
-			strBuilder.append("]");
-			return strBuilder.toString();
+            String strBuilder = "[" +
+                    dataType.getName() +
+                    " " +
+                    name +
+                    "@" +
+                    storage +
+                    "]";
+			return strBuilder;
 		}
 	}
 

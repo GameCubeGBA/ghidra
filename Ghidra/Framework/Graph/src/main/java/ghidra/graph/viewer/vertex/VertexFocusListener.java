@@ -20,6 +20,7 @@ package ghidra.graph.viewer.vertex;
  *
  * @param <V> the vertex type
  */
+@FunctionalInterface
 public interface VertexFocusListener<V> {
 
 	void vertexFocused(V v);

@@ -48,38 +48,32 @@ public class ConstructorInfo {
 		switch (flowFlags) {					// Convert flags to a standard flowtype
 			case 0:
 			case BRANCH_TO_END:
-				return RefType.FALL_THROUGH;
+            case NO_FALLTHRU | BRANCH_TO_END:
+            case BRANCH_INDIRECT | NO_FALLTHRU | BRANCH_TO_END:
+                // This should be COMPUTED_CONDITONAL_JUMP but this doesn't exist
+                // so we make it a fall thru so the disassembler can continue the flow
+                return RefType.FALL_THROUGH;
 			case CALL:
 				return RefType.UNCONDITIONAL_CALL;
 			case CALL | BRANCH_TO_END:
 				return RefType.CONDITIONAL_CALL;			// This could be wrong but doesn't matter much
 			case CALL_INDIRECT:
-				return RefType.COMPUTED_CALL;
-			case CALL_INDIRECT | BRANCH_TO_END:			// This could be COMPUTED_CONDITIONAL?
-				return RefType.COMPUTED_CALL;
-			case BRANCH_INDIRECT | NO_FALLTHRU:
+            case CALL_INDIRECT | BRANCH_TO_END:			// This could be COMPUTED_CONDITIONAL?
+                return RefType.COMPUTED_CALL;
+            case BRANCH_INDIRECT | NO_FALLTHRU:
 				return RefType.COMPUTED_JUMP;
-			case BRANCH_INDIRECT | NO_FALLTHRU | BRANCH_TO_END:
-				// This should be COMPUTED_CONDITONAL_JUMP but this doesn't exist
-				// so we make it a fall thru so the disassembler can continue the flow
-				return RefType.FALL_THROUGH;
-			case RETURN | NO_FALLTHRU:
-				return RefType.TERMINATOR;
+            case RETURN | NO_FALLTHRU:
+            case NO_FALLTHRU:
+                return RefType.TERMINATOR;
 			case RETURN | NO_FALLTHRU | BRANCH_TO_END:
 				return RefType.CONDITIONAL_TERMINATOR;
 			case JUMPOUT:
-				return RefType.CONDITIONAL_JUMP;
+            case BRANCH_TO_END | JUMPOUT:
+            case JUMPOUT | NO_FALLTHRU | BRANCH_TO_END:
+                return RefType.CONDITIONAL_JUMP;
 			case JUMPOUT | NO_FALLTHRU:
 				return RefType.UNCONDITIONAL_JUMP;
-			case JUMPOUT | NO_FALLTHRU | BRANCH_TO_END:
-				return RefType.CONDITIONAL_JUMP;
-			case NO_FALLTHRU:
-				return RefType.TERMINATOR;
-			case BRANCH_TO_END | JUMPOUT:
-				return RefType.CONDITIONAL_JUMP;
-			case NO_FALLTHRU | BRANCH_TO_END:
-				return RefType.FALL_THROUGH;
-			default:
+            default:
 				break;
 		}
 		return RefType.INVALID;

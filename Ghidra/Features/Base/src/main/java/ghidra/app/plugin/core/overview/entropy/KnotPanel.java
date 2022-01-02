@@ -173,7 +173,7 @@ public class KnotPanel extends JPanel implements ComponentListener {
 	public void componentShown(ComponentEvent e) {
 	}
 
-	private class ToplessLineBorder extends LineBorder {
+	private static class ToplessLineBorder extends LineBorder {
 
 		public ToplessLineBorder(Color color) {
 			super(color);

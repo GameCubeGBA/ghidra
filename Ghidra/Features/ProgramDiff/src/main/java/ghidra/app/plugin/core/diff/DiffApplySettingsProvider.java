@@ -389,7 +389,7 @@ public class DiffApplySettingsProvider extends ComponentProviderAdapter {
 		return plugin;
 	}
 
-	class Choice extends JPanel implements Comparable<Choice> {
+	static class Choice extends JPanel implements Comparable<Choice> {
 		private static final long serialVersionUID = 1L;
 		String type;
 		boolean allowMerge;
@@ -414,7 +414,7 @@ public class DiffApplySettingsProvider extends ComponentProviderAdapter {
 			}
 			label = new GDLabel(" " + typeName + " ");
 			label.setHorizontalAlignment(SwingConstants.RIGHT);
-			add(applyCB, BorderLayout.EAST);
+			add(applyCB, BorderLayout.LINE_END);
 			add(label, BorderLayout.CENTER);
 		}
 
@@ -462,7 +462,7 @@ public class DiffApplySettingsProvider extends ComponentProviderAdapter {
 			applyCB.setName(type + " Diff Apply CB");
 			label = new GDLabel(" " + type + " ");
 			label.setHorizontalAlignment(SwingConstants.RIGHT);
-			add(applyCB, BorderLayout.EAST);
+			add(applyCB, BorderLayout.LINE_END);
 			add(label, BorderLayout.CENTER);
 		}
 	}

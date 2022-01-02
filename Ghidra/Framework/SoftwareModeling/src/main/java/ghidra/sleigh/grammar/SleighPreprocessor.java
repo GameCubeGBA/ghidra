@@ -277,12 +277,11 @@ public class SleighPreprocessor implements ExpressionEnvironment {
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("lineno:");
-		sb.append(lineno);
-		sb.append(" ");
-		sb.append(ifstack);
-		return sb.toString();
+        String sb = "lineno:" +
+                lineno +
+                " " +
+                ifstack;
+		return sb;
 	}
 
 	private void handleExpression(String expression) throws RecognitionException, IOException {

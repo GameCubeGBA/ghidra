@@ -453,7 +453,7 @@ public class XRefFieldFactory extends FieldFactory {
 			List<XrefFieldElement> rowElements = new ArrayList<>();
 			Reference firstRef = refs.get(0);
 			XrefAttributedString xrefString =
-				new XrefAttributedString(firstRef, nameString);
+					new XrefAttributedString(firstRef, nameString);
 			rowElements.add(new XrefFieldElement(xrefString, row, 0));
 
 			//
@@ -613,7 +613,7 @@ public class XRefFieldFactory extends FieldFactory {
 		}
 
 		XrefAttributedString xrefString =
-			new XrefAttributedString(ref, addressPart, delimiter);
+				new XrefAttributedString(ref, addressPart, delimiter);
 		if (delimiter == null) {
 			xrefString.hideDelimiter();
 		}
@@ -633,7 +633,7 @@ public class XRefFieldFactory extends FieldFactory {
 		}
 
 		XrefAttributedString xrefString =
-			new XrefAttributedString(ref, as, delimiter);
+				new XrefAttributedString(ref, as, delimiter);
 		return new XrefFieldElement(xrefString, row, 0);
 	}
 
@@ -866,7 +866,7 @@ public class XRefFieldFactory extends FieldFactory {
 // Inner Classes
 //==================================================================================================
 
-	private class XrefAttributedString extends CompositeAttributedString {
+	private static class XrefAttributedString extends CompositeAttributedString {
 
 		private AttributedString content;
 		private AttributedString delimiter;
@@ -927,7 +927,7 @@ public class XRefFieldFactory extends FieldFactory {
 		}
 	}
 
-	private class XrefListingField extends ListingTextField {
+	private static class XrefListingField extends ListingTextField {
 
 		XrefListingField(XRefFieldFactory factory, ProxyObj<?> proxy, TextField field) {
 			super(factory, proxy, field);

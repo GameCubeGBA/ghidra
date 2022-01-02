@@ -36,14 +36,12 @@ class MemviewMapModel extends AbstractSortedTableModel<MemoryBox> {
 
 	private List<MemoryBox> memList = new ArrayList<>();
 	private Map<String, MemoryBox> memMap = new HashMap<>();
-	private MemviewProvider provider;
 
 	private static final String[] COLUMN_NAMES =
 		{ NAME_COL, ASTART_COL, ASTOP_COL, TSTART_COL, TSTOP_COL };
 
 	public MemviewMapModel(MemviewProvider provider) {
 		super(ASTART);
-		this.provider = provider;
 	}
 
 	public List<MemoryBox> getBoxes() {
@@ -216,7 +214,7 @@ class MemviewMapModel extends AbstractSortedTableModel<MemoryBox> {
 		return new MemoryMapComparator(columnIndex);
 	}
 
-	private class MemoryMapComparator implements Comparator<MemoryBox> {
+	private static class MemoryMapComparator implements Comparator<MemoryBox> {
 		private final int sortColumn;
 
 		public MemoryMapComparator(int sortColumn) {

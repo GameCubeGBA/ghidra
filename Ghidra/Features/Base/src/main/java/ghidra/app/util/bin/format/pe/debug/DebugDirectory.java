@@ -50,7 +50,7 @@ public class DebugDirectory implements StructConverter, ByteArrayConverter {
 	 */
     public static final String NAME = "IMAGE_DEBUG_DIRECTORY";
 	/**
-	 * The size of the <code>IMAGE_DEBUG_DIRECTORY</code>, in bytes.
+	 * The size of the {@code IMAGE_DEBUG_DIRECTORY}, in bytes.
 	 */
     public static final int IMAGE_SIZEOF_DEBUG_DIRECTORY = 28;
 

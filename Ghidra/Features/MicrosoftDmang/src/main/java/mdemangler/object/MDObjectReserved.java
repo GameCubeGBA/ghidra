@@ -41,11 +41,11 @@ public class MDObjectReserved extends MDObject {
 	}
 
 	/**
-	 * This method returns the <b><code>String</code></b> containing the sequence of ASCII-represented digits
+	 * This method returns the <b>{@code String}</b> containing the sequence of ASCII-represented digits
 	 *  '0'-'9'.  The processing and capture of these digits is stopped when a non-digit
 	 *  is encountered.
-	 * @param dmang The <b><code>MDMang</code></b> demangler control.
-	 * @return The <b><code>String</code></b> containing the digits.
+	 * @param dmang The <b>{@code MDMang}</b> demangler control.
+	 * @return The <b>{@code String}</b> containing the digits.
 	 */
 	protected static String parseDigits(MDMang dmang) {
 		StringBuilder ret = new StringBuilder();

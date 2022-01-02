@@ -214,7 +214,7 @@ public class GTreeSlowLoadingNodeTest extends AbstractDockingTest {
 // Inner Classes
 //==================================================================================================
 
-	private class EmptyRootNode extends GTreeNode {
+	private static class EmptyRootNode extends GTreeNode {
 
 		EmptyRootNode() {
 			setChildren(new ArrayList<GTreeNode>());
@@ -334,7 +334,7 @@ public class GTreeSlowLoadingNodeTest extends AbstractDockingTest {
 
 	}
 
-	private class TestLeafNode extends GTreeNode {
+	private static class TestLeafNode extends GTreeNode {
 
 		private String name = getClass().getSimpleName() + getRandomString();
 

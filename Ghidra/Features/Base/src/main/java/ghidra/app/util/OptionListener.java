@@ -21,6 +21,7 @@ package ghidra.app.util;
  * 
  * 
  */
+@FunctionalInterface
 public interface OptionListener {
 	
 	/**

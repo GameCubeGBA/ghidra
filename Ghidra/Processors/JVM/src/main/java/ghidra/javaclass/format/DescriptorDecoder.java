@@ -229,9 +229,7 @@ public class DescriptorDecoder {
 			int dimension = descriptor.lastIndexOf('[') + 1;
 			String baseType = getTypeNameFromDescriptor(descriptor.replace("[", ""),
 				fullyQualifiedName, replaceSlash);
-			StringBuilder sb = new StringBuilder(baseType);
-            sb.append("[]".repeat(dimension));
-			return sb.toString();
+            return baseType + "[]".repeat(dimension);
 		}
 		switch (descriptor.charAt(0)) {
 			case BASE_TYPE_BYTE:  //signed byte

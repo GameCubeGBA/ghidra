@@ -48,17 +48,17 @@ public class MonitoredInputStream extends InputStream {
 
 	/**
 	 * Reads the next byte of data from this input stream. The value 
-	 * byte is returned as an <code>int</code> in the range 
-	 * <code>0</code> to <code>255</code>. If no byte is available 
+	 * byte is returned as an {@code int} in the range
+	 * {@code 0} to <code>255</code>. If no byte is available
 	 * because the end of the stream has been reached, the value 
-	 * <code>-1</code> is returned. This method blocks until input data 
+	 * {@code -1} is returned. This method blocks until input data
 	 * is available, the end of the stream is detected, or an exception 
 	 * is thrown. 
 	 * <p>
 	 * This method
-	 * simply performs <code>in.read()</code> and returns the result.
+	 * simply performs {@code in.read()} and returns the result.
 	 *
-	 * @return     the next byte of data, or <code>-1</code> if the end of the
+	 * @return     the next byte of data, or {@code -1} if the end of the
 	 *             stream is reached.
 	 * @exception  IOException  if an I/O error occurs.
 	 */
@@ -80,21 +80,21 @@ public class MonitoredInputStream extends InputStream {
 	}
 
 	/**
-	 * Reads up to <code>byte.length</code> bytes of data from this 
+	 * Reads up to {@code byte.length} bytes of data from this
 	 * input stream into an array of bytes. This method blocks until some 
 	 * input is available. 
 	 * <p>
 	 * This method simply performs the call
-	 * <code>read(b, 0, b.length)</code> and returns
+	 * {@code read(b, 0, b.length)} and returns
 	 * the  result. It is important that it does
-	 * <i>not</i> do <code>in.read(b)</code> instead;
-	 * certain subclasses of  <code>FilterInputStream</code>
+	 * <i>not</i> do {@code in.read(b)} instead;
+	 * certain subclasses of  {@code FilterInputStream}
 	 * depend on the implementation strategy actually
 	 * used.
 	 *
 	 * @param      b   the buffer into which the data is read.
 	 * @return     the total number of bytes read into the buffer, or
-	 *             <code>-1</code> if there is no more data because the end of
+	 *             {@code -1} if there is no more data because the end of
 	 *             the stream has been reached.
 	 * @exception  IOException  if an I/O error occurs.
 	 * @see        java.io.FilterInputStream#read(byte[], int, int)
@@ -105,18 +105,18 @@ public class MonitoredInputStream extends InputStream {
 	}
 
 	/**
-	 * Reads up to <code>len</code> bytes of data from this input stream 
+	 * Reads up to {@code len} bytes of data from this input stream
 	 * into an array of bytes. This method blocks until some input is 
 	 * available. 
 	 * <p>
-	 * This method simply performs <code>in.read(b, off, len)</code> 
+	 * This method simply performs {@code in.read(b, off, len)}
 	 * and returns the result.
 	 *
 	 * @param      b     the buffer into which the data is read.
 	 * @param      off   the start offset of the data.
 	 * @param      len   the maximum number of bytes read.
 	 * @return     the total number of bytes read into the buffer, or
-	 *             <code>-1</code> if there is no more data because the end of
+	 *             {@code -1} if there is no more data because the end of
 	 *             the stream has been reached.
 	 * @exception  IOException  if an I/O error occurs.
 	 */
@@ -136,14 +136,14 @@ public class MonitoredInputStream extends InputStream {
 	}
 
 	/**
-	 * Skips over and discards <code>n</code> bytes of data from the 
-	 * input stream. The <code>skip</code> method may, for a variety of 
+	 * Skips over and discards {@code n} bytes of data from the
+	 * input stream. The {@code skip} method may, for a variety of
 	 * reasons, end up skipping over some smaller number of bytes, 
-	 * possibly <code>0</code>. The actual number of bytes skipped is 
+	 * possibly {@code 0}. The actual number of bytes skipped is
 	 * returned. 
 	 * <p>
 	 * This method
-	 * simply performs <code>in.skip(n)</code>.
+	 * simply performs {@code in.skip(n)}.
 	 *
 	 * @param      n   the number of bytes to be skipped.
 	 * @return     the actual number of bytes skipped.
@@ -159,7 +159,7 @@ public class MonitoredInputStream extends InputStream {
 	 * stream without blocking. 
 	 * <p>
 	 * This method
-	 * simply performs <code>in.available()</code> and
+	 * simply performs {@code in.available()} and
 	 * returns the result.
 	 *
 	 * @return     the number of bytes that can be read from the input stream
@@ -175,7 +175,7 @@ public class MonitoredInputStream extends InputStream {
 	 * Closes this input stream and releases any system resources 
 	 * associated with the stream. 
 	 * This
-	 * method simply performs <code>in.close()</code>.
+	 * method simply performs {@code in.close()}.
 	 *
 	 * @exception  IOException  if an I/O error occurs.
 	 */
@@ -186,14 +186,14 @@ public class MonitoredInputStream extends InputStream {
 
 	/**
 	 * Marks the current position in this input stream. A subsequent 
-	 * call to the <code>reset</code> method repositions this stream at 
+	 * call to the {@code reset} method repositions this stream at
 	 * the last marked position so that subsequent reads re-read the same bytes.
 	 * <p>
-	 * The <code>readlimit</code> argument tells this input stream to 
+	 * The {@code readlimit} argument tells this input stream to
 	 * allow that many bytes to be read before the mark position gets 
 	 * invalidated. 
 	 * <p>
-	 * This method simply performs <code>in.mark(readlimit)</code>.
+	 * This method simply performs {@code in.mark(readlimit)}.
 	 *
 	 * @param   readlimit   the maximum limit of bytes that can be read before
 	 *                      the mark position becomes invalid.
@@ -206,10 +206,10 @@ public class MonitoredInputStream extends InputStream {
 
 	/**
 	 * Repositions this stream to the position at the time the 
-	 * <code>mark</code> method was last called on this input stream. 
+	 * {@code mark} method was last called on this input stream.
 	 * <p>
 	 * This method
-	 * simply performs <code>in.reset()</code>.
+	 * simply performs {@code in.reset()}.
 	 * <p>
 	 * Stream marks are intended to be used in
 	 * situations where you need to read ahead a little to see what's in
@@ -230,14 +230,14 @@ public class MonitoredInputStream extends InputStream {
 	}
 
 	/**
-	 * Tests if this input stream supports the <code>mark</code> 
-	 * and <code>reset</code> methods. 
+	 * Tests if this input stream supports the {@code mark}
+	 * and {@code reset} methods.
 	 * This method
-	 * simply performs <code>in.markSupported()</code>.
+	 * simply performs {@code in.markSupported()}.
 	 *
-	 * @return  <code>true</code> if this stream type supports the
-	 *          <code>mark</code> and <code>reset</code> method;
-	 *          <code>false</code> otherwise.
+	 * @return  {@code true} if this stream type supports the
+	 *          {@code mark} and <code>reset</code> method;
+	 *          {@code false} otherwise.
 	 * @see     java.io.InputStream#mark(int)
 	 * @see     java.io.InputStream#reset()
 	 */

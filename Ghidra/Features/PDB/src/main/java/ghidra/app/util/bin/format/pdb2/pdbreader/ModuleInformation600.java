@@ -53,12 +53,11 @@ public class ModuleInformation600 extends AbstractModuleInformation {
 
 	@Override
 	protected String dumpAdditionals() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("\nnameIndexSourceFile: ");
-		builder.append(nameIndexSourceFile);
-		builder.append("\nnameIndexCompilerPdbPath: ");
-		builder.append(nameIndexCompilerPdbPath);
-		return builder.toString();
+        String builder = "\nnameIndexSourceFile: " +
+                nameIndexSourceFile +
+                "\nnameIndexCompilerPdbPath: " +
+                nameIndexCompilerPdbPath;
+		return builder;
 	}
 
 }

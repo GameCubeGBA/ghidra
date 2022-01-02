@@ -25,8 +25,8 @@ import ghidra.util.Conv;
 import ghidra.util.exception.DuplicateNameException;
 
 /**
- * A class to represent the <code>IMAGE_LOAD_CONFIG_DIRECTORY</code>
- * data structure which is defined in <b><code>winnt.h</code></b>.
+ * A class to represent the {@code IMAGE_LOAD_CONFIG_DIRECTORY}
+ * data structure which is defined in <b>{@code winnt.h}</b>.
  */
 public class LoadConfigDirectory implements StructConverter {
 	public static final String NAME32 = "IMAGE_LOAD_CONFIG_DIRECTORY32";
@@ -452,12 +452,11 @@ public class LoadConfigDirectory implements StructConverter {
 
 		@Override
 		public String toString() {
-			StringBuilder sb = new StringBuilder();
-			sb.append("flags=0x" + Integer.toHexString(Conv.shortToInt(flags)));
-			sb.append(", catalog=0x" + Integer.toHexString(Conv.shortToInt(catalog)));
-			sb.append(", catalogOffset=0x" + Integer.toHexString(catalogOffset));
-			sb.append(", reserved=0x" + Integer.toHexString(reserved));
-			return sb.toString();
+            String sb = "flags=0x" + Integer.toHexString(Conv.shortToInt(flags)) +
+                    ", catalog=0x" + Integer.toHexString(Conv.shortToInt(catalog)) +
+                    ", catalogOffset=0x" + Integer.toHexString(catalogOffset) +
+                    ", reserved=0x" + Integer.toHexString(reserved);
+			return sb;
 		}
 
 		@Override

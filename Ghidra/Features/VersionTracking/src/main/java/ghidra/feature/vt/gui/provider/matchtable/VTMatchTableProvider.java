@@ -218,7 +218,7 @@ public class VTMatchTableProvider extends ComponentProviderAdapter
 
 		JPanel filterAreaPanel = createFilterArea();
 		matchesTablePanel.add(tablePanel, BorderLayout.CENTER);
-		matchesTablePanel.add(filterAreaPanel, BorderLayout.SOUTH);
+		matchesTablePanel.add(filterAreaPanel, BorderLayout.PAGE_END);
 
 		JPanel parentPanel = new JPanel(new BorderLayout());
 		parentPanel.add(matchesTablePanel);
@@ -336,7 +336,7 @@ public class VTMatchTableProvider extends ComponentProviderAdapter
 
 		JComponent nameFilterPanel = createTextFilterPanel();
 		parentPanel.add(nameFilterPanel, BorderLayout.CENTER);
-		parentPanel.add(innerPanel, BorderLayout.EAST);
+		parentPanel.add(innerPanel, BorderLayout.LINE_END);
 
 		JComponent scoreFilterPanel = createScoreFilterPanel();
 		innerPanel.add(scoreFilterPanel);

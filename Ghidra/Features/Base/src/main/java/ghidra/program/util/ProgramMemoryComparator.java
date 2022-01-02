@@ -23,7 +23,7 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.listing.ProgramContext;
 
 /**
- * <CODE>ProgramMemoryComparator</CODE> is a class for comparing two programs and
+ * {@code ProgramMemoryComparator} is a class for comparing two programs and
  * determining the address differences between them.
  */
 
@@ -66,7 +66,7 @@ public class ProgramMemoryComparator {
 	private AddressSet compatibleOnlyInTwo;
 
     /**
-     * <CODE>ProgramMemoryComparator</CODE> is used to determine the memory
+     * {@code ProgramMemoryComparator} is used to determine the memory
      * address differences between two programs.
      *
      * @param program1 the first program

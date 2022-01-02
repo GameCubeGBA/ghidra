@@ -23,7 +23,7 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.listing.ProgramModule;
 
 /**
- * The <CODE>GroupPath</CODE> is a class to represent a unique path in a tree for a Group.
+ * The {@code GroupPath} is a class to represent a unique path in a tree for a Group.
  */
 public class GroupPath implements Serializable {
     private static final long serialVersionUID = 1;

@@ -116,9 +116,9 @@ public class SaveToolConfigDialog extends DialogComponentProvider implements Lis
 		JPanel toolFieldPanel = createToolFieldPanel();
 
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.add(toolFieldPanel, BorderLayout.NORTH);
+		panel.add(toolFieldPanel, BorderLayout.PAGE_START);
 		panel.add(iconPanel, BorderLayout.CENTER);
-		panel.add(iconFieldPanel, BorderLayout.SOUTH);
+		panel.add(iconFieldPanel, BorderLayout.PAGE_END);
 		panel.setPreferredSize(new Dimension(400, 300));
 		return panel;
 	}
@@ -319,9 +319,9 @@ public class SaveToolConfigDialog extends DialogComponentProvider implements Lis
 
 		JPanel panel = new JPanel(new BorderLayout(5, 0));
 		panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-		panel.add(new GLabel("Icon Name:"), BorderLayout.WEST);
+		panel.add(new GLabel("Icon Name:"), BorderLayout.LINE_START);
 		panel.add(iconField, BorderLayout.CENTER);
-		panel.add(browseButton, BorderLayout.EAST);
+		panel.add(browseButton, BorderLayout.LINE_END);
 		return panel;
 	}
 

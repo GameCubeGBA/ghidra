@@ -21,7 +21,7 @@ import ghidra.program.util.DiffUtility;
 import ghidra.util.HTMLUtilities;
 
 /**
- * <code>ConflictUtility</code> provides some constants and static methods 
+ * {@code ConflictUtility} provides some constants and static methods
  * used by the Listing Merge portion of the multi-user merge.
  * For now, the VariousChoicesPanel and VerticalChoicesPanel use HTML in
  * JLabels to display color etc. This is because they also show radiobuttons
@@ -87,9 +87,7 @@ public class ConflictUtility {
 	 * @return the string representing that many spaces in HTML.
 	 */
 	public static String spaces(int num) {
-		StringBuffer buf = new StringBuffer(6 * num);
-        buf.append("&nbsp;".repeat(Math.max(0, num)));
-		return buf.toString();
+        return "&nbsp;".repeat(Math.max(0, num));
 	}
 
 	/**

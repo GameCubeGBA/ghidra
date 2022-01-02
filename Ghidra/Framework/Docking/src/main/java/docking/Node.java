@@ -172,9 +172,7 @@ abstract class Node {
 	}
 
 	private String indent(int n) {
-		StringBuilder buffy = new StringBuilder();
-        buffy.append(" ".repeat(Math.max(0, n)));
-		return buffy.toString();
+        return " ".repeat(Math.max(0, n));
 	}
 
 	void dispose() {

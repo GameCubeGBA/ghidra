@@ -33,7 +33,7 @@ import ghidra.util.task.TaskMonitor;
  * NOTE:  ALL LanguageTranslator CLASSES MUST END IN "LanguageTranslator".  If not,
  * the ClassSearcher will not find them.
  * 
- * <code>LanguageTranslator</code> provides translation capabilities used by Program.setLanguage
+ * {@code LanguageTranslator} provides translation capabilities used by Program.setLanguage
  * when converting a program from one language to another or from one version to another.
  * <br>
  * Explicit translator implementations must implement the default constructor and should not

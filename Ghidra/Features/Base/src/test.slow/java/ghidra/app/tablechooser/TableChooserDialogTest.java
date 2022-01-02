@@ -511,7 +511,8 @@ public class TableChooserDialogTest extends AbstractGhidraHeadedIntegrationTest 
 // Inner Classes
 //==================================================================================================
 
-	private interface TestExecutorDecision {
+	@FunctionalInterface
+    private interface TestExecutorDecision {
 		boolean decide(AddressableRowObject rowObject);
 	}
 
@@ -604,7 +605,7 @@ public class TableChooserDialogTest extends AbstractGhidraHeadedIntegrationTest 
 		}
 	}
 
-	private class TestAction extends DockingAction {
+	private static class TestAction extends DockingAction {
 
 		private int invoked;
 

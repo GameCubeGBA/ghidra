@@ -87,7 +87,7 @@ public class GTaskManagerPanel extends JPanel {
 		mainPanel.setResizeWeight(.55);
 
 		add(mainPanel, BorderLayout.CENTER);
-		add(buildControlPanel(), BorderLayout.SOUTH);
+		add(buildControlPanel(), BorderLayout.PAGE_END);
 
 	}
 

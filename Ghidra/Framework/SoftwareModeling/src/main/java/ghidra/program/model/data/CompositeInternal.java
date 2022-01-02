@@ -95,7 +95,7 @@ public interface CompositeInternal extends Composite {
 	int getStoredMinimumAlignment();
 
 	/**
-	 * <code>ComponentComparator</code> provides ability to compare two DataTypeComponent objects
+	 * {@code ComponentComparator} provides ability to compare two DataTypeComponent objects
 	 * based upon their ordinal. Intended to be used to sort components based upon ordinal.
 	 */
     class ComponentComparator implements Comparator<DataTypeComponent> {
@@ -109,7 +109,7 @@ public interface CompositeInternal extends Composite {
 	}
 
 	/**
-	 * <code>OffsetComparator</code> provides ability to compare an Integer offset with a
+	 * {@code OffsetComparator} provides ability to compare an Integer offset with a
 	 * DataTypeComponent object. The offset will be consider equal (0) if the component contains the
 	 * offset.
 	 */
@@ -136,7 +136,7 @@ public interface CompositeInternal extends Composite {
 	}
 
 	/**
-	 * <code>OrdinalComparator</code> provides ability to compare an Integer ordinal with a
+	 * {@code OrdinalComparator} provides ability to compare an Integer ordinal with a
 	 * DataTypeComponent object. The ordinal will be consider equal (0) if the component corresponds
 	 * to the specified ordinal.
 	 * <p>

@@ -820,7 +820,7 @@ public class GhidraJarBuilder implements GhidraLaunchable {
 
 	}
 
-	private class Zip {
+	private static class Zip {
 		private ZipOutputStream zipOut;
 		private TaskMonitor monitor;
 
@@ -921,11 +921,9 @@ public class GhidraJarBuilder implements GhidraLaunchable {
 		}
 		String invocationName = System.getProperty(INVOCATION_NAME_PROPERTY);
 
-		StringBuffer buf = new StringBuffer();
-		buf.append("\nUsage: ");
-		buf.append(invocationName != null ? invocationName : "GhidraJarBuilder");
-		buf.append(
-			" [-output <output file>] [-srczip <src zip output file>] [-bin <compiled classes dir>] [-main <main-class>]\n");
+        String buf = "\nUsage: " +
+                (invocationName != null ? invocationName : "GhidraJarBuilder") +
+                " [-output <output file>] [-srczip <src zip output file>] [-bin <compiled classes dir>] [-main <main-class>]\n";
 		System.err.println(buf);
 		System.exit(0);
 	}

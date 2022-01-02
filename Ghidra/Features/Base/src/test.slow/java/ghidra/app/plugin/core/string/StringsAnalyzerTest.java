@@ -910,9 +910,8 @@ public class StringsAnalyzerTest extends AbstractGhidraHeadedIntegrationTest {
 			stringHere = dataHere.getDefaultValueRepresentation();
 
 			// String will look something like --> "My String",00
-			StringBuilder buildMyString = new StringBuilder("\"" + existingStrings[i] + "\"");
 
-			assertEquals(buildMyString.toString(), stringHere);
+            assertEquals("\"" + existingStrings[i] + "\"", stringHere);
 		}
 	}
 
@@ -967,9 +966,8 @@ public class StringsAnalyzerTest extends AbstractGhidraHeadedIntegrationTest {
 			stringHere = dataHere.getDefaultValueRepresentation();
 
 			// String will look something like --> "My String",00
-			StringBuilder buildMyString = new StringBuilder("\"" + existingStrings[i] + "\"");
 
-			assertEquals(buildMyString.toString(), stringHere);
+            assertEquals("\"" + existingStrings[i] + "\"", stringHere);
 		}
 	}
 

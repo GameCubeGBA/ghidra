@@ -18,6 +18,7 @@ package ghidra.feature.vt.gui.provider.relatedMatches;
 
 import ghidra.feature.vt.api.util.VTRelatedMatch;
 
+@FunctionalInterface
 public interface VTRelatedMatchSelectionListener {
     void relatedMatchSelected(VTRelatedMatch relatedMatch);
 }

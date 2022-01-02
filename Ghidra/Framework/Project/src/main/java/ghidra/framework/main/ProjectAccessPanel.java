@@ -194,7 +194,7 @@ public class ProjectAccessPanel extends AbstractWizardJPanel {
 
 		JPanel mainPanel = new JPanel();
 		mainPanel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
-		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.X_AXIS));
+		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.LINE_AXIS));
 
 		knownUsersPanel = new KnownUsersPanel(Arrays.asList(knownUsers));
 		userAccessPanel = new UserAccessPanel(currentUser);
@@ -209,7 +209,7 @@ public class ProjectAccessPanel extends AbstractWizardJPanel {
 		if (anonymousServerAccessAllowed) {
 			anonymousAccessCB = new GCheckBox("Allow Anonymous Access", origAnonymousAccessEnabled);
 			anonymousAccessCB.setBorder(BorderFactory.createEmptyBorder(10, 10, 0, 0));
-			add(anonymousAccessCB, BorderLayout.SOUTH);
+			add(anonymousAccessCB, BorderLayout.PAGE_END);
 		}
 	}
 

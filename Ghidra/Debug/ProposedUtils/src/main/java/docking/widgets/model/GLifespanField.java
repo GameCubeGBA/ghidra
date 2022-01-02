@@ -37,7 +37,7 @@ public class GLifespanField extends JPanel {
 	private final DefaultComboBoxModel<String> modelMax = new DefaultComboBoxModel<>();
 
 	public GLifespanField() {
-		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+		setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
 
 		add(labelLower);
 		add(fieldMin);

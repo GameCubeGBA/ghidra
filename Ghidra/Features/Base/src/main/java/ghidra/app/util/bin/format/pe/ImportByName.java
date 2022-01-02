@@ -24,8 +24,8 @@ import ghidra.util.exception.*;
 import java.io.*;
 
 /**
- * A class to represent the <code>IMAGE_IMPORT_BY_NAME</code>
- * data structure defined in <b><code>winnt.h</code></b>.
+ * A class to represent the {@code IMAGE_IMPORT_BY_NAME}
+ * data structure defined in <b>{@code winnt.h}</b>.
  *
  * <pre>
  * typedef struct _IMAGE_IMPORT_BY_NAME {

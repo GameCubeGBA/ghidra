@@ -33,7 +33,7 @@ import ghidra.util.exception.DuplicateNameException;
 
 /**
  * A class to represent the IMAGE_FILE_HEADER struct as
- * defined in <code>winnt.h</code>.
+ * defined in {@code winnt.h}.
  * <br>
  * <pre>
  * typedef struct _IMAGE_FILE_HEADER {
@@ -54,7 +54,7 @@ public class FileHeader implements StructConverter {
 	 */
     public static final String NAME = "IMAGE_FILE_HEADER";
 	/**
-	 * The size of the <code>IMAGE_FILE_HEADER</code> in bytes.
+	 * The size of the {@code IMAGE_FILE_HEADER} in bytes.
 	 */
     public static final int IMAGE_SIZEOF_FILE_HEADER = 20;
 

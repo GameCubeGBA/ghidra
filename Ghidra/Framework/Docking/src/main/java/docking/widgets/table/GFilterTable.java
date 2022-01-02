@@ -58,7 +58,7 @@ public class GFilterTable<ROW_OBJECT> extends JPanel {
 		JScrollPane scrollPane = new JScrollPane(table);
 		add(scrollPane, BorderLayout.CENTER);
 		filterPanel = createTableFilterPanel(table, model);
-		add(filterPanel, BorderLayout.SOUTH);
+		add(filterPanel, BorderLayout.PAGE_END);
 	}
 
 	protected GTable createTable(RowObjectTableModel<ROW_OBJECT> tableModel) {
@@ -84,7 +84,7 @@ public class GFilterTable<ROW_OBJECT> extends JPanel {
 
 		add(tablePanel, BorderLayout.CENTER);
 		filterPanel = createTableFilterPanel(table, model);
-		add(filterPanel, BorderLayout.SOUTH);
+		add(filterPanel, BorderLayout.PAGE_END);
 	}
 
 	protected GTableFilterPanel<ROW_OBJECT> createTableFilterPanel(GTable gTable,

@@ -169,7 +169,7 @@ public class GatherParamPanel extends JPanel {
 		this.shown = shown;
 	}
 
-	public class ParamComponent {
+	public static class ParamComponent {
 		private int type;
 		private Component displayComponent;
 

@@ -37,7 +37,7 @@ import ghidra.util.Msg;
 import ghidra.util.SystemUtilities;
 
 /**
- * <code>SleighCompileLauncher</code> Sleigh compiler launch provider
+ * {@code SleighCompileLauncher} Sleigh compiler launch provider
  */
 public class SleighCompileLauncher implements GhidraLaunchable {
 

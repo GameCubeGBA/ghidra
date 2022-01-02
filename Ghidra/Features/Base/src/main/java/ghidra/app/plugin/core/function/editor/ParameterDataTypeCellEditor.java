@@ -110,7 +110,7 @@ class ParameterDataTypeCellEditor extends AbstractCellEditor implements TableCel
 
 		editorPanel = new JPanel(new BorderLayout());
 		editorPanel.add(textField, BorderLayout.CENTER);
-		editorPanel.add(dataTypeChooserButton, BorderLayout.EAST);
+		editorPanel.add(dataTypeChooserButton, BorderLayout.LINE_END);
 	}
 
 	/**

@@ -324,7 +324,7 @@ public class FilterOptionsEditorDialog extends DialogComponentProvider {
 	 * define how multiple terms are logically applied; eg: 'AND' means that all filter terms
 	 * must be matched, 'OR' means any single term must match.
 	 */
-	class MultiTermPanel extends InlineComponentTitledPanel {
+    static class MultiTermPanel extends InlineComponentTitledPanel {
 
 		private JLayer<?> optionsPaneDisableLayer;
 
@@ -403,10 +403,10 @@ public class FilterOptionsEditorDialog extends DialogComponentProvider {
 		 */
 		private void createPanel() {
 
-			getContentPane().setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+			getContentPane().setLayout(new FlowLayout(FlowLayout.LEADING, 0, 0));
 
 			JPanel outerPanel = new JPanel();
-			outerPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+			outerPanel.setLayout(new FlowLayout(FlowLayout.LEADING, 0, 0));
 
 			JPanel optionsPanel = new JPanel();
 			optionsPanel.setLayout(new PairLayout());
@@ -420,7 +420,7 @@ public class FilterOptionsEditorDialog extends DialogComponentProvider {
 			delimiterCharacterCB.setRenderer(new DelimiterListCellRenderer());
 
 			JPanel fixedSizePanel = new JPanel();
-			fixedSizePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+			fixedSizePanel.setLayout(new FlowLayout(FlowLayout.LEADING));
 			fixedSizePanel.add(delimiterCharacterCB);
 
 			optionsPanel.add(delimiterCharacterFieldName);
@@ -430,7 +430,7 @@ public class FilterOptionsEditorDialog extends DialogComponentProvider {
 			JLabel label = new GLabel("Evaluation Mode:");
 
 			JPanel buttonGroupPanel = new JPanel();
-			buttonGroupPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+			buttonGroupPanel.setLayout(new FlowLayout(FlowLayout.LEADING));
 			ButtonGroup modeBtnGroup = new ButtonGroup();
 			MultitermEvaluationMode[] modes = MultitermEvaluationMode.values();
 			for (MultitermEvaluationMode mode : modes) {

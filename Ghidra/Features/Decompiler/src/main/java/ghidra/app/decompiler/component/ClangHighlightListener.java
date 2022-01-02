@@ -19,6 +19,7 @@ package ghidra.app.decompiler.component;
 /**
  * Interface for a decompiler highlight change listener.
  */
+@FunctionalInterface
 public interface ClangHighlightListener {
 
 	/**

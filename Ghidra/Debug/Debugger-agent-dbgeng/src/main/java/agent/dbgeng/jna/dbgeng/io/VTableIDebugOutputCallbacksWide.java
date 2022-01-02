@@ -42,19 +42,23 @@ public class VTableIDebugOutputCallbacksWide extends Structure {
 		return FIELDS;
 	}
 
-	public interface QueryInterfaceCallback extends StdCallLibrary.StdCallCallback {
+	@FunctionalInterface
+    public interface QueryInterfaceCallback extends StdCallLibrary.StdCallCallback {
 		HRESULT invoke(Pointer thisPointer, REFIID refid, PointerByReference ppvObject);
 	}
 
-	public interface AddRefCallback extends StdCallLibrary.StdCallCallback {
+	@FunctionalInterface
+    public interface AddRefCallback extends StdCallLibrary.StdCallCallback {
 		int invoke(Pointer thisPointer);
 	}
 
-	public interface ReleaseCallback extends StdCallLibrary.StdCallCallback {
+	@FunctionalInterface
+    public interface ReleaseCallback extends StdCallLibrary.StdCallCallback {
 		int invoke(Pointer thisPointer);
 	}
 
-	public interface OutputCallback extends StdCallLibrary.StdCallCallback {
+	@FunctionalInterface
+    public interface OutputCallback extends StdCallLibrary.StdCallCallback {
 		HRESULT invoke(Pointer thisPointer, ULONG Mask, WString Text);
 	}
 }

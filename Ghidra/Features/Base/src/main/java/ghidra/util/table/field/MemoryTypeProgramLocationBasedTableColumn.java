@@ -73,7 +73,7 @@ public class MemoryTypeProgramLocationBasedTableColumn
 // Inner Classes
 //==================================================================================================
 
-	private class MemoryTypeRenderer extends AbstractGhidraColumnRenderer<MemoryBlock> {
+	private static class MemoryTypeRenderer extends AbstractGhidraColumnRenderer<MemoryBlock> {
 
 		private Color disabledColor = Color.LIGHT_GRAY;
 		private ImageIcon offIcon = ResourceManager.loadImage("images/EmptyIcon16.gif");
@@ -182,7 +182,7 @@ public class MemoryTypeProgramLocationBasedTableColumn
 		}
 	}
 
-	private class MemoryTypeComparator implements Comparator<MemoryBlock> {
+	private static class MemoryTypeComparator implements Comparator<MemoryBlock> {
 		@Override
 		public int compare(MemoryBlock o1, MemoryBlock o2) {
 			return o1.getPermissions() - o2.getPermissions();

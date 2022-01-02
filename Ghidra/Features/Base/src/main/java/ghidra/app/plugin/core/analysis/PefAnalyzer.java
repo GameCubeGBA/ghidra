@@ -125,7 +125,7 @@ public class PefAnalyzer extends AbstractAnalyzer {
 	 * <p>
 	 * If the instruction is in the form of:
 	 * <p>
-	 * <code>lwz r12,0x20(r2)</code>
+	 * {@code lwz r12,0x20(r2)}
 	 * <p>
 	 * Then it renames the function containing the instruction
 	 * with the symbol's name defined at the address computed

@@ -52,20 +52,19 @@ public class TypeProgramInterface800 extends AbstractTypeProgramInterface {
 
 	@Override
 	protected void dumpHeader(Writer writer) throws IOException {
-		StringBuilder builder = new StringBuilder();
-		builder.append("\nversionNumber: ");
-		builder.append(versionNumber);
-		builder.append("\nheaderLength: ");
-		builder.append(headerLength);
-		builder.append("\ntypeIndexMin: ");
-		builder.append(typeIndexMin);
-		builder.append("\ntypeIndexMaxExclusive: ");
-		builder.append(typeIndexMaxExclusive);
-		builder.append("\ndataLength: ");
-		builder.append(dataLength);
-		builder.append("\n");
-		builder.append(hash.dump());
-		writer.write(builder.toString());
+        String builder = "\nversionNumber: " +
+                versionNumber +
+                "\nheaderLength: " +
+                headerLength +
+                "\ntypeIndexMin: " +
+                typeIndexMin +
+                "\ntypeIndexMaxExclusive: " +
+                typeIndexMaxExclusive +
+                "\ndataLength: " +
+                dataLength +
+                "\n" +
+                hash.dump();
+		writer.write(builder);
 	}
 
 }

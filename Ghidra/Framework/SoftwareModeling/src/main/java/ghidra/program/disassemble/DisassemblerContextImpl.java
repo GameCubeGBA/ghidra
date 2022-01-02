@@ -18,7 +18,6 @@ package ghidra.program.disassemble;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -660,8 +659,8 @@ public class DisassemblerContextImpl implements DisassemblerContext {
 
 	/**
 	 * Stores register value in map.
-	 * If <code>newValuePrecedence</code> is true, then the given <code>newValue</code>
-	 * overrides the <code>currentValue</code>.
+	 * If {@code newValuePrecedence} is true, then the given <code>newValue</code>
+	 * overrides the {@code currentValue}.
 	 * 
 	 * @param fromAddr the address from which the Register value flows.
 	 * @param destAddr the address to store the new value

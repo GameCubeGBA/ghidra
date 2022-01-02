@@ -73,7 +73,7 @@ class PropertyListMergePanel extends JPanel {
 
 		setLayout(new BorderLayout(0, 20));
 		setBorder(BorderFactory.createEmptyBorder(10, 5, 0, 5));
-		add(countPanel, BorderLayout.NORTH);
+		add(countPanel, BorderLayout.PAGE_START);
 		add(conflictPanel, BorderLayout.CENTER);
 	}
 

@@ -15,6 +15,7 @@
  */
 package ghidra.plugin.importer;
 
+@FunctionalInterface
 public interface LcsSelectionListener {
     void valueChanged(LcsSelectionEvent e);
 }

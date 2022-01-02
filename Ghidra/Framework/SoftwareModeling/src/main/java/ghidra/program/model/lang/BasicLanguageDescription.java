@@ -154,15 +154,14 @@ public class BasicLanguageDescription implements LanguageDescription {
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append(processor);
-		sb.append("/");
-		sb.append(endian);
-		sb.append("/");
-		sb.append(size);
-		sb.append("/");
-		sb.append(variant);
-		return sb.toString();
+        String sb = processor +
+                "/" +
+                endian +
+                "/" +
+                size +
+                "/" +
+                variant;
+		return sb;
 	}
 
 	@Override

@@ -71,7 +71,7 @@ public class PrintOptionsDialog extends DialogComponentProvider {
 		JPanel outerPanel = new JPanel(new BorderLayout());
 
 		JPanel rangePanel = new JPanel();
-		rangePanel.setLayout(new BoxLayout(rangePanel, BoxLayout.Y_AXIS));
+		rangePanel.setLayout(new BoxLayout(rangePanel, BoxLayout.PAGE_AXIS));
 		rangePanel.setBorder(BorderFactory.createTitledBorder("Print Range"));
 
 		KeyListener key = new KeyAdapter() {
@@ -101,7 +101,7 @@ public class PrintOptionsDialog extends DialogComponentProvider {
 		group.add(view);
 
 		JPanel headerPanel = new JPanel();
-		headerPanel.setLayout(new BoxLayout(headerPanel, BoxLayout.X_AXIS));
+		headerPanel.setLayout(new BoxLayout(headerPanel, BoxLayout.LINE_AXIS));
 		headerPanel.setBorder(BorderFactory.createTitledBorder("Header and Footer"));
 
 		title = new GCheckBox("Title");
@@ -118,16 +118,16 @@ public class PrintOptionsDialog extends DialogComponentProvider {
 		headerPanel.add(pageNum);
 
 		JPanel optionsPanel = new JPanel();
-		optionsPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+		optionsPanel.setLayout(new FlowLayout(FlowLayout.LEADING));
 		optionsPanel.setBorder(BorderFactory.createTitledBorder("Other Print Options"));
 
 		monochrome = new GCheckBox("Use Monochrome", true);
 		monochrome.addKeyListener(key);
 		optionsPanel.add(monochrome);
 
-		outerPanel.add(rangePanel, BorderLayout.NORTH);
+		outerPanel.add(rangePanel, BorderLayout.PAGE_START);
 		outerPanel.add(headerPanel, BorderLayout.CENTER);
-		outerPanel.add(optionsPanel, BorderLayout.SOUTH);
+		outerPanel.add(optionsPanel, BorderLayout.PAGE_END);
 
 		setFocusComponent();
 

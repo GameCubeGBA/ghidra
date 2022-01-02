@@ -17,6 +17,7 @@ package ghidra.app.services;
 
 import java.io.InputStream;
 
+@FunctionalInterface
 public interface TextEditorService {
 
 	/**

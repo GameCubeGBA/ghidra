@@ -187,7 +187,7 @@ public class BatchImportDialog extends DialogComponentProvider {
 
 		// some padding before the files table
 		sourceOptionsPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
-		sourceListPanel.add(sourceOptionsPanel, BorderLayout.SOUTH);
+		sourceListPanel.add(sourceOptionsPanel, BorderLayout.PAGE_END);
 
 		JPanel maxDepthPanel = new JPanel();
 		JLabel maxDepthLabel = new GDLabel("Depth limit:");
@@ -245,14 +245,14 @@ public class BatchImportDialog extends DialogComponentProvider {
 			refreshData();
 		});
 
-		sourceListButtonsPanel.add(addSourceButton, BorderLayout.NORTH);
-		sourceListButtonsPanel.add(removeSourceButton, BorderLayout.SOUTH);
+		sourceListButtonsPanel.add(addSourceButton, BorderLayout.PAGE_START);
+		sourceListButtonsPanel.add(removeSourceButton, BorderLayout.PAGE_END);
 
 		// another wrapping panel so the borderlayout'd sourceListButtonsPanel doesn't
 		// get forced to take up the full EAST cell of the containing panel.
 		JPanel buttonWrapperPanel = new JPanel();
 		buttonWrapperPanel.add(sourceListButtonsPanel);
-		sourceListPanel.add(buttonWrapperPanel, BorderLayout.EAST);
+		sourceListPanel.add(buttonWrapperPanel, BorderLayout.LINE_END);
 
 		sourceListModel.addListDataListener(new ListDataListener() {
 			@Override
@@ -330,8 +330,8 @@ public class BatchImportDialog extends DialogComponentProvider {
 
 		JPanel outputOptionsPanel = new JPanel(new BorderLayout());
 		outputOptionsPanel.setBorder(createTitledBorder("Import Options", true));
-		outputOptionsPanel.add(outputChoicesPanel, BorderLayout.NORTH);
-		outputOptionsPanel.add(destPanel, BorderLayout.SOUTH);
+		outputOptionsPanel.add(outputChoicesPanel, BorderLayout.PAGE_START);
+		outputOptionsPanel.add(destPanel, BorderLayout.PAGE_END);
 		return outputOptionsPanel;
 	}
 

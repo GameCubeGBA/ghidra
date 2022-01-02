@@ -21,7 +21,7 @@ package ghidra.program.model.listing;
 import ghidra.util.exception.UsrException;
 
 /**
- * <CODE>CircularDependencyException</CODE> is thrown in cases where
+ * {@code CircularDependencyException} is thrown in cases where
  * an action would cause the program's module structure to have a
  * "cycle", that is to have two module which are both ancestors and
  * descendants of each other.

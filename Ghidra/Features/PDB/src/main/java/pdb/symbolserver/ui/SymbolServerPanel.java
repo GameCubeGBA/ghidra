@@ -118,11 +118,11 @@ class SymbolServerPanel extends JPanel {
 
 		additionalSearchLocationsPanel = new JPanel();
 		additionalSearchLocationsPanel
-				.setLayout(new BoxLayout(additionalSearchLocationsPanel, BoxLayout.Y_AXIS));
+				.setLayout(new BoxLayout(additionalSearchLocationsPanel, BoxLayout.PAGE_AXIS));
 		additionalSearchLocationsPanel.add(buttonPanel);
 		additionalSearchLocationsPanel.add(tableScrollPane);
 
-		add(symbolStorageLocationPanel, BorderLayout.NORTH);
+		add(symbolStorageLocationPanel, BorderLayout.PAGE_START);
 		add(additionalSearchLocationsPanel, BorderLayout.CENTER);
 	}
 
@@ -250,7 +250,7 @@ class SymbolServerPanel extends JPanel {
 						"SymbolServerConfig Save"));
 
 		JPanel buttonPanel = new JPanel();
-		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+		buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
 		buttonPanel.add(new GLabel("Additional Search Paths:"));
 		buttonPanel.add(Box.createHorizontalGlue());
 		buttonPanel.add(addLocationButton);

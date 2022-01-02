@@ -67,7 +67,7 @@ public class LogPanel extends JPanel implements LogListener {
 		JPanel eastPanel = new JPanel(new HorizontalLayout(0));
 		eastPanel.add(button);
 		eastPanel.add(new StatusBarSpacer());
-		panel.add(eastPanel, BorderLayout.EAST);
+		panel.add(eastPanel, BorderLayout.LINE_END);
 
 		Border b = BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5),
 			BorderFactory.createLoweredBevelBorder());
@@ -82,7 +82,7 @@ public class LogPanel extends JPanel implements LogListener {
 		});
 
 		addLogAppender();
-		add(panel, BorderLayout.NORTH);
+		add(panel, BorderLayout.PAGE_START);
 	}
 
 	/**

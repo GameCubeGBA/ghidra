@@ -23,7 +23,7 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.util.ProgramLocation;
 
 /**
- * <code>HoverService</code> provides the ability to popup data Windows over a Field viewer
+ * {@code HoverService} provides the ability to popup data Windows over a Field viewer
  * in response to the mouse hovering over a single Field.
  */
 public interface HoverService {

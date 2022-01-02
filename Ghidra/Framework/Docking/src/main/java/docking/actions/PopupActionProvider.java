@@ -34,6 +34,7 @@ import docking.action.DockingActionIf;
  * implementation of this class, you must register it with
  * {@link Tool#addPopupActionProvider(PopupActionProvider)}.
  */
+@FunctionalInterface
 public interface PopupActionProvider {
 
 	/**

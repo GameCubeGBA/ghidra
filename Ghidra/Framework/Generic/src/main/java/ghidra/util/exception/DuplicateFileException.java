@@ -19,7 +19,7 @@ package ghidra.util.exception;
 import java.io.IOException;
 
 /**
- * <code>DuplicateFileException</code> is thrown whenever a file or folder can't
+ * {@code DuplicateFileException} is thrown whenever a file or folder can't
  * be created because one with that name already exists at the same location.
  */
 public class DuplicateFileException extends IOException {

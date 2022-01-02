@@ -43,10 +43,10 @@ public class SearchControlPanel extends JPanel {
 		this.editorPanel = editorPanel;
 
 		setLayout(new BorderLayout());
-		add(new GLabel("Search: "), BorderLayout.WEST);
+		add(new GLabel("Search: "), BorderLayout.LINE_START);
 		textField = new JTextField(20);
 		add(textField, BorderLayout.CENTER);
-		add(buildButtonPanel(), BorderLayout.EAST);
+		add(buildButtonPanel(), BorderLayout.LINE_END);
 
 		Border bevel = BorderFactory.createBevelBorder(BevelBorder.LOWERED);
 		Border spacer = BorderFactory.createEmptyBorder(4, 10, 5, 10);

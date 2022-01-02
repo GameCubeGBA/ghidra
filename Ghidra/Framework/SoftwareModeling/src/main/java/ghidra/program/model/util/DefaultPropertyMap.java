@@ -226,7 +226,7 @@ public abstract class DefaultPropertyMap implements PropertyMap {
 	 * @param start the first address in the range.
 	 * @param end the last address in the range.
 	 * @exception TypeMismatchException thrown if the property does not
-	 * have values of type <CODE>Object</CODE>.
+	 * have values of type {@code Object}.
 	 */
 	@Override
 	public AddressIterator getPropertyIterator(Address start, Address end) {
@@ -244,7 +244,7 @@ public abstract class DefaultPropertyMap implements PropertyMap {
 	/** Returns an iterator over addresses that have a property value within the
 	 * property map.
 	 * @exception TypeMismatchException thrown if the property does not
-	 * have values of type <CODE>Object</CODE>.
+	 * have values of type {@code Object}.
 	 */
 	@Override
 	public AddressIterator getPropertyIterator() {
@@ -419,18 +419,6 @@ public abstract class DefaultPropertyMap implements PropertyMap {
 		}
 
 		/**
-		 * @see AddressIterator#hasPrevious()
-		 */
-		public boolean hasPrevious() {
-			throw new UnsupportedOperationException();
-//			nextAddr = null;
-//			if (prevAddr == null) {
-//				prevAddr = findPrevious();
-//			}
-//			return prevAddr != null;
-		}
-
-		/**
 		 * @see AddressIterator#next()
 		 */
 		@Override
@@ -441,19 +429,6 @@ public abstract class DefaultPropertyMap implements PropertyMap {
 				return addr;
 			}
 			return null;
-		}
-
-		/**
-		 * @see AddressIterator#previous()
-		 */
-		public Address previous() {
-			throw new UnsupportedOperationException();
-//			if (hasPrevious()) {
-//				Address addr = prevAddr;
-//				prevAddr = null;
-//				return addr;
-//			}
-//			return null;
 		}
 
 		private Address findNext() {

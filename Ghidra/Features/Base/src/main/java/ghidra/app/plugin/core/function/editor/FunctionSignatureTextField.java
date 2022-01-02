@@ -293,7 +293,7 @@ class FunctionSignatureTextField extends JTextPane {
 		jFrame.setVisible(true);
 	}
 
-	private class SubString {
+	private static class SubString {
 		private String text;
 		private int subStringStart;
 		private int subStringEnd;

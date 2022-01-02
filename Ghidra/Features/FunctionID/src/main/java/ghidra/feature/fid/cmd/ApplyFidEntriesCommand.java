@@ -218,16 +218,16 @@ public class ApplyFidEntriesCommand extends BackgroundCommand {
 	}
 
 	private String generateComment(String header, TaskMonitor monitor) throws CancelledException {
-		StringBuilder buffer = new StringBuilder();
-		buffer.append(header);
 
-		// append names, class, and library info buffer
-		buffer.append("\n");
-		buffer.append(listNames(monitor));
-		buffer.append("\n");
-		buffer.append(listLibraries(monitor));
+        String buffer = header +
 
-		return buffer.toString();
+                // append names, class, and library info buffer
+                "\n" +
+                listNames(monitor) +
+                "\n" +
+                listLibraries(monitor);
+
+		return buffer;
 	}
 
 	private String generateBookmark(String bookmark) {

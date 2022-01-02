@@ -26,8 +26,8 @@ import ghidra.util.exception.DuplicateNameException;
 
 /**
  * A class to represent the 
- * <code>IMAGE_BOUND_FORWARDER_REF</code>
- * data structure defined in <b><code>winnt.h</code></b>.
+ * {@code IMAGE_BOUND_FORWARDER_REF}
+ * data structure defined in <b>{@code winnt.h}</b>.
  * <p>
  * <pre>
  * typedef struct _IMAGE_BOUND_FORWARDER_REF {
@@ -43,7 +43,7 @@ public class BoundImportForwarderRef implements StructConverter, ByteArrayConver
 	 */
     public static final String NAME = "IMAGE_BOUND_FORWARDER_REF";
 	/**
-	 * The size of the <code>IMAGE_BOUND_FORWARDER_REF</code> in bytes.
+	 * The size of the {@code IMAGE_BOUND_FORWARDER_REF} in bytes.
 	 */
     public static final int IMAGE_SIZEOF_BOUND_IMPORT_FORWARDER_REF = 8;
 

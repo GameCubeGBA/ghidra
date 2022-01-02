@@ -123,31 +123,23 @@ public class JdiModelTargetObjectImpl extends
 
 	protected void checkExited(Integer state, JdiCause cause) {
 		switch (state) {
-			case ThreadReference.THREAD_STATUS_NOT_STARTED: {
+			case ThreadReference.THREAD_STATUS_NOT_STARTED:
+            case ThreadReference.THREAD_STATUS_UNKNOWN:
+            case ThreadReference.THREAD_STATUS_SLEEPING:
+            case ThreadReference.THREAD_STATUS_ZOMBIE:
+            case ThreadReference.THREAD_STATUS_MONITOR: {
 				break;
 			}
-			case ThreadReference.THREAD_STATUS_MONITOR: {
-				break;
-			}
-			case ThreadReference.THREAD_STATUS_WAIT: {
+            case ThreadReference.THREAD_STATUS_WAIT: {
 				onStopped();
 				break;
 			}
-			case ThreadReference.THREAD_STATUS_ZOMBIE: {
-				break;
-			}
-			case ThreadReference.THREAD_STATUS_SLEEPING: {
-				break;
-			}
-			case ThreadReference.THREAD_STATUS_RUNNING: {
+            case ThreadReference.THREAD_STATUS_RUNNING: {
 				resetModified();
 				onRunning();
 				break;
 			}
-			case ThreadReference.THREAD_STATUS_UNKNOWN: {
-				break;
-			}
-		}
+        }
 	}
 
 	protected void onRunning() {

@@ -317,7 +317,7 @@ public class DebuggerWatchesProvider extends ComponentProviderAdapter {
 		watchTable = new GhidraTable(watchTableModel);
 		mainPanel.add(new JScrollPane(watchTable));
 		watchFilterPanel = new GhidraTableFilterPanel<>(watchTable, watchTableModel);
-		mainPanel.add(watchFilterPanel, BorderLayout.SOUTH);
+		mainPanel.add(watchFilterPanel, BorderLayout.PAGE_END);
 
 		watchTable.getSelectionModel().addListSelectionListener(evt -> {
 			if (evt.getValueIsAdjusting()) {

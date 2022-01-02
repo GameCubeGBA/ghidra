@@ -46,7 +46,7 @@ public class InputWithChoicesDialog extends DialogComponentProvider {
 	 * can check the value of {@link #isCanceled()} to know whether or not 
 	 * the user canceled the operation. To get the user selected value use the
 	 * {@link #getValue()} value(s) entered by the user.  If the user cancelled the operation, then
-	 * null will be returned from <code>getValue()</code>.
+	 * null will be returned from {@code getValue()}.
 	 * <P>
 	 * 
 	 * @param dialogTitle used as the name of the dialog's title bar
@@ -76,7 +76,7 @@ public class InputWithChoicesDialog extends DialogComponentProvider {
 	 * can check the value of {@link #isCanceled()} to know whether or not 
 	 * the user canceled the operation. To get the user selected value use the
 	 * {@link #getValue()} value(s) entered by the user.  If the user cancelled the operation, then
-	 * null will be returned from <code>getValue()</code>.
+	 * null will be returned from {@code getValue()}.
 	 * <P>
 	 * 
 	 * @param dialogTitle used as the name of the dialog's title bar
@@ -122,8 +122,8 @@ public class InputWithChoicesDialog extends DialogComponentProvider {
 		combo = createComboBox(optionValues, initialValue);
 
 		JPanel dataPanel = new JPanel(new BorderLayout());
-		dataPanel.add(messageLabel, BorderLayout.NORTH);
-		dataPanel.add(combo, BorderLayout.SOUTH);
+		dataPanel.add(messageLabel, BorderLayout.PAGE_START);
+		dataPanel.add(combo, BorderLayout.PAGE_END);
 
 		workPanel.add(dataPanel, BorderLayout.CENTER);
 
@@ -138,9 +138,9 @@ public class InputWithChoicesDialog extends DialogComponentProvider {
 
 			JPanel iconPanel = new JPanel(new BorderLayout());
 			iconPanel.add(iconLabel, BorderLayout.CENTER);
-			iconPanel.add(separatorPanel, BorderLayout.EAST);
+			iconPanel.add(separatorPanel, BorderLayout.LINE_END);
 
-			workPanel.add(iconPanel, BorderLayout.WEST);
+			workPanel.add(iconPanel, BorderLayout.LINE_START);
 		}
 
 		addWorkPanel(workPanel);

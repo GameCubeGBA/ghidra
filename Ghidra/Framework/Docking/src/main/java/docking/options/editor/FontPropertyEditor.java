@@ -138,8 +138,8 @@ private static final String SAMPLE_STRING = "ABCabc \u00a9\u00ab\u00a7\u0429\u05
 			stylePanel.setLayout(new GridLayout(2, 1));
 			sizeAndStylePanel.setLayout(new BorderLayout());
 
-			topPanel.add(BorderLayout.WEST, fontPanel);
-			sizeAndStylePanel.add(BorderLayout.WEST, sizePanel);
+			topPanel.add(BorderLayout.LINE_START, fontPanel);
+			sizeAndStylePanel.add(BorderLayout.LINE_START, sizePanel);
 			sizeAndStylePanel.add(BorderLayout.CENTER, stylePanel);
 			topPanel.add(BorderLayout.CENTER, sizeAndStylePanel);
 
@@ -147,9 +147,9 @@ private static final String SAMPLE_STRING = "ABCabc \u00a9\u00ab\u00a7\u0429\u05
 			fontStringLabel.setPreferredSize(new Dimension(350, 50));
 			fontStringLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			fontStringLabel.setFont(font);
-			topPanel.add(BorderLayout.SOUTH, fontStringLabel);
+			topPanel.add(BorderLayout.PAGE_END, fontStringLabel);
 
-			add(BorderLayout.NORTH, topPanel);
+			add(BorderLayout.PAGE_START, topPanel);
 
 			fontLabel = new GDLabel("Fonts");
 			Font newFont = getFont().deriveFont(1);
@@ -256,7 +256,7 @@ private static final String SAMPLE_STRING = "ABCabc \u00a9\u00ab\u00a7\u0429\u05
 	}
 
 	// A wrapper class created so that the names of fonts are comparable ignoring case
-	private class FontWrapper implements Comparable<FontWrapper> {
+	private static class FontWrapper implements Comparable<FontWrapper> {
 		private final String fontName;
 
 		private FontWrapper(String fontName) {

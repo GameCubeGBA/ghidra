@@ -30,9 +30,7 @@ import org.antlr.runtime.tree.Tree;
 
 public class ANTLRUtil {
 	static String indent(int n) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("    ".repeat(Math.max(0, n)));
-		return sb.toString();
+        return "    ".repeat(Math.max(0, n));
 	}
 
 	public static void debugNodeStream(BufferedTreeNodeStream nodes, PrintStream out) {

@@ -75,7 +75,8 @@ public class Processor implements Comparable<Processor> {
 		this.name = name;
 	}
 
-	interface RegisterHook {
+	@FunctionalInterface
+    interface RegisterHook {
 		void register(String name);
 	}
 

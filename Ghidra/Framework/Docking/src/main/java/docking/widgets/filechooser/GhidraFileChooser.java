@@ -335,11 +335,11 @@ public class GhidraFileChooser extends DialogComponentProvider
 
 		JPanel directoryPanel = new JPanel(new BorderLayout(PAD, PAD));
 		directoryPanel.add(cardPanel, BorderLayout.CENTER);
-		directoryPanel.add(filenamePanel, BorderLayout.SOUTH);
+		directoryPanel.add(filenamePanel, BorderLayout.PAGE_END);
 
 		JPanel main = new JPanel(new BorderLayout(PAD, PAD));
-		main.add(currentPathPanel, BorderLayout.NORTH);
-		main.add(shortCutPanel, BorderLayout.WEST);
+		main.add(currentPathPanel, BorderLayout.PAGE_START);
+		main.add(shortCutPanel, BorderLayout.LINE_START);
 		main.add(directoryPanel, BorderLayout.CENTER);
 
 		return main;
@@ -412,7 +412,7 @@ public class GhidraFileChooser extends DialogComponentProvider
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.setBorder(BorderFactory.createLoweredBevelBorder());
 		panel.setBackground(BACKGROUND_COLOR.darker());
-		panel.add(shortCutPanel, BorderLayout.NORTH);
+		panel.add(shortCutPanel, BorderLayout.PAGE_START);
 		return panel;
 	}
 
@@ -689,10 +689,10 @@ public class GhidraFileChooser extends DialogComponentProvider
 	}
 
 	/**
-	 * Sets the <code>GhidraFileChooser</code> to allow the user to just
+	 * Sets the {@code GhidraFileChooser} to allow the user to just
 	 * select files, just select
 	 * directories, or select both files and directories.  The default is
-	 * <code>JFilesChooser.FILES_ONLY</code>.
+	 * {@code JFilesChooser.FILES_ONLY}.
 	 *
 	 * @param mode the type of files to be displayed:
 	 * <ul>
@@ -701,7 +701,7 @@ public class GhidraFileChooser extends DialogComponentProvider
 	 * <li>GhidraFileChooser.FILES_AND_DIRECTORIES
 	 * </ul>
 	 *
-	 * @exception IllegalArgumentException  if <code>mode</code> is an
+	 * @exception IllegalArgumentException  if {@code mode} is an
 	 *              illegal Dialog mode
 	 * @deprecated use instead {@link #setFileSelectionMode(GhidraFileChooserMode)}
 	 */
@@ -748,7 +748,7 @@ public class GhidraFileChooser extends DialogComponentProvider
 	}
 
 	/**
-	 * Sets the text used in the <code>OK</code> button 
+	 * Sets the text used in the {@code OK} button
 	 * 
 	 * @param buttonText the text 
 	 */
@@ -757,7 +757,7 @@ public class GhidraFileChooser extends DialogComponentProvider
 	}
 
 	/**
-	 * Sets the tooltip text used in the <code>OK</code> button
+	 * Sets the tooltip text used in the {@code OK} button
 	 * 
 	 * @param tooltipText the tooltip text
 	 */
@@ -1177,13 +1177,13 @@ public class GhidraFileChooser extends DialogComponentProvider
 	}
 
 	/**
-	 * Sets the current directory. Passing in <code>null</code> sets the
+	 * Sets the current directory. Passing in {@code null} sets the
 	 * file chooser to point to the user's default directory.
 	 * This default depends on the operating system. It is
 	 * typically the "My Documents" folder on Windows, and the user's
 	 * home directory on Unix.
 	 * <br>
-	 * If the file passed in as <code>currentDirectory</code> is not a
+	 * If the file passed in as {@code currentDirectory} is not a
 	 * directory, the parent of the file will be used as the currentDirectory.
 	 * If the parent is not traversable, then it will walk up the parent tree
 	 * until it finds a traversable directory, or hits the root of the
@@ -1945,10 +1945,6 @@ public class GhidraFileChooser extends DialogComponentProvider
 		Preferences.store();
 	}
 
-	private boolean isTableShowing() {
-		return showDetails;
-	}
-
 	String getInvalidFilenameMessage(String filename) {
 		switch (filename) {
 			case ".":
@@ -2112,7 +2108,7 @@ public class GhidraFileChooser extends DialogComponentProvider
 	}
 
 	// a custom button group that allows us to deselect buttons, which Java's does not
-	private class UnselectableButtonGroup extends ButtonGroup {
+	private static class UnselectableButtonGroup extends ButtonGroup {
 
 		private ButtonModel overriddenSelection = null;
 

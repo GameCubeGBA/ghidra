@@ -18,6 +18,7 @@ package ghidra.app.tablechooser;
 
 import ghidra.program.model.address.Address;
 
+@FunctionalInterface
 public interface AddressableRowObject {
 	Address getAddress();
 }

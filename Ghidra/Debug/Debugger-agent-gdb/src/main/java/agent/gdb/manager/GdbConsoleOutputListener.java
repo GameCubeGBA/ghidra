@@ -17,6 +17,7 @@ package agent.gdb.manager;
 
 import agent.gdb.manager.GdbManager.Channel;
 
+@FunctionalInterface
 public interface GdbConsoleOutputListener {
 	/**
 	 * GDB outputted some text

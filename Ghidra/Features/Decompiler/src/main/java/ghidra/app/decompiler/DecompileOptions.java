@@ -38,9 +38,6 @@ import ghidra.util.SystemUtilities;
  * Configuration options for the decompiler
  * This stores the options and can create an XML
  * string to be sent to the decompiler process
- *
- *
- *
  */
 public class DecompileOptions {
 	private static final String PREDICATE_OPTIONSTRING = "Analysis.Simplify predication";
@@ -60,7 +57,7 @@ public class DecompileOptions {
 	private static final String ELIMINATE_UNREACHABLE_OPTIONSTRING =
 		"Analysis.Eliminate unreachable code";
 	private static final String ELIMINATE_UNREACHABLE_OPTIONDESCRIPTION =
-		"If set, branches and code that can never be executed are " + "eliminated as dead code";
+			"If set, branches and code that can never be executed are eliminated as dead code"
 	private static final boolean ELIMINATE_UNREACHABLE_OPTIONDEFAULT = true;
 	private boolean eliminateUnreachable;
 
@@ -144,7 +141,7 @@ public class DecompileOptions {
 
 	private static final String CONVENTION_OPTIONSTRING = "Display.Print calling convention name";
 	private static final String CONVENTION_OPTIONDESCRIPTION =
-		"If set, the names of callling conventions (which differ " +
+		"If set, the names of calling conventions (when they differ " +
 			"from the default) will be printed as part of the function prototype.";
 	private static final boolean CONVENTION_OPTIONDEFAULT = true;	// Must match PrintC::resetDefaultsPrintC
 	private boolean conventionPrint;
@@ -158,14 +155,14 @@ public class DecompileOptions {
 
 	private static final String MAXWIDTH_OPTIONSTRING = "Display.Maximum characters in a code line";
 	private static final String MAXWIDTH_OPTIONDESCRIPTION =
-		"Maximum number of characters allowed per line before " + "before line breaks are forced.";
+			"Maximum number of characters allowed per line before line breaks are forced.";
 	private static final int MAXWIDTH_OPTIONDEFAULT = 100;	// Must match EmitPrettyPrint::resetDefaultsPrettyPrint
 	private int maxwidth;
 
 	private static final String INDENTWIDTH_OPTIONSTRING =
 		"Display.Number of characters per indent level";
 	private static final String INDENTWIDTH_OPTIONDESCRIPTION =
-		"Number of characters indented for each level of control-flow " + "or scope nesting";
+			"Number of characters indented for each level of control-flow or scope nesting"
 	private static final int INDENTWIDTH_OPTIONDEFAULT = 2;	// Must match EmitXml::resetDefaultsInternal
 	private int indentwidth;
 

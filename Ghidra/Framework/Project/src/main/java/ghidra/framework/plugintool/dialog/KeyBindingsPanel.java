@@ -231,20 +231,20 @@ public class KeyBindingsPanel extends JPanel {
 		JPanel importExportPanel = createImportExportPanel();
 		tableFilterPanel = new GTableFilterPanel<>(actionTable, tableModel);
 		JPanel middlePanel = new JPanel(new BorderLayout());
-		middlePanel.add(tableFilterPanel, BorderLayout.NORTH);
-		middlePanel.add(importExportPanel, BorderLayout.SOUTH);
+		middlePanel.add(tableFilterPanel, BorderLayout.PAGE_START);
+		middlePanel.add(importExportPanel, BorderLayout.PAGE_END);
 
 		// contains the upper panel (table) and the middle panel)
 		JPanel centerPanel = new JPanel(new BorderLayout());
 		centerPanel.add(sp, BorderLayout.CENTER);
-		centerPanel.add(middlePanel, BorderLayout.SOUTH);
+		centerPanel.add(middlePanel, BorderLayout.PAGE_END);
 
 		// lower panel - key entry panel and status panel
 		JPanel keyPanel = createKeyEntryPanel();
 		JComponent statusPanel = createStatusPanel(keyPanel);
 
 		add(centerPanel, BorderLayout.CENTER);
-		add(statusPanel, BorderLayout.SOUTH);
+		add(statusPanel, BorderLayout.PAGE_END);
 	}
 
 	private JPanel createStatusPanel(JPanel keyPanel) {
@@ -275,7 +275,7 @@ public class KeyBindingsPanel extends JPanel {
 		helpButtonPanel.add(Box.createVerticalGlue());
 
 		JPanel lowerStatusPanel = new JPanel();
-		lowerStatusPanel.setLayout(new BoxLayout(lowerStatusPanel, BoxLayout.X_AXIS));
+		lowerStatusPanel.setLayout(new BoxLayout(lowerStatusPanel, BoxLayout.LINE_AXIS));
 		lowerStatusPanel.add(helpButtonPanel);
 		lowerStatusPanel.add(statusLabel);
 
@@ -289,7 +289,7 @@ public class KeyBindingsPanel extends JPanel {
 		ksField = new KeyEntryTextField(20, keyStroke -> processKeyStrokeEntry(keyStroke));
 
 		// this is the lower panel that holds the key entry text field
-		JPanel p = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel p = new JPanel(new FlowLayout(FlowLayout.LEADING));
 		p.add(ksField);
 
 		JPanel keyPanel = new JPanel(new BorderLayout());
@@ -304,7 +304,7 @@ public class KeyBindingsPanel extends JPanel {
 				"press <Enter> or <Backspace>");
 		JPanel labelPanel = new JPanel();
 		labelPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 0, 0));
-		BoxLayout bl = new BoxLayout(labelPanel, BoxLayout.X_AXIS);
+		BoxLayout bl = new BoxLayout(labelPanel, BoxLayout.LINE_AXIS);
 		labelPanel.setLayout(bl);
 		labelPanel.add(Box.createHorizontalStrut(5));
 		labelPanel.add(new GIconLabel(ResourceManager.loadImage("images/information.png")));
@@ -312,7 +312,7 @@ public class KeyBindingsPanel extends JPanel {
 		labelPanel.add(mlabel);
 
 		// the default panel is the panel that holds left-hand side label
-		defaultPanel.add(labelPanel, BorderLayout.NORTH);
+		defaultPanel.add(labelPanel, BorderLayout.PAGE_START);
 		defaultPanel.setBorder(BorderFactory.createLoweredBevelBorder());
 
 		// the info panel is the holds the right-hand label and is inside of
@@ -331,7 +331,7 @@ public class KeyBindingsPanel extends JPanel {
 		innerPanel.add(sp);
 
 		keyPanel.add(innerPanel, BorderLayout.CENTER);
-		keyPanel.add(p, BorderLayout.SOUTH);
+		keyPanel.add(p, BorderLayout.PAGE_END);
 		return keyPanel;
 	}
 
@@ -373,7 +373,7 @@ public class KeyBindingsPanel extends JPanel {
 			});
 		});
 
-		JPanel containerPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		JPanel containerPanel = new JPanel(new FlowLayout(FlowLayout.TRAILING));
 		containerPanel.add(importButton);
 		containerPanel.add(exportButton);
 

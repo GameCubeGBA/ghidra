@@ -18,9 +18,9 @@ package ghidra.app.util.bin.format.pe;
 
 /**
  * A class to represent the 
- * <code>IMAGE_ROM_HEADERS</code>
+ * {@code IMAGE_ROM_HEADERS}
  * struct as defined in 
- * <b><code>winnt.h</code></b>.
+ * <b>{@code winnt.h}</b>.
  *
  * <pre>
  * typedef struct _IMAGE_ROM_HEADERS {

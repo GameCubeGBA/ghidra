@@ -26,6 +26,7 @@ import ghidra.util.task.TaskMonitor;
  *
  * @param <T> the row type
  */
+@FunctionalInterface
 public interface TableAddRemoveStrategy<T> {
 
 	/**

@@ -60,7 +60,7 @@ public class StringConstraintEditor extends AbstractColumnConstraintEditor<Strin
 		infoLabel = new GDHtmlLabel("abc");  // temporary text in the label so that it sizes properly
 		infoLabel.setForeground(Color.RED);
 		infoLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		panel.add(infoLabel, BorderLayout.SOUTH);
+		panel.add(infoLabel, BorderLayout.PAGE_END);
 		return panel;
 	}
 

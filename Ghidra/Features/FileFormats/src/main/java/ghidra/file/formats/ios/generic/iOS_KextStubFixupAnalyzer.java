@@ -276,8 +276,8 @@ public class iOS_KextStubFixupAnalyzer extends FileFormatAnalyzer {
 					SymbolTable symbolTable = alreadyOpenProgram.getSymbolTable();
 					Symbol symbol = symbolTable.getPrimarySymbol(destinationAddress);
 					return new DestinationProgramInfo(alreadyOpenProgram.getName(),
-						alreadyOpenProgram.getDomainFile().getPathname(),
-						symbol == null ? null : symbol.getName());
+                            alreadyOpenProgram.getDomainFile().getPathname(),
+                            symbol == null ? null : symbol.getName());
 				}
 			}
 		}
@@ -325,7 +325,7 @@ public class iOS_KextStubFixupAnalyzer extends FileFormatAnalyzer {
 						Symbol symbol = symbolTable.getPrimarySymbol(destinationAddress);
 						String symbolName = symbol == null ? null : symbol.getName();
 						return new DestinationProgramInfo(program.getName(), file.getPathname(),
-							symbolName);
+                                symbolName);
 					}
 				}
 			}
@@ -350,7 +350,7 @@ public class iOS_KextStubFixupAnalyzer extends FileFormatAnalyzer {
 		return false;
 	}
 
-	class DestinationProgramInfo {
+	static class DestinationProgramInfo {
 		String programName;
 		String programPath;
 		String symbolName;

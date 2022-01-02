@@ -20,6 +20,7 @@ package ghidra.framework.model;
  *  Interface  to indicate whether a domain file should be included in a list or
  * set of domain files.
  */
+@FunctionalInterface
 public interface DomainFileFilter {
 
     /**
@@ -27,7 +28,7 @@ public interface DomainFileFilter {
      * included in a domain file list.
      *
      * @param  df  The domain file to be tested
-     * @return  <code>true</code> if and only if <code>df</code>
+     * @return  {@code true} if and only if <code>df</code>
      * 
      */
     boolean accept(DomainFile df);

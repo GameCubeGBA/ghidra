@@ -22,7 +22,7 @@ import java.util.Date;
 import java.util.Objects;
 
 /**
- * <code>ItemCheckoutStatus</code> provides immutable status information for a 
+ * {@code ItemCheckoutStatus} provides immutable status information for a
  * checked-out item.  This class is serializable so that it may be passed 
  * to a remote client.
  */

@@ -2119,7 +2119,7 @@ public class VTMatchApplyTest extends AbstractGhidraHeadedIntegrationTest {
 // Inner Classes
 //==================================================================================================
 
-	private class DomainObjectListenerRecorder implements DomainObjectListener {
+	private static class DomainObjectListenerRecorder implements DomainObjectListener {
 
 		List<DomainObjectChangedEvent> events = new ArrayList<>();
 
@@ -2129,7 +2129,7 @@ public class VTMatchApplyTest extends AbstractGhidraHeadedIntegrationTest {
 		}
 	}
 
-	private class AssociationPair {
+	private static class AssociationPair {
 
 		private final Address sourceAddress;
 		private final Address destinationAddress;

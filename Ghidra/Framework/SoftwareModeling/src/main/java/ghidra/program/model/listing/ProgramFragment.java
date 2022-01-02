@@ -22,11 +22,11 @@ import ghidra.program.model.address.AddressSetView;
 import ghidra.util.exception.NotFoundException;
 
 /**
- * A <CODE>ProgramFragment</CODE> is a set of <CODE>CodeUnit</CODE>s that have been
+ * A {@code ProgramFragment} is a set of <CODE>CodeUnit</CODE>s that have been
  * bundled together with some additional information such as a name, comment,
  * alias, etc. Every code unit in the program is in one and only one fragment
  * so the fragments form a partition of the program. Fragments in turn are the
- * building blocks of <CODE>ProgramModule</CODE>s. Program fragments and modules 
+ * building blocks of {@code ProgramModule}s. Program fragments and modules
  * allow the user to overlay a hierarchical structure upon the program which can then 
  * be used to control viewing and navigating the program.
  */
@@ -48,15 +48,15 @@ public interface ProgramFragment extends Group, AddressSetView {
 
     /**
 	 * Moves all of the code units in a given range into this fragment.
-	 * Note that <CODE>min</CODE> must the starting address of a code unit
-	 * and <CODE>max</CODE> must be the ending address of a code unit.
+	 * Note that {@code min} must the starting address of a code unit
+	 * and {@code max} must be the ending address of a code unit.
 	 * Furthermore every address in the given range must exist in program
 	 * memory.<P>
 	 *
 	 * @param min min address of range specifying the code units to move
      * @param max max address of range specifying the code units to move
-	 * @exception NotFoundException thrown if any address between <CODE>min</CODE>
-	 * and <CODE>max</CODE> (inclusive) does not belong to program memory.
+	 * @exception NotFoundException thrown if any address between {@code min}
+	 * and {@code max} (inclusive) does not belong to program memory.
 	 */
     void move(Address min, Address max) throws NotFoundException;
 

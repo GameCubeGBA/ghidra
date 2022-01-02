@@ -637,7 +637,7 @@ public class RedBlackLongKeySet implements Serializable {
 
 
     /**
-     * Save the state of the <code>TreeMap</code> instance to a stream (i.e.,
+     * Save the state of the {@code TreeMap} instance to a stream (i.e.,
      * serialize it).
      *
      * @serialData The <i>size</i> of the TreeMap (the number of key-value
@@ -665,7 +665,7 @@ public class RedBlackLongKeySet implements Serializable {
 
 
     /**
-     * Reconstitute the <code>TreeMap</code> instance from a stream (i.e.,
+     * Reconstitute the {@code TreeMap} instance from a stream (i.e.,
      * deserialize it).
      */
     private void readObject(final java.io.ObjectInputStream s)

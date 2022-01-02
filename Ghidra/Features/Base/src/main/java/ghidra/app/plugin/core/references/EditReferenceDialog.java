@@ -116,9 +116,9 @@ public class EditReferenceDialog extends DialogComponentProvider {
 				throw new UnsupportedOperationException();
 			}
 		});
-		topPanel.add(instrPanel, BorderLayout.NORTH);
+		topPanel.add(instrPanel, BorderLayout.PAGE_START);
 
-		JPanel refTypePanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5));
+		JPanel refTypePanel = new JPanel(new FlowLayout(FlowLayout.LEADING, 5, 5));
 		refTypePanel.setBorder(new TitledBorder(new EtchedBorder(), "Type of Reference"));
 		ChangeListener refChoiceListener = e -> {
             Object src = e.getSource();
@@ -174,7 +174,7 @@ public class EditReferenceDialog extends DialogComponentProvider {
 		bottomPanel.add(regRefPanel, regRefPanel.getName());
 
 		JPanel workPanel = new JPanel(new BorderLayout());
-		workPanel.add(topPanel, BorderLayout.NORTH);
+		workPanel.add(topPanel, BorderLayout.PAGE_START);
 		workPanel.add(bottomPanel, BorderLayout.CENTER);
 
 		return workPanel;

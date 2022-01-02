@@ -24,7 +24,7 @@ import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>ListingMerger</code> is an interface implemented by an individual 
+ * {@code ListingMerger} is an interface implemented by an individual
  * listing merge manager. It defines methods that the overall ListingMergeManager
  * can call on the individual listing merge managers.
  */

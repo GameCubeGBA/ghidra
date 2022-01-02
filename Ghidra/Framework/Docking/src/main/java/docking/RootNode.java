@@ -100,7 +100,7 @@ class RootNode extends WindowNode {
 
 		if (mgr.hasStatusBar()) {
 			statusBar = new StatusBar();
-			c.add(statusBar, BorderLayout.SOUTH);
+			c.add(statusBar, BorderLayout.PAGE_END);
 		}
 
 		this.dropTargetFactory = factory;

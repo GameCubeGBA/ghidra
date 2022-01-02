@@ -25,6 +25,7 @@ import ghidra.program.model.address.Address;
  * Interface to get a record iterator. 
  * 
  */
+@FunctionalInterface
 public interface DBRecordAdapter {
 
 	/**

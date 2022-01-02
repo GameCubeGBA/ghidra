@@ -30,7 +30,7 @@ import javax.swing.ImageIcon;
 
 /**
  * Service to show a component that has a JTable given a table model
- * that builds up its data dynamically (a <code>ThreadedTableModel</code>). 
+ * that builds up its data dynamically (a {@code ThreadedTableModel}).
  */
 @ServiceInfo(defaultProvider = TableServicePlugin.class)
 public interface TableService {

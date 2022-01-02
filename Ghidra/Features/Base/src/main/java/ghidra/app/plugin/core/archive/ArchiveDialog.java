@@ -71,7 +71,7 @@ public class ArchiveDialog extends DialogComponentProvider {
 
 	/**
 	 * Define the Main panel for the dialog here.
-	 * @return JPanel the completed <CODE>Main Panel</CODE>
+	 * @return JPanel the completed {@code Main Panel}
 	 */
 	protected JPanel buildMainPanel() {
 		GridBagLayout gbl = new GridBagLayout();
@@ -106,7 +106,7 @@ public class ArchiveDialog extends DialogComponentProvider {
 
 		// add the labels
 		//
-		gbc.anchor = GridBagConstraints.EAST;
+		gbc.anchor = GridBagConstraints.LINE_END;
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbl.setConstraints(archiveLabel, gbc);
@@ -130,7 +130,7 @@ public class ArchiveDialog extends DialogComponentProvider {
 
 		// add the browse buttons
 		//
-		gbc.anchor = GridBagConstraints.WEST;
+		gbc.anchor = GridBagConstraints.LINE_START;
 		gbc.gridwidth = 1;
 		gbc.insets.left = 5;
 		gbc.insets.right = 5;

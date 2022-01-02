@@ -86,21 +86,20 @@ public class EntropyOverviewColorService implements OverviewColorService {
 		}
 		int entropyScaled = computeEntropy(address);
 		double entropy = (entropyScaled * 8.0d) / 255; 	// convert back from palette scale to original entropy value
-		StringBuilder buffer = new StringBuilder();
-		buffer.append("<b>");
-		buffer.append(HTMLUtilities.escapeHTML(getName()));
-		buffer.append("</b>\n");
-		buffer.append(" ");
-		buffer.append(formatter.format(entropy));
-		buffer.append(" ");
-		buffer.append(HTMLUtilities.escapeHTML(getKnotName(entropyScaled)));
-		buffer.append(" ");
-		buffer.append(" &nbsp&nbsp&nbsp(");
-		buffer.append(HTMLUtilities.escapeHTML(getBlockName(address)));
-		buffer.append(" ");
-		buffer.append(HTMLUtilities.escapeHTML(address.toString()));
-		buffer.append(" )");
-		return HTMLUtilities.toWrappedHTML(buffer.toString(), 0);
+        String buffer = "<b>" +
+                HTMLUtilities.escapeHTML(getName()) +
+                "</b>\n" +
+                " " +
+                formatter.format(entropy) +
+                " " +
+                HTMLUtilities.escapeHTML(getKnotName(entropyScaled)) +
+                " " +
+                " &nbsp&nbsp&nbsp(" +
+                HTMLUtilities.escapeHTML(getBlockName(address)) +
+                " " +
+                HTMLUtilities.escapeHTML(address.toString()) +
+                " )";
+		return HTMLUtilities.toWrappedHTML(buffer, 0);
 	}
 
 	private String getKnotName(int entropy) {

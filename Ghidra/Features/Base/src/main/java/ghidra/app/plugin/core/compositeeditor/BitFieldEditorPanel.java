@@ -40,7 +40,7 @@ import ghidra.util.layout.*;
 import resources.ResourceManager;
 
 /**
- * <code>BitFieldEditorPanel</code> provides the ability to add or modify bitfields
+ * {@code BitFieldEditorPanel} provides the ability to add or modify bitfields
  * within non-packed structures.
  */
 public class BitFieldEditorPanel extends JPanel {
@@ -115,7 +115,7 @@ public class BitFieldEditorPanel extends JPanel {
 
 	private JPanel createLegendPanel() {
 		JPanel legendPanel = new JPanel(new BorderLayout());
-		legendPanel.add(new BitFieldPlacementComponent.BitFieldLegend(null), BorderLayout.WEST);
+		legendPanel.add(new BitFieldPlacementComponent.BitFieldLegend(null), BorderLayout.LINE_START);
 		return legendPanel;
 	}
 
@@ -184,7 +184,7 @@ public class BitFieldEditorPanel extends JPanel {
 		// the message label not visible
 		int height = statusTextField.getPreferredSize().height;
 
-		statusPanel.add(Box.createVerticalStrut(height), BorderLayout.WEST);
+		statusPanel.add(Box.createVerticalStrut(height), BorderLayout.LINE_START);
 		statusPanel.add(statusTextField, BorderLayout.CENTER);
 
 		return statusPanel;

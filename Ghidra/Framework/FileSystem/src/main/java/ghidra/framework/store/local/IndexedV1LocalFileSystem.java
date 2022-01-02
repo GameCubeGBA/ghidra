@@ -26,7 +26,7 @@ import ghidra.util.PropertyFile;
 import ghidra.util.exception.NotFoundException;
 
 /**
- * <code>IndexedLocalFileSystem</code> implements a case-sensitive indexed filesystem
+ * {@code IndexedLocalFileSystem} implements a case-sensitive indexed filesystem
  * which uses a shallow storage hierarchy with no restriction on file name or path 
  * length.  This filesystem is identified by the existence of an index file (~index.dat) 
  * and recovery journal (~index.jrn).

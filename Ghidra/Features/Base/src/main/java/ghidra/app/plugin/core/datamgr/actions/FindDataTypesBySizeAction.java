@@ -72,7 +72,7 @@ public class FindDataTypesBySizeAction extends DockingAction {
 		return new SizeGTreeFilter(values);
 	}
 
-	private class MyTreeFilterProvider extends DefaultGTreeFilterProvider {
+	private static class MyTreeFilterProvider extends DefaultGTreeFilterProvider {
 		private GTreeFilter secondaryFilter;
 
 		MyTreeFilterProvider(GTree tree, GTreeFilter secondaryFilter) {
@@ -90,7 +90,7 @@ public class FindDataTypesBySizeAction extends DockingAction {
 		}
 	}
 
-	private class SizeGTreeFilter implements GTreeFilter {
+	private static class SizeGTreeFilter implements GTreeFilter {
 
 		private final SortedRangeList sizes;
 

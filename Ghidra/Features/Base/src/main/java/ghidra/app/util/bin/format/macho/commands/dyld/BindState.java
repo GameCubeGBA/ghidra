@@ -47,32 +47,31 @@ public class BindState extends AbstractDyldInfoState {
 
 		File file = new File( getOrdinalName( ) );
 
-		StringBuffer buffer = new StringBuffer();
-		buffer.append(  getSegmentName( ) );
-		buffer.append( ' ' );
-		buffer.append( ' ' );
-		buffer.append(StringUtilities.pad(sectionName, ' ', -20));
-		buffer.append( ' ' );
-		buffer.append( ' ' );
-		buffer.append( sectionAddress );
-		buffer.append( ' ' );
-		buffer.append( ' ' );
-		buffer.append( getTypeName() );
-		buffer.append( ' ' );
-		buffer.append( ' ' );
-		buffer.append( weak );
-		buffer.append( ' ' );
-		buffer.append( ' ' );
-		buffer.append( addend );
-		buffer.append( ' ' );
-		buffer.append( ' ' );
-		buffer.append(StringUtilities.pad(file.getName(), ' ', -20));
-		buffer.append( ' ' );
-		buffer.append( ' ' );
-		buffer.append( symbolName );
-		buffer.append( ' ' );
-		buffer.append( ' ' );
-		return buffer.toString();
+        String buffer = getSegmentName() +
+                ' ' +
+                ' ' +
+                StringUtilities.pad(sectionName, ' ', -20) +
+                ' ' +
+                ' ' +
+                sectionAddress +
+                ' ' +
+                ' ' +
+                getTypeName() +
+                ' ' +
+                ' ' +
+                weak +
+                ' ' +
+                ' ' +
+                addend +
+                ' ' +
+                ' ' +
+                StringUtilities.pad(file.getName(), ' ', -20) +
+                ' ' +
+                ' ' +
+                symbolName +
+                ' ' +
+                ' ';
+		return buffer;
 	}
 
 	public void setWeak( boolean weak ) {

@@ -138,7 +138,7 @@ public class DataTypeTableCellEditor extends AbstractCellEditor
 			}
 		};
 		editorPanel.add(textField, BorderLayout.CENTER);
-		editorPanel.add(dataTypeChooserButton, BorderLayout.EAST);
+		editorPanel.add(dataTypeChooserButton, BorderLayout.LINE_END);
 	}
 
 	protected void stopEdit() {

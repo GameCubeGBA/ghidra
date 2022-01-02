@@ -216,12 +216,11 @@ public interface DbgEngNative extends StdCallLibrary {
 					u.setType("F128Bytes");
 					break;
 				case VECTOR64:
-					u.setType("VI8");
+                case VECTOR128:
+                    u.setType("VI8");
 					break;
-				case VECTOR128:
-					u.setType("VI8");
-					break; // TODO: Can I activate multiple types?
-			}
+                // TODO: Can I activate multiple types?
+            }
 		}
 
 		@Override
@@ -268,10 +267,9 @@ public interface DbgEngNative extends StdCallLibrary {
 				case FLOAT128:
 					return (T) new DebugFloat128Value(u.F128Bytes);
 				case VECTOR64:
-					return (T) new DebugVector128Value(u.VI8);
-				case VECTOR128:
-					return (T) new DebugVector128Value(u.VI8);
-			}
+                case VECTOR128:
+                    return (T) new DebugVector128Value(u.VI8);
+            }
 			throw new AssertionError("INTERNAL: Shouldn't be here");
 		}
 

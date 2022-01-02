@@ -46,7 +46,7 @@ import ghidra.util.exception.DuplicateFileException;
 import ghidra.util.exception.NotFoundException;
 
 /**
- * <code>IndexedLocalFileSystem</code> implements a case-sensitive indexed filesystem
+ * {@code IndexedLocalFileSystem} implements a case-sensitive indexed filesystem
  * which uses a shallow storage hierarchy with no restriction on file name or path 
  * length.  This filesystem is identified by the existence of an index file (~index.dat) 
  * and recovery journal (~index.jrn).
@@ -56,13 +56,13 @@ public class IndexedLocalFileSystem extends LocalFileSystem {
 	public static final int LATEST_INDEX_VERSION = 1;
 
 	/**
-	 * <code>INDEX_REWRITE_JOURNAL_LIMIT</code> determines the maximum number of journal
+	 * {@code INDEX_REWRITE_JOURNAL_LIMIT} determines the maximum number of journal
 	 * entries permitted before a rewrite of the index is forced
 	 */
 	static final int INDEX_REWRITE_JOURNAL_LIMIT = 1000;		// 1000 journal entries
 
 	/**
-	 * <code>INDEX_REWRITE_TIME_LIMIT_MS</code> determines the maximum time which will
+	 * {@code INDEX_REWRITE_TIME_LIMIT_MS} determines the maximum time which will
 	 * lapse before the index is rewritten with any changes
 	 */
 	static final int INDEX_REWRITE_TIME_LIMIT_MS = 30 * 60 * 1000; // 30-minutes
@@ -1749,7 +1749,7 @@ public class IndexedLocalFileSystem extends LocalFileSystem {
 	}
 
 	/**
-	 * <code>BadStorageNameException</code> invalid storage name
+	 * {@code BadStorageNameException} invalid storage name
 	 * encountered.
 	 */
 	public static class BadStorageNameException extends IOException {
@@ -1762,7 +1762,7 @@ public class IndexedLocalFileSystem extends LocalFileSystem {
 	}
 
 	/**
-	 * <code>IndexReadException</code> occurs when an error occurs
+	 * {@code IndexReadException} occurs when an error occurs
 	 * while reading/processing the filesystem index
 	 */
 	public static class IndexReadException extends IOException {
@@ -1779,7 +1779,7 @@ public class IndexedLocalFileSystem extends LocalFileSystem {
 	}
 
 	/**
-	 * <code>IndexReadException</code> occurs when an error occurs
+	 * {@code IndexReadException} occurs when an error occurs
 	 * while reading/processing the filesystem index
 	 */
 	public static class IndexVersionException extends IndexReadException {

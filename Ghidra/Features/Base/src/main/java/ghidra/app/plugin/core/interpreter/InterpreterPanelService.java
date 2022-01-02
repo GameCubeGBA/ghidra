@@ -17,6 +17,7 @@ package ghidra.app.plugin.core.interpreter;
 
 import ghidra.framework.plugintool.ServiceInfo;
 
+@FunctionalInterface
 @ServiceInfo(defaultProvider = InterpreterPanelPlugin.class)
 public interface InterpreterPanelService {
 

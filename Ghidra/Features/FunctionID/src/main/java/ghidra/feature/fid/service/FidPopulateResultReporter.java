@@ -15,6 +15,7 @@
  */
 package ghidra.feature.fid.service;
 
+@FunctionalInterface
 public interface FidPopulateResultReporter {
 	void report(FidPopulateResult result);
 }

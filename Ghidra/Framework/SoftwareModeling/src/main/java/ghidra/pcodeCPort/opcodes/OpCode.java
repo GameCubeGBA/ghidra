@@ -166,28 +166,19 @@ public enum OpCode {
 		// the input parameters
 		switch (this) {
 			case CPUI_INT_EQUAL:
-				return false;
-			case CPUI_INT_NOTEQUAL:
-				return false;
-			case CPUI_INT_SLESS:
-				return true;
-			case CPUI_INT_SLESSEQUAL:
-				return true;
-			case CPUI_INT_LESS:
-				return true;
-			case CPUI_INT_LESSEQUAL:
-				return true;
-			case CPUI_BOOL_NEGATE:
-				return false;
-			case CPUI_FLOAT_EQUAL:
-				return false;
-			case CPUI_FLOAT_NOTEQUAL:
-				return false;
-			case CPUI_FLOAT_LESS:
-				return true;
-			case CPUI_FLOAT_LESSEQUAL:
-				return true;
-			default:
+            case CPUI_FLOAT_NOTEQUAL:
+            case CPUI_FLOAT_EQUAL:
+            case CPUI_BOOL_NEGATE:
+            case CPUI_INT_NOTEQUAL:
+                return false;
+            case CPUI_INT_SLESS:
+            case CPUI_FLOAT_LESSEQUAL:
+            case CPUI_FLOAT_LESS:
+            case CPUI_INT_LESSEQUAL:
+            case CPUI_INT_LESS:
+            case CPUI_INT_SLESSEQUAL:
+                return true;
+            default:
 				break;
 		}
 		return false;

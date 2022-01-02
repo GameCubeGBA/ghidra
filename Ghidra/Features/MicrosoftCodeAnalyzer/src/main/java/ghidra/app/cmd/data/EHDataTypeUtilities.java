@@ -215,8 +215,8 @@ public class EHDataTypeUtilities {
 
 	/**
 	 * Creates a comment if it doesn't already exist at the specified address in the program
-	 * and if it doesn't contain the <code>dataTypeName</code> string. 
-	 * The comment will contain the prefix, the <code>dataTypeName</code>, and the suffix. 
+	 * and if it doesn't contain the {@code dataTypeName} string.
+	 * The comment will contain the prefix, the {@code dataTypeName}, and the suffix.
 	 * If a comment already exists without containing the dataTypeName, 
 	 * then this comment will be appended to the existing one.
 	 * 
@@ -252,7 +252,7 @@ public class EHDataTypeUtilities {
 	}
 
 	/**
-	 * Creates a symbol if one containing the <code>dataTypeName</code> doesn't already exist at 
+	 * Creates a symbol if one containing the {@code dataTypeName} doesn't already exist at
 	 * the specified address in the program.
 	 * 
 	 * @param program the program.

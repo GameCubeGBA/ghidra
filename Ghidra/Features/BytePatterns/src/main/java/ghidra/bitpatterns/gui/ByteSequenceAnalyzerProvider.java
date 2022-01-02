@@ -92,7 +92,7 @@ public abstract class ByteSequenceAnalyzerProvider extends DialogComponentProvid
 
 	private JPanel createMainPanel() {
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.add(infoPanel, BorderLayout.NORTH);
+		panel.add(infoPanel, BorderLayout.PAGE_START);
 		GFilterTable<ByteSequenceRowObject> filterTable = new GFilterTable<>(byteSequenceTable);
 		panel.add(filterTable, BorderLayout.CENTER);
 		return panel;
@@ -116,9 +116,9 @@ public abstract class ByteSequenceAnalyzerProvider extends DialogComponentProvid
 		TitledBorder noteBorder = new TitledBorder("Note");
 		noteField.setBorder(noteBorder);
 
-		panel.add(mergedSeqTextField, BorderLayout.NORTH);
+		panel.add(mergedSeqTextField, BorderLayout.PAGE_START);
 		panel.add(bitsOfCheckField, BorderLayout.CENTER);
-		panel.add(noteField, BorderLayout.SOUTH);
+		panel.add(noteField, BorderLayout.PAGE_END);
 		return panel;
 	}
 

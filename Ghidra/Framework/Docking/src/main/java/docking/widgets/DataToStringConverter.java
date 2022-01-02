@@ -16,6 +16,7 @@
  */
 package docking.widgets;
 
+@FunctionalInterface
 public interface DataToStringConverter<T> {
 	DataToStringConverter<String> stringDataToStringConverter =
 		t -> t;

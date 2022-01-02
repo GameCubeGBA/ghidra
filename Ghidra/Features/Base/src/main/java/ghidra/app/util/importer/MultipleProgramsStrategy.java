@@ -20,6 +20,7 @@ import ghidra.program.model.listing.Program;
 
 import java.util.List;
 
+@FunctionalInterface
 public interface MultipleProgramsStrategy {
     MultipleProgramsStrategy ALL_PROGRAMS = (programs, consumer) -> programs;
 

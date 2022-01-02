@@ -76,11 +76,10 @@ public class JdiModelTargetProcess extends JdiModelTargetObjectImpl
 		if (process == null) {
 			return super.getDisplay();
 		}
-		StringBuilder sb = new StringBuilder();
-		sb.append("Process " + process.pid());
-		sb.append(" alive=");
-		sb.append(process.isAlive());
-		return sb.toString();
+        String sb = "Process " + process.pid() +
+                " alive=" +
+                process.isAlive();
+		return sb;
 	}
 
 	protected TargetExecutionState convertState(boolean isAlive) {

@@ -63,18 +63,16 @@ class FidHashQuadImpl implements FidHashQuad {
 	 */
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
 
-		sb.append(" FH: ");
-		sb.append(Long.toHexString(fullHash));
-		sb.append(" (");
-		sb.append(Short.toString(codeUnitSize));
+        String sb = " FH: " +
+                Long.toHexString(fullHash) +
+                " (" +
+                Short.toString(codeUnitSize) +
+                ") +" +
+                specificHashAdditionalSize +
+                " XH: " +
+                Long.toHexString(specificHash);
 
-		sb.append(") +");
-		sb.append(specificHashAdditionalSize);
-		sb.append(" XH: ");
-		sb.append(Long.toHexString(specificHash));
-
-		return sb.toString();
+		return sb;
 	}
 }

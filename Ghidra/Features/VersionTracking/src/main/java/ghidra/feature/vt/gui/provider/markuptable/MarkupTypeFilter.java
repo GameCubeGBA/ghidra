@@ -52,7 +52,7 @@ public class MarkupTypeFilter extends CheckBoxBasedAncillaryFilter<VTMarkupItem>
 // Inner Classes
 //==================================================================================================
 
-	private class MarkupTypeCheckBoxInfo extends CheckBoxInfo<VTMarkupItem> {
+	private static class MarkupTypeCheckBoxInfo extends CheckBoxInfo<VTMarkupItem> {
 
 		private VTMarkupType markupType;
 

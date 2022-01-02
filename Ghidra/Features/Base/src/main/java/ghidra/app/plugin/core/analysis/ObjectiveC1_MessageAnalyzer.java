@@ -130,7 +130,7 @@ public class ObjectiveC1_MessageAnalyzer extends AbstractAnalyzer {
 				name.startsWith("thunk" + ObjectiveC1_Constants.OBJC_MSG_SEND);
 	}
 
-	private class CurrentState {
+	private static class CurrentState {
 		Program program;
 		Namespace globalNamespace;
 		Namespace selectorNamespace;

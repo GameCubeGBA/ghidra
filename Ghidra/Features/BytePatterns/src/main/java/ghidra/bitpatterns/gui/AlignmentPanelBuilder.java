@@ -78,9 +78,9 @@ public class AlignmentPanelBuilder extends ContextRegisterFilterablePanelBuilder
 
 		getButtonPanel().add(recomputeButton);
 
-		mainPanel.add(modulusPanel, BorderLayout.NORTH);
+		mainPanel.add(modulusPanel, BorderLayout.PAGE_START);
 
-		mainPanel.add(getButtonPanel(), BorderLayout.SOUTH);
+		mainPanel.add(getButtonPanel(), BorderLayout.PAGE_END);
 
 		return mainPanel;
 	}
@@ -159,7 +159,7 @@ public class AlignmentPanelBuilder extends ContextRegisterFilterablePanelBuilder
 		updateAlignmentPanel();
 	}
 
-	private class ModulusInfo {
+	private static class ModulusInfo {
 
 		private String modulus;
 		private String percent;

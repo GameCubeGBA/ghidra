@@ -25,7 +25,7 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.listing.Variable;
 
 /**
- * The <CODE>VariableLocFieldLocation</CODE> class provides specific information
+ * The {@code VariableLocFieldLocation} class provides specific information
  * about the stack variable offset field within a program location.
  */
 

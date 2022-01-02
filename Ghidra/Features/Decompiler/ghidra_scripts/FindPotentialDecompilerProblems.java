@@ -91,7 +91,7 @@ public class FindPotentialDecompilerProblems extends GhidraScript {
 		HighFunction hf = decompResult.getHighFunction();
 		if (hf == null) {
 			problems.add(new ProblemLocation(currentProgram, func.getEntryPoint(),
-				func.getEntryPoint(), "", "Decompilation Error"));
+                    func.getEntryPoint(), "", "Decompilation Error"));
 			return problems;
 		}
 
@@ -129,15 +129,15 @@ public class FindPotentialDecompilerProblems extends GhidraScript {
 					funcAddr = func.getEntryPoint();
 				}
 				problems.add(new ProblemLocation(currentProgram, func.getEntryPoint(), funcAddr,
-					sym.getName(), possible));
+                        sym.getName(), possible));
 			}
 
 			if (sym.getName().startsWith("unaff_")) {
 				Address firstAddr = getFirstCalledFunction(func);
 				if (sym.getName().equals("unaff_EBP")) {
 					problems.add(
-						new ProblemLocation(currentProgram, firstAddr, func.getEntryPoint(),
-							sym.getName(), "Suspect function is EH_PROLOG/EH_EPILOG"));
+                            new ProblemLocation(currentProgram, firstAddr, func.getEntryPoint(),
+                                    sym.getName(), "Suspect function is EH_PROLOG/EH_EPILOG"));
 					continue;
 				}
 				// Has a side effect variable
@@ -145,7 +145,7 @@ public class FindPotentialDecompilerProblems extends GhidraScript {
 						: "Undefined parameter or global register save");
 				//TODO: sym.getPCAddress() points outside of function bodies in certain cases...
 				problems.add(new ProblemLocation(currentProgram, func.getEntryPoint(),
-					sym.getPCAddress(), sym.getName(), possible));
+                        sym.getPCAddress(), sym.getName(), possible));
 			}
 			//extraout_X: will sym.getHighVariable().getRepresentative return X?
 			if (sym.getName().startsWith("extraout")) {
@@ -163,7 +163,7 @@ public class FindPotentialDecompilerProblems extends GhidraScript {
 					possible = "Function containing problem may need return type adjusted.";
 				}
 				problems.add(new ProblemLocation(currentProgram, func.getEntryPoint(), funcAddr,
-					sym.getName(), possible));
+                        sym.getName(), possible));
 			}
 		}
 		return problems;
@@ -373,7 +373,7 @@ public class FindPotentialDecompilerProblems extends GhidraScript {
 		dialog.addCustomColumn(explanationColumn);
 	}
 
-	class ProblemLocation implements AddressableRowObject {
+	static class ProblemLocation implements AddressableRowObject {
 		private Program program;
 		private Address problemAddress;
 		private Address causeAddress;

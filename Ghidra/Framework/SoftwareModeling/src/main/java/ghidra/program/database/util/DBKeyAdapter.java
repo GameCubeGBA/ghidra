@@ -26,6 +26,7 @@ import ghidra.program.model.address.Address;
  * 
  * 
  */
+@FunctionalInterface
 public interface DBKeyAdapter {
 
 	/**

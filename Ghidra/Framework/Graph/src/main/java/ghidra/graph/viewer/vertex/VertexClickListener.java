@@ -29,6 +29,7 @@ import ghidra.graph.viewer.event.mouse.VisualGraphMousePlugin;
  * @param <E> the edge type
  * @see VertexFocusListener
  */
+@FunctionalInterface
 public interface VertexClickListener<V extends VisualVertex, E extends VisualEdge<V>> {
 
 	/**

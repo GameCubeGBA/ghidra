@@ -31,8 +31,8 @@ public class LegendPanel extends JPanel {
 
 	public LegendPanel() {
 		super(new BorderLayout());
-		add(buildHeader(), BorderLayout.NORTH);
-		add(palettePanel, BorderLayout.WEST);
+		add(buildHeader(), BorderLayout.PAGE_START);
+		add(palettePanel, BorderLayout.LINE_START);
 		add(knotPanel, BorderLayout.CENTER);
 		setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
 	}

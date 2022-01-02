@@ -102,9 +102,8 @@ public class FuncDBsmall implements FuncDB<FuncRecord> {
 	//Save DB to an XML file.
 	@Override
 	public void saveXml(Writer fwrite) throws IOException {
-		StringBuffer buf = new StringBuffer();
-		buf.append("<funcDB>\n");												//The XML tag for the entire DB.
-		fwrite.append(buf.toString());
+        fwrite.append("<funcDB>\n" //The XML tag for the entire DB.
+        );
 		for (LibraryRecord libRec : this.libraries) {
 			libRec.saveXml(fwrite);												//Write out each library in XML.
 		}

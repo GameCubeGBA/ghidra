@@ -35,7 +35,7 @@ public abstract class ControlPanelWidget extends JPanel {
 	public ControlPanelWidget( String title) {
 
 		this.setLayout(new FlowLayout());
-		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+		setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
 		setAlignmentX(Component.LEFT_ALIGNMENT);
 
 		TitledBorder componentBorder = new TitledBorder(title);

@@ -21,8 +21,8 @@ import ghidra.program.model.symbol.SourceType;
 import ghidra.program.model.symbol.Symbol;
 
 /**
- * <CODE>AddressLabelInfo</CODE> is a utility class for storing
- * an <CODE>Address</CODE> and a corresponding label or alias together.
+ * {@code AddressLabelInfo} is a utility class for storing
+ * an {@code Address} and a corresponding label or alias together.
  */
 public class AddressLabelInfo implements Comparable<AddressLabelInfo> {
 	private Address addr;
@@ -152,15 +152,14 @@ public class AddressLabelInfo implements Comparable<AddressLabelInfo> {
 
 	@Override
 	public String toString() {
-		StringBuilder buf = new StringBuilder();
-		buf.append("LABEL INFO NAME=");
-		buf.append(label);
-		buf.append(", ");
-		buf.append("ADDR=" + addr);
-		buf.append(", ");
-		buf.append("isEntry = " + isEntry);
-		buf.append(", ");
-		buf.append("type = " + processorSymbolType);
-		return buf.toString();
+        String buf = "LABEL INFO NAME=" +
+                label +
+                ", " +
+                "ADDR=" + addr +
+                ", " +
+                "isEntry = " + isEntry +
+                ", " +
+                "type = " + processorSymbolType;
+		return buf;
 	}
 }

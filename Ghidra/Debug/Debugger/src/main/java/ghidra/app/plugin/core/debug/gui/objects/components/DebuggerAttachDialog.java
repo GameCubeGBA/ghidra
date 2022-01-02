@@ -92,7 +92,7 @@ public class DebuggerAttachDialog extends DialogComponentProvider {
 
 		GhidraTableFilterPanel<TargetAttachable> filterPanel =
 			new GhidraTableFilterPanel<>(processTable, processes);
-		panel.add(filterPanel, BorderLayout.SOUTH);
+		panel.add(filterPanel, BorderLayout.PAGE_END);
 
 		addWorkPanel(panel);
 

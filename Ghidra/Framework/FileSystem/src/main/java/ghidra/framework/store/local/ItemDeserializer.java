@@ -31,7 +31,7 @@ import ghidra.util.exception.IOCancelledException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>ItemDeserializer</code> facilitates the reading of a compressed data stream
+ * {@code ItemDeserializer} facilitates the reading of a compressed data stream
  * contained within a "packed" file.  A "packed" file contains the following meta-data
  * which is available after construction:
  * <ul>

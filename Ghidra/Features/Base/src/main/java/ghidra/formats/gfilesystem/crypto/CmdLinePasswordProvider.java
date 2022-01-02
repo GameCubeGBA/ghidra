@@ -39,10 +39,10 @@ import utilities.util.FileUtilities;
  * is the file's identifying information (name, path, etc):
  * <p>
  * <pre>
- * <code>password1   [tab]   myfirstzipfile.zip</code> <b>&larr; supplies a password for the named file located in any directory</b>
- * <code>someOtherPassword   [tab]   /full/path/tozipfile.zip</code> <b>&larr; supplies password for file at specified location</b> 
- * <code>anotherPassword [tab]   file:///full/path/tozipfile.zip|zip:///subdir/in/zip/somefile.txt</code> <b>&larr; supplies password for file embedded inside a zip</b>
- * <code>yetAnotherPassword</code> <b>&larr; a password to try for any file that needs a password</b>
+ * {@code password1   [tab]   myfirstzipfile.zip} <b>&larr; supplies a password for the named file located in any directory</b>
+ * {@code someOtherPassword   [tab]   /full/path/tozipfile.zip} <b>&larr; supplies password for file at specified location</b>
+ * {@code anotherPassword [tab]   file:///full/path/tozipfile.zip|zip:///subdir/in/zip/somefile.txt} <b>&larr; supplies password for file embedded inside a zip</b>
+ * {@code yetAnotherPassword} <b>&larr; a password to try for any file that needs a password</b>
  * </pre>
  * 
  * 

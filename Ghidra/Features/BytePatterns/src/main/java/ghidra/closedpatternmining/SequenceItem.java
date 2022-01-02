@@ -111,12 +111,11 @@ public class SequenceItem implements Comparable<SequenceItem> {
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("item: ");
-		sb.append(symbol);
-		sb.append(", index: ");
-		sb.append(index);
-		return sb.toString();
+        String sb = "item: " +
+                symbol +
+                ", index: " +
+                index;
+		return sb;
 	}
 
 	@Override

@@ -17,9 +17,10 @@
 package db;
 
 /**
- * <code>DBFileListener</code> facilitates listener notification
+ * {@code DBFileListener} facilitates listener notification
  * when new database versions are created.
  */
+@FunctionalInterface
 public interface DBFileListener {
 
 	/**

@@ -25,7 +25,7 @@ import ghidra.program.model.listing.Program;
 import ghidra.program.model.listing.Variable;
 
 /**
- * The <CODE>VariableCommentFieldLocation</CODE> class provides specific information
+ * The {@code VariableCommentFieldLocation} class provides specific information
  * about the stack variable comment field within a program location.
  */
 

@@ -18,7 +18,7 @@ package db;
 import java.io.IOException;
 
 /**
- * <code>DBChangeSet</code> facilitates the reading and writing of application
+ * {@code DBChangeSet} facilitates the reading and writing of application
  * level change data associated with BufferFile.
  */
 public interface DBChangeSet {

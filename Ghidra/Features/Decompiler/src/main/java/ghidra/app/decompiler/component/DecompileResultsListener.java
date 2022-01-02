@@ -16,6 +16,7 @@
  */
 package ghidra.app.decompiler.component;
 
+@FunctionalInterface
 public interface DecompileResultsListener {
 
 	void setDecompileData(DecompileData decompileData);

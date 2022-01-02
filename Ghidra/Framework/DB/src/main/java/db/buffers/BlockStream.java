@@ -18,7 +18,7 @@ package db.buffers;
 import java.io.Closeable;
 
 /**
- * <code>BlockStream</code> provides a BufferFile block stream.
+ * {@code BlockStream} provides a BufferFile block stream.
  */
 public interface BlockStream extends Closeable {
 	

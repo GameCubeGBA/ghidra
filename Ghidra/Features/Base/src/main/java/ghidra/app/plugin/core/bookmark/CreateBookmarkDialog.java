@@ -159,7 +159,7 @@ public class CreateBookmarkDialog extends DialogComponentProvider {
 		gbc.weightx = 0;
 		gbc.weighty = 0;
 		gbc.fill = GridBagConstraints.NONE;
-		gbc.anchor = GridBagConstraints.EAST;
+		gbc.anchor = GridBagConstraints.LINE_END;
 		mainPanel.add(new GLabel("Category: ", SwingConstants.RIGHT), gbc);
 
 		gbc.gridx = 2;
@@ -167,7 +167,7 @@ public class CreateBookmarkDialog extends DialogComponentProvider {
 		gbc.weightx = 0;
 		gbc.weighty = 0;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
-		gbc.anchor = GridBagConstraints.WEST;
+		gbc.anchor = GridBagConstraints.LINE_START;
 		mainPanel.add(categoryComboBox, gbc);
 
 		gbc.gridx = 1;
@@ -175,7 +175,7 @@ public class CreateBookmarkDialog extends DialogComponentProvider {
 		gbc.weightx = 0;
 		gbc.weighty = 0;
 		gbc.fill = GridBagConstraints.NONE;
-		gbc.anchor = GridBagConstraints.EAST;
+		gbc.anchor = GridBagConstraints.LINE_END;
 		mainPanel.add(new GLabel("Address: ", SwingConstants.RIGHT), gbc);
 
 		gbc.gridx = 2;
@@ -183,7 +183,7 @@ public class CreateBookmarkDialog extends DialogComponentProvider {
 		gbc.weightx = 0;
 		gbc.weighty = 0;
 		gbc.fill = GridBagConstraints.NONE;
-		gbc.anchor = GridBagConstraints.WEST;
+		gbc.anchor = GridBagConstraints.LINE_START;
 		mainPanel.add(locationTextField, gbc);
 
 		gbc.gridx = 1;
@@ -191,7 +191,7 @@ public class CreateBookmarkDialog extends DialogComponentProvider {
 		gbc.weightx = 0;
 		gbc.weighty = 0;
 		gbc.fill = GridBagConstraints.NONE;
-		gbc.anchor = GridBagConstraints.EAST;
+		gbc.anchor = GridBagConstraints.LINE_END;
 		mainPanel.add(new GLabel("Description: ", SwingConstants.RIGHT), gbc);
 
 		gbc.gridx = 2;
@@ -199,7 +199,7 @@ public class CreateBookmarkDialog extends DialogComponentProvider {
 		gbc.weightx = 1.0;
 		gbc.weighty = 0;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
-		gbc.anchor = GridBagConstraints.WEST;
+		gbc.anchor = GridBagConstraints.LINE_START;
 		mainPanel.add(commentTextField, gbc);
 
 		ImageIcon icon = BookmarkNavigator.NOTE_ICON;
@@ -213,8 +213,8 @@ public class CreateBookmarkDialog extends DialogComponentProvider {
 
 		JPanel workPanel = new JPanel(new BorderLayout());
 		workPanel.add(mainPanel, BorderLayout.CENTER);
-		workPanel.add(imageLabel, BorderLayout.WEST);
-		workPanel.add(selectionPanel, BorderLayout.SOUTH);
+		workPanel.add(imageLabel, BorderLayout.LINE_START);
+		workPanel.add(selectionPanel, BorderLayout.PAGE_END);
 
 		return workPanel;
 	}

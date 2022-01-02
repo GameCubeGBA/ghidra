@@ -38,22 +38,18 @@ public class BTreeNodeRecord /*implements StructConverter*/ {
 		unknown3      =  reader.readNextInt();
 
 		switch ( descriptor.getKind() ) {
-			case BTreeNodeKinds.kBTHeaderNode: {
+			case BTreeNodeKinds.kBTHeaderNode:
+            case BTreeNodeKinds.kBTMapNode:
+            case BTreeNodeKinds.kBTIndexNode: {
 				break;
 			}
-			case BTreeNodeKinds.kBTIndexNode: {
-				break;
-			}
-			case BTreeNodeKinds.kBTLeafNode: {
+            case BTreeNodeKinds.kBTLeafNode: {
 				unknown4      =  reader.readNextInt();
 				unknown5      =  reader.readNextInt();
 				recordLength  =  reader.readNextInt();
 				break;
 			}
-			case BTreeNodeKinds.kBTMapNode: {
-				break;
-			}
-		}
+        }
 
 		_descriptor = descriptor;
 

@@ -109,7 +109,7 @@ public class KeyEntryDialog extends DialogComponentProvider {
 
 		JPanel labelPanel = new JPanel();
 		labelPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-		BoxLayout bl = new BoxLayout(labelPanel, BoxLayout.X_AXIS);
+		BoxLayout bl = new BoxLayout(labelPanel, BoxLayout.LINE_AXIS);
 		labelPanel.setLayout(bl);
 		labelPanel.add(Box.createHorizontalStrut(5));
 		labelPanel.add(imageLabel);
@@ -122,7 +122,7 @@ public class KeyEntryDialog extends DialogComponentProvider {
 			updateCollisionPane(keyStroke);
 		});
 
-		defaultPanel.add(labelPanel, BorderLayout.NORTH);
+		defaultPanel.add(labelPanel, BorderLayout.PAGE_START);
 		defaultPanel.setBorder(BorderFactory.createLoweredBevelBorder());
 		JPanel p = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		p.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
@@ -135,7 +135,7 @@ public class KeyEntryDialog extends DialogComponentProvider {
 		defaultPanel.add(p, BorderLayout.CENTER);
 
 		JPanel mainPanel = new JPanel(new BorderLayout());
-		mainPanel.add(defaultPanel, BorderLayout.NORTH);
+		mainPanel.add(defaultPanel, BorderLayout.PAGE_START);
 		mainPanel.add(createCollisionPanel(), BorderLayout.CENTER);
 		return mainPanel;
 	}

@@ -116,10 +116,10 @@ public class ClearDialog extends DialogComponentProvider {
 		panel = new JPanel();
 		panel.setLayout(new BorderLayout(10, 10));
 
-		panel.add(new GLabel("Clear Options:"), BorderLayout.NORTH);
+		panel.add(new GLabel("Clear Options:"), BorderLayout.PAGE_START);
 
 		JPanel cbPanel = new JPanel();
-		BoxLayout bl = new BoxLayout(cbPanel, BoxLayout.Y_AXIS);
+		BoxLayout bl = new BoxLayout(cbPanel, BoxLayout.PAGE_AXIS);
 		cbPanel.setLayout(bl);
 
 		symbolsCb = new GCheckBox("Symbols");
@@ -228,7 +228,7 @@ public class ClearDialog extends DialogComponentProvider {
 		buttonPanel.add(deselectAllbutton);
 
 		JPanel lowerPanel = new JPanel();
-		lowerPanel.setLayout(new BoxLayout(lowerPanel, BoxLayout.Y_AXIS));
+		lowerPanel.setLayout(new BoxLayout(lowerPanel, BoxLayout.PAGE_AXIS));
 		JSeparator separator = new JSeparator();
 
 		lowerPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 5, 10));
@@ -239,7 +239,7 @@ public class ClearDialog extends DialogComponentProvider {
 		JPanel p = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		p.add(cbPanel);
 		panel.add(p, BorderLayout.CENTER);
-		panel.add(lowerPanel, BorderLayout.SOUTH);
+		panel.add(lowerPanel, BorderLayout.PAGE_END);
 	}
 
 	private void setAllCheckBoxesSelected(boolean selected, List<JCheckBox> list) {

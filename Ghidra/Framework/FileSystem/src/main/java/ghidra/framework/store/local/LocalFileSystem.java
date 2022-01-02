@@ -39,7 +39,7 @@ import ghidra.util.exception.DuplicateFileException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>LocalFileSystem</code> provides access to FolderItem's which
+ * {@code LocalFileSystem} provides access to FolderItem's which
  * exist within a File-based directory structure.  Although FolderItem
  * caching is highly recommended, it is not provided by this implementation
  * and should be provided by an encompassing set of folder/file objects.
@@ -886,11 +886,10 @@ public abstract class LocalFileSystem implements FileSystem {
 		if (prefixCount == 0) {
 			return name;
 		}
-		StringBuilder buf = new StringBuilder();
-		// keep number of hidden prefix chars even
-        buf.append(String.valueOf(HIDDEN_DIR_PREFIX_CHAR).repeat(Math.max(0, prefixCount)));
-		buf.append(name);
-		return buf.toString();
+        // keep number of hidden prefix chars even
+        String buf = String.valueOf(HIDDEN_DIR_PREFIX_CHAR).repeat(Math.max(0, prefixCount)) +
+                name;
+		return buf;
 	}
 
 	/**

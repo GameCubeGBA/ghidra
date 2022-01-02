@@ -573,9 +573,9 @@ public abstract class PopupWindowPlacer {
 //==================================================================================================
 
 	/**
-	 * Placer that attempts a placement on the <code>major</code> edge of the inner bounds, with
-	 * <code>minorBegin</code> specifying the preferred cell location at which to start the
-	 * placement attempt and <code>minorEnd</code> specifying that limit on the amount of shift
+	 * Placer that attempts a placement on the {@code major} edge of the inner bounds, with
+	 * {@code minorBegin} specifying the preferred cell location at which to start the
+	 * placement attempt and {@code minorEnd} specifying that limit on the amount of shift
 	 * that is made in an attempt to make the placement fit within the outer bounds.  The inner
 	 * bounds is not allowed to be violated.
 	 */

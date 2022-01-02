@@ -83,7 +83,7 @@ public class CheckoutDialog extends DialogComponentProvider {
 		JPanel msgPanel = new JPanel(new BorderLayout());
 		msgPanel.add(
 			new GIconLabel(OptionDialog.getIconForMessageType(OptionDialog.QUESTION_MESSAGE)),
-			BorderLayout.WEST);
+                BorderLayout.LINE_START);
 
 		MultiLineLabel msgText = new MultiLineLabel("Checkout selected file(s)?");
 		msgText.setMaximumSize(msgText.getPreferredSize());
@@ -96,7 +96,7 @@ public class CheckoutDialog extends DialogComponentProvider {
 		JPanel cbPanel = new JPanel(new BorderLayout());
 		cbPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
 		cbPanel.add(exclusiveCB);
-		innerPanel.add(cbPanel, BorderLayout.SOUTH);
+		innerPanel.add(cbPanel, BorderLayout.PAGE_END);
 
 		return innerPanel;
 	}

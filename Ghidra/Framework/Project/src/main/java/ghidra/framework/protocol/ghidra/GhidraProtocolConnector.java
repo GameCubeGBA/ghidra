@@ -27,7 +27,7 @@ import ghidra.framework.client.RepositoryServerAdapter;
 import ghidra.framework.store.FileSystem;
 
 /**
- * <code>GhidraProtocolConnector</code> provides an abtract implementation to access Ghidra 
+ * {@code GhidraProtocolConnector} provides an abtract implementation to access Ghidra
  * repositories using various underlying communication protocols.  The common requirement 
  * for all implementations is the ability to derive a repository URL from any folder or file
  * URL. 
@@ -48,7 +48,7 @@ public abstract class GhidraProtocolConnector {
 	protected RepositoryServerAdapter repositoryServerAdapter;
 
 	/**
-	 * Abstract <code>GhidraProtocolConnector</code> constructor.
+	 * Abstract {@code GhidraProtocolConnector} constructor.
 	 * @param url a repository resource URL appropriate for the specific protocol implementation
 	 * @throws MalformedURLException if URL is invalid
 	 */

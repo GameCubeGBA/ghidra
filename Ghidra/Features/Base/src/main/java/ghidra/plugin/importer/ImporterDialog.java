@@ -217,7 +217,7 @@ public class ImporterDialog extends DialogComponentProvider {
 
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.add(folderNameTextField, BorderLayout.CENTER);
-		panel.add(folderButton, BorderLayout.EAST);
+		panel.add(folderButton, BorderLayout.LINE_END);
 		return panel;
 	}
 
@@ -247,7 +247,7 @@ public class ImporterDialog extends DialogComponentProvider {
 
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.add(languageTextField, BorderLayout.CENTER);
-		panel.add(languageButton, BorderLayout.EAST);
+		panel.add(languageButton, BorderLayout.LINE_END);
 		return panel;
 	}
 
@@ -271,7 +271,7 @@ public class ImporterDialog extends DialogComponentProvider {
 		}
 
 		panel.add(loaderComboBox, BorderLayout.CENTER);
-		panel.add(buildLoaderInfoButton(), BorderLayout.EAST);
+		panel.add(buildLoaderInfoButton(), BorderLayout.LINE_END);
 		return panel;
 	}
 
@@ -325,7 +325,7 @@ public class ImporterDialog extends DialogComponentProvider {
 		JPanel panel = new JPanel(new BorderLayout());
 		JPanel innerPanel = new JPanel(new VerticalLayout(5));
 		innerPanel.add(buildOptionsButton());
-		panel.add(innerPanel, BorderLayout.EAST);
+		panel.add(innerPanel, BorderLayout.LINE_END);
 		return panel;
 	}
 

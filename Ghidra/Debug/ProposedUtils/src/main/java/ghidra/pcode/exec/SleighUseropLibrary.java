@@ -22,6 +22,7 @@ import ghidra.pcodeCPort.slghsymbol.UserOpSymbol;
 import ghidra.program.model.pcode.Varnode;
 import ghidra.sleigh.grammar.Location;
 
+@FunctionalInterface
 public interface SleighUseropLibrary<T> {
 	final class EmptySleighUseropLibrary implements SleighUseropLibrary<Object> {
 		@Override

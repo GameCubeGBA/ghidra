@@ -245,7 +245,8 @@ public class UnknownWithUtils extends Unknown {
 
 	public static final RefAnalyzer ANALYZER = new DisabledRefAnalyzer();
 
-	public interface VTableIndex {
+	@FunctionalInterface
+    public interface VTableIndex {
 		int getIndex();
 
 		static <I extends Enum<I> & VTableIndex> int follow(Class<I> prev) {

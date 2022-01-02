@@ -188,7 +188,7 @@ public class CloseToolTest extends AbstractGhidraHeadedIntegrationTest {
 // Inner Classes	
 //==================================================================================================	
 
-	private class ControllableBackgroundCommand extends BackgroundCommand {
+	private static class ControllableBackgroundCommand extends BackgroundCommand {
 
 		private volatile boolean hasStarted;
 		private volatile boolean stop;

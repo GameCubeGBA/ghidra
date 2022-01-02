@@ -20,6 +20,7 @@ import ghidra.formats.gfilesystem.FSRL;
 /**
  * A service to interact with file systems.
  */
+@FunctionalInterface
 public interface FileSystemBrowserService {
 
 	/**

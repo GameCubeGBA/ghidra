@@ -15,6 +15,7 @@
  */
 package ghidra.graph.viewer.edge;
 
+@FunctionalInterface
 public interface PathHighlightListener {
 
 	/**

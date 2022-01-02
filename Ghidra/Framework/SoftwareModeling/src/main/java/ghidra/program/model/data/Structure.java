@@ -437,7 +437,7 @@ public interface Structure extends Composite {
 	void growStructure(int amount);
 
 	/**
-	 * <code>BitOffsetComparator</code> provides ability to compare an normalized bit offset (see
+	 * {@code BitOffsetComparator} provides ability to compare an normalized bit offset (see
 	 * {@link #getNormalizedBitfieldOffset(int, int, int, int, boolean)}) with a
 	 * {@link DataTypeComponent} object. The offset will be considered equal (0) if the component
 	 * contains the offset. A normalized component bit numbering is used to establish the footprint

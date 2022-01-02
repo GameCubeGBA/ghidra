@@ -27,6 +27,7 @@ import com.sun.jdi.ThreadReference;
  * a reason that is not understood by the manager, then {@link JdiReason.Reasons#UNKNOWN} is given.
  * If no reason is provided, then {@link JdiReason.Reasons#NONE} is given.
  */
+@FunctionalInterface
 public interface JdiReason {
 	/**
 	 * A map of reason strings to reason classes

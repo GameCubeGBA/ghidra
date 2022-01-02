@@ -60,7 +60,7 @@ public class LSDATable {
 
 	/**
 	 * Constructor for an LSDA exception table.
-	 * <br>Note: The <code>create(Address, DwarfEHDecoder, RegionDescriptor)</code> method must be 
+	 * <br>Note: The {@code create(Address, DwarfEHDecoder, RegionDescriptor)} method must be
 	 * called after constructing an LSDATable to associate it with an address before any of 
 	 * its "get..." methods are called.
 	 * @param monitor task monitor to see if the user has cancelled analysis
@@ -72,7 +72,7 @@ public class LSDATable {
 	}
 
 	/**
-	 * Create a LSDA Table from the bytes at <code>addr</code>. Parses the header, call site table,
+	 * Create a LSDA Table from the bytes at {@code addr}. Parses the header, call site table,
 	 * action table, and type table.
 	 * <br>Note: This method must get called before any of the "get..." methods.
 	 * @param tableAddr the start (minimum address) of this LSDA table.

@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 /**
- * <code>FieldIndexTable</code> provides a simplified index table whose key is
+ * {@code FieldIndexTable} provides a simplified index table whose key is
  * a fixed or variable length {@link IndexField} which consists of a concatenation of
  * the index field value and associated primary table key.
  */
@@ -78,8 +78,8 @@ public class FieldIndexTable extends IndexTable {
 		IndexField indexField =
 			indexKeyType.newIndexField(indexValue, getPrimaryTableKeyType().getMinValue());
 
-		DBFieldIterator iter = indexTable.fieldKeyIterator(indexField);
 		ArrayList<IndexField> list = new ArrayList<>(20);
+		DBFieldIterator iter = indexTable.fieldKeyIterator(indexField);
 		while (iter.hasNext()) {
 			IndexField f = (IndexField) iter.next();
 			if (!f.hasSameIndexValue(indexField)) {

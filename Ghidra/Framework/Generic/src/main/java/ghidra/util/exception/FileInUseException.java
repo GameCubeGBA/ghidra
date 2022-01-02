@@ -19,7 +19,7 @@ package ghidra.util.exception;
 import java.io.IOException;
 
 /**
- * <code>FileInUseException</code> indicates that there was contention
+ * {@code FileInUseException} indicates that there was contention
  * for a file which is in-use.  This can be caused for various reasons
  * including a file lock of some kind.
  */

@@ -16,6 +16,7 @@
  */
 package ghidra.util;
 
+@FunctionalInterface
 public interface Disposable {
 	/**
 	 * Dispose this object

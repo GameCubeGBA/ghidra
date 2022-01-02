@@ -101,7 +101,7 @@ public class KeyBindingData {
 
 	/**
 	 * Updates the given data with system-independent versions of key modifiers.  For example,
-	 * the <code>control</code> key will be converted to the <code>command</code> key on the Mac.
+	 * the {@code control} key will be converted to the <code>command</code> key on the Mac.
 	 * @param newKeyBindingData the data to validate
 	 * @return the potentially changed data
 	 */

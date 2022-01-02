@@ -355,7 +355,7 @@ class DetachedWindowNode extends WindowNode {
 		contentPane.add(comp, BorderLayout.CENTER);
 
 		statusBar = new StatusBar();
-		contentPane.add(statusBar, BorderLayout.SOUTH);
+		contentPane.add(statusBar, BorderLayout.PAGE_END);
 
 		window.addWindowListener(new WindowAdapter() {
 			@Override

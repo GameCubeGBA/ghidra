@@ -124,7 +124,7 @@ public class DefaultGTreeFilterProvider implements GTreeFilterProvider {
 		JPanel newFilterPanel = new JPanel(new BorderLayout());
 		newFilterPanel.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
 		JLabel filterLabel = new GLabel(" Filter: ");
-		newFilterPanel.add(filterLabel, BorderLayout.WEST);
+		newFilterPanel.add(filterLabel, BorderLayout.LINE_START);
 
 		filterField = new FilterTextField(gTree.getJTree());
 		newFilterPanel.add(filterField, BorderLayout.CENTER);
@@ -154,7 +154,7 @@ public class DefaultGTreeFilterProvider implements GTreeFilterProvider {
 		helpService.registerHelp(filterField, helpLocation);
 
 		filterStateButton.setToolTipText("Filter Options");
-		newFilterPanel.add(filterStateButton, BorderLayout.EAST);
+		newFilterPanel.add(filterStateButton, BorderLayout.LINE_END);
 		return newFilterPanel;
 	}
 

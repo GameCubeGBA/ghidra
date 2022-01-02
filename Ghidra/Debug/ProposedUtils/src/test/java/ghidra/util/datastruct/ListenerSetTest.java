@@ -13,8 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ghidra.util.datastruct;
-
 import static org.junit.Assert.assertEquals;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -25,7 +23,8 @@ import org.junit.Test;
 import ghidra.util.datastruct.ListenerSet;
 
 public class ListenerSetTest {
-	public interface DummyListener {
+	@FunctionalInterface
+    public interface DummyListener {
 		void event(String e);
 	}
 

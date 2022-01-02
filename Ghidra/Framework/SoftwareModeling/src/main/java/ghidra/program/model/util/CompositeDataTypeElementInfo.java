@@ -74,15 +74,14 @@ public class CompositeDataTypeElementInfo extends DataTypeInfo {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(dataTypeHandle);
-        sb.append("/");
-        sb.append(dataTypeAlignment);
-        sb.append(":(");
-        sb.append(dataTypeOffset);
-        sb.append(",");
-        sb.append(dataTypeLength);
-        sb.append(")");
-        return sb.toString();
+        String sb = dataTypeHandle +
+                "/" +
+                dataTypeAlignment +
+                ":(" +
+                dataTypeOffset +
+                "," +
+                dataTypeLength +
+                ")";
+        return sb;
     }
 }

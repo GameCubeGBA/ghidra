@@ -532,13 +532,13 @@ public final class NumericUtilities {
 	}
 
 	/**
-	 * Render <code>number</code> in different bases using the default signedness mode.
+	 * Render {@code number} in different bases using the default signedness mode.
 	 * <p>
 	 * This invokes {@linkplain #formatNumber(long, int, SignednessFormatMode)} with a
-	 * <code>mode</code> parameter of <code>{@linkplain SignednessFormatMode#DEFAULT}</code>.
+	 * {@code mode} parameter of <code>{@linkplain SignednessFormatMode#DEFAULT}</code>.
 	 *
 	 * @param number The number to represent
-	 * @param radix the base in which <code>number</code> is represented
+	 * @param radix the base in which {@code number} is represented
 	 * @return formatted string of the number parameter in provided radix base
 	 * @see #formatNumber(long, int, SignednessFormatMode)
 	 */
@@ -547,13 +547,13 @@ public final class NumericUtilities {
 	}
 
 	/**
-	 * Provide renderings of <code>number</code> in different bases:
+	 * Provide renderings of {@code number} in different bases:
 	 * <ul>
-	 * <li><code>0</code> - renders <code>number</code> as an escaped character sequence</li>
-	 * <li><code>2</code> - renders <code>number</code> as a <code>base-2</code> integer</li>
-	 * <li><code>8</code> - renders <code>number</code> as a <code>base-8</code> integer</li>
-	 * <li><code>10</code> - renders <code>number</code> as a <code>base-10</code> integer</li>
-	 * <li><code>16</code> (default) - renders <code>number</code> as a <code>base-16</code>
+	 * <li>{@code 0} - renders <code>number</code> as an escaped character sequence</li>
+	 * <li>{@code 2} - renders <code>number</code> as a <code>base-2</code> integer</li>
+	 * <li>{@code 8} - renders <code>number</code> as a <code>base-8</code> integer</li>
+	 * <li>{@code 10} - renders <code>number</code> as a <code>base-10</code> integer</li>
+	 * <li>{@code 16} (default) - renders <code>number</code> as a <code>base-16</code>
 	 * integer</li>
 	 * </ul>
 	 * <table>
@@ -673,7 +673,7 @@ public final class NumericUtilities {
 	 * </table>
 	 * 
 	 * @param number The number to represent
-	 * @param radix The base in which <code>number</code> is represented
+	 * @param radix The base in which {@code number} is represented
 	 * @param mode Specifies how the number is formatted with respect to its signed-ness
 	 * @return number string in the given base
 	 */
@@ -894,7 +894,8 @@ public final class NumericUtilities {
 	/**
 	 * Provides the protocol for rendering integer-type numbers in different signed-ness modes.
 	 */
-	private interface IntegerRadixRenderer {
+	@FunctionalInterface
+    private interface IntegerRadixRenderer {
 		/**
 		 * Format the given number in the provided radix base.
 		 * 
@@ -970,14 +971,12 @@ public final class NumericUtilities {
 		public String toString(long number, int radix) {
 			switch (radix) {
 				case 2:
-					return new UnsignedIntegerRadixRenderer().toString(number, radix);
-				case 8:
-					return new UnsignedIntegerRadixRenderer().toString(number, radix);
-				case 10:
+                case 16:
+                case 8:
+                    return new UnsignedIntegerRadixRenderer().toString(number, radix);
+                case 10:
 					return new SignedIntegerRadixRenderer().toString(number, radix);
-				case 16:
-					return new UnsignedIntegerRadixRenderer().toString(number, radix);
-			}
+            }
 			throw new IllegalArgumentException("Unsupported radix");
 		}
 	}

@@ -163,11 +163,10 @@ public class SymbolRecords {
 			throws IOException {
 		writer.write("SymbolMap---------------------------------------------------");
 		for (Map.Entry<Long, AbstractMsSymbol> entry : mySymbolsByOffset.entrySet()) {
-			StringBuilder builder = new StringBuilder();
-			builder.append("\n------------------------------------------------------------\n");
-			builder.append(String.format("Offset: 0X%08X\n", entry.getKey()));
-			builder.append(entry.getValue());
-			writer.write(builder.toString());
+            String builder = "\n------------------------------------------------------------\n" +
+                    String.format("Offset: 0X%08X\n", entry.getKey()) +
+                    entry.getValue();
+			writer.write(builder);
 		}
 		writer.write("\nEnd SymbolMap-----------------------------------------------\n");
 	}

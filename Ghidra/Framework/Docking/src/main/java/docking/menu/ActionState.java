@@ -21,9 +21,9 @@ import ghidra.util.HelpLocation;
 import ghidra.util.SystemUtilities;
 
 /**
- * Note: this class overrides the <code>equals(Object)</code> and relies upon the <code>equals</code>
- * method of the <code>userData</code> object.  Thus, if it is important that equals work for you in 
- * the non-standard identity way, then you must override <code>equals</code> in your user data objects.
+ * Note: this class overrides the {@code equals(Object)} and relies upon the <code>equals</code>
+ * method of the {@code userData} object.  Thus, if it is important that equals work for you in
+ * the non-standard identity way, then you must override {@code equals} in your user data objects.
  * 
  * @param <T> the type of the action state
  */

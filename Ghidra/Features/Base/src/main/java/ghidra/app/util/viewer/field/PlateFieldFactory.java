@@ -326,8 +326,8 @@ public class PlateFieldFactory extends FieldFactory {
 				prefix.length() + element.length() + ellipsis.length());
 
 		return new FieldElementResult(
-			new CompositeFieldElement(new FieldElement[] { prefix, element, ellipsis, suffix }),
-			ellipsisLength > 0);
+                new CompositeFieldElement(new FieldElement[]{prefix, element, ellipsis, suffix}),
+                ellipsisLength > 0);
 	}
 
 	private void addPadding(StringBuilder buf, int count) {
@@ -455,9 +455,7 @@ public class PlateFieldFactory extends FieldFactory {
 		int n = width / starWidth;
 
 		if (stars.length() != n) {
-			StringBuilder buf = new StringBuilder();
-            buf.append("*".repeat(Math.max(0, n)));
-			stars = buf.toString();
+            stars = "*".repeat(Math.max(0, n));
 		}
 		return stars;
 	}
@@ -792,7 +790,7 @@ public class PlateFieldFactory extends FieldFactory {
 		}
 	}
 
-	private class FieldElementResult {
+	private static class FieldElementResult {
 		private FieldElement element;
 		private boolean isClipped;
 

@@ -24,7 +24,7 @@ import ghidra.util.HelpLocation;
 import docking.action.MenuData;
 
 /**
- * <CODE>EditStructureAction</CODE> allows the user to edit a structure.
+ * {@code EditStructureAction} allows the user to edit a structure.
  */
 class EditStructureAction extends ListingContextAction {
 	private FunctionPlugin plugin;

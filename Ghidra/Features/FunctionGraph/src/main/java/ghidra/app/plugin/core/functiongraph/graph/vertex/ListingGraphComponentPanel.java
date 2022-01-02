@@ -170,7 +170,7 @@ public class ListingGraphComponentPanel extends AbstractGraphComponentPanel {
 		// the full function graph.
 		setFormat(false);
 
-		add(genericHeader, BorderLayout.NORTH);
+		add(genericHeader, BorderLayout.PAGE_START);
 
 		listingPanel.setProgramLocationListener(controller);
 		listingPanel.setProgramSelectionListener(controller);
@@ -226,7 +226,7 @@ public class ListingGraphComponentPanel extends AbstractGraphComponentPanel {
 		headerPanel.add(tooltipTitleLabel);
 		headerPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-		panel.add(headerPanel, BorderLayout.NORTH);
+		panel.add(headerPanel, BorderLayout.PAGE_START);
 		panel.add(previewListingPanel, BorderLayout.CENTER);
 
 		toolTipComponent = panel;

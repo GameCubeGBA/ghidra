@@ -193,14 +193,14 @@ public class GenericHeader extends JPanel {
 	private void constructOneLinePanel() {
 		removeAll();
 		if (toolbar == null) {
-			add(menuCloseToolbar, BorderLayout.EAST);
+			add(menuCloseToolbar, BorderLayout.LINE_END);
 		}
 		else {
-			JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+			JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEADING, 0, 0));
 			toolbar.setBorder(BorderFactory.createEmptyBorder());
 			panel.add(toolbar);
 			panel.add(menuCloseToolbar);
-			add(panel, BorderLayout.EAST);
+			add(panel, BorderLayout.LINE_END);
 			toolbar.setUseSingleLineLayout(true);
 			toolbar.invalidate();
 		}
@@ -224,9 +224,9 @@ public class GenericHeader extends JPanel {
 	private void constructMultiLinePanel() {
 		removeAll();
 		toolbar.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.BLACK));
-		add(toolbar, BorderLayout.SOUTH);
+		add(toolbar, BorderLayout.PAGE_END);
 		add(titlePanel, BorderLayout.CENTER);
-		add(menuCloseToolbar, BorderLayout.EAST);
+		add(menuCloseToolbar, BorderLayout.LINE_END);
 
 		numLines = 2;
         toolbar.setUseSingleLineLayout(useSingleLineLayoutOverride);

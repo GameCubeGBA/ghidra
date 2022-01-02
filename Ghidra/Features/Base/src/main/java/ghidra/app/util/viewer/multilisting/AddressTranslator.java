@@ -19,6 +19,7 @@ package ghidra.app.util.viewer.multilisting;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 
+@FunctionalInterface
 public interface AddressTranslator {
 
 	Address translate(Address address, Program primaryProgram, Program program);

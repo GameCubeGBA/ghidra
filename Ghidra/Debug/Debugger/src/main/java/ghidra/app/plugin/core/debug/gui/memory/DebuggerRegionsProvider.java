@@ -275,7 +275,7 @@ public class DebuggerRegionsProvider extends ComponentProviderAdapter {
 		regionTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		mainPanel.add(new JScrollPane(regionTable));
 		regionFilterPanel = new GhidraTableFilterPanel<>(regionTable, regionTableModel);
-		mainPanel.add(regionFilterPanel, BorderLayout.SOUTH);
+		mainPanel.add(regionFilterPanel, BorderLayout.PAGE_END);
 
 		regionTable.getSelectionModel().addListSelectionListener(evt -> {
 			myActionContext = new DebuggerRegionActionContext(this,

@@ -128,7 +128,7 @@ class FilePromptDialog extends DialogComponentProvider {
 
 		JPanel textFieldWithButtonPanel = new JPanel(new BorderLayout());
 		textFieldWithButtonPanel.add(filePathTextField, BorderLayout.CENTER);
-		textFieldWithButtonPanel.add(browseButton, BorderLayout.EAST);
+		textFieldWithButtonPanel.add(browseButton, BorderLayout.LINE_END);
 
 		JPanel mainPanel = new JPanel(new PairLayout());
 		mainPanel.add(promptLabel);

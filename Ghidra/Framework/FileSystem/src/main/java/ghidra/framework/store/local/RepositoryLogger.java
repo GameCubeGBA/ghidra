@@ -16,6 +16,7 @@
  */
 package ghidra.framework.store.local;
 
+@FunctionalInterface
 public interface RepositoryLogger {
 
 	void log(String path, String msg, String user);

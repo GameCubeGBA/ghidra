@@ -36,7 +36,7 @@ import ghidra.util.Conv;
  */
 public class DebugCOFFLineNumber {
 	/**
-	 * The size of the <code>IMAGE_LINENUMBER</code> structure.
+	 * The size of the {@code IMAGE_LINENUMBER} structure.
 	 */
     public static final int IMAGE_SIZEOF_LINENUMBER = 6;
 

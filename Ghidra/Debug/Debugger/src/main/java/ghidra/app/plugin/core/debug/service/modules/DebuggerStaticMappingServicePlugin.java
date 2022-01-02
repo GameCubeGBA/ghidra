@@ -278,7 +278,7 @@ public class DebuggerStaticMappingServicePlugin extends Plugin
 		}
 	}
 
-	protected class MappingEntry {
+	protected static class MappingEntry {
 		private final TraceStaticMapping mapping;
 
 		private Program program;

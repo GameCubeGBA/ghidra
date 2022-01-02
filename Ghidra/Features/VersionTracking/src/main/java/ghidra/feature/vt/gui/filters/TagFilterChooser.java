@@ -20,6 +20,7 @@ import ghidra.feature.vt.api.main.VTMatchTag;
 
 import java.util.Map;
 
+@FunctionalInterface
 interface TagFilterChooser {
 
 	/**

@@ -50,7 +50,7 @@ import ghidra.util.exception.AssertException;
  *      	</LI>
  *      	<LI>checking to see if the column value is a {@link JLabel}
  *      	</LI>
- *      	<LI>calling <code>toString()</code> on the object
+ *      	<LI>calling {@code toString()} on the object
  *      	</LI>
  *      </OL>
  *  </LI>

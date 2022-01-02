@@ -21,7 +21,7 @@ import ghidra.framework.model.DomainObjectLockedException;
 import ghidra.util.Msg;
 
 /**
- * <code>GhidraThreadGroup</code> provides a means of catching all uncaught
+ * {@code GhidraThreadGroup} provides a means of catching all uncaught
  * exceptions which occur in any Ghidra thread.
  */
 public class GhidraThreadGroup extends ThreadGroup {

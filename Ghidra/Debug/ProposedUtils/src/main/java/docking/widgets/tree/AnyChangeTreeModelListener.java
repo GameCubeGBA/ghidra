@@ -18,6 +18,7 @@ package docking.widgets.tree;
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
 
+@FunctionalInterface
 public interface AnyChangeTreeModelListener extends TreeModelListener {
 	void treeChanged(TreeModelEvent e);
 

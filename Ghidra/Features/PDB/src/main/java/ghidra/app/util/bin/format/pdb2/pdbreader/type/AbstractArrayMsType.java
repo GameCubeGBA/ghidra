@@ -107,10 +107,9 @@ public abstract class AbstractArrayMsType extends AbstractMsType {
 			builder.insert(0, "(");
 			builder.append(")");
 		}
-		StringBuilder myBuilder = new StringBuilder();
-		myBuilder.append("<");
-		myBuilder.append(pdb.getTypeRecord(indexTypeRecordNumber));
-		myBuilder.append(">");
+		String myBuilder = "<" +
+				pdb.getTypeRecord(indexTypeRecordNumber) +
+				">";
 
 		builder.append("[");
 		builder.append(size);

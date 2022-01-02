@@ -60,8 +60,8 @@ public class FixedBitSizeValueField extends JPanel {
 			menuButton = new SmallBorderButton(" hex",DROP_DOWN_MENU_ICON);
 			menuButton.setHorizontalTextPosition(SwingConstants.LEADING);
 			buttonPanel.setBorder(BorderFactory.createEmptyBorder(0,2,0,3));
-			buttonPanel.add(menuButton, BorderLayout.EAST);
-			add(buttonPanel, BorderLayout.EAST);
+			buttonPanel.add(menuButton, BorderLayout.LINE_END);
+			add(buttonPanel, BorderLayout.LINE_END);
 			menuButton.setFocusable(false);
 			menuButton.addActionListener(e -> showPopup());
 
@@ -308,7 +308,7 @@ public class FixedBitSizeValueField extends JPanel {
 		JFrame f = new JFrame("Test");
 		JPanel panel = new JPanel(new BorderLayout());
 		FixedBitSizeValueField rf = new FixedBitSizeValueField(8, true, false);
-		panel.add(rf, BorderLayout.NORTH);
+		panel.add(rf, BorderLayout.PAGE_START);
 		f.getContentPane().add(panel);
 		f.pack();
 		f.setVisible(true);

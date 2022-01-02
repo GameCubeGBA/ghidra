@@ -17,6 +17,7 @@ package ghidra.app.plugin.core.debug.service.breakpoint;
 
 import java.util.concurrent.CompletableFuture;
 
+@FunctionalInterface
 public interface BreakpointActionItem {
 	CompletableFuture<Void> execute();
 }

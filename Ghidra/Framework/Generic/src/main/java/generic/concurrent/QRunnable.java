@@ -24,6 +24,7 @@ import ghidra.util.task.TaskMonitor;
  * 
  * @param <I> The type of the items to be processed.
  */
+@FunctionalInterface
 public interface QRunnable<I> {
 
 	/**

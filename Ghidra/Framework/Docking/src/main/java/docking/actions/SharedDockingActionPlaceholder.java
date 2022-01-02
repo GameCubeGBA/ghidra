@@ -34,6 +34,7 @@ import docking.tool.ToolConstants;
  * an action on behalf of a transient provider, thus preventing the tool from removing any 
  * previously applied options.
  */
+@FunctionalInterface
 public interface SharedDockingActionPlaceholder {
 
 	/**

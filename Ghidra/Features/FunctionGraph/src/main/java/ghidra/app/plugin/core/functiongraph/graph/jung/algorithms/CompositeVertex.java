@@ -84,11 +84,10 @@ public class CompositeVertex<V, E> {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("V: ");
-        sb.append(collectSimpleVertices());
-        sb.append(" E: ");
-        sb.append(collectInternalEdges());
-        return sb.toString();
+        String sb = "V: " +
+                collectSimpleVertices() +
+                " E: " +
+                collectInternalEdges();
+        return sb;
     }
 }

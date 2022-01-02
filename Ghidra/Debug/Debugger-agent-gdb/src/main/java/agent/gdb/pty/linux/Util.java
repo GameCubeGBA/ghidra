@@ -23,6 +23,7 @@ import jnr.ffi.byref.IntByReference;
 /**
  * The interface for linking to {@code openpty} via jnr-ffi
  */
+@FunctionalInterface
 public interface Util {
 	Util INSTANCE = LibraryLoader.create(Util.class).load("util");
 

@@ -70,7 +70,7 @@ public class FindStructuresByOffsetAction extends DockingAction {
 		newProvider.setVisible(true);
 	}
 
-	private class MyTreeFilterProvider extends DefaultGTreeFilterProvider {
+	private static class MyTreeFilterProvider extends DefaultGTreeFilterProvider {
 		private GTreeFilter secondaryFilter;
 
 		MyTreeFilterProvider(GTree tree, GTreeFilter secondaryFilter) {
@@ -88,7 +88,7 @@ public class FindStructuresByOffsetAction extends DockingAction {
 		}
 	}
 
-	private class OffsetGTreeFilter implements GTreeFilter {
+	private static class OffsetGTreeFilter implements GTreeFilter {
 
 		private final SortedRangeList offsets;
 

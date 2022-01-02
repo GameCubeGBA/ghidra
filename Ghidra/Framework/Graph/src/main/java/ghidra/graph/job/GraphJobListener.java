@@ -18,6 +18,7 @@ package ghidra.graph.job;
 /**
  * A listener to {@link GraphJob} state
  */
+@FunctionalInterface
 public interface GraphJobListener {
 
 	void jobFinished(GraphJob job);

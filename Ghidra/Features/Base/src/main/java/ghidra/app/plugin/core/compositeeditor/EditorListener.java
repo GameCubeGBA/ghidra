@@ -21,6 +21,7 @@ package ghidra.app.plugin.core.compositeeditor;
  * 
  * Interface used for notification when an edit session is ending. 
  */
+@FunctionalInterface
 public interface EditorListener {
 	
 	/**

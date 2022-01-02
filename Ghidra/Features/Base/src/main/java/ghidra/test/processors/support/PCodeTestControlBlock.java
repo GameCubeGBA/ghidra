@@ -27,7 +27,7 @@ import ghidra.program.model.util.CodeUnitInsertionException;
 import ghidra.util.Msg;
 
 /**
- * <code>PCodeTestControlBlock</code> data is read from each binary test file and
+ * {@code PCodeTestControlBlock} data is read from each binary test file and
  * identified by the MAIN_CONTROL_BLOCK_MAGIC 64-bit character field value at the start of the 
  * data structure.  Only one instance of this should exist within the binary.
  */

@@ -21,7 +21,7 @@ import java.rmi.server.RemoteObjectInvocationHandler;
 import java.util.NoSuchElementException;
 
 /**
- * <code>RemoteBufferFileHandle</code> facilitates access to a remote BufferFile
+ * {@code RemoteBufferFileHandle} facilitates access to a remote BufferFile
  * via RMI.
  * <p>
  * Methods from {@link BufferFileHandle} <b>must</b> be re-declared here 

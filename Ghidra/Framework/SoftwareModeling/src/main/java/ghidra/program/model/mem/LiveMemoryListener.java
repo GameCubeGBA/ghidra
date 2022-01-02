@@ -18,6 +18,7 @@ package ghidra.program.model.mem;
 
 import ghidra.program.model.address.Address;
 
+@FunctionalInterface
 public interface LiveMemoryListener {
 	void memoryChanged(Address addr, int size);
 }

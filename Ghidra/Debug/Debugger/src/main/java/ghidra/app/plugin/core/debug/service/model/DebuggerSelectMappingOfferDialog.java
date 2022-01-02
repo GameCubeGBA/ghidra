@@ -177,15 +177,15 @@ public class DebuggerSelectMappingOfferDialog extends DialogComponentProvider {
 
 			JPanel nested1 = new JPanel(new BorderLayout());
 			nested1.add(scrollPane, BorderLayout.CENTER);
-			nested1.add(offerTableFilterPanel, BorderLayout.SOUTH);
+			nested1.add(offerTableFilterPanel, BorderLayout.PAGE_END);
 
 			JPanel nested2 = new JPanel(new BorderLayout());
 			nested2.add(nested1, BorderLayout.CENTER);
-			nested2.add(descPanel, BorderLayout.SOUTH);
+			nested2.add(descPanel, BorderLayout.PAGE_END);
 
 			setLayout(new BorderLayout());
 			add(nested2, BorderLayout.CENTER);
-			add(overrideCheckBox, BorderLayout.SOUTH);
+			add(overrideCheckBox, BorderLayout.PAGE_END);
 
 			setFilterRecommended(true);
 			offerTable.getSelectionModel().addListSelectionListener(e -> {

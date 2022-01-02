@@ -48,15 +48,15 @@ import ghidra.util.classfinder.ExtensionPoint;
  * <p>
  * <h2>Well formed Plugins:</h2>
  * <UL>
- * 	<LI>Derive from <code>Plugin</code> (directly or indirectly).
+ * 	<LI>Derive from {@code Plugin} (directly or indirectly).
  * 	<LI>Class name ends with "Plugin" and does not match any other Plugin, regardless of
  * 	its location in the package tree.
  * 	<LI>Have a {@link PluginInfo @PluginInfo()} annotation.
  * 	<LI>Have a constructor with exactly 1 parameter: PluginTool.
  * 		<UL>
- *  			<LI><code>public MyPlugin(PluginTool tool) { ... }</code>
+ *  			<LI>{@code public MyPlugin(PluginTool tool) { ... }}
  *  		</UL>
- *  	<LI>Usually overrides <code>protected void init()</code>.
+ *  	<LI>Usually overrides {@code protected void init()}.
  * </UL>
  * <h2>Class naming</h2>
  * All Plugin Classes <b>MUST END IN</b> "Plugin".  If not, the ClassSearcher will not find them.
@@ -141,8 +141,8 @@ import ghidra.util.classfinder.ExtensionPoint;
  * constructor:
  * <p>
  * &nbsp;&nbsp;<code>public MyPlugin(PluginTool tool) {</code><br>
- * &nbsp;&nbsp;&nbsp;&nbsp;<code>...</code><br>
- * &nbsp;&nbsp;&nbsp;&nbsp;<code>MyService serviceObj = new MyService() { ... };</code><br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;{@code ...}<br>
+ * &nbsp;&nbsp;&nbsp;&nbsp;{@code MyService serviceObj = new MyService() { ... };}<br>
  * &nbsp;&nbsp;&nbsp;&nbsp;<code><b>registerServiceProvided(MyService.class, serviceObj);</b>
  * </code><br>
  * &nbsp;&nbsp;<code>}</code><br>

@@ -54,7 +54,7 @@ class DbViewerComponent extends JPanel {
 	DbViewerComponent() {
 		super(new BorderLayout());
 
-		JPanel northPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel northPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
 		JPanel subNorthPanel = new JPanel(new PairLayout(4, 10));
 		subNorthPanel.add(new GLabel("Database:"));
 		dbLabel = new GDLabel();
@@ -64,7 +64,7 @@ class DbViewerComponent extends JPanel {
 		combo.addActionListener(e -> refreshTable());
 		subNorthPanel.add(combo);
 		northPanel.add(subNorthPanel);
-		add(northPanel, BorderLayout.NORTH);
+		add(northPanel, BorderLayout.PAGE_START);
 
 		updateMgr = new SwingUpdateManager(100, 2000, () -> refresh());
 	}
@@ -232,7 +232,7 @@ class DbViewerComponent extends JPanel {
 		}
 		panel.add(new GLabel(
 			recCnt + "   " + intNodeCnt + "   " + recNodeCnt + "   " + chainBufCnt + "   " + size),
-			BorderLayout.SOUTH);
+                BorderLayout.PAGE_END);
 
 		return panel;
 	}

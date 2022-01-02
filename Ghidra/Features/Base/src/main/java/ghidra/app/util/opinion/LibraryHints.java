@@ -28,7 +28,7 @@ import ghidra.util.Msg;
 import ghidra.util.xml.XmlUtilities;
 
 /**
- * <code>LibraryHints</code> provides a means of specifying certain LIBRARY
+ * {@code LibraryHints} provides a means of specifying certain LIBRARY
  * EXPORT attributes which should be included when the associated .exports file
  * is created.
  */

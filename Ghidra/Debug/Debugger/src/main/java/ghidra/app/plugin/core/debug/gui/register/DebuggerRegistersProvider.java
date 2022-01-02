@@ -482,7 +482,7 @@ public class DebuggerRegistersProvider extends ComponentProviderAdapter
 		// TODO: Allow multiple selection for copy, etc.?
 		mainPanel.add(new JScrollPane(regsTable));
 		regsFilterPanel = new GhidraTableFilterPanel<>(regsTable, regsTableModel);
-		mainPanel.add(regsFilterPanel, BorderLayout.SOUTH);
+		mainPanel.add(regsFilterPanel, BorderLayout.PAGE_END);
 
 		regsTable.getSelectionModel().addListSelectionListener(evt -> {
 			myActionContext = new DebuggerRegisterActionContext(this,

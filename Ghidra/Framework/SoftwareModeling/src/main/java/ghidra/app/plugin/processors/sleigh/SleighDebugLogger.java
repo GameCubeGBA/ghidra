@@ -53,7 +53,7 @@ import ghidra.program.model.scalar.Scalar;
 import ghidra.util.StringUtilities;
 
 /**
- * <code>SleighDebugLogger</code> provides the ability to obtain detailed instruction
+ * {@code SleighDebugLogger} provides the ability to obtain detailed instruction
  * parse details.
  */
 public class SleighDebugLogger {
@@ -441,9 +441,7 @@ public class SleighDebugLogger {
 	}
 
 	private String getIndent() {
-		StringBuilder buf = new StringBuilder();
-        buf.append("   ".repeat(Math.max(0, indentLevel)));
-		return buf.toString();
+        return "   ".repeat(Math.max(0, indentLevel));
 	}
 
 	/**
@@ -1120,27 +1118,6 @@ public class SleighDebugLogger {
 		PatternGroup(PatternGroup parent, String name) {
 			this.parent = parent;
 			this.name = name;
-		}
-
-		String getName() {
-			return name;
-		}
-
-		String getPathname() {
-			if (parent == null) {
-				return "";
-			}
-			if (name == null) {
-				return null;
-			}
-			String parentPath = parent.getPathname();
-			if (parentPath == null) {
-				return null;
-			}
-			if (!parentPath.isEmpty()) {
-				parentPath += ".";
-			}
-			return parentPath + name;
 		}
 
 		PatternGroup getParent() {

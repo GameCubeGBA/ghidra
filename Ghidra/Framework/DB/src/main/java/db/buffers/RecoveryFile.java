@@ -24,7 +24,7 @@ import ghidra.util.exception.AssertException;
 import ghidra.util.exception.NoValueException;
 
 /**
- * <code>VersionFile</code> records buffer changes and parameters necessary to reconstruct an
+ * {@code VersionFile} records buffer changes and parameters necessary to reconstruct an
  * older version of a LocalBufferFile.
  */
 class RecoveryFile {

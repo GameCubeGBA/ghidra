@@ -23,6 +23,7 @@ import ghidra.util.classfinder.ExtensionPoint;
  * Extension point for introducing ColumnConstraints to the system.  File names must end 
  * with 'ColumnConstraintProvider' in order to be found.
  */
+@FunctionalInterface
 public interface ColumnConstraintProvider extends ExtensionPoint {
 
 	/**

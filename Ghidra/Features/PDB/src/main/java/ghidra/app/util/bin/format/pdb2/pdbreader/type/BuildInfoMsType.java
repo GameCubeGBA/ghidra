@@ -75,10 +75,9 @@ public class BuildInfoMsType extends AbstractMsType {
 		//No API for output.
 		DelimiterState ds = new DelimiterState("", ", ");
 		for (int i = 0; (i < count) && (i < BUILDINFO_STRING.length); i++) {
-			StringBuilder myBuilder = new StringBuilder();
-			myBuilder.append(BUILDINFO_STRING[i]);
-			myBuilder.append(pdb.getTypeRecord(argsCodeItemRecordNumbers.get(i)));
-			builder.append(ds.out(true, myBuilder.toString()));
+            String myBuilder = BUILDINFO_STRING[i] +
+                    pdb.getTypeRecord(argsCodeItemRecordNumbers.get(i));
+			builder.append(ds.out(true, myBuilder));
 		}
 	}
 

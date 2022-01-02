@@ -221,9 +221,9 @@ public class EquateTableProvider extends ComponentProviderAdapter {
 		JScrollPane equatesTablePane = new JScrollPane(equatesTable);
 
 		JPanel equatesPanel = new JPanel(new BorderLayout());
-		equatesPanel.add(new GLabel("Equates", SwingConstants.CENTER), BorderLayout.NORTH);
+		equatesPanel.add(new GLabel("Equates", SwingConstants.CENTER), BorderLayout.PAGE_START);
 		equatesPanel.add(equatesTablePane, BorderLayout.CENTER);
-		equatesPanel.add(equatesFilterPanel, BorderLayout.SOUTH);
+		equatesPanel.add(equatesFilterPanel, BorderLayout.PAGE_END);
 
 		//////////////////////////////////////////////////////////////
 

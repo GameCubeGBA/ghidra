@@ -369,7 +369,7 @@ public class DataTreeDialogTest extends AbstractGhidraHeadedIntegrationTest {
 		return tree;
 	}
 
-	private class MyDomainFileFilter implements DomainFileFilter {
+	private static class MyDomainFileFilter implements DomainFileFilter {
 		/* (non-Javadoc)
 		 * @see ghidra.framework.model.DomainFileFilter#accept(ghidra.framework.model.DomainFile)
 		 */

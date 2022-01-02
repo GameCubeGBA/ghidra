@@ -364,9 +364,7 @@ public class MDDataTypeParser {
 //						MDTemplateNameAndArguments tn = new MDTemplateNameAndArguments(dmang);
 //						dt.setTypeName("{MDMANG_UNK_EXTENDEDTYPE:" + tn.emit() + "}"); // 20160728 temp
 						break;
-					case MDMang.DONE:
-						throw new MDException("Type code not expected: " + code);
-					default:
+                    default:
 						throw new MDException("Type code not expected: " + code);
 				}
 				break;
@@ -379,9 +377,7 @@ public class MDDataTypeParser {
 				dtv.setNonPrinting();
 				dt = dtv;
 				break;
-			case MDMang.DONE:
-				throw new MDException("Type code not expected: " + code);
-			default:
+            default:
 				throw new MDException("Type code not expected: " + code);
 		}
 		return dt;

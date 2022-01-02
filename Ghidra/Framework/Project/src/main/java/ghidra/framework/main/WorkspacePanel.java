@@ -88,7 +88,7 @@ class WorkspacePanel extends JPanel implements WorkspaceChangeListener {
 		setHelpLocation();
 		JPanel wcPanel = new JPanel();
 		wcPanel.add(workspaceChooser);
-		add(wcPanel, BorderLayout.EAST);
+		add(wcPanel, BorderLayout.LINE_END);
 		add(runningToolsCardPanel, BorderLayout.CENTER);
 		setBorder(INACTIVE_BORDER);
 

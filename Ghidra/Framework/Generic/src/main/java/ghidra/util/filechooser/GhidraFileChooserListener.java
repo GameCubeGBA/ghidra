@@ -21,6 +21,7 @@ package ghidra.util.filechooser;
  * of the file chooser model have changed.
  * 
  */
+@FunctionalInterface
 public interface GhidraFileChooserListener {
     /**
      * Invoked when the contents of the file

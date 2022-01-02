@@ -21,6 +21,7 @@ package ghidra.program.model.listing;
  * Interface for a domain object change set.  Objects that implements this interface track
  * various change information on a domain object.
  */
+@FunctionalInterface
 public interface DomainObjectChangeSet {
 	boolean hasChanges();
 }

@@ -594,10 +594,9 @@ public class ClangLayoutController implements LayoutModel, LayoutModelListener {
 			int lineNumberLength = lineNumberString.length();
 			int padLength = maxNumberOfDigits - lineNumberLength;
 
-			StringBuffer buffy = new StringBuffer();
-			buffy.append(" ".repeat(Math.max(0, padLength)));
-			buffy.append(lineNumberString).append(' '); // space for separation
-			return buffy.toString();
+            String buffy = " ".repeat(Math.max(0, padLength)) +
+                    lineNumberString + ' '; // space for separation
+            return buffy;
 		}
 
 		private static AttributedString createAttributedLineNumberString(int lineNumber,
@@ -648,7 +647,7 @@ public class ClangLayoutController implements LayoutModel, LayoutModelListener {
 		}
 	}
 
-	private class FieldNumberColumnPair {
+	private static class FieldNumberColumnPair {
 		private final int fieldNumber;
 		private final int column;
 

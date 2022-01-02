@@ -176,10 +176,10 @@ public class ResourceManager {
 	}
 
 	/**
-	 * Search the classpath for files in the &lt;classpath entry&gt;/<code>dirName</code> 
-	 * location that have the given extension.  In <code>null</code> is passed for the 
+	 * Search the classpath for files in the &lt;classpath entry&gt;/{@code dirName}
+	 * location that have the given extension.  In {@code null} is passed for the
 	 * extension, then all files found in the given dir names will be returned.  In this 
-	 * way, <code>null</code> is a wildcard.
+	 * way, {@code null} is a wildcard.
 	 *
 	 * <P>This method differs from {@link #getResource(String)} in that this method finds 
 	 * multiple matches.
@@ -198,10 +198,10 @@ public class ResourceManager {
 	}
 
 	/**
-	 * Search the classpath for files in the &lt;classpath entry&gt;/<code>dirName</code> 
-	 * location that have the given extension.  In <code>null</code> is passed for the 
+	 * Search the classpath for files in the &lt;classpath entry&gt;/{@code dirName}
+	 * location that have the given extension.  In {@code null} is passed for the
 	 * extension, then all files found in the given dir names will be returned.  In this 
-	 * way, <code>null</code> is a wildcard.
+	 * way, {@code null} is a wildcard.
 	 *
 	 * <P>The names returned from this method are relative and are meant to be used in a 
 	 * later callback to this class for methods such as {@link #loadImage(String)} or
@@ -388,7 +388,7 @@ public class ResourceManager {
 	}
 
 	/**
-	 * Creates an image icon from the given image.  This method will create an <code>ImageIcon</code>
+	 * Creates an image icon from the given image.  This method will create an {@code ImageIcon}
 	 * the <a href="safe">"safe"</a> way by avoiding the constructor 
 	 * {@link ImageIcon#ImageIcon(Image)}, which can
 	 * trigger problems with Java's {@link MediaTracker}.
@@ -545,7 +545,7 @@ public class ResourceManager {
 	}
 
 	/**
-	 * A convenience method to force the image denoted by <code>filename</code> to be read 
+	 * A convenience method to force the image denoted by {@code filename} to be read
 	 * from disk and to not use the cached version 
 	 * 
 	 * @param filename name of file to load, e.g., "images/home.gif"

@@ -33,7 +33,7 @@ import ghidra.util.exception.FileInUseException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>Database</code> facilitates the creation of a DBHandle for accessing
+ * {@code Database} facilitates the creation of a DBHandle for accessing
  * a database.
  * <p>
  * Public constructors are only provided for use with "Non-Versioned" databases.

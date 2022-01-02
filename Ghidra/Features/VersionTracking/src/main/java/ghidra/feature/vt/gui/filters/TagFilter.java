@@ -72,12 +72,12 @@ public class TagFilter extends AncillaryFilter<VTMatch> {
 		editButton.setEnabled(false);
 
 		JPanel innerPanel = new JPanel();
-		innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.X_AXIS));
+		innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.LINE_AXIS));
 		innerPanel.add(new GLabel("Excluded Tags: "));
 		innerPanel.add(excludedTagsLabel);
 		innerPanel.add(Box.createHorizontalGlue());
 		innerPanel.add(editButton);
-		panel.add(innerPanel, BorderLayout.NORTH);
+		panel.add(innerPanel, BorderLayout.PAGE_START);
 
 		return panel;
 	}

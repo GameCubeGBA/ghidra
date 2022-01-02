@@ -200,7 +200,7 @@ public class SampleGraphProvider extends ComponentProviderAdapter {
 		group.add(removedButton);
 		fadedButton.setSelected(true);
 
-		JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEADING));
 		panel.add(new GLabel("Filtered Display: "));
 		panel.add(fadedButton);
 		panel.add(removedButton);
@@ -316,7 +316,7 @@ public class SampleGraphProvider extends ComponentProviderAdapter {
 
 	private void showFilterPanel(boolean selected) {
 		if (selected) {
-			mainPanel.add(filterPanel, BorderLayout.SOUTH);
+			mainPanel.add(filterPanel, BorderLayout.PAGE_END);
 		}
 		else {
 			mainPanel.remove(filterPanel);

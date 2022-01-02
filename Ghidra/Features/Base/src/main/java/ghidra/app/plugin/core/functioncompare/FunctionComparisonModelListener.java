@@ -23,6 +23,7 @@ import ghidra.app.services.FunctionComparisonModel;
  * Allows subscribers to register for {@link FunctionComparisonModel function
  * comparison model} changes
  */
+@FunctionalInterface
 public interface FunctionComparisonModelListener {
 
 	/**

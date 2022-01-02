@@ -40,7 +40,7 @@ import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>SymbolDatabaseAdapterV0</code> handles symbol tables which were created 
+ * {@code SymbolDatabaseAdapterV0} handles symbol tables which were created
  * prior to the addition of Namespace support and Function symbols.  Function symbols 
  * are synthesized for those functions whose entry point currently has a 
  * label symbol.  The ID of these synthesized function symbols is the max ID plus 

@@ -25,6 +25,7 @@ import java.io.IOException;
  * byte array.
  * 
  */
+@FunctionalInterface
 public interface ByteArrayConverter {
 	/**
 	 * Returns a byte array representing this implementor

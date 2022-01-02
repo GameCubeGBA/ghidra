@@ -91,23 +91,23 @@ public class DiscoverableTableUtils {
 	/**
 	 * Returns all "discovered" {@link AbstractDynamicTableColumn} classes that are compatible with the
 	 * given class, which represents the object for a table's row.  For example, many tables use
-	 * <code>Address</code> as the row type.  In this case, passing <code>Address.class</code> as the
+	 * {@code Address} as the row type.  In this case, passing <code>Address.class</code> as the
 	 * parameter to this method will return all {@link AbstractDynamicTableColumn}s that can provide column
-	 * data by working with <code>Address</code> instances.
+	 * data by working with {@code Address} instances.
 	 * 
 	 * <p><u>Usage Notes:</u>  This class will not only discover {@link AbstractDynamicTableColumn}s
 	 * that directly support the given class type, but will also use discovered
 	 * {@link TableRowMapper} objects to create adapters that allow the
 	 * use of table row data that does not exactly match the supported type of discovered
 	 * {@link AbstractDynamicTableColumn} classes.  For example, suppose that a table's row type is
-	 * <code>Address</code>.  This methods will return at least all {@link AbstractDynamicTableColumn}s
-	 * that support <code>Address</code> data.  In order to support extra columns, Ghidra has
-	 * created a {@link TableRowMapper} that can convert a <code>ProgramLocation</code> into an
-	 * <code>Address</code>.  This method will find and use this mapper to return a
+	 * {@code Address}.  This methods will return at least all {@link AbstractDynamicTableColumn}s
+	 * that support {@code Address} data.  In order to support extra columns, Ghidra has
+	 * created a {@link TableRowMapper} that can convert a {@code ProgramLocation} into an
+	 * {@code Address}.  This method will find and use this mapper to return a
 	 * {@link MappedTableColumn} instance (which is an {@link AbstractDynamicTableColumn}).  By doing
-	 * this, any table that has <code>Address</code> objects as its row type can now use
-	 * {@link AbstractDynamicTableColumn}s that support <code>ProgramLocations</code> in addition to
-	 * <code>Address</code> objects.  These mappers provide a way for tables that have non-standard
+	 * this, any table that has {@code Address} objects as its row type can now use
+	 * {@link AbstractDynamicTableColumn}s that support {@code ProgramLocations} in addition to
+	 * {@code Address} objects.  These mappers provide a way for tables that have non-standard
 	 * Ghidra data as their row type to take advantage of existing dynamic columns for standard
 	 * Ghidra data (like ProgramLocations and Addresses).
 	 * 
@@ -143,7 +143,7 @@ public class DiscoverableTableUtils {
 	}
 
 	/**
-	 * If the given <code>DynamicTableColumn</code> is a match for the given <code>rowTypeClass</code>, then
+	 * If the given {@code DynamicTableColumn} is a match for the given <code>rowTypeClass</code>, then
 	 * it will be added to the given list.
 	 * <p>
 	 * <u>Implementation Notes:</u>
@@ -163,7 +163,7 @@ public class DiscoverableTableUtils {
 	 * @param rowTypeClass      The class of the table's row data (with the same type as
 	 * 						    COLUMN_ROW_TYPE)
 	 * @param tableColumn       The column to add to the given collection if it supports the
-	 *                          given <code>rowTypeClass</code>.
+	 *                          given {@code rowTypeClass}.
 	 */
 	@SuppressWarnings("unchecked")
 	// Each cast is checked below (see notes)
@@ -206,13 +206,13 @@ public class DiscoverableTableUtils {
 
 	/**
 	 * Returns a {@link TableRowMapper} for the given class types if one is found.  The
-	 * returned mapper will know how to translate instances of <code>fromType</code> to
-	 * <code>toType</code>.
+	 * returned mapper will know how to translate instances of {@code fromType} to
+	 * {@code toType}.
 	 *
 	 * @param <ROW_TYPE> The type of row that is defined by the table
 	 * @param <EXPECTED_TYPE> The type of row object that is desired
-	 * @param fromType The <code>Class</code> object of the given row type
-	 * @param toType The <code>Class</code> object of the desired row type
+	 * @param fromType The {@code Class} object of the given row type
+	 * @param toType The {@code Class} object of the desired row type
 	 * @return a new TableRowMapper
 	 */
 	@SuppressWarnings({ "unchecked" }) 	// we verified before casting
@@ -248,7 +248,7 @@ public class DiscoverableTableUtils {
 	/**
 	 * Returns a list of all the {@link ColumnConstraint} that are capable of filtering the
 	 * destination type of the given mapper.  The mapper will be used to create a mapped constraint
-	 * that will be called with an instance of the type <code>T</code>.
+	 * that will be called with an instance of the type {@code T}.
 	 * 
 	 * @param mapper the mapper that will be used to convert
 	 * @return a list of all the {@link ColumnConstraint} that are capable of filtering the

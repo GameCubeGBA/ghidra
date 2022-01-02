@@ -109,18 +109,17 @@ public class XCoffFileHeader implements StructConverter {
 
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
-		buffer.append("FILE HEADER VALUES").append(NL);
-		buffer.append("f_magic  = ").append(f_magic).append(NL);
-		buffer.append("f_nscns  = ").append(f_nscns).append(NL);
-		buffer.append("f_timdat = ");
-		buffer.append(DateFormat.getDateInstance().format(new Date(f_timdat)));
-		buffer.append(NL);
-		buffer.append("f_symptr = ").append(f_symptr).append(NL);
-		buffer.append("f_nsyms  = ").append(f_nsyms).append(NL);
-		buffer.append("f_opthdr = ").append(f_opthdr).append(NL);
-		buffer.append("f_flags  = ").append(f_flags).append(NL);
-		return buffer.toString();
+        String buffer = "FILE HEADER VALUES" + NL +
+                "f_magic  = " + f_magic + NL +
+                "f_nscns  = " + f_nscns + NL +
+                "f_timdat = " +
+                DateFormat.getDateInstance().format(new Date(f_timdat)) +
+                NL +
+                "f_symptr = " + f_symptr + NL +
+                "f_nsyms  = " + f_nsyms + NL +
+                "f_opthdr = " + f_opthdr + NL +
+                "f_flags  = " + f_flags + NL;
+		return buffer;
 	}
 
 	public DataType toDataType() throws DuplicateNameException, IOException {

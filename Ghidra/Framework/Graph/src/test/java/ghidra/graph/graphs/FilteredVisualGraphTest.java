@@ -612,7 +612,8 @@ public class FilteredVisualGraphTest extends AbstractFilteringVisualGraphTest {
 		assertFiltered(e);
 	}
 
-	private interface AddEdgeConsumer {
+	@FunctionalInterface
+    private interface AddEdgeConsumer {
 		void doAddEdge(TestEdge e, AbstractTestVertex v1, AbstractTestVertex v2);
 	}
 }

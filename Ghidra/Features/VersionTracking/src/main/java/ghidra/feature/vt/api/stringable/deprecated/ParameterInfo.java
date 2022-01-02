@@ -100,18 +100,17 @@ public class ParameterInfo extends ParameterImpl {
 		DataTypeManager dataTypeMananger = getProgram().getDataTypeManager();
 		DataType dt = getDataType();
 
-		StringBuffer buffy = new StringBuffer();
-		buffy.append(getClass().getSimpleName()).append(Stringable.DELIMITER);
-		buffy.append(Long.toString(dataTypeMananger.getUniversalID().getValue())).append(
-			Stringable.DELIMITER);
-		buffy.append(Long.toString(dataTypeMananger.getID(dt))).append(Stringable.DELIMITER);
-		buffy.append(dt.getName()).append(Stringable.DELIMITER);
-		buffy.append(Integer.toString(getOrdinal())).append(Stringable.DELIMITER);
-		buffy.append(getName()).append(Stringable.DELIMITER);
-		buffy.append(getSource().name()).append(Stringable.DELIMITER);
-		buffy.append(getComment()).append(Stringable.DELIMITER);
-		buffy.append(getVariableStorage().getSerializationString());
-		return buffy.toString();
+        String buffy = getClass().getSimpleName() + Stringable.DELIMITER +
+                Long.toString(dataTypeMananger.getUniversalID().getValue()) +
+                Stringable.DELIMITER +
+                Long.toString(dataTypeMananger.getID(dt)) + Stringable.DELIMITER +
+                dt.getName() + Stringable.DELIMITER +
+                Integer.toString(getOrdinal()) + Stringable.DELIMITER +
+                getName() + Stringable.DELIMITER +
+                getSource().name() + Stringable.DELIMITER +
+                getComment() + Stringable.DELIMITER +
+                getVariableStorage().getSerializationString();
+		return buffy;
 	}
 
 	public Parameter createParameterDefinition(Function destFunction, int ordinal) {

@@ -67,13 +67,12 @@ public class ByteSequenceLengthFilter {
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("internalIndex: ");
-		sb.append(internalIndex);
-		sb.append("\nminLength: ");
-		sb.append(minLength);
-		sb.append("\n");
-		return sb.toString();
+        String sb = "internalIndex: " +
+                internalIndex +
+                "\nminLength: " +
+                minLength +
+                "\n";
+		return sb;
 	}
 
 }

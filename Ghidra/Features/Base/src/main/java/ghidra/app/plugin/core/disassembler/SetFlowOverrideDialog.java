@@ -78,7 +78,7 @@ class SetFlowOverrideDialog extends DialogComponentProvider {
 
 	private JPanel buildMainPanel() {
 		JPanel mainPanel = new JPanel();
-		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
 		mainPanel.setBorder(BorderFactory.createEmptyBorder(2, 5, 2, 2));
 		if (instruction != null) {
 			mainPanel.add(buildCurrentFlowPanel());
@@ -93,7 +93,7 @@ class SetFlowOverrideDialog extends DialogComponentProvider {
 	private JPanel buildCurrentFlowPanel() {
 
 		JPanel panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+		panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
 
 		FlowType flowType = instruction.getFlowType();
 
@@ -109,7 +109,7 @@ class SetFlowOverrideDialog extends DialogComponentProvider {
 	private JPanel buildNotePanel(String note) {
 
 		JPanel panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+		panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
 
 		panel.add(new GLabel(note));
 
@@ -121,7 +121,7 @@ class SetFlowOverrideDialog extends DialogComponentProvider {
 	private JPanel buildFlowOverridePanel() {
 
 		JPanel panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+		panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
 
 		flowOverrideComboBox = new GhidraComboBox<>();
 		flowOverrideComboBox.addItem(DEFAULT_CHOICE);

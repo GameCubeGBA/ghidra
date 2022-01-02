@@ -91,9 +91,9 @@ class CategoryMergePanel extends JPanel {
         });
 
 		setLayout(new BorderLayout(0, 10));
-		add(countPanel, BorderLayout.NORTH);
+		add(countPanel, BorderLayout.PAGE_START);
 		add(resolvePanel, BorderLayout.CENTER);
-		add(createUseForAllCheckBox(), BorderLayout.SOUTH);
+		add(createUseForAllCheckBox(), BorderLayout.PAGE_END);
 	}
 
 	public static void main(String[] args) {

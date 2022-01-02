@@ -108,7 +108,7 @@ public class DataTypeSelectionDialog extends DialogComponentProvider {
 
 	protected JComponent createEditorPanel(DataTypeSelectionEditor dtEditor) {
 		JPanel mainPanel = new JPanel(new BorderLayout());
-		mainPanel.add(editor.getEditorComponent(), BorderLayout.NORTH);
+		mainPanel.add(editor.getEditorComponent(), BorderLayout.PAGE_START);
 		return mainPanel;
 	}
 

@@ -31,10 +31,9 @@ public class EmptyVariableTextLine extends VariableTextLine implements PlaceHold
 	}
 
 	private static String buildDisplayText(int numberOfCharacters) {
-		StringBuffer buffy = new StringBuffer("<TT>");
-        buffy.append(HTMLDataTypeRepresentation.HTML_SPACE.repeat(Math.max(0, numberOfCharacters)));
-		buffy.append("</TT>");
-		return buffy.toString();
+        String buffy = "<TT>" + HTMLDataTypeRepresentation.HTML_SPACE.repeat(Math.max(0, numberOfCharacters)) +
+                "</TT>";
+		return buffy;
 	}
 
 	@Override

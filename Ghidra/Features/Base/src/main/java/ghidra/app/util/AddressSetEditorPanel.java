@@ -52,9 +52,9 @@ public class AddressSetEditorPanel extends JPanel {
 		this.addressSet = new AddressSet(addressSet);
 
 		setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
-		add(createAddRangePanel(), BorderLayout.NORTH);
+		add(createAddRangePanel(), BorderLayout.PAGE_START);
 		add(createRangeListPanel(), BorderLayout.CENTER);
-		add(createRemoveRangePanel(), BorderLayout.SOUTH);
+		add(createRemoveRangePanel(), BorderLayout.PAGE_END);
 		validateAddRemoveButton();
 		validateRemoveButton();
 
@@ -65,7 +65,7 @@ public class AddressSetEditorPanel extends JPanel {
 		minAddressPanel.setLayout(new BorderLayout());
 		JLabel minLabel = new GDLabel("Min:");
 		minLabel.setToolTipText("Enter minimum address to add or remove");
-		minAddressPanel.add(minLabel, BorderLayout.WEST);
+		minAddressPanel.add(minLabel, BorderLayout.LINE_START);
 		minAddressField = new AddressInput();
 		minAddressField.setAddressFactory(addressFactory);
 		ChangeListener listener = e -> validateAddRemoveButton();
@@ -76,7 +76,7 @@ public class AddressSetEditorPanel extends JPanel {
 		maxAddressPanel.setLayout(new BorderLayout());
 		JLabel maxLabel = new GDLabel("Max:");
 		maxLabel.setToolTipText("Enter maximum address to add or remove");
-		maxAddressPanel.add(maxLabel, BorderLayout.WEST);
+		maxAddressPanel.add(maxLabel, BorderLayout.LINE_START);
 		maxAddressField = new AddressInput();
 		maxAddressField.setAddressFactory(addressFactory);
 		maxAddressField.addChangeListener(listener);

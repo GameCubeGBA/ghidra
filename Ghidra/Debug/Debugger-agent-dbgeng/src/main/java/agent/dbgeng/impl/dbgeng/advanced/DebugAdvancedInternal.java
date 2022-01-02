@@ -28,6 +28,7 @@ import agent.dbgeng.jna.dbgeng.advanced.*;
 import ghidra.comm.util.BitmaskUniverse;
 import ghidra.util.datastruct.WeakValueHashMap;
 
+@FunctionalInterface
 public interface DebugAdvancedInternal extends DebugAdvanced {
 	Map<Pointer, DebugAdvancedInternal> CACHE = new WeakValueHashMap<>();
 

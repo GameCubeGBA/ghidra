@@ -90,7 +90,8 @@ public class TestVertexTooltipProvider
 // Inner Classes
 //==================================================================================================	
 
-	public interface SpyTooltip {
+	@FunctionalInterface
+    public interface SpyTooltip {
 		// shared hierarchy interface
 		String getTooltipAsText();
 	}

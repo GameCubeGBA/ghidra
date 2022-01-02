@@ -167,7 +167,9 @@ public class TypeApplierFactory {
 //					// Not evaluated/implemented yet.
 //					break;
 				case FieldList16MsType.PDB_ID:
-					applier = new FieldListTypeApplier(applicator, type);
+//				case DefaultArgumentsStMsType.PDB_ID:
+                case FieldListMsType.PDB_ID:
+                    applier = new FieldListTypeApplier(applicator, type);
 					break;
 //				case DerivedClassList16MsType.PDB_ID:
 //					// Not evaluated/implemented yet.
@@ -196,15 +198,21 @@ public class TypeApplierFactory {
 
 				// 0x400 block
 				case BaseClass16MsType.PDB_ID:
-					applier = new BaseClassTypeApplier(applicator, type);
+                case IndirectVirtualBaseClassMsType.PDB_ID:
+                case VirtualBaseClassMsType.PDB_ID:
+//				case MethodListMsType.PDB_ID:
+//				case DimensionedArrayConstBoundsUpperMsType.PDB_ID:
+//				case DimensionedArrayConstBoundsLowerUpperMsType.PDB_ID:
+//				case DimensionedArrayVarBoundsUpperMsType.PDB_ID:
+//				case DimensionedArrayVarBoundsLowerUpperMsType.PDB_ID:
+
+                    // 0x1400 block
+                case BaseClassMsType.PDB_ID:
+                case IndirectVirtualBaseClass16MsType.PDB_ID:
+                case VirtualBaseClass16MsType.PDB_ID:
+                    applier = new BaseClassTypeApplier(applicator, type);
 					break;
-				case VirtualBaseClass16MsType.PDB_ID:
-					applier = new BaseClassTypeApplier(applicator, type);
-					break;
-				case IndirectVirtualBaseClass16MsType.PDB_ID:
-					applier = new BaseClassTypeApplier(applicator, type);
-					break;
-				case EnumerateStMsType.PDB_ID:
+                case EnumerateStMsType.PDB_ID:
 					applier = new EnumerateTypeApplier(applicator, (EnumerateStMsType) type);
 					break;
 //				case FriendFunction16MsType.PDB_ID:
@@ -220,27 +228,33 @@ public class TypeApplierFactory {
 //					// Not evaluated/implemented yet.
 //					break;
 				case OverloadedMethod16MsType.PDB_ID:
-					// See note in "default" case regarding NoTypeApplier
+                case OneMethodMsType.PDB_ID:
+//				case StaticMemberMsType.PDB_ID:
+                case OverloadedMethodMsType.PDB_ID:
+//				case FriendClassMsType.PDB_ID:
+                case OneMethodStMsType.PDB_ID:
+//				case StaticMemberStMsType.PDB_ID:
+                case OverloadedMethodStMsType.PDB_ID:
+//				case FriendClass16MsType.PDB_ID:
+                case OneMethod16MsType.PDB_ID:
+                    // See note in "default" case regarding NoTypeApplier
 					applier = new NoTypeApplier(applicator, type);
 					break;
 				case NestedType16MsType.PDB_ID:
-					applier = new NestedTypeApplier(applicator, type);
+                case NestedTypeExtMsType.PDB_ID:
+                case NestedTypeMsType.PDB_ID:
+                case NestedTypeExtStMsType.PDB_ID:
+                case NestedTypeStMsType.PDB_ID:
+                    applier = new NestedTypeApplier(applicator, type);
 					break;
 				case VirtualFunctionTablePointer16MsType.PDB_ID:
-					applier = new VirtualFunctionTablePointerTypeApplier(applicator, type);
-					break;
-//				case FriendClass16MsType.PDB_ID:
-//					// Not evaluated/implemented yet.
-//					break;
-				case OneMethod16MsType.PDB_ID:
-					// See note in "default" case regarding NoTypeApplier
-					applier = new NoTypeApplier(applicator, type);
-					break;
-				case VirtualFunctionTablePointerWithOffset16MsType.PDB_ID:
-					applier = new VirtualFunctionTablePointerTypeApplier(applicator, type);
+                case VirtualFunctionTablePointerWithOffsetMsType.PDB_ID:
+                case VirtualFunctionTablePointerMsType.PDB_ID:
+                case VirtualFunctionTablePointerWithOffset16MsType.PDB_ID:
+                    applier = new VirtualFunctionTablePointerTypeApplier(applicator, type);
 					break;
 
-				// 0x1000 block
+                // 0x1000 block
 				case ModifierMsType.PDB_ID:
 					applier = new ModifierTypeApplier(applicator, (ModifierMsType) type);
 					break;
@@ -301,45 +315,13 @@ public class TypeApplierFactory {
 				case ArgumentsListMsType.PDB_ID:
 					applier = new ArgumentsListTypeApplier(applicator, (ArgumentsListMsType) type);
 					break;
-//				case DefaultArgumentsStMsType.PDB_ID:
-//					// Not evaluated/implemented yet.
-//					break;
-				case FieldListMsType.PDB_ID:
-					applier = new FieldListTypeApplier(applicator, type);
-					break;
-//				case DerivedClassListMsType.PDB_ID:
+                //				case DerivedClassListMsType.PDB_ID:
 //					// Not evaluated/implemented yet.
 //					break;
 				case BitfieldMsType.PDB_ID:
 					applier = new BitfieldTypeApplier(applicator, (BitfieldMsType) type);
 					break;
-//				case MethodListMsType.PDB_ID:
-//					// Not evaluated/implemented yet.
-//					break;
-//				case DimensionedArrayConstBoundsUpperMsType.PDB_ID:
-//					// Not evaluated/implemented yet.
-//					break;
-//				case DimensionedArrayConstBoundsLowerUpperMsType.PDB_ID:
-//					// Not evaluated/implemented yet.
-//					break;
-//				case DimensionedArrayVarBoundsUpperMsType.PDB_ID:
-//					// Not evaluated/implemented yet.
-//					break;
-//				case DimensionedArrayVarBoundsLowerUpperMsType.PDB_ID:
-//					// Not evaluated/implemented yet.
-//					break;
-
-				// 0x1400 block
-				case BaseClassMsType.PDB_ID:
-					applier = new BaseClassTypeApplier(applicator, type);
-					break;
-				case VirtualBaseClassMsType.PDB_ID:
-					applier = new BaseClassTypeApplier(applicator, type);
-					break;
-				case IndirectVirtualBaseClassMsType.PDB_ID:
-					applier = new BaseClassTypeApplier(applicator, type);
-					break;
-//				case FriendFunctionStMsType.PDB_ID:
+                //				case FriendFunctionStMsType.PDB_ID:
 //					// Not evaluated/implemented yet.
 //					break;
 //				case IndexMsType.PDB_ID:
@@ -348,33 +330,7 @@ public class TypeApplierFactory {
 				case MemberStMsType.PDB_ID:
 					applier = new MemberTypeApplier(applicator, (MemberStMsType) type);
 					break;
-//				case StaticMemberStMsType.PDB_ID:
-//					// Not evaluated/implemented yet.
-//					break;
-				case OverloadedMethodStMsType.PDB_ID:
-					// See note in "default" case regarding NoTypeApplier
-					applier = new NoTypeApplier(applicator, type);
-					break;
-				case NestedTypeStMsType.PDB_ID:
-					applier = new NestedTypeApplier(applicator, type);
-					break;
-				case VirtualFunctionTablePointerMsType.PDB_ID:
-					applier = new VirtualFunctionTablePointerTypeApplier(applicator, type);
-					break;
-//				case FriendClassMsType.PDB_ID:
-//					// Not evaluated/implemented yet.
-//					break;
-				case OneMethodStMsType.PDB_ID:
-					// See note in "default" case regarding NoTypeApplier
-					applier = new NoTypeApplier(applicator, type);
-					break;
-				case VirtualFunctionTablePointerWithOffsetMsType.PDB_ID:
-					applier = new VirtualFunctionTablePointerTypeApplier(applicator, type);
-					break;
-				case NestedTypeExtStMsType.PDB_ID:
-					applier = new NestedTypeApplier(applicator, type);
-					break;
-//				case MemberModifyStMsType.PDB_ID:
+                //				case MemberModifyStMsType.PDB_ID:
 //					// Not evaluated/implemented yet.
 //					break;
 //				case ManagedStMsType.PDB_ID:
@@ -421,24 +377,7 @@ public class TypeApplierFactory {
 				case MemberMsType.PDB_ID:
 					applier = new MemberTypeApplier(applicator, (MemberMsType) type);
 					break;
-//				case StaticMemberMsType.PDB_ID:
-//					// Not evaluated/implemented yet.
-//					break;
-				case OverloadedMethodMsType.PDB_ID:
-					// See note in "default" case regarding NoTypeApplier
-					applier = new NoTypeApplier(applicator, type);
-					break;
-				case NestedTypeMsType.PDB_ID:
-					applier = new NestedTypeApplier(applicator, type);
-					break;
-				case OneMethodMsType.PDB_ID:
-					// See note in "default" case regarding NoTypeApplier
-					applier = new NoTypeApplier(applicator, type);
-					break;
-				case NestedTypeExtMsType.PDB_ID:
-					applier = new NestedTypeApplier(applicator, type);
-					break;
-//				case MemberModifyMsType.PDB_ID:
+                //				case MemberModifyMsType.PDB_ID:
 //					// Not evaluated/implemented yet.
 //					break;
 //				case ManagedMsType.PDB_ID:
@@ -489,12 +428,10 @@ public class TypeApplierFactory {
 //					// Not evaluated/implemented yet.
 //					break;
 				case UserDefinedTypeSourceAndLineMsType.PDB_ID:
-					applier = new UdtSourceLineTypeApplier(applicator, type);
+                case UserDefinedTypeModuleSourceAndLineMsType.PDB_ID:
+                    applier = new UdtSourceLineTypeApplier(applicator, type);
 					break;
-				case UserDefinedTypeModuleSourceAndLineMsType.PDB_ID:
-					applier = new UdtSourceLineTypeApplier(applicator, type);
-					break;
-				case Class19MsType.PDB_ID:
+                case Class19MsType.PDB_ID:
 					applier = new CompositeTypeApplier(applicator, (Class19MsType) type);
 					break;
 				case Structure19MsType.PDB_ID:

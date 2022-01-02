@@ -31,7 +31,7 @@ import ghidra.util.exception.DuplicateFileException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>LocalDataFile</code> provides a FolderItem implementation
+ * {@code LocalDataFile} provides a FolderItem implementation
  * for a local serialized data file.  This implementation supports 
  * a non-versioned file-system only.
  * <p>

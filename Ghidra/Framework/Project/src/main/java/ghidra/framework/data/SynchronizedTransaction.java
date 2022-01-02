@@ -23,7 +23,7 @@ import ghidra.framework.model.AbortedTransactionListener;
 import ghidra.framework.model.Transaction;
 
 /**
- * <code>SynchronizedTransaction</code> represents an atomic undoable operation performed
+ * {@code SynchronizedTransaction} represents an atomic undoable operation performed
  * on a synchronized set of domain objects.
  */
 class SynchronizedTransaction implements Transaction {

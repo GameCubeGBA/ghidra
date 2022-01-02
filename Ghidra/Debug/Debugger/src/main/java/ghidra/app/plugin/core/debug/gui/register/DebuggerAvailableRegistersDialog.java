@@ -148,7 +148,7 @@ public class DebuggerAvailableRegistersDialog extends DialogComponentProvider {
 		availableTable.setAutoLookupColumn(AvailableRegisterTableColumns.NAME.ordinal());
 
 		availableFilterPanel = new GhidraTableFilterPanel<>(availableTable, availableTableModel);
-		panel.add(availableFilterPanel, BorderLayout.SOUTH);
+		panel.add(availableFilterPanel, BorderLayout.PAGE_END);
 
 		addWorkPanel(panel);
 

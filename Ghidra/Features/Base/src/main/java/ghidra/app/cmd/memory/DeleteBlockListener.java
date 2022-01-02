@@ -22,6 +22,7 @@ package ghidra.app.cmd.memory;
  * 
  *  
  */
+@FunctionalInterface
 public interface DeleteBlockListener {
 
 	/**

@@ -210,7 +210,8 @@ public class DebuggerCopyIntoProgramDialog extends DialogComponentProvider {
 		}
 	}
 
-	protected interface CopyDestination {
+	@FunctionalInterface
+    protected interface CopyDestination {
 		default Program getExistingProgram() {
 			return null;
 		}
@@ -320,7 +321,7 @@ public class DebuggerCopyIntoProgramDialog extends DialogComponentProvider {
 
 		{
 			JPanel opts = new JPanel();
-			opts.setLayout(new BoxLayout(opts, BoxLayout.Y_AXIS));
+			opts.setLayout(new BoxLayout(opts, BoxLayout.PAGE_AXIS));
 
 			{
 				Box progBox = Box.createHorizontalBox();
@@ -400,7 +401,7 @@ public class DebuggerCopyIntoProgramDialog extends DialogComponentProvider {
 				}
 				opts.add(panelInclude);
 			}
-			panel.add(opts, BorderLayout.NORTH);
+			panel.add(opts, BorderLayout.PAGE_START);
 		}
 
 		{
@@ -409,7 +410,7 @@ public class DebuggerCopyIntoProgramDialog extends DialogComponentProvider {
 			table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 			tablePanel.add(new JScrollPane(table));
 			filterPanel = new GhidraTableFilterPanel<>(table, tableModel);
-			tablePanel.add(filterPanel, BorderLayout.SOUTH);
+			tablePanel.add(filterPanel, BorderLayout.PAGE_END);
 			panel.add(tablePanel, BorderLayout.CENTER);
 		}
 

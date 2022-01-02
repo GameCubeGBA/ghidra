@@ -21,7 +21,7 @@ import ghidra.app.util.bin.BinaryReader;
 import java.io.IOException;
 
 /**
- * The <code>ARHeader</code> class is used to store the per-object file 
+ * The {@code ARHeader} class is used to store the per-object file
  *  archive headers.  It can also create an XCOFF32 object for inspecting
  *  the object file data.
  */

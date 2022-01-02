@@ -31,7 +31,7 @@ package docking.widgets.dialogs;
  * tool.showDialog() call parameters.</P>
  * <br>To display the dialog call:
  * <pre>
- * <code>
+ * {@code
  *     String entryType = "items";
  *     int initial = 5; // initial value in text field.
  *     int min = 1;     // minimum valid value in text field.
@@ -42,7 +42,7 @@ package docking.widgets.dialogs;
  *     	   // not cancelled
  *     	   int result = numInputProvider.getValue();
  *     }
- * </code>
+ * }
  * </pre>
  */
 public class NumberInputDialog extends AbstractNumberInputDialog {

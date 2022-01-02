@@ -44,10 +44,10 @@ public class SideKickVerticalScrollbar extends JScrollBar {
 		this.viewport = viewport;
 		this.delegate = new MyScrollBar();
 		setLayout(new BorderLayout());
-		add(delegate, BorderLayout.WEST);
+		add(delegate, BorderLayout.LINE_START);
 		JPanel panel = new JPanel(new SideKickLayout());
 		panel.add(sideKick);
-		add(panel, BorderLayout.EAST);
+		add(panel, BorderLayout.LINE_END);
 	}
 
 	class MyScrollBar extends JScrollBar {

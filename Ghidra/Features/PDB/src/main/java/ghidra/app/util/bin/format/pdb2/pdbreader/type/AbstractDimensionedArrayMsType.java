@@ -87,10 +87,9 @@ public abstract class AbstractDimensionedArrayMsType extends AbstractMsType {
 			builder.insert(0, "(");
 			builder.append(")");
 		}
-		StringBuilder myBuilder = new StringBuilder();
-		myBuilder.append("<");
-		myBuilder.append(getDimensionInformation());
-		myBuilder.append(">");
+        String myBuilder = "<" +
+                getDimensionInformation() +
+                ">";
 
 		builder.append("[");
 		builder.append(myBuilder);

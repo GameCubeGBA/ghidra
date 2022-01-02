@@ -89,7 +89,7 @@ public class VTImpliedMatchesTableProvider extends ComponentProviderAdapter
 			createImpliedMatchTablePanel();
 		filterPanel = new GhidraTableFilterPanel<>(impliedMatchesTable, impliedMatchTableModel);
 		panel.add(tablePanel, BorderLayout.CENTER);
-		panel.add(filterPanel, BorderLayout.SOUTH);
+		panel.add(filterPanel, BorderLayout.PAGE_END);
 		return panel;
 	}
 

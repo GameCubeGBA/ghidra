@@ -154,16 +154,14 @@ class DataTypePanel extends JPanel {
 	}
 
 	private void insertAlignment(Composite composite) {
-		StringBuffer alignmentBuffer = new StringBuffer();
-		alignmentBuffer.append("Alignment: ");
-		alignmentBuffer.append(Integer.toString(composite.getAlignment()));
+        String alignmentBuffer = "Alignment: " +
+                Integer.toString(composite.getAlignment());
 		insertString(alignmentBuffer + "\n", sourceAttrSet);
 	}
 
 	private void insertLength(Composite composite) {
-		StringBuffer lengthBuffer = new StringBuffer();
-		lengthBuffer.append("Length: ");
-		lengthBuffer.append(Integer.toString(composite.getLength()));
+        String lengthBuffer = "Length: " +
+                Integer.toString(composite.getLength());
 		insertString(lengthBuffer + "\n", sourceAttrSet);
 	}
 
@@ -246,7 +244,7 @@ class DataTypePanel extends JPanel {
 		insertLength(comp);
 	}
 
-	private class EnumEntry implements Comparable<EnumEntry> {
+	private static class EnumEntry implements Comparable<EnumEntry> {
 
 		private final String name;
 		private final long value;

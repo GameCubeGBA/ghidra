@@ -154,7 +154,7 @@ public class VersionControlDialog extends DialogComponentProvider {
 	private JPanel buildMainPanel() {
 
 		JPanel innerPanel = new JPanel();
-		innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS));
+		innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.PAGE_AXIS));
 		ImageIcon icon = resources.ResourceManager.loadImage(
 			addToVersionControl ? "images/vcAdd.png" : "images/vcCheckIn.png");
 
@@ -162,7 +162,7 @@ public class VersionControlDialog extends DialogComponentProvider {
 				: "Add comments to describe changes",
 			SwingConstants.LEFT);
 		JPanel dPanel = new JPanel(new BorderLayout(10, 0));
-		dPanel.add(new GIconLabel(icon), BorderLayout.WEST);
+		dPanel.add(new GIconLabel(icon), BorderLayout.LINE_START);
 		dPanel.add(descriptionLabel, BorderLayout.CENTER);
 
 		JPanel cPanel = new JPanel(new BorderLayout());
@@ -173,7 +173,7 @@ public class VersionControlDialog extends DialogComponentProvider {
 
 		keepCB = new GCheckBox("Keep File Checked Out", true);
 		JPanel kPanel = new JPanel(new BorderLayout());
-		kPanel.add(keepCB, BorderLayout.WEST);
+		kPanel.add(keepCB, BorderLayout.LINE_START);
 
 		innerPanel.add(Box.createVerticalStrut(10));
 		innerPanel.add(dPanel);
@@ -186,7 +186,7 @@ public class VersionControlDialog extends DialogComponentProvider {
 		if (!addToVersionControl) {
 			keepFileCB = new GCheckBox("Create \".keep\" file", false);
 			JPanel kpPanel = new JPanel(new BorderLayout());
-			kpPanel.add(keepFileCB, BorderLayout.WEST);
+			kpPanel.add(keepFileCB, BorderLayout.LINE_START);
 			innerPanel.add(kpPanel);
 		}
 

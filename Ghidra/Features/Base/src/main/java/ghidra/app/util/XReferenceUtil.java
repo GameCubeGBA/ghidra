@@ -59,14 +59,14 @@ public class XReferenceUtil {
 	}
 
 	/**
-	 * Returns an array containing the first <b><code>maxNumber</code></b>
+	 * Returns an array containing the first <b>{@code maxNumber}</b>
 	 * direct xref addresses to the specified code unit.
 	 * 
 	 * @param cu the code unit to generate the xrefs
 	 * @param maxNumber max number of xrefs to get,
 	 *                  or -1 to get all references
 	 * 
-	 * @return array first <b><code>maxNumber</code></b> xrefs to the code unit
+	 * @return array first <b>{@code maxNumber}</b> xrefs to the code unit
 	 */
     public static final Address[] getXRefList(CodeUnit cu, int maxNumber) {
 		Program prog = cu.getProgram();
@@ -90,14 +90,14 @@ public class XReferenceUtil {
 	}
 
 	/**
-	 * Returns an array containing the first <b><code>maxNumber</code></b>
+	 * Returns an array containing the first <b>{@code maxNumber}</b>
 	 * direct xref references to the specified code unit.
 	 * 
 	 * @param cu the code unit to generate the xrefs
 	 * @param maxNumber max number of xrefs to get,
 	 *                  or -1 to get all references
 	 * 
-	 * @return array first <b><code>maxNumber</code></b> xrefs to the code unit
+	 * @return array first <b>{@code maxNumber}</b> xrefs to the code unit
 	 */
     public static final Reference[] getXReferences(CodeUnit cu, int maxNumber) {
 		Program prog = cu.getProgram();

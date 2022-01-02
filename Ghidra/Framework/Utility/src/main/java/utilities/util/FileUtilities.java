@@ -511,8 +511,8 @@ public final class FileUtilities {
 	}
 
 	/**
-	 * Copies the contents of <code>originalDir</code> to <code>copyDir</code>.  If the <code>originalDir</code>
-	 * does not exist, then this method will do nothing.  If <code>copyDir</code> does not exist, then
+	 * Copies the contents of {@code originalDir} to <code>copyDir</code>.  If the <code>originalDir</code>
+	 * does not exist, then this method will do nothing.  If {@code copyDir} does not exist, then
 	 * it will be created as necessary.
 	 *
 	 * @param originalDir The directory from which to extract contents
@@ -647,7 +647,7 @@ public final class FileUtilities {
 	}
 
 	/**
-	 * Copy the <code>in</code> stream to the <code>out</code> stream.  The output stream will
+	 * Copy the {@code in} stream to the <code>out</code> stream.  The output stream will
 	 * <b>not</b> be closed when the copy operation is finished.
 	 *
 	 * @param in source input stream
@@ -838,7 +838,7 @@ public final class FileUtilities {
 	/**
 	 * Returns true if the given file:
 	 * <ol>
-	 *  <li> is <code>null</code>, or  </li>
+	 *  <li> is {@code null}, or  </li>
 	 * 	<li>{@link File#isFile()} is true, </li>
 	 *  <li>and {@link File#length()} is == 0.</li>
 	 *  </ol>
@@ -854,8 +854,8 @@ public final class FileUtilities {
 	}
 
 	/**
-	 * Returns true if the given <code>potentialParentFile</code> is the parent path of
-	 * the given <code>otherFile</code>, or if the two file paths point to the same path.
+	 * Returns true if the given {@code potentialParentFile} is the parent path of
+	 * the given {@code otherFile}, or if the two file paths point to the same path.
 	 *
 	 * @param potentialParentFile The file that may be the parent
 	 * @param otherFile The file that may be the child
@@ -885,7 +885,7 @@ public final class FileUtilities {
 	 * the paths are the same or unrelated, then null is returned.
 	 *
 	 * <P>For example, given, in this order, two files with these paths
-	 *  <code>/a/b</code> and <code>/a/b/c</code>, this method will return 'c'.
+	 *  {@code /a/b} and <code>/a/b/c</code>, this method will return 'c'.
 	 *
 	 * @param f1 the parent file
 	 * @param f2 the child file
@@ -917,7 +917,7 @@ public final class FileUtilities {
 	 * Note: unlike {@link #relativizePath(File, File)}, this function does not resolve symbolic links.
 	 *
 	 * <P>For example, given, in this order, two files with these paths
-	 *  <code>/a/b</code> and <code>/a/b/c</code>, this method will return 'c'.
+	 *  {@code /a/b} and <code>/a/b/c</code>, this method will return 'c'.
 	 *
 	 * @param f1 the parent resource file
 	 * @param f2 the child resource file

@@ -23,7 +23,7 @@ import ghidra.util.task.TaskMonitor;
 
 /**
  * Calculates the longest common subsequence (LCS) between two sequences of Matchable 
- * objects, <code>x</code> and <code>y</code>.
+ * objects, {@code x} and <code>y</code>.
  * 
  * <p>This is an optimizing version of the {@link Lcs} that will pre-calculate all similar 
  * items from the beginning and end of the two given sequences.  Doing this will reduce 
@@ -54,8 +54,8 @@ public abstract class ReducingLcs<I, T> extends Lcs<T> {
 	/**
 	 * Constructor
 	 * 
-	 * @param ix the input sequence <code>x</code>
-	 * @param iy the input sequence <code>y</code>
+	 * @param ix the input sequence {@code x}
+	 * @param iy the input sequence {@code y}
 	 */
 	public ReducingLcs(I ix, I iy) {
 		this.xSource = ix;

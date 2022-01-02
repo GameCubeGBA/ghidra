@@ -87,7 +87,7 @@ public class ViewProjectAccessPanel extends ProjectAccessPanel {
 			Font f = anonymousAccessLabel.getFont().deriveFont(Font.ITALIC);
 			anonymousAccessLabel.setFont(f);
 
-			mainPanel.add(anonymousAccessLabel, BorderLayout.SOUTH);
+			mainPanel.add(anonymousAccessLabel, BorderLayout.PAGE_END);
 		}
 
 		add(mainPanel);

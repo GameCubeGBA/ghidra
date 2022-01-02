@@ -18,7 +18,7 @@ package db;
 import java.io.IOException;
 
 /**
- * <code>ConvertedRecordIterator</code> provides a RecordIterator wrapper
+ * {@code ConvertedRecordIterator} provides a RecordIterator wrapper
  * for performing record conversion frequently required when using older
  * data.
  */

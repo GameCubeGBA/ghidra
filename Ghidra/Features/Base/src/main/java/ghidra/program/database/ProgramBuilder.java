@@ -1139,7 +1139,8 @@ public class ProgramBuilder {
 		}
 	}
 
-	private interface ExceptionalSupplier<R, E extends Exception> {
+	@FunctionalInterface
+    private interface ExceptionalSupplier<R, E extends Exception> {
 		R get() throws E;
 	}
 }

@@ -23,6 +23,7 @@ import ghidra.util.HelpLocation;
 /**
  * Register help for a specific component.
  */
+@FunctionalInterface
 public interface HelpActionManager {
 	
 	/**

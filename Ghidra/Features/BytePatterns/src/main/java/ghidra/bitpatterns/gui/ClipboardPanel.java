@@ -70,7 +70,7 @@ public class ClipboardPanel extends JPanel {
 	 * @param plugin
 	 */
 	public ClipboardPanel(FunctionBitPatternsExplorerPlugin plugin) {
-        BoxLayout mainLayout = new BoxLayout(this, BoxLayout.Y_AXIS);
+        BoxLayout mainLayout = new BoxLayout(this, BoxLayout.PAGE_AXIS);
 		setLayout(mainLayout);
 
 		this.plugin = plugin;

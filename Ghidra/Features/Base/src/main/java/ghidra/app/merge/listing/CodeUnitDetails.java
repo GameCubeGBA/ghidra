@@ -108,10 +108,9 @@ public abstract class CodeUnitDetails {
 		if (cu == null) {
 			return "You must be on a code unit to see the details.";
 		}
-		StringBuffer buf = new StringBuffer();
-		buf.append("References: " + NEW_LINE);
-		buf.append(getProgramRefDetails(cu.getProgram(), cu.getReferencesFrom()));
-		return buf.toString();
+        String buf = "References: " + NEW_LINE +
+                getProgramRefDetails(cu.getProgram(), cu.getReferencesFrom());
+		return buf;
 	}
 
 	private static String getRefInfo(Program pgm, Reference ref) {
@@ -155,9 +154,7 @@ public abstract class CodeUnitDetails {
 		if (numSpaces <= 0) {
 			return "";
 		}
-		StringBuffer buf = new StringBuffer(numSpaces);
-		buf.append(" ".repeat(numSpaces));
-		return buf.toString();
+        return " ".repeat(numSpaces);
 	}
 
 }

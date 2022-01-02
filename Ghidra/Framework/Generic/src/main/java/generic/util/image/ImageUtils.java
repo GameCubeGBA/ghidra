@@ -278,7 +278,7 @@ public class ImageUtils {
 	}
 
 	/**
-	 * Writes the given icon out to the file denoted by <code>filename</code> <b> in the PNG format</b>.
+	 * Writes the given icon out to the file denoted by {@code filename} <b> in the PNG format</b>.
 	 * 
 	 * @param icon the icon to write
 	 * @param filename the filename denoting the write destination
@@ -421,13 +421,13 @@ public class ImageUtils {
 
 	/**
 	 * Takes in RGB pixel data and then converts the pixel into a gray color with a brightness
-	 * based upon <code>brightnessPercent</code>.
+	 * based upon {@code brightnessPercent}.
 	 *  
 	 * @param rgbPixels The RGB pixel data for a given pixel.
 	 * @param destination The converted pixel data.
 	 * @param brightnessPercent The amount of brightness to include in the gray value, where 100
 	 *        percent is the brightest possible value.
-	 * @return The <code>destination</code> array filled with the new pixel data.
+	 * @return The {@code destination} array filled with the new pixel data.
 	 */
 	private static int[] filterRgbDisabledImage(int[] rgbPixels, int[] destination,
 			int brightnessPercent) {

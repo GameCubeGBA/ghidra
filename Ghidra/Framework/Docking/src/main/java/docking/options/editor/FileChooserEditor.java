@@ -108,7 +108,7 @@ public class FileChooserEditor extends PropertyEditorSupport {
 		private JButton browseButton;
 
 		private FileChooserPanel() {
-			BoxLayout bl = new BoxLayout(this, BoxLayout.X_AXIS);
+			BoxLayout bl = new BoxLayout(this, BoxLayout.LINE_AXIS);
 			setLayout(bl);
 
 			textField.setText(currentFileValue != null ? currentFileValue.getAbsolutePath() : "");

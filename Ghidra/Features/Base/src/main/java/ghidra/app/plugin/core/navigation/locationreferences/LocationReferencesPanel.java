@@ -64,7 +64,7 @@ public class LocationReferencesPanel extends JPanel {
 		GhidraTableFilterPanel<LocationReference> tableFilterPanel =
 			new GhidraTableFilterPanel<>(table, tableModel);
 		add(tablePanel, BorderLayout.CENTER);
-		add(tableFilterPanel, BorderLayout.SOUTH);
+		add(tableFilterPanel, BorderLayout.PAGE_END);
 	}
 
 	Collection<Address> getReferenceAddresses() {

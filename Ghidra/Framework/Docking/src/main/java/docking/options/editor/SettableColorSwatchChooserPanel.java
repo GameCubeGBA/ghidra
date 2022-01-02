@@ -146,7 +146,7 @@ public class SettableColorSwatchChooserPanel extends AbstractColorChooserPanel {
 		JPanel recentLabelHolder = new JPanel(new BorderLayout());
 		JLabel l = new GHtmlLabel(recentStr);
 		l.setLabelFor(recentSwatchPanel);
-		recentLabelHolder.add(l, BorderLayout.NORTH);
+		recentLabelHolder.add(l, BorderLayout.PAGE_START);
 		gbc.weighty = 0.0;
 		gbc.gridwidth = GridBagConstraints.REMAINDER;
 		gbc.gridheight = 1;
@@ -161,7 +161,7 @@ public class SettableColorSwatchChooserPanel extends AbstractColorChooserPanel {
 		JPanel historyLabelHolder = new JPanel(new BorderLayout());
 		JLabel historyLabel = new GLabel("History:");
 		historyLabel.setLabelFor(historySwatchPanel);
-		historyLabelHolder.add(historyLabel, BorderLayout.NORTH);
+		historyLabelHolder.add(historyLabel, BorderLayout.PAGE_START);
 		gbc.weighty = 0.0;
 		gbc.gridwidth = GridBagConstraints.REMAINDER;
 		gbc.gridheight = 1;

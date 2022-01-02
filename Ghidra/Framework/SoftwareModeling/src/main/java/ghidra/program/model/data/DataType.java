@@ -31,7 +31,7 @@ import ghidra.util.exception.DuplicateNameException;
 public interface DataType {
 
 	/**
-	 * WARNING: do not add <code>default</code> method implementations to this interface. Doing so
+	 * WARNING: do not add {@code default} method implementations to this interface. Doing so
 	 * intereferes with correct initialization of the static instance variables {@link #DEFAULT} and
 	 * {@link #VOID} below.
 	 */
@@ -42,7 +42,7 @@ public interface DataType {
 	DataType DEFAULT = DefaultDataType.dataType;
 
 	/**
-	 * Instance of void datatype (never use <code>==</code>)
+	 * Instance of void datatype (never use {@code ==})
 	 * 
 	 * @deprecated should use {@link VoidDataType#dataType} instead
 	 */
@@ -342,7 +342,7 @@ public interface DataType {
 	 * Returns the appropriate string to use as the default label prefix.
 	 * <p>
 	 * This takes into account the fact that there exists a reference to the data that references
-	 * <code>offcutLength</code> bytes into this type
+	 * {@code offcutLength} bytes into this type
 	 * 
 	 * @param buf memory buffer containing the bytes.
 	 * @param settings the Settings object

@@ -22,13 +22,13 @@ import ghidra.util.exception.NotEmptyException;
 import ghidra.util.exception.NotFoundException;
 
 /**
- * A <CODE>ProgramModule</CODE> is a group of <CODE>ProgramFragment</CODE>s 
- * and/or other <CODE>ProgramModule</CODE>s together with some related 
+ * A {@code ProgramModule} is a group of <CODE>ProgramFragment</CODE>s
+ * and/or other {@code ProgramModule}s together with some related
  * information such as a name, comment, and alias. Users create modules to 
  * overlay the program with a hierarchical structure. A <I>child</I> of a module 
  * is a fragment or module which it directly contains. A <I>parent</I> of a module 
  * is a module which has this module as a child. A module may be contained in more 
- * than one module. A <CODE>Program</CODE> always has at least one module, the root module. 
+ * than one module. A {@code Program} always has at least one module, the root module.
  * The root module cannot be removed and is the ancestor for all other modules and
  * fragments in the program.
  */

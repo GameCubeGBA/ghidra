@@ -164,10 +164,10 @@ class EditExternalLocationPanel extends JPanel {
 		JPanel pathPanel = new JPanel(new BorderLayout());
 		pathPanel.add(extLibPathTextField, BorderLayout.CENTER);
 
-		JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
+		JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEADING, 0, 0));
 		buttonPanel.add(clearButton);
 		buttonPanel.add(editButton);
-		pathPanel.add(buttonPanel, BorderLayout.EAST);
+		pathPanel.add(buttonPanel, BorderLayout.LINE_END);
 
 		topPanel.add(new GLabel("Path:", SwingConstants.RIGHT));
 		topPanel.add(pathPanel);
@@ -211,7 +211,7 @@ class EditExternalLocationPanel extends JPanel {
 		panel.add(extOriginalLabelTextField, BorderLayout.CENTER);
 		restoreButton = new JButton("Restore");
 		restoreButton.addActionListener(e -> restoreOriginalName());
-		panel.add(restoreButton, BorderLayout.EAST);
+		panel.add(restoreButton, BorderLayout.LINE_END);
 		return panel;
 	}
 

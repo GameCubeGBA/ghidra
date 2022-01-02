@@ -551,7 +551,7 @@ public class SymbolTreeProvider extends ComponentProviderAdapter {
 		}
 	}
 
-	private abstract class AbstactSymbolUpdateTask extends GTreeTask {
+	private abstract static class AbstactSymbolUpdateTask extends GTreeTask {
 
 		protected final Symbol symbol;
 

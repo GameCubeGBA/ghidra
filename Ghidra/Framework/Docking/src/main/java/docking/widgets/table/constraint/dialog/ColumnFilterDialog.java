@@ -255,7 +255,7 @@ public class ColumnFilterDialog<R> extends DialogComponentProvider
 
 			innerPanel.add(addAndConditionButton);
 			innerPanel.add(addOrConditionButton);
-			bottomPanel.add(innerPanel, BorderLayout.EAST);
+			bottomPanel.add(innerPanel, BorderLayout.LINE_END);
 		}
 
 		return bottomPanel;

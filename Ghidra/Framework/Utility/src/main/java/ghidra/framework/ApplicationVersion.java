@@ -20,7 +20,7 @@ package ghidra.framework;
  * <p>
  * The version format is \d\.\d(\.\d)?(\-.+)?
  * <p>
- * Note: this class has a natural ordering that is inconsistent with equals (the <code>tag</code>
+ * Note: this class has a natural ordering that is inconsistent with equals (the {@code tag}
  * part of the version is disregarded in the {@link #compareTo(ApplicationVersion)} method).
  * <p>
  * Examples:

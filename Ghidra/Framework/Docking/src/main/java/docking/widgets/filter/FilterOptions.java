@@ -223,9 +223,7 @@ public class FilterOptions {
 
 	public static Icon getIcon(TextFilterStrategy filterStrategy) {
 		switch (filterStrategy) {
-			case CONTAINS:
-				return CONTAINS_ICON;
-			case MATCHES_EXACTLY:
+            case MATCHES_EXACTLY:
 				return EXACT_MATCH_ICON;
 			case STARTS_WITH:
 				return STARTS_WITH_ICON;

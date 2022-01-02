@@ -1765,7 +1765,7 @@ class FunctionMerger extends AbstractFunctionMerger implements ListingMerger {
 
 	/**
 	 * Updates the progress bar associated with this phase of the merge.
-	 * Before beginning to auto-merge the <code>totalChanges</code> and <code>changeNum</code> must be set.
+	 * Before beginning to auto-merge the {@code totalChanges} and <code>changeNum</code> must be set.
 	 * This method should then be called as changes are made to update the change bar.
 	 * This assumes that each change is equivalent in terms of shown progress.
 	 * @param increment the number of changes completed relative to the total

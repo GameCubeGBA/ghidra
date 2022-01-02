@@ -22,7 +22,7 @@ import java.util.Set;
 import javax.security.auth.Subject;
 
 /**
- * <code>GhidraPrincipal</code> specifies a Ghidra user as a Principal
+ * {@code GhidraPrincipal} specifies a Ghidra user as a Principal
  * for use with server login/authentication.
  */
 public class GhidraPrincipal implements Principal, java.io.Serializable {

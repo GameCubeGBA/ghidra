@@ -26,7 +26,7 @@ import ghidra.util.exception.DuplicateNameException;
 
 /**
  * A class to the represent the IMAGE_SECTION_HEADER
- * struct as defined in <code>winnt.h</code>.
+ * struct as defined in {@code winnt.h}.
  * <br>
  * <pre>
  * typedef struct _IMAGE_SECTION_HEADER {
@@ -46,7 +46,7 @@ import ghidra.util.exception.DuplicateNameException;
  * } IMAGE_SECTION_HEADER, *PIMAGE_SECTION_HEADER; * 
  * </pre>
  * <br>
- * <code>#define IMAGE_SIZEOF_SECTION_HEADER 40</code> * 
+ * {@code #define IMAGE_SIZEOF_SECTION_HEADER 40} *
  * 
  * 
  */
@@ -493,26 +493,21 @@ public class SectionHeader implements StructConverter, ByteArrayConverter {
 	 */
 	@Override
 	public String toString() {
-		StringBuffer buff = new StringBuffer();
 
-		buff.append("Section Header:" + "\n");
-		buff.append("\t" + "name:                 " + name + "\n");
-		buff.append("\t" + "physicalAddress:      " + Integer.toHexString(physicalAddress) + "\n");
-		buff.append("\t" + "virtualSize:          " + Integer.toHexString(virtualSize) + "\n");
-		buff.append("\t" + "virtualAddress:       " + Integer.toHexString(virtualAddress) + "\n");
-		buff.append("\t" + "sizeOfRawData:        " + Integer.toHexString(sizeOfRawData) + "\n");
-		buff.append("\t" + "pointerToRawData:     " + Integer.toHexString(pointerToRawData) + "\n");
-		buff.append(
-			"\t" + "pointerToRelocations: " + Integer.toHexString(pointerToRelocations) + "\n");
-		buff.append(
-			"\t" + "pointerToLinenumbers: " + Integer.toHexString(pointerToLinenumbers) + "\n");
-		buff.append(
-			"\t" + "numberOfRelocations:  " + Integer.toHexString(numberOfRelocations) + "\n");
-		buff.append(
-			"\t" + "numberOfLinenumbers:  " + Integer.toHexString(numberOfLinenumbers) + "\n");
-		buff.append("\t" + "characteristics:      " + Integer.toHexString(characteristics) + "\n");
+        String buff = "Section Header:" + "\n" +
+                "\t" + "name:                 " + name + "\n" +
+                "\t" + "physicalAddress:      " + Integer.toHexString(physicalAddress) + "\n" +
+                "\t" + "virtualSize:          " + Integer.toHexString(virtualSize) + "\n" +
+                "\t" + "virtualAddress:       " + Integer.toHexString(virtualAddress) + "\n" +
+                "\t" + "sizeOfRawData:        " + Integer.toHexString(sizeOfRawData) + "\n" +
+                "\t" + "pointerToRawData:     " + Integer.toHexString(pointerToRawData) + "\n" +
+                "\t" + "pointerToRelocations: " + Integer.toHexString(pointerToRelocations) + "\n" +
+                "\t" + "pointerToLinenumbers: " + Integer.toHexString(pointerToLinenumbers) + "\n" +
+                "\t" + "numberOfRelocations:  " + Integer.toHexString(numberOfRelocations) + "\n" +
+                "\t" + "numberOfLinenumbers:  " + Integer.toHexString(numberOfLinenumbers) + "\n" +
+                "\t" + "characteristics:      " + Integer.toHexString(characteristics) + "\n";
 
-		return buff.toString();
+		return buff;
 	}
 
 	@Override
@@ -569,7 +564,7 @@ public class SectionHeader implements StructConverter, ByteArrayConverter {
 	/**
 	 * Writes the bytes from this section into the specified random access file.
 	 * The bytes will be written starting at the byte position
-	 * specified by <code>getPointerToRawData()</code>.
+	 * specified by {@code getPointerToRawData()}.
 	 * 
 	 * @param raf           the random access file
 	 * @param rafIndex      the index into the RAF where the bytes will be written

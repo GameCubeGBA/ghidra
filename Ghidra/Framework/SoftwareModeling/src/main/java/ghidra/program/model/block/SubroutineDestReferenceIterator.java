@@ -26,7 +26,7 @@ import ghidra.util.task.TaskMonitor;
 
 /**
  * SubroutineDestReferenceIterator is a unidirectional iterator over 
- * the destination <CODE>CodeBlockReference</CODE>s for a CodeBlock.
+ * the destination {@code CodeBlockReference}s for a CodeBlock.
  */
 public class SubroutineDestReferenceIterator implements CodeBlockReferenceIterator {
 

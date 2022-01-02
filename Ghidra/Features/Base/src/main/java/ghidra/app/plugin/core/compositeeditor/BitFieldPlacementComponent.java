@@ -834,7 +834,7 @@ public class BitFieldPlacementComponent extends JPanel implements Scrollable {
 	}
 
 	/**
-	 * <code>BitFieldPlacement</code> provides the ability to translate a 
+	 * {@code BitFieldPlacement} provides the ability to translate a
 	 * composite component to a bit-level placement within the allocation
 	 * range including the notion of clipped edges when one or both sides 
 	 * extend beyond the allocation range.
@@ -895,7 +895,7 @@ public class BitFieldPlacementComponent extends JPanel implements Scrollable {
 	}
 
 	/**
-	 * <code>BitFieldAllocation</code> provides the bit-level details within the
+	 * {@code BitFieldAllocation} provides the bit-level details within the
 	 * allocation range including the optional overlay of an edit component
 	 * with confict detection.  The bit-level details are defined via 
 	 * {@link BitAttributes}.
@@ -1184,7 +1184,7 @@ public class BitFieldPlacementComponent extends JPanel implements Scrollable {
 	}
 
 	/**
-	 * <code>BitAttributes</code> provide bit attributes which identify the 
+	 * {@code BitAttributes} provide bit attributes which identify the
 	 * associated component, a conflict component and left/right line
 	 * types to be displayed.
 	 */

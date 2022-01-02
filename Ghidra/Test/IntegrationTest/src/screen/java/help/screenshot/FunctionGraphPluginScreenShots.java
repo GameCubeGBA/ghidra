@@ -480,7 +480,7 @@ public class FunctionGraphPluginScreenShots extends AbstractFunctionGraphTest {
 		SwingUtilities.convertPointToScreen(screenLocation, parent);
 
 		CalloutComponentInfo calloutInfo = new FGCalloutComponentInfo(parent, component,
-			screenLocation, relativePoint, size, viewer, v);
+                screenLocation, relativePoint, size, viewer, v);
 
 		createCallout(parent, calloutInfo);
 	}
@@ -823,7 +823,7 @@ public class FunctionGraphPluginScreenShots extends AbstractFunctionGraphTest {
 		closeButton.addActionListener(e -> dialog.setVisible(false));
 
 		panel.add(button);
-		panel.add(closeButton, BorderLayout.SOUTH);
+		panel.add(closeButton, BorderLayout.PAGE_END);
 		dialog.getContentPane().add(panel);
 
 		dialog.setSize(300, 200);
@@ -873,7 +873,7 @@ public class FunctionGraphPluginScreenShots extends AbstractFunctionGraphTest {
 // Inner Classes
 //==================================================================================================
 
-	private class MyScreen extends GhidraScreenShotGenerator {
+	private static class MyScreen extends GhidraScreenShotGenerator {
 
 		public MyScreen() {
         }
@@ -896,7 +896,7 @@ public class FunctionGraphPluginScreenShots extends AbstractFunctionGraphTest {
 		}
 	}
 
-	private class FGCalloutComponentInfo extends CalloutComponentInfo {
+	private static class FGCalloutComponentInfo extends CalloutComponentInfo {
 
 		private VisualizationViewer<FGVertex, FGEdge> viewer;
 		private FGVertex vertex;

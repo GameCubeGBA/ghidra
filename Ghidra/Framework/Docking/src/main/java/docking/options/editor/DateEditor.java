@@ -96,7 +96,7 @@ public class DateEditor extends PropertyEditorSupport {
 		private JButton browseButton;
 
 		DatePanel() {
-			BoxLayout bl = new BoxLayout(this, BoxLayout.X_AXIS);
+			BoxLayout bl = new BoxLayout(this, BoxLayout.LINE_AXIS);
 			setLayout(bl);
 			textField = new JTextField(NUMBER_OF_COLUMNS);
 			textField.setText(date != null ? format(date) : "");

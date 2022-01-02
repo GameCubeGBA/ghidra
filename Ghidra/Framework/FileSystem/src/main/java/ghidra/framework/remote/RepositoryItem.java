@@ -20,7 +20,7 @@ import java.io.IOException;
 import ghidra.framework.store.FileSystem;
 
 /**
- * <code>RepositoryItemStatus</code> provides status information for a 
+ * {@code RepositoryItemStatus} provides status information for a
  * repository folder item.
  */
 public class RepositoryItem implements java.io.Serializable {

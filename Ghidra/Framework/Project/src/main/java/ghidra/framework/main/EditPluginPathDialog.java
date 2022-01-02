@@ -116,13 +116,13 @@ class EditPluginPathDialog extends DialogComponentProvider {
 
 	/**
 	 * Define the Main panel for the dialog here.
-	 * @return JPanel the completed <CODE>Main Panel</CODE>
+	 * @return JPanel the completed {@code Main Panel}
 	 */
 	protected JPanel buildMainPanel() {
 		// give base class the panel it needs to complete its construction
 		// and then finish building after base class is done
 		mainPanel = new JPanel();
-		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
 
 		listModel = new DefaultListModel<>();
 		setPluginPathsListData(Preferences.getPluginPaths());
@@ -283,7 +283,7 @@ class EditPluginPathDialog extends DialogComponentProvider {
 		downButton = ButtonPanelFactory.createButton(ButtonPanelFactory.ARROW_DOWN_TYPE);
 		downButton.setName("DownArrow");
 		downButton.addActionListener(e -> handleSelection(DOWN));
-		JPanel arrowButtonsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
+		JPanel arrowButtonsPanel = new JPanel(new FlowLayout(FlowLayout.LEADING, 10, 10));
 		arrowButtonsPanel.add(upButton);
 		arrowButtonsPanel.add(downButton);
 
@@ -302,7 +302,7 @@ class EditPluginPathDialog extends DialogComponentProvider {
 
 		// put the right-side buttons panel together
 		JPanel listButtonPanel = new JPanel(new BorderLayout(0, 0));
-		listButtonPanel.add(arrowButtonsPanel, BorderLayout.NORTH);
+		listButtonPanel.add(arrowButtonsPanel, BorderLayout.PAGE_START);
 		listButtonPanel.add(otherButtonsPanel, BorderLayout.CENTER);
 
 		//
@@ -327,7 +327,7 @@ class EditPluginPathDialog extends DialogComponentProvider {
 		//
 		JPanel pluginPathListPanel = new JPanel(new BorderLayout(0, 0));
 		pluginPathListPanel.add(scrollListPanel, BorderLayout.CENTER);
-		pluginPathListPanel.add(listButtonPanel, BorderLayout.EAST);
+		pluginPathListPanel.add(listButtonPanel, BorderLayout.LINE_END);
 
 		pluginPathListPanel.setBorder(new TitledBorder("User Plugin Paths"));
 
@@ -447,7 +447,7 @@ class EditPluginPathDialog extends DialogComponentProvider {
 	 * ListCellRenderer that renders the path values in the list,
 	 * coloring paths that are no longer readable in red.
 	 */
-	private class PluginPathRenderer extends GListCellRenderer<String> {
+	private static class PluginPathRenderer extends GListCellRenderer<String> {
 
 		@Override
 		public Component getListCellRendererComponent(JList<? extends String> list, String value,

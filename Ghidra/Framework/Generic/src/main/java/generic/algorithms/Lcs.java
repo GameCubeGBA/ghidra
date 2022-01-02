@@ -23,7 +23,7 @@ import ghidra.util.task.TaskMonitor;
 
 /**
  * Abstract class for finding the Longest Common Subsequence (LCS) between two 
- * sequences of Matchable objects, <code>x</code> and <code>y</code>.
+ * sequences of Matchable objects, {@code x} and <code>y</code>.
  * 
  * <p>The performance of this algorithm is O(n^2).  Thus, large inputs can cause much processor
  * and memory usage.   This class has an upper limit (see {@link #getSizeLimit()}) to prevent
@@ -57,7 +57,7 @@ public abstract class Lcs<T> {
 	 * Gets the value of the x sequence at the given index, where index is 1-based
 	 * 
 	 * @param index the 1-based position of interest in the x sequence
-	 * @return the value in the x sequence at <code>index</code>
+	 * @return the value in the x sequence at {@code index}
 	 */
 	protected abstract T valueOfX(int index);
 
@@ -65,7 +65,7 @@ public abstract class Lcs<T> {
 	 * Gets the value of the y sequence at the given index, where index is 1-based
 	 * 
 	 * @param index the 1-based position of interest in the Y sequence
-	 * @return the value in the y sequence at <code>index</code>
+	 * @return the value in the y sequence at {@code index}
 	 */
 	protected abstract T valueOfY(int index);
 
@@ -74,7 +74,7 @@ public abstract class Lcs<T> {
 	 * 
 	 * @param x the x-sequence element of interest
 	 * @param y the y-sequence element of interest
-	 * @return true if <code>x</code> matches <code>y</code>; false otherwise
+	 * @return true if {@code x} matches <code>y</code>; false otherwise
 	 */
 	protected abstract boolean matches(T x, T y);
 

@@ -40,7 +40,7 @@ import utilities.util.FileUtilities;
  */
 public class Preferences {
 	/**
-	 * The <code>APPLICATION_PREFERENCES_FILENAME</code> is the default name for the user preferences file.
+	 * The {@code APPLICATION_PREFERENCES_FILENAME} is the default name for the user preferences file.
 	 * @see ghidra.framework.preferences.Preferences
 	 */
 	public static final String APPLICATION_PREFERENCES_FILENAME = "preferences";
@@ -200,7 +200,7 @@ public class Preferences {
 	/**
 	 * Get the property with the given name.
 	 * <p>
-	 * Note: all <code>getProperty(...)</code> methods will first check {@link System#getProperty(String)}
+	 * Note: all {@code getProperty(...)} methods will first check {@link System#getProperty(String)}
 	 * for a value first.  This allows users to override preferences from the command-line.
 	 * @param name the property name
 	 * @return the current property value; null if not set
@@ -218,7 +218,7 @@ public class Preferences {
 	/**
 	 * Get the property with the given name; if there is no property, return the defaultValue.
 	 * <p>
-	 * Note: all <code>getProperty(...)</code> methods will first check {@link System#getProperty(String)}
+	 * Note: all {@code getProperty(...)} methods will first check {@link System#getProperty(String)}
 	 * for a value first.  This allows users to override preferences from the command-line.
 	 * @param name the property name
 	 * @param defaultValue the default value
@@ -239,10 +239,10 @@ public class Preferences {
 	/**
 	 * Get the property with the given name; if there is no property, return the defaultValue.
 	 * <p>
-	 * This version of <code>getProperty</code> will, when <code>useHistoricalValue</code> is true, look
+	 * This version of {@code getProperty} will, when <code>useHistoricalValue</code> is true, look
 	 * for the given preference value in the last used installation of the application.
 	 * <p>
-	 * Note: all <code>getProperty(...)</code> methods will first check {@link System#getProperty(String)}
+	 * Note: all {@code getProperty(...)} methods will first check {@link System#getProperty(String)}
 	 * for a value first.  This allows users to override preferences from the command-line.
 	 * 
 	 * @param name The name of the property for which to get a value

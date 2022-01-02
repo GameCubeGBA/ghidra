@@ -118,8 +118,8 @@ public class FindDialog extends DialogComponentProvider {
 		JPanel textPanel = new JPanel();
 		textPanel.add(findLabel);
 		textPanel.add(comboBox);
-		mainPanel.add(textPanel, BorderLayout.NORTH);
-		mainPanel.add(buildFormatPanel(), BorderLayout.SOUTH);
+		mainPanel.add(textPanel, BorderLayout.PAGE_START);
+		mainPanel.add(buildFormatPanel(), BorderLayout.PAGE_END);
 		mainPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
 		return mainPanel;
@@ -133,7 +133,7 @@ public class FindDialog extends DialogComponentProvider {
 	private JPanel buildFormatPanel() {
 		JPanel formatPanel = new JPanel();
 		formatPanel.setBorder(BorderFactory.createTitledBorder("Format"));
-		formatPanel.setLayout(new BoxLayout(formatPanel, BoxLayout.Y_AXIS));
+		formatPanel.setLayout(new BoxLayout(formatPanel, BoxLayout.PAGE_AXIS));
 		formatPanel.add(stringRadioButton);
 		formatPanel.add(regexRadioButton);
 		return formatPanel;

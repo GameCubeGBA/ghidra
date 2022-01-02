@@ -18,6 +18,7 @@ package ghidra;
 /**
  * Something intended to be launched by the {@link GhidraLauncher}.
  */
+@FunctionalInterface
 public interface GhidraLaunchable {
 
 	/**

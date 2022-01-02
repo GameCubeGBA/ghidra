@@ -31,14 +31,16 @@ public interface Kernel32Extra extends StdCallLibrary {
 	Kernel32Extra INSTANCE =
 			Native.load("kernel32", Kernel32Extra.class, W32APIOptions.DEFAULT_OPTIONS);
 
-	interface VectoredHandlerCallback extends StdCallCallback {
+	@FunctionalInterface
+    interface VectoredHandlerCallback extends StdCallCallback {
 		LONG EXCEPTION_CONTINUE_EXECUTION = new LONG(0xffffffffL);
 		LONG EXCEPTION_CONTINUE_SEARCH = new LONG(0x0L);
 
 		LONG invoke(EXCEPTION_POINTERS.ByReference ExceptionInfo);
 	}
 
-	interface HandlerRoutineCallback extends StdCallCallback {
+	@FunctionalInterface
+    interface HandlerRoutineCallback extends StdCallCallback {
 		int CTRL_C_EVENT = 0;
 		int CTRL_CLOSE_EVENT = 2;
 		int CTRL_LOGOFF_EVENT = 5;

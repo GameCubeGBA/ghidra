@@ -83,7 +83,7 @@ public class FunctionSignatureParserTest extends AbstractGhidraHeadedIntegration
 		parser = new FunctionSignatureParser(program.getDataTypeManager(), service);
 	}
 
-	private class NameComparator implements Comparator<DataType> {
+	private static class NameComparator implements Comparator<DataType> {
 		@Override
 		public int compare(DataType d1, DataType d2) {
 			int c = d1.getName().compareTo(d2.getName());

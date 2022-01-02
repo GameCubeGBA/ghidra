@@ -98,7 +98,7 @@ public class VariableHeightPanel extends JPanel implements Scrollable {
 	/**
 	 * This method is in place because the clients of this panel are not the ones that 
 	 * construct this panel and thus cannot create the desired type of layout at construction time.
-	 * <b>This method has no effect if this panel was constructed with <code>pack</code> set to
+	 * <b>This method has no effect if this panel was constructed with {@code pack} set to
 	 * false, which makes this panel use a grid style layout.</b>
 	 *  
 	 * @param singleLineLayout True signals to put all children on a single row; false will use

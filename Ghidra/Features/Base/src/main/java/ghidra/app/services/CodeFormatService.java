@@ -23,6 +23,7 @@ import ghidra.framework.plugintool.ServiceInfo;
  * Service provided by a plugin that gives access to a manager for the field formats used by a 
  * listing.
  */
+@FunctionalInterface
 @ServiceInfo(defaultProvider = CodeBrowserPlugin.class)
 public interface CodeFormatService {
 

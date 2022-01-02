@@ -872,10 +872,8 @@ public class DecompilerNestedLayout extends AbstractFGLayout {
 
 		for (int i = 0; i < blockSize; i++) {
 			PcodeBlock child = block.getBlock(i);
-			StringBuilder buffy = new StringBuilder();
-			buffy.append(printDepth(1, depth + 1)).append(' ').append(child);
 
-			debug(buffy.toString());
+            debug(printDepth(1, depth + 1) + ' ' + child);
 		}
 
 		for (int i = 0; i < blockSize; i++) {
@@ -932,14 +930,13 @@ public class DecompilerNestedLayout extends AbstractFGLayout {
 
 			BlockCopy copy = (BlockCopy) child;
 
-			StringBuilder buffy = new StringBuilder();
-			buffy.append(printDepth(depth, depth + 1))
-					.append(' ')
-					.append(ID)
-					.append(" plain - ")
-					.append(copy.getRef());
+            String buffy = printDepth(depth, depth + 1) +
+                    ' ' +
+                    ID +
+                    " plain - " +
+                    copy.getRef();
 
-			debug(buffy.toString());
+			debug(buffy);
 		}
 	}
 
@@ -948,11 +945,9 @@ public class DecompilerNestedLayout extends AbstractFGLayout {
 			return "";
 		}
 
-		StringBuilder buffy = new StringBuilder();
-        buffy.append(" ".repeat(Math.max(0, depth * 2)));
-
-		buffy.append(' ');
-		return buffy.toString();
+        String buffy = " ".repeat(Math.max(0, depth * 2)) +
+                ' ';
+		return buffy;
 	}
 
 	private GridLocationMap<FGVertex, FGEdge> assignCoordinates(
@@ -1115,7 +1110,7 @@ public class DecompilerNestedLayout extends AbstractFGLayout {
 		private int edgeOffset;
 		private Map<FGVertex, Vertex2d> cache =
 			LazyMap.lazyMap(new HashMap<>(), v -> new Vertex2d(v, vertexShaper,
-				vertexLayoutLocations, layoutToGridMap, edgeOffset));
+                    vertexLayoutLocations, layoutToGridMap, edgeOffset));
 
 		Vertex2dFactory(VisualGraphVertexShapeTransformer<FGVertex> transformer,
 				Map<FGVertex, Point2D> vertexLayoutLocations,
@@ -1128,10 +1123,6 @@ public class DecompilerNestedLayout extends AbstractFGLayout {
 
 		Column getColumn(double x) {
 			return layoutToGridMap.getColumnContaining((int) x);
-		}
-
-		private int getEdgeOffset() {
-			return edgeOffset;
 		}
 
 		Vertex2d get(FGVertex v) {
@@ -1157,7 +1148,7 @@ public class DecompilerNestedLayout extends AbstractFGLayout {
 	 * A class that represents 2D information about the contained vertex, such as location,
 	 * bounds, row and column of the layout grid.
 	 */
-	private class Vertex2d {
+	private static class Vertex2d {
 
 		private FGVertex v;
 		private Row<FGVertex> row;
@@ -1345,7 +1336,7 @@ public class DecompilerNestedLayout extends AbstractFGLayout {
 		}
 	}
 
-	private abstract class DecompilerBlock {
+	private abstract static class DecompilerBlock {
 		protected DecompilerBlock parent;
 		protected PcodeBlock pcodeBlock;
 		private int row;
@@ -1469,36 +1460,30 @@ public class DecompilerNestedLayout extends AbstractFGLayout {
 
 		switch (block.getType()) {
 			case PLAIN:
-				return new DecompilerBlockGraph(parent, block);
-			case BASIC:
-				return new DecompilerBlockGraph(parent, block);
-			case GRAPH:
-				return new DecompilerBlockGraph(parent, block);
-			case COPY:
+            case INFLOOP:
+            case MULTIGOTO:
+            case GOTO:
+            case GRAPH:
+            case BASIC:
+                return new DecompilerBlockGraph(parent, block);
+            case COPY:
 				return new PlainBlock(parent, block);
-			case GOTO:
-				return new DecompilerBlockGraph(parent, block);
-			case MULTIGOTO:
-				return new DecompilerBlockGraph(parent, block);
-			case LIST:
+            case LIST:
 				return new ListBlock(parent, block);
 			case CONDITION:
 				return new ConditionBlock(parent, block); //  not sure
 			case PROPERIF:
-				return new IfBlock(parent, block);
+            case IFGOTO:
+                return new IfBlock(parent, block);
 			case IFELSE:
-				return new IfElseBlock(parent, block);
-			case IFGOTO:
-				return new IfBlock(parent, block); //  not sure
-			case WHILEDO:
+				return new IfElseBlock(parent, block);//  not sure
+            case WHILEDO:
 				return new WhileLoopBlock(parent, block);
 			case DOWHILE:
 				return new DoLoopBlock(parent, block);
 			case SWITCH:
 				return new SwitchBlock(parent, block);
-			case INFLOOP:
-				return new DecompilerBlockGraph(parent, block);
-		}
+        }
 
 		throw new AssertException(
 			"Unhandled Decompiler Type: " + PcodeBlock.typeToName(block.getType()));

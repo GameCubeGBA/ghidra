@@ -93,7 +93,7 @@ public class EnumConstraintEditor<T extends Enum<T>> extends AbstractColumnConst
 		infoLabel = new GDHtmlLabel("");
 		infoLabel.setForeground(Color.GRAY);
 		infoLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		outerPanel.add(infoLabel, BorderLayout.SOUTH);
+		outerPanel.add(infoLabel, BorderLayout.PAGE_END);
 
 		return outerPanel;
 	}
@@ -105,8 +105,8 @@ public class EnumConstraintEditor<T extends Enum<T>> extends AbstractColumnConst
 	 * name for a value; this attempts to locate one such function within the Enum class.
 	 * <p>
 	 * This searches the enum class for a zero-argument, String-returning method called
-	 * <code>getName()</code>, <code>getDisplayName()</code>, or <code>getDisplayString()</code>
-	 * before falling back to <code>toString()</code>.
+	 * {@code getName()}, <code>getDisplayName()</code>, or <code>getDisplayString()</code>
+	 * before falling back to {@code toString()}.
 	 *
 	 * @return a more user-friendly name for the value
 	 */

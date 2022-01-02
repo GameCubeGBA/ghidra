@@ -548,9 +548,7 @@ public class PostCommentFieldFactory extends FieldFactory {
 			return;
 		}
 		// Initialize dashed separator lines
-		StringBuffer sb = new StringBuffer();
-        sb.append("-".repeat(80));
-		DEFAULT_FLAG_COMMENT = sb.toString();
+        DEFAULT_FLAG_COMMENT = "-".repeat(80);
 
 	}
 
@@ -653,7 +651,7 @@ public class PostCommentFieldFactory extends FieldFactory {
 			Address ref = pcodeOverride.getOverridingReference(type);
 			if (ref != null) {
 				return new OverrideCommentData(ref, callOtherName, hasMultipleCallOthers,
-					outputWarningString);
+                        outputWarningString);
 			}
 			return null;
 		}
@@ -667,11 +665,11 @@ public class PostCommentFieldFactory extends FieldFactory {
 			return null;
 		}
 		return new OverrideCommentData(ref, callOtherName, hasMultipleCallOthers,
-			outputWarningString);
+                outputWarningString);
 
 	}
 
-	private class OverrideCommentData {
+	private static class OverrideCommentData {
 		private Address overridingRef;
 		private String overriddenCallOther;
 		private boolean hasMultipleCallOthers;

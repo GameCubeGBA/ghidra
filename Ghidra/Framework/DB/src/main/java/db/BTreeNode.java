@@ -22,7 +22,7 @@ import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
 /**
- * <code>BTreeNode</code> defines a common interface for all types
+ * {@code BTreeNode} defines a common interface for all types
  * of BTree nodes.
  */
 interface BTreeNode {

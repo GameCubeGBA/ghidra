@@ -120,7 +120,7 @@ public class TLSDirectory implements StructConverter {
     }
 
 	/**
-	 * @return the address of an array of <code>PIMAGE_TLS_CALLBACK</code> function pointers
+	 * @return the address of an array of {@code PIMAGE_TLS_CALLBACK} function pointers
 	 */
     public long getAddressOfCallBacks() {
         return addressOfCallBacks;

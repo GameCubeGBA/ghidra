@@ -76,7 +76,7 @@ public class AskDialog<T> extends DialogComponentProvider {
 		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
 		label = new GDLabel(message);
-		panel.add(label, BorderLayout.WEST);
+		panel.add(label, BorderLayout.LINE_START);
 
 		if (choices == null) {
 			textField = new JTextField(20);
@@ -115,12 +115,11 @@ public class AskDialog<T> extends DialogComponentProvider {
 			bounds.y = location.y;
 		}
 
-		StringBuffer buffer = new StringBuffer();
-		buffer.append(bounds.x).append(":");
-		buffer.append(bounds.y).append(":");
-		buffer.append(bounds.width).append(":");
-		buffer.append(bounds.height).append(":");
-		Preferences.setProperty("Ask Dialog Bounds", buffer.toString());
+        String buffer = bounds.x + ":" +
+                bounds.y + ":" +
+                bounds.width + ":" +
+                bounds.height + ":";
+		Preferences.setProperty("Ask Dialog Bounds", buffer);
 	}
 
 	@SuppressWarnings("unchecked")  // the type must be correct, as the values were passed in

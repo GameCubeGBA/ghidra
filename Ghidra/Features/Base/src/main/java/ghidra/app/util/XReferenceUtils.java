@@ -36,13 +36,13 @@ public class XReferenceUtils {
     private static final int ALL_REFS = -1;
 
 	/**
-	 * Returns an array containing the first <b><code>max</code></b>
+	 * Returns an array containing the first <b>{@code max}</b>
 	 * direct xref references to the specified code unit.
 	 * 
 	 * @param cu the code unit to generate the xrefs
 	 * @param max max number of xrefs to get, or -1 to get all references
 	 * 
-	 * @return array first <b><code>max</code></b> xrefs to the code unit
+	 * @return array first <b>{@code max}</b> xrefs to the code unit
 	 */
     public static final List<Reference> getXReferences(CodeUnit cu, int max) {
 		Program program = cu.getProgram();

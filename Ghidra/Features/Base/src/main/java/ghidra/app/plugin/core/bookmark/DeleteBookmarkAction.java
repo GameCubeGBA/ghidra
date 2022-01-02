@@ -25,7 +25,7 @@ import docking.action.DockingAction;
 import docking.action.MenuData;
 
 /**
- * <CODE>DeleteFunctionAction</CODE> allows the user to delete a function at
+ * {@code DeleteFunctionAction} allows the user to delete a function at
  * the entry point of the function.
  */
 class DeleteBookmarkAction extends DockingAction {

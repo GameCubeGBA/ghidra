@@ -139,7 +139,7 @@ public class OptionsPanel extends JPanel {
 		restoreDefaultPanel.setLayout(new BorderLayout());
 
 		if (showRestoreDefaultsButton) {
-			restoreDefaultPanel.add(createRestoreDefaultsButton(), BorderLayout.EAST);
+			restoreDefaultPanel.add(createRestoreDefaultsButton(), BorderLayout.LINE_END);
 		}
 	}
 
@@ -264,7 +264,7 @@ public class OptionsPanel extends JPanel {
 
 		JPanel labelPanel = new JPanel();
 		labelPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 0, 0));
-		BoxLayout bl = new BoxLayout(labelPanel, BoxLayout.X_AXIS);
+		BoxLayout bl = new BoxLayout(labelPanel, BoxLayout.LINE_AXIS);
 		labelPanel.setLayout(bl);
 		labelPanel.add(Box.createHorizontalStrut(5));
 		labelPanel.add(new GIconLabel(ResourceManager.loadImage("images/information.png")));
@@ -299,7 +299,7 @@ public class OptionsPanel extends JPanel {
 		optionsEditorContainer.removeAll();
 		optionsEditorContainer.add(editorComponent, BorderLayout.CENTER);
 
-		optionsEditorContainer.add(restoreDefaultPanel, BorderLayout.SOUTH);
+		optionsEditorContainer.add(restoreDefaultPanel, BorderLayout.PAGE_END);
 
 		setViewPanel(optionsEditorContainer, selectedNode);
 	}
@@ -390,7 +390,7 @@ public class OptionsPanel extends JPanel {
 // Inner Classes
 //==================================================================================================	
 
-	public class OptionsDataTransformer extends DefaultGTreeDataTransformer {
+	public static class OptionsDataTransformer extends DefaultGTreeDataTransformer {
 		@Override
 		public List<String> transform(GTreeNode node) {
 			List<String> results = super.transform(node);

@@ -129,8 +129,8 @@ public abstract class DataLoadingConstraintEditor<T> extends AbstractColumnConst
 
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.add(viewPanel, BorderLayout.CENTER);
-		panel.add(buttonPanel, BorderLayout.EAST);
-		panel.add(statusLabel, BorderLayout.SOUTH);
+		panel.add(buttonPanel, BorderLayout.LINE_END);
+		panel.add(statusLabel, BorderLayout.PAGE_END);
 		return panel;
 	}
 

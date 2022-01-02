@@ -76,7 +76,7 @@ public class SampleTableProvider extends ComponentProviderAdapter implements Opt
 		JPanel panel = new JPanel(new BorderLayout());
 
 		panel.add(buildTablePanel(), BorderLayout.CENTER);
-		panel.add(buildControlPanel(), BorderLayout.NORTH);
+		panel.add(buildControlPanel(), BorderLayout.PAGE_START);
 
 		return panel;
 	}
@@ -85,7 +85,7 @@ public class SampleTableProvider extends ComponentProviderAdapter implements Opt
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
-		panel.add(buildAlgorithmsPanel(), BorderLayout.WEST);
+		panel.add(buildAlgorithmsPanel(), BorderLayout.LINE_START);
 		panel.add(buildButtonsPanel(), BorderLayout.CENTER); // run button
 
 		return panel;
@@ -119,7 +119,7 @@ public class SampleTableProvider extends ComponentProviderAdapter implements Opt
 		JPanel runButtonPanel = new JPanel(new MiddleLayout());
 		runButtonPanel.add(runButton);
 
-		buttonPanel.add(fileChooserPanel, BorderLayout.NORTH);
+		buttonPanel.add(fileChooserPanel, BorderLayout.PAGE_START);
 		buttonPanel.add(runButtonPanel, BorderLayout.CENTER);
 		return buttonPanel;
 	}

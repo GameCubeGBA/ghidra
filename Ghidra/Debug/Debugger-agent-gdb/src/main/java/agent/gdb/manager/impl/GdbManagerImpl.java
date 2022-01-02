@@ -152,7 +152,7 @@ public class GdbManagerImpl implements GdbManager {
 		}
 	}
 
-	class PtyInfoDialogThread extends Thread {
+	static class PtyInfoDialogThread extends Thread {
 		private final JOptionPane pane;
 		private final JDialog dialog;
 		final CompletableFuture<Integer> result = new CompletableFuture<>();
@@ -1549,7 +1549,8 @@ public class GdbManagerImpl implements GdbManager {
 	/**
 	 * An interface for taking lines of input
 	 */
-	public interface LineReader {
+	@FunctionalInterface
+    public interface LineReader {
 		String readLine(String prompt) throws IOException;
 	}
 

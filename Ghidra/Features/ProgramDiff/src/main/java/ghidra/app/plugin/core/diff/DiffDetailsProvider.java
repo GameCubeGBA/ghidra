@@ -289,13 +289,13 @@ public class DiffDetailsProvider extends ComponentProviderAdapter {
 		createAutoUpdateCheckBox();
 		createFilterDiffsCheckBox();
 		JPanel bottomPanel = new JPanel();
-		bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.X_AXIS));
+		bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.LINE_AXIS));
 		bottomPanel.add(Box.createHorizontalGlue());
 		bottomPanel.add(autoUpdateCB);
 		bottomPanel.add(Box.createHorizontalStrut(10));
 		bottomPanel.add(filterDiffsCB);
 		bottomPanel.add(Box.createHorizontalGlue());
-		panel.add(bottomPanel, BorderLayout.SOUTH);
+		panel.add(bottomPanel, BorderLayout.PAGE_END);
 		return panel;
 	}
 

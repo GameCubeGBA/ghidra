@@ -86,7 +86,7 @@ class SymbolPanel extends JPanel {
 		}
 
 		add(threadedTablePanel, BorderLayout.CENTER);
-		add(createFilterFieldPanel(), BorderLayout.SOUTH);
+		add(createFilterFieldPanel(), BorderLayout.PAGE_END);
 
 		filterDialog = new FilterDialog(tool);
 	}

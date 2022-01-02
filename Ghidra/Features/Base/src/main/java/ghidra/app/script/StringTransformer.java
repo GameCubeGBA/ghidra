@@ -15,6 +15,7 @@
  */
 package ghidra.app.script;
 
+@FunctionalInterface
 public interface StringTransformer<T> {
 	T apply(String s);
 }

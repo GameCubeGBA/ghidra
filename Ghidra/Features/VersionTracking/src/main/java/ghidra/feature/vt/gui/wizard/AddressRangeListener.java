@@ -18,6 +18,7 @@ package ghidra.feature.vt.gui.wizard;
 
 import ghidra.program.model.address.Address;
 
+@FunctionalInterface
 public interface AddressRangeListener {
 
 	void processAddressRange(Address minAddress, Address maxAddress);

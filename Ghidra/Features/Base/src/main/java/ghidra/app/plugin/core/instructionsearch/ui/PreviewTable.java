@@ -485,10 +485,9 @@ public class PreviewTable extends AbstractInstructionTable {
 						String comment = searchData.getInstructions().get(selectedRow).getTextRep();
 
 						if (comment != null) {
-							StringBuilder builder = new StringBuilder();
-							builder.append(val).append("\t").append("// ").append(comment).append(
-								"\n");
-							val = new StringBuilder(builder.toString());
+                            String builder = val + "\t" + "// " + comment +
+                                    "\n";
+							val = new StringBuilder(builder);
 						}
 					}
 

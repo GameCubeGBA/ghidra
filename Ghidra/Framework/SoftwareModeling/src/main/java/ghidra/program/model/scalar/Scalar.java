@@ -149,7 +149,7 @@ public class Scalar implements Comparable<Scalar> {
 	/**
 	 * <p>Returns a byte array representing this Scalar.  The size of
 	 * the byte array is the number of bytes required to hold the
-	 * number of bits returned by <CODE>bitLength()</CODE>.</p>
+	 * number of bits returned by {@code bitLength()}.</p>
 	 *
 	 * @return a big-endian byte array containing the bits in this Scalar.
 	 */
@@ -215,8 +215,8 @@ public class Scalar implements Comparable<Scalar> {
 	}
 
 	/**
-	 * <p>Adds the integer n to <code>this</code>.
-	 * Computes (<code>this = this + n</code>).
+	 * <p>Adds the integer n to {@code this}.
+	 * Computes ({@code this = this + n}).
 	 * @param n the value to add to this scalars value to produce a new scalar.
 	 */
 	public Scalar add(long n) {
@@ -280,7 +280,7 @@ public class Scalar implements Comparable<Scalar> {
 	}
 
 	/**
-	 * <p>Sets <code>this = this &lt;&lt; n</code>.</p>
+	 * <p>Sets {@code this = this << n}.</p>
 	 * @param n the number of bits to shift left.
 	 * @throws ArithmeticException if n &lt; 0.
 	 */
@@ -292,7 +292,7 @@ public class Scalar implements Comparable<Scalar> {
 	}
 
 	/**
-	 * <p>Sets <code>this = this &gt;&gt; n</code> using 0 as the fill bit.</p>
+	 * <p>Sets {@code this = this >> n} using 0 as the fill bit.</p>
 	 * @param n the number of bits to shift right.
 	 * @throws ArithmeticException if n &lt; 0.
 	 */
@@ -304,7 +304,7 @@ public class Scalar implements Comparable<Scalar> {
 	}
 
 	/**
-	 * <p>Sets <code>this = this &gt;&gt; n</code> replicating the sign bit.</p>
+	 * <p>Sets {@code this = this >> n} replicating the sign bit.</p>
 	 * @param n the number of bits to arithmetically shift.
 	 * @throws ArithmeticException if n &lt; 0.
 	 */
@@ -316,7 +316,7 @@ public class Scalar implements Comparable<Scalar> {
 	}
 
 	/**
-	 * <p>Sets <code>this = this - n</code>.</p>
+	 * <p>Sets {@code this = this - n}.</p>
 	 * @param n the value to subtract from this scalar to produce a new scalar.
 	 */
 	public Scalar subtract(long n) {

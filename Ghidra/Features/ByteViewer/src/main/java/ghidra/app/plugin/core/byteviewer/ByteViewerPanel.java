@@ -815,7 +815,7 @@ public class ByteViewerPanel extends JPanel
 
 		statusPanel = createStatusPanel();
 		add(scrollp, BorderLayout.CENTER);
-		add(statusPanel, BorderLayout.SOUTH);
+		add(statusPanel, BorderLayout.PAGE_END);
 
 		HelpService help = Help.getHelpService();
 		help.registerHelp(this, new HelpLocation("ByteViewerPlugin", "ByteViewerPlugin"));
@@ -870,7 +870,7 @@ public class ByteViewerPanel extends JPanel
 		JPanel[] panels = { p1, p2, p3, p4 };
 
 		JPanel panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+		panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
 		panel.add(Box.createHorizontalStrut(10));
 		for (JPanel element : panels) {
 			panel.add(element);

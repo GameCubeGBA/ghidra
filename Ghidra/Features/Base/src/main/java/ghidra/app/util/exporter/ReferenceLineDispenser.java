@@ -160,15 +160,14 @@ class ReferenceLineDispenser extends AbstractLineDispenser {
 
 		if (displayRefHeader) {
 			if (refs.length > 0 || offcuts.length > 0) {
-				StringBuffer tmp = new StringBuffer();
-				tmp.append(header);
-				tmp.append("[");
-				tmp.append(refs.length);
-				tmp.append(",");
-				tmp.append(offcuts.length);
-				tmp.append("]: ");
+                String tmp = header +
+                        "[" +
+                        refs.length +
+                        "," +
+                        offcuts.length +
+                        "]: ";
 
-				buf.append(clip(tmp.toString(), headerWidth));
+				buf.append(clip(tmp, headerWidth));
 			}
 		}
 

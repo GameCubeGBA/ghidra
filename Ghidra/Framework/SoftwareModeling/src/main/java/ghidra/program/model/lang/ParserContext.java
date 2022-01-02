@@ -17,9 +17,10 @@
 package ghidra.program.model.lang;
 
 /**
- * <code>ParserContext</code> represents a language provider specific parser context
+ * {@code ParserContext} represents a language provider specific parser context
  * which may be cached.
  */
+@FunctionalInterface
 public interface ParserContext {
 
 	InstructionPrototype getPrototype();

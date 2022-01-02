@@ -15,6 +15,7 @@
  */
 package agent.lldb.manager;
 
+@FunctionalInterface
 public interface LldbReason {
 
 	/**

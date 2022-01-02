@@ -21,6 +21,7 @@ import ghidra.util.task.TaskMonitor;
 /**
  * An interface to unify the different methods for searching memory.
  */
+@FunctionalInterface
 public interface MemorySearchAlgorithm {
 
 	/**

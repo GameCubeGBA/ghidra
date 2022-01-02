@@ -32,9 +32,9 @@ import javax.swing.border.TitledBorder;
  * A panel with a component-containing border. Use a checkbox as the component, for example, 
  * to control the enablement of child widgets.
  * <p> 
- *  Users should modify the contents of this panel via the JPanel from <code>getContentPane()</code> 
- *  -- <code>add()</code> and <code>remove()</code> methods have been overridden to modify the 
- *  content pane; other calls to this panel should <code>getContentPane()</code> first.
+ *  Users should modify the contents of this panel via the JPanel from {@code getContentPane()}
+ *  -- {@code add()} and <code>remove()</code> methods have been overridden to modify the
+ *  content pane; other calls to this panel should {@code getContentPane()} first.
  *  <p>
  *  Example:
  *  <pre>
@@ -60,7 +60,7 @@ public class InlineComponentTitledPanel extends JPanel {
 	private InlineComponentTitledBorder border;
 
 	/**
-	 * Create a panel with <code>titleComponent</code> in the top, left corner
+	 * Create a panel with {@code titleComponent} in the top, left corner
 	 * @param titleComponent widget to draw in the border
 	 */
 	public InlineComponentTitledPanel(JComponent titleComponent) {
@@ -68,7 +68,7 @@ public class InlineComponentTitledPanel extends JPanel {
 	}
 
 	/**
-	 * Create a panel with <code>titleComponent</code> in the top, left corner
+	 * Create a panel with {@code titleComponent} in the top, left corner
 	 * @param titleComponent widget to draw in the border
 	 * @param otherBorder secondary border to place around this panel
 	 */
@@ -77,7 +77,7 @@ public class InlineComponentTitledPanel extends JPanel {
 	}
 
 	/**
-	 * Create a panel with <code>titleComponent</code> in the prescribed location
+	 * Create a panel with {@code titleComponent} in the prescribed location
 	 * @param titleComponent widget to draw in the border
 	 * @param titleJustification top-bottom alignment
 	 * @param titlePosition left-right alignment
@@ -89,7 +89,7 @@ public class InlineComponentTitledPanel extends JPanel {
 	}
 
 	/**
-	 * Create a panel with <code>titleComponent</code> in the prescribed location with a secondary
+	 * Create a panel with {@code titleComponent} in the prescribed location with a secondary
 	 *  border
 	 * @param titleComponent widget to draw in the border
 	 * @param titleJustification top-bottom alignment

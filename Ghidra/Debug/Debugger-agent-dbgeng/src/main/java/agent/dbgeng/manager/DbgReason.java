@@ -15,6 +15,7 @@
  */
 package agent.dbgeng.manager;
 
+@FunctionalInterface
 public interface DbgReason {
 
 	/**

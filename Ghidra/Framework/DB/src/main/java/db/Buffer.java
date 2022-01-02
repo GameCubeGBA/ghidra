@@ -18,7 +18,7 @@ package db;
 import java.io.IOException;
 
 /**
- * <code>Buffer</code> provides a general purpose storage buffer interface
+ * {@code Buffer} provides a general purpose storage buffer interface
  * providing various data access methods.
  */
 public interface Buffer {

@@ -21,7 +21,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 /**
- * <code>DataFileItem</code> corresponds to a private serialized
+ * {@code DataFileItem} corresponds to a private serialized
  * data file within a FileSystem.  Methods are provided for opening
  * the underlying file as an input or output stream.
  * <br>

@@ -101,9 +101,7 @@ public class EquateSymbol extends HighSymbol {
 		if (convert != 0) {
 			String formString = "hex";
 			switch (convert) {
-			case FORMAT_HEX:
-				break;
-			case FORMAT_DEC:
+                case FORMAT_DEC:
 				formString = "dec";
 				break;
 			case FORMAT_OCT:

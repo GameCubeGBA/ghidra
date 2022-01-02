@@ -180,18 +180,17 @@ public class MarkupItemStorageDB extends DatabaseObject implements MarkupItemSto
 	@Override
 	public String toString() {
 		//@formatter:off
-		StringBuffer buffy = new StringBuffer();
-		buffy.append('\n').append(getClass().getSimpleName()).append('\n');
-		buffy.append('\t').append("Source Address          = ").append(getSourceAddress()).append('\n');
-		buffy.append('\t').append("Dest Address            = ").append(getDestinationAddress()).append('\n');
-		buffy.append('\t').append("Markup Class            = ").append(getMarkupType()).append('\n');
-		buffy.append('\t').append("Status                  = ").append(getStatus()).append('\n');
-		buffy.append('\t').append("Source Value            = ").append(getSourceValue()).append('\n');
-		buffy.append('\t').append("Dest Value              = ").append(getDestinationValue()).append('\n');
-		buffy.append('\t').append("Association             = ").append(association).append('\n');
-		buffy.append('\t').append("Algorithm               = ").append(getDestinationAddressSource()).append('\n');
+        String buffy = '\n' + getClass().getSimpleName() + '\n' +
+                '\t' + "Source Address          = " + getSourceAddress() + '\n' +
+                '\t' + "Dest Address            = " + getDestinationAddress() + '\n' +
+                '\t' + "Markup Class            = " + getMarkupType() + '\n' +
+                '\t' + "Status                  = " + getStatus() + '\n' +
+                '\t' + "Source Value            = " + getSourceValue() + '\n' +
+                '\t' + "Dest Value              = " + getDestinationValue() + '\n' +
+                '\t' + "Association             = " + association + '\n' +
+                '\t' + "Algorithm               = " + getDestinationAddressSource() + '\n';
 		//@formatter:on
-		return buffy.toString();
+		return buffy;
 	}
 
 }

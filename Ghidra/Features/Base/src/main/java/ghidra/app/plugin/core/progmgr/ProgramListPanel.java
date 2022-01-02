@@ -133,7 +133,7 @@ class ProgramListPanel extends JPanel {
 		sp.setBorder(BorderFactory.createEmptyBorder());
 
 		JPanel northPanel = new JPanel();
-		northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.Y_AXIS));
+		northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.PAGE_AXIS));
 
 		filterField = createFilterField();
 		northPanel.add(filterField);
@@ -142,7 +142,7 @@ class ProgramListPanel extends JPanel {
 		northPanel.add(separator);
 		northPanel.setBackground(BACKGROUND_COLOR);
 
-		add(northPanel, BorderLayout.NORTH);
+		add(northPanel, BorderLayout.PAGE_START);
 		add(programList, BorderLayout.CENTER);
 
 		// add some padding around the panel

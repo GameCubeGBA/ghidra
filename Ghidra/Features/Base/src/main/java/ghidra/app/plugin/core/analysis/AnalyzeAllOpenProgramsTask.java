@@ -376,7 +376,7 @@ class AnalyzeAllOpenProgramsTask extends Task {
 		}
 	}
 
-	private class BottomUpCancelledListener implements CancelledListener {
+	private static class BottomUpCancelledListener implements CancelledListener {
 
 		private TaskMonitor outerMonitor;
 
@@ -470,7 +470,7 @@ class AnalyzeAllOpenProgramsTask extends Task {
 		}
 	}
 
-	private class ScrollingOptionDialog extends OptionDialog {
+	private static class ScrollingOptionDialog extends OptionDialog {
 
 		public ScrollingOptionDialog(String message) {
 			super("Found Differing Architectures", message, "Continue",

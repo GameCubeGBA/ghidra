@@ -81,8 +81,8 @@ public class Cie extends GccAnalysisClass {
 
 	/**
 	 * Creates a common information entry object that is not in the debug frame section.
-	 * <p>Note: The <code>create(Address)</code> method must be called after constructing a 
-	 * <code>Cie</code> to associate it with an address before any of its "process..." methods are called.
+	 * <p>Note: The {@code create(Address)} method must be called after constructing a
+	 * {@code Cie} to associate it with an address before any of its "process..." methods are called.
 	 * 
 	 * @param monitor task monitor to see if the user has cancelled analysis.
 	 * @param program the program containing the CIE.
@@ -93,8 +93,8 @@ public class Cie extends GccAnalysisClass {
 
 	/**
 	 * Creates a common information entry object.
-	 * <p>Note: The <code>create(Address)</code> method must be called after constructing a 
-	 * <code>Cie</code> to associate it with an address before any of its "process..." methods are called.
+	 * <p>Note: The {@code create(Address)} method must be called after constructing a
+	 * {@code Cie} to associate it with an address before any of its "process..." methods are called.
 	 * 
 	 * @param monitor task monitor to see if the user has cancelled analysis.
 	 * @param program the program containing the CIE.
@@ -460,7 +460,7 @@ public class Cie extends GccAnalysisClass {
 	}
 
 	/**
-	 * Creates a Common Information Entry (CIE) at <code>cieAddress</code>. 
+	 * Creates a Common Information Entry (CIE) at {@code cieAddress}.
 	 * <br>Note: This method must get called before any of the "get..." methods.
 	 * 
 	 * @param cieAddress the address where the CIE should be created.

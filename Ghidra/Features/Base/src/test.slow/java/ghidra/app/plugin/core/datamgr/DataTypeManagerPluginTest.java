@@ -1256,7 +1256,7 @@ public class DataTypeManagerPluginTest extends AbstractGhidraHeadedIntegrationTe
 		waitForTree(tree);
 	}
 
-	private class SpyAction extends AbstractAction {
+	private static class SpyAction extends AbstractAction {
 
 		private Action defaultAction;
 		private AtomicBoolean actionFired = new AtomicBoolean();

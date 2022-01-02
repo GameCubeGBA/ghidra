@@ -49,7 +49,7 @@ import ghidra.util.HelpLocation;
 import resources.ResourceManager;
 
 /**
- * <CODE>NextPrevAddressPlugin</CODE> allows the user to go back and forth in
+ * {@code NextPrevAddressPlugin} allows the user to go back and forth in
  * the history list and to clear it
  */
 //@formatter:off

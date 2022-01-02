@@ -1167,7 +1167,7 @@ public class GTreeTest extends AbstractDockingTest {
 // Inner Classes
 //==================================================================================================
 
-	private class TestGTree extends GTree {
+	private static class TestGTree extends GTree {
 
 		public TestGTree(GTreeNode root) {
 			super(root);
@@ -1364,7 +1364,7 @@ public class GTreeTest extends AbstractDockingTest {
 		}
 	}
 
-	private class LeafDisplayNode extends LeafNode {
+	private static class LeafDisplayNode extends LeafNode {
 
 		private String displayName;
 

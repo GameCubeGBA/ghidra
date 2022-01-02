@@ -69,7 +69,7 @@ public class LSDAHeader extends GccAnalysisClass {
 
 	/**
 	 * Constructor for the LSDA header which indicates encoding for the LSDA tables.
-	 * <br>Note: The <code>create(Address)</code> method must be called after constructing an 
+	 * <br>Note: The {@code create(Address)} method must be called after constructing an
 	 * LSDAHeader to associate it with an address before any of its "get..." methods are called.
 	 * @param monitor task monitor to see if the user has cancelled analysis.
 	 * @param program the program containing this header.
@@ -196,7 +196,7 @@ public class LSDAHeader extends GccAnalysisClass {
 	}
 
 	/**
-	 * Create a LSDA Header from the bytes at <code>addr</code>.
+	 * Create a LSDA Header from the bytes at {@code addr}.
 	 * <br>Note: This method must get called before any of the "get..." methods.
 	 * @param addr the start (minimum address) of this LSDA header.
 	 * @throws MemoryAccessException if memory for the header couldn't be read.
@@ -327,7 +327,7 @@ public class LSDAHeader extends GccAnalysisClass {
 	/**
 	 * Gets the base address of the type table. The base address is the last byte (maximum address) 
 	 * of the type table. The type table is ordered in reverse.
-	 * @return the type table's base address or <code>Address.NO_ADDRESS</code>
+	 * @return the type table's base address or {@code Address.NO_ADDRESS}
 	 */
 	public Address getTTypeBaseAddress() {
 		return ttypeAddr;

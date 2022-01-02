@@ -20,6 +20,7 @@ import docking.widgets.fieldpanel.internal.FieldPanelCoordinator;
 /**
  * Action context for a CodeComparisonPanel.
  */
+@FunctionalInterface
 public interface CodeComparisonPanelActionContext {
 
 	/**

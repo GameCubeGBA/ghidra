@@ -28,7 +28,7 @@ import ghidra.program.model.listing.Program;
  * Implementors of this interface should probably be registered in {@link DWARFSectionProviderFactory}
  * so they can be auto-detected when queried and also need to implement the static method:
  * <p>
- * <code>public static DWARFSectionProvider createSectionProviderFor(Program program)</code>
+ * {@code public static DWARFSectionProvider createSectionProviderFor(Program program)}
  * <p>
  */
 public interface DWARFSectionProvider extends Closeable {

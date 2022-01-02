@@ -87,9 +87,7 @@ public abstract class HTMLDataTypeRepresentation {
 	protected static final Color DIFF_COLOR = ValidatableLine.INVALID_COLOR;
 
 	private static String createSpace(int numberOfSpaces) {
-		StringBuilder buffer = new StringBuilder();
-        buffer.append(HTML_SPACE.repeat(Math.max(0, numberOfSpaces)));
-		return buffer.toString();
+        return HTML_SPACE.repeat(Math.max(0, numberOfSpaces));
 	}
 
 	protected static StringBuilder addDataTypeLength(String dataTypeLengthString,

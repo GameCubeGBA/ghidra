@@ -37,7 +37,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import ghidra.util.Msg;
 
 /**
- * <code>ApplicationKeyStore</code> provides the ability to read X.509 certificates and 
+ * {@code ApplicationKeyStore} provides the ability to read X.509 certificates and
  * keystores in various formats. Certificate files (e.g., cacerts) may be in a standard
  * X.509 form (*.pem, *.crt, *.cer, *.der) or Java JKS (*.jks) form, while keystores 
  * for client/server may be in a PKCS12 form (*.p12, *.pks, *.pfx) or Java JKS (*.jks) form.

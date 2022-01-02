@@ -68,7 +68,7 @@ public class ExpiringSwingTimer extends GhidraSwingTimer {
 	 * <p>Note: this class sets the parent's initial delay to 0.  This is to allow the client 
 	 * code to be executed without delay when the ready condition is true.
 	 * 
-	 * @param delay the delay between calls to check <code>isReady</code>
+	 * @param delay the delay between calls to check {@code isReady}
 	 * @param isReady true if the code should be run
 	 * @param expireMs the amount of time past which the code will not be run
 	 * @param runnable the code to run

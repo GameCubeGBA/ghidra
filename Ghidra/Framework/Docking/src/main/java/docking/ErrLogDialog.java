@@ -104,36 +104,35 @@ public class ErrLogDialog extends AbstractErrDialog {
 	}
 
 	private String addUsefulReportingInfo(String details) {
-		StringBuilder sb = new StringBuilder(details);
-		sb.append(EOL);
-		sb.append(SEPARATOR_LINE);
-		sb.append(EOL);
-		sb.append("Build Date: ");
-		sb.append(Application.getBuildDate());
-		sb.append(EOL);
-		sb.append(Application.getName());
-		sb.append(" Version: ");
-		sb.append(Application.getApplicationVersion());
-		sb.append(EOL);
-		sb.append("Java Home: ");
-		sb.append(System.getProperty("java.home"));
-		sb.append(EOL);
-		sb.append("JVM Version: ");
-		sb.append(System.getProperty("java.vendor"));
-		sb.append(" ");
-		sb.append(System.getProperty("java.version"));
-		sb.append(EOL);
-		sb.append("OS: ");
-		sb.append(System.getProperty("os.name"));
-		sb.append(" ");
-		sb.append(System.getProperty("os.version"));
-		sb.append(" ");
-		sb.append(System.getProperty("os.arch"));
-		sb.append(EOL);
-		sb.append("Workstation: ");
-		sb.append(getHostname());
-		sb.append(EOL);
-		return sb.toString();
+        String sb = details + EOL +
+                SEPARATOR_LINE +
+                EOL +
+                "Build Date: " +
+                Application.getBuildDate() +
+                EOL +
+                Application.getName() +
+                " Version: " +
+                Application.getApplicationVersion() +
+                EOL +
+                "Java Home: " +
+                System.getProperty("java.home") +
+                EOL +
+                "JVM Version: " +
+                System.getProperty("java.vendor") +
+                " " +
+                System.getProperty("java.version") +
+                EOL +
+                "OS: " +
+                System.getProperty("os.name") +
+                " " +
+                System.getProperty("os.version") +
+                " " +
+                System.getProperty("os.arch") +
+                EOL +
+                "Workstation: " +
+                getHostname() +
+                EOL;
+		return sb;
 	}
 
 	private Object getHostname() {
@@ -161,7 +160,7 @@ public class ErrLogDialog extends AbstractErrDialog {
 		JPanel introPanel = new JPanel(new BorderLayout(10, 10));
 		introPanel.add(
 			new GIconLabel(UIManager.getIcon("OptionPane.errorIcon"), SwingConstants.RIGHT),
-			BorderLayout.WEST);
+                BorderLayout.LINE_START);
 		String html = HTMLUtilities.toHTML(message);
 		introPanel.add(new GHtmlLabel(html) {
 			@Override
@@ -174,7 +173,7 @@ public class ErrLogDialog extends AbstractErrDialog {
 		}, BorderLayout.CENTER);
 
 		mainPanel = new JPanel(new BorderLayout(10, 20));
-		mainPanel.add(introPanel, BorderLayout.NORTH);
+		mainPanel.add(introPanel, BorderLayout.PAGE_START);
 
 		sendButton = new JButton(SEND);
 		sendButton.addActionListener(e -> sendDetails());
@@ -194,7 +193,7 @@ public class ErrLogDialog extends AbstractErrDialog {
 		}
 		buttonPanel.add(detailsButton);
 
-		introPanel.add(buttonPanel, BorderLayout.EAST);
+		introPanel.add(buttonPanel, BorderLayout.LINE_END);
 		mainPanel.add(detailsPane, BorderLayout.CENTER);
 
 		addWorkPanel(mainPanel);
@@ -358,7 +357,7 @@ public class ErrLogDialog extends AbstractErrDialog {
 
 			JPanel tablePanel = new JPanel(new BorderLayout());
 			tablePanel.add(new JScrollPane(errorsTable), BorderLayout.CENTER);
-			tablePanel.add(tableFilterPanel, BorderLayout.SOUTH);
+			tablePanel.add(tableFilterPanel, BorderLayout.PAGE_END);
 
 			add(tablePanel, BorderLayout.CENTER);
 

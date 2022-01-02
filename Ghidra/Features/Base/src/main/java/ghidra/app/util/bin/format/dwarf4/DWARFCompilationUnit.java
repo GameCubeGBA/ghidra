@@ -306,14 +306,12 @@ public class DWARFCompilationUnit {
 
 	@Override
 	public String toString() {
-		StringBuilder buffer = new StringBuilder();
-		buffer.append("Compilation Unit");
-		buffer.append(" [Start:0x" + Long.toHexString(this.startOffset) + "]");
-		buffer.append(" [Length:0x" + Long.toHexString(this.length) + "]");
-		buffer.append(" [AbbreviationOffset:0x" + Long.toHexString(this.abbreviationOffset) + "]");
-		buffer.append(
-			" [CompileUnit: " + (compUnit != null ? compUnit.toString() : "not present") + "]");
-		return buffer.toString();
+        String buffer = "Compilation Unit" +
+                " [Start:0x" + Long.toHexString(this.startOffset) + "]" +
+                " [Length:0x" + Long.toHexString(this.length) + "]" +
+                " [AbbreviationOffset:0x" + Long.toHexString(this.abbreviationOffset) + "]" +
+                " [CompileUnit: " + (compUnit != null ? compUnit.toString() : "not present") + "]";
+		return buffer;
 	}
 
 	public Map<Integer, DWARFAbbreviation> getCodeToAbbreviationMap() {

@@ -28,6 +28,7 @@ import agent.dbgmodel.jna.dbgmodel.datamodel.script.debug.IDataModelScriptDebugB
 import agent.dbgmodel.jna.dbgmodel.datamodel.script.debug.WrapIDataModelScriptDebugBreakpointEnumerator;
 import ghidra.util.datastruct.WeakValueHashMap;
 
+@FunctionalInterface
 public interface DataModelScriptDebugBreakpointEnumeratorInternal
 		extends DataModelScriptDebugBreakpointEnumerator {
 	Map<Pointer, DataModelScriptDebugBreakpointEnumeratorInternal> CACHE = new WeakValueHashMap<>();

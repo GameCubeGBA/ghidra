@@ -24,7 +24,7 @@ import ghidra.program.model.symbol.SourceType;
 import ghidra.program.util.ProgramSelection;
 
 /**
- * <CODE>CreateMultipleFunctionsAction</CODE> allows the user to create functions from the 
+ * {@code CreateMultipleFunctionsAction} allows the user to create functions from the
  * selection in the browser. This tries to create functions by working from the minimum address 
  * to the maximum address in the selection. Any addresses in the selection that are already in 
  * existing functions are discarded. Every time a function is created, all the other addresses 

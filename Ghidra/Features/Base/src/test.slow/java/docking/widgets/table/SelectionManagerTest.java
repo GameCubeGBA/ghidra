@@ -608,7 +608,7 @@ public class SelectionManagerTest extends AbstractGhidraHeadedIntegrationTest {
 // Inner Classes
 //==================================================================================================
 
-	private class StringRowObject {
+	private static class StringRowObject {
 		private final String[] data;
 
 		StringRowObject(String[] data) {

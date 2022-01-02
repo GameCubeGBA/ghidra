@@ -23,6 +23,7 @@ import ghidra.framework.plugintool.PluginEvent;
  *  Listener that is notified when an event is generated.
  *
  */
+@FunctionalInterface
 public interface PluginEventListener {
 	/**
 	 * Notification that the given plugin event was sent.

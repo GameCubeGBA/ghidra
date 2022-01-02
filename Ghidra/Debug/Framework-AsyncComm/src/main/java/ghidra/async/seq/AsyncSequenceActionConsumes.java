@@ -29,6 +29,7 @@ import ghidra.async.TypeSpec;
  * @param <R> the type of result of the whole sequence
  * @param <T> the type of temporary consumed, i.e., produced by the previous action
  */
+@FunctionalInterface
 public interface AsyncSequenceActionConsumes<R, T>
 		extends BiConsumer<T, AsyncSequenceHandlerForRunner<R>> {
 	// Nothing

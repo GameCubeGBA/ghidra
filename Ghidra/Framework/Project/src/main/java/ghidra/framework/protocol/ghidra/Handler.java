@@ -31,8 +31,8 @@ import ghidra.util.classfinder.ClassSearcher;
 import ghidra.util.exception.NotFoundException;
 
 /**
- * <code>Handler</code> provides a "ghidra" URL protocol handler which
- * corresponds to the <code>GhidraURLConnection</code> implementation.
+ * {@code Handler} provides a "ghidra" URL protocol handler which
+ * corresponds to the {@code GhidraURLConnection} implementation.
  */
 public class Handler extends URLStreamHandler {
 
@@ -47,7 +47,7 @@ public class Handler extends URLStreamHandler {
 	 * <pre>
 	 *   URL url = new URL(null, "ghidra://myGhidraServer/Test", new ghidra.framework.protocol.ghidra.Handler());
 	 * </pre>
-	 * It is also important that a <code>ClientAuthenticator</code> also be registered.
+	 * It is also important that a {@code ClientAuthenticator} also be registered.
 	 * @see ClientUtil#setClientAuthenticator(ghidra.framework.client.ClientAuthenticator)
 	 */
 	public static void registerHandler() {

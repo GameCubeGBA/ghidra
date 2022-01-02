@@ -133,7 +133,7 @@ public class DataTypeSelectionEditor extends AbstractCellEditor {
 		browseButton.addActionListener(e -> showDataTypeBrowser());
 
 		editorPanel = new JPanel();
-		editorPanel.setLayout(new BoxLayout(editorPanel, BoxLayout.X_AXIS));
+		editorPanel.setLayout(new BoxLayout(editorPanel, BoxLayout.LINE_AXIS));
 		editorPanel.add(selectionField);
 		editorPanel.add(Box.createHorizontalStrut(5));
 		editorPanel.add(browseButton);

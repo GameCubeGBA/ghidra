@@ -27,8 +27,8 @@ import javax.net.ssl.SSLSocketFactory;
 import ghidra.util.Msg;
 
 /**
- * <code>ApplicationSSLSocketFactory</code> provides a replacement for the default
- * <code>SSLSocketFactory</code> which utilizes the default SSLContext established
+ * {@code ApplicationSSLSocketFactory} provides a replacement for the default
+ * {@code SSLSocketFactory} which utilizes the default SSLContext established
  * by {@link SSLContextInitializer}.
  */
 public class ApplicationSSLSocketFactory extends SSLSocketFactory {

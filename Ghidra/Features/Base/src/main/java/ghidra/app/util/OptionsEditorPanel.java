@@ -86,7 +86,7 @@ public class OptionsEditorPanel extends JPanel {
 			JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
 			buttonPanel.add(buildSelectAll(list));
 			buttonPanel.add(buildDeselectAll(list));
-			wrapperPanel.add(buttonPanel, BorderLayout.SOUTH);
+			wrapperPanel.add(buttonPanel, BorderLayout.PAGE_END);
 			Border etchedBorder = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
 			Border marginBorder = BorderFactory.createEmptyBorder(10, 0, 10, 10);
 			panel.setBorder(BorderFactory.createCompoundBorder(etchedBorder, marginBorder));
@@ -230,8 +230,8 @@ public class OptionsEditorPanel extends JPanel {
 			option.setValue(b);
 			button.setEnabled(b);
 		});
-		panel.add(jCheckBox, BorderLayout.WEST);
-		panel.add(button, BorderLayout.EAST);
+		panel.add(jCheckBox, BorderLayout.LINE_START);
+		panel.add(button, BorderLayout.LINE_END);
 		return panel;
 	}
 

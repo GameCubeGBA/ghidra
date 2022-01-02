@@ -103,10 +103,9 @@ public class ArrayDataTypeHTMLRepresentation extends HTMLDataTypeRepresentation 
 	}
 
 	private ValidatableLine buildHeaderContent() {
-		StringBuilder buffy = new StringBuilder();
-		buffy.append(FORWARD_SLASH).append(FORWARD_SLASH).append(HTML_SPACE);
-		buffy.append(HTMLUtilities.friendlyEncodeHTML(array.getName()));
-		return new TextLine(buffy.toString());
+        String buffy = FORWARD_SLASH + FORWARD_SLASH + HTML_SPACE +
+                HTMLUtilities.friendlyEncodeHTML(array.getName());
+		return new TextLine(buffy);
 	}
 
 	private ValidatableLine buildFooterContent() {

@@ -24,8 +24,8 @@ import ghidra.util.NumericUtilities;
 import ghidra.util.exception.DuplicateNameException;
 
 /**
- * A class to represent the <code>WIN_CERTIFICATE</code>
- * struct as defined in <b><code>winbase.h</code></b>.
+ * A class to represent the {@code WIN_CERTIFICATE}
+ * struct as defined in <b>{@code winbase.h}</b>.
  * <p>
  * This structure encapsulates a signature used in verifying executables.
  * <p>

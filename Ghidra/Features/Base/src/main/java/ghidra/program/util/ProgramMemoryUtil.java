@@ -33,7 +33,7 @@ import ghidra.util.task.TaskMonitorAdapter;
 import utility.function.TerminatingConsumer; 
 
 /**
- * <CODE>ProgramMemoryUtil</CODE> contains some static methods for 
+ * {@code ProgramMemoryUtil} contains some static methods for
  * checking Memory block data.
  */
 

@@ -71,7 +71,7 @@ public abstract class AbstractCreateDataTypeModel {
 
 	/**
 	 * Constructor for the abstract create data type model. This constructor expects
-	 * to create <code>count</code> number of data types at the indicated address in the program.
+	 * to create {@code count} number of data types at the indicated address in the program.
 	 * If more than one data type is being created, they will be in an array data type.
 	 * @param program the program where the data type would be created.
 	 * @param count the number of data types to create.

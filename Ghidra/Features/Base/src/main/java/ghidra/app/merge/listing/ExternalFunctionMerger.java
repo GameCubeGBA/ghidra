@@ -323,7 +323,7 @@ protected static final int EXTERNAL_SYMBOL_TYPE = 0x010;
 	}
 
 	private void initializeConflictSets() {
-		AddressFactory myAddressFactory = programs[MY].getAddressFactory();
+//		AddressFactory myAddressFactory = programs[MY].getAddressFactory();
 //		AddressFactory originalAddressFactory = programs[ORIGINAL].getAddressFactory();
 
 		externalDataTypeConflicts = new AddressSet();
@@ -1390,7 +1390,7 @@ protected static final int EXTERNAL_SYMBOL_TYPE = 0x010;
 	}
 
 	/**
-	 * <CODE>replaceExternalDataType</CODE> replaces the data type of the
+	 * {@code replaceExternalDataType} replaces the data type of the
 	 * external label in program1 with the data type of the external label in program2
 	 * at the specified external space address.
 	 * @param resultExternalLocation
@@ -1606,8 +1606,8 @@ protected static final int EXTERNAL_SYMBOL_TYPE = 0x010;
 		externalLocations[ORIGINAL] = null;
 		externalLocations[RESULT] = externalManagers[RESULT].getExternalLocation(resultSymbol);
 
-		String latestName = getExternalName(externalLocations, LATEST, true);
-		String myName = getExternalName(externalLocations, MY, true);
+		String latestName = getExternalName(externalLocations, LATEST);
+		String myName = getExternalName(externalLocations, MY);
 		boolean latestIsFunction = externalLocations[LATEST].isFunction();
 		boolean myIsFunction = externalLocations[MY].isFunction();
 		Address latestAddress = externalLocations[LATEST].getAddress();
@@ -1653,7 +1653,7 @@ protected static final int EXTERNAL_SYMBOL_TYPE = 0x010;
 			DataType myDataType = getResultDataType(myExternalLocation);
 			boolean myDataTypeIsDefined = hasDefinedDataType(myExternalLocation);
 			Address myAddress = myExternalLocation.getAddress();
-			String myOriginalName = myExternalLocation.getOriginalImportedName();
+//			String myOriginalName = myExternalLocation.getOriginalImportedName();
 //			SourceType mySourceType = myExternalLocation.getSource();
 			Function myFunction = myExternalLocation.getFunction();
 			boolean myExternalIsFunction = (myFunction != null);
@@ -2732,10 +2732,10 @@ protected static final int EXTERNAL_SYMBOL_TYPE = 0x010;
 			panel.setTitle("External Add");
 			StringBuffer buf = new StringBuffer();
 			buf.append(LATEST_TITLE + " external '");
-			String latestName = getExternalName(externalLocations, LATEST, true);
+			String latestName = getExternalName(externalLocations, LATEST);
 			buf.append(ConflictUtility.getEmphasizeString(latestName));
 			buf.append("' and " + MY_TITLE + " external '");
-			String myName = getExternalName(externalLocations, MY, true);
+			String myName = getExternalName(externalLocations, MY);
 			buf.append(ConflictUtility.getEmphasizeString(myName));
 			buf.append("' were added,<br>but are possibly intended to be the same external.");
 			buf.append(HTMLUtilities.spaces(2));
@@ -2766,11 +2766,10 @@ protected static final int EXTERNAL_SYMBOL_TYPE = 0x010;
 
 		runSwing(() -> {
 			panel.setTitle("External Remove");
-			StringBuffer buf = new StringBuffer();
-			buf.append("One external was removed and the other changed for ");
-			buf.append(getExternalName(externalLocations, ORIGINAL, true));
-			buf.append(".");
-			panel.setHeader(buf.toString());
+            String buf = "One external was removed and the other changed for " +
+                    getExternalName(externalLocations, ORIGINAL) +
+                    ".";
+			panel.setHeader(buf);
 			ChangeListener changeListener =
 				new ExternalRemoveConflictChangeListener(externalLocations, panel, monitor);
 			panel.setRowHeader(header);
@@ -2922,12 +2921,12 @@ protected static final int EXTERNAL_SYMBOL_TYPE = 0x010;
 			if (removeString != null) {
 				buf.append("External data type was removed in " + removeString +
 					" and changed in " + changeString + " /nfor ");
-				buf.append(getExternalName(externalLocations, ORIGINAL, true));
+				buf.append(getExternalName(externalLocations, ORIGINAL));
 				buf.append(".");
 			}
 			else {
 				buf.append(LATEST_TITLE + " and " + MY_TITLE + " both changed data type \nfor ");
-				buf.append(getExternalName(externalLocations, ORIGINAL, true));
+				buf.append(getExternalName(externalLocations, ORIGINAL));
 				buf.append(".");
 			}
 			panel.setHeader(buf.toString());
@@ -3150,8 +3149,7 @@ protected static final int EXTERNAL_SYMBOL_TYPE = 0x010;
 		}
 	}
 
-	private String getExternalName(final ExternalLocation[] externalLocations, int programVersion,
-			boolean includeNamespace) {
+	private String getExternalName(final ExternalLocation[] externalLocations, int programVersion) {
 		Symbol symbol = null;
 		switch (programVersion) {
 			case LATEST:
@@ -3180,7 +3178,7 @@ protected static final int EXTERNAL_SYMBOL_TYPE = 0x010;
 				break;
 		}
 		if (symbol != null) {
-			return symbol.getName(includeNamespace);
+			return symbol.getName(true);
 		}
 		return "Unknown"; // ???
 	}
@@ -3192,12 +3190,12 @@ protected static final int EXTERNAL_SYMBOL_TYPE = 0x010;
 		switch (choice) {
 			case KEEP_LATEST_ADD:
 				// RESULT already has LATEST so no external to add.
-				adjustIDMapsForReplace(externalLocations, LATEST);
+				adjustIDMapsForReplace(externalLocations);
 				break;
 			case KEEP_MY_ADD:
 				// Replace RESULT with MY external.
 				merge(externalLocations, KEEP_MY, monitor);
-				adjustIDMapsForReplace(externalLocations, MY);
+				adjustIDMapsForReplace(externalLocations);
 				break;
 			case KEEP_BOTH_ADDS:
 				// Add MY external giving it a new name if necessary.
@@ -3209,7 +3207,7 @@ protected static final int EXTERNAL_SYMBOL_TYPE = 0x010;
 			case MERGE_BOTH_ADDS:
 				// Merge LATEST and MY into the RESULT external.
 				mergeLatestAndMyForAddConflict(externalLocations, monitor);
-				adjustIDMapsForReplace(externalLocations, RESULT);
+				adjustIDMapsForReplace(externalLocations);
 				break;
 			default:
 				String message =
@@ -3739,7 +3737,7 @@ protected static final int EXTERNAL_SYMBOL_TYPE = 0x010;
 			ExternalLocation resultExternalLocation = replaceExternalLocation(
 				externalLocations[RESULT], externalLocations[LATEST], mergeLatest, monitor);
 			externalLocations[RESULT] = resultExternalLocation;
-			adjustIDMapsForReplace(externalLocations, LATEST);
+			adjustIDMapsForReplace(externalLocations);
 		}
 	}
 
@@ -3764,7 +3762,7 @@ protected static final int EXTERNAL_SYMBOL_TYPE = 0x010;
 			ExternalLocation resultExternalLocation = replaceExternalLocation(
 				externalLocations[RESULT], externalLocations[MY], mergeMy, monitor);
 			externalLocations[RESULT] = resultExternalLocation;
-			adjustIDMapsForReplace(externalLocations, MY);
+			adjustIDMapsForReplace(externalLocations);
 		}
 	}
 
@@ -3799,7 +3797,7 @@ protected static final int EXTERNAL_SYMBOL_TYPE = 0x010;
 				replaceExternalLocation(externalLocations[RESULT], externalLocations[ORIGINAL],
                         mergeOriginal, monitor);
 			externalLocations[RESULT] = resultExternalLocation;
-			adjustIDMapsForReplace(externalLocations, ORIGINAL);
+			adjustIDMapsForReplace(externalLocations);
 		}
 	}
 
@@ -3920,7 +3918,7 @@ protected static final int EXTERNAL_SYMBOL_TYPE = 0x010;
 		}
 	}
 
-	private void adjustIDMapsForReplace(ExternalLocation[] externalLocations, int chosenExternal) {
+	private void adjustIDMapsForReplace(ExternalLocation[] externalLocations) {
 
 		long resultID =
 			(externalLocations[RESULT] != null) ? externalLocations[RESULT].getSymbol().getID()

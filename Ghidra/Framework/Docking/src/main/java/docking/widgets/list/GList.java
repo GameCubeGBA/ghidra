@@ -43,16 +43,16 @@ public class GList<T> extends JList<T> implements GComponent {
 	private AutoLookup autoLookup = createAutoLookup();
 
 	/**
-	 * Constructs a <code>GhidraList</code> with an empty model.
+	 * Constructs a {@code GhidraList} with an empty model.
 	 */
 	public GList() {
         init();
 	}
 
 	/**
-	 * Constructs a <code>GhidraList</code> that displays the elements in
+	 * Constructs a {@code GhidraList} that displays the elements in
 	 * the specified array.  This constructor just delegates to the
-	 * <code>ListModel</code> constructor.
+	 * {@code ListModel} constructor.
 	 * @param  listData  the array of Objects to be loaded into the data model
 	 */
 	public GList(T[] listData) {
@@ -61,10 +61,10 @@ public class GList<T> extends JList<T> implements GComponent {
 	}
 
 	/**
-	 * Constructs a <code>GhidraList</code> that displays the elements in
-	 * the specified <code>Vector</code>.  This constructor just
-	 * delegates to the <code>ListModel</code> constructor.
-	 * @param  listData  the <code>Vector</code> to be loaded into the data model
+	 * Constructs a {@code GhidraList} that displays the elements in
+	 * the specified {@code Vector}.  This constructor just
+	 * delegates to the {@code ListModel} constructor.
+	 * @param  listData  the {@code Vector} to be loaded into the data model
 	 */
 	public GList(Vector<T> listData) {
 		super(listData);
@@ -72,11 +72,11 @@ public class GList<T> extends JList<T> implements GComponent {
 	}
 
 	/**
-	 * Constructs a <code>GhidraList</code> that displays the elements in the
-	 * specified, non-<code>null</code> model. 
-	 * All <code>GhidraList</code> constructors delegate to this one.
+	 * Constructs a {@code GhidraList} that displays the elements in the
+	 * specified, non-{@code null} model.
+	 * All {@code GhidraList} constructors delegate to this one.
 	 * @param dataModel   the data model for this list
-	 * @exception IllegalArgumentException   if <code>dataModel</code> is <code>null</code>
+	 * @exception IllegalArgumentException   if {@code dataModel} is <code>null</code>
 	 */
 	public GList(ListModel<T> dataModel) {
 		super(dataModel);

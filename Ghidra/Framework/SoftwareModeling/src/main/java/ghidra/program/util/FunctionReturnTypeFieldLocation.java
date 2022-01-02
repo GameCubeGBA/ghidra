@@ -24,7 +24,7 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 
 /**
- * The <CODE>FunctionReturnTypeFieldLocation</CODE> class provides specific information
+ * The {@code FunctionReturnTypeFieldLocation} class provides specific information
  * about the Function Return Type field within a program location.
  */
 public class FunctionReturnTypeFieldLocation extends FunctionSignatureFieldLocation {

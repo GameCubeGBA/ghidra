@@ -70,7 +70,7 @@ public class BookmarkProvider extends ComponentProviderAdapter {
 
 		panel = new JPanel(new BorderLayout());
 		panel.add(threadedTablePanel, BorderLayout.CENTER);
-		panel.add(createFilterFieldPanel(), BorderLayout.SOUTH);
+		panel.add(createFilterFieldPanel(), BorderLayout.PAGE_END);
 
 		adjustTableColumns();
 

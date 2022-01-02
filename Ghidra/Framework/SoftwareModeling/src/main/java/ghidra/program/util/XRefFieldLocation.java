@@ -21,7 +21,7 @@ import ghidra.program.model.address.Address;
 import ghidra.program.model.listing.Program;
 
 /**
- * The <CODE>XRefFieldLocation</CODE> class contains specific location information
+ * The {@code XRefFieldLocation} class contains specific location information
  * within the XREF field of a CodeUnitLocation object.
  */
 public class XRefFieldLocation extends CodeUnitLocation {

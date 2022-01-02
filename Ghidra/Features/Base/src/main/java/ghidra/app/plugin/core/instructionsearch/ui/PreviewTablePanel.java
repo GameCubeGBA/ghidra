@@ -66,7 +66,7 @@ public class PreviewTablePanel extends JPanel {
 		scrollPane = new JScrollPane(previewTable);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-		add(previewTable.getToolbar(), BorderLayout.NORTH);
+		add(previewTable.getToolbar(), BorderLayout.PAGE_START);
 		add(scrollPane, BorderLayout.CENTER);
 	}
 

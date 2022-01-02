@@ -28,6 +28,7 @@ import ghidra.async.TypeSpec;
  * 
  * @param <R> the type produced by the whole sequence
  */
+@FunctionalInterface
 public interface AsyncSequenceActionRuns<R> extends Consumer<AsyncSequenceHandlerForRunner<R>> {
 	// Nothing
 }

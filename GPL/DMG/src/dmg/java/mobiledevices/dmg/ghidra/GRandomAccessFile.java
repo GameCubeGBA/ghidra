@@ -123,8 +123,8 @@ public class GRandomAccessFile {
 	 *                   beginning of the file, at which to set the file 
 	 *                   pointer.
 	 * @throws IOException 
-	 * @exception  IOException  if <code>pos</code> is less than 
-	 *                          <code>0</code> or if an I/O error occurs.
+	 * @exception  IOException  if {@code pos} is less than
+	 *                          {@code 0} or if an I/O error occurs.
 	 */
 	public void seek(long pos) throws IOException {
 		checkOpen();
@@ -153,7 +153,7 @@ public class GRandomAccessFile {
 	 * is detected, or an exception is thrown. 
 	 *
 	 * @return     the next byte of this file as a signed eight-bit
-	 *             <code>byte</code>.
+	 *             {@code byte}.
 	 * @exception  EOFException  if this file has reached the end.
 	 * @exception  IOException   if an I/O error occurs.
 	 */
@@ -164,13 +164,13 @@ public class GRandomAccessFile {
 	}
 
 	/**
-	 * Reads up to <code>b.length</code> bytes of data from this file 
+	 * Reads up to {@code b.length} bytes of data from this file
 	 * into an array of bytes. This method blocks until at least one byte 
 	 * of input is available. 
 	 *
 	 * @param      b   the buffer into which the data is read.
 	 * @return     the total number of bytes read into the buffer, or
-	 *             <code>-1</code> if there is no more data because the end of
+	 *             {@code -1} if there is no more data because the end of
 	 *             this file has been reached.
 	 * @exception  IOException  if an I/O error occurs.
 	 */
@@ -180,7 +180,7 @@ public class GRandomAccessFile {
 	}
 
 	/**
-	 * Reads up to <code>len</code> bytes of data from this file into an 
+	 * Reads up to {@code len} bytes of data from this file into an
 	 * array of bytes. This method blocks until at least one byte of input 
 	 * is available.
 	 * 
@@ -188,7 +188,7 @@ public class GRandomAccessFile {
 	 * @param      off   the start offset of the data.
 	 * @param      len   the maximum number of bytes read.
 	 * @return     the total number of bytes read into the buffer, or
-	 *             <code>-1</code> if there is no more data because the end of
+	 *             {@code -1} if there is no more data because the end of
 	 *             the file has been reached.
 	 * @exception  IOException  if an I/O error occurs.
 	 */
@@ -226,7 +226,7 @@ public class GRandomAccessFile {
 	}
 
 	/**
-	 * Writes <code>b.length</code> bytes from the specified byte array 
+	 * Writes {@code b.length} bytes from the specified byte array
 	 * to this file, starting at the current file pointer. 
 	 * @param      b   the data.
 	 * @exception  IOException  if an I/O error occurs.

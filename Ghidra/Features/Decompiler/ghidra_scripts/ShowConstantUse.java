@@ -348,7 +348,7 @@ public class ShowConstantUse extends GhidraScript {
 
 	// Object that gathers the constant used locations within the program
 	//
-	class ConstUseLocation implements AddressableRowObject {
+    static class ConstUseLocation implements AddressableRowObject {
 		private Program program;
 		private Address addr;
 		private Long constVal;
@@ -503,7 +503,7 @@ public class ShowConstantUse extends GhidraScript {
 	// These contains fields that are part of the back-tracking process if a
 	// variable is traced
 	// to the parameter of function, this is an entry for that location
-	public class FunctionParamUse {
+	public static class FunctionParamUse {
 		String name;
 		Address addr;
 		Integer paramIndex;
@@ -609,7 +609,7 @@ public class ShowConstantUse extends GhidraScript {
 			return constUse;
 		}
 		funcList.add(new FunctionParamUse(f.getName(), f.getEntryPoint(), paramIndex, pvnode,
-			new ArrayList<PcodeOp>()));
+                new ArrayList<PcodeOp>()));
 
 		addConstants(tableChooserDialog, constUse);
 
@@ -794,7 +794,7 @@ public class ShowConstantUse extends GhidraScript {
 			HighVariable hvar = vnode.getHigh();
 			if (hvar instanceof HighParam) {
 				funcList.add(new FunctionParamUse(function.getName(), function.getEntryPoint(),
-					((HighParam) hvar).getSlot(), hvar.getRepresentative(), defUseList));
+                        ((HighParam) hvar).getSlot(), hvar.getRepresentative(), defUseList));
 				return;
 			}
 			if (hvar instanceof HighGlobal) {
@@ -859,7 +859,8 @@ public class ShowConstantUse extends GhidraScript {
 					doneSet);
 				return;
 			case PcodeOp.INT_ZEXT:
-				followToParam(constUse, defUseList, highFunction, def.getInput(0), funcList,
+            case PcodeOp.CAST:
+                followToParam(constUse, defUseList, highFunction, def.getInput(0), funcList,
 					doneSet);
 				return;
 			case PcodeOp.MULTIEQUAL:
@@ -870,11 +871,7 @@ public class ShowConstantUse extends GhidraScript {
 				followToParam(constUse, splitUseList, highFunction, def.getInput(1), funcList,
 					doneSet);
 				return;
-			case PcodeOp.CAST:
-				followToParam(constUse, defUseList, highFunction, def.getInput(0), funcList,
-					doneSet);
-				return;
-			case PcodeOp.INDIRECT:
+            case PcodeOp.INDIRECT:
 				Varnode output = def.getOutput();
 				if (output.getAddress().equals(def.getInput(0).getAddress())) {
 					followToParam(constUse, defUseList, highFunction, def.getInput(0), funcList,

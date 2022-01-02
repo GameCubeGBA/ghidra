@@ -18,6 +18,7 @@ package ghidra.feature.vt.gui.plugin;
 
 import ghidra.feature.vt.api.main.VTMatch;
 
+@FunctionalInterface
 public interface VTSubToolManagerListener {
 
 	void setSelectedMatch(VTMatch match);

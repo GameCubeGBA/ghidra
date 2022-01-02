@@ -141,7 +141,7 @@ public class TableComponentProvider<T> extends ComponentProviderAdapter
 		}
 
 		panel.add(threadedPanel, BorderLayout.CENTER);
-		panel.add(createFilterFieldPanel(table, tableModel), BorderLayout.SOUTH);
+		panel.add(createFilterFieldPanel(table, tableModel), BorderLayout.PAGE_END);
 
 		return panel;
 	}

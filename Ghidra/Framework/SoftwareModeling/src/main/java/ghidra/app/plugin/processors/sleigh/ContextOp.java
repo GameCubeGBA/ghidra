@@ -78,15 +78,14 @@ public class ContextOp implements ContextChange {
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("ctx&");
-        sb.append("SS:SS:SS:SS:".repeat(Math.max(0, num)));
-		sb.append(NumericUtilities.convertMaskToHexString(mask, 8, false, 2, ":"));
-		sb.append(" := ");
-		sb.append(patexp);
-		sb.append("( << ");
-		sb.append(shift);
-		sb.append(")");
-		return sb.toString();
+        String sb = "ctx&" +
+                "SS:SS:SS:SS:".repeat(Math.max(0, num)) +
+                NumericUtilities.convertMaskToHexString(mask, 8, false, 2, ":") +
+                " := " +
+                patexp +
+                "( << " +
+                shift +
+                ")";
+		return sb;
 	}
 }
