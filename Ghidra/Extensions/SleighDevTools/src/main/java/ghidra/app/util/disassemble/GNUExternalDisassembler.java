@@ -523,7 +523,7 @@ public class GNUExternalDisassembler implements ExternalDisassembler {
 				thisByteString = thisByteString.substring(thisByteString.length() - 2);
 			}
 			// append this byte's hex string to the larger word length string
-			byteString = byteString + thisByteString;
+			byteString += thisByteString;
 		}
 
 		return byteString;
