@@ -121,7 +121,7 @@ public class ScalarOperandAnalyzer extends AbstractAnalyzer {
                     Address addr = instr.getMinAddress().add(r);
                     RelocationTable relocTable = program.getRelocationTable();
                     Relocation reloc = relocTable.getRelocation(addr);
-                    if (reloc != null) {
+                    if (reloc != null && isValidRelocationAddress(program, addr)) {
                         try {
                             switch (scalar.bitLength()) {
                                 case 8:
