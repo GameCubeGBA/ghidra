@@ -166,7 +166,7 @@ class DataComponent extends DataDB {
 			return "[" + this.indexInParent + "]";
 		}
 		String myName = component.getFieldName();
-		if (myName == null || myName.length() == 0) {
+		if (myName == null || myName.isEmpty()) {
 			myName = component.getDefaultFieldName();
 		}
 		return myName;
@@ -192,7 +192,7 @@ class DataComponent extends DataDB {
 
 	private String getComponentName(String parentPath) {
 		StringBuilder stringBuffer = new StringBuilder();
-		if (parentPath != null && parentPath.length() > 0) {
+		if (parentPath != null && !parentPath.isEmpty()) {
 			stringBuffer.append(parentPath);
 			if (component != null) { // not an array?
 				stringBuffer.append('.');
@@ -226,7 +226,7 @@ class DataComponent extends DataDB {
 	 */
 	@Override
 	public int getRootOffset() {
-		return parent.getRootOffset() + getParentOffset();
+		return parent.getRootOffset() + offset;
 	}
 
 	/**

@@ -33,12 +33,12 @@ import java.util.List;
  */
 public class RelocValueGroup extends Relocation {
 
-	public final static int kPEFRelocBySectC = 0;
-	public final static int kPEFRelocBySectD = 1;
-	public final static int kPEFRelocTVector12 = 2;
-	public final static int kPEFRelocTVector8 = 3;
-	public final static int kPEFRelocVTable8 = 4;
-	public final static int kPEFRelocImportRun = 5;
+	public static final int kPEFRelocBySectC = 0;
+	public static final int kPEFRelocBySectD = 1;
+	public static final int kPEFRelocTVector12 = 2;
+	public static final int kPEFRelocTVector8 = 3;
+	public static final int kPEFRelocVTable8 = 4;
+	public static final int kPEFRelocImportRun = 5;
 
 	private int subopcode;
 	private int runLength;

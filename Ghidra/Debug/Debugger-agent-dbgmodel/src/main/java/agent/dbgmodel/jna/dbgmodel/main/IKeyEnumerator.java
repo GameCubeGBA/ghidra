@@ -24,7 +24,7 @@ import agent.dbgmodel.jna.dbgmodel.IUnknownEx;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IKeyEnumerator extends IUnknownEx {
-	final IID IID_IKEY_ENUMERATOR = new IID("345FA92E-5E00-4319-9CAE-971F7601CDCF");
+	IID IID_IKEY_ENUMERATOR = new IID("345FA92E-5E00-4319-9CAE-971F7601CDCF");
 
 	enum VTIndices implements VTableIndex {
 		RESET, //

@@ -36,7 +36,7 @@ public interface GoToService {
 	 * Characters that are allowed in words that the GoToService can use. These
 	 * typically represent library name delimiters.
 	 */
-	public static final char[] VALID_GOTO_CHARS = new char[] { '.', ':', '*' };
+    char[] VALID_GOTO_CHARS = new char[] { '.', ':', '*' };
 
 	/**
 	 * Generates a GoTo event and handles any history state that needs to be saved.  This method
@@ -46,7 +46,7 @@ public interface GoToService {
 	 * @return true if the go to was successful
 	 * @see #goTo(ProgramLocation, Program)
 	 */
-	public boolean goTo(ProgramLocation loc);
+    boolean goTo(ProgramLocation loc);
 
 	/**
 	 * Generates a GoTo event and handles any history state that needs to be saved.  This 
@@ -61,12 +61,12 @@ public interface GoToService {
 	 * @return true if the go to was successful
 	 * @see #goTo(ProgramLocation)
 	 */
-	public boolean goTo(ProgramLocation loc, Program program);
+    boolean goTo(ProgramLocation loc, Program program);
 
-	public boolean goTo(Navigatable navigatable, ProgramLocation loc, Program program);
+	boolean goTo(Navigatable navigatable, ProgramLocation loc, Program program);
 
-	public boolean goTo(Navigatable navigatable, Program program, Address address,
-			Address refAddress);
+	boolean goTo(Navigatable navigatable, Program program, Address address,
+                 Address refAddress);
 
 	/**
 	 * Generates a GoTo event to the goToAddress or symbol.  The currentAddress is used to
@@ -75,9 +75,9 @@ public interface GoToService {
 	 * @param goToAddress the address to goto
 	 * @return true if the go to was successful
 	 */
-	public boolean goTo(Address currentAddress, Address goToAddress);
+    boolean goTo(Address currentAddress, Address goToAddress);
 
-	public boolean goTo(Navigatable navigatable, Address goToAddress);
+	boolean goTo(Navigatable navigatable, Address goToAddress);
 
 	/**
 	 * Generates a GoTo event to the gotoAddress.
@@ -85,7 +85,7 @@ public interface GoToService {
 	 * @return true if the go to was successful
 	 * @see #goTo(Address, Program)
 	 */
-	public boolean goTo(Address goToAddress);
+    boolean goTo(Address goToAddress);
 
 	/**
 	 * Generates a GoTo event to the gotoAddress.   This overloaded version of
@@ -100,7 +100,7 @@ public interface GoToService {
 	 * @return true if the go to was successful
 	 * @see #goTo(Address)
 	 */
-	public boolean goTo(Address goToAddress, Program program);
+    boolean goTo(Address goToAddress, Program program);
 
 	/**
 	 * Navigate to either the external program location or address linkage location.  
@@ -115,8 +115,8 @@ public interface GoToService {
 	 * @return true if either navigation to the external program or to a
 	 * linkage location was completed successfully.
 	 */
-	public boolean goToExternalLocation(ExternalLocation externalLoc,
-			boolean checkNavigationOption);
+    boolean goToExternalLocation(ExternalLocation externalLoc,
+                                 boolean checkNavigationOption);
 
 	/**
 	 * Navigate to either the external program location or address linkage location.  
@@ -132,8 +132,8 @@ public interface GoToService {
 	 * @return true if either navigation to the external program or to a
 	 * linkage location was completed successfully.
 	 */
-	public boolean goToExternalLocation(Navigatable navigatable, ExternalLocation externalLoc,
-			boolean checkNavigationOption);
+    boolean goToExternalLocation(Navigatable navigatable, ExternalLocation externalLoc,
+                                 boolean checkNavigationOption);
 
 	/**
 	 * Parses the input string as either: 
@@ -154,16 +154,16 @@ public interface GoToService {
 	 * @param monitor the task monitor
 	 * @return true if the queryInput is found or appears to be a wildcard search.
 	 */
-	public boolean goToQuery(Address fromAddr, QueryData queryData, GoToServiceListener listener,
-			TaskMonitor monitor);
+    boolean goToQuery(Address fromAddr, QueryData queryData, GoToServiceListener listener,
+                      TaskMonitor monitor);
 
-	public boolean goToQuery(Navigatable navigatable, Address fromAddr, QueryData queryData,
-			GoToServiceListener listener, TaskMonitor monitor);
+	boolean goToQuery(Navigatable navigatable, Address fromAddr, QueryData queryData,
+                      GoToServiceListener listener, TaskMonitor monitor);
 
-	public GoToOverrideService getOverrideService();
+	GoToOverrideService getOverrideService();
 
-	public void setOverrideService(GoToOverrideService override);
+	void setOverrideService(GoToOverrideService override);
 
-	public Navigatable getDefaultNavigatable();
+	Navigatable getDefaultNavigatable();
 
 }

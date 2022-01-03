@@ -386,11 +386,8 @@ public class AddressTableDialog extends DialogComponentProvider {
 	}
 
 	boolean getShiftedAddresses() {
-		if (shiftedAddressButton.isSelected()) {
-			return true;
-		}
-		return false;
-	}
+        return shiftedAddressButton.isSelected();
+    }
 
 	int getOffset() {
 		try {

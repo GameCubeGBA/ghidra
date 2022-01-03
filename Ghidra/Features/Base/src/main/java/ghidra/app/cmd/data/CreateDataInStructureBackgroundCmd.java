@@ -98,7 +98,7 @@ public class CreateDataInStructureBackgroundCmd extends BackgroundCommand {
 
 		DataType existingDT = startData.getDataType();
 		int startIndex = startData.getComponentIndex();
-		Data lastComp = parent.getComponentContaining(
+		Data lastComp = parent.getComponentAt(
 			(int) (startData.getMinAddress().subtract(parent.getMinAddress()) + length - 1));
 		int endIndex = lastComp.getComponentIndex();
 

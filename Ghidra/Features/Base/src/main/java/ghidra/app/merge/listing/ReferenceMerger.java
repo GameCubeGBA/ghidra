@@ -52,12 +52,12 @@ import ghidra.util.task.TaskMonitor;
  */
 class ReferenceMerger extends AbstractListingMerger {
 
-	final static String REFERENCES_PHASE = "References";
-	private final static int TYPE_CONFLICT = 1;
-	private final static int REMOVE_CONFLICT = 2;
-	private final static int CHANGE_CONFLICT = 3;
-	private final static int ADD_CONFLICT = 4;
-	private final static int PRIMARY_CONFLICT = 5;
+	static final String REFERENCES_PHASE = "References";
+	private static final int TYPE_CONFLICT = 1;
+	private static final int REMOVE_CONFLICT = 2;
+	private static final int CHANGE_CONFLICT = 3;
+	private static final int ADD_CONFLICT = 4;
+	private static final int PRIMARY_CONFLICT = 5;
 
 	VerticalChoicesPanel conflictPanel;
 	// currentAddress is declared in AbstractListingMerger
@@ -363,66 +363,59 @@ class ReferenceMerger extends AbstractListingMerger {
 	}
 
 	private void processOriginalRefs(Reference[] originalRefs) {
-		for (int origIndex = 0; origIndex < originalRefs.length; origIndex++) {
-			Reference originalRef = originalRefs[origIndex];
-			Reference myRef = DiffUtility.getReference(originalPgm, originalRef, myPgm);
-			Reference latestRef = DiffUtility.getReference(originalPgm, originalRef, latestPgm);
-			if (myRef == null) {
-				if (!diffOriginalLatest.equalRefs(originalRef, latestRef)) {
-					saveRemoveConflict(originalRef);
-				}
-				else {
-					// AutoMerge: Remove ref as in MY.
-					Reference resultRef =
-						DiffUtility.getReference(originalPgm, originalRef, resultPgm);
-					if (resultRef != null) {
-						resultRefMgr.delete(resultRef);
-					}
-				}
-			}
-			else if (latestRef == null) {
-				if (!diffOriginalMy.equalRefs(originalRef, myRef)) {
-					saveRemoveConflict(originalRef);
-				} // Otherwise should already be gone.
-			}
-			else {
-				if (diffLatestMy.equalRefs(latestRef, myRef)) {
-					continue;
-				}
-				boolean changedLatest = !diffOriginalLatest.equalRefs(originalRef, latestRef);
-				boolean changedMy = !diffOriginalMy.equalRefs(originalRef, myRef);
-				if (changedMy) {
-					if (changedLatest) {
-						saveChangeConflict(myRef);
-					}
-					else {
-						// AutoMerge: Change to MY ref
-						DiffUtility.createReference(myPgm, myRef, resultPgm);
-					}
-				}
-			}
-		}
+        for (Reference originalRef : originalRefs) {
+            Reference myRef = DiffUtility.getReference(originalPgm, originalRef, myPgm);
+            Reference latestRef = DiffUtility.getReference(originalPgm, originalRef, latestPgm);
+            if (myRef == null) {
+                if (!diffOriginalLatest.equalRefs(originalRef, latestRef)) {
+                    saveRemoveConflict(originalRef);
+                } else {
+                    // AutoMerge: Remove ref as in MY.
+                    Reference resultRef =
+                            DiffUtility.getReference(originalPgm, originalRef, resultPgm);
+                    if (resultRef != null) {
+                        resultRefMgr.delete(resultRef);
+                    }
+                }
+            } else if (latestRef == null) {
+                if (!diffOriginalMy.equalRefs(originalRef, myRef)) {
+                    saveRemoveConflict(originalRef);
+                } // Otherwise should already be gone.
+            } else {
+                if (diffLatestMy.equalRefs(latestRef, myRef)) {
+                    continue;
+                }
+                boolean changedLatest = !diffOriginalLatest.equalRefs(originalRef, latestRef);
+                boolean changedMy = !diffOriginalMy.equalRefs(originalRef, myRef);
+                if (changedMy) {
+                    if (changedLatest) {
+                        saveChangeConflict(myRef);
+                    } else {
+                        // AutoMerge: Change to MY ref
+                        DiffUtility.createReference(myPgm, myRef, resultPgm);
+                    }
+                }
+            }
+        }
 	}
 
 	private void processMyRefsAdded(Reference[] myRefs) {
 		// Check Adds which could result in an AddConflict or a type conflict.
-		for (int myIndex = 0; myIndex < myRefs.length; myIndex++) {
-			Reference myRef = myRefs[myIndex];
-			Reference originalRef = DiffUtility.getReference(myPgm, myRef, originalPgm);
-			if (originalRef == null) {
-				Reference latestRef = DiffUtility.getReference(myPgm, myRef, latestPgm);
-				if (latestRef == null) {
-					// AutoMerge: Add MY ref
-					DiffUtility.createReference(myPgm, myRef, resultPgm);
-				}
-				else {
-					if (diffLatestMy.equalRefs(latestRef, myRef)) {
-						continue;
-					}
-					saveAddConflict(myRef);
-				}
-			}
-		}
+        for (Reference myRef : myRefs) {
+            Reference originalRef = DiffUtility.getReference(myPgm, myRef, originalPgm);
+            if (originalRef == null) {
+                Reference latestRef = DiffUtility.getReference(myPgm, myRef, latestPgm);
+                if (latestRef == null) {
+                    // AutoMerge: Add MY ref
+                    DiffUtility.createReference(myPgm, myRef, resultPgm);
+                } else {
+                    if (diffLatestMy.equalRefs(latestRef, myRef)) {
+                        continue;
+                    }
+                    saveAddConflict(myRef);
+                }
+            }
+        }
 	}
 
 	/**
@@ -527,35 +520,35 @@ class ReferenceMerger extends AbstractListingMerger {
 	private boolean compatibleRefs(Reference ref1, Reference[] refs) {
 		Address toAddr = ref1.getToAddress();
 		if (toAddr.isMemoryAddress()) {
-			for (int i = 0; i < refs.length; i++) {
-				if (!refs[i].getToAddress().isMemoryAddress()) {
-					return false;
-				}
-			}
+            for (Reference ref : refs) {
+                if (!ref.getToAddress().isMemoryAddress()) {
+                    return false;
+                }
+            }
 			return true;
 		}
 		else if (toAddr.isExternalAddress()) {
-			for (int i = 0; i < refs.length; i++) {
-				if (!refs[i].getToAddress().isExternalAddress()) {
-					return false;
-				}
-			}
+            for (Reference ref : refs) {
+                if (!ref.getToAddress().isExternalAddress()) {
+                    return false;
+                }
+            }
 			return true;
 		}
 		if (toAddr.isRegisterAddress()) {
-			for (int i = 0; i < refs.length; i++) {
-				if (!refs[i].getToAddress().isRegisterAddress()) {
-					return false;
-				}
-			}
+            for (Reference ref : refs) {
+                if (!ref.getToAddress().isRegisterAddress()) {
+                    return false;
+                }
+            }
 			return true;
 		}
 		if (toAddr.isStackAddress()) {
-			for (int i = 0; i < refs.length; i++) {
-				if (!refs[i].getToAddress().isStackAddress()) {
-					return false;
-				}
-			}
+            for (Reference ref : refs) {
+                if (!ref.getToAddress().isStackAddress()) {
+                    return false;
+                }
+            }
 			return true;
 		}
 		return false;
@@ -700,7 +693,7 @@ class ReferenceMerger extends AbstractListingMerger {
 			int chosenConflictOption, boolean askUser, TaskMonitor monitor)
 			throws CancelledException {
 		ArrayList<Integer> opIndexList = typeConflicts.get(addr);
-		if (opIndexList == null || opIndexList.size() == 0) {
+		if (opIndexList == null || opIndexList.isEmpty()) {
 			return;
 		}
 		if (opIndexList.contains(Integer.valueOf(opIndex))) {
@@ -729,106 +722,97 @@ class ReferenceMerger extends AbstractListingMerger {
 			int chosenConflictOption, boolean askUser, TaskMonitor monitor)
 			throws CancelledException {
 		ArrayList<Reference> removeList = removeConflicts.get(addr);
-		if (removeList == null || removeList.size() == 0) {
+		if (removeList == null || removeList.isEmpty()) {
 			return;
 		}
 		currentAddress = addr;
 		currentOpIndex = opIndex;
 		currentBackgroundSet = new AddressSet(addr, addr);
 		currentConflictType = REMOVE_CONFLICT;
-		for (Iterator<Reference> iter = removeList.iterator(); iter.hasNext();) {
-			Reference removeRef = iter.next();
-			currentReference = removeRef;
-			if (currentReference.getOperandIndex() == opIndex) {
-				// If we have a reference choice then a "Use For All" has already occurred.
-				if (referenceChoice != ASK_USER) {
-					resolveRemoveVsChange(currentReference, referenceChoice);
-				}
-				else {
-					if (askUser && mergeManager != null) {
-						showConflictPanel(listingPanel, REMOVE_CONFLICT);
-						monitor.checkCanceled();
-					}
-					else {
-						resolveRemoveVsChange(currentReference, chosenConflictOption);
-					}
-				}
-			}
-		}
+        for (Reference removeRef : removeList) {
+            currentReference = removeRef;
+            if (currentReference.getOperandIndex() == opIndex) {
+                // If we have a reference choice then a "Use For All" has already occurred.
+                if (referenceChoice != ASK_USER) {
+                    resolveRemoveVsChange(currentReference, referenceChoice);
+                } else {
+                    if (askUser && mergeManager != null) {
+                        showConflictPanel(listingPanel, REMOVE_CONFLICT);
+                        monitor.checkCanceled();
+                    } else {
+                        resolveRemoveVsChange(currentReference, chosenConflictOption);
+                    }
+                }
+            }
+        }
 	}
 
 	private void handleChangeConflict(ListingMergePanel listingPanel, Address addr, int opIndex,
 			int chosenConflictOption, boolean askUser, TaskMonitor monitor)
 			throws CancelledException {
 		ArrayList<Reference> changeList = changeConflicts.get(addr);
-		if (changeList == null || changeList.size() == 0) {
+		if (changeList == null || changeList.isEmpty()) {
 			return;
 		}
 		currentAddress = addr;
 		currentOpIndex = opIndex;
 		currentBackgroundSet = new AddressSet(addr, addr);
 		currentConflictType = CHANGE_CONFLICT;
-		for (Iterator<Reference> iter = changeList.iterator(); iter.hasNext();) {
-			Reference changeRef = iter.next();
-			currentReference = changeRef;
-			if (currentReference.getOperandIndex() == opIndex) {
-				// If we have a reference choice then a "Use For All" has already occurred.
-				if (referenceChoice != ASK_USER) {
-					resolveChangeConflict(currentReference, referenceChoice);
-				}
-				else {
-					if (askUser && mergeManager != null) {
-						showConflictPanel(listingPanel, CHANGE_CONFLICT);
-						monitor.checkCanceled();
-					}
-					else {
-						resolveChangeConflict(currentReference, chosenConflictOption);
-					}
-				}
-			}
-		}
+        for (Reference changeRef : changeList) {
+            currentReference = changeRef;
+            if (currentReference.getOperandIndex() == opIndex) {
+                // If we have a reference choice then a "Use For All" has already occurred.
+                if (referenceChoice != ASK_USER) {
+                    resolveChangeConflict(currentReference, referenceChoice);
+                } else {
+                    if (askUser && mergeManager != null) {
+                        showConflictPanel(listingPanel, CHANGE_CONFLICT);
+                        monitor.checkCanceled();
+                    } else {
+                        resolveChangeConflict(currentReference, chosenConflictOption);
+                    }
+                }
+            }
+        }
 	}
 
 	private void handleAddConflict(ListingMergePanel listingPanel, Address addr, int opIndex,
 			int chosenConflictOption, boolean askUser, TaskMonitor monitor)
 			throws CancelledException {
 		ArrayList<Reference> addList = addConflicts.get(addr);
-		if (addList == null || addList.size() == 0) {
+		if (addList == null || addList.isEmpty()) {
 			return;
 		}
 		currentAddress = addr;
 		currentOpIndex = opIndex;
 		currentBackgroundSet = new AddressSet(addr, addr);
 		currentConflictType = ADD_CONFLICT;
-		for (Iterator<Reference> iter = addList.iterator(); iter.hasNext();) {
-			Reference changeRef = iter.next();
-			currentReference = changeRef;
-			if (currentReference.getReferenceType().isFallthrough()) {
-				continue; // Ignore fallthrough references.
-			}
-			if (currentReference.getOperandIndex() == opIndex) {
-				// If we have a reference choice then a "Use For All" has already occurred.
-				if (referenceChoice != ASK_USER) {
-					resolveAddConflict(currentReference, referenceChoice);
-				}
-				else {
-					if (askUser && mergeManager != null) {
-						showConflictPanel(listingPanel, ADD_CONFLICT);
-						monitor.checkCanceled();
-					}
-					else {
-						resolveAddConflict(currentReference, chosenConflictOption);
-					}
-				}
-			}
-		}
+        for (Reference changeRef : addList) {
+            currentReference = changeRef;
+            if (currentReference.getReferenceType().isFallthrough()) {
+                continue; // Ignore fallthrough references.
+            }
+            if (currentReference.getOperandIndex() == opIndex) {
+                // If we have a reference choice then a "Use For All" has already occurred.
+                if (referenceChoice != ASK_USER) {
+                    resolveAddConflict(currentReference, referenceChoice);
+                } else {
+                    if (askUser && mergeManager != null) {
+                        showConflictPanel(listingPanel, ADD_CONFLICT);
+                        monitor.checkCanceled();
+                    } else {
+                        resolveAddConflict(currentReference, chosenConflictOption);
+                    }
+                }
+            }
+        }
 	}
 
 	private void handlePrimaryConflict(ListingMergePanel listingPanel, Address addr, int opIndex,
 			int chosenConflictOption, boolean askUser, TaskMonitor monitor)
 			throws CancelledException {
 		ArrayList<Integer> opIndexList = primaryConflicts.get(addr);
-		if (opIndexList == null || opIndexList.size() == 0) {
+		if (opIndexList == null || opIndexList.isEmpty()) {
 			return;
 		}
 		if (opIndexList.contains(Integer.valueOf(opIndex))) {
@@ -866,9 +850,7 @@ class ReferenceMerger extends AbstractListingMerger {
 				DiffUtility.getReference(latestPgm, latestPrimary, resultPgm);
 			if (resultForLatest != null) {
 				Reference resultForMy = DiffUtility.getReference(myPgm, myPrimary, resultPgm);
-				if (resultForMy != null && resultForLatest != resultForMy) {
-					return true;
-				}
+                return resultForMy != null && resultForLatest != resultForMy;
 			}
 		}
 		return false;
@@ -1040,18 +1022,18 @@ class ReferenceMerger extends AbstractListingMerger {
 				((latestRefs.length == 1) ? "Use '" : "Use all in '"), suffix), LATEST_BUTTON_NAME,
 			KEEP_LATEST, listener);
 		if (latestRefs.length > 1) {
-			for (int i = 0; i < latestRefs.length; i++) {
-				panel.addInfoRow(getReferenceInfo(latestPgm, latestRefs[i], "'", suffix));
-			}
+            for (Reference latestRef : latestRefs) {
+                panel.addInfoRow(getReferenceInfo(latestPgm, latestRef, "'", suffix));
+            }
 		}
 		panel.addRadioButtonRow(
 			getReferenceInfo(myPgm, ((myRefs.length == 1) ? myRefs[0] : null),
 				((myRefs.length == 1) ? "Use '" : "Use all in '"), suffix),
 			CHECKED_OUT_BUTTON_NAME, KEEP_MY, listener);
 		if (myRefs.length > 1) {
-			for (int i = 0; i < myRefs.length; i++) {
-				panel.addInfoRow(getReferenceInfo(myPgm, myRefs[i], "'", suffix));
-			}
+            for (Reference myRef : myRefs) {
+                panel.addInfoRow(getReferenceInfo(myPgm, myRef, "'", suffix));
+            }
 		}
 		panel.addInfoRow(getReferenceInfo(originalPgm, ((originalRefs.length > 0) ? originalRefs[0]
 				: null), "'", suffix));

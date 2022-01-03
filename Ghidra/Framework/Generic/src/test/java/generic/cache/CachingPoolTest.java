@@ -37,8 +37,7 @@ public class CachingPoolTest extends AbstractGenericTest {
 	private CachingPool<TestItem> pool;
 
 	public CachingPoolTest() {
-		super();
-	}
+    }
 
 	@Before
 	public void setUp() throws Exception {

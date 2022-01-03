@@ -134,14 +134,14 @@ abstract class FunctionParameterAdapter {
 	 * @return the parameter data type record iterator.
 	 * @throws IOException if the database can't be accessed.
 	 */
-	abstract protected RecordIterator getRecords() throws IOException;
+    protected abstract RecordIterator getRecords() throws IOException;
 
 	/**
 	 * Delete underlying database table
 	 * @param handle database handle
 	 * @throws IOException if IO error occurs
 	 */
-	abstract protected void deleteTable(DBHandle handle) throws IOException;
+    protected abstract void deleteTable(DBHandle handle) throws IOException;
 
 	/**
 	 * Create new parameter definition record

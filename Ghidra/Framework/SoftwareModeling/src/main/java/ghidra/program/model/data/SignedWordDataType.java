@@ -23,7 +23,7 @@ public class SignedWordDataType extends AbstractIntegerDataType {
 	private static final long serialVersionUID = 1L;
 
 	/** A statically defined SignedWordDataType instance.*/
-	public final static SignedWordDataType dataType = new SignedWordDataType();
+    public static final SignedWordDataType dataType = new SignedWordDataType();
 
 	public SignedWordDataType() {
 		this(null);

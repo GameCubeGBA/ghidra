@@ -75,8 +75,7 @@ public class ReferenceMergerTest extends AbstractListingMergeManagerTest {
 	 * @param arg0
 	 */
 	public ReferenceMergerTest() {
-		super();
-	}
+    }
 
 //	/**
 //	 * 

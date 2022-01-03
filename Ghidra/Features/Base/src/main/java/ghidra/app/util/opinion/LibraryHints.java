@@ -108,9 +108,7 @@ class LibraryHints {
 		list = nameAttributeMap.get(name);
 		if (list != null) {
 			Attribute attr = getAttribute(list, attrName);
-			if (attr != null) {
-				return attr;
-			}
+            return attr;
 		}
 		return null;
 	}
@@ -142,16 +140,14 @@ class LibraryHints {
 				throw new SAXNotRecognizedException("Expected LIBRARY_HINTS document");
 			}
 
-			Iterator<?> iter = root.getChildren().iterator();
-			while (iter.hasNext()) {
-				Element element = (Element) iter.next();
-				if ("HINT".equals(element.getName())) {
-					parseHint(element);
-				}
-				else {
-					throw new SAXNotRecognizedException("Unexpected element: " + element.getName());
-				}
-			}
+            for (Object o : root.getChildren()) {
+                Element element = (Element) o;
+                if ("HINT".equals(element.getName())) {
+                    parseHint(element);
+                } else {
+                    throw new SAXNotRecognizedException("Unexpected element: " + element.getName());
+                }
+            }
 		}
 		catch (Exception e) {
 			Msg.error(this, "Error occurred while parsing hints file: " + hintsFile, e);

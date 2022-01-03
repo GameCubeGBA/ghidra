@@ -23,7 +23,7 @@ public class WordDataType extends AbstractIntegerDataType {
 	private static final long serialVersionUID = 1L;
 
 	/** A statically defined WordDataType instance.*/
-	public final static WordDataType dataType = new WordDataType();
+    public static final WordDataType dataType = new WordDataType();
 
 	public WordDataType() {
 		this(null);

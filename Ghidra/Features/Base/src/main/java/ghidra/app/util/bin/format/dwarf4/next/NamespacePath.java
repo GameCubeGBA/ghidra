@@ -217,7 +217,7 @@ public class NamespacePath implements Comparable<NamespacePath> {
 		doInOrderTraversal(
 			nsp -> sb.append(sb.length() != 0 ? Namespace.DELIMITER : "").append(
 				nsp.isRoot() ? "ROOT" : nsp.name).append(
-					"(" + (nsp.getType() != null ? nsp.getType() : "unknown type") + ")"));
+					"(" + (nsp.type != null ? nsp.type : "unknown type") + ")"));
 		return sb.toString();
 
 	}
@@ -268,15 +268,10 @@ public class NamespacePath implements Comparable<NamespacePath> {
 			return false;
 		}
 		if (type == null) {
-			if (other.type != null) {
-				return false;
-			}
+            return other.type == null;
 		}
-		else if (!type.equals(other.type)) {
-			return false;
-		}
-		return true;
-	}
+		else return type.equals(other.type);
+    }
 
 	@Override
 	public int compareTo(NamespacePath otherPath) {

@@ -25,5 +25,5 @@ public interface ListingDiffChangeListener {
 	/**
 	 * Called when the ListingDiff's set of differences and unmatched addresses has changed.
 	 */
-	public void listingDiffChanged();
+    void listingDiffChanged();
 }

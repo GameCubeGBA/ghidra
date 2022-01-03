@@ -18,5 +18,5 @@ package agent.dbgeng.jna.dbgeng.symbols;
 import com.sun.jna.platform.win32.Guid.IID;
 
 public interface IDebugSymbolGroup2 {
-	final IID IID_IDEBUG_SYMBOL_GROUP2 = new IID("6a7ccc5f-fb5e-4dcc-b41c-6c20307bccc7");
+	IID IID_IDEBUG_SYMBOL_GROUP2 = new IID("6a7ccc5f-fb5e-4dcc-b41c-6c20307bccc7");
 }

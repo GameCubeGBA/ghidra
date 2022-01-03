@@ -22,8 +22,8 @@ import ghidra.app.util.bin.format.pe.cli.streams.CliStreamMetadata;
  * This is used in the token analyzer to cut down on duplication across modules.
  */
 public interface CliRepresentable {
-	public String getRepresentation();
-	public String getShortRepresentation();
-	public String getRepresentation(CliStreamMetadata stream);
-	public String getShortRepresentation(CliStreamMetadata stream);
+	String getRepresentation();
+	String getShortRepresentation();
+	String getRepresentation(CliStreamMetadata stream);
+	String getShortRepresentation(CliStreamMetadata stream);
 }

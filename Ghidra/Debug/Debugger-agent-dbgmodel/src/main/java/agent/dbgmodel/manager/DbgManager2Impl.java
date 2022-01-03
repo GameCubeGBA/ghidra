@@ -44,8 +44,7 @@ public class DbgManager2Impl extends DbgManagerImpl {
 	 * Instantiate a new manager
 	 */
 	public DbgManager2Impl() {
-		super();
-	}
+    }
 
 	public WrappedDbgModel getAccess() {
 		return dbgmodel;

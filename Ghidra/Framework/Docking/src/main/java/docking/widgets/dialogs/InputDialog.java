@@ -40,8 +40,8 @@ import ghidra.util.layout.PairLayout;
  *
  */
 public class InputDialog extends DialogComponentProvider {
-	private final static String DEFAULT_VALUE = "";
-	private final static int MAX_SIZE = 256;
+	private static final String DEFAULT_VALUE = "";
+	private static final int MAX_SIZE = 256;
 
 	private boolean isCanceled;
 	private String[] inputLabels;
@@ -165,7 +165,7 @@ public class InputDialog extends DialogComponentProvider {
 		addCancelButton();
 		buildMainPanel();
 
-		if (initialValues != null && initialValues[0] != null && initialValues[0].length() > 0) {
+		if (initialValues != null && initialValues[0] != null && !initialValues[0].isEmpty()) {
 			// highlight the field if it contains a value
 			textFields[0].selectAll();
 		}
@@ -296,8 +296,7 @@ public class InputDialog extends DialogComponentProvider {
 			private JTextField textField;
 
 			private MyDocument(JTextField textField) {
-				super();
-				this.textField = textField;
+                this.textField = textField;
 			}
 
 			/**

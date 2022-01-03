@@ -25,7 +25,7 @@ import agent.dbgmodel.jna.dbgmodel.IUnknownEx;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IIterableConcept extends IUnknownEx {
-	final IID IID_IITERABLE_CONCEPT = new IID("F5D49D0C-0B02-4301-9C9B-B3A6037628F3");
+	IID IID_IITERABLE_CONCEPT = new IID("F5D49D0C-0B02-4301-9C9B-B3A6037628F3");
 
 	enum VTIndices implements VTableIndex {
 		GET_DEFAULT_INDEX_DIMENSIONALITY, //

@@ -23,7 +23,7 @@ import java.io.IOException;
 
 public final class ResourceTypeFactory {
 
-	public final static Object getResourceObject(BinaryReader reader, ResourceHeader header, ResourceType resourceType) throws IOException {
+	public static final Object getResourceObject(BinaryReader reader, ResourceHeader header, ResourceType resourceType) throws IOException {
 		long oldIndex = reader.getPointerIndex();
 		try {
             if (resourceType.getType() == ResourceTypes.TYPE_CFRG) {

@@ -23,12 +23,12 @@ public interface LldbModelTargetThreadContainer extends //
 		LldbModelTargetEventScope, //
 		LldbEventsListenerAdapter {
 
-	public LldbModelTargetThread getTargetThread(SBThread thread);
+	LldbModelTargetThread getTargetThread(SBThread thread);
 
-	public void threadCreated(SBThread thread);
+	void threadCreated(SBThread thread);
 
-	public void threadReplaced(SBThread thread);
+	void threadReplaced(SBThread thread);
 
-	public void threadExited(SBThread thread);
+	void threadExited(SBThread thread);
 
 }

@@ -75,19 +75,9 @@ public class SetRegisterValueDialog extends DialogComponentProvider {
 		Font f = registerComboBox.getFont().deriveFont(13f);
 		registerComboBox.setFont(f);
 		registerValueField = new FixedBitSizeValueField(32, true, false);
-		registerValueField.addChangeListener(new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				updateOkEnablement();
-			}
-		});
+		registerValueField.addChangeListener(e -> updateOkEnablement());
 
-		registerComboBox.addItemListener(new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				registerChanged();
-			}
-		});
+		registerComboBox.addItemListener(e -> registerChanged());
 		f = new Font("monospaced", Font.PLAIN, 13);
 
 		addressRangeList = new JList();
@@ -199,7 +189,7 @@ public class SetRegisterValueDialog extends DialogComponentProvider {
 				rangeData[i++] = start.toString();
 			}
 			else {
-				rangeData[i++] = start.toString() + " - " + end.toString();
+				rangeData[i++] = start + " - " + end.toString();
 			}
 		}
 		addressRangeList.setListData(rangeData);

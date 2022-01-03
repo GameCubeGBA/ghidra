@@ -22,8 +22,8 @@ package ghidra.util.search.trie;
  */
 public class ByteTrieNode<T> implements ByteTrieNodeIfc<T> {
 	// note we pull this space trick with the byte id and whether we're terminal
-	private final static int TERMINAL_MASK = 0x100;
-	private final static int ID_MASK = 0xff;
+    private static final int TERMINAL_MASK = 0x100;
+	private static final int ID_MASK = 0xff;
 
 	ByteTrieNode<T>[] children;
 	private short idAndTerminality;

@@ -19,6 +19,6 @@ import agent.dbgeng.manager.DbgExceptionFilter;
 
 public interface DbgModelTargetException extends DbgModelTargetEvent {
 
-	public DbgExceptionFilter getFilter();
+	DbgExceptionFilter getFilter();
 
 }

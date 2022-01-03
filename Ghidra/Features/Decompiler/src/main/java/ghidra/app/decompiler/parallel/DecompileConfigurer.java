@@ -29,5 +29,5 @@ public interface DecompileConfigurer {
 	 * 
 	 * @param decompiler the decompiler to configure
 	 */
-	public void configure(DecompInterface decompiler);
+    void configure(DecompInterface decompiler);
 }

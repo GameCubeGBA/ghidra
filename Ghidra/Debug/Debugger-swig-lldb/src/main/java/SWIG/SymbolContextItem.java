@@ -12,15 +12,15 @@
 package SWIG;
 
 public final class SymbolContextItem {
-  public final static SymbolContextItem eSymbolContextTarget = new SymbolContextItem("eSymbolContextTarget", lldbJNI.eSymbolContextTarget_get());
-  public final static SymbolContextItem eSymbolContextModule = new SymbolContextItem("eSymbolContextModule", lldbJNI.eSymbolContextModule_get());
-  public final static SymbolContextItem eSymbolContextCompUnit = new SymbolContextItem("eSymbolContextCompUnit", lldbJNI.eSymbolContextCompUnit_get());
-  public final static SymbolContextItem eSymbolContextFunction = new SymbolContextItem("eSymbolContextFunction", lldbJNI.eSymbolContextFunction_get());
-  public final static SymbolContextItem eSymbolContextBlock = new SymbolContextItem("eSymbolContextBlock", lldbJNI.eSymbolContextBlock_get());
-  public final static SymbolContextItem eSymbolContextLineEntry = new SymbolContextItem("eSymbolContextLineEntry", lldbJNI.eSymbolContextLineEntry_get());
-  public final static SymbolContextItem eSymbolContextSymbol = new SymbolContextItem("eSymbolContextSymbol", lldbJNI.eSymbolContextSymbol_get());
-  public final static SymbolContextItem eSymbolContextEverything = new SymbolContextItem("eSymbolContextEverything", lldbJNI.eSymbolContextEverything_get());
-  public final static SymbolContextItem eSymbolContextVariable = new SymbolContextItem("eSymbolContextVariable", lldbJNI.eSymbolContextVariable_get());
+  public static final SymbolContextItem eSymbolContextTarget = new SymbolContextItem("eSymbolContextTarget", lldbJNI.eSymbolContextTarget_get());
+  public static final SymbolContextItem eSymbolContextModule = new SymbolContextItem("eSymbolContextModule", lldbJNI.eSymbolContextModule_get());
+  public static final SymbolContextItem eSymbolContextCompUnit = new SymbolContextItem("eSymbolContextCompUnit", lldbJNI.eSymbolContextCompUnit_get());
+  public static final SymbolContextItem eSymbolContextFunction = new SymbolContextItem("eSymbolContextFunction", lldbJNI.eSymbolContextFunction_get());
+  public static final SymbolContextItem eSymbolContextBlock = new SymbolContextItem("eSymbolContextBlock", lldbJNI.eSymbolContextBlock_get());
+  public static final SymbolContextItem eSymbolContextLineEntry = new SymbolContextItem("eSymbolContextLineEntry", lldbJNI.eSymbolContextLineEntry_get());
+  public static final SymbolContextItem eSymbolContextSymbol = new SymbolContextItem("eSymbolContextSymbol", lldbJNI.eSymbolContextSymbol_get());
+  public static final SymbolContextItem eSymbolContextEverything = new SymbolContextItem("eSymbolContextEverything", lldbJNI.eSymbolContextEverything_get());
+  public static final SymbolContextItem eSymbolContextVariable = new SymbolContextItem("eSymbolContextVariable", lldbJNI.eSymbolContextVariable_get());
 
   public final int swigValue() {
     return swigValue;
@@ -33,9 +33,9 @@ public final class SymbolContextItem {
   public static SymbolContextItem swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-    for (int i = 0; i < swigValues.length; i++)
-      if (swigValues[i].swigValue == swigValue)
-        return swigValues[i];
+      for (SymbolContextItem value : swigValues)
+          if (value.swigValue == swigValue)
+              return value;
     throw new IllegalArgumentException("No enum " + SymbolContextItem.class + " with value " + swigValue);
   }
 

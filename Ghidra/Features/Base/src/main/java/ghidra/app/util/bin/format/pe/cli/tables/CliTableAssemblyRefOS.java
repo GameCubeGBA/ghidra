@@ -32,8 +32,7 @@ public class CliTableAssemblyRefOS extends CliAbstractTable {
 		public int assemblyRefIndex;
 		
 		public CliAssemblyRefOSRow(int osPlatformID, int osMajorVersion, int osMinorVersion, int assemblyRefIndex) {
-			super();
-			this.osPlatformID = osPlatformID;
+            this.osPlatformID = osPlatformID;
 			this.osMajorVersion = osMajorVersion;
 			this.osMinorVersion = osMinorVersion;
 			this.assemblyRefIndex = assemblyRefIndex;

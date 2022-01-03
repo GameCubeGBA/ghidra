@@ -25,12 +25,12 @@ public interface DbgModelTargetModuleContainer
 		extends /*DbgModelTargetObject,*/ DbgModelTargetEventScope, TargetModuleContainer {
 
 	@Override
-	public CompletableFuture<? extends TargetModule> addSyntheticModule(String name);
+    CompletableFuture<? extends TargetModule> addSyntheticModule(String name);
 
-	public DbgModelTargetModule getTargetModule(String name);
+	DbgModelTargetModule getTargetModule(String name);
 
-	public void libraryLoaded(String name);
+	void libraryLoaded(String name);
 
-	public void libraryUnloaded(String name);
+	void libraryUnloaded(String name);
 
 }

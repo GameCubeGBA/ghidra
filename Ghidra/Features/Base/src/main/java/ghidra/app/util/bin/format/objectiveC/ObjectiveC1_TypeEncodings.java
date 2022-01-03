@@ -25,55 +25,55 @@ import ghidra.program.model.symbol.SourceType;
 import ghidra.util.exception.DuplicateNameException;
 
 public final class ObjectiveC1_TypeEncodings {
-	public final static char _C_ID = '@';
-	public final static char _C_CLASS = '#';
-	public final static char _C_SEL = ':';
-	public final static char _C_CHR = 'c';
-	public final static char _C_UCHR = 'C';
-	public final static char _C_SHT = 's';
-	public final static char _C_USHT = 'S';
-	public final static char _C_INT = 'i';
-	public final static char _C_UINT = 'I';
-	public final static char _C_LNG = 'l';
-	public final static char _C_ULNG = 'L';
-	public final static char _C_LNG_LNG = 'q';
-	public final static char _C_ULNG_LNG = 'Q';
-	public final static char _C_FLT = 'f';
-	public final static char _C_DBL = 'd';
-	public final static char _C_BOOL = 'B';
-	public final static char _C_VOID = 'v';
-	public final static char _C_UNDEF = '?';
-	public final static char _C_PTR = '^';
-	public final static char _C_CHARPTR = '*';
-	public final static char _C_ATOM = '%';
+	public static final char _C_ID = '@';
+	public static final char _C_CLASS = '#';
+	public static final char _C_SEL = ':';
+	public static final char _C_CHR = 'c';
+	public static final char _C_UCHR = 'C';
+	public static final char _C_SHT = 's';
+	public static final char _C_USHT = 'S';
+	public static final char _C_INT = 'i';
+	public static final char _C_UINT = 'I';
+	public static final char _C_LNG = 'l';
+	public static final char _C_ULNG = 'L';
+	public static final char _C_LNG_LNG = 'q';
+	public static final char _C_ULNG_LNG = 'Q';
+	public static final char _C_FLT = 'f';
+	public static final char _C_DBL = 'd';
+	public static final char _C_BOOL = 'B';
+	public static final char _C_VOID = 'v';
+	public static final char _C_UNDEF = '?';
+	public static final char _C_PTR = '^';
+	public static final char _C_CHARPTR = '*';
+	public static final char _C_ATOM = '%';
 
-	public final static char _C_ARY_B = '[';
-	public final static char _C_ARY_E = ']';
-	public final static char _C_UNION_B = '(';
-	public final static char _C_UNION_E = ')';
-	public final static char _C_STRUCT_B = '{';
-	public final static char _C_STRUCT_E = '}';
-	public final static char _C_VECTOR = '!';
+	public static final char _C_ARY_B = '[';
+	public static final char _C_ARY_E = ']';
+	public static final char _C_UNION_B = '(';
+	public static final char _C_UNION_E = ')';
+	public static final char _C_STRUCT_B = '{';
+	public static final char _C_STRUCT_E = '}';
+	public static final char _C_VECTOR = '!';
 //	public final static char _C_GCINVISIBLE     = '!'; TODO which is correct??
 
 	// STRUCTURE ONLY TYPES
 	//
 
-	public final static char _C_BFLD = 'b';
+	public static final char _C_BFLD = 'b';
 
 	// MODIFIERS
 	//
 
-	public final static char _C_CONST = 'r';
-	public final static char _C_IN = 'n';
-	public final static char _C_INOUT = 'N';
-	public final static char _C_OUT = 'o';
-	public final static char _C_BYCOPY = 'O';
-	public final static char _C_BYREF = 'R';
-	public final static char _C_ONEWAY = 'V';
-	public final static char _C_ATOMIC = 'A';
+	public static final char _C_CONST = 'r';
+	public static final char _C_IN = 'n';
+	public static final char _C_INOUT = 'N';
+	public static final char _C_OUT = 'o';
+	public static final char _C_BYCOPY = 'O';
+	public static final char _C_BYREF = 'R';
+	public static final char _C_ONEWAY = 'V';
+	public static final char _C_ATOMIC = 'A';
 
-	private final static String ANONYMOUS_PREFIX = "Anonymous";
+	private static final String ANONYMOUS_PREFIX = "Anonymous";
 
 	private enum AnonymousTypes {
 		STRUCTURE(ANONYMOUS_PREFIX + "Structure"),
@@ -525,7 +525,7 @@ public final class ObjectiveC1_TypeEncodings {
 		throw new IllegalArgumentException("Name cannot be null.");
 	}
 
-	synchronized private String getUniqueAnonymousTypeName(AnonymousTypes type) {
+	private synchronized String getUniqueAnonymousTypeName(AnonymousTypes type) {
 		int index = anonymousIndexMap.get(type);
 		anonymousIndexMap.put(type, index + 1);
 		return type.toString() + index;

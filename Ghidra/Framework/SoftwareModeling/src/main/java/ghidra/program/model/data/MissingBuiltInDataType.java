@@ -29,7 +29,7 @@ import ghidra.util.exception.DuplicateNameException;
  */
 public class MissingBuiltInDataType extends DataTypeImpl implements Dynamic {
 
-	private final static long serialVersionUID = 1;
+	private static final long serialVersionUID = 1;
 
 	private String missingBuiltInClassPath;
 	private String missingBuiltInName;

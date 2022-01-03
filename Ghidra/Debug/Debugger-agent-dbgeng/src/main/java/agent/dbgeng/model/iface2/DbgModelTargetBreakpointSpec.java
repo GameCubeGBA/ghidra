@@ -40,33 +40,33 @@ public interface DbgModelTargetBreakpointSpec extends //
 	String BPT_INDEX_ATTRIBUTE_NAME = "Id";
 
 	@Override
-	public default CompletableFuture<Void> delete() {
+    default CompletableFuture<Void> delete() {
 		return getModel().gateFuture(getManager().deleteBreakpoints(getNumber()));
 	}
 
 	@Override
-	public default CompletableFuture<Void> disable() {
+    default CompletableFuture<Void> disable() {
 		setEnabled(false, "Disabled");
 		return getModel().gateFuture(getManager().disableBreakpoints(getNumber()));
 	}
 
 	@Override
-	public default CompletableFuture<Void> enable() {
+    default CompletableFuture<Void> enable() {
 		setEnabled(true, "Enabled");
 		return getModel().gateFuture(getManager().enableBreakpoints(getNumber()));
 	}
 
 	@Override
-	public default String getExpression() {
+    default String getExpression() {
 		return getBreakpointInfo().getExpression();
 	}
 
-	public default long getNumber() {
+	default long getNumber() {
 		return getBreakpointInfo().getNumber();
 	}
 
 	@Override
-	public default TargetBreakpointKindSet getKinds() {
+    default TargetBreakpointKindSet getKinds() {
 		switch (getBreakpointInfo().getType()) {
 			case BREAKPOINT:
 				return TargetBreakpointKindSet.of(TargetBreakpointKind.SW_EXECUTE);
@@ -85,7 +85,7 @@ public interface DbgModelTargetBreakpointSpec extends //
 	}
 
 	@Override
-	public default CompletableFuture<Void> init(Map<String, Object> map) {
+    default CompletableFuture<Void> init(Map<String, Object> map) {
 		AddressSpace space = getModel().getAddressSpace("ram");
 		return requestNativeAttributes().thenAccept(attrs -> {
 			if (attrs != null) {
@@ -110,8 +110,8 @@ public interface DbgModelTargetBreakpointSpec extends //
 				map.put(EXPRESSION_ATTRIBUTE_NAME, addstr);
 				map.put(KINDS_ATTRIBUTE_NAME, getKinds());
 				//map.put(BPT_INDEX_ATTRIBUTE_NAME, Long.decode(idstr));
-				map.put(ENABLED_ATTRIBUTE_NAME, enstr.equals("-1"));
-				setEnabled(enstr.equals("-1"), "Refreshed");
+				map.put(ENABLED_ATTRIBUTE_NAME, "-1".equals(enstr));
+				setEnabled("-1".equals(enstr), "Refreshed");
 				int size = getBreakpointInfo().getSize();
 				map.put(LENGTH_ATTRIBUTE_NAME, size);
 
@@ -130,13 +130,13 @@ public interface DbgModelTargetBreakpointSpec extends //
 		return l;
 	}
 
-	public default Address doGetAddress() {
+	default Address doGetAddress() {
 		DbgBreakpointInfo info = getBreakpointInfo();
 		return getModel().getAddress("ram", orZero(info.getOffset()));
 	}
 
-	public default void updateInfo(DbgBreakpointInfo oldInfo, DbgBreakpointInfo newInfo,
-			String reason) {
+	default void updateInfo(DbgBreakpointInfo oldInfo, DbgBreakpointInfo newInfo,
+                            String reason) {
 		synchronized (this) {
 			assert oldInfo == getBreakpointInfo();
 			setBreakpointInfo(newInfo);
@@ -154,28 +154,28 @@ public interface DbgModelTargetBreakpointSpec extends //
 	 * @param enabled true if enabled, false if disabled
 	 * @param reason a description of the cause (not really used, yet)
 	 */
-	public default void setEnabled(boolean enabled, String reason) {
+	default void setEnabled(boolean enabled, String reason) {
 		setBreakpointEnabled(enabled);
 		changeAttributes(List.of(), Map.of(ENABLED_ATTRIBUTE_NAME, enabled //
 		), reason);
 	}
 
 	@Override
-	public default boolean isEnabled() {
+    default boolean isEnabled() {
 		return isBreakpointEnabled();
 	}
 
 	@Override
-	public default void addAction(TargetBreakpointAction action) {
+    default void addAction(TargetBreakpointAction action) {
 		getActions().add(action);
 	}
 
 	@Override
-	public default void removeAction(TargetBreakpointAction action) {
+    default void removeAction(TargetBreakpointAction action) {
 		getActions().remove(action);
 	}
 
-	public default void breakpointHit() {
+	default void breakpointHit() {
 		DbgModelTargetThread targetThread =
 			getParentProcess().getThreads().getTargetThread(getManager().getEventThread());
 		getActions().fire.breakpointHit((DbgModelTargetBreakpointSpec) getProxy(), targetThread,

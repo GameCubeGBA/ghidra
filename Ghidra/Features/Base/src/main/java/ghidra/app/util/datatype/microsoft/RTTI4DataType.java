@@ -48,13 +48,13 @@ import ghidra.program.model.mem.Memory;
 @Deprecated
 public class RTTI4DataType extends RTTIDataType {
 
-	private final static long serialVersionUID = 1;
-	private final static int LENGTH = 20;
-	private final static int SIGNATURE_OFFSET = 0;
-	private final static int VB_TABLE_OFFSET_OFFSET = 4;
-	private final static int CONSTRUCTOR_DISP_OFFSET_OFFSET = 8;
-	private final static int RTTI_0_OFFSET = 12;
-	private final static int RTTI_3_OFFSET = 16;
+	private static final long serialVersionUID = 1;
+	private static final int LENGTH = 20;
+	private static final int SIGNATURE_OFFSET = 0;
+	private static final int VB_TABLE_OFFSET_OFFSET = 4;
+	private static final int CONSTRUCTOR_DISP_OFFSET_OFFSET = 8;
+	private static final int RTTI_0_OFFSET = 12;
+	private static final int RTTI_3_OFFSET = 16;
 	private DataTypeComponent[] fixedComps;
 	private RTTI0DataType rtti0;
 	private RTTI3DataType rtti3;
@@ -252,13 +252,9 @@ public class RTTI4DataType extends RTTIDataType {
 		// Last component should refer to RTTI3.
 		Address rtti3CompAddress = startAddress.add(RTTI_3_OFFSET);
 		Address rtti3Address = getReferencedAddress(program, rtti3CompAddress);
-		if (rtti3Address == null ||
-			(validateReferredToData && !rtti3.isValid(program, rtti3Address, validationOptions))) {
-			return false;
-		}
-
-		return true;
-	}
+        return rtti3Address != null &&
+                (!validateReferredToData || rtti3.isValid(program, rtti3Address, validationOptions));
+    }
 
 	@Override
 	public String getDefaultLabelPrefix() {

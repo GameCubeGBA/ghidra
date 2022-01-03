@@ -53,8 +53,8 @@ import ghidra.util.task.TaskMonitor;
 @FileSystemInfo(type = PrelinkFileSystem.IOS_PRELINK_FSTYPE, description = PrelinkConstants.TITLE, priority = FileSystemInfo.PRIORITY_HIGH, factory = GFileSystemBaseFactory.class)
 public class PrelinkFileSystem extends GFileSystemBase implements GFileSystemProgramProvider {
 
-	public final static String IOS_PRELINK_FSTYPE = "iosprelink";
-	private final static String SYSTEM_KEXT = "System.kext";
+	public static final String IOS_PRELINK_FSTYPE = "iosprelink";
+	private static final String SYSTEM_KEXT = "System.kext";
 
 	private Map<GFile, PrelinkMap> fileToPrelinkInfoMap = new HashMap<>();
 	private Map<Long, GFileImpl> unnamedMachoFileMap = new HashMap<>();

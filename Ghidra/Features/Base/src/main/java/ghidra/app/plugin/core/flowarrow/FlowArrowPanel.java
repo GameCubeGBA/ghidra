@@ -45,8 +45,7 @@ class FlowArrowPanel extends JPanel {
 	private Point pendingMouseClickPoint;
 
 	FlowArrowPanel(FlowArrowPlugin p) {
-		super();
-		this.plugin = p;
+        this.plugin = p;
 		setMinimumSize(new Dimension(0, 0));
 		setPreferredSize(new Dimension(32, 1));
 

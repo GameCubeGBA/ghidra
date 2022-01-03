@@ -233,7 +233,7 @@ public class DataTypeHelper {
 		return null;
 	}
 
-	static public DataType getBaseType(DataType dt) {
+	public static DataType getBaseType(DataType dt) {
 		DataType testTypeDefDt = dt;
 		if (testTypeDefDt instanceof TypeDef) {
 			return ((TypeDef) testTypeDefDt).getBaseDataType();

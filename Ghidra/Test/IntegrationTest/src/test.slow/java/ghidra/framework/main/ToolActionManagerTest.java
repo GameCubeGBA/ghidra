@@ -197,7 +197,7 @@ public class ToolActionManagerTest extends AbstractGhidraHeadedIntegrationTest {
 				list.add(config.getName());
 			}
 		}
-		assertTrue(list.size() > 0);
+		assertTrue(!list.isEmpty());
 		Collections.sort(list);
 		runSwing(() -> tc.remove(list.get(list.size() - 1)));
 	}
@@ -433,8 +433,8 @@ public class ToolActionManagerTest extends AbstractGhidraHeadedIntegrationTest {
 		}
 		newList.removeAll(origList);
 		runSwing(() -> {
-			for (int i = 0; i < newList.size(); i++) {
-				tc.remove(newList.get(i));
+			for (String s : newList) {
+				tc.remove(s);
 			}
 		});
 		assertEquals(origList.size(), tc.getToolCount());
@@ -646,7 +646,7 @@ public class ToolActionManagerTest extends AbstractGhidraHeadedIntegrationTest {
 			ToolTemplate[] toolTemplates = toolChest.getToolTemplates();
 			for (ToolTemplate toolTemplate : toolTemplates) {
 				String name = toolTemplate.getName();
-				if (!name.equals("CodeBrowser")) {
+				if (!"CodeBrowser".equals(name)) {
 					if (!toolChest.remove(name)) {
 						failedTool.set(name);
 						return;

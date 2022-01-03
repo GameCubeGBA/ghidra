@@ -48,8 +48,7 @@ public class DisassemblerPluginTest extends AbstractGhidraHeadedIntegrationTest 
 	private DockingActionIf staticDisassemblyAction;
 
 	public DisassemblerPluginTest() {
-		super();
-	}
+    }
 
 	@Before
 	public void setUp() throws Exception {

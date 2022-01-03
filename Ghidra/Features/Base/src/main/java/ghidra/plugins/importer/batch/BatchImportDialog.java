@@ -427,7 +427,7 @@ public class BatchImportDialog extends DialogComponentProvider {
 			}
 
 			Msg.showWarn(this, getComponent(), "Skipping " + badFiles.size() + " file(s)",
-				"Program encountered while adding files to batch: " + sb.toString());
+				"Program encountered while adding files to batch: " + sb);
 
 		}
 

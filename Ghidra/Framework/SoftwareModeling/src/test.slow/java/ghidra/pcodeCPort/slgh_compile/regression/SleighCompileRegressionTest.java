@@ -80,42 +80,37 @@ public class SleighCompileRegressionTest extends AbstractGenericTest {
 
 		LoggingInitialization.initializeLoggingSystem();
 		List<ResourceFile> inputs = getSlaspecFiles();
-		Iterator<ResourceFile> ii = inputs.iterator();
 
-		while (ii.hasNext()) {
-			ResourceFile inputFile = ii.next();
-			String inputName = inputFile.getName().replaceFirst("\\.slaspec$", "-");
-			File targetFile = createTempFile("target-" + inputName, ".sla");
-			File actualFile = createTempFile("actual-" + inputName, ".sla");
-			log.info("testing " + inputFile + " (in " + targetFile + " and " + actualFile + ")");
+        for (ResourceFile inputFile : inputs) {
+            String inputName = inputFile.getName().replaceFirst("\\.slaspec$", "-");
+            File targetFile = createTempFile("target-" + inputName, ".sla");
+            File actualFile = createTempFile("actual-" + inputName, ".sla");
+            log.info("testing " + inputFile + " (in " + targetFile + " and " + actualFile + ")");
 
-			int targetRetval = runTargetCompiler(inputFile, targetFile);
-			if (itsOK("non-zero target compiler return value", 0 == targetRetval)) {
+            int targetRetval = runTargetCompiler(inputFile, targetFile);
+            if (itsOK("non-zero target compiler return value", 0 == targetRetval)) {
 
-				int actualRetval = runActualCompiler(inputFile.getFile(false), actualFile);
-				if (itsOK("non-zero actual compiler return value", 0 == actualRetval)) {
-					currentLangBadCount = 0;
-					boolean ok = comparesOK(actualFile, targetFile);
+                int actualRetval = runActualCompiler(inputFile.getFile(false), actualFile);
+                if (itsOK("non-zero actual compiler return value", 0 == actualRetval)) {
+                    currentLangBadCount = 0;
+                    boolean ok = comparesOK(actualFile, targetFile);
 
-					if (ok) {
-						assertTrue("could not delete target output file " + targetFile,
-							targetFile.delete());
-						assertTrue("could not delete actual output file " + actualFile,
-							actualFile.delete());
-					}
-					else {
-						summary.append("Sleigh compile mismatch for: " + inputFile + "\n");
-					}
-				}
-				else {
-					summary.append("Sleigh(Java) compile failed for: " + inputFile + "\n");
-				}
-			}
-			else {
-				summary.append("Sleigh(C) compile failed for: " + inputFile + "\n");
-			}
+                    if (ok) {
+                        assertTrue("could not delete target output file " + targetFile,
+                                targetFile.delete());
+                        assertTrue("could not delete actual output file " + actualFile,
+                                actualFile.delete());
+                    } else {
+                        summary.append("Sleigh compile mismatch for: " + inputFile + "\n");
+                    }
+                } else {
+                    summary.append("Sleigh(Java) compile failed for: " + inputFile + "\n");
+                }
+            } else {
+                summary.append("Sleigh(C) compile failed for: " + inputFile + "\n");
+            }
 //            printMemory();
-		}
+        }
 		if (allOK) {
 			log.info("SUCCESS!  Finished all tests.");
 		}

@@ -28,8 +28,7 @@ import ghidra.app.plugin.core.programtree.ViewManagerComponentProvider;
 public class DisassembledViewPluginScreenShots extends GhidraScreenShotGenerator {
 
 	public DisassembledViewPluginScreenShots() {
-		super();
-	}
+    }
 
 	@Test
 	public void testDisassembledViewPluginMain() {

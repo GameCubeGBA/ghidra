@@ -59,8 +59,8 @@ import ghidra.util.worker.Worker;
 public class RunManager {
 
 	private static final int SHOW_PROGRESS_DELAY = 500;
-	private final static String DEFAULT = "Default Panel";
-	private final static String PROGRESS = "Progress Panel";
+	private static final String DEFAULT = "Default Panel";
+	private static final String PROGRESS = "Progress Panel";
 
 	private CardLayout cardLayout; // layout for progress panel
 	private JPanel progressPanel;

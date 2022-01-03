@@ -42,7 +42,7 @@ import ghidra.util.task.TaskMonitor;
 
 public class CoffLoader extends AbstractLibrarySupportLoader {
 
-	public final static String COFF_NAME = "Common Object File Format (COFF)";
+	public static final String COFF_NAME = "Common Object File Format (COFF)";
 	public static final String FAKE_LINK_OPTION_NAME = "Attempt to link sections located at 0x0";
 	static final boolean FAKE_LINK_OPTION_DEFAULT = true;
 	private static final int COFF_NULL_SANITY_CHECK_LEN = 64;

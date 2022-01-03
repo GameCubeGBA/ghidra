@@ -35,7 +35,7 @@ import ghidra.util.task.TaskMonitor;
 
 public class BinaryLoader extends AbstractProgramLoader {
 
-	public final static String BINARY_NAME = "Raw Binary";
+	public static final String BINARY_NAME = "Raw Binary";
 
 	public static final String OPTION_NAME_LEN = "Length";
 	public static final String OPTION_NAME_FILE_OFFSET = "File Offset";
@@ -279,7 +279,7 @@ public class BinaryLoader extends AbstractProgramLoader {
 
 		Address baseAddr =
 			importerLanguage.getAddressFactory().getDefaultAddressSpace().getAddress(0);
-		Program prog = createProgram(provider, programName, baseAddr, getName(), importerLanguage,
+		Program prog = createProgram(provider, programName, baseAddr, BINARY_NAME, importerLanguage,
 			importerCompilerSpec, consumer);
 		boolean success = false;
 		try {
@@ -325,7 +325,7 @@ public class BinaryLoader extends AbstractProgramLoader {
 			if (baseAddr == null) {
 				baseAddr = space.getAddress(0);
 			}
-			if (blockName == null || blockName.length() == 0) {
+			if (blockName == null || blockName.isEmpty()) {
 				blockName = generateBlockName(prog, isOverlay, baseAddr.getAddressSpace());
 			}
 			createBlock(prog, isOverlay, blockName, baseAddr, fileBytes, length, log);

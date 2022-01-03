@@ -538,6 +538,12 @@ class DataDB extends CodeUnitDB implements Data {
 		}
 	}
 
+	@Deprecated
+	@Override
+	public Data getComponentAt(int offset) {
+		return getComponentContaining(offset);
+	}
+
 	@Override
 	public Data getComponentContaining(int offset) {
 		lock.acquire();
@@ -792,7 +798,7 @@ class DataDB extends CodeUnitDB implements Data {
 
 	@Override
 	public Class<?> getValueClass() {
-		DataType dt = getBaseDataType();
+		DataType dt = baseDataType;
 		if (dt != null) {
 			return dt.getValueClass(this);
 		}

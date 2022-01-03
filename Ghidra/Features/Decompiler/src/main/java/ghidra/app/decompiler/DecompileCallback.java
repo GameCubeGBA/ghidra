@@ -54,7 +54,7 @@ import ghidra.util.xml.XmlUtilities;
  */
 public class DecompileCallback {
 
-	public final static int MAX_SYMBOL_COUNT = 16;
+	public static final int MAX_SYMBOL_COUNT = 16;
 
 	/**
 	 * Data returned for a query about strings
@@ -1421,15 +1421,14 @@ public class DecompileCallback {
 		private StringBuilder curbuffer;
 
 		NameListHandler() {
-			super();
-			res = new ArrayList<>();
+            res = new ArrayList<>();
 			curbuffer = null;
 		}
 
 		@Override
 		public void startElement(String uri, String localName, String rawName, Attributes attr)
 				throws SAXException {
-			if (localName.equals("val")) {
+			if ("val".equals(localName)) {
 				curbuffer = new StringBuilder();
 			}
 		}
@@ -1443,7 +1442,7 @@ public class DecompileCallback {
 
 		@Override
 		public void endElement(String arg0, String arg1, String arg2) throws SAXException {
-			if (arg1.equals("val")) {
+			if ("val".equals(arg1)) {
 				res.add(curbuffer.toString());
 				curbuffer = null;
 			}

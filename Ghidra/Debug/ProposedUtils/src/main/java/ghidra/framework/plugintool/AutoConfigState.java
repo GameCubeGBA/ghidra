@@ -31,7 +31,7 @@ public interface AutoConfigState {
 		void write(SaveState state, String name, T value);
 	}
 
-	static class BooleanConfigFieldCodec implements ConfigFieldCodec<Boolean> {
+	class BooleanConfigFieldCodec implements ConfigFieldCodec<Boolean> {
 		public static final BooleanConfigFieldCodec INSTANCE = new BooleanConfigFieldCodec();
 
 		@Override
@@ -45,7 +45,7 @@ public interface AutoConfigState {
 		}
 	}
 
-	static class ByteConfigFieldCodec implements ConfigFieldCodec<Byte> {
+	class ByteConfigFieldCodec implements ConfigFieldCodec<Byte> {
 		public static final ByteConfigFieldCodec INSTANCE = new ByteConfigFieldCodec();
 
 		@Override
@@ -59,7 +59,7 @@ public interface AutoConfigState {
 		}
 	}
 
-	static class ShortConfigFieldCodec implements ConfigFieldCodec<Short> {
+	class ShortConfigFieldCodec implements ConfigFieldCodec<Short> {
 		public static final ShortConfigFieldCodec INSTANCE = new ShortConfigFieldCodec();
 
 		@Override
@@ -73,7 +73,7 @@ public interface AutoConfigState {
 		}
 	}
 
-	static class IntConfigFieldCodec implements ConfigFieldCodec<Integer> {
+	class IntConfigFieldCodec implements ConfigFieldCodec<Integer> {
 		public static final IntConfigFieldCodec INSTANCE = new IntConfigFieldCodec();
 
 		@Override
@@ -87,7 +87,7 @@ public interface AutoConfigState {
 		}
 	}
 
-	static class LongConfigFieldCodec implements ConfigFieldCodec<Long> {
+	class LongConfigFieldCodec implements ConfigFieldCodec<Long> {
 		public static final LongConfigFieldCodec INSTANCE = new LongConfigFieldCodec();
 
 		@Override
@@ -101,7 +101,7 @@ public interface AutoConfigState {
 		}
 	}
 
-	static class FloatConfigFieldCodec implements ConfigFieldCodec<Float> {
+	class FloatConfigFieldCodec implements ConfigFieldCodec<Float> {
 		public static final FloatConfigFieldCodec INSTANCE = new FloatConfigFieldCodec();
 
 		@Override
@@ -115,7 +115,7 @@ public interface AutoConfigState {
 		}
 	}
 
-	static class DoubleConfigFieldCodec implements ConfigFieldCodec<Double> {
+	class DoubleConfigFieldCodec implements ConfigFieldCodec<Double> {
 		public static final DoubleConfigFieldCodec INSTANCE = new DoubleConfigFieldCodec();
 
 		@Override
@@ -129,7 +129,7 @@ public interface AutoConfigState {
 		}
 	}
 
-	static class StringConfigFieldCodec implements ConfigFieldCodec<String> {
+	class StringConfigFieldCodec implements ConfigFieldCodec<String> {
 		public static final StringConfigFieldCodec INSTANCE = new StringConfigFieldCodec();
 
 		@Override
@@ -143,7 +143,7 @@ public interface AutoConfigState {
 		}
 	}
 
-	static class BooleanArrayConfigFieldCodec implements ConfigFieldCodec<boolean[]> {
+	class BooleanArrayConfigFieldCodec implements ConfigFieldCodec<boolean[]> {
 		public static final BooleanArrayConfigFieldCodec INSTANCE =
 			new BooleanArrayConfigFieldCodec();
 
@@ -158,7 +158,7 @@ public interface AutoConfigState {
 		}
 	}
 
-	static class ByteArrayConfigFieldCodec implements ConfigFieldCodec<byte[]> {
+	class ByteArrayConfigFieldCodec implements ConfigFieldCodec<byte[]> {
 		public static final ByteArrayConfigFieldCodec INSTANCE = new ByteArrayConfigFieldCodec();
 
 		@Override
@@ -172,7 +172,7 @@ public interface AutoConfigState {
 		}
 	}
 
-	static class ShortArrayConfigFieldCodec implements ConfigFieldCodec<short[]> {
+	class ShortArrayConfigFieldCodec implements ConfigFieldCodec<short[]> {
 		public static final ShortArrayConfigFieldCodec INSTANCE = new ShortArrayConfigFieldCodec();
 
 		@Override
@@ -186,7 +186,7 @@ public interface AutoConfigState {
 		}
 	}
 
-	static class IntArrayConfigFieldCodec implements ConfigFieldCodec<int[]> {
+	class IntArrayConfigFieldCodec implements ConfigFieldCodec<int[]> {
 		public static final IntArrayConfigFieldCodec INSTANCE = new IntArrayConfigFieldCodec();
 
 		@Override
@@ -200,7 +200,7 @@ public interface AutoConfigState {
 		}
 	}
 
-	static class LongArrayConfigFieldCodec implements ConfigFieldCodec<long[]> {
+	class LongArrayConfigFieldCodec implements ConfigFieldCodec<long[]> {
 		public static final LongArrayConfigFieldCodec INSTANCE = new LongArrayConfigFieldCodec();
 
 		@Override
@@ -214,7 +214,7 @@ public interface AutoConfigState {
 		}
 	}
 
-	static class FloatArrayConfigFieldCodec implements ConfigFieldCodec<float[]> {
+	class FloatArrayConfigFieldCodec implements ConfigFieldCodec<float[]> {
 		public static final FloatArrayConfigFieldCodec INSTANCE = new FloatArrayConfigFieldCodec();
 
 		@Override
@@ -228,7 +228,7 @@ public interface AutoConfigState {
 		}
 	}
 
-	static class DoubleArrayConfigFieldCodec implements ConfigFieldCodec<double[]> {
+	class DoubleArrayConfigFieldCodec implements ConfigFieldCodec<double[]> {
 		public static final DoubleArrayConfigFieldCodec INSTANCE =
 			new DoubleArrayConfigFieldCodec();
 
@@ -243,7 +243,7 @@ public interface AutoConfigState {
 		}
 	}
 
-	static class StringArrayConfigFieldCodec implements ConfigFieldCodec<String[]> {
+	class StringArrayConfigFieldCodec implements ConfigFieldCodec<String[]> {
 		public static final StringArrayConfigFieldCodec INSTANCE =
 			new StringArrayConfigFieldCodec();
 
@@ -258,7 +258,7 @@ public interface AutoConfigState {
 		}
 	}
 
-	static class EnumConfigFieldCodec implements ConfigFieldCodec<Enum<?>> {
+	class EnumConfigFieldCodec implements ConfigFieldCodec<Enum<?>> {
 		public static final EnumConfigFieldCodec INSTANCE = new EnumConfigFieldCodec();
 
 		@Override

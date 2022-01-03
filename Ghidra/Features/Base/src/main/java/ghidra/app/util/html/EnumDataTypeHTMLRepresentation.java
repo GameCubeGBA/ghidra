@@ -132,16 +132,15 @@ public class EnumDataTypeHTMLRepresentation extends HTMLDataTypeRepresentation {
 		int lineCount = 0;
 
 		// header
-		Iterator<ValidatableLine> iterator = headerLines.iterator();
-		for (; iterator.hasNext();) {
-			TextLine line = (TextLine) iterator.next();
-			String encodedHeaderLine = line.getText();
-			String headerLine = wrapStringInColor(encodedHeaderLine, line.getTextColor());
-			append(fullHtml, truncatedHtml, lineCount, headerLine);
-			lineCount++;
-		}
+        for (ValidatableLine validatableLine : headerLines) {
+            TextLine line = (TextLine) validatableLine;
+            String encodedHeaderLine = line.getText();
+            String headerLine = wrapStringInColor(encodedHeaderLine, line.getTextColor());
+            append(fullHtml, truncatedHtml, lineCount, headerLine);
+            lineCount++;
+        }
 
-		append(fullHtml, truncatedHtml, lineCount, LENGTH_PREFIX, infoLine.getText());
+        append(fullHtml, truncatedHtml, lineCount, LENGTH_PREFIX, infoLine.getText());
 		append(fullHtml, truncatedHtml, lineCount, BR, BR);
 
 		// "<TT> displayName { "

@@ -16,7 +16,7 @@
 package ghidra.dbg.attributes;
 
 public interface TargetPrimitiveDataType extends TargetDataType {
-	public static final TargetDataType VOID =
+	TargetDataType VOID =
 		new DefaultTargetPrimitiveDataType(PrimitiveKind.VOID, 0);
 
 	enum PrimitiveKind {
@@ -29,7 +29,7 @@ public interface TargetPrimitiveDataType extends TargetDataType {
 		COMPLEX;
 	}
 
-	public class DefaultTargetPrimitiveDataType implements TargetPrimitiveDataType {
+	class DefaultTargetPrimitiveDataType implements TargetPrimitiveDataType {
 		protected final PrimitiveKind kind;
 		protected final int length;
 

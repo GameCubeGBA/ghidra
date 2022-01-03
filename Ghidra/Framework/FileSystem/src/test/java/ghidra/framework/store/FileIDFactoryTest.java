@@ -27,8 +27,7 @@ import generic.test.AbstractGenericTest;
 public class FileIDFactoryTest extends AbstractGenericTest {
 
 	public FileIDFactoryTest() {
-		super();
-	}
+    }
 	
 @Test
     public void testCreateFileID() {

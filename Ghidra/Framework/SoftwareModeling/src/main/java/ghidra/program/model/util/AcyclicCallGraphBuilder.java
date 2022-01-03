@@ -237,7 +237,7 @@ public class AcyclicCallGraphBuilder {
 		@Override
 		public String toString() {
 			return address == null ? ""
-					: address.toString() +
+					: address +
 						(children == null ? " <no children>" : " " + Arrays.toString(children));
 		}
 	}

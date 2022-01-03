@@ -151,7 +151,7 @@ public class MemviewProvider extends ComponentProviderAdapter {
 	}
 
 	private void performApplyFilterToPanel(ActionContext ctx) {
-		applyFilter = !isApplyFilter();
+		applyFilter = !applyFilter;
 		applyFilter();
 	}
 

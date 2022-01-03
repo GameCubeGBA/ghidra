@@ -72,7 +72,7 @@ public class PowerPCAddressAnalyzer extends ConstantPropagationAnalyzer {
 	private boolean propagateR30value; // see computed default
 	private boolean recoverSwitchTables = SWITCH_OPTION_DEFAULT_VALUE;
 
-	private final static String PROCESSOR_NAME = "PowerPC";
+	private static final String PROCESSOR_NAME = "PowerPC";
 
 	public PowerPCAddressAnalyzer() {
 		super(PROCESSOR_NAME);
@@ -200,7 +200,7 @@ public class PowerPCAddressAnalyzer extends ConstantPropagationAnalyzer {
 
 				private void markupDualInstructions(VarnodeContext context, Instruction instr) {
 					String mnemonic = instr.getMnemonicString();
-					if (mnemonic.equals("subi") || mnemonic.equals("addi")) {
+					if ("subi".equals(mnemonic) || "addi".equals(mnemonic)) {
 						Register reg = instr.getRegister(0);
 						if (reg != null) {
 							BigInteger val = context.getValue(reg, false);
@@ -234,12 +234,12 @@ public class PowerPCAddressAnalyzer extends ConstantPropagationAnalyzer {
 
 					// don't markup li from a scalar, addresses don't fit in an instruction.
 					String mnemonic = instr.getMnemonicString();
-					if (mnemonic.equals("li") && instr.getScalar(1) != null) {
+					if ("li".equals(mnemonic) && instr.getScalar(1) != null) {
 						return false;
 					}
 
 					// lis is only the upper half of the instruction, don't mark it as a reference.
-					if (mnemonic.equals("lis")) {
+					if ("lis".equals(mnemonic)) {
 						return false;
 					}
 
@@ -269,8 +269,8 @@ public class PowerPCAddressAnalyzer extends ConstantPropagationAnalyzer {
 					if (!instruction.getFlowType().isJump()) {
 						return false;
 					}
-					if (mnemonic.equals("bcctr") || mnemonic.equals("bcctrl") ||
-						mnemonic.equals("bctr")) {
+					if ("bcctr".equals(mnemonic) || "bcctrl".equals(mnemonic) ||
+						"bctr".equals(mnemonic)) {
 						// record the destination that is unknown
 						if (!checkAlreadyRecovered(instruction.getProgram(),
 							instruction.getMinAddress())) {
@@ -287,10 +287,10 @@ public class PowerPCAddressAnalyzer extends ConstantPropagationAnalyzer {
 					if (node.isRegister()) {
 						Register reg = program.getRegister(node.getAddress());
 						if (reg != null) {
-							if (reg.getName().equals("xer_so")) {
+							if ("xer_so".equals(reg.getName())) {
 								return Long.valueOf(0);
 							}
-							if (propagateR2value && reg.getName().equals("r2") &&
+							if (propagateR2value && "r2".equals(reg.getName()) &&
 								startingR2Value != null && startingR2Value.hasValue()) {
 								return Long.valueOf(startingR2Value.getUnsignedValue().longValue());
 							}
@@ -369,12 +369,8 @@ public class PowerPCAddressAnalyzer extends ConstantPropagationAnalyzer {
 			return true;
 		}
 		Reference[] refs = program.getReferenceManager().getReferencesFrom(addr);
-		if (refs.length == 1 && !refs[0].getReferenceType().isData()) {
-			return true;
-		}
-
-		return false;
-	}
+        return refs.length == 1 && !refs[0].getReferenceType().isData();
+    }
 
 	private void recoverSwitches(final Program program, SymbolicPropogator symEval,
 			AddressSet destinationSet, TaskMonitor monitor) throws CancelledException {
@@ -491,7 +487,7 @@ public class PowerPCAddressAnalyzer extends ConstantPropagationAnalyzer {
 					Register reg = program.getRegister(node.getAddress());
 					if (reg != null) {
 						// never assume for flags, or control registers
-						if (reg.getName().equals("xer_so") || reg.getName().startsWith("cr")) {
+						if ("xer_so".equals(reg.getName()) || reg.getName().startsWith("cr")) {
 							return Long.valueOf(0);
 						}
 					}
@@ -694,9 +690,9 @@ public class PowerPCAddressAnalyzer extends ConstantPropagationAnalyzer {
 
 	protected boolean isPEFCallingConvention(Program program, Instruction instr) {
 
-		if (instr.getMnemonicString().equals("lwz")) {
+		if ("lwz".equals(instr.getMnemonicString())) {
 			Register reg = instr.getRegister(0);
-			if (reg != null && reg.getName().equals("r2")) {
+			if (reg != null && "r2".equals(reg.getName())) {
 				Object[] objs = instr.getOpObjects(1);
 				Register stackRegister = program.getCompilerSpec().getStackPointer();
 				for (Object obj : objs) {
@@ -710,9 +706,7 @@ public class PowerPCAddressAnalyzer extends ConstantPropagationAnalyzer {
 				}
 				Address fallAddr = instr.getFallFrom();
 				Instruction fallInstr = program.getListing().getInstructionContaining(fallAddr);
-				if (fallInstr != null && fallInstr.getFlowType().isCall()) {
-					return true;
-				}
+                return fallInstr != null && fallInstr.getFlowType().isCall();
 			}
 		}
 		return false;

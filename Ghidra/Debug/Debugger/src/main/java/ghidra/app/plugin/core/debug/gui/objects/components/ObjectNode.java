@@ -113,7 +113,7 @@ public class ObjectNode extends GTreeSlowLoadingNode {  //extends GTreeNode
 
 	@Override
 	public String getDisplayText() {
-		return getContainer().getDecoratedName();
+		return container.getDecoratedName();
 	}
 
 	@Override
@@ -212,28 +212,22 @@ public class ObjectNode extends GTreeSlowLoadingNode {  //extends GTreeNode
 
 	public void callUpdate() {
 		// NB: this has to be in its own thread
-		CompletableFuture.runAsync(new Runnable() {
-			@Override
-			public void run() {
-				List<GTreeNode> updateNodes = tree.update(container);
-				if (isRestructured()) {
-					setChildren(updateNodes);
-				}
-			}
-		});
+		CompletableFuture.runAsync(() -> {
+            List<GTreeNode> updateNodes = tree.update(container);
+            if (isRestructured()) {
+                setChildren(updateNodes);
+            }
+        });
 	}
 
 	public void callModified() {
 		// NB: this has to be in its own thread
-		CompletableFuture.runAsync(new Runnable() {
-			@Override
-			public void run() {
-				List<GTreeNode> updateNodes = tree.update(container);
-				for (GTreeNode n : updateNodes) {
-					n.fireNodeChanged(ObjectNode.this, n);
-				}
-			}
-		});
+		CompletableFuture.runAsync(() -> {
+            List<GTreeNode> updateNodes = tree.update(container);
+            for (GTreeNode n : updateNodes) {
+                n.fireNodeChanged(ObjectNode.this, n);
+            }
+        });
 	}
 
 	public boolean isRestructured() {

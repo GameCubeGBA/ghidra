@@ -189,13 +189,9 @@ public abstract class AutoLookup {
 	private boolean isIgnorableKeyEvent(KeyEvent event) {
 
 		// ignore modified keys, except for SHIFT
-		if (!isUnmodifiedOrShift(event.getModifiersEx()) || event.isActionKey() || event.getKeyChar() == KeyEvent.CHAR_UNDEFINED ||
-			Character.isISOControl(event.getKeyChar())) {
-			return true;
-		}
-
-		return false;
-	}
+        return !isUnmodifiedOrShift(event.getModifiersEx()) || event.isActionKey() || event.getKeyChar() == KeyEvent.CHAR_UNDEFINED ||
+                Character.isISOControl(event.getKeyChar());
+    }
 
 	private boolean isUnmodifiedOrShift(int modifiers) {
 		if (modifiers == 0) {

@@ -86,13 +86,10 @@ class EditExternalReferencePanel extends EditReferencePanel {
 				extProgNameChanged();
 			}
 		});
-		extLibName.addItemListener(new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				extProgNameChanged();
-				updateExtLibPath();
-			}
-		});
+		extLibName.addItemListener(e -> {
+            extProgNameChanged();
+            updateExtLibPath();
+        });
 		topPanel.add(extLibName);
 
 		extLibPath = new JTextField();
@@ -102,21 +99,11 @@ class EditExternalReferencePanel extends EditReferencePanel {
 
 		clearButton = new JButton("Clear");
 		clearButton.setToolTipText("Remove Link to External Program");
-		clearButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				extLibPath.setText(null);
-			}
-		});
+		clearButton.addActionListener(e -> extLibPath.setText(null));
 
 		editButton = new JButton("Edit");
 		editButton.setToolTipText("Edit Link to External Program");
-		editButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				popupProgramChooser();
-			}
-		});
+		editButton.addActionListener(e -> popupProgramChooser());
 
 		JPanel pathPanel = new JPanel(new BorderLayout());
 		pathPanel.add(extLibPath, BorderLayout.CENTER);
@@ -148,7 +135,7 @@ class EditExternalReferencePanel extends EditReferencePanel {
 	}
 
 	private void extProgNameChanged() {
-		boolean hasText = (extLibName.getText().trim().length() != 0);
+		boolean hasText = (!extLibName.getText().trim().isEmpty());
 		clearButton.setEnabled(hasText);
 		editButton.setEnabled(hasText);
 		extLibPath.setText(null);
@@ -159,18 +146,18 @@ class EditExternalReferencePanel extends EditReferencePanel {
 		extLibName.clearModel();
 		extLibName.addItem(Library.UNKNOWN);
 		Arrays.sort(names);
-		for (int i = 0; i < names.length; i++) {
+		for (String name : names) {
 			if (Library.UNKNOWN.equals(extLibName)) {
 				continue;
 			}
-			extLibName.addItem(names[i]);
+			extLibName.addItem(name);
 		}
 	}
 
 	private void updateExtLibPath() {
 		String name = extLibName.getText().trim();
 		String path = null;
-		if (name.length() != 0) {
+		if (!name.isEmpty()) {
 			name = name.trim();
 			path = fromCodeUnit.getProgram().getExternalManager().getExternalLibraryPath(name);
 		}
@@ -184,22 +171,19 @@ class EditExternalReferencePanel extends EditReferencePanel {
 		DataTreeDialog d =
 			new DataTreeDialog(this.getParent(), "Choose External Program", DataTreeDialog.OPEN);
 		final DataTreeDialog dialog = d;
-		d.addOkActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				DomainFile df = dialog.getDomainFile();
-				if (df == null) {
-					return;
-				}
-				String pathName = df.getPathname();
-				if (pathName.equals(fromCodeUnit.getProgram().getDomainFile().getPathname())) {
-					dialog.setStatusText("Selected program is the same as current program");
-					return;
-				}
-				dialog.close();
-				extLibPath.setText(df.getPathname());
-			}
-		});
+		d.addOkActionListener(e -> {
+            DomainFile df = dialog.getDomainFile();
+            if (df == null) {
+                return;
+            }
+            String pathName = df.getPathname();
+            if (pathName.equals(fromCodeUnit.getProgram().getDomainFile().getPathname())) {
+                dialog.setStatusText("Selected program is the same as current program");
+                return;
+            }
+            dialog.close();
+            extLibPath.setText(df.getPathname());
+        });
 		plugin.getTool().showDialog(d);
 	}
 
@@ -287,7 +271,7 @@ class EditExternalReferencePanel extends EditReferencePanel {
 		}
 
 		String name = extLibName.getText();
-		if (name == null || name.trim().length() == 0) {
+		if (name == null || name.trim().isEmpty()) {
 			showInputErr("An external program 'Name' must be specified.");
 			return false;
 		}
@@ -307,7 +291,7 @@ class EditExternalReferencePanel extends EditReferencePanel {
 				space.getMaxAddress().toString(false));
 			return false;
 		}
-		if (addr == null && (label == null || label.length() == 0)) {
+		if (addr == null && (label == null || label.isEmpty())) {
 			showInputErr(
 				"Either (or both) an external 'Label' and/or 'Address' must be specified.");
 			return false;

@@ -32,6 +32,6 @@ interface TagFilterChooser {
 	 * @param currentExcludedTags The current collection of excluded tags.  This will be used to
 	 *                            seed the excluded tag choices for this chooser.
 	 */
-	public Map<String, VTMatchTag> getExcludedTags(Map<String, VTMatchTag> allTags,
-			Map<String, VTMatchTag> currentExcludedTags);
+    Map<String, VTMatchTag> getExcludedTags(Map<String, VTMatchTag> allTags,
+                                            Map<String, VTMatchTag> currentExcludedTags);
 }

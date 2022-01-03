@@ -31,8 +31,7 @@ public class ProgramUtilitiesTest extends AbstractGhidraHeadedIntegrationTest {
 	private TestEnv env;
 
 	public ProgramUtilitiesTest() {
-		super();
-	}
+    }
 
     @Before
 	public void setUp() throws Exception {

@@ -39,10 +39,10 @@ import ghidra.util.exception.InvalidInputException;
 import ghidra.util.task.TaskMonitor;
 
 public class OmfLoader extends AbstractLibrarySupportLoader {
-	public final static String OMF_NAME = "Relocatable Object Module Format (OMF)";
-	public final static long MIN_BYTE_LENGTH = 11;
-	public final static long IMAGE_BASE = 0x2000; // Base offset to start loading segments
-	public final static long MAX_UNINITIALIZED_FILL = 0x2000;	// Maximum zero bytes added to pad initialized segments
+	public static final String OMF_NAME = "Relocatable Object Module Format (OMF)";
+	public static final long MIN_BYTE_LENGTH = 11;
+	public static final long IMAGE_BASE = 0x2000; // Base offset to start loading segments
+	public static final long MAX_UNINITIALIZED_FILL = 0x2000;	// Maximum zero bytes added to pad initialized segments
 
 	private ArrayList<OmfSymbol> externsyms = null;
 
@@ -88,7 +88,7 @@ public class OmfLoader extends AbstractLibrarySupportLoader {
 			catch (OmfException e) {
 				throw new IOException("Bad header format: " + e.getMessage());
 			}
-			List<QueryResult> results = QueryOpinionService.query(getName(), scan.getMachineName(),
+			List<QueryResult> results = QueryOpinionService.query(OMF_NAME, scan.getMachineName(),
 				mapTranslator(scan.getTranslator()));
 			for (QueryResult result : results) {
 				loadSpecs.add(new LoadSpec(this, IMAGE_BASE, result));
@@ -463,7 +463,7 @@ public class OmfLoader extends AbstractLibrarySupportLoader {
 			MessageLog log) {
 
 		ArrayList<OmfExternalSymbol> symbolrecs = header.getExternalSymbols();
-		if (symbolrecs.size() == 0) {
+		if (symbolrecs.isEmpty()) {
 			return;
 		}
 

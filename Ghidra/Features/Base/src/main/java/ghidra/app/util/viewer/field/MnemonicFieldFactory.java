@@ -45,8 +45,8 @@ public class MnemonicFieldFactory extends FieldFactory {
 	public static final String FIELD_NAME = "Mnemonic";
 	public static final Color OVERRIDE_COLOR = new Color(180, 0, 108);
 // TODO: Should BAD_PROTOTYPE_COLOR be an option?
-	private final static Color BAD_PROTOTYPE_COLOR = new Color(196, 0, 0);
-	private final static String SHOW_UNDERLINE_FOR_REFERENCES =
+private static final Color BAD_PROTOTYPE_COLOR = new Color(196, 0, 0);
+	private static final String SHOW_UNDERLINE_FOR_REFERENCES =
 		GhidraOptions.MNEMONIC_GROUP_TITLE + Options.DELIMITER + "Underline Fields With References";
 
 	private static final String OVERRIDE_COLOR_OPTION = "Mnemonic, Override Color";

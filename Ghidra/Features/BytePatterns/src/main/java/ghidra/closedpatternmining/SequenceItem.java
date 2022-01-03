@@ -72,14 +72,11 @@ public class SequenceItem implements Comparable<SequenceItem> {
 			return false;
 		}
 		SequenceItem other = (SequenceItem) obj;
-		if (!other.getSymbol().equals(symbol)) {
+		if (!other.symbol.equals(symbol)) {
 			return false;
 		}
-		if (!(other.getIndex() == index)) {
-			return false;
-		}
-		return true;
-	}
+        return other.index == index;
+    }
 
 	/**
 	 * Generates a String from a list of {@link SequenceItem}s with each missing {@link SequenceItem} replaces by a "."
@@ -91,15 +88,15 @@ public class SequenceItem implements Comparable<SequenceItem> {
 		StringBuilder sb = new StringBuilder();
 		int symbolsWritten = 0;
 		for (SequenceItem currentItem : itemList) {
-			if (currentItem.getIndex() < symbolsWritten) {
+			if (currentItem.index < symbolsWritten) {
 				throw new IllegalArgumentException(
 					"itemList must be in ascending order of item index");
 			}
-			while (currentItem.getIndex() > symbolsWritten) {
+			while (currentItem.index > symbolsWritten) {
 				sb.append(".");//add a dit
 				symbolsWritten++;
 			}
-			sb.append(currentItem.getSymbol());
+			sb.append(currentItem.symbol);
 			symbolsWritten++;
 		}
 		if (symbolsWritten > totalLength) {
@@ -123,10 +120,10 @@ public class SequenceItem implements Comparable<SequenceItem> {
 
 	@Override
 	public int compareTo(SequenceItem arg0) {
-		if (index != arg0.getIndex()) {
-			return index - arg0.getIndex();
+		if (index != arg0.index) {
+			return index - arg0.index;
 		}
-		return symbol.compareTo(arg0.getSymbol());
+		return symbol.compareTo(arg0.symbol);
 	}
 
 }

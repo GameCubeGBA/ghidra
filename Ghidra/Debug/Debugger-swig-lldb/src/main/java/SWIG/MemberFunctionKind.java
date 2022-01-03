@@ -12,11 +12,11 @@
 package SWIG;
 
 public final class MemberFunctionKind {
-  public final static MemberFunctionKind eMemberFunctionKindUnknown = new MemberFunctionKind("eMemberFunctionKindUnknown", lldbJNI.eMemberFunctionKindUnknown_get());
-  public final static MemberFunctionKind eMemberFunctionKindConstructor = new MemberFunctionKind("eMemberFunctionKindConstructor");
-  public final static MemberFunctionKind eMemberFunctionKindDestructor = new MemberFunctionKind("eMemberFunctionKindDestructor");
-  public final static MemberFunctionKind eMemberFunctionKindInstanceMethod = new MemberFunctionKind("eMemberFunctionKindInstanceMethod");
-  public final static MemberFunctionKind eMemberFunctionKindStaticMethod = new MemberFunctionKind("eMemberFunctionKindStaticMethod");
+  public static final MemberFunctionKind eMemberFunctionKindUnknown = new MemberFunctionKind("eMemberFunctionKindUnknown", lldbJNI.eMemberFunctionKindUnknown_get());
+  public static final MemberFunctionKind eMemberFunctionKindConstructor = new MemberFunctionKind("eMemberFunctionKindConstructor");
+  public static final MemberFunctionKind eMemberFunctionKindDestructor = new MemberFunctionKind("eMemberFunctionKindDestructor");
+  public static final MemberFunctionKind eMemberFunctionKindInstanceMethod = new MemberFunctionKind("eMemberFunctionKindInstanceMethod");
+  public static final MemberFunctionKind eMemberFunctionKindStaticMethod = new MemberFunctionKind("eMemberFunctionKindStaticMethod");
 
   public final int swigValue() {
     return swigValue;
@@ -29,9 +29,9 @@ public final class MemberFunctionKind {
   public static MemberFunctionKind swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-    for (int i = 0; i < swigValues.length; i++)
-      if (swigValues[i].swigValue == swigValue)
-        return swigValues[i];
+      for (MemberFunctionKind value : swigValues)
+          if (value.swigValue == swigValue)
+              return value;
     throw new IllegalArgumentException("No enum " + MemberFunctionKind.class + " with value " + swigValue);
   }
 

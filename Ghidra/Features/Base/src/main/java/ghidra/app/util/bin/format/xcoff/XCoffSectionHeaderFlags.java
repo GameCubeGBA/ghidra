@@ -16,14 +16,14 @@
 package ghidra.app.util.bin.format.xcoff;
 
 public final class XCoffSectionHeaderFlags {
-	public final static int STYP_PAD = 0x0008;
-	public final static int STYP_TEXT = 0x0020;
-	public final static int STYP_DATA = 0x0040;
-	public final static int STYP_BSS = 0x0080;
-	public final static int STYP_EXCEPT = 0x0080;
-	public final static int STYP_INFO = 0x0200;
-	public final static int STYP_LOADER = 0x1000;
-	public final static int STYP_DEBUG = 0x2000;
-	public final static int STYP_TYPCHK = 0x4000;
-	public final static int STYP_OVRFLO = 0x8000;
+	public static final int STYP_PAD = 0x0008;
+	public static final int STYP_TEXT = 0x0020;
+	public static final int STYP_DATA = 0x0040;
+	public static final int STYP_BSS = 0x0080;
+	public static final int STYP_EXCEPT = 0x0080;
+	public static final int STYP_INFO = 0x0200;
+	public static final int STYP_LOADER = 0x1000;
+	public static final int STYP_DEBUG = 0x2000;
+	public static final int STYP_TYPCHK = 0x4000;
+	public static final int STYP_OVRFLO = 0x8000;
 }

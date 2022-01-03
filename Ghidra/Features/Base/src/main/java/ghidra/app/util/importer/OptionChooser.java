@@ -22,6 +22,6 @@ import ghidra.program.model.address.AddressFactory;
 
 @FunctionalInterface
 public interface OptionChooser {
-	public static final OptionChooser DEFAULT_OPTIONS = (choices, addressFactory) -> choices;
+	OptionChooser DEFAULT_OPTIONS = (choices, addressFactory) -> choices;
 	List<Option> choose(List<Option> optionChoices, AddressFactory addressFactory);
 }

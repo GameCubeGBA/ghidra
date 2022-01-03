@@ -142,11 +142,8 @@ public abstract class ByteSequenceAnalyzerProvider extends DialogComponentProvid
 				if (rows == null) {
 					return false;
 				}
-				if (rows.isEmpty()) {
-					return false;
-				}
-				return true;
-			}
+                return !rows.isEmpty();
+            }
 
 			@Override
 			public boolean isAddToPopup(ActionContext context) {

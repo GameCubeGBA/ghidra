@@ -104,7 +104,7 @@ public class MoveBlockModelTest extends AbstractGhidraHeadedIntegrationTest
 		assertTrue(s.indexOf("0x6600") > 0);
 		assertEquals(block.getStart(), model.getNewStartAddress());
 		assertEquals(block.getEnd(), model.getNewEndAddress());
-		assertTrue(model.getMessage().length() == 0);
+		assertTrue(model.getMessage().isEmpty());
 	}
 
 	@Test
@@ -122,7 +122,7 @@ public class MoveBlockModelTest extends AbstractGhidraHeadedIntegrationTest
 	@Test
 	public void testBadEnd() {
 		model.setNewEndAddress(getNotepadAddr(0x1007));
-		assertTrue(model.getMessage().length() > 0);
+		assertTrue(!model.getMessage().isEmpty());
 	}
 
 	@Test

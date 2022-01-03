@@ -22,7 +22,7 @@ public interface FunctionGraphVertexLocationContextIf
 		extends FunctionGraphValidGraphActionContextIf, VisualGraphVertexActionContext<FGVertex> {
 
 	@Override
-	public FGVertex getVertex();
+    FGVertex getVertex();
 
-	public VertexActionContextInfo getVertexInfo();
+	VertexActionContextInfo getVertexInfo();
 }

@@ -49,12 +49,12 @@ public class PythonCodeCompletionFactory {
 	/* package-level accessibility so that PythonPlugin can tell this is
 	 * our option
 	 */
-	final static String INCLUDE_TYPES_LABEL = "Include type names in code completion popup?";
-	private final static String INCLUDE_TYPES_DESCRIPTION =
+    static final String INCLUDE_TYPES_LABEL = "Include type names in code completion popup?";
+	private static final String INCLUDE_TYPES_DESCRIPTION =
 		"Whether or not to include the type names (classes) of the possible " +
 			"completions in the code completion window.  The class name will be " +
 			"parenthesized after the completion.";
-	private final static boolean INCLUDE_TYPES_DEFAULT = true;
+	private static final boolean INCLUDE_TYPES_DEFAULT = true;
 	private static boolean includeTypes = INCLUDE_TYPES_DEFAULT;
 
 	public static final Color NULL_COLOR = new Color(255, 0, 0);
@@ -204,14 +204,12 @@ public class PythonCodeCompletionFactory {
 			}
 
 			comp = new GDLabel(description);
-			Iterator<Class<?>> iter = classes.iterator();
-			while (iter.hasNext()) {
-				Class<?> testClass = iter.next();
-				if (testClass.isInstance(pyObj)) {
-					comp.setForeground(classToColorMap.get(testClass));
-					break;
-				}
-			}
+            for (Class<?> testClass : classes) {
+                if (testClass.isInstance(pyObj)) {
+                    comp.setForeground(classToColorMap.get(testClass));
+                    break;
+                }
+            }
 		}
 		return new CodeCompletion(description, insertion, comp);
 	}
@@ -226,17 +224,16 @@ public class PythonCodeCompletionFactory {
 		options.registerOption(INCLUDE_TYPES_LABEL, INCLUDE_TYPES_DEFAULT, null,
 			INCLUDE_TYPES_DESCRIPTION);
 
-		Iterator<?> iter = classes.iterator();
-		while (iter.hasNext()) {
-			Class<?> currentClass = (Class<?>) iter.next();
-			options.registerOption(
-				COMPLETION_LABEL + Options.DELIMITER + getSimpleName(currentClass),
-				classToColorMap.get(currentClass), null,
-				"Color to use for " + classDescription.get(currentClass) + ".");
-			classToColorMap.put(currentClass,
-				options.getColor(COMPLETION_LABEL + Options.DELIMITER + getSimpleName(currentClass),
-					classToColorMap.get(currentClass)));
-		}
+        for (Class<?> aClass : classes) {
+            Class<?> currentClass = (Class<?>) aClass;
+            options.registerOption(
+                    COMPLETION_LABEL + Options.DELIMITER + getSimpleName(currentClass),
+                    classToColorMap.get(currentClass), null,
+                    "Color to use for " + classDescription.get(currentClass) + ".");
+            classToColorMap.put(currentClass,
+                    options.getColor(COMPLETION_LABEL + Options.DELIMITER + getSimpleName(currentClass),
+                            classToColorMap.get(currentClass)));
+        }
 	}
 
 	/**
@@ -285,7 +282,7 @@ public class PythonCodeCompletionFactory {
 		Method[] declaredMethods = obj.getClass().getDeclaredMethods();
 
 		for (Method declaredMethod : declaredMethods) {
-			if (declaredMethod.getName().equals("__call__")) {
+			if ("__call__".equals(declaredMethod.getName())) {
 				callMethodList.add(declaredMethod);
 			}
 		}

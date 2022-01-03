@@ -99,11 +99,8 @@ public class DebuggerEmulationServicePlugin extends Plugin implements DebuggerEm
 			if (this.trace != that.trace) {
 				return false;
 			}
-			if (!Objects.equals(this.time, that.time)) {
-				return false;
-			}
-			return true;
-		}
+            return Objects.equals(this.time, that.time);
+        }
 
 		@Override
 		public int compareTo(CacheKey that) {
@@ -121,12 +118,8 @@ public class DebuggerEmulationServicePlugin extends Plugin implements DebuggerEm
 			}
 
 			result = this.time.compareSchedule(that.time);
-			if (result != CompareResult.EQUALS) {
-				return result;
-			}
-
-			return CompareResult.EQUALS;
-		}
+            return result;
+        }
 	}
 
 	protected static class CachedEmulator {
@@ -210,15 +203,12 @@ public class DebuggerEmulationServicePlugin extends Plugin implements DebuggerEm
 	private boolean emulateProgramEnabled(ProgramLocationActionContext ctx) {
 		Program program = ctx.getProgram();
 		// To avoid confusion of "forked from trace," only permit action from static context
-		if (program == null || program instanceof TraceProgramView) {
-			return false;
-		}
+        return program != null && !(program instanceof TraceProgramView);
 		/*MemoryBlock block = program.getMemory().getBlock(ctx.getAddress());
 		if (!block.isExecute()) {
 			return false;
 		}*/
-		return true;
-	}
+    }
 
 	private void emulateProgramActivated(ProgramLocationActionContext ctx) {
 		Program program = ctx.getProgram();
@@ -247,13 +237,10 @@ public class DebuggerEmulationServicePlugin extends Plugin implements DebuggerEm
 		Program programOrView = ctx.getProgram();
 		if (programOrView instanceof TraceProgramView) {
 			TraceProgramView view = (TraceProgramView) programOrView;
-			if (!ProgramEmulationUtils.isEmulatedProgram(view.getTrace())) {
-				return false;
-			}
+            return ProgramEmulationUtils.isEmulatedProgram(view.getTrace());
 			/*MemoryBlock block = view.getMemory().getBlock(ctx.getAddress());
 			return block.isExecute();*/
-			return true;
-		}
+        }
 
 		// Action was probably activated in a static listing.
 		// Bail if current trace is not emulated. Otherwise map and check region.

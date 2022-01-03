@@ -56,8 +56,7 @@ public class MemviewPanel extends JPanel implements MouseListener, MouseMotionLi
 	private Map<Long, Set<MemoryBox>> time2box = new HashMap<>();
 
 	public MemviewPanel(MemviewProvider provider) {
-		super();
-		this.provider = provider;
+        this.provider = provider;
 		setPreferredSize(new Dimension(barWidth, barHeight));
 		setSize(getPreferredSize());
 		setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
@@ -184,7 +183,7 @@ public class MemviewPanel extends JPanel implements MouseListener, MouseMotionLi
 			return;
 
 		boxList = new ArrayList<MemoryBox>();
-		Collection<MemoryBox> boxes = getBoxes();
+		Collection<MemoryBox> boxes = blist;
 		if (boxes == null) {
 			return;
 		}

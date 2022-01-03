@@ -26,7 +26,7 @@ import java.io.ObjectOutputStream;
  *
  */
 public class VoidPropertySet extends PropertySet {
-    private final static long serialVersionUID = 1;
+    private static final long serialVersionUID = 1;
 	/**
 	 * Constructor for VoidPropertySet.
 	 * @param name the name associated with this property set.

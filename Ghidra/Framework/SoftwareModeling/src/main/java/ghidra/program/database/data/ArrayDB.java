@@ -216,11 +216,8 @@ class ArrayDB extends DataTypeDB implements Array {
 			return false;
 		}
 		DataType dataType = getDataType();
-		if (!dataType.isEquivalent(array.getDataType()) || (dataType instanceof Dynamic && getElementLength() != array.getElementLength())) {
-			return false;
-		}
-		return true;
-	}
+        return dataType.isEquivalent(array.getDataType()) && (!(dataType instanceof Dynamic) || getElementLength() == array.getElementLength());
+    }
 
 	@Override
 	public void dataTypeReplaced(DataType oldDt, DataType newDt) {

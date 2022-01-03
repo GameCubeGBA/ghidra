@@ -54,31 +54,29 @@ public class DockingWindowsLookAndFeelUtils {
 	/**
 	 * Preference name for look and feel for the application.
 	 */
-	public final static String LAST_LOOK_AND_FEEL_KEY = "LastLookAndFeel";
+    public static final String LAST_LOOK_AND_FEEL_KEY = "LastLookAndFeel";
 
 	/**
 	 * Preference name for whether to use inverted colors.
 	 */
-	public final static String USE_INVERTED_COLORS_KEY = "LookAndFeel.UseInvertedColors";
+    public static final String USE_INVERTED_COLORS_KEY = "LookAndFeel.UseInvertedColors";
 
 	/**
 	 * Metal is the non-system, generic Java Look and Feel.
 	 */
-	public final static String METAL_LOOK_AND_FEEL = "Metal";
+    public static final String METAL_LOOK_AND_FEEL = "Metal";
 
 	/**
 	 * Default Look and feel for the current platform.
 	 */
-	private final static String SYSTEM_LOOK_AND_FEEL = "System";
+    private static final String SYSTEM_LOOK_AND_FEEL = "System";
 
 	/**
 	 * The most stable Linux LaF.
 	 */
 	private static final String NIMBUS_LOOK_AND_FEEL = "Nimbus";
 
-	private static RepaintManager defaultSwingRepaintManager = null;
-
-	private DockingWindowsLookAndFeelUtils() {
+    private DockingWindowsLookAndFeelUtils() {
 		// utils class, cannot create
 	}
 
@@ -195,14 +193,16 @@ public class DockingWindowsLookAndFeelUtils {
 		return UIManager.getSystemLookAndFeelClassName();
 	}
 
-	public static void setUseInvertedColors(boolean useInvertedColors) {
+    private static final class DefaultSwingRepaintManagerHolder {
+        private static final RepaintManager defaultSwingRepaintManager = RepaintManager.currentManager(null /*unused*/);
+    }
+
+    public static void setUseInvertedColors(boolean useInvertedColors) {
 		SystemUtilities.runIfSwingOrPostSwingLater(() -> {
 
-			if (defaultSwingRepaintManager == null) {
-				defaultSwingRepaintManager = RepaintManager.currentManager(null /*unused*/);
-			}
+            /*unused*/
 
-			RepaintManager rm = defaultSwingRepaintManager;
+            RepaintManager rm = DefaultSwingRepaintManagerHolder.defaultSwingRepaintManager;
 			if (useInvertedColors) {
 				rm = new GRepaintManager();
 			}
@@ -292,19 +292,17 @@ public class DockingWindowsLookAndFeelUtils {
 		UIDefaults defaults = UIManager.getDefaults();
 
 		Set<Entry<Object, Object>> set = defaults.entrySet();
-		Iterator<Entry<Object, Object>> iterator = set.iterator();
-		while (iterator.hasNext()) {
-			Entry<Object, Object> entry = iterator.next();
-			Object key = entry.getKey();
+        for (Entry<Object, Object> entry : set) {
+            Object key = entry.getKey();
 
-			if (key.toString().toLowerCase().contains("font")) {
-				Font currentFont = defaults.getFont(key);
-				if (currentFont != null) {
-					Font newFont = currentFont.deriveFont((float) fontSize);
-					UIManager.put(key, newFont);
-				}
-			}
-		}
+            if (key.toString().toLowerCase().contains("font")) {
+                Font currentFont = defaults.getFont(key);
+                if (currentFont != null) {
+                    Font newFont = currentFont.deriveFont((float) fontSize);
+                    UIManager.put(key, newFont);
+                }
+            }
+        }
 	}
 
 	/**

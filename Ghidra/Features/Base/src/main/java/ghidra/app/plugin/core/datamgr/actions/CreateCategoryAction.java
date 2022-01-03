@@ -48,11 +48,8 @@ public class CreateCategoryAction extends DockingAction {
 		if (categoryNode == null || !categoryNode.isEnabled()) {
 			return false;
 		}
-		if (categoryNode instanceof BuiltInArchiveNode) {
-			return false;
-		}
-		return true;
-	}
+        return !(categoryNode instanceof BuiltInArchiveNode);
+    }
 
 	@Override
 	public boolean isEnabledForContext(ActionContext context) {

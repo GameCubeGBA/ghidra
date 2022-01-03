@@ -460,11 +460,8 @@ public class DisplayableEol {
 		AddressSpace addressSpace = maxAddress.getAddressSpace();
 		Address spaceMaxAddress = addressSpace.getMaxAddress();
 		long minOffset = minAddress.getOffset();
-		if (minOffset == 0 && maxAddress.equals(spaceMaxAddress)) {
-			return true;
-		}
-		return false;
-	}
+        return minOffset == 0 && maxAddress.equals(spaceMaxAddress);
+    }
 
 	private String getFunctionSignature(Program program, Address funcAddr,
 			boolean displayFuncName) {
@@ -492,12 +489,8 @@ public class DisplayableEol {
 		}
 
 		long offset = addr.getOffset();
-		if (offset == 0x0 || offset == 0xffffffff || offset == 0xffff || offset == 0xff) {
-			return false;
-		}
-
-		return true;
-	}
+        return offset != 0x0 && offset != 0xffffffff && offset != 0xffff && offset != 0xff;
+    }
 
 	/**
 	 * Gets an array of objects that indicate the repeatable comments at the "to addresses" of the

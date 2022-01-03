@@ -19,7 +19,7 @@ import ghidra.dbg.target.TargetEnvironment;
 
 public interface DbgModelTargetEnvironmentEx extends DbgModelTargetObject, TargetEnvironment {
 
-	public void refreshInternal();
+	void refreshInternal();
 
 	/*
 	@Override

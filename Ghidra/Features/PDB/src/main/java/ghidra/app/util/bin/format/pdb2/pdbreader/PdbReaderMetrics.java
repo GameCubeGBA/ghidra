@@ -1054,7 +1054,7 @@ public class PdbReaderMetrics {
 	 */
 	private String reportAnomalies() {
 		StringBuilder builder = new StringBuilder();
-		if (pdbAnomalies.size() > 0) {
+		if (!pdbAnomalies.isEmpty()) {
 			builder.append("PDB Anomalies: ");
 			builder.append(pdbAnomalies);
 			builder.append("\n");

@@ -225,9 +225,9 @@ public class TraceObjectManager {
 	}
 
 	public boolean isRequired(TargetObject obj) {
-		if (obj.getName().equals("Debug"))
+		if ("Debug".equals(obj.getName()))
 			return true;
-		if (obj.getName().equals("Stack"))
+		if ("Stack".equals(obj.getName()))
 			return true;
 
 		Set<Class<? extends TargetObject>> interfaces = obj.getSchema().getInterfaces();
@@ -621,7 +621,7 @@ public class TraceObjectManager {
 	}
 
 	public List<TargetBreakpointLocation> collectBreakpoints(TargetThread thread) {
-		return getBreakpoints().stream().collect(Collectors.toList());
+		return breakpoints.stream().collect(Collectors.toList());
 	}
 
 	public void onBreakpointContainers(TargetThread thread,

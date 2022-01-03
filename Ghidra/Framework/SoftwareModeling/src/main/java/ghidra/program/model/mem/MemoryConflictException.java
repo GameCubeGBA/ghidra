@@ -27,7 +27,6 @@ public class MemoryConflictException extends UsrException {
 	 * Constructs a new MemoryConflictException
 	 */
     public MemoryConflictException() {
-		super();
     }
 	/**
 	 * Constructs a new MemoryConflictException with a detailed message.

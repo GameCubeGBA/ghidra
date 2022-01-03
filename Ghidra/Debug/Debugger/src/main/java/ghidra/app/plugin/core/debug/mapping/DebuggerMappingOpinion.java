@@ -53,7 +53,7 @@ public interface DebuggerMappingOpinion extends ExtensionPoint {
 	 * @param env the target environment
 	 * @return the endianness
 	 */
-	public static Endian getEndian(TargetEnvironment env) {
+	static Endian getEndian(TargetEnvironment env) {
 		String strEndian = env.getEndian();
 		if (strEndian.contains("little")) {
 			return Endian.LITTLE;
@@ -74,8 +74,8 @@ public interface DebuggerMappingOpinion extends ExtensionPoint {
 	 * @param includeOverrides true to include offers with negative confidence
 	 * @return a future which completes with the set of offers
 	 */
-	public static List<DebuggerMappingOffer> queryOpinions(TargetObject target,
-			boolean includeOverrides) {
+	static List<DebuggerMappingOffer> queryOpinions(TargetObject target,
+                                                    boolean includeOverrides) {
 		List<DebuggerMappingOffer> result = new ArrayList<>();
 		for (DebuggerMappingOpinion opinion : ClassSearcher
 				.getInstances(DebuggerMappingOpinion.class)) {
@@ -100,8 +100,8 @@ public interface DebuggerMappingOpinion extends ExtensionPoint {
 	 * @param target the target, usually a process
 	 * @return a future which completes with true if it knows, false if not
 	 */
-	public default Set<DebuggerMappingOffer> getOffers(TargetObject target,
-			boolean includeOverrides) {
+	default Set<DebuggerMappingOffer> getOffers(TargetObject target,
+                                                boolean includeOverrides) {
 		if (!(target instanceof TargetProcess)) {
 			return Set.of();
 		}

@@ -27,7 +27,7 @@ import ghidra.framework.plugintool.PluginTool;
 import ghidra.program.model.listing.Program;
 
 public class DbgDebuggerProgramLaunchOpinion implements DebuggerProgramLaunchOpinion {
-	protected static abstract class AbstractDbgDebuggerProgramLaunchOffer
+	protected abstract static class AbstractDbgDebuggerProgramLaunchOffer
 			extends AbstractDebuggerProgramLaunchOffer {
 
 		public AbstractDbgDebuggerProgramLaunchOffer(Program program, PluginTool tool,

@@ -47,8 +47,8 @@ public class FormatStringAnalyzer extends AbstractAnalyzer {
 			"signatures. Currently, this analyzer only supports printf, scanf, and their variants " +
 			"(e.g., snprintf, fscanf). If the current selection is empty, it searches through " +
 			"every function. Once the correct signatures are inferred, they are overridden.";
-	private final static boolean OPTION_DEFAULT_CREATE_BOOKMARKS_ENABLED = false;
-	private final static String OPTION_NAME_CREATE_BOOKMARKS = "Create Analysis Bookmarks";
+	private static final boolean OPTION_DEFAULT_CREATE_BOOKMARKS_ENABLED = false;
+	private static final String OPTION_NAME_CREATE_BOOKMARKS = "Create Analysis Bookmarks";
 	private static final String OPTION_DESCRIPTION_CREATE_BOOKMARKS =
 		"Select this check box if you want this analyzer to create analysis bookmarks " +
 			"when items of interest are created/identified by the analyzer.";
@@ -213,7 +213,7 @@ public class FormatStringAnalyzer extends AbstractAnalyzer {
 				}
 				List<FunctionCallData> functionCallDataList = pcodeParser.parseFunctionForCallData(
 					pcodeOpASTs, stringsByAddress, variadicFuncNames);
-				if (functionCallDataList != null && functionCallDataList.size() > 0) {
+				if (functionCallDataList != null && !functionCallDataList.isEmpty()) {
 					overrideCallList(program, function, functionCallDataList, namesToParameters,
 						namesToReturn);
 				}

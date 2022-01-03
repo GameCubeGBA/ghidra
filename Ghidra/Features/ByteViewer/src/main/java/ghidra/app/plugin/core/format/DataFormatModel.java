@@ -30,24 +30,24 @@ import java.math.BigInteger;
  */
 public interface DataFormatModel extends ExtensionPoint {
 
-	public static final int NEXT_UNIT = -1;
-	public static final int PREVIOUS_UNIT = -1;
+	int NEXT_UNIT = -1;
+	int PREVIOUS_UNIT = -1;
 
 	/**
 	 * Gets the number of bytes to make a unit, e.g., 
 	 * for 'byte' unit size =1, for 'unicode' unit size = 2, etc.
 	 */
-	public int getUnitByteSize();
+    int getUnitByteSize();
 
 	/**
 	 * Gets data format name.
 	 */
-	public String getName();
+    String getName();
 
 	/**
 	 * Gets the help location for this format
 	 */
-	public HelpLocation getHelpLocation();
+    HelpLocation getHelpLocation();
 
 	/**
 	 * Gets the number of characters required to display a
@@ -55,19 +55,19 @@ public interface DataFormatModel extends ExtensionPoint {
 	 * may display a unit as '0xff'. The data unit
 	 * size returned would be 4.
 	 */
-	public int getDataUnitSymbolSize();
+    int getDataUnitSymbolSize();
 
 	/**
 	 * Given a character position from 0 to data unit symbol size - 1
 	 * it returns a number from 0 to unit byte size - 1 indicating which
 	 * byte the character position was obtained from.
 	 */
-	public int getByteOffset(ByteBlock block, int position);
+    int getByteOffset(ByteBlock block, int position);
 
 	/**
 	 * Given the byte offset into a unit, get the column position.
 	 */
-	public int getColumnPosition(ByteBlock block, int byteOffset);
+    int getColumnPosition(ByteBlock block, int byteOffset);
 
 	/**
 	 * Gets the string representation at the given index in the block.
@@ -77,13 +77,13 @@ public interface DataFormatModel extends ExtensionPoint {
 	 * @throws IndexOutOfBoundsException if index is not valid for the
 	 * block
 	 */
-	public String getDataRepresentation(ByteBlock block, BigInteger index)
+    String getDataRepresentation(ByteBlock block, BigInteger index)
 			throws ByteBlockAccessException;
 
 	/**
 	 * Returns true if the formatter allows values to be changed.
 	 */
-	public boolean isEditable();
+    boolean isEditable();
 
 	/**
 	 * Overwrite a value in a ByteBlock.
@@ -99,34 +99,34 @@ public interface DataFormatModel extends ExtensionPoint {
 	 * @throws IndexOutOfBoundsException if index is not valid for the
 	 * block
 	 */
-	public boolean replaceValue(ByteBlock block, BigInteger index, int pos, char c)
+    boolean replaceValue(ByteBlock block, BigInteger index, int pos, char c)
 			throws ByteBlockAccessException;
 
 	/**
 	 * Get number of units in a group. A group may represent
 	 * multiple units shown as one entity.
 	 */
-	public int getGroupSize();
+    int getGroupSize();
 
 	/**
 	 * Set the number of units in a group.
 	 * @throws UnsupportedOperationException if model does not
 	 * support groups
 	 */
-	public void setGroupSize(int groupSize);
+    void setGroupSize(int groupSize);
 
 	/**
 	 * Get the number of characters separating units.
 	 */
-	public int getUnitDelimiterSize();
+    int getUnitDelimiterSize();
 
 	/**
 	 * Verify that this model can support the given bytes per line
 	 * value.
 	 * @return true if this model supports the given number of bytes per line
 	 */
-	public boolean validateBytesPerLine(int bytesPerLine);
+    boolean validateBytesPerLine(int bytesPerLine);
 
-	public void dispose();
+	void dispose();
 
 }

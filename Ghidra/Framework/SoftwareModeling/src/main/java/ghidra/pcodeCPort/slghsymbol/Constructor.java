@@ -392,7 +392,7 @@ public class Constructor {
 		final int printpieces = printpiece.size();
 		for (int i = 0; i < printpieces; ++i) {
 			String piece = printpiece.get(i);
-			if (piece.length() > 0 && piece.charAt(0) == '\n') {
+			if (!piece.isEmpty() && piece.charAt(0) == '\n') {
 				int index = piece.charAt(1) - 'A';
 				s.append("<opprint id=\"");
 				s.print(index);
@@ -427,38 +427,32 @@ public class Constructor {
 		int lineno = XmlUtils.decodeUnknownInt(el.getAttributeValue("line"));
 
 		List<?> list = el.getChildren();
-		Iterator<?> iter = list.iterator();
-		while (iter.hasNext()) {
-			Element child = (Element) iter.next();
-			if ("oper".equals(child.getName())) {
-				id = XmlUtils.decodeUnknownInt(child.getAttributeValue("id"));
-				OperandSymbol sym = (OperandSymbol) trans.findSymbol(id);
-				operands.push_back(sym);
-			}
-			else if ("print".equals(child.getName())) {
-				printpiece.push_back(child.getAttributeValue("piece"));
-			}
-			else if ("opprint".equals(child.getName())) {
-				int index = XmlUtils.decodeUnknownInt(child.getAttributeValue("id"));
-				char c = (char) ('A' + index);
-				String operstring = "\n" + c;
-				printpiece.push_back(operstring);
-			}
-			else if ("context_op".equals(child.getName())) {
-				ContextOp c_op = new ContextOp(location);
-				c_op.restoreXml(child, trans);
-				context.push_back(c_op);
-			}
-			else if ("commit".equals(child.getName())) {
-				ContextCommit c_op = new ContextCommit();
-				c_op.restoreXml(child, trans);
-				context.push_back(c_op);
-			}
-			else {
-				templ = new ConstructTpl(null);
-				templ.restoreXml(child, trans);
-			}
-		}
+        for (Object o : list) {
+            Element child = (Element) o;
+            if ("oper".equals(child.getName())) {
+                id = XmlUtils.decodeUnknownInt(child.getAttributeValue("id"));
+                OperandSymbol sym = (OperandSymbol) trans.findSymbol(id);
+                operands.push_back(sym);
+            } else if ("print".equals(child.getName())) {
+                printpiece.push_back(child.getAttributeValue("piece"));
+            } else if ("opprint".equals(child.getName())) {
+                int index = XmlUtils.decodeUnknownInt(child.getAttributeValue("id"));
+                char c = (char) ('A' + index);
+                String operstring = "\n" + c;
+                printpiece.push_back(operstring);
+            } else if ("context_op".equals(child.getName())) {
+                ContextOp c_op = new ContextOp(location);
+                c_op.restoreXml(child, trans);
+                context.push_back(c_op);
+            } else if ("commit".equals(child.getName())) {
+                ContextCommit c_op = new ContextCommit();
+                c_op.restoreXml(child, trans);
+                context.push_back(c_op);
+            } else {
+                templ = new ConstructTpl(null);
+                templ.restoreXml(child, trans);
+            }
+        }
 		pattern = null;
 		if ((printpiece.size() == 1) && (printpiece.get(0).charAt(0) == '\n')) {
 			flowthruindex = printpiece.get(0).charAt(1) - 'A';
@@ -545,7 +539,7 @@ public class Constructor {
 		// Fix up printpiece operand refs
 		for (int i = 0; i < printpiece.size(); ++i) {
 			final String piece = printpiece.get(i);
-			if (piece.length() > 0 && piece.charAt(0) == '\n') {
+			if (!piece.isEmpty() && piece.charAt(0) == '\n') {
 				int index = piece.charAt(1) - 'A';
 				index = handmap.get(index);
 				char c = (char) ('A' + index);

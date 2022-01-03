@@ -23,35 +23,35 @@ import java.lang.reflect.Field;
 public final class EntryDescriptorID {
 
 	/** The data fork. */
-	public final static int ENTRY_DATA_FORK        = 0x1;
+    public static final int ENTRY_DATA_FORK        = 0x1;
 	/** The resource fork. */
-	public final static int ENTRY_RESOURCE_FORK    = 0x2;
+    public static final int ENTRY_RESOURCE_FORK    = 0x2;
 	/** File's name as created on home file system. */
-	public final static int ENTRY_REAL_NAME        = 0x3;
+    public static final int ENTRY_REAL_NAME        = 0x3;
 	/** Standard Macintosh comment. */
-	public final static int ENTRY_COMMENT          = 0x4;
+    public static final int ENTRY_COMMENT          = 0x4;
 	/** Standard Macintosh black-and-white icon. */
-	public final static int ENTRY_ICON_BW          = 0x5;
+    public static final int ENTRY_ICON_BW          = 0x5;
 	/** Macintosh color icon. */
-	public final static int ENTRY_ICON_COLOR       = 0x6;
+    public static final int ENTRY_ICON_COLOR       = 0x6;
 	/** File creation date, modification date, etc. */
-	public final static int ENTRY_FILE_DATE_INFO   = 0x7;
+    public static final int ENTRY_FILE_DATE_INFO   = 0x7;
 	/** Standard Macintosh Finder information. */
-	public final static int ENTRY_FINDER_INFO      = 0x8;
+    public static final int ENTRY_FINDER_INFO      = 0x8;
 	/** Macintosh file information, attributes, etc. */
-	public final static int ENTRY_MAC_FILE_INFO    = 0x9;
+    public static final int ENTRY_MAC_FILE_INFO    = 0x9;
 	/** ProDOS file information, attributes, etc. */
-	public final static int ENTRY_PRODOS_FILE_INFO = 0xa;
+    public static final int ENTRY_PRODOS_FILE_INFO = 0xa;
 	/** MS-DOS file information, attributes, etc. */
-	public final static int ENTRY_MSDOS_FILE_INFO  = 0xb;
+    public static final int ENTRY_MSDOS_FILE_INFO  = 0xb;
 	/** AFP short name. */
-	public final static int ENTRY_SHORT_NAME       = 0xc;
+    public static final int ENTRY_SHORT_NAME       = 0xc;
 	/** AFP file information, attributes, etc. */
-	public final static int ENTRY_AFP_FILE_INFO    = 0xd;
+    public static final int ENTRY_AFP_FILE_INFO    = 0xd;
 	/** AFP directory ID. */
-	public final static int ENTRY_DIRECTORY_ID     = 0xe;
+    public static final int ENTRY_DIRECTORY_ID     = 0xe;
 
-	public final static String convertEntryIdToName(int entryID) {
+	public static final String convertEntryIdToName(int entryID) {
 		Field [] fields = EntryDescriptorID.class.getDeclaredFields();
 		for (Field field : fields) {
 			if (field.getName().startsWith("ENTRY_")) {

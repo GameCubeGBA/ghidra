@@ -23,7 +23,7 @@ import ghidra.file.formats.android.oat.UnsupportedOatVersionException;
 
 public final class TypeLookupTableFactory {
 
-	public final static TypeLookupTable getTypeLookupTable(BinaryReader reader, String oatVersion)
+	public static final TypeLookupTable getTypeLookupTable(BinaryReader reader, String oatVersion)
 			throws IOException {
 
 		switch (oatVersion) {

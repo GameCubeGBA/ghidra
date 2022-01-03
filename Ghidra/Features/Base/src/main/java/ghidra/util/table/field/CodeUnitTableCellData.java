@@ -249,7 +249,7 @@ public class CodeUnitTableCellData implements Comparable<CodeUnitTableCellData> 
 		if (cu != null) {
 			representation = createCodeUnitRepresentation(cu, cuFormat);
 		}
-		if (representation == null || representation.length() == 0) {
+		if (representation == null || representation.isEmpty()) {
 			representation = "??";
 		}
 

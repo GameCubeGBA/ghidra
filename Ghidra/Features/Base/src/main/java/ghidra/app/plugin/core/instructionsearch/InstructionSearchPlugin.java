@@ -68,7 +68,7 @@ import ghidra.util.task.TaskMonitorComponent;
 //@formatter:on
 public class InstructionSearchPlugin extends ProgramPlugin {
 
-	final static String SEARCH_ACTION_NAME = "Search Instruction Patterns";
+	static final String SEARCH_ACTION_NAME = "Search Instruction Patterns";
 
 	private TaskMonitor taskMonitor;
 

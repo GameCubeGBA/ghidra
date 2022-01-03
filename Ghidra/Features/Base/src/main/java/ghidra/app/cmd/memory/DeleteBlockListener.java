@@ -30,5 +30,5 @@ public interface DeleteBlockListener {
 	 * @param cmd command that was completed; the command has the 
 	 * status as to whether the delete was successful
 	 */
-	public void deleteBlockCompleted(DeleteBlockCmd cmd);
+    void deleteBlockCompleted(DeleteBlockCmd cmd);
 }

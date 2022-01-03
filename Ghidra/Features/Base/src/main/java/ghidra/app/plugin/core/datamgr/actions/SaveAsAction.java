@@ -58,12 +58,8 @@ public class SaveAsAction extends DockingAction {
 		}
 
 		GTreeNode node = (GTreeNode) selectionPaths[0].getLastPathComponent();
-		if ((node instanceof FileArchiveNode) || (node instanceof ProjectArchiveNode)) {
-			return true;
-		}
-
-		return false;
-	}
+        return (node instanceof FileArchiveNode) || (node instanceof ProjectArchiveNode);
+    }
 
 	@Override
 	public void actionPerformed(ActionContext context) {

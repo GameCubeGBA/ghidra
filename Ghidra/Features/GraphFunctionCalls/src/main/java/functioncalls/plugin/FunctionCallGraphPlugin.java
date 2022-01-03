@@ -113,7 +113,7 @@ public class FunctionCallGraphPlugin extends ProgramPlugin implements OptionsCha
 	}
 
 	private void doLocationChanged() {
-		provider.locationChanged(getCurrentLocation());
+		provider.locationChanged(currentLocation);
 	}
 
 	void handleProviderLocationChanged(ProgramLocation location) {

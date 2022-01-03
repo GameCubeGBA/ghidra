@@ -603,8 +603,7 @@ public abstract class PopupWindowPlacer {
 	 */
 	static class LeastOverlapCornerPopupWindowPlacer extends PopupWindowPlacer {
 		public LeastOverlapCornerPopupWindowPlacer() {
-			super();
-		}
+        }
 
 		@Override
 		public Rectangle getMyPlacement(Dimension toBePlaced, Rectangle context, Rectangle outer) {
@@ -690,7 +689,7 @@ public abstract class PopupWindowPlacer {
 // Size and Shape Classes
 //==================================================================================================
 
-	private static abstract class PositionableDimension extends Dimension {
+	private abstract static class PositionableDimension extends Dimension {
 
 		public PositionableDimension(Dimension dimension) {
 			super(dimension);
@@ -759,11 +758,10 @@ public abstract class PopupWindowPlacer {
 		}
 	}
 
-	private static abstract class PositionableRectangle extends Rectangle {
+	private abstract static class PositionableRectangle extends Rectangle {
 
 		PositionableRectangle() {
-			super();
-		}
+        }
 
 		public PositionableRectangle(Rectangle rectangle) {
 			super(rectangle);
@@ -795,8 +793,7 @@ public abstract class PopupWindowPlacer {
 	private static class HorizontalMajorRectangle extends PositionableRectangle {
 
 		HorizontalMajorRectangle() {
-			super();
-		}
+        }
 
 		public HorizontalMajorRectangle(Rectangle rectangle) {
 			super(rectangle);
@@ -846,8 +843,7 @@ public abstract class PopupWindowPlacer {
 	private static class VerticalMajorRectangle extends PositionableRectangle {
 
 		VerticalMajorRectangle() {
-			super();
-		}
+        }
 
 		public VerticalMajorRectangle(Rectangle rectangle) {
 			super(rectangle);

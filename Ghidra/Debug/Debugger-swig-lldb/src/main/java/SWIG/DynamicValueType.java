@@ -12,9 +12,9 @@
 package SWIG;
 
 public final class DynamicValueType {
-  public final static DynamicValueType eNoDynamicValues = new DynamicValueType("eNoDynamicValues", lldbJNI.eNoDynamicValues_get());
-  public final static DynamicValueType eDynamicCanRunTarget = new DynamicValueType("eDynamicCanRunTarget", lldbJNI.eDynamicCanRunTarget_get());
-  public final static DynamicValueType eDynamicDontRunTarget = new DynamicValueType("eDynamicDontRunTarget", lldbJNI.eDynamicDontRunTarget_get());
+  public static final DynamicValueType eNoDynamicValues = new DynamicValueType("eNoDynamicValues", lldbJNI.eNoDynamicValues_get());
+  public static final DynamicValueType eDynamicCanRunTarget = new DynamicValueType("eDynamicCanRunTarget", lldbJNI.eDynamicCanRunTarget_get());
+  public static final DynamicValueType eDynamicDontRunTarget = new DynamicValueType("eDynamicDontRunTarget", lldbJNI.eDynamicDontRunTarget_get());
 
   public final int swigValue() {
     return swigValue;
@@ -27,9 +27,9 @@ public final class DynamicValueType {
   public static DynamicValueType swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-    for (int i = 0; i < swigValues.length; i++)
-      if (swigValues[i].swigValue == swigValue)
-        return swigValues[i];
+      for (DynamicValueType value : swigValues)
+          if (value.swigValue == swigValue)
+              return value;
     throw new IllegalArgumentException("No enum " + DynamicValueType.class + " with value " + swigValue);
   }
 

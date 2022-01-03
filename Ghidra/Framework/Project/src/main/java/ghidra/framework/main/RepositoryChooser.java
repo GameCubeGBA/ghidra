@@ -253,7 +253,7 @@ class RepositoryChooser extends DialogComponentProvider {
 				"Failed to query list of repositories: " + e.getMessage());
 		}
 
-		if (listModel.size() == 0) {
+		if (listModel.isEmpty()) {
 			setStatusText("No repositories found");
 		}
 	}

@@ -39,8 +39,7 @@ public class PairedTransactionTest extends AbstractGenericTest {
 	Options propertyList2;
 
 	public PairedTransactionTest() {
-		super();
-	}
+    }
 
 	@Before
 	public void setUp() throws Exception {

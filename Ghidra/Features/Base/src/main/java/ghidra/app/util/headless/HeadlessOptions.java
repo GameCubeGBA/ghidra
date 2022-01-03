@@ -491,7 +491,7 @@ public class HeadlessOptions {
 			this.loaderArgs = loaderArgs;
 		}
 		else {
-			if (loaderArgs != null && loaderArgs.size() > 0) {
+			if (loaderArgs != null && !loaderArgs.isEmpty()) {
 				throw new InvalidInputException(
 					"Loader arguments defined without a loader being specified.");
 			}

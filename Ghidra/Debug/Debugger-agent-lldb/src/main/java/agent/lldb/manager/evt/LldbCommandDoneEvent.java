@@ -26,8 +26,7 @@ public class LldbCommandDoneEvent extends AbstractLldbCompletedCommandEvent {
 	 * Construct a new event, parsing the tail for information
 	 */
 	public LldbCommandDoneEvent() {
-		super();
-	}
+    }
 
 	public LldbCommandDoneEvent(LldbCommand<?> cmd) {
 		super(cmd.toString());

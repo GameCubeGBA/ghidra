@@ -24,8 +24,7 @@ public class DatabaseVersionException extends Exception {
 	 * Construct a new DatabaseException.
 	 */
 	public DatabaseVersionException() {
-		super();
-	}
+    }
 
 	/**
 	 * Construct a new DatabaseException with the given message.

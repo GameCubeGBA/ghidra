@@ -20,7 +20,7 @@ public class UnsignedInteger7DataType extends AbstractIntegerDataType {
 	private static final long serialVersionUID = 1L;
 
 	/** A statically defined UnsignedInteger7DataType instance.*/
-	public final static UnsignedInteger7DataType dataType = new UnsignedInteger7DataType();
+    public static final UnsignedInteger7DataType dataType = new UnsignedInteger7DataType();
 
 	public UnsignedInteger7DataType() {
 		this(null);

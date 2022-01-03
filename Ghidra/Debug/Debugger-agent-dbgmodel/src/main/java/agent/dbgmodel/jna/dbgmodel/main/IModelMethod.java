@@ -25,7 +25,7 @@ import agent.dbgmodel.jna.dbgmodel.IUnknownEx;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IModelMethod extends IUnknownEx {
-	final IID IID_IMODEL_METHOD = new IID("80600C1F-B90B-4896-82AD-1C00207909E8");
+	IID IID_IMODEL_METHOD = new IID("80600C1F-B90B-4896-82AD-1C00207909E8");
 
 	enum VTIndices implements VTableIndex {
 		CALL, //

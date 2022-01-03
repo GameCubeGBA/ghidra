@@ -43,19 +43,19 @@ public interface LldbModelTargetBreakpointContainer extends LldbModelTargetObjec
 		LldbEventsListenerAdapter {
 
 	@Override
-	public void breakpointCreated(Object info, LldbCause cause);
+    void breakpointCreated(Object info, LldbCause cause);
 
 	@Override
-	public void breakpointModified(Object info, LldbCause cause);
+    void breakpointModified(Object info, LldbCause cause);
 
 	@Override
-	public void breakpointDeleted(Object info, LldbCause cause);
+    void breakpointDeleted(Object info, LldbCause cause);
 
 	@Override
-	public void breakpointHit(Object info, LldbCause cause);
+    void breakpointHit(Object info, LldbCause cause);
 
-	public default CompletableFuture<Void> doPlaceBreakpoint(Set<TargetBreakpointKind> kinds,
-			Function<LldbBreakpointType, CompletableFuture<?>> placer) {
+	default CompletableFuture<Void> doPlaceBreakpoint(Set<TargetBreakpointKind> kinds,
+                                                      Function<LldbBreakpointType, CompletableFuture<?>> placer) {
 		AsyncFence fence = new AsyncFence();
 		if (kinds.contains(TargetBreakpointKind.READ) &&
 			kinds.contains(TargetBreakpointKind.WRITE)) {
@@ -77,21 +77,21 @@ public interface LldbModelTargetBreakpointContainer extends LldbModelTargetObjec
 	}
 
 	@Override
-	public default CompletableFuture<Void> placeBreakpoint(String expression,
-			Set<TargetBreakpointKind> kinds) {
+    default CompletableFuture<Void> placeBreakpoint(String expression,
+                                                    Set<TargetBreakpointKind> kinds) {
 		LldbManagerImpl manager = getManager();
 		return doPlaceBreakpoint(kinds, t -> manager.insertBreakpoint(expression, t));
 	}
 
 	@Override
-	public default CompletableFuture<Void> placeBreakpoint(AddressRange range,
-			Set<TargetBreakpointKind> kinds) {
+    default CompletableFuture<Void> placeBreakpoint(AddressRange range,
+                                                    Set<TargetBreakpointKind> kinds) {
 		LldbManagerImpl manager = getManager();
 		long offset = range.getMinAddress().getOffset();
 		int len = (int) range.getLength();
 		return doPlaceBreakpoint(kinds, t -> manager.insertBreakpoint(offset, len, t));
 	}
 
-	public SBTarget getSession();
+	SBTarget getSession();
 
 }

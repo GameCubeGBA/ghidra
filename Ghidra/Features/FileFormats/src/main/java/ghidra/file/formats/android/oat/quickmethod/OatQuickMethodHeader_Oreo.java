@@ -29,7 +29,7 @@ import ghidra.util.exception.DuplicateNameException;
  */
 public class OatQuickMethodHeader_Oreo extends OatQuickMethodHeader {
 
-	final static int SIZE = 16 + QuickMethodFrameInfo.SIZE;
+	static final int SIZE = 16 + QuickMethodFrameInfo.SIZE;
 
 	private int vmap_table_offset_;
 	private int method_info_offset_;

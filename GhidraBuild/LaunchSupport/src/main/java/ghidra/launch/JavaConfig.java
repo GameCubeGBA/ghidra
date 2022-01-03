@@ -212,10 +212,10 @@ public class JavaConfig {
 		File javaExecutable = null;
 		File javacExecutable = null;
 		for (File f : binDir.listFiles()) {
-			if (f.getName().equals("java") || f.getName().equals("java.exe")) {
+			if ("java".equals(f.getName()) || "java.exe".equals(f.getName())) {
 				javaExecutable = f;
 			}
-			if (f.getName().equals("javac") || f.getName().equals("javac.exe")) {
+			if ("javac".equals(f.getName()) || "javac.exe".equals(f.getName())) {
 				javacExecutable = f;
 			}
 		}

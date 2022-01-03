@@ -23,7 +23,7 @@ import com.sun.jna.ptr.PointerByReference;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IDataModelScriptDebug2 extends IDataModelScriptDebug {
-	final IID IID_IDATA_MODEL_SCRIPT_DEBUG2 = new IID("CBB10ED3-839E-426c-9243-E23535C1AE1A");
+	IID IID_IDATA_MODEL_SCRIPT_DEBUG2 = new IID("CBB10ED3-839E-426c-9243-E23535C1AE1A");
 
 	enum VTIndices2 implements VTableIndex {
 		SET_BREAKPOINT_AT_FUNCTION, //

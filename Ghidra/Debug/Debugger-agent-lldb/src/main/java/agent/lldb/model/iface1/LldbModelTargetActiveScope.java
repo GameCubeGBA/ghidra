@@ -36,11 +36,11 @@ public interface LldbModelTargetActiveScope extends LldbModelTargetObject, Targe
 	// NB: requesActivation request change in active object - propagates down to manager
 	//  (but, of course, may then cause change in state)
 	@Override
-	public default CompletableFuture<Void> requestActivation(TargetObject obj) {
+    default CompletableFuture<Void> requestActivation(TargetObject obj) {
 		return getModel().gateFuture(getManager().requestActivation(this, obj));
 	}
 
-	public default CompletableFuture<Void> doRequestActivation(TargetObject obj) {
+	default CompletableFuture<Void> doRequestActivation(TargetObject obj) {
 		if (getManager().isWaiting()) {
 			return AsyncUtils.NIL;
 		}

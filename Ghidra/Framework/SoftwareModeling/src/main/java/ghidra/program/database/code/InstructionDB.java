@@ -54,17 +54,17 @@ import ghidra.util.exception.NoValueException;
  */
 public class InstructionDB extends CodeUnitDB implements Instruction, InstructionContext {
 
-	private static byte FALLTHROUGH_SET_MASK = (byte) 0x01;
+	private static byte FALLTHROUGH_SET_MASK = 0x01;
 	private static byte FALLTHROUGH_CLEAR_MASK = (byte) 0xfe;
 
-	private static byte FLOWOVERRIDE_MASK = (byte) 0x0e;
+	private static byte FLOWOVERRIDE_MASK = 0x0e;
 	private static byte FLOWOVERRIDE_CLEAR_MASK = (byte) 0xf1;
 	private static int FLOWOVERRIDE_SHIFT = 1;
 
 	private InstructionPrototype proto;
 	private byte flags;
 	private FlowOverride flowOverride;
-	private final static Address[] EMPTY_ADDR_ARRAY = {};
+	private static final Address[] EMPTY_ADDR_ARRAY = {};
 	private volatile boolean clearingFallThroughs = false;
 
 	private ParserContext parserContext;
@@ -582,11 +582,8 @@ public class InstructionDB extends CodeUnitDB implements Instruction, Instructio
 		if ((origFlowType.isCall() && referenceType.isCall()) || (origFlowType.isJump() && referenceType.isJump())) {
 			return true;
 		}
-		if (origFlowType.isTerminal() && referenceType.isTerminal()) {
-			return true;
-		}
-		return false;
-	}
+        return origFlowType.isTerminal() && referenceType.isTerminal();
+    }
 
 	@Override
 	public PcodeOp[] getPcode() {
@@ -812,7 +809,7 @@ public class InstructionDB extends CodeUnitDB implements Instruction, Instructio
 				"Program does not contain referenced instruction: " + instructionAddress);
 		}
 		// Ensure that prototype is same implementation
-		InstructionPrototype otherProto = instr.getPrototype();
+		InstructionPrototype otherProto = instr.proto;
 		if (!otherProto.getClass().equals(proto.getClass())) {
 			throw new UnknownContextException(
 				"Instruction has incompatible prototype at: " + instructionAddress);

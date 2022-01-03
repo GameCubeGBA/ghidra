@@ -29,7 +29,7 @@ import ghidra.util.exception.InvalidInputException;
 import ghidra.util.task.TaskMonitor;
 
 public class SegmentedCallingConventionAnalyzer extends AbstractAnalyzer {
-	private final static String NAME = "Segmented X86 Calling Conventions";
+	private static final String NAME = "Segmented X86 Calling Conventions";
 	private static final String DESCRIPTION =
 		"Analyzes X86 programs with segmented address spaces to identify a calling convention for each function.  This analyzer looks at the type of return used for the function to identify the calling convention.";
 

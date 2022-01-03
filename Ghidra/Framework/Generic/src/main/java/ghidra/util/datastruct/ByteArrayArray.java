@@ -27,7 +27,7 @@ import java.io.Serializable;
  * Array of byte[] that grows as needed.
  */
 public class ByteArrayArray implements Array, Serializable {
-    private final static long serialVersionUID = 1;
+    private static final long serialVersionUID = 1;
     static final int MIN_SIZE = 4;
     byte[] bytes;
     int[] starts;

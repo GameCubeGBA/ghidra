@@ -65,8 +65,7 @@ public class FunctionGraphPluginScreenShots extends AbstractFunctionGraphTest {
 	private int height = 400;
 
 	public FunctionGraphPluginScreenShots() {
-		super();
-	}
+    }
 
 	@Override
 	@Before
@@ -791,7 +790,7 @@ public class FunctionGraphPluginScreenShots extends AbstractFunctionGraphTest {
 				action.getAllActionStates();
 			for (ActionState<Class<? extends FGLayoutProvider>> state : states) {
 				Class<? extends FGLayoutProvider> layoutClass = state.getUserData();
-				if (layoutClass.getSimpleName().equals("DecompilerNestedLayoutProvider")) {
+				if ("DecompilerNestedLayoutProvider".equals(layoutClass.getSimpleName())) {
 					action.setCurrentActionState(state);
 					return;
 				}
@@ -877,8 +876,7 @@ public class FunctionGraphPluginScreenShots extends AbstractFunctionGraphTest {
 	private static class MyScreen extends GhidraScreenShotGenerator {
 
 		public MyScreen() {
-			super();
-		}
+        }
 
 		@Override
 		public void loadProgram() {

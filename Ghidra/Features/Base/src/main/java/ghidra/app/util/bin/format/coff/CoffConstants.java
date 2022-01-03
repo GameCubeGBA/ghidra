@@ -21,21 +21,21 @@ public class CoffConstants {
 	/**
 	 * Max length (in bytes) of an in-place section name.
 	 */
-	public final static int SECTION_NAME_LENGTH         =   8;
+    public static final int SECTION_NAME_LENGTH         =   8;
 	/**
 	 * Max length (in bytes) of an in-place symbol name.
 	 */
-	public final static int SYMBOL_NAME_LENGTH          =   8;
+    public static final int SYMBOL_NAME_LENGTH          =   8;
 	/**
 	 * Length (in bytes) of a symbol data structure.
 	 */
-	public final static int SYMBOL_SIZEOF               =  18;
+    public static final int SYMBOL_SIZEOF               =  18;
 	/**
 	 * Max-length (in bytes) of a file name.
 	 */
-	public final static int FILE_NAME_LENGTH            =  14;
+    public static final int FILE_NAME_LENGTH            =  14;
 	/**
 	 * Number of dimensions of a symbol's auxiliary array.
 	 */
-	public final static int AUXILIARY_ARRAY_DIMENSION   =  4;
+    public static final int AUXILIARY_ARRAY_DIMENSION   =  4;
 }

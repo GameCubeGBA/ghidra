@@ -34,7 +34,7 @@ import ghidra.dbg.jdi.manager.impl.JdiManagerImpl;
  */
 public interface JdiManager extends AutoCloseable {
 
-	public enum Channel {
+	enum Channel {
 		STDOUT, STDERR;
 	}
 
@@ -43,7 +43,7 @@ public interface JdiManager extends AutoCloseable {
 	 * 
 	 * @return the manager
 	 */
-	public static JdiManager newInstance() {
+	static JdiManager newInstance() {
 		return new JdiManagerImpl();
 	}
 
@@ -212,7 +212,7 @@ public interface JdiManager extends AutoCloseable {
 	@Deprecated(forRemoval = true)
 	CompletableFuture<List<Pair<Integer, String>>> listAvailableProcesses();
 
-	public VirtualMachineManager getVirtualMachineManager();
+	VirtualMachineManager getVirtualMachineManager();
 
 	JdiEventHandler getEventHandler(VirtualMachine vm);
 

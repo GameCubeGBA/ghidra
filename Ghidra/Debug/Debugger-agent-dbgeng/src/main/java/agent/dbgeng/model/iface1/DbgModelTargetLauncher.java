@@ -33,7 +33,7 @@ import ghidra.dbg.target.TargetLauncher.TargetCmdLineLauncher;
 public interface DbgModelTargetLauncher extends DbgModelTargetObject, TargetCmdLineLauncher {
 
 	@Override
-	public default CompletableFuture<Void> launch(List<String> args) {
+    default CompletableFuture<Void> launch(List<String> args) {
 		return getModel().gateFuture(getManager().launch(args)).exceptionally((exc) -> {
 			throw new DebuggerUserException("Launch failed for " + args);
 		}).thenApply(__ -> null);

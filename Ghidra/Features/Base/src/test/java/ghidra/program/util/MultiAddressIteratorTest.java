@@ -30,8 +30,7 @@ public class MultiAddressIteratorTest extends AbstractGenericTest {
 
 	/** Creates new ProgramDiffTest */
 	public MultiAddressIteratorTest() {
-		super();
-	}
+    }
 
 	/**
 	 * @see TestCase#setUp()

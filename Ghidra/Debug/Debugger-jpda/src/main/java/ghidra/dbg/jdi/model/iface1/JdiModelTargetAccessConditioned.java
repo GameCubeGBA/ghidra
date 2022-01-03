@@ -29,6 +29,6 @@ public interface JdiModelTargetAccessConditioned
 		extends JdiModelTargetObject, TargetAccessConditioned {
 
 	@Override
-	public boolean isAccessible();
+    boolean isAccessible();
 
 }

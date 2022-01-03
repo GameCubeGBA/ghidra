@@ -48,7 +48,7 @@ import ghidra.util.*;
  *         The remaining 6 bytes contain the final 12 hexadecimal digits.<br> 
  */
 public class GUID {
-	public final static int SIZEOF = 16;
+	public static final int SIZEOF = 16;
 
 	private int data1;
 	private short data2;
@@ -250,9 +250,6 @@ public class GUID {
 		if (data3 != other.data3) {
 			return false;
 		}
-		if (!Arrays.equals(data4, other.data4)) {
-			return false;
-		}
-		return true;
-	}
+        return Arrays.equals(data4, other.data4);
+    }
 }

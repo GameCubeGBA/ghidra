@@ -23,7 +23,7 @@ import ghidra.util.exception.DuplicateNameException;
 import java.io.IOException;
 
 public final class XCoffSectionHeader implements StructConverter {
-	private final static char NL = '\n';
+	private static final char NL = '\n';
 
 	private byte [] s_name;  // section name
 	private long s_paddr;    // physical address, aliased s_nlib

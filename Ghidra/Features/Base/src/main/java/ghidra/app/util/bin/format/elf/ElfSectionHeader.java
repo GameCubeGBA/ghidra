@@ -350,7 +350,7 @@ public class ElfSectionHeader implements StructConverter, Writeable, MemoryLoada
 		try {
 			if (sh_name >= 0 && e_shstrndx >= 0 && e_shstrndx < sections.length) {
 				// read section name from string table
-				long stringTableOffset = sections[e_shstrndx].getOffset();
+				long stringTableOffset = sections[e_shstrndx].sh_offset;
 				if (stringTableOffset >= 0) {
 					long offset = stringTableOffset + sh_name;
 					if (offset < reader.length()) {

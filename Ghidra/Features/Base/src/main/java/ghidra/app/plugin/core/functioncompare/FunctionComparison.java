@@ -109,11 +109,11 @@ public class FunctionComparison implements Comparable<FunctionComparison> {
 			return 1;
 		}
 
-		String sourcePath = getSource().getProgram().getDomainFile().getPathname();
-		String otherPath = o.getSource().getProgram().getDomainFile().getPathname();
+		String sourcePath = source.getProgram().getDomainFile().getPathname();
+		String otherPath = o.source.getProgram().getDomainFile().getPathname();
 
-		String sourceName = getSource().getName();
-		String otherName = o.getSource().getName();
+		String sourceName = source.getName();
+		String otherName = o.source.getName();
 		int result = sourcePath.compareTo(otherPath);
 		if (result != 0) {
 			return result;
@@ -126,7 +126,7 @@ public class FunctionComparison implements Comparable<FunctionComparison> {
 		}
 
 		// equal names
-		return getSource().getEntryPoint().compareTo(o.getSource().getEntryPoint());
+		return source.getEntryPoint().compareTo(o.source.getEntryPoint());
 	}
 
 	/**

@@ -76,7 +76,7 @@ class ClassPackage extends ClassLocation {
 				continue;
 			}
 
-			if (packageName.length() > 0) {
+			if (!packageName.isEmpty()) {
 				pkg = packageName + "." + pkg;
 			}
 
@@ -96,12 +96,11 @@ class ClassPackage extends ClassLocation {
 
 		set.addAll(classes);
 
-		Iterator<ClassPackage> it = children.iterator();
-		while (it.hasNext()) {
-			monitor.checkCanceled();
-			ClassPackage subPkg = it.next();
-			subPkg.getClasses(set, monitor);
-		}
+        for (ClassPackage child : children) {
+            monitor.checkCanceled();
+            ClassPackage subPkg = child;
+            subPkg.getClasses(set, monitor);
+        }
 	}
 
 	private Set<String> getAllClassNames() {
@@ -115,7 +114,7 @@ class ClassPackage extends ClassLocation {
 		for (File file : files) {
 			String name = file.getName();
 			name = name.substring(0, name.length() - 6);
-			if (packageName.length() > 0) {
+			if (!packageName.isEmpty()) {
 				name = packageName + "." + name;
 			}
 			results.add(name);

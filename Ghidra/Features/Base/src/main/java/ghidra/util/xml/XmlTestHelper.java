@@ -150,12 +150,10 @@ public class XmlTestHelper {
 		File file = new File(tempDir, name);
 		file.deleteOnExit();
 		FileWriter writer = new FileWriter(file);
-		Iterator<String> it = xmlList.iterator();
-		while (it.hasNext()) {
-			String xml = it.next();
-			writer.write(xml);
-			writer.write('\n');
-		}
+        for (String xml : xmlList) {
+            writer.write(xml);
+            writer.write('\n');
+        }
 
 		writer.close();
 		XmlPullParser parser = XmlPullParserFactory.create(file, null, false);
@@ -197,7 +195,7 @@ public class XmlTestHelper {
 		if (!file.exists()) {
 			throw new FileNotFoundException("Can not find test program: " + programName);
 		}
-		return getProject().importProgramFast(file);
+		return gp.importProgramFast(file);
 	}
 
 	public static void assertXMLFilesEquals(File expectedXMLFile, File testXMLFile)
@@ -261,7 +259,7 @@ public class XmlTestHelper {
 					testAttrs.remove(expectedAttr.getKey());
 				}
 				if (!testAttrs.isEmpty()) {
-					failWithInfo("Unexpected attributes found: " + testAttrs.keySet().toString(),
+					failWithInfo("Unexpected attributes found: " + testAttrs.keySet(),
 						expectedXMLParser, testXMLParser, expectedElement, testElement,
 						currentPath);
 				}

@@ -33,7 +33,7 @@ public interface TargetAccessConditioned extends TargetObject {
 	String ACCESSIBLE_ATTRIBUTE_NAME = PREFIX_INVISIBLE + "accessible";
 
 	@TargetAttributeType(name = ACCESSIBLE_ATTRIBUTE_NAME, required = true, hidden = true)
-	public default boolean isAccessible() {
+    default boolean isAccessible() {
 		return getTypedAttributeNowByName(ACCESSIBLE_ATTRIBUTE_NAME, Boolean.class, true);
 	}
 }

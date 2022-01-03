@@ -69,9 +69,7 @@ public class CompositeDataTypeElementInfo extends DataTypeInfo {
         if (!super.equals(obj) || !(obj instanceof CompositeDataTypeElementInfo))
             return false;
         final CompositeDataTypeElementInfo other = (CompositeDataTypeElementInfo) obj;
-        if (dataTypeOffset != other.dataTypeOffset)
-            return false;
-        return true;
+        return dataTypeOffset == other.dataTypeOffset;
     }
 
     @Override

@@ -582,18 +582,16 @@ public class PlateFieldFactoryTest extends AbstractGhidraHeadedIntegrationTest {
 
 	private void resetOptions() {
 		List<String> names = fieldOptions.getOptionNames();
-		for (int i = 0; i < names.size(); i++) {
-			String name = names.get(i);
-			if (!name.startsWith("Format Code")) {
-				continue;
-			}
-			if (name.contains("Show ") || name.contains("Flag ")) {
-				fieldOptions.setBoolean(name, false);
-			}
-			else if (name.contains("Lines")) {
-				fieldOptions.setInt(name, 0);
-			}
-		}
+        for (String name : names) {
+            if (!name.startsWith("Format Code")) {
+                continue;
+            }
+            if (name.contains("Show ") || name.contains("Flag ")) {
+                fieldOptions.setBoolean(name, false);
+            } else if (name.contains("Lines")) {
+                fieldOptions.setInt(name, 0);
+            }
+        }
 		waitForPostedSwingRunnables();
 		cb.updateNow();
 	}

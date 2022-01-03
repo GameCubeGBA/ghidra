@@ -41,8 +41,7 @@ public class OperandRepresentationList extends ArrayList<Object> {
 	}
 	
 	OperandRepresentationList(boolean primaryReferenceIsHidden) {
-		super();
-		this.primaryReferenceIsHidden = primaryReferenceIsHidden;
+        this.primaryReferenceIsHidden = primaryReferenceIsHidden;
 	}
 	
 	OperandRepresentationList(List<?> opList) {
@@ -50,14 +49,12 @@ public class OperandRepresentationList extends ArrayList<Object> {
 	}
 	
 	OperandRepresentationList(String error) {
-		super();
-		add(error);
+        add(error);
 		hasError = true;
 	}
 	
 	OperandRepresentationList() {
-		super();
-	}
+    }
 	
 	/**
 	 * Set flag indicating that representation does not include primary

@@ -12,9 +12,9 @@
 package SWIG;
 
 public final class EmulateInstructionOptions {
-  public final static EmulateInstructionOptions eEmulateInstructionOptionNone = new EmulateInstructionOptions("eEmulateInstructionOptionNone", lldbJNI.eEmulateInstructionOptionNone_get());
-  public final static EmulateInstructionOptions eEmulateInstructionOptionAutoAdvancePC = new EmulateInstructionOptions("eEmulateInstructionOptionAutoAdvancePC", lldbJNI.eEmulateInstructionOptionAutoAdvancePC_get());
-  public final static EmulateInstructionOptions eEmulateInstructionOptionIgnoreConditions = new EmulateInstructionOptions("eEmulateInstructionOptionIgnoreConditions", lldbJNI.eEmulateInstructionOptionIgnoreConditions_get());
+  public static final EmulateInstructionOptions eEmulateInstructionOptionNone = new EmulateInstructionOptions("eEmulateInstructionOptionNone", lldbJNI.eEmulateInstructionOptionNone_get());
+  public static final EmulateInstructionOptions eEmulateInstructionOptionAutoAdvancePC = new EmulateInstructionOptions("eEmulateInstructionOptionAutoAdvancePC", lldbJNI.eEmulateInstructionOptionAutoAdvancePC_get());
+  public static final EmulateInstructionOptions eEmulateInstructionOptionIgnoreConditions = new EmulateInstructionOptions("eEmulateInstructionOptionIgnoreConditions", lldbJNI.eEmulateInstructionOptionIgnoreConditions_get());
 
   public final int swigValue() {
     return swigValue;
@@ -27,9 +27,9 @@ public final class EmulateInstructionOptions {
   public static EmulateInstructionOptions swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-    for (int i = 0; i < swigValues.length; i++)
-      if (swigValues[i].swigValue == swigValue)
-        return swigValues[i];
+      for (EmulateInstructionOptions value : swigValues)
+          if (value.swigValue == swigValue)
+              return value;
     throw new IllegalArgumentException("No enum " + EmulateInstructionOptions.class + " with value " + swigValue);
   }
 

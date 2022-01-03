@@ -177,9 +177,7 @@ class FileByteBlock implements ByteBlock {
 	private String pad(String str, int length) {
 		StringBuffer sb = new StringBuffer();
 		int nspaces = length - str.length();
-		for (int i = 0; i < nspaces; i++) {
-			sb.append(" ");
-		}
+        sb.append(" ".repeat(Math.max(0, nspaces)));
 		sb.append(str);
 		return sb.toString();
 	}

@@ -51,8 +51,7 @@ public class EolCommentFieldLocation extends CommentFieldLocation {
 	 * an end-of-line field location from XML.
 	 */
 	public EolCommentFieldLocation() {
-		super();
-	}
+    }
 
 	public int getCurrentCommentRow() {
 		return currentCommentRow;
@@ -72,10 +71,8 @@ public class EolCommentFieldLocation extends CommentFieldLocation {
 		if (!super.equals(obj) || (getClass() != obj.getClass()))
 			return false;
 		EolCommentFieldLocation other = (EolCommentFieldLocation) obj;
-		if (currentCommentRow != other.currentCommentRow)
-			return false;
-		return true;
-	}
+        return currentCommentRow == other.currentCommentRow;
+    }
 
 	@Override
 	public void restoreState(Program p, SaveState obj) {

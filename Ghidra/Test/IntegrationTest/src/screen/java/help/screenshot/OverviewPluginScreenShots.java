@@ -32,8 +32,7 @@ public class OverviewPluginScreenShots extends GhidraScreenShotGenerator {
 	private EntropyOverviewColorService entropyService;
 
 	public OverviewPluginScreenShots() {
-		super();
-	}
+    }
 
 	@Override
 	public void setUp() throws Exception {

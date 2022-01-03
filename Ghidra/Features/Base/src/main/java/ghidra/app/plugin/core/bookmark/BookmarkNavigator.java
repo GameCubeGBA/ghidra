@@ -37,27 +37,27 @@ public class BookmarkNavigator {
 
 	private static final int BIG_CHANGE = 1000;
 
-	final static ImageIcon NOTE_ICON = ResourceManager.loadImage("images/notes.gif");
-	final static ImageIcon INFO_ICON = ResourceManager.loadImage("images/information.png");
-	final static ImageIcon WARNING_ICON = ResourceManager.loadImage("images/warning.png");
-	final static ImageIcon ERROR_ICON = ResourceManager.loadImage("images/edit-delete.png");
-	final static ImageIcon ANALYSIS_ICON =
+	static final ImageIcon NOTE_ICON = ResourceManager.loadImage("images/notes.gif");
+	static final ImageIcon INFO_ICON = ResourceManager.loadImage("images/information.png");
+	static final ImageIcon WARNING_ICON = ResourceManager.loadImage("images/warning.png");
+	static final ImageIcon ERROR_ICON = ResourceManager.loadImage("images/edit-delete.png");
+	static final ImageIcon ANALYSIS_ICON =
 		ResourceManager.loadImage("images/applications-system.png");
-	final static ImageIcon DEFAULT_ICON = ResourceManager.loadImage("images/unknown.gif");
+	static final ImageIcon DEFAULT_ICON = ResourceManager.loadImage("images/unknown.gif");
 
-	final static int NOTE_PRIORITY = MarkerService.BOOKMARK_PRIORITY;
-	final static int ERROR_PRIORITY = MarkerService.BOOKMARK_PRIORITY + BIG_CHANGE;
-	final static int WARNING_PRIORITY = MarkerService.BOOKMARK_PRIORITY + (BIG_CHANGE / 2);
-	final static int INFO_PRIORITY = MarkerService.BOOKMARK_PRIORITY + 4;
-	final static int ANALYSIS_PRIORITY = MarkerService.BOOKMARK_PRIORITY + 6;
-	final static int DEFAULT_PRIORITY = MarkerService.BOOKMARK_PRIORITY + 8;
+	static final int NOTE_PRIORITY = MarkerService.BOOKMARK_PRIORITY;
+	static final int ERROR_PRIORITY = MarkerService.BOOKMARK_PRIORITY + BIG_CHANGE;
+	static final int WARNING_PRIORITY = MarkerService.BOOKMARK_PRIORITY + (BIG_CHANGE / 2);
+	static final int INFO_PRIORITY = MarkerService.BOOKMARK_PRIORITY + 4;
+	static final int ANALYSIS_PRIORITY = MarkerService.BOOKMARK_PRIORITY + 6;
+	static final int DEFAULT_PRIORITY = MarkerService.BOOKMARK_PRIORITY + 8;
 
-	final static Color NOTE_COLOR = new Color(128, 0, 255);     // Purple
-	final static Color INFO_COLOR = new Color(0, 255, 255);     // Cyan
-	final static Color WARNING_COLOR = new Color(255, 196, 51); // Dark Yellow
-	final static Color ERROR_COLOR = new Color(204, 0, 51);     // Dark Red
-	final static Color ANALYSIS_COLOR = new Color(255, 128, 0); // Orange
-	final static Color DEFAULT_COLOR = new Color(255, 0, 255);  // Magenta
+	static final Color NOTE_COLOR = new Color(128, 0, 255);     // Purple
+	static final Color INFO_COLOR = new Color(0, 255, 255);     // Cyan
+	static final Color WARNING_COLOR = new Color(255, 196, 51); // Dark Yellow
+	static final Color ERROR_COLOR = new Color(204, 0, 51);     // Dark Red
+	static final Color ANALYSIS_COLOR = new Color(255, 128, 0); // Orange
+	static final Color DEFAULT_COLOR = new Color(255, 0, 255);  // Magenta
 
 	private String type;
 	private MarkerService markerService;

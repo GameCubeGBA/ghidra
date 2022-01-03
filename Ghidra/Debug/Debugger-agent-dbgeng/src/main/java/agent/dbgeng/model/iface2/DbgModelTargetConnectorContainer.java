@@ -17,6 +17,6 @@ package agent.dbgeng.model.iface2;
 
 public interface DbgModelTargetConnectorContainer extends DbgModelTargetObject {
 
-	public DbgModelTargetAvailable getTargetAttachable(int pid);
+	DbgModelTargetAvailable getTargetAttachable(int pid);
 
 }

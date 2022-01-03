@@ -125,8 +125,7 @@ public class DependentServiceResolverTest {
 
 	public static class NeedsInjectionOverrideD extends NeedsInjectionNoExtends {
 		public NeedsInjectionOverrideD() throws Exception {
-			super();
-		}
+        }
 
 		@DependentService
 		private E e;

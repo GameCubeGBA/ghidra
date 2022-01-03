@@ -397,7 +397,7 @@ public class AutoVersionTrackingTask extends Task {
 
 			MatchInfo matchInfo = controller.getMatchInfo(match);
 			Collection<VTMarkupItem> markupItems = matchInfo.getAppliableMarkupItems(monitor);
-			if (markupItems == null || markupItems.size() == 0) {
+			if (markupItems == null || markupItems.isEmpty()) {
 				continue;
 			}
 
@@ -528,15 +528,13 @@ public class AutoVersionTrackingTask extends Task {
 				// If accept match succeeds apply the markup for the match
 				MatchInfo matchInfo = controller.getMatchInfo(match);
 				Collection<VTMarkupItem> markupItems = matchInfo.getAppliableMarkupItems(monitor);
-				if (markupItems != null && markupItems.size() != 0) {
+				if (markupItems != null && !markupItems.isEmpty()) {
 
 					ApplyMarkupItemTask markupTask =
 						new ApplyMarkupItemTask(controller.getSession(), markupItems, applyOptions);
 					markupTask.run(monitor);
 					boolean currentMatchHasErrors = markupTask.hasErrors();
-					if (currentMatchHasErrors) {
-						return true;
-					}
+                    return currentMatchHasErrors;
 				}
 			}
 		}

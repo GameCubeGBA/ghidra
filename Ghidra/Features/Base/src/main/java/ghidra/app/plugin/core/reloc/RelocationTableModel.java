@@ -35,10 +35,10 @@ import ghidra.util.task.TaskMonitor;
 
 class RelocationTableModel extends AddressBasedTableModel<Relocation> {
 
-	final static String RELOCATION_ADDRESS = "Address";
-	final static String RELOCATION_TYPE = "Type";
-	final static String RELOCATION_VALUE = "Values";
-	final static String RELOCATION_BYTES = "Original Bytes";
+	static final String RELOCATION_ADDRESS = "Address";
+	static final String RELOCATION_TYPE = "Type";
+	static final String RELOCATION_VALUE = "Values";
+	static final String RELOCATION_BYTES = "Original Bytes";
 	static final String RELOCATION_NAME = "Name";
 
 	public RelocationTableModel(ServiceProvider serviceProvider, Program program,

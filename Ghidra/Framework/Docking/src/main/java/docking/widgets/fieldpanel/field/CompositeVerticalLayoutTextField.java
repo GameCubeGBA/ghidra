@@ -183,7 +183,7 @@ public class CompositeVerticalLayoutTextField implements TextField {
 
 	@Override
 	public String toString() {
-		return getText();
+		return fullText;
 	}
 
 	@Override
@@ -322,12 +322,9 @@ public class CompositeVerticalLayoutTextField implements TextField {
 
 	@Override
 	public boolean contains(int x, int y) {
-		if ((x >= startX) && (x < startX + width) && (y >= -heightAbove) &&
-			(y < height - heightAbove)) {
-			return true;
-		}
-		return false;
-	}
+        return (x >= startX) && (x < startX + width) && (y >= -heightAbove) &&
+                (y < height - heightAbove);
+    }
 
 	public String getRowSeparator() {
 		return rowSeparator;
@@ -442,7 +439,7 @@ public class CompositeVerticalLayoutTextField implements TextField {
 			}
 			ySoFar += fieldHeight;
 		}
-		return getNumRows() - 1;
+		return numRows - 1;
 	}
 
 	@Override
@@ -456,7 +453,7 @@ public class CompositeVerticalLayoutTextField implements TextField {
 	@Override
 	public boolean isValid(int row, int col) {
 
-		if ((row < 0) || (row >= getNumRows())) {
+		if ((row < 0) || (row >= numRows)) {
 			return false;
 		}
 
@@ -468,7 +465,7 @@ public class CompositeVerticalLayoutTextField implements TextField {
 	@Override
 	public Rectangle getCursorBounds(int row, int col) {
 
-		if ((row < 0) || (row >= getNumRows())) {
+		if ((row < 0) || (row >= numRows)) {
 			return null;
 		}
 
@@ -534,7 +531,7 @@ public class CompositeVerticalLayoutTextField implements TextField {
 	public int screenLocationToTextOffset(int row, int col) {
 
 		if (row >= numRows) {
-			return getText().length();
+			return fullText.length();
 		}
 
 		int extraSpace = rowSeparator.length();
@@ -558,24 +555,24 @@ public class CompositeVerticalLayoutTextField implements TextField {
 		int extraSpace = rowSeparator.length();
 		int n = fieldRows.size();
 		int textOffsetSoFar = 0;
-		for (int i = 0; i < n; i++) {
+        for (FieldRow row : fieldRows) {
 
-			if (textOffsetSoFar > textOffset) {
-				break;
-			}
+            if (textOffsetSoFar > textOffset) {
+                break;
+            }
 
-			FieldRow fieldRow = fieldRows.get(i);
-			int length = fieldRow.field.getText().length() + extraSpace;
-			int end = textOffsetSoFar + length;
-			if (end > textOffset) {
-				int relativeOffset = textOffset - textOffsetSoFar;
-				RowColLocation location = fieldRow.field.textOffsetToScreenLocation(relativeOffset);
-				int screenRow = fieldRow.fromRelativeRow(location.row());
-				return location.withRow(screenRow);
-			}
+            FieldRow fieldRow = row;
+            int length = fieldRow.field.getText().length() + extraSpace;
+            int end = textOffsetSoFar + length;
+            if (end > textOffset) {
+                int relativeOffset = textOffset - textOffsetSoFar;
+                RowColLocation location = fieldRow.field.textOffsetToScreenLocation(relativeOffset);
+                int screenRow = fieldRow.fromRelativeRow(location.row());
+                return location.withRow(screenRow);
+            }
 
-			textOffsetSoFar += length;
-		}
+            textOffsetSoFar += length;
+        }
 
 		FieldRow lastRow = fieldRows.get(fieldRows.size() - 1);
 		int length = lastRow.field.getText().length();

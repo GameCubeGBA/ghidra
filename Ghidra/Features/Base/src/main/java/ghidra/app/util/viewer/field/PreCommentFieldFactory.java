@@ -47,16 +47,16 @@ public class PreCommentFieldFactory extends FieldFactory {
 
 	public static final String FIELD_NAME = "Pre-Comment";
 
-	private final static String GROUP_TITLE = "Format Code";
-	private final static String FIELD_GROUP_TITLE = "Pre-comments Field";
-	public final static String ENABLE_WORD_WRAP_MSG =
+	private static final String GROUP_TITLE = "Format Code";
+	private static final String FIELD_GROUP_TITLE = "Pre-comments Field";
+	public static final String ENABLE_WORD_WRAP_MSG =
 		FIELD_GROUP_TITLE + Options.DELIMITER + "Enable Word Wrapping";
-	public final static String ENABLE_ALWAYS_SHOW_AUTOMATIC_MSG =
+	public static final String ENABLE_ALWAYS_SHOW_AUTOMATIC_MSG =
 		FIELD_GROUP_TITLE + Options.DELIMITER + "Always Show the Automatic Comment";
 
-	final static String FLAG_FUNCTION_ENTRY_OPTION =
+	static final String FLAG_FUNCTION_ENTRY_OPTION =
 		GROUP_TITLE + Options.DELIMITER + "Flag Function Entry";
-	final static String FLAG_SUBROUTINE_ENTRY_OPTION =
+	static final String FLAG_SUBROUTINE_ENTRY_OPTION =
 		GROUP_TITLE + Options.DELIMITER + "Flag Subroutine Entry";
 
 	static String FUNCTION_FLAG_COMMENT;
@@ -357,7 +357,7 @@ public class PreCommentFieldFactory extends FieldFactory {
 		}
 
 		return new String[] { "Zero-length Component: " + lastZeroLengthComponent.getDataType().getName() + " " +
-				flexName.toString() };
+                flexName};
 	}
 
 	private ListingTextField getTextField(String[] comments, String[] autoComment,
@@ -417,25 +417,17 @@ public class PreCommentFieldFactory extends FieldFactory {
 		}
 		StringBuffer sb = new StringBuffer();
 		sb.append("\n");
-		for (int i = 0; i < 20; i++) {
-			sb.append("|");
-		}
+        sb.append("|".repeat(20));
 		sb.append(" FUNCTION ");
-		for (int i = 0; i < 50; i++) {
-			sb.append("|");
-		}
+        sb.append("|".repeat(50));
 		sb.append("\n");
 		FUNCTION_FLAG_COMMENT = sb.toString();
 
 		sb.setLength(0);
 		sb.append("\n");
-		for (int i = 0; i < 19; i++) {
-			sb.append("|");
-		}
+        sb.append("|".repeat(19));
 		sb.append(" SUBROUTINE ");
-		for (int i = 0; i < 49; i++) {
-			sb.append("|");
-		}
+        sb.append("|".repeat(49));
 		sb.append("\n");
 		SUBROUTINE_FLAG_COMMENT = sb.toString();
 

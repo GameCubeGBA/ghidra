@@ -104,9 +104,9 @@ public class FixLangId extends GhidraScript {
 		List<LanguageDescription> descriptions =
 			DefaultLanguageService.getLanguageService().getLanguageDescriptions(true);
 		List<String> choices = new ArrayList<>(descriptions.size());
-		for (int i = 0; i < descriptions.size(); i++) {
-			choices.add(descriptions.get(i).getLanguageID().getIdAsString());
-		}
+        for (LanguageDescription description : descriptions) {
+            choices.add(description.getLanguageID().getIdAsString());
+        }
 
 		try {
 			langId = askChoice("Select New Language", "Language ID:", choices, null);

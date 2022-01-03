@@ -567,7 +567,7 @@ class FidServiceLibraryIngest {
 			}
 			hashes.add(relation.getSpecificHash());
 		}
-		if (hashes.size() == 0 && (!list.isEmpty())) {
+		if (hashes.isEmpty() && (!list.isEmpty())) {
 			Msg.warn(FidServiceLibraryIngest.class,
 				"direct relation " + symbol.name + "lost with hash filter");
 		}
@@ -621,11 +621,8 @@ class FidServiceLibraryIngest {
 		}
 		Address entryPoint = function.getEntryPoint();
 		MemoryBlock block = function.getProgram().getMemory().getBlock(entryPoint);
-		if (!block.isInitialized()) {
-			return true;
-		}
-		return false;
-	}
+        return !block.isInitialized();
+    }
 
 	private void exclude(DomainFile domainFile, Function function,
 			FidPopulateResult.Disposition reason) {

@@ -23,8 +23,6 @@ import ghidra.pcode.opbehavior.UnaryOpBehavior;
 public interface PcodeArithmetic<T> {
 	PcodeArithmetic<byte[]> BYTES_BE = BytesPcodeArithmetic.BIG_ENDIAN;
 	PcodeArithmetic<byte[]> BYTES_LE = BytesPcodeArithmetic.LITTLE_ENDIAN;
-	@Deprecated(forRemoval = true) // TODO: Not getting used
-	PcodeArithmetic<BigInteger> BIGINT = BigIntegerPcodeArithmetic.INSTANCE;
 
 	T unaryOp(UnaryOpBehavior op, int sizeout, int sizein1, T in1);
 

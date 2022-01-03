@@ -21,15 +21,15 @@ package ghidra.app.util.bin.format.xcoff;
  */
 public final class XCoffSectionHeaderNames {
 
-	public final static String _TEXT      = ".text";
-	public final static String _DATA      = ".data";
-	public final static String _BSS       = ".bss";
-	public final static String _PAD       = ".pad";
-	public final static String _LOADER    = ".loader";
-	public final static String _DEBUG     = ".debug";
-	public final static String _TYPCHK    = ".typchk";
-	public final static String _EXCEPT    = ".except";
-	public final static String _OVRFLO    = ".ovrflo";
-	public final static String _INFO      = ".info";
+	public static final String _TEXT      = ".text";
+	public static final String _DATA      = ".data";
+	public static final String _BSS       = ".bss";
+	public static final String _PAD       = ".pad";
+	public static final String _LOADER    = ".loader";
+	public static final String _DEBUG     = ".debug";
+	public static final String _TYPCHK    = ".typchk";
+	public static final String _EXCEPT    = ".except";
+	public static final String _OVRFLO    = ".ovrflo";
+	public static final String _INFO      = ".info";
 
 }

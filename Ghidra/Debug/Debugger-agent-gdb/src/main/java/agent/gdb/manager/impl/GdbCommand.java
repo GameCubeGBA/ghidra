@@ -59,7 +59,7 @@ public interface GdbCommand<T> {
 	 * @param state GDB's state
 	 * @return true if it can be executed, false otherwise
 	 */
-	public boolean validInState(GdbState state);
+    boolean validInState(GdbState state);
 
 	/**
 	 * Perform any pre-execution screening for this command
@@ -76,28 +76,28 @@ public interface GdbCommand<T> {
 	 * 
 	 * @return the encoded command
 	 */
-	public String encode();
+    String encode();
 
 	/**
 	 * If executing this command changes the current thread, return that thread's ID
 	 * 
 	 * @return the new current thread ID
 	 */
-	public Integer impliesCurrentThreadId();
+    Integer impliesCurrentThreadId();
 
 	/**
 	 * If executing this command change the current frame, return that frame's ID
 	 * 
 	 * @return the new current frame ID
 	 */
-	public Integer impliesCurrentFrameId();
+    Integer impliesCurrentFrameId();
 
 	/**
 	 * Check if focus announcements from this command should be suppressed
 	 * 
 	 * @return true to suppress announcements
 	 */
-	public boolean isFocusInternallyDriven();
+    boolean isFocusInternallyDriven();
 
 	/**
 	 * Handle an event that occurred during the execution of this command
@@ -106,7 +106,7 @@ public interface GdbCommand<T> {
 	 * @param pending a copy of the executing command instance
 	 * @return true if the command is now ready to be completed
 	 */
-	public boolean handle(GdbEvent<?> evt, GdbPendingCommand<?> pending);
+    boolean handle(GdbEvent<?> evt, GdbPendingCommand<?> pending);
 
 	/**
 	 * Called when the manager believes this command is finished executing
@@ -117,12 +117,12 @@ public interface GdbCommand<T> {
 	 * @param pending a copy of the now-finished-executing command instance
 	 * @return the object "returned" by the command
 	 */
-	public T complete(GdbPendingCommand<?> pending);
+    T complete(GdbPendingCommand<?> pending);
 
 	/**
 	 * Get the interpreter for which this command is encoded
 	 * 
 	 * @return the interpreter
 	 */
-	public Interpreter getInterpreter();
+    Interpreter getInterpreter();
 }

@@ -212,7 +212,7 @@ public class GraphExporterDialog extends DialogComponentProvider {
 			return;
 		}
 		String fileToExportInto = filePathTextField.getText();
-		if (fileToExportInto.length() == 0) {
+		if (fileToExportInto.isEmpty()) {
 			setStatusText("Please enter a destination file.");
 			return;
 		}

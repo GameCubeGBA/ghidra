@@ -29,7 +29,7 @@ public interface ListingField extends Field {
     /**
      * Returns the FieldFactory that generated this Field
      */
-	public FieldFactory getFieldFactory();
+    FieldFactory getFieldFactory();
     /**
      * Returns the height above the imaginary base line used for alignment of
      * fields.
@@ -44,13 +44,13 @@ public interface ListingField extends Field {
     /**
      * Returns the fieldModel that has the FieldFactory that generated this field.
      */
-	public FieldFormatModel getFieldModel();
+    FieldFormatModel getFieldModel();
 
     /**
      * Returns the object that the fieldFactory used to generate the information
      * in this field.
      */
-	public ProxyObj getProxy();
+    ProxyObj getProxy();
 	
 	/**
 	 * Returns the object that was clicked on a Field for the given FieldLocation.  This may be the
@@ -59,5 +59,5 @@ public interface ListingField extends Field {
 	 * @param fieldLocation The location that was clicked.
 	 * @return the object that was clicked
 	 */
-	public Object getClickedObject( FieldLocation fieldLocation );
+    Object getClickedObject(FieldLocation fieldLocation);
 }

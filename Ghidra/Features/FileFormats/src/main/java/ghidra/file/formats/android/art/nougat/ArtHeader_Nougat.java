@@ -175,7 +175,7 @@ public class ArtHeader_Nougat extends ArtHeader implements ArtCompression {
 
 	@Override
 	public long getDecompressedOffset() {
-		return getCompressedOffset();
+		return _compressedOffset;
 	}
 
 	@Override

@@ -54,11 +54,11 @@ import ghidra.util.task.TaskMonitor;
  * </pre>
  */
 public class ExportDataDirectory extends DataDirectory {
-	private final static String NAME = "IMAGE_DIRECTORY_ENTRY_EXPORT";
+	private static final String NAME = "IMAGE_DIRECTORY_ENTRY_EXPORT";
 	/**
 	 * The size of the {@code IMAGE_EXPORT_DIRECTORY} in bytes.
 	 */
-	public final static int IMAGE_SIZEOF_EXPORT_DIRECTORY = 40;
+    public static final int IMAGE_SIZEOF_EXPORT_DIRECTORY = 40;
 
 	private int characteristics;
 	private int timeDateStamp;
@@ -177,18 +177,18 @@ public class ExportDataDirectory extends DataDirectory {
 		PeUtils.createData(program, addr, toDataType(), log);
 
 		//apply string datatype on export name
-		int ptrToName = getName();
+		int ptrToName = name;
 		if (ptrToName > 0) {
 			Address strAddr = space.getAddress(va(ptrToName, isBinary));
 			createTerminatedString(program, strAddr, false, log);
 			setPlateComment(program, strAddr, "Export Library Name");
 		}
 
-		long funcAddr = va(getAddressOfFunctions(), isBinary);
-		long nameAddr = va(getAddressOfNames(), isBinary);
-		long ordinalAddr = va(getAddressOfNameOrdinals(), isBinary);
+		long funcAddr = va(addressOfFunctions, isBinary);
+		long nameAddr = va(addressOfNames, isBinary);
+		long ordinalAddr = va(addressOfNameOrdinals, isBinary);
 
-		for (int i = 0; i < getNumberOfFunctions(); ++i) {
+		for (int i = 0; i < numberOfFunctions; ++i) {
 			if (monitor.isCancelled()) {
 				break;
 			}
@@ -211,7 +211,7 @@ public class ExportDataDirectory extends DataDirectory {
 			}
 			funcAddr += 4;
 		}
-		for (int i = 0; i < getNumberOfNames(); ++i) {
+		for (int i = 0; i < numberOfNames; ++i) {
 			if (monitor.isCancelled()) {
 				break;
 			}
@@ -222,7 +222,7 @@ public class ExportDataDirectory extends DataDirectory {
 			PeUtils.createData(program, address, new WordDataType(), log);
 			ordinalAddr += 2;
 		}
-		for (int i = 0; i < getNumberOfNames(); ++i) {
+		for (int i = 0; i < numberOfNames; ++i) {
 			if (monitor.isCancelled()) {
 				break;
 			}

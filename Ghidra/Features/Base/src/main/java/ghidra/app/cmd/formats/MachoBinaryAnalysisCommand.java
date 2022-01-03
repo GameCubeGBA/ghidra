@@ -46,8 +46,7 @@ public class MachoBinaryAnalysisCommand extends FlatProgramAPI
 	private ProgramModule module;
 
 	public MachoBinaryAnalysisCommand() {
-		super();
-	}
+    }
 
 	public MachoBinaryAnalysisCommand(Address address, ProgramModule module) {
 		this(address, true, module);
@@ -55,8 +54,7 @@ public class MachoBinaryAnalysisCommand extends FlatProgramAPI
 
 	public MachoBinaryAnalysisCommand(Address address, boolean isRelativeToAddress,
 			ProgramModule module) {
-		super();
-		this.address = address;
+        this.address = address;
 		this.isRelativeToAddress = isRelativeToAddress;
 		this.module = module;
 	}

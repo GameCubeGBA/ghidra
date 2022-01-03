@@ -38,7 +38,6 @@ public abstract class AbstractWizardJPanel extends JPanel implements WizardPanel
 	 * Default constructor.
 	 */
     public AbstractWizardJPanel() {
-        super();
     }
     
     /**

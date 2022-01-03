@@ -275,11 +275,8 @@ public class RestrictedValueSortedMap<K, V> implements ValueSortedMap<K, V> {
 			}
 			Entry<K, V> ent = (Entry<K, V>) o;
 			V val = ent.getValue();
-			if (!inBounds(val)) {
-				return false;
-			}
-			return true;
-		}
+            return inBounds(val);
+        }
 
 		@Override
 		public Iterator<Entry<K, V>> iterator() {
@@ -1104,9 +1101,7 @@ public class RestrictedValueSortedMap<K, V> implements ValueSortedMap<K, V> {
 		}
 		if (hasTo) {
 			int toCmp = comparator.compare(val, toValue);
-			if (toCmp > 0 || toCmp == 0 && !toInclusive) {
-				return false;
-			}
+            return toCmp <= 0 && (toCmp != 0 || toInclusive);
 		}
 		return true;
 	}

@@ -65,8 +65,7 @@ public class VTAddToSessionTest extends AbstractGhidraHeadedIntegrationTest {
 	private AddressSet destinationSelection;
 
 	public VTAddToSessionTest() {
-		super();
-	}
+    }
 
 	@Before
 	public void setUp() throws Exception {

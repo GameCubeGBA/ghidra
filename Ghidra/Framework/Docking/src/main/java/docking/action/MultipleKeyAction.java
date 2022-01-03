@@ -343,7 +343,7 @@ public class MultipleKeyAction extends DockingKeyBindingAction {
 			buildy.append(data.action.toString()).append("\n\t");
 		}
 
-		if (actions.size() > 0) {
+		if (!actions.isEmpty()) {
 			buildy.delete(buildy.length() - 2, buildy.length()); // trim off newline and tab
 		}
 
@@ -374,7 +374,7 @@ public class MultipleKeyAction extends DockingKeyBindingAction {
 
 		@Override
 		public String toString() {
-			String providerString = provider == null ? "" : provider.toString() + " - ";
+			String providerString = provider == null ? "" : provider + " - ";
 			return providerString + action;
 		}
 

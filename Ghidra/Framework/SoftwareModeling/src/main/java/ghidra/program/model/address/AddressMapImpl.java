@@ -33,17 +33,17 @@ import ghidra.util.UniversalIdGenerator;
  */
 public class AddressMapImpl {
 
-	private final static int ADDR_OFFSET_SIZE = 32;
-	private final static int MAP_ID_SIZE = 8;
-	private final static long MAX_OFFSET = (1L << ADDR_OFFSET_SIZE) - 1;
-	private final static long ADDR_OFFSET_MASK = MAX_OFFSET;
-	private final static long MAP_ID_MASK = (long) -1 << (64 - MAP_ID_SIZE);
+	private static final int ADDR_OFFSET_SIZE = 32;
+	private static final int MAP_ID_SIZE = 8;
+	private static final long MAX_OFFSET = (1L << ADDR_OFFSET_SIZE) - 1;
+	private static final long ADDR_OFFSET_MASK = MAX_OFFSET;
+	private static final long MAP_ID_MASK = (long) -1 << (64 - MAP_ID_SIZE);
 
-	private final static long BASE_MASK = ~ADDR_OFFSET_MASK;
-	private final static int BASE_ID_SIZE = 64 - MAP_ID_SIZE - ADDR_OFFSET_SIZE;
-	private final static int BASE_ID_MASK = (1 << BASE_ID_SIZE) - 1;
+	private static final long BASE_MASK = ~ADDR_OFFSET_MASK;
+	private static final int BASE_ID_SIZE = 64 - MAP_ID_SIZE - ADDR_OFFSET_SIZE;
+	private static final int BASE_ID_MASK = (1 << BASE_ID_SIZE) - 1;
 
-	private final static int STACK_SPACE_ID = -1 >>> MAP_ID_SIZE;
+	private static final int STACK_SPACE_ID = -1 >>> MAP_ID_SIZE;
 
 	private HashMap<String, AddressSpace> spaceMap = new HashMap<>();
 	private AddressSpace stackSpace; // special case - this is the only signed space map supports

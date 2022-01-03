@@ -21,7 +21,7 @@ import ghidra.framework.model.DomainObject;
 
 public interface DomainFileArchive extends Archive {
 
-	public abstract DomainFile getDomainFile();
+	DomainFile getDomainFile();
 
-	public abstract DomainObject getDomainObject();
+	DomainObject getDomainObject();
 }

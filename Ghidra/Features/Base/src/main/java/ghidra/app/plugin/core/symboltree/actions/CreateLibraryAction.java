@@ -46,9 +46,7 @@ public class CreateLibraryAction extends SymbolTreeContextAction {
 		TreePath[] selectionPaths = context.getSelectedSymbolTreePaths();
 		if (selectionPaths.length == 1) {
 			Object object = selectionPaths[0].getLastPathComponent();
-			if (object instanceof ImportsCategoryNode || object instanceof SymbolTreeRootNode) {
-				return true;
-			}
+            return object instanceof ImportsCategoryNode || object instanceof SymbolTreeRootNode;
 		}
 		return false;
 	}

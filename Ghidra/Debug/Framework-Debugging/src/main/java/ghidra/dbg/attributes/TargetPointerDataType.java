@@ -17,7 +17,7 @@ package ghidra.dbg.attributes;
 
 @FunctionalInterface
 public interface TargetPointerDataType extends TargetDataType {
-	public class DefaultTargetPointerDataType implements TargetPointerDataType {
+	class DefaultTargetPointerDataType implements TargetPointerDataType {
 		protected final TargetDataType referentType;
 
 		public DefaultTargetPointerDataType(TargetDataType referentType) {

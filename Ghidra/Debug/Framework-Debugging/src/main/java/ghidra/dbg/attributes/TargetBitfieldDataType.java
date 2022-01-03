@@ -21,7 +21,7 @@ package ghidra.dbg.attributes;
  * This is only applicable to fields of structures.
  */
 public interface TargetBitfieldDataType extends TargetDataType {
-	public class DefaultTargetBitfieldDataType implements TargetBitfieldDataType {
+	class DefaultTargetBitfieldDataType implements TargetBitfieldDataType {
 		protected final TargetDataType fieldType;
 		protected final int leastBitPosition;
 		protected final int bitLength;

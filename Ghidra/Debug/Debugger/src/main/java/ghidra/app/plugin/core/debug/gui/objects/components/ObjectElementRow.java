@@ -69,8 +69,8 @@ public class ObjectElementRow {
 	}
 
 	public Object getValue() {
-		if (currentKey.equals("Accessor")) {
-			return getTargetObject().getName();
+		if ("Accessor".equals(currentKey)) {
+			return to.getName();
 		}
 		if (map == null) {
 			return "";

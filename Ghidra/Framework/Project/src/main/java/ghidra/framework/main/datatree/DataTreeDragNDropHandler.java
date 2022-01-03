@@ -116,12 +116,8 @@ public class DataTreeDragNDropHandler implements GTreeDragNDropHandler {
 
 	@Override
 	public boolean isDropSiteOk(GTreeNode destUserData, DataFlavor[] flavors, int dropAction) {
-		if (!isActiveProject || ToolConstants.NO_ACTIVE_PROJECT.equals(destUserData.getName())) {
-			return false;
-		}
-
-		return true;
-	}
+        return isActiveProject && !ToolConstants.NO_ACTIVE_PROJECT.equals(destUserData.getName());
+    }
 
 	@Override
 	public boolean isStartDragOk(List<GTreeNode> dragUserData, int dragAction) {

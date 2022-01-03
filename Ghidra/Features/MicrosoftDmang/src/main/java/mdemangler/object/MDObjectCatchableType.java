@@ -55,11 +55,9 @@ public class MDObjectCatchableType extends MDObjectReserved {
 	public void insert(StringBuilder builder) {
 		super.insert(builder);
 		dmang.appendString(builder, "[CatchableType," + digits + "]");
-		Iterator<MDObjectCPP> iter = objectCPPList.iterator();
-		while (iter.hasNext()) {
-			MDObjectCPP objectCPP = iter.next();
-			dmang.appendString(builder, "{" + objectCPP + "}");
-		}
+        for (MDObjectCPP objectCPP : objectCPPList) {
+            dmang.appendString(builder, "{" + objectCPP + "}");
+        }
 	}
 
 	@Override

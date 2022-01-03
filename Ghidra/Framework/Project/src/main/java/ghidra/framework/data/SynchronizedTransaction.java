@@ -116,7 +116,7 @@ class SynchronizedTransaction implements Transaction {
 		int index = findDomainObject(domainObj);
 		int txId = managers[index].startTransaction(domainObj, description, listener, false, false);
 		++activeCounts[index];
-		if (descriptions[index] == null && description != null && description.length() != 0) {
+		if (descriptions[index] == null && description != null && !description.isEmpty()) {
 			descriptions[index] = description;
 		}
 		return txId;

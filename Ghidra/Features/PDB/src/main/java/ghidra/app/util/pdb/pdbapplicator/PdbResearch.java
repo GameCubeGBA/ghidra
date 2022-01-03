@@ -350,7 +350,7 @@ public class PdbResearch {
 
 	//==============================================================================================
 	//==============================================================================================
-	static private void initDeveloperOrderRecordNumbers() {
+    private static void initDeveloperOrderRecordNumbers() {
 		developerDebugOrderIndexNumbers = new TreeSet<>();
 
 		developerDebugOrderIndexNumbers.add(9696);
@@ -429,8 +429,8 @@ public class PdbResearch {
 		}
 	}
 
-	static private boolean childWalkSym(PdbApplicator applicator, int moduleNumber,
-			AbstractMsSymbolIterator iter) throws PdbException, CancelledException {
+	private static boolean childWalkSym(PdbApplicator applicator, int moduleNumber,
+                                        AbstractMsSymbolIterator iter) throws PdbException, CancelledException {
 		if (!iter.hasNext()) {
 			return false;
 		}
@@ -473,7 +473,7 @@ public class PdbResearch {
 	}
 
 	//==============================================================================================
-	static private boolean childWalkType(int moduleNumber, MsTypeApplier applier) {
+    private static boolean childWalkType(int moduleNumber, MsTypeApplier applier) {
 		doNothingSetBreakPointHere();
 		if (applier instanceof AbstractFunctionTypeApplier) {
 			doNothingSetBreakPointHere();

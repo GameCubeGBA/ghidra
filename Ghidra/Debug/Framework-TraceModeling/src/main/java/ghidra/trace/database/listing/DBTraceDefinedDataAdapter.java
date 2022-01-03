@@ -115,6 +115,12 @@ public interface DBTraceDefinedDataAdapter extends DBTraceDataAdapter {
 			return null;
 		}
 	}
+
+	@Deprecated
+	@Override
+	default DBTraceDefinedDataAdapter getComponentAt(int offset) {
+		return getComponentContaining(offset);
+	}
 	
 	@Override
 	default DBTraceDefinedDataAdapter getComponentContaining(int offset) {
@@ -206,7 +212,7 @@ public interface DBTraceDefinedDataAdapter extends DBTraceDataAdapter {
 			if (offset < 0 || offset >= getLength()) {
 				return null;
 			}
-			DBTraceDefinedDataAdapter component = getComponentContaining(offset);
+			DBTraceDefinedDataAdapter component = getComponentAt(offset);
 			if (component == null || component == this) {
 				return this;
 			}

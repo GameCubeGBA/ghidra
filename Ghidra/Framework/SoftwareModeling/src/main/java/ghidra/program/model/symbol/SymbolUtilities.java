@@ -60,47 +60,47 @@ public class SymbolUtilities {
 	/**
 	 * Default prefix for a subroutine
 	 */
-	private final static String DEFAULT_SUBROUTINE_PREFIX = "SUB_";
+    private static final String DEFAULT_SUBROUTINE_PREFIX = "SUB_";
 	/**
 	 * Default prefix for a reference that has flow
 	 * but is not a call.
 	 */
-	private final static String DEFAULT_SYMBOL_PREFIX = "LAB_";
+    private static final String DEFAULT_SYMBOL_PREFIX = "LAB_";
 	/**
 	 * Default prefix for a data reference.
 	 */
-	private final static String DEFAULT_DATA_PREFIX = "DAT_";
+    private static final String DEFAULT_DATA_PREFIX = "DAT_";
 	/**
 	 * Default prefix for reference that is unknown.
 	 */
-	private final static String DEFAULT_UNKNOWN_PREFIX = "UNK_";
+    private static final String DEFAULT_UNKNOWN_PREFIX = "UNK_";
 	/**
 	 * Default prefix for an entry point.
 	 */
-	private final static String DEFAULT_EXTERNAL_ENTRY_PREFIX = "EXT_";
+    private static final String DEFAULT_EXTERNAL_ENTRY_PREFIX = "EXT_";
 	/**
 	 * Default prefix for a function.
 	 */
-	private final static String DEFAULT_FUNCTION_PREFIX = "FUN_";
+    private static final String DEFAULT_FUNCTION_PREFIX = "FUN_";
 	/**
 	 * Default prefix for a reference that is offcut.
 	 */
-	private final static String DEFAULT_INTERNAL_REF_PREFIX = "OFF_";
+    private static final String DEFAULT_INTERNAL_REF_PREFIX = "OFF_";
 
 	private static final String UNDERSCORE = "_";
-	private final static String PLUS = "+";
+	private static final String PLUS = "+";
 
-	public final static int UNK_LEVEL = 0;
-	public final static int DAT_LEVEL = 1;
-	public final static int LAB_LEVEL = 2;
-	public final static int SUB_LEVEL = 3;
-	public final static int EXT_LEVEL = 5;
-	public final static int FUN_LEVEL = 6;
+	public static final int UNK_LEVEL = 0;
+	public static final int DAT_LEVEL = 1;
+	public static final int LAB_LEVEL = 2;
+	public static final int SUB_LEVEL = 3;
+	public static final int EXT_LEVEL = 5;
+	public static final int FUN_LEVEL = 6;
 
 	/**
 	 * Array of default prefixes.
 	 */
-	private final static String[] DYNAMIC_PREFIX_ARRAY = { DEFAULT_UNKNOWN_PREFIX,
+    private static final String[] DYNAMIC_PREFIX_ARRAY = { DEFAULT_UNKNOWN_PREFIX,
 		DEFAULT_DATA_PREFIX, DEFAULT_SYMBOL_PREFIX, DEFAULT_SUBROUTINE_PREFIX,
 		DEFAULT_UNKNOWN_PREFIX, DEFAULT_EXTERNAL_ENTRY_PREFIX, DEFAULT_FUNCTION_PREFIX };
 
@@ -115,12 +115,12 @@ public class SymbolUtilities {
 	 * The standard prefix for denoting the ordinal
 	 * values of a symbol.
 	 */
-	public final static String ORDINAL_PREFIX = "Ordinal_";
+    public static final String ORDINAL_PREFIX = "Ordinal_";
 
 	/**
 	 * Invalid characters for a symbol name.
 	 */
-	public final static char[] INVALIDCHARS = { ' ' };
+    public static final char[] INVALIDCHARS = { ' ' };
 
 	private static final Comparator<Symbol> CASE_INSENSITIVE_SYMBOL_NAME_COMPARATOR = (s1, s2) -> {
 		return s1.getName().compareToIgnoreCase(s2.getName());
@@ -246,7 +246,7 @@ public class SymbolUtilities {
 		if (name == null) {
 			throw new InvalidInputException("Symbol name can't be null");
 		}
-		if (name.length() == 0) {
+		if (name.isEmpty()) {
 			throw new InvalidInputException("Symbol name can't be empty string");
 		}
 		if (name.length() > MAX_SYMBOL_NAME_LENGTH) {
@@ -338,11 +338,8 @@ public class SymbolUtilities {
 		if ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f')) {
 			return true;
 		}
-		if (c >= 'A' && c <= 'F') {
-			return true;
-		}
-		return false;
-	}
+        return c >= 'A' && c <= 'F';
+    }
 
 	/**
 	 * Returns true if the specified char
@@ -643,7 +640,7 @@ public class SymbolUtilities {
 
 		int start = 1;
 		int end = pieces.length - 2;
-		if (pieces[end].length() == 0) { // if last piece is empty string, then it is not part of spaceName;
+		if (pieces[end].isEmpty()) { // if last piece is empty string, then it is not part of spaceName;
 			end--;
 		}
 
@@ -679,7 +676,7 @@ public class SymbolUtilities {
 	}
 
 	public static boolean isDefaultParameterName(String name) {
-		if (name == null || name.length() == 0) {
+		if (name == null || name.isEmpty()) {
 			return true;
 		}
 		if (name.startsWith(Function.DEFAULT_PARAM_PREFIX)) {
@@ -757,7 +754,7 @@ public class SymbolUtilities {
 
 	public static boolean isDefaultLocalName(Program program, String name,
 			VariableStorage storage) {
-		if (name == null || name.length() == 0) {
+		if (name == null || name.isEmpty()) {
 			return true;
 		}
 		if (storage == VariableStorage.BAD_STORAGE) {
@@ -799,7 +796,7 @@ public class SymbolUtilities {
 	}
 
 	public static boolean isDefaultLocalStackName(String name) {
-		if (name == null || name.length() == 0) {
+		if (name == null || name.isEmpty()) {
 			return true;
 		}
 		if (name.startsWith(Function.DEFAULT_LOCAL_PREFIX)) {

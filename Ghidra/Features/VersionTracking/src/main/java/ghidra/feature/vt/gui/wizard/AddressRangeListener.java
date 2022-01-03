@@ -21,6 +21,6 @@ import ghidra.program.model.address.Address;
 @FunctionalInterface
 public interface AddressRangeListener {
 
-	public void processAddressRange(Address minAddress, Address maxAddress);
+	void processAddressRange(Address minAddress, Address maxAddress);
 
 }

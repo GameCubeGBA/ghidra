@@ -43,7 +43,7 @@ public interface TargetBreakpointLocation extends TargetObject {
 	 * @return the address
 	 */
 	@TargetAttributeType(name = ADDRESS_ATTRIBUTE_NAME, required = true, hidden = true)
-	public default Address getAddress() {
+    default Address getAddress() {
 		return getTypedAttributeNowByName(ADDRESS_ATTRIBUTE_NAME, Address.class, null);
 	}
 
@@ -59,11 +59,11 @@ public interface TargetBreakpointLocation extends TargetObject {
 	 * @return the length, or {@code null} if not known
 	 */
 	@TargetAttributeType(name = LENGTH_ATTRIBUTE_NAME, hidden = true)
-	public default Integer getLength() {
+    default Integer getLength() {
 		return getTypedAttributeNowByName(LENGTH_ATTRIBUTE_NAME, Integer.class, null);
 	}
 
-	public default int getLengthOrDefault(int fallback) {
+	default int getLengthOrDefault(int fallback) {
 		return getTypedAttributeNowByName(LENGTH_ATTRIBUTE_NAME, Integer.class, fallback);
 	}
 
@@ -77,7 +77,7 @@ public interface TargetBreakpointLocation extends TargetObject {
 	 * @return the reference to the specification
 	 */
 	@TargetAttributeType(name = SPEC_ATTRIBUTE_NAME, required = true, hidden = true)
-	public default TargetBreakpointSpec getSpecification() {
+    default TargetBreakpointSpec getSpecification() {
 		return getTypedAttributeNowByName(SPEC_ATTRIBUTE_NAME, TargetBreakpointSpec.class, null);
 	}
 }

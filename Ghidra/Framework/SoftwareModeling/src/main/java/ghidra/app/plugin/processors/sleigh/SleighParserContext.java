@@ -119,7 +119,7 @@ public class SleighParserContext implements ParserContext {
 	}
 
 	public void applyCommits(ProcessorContext ctx) throws MemoryAccessException {
-		if (contextcommit.size() == 0)
+		if (contextcommit.isEmpty())
 			return;
 		ContextCache contextCache = prototype.getContextCache();
 		ParserWalker walker = new ParserWalker(this);
@@ -322,14 +322,14 @@ public class SleighParserContext implements ParserContext {
 
 	public Address getFlowRefAddr() {
 		if (refAddr == null) {
-			throw new SleighException("Flow reference (inst_ref) is undefined at " + getAddr());
+			throw new SleighException("Flow reference (inst_ref) is undefined at " + addr);
 		}
 		return refAddr;
 	}
 
 	public Address getFlowDestAddr() {
 		if (destAddr == null) {
-			throw new SleighException("Flow destination (inst_dest) is undefined at " + getAddr());
+			throw new SleighException("Flow destination (inst_dest) is undefined at " + addr);
 		}
 		return destAddr;
 	}

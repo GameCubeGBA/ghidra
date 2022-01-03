@@ -69,8 +69,7 @@ public class SaveToolConfigDialogTest extends AbstractGhidraHeadedIntegrationTes
 	private PluginTool newtool;
 
 	public SaveToolConfigDialogTest() {
-		super();
-	}
+    }
 
 	@Before
 	public void setUp() throws Exception {

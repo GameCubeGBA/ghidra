@@ -36,6 +36,6 @@ public interface AnnotatedMouseHandler {
      *        the mouse click
      * @return true if the handler wants to be the only handler processing the click.
      */
-    public boolean handleMouseClick(ProgramLocation location, MouseEvent mouseEvent, 
-        ServiceProvider serviceProvider );
+    boolean handleMouseClick(ProgramLocation location, MouseEvent mouseEvent,
+                             ServiceProvider serviceProvider);
 }

@@ -45,8 +45,7 @@ class DomainObjectTransactionManager extends AbstractTransactionManager {
 	private DomainObjectDBTransaction transaction;
 
 	DomainObjectTransactionManager(DomainObjectAdapterDB domainObj) {
-		super();
-		this.domainObj = domainObj;
+        this.domainObj = domainObj;
 		domainObj.dbh.setMaxUndos(NUM_UNDOS);
 		domainObjAsArray = new DomainObjectAdapterDB[] { domainObj };
 	}
@@ -213,7 +212,7 @@ class DomainObjectTransactionManager extends AbstractTransactionManager {
 
 	@Override
 	synchronized boolean canRedo() {
-		if (transaction == null && redoList.size() > 0) {
+		if (transaction == null && !redoList.isEmpty()) {
 			return domainObj.dbh.canRedo();
 		}
 		return false;
@@ -221,7 +220,7 @@ class DomainObjectTransactionManager extends AbstractTransactionManager {
 
 	@Override
 	synchronized boolean canUndo() {
-		if (transaction == null && undoList.size() > 0) {
+		if (transaction == null && !undoList.isEmpty()) {
 			return domainObj.dbh.canUndo();
 		}
 		return false;
@@ -229,7 +228,7 @@ class DomainObjectTransactionManager extends AbstractTransactionManager {
 
 	@Override
 	synchronized String getRedoName() {
-		if (transaction == null && redoList.size() > 0) {
+		if (transaction == null && !redoList.isEmpty()) {
 			Transaction t = redoList.getLast();
 			return t.getDescription();
 		}
@@ -238,7 +237,7 @@ class DomainObjectTransactionManager extends AbstractTransactionManager {
 
 	@Override
 	synchronized String getUndoName() {
-		if (transaction == null && undoList.size() > 0) {
+		if (transaction == null && !undoList.isEmpty()) {
 			Transaction t = undoList.getLast();
 			return t.getDescription();
 		}

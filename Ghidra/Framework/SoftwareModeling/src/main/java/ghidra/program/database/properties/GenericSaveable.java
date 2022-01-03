@@ -111,11 +111,8 @@ public class GenericSaveable implements Saveable {
 			return false;
 		}
 		GenericSaveable other = (GenericSaveable) obj;
-		if (!Objects.equals(record, other.record)) {
-			return false;
-		}
-		return true;
-	}
+        return Objects.equals(record, other.record);
+    }
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()

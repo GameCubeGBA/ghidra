@@ -98,7 +98,7 @@ public interface CompositeInternal extends Composite {
 	 * {@code ComponentComparator} provides ability to compare two DataTypeComponent objects
 	 * based upon their ordinal. Intended to be used to sort components based upon ordinal.
 	 */
-	public static class ComponentComparator implements Comparator<DataTypeComponent> {
+    class ComponentComparator implements Comparator<DataTypeComponent> {
 
 		public static final ComponentComparator INSTANCE = new ComponentComparator();
 
@@ -113,7 +113,7 @@ public interface CompositeInternal extends Composite {
 	 * DataTypeComponent object. The offset will be consider equal (0) if the component contains the
 	 * offset.
 	 */
-	public static class OffsetComparator implements Comparator<Object> {
+    class OffsetComparator implements Comparator<Object> {
 
 		public static final OffsetComparator INSTANCE = new OffsetComparator();
 
@@ -141,7 +141,7 @@ public interface CompositeInternal extends Composite {
 	 * to the specified ordinal.
 	 * <p>
 	 */
-	public static class OrdinalComparator implements Comparator<Object> {
+    class OrdinalComparator implements Comparator<Object> {
 
 		public static final OrdinalComparator INSTANCE = new OrdinalComparator();
 

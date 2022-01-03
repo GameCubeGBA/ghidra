@@ -23,5 +23,5 @@ import ghidra.framework.model.DomainObject;
  */
 @FunctionalInterface
 public interface DomainObjectService {
-	public DomainObject getDomainObject();
+	DomainObject getDomainObject();
 }

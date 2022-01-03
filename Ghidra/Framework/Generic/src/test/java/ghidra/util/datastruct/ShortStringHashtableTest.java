@@ -26,8 +26,7 @@ public class ShortStringHashtableTest extends AbstractGenericTest {
 	 * @param arg0
 	 */
 	public ShortStringHashtableTest() {
-		super();
-	}
+    }
 
 @Test
     public void testShortStringHashtable() {

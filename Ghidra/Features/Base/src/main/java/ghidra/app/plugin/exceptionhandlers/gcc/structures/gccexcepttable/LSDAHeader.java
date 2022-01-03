@@ -227,7 +227,7 @@ public class LSDAHeader extends GccAnalysisClass {
 		headerSize = addr.subtract(baseAddr);
 		callSiteTableHeaderSize = addr.subtract(callSiteTableStart);
 
-		Address extent = addr.add(getCallSiteTableLength() - 1);
+		Address extent = addr.add(callSiteTableLength - 1);
 
 		if (ttypeEncoding != OMITTED_ENCODING_TYPE) {
 			ttypeAddr = baseAddr.add(ttypeOffset);

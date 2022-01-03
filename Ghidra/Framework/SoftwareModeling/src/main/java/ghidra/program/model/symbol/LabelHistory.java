@@ -27,15 +27,15 @@ public class LabelHistory {
 	/**
 	 * Label added.
 	 */
-	public static final byte ADD 	 = (byte)0;
+	public static final byte ADD 	 = 0;
 	/**
 	 * Label removed.
 	 */
-	public static final byte REMOVE = (byte)1;
+	public static final byte REMOVE = 1;
 	/**
 	 * Label renamed.
 	 */
-	public static final byte RENAME = (byte)2;
+	public static final byte RENAME = 2;
 
 	private Address addr;
 	private String labelStr;

@@ -26,16 +26,16 @@ import ghidra.util.database.annot.DBAnnotatedField;
 public class DBAnnotatedFieldValidator extends AbstractDBAnnotationValidator {
 	final VariableElement field;
 	final Map<TypeMirror, TypeElement> javaToDBTypeMap;
-	final static String FACTORY_NAME = "ghidra.util.database.DBCachedObjectStoreFactory";
-	final static String BOOLEAN_CODEC_NAME = FACTORY_NAME + ".BooleanDBFieldCodec";
-	final static String BYTE_CODEC_NAME = FACTORY_NAME + ".ByteDBFieldCodec";
-	final static String SHORT_CODEC_NAME = FACTORY_NAME + ".ShortDBFieldCodec";
-	final static String INT_CODEC_NAME = FACTORY_NAME + ".IntDBFieldCodec";
-	final static String LONG_CODEC_NAME = FACTORY_NAME + ".LongDBFieldCodec";
-	final static String STRING_CODEC_NAME = FACTORY_NAME + ".StringDBFieldCodec";
-	final static String BYTE_ARRAY_CODEC_NAME = FACTORY_NAME + ".ByteArrayDBFieldCodec";
-	final static String LONG_ARRAY_CODEC_NAME = FACTORY_NAME + ".LongArrayDBFieldCodec";
-	final static String ENUM_CODEC_NAME = FACTORY_NAME + ".EnumDBByteFieldCodec";
+	static final String FACTORY_NAME = "ghidra.util.database.DBCachedObjectStoreFactory";
+	static final String BOOLEAN_CODEC_NAME = FACTORY_NAME + ".BooleanDBFieldCodec";
+	static final String BYTE_CODEC_NAME = FACTORY_NAME + ".ByteDBFieldCodec";
+	static final String SHORT_CODEC_NAME = FACTORY_NAME + ".ShortDBFieldCodec";
+	static final String INT_CODEC_NAME = FACTORY_NAME + ".IntDBFieldCodec";
+	static final String LONG_CODEC_NAME = FACTORY_NAME + ".LongDBFieldCodec";
+	static final String STRING_CODEC_NAME = FACTORY_NAME + ".StringDBFieldCodec";
+	static final String BYTE_ARRAY_CODEC_NAME = FACTORY_NAME + ".ByteArrayDBFieldCodec";
+	static final String LONG_ARRAY_CODEC_NAME = FACTORY_NAME + ".LongArrayDBFieldCodec";
+	static final String ENUM_CODEC_NAME = FACTORY_NAME + ".EnumDBByteFieldCodec";
 
 	final TypeElement ENUM_CODEC_ELEM;
 

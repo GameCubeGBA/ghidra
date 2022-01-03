@@ -43,8 +43,7 @@ public class InstructionInfoTest extends AbstractGhidraHeadedIntegrationTest {
 	private CodeBrowserPlugin cb;
 
 	public InstructionInfoTest() {
-		super();
-	}
+    }
 
 	private Address addr(String address) {
 		return program.getAddressFactory().getAddress(address);

@@ -170,13 +170,8 @@ RESTORE_SELECTION_ACTION_NAME},
             if ( previousRestoreSelection == null || previousRestoreSelection.isEmpty() ) {
                 return false;
             }
-            
-            if ( previousRestoreSelection.equals( activeSelection ) ) {
-                return false;
-            }
-            
-            
-            return true;
+
+            return !previousRestoreSelection.equals(activeSelection);
         }
     }
 }

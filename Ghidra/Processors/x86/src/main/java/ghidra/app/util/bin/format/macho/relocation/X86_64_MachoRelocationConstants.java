@@ -25,50 +25,50 @@ public class X86_64_MachoRelocationConstants {
 	/**
 	 * For absolute addresses
 	 */
-	public final static int X86_64_RELOC_UNSIGNED = 0;
+    public static final int X86_64_RELOC_UNSIGNED = 0;
 
 	/**
 	 * For signed 32-bit displacement
 	 */
-	public final static int X86_64_RELOC_SIGNED = 1;
+    public static final int X86_64_RELOC_SIGNED = 1;
 
 	/**
 	 *  A CALL/JMP instruction with 32-bit displacement
 	 */
-	public final static int X86_64_RELOC_BRANCH = 2;
+    public static final int X86_64_RELOC_BRANCH = 2;
 
 	/**
 	 * A MOVQ load of a GOT entry
 	 */
-	public final static int X86_64_RELOC_GOT_LOAD = 3;
+    public static final int X86_64_RELOC_GOT_LOAD = 3;
 
 	/**
 	 * Other GOT references
 	 */
-	public final static int X86_64_RELOC_GOT = 4;
+    public static final int X86_64_RELOC_GOT = 4;
 
 	/**
 	 * Must be followed by a X86_64_RELOC_UNSIGNED
 	 */
-	public final static int X86_64_RELOC_SUBTRACTOR = 5;
+    public static final int X86_64_RELOC_SUBTRACTOR = 5;
 
 	/**
 	 * For signed 32-bit displacement with a -1 addend
 	 */
-	public final static int X86_64_RELOC_SIGNED_1 = 6;
+    public static final int X86_64_RELOC_SIGNED_1 = 6;
 
 	/**
 	 * For signed 32-bit displacement with a -2 addend
 	 */
-	public final static int X86_64_RELOC_SIGNED_2 = 7;
+    public static final int X86_64_RELOC_SIGNED_2 = 7;
 
 	/**
 	 * For signed 32-bit displacement with a -4 addend
 	 */
-	public final static int X86_64_RELOC_SIGNED_4 = 8;
+    public static final int X86_64_RELOC_SIGNED_4 = 8;
 
 	/**
 	 * For thread local variables
 	 */
-	public final static int X86_64_RELOC_TLV = 9;
+    public static final int X86_64_RELOC_TLV = 9;
 }

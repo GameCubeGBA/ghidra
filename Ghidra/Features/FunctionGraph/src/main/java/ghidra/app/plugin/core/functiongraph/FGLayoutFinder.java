@@ -25,5 +25,5 @@ import ghidra.app.plugin.core.functiongraph.graph.layout.FGLayoutProvider;
  */
 @FunctionalInterface
 public interface FGLayoutFinder {
-	public List<FGLayoutProvider> findLayouts();
+	List<FGLayoutProvider> findLayouts();
 }

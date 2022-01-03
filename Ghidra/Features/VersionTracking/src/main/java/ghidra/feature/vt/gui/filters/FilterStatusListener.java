@@ -21,5 +21,5 @@ import ghidra.feature.vt.gui.filters.Filter.FilterEditingStatus;
 @FunctionalInterface
 public interface FilterStatusListener {
 
-    public void filterStatusChanged( FilterEditingStatus status );
+    void filterStatusChanged(FilterEditingStatus status);
 }

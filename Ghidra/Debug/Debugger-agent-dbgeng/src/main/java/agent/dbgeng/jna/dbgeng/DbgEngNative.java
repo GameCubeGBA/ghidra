@@ -40,7 +40,7 @@ public interface DbgEngNative extends StdCallLibrary {
 
 	HRESULT DebugCreateEx(REFIID InterfaceId, DWORD DbgEngOptions, PointerByReference Interface);
 
-	public static class DEBUG_BREAKPOINT_PARAMETERS extends Structure {
+	class DEBUG_BREAKPOINT_PARAMETERS extends Structure {
 		public static class ByReference extends DEBUG_BREAKPOINT_PARAMETERS
 				implements Structure.ByReference {
 		}
@@ -68,7 +68,7 @@ public interface DbgEngNative extends StdCallLibrary {
 		}
 	}
 
-	public static class DEBUG_REGISTER_DESCRIPTION extends Structure {
+	class DEBUG_REGISTER_DESCRIPTION extends Structure {
 		public static class ByReference extends DEBUG_REGISTER_DESCRIPTION
 				implements Structure.ByReference {
 		}
@@ -92,7 +92,7 @@ public interface DbgEngNative extends StdCallLibrary {
 		}
 	}
 
-	public static class DEBUG_VALUE extends Structure {
+	class DEBUG_VALUE extends Structure {
 		public static class ByReference extends DEBUG_VALUE implements Structure.ByReference {
 		}
 
@@ -335,7 +335,7 @@ public interface DbgEngNative extends StdCallLibrary {
 		}
 	}
 
-	public class DEBUG_MODULE_AND_ID extends Structure {
+	class DEBUG_MODULE_AND_ID extends Structure {
 		public static class ByReference extends DEBUG_MODULE_AND_ID
 				implements Structure.ByReference {
 		}
@@ -351,7 +351,7 @@ public interface DbgEngNative extends StdCallLibrary {
 		}
 	}
 
-	public class DEBUG_MODULE_PARAMETERS extends Structure {
+	class DEBUG_MODULE_PARAMETERS extends Structure {
 		public static class ByReference extends DEBUG_MODULE_PARAMETERS
 				implements Structure.ByReference {
 		}
@@ -381,7 +381,7 @@ public interface DbgEngNative extends StdCallLibrary {
 		}
 	}
 
-	public class DEBUG_SYMBOL_ENTRY extends Structure {
+	class DEBUG_SYMBOL_ENTRY extends Structure {
 		public static class ByReference extends DEBUG_SYMBOL_ENTRY
 				implements Structure.ByReference {
 		}
@@ -408,7 +408,7 @@ public interface DbgEngNative extends StdCallLibrary {
 		}
 	}
 
-	public class DEBUG_THREAD_BASIC_INFORMATION extends Structure {
+	class DEBUG_THREAD_BASIC_INFORMATION extends Structure {
 		public static class ByReference extends DEBUG_THREAD_BASIC_INFORMATION
 				implements Structure.ByReference {
 		}
@@ -434,7 +434,7 @@ public interface DbgEngNative extends StdCallLibrary {
 		}
 	}
 
-	public class DEBUG_STACK_FRAME extends Structure {
+	class DEBUG_STACK_FRAME extends Structure {
 		public static class ByReference extends DEBUG_STACK_FRAME implements Structure.ByReference {
 		}
 
@@ -458,7 +458,7 @@ public interface DbgEngNative extends StdCallLibrary {
 		}
 	}
 
-	public class DEBUG_SPECIFIC_FILTER_PARAMETERS extends Structure {
+	class DEBUG_SPECIFIC_FILTER_PARAMETERS extends Structure {
 		public static class ByReference extends DEBUG_SPECIFIC_FILTER_PARAMETERS
 				implements Structure.ByReference {
 		}
@@ -479,7 +479,7 @@ public interface DbgEngNative extends StdCallLibrary {
 		}
 	}
 
-	public class DEBUG_EXCEPTION_FILTER_PARAMETERS extends Structure {
+	class DEBUG_EXCEPTION_FILTER_PARAMETERS extends Structure {
 		public static class ByReference extends DEBUG_EXCEPTION_FILTER_PARAMETERS
 				implements Structure.ByReference {
 		}

@@ -29,9 +29,9 @@ import resources.ResourceManager;
  */
 class SaveApplySettingsAction extends DockingAction {
 
-	private final static String ACTION_NAME = "Save Default Diff Apply Settings";
-	private final static String GROUP_NAME = "DEFAULTS";
-	private final static String DESCRIPTION = "Save Current Diff Apply Settings As The Default.";
+	private static final String ACTION_NAME = "Save Default Diff Apply Settings";
+	private static final String GROUP_NAME = "DEFAULTS";
+	private static final String DESCRIPTION = "Save Current Diff Apply Settings As The Default.";
 	private DiffApplySettingsProvider settingsProvider;
 	private DiffApplySettingsOptionManager settingsOptionMgr;
 

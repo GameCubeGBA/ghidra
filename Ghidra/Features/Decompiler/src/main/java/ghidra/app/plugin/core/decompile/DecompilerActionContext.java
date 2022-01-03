@@ -140,7 +140,7 @@ public class DecompilerActionContext extends NavigatableActionContext
 		//               'performAction()' on this class, which will skip the action's work and
 		//               show an message if the decompiler is busy.
 		//
-		if (isDecompiling()) {
+		if (isDecompiling) {
 			return true;
 		}
 

@@ -316,7 +316,7 @@ public class InjectPayloadSleigh implements InjectPayload {
 		parser.end(el);
 		if (parseString != null) {
 			parseString = parseString.trim();
-			if (parseString.length() == 0) {
+			if (parseString.isEmpty()) {
 				parseString = null;
 			}
 		}
@@ -414,12 +414,9 @@ public class InjectPayloadSleigh implements InjectPayload {
 		if (paramShift != op2.paramShift) {
 			return false;
 		}
-		if (type != op2.type || subType != op2.subType) {
-			return false;
-		}
+        return type == op2.type && subType == op2.subType;
 		// We are NOT checking parseString and pcodeTemplate
-		return true;
-	}
+    }
 
 	@Override
 	public int hashCode() {

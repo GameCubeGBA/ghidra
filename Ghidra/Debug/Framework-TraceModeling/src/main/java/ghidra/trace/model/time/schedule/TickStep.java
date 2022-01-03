@@ -156,11 +156,8 @@ public class TickStep implements Step {
 		if (this.threadKey != that.threadKey) {
 			return false;
 		}
-		if (this.tickCount != that.tickCount) {
-			return false;
-		}
-		return true;
-	}
+        return this.tickCount == that.tickCount;
+    }
 
 	@Override
 	public CompareResult compareStep(Step step) {
@@ -178,12 +175,8 @@ public class TickStep implements Step {
 		}
 
 		result = CompareResult.related(Long.compare(this.tickCount, that.tickCount));
-		if (result != CompareResult.EQUALS) {
-			return result;
-		}
-
-		return CompareResult.EQUALS;
-	}
+        return result;
+    }
 
 	@Override
 	public <T> void execute(PcodeThread<T> emuThread, Consumer<PcodeThread<T>> stepAction,

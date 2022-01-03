@@ -64,11 +64,8 @@ public class LanguageID implements Comparable<LanguageID> {
 			return false;
 		}
 		final LanguageID other = (LanguageID) obj;
-		if (!Objects.equals(id, other.id)) {
-			return false;
-		}
-		return true;
-	}
+        return Objects.equals(id, other.id);
+    }
 
 	@Override
 	public String toString() {

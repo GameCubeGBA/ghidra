@@ -18,7 +18,7 @@ package ghidra.app.plugin.core.compositeeditor;
 
 @FunctionalInterface
 public interface EditorModelListener {
-	public static final int EDIT_STARTED = 5;
-	public static final int EDIT_ENDED = 6;
-	public void editStateChanged(int type);
+	int EDIT_STARTED = 5;
+	int EDIT_ENDED = 6;
+	void editStateChanged(int type);
 }

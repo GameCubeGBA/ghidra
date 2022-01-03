@@ -53,7 +53,7 @@ import resources.ResourceManager;
 public interface Trace extends DataTypeManagerDomainObject {
 	ImageIcon TRACE_ICON = ResourceManager.loadImage("images/video-x-generic16.png");
 
-	public static final class TraceBookmarkChangeType<T, U> extends DefaultTraceChangeType<T, U> {
+	final class TraceBookmarkChangeType<T, U> extends DefaultTraceChangeType<T, U> {
 		public static final TraceBookmarkChangeType<TraceBookmarkType, Void> TYPE_ADDED =
 			new TraceBookmarkChangeType<>();
 		public static final TraceBookmarkChangeType<TraceBookmark, Void> ADDED =
@@ -66,7 +66,7 @@ public interface Trace extends DataTypeManagerDomainObject {
 			new TraceBookmarkChangeType<>();
 	}
 
-	public static final class TraceBreakpointChangeType<U>
+	final class TraceBreakpointChangeType<U>
 			extends DefaultTraceChangeType<TraceBreakpoint, U> {
 		public static final TraceBreakpointChangeType<Void> ADDED =
 			new TraceBreakpointChangeType<>();
@@ -78,7 +78,7 @@ public interface Trace extends DataTypeManagerDomainObject {
 			new TraceBreakpointChangeType<>();
 	}
 
-	public static final class TraceCategoryChangeType<U> extends DefaultTraceChangeType<Long, U> {
+	final class TraceCategoryChangeType<U> extends DefaultTraceChangeType<Long, U> {
 		// Long is category ID
 		public static final TraceCategoryChangeType<Category> ADDED =
 			new TraceCategoryChangeType<>();
@@ -90,7 +90,7 @@ public interface Trace extends DataTypeManagerDomainObject {
 			new TraceCategoryChangeType<>();
 	}
 
-	public static final class TraceCodeChangeType<T, U> extends DefaultTraceChangeType<T, U> {
+	final class TraceCodeChangeType<T, U> extends DefaultTraceChangeType<T, U> {
 		// May be a single unit or a whole block. "newValue" is first unit
 		public static final TraceCodeChangeType<TraceAddressSnapRange, TraceCodeUnit> ADDED =
 			new TraceCodeChangeType<>();
@@ -110,7 +110,7 @@ public interface Trace extends DataTypeManagerDomainObject {
 			new TraceCodeChangeType<>();
 	}
 
-	public static final class TraceCommentChangeType
+	final class TraceCommentChangeType
 			extends DefaultTraceChangeType<TraceAddressSnapRange, String> {
 		private static final Map<Integer, TraceCommentChangeType> BY_TYPE = new HashMap<>();
 
@@ -137,7 +137,7 @@ public interface Trace extends DataTypeManagerDomainObject {
 		}
 	}
 
-	public static final class TraceCompositeDataChangeType<T, U>
+	final class TraceCompositeDataChangeType<T, U>
 			extends DefaultTraceChangeType<T, U> {
 		public static final TraceCompositeDataChangeType<TraceAddressSnapRange, TraceData> ADDED =
 			new TraceCompositeDataChangeType<>();
@@ -147,7 +147,7 @@ public interface Trace extends DataTypeManagerDomainObject {
 			new TraceCompositeDataChangeType<>();
 	}
 
-	public static final class TraceDataTypeChangeType<U> extends DefaultTraceChangeType<Long, U> {
+	final class TraceDataTypeChangeType<U> extends DefaultTraceChangeType<Long, U> {
 		public static final TraceDataTypeChangeType<DataType> ADDED =
 			new TraceDataTypeChangeType<>();
 		// Old is null
@@ -163,7 +163,7 @@ public interface Trace extends DataTypeManagerDomainObject {
 			new TraceDataTypeChangeType<>();
 	}
 
-	public static final class TraceFunctionChangeType<U>
+	final class TraceFunctionChangeType<U>
 			extends DefaultTraceChangeType<TraceFunctionSymbol, U> {
 		// NOTE: ADDED/DELETED/LIFESPAN_CHANGED are SymbolChangeTypes
 		public static final TraceFunctionChangeType<Void> CHANGED = new TraceFunctionChangeType<>();
@@ -191,7 +191,7 @@ public interface Trace extends DataTypeManagerDomainObject {
 		// TODO: VARIABLE_REFERENCE_DELETED? Or would these be reported by ref manager?
 	}
 
-	public static final class TraceFunctionTagChangeType<U>
+	final class TraceFunctionTagChangeType<U>
 			extends DefaultTraceChangeType<FunctionTag, U> {
 		public static final TraceFunctionTagChangeType<Void> ADDED =
 			new TraceFunctionTagChangeType<>();
@@ -201,7 +201,7 @@ public interface Trace extends DataTypeManagerDomainObject {
 			new TraceFunctionTagChangeType<>();
 	}
 
-	public static final class TraceInstructionChangeType<U>
+	final class TraceInstructionChangeType<U>
 			extends DefaultTraceChangeType<TraceInstruction, U> {
 		public static final TraceInstructionChangeType<FlowOverride> FLOW_OVERRIDE_CHANGED =
 			new TraceInstructionChangeType<>();
@@ -209,13 +209,13 @@ public interface Trace extends DataTypeManagerDomainObject {
 			new TraceInstructionChangeType<>();
 	}
 
-	public static final class TraceMemoryBytesChangeType
+	final class TraceMemoryBytesChangeType
 			extends DefaultTraceChangeType<TraceAddressSnapRange, byte[]> {
 		// byte array may be larger than actual change
 		public static final TraceMemoryBytesChangeType CHANGED = new TraceMemoryBytesChangeType();
 	}
 
-	public static final class TraceMemoryRegionChangeType<U>
+	final class TraceMemoryRegionChangeType<U>
 			extends DefaultTraceChangeType<TraceMemoryRegion, U> {
 		public static final TraceMemoryRegionChangeType<Void> ADDED =
 			new TraceMemoryRegionChangeType<>();
@@ -228,13 +228,13 @@ public interface Trace extends DataTypeManagerDomainObject {
 		// NOTE: No MOVING, SPLITTING, or JOINING
 	}
 
-	public static final class TraceMemoryStateChangeType<U>
+	final class TraceMemoryStateChangeType<U>
 			extends DefaultTraceChangeType<TraceAddressSnapRange, U> {
 		public static final TraceMemoryStateChangeType<TraceMemoryState> CHANGED =
 			new TraceMemoryStateChangeType<>();
 	}
 
-	public static final class TraceModuleChangeType<U>
+	final class TraceModuleChangeType<U>
 			extends DefaultTraceChangeType<TraceModule, U> {
 		public static final TraceModuleChangeType<Void> ADDED = new TraceModuleChangeType<>();
 		public static final TraceModuleChangeType<Void> CHANGED = new TraceModuleChangeType<>();
@@ -244,7 +244,7 @@ public interface Trace extends DataTypeManagerDomainObject {
 		public static final TraceModuleChangeType<Void> DELETED = new TraceModuleChangeType<>();
 	}
 
-	public static final class TraceReferenceChangeType<T, U> extends DefaultTraceChangeType<T, U> {
+	final class TraceReferenceChangeType<T, U> extends DefaultTraceChangeType<T, U> {
 		public static final TraceReferenceChangeType<TraceAddressSnapRange, TraceReference> ADDED =
 			new TraceReferenceChangeType<>();
 		public static final TraceReferenceChangeType<TraceReference, Range<Long>> LIFESPAN_CHANGED =
@@ -255,21 +255,21 @@ public interface Trace extends DataTypeManagerDomainObject {
 			new TraceReferenceChangeType<>();
 	}
 
-	public static final class TraceSectionChangeType<U>
+	final class TraceSectionChangeType<U>
 			extends DefaultTraceChangeType<TraceSection, U> {
 		public static final TraceSectionChangeType<Void> ADDED = new TraceSectionChangeType<>();
 		public static final TraceSectionChangeType<Void> CHANGED = new TraceSectionChangeType<>();
 		public static final TraceSectionChangeType<Void> DELETED = new TraceSectionChangeType<>();
 	}
 
-	public static final class TraceStackChangeType<U>
+	final class TraceStackChangeType<U>
 			extends DefaultTraceChangeType<TraceStack, U> {
 		public static final TraceStackChangeType<Void> ADDED = new TraceStackChangeType<>();
 		public static final TraceStackChangeType<Void> CHANGED = new TraceStackChangeType<>();
 		public static final TraceStackChangeType<Void> DELETED = new TraceStackChangeType<>();
 	}
 
-	public static final class TraceStaticMappingChangeType<U>
+	final class TraceStaticMappingChangeType<U>
 			extends DefaultTraceChangeType<TraceStaticMapping, U> {
 		public static final TraceStaticMappingChangeType<Void> ADDED =
 			new TraceStaticMappingChangeType<>();
@@ -277,7 +277,7 @@ public interface Trace extends DataTypeManagerDomainObject {
 			new TraceStaticMappingChangeType<>();
 	}
 
-	public static final class TraceSourceArchiveChangeType<U>
+	final class TraceSourceArchiveChangeType<U>
 			extends DefaultTraceChangeType<UniversalID, U> {
 		public static final TraceSourceArchiveChangeType<Void> ADDED =
 			new TraceSourceArchiveChangeType<>();
@@ -288,7 +288,7 @@ public interface Trace extends DataTypeManagerDomainObject {
 			new TraceSourceArchiveChangeType<>();
 	}
 
-	public static final class TraceSymbolChangeType<U>
+	final class TraceSymbolChangeType<U>
 			extends DefaultTraceChangeType<TraceSymbol, U> {
 		public static final TraceSymbolChangeType<Void> ADDED = new TraceSymbolChangeType<>();
 		public static final TraceSymbolChangeType<SourceType> SOURCE_CHANGED =
@@ -311,7 +311,7 @@ public interface Trace extends DataTypeManagerDomainObject {
 		public static final TraceSymbolChangeType<Void> CHANGED = new TraceSymbolChangeType<>();
 	}
 
-	public static final class TraceThreadChangeType<U>
+	final class TraceThreadChangeType<U>
 			extends DefaultTraceChangeType<TraceThread, U> {
 		public static final TraceThreadChangeType<Void> ADDED = new TraceThreadChangeType<>();
 		public static final TraceThreadChangeType<Void> CHANGED = new TraceThreadChangeType<>();
@@ -320,7 +320,7 @@ public interface Trace extends DataTypeManagerDomainObject {
 		public static final TraceThreadChangeType<Void> DELETED = new TraceThreadChangeType<>();
 	}
 
-	public static final class TraceSnapshotChangeType<U>
+	final class TraceSnapshotChangeType<U>
 			extends DefaultTraceChangeType<TraceSnapshot, U> {
 		public static final TraceSnapshotChangeType<Void> ADDED = new TraceSnapshotChangeType<>();
 		public static final TraceSnapshotChangeType<Void> CHANGED = new TraceSnapshotChangeType<>();

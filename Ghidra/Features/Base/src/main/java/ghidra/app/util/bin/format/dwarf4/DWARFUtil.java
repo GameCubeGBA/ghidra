@@ -75,21 +75,20 @@ public class DWARFUtil {
 	 */
 	public static Field getStaticFinalFieldWithValue(Class<?> clazz, long value) {
 		Field[] fields = clazz.getDeclaredFields();
-		for (int i = 0; i < fields.length; i++) {
-			if ((!Modifier.isFinal(fields[i].getModifiers())) ||
-				(!Modifier.isStatic(fields[i].getModifiers()))) {
-				continue;
-			}
-			try {
-				long fieldValue = fields[i].getLong(null);
-				if (fieldValue == value) {
-					return fields[i];
-				}
-			}
-			catch (IllegalArgumentException | IllegalAccessException e) {
-				// ignore
-			}
-		}
+        for (Field field : fields) {
+            if ((!Modifier.isFinal(field.getModifiers())) ||
+                    (!Modifier.isStatic(field.getModifiers()))) {
+                continue;
+            }
+            try {
+                long fieldValue = field.getLong(null);
+                if (fieldValue == value) {
+                    return field;
+                }
+            } catch (IllegalArgumentException | IllegalAccessException e) {
+                // ignore
+            }
+        }
 		return null;
 	}
 
@@ -322,7 +321,7 @@ public class DWARFUtil {
 			sb.append(childName);
 		}
 
-		return "anon_" + getContainerTypeName(diea) + "_for_" + sb.toString();
+		return "anon_" + getContainerTypeName(diea) + "_for_" + sb;
 	}
 
 	/**

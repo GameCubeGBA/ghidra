@@ -36,7 +36,7 @@ public interface ClipboardContentProviderService {
 	 * Returns the component provider associated with this service
 	 * @return the provider
 	 */
-	public ComponentProvider getComponentProvider();
+    ComponentProvider getComponentProvider();
 
 	/**
 	 * Triggers the default copy operation
@@ -44,7 +44,7 @@ public interface ClipboardContentProviderService {
 	 * may be canceled
 	 * @return the created transferable; null if the copy was unsuccessful
 	 */
-	public Transferable copy(TaskMonitor monitor);
+    Transferable copy(TaskMonitor monitor);
 
 	/**
 	 * Triggers a special copy with the specified copy type.
@@ -53,27 +53,27 @@ public interface ClipboardContentProviderService {
 	 * may be canceled
 	 * @return the created transferable; null if the copy was unsuccessful
 	 */
-	public Transferable copySpecial(ClipboardType copyType, TaskMonitor monitor);
+    Transferable copySpecial(ClipboardType copyType, TaskMonitor monitor);
 
 	/**
 	 * Triggers the default paste operation for the given transferable
 	 * @param pasteData the paste transferable
 	 * @return true of the paste was successful
 	 */
-	public boolean paste(Transferable pasteData);
+    boolean paste(Transferable pasteData);
 
 	/**
 	 * Gets the currently active ClipboardTypes for copying with the current context
 	 * @return the types
 	 */
-	public List<ClipboardType> getCurrentCopyTypes();
+    List<ClipboardType> getCurrentCopyTypes();
 
 	/**
 	 * Return whether the given context is valid for actions on popup menus.
 	 * @param context the context of where the popup menu will be positioned.
 	 * @return true if valid
 	 */
-	public boolean isValidContext(ActionContext context);
+    boolean isValidContext(ActionContext context);
 
 	/**
 	 * Returns true if copy should be enabled; false if it should be disabled.  This method can
@@ -81,13 +81,13 @@ public interface ClipboardContentProviderService {
 	 * popup menus but to have them enabled when appropriate.
 	 * @return true if copy should be enabled
 	 */
-	public boolean enableCopy();
+    boolean enableCopy();
 
 	/**
 	 * Returns true if copySpecial actions should be enabled;
 	 * @return true if copySpecial actions should be enabled;
 	 */
-	public boolean enableCopySpecial();
+    boolean enableCopySpecial();
 
 	/**
 	 * Returns true if paste should be enabled; false if it should be disabled.  This method can
@@ -95,13 +95,13 @@ public interface ClipboardContentProviderService {
 	 * popup menus but to have them enabled when appropriate.
 	 * @return true if paste should be enabled
 	 */
-	public boolean enablePaste();
+    boolean enablePaste();
 
 	/**
 	 * Notification that the clipboard owner has lost its ownership.
 	 * @param transferable the contents which the owner had placed on the clipboard
 	 */
-	public void lostOwnership(Transferable transferable);
+    void lostOwnership(Transferable transferable);
 
 	/**
 	 * Adds a change listener that will be notified when the state of the service provider changes
@@ -111,14 +111,14 @@ public interface ClipboardContentProviderService {
 	 * 
 	 * @param listener The listener to add.
 	 */
-	public void addChangeListener(ChangeListener listener);
+    void addChangeListener(ChangeListener listener);
 
 	/**
 	 * Removes the given change listener.
 	 * @param listener The listener to remove.
 	 * @see #addChangeListener(ChangeListener)
 	 */
-	public void removeChangeListener(ChangeListener listener);
+    void removeChangeListener(ChangeListener listener);
 
 	/**
 	 * Returns true if the service can perform a paste operation using the given transferable.
@@ -126,18 +126,18 @@ public interface ClipboardContentProviderService {
 	 * @param availableFlavors data flavors available for the current clipboard transferable
 	 * @return true if the service can perform a paste operation using the given transferable.
 	 */
-	public boolean canPaste(DataFlavor[] availableFlavors);
+    boolean canPaste(DataFlavor[] availableFlavors);
 
 	/**
 	 * Returns true if the given service provider can currently perform a copy operation.
 	 * @return true if the given service provider can currently perform a copy operation.
 	 */
-	public boolean canCopy();
+    boolean canCopy();
 
 	/**
 	 * Returns true if the given service provider can currently perform a 'copy special' 
 	 * operation.
 	 * @return true if copy special is enabled
 	 */
-	public boolean canCopySpecial();
+    boolean canCopySpecial();
 }

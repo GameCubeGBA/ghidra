@@ -523,9 +523,7 @@ public class FieldIndexTable extends IndexTable {
 					DBRecord rec = primaryTable.getRecord(f.getPrimaryKey());
 					val = rec.getField(indexColumn);
 				}
-				if (val.compareTo(min.getNonTruncatedIndexField()) > 0) {
-					return true;
-				}
+                return val.compareTo(min.getNonTruncatedIndexField()) > 0;
 			}
 			return false;
 		}

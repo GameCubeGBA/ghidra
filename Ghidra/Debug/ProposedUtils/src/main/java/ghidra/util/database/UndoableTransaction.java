@@ -24,25 +24,25 @@ import ghidra.program.model.listing.ProgramUserData;
 import ghidra.util.Msg;
 
 public interface UndoableTransaction extends AutoCloseable {
-	public static UndoableTransaction start(UndoableDomainObject domainObject, String description,
-			boolean commitByDefault) {
+	static UndoableTransaction start(UndoableDomainObject domainObject, String description,
+                                     boolean commitByDefault) {
 		int tid = domainObject.startTransaction(description);
 		return new DomainObjectUndoableTransaction(domainObject, tid, commitByDefault);
 	}
 
-	public static UndoableTransaction start(UndoableDomainObject domainObject, String description,
-			AbortedTransactionListener listener, boolean commitByDefault) {
+	static UndoableTransaction start(UndoableDomainObject domainObject, String description,
+                                     AbortedTransactionListener listener, boolean commitByDefault) {
 		int tid = domainObject.startTransaction(description, listener);
 		return new DomainObjectUndoableTransaction(domainObject, tid, commitByDefault);
 	}
 
-	public static UndoableTransaction start(DataTypeManager dataTypeManager, String description,
-			boolean commitByDefault) {
+	static UndoableTransaction start(DataTypeManager dataTypeManager, String description,
+                                     boolean commitByDefault) {
 		int tid = dataTypeManager.startTransaction(description);
 		return new DataTypeManagerUndoableTransaction(dataTypeManager, tid, commitByDefault);
 	}
 
-	public static UndoableTransaction start(ProgramUserData userData) {
+	static UndoableTransaction start(ProgramUserData userData) {
 		int tid = userData.startTransaction();
 		return new ProgramUserDataUndoableTransaction(userData, tid);
 	}

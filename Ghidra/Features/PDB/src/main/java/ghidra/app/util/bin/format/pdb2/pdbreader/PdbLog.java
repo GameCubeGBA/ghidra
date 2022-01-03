@@ -30,8 +30,7 @@ import ghidra.util.Msg;
  */
 public class PdbLog {
 
-	private static Writer nullWriter;
-	private static Writer fileWriter;
+    private static Writer fileWriter;
 	private static final boolean SYSTEM_LOGGING_ENABLED = Boolean.getBoolean("pdb.logging");
 	private static boolean enabled = SYSTEM_LOGGING_ENABLED;
 
@@ -208,16 +207,17 @@ public class PdbLog {
 		return fileWriter;
 	}
 
-	/**
+    private static final class NullWriterHolder {
+        private static final Writer nullWriter = new NullWriter();
+    }
+
+    /**
 	 * Returns a {@link NullWriter} for the log file when chosen instead of a FileWriter.  If
 	 * one already exists, it is returned.  Otherwise a new one is created.
 	 * @return a {@link NullWriter} for the log file.
 	 */
 	private static Writer getNullWriter() {
-		if (nullWriter == null) {
-			nullWriter = new NullWriter();
-		}
-		return nullWriter;
+        return NullWriterHolder.nullWriter;
 	}
 
 	private static void handleIOException(IOException exception) {

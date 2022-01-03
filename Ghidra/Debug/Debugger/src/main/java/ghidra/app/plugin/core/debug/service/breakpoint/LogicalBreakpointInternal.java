@@ -38,7 +38,7 @@ import ghidra.util.task.TaskMonitor;
 import utilities.util.IDHashed;
 
 public interface LogicalBreakpointInternal extends LogicalBreakpoint {
-	public static class ProgramBreakpoint {
+	class ProgramBreakpoint {
 		public static Set<TraceBreakpointKind> kindsFromBookmark(Bookmark mark) {
 			String[] parts = mark.getCategory().split(";");
 			Set<TraceBreakpointKind> result = TraceBreakpointKindSet.decode(parts[0], false);
@@ -158,11 +158,8 @@ public interface LogicalBreakpointInternal extends LogicalBreakpoint {
 			if (length != lengthFromBookmark(candBookmark)) {
 				return false;
 			}
-			if (!Objects.equals(kinds, kindsFromBookmark(candBookmark))) {
-				return false;
-			}
-			return true;
-		}
+            return Objects.equals(kinds, kindsFromBookmark(candBookmark));
+        }
 
 		public Program getProgram() {
 			return program;
@@ -255,7 +252,7 @@ public interface LogicalBreakpointInternal extends LogicalBreakpoint {
 		}
 	}
 
-	static class TraceBreakpointSet {
+	class TraceBreakpointSet {
 		private final TraceRecorder recorder;
 		private final Trace trace;
 		private final Address address;
@@ -312,11 +309,8 @@ public interface LogicalBreakpointInternal extends LogicalBreakpoint {
 			if (trace != bpt.getTrace()) {
 				return false;
 			}
-			if (!address.equals(bpt.getMinAddress())) {
-				return false;
-			}
-			return true;
-		}
+            return address.equals(bpt.getMinAddress());
+        }
 
 		public boolean remove(TraceBreakpoint bpt) {
 			return breakpoints.remove(new IDHashed<>(bpt));

@@ -22,5 +22,5 @@ import java.util.Set;
 @FunctionalInterface
 public interface FunctionGraphValidGraphActionContextIf {
 
-	public Set<FGVertex> getSelectedVertices();
+	Set<FGVertex> getSelectedVertices();
 }

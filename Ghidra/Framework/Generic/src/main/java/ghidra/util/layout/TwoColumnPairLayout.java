@@ -39,8 +39,7 @@ public class TwoColumnPairLayout implements LayoutManager {
 
 	public TwoColumnPairLayout(int verticalGap, int columnGap, int pairGap,
 			int preferredValueColumnWidth) {
-		super();
-		this.verticalGap = verticalGap;
+        this.verticalGap = verticalGap;
 		this.columnGap = columnGap;
 		this.pairGap = pairGap;
 		this.preferredColumnWidth = preferredValueColumnWidth;

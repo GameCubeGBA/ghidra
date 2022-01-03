@@ -38,10 +38,10 @@ public class KeyedObjectFactory
   }
 
 	/** The singleton instance of KeyedObjectFactory. */
-  static public KeyedObjectFactory instance_ = new KeyedObjectFactory();
+    public static KeyedObjectFactory instance_ = new KeyedObjectFactory();
 
   /** Returns singleton instance of KeyedObjectFactory. */
-  static public KeyedObjectFactory getInstance()
+  public static KeyedObjectFactory getInstance()
   {
       return instance_;
   }

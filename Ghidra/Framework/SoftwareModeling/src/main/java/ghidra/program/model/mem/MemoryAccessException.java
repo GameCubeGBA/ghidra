@@ -29,7 +29,6 @@ public class MemoryAccessException extends UsrException
      * <p>Constructs an MemoryAccessException with no detail message.<p>
      */
     public MemoryAccessException() {
-        super();
     }
     
     

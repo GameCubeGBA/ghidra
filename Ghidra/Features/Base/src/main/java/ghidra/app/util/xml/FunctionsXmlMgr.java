@@ -42,8 +42,8 @@ import ghidra.xml.XmlPullParser;
 import resources.ResourceManager;
 
 class FunctionsXmlMgr {
-	public final static String LIB_BOOKMARK_CATEGORY = "Library Identification";
-	public final static String FID_BOOKMARK_CATEGORY = "Function ID Analyzer";
+	public static final String LIB_BOOKMARK_CATEGORY = "Library Identification";
+	public static final String FID_BOOKMARK_CATEGORY = "Function ID Analyzer";
 	private static final Set<String> LIBRARY_BOOKMARK_CATEGORY_STRINGS = new HashSet<>();
 	static {
 		LIBRARY_BOOKMARK_CATEGORY_STRINGS.add(LIB_BOOKMARK_CATEGORY);
@@ -177,7 +177,7 @@ class FunctionsXmlMgr {
 					}
 					else {
 						while (parser.peek().isStart() &&
-							parser.peek().getName().equals("STACK_FRAME")) {
+							"STACK_FRAME".equals(parser.peek().getName())) {
 							parser.discardSubTree("STACK_FRAME");
 						}
 					}
@@ -316,7 +316,7 @@ class FunctionsXmlMgr {
 
 	private DataType readReturnType(XmlPullParser parser, String funcName) {
 		XmlElement element = parser.peek();
-		if (element.getName().equals("RETURN_TYPE")) {
+		if ("RETURN_TYPE".equals(element.getName())) {
 			element = parser.next();
 
 			DataType dt = findDataType(element);
@@ -335,7 +335,7 @@ class FunctionsXmlMgr {
 			throws AddressFormatException, AddressOutOfBoundsException {
 
 		XmlElement element = parser.peek();
-		while (element.getName().equals("ADDRESS_RANGE")) {
+		while ("ADDRESS_RANGE".equals(element.getName())) {
 			element = parser.next();
 
 			String startStr = element.getAttribute("START");
@@ -362,7 +362,7 @@ class FunctionsXmlMgr {
 	private void readStackFrame(XmlPullParser parser, Function func, boolean overwriteConflicts,
 			List<Variable> stackVariables, List<Variable> stackParams) {
 		XmlElement element = parser.peek();
-		if (element.getName().equals("STACK_FRAME")) {
+		if ("STACK_FRAME".equals(element.getName())) {
 			element = parser.next();
 
 			StackFrame frame = func.getStackFrame();
@@ -395,7 +395,7 @@ class FunctionsXmlMgr {
 			boolean overwriteConflicts, List<Variable> stackVariables, List<Variable> stackParams) {
 
 		XmlElement element = parser.peek();
-		while (element.getName().equals("STACK_VAR")) {
+		while ("STACK_VAR".equals(element.getName())) {
 			element = parser.next();
 			String stackPtrStringValue = element.getAttribute("STACK_PTR_OFFSET");
 			if (stackPtrStringValue == null) {
@@ -472,7 +472,7 @@ class FunctionsXmlMgr {
 	private void readRegisterVars(XmlPullParser parser, Function func,
 			List<Variable> registerParams) {
 		XmlElement element = parser.peek();
-		while (element.getName().equals("REGISTER_VAR")) {
+		while ("REGISTER_VAR".equals(element.getName())) {
 			element = parser.next();
 			try {
 				String name = element.getAttribute("NAME");
@@ -599,13 +599,13 @@ class FunctionsXmlMgr {
 	}
 
 	private void writeRegularComment(XmlWriter writer, String comment) {
-		if (comment != null && comment.length() > 0) {
+		if (comment != null && !comment.isEmpty()) {
 			writer.writeElement("REGULAR_CMT", null, comment);
 		}
 	}
 
 	private void writeRepeatableComment(XmlWriter writer, String comment) {
-		if (comment != null && comment.length() > 0) {
+		if (comment != null && !comment.isEmpty()) {
 			writer.writeElement("REPEATABLE_CMT", null, comment);
 		}
 	}
@@ -647,7 +647,7 @@ class FunctionsXmlMgr {
 		attrs.addAttribute("SIZE", var.getLength(), true);
 
 		String comment = var.getComment();
-		if (comment == null || comment.length() == 0) {
+		if (comment == null || comment.isEmpty()) {
 			writer.writeElement("STACK_VAR", attrs);
 		}
 		else {
@@ -667,7 +667,7 @@ class FunctionsXmlMgr {
 			attrs.addAttribute("DATATYPE_NAMESPACE", reg.getDataType().getCategoryPath().getPath());
 
 			String comment = reg.getComment();
-			if (comment == null || comment.length() == 0) {
+			if (comment == null || comment.isEmpty()) {
 				writer.writeElement("REGISTER_VAR", attrs);
 			}
 			else {

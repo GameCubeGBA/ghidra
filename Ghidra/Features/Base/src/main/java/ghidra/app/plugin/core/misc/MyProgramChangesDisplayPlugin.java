@@ -68,10 +68,10 @@ import resources.ResourceManager;
 public class MyProgramChangesDisplayPlugin extends ProgramPlugin implements DomainObjectListener {
 
 	// priorities for the different change sets displayed - higher takes precedent when painting
-	private final static int CHANGES_SINCE_CO_PRIORITY = MarkerService.CHANGE_PRIORITY;
-	private final static int MY_CHANGE_PRIORITY = MarkerService.CHANGE_PRIORITY + 1;
-	private final static int OTHER_CHANGES_PRIORITY = MarkerService.CHANGE_PRIORITY + 2;
-	private final static int CONFLICT_PRIORITY = MarkerService.CHANGE_PRIORITY + 3;
+    private static final int CHANGES_SINCE_CO_PRIORITY = MarkerService.CHANGE_PRIORITY;
+	private static final int MY_CHANGE_PRIORITY = MarkerService.CHANGE_PRIORITY + 1;
+	private static final int OTHER_CHANGES_PRIORITY = MarkerService.CHANGE_PRIORITY + 2;
+	private static final int CONFLICT_PRIORITY = MarkerService.CHANGE_PRIORITY + 3;
 
 	private MarkerService markerService;
 

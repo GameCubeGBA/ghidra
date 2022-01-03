@@ -144,11 +144,9 @@ public class MultiFunctionComparisonPanel extends FunctionComparisonPanel {
 
 		// Reload the functions
 		FunctionComparisonModel model = ((FunctionComparisonProvider) provider).getModel();
-		Iterator<FunctionComparison> compIter = model.getComparisons().iterator();
-		while (compIter.hasNext()) {
-			FunctionComparison fc = compIter.next();
-			sourceFunctionsCBModel.addElement(fc.getSource());
-		}
+        for (FunctionComparison fc : model.getComparisons()) {
+            sourceFunctionsCBModel.addElement(fc.getSource());
+        }
 
 		restoreSelection(sourceFunctionsCB, selection);
 	}
@@ -171,14 +169,12 @@ public class MultiFunctionComparisonPanel extends FunctionComparisonPanel {
 		// Find all target functions associated with the given source function
 		// and add them to the combo box model
 		FunctionComparisonModel model = ((FunctionComparisonProvider) provider).getModel();
-		Iterator<FunctionComparison> compIter = model.getComparisons().iterator();
-		while (compIter.hasNext()) {
-			FunctionComparison fc = compIter.next();
-			if (fc.getSource().equals(source)) {
-				Set<Function> targets = fc.getTargets();
-				targetFunctionsCBModel.addAll(targets);
-			}
-		}
+        for (FunctionComparison fc : model.getComparisons()) {
+            if (fc.getSource().equals(source)) {
+                Set<Function> targets = fc.getTargets();
+                targetFunctionsCBModel.addAll(targets);
+            }
+        }
 
 		restoreSelection(targetFunctionsCB, selection);
 	}
@@ -236,27 +232,24 @@ public class MultiFunctionComparisonPanel extends FunctionComparisonPanel {
 		sourceFunctionsCBModel = new DefaultComboBoxModel<>();
 		sourceFunctionsCB.setModel(sourceFunctionsCBModel);
 		sourceFunctionsCB.setRenderer(new FunctionListCellRenderer());
-		sourceFunctionsCB.addItemListener(new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				if (e.getStateChange() != ItemEvent.SELECTED) {
-					return;
-				}
+		sourceFunctionsCB.addItemListener(e -> {
+            if (e.getStateChange() != ItemEvent.SELECTED) {
+                return;
+            }
 
-				Function selected = (Function) sourceFunctionsCBModel.getSelectedItem();
-				loadFunctions(selected, null);
+            Function selected = (Function) sourceFunctionsCBModel.getSelectedItem();
+            loadFunctions(selected, null);
 
-				// Each time a source function is selected we need
-				// to load the targets associated with it
-				reloadTargetList((Function) sourceFunctionsCBModel.getSelectedItem());
+            // Each time a source function is selected we need
+            // to load the targets associated with it
+            reloadTargetList((Function) sourceFunctionsCBModel.getSelectedItem());
 
-				updateTabText();
+            updateTabText();
 
-				// Fire a notification to update the UI state; without this the 
-				// actions would not be properly enabled/disabled
-				tool.contextChanged(provider);
-			}
-		});
+            // Fire a notification to update the UI state; without this the
+            // actions would not be properly enabled/disabled
+            tool.contextChanged(provider);
+        });
 
 		panel.add(sourceFunctionsCB, BorderLayout.CENTER);
 		return panel;
@@ -279,23 +272,20 @@ public class MultiFunctionComparisonPanel extends FunctionComparisonPanel {
 		targetFunctionsCBModel = new DefaultComboBoxModel<>();
 		targetFunctionsCB.setModel(targetFunctionsCBModel);
 		targetFunctionsCB.setRenderer(new FunctionListCellRenderer());
-		targetFunctionsCB.addItemListener(new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				if (e.getStateChange() != ItemEvent.SELECTED) {
-					return;
-				}
+		targetFunctionsCB.addItemListener(e -> {
+            if (e.getStateChange() != ItemEvent.SELECTED) {
+                return;
+            }
 
-				Function selected = (Function) targetFunctionsCBModel.getSelectedItem();
-				loadFunctions((Function) sourceFunctionsCBModel.getSelectedItem(), selected);
+            Function selected = (Function) targetFunctionsCBModel.getSelectedItem();
+            loadFunctions((Function) sourceFunctionsCBModel.getSelectedItem(), selected);
 
-				updateTabText();
+            updateTabText();
 
-				// Fire a notification to update the UI state; without this the 
-				// actions would not be properly enabled/disabled
-				tool.contextChanged(provider);
-			}
-		});
+            // Fire a notification to update the UI state; without this the
+            // actions would not be properly enabled/disabled
+            tool.contextChanged(provider);
+        });
 
 		panel.add(targetFunctionsCB, BorderLayout.CENTER);
 		return panel;

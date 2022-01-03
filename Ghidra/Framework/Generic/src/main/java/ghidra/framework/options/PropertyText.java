@@ -30,7 +30,7 @@ import javax.swing.event.DocumentListener;
  */
 public class PropertyText extends JTextField {
 
-	private final static int NUMBER_OF_COLUMNS = 12;
+	private static final int NUMBER_OF_COLUMNS = 12;
 	private PropertyEditor editor;
 	private boolean isEditing = false;
 

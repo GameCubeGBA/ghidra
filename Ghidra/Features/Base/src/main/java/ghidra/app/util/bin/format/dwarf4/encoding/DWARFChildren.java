@@ -35,7 +35,7 @@ public enum DWARFChildren
 	static {
 		valueMap = new HashMap<Integer, DWARFChildren>();
 		for(DWARFChildren access : DWARFChildren.values()) {
-			valueMap.put(access.getValue(), access);
+			valueMap.put(access.value, access);
 		}
 	}
 	
@@ -61,6 +61,6 @@ public enum DWARFChildren
 		DWARFChildren access = valueMap.get(key.intValue());
 		if(access != null)
 			return access;
-		throw new IllegalArgumentException("Invalid Integer value: " + key.toString());
+		throw new IllegalArgumentException("Invalid Integer value: " + key);
 	}
 }

@@ -573,11 +573,8 @@ public class Schema {
 				return false;
 			}
 		}
-		if (!Objects.equals(sparseColumnSet, otherSchema.sparseColumnSet)) {
-			return false;
-		}
-		return true;
-	}
+        return Objects.equals(sparseColumnSet, otherSchema.sparseColumnSet);
+    }
 
 	@Override
 	public int hashCode() {

@@ -45,7 +45,7 @@ class OptionsDB extends AbstractOptions {
 
 	private static final String PROPERTY_TABLE_NAME = "Property Table";
 
-	private final static Schema PROPERTY_SCHEMA = new Schema(0, StringField.INSTANCE,
+	private static final Schema PROPERTY_SCHEMA = new Schema(0, StringField.INSTANCE,
 		"Property Name", new Field[] { StringField.INSTANCE, ByteField.INSTANCE },
 		new String[] { "Value", "Type" });
 

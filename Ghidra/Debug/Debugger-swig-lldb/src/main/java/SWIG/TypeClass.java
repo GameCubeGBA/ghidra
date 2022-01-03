@@ -12,27 +12,27 @@
 package SWIG;
 
 public final class TypeClass {
-  public final static TypeClass eTypeClassInvalid = new TypeClass("eTypeClassInvalid", lldbJNI.eTypeClassInvalid_get());
-  public final static TypeClass eTypeClassArray = new TypeClass("eTypeClassArray", lldbJNI.eTypeClassArray_get());
-  public final static TypeClass eTypeClassBlockPointer = new TypeClass("eTypeClassBlockPointer", lldbJNI.eTypeClassBlockPointer_get());
-  public final static TypeClass eTypeClassBuiltin = new TypeClass("eTypeClassBuiltin", lldbJNI.eTypeClassBuiltin_get());
-  public final static TypeClass eTypeClassClass = new TypeClass("eTypeClassClass", lldbJNI.eTypeClassClass_get());
-  public final static TypeClass eTypeClassComplexFloat = new TypeClass("eTypeClassComplexFloat", lldbJNI.eTypeClassComplexFloat_get());
-  public final static TypeClass eTypeClassComplexInteger = new TypeClass("eTypeClassComplexInteger", lldbJNI.eTypeClassComplexInteger_get());
-  public final static TypeClass eTypeClassEnumeration = new TypeClass("eTypeClassEnumeration", lldbJNI.eTypeClassEnumeration_get());
-  public final static TypeClass eTypeClassFunction = new TypeClass("eTypeClassFunction", lldbJNI.eTypeClassFunction_get());
-  public final static TypeClass eTypeClassMemberPointer = new TypeClass("eTypeClassMemberPointer", lldbJNI.eTypeClassMemberPointer_get());
-  public final static TypeClass eTypeClassObjCObject = new TypeClass("eTypeClassObjCObject", lldbJNI.eTypeClassObjCObject_get());
-  public final static TypeClass eTypeClassObjCInterface = new TypeClass("eTypeClassObjCInterface", lldbJNI.eTypeClassObjCInterface_get());
-  public final static TypeClass eTypeClassObjCObjectPointer = new TypeClass("eTypeClassObjCObjectPointer", lldbJNI.eTypeClassObjCObjectPointer_get());
-  public final static TypeClass eTypeClassPointer = new TypeClass("eTypeClassPointer", lldbJNI.eTypeClassPointer_get());
-  public final static TypeClass eTypeClassReference = new TypeClass("eTypeClassReference", lldbJNI.eTypeClassReference_get());
-  public final static TypeClass eTypeClassStruct = new TypeClass("eTypeClassStruct", lldbJNI.eTypeClassStruct_get());
-  public final static TypeClass eTypeClassTypedef = new TypeClass("eTypeClassTypedef", lldbJNI.eTypeClassTypedef_get());
-  public final static TypeClass eTypeClassUnion = new TypeClass("eTypeClassUnion", lldbJNI.eTypeClassUnion_get());
-  public final static TypeClass eTypeClassVector = new TypeClass("eTypeClassVector", lldbJNI.eTypeClassVector_get());
-  public final static TypeClass eTypeClassOther = new TypeClass("eTypeClassOther", lldbJNI.eTypeClassOther_get());
-  public final static TypeClass eTypeClassAny = new TypeClass("eTypeClassAny", lldbJNI.eTypeClassAny_get());
+  public static final TypeClass eTypeClassInvalid = new TypeClass("eTypeClassInvalid", lldbJNI.eTypeClassInvalid_get());
+  public static final TypeClass eTypeClassArray = new TypeClass("eTypeClassArray", lldbJNI.eTypeClassArray_get());
+  public static final TypeClass eTypeClassBlockPointer = new TypeClass("eTypeClassBlockPointer", lldbJNI.eTypeClassBlockPointer_get());
+  public static final TypeClass eTypeClassBuiltin = new TypeClass("eTypeClassBuiltin", lldbJNI.eTypeClassBuiltin_get());
+  public static final TypeClass eTypeClassClass = new TypeClass("eTypeClassClass", lldbJNI.eTypeClassClass_get());
+  public static final TypeClass eTypeClassComplexFloat = new TypeClass("eTypeClassComplexFloat", lldbJNI.eTypeClassComplexFloat_get());
+  public static final TypeClass eTypeClassComplexInteger = new TypeClass("eTypeClassComplexInteger", lldbJNI.eTypeClassComplexInteger_get());
+  public static final TypeClass eTypeClassEnumeration = new TypeClass("eTypeClassEnumeration", lldbJNI.eTypeClassEnumeration_get());
+  public static final TypeClass eTypeClassFunction = new TypeClass("eTypeClassFunction", lldbJNI.eTypeClassFunction_get());
+  public static final TypeClass eTypeClassMemberPointer = new TypeClass("eTypeClassMemberPointer", lldbJNI.eTypeClassMemberPointer_get());
+  public static final TypeClass eTypeClassObjCObject = new TypeClass("eTypeClassObjCObject", lldbJNI.eTypeClassObjCObject_get());
+  public static final TypeClass eTypeClassObjCInterface = new TypeClass("eTypeClassObjCInterface", lldbJNI.eTypeClassObjCInterface_get());
+  public static final TypeClass eTypeClassObjCObjectPointer = new TypeClass("eTypeClassObjCObjectPointer", lldbJNI.eTypeClassObjCObjectPointer_get());
+  public static final TypeClass eTypeClassPointer = new TypeClass("eTypeClassPointer", lldbJNI.eTypeClassPointer_get());
+  public static final TypeClass eTypeClassReference = new TypeClass("eTypeClassReference", lldbJNI.eTypeClassReference_get());
+  public static final TypeClass eTypeClassStruct = new TypeClass("eTypeClassStruct", lldbJNI.eTypeClassStruct_get());
+  public static final TypeClass eTypeClassTypedef = new TypeClass("eTypeClassTypedef", lldbJNI.eTypeClassTypedef_get());
+  public static final TypeClass eTypeClassUnion = new TypeClass("eTypeClassUnion", lldbJNI.eTypeClassUnion_get());
+  public static final TypeClass eTypeClassVector = new TypeClass("eTypeClassVector", lldbJNI.eTypeClassVector_get());
+  public static final TypeClass eTypeClassOther = new TypeClass("eTypeClassOther", lldbJNI.eTypeClassOther_get());
+  public static final TypeClass eTypeClassAny = new TypeClass("eTypeClassAny", lldbJNI.eTypeClassAny_get());
 
   public final int swigValue() {
     return swigValue;
@@ -45,9 +45,9 @@ public final class TypeClass {
   public static TypeClass swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-    for (int i = 0; i < swigValues.length; i++)
-      if (swigValues[i].swigValue == swigValue)
-        return swigValues[i];
+      for (TypeClass value : swigValues)
+          if (value.swigValue == swigValue)
+              return value;
     throw new IllegalArgumentException("No enum " + TypeClass.class + " with value " + swigValue);
   }
 

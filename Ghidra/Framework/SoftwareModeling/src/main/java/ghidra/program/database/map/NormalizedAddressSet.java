@@ -106,11 +106,9 @@ public class NormalizedAddressSet implements AddressSetView {
 		}
 
 		List<KeyRange> ranges = addrMap.getKeyRanges(startAddr, endAddr, true);
-		Iterator<KeyRange> it = ranges.iterator();
-		while (it.hasNext()) {
-			KeyRange kr = it.next();
-			addRange(kr.minKey, kr.maxKey);
-		}
+        for (KeyRange kr : ranges) {
+            addRange(kr.minKey, kr.maxKey);
+        }
 	}
 
 	/**
@@ -143,11 +141,9 @@ public class NormalizedAddressSet implements AddressSetView {
 	 */
 	public void delete(AddressSetView view) {
 		List<KeyRange> list = addrMap.getKeyRanges(view, false, false);
-		Iterator<KeyRange> it = list.iterator();
-		while (it.hasNext()) {
-			KeyRange kr = it.next();
-			deleteRange(kr.minKey, kr.maxKey);
-		}
+        for (KeyRange kr : list) {
+            deleteRange(kr.minKey, kr.maxKey);
+        }
 	}
 
 	private void deleteRange(long minKey, long maxKey) {
@@ -189,15 +185,13 @@ public class NormalizedAddressSet implements AddressSetView {
 			!addrMap.decodeAddress(ranges.get(ranges.size() - 1).maxKey).equals(endAddr)) {
 			return false;
 		}
-		Iterator<KeyRange> it = ranges.iterator();
-		while (it.hasNext()) {
-			KeyRange kr = it.next();
-			SortedRangeList list = getRangeList(kr.minKey);
-			if (!list.contains((int) kr.minKey + Integer.MIN_VALUE,
-				(int) kr.maxKey + Integer.MIN_VALUE)) {
-				return false;
-			}
-		}
+        for (KeyRange kr : ranges) {
+            SortedRangeList list = getRangeList(kr.minKey);
+            if (!list.contains((int) kr.minKey + Integer.MIN_VALUE,
+                    (int) kr.maxKey + Integer.MIN_VALUE)) {
+                return false;
+            }
+        }
 		return true;
 	}
 
@@ -221,7 +215,7 @@ public class NormalizedAddressSet implements AddressSetView {
 	 */
 	@Override
 	public boolean isEmpty() {
-		return baseLists.size() == 0;
+		return baseLists.isEmpty();
 	}
 
 	/**
@@ -229,7 +223,7 @@ public class NormalizedAddressSet implements AddressSetView {
 	 */
 	@Override
 	public Address getMinAddress() {
-		if (bases.size() == 0) {
+		if (bases.isEmpty()) {
 			return null;
 		}
 
@@ -244,7 +238,7 @@ public class NormalizedAddressSet implements AddressSetView {
 	 */
 	@Override
 	public Address getMaxAddress() {
-		if (bases.size() == 0) {
+		if (bases.isEmpty()) {
 			return null;
 		}
 
@@ -323,13 +317,11 @@ public class NormalizedAddressSet implements AddressSetView {
 	@Override
 	public boolean intersects(AddressSetView addrSet) {
 		List<KeyRange> keyList = addrMap.getKeyRanges(addrSet, false, false);
-		Iterator<KeyRange> it = keyList.iterator();
-		while (it.hasNext()) {
-			KeyRange kr = it.next();
-			if (intersects(kr.minKey, kr.maxKey)) {
-				return true;
-			}
-		}
+        for (KeyRange kr : keyList) {
+            if (intersects(kr.minKey, kr.maxKey)) {
+                return true;
+            }
+        }
 		return false;
 	}
 
@@ -347,13 +339,11 @@ public class NormalizedAddressSet implements AddressSetView {
 	@Override
 	public boolean intersects(Address start, Address end) {
 		List<KeyRange> keyList = addrMap.getKeyRanges(start, end, false);
-		Iterator<KeyRange> it = keyList.iterator();
-		while (it.hasNext()) {
-			KeyRange kr = it.next();
-			if (intersects(kr.minKey, kr.maxKey)) {
-				return true;
-			}
-		}
+        for (KeyRange kr : keyList) {
+            if (intersects(kr.minKey, kr.maxKey)) {
+                return true;
+            }
+        }
 		return false;
 	}
 

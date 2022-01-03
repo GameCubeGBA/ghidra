@@ -25,7 +25,7 @@ import java.io.Serializable;
  * @see ghidra.program.util.ChangeManager ChangeManager
  */
 public class DomainObjectChangeRecord implements Serializable {
-	private final static long serialVersionUID = 1;
+	private static final long serialVersionUID = 1;
 
 	private int eventType;
 	private int subEventType;

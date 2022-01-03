@@ -40,8 +40,7 @@ public class SharedRangeMapDBTest extends AbstractGhidraHeadedIntegrationTest
 	 * @param arg0
 	 */
 	public SharedRangeMapDBTest() {
-		super();
-	}
+    }
 
 	/*
 	 * @see TestCase#setUp()

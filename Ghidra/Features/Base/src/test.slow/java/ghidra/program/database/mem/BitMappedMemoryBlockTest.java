@@ -44,8 +44,7 @@ public class BitMappedMemoryBlockTest extends AbstractGhidraHeadedIntegrationTes
 	 * @param name
 	 */
 	public BitMappedMemoryBlockTest() {
-		super();
-	}
+    }
 
 	@Before
 	public void setUp() throws Exception {

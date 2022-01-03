@@ -27,7 +27,7 @@ import ghidra.util.classfinder.ClassSearcher;
  *  This field is not meant to be loaded by the {@link ClassSearcher}, hence the X in the name.
  */
 public class BadDataType extends BuiltIn implements Dynamic {
-	private final static long serialVersionUID = 1;
+	private static final long serialVersionUID = 1;
 
 	public static final BadDataType dataType = new BadDataType();
 

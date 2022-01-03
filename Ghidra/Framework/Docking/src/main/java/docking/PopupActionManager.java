@@ -29,6 +29,7 @@ import javax.swing.JPopupMenu;
 import org.apache.commons.collections4.IteratorUtils;
 
 import docking.action.DockingActionIf;
+import docking.action.DockingActionProviderIf;
 import docking.action.MenuData;
 import docking.menu.MenuGroupMap;
 import docking.menu.MenuHandler;
@@ -69,6 +70,7 @@ public class PopupActionManager implements PropertyChangeListener {
 			if (isRemovingFromPopup(oldData, newData)) {
 				popupActions.remove(evt.getSource());
 			}
+
 		}
 	}
 
@@ -119,6 +121,9 @@ public class PopupActionManager implements PropertyChangeListener {
 	void populatePopupMenuActions(Iterator<DockingActionIf> localActions,
 			ActionContext actionContext, MenuManager menuMgr) {
 
+		// Unregistered actions are those used by special-needs components, on-the-fly
+		addUnregisteredActions(actionContext, menuMgr);
+
 		// Include temporary actions
 		List<DockingActionIf> tempActions = windowManager.getTemporaryPopupActions(actionContext);
 		if (tempActions != null) {
@@ -133,19 +138,16 @@ public class PopupActionManager implements PropertyChangeListener {
 		}
 
 		// Include global actions
-		Iterator<DockingActionIf> iter = popupActions.iterator();
-		while (iter.hasNext()) {
-			DockingActionIf action = iter.next();
+        for (DockingActionIf action : popupActions) {
+            MenuData popupMenuData = action.getPopupMenuData();
+            if (popupMenuData != null && action.isValidContext(actionContext) &&
+                    action.isAddToPopup(actionContext)) {
 
-			MenuData popupMenuData = action.getPopupMenuData();
-			if (popupMenuData != null && action.isValidContext(actionContext) &&
-				action.isAddToPopup(actionContext)) {
-
-				boolean isEnabled = action.isEnabledForContext(actionContext);
-				action.setEnabled(isEnabled);
-				menuMgr.addAction(action);
-			}
-		}
+                boolean isEnabled = action.isEnabledForContext(actionContext);
+                action.setEnabled(isEnabled);
+                menuMgr.addAction(action);
+            }
+        }
 
 		// Include local actions for focused component
 		while (localActions.hasNext()) {
@@ -154,6 +156,25 @@ public class PopupActionManager implements PropertyChangeListener {
 				action.isAddToPopup(actionContext)) {
 				action.setEnabled(action.isEnabledForContext(actionContext));
 				menuMgr.addAction(action);
+			}
+		}
+	}
+
+	private void addUnregisteredActions(ActionContext actionContext, MenuManager menuMgr) {
+
+		Object source = actionContext.getSourceObject();
+
+		// this interface is deprecated in favor the code that calls this method; this will be deleted
+		if (source instanceof DockingActionProviderIf) {
+			DockingActionProviderIf actionProvider = (DockingActionProviderIf) source;
+			List<DockingActionIf> dockingActions = actionProvider.getDockingActions();
+			for (DockingActionIf action : dockingActions) {
+				MenuData popupMenuData = action.getPopupMenuData();
+				if (popupMenuData != null && action.isValidContext(actionContext) &&
+					action.isAddToPopup(actionContext)) {
+					action.setEnabled(action.isEnabledForContext(actionContext));
+					menuMgr.addAction(action);
+				}
 			}
 		}
 	}

@@ -29,7 +29,7 @@ public interface GFileSystemProbeBytesOnly extends GFileSystemProbe {
 	 * Maximum that any GFileSystemProbeBytesOnly is allowed to specify as its
 	 * {@link GFileSystemProbeBytesOnly#getBytesRequired()}.
 	 */
-	public static final int MAX_BYTESREQUIRED = 64 * 1024;
+    int MAX_BYTESREQUIRED = 64 * 1024;
 
 	/**
 	 * The minimum number of bytes needed to be supplied to the
@@ -37,7 +37,7 @@ public interface GFileSystemProbeBytesOnly extends GFileSystemProbe {
 	 * <p>
 	 * @return min number of bytes needed for probe
 	 */
-	public int getBytesRequired();
+    int getBytesRequired();
 
 	/**
 	 * Probes the supplied {@code startBytes} byte[] array to determine if this filesystem
@@ -49,5 +49,5 @@ public interface GFileSystemProbeBytesOnly extends GFileSystemProbe {
 	 * @return {@code true} if the specified file is handled by this filesystem implementation,
 	 * {@code false} if not.
 	 */
-	public boolean probeStartBytes(FSRL containerFSRL, byte[] startBytes);
+    boolean probeStartBytes(FSRL containerFSRL, byte[] startBytes);
 }

@@ -43,9 +43,9 @@ import ghidra.util.database.spatial.rect.Rectangle2DDirection;
 public abstract class AbstractDBTraceSymbolSingleTypeWithLocationView<T extends AbstractDBTraceSymbol>
 		extends AbstractDBTraceSymbolSingleTypeView<T> {
 
-	protected final static int CACHE_SNAP_BREADTH = 2;
-	protected final static int CACHE_ADDRESS_BREADTH = 30;
-	protected final static int CACHE_MAX_POINTS = 1000;
+	protected static final int CACHE_SNAP_BREADTH = 2;
+	protected static final int CACHE_ADDRESS_BREADTH = 30;
+	protected static final int CACHE_MAX_POINTS = 1000;
 
 	protected static class GetSymbolsKey extends GetKey {
 		public final TraceThread thread;

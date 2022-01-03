@@ -46,9 +46,8 @@ public class JgtSelectingGraphMousePlugin
 	};
 
 	JgtSelectingGraphMousePlugin() {
-		super();
 
-		//
+        //
 		// JUNGRAPHT CHANGE 1
 		// turn off painting of the picking square
 		this.pickFootprintPaintable = dummyPickFootprintPaintable;

@@ -22,35 +22,35 @@ package ghidra.file.formats.android.ota_update;
  */
 public final class PayloadConstants {
 
-	public final static long kChromeOSMajorPayloadVersion = 1;
+	public static final long kChromeOSMajorPayloadVersion = 1;
 
-	public final static long kBrilloMajorPayloadVersion = 2;
+	public static final long kBrilloMajorPayloadVersion = 2;
 
-	public final static int kMinSupportedMinorPayloadVersion = 1;
-	public final static int kMaxSupportedMinorPayloadVersion = 6;
+	public static final int kMinSupportedMinorPayloadVersion = 1;
+	public static final int kMaxSupportedMinorPayloadVersion = 6;
 
-	public final static int kFullPayloadMinorVersion = 0;
+	public static final int kFullPayloadMinorVersion = 0;
 
-	public final static int kInPlaceMinorPayloadVersion = 1;
+	public static final int kInPlaceMinorPayloadVersion = 1;
 
-	public final static int kSourceMinorPayloadVersion = 2;
+	public static final int kSourceMinorPayloadVersion = 2;
 
-	public final static int kOpSrcHashMinorPayloadVersion = 3;
+	public static final int kOpSrcHashMinorPayloadVersion = 3;
 
-	public final static int kBrotliBsdiffMinorPayloadVersion = 4;
+	public static final int kBrotliBsdiffMinorPayloadVersion = 4;
 
-	public final static int kPuffdiffMinorPayloadVersion = 5;
+	public static final int kPuffdiffMinorPayloadVersion = 5;
 
-	public final static int kVerityMinorPayloadVersion = 6;
+	public static final int kVerityMinorPayloadVersion = 6;
 
-	public final static long kMinSupportedMajorPayloadVersion = 1;
-	public final static long kMaxSupportedMajorPayloadVersion = 2;
+	public static final long kMinSupportedMajorPayloadVersion = 1;
+	public static final long kMaxSupportedMajorPayloadVersion = 2;
 
-	public final static long kMaxPayloadHeaderSize = 24;
+	public static final long kMaxPayloadHeaderSize = 24;
 
-	public final static String kPartitionNameKernel = "kernel";
-	public final static String kPartitionNameRoot = "root";
+	public static final String kPartitionNameKernel = "kernel";
+	public static final String kPartitionNameRoot = "root";
 
-	public final static String kDeltaMagic = "CrAU";
+	public static final String kDeltaMagic = "CrAU";
 
 }

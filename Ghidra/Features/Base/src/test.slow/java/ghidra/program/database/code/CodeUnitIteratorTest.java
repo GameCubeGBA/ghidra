@@ -60,8 +60,7 @@ public class CodeUnitIteratorTest extends AbstractGhidraHeadedIntegrationTest {
 	 * @param arg0
 	 */
 	public CodeUnitIteratorTest() {
-		super();
-	}
+    }
 
 	/*
 	 * @see TestCase#setUp()

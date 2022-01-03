@@ -29,7 +29,7 @@ import ghidra.util.exception.NotFoundException;
  * 
  * @see <a href="https://opensource.apple.com/source/xnu/xnu-7195.81.3/EXTERNAL_HEADERS/mach-o/reloc.h.auto.html">mach-o/reloc.h</a> 
  */
-abstract public class MachoRelocationHandler implements ExtensionPoint {
+public abstract class MachoRelocationHandler implements ExtensionPoint {
 
 	/**
 	 * Checks to see whether or not an instance of this Mach-O relocation handler can handle 
@@ -38,7 +38,7 @@ abstract public class MachoRelocationHandler implements ExtensionPoint {
 	 * @param header The header associated with the Mach-O to relocate
 	 * @return True if this relocation handler can do the relocation; otherwise, false
 	 */
-	abstract public boolean canRelocate(MachHeader header);
+    public abstract boolean canRelocate(MachHeader header);
 
 	/**
 	 * Checks to see if the given relocation is a "paired" relocation.  A paired relocation has a 
@@ -47,7 +47,7 @@ abstract public class MachoRelocationHandler implements ExtensionPoint {
 	 * @param relocation The relocation to check
 	 * @return True if the given relocation is a "paired" relocation; otherwise, false
 	 */
-	abstract public boolean isPairedRelocation(RelocationInfo relocation);
+    public abstract boolean isPairedRelocation(RelocationInfo relocation);
 
 	/**
 	 * Performs a relocation
@@ -56,7 +56,7 @@ abstract public class MachoRelocationHandler implements ExtensionPoint {
 	 * @throws MemoryAccessException If there is a problem accessing memory during the relocation
 	 * @throws NotFoundException If this handler didn't find a way to perform the relocation
 	 */
-	abstract public void relocate(MachoRelocation relocation)
+    public abstract void relocate(MachoRelocation relocation)
 			throws MemoryAccessException, NotFoundException;
 
 	/**

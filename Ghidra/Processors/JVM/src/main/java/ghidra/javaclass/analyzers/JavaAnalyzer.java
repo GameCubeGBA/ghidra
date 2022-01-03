@@ -316,7 +316,7 @@ public class JavaAnalyzer extends AbstractJavaAnalyzer implements AnalysisWorker
 			AbstractConstantPoolInfoJava poolEntry = classFile.getConstantPool()[nameIndex];
 			if (poolEntry instanceof ConstantPoolUtf8Info) {
 				String name = ((ConstantPoolUtf8Info) poolEntry).getString();
-				if (name.equals("BootstrapMethods")) {
+				if ("BootstrapMethods".equals(name)) {
 					return ((BootstrapMethodsAttribute) attribute).getBootstrapMethods();
 				}
 			}
@@ -423,7 +423,7 @@ public class JavaAnalyzer extends AbstractJavaAnalyzer implements AnalysisWorker
 				continue;
 			}
 
-			if (instruction.getMnemonicString().equals("invokedynamic")) {
+			if ("invokedynamic".equals(instruction.getMnemonicString())) {
 				addInvokeDynamicComments(program, constantPool, indexMap, bootstrapMethods,
 					instruction);
 			}

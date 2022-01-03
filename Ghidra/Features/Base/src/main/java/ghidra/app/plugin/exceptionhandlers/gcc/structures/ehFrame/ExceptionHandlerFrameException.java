@@ -26,8 +26,7 @@ public class ExceptionHandlerFrameException extends Exception {
 	 * cause.
 	 */
 	public ExceptionHandlerFrameException() {
-		super();
-	}
+    }
 
 	/**
 	 * Constructs a new ExceptionHandlerFrameException with the specified detail message and

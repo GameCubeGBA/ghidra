@@ -22,7 +22,7 @@ import com.sun.jna.platform.win32.WinNT.HRESULT;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IModelKeyReference2 extends IModelKeyReference {
-	final IID IID_IMODEL_REFERENCE2 = new IID("80E2F7C5-7159-4e92-887E-7E0347E88406");
+	IID IID_IMODEL_REFERENCE2 = new IID("80E2F7C5-7159-4e92-887E-7E0347E88406");
 
 	enum VTIndices2 implements VTableIndex {
 		OVERRIDE_CONTEXT_OBJECT, //

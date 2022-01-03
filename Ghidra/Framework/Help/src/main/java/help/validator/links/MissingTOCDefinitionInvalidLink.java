@@ -81,10 +81,7 @@ public class MissingTOCDefinitionInvalidLink implements InvalidLink {
 		}
 
 		MissingTOCDefinitionInvalidLink other = (MissingTOCDefinitionInvalidLink) obj;
-		if (!Objects.equals(reference, other.reference)) {
-			return false;
-		}
-		return true;
-	}
+        return Objects.equals(reference, other.reference);
+    }
 
 }

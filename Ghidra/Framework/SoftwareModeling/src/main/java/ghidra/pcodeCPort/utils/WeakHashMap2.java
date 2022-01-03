@@ -33,7 +33,7 @@ import java.util.Set;
  */
 public class WeakHashMap2<K, V> extends AbstractMap<K, V> {
 
-	static private class WeakValue<Z> extends WeakReference<Z> {
+	private static class WeakValue<Z> extends WeakReference<Z> {
 		private int hash; /* Hashcode of value, stored here since the value
 							may be tossed by the GC */
 
@@ -272,7 +272,7 @@ public class WeakHashMap2<K, V> extends AbstractMap<K, V> {
 	/* -- Views -- */
 
 	/* Internal class for entries */
-	static private class Entry<K, V> implements Map.Entry<K, V> {
+    private static class Entry<K, V> implements Map.Entry<K, V> {
 		private K key;
 		private V value; /* Strong reference to value, so that the GC
 							will leave it alone as long as this Entry
@@ -315,7 +315,7 @@ public class WeakHashMap2<K, V> extends AbstractMap<K, V> {
 		public int hashCode() {
 			Object v;
 			return (((key == null) ? 0 : key.hashCode()) ^
-				(((v = getValue()) == null) ? 0 : v.hashCode()));
+				(((v = value) == null) ? 0 : v.hashCode()));
 		}
 
 	}

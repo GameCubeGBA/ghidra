@@ -164,7 +164,7 @@ public class SymbolGTreeDragNDropHandler implements GTreeDragNDropHandler {
 			}
 		}
 
-		return dragUserData.size() != 0;
+		return !dragUserData.isEmpty();
 	}
 
 	@Override

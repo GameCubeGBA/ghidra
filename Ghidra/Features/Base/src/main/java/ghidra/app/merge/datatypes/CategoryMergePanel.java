@@ -83,13 +83,10 @@ class CategoryMergePanel extends JPanel {
 
 	private void create() {
 		countPanel = new ConflictCountPanel();
-		resolvePanel = new CategoryConflictPanel("Resolve Conflict", new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				mergeManager.clearStatusText();
-				mergeManager.setApplyEnabled(true);
-			}
-		});
+		resolvePanel = new CategoryConflictPanel("Resolve Conflict", e -> {
+            mergeManager.clearStatusText();
+            mergeManager.setApplyEnabled(true);
+        });
 
 		setLayout(new BorderLayout(0, 10));
 		add(countPanel, BorderLayout.PAGE_START);

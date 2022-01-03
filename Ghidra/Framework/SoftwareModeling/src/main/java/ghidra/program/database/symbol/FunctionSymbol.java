@@ -261,7 +261,7 @@ public class FunctionSymbol extends SymbolDB {
 //		if (isThunk()) {
 //			return source; // unexpected - already handled
 //		}
-		if (newName == null || newName.length() == 0) {
+		if (newName == null || newName.isEmpty()) {
 			return SourceType.DEFAULT;
 		}
 		if (isExternal()) {
@@ -379,7 +379,7 @@ public class FunctionSymbol extends SymbolDB {
 				return true;
 			}
 			List<Long> thunkIds = functionMgr.getThunkFunctionIds(key);
-			return thunkIds != null ? (thunkIds.size() != 0) : false;
+			return thunkIds != null ? (!thunkIds.isEmpty()) : false;
 		}
 		finally {
 			lock.release();

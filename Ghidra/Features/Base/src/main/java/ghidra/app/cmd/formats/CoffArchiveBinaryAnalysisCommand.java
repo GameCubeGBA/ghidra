@@ -37,8 +37,7 @@ public class CoffArchiveBinaryAnalysisCommand extends FlatProgramAPI
 	private MessageLog messages = new MessageLog();
 
 	public CoffArchiveBinaryAnalysisCommand() {
-		super();
-	}
+    }
 
 	@Override
 	public boolean analysisWorkerCallback(Program program, Object workerContext,

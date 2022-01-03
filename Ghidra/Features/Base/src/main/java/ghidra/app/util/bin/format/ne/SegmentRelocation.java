@@ -26,26 +26,26 @@ import java.io.IOException;
  */
 public class SegmentRelocation {
 	
-	public final static int VALUES_SIZE = 5;
+	public static final int VALUES_SIZE = 5;
 	
 	/**Moveable relocation.*/
-    public final static short MOVEABLE = 0xff;
+    public static final short MOVEABLE = 0xff;
     /**A mask indicating that the low-order nibble is the type.*/
-    public final static byte TYPE_MASK            = 0x0f;
+    public static final byte TYPE_MASK            = 0x0f;
     /**low byte at the specified address.*/
-    public final static byte TYPE_LO_BYTE         = 0x00;
+    public static final byte TYPE_LO_BYTE         = 0x00;
     /**16-bit selector.*/
-    public final static byte TYPE_SEGMENT         = 0x02;
+    public static final byte TYPE_SEGMENT         = 0x02;
     /**32-bit pointer.*/
-    public final static byte TYPE_FAR_ADDR        = 0x03;
+    public static final byte TYPE_FAR_ADDR        = 0x03;
     /**16-bit pointer.*/
-    public final static byte TYPE_OFFSET          = 0x05;
+    public static final byte TYPE_OFFSET          = 0x05;
     /**48-bit pointer.*/
-    public final static byte TYPE_FAR_ADDR_48     = 0x0c;
+    public static final byte TYPE_FAR_ADDR_48     = 0x0c;
     /**32-bit offset.*/
-    public final static byte TYPE_OFFSET_32       = 0x0d;
+    public static final byte TYPE_OFFSET_32       = 0x0d;
 	/**The names of the available relocations.*/
-    public final static String [] TYPE_STRINGS = {
+    public static final String [] TYPE_STRINGS = {
                         "Low Byte",
                         "???1",
                         "16-bit Segment Selector",
@@ -62,7 +62,7 @@ public class SegmentRelocation {
                         "32-bit Offset"
     };
     /**The number of bytes required to perform relocation*/
-    public final static int[] TYPE_LENGTHS = {
+    public static final int[] TYPE_LENGTHS = {
     					1,	// TYPE_LO_BYTE
     					0,
     					2,	// TYPE_SEGMENT
@@ -79,17 +79,17 @@ public class SegmentRelocation {
     					4	// TYPE_OFFSET_32
     };
     /**A mask indicating that the low-order two-bits is the type.*/
-    public final static byte FLAG_TARGET_MASK     = 0x03;
+    public static final byte FLAG_TARGET_MASK     = 0x03;
     /**Internal reference relocation.*/
-    public final static byte FLAG_INTERNAL_REF    = 0x00;
+    public static final byte FLAG_INTERNAL_REF    = 0x00;
     /**Import ordinal relocation.*/
-    public final static byte FLAG_IMPORT_ORDINAL  = 0x01;
+    public static final byte FLAG_IMPORT_ORDINAL  = 0x01;
     /**Import name relocation.*/
-    public final static byte FLAG_IMPORT_NAME     = 0x02;
+    public static final byte FLAG_IMPORT_NAME     = 0x02;
     /**Operating system fixup relocation.*/
-    public final static byte FLAG_OS_FIXUP        = 0x03;
+    public static final byte FLAG_OS_FIXUP        = 0x03;
     /**Additive relocaiton.*/
-    public final static byte FLAG_ADDITIVE        = 0x04;
+    public static final byte FLAG_ADDITIVE        = 0x04;
 
     private int    segment;
     private byte   type;

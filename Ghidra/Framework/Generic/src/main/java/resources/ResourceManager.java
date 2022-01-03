@@ -66,7 +66,7 @@ import utility.module.ModuleUtilities;
  */
 public class ResourceManager {
 
-	private final static String DEFAULT_ICON_FILENAME = Images.BOMB;
+	private static final String DEFAULT_ICON_FILENAME = Images.BOMB;
 	private static ImageIcon DEFAULT_ICON;
 	private static Map<String, ImageIcon> iconMap = new HashMap<>();
 

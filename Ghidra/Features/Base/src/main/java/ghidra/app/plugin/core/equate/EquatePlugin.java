@@ -57,11 +57,11 @@ import ghidra.util.task.*;
 )
 //@formatter:on
 public class EquatePlugin extends Plugin {
-	private final static String GROUP_NAME = "equate";
-	private final static String[] SET_MENUPATH = new String[] { "Set Equate..." };
-	private final static String[] RENAME_MENUPATH = new String[] { "Rename Equate..." };
-	private final static String[] REMOVE_MENUPATH = new String[] { "Remove Equate" };
-	private final static String[] APPLYENUM_MENUPATH = new String[] { "Apply Enum..." };
+	private static final String GROUP_NAME = "equate";
+	private static final String[] SET_MENUPATH = new String[] { "Set Equate..." };
+	private static final String[] RENAME_MENUPATH = new String[] { "Rename Equate..." };
+	private static final String[] REMOVE_MENUPATH = new String[] { "Remove Equate" };
+	private static final String[] APPLYENUM_MENUPATH = new String[] { "Apply Enum..." };
 
 	// plugin instance variables
 	private DockingAction setAction;

@@ -35,14 +35,13 @@ public class DefineTable {
 
 	Hashtable lookupTable = new Hashtable();
 
-	private final static String VALUE = "value";
+	private static final String VALUE = "value";
 
 	/**
 	 * 
 	 */
 	public DefineTable() {
-		super();
-		// TODO Auto-generated constructor stub
+        // TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -338,9 +337,7 @@ public class DefineTable {
 
 		//nextRepl = image.substring(0, currIndex);	// shift to location
 		String replacementString = defs.get(defName).image;		// get replacement text
-		if (replacementString.equals(defName)) {
-			return false; // no need to replace
-		}
+        return !replacementString.equals(defName); // no need to replace
 
 //		// check that macro argv arguments match
 //		Vector<PPToken> argv = getArgs(defName);
@@ -360,9 +357,7 @@ public class DefineTable {
 //				return false;
 //			}
 //		}
-
-		return true;
-	}
+    }
 
 	int replace(StringBuffer buf, String currKey, int fromIndex, ArrayList<String> sublist) {
 		String replacementString = null;
@@ -401,7 +396,7 @@ public class DefineTable {
 			System.err.println("DONT Replace " + currKey + " in: " + buf);
 			return -1;
 		}
-		if (argv != null && argv.size() > 0) {
+		if (argv != null && !argv.isEmpty()) {
 			// need to scan carefully, and recursively
 			// there shouldn't be so many globals...
 			// could be screwed up by so many things
@@ -587,7 +582,7 @@ public class DefineTable {
 		if (join) {
 			image = joinPdPd(image);
 		}
-		if (image.length() > 0 && image.charAt(0) == '#') {
+		if (!image.isEmpty() && image.charAt(0) == '#') {
 			image = "\"" + image.substring(1) + "\"";
 		}
 
@@ -738,7 +733,7 @@ public class DefineTable {
 	 */
 	private static CategoryPath getCategory(String catName) {
 		CategoryPath rootCat = CategoryPath.ROOT;
-		if (catName == null || catName.length() == 0) {
+		if (catName == null || catName.isEmpty()) {
 			return rootCat;
 		}
 		return new CategoryPath(rootCat, catName);

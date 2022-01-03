@@ -33,8 +33,7 @@ import ghidra.util.graph.DependencyGraph;
 public class ConcurrentGraphQTest extends AbstractGenericTest {
 
 	public ConcurrentGraphQTest() {
-		super();
-	}
+    }
 
 	@Test
 	public void test() throws InterruptedException, Exception {

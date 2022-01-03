@@ -537,7 +537,7 @@ public class ReflectionUtilities {
 		}
 
 		t.printStackTrace(ps);
-		sb.append(baos.toString());
+		sb.append(baos);
 		ps.close();
 		try {
 			baos.close();

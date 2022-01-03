@@ -323,7 +323,7 @@ public class OverlayHelpTreeTest {
 		String TOCID = tocFile.toUri().toString();
 		overlayHelpTree.printTreeForID(spy, TOCID);
 
-		System.out.println(spy.toString());
+		System.out.println(spy);
 
 		return spy;
 	}

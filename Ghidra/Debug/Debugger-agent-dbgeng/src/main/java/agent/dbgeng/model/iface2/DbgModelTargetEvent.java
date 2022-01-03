@@ -26,9 +26,9 @@ public interface DbgModelTargetEvent extends
 		DbgEventsListenerAdapter //
 {
 
-	public DbgEventFilter getFilter();
+	DbgEventFilter getFilter();
 
-	public int getEventIndex();
+	int getEventIndex();
 
 	@Override
 	void eventSelected(AbstractDbgEvent<?> event, DbgCause cause);

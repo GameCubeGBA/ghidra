@@ -34,7 +34,7 @@ import ghidra.util.SystemUtilities;
  * These do not change for a given .dex Program and can be shared (by this {@link AnalysisState})
  * between plug-ins that need to do analysis.
  */
-final public class DexAnalysisState implements AnalysisState {
+public final class DexAnalysisState implements AnalysisState {
 
 	private Program program;
 	private DexHeader header;								// Collection of raw records parsed from .dex file
@@ -105,7 +105,7 @@ final public class DexAnalysisState implements AnalysisState {
 	 * @return {@code DexAnalysisState} for specified program instance
 	 * @throws IOException if there are problems during construction of the state object
 	 */
-	public synchronized static DexAnalysisState getState(Program program) throws IOException {
+    public static synchronized DexAnalysisState getState(Program program) throws IOException {
 		DexAnalysisState analysisState =
 			AnalysisStateInfo.getAnalysisState(program, DexAnalysisState.class);
 		if (analysisState == null) {

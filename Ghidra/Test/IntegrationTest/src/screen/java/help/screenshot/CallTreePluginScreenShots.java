@@ -25,22 +25,18 @@ import ghidra.app.plugin.core.calltree.CallTreeProvider;
 public class CallTreePluginScreenShots extends GhidraScreenShotGenerator {
 
 	public CallTreePluginScreenShots() {
-		super();
-	}
+    }
 
 @Test
     public void testCallTreeWindow() {
 		positionListingTop(0x4014e0);
 		performAction("Show Function Call Trees", "CallTreePlugin", true);
 
-		runSwing(new Runnable() {
-			@Override
-			public void run() {
-				ComponentProvider provider = getProvider(CallTreeProvider.class);
-				JSplitPane splitPane = (JSplitPane) getInstanceField("splitPane", provider);
-				splitPane.setResizeWeight(0.5);
-			}
-		});
+		runSwing((Runnable) () -> {
+            ComponentProvider provider = getProvider(CallTreeProvider.class);
+            JSplitPane splitPane = (JSplitPane) getInstanceField("splitPane", provider);
+            splitPane.setResizeWeight(0.5);
+        });
 
 		captureIsolatedProvider(CallTreeProvider.class, 700, 500);
 	}

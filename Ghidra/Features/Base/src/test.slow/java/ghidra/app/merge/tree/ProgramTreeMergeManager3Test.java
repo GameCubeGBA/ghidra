@@ -831,7 +831,7 @@ public class ProgramTreeMergeManager3Test extends AbstractProgramTreeMergeManage
 		Group[] kids = root.getChildren();
 		boolean found = false;
 		for (Group kid : kids) {
-			if (kid.getName().equals("Strings")) {
+			if ("Strings".equals(kid.getName())) {
 				found = true;
 				break;
 			}
@@ -888,7 +888,7 @@ public class ProgramTreeMergeManager3Test extends AbstractProgramTreeMergeManage
 		Group[] kids = root.getChildren();
 		boolean found = false;
 		for (Group kid : kids) {
-			if (kid.getName().equals(".text")) {
+			if (".text".equals(kid.getName())) {
 				found = true;
 				break;
 			}
@@ -900,7 +900,7 @@ public class ProgramTreeMergeManager3Test extends AbstractProgramTreeMergeManage
 		String[] parentNames = fragment.getParentNames();
 		found = false;
 		for (String parentName : parentNames) {
-			if (parentName.equals("Strings")) {
+			if ("Strings".equals(parentName)) {
 				found = true;
 				break;
 			}

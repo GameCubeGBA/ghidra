@@ -62,11 +62,11 @@ import ghidra.util.layout.MaximizeSpecificColumnGridLayout;
  */
 public class VerticalChoicesPanel extends ConflictPanel {
 
-	private final static long serialVersionUID = 1;
-	final static int HEADER = 0;
-	final static int INFORMATION = 1;
-	final static int RADIO_BUTTON = 2;
-	final static int CHECK_BOX = 3;
+	private static final long serialVersionUID = 1;
+	static final int HEADER = 0;
+	static final int INFORMATION = 1;
+	static final int RADIO_BUTTON = 2;
+	static final int CHECK_BOX = 3;
 
 	private GDHtmlLabel headerLabel;
 	private JPanel rowPanel;
@@ -89,8 +89,7 @@ public class VerticalChoicesPanel extends ConflictPanel {
 	 * Creates an empty {@code VerticalChoicesPanel}
 	 */
 	public VerticalChoicesPanel() {
-		super();
-		init();
+        init();
 	}
 
 	/**
@@ -159,7 +158,7 @@ public class VerticalChoicesPanel extends ConflictPanel {
 	 * @param text the text
 	 */
 	void setHeader(String text) {
-		if (text != null && text.length() != 0) {
+		if (text != null && !text.isEmpty()) {
 			headerLabel.setText(ConflictUtility.wrapAsHTML(text));
 			add(headerLabel, BorderLayout.PAGE_START);
 		}
@@ -176,9 +175,9 @@ public class VerticalChoicesPanel extends ConflictPanel {
 		JComponent[] headerComps = getRowComponents(0);
 		if (headerComps != null) {
 			// remove the header
-			for (int i = 0; i < headerComps.length; i++) {
-				rowPanel.remove(headerComps[i]);
-			}
+            for (JComponent headerComp : headerComps) {
+                rowPanel.remove(headerComp);
+            }
 			headerComps = null;
 			if (rowComps.isEmpty()) {
 				rowComps.add(0, new ArrayList<JComponent>());
@@ -236,7 +235,7 @@ public class VerticalChoicesPanel extends ConflictPanel {
 			return new JComponent[0];
 		}
 		ArrayList<JComponent> list = rowComps.get(row);
-		if (list == null || list.size() == 0) {
+		if (list == null || list.isEmpty()) {
 			return new JComponent[0];
 		}
 		JComponent[] comps = list.toArray(new JComponent[0]);
@@ -275,16 +274,13 @@ public class VerticalChoicesPanel extends ConflictPanel {
 		final MyRadioButton firstComp = new MyRadioButton(items[0], conflictOption);
 		group.add(firstComp);
 		firstComp.setName(name);
-		ItemListener itemListener = new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				if (listener != null && ((JRadioButton) e.getSource()).isSelected()) {
-					ResolveConflictChangeEvent event =
-						new ResolveConflictChangeEvent(firstComp, row, getSelectedOptions());
-					listener.stateChanged(event);
-				}
-			}
-		};
+		ItemListener itemListener = e -> {
+            if (listener != null && ((JRadioButton) e.getSource()).isSelected()) {
+                ResolveConflictChangeEvent event =
+                    new ResolveConflictChangeEvent(firstComp, row, getSelectedOptions());
+                listener.stateChanged(event);
+            }
+        };
 		firstComp.addItemListener(itemListener);
 		setRowComponent(firstComp, row, 0, defaultInsets);
 		for (int i = 1; i < items.length; i++) {
@@ -312,14 +308,11 @@ public class VerticalChoicesPanel extends ConflictPanel {
 		rows.add(items);
 		MyCheckBox firstComp = new MyCheckBox(items[0], conflictOption);
 		firstComp.setName(name);
-		ItemListener itemListener = new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				if (listener != null) {
-					listener.stateChanged(null);
-				}
-			}
-		};
+		ItemListener itemListener = e -> {
+            if (listener != null) {
+                listener.stateChanged(null);
+            }
+        };
 		firstComp.addItemListener(itemListener);
 		setRowComponent(firstComp, row, 0, defaultInsets);
 		for (int i = 1; i < items.length; i++) {
@@ -364,16 +357,12 @@ public class VerticalChoicesPanel extends ConflictPanel {
 	@Override
 	public void clear() {
 		setHeader(null);
-		ListIterator<ArrayList<JComponent>> iter = rowComps.listIterator();
-		while (iter.hasNext()) {
-			ArrayList<JComponent> compList = iter.next();
-			ListIterator<JComponent> compIter = compList.listIterator();
-			while (compIter.hasNext()) {
-				Component rowComp = compIter.next();
-				rowPanel.remove(rowComp);
-			}
-			compList.clear();
-		}
+        for (ArrayList<JComponent> compList : rowComps) {
+            for (Component rowComp : compList) {
+                rowPanel.remove(rowComp);
+            }
+            compList.clear();
+        }
 		rowComps.clear();
 		rows.clear();
 		rowTypes.clear();
@@ -519,7 +508,7 @@ public class VerticalChoicesPanel extends ConflictPanel {
 	}
 
 	private class MyRadioButton extends GRadioButton {
-		private final static long serialVersionUID = 1;
+		private static final long serialVersionUID = 1;
 		private int option;
 
 		/**
@@ -575,7 +564,7 @@ public class VerticalChoicesPanel extends ConflictPanel {
 	}
 
 	private class MyCheckBox extends GCheckBox {
-		private final static long serialVersionUID = 1;
+		private static final long serialVersionUID = 1;
 		private int option;
 
 		/**
@@ -636,16 +625,14 @@ public class VerticalChoicesPanel extends ConflictPanel {
 		int rowCount = rowComps.size();
 		for (int row = 0; row < rowCount; row++) {
 			JComponent[] comps = getRowComponents(row);
-			for (int i = 0; i < comps.length; i++) {
-				JComponent component = comps[i];
-				if (component instanceof MyRadioButton &&
-					((MyRadioButton) component).isSelected()) {
-					conflictOption |= ((MyRadioButton) component).option;
-				}
-				else if (component instanceof MyCheckBox && ((MyCheckBox) component).isSelected()) {
-					conflictOption |= ((MyCheckBox) component).option;
-				}
-			}
+            for (JComponent component : comps) {
+                if (component instanceof MyRadioButton &&
+                        ((MyRadioButton) component).isSelected()) {
+                    conflictOption |= ((MyRadioButton) component).option;
+                } else if (component instanceof MyCheckBox && ((MyCheckBox) component).isSelected()) {
+                    conflictOption |= ((MyCheckBox) component).option;
+                }
+            }
 		}
 		return conflictOption;
 	}
@@ -663,12 +650,12 @@ public class VerticalChoicesPanel extends ConflictPanel {
 	 */
 	@Override
 	public boolean hasChoice() {
-		for (Iterator<Long> iterator = rowTypes.iterator(); iterator.hasNext();) {
-			long rowType = iterator.next().longValue();
-			if (rowType == RADIO_BUTTON || rowType == CHECK_BOX) {
-				return true;
-			}
-		}
+        for (Long type : rowTypes) {
+            long rowType = type.longValue();
+            if (rowType == RADIO_BUTTON || rowType == CHECK_BOX) {
+                return true;
+            }
+        }
 		return false;
 	}
 }

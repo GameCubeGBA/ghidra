@@ -36,7 +36,7 @@ class FunctionAdapterV3 extends FunctionAdapter {
 	// were added:  customer storage flag, signature source type
 	//
 
-	final static int SCHEMA_VERSION = 3;
+	static final int SCHEMA_VERSION = 3;
 
 	private Table table;
 

@@ -12,15 +12,15 @@
 package SWIG;
 
 public final class CommandFlags {
-  public final static CommandFlags eCommandRequiresTarget = new CommandFlags("eCommandRequiresTarget", lldbJNI.eCommandRequiresTarget_get());
-  public final static CommandFlags eCommandRequiresProcess = new CommandFlags("eCommandRequiresProcess", lldbJNI.eCommandRequiresProcess_get());
-  public final static CommandFlags eCommandRequiresThread = new CommandFlags("eCommandRequiresThread", lldbJNI.eCommandRequiresThread_get());
-  public final static CommandFlags eCommandRequiresFrame = new CommandFlags("eCommandRequiresFrame", lldbJNI.eCommandRequiresFrame_get());
-  public final static CommandFlags eCommandRequiresRegContext = new CommandFlags("eCommandRequiresRegContext", lldbJNI.eCommandRequiresRegContext_get());
-  public final static CommandFlags eCommandTryTargetAPILock = new CommandFlags("eCommandTryTargetAPILock", lldbJNI.eCommandTryTargetAPILock_get());
-  public final static CommandFlags eCommandProcessMustBeLaunched = new CommandFlags("eCommandProcessMustBeLaunched", lldbJNI.eCommandProcessMustBeLaunched_get());
-  public final static CommandFlags eCommandProcessMustBePaused = new CommandFlags("eCommandProcessMustBePaused", lldbJNI.eCommandProcessMustBePaused_get());
-  public final static CommandFlags eCommandProcessMustBeTraced = new CommandFlags("eCommandProcessMustBeTraced", lldbJNI.eCommandProcessMustBeTraced_get());
+  public static final CommandFlags eCommandRequiresTarget = new CommandFlags("eCommandRequiresTarget", lldbJNI.eCommandRequiresTarget_get());
+  public static final CommandFlags eCommandRequiresProcess = new CommandFlags("eCommandRequiresProcess", lldbJNI.eCommandRequiresProcess_get());
+  public static final CommandFlags eCommandRequiresThread = new CommandFlags("eCommandRequiresThread", lldbJNI.eCommandRequiresThread_get());
+  public static final CommandFlags eCommandRequiresFrame = new CommandFlags("eCommandRequiresFrame", lldbJNI.eCommandRequiresFrame_get());
+  public static final CommandFlags eCommandRequiresRegContext = new CommandFlags("eCommandRequiresRegContext", lldbJNI.eCommandRequiresRegContext_get());
+  public static final CommandFlags eCommandTryTargetAPILock = new CommandFlags("eCommandTryTargetAPILock", lldbJNI.eCommandTryTargetAPILock_get());
+  public static final CommandFlags eCommandProcessMustBeLaunched = new CommandFlags("eCommandProcessMustBeLaunched", lldbJNI.eCommandProcessMustBeLaunched_get());
+  public static final CommandFlags eCommandProcessMustBePaused = new CommandFlags("eCommandProcessMustBePaused", lldbJNI.eCommandProcessMustBePaused_get());
+  public static final CommandFlags eCommandProcessMustBeTraced = new CommandFlags("eCommandProcessMustBeTraced", lldbJNI.eCommandProcessMustBeTraced_get());
 
   public final int swigValue() {
     return swigValue;
@@ -33,9 +33,9 @@ public final class CommandFlags {
   public static CommandFlags swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-    for (int i = 0; i < swigValues.length; i++)
-      if (swigValues[i].swigValue == swigValue)
-        return swigValues[i];
+      for (CommandFlags value : swigValues)
+          if (value.swigValue == swigValue)
+              return value;
     throw new IllegalArgumentException("No enum " + CommandFlags.class + " with value " + swigValue);
   }
 

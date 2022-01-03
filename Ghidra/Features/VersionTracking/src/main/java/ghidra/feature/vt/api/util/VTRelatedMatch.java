@@ -21,13 +21,13 @@ import ghidra.program.model.address.*;
 import ghidra.program.model.listing.*;
 
 public interface VTRelatedMatch {
-    public VTRelatedMatchType getCorrelation();
+    VTRelatedMatchType getCorrelation();
 
-    public Address getSourceAddress();
+    Address getSourceAddress();
 
-    public Function getSourceFunction();
+    Function getSourceFunction();
 
-    public Address getDestinationAddress();
+    Address getDestinationAddress();
 
-    public Function getDestinationFunction();
+    Function getDestinationFunction();
 }

@@ -82,9 +82,9 @@ public class SpecExtensionPanel extends JPanel {
 	private JButton removeButton;
 	private ListSelectionModel selectionModel;
 
-	private final static int EXTENSION_TYPE_COLUMN = 0;
-	private final static int NAME_COLUMN = 1;
-	private final static int STATUS_COLUMN = 2;
+	private static final int EXTENSION_TYPE_COLUMN = 0;
+	private static final int NAME_COLUMN = 1;
+	private static final int STATUS_COLUMN = 2;
 
 	/**
 	 *  Status of a particular compiler specification element
@@ -592,7 +592,7 @@ public class SpecExtensionPanel extends JPanel {
 					break;
 			}
 			resultString = buffer.toString();
-			if (resultString.length() == 0) {
+			if (resultString.isEmpty()) {
 				resultString = null;
 			}
 		}

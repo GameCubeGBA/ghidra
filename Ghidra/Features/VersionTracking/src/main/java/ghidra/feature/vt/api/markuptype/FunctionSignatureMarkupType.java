@@ -166,15 +166,12 @@ public class FunctionSignatureMarkupType extends FunctionEntryPointBasedAbstract
 			throw new VersionTrackingApplyException(
 				"Couldn't find destination function to apply a name.");
 		}
-		if (sourceStringable.applyFunctionSignature(destinationFunction, adjustedOptions, false)) {
-//			// If the function signature was applied, apply the names if necessary.
-//			applyParameterNamesIfNeeded(markupItem, adjustedOptions);
-//			// If the function signature was applied, apply the no return flag if necessary.
-//			applyNoReturnIfNeeded(markupItem, adjustedOptions);
-			return true;
-		}
-		return false;
-	}
+        //			// If the function signature was applied, apply the names if necessary.
+        //			applyParameterNamesIfNeeded(markupItem, adjustedOptions);
+        //			// If the function signature was applied, apply the no return flag if necessary.
+        //			applyNoReturnIfNeeded(markupItem, adjustedOptions);
+        return sourceStringable.applyFunctionSignature(destinationFunction, adjustedOptions, false);
+    }
 
 	@Override
 	public ProgramLocation getDestinationLocation(VTAssociation association,

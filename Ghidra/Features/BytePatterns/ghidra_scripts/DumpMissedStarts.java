@@ -38,18 +38,14 @@ public class DumpMissedStarts extends GhidraScript implements PatternFactory {
 	private boolean functionMatchesPattern(byte[] buff, int numbytes) {
 		matchlist.clear();
 		root.sequenceMatch(buff, numbytes, matchlist);
-		if (matchlist.size() > 0)
-			return true;
-		return false;
-	}
+        return !matchlist.isEmpty();
+    }
 
 	private boolean detectThunk(Function func, CodeUnit cu) {
 		if (cu == null)
 			return true;
-		if (cu instanceof Data)
-			return true;
-		return false;
-	}
+        return cu instanceof Data;
+    }
 
 	private void writeBytes(Writer w, byte[] buffer, int numbytes) throws IOException {
 		StringBuffer buf = new StringBuffer();
@@ -71,8 +67,8 @@ public class DumpMissedStarts extends GhidraScript implements PatternFactory {
 		ProgramDecisionTree patternDecisionTree = Patterns.getPatternDecisionTree();
 		ResourceFile[] fileList = Patterns.findPatternFiles(currentProgram, patternDecisionTree);
 		ArrayList<Pattern> patternlist = new ArrayList<>();
-		for (int i = 0; i < fileList.length; ++i)
-			Pattern.readPostPatterns(fileList[i].getFile(true), patternlist, this);
+        for (ResourceFile resourceFile : fileList)
+            Pattern.readPostPatterns(resourceFile.getFile(true), patternlist, this);
 		FileWriter fileWriter = new FileWriter(file);
 		root = SequenceSearchState.buildStateMachine(patternlist);
 
@@ -98,7 +94,7 @@ public class DumpMissedStarts extends GhidraScript implements PatternFactory {
 
 	@Override
 	public PostRule getPostRuleByName(String nm) {
-		if (nm.equals("align"))
+		if ("align".equals(nm))
 			return new AlignRule();
 		return null;
 	}

@@ -322,13 +322,9 @@ public class FcgProvider
 		}
 
 		Rectangle bounds = clickedComponent.getBounds();
-		if (bounds.width - p.x < buffer || bounds.height - p.y < buffer) {
-			// too close to end
-			return false;
-		}
-
-		return true;
-	}
+        // too close to end
+        return bounds.width - p.x >= buffer && bounds.height - p.y >= buffer;
+    }
 
 	@Override
 	public JComponent getComponent() {
@@ -1109,13 +1105,9 @@ public class FcgProvider
 				return false; // already collapsed			
 			}
 
-			if (!isMyDirection(v.getLevel())) {
-				// only enable on incoming or outgoing, depending upon the subclass
-				return false;
-			}
-
-			return true;
-		}
+            // only enable on incoming or outgoing, depending upon the subclass
+            return isMyDirection(v.getLevel());
+        }
 
 		boolean isMyDirection(FcgLevel level) {
 			return level.getDirection() == direction;
@@ -1193,13 +1185,9 @@ public class FcgProvider
 				return false; // already expanded			
 			}
 
-			if (!isMyDirection(v.getLevel())) {
-				// only enable on incoming or outgoing, depending upon the subclass
-				return false;
-			}
-
-			return true;
-		}
+            // only enable on incoming or outgoing, depending upon the subclass
+            return isMyDirection(v.getLevel());
+        }
 
 		boolean isMyDirection(FcgLevel level) {
 			return level.getDirection() == direction;

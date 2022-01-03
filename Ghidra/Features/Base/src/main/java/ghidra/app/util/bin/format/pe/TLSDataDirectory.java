@@ -34,7 +34,7 @@ import ghidra.util.task.TaskMonitor;
  * Points to the Thread Local Storage initialization section.
  */
 public class TLSDataDirectory extends DataDirectory {
-    private final static String NAME = "IMAGE_DIRECTORY_ENTRY_TLS";
+    private static final String NAME = "IMAGE_DIRECTORY_ENTRY_TLS";
 
     private TLSDirectory tls;
 

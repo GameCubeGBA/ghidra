@@ -25,7 +25,7 @@ import ghidra.util.Saveable;
  * An ArrayList type object for ints.
  */
 public class IntArrayList implements Serializable, Saveable {
-    private final static long serialVersionUID = 1;
+    private static final long serialVersionUID = 1;
 
     public static final int MIN_SIZE = 4;
     int [] ints;

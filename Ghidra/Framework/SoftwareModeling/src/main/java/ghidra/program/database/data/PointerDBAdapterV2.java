@@ -26,7 +26,7 @@ import db.Table;
 import ghidra.util.exception.VersionException;
 
 class PointerDBAdapterV2 extends PointerDBAdapter {
-	final static int VERSION = 2;
+	static final int VERSION = 2;
 
 	private Table table;
 

@@ -1004,11 +1004,8 @@ public class DebuggerModulesProvider extends ComponentProviderAdapter {
 			return false;
 		}
 		TraceRecorder recorder = modelService.getRecorder(currentTrace);
-		if (recorder == null) {
-			return false;
-		}
-		return true;
-	}
+        return recorder != null;
+    }
 
 	protected void promptModuleProposal(Collection<ModuleMapEntry> proposal) {
 		if (proposal.isEmpty()) {

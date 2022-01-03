@@ -300,11 +300,10 @@ public class AddEditDialog extends DialogComponentProvider {
 
 	private void initRecentChoices() {
 		labelNameChoices.removeAllItems();
-		Iterator<String> it = recentLabels.iterator();
-		while (it.hasNext()) {
-			labelNameChoices.addItem(it.next());
-		}
-		if (recentLabels.size() > 0) {
+        for (String recentLabel : recentLabels) {
+            labelNameChoices.addItem(recentLabel);
+        }
+		if (!recentLabels.isEmpty()) {
 			labelNameChoices.setSelectedIndex(-1);
 		}
 	}

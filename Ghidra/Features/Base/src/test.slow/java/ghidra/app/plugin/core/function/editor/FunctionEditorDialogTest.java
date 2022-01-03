@@ -40,8 +40,7 @@ import ghidra.test.*;
 public class FunctionEditorDialogTest extends AbstractGhidraHeadedIntegrationTest {
 
 	public FunctionEditorDialogTest() {
-		super();
-	}
+    }
 
 	private TestEnv env;
 	private PluginTool tool;
@@ -110,12 +109,9 @@ public class FunctionEditorDialogTest extends AbstractGhidraHeadedIntegrationTes
 	}
 
 	private void finishEditing(final TableCellEditor cellEditor) {
-		runSwing(new Runnable() {
-			@Override
-			public void run() {
-				cellEditor.stopCellEditing();
-			}
-		});
+		runSwing(() -> {
+            cellEditor.stopCellEditing();
+        });
 		waitForSwing();
 	}
 

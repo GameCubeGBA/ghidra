@@ -33,7 +33,7 @@ import ghidra.util.Msg;
 public interface ConfigurableFactory<T> {
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.TYPE)
-	public @interface FactoryDescription {
+    @interface FactoryDescription {
 		String brief();
 
 		String htmlDetails();
@@ -41,7 +41,7 @@ public interface ConfigurableFactory<T> {
 
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.FIELD)
-	public @interface FactoryOption {
+    @interface FactoryOption {
 		/**
 		 * The text to display next to the option
 		 * 
@@ -50,7 +50,7 @@ public interface ConfigurableFactory<T> {
 		String value();
 	}
 
-	public interface Property<T> {
+	interface Property<T> {
 		Class<T> getValueClass();
 
 		T getValue();

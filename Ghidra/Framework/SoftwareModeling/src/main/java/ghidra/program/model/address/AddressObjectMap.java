@@ -387,13 +387,13 @@ public class AddressObjectMap {
 }
 
 class Mark implements Serializable {
-    private final static long serialVersionUID = 1;
+    private static final long serialVersionUID = 1;
     
     static final int START = 1;
     static final int END = 2;
     static final int SINGLE = 3;
 
-    private final static Object[] emptyArray = {};
+    private static final Object[] emptyArray = {};
 
     Object obj;
     int type;
@@ -473,10 +473,7 @@ class Mark implements Serializable {
 
 
     boolean isEmpty() {
-        if ((obj == null) || ((obj instanceof Object[]) && (((Object[])obj).length == 0))) {
-		    return true;
-		}
-        return false;
+        return (obj == null) || ((obj instanceof Object[]) && (((Object[]) obj).length == 0));
     }
     void remove(Object removeObj) {
         if (obj == null) {

@@ -59,12 +59,12 @@ import resources.ResourceManager;
  */
 class FileActionManager {
 
-	private final static int NEW_ACCELERATOR = KeyEvent.VK_N;
-	private final static int OPEN_ACCELERATOR = KeyEvent.VK_O;
-	private final static int CLOSE_ACCELERATOR = KeyEvent.VK_W;
-	private final static int SAVE_ACCELERATOR = KeyEvent.VK_S;
-	private final static Icon NEW_PROJECT_ICON = ResourceManager.loadImage("images/folder_add.png");
-	private final static String LAST_SELECTED_PROJECT_DIRECTORY = "LastSelectedProjectDirectory";
+	private static final int NEW_ACCELERATOR = KeyEvent.VK_N;
+	private static final int OPEN_ACCELERATOR = KeyEvent.VK_O;
+	private static final int CLOSE_ACCELERATOR = KeyEvent.VK_W;
+	private static final int SAVE_ACCELERATOR = KeyEvent.VK_S;
+	private static final Icon NEW_PROJECT_ICON = ResourceManager.loadImage("images/folder_add.png");
+	private static final String LAST_SELECTED_PROJECT_DIRECTORY = "LastSelectedProjectDirectory";
 
 	private static final String DISPLAY_DATA = "DISPLAY_DATA";
 
@@ -310,7 +310,7 @@ class FileActionManager {
 			ProjectManager pm = plugin.getProjectManager();
 			project = pm.openProject(projectLocator, true, false);
 			if (project == null) {
-				status = "Error opening project: " + projectLocator.toString();
+				status = "Error opening project: " + projectLocator;
 			}
 			else {
 				firingProjectOpened = true;
@@ -321,7 +321,7 @@ class FileActionManager {
 			}
 		}
 		catch (NotFoundException nfe) {
-			status = "Project not found for " + projectLocator.toString();
+			status = "Project not found for " + projectLocator;
 			Msg.showInfo(getClass(), tool.getToolFrame(), "Error Opening Project", status);
 		}
 		catch (NotOwnerException e) {
@@ -333,11 +333,11 @@ class FileActionManager {
 				"creating a \"Shared Project\" will allow a group of users to use a shared server-based repository.");
 		}
 		catch (LockException e) {
-			status = "Project is already open for update: " + projectLocator.toString();
+			status = "Project is already open for update: " + projectLocator;
 			Msg.showError(this, null, "Open Project Failed", status);
 		}
 		catch (Exception e) {
-			status = "Error opening project: " + projectLocator.toString();
+			status = "Error opening project: " + projectLocator;
 			Msg.showError(this, null, "Open Project Failed", status, e);
 		}
 		finally {
@@ -383,11 +383,10 @@ class FileActionManager {
 				buf.append("the following actions:\n \n");
 				Transaction t = udo.getCurrentTransaction();
 				List<String> list = t.getOpenSubTransactions();
-				Iterator<String> it = list.iterator();
-				while (it.hasNext()) {
-					buf.append("\n     ");
-					buf.append(it.next());
-				}
+                for (String s : list) {
+                    buf.append("\n     ");
+                    buf.append(s);
+                }
 				buf.append("\n \n");
 				buf.append(
 					"You may exit Ghidra, but the above action(s) will be aborted and all\n");
@@ -598,7 +597,7 @@ class FileActionManager {
 		// give a special confirm message if user is about to
 		// remove the active project
 		StringBuilder confirmMsg = new StringBuilder("Project: ");
-		confirmMsg.append(projectLocator.toString());
+		confirmMsg.append(projectLocator);
 		confirmMsg.append(" ?\n");
 		boolean isActiveProject =
 			(activeProject != null && activeProject.getProjectLocator().equals(projectLocator));
@@ -681,7 +680,7 @@ class FileActionManager {
 				Msg.showError(this, null, null, null, e);
 			}
 		}
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			return true;
 		}
 
@@ -698,12 +697,9 @@ class FileActionManager {
 		sb.append(" \nChoose 'Cancel' to cancel Close Project, or \n");
 		sb.append("'Lose Changes' to continue.");
 
-		if (OptionDialog.showOptionDialog(tool.getToolFrame(), "Read-Only Files", sb.toString(),
-			"Lose Changes", OptionDialog.QUESTION_MESSAGE) == OptionDialog.OPTION_ONE) {
-			return true; // Lose changes, so close the project
-		}
-		return false;
-	}
+        return OptionDialog.showOptionDialog(tool.getToolFrame(), "Read-Only Files", sb.toString(),
+                "Lose Changes", OptionDialog.QUESTION_MESSAGE) == OptionDialog.OPTION_ONE; // Lose changes, so close the project
+    }
 
 	/**
 	 * Fire the project opened event

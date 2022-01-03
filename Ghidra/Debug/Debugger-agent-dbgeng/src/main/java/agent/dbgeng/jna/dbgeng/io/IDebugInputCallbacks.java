@@ -20,7 +20,7 @@ import com.sun.jna.platform.win32.WinDef.ULONG;
 import com.sun.jna.platform.win32.WinNT.HRESULT;
 
 public interface IDebugInputCallbacks {
-	final IID IID_IDEBUG_INPUT_CALLBACKS = new IID("9f50e42c-f136-499e-9a97-73036c94ed2d");
+	IID IID_IDEBUG_INPUT_CALLBACKS = new IID("9f50e42c-f136-499e-9a97-73036c94ed2d");
 
 	HRESULT StartInput(ULONG BufferSize);
 

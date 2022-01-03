@@ -51,7 +51,7 @@ import ghidra.util.task.TaskMonitor;
  */
 class EquateMerger extends AbstractListingMerger {
 
-	final static String EQUATES_PHASE = "Equates";
+	static final String EQUATES_PHASE = "Equates";
 	EquateConflict currentConflict;
 
 	EquateTable latestEquateTab;
@@ -313,24 +313,21 @@ class EquateMerger extends AbstractListingMerger {
 		ArrayList<EquateConflict> list = conflicts.get(addr);
 		if (list != null) {
 			// merge each conflict at this address.
-			for (int i = 0; i < len; i++) {
-				EquateConflict equateConflict = list.get(i);
-				// If we have a equate choice then a "Use For All" has already occurred.
-				if (equateChoice != ASK_USER) {
-					merge(equateConflict.address, equateConflict.opIndex, equateConflict.scalar,
-						equateChoice);
-				}
-				else {
-					if (askUser && mergeManager != null) {
-						setupConflictPanel(listingPanel, equateConflict);
-						monitor.checkCanceled();
-					}
-					else {
-						merge(equateConflict.address, equateConflict.opIndex,
-							equateConflict.scalar, chosenConflictOption);
-					}
-				}
-			}
+            for (EquateConflict equateConflict : list) {
+                // If we have a equate choice then a "Use For All" has already occurred.
+                if (equateChoice != ASK_USER) {
+                    merge(equateConflict.address, equateConflict.opIndex, equateConflict.scalar,
+                            equateChoice);
+                } else {
+                    if (askUser && mergeManager != null) {
+                        setupConflictPanel(listingPanel, equateConflict);
+                        monitor.checkCanceled();
+                    } else {
+                        merge(equateConflict.address, equateConflict.opIndex,
+                                equateConflict.scalar, chosenConflictOption);
+                    }
+                }
+            }
 		}
 	}
 
@@ -345,76 +342,67 @@ class EquateMerger extends AbstractListingMerger {
 		this.currentConflict = equateConflict;
 		this.currentAddress = equateConflict.address;
 		try {
-			final ChangeListener changeListener = new ChangeListener() {
-				@Override
-				public void stateChanged(ChangeEvent e) {
-					conflictOption = conflictPanel.getSelectedOptions();
-					if (conflictOption == ASK_USER) {
-						if (mergeManager != null) {
-							mergeManager.setApplyEnabled(false);
-						}
-						return;
-					}
-					if (mergeManager != null) {
-						mergeManager.clearStatusText();
-					}
-					EquateConflict conflictInfo = EquateMerger.this.currentConflict;
-					merge(conflictInfo.address, conflictInfo.opIndex, conflictInfo.scalar,
-						conflictOption);
-					if (mergeManager != null) {
-						mergeManager.setApplyEnabled(true);
-					}
-				}
-			};
-			SwingUtilities.invokeAndWait(new Runnable() {
-				@Override
-				public void run() {
-					EquateConflict conflictInfo = EquateMerger.this.currentConflict;
-					Address address = conflictInfo.address;
-					int opIndex = conflictInfo.opIndex;
-					long value = conflictInfo.scalar.getValue();
-					Equate latest = latestEquateTab.getEquate(address, opIndex, value);
-					Equate my = myEquateTab.getEquate(address, opIndex, value);
-					Equate original = originalEquateTab.getEquate(address, opIndex, value);
+			final ChangeListener changeListener = e -> {
+                conflictOption = conflictPanel.getSelectedOptions();
+                if (conflictOption == ASK_USER) {
+                    if (mergeManager != null) {
+                        mergeManager.setApplyEnabled(false);
+                    }
+                    return;
+                }
+                if (mergeManager != null) {
+                    mergeManager.clearStatusText();
+                }
+                EquateConflict conflictInfo = EquateMerger.this.currentConflict;
+                merge(conflictInfo.address, conflictInfo.opIndex, conflictInfo.scalar,
+                    conflictOption);
+                if (mergeManager != null) {
+                    mergeManager.setApplyEnabled(true);
+                }
+            };
+			SwingUtilities.invokeAndWait(() -> {
+                EquateConflict conflictInfo = EquateMerger.this.currentConflict;
+                Address address = conflictInfo.address;
+                int opIndex = conflictInfo.opIndex;
+                long value = conflictInfo.scalar.getValue();
+                Equate latest = latestEquateTab.getEquate(address, opIndex, value);
+                Equate my = myEquateTab.getEquate(address, opIndex, value);
+                Equate original = originalEquateTab.getEquate(address, opIndex, value);
 
-					if (conflictPanel != null) {
-						conflictPanel.clear();
-					}
-					else {
-						conflictPanel = new VerticalChoicesPanel();
-						currentConflictPanel = conflictPanel;
-					}
-					conflictPanel.setTitle("Equate");
-					StringBuffer conflictBuf = new StringBuffer();
-					conflictBuf.append("The equate changes at address ");
-					ConflictUtility.addAddress(conflictBuf, address);
-					conflictBuf.append(" and operand ");
-					ConflictUtility.addCount(conflictBuf, opIndex);
-					conflictBuf.append(" are in conflict. Select the desired result.");
-					conflictPanel.setHeader(conflictBuf.toString());
-					conflictPanel.setRowHeader(getEquateInfo(-1, null));
-					conflictPanel.addRadioButtonRow(getEquateInfo(LATEST, latest),
-						LATEST_BUTTON_NAME, KEEP_LATEST, changeListener);
-					conflictPanel.addRadioButtonRow(getEquateInfo(MY, my), CHECKED_OUT_BUTTON_NAME,
-						KEEP_MY, changeListener);
-					conflictPanel.addInfoRow(getEquateInfo(ORIGINAL, original));
+                if (conflictPanel != null) {
+                    conflictPanel.clear();
+                }
+                else {
+                    conflictPanel = new VerticalChoicesPanel();
+                    currentConflictPanel = conflictPanel;
+                }
+                conflictPanel.setTitle("Equate");
+                StringBuffer conflictBuf = new StringBuffer();
+                conflictBuf.append("The equate changes at address ");
+                ConflictUtility.addAddress(conflictBuf, address);
+                conflictBuf.append(" and operand ");
+                ConflictUtility.addCount(conflictBuf, opIndex);
+                conflictBuf.append(" are in conflict. Select the desired result.");
+                conflictPanel.setHeader(conflictBuf.toString());
+                conflictPanel.setRowHeader(getEquateInfo(-1, null));
+                conflictPanel.addRadioButtonRow(getEquateInfo(LATEST, latest),
+                    LATEST_BUTTON_NAME, KEEP_LATEST, changeListener);
+                conflictPanel.addRadioButtonRow(getEquateInfo(MY, my), CHECKED_OUT_BUTTON_NAME,
+                    KEEP_MY, changeListener);
+                conflictPanel.addInfoRow(getEquateInfo(ORIGINAL, original));
 
-					boolean useForAll = (equateChoice != ASK_USER);
-					conflictPanel.setUseForAll(useForAll);
-					conflictPanel.setConflictType("Equate");
+                boolean useForAll = (equateChoice != ASK_USER);
+                conflictPanel.setUseForAll(useForAll);
+                conflictPanel.setConflictType("Equate");
 
-					listingPanel.setBottomComponent(conflictPanel);
-				}
-			});
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					EquateConflict conflictInfo = EquateMerger.this.currentConflict;
-					Address address = conflictInfo.address;
-					listingPanel.clearAllBackgrounds();
-					listingPanel.paintAllBackgrounds(new AddressSet(address, address));
-				}
-			});
+                listingPanel.setBottomComponent(conflictPanel);
+            });
+			SwingUtilities.invokeLater(() -> {
+                EquateConflict conflictInfo = EquateMerger.this.currentConflict;
+                Address address = conflictInfo.address;
+                listingPanel.clearAllBackgrounds();
+                listingPanel.paintAllBackgrounds(new AddressSet(address, address));
+            });
 		}
 		catch (InterruptedException e) {
 		}

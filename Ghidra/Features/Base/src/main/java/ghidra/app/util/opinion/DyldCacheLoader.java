@@ -34,7 +34,7 @@ import ghidra.util.task.TaskMonitor;
  */
 public class DyldCacheLoader extends AbstractLibrarySupportLoader {
 
-	public final static String DYLD_CACHE_NAME = "DYLD Cache";
+	public static final String DYLD_CACHE_NAME = "DYLD Cache";
 
 	/** Loader option to process symbols*/
 	static final String PROCESS_SYMBOLS_OPTION_NAME = "Process symbols";
@@ -75,7 +75,7 @@ public class DyldCacheLoader extends AbstractLibrarySupportLoader {
 			DyldArchitecture architecture = header.getArchitecture();
 			if (architecture != null) {
 				List<QueryResult> results =
-					QueryOpinionService.query(getName(), architecture.getProcessor(), null);
+					QueryOpinionService.query(DYLD_CACHE_NAME, architecture.getProcessor(), null);
 				for (QueryResult result : results) {
 					loadSpecs.add(new LoadSpec(this, header.getBaseAddress(), result));
 				}

@@ -33,40 +33,40 @@ public interface VTProgramCorrelator {
 	 * 
 	 * @throws CancelledException if the user cancels the correlation via the task monitor.
 	 */
-	public VTMatchSet correlate(VTSession session, TaskMonitor monitor) throws CancelledException;
+    VTMatchSet correlate(VTSession session, TaskMonitor monitor) throws CancelledException;
 
 	/**
 	 * Return the name of the correlator.
 	 * @return the name of the correlator
 	 */
-	public String getName();
+    String getName();
 
 	/**
 	 * Returns a options object populated with the options for this correlator instance.
 	 */
-	public ToolOptions getOptions();
+    ToolOptions getOptions();
 
 	/**
 	 * Returns the address set associated with this correlator instance.
 	 * @return  the address set associated with this correlator instance.
 	 */
-	public AddressSetView getSourceAddressSet();
+    AddressSetView getSourceAddressSet();
 
 	/**
 	 * Returns the source program for this correlator instance.
 	 * @return  the source program for this correlator instance.
 	 */
-	public Program getSourceProgram();
+    Program getSourceProgram();
 
 	/**
 	 * Returns the destination program for this correlator instance.
 	 * @return  the destination program for this correlator instance.
 	 */
-	public Program getDestinationProgram();
+    Program getDestinationProgram();
 
 	/**
 	 * Returns the address set associated with this correlator instance.
 	 * @return  the address set associated with this correlator instance.
 	 */
-	public AddressSetView getDestinationAddressSet();
+    AddressSetView getDestinationAddressSet();
 }

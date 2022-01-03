@@ -27,7 +27,7 @@ import ghidra.util.exception.DuplicateNameException;
  * Basic implementation of a DataTypeComponent
  */
 public class DataTypeComponentImpl implements InternalDataTypeComponent, Serializable {
-	private final static long serialVersionUID = 1;
+	private static final long serialVersionUID = 1;
 
 	private DataType dataType;
 	private CompositeDataTypeImpl parent; // parent prototype containing us
@@ -82,7 +82,7 @@ public class DataTypeComponentImpl implements InternalDataTypeComponent, Seriali
 	@Override
 	public boolean isZeroBitFieldComponent() {
 		if (isBitFieldComponent()) {
-			BitFieldDataType bitField = (BitFieldDataType) getDataType();
+			BitFieldDataType bitField = (BitFieldDataType) dataType;
 			return bitField.getBitSize() == 0;
 		}
 		return false;
@@ -130,7 +130,7 @@ public class DataTypeComponentImpl implements InternalDataTypeComponent, Seriali
 	public void setFieldName(String name) throws DuplicateNameException {
 		if (name != null) {
 			name = name.trim();
-			if (name.length() == 0 || name.equals(getDefaultFieldName())) {
+			if (name.isEmpty() || name.equals(getDefaultFieldName())) {
 				name = null;
 			}
 			else {
@@ -164,7 +164,7 @@ public class DataTypeComponentImpl implements InternalDataTypeComponent, Seriali
 				subname = subname.substring(3);
 				base = 16;
 			}
-			if (subname.length() != 0) {
+			if (!subname.isEmpty()) {
 				try {
 					Integer.parseInt(subname, base);
 					throw new DuplicateNameException("Reserved field name: " + fieldName);
@@ -250,13 +250,13 @@ public class DataTypeComponentImpl implements InternalDataTypeComponent, Seriali
 			return false;
 		}
 		DataTypeComponent dtc = (DataTypeComponent) obj;
-		DataType myDt = getDataType();
+		DataType myDt = dataType;
 		DataType otherDt = dtc.getDataType();
 
-		if (offset != dtc.getOffset() || getLength() != dtc.getLength() ||
+		if (offset != dtc.getOffset() || length != dtc.getLength() ||
 			ordinal != dtc.getOrdinal() ||
 			!SystemUtilities.isEqual(getFieldName(), dtc.getFieldName()) ||
-			!SystemUtilities.isEqual(getComment(), dtc.getComment())) {
+			!SystemUtilities.isEqual(comment, dtc.getComment())) {
 			return false;
 		}
 		if (!(myDt instanceof Pointer)) {
@@ -288,7 +288,7 @@ public class DataTypeComponentImpl implements InternalDataTypeComponent, Seriali
 
 	@Override
 	public boolean isEquivalent(DataTypeComponent dtc) {
-		DataType myDt = getDataType();
+		DataType myDt = dataType;
 		DataType otherDt = dtc.getDataType();
 		DataType myParent = getParent();
 		boolean aligned =
@@ -296,12 +296,12 @@ public class DataTypeComponentImpl implements InternalDataTypeComponent, Seriali
 		// Components don't need to have matching offset when they are aligned
 		if ((!aligned && (offset != dtc.getOffset())) ||
 			!SystemUtilities.isEqual(getFieldName(), dtc.getFieldName()) ||
-			!SystemUtilities.isEqual(getComment(), dtc.getComment())) {
+			!SystemUtilities.isEqual(comment, dtc.getComment())) {
 			return false;
 		}
 
 		// Component lengths need only be checked for dynamic types
-		if (getLength() != dtc.getLength() && (myDt instanceof Dynamic)) {
+		if (length != dtc.getLength() && (myDt instanceof Dynamic)) {
 			return false;
 		}
 

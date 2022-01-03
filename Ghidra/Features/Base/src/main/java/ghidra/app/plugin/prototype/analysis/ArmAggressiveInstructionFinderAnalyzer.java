@@ -290,11 +290,8 @@ public class ArmAggressiveInstructionFinderAnalyzer extends AbstractAnalyzer {
 					numInstr++;
 					FlowType ftype = instr.getFlowType();
 					if (ftype.isTerminal()) {
-						if (!validTerminator(instr)) {
-							return false;
-						}
-						return true;
-					}
+                        return validTerminator(instr);
+                    }
 					// can't follow computed jumps
 					if (ftype.isComputed() && ftype.isJump()) {
 						return true;
@@ -322,11 +319,8 @@ public class ArmAggressiveInstructionFinderAnalyzer extends AbstractAnalyzer {
 							Function func = curProgram.getFunctionManager().getFunctionAt(flows[0]);
 							if (func != null) {
 								addsInfo = true;
-								if (func.hasNoReturn()) {
-									return false;
-								}
-								return true;
-							}
+                                return !func.hasNoReturn();
+                            }
 							if (curProgram.getListing().getInstructionAt(flows[0]) == null) {
 								addsInfo = true;
 								return true;
@@ -339,12 +333,12 @@ public class ArmAggressiveInstructionFinderAnalyzer extends AbstractAnalyzer {
 					if (ftype.isCall() && ftype.isComputed() && lastResults != null &&
 						instr.getNumOperands() == 1) {
 						Register reg = instr.getRegister(0);
-						for (int i = 0; i < lastResults.length; i++) {
-							if (reg.equals(lastResults[i])) {
-								addsInfo = true;
-								return true;
-							}
-						}
+                        for (Object lastResult : lastResults) {
+                            if (reg.equals(lastResult)) {
+                                addsInfo = true;
+                                return true;
+                            }
+                        }
 					}
 					// record last instruction doing a load to a register
 					lastResults = null;
@@ -359,12 +353,12 @@ public class ArmAggressiveInstructionFinderAnalyzer extends AbstractAnalyzer {
 					if (instr.getMnemonicString().startsWith("ldm")) {
 						Object[] inObjs = instr.getInputObjects();
 						if (inObjs != null) {
-							for (int i = 0; i < inObjs.length; i++) {
-								if (inObjs[i] instanceof Register &&
-									(((Register) inObjs[i]).getTypeFlags() & Register.TYPE_SP) == 0) {
-									return true;
-								}
-							}
+                            for (Object inObj : inObjs) {
+                                if (inObj instanceof Register &&
+                                        (((Register) inObj).getTypeFlags() & Register.TYPE_SP) == 0) {
+                                    return true;
+                                }
+                            }
 							return false;
 						}
 					}
@@ -487,11 +481,11 @@ public class ArmAggressiveInstructionFinderAnalyzer extends AbstractAnalyzer {
 
 		AddressSet execSet = new AddressSet();
 		MemoryBlock[] blocks = program.getMemory().getBlocks();
-		for (int i = 0; i < blocks.length; i++) {
-			if (blocks[i].isExecute()) {
-				execSet.addRange(blocks[i].getStart(), blocks[i].getEnd());
-			}
-		}
+        for (MemoryBlock block : blocks) {
+            if (block.isExecute()) {
+                execSet.addRange(block.getStart(), block.getEnd());
+            }
+        }
 
 		if (execSet.isEmpty()) {
 			return set;

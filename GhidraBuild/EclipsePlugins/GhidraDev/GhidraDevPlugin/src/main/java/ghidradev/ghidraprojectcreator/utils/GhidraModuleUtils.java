@@ -151,7 +151,7 @@ public class GhidraModuleUtils {
 		// Copy the skeleton files
 		File ghidraInstallDir = ghidraLayout.getApplicationInstallationDir().getFile(false);
 		File skeletonDir = Files.find(ghidraInstallDir.toPath(), 4, (path, attrs) -> {
-			return attrs.isDirectory() && path.getFileName().toString().equals("Skeleton");
+			return attrs.isDirectory() && "Skeleton".equals(path.getFileName().toString());
 		}).map(p -> p.toFile()).findFirst().orElse(null);
 		if (skeletonDir == null) {
 			throw new IOException("Failed to find skeleton directory.");

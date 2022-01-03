@@ -60,13 +60,13 @@ public class VersionControlAction2Test extends AbstractVersionControlActionTest 
 			}
 			String actionName = action.getName();
 			ActionContext context = getDomainFileActionContext(node);
-			if (actionName.equals("Add to Version Control")) {
+			if ("Add to Version Control".equals(actionName)) {
 				assertTrue(action.isEnabledForContext(context));
 			}
 			else {
 				assertTrue(!action.isEnabledForContext(context));
 			}
-			if (actionName.equals("Find Checkouts")) {
+			if ("Find Checkouts".equals(actionName)) {
 				assertTrue(!action.isAddToPopup(context));
 			}
 			else {
@@ -98,7 +98,7 @@ public class VersionControlAction2Test extends AbstractVersionControlActionTest 
 			if (!(action instanceof VersionControlAction)) {
 				continue;
 			}
-			if (action.getName().equals("Find Checkouts")) {
+			if ("Find Checkouts".equals(action.getName())) {
 				assertTrue(action.isEnabledForContext(getDomainFileActionContext(node)));
 			}
 			else {

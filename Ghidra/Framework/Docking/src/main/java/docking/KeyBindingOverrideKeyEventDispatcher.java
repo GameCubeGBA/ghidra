@@ -194,16 +194,13 @@ public class KeyBindingOverrideKeyEventDispatcher implements KeyEventDispatcher 
 		}
 
 		Component glassPane = rootPane.getGlassPane();
-		if ((glassPane instanceof GGlassPane) && ((GGlassPane) glassPane).isBusy()) {
-			return true; // out parent's glass pane is blocking..don't let events through
-		}
+        return (glassPane instanceof GGlassPane) && ((GGlassPane) glassPane).isBusy(); // out parent's glass pane is blocking..don't let events through
 //        else {
 //            Msg.debug( KeyBindingOverrideKeyEventDispatcher.this,
 //                "Found a window with a non-standard glass pane--this should be fixed to " +
 //                "use the Docking windowing system" );
 //        }
-		return false;
-	}
+    }
 
 	/**
 	 * Used to clear the flag that signals we are in the middle of processing a Ghidra action.
@@ -320,13 +317,9 @@ public class KeyBindingOverrideKeyEventDispatcher implements KeyEventDispatcher 
 			KeyBindingPrecedence keyBindingPrecedence, KeyEvent e) {
 		// O.K., there is an action for the KeyStroke, but before we process it, we have to
 		// check the proper ordering of key events (see method JavaDoc)
-		if (processActionAtPrecedence(KeyBindingPrecedence.KeyListenerLevel, keyBindingPrecedence,
-			action, e) || processComponentKeyListeners(e)) {
-			return true;
-		}
-
-		return false;
-	}
+        return processActionAtPrecedence(KeyBindingPrecedence.KeyListenerLevel, keyBindingPrecedence,
+                action, e) || processComponentKeyListeners(e);
+    }
 
 	private boolean processComponentActionMapPrecedence(DockingKeyBindingAction action,
 			KeyBindingPrecedence keyBindingPrecedence, KeyEvent event) {
@@ -336,12 +329,8 @@ public class KeyBindingOverrideKeyEventDispatcher implements KeyEventDispatcher 
 		}
 
 		KeyStroke keyStroke = KeyStroke.getKeyStrokeForEvent(event);
-		if (processInputAndActionMaps(event, keyStroke)) {
-			return true;
-		}
-
-		return false;
-	}
+        return processInputAndActionMaps(event, keyStroke);
+    }
 
 	private boolean processActionAtPrecedence(KeyBindingPrecedence precedence,
 			KeyBindingPrecedence keyBindingPrecedence, DockingKeyBindingAction action,

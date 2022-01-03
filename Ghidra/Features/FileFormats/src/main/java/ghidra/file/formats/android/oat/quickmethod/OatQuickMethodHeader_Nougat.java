@@ -27,7 +27,7 @@ import ghidra.util.exception.DuplicateNameException;
  */
 public class OatQuickMethodHeader_Nougat extends OatQuickMethodHeader {
 
-	final static int SIZE = 16 + QuickMethodFrameInfo.SIZE;
+	static final int SIZE = 16 + QuickMethodFrameInfo.SIZE;
 
 	private int mapping_table_offset_;
 	private QuickMethodFrameInfo frame_info_;

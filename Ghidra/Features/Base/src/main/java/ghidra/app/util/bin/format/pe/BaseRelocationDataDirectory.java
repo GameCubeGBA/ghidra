@@ -34,7 +34,7 @@ import ghidra.util.task.TaskMonitor;
  * Points to the base relocation information.
  */
 public class BaseRelocationDataDirectory extends DataDirectory implements ByteArrayConverter {
-    private final static String NAME = "IMAGE_DIRECTORY_ENTRY_BASERELOC";
+    private static final String NAME = "IMAGE_DIRECTORY_ENTRY_BASERELOC";
 
     private BaseRelocation [] relocs;
 

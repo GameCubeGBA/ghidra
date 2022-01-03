@@ -70,7 +70,7 @@ public class ProgramDnDTree extends DragNDropTree {
 	private Plugin plugin;
 	private String treeName;
 	private NodeComparator nodeComparator;
-	private final static GroupPath[] EMPTY_GROUP_SELECTION = new GroupPath[0];
+	private static final GroupPath[] EMPTY_GROUP_SELECTION = new GroupPath[0];
 	private Object versionTag;
 
 	/**
@@ -306,11 +306,11 @@ public class ProgramDnDTree extends DragNDropTree {
 
 			// don't allow drop if node is a fragment and the
 			// action is not a move
-			if (node.isFragment() && dropAction != DnDConstants.ACTION_MOVE) {
-				return false;
-			}
+            return !node.isFragment() || dropAction == DnDConstants.ACTION_MOVE;
 		}
-		else if (chosen.equals(SelectionTransferable.localProgramSelectionFlavor)) {
+		else // fromObject is null, so we know this is
+            // from another tree, so don't allow the drop
+            if (chosen.equals(SelectionTransferable.localProgramSelectionFlavor)) {
 			if ((node.isFragment() && dropAction != DnDConstants.ACTION_MOVE) ||
 				(node.isModule() && dropAction != DnDConstants.ACTION_MOVE)) {
 				return false;
@@ -328,13 +328,8 @@ public class ProgramDnDTree extends DragNDropTree {
 				return false;
 			}
 		}
-		else if (chosen.equals(TreeTransferable.localTreeNodeFlavor)) {
-			// fromObject is null, so we know this is
-			// from another tree, so don't allow the drop
-			return false;
-		}
-		return true;
-	}
+		else return !chosen.equals(TreeTransferable.localTreeNodeFlavor);
+    }
 
 	/**
 	 * Get the string to use as the tool tip for the specified node.
@@ -500,12 +495,11 @@ public class ProgramDnDTree extends DragNDropTree {
 
 		TreePath path = node.getTreePath();
 
-		for (int i = 0; i < viewList.size(); i++) {
-			TreePath viewPath = viewList.get(i);
-			if (viewPath.isDescendant(path) && !viewPath.equals(path)) {
-				return true;
-			}
-		}
+        for (TreePath viewPath : viewList) {
+            if (viewPath.isDescendant(path) && !viewPath.equals(path)) {
+                return true;
+            }
+        }
 		return false;
 	}
 
@@ -560,7 +554,7 @@ public class ProgramDnDTree extends DragNDropTree {
 				list.add(p);
 			}
 		}
-		if (list.size() == 0 || (viewList.containsAll(list) && viewList.size() == list.size())) {
+		if (list.isEmpty() || (viewList.containsAll(list) && viewList.size() == list.size())) {
 			return;
 		}
 		TreePath[] paths = new TreePath[list.size()];
@@ -703,17 +697,11 @@ public class ProgramDnDTree extends DragNDropTree {
 			if (selectionCount == 1) {
 				return true;
 			}
-			else if (selectionCount == 0) {
-				return true;
-			}
-			return false;
-		}
+			else return selectionCount == 0;
+        }
 		// allow 1 or many in selection
-		if (selectionCount > 0) {
-			return true;
-		}
-		return false;
-	}
+        return selectionCount > 0;
+    }
 
 	/**
 	 * Generate a unique name to be used as the default when
@@ -1010,10 +998,9 @@ public class ProgramDnDTree extends DragNDropTree {
 				treeModel.reload(parent);
 
 			}
-			for (int i = 0; i < list.size(); i++) {
-				TreePath p = list.get(i);
-				expandPath(p);
-			}
+            for (TreePath p : list) {
+                expandPath(p);
+            }
 		}
 	}
 
@@ -1186,13 +1173,11 @@ public class ProgramDnDTree extends DragNDropTree {
 
 		ArrayList<ProgramNode> list = new ArrayList<>();
 
-		for (int i = 0; i < nodeList.size(); i++) {
-			ProgramNode node = nodeList.get(i);
-
-			if (node.getName().equals(groupName)) {
-				list.add(node);
-			}
-		}
+        for (ProgramNode node : nodeList) {
+            if (node.getName().equals(groupName)) {
+                list.add(node);
+            }
+        }
 		ProgramNode[] nodes = new ProgramNode[list.size()];
 		return list.toArray(nodes);
 	}
@@ -1316,10 +1301,9 @@ public class ProgramDnDTree extends DragNDropTree {
 	 * @param list list of TreePaths.
 	 */
 	public void expandPaths(List<TreePath> list) {
-		for (int i = 0; i < list.size(); i++) {
-			TreePath path = list.get(i);
-			expandPath(path);
-		}
+        for (TreePath path : list) {
+            expandPath(path);
+        }
 	}
 
 	/**
@@ -1370,14 +1354,12 @@ public class ProgramDnDTree extends DragNDropTree {
 
 		ArrayList<ProgramNode> list = new ArrayList<>();
 
-		for (int i = 0; i < nodeList.size(); i++) {
-			ProgramNode node = nodeList.get(i);
-
-			Group group = node.getGroup();
-			if (group != null && group.equals(g)) {
-				list.add(node);
-			}
-		}
+        for (ProgramNode node : nodeList) {
+            Group group = node.getGroup();
+            if (group != null && group.equals(g)) {
+                list.add(node);
+            }
+        }
 		ProgramNode[] nodes = new ProgramNode[list.size()];
 		return list.toArray(nodes);
 	}
@@ -1387,13 +1369,12 @@ public class ProgramDnDTree extends DragNDropTree {
 	 */
 	private TreePath findTreePath(GroupPath groupPath) {
 
-		for (int i = 0; i < nodeList.size(); i++) {
-			ProgramNode node = nodeList.get(i);
-			GroupPath p = node.getGroupPath();
-			if (p.equals(groupPath)) {
-				return node.getTreePath();
-			}
-		}
+        for (ProgramNode node : nodeList) {
+            GroupPath p = node.getGroupPath();
+            if (p.equals(groupPath)) {
+                return node.getTreePath();
+            }
+        }
 		return null;
 	}
 
@@ -1582,7 +1563,7 @@ public class ProgramDnDTree extends DragNDropTree {
 
 		// this must be TreeTransferable.localTreeNodeFlavor
 		List<ProgramNode> list = (List<ProgramNode>) data;
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			throw new RuntimeException("Nothing to drop!");
 		}
 
@@ -1738,10 +1719,9 @@ public class ProgramDnDTree extends DragNDropTree {
 	 * garbage collected.
 	 */
 	private void disposeOfNodes() {
-		for (int i = 0; i < nodeList.size(); i++) {
-			ProgramNode node = nodeList.get(i);
-			node.dispose();
-		}
+        for (ProgramNode node : nodeList) {
+            node.dispose();
+        }
 	}
 
 	/**

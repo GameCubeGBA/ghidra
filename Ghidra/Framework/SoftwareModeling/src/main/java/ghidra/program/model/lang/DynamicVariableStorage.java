@@ -33,8 +33,7 @@ public class DynamicVariableStorage extends VariableStorage {
 	 * @param autoParamType auto-parameter type or null if not applicable
 	 */
 	private DynamicVariableStorage(AutoParameterType autoParamType) {
-		super();
-		this.autoParamType = autoParamType;
+        this.autoParamType = autoParamType;
 		isUnassigned = true;
 	}
 	
@@ -45,8 +44,7 @@ public class DynamicVariableStorage extends VariableStorage {
 	 * as a pointer instead of its raw type
 	 */
 	private DynamicVariableStorage(boolean forcedIndirect) {
-		super();
-		this.forcedIndirect = forcedIndirect;
+        this.forcedIndirect = forcedIndirect;
 		isUnassigned = true;
 	}
 	

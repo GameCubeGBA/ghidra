@@ -97,32 +97,29 @@ class MemReferenceDB extends ReferenceDB {
 					toAddr.equals(memRef.getToAddress()) && opIndex == memRef.getOperandIndex() &&
 					symbolID == memRef.getSymbolID() && isPrimary == memRef.isPrimary() &&
 					sourceType == memRef.getSource() && refType == memRef.getReferenceType() &&
-					isShiftedReference() == memRef.isShiftedReference() &&
-					isOffsetReference() == memRef.isOffsetReference();
+					isShifted == memRef.isShifted &&
+					isOffset == memRef.isOffset;
 			}
 			Address compatibleFromAddr =
 				SimpleDiffUtility.getCompatibleAddress(program, fromAddr, memRef.program);
 			if (compatibleFromAddr == null) {
 				compatibleFromAddr = fromAddr;
 			}
-			if (!compatibleFromAddr.equals(memRef.fromAddr) || opIndex != memRef.opIndex ||
-				sourceType != memRef.sourceType || refType != memRef.getReferenceType() ||
-				toAddr.getOffset() != memRef.toAddr.getOffset() ||
-				isPrimary != memRef.isPrimary() ||
-				isShiftedReference() != memRef.isShiftedReference() ||
-				isOffsetReference() != memRef.isOffsetReference()) {
-				return false;
-			}
-			return true;
-		}
+            return compatibleFromAddr.equals(memRef.fromAddr) && opIndex == memRef.opIndex &&
+                    sourceType == memRef.sourceType && refType == memRef.getReferenceType() &&
+                    toAddr.getOffset() == memRef.toAddr.getOffset() &&
+                    isPrimary == memRef.isPrimary() &&
+                    isShifted == memRef.isShifted &&
+                    isOffset == memRef.isOffset;
+        }
 		else if (obj instanceof Reference) {
 			Reference ref = (Reference) obj;
 			return fromAddr.equals(ref.getFromAddress()) && toAddr.equals(ref.getToAddress()) &&
 				opIndex == ref.getOperandIndex() && symbolID == ref.getSymbolID() &&
 				isPrimary == ref.isPrimary() && sourceType == ref.getSource() &&
 				refType == ref.getReferenceType() &&
-				isShiftedReference() == ref.isShiftedReference() &&
-				isOffsetReference() == ref.isOffsetReference();
+				isShifted == ref.isShiftedReference() &&
+				isOffset == ref.isOffsetReference();
 		}
 		return false;
 

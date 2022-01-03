@@ -69,10 +69,7 @@ public abstract class AbstractTestVertex extends AbstractVisualVertex {
 			return false;
 		}
 		AbstractTestVertex other = (AbstractTestVertex) obj;
-		if (!Objects.equals(name, other.name)) {
-			return false;
-		}
-		return true;
-	}
+        return Objects.equals(name, other.name);
+    }
 
 }

@@ -1544,7 +1544,7 @@ public class SleighCompile extends SleighBase {
 			String errstring;
 
 			errstring = checkSymbols(cur.scope); // Check labels in the section's scope
-			if (errstring.length() != 0) {
+			if (!errstring.isEmpty()) {
 				myErrors.push_back(scopeString + errstring);
 			}
 			else {
@@ -1768,7 +1768,7 @@ public class SleighCompile extends SleighBase {
 	public void buildMacro(MacroSymbol sym, ConstructTpl rtl) {
 		entry("buildMacro", sym, rtl);
 		String errstring = checkSymbols(symtab.getCurrentScope());
-		if (errstring.length() != 0) {
+		if (!errstring.isEmpty()) {
 			reportError(sym.getLocation(),
 				"Error in definition of macro '" + sym.getName() + "': " + errstring);
 			return;

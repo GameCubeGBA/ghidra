@@ -24,11 +24,11 @@ import ghidra.dbg.util.ConversionUtils;
 public interface LldbModelTargetRegister extends LldbModelTargetObject, TargetRegister {
 
 	@Override
-	public int getBitLength();
+    int getBitLength();
 
-	public SBValue getRegister();
+	SBValue getRegister();
 
-	public default byte[] getBytes() {
+	default byte[] getBytes() {
 		String val = (String) getCachedAttributes().get(VALUE_ATTRIBUTE_NAME);
 		BigInteger value = new BigInteger(val, 16);
 		return ConversionUtils.bigIntegerToBytes(getBitLength() / 8, value);

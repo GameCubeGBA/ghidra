@@ -41,7 +41,7 @@ public class ByteTrie<T> implements ByteTrieIfc<T> {
 	 * suffix (failure) pointers.
 	 * @return an auto-incrementing version id
 	 */
-	private synchronized static long getVersionId() {
+    private static synchronized long getVersionId() {
 		return ++GVID;
 	}
 

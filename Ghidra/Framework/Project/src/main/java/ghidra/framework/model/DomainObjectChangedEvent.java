@@ -33,7 +33,7 @@ import java.util.List;
 public class DomainObjectChangedEvent extends EventObject
 		implements Iterable<DomainObjectChangeRecord> {
 
-	private final static long serialVersionUID = 1;
+	private static final long serialVersionUID = 1;
 
 	private List<DomainObjectChangeRecord> subEvents;
 	private BitSet eventBits = new BitSet(255);

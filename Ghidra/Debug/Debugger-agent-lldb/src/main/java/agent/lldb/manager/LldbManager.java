@@ -32,7 +32,7 @@ public interface LldbManager extends AutoCloseable, LldbBreakpointInsertions {
 	/**
 	 * Possible values for {@link LldbThread#step(ExecSuffix)}
 	 */
-	public enum ExecSuffix {
+    enum ExecSuffix {
 		FINISH("finish"),
 		NEXT("next"),
 		NEXT_INSTRUCTION("next-instruction"),
@@ -324,28 +324,28 @@ public interface LldbManager extends AutoCloseable, LldbBreakpointInsertions {
 	 * 
 	 * @return a future that completes with a map of session IDs to session handles
 	 */
-	public CompletableFuture<Map<String, SBModule>> listModules(SBTarget session);
+    CompletableFuture<Map<String, SBModule>> listModules(SBTarget session);
 
 	/**
 	 * List lldb's module sections
 	 * 
 	 * @return a future that completes with a map of session IDs to session handles
 	 */
-	public CompletableFuture<Map<String, SBSection>> listModuleSections(SBModule module);
+    CompletableFuture<Map<String, SBSection>> listModuleSections(SBModule module);
 
 	/**
 	 * List lldb's module symbols
 	 * 
 	 * @return a future that completes with a map of session IDs to session handles
 	 */
-	public CompletableFuture<Map<String, SBSymbol>> listModuleSymbols(SBModule module);
+    CompletableFuture<Map<String, SBSymbol>> listModuleSymbols(SBModule module);
 
 	/**
 	 * List lldb's memory
 	 * 
 	 * @return a future that completes with a map of session IDs to session handles
 	 */
-	public CompletableFuture<List<SBMemoryRegionInfo>> listMemory(SBProcess process);
+    CompletableFuture<List<SBMemoryRegionInfo>> listMemory(SBProcess process);
 
 	/**
 	 * List information for all breakpoints

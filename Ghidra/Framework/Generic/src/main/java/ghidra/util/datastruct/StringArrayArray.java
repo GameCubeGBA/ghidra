@@ -22,14 +22,13 @@ import java.io.Serializable;
  * Array of String[] that grows as needed.
  */
 public class StringArrayArray implements Array, Serializable {
-	private final static long serialVersionUID = 1;
+	private static final long serialVersionUID = 1;
 
 	private ByteArrayArray byteStore;
 	/**
 	 * Constructor for StringArrayArray.
 	 */
 	public StringArrayArray() {
-		super();
 		byteStore = new ByteArrayArray();
 	}
 
@@ -102,20 +101,19 @@ public class StringArrayArray implements Array, Serializable {
 		bytes[2] = (byte)(n >> 8);			
 		bytes[3] = (byte)n;
 		int pos = 4;
-		for(int i=0;i<n;i++) {
-			if (value[i] == null) {
-				bytes[pos++] = (byte)-1;
-				bytes[pos++] = (byte)-1;
-			}
-			else {
-				int strlen = value[i].length();
-			
-				bytes[pos++] = (byte)(strlen >> 8);
-				bytes[pos++] = (byte)(strlen);
-				System.arraycopy(value[i].getBytes(),0,bytes,pos,strlen);
-				pos += strlen;
-			}
-		}
+        for (String s : value) {
+            if (s == null) {
+                bytes[pos++] = -1;
+                bytes[pos++] = -1;
+            } else {
+                int strlen = s.length();
+
+                bytes[pos++] = (byte) (strlen >> 8);
+                bytes[pos++] = (byte) (strlen);
+                System.arraycopy(s.getBytes(), 0, bytes, pos, strlen);
+                pos += strlen;
+            }
+        }
 		return bytes;
 	}
 	private String[] bytesToStringArray(byte[] bytes) {

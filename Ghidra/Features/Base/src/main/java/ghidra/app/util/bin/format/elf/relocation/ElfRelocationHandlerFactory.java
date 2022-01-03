@@ -23,12 +23,12 @@ import java.util.List;
 
 public final class ElfRelocationHandlerFactory {
 
-	public final static List<ElfRelocationHandler> getHandlers() {
+	public static final List<ElfRelocationHandler> getHandlers() {
 		return new ArrayList<ElfRelocationHandler>(
 			ClassSearcher.getInstances(ElfRelocationHandler.class));
 	}
 
-	public final static ElfRelocationHandler getHandler(ElfHeader elf) {
+	public static final ElfRelocationHandler getHandler(ElfHeader elf) {
 		for (ElfRelocationHandler handler : getHandlers()) {
 			if (handler.canRelocate(elf)) {
 				return handler;

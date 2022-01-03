@@ -45,12 +45,12 @@ public class ButtonPanelFactory {
 	 * layout the buttons on the panel created with createButtonPanel()
 	 * horizontally along the X-axis
 	 */
-	public final static char X_AXIS = '0';
+    public static final char X_AXIS = '0';
 	/**
 	 * layout the buttons on the panel created with createButtonPanel()
 	 * vertically along the Y-axis
 	 */
-	public final static char Y_AXIS = '1';
+    public static final char Y_AXIS = '1';
 
 	/*
 	 * types of buttons you can request from the factory that have
@@ -59,35 +59,35 @@ public class ButtonPanelFactory {
 	/**
 	 * Button that has an up arrow.
 	 */
-	public final static int ARROW_UP_TYPE = 0;
+    public static final int ARROW_UP_TYPE = 0;
 	/**
 	 * Button that has a down arrow.
 	 */
-	public final static int ARROW_DOWN_TYPE = 1;
+    public static final int ARROW_DOWN_TYPE = 1;
 	/**
 	 * Button that indicates a file chooser to browse.
 	 */
-	public final static int BROWSE_TYPE = 2;
+    public static final int BROWSE_TYPE = 2;
 	/**
 	 * Button for cancel.
 	 */
-	public final static int CANCEL_TYPE = 3;
+    public static final int CANCEL_TYPE = 3;
 	/**
 	 * Button that indicates an edit operation.
 	 */
-	public final static int EDIT_TYPE = 4;
+    public static final int EDIT_TYPE = 4;
 	/**
 	 * Button for OK.
 	 */
-	public final static int OK_TYPE = 5;
+    public static final int OK_TYPE = 5;
 	/** 
 	 * Button that has a left arrow.
 	 */
-	public final static int ARROW_LEFT_TYPE = 6;
+    public static final int ARROW_LEFT_TYPE = 6;
 	/**
 	 * Button that has a right arrow.
 	 */
-	public final static int ARROW_RIGHT_TYPE = 7;
+    public static final int ARROW_RIGHT_TYPE = 7;
 
 	/*
 	 * values used to construct various button types, as defined
@@ -97,15 +97,15 @@ public class ButtonPanelFactory {
 	/**
 	 * Dimension for the arrow button.
 	 */
-	public final static Dimension ARROW_SIZE = new Dimension(32, 32);
+    public static final Dimension ARROW_SIZE = new Dimension(32, 32);
 	/**
 	 * Dimension for the browse button.
 	 */
-	public final static Dimension BROWSE_SIZE = new Dimension(30, 25);
+    public static final Dimension BROWSE_SIZE = new Dimension(30, 25);
 	/**
 	 * Text for the browse button.
 	 */
-	public final static Icon BROWSE_ICON = new Icon() {
+    public static final Icon BROWSE_ICON = new Icon() {
 		@Override
 		public void paintIcon(Component c, Graphics g, int x, int y) {
 			g.setColor(Color.BLACK);
@@ -127,19 +127,19 @@ public class ButtonPanelFactory {
 	/**
 	 * Font for the browse button label.
 	 */
-	public final static Font BROWSE_FONT = new Font("Dialog", Font.BOLD, 12);
+    public static final Font BROWSE_FONT = new Font("Dialog", Font.BOLD, 12);
 
 	/**
 	 * internal values used when creating the panels and buttons
 	 */
-	private final static int TOP_MARGIN = 8;
-	private final static int BOTTOM_MARGIN = 8;
-	private final static int SIDE_MARGIN = 20;
+    private static final int TOP_MARGIN = 8;
+	private static final int BOTTOM_MARGIN = 8;
+	private static final int SIDE_MARGIN = 20;
 //    private final static int BUTTON_MARGIN      = 4;
-	private final static int BUTTON_GAP = 10;
-	private final static String CANCEL_LABEL = "Cancel";
-	private final static String OK_LABEL = "Ok";
-	private final static String UNTITLED = "Untitled Button";
+private static final int BUTTON_GAP = 10;
+	private static final String CANCEL_LABEL = "Cancel";
+	private static final String OK_LABEL = "Ok";
+	private static final String UNTITLED = "Untitled Button";
 	private static final String BROWSE_TOOLTIP_TEXT = "Browse";
 
 	/**

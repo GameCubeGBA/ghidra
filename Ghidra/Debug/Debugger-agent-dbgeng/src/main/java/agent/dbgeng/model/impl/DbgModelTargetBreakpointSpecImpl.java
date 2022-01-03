@@ -103,7 +103,7 @@ public class DbgModelTargetBreakpointSpecImpl extends DbgModelTargetObjectImpl
 	@Override
 	public void updateInfo(DbgBreakpointInfo oldInfo, DbgBreakpointInfo newInfo, String reason) {
 		synchronized (this) {
-			assert oldInfo == getBreakpointInfo();
+			assert oldInfo == info;
 			setBreakpointInfo(newInfo);
 		}
 		changeAttributeSet("Refreshed");

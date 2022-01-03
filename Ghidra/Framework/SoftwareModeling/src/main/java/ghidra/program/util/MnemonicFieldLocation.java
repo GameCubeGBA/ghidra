@@ -112,11 +112,8 @@ public class MnemonicFieldLocation extends CodeUnitLocation {
 		if (!super.equals(obj) || (getClass() != obj.getClass()))
 			return false;
 		MnemonicFieldLocation other = (MnemonicFieldLocation) obj;
-		if (!Objects.equals(mnemonicStr, other.mnemonicStr)) {
-			return false;
-		}
-		return true;
-	}
+        return Objects.equals(mnemonicStr, other.mnemonicStr);
+    }
 
 	@Override
 	public void restoreState(Program p, SaveState obj) {

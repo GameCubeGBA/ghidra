@@ -41,8 +41,7 @@ public class ShowInstructionInfoPluginScreenShots extends GhidraScreenShotGenera
 	private ShowInstructionInfoPlugin plugin;
 
 	public ShowInstructionInfoPluginScreenShots() {
-		super();
-	}
+    }
 
 	@Override
 	public void setUp() throws Exception {

@@ -17,6 +17,6 @@ package agent.lldb.model.iface2;
 
 public interface LldbModelTargetConnectorContainer extends LldbModelTargetObject {
 
-	public LldbModelTargetAvailable getTargetAttachable(int pid);
+	LldbModelTargetAvailable getTargetAttachable(int pid);
 
 }

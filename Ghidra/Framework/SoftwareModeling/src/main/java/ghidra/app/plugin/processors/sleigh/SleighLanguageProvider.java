@@ -77,7 +77,7 @@ public class SleighLanguageProvider implements LanguageProvider {
 		new LinkedHashMap<>();
 	private int failureCount = 0;
 
-	public final static String LANGUAGE_DIR_NAME = "languages";
+	public static final String LANGUAGE_DIR_NAME = "languages";
 
 	public SleighLanguageProvider() throws Exception {
 		createLanguages();
@@ -310,7 +310,7 @@ public class SleighLanguageProvider implements LanguageProvider {
 				String tool = externalName.getAttribute("tool");
 				String name = externalName.getAttribute("name");
 
-				if (tool != null && name != null && tool.length() > 0 && name.length() > 0) {
+				if (tool != null && name != null && !tool.isEmpty() && !name.isEmpty()) {
                     List<String> nameList = externalNameMap.computeIfAbsent(tool, k -> new ArrayList<>());
                     nameList.add(name);
 				}

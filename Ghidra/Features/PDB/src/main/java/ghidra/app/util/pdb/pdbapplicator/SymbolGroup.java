@@ -159,11 +159,8 @@ public class SymbolGroup {
 
 		@Override
 		public boolean hasNext() {
-			if (nextIndex == offsets.size()) {
-				return false;
-			}
-			return true;
-		}
+            return nextIndex != offsets.size();
+        }
 
 		/**
 		 * Peeks at and returns the next symbol without incrementing to the next.  If none are

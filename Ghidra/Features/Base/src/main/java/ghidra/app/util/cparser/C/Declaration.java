@@ -29,12 +29,11 @@ public class Declaration {
 	private int bitSize = -1;
 
 	public Declaration() {
-		super();
-	}
+    }
 
 	public Declaration(Declaration dec) {
 		this();
-		this.dt = dec.getDataType();
+		this.dt = dec.dt;
 	}
 
 	public Declaration(Declaration dec, String name) throws ParseException {
@@ -42,7 +41,7 @@ public class Declaration {
 		if (dec == null) {
 			throw new ParseException("Undefined data type \"" + name + "\"");
 		}
-		this.dt = dec.getDataType();
+		this.dt = dec.dt;
 		this.name = name;
 	}
 

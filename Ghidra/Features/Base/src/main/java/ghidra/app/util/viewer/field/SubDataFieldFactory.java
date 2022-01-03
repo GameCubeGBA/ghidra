@@ -43,8 +43,7 @@ public class SubDataFieldFactory extends OperandFieldFactory {
 	 * @param path the component path for the data
 	 */
 	public SubDataFieldFactory(String name, int[] path) {
-		super();
-		this.componentPath = path;
+        this.componentPath = path;
 		this.name = name;
 	}
 

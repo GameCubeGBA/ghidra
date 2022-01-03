@@ -30,8 +30,8 @@ import ghidra.test.*;
  */
 public class ConnectToolsTest extends AbstractGhidraHeadedIntegrationTest {
 
-	private final static String BAD_EVENT_NAME = "TEST_CONNECT_FOR_BAD_EVENT";
-	private final static String DIRECTORY_NAME = AbstractGTest.getTestDirectoryPath();
+	private static final String BAD_EVENT_NAME = "TEST_CONNECT_FOR_BAD_EVENT";
+	private static final String DIRECTORY_NAME = AbstractGTest.getTestDirectoryPath();
 
 	private Project project;
 

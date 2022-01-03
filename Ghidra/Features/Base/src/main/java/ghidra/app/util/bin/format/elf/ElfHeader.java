@@ -318,7 +318,7 @@ public class ElfHeader implements StructConverter, Writeable {
 			return null;
 		}
 		String typeSuffix = elfLoadAdapter.getDataTypeSuffix();
-		if (typeSuffix != null && typeSuffix.length() == 0) {
+		if (typeSuffix != null && typeSuffix.isEmpty()) {
 			typeSuffix = null;
 		}
 		return typeSuffix;
@@ -1062,9 +1062,7 @@ public class ElfHeader implements StructConverter, Writeable {
 			return true;
 		}
 		if (dynamicTable != null) {
-			if (dynamicTable.containsDynamicValue(ElfDynamicType.DT_GNU_PRELINKED)) {
-				return true;
-			}
+            return dynamicTable.containsDynamicValue(ElfDynamicType.DT_GNU_PRELINKED);
 		}
 		return false;
 	}
@@ -1099,7 +1097,7 @@ public class ElfHeader implements StructConverter, Writeable {
 				reader.setPointerIndex(ptr);
 			}
 
-			if (readAsciiString.equals("PRE")) {
+			if ("PRE".equals(readAsciiString)) {
 				preLinkImageBase = (readInt) & 0xffffffffL;
 			}
 		}
@@ -1372,7 +1370,7 @@ public class ElfHeader implements StructConverter, Writeable {
 				list.add(sectionHeader);
 			}
 		}
-		if (list.size() == 0) {
+		if (list.isEmpty()) {
 			return null;
 		}
 		if (list.size() > 1) {

@@ -72,8 +72,7 @@ public class RefMergerRegTest extends AbstractListingMergeManagerTest {
 	// 0x10033fe: op0 both have reg ref to EDI.
 
 	public RefMergerRegTest() {
-		super();
-	}
+    }
 
 @Test
     public void testRegRefRemoveNoConflict() throws Exception {

@@ -27,7 +27,7 @@ import ghidra.util.task.TaskMonitor;
  */
 public class MonitoredInputStream extends InputStream {
 
-	private final static int PROGRESS_INCREMENT = 32 * 1024;
+	private static final int PROGRESS_INCREMENT = 32 * 1024;
 
 	protected InputStream in;
 	private TaskMonitor monitor;

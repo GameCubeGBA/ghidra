@@ -493,7 +493,7 @@ public class DataTypeParser {
 
 	private static String[] splitDataTypeModifiers(String dataTypeModifiers) {
 		dataTypeModifiers = dataTypeModifiers.replaceAll(":[ \\t]", "");
-		if (dataTypeModifiers.length() == 0) {
+		if (dataTypeModifiers.isEmpty()) {
 			return new String[0];
 		}
 		List<String> list = new ArrayList<>();
@@ -540,7 +540,7 @@ public class DataTypeParser {
 		return Integer.parseInt(size);
 	}
 
-	private static interface DtPiece {
+	private interface DtPiece {
 		// dummy interface so we don't have to use Object in the list container
 	}
 
@@ -575,7 +575,7 @@ public class DataTypeParser {
 			if (piece.startsWith("[") && piece.endsWith("]")) {
 				try {
 					String elementCountStr = piece.substring(1, piece.length() - 1);
-					if (elementCountStr.length() == 0) {
+					if (elementCountStr.isEmpty()) {
 						// treat empty array spec same as 0
 						// consumer may need to handle resulting array as a pointer (e.g., parameter)
 						elementCount = 0;

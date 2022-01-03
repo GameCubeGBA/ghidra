@@ -43,16 +43,16 @@ import ghidra.util.task.TaskMonitor;
  */
 public class ElfLoader extends AbstractLibrarySupportLoader {
 
-	public final static String ELF_NAME = "Executable and Linking Format (ELF)";
+	public static final String ELF_NAME = "Executable and Linking Format (ELF)";
 
-	public final static String ELF_ENTRY_FUNCTION_NAME = "entry";
+	public static final String ELF_ENTRY_FUNCTION_NAME = "entry";
 
-	public final static String ELF_FILE_TYPE_PROPERTY = "ELF File Type";
-	public final static String ELF_ORIGINAL_IMAGE_BASE_PROPERTY = "ELF Original Image Base";
-	public final static String ELF_PRELINKED_PROPERTY = "ELF Prelinked";
+	public static final String ELF_FILE_TYPE_PROPERTY = "ELF File Type";
+	public static final String ELF_ORIGINAL_IMAGE_BASE_PROPERTY = "ELF Original Image Base";
+	public static final String ELF_PRELINKED_PROPERTY = "ELF Prelinked";
 
-	public final static String ELF_REQUIRED_LIBRARY_PROPERTY_PREFIX = "ELF Required Library ["; // followed by "#]"
-	public final static String ELF_SOURCE_FILE_PROPERTY_PREFIX = "ELF Source File ["; // followed by "#]"
+	public static final String ELF_REQUIRED_LIBRARY_PROPERTY_PREFIX = "ELF Required Library ["; // followed by "#]"
+	public static final String ELF_SOURCE_FILE_PROPERTY_PREFIX = "ELF Source File ["; // followed by "#]"
 
 	/**
 	 * Getter for the {@link #ELF_ORIGINAL_IMAGE_BASE_PROPERTY} property.
@@ -109,14 +109,11 @@ public class ElfLoader extends AbstractLibrarySupportLoader {
 			ElfHeader elf = ElfHeader.createElfHeader(RethrowContinuesFactory.INSTANCE, provider);
 			// TODO: Why do we convey image base to loader ?  This will be managed by each loader !
 			List<QueryResult> results =
-				QueryOpinionService.query(getName(), elf.getMachineName(), elf.getFlags());
+				QueryOpinionService.query(ELF_NAME, elf.getMachineName(), elf.getFlags());
 			for (QueryResult result : results) {
-				boolean add = true;
+				boolean add = !elf.is32Bit() || result.pair.getLanguageDescription().getSize() <= 32;
 				// Some languages are defined with sizes smaller than 32
-				if (elf.is32Bit() && result.pair.getLanguageDescription().getSize() > 32) {
-					add = false;
-				}
-				if (elf.is64Bit() && result.pair.getLanguageDescription().getSize() <= 32) {
+                if (elf.is64Bit() && result.pair.getLanguageDescription().getSize() <= 32) {
 					add = false;
 				}
 				if (elf.isLittleEndian() &&

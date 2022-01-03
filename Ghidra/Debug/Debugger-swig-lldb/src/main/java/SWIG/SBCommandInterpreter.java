@@ -167,10 +167,10 @@ public class SBCommandInterpreter {
     return lldbJNI.SBCommandInterpreter_WasInterrupted(swigCPtr, this);
   }
 
-  public final static int eBroadcastBitThreadShouldExit = lldbJNI.SBCommandInterpreter_eBroadcastBitThreadShouldExit_get();
-  public final static int eBroadcastBitResetPrompt = lldbJNI.SBCommandInterpreter_eBroadcastBitResetPrompt_get();
-  public final static int eBroadcastBitQuitCommandReceived = lldbJNI.SBCommandInterpreter_eBroadcastBitQuitCommandReceived_get();
-  public final static int eBroadcastBitAsynchronousOutputData = lldbJNI.SBCommandInterpreter_eBroadcastBitAsynchronousOutputData_get();
-  public final static int eBroadcastBitAsynchronousErrorData = lldbJNI.SBCommandInterpreter_eBroadcastBitAsynchronousErrorData_get();
+  public static final int eBroadcastBitThreadShouldExit = lldbJNI.SBCommandInterpreter_eBroadcastBitThreadShouldExit_get();
+  public static final int eBroadcastBitResetPrompt = lldbJNI.SBCommandInterpreter_eBroadcastBitResetPrompt_get();
+  public static final int eBroadcastBitQuitCommandReceived = lldbJNI.SBCommandInterpreter_eBroadcastBitQuitCommandReceived_get();
+  public static final int eBroadcastBitAsynchronousOutputData = lldbJNI.SBCommandInterpreter_eBroadcastBitAsynchronousOutputData_get();
+  public static final int eBroadcastBitAsynchronousErrorData = lldbJNI.SBCommandInterpreter_eBroadcastBitAsynchronousErrorData_get();
 
 }

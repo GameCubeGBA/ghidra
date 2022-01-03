@@ -355,7 +355,7 @@ public class FileBytes {
 
 	@Override
 	public String toString() {
-		return getFilename();
+		return filename;
 	}
 
 	@Override
@@ -378,10 +378,7 @@ public class FileBytes {
 		if (id != other.id) {
 			return false;
 		}
-		if (invalid != other.invalid) {
-			return false;
-		}
-		return true;
-	}
+        return invalid == other.invalid;
+    }
 
 }

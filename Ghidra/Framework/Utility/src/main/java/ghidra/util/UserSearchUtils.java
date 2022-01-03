@@ -32,28 +32,28 @@ public class UserSearchUtils {
 	/**
 	 * Wildcard string for matching 0 or more characters.
 	 */
-	public final static String STAR = "*";
+    public static final String STAR = "*";
 
 	/**
 	 * Characters that we handle similarly to command-line globbing expansion characters.
 	 */
-	private final static char[] GLOB_CHARACTERS = { '*', '?' };
+    private static final char[] GLOB_CHARACTERS = { '*', '?' };
 
 	/**
 	 * A pattern that will find all '\' chars that are not followed by '*', '?'
 	 * or another '\'
 	 */
-	public final static Pattern NON_GLOB_BACKSLASH_PATTERN = Pattern.compile("\\\\(?![\\*\\?])");
+    public static final Pattern NON_GLOB_BACKSLASH_PATTERN = Pattern.compile("\\\\(?![\\*\\?])");
 
 	/**
 	 * A pattern that will find all '*' chars that are not preceded by a '\'
 	 */
-	private final static Pattern STAR_PATTERN = Pattern.compile("(?<!\\\\)\\*");
+    private static final Pattern STAR_PATTERN = Pattern.compile("(?<!\\\\)\\*");
 
 	/**
 	 * A pattern that will find all '?' chars that are not preceded by a '\'
 	 */
-	private final static Pattern QUESTION_PATTERN = Pattern.compile("(?<!\\\\)\\?");
+    private static final Pattern QUESTION_PATTERN = Pattern.compile("(?<!\\\\)\\?");
 
 	static final int CASE_SENSITIVE = 0;
 

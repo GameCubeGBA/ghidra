@@ -12,39 +12,39 @@
 package SWIG;
 
 public final class BasicType {
-  public final static BasicType eBasicTypeInvalid = new BasicType("eBasicTypeInvalid", lldbJNI.eBasicTypeInvalid_get());
-  public final static BasicType eBasicTypeVoid = new BasicType("eBasicTypeVoid", lldbJNI.eBasicTypeVoid_get());
-  public final static BasicType eBasicTypeChar = new BasicType("eBasicTypeChar");
-  public final static BasicType eBasicTypeSignedChar = new BasicType("eBasicTypeSignedChar");
-  public final static BasicType eBasicTypeUnsignedChar = new BasicType("eBasicTypeUnsignedChar");
-  public final static BasicType eBasicTypeWChar = new BasicType("eBasicTypeWChar");
-  public final static BasicType eBasicTypeSignedWChar = new BasicType("eBasicTypeSignedWChar");
-  public final static BasicType eBasicTypeUnsignedWChar = new BasicType("eBasicTypeUnsignedWChar");
-  public final static BasicType eBasicTypeChar16 = new BasicType("eBasicTypeChar16");
-  public final static BasicType eBasicTypeChar32 = new BasicType("eBasicTypeChar32");
-  public final static BasicType eBasicTypeShort = new BasicType("eBasicTypeShort");
-  public final static BasicType eBasicTypeUnsignedShort = new BasicType("eBasicTypeUnsignedShort");
-  public final static BasicType eBasicTypeInt = new BasicType("eBasicTypeInt");
-  public final static BasicType eBasicTypeUnsignedInt = new BasicType("eBasicTypeUnsignedInt");
-  public final static BasicType eBasicTypeLong = new BasicType("eBasicTypeLong");
-  public final static BasicType eBasicTypeUnsignedLong = new BasicType("eBasicTypeUnsignedLong");
-  public final static BasicType eBasicTypeLongLong = new BasicType("eBasicTypeLongLong");
-  public final static BasicType eBasicTypeUnsignedLongLong = new BasicType("eBasicTypeUnsignedLongLong");
-  public final static BasicType eBasicTypeInt128 = new BasicType("eBasicTypeInt128");
-  public final static BasicType eBasicTypeUnsignedInt128 = new BasicType("eBasicTypeUnsignedInt128");
-  public final static BasicType eBasicTypeBool = new BasicType("eBasicTypeBool");
-  public final static BasicType eBasicTypeHalf = new BasicType("eBasicTypeHalf");
-  public final static BasicType eBasicTypeFloat = new BasicType("eBasicTypeFloat");
-  public final static BasicType eBasicTypeDouble = new BasicType("eBasicTypeDouble");
-  public final static BasicType eBasicTypeLongDouble = new BasicType("eBasicTypeLongDouble");
-  public final static BasicType eBasicTypeFloatComplex = new BasicType("eBasicTypeFloatComplex");
-  public final static BasicType eBasicTypeDoubleComplex = new BasicType("eBasicTypeDoubleComplex");
-  public final static BasicType eBasicTypeLongDoubleComplex = new BasicType("eBasicTypeLongDoubleComplex");
-  public final static BasicType eBasicTypeObjCID = new BasicType("eBasicTypeObjCID");
-  public final static BasicType eBasicTypeObjCClass = new BasicType("eBasicTypeObjCClass");
-  public final static BasicType eBasicTypeObjCSel = new BasicType("eBasicTypeObjCSel");
-  public final static BasicType eBasicTypeNullPtr = new BasicType("eBasicTypeNullPtr");
-  public final static BasicType eBasicTypeOther = new BasicType("eBasicTypeOther");
+  public static final BasicType eBasicTypeInvalid = new BasicType("eBasicTypeInvalid", lldbJNI.eBasicTypeInvalid_get());
+  public static final BasicType eBasicTypeVoid = new BasicType("eBasicTypeVoid", lldbJNI.eBasicTypeVoid_get());
+  public static final BasicType eBasicTypeChar = new BasicType("eBasicTypeChar");
+  public static final BasicType eBasicTypeSignedChar = new BasicType("eBasicTypeSignedChar");
+  public static final BasicType eBasicTypeUnsignedChar = new BasicType("eBasicTypeUnsignedChar");
+  public static final BasicType eBasicTypeWChar = new BasicType("eBasicTypeWChar");
+  public static final BasicType eBasicTypeSignedWChar = new BasicType("eBasicTypeSignedWChar");
+  public static final BasicType eBasicTypeUnsignedWChar = new BasicType("eBasicTypeUnsignedWChar");
+  public static final BasicType eBasicTypeChar16 = new BasicType("eBasicTypeChar16");
+  public static final BasicType eBasicTypeChar32 = new BasicType("eBasicTypeChar32");
+  public static final BasicType eBasicTypeShort = new BasicType("eBasicTypeShort");
+  public static final BasicType eBasicTypeUnsignedShort = new BasicType("eBasicTypeUnsignedShort");
+  public static final BasicType eBasicTypeInt = new BasicType("eBasicTypeInt");
+  public static final BasicType eBasicTypeUnsignedInt = new BasicType("eBasicTypeUnsignedInt");
+  public static final BasicType eBasicTypeLong = new BasicType("eBasicTypeLong");
+  public static final BasicType eBasicTypeUnsignedLong = new BasicType("eBasicTypeUnsignedLong");
+  public static final BasicType eBasicTypeLongLong = new BasicType("eBasicTypeLongLong");
+  public static final BasicType eBasicTypeUnsignedLongLong = new BasicType("eBasicTypeUnsignedLongLong");
+  public static final BasicType eBasicTypeInt128 = new BasicType("eBasicTypeInt128");
+  public static final BasicType eBasicTypeUnsignedInt128 = new BasicType("eBasicTypeUnsignedInt128");
+  public static final BasicType eBasicTypeBool = new BasicType("eBasicTypeBool");
+  public static final BasicType eBasicTypeHalf = new BasicType("eBasicTypeHalf");
+  public static final BasicType eBasicTypeFloat = new BasicType("eBasicTypeFloat");
+  public static final BasicType eBasicTypeDouble = new BasicType("eBasicTypeDouble");
+  public static final BasicType eBasicTypeLongDouble = new BasicType("eBasicTypeLongDouble");
+  public static final BasicType eBasicTypeFloatComplex = new BasicType("eBasicTypeFloatComplex");
+  public static final BasicType eBasicTypeDoubleComplex = new BasicType("eBasicTypeDoubleComplex");
+  public static final BasicType eBasicTypeLongDoubleComplex = new BasicType("eBasicTypeLongDoubleComplex");
+  public static final BasicType eBasicTypeObjCID = new BasicType("eBasicTypeObjCID");
+  public static final BasicType eBasicTypeObjCClass = new BasicType("eBasicTypeObjCClass");
+  public static final BasicType eBasicTypeObjCSel = new BasicType("eBasicTypeObjCSel");
+  public static final BasicType eBasicTypeNullPtr = new BasicType("eBasicTypeNullPtr");
+  public static final BasicType eBasicTypeOther = new BasicType("eBasicTypeOther");
 
   public final int swigValue() {
     return swigValue;
@@ -57,9 +57,9 @@ public final class BasicType {
   public static BasicType swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-    for (int i = 0; i < swigValues.length; i++)
-      if (swigValues[i].swigValue == swigValue)
-        return swigValues[i];
+      for (BasicType value : swigValues)
+          if (value.swigValue == swigValue)
+              return value;
     throw new IllegalArgumentException("No enum " + BasicType.class + " with value " + swigValue);
   }
 

@@ -11,11 +11,11 @@ public final class GFileUtilityMethods {
 	private static final String GHIDRA_FILE_SYSTEM_PREFIX = "ghidra_file_system_";
 	private static final String GHIDRA_FILE_SYSTEM_SUFFIX = ".tmp";
 
-	public final static File writeTemporaryFile( InputStream inputStream ) throws IOException {
+	public static final File writeTemporaryFile(InputStream inputStream ) throws IOException {
 		return writeTemporaryFile( inputStream , Integer.MAX_VALUE );
 	}
 
-	public final static File writeTemporaryFile( InputStream inputStream, int maxBytesToWrite ) throws IOException {
+	public static final File writeTemporaryFile(InputStream inputStream, int maxBytesToWrite ) throws IOException {
 		File tempOutputFile = File.createTempFile( GHIDRA_FILE_SYSTEM_PREFIX, GHIDRA_FILE_SYSTEM_SUFFIX );
 		tempOutputFile.deleteOnExit();
 		OutputStream outputStream = new FileOutputStream( tempOutputFile );
@@ -40,15 +40,17 @@ public final class GFileUtilityMethods {
 		return tempOutputFile;
 	}
 
-	public final static File writeTemporaryFile( byte [] bytes, String prefix ) throws IOException {
+	public static final File writeTemporaryFile(byte [] bytes, String prefix ) throws IOException {
 		if ( prefix == null ) {
 			prefix = GHIDRA_FILE_SYSTEM_PREFIX;
 		}
 		if ( prefix.length() < 3 ) {//temp file prefix must be at least 3 chars in length
-			for ( int i = prefix.length() ; i < 3 ; ++i ) {
-				prefix = prefix + '_';
+            StringBuilder prefixBuilder = new StringBuilder(prefix);
+            for (int i = prefixBuilder.length(); i < 3 ; ++i ) {
+				prefixBuilder.append('_');
 			}
-		}
+            prefix = prefixBuilder.toString();
+        }
 		File tempFile = File.createTempFile( prefix , GHIDRA_FILE_SYSTEM_SUFFIX );
 		tempFile.deleteOnExit();
 		OutputStream tempFileOut = new FileOutputStream( tempFile );

@@ -38,8 +38,7 @@ public class BookmarkMergerNoteTest extends AbstractListingMergeManagerTest {
 	// 1002323 Note cat
 
 	public BookmarkMergerNoteTest() {
-		super();
-	}
+    }
 
 	@Override
 	protected ProgramMultiUserMergeManager createMergeManager(ProgramChangeSet resultChangeSet,

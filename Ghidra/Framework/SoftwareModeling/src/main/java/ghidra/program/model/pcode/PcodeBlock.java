@@ -36,21 +36,21 @@ public class PcodeBlock {
 	private ArrayList<BlockEdge> intothis;						// Blocks flowing into this block
 	private ArrayList<BlockEdge> outofthis;						// Blocks into which this block flows
 
-	public final static int PLAIN = 0;
-	public final static int BASIC = 1;
-	public final static int GRAPH = 2;
-	public final static int COPY = 3;
-	public final static int GOTO = 4;
-	public final static int MULTIGOTO = 5;
-	public final static int LIST = 6;
-	public final static int CONDITION = 7;
-	public final static int PROPERIF = 8;
-	public final static int IFELSE = 9;
-	public final static int IFGOTO = 10;
-	public final static int WHILEDO = 11;
-	public final static int DOWHILE = 12;
-	public final static int SWITCH = 13;
-	public final static int INFLOOP = 14;
+	public static final int PLAIN = 0;
+	public static final int BASIC = 1;
+	public static final int GRAPH = 2;
+	public static final int COPY = 3;
+	public static final int GOTO = 4;
+	public static final int MULTIGOTO = 5;
+	public static final int LIST = 6;
+	public static final int CONDITION = 7;
+	public static final int PROPERIF = 8;
+	public static final int IFELSE = 9;
+	public static final int IFGOTO = 10;
+	public static final int WHILEDO = 11;
+	public static final int DOWHILE = 12;
+	public static final int SWITCH = 13;
+	public static final int INFLOOP = 14;
 
 	public static String typeToName(int type) {
 		switch (type) {
@@ -331,7 +331,7 @@ public class PcodeBlock {
 			if (leaf == null) {
 				return -1;
 			}
-			leaf = leaf.getParent();
+			leaf = leaf.parent;
 			depth += 1;
 		}
 		return depth;

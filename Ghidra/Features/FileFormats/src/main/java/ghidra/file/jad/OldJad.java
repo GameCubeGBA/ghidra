@@ -110,7 +110,7 @@ class OldJad {
 		String stdinMessages = readStdinMessagesFromProcess(process, monitor);
 
 		if (SystemUtilities.isInDevelopmentMode()) {
-			if (stdinMessages != null && stdinMessages.length() > 0) {
+			if (stdinMessages != null && !stdinMessages.isEmpty()) {
 				System.out.println(stdinMessages);
 			}
 		}
@@ -118,7 +118,7 @@ class OldJad {
 		String stderrMessages = readStderrMessagesFromProcess(process, monitor);
 
 		if (SystemUtilities.isInDevelopmentMode()) {
-			if (stderrMessages != null && stderrMessages.length() > 0) {
+			if (stderrMessages != null && !stderrMessages.isEmpty()) {
 				System.out.println(stderrMessages);
 			}
 		}

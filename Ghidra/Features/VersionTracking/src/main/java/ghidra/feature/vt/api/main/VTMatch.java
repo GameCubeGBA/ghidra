@@ -26,34 +26,34 @@ import ghidra.program.model.address.Address;
  */
 
 public interface VTMatch {
-	public static final String BYTES_LENGTH_TYPE = "bytes";
-	public static final String INSTRUCTIONS_LENGTH_TYPE = "instructions";
-	public static final String AL_LINES_LENGTH_TYPE = "AL lines";
+	String BYTES_LENGTH_TYPE = "bytes";
+	String INSTRUCTIONS_LENGTH_TYPE = "instructions";
+	String AL_LINES_LENGTH_TYPE = "AL lines";
 
 	/**
 	 * returns the VTMatchSet that contains this match.
 	 * @return the VTMatchSet that contains this match.
 	 */
-	public VTMatchSet getMatchSet();
+    VTMatchSet getMatchSet();
 
 	/**
 	 * Returns the VTAssocation that this match is suggesting.
 	 * @return the VTAssocation for this match.
 	 */
-	public VTAssociation getAssociation();
+    VTAssociation getAssociation();
 
 	/**
 	 * Returns the tag that has been applied to this match or null if not tagged.
 	 * @return the tag that has been applied to this match or null if not tagged.
 	 */
-	public VTMatchTag getTag();
+    VTMatchTag getTag();
 
 	/**
 	 * Sets the tag for this match.  Any previous tag is replaced. A value of null will remove
 	 * any existing tag.
 	 * @param tag the tag to set on this match.
 	 */
-	public void setTag(VTMatchTag tag);
+    void setTag(VTMatchTag tag);
 
 	/**
 	 * Returns a score that attempts to indicate how similar the associated items are to each other
@@ -62,7 +62,7 @@ public interface VTMatch {
 	 * match.
 	 * @return the score that attempts to indication how similar the items are. 
 	 */
-	public VTScore getSimilarityScore();
+    VTScore getSimilarityScore();
 
 	/**
 	 * Returns a confidence score which is generally a combination of the similarity score and some
@@ -71,30 +71,30 @@ public interface VTMatch {
 	 * Comparing scores from different algorithms is meaningless.
 	 * @return
 	 */
-	public VTScore getConfidenceScore();
+    VTScore getConfidenceScore();
 
 	/**
 	 * Returns the address in the source program for a match.
 	 * @return the address in the source program
 	 */
-	public Address getSourceAddress();
+    Address getSourceAddress();
 
 	/**
 	 * Returns the address in the destination program for a match.
 	 * @return the address in the destination
 	 */
-	public Address getDestinationAddress();
+    Address getDestinationAddress();
 
 	/**
 	 * Returns the length of the source function or data.
 	 * @return the length of the source function or data.
 	 */
-	public int getSourceLength();
+    int getSourceLength();
 
 	/**
 	 * Returns the length of the destination function or data.
 	 * @return the length of the destination function or data.
 	 */
-	public int getDestinationLength();
+    int getDestinationLength();
 
 }

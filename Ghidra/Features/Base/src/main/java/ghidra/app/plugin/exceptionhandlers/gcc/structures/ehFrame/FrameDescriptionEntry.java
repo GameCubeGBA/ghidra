@@ -538,7 +538,7 @@ public class FrameDescriptionEntry extends GccAnalysisClass {
 		/*
 		 * If the first character is a 'z', Augmentation Data is included.
 		 */
-		if (addr != null && cieAugmentationString != null && cieAugmentationString.length() > 0 &&
+		if (addr != null && cieAugmentationString != null && !cieAugmentationString.isEmpty() &&
 			cieAugmentationString.charAt(0) == 'z') {
 
 			// Create the Augmentation Data Length & Augmentation Data fields
@@ -745,7 +745,7 @@ public class FrameDescriptionEntry extends GccAnalysisClass {
 	private void updateAugmentationDataEx() throws MemoryAccessException {
 		augmentationDataEx = new byte[intAugmentationDataExLength];
 
-		program.getMemory().getBytes(getAugmentationExDataAddress(), augmentationDataEx);
+		program.getMemory().getBytes(augmentationDataExAddr, augmentationDataEx);
 	}
 
 	/**

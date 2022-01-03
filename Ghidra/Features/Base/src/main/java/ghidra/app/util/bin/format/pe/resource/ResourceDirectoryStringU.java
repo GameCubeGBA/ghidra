@@ -32,7 +32,7 @@ import ghidra.util.exception.DuplicateNameException;
  * </pre>
  */
 public class ResourceDirectoryStringU implements StructConverter {
-	public final static String NAME = "IMAGE_RESOURCE_DIR_STRING_U";
+	public static final String NAME = "IMAGE_RESOURCE_DIR_STRING_U";
 
     private short  length;
     private String nameString;

@@ -44,8 +44,8 @@ import ghidra.util.task.*;
 
 public class DataSettingsDialog extends DialogComponentProvider {
 
-	private final static int WIDTH = 350;
-	private final static int HEIGHT = 150;
+	private static final int WIDTH = 350;
+	private static final int HEIGHT = 150;
 
 	private static String[] BOOLEAN_CHOICES = { "yes", "no" };
 	private static String NO_CHOICE = "";
@@ -718,8 +718,8 @@ public class DataSettingsDialog extends DialogComponentProvider {
 
 	static class SettingsEditor extends AbstractCellEditor implements TableCellEditor {
 
-		final static int ENUM = 0;
-		final static int BOOLEAN = 1;
+		static final int ENUM = 0;
+		static final int BOOLEAN = 1;
 
 		private int mode;
 		private GComboBox<String> comboBox = new GComboBox<>();

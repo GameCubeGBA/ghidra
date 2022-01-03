@@ -71,7 +71,7 @@ public class DataTypeDropDownSelectionDataModel implements DropDownTextFieldData
 
 	@Override
 	public List<DataType> getMatchingData(String searchText) {
-		if (searchText == null || searchText.length() == 0) {
+		if (searchText == null || searchText.isEmpty()) {
 			return Collections.emptyList();
 		}
 

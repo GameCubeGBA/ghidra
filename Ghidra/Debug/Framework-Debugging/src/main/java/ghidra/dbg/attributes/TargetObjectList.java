@@ -20,7 +20,7 @@ import java.util.*;
 import ghidra.dbg.target.TargetObject;
 
 public interface TargetObjectList<T extends TargetObject> extends List<T> {
-	public static class EmptyTargetObjectRefList<T extends TargetObject> extends AbstractList<T>
+	class EmptyTargetObjectRefList<T extends TargetObject> extends AbstractList<T>
 			implements TargetObjectList<T> {
 		@Override
 		public T get(int index) {
@@ -33,20 +33,20 @@ public interface TargetObjectList<T extends TargetObject> extends List<T> {
 		}
 	}
 
-	public static class DefaultTargetObjectList<T extends TargetObject> extends ArrayList<T>
+	class DefaultTargetObjectList<T extends TargetObject> extends ArrayList<T>
 			implements TargetObjectList<T> {
 		// Nothing to add
 	}
 
-	public static final TargetObjectList<?> EMPTY = new EmptyTargetObjectRefList<>();
+	TargetObjectList<?> EMPTY = new EmptyTargetObjectRefList<>();
 
 	@SuppressWarnings("unchecked")
-	public static <T extends TargetObject> TargetObjectList<T> of() {
+    static <T extends TargetObject> TargetObjectList<T> of() {
 		return (TargetObjectList<T>) EMPTY;
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <T extends TargetObject> TargetObjectList<T> of(T... e) {
+    static <T extends TargetObject> TargetObjectList<T> of(T... e) {
 		DefaultTargetObjectList<T> list = new DefaultTargetObjectList<>();
 		list.addAll(List.of(e));
 		return list;

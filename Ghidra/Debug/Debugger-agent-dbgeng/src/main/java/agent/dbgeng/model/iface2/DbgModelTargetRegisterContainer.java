@@ -21,6 +21,6 @@ import ghidra.dbg.target.TargetRegisterContainer;
 public interface DbgModelTargetRegisterContainer
 		extends DbgModelTargetObject, TargetRegisterContainer {
 
-	public DbgModelTargetRegister getTargetRegister(DbgRegister register);
+	DbgModelTargetRegister getTargetRegister(DbgRegister register);
 
 }

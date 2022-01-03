@@ -112,7 +112,7 @@ import utility.application.ApplicationLayout;
  */
 public abstract class ProcessorEmulatorTestAdapter extends TestCase implements ExecutionListener {
 
-	public final static String BATCH_MODE_OUTPUT_DIR =
+	public static final String BATCH_MODE_OUTPUT_DIR =
 		System.getProperty("ghidra.test.property.output.dir");
 
 	// If pcodetests data directory can not be found for the module containing the junit,
@@ -538,7 +538,7 @@ public abstract class ProcessorEmulatorTestAdapter extends TestCase implements E
 
 		try {
 			instance.setUp();
-			if (instance.testGroupMap == null || instance.testGroupMap.size() == 0) {
+			if (instance.testGroupMap == null || instance.testGroupMap.isEmpty()) {
 				return getTestFailure(emulatorTestClass, "No test binaries found", null);
 			}
 			ArrayList<PCodeTestGroup> testGroups = new ArrayList<>(instance.testGroupMap.values());
@@ -645,7 +645,7 @@ public abstract class ProcessorEmulatorTestAdapter extends TestCase implements E
 					}
 				}
 
-				buf.append(instr.toString());
+				buf.append(instr);
 
 				if (instr.getDelaySlotDepth() != 0) {
 					buf.append(" (delay-slots not shown)");
@@ -685,12 +685,8 @@ public abstract class ProcessorEmulatorTestAdapter extends TestCase implements E
 				buf2.append(testRunner.getRegisterValueString(reg));
 				buf2.append(' ');
 				int diff = buf1.length() - buf2.length();
-				for (int n = diff; n < 0; n++) {
-					buf1.append(' ');
-				}
-				for (int n = diff; n > 0; n--) {
-					buf2.append(' ');
-				}
+                buf1.append(" ".repeat(Math.max(0, 0 - diff)));
+                buf2.append(" ".repeat(Math.max(0, diff)));
 			}
 			if (buf1.length() > 1) {
 				log(testRunner.getTestGroup(), buf1.toString());
@@ -699,7 +695,7 @@ public abstract class ProcessorEmulatorTestAdapter extends TestCase implements E
 		}
 	}
 
-	private static abstract class DumpFormatter {
+	private abstract static class DumpFormatter {
 		final int elementSize;
 		final boolean bigEndian;
 
@@ -1056,7 +1052,7 @@ public abstract class ProcessorEmulatorTestAdapter extends TestCase implements E
 			data.traceLog = new PrintWriter(new BufferedWriter(
 				new OutputStreamWriter(new FileOutputStream(data.traceFile, true))));
 
-			data.traceLog.println((new Date()).toString());
+			data.traceLog.println((new Date()));
 
 			return data;
 		}
@@ -1102,7 +1098,7 @@ public abstract class ProcessorEmulatorTestAdapter extends TestCase implements E
 			}
 		}
 
-		if (testGroupName == null || testGroupName.length() == 0) {
+		if (testGroupName == null || testGroupName.isEmpty()) {
 			fail("Empty test group name");
 		}
 
@@ -1238,7 +1234,7 @@ public abstract class ProcessorEmulatorTestAdapter extends TestCase implements E
 				failTest(testRunner,
 					"ERROR Unexpected number of assertions ( " + passFailText + " )");
 			}
-			if (fail != 0 || callOtherErrors != 0 || testFailures.size() != 0) {
+			if (fail != 0 || callOtherErrors != 0 || !testFailures.isEmpty()) {
 				failTest(testRunner,
 					"ERROR One or more group tests failed ( " + passFailText + " )");
 			}
@@ -1724,8 +1720,7 @@ public abstract class ProcessorEmulatorTestAdapter extends TestCase implements E
 			}
 		}
 		Collections.sort(list);
-		for (int i = 0; i < list.size(); i++) {
-			String relativePath = list.get(i);
+		for (String relativePath : list) {
 			testFiles.add(new PCodeTestFile(new File(testResourceDir, relativePath), relativePath));
 		}
 		return testFiles;
@@ -1852,7 +1847,7 @@ public abstract class ProcessorEmulatorTestAdapter extends TestCase implements E
 			resourcesTestDataDir);
 		testFiles = findBinaryTestFiles(resourcesTestDataDir);
 
-		if (testFiles.size() == 0) {
+		if (testFiles.isEmpty()) {
 			throw new AssertException("No test binaries found");
 		}
 

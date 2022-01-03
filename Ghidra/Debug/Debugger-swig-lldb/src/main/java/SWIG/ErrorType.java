@@ -12,12 +12,12 @@
 package SWIG;
 
 public final class ErrorType {
-  public final static ErrorType eErrorTypeInvalid = new ErrorType("eErrorTypeInvalid");
-  public final static ErrorType eErrorTypeGeneric = new ErrorType("eErrorTypeGeneric");
-  public final static ErrorType eErrorTypeMachKernel = new ErrorType("eErrorTypeMachKernel");
-  public final static ErrorType eErrorTypePOSIX = new ErrorType("eErrorTypePOSIX");
-  public final static ErrorType eErrorTypeExpression = new ErrorType("eErrorTypeExpression");
-  public final static ErrorType eErrorTypeWin32 = new ErrorType("eErrorTypeWin32");
+  public static final ErrorType eErrorTypeInvalid = new ErrorType("eErrorTypeInvalid");
+  public static final ErrorType eErrorTypeGeneric = new ErrorType("eErrorTypeGeneric");
+  public static final ErrorType eErrorTypeMachKernel = new ErrorType("eErrorTypeMachKernel");
+  public static final ErrorType eErrorTypePOSIX = new ErrorType("eErrorTypePOSIX");
+  public static final ErrorType eErrorTypeExpression = new ErrorType("eErrorTypeExpression");
+  public static final ErrorType eErrorTypeWin32 = new ErrorType("eErrorTypeWin32");
 
   public final int swigValue() {
     return swigValue;
@@ -30,9 +30,9 @@ public final class ErrorType {
   public static ErrorType swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-    for (int i = 0; i < swigValues.length; i++)
-      if (swigValues[i].swigValue == swigValue)
-        return swigValues[i];
+      for (ErrorType value : swigValues)
+          if (value.swigValue == swigValue)
+              return value;
     throw new IllegalArgumentException("No enum " + ErrorType.class + " with value " + swigValue);
   }
 

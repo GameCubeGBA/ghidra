@@ -212,7 +212,7 @@ public class MDDataType extends MDType {
 //			builder.insertSpacedString(CONST);
 //		}
 
-		if (getTypeName().length() != 0) {
+		if (!getTypeName().isEmpty()) {
 			if (builder.length() != 0) {
 				dmang.insertString(builder, " ");
 			}

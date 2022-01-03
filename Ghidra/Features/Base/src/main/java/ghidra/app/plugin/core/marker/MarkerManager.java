@@ -55,8 +55,8 @@ import ghidra.util.task.SwingUpdateManager;
  */
 public class MarkerManager implements MarkerService {
 
-	private final static String POPUP_WINDOW_NAME = "Bookmark ToolTip Window";
-	private final static int MAX_TOOLTIP_LINES = 10;
+	private static final String POPUP_WINDOW_NAME = "Bookmark ToolTip Window";
+	private static final int MAX_TOOLTIP_LINES = 10;
 
 	private MarkerPanel markerPanel;
 	private NavigationPanel navigationPanel;
@@ -321,13 +321,11 @@ public class MarkerManager implements MarkerService {
 		}
 
 		int viewHeight = panel.getHeight() - MarkerSetImpl.MARKER_HEIGHT;
-		Iterator<MarkerSetImpl> it = currentMarkerSets.iterator();
-		while (it.hasNext()) {
-			MarkerSetImpl markers = it.next();
-			if (markers.active) {
-				markers.paintNavigation(g, viewHeight, panel, addrMap);
-			}
-		}
+        for (MarkerSetImpl markers : currentMarkerSets) {
+            if (markers.active) {
+                markers.paintNavigation(g, viewHeight, panel, addrMap);
+            }
+        }
 	}
 
 	/**
@@ -473,11 +471,9 @@ public class MarkerManager implements MarkerService {
 
 	private void updateMarkerSets(boolean updateMarkers, boolean updateNavigation,
 			boolean updateNow) {
-		Iterator<MarkerSetImpl> it = currentMarkerSets.iterator();
-		while (it.hasNext()) {
-			MarkerSetImpl marker = it.next();
-			marker.updateView(updateMarkers, updateNavigation);
-		}
+        for (MarkerSetImpl marker : currentMarkerSets) {
+            marker.updateView(updateMarkers, updateNavigation);
+        }
 
 		if (updateNow) {
 			updater.updateNow();
@@ -872,7 +868,7 @@ public class MarkerManager implements MarkerService {
 	 * are added, the older items will be removed from this map the given plugin.
 	 */
 	static class AddressColorCache extends FixedSizeHashMap<Address, Color> {
-		private final static int MAX_SIZE = 50;
+		private static final int MAX_SIZE = 50;
 
 		AddressColorCache() {
 			super(MAX_SIZE, MAX_SIZE);

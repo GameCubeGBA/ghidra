@@ -136,7 +136,7 @@ public class FGProvider extends VisualGraphComponentProvider<FGVertex, FGEdge, F
 	@Override
 	public boolean isSnapshot() {
 		// we are a snapshot when we are 'disconnected' 
-		return !isConnected();
+		return !isConnected;
 	}
 
 	public void setClipboardService(ClipboardService service) {
@@ -365,7 +365,7 @@ public class FGProvider extends VisualGraphComponentProvider<FGVertex, FGEdge, F
 		String title = result.first;
 		String subTitle = result.second;
 
-		if (!isConnected()) {
+		if (!isConnected) {
 			title = "[" + title + "]";
 		}
 
@@ -665,19 +665,17 @@ public class FGProvider extends VisualGraphComponentProvider<FGVertex, FGEdge, F
 
 		AddressSet addresses = new AddressSet();
 
-		Iterator<DomainObjectChangeRecord> iterator = ev.iterator();
-		while (iterator.hasNext()) {
-			DomainObjectChangeRecord record = iterator.next();
-			if (record instanceof ProgramChangeRecord) {
-				ProgramChangeRecord programRecord = (ProgramChangeRecord) record;
-				Address start = programRecord.getStart();
-				Address end = programRecord.getEnd();
+        for (DomainObjectChangeRecord record : ev) {
+            if (record instanceof ProgramChangeRecord) {
+                ProgramChangeRecord programRecord = (ProgramChangeRecord) record;
+                Address start = programRecord.getStart();
+                Address end = programRecord.getEnd();
 
-				if (start != null && end != null) {
-					addresses.addRange(start, end);
-				}
-			}
-		}
+                if (start != null && end != null) {
+                    addresses.addRange(start, end);
+                }
+            }
+        }
 
 		controller.invalidateCacheForAddresses(addresses);
 	}
@@ -740,7 +738,7 @@ public class FGProvider extends VisualGraphComponentProvider<FGVertex, FGEdge, F
 		//
 		Graph<FGVertex, FGEdge> graph = functionGraph;
 		Collection<FGEdge> inEdgesForDestination = graph.getInEdges(destinationVertex);
-		if (inEdgesForDestination.size() == 0) {
+		if (inEdgesForDestination.isEmpty()) {
 			// must be in a dirty state with vertices and edges that don't match reality
 			return;
 		}
@@ -847,7 +845,7 @@ public class FGProvider extends VisualGraphComponentProvider<FGVertex, FGEdge, F
 		//
 		Graph<FGVertex, FGEdge> graph = functionGraph;
 		Collection<FGEdge> inEdgesForDestination = graph.getInEdges(destinationVertex);
-		if (inEdgesForDestination.size() == 0) {
+		if (inEdgesForDestination.isEmpty()) {
 			// must be in a dirty state with vertices and edges that don't match reality
 			return;
 		}
@@ -1038,7 +1036,7 @@ public class FGProvider extends VisualGraphComponentProvider<FGVertex, FGEdge, F
 
 	@Override
 	public String getWindowGroup() {
-		if (isConnected()) {
+		if (isConnected) {
 			return FunctionGraphPlugin.FUNCTION_GRAPH_NAME;
 		}
 		return "disconnected";
@@ -1255,7 +1253,7 @@ public class FGProvider extends VisualGraphComponentProvider<FGVertex, FGEdge, F
 	@Override
 	public boolean goTo(Program gotoProgram, ProgramLocation location) {
 		if (gotoProgram != currentProgram) {
-			if (!isConnected()) {
+			if (!isConnected) {
 				tool.setStatusInfo("Program location not applicable for this provider!");
 				return false;
 			}
@@ -1301,7 +1299,7 @@ public class FGProvider extends VisualGraphComponentProvider<FGVertex, FGEdge, F
 
 	@Override
 	public Icon getIcon() {
-		if (isConnected()) {
+		if (isConnected) {
 			return super.getIcon();
 		}
 

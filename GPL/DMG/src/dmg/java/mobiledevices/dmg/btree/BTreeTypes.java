@@ -6,9 +6,9 @@ package mobiledevices.dmg.btree;
 public final class BTreeTypes {
 
 	/** Control file */
-	public final static byte kHFSBTreeType       =  (byte)0;
+    public static final byte kHFSBTreeType       = 0;
 	/** User bTree types start from 128 */
-	public final static byte kUserBTreeType      =  (byte)128;
+    public static final byte kUserBTreeType      =  (byte)128;
 	/** */
-	public final static byte kReservedBTreeType  =  (byte)255;
+    public static final byte kReservedBTreeType  =  (byte)255;
 }

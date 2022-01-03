@@ -16,7 +16,7 @@
 package ghidra.file.crypto;
 
 public final class CryptoKey {
-	public final static CryptoKey NOT_ENCRYPTED_KEY = new CryptoKey(null,null);
+	public static final CryptoKey NOT_ENCRYPTED_KEY = new CryptoKey(null,null);
 
 	public final byte [] key;
 	public final byte [] iv;

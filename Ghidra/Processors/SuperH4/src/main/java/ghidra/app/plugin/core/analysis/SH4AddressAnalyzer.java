@@ -42,7 +42,7 @@ public class SH4AddressAnalyzer extends ConstantPropagationAnalyzer {
 
 	protected Register r12;
 
-	private final static String PROCESSOR_NAME = "SuperH4";
+	private static final String PROCESSOR_NAME = "SuperH4";
 
 	public SH4AddressAnalyzer() {
 		super(PROCESSOR_NAME);
@@ -135,7 +135,7 @@ public class SH4AddressAnalyzer extends ConstantPropagationAnalyzer {
 
 		// force the reference on the first operand for bsrf
 		String mnemonic = instr.getMnemonicString();
-		if (mnemonic.equals("bsrf") || mnemonic.equals("braf")) {
+		if ("bsrf".equals(mnemonic) || "braf".equals(mnemonic)) {
 			instr.addOperandReference(0, address, refType, SourceType.ANALYSIS);
 
 			// need to handle disassembly too

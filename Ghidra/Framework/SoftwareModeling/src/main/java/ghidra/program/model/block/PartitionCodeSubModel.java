@@ -66,11 +66,11 @@ public class PartitionCodeSubModel implements SubroutineBlockModel {
 	private CodeBlockCache foundModelP;     // cache for model-P subroutine
 	private MultEntSubModel modelM;
 
-	private final static CodeBlock[] emptyArray = {};
+	private static final CodeBlock[] emptyArray = {};
 
 	// create graph and the vertex attributes associated with the graph
-	private final static String ENTRY_POINT_TAG = "Entry Point Tag";
-	private final static String SOURCE_NUMBER = "Source Number";
+    private static final String ENTRY_POINT_TAG = "Entry Point Tag";
+	private static final String SOURCE_NUMBER = "Source Number";
 	private String attributeType = AttributeManager.INTEGER_TYPE;
 
 	private DirectedGraph g;
@@ -247,7 +247,7 @@ public class PartitionCodeSubModel implements SubroutineBlockModel {
 		}
 
 		// Check for fall-through condition
-		Instruction inst = getListing().getInstructionBefore(start);
+		Instruction inst = listing.getInstructionBefore(start);
 		if (inst != null) {
 			Address a = inst.getFallThrough();
 			if (start.equals(a)) {
@@ -544,47 +544,41 @@ public class PartitionCodeSubModel implements SubroutineBlockModel {
 					if (children.isEmpty()) {
 						continue;
 					}
-					Iterator<Vertex> childIter = children.iterator();
-					while (childIter.hasNext()) {
-						Vertex child = childIter.next();
+                    for (Vertex child : children) {
+                        // check to see if child has already been labeled
+                        //  if not, give it label of current source
+                        int sourceValue = 0;
+                        try {
+                            sourceValue = sourceNumber.getValue(child);
+                            if (sourceValue == i + 1) { // there's a cycle -- need to break out
+                                continue;
+                            }
+                        } catch (NoValueException nVE) {
+                            sourceValue = i + 1;
+                        }
 
-						// check to see if child has already been labeled
-						//  if not, give it label of current source
-						int sourceValue = 0;
-						try {
-							sourceValue = sourceNumber.getValue(child);
-							if (sourceValue == i + 1) { // there's a cycle -- need to break out
-								continue;
-							}
-						}
-						catch (NoValueException nVE) {
-							sourceValue = i + 1;
-						}
+                        // If child's label is the same as the source, continue traversing graph
+                        // If child's label differs from source, we found a new entry point!
+                        //  In later case, don't traverse graph -- removing incoming edges
+                        //  and add to entryList
+                        if (sourceValue == i + 1) {
+                            todoStack.addLast(child);
+                        } else {
+                            // remove all edges going into child
+                            Set<Edge> incomingEdges = g.getIncomingEdges(child);
+                            for (Edge incomingEdge : incomingEdges) {
+                                g.remove(incomingEdge);
+                            }
 
-						// If child's label is the same as the source, continue traversing graph
-						// If child's label differs from source, we found a new entry point!
-						//  In later case, don't traverse graph -- removing incoming edges
-						//  and add to entryList
-						if (sourceValue == i + 1) {
-							todoStack.addLast(child);
-						}
-						else {
-							// remove all edges going into child
-							Set<Edge> incomingEdges = g.getIncomingEdges(child);
-							Iterator<Edge> edgeIter = incomingEdges.iterator();
-							while (edgeIter.hasNext()) {
-								g.remove(edgeIter.next());
-							}
+                            // add child to entryList
+                            entryList.addLast(child);
 
-							// add child to entryList
-							entryList.addLast(child);
+                            // child has entry point
+                            entAttribute.setValue(child, 0);
 
-							// child has entry point
-							entAttribute.setValue(child, 0);
-
-							sourceListIsGrowing = true;
-						}
-					}
+                            sourceListIsGrowing = true;
+                        }
+                    }
 				}
 			}
 		}

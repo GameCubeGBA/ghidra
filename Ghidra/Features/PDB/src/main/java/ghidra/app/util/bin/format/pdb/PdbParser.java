@@ -55,7 +55,7 @@ public class PdbParser {
 	static final String STRUCTURE_KIND = "Structure";
 	static final String UNION_KIND = "Union";
 
-	public final static boolean onWindows =
+	public static final boolean onWindows =
 		(Platform.CURRENT_PLATFORM.getOperatingSystem() == OperatingSystem.WINDOWS);
 
 	public enum PdbFileType {
@@ -358,7 +358,7 @@ public class PdbParser {
 					continue;
 				}
 //				long start = System.currentTimeMillis();
-				if (element.getName().equals("pdb")) {
+				if ("pdb".equals(element.getName())) {
 					/*
 					String exe = element.getAttribute("exe");
 					exe = (exe == null ? "" : exe.toLowerCase());
@@ -368,26 +368,26 @@ public class PdbParser {
 					}
 					*/
 				}
-				else if (element.getName().equals("enums")) {
+				else if ("enums".equals(element.getName())) {
 					// apply enums - no data type dependencies
 					ApplyEnums.applyTo(parser, this, monitor, log);
 				}
-				else if (element.getName().equals("datatypes")) {
+				else if ("datatypes".equals(element.getName())) {
 					if (applyDataTypes == null) {
 						applyDataTypes = new ApplyDataTypes(this, log);
 					}
 					applyDataTypes.preProcessDataTypeList(parser, false, monitor);
 				}
-				else if (element.getName().equals("classes")) {
+				else if ("classes".equals(element.getName())) {
 					if (applyDataTypes == null) {
 						applyDataTypes = new ApplyDataTypes(this, log);
 					}
 					applyDataTypes.preProcessDataTypeList(parser, true, monitor);
 				}
-				else if (element.getName().equals("typedefs")) {
+				else if ("typedefs".equals(element.getName())) {
 					applyTypeDefs = new ApplyTypeDefs(this, parser, monitor, log);
 				}
-				else if (element.getName().equals("functions")) {
+				else if ("functions".equals(element.getName())) {
 					// apply functions (must occur within XML after all type sections)
 					if (!typesFlushed) {
 						completeDefferedTypeParsing(applyDataTypes, applyTypeDefs, log);
@@ -395,7 +395,7 @@ public class PdbParser {
 					}
 					ApplyFunctions.applyTo(this, parser, monitor, log);
 				}
-				else if (element.getName().equals("tables")) {
+				else if ("tables".equals(element.getName())) {
 					// apply tables (must occur within XML after all other sections)
 					if (!typesFlushed) {
 						completeDefferedTypeParsing(applyDataTypes, applyTypeDefs, log);
@@ -664,7 +664,7 @@ public class PdbParser {
 			}
 		}
 
-		if (warning.length() > 0) {
+		if (!warning.isEmpty()) {
 			if (SystemUtilities.isInHeadlessMode()) {
 				throw new PdbException(warning + ".. Skipping PDB processing.");
 			}
@@ -903,11 +903,8 @@ public class PdbParser {
 
 		// All forms of Undefined data are replaceable
 		// TODO: maybe it should check the length of the data type before putting it down.
-		if (Undefined.isUndefined(dataType)) {
-			return true;
-		}
-		return false;
-	}
+        return Undefined.isUndefined(dataType);
+    }
 
 	private boolean isEquivalent(Data existingData, int existingDataTypeLength,
 			DataType newDataType) {
@@ -916,9 +913,7 @@ public class PdbParser {
 				Array array = (Array) newDataType;
 				DataType arrayDataType = array.getDataType();
 				if (arrayDataType instanceof ArrayStringable) {
-					if (array.getLength() == existingDataTypeLength) {
-						return true;
-					}
+                    return array.getLength() == existingDataTypeLength;
 				}
 			}
 		}

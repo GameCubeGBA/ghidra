@@ -51,8 +51,7 @@ public class AutoRenamePluginTest extends AbstractGhidraHeadedIntegrationTest {
 	private CodeBrowserPlugin cb;
 
 	public AutoRenamePluginTest() {
-		super();
-	}
+    }
 
 	@Before
 	public void setUp() throws Exception {

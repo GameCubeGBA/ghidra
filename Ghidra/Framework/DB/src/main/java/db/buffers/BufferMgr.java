@@ -423,39 +423,35 @@ public class BufferMgr {
 
 				// Dispose all buffer nodes - speeds up garbage collection
 				if (checkpointHeads != null) {
-					Iterator<BufferNode> iter = checkpointHeads.iterator();
-					while (iter.hasNext()) {
-						BufferNode node = iter.next();
-						while (node != null) {
-							BufferNode next = node.nextInCheckpoint;
-							node.buffer = null;
-							node.nextCached = null;
-							node.prevCached = null;
-							node.nextInCheckpoint = null;
-							node.prevInCheckpoint = null;
-							node.nextVersion = null;
-							node.prevVersion = null;
-							node = next;
-						}
-					}
+                    for (BufferNode node : checkpointHeads) {
+                        while (node != null) {
+                            BufferNode next = node.nextInCheckpoint;
+                            node.buffer = null;
+                            node.nextCached = null;
+                            node.prevCached = null;
+                            node.nextInCheckpoint = null;
+                            node.prevInCheckpoint = null;
+                            node.nextVersion = null;
+                            node.prevVersion = null;
+                            node = next;
+                        }
+                    }
 					checkpointHeads = null;
 				}
 				if (redoCheckpointHeads != null) {
-					Iterator<BufferNode> iter = redoCheckpointHeads.iterator();
-					while (iter.hasNext()) {
-						BufferNode node = iter.next();
-						while (node != null) {
-							BufferNode next = node.nextInCheckpoint;
-							node.buffer = null;
-							node.nextCached = null;
-							node.prevCached = null;
-							node.nextInCheckpoint = null;
-							node.prevInCheckpoint = null;
-							node.nextVersion = null;
-							node.prevVersion = null;
-							node = next;
-						}
-					}
+                    for (BufferNode node : redoCheckpointHeads) {
+                        while (node != null) {
+                            BufferNode next = node.nextInCheckpoint;
+                            node.buffer = null;
+                            node.nextCached = null;
+                            node.prevCached = null;
+                            node.nextInCheckpoint = null;
+                            node.prevInCheckpoint = null;
+                            node.nextVersion = null;
+                            node.prevVersion = null;
+                            node = next;
+                        }
+                    }
 					redoCheckpointHeads = null;
 				}
 				bufferTable = null;
@@ -542,9 +538,9 @@ public class BufferMgr {
 		if (cnt == 0) {
 			return;
 		}
-		for (int i = 0; i < cnt; i++) {
-			disposeNodeList(redoCheckpointHeads.get(i));
-		}
+        for (BufferNode redoCheckpointHead : redoCheckpointHeads) {
+            disposeNodeList(redoCheckpointHead);
+        }
 		redoCheckpointHeads.clear();
 	}
 
@@ -1234,7 +1230,7 @@ public class BufferMgr {
 	 * @return true if redo is available
 	 */
 	public boolean hasRedoCheckpoints() {
-		return redoCheckpointHeads.size() != 0;
+		return !redoCheckpointHeads.isEmpty();
 	}
 
 	/**
@@ -2013,7 +2009,7 @@ public class BufferMgr {
 		buf.append(currentCheckpoint);
 		if (sourceFile != null) {
 			buf.append("\n Source file: ");
-			buf.append(sourceFile.toString());
+			buf.append(sourceFile);
 		}
 		buf.append("\n Cache file: ");
 		buf.append(cacheFile.toString());

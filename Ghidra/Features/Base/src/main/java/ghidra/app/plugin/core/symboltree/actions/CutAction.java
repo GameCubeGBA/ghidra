@@ -38,7 +38,7 @@ import ghidra.app.plugin.core.symboltree.nodes.SymbolTreeNode;
 import resources.ResourceManager;
 
 public class CutAction extends SymbolTreeContextAction {
-	private final static Icon CUT_ICON = ResourceManager.loadImage("images/edit-cut22.png");
+	private static final Icon CUT_ICON = ResourceManager.loadImage("images/edit-cut22.png");
 	private final SymbolTreeProvider provider;
 	private ClipboardOwner clipboardOwner;
 

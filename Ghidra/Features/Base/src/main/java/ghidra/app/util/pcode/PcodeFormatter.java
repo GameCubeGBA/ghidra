@@ -150,7 +150,7 @@ public class PcodeFormatter {
 			if (buf.length() != 0) {
 				buf.append(EOL);
 			}
-			buf.append(line.toString());
+			buf.append(line);
 		}
 		return buf.toString();
 	}

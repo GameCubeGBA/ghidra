@@ -29,7 +29,7 @@ import ghidra.util.exception.NotYetImplementedException;
  *
  */
 public class BytePropertySet extends PropertySet {
-    private final static long serialVersionUID = 1;
+    private static final long serialVersionUID = 1;
 	/**
 	 * Constructor for BytePropertySet.
 	 * @param name the name associated with this property set.

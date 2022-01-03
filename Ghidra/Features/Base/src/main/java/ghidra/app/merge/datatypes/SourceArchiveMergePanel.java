@@ -56,8 +56,7 @@ class SourceArchiveMergePanel extends JPanel {
 	private JCheckBox useForAllCB;
 
 	SourceArchiveMergePanel(DomainObjectMergeManager mergeManager, int totalConflicts) {
-		super();
-		this.mergeManager = mergeManager;
+        this.mergeManager = mergeManager;
 		this.totalConflicts = totalConflicts;
 		create();
 
@@ -104,15 +103,12 @@ class SourceArchiveMergePanel extends JPanel {
 	private void create() {
 
 		buttonGroup = new ButtonGroup();
-		ItemListener listener = new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				if (e.getStateChange() == ItemEvent.SELECTED) {
-					mergeManager.clearStatusText();
-					mergeManager.setApplyEnabled(true);
-				}
-			}
-		};
+		ItemListener listener = e -> {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                mergeManager.clearStatusText();
+                mergeManager.setApplyEnabled(true);
+            }
+        };
 
 		latestRB = new GRadioButton(MergeConstants.LATEST_TITLE);
 		latestRB.setName(LATEST_BUTTON_NAME);

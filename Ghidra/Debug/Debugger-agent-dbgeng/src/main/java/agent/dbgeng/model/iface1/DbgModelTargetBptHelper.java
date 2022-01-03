@@ -29,16 +29,16 @@ import ghidra.util.datastruct.ListenerSet;
  */
 public interface DbgModelTargetBptHelper extends DbgModelTargetObject {
 
-	public DbgBreakpointInfo getBreakpointInfo();
+	DbgBreakpointInfo getBreakpointInfo();
 
-	public void setBreakpointId(String id);
+	void setBreakpointId(String id);
 
-	public void setBreakpointInfo(DbgBreakpointInfo info);
+	void setBreakpointInfo(DbgBreakpointInfo info);
 
-	public boolean isBreakpointEnabled();
+	boolean isBreakpointEnabled();
 
-	public void setBreakpointEnabled(boolean enabled);
+	void setBreakpointEnabled(boolean enabled);
 
-	public ListenerSet<TargetBreakpointAction> getActions();
+	ListenerSet<TargetBreakpointAction> getActions();
 
 }

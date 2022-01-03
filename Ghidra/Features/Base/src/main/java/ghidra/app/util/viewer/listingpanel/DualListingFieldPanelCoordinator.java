@@ -27,11 +27,11 @@ public interface DualListingFieldPanelCoordinator extends ViewListener {
 	 * Method that gets called when the location changes in the left side's program listing.
 	 * @param leftLocation the new location in the left side.
 	 */
-	public void leftLocationChanged(ProgramLocation leftLocation);
+    void leftLocationChanged(ProgramLocation leftLocation);
 
 	/**
 	 * Method that gets called when the location changes in the right side's program listing.
 	 * @param rightLocation the new location in the right side.
 	 */
-	public void rightLocationChanged(ProgramLocation rightLocation);
+    void rightLocationChanged(ProgramLocation rightLocation);
 }

@@ -23,8 +23,7 @@ public class LldbCommandRunningEvent extends AbstractLldbCompletedCommandEvent {
 	 * Construct a new event, parsing the tail for information
 	 */
 	public LldbCommandRunningEvent() {
-		super();
-	}
+    }
 
 	@Override
 	public StateType newState() {

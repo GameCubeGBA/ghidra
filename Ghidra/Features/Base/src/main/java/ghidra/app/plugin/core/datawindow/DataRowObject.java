@@ -58,11 +58,8 @@ class DataRowObject implements Comparable<DataRowObject> {
 		}
 
 		DataRowObject other = (DataRowObject) obj;
-		if (key != other.key) {
-			return false;
-		}
-		return true;
-	}
+        return key == other.key;
+    }
 
 	@Override
 	public int compareTo(DataRowObject o) {

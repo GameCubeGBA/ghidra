@@ -31,51 +31,51 @@ public interface StructConverter {
 	/**
 	 * Reusable BYTE datatype.
 	 */
-	public final static DataType BYTE = ByteDataType.dataType;
+    DataType BYTE = ByteDataType.dataType;
 	/**
 	 * Reusable WORD datatype.
 	 */
-	public final static DataType WORD = WordDataType.dataType;
+    DataType WORD = WordDataType.dataType;
 	/**
 	 * Reusable DWORD datatype.
 	 */
-	public final static DataType DWORD = DWordDataType.dataType;
+    DataType DWORD = DWordDataType.dataType;
 	/**
 	 * Reusable QWORD datatype.
 	 */
-	public final static DataType QWORD = QWordDataType.dataType;
+    DataType QWORD = QWordDataType.dataType;
 	/**
 	 * Reusable ASCII datatype.
 	 */
-	public final static DataType ASCII = CharDataType.dataType;
+    DataType ASCII = CharDataType.dataType;
 	/**
 	 * Reusable STRING datatype.
 	 */
-	public final static DataType STRING = StringDataType.dataType;
+    DataType STRING = StringDataType.dataType;
 	/**
 	 * Reusable UTF8 string datatype.
 	 */
-	public final static DataType UTF8 = StringUTF8DataType.dataType;
+    DataType UTF8 = StringUTF8DataType.dataType;
 	/**
 	 * Reusable UTF16 string datatype.
 	 */
-	public final static DataType UTF16 = UnicodeDataType.dataType;
+    DataType UTF16 = UnicodeDataType.dataType;
 	/**
 	 * Reusable POINTER datatype.
 	 */
-	public final static DataType POINTER = PointerDataType.dataType;
+    DataType POINTER = PointerDataType.dataType;
 	/**
 	 * Reusable VOID datatype.
 	 */
-	public final static DataType VOID = VoidDataType.dataType;
+    DataType VOID = VoidDataType.dataType;
 	/**
 	 * Reusable 32-bit image base offset datatype. 
 	 */
-	public final static DataType IBO32 = new ImageBaseOffset32DataType();
+    DataType IBO32 = new ImageBaseOffset32DataType();
 	/**
 	 * Reusable 64-bit image base offset datatype. 
 	 */
-	public final static DataType IBO64 = new ImageBaseOffset64DataType();
+    DataType IBO64 = new ImageBaseOffset64DataType();
 
 	/**
 	 * Returns a structure datatype representing the
@@ -101,5 +101,5 @@ public interface StructConverter {
 	 * 
 	 * @see ghidra.program.model.data.StructureDataType
 	 */
-	public DataType toDataType() throws DuplicateNameException, IOException;
+    DataType toDataType() throws DuplicateNameException, IOException;
 }

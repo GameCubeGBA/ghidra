@@ -360,7 +360,7 @@ public class OptionsPanel extends JPanel {
 		if (editor == null) {
 			List<String> optionList = node.getOptionNames();
 			Collections.sort(optionList);
-			if (optionList.size() > 0) {
+			if (!optionList.isEmpty()) {
 				editor = new ScrollableOptionsEditor(options.getName(), optionList);
 			}
 		}

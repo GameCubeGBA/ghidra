@@ -79,11 +79,8 @@ public class ExportToHeaderAction extends DockingAction {
 			CategoryNode categoryNode = (CategoryNode) node;
 			return categoryNode.isEnabled();
 		}
-		else if (node instanceof DataTypeNode) {
-			return true;
-		}
-		return false;
-	}
+		else return node instanceof DataTypeNode;
+    }
 
 	@Override
 	public void actionPerformed(ActionContext context) {
@@ -129,7 +126,7 @@ public class ExportToHeaderAction extends DockingAction {
 			}
 			catch (Exception e) {
 				Msg.showError(this, plugin.getTool().getToolFrame(), "Export Data Types",
-					"Error creating " + clazz.getName() + "\n" + e.toString(), e);
+					"Error creating " + clazz.getName() + "\n" + e, e);
 			}
 		}
 

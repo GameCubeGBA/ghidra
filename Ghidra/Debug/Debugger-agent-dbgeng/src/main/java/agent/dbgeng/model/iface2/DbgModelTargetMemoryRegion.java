@@ -21,15 +21,15 @@ import ghidra.program.model.address.AddressRange;
 public interface DbgModelTargetMemoryRegion extends DbgModelTargetObject, TargetMemoryRegion {
 
 	@Override
-	public AddressRange getRange();
+    AddressRange getRange();
 
 	@Override
-	public boolean isReadable();
+    boolean isReadable();
 
 	@Override
-	public boolean isWritable();
+    boolean isWritable();
 
 	@Override
-	public boolean isExecutable();
+    boolean isExecutable();
 
 }

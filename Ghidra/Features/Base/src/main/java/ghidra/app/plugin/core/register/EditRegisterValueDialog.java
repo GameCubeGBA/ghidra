@@ -56,12 +56,7 @@ class EditRegisterValueDialog extends DialogComponentProvider {
 
 		startAddrField = new AddressInput();
 		endAddrField = new AddressInput();
-		ChangeListener changeListener = new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				updateOk();
-			}
-		};
+		ChangeListener changeListener = e -> updateOk();
 		startAddrField.setAddressFactory(factory);
 		endAddrField.setAddressFactory(factory);
 		startAddrField.addChangeListener(changeListener);

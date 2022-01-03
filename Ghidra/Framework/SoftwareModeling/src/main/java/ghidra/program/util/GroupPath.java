@@ -26,7 +26,7 @@ import ghidra.program.model.listing.ProgramModule;
  * The {@code GroupPath} is a class to represent a unique path in a tree for a Group.
  */
 public class GroupPath implements Serializable {
-    private final static long serialVersionUID = 1;
+    private static final long serialVersionUID = 1;
 
 	private String []groupNames;
 

@@ -31,5 +31,5 @@ public interface MemoryWriter {
 	 * cache is updated so that subsequent reads within the same region do not get forwarded.
 	 */
 	// TODO: Use ByteBuffer instead?
-	public CompletableFuture<Void> writeMemory(long address, byte[] data);
+    CompletableFuture<Void> writeMemory(long address, byte[] data);
 }

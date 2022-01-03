@@ -72,7 +72,7 @@ public class HelpManager implements HelpService {
 	public static final String SHOW_AID_KEY = "SHOW.HELP.NAVIGATION.AID";
 	private static final String TABLE_OF_CONTENTS_FILENAME_KEY = "data";
 
-	private final static URL HELP_NOT_FOUND_PAGE_URL =
+	private static final URL HELP_NOT_FOUND_PAGE_URL =
 		ResourceManager.getResource("help/empty.htm");
 
 	private static final String TABLE_OF_CONTENTS_VIEW_NAME = "TOC";
@@ -186,12 +186,8 @@ public class HelpManager implements HelpService {
 	}
 
 	private boolean isExcluded(Object helpee) {
-		if (excludedFromHelp.contains(helpee)) {
-			return true;
-		}
-
-		return false;
-	}
+        return excludedFromHelp.contains(helpee);
+    }
 
 	/**
 	 * Returns the Help location associated with the specified object
@@ -481,7 +477,7 @@ public class HelpManager implements HelpService {
 			buffy.append("                ").append(loc.getInceptionInformation()).append('\n');
 		}
 
-		new Throwable("Bad Help Locations Found!\n" + buffy.toString()).printStackTrace();
+		new Throwable("Bad Help Locations Found!\n" + buffy).printStackTrace();
 	}
 
 	public Map<Object, HelpLocation> getInvalidHelpLocations(TaskMonitor monitor)
@@ -525,11 +521,8 @@ public class HelpManager implements HelpService {
 		}
 
 		DockingActionIf action = (DockingActionIf) helpee;
-		if ((action.getToolBarData() != null) || (action.getMenuBarData() != null) || (action.getPopupMenuData() != null)) {
-			return false;
-		}
-		return true;
-	}
+        return (action.getToolBarData() == null) && (action.getMenuBarData() == null) && (action.getPopupMenuData() == null);
+    }
 
 	private void displayHelpUrl(Object help, URL helpUrl) {
 		if (helpUrl == null) {
@@ -651,12 +644,8 @@ public class HelpManager implements HelpService {
 
 		URL URL = helpSet.getHelpSetURL();
 		String URLString = URL.toString();
-		if (URLString.endsWith(DUMMY_HELP_SET_NAME)) {
-			return true;
-		}
-
-		return false;
-	}
+        return URLString.endsWith(DUMMY_HELP_SET_NAME);
+    }
 
 	/**
 	 * Create a new help set for the given url, if one does
@@ -719,7 +708,7 @@ public class HelpManager implements HelpService {
 		}
 		buffy.append("\nHELP-LOCATION-> ");
 		if (helpLoc != null) {
-			buffy.append(helpLoc.toString());
+			buffy.append(helpLoc);
 			String str = helpLoc.getTopic();
 			if (str != null) {
 				buffy.append("\n   TOPIC:       ");

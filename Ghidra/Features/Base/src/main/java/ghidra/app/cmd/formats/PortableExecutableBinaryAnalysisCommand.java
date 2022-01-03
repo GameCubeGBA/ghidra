@@ -45,8 +45,7 @@ public class PortableExecutableBinaryAnalysisCommand extends FlatProgramAPI
 	private MessageLog messages = new MessageLog();
 
 	public PortableExecutableBinaryAnalysisCommand() {
-		super();
-	}
+    }
 
 	@Override
 	public boolean canApply(Program program) {

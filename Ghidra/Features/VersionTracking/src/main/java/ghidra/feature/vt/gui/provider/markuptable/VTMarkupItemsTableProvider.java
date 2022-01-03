@@ -225,75 +225,71 @@ public class VTMarkupItemsTableProvider extends ComponentProviderAdapter
 			}
 		});
 
-		markupItemSelectionListener = new ListSelectionListener() {
-			@Override
-			@SuppressWarnings("unchecked")
-			// it's our model, it must be our type
-			public void valueChanged(ListSelectionEvent e) {
-				if (e.getValueIsAdjusting()) {
-					return;
-				}
+        // it's our model, it must be our type
+        markupItemSelectionListener = e -> {
+            if (e.getValueIsAdjusting()) {
+                return;
+            }
 
-				try {
-					// Need the following flag to prevent selection changing when selecting 
-					// in the markup table, if another of the same markup type exists with 
-					// the same destination address.
-					processingMarkupItemSelected = true;
+            try {
+                // Need the following flag to prevent selection changing when selecting
+                // in the markup table, if another of the same markup type exists with
+                // the same destination address.
+                processingMarkupItemSelected = true;
 
-					ListingCodeComparisonPanel dualListingPanel =
-						functionComparisonPanel.getDualListingPanel();
-					VTMarkupItem markupItem = null;
-					if (table.getSelectedRowCount() == 1) {
-						// we get out the model here in case it has been wrapped by one of the filters
-						RowObjectTableModel<VTMarkupItem> model =
-							(RowObjectTableModel<VTMarkupItem>) table.getModel();
-						int selectedRow = table.getSelectedRow();
-						markupItem = model.getRowObject(selectedRow);
-					}
-					else {
-						// No markup item selected or multiple selected.
-						if (dualListingPanel != null) {
-							dualListingPanel.updateListings(); // refresh the dual listing's background markup colors.
-						}
-						controller.setSelectedMarkupItem(null); // Refresh the subTools markup backgrounds and location.
-						return;
-					}
+                ListingCodeComparisonPanel dualListingPanel =
+                    functionComparisonPanel.getDualListingPanel();
+                VTMarkupItem markupItem = null;
+                if (table.getSelectedRowCount() == 1) {
+                    // we get out the model here in case it has been wrapped by one of the filters
+                    RowObjectTableModel<VTMarkupItem> model =
+                        (RowObjectTableModel<VTMarkupItem>) table.getModel();
+                    int selectedRow = table.getSelectedRow();
+                    markupItem = model.getRowObject(selectedRow);
+                }
+                else {
+                    // No markup item selected or multiple selected.
+                    if (dualListingPanel != null) {
+                        dualListingPanel.updateListings(); // refresh the dual listing's background markup colors.
+                    }
+                    controller.setSelectedMarkupItem(null); // Refresh the subTools markup backgrounds and location.
+                    return;
+                }
 
-					notifyContextChanged();
+                notifyContextChanged();
 
-					if (dualListingPanel != null) {
-						// Don't set source or destination if the location change was initiated by the dual listing.
-						if (!processingSourceLocationChange &&
-							!processingDestinationLocationChange) {
-							dualListingPanel.setLeftLocation(dualListingPanel.getLeftProgram(),
-								markupItem.getSourceLocation());
-							dualListingPanel.setRightLocation(dualListingPanel.getRightProgram(),
-								markupItem.getDestinationLocation());
-						}
-						else {
-							// Only adjust the side of the dual listing panel that didn't initiate this.
-							ProgramLocation sourceLocation = markupItem.getSourceLocation();
-							if (processingDestinationLocationChange && sourceLocation != null) {
-								dualListingPanel.setLeftLocation(dualListingPanel.getLeftProgram(),
-									sourceLocation);
-							}
+                if (dualListingPanel != null) {
+                    // Don't set source or destination if the location change was initiated by the dual listing.
+                    if (!processingSourceLocationChange &&
+                        !processingDestinationLocationChange) {
+                        dualListingPanel.setLeftLocation(dualListingPanel.getLeftProgram(),
+                            markupItem.getSourceLocation());
+                        dualListingPanel.setRightLocation(dualListingPanel.getRightProgram(),
+                            markupItem.getDestinationLocation());
+                    }
+                    else {
+                        // Only adjust the side of the dual listing panel that didn't initiate this.
+                        ProgramLocation sourceLocation = markupItem.getSourceLocation();
+                        if (processingDestinationLocationChange && sourceLocation != null) {
+                            dualListingPanel.setLeftLocation(dualListingPanel.getLeftProgram(),
+                                sourceLocation);
+                        }
 
-							ProgramLocation destinationLocation =
-								markupItem.getDestinationLocation();
-							if (processingSourceLocationChange && destinationLocation != null) {
-								dualListingPanel.setRightLocation(
-									dualListingPanel.getRightProgram(), destinationLocation);
-							}
-						}
-						dualListingPanel.updateListings(); // refresh the dual listing's background markup colors.
-					}
-					controller.setSelectedMarkupItem(markupItem); // Refresh the subTools markup backgrounds and location.
-				}
-				finally {
-					processingMarkupItemSelected = false;
-				}
-			}
-		};
+                        ProgramLocation destinationLocation =
+                            markupItem.getDestinationLocation();
+                        if (processingSourceLocationChange && destinationLocation != null) {
+                            dualListingPanel.setRightLocation(
+                                dualListingPanel.getRightProgram(), destinationLocation);
+                        }
+                    }
+                    dualListingPanel.updateListings(); // refresh the dual listing's background markup colors.
+                }
+                controller.setSelectedMarkupItem(markupItem); // Refresh the subTools markup backgrounds and location.
+            }
+            finally {
+                processingMarkupItemSelected = false;
+            }
+        };
 		ListSelectionModel selectionModel = table.getSelectionModel();
 		selectionModel.addListSelectionListener(markupItemSelectionListener);
 

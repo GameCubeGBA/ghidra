@@ -31,7 +31,7 @@ import java.io.IOException;
  * </pre>
  */
 public class ResourceDirectoryString implements StructConverter {
-	public final static String NAME = "IMAGE_RESOURCE_DIRECTORY_STRING";
+	public static final String NAME = "IMAGE_RESOURCE_DIRECTORY_STRING";
 
     private short  length;
     private String nameString;

@@ -20,7 +20,7 @@ import ghidra.trace.database.thread.DBTraceThread;
 import ghidra.trace.util.TraceAddressSpace;
 
 public interface DBTraceSpaceKey extends TraceAddressSpace {
-	static class DefaultDBTraceSpaceKey implements DBTraceSpaceKey {
+	class DefaultDBTraceSpaceKey implements DBTraceSpaceKey {
 		private final DBTraceThread thread;
 		private final AddressSpace space;
 		private final int frameLevel;

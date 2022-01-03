@@ -43,12 +43,7 @@ class VarnodeLocationCellEditor extends AbstractCellEditor implements TableCellE
 	private AddressInput addressInput;
 	private IntegerTextField offsetInput;
 
-	private Comparator<Register> registerWrapperComparator = new Comparator<Register>() {
-		@Override
-		public int compare(Register r1, Register r2) {
-			return r1.toString().compareToIgnoreCase(r2.toString());
-		}
-	};
+	private Comparator<Register> registerWrapperComparator = (r1, r2) -> r1.toString().compareToIgnoreCase(r2.toString());
 	private VarnodeInfo currentVarnode;
 
 	VarnodeLocationCellEditor(StorageAddressModel model) {
@@ -143,12 +138,7 @@ class VarnodeLocationCellEditor extends AbstractCellEditor implements TableCellE
 		if (address != null) {
 			addressInput.setAddress(address);
 		}
-		addressInput.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				stopCellEditing();
-			}
-		});
+		addressInput.addActionListener(e -> stopCellEditing());
 		return addressInput;
 	}
 
@@ -159,12 +149,7 @@ class VarnodeLocationCellEditor extends AbstractCellEditor implements TableCellE
 		if (address != null) {
 			offsetInput.setValue(address.getOffset());
 		}
-		offsetInput.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				stopCellEditing();
-			}
-		});
+		offsetInput.addActionListener(e -> stopCellEditing());
 		return offsetInput.getComponent();
 	}
 
@@ -210,21 +195,12 @@ class VarnodeLocationCellEditor extends AbstractCellEditor implements TableCellE
 			}
 		});
 
-		combo.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				stopCellEditing();
-			}
-		});
+		combo.addActionListener(e -> stopCellEditing());
 
-		SwingUtilities.invokeLater(new Runnable() {
-
-			@Override
-			public void run() {
-				combo.showPopup();
-				combo.requestFocus();
-			}
-		});
+		SwingUtilities.invokeLater(() -> {
+            combo.showPopup();
+            combo.requestFocus();
+        });
 		return combo;
 	}
 }

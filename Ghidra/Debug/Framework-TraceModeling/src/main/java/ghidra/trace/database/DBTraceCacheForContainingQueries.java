@@ -48,11 +48,8 @@ public abstract class DBTraceCacheForContainingQueries<K extends GetKey, V, T> {
 			if (this.snap != that.snap) {
 				return false;
 			}
-			if (!this.addr.equals(that.addr)) {
-				return false;
-			}
-			return true;
-		}
+            return this.addr.equals(that.addr);
+        }
 
 		@Override
 		public int hashCode() {

@@ -19,5 +19,5 @@ package ghidra.app.plugin.core.compositeeditor;
 @FunctionalInterface
 public interface UnionEditorOptionManager {
 	
-	public abstract boolean showUnionNumbersInHex();
+	boolean showUnionNumbersInHex();
 }

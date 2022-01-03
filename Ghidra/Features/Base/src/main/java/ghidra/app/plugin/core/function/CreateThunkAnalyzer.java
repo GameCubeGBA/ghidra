@@ -36,8 +36,7 @@ public class CreateThunkAnalyzer extends FunctionAnalyzer {
 	private static final boolean OPTION_DEFAULT_CREATE_THUNKS_EARLY_ENABLED = true;
 
 	public CreateThunkAnalyzer() {
-		super();
-		setPriority(AnalysisPriority.BLOCK_ANALYSIS.after().after());
+        setPriority(AnalysisPriority.BLOCK_ANALYSIS.after().after());
 		setDefaultEnablement(true);
 		createOnlyThunks = OPTION_DEFAULT_CREATE_THUNKS_EARLY_ENABLED;
 		analysisMessage = FIND_THUNKS_STARTS_MSG;

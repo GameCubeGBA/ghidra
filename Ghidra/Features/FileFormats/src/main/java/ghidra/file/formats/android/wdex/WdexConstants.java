@@ -29,14 +29,14 @@ public final class WdexConstants {
 	  * static constexpr uint8_t kVdexInvalidMagic[] = { 'w', 'd', 'e', 'x' };
 	  * </pre>
 	 */
-	public final static String MAGIC = "wdex";
+    public static final String MAGIC = "wdex";
 
-	public final static String kVdexInvalidMagic = MAGIC;
+	public static final String kVdexInvalidMagic = MAGIC;
 
 	/**
 	 * Returns true if the given program contain WDEX information.
 	 */
-	public final static boolean isWDEX(Program program) {
+    public static final boolean isWDEX(Program program) {
 		if (program != null) {
 			try {
 				byte[] bytes = new byte[MAGIC.length()];

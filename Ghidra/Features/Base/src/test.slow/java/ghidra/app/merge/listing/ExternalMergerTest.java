@@ -72,8 +72,7 @@ public class ExternalMergerTest extends AbstractExternalMergerTest {
 	 * @param arg0
 	 */
 	public ExternalMergerTest() {
-		super();
-	}
+    }
 
 	@Test
 	public void testExtLabelRefAddSameNoConflict() throws Exception {

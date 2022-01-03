@@ -22,5 +22,5 @@ package ghidra.file.formats.xar;
  */
 public final class XARConstants {
 
-	public final static byte [] MAGIC_BYTES = { 'x', 'a', 'r', '!' };
+	public static final byte [] MAGIC_BYTES = { 'x', 'a', 'r', '!' };
 }

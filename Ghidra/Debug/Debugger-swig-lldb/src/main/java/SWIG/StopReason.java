@@ -12,21 +12,21 @@
 package SWIG;
 
 public final class StopReason {
-  public final static StopReason eStopReasonInvalid = new StopReason("eStopReasonInvalid", lldbJNI.eStopReasonInvalid_get());
-  public final static StopReason eStopReasonNone = new StopReason("eStopReasonNone");
-  public final static StopReason eStopReasonTrace = new StopReason("eStopReasonTrace");
-  public final static StopReason eStopReasonBreakpoint = new StopReason("eStopReasonBreakpoint");
-  public final static StopReason eStopReasonWatchpoint = new StopReason("eStopReasonWatchpoint");
-  public final static StopReason eStopReasonSignal = new StopReason("eStopReasonSignal");
-  public final static StopReason eStopReasonException = new StopReason("eStopReasonException");
-  public final static StopReason eStopReasonExec = new StopReason("eStopReasonExec");
-  public final static StopReason eStopReasonPlanComplete = new StopReason("eStopReasonPlanComplete");
-  public final static StopReason eStopReasonThreadExiting = new StopReason("eStopReasonThreadExiting");
-  public final static StopReason eStopReasonInstrumentation = new StopReason("eStopReasonInstrumentation");
-  public final static StopReason eStopReasonProcessorTrace = new StopReason("eStopReasonProcessorTrace");
-  public final static StopReason eStopReasonFork = new StopReason("eStopReasonFork");
-  public final static StopReason eStopReasonVFork = new StopReason("eStopReasonVFork");
-  public final static StopReason eStopReasonVForkDone = new StopReason("eStopReasonVForkDone");
+  public static final StopReason eStopReasonInvalid = new StopReason("eStopReasonInvalid", lldbJNI.eStopReasonInvalid_get());
+  public static final StopReason eStopReasonNone = new StopReason("eStopReasonNone");
+  public static final StopReason eStopReasonTrace = new StopReason("eStopReasonTrace");
+  public static final StopReason eStopReasonBreakpoint = new StopReason("eStopReasonBreakpoint");
+  public static final StopReason eStopReasonWatchpoint = new StopReason("eStopReasonWatchpoint");
+  public static final StopReason eStopReasonSignal = new StopReason("eStopReasonSignal");
+  public static final StopReason eStopReasonException = new StopReason("eStopReasonException");
+  public static final StopReason eStopReasonExec = new StopReason("eStopReasonExec");
+  public static final StopReason eStopReasonPlanComplete = new StopReason("eStopReasonPlanComplete");
+  public static final StopReason eStopReasonThreadExiting = new StopReason("eStopReasonThreadExiting");
+  public static final StopReason eStopReasonInstrumentation = new StopReason("eStopReasonInstrumentation");
+  public static final StopReason eStopReasonProcessorTrace = new StopReason("eStopReasonProcessorTrace");
+  public static final StopReason eStopReasonFork = new StopReason("eStopReasonFork");
+  public static final StopReason eStopReasonVFork = new StopReason("eStopReasonVFork");
+  public static final StopReason eStopReasonVForkDone = new StopReason("eStopReasonVForkDone");
 
   public final int swigValue() {
     return swigValue;
@@ -39,9 +39,9 @@ public final class StopReason {
   public static StopReason swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-    for (int i = 0; i < swigValues.length; i++)
-      if (swigValues[i].swigValue == swigValue)
-        return swigValues[i];
+      for (StopReason value : swigValues)
+          if (value.swigValue == swigValue)
+              return value;
     throw new IllegalArgumentException("No enum " + StopReason.class + " with value " + swigValue);
   }
 

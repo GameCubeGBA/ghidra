@@ -88,14 +88,9 @@ public class MultipleLocalVariableStringable extends Stringable {
         
         MultipleLocalVariableStringable other = (MultipleLocalVariableStringable) obj;
         if ( localVariableStringables == null ) {
-            if ( other.localVariableStringables != null ) {
-                return false;
-            }
+            return other.localVariableStringables == null;
         }
-        else if ( !localVariableStringables.equals( other.localVariableStringables ) ) {
-            return false;
-        }
-        return true;
+        else return localVariableStringables.equals(other.localVariableStringables);
     }
 
     @Override

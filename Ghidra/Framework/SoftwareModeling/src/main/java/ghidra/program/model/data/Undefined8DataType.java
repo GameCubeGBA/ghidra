@@ -32,10 +32,10 @@ public class Undefined8DataType extends Undefined {
 			Undefined8DataType.class.getName());
 	}
 
-	private final static long serialVersionUID = 1;
+	private static final long serialVersionUID = 1;
 
 	/** A statically defined DefaultDataType used when an Undefined byte is needed.*/
-	public final static Undefined8DataType dataType = new Undefined8DataType();
+    public static final Undefined8DataType dataType = new Undefined8DataType();
 
 	/**
 	 * Construcs a new Undefined8 dataType

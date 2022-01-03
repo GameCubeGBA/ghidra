@@ -1125,7 +1125,7 @@ public class GraphComponent<V extends VisualVertex, E extends VisualEdge<V>, G e
 		@Override
 		public void verticesPicked(Set<V> vertices, EventSource source) {
 
-			if (vertices.size() == 0) {
+			if (vertices.isEmpty()) {
 				innerClassGraph.clearSelectedVertices();
 			}
 			else if (vertices.size() == 1) {
@@ -1232,12 +1232,8 @@ public class GraphComponent<V extends VisualVertex, E extends VisualEdge<V>, G e
 			// p is the screen point for the mouse event
 			Point2D p = e.getPoint();
 			selectedVertex = pickSupport.getVertex(layout, p.getX(), p.getY());
-			if (selectedVertex == null) {
-				return false;
-			}
-
-			return true;
-		}
+            return selectedVertex != null;
+        }
 
 		@Override
 		public void mouseClicked(MouseEvent e) {

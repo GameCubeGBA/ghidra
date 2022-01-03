@@ -144,7 +144,7 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 
 	Lock lock;
 
-	final static int DATA_OP_INDEX = 0; // operand index for data, will always be zero
+	static final int DATA_OP_INDEX = 0; // operand index for data, will always be zero
 	private static final int MAX_SEGMENT_LIMIT = 2;
 
 	/**
@@ -2699,9 +2699,7 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 		Data data = getDefinedDataAfter(start);
 		if (data != null) {
 			Address addr = data.getMinAddress();
-			if (range.contains(addr)) {
-				return false;
-			}
+            return !range.contains(addr);
 		}
 		return true;
 
@@ -3401,7 +3399,7 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 	public String getComment(int commentType, Address address) {
 		try {
 			long addr = addrMap.getKey(address, false);
-			DBRecord commentRec = getCommentAdapter().getRecord(addr);
+			DBRecord commentRec = commentAdapter.getRecord(addr);
 			if (commentRec != null) {
 				return commentRec.getString(commentType);
 			}
@@ -3431,12 +3429,12 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 		lock.acquire();
 		try {
 			long addr = addrMap.getKey(address, true);
-			DBRecord commentRec = getCommentAdapter().getRecord(addr);
+			DBRecord commentRec = commentAdapter.getRecord(addr);
 			if (commentRec == null) {
 				if (comment == null) {
 					return;
 				}
-				commentRec = getCommentAdapter().createRecord(addr, commentType, comment);
+				commentRec = commentAdapter.createRecord(addr, commentType, comment);
 				sendNotification(address, commentType, null, comment);
 				return;
 			}
@@ -3447,11 +3445,11 @@ public class CodeManager implements ErrorHandler, ManagerDB {
 
 			for (int i = 0; i < CommentsDBAdapter.COMMENT_COL_COUNT; i++) {
 				if (commentRec.getString(i) != null) {
-					getCommentAdapter().updateRecord(commentRec);
+					commentAdapter.updateRecord(commentRec);
 					return;
 				}
 			}
-			getCommentAdapter().deleteRecord(commentRec.getKey());
+			commentAdapter.deleteRecord(commentRec.getKey());
 		}
 		catch (IOException e) {
 			dbError(e);

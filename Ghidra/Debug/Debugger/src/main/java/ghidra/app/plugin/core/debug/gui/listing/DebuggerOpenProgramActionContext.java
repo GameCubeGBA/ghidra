@@ -47,9 +47,6 @@ public class DebuggerOpenProgramActionContext extends ActionContext {
 			return false;
 		}
 		DebuggerOpenProgramActionContext that = (DebuggerOpenProgramActionContext) obj;
-		if (!this.df.equals(that.df)) {
-			return false;
-		}
-		return true;
-	}
+        return this.df.equals(that.df);
+    }
 }

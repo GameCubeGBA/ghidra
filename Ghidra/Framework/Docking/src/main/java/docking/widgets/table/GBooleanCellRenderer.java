@@ -26,8 +26,7 @@ public class GBooleanCellRenderer extends GTableCellRenderer {
 	protected GCheckBox cb = new GCheckBox();
 
 	public GBooleanCellRenderer() {
-		super();
-		setLayout(new BorderLayout());
+        setLayout(new BorderLayout());
 		cb.setHorizontalAlignment(CENTER);
 		cb.setOpaque(false);
 		add(cb);

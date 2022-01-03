@@ -32,13 +32,13 @@ import ghidra.app.util.bin.ByteProvider;
  */
 public final class OdexConstants {
 
-	public final static String ODEX_MAGIC_35 = "dey\n035\0";
-	public final static String ODEX_MAGIC_36 = "dey\n036\0";
-	public final static String ODEX_MAGIC_37 = "dey\n037\0";
+	public static final String ODEX_MAGIC_35 = "dey\n035\0";
+	public static final String ODEX_MAGIC_36 = "dey\n036\0";
+	public static final String ODEX_MAGIC_37 = "dey\n037\0";
 
-	public final static int ODEX_MAGIC_LENGTH = ODEX_MAGIC_36.length();
+	public static final int ODEX_MAGIC_LENGTH = ODEX_MAGIC_36.length();
 
-	public final static boolean isOdexFile(ByteProvider provider) {
+	public static final boolean isOdexFile(ByteProvider provider) {
 		try {
 			String magic = new String(provider.readBytes(0, ODEX_MAGIC_LENGTH));
 			return ODEX_MAGIC_35.equals(magic) ||

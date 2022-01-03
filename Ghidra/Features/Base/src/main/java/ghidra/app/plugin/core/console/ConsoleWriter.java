@@ -26,7 +26,6 @@ class ConsoleWriter extends Writer {
     private boolean error;
 
     ConsoleWriter(ConsoleService console, boolean error) {
-        super();
         this.console = console;
         this.error = error;
     }

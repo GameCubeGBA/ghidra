@@ -60,8 +60,7 @@ public class FunctionSignatureMarkupTest extends AbstractFunctionSignatureMarkup
 	//  Gadget::use 00411570    FUN... 00411560
 
 	public FunctionSignatureMarkupTest() {
-		super();
-	}
+    }
 
 @Test
     public void testDiffParamCount_ForceSignatureAndNamesWhenSameCount_3To2() throws Exception {

@@ -295,7 +295,7 @@ public class SleighCompileLauncher implements GhidraLaunchable {
 			String option = r.readLine();
 			while (option != null) {
 				option = option.trim();
-				if (option.length() != 0 && !option.startsWith("#")) {
+				if (!option.isEmpty() && !option.startsWith("#")) {
 					list.add(option);
 				}
 				option = r.readLine();

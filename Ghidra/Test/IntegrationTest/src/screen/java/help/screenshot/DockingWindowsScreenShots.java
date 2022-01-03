@@ -29,8 +29,7 @@ import ghidra.app.plugin.core.programtree.ViewManagerComponentProvider;
 public class DockingWindowsScreenShots extends GhidraScreenShotGenerator {
 
 	public DockingWindowsScreenShots() {
-		super();
-	}
+    }
 
 	@Test
 	public void testCaptureTool() {

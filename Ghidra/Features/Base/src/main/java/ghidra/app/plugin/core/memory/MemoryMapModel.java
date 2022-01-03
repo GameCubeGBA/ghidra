@@ -40,42 +40,42 @@ import ghidra.util.Msg;
 
 class MemoryMapModel extends AbstractSortedTableModel<MemoryBlock> {
 
-	final static byte NAME = 0;
-	final static byte START = 1;
-	final static byte END = 2;
-	final static byte LENGTH = 3;
-	final static byte READ = 4;
-	final static byte WRITE = 5;
-	final static byte EXECUTE = 6;
-	final static byte VOLATILE = 7;
-	final static byte OVERLAY = 8;
-	final static byte BLOCK_TYPE = 9;
-	final static byte INIT = 10;
-	final static byte BYTE_SOURCE = 11;
-	final static byte SOURCE = 12;
-	final static byte COMMENT = 13;
+	static final byte NAME = 0;
+	static final byte START = 1;
+	static final byte END = 2;
+	static final byte LENGTH = 3;
+	static final byte READ = 4;
+	static final byte WRITE = 5;
+	static final byte EXECUTE = 6;
+	static final byte VOLATILE = 7;
+	static final byte OVERLAY = 8;
+	static final byte BLOCK_TYPE = 9;
+	static final byte INIT = 10;
+	static final byte BYTE_SOURCE = 11;
+	static final byte SOURCE = 12;
+	static final byte COMMENT = 13;
 
-	final static String NAME_COL = "Name";
-	final static String START_COL = "Start";
-	final static String END_COL = "End";
-	final static String LENGTH_COL = "Length";
-	final static String READ_COL = "R";
-	final static String WRITE_COL = "W";
-	final static String EXECUTE_COL = "X";
-	final static String VOLATILE_COL = "Volatile";
-	final static String OVERLAY_COL = "Overlay";
-	final static String BLOCK_TYPE_COL = "Type";
-	final static String INIT_COL = "Initialized";
-	final static String BYTE_SOURCE_COL = "Byte Source";
-	final static String SOURCE_COL = "Source";
-	final static String COMMENT_COL = "Comment";
+	static final String NAME_COL = "Name";
+	static final String START_COL = "Start";
+	static final String END_COL = "End";
+	static final String LENGTH_COL = "Length";
+	static final String READ_COL = "R";
+	static final String WRITE_COL = "W";
+	static final String EXECUTE_COL = "X";
+	static final String VOLATILE_COL = "Volatile";
+	static final String OVERLAY_COL = "Overlay";
+	static final String BLOCK_TYPE_COL = "Type";
+	static final String INIT_COL = "Initialized";
+	static final String BYTE_SOURCE_COL = "Byte Source";
+	static final String SOURCE_COL = "Source";
+	static final String COMMENT_COL = "Comment";
 
 	private Program program;
 
 	private ArrayList<MemoryBlock> memList;
 	private MemoryMapProvider provider;
 
-	private final static String[] COLUMN_NAMES =
+	private static final String[] COLUMN_NAMES =
 		{ NAME_COL, START_COL, END_COL, LENGTH_COL, READ_COL, WRITE_COL, EXECUTE_COL, VOLATILE_COL,
 			OVERLAY_COL, BLOCK_TYPE_COL, INIT_COL, BYTE_SOURCE_COL, SOURCE_COL, COMMENT_COL };
 
@@ -112,12 +112,9 @@ class MemoryMapModel extends AbstractSortedTableModel<MemoryBlock> {
 
 	@Override
 	public boolean isSortable(int columnIndex) {
-		if (columnIndex == READ || columnIndex == WRITE || columnIndex == EXECUTE ||
-			columnIndex == VOLATILE || columnIndex == OVERLAY || columnIndex == INIT) {
-			return false;
-		}
-		return true;
-	}
+        return columnIndex != READ && columnIndex != WRITE && columnIndex != EXECUTE &&
+                columnIndex != VOLATILE && columnIndex != OVERLAY && columnIndex != INIT;
+    }
 
 	@Override
 	public String getName() {
@@ -256,7 +253,7 @@ class MemoryMapModel extends AbstractSortedTableModel<MemoryBlock> {
 					if (!verifyRenameAllowed(block, name)) {
 						return;
 					}
-					if (name.length() == 0) {
+					if (name.isEmpty()) {
 						Msg.showError(this, provider.getComponent(), "Enter Block Label",
 							"Please enter a label name.");
 						break;
@@ -364,7 +361,7 @@ class MemoryMapModel extends AbstractSortedTableModel<MemoryBlock> {
 					String cmt = block.getComment();
 					if (cmt == null || !cmt.equals(aValue)) {
 						String value = (String) aValue;
-						if (value.length() == 0) {
+						if (value.isEmpty()) {
 							value = null;
 						}
 						int id = program.startTransaction("Set Comment State");

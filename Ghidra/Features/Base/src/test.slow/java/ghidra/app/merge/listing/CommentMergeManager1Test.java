@@ -34,8 +34,7 @@ public class CommentMergeManager1Test extends AbstractListingMergeManagerTest {
 	 * @param arg0
 	 */
 	public CommentMergeManager1Test() {
-		super();
-	}
+    }
 
 	@Test
 	public void testAddLatest() throws Exception {

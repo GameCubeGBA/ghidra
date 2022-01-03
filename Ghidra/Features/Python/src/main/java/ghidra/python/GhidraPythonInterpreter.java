@@ -445,7 +445,7 @@ public class GhidraPythonInterpreter extends InteractiveInterpreter {
 	 * @see PythonPlugin#getCompletions
 	 */
 	List<CodeCompletion> getCommandCompletions(String cmd, boolean includeBuiltins) {
-		if ((cmd.length() > 0) && (cmd.charAt(cmd.length() - 1) == '(')) {
+		if ((!cmd.isEmpty()) && (cmd.charAt(cmd.length() - 1) == '(')) {
 			return getMethodCommandCompletions(cmd);
 		}
 		return getPropertyCommandCompletions(cmd, includeBuiltins);
@@ -465,17 +465,15 @@ public class GhidraPythonInterpreter extends InteractiveInterpreter {
 			PyObject locals = getLocals();
 
 			// Return value is (name, argspec, tip_text)
-			ListIterator<?> iter =
-				((List<?>) getCallTipJava.__call__(command, locals)).listIterator();
-			while (iter.hasNext()) {
-				String completion_portion = iter.next().toString();
-				if (!completion_portion.isEmpty()) {
-					String[] substrings = completion_portion.split("\n");
-					for (String substring : substrings) {
-						completion_list.add(new CodeCompletion(substring, null, null));
-					}
-				}
-			}
+            for (Object o : (List<?>) getCallTipJava.__call__(command, locals)) {
+                String completion_portion = o.toString();
+                if (!completion_portion.isEmpty()) {
+                    String[] substrings = completion_portion.split("\n");
+                    for (String substring : substrings) {
+                        completion_list.add(new CodeCompletion(substring, null, null));
+                    }
+                }
+            }
 		}
 		catch (Exception e) {
 			Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);

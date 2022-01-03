@@ -34,58 +34,58 @@ public interface ViewProviderService extends ViewService {
 	/**
 	 * Get the viewer component.
 	 */
-	public JComponent getViewComponent();
+    JComponent getViewComponent();
 
 	/**
 	 * Get the name of this view.
 	 */
-	public String getViewName();
+    String getViewName();
 
 	/**
 	 * Set whether or not the component that is showing has focus.
 	 * @param hasFocus true if the component has focus
 	 */
-	public void setHasFocus(boolean hasFocus);
+    void setHasFocus(boolean hasFocus);
 
 	/**
 	 * Return the object under the mouse location for the popup
 	 * @param event mouse event generated when the right mouse button is pressed
 	 */
-	public Object getActivePopupObject(MouseEvent event);
+    Object getActivePopupObject(MouseEvent event);
 
 	/**
 	 * Returns the current action context for this view service
 	 * @param event the mouse event
 	 * @return the context
 	 */
-	public ActionContext getActionContext(MouseEvent event);
+    ActionContext getActionContext(MouseEvent event);
 
 	/**
 	 * Get the actions that would go on a tool bar.
 	 */
-	public DockingAction[] getToolBarActions();
+    DockingAction[] getToolBarActions();
 
 	/**
 	 * Notification that this view is closed.
 	 * @return true if the view can be closed
 	 */
-	public boolean viewClosed();
+    boolean viewClosed();
 
 	/**
 	 * Notification that this view should be deleted
 	 * @return true if the view can be deleted
 	 */
-	public boolean viewDeleted();
+    boolean viewDeleted();
 
 	/**
 	 * Notification that this view should be renamed to newName.
 	 * @return true if the rename is allowed
 	 */
-	public boolean viewRenamed(String newName);
+    boolean viewRenamed(String newName);
 
 	/**
 	 * Returns the context for the current selection.
 	 */
-	public Object getActiveObject();
+    Object getActiveObject();
 
 }

@@ -108,7 +108,7 @@ public class EntropyFieldFactory extends FieldFactory {
 			if (count == 0) {
 				continue;
 			}
-			double p_x = (double) count / (double) len;
+			double p_x = (double) count / len;
 			sum -= p_x * Math.log(p_x) * 1.0 / Math.log(2);
 		}
 

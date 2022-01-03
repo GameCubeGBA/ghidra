@@ -65,7 +65,7 @@ public class MicrosoftDemangler implements Demangler {
 
 	private DemangledObject demangleMS(String mangled, boolean demangleOnlyKnownPatterns)
 			throws DemangledException {
-		if (mangled == null || mangled.length() == 0) {
+		if (mangled == null || mangled.isEmpty()) {
 			throw new DemangledException(true);
 		}
 

@@ -123,7 +123,7 @@ public class ComputeChecksumsPlugin extends ProgramPlugin {
 	 * @return true if the current program has a selection
 	 */
 	boolean hasSelection() {
-		ProgramSelection selection = getSelection();
+		ProgramSelection selection = currentSelection;
 		return selection != null && !selection.isEmpty();
 	}
 

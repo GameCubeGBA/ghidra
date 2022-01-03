@@ -148,11 +148,8 @@ public class AssemblyParseMachine implements Comparable<AssemblyParseMachine> {
 		if ((this.pos != apm.pos) || !this.output.equals(apm.output) || !this.stack.equals(apm.stack) || (this.accepted != apm.accepted)) {
 			return false;
 		}
-		if (this.error != apm.error) {
-			return false;
-		}
-		return true;
-	}
+        return this.error == apm.error;
+    }
 
 	@Override
 	public int compareTo(AssemblyParseMachine that) {

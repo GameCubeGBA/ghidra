@@ -268,12 +268,9 @@ public class FindPotentialDecompilerProblems extends GhidraScript {
 		if (ref.getToAddress() == null) {
 			return false;
 		}
-		if (currentProgram.getFunctionManager().getFunctionAt(ref.getToAddress()) != null) {
-			return true;
-		}
-		return false;
+        return currentProgram.getFunctionManager().getFunctionAt(ref.getToAddress()) != null;
 
-	}
+    }
 
 	static class BasicConfigurer implements DecompileConfigurer {
 		private Program p;
@@ -425,8 +422,8 @@ public class FindPotentialDecompilerProblems extends GhidraScript {
 
 		@Override
 		public String toString() {
-			return "Issue at:" + getAddress() + "  found: " + getVarName() + "  " +
-				getExplanation() + " at " + getWhyAddr();
+			return "Issue at:" + getAddress() + "  found: " + varName + "  " +
+                    explanation + " at " + getWhyAddr();
 		}
 	}
 

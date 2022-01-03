@@ -81,11 +81,8 @@ public class DebuggerThreadsProvider extends ComponentProviderAdapter {
 		if (!Objects.equals(a.getThread(), b.getThread())) {
 			return false;
 		}
-		if (!Objects.equals(a.getTime(), b.getTime())) {
-			return false;
-		}
-		return true;
-	}
+        return Objects.equals(a.getTime(), b.getTime());
+    }
 
 	protected class StepSnapBackwardAction extends AbstractStepSnapBackwardAction {
 		public static final String GROUP = DebuggerResources.GROUP_CONTROL;
@@ -115,11 +112,8 @@ public class DebuggerThreadsProvider extends ComponentProviderAdapter {
 			if (!current.getTime().isSnapOnly()) {
 				return true;
 			}
-			if (current.getSnap() <= 0) {
-				return false;
-			}
-			return true;
-		}
+            return current.getSnap() > 0;
+        }
 	}
 
 	protected class EmulateTickBackwardAction extends AbstractEmulateTickBackwardAction {
@@ -152,11 +146,8 @@ public class DebuggerThreadsProvider extends ComponentProviderAdapter {
 			if (current.getTrace() == null) {
 				return false;
 			}
-			if (current.getTime().steppedBackward(current.getTrace(), 1) == null) {
-				return false;
-			}
-			return true;
-		}
+            return current.getTime().steppedBackward(current.getTrace(), 1) != null;
+        }
 	}
 
 	protected class EmulateTickForwardAction extends AbstractEmulateTickForwardAction {
@@ -183,11 +174,8 @@ public class DebuggerThreadsProvider extends ComponentProviderAdapter {
 			if (emulationService == null) {
 				return false;
 			}
-			if (current.getThread() == null) {
-				return false;
-			}
-			return true;
-		}
+            return current.getThread() != null;
+        }
 	}
 
 	protected class StepSnapForwardAction extends AbstractStepSnapForwardAction {
@@ -212,11 +200,8 @@ public class DebuggerThreadsProvider extends ComponentProviderAdapter {
 				return false;
 			}
 			Long maxSnap = curTrace.getTimeManager().getMaxSnap();
-			if (maxSnap == null || current.getSnap() >= maxSnap) {
-				return false;
-			}
-			return true;
-		}
+            return maxSnap != null && current.getSnap() < maxSnap;
+        }
 	}
 
 	protected class SeekTracePresentAction extends AbstractSeekTracePresentAction

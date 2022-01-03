@@ -24,9 +24,8 @@ import ghidra.util.classfinder.ClassSearcher;
 
 public class ProgramDecisionTree extends DecisionTree<Program> {
 	public ProgramDecisionTree() {
-		super();
 
-		List<Class<? extends ProgramConstraint>> classes =
+        List<Class<? extends ProgramConstraint>> classes =
 			ClassSearcher.getClasses(ProgramConstraint.class);
 		for (Class<? extends ProgramConstraint> constraintClass : classes) {
 			try {

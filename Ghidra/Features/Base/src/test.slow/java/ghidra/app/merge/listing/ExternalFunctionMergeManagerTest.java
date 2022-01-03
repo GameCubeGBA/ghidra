@@ -39,8 +39,7 @@ import ghidra.util.exception.InvalidInputException;
 public class ExternalFunctionMergeManagerTest extends AbstractExternalMergerTest {
 
 	public ExternalFunctionMergeManagerTest() {
-		super();
-	}
+    }
 
 	@Test
 	public void testChangeLatestFunction() throws Exception {

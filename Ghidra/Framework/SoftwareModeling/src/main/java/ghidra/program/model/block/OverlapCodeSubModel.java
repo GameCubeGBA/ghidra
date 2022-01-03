@@ -200,11 +200,11 @@ public class OverlapCodeSubModel implements SubroutineBlockModel {
 
         // Return all OSubs - one per entry point
         ArrayList<CodeBlock> blockList = new ArrayList<>();
-        for (int i = 0; i < cnt; i++) {
-            CodeBlock block = getSubroutine(entPts[i], monitor);
+        for (Address entPt : entPts) {
+            CodeBlock block = getSubroutine(entPt, monitor);
             if (block.contains(addr)) {
-				blockList.add(block);
-			}
+                blockList.add(block);
+            }
         }
         return blockList.toArray(new CodeBlock[0]);
     }
@@ -235,11 +235,11 @@ public class OverlapCodeSubModel implements SubroutineBlockModel {
         }
 
         // Return first OSub which contains addr
-        for (int i = 0; i < cnt; i++) {
-            block = getSubroutine(entPts[i], monitor);
+        for (Address entPt : entPts) {
+            block = getSubroutine(entPt, monitor);
             if (block != null && block.contains(addr)) {
-				return block;
-			}
+                return block;
+            }
         }
         return null;
     }

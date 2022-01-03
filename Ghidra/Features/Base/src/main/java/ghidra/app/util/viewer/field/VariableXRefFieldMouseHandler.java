@@ -35,7 +35,7 @@ import ghidra.program.util.*;
  */
 public class VariableXRefFieldMouseHandler extends XRefFieldMouseHandler {
 
-	private final static Class<?>[] SUPPORTED_CLASSES = new Class<?>[] {
+	private static final Class<?>[] SUPPORTED_CLASSES = new Class<?>[] {
 		VariableXRefFieldLocation.class, VariableXRefHeaderFieldLocation.class };
 
 	@Override

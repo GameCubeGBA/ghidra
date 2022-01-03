@@ -106,7 +106,7 @@ public class XmlAttributes {
 	 * @param hex   true if value should be written in hex
 	 */
 	public void addAttribute(String name, byte value, boolean hex) {
-		addAttribute(name, hex ? Conv.byteToInt(value) : (int) value, hex);
+		addAttribute(name, hex ? Conv.byteToInt(value) : value, hex);
 	}
 
 	/**
@@ -125,7 +125,7 @@ public class XmlAttributes {
 	 * @param hex   true if value should be written in hex
 	 */
 	public void addAttribute(String name, short value, boolean hex) {
-		addAttribute(name, hex ? Conv.shortToInt(value) : (int) value, hex);
+		addAttribute(name, hex ? Conv.shortToInt(value) : value, hex);
 	}
 
 	/**

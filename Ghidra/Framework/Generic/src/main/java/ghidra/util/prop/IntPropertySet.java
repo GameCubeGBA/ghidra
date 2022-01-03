@@ -28,7 +28,7 @@ import ghidra.util.exception.NoValueException;
  * 
  */
 public class IntPropertySet extends PropertySet {
-    private final static long serialVersionUID = 1;
+    private static final long serialVersionUID = 1;
     
 	/**
 	 * Constructor for IntPropertySet.

@@ -24,11 +24,11 @@ import ghidra.dbg.util.ConversionUtils;
 public interface DbgModelTargetRegister extends DbgModelTargetObject, TargetRegister {
 
 	@Override
-	public int getBitLength();
+    int getBitLength();
 
-	public DbgRegister getRegister();
+	DbgRegister getRegister();
 
-	public default byte[] getBytes() {
+	default byte[] getBytes() {
 		String val = (String) getCachedAttributes().get(VALUE_ATTRIBUTE_NAME);
 		BigInteger value = new BigInteger(val, 16);
 		return ConversionUtils.bigIntegerToBytes(16, value);

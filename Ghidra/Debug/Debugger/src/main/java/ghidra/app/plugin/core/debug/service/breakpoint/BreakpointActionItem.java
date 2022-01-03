@@ -19,5 +19,5 @@ import java.util.concurrent.CompletableFuture;
 
 @FunctionalInterface
 public interface BreakpointActionItem {
-	public CompletableFuture<Void> execute();
+	CompletableFuture<Void> execute();
 }

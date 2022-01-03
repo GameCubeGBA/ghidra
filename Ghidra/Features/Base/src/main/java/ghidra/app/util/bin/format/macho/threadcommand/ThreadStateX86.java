@@ -18,23 +18,23 @@ package ghidra.app.util.bin.format.macho.threadcommand;
 abstract class ThreadStateX86 extends ThreadState {
 
 	@Deprecated
-	public final static int i386_THREAD_STATE = 1;
+    public static final int i386_THREAD_STATE = 1;
 	@Deprecated
-	public final static int i386_FLOAT_STATE = 2;
+    public static final int i386_FLOAT_STATE = 2;
 	@Deprecated
-	public final static int i386_EXCEPTION_STATE = 3;
+    public static final int i386_EXCEPTION_STATE = 3;
 
-	public final static int x86_THREAD_STATE32 = 1;
-	public final static int x86_FLOAT_STATE32 = 2;
-	public final static int x86_EXCEPTION_STATE32 = 3;
-	public final static int x86_THREAD_STATE64 = 4;
-	public final static int x86_FLOAT_STATE64 = 5;
-	public final static int x86_EXCEPTION_STATE64 = 6;
-	public final static int x86_THREAD_STATE = 7;
-	public final static int x86_FLOAT_STATE = 8;
-	public final static int x86_EXCEPTION_STATE = 9;
-	public final static int x86_DEBUG_STATE32 = 10;
-	public final static int x86_DEBUG_STATE64 = 11;
-	public final static int x86_DEBUG_STATE = 12;
-	public final static int THREAD_STATE_NONE = 13;
+	public static final int x86_THREAD_STATE32 = 1;
+	public static final int x86_FLOAT_STATE32 = 2;
+	public static final int x86_EXCEPTION_STATE32 = 3;
+	public static final int x86_THREAD_STATE64 = 4;
+	public static final int x86_FLOAT_STATE64 = 5;
+	public static final int x86_EXCEPTION_STATE64 = 6;
+	public static final int x86_THREAD_STATE = 7;
+	public static final int x86_FLOAT_STATE = 8;
+	public static final int x86_EXCEPTION_STATE = 9;
+	public static final int x86_DEBUG_STATE32 = 10;
+	public static final int x86_DEBUG_STATE64 = 11;
+	public static final int x86_DEBUG_STATE = 12;
+	public static final int THREAD_STATE_NONE = 13;
 }

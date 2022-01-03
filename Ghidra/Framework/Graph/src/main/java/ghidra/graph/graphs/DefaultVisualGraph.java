@@ -139,7 +139,7 @@ public abstract class DefaultVisualGraph<V extends VisualVertex,
 		//
 
 		// quick check for no selected vertices
-		boolean hasGroupSelection = selectedVertices.size() > 0;
+		boolean hasGroupSelection = !selectedVertices.isEmpty();
 		if (!hasGroupSelection && focusedVertex == null) {
 			return Collections.emptySet();
 		}

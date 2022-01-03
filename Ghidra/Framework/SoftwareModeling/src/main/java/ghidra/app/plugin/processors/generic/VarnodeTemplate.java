@@ -132,9 +132,8 @@ public class VarnodeTemplate implements Serializable {
     public boolean equals(Object o) {
 		if (o.getClass() != VarnodeTemplate.class) return false;
 		VarnodeTemplate vt = (VarnodeTemplate) o;
-		if ((vt.hashCode() != hashCode) || !vt.space().equals(this.space) || !vt.offset().equals(this.offset) || !vt.size().equals(this.size)) return false;
-		return true;
-	}
+        return (vt.hashCode() == hashCode) && vt.space().equals(this.space) && vt.offset().equals(this.offset) && vt.size().equals(this.size);
+    }
 
 
 }

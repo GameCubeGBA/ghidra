@@ -43,8 +43,8 @@ import java.util.List;
  * </pre>
  */
 public class ResourceDirectory implements StructConverter {
-	public final static String NAME = "IMAGE_RESOURCE_DIRECTORY";
-	public final static int SIZEOF = 16;
+	public static final String NAME = "IMAGE_RESOURCE_DIRECTORY";
+	public static final int SIZEOF = 16;
 
     private int    characteristics;
     private int    timeDataStamp;

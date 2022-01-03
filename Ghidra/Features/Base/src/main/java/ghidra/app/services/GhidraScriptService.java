@@ -20,8 +20,8 @@ import ghidra.util.task.TaskListener;
 
 public interface GhidraScriptService {
 
-	public void runScript(String scriptName, TaskListener listener);
-	public void refreshScriptList();
+	void runScript(String scriptName, TaskListener listener);
+	void refreshScriptList();
 
 	/**
 	 * Attempts to edit the provided file in Eclipse.
@@ -29,5 +29,5 @@ public interface GhidraScriptService {
 	 * @param file The file to edit in Eclipse.
 	 * @return True if the file opened in Eclipse; otherwise, false.
 	 */
-	public boolean tryToEditFileInEclipse(ResourceFile file);
+    boolean tryToEditFileInEclipse(ResourceFile file);
 }

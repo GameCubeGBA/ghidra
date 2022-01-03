@@ -48,11 +48,8 @@ public abstract class BinaryExpression extends PatternExpression {
 			return false;
 		}
 		BinaryExpression that = (BinaryExpression) obj;
-		if (!this.left.equals(that.left) || !this.right.equals(that.right)) {
-			return false;
-		}
-		return true;
-	}
+        return this.left.equals(that.left) && this.right.equals(that.right);
+    }
 
 	public BinaryExpression() {
 	}

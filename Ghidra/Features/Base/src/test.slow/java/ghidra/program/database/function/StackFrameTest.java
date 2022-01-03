@@ -43,8 +43,7 @@ public class StackFrameTest extends AbstractGhidraHeadedIntegrationTest {
 	private int transactionID;
 
 	public StackFrameTest() {
-		super();
-	}
+    }
 
 	@After
 	public void tearDown() throws Exception {
@@ -134,9 +133,9 @@ public class StackFrameTest extends AbstractGhidraHeadedIntegrationTest {
 		frame = f.getStackFrame();
 
 		Variable[] vars = frame.getStackVariables();
-		for (int i = 0; i < vars.length; i++) {
-			System.out.println(vars[i].getName() + ": " + vars[i].getVariableStorage());
-		}
+        for (Variable variable : vars) {
+            System.out.println(variable.getName() + ": " + variable.getVariableStorage());
+        }
 		assertEquals(8, frame.getParameters().length);
 
 		assertEquals(8, frame.getParameterSize());
@@ -145,33 +144,31 @@ public class StackFrameTest extends AbstractGhidraHeadedIntegrationTest {
 		vars = frame.getParameters();
 		assertEquals(8, vars.length);
 		int n = growsNeg ? 8 : 0;
-		for (int i = 0; i < vars.length; i++) {
-			Variable var = vars[i];
-			System.out.println(
-				"  Stack Var: " + var.getName() + " " + vars[i].getVariableStorage());
-			assertTrue(var.isStackVariable());
-			assertEquals(n - 8, var.getStackOffset());
-			assertEquals(names[n], var.getName());
-			assertEquals(1, var.getLength());
-			assertTrue(dt.isEquivalent(var.getDataType()));
-			assertEquals("My Comment" + n, var.getComment());
-			++n;
-		}
+        for (Variable var : vars) {
+            System.out.println(
+                    "  Stack Var: " + var.getName() + " " + var.getVariableStorage());
+            assertTrue(var.isStackVariable());
+            assertEquals(n - 8, var.getStackOffset());
+            assertEquals(names[n], var.getName());
+            assertEquals(1, var.getLength());
+            assertTrue(dt.isEquivalent(var.getDataType()));
+            assertEquals("My Comment" + n, var.getComment());
+            ++n;
+        }
 
 		vars = frame.getLocals();
 		assertEquals(8, vars.length);
 		n = growsNeg ? 0 : 8;
-		for (int i = 0; i < vars.length; i++) {
-			Variable var = vars[i];
-			//System.out.println("  Stack Var: " + var.getName() + " " + vars[i].getVariableStorage());
-			assertTrue(var.isStackVariable());
-			assertEquals(n - 8, var.getStackOffset());
-			assertEquals(names[n], var.getName());
-			assertEquals(1, var.getLength());
-			assertTrue(dt.isEquivalent(var.getDataType()));
-			assertEquals("My Comment" + n, var.getComment());
-			++n;
-		}
+        for (Variable var : vars) {
+            //System.out.println("  Stack Var: " + var.getName() + " " + vars[i].getVariableStorage());
+            assertTrue(var.isStackVariable());
+            assertEquals(n - 8, var.getStackOffset());
+            assertEquals(names[n], var.getName());
+            assertEquals(1, var.getLength());
+            assertTrue(dt.isEquivalent(var.getDataType()));
+            assertEquals("My Comment" + n, var.getComment());
+            ++n;
+        }
 
 	}
 	//TODO

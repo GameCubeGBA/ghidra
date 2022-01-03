@@ -29,8 +29,7 @@ import ghidra.program.util.ProgramSelection;
 public class DiffEnablementTest extends DiffTestAdapter {
 
 	public DiffEnablementTest() {
-		super();
-	}
+    }
 
 	@Override
 	@Before

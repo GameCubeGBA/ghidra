@@ -29,7 +29,6 @@ package ghidra.program.model.pcode;
 public class BlockList extends BlockGraph {
 	
 	public BlockList() {
-		super();
-		blocktype = PcodeBlock.LIST;
+        blocktype = PcodeBlock.LIST;
 	}
 }

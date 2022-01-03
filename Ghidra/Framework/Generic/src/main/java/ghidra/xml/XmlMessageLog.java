@@ -29,8 +29,7 @@ public class XmlMessageLog extends MessageLog {
 	 * Constructs a new XML message log.
 	 */
 	public XmlMessageLog() {
-		super();
-	}
+    }
 
 	/**
 	 * Sets the XML parser.

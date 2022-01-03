@@ -64,7 +64,7 @@ public class AutoTableDisassemblerPlugin extends ProgramPlugin implements Domain
 	private boolean automaticLabel;
 	private int offsetLen;
 	private DockingAction findTableAction;
-	final static String SEARCH_ACTION_NAME = "Search for Address Tables";
+	static final String SEARCH_ACTION_NAME = "Search for Address Tables";
 
 	public AutoTableDisassemblerPlugin(PluginTool tool) {
 		super(tool, true, true);

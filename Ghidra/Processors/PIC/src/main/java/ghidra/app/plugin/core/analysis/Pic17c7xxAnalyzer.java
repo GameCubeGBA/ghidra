@@ -385,24 +385,23 @@ public class Pic17c7xxAnalyzer extends AbstractAnalyzer {
 
 		DirectedGraph graph = new DirectedGraph();
 
-		Iterator<Address> iter = blockEntrySet.iterator();
-		while (iter.hasNext()) {
-			CodeBlock srcBlock = model.getCodeBlockAt(iter.next(), monitor);
-			Vertex srcVertex = getConnectedVertex(graph, srcBlock, null);
+        for (Address address : blockEntrySet) {
+            CodeBlock srcBlock = model.getCodeBlockAt(address, monitor);
+            Vertex srcVertex = getConnectedVertex(graph, srcBlock, null);
 
-			CodeBlockReferenceIterator refIter = srcBlock.getDestinations(monitor);
-			while (refIter.hasNext()) {
-				CodeBlockReference blockRef = refIter.next();
-				Address destAddr = blockRef.getReference();
-				if (!blockEntrySet.contains(destAddr) ||
-					destAddr.equals(srcBlock.getFirstStartAddress())) {
-					// skip destinations not contained within the initial set or is a self-reference
-					continue;
-				}
-				CodeBlock destBlock = blockRef.getDestinationBlock();
-				getConnectedVertex(graph, destBlock, srcVertex);
-			}
-		}
+            CodeBlockReferenceIterator refIter = srcBlock.getDestinations(monitor);
+            while (refIter.hasNext()) {
+                CodeBlockReference blockRef = refIter.next();
+                Address destAddr = blockRef.getReference();
+                if (!blockEntrySet.contains(destAddr) ||
+                        destAddr.equals(srcBlock.getFirstStartAddress())) {
+                    // skip destinations not contained within the initial set or is a self-reference
+                    continue;
+                }
+                CodeBlock destBlock = blockRef.getDestinationBlock();
+                getConnectedVertex(graph, destBlock, srcVertex);
+            }
+        }
 		return graph;
 	}
 
@@ -432,16 +431,16 @@ public class Pic17c7xxAnalyzer extends AbstractAnalyzer {
 				markupFRegInstruction(instr, 0, RefType.READ);
 				markupFRegInstruction(instr, 1, RefType.WRITE);
 			}
-			else if (mnemonic.equals("TABLRD")) {
+			else if ("TABLRD".equals(mnemonic)) {
 				markupFRegInstruction(instr, 2, RefType.WRITE);
 			}
-			else if (mnemonic.equals("TLRD")) {
+			else if ("TLRD".equals(mnemonic)) {
 				markupFRegInstruction(instr, 1, RefType.WRITE);
 			}
-			else if (mnemonic.equals("TABLWT")) {
+			else if ("TABLWT".equals(mnemonic)) {
 				markupFRegInstruction(instr, 2, RefType.READ);
 			}
-			else if (mnemonic.equals("TLWT")) {
+			else if ("TLWT".equals(mnemonic)) {
 				markupFRegInstruction(instr, 1, RefType.READ);
 			}
 			else if (FREG_BIT_INSTRUCTIONS.contains(mnemonic)) {

@@ -20,7 +20,7 @@ public class UnsignedInteger5DataType extends AbstractIntegerDataType {
 	private static final long serialVersionUID = 1L;
 
 	/** A statically defined UnsignedInteger5DataType instance.*/
-	public final static UnsignedInteger5DataType dataType = new UnsignedInteger5DataType();
+    public static final UnsignedInteger5DataType dataType = new UnsignedInteger5DataType();
 
 	public UnsignedInteger5DataType() {
 		this(null);

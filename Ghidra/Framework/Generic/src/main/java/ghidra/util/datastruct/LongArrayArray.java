@@ -29,7 +29,7 @@ import java.io.Serializable;
  * Array of long[] that grows as needed.
  */
 public class LongArrayArray implements Array, Serializable {
-	private final static long serialVersionUID = 1;
+	private static final long serialVersionUID = 1;
 
     static final int MIN_SIZE = 4;
     long[] longs;

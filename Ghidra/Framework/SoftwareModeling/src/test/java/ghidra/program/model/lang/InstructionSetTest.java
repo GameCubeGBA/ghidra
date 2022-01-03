@@ -40,8 +40,7 @@ public class InstructionSetTest extends AbstractGenericTest {
 	private InstructionSet instructionSet;
 
 	public InstructionSetTest() {
-		super();
-	}
+    }
 
 	private Address addr(long offset) {
 		return AddressSpace.DEFAULT_REGISTER_SPACE.getAddress(offset);

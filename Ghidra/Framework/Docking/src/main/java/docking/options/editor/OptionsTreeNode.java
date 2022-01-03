@@ -27,11 +27,11 @@ import ghidra.framework.options.Options;
 import resources.ResourceManager;
 
 class OptionsTreeNode extends GTreeLazyNode {
-	private final static Icon OPEN_FOLDER_ICON =
+	private static final Icon OPEN_FOLDER_ICON =
 		ResourceManager.loadImage("images/openSmallFolder.png");
-	private final static Icon CLOSED_FOLDER_ICON =
+	private static final Icon CLOSED_FOLDER_ICON =
 		ResourceManager.loadImage("images/closedSmallFolder.png");
-	private final static Icon PROPERTIES_ICON =
+	private static final Icon PROPERTIES_ICON =
 		ResourceManager.loadImage("images/document-properties.png");
 
 	private final Options options;
@@ -97,7 +97,7 @@ class OptionsTreeNode extends GTreeLazyNode {
 	}
 
 	public int compareTo(OptionsTreeNode other) {
-		return getName().compareTo(other.getName());
+		return name.compareTo(other.name);
 	}
 
 	public String getGroupPathName() {
@@ -122,7 +122,7 @@ class OptionsTreeNode extends GTreeLazyNode {
 
 	@Override
 	public String toString() {
-		return getName();
+		return name;
 	}
 
 	@Override
@@ -132,7 +132,7 @@ class OptionsTreeNode extends GTreeLazyNode {
 
 	@Override
 	public int compareTo(GTreeNode other) {
-		return getName().compareTo(other.getName());
+		return name.compareTo(other.getName());
 	}
 
 	@Override
@@ -143,6 +143,6 @@ class OptionsTreeNode extends GTreeLazyNode {
 		if ((obj == null) || (obj.getClass() != getClass())) {
 			return false;
 		}
-		return getName().equals(((OptionsTreeNode) obj).getName());
+		return name.equals(((OptionsTreeNode) obj).name);
 	}
 }

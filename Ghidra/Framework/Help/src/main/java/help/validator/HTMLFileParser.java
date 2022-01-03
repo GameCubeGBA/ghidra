@@ -114,10 +114,10 @@ public class HTMLFileParser {
 
 	private static TagBlock getTagBody(LineNumberReader rdr, Line line) throws IOException {
 
-		String tagBody = "";
+		StringBuilder tagBody = new StringBuilder();
 		int tagEnd = -1;
 		while ((tagEnd = line.indexOf('>')) < 0) {
-			tagBody += line.text + " ";
+			tagBody.append(line.text).append(" ");
 			String nextLineText = rdr.readLine();
 			if (nextLineText == null) {
 				line = null;
@@ -128,11 +128,11 @@ public class HTMLFileParser {
 		}
 
 		if (line != null) {
-			tagBody += line.substring(0, tagEnd).text;
+			tagBody.append(line.substring(0, tagEnd).text);
 			line = line.substring(tagEnd + 1);
 		}
 
-		return new TagBlock(line, tagBody);
+		return new TagBlock(line, tagBody.toString());
 	}
 
 	private static TagBlock skipPastCommentEnd(LineNumberReader rdr, Line line, int start)
@@ -140,9 +140,9 @@ public class HTMLFileParser {
 
 		line = line.substring(start);
 
-		String comment = "";
+		StringBuilder comment = new StringBuilder();
 		while (!line.contains(COMMENT_END_TAG)) {
-			comment += line.text + '\n';
+			comment.append(line.text).append('\n');
 			String text = rdr.readLine();
 			line = new Line(line.file, text, rdr.getLineNumber());
 		}
@@ -150,11 +150,11 @@ public class HTMLFileParser {
 		int index = line.indexOf(COMMENT_END_TAG, 0);
 		if (index >= 0) {
 			// update the line to move past the comment closing tag 
-			comment += line.substring(0, index).text;
+			comment.append(line.substring(0, index).text);
 			line = line.substring(index + COMMENT_END_TAG.length());
 		}
 
-		return new TagBlock(line, comment);
+		return new TagBlock(line, comment.toString());
 	}
 
 	private static ScanResult getTagName(Line line, int index) throws IOException {
@@ -264,18 +264,17 @@ public class HTMLFileParser {
 		buf = new StringBuilder();
 		buf.append('<');
 		buf.append(tagType);
-		Iterator<String> iter = map.keySet().iterator();
-		while (iter.hasNext()) {
-			attr = iter.next();
-			String value = map.get(attr);
-			buf.append(' ');
-			buf.append(attr);
-			if (value != null) {
-				buf.append("=\"");
-				buf.append(value);
-				buf.append("\"");
-			}
-		}
+        for (String s : map.keySet()) {
+            attr = s;
+            String value = map.get(attr);
+            buf.append(' ');
+            buf.append(attr);
+            if (value != null) {
+                buf.append("=\"");
+                buf.append(value);
+                buf.append("\"");
+            }
+        }
 		buf.append('>');
 		return buf.toString();
 	}

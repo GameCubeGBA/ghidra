@@ -21,6 +21,6 @@ import ghidra.program.model.address.AddressRange;
 public interface LldbModelTargetModuleSection extends LldbModelTargetObject, TargetSection {
 
 	@Override
-	public AddressRange getRange();
+    AddressRange getRange();
 
 }

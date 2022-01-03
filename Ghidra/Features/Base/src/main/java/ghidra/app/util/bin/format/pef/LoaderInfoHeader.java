@@ -45,7 +45,7 @@ import java.util.List;
  * }</pre>
  */
 public class LoaderInfoHeader implements StructConverter {
-	public final static int SIZEOF = 56;
+	public static final int SIZEOF = 56;
 
 	private SectionHeader _section;
 

@@ -389,11 +389,8 @@ public abstract class VariableDB implements Variable {
 		if (getFirstUseOffset() != otherVar.getFirstUseOffset()) {
 			return false;
 		}
-		if (!DataTypeUtilities.isSameOrEquivalentDataType(getDataType(), otherVar.getDataType())) {
-			return false;
-		}
-		return true;
-	}
+        return DataTypeUtilities.isSameOrEquivalentDataType(getDataType(), otherVar.getDataType());
+    }
 
 	/**
 	 * Update variable storage and data-type associated with the underlying variable symbol.

@@ -33,11 +33,11 @@ import resources.ResourceManager;
  */
 public class CreateInternalStructureAction extends CompositeEditorTableAction {
 
-	private final static ImageIcon ICON =
+	private static final ImageIcon ICON =
 		ResourceManager.loadImage("images/cstruct.png");
-	public final static String ACTION_NAME = "Create Structure From Selection";
-	private final static String GROUP_NAME = COMPONENT_ACTION_GROUP;
-	private final static String DESCRIPTION =
+	public static final String ACTION_NAME = "Create Structure From Selection";
+	private static final String GROUP_NAME = COMPONENT_ACTION_GROUP;
+	private static final String DESCRIPTION =
 		"Create a new structure from the selected components and replace them with it.";
 	private static String[] POPUP_PATH = new String[] { ACTION_NAME };
 

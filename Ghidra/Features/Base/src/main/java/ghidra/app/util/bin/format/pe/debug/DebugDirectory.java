@@ -48,11 +48,11 @@ public class DebugDirectory implements StructConverter, ByteArrayConverter {
 	/**
 	 * The name to use when converting into a structure data type.
 	 */
-	public final static String NAME = "IMAGE_DEBUG_DIRECTORY";
+    public static final String NAME = "IMAGE_DEBUG_DIRECTORY";
 	/**
 	 * The size of the {@code IMAGE_DEBUG_DIRECTORY}, in bytes.
 	 */
-	public final static int IMAGE_SIZEOF_DEBUG_DIRECTORY = 28;
+    public static final int IMAGE_SIZEOF_DEBUG_DIRECTORY = 28;
 
 	private int characteristics;
 	private int timeDateStamp;

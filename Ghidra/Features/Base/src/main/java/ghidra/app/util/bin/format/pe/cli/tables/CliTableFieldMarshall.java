@@ -42,8 +42,7 @@ public class CliTableFieldMarshall extends CliAbstractTable {
 		public int nativeTypeIndex;
 
 		public CliFieldMarshallRow(int parentIndex, int nativeTypeIndex) {
-			super();
-			this.parentIndex = parentIndex;
+            this.parentIndex = parentIndex;
 			this.nativeTypeIndex = nativeTypeIndex;
 		}
 

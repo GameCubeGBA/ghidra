@@ -29,15 +29,15 @@ import ghidra.dbg.target.TargetInterpreter;
  */
 public interface DbgModelTargetInterpreter extends DbgModelTargetObject, TargetInterpreter {
 
-	public static final String DBG_PROMPT = "(kd)";
+	String DBG_PROMPT = "(kd)";
 
 	@Override
-	public default CompletableFuture<Void> execute(String cmd) {
+    default CompletableFuture<Void> execute(String cmd) {
 		return getModel().gateFuture(getManager().console(cmd));
 	}
 
 	@Override
-	public default CompletableFuture<String> executeCapture(String cmd) {
+    default CompletableFuture<String> executeCapture(String cmd) {
 		return getModel().gateFuture(getManager().consoleCapture(cmd));
 	}
 

@@ -33,8 +33,7 @@ import ghidra.util.task.TaskMonitor;
 public class GraphServicesScreenShots extends GhidraScreenShotGenerator {
 
 	public GraphServicesScreenShots() {
-		super();
-	}
+    }
 
 	@Override
 	public void setUp() throws Exception {

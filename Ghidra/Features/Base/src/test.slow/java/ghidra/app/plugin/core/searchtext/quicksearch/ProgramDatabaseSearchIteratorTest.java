@@ -56,8 +56,7 @@ public class ProgramDatabaseSearchIteratorTest extends AbstractGhidraHeadedInteg
 	private TaskMonitor monitor = TaskMonitor.DUMMY;
 
 	public ProgramDatabaseSearchIteratorTest() {
-		super();
-	}
+    }
 
 	private void createIMM(long address) throws MemoryAccessException {
 		builder.addBytesMoveImmediate(address, (short) 5);

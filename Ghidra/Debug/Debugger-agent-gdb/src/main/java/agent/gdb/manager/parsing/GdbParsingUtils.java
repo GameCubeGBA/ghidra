@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
 public enum GdbParsingUtils {
 	;
 
-	public static abstract class AbstractGdbParser {
+	public abstract static class AbstractGdbParser {
 		protected final CharBuffer buf;
 
 		protected AbstractGdbParser(CharSequence text) {

@@ -98,7 +98,7 @@ public class Rtti3Model extends AbstractCreateRttiDataModel {
 		// Next four bytes after 2 dwords should be number of RTTI1 pointers in RTTI2.
 		int rtti1Count = getRtti1Count();
 		if (rtti1Count < 1 || rtti1Count > MAX_RTTI_1_COUNT) { // For now assume we shouldn't be seeing more than 1000 pointers in RTTI2.
-			throw new InvalidDataTypeException(getName() + " data type at " + getAddress() +
+			throw new InvalidDataTypeException(DATA_TYPE_NAME + " data type at " + getAddress() +
 				" doesn't have a valid " + Rtti1Model.DATA_TYPE_NAME + " count.");
 		}
 
@@ -107,7 +107,7 @@ public class Rtti3Model extends AbstractCreateRttiDataModel {
 		// Last component should refer to RTTI2.
 		Address rtti2Address = getRtti2Address();
 		if (rtti2Address == null) {
-			throw new InvalidDataTypeException(getName() + " data type at " + getAddress() +
+			throw new InvalidDataTypeException(DATA_TYPE_NAME + " data type at " + getAddress() +
 				" doesn't refer to a valid location for the " + Rtti2Model.DATA_TYPE_NAME + ".");
 		}
 		rtti2Model = new Rtti2Model(program, rtti1Count, rtti2Address, validationOptions);

@@ -47,11 +47,8 @@ public class FilterPointersAction extends ToggleDockingAction {
 
 	@Override
 	public boolean isEnabledForContext(ActionContext context) {
-		if (!(context instanceof DataTypesActionContext)) {
-			return false;
-		}
-		return true;
-	}
+        return context instanceof DataTypesActionContext;
+    }
 
 	@Override
 	public void actionPerformed(ActionContext context) {

@@ -822,7 +822,7 @@ public interface Memory extends AddressSetView {
 	 * @return true if name is valid else false
 	 */
 	static boolean isValidMemoryBlockName(String name) {
-		if (name == null || name.length() == 0) {
+		if (name == null || name.isEmpty()) {
 			return false;
 		}
 		for (int i = 0; i < name.length(); i++) {

@@ -65,8 +65,7 @@ public class UserDefinedMergeManagerTest extends AbstractListingMergeManagerTest
 	 * @param arg0
 	 */
 	public UserDefinedMergeManagerTest() {
-		super();
-	}
+    }
 
 @Test
     public void testAddVoidProperty() throws Exception {

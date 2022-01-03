@@ -30,11 +30,11 @@ import resources.ResourceManager;
 
 public class DeleteAction extends CompositeEditorTableAction {
 
-	public final static String ACTION_NAME = "Delete Components";
-	private final static String GROUP_NAME = COMPONENT_ACTION_GROUP;
-	private final static ImageIcon ICON = ResourceManager.loadImage("images/edit-delete.png");
-	private final static String[] popupPath = new String[] { "Delete" };
-	private final static KeyStroke KEY_STROKE = KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0);
+	public static final String ACTION_NAME = "Delete Components";
+	private static final String GROUP_NAME = COMPONENT_ACTION_GROUP;
+	private static final ImageIcon ICON = ResourceManager.loadImage("images/edit-delete.png");
+	private static final String[] popupPath = new String[] { "Delete" };
+	private static final KeyStroke KEY_STROKE = KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0);
 
 	public DeleteAction(CompositeEditorProvider provider) {
 		super(provider, EDIT_ACTION_PREFIX + ACTION_NAME, GROUP_NAME, popupPath, null, ICON);

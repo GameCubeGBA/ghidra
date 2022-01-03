@@ -279,7 +279,7 @@ public class ProgramMemoryComparator {
      * @param program2 the second program
      * @return true if the register names are the same
 	 */
-	static public boolean sameProgramContextRegisterNames(Program program1, Program program2) {
+    public static boolean sameProgramContextRegisterNames(Program program1, Program program2) {
 		ProgramContext pc1 = program1.getProgramContext();
 		ProgramContext pc2 = program2.getProgramContext();
 		List<String> names1 = pc1.getRegisterNames();

@@ -38,8 +38,7 @@ public class DataTypeUtilitiesTest extends AbstractGenericTest {
 	private int txID;
 
 	public DataTypeUtilitiesTest() {
-		super();
-	}
+    }
 
 	@Before
 	public void setUp() throws Exception {

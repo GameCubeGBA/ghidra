@@ -25,30 +25,30 @@ public class X86_32_MachoRelocationConstants {
 	/**
 	 * Generic relocation
 	 */
-	public final static int GENERIC_RELOC_VANILLA = 0;
+    public static final int GENERIC_RELOC_VANILLA = 0;
 
 	/**
 	 * Only follows a GENERIC_RELOC_SECTDIFF
 	 */
-	public final static int GENERIC_RELOC_PAIR = 1;
+    public static final int GENERIC_RELOC_PAIR = 1;
 
 	/**
 	 * The difference of two symbols defined in two different sections
 	 */
-	public final static int GENERIC_RELOC_SECTDIFF = 2;
+    public static final int GENERIC_RELOC_SECTDIFF = 2;
 
 	/**
 	 * Pre-bound lazy pointer
 	 */
-	public final static int GENERIC_RELOC_PB_LA_PTR = 3;
+    public static final int GENERIC_RELOC_PB_LA_PTR = 3;
 
 	/**
 	 * The difference of two symbols defined in two different sections
 	 */
-	public final static int GENERIC_RELOC_LOCAL_SECTDIFF = 4;
+    public static final int GENERIC_RELOC_LOCAL_SECTDIFF = 4;
 
 	/**
 	 * Thread local variables
 	 */
-	public final static int GENERIC_RELOC_TLV = 5;
+    public static final int GENERIC_RELOC_TLV = 5;
 }

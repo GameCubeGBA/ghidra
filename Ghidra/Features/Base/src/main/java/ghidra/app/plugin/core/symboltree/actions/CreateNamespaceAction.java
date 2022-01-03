@@ -58,12 +58,8 @@ public class CreateNamespaceAction extends SymbolTreeContextAction {
 			return (symbolType == SymbolType.NAMESPACE || symbolType == SymbolType.CLASS ||
 				symbolType == SymbolType.LIBRARY);
 		}
-		else if (object instanceof NamespaceCategoryNode) {
-			return true;
-		}
-
-		return false;
-	}
+		else return object instanceof NamespaceCategoryNode;
+    }
 
 	@Override
 	public void actionPerformed(SymbolTreeActionContext context) {

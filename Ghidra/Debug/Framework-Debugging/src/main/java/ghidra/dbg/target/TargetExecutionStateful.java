@@ -29,7 +29,7 @@ public interface TargetExecutionStateful extends TargetObject {
 	/**
 	 * The execution state of a debug target object
 	 */
-	public enum TargetExecutionState {
+    enum TargetExecutionState {
 		/**
 		 * The object has been created, but it not yet alive
 		 * 
@@ -179,7 +179,7 @@ public interface TargetExecutionStateful extends TargetObject {
 	 * @return the state
 	 */
 	@TargetAttributeType(name = STATE_ATTRIBUTE_NAME, required = true, hidden = true)
-	public default TargetExecutionState getExecutionState() {
+    default TargetExecutionState getExecutionState() {
 		return getTypedAttributeNowByName(STATE_ATTRIBUTE_NAME, TargetExecutionState.class,
 			TargetExecutionState.INACTIVE);
 	}

@@ -73,8 +73,7 @@ public class ApplicationKeyManagerFactoryTest extends AbstractGenericTest {
 	}
 
 	public ApplicationKeyManagerFactoryTest() {
-		super();
-	}
+    }
 
 	@Before
 	public void setUp() throws Exception {

@@ -51,8 +51,8 @@ class PythonScriptExecutionThread extends Thread {
 			interpreter.execFile(script.getSourceFile(), script);
 		}
 		catch (PyException pye) {
-			if (PyException.exceptionClassName(pye.type).equalsIgnoreCase(
-				"exceptions.SystemExit")) {
+			if ("exceptions.SystemExit".equalsIgnoreCase(
+                    PyException.exceptionClassName(pye.type))) {
 				interpreter.printErr("SystemExit");
 			}
 			else {

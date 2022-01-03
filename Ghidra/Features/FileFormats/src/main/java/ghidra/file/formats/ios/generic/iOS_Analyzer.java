@@ -34,12 +34,7 @@ public class iOS_Analyzer extends FileFormatAnalyzer {
 	public boolean analyze(Program program, AddressSetView set, TaskMonitor monitor,
 			final MessageLog log) throws Exception {
 
-		DisassemblerMessageListener listener = new DisassemblerMessageListener() {
-			@Override
-			public void disassembleMessageReported(String msg) {
-				log.appendMsg(msg);
-			}
-		};
+		DisassemblerMessageListener listener = msg -> log.appendMsg(msg);
 
 		Address imageBase = program.getImageBase();
 

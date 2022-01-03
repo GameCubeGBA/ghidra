@@ -12,12 +12,12 @@
 package SWIG;
 
 public final class FrameComparison {
-  public final static FrameComparison eFrameCompareInvalid = new FrameComparison("eFrameCompareInvalid");
-  public final static FrameComparison eFrameCompareUnknown = new FrameComparison("eFrameCompareUnknown");
-  public final static FrameComparison eFrameCompareEqual = new FrameComparison("eFrameCompareEqual");
-  public final static FrameComparison eFrameCompareSameParent = new FrameComparison("eFrameCompareSameParent");
-  public final static FrameComparison eFrameCompareYounger = new FrameComparison("eFrameCompareYounger");
-  public final static FrameComparison eFrameCompareOlder = new FrameComparison("eFrameCompareOlder");
+  public static final FrameComparison eFrameCompareInvalid = new FrameComparison("eFrameCompareInvalid");
+  public static final FrameComparison eFrameCompareUnknown = new FrameComparison("eFrameCompareUnknown");
+  public static final FrameComparison eFrameCompareEqual = new FrameComparison("eFrameCompareEqual");
+  public static final FrameComparison eFrameCompareSameParent = new FrameComparison("eFrameCompareSameParent");
+  public static final FrameComparison eFrameCompareYounger = new FrameComparison("eFrameCompareYounger");
+  public static final FrameComparison eFrameCompareOlder = new FrameComparison("eFrameCompareOlder");
 
   public final int swigValue() {
     return swigValue;
@@ -30,9 +30,9 @@ public final class FrameComparison {
   public static FrameComparison swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-    for (int i = 0; i < swigValues.length; i++)
-      if (swigValues[i].swigValue == swigValue)
-        return swigValues[i];
+      for (FrameComparison value : swigValues)
+          if (value.swigValue == swigValue)
+              return value;
     throw new IllegalArgumentException("No enum " + FrameComparison.class + " with value " + swigValue);
   }
 

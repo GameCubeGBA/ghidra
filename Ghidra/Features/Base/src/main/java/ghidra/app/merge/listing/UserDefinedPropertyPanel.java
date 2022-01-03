@@ -24,14 +24,13 @@ package ghidra.app.merge.listing;
  */
 class UserDefinedPropertyPanel extends VerticalChoicesPanel {
 
-	private final static long serialVersionUID = 1;
+	private static final long serialVersionUID = 1;
 
 	/**
 	 * Creates a panel for displaying and resolving User Defined Property conflicts.
 	 */
 	UserDefinedPropertyPanel() {
-		super();
-	}
+    }
 
 	/**
 	 * Creates a panel for displaying and resolving User Defined Property conflicts.

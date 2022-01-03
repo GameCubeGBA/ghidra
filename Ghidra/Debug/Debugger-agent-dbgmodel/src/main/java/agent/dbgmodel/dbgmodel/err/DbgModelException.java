@@ -20,8 +20,7 @@ package agent.dbgmodel.dbgmodel.err;
  */
 public class DbgModelException extends Exception {
 	public DbgModelException() {
-		super();
-	}
+    }
 
 	public DbgModelException(String message) {
 		super(message);

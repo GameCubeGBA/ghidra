@@ -33,13 +33,13 @@ import java.util.List;
  */
 public interface ClangNode {
 
-	public ClangNode Parent();
-	public Address getMinAddress();
-	public Address getMaxAddress();
-	public void setHighlight(Color c);
-	public int numChildren(); 
-	public ClangNode Child(int i);
-	public ClangFunction getClangFunction();
-	public void flatten(List<ClangNode> list);
+	ClangNode Parent();
+	Address getMinAddress();
+	Address getMaxAddress();
+	void setHighlight(Color c);
+	int numChildren();
+	ClangNode Child(int i);
+	ClangFunction getClangFunction();
+	void flatten(List<ClangNode> list);
 
 }

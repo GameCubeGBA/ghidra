@@ -20,8 +20,7 @@ import org.junit.Test;
 public class FallThroughPluginScreenShots extends GhidraScreenShotGenerator {
 
 	public FallThroughPluginScreenShots() {
-		super();
-	}
+    }
 
 @Test
     public void testSetFallThrough() {

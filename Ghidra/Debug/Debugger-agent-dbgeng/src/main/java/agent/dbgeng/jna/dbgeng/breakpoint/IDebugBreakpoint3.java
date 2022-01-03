@@ -22,7 +22,7 @@ import com.sun.jna.platform.win32.WinNT.HRESULT;
 import agent.dbgeng.jna.dbgeng.UnknownWithUtils.VTableIndex;
 
 public interface IDebugBreakpoint3 extends IDebugBreakpoint2 {
-	final IID IID_IDEBUG_BREAKPOINT3 = new IID("38f5c249-b448-43bb-9835-579d4ec02249");
+	IID IID_IDEBUG_BREAKPOINT3 = new IID("38f5c249-b448-43bb-9835-579d4ec02249");
 
 	enum VTIndices3 implements VTableIndex {
 		GET_GUID, //

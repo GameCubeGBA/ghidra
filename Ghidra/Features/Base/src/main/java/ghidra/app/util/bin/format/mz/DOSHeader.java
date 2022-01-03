@@ -63,9 +63,9 @@ import ghidra.util.exception.DuplicateNameException;
  */
 public class DOSHeader implements StructConverter, Writeable {
     /** The name to use when converting into a structure data type. */
-    public final static String NAME = "IMAGE_DOS_HEADER";
-	public final static int IMAGE_DOS_SIGNATURE = 0x5A4D; // MZ
-    public final static int SIZEOF_DOS_HEADER   = 64;
+    public static final String NAME = "IMAGE_DOS_HEADER";
+	public static final int IMAGE_DOS_SIGNATURE = 0x5A4D; // MZ
+    public static final int SIZEOF_DOS_HEADER   = 64;
 
     private short e_magic;                     // Magic number							
     private short e_cblp;                      // Bytes on last page of file

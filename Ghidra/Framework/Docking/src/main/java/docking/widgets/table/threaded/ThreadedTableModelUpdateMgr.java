@@ -40,8 +40,8 @@ import ghidra.util.task.TaskMonitorAdapter;
 class ThreadedTableModelUpdateMgr<T> {
 
 	// make the delay large enough that a flurry of events will stay buffered
-	public final static int DELAY = 5000;
-	public final static int MAX_DELAY = 1000 * 60 * 20;
+    public static final int DELAY = 5000;
+	public static final int MAX_DELAY = 1000 * 60 * 20;
 	static final int TOO_MANY_ADD_REMOVES = 3000;
 
 	private ThreadedTableModel<T, ?> model;

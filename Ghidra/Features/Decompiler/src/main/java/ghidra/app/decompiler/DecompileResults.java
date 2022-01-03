@@ -221,7 +221,7 @@ public class DecompileResults {
 				parser.start("doc");
 				while(parser.peek().isStart()) {
 					XmlElement el = parser.peek();
-					if (el.getName().equals("function")) {
+					if ("function".equals(el.getName())) {
 						if (hfunc ==  null) {
 							hfunc = new HighFunction(function, language, compilerSpec, dtmanage);
 							hfunc.readXML(parser);
@@ -233,7 +233,7 @@ public class DecompileResults {
 							}							
 						}
 					}
-					else if (el.getName().equals("parammeasures")) {
+					else if ("parammeasures".equals(el.getName())) {
 						hparamid = new HighParamID(function, language, compilerSpec, dtmanage);
 						hparamid.readXML(parser);
 					}

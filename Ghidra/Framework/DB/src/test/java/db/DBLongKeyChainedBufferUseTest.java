@@ -34,8 +34,7 @@ public class DBLongKeyChainedBufferUseTest extends AbstractGenericTest {
 	 * Constructor
 	 */
 	public DBLongKeyChainedBufferUseTest() {
-		super();
-	}
+    }
 
 	@Before
 	public void setUp() throws Exception {
@@ -58,9 +57,7 @@ public class DBLongKeyChainedBufferUseTest extends AbstractGenericTest {
 		String str = prefix + k;
 		StringBuilder buf = new StringBuilder();
 		int iter = ((bigLength * factor) / str.length()) + 1;
-		for (int i = 0; i < iter; i++) {
-			buf.append(str);
-		}
+        buf.append(str.repeat(Math.max(0, iter)));
 		return buf.toString();
 	}
 

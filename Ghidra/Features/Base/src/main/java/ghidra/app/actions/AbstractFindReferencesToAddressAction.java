@@ -93,12 +93,8 @@ public abstract class AbstractFindReferencesToAddressAction extends NavigatableC
 
 		Listing listing = program.getListing();
 		CodeUnit cu = listing.getCodeUnitContaining(address);
-		if (cu == null) {
-			return false;
-		}
-
-		return true;
-	}
+        return cu != null;
+    }
 
 	protected ProgramLocation getLocation(NavigatableActionContext context) {
 		return context.getLocation();

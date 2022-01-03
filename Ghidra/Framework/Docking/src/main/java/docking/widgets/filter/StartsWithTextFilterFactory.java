@@ -27,7 +27,7 @@ public class StartsWithTextFilterFactory implements TextFilterFactory {
 
 	@Override
 	public TextFilter getTextFilter(String text) {
-		if ((text == null) || (text.length() == 0)) {
+		if ((text == null) || (text.isEmpty())) {
 			return null;
 		}
 

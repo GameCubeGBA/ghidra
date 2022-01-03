@@ -33,8 +33,7 @@ public class MyTestMemory extends AddressSet implements Memory {
 	MemoryBlock myMemoryBlock;
 
 	public MyTestMemory(byte[] bytes) {
-		super();
-		this.myMemoryBytes = bytes;
+        this.myMemoryBytes = bytes;
 		AddressSpace space = new GenericAddressSpace("Mem", 32, AddressSpace.TYPE_RAM, 0);
 		Address start = space.getAddress(0);
 		Address end = space.getAddress(bytes.length - 1);

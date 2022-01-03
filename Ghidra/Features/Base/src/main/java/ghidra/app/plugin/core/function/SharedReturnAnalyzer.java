@@ -40,10 +40,10 @@ public class SharedReturnAnalyzer extends AbstractAnalyzer {
 			"the one-shot analysis action can be used if functions were created while this " +
 			"analyzer was disabled or not present.";
 
-	private final static String OPTION_NAME_ASSUME_CONTIGUOUS_FUNCTIONS =
+	private static final String OPTION_NAME_ASSUME_CONTIGUOUS_FUNCTIONS =
 		"Assume Contiguous Functions Only";
 
-	private final static String OPTION_NAME_CONSIDER_CONDITIONAL_BRANCHES_FUNCTIONS =
+	private static final String OPTION_NAME_CONSIDER_CONDITIONAL_BRANCHES_FUNCTIONS =
 		"Allow Conditional Jumps";
 
 	private static final String OPTION_DESCRIPTION_ASSUME_CONTIGUOUS_FUNCTIONS =
@@ -54,8 +54,8 @@ public class SharedReturnAnalyzer extends AbstractAnalyzer {
 		"Signals to allow conditional jumps to be consider for " +
 			"shared return jumps to other functions.";
 
-	private final static boolean OPTION_DEFAULT_ASSUME_CONTIGUOUS_FUNCTIONS_ENABLED = false;
-	private final static boolean OPTION_DEFAULT_CONSIDER_CONDITIONAL_BRANCHES_ENABLED = false;
+	private static final boolean OPTION_DEFAULT_ASSUME_CONTIGUOUS_FUNCTIONS_ENABLED = false;
+	private static final boolean OPTION_DEFAULT_CONSIDER_CONDITIONAL_BRANCHES_ENABLED = false;
 
 	private boolean assumeContiguousFunctions = OPTION_DEFAULT_ASSUME_CONTIGUOUS_FUNCTIONS_ENABLED;
 	private boolean considerConditionalBranches =

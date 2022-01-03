@@ -124,7 +124,7 @@ public class PackedDatabaseCache {
 			String line;
 			while ((line = r.readLine()) != null) {
 				line = line.trim();
-				if (line.length() == 0) {
+				if (line.isEmpty()) {
 					continue;
 				}
 				CachedDB entry = new CachedDB(line);
@@ -321,7 +321,6 @@ public class PackedDatabaseCache {
 	/**
 	 * Get cached packed database
 	 * @param packedDbFile
-	 * @param isReadOnly
 	 * @param monitor
 	 * @return
 	 * @throws CancelledException

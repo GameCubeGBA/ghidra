@@ -113,7 +113,7 @@ public class GTaskManagerPanel extends JPanel {
 			int dividerLocation = mainPanel.getDividerLocation();
 			Dimension size = mainPanel.getSize();
 			int width = Math.max(1, size.width);
-			lastDividerLocation = (float) dividerLocation / (float) width;
+			lastDividerLocation = (float) dividerLocation / width;
 			mainPanel.remove(resultPanel);
 		}
 		validate();

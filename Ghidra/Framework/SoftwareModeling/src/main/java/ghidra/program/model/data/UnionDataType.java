@@ -599,11 +599,9 @@ public class UnionDataType extends CompositeDataTypeImpl implements UnionInterna
 
 		UnionInternal union = (UnionInternal) dataType;
 
-		Iterator<DataTypeComponentImpl> it = components.iterator();
-		while (it.hasNext()) {
-			DataTypeComponent dtc = it.next();
-			dtc.getDataType().removeParent(this);
-		}
+        for (DataTypeComponent dtc : components) {
+            dtc.getDataType().removeParent(this);
+        }
 		components.clear();
 		unionAlignment = -1;
 

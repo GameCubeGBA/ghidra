@@ -36,7 +36,7 @@ public class ProcessorStateDialog extends DialogComponentProvider {
 
 	private JPanel mainPanel;
 
-	private final static String TITLE = "Specify Processor Disassembly Options";
+	private static final String TITLE = "Specify Processor Disassembly Options";
 
 	private FixedBitSizeValueField[] fields;
 	private java.util.List<Register> registerList;
@@ -84,18 +84,8 @@ public class ProcessorStateDialog extends DialogComponentProvider {
 		group.add(decimalButton);
 		radioPanel.add(hexButton);
 		radioPanel.add(decimalButton);
-		hexButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setRadix(16);
-			}
-		});
-		decimalButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setRadix(10);
-			}
-		});
+		hexButton.addActionListener(e -> setRadix(16));
+		decimalButton.addActionListener(e -> setRadix(10));
 
 		addWorkPanel(mainPanel);
 		setHelpLocation(new HelpLocation("DisassemblerPlugin", "ProcessorOptions"));

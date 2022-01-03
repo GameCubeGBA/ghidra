@@ -47,8 +47,7 @@ public class AddressKeyIteratorTest extends AbstractGhidraHeadedIntegrationTest 
 	 * @param arg0
 	 */
 	public AddressKeyIteratorTest() {
-		super();
-	}
+    }
 
 	@Before
 	public void setUp() throws Exception {

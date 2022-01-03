@@ -301,7 +301,7 @@ public class ExternalManagerDB implements ManagerDB, ExternalManager {
 
 	private SourceType checkExternalLabel(String extLabel, Address extAddr, SourceType source)
 			throws InvalidInputException {
-		if (extLabel == null || extLabel.length() == 0) {
+		if (extLabel == null || extLabel.isEmpty()) {
 			extLabel = null;
 		}
 		if (extLabel == null && extAddr == null) {
@@ -384,7 +384,7 @@ public class ExternalManagerDB implements ManagerDB, ExternalManager {
 	private ExternalLocation getExtLocation(Namespace library, String extLabel, Address extAddr,
 			boolean reuseExisting) throws InvalidInputException {
 
-		if (extLabel != null && (extLabel.length() == 0 ||
+		if (extLabel != null && (extLabel.isEmpty() ||
 			SymbolUtilities.isReservedExternalDefaultName(extLabel, addrMap.getAddressFactory()))) {
 			extLabel = null; // force use of address
 		}

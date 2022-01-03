@@ -23,8 +23,8 @@ import ghidra.util.exception.DuplicateNameException;
 import java.io.IOException;
 
 public class CFragResourceMember implements StructConverter {
-	public final static int kNullCFragVersion     =  0;
-	public final static int kWildcardCFragVersion = -1;
+	public static final int kNullCFragVersion     =  0;
+	public static final int kWildcardCFragVersion = -1;
 
 	private String             architecture;
 	private short              reservedA;//must be zero

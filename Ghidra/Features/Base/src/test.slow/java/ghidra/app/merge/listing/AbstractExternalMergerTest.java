@@ -46,8 +46,7 @@ public abstract class AbstractExternalMergerTest extends AbstractListingMergeMan
 	static final String MERGE_BOTH_BUTTON = ExternalFunctionMerger.MERGE_BOTH_BUTTON_NAME;
 
 	public AbstractExternalMergerTest() {
-		super();
-	}
+    }
 
 	ExternalLocation createExternalLabel(ProgramDB program, String transactionDescription,
 			String library, String label, String addressAsString, DataType dataType,

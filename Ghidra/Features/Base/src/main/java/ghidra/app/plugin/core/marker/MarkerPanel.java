@@ -30,8 +30,7 @@ public class MarkerPanel extends JPanel {
 	private MarkerManager manager;
 
 	MarkerPanel(MarkerManager manager) {
-		super();
-		this.manager = manager;
+        this.manager = manager;
 
 		ToolTipManager.sharedInstance().registerComponent(this);
 	}

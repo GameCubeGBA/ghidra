@@ -44,7 +44,7 @@ import resources.ResourceManager;
 
 public class EquateTableProvider extends ComponentProviderAdapter {
 
-	private final static String DELETE_IMAGE = "images/edit-delete.png";
+	private static final String DELETE_IMAGE = "images/edit-delete.png";
 
 	private EquateTablePlugin plugin;
 	private GhidraTable equatesTable;

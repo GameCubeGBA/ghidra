@@ -30,8 +30,8 @@ import ghidra.util.task.TaskMonitor;
 @Deprecated
 public final class DecryptorFactory {
 
-	public final static DecryptedPacket decrypt(String firmwareName, String firmwarePath,
-			ByteProvider provider, TaskMonitor monitor) throws IOException, CryptoException,
+	public static final DecryptedPacket decrypt(String firmwareName, String firmwarePath,
+                                                ByteProvider provider, TaskMonitor monitor) throws IOException, CryptoException,
 	CancelledException {
 
 		List<Decryptor> instances = ClassSearcher.getInstances(Decryptor.class);

@@ -46,7 +46,7 @@ public class XmlUtils {
 		s.append( val ? "true" : "false" ).append( "\"" );
 	}
 	public static boolean decodeBoolean(String boolString) {
-		if ((boolString == null)||(boolString.length()==0)) {
+		if ((boolString == null)||(boolString.isEmpty())) {
 			return false;
 		}
 		char firstc = boolString.charAt(0);

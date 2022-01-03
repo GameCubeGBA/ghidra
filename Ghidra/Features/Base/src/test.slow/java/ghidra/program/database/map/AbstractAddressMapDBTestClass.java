@@ -39,8 +39,7 @@ public abstract class AbstractAddressMapDBTestClass extends AbstractGhidraHeaded
 	 * @param arg0
 	 */
 	public AbstractAddressMapDBTestClass() {
-		super();
-	}
+    }
 
 	@Before
 	public void setUp() throws Exception {

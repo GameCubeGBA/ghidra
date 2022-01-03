@@ -43,7 +43,7 @@ public interface TargetSymbol extends TargetObject {
 	 * @return a future completing with the type
 	 */
 	@TargetAttributeType(name = DATA_TYPE_ATTRIBUTE_NAME, fixed = true, hidden = true)
-	public default TargetDataType getDataType() {
+    default TargetDataType getDataType() {
 		return getTypedAttributeNowByName(DATA_TYPE_ATTRIBUTE_NAME, TargetDataType.class,
 			TargetDataType.UNDEFINED1);
 	}
@@ -53,8 +53,8 @@ public interface TargetSymbol extends TargetObject {
 	 * 
 	 * @return a future completing with the type
 	 */
-	public default CompletableFuture<DataType> getGhidraDataType(
-			TargetDataTypeConverter converter) {
+	default CompletableFuture<DataType> getGhidraDataType(
+            TargetDataTypeConverter converter) {
 		return converter.convertTargetDataType(getDataType()).thenApply(dt -> dt);
 	}
 
@@ -67,7 +67,7 @@ public interface TargetSymbol extends TargetObject {
 	 * 
 	 * @see #getGhidraDataType(TargetDataTypeConverter)
 	 */
-	public default CompletableFuture<DataType> getGhidraDataType(DataTypeManager dtm) {
+	default CompletableFuture<DataType> getGhidraDataType(DataTypeManager dtm) {
 		return getGhidraDataType(new TargetDataTypeConverter(dtm));
 	}
 
@@ -83,7 +83,7 @@ public interface TargetSymbol extends TargetObject {
 	 * 
 	 * @see #getGhidraDataType(DataTypeManager)
 	 */
-	public default CompletableFuture<DataType> getGhidraDataType() {
+	default CompletableFuture<DataType> getGhidraDataType() {
 		return getGhidraDataType((DataTypeManager) null);
 	}
 
@@ -96,7 +96,7 @@ public interface TargetSymbol extends TargetObject {
 	 * 
 	 * @return true if constant, or false if not or unspecified
 	 */
-	public default boolean isConstant() {
+	default boolean isConstant() {
 		return getValue().isConstantAddress();
 	}
 
@@ -111,7 +111,7 @@ public interface TargetSymbol extends TargetObject {
 	 */
 	@Override
 	// NB. TargetObject defines this attribute
-	public default Address getValue() {
+    default Address getValue() {
 		return getTypedAttributeNowByName(VALUE_ATTRIBUTE_NAME, Address.class, Address.NO_ADDRESS);
 	}
 
@@ -128,7 +128,7 @@ public interface TargetSymbol extends TargetObject {
 		name = SIZE_ATTRIBUTE_NAME,
 		fixed = true,
 		hidden = true)
-	public default long getSize() {
+    default long getSize() {
 		return getTypedAttributeNowByName(SIZE_ATTRIBUTE_NAME, Long.class, 0L);
 	}
 
@@ -147,7 +147,7 @@ public interface TargetSymbol extends TargetObject {
 		required = true,
 		fixed = true,
 		hidden = true)
-	public default TargetSymbolNamespace getNamespace() {
+    default TargetSymbolNamespace getNamespace() {
 		return getTypedAttributeNowByName(NAMESPACE_ATTRIBUTE_NAME, TargetSymbolNamespace.class,
 			null);
 	}

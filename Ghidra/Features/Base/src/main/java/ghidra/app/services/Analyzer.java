@@ -34,45 +34,45 @@ public interface Analyzer extends ExtensionPoint {
 	 * Get the name of this analyzer
 	 * @return analyzer name
 	 */
-	public String getName();
+    String getName();
 
 	/**
 	 * Get the type of analysis this analyzer performs
 	 * @return analyze type
 	 */
-	public AnalyzerType getAnalysisType();
+    AnalyzerType getAnalysisType();
 
 	/**
 	 * Returns true if this analyzer should be enabled by default.  Generally useful
 	 * analyzers should return true. Specialized analyzers should return false;
 	 */
-	public boolean getDefaultEnablement(Program program);
+    boolean getDefaultEnablement(Program program);
 
 	/**
 	 * Returns true if it makes sense for this analyzer to directly invoked on an address or
 	 * addressSet.  The AutoAnalyzer plug-in will automatically create an action for each
 	 * analyzer that returns true.
 	 */
-	public boolean supportsOneTimeAnalysis();
+    boolean supportsOneTimeAnalysis();
 
 	/**
 	 * Get a longer description of what this analyzer does.
 	 * @return analyzer description
 	 */
-	public String getDescription();
+    String getDescription();
 
 	/**
 	 * Get the priority that this analyzer should run at.
 	 * @return analyzer priority
 	 */
-	public AnalysisPriority getPriority();
+    AnalysisPriority getPriority();
 
 	/**
 	 * Can this analyzer work on this program. 
 	 * @param program program to be analyzed
 	 * @return true if this analyzer can analyze this program
 	 */
-	public boolean canAnalyze(Program program);
+    boolean canAnalyze(Program program);
 
 	/**
 	 * Called when the requested information type has been added.
@@ -85,7 +85,7 @@ public interface Analyzer extends ExtensionPoint {
 	 * @param log a message log to record analysis information
 	 * @return true if the analysis succeeded
 	 */
-	public boolean added(Program program, AddressSetView set, TaskMonitor monitor, MessageLog log)
+    boolean added(Program program, AddressSetView set, TaskMonitor monitor, MessageLog log)
 			throws CancelledException;
 
 	/**
@@ -99,7 +99,7 @@ public interface Analyzer extends ExtensionPoint {
 	 * @param log a message log to record analysis information
 	 * @return true if the analysis succeeded
 	 */
-	public boolean removed(Program program, AddressSetView set, TaskMonitor monitor, MessageLog log)
+    boolean removed(Program program, AddressSetView set, TaskMonitor monitor, MessageLog log)
 			throws CancelledException;
 
 	/**
@@ -108,7 +108,7 @@ public interface Analyzer extends ExtensionPoint {
 	 * @param options the program options/property list that contains the options
 	 * @param program program to be analyzed
 	 */
-	public void registerOptions(Options options, Program program);
+    void registerOptions(Options options, Program program);
 
 	/**
 	 * Analyzers should initialize their options from the values in the given Options, 
@@ -116,19 +116,19 @@ public interface Analyzer extends ExtensionPoint {
 	 * @param options the program options/property list that contains the options
 	 * @param program program to be analyzed
 	 */
-	public void optionsChanged(Options options, Program program);
+    void optionsChanged(Options options, Program program);
 
 	/**
 	 * Called when an auto-analysis session ends. This notifies the analyzer so it can clean up any 
 	 * resources that only needed to be maintained during a single auto-analysis session.
 	 * @param program the program that was just completed being analyzed
 	 */
-	public void analysisEnded(Program program);
+    void analysisEnded(Program program);
 
 	/**
 	 * Returns true if this analyzer is a prototype.
 	 * @return true if this analyzer is a prototype
 	 */
-	public boolean isPrototype();
+    boolean isPrototype();
 
 }

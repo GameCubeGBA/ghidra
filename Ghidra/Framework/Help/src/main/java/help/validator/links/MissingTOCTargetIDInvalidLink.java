@@ -90,9 +90,6 @@ public class MissingTOCTargetIDInvalidLink implements InvalidLink {
 		if (!Objects.equals(help, other.help)) {
 			return false;
 		}
-		if (!Objects.equals(item, other.item)) {
-			return false;
-		}
-		return true;
-	}
+        return Objects.equals(item, other.item);
+    }
 }

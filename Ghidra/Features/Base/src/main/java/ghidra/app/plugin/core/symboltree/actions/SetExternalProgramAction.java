@@ -57,9 +57,7 @@ public class SetExternalProgramAction extends SymbolTreeContextAction {
 		TreePath[] selectionPaths = context.getSelectedSymbolTreePaths();
 		if (selectionPaths.length == 1) {
 			Object object = selectionPaths[0].getLastPathComponent();
-			if (object instanceof LibrarySymbolNode) {
-				return true;
-			}
+            return object instanceof LibrarySymbolNode;
 		}
 		return false;
 	}
@@ -86,36 +84,29 @@ public class SetExternalProgramAction extends SymbolTreeContextAction {
 
 		dialog.setSearchText(externalName);
 
-		dialog.addOkActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e1) {
-				DomainFile domainFile = dialog.getDomainFile();
-				if (domainFile == null) {
-					return;
-				}
-				String pathName = domainFile.toString();
-				dialog.close();
-				if (!pathName.equals(externalLibraryPath)) {
-					Command cmd = new SetExternalNameCmd(externalName, domainFile.getPathname());
-					plugin.getTool().execute(cmd, plugin.getProgram());
-				}
-			}
-		});
+		dialog.addOkActionListener(e1 -> {
+            DomainFile domainFile = dialog.getDomainFile();
+            if (domainFile == null) {
+                return;
+            }
+            String pathName = domainFile.toString();
+            dialog.close();
+            if (!pathName.equals(externalLibraryPath)) {
+                Command cmd = new SetExternalNameCmd(externalName, domainFile.getPathname());
+                plugin.getTool().execute(cmd, plugin.getProgram());
+            }
+        });
 		dialog.setHelpLocation(new HelpLocation("SymbolTreePlugin", "ChooseExternalProgram"));
 
 		if (externalLibraryPath != null) {
-			SwingUtilities.invokeLater(new Runnable() {
-
-				@Override
-				public void run() {
-					Project project = AppInfo.getActiveProject();
-					ProjectData pd = project.getProjectData();
-					DomainFile domainFile = pd.getFile(externalLibraryPath);
-					if (domainFile != null) {
-						dialog.selectDomainFile(domainFile);
-					}
-				}
-			});
+			SwingUtilities.invokeLater(() -> {
+                Project project = AppInfo.getActiveProject();
+                ProjectData pd = project.getProjectData();
+                DomainFile domainFile = pd.getFile(externalLibraryPath);
+                if (domainFile != null) {
+                    dialog.selectDomainFile(domainFile);
+                }
+            });
 		}
 
 		plugin.getTool().showDialog(dialog);

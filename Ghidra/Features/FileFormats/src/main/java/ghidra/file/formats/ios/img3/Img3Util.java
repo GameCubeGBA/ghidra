@@ -23,7 +23,7 @@ import java.util.Arrays;
 
 public final class Img3Util {
 
-	public final static boolean isIMG3(Program program) {
+	public static final boolean isIMG3(Program program) {
 		if (program != null) {
 			Address address = program.getMinAddress();
 			if (address != null) {

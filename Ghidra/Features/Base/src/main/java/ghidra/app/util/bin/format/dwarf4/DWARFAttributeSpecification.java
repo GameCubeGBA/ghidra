@@ -68,7 +68,7 @@ public class DWARFAttributeSpecification {
 
 	@Override
 	public String toString() {
-		return DWARFUtil.toString(DWARFAttribute.class, getAttribute()) + "->" + getAttributeForm();
+		return DWARFUtil.toString(DWARFAttribute.class, attribute) + "->" + attributeForm;
 	}
 
 	@Override
@@ -91,8 +91,6 @@ public class DWARFAttributeSpecification {
 		DWARFAttributeSpecification other = (DWARFAttributeSpecification) obj;
 		if (attribute != other.attribute)
 			return false;
-		if (attributeForm != other.attributeForm)
-			return false;
-		return true;
-	}
+        return attributeForm == other.attributeForm;
+    }
 }

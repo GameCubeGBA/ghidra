@@ -58,31 +58,30 @@ public class LabelDirectFunctionReferencesScript extends GhidraScript {
 		while (funcIter.hasNext() && !monitor.isCancelled()) {
 			funcSet.add(funcIter.next());
 		}
-		if (funcSet.size() == 0) {
+		if (funcSet.isEmpty()) {
 			popup("No functions found.  Try analyzing code first.");
 			return;
 		}
 
-		for (int i = 0; i < funcSet.size(); i++) {
-			Function func = funcSet.get(i);
-			refs = findRefs(func.getEntryPoint(), monitor);
-			for (int j = 0; j < refs.size(); j++) {
-				Data data = getDataAt(refs.get(j));
-				//	if((data != null) && data.isDefined() && ((data.getBaseDataType().getName() == "dword") || (data.getBaseDataType().getName() == "pointer32"))){
-				if ((data != null) && data.isDefined() &&
-					(("dword".equals(data.getBaseDataType().getName())) || (data.isPointer()))) {
-					resultSet.add(refs.get(j));
-					String newLabel = "ptr_" + func.getName(false) + "_" + refs.get(j).toString();
-					println(newLabel);
-					Symbol sym =
-						symbolTable.createLabel(refs.get(j), newLabel, SourceType.ANALYSIS);
-					if (!sym.isPrimary()) {
-						sym.setPrimary();
-					}
-				}
-			}
+        for (Function func : funcSet) {
+            refs = findRefs(func.getEntryPoint(), monitor);
+            for (Address ref : refs) {
+                Data data = getDataAt(ref);
+                //	if((data != null) && data.isDefined() && ((data.getBaseDataType().getName() == "dword") || (data.getBaseDataType().getName() == "pointer32"))){
+                if ((data != null) && data.isDefined() &&
+                        (("dword".equals(data.getBaseDataType().getName())) || (data.isPointer()))) {
+                    resultSet.add(ref);
+                    String newLabel = "ptr_" + func.getName(false) + "_" + ref.toString();
+                    println(newLabel);
+                    Symbol sym =
+                            symbolTable.createLabel(ref, newLabel, SourceType.ANALYSIS);
+                    if (!sym.isPrimary()) {
+                        sym.setPrimary();
+                    }
+                }
+            }
 
-		}
+        }
 	}
 
 	List<Address> findRefs(Address fromAddr, TaskMonitor taskMonitor) throws MemoryAccessException {

@@ -50,8 +50,7 @@ public class GhidraTable extends GTable {
 	private ListSelectionListener navigationSelectionListener;
 
 	public GhidraTable() {
-		super();
-	}
+    }
 
 	public GhidraTable(TableModel model) {
 		super(model);

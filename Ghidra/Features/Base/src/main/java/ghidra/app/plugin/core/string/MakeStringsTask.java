@@ -34,7 +34,7 @@ import ghidra.util.task.TaskMonitor;
 public class MakeStringsTask extends ProgramTask {
 	private static final String LOCALIZATION_SEPARATOR = "@";
 
-	private final static int MAX_LABEL_LENGTH = 60;
+	private static final int MAX_LABEL_LENGTH = 60;
 
 	private List<FoundString> foundStrings;
 	private boolean autoLabel;

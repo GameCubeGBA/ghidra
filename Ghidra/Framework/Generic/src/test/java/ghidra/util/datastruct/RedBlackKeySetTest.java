@@ -27,8 +27,7 @@ public class RedBlackKeySetTest extends AbstractGenericTest {
 	 * @param arg0
 	 */
 	public RedBlackKeySetTest() {
-		super();
-	}
+    }
 	
     /**
      * regression test driver

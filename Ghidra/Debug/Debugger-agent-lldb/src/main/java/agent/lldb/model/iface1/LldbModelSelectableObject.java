@@ -30,6 +30,6 @@ import ghidra.dbg.target.schema.*;
 	})
 public interface LldbModelSelectableObject extends LldbModelTargetObject {
 
-	public CompletableFuture<Void> setActive();
+	CompletableFuture<Void> setActive();
 
 }

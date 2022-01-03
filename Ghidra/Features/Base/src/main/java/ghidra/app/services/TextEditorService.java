@@ -28,6 +28,6 @@ public interface TextEditorService {
 	 * @param inputStream {@link InputStream} with content that should be displayed in the
 	 * edit window.  Stream closed by this service.
 	 */
-	public void edit(String name, InputStream inputStream);
+    void edit(String name, InputStream inputStream);
 
 }

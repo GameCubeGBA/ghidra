@@ -40,11 +40,8 @@ public class DebugServerId implements Comparable<DebugServerId> {
 			return false;
 		}
 		DebugServerId that = (DebugServerId) obj;
-		if (this.id != that.id) {
-			return false;
-		}
-		return true;
-	}
+        return this.id == that.id;
+    }
 
 	@Override
 	public int compareTo(DebugServerId that) {

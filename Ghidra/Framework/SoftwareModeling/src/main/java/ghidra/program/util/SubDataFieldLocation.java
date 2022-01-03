@@ -58,8 +58,7 @@ public class SubDataFieldLocation extends CodeUnitLocation {
 	 * Should only be used by XML restoration.
 	 */
 	public SubDataFieldLocation() {
-		super();
-	}
+    }
 
 	/**
 	 * Returns a string representation of the dataValue at this location.
@@ -101,11 +100,8 @@ public class SubDataFieldLocation extends CodeUnitLocation {
 		if (!Objects.equals(fieldName, other.fieldName)) {
 			return false;
 		}
-		if (!Objects.equals(rep, other.rep)) {
-			return false;
-		}
-		return true;
-	}
+        return Objects.equals(rep, other.rep);
+    }
 
 	@Override
 	public void restoreState(Program p, SaveState obj) {

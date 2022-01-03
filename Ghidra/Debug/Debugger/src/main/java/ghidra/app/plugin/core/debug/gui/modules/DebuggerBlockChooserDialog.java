@@ -187,7 +187,7 @@ public class DebuggerBlockChooserDialog extends DialogComponentProvider {
 		computeScores(section, tool.getService(DebuggerStaticMappingService.class));
 		selectHighestScoringBlock();
 		tool.showDialog(this);
-		return getChosen();
+		return chosen;
 	}
 
 	protected void computeScores(TraceSection section, DebuggerStaticMappingService service) {

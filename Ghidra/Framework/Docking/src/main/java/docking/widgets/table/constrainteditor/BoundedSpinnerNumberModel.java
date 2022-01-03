@@ -39,8 +39,7 @@ class BoundedSpinnerNumberModel extends SpinnerNumberModel {
 	}
 
 	public BoundedSpinnerNumberModel() {
-		super();
-	}
+    }
 
 	@Override
 	public void setValue(Object value) {

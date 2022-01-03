@@ -60,10 +60,7 @@ class ReorderManager {
         // must be a move, because this is just a reorder of the
         // children.
         if (destNode.equals(dropNode.getParent())) {
-            if (dropAction != DnDConstants.ACTION_MOVE) {
-                return false;
-            }
-            return true;
+            return dropAction == DnDConstants.ACTION_MOVE;
         }
         if (dropNode.getParent().equals(destNode.getParent()) &&
             dropAction != DnDConstants.ACTION_MOVE) {
@@ -90,9 +87,7 @@ class ReorderManager {
 
                 if (destNode.isModule()) {
                     ProgramModule dm = destNode.getModule();
-                    if (dm.contains(frag)) {
-                        return false;
-                    }
+                    return !dm.contains(frag);
                 }
                 return true;
             }
@@ -116,14 +111,10 @@ class ReorderManager {
         if (destNode.isModule() && dropAction == DnDConstants.ACTION_COPY) {
             ProgramModule dm = destNode.getModule();
             if (dropNode.isModule()) {
-                if (dm.contains(dropNode.getModule())) {
-                    return false;
-                }
+                return !dm.contains(dropNode.getModule());
             }
             else {
-                if (dm.contains(dropNode.getFragment())) {
-                    return false;
-                }
+                return !dm.contains(dropNode.getFragment());
             }
         }
         return true;
@@ -150,9 +141,9 @@ class ReorderManager {
 		}
 
 		try {
-            for ( int i = 0; i < dropNodes.length; i++ ) {
-                ProgramNode parentNode = (ProgramNode)destNode.getParent();
-                reorderNode( destNode, dropAction, relativeMousePos, parentNode, dropNodes[i] );
+            for (ProgramNode dropNode : dropNodes) {
+                ProgramNode parentNode = (ProgramNode) destNode.getParent();
+                reorderNode(destNode, dropAction, relativeMousePos, parentNode, dropNode);
             }
 		} finally {
 			tree.endTransaction(transactionID, true);
@@ -262,11 +253,7 @@ class ReorderManager {
 	private void addToSelection(ProgramNode node) {
 		final TreePath p = node.getTreePath();
 		tree.addSelectionPath(p);
-		Runnable r = new Runnable() {
-		    public void run() {
-		        tree.addSelectionPath(p);
-		    }
-		};
+		Runnable r = () -> tree.addSelectionPath(p);
 		SwingUtilities.invokeLater(r);
 	}
     

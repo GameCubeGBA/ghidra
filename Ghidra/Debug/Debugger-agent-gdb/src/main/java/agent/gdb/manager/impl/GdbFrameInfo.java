@@ -74,12 +74,12 @@ public class GdbFrameInfo {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(getLevel(), getAddr());
+		return Objects.hash(level, addr);
 	}
 
 	@Override
 	public String toString() {
-		return "<GdbFrameInfo level=" + getLevel() + ", addr=" + getAddr() + ">";
+		return "<GdbFrameInfo level=" + level + ", addr=" + addr + ">";
 	}
 
 	@Override
@@ -88,14 +88,11 @@ public class GdbFrameInfo {
 			return false;
 		}
 		GdbFrameInfo that = (GdbFrameInfo) obj;
-		if (this.getLevel() != that.getLevel()) {
+		if (this.level != that.level) {
 			return false;
 		}
-		if (this.getAddr() != that.getAddr()) {
-			return false;
-		}
-		return true;
-	}
+        return this.addr == that.addr;
+    }
 
 	public String getLevel() {
 		return level;

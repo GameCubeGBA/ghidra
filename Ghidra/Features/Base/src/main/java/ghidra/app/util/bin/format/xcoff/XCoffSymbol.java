@@ -21,15 +21,15 @@ import ghidra.app.util.bin.BinaryReader;
 import java.io.IOException;
 
 public class XCoffSymbol {
-	private final static char NL = '\n';
+	private static final char NL = '\n';
 
-	public final static int SYMSZ = 18;
-	public final static int SYMNMLEN = 8;
+	public static final int SYMSZ = 18;
+	public static final int SYMNMLEN = 8;
 
 	/* section number, in n_scnum.  */
-	public final static int N_DEBUG = -2;
-	public final static int N_ABS   = -1;
-	public final static int N_UNDEF = 0;
+    public static final int N_DEBUG = -2;
+	public static final int N_ABS   = -1;
+	public static final int N_UNDEF = 0;
 
 	private byte [] n_name;  //Symbol name, or pointer into string table if symbol name is greater than SYMNMLEN.
 	private int    n_value;  //Symbol's value: dependent on section number, storage class and type.

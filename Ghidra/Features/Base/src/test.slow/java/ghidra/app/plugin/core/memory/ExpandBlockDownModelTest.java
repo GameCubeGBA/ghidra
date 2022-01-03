@@ -50,8 +50,7 @@ public class ExpandBlockDownModelTest extends AbstractGhidraHeadedIntegrationTes
 	 * @param arg0
 	 */
 	public ExpandBlockDownModelTest() {
-		super();
-	}
+    }
 
 	private Program buildProgram(String programName) throws Exception {
 		ProgramBuilder builder = new ProgramBuilder(programName, ProgramBuilder._TOY);
@@ -95,32 +94,32 @@ public class ExpandBlockDownModelTest extends AbstractGhidraHeadedIntegrationTes
 	public void testSetEndAddress() {
 		model.setEndAddress(getAddr(0x1007700));
 		assertEquals(0x6701, model.getLength());
-		assertTrue(model.getMessage().length() == 0);
+		assertTrue(model.getMessage().isEmpty());
 	}
 
 	@Test
 	public void testSetBadAddress() {
 		model.setEndAddress(getAddr(0x1007000));
-		assertTrue(model.getMessage().length() > 0);
+		assertTrue(!model.getMessage().isEmpty());
 	}
 
 	@Test
 	public void testSetLength() {
 		model.setLength(0x7000);
-		assertTrue(model.getMessage().length() == 0);
+		assertTrue(model.getMessage().isEmpty());
 		assertEquals(getAddr(0x1007fff), model.getEndAddress());
 	}
 
 	@Test
 	public void testSetBadLength() {
 		model.setLength(-1);
-		assertTrue(model.getMessage().length() > 0);
+		assertTrue(!model.getMessage().isEmpty());
 
 		model.setLength(0x7000);
-		assertTrue(model.getMessage().length() == 0);
+		assertTrue(model.getMessage().isEmpty());
 
 		model.setLength(0x500);
-		assertTrue(model.getMessage().length() > 0);
+		assertTrue(!model.getMessage().isEmpty());
 	}
 
 	@Test
@@ -136,7 +135,7 @@ public class ExpandBlockDownModelTest extends AbstractGhidraHeadedIntegrationTes
 	public void testOverlap() {
 		model.setEndAddress(getAddr(0x1008010));
 		assertTrue(!model.execute());
-		assertTrue(model.getMessage().length() > 0);
+		assertTrue(!model.getMessage().isEmpty());
 	}
 
 	@Test

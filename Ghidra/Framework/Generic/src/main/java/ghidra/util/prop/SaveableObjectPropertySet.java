@@ -30,7 +30,7 @@ import ghidra.util.Saveable;
  *
  */
 public class SaveableObjectPropertySet extends PropertySet {
-    private final static long serialVersionUID = 1;
+    private static final long serialVersionUID = 1;
 	/**
 	 * Constructor for SaveableObjectPropertySet.
 	 * @param name the name associated with this property set.

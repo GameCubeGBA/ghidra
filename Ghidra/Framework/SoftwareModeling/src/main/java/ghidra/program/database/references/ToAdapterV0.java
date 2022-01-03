@@ -150,7 +150,7 @@ class ToAdapterV0 extends ToAdapter {
 		try {
 			RefList refList = new RefListV0(newRec, this, addrMap, null, null, false);
 			Reference[] refs = refList.getAllRefs();
-			byte refLevel = (byte) -1;
+			byte refLevel = -1;
 			for (Reference ref : refs) {
 				byte level = RefListV0.getRefLevel(ref.getReferenceType());
 				if (level > refLevel) {

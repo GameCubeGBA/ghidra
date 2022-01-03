@@ -108,11 +108,8 @@ public class FunctionReturnTypeFieldLocation extends FunctionSignatureFieldLocat
 		if (!super.equals(obj) || (getClass() != obj.getClass()))
 			return false;
 		FunctionReturnTypeFieldLocation other = (FunctionReturnTypeFieldLocation) obj;
-		if (!Objects.equals(returnTypeStr, other.returnTypeStr)) {
-			return false;
-		}
-		return true;
-	}
+        return Objects.equals(returnTypeStr, other.returnTypeStr);
+    }
 
 	@Override
 	public void saveState(SaveState obj) {

@@ -72,7 +72,7 @@ public enum PeSubsystem {
 
 	public static PeSubsystem parse(int id) {
 		for (PeSubsystem ss : values()) {
-			if (ss.getValue() == id) {
+			if (ss.value == id) {
 				return ss;
 			}
 		}

@@ -25,6 +25,6 @@ public interface ClangHighlightListener {
 	/**
 	 * Method to invoke whenever the decompiler token highlights have changed.
 	 */
-	public void tokenHighlightsChanged();
+    void tokenHighlightsChanged();
 
 }

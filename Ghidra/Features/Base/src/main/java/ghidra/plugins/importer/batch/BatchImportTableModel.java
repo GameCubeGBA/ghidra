@@ -38,8 +38,8 @@ class BatchImportTableModel extends AbstractSortedTableModel<BatchGroup> {
 
 		public final String columnLabel;
 		public final boolean editable;
-		private final static COLS[] staticvalues = values();
-		public final static int count = staticvalues.length;
+		private static final COLS[] staticvalues = values();
+		public static final int count = staticvalues.length;
 		public static final String UNKNOWN_COLUMN_LABEL = "<unknown>";
 
 		public static String getColumnLabel(int i) {

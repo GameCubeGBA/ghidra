@@ -44,8 +44,7 @@ public class GhidraTestApplicationLayout extends GhidraApplicationLayout {
 	 */
 	public GhidraTestApplicationLayout(File userSettingsDir)
 			throws FileNotFoundException, IOException {
-		super();
-		this.userSettingsDir = userSettingsDir;
+        this.userSettingsDir = userSettingsDir;
 	}
 
 	@Override

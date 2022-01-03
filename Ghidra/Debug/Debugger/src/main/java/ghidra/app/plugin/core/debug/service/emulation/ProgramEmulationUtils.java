@@ -357,9 +357,6 @@ public enum ProgramEmulationUtils {
 		if (snapshot == null) {
 			return false;
 		}
-		if (!snapshot.getDescription().startsWith(EMULATION_STARTED_AT)) {
-			return false;
-		}
-		return true;
-	}
+        return snapshot.getDescription().startsWith(EMULATION_STARTED_AT);
+    }
 }

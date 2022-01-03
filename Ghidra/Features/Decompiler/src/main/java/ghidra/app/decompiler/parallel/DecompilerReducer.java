@@ -23,5 +23,5 @@ import java.util.List;
 
 @FunctionalInterface
 public interface DecompilerReducer<R, D> {
-	public R reduce(List<DominantPair<Address, D>> list);
+	R reduce(List<DominantPair<Address, D>> list);
 }

@@ -46,8 +46,7 @@ import ghidra.test.*;
 public class Function2Test extends AbstractGhidraHeadedIntegrationTest {
 
 	public Function2Test() {
-		super();
-	}
+    }
 
 	private TestEnv env;
 	private PluginTool tool;

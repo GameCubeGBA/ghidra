@@ -31,12 +31,12 @@ import ghidra.util.task.TaskMonitor;
 class ProgramTextWriter {
 
 	// HTML tags
-	private final static String BEGIN_ANCHOR = "<A NAME=\"";
-	private final static String END_ANCHOR = "\"></A>";
+    private static final String BEGIN_ANCHOR = "<A NAME=\"";
+	private static final String END_ANCHOR = "\"></A>";
 
-	private final static String BYTES_DELIM = "";
-	private final static String STRUCT_PREFIX = "|_";
-	private final static int INDENT_SPACES = 3;
+	private static final String BYTES_DELIM = "";
+	private static final String STRUCT_PREFIX = "|_";
+	private static final int INDENT_SPACES = 3;
 
 	private ProgramTextOptions options;
 	private StringBuilder buffy = new StringBuilder();
@@ -308,14 +308,14 @@ class ProgramTextWriter {
 							eolcmt = clip(eolcmt, options.getEolWidth(), true, true);
 						}
 						buffy.append(eolcmt);
-						writer.println(buffy.toString());
+						writer.println(buffy);
 						buffy = new StringBuilder();
 					}
 				}
 			}
 
 			if (buffy.length() > 0) {
-				writer.println(buffy.toString());
+				writer.println(buffy);
 			}
 			buffy = new StringBuilder();
 
@@ -378,7 +378,7 @@ class ProgramTextWriter {
 		buffy.append(" -> ");
 		processAddress(bytesRemovedRangeEnd, null);
 		buffy.append(" [UNDEFINED BYTES REMOVED]");
-		writer.print(buffy.toString());
+		writer.print(buffy);
 
 		if (options.isHTML()) {
 			writer.print("</FONT>");
@@ -744,7 +744,7 @@ class ProgramTextWriter {
 	private void processSpace(int type) {
 		for (int x = 0; x < type; x++) {
 			buffy = new StringBuilder();
-			writer.println(buffy.toString());
+			writer.println(buffy);
 		}
 	}
 
@@ -755,6 +755,6 @@ class ProgramTextWriter {
 		}
 		buffy.append(options.getCommentPrefix());
 		buffy.append(what);
-		writer.println(buffy.toString());
+		writer.println(buffy);
 	}
 }

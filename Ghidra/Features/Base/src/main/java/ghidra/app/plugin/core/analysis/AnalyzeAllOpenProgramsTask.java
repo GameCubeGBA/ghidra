@@ -185,12 +185,8 @@ class AnalyzeAllOpenProgramsTask extends Task {
 			program.endTransaction(id, true);
 		}
 
-		if (!analyze.get()) {
-			return false;
-		}
-
-		return true;
-	}
+        return analyze.get();
+    }
 
 	/**
 	 * Returns a list of all programs that should be analyzed. 
@@ -464,15 +460,10 @@ class AnalyzeAllOpenProgramsTask extends Task {
 				return false;
 			}
 			if (languageID == null) {
-				if (other.languageID != null) {
-					return false;
-				}
+                return other.languageID == null;
 			}
-			else if (!languageID.equals(other.languageID)) {
-				return false;
-			}
-			return true;
-		}
+			else return languageID.equals(other.languageID);
+        }
 
 		private AnalyzeAllOpenProgramsTask getOuterType() {
 			return AnalyzeAllOpenProgramsTask.this;

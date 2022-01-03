@@ -42,8 +42,7 @@ public class VariableStorageConflictsTest extends AbstractGenericTest {
 //	private TestEnv testEnv;
 
 	public VariableStorageConflictsTest() {
-		super();
-		// TODO Auto-generated constructor stub
+        // TODO Auto-generated constructor stub
 	}
 
 	@Before

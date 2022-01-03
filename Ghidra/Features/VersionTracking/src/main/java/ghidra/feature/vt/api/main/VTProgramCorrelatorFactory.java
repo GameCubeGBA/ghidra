@@ -28,25 +28,25 @@ public interface VTProgramCorrelatorFactory extends ExtensionPoint {
 	 * Returns the name of the correlator for display to the user in the GUI.
 	 * @return the name of the correlator
 	 */
-	public String getName();
+    String getName();
 
 	/**
 	 * Returns the description of the correlator for display to the user in the GUI.
 	 * @return the description of the correlator
 	 */
-	public String getDescription();
+    String getDescription();
 
 	/**
 	 * Returns the listing priority of the correlator; lower means higher in the list.
 	 * @return the listing priority of the correlator
 	 */
-	public int getPriority();
+    int getPriority();
 
 	/**
 	 * Returns the restriction preference of the correlator.
 	 * @return the restriction preference of the correlator
 	 */
-	public VTProgramCorrelatorAddressRestrictionPreference getAddressRestrictionPreference();
+    VTProgramCorrelatorAddressRestrictionPreference getAddressRestrictionPreference();
 
 	/**
 	 * Returns an options action that contains a list of all supported options for the algorithm and
@@ -54,7 +54,7 @@ public interface VTProgramCorrelatorFactory extends ExtensionPoint {
 	 * @return an options action that contains a list of all supported options for the algorithm and
 	 * their default values.
 	 */
-	public VTOptions createDefaultOptions();
+    VTOptions createDefaultOptions();
 
 	/**
 	 * Returns a VTProgramCorrelator instance created specifically for the given parameters.
@@ -67,7 +67,7 @@ public interface VTProgramCorrelatorFactory extends ExtensionPoint {
 	 * @param options the options to use for this correlation.
 	 * @return a new VTProgramCorrelator instance created specifically for this set of given parameters.
 	 */
-	public VTProgramCorrelator createCorrelator(ServiceProvider serviceProvider,
-			Program sourceProgram, AddressSetView sourceAddressSet, Program destinationProgram,
-			AddressSetView destinationAddressSet, VTOptions options);
+    VTProgramCorrelator createCorrelator(ServiceProvider serviceProvider,
+                                         Program sourceProgram, AddressSetView sourceAddressSet, Program destinationProgram,
+                                         AddressSetView destinationAddressSet, VTOptions options);
 }

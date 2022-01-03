@@ -31,7 +31,7 @@ import resources.ResourceManager;
 
 public class DeleteAction extends SymbolTreeContextAction {
 
-	private final static Icon DELETE_ICON = ResourceManager.loadImage("images/edit-delete.png");
+	private static final Icon DELETE_ICON = ResourceManager.loadImage("images/edit-delete.png");
 
 	private final SymbolTreePlugin plugin;
 

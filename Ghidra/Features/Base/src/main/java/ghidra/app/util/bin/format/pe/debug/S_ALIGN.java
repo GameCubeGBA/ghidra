@@ -50,11 +50,11 @@ class S_ALIGN extends DebugSymbol {
 	}
 
 	public boolean isEOT() {
-		for (int i = 0 ; i < pad.length ; ++i) {
-			if (pad[i] != 0xff) {
-				return false;
-			}
-		}
+        for (byte b : pad) {
+            if (b != 0xff) {
+                return false;
+            }
+        }
 		return true;
 	}
 

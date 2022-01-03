@@ -31,8 +31,7 @@ public class CliTablePropertyMap extends CliAbstractTable {
 		public int propertyListIndex;
 		
 		public CliPropertyMapRow(int parentIndex, int propertyListIndex) {
-			super();
-			this.parentIndex = parentIndex;
+            this.parentIndex = parentIndex;
 			this.propertyListIndex = propertyListIndex;
 		}
 

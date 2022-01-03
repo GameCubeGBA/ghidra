@@ -33,7 +33,7 @@ public interface FileSystemProbeConflictResolver {
 	 * @param factories a {@link List} of {@link FileSystemInfoRec}s.
 	 * @return the choosen FSIR, or null
 	 */
-	default public FileSystemInfoRec resolveFSIR(List<FileSystemInfoRec> factories) {
+    default FileSystemInfoRec resolveFSIR(List<FileSystemInfoRec> factories) {
 		switch (factories.size()) {
 			case 0:
 				return null;
@@ -53,30 +53,20 @@ public interface FileSystemProbeConflictResolver {
 	 * @param factories {@link List} of {@link FileSystemInfoRec}, always more than 1 element.
 	 * @return the choosen FSIR, or null
 	 */
-	public FileSystemInfoRec chooseFSIR(List<FileSystemInfoRec> factories);
+    FileSystemInfoRec chooseFSIR(List<FileSystemInfoRec> factories);
 
 	/**
 	 * Conflict handler that chooses the first filesystem in the list.
 	 */
-	public static final FileSystemProbeConflictResolver CHOOSEFIRST =
-		new FileSystemProbeConflictResolver() {
-			@Override
-			public FileSystemInfoRec chooseFSIR(List<FileSystemInfoRec> factories) {
-				return factories.get(0);
-			}
-		};
+    FileSystemProbeConflictResolver CHOOSEFIRST =
+            factories -> factories.get(0);
 
 	/**
 	 * Conflict handler that allows the user to pick the filesystem to use from a GUI list.
 	 * <p>
 	 */
-	public static FileSystemProbeConflictResolver GUI_PICKER =
-		new FileSystemProbeConflictResolver() {
-			@Override
-			public FileSystemInfoRec chooseFSIR(List<FileSystemInfoRec> factories) {
-				return SelectFromListDialog.selectFromList(factories, "Select filesystem",
-					"Select a filesystem from list", FileSystemInfoRec::getDescription);
-			}
-		};
+    FileSystemProbeConflictResolver GUI_PICKER =
+            factories -> SelectFromListDialog.selectFromList(factories, "Select filesystem",
+                "Select a filesystem from list", FileSystemInfoRec::getDescription);
 
 }

@@ -22,7 +22,7 @@ import com.sun.jna.platform.win32.WinNT.HRESULT;
 
 @FunctionalInterface
 public interface IDebugOutputCallbacksWide {
-	final IID IID_IDEBUG_OUTPUT_CALLBACKS_WIDE = new IID("4c7fd663-c394-4e26-8ef1-34ad5ed3764c");
+	IID IID_IDEBUG_OUTPUT_CALLBACKS_WIDE = new IID("4c7fd663-c394-4e26-8ef1-34ad5ed3764c");
 
 	HRESULT Output(ULONG Mask, WString Text);
 }

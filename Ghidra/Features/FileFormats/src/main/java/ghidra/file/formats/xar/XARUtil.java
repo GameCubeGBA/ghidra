@@ -23,13 +23,13 @@ import java.util.Arrays;
 
 public class XARUtil {
 	
-	public final static boolean isXAR( Program program ) {
+	public static final boolean isXAR(Program program ) {
 		ByteProvider provider = new MemoryByteProvider( program.getMemory(), 
 														program.getAddressFactory().getDefaultAddressSpace() );
 		return isXAR( provider );
 	}
 
-	public final static boolean isXAR( ByteProvider provider ) {
+	public static final boolean isXAR(ByteProvider provider ) {
 		try {
 			byte [] bytes = provider.readBytes( 0, XARConstants.MAGIC_BYTES.length  );
 			return Arrays.equals( bytes, XARConstants.MAGIC_BYTES );

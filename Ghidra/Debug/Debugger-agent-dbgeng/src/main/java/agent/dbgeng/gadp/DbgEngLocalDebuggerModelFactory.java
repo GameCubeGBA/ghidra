@@ -75,10 +75,10 @@ public class DbgEngLocalDebuggerModelFactory extends AbstractGadpLocalDebuggerMo
 		cmd.addAll(List.of("-H", host));
 		cmd.addAll(List.of("-p", Integer.toString(port)));
 		//cmd.addAll(List.of("-t", transport));
-		if (!remote.equals("none")) {
+		if (!"none".equals(remote)) {
 			cmd.addAll(List.of("-r", remote));
 		}
-		if (!transport.equals("none")) {
+		if (!"none".equals(transport)) {
 			cmd.addAll(List.of("-t", transport));
 		}
 	}

@@ -18,8 +18,7 @@ package ghidra.util.database.err;
 @SuppressWarnings("serial")
 public class NoDefaultCodecException extends RuntimeException {
 	public NoDefaultCodecException() {
-		super();
-	}
+    }
 
 	public NoDefaultCodecException(String message) {
 		super(message);

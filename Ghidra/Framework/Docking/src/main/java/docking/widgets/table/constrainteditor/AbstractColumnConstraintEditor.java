@@ -144,7 +144,7 @@ public abstract class AbstractColumnConstraintEditor<T> implements ColumnConstra
 	 * @return true if the UI defines a valid value, false otherwise
 	 * @see ColumnConstraintEditor#hasValidValue()
 	 */
-	abstract protected boolean checkEditorValueValidity();
+    protected abstract boolean checkEditorValueValidity();
 
 	@Override
 	public final boolean hasValidValue() {
@@ -205,7 +205,7 @@ public abstract class AbstractColumnConstraintEditor<T> implements ColumnConstra
 	 * @param error true if the message is an error; false otherwise
 	 * @return an HTML string suitable for a JLabel.
 	 */
-	protected final static String formatStatus(String message, boolean error) {
+    protected static final String formatStatus(String message, boolean error) {
 		Color color = error ? Color.RED : Color.BLACK;
 		String messageWithFont = HTMLUtilities.setFont(message, color, 12);
 		return HTMLUtilities.wrapAsHTML(messageWithFont);

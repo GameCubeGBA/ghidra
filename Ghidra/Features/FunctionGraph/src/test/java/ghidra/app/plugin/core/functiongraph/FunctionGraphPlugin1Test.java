@@ -62,8 +62,7 @@ import ghidra.util.task.TaskMonitor;
 public class FunctionGraphPlugin1Test extends AbstractFunctionGraphTest {
 
 	public FunctionGraphPlugin1Test() {
-		super();
-	}
+    }
 
 	@Override
 	@Before
@@ -604,11 +603,11 @@ public class FunctionGraphPlugin1Test extends AbstractFunctionGraphTest {
 			vertexAddresses.add(addresses.getMinAddress());
 		}
 
-		for (; iterator.hasNext();) {
-			CodeBlock codeBlock = iterator.next();
-			assertTrue(vertexAddresses.contains(codeBlock.getMinAddress()));
-		}
-	}
+        while (iterator.hasNext()) {
+            CodeBlock codeBlock = iterator.next();
+            assertTrue(vertexAddresses.contains(codeBlock.getMinAddress()));
+        }
+    }
 
 	@Test
 	public void testClearColorAction() throws Exception {

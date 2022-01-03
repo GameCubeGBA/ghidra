@@ -30,20 +30,20 @@ import ghidra.framework.store.ItemCheckoutStatus;
 class CheckoutsTableModel extends AbstractSortedTableModel<ItemCheckoutStatus> {
 	private static final long serialVersionUID = 1L;
 
-	final static String DATE = "Checkout Date";
-	final static String VERSION = "Version";
-	final static String USER = "User";
-	final static String HOST = "Hostname";
-	final static String PROJECT_NAME = "Project Name";
-	final static String PROJECT_LOC = "Location";
+	static final String DATE = "Checkout Date";
+	static final String VERSION = "Version";
+	static final String USER = "User";
+	static final String HOST = "Hostname";
+	static final String PROJECT_NAME = "Project Name";
+	static final String PROJECT_LOC = "Location";
 
 	// columns used in the getValueAt() method
-	final static int DATE_COL = 0;
-	final static int VERSION_COL = 1;
-	final static int USER_COL = 2;
-	final static int HOST_COL = 3;
-	final static int PROJECT_NAME_COL = 4;
-	final static int PROJECT_LOC_COL = 5;
+    static final int DATE_COL = 0;
+	static final int VERSION_COL = 1;
+	static final int USER_COL = 2;
+	static final int HOST_COL = 3;
+	static final int PROJECT_NAME_COL = 4;
+	static final int PROJECT_LOC_COL = 5;
 
 	private String[] columnNames = { DATE, VERSION, USER, HOST, PROJECT_NAME, PROJECT_LOC };
 

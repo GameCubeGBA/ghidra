@@ -35,7 +35,7 @@ public enum DWARFIdentifierCase
 	static {
 		valueMap = new HashMap<Integer, DWARFIdentifierCase>();
 		for(DWARFIdentifierCase access : DWARFIdentifierCase.values()) {
-			valueMap.put(access.getValue(), access);
+			valueMap.put(access.value, access);
 		}
 	}
 	

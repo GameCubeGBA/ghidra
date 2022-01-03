@@ -45,8 +45,7 @@ public class CommentWindowPluginTest extends AbstractGhidraHeadedIntegrationTest
 	private CommentWindowProvider provider;
 
 	public CommentWindowPluginTest() {
-		super();
-	}
+    }
 
 	@SuppressWarnings("unused")
 	private Address addr(String address) {

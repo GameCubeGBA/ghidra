@@ -60,8 +60,8 @@ import ghidra.util.task.TaskMonitor;
  */
 public class SaveDataDialog extends DialogComponentProvider {
 
-	private final static String SELECT_ALL = "Select All";
-	private final static String DESELECT_ALL = "Select None";
+	private static final String SELECT_ALL = "Select All";
+	private static final String DESELECT_ALL = "Select None";
 
 	private ListPanel listPanel;
 	private JPanel mainPanel;
@@ -146,7 +146,7 @@ public class SaveDataDialog extends DialogComponentProvider {
 				list.add(files.get(i));
 			}
 		}
-		if (list.size() > 0) {
+		if (!list.isEmpty()) {
 			DomainFile[] deleteFiles = new DomainFile[list.size()];
 			SaveTask task = new SaveTask(list.toArray(deleteFiles));
 			new TaskLauncher(task, getComponent());

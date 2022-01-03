@@ -132,11 +132,8 @@ public interface TargetMethod extends TargetObject {
 			if (!Objects.equals(this.description, that.description)) {
 				return false;
 			}
-			if (!Objects.equals(this.choices, that.choices)) {
-				return false;
-			}
-			return true;
-		}
+            return Objects.equals(this.choices, that.choices);
+        }
 
 		/**
 		 * Extract the argument for this parameter
@@ -169,13 +166,13 @@ public interface TargetMethod extends TargetObject {
 		}
 	}
 
-	public interface TargetParameterMap extends Map<String, ParameterDescription<?>> {
-		public static class EmptyTargetParameterMap extends
+	interface TargetParameterMap extends Map<String, ParameterDescription<?>> {
+		class EmptyTargetParameterMap extends
 				AbstractEmptyMap<String, ParameterDescription<?>> implements TargetParameterMap {
 			// Nothing
 		}
 
-		public static class ImmutableTargetParameterMap extends
+		class ImmutableTargetParameterMap extends
 				AbstractNMap<String, ParameterDescription<?>> implements TargetParameterMap {
 
 			public ImmutableTargetParameterMap(Map<String, ParameterDescription<?>> map) {
@@ -185,11 +182,11 @@ public interface TargetMethod extends TargetObject {
 
 		TargetParameterMap EMPTY = new EmptyTargetParameterMap();
 
-		public static TargetParameterMap of() {
+		static TargetParameterMap of() {
 			return EMPTY;
 		}
 
-		public static TargetParameterMap copyOf(Map<String, ParameterDescription<?>> map) {
+		static TargetParameterMap copyOf(Map<String, ParameterDescription<?>> map) {
 			return new ImmutableTargetParameterMap(map);
 		}
 	}
@@ -299,12 +296,12 @@ public interface TargetMethod extends TargetObject {
 	 * 
 	 * @return the name-description map of parameters
 	 */
-	@TargetAttributeType(
-		name = PARAMETERS_ATTRIBUTE_NAME,
-		required = true,
-		fixed = true,
-		hidden = true)
-	default public TargetParameterMap getParameters() {
+    @TargetAttributeType(
+            name = PARAMETERS_ATTRIBUTE_NAME,
+            required = true,
+            fixed = true,
+            hidden = true)
+    default TargetParameterMap getParameters() {
 		return getParameters(this);
 	}
 
@@ -318,12 +315,12 @@ public interface TargetMethod extends TargetObject {
 	 * 
 	 * @return the return type
 	 */
-	@TargetAttributeType(
-		name = RETURN_TYPE_ATTRIBUTE_NAME,
-		required = true,
-		fixed = true,
-		hidden = true)
-	default public Class<?> getReturnType() {
+    @TargetAttributeType(
+            name = RETURN_TYPE_ATTRIBUTE_NAME,
+            required = true,
+            fixed = true,
+            hidden = true)
+    default Class<?> getReturnType() {
 		return getTypedAttributeNowByName(RETURN_TYPE_ATTRIBUTE_NAME, Class.class, Object.class);
 	}
 

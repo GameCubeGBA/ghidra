@@ -38,8 +38,7 @@ public class AddressSpaceTest extends AbstractGenericTest {
 	AddressSpace space3;
 
 	public AddressSpaceTest() {
-		super();
-	}
+    }
 
 	@Before
 	public void setUp() {

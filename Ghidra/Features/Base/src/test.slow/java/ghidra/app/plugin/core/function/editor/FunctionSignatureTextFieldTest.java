@@ -34,8 +34,7 @@ public class FunctionSignatureTextFieldTest extends AbstractGhidraHeadedIntegrat
 	private Color paramNameColor = FunctionSignatureTextField.PARAMETER_NAME_COLOR;
 
 	public FunctionSignatureTextFieldTest() {
-		super();
-	}
+    }
 
     @Before
     public void setUp() throws Exception {
@@ -133,25 +132,17 @@ public class FunctionSignatureTextFieldTest extends AbstractGhidraHeadedIntegrat
 	}
 
 	private void setText(final String s) {
-		runSwing(new Runnable() {
-			@Override
-			public void run() {
-				field.setText(s);
-			}
-		});
+		runSwing(() -> field.setText(s));
 		waitForPostedSwingRunnables();
 	}
 
 	private void replaceText(final String textToReplace, final String newText) {
-		runSwing(new Runnable() {
-			@Override
-			public void run() {
-				int start = field.getText().indexOf(textToReplace);
-				field.setCaretPosition(start);
-				field.moveCaretPosition(start + textToReplace.length());
-				field.replaceSelection(newText);
-			}
-		});
+		runSwing(() -> {
+            int start = field.getText().indexOf(textToReplace);
+            field.setCaretPosition(start);
+            field.moveCaretPosition(start + textToReplace.length());
+            field.replaceSelection(newText);
+        });
 		waitForPostedSwingRunnables();
 	}
 }

@@ -230,13 +230,10 @@ class ToolButton extends EmptyBorderButton implements Draggable, Droppable {
 						ToolButtonTransferable.localToolButtonFlavor);
 					ToolButton draggedButton = (ToolButton) draggedData;
 					if (draggedButton != null) {
-						if (draggedButton.associatedRunningTool == associatedRunningTool) {
-							// tool chest -> tool chest is not allowed (both runningTools are null).
-							// runningTool -> same runningTool is not allowed.
-							return false;
-						}
-						return true;
-					}
+                        // tool chest -> tool chest is not allowed (both runningTools are null).
+                        // runningTool -> same runningTool is not allowed.
+                        return draggedButton.associatedRunningTool != associatedRunningTool;
+                    }
 				}
 				else if (element.equals(VersionInfoTransferable.localVersionInfoFlavor)) {
 					return true;
@@ -263,7 +260,7 @@ class ToolButton extends EmptyBorderButton implements Draggable, Droppable {
 		}
 
 		// if we get here then no invalid items were found, so as long as there is data, it is valid
-		return fileList.size() > 0;
+		return !fileList.isEmpty();
 	}
 
 	/**

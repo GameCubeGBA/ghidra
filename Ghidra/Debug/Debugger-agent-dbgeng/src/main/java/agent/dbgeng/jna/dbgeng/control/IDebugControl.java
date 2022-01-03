@@ -26,7 +26,7 @@ import agent.dbgeng.jna.dbgeng.UnknownWithUtils.VTableIndex;
 import agent.dbgeng.jna.dbgeng.breakpoint.IDebugBreakpoint;
 
 public interface IDebugControl extends IUnknown {
-	final IID IID_IDEBUG_CONTROL = new IID("5182e668-105e-416e-ad92-24ef800424ba");
+	IID IID_IDEBUG_CONTROL = new IID("5182e668-105e-416e-ad92-24ef800424ba");
 
 	enum VTIndices implements VTableIndex {
 		GET_INTERRUPT, //

@@ -76,8 +76,8 @@ import ghidra.util.task.TaskMonitor;
 import utilities.util.FileUtilities;
 
 public class MSLibBatchImportWorker extends GhidraScript {
-	final static Predicate<Loader> LOADER_FILTER = new SingleLoaderFilter(MSCoffLoader.class);
-	final static LoadSpecChooser LOADSPEC_CHOOSER = new CsHintLoadSpecChooser("windows");
+	static final Predicate<Loader> LOADER_FILTER = new SingleLoaderFilter(MSCoffLoader.class);
+	static final LoadSpecChooser LOADSPEC_CHOOSER = new CsHintLoadSpecChooser("windows");
 
 	private static String getProcessId(String fallback) {
 		// something like '<pid>@<hostname>', at least in SUN / Oracle JVMs

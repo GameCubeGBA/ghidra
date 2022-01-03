@@ -34,7 +34,7 @@ public enum DWARFAccessibility
 	static {
 		valueMap = new HashMap<Integer, DWARFAccessibility>();
 		for(DWARFAccessibility access : DWARFAccessibility.values()) {
-			valueMap.put(access.getValue(), access);
+			valueMap.put(access.value, access);
 		}
 	}
 	
@@ -60,6 +60,6 @@ public enum DWARFAccessibility
 		DWARFAccessibility access = valueMap.get(key.intValue());
 		if(access != null)
 			return access;
-		throw new IllegalArgumentException("Invalid Integer value: " + key.toString());
+		throw new IllegalArgumentException("Invalid Integer value: " + key);
 	}
 }

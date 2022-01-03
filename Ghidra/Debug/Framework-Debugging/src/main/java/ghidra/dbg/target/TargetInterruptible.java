@@ -38,5 +38,5 @@ public interface TargetInterruptible extends TargetObject {
 	 * 
 	 * @return a future which completes when the interrupt has been sent
 	 */
-	public CompletableFuture<Void> interrupt();
+    CompletableFuture<Void> interrupt();
 }

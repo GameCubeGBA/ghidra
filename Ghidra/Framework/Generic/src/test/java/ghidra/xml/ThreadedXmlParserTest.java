@@ -55,8 +55,7 @@ public class ThreadedXmlParserTest extends AbstractGenericTest {
 		"<!ENTITY xxe SYSTEM \"file://@TEMP_FILE@\">]><foo>&xxe; fizzbizz</foo>";
 	
 	public ThreadedXmlParserTest() {
-		super();
-	}
+    }
 
 	/**
 	 * <p>

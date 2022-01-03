@@ -29,7 +29,7 @@ import ghidra.program.model.symbol.Namespace;
 import ghidra.util.exception.DuplicateNameException;
 
 public class ObjectiveC2_InstanceVariableList implements StructConverter {
-	public final static String NAME = "ivar_list_t";
+	public static final String NAME = "ivar_list_t";
 
 	private ObjectiveC2_State _state;
 	private long _index;
@@ -88,7 +88,7 @@ public class ObjectiveC2_InstanceVariableList implements StructConverter {
 	}
 
 	public void applyTo(Namespace namespace) throws Exception {
-		Address address = ObjectiveC1_Utilities.toAddress(_state.program, getIndex());
+		Address address = ObjectiveC1_Utilities.toAddress(_state.program, _index);
 		try {
 			ObjectiveC1_Utilities.applyData(_state.program, toDataType(), address);
 		}
@@ -100,7 +100,7 @@ public class ObjectiveC2_InstanceVariableList implements StructConverter {
 		}
 		catch (Exception e) {}
 
-		for (ObjectiveC2_InstanceVariable ivar : getIvars()) {
+		for (ObjectiveC2_InstanceVariable ivar : ivars) {
 			ivar.applyTo(namespace);
 		}
 	}

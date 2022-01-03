@@ -21,6 +21,6 @@ import ghidra.dbg.target.TargetSymbolNamespace;
 
 public interface DbgModelTargetSymbolContainer extends DbgModelTargetObject, TargetSymbolNamespace {
 
-	public DbgModelTargetSymbolImpl getTargetSymbol(DbgMinimalSymbol symbol);
+	DbgModelTargetSymbolImpl getTargetSymbol(DbgMinimalSymbol symbol);
 
 }

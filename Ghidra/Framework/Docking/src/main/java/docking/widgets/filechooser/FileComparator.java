@@ -25,9 +25,9 @@ import java.util.Comparator;
 import ghidra.util.filechooser.GhidraFileChooserModel;
 
 class FileComparator implements Comparator<File> {
-	final static int SORT_BY_NAME = 1111;
-	final static int SORT_BY_SIZE = 2222;
-	final static int SORT_BY_TIME = 3333;
+	static final int SORT_BY_NAME = 1111;
+	static final int SORT_BY_SIZE = 2222;
+	static final int SORT_BY_TIME = 3333;
 
 	private GhidraFileChooserModel model;
 	private int sortBy = SORT_BY_NAME;

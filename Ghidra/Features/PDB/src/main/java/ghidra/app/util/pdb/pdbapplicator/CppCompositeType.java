@@ -63,7 +63,7 @@ public class CppCompositeType {
 
 	static CategoryPath createDirectCategoryPath(CppCompositeType cppType) {
 		return cppType.getBaseCategoryName(
-			CppCompositeType.createDirectClassName(cppType.getComposite()));
+			CppCompositeType.createDirectClassName(cppType.composite));
 	}
 
 	/*
@@ -96,35 +96,12 @@ public class CppCompositeType {
 		this.mangledName = mangledName;
 	}
 
-	public static CppClassType createCppClassType(Composite composite, String mangledName) {
-		return new CppClassType(composite, mangledName);
-	}
-
-	public static CppClassType createCppClassType(Composite composite, String name,
-			String mangledName, int size) {
-		CppClassType cppType = new CppClassType(composite, mangledName);
-		cppType.setName(name);
-		cppType.setSize(size);
-		return cppType;
-	}
-
-	public static CppStructType createCppStructType(Composite composite, String mangledName) {
-		return new CppStructType(composite, mangledName);
-	}
-
 	public static CppStructType createCppStructType(Composite composite, String name,
 			String mangledName, int size) {
 		CppStructType cppType = new CppStructType(composite, mangledName);
 		cppType.setName(name);
 		cppType.setSize(size);
 		return cppType;
-	}
-
-	private static class CppClassType extends CppCompositeType {
-		private CppClassType(Composite composite, String mangledName) {
-			super(composite, mangledName);
-			setClass();
-		}
 	}
 
 	private static class CppStructType extends CppCompositeType {
@@ -176,11 +153,8 @@ public class CppCompositeType {
 		// If final, can have an empty name.  I believe this means "name" can be empty, but
 		//  can still have parent namespace.  TODO: check this if we change to something more
 		//  than String.
-		if (StringUtils.isEmpty(className) && !isFinal) {
-			return false;
-		}
-		return true;
-	}
+        return !StringUtils.isEmpty(className) || isFinal;
+    }
 
 	private List<LayoutBaseClass> getLayoutBaseClasses() {
 		return layoutBaseClasses;
@@ -243,14 +217,6 @@ public class CppCompositeType {
 		return size;
 	}
 
-	public int getNumMembers() {
-		return myMembers.size();
-	}
-
-	public int getNumLayoutMembers() {
-		return layoutMembers.size();
-	}
-
 	public void addVirtualFunctionTablePointer(String name, DataType dataType, int offset) {
 		Member newMember = new Member(name, dataType, false,
 			new ClassFieldAttributes(Access.UNKNOWN, Property.UNKNOWN), offset);
@@ -271,12 +237,6 @@ public class CppCompositeType {
 			}
 			pdbMembers.add(index, vftPtrPdbMember);
 		}
-	}
-
-	public void addMember(String memberName, DataType dataType, boolean isFlexibleArray, int offset,
-			String comment) {
-		addMember(memberName, dataType, isFlexibleArray,
-			new ClassFieldAttributes(Access.UNKNOWN, Property.UNKNOWN), offset, comment);
 	}
 
 	public void addMember(String memberName, DataType dataType, boolean isFlexibleArray,
@@ -611,7 +571,7 @@ public class CppCompositeType {
 	}
 
 	boolean isZeroSize() {
-		return memberData.size() == 0;
+		return memberData.isEmpty();
 	}
 
 	//----------------------------------------------------------------------------------------------
@@ -733,7 +693,7 @@ public class CppCompositeType {
 	private List<ClassPdbMember> getDirectBaseClassMembers(TaskMonitor monitor)
 			throws CancelledException {
 		List<ClassPdbMember> myDirectClassPdbMembers = new ArrayList<>();
-		for (LayoutBaseClass base : getLayoutBaseClasses()) {
+		for (LayoutBaseClass base : layoutBaseClasses) {
 			monitor.checkCanceled();
 			CppCompositeType baseComposite = base.getBaseClassType();
 			if (base instanceof DirectLayoutBaseClass) {
@@ -741,7 +701,7 @@ public class CppCompositeType {
 					Composite baseDataType = base.getDirectDataType();
 					int offset = ((DirectLayoutBaseClass) base).getOffset();
 					CategoryPath cn =
-						getBaseCategoryName("BaseClass_" + base.getBaseClassType().getName());
+						getBaseCategoryName("BaseClass_" + base.getBaseClassType().className);
 					Member baseMember =
 						new Member("", baseDataType, false, null, offset, cn.toString());
 					addPdbMember(myDirectClassPdbMembers, baseMember);
@@ -756,7 +716,7 @@ public class CppCompositeType {
 	private List<VirtualLayoutBaseClass> preprocessVirtualBases(TaskMonitor monitor)
 			throws CancelledException, PdbException {
 		List<VirtualLayoutBaseClass> myVirtualLayoutBases = new ArrayList<>();
-		for (LayoutBaseClass base : getLayoutBaseClasses()) {
+		for (LayoutBaseClass base : layoutBaseClasses) {
 			monitor.checkCanceled();
 			if (base instanceof VirtualLayoutBaseClass) {
 				addPlaceholderVirtualBaseTableEntry(((VirtualLayoutBaseClass) base));
@@ -871,20 +831,20 @@ public class CppCompositeType {
 			List<VirtualLayoutBaseClass> myAccumulatedVirtualBases, int depth, TaskMonitor monitor)
 			throws PdbException, CancelledException {
 		depth++;
-		for (LayoutBaseClass base : cppType.getLayoutBaseClasses()) {
+		for (LayoutBaseClass base : cppType.layoutBaseClasses) {
 			monitor.checkCanceled();
 			CppCompositeType baseComposite = base.getBaseClassType();
 			if (base instanceof DirectLayoutBaseClass) {
 				if (isDirect) {
 					if (alreadyAccumulatedByName(myAccumulatedDirectBases, base)) {
 						throw new PdbException(
-							"Direct base already seen: " + base.getBaseClassType().getName());
+							"Direct base already seen: " + base.getBaseClassType().className);
 					}
 					if (!baseComposite.isZeroSize()) {
 						Composite baseDataType = base.getDirectDataType();
 						int offset = ((DirectLayoutBaseClass) base).getOffset();
 						CategoryPath cn =
-							getBaseCategoryName("BaseClass_" + base.getBaseClassType().getName());
+							getBaseCategoryName("BaseClass_" + base.getBaseClassType().className);
 						Member baseMember =
 							new Member("", baseDataType, false, null, offset, cn.toString());
 						addPdbMember(myPdbMembers, baseMember);
@@ -955,7 +915,7 @@ public class CppCompositeType {
 			}
 			DataType vbptr = getVbptrDataType(dtm, vbtManager, table);
 			allVbtFound &=
-				addOrUpdateVbtAndVbtptrMember(vbtManager, table, vbptr, vbtptrOffset, getName());
+				addOrUpdateVbtAndVbtptrMember(vbtManager, table, vbptr, vbtptrOffset, className);
 		}
 		return allVbtFound;
 	}
@@ -1012,7 +972,7 @@ public class CppCompositeType {
 		}
 		else {
 			CppCompositeType compositeThatContainsMember = cAndM.getComposite();
-			String mangled = compositeThatContainsMember.getMangledName();
+			String mangled = compositeThatContainsMember.mangledName;
 			subMangled.add(mangled);
 		}
 		if (!(vbtManager instanceof PdbVbtManager)) {
@@ -1024,7 +984,7 @@ public class CppCompositeType {
 		}
 
 		return findVbtBySymbolConstruction(table, (PdbVbtManager) vbtManager, entrySize,
-			getMangledName(), type, subMangled);
+                mangledName, type, subMangled);
 	}
 
 	private boolean findVbtBySymbolConstruction(PlaceholderVirtualBaseTable table,
@@ -1153,7 +1113,7 @@ public class CppCompositeType {
 	private void addVirtualBases(int startOffset, List<ClassPdbMember> pdbMembers,
 			List<VirtualLayoutBaseClass> virtualBases, boolean allVbtFound, TaskMonitor monitor)
 			throws PdbException, CancelledException {
-		String accumulatedComment = "";
+		StringBuilder accumulatedComment = new StringBuilder();
 		int memberOffset = startOffset;
 		List<VirtualLayoutBaseClass> orderedBases = new ArrayList<>();
 		List<Integer> offsets = new ArrayList<>();
@@ -1179,17 +1139,17 @@ public class CppCompositeType {
 			if (virtualBaseLength != 0) {
 				String comment =
 					"(Virtual Base " + virtualBase.getDataTypePath().getDataTypeName() + ")";
-				accumulatedComment += comment;
+				accumulatedComment.append(comment);
 				ClassPdbMember virtualClassPdbMember =
-					new ClassPdbMember("", baseDataType, false, memberOffset, accumulatedComment);
+					new ClassPdbMember("", baseDataType, false, memberOffset, accumulatedComment.toString());
 				pdbMembers.add(virtualClassPdbMember);
 				memberOffset += virtualBaseLength;
-				accumulatedComment = "";
+				accumulatedComment = new StringBuilder();
 			}
 			else {
 				String comment = "(Virtual Base (empty) " +
 					virtualBase.getDataTypePath().getDataTypeName() + ")";
-				accumulatedComment += comment;
+				accumulatedComment.append(comment);
 			}
 			// If last base is empty, then its comment and any accumulated to this point
 			//  will not be seen (not applied to a PdbMember).  TODO: Consider options,
@@ -1228,7 +1188,7 @@ public class CppCompositeType {
 	private void addVirtualBasesSpeculatively(int startOffset, List<ClassPdbMember> pdbMembers,
 			List<VirtualLayoutBaseClass> virtualBases, TaskMonitor monitor)
 			throws CancelledException {
-		String accumulatedComment = "";
+		StringBuilder accumulatedComment = new StringBuilder();
 		int memberOffset = startOffset;
 		for (VirtualLayoutBaseClass virtualBase : virtualBases) {
 			monitor.checkCanceled();
@@ -1238,17 +1198,17 @@ public class CppCompositeType {
 			if (virtualBaseLength != 0) {
 				String comment = "((Speculative Placement) Virtual Base " +
 					virtualBase.getDataTypePath().getDataTypeName() + ")";
-				accumulatedComment += comment;
+				accumulatedComment.append(comment);
 				ClassPdbMember virtualClassPdbMember =
-					new ClassPdbMember("", baseDataType, false, memberOffset, accumulatedComment);
+					new ClassPdbMember("", baseDataType, false, memberOffset, accumulatedComment.toString());
 				pdbMembers.add(virtualClassPdbMember);
 				memberOffset += virtualBaseLength;
-				accumulatedComment = "";
+				accumulatedComment = new StringBuilder();
 			}
 			else {
 				String comment = "((empty) (Speculative Placement) Virtual Base " +
 					virtualBase.getDataTypePath().getDataTypeName() + ")";
-				accumulatedComment += comment;
+				accumulatedComment.append(comment);
 			}
 			// If last base is empty, then its comment and any accumulated to this point
 			//  will not be seen (not applied to a PdbMember).  TODO: Consider options,
@@ -1303,7 +1263,7 @@ public class CppCompositeType {
 	}
 
 	CategoryPath getBaseCategoryName(String baseName) {
-		CategoryPath cn = getCategoryPath();
+		CategoryPath cn = categoryPath;
 		return new CategoryPath(cn, baseName);
 	}
 
@@ -1311,7 +1271,7 @@ public class CppCompositeType {
 	// Taken from PdbUtil without change.  Would have had to change access on class PdbUtil and
 	//  this ensureSize method to public to make it accessible.  Can revert to using PdbUtil
 	//  once we move this new module from Contrib to Features/PDB.
-	final static void clearComponents(Composite composite) {
+	static final void clearComponents(Composite composite) {
 		if (composite instanceof Structure) {
 			((Structure) composite).deleteAll();
 		}
@@ -1362,7 +1322,7 @@ public class CppCompositeType {
 		}
 
 		Composite getDirectDataType() {
-			Composite c = getBaseClassType().getComposite();
+			Composite c = baseClassType.getComposite();
 			if (c.getNumComponents() == 0) {
 				return c;
 			}
@@ -1536,7 +1496,7 @@ public class CppCompositeType {
 		public String toString() {
 			StringBuilder builder = new StringBuilder();
 			builder.append(dataType);
-			if (builder.length() > 0 && memberName.length() > 0) {
+			if (builder.length() > 0 && !memberName.isEmpty()) {
 				builder.append(' ');
 			}
 			builder.append(memberName);
@@ -1801,7 +1761,7 @@ public class CppCompositeType {
 
 		@Override
 		public String toString() {
-			if (label.length() != 0) {
+			if (!label.isEmpty()) {
 				return label + " ";
 			}
 			return label;
@@ -1844,7 +1804,7 @@ public class CppCompositeType {
 
 		@Override
 		public String toString() {
-			if (label.length() != 0) {
+			if (!label.isEmpty()) {
 				return label + " ";
 			}
 			return label;
@@ -1888,7 +1848,7 @@ public class CppCompositeType {
 
 		@Override
 		public String toString() {
-			if (label.length() != 0) {
+			if (!label.isEmpty()) {
 				return label + " ";
 			}
 			return label;

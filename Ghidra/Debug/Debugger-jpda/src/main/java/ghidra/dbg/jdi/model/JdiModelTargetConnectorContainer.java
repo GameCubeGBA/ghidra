@@ -96,7 +96,7 @@ public class JdiModelTargetConnectorContainer extends JdiModelTargetObjectImpl {
 	}
 
 	public CompletableFuture<?> refreshInternal() {
-		if (!isObserved()) {
+		if (listeners.isEmpty()) {
 			return AsyncUtils.NIL;
 		}
 		return doRefresh().exceptionally(ex -> {

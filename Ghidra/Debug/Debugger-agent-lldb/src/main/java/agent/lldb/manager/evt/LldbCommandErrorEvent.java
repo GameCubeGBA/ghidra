@@ -31,8 +31,7 @@ public class LldbCommandErrorEvent extends AbstractLldbCompletedCommandEvent {
 	}
 
 	protected LldbCommandErrorEvent() {
-		super();
-	}
+    }
 
 	protected LldbCommandErrorEvent(String message) {
 		super(message);

@@ -17,11 +17,11 @@
 package ghidra.app.util;
 
 public class Permissions {
-	public final static Permissions ALL = new Permissions(true, true, true);
+	public static final Permissions ALL = new Permissions(true, true, true);
 
-	public final static Permissions READ_ONLY = new Permissions(true, false, false);
+	public static final Permissions READ_ONLY = new Permissions(true, false, false);
 
-	public final static Permissions READ_EXECUTE = new Permissions(true, false, true);
+	public static final Permissions READ_EXECUTE = new Permissions(true, false, true);
 
 	public final boolean read;
 	public final boolean write;

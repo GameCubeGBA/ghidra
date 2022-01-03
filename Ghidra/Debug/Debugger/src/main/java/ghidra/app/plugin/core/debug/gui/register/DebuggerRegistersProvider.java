@@ -175,11 +175,8 @@ public class DebuggerRegistersProvider extends ComponentProviderAdapter
 		if (!Objects.equals(a.getTime(), b.getTime())) {
 			return false;
 		}
-		if (!Objects.equals(a.getFrame(), b.getFrame())) {
-			return false;
-		}
-		return true;
-	}
+        return Objects.equals(a.getFrame(), b.getFrame());
+    }
 
 	class TraceChangeListener extends TraceDomainObjectListener {
 		public TraceChangeListener() {
@@ -202,23 +199,17 @@ public class DebuggerRegistersProvider extends ComponentProviderAdapter
 			if (space.getThread() != curThread) {
 				return false;
 			}
-			if (space.getFrameLevel() != current.getFrame()) {
-				return false;
-			}
-			return true;
-		}
+            return space.getFrameLevel() == current.getFrame();
+        }
 
 		private boolean isVisible(TraceAddressSpace space, TraceAddressSnapRange range) {
 			if (!isVisible(space)) {
 				return false;
 			}
 			TraceProgramView view = current.getView();
-			if (view == null || !view.getViewport().containsAnyUpper(range.getLifespan())) {
-				return false;
-			}
+            return view != null && view.getViewport().containsAnyUpper(range.getLifespan());
 			// Probably not worth checking for occlusion here. Just a little refresh waste.
-			return true;
-		}
+        }
 
 		private void refreshRange(AddressRange range) {
 			TraceMemoryRegisterSpace space = getRegisterMemorySpace(false);
@@ -765,21 +756,15 @@ public class DebuggerRegistersProvider extends ComponentProviderAdapter
 		TraceRecorder recorder = current.getRecorder();
 		TargetRegisterBank targetRegs =
 			recorder.getTargetRegisterBank(current.getThread(), current.getFrame());
-		if (targetRegs == null) {
-			return false;
-		}
-		return true;
-	}
+        return targetRegs != null;
+    }
 
 	boolean canWriteRegister(Register register) {
 		if (!isEditsEnabled()) {
 			return false;
 		}
-		if (register.isProcessorContext()) {
-			return false; // TODO: Limitation from using Sleigh for patching
-		}
-		return true;
-	}
+        return !register.isProcessorContext(); // TODO: Limitation from using Sleigh for patching
+    }
 
 	boolean canWriteTargetRegister(Register register) {
 		if (!isEditsEnabled()) {

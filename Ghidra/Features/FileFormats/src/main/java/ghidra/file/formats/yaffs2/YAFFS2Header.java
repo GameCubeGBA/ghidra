@@ -88,10 +88,7 @@ public class YAFFS2Header implements StructConverter {
 	}
 	
 	public boolean isDirectory() {
-		if (objectType == 3) {
-			return true;
-		}
-		return false;
+		return objectType == 3;
 	}
 
 	public short getChecksum() {
@@ -179,10 +176,7 @@ public class YAFFS2Header implements StructConverter {
 	}
 
 	public boolean isFile() {
-		if (objectType == 1) {
-			return true;
-		}
-		return false;
+		return objectType == 1;
 	}
 	
 	// header structure for analyzer

@@ -173,7 +173,7 @@ public abstract class AbstractIntegerDataType extends BuiltIn implements ArraySt
 		}
 
 		if (size > 8) {
-			if (!isSigned()) {
+			if (!signed) {
 				// ensure that bytes are treated as unsigned
 				byte[] unsignedBytes = new byte[bytes.length + 1];
 				System.arraycopy(bytes, 0, unsignedBytes, 1, bytes.length);
@@ -187,7 +187,7 @@ public abstract class AbstractIntegerDataType extends BuiltIn implements ArraySt
 		for (byte b : bytes) {
 			val = (val << 8) + (b & 0x0ffL);
 		}
-		return new Scalar(size * 8, val, isSigned());
+		return new Scalar(size * 8, val, signed);
 	}
 
 	protected BigInteger castValueToEncode(Object value) throws DataTypeEncodeException {
@@ -219,7 +219,7 @@ public abstract class AbstractIntegerDataType extends BuiltIn implements ArraySt
 			throw new DataTypeEncodeException("Length mismatch", value, this);
 		}
 		BigInteger bigValue = castValueToEncode(value);
-		byte[] encoding = Utils.bigIntegerToBytes(bigValue, length, isSigned());
+		byte[] encoding = Utils.bigIntegerToBytes(bigValue, length, signed);
 		if (!ENDIAN.isBigEndian(settings, buf)) {
 			ArrayUtilities.reverse(encoding);
 		}
@@ -402,8 +402,13 @@ public abstract class AbstractIntegerDataType extends BuiltIn implements ArraySt
 		return dt.getClass().equals(getClass());
 	}
 
-	private static AbstractIntegerDataType[] signedTypes;
-	private static AbstractIntegerDataType[] unsignedTypes;
+	private static final class SignedTypesHolder {
+		private static final AbstractIntegerDataType[] signedTypes = new AbstractIntegerDataType[]{SignedByteDataType.dataType,
+					SignedWordDataType.dataType, Integer3DataType.dataType,
+					SignedDWordDataType.dataType, Integer5DataType.dataType, Integer6DataType.dataType,
+					Integer7DataType.dataType, SignedQWordDataType.dataType,
+					Integer16DataType.dataType};
+	}
 
 	/**
 	 * An "map" of the first 8 (by size) signed integer data types, where the element at index
@@ -413,14 +418,15 @@ public abstract class AbstractIntegerDataType extends BuiltIn implements ArraySt
 	 * @return array of all signed integer types (char and bool types excluded)
 	 */
 	private static AbstractIntegerDataType[] getSignedTypes() {
-		if (signedTypes == null) {
-			signedTypes = new AbstractIntegerDataType[] { SignedByteDataType.dataType,
-				SignedWordDataType.dataType, Integer3DataType.dataType,
-				SignedDWordDataType.dataType, Integer5DataType.dataType, Integer6DataType.dataType,
-				Integer7DataType.dataType, SignedQWordDataType.dataType,
-				Integer16DataType.dataType };
-		}
-		return signedTypes;
+		return SignedTypesHolder.signedTypes;
+	}
+
+	private static final class UnsignedTypesHolder {
+		private static final AbstractIntegerDataType[] unsignedTypes = new AbstractIntegerDataType[]{ByteDataType.dataType,
+					WordDataType.dataType, UnsignedInteger3DataType.dataType, DWordDataType.dataType,
+					UnsignedInteger5DataType.dataType, UnsignedInteger6DataType.dataType,
+					UnsignedInteger7DataType.dataType, QWordDataType.dataType,
+					UnsignedInteger16DataType.dataType};
 	}
 
 	/**
@@ -431,14 +437,7 @@ public abstract class AbstractIntegerDataType extends BuiltIn implements ArraySt
 	 * @return array of all unsigned integer types (char and bool types excluded)
 	 */
 	private static AbstractIntegerDataType[] getUnsignedTypes() {
-		if (unsignedTypes == null) {
-			unsignedTypes = new AbstractIntegerDataType[] { ByteDataType.dataType,
-				WordDataType.dataType, UnsignedInteger3DataType.dataType, DWordDataType.dataType,
-				UnsignedInteger5DataType.dataType, UnsignedInteger6DataType.dataType,
-				UnsignedInteger7DataType.dataType, QWordDataType.dataType,
-				UnsignedInteger16DataType.dataType };
-		}
-		return unsignedTypes;
+		return UnsignedTypesHolder.unsignedTypes;
 	}
 
 	/**

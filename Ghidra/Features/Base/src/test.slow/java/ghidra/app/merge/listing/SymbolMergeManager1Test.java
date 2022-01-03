@@ -65,8 +65,7 @@ public class SymbolMergeManager1Test extends AbstractListingMergeManagerTest {
 	 * @param arg0
 	 */
 	public SymbolMergeManager1Test() {
-		super();
-	}
+    }
 
 	/**
 	 * Test function namespace symbols being removed from either the LATEST or

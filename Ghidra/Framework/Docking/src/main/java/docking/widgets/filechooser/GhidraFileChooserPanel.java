@@ -52,14 +52,14 @@ public class GhidraFileChooserPanel extends JPanel implements Droppable {
 	 * This mode denotes that only existing files will
 	 * be chosen for the purpose of reading.
 	 */
-	public final static int INPUT_MODE = 0;
+    public static final int INPUT_MODE = 0;
 	/**
 	 * This mode denotes that existing files (or new files)
 	 * will be chosen for the purpose of writing.
 	 * If an existing file is selected the user will
 	 * be prompted to confirm overwrite.
 	 */
-	public final static int OUTPUT_MODE = 1;
+    public static final int OUTPUT_MODE = 1;
 
 	private GhidraFileChooser fileChooser;
 	private GhidraFileFilter filter = GhidraFileFilter.ALL;
@@ -186,7 +186,7 @@ public class GhidraFileChooserPanel extends JPanel implements Droppable {
 	private void fileChanged() {
 		if (listener != null) {
 			String file = filenameTextField.getText();
-			if (file.length() == 0) {
+			if (file.isEmpty()) {
 				listener.fileChanged(null);
 			}
 			else {
@@ -279,7 +279,7 @@ public class GhidraFileChooserPanel extends JPanel implements Droppable {
 	public void add(Object obj, DropTargetDropEvent e, DataFlavor f) {
 		if (f == DataFlavor.javaFileListFlavor) {
 			List<?> files = (java.util.List<?>) obj;
-			if (files.size() > 0) {
+			if (!files.isEmpty()) {
 				File file = (File) files.get(0);
 				filenameTextField.setText(file.getAbsolutePath());
 				if (listener != null) {

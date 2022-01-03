@@ -234,18 +234,16 @@ public class VarnodeBank {
 		int uq = (uniq==-1) ? 0 : uniq;
 		PcodeOpAST op = new PcodeOpAST(pc, uq, PcodeOp.COPY, 0);
 		searchvn.setDef(op);
-		Iterator<VarnodeAST> iter = locTree.tailSet(searchvn).iterator();
-		for(;iter.hasNext();) {
-			VarnodeAST vn = iter.next();
-			if ((vn.getSize()!=sz) || !vn.getAddress().equals(addr)) {
-				break;
-			}
-			PcodeOp op2 = vn.getDef();
-			if (((op2!=null)&&(op2.getSeqnum().getTarget().equals(pc))) && ((uniq==-1)||(op2.getSeqnum().getTime()==uniq))) {
-				return vn;
-			}
-		}
-		return null;
+        for (VarnodeAST vn : locTree.tailSet(searchvn)) {
+            if ((vn.getSize() != sz) || !vn.getAddress().equals(addr)) {
+                break;
+            }
+            PcodeOp op2 = vn.getDef();
+            if (((op2 != null) && (op2.getSeqnum().getTarget().equals(pc))) && ((uniq == -1) || (op2.getSeqnum().getTime() == uniq))) {
+                return vn;
+            }
+        }
+        return null;
 	}
 	
 	public Varnode findInput(int sz,Address addr) {

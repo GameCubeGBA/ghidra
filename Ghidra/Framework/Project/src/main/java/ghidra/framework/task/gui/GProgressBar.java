@@ -349,7 +349,7 @@ public class GProgressBar extends JPanel {
 			return "100%";
 		}
 
-		float percent = ((float) currentProgress / (float) maximum);
+		float percent = ((float) currentProgress / maximum);
 		String formattedPercent = PERCENT_FORMAT.format(percent);
 		if (!paintProgressValue) {
 			return formattedPercent;

@@ -20,7 +20,7 @@ import ghidra.program.model.listing.Function;
 
 public interface VTFunctionAssociationListener {
 	
-	public void sourceFunctionSelected(Function sourceFunction);
+	void sourceFunctionSelected(Function sourceFunction);
 
-	public void destinationFunctionSelected(Function destinationFunction);
+	void destinationFunctionSelected(Function destinationFunction);
 }
