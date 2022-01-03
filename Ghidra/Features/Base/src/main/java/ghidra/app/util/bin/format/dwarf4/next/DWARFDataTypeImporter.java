@@ -202,7 +202,7 @@ public class DWARFDataTypeImporter {
 				result = makeDataTypeForFunctionDefinition(diea, false);
 				break;
 			default:
-				Msg.warn(this, "Unsupported datatype in die: " + diea);
+				Msg.warn(this, "Unsupported datatype in die: " + diea.toString());
 		}
 		trackRecursion(diea.getOffset(), -1);
 
@@ -1071,43 +1071,46 @@ public class DWARFDataTypeImporter {
 		List<Integer> dimensions = new ArrayList<>();
 		List<DebugInfoEntry> subrangeDIEs =
 			diea.getHeadFragment().getChildren(DWARFTag.DW_TAG_subrange_type);
-        for (DebugInfoEntry subrangeDY : subrangeDIEs) {
-            DIEAggregate subrangeAggr = prog.getAggregate(subrangeDY);
-            long numElements = -1;
-            try {
-                if (subrangeAggr.hasAttribute(DWARFAttribute.DW_AT_count)) {
-                    numElements =
-                            subrangeAggr.parseUnsignedLong(DWARFAttribute.DW_AT_count, 0xbadbeef);
-                }
-                // Otherwise check for an upper bound
-                else if (subrangeAggr.hasAttribute(DWARFAttribute.DW_AT_upper_bound)) {
-                    long upperBound =
-                            subrangeAggr.parseUnsignedLong(DWARFAttribute.DW_AT_upper_bound, 0xbadbeef);
+		for (int subRangeDIEIndex = 0; subRangeDIEIndex < subrangeDIEs.size(); subRangeDIEIndex++) {
+			DIEAggregate subrangeAggr = prog.getAggregate(subrangeDIEs.get(subRangeDIEIndex));
+			long numElements = -1;
+			try {
+				if (subrangeAggr.hasAttribute(DWARFAttribute.DW_AT_count)) {
+					numElements =
+						subrangeAggr.parseUnsignedLong(DWARFAttribute.DW_AT_count, 0xbadbeef);
+				}
+				// Otherwise check for an upper bound
+				else if (subrangeAggr.hasAttribute(DWARFAttribute.DW_AT_upper_bound)) {
+					long upperBound =
+						subrangeAggr.parseUnsignedLong(DWARFAttribute.DW_AT_upper_bound, 0xbadbeef);
 
-                    // fix special flag values used by DWARF to indicate that the array dimension
-                    // is unknown.  64bit 0xffffff...s and 32bit 0xffff..s will
-                    // be forced to 0.
-                    if (upperBound == 0xFF_FF_FF_FFL /* ie. max uint32 */ || upperBound == -1) {
-                        upperBound = 0;
-                    } else {
-                        numElements = upperBound + 1;
-                    }
-                }
-            } catch (UnsupportedOperationException | IOException | IndexOutOfBoundsException
-                    | DWARFExpressionException e) {
-                // ignore
-            }
+					// fix special flag values used by DWARF to indicate that the array dimension
+					// is unknown.  64bit 0xffffff...s and 32bit 0xffff..s will
+					// be forced to 0.
+					if (upperBound == 0xFF_FF_FF_FFL /* ie. max uint32 */ || upperBound == -1) {
+						upperBound = 0;
+					}
+					else {
+						numElements = upperBound + 1;
+					}
+				}
+			}
+			catch (UnsupportedOperationException | IOException | IndexOutOfBoundsException
+					| DWARFExpressionException e) {
+				// ignore
+			}
 
-            if (numElements == -1) {
-                numElements = 0;
-            } else if (numElements > Integer.MAX_VALUE) {
-                Msg.error(this, "Bad value [" + numElements + "] for array's size in DIE: " +
-                        diea.getOffset() + ", forcing to 1");
-                numElements = 1;
-            }
+			if (numElements == -1) {
+				numElements = 0;
+			}
+			else if (numElements > Integer.MAX_VALUE) {
+				Msg.error(this, "Bad value [" + numElements + "] for array's size in DIE: " +
+					diea.getOffset() + ", forcing to 1");
+				numElements = 1;
+			}
 
-            dimensions.add((int) numElements);
-        }
+			dimensions.add((int) numElements);
+		}
 
 		DataType dt = elementType.dataType;
 		for (int i = dimensions.size() - 1; i >= 0; i--) {
@@ -1181,7 +1184,7 @@ public class DWARFDataTypeImporter {
 		DIEAggregate type = diea.getTypeRef();
 		DIEAggregate containingType = diea.getContainingTypeRef();
 		if (type == null || containingType == null) {
-			Msg.error(this, "No type info for ptr_to_member: " + diea);
+			Msg.error(this, "No type info for ptr_to_member: " + diea.toString());
 			return null;
 		}
 

@@ -50,8 +50,8 @@ import java.util.List;
  * </pre>
  */
 public class ResourceDirectoryEntry implements StructConverter {
-	private static final String NAME = "IMAGE_RESOURCE_DIRECTORY_ENTRY";
-	public static final int SIZEOF = 8;
+	private final static String NAME = "IMAGE_RESOURCE_DIRECTORY_ENTRY";
+	public final static int SIZEOF = 8;
 
 	private boolean isNameEntry;
 	private boolean isFirstLevel;
@@ -147,7 +147,7 @@ public class ResourceDirectoryEntry implements StructConverter {
 				List<ResourceInfo> entryResources = entry.getResources(level + 1);
 				for (ResourceInfo info : entryResources) {
 					resources.add(info);
-					info.setName(this + "_" + info.getName());
+					info.setName(toString() + "_" + info.getName());
 					if (!isNameEntry) {
 						if (level == 0) {
 							info.setTypeID(id);

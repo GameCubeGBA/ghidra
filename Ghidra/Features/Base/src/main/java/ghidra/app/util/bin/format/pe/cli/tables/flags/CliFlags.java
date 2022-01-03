@@ -25,7 +25,7 @@ public class CliFlags {
 		private static final long serialVersionUID = 1L;
 		
 		/** A statically defined instance.*/
-        public static final CliEnumAssemblyFlags dataType = new CliEnumAssemblyFlags();
+	    public final static CliEnumAssemblyFlags dataType = new CliEnumAssemblyFlags();
 		
 		public CliEnumAssemblyFlags() {
 			super(new CategoryPath(PATH), "AssemblyFlags", 4);
@@ -42,7 +42,7 @@ public class CliFlags {
 		private static final long serialVersionUID = 1L;
 		
 		/** A statically defined instance.*/
-        public static final CliEnumAssemblyHashAlgorithm dataType = new CliEnumAssemblyHashAlgorithm();
+	    public final static CliEnumAssemblyHashAlgorithm dataType = new CliEnumAssemblyHashAlgorithm();
 		
 		public CliEnumAssemblyHashAlgorithm() {
 			super(new CategoryPath(PATH), "AssemblyHash", 4);
@@ -58,7 +58,7 @@ public class CliFlags {
 		private static final long serialVersionUID = 1L;
 		
 		/** A statically defined instance.*/
-        public static final CliEnumEventAttributes dataType = new CliEnumEventAttributes();
+	    public final static CliEnumEventAttributes dataType = new CliEnumEventAttributes();
 		
 		public CliEnumEventAttributes() {
 			super(new CategoryPath(PATH), "EventAttributes", 2);
@@ -73,7 +73,7 @@ public class CliFlags {
 		private static final long serialVersionUID = 1L;
 		
 		/** A statically defined instance.*/
-        public static final CliEnumFieldAttributes dataType = new CliEnumFieldAttributes();
+	    public final static CliEnumFieldAttributes dataType = new CliEnumFieldAttributes();
 		
 		public CliEnumFieldAttributes() {
 			super(new CategoryPath(PATH), "FieldAttributes", 2);
@@ -103,7 +103,7 @@ public class CliFlags {
 		private static final long serialVersionUID = 1L;
 		
 		/** A statically defined instance.*/
-        public static final CliEnumFileAttributes dataType = new CliEnumFileAttributes();
+	    public final static CliEnumFileAttributes dataType = new CliEnumFileAttributes();
 		
 		public CliEnumFileAttributes() {
 			super(new CategoryPath(PATH), "FileAttributes", 4);
@@ -118,7 +118,7 @@ public class CliFlags {
 		private static final long serialVersionUID = 1L;
 		
 		/** A statically defined instance.*/
-        public static final CliEnumGenericParamAttributes dataType = new CliEnumGenericParamAttributes();
+	    public final static CliEnumGenericParamAttributes dataType = new CliEnumGenericParamAttributes();
 		
 		public CliEnumGenericParamAttributes() {
 			super(new CategoryPath(PATH), "GenericParamAttributes", 2);
@@ -137,7 +137,7 @@ public class CliFlags {
 		private static final long serialVersionUID = 1L;
 		
 		/** A statically defined instance.*/
-        public static final CliEnumPInvokeAttributes dataType = new CliEnumPInvokeAttributes();
+	    public final static CliEnumPInvokeAttributes dataType = new CliEnumPInvokeAttributes();
 		
 		public CliEnumPInvokeAttributes() {
 			super(new CategoryPath(PATH), "PInvokeAttributes", 2);
@@ -164,7 +164,7 @@ public class CliFlags {
 		private static final long serialVersionUID = 1L;
 		
 		/** A statically defined instance.*/
-        public static final CliEnumManifestResourceAttributes dataType = new CliEnumManifestResourceAttributes();
+	    public final static CliEnumManifestResourceAttributes dataType = new CliEnumManifestResourceAttributes();
 		
 		public CliEnumManifestResourceAttributes() {
 			super(new CategoryPath(PATH), "ManifestResourceAttributes", 4);
@@ -179,7 +179,7 @@ public class CliFlags {
 		private static final long serialVersionUID = 1L;
 		
 		/** A statically defined instance.*/
-        public static final CliEnumMethodAttributes dataType = new CliEnumMethodAttributes();
+	    public final static CliEnumMethodAttributes dataType = new CliEnumMethodAttributes();
 		
 		public CliEnumMethodAttributes() {
 			super(new CategoryPath(PATH), "MethodAttributes", 2);
@@ -221,7 +221,7 @@ public class CliFlags {
 		private static final long serialVersionUID = 1L;
 		
 		/** A statically defined instance.*/
-        public static final CliEnumMethodImplAttributes dataType = new CliEnumMethodImplAttributes();
+	    public final static CliEnumMethodImplAttributes dataType = new CliEnumMethodImplAttributes();
 		
 		public CliEnumMethodImplAttributes() {
 			super(new CategoryPath(PATH), "MethodImplAttributes", 2);
@@ -250,7 +250,7 @@ public class CliFlags {
 		private static final long serialVersionUID = 1L;
 		
 		/** A statically defined instance.*/
-        public static final CliEnumMethodSemanticsAttributes dataType = new CliEnumMethodSemanticsAttributes();
+	    public final static CliEnumMethodSemanticsAttributes dataType = new CliEnumMethodSemanticsAttributes();
 		
 		public CliEnumMethodSemanticsAttributes() {
 			super(new CategoryPath(PATH), "MethodSemanticsAttributes", 2);
@@ -269,7 +269,7 @@ public class CliFlags {
 		private static final long serialVersionUID = 1L;
 		
 		/** A statically defined instance.*/
-        public static final CliEnumParamAttributes dataType = new CliEnumParamAttributes();
+	    public final static CliEnumParamAttributes dataType = new CliEnumParamAttributes();
 		
 		public CliEnumParamAttributes() {
 			super(new CategoryPath(PATH), "ParamAttributes", 2);
@@ -288,7 +288,7 @@ public class CliFlags {
 		private static final long serialVersionUID = 1L;
 		
 		/** A statically defined instance.*/
-        public static final CliEnumPropertyAttributes dataType = new CliEnumPropertyAttributes();
+	    public final static CliEnumPropertyAttributes dataType = new CliEnumPropertyAttributes();
 		
 		public CliEnumPropertyAttributes() {
 			super(new CategoryPath(PATH), "PropertyAttributes", 2);
@@ -305,7 +305,7 @@ public class CliFlags {
 		private static final long serialVersionUID = 1L;
 		
 		/** A statically defined instance.*/
-        public static final CliEnumTypeAttributes dataType = new CliEnumTypeAttributes();
+	    public final static CliEnumTypeAttributes dataType = new CliEnumTypeAttributes();
 		
 		public CliEnumTypeAttributes() {
 			super(new CategoryPath(PATH), "TypeAttributes", 4);

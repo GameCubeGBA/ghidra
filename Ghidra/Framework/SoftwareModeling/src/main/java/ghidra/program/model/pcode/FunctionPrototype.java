@@ -398,7 +398,7 @@ public class FunctionPrototype {
 				String name = param.getName();
 				DataType dt = param.getDataType();
 				boolean namelock = false;
-				if ((name != null) && (!name.isEmpty())) {
+				if ((name != null) && (name.length() > 0)) {
 					res.append(" name=\"").append(name).append('\"');
 					namelock = true;
 				}

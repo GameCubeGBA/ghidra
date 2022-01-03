@@ -29,20 +29,20 @@ public interface MultiTabListener {
 	 * Notification that the given object is selected.
 	 * @param obj object that is represented as a tab in the MultiTabPanel
 	 */
-    void objectSelected(Object obj);
+	public void objectSelected(Object obj);
 	
 	
 	/**
 	 * Notification that the given object was added.
 	 * @param obj object that is represented as a tab in the MultiTabPanel
 	 */
-    void objectAdded(Object obj);
+	public void objectAdded(Object obj);
 	
 	/**
 	 * Remove the object's tab if this method returns true.
 	 * @param obj object that is represented as a tab in the MultiTabPanel
 	 * @return true if the object's tab should be removed
 	 */
-    boolean removeObject(Object obj);
+	public boolean removeObject(Object obj);
 	
 }

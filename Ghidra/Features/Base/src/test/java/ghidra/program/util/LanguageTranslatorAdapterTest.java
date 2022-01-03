@@ -41,7 +41,8 @@ public class LanguageTranslatorAdapterTest extends AbstractGenericTest {
 	private LanguageTranslator trans12;
 
 	public LanguageTranslatorAdapterTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

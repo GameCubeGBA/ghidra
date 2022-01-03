@@ -64,7 +64,7 @@ public abstract class AbstractEquatePluginTest extends AbstractProgramBasedTest 
 	protected DockingActionIf removeAction;
 	protected DockingActionIf applyEnumAction;
 
-	protected static final String SHOW_BLOCK_NAME_OPTION = GhidraOptions.OPERAND_GROUP_TITLE +
+	protected final static String SHOW_BLOCK_NAME_OPTION = GhidraOptions.OPERAND_GROUP_TITLE +
 		Options.DELIMITER + GhidraOptions.OPTION_SHOW_BLOCK_NAME;
 
 	/**

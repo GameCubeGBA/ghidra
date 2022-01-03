@@ -24,7 +24,8 @@ import ghidra.program.model.address.Address;
 public class CommentsPluginScreenShots extends GhidraScreenShotGenerator {
 
 	public CommentsPluginScreenShots() {
-    }
+		super();
+	}
 
 	@Test
 	public void testCaptureComment() {

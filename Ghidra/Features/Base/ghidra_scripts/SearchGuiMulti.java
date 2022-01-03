@@ -65,19 +65,39 @@ public class SearchGuiMulti extends SearchBaseExtended {
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
 		mnemonicButton.setText("Mnemonic");
-		mnemonicButton.addActionListener(evt -> mnemonicButtonActionPerformed(evt));
+		mnemonicButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				mnemonicButtonActionPerformed(evt);
+			}
+		});
 		mnemonicButton.setVisible(false);
 
 		op1Button.setText("Operand 1");
-		op1Button.addActionListener(evt -> op1ButtonActionPerformed(evt));
+		op1Button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				op1ButtonActionPerformed(evt);
+			}
+		});
 		op1Button.setVisible(false);
 
 		op2Button.setText("Operand 2");
-		op2Button.addActionListener(evt -> op2ButtonActionPerformed(evt));
+		op2Button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				op2ButtonActionPerformed(evt);
+			}
+		});
 		op2Button.setVisible(false);
 
 		searchButton.setText("Search");
-		searchButton.addActionListener(evt -> searchButtonActionPerformed(evt));
+		searchButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				searchButtonActionPerformed(evt);
+			}
+		});
 
 		fillTable();
 		tableModel = new DefaultTableModel(tableContentsDO, columnIdentifiers) {
@@ -280,7 +300,12 @@ public class SearchGuiMulti extends SearchBaseExtended {
 		for (int row = 0; row < mnemonics.size(); row++) {
 			SLMaskControl temp = new SLMaskControl();
 
-            temp.useMnemonic = tableContentsDO[row][0].getBackgroundColor().equals(Color.green);
+			if (tableContentsDO[row][0].getBackgroundColor().equals(Color.green)) {
+				temp.useMnemonic = true;
+			}
+			else {
+				temp.useMnemonic = false;
+			}
 
 			if (tableContentsDO[row][1].getBackgroundColor().equals(Color.green)) {
 				temp.useOp1 = true;

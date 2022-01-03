@@ -80,14 +80,14 @@ public class EHCatchHandlerModel extends AbstractCreateDataTypeModel {
 			Address catchHandlerAddress = getCatchHandlerAddress(catchHandlerOrdinal);
 			if (catchHandlerAddress == null ||
 				!EHDataTypeUtilities.isValidForFunction(program, catchHandlerAddress)) {
-				throw new InvalidDataTypeException(DATA_TYPE_NAME + " data type at " + getAddress() +
+				throw new InvalidDataTypeException(getName() + " data type at " + getAddress() +
 					" doesn't refer to a valid location for a catch handler for entry " +
 					catchHandlerOrdinal + ".");
 			}
 			Address typeDescriptorAddress = getTypeDescriptorAddress(catchHandlerOrdinal);
 			if (typeDescriptorAddress != null &&
 				!EHDataTypeUtilities.isValidAddress(program, typeDescriptorAddress)) {
-				throw new InvalidDataTypeException(DATA_TYPE_NAME + " data type at " + getAddress() +
+				throw new InvalidDataTypeException(getName() + " data type at " + getAddress() +
 					" doesn't refer to a valid location for the type descriptor for entry " +
 					catchHandlerOrdinal + ".");
 			}

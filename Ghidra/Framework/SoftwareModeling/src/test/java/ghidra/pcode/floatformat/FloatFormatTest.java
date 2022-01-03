@@ -29,7 +29,8 @@ import generic.test.AbstractGenericTest;
 public strictfp class FloatFormatTest extends AbstractGenericTest {
 
 	public FloatFormatTest() {
-    }
+		super();
+	}
 
 	@Test
 	public void testCreateFloat() {
@@ -155,7 +156,7 @@ public strictfp class FloatFormatTest extends AbstractGenericTest {
 		Assert.assertEquals(e4, e5);
 	}
 
-	protected static long makeDoubleFloat(boolean neg, int exp, int float_frac) {
+	static protected long makeDoubleFloat(boolean neg, int exp, int float_frac) {
 		long l = neg ? 1L << 63 : 0L;
 		l |= (1023L + exp) << 52;
 		l |= ((long) float_frac) << (52 - 23);

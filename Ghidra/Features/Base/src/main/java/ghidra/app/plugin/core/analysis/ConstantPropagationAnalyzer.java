@@ -78,7 +78,7 @@ public class ConstantPropagationAnalyzer extends AbstractAnalyzer {
 		"Maxmimum speculative reference address offset from the end of memory for offsets and parameters";
 	protected static final int MAXSPECULATIVEREFADDRESS_OPTION_DEFAULT_VALUE = 256;
 
-	protected static final int NOTIFICATION_INTERVAL = 100;
+	protected final static int NOTIFICATION_INTERVAL = 100;
 
 	protected boolean checkParamRefsOption = OPTION_DEFAULT_VALUE;
 	protected boolean checkStoredRefsOption = STORED_OPTION_DEFAULT_VALUE;
@@ -90,7 +90,7 @@ public class ConstantPropagationAnalyzer extends AbstractAnalyzer {
 
 	protected boolean followConditional = false;
 
-	static final HashSet<String> handledProcessors = new HashSet<String>();
+	final static HashSet<String> handledProcessors = new HashSet<String>();
 	protected String processorName = "Basic";
 	protected AddressSetView EMPTY_ADDRESS_SET = new AddressSet();
 
@@ -110,7 +110,7 @@ public class ConstantPropagationAnalyzer extends AbstractAnalyzer {
 	 *
 	 * @param processorName
 	 */
-    public static void claimProcessor(String processorName) {
+	static public void claimProcessor(String processorName) {
 		handledProcessors.add(processorName);
 	}
 
@@ -122,9 +122,13 @@ public class ConstantPropagationAnalyzer extends AbstractAnalyzer {
 		checkParamRefsOption &=
 			!(program.getAddressFactory().getDefaultAddressSpace() instanceof SegmentedAddressSpace);
 
-		if ("Basic".equals(processorName)) {
-            return !handledProcessors.contains(program.getLanguage().getProcessor().toString());
-        }
+		if (processorName.equals("Basic")) {
+			if (handledProcessors.contains(program.getLanguage().getProcessor().toString())) {
+				return false;
+			}
+
+			return true;
+		}
 		return program.getLanguage().getProcessor().equals(
 			Processor.findOrPossiblyCreateProcessor(processorName));
 	}
@@ -256,27 +260,30 @@ public class ConstantPropagationAnalyzer extends AbstractAnalyzer {
 		monitor.setMessage("Analyzing functions...");
 		monitor.setMaximum(locations.size());
 
-		QCallback<Address, AddressSetView> callback = (loc, taskMonitor) -> {
-            synchronized (analyzedSet) {
-                if (analyzedSet.contains(loc)) {
-                    taskMonitor.incrementProgress(1);
-                    return EMPTY_ADDRESS_SET;
-                }
-            }
+		QCallback<Address, AddressSetView> callback = new QCallback<Address, AddressSetView>() {
+			@Override
+			public AddressSetView process(Address loc, TaskMonitor taskMonitor) {
+				synchronized (analyzedSet) {
+					if (analyzedSet.contains(loc)) {
+						taskMonitor.incrementProgress(1);
+						return EMPTY_ADDRESS_SET;
+					}
+				}
 
-            try {
-                AddressSetView result = analyzeLocation(program, loc, null, taskMonitor);
-                synchronized (analyzedSet) {
-                    analyzedSet.add(result);
-                }
+				try {
+					AddressSetView result = analyzeLocation(program, loc, null, taskMonitor);
+					synchronized (analyzedSet) {
+						analyzedSet.add(result);
+					}
 
-                taskMonitor.incrementProgress(1);
-                return result;
-            }
-            catch (CancelledException e) {
-                return null; // monitor was cancelled
-            }
-        };
+					taskMonitor.incrementProgress(1);
+					return result;
+				}
+				catch (CancelledException e) {
+					return null; // monitor was cancelled
+				}
+			}
+		};
 
 		// bound check thread limit
 		if (maxThreadCount > pool.getMaxThreadCount() || maxThreadCount < 1) {

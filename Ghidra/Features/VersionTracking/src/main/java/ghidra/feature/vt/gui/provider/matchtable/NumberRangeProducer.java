@@ -24,11 +24,11 @@ public interface NumberRangeProducer {
 	 * Returns the lower range number; can be null
 	 * @return the number
 	 */
-    Number getLowerNumber();
+	public Number getLowerNumber();
 
 	/**
 	 * Returns the upper range number; can be null
 	 * @return the number
 	 */
-    Number getUpperNumber();
+	public Number getUpperNumber();
 }

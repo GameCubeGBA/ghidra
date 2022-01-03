@@ -157,7 +157,7 @@ public abstract class AssemblyTestCase extends AbstractGenericTest {
 			new SleighDebugLogger(buf, context, lang, SleighDebugMode.VERBOSE);
 		InstructionPrototype ip = lang.parse(buf, context, false);
 		if (VERBOSE_DIS) {
-			dbg.println("SleighLog:\n" + logger);
+			dbg.println("SleighLog:\n" + logger.toString());
 		}
 		return new PseudoInstruction(at, ip, buf, context);
 	}

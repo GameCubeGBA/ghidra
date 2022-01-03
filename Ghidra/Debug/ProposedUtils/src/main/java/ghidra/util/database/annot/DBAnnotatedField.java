@@ -30,7 +30,7 @@ public @interface DBAnnotatedField {
 	@SuppressWarnings("rawtypes")
 	Class<? extends DBFieldCodec> codec() default DefaultCodec.class;
 
-	abstract class DefaultCodec<OT extends DBAnnotatedObject, FT extends db.Field>
+	static abstract class DefaultCodec<OT extends DBAnnotatedObject, FT extends db.Field>
 			implements DBFieldCodec<Void, OT, FT> {
 		private DefaultCodec() {
 			throw new AssertionError();

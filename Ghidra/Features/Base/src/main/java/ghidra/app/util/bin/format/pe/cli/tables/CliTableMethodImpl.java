@@ -34,7 +34,8 @@ public class CliTableMethodImpl extends CliAbstractTable {
 		public int methodDeclarationIndex;
 		
 		public CliMethodImplRow(int classIndex, int methodBodyIndex, int methodDeclarationIndex) {
-            this.classIndex = classIndex;
+			super();
+			this.classIndex = classIndex;
 			this.methodBodyIndex = methodBodyIndex;
 			this.methodDeclarationIndex = methodDeclarationIndex;
 		}

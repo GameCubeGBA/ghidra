@@ -420,7 +420,7 @@ public class PdbByteReader {
 			return new String(bytes, offset, length, charset);
 		}
 		catch (IndexOutOfBoundsException e) {
-			throw new PdbException("Error parsing String: " + e);
+			throw new PdbException("Error parsing String: " + e.toString());
 		}
 	}
 
@@ -443,7 +443,7 @@ public class PdbByteReader {
 			return new String(bytes, offset, length, StandardCharsets.UTF_8);
 		}
 		catch (IndexOutOfBoundsException e) {
-			throw new PdbException("Error parsing String: " + e);
+			throw new PdbException("Error parsing String: " + e.toString());
 		}
 	}
 

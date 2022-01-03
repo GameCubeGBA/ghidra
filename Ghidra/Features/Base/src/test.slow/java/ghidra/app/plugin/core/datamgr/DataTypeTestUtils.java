@@ -45,10 +45,18 @@ public class DataTypeTestUtils {
 	}
 
     private static final class TempArchiveDirHolder {
-        private static final File tempArchiveDir = AbstractGenericTest.createTempDirectory("archive.db.dir");
-    }
+        private static File tempArchiveDir;
 
-    private static File getTempDir() throws IOException {
+		static {
+			try {
+				tempArchiveDir = AbstractGenericTest.createTempDirectory("archive.db.dir");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+    private static File getTempDir() {
         return TempArchiveDirHolder.tempArchiveDir;
 	}
 

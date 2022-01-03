@@ -109,7 +109,7 @@ class OldLanguage implements Language {
 
 	@Override
 	public String toString() {
-		return langDescription + "(Version " + getVersion() + ")";
+		return getDescription() + "(Version " + getVersion() + ")";
 	}
 
 	/**
@@ -269,41 +269,46 @@ class OldLanguage implements Language {
 		boolean spacesFound = false;
 		boolean registersFound = false;
 
-        for (Object o : root.getChildren()) {
-            Element element = (Element) o;
-            String elementName = element.getName();
-            if ("description".equals(elementName)) {
-                if (descriptionFound) {
-                    throw new SAXException("only one 'description' element permitted");
-                }
-                descriptionFound = true;
-                langDescription = parseDescription(element, version);
-            } else if ("compiler".equals(elementName)) {
-                associatedCompilerSpecs.add(parseCompilerSpecDescription(element));
-            } else if ("spaces".equals(elementName)) {
-                if (spacesFound) {
-                    throw new SAXException("only one 'spaces' element permitted");
-                }
-                spacesFound = true;
-                if (!descriptionOnly) {
-                    addressFactory = parseAddressSpaces(element);
-                }
-            } else if ("registers".equals(elementName)) {
-                if (registersFound) {
-                    throw new SAXException("only one 'registers' element permitted");
-                }
-                if (!spacesFound) {
-                    throw new SAXException(
-                            "'spaces' element must occur before 'registers' element within file");
-                }
-                registersFound = true;
-                if (!descriptionOnly) {
-                    registerMgr = parseRegisters(element, addressFactory);
-                }
-            } else {
-                throw new SAXException("Unsupported language element '" + elementName + "'");
-            }
-        }
+		Iterator<?> iter = root.getChildren().iterator();
+		while (iter.hasNext()) {
+			Element element = (Element) iter.next();
+			String elementName = element.getName();
+			if ("description".equals(elementName)) {
+				if (descriptionFound) {
+					throw new SAXException("only one 'description' element permitted");
+				}
+				descriptionFound = true;
+				langDescription = parseDescription(element, version);
+			}
+			else if ("compiler".equals(elementName)) {
+				associatedCompilerSpecs.add(parseCompilerSpecDescription(element));
+			}
+			else if ("spaces".equals(elementName)) {
+				if (spacesFound) {
+					throw new SAXException("only one 'spaces' element permitted");
+				}
+				spacesFound = true;
+				if (!descriptionOnly) {
+					addressFactory = parseAddressSpaces(element);
+				}
+			}
+			else if ("registers".equals(elementName)) {
+				if (registersFound) {
+					throw new SAXException("only one 'registers' element permitted");
+				}
+				if (!spacesFound) {
+					throw new SAXException(
+						"'spaces' element must occur before 'registers' element within file");
+				}
+				registersFound = true;
+				if (!descriptionOnly) {
+					registerMgr = parseRegisters(element, addressFactory);
+				}
+			}
+			else {
+				throw new SAXException("Unsupported language element '" + elementName + "'");
+			}
+		}
 
 		if (!descriptionFound) {
 			throw new SAXException("Missing required 'description' element");
@@ -396,34 +401,36 @@ class OldLanguage implements Language {
 			throws SAXException {
 		RegisterBuilder regBuilder = new RegisterBuilder();
 		List<?> children = element.getChildren();
-        for (Object child : children) {
-            Element childElement = (Element) child;
-            String elementName = childElement.getName();
-            if ("context_register".equals(elementName) || "register".equals(elementName)) {
-                boolean bigEndian =
-                        "context_register".equals(elementName) ? true : endian.isBigEndian();
-                String name = childElement.getAttributeValue("name");
-                if (name == null) {
-                    throw new SAXException("Missing required register 'name' attribute");
-                }
-                Address addr = parseRegisterAddress(childElement, addrFactory);
-                int bitsize = parseIntAttribute(childElement, "bitsize");
-                AddressSpace space = addr.getAddressSpace();
+		Iterator<?> iter = children.iterator();
+		while (iter.hasNext()) {
+			Element childElement = (Element) iter.next();
+			String elementName = childElement.getName();
+			if ("context_register".equals(elementName) || "register".equals(elementName)) {
+				boolean bigEndian =
+					"context_register".equals(elementName) ? true : endian.isBigEndian();
+				String name = childElement.getAttributeValue("name");
+				if (name == null) {
+					throw new SAXException("Missing required register 'name' attribute");
+				}
+				Address addr = parseRegisterAddress(childElement, addrFactory);
+				int bitsize = parseIntAttribute(childElement, "bitsize");
+				AddressSpace space = addr.getAddressSpace();
 
-                regBuilder.addRegister(name, name, addr, (bitsize + 7) / 8, 0, bitsize, bigEndian,
-                        0);
+				regBuilder.addRegister(name, name, addr, (bitsize + 7) / 8, 0, bitsize, bigEndian,
+					0);
 
-                if (space.isLoadedMemorySpace() && space instanceof GenericAddressSpace) {
-                    ((GenericAddressSpace) space).setHasMappedRegisters(true);
-                }
+				if (space.isLoadedMemorySpace() && space instanceof GenericAddressSpace) {
+					((GenericAddressSpace) space).setHasMappedRegisters(true);
+				}
 
-                if ("context_register".equals(elementName)) {
-                    parseContextFields(childElement, regBuilder, addr, bitsize);
-                }
-            } else {
-                throw new SAXException("Unsupported registers element '" + elementName + "'");
-            }
-        }
+				if ("context_register".equals(elementName)) {
+					parseContextFields(childElement, regBuilder, addr, bitsize);
+				}
+			}
+			else {
+				throw new SAXException("Unsupported registers element '" + elementName + "'");
+			}
+		}
 		return regBuilder.getRegisterManager();
 	}
 
@@ -431,40 +438,42 @@ class OldLanguage implements Language {
 			int contextBitLength) throws SAXException {
 
 		List<?> children = element.getChildren();
-        for (Object child : children) {
-            Element childElement = (Element) child;
-            String elementName = childElement.getName();
-            if (!"field".equals(childElement.getName())) {
-                throw new SAXException(
-                        "Unsupported context_register element '" + elementName + "'");
-            }
-            String name = childElement.getAttributeValue("name");
-            if (name == null) {
-                throw new SAXException("Missing required field 'name' attribute");
-            }
-            String range = childElement.getAttributeValue("range");
-            if (range == null) {
-                throw new SAXException("Missing required field 'range' attribute");
-            }
-            int lsb = -1;
-            int msb = -1;
-            try {
-                String[] splitRange = range.split(",");
-                lsb = Integer.parseInt(splitRange[0]);
-                msb = Integer.parseInt(splitRange[1]);
-                int fieldBitLength = msb - lsb + 1;
+		Iterator<?> iter = children.iterator();
+		while (iter.hasNext()) {
+			Element childElement = (Element) iter.next();
+			String elementName = childElement.getName();
+			if (!"field".equals(childElement.getName())) {
+				throw new SAXException(
+					"Unsupported context_register element '" + elementName + "'");
+			}
+			String name = childElement.getAttributeValue("name");
+			if (name == null) {
+				throw new SAXException("Missing required field 'name' attribute");
+			}
+			String range = childElement.getAttributeValue("range");
+			if (range == null) {
+				throw new SAXException("Missing required field 'range' attribute");
+			}
+			int lsb = -1;
+			int msb = -1;
+			try {
+				String[] splitRange = range.split(",");
+				lsb = Integer.parseInt(splitRange[0]);
+				msb = Integer.parseInt(splitRange[1]);
+				int fieldBitLength = msb - lsb + 1;
 
-                // Transpose bit numbering from Sleigh convention in file to big-endian register context bit numbering
-                lsb = contextBitLength - msb - 1;
-                msb = lsb + fieldBitLength - 1;
-            } catch (Exception e) {
-            }
+				// Transpose bit numbering from Sleigh convention in file to big-endian register context bit numbering
+				lsb = contextBitLength - msb - 1;
+				msb = lsb + fieldBitLength - 1;
+			}
+			catch (Exception e) {
+			}
 //			if (lsb < 0 || msb < 0 || msb < lsb || lsb > 31 || msb > 31) {
 //				throw new SAXException("invalid field range: " + range);
 //			}
-            regBuilder.addRegister(name, name, addr, (contextBitLength + 7) / 8, lsb, msb - lsb + 1,
-                    true, Register.TYPE_CONTEXT);
-        }
+			regBuilder.addRegister(name, name, addr, (contextBitLength + 7) / 8, lsb, msb - lsb + 1,
+				true, Register.TYPE_CONTEXT);
+		}
 
 	}
 
@@ -551,33 +560,40 @@ class OldLanguage implements Language {
 		CompilerSpecID compilerSpecID = null;
 
 		List<?> children = element.getChildren();
-        for (Object child : children) {
-            Element childElement = (Element) child;
-            String elementName = childElement.getName();
-            String text = childElement.getText().trim();
-            if ("name".equals(elementName)) {
-                LanguageCompilerSpecPair pair =
-                        OldLanguageMappingService.lookupMagicString(text, false);
-                if (pair != null) {
-                    id = pair.languageID;
-                    compilerSpecID = pair.compilerSpecID;
-                } else {
-                    throw new SAXException("Failed to map old language name: " + text);
-                }
-            } else if ("id".equals(elementName)) {
-                id = new LanguageID(text);
-            } else if ("processor".equals(elementName)) {
-                processor = Processor.findOrPossiblyCreateProcessor(text);
-            } else if ("variant".equals(elementName)) {
-                variant = text;
-            } else if ("size".equals(elementName)) {
-                try {
-                    size = Integer.parseInt(text);
-                } catch (NumberFormatException e) {
-                    throw new SAXException(e);
-                }
-            }
-        }
+		Iterator<?> iter = children.iterator();
+		while (iter.hasNext()) {
+			Element childElement = (Element) iter.next();
+			String elementName = childElement.getName();
+			String text = childElement.getText().trim();
+			if ("name".equals(elementName)) {
+				LanguageCompilerSpecPair pair =
+					OldLanguageMappingService.lookupMagicString(text, false);
+				if (pair != null) {
+					id = pair.languageID;
+					compilerSpecID = pair.compilerSpecID;
+				}
+				else {
+					throw new SAXException("Failed to map old language name: " + text);
+				}
+			}
+			else if ("id".equals(elementName)) {
+				id = new LanguageID(text);
+			}
+			else if ("processor".equals(elementName)) {
+				processor = Processor.findOrPossiblyCreateProcessor(text);
+			}
+			else if ("variant".equals(elementName)) {
+				variant = text;
+			}
+			else if ("size".equals(elementName)) {
+				try {
+					size = Integer.parseInt(text);
+				}
+				catch (NumberFormatException e) {
+					throw new SAXException(e);
+				}
+			}
+		}
 		if (id == null) {
 			throw new SAXException("Missing required description 'id' or 'name' element");
 		}

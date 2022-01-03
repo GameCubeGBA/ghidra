@@ -103,7 +103,7 @@ public class HREF implements Comparable<HREF> {
 	}
 
 	public String getHelpPath() {
-		Path referenceFileHelpPath = relativePath;
+		Path referenceFileHelpPath = getReferenceFileHelpPath();
 		if (referenceFileHelpPath == null) {
 			return null;
 		}
@@ -129,7 +129,7 @@ public class HREF implements Comparable<HREF> {
 		}
 
 		// check file
-		Path otherSourceFile = other.sourceFile;
+		Path otherSourceFile = other.getSourceFile();
 		if (!sourceFile.equals(otherSourceFile)) {
 			return sourceFile.compareTo(otherSourceFile);
 		}

@@ -34,12 +34,12 @@ public interface Archive extends DataTypeManagerOwner, Comparable<Archive> {
 	 * This is the name to be presented to the user for this archive.
 	 * @return the name
 	 */
-    String getName();
+	public String getName();
 
 	/**
 	 * Closes this archive.  Some archives cannot be closed (i.e. BuiltIn data type archive.)
 	 */
-    void close();
+	public void close();
 
 	/**
 	 * Determines if this is a modifiable archive like a program archive, a non-versioned
@@ -47,31 +47,31 @@ public interface Archive extends DataTypeManagerOwner, Comparable<Archive> {
 	 * file archive.
 	 * @return true if it is a modifiable archive and can have its contents changed.
 	 */
-    boolean isModifiable();
+	public boolean isModifiable();
 
 	/**
 	 * Determines if this archive can be saved. Some archives cannot be saved.
 	 * @return true if the archive can be saved.
 	 */
-    boolean isSavable();
+	public boolean isSavable();
 
 	/**
 	 * Determines if this archive has been changed. Some archives cannot be changed.
 	 * @return true if the archive contains unsaved changes.
 	 */
-    boolean isChanged();
+	public boolean isChanged();
 
 	/**
 	 * Saves this archive. Some archives cannot be saved.
 	 */
-    void save() throws DuplicateFileException, IOException;
+	public void save() throws DuplicateFileException, IOException;
 
 	/**
 	 * Saves this archive to a newly named file.
 	 * @param component
 	 * @throws IOException
 	 */
-    void saveAs(Component component) throws IOException;
+	public void saveAs(Component component) throws IOException;
 
 	/**
 	 * Gets the icon representing this archive.
@@ -79,5 +79,5 @@ public interface Archive extends DataTypeManagerOwner, Comparable<Archive> {
 	 * false indicates the node is closed.
 	 * @return the archive's icon.
 	 */
-    ImageIcon getIcon(boolean expanded);
+	public ImageIcon getIcon(boolean expanded);
 }

@@ -30,7 +30,7 @@ import ghidra.dbg.target.TargetInterruptible;
 public interface LldbModelTargetInterruptible extends LldbModelTargetObject, TargetInterruptible {
 
 	@Override
-    default CompletableFuture<Void> interrupt() {
+	public default CompletableFuture<Void> interrupt() {
 		getManager().sendInterruptNow();
 		return CompletableFuture.completedFuture(null);
 	}

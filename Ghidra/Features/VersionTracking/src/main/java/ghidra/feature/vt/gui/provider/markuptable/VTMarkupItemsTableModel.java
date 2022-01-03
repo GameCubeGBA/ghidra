@@ -124,11 +124,14 @@ public class VTMarkupItemsTableModel extends AddressBasedTableModel<VTMarkupItem
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
 		int appliedAddressIndex = getColumnIndex(AppliedDestinationAddressTableColumn.class);
 
-        return columnIndex == appliedAddressIndex;
+		if (columnIndex != appliedAddressIndex) {
+			return false;
+		}
 
 		// Make destination address editable. It will get validated upon edit and 
 		// display an info dialog if not really editable.
-    }
+		return true;
+	}
 
 	@Override
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
@@ -198,8 +201,12 @@ public class VTMarkupItemsTableModel extends AddressBasedTableModel<VTMarkupItem
 				return true;
 			}
 
-            return rowMatchesFilters(appliedFilters, markup);
-        }
+			if (rowMatchesFilters(appliedFilters, markup)) {
+				return true;
+			}
+
+			return false;
+		}
 
 		/*
 		 * For our row to match, each column must be tested for each filter to see if all filters 

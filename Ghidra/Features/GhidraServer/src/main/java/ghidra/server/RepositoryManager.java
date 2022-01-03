@@ -92,9 +92,11 @@ public class RepositoryManager {
 	 * Dispose this repository manager and all repository instances
 	 */
 	public synchronized void dispose() {
-        for (Repository rep : repositoryMap.values()) {
-            rep.dispose();
-        }
+		Iterator<Repository> iter = repositoryMap.values().iterator();
+		while (iter.hasNext()) {
+			Repository rep = iter.next();
+			rep.dispose();
+		}
 	}
 
 	/**
@@ -210,15 +212,18 @@ public class RepositoryManager {
 	public synchronized String[] getRepositoryNames(String currentUser) {
 
 		ArrayList<String> list = new ArrayList<>();
-        for (Repository rep : repositoryMap.values()) {
-            if (isAnonymousUser(currentUser)) {
-                if (rep.anonymousAccessAllowed()) {
-                    list.add(rep.getName());
-                }
-            } else if (rep.getUser(currentUser) != null) {
-                list.add(rep.getName());
-            }
-        }
+		Iterator<Repository> iter = repositoryMap.values().iterator();
+		while (iter.hasNext()) {
+			Repository rep = iter.next();
+			if (isAnonymousUser(currentUser)) {
+				if (rep.anonymousAccessAllowed()) {
+					list.add(rep.getName());
+				}
+			}
+			else if (rep.getUser(currentUser) != null) {
+				list.add(rep.getName());
+			}
+		}
 		Collections.sort(list);
 		String[] names = new String[list.size()];
 		return list.toArray(names);
@@ -323,7 +328,7 @@ public class RepositoryManager {
 				tbuf.insert(0, StringUtilities.pad(Integer.toString(hours), '0', 2));
 			}
 		}
-		return tbuf + " (" + units + ")";
+		return tbuf.toString() + " (" + units + ")";
 	}
 
 	/**

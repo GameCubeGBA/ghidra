@@ -53,7 +53,7 @@ import resources.ResourceManager;
 public class SymbolTreeProvider extends ComponentProviderAdapter {
 
 	private static final ImageIcon ICON = ResourceManager.loadImage("images/sitemap_color.png");
-	private static final String NAME = "Symbol Tree";
+	private final static String NAME = "Symbol Tree";
 
 	private ClipboardOwner clipboardOwner;
 	private Clipboard localClipboard;// temporary clipboard used for the "cut" operation

@@ -24,6 +24,6 @@ public interface LldbModelTargetRegisterContainerAndBank extends //
 		TargetRegisterContainer, //
 		TargetRegisterBank {
 
-	LldbModelTargetRegister getTargetRegister(SBValue register);
+	public LldbModelTargetRegister getTargetRegister(SBValue register);
 
 }

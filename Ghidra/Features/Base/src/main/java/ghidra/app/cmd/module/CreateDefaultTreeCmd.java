@@ -80,14 +80,14 @@ public class CreateDefaultTreeCmd implements Command {
 	private static void renameFragments(Program program, String treeName) {
 		Listing listing = program.getListing();
 		MemoryBlock[] blocks = program.getMemory().getBlocks();
-        for (MemoryBlock block : blocks) {
-            ProgramFragment fragment = listing.getFragment(treeName,
-                    block.getStart());
-            try {
-                fragment.setName(block.getName());
-            } catch (DuplicateNameException e) {
-            }
-        }
+		for (int i=0; i<blocks.length; i++) {
+			ProgramFragment fragment = listing.getFragment(treeName,
+												blocks[i].getStart());
+			try {
+				fragment.setName(blocks[i].getName());
+			} catch (DuplicateNameException e) {
+			}
+		}			
 	}
 
 	/**

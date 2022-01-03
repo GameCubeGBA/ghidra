@@ -29,7 +29,7 @@ import ghidra.program.model.address.AddressSetView;
 import ghidra.util.exception.VersionException;
 
 public class RelocationDBAdapterV4 extends RelocationDBAdapter {
-	static final int VERSION = 4;
+	final static int VERSION = 4;
 	private Table relocTable;
 	private AddressMap addrMap;
 

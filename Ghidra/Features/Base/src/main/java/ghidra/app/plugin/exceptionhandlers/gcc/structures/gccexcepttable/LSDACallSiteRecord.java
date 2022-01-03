@@ -89,12 +89,12 @@ public class LSDACallSiteRecord extends GccAnalysisClass {
 
 		Address lpStart = region.getLSDATable().getHeader().getLPStartAddress();
 
-		Address callSiteBaseAddr = lpStart.add(callSitePosition);
-		Address callSiteExtentAddr = callSiteBaseAddr.add(callSiteLength - 1);
+		Address callSiteBaseAddr = lpStart.add(getCallSitePosition());
+		Address callSiteExtentAddr = callSiteBaseAddr.add(getCallSiteLength() - 1);
 
 		callSiteRange = new AddressRangeImpl(callSiteBaseAddr, callSiteExtentAddr);
 
-		landingPadAddr = lpStart.add(landingPadOffset);
+		landingPadAddr = lpStart.add(getLandingPadOffset());
 
 		SetCommentCmd commentCmd =
 			new SetCommentCmd(baseAddr, CodeUnit.PLATE_COMMENT, "(LSDA) Call Site Record");

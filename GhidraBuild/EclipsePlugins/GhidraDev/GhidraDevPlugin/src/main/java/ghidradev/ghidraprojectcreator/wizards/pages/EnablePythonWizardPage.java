@@ -246,7 +246,7 @@ public class EnablePythonWizardPage extends WizardPage {
 			return Files.find(ghidraInstallDir.toPath(), 10, (path, attrs) -> {
 				String name = path.getFileName().toString();
 				String parentName = path.getParent().getFileName().toString();
-				return attrs.isDirectory() && "Lib".equals(name) && parentName.startsWith("jython");
+				return attrs.isDirectory() && name.equals("Lib") && parentName.startsWith("jython");
 			}).map(p -> p.toFile()).findFirst().orElse(null);
 		}
 		catch (IOException e) {

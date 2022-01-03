@@ -136,12 +136,12 @@ public class DbLargeTableModel implements TableModel {
 		--columnIndex;
 		int[] indexCols = table.getIndexedColumns();
 		boolean isIndexed = false;
-        for (int indexCol : indexCols) {
-            if (indexCol == columnIndex) {
-                isIndexed = true;
-                break;
-            }
-        }
+		for (int i = 0; i < indexCols.length; i++) {
+			if (indexCols[i] == columnIndex) {
+				isIndexed = true;
+				break;
+			}
+		}
 		return schema.getFieldNames()[columnIndex] + (isIndexed ? "*" : "");
 	}
 

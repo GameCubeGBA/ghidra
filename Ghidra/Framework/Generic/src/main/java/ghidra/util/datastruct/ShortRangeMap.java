@@ -35,7 +35,7 @@ import ghidra.util.prop.ShortPropertySet;
  * that contains a value.
  */
 public class ShortRangeMap implements Serializable {
-    private static final long serialVersionUID = 1;
+    private final static long serialVersionUID = 1;
     /** The maximum end of range index allowed. */
 	public static final long LARGEST = 0xffffffffffffffffL;
 	

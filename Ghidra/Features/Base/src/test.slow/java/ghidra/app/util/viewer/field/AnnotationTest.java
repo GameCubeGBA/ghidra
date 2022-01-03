@@ -999,8 +999,12 @@ public class AnnotationTest extends AbstractGhidraHeadedIntegrationTest {
 				text = symbol.getName();
 			}
 
-            return text.equals(symbolName);
-        }
+			if (text.equals(symbolName)) {
+				return true;
+			}
+
+			return false;
+		}
 
 		/**
 		 * Try to navigate to the given program/address pair
@@ -1017,7 +1021,11 @@ public class AnnotationTest extends AbstractGhidraHeadedIntegrationTest {
 			Address navAddress = lastLocation.getAddress();
 
 			// if address, convert to long and compare
-            return navAddress.equals(address);
-        }
+			if (navAddress.equals(address)) {
+				return true;
+			}
+
+			return false;
+		}
 	}
 }

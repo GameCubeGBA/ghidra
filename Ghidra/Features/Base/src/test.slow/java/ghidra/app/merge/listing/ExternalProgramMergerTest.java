@@ -39,7 +39,8 @@ public class ExternalProgramMergerTest extends AbstractListingMergeManagerTest {
 	 * @param arg0
 	 */
 	public ExternalProgramMergerTest() {
-    }
+		super();
+	}
 
 	@Test
 	public void testChangePathNoConflicts() throws Exception {

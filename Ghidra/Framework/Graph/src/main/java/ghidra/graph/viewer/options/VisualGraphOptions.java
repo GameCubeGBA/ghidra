@@ -114,7 +114,7 @@ public class VisualGraphOptions {
 		options.registerOption(VIEW_RESTORE_OPTIONS_KEY, ViewRestoreOption.START_FULLY_ZOOMED_OUT,
 			help, VIEW_RESTORE_OPTIONS_DESCRIPTION);
 
-		options.registerOption(SCROLL_WHEEL_PANS_KEY, scrollWheelPans, help,
+		options.registerOption(SCROLL_WHEEL_PANS_KEY, getScrollWheelPans(), help,
 			SCROLL_WHEEL_PANS_DESCRIPTION);
 
 		options.registerOption(GRAPH_BACKGROUND_COLOR_KEY, DEFAULT_GRAPH_BACKGROUND_COLOR, help,

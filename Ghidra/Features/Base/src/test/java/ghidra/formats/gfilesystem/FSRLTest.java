@@ -222,11 +222,11 @@ public class FSRLTest {
 
 		assertTrue(parentFSRL.toString() + " should be parent of " + childFSRL.toString(),
 			childFSRL.isDescendantOf(parentFSRL));
-		assertTrue(gParentFSRL.toString() + " should be parent of " + childFSRL,
+		assertTrue(gParentFSRL.toString() + " should be parent of " + childFSRL.toString(),
 			childFSRL.isDescendantOf(gParentFSRL));
-		assertTrue(gParentsDirFSRL.toString() + " should be parent of " + childFSRL,
+		assertTrue(gParentsDirFSRL.toString() + " should be parent of " + childFSRL.toString(),
 			childFSRL.isDescendantOf(gParentsDirFSRL));
-		assertTrue(rootDirFSRL.toString() + " should be parent of " + childFSRL,
+		assertTrue(rootDirFSRL.toString() + " should be parent of " + childFSRL.toString(),
 			childFSRL.isDescendantOf(rootDirFSRL));
 		assertFalse(childFSRL.isDescendantOf(notGParentFSRL));
 		assertFalse(childFSRL.isDescendantOf(notParentFSRL));

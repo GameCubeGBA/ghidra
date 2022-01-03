@@ -582,10 +582,10 @@ public class ReferenceDBManager implements ReferenceManager, ManagerDB, ErrorHan
 	public Reference addExternalReference(Address fromAddr, String libraryName, String extLabel,
 			Address extAddr, SourceType sourceType, int opIndex, RefType type)
 			throws InvalidInputException, DuplicateNameException {
-		if (libraryName == null || libraryName.isEmpty()) {
+		if (libraryName == null || libraryName.length() == 0) {
 			throw new InvalidInputException("A valid library name must be specified.");
 		}
-		if (extLabel != null && extLabel.isEmpty()) {
+		if (extLabel != null && extLabel.length() == 0) {
 			extLabel = null;
 		}
 		if (extLabel == null && extAddr == null) {
@@ -617,7 +617,7 @@ public class ReferenceDBManager implements ReferenceManager, ManagerDB, ErrorHan
 		if (extNamespace == null || !extNamespace.isExternal()) {
 			throw new InvalidInputException("The namespace must be an external namespace.");
 		}
-		if (extLabel != null && extLabel.isEmpty()) {
+		if (extLabel != null && extLabel.length() == 0) {
 			extLabel = null;
 		}
 		if (extLabel == null && extAddr == null) {
@@ -767,23 +767,25 @@ public class ReferenceDBManager implements ReferenceManager, ManagerDB, ErrorHan
 		int outOfScopeOffset = scope.getOutOfScopeOffset();
 
 		SortedMap<Address, List<Reference>> subMap = dataReferences.tailMap(minStorageAddr);
-        for (List<Reference> refList : subMap.values()) {
+		Iterator<List<Reference>> refListIter = subMap.values().iterator();
+		while (refListIter.hasNext()) {
 
-            for (Reference ref : refList) {
+			List<Reference> refList = refListIter.next();
+			for (Reference ref : refList) {
 
-                if (ref.getToAddress().compareTo(maxStorageAddr) > 0) {
-                    return;
-                }
-                int refOffset = (int) ref.getFromAddress().subtract(entry);
-                if (refOffset < 0) {
-                    refOffset = Integer.MAX_VALUE - refOffset;
-                }
-                if (refOffset >= firstUseOffset && refOffset < outOfScopeOffset) {
-                    // reference is within variable scope - add to list
-                    matchingReferences.add(ref);
-                }
-            }
-        }
+				if (ref.getToAddress().compareTo(maxStorageAddr) > 0) {
+					return;
+				}
+				int refOffset = (int) ref.getFromAddress().subtract(entry);
+				if (refOffset < 0) {
+					refOffset = Integer.MAX_VALUE - refOffset;
+				}
+				if (refOffset >= firstUseOffset && refOffset < outOfScopeOffset) {
+					// reference is within variable scope - add to list
+					matchingReferences.add(ref);
+				}
+			}
+		}
 	}
 
 	@Override

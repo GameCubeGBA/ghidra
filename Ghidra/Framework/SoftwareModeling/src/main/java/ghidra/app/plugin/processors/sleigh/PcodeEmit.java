@@ -208,7 +208,7 @@ public abstract class PcodeEmit {
 	 */
 	void resolveFinalFallthrough() {
 		try {
-			if (fallOverride == null || fallOverride.equals(startAddress.add(fallOffset))) {
+			if (fallOverride == null || fallOverride.equals(getStartAddress().add(fallOffset))) {
 				return;
 			}
 		}
@@ -882,6 +882,9 @@ public abstract class PcodeEmit {
 	// Used to check whether the address from a potentially overriding reference 
 	// actually changes the call destination
 	private boolean actualOverride(VarnodeData data, Address addr) {
-        return !data.space.equals(addr.getAddressSpace()) || (data.offset != addr.getOffset());
-    }
+		if (!data.space.equals(addr.getAddressSpace()) || (data.offset != addr.getOffset())) {
+			return true;
+		}
+		return false;
+	}
 }

@@ -33,6 +33,7 @@ public class XRefHeaderFieldLocation extends XRefFieldLocation {
 	 * Should only be used for XML restoring.
 	 */
 	public XRefHeaderFieldLocation() {
-    }
+		super();
+	}
 
 }

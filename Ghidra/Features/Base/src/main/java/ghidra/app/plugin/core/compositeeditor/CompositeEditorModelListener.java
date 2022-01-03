@@ -26,12 +26,12 @@ package ghidra.app.plugin.core.compositeeditor;
  */
 public interface CompositeEditorModelListener extends CompositeViewerModelListener {
     // Definitions of the types of state changes that can occur.
-    int COMPOSITE_MODIFIED = 1;
-    int COMPOSITE_UNMODIFIED = 2;
-    int COMPOSITE_LOADED = 3;
-    int NO_COMPOSITE_LOADED = 4;
-    int EDIT_STARTED = 5;
-    int EDIT_ENDED = 6;
+    public static final int COMPOSITE_MODIFIED = 1;
+    public static final int COMPOSITE_UNMODIFIED = 2;
+    public static final int COMPOSITE_LOADED = 3;
+    public static final int NO_COMPOSITE_LOADED = 4;
+    public static final int EDIT_STARTED = 5;
+    public static final int EDIT_ENDED = 6;
 
 	/**
 	 * Called whenever the composite data type editor state changes for whether or not
@@ -39,7 +39,7 @@ public interface CompositeEditorModelListener extends CompositeViewerModelListen
 	 *
 	 * @param showUndefinedBytes true if undefined bytes should be displayed in the editor
 	 */
-    void showUndefinedStateChanged(boolean showUndefinedBytes);
+	public abstract void showUndefinedStateChanged(boolean showUndefinedBytes);
 
     /**
      * Called whenever the data composite edit state changes.
@@ -51,7 +51,7 @@ public interface CompositeEditorModelListener extends CompositeViewerModelListen
      * @param type the type of state change: COMPOSITE_MODIFIED, COMPOSITE_UNMODIFIED,
      * COMPOSITE_LOADED, NO_COMPOSITE_LOADED, EDIT_STARTED, EDIT_ENDED.
      */
-    void compositeEditStateChanged(int type);
+	public abstract void compositeEditStateChanged(int type);
 
 //    /**
 //     * Called when the data type for one of our components changes.
@@ -70,6 +70,6 @@ public interface CompositeEditorModelListener extends CompositeViewerModelListen
      * edited. It is up to the application to determine whether to cancel or 
      * apply the field edits.
      */
-    void endFieldEditing();
+	public abstract void endFieldEditing();
 	
 }

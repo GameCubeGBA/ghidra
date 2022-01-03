@@ -118,8 +118,11 @@ public class DebuggerCoordinates {
 		if (!Objects.equals(a.time, b.time)) {
 			return false;
 		}
-        return Objects.equals(a.frame, b.frame);
-    }
+		if (!Objects.equals(a.frame, b.frame)) {
+			return false;
+		}
+		return true;
+	}
 
 	private final Trace trace;
 	private final TraceRecorder recorder;
@@ -173,8 +176,11 @@ public class DebuggerCoordinates {
 		if (!Objects.equals(this.time, that.time)) {
 			return false;
 		}
-        return Objects.equals(this.frame, that.frame);
-    }
+		if (!Objects.equals(this.frame, that.frame)) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public int hashCode() {

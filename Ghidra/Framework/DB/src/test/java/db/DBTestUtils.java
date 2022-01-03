@@ -685,7 +685,7 @@ public class DBTestUtils {
 			// Simply increase length by adding trailing 0 byte
 			newBytes = new byte[len + 1];
 			System.arraycopy(bytes, 0, newBytes, 0, len);
-			newBytes[len] = 0x00;
+			newBytes[len] = (byte) 0x00;
 		}
 		else if (bytes[len - 1] == (byte) 0xff) {
 			// chop trailing ff bytes, increment new last byte
@@ -808,6 +808,7 @@ public class DBTestUtils {
 class DuplicateKeyException extends Exception {
 
 	DuplicateKeyException() {
+		super();
 	}
 
 }

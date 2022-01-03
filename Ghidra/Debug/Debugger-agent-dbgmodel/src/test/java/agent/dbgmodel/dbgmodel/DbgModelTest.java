@@ -157,12 +157,15 @@ public class DbgModelTest extends AbstractGhidraHeadlessIntegrationTest {
 				return DebugStatus.BREAK;
 			}
 		});
-		client.setOutputCallbacks((mask, text) -> {
-            System.out.print(text);
-            if (outputCapture != null) {
-                outputCapture.append(text);
-            }
-        });
+		client.setOutputCallbacks(new DebugOutputCallbacks() {
+			@Override
+			public void output(int mask, String text) {
+				System.out.print(text);
+				if (outputCapture != null) {
+					outputCapture.append(text);
+				}
+			}
+		});
 
 		client.openDumpFileWide("notepad01.run");
 		control.waitForEvent();
@@ -232,7 +235,7 @@ public class DbgModelTest extends AbstractGhidraHeadlessIntegrationTest {
 		do {
 			key = enumerateKeys.getNext();
 			ModelObject value = enumerateKeys.getValue();
-			if (value == null || key == null || "Registers".equals(key)) {
+			if (value == null || key == null || key.equals("Registers")) {
 				continue;
 			}
 			//if (!value.getKind().equals(ModelObjectKind.OBJECT_METHOD)) {
@@ -302,7 +305,7 @@ public class DbgModelTest extends AbstractGhidraHeadlessIntegrationTest {
 			ModelObject env = currentProcess.getKeyValue("Environment");
 			ModelObject eb = env.getKeyValue("EnvironmentBlock");
 			System.out.println(eb.getKind());
-			System.out.println(eb);
+			System.out.println(eb.toString());
 
 			DebugHostType1 targetInfo = eb.getTargetInfo();
 			//DebugHostContext context = targetInfo.getContext();

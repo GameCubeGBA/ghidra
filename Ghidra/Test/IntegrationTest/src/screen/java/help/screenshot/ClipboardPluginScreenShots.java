@@ -149,19 +149,22 @@ public class ClipboardPluginScreenShots extends GhidraScreenShotGenerator {
 
 		Object listPanel = getInstanceField("listPanel", copySpecialDialog);
 		final JList<?> list = (JList<?>) getInstanceField("list", listPanel);
-		runSwing((Runnable) () -> {
-            ListModel<?> model = list.getModel();
-            int size = model.getSize();
-            for (int i = 0; i < size; i++) {
-                Object value = model.getElementAt(i);
-                if ("Labels and Comments".equals(value.toString())) {
-                    list.setSelectedIndex(i);
-                    return;
-                }
-            }
+		runSwing(new Runnable() {
+			@Override
+			public void run() {
+				ListModel<?> model = list.getModel();
+				int size = model.getSize();
+				for (int i = 0; i < size; i++) {
+					Object value = model.getElementAt(i);
+					if ("Labels and Comments".equals(value.toString())) {
+						list.setSelectedIndex(i);
+						return;
+					}
+				}
 
-            throw new RuntimeException("Could not find 'Labels and Comments' copy action");
-        });
+				throw new RuntimeException("Could not find 'Labels and Comments' copy action");
+			}
+		});
 		waitForSwing();
 	}
 

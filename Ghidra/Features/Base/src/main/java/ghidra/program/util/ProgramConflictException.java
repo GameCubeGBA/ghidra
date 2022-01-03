@@ -28,6 +28,7 @@ public class ProgramConflictException extends UsrException {
 	 * Constructor
 	 */
     public ProgramConflictException() {
+		super();
     }
 	/**
 	 * Constructor

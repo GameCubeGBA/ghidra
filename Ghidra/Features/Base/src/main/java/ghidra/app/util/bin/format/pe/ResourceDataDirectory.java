@@ -17,7 +17,9 @@ package ghidra.app.util.bin.format.pe;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.regex.Pattern;
 
+import ghidra.app.util.bin.StructConverter;
 import ghidra.app.util.bin.format.FactoryBundledWithBinaryReader;
 import ghidra.app.util.bin.format.pe.resource.*;
 import ghidra.app.util.datatype.microsoft.*;
@@ -156,6 +158,7 @@ public class ResourceDataDirectory extends DataDirectory {
 	 * Manifest resource
 	 */
     public static final byte RT_MANIFEST = 24;
+	private static final Pattern COMPILE = Pattern.compile("\"");
 
 	private ResourceDirectory rootDirectory;
 
@@ -536,9 +539,9 @@ public class ResourceDataDirectory extends DataDirectory {
 
 			int offset = 0;
 			//get first structure
-			Data componentAt = data.getComponentAt(offset);
-			if (componentAt.isStructure() &&
-				"DLGTEMPLATE".equals(componentAt.getBaseDataType().getName())) {
+			Data componentContaining = data.getComponentContaining(offset);
+			if (componentContaining.isStructure() &&
+				"DLGTEMPLATE".equals(componentContaining.getBaseDataType().getName())) {
 
 				//determine if 3 or 5 components after initial structure
 				int numAfter = 3;
@@ -552,43 +555,43 @@ public class ResourceDataDirectory extends DataDirectory {
 
 				//get three or five components after initial structure
 				for (int i = 0; i < numAfter; i++) {
-					offset += componentAt.getLength();
-					componentAt = data.getComponentAt(offset);
+					offset += componentContaining.getLength();
+					componentContaining = data.getComponentContaining(offset);
 					comment.append("\n" + afterTemplate[i] + ": ");
-					if ("short".equals(componentAt.getBaseDataType().getName())) {
-						comment.append(componentAt.getDefaultValueRepresentation());
+					if ("short".equals(componentContaining.getBaseDataType().getName())) {
+						comment.append(componentContaining.getDefaultValueRepresentation());
 					}
-					if ("short[1]".equals(componentAt.getBaseDataType().getName())) {
+					if ("short[1]".equals(componentContaining.getBaseDataType().getName())) {
 						if (buffer.getShort(offset) == 0x0000) {
 							comment.append(templateType0[i]);
 						}
 					}
-					if ("short[2]".equals(componentAt.getBaseDataType().getName())) {
+					if ("short[2]".equals(componentContaining.getBaseDataType().getName())) {
 						if ((buffer.getShort(offset) & 0xffff) == 0xffff) {
 							int ordinal = buffer.getShort(offset + 2);
 							comment.append("External Ordinal Number " + ordinal);
 						}
 					}
 
-					if ("unicode".equals(componentAt.getBaseDataType().getName())) {
+					if ("unicode".equals(componentContaining.getBaseDataType().getName())) {
 						comment.append(
-							fixupStringRepForDisplay(componentAt.getDefaultValueRepresentation()));
+							fixupStringRepForDisplay(componentContaining.getDefaultValueRepresentation()));
 					}
 				}
 				//loop over item structures
 				comment.append("\n");
 				while (currentItem < numItems) {
-					offset += componentAt.getLength();
-					componentAt = data.getComponentAt(offset);
-					if ("DLGITEMTEMPLATE".equals(componentAt.getBaseDataType().getName())) {
+					offset += componentContaining.getLength();
+					componentContaining = data.getComponentContaining(offset);
+					if ("DLGITEMTEMPLATE".equals(componentContaining.getBaseDataType().getName())) {
 						currentItem++;
 						comment.append("\nItem " + currentItem + ": ");
 						//loop over three items after each item structure
 						for (int i = 0; i < 3; i++) {
-							offset += componentAt.getLength();
-							componentAt = data.getComponentAt(offset);
+							offset += componentContaining.getLength();
+							componentContaining = data.getComponentContaining(offset);
 							comment.append("\n   " + afterItem[i] + ": ");
-							if (componentAt.getBaseDataType().getName().startsWith("short[")) {
+							if (componentContaining.getBaseDataType().getName().startsWith("short[")) {
 								//no other info
 								if (buffer.getShort(offset) == 0x0000) {
 									comment.append("None");
@@ -606,9 +609,9 @@ public class ResourceDataDirectory extends DataDirectory {
 								}
 							}
 
-							if ("unicode".equals(componentAt.getBaseDataType().getName())) {
+							if ("unicode".equals(componentContaining.getBaseDataType().getName())) {
 								comment.append(fixupStringRepForDisplay(
-									componentAt.getDefaultValueRepresentation()));
+									componentContaining.getDefaultValueRepresentation()));
 							}
 						}
 					}
@@ -684,8 +687,8 @@ public class ResourceDataDirectory extends DataDirectory {
 					}
 
 					String menuString = fixupStringRepForDisplay(
-						data.getComponentAt(offset).getDefaultValueRepresentation());
-					menuString = menuString.replaceAll("\"", "");
+						data.getComponentContaining(offset).getDefaultValueRepresentation());
+					menuString = COMPILE.matcher(menuString).replaceAll("");
 					if (menuString.isEmpty()) {
 						comment.append("-------------------\n");
 					}
@@ -734,7 +737,7 @@ public class ResourceDataDirectory extends DataDirectory {
 	}
 
 	/**
-	 * @see ghidra.app.util.bin.StructConverter#toDataType()
+	 * @see StructConverter#toDataType()
 	 */
 	@Override
 	public DataType toDataType() throws DuplicateNameException, IOException {

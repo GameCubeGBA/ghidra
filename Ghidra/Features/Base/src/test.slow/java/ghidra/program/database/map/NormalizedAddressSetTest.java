@@ -36,7 +36,8 @@ public class NormalizedAddressSetTest extends AbstractGhidraHeadedIntegrationTes
 	private NormalizedAddressSet set;
 
 	public NormalizedAddressSetTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

@@ -49,7 +49,8 @@ public class ContextStateTest extends AbstractGhidraHeadedIntegrationTest {
 	private Varnode mem1;
 
 	public ContextStateTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

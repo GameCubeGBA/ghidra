@@ -169,11 +169,12 @@ public class Match implements Comparable<Match>
 	@Override
     public String toString()
 	{
-		StringBuilder str = new StringBuilder(otherBeginning.toString(true) + "\n");
-        for (Object match : thisMatch) {
-            str.append(match.toString()).append(" ");
-        }
-		return str.toString();
+		String str =  otherBeginning.toString(true) + "\n";
+		for( int i=0; i< thisMatch.size(); i++ )
+		{
+			str += thisMatch.get(i).toString() + " ";
+		}
+		return str;
 	}
 	
 	/**
@@ -226,10 +227,10 @@ public class Match implements Comparable<Match>
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
 	public int compareTo(Match m) {
-		int val = thisBeginning.compareTo(m.thisBeginning);
+		int val = getThisBeginning().compareTo( m.getThisBeginning() );
 		if( val != 0 )
 			return val;
-		val = otherBeginning.compareTo(m.otherBeginning);
+		val = getOtherBeginning().compareTo( m.getOtherBeginning() );
 		if( val != 0 )
 			return val;		
 		return length() - m.length();

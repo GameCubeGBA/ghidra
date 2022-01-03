@@ -106,7 +106,7 @@ public class PrelinkParser {
 		String value = element.getValue();
 		if (value.equals(PrelinkConstants.kPrelinkPersonalitiesKey)) {
 			Element arrayElement = (Element) iterator.next();
-			if (arrayElement.getChildren().isEmpty()) {
+			if (arrayElement.getChildren().size() == 0) {
 				//should be empty...
 			}
 		}
@@ -119,11 +119,11 @@ public class PrelinkParser {
 	private void process(List<?> children, List<PrelinkMap> list, TaskMonitor monitor) {
 		monitor.setMessage("Processing prelink information...");
 
-		for (Object child : children) {
+		for (int i = 0; i < children.size(); ++i) {
 			if (monitor.isCancelled()) {
 				break;
 			}
-			Element element = (Element) child;
+			Element element = (Element) children.get(i);
 			if (element.getName().equals(TAG_DICT)) {
 				PrelinkMap map = processElement(element, monitor);
 				list.add(map);

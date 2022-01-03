@@ -111,35 +111,47 @@ class SelectBlockDialog extends DialogComponentProvider {
 
 		forwardButton = new GRadioButton("Select Forward", true);
 		forwardButton.setName("forwardButton");
-		forwardButton.addActionListener(ae -> {
-            setStatusText("Enter number of bytes to select");
-            setAddressFieldEnabled(false);
-            setLengthInputEnabled(true);
-        });
+		forwardButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				setStatusText("Enter number of bytes to select");
+				setAddressFieldEnabled(false);
+				setLengthInputEnabled(true);
+			}
+		});
 		buttonGroup.add(forwardButton);
 		backwardButton = new GRadioButton("Select Backward");
 		backwardButton.setName("backwardButton");
-		backwardButton.addActionListener(ae -> {
-            setStatusText("Enter number of bytes to select");
-            setAddressFieldEnabled(false);
-            setLengthInputEnabled(true);
-        });
+		backwardButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				setStatusText("Enter number of bytes to select");
+				setAddressFieldEnabled(false);
+				setLengthInputEnabled(true);
+			}
+		});
 		buttonGroup.add(backwardButton);
 		allButton = new GRadioButton("Select All");
 		allButton.setName("allButton");
-		allButton.addActionListener(ae -> {
-            setItemsEnabled(false);
-            clearStatusText();
-        });
+		allButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				setItemsEnabled(false);
+				clearStatusText();
+			}
+		});
 
 		buttonGroup.add(allButton);
 		toButton = new GRadioButton("To Address");
 		toButton.setName("toButton");
-		toButton.addActionListener(ae -> {
-            setStatusText("Enter an Address to go to");
-            setAddressFieldEnabled(true);
-            setLengthInputEnabled(false);
-        });
+		toButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ae) {
+				setStatusText("Enter an Address to go to");
+				setAddressFieldEnabled(true);
+				setLengthInputEnabled(false);
+			}
+		});
 		buttonGroup.add(toButton);
 		gbc.gridx = 0;
 		gbc.gridy = 0;
@@ -346,7 +358,12 @@ class SelectBlockDialog extends DialogComponentProvider {
 	}
 
 	private void showWarningDialog(final String text) {
-		SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(getComponent(), text));
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				JOptionPane.showMessageDialog(getComponent(), text);
+			}
+		});
 	}
 
 	public void setNavigatable(Navigatable navigatable) {

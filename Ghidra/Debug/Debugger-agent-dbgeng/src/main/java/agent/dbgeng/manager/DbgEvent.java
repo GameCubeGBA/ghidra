@@ -23,26 +23,26 @@ public interface DbgEvent<T> {
 	 * 
 	 * @return the information
 	 */
-    T getInfo();
+	public T getInfo();
 
 	/**
 	 * Use {@link DbgPendingCommand#claim(DbgEvent)} instead
 	 * 
 	 * @param cause the cause
 	 */
-    void claim(DbgPendingCommand<?> cause);
+	public void claim(DbgPendingCommand<?> cause);
 
 	/**
 	 * If claimed, get the cause of this event
 	 * 
 	 * @return the cause
 	 */
-    DbgCause getCause();
+	public DbgCause getCause();
 
 	/**
 	 * Use {@link DbgPendingCommand#steal(DbgEvent)} instead
 	 */
-    void steal();
+	public void steal();
 
 	/**
 	 * Check if this event is stolen
@@ -51,13 +51,13 @@ public interface DbgEvent<T> {
 	 * 
 	 * @return true if stolen, false otherwise
 	 */
-    boolean isStolen();
+	public boolean isStolen();
 
 	/**
 	 * If this event implies a new dbgeng state, get that state
 	 * 
 	 * @return the new state, or null for no change
 	 */
-    DbgState newState();
+	public DbgState newState();
 
 }

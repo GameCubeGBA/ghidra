@@ -113,7 +113,7 @@ public class AndroidXmlConvertor {
 					}
 				}
 
-				out.print(buffer);
+				out.print(buffer.toString());
 			}
 			out.println();
 		}
@@ -126,7 +126,7 @@ public class AndroidXmlConvertor {
 	}
 
 	private static String getNamespacePrefix(String prefix) {
-		if (prefix == null || prefix.isEmpty()) {
+		if (prefix == null || prefix.length() == 0) {
 			return "";
 		}
 		return prefix + ":";

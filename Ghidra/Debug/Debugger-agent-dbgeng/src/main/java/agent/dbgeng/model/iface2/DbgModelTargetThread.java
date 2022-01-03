@@ -35,7 +35,7 @@ public interface DbgModelTargetThread extends //
 		DbgEventsListenerAdapter, //
 		DbgModelSelectableObject {
 
-	default DbgThread getThread() {
+	public default DbgThread getThread() {
 		DbgManagerImpl manager = getManager();
 		DebugSystemObjects so = manager.getSystemObjects();
 		try {
@@ -56,16 +56,16 @@ public interface DbgModelTargetThread extends //
 	}
 
 	@Override
-    default CompletableFuture<Void> setActive() {
+	public default CompletableFuture<Void> setActive() {
 		DbgManagerImpl manager = getManager();
 		DbgThread thread = getThread();
 		return manager.execute(new DbgSetActiveThreadCommand(manager, thread, null));
 	}
 
-	DbgModelTargetStackImpl getStack();
+	public DbgModelTargetStackImpl getStack();
 
-	String getExecutingProcessorType();
+	public String getExecutingProcessorType();
 
-	void threadStateChangedSpecific(DbgState state, DbgReason reason);
+	public void threadStateChangedSpecific(DbgState state, DbgReason reason);
 
 }

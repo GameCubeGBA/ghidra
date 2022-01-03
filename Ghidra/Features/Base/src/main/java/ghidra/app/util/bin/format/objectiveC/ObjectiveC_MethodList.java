@@ -63,7 +63,7 @@ public abstract class ObjectiveC_MethodList implements StructConverter {
 		}
 		catch (Exception e) {}
 
-		for (ObjectiveC_Method method : methods) {
+		for (ObjectiveC_Method method : getMethods()) {
 			method.applyTo(namespace);
 		}
 	}

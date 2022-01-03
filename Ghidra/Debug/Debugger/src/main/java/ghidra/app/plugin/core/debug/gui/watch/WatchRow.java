@@ -82,7 +82,7 @@ public class WatchRow {
 	protected void recompile() {
 		compiled = null;
 		error = null;
-		if (expression == null || expression.isEmpty()) {
+		if (expression == null || expression.length() == 0) {
 			return;
 		}
 		if (language == null) {
@@ -459,7 +459,7 @@ public class WatchRow {
 			return "";
 		}
 		String message = error.getMessage();
-		if (message != null && !message.trim().isEmpty()) {
+		if (message != null && message.trim().length() != 0) {
 			return message;
 		}
 		return error.getClass().getSimpleName();

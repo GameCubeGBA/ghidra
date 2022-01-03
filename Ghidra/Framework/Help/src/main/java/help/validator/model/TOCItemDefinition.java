@@ -37,8 +37,11 @@ public class TOCItemDefinition extends TOCItem {
 		}
 
 		String ID = linkDatabase.getIDForLink(getTargetAttribute());
-        return ID != null; // valid help ID found
-    }
+		if (ID != null) {
+			return true; // valid help ID found
+		}
+		return false;
+	}
 
 	@Override
 	public String generateTOCItemTag(LinkDatabase linkDatabase, boolean isInlineTag,

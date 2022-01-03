@@ -307,7 +307,7 @@ public class ApplicationKeyManagerUtils {
 				}
 				writer.println(BEGIN_CERT);
 				String base64 = Base64.getEncoder().encodeToString(certificate.getEncoded());
-				while (!base64.isEmpty()) {
+				while (base64.length() != 0) {
 					int endIndex = Math.min(44, base64.length());
 					String line = base64.substring(0, endIndex);
 					writer.println(line);

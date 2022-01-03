@@ -68,9 +68,9 @@ public class IndexedFileSystemFolderTest extends AbstractGhidraHeadedIntegration
 	private void deleteAll(File file) {
 		if (file.isDirectory()) {
 			File[] files = file.listFiles();
-            for (File value : files) {
-                deleteAll(value);
-            }
+			for (int i = 0; i < files.length; i++) {
+				deleteAll(files[i]);
+			}
 		}
 		file.delete();
 	}

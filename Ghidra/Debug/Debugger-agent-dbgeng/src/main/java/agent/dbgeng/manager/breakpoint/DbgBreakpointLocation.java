@@ -130,6 +130,9 @@ public class DbgBreakpointLocation {
 		if (!Objects.equals(this.addr, that.addr)) {
 			return false;
 		}
-        return Objects.equals(this.processIds, that.processIds);
-    }
+		if (!Objects.equals(this.processIds, that.processIds)) {
+			return false;
+		}
+		return true;
+	}
 }

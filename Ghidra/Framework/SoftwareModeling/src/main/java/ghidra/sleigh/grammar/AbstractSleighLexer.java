@@ -27,7 +27,8 @@ public abstract class AbstractSleighLexer extends Lexer implements SleighRecogni
 	protected ParsingEnvironment env = null;
 
 	public AbstractSleighLexer() {
-    }
+		super();
+	}
 
 	public AbstractSleighLexer(CharStream input, RecognizerSharedState state) {
 		super(input, state);

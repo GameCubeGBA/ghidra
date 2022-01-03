@@ -169,7 +169,7 @@ public class Pattern extends DittedBitSequence {
 		parser.start("patternlist");
 		XmlElement el = parser.peek();
 		while (el.isStart()) {
-			if ("patternpairs".equals(el.getName())) {
+			if (el.getName().equals("patternpairs")) {
 				PatternPairSet pairset = new PatternPairSet();
 				pairset.restoreXml(parser, pfactory);
 				pairset.createFinalPatterns(patlist);
@@ -214,7 +214,7 @@ public class Pattern extends DittedBitSequence {
 		parser.start("patternlist");
 		XmlElement el = parser.peek();
 		while (el.isStart()) {
-			if ("patternpairs".equals(el.getName())) {
+			if (el.getName().equals("patternpairs")) {
 				PatternPairSet pairset = new PatternPairSet();
 				pairset.restoreXml(parser, pfactory);
 				pairset.extractPostPatterns(patternList);

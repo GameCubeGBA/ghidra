@@ -41,7 +41,8 @@ public class ConflictHandlerTest2 extends AbstractGhidraHeadedIntegrationTest {
 	private int transactionID;
 
 	public ConflictHandlerTest2() {
-    }
+		super();
+	}
 
 	private void startTransaction() {
 		transactionID = program.startTransaction("Test");

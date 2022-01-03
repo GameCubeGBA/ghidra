@@ -48,13 +48,13 @@ public class FindNoReturnFunctionsAnalyzer extends AbstractAnalyzer {
 			"The one-shot analysis action can be used if functions were created while this " +
 			"analyzer was disabled or not present.";
 
-	private static final String OPTION_FUNCTION_NONRETURN_THRESHOLD =
+	private final static String OPTION_FUNCTION_NONRETURN_THRESHOLD =
 		"Function Non-return Threshold";
 
 	private static final String OPTION_DESCRIPTION_FUNCTION_NONRETURN_THRESHOLD =
 		"Enter the number of indications for a given function before it is considered non-returning.";
 
-	private static final int OPTION_DEFAULT_EVIDENCE_THRESHOLD = 3;
+	private final static int OPTION_DEFAULT_EVIDENCE_THRESHOLD = 3;
 
 	private int evidenceThresholdFunctions = OPTION_DEFAULT_EVIDENCE_THRESHOLD;
 
@@ -793,7 +793,7 @@ public class FindNoReturnFunctionsAnalyzer extends AbstractAnalyzer {
 
 		@Override
 		public Address getAddress() {
-			return addr;
+			return getNoReturnAddr();
 		}
 
 		public Address getNoReturnAddr() {
@@ -810,7 +810,7 @@ public class FindNoReturnFunctionsAnalyzer extends AbstractAnalyzer {
 
 		@Override
 		public String toString() {
-			return "NoReturn At:" + getAddress() + "  because: " + explanation +
+			return "NoReturn At:" + getAddress() + "  because: " + getExplanation() +
 				(whyAddr != null ? " at " + whyAddr : "");
 		}
 	}

@@ -166,9 +166,9 @@ public class ModuleAlgorithmPlugin extends ProgramPlugin implements BlockModelSe
 	@Override
     protected void programDeactivated(Program program) {
 		if (actions != null) {
-            for (DockingAction action : actions) {
-                action.setEnabled(false);
-            }
+			for (int i = 0; i < actions.length; i++) {
+				actions[i].setEnabled(false);
+			}
 		}
 	}
 
@@ -178,9 +178,9 @@ public class ModuleAlgorithmPlugin extends ProgramPlugin implements BlockModelSe
 	@Override
     protected void programActivated(Program program) {
 		if (actions != null) {
-            for (DockingAction action : actions) {
-                action.setEnabled(true);
-            }
+			for (int i = 0; i < actions.length; i++) {
+				actions[i].setEnabled(true);
+			}
 		}
 	}
 

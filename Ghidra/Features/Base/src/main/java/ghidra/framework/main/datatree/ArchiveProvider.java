@@ -27,5 +27,5 @@ import java.util.List;
 @FunctionalInterface
 public interface ArchiveProvider {
 
-	List<Archive> getArchives();
+	public List<Archive> getArchives();
 }

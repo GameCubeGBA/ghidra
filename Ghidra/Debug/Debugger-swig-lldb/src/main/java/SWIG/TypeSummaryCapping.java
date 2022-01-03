@@ -12,8 +12,8 @@
 package SWIG;
 
 public final class TypeSummaryCapping {
-  public static final TypeSummaryCapping eTypeSummaryCapped = new TypeSummaryCapping("eTypeSummaryCapped", lldbJNI.eTypeSummaryCapped_get());
-  public static final TypeSummaryCapping eTypeSummaryUncapped = new TypeSummaryCapping("eTypeSummaryUncapped", lldbJNI.eTypeSummaryUncapped_get());
+  public final static TypeSummaryCapping eTypeSummaryCapped = new TypeSummaryCapping("eTypeSummaryCapped", lldbJNI.eTypeSummaryCapped_get());
+  public final static TypeSummaryCapping eTypeSummaryUncapped = new TypeSummaryCapping("eTypeSummaryUncapped", lldbJNI.eTypeSummaryUncapped_get());
 
   public final int swigValue() {
     return swigValue;
@@ -26,9 +26,9 @@ public final class TypeSummaryCapping {
   public static TypeSummaryCapping swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-      for (TypeSummaryCapping value : swigValues)
-          if (value.swigValue == swigValue)
-              return value;
+    for (int i = 0; i < swigValues.length; i++)
+      if (swigValues[i].swigValue == swigValue)
+        return swigValues[i];
     throw new IllegalArgumentException("No enum " + TypeSummaryCapping.class + " with value " + swigValue);
   }
 

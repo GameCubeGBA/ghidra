@@ -60,7 +60,7 @@ public class WizardManager extends DialogComponentProvider implements WizardPane
 	/**Default text for the 'back' button*/
 	public static final String BACK = "<< Back";
 
-	private static final String INIT_TITLE = "<< untitled >>";
+	private final static String INIT_TITLE = "<< untitled >>";
 
 	private PanelManager panelMgr;
 	private WizardPanel currWizPanel;

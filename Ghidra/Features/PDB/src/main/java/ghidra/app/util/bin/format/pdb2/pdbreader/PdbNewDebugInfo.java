@@ -316,12 +316,12 @@ public class PdbNewDebugInfo extends PdbDebugInfo {
 			String name = bufferReader.parseNullTerminatedString(
 				pdb.getPdbReaderOptions().getOneByteCharset());
 			//if (name != null) {
-			if (!name.isEmpty()) {
+			if (name.length() != 0) {
 				realEntryCount++;
 			}
 			editAndContinueNameList.add(name);
 			//long hashVal = (name == null) ? 0 : hasher.hash(name, 0xffffffffL);
-			long hashVal = (name.isEmpty()) ? 0 : hasher.hash(name, 0xffffffffL);
+			long hashVal = (name.length() == 0) ? 0 : hasher.hash(name, 0xffffffffL);
 			hashVal %= tableSize;
 			//TODO: what to do with hashVal???
 			//System.out.println(offset + ": " + name + " " + hashVal);

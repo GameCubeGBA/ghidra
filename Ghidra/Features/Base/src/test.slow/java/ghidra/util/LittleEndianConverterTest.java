@@ -41,7 +41,8 @@ public class LittleEndianConverterTest extends AbstractGhidraHeadedIntegrationTe
 	 * @param arg0
 	 */
 	public LittleEndianConverterTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() {

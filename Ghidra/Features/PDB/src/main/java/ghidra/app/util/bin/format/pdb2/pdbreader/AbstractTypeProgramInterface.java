@@ -308,7 +308,7 @@ public abstract class AbstractTypeProgramInterface implements TPI {
 			if (type != null) {
 				builder.append(type.getClass().getSimpleName());
 				builder.append("\n");
-				builder.append(type);
+				builder.append(type.toString());
 				builder.append("\n");
 			}
 			else {

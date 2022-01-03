@@ -46,13 +46,13 @@ public interface TargetBreakpointSpecContainer extends TargetObject {
 
 	String SUPPORTED_BREAK_KINDS_ATTRIBUTE_NAME = PREFIX_INVISIBLE + "supported_breakpoint_kinds";
 
-	interface TargetBreakpointKindSet extends Set<TargetBreakpointKind> {
-		class EmptyTargetBreakpointKindSet
+	public interface TargetBreakpointKindSet extends Set<TargetBreakpointKind> {
+		public static class EmptyTargetBreakpointKindSet
 				extends AbstractEmptySet<TargetBreakpointKind> implements TargetBreakpointKindSet {
 			// Nothing
 		}
 
-		class ImmutableTargetBreakpointKindSet
+		public static class ImmutableTargetBreakpointKindSet
 				extends AbstractNSet<TargetBreakpointKind>
 				implements TargetBreakpointKindSet {
 
@@ -67,15 +67,15 @@ public interface TargetBreakpointSpecContainer extends TargetObject {
 
 		TargetBreakpointKindSet EMPTY = new EmptyTargetBreakpointKindSet();
 
-		static TargetBreakpointKindSet of() {
+		public static TargetBreakpointKindSet of() {
 			return EMPTY;
 		}
 
-		static TargetBreakpointKindSet of(TargetBreakpointKind... kinds) {
+		public static TargetBreakpointKindSet of(TargetBreakpointKind... kinds) {
 			return new ImmutableTargetBreakpointKindSet(kinds);
 		}
 
-		static TargetBreakpointKindSet copyOf(Set<TargetBreakpointKind> set) {
+		public static TargetBreakpointKindSet copyOf(Set<TargetBreakpointKind> set) {
 			return new ImmutableTargetBreakpointKindSet(set);
 		}
 	}
@@ -93,7 +93,7 @@ public interface TargetBreakpointSpecContainer extends TargetObject {
 		name = SUPPORTED_BREAK_KINDS_ATTRIBUTE_NAME,
 		required = true,
 		hidden = true)
-    default TargetBreakpointKindSet getSupportedBreakpointKinds() {
+	public default TargetBreakpointKindSet getSupportedBreakpointKinds() {
 		return getTypedAttributeNowByName(SUPPORTED_BREAK_KINDS_ATTRIBUTE_NAME,
 			TargetBreakpointKindSet.class, TargetBreakpointKindSet.of());
 	}
@@ -109,8 +109,8 @@ public interface TargetBreakpointSpecContainer extends TargetObject {
 	 * @param kinds the desired set of kinds
 	 * @return a future which completes when the request is processed
 	 */
-    CompletableFuture<Void> placeBreakpoint(String expression,
-                                            Set<TargetBreakpointKind> kinds);
+	public CompletableFuture<Void> placeBreakpoint(String expression,
+			Set<TargetBreakpointKind> kinds);
 
 	/**
 	 * Specify a breakpoint having the given range and kinds
@@ -123,8 +123,8 @@ public interface TargetBreakpointSpecContainer extends TargetObject {
 	 * @param kinds the desired set of kinds
 	 * @return a future which completes when the request is processed
 	 */
-    CompletableFuture<Void> placeBreakpoint(AddressRange range,
-                                            Set<TargetBreakpointKind> kinds);
+	public CompletableFuture<Void> placeBreakpoint(AddressRange range,
+			Set<TargetBreakpointKind> kinds);
 
 	/**
 	 * Specify a breakpoint having the given address and kinds
@@ -137,8 +137,8 @@ public interface TargetBreakpointSpecContainer extends TargetObject {
 	 * @param kinds the desired set of kinds
 	 * @return a future which completes when the request is processed
 	 */
-	default CompletableFuture<Void> placeBreakpoint(Address address,
-                                                    Set<TargetBreakpointKind> kinds) {
+	public default CompletableFuture<Void> placeBreakpoint(Address address,
+			Set<TargetBreakpointKind> kinds) {
 		return placeBreakpoint(new AddressRangeImpl(address, address), kinds);
 	}
 }

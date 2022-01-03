@@ -160,7 +160,7 @@ public class CliStreamHeader implements StructConverter, PeMarkupable {
 
 	@Override
 	public String toString() {
-		return name;
+		return getName();
 	}
 
 	/**

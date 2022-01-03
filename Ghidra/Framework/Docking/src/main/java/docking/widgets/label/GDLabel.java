@@ -49,7 +49,8 @@ public class GDLabel extends JLabel implements GComponent {
 	 * <p>
 	 */
 	public GDLabel() {
-        init();
+		super();
+		init();
 	}
 
 	/**

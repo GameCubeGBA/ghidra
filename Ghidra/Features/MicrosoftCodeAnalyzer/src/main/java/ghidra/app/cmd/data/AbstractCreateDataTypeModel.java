@@ -110,14 +110,14 @@ public abstract class AbstractCreateDataTypeModel {
 		isLoadedAndInitialized = loadedAndInitializedSet.contains(address);
 		memBuffer = new DumbMemBufferImpl(memory, address);
 		dataTypeManager = program.getDataTypeManager();
-		imageBaseAddress = program.getImageBase();
+		imageBaseAddress = getProgram().getImageBase();
 	}
 
 	/**
 	 * Determine if the program in this model is for windows.
 	 * @return true if the program is a windows program.
 	 */
-    protected final boolean isWindows() {
+	final protected boolean isWindows() {
 		CompilerSpecID compilerSpecID = program.getCompilerSpec().getCompilerSpecID();
 		String compilerIdString = compilerSpecID.getIdAsString();
 		String compilerString = program.getCompiler();
@@ -225,9 +225,9 @@ public abstract class AbstractCreateDataTypeModel {
 		}
 		try {
 			long totalSize = dataTypeLength * count;
-			Address start = address;
+			Address start = getAddress();
 			Address end = start.add(totalSize - 1);
-			Memory memory = program.getMemory();
+			Memory memory = getProgram().getMemory();
 			MemoryBlock startBlock = memory.getBlock(start);
 			return startBlock != null && startBlock.contains(end);
 		}
@@ -300,27 +300,27 @@ public abstract class AbstractCreateDataTypeModel {
 			throw new InvalidDataTypeException(
 				getName() + " data type model is only valid for Visual Studio windows PE.");
 		}
-		if (!isValidAddress) {
+		if (!isValidAddress()) {
 			throw new InvalidDataTypeException(
-				getName() + " data type isn't at a valid address " + address + ".");
+				getName() + " data type isn't at a valid address " + getAddress() + ".");
 		}
 //		if (!isInitializedAddress()) {
 //			throw new InvalidDataTypeException(
 //				getName() + " data type isn't on an initialized address " + getAddress() + ".");
 //		}
-		if (!isLoadedAndInitialized) {
+		if (!isLoadedAndInitializedAddress()) {
 			throw new InvalidDataTypeException(getName() +
-				" data type isn't on a loaded and initialized address " + address + ".");
+				" data type isn't on a loaded and initialized address " + getAddress() + ".");
 		}
 		checkDataType();
 		if (!fitsInSingleMemoryBlock()) {
 			throw new InvalidDataTypeException(
 				getName() + " data type doesn't fit in a single memory block when placed at " +
-                        address + ".");
+					getAddress() + ".");
 		}
-		if (address.getOffset() % getAlignment() != 0) {
+		if (getAddress().getOffset() % getAlignment() != 0) {
 			throw new InvalidDataTypeException(
-				getName() + " data type is not properly aligned at " + address + ".");
+				getName() + " data type is not properly aligned at " + getAddress() + ".");
 		}
 
 		Listing listing = program.getListing();
@@ -330,20 +330,20 @@ public abstract class AbstractCreateDataTypeModel {
 		long numBytes = dtLength * count;
 		if (numBytes <= 0) {
 			throw new InvalidDataTypeException(
-				"Cannot determine length for " + getName() + " data type at " + address + ".");
+				"Cannot determine length for " + getName() + " data type at " + getAddress() + ".");
 		}
 		Address endAddress = address.add(numBytes - 1);
 
-		if (!validationOptions.shouldIgnoreInstructions() &&
+		if (!getValidationOptions().shouldIgnoreInstructions() &&
 			containsInstruction(listing, startAddress, endAddress)) {
 			throw new InvalidDataTypeException("Instructions are in the way of " + count + " " +
-				getName() + " data type(s) at " + address + ".");
+				getName() + " data type(s) at " + getAddress() + ".");
 		}
 
-		if (!validationOptions.shouldIgnoreDefinedData() &&
+		if (!getValidationOptions().shouldIgnoreDefinedData() &&
 			containsDefinedData(listing, startAddress, endAddress)) {
 			throw new InvalidDataTypeException("Defined data is in the way of " + count + " " +
-				getName() + " data type(s) at " + address + ".");
+				getName() + " data type(s) at " + getAddress() + ".");
 		}
 
 	}
@@ -370,7 +370,7 @@ public abstract class AbstractCreateDataTypeModel {
 	protected void checkValidity() throws InvalidDataTypeException {
 		if (!isValid()) {
 			throw new InvalidDataTypeException(getName() + " data type isn't valid at " +
-                    address + " in " + program + ".");
+				getAddress() + " in " + getProgram() + ".");
 		}
 	}
 
@@ -387,9 +387,9 @@ public abstract class AbstractCreateDataTypeModel {
 	 */
 	protected void checkValidity(int ordinal) throws InvalidDataTypeException {
 		checkValidity();
-		if (ordinal < 0 || ordinal >= count) {
+		if (ordinal < 0 || ordinal >= getCount()) {
 			throw new IllegalArgumentException(ordinal + " is not a valid ordinal for " +
-				getName() + " data type at " + address + " in " + program + ".");
+				getName() + " data type at " + getAddress() + " in " + getProgram() + ".");
 		}
 	}
 
@@ -482,7 +482,7 @@ public abstract class AbstractCreateDataTypeModel {
 		}
 		catch (AddressOutOfBoundsException e) {
 			throw new InvalidDataTypeException(
-				getName() + " data type doesn't fit in memory at " + address + ".");
+				getName() + " data type doesn't fit in memory at " + getAddress() + ".");
 		}
 	}
 
@@ -518,7 +518,7 @@ public abstract class AbstractCreateDataTypeModel {
 		else if (mapAddress == null) {
 			return false;
 		}
-		Memory memory = program.getMemory();
+		Memory memory = getProgram().getMemory();
 		return memory.getLoadedAndInitializedAddressSet().contains(mapAddress);
 	}
 
@@ -530,7 +530,7 @@ public abstract class AbstractCreateDataTypeModel {
 	 */
 	public boolean isBlockedByInstructions() throws InvalidDataTypeException {
 		// Is there enough memory for data type?
-		Address start = address;
+		Address start = getAddress();
 		Address end = getEndAddress();
 		AddressSet addrSet = new AddressSet(start, end);
 		// Are there any instructions in the way?
@@ -540,8 +540,11 @@ public abstract class AbstractCreateDataTypeModel {
 			return true;
 		}
 		InstructionIterator instIter = listing.getInstructions(addrSet, true);
-        return instIter.hasNext();
-    }
+		if (instIter.hasNext()) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Gets the MemBuffer for the indicated data type in the array when the model has a count
@@ -552,11 +555,11 @@ public abstract class AbstractCreateDataTypeModel {
 	 */
 	protected MemBuffer getSpecificMemBuffer(int ordinal, DataType dt) {
 		int size = dt.getLength();
-		MemBuffer baseMemBuffer = memBuffer;
+		MemBuffer baseMemBuffer = getMemBuffer();
 		long offset = size * ordinal;
 		Address specificAddress = baseMemBuffer.getAddress().add(offset);
 		MemBuffer specificMemBuffer =
-			new DumbMemBufferImpl(program.getMemory(), specificAddress);
+			new DumbMemBufferImpl(getProgram().getMemory(), specificAddress);
 		return specificMemBuffer;
 	}
 
@@ -583,7 +586,7 @@ public abstract class AbstractCreateDataTypeModel {
 	public void checkNonNegative(String countType, int actualCount)
 			throws InvalidDataTypeException {
 		if (actualCount < 0) {
-			throw new InvalidDataTypeException(getName() + " data type at " + address +
+			throw new InvalidDataTypeException(getName() + " data type at " + getAddress() +
 				" has a " + countType + " count of " + actualCount + ", which seems incorrect.");
 		}
 	}
@@ -600,7 +603,7 @@ public abstract class AbstractCreateDataTypeModel {
 			throws InvalidDataTypeException {
 		if (actualCount > maxValidCount) {
 			throw new InvalidDataTypeException(
-				getName() + " data type at " + address + " has a " + countType + " count of " +
+				getName() + " data type at " + getAddress() + " has a " + countType + " count of " +
 					actualCount + ", which exceeds the expected maximum of " + maxValidCount + ".");
 		}
 	}
@@ -618,8 +621,11 @@ public abstract class AbstractCreateDataTypeModel {
 			return true;
 		}
 		data = listing.getDefinedDataAfter(startAddress);
-        return data != null && data.getMinAddress().compareTo(endAddress) <= 0;
-    }
+		if (data != null && data.getMinAddress().compareTo(endAddress) <= 0) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Determines if an instruction is already defined between the start and end address.
@@ -634,8 +640,11 @@ public abstract class AbstractCreateDataTypeModel {
 			return true;
 		}
 		instruction = listing.getInstructionAfter(startAddress);
-        return instruction != null && instruction.getMinAddress().compareTo(endAddress) <= 0;
-    }
+		if (instruction != null && instruction.getMinAddress().compareTo(endAddress) <= 0) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Gets the current validation options that are set for this model.
@@ -648,7 +657,7 @@ public abstract class AbstractCreateDataTypeModel {
 	/**
 	 * Returns the DataOrganization associated with this model's DataTypeManager
 	 */
-    protected final DataOrganization getDataOrganization() {
+	final protected DataOrganization getDataOrganization() {
 		return dataTypeManager.getDataOrganization();
 	}
 
@@ -679,7 +688,7 @@ public abstract class AbstractCreateDataTypeModel {
 	 * @return the message
 	 */
 	protected final String getDefaultInvalidMessage() {
-		return getName() + " data type at " + address + " isn't valid.";
+		return getName() + " data type at " + getAddress() + " isn't valid.";
 	}
 
 	/**

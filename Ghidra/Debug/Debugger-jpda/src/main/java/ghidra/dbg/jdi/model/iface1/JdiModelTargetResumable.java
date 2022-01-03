@@ -30,6 +30,6 @@ import ghidra.dbg.target.TargetResumable;
 public interface JdiModelTargetResumable extends JdiModelTargetObject, TargetResumable {
 
 	@Override
-    CompletableFuture<Void> resume();
+	public CompletableFuture<Void> resume();
 
 }

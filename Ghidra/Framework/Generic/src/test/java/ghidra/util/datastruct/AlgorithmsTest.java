@@ -33,7 +33,8 @@ public class AlgorithmsTest extends AbstractGenericTest {
 	Comparator<Long> comparator;
 
 	public AlgorithmsTest() {
-        comparator = (a, b) -> {
+		super();
+		comparator = (a, b) -> {
 			if (a < b) {
 				return -1;
 			}

@@ -173,7 +173,7 @@ public abstract class AbstractModelForLldbBreakpointsTest
 		String bpId = matchIndices.get(BREAK_ID_POS);
 		String type = getTypeFromKind(kind);
 		String line = waitOn(interpreter.executeCapture(getCommand("list", type, bpId))).trim();
-		if ("breakpoint".equals(type))
+		if (type.equals("breakpoint"))
 			assertTrue(line.startsWith(bpId.substring(1)));			
 		else 
 			assertTrue(line.contains("Watchpoint " + bpId.substring(1)));

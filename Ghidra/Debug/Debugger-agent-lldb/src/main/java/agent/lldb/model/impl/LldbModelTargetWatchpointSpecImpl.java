@@ -46,7 +46,7 @@ public class LldbModelTargetWatchpointSpecImpl extends LldbModelTargetAbstractXp
 		DescriptionLevel detail = DescriptionLevel.swigToEnum(level);
 		wpt.GetDescription(stream, detail);
 		String data = stream.GetData();
-		return "No value".equals(data) ? getName() : data;
+		return data.equals("No value") ? getName() : data;
 	}
 
 	protected TargetBreakpointKindSet computeKinds(Object from) {

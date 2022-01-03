@@ -36,6 +36,7 @@ public class PropertyMapTest extends AbstractGenericTest {
      * @param arg0
      */
     public PropertyMapTest() {
+        super();
     }
 
 	private Address addr(int i) {

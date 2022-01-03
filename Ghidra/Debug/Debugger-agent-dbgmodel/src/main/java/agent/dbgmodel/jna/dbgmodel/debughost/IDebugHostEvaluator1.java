@@ -25,7 +25,7 @@ import agent.dbgmodel.jna.dbgmodel.IUnknownEx;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IDebugHostEvaluator1 extends IUnknownEx {
-	IID IID_IDEBUG_HOST_EVALUATOR = new IID("0FEF9A21-577E-4997-AC7B-1C4883241D99");
+	final IID IID_IDEBUG_HOST_EVALUATOR = new IID("0FEF9A21-577E-4997-AC7B-1C4883241D99");
 
 	enum VTIndices1 implements VTableIndex {
 		EVALUATE_EXPRESSION, //

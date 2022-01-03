@@ -78,7 +78,7 @@ public class DecompilerDisposer {
 		}
 	}
 
-	private abstract static class AbstractDisposable {
+	private static abstract class AbstractDisposable {
 		abstract void dispose();
 	}
 

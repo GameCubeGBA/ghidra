@@ -25,8 +25,8 @@ public interface DbgModelTargetProcessContainer extends //
 		DbgModelTargetEventScope, //
 		DbgEventsListenerAdapter {
 
-	DbgModelTargetProcess getTargetProcess(DebugProcessId id);
+	public DbgModelTargetProcess getTargetProcess(DebugProcessId id);
 
-	DbgModelTargetProcess getTargetProcess(DbgProcess process);
+	public DbgModelTargetProcess getTargetProcess(DbgProcess process);
 
 }

@@ -33,7 +33,8 @@ class SymbolRenderer extends GhidraTableCellRenderer {
 	private SymbolInspector inspector;
 
 	SymbolRenderer() {
-    }
+		super();
+	}
 
 	void setSymbolInspector(SymbolInspector inspector) {
 		this.inspector = inspector;

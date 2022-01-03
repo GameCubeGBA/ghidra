@@ -36,30 +36,30 @@ public interface LldbModelTargetBreakpointSpec extends //
 	String BPT_INDEX_ATTRIBUTE_NAME = "Id";
 
 	@Override
-    default CompletableFuture<Void> delete() {
+	public default CompletableFuture<Void> delete() {
 		return getModel().gateFuture(getManager().deleteBreakpoints(getId()));
 	}
 
 	@Override
-    default CompletableFuture<Void> disable() {
+	public default CompletableFuture<Void> disable() {
 		setEnabled(false, "Disabled");
 		return getModel().gateFuture(getManager().disableBreakpoints(getId()));
 	}
 
 	@Override
-    default CompletableFuture<Void> enable() {
+	public default CompletableFuture<Void> enable() {
 		setEnabled(true, "Enabled");
 		return getModel().gateFuture(getManager().enableBreakpoints(getId()));
 	}
 
-	default String getId() {
+	public default String getId() {
 		return DebugClient.getId(getModelObject());
 	}
 
 	@Override
-    TargetBreakpointKindSet getKinds();
+	public TargetBreakpointKindSet getKinds();
 
-	void updateInfo(Object info, String reason);
+	public void updateInfo(Object info, String reason);
 
 	/**
 	 * Update the enabled field
@@ -71,27 +71,27 @@ public interface LldbModelTargetBreakpointSpec extends //
 	 * @param enabled true if enabled, false if disabled
 	 * @param reason a description of the cause (not really used, yet)
 	 */
-    void setEnabled(boolean enabled, String reason);
+	public void setEnabled(boolean enabled, String reason);
 
-	ListenerSet<TargetBreakpointAction> getActions();
+	public ListenerSet<TargetBreakpointAction> getActions();
 
 	@Override
-    default void addAction(TargetBreakpointAction action) {
+	public default void addAction(TargetBreakpointAction action) {
 		getActions().add(action);
 	}
 
 	@Override
-    default void removeAction(TargetBreakpointAction action) {
+	public default void removeAction(TargetBreakpointAction action) {
 		getActions().remove(action);
 	}
 
-	default void breakpointHit() {
+	public default void breakpointHit() {
 		LldbModelTargetThread targetThread =
 			getParentProcess().getThreads().getTargetThread(getManager().getEventThread());
 		getActions().fire.breakpointHit((LldbModelTargetBreakpointSpec) getProxy(), targetThread,
 			null, findLocation(targetThread));
 	}
 
-	LldbModelTargetBreakpointLocation findLocation(Object object);
+	public LldbModelTargetBreakpointLocation findLocation(Object object);
 
 }

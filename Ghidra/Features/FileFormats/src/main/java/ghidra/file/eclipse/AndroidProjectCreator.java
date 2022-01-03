@@ -127,7 +127,7 @@ public class AndroidProjectCreator {
 			monitor.setIndeterminate(true);
 
 			if (child.isDirectory()) {
-				if ("META-INF".equals(childName)) {
+				if (childName.equals("META-INF")) {
 					continue;
 				}
 				File subDir = new File(outputDirectory, childName);

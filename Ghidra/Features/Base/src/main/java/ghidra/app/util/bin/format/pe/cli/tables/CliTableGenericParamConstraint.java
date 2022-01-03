@@ -33,7 +33,8 @@ public class CliTableGenericParamConstraint extends CliAbstractTable {
 		public int constraintIndex;
 		
 		public CliGenericParamConstraintRow(int ownerIndex, int constraintIndex) {
-            this.ownerIndex = ownerIndex;
+			super();
+			this.ownerIndex = ownerIndex;
 			this.constraintIndex = constraintIndex;
 		}
 

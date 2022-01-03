@@ -573,7 +573,7 @@ public class MemoryBlockDB implements MemoryBlock {
 		for (SubMemoryBlock subBlock : subBlocks) {
 			subBlock.delete();
 		}
-		adapter.deleteMemoryBlock(id);
+		adapter.deleteMemoryBlock(getID());
 		invalidate();
 	}
 

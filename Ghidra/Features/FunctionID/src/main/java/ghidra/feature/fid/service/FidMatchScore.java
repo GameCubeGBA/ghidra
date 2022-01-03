@@ -26,37 +26,37 @@ public interface FidMatchScore {
 	 * Returns the function record of the potential match.
 	 * @return the function record
 	 */
-    FunctionRecord getFunctionRecord();
+	public abstract FunctionRecord getFunctionRecord();
 
 	/**
 	 * Returns the number of code units in just the potential function.
 	 * @return the number of code units in the function record match
 	 */
-    float getPrimaryFunctionCodeUnitScore();
+	public abstract float getPrimaryFunctionCodeUnitScore();
 
 	/**
 	 * Returns the type of hash match for the potential function.
 	 * @return the type of the hash match for the potential function
 	 */
-    HashLookupListMode getPrimaryFunctionMatchMode();
+	public abstract HashLookupListMode getPrimaryFunctionMatchMode();
 
 	/**
 	 * Returns the accumulated matching code units in child (inferior, callee)
 	 * functions.
 	 * @return the sum of matching inferior functions' code units
 	 */
-    float getChildFunctionCodeUnitScore();
+	public abstract float getChildFunctionCodeUnitScore();
 
 	/**
 	 * Returns the accumulated matching code units in parent (superior, caller)
 	 * functions
 	 * @return the sum of matching superior functions' code units
 	 */
-    float getParentFunctionCodeUnitScore();
+	public abstract float getParentFunctionCodeUnitScore();
 
 	/**
 	 * Returns the overall score (higher is better).
 	 * @return the overall score
 	 */
-    float getOverallScore();
+	public abstract float getOverallScore();
 }

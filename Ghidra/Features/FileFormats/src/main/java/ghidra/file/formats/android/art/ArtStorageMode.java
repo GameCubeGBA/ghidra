@@ -21,9 +21,9 @@ package ghidra.file.formats.android.art;
 public enum ArtStorageMode {
 	kStorageModeUncompressed, kStorageModeLZ4, kStorageModeLZ4HC, kStorageModeCount;  // Number of elements in enum.
 
-	public static final ArtStorageMode kDefaultStorageMode = kStorageModeUncompressed;
+	public final static ArtStorageMode kDefaultStorageMode = kStorageModeUncompressed;
 
-	public static final int SIZE = 32;//bits
+	public final static int SIZE = 32;//bits
 
 	public static ArtStorageMode get(int value) throws UnknownArtStorageModeException {
 		for (ArtStorageMode mode : values()) {

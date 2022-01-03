@@ -69,14 +69,29 @@ public class DbViewer extends JFrame {
 		menuBar.add(menu);
 		openItem = new JMenuItem("Open Database...");
 		menu.add(openItem);
-		openItem.addActionListener(e -> openDb());
+		openItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				openDb();
+			}
+		});
 		closeItem = new JMenuItem("Close Database");
 		menu.add(closeItem);
 		closeItem.setEnabled(false);
-		closeItem.addActionListener(e -> closeDb());
+		closeItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				closeDb();
+			}
+		});
 		JMenuItem exitItem = new JMenuItem("Exit");
 		menu.add(exitItem);
-		exitItem.addActionListener(e -> System.exit(0));
+		exitItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		setJMenuBar(menuBar);
 	}
 
@@ -153,7 +168,12 @@ public class DbViewer extends JFrame {
 				tables[i].getName() + " (" + Integer.toString(tables[i].getRecordCount()) + ")";
 		}
 		combo = new GComboBox<>(names);
-		combo.addActionListener(e -> updateTable());
+		combo.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				updateTable();
+			}
+		});
 		subNorthPanel.add(combo);
 		northPanel.add(subNorthPanel);
 		mainPanel.add(northPanel, BorderLayout.PAGE_START);

@@ -115,8 +115,11 @@ public class DataTypePath {
 		if (!categoryPath.equals(other.categoryPath)) {
 			return false;
 		}
-        return dataTypeName.equals(other.dataTypeName);
-    }
+		if (!dataTypeName.equals(other.dataTypeName)) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public String toString() {

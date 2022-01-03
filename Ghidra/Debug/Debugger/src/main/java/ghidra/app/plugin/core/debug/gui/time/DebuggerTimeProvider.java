@@ -45,8 +45,11 @@ public class DebuggerTimeProvider extends ComponentProviderAdapter {
 		if (!Objects.equals(a.getTrace(), b.getTrace())) {
 			return false;
 		}
-        return Objects.equals(a.getTime(), b.getTime());
-    }
+		if (!Objects.equals(a.getTime(), b.getTime())) {
+			return false;
+		}
+		return true;
+	}
 
 	protected final DebuggerTimePlugin plugin;
 

@@ -71,7 +71,7 @@ public interface VariableFilter {
 	 */
 	boolean matches(Variable variable);
 
-	class ParameterFilter implements VariableFilter {
+	public static class ParameterFilter implements VariableFilter {
 
 		private final boolean allowAutoParams;
 
@@ -89,7 +89,7 @@ public interface VariableFilter {
 		}
 	}
 
-	class LocalVariableFilter implements VariableFilter {
+	public static class LocalVariableFilter implements VariableFilter {
 
 		@Override
 		public boolean matches(Variable variable) {
@@ -97,7 +97,7 @@ public interface VariableFilter {
 		}
 	}
 
-	class StackVariableFilter implements VariableFilter {
+	public static class StackVariableFilter implements VariableFilter {
 
 		@Override
 		public boolean matches(Variable variable) {
@@ -105,7 +105,7 @@ public interface VariableFilter {
 		}
 	}
 
-	class CompoundStackVariableFilter implements VariableFilter {
+	public static class CompoundStackVariableFilter implements VariableFilter {
 
 		@Override
 		public boolean matches(Variable variable) {
@@ -113,7 +113,7 @@ public interface VariableFilter {
 		}
 	}
 
-	class RegisterVariableFilter implements VariableFilter {
+	public static class RegisterVariableFilter implements VariableFilter {
 
 		@Override
 		public boolean matches(Variable variable) {
@@ -121,7 +121,7 @@ public interface VariableFilter {
 		}
 	}
 
-	class MemoryVariableFilter implements VariableFilter {
+	public static class MemoryVariableFilter implements VariableFilter {
 
 		@Override
 		public boolean matches(Variable variable) {
@@ -129,7 +129,7 @@ public interface VariableFilter {
 		}
 	}
 
-	class UniqueVariableFilter implements VariableFilter {
+	public static class UniqueVariableFilter implements VariableFilter {
 
 		@Override
 		public boolean matches(Variable variable) {

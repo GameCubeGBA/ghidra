@@ -26,7 +26,7 @@ import ghidra.util.exception.NoValueException;
 
 
 public class StringIntHashtable implements Serializable {
-    private static final long serialVersionUID = 1;
+    private final static long serialVersionUID = 1;
 
 
     private StringKeyIndexer indexer;    // allocates and manages index values for keys.
@@ -38,7 +38,7 @@ public class StringIntHashtable implements Serializable {
      * Default constructor creates a table with an initial default capacity.
      */
     public StringIntHashtable() {
-        this(3);
+        this((short)3);
     }
 
     /**
@@ -104,7 +104,10 @@ public class StringIntHashtable implements Serializable {
      * @return true if key is found and removed, false otherwise.
      */
     public boolean remove(String key) {
-        return indexer.remove(key) >= 0;
+        if (indexer.remove(key) < 0) {
+            return false;
+        }
+        return true;
     }
 
     /**

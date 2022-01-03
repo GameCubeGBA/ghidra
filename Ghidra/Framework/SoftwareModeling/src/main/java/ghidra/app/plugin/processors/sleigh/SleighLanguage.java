@@ -1031,7 +1031,7 @@ public class SleighLanguage implements Language {
 			}
 
 			AddressSpace spc;
-			if (segmentedspace.equals(name)) {
+			if (getSegmentedSpace().equals(name)) {
 				if (truncateSpace && type != AddressSpace.TYPE_RAM) {
 					throw new SleighException(
 						"Segmented space does not support truncation: " + name);
@@ -1257,7 +1257,7 @@ public class SleighLanguage implements Language {
 	public ManualEntry getManualEntry(String instruction) {
 		initManual();
 
-		if (instruction == null || instruction.isEmpty()) {
+		if (instruction == null || instruction.length() == 0) {
 			return manual.get(null);
 		}
 		instruction = instruction.toUpperCase();
@@ -1276,13 +1276,15 @@ public class SleighLanguage implements Language {
 		ManualEntry manualEntry = null;
 		int maxInCommon = -1;
 
-        for (Entry<String, ManualEntry> mapEntry : subMap.entrySet()) {
-            String key = mapEntry.getKey();
-            if (instruction.startsWith(key) && key.length() > maxInCommon) {
-                manualEntry = mapEntry.getValue();
-                maxInCommon = key.length();
-            }
-        }
+		Iterator<Entry<String, ManualEntry>> ii = subMap.entrySet().iterator();
+		while (ii.hasNext()) {
+			Entry<String, ManualEntry> mapEntry = ii.next();
+			String key = mapEntry.getKey();
+			if (instruction.startsWith(key) && key.length() > maxInCommon) {
+				manualEntry = mapEntry.getValue();
+				maxInCommon = key.length();
+			}
+		}
 
 		if (manualEntry == null) {
 			return manual.get(null);

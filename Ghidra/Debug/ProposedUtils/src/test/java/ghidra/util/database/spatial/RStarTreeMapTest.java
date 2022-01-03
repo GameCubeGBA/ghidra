@@ -91,7 +91,7 @@ public class RStarTreeMapTest {
 		}
 	}
 
-	public interface IntRect extends Rectangle2D<Integer, Integer, IntRect> {
+	public static interface IntRect extends Rectangle2D<Integer, Integer, IntRect> {
 		IntRect ALL = new ImmutableIntRect(Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MIN_VALUE,
 			Integer.MAX_VALUE);
 
@@ -439,8 +439,11 @@ public class RStarTreeMapTest {
 			if (!r1.contains(shape.getX1(), shape.getY1())) {
 				return false;
 			}
-            return r2.contains(shape.getX2(), shape.getY2());
-        }
+			if (!r2.contains(shape.getX2(), shape.getY2())) {
+				return false;
+			}
+			return true;
+		}
 
 		@Override
 		protected IntRectQuery create(IntRect ir1, IntRect ir2, Rectangle2DDirection newDirection) {

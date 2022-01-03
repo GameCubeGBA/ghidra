@@ -103,17 +103,21 @@ public class ShowSymbolReferencesAction extends SymbolTreeContextAction {
 		}
 
 		Object lastPathComponent = selectionPaths[0].getLastPathComponent();
-        return lastPathComponent instanceof CodeSymbolNode ||
-                lastPathComponent instanceof FunctionSymbolNode ||
-                lastPathComponent instanceof LibrarySymbolNode ||
-                lastPathComponent instanceof LocalVariableSymbolNode ||
-                lastPathComponent instanceof ParameterSymbolNode;
+		if (lastPathComponent instanceof CodeSymbolNode ||
+			lastPathComponent instanceof FunctionSymbolNode ||
+			lastPathComponent instanceof LibrarySymbolNode ||
+			lastPathComponent instanceof LocalVariableSymbolNode ||
+			lastPathComponent instanceof ParameterSymbolNode) {
+			return true;
+		}
 
 		// TODO multi reference type
 		// ClassSymbolNode - maybe could be both when classes are real things in Ghidra
 		// NamespaceSymbolNode
 		// FunctionSymbolNode - could be both
-    }
+
+		return false;
+	}
 
 	@Override
 	protected void actionPerformed(SymbolTreeActionContext context) {

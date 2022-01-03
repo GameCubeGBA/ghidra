@@ -35,7 +35,7 @@ import ghidra.util.prop.IntPropertySet;
  * that contains a value.
  */
 public class RangeMap implements Serializable {
-    private static final long serialVersionUID = 1;
+    private final static long serialVersionUID = 1;
 	
 	IntPropertySet map;
 	int defaultValue;

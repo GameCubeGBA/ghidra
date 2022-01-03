@@ -303,7 +303,7 @@ public class PcodeInjectLibrary {
 	 * @return true if the user-defined op exists
 	 */
 	public boolean hasUserDefinedOp(String name) {
-		if (callOtherFixupMap.isEmpty()) {
+		if (callOtherFixupMap.size() == 0) {
 			int max = language.getNumberOfUserDefinedOpNames();
 			for (int i = 0; i < max; ++i) {
 				String opname = language.getUserDefinedOpName(i);
@@ -519,8 +519,11 @@ public class PcodeInjectLibrary {
 		if (!exePcodeMap.equals(op2.exePcodeMap)) {
 			return false;
 		}
-        return SystemUtilities.isArrayEqual(programPayload, op2.programPayload);
-    }
+		if (!SystemUtilities.isArrayEqual(programPayload, op2.programPayload)) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public int hashCode() {

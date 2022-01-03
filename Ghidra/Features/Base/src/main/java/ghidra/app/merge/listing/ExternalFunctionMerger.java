@@ -59,22 +59,22 @@ import ghidra.util.task.TaskMonitor;
  */
 public class ExternalFunctionMerger extends AbstractFunctionMerger implements ListingMerger {
 
-	static final String EXTERNALS_PHASE = "Externals";
-	private static final String CONFLICT_TYPE = "Externals";
-	private static final String INFO_TITLE = CONFLICT_TYPE + " Merge Information";
-	private static final String ERROR_TITLE = CONFLICT_TYPE + " Merge Errors";
+	final static String EXTERNALS_PHASE = "Externals";
+	private final static String CONFLICT_TYPE = "Externals";
+	private final static String INFO_TITLE = CONFLICT_TYPE + " Merge Information";
+	private final static String ERROR_TITLE = CONFLICT_TYPE + " Merge Errors";
 
-	protected static final int EXTERNAL_NAMESPACE = 0x001;
-	protected static final int EXTERNAL_LABEL = 0x002;
-	protected static final int EXTERNAL_ADDRESS = 0x004;
+	static protected final int EXTERNAL_NAMESPACE = 0x001;
+	static protected final int EXTERNAL_LABEL = 0x002;
+	static protected final int EXTERNAL_ADDRESS = 0x004;
 // Source Type differences have been commented out.
 // Instead source type will be replaced whenever the label name is replaced.
 //	static protected final int EXTERNAL_SOURCE_TYPE = 0x008;
-protected static final int EXTERNAL_SYMBOL_TYPE = 0x010;
-	protected static final int EXTERNAL_DATA_TYPE = 0x020;
-	protected static final int EXTERNAL_FUNCTION = 0x040;
-	protected static final int HIGHEST_DETAIL_BIT_SHIFT = 6; // 0 based
-	protected static final int ALL_EXTERNAL_DIFFERENCES = EXTERNAL_NAMESPACE | EXTERNAL_LABEL |
+	static protected final int EXTERNAL_SYMBOL_TYPE = 0x010;
+	static protected final int EXTERNAL_DATA_TYPE = 0x020;
+	static protected final int EXTERNAL_FUNCTION = 0x040;
+	static protected final int HIGHEST_DETAIL_BIT_SHIFT = 6; // 0 based
+	static protected final int ALL_EXTERNAL_DIFFERENCES = EXTERNAL_NAMESPACE | EXTERNAL_LABEL |
 		EXTERNAL_ADDRESS | EXTERNAL_SYMBOL_TYPE | EXTERNAL_DATA_TYPE | EXTERNAL_FUNCTION;
 //	static protected final int ALL_EXTERNAL_DIFFERENCES = EXTERNAL_NAMESPACE | EXTERNAL_LABEL |
 //			EXTERNAL_ADDRESS | EXTERNAL_SOURCE_TYPE | EXTERNAL_SYMBOL_TYPE | EXTERNAL_DATA_TYPE |
@@ -976,9 +976,13 @@ protected static final int EXTERNAL_SYMBOL_TYPE = 0x010;
 			(dataType2IsDefined && external1IsFunction)) {
 			return true;
 		}
-        return external1IsFunction && external2IsFunction &&
-                hasExternalFunctionAddConflicts(function1, function2);
-    }
+		if (external1IsFunction && external2IsFunction &&
+			hasExternalFunctionAddConflicts(function1, function2)) {
+			return true;
+		}
+
+		return false;
+	}
 
 	private boolean isNameConflict(String name1, String name2, String originalName1,
 			String originalName2) {
@@ -989,16 +993,25 @@ protected static final int EXTERNAL_SYMBOL_TYPE = 0x010;
 			if (!originalName1.equals(originalName2)) {
 				return true;
 			}
-            return !name1.equals(name2);
+			if (!name1.equals(name2)) {
+				return true;
+			}
 		}
 		else if (hasOriginalName1) {
-            return !name2.equals(name1) && !name2.equals(originalName1);
+			if (!name2.equals(name1) && !name2.equals(originalName1)) {
+				return true;
+			}
 		}
 		else if (hasOriginalName2) {
-            return !name1.equals(name2) && !name1.equals(originalName2);
+			if (!name1.equals(name2) && !name1.equals(originalName2)) {
+				return true;
+			}
 		}
-		else return !name1.equals(name2);
-    }
+		else if (!name1.equals(name2)) {
+			return true;
+		}
+		return false;
+	}
 
 	private boolean hasExternalFunctionAddConflicts(Function function1, Function function2) {
 		return !ProgramDiff.equivalentFunctions(function1, function2, true);
@@ -1084,9 +1097,13 @@ protected static final int EXTERNAL_SYMBOL_TYPE = 0x010;
 		if (symbolType1 != symbolType2) {
 			return false;
 		}
-        return (symbolType1 != SymbolType.FUNCTION) ||
-                ProgramDiff.equivalentFunctions(function1, function2);
-    }
+		if ((symbolType1 == SymbolType.FUNCTION) &&
+			!ProgramDiff.equivalentFunctions(function1, function2)) {
+			return false;
+		}
+
+		return true;
+	}
 
 	private void determineExternalRemoveConflicts(TaskMonitor monitor) throws CancelledException {
 		monitor.checkCanceled();
@@ -1097,41 +1114,46 @@ protected static final int EXTERNAL_SYMBOL_TYPE = 0x010;
 			"Finding conflicts for removed externals.");
 
 		// Process Externals that were removed in LATEST
-        for (long originalID : latestRemovedOriginalIDs) {
-            long myID = resolveMyIDFromOriginalID(originalID);
-            if (myRemovedOriginalIDs.contains(originalID)) {
-                // MY removed it too.
-                continue;
-            }
-            if (myModifiedIDs.contains(myID)) {
-                // Conflict: MY changed it, but LATEST has removed it.
-                removeConflictIDs.add(originalID);
-            }
+		Iterator<Long> latestIterator = latestRemovedOriginalIDs.iterator();
+		while (latestIterator.hasNext()) {
+			long originalID = latestIterator.next();
+			long myID = resolveMyIDFromOriginalID(originalID);
+			if (myRemovedOriginalIDs.contains(originalID)) {
+				// MY removed it too.
+				continue;
+			}
+			if (myModifiedIDs.contains(myID)) {
+				// Conflict: MY changed it, but LATEST has removed it.
+				removeConflictIDs.add(originalID);
+			}
 
-            mergeManager.updateProgress((++changeNum / totalChanges) * 100);
-        }
+			mergeManager.updateProgress((++changeNum / totalChanges) * 100);
+		}
 
 		// Process Externals that were removed in MY
-        for (long originalID : myRemovedOriginalIDs) {
-            long latestID = resolveLatestIDFromOriginalID(originalID);
-            if (latestRemovedOriginalIDs.contains(originalID)) {
-                // LATEST removed it too.
-                continue;
-            }
-            if (latestModifiedIDs.contains(latestID)) {
-                // Conflict: LATEST changed it, but MY has removed it.
-                removeConflictIDs.add(originalID);
-            } else {
-                long resultID = getResultIDfromOriginalID(originalID);
-                if (resultID != -1) {
-                    removeExternal(resultID);
-                }
-                originalResolvedSymbols.put(originalID, -1);
-                latestResolvedSymbols.put(latestID, -1);
-            }
+		Iterator<Long> myIterator = myRemovedOriginalIDs.iterator();
+		while (myIterator.hasNext()) {
+			long originalID = myIterator.next();
+			long latestID = resolveLatestIDFromOriginalID(originalID);
+			if (latestRemovedOriginalIDs.contains(originalID)) {
+				// LATEST removed it too.
+				continue;
+			}
+			if (latestModifiedIDs.contains(latestID)) {
+				// Conflict: LATEST changed it, but MY has removed it.
+				removeConflictIDs.add(originalID);
+			}
+			else {
+				long resultID = getResultIDfromOriginalID(originalID);
+				if (resultID != -1) {
+					removeExternal(resultID);
+				}
+				originalResolvedSymbols.put(originalID, -1);
+				latestResolvedSymbols.put(latestID, -1);
+			}
 
-            mergeManager.updateProgress((++changeNum / totalChanges) * 100);
-        }
+			mergeManager.updateProgress((++changeNum / totalChanges) * 100);
+		}
 	}
 
 	private void determineExternalChangeConflicts(TaskMonitor monitor) throws CancelledException {
@@ -1150,81 +1172,85 @@ protected static final int EXTERNAL_SYMBOL_TYPE = 0x010;
 	}
 
 	private void processExternalsChangedInLatest(TaskMonitor monitor) throws CancelledException {
-        for (Long latestModifiedID : latestModifiedIDs) {
-            monitor.checkCanceled();
-            long latestID = latestModifiedID;
-            long originalID = resolveOriginalIDFromLatestID(latestID);
-            long myID = resolveMyIDFromOriginalID(originalID);
-            if (removeConflictIDs.contains(originalID)) {
-                continue; // Already have a remove conflict on this.
-            }
-            if (myModifiedIDs.contains(myID)) {
-                // Both modified it so need to autoMerge and determine Conflicts.
-                Symbol latestSymbol = symbolTables[LATEST].getSymbol(latestID);
-                Symbol mySymbol = symbolTables[MY].getSymbol(myID);
-                Symbol originalSymbol = symbolTables[ORIGINAL].getSymbol(originalID);
-                long resultID = getResultIDfromLatestID(latestID);
-                Symbol resultSymbol = symbolTables[RESULT].getSymbol(resultID);
+		Iterator<Long> latestIterator = latestModifiedIDs.iterator();
+		while (latestIterator.hasNext()) {
+			monitor.checkCanceled();
+			long latestID = latestIterator.next();
+			long originalID = resolveOriginalIDFromLatestID(latestID);
+			long myID = resolveMyIDFromOriginalID(originalID);
+			if (removeConflictIDs.contains(originalID)) {
+				continue; // Already have a remove conflict on this.
+			}
+			if (myModifiedIDs.contains(myID)) {
+				// Both modified it so need to autoMerge and determine Conflicts.
+				Symbol latestSymbol = symbolTables[LATEST].getSymbol(latestID);
+				Symbol mySymbol = symbolTables[MY].getSymbol(myID);
+				Symbol originalSymbol = symbolTables[ORIGINAL].getSymbol(originalID);
+				long resultID = getResultIDfromLatestID(latestID);
+				Symbol resultSymbol = symbolTables[RESULT].getSymbol(resultID);
 
-                ExternalLocation[] externalLocations = new ExternalLocation[4];
-                externalLocations[LATEST] =
-                        externalManagers[LATEST].getExternalLocation(latestSymbol);
-                externalLocations[MY] = externalManagers[MY].getExternalLocation(mySymbol);
-                externalLocations[ORIGINAL] =
-                        externalManagers[ORIGINAL].getExternalLocation(originalSymbol);
-                externalLocations[RESULT] =
-                        externalManagers[RESULT].getExternalLocation(resultSymbol);
+				ExternalLocation[] externalLocations = new ExternalLocation[4];
+				externalLocations[LATEST] =
+					externalManagers[LATEST].getExternalLocation(latestSymbol);
+				externalLocations[MY] = externalManagers[MY].getExternalLocation(mySymbol);
+				externalLocations[ORIGINAL] =
+					externalManagers[ORIGINAL].getExternalLocation(originalSymbol);
+				externalLocations[RESULT] =
+					externalManagers[RESULT].getExternalLocation(resultSymbol);
 
-                myResolvedSymbols.put(myID, resultID);
+				myResolvedSymbols.put(myID, resultID);
 
-                mergeChangesAndDetermineConflicts(externalLocations, monitor);
-            }
-            // Otherwise, MY didn't change it and RESULT should already have the change from LATEST.
+				mergeChangesAndDetermineConflicts(externalLocations, monitor);
+			}
+			// Otherwise, MY didn't change it and RESULT should already have the change from LATEST.
 
-            mergeManager.updateProgress((++changeNum / totalChanges) * 100);
-        } // Done checking LATEST changes.
+			mergeManager.updateProgress((++changeNum / totalChanges) * 100);
+		} // Done checking LATEST changes.
 	}
 
 	private void processExternalsChangedInMy(TaskMonitor monitor) throws CancelledException {
-        for (Long myModifiedID : myModifiedIDs) {
-            monitor.checkCanceled();
-            long myID = myModifiedID;
-            long originalID = resolveOriginalIDFromMyID(myID);
-            long latestID = resolveLatestIDFromOriginalID(originalID);
-            long resultID = getResultIDfromLatestID(latestID);
+		Iterator<Long> myIterator = myModifiedIDs.iterator();
+		while (myIterator.hasNext()) {
+			monitor.checkCanceled();
+			long myID = myIterator.next();
+			long originalID = resolveOriginalIDFromMyID(myID);
+			long latestID = resolveLatestIDFromOriginalID(originalID);
+			long resultID = getResultIDfromLatestID(latestID);
 
-            if (latestModifiedIDs.contains(latestID)) {
-                continue; // Already processed this above in the LATEST changes loop.
-            }
-            if (removeConflictIDs.contains(originalID)) {
-                continue; // Already have a remove conflict on this.
-            }
-            // Only MY modified it so need to autoMerge it.
-            Symbol myExternalSymbol = symbolTables[MY].getSymbol(myID);
-            ExternalLocation myExternalLocation =
-                    externalManagers[MY].getExternalLocation(myExternalSymbol);
-            Symbol resultExternalSymbol = symbolTables[RESULT].getSymbol(resultID);
-            ExternalLocation resultExternalLocation =
-                    externalManagers[RESULT].getExternalLocation(resultExternalSymbol);
+			if (latestModifiedIDs.contains(latestID)) {
+				continue; // Already processed this above in the LATEST changes loop.
+			}
+			if (removeConflictIDs.contains(originalID)) {
+				continue; // Already have a remove conflict on this.
+			}
+			// Only MY modified it so need to autoMerge it.
+			Symbol myExternalSymbol = symbolTables[MY].getSymbol(myID);
+			ExternalLocation myExternalLocation =
+				externalManagers[MY].getExternalLocation(myExternalSymbol);
+			Symbol resultExternalSymbol = symbolTables[RESULT].getSymbol(resultID);
+			ExternalLocation resultExternalLocation =
+				externalManagers[RESULT].getExternalLocation(resultExternalSymbol);
 
-            myAddressTranslator.setPair(resultExternalSymbol.getAddress(),
-                    myExternalSymbol.getAddress());
+			myAddressTranslator.setPair(resultExternalSymbol.getAddress(),
+				myExternalSymbol.getAddress());
 
-            try {
-                resultExternalLocation = replaceExternalLocation(resultExternalLocation,
-                        myExternalLocation, mergeMy, monitor);
-                myResolvedSymbols.put(myID, resultID);
-                originalResolvedSymbols.put(originalID, resultID);
-            } catch (DuplicateNameException e) {
-                Msg.showError(this, mergeManager.getMergeTool().getToolFrame(),
-                        "Error Merging External Location", e.getMessage());
-            } catch (InvalidInputException e) {
-                Msg.showError(this, mergeManager.getMergeTool().getToolFrame(),
-                        "Error Merging External Location", e.getMessage());
-            }
+			try {
+				resultExternalLocation = replaceExternalLocation(resultExternalLocation,
+					myExternalLocation, getMergeMy(), monitor);
+				myResolvedSymbols.put(myID, resultID);
+				originalResolvedSymbols.put(originalID, resultID);
+			}
+			catch (DuplicateNameException e) {
+				Msg.showError(this, mergeManager.getMergeTool().getToolFrame(),
+					"Error Merging External Location", e.getMessage());
+			}
+			catch (InvalidInputException e) {
+				Msg.showError(this, mergeManager.getMergeTool().getToolFrame(),
+					"Error Merging External Location", e.getMessage());
+			}
 
-            mergeManager.updateProgress((++changeNum / totalChanges) * 100);
-        } // Done checking MY changes.
+			mergeManager.updateProgress((++changeNum / totalChanges) * 100);
+		} // Done checking MY changes.
 	}
 
 	private long getResultIDfromLatestID(long latestID) {
@@ -1454,7 +1480,7 @@ protected static final int EXTERNAL_SYMBOL_TYPE = 0x010;
 				}
 				else {
 					// Auto Merge MY external function changes.
-					replaceFunction(externalLocations[RESULT], externalLocations[MY], mergeMy,
+					replaceFunction(externalLocations[RESULT], externalLocations[MY], getMergeMy(),
 						monitor);
 				}
 			}
@@ -1512,74 +1538,77 @@ protected static final int EXTERNAL_SYMBOL_TYPE = 0x010;
 		mergeManager.updateProgress((changeNum / totalChanges) * 100);
 
 		// MY adds may conflict with LATEST adds that are already in RESULT.
-        for (Long myAddID : myAddIDs) {
-            monitor.checkCanceled();
-            long myID = myAddID;
-            Symbol mySymbol = symbolTables[MY].getSymbol(myID);
-            // Non-primary symbols are "original" symbols and we don't need to match these.
-            if (!mySymbol.isPrimary()) {
-                continue;
-            }
-            ExternalLocation myExternalLocation =
-                    externalManagers[MY].getExternalLocation(mySymbol);
-            if (myExternalLocation == null) {
-                throw new AssertException("Why don't we have an external location?");
-            }
-            // Get the external symbol in LATEST that we think most likely matches MY external.
-            // Only try to match it with externals that were also added in LATEST.
-            Symbol latestSymbol = SimpleDiffUtility.getMatchingExternalSymbol(programs[MY],
-                    mySymbol, programs[LATEST], latestAddIDs);
-            ExternalLocation latestExternalLocation = null;
-            if (latestSymbol != null) {
-                // We have a possible matching external from LATEST.
-                SymbolType symbolType = latestSymbol.getSymbolType();
-                if (symbolType == SymbolType.LABEL || symbolType == SymbolType.FUNCTION) {
-                    latestExternalLocation =
-                            externalManagers[LATEST].getExternalLocation(latestSymbol);
-                }
-            }
-            if (latestExternalLocation == null) {
-                // Couldn't find an external in LATEST that we think matches this one in MY.
-                // So just add this one and give it a conflict name if necessary.
-                try {
-                    ExternalLocation resultExternalLocation =
-                            addExternal(myExternalLocation, monitor);
+		Iterator<Long> myIterator = myAddIDs.iterator();
+		while (myIterator.hasNext()) {
+			monitor.checkCanceled();
+			long myID = myIterator.next();
+			Symbol mySymbol = symbolTables[MY].getSymbol(myID);
+			// Non-primary symbols are "original" symbols and we don't need to match these.
+			if (!mySymbol.isPrimary()) {
+				continue;
+			}
+			ExternalLocation myExternalLocation =
+				externalManagers[MY].getExternalLocation(mySymbol);
+			if (myExternalLocation == null) {
+				throw new AssertException("Why don't we have an external location?");
+			}
+			// Get the external symbol in LATEST that we think most likely matches MY external.
+			// Only try to match it with externals that were also added in LATEST.
+			Symbol latestSymbol = SimpleDiffUtility.getMatchingExternalSymbol(programs[MY],
+				mySymbol, programs[LATEST], latestAddIDs);
+			ExternalLocation latestExternalLocation = null;
+			if (latestSymbol != null) {
+				// We have a possible matching external from LATEST.
+				SymbolType symbolType = latestSymbol.getSymbolType();
+				if (symbolType == SymbolType.LABEL || symbolType == SymbolType.FUNCTION) {
+					latestExternalLocation =
+						externalManagers[LATEST].getExternalLocation(latestSymbol);
+				}
+			}
+			if (latestExternalLocation == null) {
+				// Couldn't find an external in LATEST that we think matches this one in MY.
+				// So just add this one and give it a conflict name if necessary.
+				try {
+					ExternalLocation resultExternalLocation =
+						addExternal(myExternalLocation, monitor);
 
-                    ExternalLocation[] externalLocations = new ExternalLocation[]{
-                            resultExternalLocation, latestExternalLocation, myExternalLocation, null};
-                    adjustIDMapsForAdd(externalLocations, resultExternalLocation, MY);
-                } catch (DuplicateNameException e) {
-                    Msg.error(this, "Couldn't add external '" +
-                            myExternalLocation.getSymbol().getName(true) + ",. " + e.getMessage());
-                } catch (InvalidInputException e) {
-                    Msg.error(this, "Couldn't add external '" +
-                            myExternalLocation.getSymbol().getName(true) + ",. " + e.getMessage());
-                }
-                continue;
-            }
+					ExternalLocation[] externalLocations = new ExternalLocation[] {
+						resultExternalLocation, latestExternalLocation, myExternalLocation, null };
+					adjustIDMapsForAdd(externalLocations, resultExternalLocation, MY);
+				}
+				catch (DuplicateNameException e) {
+					Msg.error(this, "Couldn't add external '" +
+						myExternalLocation.getSymbol().getName(true) + ",. " + e.getMessage());
+				}
+				catch (InvalidInputException e) {
+					Msg.error(this, "Couldn't add external '" +
+						myExternalLocation.getSymbol().getName(true) + ",. " + e.getMessage());
+				}
+				continue;
+			}
 
-            // Check the externals for add conflicts. If there are any then present them with a
-            // choice between Keep Latest, Keep My, Keep Both, or Merge Together.
-            boolean hasExternalAddConflicts =
-                    hasExternalAddConflicts(latestExternalLocation, myExternalLocation);
-            if (hasExternalAddConflicts) {
-                // Check to see if this is a new external function versus a new external data label.
-                if (isAddConflictSpecialFunctionVsData(latestExternalLocation, myExternalLocation,
-                        monitor)) {
-                    // Only give the latest vs my choices. Don't allow KeepBoth or MergeBoth.
-                    saveExternalFunctionVersusDataTypeConflict(
-                            myExternalLocation.getExternalSpaceAddress());
-                    continue;
-                }
-                saveExternalAddConflict(latestExternalLocation, myExternalLocation, monitor);
-                continue;
-            }
+			// Check the externals for add conflicts. If there are any then present them with a
+			// choice between Keep Latest, Keep My, Keep Both, or Merge Together.
+			boolean hasExternalAddConflicts =
+				hasExternalAddConflicts(latestExternalLocation, myExternalLocation);
+			if (hasExternalAddConflicts) {
+				// Check to see if this is a new external function versus a new external data label.
+				if (isAddConflictSpecialFunctionVsData(latestExternalLocation, myExternalLocation,
+					monitor)) {
+					// Only give the latest vs my choices. Don't allow KeepBoth or MergeBoth.
+					saveExternalFunctionVersusDataTypeConflict(
+						myExternalLocation.getExternalSpaceAddress());
+					continue;
+				}
+				saveExternalAddConflict(latestExternalLocation, myExternalLocation, monitor);
+				continue;
+			}
 
-            // Otherwise, merge MY and RESULT (originally matched LATEST).
-            mergeAddsAndDetermineConflicts(latestExternalLocation, myExternalLocation, monitor);
+			// Otherwise, merge MY and RESULT (originally matched LATEST).
+			mergeAddsAndDetermineConflicts(latestExternalLocation, myExternalLocation, monitor);
 
-            mergeManager.updateProgress((++changeNum / totalChanges) * 100);
-        }
+			mergeManager.updateProgress((++changeNum / totalChanges) * 100);
+		}
 	}
 
 	/**
@@ -1706,7 +1735,7 @@ protected static final int EXTERNAL_SYMBOL_TYPE = 0x010;
 				// Add the function to the external location.
 				// Change the external Label into a function.
 				Function resultFunction = resultExternalLocation.createFunction();
-				mergeMy.replaceExternalFunction(resultFunction, myFunction, monitor);
+				getMergeMy().replaceExternalFunction(resultFunction, myFunction, monitor);
 			}
 		}
 		// Otherwise Latest and My are equivalent.
@@ -1731,7 +1760,7 @@ protected static final int EXTERNAL_SYMBOL_TYPE = 0x010;
 			throws DuplicateNameException, InvalidInputException, CancelledException {
 
 		ExternalLocation resultExternalLocation =
-			addExternal(myExternalLocation, mergeMy, monitor);
+			addExternal(myExternalLocation, getMergeMy(), monitor);
 		if ((resultExternalLocation != null) &&
 			!resultExternalLocation.getLabel().equals(myExternalLocation.getLabel())) {
 			renamedConflictIDs.add(resultExternalLocation.getSymbol().getID());
@@ -2181,23 +2210,24 @@ protected static final int EXTERNAL_SYMBOL_TYPE = 0x010;
 					mergeParamInfo(functions, paramInfoConflicts, parameterInfoChoice, monitor);
 				}
 				else if (askUser && mergeManager != null) {
-                    for (ParamInfoConflict paramInfoConflict : paramInfoConflicts) {
-                        monitor.checkCanceled();
-                        ParamInfoConflict pc = paramInfoConflict;
-                        boolean useForAll = (parameterInfoChoice != ASK_USER);
-                        if (useForAll) {
-                            mergeParamInfo(functions, pc, parameterInfoChoice, monitor);
-                            continue;
-                        }
-                        VariousChoicesPanel choicesPanel =
-                                createParamInfoConflictPanel(functions, pc, monitor);
+					Iterator<ParamInfoConflict> iter = paramInfoConflicts.iterator();
+					while (iter.hasNext()) {
+						monitor.checkCanceled();
+						ParamInfoConflict pc = iter.next();
+						boolean useForAll = (parameterInfoChoice != ASK_USER);
+						if (useForAll) {
+							mergeParamInfo(functions, pc, parameterInfoChoice, monitor);
+							continue;
+						}
+						VariousChoicesPanel choicesPanel =
+							createParamInfoConflictPanel(functions, pc, monitor);
 
-                        choicesPanel.setUseForAll(useForAll);
-                        choicesPanel.setConflictType("Function Parameter Info");
+						choicesPanel.setUseForAll(useForAll);
+						choicesPanel.setConflictType("Function Parameter Info");
 
-                        setupConflictPanel(listingPanel, choicesPanel, externalLocations, monitor);
-                        monitor.checkCanceled();
-                    }
+						setupConflictPanel(listingPanel, choicesPanel, externalLocations, monitor);
+						monitor.checkCanceled();
+					}
 
 				}
 				else {
@@ -3424,7 +3454,7 @@ protected static final int EXTERNAL_SYMBOL_TYPE = 0x010;
 			}
 			if (myIsFunction && !latestIsFunction) {
 				// Auto Merge MY external function changes.
-				replaceFunction(externalLocations[RESULT], externalLocations[MY], mergeMy,
+				replaceFunction(externalLocations[RESULT], externalLocations[MY], getMergeMy(),
 					monitor);
 			}
 		}
@@ -3664,15 +3694,15 @@ protected static final int EXTERNAL_SYMBOL_TYPE = 0x010;
 		switch (currentChosenOption) {
 			case KEEP_LATEST:
 				replaceFunction(externalLocations[RESULT], externalLocations[LATEST],
-                        mergeLatest, monitor);
+					getMergeLatest(), monitor);
 				break;
 			case KEEP_MY:
-				replaceFunction(externalLocations[RESULT], externalLocations[MY], mergeMy,
+				replaceFunction(externalLocations[RESULT], externalLocations[MY], getMergeMy(),
 					monitor);
 				break;
 			case KEEP_ORIGINAL:
 				replaceFunction(externalLocations[RESULT], externalLocations[ORIGINAL],
-                        mergeOriginal, monitor);
+					getMergeOriginal(), monitor);
 			default:
 				throw new AssertException("Can only merge external detail from Latest or My.");
 		}
@@ -3735,7 +3765,7 @@ protected static final int EXTERNAL_SYMBOL_TYPE = 0x010;
 			latestAddressTranslator.setPair(externalLocations[RESULT].getExternalSpaceAddress(),
 				externalLocations[LATEST].getExternalSpaceAddress());
 			ExternalLocation resultExternalLocation = replaceExternalLocation(
-				externalLocations[RESULT], externalLocations[LATEST], mergeLatest, monitor);
+				externalLocations[RESULT], externalLocations[LATEST], getMergeLatest(), monitor);
 			externalLocations[RESULT] = resultExternalLocation;
 			adjustIDMapsForReplace(externalLocations);
 		}
@@ -3760,7 +3790,7 @@ protected static final int EXTERNAL_SYMBOL_TYPE = 0x010;
 			myAddressTranslator.setPair(externalLocations[RESULT].getExternalSpaceAddress(),
 				externalLocations[MY].getExternalSpaceAddress());
 			ExternalLocation resultExternalLocation = replaceExternalLocation(
-				externalLocations[RESULT], externalLocations[MY], mergeMy, monitor);
+				externalLocations[RESULT], externalLocations[MY], getMergeMy(), monitor);
 			externalLocations[RESULT] = resultExternalLocation;
 			adjustIDMapsForReplace(externalLocations);
 		}
@@ -3795,7 +3825,7 @@ protected static final int EXTERNAL_SYMBOL_TYPE = 0x010;
 				externalLocations[ORIGINAL].getExternalSpaceAddress());
 			ExternalLocation resultExternalLocation =
 				replaceExternalLocation(externalLocations[RESULT], externalLocations[ORIGINAL],
-                        mergeOriginal, monitor);
+					getMergeOriginal(), monitor);
 			externalLocations[RESULT] = resultExternalLocation;
 			adjustIDMapsForReplace(externalLocations);
 		}
@@ -4300,7 +4330,7 @@ protected static final int EXTERNAL_SYMBOL_TYPE = 0x010;
 	}
 
 	private interface ConflictListener {
-		void resolveConflict();
+		public void resolveConflict();
 	}
 
 	@Override

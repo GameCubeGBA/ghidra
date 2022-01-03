@@ -129,6 +129,9 @@ public class MarkerLocation implements Serializable {
 		if (x != other.x) {
 			return false;
 		}
-        return y == other.y;
-    }
+		if (y != other.y) {
+			return false;
+		}
+		return true;
+	}
 }

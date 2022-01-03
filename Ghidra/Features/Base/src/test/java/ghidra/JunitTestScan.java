@@ -24,7 +24,11 @@ import java.io.*;
  */
 public class JunitTestScan {
 	
-	private static final FilenameFilter TEST_XML_FILTER = (dir, name) -> (name.startsWith("TEST-") && name.endsWith(".xml"));
+	private static final FilenameFilter TEST_XML_FILTER = new FilenameFilter() {
+		public boolean accept(File dir, String name) {
+			return (name.startsWith("TEST-") && name.endsWith(".xml"));
+		}
+	};
 	
 	private static void writeXmlFile(File xmlFile) throws IOException {
 		
@@ -56,16 +60,16 @@ public class JunitTestScan {
 		}
 		
 		File[] files = dataDir.listFiles(TEST_XML_FILTER);
-        for (File file : files) {
-            if (file.length() == 0) {
-                try {
-                    System.out.println("Found bad test data: " + file);
-                    writeXmlFile(file);
-                } catch (IOException e) {
-                    System.err.println("Failed to fix data file: " + file);
-                }
-            }
-        }
+		for (int i = 0; i < files.length; i++) {
+			if (files[i].length() == 0) {
+				try {
+					System.out.println("Found bad test data: " + files[i]);
+					writeXmlFile(files[i]);	
+				} catch (IOException e) {
+					System.err.println("Failed to fix data file: " + files[i]);	
+				}
+			}	
+		}
 		
 		
 	}

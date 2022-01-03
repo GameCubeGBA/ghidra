@@ -30,24 +30,24 @@ public class ObjectEnumeratedColumnTableModel<C extends ObjectsEnumeratedTableCo
 		extends AbstractSortedTableModel<R> implements EnumeratedColumnTableModel<R> {
 
 	// NOTE: If I need to track indices, addSortListener
-	public interface ObjectsEnumeratedTableColumn<C, R> {
-		Object getValueOf(R row);
+	public static interface ObjectsEnumeratedTableColumn<C, R> {
+		public Object getValueOf(R row);
 
-		String getHeader();
+		public String getHeader();
 
-		default void setValueOf(R row, Object value) {
+		default public void setValueOf(R row, Object value) {
 			throw new UnsupportedOperationException("Cell is not editable");
 		}
 
-		default boolean isEditable(R row) {
+		default public boolean isEditable(R row) {
 			return false;
 		}
 
-		default boolean isSortable() {
+		default public boolean isSortable() {
 			return true;
 		}
 
-		default SortDirection defaultSortDirection() {
+		default public SortDirection defaultSortDirection() {
 			return SortDirection.ASCENDING;
 		}
 	}

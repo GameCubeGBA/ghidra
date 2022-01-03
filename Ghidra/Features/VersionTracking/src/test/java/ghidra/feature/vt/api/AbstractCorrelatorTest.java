@@ -42,7 +42,8 @@ public abstract class AbstractCorrelatorTest extends AbstractGhidraHeadedIntegra
 	protected ArrayList<String> errors;
 
 	public AbstractCorrelatorTest() {
-    }
+		super();
+	}
 
 	protected abstract Program getSourceProgram();
 
@@ -70,7 +71,7 @@ public abstract class AbstractCorrelatorTest extends AbstractGhidraHeadedIntegra
 		destinationProgram = null;
 		env = null;
 
-		if (!errors.isEmpty()) {
+		if (errors.size() > 0) {
 			for (String msg : errors) {
 				Msg.error(this, msg);
 			}
@@ -110,7 +111,7 @@ public abstract class AbstractCorrelatorTest extends AbstractGhidraHeadedIntegra
 						Address sourceEntryPoint = function.getEntryPoint();
 						Collection<VTAssociation> associations =
 							manager.getRelatedAssociationsBySourceAddress(sourceEntryPoint);
-						if (associations.isEmpty()) {
+						if (associations.size() == 0) {
 							error(factory, "no source matches for function " + function.getName() +
 								" at " + sourceEntryPoint);
 						}
@@ -189,7 +190,7 @@ public abstract class AbstractCorrelatorTest extends AbstractGhidraHeadedIntegra
 							" that should NOT have been found");
 					}
 				}
-				if (!mapCopy.isEmpty()) {
+				if (mapCopy.size() > 0) {
 					Set<Entry<Address, Address>> entries = mapCopy.entrySet();
 					for (Entry<Address, Address> entry : entries) {
 						error(factory, "did not find correlation " + entry.getKey() + " -> " +

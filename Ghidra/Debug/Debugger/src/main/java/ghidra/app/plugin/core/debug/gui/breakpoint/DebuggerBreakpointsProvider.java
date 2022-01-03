@@ -453,7 +453,8 @@ public class DebuggerBreakpointsProvider extends ComponentProviderAdapter
 
 	protected class MakeBreakpointsEffectiveAction extends CommonMakeBreakpointsEffectiveAction {
 		public MakeBreakpointsEffectiveAction() {
-            addLocalAction(this);
+			super();
+			addLocalAction(this);
 			setEnabled(false);
 		}
 

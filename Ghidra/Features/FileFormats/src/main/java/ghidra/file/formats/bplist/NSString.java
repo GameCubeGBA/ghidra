@@ -39,7 +39,7 @@ public class NSString extends NSObject {
 	public DataType toDataType() throws DuplicateNameException, IOException {
 		Structure structure = new StructureDataType( "NSString_" + string.length( ), 0 );
 		addHeader( structure, string.length( ) );
-		if (!string.isEmpty()) {
+		if ( string.length( ) > 0 ) {
 			if ( type == NSStringTypes.TYPE_ASCII ) {
 				structure.add( STRING, string.length( ), "ascii", null );
 			}

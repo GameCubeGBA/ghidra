@@ -22,7 +22,7 @@ import ghidra.util.exception.DuplicateNameException;
 import java.io.IOException;
 
 public class CFragUsage2Union implements StructConverter {
-	public static final short kNoAppSubFolder = 0;
+	public final static short kNoAppSubFolder = 0;
 
 	private short appSubdirID;
 

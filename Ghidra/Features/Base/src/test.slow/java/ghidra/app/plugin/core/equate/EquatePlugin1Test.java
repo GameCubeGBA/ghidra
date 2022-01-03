@@ -1226,7 +1226,7 @@ public class EquatePlugin1Test extends AbstractEquatePluginTest {
 		triggerEnter(textField);
 		waitForTasks();
 
-		assertFalse("bob".equals(et.getEquate(addr(0x01004c0d), 1, 0x0).getName()));
+		assertFalse(et.getEquate(addr(0x01004c0d), 1, 0x0).getName().equals("bob"));
 		assertEquatesAppliedFromEnum(id, 0, 2, 4);
 		assertEquatesNotApplied(id, 3, 5);
 

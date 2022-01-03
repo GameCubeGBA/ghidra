@@ -28,7 +28,7 @@ public interface ByteProvider extends Closeable {
 	/**
 	 * A static re-usable empty {@link ByteProvider} instance. 
 	 */
-    ByteProvider EMPTY_BYTEPROVIDER = new EmptyByteProvider();
+	public static final ByteProvider EMPTY_BYTEPROVIDER = new EmptyByteProvider();
 
 	/**
 	 * Returns the {@link FSRL} of the underlying file for this byte provider,
@@ -37,7 +37,7 @@ public interface ByteProvider extends Closeable {
 	 * @return The {@link FSRL} of the underlying {@link File}, or null if no associated 
 	 *   {@link File}.
 	 */
-    default FSRL getFSRL() {
+	default public FSRL getFSRL() {
 		File f = getFile();
 		return (f != null) ? FileSystemService.getInstance().getLocalFSRL(f) : null;
 	}
@@ -48,14 +48,14 @@ public interface ByteProvider extends Closeable {
 	 * 
 	 * @return the underlying file for this byte provider
 	 */
-    File getFile();
+	public File getFile();
 
 	/**
 	 * Returns the name of the {@link ByteProvider}. For example, the underlying file name.
 	 * 
 	 * @return the name of the {@link ByteProvider} or null if there is no name
 	 */
-    String getName();
+	public String getName();
 
 	/**
 	 * Returns the absolute path (similar to, but not a, URI) to the {@link ByteProvider}.
@@ -64,7 +64,7 @@ public interface ByteProvider extends Closeable {
 	 * @return the absolute path to the {@link ByteProvider} or null if not associated with a 
 	 *   {@link File}.
 	 */
-    String getAbsolutePath();
+	public String getAbsolutePath();
 
 	/**
 	 * Returns the length of the {@link ByteProvider}
@@ -72,7 +72,7 @@ public interface ByteProvider extends Closeable {
 	 * @return the length of the {@link ByteProvider}
 	 * @throws IOException if an I/O error occurs
 	 */
-    long length() throws IOException;
+	public long length() throws IOException;
 
 	/**
 	 * Returns true if the specified index is valid.
@@ -80,7 +80,7 @@ public interface ByteProvider extends Closeable {
 	 * @param index the index in the byte provider to check
 	 * @return true if the specified index is valid
 	 */
-    boolean isValidIndex(long index);
+	public boolean isValidIndex(long index);
 
 	/**
 	 * Releases any resources the {@link ByteProvider} may have occupied
@@ -88,7 +88,7 @@ public interface ByteProvider extends Closeable {
 	 * @throws IOException if an I/O error occurs
 	 */
 	@Override
-    void close() throws IOException;
+	public void close() throws IOException;
 
 	/**
 	 * Reads a byte at the specified index
@@ -97,7 +97,7 @@ public interface ByteProvider extends Closeable {
 	 * @return the byte read from the specified index
 	 * @throws IOException if an I/O error occurs
 	 */
-    byte readByte(long index) throws IOException;
+	public byte readByte(long index) throws IOException;
 
 	/**
 	 * Reads a byte array at the specified index
@@ -107,7 +107,7 @@ public interface ByteProvider extends Closeable {
 	 * @return the byte array read from the specified index
 	 * @throws IOException if an I/O error occurs
 	 */
-    byte[] readBytes(long index, long length) throws IOException;
+	public byte[] readBytes(long index, long length) throws IOException;
 
 	/**
 	 * Returns an input stream to the underlying byte provider starting at the specified index.
@@ -121,7 +121,7 @@ public interface ByteProvider extends Closeable {
 	 * @return the {@link InputStream}
 	 * @throws IOException  if an I/O error occurs
 	 */
-    default InputStream getInputStream(long index) throws IOException {
+	default public InputStream getInputStream(long index) throws IOException {
 		if (index < 0 || index > length()) {
 			throw new IOException("Invalid start position: " + index);
 		}

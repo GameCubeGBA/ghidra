@@ -49,7 +49,8 @@ public class CliTableAssemblyRef extends CliAbstractTable {
 		public CliAssemblyRefRow(short majorVersion, short minorVersion, short buildNumber,
 				short revisionNumber, int flags, int publicKeyOrTokenIndex, int nameIndex,
 				int cultureIndex, int hashValueIndex) {
-            this.majorVersion = majorVersion;
+			super();
+			this.majorVersion = majorVersion;
 			this.minorVersion = minorVersion;
 			this.buildNumber = buildNumber;
 			this.revisionNumber = revisionNumber;

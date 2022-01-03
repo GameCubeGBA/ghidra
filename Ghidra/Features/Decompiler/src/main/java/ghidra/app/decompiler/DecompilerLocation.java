@@ -104,8 +104,11 @@ public class DecompilerLocation extends ProgramLocation {
 			return false;
 		}
 
-        return Objects.equals(tokenName, other.tokenName);
-    }
+		if (!Objects.equals(tokenName, other.tokenName)) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public void saveState(SaveState saveState) {

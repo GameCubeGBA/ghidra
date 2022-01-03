@@ -32,7 +32,7 @@ import ghidra.app.merge.util.ConflictUtility;
  */
 public class ExternalConflictInfoPanel extends JPanel {
 
-	private static final long serialVersionUID = 1;
+	private final static long serialVersionUID = 1;
 	private String conflictType;
 	private int conflictNum;
 	private int totalConflicts;
@@ -45,7 +45,8 @@ public class ExternalConflictInfoPanel extends JPanel {
 	 * Creates a new {@code ExternalConflictInfoPanel} to use above the listings.
 	 */
 	public ExternalConflictInfoPanel() {
-        create();
+		super();
+		create();
 	}
 
 	private void create() {

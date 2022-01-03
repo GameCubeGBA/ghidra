@@ -168,7 +168,7 @@ public class FunctionDataTypeHTMLRepresentation extends HTMLDataTypeRepresentati
 
 		String varArgsText = varArgs.getText();
 		varArgsText = wrapStringInColor(varArgsText, varArgs.getTextColor());
-		boolean hasVarArgs = !varArgsText.isEmpty();
+		boolean hasVarArgs = varArgsText.length() != 0;
 
 		int size = arguments.size();
 		for (int i = 0; i < size; i++, lineCount++) { // walk in pairs (display name to name)
@@ -213,7 +213,7 @@ public class FunctionDataTypeHTMLRepresentation extends HTMLDataTypeRepresentati
 		else if (size == 0) {
 			String voidArgsText = voidArgs.getText();
 			voidArgsText = wrapStringInColor(voidArgsText, voidArgs.getTextColor());
-			if (!voidArgsText.isEmpty()) {
+			if (voidArgsText.length() != 0) {
 				append(fullHtml, truncatedHtml, lineCount, varArgsText);
 			}
 		}

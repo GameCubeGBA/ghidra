@@ -29,15 +29,15 @@ import ghidra.dbg.target.TargetInterpreter;
  */
 public interface LldbModelTargetInterpreter extends LldbModelTargetObject, TargetInterpreter {
 
-	String LLDB_PROMPT = "(lldb)";
+	public static final String LLDB_PROMPT = "(lldb)";
 
 	@Override
-    default CompletableFuture<Void> execute(String cmd) {
+	public default CompletableFuture<Void> execute(String cmd) {
 		return getModel().gateFuture(getManager().console(cmd));
 	}
 
 	@Override
-    default CompletableFuture<String> executeCapture(String cmd) {
+	public default CompletableFuture<String> executeCapture(String cmd) {
 		return getModel().gateFuture(getManager().consoleCapture(cmd));
 	}
 

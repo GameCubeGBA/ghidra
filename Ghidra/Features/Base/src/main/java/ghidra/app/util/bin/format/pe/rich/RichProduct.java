@@ -39,7 +39,7 @@ public class RichProduct {
 	}
 
 	public String toString() {
-		return productVersion + " -- " + productType;
+		return getProductVersion() + " -- " + getProductType();
 	}
 
 }

@@ -42,6 +42,7 @@ public class RangeTest extends AbstractGenericTest {
 	 * Constructor for TestRange.
 	 */
 	public RangeTest() {
+		super();
 	}
 
 	@Test
@@ -286,7 +287,7 @@ public class RangeTest extends AbstractGenericTest {
 			int max = pair[1];
 			r1 = new Range(min, max);
 			r2 = new Range(min, max);
-			assertEquals("Range equals() failed for " + r1 + ".", r1, r2);
+			assertEquals("Range equals() failed for " + r1.toString() + ".", r1, r2);
 		}
 	}
 
@@ -478,7 +479,7 @@ public class RangeTest extends AbstractGenericTest {
 			int min = pair[0];
 			int max = pair[1];
 			r = new Range(min, max);
-			assertEquals("Bad size for range " + r, ((long) max - min + 1),
+			assertEquals("Bad size for range " + r.toString(), ((long) max - (long) min + 1),
 				r.size());
 		}
 	}

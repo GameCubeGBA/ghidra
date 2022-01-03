@@ -75,7 +75,7 @@ public class EHUnwindModel extends AbstractCreateDataTypeModel {
 			Address actionAddress = getActionAddress(unwindBlockOrdinal);
 			if ((actionAddress != null) &&
 				!EHDataTypeUtilities.isValidForFunction(program, actionAddress)) {
-				throw new InvalidDataTypeException(DATA_TYPE_NAME + " data type at " + getAddress() +
+				throw new InvalidDataTypeException(getName() + " data type at " + getAddress() +
 					" doesn't refer to a valid location for an action.");
 			}
 		}

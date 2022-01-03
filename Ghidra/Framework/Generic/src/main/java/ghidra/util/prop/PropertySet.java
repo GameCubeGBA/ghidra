@@ -32,11 +32,11 @@ import ghidra.util.exception.NoValueException;
  * values are determined by the derived class.
  */
 public abstract class PropertySet implements Serializable {
-	private static final long serialVersionUID = 1;
+	private final static long serialVersionUID = 1;
 	protected static final NoValueException noValueException = new NoValueException();
-	private static final int DEFAULT_NUMBER_PAGE_BITS = 12;
-	private static final int MIN_NUMBER_PAGE_BITS = 8;
-	private static final int MAX_NUMBER_PAGE_BITS = 15;	// must be kept less than
+	private final static int DEFAULT_NUMBER_PAGE_BITS = 12;
+	private final static int MIN_NUMBER_PAGE_BITS = 8;
+	private final static int MAX_NUMBER_PAGE_BITS = 15;	// must be kept less than
 														// size of a short
 
 	private String name;

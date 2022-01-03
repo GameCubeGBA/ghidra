@@ -36,9 +36,9 @@ public class AutoOptionsListener<R> implements OptionsChangeListener {
 		new HashMap<>();
 
 	protected interface OptionSetter<R> {
-		void set(R receiver, Object newValue, Object oldValue);
+		public void set(R receiver, Object newValue, Object oldValue);
 
-		CategoryAndName getKey();
+		public CategoryAndName getKey();
 	}
 
 	protected static class FieldOptionSetter<R> implements OptionSetter<R> {

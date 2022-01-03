@@ -46,7 +46,7 @@ public abstract class AbstractDemangledFunctionDefinitionDataType extends Demang
 		super(mangled, originalDemangled, DEFAULT_NAME_PREFIX + nextId());
 	}
 
-	private static synchronized int nextId() {
+	private synchronized static int nextId() {
 		return ID++;
 	}
 
@@ -54,7 +54,7 @@ public abstract class AbstractDemangledFunctionDefinitionDataType extends Demang
 	 * Returns the string for this type of reference (e.g., * or &amp;)
 	 * @return the string
 	 */
-    protected abstract String getTypeString();
+	abstract protected String getTypeString();
 
 	@Override
 	public String getSignature() {

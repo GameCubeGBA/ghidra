@@ -81,7 +81,7 @@ public class FormatStringParser {
 	private List<String> parseFormatString(String formatString) {
 
 		List<String> formatArgumentList = new ArrayList<>();
-		StringBuilder current = new StringBuilder();
+		String current = "";
 		for (int i = 0; i < formatString.length(); i++) {
 			char c = formatString.charAt(i);
 			if (c == '%') {
@@ -92,15 +92,15 @@ public class FormatStringParser {
 					++i;
 					c = formatString.charAt(i);
 					while (!isConversionSpecifier(c)) {
-						current.append(c);
+						current += c;
 						++i;
 						if (i >= formatString.length()) {
 							return null;
 						}
 						c = formatString.charAt(i);
 					}
-					formatArgumentList.add(current.toString() + c);
-					current = new StringBuilder();
+					formatArgumentList.add(current + c);
+					current = "";
 				}
 			}
 		}
@@ -401,13 +401,19 @@ public class FormatStringParser {
 			// At this point c is either a number, '*', or '.'
 			if (!data.isPrecisionComplete() && !data.isFieldWidthComplete() && c != '.') {
 				i = handleOutputConversionForParameters(formatString, i, data, formatArgumentMap);
-            }
+				if (i == -1) {
+					return -1;
+				}
+			}
 			else if (data.isFieldWidthComplete() && c != '.') {
 				return -1;
 			}
 			else if (!data.isPrecisionComplete() && c == '.') {
 				i = handlePrecisionForParameters(formatString, i, data, formatArgumentMap);
-            }
+				if (i == -1) {
+					return -1;
+				}
+			}
 			else {
 				return -1;
 			}
@@ -495,15 +501,15 @@ public class FormatStringParser {
 		else {
 			return 0;
 		}
-		StringBuilder paramIndexString = new StringBuilder();
+		String paramIndexString = "";
 		while (Character.isDigit(c)) {
-			paramIndexString.append(Character.toString(c));
+			paramIndexString += Character.toString(c);
 			++i;
 			c = formatString.charAt(i);
 		}
-		return c != '$' || (paramIndexString.length() == 0) || Integer.parseInt(paramIndexString.toString()) == 0
+		return c != '$' || paramIndexString.length() == 0 || Integer.parseInt(paramIndexString) == 0
 				? 0
-				: Integer.parseInt(paramIndexString.toString());
+				: Integer.parseInt(paramIndexString);
 	}
 
 	/**
@@ -546,9 +552,12 @@ public class FormatStringParser {
 
 	// If there are two consecutive '%' signs, do not evaluate the data types
 	private boolean emitPercent(String formatString, int i) {
-        return formatString.charAt(i) == '%' && i + 1 < formatString.length() &&
-                formatString.charAt(i + 1) == '%';
-    }
+		if (formatString.charAt(i) == '%' && i + 1 < formatString.length() &&
+			formatString.charAt(i + 1) == '%') {
+			return true;
+		}
+		return false;
+	}
 
 	public DataType[] convertToOutputDataTypes(List<FormatArgument> formatArguments) {
 		if (formatArguments == null) {
@@ -557,7 +566,7 @@ public class FormatStringParser {
 		List<DataType> dataTypeList = formatArguments.stream().map(argument -> {
 			String conversionSpecifier = argument.getConversionSpecifier();
 			DataType dt = convertPairToDataType(argument.getLengthModifier(),
-				"*".equals(conversionSpecifier) ? "d" : conversionSpecifier);
+				conversionSpecifier.equals("*") ? "d" : conversionSpecifier);
 			return dt;
 		}).collect(Collectors.toList());
 		return dataTypeList.contains(null) ? null
@@ -573,8 +582,8 @@ public class FormatStringParser {
 		for (int i = 0; i < formatArguments.size(); i++) {
 			FormatArgument argument = formatArguments.get(i);
 			// * means to skip
-			if ("*".equals(argument.getConversionSpecifier())) {
-				if ("*".equals(formatArguments.get(i + 1).getConversionSpecifier())) {
+			if (argument.getConversionSpecifier().equals("*")) {
+				if (formatArguments.get(i + 1).getConversionSpecifier().equals("*")) {
 					return null;
 				}
 				++i;
@@ -597,20 +606,23 @@ public class FormatStringParser {
 	}
 
 	private boolean verifyConversionPair(String lengthModifier, String conversionSpecifier) {
-		if (lengthModifier == null || "l".equals(lengthModifier)) {
+		if (lengthModifier == null || lengthModifier.equals("l")) {
 			return true;
 		}
-        return ("L".equals(lengthModifier) && isDouble(conversionSpecifier)) ||
-                (!"L".equals(lengthModifier) &&
-                        (isInteger(conversionSpecifier) || isIntegerPointer(conversionSpecifier)));
-    }
+		if ((lengthModifier.equals("L") && isDouble(conversionSpecifier)) ||
+			(!lengthModifier.equals("L") &&
+				(isInteger(conversionSpecifier) || isIntegerPointer(conversionSpecifier)))) {
+			return true;
+		}
+		return false;
+	}
 
 	private DataType convertPairToDataType(String lengthModifier, String conversionSpecifier) {
 
-		if (lengthModifier == null || "c".equals(conversionSpecifier) ||
-			"s".equals(conversionSpecifier) ||
-			"C".equals(conversionSpecifier) ||
-			"S".equals(conversionSpecifier)) {
+		if (lengthModifier == null || conversionSpecifier.equals("c") ||
+			conversionSpecifier.equals("s") ||
+			conversionSpecifier.equals("C") ||
+			conversionSpecifier.equals("S")) {
 			return conversionSpecifierToDataType(conversionSpecifier);
 		}
 		switch (lengthModifier) {
@@ -847,8 +859,8 @@ public class FormatStringParser {
 	}
 
 	private String extendLengthModifier(String lengthModifier, char nextChar) {
-		if (("h".equals(lengthModifier) && nextChar == 'h') ||
-			("l".equals(lengthModifier) && nextChar == 'l')) {
+		if ((lengthModifier.equals("h") && nextChar == 'h') ||
+			(lengthModifier.equals("l") && nextChar == 'l')) {
 			return lengthModifier + Character.toString(nextChar);
 		}
 		return null;

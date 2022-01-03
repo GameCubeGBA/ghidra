@@ -22,10 +22,10 @@ package ghidra.app.plugin.core.compositeeditor;
  */
 @FunctionalInterface
 interface ComponentCellEditorListener {
-    int NEXT = 1;
-    int PREVIOUS = 2;
-    int UP = 3;
-    int DOWN = 4;
+    static int NEXT = 1;
+    static int PREVIOUS = 2;
+    static int UP = 3;
+    static int DOWN = 4;
     
     void moveCellEditor(int direction, String value);
     

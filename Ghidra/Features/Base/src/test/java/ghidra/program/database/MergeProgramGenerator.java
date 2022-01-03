@@ -19,5 +19,5 @@ package ghidra.program.database;
 @FunctionalInterface
 public interface MergeProgramGenerator {
 
-	ProgramDB generateProgram(String programName) throws Exception;
+	public ProgramDB generateProgram(String programName) throws Exception;
 }

@@ -143,10 +143,12 @@ public class ToolBarManager {
 	}
 
 	private void addButtonsToToolBar(JComponent toolBarComponent, List<ToolBarItemManager> items) {
-        for (ToolBarItemManager item : items) {
-            JButton button = item.getButton();
-            toolBarComponent.add(button);
-        }
+		Iterator<ToolBarItemManager> iterator = items.iterator();
+		while (iterator.hasNext()) {
+			ToolBarItemManager item = iterator.next();
+			JButton button = item.getButton();
+			toolBarComponent.add(button);
+		}
 	}
 
 	private void insertSeparator(JComponent toolBarComponent) {

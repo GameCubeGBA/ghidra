@@ -293,13 +293,13 @@ public class ParserContext {
 	 * Returns primary flow reference destination address for instruction or null
 	 */
 	public Address getFlowRefAddr() {
-		throw new SleighException("Flow reference (inst_ref) is undefined at " + addr);
+		throw new SleighException("Flow reference (inst_ref) is undefined at " + getAddr());
 	}
 
 	/**
 	 * Returns original flow destination address for instruction or null
 	 */
 	public Address getFlowDestAddr() {
-		throw new SleighException("Flow destination (inst_dest) is undefined at " + addr);
+		throw new SleighException("Flow destination (inst_dest) is undefined at " + getAddr());
 	}
 }

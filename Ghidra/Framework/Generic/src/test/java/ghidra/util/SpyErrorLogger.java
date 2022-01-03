@@ -96,7 +96,7 @@ public class SpyErrorLogger implements ErrorLogger, Iterable<String> {
 		}
 
 		fail("Did not find log message containing all these words: " + Arrays.toString(words) +
-			"\nInstead, had these messages: " + this);
+			"\nInstead, had these messages: " + toString());
 	}
 
 	@Override

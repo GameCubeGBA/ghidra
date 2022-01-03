@@ -54,7 +54,7 @@ public abstract class AbstractLocalOrParameterStoredInRegisterMsSymbol extends A
 		myBuilder.append(typeRecordNumber.getNumber());
 		attributes.emit(myBuilder);
 		builder.append(String.format("%s: %s, %s %s", getSymbolTypeName(), registerName.toString(),
-                myBuilder, name));
+			myBuilder.toString(), name));
 	}
 
 }

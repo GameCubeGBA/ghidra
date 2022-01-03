@@ -226,7 +226,7 @@ public class ExternalReferencesProvider extends ComponentProviderAdapter {
 		if (buf.length() > 0) {
 			Msg.showError(this, mainPanel, "Delete Failure",
 				"The following external reference names could not be deleted\n" +
-					"because they contain external locations:\n" + buf);
+					"because they contain external locations:\n" + buf.toString());
 		}
 	}
 
@@ -311,17 +311,20 @@ public class ExternalReferencesProvider extends ComponentProviderAdapter {
 			if (!Objects.equals(name, other.name)) {
 				return false;
 			}
-            return Objects.equals(path, other.path);
-        }
+			if (!Objects.equals(path, other.path)) {
+				return false;
+			}
+			return true;
+		}
 
 	}
 
 	class ExternalNamesTableModel extends AbstractSortedTableModel<ExternalNamesRow> {
 
-		static final int NAME_COL = 0;
-		static final int PATH_COL = 1;
-		static final String EXTERNAL_NAME = "Name";
-		static final String PATH_NAME = "Ghidra Program";
+		final static int NAME_COL = 0;
+		final static int PATH_COL = 1;
+		final static String EXTERNAL_NAME = "Name";
+		final static String PATH_NAME = "Ghidra Program";
 		private final List<String> columns = List.of(EXTERNAL_NAME, PATH_NAME);
 
 		private List<ExternalNamesRow> paths = new ArrayList<>();
@@ -390,8 +393,11 @@ public class ExternalReferencesProvider extends ComponentProviderAdapter {
 
 		@Override
 		public boolean isCellEditable(int rowIndex, int columnIndex) {
-            return columnIndex == NAME_COL;
-        }
+			if (columnIndex == NAME_COL) {
+				return true;
+			}
+			return false;
+		}
 
 		@Override
 		public List<ExternalNamesRow> getModelData() {

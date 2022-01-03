@@ -32,6 +32,7 @@ public class VTRelatedMatchImpl implements VTRelatedMatch {
     public VTRelatedMatchImpl(VTRelatedMatchType correlation,
             Address sourceAddress, Function sourceFunction,
             Address destinationAddress, Function destinationFunction) {
+        super();
         if (correlation == null) {
             throw new IllegalArgumentException("correlation");
         }

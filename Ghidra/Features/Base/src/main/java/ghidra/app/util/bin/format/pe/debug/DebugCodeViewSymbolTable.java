@@ -29,16 +29,16 @@ import java.util.*;
  * code view symbol table.
  */
 public class DebugCodeViewSymbolTable implements StructConverter {
-	public static final int MAGIC_NB_09 =
+	public final static int MAGIC_NB_09 = 
 		DebugCodeViewConstants.SIGNATURE_NB << 16 |
 		DebugCodeViewConstants.VERSION_09;
-	public static final int MAGIC_NB_11 =
+	public final static int MAGIC_NB_11 = 
 		DebugCodeViewConstants.SIGNATURE_NB << 16 |
 		DebugCodeViewConstants.VERSION_11;
-	public static final int MAGIC_N1_12 =
+	public final static int MAGIC_N1_12 = 
 		DebugCodeViewConstants.SIGNATURE_N1 << 16 |
 		DebugCodeViewConstants.VERSION_12;
-	public static final int MAGIC_N1_13 =
+	public final static int MAGIC_N1_13 = 
 		DebugCodeViewConstants.SIGNATURE_N1 << 16 |
 		DebugCodeViewConstants.VERSION_13;
 

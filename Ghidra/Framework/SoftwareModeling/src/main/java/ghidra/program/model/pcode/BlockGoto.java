@@ -34,7 +34,8 @@ public class BlockGoto extends BlockGraph {
 	private int gototype;			// Type of goto  (1=plaingoto 2=break 4=continue)
 	
 	public BlockGoto() {
-        gototarget = null;
+		super();
+		gototarget = null;
 		gototype = 1;
 		blocktype = PcodeBlock.GOTO;
 	}

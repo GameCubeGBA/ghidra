@@ -57,7 +57,7 @@ public class ChooseMatchTagAction extends DockingAction {
 	public void actionPerformed(ActionContext context) {
 		VTMatchContext matchContext = (VTMatchContext) context;
 		List<VTMatch> matches = matchContext.getSelectedMatches();
-		if (matches.isEmpty()) {
+		if (matches.size() == 0) {
 			return;
 		}
 		JComponent component = context.getComponentProvider().getComponent();
@@ -66,7 +66,7 @@ public class ChooseMatchTagAction extends DockingAction {
 
 	private void editTag(final List<VTMatch> matches, final JComponent component) {
 
-		if (matches == null || matches.isEmpty()) {
+		if (matches == null || matches.size() == 0) {
 			return;
 		}
 		VTSession session = controller.getSession();
@@ -88,8 +88,11 @@ public class ChooseMatchTagAction extends DockingAction {
 		}
 		VTMatchContext matchContext = (VTMatchContext) context;
 		List<VTMatch> matches = matchContext.getSelectedMatches();
-        return !matches.isEmpty();
-    }
+		if (matches.size() == 0) {
+			return false;
+		}
+		return true;
+	}
 
 //==================================================================================================
 // Inner Classes    

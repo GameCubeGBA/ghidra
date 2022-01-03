@@ -38,7 +38,8 @@ import ghidra.util.exception.DuplicateNameException;
 public class HTMLDataTypeRepresentationTest extends AbstractGenericTest {
 
 	public HTMLDataTypeRepresentationTest() {
-    }
+		super();
+	}
 
 	@Test
 	public void testCompositeWithFieldNameDifference() {

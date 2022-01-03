@@ -23,7 +23,7 @@ import ghidra.framework.options.Options;
  */
 public interface FGLayoutOptions {
 
-	String OWNER = FunctionGraphPlugin.class.getSimpleName();
+	public static final String OWNER = FunctionGraphPlugin.class.getSimpleName();
 
 	/**
 	 * Called during setup for this class to register its options with the given {@link Options}
@@ -31,7 +31,7 @@ public interface FGLayoutOptions {
 	 * 
 	 * @param options the tool options
 	 */
-    void registerOptions(Options options);
+	public void registerOptions(Options options);
 
 	/**
 	 * Called when the given {@link Options} object has changed.  This class will update its 
@@ -39,7 +39,7 @@ public interface FGLayoutOptions {
 	 * 
 	 * @param options the tool options
 	 */
-    void loadOptions(Options options);
+	public void loadOptions(Options options);
 
 	/**
 	 * Returns true if the given option name, when changed, requires that the current graph be
@@ -48,5 +48,5 @@ public interface FGLayoutOptions {
 	 * @param optionName the changed option name
 	 * @return true if a relayout is required
 	 */
-    boolean optionChangeRequiresRelayout(String optionName);
+	public boolean optionChangeRequiresRelayout(String optionName);
 }

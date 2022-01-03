@@ -348,7 +348,9 @@ public class MatchSymbol {
 		Address symAddr = symbol.getAddress();
 		if (symAddr != null) {
 			Data data = prog.getListing().getDataAt(symAddr);
-            return (data != null) && data.hasStringValue();
+			if ((data != null) && data.hasStringValue()) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -443,7 +445,10 @@ public class MatchSymbol {
 			if (!SystemUtilities.isEqual(bSymbol, other.bSymbol)) {
 				return false;
 			}
-            return bProg == other.bProg;
-        }
+			if (bProg != other.bProg) {
+				return false;
+			}
+			return true;
+		}
 	}
 }

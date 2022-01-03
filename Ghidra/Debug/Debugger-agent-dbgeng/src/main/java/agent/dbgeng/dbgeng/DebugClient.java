@@ -28,11 +28,11 @@ import ghidra.comm.util.BitmaskUniverse;
  * A wrapper for {@code IDebugClient} and its newer variants.
  */
 public interface DebugClient extends DebugClientReentrant {
-	enum ExecutionState {
+	public static enum ExecutionState {
 		RUNNING, STOPPED;
 	}
 
-	enum DebugStatus {
+	public static enum DebugStatus {
 		NO_CHANGE(false, null, 13), //
 		GO(true, ExecutionState.RUNNING, 10), //
 		GO_HANDLED(true, ExecutionState.RUNNING, 9), //
@@ -80,7 +80,7 @@ public interface DebugClient extends DebugClientReentrant {
 		}
 	}
 
-	enum SessionStatus {
+	public static enum SessionStatus {
 		ACTIVE, //
 		END_SESSION_ACTIVE_TERMINATE,//
 		END_SESSION_ACTIVE_DETACH, //
@@ -92,7 +92,7 @@ public interface DebugClient extends DebugClientReentrant {
 		;
 	}
 
-	enum ChangeDebuggeeState implements BitmaskUniverse {
+	public static enum ChangeDebuggeeState implements BitmaskUniverse {
 		ALL(0xffffffff), //
 		REGISTERS(1 << 0), //
 		DATA(1 << 1), //
@@ -111,7 +111,7 @@ public interface DebugClient extends DebugClientReentrant {
 		}
 	}
 
-	enum ChangeEngineState implements BitmaskUniverse {
+	public static enum ChangeEngineState implements BitmaskUniverse {
 		ALL(0xffffffff), //
 		CURRENT_THREAD(1 << 0), //
 		EFFECTIVE_PROCESSOR(1 << 1), //
@@ -142,7 +142,7 @@ public interface DebugClient extends DebugClientReentrant {
 		}
 	}
 
-	enum ChangeSymbolState implements BitmaskUniverse {
+	public static enum ChangeSymbolState implements BitmaskUniverse {
 		ALL(0xffffffff), //
 		LOADS(1 << 0), //
 		UNLOADS(1 << 1), //
@@ -164,7 +164,7 @@ public interface DebugClient extends DebugClientReentrant {
 		}
 	}
 
-	enum DebugAttachFlags implements BitmaskUniverse {
+	public static enum DebugAttachFlags implements BitmaskUniverse {
 		DEFAULT(0), //
 		NONINVASIVE(1 << 0), //
 		EXISTING(1 << 1), //
@@ -186,7 +186,7 @@ public interface DebugClient extends DebugClientReentrant {
 		}
 	}
 
-	enum DebugCreateFlags implements BitmaskUniverse {
+	public static enum DebugCreateFlags implements BitmaskUniverse {
 		DEBUG_PROCESS(WinBase.DEBUG_PROCESS), //
 		DEBUG_ONLY_THIS_PROCESS(WinBase.DEBUG_ONLY_THIS_PROCESS), //
 		CREATE_SUSPENDED(WinBase.CREATE_SUSPENDED), //
@@ -240,7 +240,7 @@ public interface DebugClient extends DebugClientReentrant {
 		}
 	}
 
-	enum DebugEndSessionFlags {
+	public enum DebugEndSessionFlags {
 		DEBUG_END_PASSIVE(0x00000000),
 		DEBUG_END_ACTIVE_TERMINATE(0x00000001),
 		DEBUG_END_ACTIVE_DETACH(0x00000002),
@@ -258,7 +258,7 @@ public interface DebugClient extends DebugClientReentrant {
 		}
 	}
 
-	enum DebugOutputFlags {
+	public enum DebugOutputFlags {
 		DEBUG_OUTPUT_NORMAL(0x1), //
 		DEBUG_OUTPUT_ERROR(0x2), //
 		DEBUG_OUTPUT_WARNING(0x4), //

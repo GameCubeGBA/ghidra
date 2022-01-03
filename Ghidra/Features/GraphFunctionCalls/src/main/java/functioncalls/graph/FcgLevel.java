@@ -191,8 +191,11 @@ public class FcgLevel implements Comparable<FcgLevel> {
 		if (direction != other.direction) {
 			return false;
 		}
-        return row == other.row;
-    }
+		if (row != other.row) {
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * Returns the row of this vertex 
@@ -205,7 +208,7 @@ public class FcgLevel implements Comparable<FcgLevel> {
 	@Override
 	public int compareTo(FcgLevel l2) {
 
-		int result = direction.compareTo(l2.direction);
+		int result = getDirection().compareTo(l2.getDirection());
 		if (result != 0) {
 			return result; // compare by direction first In on top; Out on bottom
 		}

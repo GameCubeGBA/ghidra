@@ -88,7 +88,7 @@ class CommentsXmlMgr {
 				throw new CancelledException();
 			}
 			element = parser.next();
-			if (!"COMMENT".equals(element.getName())) {
+			if (!element.getName().equals("COMMENT")) {
 				break;
 			}
 			if (element.isStart()) {
@@ -157,7 +157,7 @@ class CommentsXmlMgr {
 				// if a comment already exists, then merge...
 				//
 				String currCmt = cu.getComment(commentType);
-				if (currCmt == null || currCmt.isEmpty()) {
+				if (currCmt == null || currCmt.length() == 0) {
 					cu.setComment(commentType, comments);
 				}
 				else if (!currCmt.contains(comments)) {

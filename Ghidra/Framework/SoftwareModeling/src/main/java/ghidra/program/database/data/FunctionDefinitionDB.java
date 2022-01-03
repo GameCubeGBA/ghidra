@@ -136,7 +136,7 @@ class FunctionDefinitionDB extends DataTypeDB implements FunctionDefinition {
 			if (hasVarArgs) {
 				buf.append(VAR_ARGS_DISPLAY_STRING);
 			}
-			else if (parameters.isEmpty()) {
+			else if (parameters.size() == 0) {
 				buf.append(VOID_PARAM_DISPLAY_STRING);
 			}
 			buf.append(")");
@@ -259,10 +259,12 @@ class FunctionDefinitionDB extends DataTypeDB implements FunctionDefinition {
 		lock.acquire();
 		try {
 			checkDeleted();
-            for (ParameterDefinitionDB param : parameters) {
-                param.getDataType().removeParent(this);
-                paramAdapter.removeRecord(param.getKey());
-            }
+			Iterator<ParameterDefinitionDB> it = parameters.iterator();
+			while (it.hasNext()) {
+				ParameterDefinitionDB param = it.next();
+				param.getDataType().removeParent(this);
+				paramAdapter.removeRecord(param.getKey());
+			}
 			parameters.clear();
 			for (int i = 0; i < args.length; i++) {
 				DataType type =
@@ -332,11 +334,12 @@ class FunctionDefinitionDB extends DataTypeDB implements FunctionDefinition {
 		try {
 			checkDeleted();
 			int n = parameters.size();
-            for (ParameterDefinitionDB param : parameters) {
-                if (param.getDataType() == dt) {
-                    param.setDataType(DataType.DEFAULT);
-                }
-            }
+			for (int i = 0; i < n; i++) {
+				ParameterDefinitionDB param = parameters.get(i);
+				if (param.getDataType() == dt) {
+					param.setDataType(DataType.DEFAULT);
+				}
+			}
 			if (dt == getReturnType()) {
 				setReturnType(DataType.DEFAULT);
 			}
@@ -439,17 +442,19 @@ class FunctionDefinitionDB extends DataTypeDB implements FunctionDefinition {
 				}
 			}
 			int n = parameters.size();
-            for (ParameterDefinitionDB param : parameters) {
-                if (param.getDataType() == oldDt) {
-                    try {
-                        param.setDataType(newDt);
-                    } catch (IllegalArgumentException e) {
-                        // oldDt replaced with incompatible type - treat as removal
-                        dataTypeDeleted(oldDt);
-                        return;
-                    }
-                }
-            }
+			for (int i = 0; i < n; i++) {
+				ParameterDefinitionDB param = parameters.get(i);
+				if (param.getDataType() == oldDt) {
+					try {
+						param.setDataType(newDt);
+					}
+					catch (IllegalArgumentException e) {
+						// oldDt replaced with incompatible type - treat as removal
+						dataTypeDeleted(oldDt);
+						return;
+					}
+				}
+			}
 		}
 		finally {
 			lock.release();

@@ -69,7 +69,7 @@ public class CompositeTypeApplier extends AbstractComplexTypeApplier {
 
 	CppCompositeType getClassType() {
 		if (definitionApplier != null) {
-			return ((CompositeTypeApplier) definitionApplier).classType;
+			return ((CompositeTypeApplier) definitionApplier).getClassTypeInternal();
 		}
 		return classType;
 	}
@@ -91,7 +91,7 @@ public class CompositeTypeApplier extends AbstractComplexTypeApplier {
 		AbstractComplexTypeApplier alternativeApplier = getAlternativeTypeApplier();
 		if (alternativeApplier != null) {
 			dataType = alternativeApplier.getDataTypeInternal();
-			classType = ((CompositeTypeApplier) alternativeApplier).classType;
+			classType = ((CompositeTypeApplier) alternativeApplier).getClassTypeInternal();
 		}
 		if (dataType != null) {
 			return;
@@ -405,7 +405,7 @@ public class CompositeTypeApplier extends AbstractComplexTypeApplier {
 	// Taken from PdbUtil without change.  Would have had to change access on class PdbUtil and
 	//  this ensureSize method to public to make it accessible.  Can revert to using PdbUtil
 	//  once we move this new module from Contrib to Features/PDB.
-    static final void clearComponents(Composite composite) {
+	final static void clearComponents(Composite composite) {
 		if (composite instanceof Structure) {
 			((Structure) composite).deleteAll();
 		}
@@ -463,10 +463,10 @@ public class CompositeTypeApplier extends AbstractComplexTypeApplier {
 		FieldListTypeApplier fieldListApplier = (FieldListTypeApplier) applier;
 		AbstractFieldListMsType fieldListType =
 			((AbstractFieldListMsType) fieldListApplier.getMsType());
-		if (!fieldListType.getBaseClassList().isEmpty()) {
+		if (fieldListType.getBaseClassList().size() != 0) {
 			return true;
 		}
-		return (!fieldListType.getBaseClassList().isEmpty());
+		return (fieldListType.getBaseClassList().size() != 0);
 	}
 
 	private boolean hasHiddenComponents() {
@@ -496,8 +496,8 @@ public class CompositeTypeApplier extends AbstractComplexTypeApplier {
 		AbstractFieldListMsType fieldListType =
 			((AbstractFieldListMsType) fieldListApplier.getMsType());
 
-		return (!fieldListType.getMethodList().isEmpty() ||
-                !fieldListType.getBaseClassList().isEmpty());
+		return (fieldListType.getMethodList().size() != 0 ||
+			fieldListType.getBaseClassList().size() != 0);
 	}
 
 	private void addClassTypeBaseClasses(Composite composite, FieldListTypeApplier fieldListApplier)

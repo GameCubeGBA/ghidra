@@ -30,7 +30,7 @@ import ghidra.util.task.TaskMonitor;
 
 public class X86Analyzer extends ConstantPropagationAnalyzer {
 
-	private static final String PROCESSOR_NAME = "x86";
+	private final static String PROCESSOR_NAME = "x86";
 
 	public X86Analyzer() {
 		super(PROCESSOR_NAME);
@@ -53,7 +53,7 @@ public class X86Analyzer extends ConstantPropagationAnalyzer {
 			@Override
 			public boolean evaluateContext(VarnodeContext context, Instruction instr) {
 				String mnemonic = instr.getMnemonicString();
-				if ("LEA".equals(mnemonic)) {
+				if (mnemonic.equals("LEA")) {
 					Register reg = instr.getRegister(0);
 					if (reg != null) {
 						BigInteger val = context.getValue(reg, false);

@@ -76,7 +76,7 @@ public class VariableTextLine implements ValidatableLine {
 
 	@Override
 	public boolean isDiffColored() {
-		return variableTypeColor != null || variableNameColor != null;
+		return getVariableTypeColor() != null || getVariableNameColor() != null;
 	}
 
 	public Color getVariableTypeColor() {

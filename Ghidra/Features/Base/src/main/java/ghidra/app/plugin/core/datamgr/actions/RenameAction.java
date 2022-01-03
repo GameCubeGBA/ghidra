@@ -37,8 +37,11 @@ public class RenameAction extends DockingAction {
 	@Override
 	public boolean isAddToPopup(ActionContext context) {
 		GTreeNode node = getSelectedNode(context);
-        return node != null && !(node instanceof ArchiveRootNode) && !(node instanceof ArchiveNode);
-    }
+		if (node == null || node instanceof ArchiveRootNode || node instanceof ArchiveNode) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public boolean isEnabledForContext(ActionContext context) {

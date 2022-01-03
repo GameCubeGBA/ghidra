@@ -22,11 +22,11 @@ import org.apache.commons.collections4.list.AbstractListDecorator;
 import ghidra.dbg.util.CollectionUtils.AbstractEmptyList;
 
 public interface TargetStringList extends List<String> {
-	class EmptyTargetStringList extends AbstractEmptyList<String>
+	public static class EmptyTargetStringList extends AbstractEmptyList<String>
 			implements TargetStringList {
 	}
 
-	class ImmutableTargetStringList extends AbstractListDecorator<String>
+	public static class ImmutableTargetStringList extends AbstractListDecorator<String>
 			implements TargetStringList {
 		public ImmutableTargetStringList(String... strings) {
 			super(List.of(strings));
@@ -37,21 +37,21 @@ public interface TargetStringList extends List<String> {
 		}
 	}
 
-	class MutableTargetStringList extends ArrayList<String>
+	public static class MutableTargetStringList extends ArrayList<String>
 			implements TargetStringList {
 	}
 
-	TargetStringList EMPTY = new EmptyTargetStringList();
+	public static final TargetStringList EMPTY = new EmptyTargetStringList();
 
-	static TargetStringList of() {
+	public static TargetStringList of() {
 		return EMPTY;
 	}
 
-	static TargetStringList of(String... strings) {
+	public static TargetStringList of(String... strings) {
 		return new ImmutableTargetStringList(strings);
 	}
 
-	static TargetStringList copyOf(Collection<String> strings) {
+	public static TargetStringList copyOf(Collection<String> strings) {
 		return new ImmutableTargetStringList(strings);
 	}
 }

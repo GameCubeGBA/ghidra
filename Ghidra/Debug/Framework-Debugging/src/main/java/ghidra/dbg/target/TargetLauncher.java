@@ -61,7 +61,7 @@ public interface TargetLauncher extends TargetObject {
 		TargetParameterMap PARAMETERS = TargetMethod.makeParameters(PARAMETER_CMDLINE_ARGS);
 
 		@Override
-        default TargetParameterMap getParameters() {
+		default public TargetParameterMap getParameters() {
 			return PARAMETERS;
 		}
 
@@ -76,17 +76,17 @@ public interface TargetLauncher extends TargetObject {
 		 * @param args the arguments
 		 * @return a future which completes when the command has been processed
 		 */
-        CompletableFuture<Void> launch(List<String> args);
+		public CompletableFuture<Void> launch(List<String> args);
 
 		/**
 		 * @see #launch(List)
 		 */
-		default CompletableFuture<Void> launch(String... args) {
+		public default CompletableFuture<Void> launch(String... args) {
 			return launch(Arrays.asList(args));
 		}
 
 		@Override
-        default CompletableFuture<Void> launch(Map<String, ?> args) {
+		public default CompletableFuture<Void> launch(Map<String, ?> args) {
 			return launch(CmdLineParser.tokenize(PARAMETER_CMDLINE_ARGS.get(args)));
 		}
 	}
@@ -125,10 +125,10 @@ public interface TargetLauncher extends TargetObject {
 	}
 
 	@TargetAttributeType(
-            name = TargetMethod.PARAMETERS_ATTRIBUTE_NAME,
-            required = true,
-            hidden = true)
-    default TargetParameterMap getParameters() {
+		name = TargetMethod.PARAMETERS_ATTRIBUTE_NAME,
+		required = true,
+		hidden = true)
+	default public TargetParameterMap getParameters() {
 		return TargetMethod.getParameters(this);
 	}
 
@@ -138,5 +138,5 @@ public interface TargetLauncher extends TargetObject {
 	 * @param args the map of arguments.
 	 * @return a future which completes when the command is completed
 	 */
-    CompletableFuture<Void> launch(Map<String, ?> args);
+	public CompletableFuture<Void> launch(Map<String, ?> args);
 }

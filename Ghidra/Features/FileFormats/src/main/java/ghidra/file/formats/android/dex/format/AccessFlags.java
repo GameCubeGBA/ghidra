@@ -22,87 +22,87 @@ public final class AccessFlags {
 	/**
 	 * public: visible everywhere
 	 */
-    public static final int ACC_PUBLIC = 0x1;
+	public final static int ACC_PUBLIC = 0x1;
 	/**
 	 * private: only visible to defining class 
 	 */
-    public static final int ACC_PRIVATE = 0x2;
+	public final static int ACC_PRIVATE = 0x2;
 	/**
 	 * protected: visible to package and subclasses
 	 */
-    public static final int ACC_PROTECTED = 0x4;
+	public final static int ACC_PROTECTED = 0x4;
 	/**
 	 * static: is not constructed with an outer this reference
 	 */
-    public static final int ACC_STATIC = 0x8;
+	public final static int ACC_STATIC = 0x8;
 	/**
 	 * final: not subclassable
 	 * final: immutable after construction
 	 * final: not overridable
 	 */
-    public static final int ACC_FINAL = 0x10;
+	public final static int ACC_FINAL = 0x10;
 	/**
 	 * synchronized: associated lock automatically acquired around call to this method. 
 	 * Note: This is only valid to set when ACC_NATIVE is also set.
 	 */
-    public static final int ACC_SYNCHRONIZED = 0x20;
+	public final static int ACC_SYNCHRONIZED = 0x20;
 	/**
 	 * volatile: special access rules to help with thread safety
 	 */
-    public static final int ACC_VOLATILE = 0x40;
+	public final static int ACC_VOLATILE = 0x40;
 	/**
 	 * bridge method, added automatically by compiler as a type-safe bridge
 	 */
-    public static final int ACC_BRIDGE = 0x40;
+	public final static int ACC_BRIDGE = 0x40;
 	/**
 	 * transient: not to be saved by default serialization
 	 */
-    public static final int ACC_TRANSIENT = 0x80;
+	public final static int ACC_TRANSIENT = 0x80;
 	/**
 	 * last argument should be treated as a "rest" argument by compiler
 	 */
-    public static final int ACC_VARARGS = 0x80;
+	public final static int ACC_VARARGS = 0x80;
 	/**
 	 * native: implemented in native code
 	 */
-    public static final int ACC_NATIVE = 0x100;
+	public final static int ACC_NATIVE = 0x100;
 	/**
 	 * interface: multiply-implementable abstract class
 	 */
-    public static final int ACC_INTERFACE = 0x200;
+	public final static int ACC_INTERFACE = 0x200;
 	/**
 	 * abstract: not directly instantiable
 	 * abstract: unimplemented by this class
 	 */
-    public static final int ACC_ABSTRACT = 0x400;
+	public final static int ACC_ABSTRACT = 0x400;
 	/**
 	 * strictfp: strict rules for floating-point arithmetic
 	 */
-    public static final int ACC_STRICT = 0x800;
+	public final static int ACC_STRICT = 0x800;
 	/**
 	 * not directly defined in source code
 	 */
-    public static final int ACC_SYNTHETIC = 0x1000;
+	public final static int ACC_SYNTHETIC = 0x1000;
 	/**
 	 * declared as an annotation class
 	 */
-    public static final int ACC_ANNOTATION = 0x2000;
+	public final static int ACC_ANNOTATION = 0x2000;
 	/**
 	 * declared as an enumerated type declared as an enumerated value
 	 */
-    public static final int ACC_ENUM = 0x4000;
+	public final static int ACC_ENUM = 0x4000;
 	// (unused) 0x8000
 	/**
 	 * constructor method (class or instance initializer)
 	 */
-    public static final int ACC_CONSTRUCTOR = 0x10000;
+	public final static int ACC_CONSTRUCTOR = 0x10000;
 	/**
 	 * declared synchronized. 
 	 * Note: This has no effect on execution (other than in reflection of this flag, per se).
 	 */
-    public static final int ACC_DECLARED_SYNCHRONIZED = 0x20000;
+	public final static int ACC_DECLARED_SYNCHRONIZED = 0x20000;
 
-	public static final String toString(int value) {
+	public final static String toString(int value) {
 		StringBuilder builder = new StringBuilder();
 		try {
 			Field[] fields = AccessFlags.class.getDeclaredFields();

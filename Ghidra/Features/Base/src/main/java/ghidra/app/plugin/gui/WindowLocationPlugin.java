@@ -75,7 +75,12 @@ public class WindowLocationPlugin extends Plugin {
 			windowPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
 			Toolkit toolkit = Toolkit.getDefaultToolkit();
-			AWTEventListener listener = event -> windowPanel.repaint();
+			AWTEventListener listener = new AWTEventListener() {
+				@Override
+				public void eventDispatched(AWTEvent event) {
+					windowPanel.repaint();
+				}
+			};
 			toolkit.addAWTEventListener(listener, AWTEvent.MOUSE_MOTION_EVENT_MASK);
 			toolkit.addAWTEventListener(listener, AWTEvent.MOUSE_EVENT_MASK);
 		}
@@ -430,8 +435,11 @@ public class WindowLocationPlugin extends Plugin {
 			}
 
 			WindowInfo other = (WindowInfo) obj;
-            return Objects.equals(window, other.window);
-        }
+			if (!Objects.equals(window, other.window)) {
+				return false;
+			}
+			return true;
+		}
 
 		@Override
 		public String toString() {

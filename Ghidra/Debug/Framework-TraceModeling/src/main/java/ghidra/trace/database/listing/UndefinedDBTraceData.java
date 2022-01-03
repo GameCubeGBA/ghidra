@@ -83,13 +83,13 @@ public class UndefinedDBTraceData implements DBTraceDataAdapter, DBTraceSpaceKey
 	@Override
 	public AddressRange getRange() {
 		// TODO: Cache this?
-		return new AddressRangeImpl(getMinAddress(), address);
+		return new AddressRangeImpl(getMinAddress(), getMaxAddress());
 	}
 
 	@Override
 	public TraceAddressSnapRange getBounds() {
 		// TODO: Cache this?
-		return new ImmutableTraceAddressSnapRange(getMinAddress(), address, lifespan);
+		return new ImmutableTraceAddressSnapRange(getMinAddress(), getMaxAddress(), getLifespan());
 	}
 
 	@Override
@@ -156,7 +156,7 @@ public class UndefinedDBTraceData implements DBTraceDataAdapter, DBTraceSpaceKey
 			// TODO: 0-fill instead? Will need to check memory space bounds.
 			return 0;
 		}
-		return mem.getBytes(snap, address.add(addressOffset), buffer);
+		return mem.getBytes(getStartSnap(), address.add(addressOffset), buffer);
 	}
 
 	@Override
@@ -233,11 +233,6 @@ public class UndefinedDBTraceData implements DBTraceDataAdapter, DBTraceSpaceKey
 	}
 
 	@Override
-	public TraceData getComponentAt(int offset) {
-		return null;
-	}
-
-	@Override
 	public Data getComponentContaining(int offset) {
 		return null;
 	}
@@ -270,7 +265,7 @@ public class UndefinedDBTraceData implements DBTraceDataAdapter, DBTraceSpaceKey
 
 	@Override
 	public DBTraceDataSettingsOperations getSettingsSpace(boolean createIfAbsent) {
-		return trace.getDataSettingsAdapter().get(this, createIfAbsent);
+		return getTrace().getDataSettingsAdapter().get(this, createIfAbsent);
 	}
 
 	@Override

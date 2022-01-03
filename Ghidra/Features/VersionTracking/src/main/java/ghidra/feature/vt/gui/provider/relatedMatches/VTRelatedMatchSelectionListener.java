@@ -20,5 +20,5 @@ import ghidra.feature.vt.api.util.VTRelatedMatch;
 
 @FunctionalInterface
 public interface VTRelatedMatchSelectionListener {
-    void relatedMatchSelected(VTRelatedMatch relatedMatch);
+    public void relatedMatchSelected( VTRelatedMatch relatedMatch );
 }

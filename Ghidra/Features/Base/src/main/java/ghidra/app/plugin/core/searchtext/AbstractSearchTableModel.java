@@ -32,8 +32,8 @@ import ghidra.util.task.TaskMonitor;
  */
 public abstract class AbstractSearchTableModel extends ProgramLocationPreviewTableModel {
 
-	private static final int DEFAULT_SEARCH_LIMIT = 500;
-	static final String TITLE = "Text Search";
+	private final static int DEFAULT_SEARCH_LIMIT = 500;
+	final static String TITLE = "Text Search";
 
 	protected SearchOptions options;
 	protected int searchLimit;

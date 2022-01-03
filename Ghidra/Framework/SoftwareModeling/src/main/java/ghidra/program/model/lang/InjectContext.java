@@ -41,7 +41,8 @@ public class InjectContext {
 		private int state;
 
 		Handler(AddressFactory adFact) {
-            state = 0;
+			super();
+			state = 0;
 			addrFactory = adFact;
 		}
 

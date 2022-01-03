@@ -45,7 +45,8 @@ public class ProgramDiff3Test extends AbstractProgramDiffTest {
 
 	/** Creates new ProgramDiffTest */
 	public ProgramDiff3Test() {
-    }
+		super();
+	}
 
 	/**
 	 * @see TestCase#setUp()

@@ -26,24 +26,24 @@ public interface MergeResolver {
 	/**
 	 * Get the name of this MergeResolver.
 	 */
-    String getName();
+	public String getName();
 
 	/**
 	 * Get the description of what this MergeResolver does.
 	 */
-    String getDescription();
+	public String getDescription();	
 
 	/**
 	 * Notification that the apply button was hit.
 	 *
 	 */
-    void apply();
+	public void apply();
 	 
 	/**
 	 * Notification that the merge process was canceled.
 	 *
 	 */
-    void cancel();
+	public void cancel();
 	
 	/**
 	 * Perform the merge process.
@@ -52,7 +52,7 @@ public interface MergeResolver {
 	 * @throws Exception if the merge encounters an error and the merge process
 	 * should not continue.
 	 */
-    void merge(TaskMonitor monitor) throws Exception;
+	public void merge(TaskMonitor monitor) throws Exception;
 
 	/**
 	 * Gets identifiers for the merge phases handled by this MergeResolver.
@@ -72,5 +72,5 @@ public interface MergeResolver {
 	 * }.
 	 * @return an array of phases.
 	 */
-    String[][] getPhases();
+	public String[][] getPhases();
 }

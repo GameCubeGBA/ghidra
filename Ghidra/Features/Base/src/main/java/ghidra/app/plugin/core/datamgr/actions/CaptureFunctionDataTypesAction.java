@@ -92,8 +92,15 @@ public class CaptureFunctionDataTypesAction extends DockingAction {
 		final PluginTool tool = plugin.getTool();
 		CaptureFunctionDataTypesCmd cmd =
 			new CaptureFunctionDataTypesCmd(manager, currentSelection,
-                    command -> tool.setStatusInfo("Captured function data types to \"" +
-                        manager.getName() + "\"."));
+				new CaptureFunctionDataTypesListener() {
+
+					@Override
+					public void captureFunctionDataTypesCompleted(
+							CaptureFunctionDataTypesCmd command) {
+						tool.setStatusInfo("Captured function data types to \"" +
+							manager.getName() + "\".");
+					}
+				});
 		tool.executeBackgroundCommand(cmd, program);
 	}
 

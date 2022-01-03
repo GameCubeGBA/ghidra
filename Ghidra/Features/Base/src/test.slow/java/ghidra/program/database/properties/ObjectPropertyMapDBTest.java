@@ -54,7 +54,8 @@ public class ObjectPropertyMapDBTest extends AbstractGhidraHeadedIntegrationTest
 	 * @param arg0
 	 */
 	public ObjectPropertyMapDBTest() {
-    }
+		super();
+	}
 
 	/*
 	 * @see TestCase#setUp()

@@ -31,8 +31,8 @@ import ghidra.test.ProjectTestUtils;
  */
 public class DeleteToolTest extends AbstractGhidraHeadedIntegrationTest {
 
-	private static final String PROJECT_DIRECTORY = AbstractGTest.getTestDirectoryPath();
-	private static final String TOOL_NAME = "TestTool";
+	private final static String PROJECT_DIRECTORY = AbstractGTest.getTestDirectoryPath();
+	private final static String TOOL_NAME = "TestTool";
 
 	private PluginTool runningTool;
 	private Project project;
@@ -65,9 +65,12 @@ public class DeleteToolTest extends AbstractGhidraHeadedIntegrationTest {
 		toolChest.remove(TOOL_NAME);
 
 		// create a new running tool
-		runSwing(() -> {
-            runningTool = ProjectTestUtils.getTool(project, null);
-        });
+		runSwing(new Runnable() {
+			@Override
+			public void run() {
+				runningTool = ProjectTestUtils.getTool(project, null);
+			}
+		});
 		try {
 			runningTool.setToolName(TOOL_NAME);
 
@@ -94,7 +97,12 @@ public class DeleteToolTest extends AbstractGhidraHeadedIntegrationTest {
 			}
 		}
 		finally {
-			runSwing(() -> runningTool.close());
+			runSwing(new Runnable() {
+				@Override
+				public void run() {
+					runningTool.close();
+				}
+			});
 		}
 	}
 

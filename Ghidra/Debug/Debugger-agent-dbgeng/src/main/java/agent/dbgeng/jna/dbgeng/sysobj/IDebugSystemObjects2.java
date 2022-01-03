@@ -20,7 +20,7 @@ import com.sun.jna.platform.win32.Guid.IID;
 import agent.dbgeng.jna.dbgeng.UnknownWithUtils.VTableIndex;
 
 public interface IDebugSystemObjects2 extends IDebugSystemObjects {
-	IID IID_IDEBUG_SYSTEM_OBJECTS2 = new IID("0ae9f5ff-1852-4679-b055-494bee6407ee");
+	final IID IID_IDEBUG_SYSTEM_OBJECTS2 = new IID("0ae9f5ff-1852-4679-b055-494bee6407ee");
 
 	enum VTIndices2 implements VTableIndex {
 		GET_CURRENT_PROCESS_UP_TIME, //

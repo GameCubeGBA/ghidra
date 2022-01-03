@@ -26,8 +26,8 @@ import ghidra.framework.plugintool.ServiceProvider;
  * This class is used to model the table in the ComputeChecksumsProvider.
  */
 public class ChecksumTableModel extends GDynamicColumnTableModel<ChecksumAlgorithm, Object> {
-	public static final int NAME_COL = 0;
-	public static final int VALUE_COL = 1;
+	final public static int NAME_COL = 0;
+	final public static int VALUE_COL = 1;
 
 	private List<ChecksumAlgorithm> checksumList;
 	private boolean isHex;

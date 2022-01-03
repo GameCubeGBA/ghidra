@@ -76,14 +76,14 @@ class PrototypeManager {
 	private ProgramContext programContext;
 	private Register baseContextRegister;
 
-	static final int BYTES_COL = 0;
-	static final int ADDR_COL = 1;
-	static final int DELAY_COL = 2;
+	final static int BYTES_COL = 0;
+	final static int ADDR_COL = 1;
+	final static int DELAY_COL = 2;
 
-	static final String PROTO_TABLE_NAME = "Prototypes";
-	static final Schema PROTO_SCHEMA = createPrototypeSchema();
-	static final String CONTEXT_TABLE_NAME = "ContextTable";
-	static final Schema REGISTER_SCHEMA = createRegisterSchema();
+	final static String PROTO_TABLE_NAME = "Prototypes";
+	final static Schema PROTO_SCHEMA = createPrototypeSchema();
+	final static String CONTEXT_TABLE_NAME = "ContextTable";
+	final static Schema REGISTER_SCHEMA = createRegisterSchema();
 
 	private static Schema createPrototypeSchema() {
 		return new Schema(1, "Keys",

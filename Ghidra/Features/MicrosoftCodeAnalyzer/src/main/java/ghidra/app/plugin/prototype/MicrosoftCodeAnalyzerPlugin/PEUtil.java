@@ -37,7 +37,7 @@ import ghidra.program.model.reloc.Relocation;
 
 public class PEUtil {
 
-	public static boolean canAnalyze(Program program) {
+	static public boolean canAnalyze(Program program) {
 		String format = program.getExecutableFormat();
 		if (format.equals(PeLoader.PE_NAME)) {
 			return true;
@@ -63,7 +63,7 @@ public class PEUtil {
 		return false;
 	}
 
-	public static boolean isVisualStudioOrClangPe(Program program) {
+	static public boolean isVisualStudioOrClangPe(Program program) {
 		return program.getExecutableFormat().equals(PeLoader.PE_NAME) &&
 			(program.getCompiler().equals(CompilerEnum.VisualStudio.toString()) ||
 				program.getCompiler().equals(CompilerEnum.Clang.toString()));

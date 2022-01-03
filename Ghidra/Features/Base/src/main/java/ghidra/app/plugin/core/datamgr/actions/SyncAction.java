@@ -74,8 +74,12 @@ public abstract class SyncAction extends DockingAction implements Comparable<Syn
 
 	@Override
 	public boolean isEnabledForContext(ActionContext context) {
-        return context instanceof DataTypesActionContext;
-    }
+		if (!(context instanceof DataTypesActionContext)) {
+			return false;
+		}
+
+		return true;
+	}
 
 	@Override
 	public void actionPerformed(ActionContext context) {

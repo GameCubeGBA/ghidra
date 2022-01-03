@@ -77,10 +77,12 @@ class PropertyListMergePanel extends JPanel {
 	}
 
 	private ConflictPanel createConflictPanel() {
-		ChangeListener changeListener = e -> {
-            mergeManager.clearStatusText();
-            mergeManager.setApplyEnabled(true);
-        };
+		ChangeListener changeListener = new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				mergeManager.clearStatusText();
+				mergeManager.setApplyEnabled(true);
+			}
+		};
 
 		conflictPanel = new ConflictPanel(changeListener);
 		Dimension d = conflictPanel.getPreferredSize();

@@ -50,7 +50,7 @@ public class DefaultTableTextFilterFactory<ROW_OBJECT>
 
 	private TableFilter<ROW_OBJECT> getBaseFilter(String text,
 			RowFilterTransformer<ROW_OBJECT> transformer) {
-		if (filterOptions.isMultiterm() && !text.trim().isEmpty()) {
+		if (filterOptions.isMultiterm() && text.trim().length() > 0) {
 			return getMultiWordTableFilter(text, transformer);
 
 		}

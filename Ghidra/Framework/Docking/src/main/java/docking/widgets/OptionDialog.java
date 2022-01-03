@@ -322,7 +322,7 @@ public class OptionDialog extends DialogComponentProvider {
 			buttons.add(button);
 		}
 
-		if (options.isEmpty()) {
+		if (options.size() == 0) {
 			JButton button = createOptionButton("OK", 1);
 			button.setName("OK");
 			addButton(button);

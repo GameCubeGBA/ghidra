@@ -309,9 +309,10 @@ public class FunctionBitPatternInfo {
 			List<String> contextRegs) {
 		List<ContextRegisterInfo> contextRegisterInfo =
 			new ArrayList<ContextRegisterInfo>(contextRegs.size());
-        for (String contextReg : contextRegs) {
-            contextRegisterInfo.add(new ContextRegisterInfo(contextReg));
-        }
+		int numContextRegs = contextRegs.size();
+		for (int i = 0; i < numContextRegs; ++i) {
+			contextRegisterInfo.add(new ContextRegisterInfo(contextRegs.get(i)));
+		}
 		ProgramContext pContext = program.getProgramContext();
 		for (ContextRegisterInfo cRegInfo : contextRegisterInfo) {
 			Register reg = program.getRegister(cRegInfo.getContextRegister());
@@ -331,12 +332,13 @@ public class FunctionBitPatternInfo {
 		StringBuilder sb = new StringBuilder();
 		if (contextRegisters != null) {
 			sb.append("Registers: ");
-            for (ContextRegisterInfo contextRegister : contextRegisters) {
-                sb.append(contextRegister.getContextRegister());
-                sb.append(": ");
-                sb.append(contextRegister.getValue());
-                sb.append(" ");
-            }
+			int size = contextRegisters.size();
+			for (int i = 0; i < size; i++) {
+				sb.append(contextRegisters.get(i).getContextRegister());
+				sb.append(": ");
+				sb.append(contextRegisters.get(i).getValue());
+				sb.append(" ");
+			}
 			sb.append("\n");
 		}
 		sb.append("Prebytes: ");
@@ -344,7 +346,7 @@ public class FunctionBitPatternInfo {
 		sb.append("\n");
 		if (preInst != null) {
 			sb.append("preInstructions: ");
-			sb.append(preInst);
+			sb.append(preInst.toString());
 		}
 		sb.append("\nAddress: ");
 		sb.append(address);

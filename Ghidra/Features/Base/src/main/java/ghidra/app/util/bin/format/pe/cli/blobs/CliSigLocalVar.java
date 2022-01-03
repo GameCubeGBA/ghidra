@@ -93,14 +93,14 @@ public class CliSigLocalVar extends CliAbstractSig {
 
 	@Override
 	public String getRepresentationCommon(CliStreamMetadata stream, boolean isShort) {
-		StringBuilder rep = new StringBuilder();
+		String rep = "";
 		for (CliParam param : types) {
-			rep.append(getRepresentationOf(param, stream, isShort)).append(", ");
+			rep += getRepresentationOf(param, stream, isShort) + ", ";
 		}
 		if (types.length > 0) {
-			rep = new StringBuilder(rep.substring(0, rep.length() - 2)); // remove comma+space
+			rep = rep.substring(0, rep.length() - 2); // remove comma+space
 		}
-		return rep.toString();
+		return rep;
 	}
 
 }

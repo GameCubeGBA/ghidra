@@ -232,9 +232,12 @@ public class ClearPlugin extends Plugin {
 		if (currentSelection != null && !currentSelection.isEmpty()) {
 			return true;
 		}
-		else return (loc != null) && (loc.getAddress() != null) && (loc instanceof CodeUnitLocation);
+		else if ((loc != null) && (loc.getAddress() != null) && (loc instanceof CodeUnitLocation)) {
+			return true;
+		}
+		return false;
 
-    }
+	}
 
 	private void clearCodeBytes(ListingActionContext context) {
 		ClearOptions opts = new ClearOptions();

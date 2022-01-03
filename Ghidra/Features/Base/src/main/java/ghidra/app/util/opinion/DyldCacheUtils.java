@@ -40,7 +40,7 @@ public class DyldCacheUtils {
 	 * @param program The {@link Program}
 	 * @return True if the given {@link Program} is a DYLD cache; otherwise, false
 	 */
-    public static final boolean isDyldCache(Program program) {
+	public final static boolean isDyldCache(Program program) {
 		if (program == null) {
 			return false;
 		}
@@ -64,7 +64,7 @@ public class DyldCacheUtils {
 	 * @param provider The {@link ByteProvider}
 	 * @return True if the given {@link ByteProvider} is a DYLD cache; otherwise, false
 	 */
-    public static final boolean isDyldCache(ByteProvider provider) {
+	public final static boolean isDyldCache(ByteProvider provider) {
 		if (provider == null) {
 			return false;
 		}
@@ -86,7 +86,7 @@ public class DyldCacheUtils {
 	 * @return True if the given signature represents a DYLD cache signature with an architecture we
 	 * support; otherwise, false
 	 */
-    public static final boolean isDyldCache(String signature) {
+	public final static boolean isDyldCache(String signature) {
 		for (DyldArchitecture architecture : DyldArchitecture.ARCHITECTURES) {
 			if (architecture.getSignature().equals(signature)) {
 				return true;
@@ -201,8 +201,11 @@ public class DyldCacheUtils {
 					if (f.getName().equals(baseName)) {
 						return false;
 					}
-                    return !f.getName().toLowerCase().endsWith(".map");
-                });
+					if (f.getName().toLowerCase().endsWith(".map")) {
+						return false;
+					}
+					return true;
+				});
 				if (splitFiles != null) {
 					List<File> list = Arrays.asList(splitFiles);
 					Collections.sort(list);

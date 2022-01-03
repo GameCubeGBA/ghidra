@@ -289,7 +289,7 @@ public class MDModifiedTypeParser {
 	}
 
 	public void checkInvalidSymbol() throws MDException {
-		if (isFunction && (foundManagedProperty || (!prefixList.isEmpty()))) {
+		if (isFunction && (foundManagedProperty || (prefixList.size() != 0))) {
 			throw new MDException(
 				"EFI and Managed Properies not permitted for function pointer/reference");
 		}

@@ -210,11 +210,15 @@ public class DecompilerClipboardProvider extends ByteCopier
 		Layout layout = model.getLayout(BigInteger.valueOf(lineNumber));
 		ClangTextField field = (ClangTextField) layout.getField(0);
 		int numSpaces = (field.getStartX() - field.getLineNumberWidth()) / spaceCharWidthInPixels;
-        buffer.append(" ".repeat(Math.max(0, numSpaces)));
+		for (int i = 0; i < numSpaces; i++) {
+			buffer.append(' ');
+		}
 
 		int startPos = field.screenLocationToTextOffset(startRow, startColumn);
 		int endPos = field.screenLocationToTextOffset(endRow, endColumn);
-        buffer.append(" ".repeat(Math.max(0, startPos)));
+		for (int i = 0; i < startPos; i++) {
+			buffer.append(' ');
+		}
 		if (startPos >= 0 && endPos >= startPos) {
 			buffer.append(field.getText(), startPos, endPos);
 		}

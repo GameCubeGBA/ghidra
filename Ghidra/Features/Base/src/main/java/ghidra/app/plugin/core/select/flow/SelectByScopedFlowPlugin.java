@@ -272,18 +272,18 @@ public class SelectByScopedFlowPlugin extends ProgramPlugin {
 		CodeBlockIterator iterator = blockModel.getCodeBlocksContaining(addresses, monitor);
 		monitor.initialize(addresses.getNumAddresses());
 
-        while (iterator.hasNext()) {
-            monitor.checkCanceled();
-            CodeBlock codeBlock = iterator.next();
-            CodeBlockVertex vertex = new CodeBlockVertex(codeBlock);
-            vertices.add(vertex);
+		for (; iterator.hasNext();) {
+			monitor.checkCanceled();
+			CodeBlock codeBlock = iterator.next();
+			CodeBlockVertex vertex = new CodeBlockVertex(codeBlock);
+			vertices.add(vertex);
 
-            long blockAddressCount = codeBlock.getNumAddresses();
-            long currentProgress = monitor.getProgress();
-            monitor.setProgress(currentProgress + blockAddressCount);
-        }
+			long blockAddressCount = codeBlock.getNumAddresses();
+			long currentProgress = monitor.getProgress();
+			monitor.setProgress(currentProgress + blockAddressCount);
+		}
 
-        return vertices;
+		return vertices;
 	}
 
 	private void addVerticesToGraph(
@@ -310,18 +310,18 @@ public class SelectByScopedFlowPlugin extends ProgramPlugin {
 
 		CodeBlock codeBlock = start.getCodeBlock();
 		CodeBlockReferenceIterator destinations = codeBlock.getDestinations(monitor);
-        while (destinations.hasNext()) {
-            monitor.checkCanceled();
-            CodeBlockReference reference = destinations.next();
-            CodeBlock destinationBlock = reference.getDestinationBlock();
-            CodeBlockVertex end = blockToVertexMap.get(destinationBlock);
-            if (end == null) {
-                continue; // no vertex means the code block is not in our function
-            }
+		for (; destinations.hasNext();) {
+			monitor.checkCanceled();
+			CodeBlockReference reference = destinations.next();
+			CodeBlock destinationBlock = reference.getDestinationBlock();
+			CodeBlockVertex end = blockToVertexMap.get(destinationBlock);
+			if (end == null) {
+				continue; // no vertex means the code block is not in our function
+			}
 
-            graph.addEdge(new CodeBlockEdge(start, end), start, end);
-        }
-    }
+			graph.addEdge(new CodeBlockEdge(start, end), start, end);
+		}
+	}
 
 	private Map<CodeBlock, CodeBlockVertex> mapBlocksToVertices(List<CodeBlockVertex> vertices) {
 		Map<CodeBlock, CodeBlockVertex> blockToVertexMap = new HashMap<>();

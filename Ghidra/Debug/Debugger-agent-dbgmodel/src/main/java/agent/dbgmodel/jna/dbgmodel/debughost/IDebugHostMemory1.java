@@ -28,7 +28,7 @@ import agent.dbgmodel.jna.dbgmodel.DbgModelNative.LOCATION;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IDebugHostMemory1 extends IUnknownEx {
-	IID IID_IDEBUG_HOST_MEMORY = new IID("212149C9-9183-4a3e-B00E-4FD1DC95339B");
+	final IID IID_IDEBUG_HOST_MEMORY = new IID("212149C9-9183-4a3e-B00E-4FD1DC95339B");
 
 	enum VTIndices1 implements VTableIndex {
 		READ_BYTES, //

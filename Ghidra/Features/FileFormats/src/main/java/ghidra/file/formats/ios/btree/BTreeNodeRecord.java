@@ -68,10 +68,10 @@ public class BTreeNodeRecord implements StructConverter {
 		_descriptor = descriptor;
 
 		if ( descriptor.getKind() == BTreeNodeKinds.kBTLeafNode ) {
-			if ( type.equals( XattrConstants.DECMPFS_XATTR_NAME ) ) {
-				_decmpfsHeader = new DecmpfsHeader( reader, recordLength);
+			if ( getType().equals( XattrConstants.DECMPFS_XATTR_NAME ) ) {
+				_decmpfsHeader = new DecmpfsHeader( reader, getRecordLength() );
 			}
-			else if ( type.equals( XattrConstants.KAUTH_FILESEC_XATTR_NAME ) ) {
+			else if ( getType().equals( XattrConstants.KAUTH_FILESEC_XATTR_NAME ) ) {
 				//TODO
 			}
 		}

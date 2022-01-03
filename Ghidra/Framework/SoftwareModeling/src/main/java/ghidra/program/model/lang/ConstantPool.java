@@ -16,7 +16,6 @@
 package ghidra.program.model.lang;
 
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 
 import ghidra.program.model.data.DataType;
 import ghidra.program.model.pcode.PcodeDataTypeManager;
@@ -111,7 +110,7 @@ public abstract class ConstantPool {
 		}
 
 		public void setUTF8Data(String val) {
-			byteData = val.getBytes(StandardCharsets.UTF_8);
+			byteData = val.getBytes(Charset.forName("UTF-8"));
 		}
 	}
 

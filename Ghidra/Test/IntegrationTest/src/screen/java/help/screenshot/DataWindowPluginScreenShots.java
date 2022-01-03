@@ -24,7 +24,8 @@ import docking.ComponentProvider;
 public class DataWindowPluginScreenShots extends GhidraScreenShotGenerator {
 
 	public DataWindowPluginScreenShots() {
-    }
+		super();
+	}
 
 @Test
     public void testDataWindow() {

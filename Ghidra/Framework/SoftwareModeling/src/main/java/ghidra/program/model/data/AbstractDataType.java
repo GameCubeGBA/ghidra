@@ -38,7 +38,7 @@ public abstract class AbstractDataType implements DataType {
 		if (path == null) {
 			throw new IllegalArgumentException("Category Path is null!");
 		}
-		if (name == null || name.isEmpty()) {
+		if (name == null || name.length() == 0) {
 			throw new IllegalArgumentException("Name is null or empty!");
 		}
 		// allow spaces since derived types may have spaces (pointers for example: foo *32)

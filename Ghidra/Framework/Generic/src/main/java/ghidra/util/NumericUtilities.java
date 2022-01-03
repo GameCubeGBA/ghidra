@@ -33,10 +33,10 @@ public final class NumericUtilities {
 	public static final BigInteger MAX_SIGNED_LONG = new BigInteger("7fffffffffffffff", 16);
 	public static final long MAX_UNSIGNED_INT32_AS_LONG = 0xffffffffL;
 
-	private static final String HEX_PREFIX_X = "0X";
-	private static final String HEX_PREFIX_x = "0x";
+	private final static String HEX_PREFIX_X = "0X";
+	private final static String HEX_PREFIX_x = "0x";
 
-	private static final Set<Class<? extends Number>> INTEGER_TYPES = new HashSet<>();
+	private final static Set<Class<? extends Number>> INTEGER_TYPES = new HashSet<>();
 	static {
 		INTEGER_TYPES.add(Byte.class);
 		INTEGER_TYPES.add(Short.class);
@@ -66,7 +66,7 @@ public final class NumericUtilities {
 		long value = 0;
 
 		numStr = (numStr == null ? "" : numStr.trim());
-		if (numStr.isEmpty()) {
+		if (numStr.length() == 0) {
 			return value;
 		}
 
@@ -95,7 +95,7 @@ public final class NumericUtilities {
 		long sign = 1;
 
 		numStr = (numStr == null ? "" : numStr.trim());
-		if (numStr.isEmpty()) {
+		if (numStr.length() == 0) {
 			return value;
 		}
 		if (numStr.startsWith("-")) {
@@ -111,7 +111,7 @@ public final class NumericUtilities {
 			numStr = numStr.substring(2);
 			radix = 16;
 		}
-		if (numStr.isEmpty()) {
+		if (numStr.length() == 0) {
 			return 0;
 		}
 		try {
@@ -141,7 +141,7 @@ public final class NumericUtilities {
 		long sign = 1;
 
 		numStr = (numStr == null ? "" : numStr.trim());
-		if (numStr.isEmpty()) {
+		if (numStr.length() == 0) {
 			return value;
 		}
 
@@ -171,7 +171,7 @@ public final class NumericUtilities {
 	public static BigInteger parseHexBigInteger(String numStr) {
 
 		numStr = (numStr == null ? "" : numStr.trim());
-		if (numStr.isEmpty()) {
+		if (numStr.length() == 0) {
 			throw new NumberFormatException(numStr + " no digits.");
 		}
 
@@ -910,7 +910,7 @@ public final class NumericUtilities {
 	/**
 	 * Renders provided numbers as signed values
 	 */
-    private static final class SignedIntegerRadixRenderer implements IntegerRadixRenderer {
+	private final static class SignedIntegerRadixRenderer implements IntegerRadixRenderer {
 		/**
 		 * {@inheritDoc}
 		 * <p>
@@ -935,7 +935,7 @@ public final class NumericUtilities {
 	/**
 	 * Renders provided numbers as unsigned values
 	 */
-    private static final class UnsignedIntegerRadixRenderer implements IntegerRadixRenderer {
+	private final static class UnsignedIntegerRadixRenderer implements IntegerRadixRenderer {
 		/**
 		 * {@inheritDoc}
 		 * <p>
@@ -960,7 +960,7 @@ public final class NumericUtilities {
 	/**
 	 * Renders provided numbers in a more human-friendly manner
 	 */
-    private static final class DefaultIntegerRadixRenderer implements IntegerRadixRenderer {
+	private final static class DefaultIntegerRadixRenderer implements IntegerRadixRenderer {
 		/**
 		 * {@inheritDoc}
 		 * <p>

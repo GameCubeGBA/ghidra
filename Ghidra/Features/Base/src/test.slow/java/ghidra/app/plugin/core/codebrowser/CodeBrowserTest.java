@@ -176,11 +176,11 @@ public class CodeBrowserTest extends AbstractGhidraHeadedIntegrationTest {
 			addressModel.getProgramSelection(table.getSelectedRows());
 
 		AddressIterator addresses = tableProgramSelection.getAddresses(true);
-        while (addresses.hasNext()) {
-            Address address = addresses.next();
-            assertTrue(ps.contains(address));
-        }
-    }
+		for (; addresses.hasNext();) {
+			Address address = addresses.next();
+			assertTrue(ps.contains(address));
+		}
+	}
 
 	@Test
 	public void testSimpleDragToCreateSelection() {

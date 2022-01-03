@@ -77,8 +77,11 @@ public class FieldNameFieldLocation extends CodeUnitLocation {
 		if (!super.equals(obj) || (getClass() != obj.getClass()))
 			return false;
 		FieldNameFieldLocation other = (FieldNameFieldLocation) obj;
-        return Objects.equals(fieldName, other.fieldName);
-    }
+		if (!Objects.equals(fieldName, other.fieldName)) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public void saveState(SaveState obj) {

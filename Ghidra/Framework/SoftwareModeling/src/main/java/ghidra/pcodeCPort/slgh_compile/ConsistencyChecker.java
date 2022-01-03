@@ -917,8 +917,11 @@ class ConsistencyChecker {
 		if (off + vn2.getSize().getReal() - 1 < offset) {
 			return false;
 		}
-        return off <= (offset + size - 1);
-    }
+		if (off > (offset + size - 1)) {
+			return false;
+		}
+		return true;
+	}
 
 	// Does op potentially read vn
 	// This is extremely conservative. Basically any op where
@@ -956,8 +959,11 @@ class ConsistencyChecker {
 
 		// We always check for writes to -vn-
 		VarnodeTpl vn2 = op.getOut();
-        return (vn2 != null) && possibleIntersection(vn, vn2);
-    }
+		if ((vn2 != null) && possibleIntersection(vn, vn2)) {
+			return true;
+		}
+		return false;
+	}
 
 	// Look for reads and writes to temporaries
 	private void optimizeGather1(Constructor ct, MapSTL<Long, OptimizeRecord> recs, int secnum) {

@@ -21,7 +21,7 @@ import java.util.concurrent.CompletableFuture;
 public interface DbgModelTargetTTD extends DbgModelTargetObject {
 
 	@Override
-    default CompletableFuture<Void> init(Map<String, Object> map) {
+	public default CompletableFuture<Void> init(Map<String, Object> map) {
 		return requestNativeAttributes().thenCompose(attrs -> {
 			if (attrs == null) {
 				return CompletableFuture.completedFuture(null);

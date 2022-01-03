@@ -32,7 +32,7 @@ public final class CoffRelocationHandlerFactory {
 	 *     is defined by the given COFF file header.  Could return null if there if no such handler
 	 *     was found.
 	 */
-    public static final CoffRelocationHandler getHandler(CoffFileHeader fileHeader) {
+	public final static CoffRelocationHandler getHandler(CoffFileHeader fileHeader) {
 		for (CoffRelocationHandler handler : ClassSearcher.getInstances(
 			CoffRelocationHandler.class)) {
 			if (handler.canRelocate(fileHeader)) {

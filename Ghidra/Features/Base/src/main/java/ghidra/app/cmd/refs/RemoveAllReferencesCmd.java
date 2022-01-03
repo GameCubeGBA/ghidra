@@ -66,10 +66,10 @@ public class RemoveAllReferencesCmd implements Command {
     	}
     	
     	Reference[] refs = refMgr.getReferencesFrom(fromAddr, opIndex);
-        for (Reference ref : refs) {
-            refMgr.delete(ref);
-            RemoveReferenceCmd.fixupReferencedVariable(program, ref);
-        }
+		for (int i = 0; i < refs.length; i++) {
+			refMgr.delete(refs[i]);
+			RemoveReferenceCmd.fixupReferencedVariable(program, refs[i]);
+		}
  		return true;
     }
 

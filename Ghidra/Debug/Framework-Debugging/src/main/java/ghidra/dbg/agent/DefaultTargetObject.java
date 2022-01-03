@@ -131,6 +131,32 @@ public class DefaultTargetObject<E extends TargetObject, P extends TargetObject>
 			parent.getSchema().getChildSchema(key));
 	}
 
+	/**
+	 * Check if this object is being observed
+	 * 
+	 * <p>
+	 * TODO: It'd be nice if we could know what is being observed: attributes, elements, console
+	 * output, etc. In other words, the sub-types and overrides of the listeners.
+	 * 
+	 * <p>
+	 * Note, if an implementation chooses to cull requests because no one is listening, it should
+	 * take care to re-synchronize when a listener is added. The implementor will need to override
+	 * {@link #addListener(TargetObjectListener)}.
+	 * 
+	 * @implNote The recommended pattern on the client side for keeping a synchronized cache is to
+	 *           add a listener, and then retrieve the current elements. Thus, it is acceptable to
+	 *           neglect invoking the callback on the new listener during re-synchronization.
+	 *           However, more testing is needed to verify this doesn't cause problems when network
+	 *           messaging is involved.
+	 * 
+	 * @return true if there is at least one listener on this object
+	 * @deprecated Since the addition of model listeners, everything is always observed
+	 */
+	@Deprecated(forRemoval = true)
+	protected boolean isObserved() {
+		return !listeners.isEmpty();
+	}
+
 	@Override
 	public CompletableFuture<Void> resync(boolean refreshAttributes, boolean refreshElements) {
 		return CompletableFuture.allOf(fetchAttributes(refreshAttributes),

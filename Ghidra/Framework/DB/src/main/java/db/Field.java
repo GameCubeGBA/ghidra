@@ -125,12 +125,12 @@ public abstract class Field implements Comparable<Field> {
 	/**
 	 * Field base type mask
 	 */
-	static final byte FIELD_TYPE_MASK = 0x0F;
+	static final byte FIELD_TYPE_MASK = (byte) 0x0F;
 
 	/**
 	 * Field index primary key type mask
 	 */
-	static final byte INDEX_PRIMARY_KEY_TYPE_MASK = ~FIELD_TYPE_MASK;
+	static final byte INDEX_PRIMARY_KEY_TYPE_MASK = (byte) ~FIELD_TYPE_MASK;
 
 	/**
 	 * Index Primary Key Field Type Shift 
@@ -266,7 +266,7 @@ public abstract class Field implements Comparable<Field> {
 	 * Get data as a byte array.
 	 * @return byte[]
 	 */
-    public abstract byte[] getBinaryData();
+	abstract public byte[] getBinaryData();
 
 	/**
 	 * Set data from binary byte array.
@@ -276,7 +276,7 @@ public abstract class Field implements Comparable<Field> {
 	 * into field which will generally be caused by the incorrect number of 
 	 * bytes provided to a fixed-length field.
 	 */
-    public abstract void setBinaryData(byte[] bytes);
+	abstract public void setBinaryData(byte[] bytes);
 
 	/**
 	 * Get field as a String value.

@@ -40,10 +40,10 @@ public class OldBookmark implements Saveable {
 	 * @param addr
 	 */
 	OldBookmark(OldBookmark info, Address addr) {
-		this.type = info.type;
+		this.type = info.getType();
 		this.addr = addr;
-		this.category = info.category;
-		this.comment = info.comment;
+		this.category = info.getCategory();
+		this.comment = info.getComment();
 	}
 
 	/**

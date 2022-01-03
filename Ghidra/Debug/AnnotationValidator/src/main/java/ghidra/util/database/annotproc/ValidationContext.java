@@ -97,8 +97,11 @@ public class ValidationContext {
 			if (!typeUtils.isSubtype(t1, v2.getUpperBound())) {
 				return false;
 			}
-            return typeUtils.isSubtype(v2.getLowerBound(), t1);
-        }
+			if (!typeUtils.isSubtype(v2.getLowerBound(), t1)) {
+				return false;
+			}
+			return true;
+		}
 		return typeUtils.isSubtype(t1, t2);
 	}
 
@@ -254,7 +257,7 @@ class FormatVisitor implements TypeVisitor<Void, Void> {
 			visit(lower);
 		}
 		TypeMirror upper = t.getUpperBound();
-		if (!"java.lang.Object".equals(upper.toString())) {
+		if (!upper.toString().equals("java.lang.Object")) {
 			buf.append(" extends ");
 			visit(upper);
 		}

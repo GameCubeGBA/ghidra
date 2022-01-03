@@ -53,7 +53,8 @@ public class SymbolMergeManagerFunctionSourceTest extends AbstractListingMergeMa
 	 * @param arg0
 	 */
 	public SymbolMergeManagerFunctionSourceTest() {
-    }
+		super();
+	}
 
 	@Test
 	public void testChangeFunctionNameSourceSameInBoth() throws Exception {

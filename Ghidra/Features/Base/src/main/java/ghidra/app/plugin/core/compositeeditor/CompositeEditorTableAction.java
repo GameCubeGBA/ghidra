@@ -28,7 +28,7 @@ import ghidra.util.HelpLocation;
  * CompositeEditorAction is an abstract class that should be extended for any
  * action that is to be associated with a composite editor.
  */
-public abstract class CompositeEditorTableAction extends DockingAction implements EditorAction {
+abstract public class CompositeEditorTableAction extends DockingAction implements EditorAction {
 
 	protected CompositeEditorProvider provider;
 	protected CompositeEditorModel model;
@@ -89,7 +89,7 @@ public abstract class CompositeEditorTableAction extends DockingAction implement
 	}
 
 	@Override
-    public abstract void adjustEnablement();
+	abstract public void adjustEnablement();
 
 	public String getHelpName() {
 		String actionName = getName();

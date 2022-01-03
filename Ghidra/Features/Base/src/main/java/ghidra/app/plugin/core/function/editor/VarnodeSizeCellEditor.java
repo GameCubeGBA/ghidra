@@ -70,7 +70,12 @@ class VarnodeSizeCellEditor extends AbstractCellEditor implements TableCellEdito
 			};
 			input.getComponent().addFocusListener(focusListener);
 		}
-		input.addActionListener(e -> stopCellEditing());
+		input.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				stopCellEditing();
+			}
+		});
 		return input.getComponent();
 	}
 

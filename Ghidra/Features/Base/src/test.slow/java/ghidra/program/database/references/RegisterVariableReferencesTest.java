@@ -44,7 +44,8 @@ public class RegisterVariableReferencesTest extends AbstractGhidraHeadedIntegrat
 	private Register regC;
 
 	public RegisterVariableReferencesTest() {
-    }
+		super();
+	}
 
     @Before
     public void setUp() throws Exception {

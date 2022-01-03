@@ -449,7 +449,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		List<GTreeNode> children = rootNode.getChildren();
 		assertTrue(
 			"Incoming tree does not have callers as expected for function: " + getListingFunction(),
-                !children.isEmpty());
+			children.size() > 0);
 
 		GTreeNode child0 = children.get(0);
 		incomingTree.expandPath(child0);
@@ -457,7 +457,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 
 		List<GTreeNode> grandChildren = child0.getChildren();
 		assertTrue("Incoming tree child does not have callers as expected for child: " + child0,
-                !grandChildren.isEmpty());
+			grandChildren.size() > 0);
 	}
 
 	@Test
@@ -469,7 +469,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		List<GTreeNode> children = rootNode.getChildren();
 		assertTrue(
 			"Outgoing tree does not have callers as expected for function: " + getListingFunction(),
-                !children.isEmpty());
+			children.size() > 0);
 
 		GTreeNode child1 = children.get(1);
 		outgoingTree.expandPath(child1);
@@ -477,7 +477,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 
 		List<GTreeNode> grandChildren = child1.getChildren();
 		assertTrue("Outgoing tree child does not have callers as expected for child: " + child1,
-                !grandChildren.isEmpty());
+			grandChildren.size() > 0);
 	}
 
 	@Test
@@ -489,7 +489,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		List<GTreeNode> children = rootNode.getChildren();
 		assertTrue(
 			"Outgoing tree does not have callers as expected for function: " + getListingFunction(),
-                !children.isEmpty());
+			children.size() > 0);
 
 		ProgramLocation originalLocation = currentLocation();
 
@@ -530,7 +530,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		List<GTreeNode> children = rootNode.getChildren();
 		assertTrue(
 			"Outgoing tree does not have callers as expected for function: " + getListingFunction(),
-                !children.isEmpty());
+			children.size() > 0);
 
 		OutgoingCallNode child0 = (OutgoingCallNode) children.get(0);
 		clickNode(outgoingTree, child0);
@@ -746,7 +746,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		List<GTreeNode> children = rootNode.getChildren();
 		assertTrue(
 			"Outgoing tree does not have callers as expected for function: " + getListingFunction(),
-                !children.isEmpty());
+			children.size() > 0);
 
 		OutgoingCallNode child0 = (OutgoingCallNode) children.get(0);
 		clickNode(outgoingTree, child0);
@@ -773,7 +773,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		children = rootNode.getChildren();
 		assertTrue(
 			"Outgoing tree does not have callers as expected for function: " + getListingFunction(),
-                !children.isEmpty());
+			children.size() > 0);
 
 		child0 = (OutgoingCallNode) children.get(0);
 		clickNode(outgoingTree, child0);
@@ -815,7 +815,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		GTreeNode rootNode = getRootNode(incomingTree);
 		List<GTreeNode> children = rootNode.getChildren();
 		assertTrue("Incoming tree does not have callers as expected for function: " + addrString,
-                !children.isEmpty());
+			children.size() > 0);
 	}
 
 	@Test
@@ -831,7 +831,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		List<GTreeNode> children = rootNode.getChildren();
 		assertTrue(
 			"Incoming tree does not have callers as expected for function: " + getListingFunction(),
-                !children.isEmpty());
+			children.size() > 0);
 
 		GTreeNode child1 = children.get(0);
 		String nodeName = child1.getName();
@@ -847,7 +847,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		children = rootNode.getChildren();
 		assertTrue(
 			"Incoming tree does not have callers as expected for function: " + getListingFunction(),
-                !children.isEmpty());
+			children.size() > 0);
 
 		assertContainsChild(children, newName);
 		assertDoesntContainChild(children, originalName);
@@ -862,7 +862,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		List<GTreeNode> children = rootNode.getChildren();
 		assertTrue(
 			"Incoming tree does not have callers as expected for function: " + getListingFunction(),
-                !children.isEmpty());
+			children.size() > 0);
 
 		Function rootFunction = getFunction(addr("0x5000"));
 		assertEquals("Incoming References - " + rootFunction.getName(), rootNode.getName());
@@ -874,7 +874,7 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 		children = rootNode.getChildren();
 		assertTrue(
 			"Incoming tree does not have callers as expected for function: " + getListingFunction(),
-                !children.isEmpty());
+			children.size() > 0);
 
 		assertEquals("Incoming References - " + newName, rootNode.getName());
 	}
@@ -1304,10 +1304,15 @@ public class CallTreePluginTest extends AbstractGhidraHeadedIntegrationTest {
 				return false;
 			}
 			if (node == null) {
-                return other.node == null;
+				if (other.node != null) {
+					return false;
+				}
 			}
-			else return node.equals(other.node);
-        }
+			else if (!node.equals(other.node)) {
+				return false;
+			}
+			return true;
+		}
 
 		private CallTreePluginTest getOuterType() {
 			return CallTreePluginTest.this;

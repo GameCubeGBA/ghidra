@@ -191,14 +191,15 @@ public abstract class AbstractMergeTest extends AbstractGhidraHeadedIntegrationT
 		}
 		ArrayList<String> list = tx.getOpenSubTransactions();
 		StringBuffer tip = new StringBuffer();
-        for (String s : list) {
-            if (tip.length() != 0) {
-                tip.append('\n');
-            }
-            tip.append(s);
-        }
+		Iterator<String> iter = list.iterator();
+		while (iter.hasNext()) {
+			if (tip.length() != 0) {
+				tip.append('\n');
+			}
+			tip.append(iter.next());
+		}
 		Msg.error(this, prefix + "Test Case " + testName.getMethodName() +
-			" : ERROR: Transactions still exist!  " + tip);
+			" : ERROR: Transactions still exist!  " + tip.toString());
 	}
 
 	protected <T extends Component> T getMergePanel(Class<T> desiredClass) {

@@ -406,7 +406,9 @@ public class Scalar implements Comparable<Scalar> {
 		buf.append(pre);
 		if (zeroPadded) {
 			int numDigits = getDigits(radix);
-            buf.append("0".repeat(Math.max(0, numDigits - b.length())));
+			for (int i = 0; i < numDigits - b.length(); ++i) {
+				buf.append("0");
+			}
 		}
 		buf.append(b);
 		buf.append(post);

@@ -41,7 +41,8 @@ public class AddressIndexPrimaryKeyIteratorTest extends AbstractGhidraHeadedInte
 	 * @param arg0
 	 */
 	public AddressIndexPrimaryKeyIteratorTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

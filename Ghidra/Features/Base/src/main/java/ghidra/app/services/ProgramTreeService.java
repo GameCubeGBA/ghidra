@@ -34,24 +34,24 @@ public interface ProgramTreeService {
 	/**
 	 * Get the name of the tree currently being viewed.
 	 */
-    String getViewedTreeName();
+	public String getViewedTreeName();
 	
 	/**
 	 * Set the current view to that of the given name. If treeName is not
 	 * a known view, then nothing happens.
 	 * @param treeName name of the view
 	 */
-    void setViewedTree(String treeName);
+	public void setViewedTree(String treeName);
 	
 	/**
 	 * Get the address set of the current view (what is currently being shown in
 	 * the Code Browser).
 	 */
-    AddressSet getView();
+	public AddressSet getView(); 
 	
 	/**
 	 * Set the selection to the given group paths.
 	 * @param gps paths to select
 	 */
-    void setGroupSelection(GroupPath[] gps);
+	public void setGroupSelection(GroupPath[] gps);
 }

@@ -65,22 +65,25 @@ public class DataTypesTreeCellEditor extends DefaultTreeCellEditor {
 		// this is called before the changes have been put into place and we
 		// need to wait until the
 		// node has been changed before attempting to select it
-		SwingUtilities.invokeLater(() -> {
-            Object cellEditorValue = cellEditor.getCellEditorValue();
-            if (cellEditorValue == null || !(cellEditorValue instanceof String)) {
-                return;
-            }
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				Object cellEditorValue = cellEditor.getCellEditorValue();
+				if (cellEditorValue == null || !(cellEditorValue instanceof String)) {
+					return;
+				}
 
-            // reselect the cell that was edited
-            GTreeNode newNode = lastEditedNode.getChild(cellEditorValue.toString());
-            if (newNode == null) {
-                return;
-            }
-            TreePath path = newNode.getTreePath();
-            tree.setSelectionPath(path);
-            tree.scrollPathToVisible(path);
-            lastEditedNode = null;
-        });
+				// reselect the cell that was edited
+				GTreeNode newNode = lastEditedNode.getChild(cellEditorValue.toString());
+				if (newNode == null) {
+					return;
+				}
+				TreePath path = newNode.getTreePath();
+				tree.setSelectionPath(path);
+				tree.scrollPathToVisible(path);
+				lastEditedNode = null;
+			}
+		});
 	}
 
 	@Override
@@ -89,10 +92,12 @@ public class DataTypesTreeCellEditor extends DefaultTreeCellEditor {
 
 		if (isCustom(value)) {
 			edit(value);
-            // we are going to bring a stand-alone editor
-            SwingUtilities.invokeLater(() -> { // the tree is not longer involved, so tell it
-                jTree.cancelEditing();
-            });
+			SwingUtilities.invokeLater(new Runnable() { // we are going to bring a stand-alone editor
+				@Override
+				public void run() { // the tree is not longer involved, so tell it
+					jTree.cancelEditing();
+				}
+			});
 			return renderer.getTreeCellRendererComponent(jTree, value, isSelected, expanded, leaf,
 				row, true);
 		}

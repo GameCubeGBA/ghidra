@@ -19,7 +19,6 @@ import generic.jar.ResourceFile;
 import ghidra.framework.Application;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class NGramUtils {
@@ -137,6 +136,26 @@ public class NGramUtils {
 	}
 
 	/**
+	 * Invoked when the given model should be loaded.
+	 * 
+	 * @param model  Model to be loaded.
+	 */
+	public static void startNewSession(StringModel model) {
+		logProbs = new ModelLogProbabilities(ASCII_CHAR_COUNT);
+		loadStringModels(model);
+	}
+
+	/**
+	 * Invoked when the given model file should be loaded.
+	 * 
+	 * @param model  Model file to be loaded
+	 */
+	public static void startNewSession(File model) throws IOException {
+		logProbs = new ModelLogProbabilities(ASCII_CHAR_COUNT);
+		loadStringModels(new FileInputStream(model), model.getName());
+	}
+
+	/**
 	 * Initializes log probabilities based on counts from the given input file.
 	 * 
 	 * @param trigramFile     Name of trigram model file
@@ -195,7 +214,7 @@ public class NGramUtils {
 	 */
 	private static void ingestModel(InputStream modelStream, String modelName) throws IOException {
 
-		Scanner scanner1 = new Scanner(modelStream, StandardCharsets.UTF_8);
+		Scanner scanner1 = new Scanner(modelStream, "UTF-8");
 		String currString = "";
 		String[] charInfo;
 		int currCount;
@@ -217,7 +236,7 @@ public class NGramUtils {
 						modelType = currString.substring(MODEL_TYPE_PREFIX.length() + 2);
 					}
 				}
-				else if (!currString.trim().isEmpty()) {
+				else if (currString.trim().length() > 0) {
 					charInfo = currString.split("\\t");
 
 					if (charInfo.length != 4) {
@@ -228,16 +247,16 @@ public class NGramUtils {
 
 					charInfo = convertToAsciiNums(charInfo);
 
-					if ("[^]".equals(charInfo[0])) {
+					if (charInfo[0].equals("[^]")) {
 
 						// Ignore the ^ 0 $ case, if somehow one-character strings were ingested during model creation
-						if (!"[$]".equals(charInfo[2])) {
+						if (!charInfo[2].equals("[$]")) {
 							// Beginning of string
 							beginTrigramCounts[Integer.parseInt(charInfo[1])][Integer.parseInt(charInfo[2])] +=
 								currCount;
 						}
 					}
-					else if ("[$]".equals(charInfo[2])) {
+					else if (charInfo[2].equals("[$]")) {
 						endTrigramCounts[Integer.parseInt(charInfo[0])][Integer.parseInt(charInfo[1])] +=
 							currCount;
 					}
@@ -277,7 +296,7 @@ public class NGramUtils {
 					retArr[i] = descriptionToAsciiInt.get(inputChars[i]).toString();
 				}
 				else {
-					if (("[^]".equals(inputChars[i])) || ("[$]".equals(inputChars[i]))) {
+					if ((inputChars[i].equals("[^]")) || (inputChars[i].equals("[$]"))) {
 						retArr[i] = inputChars[i];
 					}
 					else {
@@ -339,13 +358,13 @@ public class NGramUtils {
 
 			for (int j = 0; j < ASCII_CHAR_COUNT; j++) {
 				beginLogTrigrams[i][j] =
-					Math.log10((double) beginTrigramCounts[i][j] / totalTrigrams);
+					Math.log10((double) beginTrigramCounts[i][j] / (double) totalTrigrams);
 				endLogTrigrams[i][j] =
-					Math.log10((double) endTrigramCounts[i][j] / totalTrigrams);
+					Math.log10((double) endTrigramCounts[i][j] / (double) totalTrigrams);
 
 				for (int k = 0; k < ASCII_CHAR_COUNT; k++) {
 					logTrigrams[i][j][k] =
-						Math.log10((double) trigramCounts[i][j][k] / totalTrigrams);
+						Math.log10((double) trigramCounts[i][j][k] / (double) totalTrigrams);
 				}
 			}
 		}
@@ -445,8 +464,12 @@ public class NGramUtils {
 	 * @return boolean
 	 */
 	public static boolean isLowerCaseModel() {
-        return "lowercase".equalsIgnoreCase(modelType);
-    }
+		if (modelType.equalsIgnoreCase("lowercase")) {
+			return true;
+		}
+
+		return false;
+	}
 
 	public static String getLastLoadedTrigramModel() {
 		return lastLoadedTrigramModel;

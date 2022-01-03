@@ -113,9 +113,13 @@ public class Json extends ToStringStyle {
 				return false;
 			}
 
-            return this.includedNames != null &&
-                    Arrays.binarySearch(this.includedNames, field.getName()) >= 0;
-        }
+			if (this.includedNames != null &&
+				Arrays.binarySearch(this.includedNames, field.getName()) >= 0) {
+				return true;
+			}
+
+			return false;
+		}
 
 		/**
 		 * Sets the names to be included

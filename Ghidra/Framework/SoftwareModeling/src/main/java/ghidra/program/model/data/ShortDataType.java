@@ -20,10 +20,10 @@ package ghidra.program.model.data;
  */
 public class ShortDataType extends AbstractIntegerDataType {
 
-	private static final long serialVersionUID = 1;
+	private final static long serialVersionUID = 1;
 
 	/** A statically defined ShortDataType instance.*/
-    public static final ShortDataType dataType = new ShortDataType();
+	public final static ShortDataType dataType = new ShortDataType();
 
 	public ShortDataType() {
 		this(null);

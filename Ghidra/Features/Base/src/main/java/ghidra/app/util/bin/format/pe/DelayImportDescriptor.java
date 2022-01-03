@@ -47,7 +47,7 @@ import ghidra.util.exception.DuplicateNameException;
  * </pre>
  */
 public class DelayImportDescriptor implements StructConverter {
-	public static final String NAME = "ImgDelayDescr";
+	public final static String NAME = "ImgDelayDescr";
 
 	private int grAttrs;
 	private long szName;

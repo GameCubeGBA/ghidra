@@ -32,7 +32,7 @@ import ghidra.dbg.target.TargetExecutionStateful;
 public interface DbgModelTargetExecutionStateful
 		extends DbgModelTargetObject, TargetExecutionStateful {
 
-	default TargetExecutionState convertState(DbgState state) {
+	public default TargetExecutionState convertState(DbgState state) {
 		switch (state) {
 			case RUNNING:
 				return TargetExecutionState.RUNNING;
@@ -42,7 +42,7 @@ public interface DbgModelTargetExecutionStateful
 		}
 	}
 
-	default void setExecutionState(TargetExecutionState state, String reason) {
+	public default void setExecutionState(TargetExecutionState state, String reason) {
 		if (isValid()) {
 			changeAttributes(List.of(), Map.of( //
 				STATE_ATTRIBUTE_NAME, state //

@@ -70,10 +70,10 @@ class RichProductIdLoader {
 	private static MSProductType resolveProductType(String toolDescription) {
 		String descr = toolDescription.toLowerCase();
 
-		if (descr.contains("import") || "IMP".equals(toolDescription)) {
+		if (descr.contains("import") || toolDescription.equals("IMP")) {
 			return MSProductType.Import;
 		}
-		if (descr.contains("export") || "EXP".equals(toolDescription)) {
+		if (descr.contains("export") || toolDescription.equals("EXP")) {
 			return MSProductType.Export;
 		}
 		if (descr.contains("imp/exp")) {
@@ -82,13 +82,13 @@ class RichProductIdLoader {
 		if (descr.contains("linker")) {
 			return MSProductType.Linker;
 		}
-		if (toolDescription.contains("link ") || "LNK".equals(toolDescription)) {
+		if (toolDescription.contains("link ") || toolDescription.equals("LNK")) {
 			return MSProductType.Linker;
 		}
-		if (descr.contains("masm") || "ASM".equals(toolDescription)) {
+		if (descr.contains("masm") || toolDescription.equals("ASM")) {
 			return MSProductType.Assembler;
 		}
-		if (descr.contains("cvtres") || "RES".equals(toolDescription)) {
+		if (descr.contains("cvtres") || toolDescription.equals("RES")) {
 			return MSProductType.CVTRes;
 		}
 		if (descr.contains("c++ compiler")) {
@@ -98,10 +98,10 @@ class RichProductIdLoader {
 			return MSProductType.C_Compiler;
 		}
 
-		if ("C++".equals(toolDescription)) {
+		if (toolDescription.equals("C++")) {
 			return MSProductType.CXX_Compiler;
 		}
-		if ("C".equals(toolDescription)) {
+		if (toolDescription.equals("C")) {
 			return MSProductType.C_Compiler;
 		}
 
@@ -112,7 +112,7 @@ class RichProductIdLoader {
 			throws FileNotFoundException, IOException {
 
 		String fileExtension = FilenameUtils.getExtension(file.getAbsolutePath()).toLowerCase();
-		if ("xml".equals(fileExtension)) {
+		if (fileExtension.equals("xml")) {
 			try {
 				loadXMLFile(file, store);
 			}
@@ -159,7 +159,7 @@ class RichProductIdLoader {
 		XmlElement element = parser.next();
 		while (!element.isEnd()) {
 			String name = element.getName();
-			if ("product".equals(name)) {
+			if (name.equals("product")) {
 				RichProduct product = loadRichProduct(element);
 				if (product != null) {
 					store.put(product.getCompid().getValue(), product);

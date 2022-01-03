@@ -20,35 +20,35 @@ import ghidra.program.model.lang.*;
 public final class CpuTypes {
 
 	/** mask for architecture bits */
-    public static final int CPU_ARCH_MASK    = 0xff000000;
+	public final static int CPU_ARCH_MASK    = 0xff000000;
 
 	/** 64 bit ABI */
-    public static final int CPU_ARCH_ABI64   = 0x01000000;
+	public final static int CPU_ARCH_ABI64   = 0x01000000;
 
-	public static final int CPU_TYPE_ANY        = -1;
-	public static final int CPU_TYPE_VAX        = 0x1;
+	public final static int CPU_TYPE_ANY        = -1;
+	public final static int CPU_TYPE_VAX        = 0x1;
 	// UNUSED                                     0x2
 	// UNUSED                                     0x3
 	// UNUSED                                     0x4
 	// UNUSED                                     0x5
-    public static final int CPU_TYPE_MC680x0    = 0x6;
-	public static final int CPU_TYPE_X86        = 0x7;
-	public static final int CPU_TYPE_I386       = CPU_TYPE_X86;		/* compatibility */
+	public final static int CPU_TYPE_MC680x0    = 0x6;
+	public final static int CPU_TYPE_X86        = 0x7;
+	public final static int CPU_TYPE_I386       = CPU_TYPE_X86;		/* compatibility */
 	// CPU_TYPE_MIPS                              0x8 
 	// UNUSED                                     0x9
-    public static final int CPU_TYPE_MC98000    = 0xa;
-	public static final int CPU_TYPE_HPPA       = 0xb;
-	public static final int CPU_TYPE_ARM        = 0xc;
-	public static final int CPU_TYPE_MC88000    = 0xd;
-	public static final int CPU_TYPE_SPARC      = 0xe;
-	public static final int CPU_TYPE_I860       = 0xf;
+	public final static int CPU_TYPE_MC98000    = 0xa;
+	public final static int CPU_TYPE_HPPA       = 0xb;
+	public final static int CPU_TYPE_ARM        = 0xc;
+	public final static int CPU_TYPE_MC88000    = 0xd;
+	public final static int CPU_TYPE_SPARC      = 0xe;
+	public final static int CPU_TYPE_I860       = 0xf;
 	// CPU_TYPE_ALPHA                             0x10
 	// UNUSED                                     0x11
-    public static final int CPU_TYPE_POWERPC    = 0x12;
+	public final static int CPU_TYPE_POWERPC    = 0x12;
 
-	public static final int CPU_TYPE_POWERPC64  = (CPU_TYPE_POWERPC | CPU_ARCH_ABI64);
-	public static final int CPU_TYPE_X86_64     = (CPU_TYPE_X86     | CPU_ARCH_ABI64);
-	public static final int CPU_TYPE_ARM_64     = (CPU_TYPE_ARM     | CPU_ARCH_ABI64);
+	public final static int CPU_TYPE_POWERPC64  = (CPU_TYPE_POWERPC | CPU_ARCH_ABI64);
+	public final static int CPU_TYPE_X86_64     = (CPU_TYPE_X86     | CPU_ARCH_ABI64);
+	public final static int CPU_TYPE_ARM_64     = (CPU_TYPE_ARM     | CPU_ARCH_ABI64);
 
 
 	/**
@@ -57,7 +57,7 @@ public final class CpuTypes {
 	 * @param cpuSubtype the CPU subtype value
 	 * @return the processor name of the given CPU type value
 	 */
-    public static final Processor getProcessor(int cpuType, int cpuSubtype) {
+	public final static Processor getProcessor(int cpuType, int cpuSubtype) {
 		switch (cpuType) {
 			case CPU_TYPE_X86:
             case CPU_TYPE_X86_64:
@@ -77,7 +77,7 @@ public final class CpuTypes {
 		throw new RuntimeException("Unrecognized CPU type: 0x"+Integer.toHexString(cpuType));
 	}
 
-	public static final int getProcessorBitSize(int cpuType) {
+	public final static int getProcessorBitSize(int cpuType) {
 		switch (cpuType) {
 			case CPU_TYPE_ARM:
 			case CPU_TYPE_SPARC:

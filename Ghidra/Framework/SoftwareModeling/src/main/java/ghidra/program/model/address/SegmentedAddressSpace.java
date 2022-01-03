@@ -35,8 +35,8 @@ import ghidra.util.NumericUtilities;
  */
 public class SegmentedAddressSpace extends GenericAddressSpace {
 
-	private static final int REALMODE_SIZE = 21;
-	private static final long REALMODE_MAXOFFSET = 0x10FFEF;
+	private final static int REALMODE_SIZE = 21;
+	private final static long REALMODE_MAXOFFSET = 0x10FFEF;
 
 	/**
 	 * Constructor for larger size address spaces (than the real-mode space)

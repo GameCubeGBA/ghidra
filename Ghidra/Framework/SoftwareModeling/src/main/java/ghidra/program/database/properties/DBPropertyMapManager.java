@@ -608,10 +608,11 @@ public class DBPropertyMapManager implements PropertyMapManager, ManagerDB {
 	public void removeAll(Address addr) {
 		lock.acquire();
 		try {
-            for (PropertyMap propertyMap : propertyMapCache.values()) {
-                PropertyMapDB pm = (PropertyMapDB) propertyMap;
-                pm.remove(addr);
-            }
+			Iterator<PropertyMap> iter = propertyMapCache.values().iterator();
+			while (iter.hasNext()) {
+				PropertyMapDB pm = (PropertyMapDB) iter.next();
+				pm.remove(addr);
+			}
 
 		}
 		finally {
@@ -627,11 +628,12 @@ public class DBPropertyMapManager implements PropertyMapManager, ManagerDB {
 			throws CancelledException {
 		lock.acquire();
 		try {
-            for (PropertyMap propertyMap : propertyMapCache.values()) {
-                monitor.checkCanceled();
-                PropertyMapDB pm = (PropertyMapDB) propertyMap;
-                pm.removeRange(startAddr, endAddr);
-            }
+			Iterator<PropertyMap> iter = propertyMapCache.values().iterator();
+			while (iter.hasNext()) {
+				monitor.checkCanceled();
+				PropertyMapDB pm = (PropertyMapDB) iter.next();
+				pm.removeRange(startAddr, endAddr);
+			}
 
 		}
 		finally {
@@ -647,11 +649,12 @@ public class DBPropertyMapManager implements PropertyMapManager, ManagerDB {
 			throws CancelledException {
 		lock.acquire();
 		try {
-            for (PropertyMap propertyMap : propertyMapCache.values()) {
-                monitor.checkCanceled();
-                PropertyMapDB pm = (PropertyMapDB) propertyMap;
-                pm.moveRange(fromAddr, fromAddr.add(length - 1), toAddr);
-            }
+			Iterator<PropertyMap> iter = propertyMapCache.values().iterator();
+			while (iter.hasNext()) {
+				monitor.checkCanceled();
+				PropertyMapDB pm = (PropertyMapDB) iter.next();
+				pm.moveRange(fromAddr, fromAddr.add(length - 1), toAddr);
+			}
 
 		}
 		finally {

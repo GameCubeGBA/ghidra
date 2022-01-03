@@ -22,8 +22,8 @@ import ghidra.program.model.data.*;
 import ghidra.util.exception.DuplicateNameException;
 
 public class CoffRelocation implements StructConverter {
-	private static final int SIZEOF2 = 4 + 4 + 2 + 2;
-	private static final int SIZEOF  = 4 + 4 + 2;
+	private final static int SIZEOF2 = 4 + 4 + 2 + 2;
+	private final static int SIZEOF  = 4 + 4 + 2;
 
 	private int    r_vaddr;  // address of relocation
 	private int    r_symndx; // symbol being relocated

@@ -136,7 +136,7 @@ public class ReturnParameterDB extends ParameterDB {
 				try {
 					newStorage =
 						(baseType instanceof VoidDataType) ? VariableStorage.VOID_STORAGE
-								: VariableUtilities.resizeStorage(storage, type,
+								: VariableUtilities.resizeStorage(getVariableStorage(), type,
 									alignStack, function);
 					VariableUtilities.checkStorage(newStorage, type, force);
 				}

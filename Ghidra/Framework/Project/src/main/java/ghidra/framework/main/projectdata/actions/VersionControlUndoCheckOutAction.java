@@ -114,7 +114,7 @@ public class VersionControlUndoCheckOutAction extends VersionControlAction {
 		DomainFile[] files = {};
 		boolean undoWasCancelled = false;
 		// Now confirm the modified ones and undo checkout for the ones the user indicates.
-		if (!modifiedCheckOutsList.isEmpty()) {
+		if (modifiedCheckOutsList.size() > 0) {
 			UndoActionDialog dialog = new UndoActionDialog("Confirm Undo Checkout",
 				resources.ResourceManager.loadImage("images/vcUndoCheckOut.png"), "UndoCheckOut",
 				"checkout", modifiedCheckOutsList);
@@ -127,7 +127,7 @@ public class VersionControlUndoCheckOutAction extends VersionControlAction {
 				undoWasCancelled = true;
 			}
 		}
-		if ((!unmodifiedCheckOutsList.isEmpty()) || (files.length > 0)) {
+		if ((unmodifiedCheckOutsList.size() > 0) || (files.length > 0)) {
 			tool.execute(new UndoCheckOutTask(unmodifiedCheckOutsList, files, saveCopy));
 		}
 		if (undoWasCancelled) {

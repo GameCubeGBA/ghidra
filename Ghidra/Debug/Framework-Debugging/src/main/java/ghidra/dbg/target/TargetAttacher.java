@@ -29,14 +29,14 @@ import ghidra.dbg.util.CollectionUtils.AbstractEmptySet;
 @DebuggerTargetObjectIface("Attacher")
 public interface TargetAttacher extends TargetObject {
 
-	interface TargetAttachKindSet extends Set<TargetAttachKind> {
+	public interface TargetAttachKindSet extends Set<TargetAttachKind> {
 
-		class EmptyTargetAttachKindSet extends AbstractEmptySet<TargetAttachKind>
+		public static class EmptyTargetAttachKindSet extends AbstractEmptySet<TargetAttachKind>
 				implements TargetAttachKindSet {
 			// Nothing
 		}
 
-		class ImmutableTargetAttachKindSet extends
+		public static class ImmutableTargetAttachKindSet extends
 				CollectionUtils.AbstractNSet<TargetAttachKind> implements TargetAttachKindSet {
 
 			public ImmutableTargetAttachKindSet(TargetAttachKind... kinds) {
@@ -50,15 +50,15 @@ public interface TargetAttacher extends TargetObject {
 
 		TargetAttachKindSet EMPTY = new EmptyTargetAttachKindSet();
 
-		static TargetAttachKindSet of() {
+		public static TargetAttachKindSet of() {
 			return EMPTY;
 		}
 
-		static TargetAttachKindSet of(TargetAttachKind... kinds) {
+		public static TargetAttachKindSet of(TargetAttachKind... kinds) {
 			return new ImmutableTargetAttachKindSet(kinds);
 		}
 
-		static TargetAttachKindSet copyOf(Set<TargetAttachKind> set) {
+		public static TargetAttachKindSet copyOf(Set<TargetAttachKind> set) {
 			return new ImmutableTargetAttachKindSet(set);
 		}
 	}
@@ -89,7 +89,7 @@ public interface TargetAttacher extends TargetObject {
 		name = SUPPORTED_ATTACH_KINDS_ATTRIBUTE_NAME,
 		required = true,
 		hidden = true)
-    default TargetAttachKindSet getSupportedAttachKinds() {
+	public default TargetAttachKindSet getSupportedAttachKinds() {
 		return getTypedAttributeNowByName(SUPPORTED_ATTACH_KINDS_ATTRIBUTE_NAME,
 			TargetAttachKindSet.class, TargetAttachKindSet.of());
 	}
@@ -104,7 +104,7 @@ public interface TargetAttacher extends TargetObject {
 	 * @param attachable the object or reference to attach to
 	 * @return a future which completes when the command is confirmed
 	 */
-    CompletableFuture<Void> attach(TargetAttachable attachable);
+	public CompletableFuture<Void> attach(TargetAttachable attachable);
 
 	/**
 	 * Attach to the given id
@@ -116,5 +116,5 @@ public interface TargetAttacher extends TargetObject {
 	 * @param pid the identifier for and object to attach to
 	 * @return a future which completes when the command is confirmed
 	 */
-    CompletableFuture<Void> attach(long pid);
+	public CompletableFuture<Void> attach(long pid);
 }

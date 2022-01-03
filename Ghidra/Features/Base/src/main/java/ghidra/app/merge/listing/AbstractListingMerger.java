@@ -227,13 +227,16 @@ abstract class AbstractListingMerger implements ListingMerger, ListingMergeConst
 	void showResolveErrors() {
 		if (errorBuf.length() > 0) {
 			try {
-				SwingUtilities.invokeAndWait(() -> {
-                    String title = getConflictType() + " Merge Errors";
-                    String msg = errorBuf.toString();
-                    ReadTextDialog dialog = new ReadTextDialog(title, msg);
-                    PluginTool mergeTool = mergeManager.getMergeTool();
-                    mergeManager.getMergeTool().showDialog(dialog, mergeTool.getActiveWindow());
-                });
+				SwingUtilities.invokeAndWait(new Runnable() {
+					@Override
+					public void run() {
+						String title = getConflictType() + " Merge Errors";
+						String msg = errorBuf.toString();
+						ReadTextDialog dialog = new ReadTextDialog(title, msg);
+						PluginTool mergeTool = mergeManager.getMergeTool();
+						mergeManager.getMergeTool().showDialog(dialog, mergeTool.getActiveWindow());
+					}
+				});
 			}
 			catch (InterruptedException e) {
 				throw new AssertException(e);
@@ -260,13 +263,16 @@ abstract class AbstractListingMerger implements ListingMerger, ListingMergeConst
 	void showResolveInfo() {
 		if (infoBuf.length() > 0) {
 			try {
-				SwingUtilities.invokeAndWait(() -> {
-                    String title = getConflictType() + " Merge Information";
-                    String msg = infoBuf.toString();
-                    ReadTextDialog dialog = new ReadTextDialog(title, msg);
-                    PluginTool mergeTool = mergeManager.getMergeTool();
-                    mergeManager.getMergeTool().showDialog(dialog, mergeTool.getActiveWindow());
-                });
+				SwingUtilities.invokeAndWait(new Runnable() {
+					@Override
+					public void run() {
+						String title = getConflictType() + " Merge Information";
+						String msg = infoBuf.toString();
+						ReadTextDialog dialog = new ReadTextDialog(title, msg);
+						PluginTool mergeTool = mergeManager.getMergeTool();
+						mergeManager.getMergeTool().showDialog(dialog, mergeTool.getActiveWindow());
+					}
+				});
 			}
 			catch (InterruptedException e) {
 				throw new AssertException(e);

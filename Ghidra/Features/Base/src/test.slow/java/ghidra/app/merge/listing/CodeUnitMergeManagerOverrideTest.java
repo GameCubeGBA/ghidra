@@ -37,7 +37,8 @@ public class CodeUnitMergeManagerOverrideTest extends AbstractListingMergeManage
 	 * @param arg0
 	 */
 	public CodeUnitMergeManagerOverrideTest() {
-    }
+		super();
+	}
 
 @Test
     public void testAddLatestFlowOverride() throws Exception {

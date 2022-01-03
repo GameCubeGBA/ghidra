@@ -96,7 +96,7 @@ public class VersionControlCheckInAction extends VersionControlAction {
 			return;
 		}
 
-		if (!checkedOut.isEmpty()) {
+		if (checkedOut.size() > 0) {
 			checkIn(checkedOut);
 		}
 	}
@@ -126,20 +126,21 @@ public class VersionControlCheckInAction extends VersionControlAction {
 			}
 		}
 
-		if (!changedList.isEmpty()) {
+		if (changedList.size() > 0) {
 			ChangedFilesDialog dialog = new ChangedFilesDialog(tool, changedList);
 			dialog.setCancelToolTipText("Cancel Check In");
 			if (!dialog.showDialog()) { // blocks until the user hits Save or Cancel
 				tool.setStatusInfo("Checkin canceled");
 				return;
 			}
-			for (DomainFile df : changedList) {
+			for (int i = 0; i < changedList.size(); i++) {
+				DomainFile df = changedList.get(i);
 				if (df.isChanged()) {
 					list.remove(df);
 				}
 			}
 		}
-		if (!list.isEmpty()) {
+		if (list.size() > 0) {
 			tool.execute(new CheckInTask(tool, list, parent));
 		}
 		else {

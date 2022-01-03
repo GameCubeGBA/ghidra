@@ -36,12 +36,12 @@ import ghidra.util.task.TaskMonitorAdapter;
  */
 public class ExternalFunctionDiffTest extends AbstractGhidraHeadedIntegrationTest {
 
-	private static final String THUNK_A_ENTRY = "0100199b";
-	private static final String THUNK_A_END = "010019a1";
-	private static final String THUNK_A_ALTERNATE_END = "010019c3";
-	private static final String FUNCTION_1 = "0100248f";
-	private static final String FUNCTION_2 = "010033f6";
-	private static final String FUNCTION_3 = "01003bed";
+	private final static String THUNK_A_ENTRY = "0100199b";
+	private final static String THUNK_A_END = "010019a1";
+	private final static String THUNK_A_ALTERNATE_END = "010019c3";
+	private final static String FUNCTION_1 = "0100248f";
+	private final static String FUNCTION_2 = "010033f6";
+	private final static String FUNCTION_3 = "01003bed";
 
 	private MergeTestFacilitator mtf;
 
@@ -49,7 +49,8 @@ public class ExternalFunctionDiffTest extends AbstractGhidraHeadedIntegrationTes
 	private Program myProgram;
 
 	public ExternalFunctionDiffTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

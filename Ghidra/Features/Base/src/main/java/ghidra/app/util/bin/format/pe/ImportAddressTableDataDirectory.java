@@ -31,7 +31,7 @@ import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.task.TaskMonitor;
 
 public class ImportAddressTableDataDirectory extends DataDirectory {
-    private static final String NAME = "IMAGE_DIRECTORY_ENTRY_IAT";
+    private final static String NAME = "IMAGE_DIRECTORY_ENTRY_IAT";
 
     private List<ThunkData []> thunkDataSetList;
 

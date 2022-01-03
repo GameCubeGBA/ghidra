@@ -19,7 +19,7 @@ public class RegularExpressionTextFilterFactory implements TextFilterFactory {
 
 	@Override
 	public TextFilter getTextFilter(String text) {
-		if ((text == null) || (text.isEmpty())) {
+		if ((text == null) || (text.length() == 0)) {
 			return null;
 		}
 

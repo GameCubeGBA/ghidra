@@ -148,7 +148,7 @@ public class InstructionUtils {
 		for (Object element : objs) {
 			if (element instanceof Scalar) {
 				Scalar scalar = (Scalar) element;
-				set.add("const:" + scalar);
+				set.add("const:" + scalar.toString());
 			}
 			else if (element instanceof Register) {
 				Register reg = (Register) element;

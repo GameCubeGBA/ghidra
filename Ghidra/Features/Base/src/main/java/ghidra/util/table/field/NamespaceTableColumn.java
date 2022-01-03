@@ -64,7 +64,10 @@ public class NamespaceTableColumn
 		Address address = location.getAddress();
 		SymbolTable symbolTable = program.getSymbolTable();
 		Symbol symbol = symbolTable.getPrimarySymbol(address);
-        return symbol;
-    }
+		if (symbol != null) {
+			return symbol;
+		}
+		return null;
+	}
 
 }

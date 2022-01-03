@@ -48,8 +48,11 @@ public class PlaceBreakpointActionItem implements BreakpointActionItem {
 		if (!this.address.equals(that.address)) {
 			return false;
 		}
-        return Objects.equals(this.kinds, that.kinds);
-    }
+		if (!Objects.equals(this.kinds, that.kinds)) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public int hashCode() {

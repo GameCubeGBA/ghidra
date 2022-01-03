@@ -37,7 +37,8 @@ public class AddMemoryBlockCmdTest extends AbstractGenericTest {
 	private Command command;
 
 	public AddMemoryBlockCmdTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -98,7 +99,7 @@ public class AddMemoryBlockCmdTest extends AbstractGenericTest {
 		catch (RollbackException e) {
 			// good
 		}
-		assertTrue(!command.getStatusMsg().isEmpty());
+		assertTrue(command.getStatusMsg().length() > 0);
 	}
 
 	@Test
@@ -250,7 +251,7 @@ public class AddMemoryBlockCmdTest extends AbstractGenericTest {
 		MemoryBlock block = null;
 		MemoryBlock[] blocks = x08.getMemory().getBlocks();
 		for (MemoryBlock block2 : blocks) {
-			if (".overlay".equals(block2.getName())) {
+			if (block2.getName().equals(".overlay")) {
 				block = block2;
 				break;
 			}

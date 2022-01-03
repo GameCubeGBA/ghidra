@@ -162,7 +162,7 @@ public class JavaHelpSetBuilder {
 		writer.newLine();
 		writer.newLine();
 
-		writer.write("<!-- HelpSet auto-generated on " + (new Date()) + " -->");
+		writer.write("<!-- HelpSet auto-generated on " + (new Date()).toString() + " -->");
 		writer.newLine();
 
 		writer.write("<helpset version=\"2.0\">");

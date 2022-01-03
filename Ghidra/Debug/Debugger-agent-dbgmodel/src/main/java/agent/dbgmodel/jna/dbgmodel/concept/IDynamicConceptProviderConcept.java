@@ -26,7 +26,7 @@ import agent.dbgmodel.jna.dbgmodel.IUnknownEx;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IDynamicConceptProviderConcept extends IUnknownEx {
-	IID IID_IDYNAMIC_CONCEPT_PROVIDER_CONCEPT =
+	final IID IID_IDYNAMIC_CONCEPT_PROVIDER_CONCEPT =
 		new IID("95A7F7DD-602E-483f-9D06-A15C0EE13174");
 
 	enum VTIndices implements VTableIndex {

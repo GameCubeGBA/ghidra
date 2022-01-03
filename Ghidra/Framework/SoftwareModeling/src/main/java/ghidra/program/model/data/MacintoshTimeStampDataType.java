@@ -35,7 +35,7 @@ public class MacintoshTimeStampDataType extends BuiltIn {
 			MacintoshTimeStampDataType.class.getName());
 	}
 
-	private static final SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
+	private final static SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
 	private static Date macStartDate;
 
 	static {

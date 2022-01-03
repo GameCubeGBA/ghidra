@@ -31,7 +31,7 @@ import java.io.*;
  * </pre>
  */
 class OMFDirEntry {
-    static final int IMAGE_SIZEOF_OMF_DIR_ENTRY = 12;
+    final static int IMAGE_SIZEOF_OMF_DIR_ENTRY = 12;
 
     private short subsection;
     private short imod;

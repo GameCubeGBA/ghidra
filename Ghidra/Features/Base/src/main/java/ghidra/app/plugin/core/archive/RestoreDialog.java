@@ -140,8 +140,8 @@ public class RestoreDialog extends DialogComponentProvider {
 		projectNameField.setColumns(RestoreDialog.NUM_TEXT_COLUMNS);
 
 		projectNameField.addActionListener(e -> {
-			if (!archiveField.getText().isEmpty() && !restoreField.getText().isEmpty() &&
-                    !projectNameField.getText().isEmpty()) {
+			if (archiveField.getText().length() > 0 && restoreField.getText().length() > 0 &&
+				projectNameField.getText().length() > 0) {
 				okCallback();
 			}
 		});
@@ -262,13 +262,13 @@ public class RestoreDialog extends DialogComponentProvider {
 	 */
 	public String getArchivePathName() {
 		String archive = archiveField.getText().trim();
-		if (archive.isEmpty()) {
+		if (archive.length() == 0) {
 			return null;
 		}
 
 		File file = new File(archive);
 		String pathName = file.getAbsolutePath();
-		if (pathName == null || pathName.isEmpty()) {
+		if (pathName == null || pathName.length() == 0) {
 			return null;
 		}
 		if (!pathName.endsWith(ArchivePlugin.ARCHIVE_EXTENSION)) {
@@ -403,7 +403,7 @@ public class RestoreDialog extends DialogComponentProvider {
 			}
 		}
 		File jarFile = null;
-		if (archivePathName != null && !archivePathName.isEmpty()) {
+		if (archivePathName != null && archivePathName.length() != 0) {
 			jarFile = new File(archivePathName);
 		}
 		jarFileChooser.setSelectedFile(jarFile);

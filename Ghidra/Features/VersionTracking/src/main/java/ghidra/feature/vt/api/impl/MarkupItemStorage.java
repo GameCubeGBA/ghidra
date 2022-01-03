@@ -24,32 +24,32 @@ import ghidra.program.model.address.Address;
 
 public interface MarkupItemStorage {
 
-	VTMarkupType getMarkupType();
+	public VTMarkupType getMarkupType();
 
-	VTAssociation getAssociation();
+	public VTAssociation getAssociation();
 
-	Address getSourceAddress();
+	public Address getSourceAddress();
 
-	Address getDestinationAddress();
+	public Address getDestinationAddress();
 
-	String getDestinationAddressSource();
+	public String getDestinationAddressSource();
 
-	VTMarkupItemStatus getStatus();
+	public VTMarkupItemStatus getStatus();
 
-	String getStatusDescription();
+	public String getStatusDescription();
 
-	Stringable getSourceValue();
+	public Stringable getSourceValue();
 
-	Stringable getDestinationValue();
+	public Stringable getDestinationValue();
 
-	MarkupItemStorage setStatus(VTMarkupItemStatus status);
+	public MarkupItemStorage setStatus(VTMarkupItemStatus status);
 
-	MarkupItemStorage reset();
+	public MarkupItemStorage reset();
 
-	MarkupItemStorage setDestinationAddress(Address address, String addressSource);
+	public MarkupItemStorage setDestinationAddress(Address address, String addressSource);
 
-	MarkupItemStorage setApplyFailed(String message);
+	public MarkupItemStorage setApplyFailed(String message);
 
-	void setSourceDestinationValues(Stringable sourceValue, Stringable destinationValue);
+	public void setSourceDestinationValues(Stringable sourceValue, Stringable destinationValue);
 
 }

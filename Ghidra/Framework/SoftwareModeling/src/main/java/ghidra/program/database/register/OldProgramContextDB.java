@@ -58,10 +58,10 @@ import ghidra.util.task.TaskMonitor;
  */
 public class OldProgramContextDB implements ProgramContext, DefaultProgramContext, ManagerDB {
 
-	private static final UndefinedValueException UNDEFINED_VALUE_EXCEPTION =
+	private final static UndefinedValueException UNDEFINED_VALUE_EXCEPTION =
 		new UndefinedValueException();
 
-	private static final String OLD_CONTEXT_TABLE_PREFIX =
+	private final static String OLD_CONTEXT_TABLE_PREFIX =
 		AddressRangeMapDB.RANGE_MAP_TABLE_PREFIX + "ProgContext";
 
 	private DBHandle dbHandle;
@@ -446,7 +446,7 @@ public class OldProgramContextDB implements ProgramContext, DefaultProgramContex
 
 	@Override
 	public RegisterValue getDisassemblyContext(Address address) {
-		return defaultDisassemblyContext;
+		return getDefaultDisassemblyContext();
 	}
 
 	@Override

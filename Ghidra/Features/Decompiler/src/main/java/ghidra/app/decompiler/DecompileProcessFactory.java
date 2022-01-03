@@ -31,13 +31,13 @@ public class DecompileProcessFactory {
 
 	private static boolean errorDisplayed = false;
 
-	public static synchronized DecompileProcess get() {
+	public synchronized static DecompileProcess get() {
 		getExePath();
 		DecompileProcess currentProcess = new DecompileProcess(exepath);
 		return currentProcess;
 	}
 
-	public static synchronized void release(DecompileProcess dp) {
+	public synchronized static void release(DecompileProcess dp) {
 		dp.dispose();
 	}
 

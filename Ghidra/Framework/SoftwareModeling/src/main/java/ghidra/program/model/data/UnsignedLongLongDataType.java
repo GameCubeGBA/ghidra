@@ -20,10 +20,10 @@ package ghidra.program.model.data;
  */
 public class UnsignedLongLongDataType extends AbstractIntegerDataType {
 
-	private static final long serialVersionUID = 1;
+	private final static long serialVersionUID = 1;
 
 	/** A statically defined UnsignedLongLongDataType instance.*/
-    public static final UnsignedLongLongDataType dataType = new UnsignedLongLongDataType();
+	public final static UnsignedLongLongDataType dataType = new UnsignedLongLongDataType();
 
 	public UnsignedLongLongDataType() {
 		this(null);

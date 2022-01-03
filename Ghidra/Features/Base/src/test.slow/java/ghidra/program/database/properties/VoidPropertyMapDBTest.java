@@ -52,7 +52,8 @@ public class VoidPropertyMapDBTest extends AbstractGhidraHeadedIntegrationTest i
 	 * @param arg0
 	 */
 	public VoidPropertyMapDBTest() {
-    }
+		super();
+	}
 
 	/*
 	 * @see TestCase#setUp()

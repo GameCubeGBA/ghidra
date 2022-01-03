@@ -30,7 +30,7 @@ import agent.gdb.manager.impl.GdbPendingCommand;
  * {@link GdbCause.Causes#UNCLAIMED}.
  */
 public interface GdbCause {
-	enum Causes implements GdbCause {
+	public enum Causes implements GdbCause {
 		UNCLAIMED;
 	}
 }

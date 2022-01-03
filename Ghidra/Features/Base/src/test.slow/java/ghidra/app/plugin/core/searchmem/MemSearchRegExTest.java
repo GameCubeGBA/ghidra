@@ -36,7 +36,8 @@ import ghidra.program.model.listing.*;
 public class MemSearchRegExTest extends AbstractMemSearchTest {
 
 	public MemSearchRegExTest() {
-    }
+		super();
+	}
 
 	@Override
 	@Before

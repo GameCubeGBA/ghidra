@@ -69,21 +69,21 @@ public class Stack<E> implements Iterable<E> {
 	 * Tests if this stack is empty.
 	 */
 	public boolean isEmpty() {
-		return (list.isEmpty());
+		return (list.size() == 0);
 	}
 
 	/**
 	 * Looks at the object at the top of this stack without removing it from the stack.
 	 */
 	public E peek() {
-		return (!list.isEmpty() ? list.get(list.size() - 1) : null);
+		return (list.size() > 0 ? list.get(list.size() - 1) : null);
 	}
 
 	/**
 	 * Removes the object at the top of this stack and returns that object as the value of this function.
 	 */
 	public E pop() {
-		return (!list.isEmpty() ? list.remove(list.size() - 1) : null);
+		return (list.size() > 0 ? list.remove(list.size() - 1) : null);
 	}
 
 	/**

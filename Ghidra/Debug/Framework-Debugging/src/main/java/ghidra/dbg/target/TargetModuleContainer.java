@@ -51,13 +51,13 @@ public interface TargetModuleContainer extends TargetObject {
 		fixed = true,
 		hidden = true)
 	@Experimental
-    default boolean supportsSyntheticModules() {
+	public default boolean supportsSyntheticModules() {
 		return getTypedAttributeNowByName(SUPPORTS_SYNTHETIC_MODULES_ATTRIBUTE_NAME, Boolean.class,
 			false);
 	}
 
 	@Experimental
-    default CompletableFuture<? extends TargetModule> addSyntheticModule(String name) {
+	public default CompletableFuture<? extends TargetModule> addSyntheticModule(String name) {
 		throw new UnsupportedOperationException();
 	}
 }

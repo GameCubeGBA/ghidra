@@ -29,19 +29,19 @@ import ghidra.util.SystemUtilities;
 public class ProgramNode extends DefaultMutableTreeNode {
 
 	private boolean visited; // true if this node was visited
-	private transient Group group; // node representing a Module or Fragment
-	private transient ProgramModule module; // null if this node represents a Fragment
-	private transient ProgramFragment fragment; // null if this node represents a  Module
-	private transient ProgramModule parentModule;
-	private transient Program program;
-	private transient Listing listing;
+	transient private Group group; // node representing a Module or Fragment
+	transient private ProgramModule module; // null if this node represents a Fragment
+	transient private ProgramFragment fragment; // null if this node represents a  Module
+	transient private ProgramModule parentModule;
+	transient private Program program;
+	transient private Listing listing;
 
 	private TreePath path;
 	private String name;
 	private boolean deleted; // true if this node is marked as deleted
 	private GroupPath groupPath;
 	private boolean isInView;
-	private transient ProgramDnDTree tree; // set only for the root node
+	transient private ProgramDnDTree tree; // set only for the root node
 
 	/**
 	 * Construct a new ProgramNode with the given Group.
@@ -98,8 +98,11 @@ public class ProgramNode extends DefaultMutableTreeNode {
 	 */
 	@Override
 	public boolean getAllowsChildren() {
-        return module != null;
-    }
+		if (module != null) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Returns whether some other object is "equal to" this one.
@@ -309,7 +312,7 @@ public class ProgramNode extends DefaultMutableTreeNode {
 		}
 		for (int i = 0; i < getChildCount(); i++) {
 			ProgramNode child = (ProgramNode) getChildAt(i);
-			if (child.isInView) {
+			if (child.isInView()) {
 				return true;
 			}
 			if (child.getAllowsChildren()) {
@@ -364,7 +367,7 @@ public class ProgramNode extends DefaultMutableTreeNode {
 			int nchild = getChildCount();
 			for (int i = 0; i < nchild; i++) {
 				ProgramNode c = (ProgramNode) getChildAt(i);
-				if (c.name.equals(childName)) {
+				if (c.getName().equals(childName)) {
 					return c;
 				}
 			}

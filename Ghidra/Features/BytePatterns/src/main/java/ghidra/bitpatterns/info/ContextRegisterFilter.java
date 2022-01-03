@@ -113,8 +113,11 @@ public class ContextRegisterFilter {
 		if (!otherFilter.contextRegisters.equals(contextRegisters)) {
 			return false;
 		}
-        return otherFilter.values.equals(values);
-    }
+		if (!otherFilter.values.equals(values)) {
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * Get the filter map

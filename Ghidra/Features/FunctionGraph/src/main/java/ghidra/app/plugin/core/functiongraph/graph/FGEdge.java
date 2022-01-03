@@ -31,11 +31,11 @@ import ghidra.program.model.symbol.FlowType;
  */
 public interface FGEdge extends VisualEdge<FGVertex> {
 
-	FlowType getFlowType();
+	public FlowType getFlowType();
 
-	String getLabel();
+	public String getLabel();
 
-	void setLabel(String label);
+	public void setLabel(String label);
 
 	/**
 	 * Set this edge's base alpha, which determines how much of the edge is visible/see through.
@@ -47,7 +47,7 @@ public interface FGEdge extends VisualEdge<FGVertex> {
 	 * 
 	 * @param alpha the alpha value
 	 */
-    void setDefaultAlpha(double alpha);
+	public void setDefaultAlpha(double alpha);
 
 	/**
 	 * Set this edge's base alpha, which determines how much of the edge is visible/see through.
@@ -59,10 +59,10 @@ public interface FGEdge extends VisualEdge<FGVertex> {
 	* 
 	* @return the alpha value
 	*/
-    double getDefaultAlpha();
+	public double getDefaultAlpha();
 
 	@SuppressWarnings("unchecked")
 	// Suppressing warning on the return type; we know our class is the right type
 	@Override
-    FGEdge cloneEdge(FGVertex start, FGVertex end);
+	public FGEdge cloneEdge(FGVertex start, FGVertex end);
 }

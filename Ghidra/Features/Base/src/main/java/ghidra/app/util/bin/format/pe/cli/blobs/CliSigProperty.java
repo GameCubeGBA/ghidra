@@ -99,15 +99,15 @@ public class CliSigProperty extends CliAbstractSig {
 
 	@Override
 	public String getRepresentationCommon(CliStreamMetadata stream, boolean isShort) {
-		StringBuilder paramsStr = new StringBuilder();
+		String paramsStr = "";
 		for (CliParam param : params) {
-			paramsStr.append(getRepresentationOf(param, stream, isShort)).append(", ");
+			paramsStr += getRepresentationOf(param, stream, isShort) + ", ";
 		}
 		if (params.length > 0) {
-			paramsStr = new StringBuilder(paramsStr.substring(0, paramsStr.length() - 2)); // remove comma+space
+			paramsStr = paramsStr.substring(0, paramsStr.length() - 2); // remove comma+space
 		}
 		return String.format("%s get(%s)", getRepresentationOf(returnType, stream, isShort),
-				paramsStr);
+			paramsStr);
 	}
 
 }

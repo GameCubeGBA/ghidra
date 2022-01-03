@@ -307,17 +307,24 @@ public class HistoryList<T> {
 			return false; // not ignoring null
 		}
 
-        return t.equals(getCurrentHistoryItem());
-    }
+		if (t.equals(getCurrentHistoryItem())) {
+			return true;
+		}
+		return false;
+	}
 
 	private boolean ignoreNull(T t) {
 		if (t != null) {
 			return false;
 		}
 
-        // no repeated nulls
-        return !allowsNulls || !isAtEnd() || (historyStack.peek() == null);
-    }
+		if (!allowsNulls || !isAtEnd() || (historyStack.peek() == null)) {
+			// no repeated nulls
+			return true;
+		}
+
+		return false;
+	}
 
 	private void dropNull() {
 		if (historyStack.peek() == null) {
@@ -376,10 +383,10 @@ public class HistoryList<T> {
 			}
 
 			if (i == historyIndex) {
-				buffy.append('[').append(t).append(']');
+				buffy.append('[').append(t.toString()).append(']');
 			}
 			else {
-				buffy.append(t);
+				buffy.append(t.toString());
 			}
 
 			if (i != historyStack.size() - 1) {
@@ -389,7 +396,7 @@ public class HistoryList<T> {
 
 		//@formatter:off
 		return "{\n" +
-			key + buffy + "\n" +
+			key + buffy.toString() + "\n" + 
 		"}";
 		//@formatter:on				
 	}

@@ -75,11 +75,14 @@ public class FrequentSequenceItem implements Comparable<FrequentSequenceItem> {
 			return false;
 		}
 		FrequentSequenceItem other = (FrequentSequenceItem) obj;
-		if (!other.frequentItem.equals(frequentItem)) {
+		if (!other.getItem().equals(frequentItem)) {
 			return false;
 		}
-        return other.support == support;
-    }
+		if (!(other.getSupport() == support)) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public String toString() {
@@ -99,7 +102,7 @@ public class FrequentSequenceItem implements Comparable<FrequentSequenceItem> {
 	public static String getPrettyString(Collection<FrequentSequenceItem> items) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("\n");
-		if (items.isEmpty()) {
+		if (items.size() == 0) {
 			sb.append("empty!");
 		}
 		else {
@@ -116,9 +119,9 @@ public class FrequentSequenceItem implements Comparable<FrequentSequenceItem> {
 	 */
 	@Override
 	public int compareTo(FrequentSequenceItem arg0) {
-		int itemCompare = frequentItem.compareTo(arg0.frequentItem);
+		int itemCompare = getItem().compareTo(arg0.getItem());
 		if (itemCompare == 0) {
-			return support - arg0.support;
+			return support - arg0.getSupport();
 		}
 		return itemCompare;
 	}

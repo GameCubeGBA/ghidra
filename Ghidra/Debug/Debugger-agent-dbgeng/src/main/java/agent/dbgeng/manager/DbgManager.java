@@ -31,7 +31,7 @@ public interface DbgManager extends AutoCloseable, DbgBreakpointInsertions {
 	/**
 	 * Possible values for {@link DbgThread#step(ExecSuffix)}
 	 */
-    enum ExecSuffix {
+	public enum ExecSuffix {
 		/** Equivalent to {@code finish} in the CLI */
 		FINISH("finish"),
 		/** Equivalent to {@code next} in the CLI */

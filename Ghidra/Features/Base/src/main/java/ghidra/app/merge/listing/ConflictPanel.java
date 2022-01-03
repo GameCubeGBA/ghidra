@@ -31,7 +31,8 @@ public abstract class ConflictPanel extends ChoiceComponent {
 	JCheckBox useForAllCB;
 
 	public ConflictPanel() {
-    }
+		super();
+	}
 
 	public ConflictPanel(boolean isDoubleBuffered) {
 		super(isDoubleBuffered);

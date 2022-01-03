@@ -104,7 +104,7 @@ public enum EnumerableTargetObjectSchema implements TargetObjectSchema {
 	 */
 	public static EnumerableTargetObjectSchema schemaForPrimitive(Class<?> cls) {
 		for (EnumerableTargetObjectSchema schema : EnumerableTargetObjectSchema.values()) {
-			if (schema.types.contains(cls)) {
+			if (schema.getTypes().contains(cls)) {
 				return schema;
 			}
 		}
@@ -120,7 +120,7 @@ public enum EnumerableTargetObjectSchema implements TargetObjectSchema {
 	 */
 	public static SchemaName nameForPrimitive(Class<?> cls) {
 		EnumerableTargetObjectSchema schema = schemaForPrimitive(cls);
-		return schema == null ? null : schema.name;
+		return schema == null ? null : schema.getName();
 	}
 
 	private final SchemaName name;
@@ -167,7 +167,7 @@ public enum EnumerableTargetObjectSchema implements TargetObjectSchema {
 
 	@Override
 	public SchemaName getDefaultElementSchema() {
-		return VOID.name;
+		return VOID.getName();
 	}
 
 	@Override

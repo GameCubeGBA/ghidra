@@ -24,20 +24,21 @@ import ghidra.util.task.TaskMonitor;
 
 import java.io.ByteArrayInputStream;
 
-public abstract class AbstractDyldInfoProcessor {
+abstract public class AbstractDyldInfoProcessor {
 	protected MachHeader header;
 	protected Program program;
 	protected ByteProvider provider;
 	protected DyldInfoCommand command;
 
 	protected AbstractDyldInfoProcessor( MachHeader header, Program program, ByteProvider provider, DyldInfoCommand command ) {
-        this.header = header;
+		super();
+		this.header = header;
 		this.program = program;
 		this.provider = provider;
 		this.command = command;
 	}
 
-	public abstract void process(TaskMonitor monitor ) throws Exception;
+	abstract public void process( TaskMonitor monitor ) throws Exception;
 
 	/**
 	 * Unsigned Little-endian Base-128

@@ -36,14 +36,14 @@ import ghidra.util.task.TaskMonitor;
 public class FileDataTypeManager extends StandAloneDataTypeManager
 		implements FileArchiveBasedDataTypeManager {
 
-	public static final String EXTENSION = "gdt"; // Ghidra Data Types
+	public final static String EXTENSION = "gdt"; // Ghidra Data Types
 	/**
 	 * Suffix for an archive file.
 	 */
-    public static final String SUFFIX = "." + EXTENSION;
+	public final static String SUFFIX = "." + EXTENSION;
 
-	static final String OLD_EXTENSION = "dtf";
-	static final String OLD_SUFFIX = "." + OLD_EXTENSION;
+	final static String OLD_EXTENSION = "dtf";
+	final static String OLD_SUFFIX = "." + OLD_EXTENSION;
 
 	private ResourceFile file;
 	private PackedDatabase packedDB;

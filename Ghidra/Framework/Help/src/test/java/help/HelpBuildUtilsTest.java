@@ -33,7 +33,8 @@ public class HelpBuildUtilsTest extends AbstractHelpTest {
 	private static final String HTML_FILE_PATH = HELP_TOPIC_PATH + '/' + TOPIC_AND_FILENAME;
 
 	public HelpBuildUtilsTest() {
-    }
+		super();
+	}
 
 	@Test
 	public void testGetRelativeHelpPath() {

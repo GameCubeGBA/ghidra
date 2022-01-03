@@ -34,7 +34,7 @@ public class DateEditor extends PropertyEditorSupport {
 
 	public static DateFormat DEFAULT_DATE_FORMAT = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss z");
 
-	private static final int NUMBER_OF_COLUMNS = 20;
+	private final static int NUMBER_OF_COLUMNS = 20;
 
 	private Date date;
 	private JTextField textField;

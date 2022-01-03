@@ -31,7 +31,8 @@ public class GRadioButton extends JRadioButton implements GComponent {
 	 * Creates a blank radio button with HTML rendering disabled.
 	 */
 	public GRadioButton() {
-        init();
+		super();
+		init();
 	}
 
 	/**

@@ -57,8 +57,12 @@ public class ToggleExpandCollapseDataAction extends ProgramLocationContextAction
 	@Override
 	protected boolean isEnabledForContext(ProgramLocationActionContext context) {
 		Data data = getClosestComponentDataUnit(context.getLocation());
-        return data != null;
-    }
+		if (data == null) {
+			return false;
+		}
+
+		return true;
+	}
 
 	@Override
 	protected void actionPerformed(ProgramLocationActionContext context) {

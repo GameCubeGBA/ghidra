@@ -144,17 +144,22 @@ public abstract class ProgramPlugin extends Plugin {
 
 			ProgramLocationPluginEvent ev = (ProgramLocationPluginEvent) event;
 			currentLocation = ev.getLocation();
-            // disable actions and remove from popup
-            // remove selection actions
-            // enable actions
-            // add selection actions
-            if (currentLocation != null && currentLocation.getAddress() == null ||
+			if (currentLocation != null && currentLocation.getAddress() == null ||
 				(currentProgram == null && ev.getProgram() == null)) {
 				currentLocation = null;
 				// disable actions, but don't remove from popup
 				enableActions(locationActionList, false);
 			}
-			else enableActions(locationActionList, currentLocation != null);
+			else if (currentLocation == null) {
+				// disable actions and remove from popup
+				enableActions(locationActionList, false);
+				// remove selection actions
+			}
+			else {
+				// enable actions
+				enableActions(locationActionList, true);
+				// add selection actions
+			}
 			if (currentProgram == null) {
 				// currentProgram is null because we haven't gotten the
 				// open program event yet (a plugin is firing location change
@@ -424,9 +429,10 @@ public abstract class ProgramPlugin extends Plugin {
 	 * @param removeFromPopup only used if enabled is false
 	 */
 	private void enableActions(ArrayList<DockingAction> list, boolean enabled) {
-        for (DockingAction a : list) {
-            a.setEnabled(enabled);
-        }
+		for (int i = 0; i < list.size(); i++) {
+			DockingAction a = list.get(i);
+			a.setEnabled(enabled);
+		}
 	}
 
 	public ProgramLocation getProgramLocation() {

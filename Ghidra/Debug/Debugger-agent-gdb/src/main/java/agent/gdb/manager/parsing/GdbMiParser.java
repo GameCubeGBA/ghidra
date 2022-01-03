@@ -174,7 +174,7 @@ public class GdbMiParser extends AbstractGdbParser {
 		 */
 		public Object getSingleton(String key) {
 			Collection<Object> col = map.get(key);
-			if (col.isEmpty()) {
+			if (col.size() == 0) {
 				return null;
 			}
 			if (col.size() != 1) {

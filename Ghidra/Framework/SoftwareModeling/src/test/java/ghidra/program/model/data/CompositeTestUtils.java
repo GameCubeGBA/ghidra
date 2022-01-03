@@ -100,7 +100,7 @@ public class CompositeTestUtils {
 
 		Composite composite = (Composite) dt;
 		StringBuilder buf = new StringBuilder();
-		buf.append(composite);
+		buf.append(composite.toString());
 
 		if (recursive) {
 			TreeSet<Composite> otherComposites = new TreeSet<>(NAME_COMPARATOR);

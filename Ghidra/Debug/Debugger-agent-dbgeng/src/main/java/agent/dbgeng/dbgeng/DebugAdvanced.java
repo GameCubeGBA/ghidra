@@ -20,7 +20,7 @@ package agent.dbgeng.dbgeng;
  */
 @FunctionalInterface
 public interface DebugAdvanced {
-	class DebugThreadBasicInformation {
+	public static class DebugThreadBasicInformation {
 		public final Integer exitStatus;
 		public final Integer priorityClass;
 		public final Integer priority;

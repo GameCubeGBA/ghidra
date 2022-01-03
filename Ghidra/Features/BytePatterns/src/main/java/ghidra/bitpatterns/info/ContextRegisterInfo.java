@@ -97,17 +97,17 @@ public class ContextRegisterInfo {
 			return false;
 		}
 		ContextRegisterInfo other = (ContextRegisterInfo) obj;
-		if (!contextRegister.equals(other.contextRegister)) {
+		if (!contextRegister.equals(other.getContextRegister())) {
 			return false;
 		}
 		if (value == null) {
-			return (other.value == null);
+			return (other.getValue() == null);
 		}
-		if (other.value == null) {
+		if (other.getValue() == null) {
 			//in this case we know that value != null
 			return false;
 		}
-		return value.equals(other.value);
+		return value.equals(other.getValue());
 	}
 
 	@Override

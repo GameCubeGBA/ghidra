@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -114,7 +113,7 @@ public class SleighPreprocessor implements ExpressionEnvironment {
 		ifstack.add(new ConditionalHelper(false, false, false, true));
 
 		FileInputStream fis = new FileInputStream(file);
-		InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.ISO_8859_1);
+		InputStreamReader isr = new InputStreamReader(fis, "ISO-8859-1");
 
 		try (BufferedReader in = new BufferedReader(isr)) {
 
@@ -123,7 +122,7 @@ public class SleighPreprocessor implements ExpressionEnvironment {
 			log.trace("enter SleighPreprocessor");
 
 			while ((line = in.readLine()) != null) {
-				log.trace("top of while, state: " + this);
+				log.trace("top of while, state: " + this.toString());
 				log.trace("got line: " + line);
 
 				String origLine = line;
@@ -131,7 +130,7 @@ public class SleighPreprocessor implements ExpressionEnvironment {
 				// remove confirmed full-line comments
 				line = line.replaceFirst("^\\s*#.*", "");
 
-				if (!line.isEmpty() && line.charAt(0) == '@') {
+				if (line.length() > 0 && line.charAt(0) == '@') {
 
 					// remove any comments in preprocessor
 					line = line.replaceFirst("#.*", "");
@@ -140,7 +139,10 @@ public class SleighPreprocessor implements ExpressionEnvironment {
 					if ((m = INCLUDE.matcher(line)).matches()) {
 						if (isCopy()) {
 							String includeFileName = handleVariables(m.group(1), true);
-							boolean isAbsolute = includeFileName.startsWith("/") || includeFileName.startsWith("\\") || includeFileName.matches("^[a-zA-Z_0-9]+:.*");
+							boolean isAbsolute = false;
+							if (includeFileName.startsWith("/") || includeFileName.startsWith("\\") || includeFileName.matches("^[a-zA-Z_0-9]+:.*")) {
+								isAbsolute = true;
+							}
 							final File includeFile = isAbsolute ? new File(includeFileName)
 									: new File(file.getParent(), includeFileName);
 							FileResolutionResult result =

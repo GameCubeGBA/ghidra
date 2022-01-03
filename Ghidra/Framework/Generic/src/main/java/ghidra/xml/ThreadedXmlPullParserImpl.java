@@ -54,7 +54,7 @@ import ghidra.util.xml.XmlUtilities;
 class ThreadedXmlPullParserImpl extends AbstractXmlPullParser {
 
 	// Special XmlElement used to tell pulling thread that the pushing thread is done.
-    private static final XmlElement XML_END_TOKEN =
+	private final static XmlElement XML_END_TOKEN =
 		new XmlElementImpl(false, false, "END TOKEN", -1, null, null, 0, 0);
 
 	private final String name;

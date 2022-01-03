@@ -60,10 +60,11 @@ public class RepositoryScreenShots extends AbstractListingMergeManagerTest {
 
 	protected TestEnv env;
 	protected MergeScreenShotGenerator mtfGenerator;
-	protected static float DESCRIPTION_FONT_SIZE = (float) 14.0;
+	static protected float DESCRIPTION_FONT_SIZE = (float) 14.0;
 
 	public RepositoryScreenShots() {
-    }
+		super();
+	}
 
 	@Before
 	@Override
@@ -608,7 +609,7 @@ public class RepositoryScreenShots extends AbstractListingMergeManagerTest {
 			(List<JComponent>) getInstanceField("titleComps", titlePanels[0]);
 		JComponent lockButton0 = null;
 		for (JComponent jComponent : titleComps0) {
-			if ("Lock/Unlock with other views".equals(jComponent.getToolTipText())) {
+			if (jComponent.getToolTipText().equals("Lock/Unlock with other views")) {
 				lockButton0 = jComponent;
 			}
 		}
@@ -618,7 +619,7 @@ public class RepositoryScreenShots extends AbstractListingMergeManagerTest {
 			(List<JComponent>) getInstanceField("titleComps", titlePanels[3]);
 		JComponent lockButton3 = null;
 		for (JComponent jComponent : titleComps3) {
-			if ("Lock/Unlock with other views".equals(jComponent.getToolTipText())) {
+			if (jComponent.getToolTipText().equals("Lock/Unlock with other views")) {
 				lockButton3 = jComponent;
 			}
 		}
@@ -671,7 +672,7 @@ public class RepositoryScreenShots extends AbstractListingMergeManagerTest {
 			(List<JComponent>) getInstanceField("titleComps", titlePanels[0]);
 		JComponent showHeaderButton = null;
 		for (JComponent jComponent : titleComps0) {
-			if ("Toggle Format Header".equals(jComponent.getToolTipText())) {
+			if (jComponent.getToolTipText().equals("Toggle Format Header")) {
 				showHeaderButton = jComponent;
 			}
 		}

@@ -20,12 +20,12 @@ import ghidra.file.formats.android.art.ArtHeader;
 import ghidra.file.formats.android.art.ArtImageSections;
 
 public class ImageSections_Marshmallow extends ArtImageSections {
-	public static final int kSectionObjects = 0;
-	public static final int kSectionArtFields = 1;
-	public static final int kSectionArtMethods = 2;
-	public static final int kSectionInternedStrings = 3;
-	public static final int kSectionImageBitmap = 4;
-	public static final int kSectionCount = 5;  // Number of elements in enum.
+	public final static int kSectionObjects = 0;
+	public final static int kSectionArtFields = 1;
+	public final static int kSectionArtMethods = 2;
+	public final static int kSectionInternedStrings = 3;
+	public final static int kSectionImageBitmap = 4;
+	public final static int kSectionCount = 5;  // Number of elements in enum.
 
 	public ImageSections_Marshmallow(BinaryReader reader, ArtHeader header) {
 		super(reader, header);

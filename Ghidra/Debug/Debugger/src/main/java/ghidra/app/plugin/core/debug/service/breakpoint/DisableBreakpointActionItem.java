@@ -33,8 +33,11 @@ public class DisableBreakpointActionItem implements BreakpointActionItem {
 			return false;
 		}
 		DisableBreakpointActionItem that = (DisableBreakpointActionItem) obj;
-        return this.togglable == that.togglable;
-    }
+		if (this.togglable != that.togglable) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public int hashCode() {

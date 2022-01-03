@@ -24,10 +24,10 @@ import java.io.IOException;
 
 public final class Img3TagFactory {
 
-	public static final AbstractImg3Tag get(BinaryReader reader) throws IOException {
+	public final static AbstractImg3Tag get(BinaryReader reader) throws IOException {
 		String tag = StringUtilities.toString( reader.peekNextInt() );
 
-		if (tag == null || tag.isEmpty()) {//TODO
+		if (tag == null || tag.length() == 0) {//TODO
 		}
 		else if (tag.equals( Img3Constants.IMG3_TAG_BDID_MAGIC )) {
 			return new BdidTag( reader );

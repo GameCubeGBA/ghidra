@@ -81,11 +81,11 @@ public class GTreeSelectionModel extends DefaultTreeSelectionModel {
 		clearSelection(EventOrigin.INTERNAL_GENERATED);
 	}
 
+	@Override
 	// overridden to signal that this change is caused by internal code
-// Note: if we want to expose this method in GTree, then create a method similar to
-// clearSelection(EventOrigin) as was done for clearSelection()
-    @Override
-    public final void removeSelectionPaths(TreePath[] paths) {
+	// Note: if we want to expose this method in GTree, then create a method similar to 
+	// clearSelection(EventOrigin) as was done for clearSelection()
+	final public void removeSelectionPaths(TreePath[] paths) {
 		currentEventOrigin = EventOrigin.INTERNAL_GENERATED;
 		super.removeSelectionPaths(paths);
 		currentEventOrigin = EventOrigin.USER_GENERATED;
@@ -101,7 +101,7 @@ public class GTreeSelectionModel extends DefaultTreeSelectionModel {
 	 * 
 	 * @param path the path that is to be removed
 	 */
-    public final void userRemovedSelectionPath(TreePath path) {
+	final public void userRemovedSelectionPath(TreePath path) {
 		currentEventOrigin = EventOrigin.USER_GENERATED;
 		super.removeSelectionPaths(new TreePath[] { path });
 		currentEventOrigin = EventOrigin.USER_GENERATED;

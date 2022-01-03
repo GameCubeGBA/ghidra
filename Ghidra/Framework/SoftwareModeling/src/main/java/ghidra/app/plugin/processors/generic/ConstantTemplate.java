@@ -141,7 +141,9 @@ public class ConstantTemplate implements Serializable {
 			if (ct.select1() != select1) {
 				return false;
 			}
-            return ct.select2() == select2;
+			if (ct.select2() != select2) {
+				return false;
+			}
 		}
 
 		return true;

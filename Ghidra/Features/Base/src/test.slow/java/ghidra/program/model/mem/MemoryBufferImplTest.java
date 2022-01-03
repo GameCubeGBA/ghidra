@@ -37,7 +37,8 @@ public class MemoryBufferImplTest extends AbstractGhidraHeadedIntegrationTest {
 	private MemoryBufferImpl memBuf;
 
 	public MemoryBufferImplTest() {
-    }
+		super();
+	}
 
 	private void loadProgram(String name) throws Exception {
 		ProgramBuilder builder = new ProgramBuilder(name, ProgramBuilder._TOY);

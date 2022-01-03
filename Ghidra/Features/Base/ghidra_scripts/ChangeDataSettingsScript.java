@@ -42,9 +42,9 @@ public class ChangeDataSettingsScript extends GhidraScript {
     			break; // something bad and unexpected has happened
     		}
     		SettingsDefinition [] settings = component.getDataType().getSettingsDefinitions();
-            for (SettingsDefinition setting : settings) {
-                if (setting instanceof FormatSettingsDefinition) {
-                    FormatSettingsDefinition format = (FormatSettingsDefinition) setting;
+    		for (int j = 0; j < settings.length; j++) {
+                if (settings[j] instanceof FormatSettingsDefinition) {
+                    FormatSettingsDefinition format = (FormatSettingsDefinition)settings[j];
                     format.setChoice(component, FormatSettingsDefinition.DECIMAL);
                 }
             }

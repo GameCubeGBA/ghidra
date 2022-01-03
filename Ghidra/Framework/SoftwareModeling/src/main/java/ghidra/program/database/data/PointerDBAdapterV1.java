@@ -30,7 +30,7 @@ import ghidra.util.exception.VersionException;
  * Version 1 adapter for the Pointer table.
  */
 class PointerDBAdapterV1 extends PointerDBAdapter {
-	static final int VERSION = 1;
+	final static int VERSION = 1;
 
 	static final int V1_PTR_DT_ID_COL = 0;
 	static final int V1_PTR_CATEGORY_COL = 1;

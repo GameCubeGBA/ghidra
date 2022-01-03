@@ -840,8 +840,13 @@ public class DBTraceProgramView implements TraceProgramView {
 
 		protected static <T> Iterable<Pair<Entry<AddressRange, T>, Entry<AddressRange, T>>> iter(
 				Iterable<Entry<AddressRange, T>> left, Iterable<Entry<AddressRange, T>> right) {
-			return () -> new OverlappingAddressRangeKeyIteratorMerger<>(left.iterator(),
-                right.iterator());
+			return new Iterable<>() {
+				@Override
+				public Iterator<Pair<Entry<AddressRange, T>, Entry<AddressRange, T>>> iterator() {
+					return new OverlappingAddressRangeKeyIteratorMerger<>(left.iterator(),
+						right.iterator());
+				}
+			};
 		}
 
 		public OverlappingAddressRangeKeyIteratorMerger(Iterator<Entry<AddressRange, T>> left,
@@ -1787,8 +1792,11 @@ public class DBTraceProgramView implements TraceProgramView {
 			TraceFunctionSymbol func = (TraceFunctionSymbol) symbol;
 			return isFunctionVisible(func, lifespan);
 		}
-        return viewport.containsAnyUpper(lifespan);
-    }
+		if (!viewport.containsAnyUpper(lifespan)) {
+			return false;
+		}
+		return true;
+	}
 
 	protected DomainObjectEventQueues isSymbolVisible(TraceAddressSpace space,
 			TraceSymbol symbol) {

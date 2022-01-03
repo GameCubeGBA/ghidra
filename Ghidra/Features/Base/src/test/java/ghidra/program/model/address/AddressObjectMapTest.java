@@ -63,7 +63,8 @@ public class AddressObjectMapTest extends AbstractGenericTest {
 
 	/** Creates new AddressObjectMapTest */
 	public AddressObjectMapTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() {

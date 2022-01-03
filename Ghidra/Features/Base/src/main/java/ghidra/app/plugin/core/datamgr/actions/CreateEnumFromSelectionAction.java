@@ -126,11 +126,14 @@ public class CreateEnumFromSelectionAction extends DockingAction {
 		myDataTypeManager.flushEvents();
 		final String parentNodeName = myDataTypeManager.getName();
 		final String newNodeName = newName;
-		SwingUtilities.invokeLater(() -> {
-            GTreeNode rootNode = gTree.getViewRoot();
-            gTree.setSelectedNodeByNamePath(new String[] { rootNode.getName(), parentNodeName,
-                newNodeName });
-        });
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				GTreeNode rootNode = gTree.getViewRoot();
+				gTree.setSelectedNodeByNamePath(new String[] { rootNode.getName(), parentNodeName,
+					newNodeName });
+			}
+		});
 	}
 
 	@Override

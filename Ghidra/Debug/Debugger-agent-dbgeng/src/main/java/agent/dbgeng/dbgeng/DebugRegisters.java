@@ -25,14 +25,14 @@ import ghidra.comm.util.BitmaskUniverse;
  * A wrapper for {@code IDebugRegisters} and its newer variants.
  */
 public interface DebugRegisters {
-	enum DebugRegisterSource {
+	public static enum DebugRegisterSource {
 		DEBUG_REGSRC_DEBUGGEE, //
 		DEBUG_REGSRC_EXPLICIT, //
 		DEBUG_REGSRC_FRAME, //
 		;
 	}
 
-	enum DebugRegisterFlags implements BitmaskUniverse {
+	public static enum DebugRegisterFlags implements BitmaskUniverse {
 		SUB_REGISTER(1 << 0), //
 		;
 
@@ -48,7 +48,7 @@ public interface DebugRegisters {
 		}
 	}
 
-	class DebugRegisterDescription {
+	public static class DebugRegisterDescription {
 		public final String name;
 		public final int index;
 		public final DebugValueType type;

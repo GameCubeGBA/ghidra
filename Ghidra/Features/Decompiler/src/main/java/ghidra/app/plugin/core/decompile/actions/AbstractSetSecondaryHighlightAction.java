@@ -42,6 +42,10 @@ public abstract class AbstractSetSecondaryHighlightAction extends AbstractDecomp
 
 		TokenHighlights highlightedTokens =
 			context.getDecompilerPanel().getSecondaryHighlightedTokens();
-        return !highlightedTokens.contains(tokenAtCursor); // already highlighted
-    }
+		if (highlightedTokens.contains(tokenAtCursor)) {
+			return false; // already highlighted
+		}
+
+		return true;
+	}
 }

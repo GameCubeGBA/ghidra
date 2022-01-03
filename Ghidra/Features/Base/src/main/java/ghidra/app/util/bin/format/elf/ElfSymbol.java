@@ -309,8 +309,11 @@ public class ElfSymbol implements ByteArrayConverter {
 		if (st_value != other.st_value) {
 			return false;
 		}
-        return symbolTableIndex == other.symbolTableIndex;
-    }
+		if (symbolTableIndex != other.symbolTableIndex) {
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * Returns true if this symbol is local.
@@ -353,9 +356,9 @@ public class ElfSymbol implements ByteArrayConverter {
 	 * @return true if this is an external symbol
 	 */
 	public boolean isExternal() {
-		return (isGlobal() || isWeak()) && st_value == 0 && st_size == 0 &&
+		return (isGlobal() || isWeak()) && getValue() == 0 && getSize() == 0 &&
 			getType() == STT_NOTYPE &&
-			st_shndx == ElfSectionHeaderConstants.SHT_NULL;
+			getSectionHeaderIndex() == ElfSectionHeaderConstants.SHT_NULL;
 	}
 
 	/**

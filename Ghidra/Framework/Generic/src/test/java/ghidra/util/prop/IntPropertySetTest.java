@@ -38,7 +38,8 @@ public class IntPropertySetTest extends AbstractGenericTest {
 	IntPropertySet ps;
 
 	public IntPropertySetTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() {

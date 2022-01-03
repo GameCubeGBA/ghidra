@@ -259,8 +259,11 @@ public class GdbBreakpointInfo {
 		if (this.times != that.times) {
 			return false;
 		}
-        return Objects.equals(this.locations, that.locations);
-    }
+		if (!Objects.equals(this.locations, that.locations)) {
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * Get the GDB-assigned breakpoint number
@@ -391,7 +394,7 @@ public class GdbBreakpointInfo {
 	}
 
 	public GdbBreakpointInfo withEnabled(@SuppressWarnings("hiding") boolean enabled) {
-		if (this.enabled == enabled) {
+		if (isEnabled() == enabled) {
 			return this;
 		}
 		return new GdbBreakpointInfo(number, type, typeName, disp, addr, what, catchType,

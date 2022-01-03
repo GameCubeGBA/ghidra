@@ -38,7 +38,8 @@ public class DWARFConflictHandlerTest extends AbstractGhidraHeadedIntegrationTes
 	private CategoryPath root = new CategoryPath(CategoryPath.ROOT, "conflict_test");
 
 	public DWARFConflictHandlerTest() {
-    }
+		super();
+	}
 
 	private void startTransaction() {
 		transactionID = program.startTransaction("Test");

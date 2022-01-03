@@ -28,7 +28,8 @@ import ghidra.program.model.symbol.Symbol;
 public class FunctionPluginScreenShots extends GhidraScreenShotGenerator {
 
 	public FunctionPluginScreenShots() {
-    }
+		super();
+	}
 
 	@Test
 	public void testEditStorage() {
@@ -42,7 +43,12 @@ public class FunctionPluginScreenShots extends GhidraScreenShotGenerator {
 		final StorageAddressEditorDialog dialog =
 			new StorageAddressEditorDialog(program, dtService, parameter, 0);
 
-		runSwing((Runnable) () -> tool.showDialog(dialog), false);
+		runSwing(new Runnable() {
+			@Override
+			public void run() {
+				tool.showDialog(dialog);
+			}
+		}, false);
 
 		captureDialog(600, 400);
 	}
@@ -61,7 +67,12 @@ public class FunctionPluginScreenShots extends GhidraScreenShotGenerator {
 		final NumberInputDialog dialog = new NumberInputDialog("Set Stack Depth Change at 0x401482",
 			"Stack Depth Change", 5, Integer.MIN_VALUE, Integer.MAX_VALUE, false);
 
-		runSwing((Runnable) () -> tool.showDialog(dialog), false);
+		runSwing(new Runnable() {
+			@Override
+			public void run() {
+				tool.showDialog(dialog);
+			}
+		}, false);
 		captureDialog();
 
 	}

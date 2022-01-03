@@ -521,9 +521,11 @@ public class GhidraScriptEditorComponentProvider extends ComponentProvider {
 		defaultFont = (Font) editor.getValue();
 
 		Collection<GhidraScriptEditorComponentProvider> values = provider.getEditorMap().values();
-        for (GhidraScriptEditorComponentProvider editorComponent : values) {
-            editorComponent.textArea.setFont(defaultFont);
-        }
+		Iterator<GhidraScriptEditorComponentProvider> iterator = values.iterator();
+		while (iterator.hasNext()) {
+			GhidraScriptEditorComponentProvider editorComponent = iterator.next();
+			editorComponent.textArea.setFont(defaultFont);
+		}
 	}
 
 	private void save() {

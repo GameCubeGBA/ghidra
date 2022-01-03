@@ -37,7 +37,7 @@ import java.io.*;
  * 
  */
 public class ImportByName implements StructConverter, ByteArrayConverter {
-	public static final String NAME = "IMAGE_IMPORT_BY_NAME";
+	public final static String NAME = "IMAGE_IMPORT_BY_NAME";
 
     private short  hint;
     private String name;

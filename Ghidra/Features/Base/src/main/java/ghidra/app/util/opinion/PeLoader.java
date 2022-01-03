@@ -59,7 +59,7 @@ import ghidra.util.task.TaskMonitor;
 public class PeLoader extends AbstractPeDebugLoader {
 
 	/** The name of the PE loader */
-    public static final String PE_NAME = "Portable Executable (PE)";
+	public final static String PE_NAME = "Portable Executable (PE)";
 
 	/** The name of the PE headers memory block. */
 	public static final String HEADERS = "Headers";
@@ -86,7 +86,7 @@ public class PeLoader extends AbstractPeDebugLoader {
 			long imageBase = ntHeader.getOptionalHeader().getImageBase();
 			String machineName = ntHeader.getFileHeader().getMachineName();
 			String compiler = CompilerOpinion.stripFamily(CompilerOpinion.getOpinion(pe, provider));
-			for (QueryResult result : QueryOpinionService.query(PE_NAME, machineName, compiler)) {
+			for (QueryResult result : QueryOpinionService.query(getName(), machineName, compiler)) {
 				loadSpecs.add(new LoadSpec(this, imageBase, result));
 			}
 			if (loadSpecs.isEmpty()) {

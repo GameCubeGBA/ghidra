@@ -36,7 +36,7 @@ public interface StringTranslationService {
 	 *
 	 * @return string name.
 	 */
-    String getTranslationServiceName();
+	public String getTranslationServiceName();
 
 	/**
 	 * Returns the {@link HelpLocation} instance that describes where to direct the user
@@ -44,7 +44,7 @@ public interface StringTranslationService {
 	 *
 	 * @return {@link HelpLocation} instance or null.
 	 */
-	default HelpLocation getHelpLocation() {
+	public default HelpLocation getHelpLocation() {
 		return null;
 	}
 
@@ -56,7 +56,7 @@ public interface StringTranslationService {
 	 * @param program the program containing the data instances.
 	 * @param stringLocations {@link List} of string locations.
 	 */
-    void translate(Program program, List<ProgramLocation> stringLocations);
+	public void translate(Program program, List<ProgramLocation> stringLocations);
 
 	/**
 	 * Helper that creates a {@link HelpLocation} based on the plugin and sts.
@@ -66,8 +66,8 @@ public interface StringTranslationService {
 	 * @return HelpLocation with topic equal to the plugin name and anchor something like
 	 * "MyTranslationServiceName_String_Translation_Service".
 	 */
-	static HelpLocation createStringTranslationServiceHelpLocation(
-            Class<? extends Plugin> pluginClass, StringTranslationService sts) {
+	public static HelpLocation createStringTranslationServiceHelpLocation(
+			Class<? extends Plugin> pluginClass, StringTranslationService sts) {
 		return new HelpLocation(PluginDescription.getPluginDescription(pluginClass).getName(),
 			sts.getTranslationServiceName() + "_String_Translation_Service");
 	}

@@ -38,7 +38,7 @@ import ghidra.util.task.TaskMonitor;
  */
 public class MachoLoader extends AbstractLibrarySupportLoader {
 
-	public static final String MACH_O_NAME = "Mac OS X Mach-O";
+	public final static String MACH_O_NAME = "Mac OS X Mach-O";
 	private static final long MIN_BYTE_LENGTH = 4;
 
 	/** Loader option to add relocation entries for each fixed chain pointer */
@@ -68,7 +68,7 @@ public class MachoLoader extends AbstractLibrarySupportLoader {
 				MachHeader.createMachHeader(RethrowContinuesFactory.INSTANCE, provider);
 			String magic =
 				CpuTypes.getMagicString(machHeader.getCpuType(), machHeader.getCpuSubType());
-			List<QueryResult> results = QueryOpinionService.query(MACH_O_NAME, magic, null);
+			List<QueryResult> results = QueryOpinionService.query(getName(), magic, null);
 			for (QueryResult result : results) {
 				loadSpecs.add(new LoadSpec(this, machHeader.getImageBase(), result));
 			}

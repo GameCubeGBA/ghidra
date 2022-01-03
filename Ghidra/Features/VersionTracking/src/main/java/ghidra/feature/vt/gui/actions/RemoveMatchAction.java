@@ -66,11 +66,14 @@ public class RemoveMatchAction extends DockingAction {
 		}
 		VTMatchContext matchContext = (VTMatchContext) context;
 		List<VTMatch> matches = matchContext.getSelectedMatches();
-		if (matches.isEmpty()) {
+		if (matches.size() == 0) {
 			return false;
 		}
-        return isRemovableMatch(matches.get(0)); // It must be a single manual match.
-    }
+		if (!isRemovableMatch(matches.get(0))) {
+			return false; // It must be a single manual match.
+		}
+		return true;
+	}
 
 	private boolean isRemovableMatch(VTMatch vtMatch) {
 		return vtMatch.getMatchSet().hasRemovableMatches();

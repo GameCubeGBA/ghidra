@@ -228,14 +228,17 @@ public class HashedFunctionAddressCorrelation implements FunctionAddressCorrelat
 		int matchSize = entry.hash.size;
 		for(InstructHash curInstruct : entry.instList) {
 			ArrayList<Hash> hashList = strategy.calcHashes(curInstruct, matchSize, store);
-            for (Hash curHash : hashList) {
-                DisambiguatorEntry curEntry = entryMap.get(curHash);
-                if (curEntry == null) {
-                    curEntry = new DisambiguatorEntry(curHash, curInstruct);
-                    entryMap.put(curHash, curEntry);
-                } else
-                    curEntry.count += 1;
-            }
+			Iterator<Hash> iter = hashList.iterator();
+			while(iter.hasNext()) {
+				Hash curHash = iter.next();
+				DisambiguatorEntry curEntry = entryMap.get(curHash);
+				if (curEntry == null) {
+					curEntry = new DisambiguatorEntry(curHash,curInstruct);
+					entryMap.put(curHash, curEntry);
+				}
+				else
+					curEntry.count += 1;
+			}
 		}
 		return entryMap;
 	}
@@ -255,17 +258,19 @@ public class HashedFunctionAddressCorrelation implements FunctionAddressCorrelat
 		TreeMap<Hash, DisambiguatorEntry> destDisambig =
 			constructDisambiguatorTree(destEntry, destStore, strategy);
 		int count = 0;
-        for (DisambiguatorEntry srcDisEntry : srcDisambig.values()) {
-            // Its possible for this InstructHash to have been matched by an earlier DisambiguatorEntry
-            if ((srcDisEntry.count != 1) || srcDisEntry.instruct.isMatched) continue;
-            DisambiguatorEntry destDisEntry = destDisambig.get(srcDisEntry.hash);
-            if (destDisEntry == null) continue;
-            if (destDisEntry.count != 1) continue;
-            if (destDisEntry.instruct.isMatched) continue;
-            // If both sides have exactly one matching InstructHash, call it a match
-            declareMatch(srcEntry, srcDisEntry.instruct, destEntry, destDisEntry.instruct);
-            count += 1;
-        }
+		Iterator<DisambiguatorEntry> iter = srcDisambig.values().iterator();
+		while(iter.hasNext()) {
+			DisambiguatorEntry srcDisEntry = iter.next();
+			// Its possible for this InstructHash to have been matched by an earlier DisambiguatorEntry
+			if ((srcDisEntry.count != 1) || srcDisEntry.instruct.isMatched) continue;
+			DisambiguatorEntry destDisEntry = destDisambig.get(srcDisEntry.hash);
+			if (destDisEntry == null) continue;
+			if (destDisEntry.count != 1) continue;
+			if (destDisEntry.instruct.isMatched) continue;
+			// If both sides have exactly one matching InstructHash, call it a match
+			declareMatch(srcEntry,srcDisEntry.instruct,destEntry,destDisEntry.instruct);
+			count += 1;
+		}
 		return count;
 	}
 
@@ -287,8 +292,9 @@ public class HashedFunctionAddressCorrelation implements FunctionAddressCorrelat
 		count = disambiguateNgramsWithStrategy(new DisambiguateByBytes(),srcEntry,destEntry);
 		if (count != 0) return true;
 		count= disambiguateNgramsWithStrategy(new DisambiguateByParentWithOrder(),srcEntry,destEntry);
-        return count != 0;
-    }
+		if (count != 0) return true;
+		return false;
+	}
 
 	/**
 	 * Check for matches through one set of n-grams.  If non-unique matches exist, attempt to disambiguate.

@@ -20,10 +20,10 @@ package ghidra.program.model.data;
  */
 public class IntegerDataType extends AbstractIntegerDataType {
 
-	private static final long serialVersionUID = 1;
+	private final static long serialVersionUID = 1;
 
 	/** A statically defined IntegerDataType instance.*/
-    public static final IntegerDataType dataType = new IntegerDataType();
+	public final static IntegerDataType dataType = new IntegerDataType();
 
 	public IntegerDataType() {
 		this(null);

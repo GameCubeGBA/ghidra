@@ -64,7 +64,7 @@ public class AddReferencesInSwitchTable extends GhidraScript {
 		DataType type = data.getDataType();
 		String typeName = type.getName();
 		//println( "type: " + typeName );			
-		if ( "byte".equalsIgnoreCase(typeName) )
+		if ( typeName.equalsIgnoreCase("byte") )
 			diff = 1;
 		else if ( type.getName().equalsIgnoreCase("word") )
 			diff = 2;

@@ -212,7 +212,7 @@ public class PrototypeModel {
 		arr[0] = clone;
 		ArrayList<VariableStorage> res = new ArrayList<>();
 		outputParams.assignMap(program, arr, res, false);
-		if (!res.isEmpty()) {
+		if (res.size() > 0) {
 			return res.get(0);
 		}
 		return null;
@@ -665,8 +665,11 @@ public class PrototypeModel {
 		if (!SystemUtilities.isEqual(paramRange, op2.paramRange)) {
 			return false;
 		}
-        return SystemUtilities.isArrayEqual(returnaddress, op2.returnaddress);
-    }
+		if (!SystemUtilities.isArrayEqual(returnaddress, op2.returnaddress)) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public int hashCode() {
@@ -675,6 +678,6 @@ public class PrototypeModel {
 
 	@Override
 	public String toString() {
-		return name;
+		return getName();
 	}
 }

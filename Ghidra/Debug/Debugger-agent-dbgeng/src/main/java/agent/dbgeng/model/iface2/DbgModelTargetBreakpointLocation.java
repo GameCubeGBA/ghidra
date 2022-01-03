@@ -22,6 +22,6 @@ public interface DbgModelTargetBreakpointLocation
 		extends DbgModelTargetObject, TargetBreakpointLocation {
 
 	@Override
-    Address getAddress();
+	public Address getAddress();
 
 }

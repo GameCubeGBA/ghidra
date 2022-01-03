@@ -38,7 +38,8 @@ import ghidra.program.model.data.*;
 public class DataTypeEditorsScreenShots extends GhidraScreenShotGenerator {
 
 	public DataTypeEditorsScreenShots() {
-    }
+		super();
+	}
 
 	@Test
 	public void testDialog() {

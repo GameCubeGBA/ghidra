@@ -23,7 +23,7 @@ import ghidra.util.exception.DuplicateNameException;
 import java.io.IOException;
 
 public class CoffLineNumber implements StructConverter {
-	public static final int SIZEOF = 4 + 2;
+	public final static int SIZEOF = 4 + 2;
 
 	private int   l_addr; // address of line number
 	private short l_lnno; // line number

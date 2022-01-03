@@ -29,7 +29,7 @@ import ghidra.util.task.TaskMonitor;
  */
 
 public class ToyAnalyzer extends ConstantPropagationAnalyzer {
-	private static final String PROCESSOR_NAME = "Toy";
+	private final static String PROCESSOR_NAME = "Toy";
 
 	public static final Processor PROCESSOR =
 		Processor.findOrPossiblyCreateProcessor(PROCESSOR_NAME);

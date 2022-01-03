@@ -165,23 +165,26 @@ public class FVSlider extends JSlider
 			// Once we have that byte value, just set the slider to be the same.
 			//
 			int chunkRowStart = 0;
+			Iterator<Chunk> iter = model.iterator();
 
-            for (Chunk chunk : model) {
-                // Figure out the starting row of the next chunk. If the row we want is less than
-                // that, then we know we've found the chunk that contains our row.
-                chunkRowStart += chunk.linesInChunk;
-                if (row < chunkRowStart) {
+			while (iter.hasNext()) {
+				Chunk chunk = iter.next();
 
-                    // To find our exact row WITHIN the chunk, we have to do some simple math (!),
-                    // then get the starting byte for that row from the byteMap.
-                    int rowWithinChunk = (row - (chunkRowStart - chunk.linesInChunk));
-                    Pair byteRange = chunk.rowToFilePositionMap.get(rowWithinChunk);
-                    if (byteRange != null) {
-                        setValue(byteRange.getStart());
-                    }
-                    break;
-                }
-            }
+				// Figure out the starting row of the next chunk. If the row we want is less than
+				// that, then we know we've found the chunk that contains our row.
+				chunkRowStart += chunk.linesInChunk;
+				if (row < chunkRowStart) {
+
+					// To find our exact row WITHIN the chunk, we have to do some simple math (!), 
+					// then get the starting byte for that row from the byteMap.
+					int rowWithinChunk = (row - (chunkRowStart - chunk.linesInChunk));
+					Pair byteRange = chunk.rowToFilePositionMap.get(rowWithinChunk);
+					if (byteRange != null) {
+						setValue(byteRange.getStart());
+					}
+					break;
+				}
+			}
 		}
 	}
 

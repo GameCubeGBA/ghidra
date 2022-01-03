@@ -34,7 +34,7 @@ class ApplyTables {
 				return;
 			}
 			XmlElement elem = xmlParser.next();
-			if (elem.isEnd() && "tables".equals(elem.getName())) {
+			if (elem.isEnd() && elem.getName().equals("tables")) {
 				break;
 			}
 			String tableName = elem.getAttribute("name");

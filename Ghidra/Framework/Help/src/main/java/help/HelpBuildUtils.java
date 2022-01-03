@@ -622,8 +622,11 @@ public class HelpBuildUtils {
 		public boolean accept(File file) {
 			String name = file.getName();
 			if (file.isDirectory()) {
-                return !".svn".equals(name) && !"bin".equals(name) && !"api".equals(name);
-            }
+				if (".svn".equals(name) || "bin".equals(name) || "api".equals(name)) {
+					return false;
+				}
+				return true;
+			}
 
 			for (String extension : fileExtensions) {
 				if (name.endsWith(extension)) {

@@ -52,7 +52,8 @@ public class ListingTest extends AbstractGenericTest {
 	 * @param arg0
 	 */
 	public ListingTest() {
-    }
+		super();
+	}
 
 	/*
 	 * @see TestCase#setUp()

@@ -56,7 +56,7 @@ public class BlockGraphTask extends Task {
 
 	private ColorizingService colorizingService;
 
-	private static final String ENTRY_NEXUS_NAME = "Entry Points";
+	private final static String ENTRY_NEXUS_NAME = "Entry Points";
 	private static final int MAX_SYMBOLS = 10;
 	private CodeBlockModel blockModel;
 	private AddressSetView selection;
@@ -189,7 +189,7 @@ public class BlockGraphTask extends Task {
 			Address start = graphBlock(graph, curBB, entryPoints);
 
 			if (start != null && (++blockCount % 50) == 0) {
-				taskMonitor.setMessage("Process Block: " + start);
+				taskMonitor.setMessage("Process Block: " + start.toString());
 			}
 		}
 

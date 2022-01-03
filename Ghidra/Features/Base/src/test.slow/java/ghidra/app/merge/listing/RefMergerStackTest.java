@@ -46,7 +46,8 @@ public class RefMergerStackTest extends AbstractListingMergeManagerTest {
 	 * @param arg0
 	 */
 	public RefMergerStackTest() {
-    }
+		super();
+	}
 
 	private void changeStackRefOffset(ProgramDB program, String fromAddr, int opIndex, int offset) {
 		Address fromAddress = addr(program, fromAddr);

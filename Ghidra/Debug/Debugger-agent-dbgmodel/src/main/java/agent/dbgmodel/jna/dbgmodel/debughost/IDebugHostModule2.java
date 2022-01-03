@@ -24,7 +24,7 @@ import com.sun.jna.ptr.PointerByReference;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IDebugHostModule2 extends IDebugHostModule1 {
-	IID IID_IDEBUG_HOST_MODULE2 = new IID("B51887E8-BCD0-4e8f-A8C7-434398B78C37");
+	final IID IID_IDEBUG_HOST_MODULE2 = new IID("B51887E8-BCD0-4e8f-A8C7-434398B78C37");
 
 	enum VTIndices2 implements VTableIndex {
 		FIND_CONTAINING_SYMBOL_BY_RVA, //

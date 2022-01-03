@@ -107,15 +107,15 @@ public class VariableProxy extends ProxyObj<Variable> {
 		}
 
 		Variable[] vars = function.getLocalVariables();
-        for (Variable variable : vars) {
-            if (firstUseOffset != variable.getFirstUseOffset()) {
-                continue;
-            }
-            if (storageAddr.equals(variable.getMinAddress())) {
-                var = variable;
-                return var;
-            }
-        }
+		for (int i = 0; i < vars.length; i++) {
+			if (firstUseOffset != vars[i].getFirstUseOffset()) {
+				continue;
+			}
+			if (storageAddr.equals(vars[i].getMinAddress())) {
+				var = vars[i];
+				return var;
+			}
+		}
 		return null;
 	}
 

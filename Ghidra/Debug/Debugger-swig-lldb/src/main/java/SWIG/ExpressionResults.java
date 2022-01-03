@@ -12,16 +12,16 @@
 package SWIG;
 
 public final class ExpressionResults {
-  public static final ExpressionResults eExpressionCompleted = new ExpressionResults("eExpressionCompleted", lldbJNI.eExpressionCompleted_get());
-  public static final ExpressionResults eExpressionSetupError = new ExpressionResults("eExpressionSetupError");
-  public static final ExpressionResults eExpressionParseError = new ExpressionResults("eExpressionParseError");
-  public static final ExpressionResults eExpressionDiscarded = new ExpressionResults("eExpressionDiscarded");
-  public static final ExpressionResults eExpressionInterrupted = new ExpressionResults("eExpressionInterrupted");
-  public static final ExpressionResults eExpressionHitBreakpoint = new ExpressionResults("eExpressionHitBreakpoint");
-  public static final ExpressionResults eExpressionTimedOut = new ExpressionResults("eExpressionTimedOut");
-  public static final ExpressionResults eExpressionResultUnavailable = new ExpressionResults("eExpressionResultUnavailable");
-  public static final ExpressionResults eExpressionStoppedForDebug = new ExpressionResults("eExpressionStoppedForDebug");
-  public static final ExpressionResults eExpressionThreadVanished = new ExpressionResults("eExpressionThreadVanished");
+  public final static ExpressionResults eExpressionCompleted = new ExpressionResults("eExpressionCompleted", lldbJNI.eExpressionCompleted_get());
+  public final static ExpressionResults eExpressionSetupError = new ExpressionResults("eExpressionSetupError");
+  public final static ExpressionResults eExpressionParseError = new ExpressionResults("eExpressionParseError");
+  public final static ExpressionResults eExpressionDiscarded = new ExpressionResults("eExpressionDiscarded");
+  public final static ExpressionResults eExpressionInterrupted = new ExpressionResults("eExpressionInterrupted");
+  public final static ExpressionResults eExpressionHitBreakpoint = new ExpressionResults("eExpressionHitBreakpoint");
+  public final static ExpressionResults eExpressionTimedOut = new ExpressionResults("eExpressionTimedOut");
+  public final static ExpressionResults eExpressionResultUnavailable = new ExpressionResults("eExpressionResultUnavailable");
+  public final static ExpressionResults eExpressionStoppedForDebug = new ExpressionResults("eExpressionStoppedForDebug");
+  public final static ExpressionResults eExpressionThreadVanished = new ExpressionResults("eExpressionThreadVanished");
 
   public final int swigValue() {
     return swigValue;
@@ -34,9 +34,9 @@ public final class ExpressionResults {
   public static ExpressionResults swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-      for (ExpressionResults value : swigValues)
-          if (value.swigValue == swigValue)
-              return value;
+    for (int i = 0; i < swigValues.length; i++)
+      if (swigValues[i].swigValue == swigValue)
+        return swigValues[i];
     throw new IllegalArgumentException("No enum " + ExpressionResults.class + " with value " + swigValue);
   }
 

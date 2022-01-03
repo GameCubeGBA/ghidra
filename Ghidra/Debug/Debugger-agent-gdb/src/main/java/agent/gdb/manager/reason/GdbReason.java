@@ -38,7 +38,7 @@ public interface GdbReason {
 	/**
 	 * A map of reason strings to reason classes
 	 */
-    Map<String, Function<GdbMiFieldList, ? extends GdbReason>> TYPES =
+	static final Map<String, Function<GdbMiFieldList, ? extends GdbReason>> TYPES =
 		new ImmutableMap.Builder<String, Function<GdbMiFieldList, ? extends GdbReason>>()
 				.put("signal-received", GdbSignalReceivedReason::new)
 				.put("breakpoint-hit", GdbBreakpointHitReason::new)
@@ -91,5 +91,5 @@ public interface GdbReason {
 		return cons.apply(info);
 	}
 
-	String desc();
+	public String desc();
 }

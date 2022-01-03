@@ -31,11 +31,11 @@ import ghidra.util.Msg;
  * A wrapper for {@code IDebugControl} and its newer variants.
  */
 public interface DebugControl extends DebugControlReentrant {
-	BitmaskSet<DebugOutputControl> SET_ALL_CLIENTS =
+	public static final BitmaskSet<DebugOutputControl> SET_ALL_CLIENTS =
 		BitmaskSet.of(DebugOutputControl.ALL_CLIENTS);
-	BitmaskSet<DebugExecute> SET_DEFAULT = BitmaskSet.of(DebugExecute.DEFAULT);
+	public static final BitmaskSet<DebugExecute> SET_DEFAULT = BitmaskSet.of(DebugExecute.DEFAULT);
 
-	enum DebugOutputLevel implements BitmaskUniverse {
+	public static enum DebugOutputLevel implements BitmaskUniverse {
 		NORMAL(1 << 0), //
 		ERROR(1 << 1), //
 		WARNING(1 << 2), //
@@ -61,7 +61,7 @@ public interface DebugControl extends DebugControlReentrant {
 		}
 	}
 
-	enum DebugOutputControl implements BitmaskUniverse {
+	public static enum DebugOutputControl implements BitmaskUniverse {
 		THIS_CLIENT(0), //
 		ALL_CLIENTS(1), //
 		ALL_OTHER_CLIENTS(2), //
@@ -88,7 +88,7 @@ public interface DebugControl extends DebugControlReentrant {
 		}
 	}
 
-	enum DebugExecute implements BitmaskUniverse {
+	public static enum DebugExecute implements BitmaskUniverse {
 		DEFAULT(0), //
 		ECHO(1 << 0), //
 		NOT_LOGGED(1 << 1), //
@@ -107,14 +107,14 @@ public interface DebugControl extends DebugControlReentrant {
 		}
 	}
 
-	enum DebugInterrupt {
+	public static enum DebugInterrupt {
 		ACTIVE, //
 		PASSIVE, //
 		EXIT, //
 		;
 	}
 
-	enum DebugFilterOrdinals {
+	public static enum DebugFilterOrdinals {
 		DEBUG_FILTER_CREATE_THREAD, //
 		DEBUG_FILTER_EXIT_THREAD, //
 		DEBUG_FILTER_CREATE_PROCESS, //
@@ -128,7 +128,7 @@ public interface DebugControl extends DebugControlReentrant {
 		;
 	}
 
-	enum DebugFilterExecutionOption {
+	public static enum DebugFilterExecutionOption {
 		DEBUG_FILTER_BREAK(0, "Break"), //
 		DEBUG_FILTER_SECOND_CHANCE_BREAK(1, "Second-chance Break"), //
 		DEBUG_FILTER_OUTPUT(2, "Output-only"), //
@@ -154,7 +154,7 @@ public interface DebugControl extends DebugControlReentrant {
 		public final String description;
 	}
 
-	enum DebugFilterContinuationOption {
+	public static enum DebugFilterContinuationOption {
 		DEBUG_FILTER_GO_HANDLED(0, "Handled"), //
 		DEBUG_FILTER_GO_NOT_HANDLED(1, "Not Handled"), //
 		;

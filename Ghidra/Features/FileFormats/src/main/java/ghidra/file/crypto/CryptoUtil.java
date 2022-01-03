@@ -22,7 +22,7 @@ public final class CryptoUtil {
 	 * @param value the integer value to translate
 	 * @return the network byte order value
 	 */
-    public static final byte [] htonl(int value) {
+	public final static byte [] htonl(int value) {
 		byte [] bytes = new byte[4];
 
 		bytes[3] = (byte)((value >>  0) & 0xff);

@@ -209,7 +209,7 @@ public class CompareSleighExternal extends GhidraScript {
 								subRegList = false;
 							}
 							extOp = extOp.substring(0,loc) + extOp.substring(loc+reg.getName().length());
-							if (!extOp.isEmpty() && extOp.charAt(0) == '-') {
+							if (extOp.length() > 0 && extOp.charAt(0) == '-') {
 								subRegList = true;
 							}
 							continue;
@@ -264,7 +264,7 @@ public class CompareSleighExternal extends GhidraScript {
 					}
 				}
 				extOp = extOp.trim();
-				if (!extOp.isEmpty() && !extOp.startsWith(";") && !extOp.startsWith("//") && !"#".equals(extOp) && !extOp.matches("[0x]+")) {
+				if (extOp.length() > 0 && !extOp.startsWith(";") && !extOp.startsWith("//") && !extOp.equals("#") && !extOp.matches("[0x]+")) {
 					markBad(addr,"Missing characters", extOp);
 				}
 			}

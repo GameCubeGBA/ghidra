@@ -52,7 +52,10 @@ public class InvertedTableFilter<ROW_OBJECT> implements TableFilter<ROW_OBJECT> 
 		}
 
 		InvertedTableFilter<?> other = (InvertedTableFilter<?>) obj;
-        return Objects.equals(filter, other.filter);
-    }
+		if (!Objects.equals(filter, other.filter)) {
+			return false;
+		}
+		return true;
+	}
 
 }

@@ -165,10 +165,11 @@ public class BookmarkDBManager implements BookmarkManager, ErrorHandler, Manager
 	}
 
 	private void refreshBookmarkTypes() {
-        for (BookmarkType bookmarkType : typesByName.values()) {
-            BookmarkTypeDB type = (BookmarkTypeDB) bookmarkType;
-            type.setHasBookmarks(bookmarkAdapter.hasTable(type.getTypeId()));
-        }
+		Iterator<BookmarkType> it = typesByName.values().iterator();
+		while (it.hasNext()) {
+			BookmarkTypeDB type = (BookmarkTypeDB) it.next();
+			type.setHasBookmarks(bookmarkAdapter.hasTable(type.getTypeId()));
+		}
 	}
 
 	/**
@@ -413,9 +414,10 @@ public class BookmarkDBManager implements BookmarkManager, ErrorHandler, Manager
 			boolean isSpecificType = type != null && type != BookmarkType.ALL_TYPES;
 			if (!isSpecificType) {
 				// no type specified; remove all
-                for (String s : typesByName.keySet()) {
-                    removeBookmarks(s);
-                }
+				Iterator<String> iter = typesByName.keySet().iterator();
+				while (iter.hasNext()) {
+					removeBookmarks(iter.next());
+				}
 				return;
 			}
 
@@ -731,12 +733,13 @@ public class BookmarkDBManager implements BookmarkManager, ErrorHandler, Manager
 	public void removeBookmarks(AddressSetView set, TaskMonitor monitor) throws CancelledException {
 		lock.acquire();
 		try {
-            for (BookmarkType bookmarkType : typesByName.values()) {
-                BookmarkTypeDB bt = (BookmarkTypeDB) bookmarkType;
-                if (bt.hasBookmarks()) {
-                    removeBookmarks(set, bt, null, monitor);
-                }
-            }
+			Iterator<BookmarkType> it = typesByName.values().iterator();
+			while (it.hasNext()) {
+				BookmarkTypeDB bt = (BookmarkTypeDB) it.next();
+				if (bt.hasBookmarks()) {
+					removeBookmarks(set, bt, null, monitor);
+				}
+			}
 		}
 		finally {
 			lock.release();
@@ -811,23 +814,25 @@ public class BookmarkDBManager implements BookmarkManager, ErrorHandler, Manager
 		lock.acquire();
 		try {
 			cache.invalidate();
-            for (BookmarkType bookmarkType : typesByName.values()) {
-                BookmarkTypeDB bt = (BookmarkTypeDB) bookmarkType;
-                int typeId = bt.getTypeId();
-                if (bt.hasBookmarks()) {
-                    Table table = bookmarkAdapter.getTable(typeId);
-                    if (table == null) {
-                        continue;
-                    }
-                    int addrCol = BookmarkDBAdapter.ADDRESS_COL;
-                    try {
-                        DatabaseTableUtils.updateIndexedAddressField(table, addrCol, addrMap,
-                                fromAddr, toAddr, length, null, monitor);
-                    } catch (IOException e) {
-                        dbError(e);
-                    }
-                }
-            }
+			Iterator<BookmarkType> it = typesByName.values().iterator();
+			while (it.hasNext()) {
+				BookmarkTypeDB bt = (BookmarkTypeDB) it.next();
+				int typeId = bt.getTypeId();
+				if (bt.hasBookmarks()) {
+					Table table = bookmarkAdapter.getTable(typeId);
+					if (table == null) {
+						continue;
+					}
+					int addrCol = BookmarkDBAdapter.ADDRESS_COL;
+					try {
+						DatabaseTableUtils.updateIndexedAddressField(table, addrCol, addrMap,
+							fromAddr, toAddr, length, null, monitor);
+					}
+					catch (IOException e) {
+						dbError(e);
+					}
+				}
+			}
 		}
 		finally {
 			lock.release();

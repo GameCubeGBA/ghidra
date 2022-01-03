@@ -37,7 +37,7 @@ public class MipsPreAnalyzer extends AbstractAnalyzer {
 	private static final String DESCRIPTION =
 		"Analyze MIPS Instructions for unaligned load pairs ldl/ldr sdl/sdr lwl/lwr swl/swr.";
 
-	private static final int NOTIFICATION_INTERVAL = 1024;
+	private final static int NOTIFICATION_INTERVAL = 1024;
 
 	Register pairBitRegister;
 	private Register isamode;
@@ -172,12 +172,15 @@ public class MipsPreAnalyzer extends AbstractAnalyzer {
 		
 		// Generally, the load/store left instruction comes before the right,
 		// but here a pair will be found in any order.
-        // sdl sdr
-        return primeOpcode == 34 || primeOpcode == 38 || // lwl lwr
-                primeOpcode == 42 || primeOpcode == 46 || // swl swr
-                primeOpcode == 26 || primeOpcode == 27 || // ldl ldr
-                primeOpcode == 44 || primeOpcode == 45;
-    }
+		if (primeOpcode == 34 || primeOpcode == 38 || // lwl lwr
+			primeOpcode == 42 || primeOpcode == 46 || // swl swr
+			primeOpcode == 26 || primeOpcode == 27 || // ldl ldr
+			primeOpcode == 44 || primeOpcode == 45) // sdl sdr
+		{
+			return true;
+		}
+		return false;
+	}
 
 	// Get rid of uninitialized, no use going through those.
 	private AddressSetView removeUninitializedBlock(Program program, AddressSetView set) {
@@ -246,7 +249,7 @@ public class MipsPreAnalyzer extends AbstractAnalyzer {
 		// if this is a move, may be copying into another register.
 		//  why? wasted code...
 		// This is a hack and should be done with real data flow...
-		if ("move".equals(curr_inst.getMnemonicString())) {
+		if (curr_inst.getMnemonicString().equals("move")) {
 			Register reg = start_inst.getRegister(0);
 			Register alt = curr_inst.getRegister(1);
 			if (reg != null && reg.equals(alt)) {

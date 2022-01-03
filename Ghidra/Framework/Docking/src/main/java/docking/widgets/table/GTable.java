@@ -156,7 +156,8 @@ public class GTable extends JTable {
 	 * Constructs a new GTable
 	 */
 	public GTable() {
-        init();
+		super();
+		init();
 	}
 
 	/**

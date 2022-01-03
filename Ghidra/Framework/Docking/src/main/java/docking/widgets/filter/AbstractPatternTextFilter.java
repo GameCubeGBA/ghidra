@@ -88,8 +88,12 @@ public abstract class AbstractPatternTextFilter implements TextFilter {
 			return false;
 		}
 
-        return Objects.equals(filterText, other.filterText);
-    }
+		if (!Objects.equals(filterText, other.filterText)) {
+			return false;
+		}
+
+		return true;
+	}
 
 	private boolean patternsEqual(Pattern p1, Pattern p2) {
 		String myPattern = getPatternString(p1);

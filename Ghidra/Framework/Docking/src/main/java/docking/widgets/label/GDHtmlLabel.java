@@ -49,7 +49,8 @@ public class GDHtmlLabel extends JLabel implements GComponent {
 	 * <p>
 	 */
 	public GDHtmlLabel() {
-    }
+		super();
+	}
 
 	/**
 	 * Creates a label with the specified text, with {@link SwingConstants#LEADING} horizontal

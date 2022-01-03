@@ -16,7 +16,6 @@
 package mdemangler;
 
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -109,6 +108,15 @@ public class MDMang {
 	 */
 	public String getMangledSymbol() {
 		return mangled;
+	}
+
+	/**
+	 * Returns the error message when demangle() returns null.
+	 *
+	 * @return the error message for the demangle() call.
+	 */
+	public String getErrorMessage() {
+		return errorMessage;
 	}
 
 	/**
@@ -329,7 +337,7 @@ public class MDMang {
 	private static final char SPACE = ' ';
 
 	public void insertSpacedString(StringBuilder builder, String string) {
-		if (builder.length() != 0 && !string.isEmpty()) {
+		if (builder.length() != 0 && string.length() != 0) {
 			if (builder.charAt(0) == ' ') {
 				if (string.charAt(string.length() - 1) == ' ') {
 					builder.deleteCharAt(0);
@@ -347,11 +355,14 @@ public class MDMang {
 	// go away
 	// altogether.
 	public boolean isEffectivelyEmpty(StringBuilder builder) {
-        return builder.length() == 0;
-    }
+		if (builder.length() == 0) {
+			return true;
+		}
+		return false;
+	}
 
 	public void insertString(StringBuilder builder, String string) {
-		if (builder.length() != 0 && !string.isEmpty()) {
+		if (builder.length() != 0 && string.length() != 0) {
 			if (builder.charAt(0) == ' ') {
 				if (string.charAt(string.length() - 1) == ' ') {
 					builder.deleteCharAt(0);
@@ -362,7 +373,7 @@ public class MDMang {
 	}
 
 	public void appendString(StringBuilder builder, String string) {
-		if (builder.length() != 0 && !string.isEmpty()) {
+		if (builder.length() != 0 && string.length() != 0) {
 			if (builder.charAt(builder.length() - 1) == ' ') {
 				if (string.charAt(0) == ' ') {
 					builder.deleteCharAt(builder.length() - 1);
@@ -394,8 +405,8 @@ public class MDMang {
 	/******************************************************************************/
 	/******************************************************************************/
 	// SPECIALIZATION METHODS
-	private static final Charset UTF8 = StandardCharsets.UTF_8;
-	private static final Charset UTF16 = StandardCharsets.UTF_16;
+	private static final Charset UTF8 = Charset.forName("UTF-8");
+	private static final Charset UTF16 = Charset.forName("UTF-16");
 
 	// private static final Charset WIN1252 = Charset.forName("windows-1252");
 	public void insert(StringBuilder builder, MDString mdstring) {

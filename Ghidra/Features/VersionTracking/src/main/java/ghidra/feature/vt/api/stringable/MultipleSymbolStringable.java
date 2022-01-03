@@ -48,7 +48,8 @@ public class MultipleSymbolStringable extends Stringable {
 			return;
 		}
 		int count = symbols.size();
-		for (Symbol symbol : symbols) {
+		for (int index = 0; index < count; index++) {
+			Symbol symbol = symbols.get(index);
 			symbolInfos.add(new SymbolInfo(symbol));
 		}
 	}
@@ -83,7 +84,7 @@ public class MultipleSymbolStringable extends Stringable {
 
 	@Override
 	protected String doConvertToString(Program program) {
-		if (symbolInfos == null || symbolInfos.isEmpty()) {
+		if (symbolInfos == null || symbolInfos.size() == 0) {
 			return "";
 		}
 

@@ -23,7 +23,8 @@ import ghidra.app.plugin.core.datamgr.DataTypesProvider;
 public class ProgramTreePluginScreenShots extends GhidraScreenShotGenerator {
 
 	public ProgramTreePluginScreenShots() {
-    }
+		super();
+	}
 
 	@Test
 	public void testViewManager() {

@@ -25,8 +25,8 @@ import javax.swing.KeyStroke;
  */
 class WrappedKeyStroke implements WrappedOption {
 
-	private static final String KEY_CODE = "KeyCode";
-	private static final String MODIFIERS = "Modifiers";
+	private final static String KEY_CODE = "KeyCode";
+	private final static String MODIFIERS = "Modifiers";
 	private KeyStroke keyStroke;
 
 	/**

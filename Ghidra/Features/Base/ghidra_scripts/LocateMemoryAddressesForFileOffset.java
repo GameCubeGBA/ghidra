@@ -76,13 +76,13 @@ public class LocateMemoryAddressesForFileOffset extends GhidraScript {
 		if (comment == null) {
 			myCodeUnit.setComment(0,
 				this.getScriptName() + ": File offset: " + Long.toHexString(fileOffset) +
-					", Memory block:address " + memBlockName + ":" + addr);
+					", Memory block:address " + memBlockName + ":" + addr.toString());
 		}
 		else {
 			myCodeUnit.setComment(0,
 				comment + ", " + this.getScriptName() + ": File offset: " +
 					Long.toHexString(fileOffset) + ", Memory block:address " + memBlockName + ":" +
-                        addr);
+					addr.toString());
 		}
 	}
 }

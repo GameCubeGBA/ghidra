@@ -169,14 +169,14 @@ public class XmlElementImpl implements XmlElement {
 
 	public static XmlElement[] splitEmptyElement(final XmlElementImpl element) {
 		XmlElement[] result;
-		if (element.isStart && element.isEnd) {
+		if (element.isStart() && element.isEnd()) {
 			result =
 				new XmlElement[] {
-					new XmlElementImpl(true, false, element.name, element.level,
-						element.getAttributes(), null, element.columnNumber,
-                            element.lineNumber),
-					new XmlElementImpl(false, true, element.name, element.level, null,
-						"", element.columnNumber, element.lineNumber) };
+					new XmlElementImpl(true, false, element.getName(), element.getLevel(),
+						element.getAttributes(), null, element.getColumnNumber(),
+						element.getLineNumber()),
+					new XmlElementImpl(false, true, element.getName(), element.getLevel(), null,
+						"", element.getColumnNumber(), element.getLineNumber()) };
 		}
 		else {
 			result = new XmlElement[] { element };

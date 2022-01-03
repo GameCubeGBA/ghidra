@@ -46,9 +46,9 @@ public class OpenVersionedFileDialog extends DataTreeDialog {
 	private static final String WIDTH_WITH_HISTORY_PREFERENCES_KEY =
 		"OPEN_PROGRAM_DIALOG.WIDTH_WITH_HISTORY";
 
-	private static final int DEFAULT_WIDTH_NO_HISTORY = WIDTH;
-	private static final int DEFAULT_WIDTH_WITH_HISTORY = 800;
-	private static final int DIVIDER_SIZE = 2;
+	private final static int DEFAULT_WIDTH_NO_HISTORY = WIDTH;
+	private final static int DEFAULT_WIDTH_WITH_HISTORY = 800;
+	private final static int DIVIDER_SIZE = 2;
 
 	private JSplitPane splitPane;
 	private JButton historyButton;

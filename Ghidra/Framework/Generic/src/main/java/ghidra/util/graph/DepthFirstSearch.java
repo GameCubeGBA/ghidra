@@ -107,7 +107,7 @@ public class DepthFirstSearch
                       {
                           pending.push( edgeIter.next() );
                       }
-                      if(edges.isEmpty())
+                      if( edges.size() == 0 )
                       {
                           finished.add( v );
                           finishListInReverseOrder.addFirst( v );
@@ -180,7 +180,7 @@ public class DepthFirstSearch
                       {
                           pending.push( edgeIter.next() );
                       }
-                      if(edges.isEmpty())
+                      if( edges.size() == 0 )
                       {
                           finished.add( v );
                           finishListInReverseOrder.addFirst( v );
@@ -255,7 +255,7 @@ public class DepthFirstSearch
                       {
                           pending.push( edgeIter.next() );
                       }
-                      if(edges.isEmpty())
+                      if( edges.size() == 0 )
                       {
                           finished.add( v );
                           finishListInReverseOrder.addFirst( v );
@@ -404,8 +404,10 @@ public class DepthFirstSearch
   public DirectedGraph spanningTree()
   {
       DirectedGraph g = new DirectedGraph( treeEdges.size() + 1, treeEdges.size() );
-      for (Edge treeEdge : treeEdges) {
-          g.add(treeEdge);
+      Iterator<Edge> iter = treeEdges.iterator();
+      while( iter.hasNext() )
+      {
+          g.add( iter.next() );
       }
       return g;
   }

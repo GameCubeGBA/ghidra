@@ -109,7 +109,12 @@ class MemoryMergePanel extends JPanel {
 		cardLayout = new CardLayout();
 		cardPanel = new JPanel(cardLayout);
 		cardPanel.setBorder(BorderFactory.createTitledBorder("Resolve Block Conflict"));
-		ChangeListener listener = e -> mergeManager.setApplyEnabled(true);
+		ChangeListener listener = new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				mergeManager.setApplyEnabled(true);
+			}
+		};
 		commentPanel = new CommentsConflictPanel(listener);
 		cardPanel.add(commentPanel, COMMENT_PANEL_ID);
 

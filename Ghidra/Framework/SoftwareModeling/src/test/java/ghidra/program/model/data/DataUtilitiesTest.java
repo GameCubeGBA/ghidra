@@ -50,7 +50,8 @@ public class DataUtilitiesTest extends AbstractGTest {
 	private MyMemory memory;
 
 	public DataUtilitiesTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -341,9 +342,12 @@ public class DataUtilitiesTest extends AbstractGTest {
 				(addrOffset >= 0x100 && addrOffset <= 0x1ff)) {
 				return true;
 			}
-			else return (addressOffset >= 0x300 && addressOffset <= 0x3ff) &&
-                        (addrOffset >= 0x300 && addrOffset <= 0x3ff);
-        }
+			else if ((addressOffset >= 0x300 && addressOffset <= 0x3ff) &&
+				(addrOffset >= 0x300 && addrOffset <= 0x3ff)) {
+				return true;
+			}
+			return false;
+		}
 	}
 
 	private class MyListing extends ListingStub {

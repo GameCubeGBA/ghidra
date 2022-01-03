@@ -61,7 +61,8 @@ public class DBPropertyMapManagerTest extends AbstractGhidraHeadedIntegrationTes
 	 * @param arg0
 	 */
 	public DBPropertyMapManagerTest() {
-    }
+		super();
+	}
 
 	/*
 	 * @see TestCase#setUp()

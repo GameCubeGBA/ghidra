@@ -24,7 +24,7 @@ import ghidra.program.model.mem.MemoryAccessException;
  * Implements the Mask interface as a byte array.
  */
 public class MaskImpl implements Mask, Serializable {
-	private static final long serialVersionUID = 1;
+	private final static long serialVersionUID = 1;
 
 	private byte[] mask;
 
@@ -177,16 +177,15 @@ public class MaskImpl implements Mask, Serializable {
 	@Override
 	public String toString() {
 		int b;
-		StringBuilder s = new StringBuilder();
-        String t;
-        for (byte element : mask) {
+		String s = "", t;
+		for (byte element : mask) {
 			b = 0x0ff & element;
 			t = Integer.toString(b, 16);
 			if (1 == t.length())
 				t = "0" + t;
-			s.append(t);
+			s += t;
 		}
-		return s.toString().toUpperCase();
+		return s.toUpperCase();
 	}
 
 	/**

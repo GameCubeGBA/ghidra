@@ -83,8 +83,9 @@ public class GTableHeaderRenderer extends JPanel implements TableCellRenderer {
 	protected boolean isPaintingPrimarySortColumn;
 
 	public GTableHeaderRenderer() {
+		super();
 
-        textLabel.setHorizontalTextPosition(SwingConstants.LEFT);
+		textLabel.setHorizontalTextPosition(SwingConstants.LEFT);
 		iconLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 
 		textLabel.setBorder(createOSSpecificBorder());

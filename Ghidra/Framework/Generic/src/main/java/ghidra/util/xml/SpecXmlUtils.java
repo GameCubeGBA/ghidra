@@ -41,8 +41,8 @@ import org.xml.sax.SAXParseException;
  */
 public class SpecXmlUtils {
 
-	public static boolean decodeBoolean(String val) {
-		if (val!=null && !val.isEmpty()) {
+	static public boolean decodeBoolean(String val) {
+		if (val!=null && val.length()!=0) {
 			switch(val.charAt(0)) {
 			case 'y':
 			case 't':
@@ -58,11 +58,11 @@ public class SpecXmlUtils {
 		return false;		// Should we throw an exception for bad encodings?
 	}
 	
-	public static String encodeBoolean(boolean val) {
+	static public String encodeBoolean(boolean val) {
 		return val ? "true" : "false";
 	}
 	
-	public static void encodeBooleanAttribute(StringBuilder buf, String nm, boolean val) {
+	static public void encodeBooleanAttribute(StringBuilder buf,String nm,boolean val) {
 		buf.append(' ');
 		buf.append(nm);
 		buf.append("=\"");
@@ -70,7 +70,7 @@ public class SpecXmlUtils {
 		buf.append('\"');
 	}
 	
-	public static void encodeStringAttribute(StringBuilder buf, String nm, String val) {
+	static public void encodeStringAttribute(StringBuilder buf,String nm,String val) {
 		buf.append(' ');
 		buf.append(nm);
 		buf.append("=\"");
@@ -78,15 +78,15 @@ public class SpecXmlUtils {
 		buf.append('\"');
 	}
 	
-	public static String encodeSignedInteger(long val) {
+	static public String encodeSignedInteger(long val) {
 		return Long.toString(val,10);
 	}
 	
-	public static String encodeUnsignedInteger(long val) {
+	static public String encodeUnsignedInteger(long val) {
 		return "0x" + Long.toHexString(val);
 	}
 	
-	public static void encodeSignedIntegerAttribute(StringBuilder buf, String nm, long val) {
+	static public void encodeSignedIntegerAttribute(StringBuilder buf,String nm,long val) {
 		buf.append(' ');
 		buf.append(nm);
 		buf.append("=\"");
@@ -94,7 +94,7 @@ public class SpecXmlUtils {
 		buf.append('\"');
 	}
 	
-	public static void encodeUnsignedIntegerAttribute(StringBuilder buf, String nm, long val) {
+	static public void encodeUnsignedIntegerAttribute(StringBuilder buf,String nm,long val) {
 		buf.append(' ');
 		buf.append(nm);
 		buf.append("=\"");
@@ -102,7 +102,7 @@ public class SpecXmlUtils {
 		buf.append('\"');
 	}
 	
-	public static void encodeDoubleAttribute(StringBuilder buf, String nm, double val) {
+	static public void encodeDoubleAttribute(StringBuilder buf,String nm,double val) {
 		buf.append(' ');
 		buf.append(nm);
 		buf.append("=\"");
@@ -110,7 +110,7 @@ public class SpecXmlUtils {
 		buf.append('\"');
 	}
 	
-	public static int decodeInt(String intString ) {
+	static public int decodeInt( String intString ) {
 	    // special case
 	    if ( (intString == null) || "0".equals( intString ) ) {
 	    	return 0;
@@ -130,7 +130,7 @@ public class SpecXmlUtils {
 	    return bi.intValue();
 	}
 	
-	public static long decodeLong(String longString ) {
+	static public long decodeLong( String longString ) {
 		// special case
 	    if ( (longString == null) || "0".equals( longString ) ) {
 	    	return 0;
@@ -150,7 +150,7 @@ public class SpecXmlUtils {
 	    return bi.longValue();
 	}
 	
-	public static void xmlEscape(StringBuilder buf, String val) {
+	static public void xmlEscape(StringBuilder buf,String val) {
 		for(int i=0;i<val.length();++i) {
 			char c = val.charAt(i);
 			// The check for escape characters needs to be efficient
@@ -180,7 +180,7 @@ public class SpecXmlUtils {
 		}
 	}
 	
-	public static void xmlEscapeAttribute(StringBuilder buf, String nm, String val) {
+	static public void xmlEscapeAttribute(StringBuilder buf,String nm,String val) {
 		buf.append(' ');
 		buf.append(nm);
 		buf.append("=\"");
@@ -188,7 +188,7 @@ public class SpecXmlUtils {
 		buf.append('\"');
 	}
 		
-	public static void xmlEscapeWriter(Writer writer, String val) throws IOException {
+	static public void xmlEscapeWriter(Writer writer,String val) throws IOException {
 		for(int i=0;i<val.length();++i) {
 			char c = val.charAt(i);
 			switch (c) {

@@ -37,7 +37,8 @@ public class FunctionIDScreenShots extends GhidraScreenShotGenerator {
 	}
 
 	public FunctionIDScreenShots() {
-    }
+		super();
+	}
 
 	@Override
 	@After

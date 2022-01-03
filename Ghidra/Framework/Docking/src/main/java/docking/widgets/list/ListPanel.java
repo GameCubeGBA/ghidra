@@ -59,8 +59,9 @@ public class ListPanel extends JPanel {
 	 * Constructs a new ListPanel.
 	 */
 	public ListPanel() {
+		super();
 
-        setLayout(new BorderLayout());
+		setLayout(new BorderLayout());
 
 		// Enforce a minimum size, for some amount of consistency.  The magic value was
 		// discovered via trial-and-error.

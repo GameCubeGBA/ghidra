@@ -75,7 +75,7 @@ public class CreateImpliedMatchAction extends DockingAction {
 	@Override
 	public boolean isEnabledForContext(ActionContext context) {
 		List<VTImpliedMatchInfo> matches = provider.getSelectedImpliedMatches();
-		return !matches.isEmpty();
+		return matches.size() > 0;
 	}
 
 	@Override

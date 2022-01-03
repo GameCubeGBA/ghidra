@@ -33,7 +33,7 @@ public interface TargetMemoryRegion extends TargetObject {
 	 * @return the range
 	 */
 	@TargetAttributeType(name = RANGE_ATTRIBUTE_NAME, required = true, hidden = true)
-    default AddressRange getRange() {
+	public default AddressRange getRange() {
 		return getTypedAttributeNowByName(RANGE_ATTRIBUTE_NAME, AddressRange.class, null);
 	}
 
@@ -43,7 +43,7 @@ public interface TargetMemoryRegion extends TargetObject {
 	 * @return true if read is permitted
 	 */
 	@TargetAttributeType(name = READABLE_ATTRIBUTE_NAME, required = true, hidden = true)
-    default boolean isReadable() {
+	public default boolean isReadable() {
 		return getTypedAttributeNowByName(READABLE_ATTRIBUTE_NAME, Boolean.class, false);
 	}
 
@@ -54,7 +54,7 @@ public interface TargetMemoryRegion extends TargetObject {
 	 */
 	@TargetAttributeType(name = WRITABLE_ATTRIBUTE_NAME, required = true, hidden = true)
 
-    default boolean isWritable() {
+	public default boolean isWritable() {
 		return getTypedAttributeNowByName(WRITABLE_ATTRIBUTE_NAME, Boolean.class, false);
 	}
 
@@ -65,7 +65,7 @@ public interface TargetMemoryRegion extends TargetObject {
 	 */
 	@TargetAttributeType(name = EXECUTABLE_ATTRIBUTE_NAME, required = true, hidden = true)
 
-    default boolean isExecutable() {
+	public default boolean isExecutable() {
 		return getTypedAttributeNowByName(EXECUTABLE_ATTRIBUTE_NAME, Boolean.class, false);
 	}
 
@@ -84,7 +84,7 @@ public interface TargetMemoryRegion extends TargetObject {
 	 * @return a reference to the memory
 	 */
 	@TargetAttributeType(name = MEMORY_ATTRIBUTE_NAME, required = true, fixed = true, hidden = true)
-    default TargetMemory getMemory() {
+	public default TargetMemory getMemory() {
 		return getTypedAttributeNowByName(MEMORY_ATTRIBUTE_NAME, TargetMemory.class, null);
 	}
 }

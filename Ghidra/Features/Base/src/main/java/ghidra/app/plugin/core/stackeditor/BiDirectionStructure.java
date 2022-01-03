@@ -24,22 +24,22 @@ public interface BiDirectionStructure extends Structure {
 	 * Get the length of this DataType in the negative direction.
 	 * @return the length of this DataType in the negative direction.
 	 */
-    int getNegativeLength();
+	public abstract int getNegativeLength();
 
 	/**
 	 * Get the length of this DataType in the positive direction.
 	 * @return the length of this DataType in the positive direction.
 	 */
-    int getPositiveLength();
+	public abstract int getPositiveLength();
 
 	/**
 	 * Get the component offset which represents the division point
 	 * between the positive and negative halves of the structure.
 	 * @return
 	 */
-    int getSplitOffset();
+	public abstract int getSplitOffset();
 
-	DataTypeComponent addNegative(DataType dataType, int length, String name, String comment);
+	public DataTypeComponent addNegative(DataType dataType, int length, String name, String comment);
 
-	DataTypeComponent addPositive(DataType dataType, int length, String name, String comment);
+	public DataTypeComponent addPositive(DataType dataType, int length, String name, String comment);
 }

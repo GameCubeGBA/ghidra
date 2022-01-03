@@ -18,5 +18,5 @@ package ghidra.feature.vt.gui.filters;
 
 @FunctionalInterface
 public interface FilterChangedListener {
-    void filterStateChanged(FilterState state);
+    public void filterStateChanged( FilterState state );
 }

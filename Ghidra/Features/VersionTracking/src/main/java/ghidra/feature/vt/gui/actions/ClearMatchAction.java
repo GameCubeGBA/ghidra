@@ -82,7 +82,7 @@ public class ClearMatchAction extends DockingAction {
 		else {
 			selectedMatches = new ArrayList<VTMatch>();
 		}
-		return (!selectedMatches.isEmpty());
+		return (selectedMatches.size() > 0);
 	}
 
 	@Override

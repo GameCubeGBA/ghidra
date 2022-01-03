@@ -33,7 +33,8 @@ public class BlockGraph extends PcodeBlock {
 	private int maxindex;						// -index- contains minimum -maxindex- contains max
 	
 	public BlockGraph() {
-        blocktype = PcodeBlock.GRAPH;
+		super();
+		blocktype = PcodeBlock.GRAPH;
 		list = new ArrayList<>();
 		maxindex = -1;
 	}

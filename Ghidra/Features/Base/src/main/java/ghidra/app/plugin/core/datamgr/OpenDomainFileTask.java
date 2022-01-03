@@ -92,17 +92,18 @@ class OpenDomainFileTask extends Task {
 
 	private boolean isFileOpen() {
 		List<Archive> dtArchiveList = dtmHandler.getAllArchives();
-        for (Archive archive : dtArchiveList) {
-            if (archive instanceof ProjectArchive) {
-                ProjectArchive projectArchive = (ProjectArchive) archive;
-                DomainFile archiveDomainFile = projectArchive.getDomainFile();
-                if (filesMatch(domainFile, archiveDomainFile)) {
-                    //            	archive = projectArchive;
-                    //            	dtmHandler.open // TODO
-                    return true;
-                }
-            }
-        }
+		for (int i = 0; i < dtArchiveList.size(); i++) {
+			Archive archive = dtArchiveList.get(i);
+			if (archive instanceof ProjectArchive) {
+				ProjectArchive projectArchive = (ProjectArchive) archive;
+				DomainFile archiveDomainFile = projectArchive.getDomainFile();
+				if (filesMatch(domainFile, archiveDomainFile)) {
+					//            	archive = projectArchive;
+					//            	dtmHandler.open // TODO
+					return true;
+				}
+			}
+		}
 
 		return false;
 	}

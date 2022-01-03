@@ -70,17 +70,17 @@ public class JdiModelTargetMethodContainer extends JdiModelTargetObjectImpl {
 		for (Method var : methods) {
 			map.put(var.name(), var);
 		}
-		methodsByName.keySet().retainAll(map.keySet());
+		getMethodsByName().keySet().retainAll(map.keySet());
 		return updateUsingMethods(map);
 	}
 
 	protected synchronized JdiModelTargetMethod getTargetMethod(Method method) {
-		return methodsByName.computeIfAbsent(method.name(),
+		return getMethodsByName().computeIfAbsent(method.name(),
 			n -> (JdiModelTargetMethod) getInstance(method));
 	}
 
 	public synchronized JdiModelTargetMethod getTargetMethodIfPresent(String name) {
-		return methodsByName.get(name);
+		return getMethodsByName().get(name);
 	}
 
 	@Override

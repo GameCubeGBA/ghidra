@@ -23,7 +23,7 @@ import com.sun.jna.platform.win32.WinNT.HRESULT;
 import agent.dbgeng.jna.dbgeng.UnknownWithUtils.VTableIndex;
 
 public interface IDebugAdvanced2 extends IDebugAdvanced {
-	IID IID_IDEBUG_ADVANCED2 = new IID("716d14c9-119b-4ba5-af1f-0890e672416a");
+	final IID IID_IDEBUG_ADVANCED2 = new IID("716d14c9-119b-4ba5-af1f-0890e672416a");
 
 	enum VTIndices2 implements VTableIndex {
 		REQUEST, //

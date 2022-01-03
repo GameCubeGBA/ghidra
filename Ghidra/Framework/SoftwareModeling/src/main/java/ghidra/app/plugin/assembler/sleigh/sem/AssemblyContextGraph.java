@@ -191,8 +191,11 @@ public class AssemblyContextGraph implements GImplicitDirectedGraph<Vertex, Edge
 		 * @return true iff they share subtables and defined bits
 		 */
 		public boolean matches(Vertex that) {
-            return this.subtable.equals(that.subtable) && (this.context.combine(that.context) != null);
-        }
+			if (!this.subtable.equals(that.subtable) || (this.context.combine(that.context) == null)) {
+				return false;
+			}
+			return true;
+		}
 
 		@Override
 		public int hashCode() {
@@ -210,8 +213,11 @@ public class AssemblyContextGraph implements GImplicitDirectedGraph<Vertex, Edge
 				return false;
 			}
 			Vertex that = (Vertex) o;
-            return this.context.equals(that.context) && this.subtable.equals(that.subtable);
-        }
+			if (!this.context.equals(that.context) || !this.subtable.equals(that.subtable)) {
+				return false;
+			}
+			return true;
+		}
 
 		@Override
 		public int compareTo(Vertex that) {
@@ -270,8 +276,11 @@ public class AssemblyContextGraph implements GImplicitDirectedGraph<Vertex, Edge
 				return false;
 			}
 			Edge that = (Edge) o;
-            return this.sem.equals(that.sem) && (this.op == that.op) && this.start.equals(that.start) && this.end.equals(that.end);
-        }
+			if (!this.sem.equals(that.sem) || (this.op != that.op) || !this.start.equals(that.start) || !this.end.equals(that.end)) {
+				return false;
+			}
+			return true;
+		}
 
 		@Override
 		public int compareTo(Edge that) {

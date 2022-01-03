@@ -18,12 +18,12 @@ package ghidra.feature.vt.gui.filters;
 
 public interface FilterDialogModel<T> {
 
-    void addFilter(Filter<T> filter);
+    public void addFilter( Filter<T> filter );
     
-    void forceRefilter();
+    public void forceRefilter();
     
     /**
      * Will be called when the visibility of the dialog using this model has changed
      */
-    void dialogVisibilityChanged(boolean isVisible);
+    public void dialogVisibilityChanged( boolean isVisible );
 }

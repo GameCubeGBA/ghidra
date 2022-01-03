@@ -32,10 +32,10 @@ public class Undefined1DataType extends Undefined {
 			Undefined1DataType.class.getName());
 	}
 
-	private static final long serialVersionUID = 1;
+	private final static long serialVersionUID = 1;
 
 	/** A statically defined DefaultDataType used when an Undefined byte is needed.*/
-    public static final Undefined1DataType dataType = new Undefined1DataType();
+	public final static Undefined1DataType dataType = new Undefined1DataType();
 
 	/**
 	 * Constructs a new Undefined1 dataType

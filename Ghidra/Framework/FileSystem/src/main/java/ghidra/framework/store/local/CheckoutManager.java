@@ -191,7 +191,7 @@ class CheckoutManager {
 	 */
 	synchronized boolean isCheckedOut() throws IOException {
 		validate();
-		return !checkouts.isEmpty();
+		return checkouts.size() != 0;
 	}
 
 	/**
@@ -273,10 +273,11 @@ class CheckoutManager {
 			}
 
 			List<Element> elementList = root.getChildren("CHECKOUT");
-            for (Element element : elementList) {
-                ItemCheckoutStatus coStatus = parseCheckoutElement(element);
-                checkouts.put(coStatus.getCheckoutId(), coStatus);
-            }
+			Iterator<Element> iter = elementList.iterator();
+			while (iter.hasNext()) {
+				ItemCheckoutStatus coStatus = parseCheckoutElement(iter.next());
+				checkouts.put(coStatus.getCheckoutId(), coStatus);
+			}
 		}
 		catch (org.jdom.JDOMException je) {
 			throw new InvalidObjectException("Invalid checkouts file: " + checkoutsFile);

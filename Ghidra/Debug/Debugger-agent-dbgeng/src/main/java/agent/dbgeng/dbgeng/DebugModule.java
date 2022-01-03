@@ -19,7 +19,7 @@ package agent.dbgeng.dbgeng;
  * Handle to a module (program or library image).
  */
 public interface DebugModule {
-	enum DebugModuleName {
+	public enum DebugModuleName {
 		IMAGE, MODULE, LOADED_IMAGE, SYMBOL_FILE, MAPPED_IMAGE;
 	}
 

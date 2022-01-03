@@ -294,8 +294,11 @@ public abstract class RefType {
 	 * @return true if the reference is indirect
 	 */
 	public boolean isIndirect() {
-        return this == INDIRECTION;
-    }
+		if (this == INDIRECTION) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Returns true if the reference is an instruction flow reference

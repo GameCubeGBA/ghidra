@@ -79,7 +79,7 @@ public class AssemblySentential<NT extends AssemblyNonTerminal> extends
 
 	@Override
 	public String toString() {
-		if (symbols.isEmpty()) {
+		if (symbols.size() == 0) {
 			return "e";
 		}
 		Iterator<? extends AssemblySymbol> symIt = symbols.iterator();
@@ -142,7 +142,7 @@ public class AssemblySentential<NT extends AssemblyNonTerminal> extends
 		@Override
 		public Collection<AssemblyParseToken> match(String buffer, int pos, AssemblyGrammar grammar,
 				Map<String, Long> labels) {
-			if (buffer.isEmpty()) {
+			if (buffer.length() == 0) {
 				return Collections.singleton(new WhiteSpaceParseToken(grammar, this, ""));
 			}
 			int b = pos;
@@ -207,7 +207,7 @@ public class AssemblySentential<NT extends AssemblyNonTerminal> extends
 
 	// If the right-most symbol is whitespace, return it
 	private WhiteSpace lastWhiteSpace() {
-		if (symbols.isEmpty()) {
+		if (symbols.size() == 0) {
 			return null;
 		}
 		AssemblySymbol last = symbols.get(symbols.size() - 1);

@@ -66,12 +66,15 @@ public class ProcMaker implements AutoCloseable {
 				return DebugStatus.BREAK;
 			}
 		});
-		client.setOutputCallbacks((mask, text) -> {
-            System.out.print(text);
-            if (outputCapture != null) {
-                outputCapture.append(text);
-            }
-        });
+		client.setOutputCallbacks(new DebugOutputCallbacks() {
+			@Override
+			public void output(int mask, String text) {
+				System.out.print(text);
+				if (outputCapture != null) {
+					outputCapture.append(text);
+				}
+			}
+		});
 
 		Msg.debug(this, "Starting " + cmdLine + " with client " + client);
 		control.execute(".create " + cmdLine);

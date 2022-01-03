@@ -210,7 +210,12 @@ public class StorageAddressEditorDialog extends DialogComponentProvider
 		panel.setBorder(BorderFactory.createTitledBorder("Storage Locations"));
 		varnodeTableModel = new VarnodeTableModel(model);
 		varnodeTable = new GTable(varnodeTableModel);
-		selectionListener = e -> model.setSelectedVarnodeRows(varnodeTable.getSelectedRows());
+		selectionListener = new ListSelectionListener() {
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				model.setSelectedVarnodeRows(varnodeTable.getSelectedRows());
+			}
+		};
 		varnodeTable.getSelectionModel().addListSelectionListener(selectionListener);
 		varnodeTable.setPreferredScrollableViewportSize(new Dimension(400, 150));
 		varnodeTable.setDefaultEditor(VarnodeType.class, new VarnodeTypeCellEditor());
@@ -236,10 +241,30 @@ public class StorageAddressEditorDialog extends DialogComponentProvider
 		upButton = new JButton("Up");
 		downButton = new JButton("Down");
 
-		addButton.addActionListener(e -> model.addVarnode());
-		removeButton.addActionListener(e -> model.removeVarnodes());
-		upButton.addActionListener(e -> model.moveSelectedVarnodeUp());
-		downButton.addActionListener(e -> model.moveSelectedVarnodeDown());
+		addButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				model.addVarnode();
+			}
+		});
+		removeButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				model.removeVarnodes();
+			}
+		});
+		upButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				model.moveSelectedVarnodeUp();
+			}
+		});
+		downButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				model.moveSelectedVarnodeDown();
+			}
+		});
 
 		panel.add(addButton);
 		panel.add(removeButton);

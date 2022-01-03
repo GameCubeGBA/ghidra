@@ -39,23 +39,24 @@ import ghidra.util.task.TaskMonitorAdapter;
  */
 public class FunctionMergerThunk2Test extends AbstractExternalMergerTest {
 
-	private static final String OVERLAP_ENTRY = "01001994";
-	private static final String THUNK_A_ENTRY = "0100199b";
-	private static final String THUNK_A_END = "010019a1";
-	private static final String THUNK_A_ALTERNATE_END = "010019c3";
+	private final static String OVERLAP_ENTRY = "01001994";
+	private final static String THUNK_A_ENTRY = "0100199b";
+	private final static String THUNK_A_END = "010019a1";
+	private final static String THUNK_A_ALTERNATE_END = "010019c3";
 //	private final static String NO_PARAMS_ENTRY = "01003a9e";
-private static final String NO_PARAMS_ENTRY = "0100194b";
+	private final static String NO_PARAMS_ENTRY = "0100194b";
 //	private final static String ONE_PARAM_ENTRY = "01002950";
-private static final String ONE_PARAM_ENTRY = "01002b44";
+	private final static String ONE_PARAM_ENTRY = "01002b44";
 //	private final static String TWO_PARAMS_ENTRY = "01004a15";
-private static final String TWO_PARAMS_ENTRY = "01004c1d";
+	private final static String TWO_PARAMS_ENTRY = "01004c1d";
 
 	/**
 	 *
 	 * @param arg0
 	 */
 	public FunctionMergerThunk2Test() {
-    }
+		super();
+	}
 
 	@Test
 	public void testAddThunkToFunctionVsExternalPickMy() throws Exception {

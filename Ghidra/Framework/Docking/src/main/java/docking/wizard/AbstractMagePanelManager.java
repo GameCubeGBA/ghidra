@@ -123,7 +123,7 @@ public abstract class AbstractMagePanelManager<T> implements PanelManager {
 	}
 
 	protected final MagePanel<T> getCurrentPanel() {
-		int index = currentIndex;
+		int index = getCurrentIndex();
 		List<MagePanel<T>> panelList = getPanels();
 		if (index < 0 || index >= panelList.size()) {
 			return null;
@@ -140,7 +140,7 @@ public abstract class AbstractMagePanelManager<T> implements PanelManager {
 			currentPanel.updateStateObjectWithPanelInfo(pretendState);
 		}
 		MagePanel<T> panel = null;
-		int index = currentIndex + 1;
+		int index = getCurrentIndex() + 1;
 		while (index < getPanels().size()) {
 			panel = getPanels().get(index);
 			WizardPanelDisplayability displayability =
@@ -156,7 +156,7 @@ public abstract class AbstractMagePanelManager<T> implements PanelManager {
 
 	@Override
 	public final boolean hasPreviousPanel() {
-		return !panelPath.isEmpty();
+		return panelPath.size() > 0;
 	}
 
 	@Override
@@ -168,7 +168,7 @@ public abstract class AbstractMagePanelManager<T> implements PanelManager {
 			currentPanel.updateStateObjectWithPanelInfo(pretendState);
 		}
 		MagePanel<T> panel = null;
-		int index = currentIndex + 1;
+		int index = getCurrentIndex() + 1;
 		while (index < getPanels().size()) {
 			panel = getPanels().get(index);
 			WizardPanelDisplayability displayability =
@@ -216,10 +216,10 @@ public abstract class AbstractMagePanelManager<T> implements PanelManager {
 		MagePanel<T> currentPanel = getCurrentPanel();
 		if (currentPanel != null) {
 			currentPanel.leavePanel(state);
-			panelPath.push(currentIndex);
+			panelPath.push(getCurrentIndex());
 		}
 		MagePanel<T> panel = null;
-		int index = currentIndex + 1;
+		int index = getCurrentIndex() + 1;
 		while (index < getPanels().size()) {
 			panel = getPanels().get(index);
 			WizardPanelDisplayability displayability =
@@ -302,13 +302,13 @@ public abstract class AbstractMagePanelManager<T> implements PanelManager {
 
 	@Override
 	public final void finish() throws IllegalPanelStateException {
-		wizardManager.disableNavigation();
+		getWizardManager().disableNavigation();
 		MagePanel<T> currentPanel = getCurrentPanel();
 		if (currentPanel != null) {
 			currentPanel.leavePanel(state);
 		}
 		MagePanel<T> panel = null;
-		int index = currentIndex + 1;
+		int index = getCurrentIndex() + 1;
 		while (index < getPanels().size()) {
 			panel = getPanels().get(index);
 			panel.getPanelDisplayabilityAndUpdateState(state);

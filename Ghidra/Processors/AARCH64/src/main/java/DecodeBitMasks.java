@@ -133,11 +133,12 @@ public class DecodeBitMasks {
 		BigInteger val = BigInteger.valueOf(value);
 		val = val.and(new BigInteger("FFFFFFFFFFFFFFFF", 16));
 
-		StringBuilder str = new StringBuilder(val.toString(2));
-		for (int len = str.length(); len < bitSize; len++) {
-			str.insert(0, "0");
+		String str = val.toString(2);
+		int len = str.length();
+		for (; len < bitSize; len++) {
+			str = "0" + str;
 		}
-		return str.toString();
+		return str;
 	}
 
 	void printit() {

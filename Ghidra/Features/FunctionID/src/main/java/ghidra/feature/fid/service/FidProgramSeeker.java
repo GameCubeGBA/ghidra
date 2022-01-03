@@ -38,8 +38,13 @@ public class FidProgramSeeker {
 	/**
 	 * Comparator to sort hash matches by decreasing significance.
 	 */
-	private static final Comparator<HashMatch> MOST_SIGNIFICANT = (o1, o2) -> o1.getOverallScore() < o2.getOverallScore() ? 1
-            : o1.getOverallScore() > o2.getOverallScore() ? -1 : 0;
+	private static final Comparator<HashMatch> MOST_SIGNIFICANT = new Comparator<HashMatch>() {
+		@Override
+		public int compare(HashMatch o1, HashMatch o2) {
+			return o1.getOverallScore() < o2.getOverallScore() ? 1
+					: o1.getOverallScore() > o2.getOverallScore() ? -1 : 0;
+		}
+	};
 
 	public final int MAX_NUM_PARENTS_FOR_SCORE = 500; // Limit number of (useless) parent (caller) functions
 

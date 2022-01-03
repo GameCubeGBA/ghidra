@@ -26,7 +26,8 @@ import ghidra.program.model.address.AddressSet;
 public class ByteViewerPluginScreenShots extends GhidraScreenShotGenerator {
 
 	public ByteViewerPluginScreenShots() {
-    }
+		super();
+	}
 
 @Test
     public void testByteViewer() {
@@ -67,11 +68,14 @@ public class ByteViewerPluginScreenShots extends GhidraScreenShotGenerator {
 		goToListing(0x40b003);
 
 		final DialogComponentProvider dialog = getDialog();
-		runSwing((Runnable) () -> {
-            AddressInput addressInput =
-                (AddressInput) getInstanceField("addressInputField", dialog);
-            addressInput.setAddress(addr(0x40b003));
-        });
+		runSwing(new Runnable() {
+			@Override
+			public void run() {
+				AddressInput addressInput =
+					(AddressInput) getInstanceField("addressInputField", dialog);
+				addressInput.setAddress(addr(0x40b003));
+			}
+		});
 
 		pressOkOnDialog();
 		goToListing(0x41cc08);

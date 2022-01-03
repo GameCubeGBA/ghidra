@@ -314,8 +314,11 @@ class FGActionManager {
 				if (!(context instanceof FunctionGraphValidGraphActionContextIf)) {
 					return false;
 				}
-                return !(context instanceof FunctionGraphVertexLocationInFullViewModeActionContext);
-            }
+				if (context instanceof FunctionGraphVertexLocationInFullViewModeActionContext) {
+					return false;
+				}
+				return true;
+			}
 		};
 		MenuData menuData = new MenuData(new String[] { "Edit Label" }, popupMutateGroup1);
 		menuData.setIcon(EDIT_ICON);
@@ -361,8 +364,11 @@ class FGActionManager {
 				if (!(context instanceof FunctionGraphValidGraphActionContextIf)) {
 					return false;
 				}
-                return !(context instanceof FunctionGraphVertexLocationInFullViewModeActionContext);
-            }
+				if (context instanceof FunctionGraphVertexLocationInFullViewModeActionContext) {
+					return false;
+				}
+				return true;
+			}
 		};
 		menuData = new MenuData(new String[] { "View Full Screen" }, popupMutateGroup1);
 		menuData.setIcon(FULL_SCREEN_ICON);
@@ -380,13 +386,19 @@ class FGActionManager {
 
 			@Override
 			public boolean isEnabledForContext(ActionContext context) {
-                return context instanceof FunctionGraphValidGraphActionContextIf;
-            }
+				if (!(context instanceof FunctionGraphValidGraphActionContextIf)) {
+					return false;
+				}
+				return true;
+			}
 
 			@Override
 			public boolean isAddToPopup(ActionContext context) {
-                return context instanceof FunctionGraphValidGraphActionContextIf;
-            }
+				if (!(context instanceof FunctionGraphValidGraphActionContextIf)) {
+					return false;
+				}
+				return true;
+			}
 		};
 		menuData = new MenuData(new String[] { "Jump to a XRef" }, popupMutateGroup1);
 		menuData.setIcon(XREFS_ICON);
@@ -423,8 +435,11 @@ class FGActionManager {
 					if (!(context instanceof FunctionGraphValidGraphActionContextIf)) {
 						return false;
 					}
-                    return !(context instanceof FunctionGraphVertexLocationInFullViewModeActionContext);
-                }
+					if (context instanceof FunctionGraphVertexLocationInFullViewModeActionContext) {
+						return false;
+					}
+					return true;
+				}
 			};
 		menuData = new MenuData(new String[] { "Group Selected Vertices" }, popupMutateGroup2);
 		menuData.setIcon(FunctionGraphPlugin.GROUP_ICON);
@@ -477,8 +492,11 @@ class FGActionManager {
 					if (!(context instanceof FunctionGraphValidGraphActionContextIf)) {
 						return false;
 					}
-                    return !(context instanceof FunctionGraphVertexLocationInFullViewModeActionContext);
-                }
+					if (context instanceof FunctionGraphVertexLocationInFullViewModeActionContext) {
+						return false;
+					}
+					return true;
+				}
 			};
 		menuData = new MenuData(new String[] { "Group Selected Vertices - Add to Group" },
 			popupMutateGroup2);
@@ -510,7 +528,7 @@ class FGActionManager {
 
 					FunctionGraphValidGraphActionContextIf graphContext =
 						(FunctionGraphValidGraphActionContextIf) context;
-					return !getGroupVertices(graphContext.getSelectedVertices()).isEmpty();
+					return getGroupVertices(graphContext.getSelectedVertices()).size() > 0;
 				}
 
 				@Override
@@ -518,8 +536,11 @@ class FGActionManager {
 					if (!(context instanceof FunctionGraphValidGraphActionContextIf)) {
 						return false;
 					}
-                    return !(context instanceof FunctionGraphVertexLocationInFullViewModeActionContext);
-                }
+					if (context instanceof FunctionGraphVertexLocationInFullViewModeActionContext) {
+						return false;
+					}
+					return true;
+				}
 			};
 		menuData = new MenuData(new String[] { "Ungroup Selected Vertices" }, popupMutateGroup2);
 
@@ -562,8 +583,11 @@ class FGActionManager {
 				if (!(context instanceof FunctionGraphValidGraphActionContextIf)) {
 					return false;
 				}
-                return !(context instanceof FunctionGraphVertexLocationInFullViewModeActionContext);
-            }
+				if (context instanceof FunctionGraphVertexLocationInFullViewModeActionContext) {
+					return false;
+				}
+				return true;
+			}
 		};
 		menuData = new MenuData(new String[] { "Remove From Group" }, popupMutateGroup2);
 
@@ -594,7 +618,7 @@ class FGActionManager {
 						return false;
 					}
 
-					return !getGroupVertices(getAllVertices()).isEmpty();
+					return getGroupVertices(getAllVertices()).size() > 0;
 				}
 
 				@Override
@@ -602,8 +626,11 @@ class FGActionManager {
 					if (!(context instanceof FunctionGraphValidGraphActionContextIf)) {
 						return false;
 					}
-                    return !(context instanceof FunctionGraphVertexLocationInFullViewModeActionContext);
-                }
+					if (context instanceof FunctionGraphVertexLocationInFullViewModeActionContext) {
+						return false;
+					}
+					return true;
+				}
 			};
 
 		menuData = new MenuData(new String[] { "Ungroup All Vertices" }, popupMutateGroup2);
@@ -759,7 +786,7 @@ class FGActionManager {
 
 					AddressSet addresses = null;
 					Collection<FGVertex> selectedVertices = controller.getSelectedVertices();
-					if (!selectedVertices.isEmpty()) {
+					if (selectedVertices.size() > 0) {
 						addresses = getAddressesForVertices(selectedVertices);
 					}
 					// if no vertex is selected, then just select all code blocks in the graph

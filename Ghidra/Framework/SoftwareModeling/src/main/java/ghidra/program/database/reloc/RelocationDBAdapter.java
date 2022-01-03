@@ -35,14 +35,14 @@ import ghidra.util.task.TaskMonitor;
 
 abstract class RelocationDBAdapter {
 
-	static final int TYPE_COL = 0;
-	static final int VALU_COL = 1;
-	static final int BYTES_COL = 2;
-	static final int SYMBOL_NAME_COL = 3;
+	final static int TYPE_COL = 0;
+	final static int VALU_COL = 1;
+	final static int BYTES_COL = 2;
+	final static int SYMBOL_NAME_COL = 3;
 
-	static final String TABLE_NAME = "Relocations";
+	final static String TABLE_NAME = "Relocations";
 
-	static final Schema SCHEMA = new Schema(
+	final static Schema SCHEMA = new Schema(
 		RelocationDBAdapterV4.VERSION, "Address", new Field[] { IntField.INSTANCE,
 			BinaryField.INSTANCE, BinaryField.INSTANCE, StringField.INSTANCE },
 		new String[] { "Type", "Values", "Bytes", "Symbol Name" });

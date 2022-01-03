@@ -110,8 +110,11 @@ public interface TraceReference extends Reference {
 			return result;
 		}
 		result = this.getToAddress().compareTo(that.getToAddress());
-        return result;
-    }
+		if (result != 0) {
+			return result;
+		}
+		return 0;
+	}
 
 	void delete();
 }

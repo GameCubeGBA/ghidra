@@ -48,7 +48,8 @@ public class OutgoingFunctionCallNodeTest extends AbstractGenericTest {
 	private String nodeAddress = "0x0000";
 
 	public OutgoingFunctionCallNodeTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

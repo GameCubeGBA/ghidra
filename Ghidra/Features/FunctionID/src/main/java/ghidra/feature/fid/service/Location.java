@@ -62,10 +62,15 @@ public class Location {
 			return false;
 		}
 		if (functionName == null) {
-            return other.functionName == null;
+			if (other.functionName != null) {
+				return false;
+			}
 		}
-		else return functionName.equals(other.functionName);
-    }
+		else if (!functionName.equals(other.functionName)) {
+			return false;
+		}
+		return true;
+	}
 
 	public Location(DomainFile domainFile, String functionName, Address entryPoint) {
 		this.domainFile = domainFile;
@@ -95,7 +100,7 @@ public class Location {
 		sb.append(functionName);
 		if (entryPoint != null) {
 			sb.append(" (");
-			sb.append(entryPoint);
+			sb.append(entryPoint.toString());
 			sb.append(")");
 		}
 		return sb.toString();

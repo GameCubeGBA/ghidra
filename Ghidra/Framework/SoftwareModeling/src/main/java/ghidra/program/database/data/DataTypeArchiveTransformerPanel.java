@@ -44,9 +44,9 @@ import ghidra.util.task.TaskMonitor;
 
 public class DataTypeArchiveTransformerPanel extends JPanel {
 
-	private static final String DOT_DOT_DOT = ". . .";
-	private static final Cursor WAIT_CURSOR = new Cursor(Cursor.WAIT_CURSOR);
-	private static final Cursor NORM_CURSOR = new Cursor(Cursor.DEFAULT_CURSOR);
+	private final static String DOT_DOT_DOT = ". . .";
+	private final static Cursor WAIT_CURSOR = new Cursor(Cursor.WAIT_CURSOR);
+	private final static Cursor NORM_CURSOR = new Cursor(Cursor.DEFAULT_CURSOR);
 
 	private GhidraFileChooser chooser;
 
@@ -57,7 +57,8 @@ public class DataTypeArchiveTransformerPanel extends JPanel {
 	private JCheckBox useOldFileIDCheckBox;
 
 	public DataTypeArchiveTransformerPanel() {
-        initialize();
+		super();
+		initialize();
 	}
 
 	private void initialize() {

@@ -96,11 +96,15 @@ public class CollapseAllArchivesAction extends DockingAction {
 		GTree gtree = (GTree) contextObject;
 		TreePath[] selectionPaths = gtree.getSelectionPaths();
 
-        // Collapse All when multiple nodes
-        if (selectionPaths.length == 0) {
+		if (selectionPaths.length == 0) {
 			updatePopupMenu(false); // Collapse All when nothing is selected
 		}
-		else updatePopupMenu(selectionPaths.length == 1); // collapse single node with children
+		else if (selectionPaths.length == 1) {
+			updatePopupMenu(true); // collapse single node with children
+		}
+		else {
+			updatePopupMenu(false); // Collapse All when multiple nodes
+		}
 
 		return true;
 	}

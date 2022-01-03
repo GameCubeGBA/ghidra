@@ -67,7 +67,7 @@ class ApplyTypeDefs {
 			if (elem.isStart()) {
 				todo.add(elem);
 			}
-			if (elem.isEnd() && "typedefs".equals(elem.getName())) {
+			if (elem.isEnd() && elem.getName().equals("typedefs")) {
 				break;
 			}
 		}

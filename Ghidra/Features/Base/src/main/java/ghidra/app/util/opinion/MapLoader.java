@@ -52,7 +52,7 @@ import ghidra.util.task.TaskMonitor;
  *  </pre>
  */
 public class MapLoader extends AbstractLibrarySupportLoader {
-	public static final String MAP_NAME = "Program Mapfile (MAP)";
+	public final static String MAP_NAME = "Program Mapfile (MAP)";
 
 	public static final String NO_MAGIC = "0";
 
@@ -107,7 +107,7 @@ public class MapLoader extends AbstractLibrarySupportLoader {
 
 		if (provider.getName() != null && provider.getName().toLowerCase().endsWith(".map") &&
 			!parseExports(provider, null).isEmpty()) {
-			List<QueryResult> results = QueryOpinionService.query(MAP_NAME, NO_MAGIC, null);
+			List<QueryResult> results = QueryOpinionService.query(getName(), NO_MAGIC, null);
 			for (QueryResult result : results) {
 				loadSpecs.add(new LoadSpec(this, 0, result));
 			}

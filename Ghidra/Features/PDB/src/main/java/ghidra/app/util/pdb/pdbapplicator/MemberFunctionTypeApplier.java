@@ -58,9 +58,12 @@ public class MemberFunctionTypeApplier extends AbstractFunctionTypeApplier {
 	protected boolean hasThisPointer() {
 		MsTypeApplier applier = applicator.getTypeApplier(
 			((AbstractMemberFunctionMsType) msType).getThisPointerRecordNumber());
-        return !(applier instanceof PrimitiveTypeApplier) ||
-                !((PrimitiveTypeApplier) applier).isNoType(); // such as for static member functions
-    }
+		if ((applier instanceof PrimitiveTypeApplier &&
+			((PrimitiveTypeApplier) applier).isNoType())) {
+			return false; // such as for static member functions
+		}
+		return true;
+	}
 
 	@Override
 	protected RecordNumber getReturnRecordNumber() {

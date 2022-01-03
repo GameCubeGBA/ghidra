@@ -107,12 +107,12 @@ public class GdbThreadInfo {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, targetId);
+		return Objects.hash(getId(), getTargetId());
 	}
 
 	@Override
 	public String toString() {
-		return "<GdbThreadInfo id=" + id + ",target-id=" + targetId + ">";
+		return "<GdbThreadInfo id=" + getId() + ",target-id=" + getTargetId() + ">";
 	}
 
 	@Override
@@ -121,11 +121,14 @@ public class GdbThreadInfo {
 			return false;
 		}
 		GdbThreadInfo that = (GdbThreadInfo) obj;
-		if (this.id != that.id) {
+		if (this.getId() != that.getId()) {
 			return false;
 		}
-        return this.targetId == that.targetId;
-    }
+		if (this.getTargetId() != that.getTargetId()) {
+			return false;
+		}
+		return true;
+	}
 
 	public String getId() {
 		return id;

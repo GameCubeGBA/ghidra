@@ -68,7 +68,7 @@ import ghidra.lifecycle.Internal;
  * context of some target object. For example, if the user is interacting with a thread, and wishes
  * to access that thread's memory, it needs to follow a given search order to find the appropriate
  * target object(s), if they exist, implementing the desired interface. See
- * {@link DebugModelConventions#suitable(Class, TargetObject)} and
+ * {@link DebugModelConventions#findSuitable(Class, TargetObject)} and
  * {@link DebugModelConventions#findInAggregate(Class, TargetObject)} for details. In summary, the
  * order is:
  * 
@@ -384,7 +384,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * 
 	 * @return the model
 	 */
-    DebuggerObjectModel getModel();
+	public DebuggerObjectModel getModel();
 
 	/**
 	 * Get the path (i.e., list of names from root to this object).
@@ -401,7 +401,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * 
 	 * @return the canonical path of the object
 	 */
-    List<String> getPath();
+	public List<String> getPath();
 
 	/**
 	 * Get the path joined by the given separator
@@ -414,7 +414,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * @param sep the path separator
 	 * @return the joined path
 	 */
-	default String getJoinedPath(String sep) {
+	public default String getJoinedPath(String sep) {
 		return PathUtils.toString(getPath(), sep);
 	}
 
@@ -428,7 +428,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * 
 	 * @return the key, or {@code null} if this is the root
 	 */
-	default String getName() {
+	public default String getName() {
 		return PathUtils.getKey(getPath());
 	}
 
@@ -438,7 +438,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * @return they index, or {@code null} if this is the root
 	 * @throws IllegalArgumentException if this object's key is not an index
 	 */
-	default String getIndex() {
+	public default String getIndex() {
 		return PathUtils.getIndex(getPath());
 	}
 
@@ -447,7 +447,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * 
 	 * @return true if root, false otherwise
 	 */
-	default boolean isRoot() {
+	public default boolean isRoot() {
 		return getPath().isEmpty();
 	}
 
@@ -456,7 +456,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * 
 	 * @return the parent or {@code null} if this is the root
 	 */
-    TargetObject getParent();
+	public TargetObject getParent();
 
 	/**
 	 * Get an informal name identifying the type of this object
@@ -468,14 +468,14 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * 
 	 * @return an informal name of this object's type
 	 */
-    String getTypeHint();
+	public String getTypeHint();
 
 	/**
 	 * Get this object's schema
 	 * 
 	 * @return the schema
 	 */
-	default TargetObjectSchema getSchema() {
+	public default TargetObjectSchema getSchema() {
 		return EnumerableTargetObjectSchema.OBJECT;
 	}
 
@@ -486,7 +486,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * 
 	 * @return the set of interfaces
 	 */
-	default Collection<? extends Class<? extends TargetObject>> getInterfaces() {
+	public default Collection<? extends Class<? extends TargetObject>> getInterfaces() {
 		return Protected.getInterfacesOf(getClass());
 	}
 
@@ -499,7 +499,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * 
 	 * @return the set of interface names
 	 */
-	default Collection<String> getInterfaceNames() {
+	public default Collection<String> getInterfaceNames() {
 		return Protected.doGetInterfaceNamesOf(getClass());
 	}
 
@@ -515,7 +515,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * 
 	 * @return true if valid, false if invalid
 	 */
-    boolean isValid();
+	public boolean isValid();
 
 	/**
 	 * Fetch all the attributes of this object
@@ -527,7 +527,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * @param refresh true to invalidate all caches involved in handling this request
 	 * @return a future which completes with a name-value map of attributes
 	 */
-	default CompletableFuture<? extends Map<String, ?>> fetchAttributes(boolean refresh) {
+	public default CompletableFuture<? extends Map<String, ?>> fetchAttributes(boolean refresh) {
 		return getModel().fetchObjectAttributes(getPath(), refresh);
 	}
 
@@ -536,7 +536,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * 
 	 * @see #fetchAttributes(boolean)
 	 */
-	default CompletableFuture<? extends Map<String, ?>> fetchAttributes() {
+	public default CompletableFuture<? extends Map<String, ?>> fetchAttributes() {
 		return fetchAttributes(false);
 	}
 
@@ -553,7 +553,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * @return a future which completes with the attribute or with {@code null} if the attribute
 	 *         does not exist
 	 */
-	default CompletableFuture<?> fetchAttribute(String name) {
+	public default CompletableFuture<?> fetchAttribute(String name) {
 		if (!PathUtils.isInvocation(name)) {
 			return fetchAttributes().thenApply(m -> m.get(name));
 		}
@@ -579,7 +579,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * @see #getCallbackElements()
 	 * @return the map of indices to element references
 	 */
-    Map<String, ? extends TargetObject> getCachedElements();
+	public Map<String, ? extends TargetObject> getCachedElements();
 
 	/**
 	 * Get the cached elements of this object synchronized with the callbacks
@@ -596,7 +596,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * 
 	 * @return the map of indices to element references
 	 */
-    Map<String, ? extends TargetObject> getCallbackElements();
+	public Map<String, ? extends TargetObject> getCallbackElements();
 
 	/**
 	 * Fetch all the elements of this object
@@ -617,8 +617,8 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * @param refresh true to invalidate all caches involved in handling this request
 	 * @return a future which completes with a index-value map of elements
 	 */
-	default CompletableFuture<? extends Map<String, ? extends TargetObject>> fetchElements(
-            boolean refresh) {
+	public default CompletableFuture<? extends Map<String, ? extends TargetObject>> fetchElements(
+			boolean refresh) {
 		return getModel().fetchObjectElements(getPath(), refresh);
 	}
 
@@ -627,7 +627,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * 
 	 * @see #fetchElements(boolean)
 	 */
-	default CompletableFuture<? extends Map<String, ? extends TargetObject>> fetchElements() {
+	public default CompletableFuture<? extends Map<String, ? extends TargetObject>> fetchElements() {
 		return fetchElements(false);
 	}
 
@@ -636,7 +636,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * 
 	 * @return a future which completes with the element or with {@code null} if it does not exist
 	 */
-	default CompletableFuture<? extends TargetObject> fetchElement(String index) {
+	public default CompletableFuture<? extends TargetObject> fetchElement(String index) {
 		return getModel().fetchModelObject(PathUtils.index(getPath(), index));
 	}
 
@@ -653,7 +653,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * @param refresh true to invalidate all caches involved in handling this request
 	 * @return a future which completes with a name-value map of children
 	 */
-	default CompletableFuture<? extends Map<String, ?>> fetchChildren(boolean refresh) {
+	public default CompletableFuture<? extends Map<String, ?>> fetchChildren(boolean refresh) {
 		AsyncFence fence = new AsyncFence();
 		Map<String, Object> children = new TreeMap<>(TargetObjectKeyComparator.CHILD);
 		fence.include(fetchElements(refresh).thenAccept(elements -> {
@@ -670,7 +670,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * 
 	 * @see #fetchChildren(boolean)
 	 */
-	default CompletableFuture<? extends Map<String, ?>> fetchChildren() {
+	public default CompletableFuture<? extends Map<String, ?>> fetchChildren() {
 		return fetchChildren(false);
 	}
 
@@ -686,7 +686,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * @see #fetchElement(String)
 	 * @return a future which completes with the child
 	 */
-	default CompletableFuture<?> fetchChild(String key) {
+	public default CompletableFuture<?> fetchChild(String key) {
 		if (PathUtils.isIndex(key)) {
 			return fetchElement(PathUtils.parseIndex(key));
 		}
@@ -705,7 +705,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * @return a future which completes with a name-value map of children supporting the given
 	 *         interface
 	 */
-	default <T extends TargetObject> //
+	public default <T extends TargetObject> //
 	CompletableFuture<? extends Map<String, ? extends T>> fetchChildrenSupporting(Class<T> iface) {
 		return fetchChildren().thenApply(m -> m.entrySet()
 				.stream()
@@ -724,14 +724,14 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * @return a future which completes with the value or with {@code null} if the path does not
 	 *         exist
 	 */
-	default CompletableFuture<?> fetchValue(List<String> sub) {
+	public default CompletableFuture<?> fetchValue(List<String> sub) {
 		return getModel().fetchModelObject(PathUtils.extend(getPath(), sub));
 	}
 
 	/**
 	 * @see #fetchValue(List)
 	 */
-	default CompletableFuture<?> fetchValue(String... sub) {
+	public default CompletableFuture<?> fetchValue(String... sub) {
 		return fetchValue(List.of(sub));
 	}
 
@@ -746,14 +746,14 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * @param sub the sub-path to the successor
 	 * @return a future which completes with the object or with {@code null} if it does not exist
 	 */
-	default CompletableFuture<? extends TargetObject> fetchSuccessor(List<String> sub) {
+	public default CompletableFuture<? extends TargetObject> fetchSuccessor(List<String> sub) {
 		return getModel().fetchModelObject(PathUtils.extend(getPath(), sub));
 	}
 
 	/**
 	 * @see #fetchSuccessor(List)
 	 */
-	default CompletableFuture<? extends TargetObject> fetchSuccessor(String... sub) {
+	public default CompletableFuture<? extends TargetObject> fetchSuccessor(String... sub) {
 		return fetchSuccessor(List.of(sub));
 	}
 
@@ -766,14 +766,14 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * @param sub the sub-path to the successor
 	 * @return the successor or {@code null} if it doesn't exist in the cache
 	 */
-	default TargetObject getSuccessor(List<String> sub) {
+	public default TargetObject getSuccessor(List<String> sub) {
 		return getModel().getModelObject(PathUtils.extend(getPath(), sub));
 	}
 
 	/**
 	 * @see #getSuccessor(List)
 	 */
-	default TargetObject getSuccessor(String... sub) {
+	public default TargetObject getSuccessor(String... sub) {
 		return getSuccessor(List.of(sub));
 	}
 
@@ -783,15 +783,15 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * @param sub the sub-path to the successor whose attributes to list
 	 * @return a future map of attributes
 	 */
-	default CompletableFuture<? extends Map<String, ?>> fetchSubAttributes(
-            List<String> sub) {
+	public default CompletableFuture<? extends Map<String, ?>> fetchSubAttributes(
+			List<String> sub) {
 		return getModel().fetchObjectAttributes(PathUtils.extend(getPath(), sub));
 	}
 
 	/**
 	 * @see #fetchSubAttributes(List)
 	 */
-	default CompletableFuture<? extends Map<String, ?>> fetchSubAttributes(String... sub) {
+	public default CompletableFuture<? extends Map<String, ?>> fetchSubAttributes(String... sub) {
 		return fetchSubAttributes(List.of(sub));
 	}
 
@@ -805,14 +805,14 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * @param sub the sub-path to the attribute
 	 * @return a future which completes with the value or with {@code null} if it does not exist
 	 */
-	default CompletableFuture<?> fetchSubAttribute(List<String> sub) {
+	public default CompletableFuture<?> fetchSubAttribute(List<String> sub) {
 		return getModel().fetchObjectAttribute(PathUtils.extend(getPath(), sub));
 	}
 
 	/**
 	 * @see #fetchSubAttribute(List)
 	 */
-	default CompletableFuture<?> fetchSubAttribute(String... sub) {
+	public default CompletableFuture<?> fetchSubAttribute(String... sub) {
 		return fetchSubAttribute(List.of(sub));
 	}
 
@@ -822,16 +822,16 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * @param sub the sub-path to the successor whose elements to list
 	 * @return a future map of elements
 	 */
-	default CompletableFuture<? extends Map<String, ? extends TargetObject>> fetchSubElements(
-            List<String> sub) {
+	public default CompletableFuture<? extends Map<String, ? extends TargetObject>> fetchSubElements(
+			List<String> sub) {
 		return getModel().fetchObjectElements(PathUtils.extend(getPath(), sub));
 	}
 
 	/**
 	 * @see #fetchSubElements(List)
 	 */
-	default CompletableFuture<? extends Map<String, ? extends TargetObject>> fetchSubElements(
-            String... sub) {
+	public default CompletableFuture<? extends Map<String, ? extends TargetObject>> fetchSubElements(
+			String... sub) {
 		return fetchSubElements(List.of(sub));
 	}
 
@@ -841,7 +841,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * @return the display description
 	 */
 	@TargetAttributeType(name = DISPLAY_ATTRIBUTE_NAME, hidden = true)
-    default String getDisplay() {
+	public default String getDisplay() {
 		return getTypedAttributeNowByName(DISPLAY_ATTRIBUTE_NAME, String.class, getName());
 	}
 
@@ -851,7 +851,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * @return the display description
 	 */
 	@TargetAttributeType(name = SHORT_DISPLAY_ATTRIBUTE_NAME, hidden = true)
-    default String getShortDisplay() {
+	public default String getShortDisplay() {
 		return getTypedAttributeNowByName(SHORT_DISPLAY_ATTRIBUTE_NAME, String.class, getDisplay());
 	}
 
@@ -866,7 +866,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * @return the kind of the object
 	 */
 	@TargetAttributeType(name = KIND_ATTRIBUTE_NAME, fixed = true, hidden = true)
-    default String getKind() {
+	public default String getKind() {
 		return getTypedAttributeNowByName(KIND_ATTRIBUTE_NAME, String.class, getDisplay());
 	}
 
@@ -884,7 +884,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * @return the recommended display position for this element
 	 */
 	@TargetAttributeType(name = ORDER_ATTRIBUTE_NAME, hidden = true)
-    default Integer getOrder() {
+	public default Integer getOrder() {
 		return getTypedAttributeNowByName(ORDER_ATTRIBUTE_NAME, Integer.class, null);
 	}
 
@@ -902,7 +902,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * @return true if modified, false if not
 	 */
 	@TargetAttributeType(name = MODIFIED_ATTRIBUTE_NAME, hidden = true)
-    default Boolean isModified() {
+	public default Boolean isModified() {
 		return getTypedAttributeNowByName(MODIFIED_ATTRIBUTE_NAME, Boolean.class, null);
 	}
 
@@ -918,7 +918,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * @return the name of the type
 	 */
 	@TargetAttributeType(name = TYPE_ATTRIBUTE_NAME, hidden = true)
-    default String getType() {
+	public default String getType() {
 		return getTypedAttributeNowByName(TYPE_ATTRIBUTE_NAME, String.class, null);
 	}
 
@@ -931,7 +931,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * @return the value
 	 */
 	@TargetAttributeType(name = VALUE_ATTRIBUTE_NAME, hidden = true)
-    default Object getValue() {
+	public default Object getValue() {
 		return getCachedAttribute(VALUE_ATTRIBUTE_NAME);
 	}
 
@@ -974,7 +974,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * 
 	 * @return the identifier
 	 */
-    Object getProtocolID();
+	public Object getProtocolID();
 
 	/**
 	 * Get this same object, cast to the requested interface, if supported
@@ -991,7 +991,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * @return the same object, cast to the interface
 	 * @throws DebuggerModelTypeException if the interface is not supported by this object
 	 */
-	default <T extends TargetObject> T as(Class<T> iface) {
+	public default <T extends TargetObject> T as(Class<T> iface) {
 		return DebuggerObjectModel.requireIface(iface, this, getPath());
 	}
 
@@ -1001,7 +1001,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * @see #getCallbackAttributes()
 	 * @return the cached name-value map of attributes
 	 */
-    Map<String, ?> getCachedAttributes();
+	public Map<String, ?> getCachedAttributes();
 
 	/**
 	 * Get the cached attributes of this object synchronized with the callbacks
@@ -1018,7 +1018,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * 
 	 * @return the cached name-value map of attributes
 	 */
-    Map<String, ?> getCallbackAttributes();
+	public Map<String, ?> getCallbackAttributes();
 
 	/**
 	 * Get the named attribute from the cache
@@ -1026,7 +1026,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * @param name the name of the attribute
 	 * @return the value
 	 */
-	default Object getCachedAttribute(String name) {
+	public default Object getCachedAttribute(String name) {
 		return getCachedAttributes().get(name);
 	}
 
@@ -1043,7 +1043,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * @param fallback the fallback value
 	 * @return the value casted to the expected type, or the fallback value
 	 */
-	default <T> T getTypedAttributeNowByName(String name, Class<T> cls, T fallback) {
+	public default <T> T getTypedAttributeNowByName(String name, Class<T> cls, T fallback) {
 		Object obj = getCachedAttribute(name);
 		TargetObjectSchema schema = getSchema();
 		boolean required = schema.getAttributeSchema(name).isRequired();
@@ -1065,7 +1065,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * 
 	 * @return a future which completes when the caches are invalidated
 	 */
-	default CompletableFuture<Void> invalidateCaches() {
+	public default CompletableFuture<Void> invalidateCaches() {
 		return AsyncUtils.NIL;
 	}
 
@@ -1090,7 +1090,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * @see DebuggerObjectModel#addModelListener(DebuggerModelListener)
 	 * @param l the listener
 	 */
-	default void addListener(DebuggerModelListener l) {
+	public default void addListener(DebuggerModelListener l) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -1102,7 +1102,7 @@ public interface TargetObject extends Comparable<TargetObject> {
 	 * 
 	 * @param l the listener
 	 */
-	default void removeListener(DebuggerModelListener l) {
+	public default void removeListener(DebuggerModelListener l) {
 		throw new UnsupportedOperationException();
 	}
 }

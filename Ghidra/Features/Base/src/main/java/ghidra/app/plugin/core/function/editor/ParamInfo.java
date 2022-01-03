@@ -102,7 +102,7 @@ public class ParamInfo {
 
 	@Override
 	public String toString() {
-		return getName() + "@" + storage;
+		return getName() + "@" + getStorage();
 	}
 
 	int getOrdinal() {
@@ -117,7 +117,7 @@ public class ParamInfo {
 	}
 
 	void setName(String name) {
-		if (name != null && name.isEmpty()) {
+		if (name != null && name.length() == 0) {
 			name = null;
 		}
 		this.name = name;

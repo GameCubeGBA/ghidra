@@ -52,7 +52,7 @@ public abstract class AbstractManagedSymbolWithSlotIndexFieldMsSymbol extends Ab
 		myBuilder.append(typeRecordNumber.getNumber());
 		attributes.emit(myBuilder);
 		builder.append(String.format("%s: %d, %s %s", getSymbolTypeName(), slotIndex,
-                myBuilder, name));
+			myBuilder.toString(), name));
 	}
 
 }

@@ -22,6 +22,6 @@ import ghidra.util.task.TaskMonitor;
 
 @FunctionalInterface
 public interface DecompilerMapFunction<D> {
-	D evaluate(DecompInterface decompiler, Function function, TaskMonitor monitor)
+	public D evaluate(DecompInterface decompiler, Function function, TaskMonitor monitor)
 			throws Exception;
 }

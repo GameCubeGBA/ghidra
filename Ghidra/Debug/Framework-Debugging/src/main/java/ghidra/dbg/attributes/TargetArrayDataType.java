@@ -16,7 +16,7 @@
 package ghidra.dbg.attributes;
 
 public interface TargetArrayDataType extends TargetDataType {
-	class DefaultTargetArrayDataType implements TargetArrayDataType {
+	public class DefaultTargetArrayDataType implements TargetArrayDataType {
 		protected final TargetDataType elementType;
 		protected final int elementCount;
 

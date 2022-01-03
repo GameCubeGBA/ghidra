@@ -54,13 +54,13 @@ class BookmarksXmlMgr {
 			throws SAXParseException, AddressFormatException, CancelledException {
 
 		XmlElement element = parser.next();
-		if (!element.isStart() || !"BOOKMARKS".equals(element.getName())) {
+		if (!element.isStart() || !element.getName().equals("BOOKMARKS")) {
 			throw new SAXParseException("Expected BOOKMARKS start tag", null, null,
 				parser.getLineNumber(), parser.getColumnNumber());
 		}
 
 		element = parser.next();
-		while ("BOOKMARK".equals(element.getName())) {
+		while (element.getName().equals("BOOKMARK")) {
 			if (monitor.isCancelled()) {
 				throw new CancelledException();
 			}
@@ -68,7 +68,7 @@ class BookmarksXmlMgr {
 			element = parser.next();
 		}
 
-		if (element.isStart() || !"BOOKMARKS".equals(element.getName())) {
+		if (element.isStart() || !element.getName().equals("BOOKMARKS")) {
 			throw new SAXParseException("Expected BOOKMARK element or BOOKMARKS end tag", null,
 				null, parser.getLineNumber(), parser.getColumnNumber());
 		}
@@ -118,7 +118,7 @@ class BookmarksXmlMgr {
 		}
 
 		element = parser.next();
-		if (element.isStart() || !"BOOKMARK".equals(element.getName())) {
+		if (element.isStart() || !element.getName().equals("BOOKMARK")) {
 			throw new SAXParseException("Expected BOOKMARK end tag", null, null,
 				parser.getLineNumber(), parser.getColumnNumber());
 		}
@@ -142,38 +142,38 @@ class BookmarksXmlMgr {
 			throws CancelledException {
 
 		BookmarkType[] types = bookmarkMgr.getBookmarkTypes();
-        for (BookmarkType type : types) {
-            if (monitor.isCancelled()) {
-                throw new CancelledException();
-            }
-            String typeStr = type.getTypeString();
-            AddressSetView bmSet = bookmarkMgr.getBookmarkAddresses(typeStr);
-            if (set != null) {
-                bmSet = set.intersect(bmSet);
-            }
-            AddressIterator iter = bmSet.getAddresses(true);
-            while (iter.hasNext()) {
-                Address addr = iter.next();
-                Bookmark[] bookmarks = bookmarkMgr.getBookmarks(addr, typeStr);
-                for (Bookmark bookmark : bookmarks) {
-                    if (monitor.isCancelled()) {
-                        return;
-                    }
-                    XmlAttributes attrs = new XmlAttributes();
-                    attrs.addAttribute("ADDRESS", XmlProgramUtilities.toString(addr));
-                    attrs.addAttribute("TYPE", typeStr);
-                    String category = bookmark.getCategory();
-                    String comment = bookmark.getComment();
-                    if (category != null && !category.isEmpty()) {
-                        attrs.addAttribute("CATEGORY", category);
-                    }
-                    if (comment != null && !comment.isEmpty()) {
-                        attrs.addAttribute("DESCRIPTION", comment);
-                    }
-                    writer.startElement("BOOKMARK", attrs);
-                    writer.endElement("BOOKMARK");
-                }
-            }
-        }
+		for (int i = 0; i < types.length; i++) {
+			if (monitor.isCancelled()) {
+				throw new CancelledException();
+			}
+			String typeStr = types[i].getTypeString();
+			AddressSetView bmSet = bookmarkMgr.getBookmarkAddresses(typeStr);
+			if (set != null) {
+				bmSet = set.intersect(bmSet);
+			}
+			AddressIterator iter = bmSet.getAddresses(true);
+			while (iter.hasNext()) {
+				Address addr = iter.next();
+				Bookmark[] bookmarks = bookmarkMgr.getBookmarks(addr, typeStr);
+				for (int n = 0; n < bookmarks.length; n++) {
+					if (monitor.isCancelled()) {
+						return;
+					}
+					XmlAttributes attrs = new XmlAttributes();
+					attrs.addAttribute("ADDRESS", XmlProgramUtilities.toString(addr));
+					attrs.addAttribute("TYPE", typeStr);
+					String category = bookmarks[n].getCategory();
+					String comment = bookmarks[n].getComment();
+					if (category != null && category.length() != 0) {
+						attrs.addAttribute("CATEGORY", category);
+					}
+					if (comment != null && comment.length() != 0) {
+						attrs.addAttribute("DESCRIPTION", comment);
+					}
+					writer.startElement("BOOKMARK", attrs);
+					writer.endElement("BOOKMARK");
+				}
+			}
+		}
 	}
 }

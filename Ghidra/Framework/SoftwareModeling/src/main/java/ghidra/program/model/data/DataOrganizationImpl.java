@@ -457,13 +457,13 @@ public class DataOrganizationImpl implements DataOrganization {
 		if (size <= 1) {
 			ctype = "char";
 		}
-		else if (size <= shortSize && (shortSize != integerSize)) {
+		else if (size <= getShortSize() && (getShortSize() != getIntegerSize())) {
 			ctype = "short";
 		}
-		else if (size <= integerSize) {
+		else if (size <= getIntegerSize()) {
 			ctype = "int";
 		}
-		else if (size <= longSize) {
+		else if (size <= getLongSize()) {
 			ctype = "long";
 		}
 		if (!signed) {
@@ -507,10 +507,10 @@ public class DataOrganizationImpl implements DataOrganization {
 					: absoluteMaxAlignment;
 		}
 		if (dataType instanceof Pointer) {
-			return defaultPointerAlignment;
+			return getDefaultPointerAlignment();
 		}
 		// Otherwise just assume the default alignment.
-		return defaultAlignment;
+		return getDefaultAlignment();
 	}
 	
 	/**
@@ -635,7 +635,7 @@ public class DataOrganizationImpl implements DataOrganization {
 			SpecXmlUtils.encodeSignedIntegerAttribute(buffer, "value", longDoubleSize);
 			buffer.append("/>\n");
 		}
-		if (!sizeAlignmentMap.isEmpty()) {
+		if (sizeAlignmentMap.size() != 0) {
 			buffer.append("<size_alignment_map>\n");
 			for (Map.Entry<Integer, Integer> entry : sizeAlignmentMap.entrySet()) {
 				buffer.append("<entry");

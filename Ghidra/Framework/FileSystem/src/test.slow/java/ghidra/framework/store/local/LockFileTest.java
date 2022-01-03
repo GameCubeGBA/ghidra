@@ -46,7 +46,8 @@ public class LockFileTest extends AbstractGenericTest {
 	 * @param arg0
 	 */
 	public LockFileTest() {
-    }
+		super();
+	}
 
 	/*
 	 * @see TestCase#setUp()

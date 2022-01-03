@@ -22,7 +22,7 @@ import ghidra.file.formats.android.oat.OatConstants;
 
 public final class OatQuickMethodHeaderFactory {
 
-	public static final int getOatQuickMethodHeaderSize(String oatVersion) throws IOException {
+	public final static int getOatQuickMethodHeaderSize(String oatVersion) throws IOException {
 		switch (oatVersion) {
 			case OatConstants.VERSION_LOLLIPOP_RELEASE:
             case OatConstants.VERSION_OREO_RELEASE:
@@ -46,8 +46,8 @@ public final class OatQuickMethodHeaderFactory {
 		throw new IOException("OatQuickMethodHeader unsupported OAT version: " + oatVersion);
 	}
 
-	public static final OatQuickMethodHeader getOatQuickMethodHeader(BinaryReader reader,
-                                                                     String oatVersion) throws IOException {
+	public final static OatQuickMethodHeader getOatQuickMethodHeader(BinaryReader reader,
+			String oatVersion) throws IOException {
 		switch (oatVersion ) {
 			case OatConstants.VERSION_LOLLIPOP_RELEASE:
 				return new OatQuickMethodHeader_Lollipop(reader);

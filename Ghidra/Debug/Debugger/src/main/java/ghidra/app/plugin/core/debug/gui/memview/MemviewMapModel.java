@@ -22,22 +22,22 @@ import ghidra.program.model.address.Address;
 
 class MemviewMapModel extends AbstractSortedTableModel<MemoryBox> {
 
-	static final byte NAME = 0;
-	static final byte ASTART = 1;
-	static final byte ASTOP = 2;
-	static final byte TSTART = 3;
-	static final byte TSTOP = 4;
+	final static byte NAME = 0;
+	final static byte ASTART = 1;
+	final static byte ASTOP = 2;
+	final static byte TSTART = 3;
+	final static byte TSTOP = 4;
 
-	static final String NAME_COL = "Name";
-	static final String ASTART_COL = "Start Address";
-	static final String ASTOP_COL = "End Address";
-	static final String TSTART_COL = "Start Time";
-	static final String TSTOP_COL = "End Time";
+	final static String NAME_COL = "Name";
+	final static String ASTART_COL = "Start Address";
+	final static String ASTOP_COL = "End Address";
+	final static String TSTART_COL = "Start Time";
+	final static String TSTOP_COL = "End Time";
 
 	private List<MemoryBox> memList = new ArrayList<>();
 	private Map<String, MemoryBox> memMap = new HashMap<>();
 
-	private static final String[] COLUMN_NAMES =
+	private final static String[] COLUMN_NAMES =
 		{ NAME_COL, ASTART_COL, ASTOP_COL, TSTART_COL, TSTOP_COL };
 
 	public MemviewMapModel(MemviewProvider provider) {

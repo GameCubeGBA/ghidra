@@ -62,10 +62,10 @@ public class PropagateExternalParametersAnalyzer extends AbstractAnalyzer {
 			}
 
 			String mnemonic = listing.getCodeUnitAt(fromAddr).getMnemonicString();
-			if (("JMP".equals(mnemonic) && (callingFunction.isThunk()))) {
+			if ((mnemonic.equals("JMP") && (callingFunction.isThunk()))) {
 				processThunkReference(listing, refMan, externalFunction, params, callingFunction);
 			}
-			else if (("CALL".equals(mnemonic))) {// not a thunk
+			else if ((mnemonic.equals("CALL"))) {// not a thunk
 				CodeUnitIterator it = getCodeUnitsFromFunctionStartToRef(callingFunction, fromAddr);
 				if (hasEnoughPushes(it, params.length)) {
 					CodeUnitIterator codeUnitsToRef =
@@ -87,7 +87,7 @@ public class PropagateExternalParametersAnalyzer extends AbstractAnalyzer {
 			}
 
 			String thunkMnemonic = listing.getCodeUnitAt(thunkAddr).getMnemonicString();
-			if (!"CALL".equals(thunkMnemonic)) {
+			if (!thunkMnemonic.equals("CALL")) {
 				continue;
 			}
 
@@ -167,10 +167,10 @@ public class PropagateExternalParametersAnalyzer extends AbstractAnalyzer {
 			if (numSkips > 0) {
 				numSkips--;
 			}
-			else if ("CALL".equals(cu.getMnemonicString())) {
+			else if (cu.getMnemonicString().equals("CALL")) {
 				numParams += numParams(cu);
 			}
-			else if ("PUSH".equals(cu.getMnemonicString())) {
+			else if (cu.getMnemonicString().equals("PUSH")) {
 				numPushes++;
 			}
 		}
@@ -198,10 +198,10 @@ public class PropagateExternalParametersAnalyzer extends AbstractAnalyzer {
 			CodeUnit cu = iterator.next();
 			boolean isBranch = cu.getLabel() != null;
 
-			if ("CALL".equals(cu.getMnemonicString())) {
+			if (cu.getMnemonicString().equals("CALL")) {
 				numSkips += numParams(cu);
 			}
-			else if ("PUSH".equals(cu.getMnemonicString())) {
+			else if (cu.getMnemonicString().equals("PUSH")) {
 				if (numSkips > 0) {
 					numSkips--;
 				}
@@ -267,42 +267,43 @@ public class PropagateExternalParametersAnalyzer extends AbstractAnalyzer {
 		// use the 'results' to propagate param info to the local variables, data, and params of
 		// the calling function
 		Msg.trace(this, "Processing propagation results - count: " + results.size());
-        for (PushedParamInfo paramInfo : results) {
-            Address paramAddress = paramInfo.getAddress();
-            Instruction instruction = listing.getInstructionAt(paramAddress);
+		for (int i = 0; i < results.size(); i++) {
+			PushedParamInfo paramInfo = results.get(i);
+			Address paramAddress = paramInfo.getAddress();
+			Instruction instruction = listing.getInstructionAt(paramAddress);
 
-            // wait on applying data types - the microsoft analyzer does some of this
-            // see how much/well it does first
-            if (!instruction.getOperandRefType(0).isData()) {
-                continue;
-            }
+			// wait on applying data types - the microsoft analyzer does some of this
+			// see how much/well it does first
+			if (!instruction.getOperandRefType(0).isData()) {
+				continue;
+			}
 
-            int opType = instruction.getOperandType(0);
-            if (!isAddressReferenceOperand(opType)) {
-                continue;
-            }
+			int opType = instruction.getOperandType(0);
+			if (!isAddressReferenceOperand(opType)) {
+				continue;
+			}
 
-            Address referencedAddress = getReferencedAddress(paramAddress);
-            if (referencedAddress == null) {
-                continue;
-            }
+			Address referencedAddress = getReferencedAddress(paramAddress);
+			if (referencedAddress == null) {
+				continue;
+			}
 
-            String paramName = paramInfo.getName();
-            String symbolName = paramName + "_" + referencedAddress;
+			String paramName = paramInfo.getName();
+			String symbolName = paramName + "_" + referencedAddress.toString();
 
-            addSymbol(symbolTable, referencedAddress, symbolName);
+			addSymbol(symbolTable, referencedAddress, symbolName);
 
-            String paramText = paramName + " parameter of " + paramInfo.getCalledFunctionName();
-            String newComment = paramText + "\n";
-            Msg.trace(this, "External Function Call at " + paramAddress + " : " + paramText +
-                    " at " + referencedAddress);
+			String paramText = paramName + " parameter of " + paramInfo.getCalledFunctionName();
+			String newComment = paramText + "\n";
+			Msg.trace(this, "External Function Call at " + paramAddress + " : " + paramText +
+				" at " + referencedAddress.toString());
 
-            createComment(referencedAddress, newComment, paramInfo);
+			createComment(referencedAddress, newComment, paramInfo);
 
-            clearUndefinedDataType(referencedAddress, monitor);
+			clearUndefinedDataType(referencedAddress, monitor);
 
-            createData(paramInfo, referencedAddress);
-        }
+			createData(paramInfo, referencedAddress);
+		}
 
 		return true;
 	}

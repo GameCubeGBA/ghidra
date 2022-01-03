@@ -48,23 +48,23 @@ public class DataTreeDialog extends DialogComponentProvider
 	/**
 	 * Dialog type for opening domain data files.
 	 */
-    public static final int OPEN = 0;
+	public final static int OPEN = 0;
 	/**
 	 * Dialog type for saving domain data files.
 	 */
-    public static final int SAVE = 1;
+	public final static int SAVE = 1;
 	/**
 	 * Dialog type for choosing a user folder.
 	 */
-    public static final int CHOOSE_FOLDER = 2; // choose only a
+	public final static int CHOOSE_FOLDER = 2; // choose only a
 	// folder owned by the user
 	/**
 	 * Dialog type for creating domain data files.
 	 */
-    public static final int CREATE = 3;
+	public final static int CREATE = 3;
 
-	protected static final int WIDTH = 350;
-	protected static final int HEIGHT = 500;
+	protected final static int WIDTH = 350;
+	protected final static int HEIGHT = 500;
 
 	protected ProjectDataTreePanel treePanel;
 
@@ -350,7 +350,7 @@ public class DataTreeDialog extends DialogComponentProvider
 
 				folderNameLabel.setText(domainFolder.getPathname());
 				if (nameField.isEditable()) {
-					if (!nameField.getText().isEmpty()) {
+					if (nameField.getText().length() > 0) {
 						nameField.selectAll();
 					}
 				}

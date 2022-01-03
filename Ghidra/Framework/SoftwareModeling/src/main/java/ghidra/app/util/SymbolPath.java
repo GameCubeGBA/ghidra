@@ -217,8 +217,11 @@ public class SymbolPath implements Comparable<SymbolPath> {
 		if (!Objects.equals(parentPath, other.parentPath)) {
 			return false;
 		}
-        return Objects.equals(symbolName, other.symbolName);
-    }
+		if (!Objects.equals(symbolName, other.symbolName)) {
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * A convenience method to check if the given symbol's symbol path matches this path
@@ -275,7 +278,7 @@ public class SymbolPath implements Comparable<SymbolPath> {
 	 */
 	private SymbolPath checkGlobal(SymbolPath path) {
 		if ((path == null) || (path.parentPath == null &&
-			GlobalNamespace.GLOBAL_NAMESPACE_NAME.equalsIgnoreCase(path.symbolName))) {
+			GlobalNamespace.GLOBAL_NAMESPACE_NAME.equalsIgnoreCase(path.getName()))) {
 			return null;
 		}
 		return path;
@@ -283,7 +286,7 @@ public class SymbolPath implements Comparable<SymbolPath> {
 
 	@Override
 	public int compareTo(SymbolPath o) {
-		SymbolPath otherParentPath = o.parentPath;
+		SymbolPath otherParentPath = o.getParent();
 		int result = 0;
 		if (parentPath == null) {
 			if (otherParentPath != null) {
@@ -297,7 +300,7 @@ public class SymbolPath implements Comparable<SymbolPath> {
 			result = parentPath.compareTo(otherParentPath);
 		}
 		if (result == 0) {
-			result = symbolName.compareTo(o.symbolName);
+			result = symbolName.compareTo(o.getName());
 		}
 		return result;
 	}

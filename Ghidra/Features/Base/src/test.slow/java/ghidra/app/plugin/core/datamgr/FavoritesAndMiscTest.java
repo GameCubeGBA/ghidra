@@ -181,12 +181,12 @@ public class FavoritesAndMiscTest extends AbstractGhidraHeadedIntegrationTest {
 
 		List<DataType> dts = changeListener.getFavoriteDts();
 		boolean found = false;
-        for (DataType dataType : dts) {
-            if ("PascalUnicode".equals(dataType.getName())) {
-                found = true;
-                break;
-            }
-        }
+		for (int i = 0; i < dts.size(); i++) {
+			if (dts.get(i).getName().equals("PascalUnicode")) {
+				found = true;
+				break;
+			}
+		}
 		if (!found) {
 			Assert.fail("Did not find MBCString as a favorite!");
 		}
@@ -198,11 +198,11 @@ public class FavoritesAndMiscTest extends AbstractGhidraHeadedIntegrationTest {
 		waitForSwing();
 
 		dts = changeListener.getFavoriteDts();
-        for (DataType dt : dts) {
-            if ("MBCString".equals(dt.getName())) {
-                Assert.fail("Should not have found MBCString as a favorite!");
-            }
-        }
+		for (int i = 0; i < dts.size(); i++) {
+			if (dts.get(i).getName().equals("MBCString")) {
+				Assert.fail("Should not have found MBCString as a favorite!");
+			}
+		}
 	}
 
 	@Test

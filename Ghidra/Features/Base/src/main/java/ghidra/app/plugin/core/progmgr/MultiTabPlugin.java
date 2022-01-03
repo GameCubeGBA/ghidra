@@ -193,9 +193,9 @@ public class MultiTabPlugin extends Plugin implements DomainObjectListener {
 		DomainFile df = program.getDomainFile();
 		String changeIndicator = program.isChanged() ? "*" : "";
 		if (!df.isInWritableProject()) {
-			return df + " [Read-Only]" + changeIndicator;
+			return df.toString() + " [Read-Only]" + changeIndicator;
 		}
-		return df + changeIndicator;
+		return df.toString() + changeIndicator;
 	}
 
 	String getToolTip(Program program) {

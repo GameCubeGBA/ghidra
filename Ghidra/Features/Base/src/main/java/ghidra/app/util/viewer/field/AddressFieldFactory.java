@@ -40,10 +40,10 @@ import ghidra.util.exception.AssertException;
 public class AddressFieldFactory extends FieldFactory {
 	public static final String FIELD_NAME = "Address";
 	public static final Color DEFAULT_COLOR = Color.BLACK;
-	private static final String GROUP_TITLE = "Address Field";
-	public static final String DISPLAY_BLOCK_NAME =
+	private final static String GROUP_TITLE = "Address Field";
+	public final static String DISPLAY_BLOCK_NAME =
 		GROUP_TITLE + Options.DELIMITER + "Display Block Name";
-	public static final String ADDRESS_DISPLAY_OPTIONS_NAME =
+	public final static String ADDRESS_DISPLAY_OPTIONS_NAME =
 		GROUP_TITLE + Options.DELIMITER + "Address Display Options";
 	private boolean displayBlockName;
 	private boolean padZeros;

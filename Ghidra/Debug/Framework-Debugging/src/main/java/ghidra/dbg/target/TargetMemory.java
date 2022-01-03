@@ -56,7 +56,7 @@ public interface TargetMemory extends TargetObject {
 	 * @param length the number of bytes to read
 	 * @return a future which completes with the read data
 	 */
-    CompletableFuture<byte[]> readMemory(Address address, int length);
+	public CompletableFuture<byte[]> readMemory(Address address, int length);
 
 	/**
 	 * Write memory at the given address
@@ -73,7 +73,7 @@ public interface TargetMemory extends TargetObject {
 	 * @param data the data to write
 	 * @return a future which completes upon successfully writing
 	 */
-    CompletableFuture<Void> writeMemory(Address address, byte[] data);
+	public CompletableFuture<Void> writeMemory(Address address, byte[] data);
 
 	/**
 	 * Get the regions of valid addresses
@@ -85,7 +85,7 @@ public interface TargetMemory extends TargetObject {
 	 * @return the collection of child regions
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-    default CompletableFuture<? extends Map<String, ? extends TargetMemoryRegion>> getRegions() {
+	public default CompletableFuture<? extends Map<String, ? extends TargetMemoryRegion>> getRegions() {
 		return fetchChildrenSupporting((Class) TargetMemoryRegion.class);
 	}
 }

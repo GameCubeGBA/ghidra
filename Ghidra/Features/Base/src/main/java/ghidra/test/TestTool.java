@@ -22,7 +22,7 @@ import ghidra.util.SystemUtilities;
 import ghidra.util.exception.AssertException;
 
 public class TestTool extends GhidraTool {
-	public static final String NAME = "Test Tool";
+	public final static String NAME = "Test Tool";
 
 	public TestTool(Project project) {
 		super(project, NAME);

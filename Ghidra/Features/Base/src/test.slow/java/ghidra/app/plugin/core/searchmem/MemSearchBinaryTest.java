@@ -40,7 +40,8 @@ import ghidra.program.util.ProgramLocation;
 public class MemSearchBinaryTest extends AbstractMemSearchTest {
 
 	public MemSearchBinaryTest() {
-    }
+		super();
+	}
 
 	@Override
 	@Before
@@ -145,12 +146,13 @@ public class MemSearchBinaryTest extends AbstractMemSearchTest {
 									0x01002d5b);		
 		//@formatter:on
 
-        for (Address start : addrs) {
-            pressSearchButton("Next");
-            CodeUnit cu = listing.getCodeUnitContaining(start);
-            assertEquals(cu.getMinAddress(), cb.getCurrentLocation().getAddress());
-            assertEquals("Found", statusLabel.getText());
-        }
+		for (int i = 0; i < addrs.size(); i++) {
+			Address start = addrs.get(i);
+			pressSearchButton("Next");
+			CodeUnit cu = listing.getCodeUnitContaining(start);
+			assertEquals(cu.getMinAddress(), cb.getCurrentLocation().getAddress());
+			assertEquals("Found", statusLabel.getText());
+		}
 		pressSearchButton("Next");
 		assertEquals("Not Found", statusLabel.getText());
 
@@ -174,12 +176,13 @@ public class MemSearchBinaryTest extends AbstractMemSearchTest {
 		//the bytes are at the right alignment value but the code units are not
 		List<Address> addrs = addrs(0x01002d2f, 0x01002d37, 0x01002d5b);
 
-        for (Address start : addrs) {
-            pressSearchButton("Next");
-            CodeUnit cu = listing.getCodeUnitContaining(start);
-            assertEquals(cu.getMinAddress(), cb.getCurrentLocation().getAddress());
-            assertEquals("Found", statusLabel.getText());
-        }
+		for (int i = 0; i < addrs.size(); i++) {
+			Address start = addrs.get(i);
+			pressSearchButton("Next");
+			CodeUnit cu = listing.getCodeUnitContaining(start);
+			assertEquals(cu.getMinAddress(), cb.getCurrentLocation().getAddress());
+			assertEquals("Found", statusLabel.getText());
+		}
 		pressSearchButton("Next");
 		assertEquals("Not Found", statusLabel.getText());
 	}

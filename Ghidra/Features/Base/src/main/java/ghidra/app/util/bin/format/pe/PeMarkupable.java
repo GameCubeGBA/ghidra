@@ -43,7 +43,7 @@ public interface PeMarkupable {
 	 * @throws IOException
 	 * @throws MemoryAccessException
 	 */
-    void markup(Program program, boolean isBinary, TaskMonitor monitor, MessageLog log,
-                NTHeader ntHeader) throws DuplicateNameException, CodeUnitInsertionException,
+	public void markup(Program program, boolean isBinary, TaskMonitor monitor, MessageLog log,
+			NTHeader ntHeader) throws DuplicateNameException, CodeUnitInsertionException,
 			IOException, MemoryAccessException;
 }

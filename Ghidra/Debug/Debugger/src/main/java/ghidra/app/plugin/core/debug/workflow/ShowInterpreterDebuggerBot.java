@@ -58,7 +58,7 @@ public class ShowInterpreterDebuggerBot implements DebuggerBot {
 	public void modelAdded(DebuggerObjectModel model) {
 		model.fetchModelRoot().thenCompose(root -> {
 			CompletableFuture<? extends TargetInterpreter> fi =
-				DebugModelConventions.suitable(TargetInterpreter.class, root);
+				DebugModelConventions.findSuitable(TargetInterpreter.class, root);
 			return fi;
 		}).thenAccept(interpreter -> {
 			if (interpreter == null) {

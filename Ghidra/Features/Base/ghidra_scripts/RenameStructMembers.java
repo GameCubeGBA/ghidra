@@ -60,27 +60,29 @@ public class RenameStructMembers extends GhidraScript {
 			DataTypeComponent[] comps = s.getDefinedComponents();
 
 			// iterate through all components for current structure
-            for (DataTypeComponent dtc : comps) {
+			for (int i = 0; i < comps.length; i++) {
 
-                // rename matching component
-                String fieldName = dtc.getFieldName();
-                if ((fieldName != null) && (fieldName.equals(curName))) {
-                    println(s.getName() + "::" + fieldName);
-                    dtc.setFieldName(newName);
-                    memberCount = memberCount + 1;
-                }
+				DataTypeComponent dtc = comps[i];
 
-                // replace matching text in component comments
-                String comment = dtc.getComment();
-                if (comment != null) {
-                    comment = comment.replaceAll(curName, newName);
-                    if (!dtc.getComment().equals(comment)) {
-                        println("comment: " + comment);
-                        dtc.setComment(comment);
-                        commentCount = commentCount + 1;
-                    }
-                }
-            }
+				// rename matching component
+				String fieldName = dtc.getFieldName();
+				if ((fieldName != null) && (fieldName.equals(curName))) {
+					println(s.getName() + "::" + fieldName);
+					dtc.setFieldName(newName);
+					memberCount = memberCount + 1;
+				}
+
+				// replace matching text in component comments
+				String comment = dtc.getComment();
+				if (comment != null) {
+					comment = comment.replaceAll(curName, newName);
+					if (!dtc.getComment().equals(comment)) {
+						println("comment: " + comment);
+						dtc.setComment(comment);
+						commentCount = commentCount + 1;
+					}
+				}
+			}
 		}
 
 		println("Member name changes:  " + memberCount);

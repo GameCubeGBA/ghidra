@@ -12,10 +12,10 @@
 package SWIG;
 
 public final class CommandInterpreterResult {
-  public static final CommandInterpreterResult eCommandInterpreterResultSuccess = new CommandInterpreterResult("eCommandInterpreterResultSuccess");
-  public static final CommandInterpreterResult eCommandInterpreterResultInferiorCrash = new CommandInterpreterResult("eCommandInterpreterResultInferiorCrash");
-  public static final CommandInterpreterResult eCommandInterpreterResultCommandError = new CommandInterpreterResult("eCommandInterpreterResultCommandError");
-  public static final CommandInterpreterResult eCommandInterpreterResultQuitRequested = new CommandInterpreterResult("eCommandInterpreterResultQuitRequested");
+  public final static CommandInterpreterResult eCommandInterpreterResultSuccess = new CommandInterpreterResult("eCommandInterpreterResultSuccess");
+  public final static CommandInterpreterResult eCommandInterpreterResultInferiorCrash = new CommandInterpreterResult("eCommandInterpreterResultInferiorCrash");
+  public final static CommandInterpreterResult eCommandInterpreterResultCommandError = new CommandInterpreterResult("eCommandInterpreterResultCommandError");
+  public final static CommandInterpreterResult eCommandInterpreterResultQuitRequested = new CommandInterpreterResult("eCommandInterpreterResultQuitRequested");
 
   public final int swigValue() {
     return swigValue;
@@ -28,9 +28,9 @@ public final class CommandInterpreterResult {
   public static CommandInterpreterResult swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-      for (CommandInterpreterResult value : swigValues)
-          if (value.swigValue == swigValue)
-              return value;
+    for (int i = 0; i < swigValues.length; i++)
+      if (swigValues[i].swigValue == swigValue)
+        return swigValues[i];
     throw new IllegalArgumentException("No enum " + CommandInterpreterResult.class + " with value " + swigValue);
   }
 

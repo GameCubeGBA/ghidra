@@ -25,13 +25,13 @@ public interface CompositeViewerModelListener {
 	/**
 	 * Called whenever the composite's component data is changed.
 	 */
-    void componentDataChanged();
+	public abstract void componentDataChanged();
 	
 	/**
 	 * Called whenever the composite's non-component data is changed.
 	 * For example, the composite's name, description, size, ...
 	 */
-    void compositeInfoChanged();
+	public abstract void compositeInfoChanged();
 
 	/**
 	 * Notification that the CompositeViewerModel's status information has changed.
@@ -39,10 +39,10 @@ public interface CompositeViewerModelListener {
 	 * @param message the information to provide to the user.
 	 * @param beep true indicates an audible beep is suggested.
 	 */
-    void statusChanged(String message, boolean beep);
+	public abstract void statusChanged(String message, boolean beep);
 
 	/**
 	 * Called to indicate the model's component selection has changed.
 	 */
-    void selectionChanged();
+	public abstract void selectionChanged();
 }

@@ -61,6 +61,6 @@ public class FcgFunction extends FunctionTestDouble {
 
 	@Override
 	public String toString() {
-		return super.toString() + " @ " + entry.getOffset();
+		return super.toString() + " @ " + getEntryPoint().getOffset();
 	}
 }

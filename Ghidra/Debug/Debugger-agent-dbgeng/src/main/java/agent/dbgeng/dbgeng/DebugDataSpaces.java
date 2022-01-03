@@ -28,7 +28,7 @@ import ghidra.util.Msg;
  * A wrapper for {@code IDebugDataSpaces} and its newer variants.
  */
 public interface DebugDataSpaces {
-	enum PageState {
+	public enum PageState {
 		COMMIT(0x1000), FREE(0x10000), RESERVE(0x2000);
 
 		private final int val;
@@ -48,7 +48,7 @@ public interface DebugDataSpaces {
 		}
 	}
 
-	enum PageProtection implements BitmaskUniverse {
+	public enum PageProtection implements BitmaskUniverse {
 		NOACCESS(1 << 0, false, false, false), //
 		READONLY(1 << 1, true, false, false), //
 		READWRITE(1 << 2, true, true, false), //
@@ -93,7 +93,7 @@ public interface DebugDataSpaces {
 		}
 	}
 
-	enum PageType {
+	public enum PageType {
 		NONE(0), //
 		IMAGE(0x1000000), //
 		MAPPED(0x40000), //
@@ -117,7 +117,7 @@ public interface DebugDataSpaces {
 		}
 	}
 
-	class DebugMemoryBasicInformation {
+	public static class DebugMemoryBasicInformation {
 		public final long baseAddress;
 		public final long allocationBase;
 		public final Set<PageProtection> allocationProtect;
@@ -181,8 +181,11 @@ public interface DebugDataSpaces {
 			if (!this.protect.equals(that.protect)) {
 				return false;
 			}
-            return this.type == that.type;
-        }
+			if (this.type != that.type) {
+				return false;
+			}
+			return true;
+		}
 	}
 
 	int readVirtual(long offset, ByteBuffer into, int len);
@@ -232,46 +235,51 @@ public interface DebugDataSpaces {
 	 * @return an iterator over virtual memory regions after the given start
 	 */
 	default Iterable<DebugMemoryBasicInformation> iterateVirtual(long start) {
-		return () -> new Iterator<DebugMemoryBasicInformation>() {
-            private long last = start;
-            private long offset = start;
-            private DebugMemoryBasicInformation next = doGetNext();
+		return new Iterable<DebugMemoryBasicInformation>() {
+			@Override
+			public Iterator<DebugMemoryBasicInformation> iterator() {
+				return new Iterator<DebugMemoryBasicInformation>() {
+					private long last = start;
+					private long offset = start;
+					private DebugMemoryBasicInformation next = doGetNext();
 
-            private DebugMemoryBasicInformation getNext() {
-                if (Long.compareUnsigned(last, offset) < 0) {
-                    return doGetNext();
-                }
-                return null;
-            }
+					private DebugMemoryBasicInformation getNext() {
+						if (Long.compareUnsigned(last, offset) < 0) {
+							return doGetNext();
+						}
+						return null;
+					}
 
-            private DebugMemoryBasicInformation doGetNext() {
-                try {
-                    DebugMemoryBasicInformation info = queryVirtual(offset);
-                    last = offset;
-                    if (info != null) {
-                        offset += info.regionSize;
-                    }
-                    return info;
-                }
-                catch (COMException e) {
-                    if (!COMUtilsExtra.isE_NOINTERFACE(e)) {
-                        throw e;
-                    }
-                    return null;
-                }
-            }
+					private DebugMemoryBasicInformation doGetNext() {
+						try {
+							DebugMemoryBasicInformation info = queryVirtual(offset);
+							last = offset;
+							if (info != null) {
+								offset += info.regionSize;
+							}
+							return info;
+						}
+						catch (COMException e) {
+							if (!COMUtilsExtra.isE_NOINTERFACE(e)) {
+								throw e;
+							}
+							return null;
+						}
+					}
 
-            @Override
-            public boolean hasNext() {
-                return next != null;
-            }
+					@Override
+					public boolean hasNext() {
+						return next != null;
+					}
 
-            @Override
-            public DebugMemoryBasicInformation next() {
-                DebugMemoryBasicInformation ret = next;
-                next = getNext();
-                return ret;
-            }
-        };
+					@Override
+					public DebugMemoryBasicInformation next() {
+						DebugMemoryBasicInformation ret = next;
+						next = getNext();
+						return ret;
+					}
+				};
+			}
+		};
 	}
 }

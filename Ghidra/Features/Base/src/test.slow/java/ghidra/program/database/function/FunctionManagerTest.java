@@ -44,7 +44,8 @@ public class FunctionManagerTest extends AbstractGhidraHeadedIntegrationTest {
 	private int transactionID;
 
 	public FunctionManagerTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

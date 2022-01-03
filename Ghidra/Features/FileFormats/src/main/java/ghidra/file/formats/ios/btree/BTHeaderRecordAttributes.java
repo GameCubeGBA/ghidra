@@ -22,8 +22,8 @@ package ghidra.file.formats.ios.btree;
  */
 public final class BTHeaderRecordAttributes {
 
-	public static final int kBTBadCloseMask           =  0x00000001;
-	public static final int kBTBigKeysMask            =  0x00000002;
-	public static final int kBTVariableIndexKeysMask  =  0x00000004;
+	public final static int kBTBadCloseMask           =  0x00000001;
+	public final static int kBTBigKeysMask            =  0x00000002;
+	public final static int kBTVariableIndexKeysMask  =  0x00000004;
 
 }

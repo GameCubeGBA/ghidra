@@ -32,7 +32,7 @@ import ghidra.dbg.target.TargetResumable;
 public interface DbgModelTargetResumable extends DbgModelTargetObject, TargetResumable {
 
 	@Override
-    default CompletableFuture<Void> resume() {
+	public default CompletableFuture<Void> resume() {
 		DbgProcess process = getManager().getCurrentProcess();
 		if (process == null) {
 			return AsyncUtils.NIL;

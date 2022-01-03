@@ -45,8 +45,8 @@ import ghidra.util.HelpLocation;
 
 class ImportGhidraToolsDialog extends DialogComponentProvider {
 
-	private static final String SELECT_ALL = "Select All";
-	private static final String DESELECT_ALL = "Select None";
+	private final static String SELECT_ALL = "Select All";
+	private final static String DESELECT_ALL = "Select None";
 
 	private ListPanel listPanel;
 	private JPanel mainPanel;

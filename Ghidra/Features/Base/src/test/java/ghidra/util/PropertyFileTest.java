@@ -21,7 +21,6 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 
 import org.junit.Test;
 
@@ -39,7 +38,8 @@ public class PropertyFileTest extends AbstractGenericTest {
 	 * @param arg0
 	 */
 	public PropertyFileTest() {
-    }
+		super();
+	}
 
 	@Test
 	public void testPropertyFile() throws Exception {
@@ -68,7 +68,7 @@ public class PropertyFileTest extends AbstractGenericTest {
 		}
 		String str = sb.toString();
 
-		pf.putString("TestString", URLEncoder.encode(str, StandardCharsets.UTF_8));
+		pf.putString("TestString", URLEncoder.encode(str, "UTF-8"));
 
 		pf.writeState();
 
@@ -80,7 +80,7 @@ public class PropertyFileTest extends AbstractGenericTest {
 		assertTrue(pf2.getBoolean("TestBooleanBad", true));
 		assertEquals(1234, pf2.getInt("TestInt", -1));
 		assertEquals(0x12345678, pf2.getLong("TestLong", -1));
-		assertEquals(str, URLDecoder.decode(pf2.getString("TestString", null), StandardCharsets.UTF_8));
+		assertEquals(str, URLDecoder.decode(pf2.getString("TestString", null), "UTF-8"));
 
 	}
 

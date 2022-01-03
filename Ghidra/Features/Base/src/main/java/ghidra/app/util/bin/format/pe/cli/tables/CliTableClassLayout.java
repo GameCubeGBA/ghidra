@@ -32,7 +32,8 @@ public class CliTableClassLayout extends CliAbstractTable {
 		public int parentIndex;
 		
 		public CliClassLayoutRow(short packingSize, int classSize, int parentIndex) {
-            this.packingSize = packingSize;
+			super();
+			this.packingSize = packingSize;
 			this.classSize = classSize;
 			this.parentIndex = parentIndex;
 		}

@@ -52,16 +52,19 @@ public class CreateProjectArchiveAction extends DockingAction {
 	}
 
 	private void selectNewArchive(final Archive archive, final DataTypeArchiveGTree gTree) {
-		SwingUtilities.invokeLater(() -> {
-            // start an edit on the new temporary node name
-            GTreeNode node = gTree.getViewRoot();
-            final GTreeNode child = node.getChild(archive.getName());
-            if (child != null) {
-                gTree.expandPath(node);
-                TreePath path = child.getTreePath();
-                gTree.scrollPathToVisible(path);
-                gTree.setSelectedNode(child);
-            }
-        });
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				// start an edit on the new temporary node name
+				GTreeNode node = gTree.getViewRoot();
+				final GTreeNode child = node.getChild(archive.getName());
+				if (child != null) {
+					gTree.expandPath(node);
+					TreePath path = child.getTreePath();
+					gTree.scrollPathToVisible(path);
+					gTree.setSelectedNode(child);
+				}
+			}
+		});
 	}
 }

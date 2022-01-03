@@ -113,8 +113,11 @@ public class ContextSetting {
 	@Override
 	public boolean equals(Object obj) {
 		ContextSetting op2 = (ContextSetting) obj;
-        return startAddr.equals(op2.startAddr) && endAddr.equals(op2.endAddr) && register.equals(op2.register) && value.equals(op2.value);
-    }
+		if (!startAddr.equals(op2.startAddr) || !endAddr.equals(op2.endAddr) || !register.equals(op2.register) || !value.equals(op2.value)) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public int hashCode() {

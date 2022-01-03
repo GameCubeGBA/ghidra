@@ -27,5 +27,5 @@ public interface ProgramDataFormatModel extends DataFormatModel {
      * Update the consumer's program with the new program.
      * @param program may be null
      */
-    void setProgram(Program program);
+    public void setProgram(Program program);
 }

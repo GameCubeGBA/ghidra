@@ -282,7 +282,7 @@ class DmgServerProcessManager implements Closeable {
 		ResourceFile serverMemoryCfgFile = new ResourceFile(dmgModule, "data/server_memory.cfg");
 		try {
 			List<String> lines = FileUtilities.getLines(serverMemoryCfgFile);
-			int result = (!lines.isEmpty())
+			int result = (lines.size() > 0)
 					? Math.max(Integer.parseInt(lines.get(0)), MIN_DMG_SERVER_MEMORY_MB)
 					: defaultValue;
 			return result;
@@ -301,11 +301,11 @@ class DmgServerProcessManager implements Closeable {
 		Map<String, String> env = System.getenv();
 		Set<Entry<String, String>> entrySet = env.entrySet();
 		for (Entry<String, String> entry : entrySet) {
-			if ("PATH".equalsIgnoreCase(entry.getKey())) {
+			if (entry.getKey().equalsIgnoreCase("PATH")) {
 				// add our value to the current value
 				pathValue = getLibraryPathVariable(entry.getKey(), entry.getValue());
 			}
-			else if ("LD_LIBRARY_PATH".equalsIgnoreCase(entry.getKey())) {
+			else if (entry.getKey().equalsIgnoreCase("LD_LIBRARY_PATH")) {
 				// add our value to the current value
 				ldLibraryPathValue = getLibraryPathVariable(entry.getKey(), entry.getValue());
 			}

@@ -37,54 +37,54 @@ public interface GraphRenderer {
 	 * <P>
 	 * @param viewer the {@link VisualizationViewer}
 	 */
-    void initializeViewer(VisualizationViewer<AttributedVertex, AttributedEdge> viewer);
+	public void initializeViewer(VisualizationViewer<AttributedVertex, AttributedEdge> viewer);
 
 	/**
 	 * Sets the graph display options that are specific to a particular graph type
 	 * @param options the {@link GraphDisplayOptions} which are options for a specific graph type
 	 */
-    void setGraphTypeDisplayOptions(GraphDisplayOptions options);
+	public void setGraphTypeDisplayOptions(GraphDisplayOptions options);
 
 	/**
 	 * Returns the current {@link GraphDisplayOptions} being used
 	 * @return the current {@link GraphDisplayOptions} being used
 	 */
-    GraphDisplayOptions getGraphDisplayOptions();
+	public GraphDisplayOptions getGraphDisplayOptions();
 
 	/**
 	 * Tells this renderer that the given vertex changed and needs to be redrawn
 	 * @param vertex the vertex that changed
 	 */
-    void vertexChanged(AttributedVertex vertex);
+	public void vertexChanged(AttributedVertex vertex);
 
 	/**
 	 * Returns the favored edge type
 	 * @return  the favored edge type
 	 */
-    String getFavoredEdgeType();
+	public String getFavoredEdgeType();
 
 	/**
 	 * Returns the edge priority for the edge type
 	 * @param edgeType the edge type to get priority for
 	 * @return the edge priority for the edge type
 	 */
-    Integer getEdgePriority(String edgeType);
+	public Integer getEdgePriority(String edgeType);
 
 	/**
 	 * Clears any cached renderings
 	 */
-    void clearCache();
+	public void clearCache();
 
 	/**
 	 * Returns the vertex selection color
 	 * @return the vertex selection color
 	 */
-    Color getVertexSelectionColor();
+	public Color getVertexSelectionColor();
 
 	/**
 	 * Returns the edge selection color
 	 * @return the edge selection color
 	 */
-    Color getEdgeSelectionColor();
+	public Color getEdgeSelectionColor();
 
 }

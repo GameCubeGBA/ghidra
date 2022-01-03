@@ -24,7 +24,8 @@ import java.beans.PropertyEditorSupport;
 public class IntEditor extends PropertyEditorSupport {
     
 	public IntEditor() {
-    }
+        super();
+	}
 	
 	@Override
 	public void setAsText(String text) throws java.lang.IllegalArgumentException {

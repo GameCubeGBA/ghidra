@@ -38,7 +38,8 @@ public class AddressEvaluatorTest extends AbstractGhidraHeadedIntegrationTest {
 	AddressFactory addrFactory;
 
 	public AddressEvaluatorTest() {
-    }
+		super();
+	}
 
 	private Address addr(String address) {
 		return addrFactory.getAddress(address);

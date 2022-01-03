@@ -57,7 +57,8 @@ public class SymbolManagerTest extends AbstractGhidraHeadedIntegrationTest {
 	private Listing listing;
 
 	public SymbolManagerTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -516,8 +517,8 @@ public class SymbolManagerTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(2, symbols.length);
 		String name1 = symbols[0].getName();
 		String name2 = symbols[1].getName();
-		assertTrue("TEST1".equals(name1) || "TEST1".equals(name2));
-		assertTrue("TEST3".equals(name1) || "TEST3".equals(name2));
+		assertTrue(name1.equals("TEST1") || name2.equals("TEST1"));
+		assertTrue(name1.equals("TEST3") || name2.equals("TEST3"));
 	}
 
 	@Test

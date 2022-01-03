@@ -524,7 +524,7 @@ public class RepositoryHandleImpl extends UnicastRemoteObject implements RemoteR
 				}
 				buf.append(user);
 			}
-			throw new FileInUseException(itemName + " in use by: " + buf);
+			throw new FileInUseException(itemName + " in use by: " + buf.toString());
 		}
 	}
 

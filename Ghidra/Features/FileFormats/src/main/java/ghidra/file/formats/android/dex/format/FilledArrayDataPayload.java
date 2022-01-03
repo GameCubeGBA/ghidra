@@ -24,7 +24,7 @@ import java.io.IOException;
 
 public class FilledArrayDataPayload implements StructConverter {
 
-	public static final short MAGIC = 0x0300;
+	public final static short MAGIC = 0x0300;
 
 	private short ident;
 	private short elementWidth;

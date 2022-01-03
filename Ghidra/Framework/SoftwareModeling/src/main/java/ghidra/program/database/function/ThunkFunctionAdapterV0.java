@@ -28,7 +28,7 @@ import ghidra.util.exception.VersionException;
 
 public class ThunkFunctionAdapterV0 extends ThunkFunctionAdapter {
 
-	static final int SCHEMA_VERSION = 0;
+	final static int SCHEMA_VERSION = 0;
 
 	private Table table;
 

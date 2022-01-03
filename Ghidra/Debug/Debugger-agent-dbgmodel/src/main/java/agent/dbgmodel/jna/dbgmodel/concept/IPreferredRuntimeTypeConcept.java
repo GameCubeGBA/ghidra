@@ -24,7 +24,7 @@ import agent.dbgmodel.jna.dbgmodel.IUnknownEx;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IPreferredRuntimeTypeConcept extends IUnknownEx {
-	IID IID_IPREFERRED_RUNTIME_TYPE_CONCEPT = new IID("9D6C1D7B-A76F-4618-8068-5F76BD9A4E8A");
+	final IID IID_IPREFERRED_RUNTIME_TYPE_CONCEPT = new IID("9D6C1D7B-A76F-4618-8068-5F76BD9A4E8A");
 
 	enum VTIndices implements VTableIndex {
 		CAST_TO_PREFERRED_RUNTIME_TYPE, //

@@ -23,7 +23,8 @@ import org.junit.Test;
 public class GlossaryScreenShots extends GhidraScreenShotGenerator {
 
 	public GlossaryScreenShots() {
-    }
+		super();
+	}
 
 @Test
     public void testBigEndian() {

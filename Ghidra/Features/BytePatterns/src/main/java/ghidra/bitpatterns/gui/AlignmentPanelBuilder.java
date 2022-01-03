@@ -51,7 +51,8 @@ public class AlignmentPanelBuilder extends ContextRegisterFilterablePanelBuilder
 	 * Creates a new {@link AlignmentPanelBuilder}
 	 */
 	public AlignmentPanelBuilder() {
-    }
+		super();
+	}
 
 	/**
 	 * Builds the alignment panel GUI components.

@@ -69,7 +69,8 @@ public abstract class AbstractLocalFileSystemTest extends AbstractGenericTest {
 	List<MyEvent> events = new ArrayList<>();
 
 	public AbstractLocalFileSystemTest(boolean useIndexedFileSystem) {
-        this.useIndexedFileSystem = useIndexedFileSystem;
+		super();
+		this.useIndexedFileSystem = useIndexedFileSystem;
 	}
 
 	@Before
@@ -862,7 +863,7 @@ public abstract class AbstractLocalFileSystemTest extends AbstractGenericTest {
 
 		String path = "/";
 		String fp = folderPath;
-		while (!fp.isEmpty()) {
+		while (fp.length() != 0) {
 			int index = fp.indexOf('/', 1);
 			String n = fp.substring(1);
 			if (index == 1) {

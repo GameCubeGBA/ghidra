@@ -289,12 +289,15 @@ public class ByteTrieTest {
 	 */
 	private static Iterator<String> iterator(ByteTrieIfc<String> trie) throws CancelledException {
 		final ArrayList<String> list = new ArrayList<String>();
-		trie.inorder(TaskMonitor.DUMMY, node -> {
-            if (node.isTerminal()) {
-                assertEquals("wrong node length", node.getValue().length, node.length());
-                list.add(new String(node.getValue()));
-            }
-        });
+		trie.inorder(TaskMonitor.DUMMY, new Op<String>() {
+			@Override
+			public void op(ByteTrieNodeIfc<String> node) {
+				if (node.isTerminal()) {
+					assertEquals("wrong node length", node.getValue().length, node.length());
+					list.add(new String(node.getValue()));
+				}
+			}
+		});
 		return list.iterator();
 	}
 
@@ -305,12 +308,15 @@ public class ByteTrieTest {
 	 */
 	private static Iterator<String> iterator2(ByteTrieIfc<String> trie) throws CancelledException {
 		final ArrayList<String> list = new ArrayList<String>();
-		trie.inorder(TaskMonitor.DUMMY, node -> {
-            if (node.isTerminal()) {
-                assertEquals("wrong node length", node.getValue().length, node.length());
-                list.add(node.getItem());
-            }
-        });
+		trie.inorder(TaskMonitor.DUMMY, new Op<String>() {
+			@Override
+			public void op(ByteTrieNodeIfc<String> node) {
+				if (node.isTerminal()) {
+					assertEquals("wrong node length", node.getValue().length, node.length());
+					list.add(node.getItem());
+				}
+			}
+		});
 		return list.iterator();
 	}
 }

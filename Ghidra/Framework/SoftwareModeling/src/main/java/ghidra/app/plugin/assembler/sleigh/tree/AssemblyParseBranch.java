@@ -66,8 +66,11 @@ public class AssemblyParseBranch extends AssemblyParseTreeNode
 			return false;
 		}
 		AssemblyParseBranch that = (AssemblyParseBranch) obj;
-        return this.substs.equals(that.substs);
-    }
+		if (!this.substs.equals(that.substs)) {
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * Prepend a child to this branch

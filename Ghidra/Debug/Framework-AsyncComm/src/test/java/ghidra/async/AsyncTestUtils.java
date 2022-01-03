@@ -26,9 +26,9 @@ import ghidra.util.Msg;
 import ghidra.util.SystemUtilities;
 
 public interface AsyncTestUtils {
-	long TIMEOUT_MS =
+	static final long TIMEOUT_MS =
 		SystemUtilities.isInTestingBatchMode() ? 5000 : Long.MAX_VALUE;
-	long RETRY_INTERVAL_MS = 100;
+	static final long RETRY_INTERVAL_MS = 100;
 
 	default <T> T waitOnNoValidate(CompletableFuture<T> future) {
 		// Do this instead of plain ol' .get(time), to ease debugging

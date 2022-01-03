@@ -134,7 +134,7 @@ public class GetSymbolForDynamicAddress extends GhidraScript {
 	}
 
 	private void printFailureExplanation() {
-		if (!programsWithAddress.isEmpty()) {
+		if (programsWithAddress.size() != 0) {
 			println("No function existed at the address " + addressToLookFor.toString());
 			println("The programs that contain the address are: ");
 			for (String name : programsWithAddress) {

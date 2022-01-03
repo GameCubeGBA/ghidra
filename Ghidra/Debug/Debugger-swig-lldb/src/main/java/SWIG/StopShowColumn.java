@@ -12,10 +12,10 @@
 package SWIG;
 
 public final class StopShowColumn {
-  public static final StopShowColumn eStopShowColumnAnsiOrCaret = new StopShowColumn("eStopShowColumnAnsiOrCaret", lldbJNI.eStopShowColumnAnsiOrCaret_get());
-  public static final StopShowColumn eStopShowColumnAnsi = new StopShowColumn("eStopShowColumnAnsi", lldbJNI.eStopShowColumnAnsi_get());
-  public static final StopShowColumn eStopShowColumnCaret = new StopShowColumn("eStopShowColumnCaret", lldbJNI.eStopShowColumnCaret_get());
-  public static final StopShowColumn eStopShowColumnNone = new StopShowColumn("eStopShowColumnNone", lldbJNI.eStopShowColumnNone_get());
+  public final static StopShowColumn eStopShowColumnAnsiOrCaret = new StopShowColumn("eStopShowColumnAnsiOrCaret", lldbJNI.eStopShowColumnAnsiOrCaret_get());
+  public final static StopShowColumn eStopShowColumnAnsi = new StopShowColumn("eStopShowColumnAnsi", lldbJNI.eStopShowColumnAnsi_get());
+  public final static StopShowColumn eStopShowColumnCaret = new StopShowColumn("eStopShowColumnCaret", lldbJNI.eStopShowColumnCaret_get());
+  public final static StopShowColumn eStopShowColumnNone = new StopShowColumn("eStopShowColumnNone", lldbJNI.eStopShowColumnNone_get());
 
   public final int swigValue() {
     return swigValue;
@@ -28,9 +28,9 @@ public final class StopShowColumn {
   public static StopShowColumn swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-      for (StopShowColumn value : swigValues)
-          if (value.swigValue == swigValue)
-              return value;
+    for (int i = 0; i < swigValues.length; i++)
+      if (swigValues[i].swigValue == swigValue)
+        return swigValues[i];
     throw new IllegalArgumentException("No enum " + StopShowColumn.class + " with value " + swigValue);
   }
 

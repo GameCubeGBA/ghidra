@@ -26,7 +26,7 @@ import ghidra.program.model.symbol.*;
 class ReferenceLineDispenser extends AbstractLineDispenser {
 
 	private static final Address[] EMPTY_ADDR_ARR = new Address[0];
-	private static final String XREFS_DELIM = ",";
+	private final static String XREFS_DELIM = ",";
 
 	private int headerWidth;
 	private boolean displayRefHeader;
@@ -209,14 +209,14 @@ class ReferenceLineDispenser extends AbstractLineDispenser {
 			refsInCurrLine++;
 
 			if (refsInCurrLine == refsPerLine) {
-				lines.add((displayRefHeader ? prefix : "") + buf);
+				lines.add((displayRefHeader ? prefix : "") + buf.toString());
 				buf.delete(0, buf.length());
 				refsInCurrLine = 0;
 			}
 		}
 
 		if (refsInCurrLine > 0) {
-			lines.add((displayRefHeader ? prefix : "") + buf);
+			lines.add((displayRefHeader ? prefix : "") + buf.toString());
 			buf.delete(0, buf.length());
 		}
 	}

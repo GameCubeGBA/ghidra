@@ -61,18 +61,21 @@ public class MemviewTable {
 		component.add(filterPanel, BorderLayout.PAGE_END);
 		table.setAutoscrolls(true);
 
-		table.getSelectionModel().addListSelectionListener(e -> {
-            if (e.getValueIsAdjusting()) {
-                return;
-            }
-            int modelRow = filterPanel.getModelRow(table.getSelectedRow());
-            MemoryBox box = model.getBoxAt(modelRow);
-            if (box != null) {
-                Set<MemoryBox> boxes = new HashSet<MemoryBox>();
-                boxes.add(box);
-                provider.selectPanelPosition(boxes);
-            }
-        });
+		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				if (e.getValueIsAdjusting()) {
+					return;
+				}
+				int modelRow = filterPanel.getModelRow(table.getSelectedRow());
+				MemoryBox box = model.getBoxAt(modelRow);
+				if (box != null) {
+					Set<MemoryBox> boxes = new HashSet<MemoryBox>();
+					boxes.add(box);
+					provider.selectPanelPosition(boxes);
+				}
+			}
+		});
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

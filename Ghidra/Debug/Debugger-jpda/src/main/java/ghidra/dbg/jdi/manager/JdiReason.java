@@ -92,5 +92,5 @@ public interface JdiReason {
 		}
 	}
 
-	String desc();
+	public String desc();
 }

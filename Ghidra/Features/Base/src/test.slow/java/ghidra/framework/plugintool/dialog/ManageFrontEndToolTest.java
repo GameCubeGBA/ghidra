@@ -52,7 +52,8 @@ public class ManageFrontEndToolTest extends AbstractGhidraHeadedIntegrationTest 
 	 * @param arg0
 	 */
 	public ManageFrontEndToolTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

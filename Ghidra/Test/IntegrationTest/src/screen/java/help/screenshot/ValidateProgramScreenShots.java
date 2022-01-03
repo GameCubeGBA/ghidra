@@ -26,7 +26,8 @@ import ghidra.app.plugin.core.validator.ValidateProgramPlugin;
 public class ValidateProgramScreenShots extends GhidraScreenShotGenerator {
 
 	public ValidateProgramScreenShots() {
-    }
+		super();
+	}
 
 @Test
     public void testValidateProgram() {

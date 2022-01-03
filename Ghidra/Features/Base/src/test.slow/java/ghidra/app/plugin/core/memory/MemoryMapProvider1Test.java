@@ -58,7 +58,8 @@ public class MemoryMapProvider1Test extends AbstractGhidraHeadedIntegrationTest 
 	private MemoryMapModel model;
 
 	public MemoryMapProvider1Test() {
-    }
+		super();
+	}
 
 	private Program buildProgram(String programName) throws Exception {
 		ProgramBuilder builder = new ProgramBuilder(programName, ProgramBuilder._TOY);
@@ -117,7 +118,7 @@ public class MemoryMapProvider1Test extends AbstractGhidraHeadedIntegrationTest 
 		table.addRowSelectionInterval(0, 0);
 		Set<DockingActionIf> actions = getActionsByOwner(tool, plugin.getName());
 		for (DockingActionIf action : actions) {
-			if ("Merge Blocks".equals(action.getName())) {
+			if (action.getName().equals("Merge Blocks")) {
 				assertFalse(action.isEnabled());
 			}
 			else {
@@ -134,9 +135,9 @@ public class MemoryMapProvider1Test extends AbstractGhidraHeadedIntegrationTest 
 		Set<DockingActionIf> actions = getActionsByOwner(tool, plugin.getName());
 		for (DockingActionIf action : actions) {
 			String name = action.getName();
-			if ("Add Block".equals(name) || "Merge Blocks".equals(name) ||
-				"Delete Block".equals(name) || "Set Image Base".equals(name) ||
-				"Memory Map".equals(name) || "Close Window".equals(name)) {
+			if (name.equals("Add Block") || name.equals("Merge Blocks") ||
+				name.equals("Delete Block") || name.equals("Set Image Base") ||
+				name.equals("Memory Map") || name.equals("Close Window")) {
 				assertTrue("Action should be enabled for  a multi-row selection - '" + name + "'",
 					action.isEnabled());
 			}

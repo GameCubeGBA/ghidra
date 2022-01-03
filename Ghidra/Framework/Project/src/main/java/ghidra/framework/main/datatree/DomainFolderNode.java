@@ -163,8 +163,11 @@ public class DomainFolderNode extends GTreeLazyNode implements Cuttable {
 			return false;
 		}
 		DomainFolderNode node = (DomainFolderNode) obj;
-        return domainFolder == node.domainFolder;
-    }
+		if (domainFolder == node.domainFolder) {
+			return true;
+		}
+		return false;
+	}
 
 	@Override
 	public int hashCode() {

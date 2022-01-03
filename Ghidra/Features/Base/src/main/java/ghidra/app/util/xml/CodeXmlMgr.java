@@ -102,7 +102,7 @@ class CodeXmlMgr implements DisassemblerMessageListener {
 
 		XmlElement element = parser.next();
 		element = parser.next();
-		while ("CODE_BLOCK".equals(element.getName())) {
+		while (element.getName().equals("CODE_BLOCK")) {
 			if (monitor.isCancelled()) {
 				throw new CancelledException();
 			}
@@ -115,7 +115,7 @@ class CodeXmlMgr implements DisassemblerMessageListener {
 		AddressSet disset = set.intersect(program.getMemory());
 
 		if (!disset.equals(set)) {
-			log.appendMsg("Disassembly address set changed to " + disset);
+			log.appendMsg("Disassembly address set changed to " + disset.toString());
 		}
 
 		disassemble(disset, monitor);

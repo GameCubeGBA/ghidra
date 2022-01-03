@@ -26,12 +26,12 @@ public interface FunctionComparisonProviderListener {
 	 * 
 	 * @param provider the closed provider
 	 */
-    void providerClosed(FunctionComparisonProvider provider);
+	public void providerClosed(FunctionComparisonProvider provider);
 
 	/**
 	 * Invoked when the provider is being opened
 	 * 
 	 * @param provider the opened provider
 	 */
-    void providerOpened(FunctionComparisonProvider provider);
+	public void providerOpened(FunctionComparisonProvider provider);
 }

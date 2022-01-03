@@ -98,18 +98,18 @@ class ArchiveTask extends Task {
 	private boolean writeProjectDirs(JarWriter writer, TaskMonitor monitor) {
 		File projectFolder = project.getProjectLocator().getProjectDir();
 		String[] names = projectFolder.list();
-        for (String name : names) {
-            if (monitor.isCancelled()) {
-                return false;
-            }
-            File file = new File(projectFolder, name);
-            monitor.setMessage("Writing " + file.getAbsolutePath());
-            if (file.isDirectory()) {
-                if (!writer.outputRecursively(file, "", monitor)) {
-                    return false;
-                }
-            }
-        }
+		for (int i = 0; i < names.length; i++) {
+			if (monitor.isCancelled()) {
+				return false;
+			}
+			File file = new File(projectFolder, names[i]);
+			monitor.setMessage("Writing " + file.getAbsolutePath());
+			if (file.isDirectory()) {
+				if (!writer.outputRecursively(file, "", monitor)) {
+					return false;
+				}
+			}
+		}
 		return true;
 	}
 

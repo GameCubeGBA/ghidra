@@ -52,7 +52,7 @@ abstract class CommentDialog extends DialogComponentProvider {
         origComments = comment;
 
         commentsField.setText(origComments);
-        if (origComments != null && !origComments.isEmpty()) {
+        if (origComments != null && origComments.length() > 0) {
             commentsField.selectAll();
         }
         PluginTool tool = plugin.getTool();
@@ -94,7 +94,7 @@ abstract class CommentDialog extends DialogComponentProvider {
         }
     }
     
-    protected abstract void doApply(String comment);
+    abstract protected void doApply(String comment);
 
     ////////////////////////////////////////////////////////////////////
     // ** private methods **

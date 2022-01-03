@@ -52,7 +52,7 @@ public interface GFileSystem extends Closeable, ExtensionPoint {
 	 *
 	 * @return string filesystem volume name.
 	 */
-    String getName();
+	public String getName();
 
 	/**
 	 * Returns the type of this file system.
@@ -62,7 +62,7 @@ public interface GFileSystem extends Closeable, ExtensionPoint {
 	 *
 	 * @return type string
 	 */
-    default String getType() {
+	default public String getType() {
 		return FSUtilities.getFilesystemTypeFromClass(this.getClass());
 	}
 
@@ -74,7 +74,7 @@ public interface GFileSystem extends Closeable, ExtensionPoint {
 	 *
 	 * @return description string
 	 */
-    default String getDescription() {
+	default public String getDescription() {
 		return FSUtilities.getFilesystemDescriptionFromClass(this.getClass());
 	}
 
@@ -83,21 +83,21 @@ public interface GFileSystem extends Closeable, ExtensionPoint {
 	 *
 	 * @return {@link FSRLRoot} of this filesystem.
 	 */
-    FSRLRoot getFSRL();
+	public FSRLRoot getFSRL();
 
 	/**
 	 * Returns true if the filesystem has been {@link #close() closed}
 	 *
 	 * @return boolean true if the filesystem has been closed.
 	 */
-    boolean isClosed();
+	public boolean isClosed();
 
 	/**
 	 * Indicates if this filesystem is a static snapshot or changes.
 	 *
 	 * @return boolean true if the filesystem is static or false if dynamic content.
 	 */
-    default boolean isStatic() {
+	default public boolean isStatic() {
 		return true;
 	}
 
@@ -107,14 +107,14 @@ public interface GFileSystem extends Closeable, ExtensionPoint {
 	 * <p>
 	 * @return {@link FileSystemRefManager} that manages references to this filesystem.
 	 */
-    FileSystemRefManager getRefManager();
+	public FileSystemRefManager getRefManager();
 
 	/**
 	 * Returns the number of files in the filesystem, if known, otherwise -1 if not known.
 	 *
 	 * @return number of files in this filesystem, -1 if not known.
 	 */
-    default int getFileCount() {
+	default public int getFileCount() {
 		return -1;
 	}
 
@@ -126,7 +126,7 @@ public interface GFileSystem extends Closeable, ExtensionPoint {
 	 * @return {@link GFile} instance of requested file, null if not found.
 	 * @throws IOException if IO error when looking up file.
 	 */
-    GFile lookup(String path) throws IOException;
+	public GFile lookup(String path) throws IOException;
 
 	/**
 	 * Returns an {@link InputStream} that contains the contents of the specified {@link GFile}.
@@ -140,7 +140,7 @@ public interface GFileSystem extends Closeable, ExtensionPoint {
 	 * @throws IOException if IO problem
 	 * @throws CancelledException if user cancels.
 	 */
-    default InputStream getInputStream(GFile file, TaskMonitor monitor)
+	default public InputStream getInputStream(GFile file, TaskMonitor monitor)
 			throws IOException, CancelledException {
 		return getInputStreamHelper(file, this, monitor);
 	}
@@ -157,7 +157,7 @@ public interface GFileSystem extends Closeable, ExtensionPoint {
 	 * @throws IOException if error
 	 * @throws CancelledException if user cancels
 	 */
-    ByteProvider getByteProvider(GFile file, TaskMonitor monitor)
+	public ByteProvider getByteProvider(GFile file, TaskMonitor monitor)
 			throws IOException, CancelledException;
 
 	/**
@@ -168,7 +168,7 @@ public interface GFileSystem extends Closeable, ExtensionPoint {
 	 * @return {@link List} of {@link GFile} instances of file in the requested directory.
 	 * @throws IOException if IO problem.
 	 */
-    List<GFile> getListing(GFile directory) throws IOException;
+	public List<GFile> getListing(GFile directory) throws IOException;
 
 	/**
 	 * Returns a container of {@link FileAttribute} values.
@@ -180,7 +180,7 @@ public interface GFileSystem extends Closeable, ExtensionPoint {
 	 * @param monitor {@link TaskMonitor}
 	 * @return {@link FileAttributes} instance (possibly read-only), maybe empty but never null
 	 */
-    default FileAttributes getFileAttributes(GFile file, TaskMonitor monitor) {
+	default public FileAttributes getFileAttributes(GFile file, TaskMonitor monitor) {
 		return FileAttributes.EMPTY;
 	}
 
@@ -196,7 +196,7 @@ public interface GFileSystem extends Closeable, ExtensionPoint {
 	 * @throws CancelledException if canceled
 	 * @throws IOException if error
 	 */
-	static InputStream getInputStreamHelper(GFile file, GFileSystem fs, TaskMonitor monitor)
+	public static InputStream getInputStreamHelper(GFile file, GFileSystem fs, TaskMonitor monitor)
 			throws CancelledException, IOException {
 		ByteProvider bp = fs.getByteProvider(file, monitor);
 		return (bp != null) ? new ByteProviderInputStream.ClosingInputStream(bp) : null;

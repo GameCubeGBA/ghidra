@@ -34,19 +34,19 @@ import ghidra.dbg.util.PathUtils;
 public interface DbgModelTargetFocusScope extends DbgModelTargetObject, TargetFocusScope {
 
 	@Override
-    DbgModelSelectableObject getFocus();
+	public DbgModelSelectableObject getFocus();
 
 	// NB: setFocus changes attributes - propagates up to client
-    boolean setFocus(DbgModelSelectableObject sel);
+	public boolean setFocus(DbgModelSelectableObject sel);
 
 	// NB: requestFocus request change in focused object - propagates down to manager
 	//  (but, of course, may then cause change in state)
 	@Override
-    default CompletableFuture<Void> requestFocus(TargetObject obj) {
+	public default CompletableFuture<Void> requestFocus(TargetObject obj) {
 		return getModel().gateFuture(getManager().requestFocus(this, obj));
 	}
 
-	default CompletableFuture<Void> doRequestFocus(TargetObject obj) {
+	public default CompletableFuture<Void> doRequestFocus(TargetObject obj) {
 		if (getManager().isWaiting()) {
 			return AsyncUtils.NIL;
 		}

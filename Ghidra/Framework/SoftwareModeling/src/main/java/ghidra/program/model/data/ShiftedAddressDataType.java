@@ -36,7 +36,7 @@ public class ShiftedAddressDataType extends BuiltIn {
 			ShiftedAddressDataType.class.getName());
 	}
 
-	public static final ShiftedAddressDataType dataType = new ShiftedAddressDataType();
+	public final static ShiftedAddressDataType dataType = new ShiftedAddressDataType();
 
 	private static SettingsDefinition[] SETTINGS_DEFS = {};
 

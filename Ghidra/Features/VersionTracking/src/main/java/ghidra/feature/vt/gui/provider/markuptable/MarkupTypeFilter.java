@@ -36,7 +36,12 @@ public class MarkupTypeFilter extends CheckBoxBasedAncillaryFilter<VTMarkupItem>
 
 	@Override
 	protected void createCheckBoxInfos() {
-		ItemListener listener = e -> fireStatusChanged(getFilterStatus());
+		ItemListener listener = new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				fireStatusChanged(getFilterStatus());
+			}
+		};
 
 		List<VTMarkupType> markupTypes = VTMarkupTypeFactory.getMarkupTypes();
 		for (VTMarkupType markupType : markupTypes) {

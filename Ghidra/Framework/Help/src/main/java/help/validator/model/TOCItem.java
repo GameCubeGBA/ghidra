@@ -174,8 +174,11 @@ public abstract class TOCItem {
 		if (!Objects.equals(targetAttribute, other.targetAttribute)) {
 			return false;
 		}
-        return Objects.equals(textAttribute, other.textAttribute);
-    }
+		if (!Objects.equals(textAttribute, other.textAttribute)) {
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * True if the two items are the same, except that they come from a different source file.
@@ -200,12 +203,15 @@ public abstract class TOCItem {
 		if (!Objects.equals(targetAttribute, other.targetAttribute)) {
 			return false;
 		}
-        return Objects.equals(textAttribute, other.textAttribute);
-    }
+		if (!Objects.equals(textAttribute, other.textAttribute)) {
+			return false;
+		}
+		return true;
+	}
 
 	public void writeContents(LinkDatabase linkDatabase, PrintWriter writer, int indentLevel) {
 		// if I have no children, then just write out a simple tag
-		if (children.isEmpty()) {
+		if (children.size() == 0) {
 			writer.println(generateTOCItemTag(linkDatabase, true, indentLevel));
 		}
 

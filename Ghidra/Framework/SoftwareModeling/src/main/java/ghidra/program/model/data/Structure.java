@@ -466,7 +466,7 @@ public interface Structure extends Composite {
 	 * }
 	 * </pre>
 	 */
-    class BitOffsetComparator implements Comparator<Object> {
+	public static class BitOffsetComparator implements Comparator<Object> {
 
 		public static final Comparator<Object> INSTANCE_LE = new BitOffsetComparator(false);
 		public static final Comparator<Object> INSTANCE_BE = new BitOffsetComparator(true);

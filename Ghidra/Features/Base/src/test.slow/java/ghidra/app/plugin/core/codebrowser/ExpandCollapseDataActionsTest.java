@@ -52,10 +52,10 @@ public class ExpandCollapseDataActionsTest extends AbstractGhidraHeadedIntegrati
 	private static String STRUCT_1_SUB_11 = "0x2e"; // this is the address of a sub structure in Struct_1
 
 	// Component Paths for various structures.
-	private static int[] STRUCT_1_SUB_11_PATH = new int[] { 11 };
-	private static int[] STRUCT_1_PATH = new int[] {};
-	private static int[] STRUCT_1_SUB_0_PATH = new int[] { 0 };
-	private static int[] STRUCT_1_SUB_0_SUB_0_PATH = new int[] { 0, 0 };
+	private static int[] STRUCT_1_SUB_11_PATH = { 11 };
+	private static int[] STRUCT_1_PATH = {};
+	private static int[] STRUCT_1_SUB_0_PATH = { 0 };
+	private static int[] STRUCT_1_SUB_0_SUB_0_PATH = { 0, 0 };
 
 	@Before
 	public void setUp() throws Exception {
@@ -365,7 +365,7 @@ public class ExpandCollapseDataActionsTest extends AbstractGhidraHeadedIntegrati
 	private Data getData(Address addr) {
 		Data data = program.getListing().getDataContaining(addr);
 		if (!data.getAddress().equals(addr)) {
-			data = data.getComponentAt((int) addr.subtract(data.getAddress()));
+			data = data.getComponentContaining((int) addr.subtract(data.getAddress()));
 		}
 		return data;
 	}

@@ -23,6 +23,6 @@ public final class CoffSectionHeaderReserved {
 	 * then this value indicates that a section
 	 * is byte aligned.
 	 */
-    public static final int EXPLICITLY_BYTE_ALIGNED = 0x08;
+	public final static int EXPLICITLY_BYTE_ALIGNED = 0x08;
 
 }

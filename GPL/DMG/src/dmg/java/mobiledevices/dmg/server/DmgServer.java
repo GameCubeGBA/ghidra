@@ -30,7 +30,7 @@ public class DmgServer {
 			encoded.append(c);
 		}
 
-		System.out.println(encoded);
+		System.out.println(encoded.toString());
 	}
 
 	public static void sendResponse(String s) {

@@ -52,7 +52,7 @@ public abstract class AbstractTaskInfo implements Comparable<AbstractTaskInfo> {
 
 	@Override
 	public int compareTo(AbstractTaskInfo o) {
-		int result = group.compareTo(o.group);
+		int result = getGroup().compareTo(o.getGroup());
 		if (result == 0) {
 			if (this instanceof GroupInfo) {
 				return -1;

@@ -20,7 +20,8 @@ import org.junit.Test;
 public class DisassemblerPluginScreenShots extends GhidraScreenShotGenerator {
 
 	public DisassemblerPluginScreenShots() {
-    }
+		super();
+	}
 
 @Test
     public void testProcessorOptions() {

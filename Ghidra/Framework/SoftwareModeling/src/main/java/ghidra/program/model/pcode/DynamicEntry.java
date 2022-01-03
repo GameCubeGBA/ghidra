@@ -80,7 +80,7 @@ public class DynamicEntry extends SymbolEntry {
 	public VariableStorage getStorage() {
 		Program program = symbol.getProgram();
 		try {
-			return new VariableStorage(program, AddressSpace.HASH_SPACE.getAddress(hash),
+			return new VariableStorage(program, AddressSpace.HASH_SPACE.getAddress(getHash()),
 				getSize());
 		}
 		catch (InvalidInputException e) {

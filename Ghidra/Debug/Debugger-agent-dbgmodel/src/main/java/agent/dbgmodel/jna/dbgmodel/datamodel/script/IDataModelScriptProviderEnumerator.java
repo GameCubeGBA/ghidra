@@ -23,7 +23,7 @@ import agent.dbgmodel.jna.dbgmodel.IUnknownEx;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IDataModelScriptProviderEnumerator extends IUnknownEx {
-	IID IID_IDATA_MODEL_SCRIPT_PROVIDER_ENUMERATOR =
+	final IID IID_IDATA_MODEL_SCRIPT_PROVIDER_ENUMERATOR =
 		new IID("95BA00E2-704A-4fe2-A8F1-A7E7D8FB0941");
 
 	enum VTIndices implements VTableIndex {

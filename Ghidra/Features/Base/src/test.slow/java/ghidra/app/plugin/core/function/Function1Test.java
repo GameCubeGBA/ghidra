@@ -86,7 +86,8 @@ public class Function1Test extends AbstractGhidraHeadedIntegrationTest {
 	private DockingActionIf chooseDataType;
 
 	public Function1Test() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -1131,14 +1132,14 @@ public class Function1Test extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals("undefined entry()", cb.getCurrentFieldText());
 
 		assertTrue(cb.goToField(addr("0x1006420"), "Variable Type", 1, 0, 0));
-		assertTrue("undefined4".equals(cb.getCurrentFieldText()));
+		assertTrue(cb.getCurrentFieldText().equals("undefined4"));
 		performAction(clearFunctionReturnTypeAction, cb.getProvider(), true);
 		waitForBusyTool();
 		assertEquals("undefined", cb.getCurrentFieldText());
 
 		undo(program);
 		cb.updateNow();
-		assertTrue(!"undefined".equals(cb.getCurrentFieldText()));
+		assertTrue(!cb.getCurrentFieldText().equals("undefined"));
 		redo(program);
 		cb.updateNow();
 		assertEquals("undefined", cb.getCurrentFieldText());

@@ -30,12 +30,13 @@ import org.junit.Test;
 import generic.test.AbstractGenericTest;
 
 public class OptionTypeTest extends AbstractGenericTest {
-	public static enum FOO {
+	static public enum FOO {
 		AAA, BBB, CCC
 	}
 
 	public OptionTypeTest() {
-    }
+		super();
+	}
 
 	@Test
     public void testIntConversion() {
@@ -169,10 +170,13 @@ public class OptionTypeTest extends AbstractGenericTest {
 			if (a != other.a)
 				return false;
 			if (b == null) {
-                return other.b == null;
+				if (other.b != null)
+					return false;
 			}
-			else return b.equals(other.b);
-        }
+			else if (!b.equals(other.b))
+				return false;
+			return true;
+		}
 
 		@Override
 		public void readState(SaveState saveState) {

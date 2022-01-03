@@ -49,7 +49,7 @@ public interface AutoReadMemorySpec extends ExtensionPoint {
 
 	Private PRIVATE = new Private();
 
-	class AutoReadMemorySpecConfigFieldCodec
+	public static class AutoReadMemorySpecConfigFieldCodec
 			implements ConfigFieldCodec<AutoReadMemorySpec> {
 		@Override
 		public AutoReadMemorySpec read(SaveState state, String name,

@@ -102,7 +102,7 @@ public class LinuxSystemMapImportScript extends GhidraScript {
 				continue;
 			}
 
-			if ("t".equalsIgnoreCase(type)) {
+			if (type.equalsIgnoreCase("t")) {
 				// This is a function
 				disassemble(addr);
 				createFunction(addr, name);

@@ -117,7 +117,7 @@ public class StructureEditorUnlockedActions5Test
 		assertEquals(model.getStatus(), "Name is not valid.");
 		assertTrue(complexStructure.isEquivalent(model.viewComposite));
 		assertTrue(viewCopy.isEquivalent(model.viewComposite));
-		assertTrue(!model.getStatus().isEmpty());
+		assertTrue(model.getStatus().length() > 0);
 		assertEquals("complexStructure#$/", model.getCompositeName());
 		assertEquals("complexStructure", complexStructure.getName());
 	}

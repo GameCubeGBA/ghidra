@@ -239,9 +239,11 @@ public class HashStore {
 	public void removeHash(HashEntry hashEntry) {
 		matchSort.remove(hashEntry);
 		hashSort.remove(hashEntry.hash);
-        for (InstructHash instruct : hashEntry.instList) {
-            instruct.hashEntries.remove(hashEntry.hash);
-        }
+		Iterator<InstructHash> iter = hashEntry.instList.iterator();
+		while(iter.hasNext()) {
+			InstructHash instruct = iter.next();
+			instruct.hashEntries.remove(hashEntry.hash);
+		}
 	}
 	
 	/**

@@ -12,15 +12,15 @@
 package SWIG;
 
 public final class ValueType {
-  public static final ValueType eValueTypeInvalid = new ValueType("eValueTypeInvalid", lldbJNI.eValueTypeInvalid_get());
-  public static final ValueType eValueTypeVariableGlobal = new ValueType("eValueTypeVariableGlobal", lldbJNI.eValueTypeVariableGlobal_get());
-  public static final ValueType eValueTypeVariableStatic = new ValueType("eValueTypeVariableStatic", lldbJNI.eValueTypeVariableStatic_get());
-  public static final ValueType eValueTypeVariableArgument = new ValueType("eValueTypeVariableArgument", lldbJNI.eValueTypeVariableArgument_get());
-  public static final ValueType eValueTypeVariableLocal = new ValueType("eValueTypeVariableLocal", lldbJNI.eValueTypeVariableLocal_get());
-  public static final ValueType eValueTypeRegister = new ValueType("eValueTypeRegister", lldbJNI.eValueTypeRegister_get());
-  public static final ValueType eValueTypeRegisterSet = new ValueType("eValueTypeRegisterSet", lldbJNI.eValueTypeRegisterSet_get());
-  public static final ValueType eValueTypeConstResult = new ValueType("eValueTypeConstResult", lldbJNI.eValueTypeConstResult_get());
-  public static final ValueType eValueTypeVariableThreadLocal = new ValueType("eValueTypeVariableThreadLocal", lldbJNI.eValueTypeVariableThreadLocal_get());
+  public final static ValueType eValueTypeInvalid = new ValueType("eValueTypeInvalid", lldbJNI.eValueTypeInvalid_get());
+  public final static ValueType eValueTypeVariableGlobal = new ValueType("eValueTypeVariableGlobal", lldbJNI.eValueTypeVariableGlobal_get());
+  public final static ValueType eValueTypeVariableStatic = new ValueType("eValueTypeVariableStatic", lldbJNI.eValueTypeVariableStatic_get());
+  public final static ValueType eValueTypeVariableArgument = new ValueType("eValueTypeVariableArgument", lldbJNI.eValueTypeVariableArgument_get());
+  public final static ValueType eValueTypeVariableLocal = new ValueType("eValueTypeVariableLocal", lldbJNI.eValueTypeVariableLocal_get());
+  public final static ValueType eValueTypeRegister = new ValueType("eValueTypeRegister", lldbJNI.eValueTypeRegister_get());
+  public final static ValueType eValueTypeRegisterSet = new ValueType("eValueTypeRegisterSet", lldbJNI.eValueTypeRegisterSet_get());
+  public final static ValueType eValueTypeConstResult = new ValueType("eValueTypeConstResult", lldbJNI.eValueTypeConstResult_get());
+  public final static ValueType eValueTypeVariableThreadLocal = new ValueType("eValueTypeVariableThreadLocal", lldbJNI.eValueTypeVariableThreadLocal_get());
 
   public final int swigValue() {
     return swigValue;
@@ -33,9 +33,9 @@ public final class ValueType {
   public static ValueType swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-      for (ValueType value : swigValues)
-          if (value.swigValue == swigValue)
-              return value;
+    for (int i = 0; i < swigValues.length; i++)
+      if (swigValues[i].swigValue == swigValue)
+        return swigValues[i];
     throw new IllegalArgumentException("No enum " + ValueType.class + " with value " + swigValue);
   }
 

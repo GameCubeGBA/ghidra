@@ -73,9 +73,12 @@ public class DataTypeSyncInfo {
 			return false;
 		}
 		// Special case where user committed changes to archive, but then didn't save the archive. 
-        // our previous commit was not saved
-        return refDt.getLastChangeTimeInSourceArchive() <= sourceDt.getLastChangeTime();
-    }
+		if (refDt.getLastChangeTimeInSourceArchive() > sourceDt.getLastChangeTime()) {
+			// our previous commit was not saved
+			return false;
+		}
+		return true;
+	}
 
 	public boolean canCommit() {
 		if (sourceDt == null) {
@@ -86,10 +89,13 @@ public class DataTypeSyncInfo {
 			return true;
 		}
 		// Special case where user committed changes to archive, but then didn't save the archive. 
-        // our previous commit was not saved
-        return refDt.getLastChangeTimeInSourceArchive() > sourceDt.getLastChangeTime();
+		if (refDt.getLastChangeTimeInSourceArchive() > sourceDt.getLastChangeTime()) {
+			// our previous commit was not saved
+			return true;
+		}
 		// no change
-    }
+		return false;
+	}
 
 	public boolean canRevert() {
 		return sourceDt != null && canCommit();

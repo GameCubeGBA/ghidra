@@ -89,8 +89,11 @@ public class DomainFileNode extends GTreeNode implements Cuttable {
 			return false;
 		}
 		DomainFileNode node = (DomainFileNode) obj;
-        return domainFile == node.domainFile;
-    }
+		if (domainFile == node.domainFile) {
+			return true;
+		}
+		return false;
+	}
 
 	@Override
 	public int hashCode() {

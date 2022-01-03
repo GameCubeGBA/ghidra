@@ -369,8 +369,10 @@ public abstract class AbstractAddressRangeFilter<T> extends AncillaryFilter<T>
 		}
 
 		Long upperAddressFilter = Long.valueOf(text, 16);
-		return offset.compareTo(upperAddressFilter) <= 0; // the match's score is higher than the upper range filter
-// we are within the score's filter range!
+		if (offset.compareTo(upperAddressFilter) > 0) {
+			return false; // the match's score is higher than the upper range filter
+		}
+		return true; // we are within the score's filter range!
 	}
 
 	@Override
@@ -555,7 +557,10 @@ public abstract class AbstractAddressRangeFilter<T> extends AncillaryFilter<T>
 
 				String oldUpperText = (String) other.get(upperAddressRangeTextField.getName());
 				String currentUpperText = upperAddressRangeTextField.getText();
-				return currentUpperText.equals(oldUpperText); // upper range has changed
+				if (!currentUpperText.equals(oldUpperText)) {
+					return false; // upper range has changed
+				}
+				return true;
 			}
 
 			return false; // our enabled states have changed...we are different

@@ -52,7 +52,7 @@ public class ArmAnalyzer extends ConstantPropagationAnalyzer {
 	private Register tmodeRegister;
 	private Register lrRegister;
 
-	private static final String PROCESSOR_NAME = "ARM";
+	private final static String PROCESSOR_NAME = "ARM";
 
 	public ArmAnalyzer() {
 		super(PROCESSOR_NAME);
@@ -408,7 +408,7 @@ public class ArmAnalyzer extends ConstantPropagationAnalyzer {
 					if (reg != null) {
 						// never assume for flags, or control registers
 						String regName = reg.getName();
-						if ("sp".equals(regName)) {
+						if (regName.equals("sp")) {
 							return null;
 						}
 						if (!regName.startsWith("r")) {
@@ -531,10 +531,12 @@ public class ArmAnalyzer extends ConstantPropagationAnalyzer {
 							switchEvaluator.getAddrByteSize(), 0, false);
 						Instruction jmpInstr = program.getListing().getInstructionAt(loc);
 						if (jmpInstr.getReferencesFrom().length <= 1) {
-                            for (Address address : switchEvaluator.getTargetList()) {
-                                jmpInstr.addMnemonicReference(address, jmpInstr.getFlowType(),
-                                        SourceType.ANALYSIS);
-                            }
+							Iterator<Address> jmpIter = switchEvaluator.getTargetList().iterator();
+							while (jmpIter.hasNext()) {
+								Address address = jmpIter.next();
+								jmpInstr.addMnemonicReference(address, jmpInstr.getFlowType(),
+									SourceType.ANALYSIS);
+							}
 						}
 						table.disassemble(program, jmpInstr, monitor);
 						table.fixupFunctionBody(program, jmpInstr, monitor);
@@ -544,7 +546,7 @@ public class ArmAnalyzer extends ConstantPropagationAnalyzer {
 					}
 				}
 			}
-			if (!switchEvaluator.getTargetList().isEmpty()) {
+			if (switchEvaluator.getTargetList().size() > 0) {
 				AddressTable table;
 				table = new AddressTable(loc, switchEvaluator.getTargetList().toArray(new Address[0]),
 						switchEvaluator.getAddrByteSize(), 0, false);
@@ -763,7 +765,7 @@ public class ArmAnalyzer extends ConstantPropagationAnalyzer {
 			}
 			else {
 				// blx instruction on a direct address in ARM mode always goes to thumb mode
-				if ("blx".equals(instruction.getMnemonicString()) || thumbMode != 0) {
+				if (instruction.getMnemonicString().equals("blx") || thumbMode != 0) {
 					inThumbMode = true;
 				}
 			}

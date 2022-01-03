@@ -168,6 +168,9 @@ public class DwarfLineNumberAnalyzer extends AbstractAnalyzer {
 		if (ElfLoader.ELF_NAME.equals(format)) {
 			return hasDebugInfo(program);
 		}
-        return MachoLoader.MACH_O_NAME.equals(format);
-    }
+		if (MachoLoader.MACH_O_NAME.equals(format)) {
+			return true;
+		}
+		return false;
+	}
 }

@@ -48,7 +48,8 @@ public class XRefFieldLocation extends CodeUnitLocation {
 	 * Creates a cross reference field location. Should only be used for XML restoring.
 	 */
 	public XRefFieldLocation() {
-    }
+		super();
+	}
 
 	/**
 	 * Returns the index of the XREF in the list.

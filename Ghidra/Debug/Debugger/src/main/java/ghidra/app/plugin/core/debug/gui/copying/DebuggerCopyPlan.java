@@ -351,7 +351,7 @@ public class DebuggerCopyPlan {
 		@Override
 		public boolean isAvailable(TraceProgramView from, Program into) {
 			return checkAvailable(from, into) &&
-				requires.stream().allMatch(c -> c.isAvailable(from, into));
+				getRequires().stream().allMatch(c -> c.isAvailable(from, into));
 		}
 
 		@Override

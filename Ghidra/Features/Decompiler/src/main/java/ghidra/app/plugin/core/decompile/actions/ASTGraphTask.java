@@ -264,10 +264,11 @@ public class ASTGraphTask extends Task {
 
 	protected void createControlFlowGraph(AttributedGraph graph, TaskMonitor monitor)
 			throws CancelledException {
-        for (PcodeBlockBasic pcodeBlockBasic : hfunction.getBasicBlocks()) {
-            monitor.checkCanceled();
-            graphPcodeBlock(graph, pcodeBlockBasic, monitor);
-        }
+		Iterator<PcodeBlockBasic> pblockIter = hfunction.getBasicBlocks().iterator();
+		while (pblockIter.hasNext()) {
+			monitor.checkCanceled();
+			graphPcodeBlock(graph, pblockIter.next(), monitor);
+		}
 	}
 
 	private void graphPcodeBlock(AttributedGraph graph, PcodeBlock pblock, TaskMonitor monitor)

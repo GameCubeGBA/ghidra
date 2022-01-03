@@ -159,7 +159,7 @@ public class JavaHelpPlugin extends Plugin implements FrontEndable {
 				monitor.initialize(1);
 			}
 
-			if (helpInfos.isEmpty()) {
+			if (helpInfos.size() == 0) {
 				Msg.showInfo(this, tool.getToolFrame(), "Help Validation Complete",
 					"No items missing help were found");
 				return;
@@ -197,8 +197,11 @@ public class JavaHelpPlugin extends Plugin implements FrontEndable {
 		if (noHelpActions.contains(actionName)) {
 			return true;
 		}
-        return isKeybindingOnly(action);
-    }
+		if (isKeybindingOnly(action)) {
+			return true;
+		}
+		return false;
+	}
 
 	private boolean isKeybindingOnly(DockingAction action) {
 		if (action.getToolBarData() != null) {
@@ -207,8 +210,11 @@ public class JavaHelpPlugin extends Plugin implements FrontEndable {
 		if (action.getMenuBarData() != null) {
 			return false;
 		}
-        return action.getPopupMenuData() == null;
-    }
+		if (action.getPopupMenuData() != null) {
+			return false;
+		}
+		return true;
+	}
 
 	private void writeHelpInfo(PrintWriter out, HelpInfoObject helpInfo, int num) {
 
@@ -311,10 +317,15 @@ public class JavaHelpPlugin extends Plugin implements FrontEndable {
 				return false;
 			}
 			if (location == null) {
-                return other.location == null;
+				if (other.location != null) {
+					return false;
+				}
 			}
-			else return location.equals(other.location);
-        }
+			else if (!location.equals(other.location)) {
+				return false;
+			}
+			return true;
+		}
 	}
 
 }

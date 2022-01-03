@@ -21,7 +21,7 @@ package ghidra.util.datastruct;
  * 
  */
 public class ManagedDataTable extends DataTable {
-    private static final long serialVersionUID = 1;
+    private final static long serialVersionUID = 1;
 
     private BooleanArray occupied = new BooleanArray();
     private int maxRow;

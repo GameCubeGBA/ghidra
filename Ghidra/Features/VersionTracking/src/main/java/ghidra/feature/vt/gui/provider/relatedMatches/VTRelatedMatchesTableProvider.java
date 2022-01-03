@@ -84,24 +84,28 @@ public class VTRelatedMatchesTableProvider extends ComponentProviderAdapter {
 		tablePanel = new MarkupItemThreadedTablePanel(relatedMatchesTableModel);
 		final GhidraTable table = tablePanel.getTable();
 
-        // it's our model, it must be our type
-        matchSelectionListener = e -> {
-            if (e.getValueIsAdjusting()) {
-                return;
-            }
+		matchSelectionListener = new ListSelectionListener() {
+			@Override
+			@SuppressWarnings("unchecked")
+			// it's our model, it must be our type
+			public void valueChanged(ListSelectionEvent e) {
+				if (e.getValueIsAdjusting()) {
+					return;
+				}
 
-            // we get out the model here in case it has been wrapped by one of the filters
-            RowObjectTableModel<VTRelatedMatch> model =
-                (RowObjectTableModel<VTRelatedMatch>) table.getModel();
-            int selectedRow = table.getSelectedRow();
-            VTRelatedMatch relatedMatch = model.getRowObject(selectedRow);
-            if (relatedMatch == null) {
-                return; // this can happen due to threaded table loading
-            }
+				// we get out the model here in case it has been wrapped by one of the filters
+				RowObjectTableModel<VTRelatedMatch> model =
+					(RowObjectTableModel<VTRelatedMatch>) table.getModel();
+				int selectedRow = table.getSelectedRow();
+				VTRelatedMatch relatedMatch = model.getRowObject(selectedRow);
+				if (relatedMatch == null) {
+					return; // this can happen due to threaded table loading
+				}
 
-            notifyContextChanged();
-            fireRelatedMatchSelected(relatedMatch);
-        };
+				notifyContextChanged();
+				fireRelatedMatchSelected(relatedMatch);
+			}
+		};
 		ListSelectionModel selectionModel = table.getSelectionModel();
 		selectionModel.addListSelectionListener(matchSelectionListener);
 

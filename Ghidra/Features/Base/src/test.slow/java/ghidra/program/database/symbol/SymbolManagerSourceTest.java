@@ -42,7 +42,8 @@ public class SymbolManagerSourceTest extends AbstractGhidraHeadedIntegrationTest
 	private Namespace globalScope;
 
 	public SymbolManagerSourceTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

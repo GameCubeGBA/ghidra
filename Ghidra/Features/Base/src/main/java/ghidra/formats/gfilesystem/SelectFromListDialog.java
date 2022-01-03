@@ -53,7 +53,7 @@ public class SelectFromListDialog<T> extends DialogComponentProvider {
 		SelectFromListDialog<T> dialog =
 			new SelectFromListDialog<>(title, prompt, list, toStringFunc);
 		SystemUtilities.runSwingNow(() -> dialog.doSelect());
-		return dialog.actionComplete ? dialog.selectedObject : null;
+		return dialog.actionComplete ? dialog.getSelectedObject() : null;
 	}
 
 	private boolean actionComplete = false;
@@ -120,7 +120,12 @@ public class SelectFromListDialog<T> extends DialogComponentProvider {
 		listPanel.setListModel(listModel);
 		listPanel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listPanel.setSelectedIndex(0);
-		listPanel.setDoubleClickActionListener(e -> okCallback());
+		listPanel.setDoubleClickActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				okCallback();
+			}
+		});
 
 		JPanel workPanel = new JPanel(new BorderLayout());
 		MultiLineLabel mll = new MultiLineLabel("\n" + prompt + ":");

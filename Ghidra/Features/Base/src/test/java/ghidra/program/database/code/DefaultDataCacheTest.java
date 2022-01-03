@@ -47,7 +47,8 @@ public class DefaultDataCacheTest extends AbstractGenericTest {
 	 * @param arg0
 	 */
 	public DefaultDataCacheTest() {
-    }
+		super();
+	}
 
 	/*
 	 * @see TestCase#setUp()

@@ -26,13 +26,13 @@ public interface BlockModelServiceListener {
 	 * @param modeName name of the block model that was added
 	 * @param modelType type of block model that was added
 	 */
-    void modelAdded(String modeName, int modelType);
+	public void modelAdded(String modeName, int modelType);
 	
 	/**
 	 * Provides notifiication when a model is removed.
 	 * @param modeName name of the block model that was removed
 	 * @param modelType type of block model that was removed
 	 */
-    void modelRemoved(String modeName, int modelType);
+	public void modelRemoved(String modeName, int modelType);
 
 }

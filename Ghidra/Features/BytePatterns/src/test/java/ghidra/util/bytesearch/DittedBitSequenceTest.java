@@ -60,7 +60,7 @@ public class DittedBitSequenceTest {
 		assertEquals(dSeq.getNumUncertainBits(), 0);
 
 		byte bits = (byte) 0xa0;    //10100000
-		byte dits = 0x55;    //01010101
+		byte dits = (byte) 0x55;    //01010101
 
 		dSeq = new DittedBitSequence(new byte[] { bits }, new byte[] { dits });
 		assertEquals(dSeq.getNumUncertainBits(), 4);
@@ -74,7 +74,7 @@ public class DittedBitSequenceTest {
 		DittedBitSequence ones =
 			new DittedBitSequence(new byte[] { (byte) 0xff }, new byte[] { (byte) 0xff });
 
-		byte evenDits = 0x55; //01010101
+		byte evenDits = (byte) 0x55; //01010101
 		byte oddDits = (byte) 0xaa;  //10101010
 
 		DittedBitSequence evens = new DittedBitSequence(new byte[] { 0 }, new byte[] { evenDits });

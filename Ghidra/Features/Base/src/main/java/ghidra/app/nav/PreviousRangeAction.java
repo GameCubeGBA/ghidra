@@ -89,5 +89,5 @@ public abstract class PreviousRangeAction extends NavigatableContextAction {
 		return currentAddress.compareTo(selection.getMinAddress()) > 0;
 	}
 
-	protected abstract ProgramSelection getSelection(ProgramLocationActionContext context);
+	abstract protected ProgramSelection getSelection(ProgramLocationActionContext context);
 }

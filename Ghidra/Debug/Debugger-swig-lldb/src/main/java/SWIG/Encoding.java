@@ -12,11 +12,11 @@
 package SWIG;
 
 public final class Encoding {
-  public static final Encoding eEncodingInvalid = new Encoding("eEncodingInvalid", lldbJNI.eEncodingInvalid_get());
-  public static final Encoding eEncodingUint = new Encoding("eEncodingUint");
-  public static final Encoding eEncodingSint = new Encoding("eEncodingSint");
-  public static final Encoding eEncodingIEEE754 = new Encoding("eEncodingIEEE754");
-  public static final Encoding eEncodingVector = new Encoding("eEncodingVector");
+  public final static Encoding eEncodingInvalid = new Encoding("eEncodingInvalid", lldbJNI.eEncodingInvalid_get());
+  public final static Encoding eEncodingUint = new Encoding("eEncodingUint");
+  public final static Encoding eEncodingSint = new Encoding("eEncodingSint");
+  public final static Encoding eEncodingIEEE754 = new Encoding("eEncodingIEEE754");
+  public final static Encoding eEncodingVector = new Encoding("eEncodingVector");
 
   public final int swigValue() {
     return swigValue;
@@ -29,9 +29,9 @@ public final class Encoding {
   public static Encoding swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-      for (Encoding value : swigValues)
-          if (value.swigValue == swigValue)
-              return value;
+    for (int i = 0; i < swigValues.length; i++)
+      if (swigValues[i].swigValue == swigValue)
+        return swigValues[i];
     throw new IllegalArgumentException("No enum " + Encoding.class + " with value " + swigValue);
   }
 

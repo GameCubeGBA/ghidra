@@ -25,7 +25,7 @@ import agent.dbgeng.jna.dbgeng.WinNTExtra.EXCEPTION_RECORD64;
 import agent.dbgeng.jna.dbgeng.breakpoint.WrapIDebugBreakpoint2;
 
 public interface IDebugEventContextCallbacks {
-	IID IID_IDEBUG_EVENT_CONTEXT_CALLBACKS = new IID("61a4905b-23f9-4247-b3c5-53d087529ab7");
+	final IID IID_IDEBUG_EVENT_CONTEXT_CALLBACKS = new IID("61a4905b-23f9-4247-b3c5-53d087529ab7");
 
 	HRESULT GetInterestMask(ULONGByReference Mask);
 

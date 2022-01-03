@@ -49,11 +49,12 @@ public class RemoveExternalRefCmd implements Command {
     	ReferenceManager refMgr = ((Program)obj).getReferenceManager();
     	
     	Reference[] refs = refMgr.getReferencesFrom(fromAddr, opIndex);
-        for (Reference ref : refs) {
-            if (ref.isExternalReference()) {
-                refMgr.delete(ref);
-            }
-        }
+		for (int i = 0; i < refs.length; i++) {
+			Reference ref = refs[i];
+			if (ref.isExternalReference()) {
+				refMgr.delete(ref);
+			}
+		}
 
  		return true;
     }

@@ -25,7 +25,7 @@ import agent.dbgmodel.jna.dbgmodel.IUnknownEx;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IKeyStore extends IUnknownEx {
-	IID IID_IKEY_STORE = new IID("0FC7557D-401D-4fca-9365-DA1E9850697C");
+	final IID IID_IKEY_STORE = new IID("0FC7557D-401D-4fca-9365-DA1E9850697C");
 
 	enum VTIndices implements VTableIndex {
 		GET_KEY, //

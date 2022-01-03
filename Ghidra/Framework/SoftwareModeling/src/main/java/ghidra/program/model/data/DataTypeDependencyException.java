@@ -25,7 +25,8 @@ package ghidra.program.model.data;
 public class DataTypeDependencyException extends Exception {
 
 	public DataTypeDependencyException() {
-    }
+		super();
+	}
 
 	public DataTypeDependencyException(String message) {
 		super(message);

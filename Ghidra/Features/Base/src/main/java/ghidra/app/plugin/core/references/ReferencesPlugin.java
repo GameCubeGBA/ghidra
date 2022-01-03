@@ -457,7 +457,7 @@ public class ReferencesPlugin extends Plugin {
 			warningMsg += "The equivalent " + wrapStr + "address " + testAddr.toString(true) +
 				" is not contained within the Program's defined memory blocks.\n \n";
 		}
-		if (!warningMsg.isEmpty()) {
+		if (warningMsg.length() != 0) {
 			if (c == null) {
 				c = tool.getToolFrame();
 			}
@@ -706,7 +706,7 @@ public class ReferencesPlugin extends Plugin {
 			SourceType.USER_DEFINED));
 
 		String existingPath = p.getExternalManager().getExternalLibraryPath(extName);
-		if (path != null && !path.isEmpty()) {
+		if (path != null && path.length() > 0) {
 			if (!path.equals(existingPath)) {
 				cmd.add(new SetExternalNameCmd(extName, path));
 			}
@@ -734,7 +734,7 @@ public class ReferencesPlugin extends Plugin {
 				oldExtLoc.getExternalSpaceAddress()).hasNext() &&
 				OptionDialog.YES_OPTION == OptionDialog.showYesNoDialog(tool.getActiveWindow(),
 					"Delete Unused External Location?",
-					"Remove unused external location symbol '" + oldExtLoc + "'?")) {
+					"Remove unused external location symbol '" + oldExtLoc.toString() + "'?")) {
 				deleteExternalLocation(p, oldExtLoc);
 
 				if (!p.getExternalManager().getExternalLocations(oldExtName).hasNext() &&

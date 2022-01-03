@@ -49,12 +49,12 @@ import ghidra.util.Msg;
 public class RTTI3DataType extends RTTIDataType {
 
 	private static final int MAX_RTTI_1_COUNT = 1000;
-	private static final long serialVersionUID = 1;
-	private static final int LENGTH = 16;
-	private static final int SIGNATURE_OFFSET = 0;
-	private static final int ATTRIBUTES_OFFSET = 4;
-	private static final int RTTI_1_COUNT_OFFSET = 8;
-	private static final int RTTI_2_POINTER_OFFSET = 12;
+	private final static long serialVersionUID = 1;
+	private final static int LENGTH = 16;
+	private final static int SIGNATURE_OFFSET = 0;
+	private final static int ATTRIBUTES_OFFSET = 4;
+	private final static int RTTI_1_COUNT_OFFSET = 8;
+	private final static int RTTI_2_POINTER_OFFSET = 12;
 	private DataTypeComponent[] fixedComps;
 
 	/**
@@ -249,9 +249,13 @@ public class RTTI3DataType extends RTTIDataType {
 		// Last component should refer to RTTI2.
 		Address rtti2Address = getRtti2Address(memory, startAddress);
 		RTTI2DataType rtti2 = new RTTI2DataType(rtti1Count, program.getDataTypeManager());
-        return rtti2Address != null &&
-                (!validateReferredToData || rtti2.isValid(program, rtti2Address, validationOptions));
-    }
+		if (rtti2Address == null ||
+			(validateReferredToData && !rtti2.isValid(program, rtti2Address, validationOptions))) {
+			return false;
+		}
+
+		return true;
+	}
 
 	@Override
 	public String getDefaultLabelPrefix() {

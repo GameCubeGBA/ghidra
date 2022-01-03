@@ -114,9 +114,12 @@ public class LengthFilter extends Filter<VTMatch> {
 
 		score = t.getDestinationLength();
 		lengthFilter = Integer.valueOf(textField.getText());
-        return score.compareTo(lengthFilter) >= 0; // the match's score is higher than the filter
-// the value is below the cutoff
-    }
+		if (score.compareTo(lengthFilter) >= 0) {
+			return true; // the match's score is higher than the filter
+		}
+
+		return false; // the value is below the cutoff
+	}
 
 	@Override
 	public FilterShortcutState getFilterShortcutState() {

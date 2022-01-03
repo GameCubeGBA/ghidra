@@ -31,7 +31,8 @@ public class DbgCommandErrorEvent extends AbstractDbgCompletedCommandEvent {
 	}
 
 	protected DbgCommandErrorEvent() {
-    }
+		super();
+	}
 
 	protected DbgCommandErrorEvent(String message) {
 		super(message);

@@ -33,8 +33,8 @@ import ghidra.util.task.TaskMonitorAdapter;
  */
 public class CreateDomainObjectTest extends AbstractGhidraHeadedIntegrationTest {
 
-	private static final String PROJECT_NAME1 = "DomainObjTests";
-	private static final String PROJECT_NAME2 = "DomainObjTests2";
+	private final static String PROJECT_NAME1 = "DomainObjTests";
+	private final static String PROJECT_NAME2 = "DomainObjTests2";
 
 	private Project project;
 	private String testDir;
@@ -44,7 +44,8 @@ public class CreateDomainObjectTest extends AbstractGhidraHeadedIntegrationTest 
 	* @param arg0
 	*/
 	public CreateDomainObjectTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

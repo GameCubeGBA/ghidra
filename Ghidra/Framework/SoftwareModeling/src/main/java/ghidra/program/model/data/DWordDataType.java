@@ -23,7 +23,7 @@ public class DWordDataType extends AbstractIntegerDataType {
 	private static final long serialVersionUID = 1L;
 
 	/** A statically defined DWordDataType instance.*/
-    public static final DWordDataType dataType = new DWordDataType();
+	public final static DWordDataType dataType = new DWordDataType();
 
 	public DWordDataType() {
 		this(null);

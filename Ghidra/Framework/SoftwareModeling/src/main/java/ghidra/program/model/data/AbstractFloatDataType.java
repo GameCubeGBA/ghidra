@@ -33,7 +33,7 @@ import ghidra.program.model.mem.MemBuffer;
  */
 public abstract class AbstractFloatDataType extends BuiltIn {
 
-	private static final long serialVersionUID = 1;
+	private final static long serialVersionUID = 1;
 
 	private static SettingsDefinition[] SETTINGS_DEFS = {};
 
@@ -194,7 +194,7 @@ public abstract class AbstractFloatDataType extends BuiltIn {
 	/**
 	 * Returns all built-in fixed-sized float data-types
 	 */
-    private static synchronized TreeMap<Integer, AbstractFloatDataType> getFloatTypes() {
+	private synchronized static TreeMap<Integer, AbstractFloatDataType> getFloatTypes() {
 		if (floatTypes == null) {
 			// unsupported sizes filled-in with a null
 			floatTypes = new TreeMap<>();

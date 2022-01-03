@@ -929,8 +929,12 @@ public class FlatProgramAPI {
 
 		monitor.setMessage("Searching post comments...");
 		addr = findComment(CodeUnit.POST_COMMENT, text);
-        return addr;
-    }
+		if (addr != null) {
+			return addr;
+		}
+
+		return null;
+	}
 
 	/**
 	 * Search for sequences of Ascii strings in program memory.  See {@link AsciiCharSetRecognizer}

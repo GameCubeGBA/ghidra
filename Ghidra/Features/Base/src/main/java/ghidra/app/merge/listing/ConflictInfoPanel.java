@@ -34,7 +34,7 @@ import ghidra.util.HTMLUtilities;
  */
 public class ConflictInfoPanel extends JPanel {
 
-	private static final long serialVersionUID = 1;
+	private final static long serialVersionUID = 1;
 	private String conflictType;
 	private int conflictNum;
 	private int totalConflicts;
@@ -51,7 +51,8 @@ public class ConflictInfoPanel extends JPanel {
 	 * Creates a new {@code ConflictInfoPanel} to use above the listings.
 	 */
 	public ConflictInfoPanel() {
-        create();
+		super();
+		create();
 	}
 
 	private void create() {

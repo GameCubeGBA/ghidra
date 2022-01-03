@@ -47,7 +47,8 @@ class CommentsConflictPanel extends JPanel {
 	 * selected
 	 */
 	CommentsConflictPanel(ChangeListener listener) {
-        this.listener = listener;
+		super();
+		this.listener = listener;
 		create();
 	}
 
@@ -122,11 +123,14 @@ class CommentsConflictPanel extends JPanel {
 				str = MergeConstants.ORIGINAL_TITLE;
 		}
 		GRadioButton rb = new GRadioButton("Use comments from " + str);
-		rb.addItemListener(e -> {
-            if (e.getStateChange() == ItemEvent.SELECTED) {
-                listener.stateChanged(null);
-            }
-        });
+		rb.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+					listener.stateChanged(null);
+				}
+			}
+		});
 		if (id == MergeConstants.LATEST) {
 			latestRB = rb;
 			latestRB.setName(MemoryMergePanel.LATEST_BUTTON_NAME);

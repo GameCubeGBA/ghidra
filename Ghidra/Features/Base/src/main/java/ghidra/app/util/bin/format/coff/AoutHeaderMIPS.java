@@ -21,7 +21,7 @@ import ghidra.app.util.bin.BinaryReader;
 import java.io.IOException;
 
 public class AoutHeaderMIPS extends AoutHeader {
-	public static final int SIZEOF = 56;
+	public final static int SIZEOF = 56;
 
 	private int      bss_start; // base of bss used for this file
 	private int      gprmask;   // general purpose register mask

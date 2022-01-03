@@ -125,12 +125,12 @@ public class BinaryCodedField extends BinaryField {
 	public BinaryCodedField(byte[] values) {
 		if (values != null) {
 			data = new byte[values.length + 2];
-			data[DATA_OFFSET] = 0;
+			data[DATA_OFFSET] = (byte) 0;
 			System.arraycopy(values, 0, data, 2, values.length);
 		}
 		else {
 			data = new byte[2];
-			data[DATA_OFFSET] = -1;
+			data[DATA_OFFSET] = (byte) -1;
 		}
 		data[DATA_TYPE_OFFSET] = BYTE_ARRAY;
 	}

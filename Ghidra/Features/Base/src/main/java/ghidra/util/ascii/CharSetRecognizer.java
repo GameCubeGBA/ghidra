@@ -19,6 +19,6 @@ package ghidra.util.ascii;
 @FunctionalInterface
 public interface CharSetRecognizer {
 
-	boolean contains(int c);
+	public boolean contains(int c);
 
 }

@@ -20,7 +20,8 @@ import org.junit.Test;
 public class PrintingPluginScreenShots extends GhidraScreenShotGenerator {
 
 	public PrintingPluginScreenShots() {
-    }
+		super();
+	}
 
 @Test
     public void testPrintOptions() {

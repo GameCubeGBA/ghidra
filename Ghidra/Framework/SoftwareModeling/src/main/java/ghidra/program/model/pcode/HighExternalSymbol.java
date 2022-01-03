@@ -57,7 +57,7 @@ public class HighExternalSymbol extends HighSymbol {
 	@Override
 	public void saveXML(StringBuilder buf) {
 		buf.append("<externrefsymbol");
-		if ((name != null) && (!name.isEmpty())) { // Give the symbol a name if we can
+		if ((name != null) && (name.length() > 0)) { // Give the symbol a name if we can
 			SpecXmlUtils.xmlEscapeAttribute(buf, "name", name + "_exref");
 		}
 		buf.append(">\n");

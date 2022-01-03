@@ -60,12 +60,12 @@ public class ZoomedImagePainter implements GGlassPanePainter {
         // the width is based upon the magnify factor and the 
         // zoom (set by the animator's progress)
         int imageWidth = image.getWidth( null );
-        int width = imageWidth + (int) (imageWidth * magnifyFactor * zoom);
+        int width = imageWidth + (int) (imageWidth * magnifyFactor * getZoom());
 
         // the height is also based upon the magnify factor and the 
         // zoom (set by the animator's progress)
         int imageHeight = image.getHeight( null );
-        int height = imageHeight + (int) (imageHeight * magnifyFactor * zoom);
+        int height = imageHeight + (int) (imageHeight * magnifyFactor * getZoom());
 
         // calculate the coordinates, centering the image drawing over the container's bounds
         int middleBoundsX = targetBounds.width >> 1;

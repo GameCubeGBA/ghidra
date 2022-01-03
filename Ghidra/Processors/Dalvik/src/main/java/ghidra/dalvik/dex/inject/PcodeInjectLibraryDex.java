@@ -41,7 +41,7 @@ public class PcodeInjectLibraryDex extends PcodeInjectLibrary {
 		if (tp == InjectPayload.CALLMECHANISM_TYPE) {
 			return new InjectPayloadDexParameters(name, sourceName);
 		}
-		else if (tp == InjectPayload.CALLOTHERFIXUP_TYPE && "moveRangeToIV".equals(name)) {
+		else if (tp == InjectPayload.CALLOTHERFIXUP_TYPE && name.equals("moveRangeToIV")) {
 			return new InjectPayloadDexRange();
 		}
 		return super.allocateInject(sourceName, name, tp);

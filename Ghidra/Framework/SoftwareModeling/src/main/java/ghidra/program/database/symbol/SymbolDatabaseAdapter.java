@@ -68,8 +68,8 @@ abstract class SymbolDatabaseAdapter {
 	static final Schema SYMBOL_SCHEMA = SymbolDatabaseAdapterV3.V3_SYMBOL_SCHEMA;
 
 	// Bits 0 & 1 are used for the source of the symbol.
-	static final byte SYMBOL_SOURCE_BITS = 0x3;
-	static final byte SYMBOL_PINNED_FLAG = 0x4; // Bit 2 is flag for "anchored to address".
+	static final byte SYMBOL_SOURCE_BITS = (byte) 0x3;
+	static final byte SYMBOL_PINNED_FLAG = (byte) 0x4; // Bit 2 is flag for "anchored to address".
 
 	// TODO: NEXT UPGRADE: remove all variable/parameter symbols with NO_ADDRESS
 

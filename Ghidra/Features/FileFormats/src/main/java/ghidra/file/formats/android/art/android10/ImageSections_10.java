@@ -23,19 +23,19 @@ import ghidra.file.formats.android.art.ArtImageSections;
  * https://android.googlesource.com/platform/art/+/refs/heads/android10-release/runtime/image.h
  */
 public class ImageSections_10 extends ArtImageSections {
-	public static final int kSectionObjects = 0;
-	public static final int kSectionArtFields = 1;
-	public static final int kSectionArtMethods = 2;
-	public static final int kSectionRuntimeMethods = 3;
-	public static final int kSectionImTables = 4;
-	public static final int kSectionIMTConflictTables = 5;
-	public static final int kSectionDexCacheArrays = 6;
-	public static final int kSectionInternedStrings = 7;
-	public static final int kSectionClassTable = 8;
-	public static final int kSectionStringReferenceOffsets = 9;
-	public static final int kSectionMetadata = 10;
-	public static final int kSectionImageBitmap = 11;
-	public static final int kSectionCount = 12;  // Number of elements in enum.
+	public final static int kSectionObjects = 0;
+	public final static int kSectionArtFields = 1;
+	public final static int kSectionArtMethods = 2;
+	public final static int kSectionRuntimeMethods = 3;
+	public final static int kSectionImTables = 4;
+	public final static int kSectionIMTConflictTables = 5;
+	public final static int kSectionDexCacheArrays = 6;
+	public final static int kSectionInternedStrings = 7;
+	public final static int kSectionClassTable = 8;
+	public final static int kSectionStringReferenceOffsets = 9;
+	public final static int kSectionMetadata = 10;
+	public final static int kSectionImageBitmap = 11;
+	public final static int kSectionCount = 12;  // Number of elements in enum.
 
 	public ImageSections_10(BinaryReader reader, ArtHeader header) {
 		super(reader, header);

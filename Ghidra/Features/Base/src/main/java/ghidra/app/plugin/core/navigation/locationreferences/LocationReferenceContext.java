@@ -102,7 +102,7 @@ public class LocationReferenceContext {
 		for (Part part : parts) {
 			buffy.append(part.getHtmlText());
 		}
-		return HTMLUtilities.HTML + buffy;
+		return HTMLUtilities.HTML + buffy.toString();
 	}
 
 	/**
@@ -129,7 +129,7 @@ public class LocationReferenceContext {
 	/**
 	 * A class that represents one or more characters within the full text of this context class
 	 */
-    abstract static class Part {
+	static abstract class Part {
 		protected String text;
 
 		Part(String text) {

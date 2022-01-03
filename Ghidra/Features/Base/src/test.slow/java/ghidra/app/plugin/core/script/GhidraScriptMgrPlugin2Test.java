@@ -37,7 +37,8 @@ import utilities.util.FileUtilities;
 public class GhidraScriptMgrPlugin2Test extends AbstractGhidraScriptMgrPluginTest {
 
 	public GhidraScriptMgrPlugin2Test() {
-    }
+		super();
+	}
 
 	@Test
 	public void testRun() throws Exception {

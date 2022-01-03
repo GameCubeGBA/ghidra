@@ -37,6 +37,7 @@ public class StringArrayTest extends AbstractGenericTest {
 
     /** Creates new ArrayArrayTest */
     public StringArrayTest() {
+        super();
     }
 @Test
     public void testSimpleGetPut() {

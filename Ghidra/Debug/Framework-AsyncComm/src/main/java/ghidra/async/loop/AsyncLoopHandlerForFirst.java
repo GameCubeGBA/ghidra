@@ -44,5 +44,5 @@ public interface AsyncLoopHandlerForFirst<R, T> extends AsyncHandlerCanExit<R> {
 	 * @param exc the exception if completed exceptionally
 	 * @return null
 	 */
-    Void consume(T elemResult, Throwable exc);
+	public Void consume(T elemResult, Throwable exc);
 }

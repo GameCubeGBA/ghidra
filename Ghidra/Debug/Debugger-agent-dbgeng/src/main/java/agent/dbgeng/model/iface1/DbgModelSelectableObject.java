@@ -31,7 +31,7 @@ import ghidra.dbg.target.schema.TargetObjectSchemaInfo;
 		@TargetAttributeType(type = Void.class) })
 public interface DbgModelSelectableObject extends DbgModelTargetObject {
 
-	default CompletableFuture<Void> setActive() {
+	public default CompletableFuture<Void> setActive() {
 		if (this instanceof DbgModelTargetSession) {
 			DbgManagerImpl manager = getManager();
 			DbgProcess process = manager.getCurrentProcess();

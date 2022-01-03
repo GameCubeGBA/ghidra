@@ -291,8 +291,11 @@ public class GTaskManager {
 	public boolean isBusy() {
 		lock.lock();
 		try {
-            return (runningTask != null) || !priorityQ.isEmpty() || !taskGroupList.isEmpty();
-        }
+			if ((runningTask != null) || !priorityQ.isEmpty() || !taskGroupList.isEmpty()) {
+				return true;
+			}
+			return false;
+		}
 		finally {
 			lock.unlock();
 		}

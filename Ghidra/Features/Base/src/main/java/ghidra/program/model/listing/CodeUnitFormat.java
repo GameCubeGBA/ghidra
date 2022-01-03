@@ -122,7 +122,7 @@ public class CodeUnitFormat {
 				}
 				else {
 					String separator = instr.getSeparator(i);
-					if (separator != null && !separator.isEmpty()) {
+					if (separator != null && separator.length() != 0) {
 						stringBuffer.append(separator);
 					}
 				}
@@ -383,8 +383,12 @@ public class CodeUnitFormat {
 		if (reg1MinAddr.compareTo(reg2MaxAddr) > 0) {
 			return false;
 		}
-        return reg2MaxAddr.compareTo(reg1MinAddr) >= 0;
-    }
+		if (reg2MaxAddr.compareTo(reg1MinAddr) < 0) {
+			return false;
+		}
+
+		return true;
+	}
 
 	private boolean hasRegisterWriteReference(Instruction instr, Register reg) {
 		for (Reference ref : instr.getReferencesFrom()) {
@@ -417,7 +421,7 @@ public class CodeUnitFormat {
 			return false;
 		}
 
-		if (representationList.isEmpty()) {
+		if (representationList.size() == 0) {
 			return false;
 		}
 
@@ -942,7 +946,9 @@ public class CodeUnitFormat {
 	private Register findRegister(Varnode v, Map<Register, Integer> regIndexMap) {
 		if (v.isRegister()) {
 			Register reg = getRegister(v.getAddress(), regIndexMap);
-            return reg;
+			if (reg != null) {
+				return reg;
+			}
 		}
 		return null;
 	}
@@ -1000,12 +1006,14 @@ public class CodeUnitFormat {
 	 * @return equate which matches scalar value or null if not found.
 	 */
 	private Equate findEquate(Scalar scalar, List<Equate> equates) {
-        for (Equate equate : equates) {
-            if (equate.getValue() == scalar.getSignedValue() ||
-                    equate.getValue() == scalar.getValue()) {
-                return equate;
-            }
-        }
+		Iterator<Equate> equateItr = equates.iterator();
+		while (equateItr.hasNext()) {
+			Equate equate = equateItr.next();
+			if (equate.getValue() == scalar.getSignedValue() ||
+				equate.getValue() == scalar.getValue()) {
+				return equate;
+			}
+		}
 		return null;
 	}
 
@@ -1302,7 +1310,7 @@ public class CodeUnitFormat {
 				namespaceName = parentNamespace.getName(true);
 			}
 		}
-		if (!namespaceName.isEmpty() && !namespaceName.endsWith(Namespace.DELIMITER)) {
+		if (namespaceName.length() != 0 && !namespaceName.endsWith(Namespace.DELIMITER)) {
 			namespaceName += Namespace.DELIMITER;
 		}
 		return namespaceName + name;

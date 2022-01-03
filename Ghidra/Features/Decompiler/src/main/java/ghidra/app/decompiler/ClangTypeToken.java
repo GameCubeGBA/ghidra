@@ -41,8 +41,9 @@ public class ClangTypeToken extends ClangToken {
 	
 	@Override
     public boolean isVariableRef() {
-        return Parent() instanceof ClangVariableDecl;
-    }
+		if (Parent() instanceof ClangVariableDecl) return true;
+		return false;	
+	}
 	
 	public DataType getDataType() {
 		return datatype;

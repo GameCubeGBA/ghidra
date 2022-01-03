@@ -118,7 +118,7 @@ class StructureEditorModel extends CompEditorModel {
 
 		if ((viewComposite == null) || (rowIndex < 0) || (columnIndex < 0) ||
 			(columnIndex >= getColumnCount())) {
-			if (columnIndex == DATATYPE) {
+			if (columnIndex == getDataTypeColumn()) {
 				return null;
 			}
 			return "";
@@ -126,22 +126,22 @@ class StructureEditorModel extends CompEditorModel {
 
 		DataTypeComponent dtc = getComponent(rowIndex);
 		if (dtc == null) {
-			if (columnIndex == DATATYPE) {
+			if (columnIndex == getDataTypeColumn()) {
 				return null;
 			}
 			return "";
 		}
 
 		String value = null;
-		if (columnIndex == OFFSET) {
+		if (columnIndex == getOffsetColumn()) {
 			int offset = dtc.getOffset();
 			value = showHexNumbers ? getHexString(offset, true) : Integer.toString(offset);
 		}
-		else if (columnIndex == LENGTH) {
+		else if (columnIndex == getLengthColumn()) {
 			int compLen = dtc.getLength();
 			value = showHexNumbers ? getHexString(compLen, true) : Integer.toString(compLen);
 		}
-		else if (columnIndex == MNEMONIC) {
+		else if (columnIndex == getMnemonicColumn()) {
 			DataType dt = dtc.getDataType();
 			value = dt.getMnemonic(new SettingsImpl());
 			int compLen = dtc.getLength();
@@ -150,15 +150,15 @@ class StructureEditorModel extends CompEditorModel {
 				value = "TooBig: " + value + " needs " + dtLen + " has " + compLen;
 			}
 		}
-		else if (columnIndex == DATATYPE) {
+		else if (columnIndex == getDataTypeColumn()) {
 			DataType dt = dtc.getDataType();
 			int dtLen = dt.getLength();
 			return DataTypeInstance.getDataTypeInstance(dt, (dtLen > 0) ? dtLen : dtc.getLength());
 		}
-		else if (columnIndex == FIELDNAME) {
+		else if (columnIndex == getNameColumn()) {
 			value = dtc.getFieldName();
 		}
-		else if (columnIndex == COMMENT) {
+		else if (columnIndex == getCommentColumn()) {
 			value = dtc.getComment();
 		}
 
@@ -252,8 +252,11 @@ class StructureEditorModel extends CompEditorModel {
 					return false;
 				}
 				DataType dt = dtc.getDataType();
-                return dt != DataType.DEFAULT;
-            default:
+				if (dt == DataType.DEFAULT) {
+					return false;
+				}
+				return true;
+			default:
 				return false; // User can't edit any other fields.
 		}
 	}
@@ -601,8 +604,11 @@ class StructureEditorModel extends CompEditorModel {
 			dtSize = comp.getLength();
 		}
 		int undefSize = getNumUndefinedBytesAt(rowIndex + 1);
-        return dtSize <= undefSize;
-    }
+		if (dtSize <= undefSize) {
+			return true;
+		}
+		return false;
+	}
 
 	@Override
 	public boolean isUnpackageAllowed() {
@@ -615,10 +621,13 @@ class StructureEditorModel extends CompEditorModel {
 		int currentIndex = selection.getFieldRange(0).getStart().getIndex().intValue();
 		// Get the range this index is in, if its in one.
 		FieldRange range = getSelectedRangeContaining(currentIndex);
-		boolean notInMultiLineSelection = (range == null) ||
-                ((range.getEnd().getIndex().intValue() - range.getStart().getIndex().intValue()) <= 1);
+		boolean notInMultiLineSelection = true;
+		if ((range != null) &&
+			((range.getEnd().getIndex().intValue() - range.getStart().getIndex().intValue()) > 1)) {
+			notInMultiLineSelection = false;
+		}
 
-        // set actions based on number of items selected
+		// set actions based on number of items selected
 		if (notInMultiLineSelection && (currentIndex < getNumComponents())) {
 
 			DataTypeComponent comp = getComponent(currentIndex);
@@ -686,10 +695,16 @@ class StructureEditorModel extends CompEditorModel {
 				if (compDt instanceof Pointer ||
 					DataTypeHelper.getBaseType(compDt) instanceof Pointer) {
 					// Don't create undefined byte pointers.
-                    return !datatype.equals(DataType.DEFAULT);
-                }
-				else return datatype.getLength() <= numAvailable;
-            }
+					if (datatype.equals(DataType.DEFAULT)) {
+						return false;
+					}
+					return true;
+				}
+				else if (datatype.getLength() <= numAvailable) {
+					return true;
+				}
+				return false;
+			}
 			return true;
 		}
 		int numComps = getNumComponents();
@@ -701,8 +716,11 @@ class StructureEditorModel extends CompEditorModel {
 		DataTypeComponent startComp = getComponent(firstIndex);
 		DataTypeComponent endComp = getComponent(lastIndex);
 		int numAvailable = endComp.getOffset() + endComp.getLength() - startComp.getOffset();
-        return datatype.getLength() <= numAvailable;
-    }
+		if (datatype.getLength() <= numAvailable) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Returns whether or not insertion of the specified component is allowed
@@ -713,8 +731,11 @@ class StructureEditorModel extends CompEditorModel {
 	 */
 	@Override
 	public boolean isInsertAllowed(int currentIndex, DataType datatype) {
-        return currentIndex <= getNumComponents();
-    }
+		if (currentIndex > getNumComponents()) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public boolean isReplaceAllowed(int rowIndex, DataType dataType) {
@@ -736,7 +757,9 @@ class StructureEditorModel extends CompEditorModel {
 				return true;
 			}
 			int maxBytes = dtc.getLength() + getNumUndefinedBytesAt(rowIndex + 1);
-            return dataType.getLength() <= maxBytes;
+			if (dataType.getLength() > maxBytes) {
+				return false;
+			}
 		}
 		return true;
 	}
@@ -1008,7 +1031,9 @@ class StructureEditorModel extends CompEditorModel {
 				Msg.showError(this, null, "Structure Editor Error", idte.getMessage());
 			}
 		}
-		else return remainingLength >= 0;
+		else if (remainingLength < 0) {
+			return false;
+		}
 
 		return true;
 	}
@@ -1170,7 +1195,7 @@ class StructureEditorModel extends CompEditorModel {
 			final String parentStructureName, final DataTypeManager applyDTM) {
 		InputDialogListener listener = dialog -> {
 			String name = dialog.getValue();
-			if ((name == null) || (name.isEmpty())) {
+			if ((name == null) || (name.length() == 0)) {
 				dialog.setStatusText("A name must be specified.");
 				return false;
 			}

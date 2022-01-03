@@ -326,7 +326,7 @@ public class FilterTextFieldTest {
 
 		boolean hasChanges() {
 
-			return runSwing(() -> !bgColorChanges.isEmpty());
+			return runSwing(() -> bgColorChanges.size() > 0);
 		}
 
 		boolean allColorsMatch(Color expected) {

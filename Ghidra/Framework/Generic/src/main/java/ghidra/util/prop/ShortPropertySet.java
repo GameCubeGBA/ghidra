@@ -29,7 +29,7 @@ import ghidra.util.exception.NotYetImplementedException;
  *
  */
 public class ShortPropertySet extends PropertySet {
-    private static final long serialVersionUID = 1;
+    private final static long serialVersionUID = 1;
 	/**
 	 * Constructor for ShortPropertySet.
 	 * @param name the name associated with this property set.

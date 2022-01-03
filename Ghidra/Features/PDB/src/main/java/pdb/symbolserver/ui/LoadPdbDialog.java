@@ -790,7 +790,7 @@ public class LoadPdbDialog extends DialogComponentProvider {
 			}
 		}
 		if (sb.length() != 0) {
-			setStatusText("<html>" + sb, mt, alert);
+			setStatusText("<html>" + sb.toString(), mt, alert);
 		}
 		else {
 			clearStatusText();

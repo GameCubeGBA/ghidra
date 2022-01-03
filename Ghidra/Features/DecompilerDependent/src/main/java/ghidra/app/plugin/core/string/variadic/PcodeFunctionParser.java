@@ -167,14 +167,14 @@ public class PcodeFunctionParser {
 			return null;
 		}
 
-		StringBuilder formatStringCandidate = new StringBuilder();
+		String formatStringCandidate = "";
 		for (int i = 0; i < stringValue.length(); i++) {
 			if (!isAsciiReadable(stringValue.charAt(i))) {
 				break;
 			}
-			formatStringCandidate.append(stringValue.charAt(i));
+			formatStringCandidate += stringValue.charAt(i);
 		}
-		return formatStringCandidate.toString();
+		return formatStringCandidate;
 	}
 
 	private boolean isAsciiReadable(char c) {

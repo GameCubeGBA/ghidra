@@ -514,8 +514,11 @@ public abstract class AbstractLibrarySupportLoader extends AbstractProgramLoader
 		if (alreadyImportedLibDF == null) {
 			alreadyImportedLibDF = domainFolder.getFile(FilenameUtils.getName(libPathFilename));
 		}
-        return alreadyImportedLibDF;
-    }
+		if (alreadyImportedLibDF != null) {
+			return alreadyImportedLibDF;
+		}
+		return null;
+	}
 
 	private static String appendPath(String... pathStrs) {
 		StringBuilder sb = new StringBuilder();

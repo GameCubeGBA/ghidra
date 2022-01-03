@@ -40,7 +40,7 @@ import ghidra.util.Msg;
  */
 public class HeadlessClientAuthenticator implements ClientAuthenticator {
 
-	private static final char[] BADPASSWORD = "".toCharArray();
+	private final static char[] BADPASSWORD = "".toCharArray();
 
 	private static Object sshPrivateKey;
 	private static String userID = ClientUtil.getUserName(); // default username

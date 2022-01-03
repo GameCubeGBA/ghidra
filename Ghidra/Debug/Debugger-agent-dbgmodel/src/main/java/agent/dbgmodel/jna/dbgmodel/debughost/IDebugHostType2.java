@@ -24,7 +24,7 @@ import com.sun.jna.ptr.PointerByReference;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IDebugHostType2 extends IDebugHostType1 {
-	IID IID_IDEBUG_HOST_TYPE2 = new IID("B28632B9-8506-4676-87CE-8F7E05E59876");
+	final IID IID_IDEBUG_HOST_TYPE2 = new IID("B28632B9-8506-4676-87CE-8F7E05E59876");
 
 	enum VTIndices2 implements VTableIndex {
 		IS_TYPEDEF, //

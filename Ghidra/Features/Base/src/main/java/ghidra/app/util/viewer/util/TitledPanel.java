@@ -88,9 +88,9 @@ public class TitledPanel extends JPanel {
 	public void addTitleComponent(JComponent comp) {
 		titleComps.add(0, comp);
 		iconPanel.removeAll();
-        for (JComponent titleComp : titleComps) {
-            iconPanel.add(titleComp);
-        }
+		for (int i = 0; i < titleComps.size(); i++) {
+			iconPanel.add(titleComps.get(i));
+		}
 	}
 
 	/**

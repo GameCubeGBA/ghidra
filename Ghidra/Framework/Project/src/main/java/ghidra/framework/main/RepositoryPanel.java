@@ -96,7 +96,7 @@ public class RepositoryPanel extends AbstractWizardJPanel {
 	public boolean isValidInformation() {
 		if (createRepButton.isSelected()) {
 			String name = nameField.getText();
-			if (name.isEmpty()) {
+			if (name.length() == 0) {
 				return false;
 			}
 			if (!NamingUtilities.isValidProjectName(name)) {
@@ -106,8 +106,11 @@ public class RepositoryPanel extends AbstractWizardJPanel {
 			//
 			return !listModel.contains(name);
 		}
-        return nameList.getSelectedValue() != null;
-    }
+		if (nameList.getSelectedValue() != null) {
+			return true;
+		}
+		return false;
+	}
 
 	/* (non-Javadoc)
 	 * @see ghidra.util.bean.wizard.WizardPanel#getHelpLocation()
@@ -226,7 +229,7 @@ public class RepositoryPanel extends AbstractWizardJPanel {
 		String msg = null;
 		if (createRepButton.isSelected()) {
 			String name = nameField.getText();
-			if (!name.isEmpty()) {
+			if (name.length() != 0) {
 				if (!NamingUtilities.isValidProjectName(name)) {
 					msg = "Invalid project repository name";
 				}

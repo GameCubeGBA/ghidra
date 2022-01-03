@@ -235,9 +235,12 @@ public class FlowArrowPlugin extends Plugin implements MarginProvider, OptionsCh
 			return false;
 		}
 
-        // below the bottom of the screen
-        return address.compareTo(screenBottom) <= 0;
-    }
+		if (address.compareTo(screenBottom) > 0) {
+			// below the bottom of the screen
+			return false;
+		}
+		return true;
+	}
 
 	boolean isOffscreen(FlowArrow arrow) {
 		if (screenBottom == null || screenTop == null) {
@@ -249,9 +252,12 @@ public class FlowArrowPlugin extends Plugin implements MarginProvider, OptionsCh
 			return true;
 		}
 
-        // start and end are below the bottom of the screen
-        return arrow.start.compareTo(screenBottom) > 0 && arrow.end.compareTo(screenBottom) > 0;
-    }
+		if (arrow.start.compareTo(screenBottom) > 0 && arrow.end.compareTo(screenBottom) > 0) {
+			// start and end are below the bottom of the screen
+			return true;
+		}
+		return false;
+	}
 
 	boolean isBelowScreen(Address address) {
 		if (screenBottom == null || screenTop == null) {

@@ -252,7 +252,7 @@ public class ScalarSearchProvider extends ComponentProviderAdapter {
 	private void createActions() {
 
 		tool.addLocalAction(this, new MakeProgramSelectionAction(plugin, scalarTable));
-		tool.addLocalAction(this, new SelectionNavigationAction(plugin, scalarTable));
+		tool.addLocalAction(this, new SelectionNavigationAction(plugin, getTable()));
 
 		GhidraTable table = threadedTablePanel.getTable();
 		tool.addLocalAction(this, new DeleteTableRowAction(table, plugin.getName()));
@@ -319,8 +319,12 @@ public class ScalarSearchProvider extends ComponentProviderAdapter {
 				return false;
 			}
 
-            return value <= maxField.getFilterValue();
-        }
+			if (value > maxField.getFilterValue()) {
+				return false;
+			}
+
+			return true;
+		}
 
 		@Override
 		public boolean isSubFilterOf(TableFilter<?> tableFilter) {

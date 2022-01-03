@@ -21,6 +21,6 @@ import ghidra.dbg.target.TargetStack;
 public interface LldbModelTargetStack
 		extends LldbModelTargetObject, TargetStack {
 
-	LldbModelTargetStackFrame getTargetFrame(SBFrame frame);
+	public LldbModelTargetStackFrame getTargetFrame(SBFrame frame);
 
 }

@@ -530,7 +530,7 @@ public class EditReferencesProvider extends ComponentProviderAdapter
 	private Data findComponent(Data data, Address addr) {
 		while (addr.compareTo(data.getMinAddress()) >= 0) {
 			long offset = addr.subtract(data.getMinAddress());
-			Data d = data.getComponentAt((int) offset);
+			Data d = data.getComponentContaining((int) offset);
 			if (d == null) {
 				break;
 			}
@@ -910,7 +910,8 @@ public class EditReferencesProvider extends ComponentProviderAdapter
 	private class CellEditComboBox extends JComboBox<RefType> {
 
 		public CellEditComboBox() {
-        }
+			super();
+		}
 
 		@Override
 		public void setSelectedIndex(int anIndex) {

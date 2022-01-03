@@ -29,9 +29,9 @@ import ghidra.program.util.ProgramSelection;
  * Select instructions, etc.)
  */
 public interface Navigatable {
-	long DEFAULT_NAVIGATABLE_ID = -1;
+	public static final long DEFAULT_NAVIGATABLE_ID = -1;
 
-	long getInstanceID();
+	public long getInstanceID();
 
 	/**
 	 * Commands this navigatable to goto (display) the given program and location
@@ -40,38 +40,38 @@ public interface Navigatable {
 	 * @param location the location in that program to display
 	 * @return true if the goto was successful
 	 */
-    boolean goTo(Program program, ProgramLocation location);
+	public boolean goTo(Program program, ProgramLocation location);
 
 	/**
 	 * Returns the current location of this Navigatable
 	 * @return the current location of this Navigatable
 	 */
-    ProgramLocation getLocation();
+	public ProgramLocation getLocation();
 
 	/**
 	 * Returns the current Program of this Navigatable
 	 * @return the current Program of this Navigatable
 	 */
-    Program getProgram();
+	public Program getProgram();
 
 	/**
 	 * Returns the view state for this navigatable
 	 * @return the view state for this navigatable
 	 */
-    LocationMemento getMemento();
+	public LocationMemento getMemento();
 
 	/** 
 	 * Sets the view state for this navigatable.  This is used later to restore the view state.
 	 * 
 	 * @param memento the state of this navigatable
 	 */
-    void setMemento(LocationMemento memento);
+	public void setMemento(LocationMemento memento);
 
 	/**
 	 * Returns an icon that represents this Navigatable
 	 * @return the icon
 	 */
-    Icon getNavigatableIcon();
+	public Icon getNavigatableIcon();
 
 	/**
 	 * Returns true if this Navigatable is "connected".  Navigatables are connected if they
@@ -79,80 +79,80 @@ public interface Navigatable {
 	 * 
 	 * @return true if this Navigatable is "connected"
 	 */
-    boolean isConnected();
+	public boolean isConnected();
 
 	/**
 	 * Currently only the 'connected' windows support markers
 	 * @return true if this navigatable supports markers
 	 */
-    boolean supportsMarkers();
+	public boolean supportsMarkers();
 
 	/**
 	 * Tells this provider to request focus.
 	 */
-    void requestFocus();
+	public void requestFocus();
 
 	/**
 	 * Returns true if this provider is visible
 	 * @return true if visible
 	 */
-    boolean isVisible();
+	public boolean isVisible();
 
 	/**
 	 * Tells this Navigatable to set its selection to the given selection
 	 * @param selection the selection to set.
 	 */
-    void setSelection(ProgramSelection selection);
+	public void setSelection(ProgramSelection selection);
 
 	/**
 	 * Tells this Navigatable to set its highlight to the given highlight
 	 * 
 	 * @param highlight the highlight to set.
 	 */
-    void setHighlight(ProgramSelection highlight);
+	public void setHighlight(ProgramSelection highlight);
 
 	/**
 	 * Returns the current selection of this Navigatable
 	 * @return the current selection of this Navigatable
 	 */
-    ProgramSelection getSelection();
+	public ProgramSelection getSelection();
 
 	/**
 	 * Returns the current highlight of this Navigatable
 	 * @return the current highlight of this Navigatable
 	 */
-    ProgramSelection getHighlight();
+	public ProgramSelection getHighlight();
 
 	/**
 	 * Returns the current text selection or null
 	 * @return the text selection
 	 */
-    String getTextSelection();
+	public String getTextSelection();
 
 	/**
 	 * Adds a listener to be notified if this Navigatable is terminated
 	 * @param listener the listener to be notified when this Navigatable is closed
 	 */
-    void addNavigatableListener(NavigatableRemovalListener listener);
+	public void addNavigatableListener(NavigatableRemovalListener listener);
 
 	/**
 	 * Removes a listener to be notified if this Navigatable is terminated.
 	 * @param listener the listener that no longer should be notified when this Navigatable is 
 	 *        closed.
 	 */
-    void removeNavigatableListener(NavigatableRemovalListener listener);
+	public void removeNavigatableListener(NavigatableRemovalListener listener);
 
 	/**
 	 * Returns true if this navigatable is no longer valid, false if it is still good
 	 * @return true if this navigatable is no longer valid, false if it is still good
 	 */
-    boolean isDisposed();
+	public boolean isDisposed();
 
 	/**
 	 * Returns true if this navigatable supports highlighting
 	 * @return true if this navigatable supports highlighting
 	 */
-    boolean supportsHighlight();
+	public boolean supportsHighlight();
 
 	/**
 	 * Set the highlight provider for the given program
@@ -160,7 +160,7 @@ public interface Navigatable {
 	 * @param highlightProvider the provider
 	 * @param program the program
 	 */
-    void setHighlightProvider(HighlightProvider highlightProvider, Program program);
+	public void setHighlightProvider(HighlightProvider highlightProvider, Program program);
 
 	/**
 	 * Removes the given highlight provider for the given program
@@ -168,5 +168,5 @@ public interface Navigatable {
 	 * @param highlightProvider the provider
 	 * @param program the program
 	 */
-    void removeHighlightProvider(HighlightProvider highlightProvider, Program program);
+	public void removeHighlightProvider(HighlightProvider highlightProvider, Program program);
 }

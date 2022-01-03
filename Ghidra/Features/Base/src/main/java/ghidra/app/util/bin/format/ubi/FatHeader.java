@@ -36,8 +36,8 @@ import ghidra.util.task.TaskMonitor;
  * @see <a href="https://opensource.apple.com/source/xnu/xnu-4570.71.2/EXTERNAL_HEADERS/mach-o/fat.h.auto.html">mach-o/fat.h</a> 
  */
 public class FatHeader {
-	public static final int FAT_MAGIC = 0xcafebabe;
-	public static final int FAT_CIGAM = 0xbebafeca;
+	public final static int FAT_MAGIC = 0xcafebabe;
+	public final static int FAT_CIGAM = 0xbebafeca;
 
     private int magic;
 	private int nfat_arch;

@@ -55,7 +55,7 @@ public class PdbDebugInfoParser {
 	public PdbDebugInfo parse(AbstractPdb pdb) throws IOException, PdbException {
 		PdbDebugInfo debugInfo;
 		try {
-			int streamNumber = DATABASE_INTERFACE_STREAM_NUMBER;
+			int streamNumber = getStreamNumber();
 			// Only reading 8-bytes - no need for monitor
 			PdbByteReader reader =
 				pdb.getReaderForStreamNumber(streamNumber, 0, 8, TaskMonitor.DUMMY);
@@ -94,7 +94,7 @@ public class PdbDebugInfoParser {
 	}
 
 	private String debugDump() {
-		return "DebugInfoParser data on stream " + DATABASE_INTERFACE_STREAM_NUMBER + ":\n" +
+		return "DebugInfoParser data on stream " + getStreamNumber() + ":\n" +
 			debugReader.dump() + "\n";
 	}
 

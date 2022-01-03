@@ -118,8 +118,8 @@ public class DecompilerParameterIdCmd extends BackgroundCommand {
 	 */
 	private boolean funcIsExternalGlue(Function func) {
 		String blockName = program.getMemory().getBlock(func.getEntryPoint()).getName();
-		return (blockName.equals(MemoryBlock.EXTERNAL_BLOCK_NAME) || ".plt".equals(blockName) ||
-			"__stub_helper".equals(blockName));
+		return (blockName.equals(MemoryBlock.EXTERNAL_BLOCK_NAME) || blockName.equals(".plt") ||
+			blockName.equals("__stub_helper"));
 	}
 
 	private void resetFunctionSourceTypes(Set<Address> set, TaskMonitor monitor)
@@ -286,7 +286,7 @@ public class DecompilerParameterIdCmd extends BackgroundCommand {
 				continue;
 			}
 			// TODO: THIS IS A HACK!
-			if ("in_FS_OFFSET".equals(sym.getName())) {
+			if (sym.getName().equals("in_FS_OFFSET")) {
 				continue;
 			}
 			if (!sym.getStorage().isRegisterStorage()) {

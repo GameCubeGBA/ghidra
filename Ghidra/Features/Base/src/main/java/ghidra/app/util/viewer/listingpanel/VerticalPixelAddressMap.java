@@ -23,56 +23,56 @@ public interface VerticalPixelAddressMap {
 	/**
 	 * Returns the Address of the first layout in this map
 	 */
-    Address getStartAddress();
+	public Address getStartAddress();
 
 	/**
 	 * Returns the index of the last layout in this map.
 	 */
-    Address getEndAddress();
+	public Address getEndAddress();
 
 	/**
 	 * Returns the number of layouts in this map.
 	 */
-    int getNumLayouts();
+	public int getNumLayouts();
 
 	/**
 	 * Returns the address of the i'th layout in this map.
 	 * @param i the index into the local array of layouts
 	 * @return the address of the i'th layout in this map.
 	 */
-    Address getLayoutAddress(int i);
+	public Address getLayoutAddress(int i);
 
 	/**
 	 * Returns the y position of the top of the i'th layout.
 	 * @param i the index of the layout.
 	 */
-    int getBeginPosition(int i);
+	public int getBeginPosition(int i);
 
 	/**
 	 * Returns the y position of the bottom of the i'th layout.
 	 * @param i the index of the layout.
 	 */
-    int getEndPosition(int i);
+	public int getEndPosition(int i);
 
 	/**
 	 * Returns pixel location to draw marker icon.
 	 * @param i the index of the layout to be marked with an icon.
 	 * @return the vertical pixel location at which to draw the icon.
 	 */
-    int getMarkPosition(int i);
+	public int getMarkPosition(int i);
 
 	/**
 	 * Determines if the given layout index contains the primary field
 	 * @param i the layout index to test.
 	 * @return true if the layout contains the primary field.
 	 */
-    boolean hasPrimaryField(int i);
+	public boolean hasPrimaryField(int i);
 
 	/**
 	 * Finds the layout containing the given point.
 	 * @param y the y coordinate of layout to be found.
 	 */
-    int findLayoutAt(int y);
+	public int findLayoutAt(int y);
 
 	/**
 	 * Returns the address of the bottom of the i'th layout.  
@@ -82,12 +82,12 @@ public interface VerticalPixelAddressMap {
 	 * @param i the index of the layout
 	 * @return the address of the bottom of the i'th layout
 	 */
-    Address getLayoutEndAddress(int i);
+	public Address getLayoutEndAddress(int i);
 
 	/**
 	 * Gets the address set of this address map.
 	 * @return the address set of this address map
 	 */
-    AddressSetView getAddressSet();
+	public AddressSetView getAddressSet();
 
 }

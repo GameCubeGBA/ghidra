@@ -217,13 +217,13 @@ class EditExternalLocationPanel extends JPanel {
 
 	private void restoreOriginalName() {
 		String originalName = extOriginalLabelTextField.getText().trim();
-		if (!originalName.isEmpty()) {
+		if (originalName.length() > 0) {
 			extLabelTextField.setText(originalName);
 		}
 	}
 
 	private void extProgNameChanged() {
-		boolean hasText = (!extLibNameComboBox.getText().trim().isEmpty());
+		boolean hasText = (extLibNameComboBox.getText().trim().length() != 0);
 		clearButton.setEnabled(hasText);
 		editButton.setEnabled(hasText);
 		extLibPathTextField.setText(null);
@@ -252,7 +252,7 @@ class EditExternalLocationPanel extends JPanel {
 			}
 			else {
 				String path = null;
-				if (!name.isEmpty()) {
+				if (name.length() != 0) {
 					name = name.trim();
 					ExternalManager externalManager = program.getExternalManager();
 					path = externalManager.getExternalLibraryPath(name);
@@ -348,7 +348,7 @@ class EditExternalLocationPanel extends JPanel {
 
 	private boolean validLibName() {
 		String extLibName = getExtLibName();
-		if (extLibName == null || extLibName.isEmpty()) {
+		if (extLibName == null || extLibName.length() == 0) {
 			showInputErr("An external library 'Name' must be specified.");
 			return false;
 		}
@@ -357,7 +357,7 @@ class EditExternalLocationPanel extends JPanel {
 
 	private boolean validLibPath() {
 		String extLibPath = getExtLibPath();
-		if (extLibPath != null && !extLibPath.isEmpty() &&
+		if (extLibPath != null && extLibPath.length() > 0 &&
 			!SystemUtilities.isEqual(autoDeterminedExternalLibraryPath, extLibPath)) {
 
 			Project project = AppInfo.getActiveProject();
@@ -375,7 +375,7 @@ class EditExternalLocationPanel extends JPanel {
 	private boolean validLocation() {
 
 		String locationName = getLocationName();
-		boolean hasLocationName = locationName != null && !locationName.isEmpty();
+		boolean hasLocationName = locationName != null && locationName.length() > 0;
 		boolean hasLocationAddress = extAddressInputWidget.hasInput();
 		if (!hasLocationName && !hasLocationAddress) {
 			showInputErr(
@@ -385,18 +385,20 @@ class EditExternalLocationPanel extends JPanel {
 		if (!validLocationName()) { // Empty is considered valid.
 			return false;
 		}
-        // Empty is considered valid.
-        return validLocationAddress();
-    }
+		if (!validLocationAddress()) { // Empty is considered valid.
+			return false;
+		}
+		return true;
+	}
 
 	private boolean validLocationName() {
 		// Will this generate a duplicate name conflict?
 		String extLibName = getExtLibName();
-		if (extLibName == null || extLibName.isEmpty()) {
+		if (extLibName == null || extLibName.length() == 0) {
 			return true; // Any name is considered valid until we have a external library for it.
 		}
 		String locationName = getLocationName();
-		if (locationName != null && !locationName.isEmpty()) {
+		if (locationName != null && locationName.length() > 0) {
 			ExternalManager externalManager = program.getExternalManager();
 			List<ExternalLocation> externalLocations =
 				externalManager.getExternalLocations(extLibName, locationName);
@@ -441,7 +443,7 @@ class EditExternalLocationPanel extends JPanel {
 		}
 
 		String name = extLibNameComboBox.getText();
-		if (name == null || name.trim().isEmpty()) {
+		if (name == null || name.trim().length() == 0) {
 			showInputErr("An external program 'Name' must be specified.");
 			return false;
 		}
@@ -458,7 +460,7 @@ class EditExternalLocationPanel extends JPanel {
 				space.getMaxAddress().toString(false));
 			return false;
 		}
-		if (addr == null && (label == null || label.isEmpty())) {
+		if (addr == null && (label == null || label.length() == 0)) {
 			showInputErr(
 				"Either (or both) an external 'Label' and/or 'Address' must be specified.");
 			return false;
@@ -587,7 +589,7 @@ class EditExternalLocationPanel extends JPanel {
 				return null;
 			}
 		}
-		if (libraryProgramPathname != null && !libraryProgramPathname.isEmpty()) {
+		if (libraryProgramPathname != null && libraryProgramPathname.length() > 0) {
 			externalManager.setExternalPath(libraryName, libraryProgramPathname, true);
 		}
 		return library;

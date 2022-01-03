@@ -61,7 +61,7 @@ public interface TargetConfigurable extends TargetObject {
 	 * @throws {@link DebuggerIllegalArgumentException} if the key is not writable, or if the value
 	 *             is not valid.
 	 */
-    CompletableFuture<Void> writeConfigurationOption(String key, Object value);
+	public CompletableFuture<Void> writeConfigurationOption(String key, Object value);
 
 	/**
 	 * Get the map of writable configuration options
@@ -72,7 +72,7 @@ public interface TargetConfigurable extends TargetObject {
 	 * 
 	 * @return a map of names to option descriptions
 	 */
-	default Map<String, ParameterDescription<?>> getConfigurableOptions() {
+	public default Map<String, ParameterDescription<?>> getConfigurableOptions() {
 		return new HashMap<>();
 	}
 }

@@ -154,12 +154,15 @@ public class DataTypePropertyManager {
 			return;
 		}
 
-		Runnable notifyRunnable = () -> {
-            ChangeEvent event = new ChangeEvent(DataTypePropertyManager.this);
-            for (ChangeListener l : changeListeners) {
-                l.stateChanged(event);
-            }
-        };
+		Runnable notifyRunnable = new Runnable() {
+			@Override
+			public void run() {
+				ChangeEvent event = new ChangeEvent(DataTypePropertyManager.this);
+				for (ChangeListener l : changeListeners) {
+					l.stateChanged(event);
+				}
+			}
+		};
 
 		SystemUtilities.runSwingNow(notifyRunnable);
 	}

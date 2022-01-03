@@ -55,7 +55,7 @@ public class DummyTargetObject implements TargetObject {
 		this.kind = kind;
 		this.value = value;
 		this.type = type;
-		this.key = !path.isEmpty() ? path.get(path.size() - 1) : "";
+		this.key = path.size() > 0 ? path.get(path.size() - 1) : "";
 		this.hash = computeHashCode();
 	}
 
@@ -67,7 +67,7 @@ public class DummyTargetObject implements TargetObject {
 		this.kind = kind;
 		this.value = value;
 		this.type = type;
-		this.key = !path.isEmpty() ? path.get(path.size() - 1) : "";
+		this.key = path.size() > 0 ? path.get(path.size() - 1) : "";
 		this.hash = computeHashCode();
 		if (objects != null) {
 			for (TargetObject obj : objects) {
@@ -85,7 +85,7 @@ public class DummyTargetObject implements TargetObject {
 		this.kind = kind;
 		this.value = value;
 		this.type = type;
-		this.key = !path.isEmpty() ? path.get(path.size() - 1) : "";
+		this.key = path.size() > 0 ? path.get(path.size() - 1) : "";
 		this.hash = computeHashCode();
 		if (!(parent instanceof DummyTargetObject)) {
 			fetchAttributes();

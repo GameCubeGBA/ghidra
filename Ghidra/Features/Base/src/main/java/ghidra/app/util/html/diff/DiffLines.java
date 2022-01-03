@@ -41,16 +41,16 @@ public class DiffLines extends ArrayList<ValidatableLine> {
 
 	void removeLeadingEmptyRows() {
 		Iterator<ValidatableLine> iterator = iterator();
-        while (iterator.hasNext()) {
-            ValidatableLine line = iterator.next();
-            if (line instanceof PlaceHolderLine) {
-                iterator.remove();
-            }
-            else {
-                return; // stop at the first real line
-            }
-        }
-    }
+		for (; iterator.hasNext();) {
+			ValidatableLine line = iterator.next();
+			if (line instanceof PlaceHolderLine) {
+				iterator.remove();
+			}
+			else {
+				return; // stop at the first real line
+			}
+		}
+	}
 
 	DiffLines createEmptyClone() {
 		return new DiffLines(input, new ArrayList<ValidatableLine>());

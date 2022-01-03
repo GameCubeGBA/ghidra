@@ -43,7 +43,8 @@ public class CliTableMethodSpec extends CliAbstractTable {
 		public int instantiationIndex;
 
 		public CliMethodSpecRow(int methodIndex, int instantiationIndex) {
-            this.methodIndex = methodIndex;
+			super();
+			this.methodIndex = methodIndex;
 			this.instantiationIndex = instantiationIndex;
 		}
 

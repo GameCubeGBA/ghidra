@@ -19,5 +19,5 @@ package ghidra.app.plugin.core.compositeeditor;
 @FunctionalInterface
 public interface StructureEditorOptionManager {
 	
-	boolean showStructureNumbersInHex();
+	public abstract boolean showStructureNumbersInHex();
 }

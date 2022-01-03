@@ -19,6 +19,6 @@ import ghidra.app.util.bin.StructConverter;
 
 public interface OatClassStatusEnum extends StructConverter {
 
-	OatClassStatusEnum get(short value);
+	public OatClassStatusEnum get(short value);
 
 }

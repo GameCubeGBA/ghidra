@@ -26,8 +26,8 @@ import ghidra.app.util.bin.format.*;
  * 
  */
 public class EntryPoint {
-	public static final byte EXPORTED = 0x01;
-	public static final byte GLOBAL   = 0x02;
+	public final static byte EXPORTED = (byte) 0x01;
+	public final static byte GLOBAL   = (byte) 0x02;
 
     private byte   flagword;
     private short  instruction; //an int 0x3f__ instruction

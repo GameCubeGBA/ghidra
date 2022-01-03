@@ -33,7 +33,8 @@ public class RepositoryManagerTest extends AbstractGhidraHeadedIntegrationTest {
 	private File root;
 
 	public RepositoryManagerTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

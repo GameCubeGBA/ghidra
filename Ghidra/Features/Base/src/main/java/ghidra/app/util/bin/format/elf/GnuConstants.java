@@ -24,12 +24,12 @@ public interface GnuConstants {
     //Versym symbol index values.
 
     /**Symbol is local.*/
-    short VER_NDX_LOCAL      =  0;
+    public final static short VER_NDX_LOCAL      =  0;
     /**Symbol is global.*/
-    short VER_NDX_GLOBAL     =  1;
+    public final static short VER_NDX_GLOBAL     =  1;
     /**Beginning of reserved entries.*/
-    short VER_NDX_LORESERVE  = (short)0xff00;
+    public final static short VER_NDX_LORESERVE  = (short)0xff00;
     /**Symbol is to be eliminated.*/
-    short VER_NDX_ELIMINATE  = (short)0xff01;
+    public final static short VER_NDX_ELIMINATE  = (short)0xff01;
 
 }

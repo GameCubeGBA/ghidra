@@ -100,20 +100,20 @@ public abstract class AbstractGroupingFunctionGraphJob extends AbstractFunctionG
 
 		PickedState<FGVertex> pickedVertexState = viewer.getPickedVertexState();
 		pickedVertexState.clear();
-		for (FGVertex vertex : newVertices) {
+		for (FGVertex vertex : getNewVertices()) {
 			pickedVertexState.pick(vertex, true);
 		}
 
 		// little extra help for GC
-		verticesToBeRemoved.clear();
-		newVertices.clear();
+		getVerticesToBeRemoved().clear();
+		getNewVertices().clear();
 	}
 
-	protected abstract void notifyGroupChange();
+	abstract protected void notifyGroupChange();
 
 	protected LayoutPositions<FGVertex, FGEdge> updateDestinationLocations() {
 		Set<FGVertex> ignore = new HashSet<>();
-		ignore.addAll(verticesToBeRemoved);
+		ignore.addAll(getVerticesToBeRemoved());
 
 		LayoutPositions<FGVertex, FGEdge> positions;
 		if (relayout) {
@@ -194,7 +194,7 @@ public abstract class AbstractGroupingFunctionGraphJob extends AbstractFunctionG
 
 		double oldComponentsAlpha = 1.0 - percentComplete;
 
-		Collection<FGVertex> vertices = verticesToBeRemoved;
+		Collection<FGVertex> vertices = getVerticesToBeRemoved();
 		for (FGVertex vertex : vertices) {
 
 			vertex.setAlpha(oldComponentsAlpha);
@@ -210,7 +210,7 @@ public abstract class AbstractGroupingFunctionGraphJob extends AbstractFunctionG
 		}
 
 		double newComponentsAlpha = percentComplete;
-		vertices = newVertices;
+		vertices = getNewVertices();
 		for (FGVertex vertex : vertices) {
 			vertex.setAlpha(newComponentsAlpha);
 
@@ -235,12 +235,12 @@ public abstract class AbstractGroupingFunctionGraphJob extends AbstractFunctionG
 //==================================================================================================	
 
 	private void removeOldVertexAndEdges() {
-		Collection<FGVertex> vertices = verticesToBeRemoved;
+		Collection<FGVertex> vertices = getVerticesToBeRemoved();
 		graph.removeVertices(vertices);
 	}
 
 	private Point2D maybeGetGroupDestinationPoint(Map<FGVertex, Point2D> locations) {
-		Set<FGVertex> toBeRemoved = verticesToBeRemoved;
+		Set<FGVertex> toBeRemoved = getVerticesToBeRemoved();
 		if (!toBeRemoved.contains(groupVertex)) {
 			return null; // we are not removing the group vertex (must be a grouping operation)
 		}
@@ -252,7 +252,7 @@ public abstract class AbstractGroupingFunctionGraphJob extends AbstractFunctionG
 		for (FGVertex vertex : vertices) {
 			if (vertex.containsAddress(vertexAddress)) {
 				// just graph any vertex--we just need somewhere for the group to merge to
-				Set<FGVertex> centerOverVertices = newVertices;
+				Set<FGVertex> centerOverVertices = getNewVertices();
 				return locations.get(centerOverVertices.iterator().next());
 			}
 		}

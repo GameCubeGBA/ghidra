@@ -31,9 +31,9 @@ import java.math.BigInteger;
  */
 public class AddressFormatModel implements ProgramDataFormatModel {
 
-	public static final String GOOD_ADDRESS = "\u278A";
-	public static final String BAD_ADDRESS = ".";
-	public static final String NON_ADDRESS = "?";
+	public final static String GOOD_ADDRESS = "\u278A";
+	public final static String BAD_ADDRESS = ".";
+	public final static String NON_ADDRESS = "?";
 
 	private int symbolSize;
 	private Listing listing;
@@ -118,6 +118,7 @@ public class AddressFormatModel implements ProgramDataFormatModel {
 	 * of an instruction or defined data, then we terminate the check.  We are
 	 * Interested in cleared bytes.
 	 * @param a address that we need to see how represent it textually.
+	 * @param string textual representation for the byte.
 	 */
 	private Address getTestAddress(Address a) {
 
@@ -154,6 +155,23 @@ public class AddressFormatModel implements ProgramDataFormatModel {
 		return null;
 	}
 
+	private boolean isUndefined(Address a) {
+
+		int length = (a.getAddressSpace().getSize()) / 4;
+		for (int i = 0; i < length; i++) {
+			if (listing.getUndefinedDataAt(a) == null) {
+				return false;
+			}
+			try {
+				a = a.addNoWrap(1);
+			}
+			catch (AddressOverflowException e) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	/**
 	 * Returns true if the formatter allows values to be changed.
 	 */
@@ -165,7 +183,7 @@ public class AddressFormatModel implements ProgramDataFormatModel {
 	 * Overwrite a value in a ByteBlock.
 	 * @param block block to change
 	 * @param index byte index into the block
-	 * @param charPosition The position within the unit where c will be the
+	 * @param pos The position within the unit where c will be the
 	 * Character.valueOf.
 	 * @param c Character.valueOf to put at pos param
 	 * @return true if the replacement is legal, false if the

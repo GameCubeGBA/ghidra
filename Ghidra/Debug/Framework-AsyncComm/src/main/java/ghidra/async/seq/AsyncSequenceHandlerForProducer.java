@@ -45,5 +45,5 @@ public interface AsyncSequenceHandlerForProducer<R, U> extends AsyncHandlerCanEx
 	 * @param exc the exception if completed exceptionally
 	 * @return null
 	 */
-    Void next(U result, Throwable exc);
+	public Void next(U result, Throwable exc);
 }

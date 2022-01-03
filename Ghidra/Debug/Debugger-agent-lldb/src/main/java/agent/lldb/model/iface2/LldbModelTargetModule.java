@@ -31,7 +31,7 @@ public interface LldbModelTargetModule extends LldbModelTargetObject, TargetModu
 	SBModule getModule();
 
 	@Override
-    default CompletableFuture<Void> init(Map<String, Object> map) {
+	public default CompletableFuture<Void> init(Map<String, Object> map) {
 		AddressSpace space = getModel().getAddressSpace("ram");
 		return requestNativeAttributes().thenAccept(attrs -> {
 			if (attrs != null) {

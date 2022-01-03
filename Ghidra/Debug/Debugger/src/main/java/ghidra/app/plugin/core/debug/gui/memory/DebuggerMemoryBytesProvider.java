@@ -67,8 +67,11 @@ public class DebuggerMemoryBytesProvider extends ProgramByteViewerComponentProvi
 		if (!Objects.equals(a.getThread(), b.getThread())) {
 			return false; // for reg/pc tracking
 		}
-        return Objects.equals(a.getFrame(), b.getFrame()); // for reg/pc tracking
-    }
+		if (!Objects.equals(a.getFrame(), b.getFrame())) {
+			return false; // for reg/pc tracking
+		}
+		return true;
+	}
 
 	protected class FollowsCurrentThreadAction extends AbstractFollowsCurrentThreadAction {
 		public FollowsCurrentThreadAction() {
@@ -253,7 +256,7 @@ public class DebuggerMemoryBytesProvider extends ProgramByteViewerComponentProvi
 	protected void createActions() {
 		initTraits();
 
-		if (!isMainViewer) {
+		if (!isMainViewer()) {
 			actionFollowsCurrentThread = new FollowsCurrentThreadAction();
 		}
 
@@ -316,7 +319,7 @@ public class DebuggerMemoryBytesProvider extends ProgramByteViewerComponentProvi
 	}
 
 	public void setFollowsCurrentThread(boolean follows) {
-		if (isMainViewer) {
+		if (isMainViewer()) {
 			throw new IllegalStateException(
 				"The main memory bytes viewer always follows the current trace and thread");
 		}
@@ -387,7 +390,7 @@ public class DebuggerMemoryBytesProvider extends ProgramByteViewerComponentProvi
 		CONFIG_STATE_HANDLER.readConfigState(this, saveState);
 		trackingTrait.readConfigState(saveState);
 
-		if (isMainViewer) {
+		if (isMainViewer()) {
 			followsCurrentThread = true;
 		}
 		else {
@@ -399,7 +402,7 @@ public class DebuggerMemoryBytesProvider extends ProgramByteViewerComponentProvi
 
 	@Override
 	protected void writeDataState(SaveState saveState) {
-		if (!isMainViewer) {
+		if (!isMainViewer()) {
 			current.writeDataState(tool, saveState, KEY_DEBUGGER_COORDINATES);
 		}
 		super.writeDataState(saveState);
@@ -407,7 +410,7 @@ public class DebuggerMemoryBytesProvider extends ProgramByteViewerComponentProvi
 
 	@Override
 	protected void readDataState(SaveState saveState) {
-		if (!isMainViewer) {
+		if (!isMainViewer()) {
 			DebuggerCoordinates coordinates =
 				DebuggerCoordinates.readDataState(tool, saveState, KEY_DEBUGGER_COORDINATES, true);
 			coordinatesActivated(coordinates);

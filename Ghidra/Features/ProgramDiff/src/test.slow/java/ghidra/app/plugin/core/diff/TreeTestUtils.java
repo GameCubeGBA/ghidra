@@ -57,22 +57,28 @@ public class TreeTestUtils {
 	 */
 	public static void selectTreeNodeByText(final JTree tree, final String text) {
 
-		AbstractGenericTest.runSwing(() -> {
-            TreePath path = findTreePathToText(tree, text);
-            if (path == null) {
-                throw new RuntimeException("tree path is null.");
-            }
-            tree.expandPath(path);
-        });
+		AbstractGenericTest.runSwing(new Runnable() {
+			@Override
+			public void run() {
+				TreePath path = findTreePathToText(tree, text);
+				if (path == null) {
+					throw new RuntimeException("tree path is null.");
+				}
+				tree.expandPath(path);
+			}
+		});
 
 		AbstractGenericTest.waitForSwing();
 
-		AbstractGenericTest.runSwing(() -> {
-            TreePath path = findTreePathToText(tree, text);
-            if (path == null) {
-                throw new RuntimeException("tree path is null.");
-            }
-            tree.getSelectionModel().setSelectionPath(path);
-        });
+		AbstractGenericTest.runSwing(new Runnable() {
+			@Override
+			public void run() {
+				TreePath path = findTreePathToText(tree, text);
+				if (path == null) {
+					throw new RuntimeException("tree path is null.");
+				}
+				tree.getSelectionModel().setSelectionPath(path);
+			}
+		});
 	}
 }

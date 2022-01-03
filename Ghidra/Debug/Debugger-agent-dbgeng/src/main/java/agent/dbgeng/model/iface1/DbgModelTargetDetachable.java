@@ -31,7 +31,7 @@ import ghidra.dbg.target.TargetDetachable;
 public interface DbgModelTargetDetachable extends DbgModelTargetObject, TargetDetachable {
 
 	@Override
-    default CompletableFuture<Void> detach() {
+	public default CompletableFuture<Void> detach() {
 		DbgProcess process = getManager().getCurrentProcess();
 		return getModel().gateFuture(process.detach());
 	}

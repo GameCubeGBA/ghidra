@@ -47,57 +47,57 @@ public interface CodeViewerService {
 	 * Add a provider that shows an overview of the program.
 	 * @param overviewProvider provider to add
 	 */
-    void addOverviewProvider(OverviewProvider overviewProvider);
+	public void addOverviewProvider(OverviewProvider overviewProvider);
 
 	/**
 	 * Remove a provider that shows an overview of the program.
 	 * @param overviewProvider provider to remove
 	 */
-    void removeOverviewProvider(OverviewProvider overviewProvider);
+	public void removeOverviewProvider(OverviewProvider overviewProvider);
 
 	/**
 	 * Add a provider that shows markers in a program for the portion 
 	 * that is visible.
 	 * @param marginProvider provider to add
 	 */
-    void addMarginProvider(MarginProvider marginProvider);
+	public void addMarginProvider(MarginProvider marginProvider);
 
 	/**
 	 * Remove a provider that shows markers in a program for the portion 
 	 * that is visible.
 	 * @param marginProvider provider to remove
 	 */
-    void removeMarginProvider(MarginProvider marginProvider);
+	public void removeMarginProvider(MarginProvider marginProvider);
 
 	/**
 	 * Add an action that is local to the Code Viewer.
 	 * @param action local action to add
 	 */
-    void addLocalAction(DockingAction action);
+	public void addLocalAction(DockingAction action);
 
 	/**
 	 * Remove the local action from the Code Viewer.
 	 * @param action local action to remove
 	 */
-    void removeLocalAction(DockingAction action);
+	public void removeLocalAction(DockingAction action);
 
 	/**
 	 * Add a provider that will be notified for drag and drop actions.
 	 * @param provider for drag and drop
 	 */
-    void addProgramDropProvider(ProgramDropProvider provider);
+	public void addProgramDropProvider(ProgramDropProvider provider);
 
 	/**
 	 * Add a listener that is notified when a mouse button is pressed.
 	 * @param listener
 	 */
-    void addButtonPressedListener(ButtonPressedListener listener);
+	public void addButtonPressedListener(ButtonPressedListener listener);
 
 	/**
 	 * Remove the button pressed listener.
 	 * @param listener
 	 */
-    void removeButtonPressedListener(ButtonPressedListener listener);
+	public void removeButtonPressedListener(ButtonPressedListener listener);
 
 	/**
 	 * Set the highlight  provider. The existing provider is replaced
@@ -105,36 +105,36 @@ public interface CodeViewerService {
 	 * @param provider The provider to set.
 	 * @param program The program with which to associate the given provider.
 	 */
-    void setHighlightProvider(HighlightProvider provider, Program program);
+	public void setHighlightProvider(HighlightProvider provider, Program program);
 
 	/**
 	 * Remove the highlight provider.
 	 * @param provider the provider to remove.
 	 * @param program the program associated with the given provider.
 	 */
-    void removeHighlightProvider(HighlightProvider provider, Program program);
+	public void removeHighlightProvider(HighlightProvider provider, Program program);
 
 	/**
 	 * Set a listing panel on the code viewer.
 	 * @param listingPanel the panel to add.
 	 */
-    void setListingPanel(ListingPanel listingPanel);
+	public void setListingPanel(ListingPanel listingPanel);
 
 	/**
 	 * Set the {@link CoordinatedListingPanelListener} for this listing.
 	 * @param listener the listener to add.
 	 */
-    void setCoordinatedListingPanelListener(CoordinatedListingPanelListener listener);
+	public void setCoordinatedListingPanelListener(CoordinatedListingPanelListener listener);
 
 	/**
 	 * Remove the given listing panel from the code viewer.
 	 */
-    void removeListingPanel(ListingPanel listingPanel);
+	public void removeListingPanel(ListingPanel listingPanel);
 
 	/**
 	 * Get Current view that the CodeViewer is showing. 
 	 */
-    AddressSetView getView();
+	public AddressSetView getView();
 
 	/**
 	 * Commands the code viewer to position the cursor at the given location.
@@ -143,48 +143,48 @@ public interface CodeViewerService {
 	 * window
 	 * @return true if the location exists.
 	 */
-    boolean goTo(ProgramLocation loc, boolean centerOnScreen);
+	public boolean goTo(ProgramLocation loc, boolean centerOnScreen);
 
 	/**
 	 * Return the fieldPanel.
 	 */
-    FieldPanel getFieldPanel();
+	public FieldPanel getFieldPanel();
 
 	/**
 	 * Returns the current address-index-map
 	 */
-    AddressIndexMap getAddressIndexMap();
+	public AddressIndexMap getAddressIndexMap();
 
-	FormatManager getFormatManager();
+	public FormatManager getFormatManager();
 
 	/**
 	 * Place a component in the North area of the CodeViewer.
 	 * @param comp component to place in the North area of the CodeViewer
 	 */
-    void setNorthComponent(JComponent comp);
+	public void setNorthComponent(JComponent comp);
 
 	/**
 	 * tells the browser to rebuild the display.
 	 */
-    void updateDisplay();
+	public void updateDisplay();
 
 	/**
 	 * Gets the current ListingLayoutModel;
 	 * @return the current ListingLayoutModel;
 	 */
-    ListingModel getListingModel();
+	public ListingModel getListingModel();
 
 	/**
 	 * Gets the navigatable for the code viewer service.
 	 * @return the navigatable for the code viewer service.
 	 */
-    Navigatable getNavigatable();
+	public Navigatable getNavigatable();
 
 	/**
 	 * Get the main Listing panel for the code viewer service.
 	 * @return the listing panel.
 	 */
-    ListingPanel getListingPanel();
+	public ListingPanel getListingPanel();
 
 	/**
 	 * Returns a String representing the current character-based selection of the currently 
@@ -195,35 +195,35 @@ public interface CodeViewerService {
 	 * 
 	 * @return the currently selected text <b>within a given field</b>
 	 */
-    String getCurrentFieldTextSelection();
+	public String getCurrentFieldTextSelection();
 
 	/**
 	 * Returns the current field under the cursor.
 	 * @return the current field under the cursor.
 	 */
-    Field getCurrentField();
+	public Field getCurrentField();
 
 	/**
 	 * Returns the current cursor location.
 	 * @return the current cursor location.
 	 */
-    ProgramLocation getCurrentLocation();
+	public ProgramLocation getCurrentLocation();
 
 	/**
 	 * Returns the current program selection (which crosses multiple fields).
 	 * @return the current program selection.
 	 */
-    ProgramSelection getCurrentSelection();
+	public ProgramSelection getCurrentSelection();
 
 	/**
 	 * Adds a listener to be notified when the set of visible addresses change.
 	 * @param listener the listener to be notified;
 	 */
-    void addListingDisplayListener(AddressSetDisplayListener listener);
+	public void addListingDisplayListener(AddressSetDisplayListener listener);
 
 	/**
 	 * Removes listener from being notified when the set of visible addresses change.
 	 * @param listener the listener to be notified;
 	 */
-    void removeListingDisplayListener(AddressSetDisplayListener listener);
+	public void removeListingDisplayListener(AddressSetDisplayListener listener);
 }

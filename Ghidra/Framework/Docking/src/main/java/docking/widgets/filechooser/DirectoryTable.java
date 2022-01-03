@@ -77,8 +77,11 @@ class DirectoryTable extends GTable implements GhidraFileChooserDirectoryModelIf
 
 			@Override
 			public boolean shouldConsume(MouseEvent e) {
-                return e.isPopupTrigger() && isEditing();
-            }
+				if (e.isPopupTrigger() && isEditing()) {
+					return true;
+				}
+				return false;
+			}
 
 			@Override
 			public void popupTriggered(MouseEvent e) {
@@ -178,7 +181,7 @@ class DirectoryTable extends GTable implements GhidraFileChooserDirectoryModelIf
 			selectedFiles.add(model.getFile(i));
 		}
 
-		if (selectedFiles.isEmpty() || selectedFiles.size() > 1) {
+		if (selectedFiles.size() == 0 || selectedFiles.size() > 1) {
 			return; // not sure if this can happen, maybe with the Ctrl key pressed
 		}
 

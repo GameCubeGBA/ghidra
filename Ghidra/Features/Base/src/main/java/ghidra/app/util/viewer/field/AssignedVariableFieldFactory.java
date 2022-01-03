@@ -104,7 +104,7 @@ public class AssignedVariableFieldFactory extends FieldFactory {
 				}
 			}
 		}
-		if (elemenetList.isEmpty()) {
+		if (elemenetList.size() == 0) {
 			return null;
 		}
 

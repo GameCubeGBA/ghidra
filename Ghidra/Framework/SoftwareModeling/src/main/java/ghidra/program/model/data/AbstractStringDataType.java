@@ -36,7 +36,7 @@ import ghidra.program.model.mem.MemBuffer;
  * <p>
  *
  */
-public abstract class AbstractStringDataType extends BuiltIn
+abstract public class AbstractStringDataType extends BuiltIn
 		implements Dynamic, DataTypeWithCharset {
 	public static final SettingsDefinition[] COMMON_STRING_SETTINGS_DEFS = { TRANSLATION, RENDER };
 	public static final SettingsDefinition[] COMMON_WITH_CHARSET_STRING_SETTINGS_DEFS =

@@ -17,20 +17,20 @@ package ghidra.file.formats.yaffs2;
 
 public class YAFFS2Constants {
 
-	public static final int MAGIC_SIZE = 11;
+	public final static int MAGIC_SIZE = 11;
 
-	public static final int FILE_NAME_SIZE = 256;
+	public final static int FILE_NAME_SIZE = 256;
 
-	public static final int ALIAS_FILE_NAME_SIZE = 160;
+	public final static int ALIAS_FILE_NAME_SIZE = 160;
 
-	public static final int RECORD_SIZE = 2112;
+	public final static int RECORD_SIZE = 2112;
 
-	public static final int HEADER_SIZE = 512;
+	public final static int HEADER_SIZE = 512;
 
-	public static final int EXTENDED_TAGS_SIZE = 64;
+	public final static int EXTENDED_TAGS_SIZE = 64;
 
-	public static final int DATA_BUFFER_SIZE = 2048;
+	public final static int DATA_BUFFER_SIZE = 2048;
 
-	public static final int EMPTY_DATA_SIZE = 1536;
+	public final static int EMPTY_DATA_SIZE = 1536;
 
 }

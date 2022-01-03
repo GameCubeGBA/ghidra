@@ -402,7 +402,7 @@ public class VariableUtilities {
 			return curStorage;
 		}
 		if (curSize == 0 || curStorage.isUniqueStorage() || curStorage.isHashStorage()) {
-			throw new InvalidInputException("Storage can't be resized: " + curStorage);
+			throw new InvalidInputException("Storage can't be resized: " + curStorage.toString());
 		}
 
 		if (dataType instanceof TypeDef) {

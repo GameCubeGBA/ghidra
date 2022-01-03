@@ -66,7 +66,8 @@ public class SearchTextPlugin3Test extends AbstractGhidraHeadedIntegrationTest {
 	private GoToService goToService;
 
 	public SearchTextPlugin3Test() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -395,12 +396,13 @@ public class SearchTextPlugin3Test extends AbstractGhidraHeadedIntegrationTest {
 
 		Collections.sort(list);
 		Collections.reverse(list);
-        for (Address addr : list) {
-            pressSearchButton(dialog, searchButton);
-            ProgramLocation loc = cbPlugin.getCurrentLocation();
-            assertEquals(addr, loc.getAddress());
-            assertTrue(loc instanceof OperandFieldLocation);
-        }
+		for (int i = 0; i < list.size(); i++) {
+			Address addr = list.get(i);
+			pressSearchButton(dialog, searchButton);
+			ProgramLocation loc = cbPlugin.getCurrentLocation();
+			assertEquals(addr, loc.getAddress());
+			assertTrue(loc instanceof OperandFieldLocation);
+		}
 	}
 
 	private void addField(FieldFormatModel model, String fieldName, int column) {
@@ -643,7 +645,7 @@ public class SearchTextPlugin3Test extends AbstractGhidraHeadedIntegrationTest {
 
 		String text = runSwing(() -> dialog.getStatusText());
 		assertTrue("expected:<Search cancelled> or <operation canceled> but was:<" + text + ">",
-			text != null && ("Search cancelled".equals(text) || "operation canceled".equals(text)));
+			text != null && (text.equals("Search cancelled") || text.equals("operation canceled")));
 	}
 
 	private void selectRadioButton(Container container, String buttonText) throws Exception {

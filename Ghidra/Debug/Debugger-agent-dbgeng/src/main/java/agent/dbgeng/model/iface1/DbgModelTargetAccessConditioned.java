@@ -29,8 +29,8 @@ public interface DbgModelTargetAccessConditioned
 		extends DbgModelTargetObject, TargetAccessConditioned {
 
 	@Override
-    boolean isAccessible();
+	public boolean isAccessible();
 
-	void setAccessible(boolean accessible);
+	public void setAccessible(boolean accessible);
 
 }

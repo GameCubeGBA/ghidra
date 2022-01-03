@@ -49,9 +49,14 @@ public class DIEAMonitoredIterator {
 	 */
 	public static Iterable<DIEAggregate> iterable(DWARFProgram prog, String monitorMessage,
 			TaskMonitor monitor) {
-		return () -> prog.getImportOptions().isPreloadAllDIEs()
-                ? new SimpleDIEAMonitoredIterator(prog, monitorMessage, monitor)
-                : new PagedDIEAMonitoredIterator(prog, monitorMessage, monitor);
+		return new Iterable<DIEAggregate>() {
+			@Override
+			public Iterator<DIEAggregate> iterator() {
+				return prog.getImportOptions().isPreloadAllDIEs()
+						? new SimpleDIEAMonitoredIterator(prog, monitorMessage, monitor)
+						: new PagedDIEAMonitoredIterator(prog, monitorMessage, monitor);
+			}
+		};
 	}
 
 	/**

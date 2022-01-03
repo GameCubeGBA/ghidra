@@ -224,9 +224,12 @@ public class OpenCloseField implements ListingField {
 
 	@Override
 	public boolean contains(int x, int y) {
-        return (x >= startX) && (x < startX + fieldWidth) && (y >= startY) &&
-                (y < startY + heightAbove + heightBelow);
-    }
+		if ((x < startX) || (x >= startX + fieldWidth) || (y < startY) ||
+			(y >= startY + heightAbove + heightBelow)) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public int getNumDataRows() {

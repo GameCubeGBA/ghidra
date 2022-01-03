@@ -44,15 +44,15 @@ import ghidra.util.Msg;
 import ghidra.util.exception.DuplicateNameException;
 
 class WorkspacePanel extends JPanel implements WorkspaceChangeListener {
-	private static final long serialVersionUID = 1L;
-	private static final String RUNNING_TOOLS_TITLE = "Running Tools";
-	private static final Border ACTIVE_WORKSPACE_BORDER =
+	private final static long serialVersionUID = 1L;
+	private final static String RUNNING_TOOLS_TITLE = "Running Tools";
+	private final static Border ACTIVE_WORKSPACE_BORDER =
 		BorderFactory.createTitledBorder(RUNNING_TOOLS_TITLE);
-	private static final String NO_ACTIVE_WORKSPACE = "INACTIVE";
-	private static final Border INACTIVE_BORDER =
+	private final static String NO_ACTIVE_WORKSPACE = "INACTIVE";
+	private final static Border INACTIVE_BORDER =
 		BorderFactory.createTitledBorder(RUNNING_TOOLS_TITLE + ": " + NO_ACTIVE_WORKSPACE);
 
-	static final int TYPICAL_NUM_RUNNING_TOOLS = 3;
+	final static int TYPICAL_NUM_RUNNING_TOOLS = 3;
 
 	private JComboBox<String> workspaceChooser;
 	private DefaultComboBoxModel<String> workspaceModel;
@@ -361,7 +361,7 @@ class WorkspacePanel extends JPanel implements WorkspaceChangeListener {
 			if (newName.equals(workspaceName)) {
 				return;
 			}
-			if (!newName.isEmpty()) {
+			if (newName.length() > 0) {
 
 				try {
 					activeWorkspace.setName(newName);

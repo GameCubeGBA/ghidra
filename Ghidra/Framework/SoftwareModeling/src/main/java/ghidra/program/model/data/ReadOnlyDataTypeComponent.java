@@ -115,7 +115,7 @@ public class ReadOnlyDataTypeComponent implements DataTypeComponent, Serializabl
 
 	@Override
 	public String getDefaultFieldName() {
-		return "field_" + ordinal;
+		return "field_" + getOrdinal();
 	}
 
 	@Override
@@ -177,7 +177,7 @@ public class ReadOnlyDataTypeComponent implements DataTypeComponent, Serializabl
 
 	@Override
 	public boolean isEquivalent(DataTypeComponent dtc) {
-		DataType myDt = dataType;
+		DataType myDt = getDataType();
 		DataType otherDt = dtc.getDataType();
 		int otherLength = dtc.getLength();
 		DataType myParent = getParent();
@@ -188,7 +188,7 @@ public class ReadOnlyDataTypeComponent implements DataTypeComponent, Serializabl
 			// Components don't need to have matching length when they are aligned. Is this correct?
 			(!aligned && (length != otherLength)) || ordinal != dtc.getOrdinal() ||
 			!isSameString(getFieldName(), dtc.getFieldName()) ||
-			!isSameString(comment, dtc.getComment())) {
+			!isSameString(getComment(), dtc.getComment())) {
 
 			return false;
 		}

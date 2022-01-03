@@ -43,23 +43,23 @@ class MemoryMapDBAdapterV0 extends MemoryMapDBAdapter {
 
 	static final String V0_TABLE_NAME = "Memory Block";
 
-	private static final int VERSION = 0;
+	private final static int VERSION = 0;
 
-	protected static final int V0_NAME_COL = 0;
-	protected static final int V0_BUFFER_ID_COL = 1;
-	protected static final int V0_COMMENTS_COL = 2;
-	protected static final int V0_DESCRIPTION_COL = 3;
-	protected static final int V0_SOURCE_NAME_COL = 4;
-	protected static final int V0_SOURCE_OFFSET_COL = 5;
-	protected static final int V0_IS_READ_COL = 6;
-	protected static final int V0_IS_WRITE_COL = 7;
-	protected static final int V0_IS_EXECUTE_COL = 8;
-	protected static final int V0_START_ADDR_COL = 9;
-	protected static final int V0_LENGTH_COL = 10;
-	protected static final int V0_TYPE_COL = 11;
-	protected static final int V0_BASE_ADDR_COL = 12;
-	protected static final int V0_SOURCE_BLOCK_ID_COL = 13;
-	protected static final int V0_SEGMENT_COL = 14;	// added in version 1
+	protected final static int V0_NAME_COL = 0;
+	protected final static int V0_BUFFER_ID_COL = 1;
+	protected final static int V0_COMMENTS_COL = 2;
+	protected final static int V0_DESCRIPTION_COL = 3;
+	protected final static int V0_SOURCE_NAME_COL = 4;
+	protected final static int V0_SOURCE_OFFSET_COL = 5;
+	protected final static int V0_IS_READ_COL = 6;
+	protected final static int V0_IS_WRITE_COL = 7;
+	protected final static int V0_IS_EXECUTE_COL = 8;
+	protected final static int V0_START_ADDR_COL = 9;
+	protected final static int V0_LENGTH_COL = 10;
+	protected final static int V0_TYPE_COL = 11;
+	protected final static int V0_BASE_ADDR_COL = 12;
+	protected final static int V0_SOURCE_BLOCK_ID_COL = 13;
+	protected final static int V0_SEGMENT_COL = 14;	// added in version 1
 
 //	private Schema SCHEMA = new Schema(0, "Key", 
 //			new Class[] {StringField.class, 

@@ -31,6 +31,7 @@ package ghidra.program.model.pcode;
 public class BlockProperIf extends BlockGraph {
 
 	public BlockProperIf() {
-        blocktype = PcodeBlock.PROPERIF;
+		super();
+		blocktype = PcodeBlock.PROPERIF;
 	}
 }

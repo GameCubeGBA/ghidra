@@ -23,7 +23,8 @@ public class DbgCommandDoneEvent extends AbstractDbgCompletedCommandEvent {
 	private DbgCommand<?> cmd;
 
 	public DbgCommandDoneEvent() {
-    }
+		super();
+	}
 
 	public DbgCommandDoneEvent(DbgCommand<?> cmd) {
 		super(cmd.toString());

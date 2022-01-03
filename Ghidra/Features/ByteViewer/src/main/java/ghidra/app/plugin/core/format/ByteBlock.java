@@ -24,23 +24,23 @@ public interface ByteBlock {
 	 * @param index byte index into this block
 	 * @throws IndexOutOfBoundsException if the given index is not in this
 	 */
-    String getLocationRepresentation(BigInteger index);
+	public String getLocationRepresentation(BigInteger index);
 
 	/**
 	 * Returns the number of characters of the largest index representation.
 	 */
-    int getMaxLocationRepresentationSize();
+	public int getMaxLocationRepresentationSize();
 
 	/**
 	 * Return the name to be used for describing the indexes into the
 	 * byte block.
 	 */
-    String getIndexName();
+	public String getIndexName();
 
 	/**
 	 * Get the number of bytes in this block.
 	 */
-    BigInteger getLength();
+	public BigInteger getLength();
 
 	/**
 	 * Get the byte at the given index.
@@ -49,7 +49,7 @@ public interface ByteBlock {
 	 * @throws IndexOutOfBoundsException if the given index is not in this
 	 * block.
 	 */
-    byte getByte(BigInteger index) throws ByteBlockAccessException;
+	public byte getByte(BigInteger index) throws ByteBlockAccessException;
 
 	/**
 	 * Returns true if this ByteBlock has byte values at the specified index.
@@ -57,7 +57,7 @@ public interface ByteBlock {
 	 * @param index byte index
 	 * @return boolean true if has initialized values, false if no values.
 	 */
-    default boolean hasValue(BigInteger index) {
+	default public boolean hasValue(BigInteger index) {
 		return true;
 	}
 
@@ -68,7 +68,7 @@ public interface ByteBlock {
 	 * @throws IndexOutOfBoundsException if the given index is not in this
 	 * block.
 	 */
-    int getInt(BigInteger index) throws ByteBlockAccessException;
+	public int getInt(BigInteger index) throws ByteBlockAccessException;
 
 	/**
 	 * Get the long at the given index.
@@ -77,7 +77,7 @@ public interface ByteBlock {
 	 * @throws IndexOutOfBoundsException if the given index is not in this
 	 * block.
 	 */
-    long getLong(BigInteger index) throws ByteBlockAccessException;
+	public long getLong(BigInteger index) throws ByteBlockAccessException;
 
 	/**
 	 * Set the byte at the given index.
@@ -87,7 +87,7 @@ public interface ByteBlock {
 	 * @throws IndexOutOfBoundsException if the given index is not in this
 	 * block.
 	 */
-    void setByte(BigInteger index, byte value) throws ByteBlockAccessException;
+	public void setByte(BigInteger index, byte value) throws ByteBlockAccessException;
 
 	/**
 	 * Set the int at the given index.
@@ -97,7 +97,7 @@ public interface ByteBlock {
 	 * @throws IndexOutOfBoundsException if the given index is not in this
 	 * block.
 	 */
-    void setInt(BigInteger index, int value) throws ByteBlockAccessException;
+	public void setInt(BigInteger index, int value) throws ByteBlockAccessException;
 
 	/**
 	 * Set the long at the given index.
@@ -107,24 +107,24 @@ public interface ByteBlock {
 	 * @throws IndexOutOfBoundsException if the given index is not in this
 	 * block.
 	 */
-    void setLong(BigInteger index, long value) throws ByteBlockAccessException;
+	public void setLong(BigInteger index, long value) throws ByteBlockAccessException;
 
 	/**
 	 * Return true if this block can be modified.
 	 */
-    boolean isEditable();
+	public boolean isEditable();
 
 	/**
 	 * Set the block according to the bigEndian parameter.
 	 * @param bigEndian true means big endian; false means little endian
 	 */
-    void setBigEndian(boolean bigEndian);
+	public void setBigEndian(boolean bigEndian);
 
 	/**
 	 * Return true if the block is big endian.
 	 * @return false if the block is little endian
 	 */
-    boolean isBigEndian();
+	public boolean isBigEndian();
 
 	/**
 	 * Returns the natural alignment (offset) for the given radix.  If there is
@@ -134,5 +134,5 @@ public interface ByteBlock {
 	 * then the natural alignment is the address offset mod the radix (if the starting
 	 * address is 10 and the radix is 4, then then the alignment is 2)).
 	 */
-    int getAlignment(int radix);
+	public int getAlignment(int radix);
 }

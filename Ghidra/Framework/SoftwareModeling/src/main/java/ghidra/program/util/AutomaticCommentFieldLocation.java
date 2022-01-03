@@ -50,7 +50,8 @@ public class AutomaticCommentFieldLocation extends CommentFieldLocation {
 	 * an end-of-line field location from XML.
 	 */
 	public AutomaticCommentFieldLocation() {
-    }
+		super();
+	}
 
 	public int getCurrentCommentRow() {
 		return currentCommentRow;
@@ -70,8 +71,10 @@ public class AutomaticCommentFieldLocation extends CommentFieldLocation {
 		if (!super.equals(obj) || (getClass() != obj.getClass()))
 			return false;
 		AutomaticCommentFieldLocation other = (AutomaticCommentFieldLocation) obj;
-        return currentCommentRow == other.currentCommentRow;
-    }
+		if (currentCommentRow != other.currentCommentRow)
+			return false;
+		return true;
+	}
 
 	@Override
 	public void saveState(SaveState obj) {

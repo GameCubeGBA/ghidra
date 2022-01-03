@@ -330,7 +330,7 @@ public class AutoAnalysisPlugin extends Plugin implements AutoAnalysisManagerLis
 			String shortMessage = "There were warnings/errors issued during analysis.";
 			String detailedMessage =
 				"(These messages are also written to the application log file)\n\n" +
-                        log;
+					log.toString();
 			MultiLineMessageDialog dialog = new MultiLineMessageDialog("Auto Analysis Summary",
 				shortMessage, detailedMessage, MultiLineMessageDialog.WARNING_MESSAGE, false);//modal?
 			DockingWindowManager.showDialog(null, dialog);

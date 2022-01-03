@@ -34,7 +34,7 @@ public class ClipboardPatternFactory implements PatternFactory {
 
 	@Override
 	public MatchAction getMatchActionByName(String nm) {
-		if ("setcontext".equals(nm)) {
+		if (nm.equals("setcontext")) {
 			FunctionStartAnalyzer funcAnalyzer = new FunctionStartAnalyzer();
 			return funcAnalyzer.new ContextAction();
 		}
@@ -43,7 +43,7 @@ public class ClipboardPatternFactory implements PatternFactory {
 
 	@Override
 	public PostRule getPostRuleByName(String nm) {
-		if ("align".equals(nm)) {
+		if (nm.equals("align")) {
 			return new AlignRule();
 		}
 		return null;

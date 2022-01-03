@@ -23,33 +23,33 @@ import java.lang.reflect.Field;
 public final class MethodHandleBytecodeBehaviors {
 
 	/** getfield C.f:T */
-    public static final int REF_getField = 1;
+	public final static int REF_getField = 1;
 
 	/** getstatic C.f:T */
-    public static final int REF_getStatic = 2;
+	public final static int REF_getStatic = 2;
 
 	/** putfield C.f:T */
-    public static final int REF_putField = 3;
+	public final static int REF_putField = 3;
 
 	/** putstatic C.f:T */
-    public static final int REF_putStatic = 4;
+	public final static int REF_putStatic = 4;
 
 	/** invokevirtual C.m:(A*)T */
-    public static final int REF_invokeVirtual = 5;
+	public final static int REF_invokeVirtual = 5;
 
 	/** invokestatic C.m:(A*)T */
-    public static final int REF_invokeStatic = 6;
+	public final static int REF_invokeStatic = 6;
 
 	/** invokespecial C.m:(A*)T */
-    public static final int REF_invokeSpecial = 7;
+	public final static int REF_invokeSpecial = 7;
 
 	/** new C; dup; invokespecial C.<init>:(A*)void */
-    public static final int REF_newInvokeSpecial = 8;
+	public final static int REF_newInvokeSpecial = 8;
 
 	/** invokeinterface C.m:(A*)T */
-    public static final int REF_invokeInterface = 9;
+	public final static int REF_invokeInterface = 9;
 
-	public static final String getName(int kind ) {
+	public final static String getName( int kind ) {
 		Field [] fields = MethodHandleBytecodeBehaviors.class.getDeclaredFields( );
 		for (Field field : fields) {
 			if (field.getName( ).startsWith( "REF_" )) {

@@ -27,7 +27,8 @@ public class BitTreeTest extends AbstractGenericTest {
 	 * @param arg0
 	 */
 	public BitTreeTest() {
-    }
+		super();
+	}
 	
     /**
      * regression test driver

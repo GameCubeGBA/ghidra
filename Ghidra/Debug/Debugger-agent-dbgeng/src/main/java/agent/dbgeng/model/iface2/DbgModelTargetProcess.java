@@ -43,17 +43,17 @@ public interface DbgModelTargetProcess extends //
 		DbgEventsListenerAdapter, //
 		DbgModelSelectableObject {
 
-	void processStarted(Long pid);
+	public void processStarted(Long pid);
 
-	DbgModelTargetThreadContainer getThreads();
+	public DbgModelTargetThreadContainer getThreads();
 
-	DbgModelTargetModuleContainer getModules();
+	public DbgModelTargetModuleContainer getModules();
 
-	DbgModelTargetMemoryContainer getMemory();
+	public DbgModelTargetMemoryContainer getMemory();
 
-	void threadStateChangedSpecific(DbgThread thread, DbgState state);
+	public void threadStateChangedSpecific(DbgThread thread, DbgState state);
 
-	default DbgProcess getProcess() {
+	public default DbgProcess getProcess() {
 		DbgManagerImpl manager = getManager();
 		DebugSystemObjects so = manager.getSystemObjects();
 		try {
@@ -71,7 +71,7 @@ public interface DbgModelTargetProcess extends //
 	}
 
 	@Override
-    default CompletableFuture<Void> setActive() {
+	public default CompletableFuture<Void> setActive() {
 		DbgManagerImpl manager = getManager();
 		DbgProcess process = getProcess();
 		if (process == null) {

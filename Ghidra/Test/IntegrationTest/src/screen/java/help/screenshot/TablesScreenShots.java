@@ -31,7 +31,8 @@ import ghidra.program.model.address.Address;
 public class TablesScreenShots extends GhidraScreenShotGenerator {
 
 	public TablesScreenShots() {
-    }
+		super();
+	}
 
 @Test
 	public void testBytesSettingsDialog() throws Exception {
@@ -72,16 +73,24 @@ public class TablesScreenShots extends GhidraScreenShotGenerator {
 	}
 
 	private void setSort(final ThreadedTableModel<?, ?> model, final TableSortState sortState) {
-		runSwing((Runnable) () -> model.setTableSortState(sortState));
+		runSwing(new Runnable() {
+			@Override
+			public void run() {
+				model.setTableSortState(sortState);
+			}
+		});
 	}
 
 	private void showColumnAddRemove(final GTable table) {
-		runSwing((Runnable) () -> {
-            TableColumnModel model = table.getColumnModel();
-            SelectColumnsDialog dialog =
-                new SelectColumnsDialog((GTableColumnModel) model, table.getModel());
-            tool.showDialog(dialog);
-        }, false);
+		runSwing(new Runnable() {
+			@Override
+			public void run() {
+				TableColumnModel model = table.getColumnModel();
+				SelectColumnsDialog dialog =
+					new SelectColumnsDialog((GTableColumnModel) model, table.getModel());
+				tool.showDialog(dialog);
+			}
+		}, false);
 		waitForSwing();
 	}
 }

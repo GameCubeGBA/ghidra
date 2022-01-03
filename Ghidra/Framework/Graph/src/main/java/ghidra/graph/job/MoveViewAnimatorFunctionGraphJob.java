@@ -77,7 +77,7 @@ public abstract class MoveViewAnimatorFunctionGraphJob<V, E>
 		mostFrames = Math.min(mostFrames, 15); // limit the time to something reasonable
 		totalFrames = Math.max(1, mostFrames); // at least one frame
 
-		double timeInSeconds = (double) totalFrames / FRAME_PER_SECOND;
+		double timeInSeconds = (double) totalFrames / (double) FRAME_PER_SECOND;
 		int duration = (int) Math.round(timeInSeconds * 1000); // put into millis
 		
 		Point2D start = new Point2D.Double();

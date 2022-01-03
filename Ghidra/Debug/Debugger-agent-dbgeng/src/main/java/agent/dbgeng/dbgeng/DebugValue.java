@@ -33,11 +33,11 @@ import ghidra.util.NumericUtilities;
 public interface DebugValue {
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.TYPE)
-    @interface ForDebugValueType {
+	public static @interface ForDebugValueType {
 		DebugValueType value();
 	}
 
-	enum DebugValueType {
+	public static enum DebugValueType {
 		INVALID(0), //
 		INT8(Byte.SIZE), //
 		INT16(Short.SIZE), //
@@ -107,7 +107,7 @@ public interface DebugValue {
 	}
 
 	@ForDebugValueType(DebugValueType.INT8)
-    class DebugInt8Value implements DebugValue {
+	public static class DebugInt8Value implements DebugValue {
 		private final byte value;
 
 		public DebugInt8Value(byte value) {
@@ -137,7 +137,7 @@ public interface DebugValue {
 	}
 
 	@ForDebugValueType(DebugValueType.INT16)
-    class DebugInt16Value implements DebugValue {
+	public static class DebugInt16Value implements DebugValue {
 		private final short value;
 
 		public DebugInt16Value(short value) {
@@ -170,7 +170,7 @@ public interface DebugValue {
 	}
 
 	@ForDebugValueType(DebugValueType.INT32)
-    class DebugInt32Value implements DebugValue {
+	public static class DebugInt32Value implements DebugValue {
 		private final int value;
 
 		public DebugInt32Value(int value) {
@@ -203,7 +203,7 @@ public interface DebugValue {
 	}
 
 	@ForDebugValueType(DebugValueType.INT64)
-    class DebugInt64Value implements DebugValue {
+	public static class DebugInt64Value implements DebugValue {
 		private final long value;
 
 		public DebugInt64Value(long value) {
@@ -236,7 +236,7 @@ public interface DebugValue {
 	}
 
 	@ForDebugValueType(DebugValueType.FLOAT32)
-    class DebugFloat32Value implements DebugValue {
+	public static class DebugFloat32Value implements DebugValue {
 		private final float value;
 
 		public DebugFloat32Value(float value) {
@@ -269,7 +269,7 @@ public interface DebugValue {
 	}
 
 	@ForDebugValueType(DebugValueType.FLOAT64)
-    class DebugFloat64Value implements DebugValue {
+	public static class DebugFloat64Value implements DebugValue {
 		private final double value;
 
 		public DebugFloat64Value(double value) {
@@ -305,7 +305,7 @@ public interface DebugValue {
 	 * Extended-precision float
 	 */
 	@ForDebugValueType(DebugValueType.FLOAT80)
-    class DebugFloat80Value implements DebugValue {
+	public static class DebugFloat80Value implements DebugValue {
 		private final byte[] bytes;
 
 		public DebugFloat80Value(byte[] bytes) {
@@ -336,7 +336,7 @@ public interface DebugValue {
 	 * 17-bit exponent, 64-bit fraction. Not sure how it's aligned in memory, though.
 	 */
 	@ForDebugValueType(DebugValueType.FLOAT82)
-    class DebugFloat82Value implements DebugValue {
+	public static class DebugFloat82Value implements DebugValue {
 		private final byte[] bytes;
 
 		public DebugFloat82Value(byte[] bytes) {
@@ -365,7 +365,7 @@ public interface DebugValue {
 	 * Quadruple-precision float
 	 */
 	@ForDebugValueType(DebugValueType.FLOAT128)
-    class DebugFloat128Value implements DebugValue {
+	public static class DebugFloat128Value implements DebugValue {
 		private final byte[] bytes;
 
 		public DebugFloat128Value(byte[] bytes) {
@@ -391,7 +391,7 @@ public interface DebugValue {
 	}
 
 	@ForDebugValueType(DebugValueType.VECTOR64)
-    class DebugVector64Value implements DebugValue {
+	public static class DebugVector64Value implements DebugValue {
 		private final byte[] bytes;
 
 		public DebugVector64Value(byte[] bytes) {
@@ -417,7 +417,7 @@ public interface DebugValue {
 	}
 
 	@ForDebugValueType(DebugValueType.VECTOR128)
-    class DebugVector128Value implements DebugValue {
+	public static class DebugVector128Value implements DebugValue {
 		private final byte[] bytes;
 
 		public DebugVector128Value(byte[] bytes) {
@@ -454,5 +454,5 @@ public interface DebugValue {
 	 * 
 	 * @return the encoded value
 	 */
-    byte[] encodeAsBytes();
+	public byte[] encodeAsBytes();
 }

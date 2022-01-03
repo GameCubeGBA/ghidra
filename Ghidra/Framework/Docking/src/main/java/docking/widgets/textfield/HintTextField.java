@@ -167,8 +167,12 @@ public class HintTextField extends JTextField {
 	 * @return true if valid, false otherwise
 	 */
 	public boolean isFieldValid() {
-        return (!required || !getText().isEmpty()) && ((verifier == null) || verifier.verify(this));
-    }
+		if ((required && getText().isEmpty()) || ((verifier != null) && !verifier.verify(this))) {
+			return false;
+		}
+
+		return true;
+	}
 
 	/**
 	 * Sets font/color attributes for the field.

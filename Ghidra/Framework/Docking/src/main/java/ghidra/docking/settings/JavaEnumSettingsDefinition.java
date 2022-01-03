@@ -80,7 +80,7 @@ public class JavaEnumSettingsDefinition<T extends Enum<T>> implements EnumSettin
 	 * @return Enum&lt;T&gt; value, or the specified defaultValueOveride if not present.
 	 */
 	public T getEnumValue(Settings settings, T defaultValueOverride) {
-		Long lvalue = settings.getLong(settingName);
+		Long lvalue = settings.getLong(getSettingName());
 		if (lvalue == null) {
 			return defaultValueOverride;
 		}
@@ -137,7 +137,7 @@ public class JavaEnumSettingsDefinition<T extends Enum<T>> implements EnumSettin
 
 	@Override
 	public boolean hasValue(Settings setting) {
-		return setting.getValue(settingName) != null;
+		return setting.getValue(getSettingName()) != null;
 	}
 
 	@Override
@@ -152,12 +152,12 @@ public class JavaEnumSettingsDefinition<T extends Enum<T>> implements EnumSettin
 
 	@Override
 	public void clear(Settings settings) {
-		settings.clearSetting(settingName);
+		settings.clearSetting(getSettingName());
 	}
 
 	@Override
 	public void copySetting(Settings srcSettings, Settings destSettings) {
-		Long l = srcSettings.getLong(settingName);
+		Long l = srcSettings.getLong(getSettingName());
 		if (l == null) {
 			clear(destSettings);
 		}
@@ -168,7 +168,7 @@ public class JavaEnumSettingsDefinition<T extends Enum<T>> implements EnumSettin
 
 	@Override
 	public int getChoice(Settings settings) {
-		Long lvalue = settings.getLong(settingName);
+		Long lvalue = settings.getLong(getSettingName());
 
 		int value = (lvalue != null) ? (int) (long) lvalue : defaultValue.ordinal();
 		return Math.min(Math.max(value, 0), values.length - 1);
@@ -176,7 +176,7 @@ public class JavaEnumSettingsDefinition<T extends Enum<T>> implements EnumSettin
 
 	@Override
 	public void setChoice(Settings settings, int value) {
-		settings.setLong(settingName, value);
+		settings.setLong(getSettingName(), value);
 	}
 
 	@Override

@@ -27,6 +27,9 @@ public class AsyncWrappedPcodeArithmetic<T> implements PcodeArithmetic<Completab
 		new AsyncWrappedPcodeArithmetic<>(BytesPcodeArithmetic.BIG_ENDIAN);
 	public static final AsyncWrappedPcodeArithmetic<byte[]> BYTES_LE =
 		new AsyncWrappedPcodeArithmetic<>(BytesPcodeArithmetic.LITTLE_ENDIAN);
+	@Deprecated(forRemoval = true) // TODO: Not getting used
+	public static final AsyncWrappedPcodeArithmetic<BigInteger> BIGINT =
+		new AsyncWrappedPcodeArithmetic<>(BigIntegerPcodeArithmetic.INSTANCE);
 
 	public static AsyncWrappedPcodeArithmetic<byte[]> forEndian(boolean isBigEndian) {
 		return isBigEndian ? BYTES_BE : BYTES_LE;

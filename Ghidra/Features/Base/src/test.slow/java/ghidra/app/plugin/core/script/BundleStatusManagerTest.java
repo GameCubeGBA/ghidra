@@ -205,7 +205,7 @@ public class BundleStatusManagerTest extends AbstractGhidraScriptMgrPluginTest {
 	}
 
 	private static String translateSeperators(String path) {
-		if (!"/".equals(File.separator)) {
+		if (!File.separator.equals("/")) {
 			return path.replace("/", File.separator);
 		}
 		return path;

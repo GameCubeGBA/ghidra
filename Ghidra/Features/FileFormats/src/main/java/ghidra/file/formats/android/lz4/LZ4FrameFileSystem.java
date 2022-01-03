@@ -38,10 +38,10 @@ import ghidra.util.task.UnknownProgressWrappingTaskMonitor;
 public class LZ4FrameFileSystem extends GFileSystemBase {
 
 	/** LZ4 Magic Number */
-    public static final int LZ4F_MAGIC = 0x184D2204;
-	public static final byte[] LZ4F_MAGIC_BYTES = { 0x04, 0x22, 0x4d, 0x18 };
+	public final static int LZ4F_MAGIC = 0x184D2204;
+	public final static byte[] LZ4F_MAGIC_BYTES = { 0x04, 0x22, 0x4d, 0x18 };
 
-	public static final String NAME = "lz4f_decompressed";
+	public final static String NAME = "lz4f_decompressed";
 
 	private GFile decompressedLZ4FFile = null;
 

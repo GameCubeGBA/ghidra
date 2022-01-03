@@ -27,11 +27,11 @@ import ghidra.util.Conv;
  */
 public class Resource {
 	/**The resources is not fixed.*/
-    public static final short FLAG_MOVEABLE = 0x0010;
+	public final static short FLAG_MOVEABLE = 0x0010;
 	/**The resource can be shared.*/
-    public static final short FLAG_PURE = 0x0020;
+	public final static short FLAG_PURE = 0x0020;
 	/**The resource is preloaded.*/
-    public static final short FLAG_PRELOAD = 0x0040;
+	public final static short FLAG_PRELOAD = 0x0040;
 
 	private FactoryBundledWithBinaryReader reader;
 	private ResourceTable rt;

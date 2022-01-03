@@ -22,7 +22,7 @@ import java.util.Arrays;
 
 public final class Apple8900Util {
 
-	public static final boolean is8900(Program program) {
+	public final static boolean is8900(Program program) {
 		Address address = program.getMinAddress();
 		byte [] bytes = new byte[4];
 		try {

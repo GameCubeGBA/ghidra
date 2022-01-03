@@ -27,49 +27,49 @@ import ghidra.app.util.OptionException;
  */
 public class XmlProgramOptions {
 	/**Flag to indicate reading/writing memory blocks*/
-    public static final long OPT_MEMORY_BLOCKS = 0x00000001L;
+	public final static long OPT_MEMORY_BLOCKS = 0x00000001L;
 	/**Flag to indicate reading/writing memory contents*/
-    public static final long OPT_MEMORY_CONTENTS = 0x00000002L;
+	public final static long OPT_MEMORY_CONTENTS = 0x00000002L;
 	/**Flag to indicate reading/writing instructions*/
-    public static final long OPT_CODE = 0x00000004L;
+	public final static long OPT_CODE = 0x00000004L;
 	/**Flag to indicate reading/writing data*/
-    public static final long OPT_DATA = 0x00000008L;
+	public final static long OPT_DATA = 0x00000008L;
 	/**Flag to indicate reading/writing symbols*/
-    public static final long OPT_SYMBOLS = 0x00000010L;
+	public final static long OPT_SYMBOLS = 0x00000010L;
 	/**Flag to indicate reading/writing equates*/
-    public static final long OPT_EQUATES = 0x00000020L;
+	public final static long OPT_EQUATES = 0x00000020L;
 	/**Flag to indicate reading/writing comments*/
-    public static final long OPT_COMMENTS = 0x00000040L;
+	public final static long OPT_COMMENTS = 0x00000040L;
 	/**Flag to indicate reading/writing properties*/
-    public static final long OPT_PROPERTIES = 0x00000080L;
+	public final static long OPT_PROPERTIES = 0x00000080L;
 	/**Flag to indicate reading/writing trees*/
-    public static final long OPT_TREES = 0x00000100L;
+	public final static long OPT_TREES = 0x00000100L;
 	/**Flag to indicate reading/writing empty program tree nodes*/
-    public static final long OPT_EMPTY_TREE_NODES = 0x00000200L;
+	public final static long OPT_EMPTY_TREE_NODES = 0x00000200L;
 	/**Flag to indicate reading/writing references*/
-    public static final long OPT_REFERENCES = 0x00000400L;
+	public final static long OPT_REFERENCES = 0x00000400L;
 	/**Flag to indicate reading/writing functions*/
-    public static final long OPT_FUNCTIONS = 0x00000800L;
+	public final static long OPT_FUNCTIONS = 0x00000800L;
 	/**
 	 * Used to signify that symbols should be overwritten when
 	 * necessary. This value is not being included in
 	 * the {@code ALL} constant.
 	 */
-    public static final long OVERWRITE_SYMBOLS = 0x20000000L;
+	public final static long OVERWRITE_SYMBOLS = 0x20000000L;
 
 	/**
 	 * Used to signify that references should be overwritten when
 	 * necessary. This value is not being included in
 	 * the {@code ALL} constant.
 	 */
-    public static final long OVERWRITE_REFS = 0x40000000L;
+	public final static long OVERWRITE_REFS = 0x40000000L;
 
 	/**
 	 * Used to signify that an existing program is being
 	 * updated. This value is not being included in
 	 * the {@code ALL} constant.
 	 */
-    public static final long ADD_2_PROG = 0x80000000L;
+	public final static long ADD_2_PROG = 0x80000000L;
 
 	private boolean addToProgram = false;
 	private boolean memoryBlocks = true;
@@ -106,46 +106,46 @@ public class XmlProgramOptions {
 
 		ArrayList<Option> optionList = new ArrayList<>();
 
-		optionList.add(new Option("Memory Blocks", Boolean.valueOf(memoryBlocks)));
-		optionList.add(new Option("Memory Contents", Boolean.valueOf(memoryContents)));
+		optionList.add(new Option("Memory Blocks", Boolean.valueOf(isMemoryBlocks())));
+		optionList.add(new Option("Memory Contents", Boolean.valueOf(isMemoryContents())));
 		if (isAddToProgram) {
 			optionList.add(new Option("Overwrite Memory Conflicts",
-				Boolean.valueOf(overwriteMemoryConflicts)));
+				Boolean.valueOf(isOverwriteMemoryConflicts())));
 		}
-		optionList.add(new Option("Instructions", Boolean.valueOf(instructions)));
-		optionList.add(new Option("Data", Boolean.valueOf(data)));
+		optionList.add(new Option("Instructions", Boolean.valueOf(isInstructions())));
+		optionList.add(new Option("Data", Boolean.valueOf(isData())));
 		if (isAddToProgram) {
 			optionList.add(
-				new Option("Overwrite Data Conflicts", Boolean.valueOf(overwriteDataConflicts)));
+				new Option("Overwrite Data Conflicts", Boolean.valueOf(isOverwriteDataConflicts())));
 		}
-		optionList.add(new Option("Symbols", Boolean.valueOf(symbols)));
+		optionList.add(new Option("Symbols", Boolean.valueOf(isSymbols())));
 		if (isAddToProgram) {
 			optionList.add(new Option("Overwrite Symbol Conflicts",
-				Boolean.valueOf(overwriteSymbolConflicts)));
+				Boolean.valueOf(isOverwriteSymbolConflicts())));
 		}
-		optionList.add(new Option("Equates", Boolean.valueOf(equates)));
-		optionList.add(new Option("Comments", Boolean.valueOf(comments)));
-		optionList.add(new Option("Properties", Boolean.valueOf(properties)));
+		optionList.add(new Option("Equates", Boolean.valueOf(isEquates())));
+		optionList.add(new Option("Comments", Boolean.valueOf(isComments())));
+		optionList.add(new Option("Properties", Boolean.valueOf(isProperties())));
 		if (isAddToProgram) {
 			optionList.add(new Option("Overwrite Property Conflicts",
-				Boolean.valueOf(overwritePropertyConflicts)));
+				Boolean.valueOf(isOverwritePropertyConflicts())));
 		}
-		optionList.add(new Option("Bookmarks", Boolean.valueOf(bookmarks)));
+		optionList.add(new Option("Bookmarks", Boolean.valueOf(isBookmarks())));
 		if (isAddToProgram) {
 			optionList.add(new Option("Overwrite Bookmark Conflicts",
-				Boolean.valueOf(overwriteBookmarkConflicts)));
+				Boolean.valueOf(isOverwriteBookmarkConflicts())));
 		}
-		optionList.add(new Option("Trees", Boolean.valueOf(trees)));
-		optionList.add(new Option("References", Boolean.valueOf(references)));
+		optionList.add(new Option("Trees", Boolean.valueOf(isTrees())));
+		optionList.add(new Option("References", Boolean.valueOf(isReferences())));
 		if (isAddToProgram) {
 			optionList.add(new Option("Overwrite Reference Conflicts",
-				Boolean.valueOf(overwriteReferenceConflicts)));
+				Boolean.valueOf(isOverwriteReferenceConflicts())));
 		}
-		optionList.add(new Option("Functions", Boolean.valueOf(functions)));
-		optionList.add(new Option("Registers", Boolean.valueOf(registers)));
-		optionList.add(new Option("Relocation Table", Boolean.valueOf(relocationTable)));
-		optionList.add(new Option("Entry Points", Boolean.valueOf(entryPoints)));
-		optionList.add(new Option("External Libraries", Boolean.valueOf(externalLibraries)));
+		optionList.add(new Option("Functions", Boolean.valueOf(isFunctions())));
+		optionList.add(new Option("Registers", Boolean.valueOf(isRegisters())));
+		optionList.add(new Option("Relocation Table", Boolean.valueOf(isRelocationTable())));
+		optionList.add(new Option("Entry Points", Boolean.valueOf(isEntryPoints())));
+		optionList.add(new Option("External Libraries", Boolean.valueOf(isExternalLibraries())));
 
 		return optionList;
 	}
@@ -168,70 +168,70 @@ public class XmlProgramOptions {
 
 			boolean val = ((Boolean) optValue).booleanValue();
 
-			if ("Memory Blocks".equals(optName)) {
+			if (optName.equals("Memory Blocks")) {
 				setMemoryBlocks(val);
 			}
-			else if ("Memory Contents".equals(optName)) {
+			else if (optName.equals("Memory Contents")) {
 				setMemoryContents(val);
 			}
-			else if ("Overwrite Memory Conflicts".equals(optName)) {
+			else if (optName.equals("Overwrite Memory Conflicts")) {
 				setOverwriteMemoryConflicts(val);
 			}
-			else if ("Instructions".equals(optName)) {
+			else if (optName.equals("Instructions")) {
 				setInstructions(val);
 			}
-			else if ("Data".equals(optName)) {
+			else if (optName.equals("Data")) {
 				setData(val);
 			}
-			else if ("Overwrite Data Conflicts".equals(optName)) {
+			else if (optName.equals("Overwrite Data Conflicts")) {
 				setOverwriteDataConflicts(val);
 			}
-			else if ("Symbols".equals(optName)) {
+			else if (optName.equals("Symbols")) {
 				setSymbols(val);
 			}
-			else if ("Overwrite Symbol Conflicts".equals(optName)) {
+			else if (optName.equals("Overwrite Symbol Conflicts")) {
 				setOverwriteSymbolConflicts(val);
 			}
-			else if ("Equates".equals(optName)) {
+			else if (optName.equals("Equates")) {
 				setEquates(val);
 			}
-			else if ("Comments".equals(optName)) {
+			else if (optName.equals("Comments")) {
 				setComments(val);
 			}
-			else if ("Properties".equals(optName)) {
+			else if (optName.equals("Properties")) {
 				setProperties(val);
 			}
-			else if ("Overwrite Property Conflicts".equals(optName)) {
+			else if (optName.equals("Overwrite Property Conflicts")) {
 				setOverwritePropertyConflicts(val);
 			}
-			else if ("Bookmarks".equals(optName)) {
+			else if (optName.equals("Bookmarks")) {
 				setBookmarks(val);
 			}
-			else if ("Overwrite Bookmark Conflicts".equals(optName)) {
+			else if (optName.equals("Overwrite Bookmark Conflicts")) {
 				setOverwriteBookmarkConflicts(val);
 			}
-			else if ("Trees".equals(optName)) {
+			else if (optName.equals("Trees")) {
 				setTrees(val);
 			}
-			else if ("References".equals(optName)) {
+			else if (optName.equals("References")) {
 				setReferences(val);
 			}
-			else if ("Overwrite Reference Conflicts".equals(optName)) {
+			else if (optName.equals("Overwrite Reference Conflicts")) {
 				setOverwriteReferenceConflicts(val);
 			}
-			else if ("Functions".equals(optName)) {
+			else if (optName.equals("Functions")) {
 				setFunctions(val);
 			}
-			else if ("Registers".equals(optName)) {
+			else if (optName.equals("Registers")) {
 				setRegisters(val);
 			}
-			else if ("Relocation Table".equals(optName)) {
+			else if (optName.equals("Relocation Table")) {
 				setRelocationTable(val);
 			}
-			else if ("Entry Points".equals(optName)) {
+			else if (optName.equals("Entry Points")) {
 				setEntryPoints(val);
 			}
-			else if ("External Libraries".equals(optName)) {
+			else if (optName.equals("External Libraries")) {
 				setExternalLibraries(val);
 			}
 			else {

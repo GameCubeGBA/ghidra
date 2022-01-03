@@ -201,7 +201,7 @@ public class FileSystemEventManager implements FileSystemListener {
 		}
 	}
 
-	private abstract static class FileSystemEvent {
+	private static abstract class FileSystemEvent {
 		String parentPath;
 		String name;
 		String newParentPath;

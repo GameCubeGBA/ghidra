@@ -18,8 +18,8 @@ package ghidra.app.util.bin.format.pe;
 
 public interface OffsetValidator {
 
-	boolean checkPointer(long ptr);
+	public boolean checkPointer(long ptr);
 
-	boolean checkRVA(long rva);
+	public boolean checkRVA(long rva);
 
 }

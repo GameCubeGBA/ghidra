@@ -213,19 +213,6 @@ public interface Data extends CodeUnit, Settings {
 	int getNumComponents();
 
 	/**
-	 * Return the first immediate child component that contains the byte at the given offset.  It
-	 * is important to note that with certain datatypes there may be more than one component
-	 * containing the specified offset (see {@link #getComponentsContaining(int)}).
-	 * 
-	 * @param offset the amount to add to this data items address to get the address of the
-	 * requested data item.
-	 * @return first data component containing offset or null
-	 * @deprecated method name has been changed to better reflect behavior.  The method
-	 * {@link #getComponentContaining(int)} should be used instead.
-	 */
-	@Deprecated(forRemoval = true, since = "10.1") Data getComponentAt(int offset);
-
-	/**
 	 * RReturn the first immediate child component that contains the byte at the given offset.  It
 	 * is important to note that with certain datatypes there may be more than one component
 	 * containing the specified offset (see {@link #getComponentsContaining(int)}).

@@ -39,7 +39,7 @@ import ghidra.util.SystemUtilities;
  */
 public class ScrollingListChoicesPanel extends ConflictPanel {
 
-	private static final long serialVersionUID = 1;
+	private final static long serialVersionUID = 1;
 
 	private GridBagLayout gbl;
 	private JPanel rowPanel;
@@ -53,7 +53,8 @@ public class ScrollingListChoicesPanel extends ConflictPanel {
 	 * Constructor for a various choices panel.
 	 */
 	public ScrollingListChoicesPanel() {
-        init();
+		super();
+		init();
 	}
 
 	/**
@@ -124,7 +125,7 @@ public class ScrollingListChoicesPanel extends ConflictPanel {
 	 * @param text the text
 	 */
 	void setHeader(String text) {
-		if (text != null && !text.isEmpty()) {
+		if (text != null && text.length() != 0) {
 			headerLabel.setText(ConflictUtility.wrapAsHTML(text));
 			add(headerLabel, BorderLayout.PAGE_START);
 		}
@@ -314,7 +315,12 @@ class ListChoice extends JPanel {
 		this.headings = headings;
 		this.data = data;
 
-		SystemUtilities.runIfSwingOrPostSwingLater(() -> model.fireTableStructureChanged());
+		SystemUtilities.runIfSwingOrPostSwingLater(new Runnable() {
+			@Override
+			public void run() {
+				model.fireTableStructureChanged();
+			}
+		});
 	}
 
 	public boolean isSelected() {

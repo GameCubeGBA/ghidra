@@ -28,7 +28,7 @@ public abstract class GTreeBulkTask extends GTreeTask {
 	}
 
 	@Override
-    public final void run(TaskMonitor monitor) throws CancelledException {
+	final public void run(TaskMonitor monitor) throws CancelledException {
 
 		boolean filteringEnabled = tree.isFilteringEnabled();
 

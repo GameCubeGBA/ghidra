@@ -180,7 +180,7 @@ public class PcodeDataTypeManager {
 		// If we don't have a good id, it may be a builtin type that is not yet placed in the program
 		ArrayList<DataType> datatypes = new ArrayList<>();
 		builtInDataTypes.findDataTypes(nm, datatypes);
-		if (!datatypes.isEmpty()) {
+		if (datatypes.size() != 0) {
 			return datatypes.get(0).clone(progDataTypes);
 		}
 		if ("code".equals(nm)) {		// A special datatype, the decompiler needs
@@ -216,7 +216,7 @@ public class PcodeDataTypeManager {
 				return findBaseType(nameStr, idStr);
 			}
 			String name = el.getAttribute("name");
-			if (!name.isEmpty()) {
+			if (name.length() != 0) {
 				return findBaseType(name, el.getAttribute("id"));
 			}
 			String meta = el.getAttribute("metatype");

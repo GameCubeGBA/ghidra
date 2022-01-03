@@ -12,66 +12,66 @@
 package SWIG;
 
 public final class SectionType {
-  public static final SectionType eSectionTypeInvalid = new SectionType("eSectionTypeInvalid");
-  public static final SectionType eSectionTypeCode = new SectionType("eSectionTypeCode");
-  public static final SectionType eSectionTypeContainer = new SectionType("eSectionTypeContainer");
-  public static final SectionType eSectionTypeData = new SectionType("eSectionTypeData");
-  public static final SectionType eSectionTypeDataCString = new SectionType("eSectionTypeDataCString");
-  public static final SectionType eSectionTypeDataCStringPointers = new SectionType("eSectionTypeDataCStringPointers");
-  public static final SectionType eSectionTypeDataSymbolAddress = new SectionType("eSectionTypeDataSymbolAddress");
-  public static final SectionType eSectionTypeData4 = new SectionType("eSectionTypeData4");
-  public static final SectionType eSectionTypeData8 = new SectionType("eSectionTypeData8");
-  public static final SectionType eSectionTypeData16 = new SectionType("eSectionTypeData16");
-  public static final SectionType eSectionTypeDataPointers = new SectionType("eSectionTypeDataPointers");
-  public static final SectionType eSectionTypeDebug = new SectionType("eSectionTypeDebug");
-  public static final SectionType eSectionTypeZeroFill = new SectionType("eSectionTypeZeroFill");
-  public static final SectionType eSectionTypeDataObjCMessageRefs = new SectionType("eSectionTypeDataObjCMessageRefs");
-  public static final SectionType eSectionTypeDataObjCCFStrings = new SectionType("eSectionTypeDataObjCCFStrings");
-  public static final SectionType eSectionTypeDWARFDebugAbbrev = new SectionType("eSectionTypeDWARFDebugAbbrev");
-  public static final SectionType eSectionTypeDWARFDebugAddr = new SectionType("eSectionTypeDWARFDebugAddr");
-  public static final SectionType eSectionTypeDWARFDebugAranges = new SectionType("eSectionTypeDWARFDebugAranges");
-  public static final SectionType eSectionTypeDWARFDebugCuIndex = new SectionType("eSectionTypeDWARFDebugCuIndex");
-  public static final SectionType eSectionTypeDWARFDebugFrame = new SectionType("eSectionTypeDWARFDebugFrame");
-  public static final SectionType eSectionTypeDWARFDebugInfo = new SectionType("eSectionTypeDWARFDebugInfo");
-  public static final SectionType eSectionTypeDWARFDebugLine = new SectionType("eSectionTypeDWARFDebugLine");
-  public static final SectionType eSectionTypeDWARFDebugLoc = new SectionType("eSectionTypeDWARFDebugLoc");
-  public static final SectionType eSectionTypeDWARFDebugMacInfo = new SectionType("eSectionTypeDWARFDebugMacInfo");
-  public static final SectionType eSectionTypeDWARFDebugMacro = new SectionType("eSectionTypeDWARFDebugMacro");
-  public static final SectionType eSectionTypeDWARFDebugPubNames = new SectionType("eSectionTypeDWARFDebugPubNames");
-  public static final SectionType eSectionTypeDWARFDebugPubTypes = new SectionType("eSectionTypeDWARFDebugPubTypes");
-  public static final SectionType eSectionTypeDWARFDebugRanges = new SectionType("eSectionTypeDWARFDebugRanges");
-  public static final SectionType eSectionTypeDWARFDebugStr = new SectionType("eSectionTypeDWARFDebugStr");
-  public static final SectionType eSectionTypeDWARFDebugStrOffsets = new SectionType("eSectionTypeDWARFDebugStrOffsets");
-  public static final SectionType eSectionTypeDWARFAppleNames = new SectionType("eSectionTypeDWARFAppleNames");
-  public static final SectionType eSectionTypeDWARFAppleTypes = new SectionType("eSectionTypeDWARFAppleTypes");
-  public static final SectionType eSectionTypeDWARFAppleNamespaces = new SectionType("eSectionTypeDWARFAppleNamespaces");
-  public static final SectionType eSectionTypeDWARFAppleObjC = new SectionType("eSectionTypeDWARFAppleObjC");
-  public static final SectionType eSectionTypeELFSymbolTable = new SectionType("eSectionTypeELFSymbolTable");
-  public static final SectionType eSectionTypeELFDynamicSymbols = new SectionType("eSectionTypeELFDynamicSymbols");
-  public static final SectionType eSectionTypeELFRelocationEntries = new SectionType("eSectionTypeELFRelocationEntries");
-  public static final SectionType eSectionTypeELFDynamicLinkInfo = new SectionType("eSectionTypeELFDynamicLinkInfo");
-  public static final SectionType eSectionTypeEHFrame = new SectionType("eSectionTypeEHFrame");
-  public static final SectionType eSectionTypeARMexidx = new SectionType("eSectionTypeARMexidx");
-  public static final SectionType eSectionTypeARMextab = new SectionType("eSectionTypeARMextab");
-  public static final SectionType eSectionTypeCompactUnwind = new SectionType("eSectionTypeCompactUnwind");
-  public static final SectionType eSectionTypeGoSymtab = new SectionType("eSectionTypeGoSymtab");
-  public static final SectionType eSectionTypeAbsoluteAddress = new SectionType("eSectionTypeAbsoluteAddress");
-  public static final SectionType eSectionTypeDWARFGNUDebugAltLink = new SectionType("eSectionTypeDWARFGNUDebugAltLink");
-  public static final SectionType eSectionTypeDWARFDebugTypes = new SectionType("eSectionTypeDWARFDebugTypes");
-  public static final SectionType eSectionTypeDWARFDebugNames = new SectionType("eSectionTypeDWARFDebugNames");
-  public static final SectionType eSectionTypeOther = new SectionType("eSectionTypeOther");
-  public static final SectionType eSectionTypeDWARFDebugLineStr = new SectionType("eSectionTypeDWARFDebugLineStr");
-  public static final SectionType eSectionTypeDWARFDebugRngLists = new SectionType("eSectionTypeDWARFDebugRngLists");
-  public static final SectionType eSectionTypeDWARFDebugLocLists = new SectionType("eSectionTypeDWARFDebugLocLists");
-  public static final SectionType eSectionTypeDWARFDebugAbbrevDwo = new SectionType("eSectionTypeDWARFDebugAbbrevDwo");
-  public static final SectionType eSectionTypeDWARFDebugInfoDwo = new SectionType("eSectionTypeDWARFDebugInfoDwo");
-  public static final SectionType eSectionTypeDWARFDebugStrDwo = new SectionType("eSectionTypeDWARFDebugStrDwo");
-  public static final SectionType eSectionTypeDWARFDebugStrOffsetsDwo = new SectionType("eSectionTypeDWARFDebugStrOffsetsDwo");
-  public static final SectionType eSectionTypeDWARFDebugTypesDwo = new SectionType("eSectionTypeDWARFDebugTypesDwo");
-  public static final SectionType eSectionTypeDWARFDebugRngListsDwo = new SectionType("eSectionTypeDWARFDebugRngListsDwo");
-  public static final SectionType eSectionTypeDWARFDebugLocDwo = new SectionType("eSectionTypeDWARFDebugLocDwo");
-  public static final SectionType eSectionTypeDWARFDebugLocListsDwo = new SectionType("eSectionTypeDWARFDebugLocListsDwo");
-  public static final SectionType eSectionTypeDWARFDebugTuIndex = new SectionType("eSectionTypeDWARFDebugTuIndex");
+  public final static SectionType eSectionTypeInvalid = new SectionType("eSectionTypeInvalid");
+  public final static SectionType eSectionTypeCode = new SectionType("eSectionTypeCode");
+  public final static SectionType eSectionTypeContainer = new SectionType("eSectionTypeContainer");
+  public final static SectionType eSectionTypeData = new SectionType("eSectionTypeData");
+  public final static SectionType eSectionTypeDataCString = new SectionType("eSectionTypeDataCString");
+  public final static SectionType eSectionTypeDataCStringPointers = new SectionType("eSectionTypeDataCStringPointers");
+  public final static SectionType eSectionTypeDataSymbolAddress = new SectionType("eSectionTypeDataSymbolAddress");
+  public final static SectionType eSectionTypeData4 = new SectionType("eSectionTypeData4");
+  public final static SectionType eSectionTypeData8 = new SectionType("eSectionTypeData8");
+  public final static SectionType eSectionTypeData16 = new SectionType("eSectionTypeData16");
+  public final static SectionType eSectionTypeDataPointers = new SectionType("eSectionTypeDataPointers");
+  public final static SectionType eSectionTypeDebug = new SectionType("eSectionTypeDebug");
+  public final static SectionType eSectionTypeZeroFill = new SectionType("eSectionTypeZeroFill");
+  public final static SectionType eSectionTypeDataObjCMessageRefs = new SectionType("eSectionTypeDataObjCMessageRefs");
+  public final static SectionType eSectionTypeDataObjCCFStrings = new SectionType("eSectionTypeDataObjCCFStrings");
+  public final static SectionType eSectionTypeDWARFDebugAbbrev = new SectionType("eSectionTypeDWARFDebugAbbrev");
+  public final static SectionType eSectionTypeDWARFDebugAddr = new SectionType("eSectionTypeDWARFDebugAddr");
+  public final static SectionType eSectionTypeDWARFDebugAranges = new SectionType("eSectionTypeDWARFDebugAranges");
+  public final static SectionType eSectionTypeDWARFDebugCuIndex = new SectionType("eSectionTypeDWARFDebugCuIndex");
+  public final static SectionType eSectionTypeDWARFDebugFrame = new SectionType("eSectionTypeDWARFDebugFrame");
+  public final static SectionType eSectionTypeDWARFDebugInfo = new SectionType("eSectionTypeDWARFDebugInfo");
+  public final static SectionType eSectionTypeDWARFDebugLine = new SectionType("eSectionTypeDWARFDebugLine");
+  public final static SectionType eSectionTypeDWARFDebugLoc = new SectionType("eSectionTypeDWARFDebugLoc");
+  public final static SectionType eSectionTypeDWARFDebugMacInfo = new SectionType("eSectionTypeDWARFDebugMacInfo");
+  public final static SectionType eSectionTypeDWARFDebugMacro = new SectionType("eSectionTypeDWARFDebugMacro");
+  public final static SectionType eSectionTypeDWARFDebugPubNames = new SectionType("eSectionTypeDWARFDebugPubNames");
+  public final static SectionType eSectionTypeDWARFDebugPubTypes = new SectionType("eSectionTypeDWARFDebugPubTypes");
+  public final static SectionType eSectionTypeDWARFDebugRanges = new SectionType("eSectionTypeDWARFDebugRanges");
+  public final static SectionType eSectionTypeDWARFDebugStr = new SectionType("eSectionTypeDWARFDebugStr");
+  public final static SectionType eSectionTypeDWARFDebugStrOffsets = new SectionType("eSectionTypeDWARFDebugStrOffsets");
+  public final static SectionType eSectionTypeDWARFAppleNames = new SectionType("eSectionTypeDWARFAppleNames");
+  public final static SectionType eSectionTypeDWARFAppleTypes = new SectionType("eSectionTypeDWARFAppleTypes");
+  public final static SectionType eSectionTypeDWARFAppleNamespaces = new SectionType("eSectionTypeDWARFAppleNamespaces");
+  public final static SectionType eSectionTypeDWARFAppleObjC = new SectionType("eSectionTypeDWARFAppleObjC");
+  public final static SectionType eSectionTypeELFSymbolTable = new SectionType("eSectionTypeELFSymbolTable");
+  public final static SectionType eSectionTypeELFDynamicSymbols = new SectionType("eSectionTypeELFDynamicSymbols");
+  public final static SectionType eSectionTypeELFRelocationEntries = new SectionType("eSectionTypeELFRelocationEntries");
+  public final static SectionType eSectionTypeELFDynamicLinkInfo = new SectionType("eSectionTypeELFDynamicLinkInfo");
+  public final static SectionType eSectionTypeEHFrame = new SectionType("eSectionTypeEHFrame");
+  public final static SectionType eSectionTypeARMexidx = new SectionType("eSectionTypeARMexidx");
+  public final static SectionType eSectionTypeARMextab = new SectionType("eSectionTypeARMextab");
+  public final static SectionType eSectionTypeCompactUnwind = new SectionType("eSectionTypeCompactUnwind");
+  public final static SectionType eSectionTypeGoSymtab = new SectionType("eSectionTypeGoSymtab");
+  public final static SectionType eSectionTypeAbsoluteAddress = new SectionType("eSectionTypeAbsoluteAddress");
+  public final static SectionType eSectionTypeDWARFGNUDebugAltLink = new SectionType("eSectionTypeDWARFGNUDebugAltLink");
+  public final static SectionType eSectionTypeDWARFDebugTypes = new SectionType("eSectionTypeDWARFDebugTypes");
+  public final static SectionType eSectionTypeDWARFDebugNames = new SectionType("eSectionTypeDWARFDebugNames");
+  public final static SectionType eSectionTypeOther = new SectionType("eSectionTypeOther");
+  public final static SectionType eSectionTypeDWARFDebugLineStr = new SectionType("eSectionTypeDWARFDebugLineStr");
+  public final static SectionType eSectionTypeDWARFDebugRngLists = new SectionType("eSectionTypeDWARFDebugRngLists");
+  public final static SectionType eSectionTypeDWARFDebugLocLists = new SectionType("eSectionTypeDWARFDebugLocLists");
+  public final static SectionType eSectionTypeDWARFDebugAbbrevDwo = new SectionType("eSectionTypeDWARFDebugAbbrevDwo");
+  public final static SectionType eSectionTypeDWARFDebugInfoDwo = new SectionType("eSectionTypeDWARFDebugInfoDwo");
+  public final static SectionType eSectionTypeDWARFDebugStrDwo = new SectionType("eSectionTypeDWARFDebugStrDwo");
+  public final static SectionType eSectionTypeDWARFDebugStrOffsetsDwo = new SectionType("eSectionTypeDWARFDebugStrOffsetsDwo");
+  public final static SectionType eSectionTypeDWARFDebugTypesDwo = new SectionType("eSectionTypeDWARFDebugTypesDwo");
+  public final static SectionType eSectionTypeDWARFDebugRngListsDwo = new SectionType("eSectionTypeDWARFDebugRngListsDwo");
+  public final static SectionType eSectionTypeDWARFDebugLocDwo = new SectionType("eSectionTypeDWARFDebugLocDwo");
+  public final static SectionType eSectionTypeDWARFDebugLocListsDwo = new SectionType("eSectionTypeDWARFDebugLocListsDwo");
+  public final static SectionType eSectionTypeDWARFDebugTuIndex = new SectionType("eSectionTypeDWARFDebugTuIndex");
 
   public final int swigValue() {
     return swigValue;
@@ -84,9 +84,9 @@ public final class SectionType {
   public static SectionType swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-      for (SectionType value : swigValues)
-          if (value.swigValue == swigValue)
-              return value;
+    for (int i = 0; i < swigValues.length; i++)
+      if (swigValues[i].swigValue == swigValue)
+        return swigValues[i];
     throw new IllegalArgumentException("No enum " + SectionType.class + " with value " + swigValue);
   }
 

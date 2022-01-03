@@ -33,5 +33,5 @@ import ghidra.app.plugin.core.instructionsearch.ui.InstructionTable;
  */
 public interface InstructionTableObserver extends Observer {
 
-	void changed();
+	public void changed();
 }

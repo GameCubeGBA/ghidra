@@ -107,7 +107,7 @@ public class DWARFCompileUnit {
 	 * @return the filename of the compile unit
 	 */
 	public String getFileName() {
-		return name == null ? null : new File(name).getName();
+		return getName() == null ? null : new File(getName()).getName();
 	}
 
 	/**

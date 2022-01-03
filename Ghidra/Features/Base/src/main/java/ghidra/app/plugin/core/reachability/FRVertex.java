@@ -27,7 +27,12 @@ import org.apache.commons.collections4.map.LazyMap;
 
 class FRVertex {
 
-	private Factory<List<CodeBlockReference>> factory = () -> new ArrayList<>();
+	private Factory<List<CodeBlockReference>> factory = new Factory<List<CodeBlockReference>>() {
+		@Override
+		public List<CodeBlockReference> create() {
+			return new ArrayList<>();
+		}
+	};
 	private Map<FRVertex, List<CodeBlockReference>> incomingReferences = LazyMap.lazyMap(
 		new HashMap<FRVertex, List<CodeBlockReference>>(), factory);
 

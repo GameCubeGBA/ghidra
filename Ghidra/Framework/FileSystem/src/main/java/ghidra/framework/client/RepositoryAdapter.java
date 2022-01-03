@@ -884,8 +884,11 @@ public class RepositoryAdapter implements RemoteAdapterListener {
 	 * @return true if the connection is valid; false if the connection needs to be reestablished
 	 */
 	public boolean verifyConnection() {
-        return serverAdapter.verifyConnection();
-    }
+		if (!serverAdapter.verifyConnection()) {
+			return false;
+		}
+		return true;
+	}
 
 	public void disconnect() {
 		disconnect(false, true);

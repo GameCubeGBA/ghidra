@@ -554,7 +554,7 @@ public class GhidraScriptTest extends AbstractGhidraHeadedIntegrationTest {
 					Arrays.asList(choices), null);
 			}
 			catch (Exception e) {
-				failWithException("Exception was caught in this test: " + e, e);
+				failWithException("Exception was caught in this test: " + e.toString(), e);
 			}
 		}, false);
 
@@ -585,7 +585,7 @@ public class GhidraScriptTest extends AbstractGhidraHeadedIntegrationTest {
 				ref.set(userChoices);
 			}
 			catch (Exception e) {
-				failWithException("Exception was caught in this test: " + e, e);
+				failWithException("Exception was caught in this test: " + e.toString(), e);
 			}
 		}, false);
 
@@ -617,7 +617,7 @@ public class GhidraScriptTest extends AbstractGhidraHeadedIntegrationTest {
 				ref.set(userChoices);
 			}
 			catch (Exception e) {
-				failWithException("Exception was caught in this test: " + e, e);
+				failWithException("Exception was caught in this test: " + e.toString(), e);
 			}
 		}, false);
 
@@ -649,7 +649,7 @@ public class GhidraScriptTest extends AbstractGhidraHeadedIntegrationTest {
 				ref.set(userChoices);
 			}
 			catch (Exception e) {
-				failWithException("Exception was caught in this test: " + e, e);
+				failWithException("Exception was caught in this test: " + e.toString(), e);
 			}
 		}, false);
 
@@ -682,7 +682,7 @@ public class GhidraScriptTest extends AbstractGhidraHeadedIntegrationTest {
 				ref.set(userChoices);
 			}
 			catch (Exception e) {
-				failWithException("Exception was caught in this test: " + e, e);
+				failWithException("Exception was caught in this test: " + e.toString(), e);
 			}
 		}, false);
 
@@ -713,7 +713,7 @@ public class GhidraScriptTest extends AbstractGhidraHeadedIntegrationTest {
 				ref.set(userChoices);
 			}
 			catch (Exception e) {
-				failWithException("Exception was caught in this test: " + e, e);
+				failWithException("Exception was caught in this test: " + e.toString(), e);
 			}
 		}, false);
 
@@ -744,7 +744,7 @@ public class GhidraScriptTest extends AbstractGhidraHeadedIntegrationTest {
 				ref.set(userChoices);
 			}
 			catch (Exception e) {
-				failWithException("Exception was caught in this test: " + e, e);
+				failWithException("Exception was caught in this test: " + e.toString(), e);
 			}
 		}, false);
 

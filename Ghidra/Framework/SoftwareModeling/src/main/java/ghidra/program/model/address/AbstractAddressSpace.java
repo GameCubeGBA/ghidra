@@ -513,7 +513,7 @@ abstract class AbstractAddressSpace implements AddressSpace {
 			// source within a list/set of addresses from a second source.
 			return 0;
 		}
-		int c = spaceID - space.getSpaceID();
+		int c = getSpaceID() - space.getSpaceID();
 		if (c == 0) {
 			c = getClass().getName().compareTo(space.getClass().getName());
 		}

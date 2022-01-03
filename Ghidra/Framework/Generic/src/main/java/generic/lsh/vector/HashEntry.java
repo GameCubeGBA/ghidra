@@ -89,8 +89,11 @@ public class HashEntry {
 		if (hash != other.hash) {
 			return false;
 		}
-        return tf == other.tf;
-    }
+		if (tf != other.tf) {
+			return false;
+		}
+		return true;
+	}
 
 	public int getHash() {
 		return hash;

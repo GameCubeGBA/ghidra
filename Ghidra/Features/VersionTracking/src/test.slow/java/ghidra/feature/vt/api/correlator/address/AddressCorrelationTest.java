@@ -482,7 +482,7 @@ public class AddressCorrelationTest extends AbstractGhidraHeadedIntegrationTest 
 			String sourceAddressString, String comment, String destinationAddressString) {
 		Address srcAddress = addr(sourceAddressString, sourceProgram);
 		Address destAddress =
-			"NO_ADDRESS".equals(destinationAddressString) ? Address.NO_ADDRESS
+			destinationAddressString.equals("NO_ADDRESS") ? Address.NO_ADDRESS
 					: addr(
 						destinationAddressString, destinationProgram);
 
@@ -517,7 +517,7 @@ public class AddressCorrelationTest extends AbstractGhidraHeadedIntegrationTest 
 					vtMarkupItem.getSourceAddress().toString() + ".", isNoAddress);
 				return;
 			}
-			assertTrue("Unexpected destination address of " + markupDestAddress +
+			assertTrue("Unexpected destination address of " + markupDestAddress.toString() +
 				" when expecting " + destAddress.toString() + " for " +
 				vtMarkupItem.getMarkupType().getDisplayName() + " markup @ " +
 				vtMarkupItem.getSourceAddress().toString() + ".",

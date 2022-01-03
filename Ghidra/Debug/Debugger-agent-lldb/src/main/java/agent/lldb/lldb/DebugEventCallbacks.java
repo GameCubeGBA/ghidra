@@ -25,7 +25,7 @@ import ghidra.comm.util.BitmaskUniverse;
  * The interface for receiving event callbacks
  */
 public interface DebugEventCallbacks {
-	enum DebugEvent implements BitmaskUniverse {
+	public static enum DebugEvent implements BitmaskUniverse {
 		BREAKPOINT(1 << 0), //
 		EXCEPTION(1 << 1), //
 		CREATE_THREAD(1 << 2), //
@@ -60,7 +60,7 @@ public interface DebugEventCallbacks {
 	 */
 	@Target(ElementType.METHOD)
 	@Retention(RetentionPolicy.RUNTIME)
-    @interface ForInterest {
+	static @interface ForInterest {
 		/**
 		 * The flag corresponding to the annotated callback method
 		 * 

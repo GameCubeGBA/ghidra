@@ -94,7 +94,7 @@ public enum OptionType {
 		return OptionType.NO_TYPE;
 	}
 
-	abstract static class StringAdapter {
+	static abstract class StringAdapter {
 		abstract Object stringToObject(String string);
 
 		String objectToString(Object object) {

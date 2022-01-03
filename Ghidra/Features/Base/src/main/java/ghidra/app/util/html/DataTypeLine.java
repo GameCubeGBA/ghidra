@@ -54,7 +54,7 @@ public class DataTypeLine implements ValidatableLine {
 
 	@Override
 	public boolean isDiffColored() {
-		return typeColor != null || nameColor != null || commentColor != null;
+		return getTypeColor() != null || getNameColor() != null || getCommentColor() != null;
 	}
 
 	public String getType() {

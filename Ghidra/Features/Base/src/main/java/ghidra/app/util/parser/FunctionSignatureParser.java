@@ -165,13 +165,13 @@ public class FunctionSignatureParser {
 			throw new ParseException("Can't parse function arguments");
 		}
 		String trailingText = newSignatureText.substring(endIndex + 1);
-		if (!trailingText.trim().isEmpty()) {
+		if (trailingText.trim().length() > 0) {
 			throw new ParseException(
 				"Unexpected trailing text at end of function: " + trailingText);
 		}
 
 		String argString = newSignatureText.substring(startIndex + 1, endIndex).trim();
-		if (argString.isEmpty()) {
+		if (argString.length() == 0) {
 			return new ParameterDefinition[0];
 		}
 		if ("void".equalsIgnoreCase(argString)) {
@@ -192,7 +192,7 @@ public class FunctionSignatureParser {
 		if ("...".equals(arg)) {
 			return;
 		}
-		if (arg.isEmpty()) {
+		if (arg.length() == 0) {
 			throw new ParseException("Missing parameter");
 		}
 
@@ -295,7 +295,7 @@ public class FunctionSignatureParser {
 		Matcher m = parameterNameCapturePattern.matcher(dataTypeName);
 		if (m.matches()) {
 			boolean hasPointerOrArraySpec = m.group(3) != null;
-			boolean hasName = (m.group(4) != null) && (!m.group(4).isEmpty());
+			boolean hasName = (m.group(4) != null) && (m.group(4).length() != 0);
 			if (hasPointerOrArraySpec && hasName) {
 				// name after array/pointer spec - dataTypeName is not a valid datatype
 				return null;

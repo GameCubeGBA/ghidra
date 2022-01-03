@@ -184,8 +184,12 @@ class SetStackDepthChangeAction extends ListingContextAction {
 	@Override
 	protected boolean isEnabledForContext(ListingActionContext context) {
 		Address address = context.getAddress();
-        return !context.hasSelection() && address != null;
-    }
+		if (context.hasSelection() || address == null) {
+			return false;
+		}
+
+		return true;
+	}
 
 	private class StackChangeOptionDialog extends OptionDialog {
 

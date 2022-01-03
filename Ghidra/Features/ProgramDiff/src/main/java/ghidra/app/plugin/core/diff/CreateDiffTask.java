@@ -175,13 +175,13 @@ class CreateDiffTask extends Task {
 		AddressSet addressesOnlyInOne = programMemoryComparator.getAddressesOnlyInOne();
 		if (!addressesOnlyInOne.isEmpty()) {
 			message +=
-				"\n \nSome addresses are only in program 1 : " + addressesOnlyInOne;
+				"\n \nSome addresses are only in program 1 : " + addressesOnlyInOne.toString();
 		}
 
 		AddressSet addressesOnlyInTwo = programMemoryComparator.getAddressesOnlyInTwo();
 		if (!addressesOnlyInTwo.isEmpty()) {
 			message +=
-				"\n \nSome addresses are only in program 2 : " + addressesOnlyInTwo;
+				"\n \nSome addresses are only in program 2 : " + addressesOnlyInTwo.toString();
 		}
 		return message;
 	}

@@ -34,7 +34,7 @@ import ghidra.util.task.TaskMonitor;
  * Points to the imports (an array of IMAGE_IMPORT_DESCRIPTOR structures).
  */
 public class ImportDataDirectory extends DataDirectory {
-	private static final String NAME = "IMAGE_DIRECTORY_ENTRY_IMPORT";
+	private final static String NAME = "IMAGE_DIRECTORY_ENTRY_IMPORT";
 
 	private ImportDescriptor[] descriptors;
 	private ImportInfo[] imports;

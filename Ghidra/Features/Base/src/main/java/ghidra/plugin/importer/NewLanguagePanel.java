@@ -184,7 +184,7 @@ public class NewLanguagePanel extends JPanel {
 	}
 
 	private void switchToRecommendedList() {
-		if (isOnShowAll) {
+		if (isAllLcsPairsTableShowing()) {
 			LanguageCompilerSpecPair selectedLcsPair = getSelectedLcsPair();
 			isOnShowAll = false;
 			setLanguages(recommendedLcsPairsList);
@@ -247,7 +247,7 @@ public class NewLanguagePanel extends JPanel {
 
 	public void setAllLcsPairsList(List<LanguageCompilerSpecPair> allLcsPairsList) {
 		this.allLcsPairsList = allLcsPairsList;
-		if (isOnShowAll) {
+		if (isAllLcsPairsTableShowing()) {
 			setLanguages(allLcsPairsList);
 		}
 	}

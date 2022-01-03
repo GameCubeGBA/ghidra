@@ -172,8 +172,11 @@ class SplitNode extends Node {
 
 	@Override
 	boolean contains(ComponentPlaceholder info) {
-        return (child1 != null && child1.contains(info)) || (child2 != null && child2.contains(info));
-    }
+		if ((child1 != null && child1.contains(info)) || (child2 != null && child2.contains(info))) {
+			return true;
+		}
+		return false;
+	}
 
 	@Override
 	void populateActiveComponents(List<ComponentPlaceholder> list) {

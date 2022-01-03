@@ -63,7 +63,8 @@ public class ParseException extends Exception {
    */
 
   public ParseException() {
-      specialConstructor = false;
+    super();
+    specialConstructor = false;
   }
 
   public ParseException(String message) {
@@ -120,34 +121,34 @@ public String getMessage() {
       if (maxSize < element.length) {
         maxSize = element.length;
       }
-        for (int i : element) {
-            expected.append(tokenImage[i]).append(" ");
-        }
+      for (int j = 0; j < element.length; j++) {
+        expected.append(tokenImage[element[j]]).append(" ");
+      }
       if (element[element.length - 1] != 0) {
         expected.append("...");
       }
       expected.append(eol).append("    ");
     }
-    StringBuilder retval = new StringBuilder("Encountered \"");
+    String retval = "Encountered \"";
     Token tok = currentToken.next;
     for (int i = 0; i < maxSize; i++) {
-      if (i != 0) retval.append(" ");
+      if (i != 0) retval += " ";
       if (tok.kind == 0) {
-        retval.append(tokenImage[0]);
+        retval += tokenImage[0];
         break;
       }
-      retval.append(add_escapes(tok.image));
+      retval += add_escapes(tok.image);
       tok = tok.next; 
     }
-    retval.append("\" at line ").append(currentToken.next.beginLine).append(", column ").append(currentToken.next.beginColumn);
-    retval.append(".").append(eol);
+    retval += "\" at line " + currentToken.next.beginLine + ", column " + currentToken.next.beginColumn;
+    retval += "." + eol;
     if (expectedTokenSequences.length == 1) {
-      retval.append("Was expecting:").append(eol).append("    ");
+      retval += "Was expecting:" + eol + "    ";
     } else {
-      retval.append("Was expecting one of:").append(eol).append("    ");
+      retval += "Was expecting one of:" + eol + "    ";
     }
-    retval.append(expected);
-    return retval.toString();
+    retval += expected.toString();
+    return retval;
   }
 
   /**

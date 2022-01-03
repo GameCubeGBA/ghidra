@@ -40,7 +40,8 @@ public class PefBinaryAnalysisCommand extends FlatProgramAPI implements BinaryAn
 	private MessageLog messages = new MessageLog();
 
 	public PefBinaryAnalysisCommand() {
-    }
+		super();
+	}
 
 	@Override
 	public boolean canApply(Program program) {

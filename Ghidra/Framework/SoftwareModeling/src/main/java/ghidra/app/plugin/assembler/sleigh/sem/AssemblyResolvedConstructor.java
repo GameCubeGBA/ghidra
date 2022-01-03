@@ -81,8 +81,11 @@ public class AssemblyResolvedConstructor extends AssemblyResolution {
 			return false;
 		}
 		AssemblyResolvedConstructor that = (AssemblyResolvedConstructor) obj;
-        return this.ins.equals(that.ins) && this.ctx.equals(that.ctx) && this.backfills.equals(that.backfills) && this.forbids.equals(that.forbids);
-    }
+		if (!this.ins.equals(that.ins) || !this.ctx.equals(that.ctx) || !this.backfills.equals(that.backfills) || !this.forbids.equals(that.forbids)) {
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * @see AssemblyResolution#resolved(AssemblyPatternBlock, AssemblyPatternBlock, String, List)
@@ -129,7 +132,7 @@ public class AssemblyResolvedConstructor extends AssemblyResolution {
 			ctx = AssemblyPatternBlock.fromString(str.substring(CTX.length(), end));
 			str = str.substring(end);
 		}
-		if (!str.isEmpty()) {
+		if (str.length() != 0) {
 			throw new IllegalArgumentException(str);
 		}
 		return AssemblyResolution.resolved(//
@@ -631,11 +634,11 @@ public class AssemblyResolvedConstructor extends AssemblyResolution {
 			for (AssemblyResolvedConstructor f : forbids) {
 				// If the forbidden length is larger than us, we can ignore it
 				// Check if the context matches, if not, we can let it pass
-				if ((f.getDefinedInstructionLength() > val.length) || (null == f.ctx.combine(forCtx))) {
+				if ((f.getDefinedInstructionLength() > val.length) || (null == f.getContext().combine(forCtx))) {
 					continue;
 				}
 				// If the context matches, now check the instruction
-				AssemblyPatternBlock i = f.ins;
+				AssemblyPatternBlock i = f.getInstruction();
 				AssemblyPatternBlock vi =
 					AssemblyPatternBlock.fromBytes(ins.length() - val.length, val);
 				if (null == i.combine(vi)) {

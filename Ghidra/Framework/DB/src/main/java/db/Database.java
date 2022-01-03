@@ -142,7 +142,7 @@ public abstract class Database {
 	 * @return true if delete was successful.  
 	 * If false is returned, a partial delete may have occurred.
 	 */
-    protected static final boolean deleteDir(File dir) {
+	protected final static boolean deleteDir(File dir) {
 		File[] flist = dir.listFiles();
 		if (flist == null) {
 			return false;
@@ -384,20 +384,23 @@ public abstract class Database {
 
 	private int[] getFileVersions(ArrayList<String> fileList) {
 		ArrayList<Integer> list = new ArrayList<>();
-        for (String fname : fileList) {
-            int ix1 = fname.indexOf('.');
-            int ix2 = fname.indexOf('.', ix1 + 1);
-            if (ix1 < 0 || ix2 < ix1) {
-                log.error(dbDir + ": bad file name: " + fname);
-                continue;
-            }
-            String v = fname.substring(ix1 + 1, ix2);
-            try {
-                list.add(Integer.valueOf(v));
-            } catch (NumberFormatException e) {
-                log.error(dbDir + ": bad file name: " + fname);
-            }
-        }
+		Iterator<String> iter = fileList.iterator();
+		while (iter.hasNext()) {
+			String fname = iter.next();
+			int ix1 = fname.indexOf('.');
+			int ix2 = fname.indexOf('.', ix1 + 1);
+			if (ix1 < 0 || ix2 < ix1) {
+				log.error(dbDir + ": bad file name: " + fname);
+				continue;
+			}
+			String v = fname.substring(ix1 + 1, ix2);
+			try {
+				list.add(Integer.valueOf(v));
+			}
+			catch (NumberFormatException e) {
+				log.error(dbDir + ": bad file name: " + fname);
+			}
+		}
 		int[] versions = new int[list.size()];
 		Iterator<Integer> versionsIter = list.iterator();
 		int ix = 0;

@@ -633,7 +633,8 @@ public class GadpClientServerTest implements AsyncTestUtils {
 
 	public class PrintingServerRunner extends ServerRunner {
 		public PrintingServerRunner() throws IOException {
-        }
+			super();
+		}
 
 		@Override
 		protected TestGadpServer createServer(SocketAddress addr) throws IOException {
@@ -1345,8 +1346,11 @@ public class GadpClientServerTest implements AsyncTestUtils {
 				if (!Objects.equals(this.methodName, that.methodName)) {
 					return false;
 				}
-                return Objects.equals(this.args, that.args);
-            }
+				if (!Objects.equals(this.args, that.args)) {
+					return false;
+				}
+				return true;
+			}
 		}
 
 		public final List<CallEntry> record = new ArrayList<>();

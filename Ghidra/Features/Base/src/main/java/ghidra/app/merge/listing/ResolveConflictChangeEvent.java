@@ -24,7 +24,7 @@ import javax.swing.event.ChangeEvent;
  * VerticalChoicesPanel or VariousChoicesPanel.
  */
 class ResolveConflictChangeEvent extends ChangeEvent {
-    private static final long serialVersionUID = 1;
+    private final static long serialVersionUID = 1;
 	int choice;
 	int row;
 

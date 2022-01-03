@@ -90,15 +90,15 @@ public class WrappedDbgModel
 	}
 
 	public Map<String, ModelObject> getAttributes(List<String> path) {
-		return util.getAttributes(path);
+		return getUtil().getAttributes(path);
 	}
 
 	public List<ModelObject> getElements(List<String> path) {
-		return util.getElements(path);
+		return getUtil().getElements(path);
 	}
 
 	public ModelObject getMethod(List<String> path) {
-		return util.getMethod(path);
+		return getUtil().getMethod(path);
 	}
 
 	@Override
@@ -234,8 +234,8 @@ public class WrappedDbgModel
 
 	@Override
 	public int readVirtual(long offset, ByteBuffer buf, int remaining) {
-		DebugHostContext currentContext = util.getCurrentContext();
-		DebugHost host = util.getHost();
+		DebugHostContext currentContext = getUtil().getCurrentContext();
+		DebugHost host = getUtil().getHost();
 		ULONGLONG ulOffset = new ULONGLONG(offset);
 		LOCATION base = new LOCATION(ulOffset);
 		DebugHostMemory1 memory = host.asMemory();
@@ -245,8 +245,8 @@ public class WrappedDbgModel
 	@Override
 	public int writeVirtual(long offset, ByteBuffer buf, int remaining) {
 		// UNTESTED
-		DebugHostContext currentContext = util.getCurrentContext();
-		DebugHost host = util.getHost();
+		DebugHostContext currentContext = getUtil().getCurrentContext();
+		DebugHost host = getUtil().getHost();
 		ULONGLONG ulOffset = new ULONGLONG(offset);
 		LOCATION base = new LOCATION(ulOffset);
 		DebugHostMemory1 memory = host.asMemory();
@@ -325,8 +325,8 @@ public class WrappedDbgModel
 
 	@Override
 	public int readDebuggerData(int offset, ByteBuffer buf, int remaining) {
-		DebugHostContext currentContext = util.getCurrentContext();
-		DebugHost host = util.getHost();
+		DebugHostContext currentContext = getUtil().getCurrentContext();
+		DebugHost host = getUtil().getHost();
 		ULONGLONG ulOffset = new ULONGLONG(offset);
 		LOCATION base = new LOCATION(ulOffset);
 		DebugHostMemory1 memory = host.asMemory();
@@ -510,13 +510,13 @@ public class WrappedDbgModel
 			return ids;
 		}
 		*/
-		ModelObject currentSession = util.getCurrentSession();
-		ModelObject currentProcess = util.getCurrentProcess();
-		String pid = util.getCtlId(currentProcess);
-		List<ModelObject> runningThreads = util.getRunningThreads(currentSession, pid);
+		ModelObject currentSession = getUtil().getCurrentSession();
+		ModelObject currentProcess = getUtil().getCurrentProcess();
+		String pid = getUtil().getCtlId(currentProcess);
+		List<ModelObject> runningThreads = getUtil().getRunningThreads(currentSession, pid);
 		ids = new ArrayList<DebugThreadId>();
 		for (ModelObject t : runningThreads) {
-			String tid = util.getCtlId(t);
+			String tid = getUtil().getCtlId(t);
 			ids.add(tid2dti(tid));
 		}
 		return ids;
@@ -617,10 +617,10 @@ public class WrappedDbgModel
 			return client.getSystemObjects().getCurrentProcessId();
 		}
 		*/
-		ModelObject currentProcess = util.getCurrentProcess();
+		ModelObject currentProcess = getUtil().getCurrentProcess();
 		DebugProcessId dpi = client.getSystemObjects().getCurrentProcessId();
 		if (currentProcess != null) {
-			String id = util.getCtlId(currentProcess);
+			String id = getUtil().getCtlId(currentProcess);
 			addObj(dpi, id);
 		}
 		return dpi;
@@ -634,10 +634,10 @@ public class WrappedDbgModel
 			return client.getSystemObjects().getCurrentThreadId();
 		}
 		*/
-		ModelObject currentThread = util.getCurrentThread();
+		ModelObject currentThread = getUtil().getCurrentThread();
 		DebugThreadId dti = client.getSystemObjects().getCurrentThreadId();
 		if (currentThread != null) {
-			String id = util.getCtlId(currentThread);
+			String id = getUtil().getCtlId(currentThread);
 			addObj(dti, id);
 		}
 		return dti;
@@ -699,10 +699,10 @@ public class WrappedDbgModel
 			return client.getRunningProcesses(si);
 		}
 		*/
-		List<ModelObject> processes = util.getRunningProcesses(obj2id(si));
+		List<ModelObject> processes = getUtil().getRunningProcesses(obj2id(si));
 		List<DebugRunningProcess> result = new ArrayList<>(processes.size());
 		for (ModelObject child : processes) {
-			String pid = util.getCtlId(child);
+			String pid = getUtil().getCtlId(child);
 			result.add(new DebugRunningProcessImpl(pid, child, si));
 		}
 		return result;
@@ -768,9 +768,9 @@ public class WrappedDbgModel
 	// SYMBOLS INTERFACE
 
 	public List<DebugHostModule1> getDebugHostModules() {
-		DebugHostSymbols symbols = util.getHost().asSymbols();
+		DebugHostSymbols symbols = getUtil().getHost().asSymbols();
 		DebugHostSymbolEnumerator enumerator =
-			symbols.enumerateModules(util.getCurrentContext());
+			symbols.enumerateModules(getUtil().getCurrentContext());
 		List<DebugHostModule1> list = new ArrayList<DebugHostModule1>();
 		DebugHostSymbol1 next;
 		while ((next = enumerator.getNext()) != null) {
@@ -780,7 +780,7 @@ public class WrappedDbgModel
 	}
 
 	public List<DebugModule> getModuleList() {
-		return util.getModuleList();
+		return getUtil().getModuleList();
 	}
 
 	@Override

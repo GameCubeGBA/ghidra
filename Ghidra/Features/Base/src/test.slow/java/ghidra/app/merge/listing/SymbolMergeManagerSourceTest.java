@@ -62,7 +62,8 @@ public class SymbolMergeManagerSourceTest extends AbstractListingMergeManagerTes
 	 * @param arg0
 	 */
 	public SymbolMergeManagerSourceTest() {
-    }
+		super();
+	}
 
 	/** Test add of same symbol with same source to both Latest and My. */
 	@Test

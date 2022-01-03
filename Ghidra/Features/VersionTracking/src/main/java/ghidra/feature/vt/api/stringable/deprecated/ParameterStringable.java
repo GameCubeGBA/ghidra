@@ -71,9 +71,12 @@ public class ParameterStringable extends Stringable {
 			return false;
 		ParameterStringable other = (ParameterStringable) obj;
 		if (parameterInfo == null) {
-            return other.parameterInfo == null;
+			if (other.parameterInfo != null)
+				return false;
 		}
-		else return parameterInfo.equals(other.parameterInfo);
-    }
+		else if (!parameterInfo.equals(other.parameterInfo))
+			return false;
+		return true;
+	}
 
 }

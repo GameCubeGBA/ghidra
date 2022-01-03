@@ -272,7 +272,7 @@ public class ObjectiveC1_MessageAnalyzer extends AbstractAnalyzer {
 			if (data == null) {
 				return null;
 			}
-			data = data.getComponentAt((int) address.subtract(data.getAddress()));
+			data = data.getComponentContaining((int) address.subtract(data.getAddress()));
 			if (data == null) {
 				return null;
 			}
@@ -317,9 +317,9 @@ public class ObjectiveC1_MessageAnalyzer extends AbstractAnalyzer {
 		if (instruction.getNumOperands() != 2) {
 			return false;
 		}
-		boolean isMOV = "MOV".equals(instruction.getMnemonicString());//intel
-		boolean isLWZ = "lwz".equals(instruction.getMnemonicString());//powerpc
-		boolean isLDR = "ldr".equals(instruction.getMnemonicString());//arm
+		boolean isMOV = instruction.getMnemonicString().equals("MOV");//intel
+		boolean isLWZ = instruction.getMnemonicString().equals("lwz");//powerpc
+		boolean isLDR = instruction.getMnemonicString().equals("ldr");//arm
 		return isMOV || isLWZ || isLDR;
 	}
 }

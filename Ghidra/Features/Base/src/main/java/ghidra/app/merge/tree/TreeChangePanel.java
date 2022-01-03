@@ -39,11 +39,11 @@ class TreeChangePanel extends JPanel {
 	private JLabel nameIconLabel;
 	private JLabel structureIconLabel;
 
-	private static final ImageIcon CHANGED_ICON = ResourceManager.loadImage("images/changed16.gif");
-	private static final ImageIcon NO_CHANGE_ICON =
+	private final static ImageIcon CHANGED_ICON = ResourceManager.loadImage("images/changed16.gif");
+	private final static ImageIcon NO_CHANGE_ICON =
 		ResourceManager.loadImage("images/EmptyIcon16.gif");
-	private static final Color CHANGED_COLOR = Color.BLACK;
-	private static final Color NO_CHANGE_COLOR = Color.GRAY;
+	private final static Color CHANGED_COLOR = Color.BLACK;
+	private final static Color NO_CHANGE_COLOR = Color.GRAY;
 
 	TreeChangePanel(String title) {
 		super(new BorderLayout());

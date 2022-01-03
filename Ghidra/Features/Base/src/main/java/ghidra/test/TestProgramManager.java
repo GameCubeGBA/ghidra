@@ -236,13 +236,13 @@ public class TestProgramManager {
 		File gzf = AbstractGenericTest.getTestDataFile(programName + ".gzf");
 
 		// handle program names that are relative paths
-		StringBuilder name = new StringBuilder(gzf.getName());
-		name = new StringBuilder(name.substring(0, name.indexOf(".")));
+		String name = gzf.getName();
+		name = name.substring(0, name.indexOf("."));
 
 		int oneUp = 0;
 		while (true) {
 			try {
-				DomainFile df = folder.createFile(name.toString(), gzf, TaskMonitor.DUMMY);
+				DomainFile df = folder.createFile(name, gzf, TaskMonitor.DUMMY);
 				AbstractGenericTest.waitForPostedSwingRunnables();
 				DomainObject dobj = df.getDomainObject(this, true, false, null);
 				try {
@@ -267,7 +267,7 @@ public class TestProgramManager {
 			}
 			catch (DuplicateFileException e) {
 				++oneUp;
-				name.append("_").append(oneUp);
+				name = name + "_" + oneUp;
 			}
 			catch (IOException e) {
 				String msg = e.getMessage();

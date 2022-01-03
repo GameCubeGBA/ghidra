@@ -18,7 +18,7 @@ package ghidra.trace.util;
 import java.util.Iterator;
 
 public interface EnumeratingIterator<T> extends Iterator<T> {
-	class WrappingEnumeratingIterator<T> implements EnumeratingIterator<T> {
+	public static class WrappingEnumeratingIterator<T> implements EnumeratingIterator<T> {
 		protected final Iterator<T> it;
 
 		protected int index = -1;
@@ -45,7 +45,7 @@ public interface EnumeratingIterator<T> extends Iterator<T> {
 		}
 	}
 
-	static <T> EnumeratingIterator<T> castOrWrap(Iterator<T> it) {
+	public static <T> EnumeratingIterator<T> castOrWrap(Iterator<T> it) {
 		if (it instanceof EnumeratingIterator) {
 			return (EnumeratingIterator<T>) it;
 		}

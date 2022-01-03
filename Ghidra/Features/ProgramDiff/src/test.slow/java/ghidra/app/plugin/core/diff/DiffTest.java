@@ -912,8 +912,11 @@ public class DiffTest extends DiffTestAdapter {
 		if (diffPlugin == null) {
 			return false;
 		}
-        return diffPlugin.getFirstProgram() != null && diffPlugin.getDiffController() != null;
-    }
+		if (diffPlugin.getFirstProgram() == null || diffPlugin.getDiffController() == null) {
+			return false;
+		}
+		return true;
+	}
 
 	private boolean isShowingDiff() {
 		if (diffPlugin == null) {
@@ -921,8 +924,11 @@ public class DiffTest extends DiffTestAdapter {
 		}
 		Program currentProgram = diffPlugin.getCurrentProgram();
 		Program firstProgram = diffPlugin.getFirstProgram();
-        return currentProgram != null && currentProgram == firstProgram;
-    }
+		if (currentProgram == null || currentProgram != firstProgram) {
+			return false;
+		}
+		return true;
+	}
 
 	private void selectTab(final MultiTabPanel panel, final Program pgm) {
 		runSwing(() -> invokeInstanceMethod("setSelectedProgram", panel,

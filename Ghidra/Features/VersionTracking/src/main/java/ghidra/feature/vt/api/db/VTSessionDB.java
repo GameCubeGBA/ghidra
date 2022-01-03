@@ -40,9 +40,9 @@ import ghidra.util.task.TaskLauncher;
 import ghidra.util.task.TaskMonitor;
 
 public class VTSessionDB extends DomainObjectAdapterDB implements VTSession, VTChangeManager {
-	private static final Field[] COL_FIELDS = new Field[] { StringField.INSTANCE };
-	private static final String[] COL_TYPES = new String[] { "Value" };
-	private static final Schema SCHEMA =
+	private final static Field[] COL_FIELDS = new Field[] { StringField.INSTANCE };
+	private final static String[] COL_TYPES = new String[] { "Value" };
+	private final static Schema SCHEMA =
 		new Schema(0, StringField.INSTANCE, "Key", COL_FIELDS, COL_TYPES);
 
 	private static final String PROGRAM_ID_PROPERTYLIST_NAME = "ProgramIDs";

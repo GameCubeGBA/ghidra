@@ -33,7 +33,7 @@ import ghidra.util.task.TaskMonitor;
 
 public class IntelHexLoader extends AbstractProgramLoader {
 
-	public static final String INTEL_HEX_NAME = "Intel Hex";
+	public final static String INTEL_HEX_NAME = "Intel Hex";
 
 	@Override
 	public LoaderTier getTier() {
@@ -150,7 +150,7 @@ public class IntelHexLoader extends AbstractProgramLoader {
 		CompilerSpec importerCompilerSpec =
 			importerLanguage.getCompilerSpecByID(pair.compilerSpecID);
 
-		Program prog = createProgram(provider, programName, null, INTEL_HEX_NAME, importerLanguage,
+		Program prog = createProgram(provider, programName, null, getName(), importerLanguage,
 			importerCompilerSpec, consumer);
 		boolean success = false;
 		try {
@@ -203,7 +203,7 @@ public class IntelHexLoader extends AbstractProgramLoader {
 			baseAddr = program.getAddressFactory().getDefaultAddressSpace().getAddress(0);
 		}
 
-		if (blockName == null || blockName.isEmpty()) {
+		if (blockName == null || blockName.length() == 0) {
 			blockName = generateBlockName(program, isOverlay, baseAddr.getAddressSpace());
 		}
 
@@ -229,10 +229,10 @@ public class IntelHexLoader extends AbstractProgramLoader {
 			}
 		}
 
-		String msg = memImage.createMemory(INTEL_HEX_NAME, provider.getName(),
+		String msg = memImage.createMemory(getName(), provider.getName(),
 			isOverlay ? blockName : null, isOverlay, program, monitor);
 
-		if (!msg.isEmpty()) {
+		if (msg.length() > 0) {
 			log.appendMsg(msg);
 		}
 

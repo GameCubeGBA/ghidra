@@ -252,8 +252,11 @@ public class SearchOptions implements Cloneable {
 		if (searchAll != other.searchAll)
 			return false;
 		if (text == null) {
-            return other.text == null;
+			if (other.text != null)
+				return false;
 		}
-		else return text.equals(other.text);
-    }
+		else if (!text.equals(other.text))
+			return false;
+		return true;
+	}
 }

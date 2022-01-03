@@ -442,7 +442,7 @@ public abstract class AbstractFunctionGraphVertex implements FGVertex {
 
 	@Override
 	public String toString() {
-		if (controller == null || !hasLoadedComponent()) {
+		if (getController() == null || !hasLoadedComponent()) {
 			// disposed!
 			return getClass().getSimpleName() + "@" + getVertexAddress().toString();
 		}

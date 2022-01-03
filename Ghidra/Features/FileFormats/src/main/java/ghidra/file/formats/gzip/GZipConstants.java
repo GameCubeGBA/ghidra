@@ -18,6 +18,6 @@ package ghidra.file.formats.gzip;
 public class GZipConstants {
 
 	public static final int MAGIC_BYTES_COUNT = 2;
-	public static final byte[] MAGIC_BYTES = { (byte) 0x1f, (byte) 0x8b };
+	public final static byte[] MAGIC_BYTES = { (byte) 0x1f, (byte) 0x8b };
 
 }

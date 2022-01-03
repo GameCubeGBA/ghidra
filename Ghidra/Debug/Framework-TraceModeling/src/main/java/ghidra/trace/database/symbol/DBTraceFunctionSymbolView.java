@@ -106,7 +106,7 @@ public class DBTraceFunctionSymbolView
 	public DBTraceFunctionSymbol add(Range<Long> lifespan, Address entryPoint, AddressSetView body,
 			String name, TraceFunctionSymbol thunked, TraceNamespaceSymbol parent,
 			SourceType source) throws InvalidInputException, OverlappingFunctionException {
-		if (name == null || name.isEmpty() || SymbolUtilities.isReservedDynamicLabelName(name,
+		if (name == null || name.length() == 0 || SymbolUtilities.isReservedDynamicLabelName(name,
 			manager.trace.getBaseAddressFactory())) {
 			source = SourceType.DEFAULT;
 			name = "";

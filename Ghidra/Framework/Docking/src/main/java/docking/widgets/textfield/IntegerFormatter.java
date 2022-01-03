@@ -32,7 +32,8 @@ public class IntegerFormatter extends NumberFormatter {
 	private DocumentFilter myDocumentFilter = null;
 
 	public IntegerFormatter() {
-        NumberFormat numberFormat = NumberFormat.getNumberInstance();
+		super();
+		NumberFormat numberFormat = NumberFormat.getNumberInstance();
 		numberFormat.setGroupingUsed(false);
 		numberFormat.setParseIntegerOnly(true);
 		setFormat(numberFormat);
@@ -139,8 +140,11 @@ public class IntegerFormatter extends NumberFormatter {
 			}
 
 			Long longValue = number.longValue();
-            return longValue.compareTo(0L) >= 0; // no negatives
-        }
+			if (longValue.compareTo(0L) < 0) {
+				return false; // no negatives
+			}
+			return true;
+		}
 
 		private boolean containsNonNumericCharacters(String text) {
 			int length = text.length();

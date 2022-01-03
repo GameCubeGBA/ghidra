@@ -179,7 +179,7 @@ class ListingDisplaySearcher implements Searcher {
 	 * Get the next location.
 	 */
 	ProgramLocation next() {
-		if (locationList.isEmpty()) {
+		if (locationList.size() == 0) {
 			findNext();
 		}
 
@@ -205,7 +205,7 @@ class ListingDisplaySearcher implements Searcher {
 	}
 
 	boolean hasNext() {
-		if (locationList.isEmpty()) {
+		if (locationList.size() == 0) {
 			findNext();
 		}
 		return options.isForward() ? locationIterator.hasNext() : locationIterator.hasPrevious();
@@ -248,7 +248,7 @@ class ListingDisplaySearcher implements Searcher {
 	private void findNext() {
 		if (currentLayout != null) {
 			findNextMatch();
-			if (!locationList.isEmpty()) {
+			if (locationList.size() > 0) {
 				return;
 			}
 		}
@@ -259,7 +259,7 @@ class ListingDisplaySearcher implements Searcher {
 		currentCodeUnit = null;
 		Listing listing = program.getListing();
 		while (!monitor.isCancelled() && currentLayout == null && addressIterator.hasNext() &&
-                locationList.isEmpty()) {
+			locationList.size() == 0) {
 
 			currentAddress = addressIterator.next();
 			monitor.setMessage("Checking address " + currentAddress);
@@ -290,14 +290,14 @@ class ListingDisplaySearcher implements Searcher {
 			}
 
 			if (options.isForward()) {
-				while (!monitor.isCancelled() && locationList.isEmpty() &&
+				while (!monitor.isCancelled() && locationList.size() == 0 &&
 					currentLayout != null && currentFieldIndex < currentLayout.getNumFields()) {
 					findNextMatch();
 				}
 			}
 			else {
 				currentFieldIndex = currentLayout.getNumFields() - 1;
-				while (!monitor.isCancelled() && locationList.isEmpty() &&
+				while (!monitor.isCancelled() && locationList.size() == 0 &&
 					currentLayout != null && currentFieldIndex >= 0) {
 					findNextMatch();
 				}
@@ -375,7 +375,7 @@ class ListingDisplaySearcher implements Searcher {
 			findLocations(field);
 		}
 
-		if (!locationList.isEmpty()) {
+		if (locationList.size() > 0) {
 			// we found a match!
 			return fieldCount;
 		}
@@ -506,7 +506,9 @@ class ListingDisplaySearcher implements Searcher {
 			}
 		}
 		if (options.searchLabels()) {
-            return fieldName.equals(LabelFieldFactory.FIELD_NAME);
+			if (fieldName.equals(LabelFieldFactory.FIELD_NAME)) {
+				return true;
+			}
 		}
 
 		return false;

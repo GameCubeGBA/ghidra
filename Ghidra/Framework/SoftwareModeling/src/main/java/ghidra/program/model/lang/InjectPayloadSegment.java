@@ -110,8 +110,11 @@ public class InjectPayloadSegment extends InjectPayloadSleigh {
 		if ((constResolveOffset != op2.constResolveOffset) || (constResolveSize != op2.constResolveSize) || !SystemUtilities.isEqual(constResolveSpace, op2.constResolveSpace) || !space.equals(op2.space)) {
 			return false;
 		}
-        return supportsFarPointer == op2.supportsFarPointer;
-    }
+		if (supportsFarPointer != op2.supportsFarPointer) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public int hashCode() {

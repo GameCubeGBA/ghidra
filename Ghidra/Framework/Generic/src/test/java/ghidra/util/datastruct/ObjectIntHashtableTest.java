@@ -29,7 +29,8 @@ public class ObjectIntHashtableTest extends AbstractGenericTest {
 	 * @param arg0
 	 */
 	public ObjectIntHashtableTest() {
-    }
+		super();
+	}
 
 @Test
     public void testObjectIntHashtable() {

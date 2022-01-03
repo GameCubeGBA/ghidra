@@ -34,16 +34,16 @@ import ghidra.util.datastruct.ListenerSet;
 
 public interface DbgModelTargetRegisterBank extends DbgModelTargetObject, TargetRegisterBank {
 
-	DbgModelTargetRegister getTargetRegister(DbgRegister register);
+	public DbgModelTargetRegister getTargetRegister(DbgRegister register);
 
 	@Override
-    default CompletableFuture<? extends Map<String, byte[]>> readRegistersNamed(
-            Collection<String> names) {
+	public default CompletableFuture<? extends Map<String, byte[]>> readRegistersNamed(
+			Collection<String> names) {
 		return getModel().gateFuture(doReadRegistersNamed(names));
 	}
 
-	default CompletableFuture<? extends Map<String, byte[]>> doReadRegistersNamed(
-            Collection<String> names) {
+	public default CompletableFuture<? extends Map<String, byte[]>> doReadRegistersNamed(
+			Collection<String> names) {
 		DbgManagerImpl manager = getManager();
 		if (manager.isWaiting()) {
 			Msg.warn(this,
@@ -101,11 +101,11 @@ public interface DbgModelTargetRegisterBank extends DbgModelTargetObject, Target
 	}
 
 	@Override
-    default CompletableFuture<Void> writeRegistersNamed(Map<String, byte[]> values) {
+	public default CompletableFuture<Void> writeRegistersNamed(Map<String, byte[]> values) {
 		return getModel().gateFuture(doWriteRegistersNamed(values));
 	}
 
-	default CompletableFuture<Void> doWriteRegistersNamed(Map<String, byte[]> values) {
+	public default CompletableFuture<Void> doWriteRegistersNamed(Map<String, byte[]> values) {
 		DbgThread thread = getParentThread().getThread();
 		return AsyncUtils.sequence(TypeSpec.VOID).then(seq -> {
 			requestNativeElements().handle(seq::nextIgnore);
@@ -133,11 +133,11 @@ public interface DbgModelTargetRegisterBank extends DbgModelTargetObject, Target
 	}
 
 	@Override
-    default Map<String, byte[]> getCachedRegisters() {
+	public default Map<String, byte[]> getCachedRegisters() {
 		return getValues();
 	}
 
-	default Map<String, byte[]> getValues() {
+	public default Map<String, byte[]> getValues() {
 		Map<String, byte[]> result = new HashMap<>();
 		for (Entry<String, ?> entry : this.getCachedAttributes().entrySet()) {
 			if (entry.getValue() instanceof DbgModelTargetRegister) {

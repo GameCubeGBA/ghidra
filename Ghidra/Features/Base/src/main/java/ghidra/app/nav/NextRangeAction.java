@@ -97,5 +97,5 @@ public abstract class NextRangeAction extends NavigatableContextAction {
 
 	}
 
-	protected abstract ProgramSelection getSelection(ProgramLocationActionContext context);
+	abstract protected ProgramSelection getSelection(ProgramLocationActionContext context);
 }

@@ -29,6 +29,7 @@ package ghidra.program.model.pcode;
 public class BlockInfLoop extends BlockGraph {
 	
 	public BlockInfLoop() {
-        blocktype = PcodeBlock.INFLOOP;
+		super();
+		blocktype = PcodeBlock.INFLOOP;
 	}
 }

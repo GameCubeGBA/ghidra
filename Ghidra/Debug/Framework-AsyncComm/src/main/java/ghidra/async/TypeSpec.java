@@ -55,23 +55,23 @@ import ghidra.async.seq.AsyncSequenceWithoutTemp;
  */
 public interface TypeSpec<U> {
 	@SuppressWarnings("rawtypes")
-    TypeSpec RAW = new TypeSpec() {
+	public static final TypeSpec RAW = new TypeSpec() {
 		/*
 		 * Nothing to put here. This one instance will just be cast to satisfy the compiler. I wish
 		 * this didn't blow runtime cycles.
 		 */
 	};
-	TypeSpec<Object> OBJECT = auto();
-	TypeSpec<Boolean> BOOLEAN = auto();
-	TypeSpec<Byte> BYTE = auto();
-	TypeSpec<Character> CHAR = auto();
-	TypeSpec<Short> SHORT = auto();
-	TypeSpec<Integer> INT = auto();
-	TypeSpec<Long> LONG = auto();
-	TypeSpec<String> STRING = auto();
-	TypeSpec<Void> VOID = auto();
+	public static final TypeSpec<Object> OBJECT = auto();
+	public static final TypeSpec<Boolean> BOOLEAN = auto();
+	public static final TypeSpec<Byte> BYTE = auto();
+	public static final TypeSpec<Character> CHAR = auto();
+	public static final TypeSpec<Short> SHORT = auto();
+	public static final TypeSpec<Integer> INT = auto();
+	public static final TypeSpec<Long> LONG = auto();
+	public static final TypeSpec<String> STRING = auto();
+	public static final TypeSpec<Void> VOID = auto();
 
-	TypeSpec<byte[]> BYTE_ARRAY = auto();
+	public static final TypeSpec<byte[]> BYTE_ARRAY = auto();
 
 	/**
 	 * Obtain the most concrete type specifier suitable in the context
@@ -91,11 +91,11 @@ public interface TypeSpec<U> {
 	 * @return
 	 */
 	@SuppressWarnings({ "unchecked" })
-    static <T> TypeSpec<T> auto() {
+	public static <T> TypeSpec<T> auto() {
 		return RAW;
 	}
 
-	static <T> TypeSpec<T> from(Future<T> future) {
+	public static <T> TypeSpec<T> from(Future<T> future) {
 		return auto();
 	}
 
@@ -105,7 +105,7 @@ public interface TypeSpec<U> {
 	 * @param cls the type of the producer
 	 * @return the specifier
 	 */
-	static <U> TypeSpec<U> cls(Class<U> cls) {
+	public static <U> TypeSpec<U> cls(Class<U> cls) {
 		return auto();
 	}
 
@@ -115,7 +115,7 @@ public interface TypeSpec<U> {
 	 * @param example the example having the desired type, often {@code null} cast to the type
 	 * @return the specifier
 	 */
-	static <U> TypeSpec<U> obj(U example) {
+	public static <U> TypeSpec<U> obj(U example) {
 		return auto();
 	}
 
@@ -124,7 +124,7 @@ public interface TypeSpec<U> {
 	 * 
 	 * @return the collection specifier
 	 */
-	default <C extends Collection<U>> TypeSpec<C> col() {
+	public default <C extends Collection<U>> TypeSpec<C> col() {
 		return auto();
 	}
 
@@ -135,7 +135,7 @@ public interface TypeSpec<U> {
 	 * @param cls the raw type of the collection
 	 * @return the collection specifier
 	 */
-	default <C extends Collection<U>> TypeSpec<C> col(Class<? super C> cls) {
+	public default <C extends Collection<U>> TypeSpec<C> col(Class<? super C> cls) {
 		return auto();
 	}
 
@@ -144,7 +144,7 @@ public interface TypeSpec<U> {
 	 * 
 	 * @return the collection specifier
 	 */
-	default <C extends Set<U>> TypeSpec<C> set() {
+	public default <C extends Set<U>> TypeSpec<C> set() {
 		return auto();
 	}
 
@@ -153,7 +153,7 @@ public interface TypeSpec<U> {
 	 * 
 	 * @return the collection specifier
 	 */
-	default <C extends List<U>> TypeSpec<C> list() {
+	public default <C extends List<U>> TypeSpec<C> list() {
 		return auto();
 	}
 
@@ -171,7 +171,7 @@ public interface TypeSpec<U> {
 	 * 
 	 * @return the "extends" type specifier
 	 */
-	default TypeSpec<? extends U> ext() {
+	public default TypeSpec<? extends U> ext() {
 		return auto();
 	}
 
@@ -182,7 +182,7 @@ public interface TypeSpec<U> {
 	 * @param keyType the type specifier for the keys
 	 * @return the map type specifier
 	 */
-	default <K> TypeSpec<Map<K, U>> mappedBy(TypeSpec<K> keyType) {
+	public default <K> TypeSpec<Map<K, U>> mappedBy(TypeSpec<K> keyType) {
 		return auto();
 	}
 
@@ -193,7 +193,7 @@ public interface TypeSpec<U> {
 	 * @param keyCls the class for the keys
 	 * @return the map type specifier
 	 */
-	default <K> TypeSpec<Map<K, U>> mappedBy(Class<K> keyCls) {
+	public default <K> TypeSpec<Map<K, U>> mappedBy(Class<K> keyCls) {
 		return auto();
 	}
 
@@ -204,11 +204,11 @@ public interface TypeSpec<U> {
 	 * @param valCls the type for values
 	 * @return the specifier
 	 */
-	static <K, V> TypeSpec<Map<K, V>> map(Class<K> keyCls, Class<V> valCls) {
+	public static <K, V> TypeSpec<Map<K, V>> map(Class<K> keyCls, Class<V> valCls) {
 		return auto();
 	}
 
-	static <L, R> TypeSpec<Pair<L, R>> pair(TypeSpec<L> lSpec, TypeSpec<R> rSpec) {
+	public static <L, R> TypeSpec<Pair<L, R>> pair(TypeSpec<L> lSpec, TypeSpec<R> rSpec) {
 		return auto();
 	}
 
@@ -297,7 +297,7 @@ public interface TypeSpec<U> {
 	 * @param func the method returning a {@link Future}
 	 * @return the specifier
 	 */
-	static <U> TypeSpec<U> future(FuncArity0<? extends Future<U>> func) {
+	public static <U> TypeSpec<U> future(FuncArity0<? extends Future<U>> func) {
 		return auto();
 	}
 
@@ -308,7 +308,7 @@ public interface TypeSpec<U> {
 	 * @param func the method returning a {@link Future}
 	 * @return the specifier
 	 */
-	static <U, P0> TypeSpec<U> future(FuncArity1<? extends Future<U>, P0> func) {
+	public static <U, P0> TypeSpec<U> future(FuncArity1<? extends Future<U>, P0> func) {
 		return auto();
 	}
 
@@ -319,7 +319,7 @@ public interface TypeSpec<U> {
 	 * @param func the method returning a {@link Future}
 	 * @return the specifier
 	 */
-	static <U, P0, P1> TypeSpec<U> future(FuncArity2<? extends Future<U>, P0, P1> func) {
+	public static <U, P0, P1> TypeSpec<U> future(FuncArity2<? extends Future<U>, P0, P1> func) {
 		return auto();
 	}
 
@@ -330,8 +330,8 @@ public interface TypeSpec<U> {
 	 * @param func the method returning a {@link Future}
 	 * @return the specifier
 	 */
-	static <U, P0, P1, P2> TypeSpec<U> future(
-            FuncArity3<? extends Future<U>, P0, P1, P2> func) {
+	public static <U, P0, P1, P2> TypeSpec<U> future(
+			FuncArity3<? extends Future<U>, P0, P1, P2> func) {
 		return auto();
 	}
 
@@ -342,8 +342,8 @@ public interface TypeSpec<U> {
 	 * @param func the method returning a {@link Future}
 	 * @return the specifier
 	 */
-	static <U, P0, P1, P2, P3> TypeSpec<U> future(
-            FuncArity4<? extends Future<U>, P0, P1, P2, P3> func) {
+	public static <U, P0, P1, P2, P3> TypeSpec<U> future(
+			FuncArity4<? extends Future<U>, P0, P1, P2, P3> func) {
 		return auto();
 	}
 }

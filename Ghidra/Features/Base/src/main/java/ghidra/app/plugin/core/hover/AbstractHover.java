@@ -47,8 +47,11 @@ public abstract class AbstractHover implements HoverService {
 	}
 
 	protected boolean isValidTooltipContent(String content) {
-        return content != null && !content.isEmpty();
-    }
+		if (content == null || content.length() == 0) {
+			return false;
+		}
+		return true;
+	}
 
 	protected JComponent createTooltipComponent(String content) {
 

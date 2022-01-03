@@ -24,7 +24,7 @@ import agent.dbgmodel.jna.dbgmodel.IUnknownEx;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IDebugHostExtensability extends IUnknownEx {
-	IID IID_IDEBUG_HOST_EXTENSABILITY = new IID("3C2B24E1-11D0-4f86-8AE5-4DF166F73253");
+	final IID IID_IDEBUG_HOST_EXTENSABILITY = new IID("3C2B24E1-11D0-4f86-8AE5-4DF166F73253");
 
 	enum VTIndices implements VTableIndex {
 		CREATE_FUNCTION_ALIAS, //

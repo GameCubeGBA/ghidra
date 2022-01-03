@@ -45,7 +45,7 @@ public class UpdateExternalNameCmd implements Command {
 		this.oldName = oldName;
 		this.newName = newName;
 		this.source = source;
-		if (newName == null || newName.isEmpty()) {
+		if (newName == null || newName.length() == 0) {
 			throw new IllegalArgumentException("newName is invalid");
 		}
 	}

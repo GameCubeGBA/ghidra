@@ -25,7 +25,8 @@ public class SymbolTypeTableColumn
 		extends ProgramBasedDynamicTableColumnExtensionPoint<ProgramLocation, String> {
 
 	public SymbolTypeTableColumn() {
-    }
+		super();
+	}
 
 	@Override
 	public String getColumnName() {

@@ -184,7 +184,9 @@ abstract class DataTypeLocationDescriptor extends LocationDescriptor {
 			}
 
 			DataType returnType = function.getReturnType();
-            return ReferenceUtils.getBaseDataType(returnType).isEquivalent(currentDataType);
+			if (ReferenceUtils.getBaseDataType(returnType).isEquivalent(currentDataType)) {
+				return true;
+			}
 		}
 
 		return false;

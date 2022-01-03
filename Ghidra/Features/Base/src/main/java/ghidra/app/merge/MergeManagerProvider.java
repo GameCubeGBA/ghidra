@@ -45,8 +45,8 @@ import resources.ResourceManager;
  */
 class MergeManagerProvider extends ComponentProviderAdapter {
 
-	static final String DEFAULT_ID = "Default Panel";
-	private static final String DEFAULT_INFO = "Merge programs in progress...";
+	final static String DEFAULT_ID = "Default Panel";
+	private final static String DEFAULT_INFO = "Merge programs in progress...";
 
 	private MergeManagerPlugin plugin;
 	private JComponent currentComponent;

@@ -26,7 +26,7 @@ import java.util.List;
  */
 public interface DataTypeDiffInput {
 
-	List<ValidatableLine> getLines();
+	public List<ValidatableLine> getLines();
 
-	PlaceHolderLine createPlaceHolder(ValidatableLine oppositeLine);
+	public PlaceHolderLine createPlaceHolder(ValidatableLine oppositeLine);
 }

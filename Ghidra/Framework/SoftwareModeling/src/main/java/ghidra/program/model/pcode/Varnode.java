@@ -158,7 +158,7 @@ public class Varnode {
 		}
 		if (isConstant() || isUnique() || isHash()) {
 			// this is not really a valid use case
-			return offset == varnode.offset;
+			return offset == varnode.getOffset();
 		}
 		long endOtherOffset = varnode.offset;
 		if (varnode.size > 0) {
@@ -471,8 +471,8 @@ public class Varnode {
 			return false;
 		}
 
-		return (this.offset == vn.offset && this.size == vn.size &&
-			this.spaceID == vn.spaceID);
+		return (this.offset == vn.getOffset() && this.size == vn.getSize() &&
+			this.spaceID == vn.getSpace());
 	}
 
 	@Override

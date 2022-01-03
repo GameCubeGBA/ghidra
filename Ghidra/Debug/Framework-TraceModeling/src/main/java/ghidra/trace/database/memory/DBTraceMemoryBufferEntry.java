@@ -119,8 +119,11 @@ public class DBTraceMemoryBufferEntry extends DBAnnotatedObject {
 		if (blockNum >= DBTraceMemorySpace.BLOCKS_PER_BUFFER) {
 			return false;
 		}
-        return isInUse(blockNum);
-    }
+		if (!isInUse(blockNum)) {
+			return false;
+		}
+		return true;
+	}
 
 	public int setBytes(ByteBuffer buf, int dstOffset, int len, int blockNum) throws IOException {
 		assert isSane(dstOffset, len, blockNum);
@@ -266,11 +269,11 @@ public class DBTraceMemoryBufferEntry extends DBAnnotatedObject {
 	}
 
 	public boolean isEmpty() {
-        for (byte b : inUse) {
-            if (b != 0) {
-                return false;
-            }
-        }
+		for (int i = 0; i < inUse.length; i++) {
+			if (inUse[i] != 0) {
+				return false;
+			}
+		}
 		return true;
 	}
 }

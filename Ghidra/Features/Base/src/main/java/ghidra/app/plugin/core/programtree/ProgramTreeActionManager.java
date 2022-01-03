@@ -745,8 +745,11 @@ class ProgramTreeActionManager implements ClipboardOwner {
 				}
 			}
 		}
-        return numberSelected == 0 || numberSelected == nchild;
-    }
+		if (numberSelected == 0 || numberSelected == nchild) {
+			return true;
+		}
+		return false;
+	}
 
 	///////////////////////////////////////////////////////////////////
 	// ** menu item callback methods for single selection popup

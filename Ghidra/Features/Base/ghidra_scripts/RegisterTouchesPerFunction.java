@@ -28,7 +28,7 @@ import java.util.*;
 
 public class RegisterTouchesPerFunction extends GhidraScript
 {
-	private static final String DIVIDER = "*************************************************************\r\n";
+	private final static String DIVIDER = "*************************************************************\r\n";
 
     @Override
     public void run() throws Exception
@@ -82,35 +82,50 @@ public class RegisterTouchesPerFunction extends GhidraScript
             inst = iIter.next();
 
             Object[] o = inst.getResultObjects();
-            for (Object item : o) {
-                if (item instanceof Register) {
-                    String name = ((Register) item).getName();
+            for (int i = 0; i < o.length; i++)
+            {
+                if (o[i] instanceof Register)
+                {
+                    String name = ((Register) o[i]).getName();
 
-                    if (inst.getMnemonicString().equalsIgnoreCase("pop")) {
-                        if (!"mult_addr".equalsIgnoreCase(name)
-                                && !"sp".equalsIgnoreCase(name)) {
-                            if (!pushPops.isEmpty()) {
+                    if (inst.getMnemonicString().equalsIgnoreCase("pop"))
+                    {
+                        if (!name.equalsIgnoreCase("mult_addr")
+                                && !name.equalsIgnoreCase("sp"))
+                        {
+                            if (pushPops.size() > 0)
+                            {
                                 restored.add(pushPops.pop() + "->" + name);
-                            } else {
+                            }
+                            else
+                            {
                                 reviewRestored = true;
                             }
                         }
-                    } else {
+                    }
+                    else
+                    {
                         affected.add(name);
                     }
                 }
             }
             o = inst.getInputObjects();
 
-            for (Object value : o) {
-                if (value instanceof Register) {
-                    String name = ((Register) value).getName();
-                    if (inst.getMnemonicString().equalsIgnoreCase("push")) {
-                        if (!"mult_addr".equalsIgnoreCase(name)
-                                && !"sp".equalsIgnoreCase(name)) {
+            for (int i = 0; i < o.length; i++)
+            {
+                if (o[i] instanceof Register)
+                {
+                    String name = ((Register) o[i]).getName();
+                    if (inst.getMnemonicString().equalsIgnoreCase("push"))
+                    {
+                        if (!name.equalsIgnoreCase("mult_addr")
+                                && !name.equalsIgnoreCase("sp"))
+                        {
                             pushPops.push(name);
                         }
-                    } else {
+                    }
+                    else
+                    {
                         accessed.add(name);
                     }
                 }
@@ -141,7 +156,7 @@ public class RegisterTouchesPerFunction extends GhidraScript
         }
         buffer.append(DIVIDER);
 
-        if (!pushPops.isEmpty())
+        if (pushPops.size() > 0)
         {
 
         	buffer.append("Registers Remaining on Stack:\r\n");

@@ -150,7 +150,7 @@ public class DisassembleCommand extends BackgroundCommand {
 	}
 
 	@Override
-    public synchronized boolean applyTo(DomainObject obj, TaskMonitor monitor) {
+	synchronized public boolean applyTo(DomainObject obj, TaskMonitor monitor) {
 		Program program = (Program) obj;
 		return doDisassembly(monitor, program, program.getLanguage().getInstructionAlignment());
 	}

@@ -848,16 +848,16 @@ public class GraphDisplayOptions implements OptionsChangeListener {
 	}
 
 	private void checkVertexType(String vertexType) {
-		if (!graphType.containsVertexType(vertexType)) {
+		if (!getGraphType().containsVertexType(vertexType)) {
 			throw new IllegalArgumentException("VertexType \"" + vertexType +
-				"\" not defined in GraphType \"" + graphType.getName() + "\".");
+				"\" not defined in GraphType \"" + getGraphType().getName() + "\".");
 		}
 	}
 
 	private void checkEdgeType(String edgeType) {
-		if (!graphType.containsEdgeType(edgeType)) {
+		if (!getGraphType().containsEdgeType(edgeType)) {
 			throw new IllegalArgumentException("EdgeType \"" + edgeType +
-				"\" not defined in GraphType \"" + graphType.getName() + "\".");
+				"\" not defined in GraphType \"" + getGraphType().getName() + "\".");
 		}
 	}
 

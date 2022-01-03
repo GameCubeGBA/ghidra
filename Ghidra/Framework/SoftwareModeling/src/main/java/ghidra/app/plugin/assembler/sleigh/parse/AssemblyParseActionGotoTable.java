@@ -121,7 +121,7 @@ public class AssemblyParseActionGotoTable {
 	/**
 	 * An action in the Action/Goto table
 	 */
-    public abstract static class Action implements Comparable<Action> {
+	public static abstract class Action implements Comparable<Action> {
 		@Override
 		public int hashCode() {
 			return toString().hashCode();

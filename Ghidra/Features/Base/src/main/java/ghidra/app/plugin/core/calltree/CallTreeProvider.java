@@ -151,14 +151,20 @@ public class CallTreeProvider extends ComponentProviderAdapter implements Domain
 				@Override
 				public boolean isEnabledForContext(ActionContext context) {
 					Object contextObject = context.getContextObject();
-                    return contextObject == outgoingTree || contextObject == incomingTree;
-                }
+					if (!(contextObject == outgoingTree || contextObject == incomingTree)) {
+						return false;
+					}
+					return true;
+				}
 
 				@Override
 				public boolean isAddToPopup(ActionContext context) {
 					Object contextObject = context.getContextObject();
-                    return contextObject == outgoingTree || contextObject == incomingTree;
-                }
+					if (!(contextObject == outgoingTree || contextObject == incomingTree)) {
+						return false;
+					}
+					return true;
+				}
 			};
 		fullyExpandNodesAction.setPopupMenuData(
 			new MenuData(new String[] { "Expand Nodes to Depth Limit" }, EXPAND_ICON, expandMenu));
@@ -212,8 +218,11 @@ public class CallTreeProvider extends ComponentProviderAdapter implements Domain
 
 				GTree gTree = (GTree) contextObject;
 				TreePath[] selectionPaths = gTree.getSelectionPaths();
-                return selectionPaths.length != 0;
-            }
+				if (selectionPaths.length == 0) {
+					return false;
+				}
+				return true;
+			}
 		};
 
 		collapseAllNodesAction.setPopupMenuData(

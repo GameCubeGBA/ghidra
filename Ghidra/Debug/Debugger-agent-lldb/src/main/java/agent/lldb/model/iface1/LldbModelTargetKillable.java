@@ -29,9 +29,9 @@ import ghidra.dbg.target.TargetKillable;
  */
 public interface LldbModelTargetKillable extends LldbModelTargetObject, TargetKillable {
 
-	CompletableFuture<Void> destroy();
+	public CompletableFuture<Void> destroy();
 
 	@Override
-    CompletableFuture<Void> kill();
+	public CompletableFuture<Void> kill();
 
 }

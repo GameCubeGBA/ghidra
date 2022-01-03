@@ -30,38 +30,38 @@ public final class ObjectiveC2_Constants {
 	/**
 	 * The name prefix of all Objective-C 2 sections.
 	 */
-    private static final String OBJC2_PREFIX                    = "__objc_";
+	private final static String OBJC2_PREFIX                    = "__objc_";
 
 	/** Objective-C 2 category list. */
-    public static final String OBJC2_CATEGORY_LIST             = "__objc_catlist";
+	public final static String OBJC2_CATEGORY_LIST             = "__objc_catlist";
 	/** Objective-C 2 class list. */
-    public static final String OBJC2_CLASS_LIST                = "__objc_classlist";
+	public final static String OBJC2_CLASS_LIST                = "__objc_classlist";
 	/** Objective-C 2 class references. */
-    public static final String OBJC2_CLASS_REFS                = "__objc_classrefs";
+	public final static String OBJC2_CLASS_REFS                = "__objc_classrefs";
 	/** Objective-C 2 constants. */
-    public static final String OBJC2_CONST                     = "__objc_const";
+	public final static String OBJC2_CONST                     = "__objc_const";
 	/**  */
-    public static final String OBJC2_DATA                      = "__objc_data";
+	public final static String OBJC2_DATA                      = "__objc_data";
 	/**  */
-    public static final String OBJC2_IMAGE_INFO                = "__objc_imageinfo";
+	public final static String OBJC2_IMAGE_INFO                = "__objc_imageinfo";
 	/**  */
-    public static final String OBJC2_MESSAGE_REFS              = "__objc_msgrefs";
+	public final static String OBJC2_MESSAGE_REFS              = "__objc_msgrefs";
 	/** Objective-C 2 non-lazy class list */
-    public static final String OBJC2_NON_LAZY_CLASS_LIST       = "__objc_nlclslist";
+	public final static String OBJC2_NON_LAZY_CLASS_LIST       = "__objc_nlclslist";
 	/**  */
-    public static final String OBJC2_PROTOCOL_LIST             = "__objc_protolist";
+	public final static String OBJC2_PROTOCOL_LIST             = "__objc_protolist";
 	/**  */
-    public static final String OBJC2_PROTOCOL_REFS             = "__objc_protorefs";
+	public final static String OBJC2_PROTOCOL_REFS             = "__objc_protorefs";
 	/**  */
-    public static final String OBJC2_SELECTOR_REFS             = "__objc_selrefs";
+	public final static String OBJC2_SELECTOR_REFS             = "__objc_selrefs";
 	/**  */
-    public static final String OBJC2_SUPER_REFS                = "__objc_superrefs";
+	public final static String OBJC2_SUPER_REFS                = "__objc_superrefs";
 
 	/**
 	 * Returns a list containing valid Objective-C 2.0 section names.
 	 * @return a list containing valid Objective-C 2.0 section names
 	 */
-    public static final List<String> getObjectiveC2SectionNames() {
+	public final static List<String> getObjectiveC2SectionNames() {
 		List<String> sectionNames = new ArrayList<String>();
 		Field [] declaredFields = ObjectiveC2_Constants.class.getDeclaredFields();
 		for (Field field : declaredFields) {
@@ -82,7 +82,7 @@ public final class ObjectiveC2_Constants {
 	 * @param program the program to check
 	 * @return true if the program contains Objective-C 2.
 	 */
-    public static final boolean isObjectiveC2(Program program) {
+	public final static boolean isObjectiveC2(Program program) {
 		String format = program.getExecutableFormat();
 		if (MachoLoader.MACH_O_NAME.equals(format)) {
 			MemoryBlock [] blocks = program.getMemory().getBlocks();
@@ -95,9 +95,9 @@ public final class ObjectiveC2_Constants {
 		return false;
 	}
 
-	public static final String NAMESPACE = "objc2";
+	public final static String NAMESPACE = "objc2";
 
-	public static final String CATEGORY = "/_objc2_";
+	public final static String CATEGORY = "/_objc2_";
 
-	public static final CategoryPath CATEGORY_PATH = new CategoryPath(CATEGORY);
+	public final static CategoryPath CATEGORY_PATH = new CategoryPath(CATEGORY);
 }

@@ -38,11 +38,12 @@ public class TreeTextFilter implements GTreeFilter {
 		int n = searchStrings.size();
 		// using old fashion for loop to avoid object creation of iterator since this is called 
 		// for each node in a tree (which can be hundreds of thousands)
-        for (String text : searchStrings) {
-            if (textFilter.matches(text)) {
-                return true;
-            }
-        }
+		for (int i = 0; i < n; i++) {
+			String text = searchStrings.get(i);
+			if (textFilter.matches(text)) {
+				return true;
+			}
+		}
 		return false;
 	}
 

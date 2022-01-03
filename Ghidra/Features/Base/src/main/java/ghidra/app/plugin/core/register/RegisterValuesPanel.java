@@ -205,7 +205,9 @@ class RegisterValuesPanel extends JPanel {
 			context.getDefaultValue(register, range.getMinAddress());
 		if (defaultRegsiterValue != null && defaultRegsiterValue.hasValue()) {
 			BigInteger defaultValue = defaultRegsiterValue.getUnsignedValue();
-            return value.equals(defaultValue);
+			if (value.equals(defaultValue)) {
+				return true;
+			}
 		}
 		return false;
 	}

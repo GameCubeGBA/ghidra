@@ -31,7 +31,8 @@ public class AddressMapDBTest extends AbstractGhidraHeadedIntegrationTest {
 	private Program p;
 
 	public AddressMapDBTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

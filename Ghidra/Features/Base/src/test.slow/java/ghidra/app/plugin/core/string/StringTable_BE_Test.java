@@ -64,7 +64,8 @@ public class StringTable_BE_Test extends AbstractGhidraHeadedIntegrationTest {
 	private CodeBrowserPlugin cbPlugin;
 
 	public StringTable_BE_Test() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

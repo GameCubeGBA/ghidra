@@ -84,7 +84,12 @@ public class DeleteVarArgsAction extends ListingContextAction {
 			return false;
 		}
 
-        updatePopupMenu(location instanceof FunctionSignatureFieldLocation);
+		if (location instanceof FunctionSignatureFieldLocation) {
+			updatePopupMenu(true);
+		}
+		else {
+			updatePopupMenu(false);
+		}
 
 		Function function = functionPlugin.getFunction(context);
 		return ((function != null) && (function.hasVarArgs()));

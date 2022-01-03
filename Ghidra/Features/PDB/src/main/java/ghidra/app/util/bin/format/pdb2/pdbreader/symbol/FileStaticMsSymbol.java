@@ -98,7 +98,7 @@ public class FileStaticMsSymbol extends AbstractMsSymbol implements NameMsSymbol
 		myBuilder.append(String.format("%08X ", typeRecordNumber.getNumber()));
 		localVariableFlags.emit(myBuilder);
 		builder.append(
-			String.format("%s: %s, %s", getSymbolTypeName(), myBuilder, name));
+			String.format("%s: %s, %s", getSymbolTypeName(), myBuilder.toString(), name));
 		builder.append("\n   Mod: ");
 		// TODO....not sure this is correct:
 		builder.append(pdb.getNameStringFromOffset(moduleFilenameStringTableIndex));

@@ -77,10 +77,10 @@ public class GTableCellRenderingData {
 	public GTableCellRenderingData copyWithNewValue(Object newValue) {
 
 		GTableCellRenderingData newData =
-			new GTableCellRenderingData(getTable(), columnViewIndex, getColumnSettings());
+			new GTableCellRenderingData(getTable(), getColumnViewIndex(), getColumnSettings());
 
-		newData.setRowData(rowViewIndex, getRowObject());
-		newData.setCellData(newValue, columnViewIndex, isSelected, hasFocus());
+		newData.setRowData(getRowViewIndex(), getRowObject());
+		newData.setCellData(newValue, columnViewIndex, isSelected(), hasFocus());
 
 		return newData;
 	}
@@ -167,7 +167,7 @@ public class GTableCellRenderingData {
 	public String toString() {
 
 		return "[" + this.getClass().getSimpleName() + ":" +
-			getTable().getModel().getClass().getSimpleName() + ":" + columnViewIndex + ":" +
+			getTable().getModel().getClass().getSimpleName() + ":" + getColumnViewIndex() + ":" +
 			getColumnSettings() + "]";
 	}
 

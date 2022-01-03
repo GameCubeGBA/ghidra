@@ -59,22 +59,26 @@ class StorageTableCellEditor extends AbstractCellEditor implements TableCellEdit
 		FunctionVariableData rowData = tableModel.getRowObject(row);
 		final StorageAddressEditorDialog dialog = new StorageAddressEditorDialog(model.getProgram(),
 			model.getDataTypeManagerService(), (VariableStorage) value, rowData);
-		SwingUtilities.invokeLater(() -> {
-            DockingWindowManager.showDialog(table, dialog);
-            if (!dialog.wasCancelled()) {
-                storage = dialog.getStorage();
-            }
-            TableCellEditor cellEditor = table.getCellEditor();
-            if (cellEditor == null) {
-                return;
-            }
-            if (storage == null) {
-                cellEditor.cancelCellEditing();
-            }
-            else {
-                cellEditor.stopCellEditing();
-            }
-        });
+		SwingUtilities.invokeLater(new Runnable() {
+
+			@Override
+			public void run() {
+				DockingWindowManager.showDialog(table, dialog);
+				if (!dialog.wasCancelled()) {
+					storage = dialog.getStorage();
+				}
+				TableCellEditor cellEditor = table.getCellEditor();
+				if (cellEditor == null) {
+					return;
+				}
+				if (storage == null) {
+					cellEditor.cancelCellEditing();
+				}
+				else {
+					cellEditor.stopCellEditing();
+				}
+			}
+		});
 		return field;
 	}
 }

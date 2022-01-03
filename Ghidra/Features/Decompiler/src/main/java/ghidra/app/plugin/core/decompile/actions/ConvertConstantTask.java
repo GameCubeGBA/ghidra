@@ -276,8 +276,11 @@ public class ConvertConstantTask implements Callback {
 			return false;
 		}
 		EquateSymbol eqSymbol = (EquateSymbol) symbol;
-        return eqSymbol.getPCAddress().equals(altAddress);
-    }
+		if (!eqSymbol.getPCAddress().equals(altAddress)) {
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * Callback executed after the alternative equate is placed and the DecompilerProvider has updated its window.

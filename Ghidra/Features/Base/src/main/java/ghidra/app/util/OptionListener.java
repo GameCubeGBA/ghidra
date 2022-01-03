@@ -28,5 +28,5 @@ public interface OptionListener {
 	 * Notification that the given option changed.
 	 * @param option option that changed
 	 */
-    void optionChanged(Option option);
+	public void optionChanged(Option option);
 }

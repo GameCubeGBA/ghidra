@@ -36,7 +36,8 @@ public class LldbGadpServerImpl implements LldbGadpServer {
 	protected final GadpSide server;
 
 	public LldbGadpServerImpl(SocketAddress addr) throws IOException {
-        this.model = new LldbModelImpl();
+		super();
+		this.model = new LldbModelImpl();
 		this.server = new GadpSide(model, addr);
 	}
 

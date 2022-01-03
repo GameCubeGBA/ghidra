@@ -133,11 +133,12 @@ class FileByteBlockSet implements ByteBlockSet {
 	}
 
 	private boolean contains(int index) {
-        for (EditInfo info : changeList) {
-            if (index == info.index) {
-                return true;
-            }
-        }
+		for (int i = 0; i < changeList.size(); i++) {
+			EditInfo info = changeList.get(i);
+			if (index == info.index) {
+				return true;
+			}
+		}
 		return false;
 	}
 

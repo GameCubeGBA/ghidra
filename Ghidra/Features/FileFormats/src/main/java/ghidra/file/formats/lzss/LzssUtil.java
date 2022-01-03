@@ -23,14 +23,16 @@ import java.util.Arrays;
 
 public class LzssUtil {
 
-	public static final boolean isLZSS(Program program) {
+	public final static boolean isLZSS(Program program) {
 		if (program != null) {
 			Address address = program.getMinAddress();
 			if (address != null) {
 				byte [] compressionBytes = getBytes(program, address);
 				if (Arrays.equals(compressionBytes, LzssConstants.SIGNATURE_COMPRESSION_BYTES)) {
 					byte [] formatBytes = getBytes(program, address.add(compressionBytes.length));
-                    return Arrays.equals(formatBytes, LzssConstants.SIGNATURE_LZSS_BYTES);
+					if (Arrays.equals(formatBytes, LzssConstants.SIGNATURE_LZSS_BYTES)) {
+						return true;
+					}
 				}
 			}
 		}

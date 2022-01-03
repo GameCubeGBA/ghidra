@@ -289,7 +289,7 @@ public class FilterTextField extends JPanel {
 	@Override
 	public void setEnabled(boolean enabled) {
 		textField.setEnabled(enabled);
-		updateField(!textField.getText().isEmpty());
+		updateField(textField.getText().length() > 0);
 	}
 
 	@Override
@@ -338,7 +338,7 @@ public class FilterTextField extends JPanel {
 
 	private void updateField(boolean fireEvent) {
 		String text = getText();
-		hasText = !text.isEmpty();
+		hasText = text.length() > 0;
 
 		updateFocusFlashing();
 

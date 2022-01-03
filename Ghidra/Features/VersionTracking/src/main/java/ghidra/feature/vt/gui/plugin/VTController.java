@@ -37,113 +37,113 @@ import ghidra.program.util.ProgramLocation;
 
 public interface VTController {
 
-	String VERSION_TRACKING_OPTIONS_NAME = "Version Tracking";
+	public static final String VERSION_TRACKING_OPTIONS_NAME = "Version Tracking";
 
-	void addListener(VTControllerListener listener);
+	public void addListener(VTControllerListener listener);
 
-	void removeListener(VTControllerListener listener);
+	public void removeListener(VTControllerListener listener);
 
 //	public VTSessionState getSessionState();
 
-	VTSession getSession();
+	public VTSession getSession();
 
-	void openVersionTrackingSession(DomainFile domainFile);
+	public void openVersionTrackingSession(DomainFile domainFile);
 
-	void openVersionTrackingSession(VTSession session);
+	public void openVersionTrackingSession(VTSession session);
 
-	boolean closeVersionTrackingSession();
+	public boolean closeVersionTrackingSession();
 
-	void closeCurrentSessionIgnoringChanges();
+	public void closeCurrentSessionIgnoringChanges();
 
-	void dispose();
+	public void dispose();
 
-	void readConfigState(SaveState saveState);
+	public void readConfigState(SaveState saveState);
 
-	void writeConfigState(SaveState saveState);
+	public void writeConfigState(SaveState saveState);
 
-	Program getSourceProgram();
+	public Program getSourceProgram();
 
-	Program getDestinationProgram();
+	public Program getDestinationProgram();
 
 	// returns true if the operation was not cancelled.
-    boolean checkForUnSavedChanges();
+	public boolean checkForUnSavedChanges();
 
-	AddressCorrelation getCorrelator(Function source, Function destination);
+	public AddressCorrelation getCorrelator(Function source, Function destination);
 
-	AddressCorrelation getCorrelator(Data source, Data destination);
+	public AddressCorrelation getCorrelator(Data source, Data destination);
 
-	VTMarkupItem getCurrentMarkupForLocation(ProgramLocation location, Program program);
+	public VTMarkupItem getCurrentMarkupForLocation(ProgramLocation location, Program program);
 
-	List<VTMarkupItem> getMarkupItems(ActionContext context);
+	public List<VTMarkupItem> getMarkupItems(ActionContext context);
 
-	ToolOptions getOptions();
+	public ToolOptions getOptions();
 
-	Component getParentComponent();
+	public Component getParentComponent();
 
-	ServiceProvider getServiceProvider();
+	public ServiceProvider getServiceProvider();
 
-	String getVersionTrackingSessionName();
+	public String getVersionTrackingSessionName();
 
-	void refresh();
+	public void refresh();
 
-	MatchInfo getMatchInfo();
+	public MatchInfo getMatchInfo();
 
-	PluginTool getTool();
+	public PluginTool getTool();
 
-	void setSelectedMatch(VTMatch match);
+	public void setSelectedMatch(VTMatch match);
 
-	MatchInfo getMatchInfo(VTMatch match);
+	public MatchInfo getMatchInfo(VTMatch match);
 
-	void setSelectedMarkupItem(VTMarkupItem markupItem);
+	public void setSelectedMarkupItem(VTMarkupItem markupItem);
 
-	AddressCorrelatorManager getCorrelator();
+	public AddressCorrelatorManager getCorrelator();
 
-	void domainObjectChanged(DomainObjectChangedEvent ev);
+	public void domainObjectChanged(DomainObjectChangedEvent ev);
 
-	void optionsChanged(ToolOptions options, String optionName, Object oldValue,
-                        Object newValue);
+	public void optionsChanged(ToolOptions options, String optionName, Object oldValue,
+			Object newValue);
 
-	void gotoSourceLocation(ProgramLocation location);
+	public void gotoSourceLocation(ProgramLocation location);
 
-	void gotoDestinationLocation(ProgramLocation location);
+	public void gotoDestinationLocation(ProgramLocation location);
 
 	/**
 	 * Runs VT tasks, listening for destination program changes and updates undo/redo state
 	 * accordingly.
 	 */
-    void runVTTask(VtTask task);
+	public void runVTTask(VtTask task);
 
-	Symbol getSourceSymbol(VTAssociation association);
+	public Symbol getSourceSymbol(VTAssociation association);
 
-	Symbol getDestinationSymbol(VTAssociation association);
+	public Symbol getDestinationSymbol(VTAssociation association);
 
 	/**
 	 * Gets the address set for the current selection in the Source Tool.
 	 * @return the current selection or null.
 	 */
-    AddressSetView getSelectionInSourceTool();
+	public AddressSetView getSelectionInSourceTool();
 
 	/**
 	 * Gets the address set for the current selection in the Destination Tool.
 	 * @return the current selection or null.
 	 */
-    AddressSetView getSelectionInDestinationTool();
+	public AddressSetView getSelectionInDestinationTool();
 
 	/**
 	 * Sets the selection in the source tool to the given address set.
 	 * @param sourceSet the addressSet to set the source tool's selection.
 	 */
-    void setSelectionInSourceTool(AddressSetView sourceSet);
+	public void setSelectionInSourceTool(AddressSetView sourceSet);
 
 	/**
 	 * Sets the selection in the destination tool to the given address set.
 	 * @param destinationSet the addressSet to set the destination tool's selection.
 	 */
-    void setSelectionInDestinationTool(AddressSetView destinationSet);
+	public void setSelectionInDestinationTool(AddressSetView destinationSet);
 
-	void markupItemStatusChanged(VTMarkupItem markupItem);
+	public void markupItemStatusChanged(VTMarkupItem markupItem);
 
-	ColorizingService getSourceColorizingService();
+	public ColorizingService getSourceColorizingService();
 
-	ColorizingService getDestinationColorizingService();
+	public ColorizingService getDestinationColorizingService();
 }

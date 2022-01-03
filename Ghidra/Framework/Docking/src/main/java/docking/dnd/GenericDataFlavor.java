@@ -28,7 +28,8 @@ public class GenericDataFlavor extends DataFlavor {
 	 * Construct a new GenericDataFlavor.
 	 */
 	public GenericDataFlavor() {
-    }
+		super();
+	}
 
 	/**
 	 * Construct a GenericDataFlavor that represents a Java class 

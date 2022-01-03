@@ -80,7 +80,7 @@ public class BatchSegregatingCriteria {
 	@Override
 	public String toString() {
 		return "[ext: " + (fileExt != null ? fileExt : "") + ", loader: " + loader +
-			", load specs: " + groupLoadSpecs + "]";
+			", load specs: " + groupLoadSpecs.toString() + "]";
 	}
 
 	@Override
@@ -122,8 +122,13 @@ public class BatchSegregatingCriteria {
 			return false;
 		}
 		if (groupLoadSpecs == null) {
-            return other.groupLoadSpecs == null;
+			if (other.groupLoadSpecs != null) {
+				return false;
+			}
 		}
-		else return groupLoadSpecs.equals(other.groupLoadSpecs);
-    }
+		else if (!groupLoadSpecs.equals(other.groupLoadSpecs)) {
+			return false;
+		}
+		return true;
+	}
 }

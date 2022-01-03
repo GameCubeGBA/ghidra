@@ -64,12 +64,42 @@ public class DecimalSearchFormat extends SearchFormat {
 		GRadioButton decimalFloat = new GRadioButton("Float", false);
 		GRadioButton decimalDouble = new GRadioButton("Double", false);
 
-		decimalByte.addActionListener(ev -> setDecimalFormat(BYTE));
-		decimalWord.addActionListener(ev -> setDecimalFormat(WORD));
-		decimalDWord.addActionListener(ev -> setDecimalFormat(DWORD));
-		decimalQWord.addActionListener(ev -> setDecimalFormat(QWORD));
-		decimalFloat.addActionListener(ev -> setDecimalFormat(FLOAT));
-		decimalDouble.addActionListener(ev -> setDecimalFormat(DOUBLE));
+		decimalByte.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ev) {
+				setDecimalFormat(BYTE);
+			}
+		});
+		decimalWord.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ev) {
+				setDecimalFormat(WORD);
+			}
+		});
+		decimalDWord.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ev) {
+				setDecimalFormat(DWORD);
+			}
+		});
+		decimalQWord.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ev) {
+				setDecimalFormat(QWORD);
+			}
+		});
+		decimalFloat.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ev) {
+				setDecimalFormat(FLOAT);
+			}
+		});
+		decimalDouble.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ev) {
+				setDecimalFormat(DOUBLE);
+			}
+		});
 
 		decimalGroup.add(decimalByte);
 		decimalGroup.add(decimalWord);

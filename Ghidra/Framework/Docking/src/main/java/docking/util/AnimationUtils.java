@@ -637,7 +637,7 @@ public class AnimationUtils {
 		}
 	}
 
-	public abstract static class BasicAnimationPainter implements GGlassPanePainter {
+	public static abstract class BasicAnimationPainter implements GGlassPanePainter {
 		protected double percentComplete = 0.0;
 
 		void setPercentComplete(double percent) {

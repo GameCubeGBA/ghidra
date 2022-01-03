@@ -24,8 +24,8 @@ import ghidra.graph.viewer.layout.VisualGraphLayout;
 public interface FGLayout extends VisualGraphLayout<FGVertex, FGEdge> {
 
 	@Override
-    FGLayout cloneLayout(VisualGraph<FGVertex, FGEdge> newGraph);
+	public FGLayout cloneLayout(VisualGraph<FGVertex, FGEdge> newGraph);
 
 	@Override
-    FunctionGraph getVisualGraph();
+	public FunctionGraph getVisualGraph();
 }

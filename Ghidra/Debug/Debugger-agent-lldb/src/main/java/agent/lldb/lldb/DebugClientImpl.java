@@ -137,12 +137,12 @@ public class DebugClientImpl implements DebugClient {
 	@Override
 	public SBProcess createProcess(DebugServerId si, SBLaunchInfo info) {
 		SBError error = new SBError();
-		StringBuilder cmd = new StringBuilder(info.GetExecutableFile().GetDirectory());
-		cmd.append("/").append(info.GetExecutableFile().GetFilename());
+		String cmd = info.GetExecutableFile().GetDirectory();
+		cmd += "/" + info.GetExecutableFile().GetFilename();
 		for (int i = 0; i < info.GetNumArguments(); i++) {
-			cmd.append(" ").append(info.GetArgumentAtIndex(i));
+			cmd += " " + info.GetArgumentAtIndex(i);
 		}
-		session = connectSession(cmd.toString());
+		session = connectSession(cmd);
 		SBProcess process = session.Launch(info, error);
 		if (!error.Success()) {
 			Msg.error(this, error.GetType() + " for create process");

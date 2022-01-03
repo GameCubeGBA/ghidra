@@ -25,60 +25,60 @@ public class AARCH64_MachoRelocationConstants {
 	/**
 	 * For pointers
 	 */
-    public static final int ARM64_RELOC_UNSIGNED = 0;
+	public final static int ARM64_RELOC_UNSIGNED = 0;
 
 	/**
 	 * Must be followed by a ARM64_RELOC_UNSIGNED
 	 */
-    public static final int ARM64_RELOC_SUBTRACTOR = 1;
+	public final static int ARM64_RELOC_SUBTRACTOR = 1;
 
 	/**
 	 * A B/BL instruction with 26-bit displacement
 	 */
-    public static final int ARM64_RELOC_BRANCH26 = 2;
+	public final static int ARM64_RELOC_BRANCH26 = 2;
 
 	/**
 	 * PC-rel distance to page of target
 	 */
-    public static final int ARM64_RELOC_PAGE21 = 3;
+	public final static int ARM64_RELOC_PAGE21 = 3;
 
 	/**
 	 * Offset within page, scaled by r_length
 	 */
-    public static final int ARM64_RELOC_PAGEOFF12 = 4;
+	public final static int ARM64_RELOC_PAGEOFF12 = 4;
 
 	/**
 	 * PC-rel distance to page of GOT slot
 	 */
-    public static final int ARM64_RELOC_GOT_LOAD_PAGE21 = 5;
+	public final static int ARM64_RELOC_GOT_LOAD_PAGE21 = 5;
 
 	/**
 	 * Offset within page of GOT slot, scaled by r_length
 	 */
-    public static final int ARM64_RELOC_GOT_LOAD_PAGEOFF12 = 6;
+	public final static int ARM64_RELOC_GOT_LOAD_PAGEOFF12 = 6;
 
 	/**
 	 * For pointers to GOT slots
 	 */
-    public static final int ARM64_RELOC_POINTER_TO_GOT = 7;
+	public final static int ARM64_RELOC_POINTER_TO_GOT = 7;
 
 	/**
 	 * PC-rel distance to page of TLVP slot
 	 */
-    public static final int ARM64_RELOC_TLVP_LOAD_PAGE21 = 8;
+	public final static int ARM64_RELOC_TLVP_LOAD_PAGE21 = 8;
 
 	/**
 	 * Offset within page of TLVP slot, scaled by r_length
 	 */
-    public static final int ARM64_RELOC_TLVP_LOAD_PAGEOFF12 = 9;
+	public final static int ARM64_RELOC_TLVP_LOAD_PAGEOFF12 = 9;
 
 	/**
 	 * Must be followed by PAGE21 or PAGEOFF12
 	 */
-    public static final int ARM64_RELOC_ADDEND = 10;
+	public final static int ARM64_RELOC_ADDEND = 10;
 	
 	/**
 	 * Like ARM64_RELOC_UNSIGNED, but addend in lower 32-bits
 	 */
-    public static final int ARM64_RELOC_AUTHENTICATED_POINTER = 11;
+	public final static int ARM64_RELOC_AUTHENTICATED_POINTER = 11;
 }

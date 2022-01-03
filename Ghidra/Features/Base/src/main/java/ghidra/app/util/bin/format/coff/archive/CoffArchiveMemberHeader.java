@@ -16,7 +16,6 @@
 package ghidra.app.util.bin.format.coff.archive;
 
 import java.io.IOException;
-import java.util.regex.Pattern;
 
 import ghidra.app.util.bin.*;
 import ghidra.program.model.data.*;
@@ -52,7 +51,6 @@ public class CoffArchiveMemberHeader implements StructConverter {
 
 	private static final int CAMH_PAYLOAD_OFF = 60;
 	public static final int CAMH_MIN_SIZE = CAMH_PAYLOAD_OFF;
-	private static final Pattern COMPILE = Pattern.compile("/[0-9]+");
 
 	/**
 	 * Reads a COFF archive member header from the specified {@link BinaryReader reader},
@@ -161,7 +159,7 @@ public class CoffArchiveMemberHeader implements StructConverter {
 				throw new IOException("Bad name len value: " + name);
 			}
 		}
-		else if (COMPILE.matcher(name).matches() && longNames != null) {
+		else if (name.matches("/[0-9]+") && longNames != null) {
 			try {
 				long offset = Long.parseLong(name.substring(1));
 				name = longNames.getStringAtOffset(reader.getByteProvider(), offset);

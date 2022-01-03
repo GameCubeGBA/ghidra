@@ -111,12 +111,12 @@ public class TrampolineMsSymbol extends AbstractMsSymbol implements AddressMsSym
 
 	@Override
 	public long getOffset() {
-		return offsetThunk;
+		return getOffsetThunk();
 	}
 
 	@Override
 	public int getSegment() {
-		return sectionThunk;
+		return getSegmentThunk();
 	}
 
 	/**

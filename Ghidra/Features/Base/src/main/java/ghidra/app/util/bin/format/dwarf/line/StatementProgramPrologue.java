@@ -22,8 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StatementProgramPrologue {
-	public static final int TOTAL_LENGTH_FIELD_LEN = 4;
-	public static final int PRE_PROLOGUE_LEN = 4 + 2 + 4;
+	public final static int TOTAL_LENGTH_FIELD_LEN = 4;
+	public final static int PRE_PROLOGUE_LEN = 4 + 2 + 4;
 
 	private int        totalLength;
 	private short      version;
@@ -56,7 +56,7 @@ public class StatementProgramPrologue {
 
 		while (true) {
 			String dir = reader.readNextAsciiString();
-			if (dir.isEmpty()) {
+			if (dir.length() == 0) {
 				break;
 			}
 			includeDirectories.add(dir);
@@ -64,7 +64,7 @@ public class StatementProgramPrologue {
 
 		while (true) {
 			FileEntry entry = new FileEntry(reader);
-			if (entry.getFileName().isEmpty()) {
+			if (entry.getFileName().length() == 0) {
 				break;
 			}
 			fileNames.add(entry);

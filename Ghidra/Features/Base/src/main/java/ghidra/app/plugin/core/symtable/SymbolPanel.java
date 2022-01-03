@@ -226,7 +226,10 @@ class SymbolPanel extends JPanel {
 			if (obj == null) {
 				return false;
 			}
-            return getClass() == obj.getClass();
-        }
+			if (getClass() != obj.getClass()) {
+				return false;
+			}
+			return true;
+		}
 	}
 }

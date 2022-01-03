@@ -123,11 +123,14 @@ public class GraphType {
 		if (!edgeTypes.equals(other.edgeTypes)) {
 			return false;
 		}
-        return vertexTypes.equals(other.vertexTypes);
-    }
+		if (!vertexTypes.equals(other.vertexTypes)) {
+			return false;
+		}
+		return true;
+	}
 
 	public String getOptionsName() {
-		return name + " Graph Type";
+		return getName() + " Graph Type";
 	}
 
 }

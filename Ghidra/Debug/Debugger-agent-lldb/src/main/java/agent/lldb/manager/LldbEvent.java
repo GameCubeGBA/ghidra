@@ -24,26 +24,26 @@ public interface LldbEvent<T> {
 	 * 
 	 * @return the information
 	 */
-    T getInfo();
+	public T getInfo();
 
 	/**
 	 * Use {@link LldbPendingCommand#claim(LldbEvent)} instead
 	 * 
 	 * @param cause the cause
 	 */
-    void claim(LldbPendingCommand<?> cause);
+	public void claim(LldbPendingCommand<?> cause);
 
 	/**
 	 * If claimed, get the cause of this event
 	 * 
 	 * @return the cause
 	 */
-    LldbCause getCause();
+	public LldbCause getCause();
 
 	/**
 	 * Use {@link LldbPendingCommand#steal(LldbEvent)} instead
 	 */
-    void steal();
+	public void steal();
 
 	/**
 	 * Check if this event is stolen
@@ -52,13 +52,13 @@ public interface LldbEvent<T> {
 	 * 
 	 * @return true if stolen, false otherwise
 	 */
-    boolean isStolen();
+	public boolean isStolen();
 
 	/**
 	 * If this event implies a new lldb state, get that state
 	 * 
 	 * @return the new state, or null for no change
 	 */
-    StateType newState();
+	public StateType newState();
 
 }

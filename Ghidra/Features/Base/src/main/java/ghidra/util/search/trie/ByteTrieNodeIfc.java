@@ -22,27 +22,27 @@ public interface ByteTrieNodeIfc<T> {
 	 * or just an internal node on our way down to one.
 	 * @return whether this node represents a terminal value
 	 */
-    boolean isTerminal();
+	public abstract boolean isTerminal();
 
 	/**
 	 * Returns the user item stored in a terminal node (or null in an
 	 * internal node).
 	 * @return the user item
 	 */
-    T getItem();
+	public abstract T getItem();
 
 	/**
 	 * Returns a new byte array with the value of the byte sequence represented
 	 * by this node (slow, built from scratch every time).
 	 * @return the byte sequence
 	 */
-    byte[] getValue();
+	public abstract byte[] getValue();
 
 	/**
 	 * Returns the length of the byte sequence represented by this node
 	 * (cached integer, very fast).
 	 * @return the length of the byte sequence
 	 */
-    int length();
+	public abstract int length();
 
 }

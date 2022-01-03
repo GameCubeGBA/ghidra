@@ -43,7 +43,8 @@ public class PackedDBHandle extends DBHandle {
 	 * @throws IOException
 	 */
 	public PackedDBHandle(String contentType) throws IOException {
-        this.contentType = contentType;
+		super();
+		this.contentType = contentType;
 	}
 
 	/**

@@ -32,5 +32,5 @@ public interface SelectLanguagePanelListener {
      * @param langID the selected language id.
      * @param compilerSpecID the selected compiler spec id.
      */
-    void selectIDValidation(LanguageID langID, CompilerSpecID compilerSpecID);
+    public void selectIDValidation(LanguageID langID, CompilerSpecID compilerSpecID);
 }

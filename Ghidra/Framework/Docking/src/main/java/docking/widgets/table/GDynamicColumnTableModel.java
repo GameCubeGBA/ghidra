@@ -190,7 +190,9 @@ public abstract class GDynamicColumnTableModel<ROW_TYPE, DATA_SOURCE>
 		if (column instanceof MappedTableColumn) {
 			MappedTableColumn<?, ?, ?, ?> mappedColumn = (MappedTableColumn<?, ?, ?, ?>) column;
 			Class<?> columnClass = mappedColumn.getMappedColumnClass();
-            return clazz.equals(columnClass);
+			if (clazz.equals(columnClass)) {
+				return true;
+			}
 		}
 
 		return false;
@@ -241,15 +243,17 @@ public abstract class GDynamicColumnTableModel<ROW_TYPE, DATA_SOURCE>
 
 		Object source = e.getSource();
 		TableSortState tableSortState = getTableSortState();
-        for (ColumnSortState columnSortState : tableSortState) {
-            int columnIndex = columnSortState.getColumnModelIndex();
-            DynamicTableColumn<?, ?, ?> column = tableColumns.get(columnIndex);
-            if (column == source) {
-                reSort();
-                return true;
-            }
-        }
-        return false;
+		Iterator<ColumnSortState> iterator = tableSortState.iterator();
+		for (; iterator.hasNext();) {
+			ColumnSortState columnSortState = iterator.next();
+			int columnIndex = columnSortState.getColumnModelIndex();
+			DynamicTableColumn<?, ?, ?> column = tableColumns.get(columnIndex);
+			if (column == source) {
+				reSort();
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -275,7 +279,7 @@ public abstract class GDynamicColumnTableModel<ROW_TYPE, DATA_SOURCE>
 	 */
 	protected void addTableColumns(Set<DynamicTableColumn<ROW_TYPE, ?, ?>> columns) {
 		for (DynamicTableColumn<ROW_TYPE, ?, ?> column : columns) {
-			doAddTableColumn(column, defaultTableColumns.size(), true);
+			doAddTableColumn(column, getDefaultTableColumns().size(), true);
 		}
 		fireTableStructureChanged();
 	}
@@ -304,13 +308,13 @@ public abstract class GDynamicColumnTableModel<ROW_TYPE, DATA_SOURCE>
 			boolean isDefault) {
 
 		if (index < 0 || index > tableColumns.size()) {
-			index = defaultTableColumns.size();
+			index = getDefaultTableColumns().size();
 		}
 
 		tableColumns.add(index, column);
 		columnSettings.put(column, new SettingsImpl(this, column));
 		if (isDefault) {
-			List<DynamicTableColumn<ROW_TYPE, ?, ?>> defaultColumns = defaultTableColumns;
+			List<DynamicTableColumn<ROW_TYPE, ?, ?>> defaultColumns = getDefaultTableColumns();
 			defaultColumns.add(index, column);
 		}
 	}
@@ -333,7 +337,7 @@ public abstract class GDynamicColumnTableModel<ROW_TYPE, DATA_SOURCE>
 	protected void removeTableColumns(Set<DynamicTableColumn<ROW_TYPE, ?, ?>> columns) {
 
 		for (DynamicTableColumn<ROW_TYPE, ?, ?> column : columns) {
-			List<DynamicTableColumn<ROW_TYPE, ?, ?>> defaultColumns = defaultTableColumns;
+			List<DynamicTableColumn<ROW_TYPE, ?, ?>> defaultColumns = getDefaultTableColumns();
 			defaultColumns.remove(column);
 			tableColumns.remove(column);
 			columnSettings.remove(column);
@@ -343,7 +347,7 @@ public abstract class GDynamicColumnTableModel<ROW_TYPE, DATA_SOURCE>
 
 	@Override
 	public int getDefaultColumnCount() {
-		return defaultTableColumns.size();
+		return getDefaultTableColumns().size();
 	}
 
 	@Override
@@ -353,7 +357,7 @@ public abstract class GDynamicColumnTableModel<ROW_TYPE, DATA_SOURCE>
 		}
 
 		DynamicTableColumn<?, ?, ?> column = tableColumns.get(modelIndex);
-		List<DynamicTableColumn<ROW_TYPE, ?, ?>> defaultColumns = defaultTableColumns;
+		List<DynamicTableColumn<ROW_TYPE, ?, ?>> defaultColumns = getDefaultTableColumns();
 		return defaultColumns.contains(column);
 	}
 
@@ -372,7 +376,7 @@ public abstract class GDynamicColumnTableModel<ROW_TYPE, DATA_SOURCE>
 		DynamicTableColumn<?, ?, ?> column = tableColumns.get(modelIndex);
 
 		// check the 'defaultColumns' first, as they may have been updated after initialization
-		List<DynamicTableColumn<ROW_TYPE, ?, ?>> defaultColumns = defaultTableColumns;
+		List<DynamicTableColumn<ROW_TYPE, ?, ?>> defaultColumns = getDefaultTableColumns();
 		if (defaultColumns.contains(column)) {
 			return true;
 		}

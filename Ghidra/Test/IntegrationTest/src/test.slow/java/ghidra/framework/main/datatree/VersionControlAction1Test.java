@@ -395,7 +395,7 @@ public class VersionControlAction1Test extends AbstractVersionControlActionTest 
 		for (int i = 0; i < n; i++) {
 			Component comp = popup.getComponent(i);
 			if (comp instanceof JMenuItem) {
-				if ("Open in Default Tool".equals(((JMenuItem) comp).getText())) {
+				if (((JMenuItem) comp).getText().equals("Open in Default Tool")) {
 					final ActionListener al = ((JMenuItem) comp).getActionListeners()[0];
 					runSwing(new Runnable() {
 						@Override
@@ -470,7 +470,7 @@ public class VersionControlAction1Test extends AbstractVersionControlActionTest 
 				for (int j = 0; j < nItems; j++) {
 					Component item = menu.getMenuComponent(j);
 					if (item instanceof JMenuItem) {
-						if ("CodeBrowser".equals(((JMenuItem) item).getText())) {
+						if (((JMenuItem) item).getText().equals("CodeBrowser")) {
 							final ActionListener al = ((JMenuItem) item).getActionListeners()[0];
 							runSwing(new Runnable() {
 								@Override

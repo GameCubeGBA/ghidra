@@ -27,7 +27,7 @@ import ghidra.program.model.lang.Processor;
 
 public class SplitExtensibleFirmwareInterfaceScript extends GhidraScript {
 
-	public static final int MAGIC = 0x0ef1fab9;
+	public final static int MAGIC = 0x0ef1fab9;
 
 	@Override
 	public void run() throws Exception {

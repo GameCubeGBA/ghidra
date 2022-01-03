@@ -23,6 +23,6 @@ public interface CoordinatedListingPanelListener {
 	 * Notifies the listener that it's associated listing panel should get closed.
 	 * @return true if the listener actually closes a listing panel.
 	 */
-    boolean listingClosed();
-	void activeProgramChanged(Program activeProgram);
+	public boolean listingClosed();
+	public void activeProgramChanged(Program activeProgram);
 }

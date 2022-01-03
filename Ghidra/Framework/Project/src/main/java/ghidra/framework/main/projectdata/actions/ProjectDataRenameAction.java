@@ -115,6 +115,9 @@ public class ProjectDataRenameAction extends FrontendProjectTreeAction {
 				return false;  // can't rename root folder
 			}
 		}
-        return !context.isReadOnlyProject();
-    }
+		if (context.isReadOnlyProject()) {
+			return false;
+		}
+		return true;
+	}
 }

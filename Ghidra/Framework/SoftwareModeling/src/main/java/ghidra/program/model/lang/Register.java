@@ -36,21 +36,21 @@ public class Register implements java.io.Serializable, Comparable<Register> {
 
 	private static final List<String> EMPTY_COLLECTION = new ArrayList<>();
 
-	private static final long serialVersionUID = 1;
-	public static final int TYPE_NONE = 0; // nothing special
-	public static final int TYPE_FP = 1; // frame pointer
-	public static final int TYPE_SP = 2; // stack pointer
-	public static final int TYPE_PC = 4; // program counter
-	public static final int TYPE_CONTEXT = 8; // processor state
-	public static final int TYPE_ZERO = 16; // Register is always zero
-	public static final int TYPE_HIDDEN = 32; // Register should not be exposed to users.
-	public static final int TYPE_DOES_NOT_FOLLOW_FLOW = 64; // Register value should NOT follow disassembly flow
+	private final static long serialVersionUID = 1;
+	public final static int TYPE_NONE = 0; // nothing special
+	public final static int TYPE_FP = 1; // frame pointer
+	public final static int TYPE_SP = 2; // stack pointer
+	public final static int TYPE_PC = 4; // program counter
+	public final static int TYPE_CONTEXT = 8; // processor state
+	public final static int TYPE_ZERO = 16; // Register is always zero
+	public final static int TYPE_HIDDEN = 32; // Register should not be exposed to users.
+	public final static int TYPE_DOES_NOT_FOLLOW_FLOW = 64; // Register value should NOT follow disassembly flow
 
 	/** Register can be used in SIMD operations **/
-    public static final int TYPE_VECTOR = 128;
+	public final static int TYPE_VECTOR = 128;
 
 	/** Register used to denote NO defined context for a language **/
-    public static final Register NO_CONTEXT =
+	public final static Register NO_CONTEXT =
 		new Register("NO_CONTEXT", "NO_CONTEXT", Address.NO_ADDRESS, 4, true, 0);
 
 	private String name;
@@ -430,7 +430,7 @@ public class Register implements java.io.Serializable, Comparable<Register> {
 		if (baseMask == null) {
 			synchronized (this) {
 				Register base = getBaseRegister();
-				int byteLength = (base.bitLength + 7) / 8;
+				int byteLength = (base.getBitLength() + 7) / 8;
 				byte[] newBaseMask = new byte[byteLength];
 				int endBit = leastSigBitInBaseRegister + bitLength - 1;
 				for (int i = leastSigBitInBaseRegister; i <= endBit; i++) {
@@ -453,7 +453,7 @@ public class Register implements java.io.Serializable, Comparable<Register> {
 	}
 
 	public boolean hasChildren() {
-		return !childRegisters.isEmpty();
+		return childRegisters.size() != 0;
 	}
 
 	void setGroup(String group) {
@@ -547,12 +547,12 @@ public class Register implements java.io.Serializable, Comparable<Register> {
 	void addLaneSize(int laneSizeInBytes) {
 		if ((8 * numBytes) != bitLength) {
 			throw new UnsupportedOperationException(
-				"Register " + name + " does not support lanes");
+				"Register " + getName() + " does not support lanes");
 		}
 		if (laneSizeInBytes <= 0 || laneSizeInBytes >= numBytes ||
 			(numBytes % laneSizeInBytes) != 0) {
 			throw new IllegalArgumentException(
-				"Invalid lane size: " + laneSizeInBytes + " for register " + name);
+				"Invalid lane size: " + laneSizeInBytes + " for register " + getName());
 		}
 		if (laneSizes == null) {
 			laneSizes = new TreeSet<>();

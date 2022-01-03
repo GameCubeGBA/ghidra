@@ -56,7 +56,8 @@ public class InstructionSequenceTreePanelBuilder extends ContextRegisterFilterab
 	 * @param type instruction sequence type
 	 */
 	public InstructionSequenceTreePanelBuilder(PatternType type) {
-        this.type = type;
+		super();
+		this.type = type;
 	}
 
 	private JPanel buildTreePanel() {
@@ -85,26 +86,32 @@ public class InstructionSequenceTreePanelBuilder extends ContextRegisterFilterab
 
 	private void addPercentageFilterButtons() {
 		applyPercentageFilterButton = new JButton(APPLY_PERCENTAGE_FILTER_BUTTON_TEXT);
-		applyPercentageFilterButton.addActionListener(e -> {
-            NumberInputDialog numberDialog =
-                new NumberInputDialog(PERCENTAGE_FILTER_TITLE, DEFAULT_PERCENTAGE_FILTER, 0,
-                    100);
-            numberDialog.show();
-            double value = 0.0;
-            if (!numberDialog.wasCancelled()) {
-                value = numberDialog.getValue();
-            }
-            percentageFilter = new PercentageFilter(value);
-            applyFilterAction();
-            gTree.expandAll();
-        });
+		applyPercentageFilterButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				NumberInputDialog numberDialog =
+					new NumberInputDialog(PERCENTAGE_FILTER_TITLE, DEFAULT_PERCENTAGE_FILTER, 0,
+						100);
+				numberDialog.show();
+				double value = 0.0;
+				if (!numberDialog.wasCancelled()) {
+					value = numberDialog.getValue();
+				}
+				percentageFilter = new PercentageFilter(value);
+				applyFilterAction();
+				gTree.expandAll();
+			}
+		});
 		getButtonPanel().add(applyPercentageFilterButton);
 
 		clearPercentageFilterButton = new JButton(CLEAR_PERCENTAGE_FILTER_BUTTON_TEXT);
-		clearPercentageFilterButton.addActionListener(e -> {
-            percentageFilter = new PercentageFilter(0.0);
-            applyFilterAction();
-        });
+		clearPercentageFilterButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				percentageFilter = new PercentageFilter(0.0);
+				applyFilterAction();
+			}
+		});
 		getButtonPanel().add(clearPercentageFilterButton);
 	}
 

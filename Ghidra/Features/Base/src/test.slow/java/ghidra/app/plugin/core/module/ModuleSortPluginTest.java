@@ -44,7 +44,8 @@ public class ModuleSortPluginTest extends AbstractGhidraHeadedIntegrationTest {
 	private ProgramTreeService service;
 
 	public ModuleSortPluginTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -53,12 +54,13 @@ public class ModuleSortPluginTest extends AbstractGhidraHeadedIntegrationTest {
 		tool.addPlugin(ProgramTreePlugin.class.getName());
 		tool.addPlugin(ModuleSortPlugin.class.getName());
 		List<Plugin> list = tool.getManagedPlugins();
-        for (Plugin p : list) {
-            if (p.getClass() == ModuleSortPlugin.class) {
-                plugin = (ModuleSortPlugin) p;
-                break;
-            }
-        }
+		for (int i = 0; i < list.size(); i++) {
+			Plugin p = list.get(i);
+			if (p.getClass() == ModuleSortPlugin.class) {
+				plugin = (ModuleSortPlugin) p;
+				break;
+			}
+		}
 		actions = getActionsByOwner(tool, plugin.getName());
 		service = tool.getService(ProgramTreeService.class);
 

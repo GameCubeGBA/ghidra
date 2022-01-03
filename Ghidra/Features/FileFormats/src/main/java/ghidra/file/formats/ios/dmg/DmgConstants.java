@@ -17,11 +17,11 @@ package ghidra.file.formats.ios.dmg;
 
 public final class DmgConstants {
 
-	public static final byte [] DMG_MAGIC_BYTES_v1 = { 'c', 'd', 's', 'a', 'e', 'n', 'c', 'r' };
+	public final static byte [] DMG_MAGIC_BYTES_v1 = { 'c', 'd', 's', 'a', 'e', 'n', 'c', 'r' };
 
-	public static final byte [] DMG_MAGIC_BYTES_v2 = { 'e', 'n', 'c', 'r', 'c', 'd', 's', 'a' };
+	public final static byte [] DMG_MAGIC_BYTES_v2 = { 'e', 'n', 'c', 'r', 'c', 'd', 's', 'a' };
 
-	public static final int DMG_MAGIC_LENGTH = 8;
+	public final static int DMG_MAGIC_LENGTH = 8;
 
 
 }

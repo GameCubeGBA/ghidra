@@ -31,16 +31,16 @@ public interface Searcher {
      * Get the next program location.
      * @return null if there is no next program location.
      */
-    ProgramLocation search();
+    public ProgramLocation search();
     
     /**
      * Set the task monitor.
      * @param monitor monitor that allows the search to be canceled
      */
-    void setMonitor(TaskMonitor monitor);
+    public void setMonitor(TaskMonitor monitor);
     
     /**
      * Return the search options associated with this Searcher.
      */
-    SearchOptions getSearchOptions();
+    public SearchOptions getSearchOptions();
 }

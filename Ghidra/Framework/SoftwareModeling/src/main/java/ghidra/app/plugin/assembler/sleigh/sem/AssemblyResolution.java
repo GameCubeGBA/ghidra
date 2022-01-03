@@ -248,6 +248,9 @@ public abstract class AssemblyResolution implements Comparable<AssemblyResolutio
 	 * @return true if this record has children
 	 */
 	public boolean hasChildren() {
-        return (children != null) && (!children.isEmpty());
-    }
+		if ((children == null) || (children.size() == 0)) {
+			return false;
+		}
+		return true;
+	}
 }

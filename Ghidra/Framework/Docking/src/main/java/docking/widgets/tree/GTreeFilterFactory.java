@@ -53,7 +53,7 @@ public class GTreeFilterFactory {
 
 	private GTreeFilter getBaseFilter(String text, FilterTransformer<GTreeNode> transformer) {
 
-		if (filterOptions.isMultiterm() && !text.trim().isEmpty()) {
+		if (filterOptions.isMultiterm() && text.trim().length() > 0) {
 			return getMultiWordTableFilter(text, transformer);
 
 		}

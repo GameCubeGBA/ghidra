@@ -23,7 +23,7 @@ import agent.dbgmodel.jna.dbgmodel.IUnknownEx;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IHostDataModelAccess extends IUnknownEx {
-	IID IID_IHOST_DATA_MODEL_ACCESS = new IID("F2BCE54E-4835-4f8a-836E-7981E29904D1");
+	final IID IID_IHOST_DATA_MODEL_ACCESS = new IID("F2BCE54E-4835-4f8a-836E-7981E29904D1");
 
 	enum VTIndices implements VTableIndex {
 		GET_DATA_MODEL, //

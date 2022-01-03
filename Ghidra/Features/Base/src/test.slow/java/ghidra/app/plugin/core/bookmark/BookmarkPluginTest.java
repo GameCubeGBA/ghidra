@@ -827,12 +827,15 @@ public class BookmarkPluginTest extends AbstractGhidraHeadedIntegrationTest {
 
 		Symbol[] syms = program.getSymbolTable().getSymbols(bm.getAddress());
 		if (syms.length != 0) {
-            return syms[0].getName().equals(table.getValueAt(row, 4));
+			if (!syms[0].getName().equals(table.getValueAt(row, 4))) {
+				return false;
+			}
 		}
 		else {
 			return table.getValueAt(row, 4) == null;
 		}
-    }
+		return true;
+	}
 
 	private void selectRow(final int row, final boolean addToSelection) {
 		runSwing(() -> {

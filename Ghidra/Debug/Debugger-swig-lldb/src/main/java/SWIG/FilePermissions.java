@@ -12,32 +12,32 @@
 package SWIG;
 
 public final class FilePermissions {
-  public static final FilePermissions eFilePermissionsUserRead = new FilePermissions("eFilePermissionsUserRead", lldbJNI.eFilePermissionsUserRead_get());
-  public static final FilePermissions eFilePermissionsUserWrite = new FilePermissions("eFilePermissionsUserWrite", lldbJNI.eFilePermissionsUserWrite_get());
-  public static final FilePermissions eFilePermissionsUserExecute = new FilePermissions("eFilePermissionsUserExecute", lldbJNI.eFilePermissionsUserExecute_get());
-  public static final FilePermissions eFilePermissionsGroupRead = new FilePermissions("eFilePermissionsGroupRead", lldbJNI.eFilePermissionsGroupRead_get());
-  public static final FilePermissions eFilePermissionsGroupWrite = new FilePermissions("eFilePermissionsGroupWrite", lldbJNI.eFilePermissionsGroupWrite_get());
-  public static final FilePermissions eFilePermissionsGroupExecute = new FilePermissions("eFilePermissionsGroupExecute", lldbJNI.eFilePermissionsGroupExecute_get());
-  public static final FilePermissions eFilePermissionsWorldRead = new FilePermissions("eFilePermissionsWorldRead", lldbJNI.eFilePermissionsWorldRead_get());
-  public static final FilePermissions eFilePermissionsWorldWrite = new FilePermissions("eFilePermissionsWorldWrite", lldbJNI.eFilePermissionsWorldWrite_get());
-  public static final FilePermissions eFilePermissionsWorldExecute = new FilePermissions("eFilePermissionsWorldExecute", lldbJNI.eFilePermissionsWorldExecute_get());
-  public static final FilePermissions eFilePermissionsUserRW = new FilePermissions("eFilePermissionsUserRW", lldbJNI.eFilePermissionsUserRW_get());
-  public static final FilePermissions eFileFilePermissionsUserRX = new FilePermissions("eFileFilePermissionsUserRX", lldbJNI.eFileFilePermissionsUserRX_get());
-  public static final FilePermissions eFilePermissionsUserRWX = new FilePermissions("eFilePermissionsUserRWX", lldbJNI.eFilePermissionsUserRWX_get());
-  public static final FilePermissions eFilePermissionsGroupRW = new FilePermissions("eFilePermissionsGroupRW", lldbJNI.eFilePermissionsGroupRW_get());
-  public static final FilePermissions eFilePermissionsGroupRX = new FilePermissions("eFilePermissionsGroupRX", lldbJNI.eFilePermissionsGroupRX_get());
-  public static final FilePermissions eFilePermissionsGroupRWX = new FilePermissions("eFilePermissionsGroupRWX", lldbJNI.eFilePermissionsGroupRWX_get());
-  public static final FilePermissions eFilePermissionsWorldRW = new FilePermissions("eFilePermissionsWorldRW", lldbJNI.eFilePermissionsWorldRW_get());
-  public static final FilePermissions eFilePermissionsWorldRX = new FilePermissions("eFilePermissionsWorldRX", lldbJNI.eFilePermissionsWorldRX_get());
-  public static final FilePermissions eFilePermissionsWorldRWX = new FilePermissions("eFilePermissionsWorldRWX", lldbJNI.eFilePermissionsWorldRWX_get());
-  public static final FilePermissions eFilePermissionsEveryoneR = new FilePermissions("eFilePermissionsEveryoneR", lldbJNI.eFilePermissionsEveryoneR_get());
-  public static final FilePermissions eFilePermissionsEveryoneW = new FilePermissions("eFilePermissionsEveryoneW", lldbJNI.eFilePermissionsEveryoneW_get());
-  public static final FilePermissions eFilePermissionsEveryoneX = new FilePermissions("eFilePermissionsEveryoneX", lldbJNI.eFilePermissionsEveryoneX_get());
-  public static final FilePermissions eFilePermissionsEveryoneRW = new FilePermissions("eFilePermissionsEveryoneRW", lldbJNI.eFilePermissionsEveryoneRW_get());
-  public static final FilePermissions eFilePermissionsEveryoneRX = new FilePermissions("eFilePermissionsEveryoneRX", lldbJNI.eFilePermissionsEveryoneRX_get());
-  public static final FilePermissions eFilePermissionsEveryoneRWX = new FilePermissions("eFilePermissionsEveryoneRWX", lldbJNI.eFilePermissionsEveryoneRWX_get());
-  public static final FilePermissions eFilePermissionsFileDefault = new FilePermissions("eFilePermissionsFileDefault", lldbJNI.eFilePermissionsFileDefault_get());
-  public static final FilePermissions eFilePermissionsDirectoryDefault = new FilePermissions("eFilePermissionsDirectoryDefault", lldbJNI.eFilePermissionsDirectoryDefault_get());
+  public final static FilePermissions eFilePermissionsUserRead = new FilePermissions("eFilePermissionsUserRead", lldbJNI.eFilePermissionsUserRead_get());
+  public final static FilePermissions eFilePermissionsUserWrite = new FilePermissions("eFilePermissionsUserWrite", lldbJNI.eFilePermissionsUserWrite_get());
+  public final static FilePermissions eFilePermissionsUserExecute = new FilePermissions("eFilePermissionsUserExecute", lldbJNI.eFilePermissionsUserExecute_get());
+  public final static FilePermissions eFilePermissionsGroupRead = new FilePermissions("eFilePermissionsGroupRead", lldbJNI.eFilePermissionsGroupRead_get());
+  public final static FilePermissions eFilePermissionsGroupWrite = new FilePermissions("eFilePermissionsGroupWrite", lldbJNI.eFilePermissionsGroupWrite_get());
+  public final static FilePermissions eFilePermissionsGroupExecute = new FilePermissions("eFilePermissionsGroupExecute", lldbJNI.eFilePermissionsGroupExecute_get());
+  public final static FilePermissions eFilePermissionsWorldRead = new FilePermissions("eFilePermissionsWorldRead", lldbJNI.eFilePermissionsWorldRead_get());
+  public final static FilePermissions eFilePermissionsWorldWrite = new FilePermissions("eFilePermissionsWorldWrite", lldbJNI.eFilePermissionsWorldWrite_get());
+  public final static FilePermissions eFilePermissionsWorldExecute = new FilePermissions("eFilePermissionsWorldExecute", lldbJNI.eFilePermissionsWorldExecute_get());
+  public final static FilePermissions eFilePermissionsUserRW = new FilePermissions("eFilePermissionsUserRW", lldbJNI.eFilePermissionsUserRW_get());
+  public final static FilePermissions eFileFilePermissionsUserRX = new FilePermissions("eFileFilePermissionsUserRX", lldbJNI.eFileFilePermissionsUserRX_get());
+  public final static FilePermissions eFilePermissionsUserRWX = new FilePermissions("eFilePermissionsUserRWX", lldbJNI.eFilePermissionsUserRWX_get());
+  public final static FilePermissions eFilePermissionsGroupRW = new FilePermissions("eFilePermissionsGroupRW", lldbJNI.eFilePermissionsGroupRW_get());
+  public final static FilePermissions eFilePermissionsGroupRX = new FilePermissions("eFilePermissionsGroupRX", lldbJNI.eFilePermissionsGroupRX_get());
+  public final static FilePermissions eFilePermissionsGroupRWX = new FilePermissions("eFilePermissionsGroupRWX", lldbJNI.eFilePermissionsGroupRWX_get());
+  public final static FilePermissions eFilePermissionsWorldRW = new FilePermissions("eFilePermissionsWorldRW", lldbJNI.eFilePermissionsWorldRW_get());
+  public final static FilePermissions eFilePermissionsWorldRX = new FilePermissions("eFilePermissionsWorldRX", lldbJNI.eFilePermissionsWorldRX_get());
+  public final static FilePermissions eFilePermissionsWorldRWX = new FilePermissions("eFilePermissionsWorldRWX", lldbJNI.eFilePermissionsWorldRWX_get());
+  public final static FilePermissions eFilePermissionsEveryoneR = new FilePermissions("eFilePermissionsEveryoneR", lldbJNI.eFilePermissionsEveryoneR_get());
+  public final static FilePermissions eFilePermissionsEveryoneW = new FilePermissions("eFilePermissionsEveryoneW", lldbJNI.eFilePermissionsEveryoneW_get());
+  public final static FilePermissions eFilePermissionsEveryoneX = new FilePermissions("eFilePermissionsEveryoneX", lldbJNI.eFilePermissionsEveryoneX_get());
+  public final static FilePermissions eFilePermissionsEveryoneRW = new FilePermissions("eFilePermissionsEveryoneRW", lldbJNI.eFilePermissionsEveryoneRW_get());
+  public final static FilePermissions eFilePermissionsEveryoneRX = new FilePermissions("eFilePermissionsEveryoneRX", lldbJNI.eFilePermissionsEveryoneRX_get());
+  public final static FilePermissions eFilePermissionsEveryoneRWX = new FilePermissions("eFilePermissionsEveryoneRWX", lldbJNI.eFilePermissionsEveryoneRWX_get());
+  public final static FilePermissions eFilePermissionsFileDefault = new FilePermissions("eFilePermissionsFileDefault", lldbJNI.eFilePermissionsFileDefault_get());
+  public final static FilePermissions eFilePermissionsDirectoryDefault = new FilePermissions("eFilePermissionsDirectoryDefault", lldbJNI.eFilePermissionsDirectoryDefault_get());
 
   public final int swigValue() {
     return swigValue;
@@ -50,9 +50,9 @@ public final class FilePermissions {
   public static FilePermissions swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-      for (FilePermissions value : swigValues)
-          if (value.swigValue == swigValue)
-              return value;
+    for (int i = 0; i < swigValues.length; i++)
+      if (swigValues[i].swigValue == swigValue)
+        return swigValues[i];
     throw new IllegalArgumentException("No enum " + FilePermissions.class + " with value " + swigValue);
   }
 

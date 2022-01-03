@@ -49,7 +49,8 @@ public class AbstractCreateDataTypeModelTest extends AbstractGenericTest {
 	private static DataTypeManagerService service;
 
 	protected AbstractCreateDataTypeModelTest() {
-        noFollowValidationOptions.setValidateReferredToData(false);
+		super();
+		noFollowValidationOptions.setValidateReferredToData(false);
 		noFollowApplyOptions.setFollowData(false);
 	}
 

@@ -53,7 +53,7 @@ abstract class DataTypeDB extends DatabaseObject implements DataType {
 	protected DBRecord record;
 	protected final DataTypeManagerDB dataMgr;
 	private volatile Settings defaultSettings;
-	private static final SettingsDefinition[] EMPTY_DEFINITIONS = {};
+	private final static SettingsDefinition[] EMPTY_DEFINITIONS = {};
 	protected boolean resolving;
 	protected boolean pointerPostResolveRequired;
 	protected Lock lock;

@@ -26,25 +26,25 @@ import ghidra.dbg.target.TargetRegisterBank;
 
 public interface LldbModelTargetRegisterBank extends LldbModelTargetObject, TargetRegisterBank {
 
-	LldbModelTargetRegister getTargetRegister(SBValue register);
+	public LldbModelTargetRegister getTargetRegister(SBValue register);
 
-	default void threadStateChangedSpecific(StateType state, LldbReason reason) {
+	public default void threadStateChangedSpecific(StateType state, LldbReason reason) {
 		readRegistersNamed(getCachedElements().keySet());
 	}
 
 	@Override
-    CompletableFuture<? extends Map<String, byte[]>> readRegistersNamed(
-            Collection<String> names);
+	public CompletableFuture<? extends Map<String, byte[]>> readRegistersNamed(
+			Collection<String> names);
 
 	@Override
-    CompletableFuture<Void> writeRegistersNamed(Map<String, byte[]> values);
+	public CompletableFuture<Void> writeRegistersNamed(Map<String, byte[]> values);
 
 	@Override
-    default Map<String, byte[]> getCachedRegisters() {
+	public default Map<String, byte[]> getCachedRegisters() {
 		return getValues();
 	}
 
-	default Map<String, byte[]> getValues() {
+	public default Map<String, byte[]> getValues() {
 		Map<String, byte[]> result = new HashMap<>();
 		for (Entry<String, ?> entry : this.getCachedAttributes().entrySet()) {
 			if (entry.getValue() instanceof LldbModelTargetRegister) {

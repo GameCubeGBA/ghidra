@@ -41,7 +41,8 @@ public class VTExactSymbolMatch1Test extends AbstractGhidraHeadedIntegrationTest
 	private Program destProg;
 
 	public VTExactSymbolMatch1Test() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -129,8 +130,10 @@ public class VTExactSymbolMatch1Test extends AbstractGhidraHeadedIntegrationTest
 
 	public boolean isMatch(Address srcAddr, Address destAddr) {
 		List<VTMatchSet> matchSets = session.getMatchSets();
-		for (VTMatchSet matchSet : matchSets) {
-			if (!matchSet.getMatches(srcAddr, destAddr).isEmpty()) {
+		for (int i = 0; i < matchSets.size(); i++) {
+			VTMatchSet matchSet = matchSets.get(i);
+
+			if (matchSet.getMatches(srcAddr, destAddr).size() > 0) {
 				return true;
 			}
 		}

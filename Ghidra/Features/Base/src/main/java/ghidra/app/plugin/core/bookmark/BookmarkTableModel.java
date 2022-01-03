@@ -33,12 +33,12 @@ import ghidra.util.task.TaskMonitor;
 
 class BookmarkTableModel extends AddressBasedTableModel<BookmarkRowObject> {
 
-	static final int TYPE_COL = 0;
-	static final int CATEGORY_COL = 1;
-	static final int COMMENT_COL = 2;
-	static final int LOCATION_COL = 3;
-	static final int LABEL_COL = 4;
-	static final int PREVIEW_COL = 5;
+	final static int TYPE_COL = 0;
+	final static int CATEGORY_COL = 1;
+	final static int COMMENT_COL = 2;
+	final static int LOCATION_COL = 3;
+	final static int LABEL_COL = 4;
+	final static int PREVIEW_COL = 5;
 
 	private BookmarkManager bookmarkMgr;
 	private Bookmark lastBookmark;
@@ -81,9 +81,11 @@ class BookmarkTableModel extends AddressBasedTableModel<BookmarkRowObject> {
 			return 0;
 		}
 		int cnt = 0;
-        for (String type : types) {
-            cnt += bookmarkMgr.getBookmarkCount(type);
-        }
+		Iterator<String> it = types.iterator();
+		while (it.hasNext()) {
+			String type = it.next();
+			cnt += bookmarkMgr.getBookmarkCount(type);
+		}
 		return cnt;
 	}
 
@@ -263,13 +265,15 @@ class BookmarkTableModel extends AddressBasedTableModel<BookmarkRowObject> {
 		private Iterator<Bookmark> currIter;
 
 		BookmarkKeyIterator(BookmarkManager bookmarkMgr) {
-            for (String type : types) {
-                Iterator<Bookmark> bkIt = bookmarkMgr.getBookmarksIterator(type);
-                if (bkIt.hasNext()) {
-                    iters.add(bkIt);
-                }
-            }
-			if (!iters.isEmpty()) {
+			Iterator<String> it = types.iterator();
+			while (it.hasNext()) {
+				String type = it.next();
+				Iterator<Bookmark> bkIt = bookmarkMgr.getBookmarksIterator(type);
+				if (bkIt.hasNext()) {
+					iters.add(bkIt);
+				}
+			}
+			if (iters.size() > 0) {
 				currIter = iters.get(0);
 			}
 		}

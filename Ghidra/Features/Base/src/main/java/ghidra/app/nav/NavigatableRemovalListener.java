@@ -18,5 +18,5 @@ package ghidra.app.nav;
 
 @FunctionalInterface
 public interface NavigatableRemovalListener {
-	void navigatableRemoved(Navigatable navigatable);
+	public void navigatableRemoved(Navigatable navigatable);
 }

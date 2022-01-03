@@ -76,12 +76,12 @@ public class SSHAuthenticationModule {
 
 	public boolean hasSignedSSHCallback(Callback[] callbacks) {
 		if (callbacks != null) {
-            for (Callback callback : callbacks) {
-                if (callback instanceof SSHSignatureCallback) {
-                    SSHSignatureCallback sshCb = (SSHSignatureCallback) callback;
-                    return sshCb.isSigned();
-                }
-            }
+			for (int i = 0; i < callbacks.length; i++) {
+				if (callbacks[i] instanceof SSHSignatureCallback) {
+					SSHSignatureCallback sshCb = (SSHSignatureCallback) callbacks[i];
+					return sshCb.isSigned();
+				}
+			}
 		}
 		return false;
 	}
@@ -106,20 +106,20 @@ public class SSHAuthenticationModule {
 		NameCallback nameCb = null;
 		SSHSignatureCallback sshCb = null;
 		if (callbacks != null) {
-            for (Callback callback : callbacks) {
-                if (callback instanceof NameCallback) {
-                    nameCb = (NameCallback) callback;
-                }
-                if (callback instanceof SSHSignatureCallback) {
-                    sshCb = (SSHSignatureCallback) callback;
-                }
-            }
+			for (int i = 0; i < callbacks.length; i++) {
+				if (callbacks[i] instanceof NameCallback) {
+					nameCb = (NameCallback) callbacks[i];
+				}
+				if (callbacks[i] instanceof SSHSignatureCallback) {
+					sshCb = (SSHSignatureCallback) callbacks[i];
+				}
+			}
 		}
 
 		if (nameCallbackAllowed && nameCb != null) {
 			username = nameCb.getName();
 		}
-		if (username == null || username.isEmpty()) {
+		if (username == null || username.length() == 0) {
 			throw new FailedLoginException("User ID must be specified");
 		}
 		if (!userMgr.isValidUser(username)) {

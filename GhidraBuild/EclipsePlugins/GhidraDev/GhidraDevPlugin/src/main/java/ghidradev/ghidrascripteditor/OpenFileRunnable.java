@@ -71,7 +71,7 @@ public class OpenFileRunnable implements Runnable {
 	}
 
 	private IFile[] maybePromptUserForFilesToOpen(List<IFile> projectFiles) {
-		if (projectFiles.isEmpty()) {
+		if (projectFiles.size() == 0) {
 			return null;
 		}
 
@@ -227,10 +227,10 @@ public class OpenFileRunnable implements Runnable {
 		private DisplayableIFile(IFile file) {
 			this.file = file;
 
-			StringBuilder format = new StringBuilder();
+			String format = "";
 			String[] strings = file.toString().split("/");
 			for (int i = 1; i < strings.length - 1; i++) {
-				format.append(strings[i]).append("/");
+				format += strings[i] + "/";
 			}
 			displayString =
 				format.substring(0, format.length() - 1) + " - " + strings[strings.length - 1];
@@ -246,7 +246,7 @@ public class OpenFileRunnable implements Runnable {
 
 		@Override
 		public String toString() {
-			return displayString;
+			return getDisplayString();
 		}
 	}
 }

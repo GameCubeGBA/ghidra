@@ -69,7 +69,8 @@ public class ExternalMergerRemoveTest extends AbstractExternalMergerTest {
 	 * @param arg0
 	 */
 	public ExternalMergerRemoveTest() {
-    }
+		super();
+	}
 
 	@Test
 	public void testExternalLabelRemoveFromLatest() throws Exception {

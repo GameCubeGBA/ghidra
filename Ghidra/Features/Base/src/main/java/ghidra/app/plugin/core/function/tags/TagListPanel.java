@@ -155,8 +155,11 @@ public abstract class TagListPanel extends JPanel {
 			}
 
 			String newComment = results[1].trim();
-            return !Objects.equals(comment, newComment);
-        });
+			if (!Objects.equals(comment, newComment)) {
+				return true;
+			}
+			return false;
+		});
 
 		DockingWindowManager.showDialog(tool.getActiveWindow(), dialog);
 		String[] results = dialog.getValues();

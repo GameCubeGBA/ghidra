@@ -334,6 +334,10 @@ public class RangeDisassemblerScript extends GhidraScript {
 			return false;
 		}
 
-        return !badReg;
-    }
+		if (badReg) {
+			return false;
+		}
+
+		return true;
+	}
 }

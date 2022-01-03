@@ -54,8 +54,8 @@ import docking.action.*;
 )
 //@formatter:on
 public class KitchenSinkPlugin extends ProgramPlugin {
-	private static final String NEXT_IMAGE = "images/right.png";
-	private static final String PREV_IMAGE = "images/left.png";
+	private final static String NEXT_IMAGE = "images/right.png";
+	private final static String PREV_IMAGE = "images/left.png";
 
     private DockingAction helloProgramAction;
     private Program program;
@@ -76,7 +76,11 @@ public class KitchenSinkPlugin extends ProgramPlugin {
 
     private void setupServices() {
     	registerServiceProvided(HelloWorldService.class,
-                () -> announce("Hello"));
+        	new HelloWorldService() {
+	            public void sayHello() {
+    	            announce("Hello");
+        	    }
+        	});
     }
 
     private void setupActions() {

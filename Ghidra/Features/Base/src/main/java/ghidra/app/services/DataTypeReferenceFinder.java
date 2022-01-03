@@ -45,9 +45,9 @@ public interface DataTypeReferenceFinder extends ExtensionPoint {
 	 * @param monitor the monitor that allows for progress and cancellation
 	 * @throws CancelledException if the operation was cancelled
 	 */
-    void findReferences(Program program, DataType dataType,
-                        Consumer<DataTypeReference> callback,
-                        TaskMonitor monitor) throws CancelledException;
+	public void findReferences(Program program, DataType dataType,
+			Consumer<DataTypeReference> callback,
+			TaskMonitor monitor) throws CancelledException;
 
 	/**
 	 * Finds references in the current program to specific field of the given {@link Composite} type
@@ -63,6 +63,6 @@ public interface DataTypeReferenceFinder extends ExtensionPoint {
 	 * @param monitor the monitor that allows for progress and cancellation
 	 * @throws CancelledException if the operation was cancelled
 	 */
-    void findReferences(Program program, Composite composite, String fieldName,
-                        Consumer<DataTypeReference> callback, TaskMonitor monitor) throws CancelledException;
+	public void findReferences(Program program, Composite composite, String fieldName,
+			Consumer<DataTypeReference> callback, TaskMonitor monitor) throws CancelledException;
 }

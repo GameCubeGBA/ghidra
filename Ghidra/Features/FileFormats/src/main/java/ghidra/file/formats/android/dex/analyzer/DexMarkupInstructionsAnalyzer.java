@@ -78,15 +78,15 @@ public class DexMarkupInstructionsAnalyzer extends FileFormatAnalyzer {
 				processString(program, instruction, 1, header, (int) scalar.getUnsignedValue(),
 					log);
 			}
-			else if ("const_class".equals(mnemonicString)) {
+			else if (mnemonicString.equals("const_class")) {
 				Scalar scalar = instruction.getScalar(1);
 				processClass(program, instruction, 1, header, (int) scalar.getUnsignedValue(), log);
 			}
-			else if ("instance_of".equals(mnemonicString)) {
+			else if (mnemonicString.equals("instance_of")) {
 				Scalar scalar = instruction.getScalar(2);
 				processClass(program, instruction, 2, header, (int) scalar.getUnsignedValue(), log);
 			}
-			else if ("check_cast".equals(mnemonicString)) {
+			else if (mnemonicString.equals("check_cast")) {
 				Scalar scalar = instruction.getScalar(1);
 				processClass(program, instruction, 1, header, (int) scalar.getUnsignedValue(), log);
 			}
@@ -95,11 +95,11 @@ public class DexMarkupInstructionsAnalyzer extends FileFormatAnalyzer {
 				processMethod(program, instruction, 0, header, (int) scalar.getUnsignedValue(),
 					log);
 			}
-			else if ("new_instance".equals(mnemonicString)) {
+			else if (mnemonicString.equals("new_instance")) {
 				Scalar scalar = instruction.getScalar(1);
 				processClass(program, instruction, 1, header, (int) scalar.getUnsignedValue(), log);
 			}
-			else if ("new_array".equals(mnemonicString)) {
+			else if (mnemonicString.equals("new_array")) {
 				Scalar scalar = instruction.getScalar(2);
 				processClass(program, instruction, 2, header, (int) scalar.getUnsignedValue(), log);
 			}

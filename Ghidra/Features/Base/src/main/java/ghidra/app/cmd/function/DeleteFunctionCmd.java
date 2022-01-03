@@ -60,8 +60,11 @@ public class DeleteFunctionCmd implements Command {
 		Listing listing = program.getListing();
 		Function func = listing.getFunctionAt(entry);
 		if (func == null) {
-            return ignoreMissingFunction;		// consider it a success
-        }
+			if (ignoreMissingFunction) {
+				return true;		// consider it a success
+			}
+			return false;
+		}
 
 		if (!entry.isExternalAddress()) {
 			func.promoteLocalUserLabelsToGlobal();

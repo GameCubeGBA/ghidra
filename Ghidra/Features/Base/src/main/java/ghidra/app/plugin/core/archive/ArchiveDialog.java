@@ -205,12 +205,12 @@ public class ArchiveDialog extends DialogComponentProvider {
 	public String getArchivePathName() {
 		String archive = archiveField.getText().trim();
 
-		if (archive.isEmpty()) {
+		if (archive.length() == 0) {
 			return null;
 		}
 		File file = new File(archive);
 		String pathName = file.getAbsolutePath();
-		if (pathName == null || pathName.isEmpty()) {
+		if (pathName == null || pathName.length() == 0) {
 			return null;
 		}
 		if (!pathName.endsWith(ArchivePlugin.ARCHIVE_EXTENSION)) {
@@ -282,7 +282,7 @@ public class ArchiveDialog extends DialogComponentProvider {
 
 		// start the browsing in the user's preferred project directory
 		File startDirectory = null;
-		if ((filePathName != null) && (!filePathName.isEmpty())) {
+		if ((filePathName != null) && (filePathName.length() > 0)) {
 			startDirectory = new File(filePathName);
 			if (startDirectory.isDirectory()) {
 				fileChooser.setCurrentDirectory(startDirectory);
@@ -316,11 +316,11 @@ public class ArchiveDialog extends DialogComponentProvider {
 			jarFileChooser.setTitle("Archive a Ghidra Project");
 		}
 		File jarFile = null;
-		if (archivePathName != null && !archivePathName.isEmpty()) {
+		if (archivePathName != null && archivePathName.length() != 0) {
 			jarFile = new File(archivePathName);
 		}
 		else if (projectLocator != null) {
-			jarFile = new File(projectLocator + ArchivePlugin.ARCHIVE_EXTENSION);
+			jarFile = new File(projectLocator.toString() + ArchivePlugin.ARCHIVE_EXTENSION);
 		}
 		jarFileChooser.setSelectedFile(jarFile);
 		jarFileChooser.setApproveButtonText(approveButtonText);

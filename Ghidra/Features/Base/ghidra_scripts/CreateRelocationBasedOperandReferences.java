@@ -70,7 +70,7 @@ public class CreateRelocationBasedOperandReferences extends GhidraScript {
 			long value;
 
 			List<Symbol> symbols = symbolTable.getLabelOrFunctionSymbols(r.getSymbolName(), null);
-			if (symbols.isEmpty()) {
+			if (symbols.size() == 0) {
 				// check for possible equate definition
 				equate = equateTable.getEquate(r.getSymbolName());
 				if (equate == null) {

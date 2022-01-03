@@ -26,7 +26,7 @@ import ghidra.util.prop.IntPropertySet;
  */
 public class DefaultIntPropertyMap extends DefaultPropertyMap implements IntPropertyMap {
 	
-    private static final long serialVersionUID = 1;
+    private final static long serialVersionUID = 1;
     private IntPropertySet ips;
 
  	/**

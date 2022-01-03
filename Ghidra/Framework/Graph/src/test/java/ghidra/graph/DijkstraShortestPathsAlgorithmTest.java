@@ -17,12 +17,7 @@ package ghidra.graph;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Deque;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Set;
+import java.util.*;
 
 import org.junit.Test;
 
@@ -65,8 +60,11 @@ public class DijkstraShortestPathsAlgorithmTest {
 				return false;
 			}
 			TestEdge that = (TestEdge) obj;
-            return this.start.equals(that.start) && this.end.equals(that.end);
-        }
+			if (!this.start.equals(that.start) || !this.end.equals(that.end)) {
+				return false;
+			}
+			return true;
+		}
 
 		@Override
 		public String toString() {

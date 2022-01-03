@@ -581,9 +581,12 @@ class EnumDB extends DataTypeDB implements Enum {
 		}
 
 		Enum enumm = (Enum) dt;
-        return DataTypeUtilities.equalsIgnoreConflict(getName(), enumm.getName()) &&
-                getLength() == enumm.getLength() && getCount() == enumm.getCount() && isEachValueEquivalent(enumm);
-    }
+		if (!DataTypeUtilities.equalsIgnoreConflict(getName(), enumm.getName()) ||
+			getLength() != enumm.getLength() || getCount() != enumm.getCount() || !isEachValueEquivalent(enumm)) {
+			return false;
+		}
+		return true;
+	}
 
 	private boolean isEachValueEquivalent(Enum enumm) {
 		String[] names = getNames();

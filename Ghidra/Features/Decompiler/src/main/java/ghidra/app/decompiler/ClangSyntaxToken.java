@@ -49,8 +49,9 @@ public class ClangSyntaxToken extends ClangToken {
 	
 	@Override
     public boolean isVariableRef() {
-        return Parent() instanceof ClangVariableDecl;
-    }
+		if (Parent() instanceof ClangVariableDecl) return true;
+		return false;	
+	}
 	
 	@Override
     public void restoreFromXML(XmlElement el,XmlElement end,PcodeFactory pfactory) {

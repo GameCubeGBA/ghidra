@@ -159,8 +159,11 @@ public class GGlassPane extends JComponent {
 	@Override
 	public boolean contains(int x, int y) {
 		Cursor currentCursor = getCursor();
-        return currentCursor.equals(BUSY_CURSOR); // the busy cursor shows over *everything*
-    }
+		if (currentCursor.equals(BUSY_CURSOR)) {
+			return true; // the busy cursor shows over *everything*
+		}
+		return false;
+	}
 
 	public static GGlassPane getGlassPane(Component component) {
 

@@ -72,19 +72,22 @@ public class GhidraTableColumnModelTest extends AbstractGhidraHeadedIntegrationT
 
 		List<TableColumn> allColumns = ghidraColumnModel.getAllColumns();
 		int columnCount = allColumns.size();
-		for (TableColumn column : allColumns) {
+		for (int i = 0; i < columnCount; i++) {
+			TableColumn column = allColumns.get(i);
 			assertTrue("Column is not visible by default when it should be.",
-					ghidraColumnModel.isVisible(column));
+				ghidraColumnModel.isVisible(column));
 		}
 
 		// setVisible()
-		for (TableColumn column : allColumns) {
+		for (int i = 0; i < columnCount; i++) {
+			TableColumn column = allColumns.get(i);
 			ghidraColumnModel.setVisible(column, false);
 		}
 
-		for (TableColumn column : allColumns) {
+		for (int i = 0; i < columnCount; i++) {
+			TableColumn column = allColumns.get(i);
 			assertTrue("Column is visible when it was made hidden.",
-					!ghidraColumnModel.isVisible(column));
+				!ghidraColumnModel.isVisible(column));
 		}
 	}
 
@@ -647,7 +650,7 @@ public class GhidraTableColumnModelTest extends AbstractGhidraHeadedIntegrationT
 	private LocationReferencesProvider findProvider() {
 		List<?> providerList =
 			(List<?>) TestUtils.getInstanceField("providerList", locationReferencesPlugin);
-		if (providerList.isEmpty()) {
+		if (providerList.size() == 0) {
 			return null;
 		}
 		return (LocationReferencesProvider) providerList.get(0);

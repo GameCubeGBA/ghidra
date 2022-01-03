@@ -42,7 +42,7 @@ public abstract class RangeColumnConstraint<T> implements ColumnConstraint<T> {
 	 * <li>Leading and trailing whitespace is removed from the value-string.</li>
 	 * </ul>
 	 */
-    private static final Pattern RANGE_SPEC_PATTERN =
+	private final static Pattern RANGE_SPEC_PATTERN =
 		Pattern.compile("\\[\\s*([^,\\]]+)\\s*,\\s*([^,\\]]+)\\s*\\]");
 
 	/**
@@ -108,7 +108,7 @@ public abstract class RangeColumnConstraint<T> implements ColumnConstraint<T> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Class<T> getColumnType() {
-		return (Class<T>) minValue.getClass();
+		return (Class<T>) getMinValue().getClass();
 	}
 
 	@Override
@@ -154,7 +154,7 @@ public abstract class RangeColumnConstraint<T> implements ColumnConstraint<T> {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(this.getClass(), minValue, maxValue);
+		return Objects.hash(this.getClass(), getMinValue(), getMaxValue());
 	}
 
 	@Override
@@ -168,8 +168,8 @@ public abstract class RangeColumnConstraint<T> implements ColumnConstraint<T> {
 
 		RangeColumnConstraint<?> otherRangeConstraint = (RangeColumnConstraint<?>) o;
 
-		return minValue.equals(otherRangeConstraint.minValue) &&
-			maxValue.equals(otherRangeConstraint.maxValue);
+		return getMinValue().equals(otherRangeConstraint.getMinValue()) &&
+			getMaxValue().equals(otherRangeConstraint.getMaxValue());
 
 	}
 

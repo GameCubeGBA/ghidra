@@ -35,7 +35,7 @@ public interface LogicalBreakpoint {
 	/**
 	 * The state of a logical breakpoint's program bookmark
 	 */
-    enum ProgramEnablement {
+	public enum ProgramEnablement {
 		/**
 		 * A placeholder state when the program bookmark state is not applicable
 		 */
@@ -139,7 +139,7 @@ public interface LogicalBreakpoint {
 	/**
 	 * The state of a logical breakpoint's trace/target locations
 	 */
-    enum TraceEnablement {
+	public enum TraceEnablement {
 		/**
 		 * A placeholder state when the breakpoint is not mapped to any trace
 		 */
@@ -306,7 +306,7 @@ public interface LogicalBreakpoint {
 	/**
 	 * The state of a logical breakpoint, i.e., whether or not its parts are enabled
 	 */
-    enum Enablement {
+	public enum Enablement {
 		/**
 		 * A placeholder state, usually indicating the logical breakpoint should not exist
 		 * 

@@ -47,7 +47,8 @@ public class VariableXRefFieldLocation extends VariableLocation {
 	 * Should only be used by XML restoration.
 	 */
 	public VariableXRefFieldLocation() {
-    }
+		super();
+	}
 
 	/**
 	 * Returns the index of the XREF in the list.

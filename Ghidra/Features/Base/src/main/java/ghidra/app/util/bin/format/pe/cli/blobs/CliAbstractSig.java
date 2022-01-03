@@ -90,7 +90,7 @@ public abstract class CliAbstractSig extends CliBlob implements CliRepresentable
 
 		public static final String PATH = "/PE/CLI/Types";
 
-		public static final CliTypeCodeDataType dataType = new CliTypeCodeDataType();
+		public final static CliTypeCodeDataType dataType = new CliTypeCodeDataType();
 
 		public CliTypeCodeDataType() {
 			super(new CategoryPath(PATH), "TypeCode", 1);
@@ -546,11 +546,11 @@ public abstract class CliAbstractSig extends CliBlob implements CliRepresentable
 		}
 
 		private String getRepresentation(CliStreamMetadata stream, boolean shortRep) {
-			StringBuilder argTypesRep = new StringBuilder();
+			String argTypesRep = "";
 			for (int i = 0; i < genArgCount; i++) {
-				argTypesRep.append(argTypes.get(i).getRepresentation());
+				argTypesRep += argTypes.get(i).getRepresentation();
 				if (i != genArgCount - 1) {
-					argTypesRep.append(", ");
+					argTypesRep += ", ";
 				}
 			}
 
@@ -573,7 +573,7 @@ public abstract class CliAbstractSig extends CliBlob implements CliRepresentable
 			}
 
 			return String.format("%s %s %d %s", firstType.toString(), typeRep, genArgCount,
-                    argTypesRep);
+				argTypesRep);
 		}
 
 		@Override
@@ -662,18 +662,18 @@ public abstract class CliAbstractSig extends CliBlob implements CliRepresentable
 
 		@Override
 		public String getRepresentation() {
-			StringBuilder modsRep = new StringBuilder();
+			String modsRep = "";
 			for (CliCustomMod mod : customMods) {
-				modsRep.append(mod.toString()).append(", ");
+				modsRep += mod.toString() + ", ";
 			}
-			modsRep = new StringBuilder(modsRep.substring(0, modsRep.length() - 2));
+			modsRep = modsRep.substring(0, modsRep.length() - 2);
 			return String.format("Ptr %s %s", modsRep, type.toString());
 		}
 
 		@Override
 		public DataType getDefinitionDataType() {
 			StructureDataType struct = new StructureDataType(new CategoryPath(PATH),
-				CliElementType.ELEMENT_TYPE_PTR + "_" + dataOffset, 0);
+				CliElementType.ELEMENT_TYPE_PTR.toString() + "_" + dataOffset, 0);
 			struct.add(CliTypeCodeDataType.dataType, CliElementType.ELEMENT_TYPE_PTR.toString(),
 				"");
 
@@ -712,12 +712,12 @@ public abstract class CliAbstractSig extends CliBlob implements CliRepresentable
 				typeRep = type.getRepresentation(stream);
 			}
 
-			StringBuilder modsRep = new StringBuilder();
+			String modsRep = "";
 			for (CliCustomMod mod : customMods) {
-				modsRep.append(mod.toString()).append(", ");
+				modsRep += mod.toString() + ", ";
 			}
-			if (!customMods.isEmpty()) {
-				modsRep = new StringBuilder(modsRep.substring(0, modsRep.length() - 2)); // Remove last comma+space
+			if (customMods.size() > 0) {
+				modsRep = modsRep.substring(0, modsRep.length() - 2); // Remove last comma+space
 			}
 			return String.format("SzArray %s %s", modsRep, typeRep);
 		}
@@ -1083,18 +1083,18 @@ public abstract class CliAbstractSig extends CliBlob implements CliRepresentable
 		}
 
 		private String getRepresentationCommon(CliStreamMetadata stream, boolean shortRep) {
-			StringBuilder rep = new StringBuilder();
+			String rep = "";
 
 			for (CliRepresentable mod : modifiers) {
 				if (mod instanceof CliCustomMod) {
 					CliCustomMod customMod = (CliCustomMod) mod;
-					rep.append(customMod.getRepresentation()).append("; ");
+					rep += customMod.getRepresentation() + "; ";
 				}
 				else if (mod instanceof CliConstraint) {
-					rep.append("constrained ");
+					rep += "constrained ";
 				}
 				else if (mod instanceof CliByRef) {
-					rep.append("byref ");
+					rep += "byref ";
 				}
 			}
 
@@ -1102,13 +1102,13 @@ public abstract class CliAbstractSig extends CliBlob implements CliRepresentable
 			// we represent as "..." to denote that VarArgs might be passed
 			// after the declared parameters
 			if (type.baseTypeCode == CliElementType.ELEMENT_TYPE_SENTINEL) {
-				rep = new StringBuilder("...");
+				rep = "...";
 			}
 			else {
-				rep.append(getRepresentationOf(type, stream, shortRep));
+				rep += getRepresentationOf(type, stream, shortRep);
 			}
 
-			return rep.toString();
+			return rep;
 		}
 
 		@Override

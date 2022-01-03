@@ -20,7 +20,7 @@ import java.util.Set;
 @FunctionalInterface
 public interface PickListener<V> {
 
-	enum EventSource {
+	public enum EventSource {
 		/** Originated from outside of the graph API (e.g., an external location change) */
 		EXTERNAL,
 

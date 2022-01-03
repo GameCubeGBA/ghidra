@@ -69,7 +69,7 @@ public abstract class VersionControlTask extends Task {
 			keepCheckedOut = vcDialog.keepCheckedOut();
 			createKeep = vcDialog.shouldCreateKeepFile();
 			comments = vcDialog.getComments();
-			if (comments.isEmpty()) {
+			if (comments.length() == 0) {
 				comments = null;
 			}
 
@@ -87,7 +87,7 @@ public abstract class VersionControlTask extends Task {
 	protected void checkFilesInUse() {
 		filesInUse = false;
 		for (DomainFile df : list) {
-			if (!df.getConsumers().isEmpty()) {
+			if (df.getConsumers().size() > 0) {
 				filesInUse = true;
 				return;
 			}

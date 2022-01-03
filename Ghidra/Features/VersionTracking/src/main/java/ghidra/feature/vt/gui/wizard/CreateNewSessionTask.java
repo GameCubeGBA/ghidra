@@ -73,10 +73,12 @@ public class CreateNewSessionTask extends Task {
 			}
 
 			final VTSession finalSession = session;
-			EventQueue.invokeLater(() -> {
-                controller.openVersionTrackingSession(finalSession);
-                releaseDomainObject(finalSession);
-            });
+			EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					controller.openVersionTrackingSession(finalSession);
+					releaseDomainObject(finalSession);
+				}
+			});
 		}
 		catch (CancelledException e) {
 			// the user cancelled; just cleanup

@@ -141,7 +141,7 @@ public class FunctionGraphFactory {
 			TaskMonitor monitor) throws CancelledException {
 
 		FunctionGraph graph = createGraph(function, controller, monitor);
-		if (graph.getVertices().isEmpty()) {
+		if (graph.getVertices().size() == 0) {
 			return new EmptyFunctionGraphData("No data in function: " + function.getName());
 		}
 
@@ -286,7 +286,7 @@ public class FunctionGraphFactory {
 		List<FGEdge> edges = new ArrayList<>();
 		CodeBlock codeBlock = blockToVertexMap.getKey(startVertex);
 		CodeBlockReferenceIterator destinations = codeBlock.getDestinations(monitor);
-		while (destinations.hasNext()) {
+		for (; destinations.hasNext();) {
 			CodeBlockReference reference = destinations.next();
 			CodeBlock destinationBlock = reference.getDestinationBlock();
 			FGVertex destinationVertex = blockToVertexMap.get(destinationBlock);
@@ -310,7 +310,7 @@ public class FunctionGraphFactory {
 		CodeBlockIterator iterator = blockModel.getCodeBlocksContaining(addresses, monitor);
 		monitor.initialize(addresses.getNumAddresses());
 
-		while (iterator.hasNext()) {
+		for (; iterator.hasNext();) {
 			CodeBlock codeBlock = iterator.next();
 
 			FlowType flowType = codeBlock.getFlowType();

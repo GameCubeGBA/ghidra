@@ -252,7 +252,7 @@ public abstract class GhidraScript extends FlatProgramAPI {
 			String basename = getScriptName();
 			basename = basename.substring(0, basename.lastIndexOf('.'));
 
-			if (!potentialPropertiesFileLocs.isEmpty()) {
+			if (potentialPropertiesFileLocs.size() > 0) {
 				propertiesFileParams.loadGhidraScriptProperties(potentialPropertiesFileLocs,
 					basename);
 			}
@@ -410,9 +410,11 @@ public abstract class GhidraScript extends FlatProgramAPI {
 					OptionDialog.QUESTION_MESSAGE);
 		//@formatter:on
 
-        // Yes
-        return choice == OptionDialog.OPTION_TWO;
-    }
+		if (choice == OptionDialog.OPTION_TWO) { // Yes
+			return true;
+		}
+		return false;
+	}
 
 	@Override
 	public void analyzeAll(Program program) {
@@ -588,7 +590,7 @@ public abstract class GhidraScript extends FlatProgramAPI {
 					if (isRunningHeadless()) {
 						Msg.error(this,
 							"Server Connect Error: Server repository connection failed: " +
-								repository + ", Exception: " + e);
+								repository + ", Exception: " + e.toString());
 					}
 					else {
 						PluginTool tool = state.getTool();
@@ -819,7 +821,7 @@ public abstract class GhidraScript extends FlatProgramAPI {
 			GhidraScript script = provider.getScriptInstance(scriptSource, writer);
 			script.setScriptArgs(scriptArguments);
 
-			if (!potentialPropertiesFileLocs.isEmpty()) {
+			if (potentialPropertiesFileLocs.size() > 0) {
 				script.setPotentialPropertiesFileLocations(potentialPropertiesFileLocs);
 			}
 
@@ -1327,7 +1329,7 @@ public abstract class GhidraScript extends FlatProgramAPI {
 			String returnString = setAnalysisOption(options, entry.getKey(),
                     entry.getValue());
 
-			if (!returnString.isEmpty()) {
+			if (returnString.length() > 0) {
 				errorBuffer.append(returnString);
 				errorBuffer.append("\n");
 			}
@@ -1359,7 +1361,7 @@ public abstract class GhidraScript extends FlatProgramAPI {
 		Options options = program.getOptions(Program.ANALYSIS_PROPERTIES);
 		String errorMsg = setAnalysisOption(options, optionName, optionValue);
 
-		if (!errorMsg.isEmpty()) {
+		if (errorMsg.length() > 0) {
 			if (isRunningHeadless()) {
 				Msg.error(this, errorMsg);
 			}

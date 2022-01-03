@@ -113,7 +113,10 @@ public class MultiTextFilterTableFilter<ROW_OBJECT> implements TableFilter<ROW_O
 			return false;
 		}
 
-        return Objects.equals(transformer, other.transformer);
-    }
+		if (!Objects.equals(transformer, other.transformer)) {
+			return false;
+		}
+		return true;
+	}
 
 }

@@ -12,13 +12,13 @@
 package SWIG;
 
 public final class ConnectionStatus {
-  public static final ConnectionStatus eConnectionStatusSuccess = new ConnectionStatus("eConnectionStatusSuccess");
-  public static final ConnectionStatus eConnectionStatusEndOfFile = new ConnectionStatus("eConnectionStatusEndOfFile");
-  public static final ConnectionStatus eConnectionStatusError = new ConnectionStatus("eConnectionStatusError");
-  public static final ConnectionStatus eConnectionStatusTimedOut = new ConnectionStatus("eConnectionStatusTimedOut");
-  public static final ConnectionStatus eConnectionStatusNoConnection = new ConnectionStatus("eConnectionStatusNoConnection");
-  public static final ConnectionStatus eConnectionStatusLostConnection = new ConnectionStatus("eConnectionStatusLostConnection");
-  public static final ConnectionStatus eConnectionStatusInterrupted = new ConnectionStatus("eConnectionStatusInterrupted");
+  public final static ConnectionStatus eConnectionStatusSuccess = new ConnectionStatus("eConnectionStatusSuccess");
+  public final static ConnectionStatus eConnectionStatusEndOfFile = new ConnectionStatus("eConnectionStatusEndOfFile");
+  public final static ConnectionStatus eConnectionStatusError = new ConnectionStatus("eConnectionStatusError");
+  public final static ConnectionStatus eConnectionStatusTimedOut = new ConnectionStatus("eConnectionStatusTimedOut");
+  public final static ConnectionStatus eConnectionStatusNoConnection = new ConnectionStatus("eConnectionStatusNoConnection");
+  public final static ConnectionStatus eConnectionStatusLostConnection = new ConnectionStatus("eConnectionStatusLostConnection");
+  public final static ConnectionStatus eConnectionStatusInterrupted = new ConnectionStatus("eConnectionStatusInterrupted");
 
   public final int swigValue() {
     return swigValue;
@@ -31,9 +31,9 @@ public final class ConnectionStatus {
   public static ConnectionStatus swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-      for (ConnectionStatus value : swigValues)
-          if (value.swigValue == swigValue)
-              return value;
+    for (int i = 0; i < swigValues.length; i++)
+      if (swigValues[i].swigValue == swigValue)
+        return swigValues[i];
     throw new IllegalArgumentException("No enum " + ConnectionStatus.class + " with value " + swigValue);
   }
 

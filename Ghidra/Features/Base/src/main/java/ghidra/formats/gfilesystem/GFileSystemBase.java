@@ -62,7 +62,7 @@ public abstract class GFileSystemBase implements GFileSystem {
 
 	@Override
 	public String toString() {
-		return "File system " + getType() + " - " + getDescription() + " - " + fileSystemName;
+		return "File system " + getType() + " - " + getDescription() + " - " + getName();
 	}
 
 	@Override
@@ -89,14 +89,14 @@ public abstract class GFileSystemBase implements GFileSystem {
 	 * @return true if valid for the byte provider
 	 * @throws IOException if an I/O error occurs
 	 */
-    public abstract boolean isValid(TaskMonitor monitor) throws IOException;
+	abstract public boolean isValid(TaskMonitor monitor) throws IOException;
 
 	/**
 	 * Opens the file system.
 	 * @throws IOException if an I/O error occurs
 	 * @throws CryptoException if an encryption error occurs
 	 */
-    public abstract void open(TaskMonitor monitor)
+	abstract public void open(TaskMonitor monitor)
 			throws IOException, CryptoException, CancelledException;
 
 	/**
@@ -121,13 +121,13 @@ public abstract class GFileSystemBase implements GFileSystem {
 	 * Returns the name of this file system.
 	 * @return the name of this file system
 	 */
-    @Override
-    public final String getName() {
+	@Override
+	final public String getName() {
 		return fileSystemName;
 	}
 
 	@Override
-    public abstract List<GFile> getListing(GFile directory) throws IOException;
+	abstract public List<GFile> getListing(GFile directory) throws IOException;
 
 	/**
 	 * Writes the given bytes to a tempfile in the temp directory.
@@ -153,7 +153,7 @@ public abstract class GFileSystemBase implements GFileSystem {
 
 	@Override
 	public GFile lookup(String path) throws IOException {
-		if (path == null || "/".equals(path)) {
+		if (path == null || path.equals("/")) {
 			return root;
 		}
 		GFile current = null;

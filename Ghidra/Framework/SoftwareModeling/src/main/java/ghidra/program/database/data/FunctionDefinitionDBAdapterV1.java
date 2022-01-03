@@ -90,7 +90,7 @@ class FunctionDefinitionDBAdapterV1 extends FunctionDefinitionDBAdapter {
 	public DBRecord createRecord(String name, String comments, long categoryID, long returnDtID,
 			boolean hasVarArgs, GenericCallingConvention genericCallingConvention,
 			long sourceArchiveID, long sourceDataTypeID, long lastChangeTime) throws IOException {
-		byte flags = 0;
+		byte flags = (byte) 0;
 		if (hasVarArgs) {
 			flags |= FunctionDefinitionDBAdapter.FUNCTION_DEF_VARARG_FLAG;
 		}

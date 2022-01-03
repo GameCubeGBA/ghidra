@@ -85,35 +85,41 @@ public class NavigateToFunctionAction extends ToggleDockingAction {
 	private void addChangeListeners(MultiFunctionComparisonProvider provider) {
 		MultiFunctionComparisonPanel panel = (MultiFunctionComparisonPanel) provider.getComponent();
 
-		panel.getSourceComponent().addItemListener(e -> {
-            if (e.getStateChange() != ItemEvent.SELECTED) {
-                return;
-            }
+		panel.getSourceComponent().addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() != ItemEvent.SELECTED) {
+					return;
+				}
 
-            if (panel.getFocusedComponent() != panel.getSourceComponent()) {
-                return;
-            }
+				if (panel.getFocusedComponent() != panel.getSourceComponent()) {
+					return;
+				}
 
-            if (NavigateToFunctionAction.this.isSelected()) {
-                Function f = (Function) panel.getSourceComponent().getSelectedItem();
-                goToService.goTo(f.getEntryPoint(), f.getProgram());
-            }
-        });
+				if (NavigateToFunctionAction.this.isSelected()) {
+					Function f = (Function) panel.getSourceComponent().getSelectedItem();
+					goToService.goTo(f.getEntryPoint(), f.getProgram());
+				}
+			}
+		});
 
-		panel.getTargetComponent().addItemListener(e -> {
-            if (e.getStateChange() != ItemEvent.SELECTED) {
-                return;
-            }
+		panel.getTargetComponent().addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() != ItemEvent.SELECTED) {
+					return;
+				}
 
-            if (panel.getFocusedComponent() != panel.getTargetComponent()) {
-                return;
-            }
+				if (panel.getFocusedComponent() != panel.getTargetComponent()) {
+					return;
+				}
 
-            if (NavigateToFunctionAction.this.isSelected()) {
-                Function f = (Function) panel.getTargetComponent().getSelectedItem();
-                goToService.goTo(f.getEntryPoint(), f.getProgram());
-            }
-        });
+				if (NavigateToFunctionAction.this.isSelected()) {
+					Function f = (Function) panel.getTargetComponent().getSelectedItem();
+					goToService.goTo(f.getEntryPoint(), f.getProgram());
+				}
+			}
+		});
 	}
 
 	/**

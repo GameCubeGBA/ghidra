@@ -28,11 +28,11 @@ public interface GoToServiceListener {
 	 * @param queryString original query string
 	 * @param foundResults true if at least one hit was found for the query
 	 */
-    void gotoCompleted(String queryString, boolean foundResults);
+	public void gotoCompleted(String queryString, boolean foundResults);
 
 	/**
 	 * Notification that the GOTO failed with an exception.
 	 * @param exc the exception that occurred.
 	 */
-    void gotoFailed(Exception exc);
+	public void gotoFailed(Exception exc);
 }

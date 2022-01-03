@@ -26,7 +26,8 @@ public class ShortObjectHashtableTest extends AbstractGenericTest {
 	 * @param arg0
 	 */
 	public ShortObjectHashtableTest() {
-    }
+		super();
+	}
 
 @Test
     public void testShortObjectHashtable() {

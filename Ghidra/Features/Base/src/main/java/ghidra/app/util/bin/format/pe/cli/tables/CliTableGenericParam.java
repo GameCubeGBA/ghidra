@@ -36,7 +36,8 @@ public class CliTableGenericParam extends CliAbstractTable {
 		public int nameIndex;
 		
 		public CliGenericParamRow(short number, short flags, int ownerIndex, int nameIndex) {
-            this.number = number;
+			super();
+			this.number = number;
 			this.flags = flags;
 			this.ownerIndex = ownerIndex;
 			this.nameIndex = nameIndex;

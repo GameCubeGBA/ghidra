@@ -54,61 +54,61 @@ public interface MarkerService {
 	/**
 	 * Display priority for marking the selection.
 	 */
-    int SELECTION_PRIORITY = 100;
+	public final static int SELECTION_PRIORITY = 100;
 	/**
 	 * Display priority for marking the highlight.
 	 */
-    int HIGHLIGHT_PRIORITY = 50;
+	public final static int HIGHLIGHT_PRIORITY = 50;
 	/**
 	 * Display priority for marking a change set.
 	 */
-    int CHANGE_PRIORITY = -50;
+	public final static int CHANGE_PRIORITY = -50;
 	/**
 	 * Display priority for marking a change set for members in a group.
 	 */
-    int GROUP_PRIORITY = -25;
+	public final static int GROUP_PRIORITY = -25;
 
 	/**
 	 * Display priority for marking the cursor location.
 	 */
-    int CURSOR_PRIORITY = 200;
+	public final static int CURSOR_PRIORITY = 200;
 
 	/**
 	 * Display priority for marking the cursor location.
 	 */
-    int FUNCTION_COMPARE_CURSOR_PRIORITY = 49;
+	public final static int FUNCTION_COMPARE_CURSOR_PRIORITY = 49;
 
 	/**
 	 * Display priority for marking locations of search hits.
 	 */
-    int SEARCH_PRIORITY = 75;
+	public final static int SEARCH_PRIORITY = 75;
 	/**
 	 * Display priority for marking locations of breakpoints.
 	 */
-    int BREAKPOINT_PRIORITY = 50;
+	public final static int BREAKPOINT_PRIORITY = 50;
 	/**
 	 * Display priority for bookmark locations.
 	 */
-    int BOOKMARK_PRIORITY = 0;
+	public final static int BOOKMARK_PRIORITY = 0;
 	/**
 	 * Display priority for marking locations where a property exists.
 	 */
-    int PROPERTY_PRIORITY = 75;
+	public final static int PROPERTY_PRIORITY = 75;
 	/**
 	 * Display priority for marking locations where a program diff difference exists.
 	 */
-    int DIFF_PRIORITY = 80;
+	public final static int DIFF_PRIORITY = 80;
 	/**
 	 * Display priority for marking references.
 	 */
-    int REFERENCE_PRIORITY = -10;
+	public final static int REFERENCE_PRIORITY = -10;
 
 	/**
 	 * A group name for highlights.  This is intended to be used with
 	 * {@link #setMarkerForGroup(String, MarkerSet, Program)} and
 	 * {@link #removeMarkerForGroup(String, MarkerSet, Program)}
 	 */
-    String HIGHLIGHT_GROUP = "HIGHLIGHT_GROUP";
+	public final static String HIGHLIGHT_GROUP = "HIGHLIGHT_GROUP";
 
 	/**
 	 * Create a Marker display which shows area type markers.
@@ -123,9 +123,9 @@ public interface MarkerService {
 	 * @param color the color of marked areas.
 	 * @return set of navigation markers
 	 */
-    MarkerSet createAreaMarker(String name, String markerDescription, Program program,
-                               int priority, boolean showMarkers, boolean showNavigation, boolean colorBackground,
-                               Color color);
+	public MarkerSet createAreaMarker(String name, String markerDescription, Program program,
+			int priority, boolean showMarkers, boolean showNavigation, boolean colorBackground,
+			Color color);
 
 	/**
 	 * Create a Marker display which shows area type markers.
@@ -141,9 +141,9 @@ public interface MarkerService {
 	 * @param isPreferred true indicates higher priority than all non-preferred MarkerSets
 	 * @return set of navigation markers
 	 */
-    MarkerSet createAreaMarker(String name, String markerDescription, Program program,
-                               int priority, boolean showMarkers, boolean showNavigation, boolean colorBackground,
-                               Color color, boolean isPreferred);
+	public MarkerSet createAreaMarker(String name, String markerDescription, Program program,
+			int priority, boolean showMarkers, boolean showNavigation, boolean colorBackground,
+			Color color, boolean isPreferred);
 
 	/**
 	 * Create a Marker display which shows point type markers.
@@ -159,9 +159,9 @@ public interface MarkerService {
 	 * @param icon icon to display in marker bar
 	 * @return set of navigation markers
 	 */
-    MarkerSet createPointMarker(String name, String markerDescription, Program program,
-                                int priority, boolean showMarkers, boolean showNavigation, boolean colorBackground,
-                                Color color, ImageIcon icon);
+	public MarkerSet createPointMarker(String name, String markerDescription, Program program,
+			int priority, boolean showMarkers, boolean showNavigation, boolean colorBackground,
+			Color color, ImageIcon icon);
 
 	/**
 	 * Create a Marker display which shows point type markers.
@@ -178,9 +178,9 @@ public interface MarkerService {
 	 * @param isPreferred is prioritized over non-preferred MarkersSets
 	 * @return set of navigation markers
 	 */
-    MarkerSet createPointMarker(String name, String markerDescription, Program program,
-                                int priority, boolean showMarkers, boolean showNavigation, boolean colorBackground,
-                                Color color, ImageIcon icon, boolean isPreferred);
+	public MarkerSet createPointMarker(String name, String markerDescription, Program program,
+			int priority, boolean showMarkers, boolean showNavigation, boolean colorBackground,
+			Color color, ImageIcon icon, boolean isPreferred);
 
 	/**
 	 * Remove the marker set
@@ -188,7 +188,7 @@ public interface MarkerService {
 	 * @param markerSet marker set to be removed from navigation bars.
 	 * @param program The program with which the markers are associated.
 	 */
-    void removeMarker(MarkerSet markerSet, Program program);
+	public void removeMarker(MarkerSet markerSet, Program program);
 
 	/**
 	 * Return the marker set with the given name;
@@ -197,7 +197,7 @@ public interface MarkerService {
 	 * @param program The program with which the created markers will be associated.
 	 * @return the markerset with the given name;
 	 */
-    MarkerSet getMarkerSet(String name, Program program);
+	public MarkerSet getMarkerSet(String name, Program program);
 
 	/**
 	 * Sets a marker set for a given group name.  Any previous marker set associated with the
@@ -208,7 +208,7 @@ public interface MarkerService {
 	 * @param program The program with which the markers are associated.
 	 * @see #removeMarkerForGroup(String, MarkerSet, Program)
 	 */
-    void setMarkerForGroup(String groupName, MarkerSet markerSet, Program program);
+	public void setMarkerForGroup(String groupName, MarkerSet markerSet, Program program);
 
 	/**
 	 * Removes a marker set for a given group name.  If the given marker set is not the marker
@@ -219,7 +219,7 @@ public interface MarkerService {
 	 *        marker is
 	 * @see #setMarkerForGroup(String, MarkerSet, Program)
 	 */
-    void removeMarkerForGroup(String groupName, MarkerSet markerSet, Program program);
+	public void removeMarkerForGroup(String groupName, MarkerSet markerSet, Program program);
 
 	/**
 	 * Returns the background color associated with the given address.  Each markerSet that supports
@@ -228,7 +228,7 @@ public interface MarkerService {
 	 * @param address the address to check for a background color.
 	 * @return the background color to use for that address or null if no markers contain that address.
 	 */
-    Color getBackgroundColor(Address address);
+	public Color getBackgroundColor(Address address);
 
 	/**
 	 * Returns the background color associated with the given program and address. Each markerSet
@@ -243,7 +243,7 @@ public interface MarkerService {
 	 * @return the background color to use for that address or null if no markers contain that
 	 *         address.
 	 */
-    Color getBackgroundColor(Program program, Address address);
+	public Color getBackgroundColor(Program program, Address address);
 
 	/**
 	 * Adds a change listener to be notified when markers are added/removed or the addresses in any
@@ -251,14 +251,14 @@ public interface MarkerService {
 	 * 
 	 * @param listener the listener
 	 */
-    void addChangeListener(ChangeListener listener);
+	public void addChangeListener(ChangeListener listener);
 
 	/**
 	 * Removes the given change listener from the list of listeners to be notified of changes
 	 * 
 	 * @param listener the listener
 	 */
-    void removeChangeListener(ChangeListener listener);
+	public void removeChangeListener(ChangeListener listener);
 
 	/**
 	 * Sets the listener to be notified when the user double-clicks in the Marker Margin area. Note
@@ -268,6 +268,6 @@ public interface MarkerService {
 	 * @param listener the listener to be notified or null to remove the current listener
 	 * @throws IllegalStateException if a listener is already set.
 	 */
-    void setMarkerClickedListener(MarkerClickedListener listener);
+	public void setMarkerClickedListener(MarkerClickedListener listener);
 
 }

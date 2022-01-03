@@ -18,5 +18,5 @@ package ghidra.app.plugin.core.functiongraph.graph.layout;
 
 @FunctionalInterface
 public interface DisposableLayout {
-	void dispose();
+	public void dispose();
 }

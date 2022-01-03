@@ -21,12 +21,12 @@ import ghidra.program.model.listing.Program;
 
 public interface DisplayableAddress extends DisplayStringProvider, Comparable<DisplayableAddress> {
 
-	String NO_ADDRESS = "No Address";
+	public static String NO_ADDRESS = "No Address";
 
 	@Override
-    String getDisplayString();
+	public String getDisplayString();
 
-	Address getAddress();
+	public Address getAddress();
 
-	Program getProgram();
+	public Program getProgram();
 }

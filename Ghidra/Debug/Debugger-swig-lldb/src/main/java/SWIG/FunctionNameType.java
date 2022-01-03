@@ -12,13 +12,13 @@
 package SWIG;
 
 public final class FunctionNameType {
-  public static final FunctionNameType eFunctionNameTypeNone = new FunctionNameType("eFunctionNameTypeNone", lldbJNI.eFunctionNameTypeNone_get());
-  public static final FunctionNameType eFunctionNameTypeAuto = new FunctionNameType("eFunctionNameTypeAuto", lldbJNI.eFunctionNameTypeAuto_get());
-  public static final FunctionNameType eFunctionNameTypeFull = new FunctionNameType("eFunctionNameTypeFull", lldbJNI.eFunctionNameTypeFull_get());
-  public static final FunctionNameType eFunctionNameTypeBase = new FunctionNameType("eFunctionNameTypeBase", lldbJNI.eFunctionNameTypeBase_get());
-  public static final FunctionNameType eFunctionNameTypeMethod = new FunctionNameType("eFunctionNameTypeMethod", lldbJNI.eFunctionNameTypeMethod_get());
-  public static final FunctionNameType eFunctionNameTypeSelector = new FunctionNameType("eFunctionNameTypeSelector", lldbJNI.eFunctionNameTypeSelector_get());
-  public static final FunctionNameType eFunctionNameTypeAny = new FunctionNameType("eFunctionNameTypeAny", lldbJNI.eFunctionNameTypeAny_get());
+  public final static FunctionNameType eFunctionNameTypeNone = new FunctionNameType("eFunctionNameTypeNone", lldbJNI.eFunctionNameTypeNone_get());
+  public final static FunctionNameType eFunctionNameTypeAuto = new FunctionNameType("eFunctionNameTypeAuto", lldbJNI.eFunctionNameTypeAuto_get());
+  public final static FunctionNameType eFunctionNameTypeFull = new FunctionNameType("eFunctionNameTypeFull", lldbJNI.eFunctionNameTypeFull_get());
+  public final static FunctionNameType eFunctionNameTypeBase = new FunctionNameType("eFunctionNameTypeBase", lldbJNI.eFunctionNameTypeBase_get());
+  public final static FunctionNameType eFunctionNameTypeMethod = new FunctionNameType("eFunctionNameTypeMethod", lldbJNI.eFunctionNameTypeMethod_get());
+  public final static FunctionNameType eFunctionNameTypeSelector = new FunctionNameType("eFunctionNameTypeSelector", lldbJNI.eFunctionNameTypeSelector_get());
+  public final static FunctionNameType eFunctionNameTypeAny = new FunctionNameType("eFunctionNameTypeAny", lldbJNI.eFunctionNameTypeAny_get());
 
   public final int swigValue() {
     return swigValue;
@@ -31,9 +31,9 @@ public final class FunctionNameType {
   public static FunctionNameType swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-      for (FunctionNameType value : swigValues)
-          if (value.swigValue == swigValue)
-              return value;
+    for (int i = 0; i < swigValues.length; i++)
+      if (swigValues[i].swigValue == swigValue)
+        return swigValues[i];
     throw new IllegalArgumentException("No enum " + FunctionNameType.class + " with value " + swigValue);
   }
 

@@ -27,7 +27,7 @@ package ghidra.dbg.jdi.manager;
  * {@link JdiCause.Causes#UNCLAIMED}.
  */
 public interface JdiCause {
-	enum Causes implements JdiCause {
+	public enum Causes implements JdiCause {
 		UNCLAIMED;
 	}
 }

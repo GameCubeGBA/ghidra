@@ -262,8 +262,11 @@ public abstract class AbstractDBTraceProgramViewListing implements TraceProgramV
 		}
 		TraceCodeUnit maxUnit =
 			codeOperations.definedUnits().getContaining(snap, range.getMaxAddress());
-        return maxUnit == null || !program.isCodeVisible(maxUnit, maxUnit.getLifespan());
-    }
+		if (maxUnit != null && program.isCodeVisible(maxUnit, maxUnit.getLifespan())) {
+			return false;
+		}
+		return true;
+	}
 
 	protected Iterator<TraceData> getUndefinedDataIterator(AddressSetView set, boolean forward) {
 		AddressRangeIterator undefIter = getUndefinedRangeIterator(set, forward);

@@ -45,8 +45,10 @@ public class LSHCosineVectorAccum extends LSHCosineVector {
 			if ((obj == null) || (getClass() != obj.getClass()))
 				return false;
 			Entry other = (Entry) obj;
-            return hash == other.hash;
-        }
+			if (hash != other.hash)
+				return false;
+			return true;
+		}
 
 		/**
 		 * Comparison must be UNSIGNED!!
@@ -72,7 +74,8 @@ public class LSHCosineVectorAccum extends LSHCosineVector {
 	private boolean finalized = false;
 
 	public LSHCosineVectorAccum() {
-        treehash = new TreeSet<>();
+		super();
+		treehash = new TreeSet<>();
 	}
 
 	public void addHash(int h, double w) {

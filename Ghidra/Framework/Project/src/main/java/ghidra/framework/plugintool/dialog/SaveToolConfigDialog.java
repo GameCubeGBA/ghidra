@@ -68,7 +68,7 @@ public class SaveToolConfigDialog extends DialogComponentProvider implements Lis
 	/**
 	 * Preference name for images directory that was last accessed.
 	 */
-    static final String LAST_ICON_DIRECTORY = "LastIconDirectory";
+	final static String LAST_ICON_DIRECTORY = "LastIconDirectory";
 
 	private ToolServices toolServices;
 	private PluginTool tool;
@@ -216,7 +216,7 @@ public class SaveToolConfigDialog extends DialogComponentProvider implements Lis
 
 		String newName = nameField.getText().trim();
 
-		if (newName.isEmpty()) {
+		if (newName.length() == 0) {
 			this.setStatusText("Please enter or select a name.");
 			return;
 		}
@@ -330,7 +330,7 @@ public class SaveToolConfigDialog extends DialogComponentProvider implements Lis
 
 		iconField.addActionListener(e -> {
 			String filename = iconField.getText();
-			if (filename.isEmpty()) {
+			if (filename.length() == 0) {
 				setStatusText("Please enter a filename for the icon.");
 				return;
 			}
@@ -447,7 +447,7 @@ public class SaveToolConfigDialog extends DialogComponentProvider implements Lis
 	private void saveToolConfig() {
 		if (iconURL == null) {
 			String iconName = iconField.getText();
-			if (!iconName.isEmpty()) {
+			if (iconName.length() > 0) {
 				iconURL = new ToolIconURL(iconName);
 			}
 		}

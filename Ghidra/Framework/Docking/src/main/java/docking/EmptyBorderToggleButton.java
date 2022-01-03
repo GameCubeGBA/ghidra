@@ -37,7 +37,8 @@ public class EmptyBorderToggleButton extends EmptyBorderButton {
 	protected PropertyChangeListener propertyChangeListener = evt -> doPropertyChange(evt);
 
 	public EmptyBorderToggleButton() {
-        init();
+		super();
+		init();
 	}
 
 	public EmptyBorderToggleButton(Icon icon) {
@@ -46,8 +47,9 @@ public class EmptyBorderToggleButton extends EmptyBorderButton {
 	}
 
 	public EmptyBorderToggleButton(DockingActionIf action) {
+		super();
 
-        // Note: do not pass the action up to super, since the JButton ancestor will perform
+		// Note: do not pass the action up to super, since the JButton ancestor will perform
 		// initialization from the action that we have not been designed to handle (we shouldn't 
 		// have to change the way that Java uses actions, but that is for a later refactoring).
 		initFromAction(action);
@@ -63,7 +65,7 @@ public class EmptyBorderToggleButton extends EmptyBorderButton {
 		Icon icon = toolBarData == null ? null : toolBarData.getIcon();
 		setIcon(icon);
 		String tt = action.getDescription();
-		if (tt == null || tt.isEmpty()) {
+		if (tt == null || tt.length() == 0) {
 			tt = action.getName();
 		}
 		setToolTipText(tt);

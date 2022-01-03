@@ -46,14 +46,17 @@ public class RegisterTree extends GTree {
 		// never have a horizontal scroll bar.
 		JScrollPane scrollPane = getScrollPane();
 		final JViewport viewport = scrollPane.getViewport();
-		scrollPane.getViewport().addChangeListener(e -> {
-            Point viewPosition = viewport.getViewPosition();
-            if (viewPosition.x != 0) {
-                // if it scrolls horizontally, put it back
-                viewPosition.x = 0;
-                viewport.setViewPosition(viewPosition);
-            }
-        });
+		scrollPane.getViewport().addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				Point viewPosition = viewport.getViewPosition();
+				if (viewPosition.x != 0) {
+					// if it scrolls horizontally, put it back
+					viewPosition.x = 0;
+					viewport.setViewPosition(viewPosition);
+				}
+			}
+		});
 		setMinimumSize(new Dimension(175, 30));
 	}
 

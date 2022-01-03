@@ -41,7 +41,7 @@ import ghidra.util.task.TaskMonitor;
  */
 public interface Loader extends ExtensionPoint, Comparable<Loader> {
 
-	String COMMAND_LINE_ARG_PREFIX = "-loader";
+	public static final String COMMAND_LINE_ARG_PREFIX = "-loader";
 
 	/**
 	 * If this {@link Loader} supports loading the given {@link ByteProvider}, this methods returns
@@ -56,7 +56,7 @@ public interface Loader extends ExtensionPoint, Comparable<Loader> {
 	 *   {@link ByteProvider}.
 	 * @throws IOException if there was an IO-related issue finding the {@link LoadSpec}s.
 	 */
-    Collection<LoadSpec> findSupportedLoadSpecs(ByteProvider provider) throws IOException;
+	public Collection<LoadSpec> findSupportedLoadSpecs(ByteProvider provider) throws IOException;
 
 	/**
 	 * Loads bytes in a particular format as a new {@link DomainObject}. 
@@ -82,9 +82,9 @@ public interface Loader extends ExtensionPoint, Comparable<Loader> {
 	 * @throws VersionException if there was an issue with database versions, probably due to a
 	 *   failed language upgrade.
 	 */
-    List<DomainObject> load(ByteProvider provider, String name, DomainFolder folder,
-                            LoadSpec loadSpec, List<Option> options, MessageLog messageLog, Object consumer,
-                            TaskMonitor monitor) throws IOException, CancelledException, DuplicateNameException,
+	public List<DomainObject> load(ByteProvider provider, String name, DomainFolder folder,
+			LoadSpec loadSpec, List<Option> options, MessageLog messageLog, Object consumer,
+			TaskMonitor monitor) throws IOException, CancelledException, DuplicateNameException,
 			InvalidNameException, VersionException;
 
 	/**
@@ -101,8 +101,8 @@ public interface Loader extends ExtensionPoint, Comparable<Loader> {
 	 * @throws IOException if there was an IO-related problem loading.
 	 * @throws CancelledException if the user cancelled the load.
 	 */
-    boolean loadInto(ByteProvider provider, LoadSpec loadSpec, List<Option> options,
-                     MessageLog messageLog, Program program, TaskMonitor monitor)
+	public boolean loadInto(ByteProvider provider, LoadSpec loadSpec, List<Option> options,
+			MessageLog messageLog, Program program, TaskMonitor monitor)
 			throws IOException, CancelledException;
 
 	/**
@@ -115,8 +115,8 @@ public interface Loader extends ExtensionPoint, Comparable<Loader> {
 	 *   otherwise, false.
 	 * @return A list of the {@link Loader}'s default options.
 	 */
-    List<Option> getDefaultOptions(ByteProvider provider, LoadSpec loadSpec,
-                                   DomainObject domainObject, boolean loadIntoProgram);
+	public List<Option> getDefaultOptions(ByteProvider provider, LoadSpec loadSpec,
+			DomainObject domainObject, boolean loadIntoProgram);
 
 	/**
 	 * Validates the {@link Loader}'s options and returns null if all options are valid; otherwise, 
@@ -130,8 +130,8 @@ public interface Loader extends ExtensionPoint, Comparable<Loader> {
 	 * @return null if all {@link Option}s are valid; otherwise, an error message describing the 
 	 *   problem is returned.
 	 */
-    String validateOptions(ByteProvider provider, LoadSpec loadSpec, List<Option> options,
-                           Program program);
+	public String validateOptions(ByteProvider provider, LoadSpec loadSpec, List<Option> options,
+			Program program);
 
 	/**
 	 * Gets the {@link Loader}'s name, which is used both for display purposes, and to identify the 
@@ -139,7 +139,7 @@ public interface Loader extends ExtensionPoint, Comparable<Loader> {
 	 * 
 	 * @return The {@link Loader}'s name.
 	 */
-    String getName();
+	public String getName();
 
 	/**
 	 * For ordering purposes; lower tier numbers are more important (and listed
@@ -147,7 +147,7 @@ public interface Loader extends ExtensionPoint, Comparable<Loader> {
 	 *
 	 * @return the tier of the loader
 	 */
-    LoaderTier getTier();
+	public LoaderTier getTier();
 
 	/**
 	 * For ordering purposes; lower numbers are more important (and listed
@@ -155,7 +155,7 @@ public interface Loader extends ExtensionPoint, Comparable<Loader> {
 	 *
 	 * @return the ordering of the loader within its tier
 	 */
-    int getTierPriority();
+	public int getTierPriority();
 
 	/**
 	 * The preferred file name to use when loading.
@@ -169,7 +169,7 @@ public interface Loader extends ExtensionPoint, Comparable<Loader> {
 	 * @param provider The bytes to load.
 	 * @return The preferred file name to use when loading.
 	 */
-	default String getPreferredFileName(ByteProvider provider) {
+	public default String getPreferredFileName(ByteProvider provider) {
 		FSRL fsrl = provider.getFSRL();
 		String name = (fsrl != null) ? fsrl.getName() : provider.getName();
 		return name.replaceAll("[\\\\:|]+", "/");
@@ -183,12 +183,12 @@ public interface Loader extends ExtensionPoint, Comparable<Loader> {
 	 * @return True if this {@link Loader} supports loading into an existing {@link Program}; 
 	 *   otherwise, false.
 	 */
-	default boolean supportsLoadIntoProgram() {
+	public default boolean supportsLoadIntoProgram() {
 		return false;
 	}
 
 	@Override
-    default int compareTo(Loader o) {
+	public default int compareTo(Loader o) {
 		int compareTiers = getTier().compareTo(o.getTier());
 		if (compareTiers == 0) {
 			int comparePriorities = getTierPriority() - o.getTierPriority();

@@ -89,7 +89,7 @@ public class DemangledString extends DemangledObject {
 			return false;
 		}
 
-		CreateStringCmd cmd = new CreateStringCmd(address, -1, unicode);
+		CreateStringCmd cmd = new CreateStringCmd(address, -1, isUnicode());
 		cmd.applyTo(program);
 
 		Symbol demangledSymbol =
@@ -116,8 +116,8 @@ public class DemangledString extends DemangledObject {
 				buf.append('_');
 			}
 		}
-		String prefix = unicode ? "u_" : "s_";
-		return prefix + buf;
+		String prefix = isUnicode() ? "u_" : "s_";
+		return prefix + buf.toString();
 	}
 
 	/**

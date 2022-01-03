@@ -1056,9 +1056,11 @@ public class ProgramDiffPlugin extends ProgramPlugin
 		clearDiff();
 		if (secondaryDiffProgram != null) {
 			markerManager.setProgram(null);
-            for (BookmarkNavigator nav : bookmarkMap.values()) {
-                nav.dispose();
-            }
+			Iterator<BookmarkNavigator> iter = bookmarkMap.values().iterator();
+			while (iter.hasNext()) {
+				BookmarkNavigator nav = iter.next();
+				nav.dispose();
+			}
 			bookmarkMap.clear();
 
 			actionManager.secondProgramClosed();

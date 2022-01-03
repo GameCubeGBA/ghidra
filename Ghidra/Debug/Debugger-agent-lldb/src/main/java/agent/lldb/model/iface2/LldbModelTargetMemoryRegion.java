@@ -21,15 +21,15 @@ import ghidra.program.model.address.AddressRange;
 public interface LldbModelTargetMemoryRegion extends LldbModelTargetObject, TargetMemoryRegion {
 
 	@Override
-    AddressRange getRange();
+	public AddressRange getRange();
 
 	@Override
-    boolean isReadable();
+	public boolean isReadable();
 
 	@Override
-    boolean isWritable();
+	public boolean isWritable();
 
 	@Override
-    boolean isExecutable();
+	public boolean isExecutable();
 
 }

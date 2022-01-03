@@ -43,7 +43,7 @@ public interface DbgModelTargetSession extends //
 
 	DbgModelTargetProcessContainer getProcesses();
 
-	default DbgSession getSession() {
+	public default DbgSession getSession() {
 		DbgManagerImpl manager = getManager();
 		try {
 			String index = PathUtils.parseIndex(getName());
@@ -57,7 +57,7 @@ public interface DbgModelTargetSession extends //
 	}
 
 	@Override
-    default void consoleOutput(String output, int mask) {
+	public default void consoleOutput(String output, int mask) {
 
 		if (!isValid()) {
 			return;
@@ -79,14 +79,14 @@ public interface DbgModelTargetSession extends //
 	}
 
 	@Override
-    default void promptChanged(String prompt) {
+	public default void promptChanged(String prompt) {
 		changeAttributes(List.of(), Map.of( //
 			PROMPT_ATTRIBUTE_NAME, prompt //
 		), "Refreshed");
 	}
 
 	@Override
-    default CompletableFuture<Void> setActive() {
+	public default CompletableFuture<Void> setActive() {
 		DbgManagerImpl manager = getManager();
 		DbgSession session = getSession();
 		if (session == null) {

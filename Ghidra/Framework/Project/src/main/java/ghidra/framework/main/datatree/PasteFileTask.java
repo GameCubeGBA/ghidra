@@ -208,7 +208,7 @@ public class PasteFileTask extends Task {
 		String name = folder.getName();
 		try {
 			folder.moveTo(newParent);
-			Msg.info(this, "Moved folder " + name + " to " + folder);
+			Msg.info(this, "Moved folder " + name + " to " + folder.toString());
 		}
 		catch (FileNotFoundException e) {
 			// user may have renamed something in this item's path

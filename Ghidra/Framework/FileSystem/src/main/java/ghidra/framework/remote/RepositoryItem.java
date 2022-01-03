@@ -25,10 +25,10 @@ import ghidra.framework.store.FileSystem;
  */
 public class RepositoryItem implements java.io.Serializable {
 
-	public static final long serialVersionUID = 2L;
+	public final static long serialVersionUID = 2L;
 
-	public static final int FILE = 1;
-	public static final int DATABASE = 2;
+	public final static int FILE = 1;
+	public final static int DATABASE = 2;
 
 	protected String folderPath;
 	protected String itemName;
@@ -95,12 +95,12 @@ public class RepositoryItem implements java.io.Serializable {
 		folderPath = in.readUTF();
 		itemName = in.readUTF();
 		fileID = in.readUTF();
-		if (fileID.isEmpty()) {
+		if (fileID.length() == 0) {
 			fileID = null;
 		}
 		itemType = in.readInt();
 		contentType = in.readUTF();
-		if (contentType.isEmpty()) {
+		if (contentType.length() == 0) {
 			contentType = null;
 		}
 		version = in.readInt();

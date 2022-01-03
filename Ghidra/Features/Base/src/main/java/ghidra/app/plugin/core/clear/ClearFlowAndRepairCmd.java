@@ -188,20 +188,21 @@ public class ClearFlowAndRepairCmd extends BackgroundCommand {
 			if (clearData && clearLabels) {
 				// Clear dereferenced symbols
 				SymbolTable symTable = program.getSymbolTable();
-                for (Address ptrDestination : ptrDestinations) {
-                    monitor.checkCanceled();
-                    Address addr = ptrDestination;
-                    Symbol[] syms = symTable.getSymbols(addr);
-                    for (Symbol sym : syms) {
-                        if (sym.getSource() == SourceType.DEFAULT) {
-                            break;
-                        }
-                        if (sym.hasReferences()) {
-                            continue;
-                        }
-                        sym.delete();
-                    }
-                }
+				Iterator<Address> iter = ptrDestinations.iterator();
+				while (iter.hasNext()) {
+					monitor.checkCanceled();
+					Address addr = iter.next();
+					Symbol[] syms = symTable.getSymbols(addr);
+					for (Symbol sym : syms) {
+						if (sym.getSource() == SourceType.DEFAULT) {
+							break;
+						}
+						if (sym.hasReferences()) {
+							continue;
+						}
+						sym.delete();
+					}
+				}
 			}
 
 			if (repair) {
@@ -579,12 +580,13 @@ public class ClearFlowAndRepairCmd extends BackgroundCommand {
 				}
 			}
 
-            for (Address start : starts) {
-                monitor.checkCanceled();
-                Address entry = start;
-                CreateFunctionCmd cmd = new CreateFunctionCmd(entry);
-                cmd.applyTo(program, monitor);
-            }
+			Iterator<Address> entryIter = starts.iterator();
+			while (entryIter.hasNext()) {
+				monitor.checkCanceled();
+				Address entry = entryIter.next();
+				CreateFunctionCmd cmd = new CreateFunctionCmd(entry);
+				cmd.applyTo(program, monitor);
+			}
 		}
 	}
 
@@ -716,48 +718,50 @@ public class ClearFlowAndRepairCmd extends BackgroundCommand {
 
 		ReferenceManager refMgr = program.getReferenceManager();
 		FunctionManager functionManager = program.getFunctionManager();
-        for (BlockVertex blockVertex : vertexMap.values()) {
-            monitor.checkCanceled();
-            BlockVertex v = blockVertex;
-            if (v == startVertex || v.srcVertices.isEmpty()) {
-                continue;
-            }
-            Address addr = v.block.getMinAddress();
-            Instruction instr = listing.getInstructionAt(addr);
-            Address fallFrom = instr.getFallFrom();
-            if (fallFrom != null && !blockSet.contains(fallFrom)) {
-                prune(v, blockSet);
-            } else {
-                ReferenceIterator refIter = refMgr.getReferencesTo(addr);
+		Iterator<BlockVertex> vertexIter = vertexMap.values().iterator();
+		while (vertexIter.hasNext()) {
+			monitor.checkCanceled();
+			BlockVertex v = vertexIter.next();
+			if (v == startVertex || v.srcVertices.isEmpty()) {
+				continue;
+			}
+			Address addr = v.block.getMinAddress();
+			Instruction instr = listing.getInstructionAt(addr);
+			Address fallFrom = instr.getFallFrom();
+			if (fallFrom != null && !blockSet.contains(fallFrom)) {
+				prune(v, blockSet);
+			}
+			else {
+				ReferenceIterator refIter = refMgr.getReferencesTo(addr);
 
-                // If there are no references, and there is a defined function inside this block
-                //   That starts in this block, with no references to it, then this bad flow couldn't
-                //   have created it.
-                // TODO: maybe even just symbols with no refs to them should be snipped
-                //       code starts at the symbol someone might have disassembled there.
-                if (!refIter.hasNext() && functionManager.getFunctionAt(addr) != null) {
-                    prune(v, blockSet);
-                    continue;
-                }
-                while (refIter.hasNext()) {
-                    monitor.checkCanceled();
-                    Reference ref = refIter.next();
-                    Address fromAddr = ref.getFromAddress();
-                    RefType refType = ref.getReferenceType();
-                    if (refType.isFlow() && !blockSet.contains(fromAddr) &&
-                            !clearSet.contains(fromAddr)) {
-                        prune(v, blockSet);
-                        break;
-                    }
-                    // any addr which corresponds to a entry-point function should be snipped
-                    if (refType == RefType.EXTERNAL_REF &&
-                            functionManager.getFunctionAt(addr) != null) {
-                        prune(v, blockSet);
-                        break;
-                    }
-                }
-            }
-        }
+				// If there are no references, and there is a defined function inside this block
+				//   That starts in this block, with no references to it, then this bad flow couldn't
+				//   have created it.
+				// TODO: maybe even just symbols with no refs to them should be snipped
+				//       code starts at the symbol someone might have disassembled there.
+				if (!refIter.hasNext() && functionManager.getFunctionAt(addr) != null) {
+					prune(v, blockSet);
+					continue;
+				}
+				while (refIter.hasNext()) {
+					monitor.checkCanceled();
+					Reference ref = refIter.next();
+					Address fromAddr = ref.getFromAddress();
+					RefType refType = ref.getReferenceType();
+					if (refType.isFlow() && !blockSet.contains(fromAddr) &&
+						!clearSet.contains(fromAddr)) {
+						prune(v, blockSet);
+						break;
+					}
+					// any addr which corresponds to a entry-point function should be snipped
+					if (refType == RefType.EXTERNAL_REF &&
+						functionManager.getFunctionAt(addr) != null) {
+						prune(v, blockSet);
+						break;
+					}
+				}
+			}
+		}
 
 		if (repair) {
 			clearBadBookmarks(program, blockSet, monitor);

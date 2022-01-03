@@ -250,13 +250,13 @@ public final class ObjectiveC1_Utilities {
 		return namespace;
 	}
 
-	public static final String formatAsObjectiveC(Function function,
-                                                  ObjectiveC_MethodType methodType) {
+	public final static String formatAsObjectiveC(Function function,
+			ObjectiveC_MethodType methodType) {
 		return formatAsObjectiveC(function.getSignature(), methodType, false);
 	}
 
-	public static final String formatAsObjectiveC(FunctionSignature signature,
-                                                  ObjectiveC_MethodType methodType, boolean appendSemicolon)
+	public final static String formatAsObjectiveC(FunctionSignature signature,
+			ObjectiveC_MethodType methodType, boolean appendSemicolon)
 			throws IllegalStateException {
 		int colonCount = StringUtilities.countOccurrences(signature.getName(), ':');
 
@@ -297,7 +297,7 @@ public final class ObjectiveC1_Utilities {
 		return buffer.toString();
 	}
 
-	public static final void createMethods(ObjectiveC1_State state) {
+	public final static void createMethods(ObjectiveC1_State state) {
 		state.monitor.setMessage("Creating Objective-C Methods...");
 		state.monitor.initialize(state.methodMap.size());
 		int progress = 0;
@@ -335,7 +335,7 @@ public final class ObjectiveC1_Utilities {
 		}
 	}
 
-	public static final void createInstanceVariablesC2_OBJC2(ObjectiveC2_State state) {
+	public final static void createInstanceVariablesC2_OBJC2(ObjectiveC2_State state) {
 		state.monitor.setMessage("Creating Objective-C 2.0 Instance Variables...");
 		state.monitor.initialize(state.variableMap.size());
 		int progress = 0;
@@ -361,7 +361,7 @@ public final class ObjectiveC1_Utilities {
 	 * This method will remove references to the NULL address
 	 * and it will adjust THUMB references to no longer be offcut.
 	 */
-    public static final void fixupReferences(ObjectiveC1_State state) {
+	public final static void fixupReferences(ObjectiveC1_State state) {
 		state.monitor.setMessage("Fixing References...");
 
 		AddressSet addressSet = new AddressSet();

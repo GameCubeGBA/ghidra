@@ -117,10 +117,15 @@ public class FileOptionsTest extends AbstractGenericTest {
 				return false;
 			}
 			if (name == null) {
-                return other.name == null;
+				if (other.name != null) {
+					return false;
+				}
 			}
-			else return name.equals(other.name);
-        }
+			else if (!name.equals(other.name)) {
+				return false;
+			}
+			return true;
+		}
 
 	}
 

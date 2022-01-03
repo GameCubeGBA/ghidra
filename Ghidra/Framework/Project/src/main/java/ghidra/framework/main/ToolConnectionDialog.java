@@ -37,8 +37,8 @@ class ToolConnectionDialog extends DialogComponentProvider implements WorkspaceC
 	private ToolManager toolManager;
 	private ToolConnectionPanel panel;
 	private FrontEndTool frontEndTool;
-	private static final String CONNECTALL = "Connect All";
-	private static final String DISCONNECTALL = "Disconnect All";
+	private final static String CONNECTALL = "Connect All";
+	private final static String DISCONNECTALL = "Disconnect All";
 	private JButton connectAllButton;
 	private JButton disconnectAllButton;
 

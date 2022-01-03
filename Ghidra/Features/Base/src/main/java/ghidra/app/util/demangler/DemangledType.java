@@ -116,7 +116,7 @@ public class DemangledType implements Demangled {
 
 	@Override
 	public String getSignature() {
-		return name;
+		return getNamespaceName();
 	}
 
 	@Override

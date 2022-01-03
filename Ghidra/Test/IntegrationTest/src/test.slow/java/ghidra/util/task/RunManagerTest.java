@@ -44,7 +44,8 @@ public class RunManagerTest extends AbstractGhidraHeadedIntegrationTest {
 	private volatile TestRunnable lastCreatedMultiThreadedTestRunner;
 
 	public RunManagerTest() {
-    }
+		super();
+	}
 
 	@Override
 	protected void testFailed(Throwable e) {

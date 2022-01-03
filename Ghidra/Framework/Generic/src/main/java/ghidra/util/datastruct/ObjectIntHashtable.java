@@ -33,7 +33,7 @@ public class ObjectIntHashtable<T> {
      * Default constructor creates a table with an initial default capacity.
      */
     public ObjectIntHashtable() {
-        this(3);
+        this((short)3);
     }
 
     /**
@@ -92,7 +92,10 @@ public class ObjectIntHashtable<T> {
      * @return true if key is found and removed, false otherwise.
      */
     public boolean remove(T key) {
-        return indexer.remove(key) >= 0;
+        if (indexer.remove(key) < 0) {
+            return false;
+        }
+        return true;
     }
 
     /**

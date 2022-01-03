@@ -311,7 +311,7 @@ public class GhidraScriptMgrPlugin3Test extends AbstractGhidraScriptMgrPluginTes
 			}
 
 			throw new AssertException("Unable to find our newly added script directory: " + dir +
-				"\nInstead we found: " + buffy);
+				"\nInstead we found: " + buffy.toString());
 		}, false);
 		waitForSwing();
 

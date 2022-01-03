@@ -23,14 +23,14 @@ public interface LldbModelTargetSessionContainer
 		extends LldbModelTargetObject, LldbEventsListenerAdapter {
 
 	@Override
-    void sessionAdded(SBTarget session, LldbCause cause);
+	public void sessionAdded(SBTarget session, LldbCause cause);
 	
 	@Override
-    void sessionReplaced(SBTarget session, LldbCause cause);
+	public void sessionReplaced(SBTarget session, LldbCause cause);
 
 	@Override
-    void sessionRemoved(String sessionId, LldbCause cause);
+	public void sessionRemoved(String sessionId, LldbCause cause);
 
-	LldbModelTargetSession getTargetSession(SBTarget session);
+	public LldbModelTargetSession getTargetSession(SBTarget session);
 
 }

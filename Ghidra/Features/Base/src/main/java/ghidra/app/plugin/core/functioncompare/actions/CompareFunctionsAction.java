@@ -99,10 +99,10 @@ public abstract class CompareFunctionsAction extends DockingAction {
 	private void setActionAttributes() {
 		setDescription("Create Function Comparison");
 		setPopupMenuData(new MenuData(new String[] { "Compare Selected Functions" },
-                CREATE_NEW_COMPARISON_ICON, CREATE_COMPARISON_GROUP));
+			getToolBarIcon(), CREATE_COMPARISON_GROUP));
 
 		ToolBarData newToolBarData =
-			new ToolBarData(CREATE_NEW_COMPARISON_ICON, CREATE_COMPARISON_GROUP);
+			new ToolBarData(getToolBarIcon(), CREATE_COMPARISON_GROUP);
 		setToolBarData(newToolBarData);
 
 		setHelpLocation(new HelpLocation("FunctionComparison", "Function_Comparison"));

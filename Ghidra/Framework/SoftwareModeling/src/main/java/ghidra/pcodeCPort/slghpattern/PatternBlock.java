@@ -413,14 +413,15 @@ public class PatternBlock {
 		nonzerosize = XmlUtils.decodeUnknownInt(el.getAttributeValue("nonzero"));
 
 		List<?> list = el.getChildren();
+		Iterator<?> it = list.iterator();
 
-        for (Object o : list) {
-            Element subel = (Element) o;
-            int mask = XmlUtils.decodeUnknownInt(subel.getAttributeValue("mask"));
-            int val = XmlUtils.decodeUnknownInt(subel.getAttributeValue("val"));
-            maskvec.push_back(mask);
-            valvec.push_back(val);
-        }
+		while (it.hasNext()) {
+			Element subel = (Element) it.next();
+			int mask = XmlUtils.decodeUnknownInt(subel.getAttributeValue("mask"));
+			int val = XmlUtils.decodeUnknownInt(subel.getAttributeValue("val"));
+			maskvec.push_back(mask);
+			valvec.push_back(val);
+		}
 		normalize();
 	}
 
@@ -428,7 +429,9 @@ public class PatternBlock {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		//sb.append("(offset=" + offset + ",nonzero=" + nonzerosize + ")");
-        sb.append("........ ".repeat(Math.max(0, offset)));
+		for (int i = 0; i < offset; i++) {
+			sb.append("........ ");
+		}
 		int pos = -1;
 		for (int i = 0; i < maskvec.size(); i++) {
 			int m = maskvec.get(i);

@@ -49,7 +49,8 @@ public class ArrayTest extends AbstractGhidraHeadedIntegrationTest {
 	private AddressSpace space;
 
 	public ArrayTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

@@ -31,7 +31,7 @@ import agent.dbgmodel.jna.dbgmodel.DbgModelNative.LOCATION.ByReference;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IModelObject extends IUnknownEx {
-	IID IID_IMODEL_OBJECT = new IID("E28C7893-3F4B-4b96-BACA-293CDC55F45D");
+	final IID IID_IMODEL_OBJECT = new IID("E28C7893-3F4B-4b96-BACA-293CDC55F45D");
 
 	enum VTIndices implements VTableIndex {
 		GET_CONTEXT, //

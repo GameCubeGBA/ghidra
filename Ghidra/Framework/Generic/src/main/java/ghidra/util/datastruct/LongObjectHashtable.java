@@ -23,7 +23,7 @@ import java.io.Serializable;
 
 
 public class LongObjectHashtable<T> implements Serializable {
-    private static final long serialVersionUID = 1;
+    private final static long serialVersionUID = 1;
 
 
     private LongKeyIndexer indexer;    // allocates and manages index values for keys.
@@ -35,7 +35,7 @@ public class LongObjectHashtable<T> implements Serializable {
      * Default constructor creates a table with an initial default capacity.
      */
     public LongObjectHashtable() {
-        this(3);
+        this((short)3);
     }
 
     /**

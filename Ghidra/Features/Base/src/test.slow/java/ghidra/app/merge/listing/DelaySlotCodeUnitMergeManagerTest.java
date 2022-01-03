@@ -36,7 +36,8 @@ public class DelaySlotCodeUnitMergeManagerTest extends AbstractListingMergeManag
 	 * @param arg0
 	 */
 	public DelaySlotCodeUnitMergeManagerTest() {
-    }
+		super();
+	}
 
 @Test
     public void testAddLatestDelaySlot() throws Exception {

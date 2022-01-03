@@ -89,7 +89,7 @@ public class DialogComponentProvider
 
 	private static final Color WARNING_COLOR = new Color(0xff9900);
 
-	private static final int DEFAULT_DELAY = 750;
+	private final static int DEFAULT_DELAY = 750;
 
 	private static final String PROGRESS = "Progress";
 	private static final String DEFAULT = "No Progress";
@@ -1362,7 +1362,7 @@ public class DialogComponentProvider
 
 	@Override
 	public String toString() {
-		return title;
+		return getTitle();
 	}
 
 //==================================================================================================

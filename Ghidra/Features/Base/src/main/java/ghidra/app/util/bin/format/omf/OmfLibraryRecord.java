@@ -71,8 +71,9 @@ public class OmfLibraryRecord extends OmfRecord {
 		if (count > 15) return false;
 		reader.align(pageSize);
 		type = reader.readNextByte();
-        return (type & 0xfc) == 0x80;
-    }
+		if ((type & 0xfc) != 0x80) return false;
+		return true;
+	}
 	
 	public static OmfLibraryRecord parse(BinaryReader reader,TaskMonitor monitor) throws IOException {
 		OmfLibraryRecord res = null;

@@ -66,7 +66,8 @@ public class RefMergerExtTest extends AbstractExternalMergerTest {
 	 * @param arg0
 	 */
 	public RefMergerExtTest() {
-    }
+		super();
+	}
 
 	@Test
 	public void testExtRefRemoveNoConflict() throws Exception {

@@ -20,12 +20,12 @@ public interface ResourceTypes {
 	/**
 	 * Resource Type ID for the Code Fragment Manager (CFM).
 	 * */
-    int TYPE_CFRG      = 0x63667267;//'c' 'f' 'r' 'g'
+	public final static int TYPE_CFRG      = 0x63667267;//'c' 'f' 'r' 'g'
 
-	int TYPE_STR_SPACE = 0x53545220;//'s' 't' 'r' ' '
+	public final static int TYPE_STR_SPACE = 0x53545220;//'s' 't' 'r' ' '
 
-	int TYPE_STR_POUND = 0x53545223;//'s' 't' 'r' '#'
+	public final static int TYPE_STR_POUND = 0x53545223;//'s' 't' 'r' '#'
 
-	int TYPE_ICON      = 0x49434E23;//'I' 'C' 'N' '#'
+	public final static int TYPE_ICON      = 0x49434E23;//'I' 'C' 'N' '#'
 
 }

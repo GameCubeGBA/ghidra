@@ -42,7 +42,8 @@ public class DisplayableEolTest extends AbstractGenericTest {
 	private ProgramDB program;
 
 	public DisplayableEolTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

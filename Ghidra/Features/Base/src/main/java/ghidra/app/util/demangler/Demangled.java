@@ -94,13 +94,13 @@ public interface Demangled {
 	 * Returns the original mangled string
 	 * @return the string
 	 */
-    String getMangledString();
+	public String getMangledString();
 
 	/**
 	 * Returns the original demangled string returned by the demangling service
 	 * @return the original demangled string
 	 */
-    String getOriginalDemangled();
+	public String getOriginalDemangled();
 
 	/** 
 	 * Returns the demangled name of this object.
@@ -108,13 +108,13 @@ public interface Demangled {
 	 * @return name of this DemangledObject with unsupported characters converted to underscore
 	 * @see #getDemangledName()
 	 */
-    String getName();
+	public String getName();
 
 	/**
 	 * Sets the name for this object
 	 * @param name the name
 	 */
-    void setName(String name);
+	public void setName(String name);
 
 	/** 
 	 * Returns the unmodified demangled name of this object. This name may contain whitespace 
@@ -122,19 +122,19 @@ public interface Demangled {
 	 * for the same name modified for use within Ghidra.
 	 * @return name of this DemangledObject
 	 */
-    String getDemangledName();
+	public String getDemangledName();
 
 	/**
 	 * Returns the namespace containing this demangled object
 	 * @return the namespace containing this demangled object
 	 */
-    Demangled getNamespace();
+	public Demangled getNamespace();
 
 	/**
 	 * Sets the namespace of this demangled object
 	 * @param ns the namespace
 	 */
-    void setNamespace(Demangled ns);
+	public void setNamespace(Demangled ns);
 
 	/**
 	 * Returns a representation of this object as fully-qualified namespace.  The 
@@ -142,7 +142,7 @@ public interface Demangled {
 	 * with '_' and '::' replaced with '--'.
 	 * @return the full namespace
 	 */
-    String getNamespaceString();
+	public String getNamespaceString();
 
 	/**
 	 * Returns this object's namespace name without the fully-qualified parent path. The 
@@ -151,12 +151,12 @@ public interface Demangled {
 	 * 
 	 * @return the name
 	 */
-    String getNamespaceName();
+	public String getNamespaceName();
 
 	/**
 	 * Generates a complete representation of this object to include all know attributes of this
 	 * object 
 	 * @return the signature
 	 */
-    String getSignature();
+	public String getSignature();
 }

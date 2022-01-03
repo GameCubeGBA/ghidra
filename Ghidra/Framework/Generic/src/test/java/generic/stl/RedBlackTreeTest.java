@@ -30,7 +30,8 @@ public class RedBlackTreeTest extends AbstractGenericTest {
 	RedBlackTree<Integer, String> treeWithDups;
 
 	public RedBlackTreeTest() {
-    }
+		super();
+	}
 	
     @Before
     public void setUp() throws Exception {

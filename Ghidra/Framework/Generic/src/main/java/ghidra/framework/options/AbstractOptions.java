@@ -761,7 +761,7 @@ public abstract class AbstractOptions implements Options {
 
 	@Override
 	public String getID(String optionName) {
-		if (name.isEmpty()) {
+		if (name.length() == 0) {
 			return optionName;
 		}
 		return name + DELIMITER + optionName;
@@ -792,7 +792,7 @@ public abstract class AbstractOptions implements Options {
 		for (String string : optionNames) {
 			sortedOptionsMap.put(string, getObject(string, null));
 		}
-		return "Options: " + sortedOptionsMap;
+		return "Options: " + sortedOptionsMap.toString();
 	}
 
 	@Override

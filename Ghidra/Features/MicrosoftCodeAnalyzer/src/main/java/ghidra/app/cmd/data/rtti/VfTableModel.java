@@ -94,7 +94,7 @@ public class VfTableModel extends AbstractCreateDataTypeModel {
 		long numEntries = elementCount;
 		if (numEntries == 0) {
 			throw new InvalidDataTypeException(
-				DATA_TYPE_NAME + " data type at " + getAddress() + " doesn't have a valid vf table.");
+				getName() + " data type at " + getAddress() + " doesn't have a valid vf table.");
 		}
 
 		Address vfTableFieldAddress = startAddress;
@@ -104,7 +104,7 @@ public class VfTableModel extends AbstractCreateDataTypeModel {
 			Address functionAddress = getAbsoluteAddress(program, vfTableFieldAddress);
 			if (functionAddress == null) {
 				throw new InvalidDataTypeException(
-					DATA_TYPE_NAME + " at " + getAddress() + " doesn't refer to a valid function.");
+					getName() + " at " + getAddress() + " doesn't refer to a valid function.");
 			}
 
 			try {
@@ -113,7 +113,7 @@ public class VfTableModel extends AbstractCreateDataTypeModel {
 			catch (AddressOutOfBoundsException e) {
 				if (ordinal < (numEntries - 1)) {
 					throw new InvalidDataTypeException(
-						DATA_TYPE_NAME + " at " + getAddress() + " isn't valid.");
+						getName() + " at " + getAddress() + " isn't valid.");
 				}
 				break;
 			}

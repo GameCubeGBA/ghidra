@@ -204,13 +204,13 @@ public class CreateDefaultReferenceAction extends ListingContextAction {
 							switch (refClass) {
 								case MEMORY_REF_CLASS:
 									if (memAddr != null && toAddr.isMemoryAddress()) {
-                                        for (Reference ref : refs) {
-                                            if (ref.getSource() != SourceType.DEFAULT &&
-                                                    memAddr.equals(toAddr)) {
-                                                actionOK = false;
-                                                break;
-                                            }
-                                        }
+										for (int i = 0; i < refs.length; i++) {
+											if (refs[i].getSource() != SourceType.DEFAULT &&
+												memAddr.equals(toAddr)) {
+												actionOK = false;
+												break;
+											}
+										}
 									}
 									break;
 								case STACK_REF_CLASS:

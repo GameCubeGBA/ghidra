@@ -93,19 +93,19 @@ public class DependencyGraphPerformanceTest {
 
 		@Override
 		public String toString() {
-			StringBuilder report = new StringBuilder(testName + " (milliseconds)\n");
+			String report = testName + " (milliseconds)\n";
 			if (!times.isEmpty()) {
 				long prev = times.get(0);
 				long total = times.get(times.size() - 1) - prev;
 				for (int i = 1; i < times.size(); i++) {
 					long current = times.get(i);
 					long diff = current - prev;
-					report.append(String.format("  %03d: %d\n", i, diff));
+					report += String.format("  %03d: %d\n", i, diff);
 					prev = current;
 				}
-				report.append(String.format("total: %d\n", total));
+				report += String.format("total: %d\n", total);
 			}
-			return report.toString();
+			return report;
 		}
 	}
 

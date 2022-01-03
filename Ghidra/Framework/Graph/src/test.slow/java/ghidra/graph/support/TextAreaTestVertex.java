@@ -113,8 +113,11 @@ public class TextAreaTestVertex extends AbstractTestVertex {
 
 	@Override
 	public boolean isGrabbable(Component c) {
-        return c != textArea;
-    }
+		if (c == textArea) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public JComponent getComponent() {

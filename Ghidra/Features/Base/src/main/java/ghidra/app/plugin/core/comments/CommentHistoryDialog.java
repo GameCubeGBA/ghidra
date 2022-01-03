@@ -48,7 +48,7 @@ public class CommentHistoryDialog extends DialogComponentProvider implements Cha
 	private CommentHistoryPanel platePanel;
 	private CommentHistoryPanel repeatablePanel;
 	
-	private static final int[] COMMENT_INDEXES =
+	private final static int[] COMMENT_INDEXES = 
 		{CodeUnit.EOL_COMMENT,
 		 CodeUnit.PRE_COMMENT,
 		 CodeUnit.POST_COMMENT,

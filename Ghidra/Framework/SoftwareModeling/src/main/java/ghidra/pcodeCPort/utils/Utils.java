@@ -139,11 +139,15 @@ public class Utils {
 	}
 
     public static boolean isprint(int c) {
-        return c >= 32 && c <= 126;
+        if (c >= 32 && c <= 126)
+            return true;
+        return false;
     }
 
     public static boolean isascii(int c) {
-        return c >= 0 && c <= 127;
+        if (c >= 0 && c <= 127)
+            return true;
+        return false;
     }
 
     public static int leastsigbit_set( long val ) { // Return bit number (0=lsb)
@@ -205,7 +209,9 @@ public class Utils {
 
 		StringBuilder buffer = new StringBuilder();
 		int missingLength = padLength - decodedString.length();
-        buffer.append("0".repeat(missingLength));
+		for ( int i = 0; i < missingLength; i++ ) {
+			buffer.append( "0" );
+		}
 		buffer.append( decodedString );
 		return buffer.toString();
 	}

@@ -82,8 +82,11 @@ public final class StructConverterUtil {
 			!Modifier.isProtected(modifiers)) {
 			return false;
 		}
-        return !field.getName().startsWith("_");
-    }
+		if (field.getName().startsWith("_")) {
+			return false;
+		}
+		return true;
+	}
 
 	private static DataType getDataType(Field field, Object object) {
 		Class<?> fieldClazz = field.getType();

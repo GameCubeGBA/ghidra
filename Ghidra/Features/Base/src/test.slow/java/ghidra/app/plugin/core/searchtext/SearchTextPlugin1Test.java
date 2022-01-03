@@ -64,8 +64,8 @@ import ghidra.util.table.field.*;
  */
 public class SearchTextPlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 
-	static final String QUICK_SEARCH = "Program Database";
-	static final String EXACT_MATCH_SEARCH = "Listing Display";
+	final static String QUICK_SEARCH = "Program Database";
+	final static String EXACT_MATCH_SEARCH = "Listing Display";
 
 	private TestEnv env;
 	private PluginTool tool;
@@ -878,7 +878,7 @@ public class SearchTextPlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 		ProgramLocation loc = cbPlugin.getCurrentLocation();
 		assertEquals(getAddr(0x1001010), loc.getAddress());
 		assertTrue(loc instanceof MnemonicFieldLocation);
-		assertTrue("addr".equals(((MnemonicFieldLocation) loc).getMnemonic()));
+		assertTrue(((MnemonicFieldLocation) loc).getMnemonic().equals("addr"));
 
 		searchOnce(tf);
 		waitForSearchTasks(dialog);
@@ -886,7 +886,7 @@ public class SearchTextPlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 		loc = cbPlugin.getCurrentLocation();
 		assertEquals(getAddr(0x1001014), loc.getAddress());
 		assertTrue(loc instanceof MnemonicFieldLocation);
-		assertTrue("addr".equals(((MnemonicFieldLocation) loc).getMnemonic()));
+		assertTrue(((MnemonicFieldLocation) loc).getMnemonic().equals("addr"));
 
 		searchOnce(tf);
 		waitForSearchTasks(dialog);
@@ -894,7 +894,7 @@ public class SearchTextPlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 		loc = cbPlugin.getCurrentLocation();
 		assertEquals(getAddr(0x1001018), loc.getAddress());
 		assertTrue(loc instanceof MnemonicFieldLocation);
-		assertTrue("addr".equals(((MnemonicFieldLocation) loc).getMnemonic()));
+		assertTrue(((MnemonicFieldLocation) loc).getMnemonic().equals("addr"));
 
 		searchOnce(tf);
 		waitForSearchTasks(dialog);
@@ -902,7 +902,7 @@ public class SearchTextPlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 		loc = cbPlugin.getCurrentLocation();
 		assertEquals(getAddr(0x1001018), loc.getAddress());
 		assertTrue(loc instanceof MnemonicFieldLocation);
-		assertTrue("addr".equals(((MnemonicFieldLocation) loc).getMnemonic()));
+		assertTrue(((MnemonicFieldLocation) loc).getMnemonic().equals("addr"));
 		assertEquals("Not found", dialog.getStatusText());
 	}
 

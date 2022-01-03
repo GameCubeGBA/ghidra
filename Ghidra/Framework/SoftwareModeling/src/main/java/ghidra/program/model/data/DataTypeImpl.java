@@ -34,7 +34,7 @@ import ghidra.util.UniversalIdGenerator;
  */
 public abstract class DataTypeImpl extends AbstractDataType {
 
-	private static final SettingsDefinition[] EMPTY_DEFINITIONS = {};
+	private final static SettingsDefinition[] EMPTY_DEFINITIONS = {};
 	protected Settings defaultSettings;
 	private List<WeakReference<DataType>> parentList;
 	private UniversalID universalID;

@@ -28,53 +28,53 @@ import ghidra.file.formats.android.vdex.VdexHeader;
  */
 public interface OatBundle {
 
-	enum HeaderType {
+	public enum HeaderType {
 		ART, CDEX, DEX, VDEX,
 	};
 
-	String APK = ".apk";
-	String ART = ".art";
-	String CLASSES = "classes";
-	String CDEX = "cdex";
-	String DEX = ".dex";
-	String JAR = ".jar";
-	String OAT = ".oat";
-	String ODEX = ".odex";
-	String VDEX = ".vdex";
+	public static final String APK = ".apk";
+	public static final String ART = ".art";
+	public static final String CLASSES = "classes";
+	public static final String CDEX = "cdex";
+	public static final String DEX = ".dex";
+	public static final String JAR = ".jar";
+	public static final String OAT = ".oat";
+	public static final String ODEX = ".odex";
+	public static final String VDEX = ".vdex";
 
 	/**
 	 * Closes the bundle and release any resources.
 	 */
-    void close();
+	public void close();
 
 	/**
 	 * Returns the corresponding OAT header.
 	 * @return the corresponding OAT header.
 	 */
-    OatHeader getOatHeader();
+	public OatHeader getOatHeader();
 
 	/**
 	 * Returns the corresponding ART header.
 	 * @return the corresponding ART header.
 	 */
-    ArtHeader getArtHeader();
+	public ArtHeader getArtHeader();
 
 	/**
 	 * Returns the corresponding OAT header.
 	 * @return the corresponding OAT header.
 	 */
-    VdexHeader getVdexHeader();
+	public VdexHeader getVdexHeader();
 
 	/**
 	 * Returns the corresponding DEX headers.
 	 * @return the corresponding DEX headers.
 	 */
-    List<DexHeader> getDexHeaders();
+	public List<DexHeader> getDexHeaders();
 
 	/**
 	 * Returns the DEX header with the specified checksum.
 	 * @return the DEX header with the specified checksum.
 	 */
-    DexHeader getDexHeaderByChecksum(int checksum);
+	public DexHeader getDexHeaderByChecksum(int checksum);
 
 }

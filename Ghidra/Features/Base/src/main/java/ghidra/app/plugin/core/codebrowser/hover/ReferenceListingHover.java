@@ -27,7 +27,7 @@ public class ReferenceListingHover extends AbstractReferenceHover implements Lis
 	private static final String DESCRIPTION =
 		"Shows \"referred to\" code and data within the listing.";
 
-	private static final int PRIORITY = 50;
+	private final static int PRIORITY = 50;
 
 	public ReferenceListingHover(PluginTool tool) {
 		this(tool, null);

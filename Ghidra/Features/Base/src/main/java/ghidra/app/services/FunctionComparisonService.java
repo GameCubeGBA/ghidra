@@ -55,7 +55,7 @@ public interface FunctionComparisonService {
 	 * @param functions the functions to compare
 	 * @return the new comparison provider 
 	 */
-    FunctionComparisonProvider compareFunctions(Set<Function> functions);
+	public FunctionComparisonProvider compareFunctions(Set<Function> functions);
 
 	/**
 	 * Creates a comparison between two functions, where the source function
@@ -71,7 +71,7 @@ public interface FunctionComparisonService {
 	 * @param target a function in the comparison
 	 * @return the new comparison provider
 	 */
-    FunctionComparisonProvider compareFunctions(Function source, Function target);
+	public FunctionComparisonProvider compareFunctions(Function source, Function target);
 
 	/**
 	 * Creates a comparison between a set of functions, adding them to the 
@@ -83,8 +83,8 @@ public interface FunctionComparisonService {
 	 * @param functions the functions to compare
 	 * @param provider the provider to add the comparisons to
 	 */
-    void compareFunctions(Set<Function> functions,
-                          FunctionComparisonProvider provider);
+	public void compareFunctions(Set<Function> functions,
+			FunctionComparisonProvider provider);
 
 	/**
 	 * Creates a comparison between two functions and adds it to a given
@@ -98,8 +98,8 @@ public interface FunctionComparisonService {
 	 * @param target a function in the comparison
 	 * @param provider the provider to add the comparison to
 	 */
-    void compareFunctions(Function source, Function target,
-                          FunctionComparisonProvider provider);
+	public void compareFunctions(Function source, Function target,
+			FunctionComparisonProvider provider);
 
 	/**
 	 * Removes a given function from all comparisons across all comparison 
@@ -107,7 +107,7 @@ public interface FunctionComparisonService {
 	 * 
 	 * @param function the function to remove
 	 */
-    void removeFunction(Function function);
+	public void removeFunction(Function function);
 
 	/**
 	 * Removes a given function from all comparisons in the given comparison
@@ -116,7 +116,7 @@ public interface FunctionComparisonService {
 	 * @param function the function to remove
 	 * @param provider the comparison provider to remove functions from
 	 */
-    void removeFunction(Function function, FunctionComparisonProvider provider);
+	public void removeFunction(Function function, FunctionComparisonProvider provider);
 
 	/**
 	 * Adds the given listener to the list of subscribers who wish to be 
@@ -124,13 +124,13 @@ public interface FunctionComparisonService {
 	 * 
 	 * @param listener the listener to be added
 	 */
-    void addFunctionComparisonProviderListener(ComponentProviderActivationListener listener);
+	public void addFunctionComparisonProviderListener(ComponentProviderActivationListener listener);
 
 	/**
 	 * Removes a listener from the list of provider activation event subscribers
 	 * 
 	 * @param listener the listener to remove
 	 */
-    void removeFunctionComparisonProviderListener(
-            ComponentProviderActivationListener listener);
+	public void removeFunctionComparisonProviderListener(
+			ComponentProviderActivationListener listener);
 }

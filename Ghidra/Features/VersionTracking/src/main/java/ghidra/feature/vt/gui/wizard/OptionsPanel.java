@@ -41,7 +41,12 @@ public class OptionsPanel extends AbstractMageJPanel<VTWizardStateKey> {
 
 	private List<OptionsEditorPanel> optionsEditorPanelList;
 	private List<VTOptions> optionsList = null;
-	private PropertyChangeListener propertyChangeListener = evt -> notifyListenersOfValidityChanged();
+	private PropertyChangeListener propertyChangeListener = new PropertyChangeListener() {
+		@Override
+		public void propertyChange(PropertyChangeEvent evt) {
+			notifyListenersOfValidityChanged();
+		}
+	};
 
 	OptionsPanel() {
 		super(new BorderLayout());

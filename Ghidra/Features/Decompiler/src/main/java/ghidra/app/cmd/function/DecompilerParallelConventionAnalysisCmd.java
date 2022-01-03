@@ -88,7 +88,7 @@ public class DecompilerParallelConventionAnalysisCmd extends BackgroundCommand {
 			analyzeFunction(function, monitor);
 
 			String errMsg = getStatusMsg();
-			if (errMsg != null && !errMsg.isEmpty()) {
+			if (errMsg != null && errMsg.length() > 0) {
 				return false;
 			}
 		}
@@ -112,8 +112,8 @@ public class DecompilerParallelConventionAnalysisCmd extends BackgroundCommand {
 	 */
 	private boolean funcIsExternalGlue(Function func) {
 		String blockName = program.getMemory().getBlock(func.getEntryPoint()).getName();
-		return (blockName.equals(MemoryBlock.EXTERNAL_BLOCK_NAME) || ".plt".equals(blockName) ||
-			"__stub_helper".equals(blockName));
+		return (blockName.equals(MemoryBlock.EXTERNAL_BLOCK_NAME) || blockName.equals(".plt") ||
+			blockName.equals("__stub_helper"));
 	}
 
 	private static boolean isInStdNamespace(Function function) {
@@ -179,7 +179,7 @@ public class DecompilerParallelConventionAnalysisCmd extends BackgroundCommand {
 			}
 
 			String errMsg = getStatusMsg();
-			if (!monitor.isCancelled() && (errMsg != null && !errMsg.isEmpty())) {
+			if (!monitor.isCancelled() && (errMsg != null && errMsg.length() != 0)) {
 				Msg.debug(this, "  Failed to decompile function: " + f.getName() + " - " + errMsg);
 			}
 		}

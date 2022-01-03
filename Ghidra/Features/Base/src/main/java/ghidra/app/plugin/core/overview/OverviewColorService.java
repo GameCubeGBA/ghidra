@@ -36,7 +36,7 @@ public interface OverviewColorService extends ExtensionPoint {
 	 * Returns the name of this color service.
 	 * @return  the name of this color service.
 	 */
-    String getName();
+	public String getName();
 
 	/**
 	 * Returns the color that this service associates with the given address.
@@ -44,19 +44,19 @@ public interface OverviewColorService extends ExtensionPoint {
 	 * @param address the address for with to get a color.
 	 * @return the color that this service associates with the given address.
 	 */
-    Color getColor(Address address);
+	public Color getColor(Address address);
 
 	/**
 	 * Sets the program that this service will provide address colors for.
 	 * @param program the program that this service will provide address colors for.
 	 */
-    void setProgram(Program program);
+	public void setProgram(Program program);
 
 	/**
 	 * Sets the {@link OverviewColorComponent} that will be displaying the colors for this service.
 	 * @param component the {@link OverviewColorComponent} that will be displaying the colors for this service.
 	 */
-    void setOverviewComponent(OverviewColorComponent component);
+	public void setOverviewComponent(OverviewColorComponent component);
 
 	/**
 	 * Returns the tool tip that the {@link OverviewColorComponent} should display when the mouse
@@ -65,7 +65,7 @@ public interface OverviewColorService extends ExtensionPoint {
 	 * @param address the address for which to get a tooltip.
 	 * @return the tooltip text for the given address.
 	 */
-    String getToolTipText(Address address);
+	public String getToolTipText(Address address);
 
 	/**
 	 * Returns a list of popup actions to be shown when the user right-clicks on the {@link OverviewColorComponent}
@@ -73,24 +73,24 @@ public interface OverviewColorService extends ExtensionPoint {
 	 *
 	 * @return the list of popup actions.
 	 */
-    List<DockingActionIf> getActions();
+	public List<DockingActionIf> getActions();
 
 	/**
 	 * Returns the {@link HelpLocation} for this service
 	 * @return  the {@link HelpLocation} for this service
 	 */
-    HelpLocation getHelpLocation();
+	public HelpLocation getHelpLocation();
 
 	/**
 	 * Initialize the service which typically is used to read options for the service.
 	 * @param tool the {@link PluginTool} using this service.
 	 */
-    void initialize(PluginTool tool);
+	public void initialize(PluginTool tool);
 
 	/**
 	 * Returns the current program used by the service.
 	 * @return the current program used by the service.
 	 */
-    Program getProgram();
+	public Program getProgram();
 
 }

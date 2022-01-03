@@ -41,7 +41,8 @@ import ghidra.util.task.TaskMonitor;
 public class ReferencesPluginScreenShots extends GhidraScreenShotGenerator {
 
 	public ReferencesPluginScreenShots() {
-    }
+		super();
+	}
 
 	@Test
 	public void testAddReferenceDialog() {

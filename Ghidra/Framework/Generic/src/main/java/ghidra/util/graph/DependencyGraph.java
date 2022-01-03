@@ -34,7 +34,8 @@ import java.util.Set;
 public class DependencyGraph<T> extends AbstractDependencyGraph<T> {
 
 	public DependencyGraph() {
-    }
+		super();
+	}
 
 	/**
 	 * Copy constructor

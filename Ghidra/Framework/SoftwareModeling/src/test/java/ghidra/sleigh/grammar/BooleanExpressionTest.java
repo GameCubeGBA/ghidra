@@ -30,6 +30,7 @@ import generic.test.AbstractGenericTest;
 public class BooleanExpressionTest extends AbstractGenericTest {
 
     public BooleanExpressionTest() {
+        super();
     }
 
     BooleanExpressionParser parser;

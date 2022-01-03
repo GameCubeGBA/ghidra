@@ -29,8 +29,8 @@ import ghidra.util.exception.DuplicateNameException;
  * data structure which is defined in <b>{@code winnt.h}</b>.
  */
 public class LoadConfigDirectory implements StructConverter {
-	public static final String NAME32 = "IMAGE_LOAD_CONFIG_DIRECTORY32";
-	public static final String NAME64 = "IMAGE_LOAD_CONFIG_DIRECTORY64";
+	public final static String NAME32 = "IMAGE_LOAD_CONFIG_DIRECTORY32";
+	public final static String NAME64 = "IMAGE_LOAD_CONFIG_DIRECTORY64";
 
 	private int size;
 	private int timeDateStamp;
@@ -394,7 +394,7 @@ public class LoadConfigDirectory implements StructConverter {
 	 */
 	static class GuardFlags implements StructConverter {
 
-		public static final String NAME = "IMAGE_GUARD_FLAGS";
+		public final static String NAME = "IMAGE_GUARD_FLAGS";
 
 		private int flags;
 
@@ -436,7 +436,7 @@ public class LoadConfigDirectory implements StructConverter {
 	 */
 	static class CodeIntegrity implements StructConverter {
 
-		public static final String NAME = "IMAGE_LOAD_CONFIG_CODE_INTEGRITY";
+		public final static String NAME = "IMAGE_LOAD_CONFIG_CODE_INTEGRITY";
 
 		private short flags;
 		private short catalog;

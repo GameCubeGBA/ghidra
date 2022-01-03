@@ -76,21 +76,21 @@ public class JdiModelTargetClassContainer extends JdiModelTargetObjectImpl {
 		for (ReferenceType ref : allClasses) {
 			map.put(ref.name(), ref);
 		}
-		classesByName.keySet().retainAll(map.keySet());
+		getClassesByName().keySet().retainAll(map.keySet());
 		return updateUsingClasses(map);
 	}
 
 	protected synchronized JdiModelTargetReferenceType getTargetClass(ReferenceType reftype) {
-		return classesByName.computeIfAbsent(reftype.name(),
+		return getClassesByName().computeIfAbsent(reftype.name(),
 			n -> (JdiModelTargetReferenceType) getInstance(reftype));
 	}
 
 	public synchronized JdiModelTargetReferenceType getTargetModuleIfPresent(String name) {
-		return classesByName.get(name);
+		return getClassesByName().get(name);
 	}
 
 	public CompletableFuture<?> refreshInternal() {
-		if (listeners.isEmpty()) {
+		if (!isObserved()) {
 			return AsyncUtils.NIL;
 		}
 		return doRefresh().exceptionally(ex -> {

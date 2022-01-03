@@ -194,10 +194,10 @@ class FunctionSignatureTextField extends JTextPane {
 			int end = paramStartStopIndexes.get(i + 1);
 			SubString paramString = new SubString(text, start, end);
 			paramString = paramString.trim();
-			if ("...".equals(paramString.toString())) {
+			if (paramString.toString().equals("...")) {
 				continue;
 			}
-			if ("void".equals(paramString.toString())) {
+			if (paramString.toString().equals("void")) {
 				continue;
 			}
 			// check for empty param list

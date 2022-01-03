@@ -42,8 +42,8 @@ class DataTypeComponentPreview implements Preview {
         if (parent == null) {
             return null;
         }
-        while (parent.parentPreview != null) {
-            parent = parent.parentPreview;
+        while (parent.getParent() != null) {
+            parent = parent.getParent();
         }
         return parent;
     }

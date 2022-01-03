@@ -106,8 +106,11 @@ public class NewSymbolFilter implements SymbolFilter {
 		if (!isAcceptableType(program, symbol)) {
 			return false;
 		}
-        return passesAdvancedFilters(program, symbol);
-    }
+		if (!passesAdvancedFilters(program, symbol)) {
+			return false;
+		}
+		return true;
+	}
 
 	private boolean isAcceptableOrigin(Program program, Symbol symbol) {
 		if (acceptsAllSources) {
@@ -143,17 +146,19 @@ public class NewSymbolFilter implements SymbolFilter {
 				}
 			}
 		}
-        // if none of the filters were applicable, then the symbol passes.
-        return !applicable;
-    }
+		if (!applicable) { // if none of the filters were applicable, then the symbol passes.
+			return true;
+		}
+		return false;
+	}
 
 	@Override
 	public boolean acceptsOnlyCodeSymbols() {
-        for (Filter activeTypeFilter : activeTypeFilters) {
-            if (!activeTypeFilter.onlyCodeSymbols) {
-                return false;
-            }
-        }
+		for (int i = 0; i < activeTypeFilters.length; i++) {
+			if (!activeTypeFilters[i].onlyCodeSymbols) {
+				return false;
+			}
+		}
 		return true;
 	}
 
@@ -885,11 +890,13 @@ public class NewSymbolFilter implements SymbolFilter {
 
 		@Override
 		boolean isEnabled() {
-            for (Filter filter : applicableFilters) {
-                if (filter.isActive()) {
-                    return true;
-                }
-            }
+			Iterator<Filter> it = applicableFilters.iterator();
+			while (it.hasNext()) {
+				Filter filter = it.next();
+				if (filter.isActive()) {
+					return true;
+				}
+			}
 			return false;
 		}
 

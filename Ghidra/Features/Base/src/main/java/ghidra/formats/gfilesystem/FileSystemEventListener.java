@@ -25,7 +25,7 @@ public interface FileSystemEventListener {
 	 *
 	 * @param fs {@link GFileSystem} that is about to be closed.
 	 */
-    void onFilesystemClose(GFileSystem fs);
+	public void onFilesystemClose(GFileSystem fs);
 
 	/**
 	 * Called by {@link FileSystemRefManager} when a new {@link FileSystemRef} is created or
@@ -33,5 +33,5 @@ public interface FileSystemEventListener {
 	 * @param fs {@link GFileSystem} that is being updated.
 	 * @param refManager {@link FileSystemRefManager} that is tracking the modified GFileSystem.
 	 */
-    void onFilesystemRefChange(GFileSystem fs, FileSystemRefManager refManager);
+	public void onFilesystemRefChange(GFileSystem fs, FileSystemRefManager refManager);
 }

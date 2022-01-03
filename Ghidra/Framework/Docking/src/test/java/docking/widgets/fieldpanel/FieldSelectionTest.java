@@ -40,7 +40,8 @@ public class FieldSelectionTest extends AbstractGenericTest {
 	 * @param name
 	 */
 	public FieldSelectionTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() {

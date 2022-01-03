@@ -86,7 +86,11 @@ public class TableSortingContext<T> {
 
 		@SuppressWarnings("rawtypes")
 		TableSortingContext other = (TableSortingContext) obj;
-        return sortState.equals(other.sortState);
+		if (!sortState.equals(other.sortState)) {
+			return false;
+		}
+
+		return true;
 // comparators do not override equals, so we can't rely on this call		
 //		return comparator.equals(other.comparator);
 	}

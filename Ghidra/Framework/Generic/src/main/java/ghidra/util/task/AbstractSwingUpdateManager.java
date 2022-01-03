@@ -321,8 +321,12 @@ public abstract class AbstractSwingUpdateManager {
 
 		// if no new requests have come in since the last time we checked, do work
 		long timeSinceLastRequest = now - requestTime;
-        return timeSinceLastRequest > minDelay;
-    }
+		if (timeSinceLastRequest > minDelay) {
+			return true;
+		}
+
+		return false;
+	}
 
 	// note: this is called on the Swing thread
 	private void swingExecutePendingWork() {

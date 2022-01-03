@@ -87,7 +87,7 @@ public class TaskScheduler implements Runnable {
 	 *
 	 */
 	public void waitForCurrentTask() {
-		Thread t = taskThread;
+		Thread t = getCurrentThread();
 		if (t != null) {
 			try {
 				t.join();

@@ -41,7 +41,8 @@ public class FunctionMatchSet extends ArrayList<SubroutineMatch> {
 	 * @param otherProgramName Name of the program being matched.
 	 */
 	public FunctionMatchSet(Program aProgram, Program bProgram) {
-        this.aProgram = aProgram;
+		super();
+		this.aProgram = aProgram;
 		this.bProgram = bProgram;
 		this.aSymbolTable = aProgram.getSymbolTable();
 		this.bSymbolTable = bProgram.getSymbolTable();

@@ -96,7 +96,7 @@ class DualListingGoToService implements GoToService {
 			isLeftSide ? dualListing.getLeftAddresses() : dualListing.getRightAddresses();
 		if (!addresses.contains(addr)) {
 			dualListing.setStatusInfo(
-				"\"" + addr + "\" is outside the current listing's view.");
+				"\"" + addr.toString() + "\" is outside the current listing's view.");
 			return false;
 		}
 		return true;

@@ -23,7 +23,8 @@ import ghidra.app.services.ConsoleService;
 public class ConsolePluginScreenShots extends GhidraScreenShotGenerator {
 
 	public ConsolePluginScreenShots() {
-    }
+		super();
+	}
 
 	@Override
 	public void loadProgram() {

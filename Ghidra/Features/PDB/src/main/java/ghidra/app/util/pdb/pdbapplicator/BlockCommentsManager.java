@@ -84,9 +84,9 @@ public class BlockCommentsManager {
 	}
 
 	void addBlockComment(Address startAddress, String name, long length, int nestingLevel) {
-		StringBuilder indent = new StringBuilder();
+		String indent = "";
 		for (int i = 1; i < nestingLevel; i++) {
-			indent.append(BLOCK_INDENT);
+			indent += BLOCK_INDENT;
 		}
 
 		String baseComment = "level " + nestingLevel + ", length " + length;

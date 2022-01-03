@@ -43,7 +43,8 @@ public class CodeBrowserNavigationx86Test extends AbstractGhidraHeadedIntegratio
 	private CodeBrowserPlugin cb;
 
 	public CodeBrowserNavigationx86Test() {
-    }
+		super();
+	}
 
 	private Address addr(String address) {
 		return addrFactory.getAddress(address);

@@ -38,6 +38,6 @@ public class GdbSignalReceivedReason implements GdbReason {
 
 	@Override
 	public String desc() {
-		return "Signalled with " + signalName;
+		return "Signalled with " + getSignalName();
 	}
 }

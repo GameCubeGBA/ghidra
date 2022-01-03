@@ -67,10 +67,13 @@ public class LocalVariableStringable extends Stringable {
 			return false;
 		LocalVariableStringable other = (LocalVariableStringable) obj;
 		if (localVariableInfo == null) {
-            return other.localVariableInfo == null;
+			if (other.localVariableInfo != null)
+				return false;
 		}
-		else return localVariableInfo.equals(other.localVariableInfo);
-    }
+		else if (!localVariableInfo.equals(other.localVariableInfo))
+			return false;
+		return true;
+	}
 
 	public Variable getLocalVariable(Function function, Address destinationStorageAddress) {
 		return localVariableInfo.createLocalVariable(function, destinationStorageAddress);

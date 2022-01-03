@@ -147,14 +147,16 @@ public class TypeDefDataTypeHTMLRepresentation extends HTMLDataTypeRepresentatio
 		StringBuilder buffy = new StringBuilder();
 
 		// warnings
-        for (String warning : warningLines) {
-            String warningLine = wrapStringInColor(warning, Color.RED);
-            buffy.append(warningLine).append(BR);
-        }
+		Iterator<String> warnings = warningLines.iterator();
+		for (; warnings.hasNext();) {
+			String warning = warnings.next();
+			String warningLine = wrapStringInColor(warning, Color.RED);
+			buffy.append(warningLine).append(BR);
+		}
 
 		// header
 		Iterator<ValidatableLine> iterator = headerLines.iterator();
-		while (iterator.hasNext()) {
+		for (; iterator.hasNext();) {
 			TextLine line = (TextLine) iterator.next(); // This text should already be encoded.
 			String headerLine = line.getText();
 			if (trim) {
@@ -169,7 +171,7 @@ public class TypeDefDataTypeHTMLRepresentation extends HTMLDataTypeRepresentatio
 		buffy.append("TypeDef Base Data Type: ").append(BR);
 
 		iterator = bodyLines.iterator();
-		while (iterator.hasNext()) {
+		for (; iterator.hasNext();) {
 
 			// This text should already be encoded and already trimmed
 			TextLine line = (TextLine) iterator.next();
@@ -197,7 +199,7 @@ public class TypeDefDataTypeHTMLRepresentation extends HTMLDataTypeRepresentatio
 
 	private static String getDataTypeDescriptionOrName(DataType dataType) {
 		String description = dataType.getDescription();
-		if (description == null || description.isEmpty()) {
+		if (description == null || description.length() == 0) {
 			return dataType.getName();
 		}
 		return description;

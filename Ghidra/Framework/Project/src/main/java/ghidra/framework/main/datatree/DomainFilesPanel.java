@@ -49,7 +49,8 @@ class DomainFilesPanel extends JPanel {
 	 * @param fileList list of DomainFile objects
 	 */
 	DomainFilesPanel(List<DomainFile> fileList, String listTitle) {
-        this.fileList = fileList;
+		super();
+		this.fileList = fileList;
 		setLayout(new BorderLayout());
 		setBorder(BorderFactory.createEmptyBorder(5, 5, 0, 5));
 

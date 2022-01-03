@@ -22,31 +22,31 @@ public interface ArtCompression {
 	 * @return the storage method
 	 * @throws UnknownArtStorageModeException when an unknown storage mode is encountered
 	 */
-    ArtStorageMode getStorageMode() throws UnknownArtStorageModeException;
+	public ArtStorageMode getStorageMode() throws UnknownArtStorageModeException;
 
 	/**
 	 * Data size for the image data excluding the bitmap and the header. 
 	 * For compressed images, this is the compressed size in the file.
 	 * @return the compressed size
 	 */
-    int getCompressedSize();
+	public int getCompressedSize();
 
 	/**
 	 * Offset to the start of the compressed bytes.
 	 * Also, offset of where to place the decompressed bytes.
 	 * @return the offset to the compressed bytes
 	 */
-    long getCompressedOffset();
+	public long getCompressedOffset();
 
 	/**
 	 * Expected size of the decompressed bytes.
 	 * @return the expected decompressed size
 	 */
-    int getDecompressedSize();
+	public int getDecompressedSize();
 
 	/**
 	 * Offset to the start of the decompressed bytes.
 	 * @return the offset to the dcompressed bytes
 	 */
-    long getDecompressedOffset();
+	public long getDecompressedOffset();
 }

@@ -63,11 +63,11 @@ class InMemoryFunctionTag implements FunctionTag {
 
 	@Override
 	public int compareTo(FunctionTag otherTag) {
-		int rc = name.compareToIgnoreCase(otherTag.getName());
+		int rc = getName().compareToIgnoreCase(otherTag.getName());
 		if (rc != 0) {
 			return rc;
 		}
-		return comment.compareToIgnoreCase(otherTag.getComment());
+		return getComment().compareToIgnoreCase(otherTag.getComment());
 	}
 
 	@Override
@@ -96,8 +96,12 @@ class InMemoryFunctionTag implements FunctionTag {
 			return false;
 		}
 
-        return Objects.equals(name, other.getName());
-    }
+		if (!Objects.equals(name, other.getName())) {
+			return false;
+		}
+
+		return true;
+	}
 
 	@Override
 	public void delete() {

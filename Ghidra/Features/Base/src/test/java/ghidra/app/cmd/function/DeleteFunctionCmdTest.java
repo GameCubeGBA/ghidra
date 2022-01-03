@@ -43,7 +43,8 @@ public class DeleteFunctionCmdTest extends AbstractGenericTest {
 	 * 
 	 */
 	public DeleteFunctionCmdTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

@@ -242,7 +242,11 @@ public class DBTraceStaticMapping extends DBAnnotatedObject
 			long thatFromOffset = range.getMinAddress().getOffset();
 			long fromOffsetDiff = thisFromOffset - thatFromOffset;
 
-            return toOffsetDiff != fromOffsetDiff;
-        }
+			if (toOffsetDiff != fromOffsetDiff) {
+				return true;
+			}
+
+			return false;
+		}
 	}
 }

@@ -43,7 +43,8 @@ public class SetHighlightPluginTest extends AbstractGhidraHeadedIntegrationTest 
 	private CodeBrowserPlugin cb;
 
 	public SetHighlightPluginTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

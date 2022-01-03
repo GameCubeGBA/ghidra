@@ -157,8 +157,12 @@ public abstract class AbstractVTMatchTableModel extends AddressBasedTableModel<V
 				return true;
 			}
 
-            return rowMatchesFilters(appliedFilters, match);
-        }
+			if (rowMatchesFilters(appliedFilters, match)) {
+				return true;
+			}
+
+			return false;
+		}
 
 		private boolean rowMatchesFilters(List<Filter<VTMatch>> filters, VTMatch match) {
 			for (Filter<VTMatch> filter : filters) {

@@ -120,8 +120,11 @@ public class EmptyTextField implements Field {
 	@Override
 	public boolean isValid(int row, int col) {
 
-        return (row == 0) && (col == 0);
-    }
+		if ((row != 0) || (col != 0)) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public void paint(JComponent c, Graphics g, PaintContext context,
@@ -152,9 +155,12 @@ public class EmptyTextField implements Field {
 
 	@Override
 	public boolean contains(int x, int y) {
-        return (x >= startX) && (x < startX + width) && (y >= -heightAbove) &&
-                (y < height - heightAbove);
-    }
+		if ((x >= startX) && (x < startX + width) && (y >= -heightAbove) &&
+			(y < height - heightAbove)) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Sets the foreground color which isn't used by objects of this class

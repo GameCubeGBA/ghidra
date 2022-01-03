@@ -309,21 +309,27 @@ public class ListingMergeManager implements MergeResolver, ListingMergeConstants
 	}
 
 	private void setListingViewsToEntireProgram() {
-		SwingUtilities.invokeLater(() -> {
-            mergePanel.setViewToProgram(RESULT);
-            mergePanel.setViewToProgram(LATEST);
-            mergePanel.setViewToProgram(MY);
-            mergePanel.setViewToProgram(ORIGINAL);
-        });
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				mergePanel.setViewToProgram(RESULT);
+				mergePanel.setViewToProgram(LATEST);
+				mergePanel.setViewToProgram(MY);
+				mergePanel.setViewToProgram(ORIGINAL);
+			}
+		});
 	}
 
 	private void emptyListingViewForPrograms() {
-		SwingUtilities.invokeLater(() -> {
-            mergePanel.emptyViewForProgram(RESULT);
-            mergePanel.emptyViewForProgram(LATEST);
-            mergePanel.emptyViewForProgram(MY);
-            mergePanel.emptyViewForProgram(ORIGINAL);
-        });
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				mergePanel.emptyViewForProgram(RESULT);
+				mergePanel.emptyViewForProgram(LATEST);
+				mergePanel.emptyViewForProgram(MY);
+				mergePanel.emptyViewForProgram(ORIGINAL);
+			}
+		});
 	}
 
 	/**
@@ -446,11 +452,14 @@ public class ListingMergeManager implements MergeResolver, ListingMergeConstants
 	 */
 	private void removeBottomComponent() {
 		try {
-			SwingUtilities.invokeAndWait(() -> {
-                if (mergePanel != null) {
-                    mergePanel.setBottomComponent(null);
-                }
-            });
+			SwingUtilities.invokeAndWait(new Runnable() {
+				@Override
+				public void run() {
+					if (mergePanel != null) {
+						mergePanel.setBottomComponent(null);
+					}
+				}
+			});
 		}
 		catch (InterruptedException e) {
 			Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);

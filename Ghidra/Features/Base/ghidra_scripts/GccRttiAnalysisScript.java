@@ -130,11 +130,11 @@ public class GccRttiAnalysisScript extends GhidraScript {
 				newCategoryName = newCategoryName.concat(character);
 				index++;
 
-				if ("<".equals(character)) {
+				if (character.equals("<")) {
 					insideBrackets = true;
 					numOpenedBrackets++;
 				}
-				if (">".equals(character)) {
+				if (character.equals(">")) {
 					numOpenedBrackets--;
 				}
 				if (numOpenedBrackets == 0) {
@@ -171,8 +171,11 @@ public class GccRttiAnalysisScript extends GhidraScript {
 		int numOpenLips = getNumSubstrings(name, "<");
 		int numClosedLips = getNumSubstrings(name, ">");
 
-        return numOpenLips > 0 && numClosedLips > 0 && numOpenLips == numClosedLips;
-    }
+		if (numOpenLips > 0 && numClosedLips > 0 && numOpenLips == numClosedLips) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Method to return the number of the given substrings contained in the given string
@@ -513,70 +516,72 @@ public class GccRttiAnalysisScript extends GhidraScript {
 		StructureDataType baseClassTypeInfoStructure =
 			createBaseClassTypeInfoStructure(classTypeInfoStructure);
 
-        for (Symbol symbol : typeinfoSymbols) {
+		Iterator<Symbol> typeinfoIterator = typeinfoSymbols.iterator();
+		while (typeinfoIterator.hasNext()) {
 
-            monitor.checkCanceled();
+			monitor.checkCanceled();
 
-            Symbol typeinfoSymbol = symbol;
-            Address typeinfoAddress = typeinfoSymbol.getAddress();
+			Symbol typeinfoSymbol = typeinfoIterator.next();
+			Address typeinfoAddress = typeinfoSymbol.getAddress();
 
-            // skip the typeinfo symbols from the three special typeinfos
-            if (isSpecialTypeinfo(typeinfoAddress)) {
-                continue;
-            }
+			// skip the typeinfo symbols from the three special typeinfos 
+			if (isSpecialTypeinfo(typeinfoAddress)) {
+				continue;
+			}
 
-            Address specialTypeinfoRef = getSingleReferencedAddress(typeinfoAddress);
-            if (specialTypeinfoRef == null) {
-                println("No special typeinfo reference found. Cannot process typeinfo struct at " +
-                        typeinfoAddress.toString());
-                continue;
-            }
+			Address specialTypeinfoRef = getSingleReferencedAddress(typeinfoAddress);
+			if (specialTypeinfoRef == null) {
+				println("No special typeinfo reference found. Cannot process typeinfo struct at " +
+					typeinfoAddress.toString());
+				continue;
+			}
 
-            if (!isSpecialTypeinfo(specialTypeinfoRef)) {
-                continue;
-            }
+			if (!isSpecialTypeinfo(specialTypeinfoRef)) {
+				continue;
+			}
 
-            try {
-                // create a "no inheritance" struct here
-                if (specialTypeinfoRef.equals(class_type_info)) {
-                    clearListing(typeinfoAddress,
-                            typeinfoAddress.add(classTypeInfoStructure.getLength()));
-                    createData(typeinfoAddress, classTypeInfoStructure);
-                    continue;
-                }
+			try {
+				// create a "no inheritance" struct here
+				if (specialTypeinfoRef.equals(class_type_info)) {
+					clearListing(typeinfoAddress,
+						typeinfoAddress.add(classTypeInfoStructure.getLength()));
+					createData(typeinfoAddress, classTypeInfoStructure);
+					continue;
+				}
 
-                // create a "single inheritance" struct here
-                if (specialTypeinfoRef.equals(si_class_type_info)) {
-                    clearListing(typeinfoAddress,
-                            typeinfoAddress.add(siClassTypeInfoStructure.getLength() - 1));
-                    createData(typeinfoAddress, siClassTypeInfoStructure);
-                    continue;
-                }
+				// create a "single inheritance" struct here
+				if (specialTypeinfoRef.equals(si_class_type_info)) {
+					clearListing(typeinfoAddress,
+						typeinfoAddress.add(siClassTypeInfoStructure.getLength() - 1));
+					createData(typeinfoAddress, siClassTypeInfoStructure);
+					continue;
+				}
 
-                // create a "virtual multip inheritance" struct here
-                if (specialTypeinfoRef.equals(vmi_class_type_info)) {
+				// create a "virtual multip inheritance" struct here
+				if (specialTypeinfoRef.equals(vmi_class_type_info)) {
 
-                    // get num base classes
-                    int offsetOfNumBases = 2 * defaultPointerSize + 4;
-                    int numBases = getInt(typeinfoAddress.add(offsetOfNumBases));
+					// get num base classes
+					int offsetOfNumBases = 2 * defaultPointerSize + 4;
+					int numBases = getInt(typeinfoAddress.add(offsetOfNumBases));
 
-                    // get or create the vmiClassTypeInfoStruct
-                    Structure vmiClassTypeinfoStructure =
-                            (Structure) dataTypeManager.getDataType(classDataTypesCategoryPath,
-                                    "VmiClassTypeInfoStructure" + numBases);
-                    if (vmiClassTypeinfoStructure == null) {
-                        vmiClassTypeinfoStructure =
-                                createVmiClassTypeInfoStructure(baseClassTypeInfoStructure, numBases);
-                    }
-                    clearListing(typeinfoAddress,
-                            typeinfoAddress.add(vmiClassTypeinfoStructure.getLength() - 1));
-                    createData(typeinfoAddress, vmiClassTypeinfoStructure);
+					// get or create the vmiClassTypeInfoStruct
+					Structure vmiClassTypeinfoStructure =
+						(Structure) dataTypeManager.getDataType(classDataTypesCategoryPath,
+							"VmiClassTypeInfoStructure" + numBases);
+					if (vmiClassTypeinfoStructure == null) {
+						vmiClassTypeinfoStructure =
+							createVmiClassTypeInfoStructure(baseClassTypeInfoStructure, numBases);
+					}
+					clearListing(typeinfoAddress,
+						typeinfoAddress.add(vmiClassTypeinfoStructure.getLength() - 1));
+					createData(typeinfoAddress, vmiClassTypeinfoStructure);
 
-                }
-            } catch (Exception e) {
-                println("ERROR: Could not apply structure to " + typeinfoAddress);
-            }
-        }
+				}
+			}
+			catch (Exception e) {
+				println("ERROR: Could not apply structure to " + typeinfoAddress);
+			}
+		}
 
 	}
 
@@ -586,9 +591,12 @@ public class GccRttiAnalysisScript extends GhidraScript {
 	 * @return true if it is a special one, false otherwise
 	 */
 	private boolean isSpecialTypeinfo(Address typeinfoAddress) {
-        return typeinfoAddress.equals(class_type_info) || typeinfoAddress.equals(si_class_type_info) ||
-                typeinfoAddress.equals(vmi_class_type_info);
-    }
+		if (typeinfoAddress.equals(class_type_info) || typeinfoAddress.equals(si_class_type_info) ||
+			typeinfoAddress.equals(vmi_class_type_info)) {
+			return true;
+		}
+		return false;
+	}
 
 	private StructureDataType createClassTypeInfoStructure() {
 
@@ -685,17 +693,18 @@ public class GccRttiAnalysisScript extends GhidraScript {
 		List<Symbol> listOfVtableSymbols = getListOfSymbolsInAddressSet(
 			currentProgram.getAddressFactory().getAddressSet(), VTABLE_LABEL, false);
 
-        for (Symbol listOfVtableSymbol : listOfVtableSymbols) {
+		Iterator<Symbol> vtableIterator = listOfVtableSymbols.iterator();
+		while (vtableIterator.hasNext()) {
 
-            monitor.checkCanceled();
+			monitor.checkCanceled();
 
-            Symbol vtableSymbol = listOfVtableSymbol;
-            Namespace vtableNamespace = vtableSymbol.getParentNamespace();
-            Address vtableAddress = vtableSymbol.getAddress();
+			Symbol vtableSymbol = vtableIterator.next();
+			Namespace vtableNamespace = vtableSymbol.getParentNamespace();
+			Address vtableAddress = vtableSymbol.getAddress();
 
-            processVtable(vtableAddress, vtableNamespace, true);
+			processVtable(vtableAddress, vtableNamespace, true);
 
-        }
+		}
 		return;
 	}
 
@@ -725,7 +734,7 @@ public class GccRttiAnalysisScript extends GhidraScript {
 		Address typeinfoAddress = findNextTypeinfoRef(vtableAddress);
 		if (typeinfoAddress == null) {
 			println(vtableNamespace.getName() + " vtable has no typeinfo ref after vtable at " +
-                    vtableAddress);
+				vtableAddress.toString());
 			return;
 		}
 
@@ -867,11 +876,15 @@ public class GccRttiAnalysisScript extends GhidraScript {
 		}
 
 		// check that no other data exept possibly longs at correct offsets
-        return isNoDataCreatedExceptMaybeLongs(vtableAddress, 2 * defaultPointerSize);
+		if (!isNoDataCreatedExceptMaybeLongs(vtableAddress, 2 * defaultPointerSize)) {
+			return false;
+		}
 
 		// TODO: maybe print a warning if the first item is not all zeros bc usually they are -- but pass
 		// it even then
-    }
+
+		return true;
+	}
 
 	private boolean isValidVftableStart(Address vftableAddress) throws CancelledException {
 
@@ -899,7 +912,9 @@ public class GccRttiAnalysisScript extends GhidraScript {
 				return false;
 			}
 			Function functionAt = getFunctionAt(referencedAddress);
-            return functionAt != null;
+			if (functionAt != null) {
+				return true;
+			}
 		}
 		else {
 			try {
@@ -999,7 +1014,7 @@ public class GccRttiAnalysisScript extends GhidraScript {
 
 			List<Address> referenceFromAddresses = getReferenceFromAddresses(address);
 
-			if (!referenceFromAddresses.isEmpty()) {
+			if (referenceFromAddresses.size() > 0) {
 				return false;
 			}
 
@@ -1090,8 +1105,11 @@ public class GccRttiAnalysisScript extends GhidraScript {
 	 * @return true if the given address could be a valid null pointer, false if not
 	 */
 	private boolean isPossibleNullPointer(Address address) throws CancelledException {
-        return hasNumZeros(address, defaultPointerSize);
-    }
+		if (!hasNumZeros(address, defaultPointerSize)) {
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * Method to determine if the given address contains a possible function pointer
@@ -1106,8 +1124,11 @@ public class GccRttiAnalysisScript extends GhidraScript {
 		}
 
 		Function function = getFunctionAt(possibleFunctionPointer);
-        return function != null;
-    }
+		if (function != null) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Method to get the pointer formed by the bytes at the current address

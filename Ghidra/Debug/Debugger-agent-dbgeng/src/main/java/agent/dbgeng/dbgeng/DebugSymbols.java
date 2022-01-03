@@ -42,21 +42,26 @@ public interface DebugSymbols {
 	 */
 	default Iterable<DebugModule> iterateModules(int startIndex) {
 		int count = getNumberLoadedModules(); // TODO: What about unloaded?
-		return () -> new Iterator<DebugModule>() {
-            int cur = startIndex;
+		return new Iterable<DebugModule>() {
+			@Override
+			public Iterator<DebugModule> iterator() {
+				return new Iterator<DebugModule>() {
+					int cur = startIndex;
 
-            @Override
-            public boolean hasNext() {
-                return cur < count;
-            }
+					@Override
+					public boolean hasNext() {
+						return cur < count;
+					}
 
-            @Override
-            public DebugModule next() {
-                DebugModule ret = getModuleByIndex(cur);
-                cur++;
-                return ret;
-            }
-        };
+					@Override
+					public DebugModule next() {
+						DebugModule ret = getModuleByIndex(cur);
+						cur++;
+						return ret;
+					}
+				};
+			}
+		};
 	}
 
 	Iterable<DebugSymbolName> iterateSymbolMatches(String pattern);
@@ -73,8 +78,8 @@ public interface DebugSymbols {
 
 	void setSymbolOptions(int options);
 
-	int getCurrentScopeFrameIndex();
+	public int getCurrentScopeFrameIndex();
 
-	void setCurrentScopeFrameIndex(int index);
+	public void setCurrentScopeFrameIndex(int index);
 
 }

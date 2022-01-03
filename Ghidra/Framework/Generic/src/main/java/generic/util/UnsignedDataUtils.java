@@ -40,10 +40,10 @@ public class UnsignedDataUtils {
         System.out.println(unsignedLessThan(0x5,0x87654321));
     }
 
-    private static final int LESS_THAN             = 0;
-    private static final int LESS_THAN_OR_EQUAL    = 1;
-    private static final int GREATER_THAN          = 2;
-    private static final int GREATER_THAN_OR_EQUAL = 3;
+    private final static int LESS_THAN             = 0;
+    private final static int LESS_THAN_OR_EQUAL    = 1;
+    private final static int GREATER_THAN          = 2;
+    private final static int GREATER_THAN_OR_EQUAL = 3;
 
     private static boolean comp(int type, byte i, byte j) {
         return comp(type,

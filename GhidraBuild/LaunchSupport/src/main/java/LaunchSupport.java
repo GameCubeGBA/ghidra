@@ -63,10 +63,10 @@ public class LaunchSupport {
 		boolean save = false;
 
 		for (int i = 2; i < args.length; i++) {
-			if ("-ask".equals(args[i])) {
+			if (args[i].equals("-ask")) {
 				ask = true;
 			}
-			else if ("-save".equals(args[i])) {
+			else if (args[i].equals("-save")) {
 				save = true;
 			}
 			else {

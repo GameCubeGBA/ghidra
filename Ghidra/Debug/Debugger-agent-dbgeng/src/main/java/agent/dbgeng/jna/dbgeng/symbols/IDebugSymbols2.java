@@ -22,7 +22,7 @@ import com.sun.jna.platform.win32.WinNT.HRESULT;
 import agent.dbgeng.jna.dbgeng.UnknownWithUtils.VTableIndex;
 
 public interface IDebugSymbols2 extends IDebugSymbols {
-	IID IID_IDEBUG_SYMBOLS2 = new IID("3a707211-afdd-4495-ad4f-56fecdf8163f");
+	final IID IID_IDEBUG_SYMBOLS2 = new IID("3a707211-afdd-4495-ad4f-56fecdf8163f");
 
 	enum VTIndices2 implements VTableIndex {
 		GET_MODULE_VERSION_INFORMATION, //

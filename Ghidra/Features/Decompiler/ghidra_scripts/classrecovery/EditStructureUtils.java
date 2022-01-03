@@ -155,13 +155,15 @@ class EditStructureUtils {
 			return false;
 		}
 
-        for (Integer componentOffset : offsetsToClear) {
-            // need to get ordinal from component using offset because after clearing
-            // component size > 1, the index changes
-            DataTypeComponent component = structure.getComponentAt(componentOffset);
-            int index = component.getOrdinal();
-            structure.clearComponent(index);
-        }
+		Iterator<Integer> offsetIterator = offsetsToClear.iterator();
+		while (offsetIterator.hasNext()) {
+			Integer componentOffset = offsetIterator.next();
+			// need to get ordinal from component using offset because after clearing 
+			// component size > 1, the index changes
+			DataTypeComponent component = structure.getComponentAt(componentOffset);
+			int index = component.getOrdinal();
+			structure.clearComponent(index);
+		}
 		return true;
 	}
 
@@ -172,8 +174,12 @@ class EditStructureUtils {
 	 */
 	static boolean isUndefined1(DataType dataType) {
 
-        return Undefined.isUndefined(dataType) && dataType.getLength() == 1;
-    }
+		if (Undefined.isUndefined(dataType) && dataType.getLength() == 1) {
+			return true;
+		}
+
+		return false;
+	}
 
 
 	/**

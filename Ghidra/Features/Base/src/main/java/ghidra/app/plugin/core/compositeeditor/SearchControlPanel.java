@@ -74,7 +74,7 @@ public class SearchControlPanel extends JPanel {
 			}
 
 			private void updateSearchButtons() {
-				boolean hasText = !textField.getText().isEmpty();
+				boolean hasText = textField.getText().length() > 0;
 				searchNext.setEnabled(hasText);
 				searchPrevious.setEnabled(hasText);
 			}
@@ -104,7 +104,7 @@ public class SearchControlPanel extends JPanel {
 
 	protected void search(boolean b) {
 		String searchText = textField.getText().trim();
-		if (!searchText.isEmpty()) {
+		if (searchText.length() > 0) {
 			editorPanel.search(searchText, b);
 		}
 	}

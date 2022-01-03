@@ -408,7 +408,7 @@ public abstract class HeadlessScript extends GhidraScript {
 			GhidraScript script = provider.getScriptInstance(scriptSource, writer);
 			isHeadlessScript = script instanceof HeadlessScript ? true : false;
 
-			if (!potentialPropertiesFileLocs.isEmpty()) {
+			if (potentialPropertiesFileLocs.size() > 0) {
 				script.setPotentialPropertiesFileLocations(potentialPropertiesFileLocs);
 			}
 

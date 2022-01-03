@@ -140,7 +140,9 @@ public class GFileSystemExtractAllTask extends AbstractFileExtractorTask {
 			skipAllErrors = true;
 		}
 
-        /* ie. != Skip this one*/
-        return skipAllErrors || option == OptionDialog.OPTION_ONE;
-    }
+		if (!skipAllErrors && option != OptionDialog.OPTION_ONE /* ie. != Skip this one*/) {
+			return false;
+		}
+		return true;
+	}
 }

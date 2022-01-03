@@ -53,7 +53,7 @@ public class ProjectDataOpenToolAction extends FrontendProjectTreeAction {
 
 	@Override
 	protected boolean isEnabledForContext(ProjectDataContext context) {
-		return !context.getSelectedFiles().isEmpty() && context.getSelectedFolders().isEmpty();
+		return context.getSelectedFiles().size() > 0 && context.getSelectedFolders().size() == 0;
 	}
 
 	private void openInTool(List<DomainFile> fileList) {

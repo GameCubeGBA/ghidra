@@ -145,8 +145,11 @@ class GhidraScriptTableModel extends GDynamicColumnTableModel<ResourceFile, Obje
 
 		DynamicTableColumn<ResourceFile, ?, ?> column = getColumn(col);
 		String columnName = column.getColumnName();
-        return SCRIPT_ACTION_COLUMN_NAME.equals(columnName);
-    }
+		if (SCRIPT_ACTION_COLUMN_NAME.equals(columnName)) {
+			return true;
+		}
+		return false;
+	}
 
 	@Override
 	public void setValueAt(Object value, int row, int col) {
@@ -372,7 +375,7 @@ class GhidraScriptTableModel extends GDynamicColumnTableModel<ResourceFile, Obje
 				else {
 					String keybindingText = "";
 					if (!info.keystroke.isEmpty()) {
-						keybindingText = ": " + info;
+						keybindingText = ": " + info.toString();
 					}
 
 					if (info.hasAction) {

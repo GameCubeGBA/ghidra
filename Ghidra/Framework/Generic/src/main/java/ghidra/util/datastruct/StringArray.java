@@ -29,7 +29,7 @@ import java.io.Serializable;
  * Array of Strings that grows as needed.
  */
 public class StringArray implements Array, Serializable {
-	private static final long serialVersionUID = 1;
+	private final static long serialVersionUID = 1;
 
     static final int MIN_SIZE = 4;
     byte[] bytes;

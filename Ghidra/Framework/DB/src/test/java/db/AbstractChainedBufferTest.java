@@ -52,6 +52,7 @@ public abstract class AbstractChainedBufferTest extends AbstractGenericTest {
 	 * @param arg0
 	 */
 	AbstractChainedBufferTest(boolean obfuscated, Buffer sourceData, int sourceDataOffset) {
+		super();
 		this.obfuscated = obfuscated;
 		this.sourceData = sourceData;
 		this.sourceDataOffset = sourceDataOffset;
@@ -302,7 +303,7 @@ public abstract class AbstractChainedBufferTest extends AbstractGenericTest {
 		byte[] bytes = new byte[size / 2];
 		Arrays.fill(bytes, (byte) 'a');
 		bytes[120] = (byte) 'W';
-		bytes[299] = 0x02;
+		bytes[299] = (byte) 0x02;
 		bytes[360] = (byte) 'x';
 
 		ChainedBuffer cb = new ChainedBuffer(size, obfuscated, sourceData, sourceDataOffset, mgr);
@@ -357,28 +358,28 @@ public abstract class AbstractChainedBufferTest extends AbstractGenericTest {
 			new ChainedBuffer(origBytes.length, obfuscated, sourceData, sourceDataOffset, mgr);
 		cb.put(0, origBytes);
 
-		newBytes[100] = 0x12;
-		newBytes[101] = 0x34;
-		newBytes[102] = 0x56;
-		newBytes[103] = 0x78;
+		newBytes[100] = (byte) 0x12;
+		newBytes[101] = (byte) 0x34;
+		newBytes[102] = (byte) 0x56;
+		newBytes[103] = (byte) 0x78;
 		int value1 = 0x12345678;
 		assertEquals(104, cb.putInt(100, value1));
 		cb.get(0, resultBytes);
 		assertTrue(Arrays.equals(resultBytes, newBytes));
 
-		newBytes[248] = 0x33;
-		newBytes[249] = 0x33;
-		newBytes[250] = 0x33;
-		newBytes[251] = 0x33;
+		newBytes[248] = (byte) 0x33;
+		newBytes[249] = (byte) 0x33;
+		newBytes[250] = (byte) 0x33;
+		newBytes[251] = (byte) 0x33;
 		int value2 = 0x33333333;
 		assertEquals(252, cb.putInt(248, value2));
 		cb.get(0, resultBytes);
 		assertTrue(Arrays.equals(resultBytes, newBytes));
 
-		newBytes[350] = 0x77;
-		newBytes[351] = 0x77;
-		newBytes[352] = 0x77;
-		newBytes[353] = 0x77;
+		newBytes[350] = (byte) 0x77;
+		newBytes[351] = (byte) 0x77;
+		newBytes[352] = (byte) 0x77;
+		newBytes[353] = (byte) 0x77;
 		int value3 = 0x77777777;
 		assertEquals(354, cb.putInt(350, value3));
 		cb.get(0, resultBytes);
@@ -416,20 +417,20 @@ public abstract class AbstractChainedBufferTest extends AbstractGenericTest {
 		byte[] newBytes = new byte[size];
 		Arrays.fill(origBytes, (byte) 0x47);
 		System.arraycopy(origBytes, 0, newBytes, 0, size);
-		newBytes[100] = 0x12;
-		newBytes[101] = 0x34;
-		newBytes[102] = 0x56;
-		newBytes[103] = 0x78;
+		newBytes[100] = (byte) 0x12;
+		newBytes[101] = (byte) 0x34;
+		newBytes[102] = (byte) 0x56;
+		newBytes[103] = (byte) 0x78;
 		int value1 = 0x12345678;
-		newBytes[248] = 0x33;
-		newBytes[249] = 0x33;
-		newBytes[250] = 0x33;
-		newBytes[251] = 0x33;
+		newBytes[248] = (byte) 0x33;
+		newBytes[249] = (byte) 0x33;
+		newBytes[250] = (byte) 0x33;
+		newBytes[251] = (byte) 0x33;
 		int value2 = 0x33333333;
-		newBytes[350] = 0x77;
-		newBytes[351] = 0x77;
-		newBytes[352] = 0x77;
-		newBytes[353] = 0x77;
+		newBytes[350] = (byte) 0x77;
+		newBytes[351] = (byte) 0x77;
+		newBytes[352] = (byte) 0x77;
+		newBytes[353] = (byte) 0x77;
 		int value3 = 0x77777777;
 		int value = 0x47474747;
 
@@ -486,10 +487,10 @@ public abstract class AbstractChainedBufferTest extends AbstractGenericTest {
 			new ChainedBuffer(origBytes.length, obfuscated, sourceData, sourceDataOffset, mgr);
 		cb.put(0, origBytes);
 
-		newBytes[100] = 0x12;
-		newBytes[101] = 0x34;
-		newBytes[102] = 0x56;
-		newBytes[103] = 0x78;
+		newBytes[100] = (byte) 0x12;
+		newBytes[101] = (byte) 0x34;
+		newBytes[102] = (byte) 0x56;
+		newBytes[103] = (byte) 0x78;
 		newBytes[104] = (byte) 0xa1;
 		newBytes[105] = (byte) 0xa2;
 		newBytes[106] = (byte) 0xa3;
@@ -499,27 +500,27 @@ public abstract class AbstractChainedBufferTest extends AbstractGenericTest {
 		cb.get(0, resultBytes);
 		assertTrue(Arrays.equals(resultBytes, newBytes));
 
-		newBytes[247] = 0x33;
-		newBytes[248] = 0x33;
-		newBytes[249] = 0x33;
-		newBytes[250] = 0x33;
-		newBytes[251] = 0x33;
-		newBytes[252] = 0x33;
-		newBytes[253] = 0x33;
-		newBytes[254] = 0x33;
+		newBytes[247] = (byte) 0x33;
+		newBytes[248] = (byte) 0x33;
+		newBytes[249] = (byte) 0x33;
+		newBytes[250] = (byte) 0x33;
+		newBytes[251] = (byte) 0x33;
+		newBytes[252] = (byte) 0x33;
+		newBytes[253] = (byte) 0x33;
+		newBytes[254] = (byte) 0x33;
 		long value2 = 0x3333333333333333L;
 		assertEquals(255, cb.putLong(247, value2));
 		cb.get(0, resultBytes);
 		assertTrue(Arrays.equals(resultBytes, newBytes));
 
-		newBytes[1350] = 0x77;
-		newBytes[1351] = 0x77;
-		newBytes[1352] = 0x77;
-		newBytes[1353] = 0x77;
-		newBytes[1354] = 0x77;
-		newBytes[1355] = 0x77;
-		newBytes[1356] = 0x77;
-		newBytes[1357] = 0x77;
+		newBytes[1350] = (byte) 0x77;
+		newBytes[1351] = (byte) 0x77;
+		newBytes[1352] = (byte) 0x77;
+		newBytes[1353] = (byte) 0x77;
+		newBytes[1354] = (byte) 0x77;
+		newBytes[1355] = (byte) 0x77;
+		newBytes[1356] = (byte) 0x77;
+		newBytes[1357] = (byte) 0x77;
 		long value3 = 0x7777777777777777L;
 		assertEquals(1358, cb.putLong(1350, value3));
 		cb.get(0, resultBytes);
@@ -557,32 +558,32 @@ public abstract class AbstractChainedBufferTest extends AbstractGenericTest {
 		byte[] newBytes = new byte[size];
 		Arrays.fill(origBytes, (byte) 0x47);
 		System.arraycopy(origBytes, 0, newBytes, 0, size);
-		newBytes[100] = 0x12;
-		newBytes[101] = 0x34;
-		newBytes[102] = 0x56;
-		newBytes[103] = 0x78;
+		newBytes[100] = (byte) 0x12;
+		newBytes[101] = (byte) 0x34;
+		newBytes[102] = (byte) 0x56;
+		newBytes[103] = (byte) 0x78;
 		newBytes[104] = (byte) 0xa1;
 		newBytes[105] = (byte) 0xa2;
 		newBytes[106] = (byte) 0xa3;
 		newBytes[107] = (byte) 0xa4;
 		long value1 = 0x12345678a1a2a3a4L;
-		newBytes[247] = 0x33;
-		newBytes[248] = 0x33;
-		newBytes[249] = 0x33;
-		newBytes[250] = 0x33;
-		newBytes[251] = 0x33;
-		newBytes[252] = 0x33;
-		newBytes[253] = 0x33;
-		newBytes[254] = 0x33;
+		newBytes[247] = (byte) 0x33;
+		newBytes[248] = (byte) 0x33;
+		newBytes[249] = (byte) 0x33;
+		newBytes[250] = (byte) 0x33;
+		newBytes[251] = (byte) 0x33;
+		newBytes[252] = (byte) 0x33;
+		newBytes[253] = (byte) 0x33;
+		newBytes[254] = (byte) 0x33;
 		long value2 = 0x3333333333333333L;
-		newBytes[1350] = 0x77;
-		newBytes[1351] = 0x77;
-		newBytes[1352] = 0x77;
-		newBytes[1353] = 0x77;
-		newBytes[1354] = 0x77;
-		newBytes[1355] = 0x77;
-		newBytes[1356] = 0x77;
-		newBytes[1357] = 0x77;
+		newBytes[1350] = (byte) 0x77;
+		newBytes[1351] = (byte) 0x77;
+		newBytes[1352] = (byte) 0x77;
+		newBytes[1353] = (byte) 0x77;
+		newBytes[1354] = (byte) 0x77;
+		newBytes[1355] = (byte) 0x77;
+		newBytes[1356] = (byte) 0x77;
+		newBytes[1357] = (byte) 0x77;
 		long value3 = 0x7777777777777777L;
 		long value = 0x4747474747474747L;
 
@@ -639,22 +640,22 @@ public abstract class AbstractChainedBufferTest extends AbstractGenericTest {
 			new ChainedBuffer(origBytes.length, obfuscated, sourceData, sourceDataOffset, mgr);
 		cb.put(0, origBytes);
 
-		newBytes[100] = 0x12;
-		newBytes[101] = 0x34;
+		newBytes[100] = (byte) 0x12;
+		newBytes[101] = (byte) 0x34;
 		short value1 = 0x1234;
 		assertEquals(102, cb.putShort(100, value1));
 		cb.get(0, resultBytes);
 		assertTrue(Arrays.equals(resultBytes, newBytes));
 
-		newBytes[249] = 0x33;
-		newBytes[250] = 0x33;
+		newBytes[249] = (byte) 0x33;
+		newBytes[250] = (byte) 0x33;
 		short value2 = 0x3333;
 		assertEquals(251, cb.putShort(249, value2));
 		cb.get(0, resultBytes);
 		assertTrue(Arrays.equals(resultBytes, newBytes));
 
-		newBytes[350] = 0x77;
-		newBytes[351] = 0x77;
+		newBytes[350] = (byte) 0x77;
+		newBytes[351] = (byte) 0x77;
 		short value3 = 0x7777;
 		assertEquals(352, cb.putShort(350, value3));
 		cb.get(0, resultBytes);
@@ -692,14 +693,14 @@ public abstract class AbstractChainedBufferTest extends AbstractGenericTest {
 		byte[] newBytes = new byte[size];
 		Arrays.fill(origBytes, (byte) 0x47);
 		System.arraycopy(origBytes, 0, newBytes, 0, size);
-		newBytes[100] = 0x12;
-		newBytes[101] = 0x34;
+		newBytes[100] = (byte) 0x12;
+		newBytes[101] = (byte) 0x34;
 		short value1 = 0x1234;
-		newBytes[249] = 0x33;
-		newBytes[250] = 0x33;
+		newBytes[249] = (byte) 0x33;
+		newBytes[250] = (byte) 0x33;
 		short value2 = 0x3333;
-		newBytes[350] = 0x77;
-		newBytes[351] = 0x77;
+		newBytes[350] = (byte) 0x77;
+		newBytes[351] = (byte) 0x77;
 		short value3 = 0x7777;
 		short value = 0x4747;
 

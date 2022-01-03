@@ -266,7 +266,12 @@ public class ManualViewerCommandEditor extends PropertyEditorSupport
 				}
 			});
 
-			fileFormatComboBox.addItemListener(e -> ManualViewerCommandEditor.this.firePropertyChange());
+			fileFormatComboBox.addItemListener(new ItemListener() {
+				@Override
+				public void itemStateChanged(ItemEvent e) {
+					ManualViewerCommandEditor.this.firePropertyChange();
+				}
+			});
 
 			return workPanel;
 		}

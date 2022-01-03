@@ -26,14 +26,15 @@ import generic.util.Path;
 
 class PathManagerModel extends AbstractTableModel {
 
-	static final int COLUMN_USE = 0;
-	static final int COLUMN_PATH = 1;
+	final static int COLUMN_USE = 0;
+	final static int COLUMN_PATH = 1;
 
 	private PathManager mgr;
 	private List<Path> paths = new ArrayList<>();
 
 	PathManagerModel(PathManager mgr, List<Path> paths) {
-        this.mgr = mgr;
+		super();
+		this.mgr = mgr;
 		this.paths.addAll(dedupPaths(paths));
 		fireTableDataChanged();
 	}

@@ -12,15 +12,15 @@
 package SWIG;
 
 public final class PathType {
-  public static final PathType ePathTypeLLDBShlibDir = new PathType("ePathTypeLLDBShlibDir");
-  public static final PathType ePathTypeSupportExecutableDir = new PathType("ePathTypeSupportExecutableDir");
-  public static final PathType ePathTypeHeaderDir = new PathType("ePathTypeHeaderDir");
-  public static final PathType ePathTypePythonDir = new PathType("ePathTypePythonDir");
-  public static final PathType ePathTypeLLDBSystemPlugins = new PathType("ePathTypeLLDBSystemPlugins");
-  public static final PathType ePathTypeLLDBUserPlugins = new PathType("ePathTypeLLDBUserPlugins");
-  public static final PathType ePathTypeLLDBTempSystemDir = new PathType("ePathTypeLLDBTempSystemDir");
-  public static final PathType ePathTypeGlobalLLDBTempSystemDir = new PathType("ePathTypeGlobalLLDBTempSystemDir");
-  public static final PathType ePathTypeClangDir = new PathType("ePathTypeClangDir");
+  public final static PathType ePathTypeLLDBShlibDir = new PathType("ePathTypeLLDBShlibDir");
+  public final static PathType ePathTypeSupportExecutableDir = new PathType("ePathTypeSupportExecutableDir");
+  public final static PathType ePathTypeHeaderDir = new PathType("ePathTypeHeaderDir");
+  public final static PathType ePathTypePythonDir = new PathType("ePathTypePythonDir");
+  public final static PathType ePathTypeLLDBSystemPlugins = new PathType("ePathTypeLLDBSystemPlugins");
+  public final static PathType ePathTypeLLDBUserPlugins = new PathType("ePathTypeLLDBUserPlugins");
+  public final static PathType ePathTypeLLDBTempSystemDir = new PathType("ePathTypeLLDBTempSystemDir");
+  public final static PathType ePathTypeGlobalLLDBTempSystemDir = new PathType("ePathTypeGlobalLLDBTempSystemDir");
+  public final static PathType ePathTypeClangDir = new PathType("ePathTypeClangDir");
 
   public final int swigValue() {
     return swigValue;
@@ -33,9 +33,9 @@ public final class PathType {
   public static PathType swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-      for (PathType value : swigValues)
-          if (value.swigValue == swigValue)
-              return value;
+    for (int i = 0; i < swigValues.length; i++)
+      if (swigValues[i].swigValue == swigValue)
+        return swigValues[i];
     throw new IllegalArgumentException("No enum " + PathType.class + " with value " + swigValue);
   }
 

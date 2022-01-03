@@ -21,35 +21,35 @@ import java.lang.reflect.Modifier;
 public final class CoffSymbolSpecial {
 
 	/** file name */
-    public static final String DOT_FILE    = ".file";
+	public final static String DOT_FILE    = ".file";
 	/** address of the .text section */
-    public static final String DOT_TEXT    = ".text";
+	public final static String DOT_TEXT    = ".text";
 	/** address of the .data section */
-    public static final String DOT_DATA    = ".data";
+	public final static String DOT_DATA    = ".data";
 	/** address of the .bss section */
-    public static final String DOT_BSS     = ".bss";
+	public final static String DOT_BSS     = ".bss";
 	/** address of the beginning of a block */
-    public static final String DOT_BB      = ".bb";
+	public final static String DOT_BB      = ".bb";
 	/** address of the end of a block */
-    public static final String DOT_EB      = ".eb";
+	public final static String DOT_EB      = ".eb";
 	/** address of the beginning of a function */
-    public static final String DOT_BF      = ".bf";
+	public final static String DOT_BF      = ".bf";
 	/** address of the end of a function */
-    public static final String DOT_EF      = ".ef";
+	public final static String DOT_EF      = ".ef";
 	/** Pointer to a structure or union that is returned by a function. */
-    public static final String DOT_TARGET  = ".target";
+	public final static String DOT_TARGET  = ".target";
 	/** Dummy tag name for a structure, union, or enumeration. */
-    public static final String DOT_NFAKE   = ".nfake";
+	public final static String DOT_NFAKE   = ".nfake";
 	/** End of a structure, union, or enumeration. */
-    public static final String DOT_EOS     = ".eos";
+	public final static String DOT_EOS     = ".eos";
 	/** Next available address after the end of the .text output section. */
-    public static final String DOT_ETEXT   = "etext";
+	public final static String DOT_ETEXT   = "etext";
 	/** Next available address after the end of the .data output section. */
-    public static final String DOT_EDATA   = "edata";
+	public final static String DOT_EDATA   = "edata";
 	/** Next available address after the end of the .bss output section. */
-    public static final String DOT_END     = "end";
+	public final static String DOT_END     = "end";
 
-	public static final boolean isSpecial(CoffSymbol symbol) {
+	public final static boolean isSpecial(CoffSymbol symbol) {
 		Field[] declaredFields = CoffMachineType.class.getDeclaredFields();
 		for (Field field : declaredFields) {
 			int modifiers = field.getModifiers();

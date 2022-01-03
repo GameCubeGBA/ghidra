@@ -32,6 +32,7 @@ public class AddressTranslationException extends RuntimeException {
      * Construct a new AddressTranslationException with no message
      */
     public AddressTranslationException() {
+        super();
     }
     
     /**

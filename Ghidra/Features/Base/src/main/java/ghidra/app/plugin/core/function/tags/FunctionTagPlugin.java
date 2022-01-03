@@ -41,7 +41,7 @@ import ghidra.program.util.ProgramLocation;
 //@formatter:on
 public class FunctionTagPlugin extends ProgramPlugin {
 
-	public static final String FUNCTION_TAG_MENU_SUBGROUP = "TagFunction";
+	public final static String FUNCTION_TAG_MENU_SUBGROUP = "TagFunction";
 
 	// Action visible when right-clicking on a function in the listing.
 	private EditFunctionTagsAction editFunctionTagsAction;

@@ -32,7 +32,7 @@ import ghidra.util.*;
 public class DBTraceUndefinedDataView extends
 		AbstractSingleDBTraceCodeUnitsView<UndefinedDBTraceData> implements TraceUndefinedDataView {
 
-	protected static final int CACHE_MAX_SNAPS = 5;
+	protected final static int CACHE_MAX_SNAPS = 5;
 
 	protected final DBTraceCodeManager manager;
 

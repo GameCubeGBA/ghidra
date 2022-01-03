@@ -39,8 +39,12 @@ public class IntegerInputVerifier extends InputVerifier {
         String text = ftf.getText();
         try {       
             Integer intValue = ((Number) formatter.stringToValue(text)).intValue();
-            // no negatives or values over 1
-            return intValue.compareTo(0) >= 0;
+            if ( intValue.compareTo( 0 ) < 0 ) {
+                // no negatives or values over 1
+                return false;
+            }
+
+            return true;
         }
         catch ( ParseException e ) {
             return false;

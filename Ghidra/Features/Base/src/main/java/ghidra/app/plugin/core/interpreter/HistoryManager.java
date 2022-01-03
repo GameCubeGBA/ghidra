@@ -18,13 +18,13 @@ package ghidra.app.plugin.core.interpreter;
 
 public interface HistoryManager {
 
-	void addHistory(String command);
+	public void addHistory(String command);
 
-	String getHistoryUp();
+	public String getHistoryUp();
 
-	String getHistoryDown();
+	public String getHistoryDown();
 
-	void setRetention(int retention);
+	public void setRetention(int retention);
 
-	int getRetention();
+	public int getRetention();
 }

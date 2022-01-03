@@ -80,6 +80,9 @@ public class SetVTMatchFromOneToManyAction extends DockingAction {
 
 	@Override
 	public boolean isAddToPopup(ActionContext context) {
-        return context instanceof VTMatchOneToManyContext;
-    }
+		if (context instanceof VTMatchOneToManyContext) {
+			return true;
+		}
+		return false;
+	}
 }

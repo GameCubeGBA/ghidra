@@ -27,7 +27,7 @@ import java.io.Serializable;
  * Array of bytes that grows as needed.
  */
 public class ByteArray implements Array, Serializable {
-    private static final long serialVersionUID = 1;
+    private final static long serialVersionUID = 1;
 
     public static final int MIN_SIZE = 4;
     byte[] bytes;
@@ -68,7 +68,7 @@ public class ByteArray implements Array, Serializable {
 		if (index >= bytes.length) {
 			return;
 		}
-        bytes[index] = 0;
+        bytes[index] = (byte)0;
         if (index == lastNonZeroIndex) {
             lastNonZeroIndex = findLastNonZeroIndex();
         }

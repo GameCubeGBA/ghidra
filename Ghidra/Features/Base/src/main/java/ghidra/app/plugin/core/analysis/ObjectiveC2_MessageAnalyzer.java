@@ -210,8 +210,11 @@ public class ObjectiveC2_MessageAnalyzer extends AbstractAnalyzer {
 			return false;
 		}
 		Register register = (Register) destinationOperandObjects[0];
-        return register.getName().equals(registerName);
-    }
+		if (register.getName().equals(registerName)) {
+			return true;
+		}
+		return false;
+	}
 
 	private String getClassName(Program program, Address toAddress) {
 		try {
@@ -290,16 +293,18 @@ public class ObjectiveC2_MessageAnalyzer extends AbstractAnalyzer {
 		if (instruction.getNumOperands() != 2) {
 			return false;
 		}
-		boolean isMOV = "MOV".equals(instruction.getMnemonicString());//intel
-		boolean isLWZ = "lwz".equals(instruction.getMnemonicString());//powerpc
-		boolean isLDR = "ldr".equals(instruction.getMnemonicString());//arm
+		boolean isMOV = instruction.getMnemonicString().equals("MOV");//intel 
+		boolean isLWZ = instruction.getMnemonicString().equals("lwz");//powerpc
+		boolean isLDR = instruction.getMnemonicString().equals("ldr");//arm
 		return isMOV || isLWZ || isLDR;
 	}
 
 	private boolean isCStringBlock(Program program, Address address) {
 		MemoryBlock block = program.getMemory().getBlock(address);
 		if (block != null) {
-            return block.getName().equals(SectionNames.TEXT_CSTRING);
+			if (block.getName().equals(SectionNames.TEXT_CSTRING)) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -307,7 +312,9 @@ public class ObjectiveC2_MessageAnalyzer extends AbstractAnalyzer {
 	private boolean isObjcSelectorRefBlock(Program program, Address address) {
 		MemoryBlock block = program.getMemory().getBlock(address);
 		if (block != null) {
-            return block.getName().equals(ObjectiveC2_Constants.OBJC2_SELECTOR_REFS);
+			if (block.getName().equals(ObjectiveC2_Constants.OBJC2_SELECTOR_REFS)) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -315,7 +322,9 @@ public class ObjectiveC2_MessageAnalyzer extends AbstractAnalyzer {
 	private boolean isObjcClassRefBlock(Program program, Address address) {
 		MemoryBlock block = program.getMemory().getBlock(address);
 		if (block != null) {
-            return block.getName().equals(ObjectiveC2_Constants.OBJC2_CLASS_REFS);
+			if (block.getName().equals(ObjectiveC2_Constants.OBJC2_CLASS_REFS)) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -323,7 +332,9 @@ public class ObjectiveC2_MessageAnalyzer extends AbstractAnalyzer {
 	private boolean isObjcConstBlock(Program program, Address address) {
 		MemoryBlock block = program.getMemory().getBlock(address);
 		if (block != null) {
-            return block.getName().equals(ObjectiveC2_Constants.OBJC2_CONST);
+			if (block.getName().equals(ObjectiveC2_Constants.OBJC2_CONST)) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -331,7 +342,9 @@ public class ObjectiveC2_MessageAnalyzer extends AbstractAnalyzer {
 	private boolean isObjcDataBlock(Program program, Address address) {
 		MemoryBlock block = program.getMemory().getBlock(address);
 		if (block != null) {
-            return block.getName().equals(ObjectiveC2_Constants.OBJC2_DATA);
+			if (block.getName().equals(ObjectiveC2_Constants.OBJC2_DATA)) {
+				return true;
+			}
 		}
 		return false;
 	}

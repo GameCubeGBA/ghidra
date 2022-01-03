@@ -49,9 +49,9 @@ class InstructionPanel extends JPanel implements ChangeListener {
 	private static final Border EMPTY_BORDER = new EmptyBorder(ETCHED_BORDER_THICKNESS,
 		ETCHED_BORDER_THICKNESS, ETCHED_BORDER_THICKNESS, ETCHED_BORDER_THICKNESS);
 
-	private static final Color UNLOCKED_LABEL_COLOR = Color.blue;
-	private static final Color NOT_IN_MEMORY_COLOR = Color.red;
-	private static final Color DEFAULT_FG_COLOR = Color.black;
+	private final static Color UNLOCKED_LABEL_COLOR = Color.blue;
+	private final static Color NOT_IN_MEMORY_COLOR = Color.red;
+	private final static Color DEFAULT_FG_COLOR = Color.black;
 
 	private static final DataFlavor[] ACCEPTABLE_DROP_FLAVORS =
 		new DataFlavor[] { SelectionTransferable.localProgramSelectionFlavor };
@@ -147,7 +147,8 @@ class InstructionPanel extends JPanel implements ChangeListener {
 	InstructionPanel(int topPad, int leftPad, int bottomPad, int rightPad,
 			DockingAction goHomeAction, ReferencesPlugin plugin,
 			InstructionPanelListener listener) {
-        this.dropSupported = listener != null ? listener.dropSupported() : false;
+		super();
+		this.dropSupported = listener != null ? listener.dropSupported() : false;
 		this.goHomeAction = goHomeAction;
 		this.symbolInspector = plugin.getSymbolInspector();
 		this.cuFormat = plugin.getCodeUnitFormat();

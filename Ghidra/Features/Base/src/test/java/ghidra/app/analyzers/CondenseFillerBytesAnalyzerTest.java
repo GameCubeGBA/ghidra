@@ -37,7 +37,8 @@ public class CondenseFillerBytesAnalyzerTest extends AbstractGenericTest {
 	private ToyProgramBuilder builder;
 
 	public CondenseFillerBytesAnalyzerTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

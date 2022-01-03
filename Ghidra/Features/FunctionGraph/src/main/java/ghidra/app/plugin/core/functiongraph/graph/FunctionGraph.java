@@ -383,46 +383,48 @@ public class FunctionGraph extends GroupingVisualGraph<FGVertex, FGEdge> {
 	private void removeAssociatedGroups(Collection<FGVertex> groupVertices) {
 		for (FGVertex vertex : groupVertices) {
 			Iterator<GroupHistoryInfo> iterator = groupHistorySet.iterator();
-            while (iterator.hasNext()) {
-                GroupHistoryInfo info = iterator.next();
-                if (!info.contains(vertex)) {
-                    continue;
-                }
+			for (; iterator.hasNext();) {
+				GroupHistoryInfo info = iterator.next();
+				if (!info.contains(vertex)) {
+					continue;
+				}
 
-                //
-                // NOTE: this code is setup such that for any given GroupHistoryInfo, if any of
-                //       its internal vertices are *moved to a new group*, then the entire history
-                //       is removed.  We could do something different, like simply remove the
-                // 	     vertex from the history entry.  For now, the current code seems simpler
-                //       in that once you alter an 'uncollapsed' group entry, the whole thing
-                //       goes away.
-                //
-                // SUBNOTE: if a vertex is manually removed from an 'uncollapsed' group, then the
-                //          history is NOT removed.
-                //
+				//
+				// NOTE: this code is setup such that for any given GroupHistoryInfo, if any of
+				//       its internal vertices are *moved to a new group*, then the entire history
+				//       is removed.  We could do something different, like simply remove the
+				// 	     vertex from the history entry.  For now, the current code seems simpler
+				//       in that once you alter an 'uncollapsed' group entry, the whole thing
+				//       goes away.
+				//
+				// SUBNOTE: if a vertex is manually removed from an 'uncollapsed' group, then the
+				//          history is NOT removed.
+				//
 
-                notifyVerticesOfGroupAssociation(info.getVertices(), null);
-                iterator.remove();
-            }
-        }
+				notifyVerticesOfGroupAssociation(info.getVertices(), null);
+				iterator.remove();
+			}
+		}
 	}
 
 	private void removeFromAllHistory(FGVertex vertex) {
 		boolean didRemove = false;
-        for (GroupHistoryInfo info : groupHistorySet) {
-            if (!info.contains(vertex)) {
-                continue;
-            }
+		Iterator<GroupHistoryInfo> iterator = groupHistorySet.iterator();
+		for (; iterator.hasNext();) {
+			GroupHistoryInfo info = iterator.next();
+			if (!info.contains(vertex)) {
+				continue;
+			}
 
-            info.removeVertex(vertex);
-            didRemove = true;
+			info.removeVertex(vertex);
+			didRemove = true;
 
-            // we want to update the vertices associated with the info, which lets them update
-            // their display with any new info
-            notifyVerticesOfGroupAssociation(info.getVertices(), info);
-        }
+			// we want to update the vertices associated with the info, which lets them update
+			// their display with any new info
+			notifyVerticesOfGroupAssociation(info.getVertices(), info);
+		}
 
-        if (didRemove) {
+		if (didRemove) {
 			notifyVerticesOfGroupAssociation(Arrays.asList(vertex), null);
 		}
 	}
@@ -580,9 +582,9 @@ public class FunctionGraph extends GroupingVisualGraph<FGVertex, FGEdge> {
 
 		Collection<FGVertex> v = getVertices();
 		Collection<FGEdge> e = getEdges();
-		FunctionGraph newGraph = new FunctionGraph(function, settings, v, e);
+		FunctionGraph newGraph = new FunctionGraph(getFunction(), getSettings(), v, e);
 
-		FGLayout originalLayout = graphLayout;
+		FGLayout originalLayout = getLayout();
 		FGLayout newLayout = originalLayout.cloneLayout(newGraph);
 
 		// setSize() must be called after setGraphLayout() due to callbacks performed when 
@@ -590,7 +592,7 @@ public class FunctionGraph extends GroupingVisualGraph<FGVertex, FGEdge> {
 		newGraph.setGraphLayout(newLayout);
 		newLayout.setSize(originalLayout.getSize());
 
-		newGraph.setOptions(options);
+		newGraph.setOptions(getOptions());
 		return newGraph;
 	}
 

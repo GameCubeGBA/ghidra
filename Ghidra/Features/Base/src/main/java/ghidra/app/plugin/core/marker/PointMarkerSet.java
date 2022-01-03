@@ -98,14 +98,15 @@ class PointMarkerSet extends MarkerSetImpl {
 			return;
 		}
 
-        for (Integer layout : layouts) {
-            int i = layout.intValue();
-            int yStart = pixmap.getMarkPosition(i);
+		Iterator<Integer> it = layouts.iterator();
+		while (it.hasNext()) {
+			int i = it.next().intValue();
+			int yStart = pixmap.getMarkPosition(i);
 
-            Image curImage = getMarkerImage(pixmap, i, yStart);
+			Image curImage = getMarkerImage(pixmap, i, yStart);
 
-            g.drawImage(curImage, 0, yStart, imageObserver);
-        }
+			g.drawImage(curImage, 0, yStart, imageObserver);
+		}
 	}
 
 	private Image getMarkerImage(VerticalPixelAddressMap pixmap, int i, int yStart) {

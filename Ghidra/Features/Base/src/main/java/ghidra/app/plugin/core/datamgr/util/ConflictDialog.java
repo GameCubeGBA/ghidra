@@ -32,9 +32,9 @@ import resources.ResourceManager;
  */
 public class ConflictDialog extends DialogComponentProvider {
 
-	static final int REPLACE = 1;
-	static final int USE_EXISTING = 2;
-	static final int RENAME = 3;
+	final static int REPLACE = 1;
+	final static int USE_EXISTING = 2;
+	final static int RENAME = 3;
 
 	private boolean applyToAll;
 	private JRadioButton replaceRB;
@@ -58,10 +58,13 @@ public class ConflictDialog extends DialogComponentProvider {
 
 		addOKButton();
 		applyToAllButton = new JButton("Apply to All");
-		applyToAllButton.addActionListener(e -> {
-            applyToAll = true;
-            close();
-        });
+		applyToAllButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				applyToAll = true;
+				close();
+			}
+		});
 		addButton(applyToAllButton);
 	}
 
@@ -98,20 +101,23 @@ public class ConflictDialog extends DialogComponentProvider {
 
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
 
-		ItemListener listener = e -> {
-            if (e.getStateChange() == ItemEvent.SELECTED) {
-                Object source = e.getSource();
-                if (source == replaceRB) {
-                    selectedOption = REPLACE;
-                }
-                else if (source == useExistingRB) {
-                    selectedOption = USE_EXISTING;
-                }
-                else {
-                    selectedOption = RENAME;
-                }
-            }
-        };
+		ItemListener listener = new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if (e.getStateChange() == ItemEvent.SELECTED) {
+					Object source = e.getSource();
+					if (source == replaceRB) {
+						selectedOption = REPLACE;
+					}
+					else if (source == useExistingRB) {
+						selectedOption = USE_EXISTING;
+					}
+					else {
+						selectedOption = RENAME;
+					}
+				}
+			}
+		};
 
 		ButtonGroup bg = new ButtonGroup();
 		renameRB = new GRadioButton("Rename new data type to " + newDTName, true);

@@ -286,8 +286,11 @@ public class DefaultTraceTimeViewport implements TraceTimeViewport {
 				if (snapshot.getSchedule() == null) {
 					return false;
 				}
-                return spanSet.contains(snapshot.getKey());
-            }
+				if (spanSet.contains(snapshot.getKey())) {
+					return true;
+				}
+				return false;
+			}
 		}
 	}
 
@@ -297,16 +300,22 @@ public class DefaultTraceTimeViewport implements TraceTimeViewport {
 				if (isLower(snapshot.getKey())) {
 					return true;
 				}
-                return spanSet.contains(snapshot.getKey()) && snapshot.getSchedule() != null;
-            }
+				if (spanSet.contains(snapshot.getKey()) && snapshot.getSchedule() != null) {
+					return true;
+				}
+				return false;
+			}
 		}
 	}
 
 	protected boolean checkSnapshotDeletedNeedsRefresh(TraceSnapshot snapshot) {
 		try (LockHold hold = trace.lockRead()) {
 			synchronized (ordered) {
-                return isLower(snapshot.getKey());
-            }
+				if (isLower(snapshot.getKey())) {
+					return true;
+				}
+				return false;
+			}
 		}
 	}
 

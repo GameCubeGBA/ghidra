@@ -36,7 +36,7 @@ import ghidra.util.exception.DuplicateNameException;
  */
 public class CreateWorkspaceTest extends AbstractGhidraHeadedIntegrationTest {
 
-	private static final String DIRECTORY_NAME = AbstractGenericTest.getTestDirectoryPath();
+	private final static String DIRECTORY_NAME = AbstractGenericTest.getTestDirectoryPath();
 
 	private Project project;
 
@@ -45,7 +45,8 @@ public class CreateWorkspaceTest extends AbstractGhidraHeadedIntegrationTest {
 	 * @param arg0
 	 */
 	public CreateWorkspaceTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -55,7 +56,12 @@ public class CreateWorkspaceTest extends AbstractGhidraHeadedIntegrationTest {
 
 	@After
 	public void tearDown() throws Exception {
-		runSwing(() -> project.close());
+		runSwing(new Runnable() {
+			@Override
+			public void run() {
+				project.close();
+			}
+		});
 		ProjectTestUtils.deleteProject(DIRECTORY_NAME, PROJECT_NAME);
 	}
 
@@ -126,9 +132,12 @@ public class CreateWorkspaceTest extends AbstractGhidraHeadedIntegrationTest {
 		setWorkspaceActive(wspaces[0]);
 
 		final Workspace workspace = wspaces[0];
-		runSwing(() -> {
-            workspace.createTool();
-        });
+		runSwing(new Runnable() {
+			@Override
+			public void run() {
+				workspace.createTool();
+			}
+		});
 
 		PluginTool[] runningTools = wspaces[0].getTools();
 		assertEquals(1, runningTools.length);
@@ -139,22 +148,30 @@ public class CreateWorkspaceTest extends AbstractGhidraHeadedIntegrationTest {
 
 		project.save();
 
-		runSwing(() -> project.close());
+		runSwing(new Runnable() {
+			@Override
+			public void run() {
+				project.close();
+			}
+		});
 
 		// now restore it
-		runSwing(() -> {
-            try {
-                project = ProjectTestUtils.getProject(DIRECTORY_NAME, PROJECT_NAME);
-            }
-            catch (LockException exc) {
-                exc.printStackTrace();
-                Assert.fail();
-            }
-            catch (IOException exc) {
-                exc.printStackTrace();
-                Assert.fail();
-            }
-        });
+		runSwing(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					project = ProjectTestUtils.getProject(DIRECTORY_NAME, PROJECT_NAME);
+				}
+				catch (LockException exc) {
+					exc.printStackTrace();
+					Assert.fail();
+				}
+				catch (IOException exc) {
+					exc.printStackTrace();
+					Assert.fail();
+				}
+			}
+		});
 
 		tm = project.getToolManager();
 		wspaces = tm.getWorkspaces();
@@ -172,6 +189,11 @@ public class CreateWorkspaceTest extends AbstractGhidraHeadedIntegrationTest {
 	}
 
 	private void setWorkspaceActive(final Workspace workspace) {
-		runSwing(() -> workspace.setActive());
+		runSwing(new Runnable() {
+			@Override
+			public void run() {
+				workspace.setActive();
+			}
+		});
 	}
 }

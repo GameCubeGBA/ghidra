@@ -60,9 +60,9 @@ public class JavaCompiler {
 		argV[5] = javaFile.getAbsolutePath(); 
 		try {
 			Process p = Runtime.getRuntime().exec(argV);
-            for (String s : argV) {
-                System.out.print(s + " ");
-            }
+			for (int i=0; i<argV.length; i++) {
+				System.out.print(argV[i] + " ");
+			}
 			System.out.println();
 				
 			InputStream stderrStream = p.getErrorStream();

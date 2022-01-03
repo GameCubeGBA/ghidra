@@ -32,7 +32,8 @@ import ghidra.program.model.listing.Program;
 public class MemSearchDecimal1Test extends AbstractMemSearchTest {
 
 	public MemSearchDecimal1Test() {
-    }
+		super();
+	}
 
 	@Override
 	@Before

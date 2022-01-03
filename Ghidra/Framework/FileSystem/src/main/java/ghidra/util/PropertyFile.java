@@ -44,7 +44,7 @@ public class PropertyFile {
 	/**
 	 * File extension indicating the file is a property file.
 	 */
-    public static final String PROPERTY_EXT = ".prp";
+	public final static String PROPERTY_EXT = ".prp";
 
 	private static final String FILE_ID = "FILE_ID";
 
@@ -423,6 +423,9 @@ public class PropertyFile {
 			return false;
 		}
 		PropertyFile other = (PropertyFile) obj;
-        return Objects.equals(propertyFile, other.propertyFile);
-    }
+		if (!Objects.equals(propertyFile, other.propertyFile)) {
+			return false;
+		}
+		return true;
+	}
 }

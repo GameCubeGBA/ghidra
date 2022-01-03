@@ -40,13 +40,13 @@ public interface LldbModelTargetProcess extends //
 		LldbEventsListenerAdapter, //
 		LldbModelSelectableObject {
 
-	void processStarted(SBProcess proc);
+	public void processStarted(SBProcess proc);
 
-	LldbModelTargetThreadContainer getThreads();
+	public LldbModelTargetThreadContainer getThreads();
 
-	SBProcess getProcess();
+	public SBProcess getProcess();
 
 	@Override
-    CompletableFuture<Void> setActive();
+	public CompletableFuture<Void> setActive();
 
 }

@@ -135,7 +135,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 		setText("printf");
 		assertEquals(" ", dialog.getStatusText());
 		pressOk();
-		assertTrue(!dialog.getStatusText().isEmpty());
+		assertTrue(dialog.getStatusText().length() > 0);
 		pressCancel();
 	}
 
@@ -174,7 +174,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 		addLabel(addr(0x0100642a));
 		pressOk();
 		assertTrue(dialog.isVisible());
-		assertTrue(!dialog.getStatusText().isEmpty());
+		assertTrue(dialog.getStatusText().length() > 0);
 
 	}
 
@@ -453,7 +453,7 @@ public class AddEditDialoglTest extends AbstractGhidraHeadedIntegrationTest {
 		setText("fred");
 		pressOk();
 		assertTrue(dialog.isVisible());
-		assertTrue(!dialog.getStatusText().isEmpty());
+		assertTrue(dialog.getStatusText().length() > 0);
 
 	}
 

@@ -67,9 +67,9 @@ import resources.ResourceManager;
  */
 public class ProjectInfoDialog extends DialogComponentProvider {
 
-	private static final Icon CONVERT_ICON = ResourceManager.loadImage("images/wand.png");
-	public static final String CHANGE = "Change Shared Project Info...";
-	static final String CONVERT = "Convert to Shared...";
+	private final static Icon CONVERT_ICON = ResourceManager.loadImage("images/wand.png");
+	public final static String CHANGE = "Change Shared Project Info...";
+	final static String CONVERT = "Convert to Shared...";
 
 	private FrontEndPlugin plugin;
 	private Project project;

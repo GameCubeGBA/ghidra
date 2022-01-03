@@ -48,8 +48,11 @@ public class FilterArraysAction extends ToggleDockingAction {
 
 	@Override
 	public boolean isEnabledForContext(ActionContext context) {
-        return context instanceof DataTypesActionContext;
-    }
+		if (!(context instanceof DataTypesActionContext)) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public void actionPerformed(ActionContext context) {

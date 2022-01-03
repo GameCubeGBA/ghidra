@@ -39,7 +39,7 @@ import ghidra.util.exception.AssertException;
 import ghidra.util.exception.CancelledException;
 import ghidra.util.task.TaskMonitor;
 
-public abstract class AbstractStoredProgramContext extends AbstractProgramContext {
+abstract public class AbstractStoredProgramContext extends AbstractProgramContext {
 
 	protected Map<Register, RegisterValueStore> registerValueMap;
 	protected Map<Register, RegisterValueStore> defaultRegisterValueMap;
@@ -331,7 +331,7 @@ public abstract class AbstractStoredProgramContext extends AbstractProgramContex
 		return getRegisterValue(register, address, registerValueMap);
 	}
 
-	protected abstract RangeMapAdapter createNewRangeMapAdapter(Register baseRegister);
+	abstract protected RangeMapAdapter createNewRangeMapAdapter(Register baseRegister);
 
 	protected void invalidateReadCache() {
 		registersWithValues = null;

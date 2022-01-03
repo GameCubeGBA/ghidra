@@ -147,7 +147,7 @@ public class BasicLanguageDescription implements LanguageDescription {
 		CompilerSpecDescription compilerSpecDescription =
 			compatibleCompilerSpecs.get(compilerSpecID);
 		if (compilerSpecDescription == null) {
-			throw new CompilerSpecNotFoundException(languageId, compilerSpecID);
+			throw new CompilerSpecNotFoundException(getLanguageID(), compilerSpecID);
 		}
 		return compilerSpecDescription;
 	}

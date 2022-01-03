@@ -25,8 +25,8 @@ package ghidra.app.plugin.core.compositeeditor;
 @FunctionalInterface
 public interface CompositeEditorLockListener {
     // Definitions of the types of state changes that can occur.
-    int EDITOR_LOCKED = 1;
-    int EDITOR_UNLOCKED = 2;
+    public static final int EDITOR_LOCKED = 1;
+    public static final int EDITOR_UNLOCKED = 2;
 
     /**
      * Called whenever the composite data type editor lock/unlock state changes.
@@ -34,5 +34,5 @@ public interface CompositeEditorLockListener {
      *
      * @param type the type of state change: EDITOR_LOCKED, EDITOR_UNLOCKED.
      */
-    void lockStateChanged(int type);
+    public void lockStateChanged(int type);
 }

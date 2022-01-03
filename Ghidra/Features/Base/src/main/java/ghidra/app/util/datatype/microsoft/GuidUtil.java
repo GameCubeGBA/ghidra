@@ -60,7 +60,7 @@ public class GuidUtil {
 		GuidType.GUID, GuidType.SYNTAX };
 	private static Hashtable<GuidType, Hashtable<String, GuidInfo>> idTables;
 
-	private static final void initialize() {
+	private final static void initialize() {
 		if (initialized) {
 			return;
 		}
@@ -101,8 +101,11 @@ public class GuidUtil {
 		versionedGuidString = versionedGuidString.toUpperCase();
 		Hashtable<String, GuidInfo> table = idTables.get(GuidType.SYNTAX);
 		GuidInfo guidInfo = table.get(versionedGuidString);
-        return guidInfo;
-    }
+		if (guidInfo != null) {
+			return guidInfo;
+		}
+		return null;
+	}
 
 	private static void buildGuidMap() {
 		for (GuidType guidType : guidTypes) {
@@ -222,25 +225,25 @@ public class GuidUtil {
 			return null; // TODO is this ok?
 		}
 
-		StringBuilder guidString;
-		guidString = new StringBuilder(Conv.toHexString((int) data[0]) + delim);
-		guidString.append(Conv.toHexString((short) (data[1]))).append(delim);
-		guidString.append(Conv.toHexString((short) (data[1] >> 16))).append(delim);
+		String guidString;
+		guidString = Conv.toHexString((int) data[0]) + delim;
+		guidString += Conv.toHexString((short) (data[1])) + delim;
+		guidString += Conv.toHexString((short) (data[1] >> 16)) + delim;
 		for (int i = 0; i < 4; i++) {
-			guidString.append(Conv.toHexString((byte) (data[2] >> i * 8)));
+			guidString += Conv.toHexString((byte) (data[2] >> i * 8));
 			if (i == 1) {
-				guidString.append(delim);
+				guidString += delim;
 			}
 		}
 		for (int i = 0; i < 4; i++) {
-			guidString.append(Conv.toHexString((byte) (data[3] >> i * 8)));
+			guidString += Conv.toHexString((byte) (data[3] >> i * 8));
 		}
 		// retVal = retVal.toUpperCase();
 		if (validate && !NewGuid.isOKForGUID(bytes, 0)) {
 			return null;
 		}
 
-		return guidString.toString();
+		return guidString;
 	}
 
 	public static String getVersionedGuidString(Program program, Address address, boolean validate) {
@@ -264,32 +267,32 @@ public class GuidUtil {
 			return null; // TODO is this ok?
 		}
 
-		StringBuilder guidString;
-		guidString = new StringBuilder(Conv.toHexString((int) data[0]) + delim);
-		guidString.append(Conv.toHexString((short) (data[1]))).append(delim);
-		guidString.append(Conv.toHexString((short) (data[1] >> 16))).append(delim);
+		String guidString;
+		guidString = Conv.toHexString((int) data[0]) + delim;
+		guidString += Conv.toHexString((short) (data[1])) + delim;
+		guidString += Conv.toHexString((short) (data[1] >> 16)) + delim;
 		for (int i = 0; i < 4; i++) {
-			guidString.append(Conv.toHexString((byte) (data[2] >> i * 8)));
+			guidString += Conv.toHexString((byte) (data[2] >> i * 8));
 			if (i == 1) {
-				guidString.append(delim);
+				guidString += delim;
 			}
 		}
 		for (int i = 0; i < 4; i++) {
-			guidString.append(Conv.toHexString((byte) (data[3] >> i * 8)));
+			guidString += Conv.toHexString((byte) (data[3] >> i * 8));
 		}
 		// retVal = retVal.toUpperCase();
 
-		guidString.append(" v");
+		guidString += " v";
 		versionData[0] = (bytes[17] << 8) + bytes[16];
-		guidString.append(Integer.toString(versionData[0])).append(".");
+		guidString += Integer.toString(versionData[0]) + ".";
 		versionData[1] = (bytes[19] << 8) + bytes[18];
-		guidString.append(Integer.toString(versionData[1]));
+		guidString += Integer.toString(versionData[1]);
 
 		if (validate && !NewGuid.isOKForGUID(bytes, 0)) {
 			return null;
 		}
 
-		return guidString.toString();
+		return guidString;
 	}
 
 	private static final String MS_GUID_PREFIX = "_GUID_";

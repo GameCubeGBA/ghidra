@@ -109,7 +109,7 @@ public class PercentAnalyzedValidator extends PostAnalysisValidator {
 		monitor.setProgress(numPossibleDefined);
 
 		int totalDefined = instCount + dataCount;
-		float coverage = (float) totalDefined / numPossibleDefined;
+		float coverage = (float) totalDefined / (float) numPossibleDefined;
 		//println("Executable Memory Length = " + numPossibleDefined);
 		//println("MyExecSetLen = " + myExecSetLen);
 		//println("Defined Instruction Bytes = " + instCount);
@@ -132,6 +132,6 @@ public class PercentAnalyzedValidator extends PostAnalysisValidator {
 
 	@Override
 	public String toString() {
-		return NAME;
+		return getName();
 	}
 }

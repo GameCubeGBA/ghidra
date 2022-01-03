@@ -30,7 +30,7 @@ import ghidra.util.Msg;
 import utilities.util.FileUtilities;
 
 public class ModuleManifestFile {
-	public static final String MODULE_MANIFEST_FILE_NAME = "Module.manifest";
+	public final static String MODULE_MANIFEST_FILE_NAME = "Module.manifest";
 
 	private static final String NAME_IDENTIFIER = "MODULE NAME:";
 	private static final String DEPENDENCY_IDENTIFIER = "MODULE DEPENDENCY:";
@@ -91,7 +91,7 @@ public class ModuleManifestFile {
 	private void processLine(ResourceFile file, String configLine, int lineNumber)
 			throws IOException {
 		String trimmedLine = configLine.trim();
-		if (trimmedLine.isEmpty()) {
+		if (trimmedLine.length() == 0) {
 			return; // ignore empty lines.
 		}
 

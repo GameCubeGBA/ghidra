@@ -34,8 +34,8 @@ import java.io.IOException;
  * </pre>
  */
 public class ResourceDataEntry implements StructConverter {
-	public static final String NAME = "IMAGE_RESOURCE_DATA_ENTRY";
-	public static final int SIZEOF = 16;
+	public final static String NAME = "IMAGE_RESOURCE_DATA_ENTRY";
+	public final static int SIZEOF = 16;
 
     private int offsetToData;
     private int size;

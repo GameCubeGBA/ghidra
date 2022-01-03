@@ -30,6 +30,6 @@ import ghidra.dbg.target.TargetInterruptible;
 public interface JdiModelTargetInterruptible extends JdiModelTargetObject, TargetInterruptible {
 
 	@Override
-    CompletableFuture<Void> interrupt();
+	public CompletableFuture<Void> interrupt();
 
 }

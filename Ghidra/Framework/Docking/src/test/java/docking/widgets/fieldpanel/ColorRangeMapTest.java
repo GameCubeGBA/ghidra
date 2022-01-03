@@ -26,7 +26,8 @@ import generic.test.AbstractGenericTest;
 
 public class ColorRangeMapTest extends AbstractGenericTest {
 	public ColorRangeMapTest() {
-    }
+		super();
+	}
 
 	@Test
 	public void testPaint1() {

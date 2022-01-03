@@ -32,7 +32,8 @@ public class SortedRangeListTest extends AbstractGenericTest {
 	 * 
 	 */
 	public SortedRangeListTest() {
-    }
+		super();
+	}
 	
 	
     @Before

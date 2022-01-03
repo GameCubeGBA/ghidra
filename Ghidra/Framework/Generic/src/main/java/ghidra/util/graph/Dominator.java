@@ -197,12 +197,14 @@ public class Dominator extends DirectedGraph //implements Weighted
 	 */
 	public Vertex goToNextWhiteChild(Vertex v) {
 		if (this.hasWhiteChild(v)) {
-            for (Vertex nextChild : this.getChildren(v)) {
-                if (this.getColor(nextChild) == white) {
-                    this.setCallingParent(nextChild, v);
-                    return nextChild;
-                }
-            }
+			Iterator<Vertex> it = this.getChildren(v).iterator();
+			while (it.hasNext()) {
+				Vertex nextChild = it.next();
+				if (this.getColor(nextChild) == white) {
+					this.setCallingParent(nextChild, v);
+					return nextChild;
+				}
+			}
 		}
 		return null;
 	}
@@ -316,11 +318,13 @@ public class Dominator extends DirectedGraph //implements Weighted
 	// checks to see if there are any children of v not yet visited
 	private boolean hasWhiteChild(Vertex v) {
 		boolean flag = false;
-        for (Vertex nextChild : this.getChildren(v)) {
-            if (this.getColor(nextChild) == white) {
-                flag = true;
-            }
-        }
+		Iterator<Vertex> it = this.getChildren(v).iterator();
+		while (it.hasNext()) {
+			Vertex nextChild = it.next();
+			if (this.getColor(nextChild) == white) {
+				flag = true;
+			}
+		}
 		return flag;
 	}
 
@@ -331,11 +335,13 @@ public class Dominator extends DirectedGraph //implements Weighted
 	 *  contain a child of v which has other parents.
 	 */
 	public void whitenChildren(Vertex v) {
-        for (Vertex next : this.getChildren(v)) {
-            if (this.getCallingParent(next).equals(v)) {
-                this.setColor(next, white);
-            }
-        }
+		Iterator<Vertex> it = this.getChildren(v).iterator();
+		while (it.hasNext()) {
+			Vertex next = it.next();
+			if (this.getCallingParent(next).equals(v)) {
+				this.setColor(next, white);
+			}
+		}
 	}
 
 	// sets the color of a vertex

@@ -43,8 +43,8 @@ public class AddressTable {
 	public static final int MINIMUM_SAFE_ADDRESS = 1024;       // default minimum address that should be considered an address
 
 	private static final String TABLE_IN_PROGRESS_PROPERTY_NAME = "TableInProgress";
-	private static final String NAME_PREFIX = "AddrTable";
-	private static final String INDEX_PREFIX = "IndexToAddrTable";
+	private final static String NAME_PREFIX = "AddrTable";
+	private final static String INDEX_PREFIX = "IndexToAddrTable";
 
 	private Address topAddress;
 	private Address[] tableElements;
@@ -254,7 +254,7 @@ public class AddressTable {
 		Listing listing = program.getListing();
 		int totalLen = (len * addrSize + skipAmount);
 		if (createIndex) {
-			totalLen += indexLen;
+			totalLen += getIndexLength();
 		}
 		if (!listing.isUndefined(currentAddress, currentAddress.addWrap(totalLen - 1))) {
 			for (int k = 0; k < totalLen; k++) {
@@ -309,7 +309,7 @@ public class AddressTable {
 		Listing listing = program.getListing();
 
 		int tableSize = getNumberAddressEntries();
-		Address tableAddr = topAddress;
+		Address tableAddr = getTopAddress();
 
 		ArrayList<AddLabelCmd> switchLabelList = new ArrayList<>();
 		AddLabelCmd tableNameLabel = null;
@@ -319,7 +319,7 @@ public class AddressTable {
 
 		String comment = null;
 		String caseName = "case_0x";
-		if (negativeTable) {
+		if (isNegativeTable()) {
 			tableName = "neg_" + tableName;
 			caseName = "case_n0x";
 			comment = "This table is a negative switch table,\r\nit indexes from the bottom";
@@ -468,7 +468,7 @@ public class AddressTable {
 		}
 
 		// create the index array if this table has one
-		if (indexLen > 0) {
+		if (getIndexLength() > 0) {
 			createTableIndex(program);
 		}
 
@@ -536,7 +536,7 @@ public class AddressTable {
 	public void labelTable(Program program, Instruction start_inst,
 			ArrayList<AddLabelCmd> switchLabelList, AddLabelCmd tableNameLabel) {
 		// check if the table is already labeled
-		Symbol[] syms = program.getSymbolTable().getSymbols(topAddress);
+		Symbol[] syms = program.getSymbolTable().getSymbols(getTopAddress());
 		for (Symbol sym : syms) {
 			if (sym.getName(false).startsWith(tableNameLabel.getLabelName())) {
 				return;
@@ -597,9 +597,9 @@ public class AddressTable {
 		}
 
 		// label the index array if this table has one
-		if (indexLen > 0) {
+		if (getIndexLength() > 0) {
 			AddLabelCmd lcmd =
-				new AddLabelCmd(topIndexAddress, "switchIndex", true, SourceType.ANALYSIS);
+				new AddLabelCmd(getTopIndexAddress(), "switchIndex", true, SourceType.ANALYSIS);
 			switchLabelList.add(lcmd);
 		}
 
@@ -687,11 +687,11 @@ public class AddressTable {
 		Listing listing = program.getListing();
 
 		// make the index array of bytes if there is one
-		if (topIndexAddress != null) {
+		if (getTopIndexAddress() != null) {
 			ByteDataType bdt = new ByteDataType();
-			ArrayDataType arraydt = new ArrayDataType(bdt, indexLen, bdt.getLength());
+			ArrayDataType arraydt = new ArrayDataType(bdt, getIndexLength(), bdt.getLength());
 			try {
-				listing.createData(topIndexAddress, arraydt, indexLen);
+				listing.createData(getTopIndexAddress(), arraydt, getIndexLength());
 			}
 			catch (CodeUnitInsertionException e) {
 			}
@@ -722,8 +722,11 @@ public class AddressTable {
 				disassembleList.add(testAddr);
 			}
 		}
-        return disassembleList.size() == tableElements.length - offset;
-    }
+		if (disassembleList.size() == tableElements.length - offset) {
+			return true;
+		}
+		return false;
+	}
 
 	public ArrayList<Address> getFunctionEntries(Program program, int offset) {
 		PseudoDisassembler pdis = new PseudoDisassembler(program);
@@ -895,12 +898,12 @@ public class AddressTable {
 //				}
 //			}
 			// Label table index if there is one
-			if (topIndexAddress != null) {
+			if (getTopIndexAddress() != null) {
 				Symbol indexSym;
 
-				indexSym = symbolTable.getPrimarySymbol(topIndexAddress);
+				indexSym = symbolTable.getPrimarySymbol(getTopIndexAddress());
 				if (indexSym == null || indexSym.isDynamic()) {
-					symbolTable.createLabel(topIndexAddress, getIndexName(offset),
+					symbolTable.createLabel(getTopIndexAddress(), getIndexName(offset),
 						SourceType.ANALYSIS);
 				}
 				else {
@@ -1271,9 +1274,12 @@ public class AddressTable {
 			int numIndexBytes = 0;
 			int numZeroBytes = 0;
 
-			boolean isIndex = maxIndexSize != 0;
+			boolean isIndex = true;
+			if (maxIndexSize == 0) {
+				isIndex = false;
+			}
 
-            while ((isIndex) && (numIndexBytes < maxIndexSize)) {
+			while ((isIndex) && (numIndexBytes < maxIndexSize)) {
 				byte b;
 				try {
 					b = memory.getByte(currentAddr);
@@ -1356,8 +1362,11 @@ public class AddressTable {
 			return false;
 		}
 		// allow 1 byte offcut
-        return !processorUsesLowBitForCode || !target.isSuccessor(testAddr);
-    }
+		if (processorUsesLowBitForCode && target.isSuccessor(testAddr)) {
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 *
@@ -1408,7 +1417,9 @@ public class AddressTable {
 		RelocationTable relocationTable = program.getRelocationTable();
 		if (relocationTable.isRelocatable()) {
 			// if it is relocatable, then there should be no pointers in memory, other than relacatable ones
-            return relocationTable.getSize() <= 0 || relocationTable.getRelocation(target) != null;
+			if (relocationTable.getSize() > 0 && relocationTable.getRelocation(target) == null) {
+				return false;
+			}
 		}
 		return true;
 	}

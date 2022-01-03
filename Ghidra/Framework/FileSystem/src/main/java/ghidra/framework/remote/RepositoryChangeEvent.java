@@ -22,7 +22,7 @@ import java.io.Serializable;
  */
 public class RepositoryChangeEvent implements Serializable {
 
-	public static final long serialVersionUID = 1L;
+	public final static long serialVersionUID = 1L;
 
 	public static final int REP_NULL_EVENT = -1;
 

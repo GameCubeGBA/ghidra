@@ -322,8 +322,11 @@ class StringDiffUtils {
 			if (start != other.start) {
 				return false;
 			}
-            return Objects.equals(text, other.text);
-        }
+			if (!Objects.equals(text, other.text)) {
+				return false;
+			}
+			return true;
+		}
 	}
 
 	private static class LineLcs extends ReducingListBasedLcs<Line> {

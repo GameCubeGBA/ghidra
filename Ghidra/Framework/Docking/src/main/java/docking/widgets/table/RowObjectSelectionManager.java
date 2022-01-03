@@ -215,7 +215,9 @@ public class RowObjectSelectionManager<T> extends DefaultListSelectionModel
 		// changes
 		if (!isAdjusting) {
 			ignoreSelectionChange = false;
-            return table.getSelectedRow() != -1; // the adjustments are done and there is a valid selection
+			if (table.getSelectedRow() != -1) {
+				return true; // the adjustments are done and there is a valid selection
+			}
 		}
 		return false;
 	}
@@ -351,14 +353,15 @@ public class RowObjectSelectionManager<T> extends DefaultListSelectionModel
 			Map<Object, List<Integer>> objectRowMap) {
 		List<Integer> rowsList = new ArrayList<>();
 		int rowCount = modelAdapter.getRowCount();
-		for (Object object : rowObjects) {
+		for (int i = 0; i < rowObjects.size(); i++) {
+			Object object = rowObjects.get(i);
 			List<Integer> integerList = objectRowMap.get(object);
 			if (integerList == null) {
 				continue;
 			}
 
 			Iterator<Integer> iterator = integerList.iterator();
-			while (iterator.hasNext()) {
+			for (; iterator.hasNext();) {
 				Integer rowIndex = iterator.next();
 				iterator.remove(); // remove this value so that we don't process it later
 				if (rowIndex < rowCount) {

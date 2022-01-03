@@ -52,7 +52,7 @@ public class DataTypeGraphComparator {
 		 * @param dt2 matching element from the second/right/dest DataType graph
 		 * @return false if abort this subtree, true if continue
 		 */
-        boolean observe(DataType dt1, DataType dt2);
+		public boolean observe(DataType dt1, DataType dt2);
 	}
 
 	/**

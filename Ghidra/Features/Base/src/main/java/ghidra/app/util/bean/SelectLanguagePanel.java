@@ -59,8 +59,9 @@ public class SelectLanguagePanel extends JPanel {
 	 * @param service the language service to use to retrieve the languages
 	 */
 	public SelectLanguagePanel(LanguageService service) {
+		super();
 
-        model = new LanguageModel(service);
+		model = new LanguageModel(service);
 
 		table = new GhidraTable(model);
 		table.setAutoLookupColumn(LanguageModel.NAME_COL);
@@ -210,15 +211,15 @@ public class SelectLanguagePanel extends JPanel {
 	}
 
 	private class LanguageModel extends AbstractSortedTableModel<LanguageDescription> {
-		private static final int NAME_COL = 0;
-		private static final int PROCESSOR_COL = 1;
-		private static final int MANUFACTURER_COL = 2;
+		private final static int NAME_COL = 0;
+		private final static int PROCESSOR_COL = 1;
+		private final static int MANUFACTURER_COL = 2;
 
-		private static final int NO_FILTER = 0;
-		private static final int STARTS_WITH_FILTER = 1;
-		private static final int ENDS_WITH_FILTER = 2;
-		private static final int EQUALS_FILTER = 3;
-		private static final int CONTAINS_FILTER = 4;
+		private final static int NO_FILTER = 0;
+		private final static int STARTS_WITH_FILTER = 1;
+		private final static int ENDS_WITH_FILTER = 2;
+		private final static int EQUALS_FILTER = 3;
+		private final static int CONTAINS_FILTER = 4;
 
 		private LanguageService service;
 		private LanguageDescription[] masterList = new LanguageDescription[0];
@@ -409,7 +410,7 @@ public class SelectLanguagePanel extends JPanel {
 			String langDisplayName = id.toString();
 			if (showVersion) {
 				langDisplayName =
-					id + " (" + ld.getVersion() + "." + ld.getMinorVersion() + ")";
+					id.toString() + " (" + ld.getVersion() + "." + ld.getMinorVersion() + ")";
 			}
 			return langDisplayName;
 		}

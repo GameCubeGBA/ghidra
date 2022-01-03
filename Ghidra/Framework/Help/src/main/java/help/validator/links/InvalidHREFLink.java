@@ -108,7 +108,10 @@ public abstract class InvalidHREFLink implements InvalidLink {
 		if (!Objects.equals(href, other.href)) {
 			return false;
 		}
-        return Objects.equals(message, other.message);
-    }
+		if (!Objects.equals(message, other.message)) {
+			return false;
+		}
+		return true;
+	}
 
 }

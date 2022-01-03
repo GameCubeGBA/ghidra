@@ -24,31 +24,31 @@ import java.lang.reflect.Field;
  */
 public final class MachHeaderFileTypes {
 	/** relocatable object file */
-    public static final int MH_OBJECT      = 0x1;
+	public final static int MH_OBJECT      = 0x1;
 	/** demand paged executable file */
-    public static final int MH_EXECUTE     = 0x2;
+	public final static int MH_EXECUTE     = 0x2;
 	/** fixed VM shared library file */
-    public static final int MH_FVMLIB      = 0x3;
+	public final static int MH_FVMLIB      = 0x3;
 	/** core file */
-    public static final int MH_CORE        = 0x4;
+	public final static int MH_CORE        = 0x4;
 	/** preloaded executable file */
-    public static final int MH_PRELOAD     = 0x5;
+	public final static int MH_PRELOAD     = 0x5;
 	/** dynamically bound shared library */
-    public static final int MH_DYLIB       = 0x6;
+	public final static int MH_DYLIB       = 0x6;
 	/** dynamic link editor */
-    public static final int MH_DYLINKER    = 0x7;
+	public final static int MH_DYLINKER    = 0x7;
 	/** dynamically bound bundle file */
-    public static final int MH_BUNDLE      = 0x8;
+	public final static int MH_BUNDLE      = 0x8;
 	/** shared library stub for static linking only, no section contents */
-    public static final int MH_DYLIB_STUB  = 0x9;
+	public final static int MH_DYLIB_STUB  = 0x9;
 	/** linking only, no section contents, companion file with only debug sections */
-    public static final int MH_DSYM        = 0xa;
+	public final static int MH_DSYM        = 0xa;
 	/** x86_64 kexts */
-    public static final int MH_KEXT_BUNDLE = 0xb;
+	public final static int MH_KEXT_BUNDLE = 0xb;
 	/** kernel cache fileset **/
-    public static final int MH_FILESET = 0xc;
+	public final static int MH_FILESET = 0xc;
 
-	public static final String getFileTypeName(int fileType) {
+	public final static String getFileTypeName(int fileType) {
 		Field [] fields = MachHeaderFileTypes.class.getDeclaredFields();
 		for (Field field : fields) {
 			if (field.getName().startsWith("MH_")) {
@@ -66,7 +66,7 @@ public final class MachHeaderFileTypes {
 		return "Unrecognized file type: 0x"+Integer.toHexString(fileType);
 	}
 
-	public static final String getFileTypeDescription(int fileType) {
+	public final static String getFileTypeDescription(int fileType) {
 		switch (fileType) {
 			case MH_OBJECT:       return "Relocatable Object File";
 			case MH_EXECUTE:      return "Demand Paged Executable File";

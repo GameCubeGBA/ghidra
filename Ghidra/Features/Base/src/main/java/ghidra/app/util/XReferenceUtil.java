@@ -39,12 +39,12 @@ import ghidra.util.table.field.ReferenceEndpoint;
  */
 @Deprecated // Use XReferenceUtils instead
 public class XReferenceUtil {
-	private static final Address[] EMPTY_ADDR_ARRAY = new Address[0];
-	private static final Reference[] EMPTY_REF_ARRAY = new Reference[0];
+	private final static Address[] EMPTY_ADDR_ARRAY = new Address[0];
+	private final static Reference[] EMPTY_REF_ARRAY = new Reference[0];
 
 	// Methods in this class treat -1 as a key to return all references and
 	// not cap the result set.
-    public static final int ALL_REFS = -1;
+	public final static int ALL_REFS = -1;
 
 	/**
 	 * Returns an array containing all
@@ -54,7 +54,7 @@ public class XReferenceUtil {
 	 * 
 	 * @return array of all xrefs to the code unit
 	 */
-    public static final Address[] getXRefList(CodeUnit cu) {
+	public final static Address[] getXRefList(CodeUnit cu) {
 		return getXRefList(cu, -1); // get all 
 	}
 
@@ -68,7 +68,7 @@ public class XReferenceUtil {
 	 * 
 	 * @return array first <b>{@code maxNumber}</b> xrefs to the code unit
 	 */
-    public static final Address[] getXRefList(CodeUnit cu, int maxNumber) {
+	public final static Address[] getXRefList(CodeUnit cu, int maxNumber) {
 		Program prog = cu.getProgram();
 		if (prog == null) {
 			return EMPTY_ADDR_ARRAY;
@@ -99,7 +99,7 @@ public class XReferenceUtil {
 	 * 
 	 * @return array first <b>{@code maxNumber}</b> xrefs to the code unit
 	 */
-    public static final Reference[] getXReferences(CodeUnit cu, int maxNumber) {
+	public final static Reference[] getXReferences(CodeUnit cu, int maxNumber) {
 		Program prog = cu.getProgram();
 		if (prog == null) {
 			return EMPTY_REF_ARRAY;
@@ -138,7 +138,7 @@ public class XReferenceUtil {
 	 * 
 	 * @return array of all offcut xrefs to the code unit
 	 */
-    public static final Address[] getOffcutXRefList(CodeUnit cu) {
+	public final static Address[] getOffcutXRefList(CodeUnit cu) {
 		return getOffcutXRefList(cu, -1); // get all
 	}
 
@@ -152,7 +152,7 @@ public class XReferenceUtil {
 	 * 
 	 * @return array of all offcut xrefs to the code unit
 	 */
-    public static final Address[] getOffcutXRefList(CodeUnit cu, int maxXRefs) {
+	public final static Address[] getOffcutXRefList(CodeUnit cu, int maxXRefs) {
 		Program prog = cu.getProgram();
 		if (prog == null) {
 			return EMPTY_ADDR_ARRAY;
@@ -191,7 +191,7 @@ public class XReferenceUtil {
 	 * 
 	 * @return array of all offcut xrefs to the code unit
 	 */
-    public static final Reference[] getOffcutXReferences(CodeUnit cu, int maxXRefs) {
+	public final static Reference[] getOffcutXReferences(CodeUnit cu, int maxXRefs) {
 		Program prog = cu.getProgram();
 		if (prog == null) {
 			return EMPTY_REF_ARRAY;

@@ -27,7 +27,7 @@ import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.task.TaskMonitor;
 
 public class GlobalPointerDataDirectory extends DataDirectory {
-    private static final String NAME = "IMAGE_DIRECTORY_ENTRY_GLOBALPTR";
+    private final static String NAME = "IMAGE_DIRECTORY_ENTRY_GLOBALPTR";
 
 	static GlobalPointerDataDirectory createGlobalPointerDataDirectory(
             NTHeader ntHeader, FactoryBundledWithBinaryReader reader)
@@ -66,7 +66,10 @@ public class GlobalPointerDataDirectory extends DataDirectory {
 	@Override
 	public boolean parse() {
 		int ptr = getPointer();
-        return ptr >= 0;
+		if (ptr < 0) {
+			return false;
+		}
+		return true;
     }
 
     /**

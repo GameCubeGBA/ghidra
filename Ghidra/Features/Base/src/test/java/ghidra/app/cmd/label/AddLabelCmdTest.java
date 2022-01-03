@@ -41,7 +41,8 @@ public class AddLabelCmdTest extends AbstractGenericTest {
 	 * @param name
 	 */
 	public AddLabelCmdTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

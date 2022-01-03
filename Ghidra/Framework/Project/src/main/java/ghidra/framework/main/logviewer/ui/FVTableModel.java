@@ -55,12 +55,12 @@ public class FVTableModel extends AbstractTableModel {
 	//@formatter:off
 	private static final Pattern levelRegex = Pattern.compile(
 			spaceRegex + Level.OFF + spaceRegex + "|" + 
-			spaceRegex + Level.DEBUG + spaceRegex + "|" +
-			spaceRegex + Level.TRACE + spaceRegex + "|" +
-			spaceRegex + Level.WARN + spaceRegex + "|" +
-			spaceRegex + Level.INFO + spaceRegex + "|" +
-			spaceRegex + Level.ERROR + spaceRegex + "|" +
-			spaceRegex + Level.FATAL + spaceRegex);
+			spaceRegex + Level.DEBUG.toString() + spaceRegex + "|" +
+			spaceRegex + Level.TRACE.toString() + spaceRegex + "|" +
+			spaceRegex + Level.WARN.toString() + spaceRegex + "|" + 
+			spaceRegex + Level.INFO.toString() + spaceRegex + "|" +
+			spaceRegex + Level.ERROR.toString() + spaceRegex + "|" + 
+			spaceRegex + Level.FATAL.toString() + spaceRegex);
 	//@formatter:on
 
 	// Holds all data to be displayed in the table. These lists should always contain the

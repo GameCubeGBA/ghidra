@@ -64,7 +64,8 @@ public class EmptyBorderButton extends JButton {
 	 *
 	 */
 	public EmptyBorderButton() {
-        init();
+		super();
+		init();
 	}
 
 	/**
@@ -145,7 +146,7 @@ public class EmptyBorderButton extends JButton {
 	}
 
 	public void raiseBorder() {
-		setBorder(RAISED_BUTTON_BORDER);
+		setBorder(getRaisedBorder());
 	}
 
 	public void clearBorder() {
@@ -163,10 +164,10 @@ public class EmptyBorderButton extends JButton {
 		boolean armed = buttonModel.isArmed();
 
 		if (pressed && (rollover || armed)) {
-			setBorder(LOWERED_BUTTON_BORDER);
+			setBorder(getLoweredBorder());
 		}
 		else if (rollover) {
-			setBorder(RAISED_BUTTON_BORDER);
+			setBorder(getRaisedBorder());
 		}
 		else {
 			setBorder(NO_BUTTON_BORDER);

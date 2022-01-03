@@ -141,7 +141,7 @@ public class StringParameterPropagator extends GhidraScript {
 			// iterate over functions
 			HashMap<Address, FuncInfo> funcParamMap = new HashMap<Address, FuncInfo>();
 			//Iterator<Address> callingFuncIter = callingFuncLocationSet.iterator();
-			while ((!callingFuncLocationSet.isEmpty()) && !monitor.isCancelled()) {
+			while ((callingFuncLocationSet.size() > 0) && !monitor.isCancelled()) {
 				Iterator<Address> callingFuncIter = callingFuncLocationSet.iterator();
 				if (!callingFuncIter.hasNext()) {
 					break;
@@ -206,7 +206,7 @@ public class StringParameterPropagator extends GhidraScript {
 				}
 
 				ArrayList<Integer> paramsSeen = funcInfo.getParamsSeen();
-				while (!paramsSeen.isEmpty()) {
+				while (paramsSeen.size() > 0) {
 					int paramIndex = paramsSeen.remove(0);
 					if (paramIndex > minParams) {
 						println("WARNING: at " + calledFunc.getName() + ", Couldn't apply param " +
@@ -594,7 +594,7 @@ public class StringParameterPropagator extends GhidraScript {
 
 	private long applyDefUseList(long value, ArrayList<PcodeOp> defUseList)
 			throws InvalidInputException {
-		if (!defUseList.isEmpty())
+		if (defUseList.size() > 0)
 			throw new InvalidInputException();
 		return value;
 	}

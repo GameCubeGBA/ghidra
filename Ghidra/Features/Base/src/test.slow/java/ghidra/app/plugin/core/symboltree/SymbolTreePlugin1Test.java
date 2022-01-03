@@ -422,7 +422,7 @@ public class SymbolTreePlugin1Test extends AbstractGhidraHeadedIntegrationTest {
 		util.selectNode(extNode);
 		ActionContext context = util.getSymbolTreeContext();
 		boolean createLibraryIsEnabled = createLibraryAction.isEnabledForContext(context);
-		if ("Imports".equals(extNode.getName())) {
+		if (extNode.getName().equals("Imports")) {
 			assertTrue(createLibraryIsEnabled);
 		}
 		else {

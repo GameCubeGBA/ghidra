@@ -136,8 +136,11 @@ public class DebuggerStackProvider extends ComponentProviderAdapter {
 		if (!Objects.equals(a.getTime(), b.getTime())) {
 			return false;
 		}
-        return Objects.equals(a.getFrame(), b.getFrame());
-    }
+		if (!Objects.equals(a.getFrame(), b.getFrame())) {
+			return false;
+		}
+		return true;
+	}
 
 	class ForStackListener extends TraceDomainObjectListener {
 		public ForStackListener() {

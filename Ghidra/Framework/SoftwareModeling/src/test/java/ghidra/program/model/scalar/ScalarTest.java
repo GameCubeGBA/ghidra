@@ -23,7 +23,8 @@ import generic.test.AbstractGenericTest;
 public class ScalarTest extends AbstractGenericTest {
 
 	public ScalarTest() {
-    }
+		super();
+	}
 
 	@Test
 	public void testScalar64() {

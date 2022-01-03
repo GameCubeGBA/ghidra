@@ -43,7 +43,8 @@ public class CodeUnitMergeManager1Test extends AbstractListingMergeManagerTest {
 	 * @param arg0
 	 */
 	public CodeUnitMergeManager1Test() {
-    }
+		super();
+	}
 
 @Test
     public void testAddLatestInstr() throws Exception {

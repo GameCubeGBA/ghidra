@@ -27,7 +27,8 @@ import ghidra.util.exception.NoValueException;
 */
 public class AddableLongDoubleHashtable extends LongDoubleHashtable {
 	public AddableLongDoubleHashtable() {
-    }
+		super();
+	}
 
 	/** Constructor creates a table with an initial given capacity.  The capacity
 	 * will be adjusted to the next highest prime in the PRIMES table.

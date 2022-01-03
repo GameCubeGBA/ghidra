@@ -72,11 +72,6 @@ public class PseudoData extends PseudoCodeUnit implements Data {
 		}
 	}
 
-	public PseudoData(Address address, DataType dataType, MemBuffer memBuffer)
-			throws AddressOverflowException {
-		this(null, address, dataType, memBuffer);
-	}
-
 	protected static DataType getBaseDataType(DataType dataType) {
 		DataType baseDataType = dataType;
 		if (baseDataType instanceof TypeDef) {
@@ -298,12 +293,6 @@ public class PseudoData extends PseudoCodeUnit implements Data {
 		return (component == null ? null : component.getComponent(componentPath));
 	}
 
-	@Deprecated
-	@Override
-	public Data getComponentAt(int offset) {
-		return getComponentContaining(offset);
-	}
-
 	@Override
 	public Data getComponentContaining(int offset) {
 		if (offset < 0 || offset > length) {
@@ -480,7 +469,7 @@ public class PseudoData extends PseudoCodeUnit implements Data {
 		if (offset < 0 || offset >= length) {
 			return null;
 		}
-		Data dc = getComponentAt(offset);
+		Data dc = getComponentContaining(offset);
 		if (dc == null || dc == this) {
 			return this;
 		}
@@ -504,7 +493,7 @@ public class PseudoData extends PseudoCodeUnit implements Data {
 
 	@Override
 	public Class<?> getValueClass() {
-		DataType dt = baseDataType;
+		DataType dt = getBaseDataType();
 		if (dt != null) {
 			return dt.getValueClass(this);
 		}

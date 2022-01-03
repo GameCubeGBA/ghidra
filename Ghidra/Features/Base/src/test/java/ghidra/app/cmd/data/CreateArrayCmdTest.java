@@ -42,7 +42,8 @@ public class CreateArrayCmdTest extends AbstractGenericTest {
 	 * @param arg0
 	 */
 	public CreateArrayCmdTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

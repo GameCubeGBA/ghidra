@@ -288,8 +288,11 @@ public abstract class AbstractGraphAlgorithmsTest extends AbstractGenericTest {
 			}
 
 			TestV other = (TestV) obj;
-            return Objects.equals(id, other.id);
-        }
+			if (!Objects.equals(id, other.id)) {
+				return false;
+			}
+			return true;
+		}
 	}
 
 	protected static class TestE extends DefaultGEdge<TestV> {

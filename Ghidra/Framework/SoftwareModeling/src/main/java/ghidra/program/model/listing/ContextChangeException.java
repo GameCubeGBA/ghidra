@@ -27,7 +27,8 @@ public class ContextChangeException extends UsrException {
 	 * <p>Constructs an ContextChangeException with no detail message.<p>
 	 */
 	public ContextChangeException() {
-    }
+		super();
+	}
 
 	/**
 	 * <p>Constructs an ContextChangeException with the specified

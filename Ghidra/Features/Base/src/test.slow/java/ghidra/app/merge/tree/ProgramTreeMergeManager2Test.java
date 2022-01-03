@@ -473,7 +473,7 @@ public class ProgramTreeMergeManager2Test extends AbstractProgramTreeMergeManage
 		assertNotNull(root);
 		Group[] kids = root.getChildren();
 		for (Group kid : kids) {
-			if ("submodule".equals(kid.getName())) {
+			if (kid.getName().equals("submodule")) {
 				Assert.fail("tree should not have a module, submodule");
 				break;
 			}

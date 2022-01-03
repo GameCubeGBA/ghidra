@@ -26,101 +26,101 @@ public final class OperandType {
 	/**
 	 * Bit set if operand refers to an address being read
 	 */
-    public static final int READ = 0x00000001;
+	public final static int READ = 0x00000001;
 	/**
 	 * Bit set if operand refers to an address being written to
 	 */
-    public static final int WRITE = 0x00000002;
+	public final static int WRITE = 0x00000002;
 
 	/**
 	 * Bit set if operand is an indirect reference.
 	 */
-    public static final int INDIRECT = 0x00000004;
+	public final static int INDIRECT = 0x00000004;
 	/**
 	 * Bit set if operand is an immediate value.
 	 */
-    public static final int IMMEDIATE = 0x00000008;
+	public final static int IMMEDIATE = 0x00000008;
 	/**
 	 * Bit set if operand depends on the instruction's address.
 	 */
-    public static final int RELATIVE = 0x00000010;
+	public final static int RELATIVE = 0x00000010;
 	/**
 	 * Bit set if operand is implicit.
 	 */
-    public static final int IMPLICIT = 0x00000020;
+	public final static int IMPLICIT = 0x00000020;
 
 	/**
 	 * Bit set it the address referred to contains code.
 	 */
-    public static final int CODE = 0x00000040;
+	public final static int CODE = 0x00000040;
 	/**
 	 * Bit set if the address referred to contains data.
 	 */
-    public static final int DATA = 0x00000080;
+	public final static int DATA = 0x00000080;
 
 	/**
 	 * Bit set if the operand is a register.
 	 */
-    public static final int PORT = 0x00000100;
+	public final static int PORT = 0x00000100;
 	/**
 	 * Bit set if the operand is a register.
 	 */
-    public static final int REGISTER = 0x00000200;
+	public final static int REGISTER = 0x00000200;
 	/**
 	 * Bit set if the operand is a register.
 	 */
-    public static final int LIST = 0x00000400;
+	public final static int LIST = 0x00000400;
 	/**
 	 * Bit set if the operand is a flag.
 	 */
-    public static final int FLAG = 0x00000800;
+	public final static int FLAG = 0x00000800;
 	/**
 	 * Bit set if the operand is text.
 	 */
-    public static final int TEXT = 0x00001000;
+	public final static int TEXT = 0x00001000;
 
 	/**
 	 * Bit set if the operand is used as an address.
 	 *  If this is not set, assume it is a scalar value.
 	 */
-    public static final int ADDRESS = 0x00002000;
+	public final static int ADDRESS = 0x00002000;
 	/**
 	 * Bit set if the operand is a scalar value
 	 */
-    public static final int SCALAR = 0x00004000;
+	public final static int SCALAR = 0x00004000;
 	/**
 	 * Bit set if the operand is a bit value
 	 */
-    public static final int BIT = 0x00008000;
+	public final static int BIT = 0x00008000;
 	/**
 	 * Bit set if the operand is a byte value
 	 */
-    public static final int BYTE = 0x00010000;
+	public final static int BYTE = 0x00010000;
 	/**
 	 * Bit set if the operand is a 2 byte value
 	 */
-    public static final int WORD = 0x00020000;
+	public final static int WORD = 0x00020000;
 	/**
 	 * Bit set if the operand is a 8 byte value
 	 */
-    public static final int QUADWORD = 0x00040000;
+	public final static int QUADWORD = 0x00040000;
 	/**
 	 * Bit set if the operand is a signed value
 	 */
-    public static final int SIGNED = 0x00080000;
+	public final static int SIGNED = 0x00080000;
 	/**
 	 * Bit set if the operand is a float value
 	 */
-    public static final int FLOAT = 0x00100000;
+	public final static int FLOAT = 0x00100000;
 	/**
 	 * Bit set if the operand is a co-processor value
 	 */
-    public static final int COP = 0x00200000;
+	public final static int COP = 0x00200000;
 	/**
 	 * Bit set if the operand is dynamically defined given some processorContext.
 	 * If bit is set then the SCALAR or ADDRESS bit must be set.
 	 */
-    public static final int DYNAMIC = 0x00400000;
+	public final static int DYNAMIC = 0x00400000;
 
 	/**
 	 * check the READ flag.

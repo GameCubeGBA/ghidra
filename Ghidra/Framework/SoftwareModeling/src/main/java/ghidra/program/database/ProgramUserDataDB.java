@@ -94,9 +94,9 @@ class ProgramUserDataDB extends DomainObjectAdapterDB implements ProgramUserData
 	private static final int UPGRADE_REQUIRED_BEFORE_VERSION = 1;
 
 	private static final String TABLE_NAME = "ProgramUserData";
-	private static final Field[] COL_FIELDS = { StringField.INSTANCE };
-	private static final String[] COL_NAMES = { "Value" };
-	private static final Schema SCHEMA =
+	private final static Field[] COL_FIELDS = { StringField.INSTANCE };
+	private final static String[] COL_NAMES = { "Value" };
+	private final static Schema SCHEMA =
 		new Schema(0, StringField.INSTANCE, "Key", COL_FIELDS, COL_NAMES);
 	private static final int VALUE_COL = 0;
 
@@ -105,11 +105,11 @@ class ProgramUserDataDB extends DomainObjectAdapterDB implements ProgramUserData
 	private static final String LANGUAGE_ID = "Language ID";
 
 	private static final String REGISTRY_TABLE_NAME = "PropertyRegistry";
-	private static final Field[] REGISTRY_COL_FIELDS = { StringField.INSTANCE,
+	private final static Field[] REGISTRY_COL_FIELDS = { StringField.INSTANCE,
 		StringField.INSTANCE, IntField.INSTANCE, StringField.INSTANCE };
-	private static final String[] REGISTRY_COL_NAMES =
+	private final static String[] REGISTRY_COL_NAMES =
 		{ "Owner", "PropertyName", "PropertyType", "SaveableClass" };
-	private static final Schema REGISTRY_SCHEMA =
+	private final static Schema REGISTRY_SCHEMA =
 		new Schema(0, "ID", REGISTRY_COL_FIELDS, REGISTRY_COL_NAMES);
 	private static final int PROPERTY_OWNER_COL = 0;
 	private static final int PROPERTY_NAME_COL = 1;

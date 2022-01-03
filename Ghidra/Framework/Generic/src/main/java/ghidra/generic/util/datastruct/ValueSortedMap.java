@@ -42,7 +42,7 @@ import java.util.Spliterators;
  * @param <V> the type of the values
  */
 public interface ValueSortedMap<K, V> extends Map<K, V> {
-	interface ValueSortedMapEntryList<K, V>
+	public interface ValueSortedMapEntryList<K, V>
 			extends Set<Entry<K, V>>, List<Entry<K, V>>, Deque<Entry<K, V>> {
 		@Override
 		default Spliterator<Entry<K, V>> spliterator() {
@@ -50,7 +50,7 @@ public interface ValueSortedMap<K, V> extends Map<K, V> {
 		}
 	}
 
-	interface ValueSortedMapKeyList<K> extends Set<K>, List<K>, Deque<K> {
+	public interface ValueSortedMapKeyList<K> extends Set<K>, List<K>, Deque<K> {
 		@Override
 		default Spliterator<K> spliterator() {
 			return Spliterators.spliterator(this, Spliterator.ORDERED | Spliterator.DISTINCT);

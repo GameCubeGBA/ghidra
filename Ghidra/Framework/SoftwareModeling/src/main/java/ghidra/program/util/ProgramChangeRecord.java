@@ -26,7 +26,7 @@ import ghidra.program.model.address.Address;
  *</p>
  */
 public class ProgramChangeRecord extends DomainObjectChangeRecord {
-	private static final long serialVersionUID = 1;
+	private final static long serialVersionUID = 1;
 
 	private Address start;
 	private Address end;

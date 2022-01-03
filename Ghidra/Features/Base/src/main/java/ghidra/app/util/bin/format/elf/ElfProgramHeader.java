@@ -204,7 +204,7 @@ public class ElfProgramHeader
 		ElfProgramHeaderType programHeaderType = header.getProgramHeaderType(p_type);
 		if (programHeaderType != null) {
 			String description = programHeaderType.description;
-			if (description != null && !description.isEmpty()) {
+			if (description != null && description.length() != 0) {
 				return programHeaderType.description;
 			}
 		}
@@ -339,7 +339,7 @@ public class ElfProgramHeader
 		if (p_type != ElfProgramHeaderConstants.PT_LOAD || p_filesz == 0 || p_memsz == 0) {
 			throw new UnsupportedOperationException("virtualAddress not loaded by this segment");
 		}
-		if (p_memsz != getAdjustedMemorySize()) {
+		if (getMemorySize() != getAdjustedMemorySize()) {
 			// TODO: unsure if we will encounter this situation 
 			throw new UnsupportedOperationException("unsupported use of filtered load segment");
 		}

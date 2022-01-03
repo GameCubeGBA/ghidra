@@ -182,7 +182,7 @@ public class CycleGroup {
 	 */
 	public DataType getNextDataType(DataType currentDataType, boolean stackPointers) {
 
-		if (dataList.isEmpty()) {
+		if (dataList.size() == 0) {
 			return null;
 		}
 

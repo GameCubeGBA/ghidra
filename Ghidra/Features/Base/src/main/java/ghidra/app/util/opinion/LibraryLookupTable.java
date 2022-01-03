@@ -76,8 +76,8 @@ public class LibraryLookupTable {
 		return null;
 	}
 
-	static synchronized void getFiles(String dllname, int size, Set<String> unresolvedLibs,
-                                      Set<String> resolvedLibs) {
+	synchronized static void getFiles(String dllname, int size, Set<String> unresolvedLibs,
+			Set<String> resolvedLibs) {
 		if (unresolvedLibs.contains(dllname) || resolvedLibs.contains(dllname)) {
 			return;
 		}
@@ -108,20 +108,20 @@ public class LibraryLookupTable {
 		}
 	}
 
-	static synchronized void cleanup() {
+	synchronized static void cleanup() {
 		for (ResourceFile file : filesToDeleteList) {
 			file.delete();
 		}
 		filesToDeleteList.clear();
 	}
 
-	public static synchronized ResourceFile createFile(Program program, boolean overwrite,
-                                                       TaskMonitor monitor) throws IOException, CancelledException {
+	public synchronized static ResourceFile createFile(Program program, boolean overwrite,
+			TaskMonitor monitor) throws IOException, CancelledException {
 		return createFile(program, overwrite, false, monitor);
 	}
 
-	public static synchronized ResourceFile createFile(Program program, boolean overwrite,
-                                                       boolean inSystem, TaskMonitor monitor) throws IOException, CancelledException {
+	public synchronized static ResourceFile createFile(Program program, boolean overwrite,
+			boolean inSystem, TaskMonitor monitor) throws IOException, CancelledException {
 		ResourceFile file = null;
 		int size = program.getLanguage().getLanguageDescription().getSize();
 
@@ -193,7 +193,7 @@ public class LibraryLookupTable {
 	 * @param size The architecture size of the DLL (e.g., 32 or 64).
 	 * @return LibrarySymbolTable associated with dllName
 	 */
-    static synchronized LibrarySymbolTable getSymbolTable(String dllName, int size) {
+	synchronized static LibrarySymbolTable getSymbolTable(String dllName, int size) {
 		String cacheKey = LibrarySymbolTable.getCacheKey(dllName, size);
 		LibrarySymbolTable symTab = cacheMap.get(cacheKey);
 		if (symTab != null) {
@@ -225,15 +225,15 @@ public class LibraryLookupTable {
 		return null;
 	}
 
-	static synchronized boolean libraryLookupTableFileExists(String dllname, int size) {
+	synchronized static boolean libraryLookupTableFileExists(String dllname, int size) {
 		return getExistingExportsFile(dllname, size) != null;
 	}
 
-	static synchronized ResourceFile getExistingExportsFile(String dllName, int size) {
+	synchronized static ResourceFile getExistingExportsFile(String dllName, int size) {
 		return getExistingExtensionedFile(dllName, EXPORTS_FILE_EXTENSION, size);
 	}
 
-	static synchronized ResourceFile getNewExportsFile(String dllName, int size) {
+	synchronized static ResourceFile getNewExportsFile(String dllName, int size) {
 		return getNewExtensionedFile(dllName, EXPORTS_FILE_EXTENSION, size);
 	}
 
@@ -241,11 +241,11 @@ public class LibraryLookupTable {
 		return getNewSystemExtensionedFile(name, EXPORTS_FILE_EXTENSION, size);
 	}
 
-	static synchronized ResourceFile getExistingOrdinalFile(String dllName, int size) {
+	synchronized static ResourceFile getExistingOrdinalFile(String dllName, int size) {
 		return getExistingExtensionedFile(dllName, ORDINAL_MAPPING_FILE_EXTENSION, size);
 	}
 
-	static synchronized boolean hasFileAndPathAndTimeStampMatch(File libraryFile, int size) {
+	synchronized static boolean hasFileAndPathAndTimeStampMatch(File libraryFile, int size) {
 		try {
 			return LibrarySymbolTable.hasFileAndPathAndTimeStampMatch(
 				getExistingExportsFile(libraryFile.getName(), size), libraryFile);
@@ -265,19 +265,19 @@ public class LibraryLookupTable {
 		return filename;
 	}
 
-	static synchronized ResourceFile getExtensionedFile(ResourceFile baseDir, String dllName,
-                                                        String extension) {
+	synchronized static ResourceFile getExtensionedFile(ResourceFile baseDir, String dllName,
+			String extension) {
 		return new ResourceFile(baseDir, dllName + extension);
 	}
 
-	static synchronized ResourceFile getStrippedExtensionedFile(ResourceFile baseDir,
-                                                                String dllName, String extension) {
+	synchronized static ResourceFile getStrippedExtensionedFile(ResourceFile baseDir,
+			String dllName, String extension) {
 		String stripName = stripPossibleExtensionFromFilename(dllName).toLowerCase();
 		return new ResourceFile(baseDir, stripName + extension);
 	}
 
-	static synchronized ResourceFile getExistingExtensionedFile(String dllName, String extension,
-                                                                int size) {
+	synchronized static ResourceFile getExistingExtensionedFile(String dllName, String extension,
+			int size) {
 
 		String strippedExtensionFilename =
 			stripPossibleExtensionFromFilename(dllName).toLowerCase() + extension;
@@ -307,13 +307,13 @@ public class LibraryLookupTable {
 		return null;
 	}
 
-	static synchronized ResourceFile getNewExtensionedFile(String dllName, String extension,
-                                                           int size) {
+	synchronized static ResourceFile getNewExtensionedFile(String dllName, String extension,
+			int size) {
 		return getStrippedExtensionedFile(createUserResourceDir(size), dllName, extension);
 	}
 
-	static synchronized ResourceFile getNewSystemExtensionedFile(String dllName, String extension,
-                                                                 int size) {
+	synchronized static ResourceFile getNewSystemExtensionedFile(String dllName, String extension,
+			int size) {
 		return getStrippedExtensionedFile(getSystemResourceDir(size), dllName, extension);
 	}
 }

@@ -35,7 +35,7 @@ public final class DexHeaderFactory {
 	 * @return the DEX header
 	 * @throws IOException should an error occur reading DEX bytes
 	 */
-    public static final DexHeader getDexHeader(Program program) throws IOException {
+	public final static DexHeader getDexHeader(Program program) throws IOException {
 		return getDexHeader(program, program.getMinAddress());
 	}
 
@@ -46,7 +46,7 @@ public final class DexHeaderFactory {
 	 * @return the DEX header
 	 * @throws IOException should an error occur reading DEX bytes
 	 */
-    public static final DexHeader getDexHeader(Program program, Address address)
+	public final static DexHeader getDexHeader(Program program, Address address)
 			throws IOException {
 		ByteProvider provider = new MemoryByteProvider(program.getMemory(), address);
 		return getDexHeader(provider, !program.getLanguage().isBigEndian());
@@ -59,7 +59,7 @@ public final class DexHeaderFactory {
 	 * @return the DEX header
 	 * @throws IOException should an error occur reading DEX bytes
 	 */
-    public static final DexHeader getDexHeader(ByteProvider provider, boolean isLittleEndian)
+	public final static DexHeader getDexHeader(ByteProvider provider, boolean isLittleEndian)
 			throws IOException {
 		BinaryReader reader = new BinaryReader(provider, isLittleEndian);
 		return getDexHeader(reader);
@@ -73,7 +73,7 @@ public final class DexHeaderFactory {
 	 * @return the DEX header
 	 * @throws IOException should an error occur reading DEX bytes
 	 */
-    public static final DexHeader getDexHeader(BinaryReader reader) throws IOException {
+	public final static DexHeader getDexHeader(BinaryReader reader) throws IOException {
 		return getDexHeader(reader, true);
 	}
 
@@ -86,7 +86,7 @@ public final class DexHeaderFactory {
 	 * @return the DEX header
 	 * @throws IOException should an error occur reading DEX bytes
 	 */
-    public static final DexHeader getDexHeader(BinaryReader reader, boolean fullParse)
+	public final static DexHeader getDexHeader(BinaryReader reader, boolean fullParse)
 			throws IOException {
 		long index = reader.getPointerIndex();
 		String magic = new String(reader.readByteArray(index, 4));

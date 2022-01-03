@@ -36,7 +36,7 @@ public interface TargetStackFrame extends TargetObject {
 	 * @return a future completing with the address of the executing (or next) instruction.
 	 */
 	@TargetAttributeType(name = PC_ATTRIBUTE_NAME, required = true, hidden = true)
-    default Address getProgramCounter() {
+	public default Address getProgramCounter() {
 		return getTypedAttributeNowByName(PC_ATTRIBUTE_NAME, Address.class, Address.NO_ADDRESS);
 	}
 }

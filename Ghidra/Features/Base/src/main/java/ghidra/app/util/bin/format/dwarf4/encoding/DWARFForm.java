@@ -56,7 +56,7 @@ public enum DWARFForm {
 	static {
 		valueMap = new HashMap<>();
 		for (DWARFForm access : DWARFForm.values()) {
-			valueMap.put(access.value, access);
+			valueMap.put(access.getValue(), access);
 		}
 	}
 

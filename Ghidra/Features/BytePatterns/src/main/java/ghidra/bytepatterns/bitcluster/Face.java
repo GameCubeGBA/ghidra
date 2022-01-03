@@ -52,12 +52,12 @@ public class Face extends DittedBitSequence implements Comparable<Face> {
 				DittedBitSequence temp = new DittedBitSequence(this, kid);
 				if (temp.getNumUncertainBits() == this.getNumUncertainBits()) {				//Check to see if kid is a subface of this.
 					this.children.add(kid);
-					this.weight += kid.weight;
+					this.weight += kid.getWeight();
 				}
 			}
 			if (addf1) {											//Used when f1 isn't already a pattern.
 				this.children.add(f1);
-				this.weight += f1.weight;
+				this.weight += f1.getWeight();
 			}
 		}
 		dit_ratio = 1.0 / Math.pow(2.0, getNumUncertainBits());
@@ -86,8 +86,11 @@ public class Face extends DittedBitSequence implements Comparable<Face> {
 		else if (!patterns.contains(this.joinOf.second)) {
 			return false;
 		}
-		else return !faceByName.containsKey(this.strID);
-    }
+		else if (faceByName.containsKey(this.strID)) {
+			return false;
+		}
+		return true;
+	}
 
 	//A measurement of "how full" the face is with weight as compared to the number of vertices it would be as a cube.
 	public double ratioFilled() {

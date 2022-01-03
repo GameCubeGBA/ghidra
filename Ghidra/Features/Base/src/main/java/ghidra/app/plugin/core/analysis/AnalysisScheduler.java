@@ -143,8 +143,11 @@ public class AnalysisScheduler {
 		Language language = analysisMgr.getProgram().getLanguage();
 
 		// get the overall disable property
-		boolean allOverriden = language.hasProperty("DisableAllAnalyzers");
-        boolean overrideEnable = defaultEnable;
+		boolean allOverriden = false;
+		if (language.hasProperty("DisableAllAnalyzers")) {
+			allOverriden = true;
+		}
+		boolean overrideEnable = defaultEnable;
 		// let individual analyzers be turned off or on
 		String propertyName = "Analyzers." + analyzer.getName();
 		if (language.hasProperty(propertyName)) {

@@ -57,6 +57,10 @@ public class DebugRunningProcessImpl
 		int result;
 
 		result = Integer.compare(this.systemId, that.systemId);
-        return result;
-    }
+		if (result != 0) {
+			return result;
+		}
+
+		return 0;
+	}
 }

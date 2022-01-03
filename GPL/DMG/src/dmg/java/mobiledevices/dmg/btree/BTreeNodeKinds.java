@@ -11,9 +11,9 @@ package mobiledevices.dmg.btree;
  */
 public final class BTreeNodeKinds {
 
-	public static final byte kBTLeafNode = -1;
-	public static final byte kBTIndexNode = 0;
-	public static final byte kBTHeaderNode = 1;
-	public static final byte kBTMapNode = 2;
+	public final static byte kBTLeafNode = -1;
+	public final static byte kBTIndexNode = 0;
+	public final static byte kBTHeaderNode = 1;
+	public final static byte kBTMapNode = 2;
 
 }

@@ -47,12 +47,12 @@ public interface LldbCommand<T> {
 	 * @param state lldb's state
 	 * @return true if it can be executed, false otherwise
 	 */
-    boolean validInState(StateType state);
+	public boolean validInState(StateType state);
 
 	/**
 	 * Invoke the command
 	 */
-    void invoke();
+	public void invoke();
 
 	/**
 	 * Handle an event that occurred during the execution of this command
@@ -61,7 +61,7 @@ public interface LldbCommand<T> {
 	 * @param pending a copy of the executing command instance
 	 * @return true if the command is now ready to be completed
 	 */
-    boolean handle(LldbEvent<?> evt, LldbPendingCommand<?> pending);
+	public boolean handle(LldbEvent<?> evt, LldbPendingCommand<?> pending);
 
 	/**
 	 * Called when the manager believes this command is finished executing
@@ -71,6 +71,6 @@ public interface LldbCommand<T> {
 	 * @param pending a copy of the now-finished-executing command instance
 	 * @return the object "returned" by the command
 	 */
-    T complete(LldbPendingCommand<?> pending);
+	public T complete(LldbPendingCommand<?> pending);
 
 }

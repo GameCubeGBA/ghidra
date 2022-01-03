@@ -76,58 +76,58 @@ public class X86_32_CoffRelocationHandler extends CoffRelocationHandler {
 	/**
 	 * The relocation is ignored.
 	 */
-    public static final short IMAGE_REL_I386_ABSOLUTE = 0x0000;
+	public final static short IMAGE_REL_I386_ABSOLUTE = 0x0000;
 
 	/**
 	 * Not supported.
 	 */
-    public static final short IMAGE_REL_I386_DIR16 = 0x0001;
+	public final static short IMAGE_REL_I386_DIR16 = 0x0001;
 
 	/**
 	 * Not supported.
 	 */
-    public static final short IMAGE_REL_I386_REL16 = 0x0002;
+	public final static short IMAGE_REL_I386_REL16 = 0x0002;
 
 	/**
 	 * The target's 32-bit VA.
 	 */
-    public static final short IMAGE_REL_I386_DIR32 = 0x0006;
+	public final static short IMAGE_REL_I386_DIR32 = 0x0006;
 
 	/**
 	 * The target's 32-bit RVA.
 	 */
-    public static final short IMAGE_REL_I386_DIR32NB = 0x0007;
+	public final static short IMAGE_REL_I386_DIR32NB = 0x0007;
 
 	/**
 	 * Not supported.
 	 */
-    public static final short IMAGE_REL_I386_SEG12 = 0x0009;
+	public final static short IMAGE_REL_I386_SEG12 = 0x0009;
 
 	/**
 	 * The 16-bit section index of the section that contains the target. 
 	 * This is used to support debugging information.
 	 */
-    public static final short IMAGE_REL_I386_SECTION = 0x000a;
+	public final static short IMAGE_REL_I386_SECTION = 0x000a;
 
 	/**
 	 * The 32-bit offset of the target from the beginning of its section. 
 	 * This is used to support debugging information and static thread local storage.
 	 */
-    public static final short IMAGE_REL_I386_SECREL = 0x000b;
+	public final static short IMAGE_REL_I386_SECREL = 0x000b;
 
 	/**
 	 * The CLR token.
 	 */
-    public static final short IMAGE_REL_I386_TOKEN = 0x000c;
+	public final static short IMAGE_REL_I386_TOKEN = 0x000c;
 
 	/**
 	 * A 7-bit offset from the base of the section that contains the target.
 	 */
-    public static final short IMAGE_REL_I386_SECREL7 = 0x000d;
+	public final static short IMAGE_REL_I386_SECREL7 = 0x000d;
 
 	/**
 	 * The 32-bit relative displacement to the target. 
 	 * This supports the x86 relative branch and call instructions.
 	 */
-    public static final short IMAGE_REL_I386_REL32 = 0x0014;
+	public final static short IMAGE_REL_I386_REL32 = 0x0014;
 }

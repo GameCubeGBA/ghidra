@@ -163,116 +163,116 @@ public final class LoadCommandTypes {
 
 	//@formatter:off
 
-	public static final int LC_REQ_DYLD = 0x80000000;
+	public final static int LC_REQ_DYLD = 0x80000000;
 
 	/** segment of this file to be mapped */
-    public static final int LC_SEGMENT                = 0x1;
+	public final static int LC_SEGMENT                = 0x1;
 	/** link-edit stab symbol table info */
-    public static final int LC_SYMTAB                 = 0x2;
+	public final static int LC_SYMTAB                 = 0x2;
 	/** link-edit gdb symbol table info (obsolete) */
-    public static final int LC_SYMSEG                 = 0x3;
+	public final static int LC_SYMSEG                 = 0x3;
 	/** thread */
-    public static final int LC_THREAD                 = 0x4;
+	public final static int LC_THREAD                 = 0x4;
 	/** unix thread (includes a stack) */
-    public static final int LC_UNIXTHREAD             = 0x5;
+	public final static int LC_UNIXTHREAD             = 0x5;
 	/** load a specified fixed VM shared library */
-    public static final int LC_LOADFVMLIB             = 0x6;
+	public final static int LC_LOADFVMLIB             = 0x6;
 	/** fixed VM shared library identification */
-    public static final int LC_IDFVMLIB               = 0x7;
+	public final static int LC_IDFVMLIB               = 0x7;
 	/** object identification info (obsolete) */
-    public static final int LC_IDENT                  = 0x8;
+	public final static int LC_IDENT                  = 0x8;
 	/** fixed VM file inclusion (internal use) */
-    public static final int LC_FVMFILE                = 0x9;
+	public final static int LC_FVMFILE                = 0x9;
 	/** prepage command (internal use) */
-    public static final int LC_PREPAGE                = 0xa;
+	public final static int LC_PREPAGE                = 0xa;
 	/** dynamic link-edit symbol table info */
-    public static final int LC_DYSYMTAB               = 0xb;
+	public final static int LC_DYSYMTAB               = 0xb;
 	/** load a dynamically linked shared library */
-    public static final int LC_LOAD_DYLIB             = 0xc;
+	public final static int LC_LOAD_DYLIB             = 0xc;
 	/** dynamically linked shared lib ident */
-    public static final int LC_ID_DYLIB               = 0xd;
+	public final static int LC_ID_DYLIB               = 0xd;
 	/** load a dynamic linker */
-    public static final int LC_LOAD_DYLINKER          = 0xe;
+	public final static int LC_LOAD_DYLINKER          = 0xe;
 	/** dynamic linker identification */
-    public static final int LC_ID_DYLINKER            = 0xf;
+	public final static int LC_ID_DYLINKER            = 0xf;
 	/** modules prebound for a dynamically linked shared library */
-    public static final int LC_PREBOUND_DYLIB         = 0x10;
+	public final static int LC_PREBOUND_DYLIB         = 0x10;
 	/** image routines */
-    public static final int LC_ROUTINES               = 0x11;
+	public final static int LC_ROUTINES               = 0x11;
 	/** sub framework */
-    public static final int LC_SUB_FRAMEWORK          = 0x12;
+	public final static int LC_SUB_FRAMEWORK          = 0x12;
 	/** sub umbrella */
-    public static final int LC_SUB_UMBRELLA           = 0x13;
+	public final static int LC_SUB_UMBRELLA           = 0x13;
 	/** sub client */
-    public static final int LC_SUB_CLIENT             = 0x14;
+	public final static int LC_SUB_CLIENT             = 0x14;
 	/** sub library */
-    public static final int LC_SUB_LIBRARY            = 0x15;
+    public final static int LC_SUB_LIBRARY            = 0x15;
 	/** two-level namespace lookup hints */
-    public static final int LC_TWOLEVEL_HINTS         = 0x16;
+	public final static int LC_TWOLEVEL_HINTS         = 0x16;
 	/** prebind checksum */
-    public static final int LC_PREBIND_CKSUM          = 0x17;
+	public final static int LC_PREBIND_CKSUM          = 0x17;
 	/** load a dynamically linked shared library that is allowed to be missing (all symbols are weak imported) */
-    public static final int LC_LOAD_WEAK_DYLIB        = 0x18 | LC_REQ_DYLD;
+	public final static int LC_LOAD_WEAK_DYLIB        = 0x18 | LC_REQ_DYLD;
 	/** 64-bit segment of this file to be mapped */
-    public static final int LC_SEGMENT_64             = 0x19;
+	public final static int LC_SEGMENT_64             = 0x19;
 	/** 64-bit image routines */
-    public static final int LC_ROUTINES_64            = 0x1a;
+	public final static int LC_ROUTINES_64            = 0x1a;
 	/** specifies the 128 bit UUID for an image */
-    public static final int LC_UUID                   = 0x1b;
+	public final static int LC_UUID                   = 0x1b;
 	/** Run path additions */
-    public static final int LC_RPATH                  = 0x1c | LC_REQ_DYLD;
+	public final static int LC_RPATH                  = 0x1c | LC_REQ_DYLD;
 	/** local of code signature */
-    public static final int LC_CODE_SIGNATURE         = 0x1d;
+	public final static int LC_CODE_SIGNATURE         = 0x1d;
 	/** local of info to split segments */
-    public static final int LC_SEGMENT_SPLIT_INFO     = 0x1e;
+	public final static int LC_SEGMENT_SPLIT_INFO     = 0x1e;
 	/** load and re-export dylib */
-    public static final int LC_REEXPORT_DYLIB         = 0x1f | LC_REQ_DYLD;
+	public final static int LC_REEXPORT_DYLIB         = 0x1f | LC_REQ_DYLD;
 	/** Delay load of dylib until first use */
-    public static final int LC_LAZY_LOAD_DYLIB        = 0x20;
+	public final static int LC_LAZY_LOAD_DYLIB        = 0x20;
 	/** encrypted segment information */
-    public static final int LC_ENCRYPTION_INFO        = 0x21;
+	public final static int LC_ENCRYPTION_INFO        = 0x21;
 	/** compressed dyld information */
-    public static final int LC_DYLD_INFO              = 0x22;
+	public final static int LC_DYLD_INFO              = 0x22;
 	/** compressed dyld information only */
-    public static final int LC_DYLD_INFO_ONLY         = 0x22 | LC_REQ_DYLD;
+	public final static int LC_DYLD_INFO_ONLY         = 0x22 | LC_REQ_DYLD;
 	/** Load upward dylib */
-    public static final int LC_LOAD_UPWARD_DYLIB      = 0x23 | LC_REQ_DYLD;
+	public final static int LC_LOAD_UPWARD_DYLIB      = 0x23 | LC_REQ_DYLD;
 	/** Build for MacOSX min OS version */
-    public static final int LC_VERSION_MIN_MACOSX     = 0x24;
+	public final static int LC_VERSION_MIN_MACOSX     = 0x24;
 	/** Build for iPhoneOS min OS version */
-    public static final int LC_VERSION_MIN_IPHONEOS   = 0x25;
+	public final static int LC_VERSION_MIN_IPHONEOS   = 0x25;
 	/** Compressed table of function start addresses */
-    public static final int LC_FUNCTION_STARTS        = 0x26;
+	public final static int LC_FUNCTION_STARTS        = 0x26;
 	/** String for DYLD to treat environment variable */
-    public static final int LC_DYLD_ENVIRONMENT       = 0x27;
+	public final static int LC_DYLD_ENVIRONMENT       = 0x27;
 	/** Replacement for LC_UNIXTHREAD */
-    public static final int LC_MAIN                   = 0x28 | LC_REQ_DYLD;
+	public final static int LC_MAIN                   = 0x28 | LC_REQ_DYLD;
 	/** Table of non-instructions in __text */
-    public static final int LC_DATA_IN_CODE           = 0x29;
+	public final static int LC_DATA_IN_CODE           = 0x29;
 	/** Source version used to build binary */
-    public static final int LC_SOURCE_VERSION         = 0x2a;
+	public final static int LC_SOURCE_VERSION         = 0x2a;
 	/** Code signing DRs copied from linked dylibs */
-    public static final int LC_DYLIB_CODE_SIGN_DRS    = 0x2b;
+	public final static int LC_DYLIB_CODE_SIGN_DRS    = 0x2b;
 	/** 64-bit encrypted segment information */
-    public static final int LC_ENCRYPTION_INFO_64     = 0x2c;
+	public final static int LC_ENCRYPTION_INFO_64     = 0x2c;
 	/** Linker options in MH_OBJECT files */
-    public static final int LC_LINKER_OPTIONS         = 0x2d;
+	public final static int LC_LINKER_OPTIONS         = 0x2d;
 	/** Optimization hints in MH_OBJECT files */
-    public static final int LC_OPTIMIZATION_HINT      = 0x2e;
+	public final static int LC_OPTIMIZATION_HINT      = 0x2e;
 	/** Build for AppleTV min OS version */
-    public static final int LC_VERSION_MIN_TVOS       = 0x2f;
+	public final static int LC_VERSION_MIN_TVOS       = 0x2f;
 	/** Build for Watch min OS version */
-    public static final int LC_VERSION_MIN_WATCHOS    = 0x30;
+	public final static int LC_VERSION_MIN_WATCHOS    = 0x30;
 	/** Arbitrary data included within a Mach-O file */
-    public static final int LC_NOTE                   = 0x31;
+	public final static int LC_NOTE                   = 0x31;
 	/** Build for platform min OS version */
-    public static final int LC_BUILD_VERSION          = 0x32;
+	public final static int LC_BUILD_VERSION          = 0x32;
 	/** used with LinkeditDataCommand, payload is trie **/
-    public static final int LC_DYLD_EXPORTS_TRIE      = 0x33 | LC_REQ_DYLD;
+	public final static int LC_DYLD_EXPORTS_TRIE      = 0x33 | LC_REQ_DYLD;
 	/** used with LinkeditDataCommand **/
-    public static final int LC_DYLD_CHAINED_FIXUPS    = 0x34 | LC_REQ_DYLD;
+	public final static int LC_DYLD_CHAINED_FIXUPS    = 0x34 | LC_REQ_DYLD;
 	/** used with fileset_entry_command **/
-    public static final int LC_FILESET_ENTRY          = 0x35 | LC_REQ_DYLD;
+	public final static int LC_FILESET_ENTRY          = 0x35 | LC_REQ_DYLD;
 	//@formatter:on
 
 	/**
@@ -280,7 +280,7 @@ public final class LoadCommandTypes {
 	 * @param type the load command type
 	 * @return a string for the given load command type
 	 */
-    public static final String getLoadCommentTypeName(int type) {
+	public final static String getLoadCommentTypeName(int type) {
 		Field[] fields = LoadCommandTypes.class.getDeclaredFields();
 		for (Field field : fields) {
 			if (field.getName().startsWith("LC_")) {

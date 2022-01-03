@@ -28,7 +28,7 @@ public class LinearExecutable {
 	/**
 	 * The magic number for LX executables.
 	 */
-    public static final short IMAGE_LX_SIGNATURE = 0x584c; //LX
+    public final static short IMAGE_LX_SIGNATURE = 0x584c; //LX
 
     public LinearExecutable(ByteProvider bp) {
         throw new NotYetImplementedException();

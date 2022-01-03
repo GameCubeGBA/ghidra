@@ -555,10 +555,10 @@ public class SBTarget {
     return new SBTrace(lldbJNI.SBTarget_CreateTrace(swigCPtr, this, SBError.getCPtr(error), error), true);
   }
 
-  public static final int eBroadcastBitBreakpointChanged = lldbJNI.SBTarget_eBroadcastBitBreakpointChanged_get();
-  public static final int eBroadcastBitModulesLoaded = lldbJNI.SBTarget_eBroadcastBitModulesLoaded_get();
-  public static final int eBroadcastBitModulesUnloaded = lldbJNI.SBTarget_eBroadcastBitModulesUnloaded_get();
-  public static final int eBroadcastBitWatchpointChanged = lldbJNI.SBTarget_eBroadcastBitWatchpointChanged_get();
-  public static final int eBroadcastBitSymbolsLoaded = lldbJNI.SBTarget_eBroadcastBitSymbolsLoaded_get();
+  public final static int eBroadcastBitBreakpointChanged = lldbJNI.SBTarget_eBroadcastBitBreakpointChanged_get();
+  public final static int eBroadcastBitModulesLoaded = lldbJNI.SBTarget_eBroadcastBitModulesLoaded_get();
+  public final static int eBroadcastBitModulesUnloaded = lldbJNI.SBTarget_eBroadcastBitModulesUnloaded_get();
+  public final static int eBroadcastBitWatchpointChanged = lldbJNI.SBTarget_eBroadcastBitWatchpointChanged_get();
+  public final static int eBroadcastBitSymbolsLoaded = lldbJNI.SBTarget_eBroadcastBitSymbolsLoaded_get();
 
 }

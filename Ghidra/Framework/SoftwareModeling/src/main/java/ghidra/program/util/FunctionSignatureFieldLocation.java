@@ -123,8 +123,11 @@ public class FunctionSignatureFieldLocation extends FunctionLocation {
 		FunctionSignatureFieldLocation other = (FunctionSignatureFieldLocation) obj;
 		if (isFieldBasedPoisitioning != other.isFieldBasedPoisitioning)
 			return false;
-        return Objects.equals(signature, other.signature);
-    }
+		if (!Objects.equals(signature, other.signature)) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public void saveState(SaveState obj) {

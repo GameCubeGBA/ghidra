@@ -649,7 +649,10 @@ public class ARM_ElfRelocationHandler extends ElfRelocationHandler {
 	}
 
 	private boolean isThumb(ElfSymbol symbol) {
-        return symbol.isFunction() && (symbol.getValue() % 1) == 1;
-    }
+		if (symbol.isFunction() && (symbol.getValue() % 1) == 1) {
+			return true;
+		}
+		return false;
+	}
 
 }

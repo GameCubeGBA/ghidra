@@ -72,10 +72,13 @@ public class AddressInputDialog extends AbstractCellEditor implements TableCellE
 
 		dialog = new DialogProvider(editableAddress);
 		dialog.setRememberSize(false);
-		SwingUtilities.invokeLater(() -> {
-            controller.getTool().showDialog(dialog, label);
-            stopCellEditing();
-        });
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				controller.getTool().showDialog(dialog, label);
+				stopCellEditing();
+			}
+		});
 
 		return label;
 	}

@@ -54,7 +54,7 @@ public interface TargetRegisterBank extends TargetObject {
 	 * @return a future which completes with object
 	 */
 	@TargetAttributeType(name = DESCRIPTIONS_ATTRIBUTE_NAME)
-    default TargetRegisterContainer getDescriptions() {
+	public default TargetRegisterContainer getDescriptions() {
 		return getTypedAttributeNowByName(DESCRIPTIONS_ATTRIBUTE_NAME,
 			TargetRegisterContainer.class, null);
 	}
@@ -74,8 +74,8 @@ public interface TargetRegisterBank extends TargetObject {
 	 * @param registers the registers to read
 	 * @return a future which completes with a name-value map of the values read
 	 */
-	default CompletableFuture<? extends Map<String, byte[]>> readRegisters(
-            Collection<TargetRegister> registers) {
+	public default CompletableFuture<? extends Map<String, byte[]>> readRegisters(
+			Collection<TargetRegister> registers) {
 		return readRegistersNamed(
 			registers.stream().map(TargetRegister::getIndex).collect(Collectors.toSet()));
 	}
@@ -95,7 +95,7 @@ public interface TargetRegisterBank extends TargetObject {
 	 * @param values the register-value map to write
 	 * @return a future which completes upon successfully writing all given registers
 	 */
-	default CompletableFuture<Void> writeRegisters(Map<TargetRegister, byte[]> values) {
+	public default CompletableFuture<Void> writeRegisters(Map<TargetRegister, byte[]> values) {
 		Map<String, byte[]> named = new LinkedHashMap<>();
 		for (Entry<TargetRegister, byte[]> ent : values.entrySet()) {
 			named.put(ent.getKey().getIndex(), ent.getValue());
@@ -111,8 +111,8 @@ public interface TargetRegisterBank extends TargetObject {
 	 * @return a future which completes with a name-value map of the values read
 	 * @throws DebuggerRegisterAccessException if a named register does not exist
 	 */
-    CompletableFuture<? extends Map<String, byte[]>> readRegistersNamed(
-            Collection<String> names);
+	public CompletableFuture<? extends Map<String, byte[]>> readRegistersNamed(
+			Collection<String> names);
 
 	/**
 	 * Write the named registers
@@ -122,15 +122,15 @@ public interface TargetRegisterBank extends TargetObject {
 	 * @return a future which completes upon successfully writing all given registers
 	 * @throws DebuggerRegisterAccessException if a named register does not exist
 	 */
-    CompletableFuture<Void> writeRegistersNamed(Map<String, byte[]> values);
+	public CompletableFuture<Void> writeRegistersNamed(Map<String, byte[]> values);
 
 	/**
 	 * Read the named registers
 	 * 
 	 * @see #readRegistersNamed(Collection)
 	 */
-	default CompletableFuture<? extends Map<String, byte[]>> readRegistersNamed(
-            String... names) {
+	public default CompletableFuture<? extends Map<String, byte[]>> readRegistersNamed(
+			String... names) {
 		return readRegistersNamed(List.of(names));
 	}
 
@@ -141,7 +141,7 @@ public interface TargetRegisterBank extends TargetObject {
 	 * @param register the register to read
 	 * @return a future which completes with the value read
 	 */
-	default CompletableFuture<byte[]> readRegister(TargetRegister register) {
+	public default CompletableFuture<byte[]> readRegister(TargetRegister register) {
 		return readRegister(register.getIndex());
 	}
 
@@ -153,7 +153,7 @@ public interface TargetRegisterBank extends TargetObject {
 	 * @param value the value to write
 	 * @return a future which completes upon successfully writing the register
 	 */
-	default CompletableFuture<Void> writeRegister(TargetRegister register, byte[] value) {
+	public default CompletableFuture<Void> writeRegister(TargetRegister register, byte[] value) {
 		return writeRegistersNamed(Map.of(register.getIndex(), value));
 	}
 
@@ -164,7 +164,7 @@ public interface TargetRegisterBank extends TargetObject {
 	 * @param name the name of the register to read
 	 * @return a future which completes with the value read
 	 */
-	default CompletableFuture<byte[]> readRegister(String name) {
+	public default CompletableFuture<byte[]> readRegister(String name) {
 		return readRegistersNamed(List.of(name)).thenApply(m -> m.get(name));
 	}
 
@@ -176,7 +176,7 @@ public interface TargetRegisterBank extends TargetObject {
 	 * @param value the value to write
 	 * @return a future which completes upon successfully writing the register
 	 */
-	default CompletableFuture<Void> writeRegister(String name, byte[] value) {
+	public default CompletableFuture<Void> writeRegister(String name, byte[] value) {
 		return writeRegistersNamed(Map.of(name, value));
 	}
 
@@ -188,7 +188,7 @@ public interface TargetRegisterBank extends TargetObject {
 	 * 
 	 * @return the cached register values
 	 */
-	default Map<String, byte[]> getCachedRegisters() {
+	public default Map<String, byte[]> getCachedRegisters() {
 		return Map.of();
 	}
 
@@ -203,7 +203,7 @@ public interface TargetRegisterBank extends TargetObject {
 	 * @deprecated Override {@link #invalidateCaches()} instead
 	 */
 	@Deprecated
-    default void clearRegisterCache() {
+	public default void clearRegisterCache() {
 		invalidateCaches().exceptionally(e -> {
 			Msg.error(this, "Error clearing register caches");
 			return null;

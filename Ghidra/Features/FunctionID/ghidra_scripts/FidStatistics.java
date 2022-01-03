@@ -138,7 +138,9 @@ public class FidStatistics extends GhidraScript {
 		}
 
 		public static void indent(StringBuilder buf, String last) {
-            buf.append(" ".repeat(Math.max(0, 10 - last.length())));
+			for (int i = last.length(); i < 10; ++i) {
+				buf.append(' ');
+			}
 		}
 
 		public void print(StringBuilder buf) {

@@ -28,268 +28,268 @@ public interface OptionalHeader extends StructConverter {
 	/**
 	 * ASLR with 64 bit address space.
 	 */
-    int IMAGE_DLLCHARACTERISTICS_HIGH_ENTROPY_VA = 0x0020;
+	public final static int IMAGE_DLLCHARACTERISTICS_HIGH_ENTROPY_VA = 0x0020;
 
 	/**
 	 * The DLL can be relocated at load time.
 	 */
-    int IMAGE_DLLCHARACTERISTICS_DYNAMIC_BASE = 0x0040;
+	public final static int IMAGE_DLLCHARACTERISTICS_DYNAMIC_BASE = 0x0040;
 
 	/**
 	 * Code integrity checks are forced.
 	 */
-    int IMAGE_DLLCHARACTERISTICS_FORCE_INTEGRITY = 0x0080;
+	public final static int IMAGE_DLLCHARACTERISTICS_FORCE_INTEGRITY = 0x0080;
 
 	/**
 	 * The image is compatible with data execution prevention (DEP)
 	 */
-    int IMAGE_DLLCHARACTERISTICS_NX_COMPAT = 0x0100;
+	public final static int IMAGE_DLLCHARACTERISTICS_NX_COMPAT = 0x0100;
 
 	/**
 	 * The image is isolation aware, but should not be isolated.
 	 */
-    int IMAGE_DLLCHARACTERISTICS_NO_ISOLATION = 0x0200;
+	public final static int IMAGE_DLLCHARACTERISTICS_NO_ISOLATION = 0x0200;
 
 	/**
 	 * The image does not use structured exception handling (SEH).
 	 */
-    int IMAGE_DLLCHARACTERISTICS_NO_SEH = 0x0400;
+	public final static int IMAGE_DLLCHARACTERISTICS_NO_SEH = 0x0400;
 
 	/**
 	 * Do not bind the image.
 	 */
-    int IMAGE_DLLCHARACTERISTICS_NO_BIND = 0x0800;
+	public final static int IMAGE_DLLCHARACTERISTICS_NO_BIND = 0x0800;
 
 	/**
 	 * Image should execute in an AppContainer.
 	 */
-    int IMAGE_DLLCHARACTERISTICS_APPCONTAINER = 0x1000;
+	public final static int IMAGE_DLLCHARACTERISTICS_APPCONTAINER = 0x1000;
 
 	/**
 	 * A WDM driver.
 	 */
-    int IMAGE_DLLCHARACTERISTICS_WDM_DRIVER = 0x2000;
+	public final static int IMAGE_DLLCHARACTERISTICS_WDM_DRIVER = 0x2000;
 
 	/**
 	 * Image supports Control Flow Guard.
 	 */
-    int IMAGE_DLLCHARACTERISTICS_GUARD_CF = 0x4000;
+	public final static int IMAGE_DLLCHARACTERISTICS_GUARD_CF = 0x4000;
 
 	/**
 	 * The image is terminal server aware.
 	 */
-    int IMAGE_DLLCHARACTERISTICS_TERMINAL_SERVER_AWARE = 0x8000;
+	public final static int IMAGE_DLLCHARACTERISTICS_TERMINAL_SERVER_AWARE = 0x8000;
 
 	/**
 	 * The count of data directories in the optional header.
 	 */
-    byte IMAGE_NUMBEROF_DIRECTORY_ENTRIES = 16;
+	public final static byte IMAGE_NUMBEROF_DIRECTORY_ENTRIES = 16;
 
 	/**
 	 * Export directory index
 	 */
-    byte IMAGE_DIRECTORY_ENTRY_EXPORT = 0;
+	public final static byte IMAGE_DIRECTORY_ENTRY_EXPORT = 0;
 	/**
 	 * Import directory index
 	 */
-    byte IMAGE_DIRECTORY_ENTRY_IMPORT = 1;
+	public final static byte IMAGE_DIRECTORY_ENTRY_IMPORT = 1;
 	/**
 	 * Resource directory index
 	 */
-    byte IMAGE_DIRECTORY_ENTRY_RESOURCE = 2;
+	public final static byte IMAGE_DIRECTORY_ENTRY_RESOURCE = 2;
 	/**
 	 * Exception directory index
 	 */
-    byte IMAGE_DIRECTORY_ENTRY_EXCEPTION = 3;
+	public final static byte IMAGE_DIRECTORY_ENTRY_EXCEPTION = 3;
 	/**
 	 * Security directory index
 	 */
-    byte IMAGE_DIRECTORY_ENTRY_SECURITY = 4;
+	public final static byte IMAGE_DIRECTORY_ENTRY_SECURITY = 4;
 	/**
 	 * Base Relocation Table directory index
 	 */
-    byte IMAGE_DIRECTORY_ENTRY_BASERELOC = 5;
+	public final static byte IMAGE_DIRECTORY_ENTRY_BASERELOC = 5;
 	/**
 	 * Debug directory index
 	 */
-    byte IMAGE_DIRECTORY_ENTRY_DEBUG = 6;
+	public final static byte IMAGE_DIRECTORY_ENTRY_DEBUG = 6;
 	/**
 	 * Architecture Specific Data directory index
 	 */
-    byte IMAGE_DIRECTORY_ENTRY_ARCHITECTURE = 7;
+	public final static byte IMAGE_DIRECTORY_ENTRY_ARCHITECTURE = 7;
 	/**
 	 * Global Pointer directory index
 	 */
-    byte IMAGE_DIRECTORY_ENTRY_GLOBALPTR = 8;//RVA of GP
+	public final static byte IMAGE_DIRECTORY_ENTRY_GLOBALPTR = 8;//RVA of GP
 	/**
 	 * TLS directory index
 	 */
-    byte IMAGE_DIRECTORY_ENTRY_TLS = 9;
+	public final static byte IMAGE_DIRECTORY_ENTRY_TLS = 9;
 	/**
 	 * Load Configuration directory index
 	 */
-    byte IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG = 10;
+	public final static byte IMAGE_DIRECTORY_ENTRY_LOAD_CONFIG = 10;
 	/**
 	 * Bound Import directory  index
 	 */
-    byte IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT = 11;
+	public final static byte IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT = 11;
 	/**
 	 * Import Address Table directory index
 	 */
-    byte IMAGE_DIRECTORY_ENTRY_IAT = 12;
+	public final static byte IMAGE_DIRECTORY_ENTRY_IAT = 12;
 	/**
 	 * Delay Load Import Descriptors directory index
 	 */
-    byte IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT = 13;
+	public final static byte IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT = 13;
 	/**
 	 * COM Runtime Descriptor directory index
 	 */
-    byte IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR = 14;
+	public final static byte IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR = 14;
 	/**
 	 * New name for the COM Descriptor directory index
 	 */
-    byte IMAGE_DIRECTORY_ENTRY_COMHEADER = 14;
+	public final static byte IMAGE_DIRECTORY_ENTRY_COMHEADER = 14;
 
 	/**
 	 * Returns true of this optional header is 64-bit.
 	 * @return true of this optional header is 64-bit
 	 */
-    boolean is64bit();
+	public boolean is64bit();
 
 	/**
 	 * Return the major version number of the linker that built this binary.
 	 * @return
 	 */
-    byte getMajorLinkerVersion();
+	public byte getMajorLinkerVersion();
 
 	/**
 	 * Return the minor version number of the linker that built this binary.
 	 * @return
 	 */
-    byte getMinorLinkerVersion();
+	public byte getMinorLinkerVersion();
 
 	/**
 	 * Return the major version number of the required operating system.
 	 * @return
 	 */
-    short getMajorOperatingSystemVersion();
+	public short getMajorOperatingSystemVersion();
 
 	/**
 	 * Return the minor version number of the required operating system.
 	 * @return
 	 */
-    short getMinorOperatingSystemVersion();
+	public short getMinorOperatingSystemVersion();
 
 	/**
 	 * Get the major version number of the image.
 	 * @return
 	 */
-    short getMajorImageVersion();
+	public short getMajorImageVersion();
 
 	/**
 	 * Get the minor version number of the image.
 	 * @return
 	 */
-    short getMinorImageVersion();
+	public short getMinorImageVersion();
 
 	/**
 	 * Get the major version number of the subsystem.
 	 */
-    short getMajorSubsystemVersion();
+	public short getMajorSubsystemVersion();
 
 	/**
 	 * Get the minor version number of the subsystem.
 	 * @return
 	 */
-    short getMinorSubsystemVersion();
+	public short getMinorSubsystemVersion();
 
 	/**
 	 * This value is reserved, and must be 0
 	 */
-    int getWin32VersionValue();
+	public int getWin32VersionValue();
 
 	/**
 	 * Get the image file checksum.
 	 * @return
 	 */
-    int getChecksum();
+	public int getChecksum();
 
 	/**
 	* Get the subsystem that is required to run this image.
 	* @return
 	*/
-    int getSubsystem();
+	public int getSubsystem();
 
 	/**
 	 * Return flags that describe properties of and features of this binary.
 	 * @see ghidra.app.util.bin.format.pe.DllCharacteristics
 	 * @return
 	 */
-    short getDllCharacteristics();
+	public short getDllCharacteristics();
 
 	/**
 	 * Return the size of the stack reservation
 	 * @return
 	 */
-    long getSizeOfStackReserve();
+	public long getSizeOfStackReserve();
 
 	/**
 	 * Return the size of the stack to commit
 	 * @return
 	 */
-    long getSizeOfStackCommit();
+	public long getSizeOfStackCommit();
 
 	/**
 	 * Return the size of the heap reservation
 	 * @return
 	 */
-    long getSizeOfHeapReserve();
+	public long getSizeOfHeapReserve();
 
 	/**
 	 * Return the size of the heap to commit
 	 * @return
 	 */
-    long getSizeOfHeapCommit();
+	public long getSizeOfHeapCommit();
 
 	/**
 	 * Return the flags passed to the loader. Obsolete.
 	 * @return
 	 */
-    int getLoaderFlags();
+	public int getLoaderFlags();
 
 	/**
 	 * @return the RVA of the first code byte in the file that will be executed
 	 */
-    long getAddressOfEntryPoint();
+	public long getAddressOfEntryPoint();
 
 	/**
 	 * @return the preferred load address of this file in memory
 	 */
-    long getImageBase();
+	public long getImageBase();
 
-	long getOriginalImageBase();
+	public long getOriginalImageBase();
 
-	boolean wasRebased();
+	public boolean wasRebased();
 
 	/**
 	 * @return the RVA that would be assigned to the next section following the last section
 	 */
-    long getSizeOfImage();
+	public long getSizeOfImage();
 
 	/**
 	 * @see #getSizeOfImage()
 	 */
-    void setSizeOfImage(long size);
+	public void setSizeOfImage(long size);
 
 	/**
 	 * @return the combined size of all headers
 	 */
-    long getSizeOfHeaders();
+	public long getSizeOfHeaders();
 
 	/**
 	 * @see #getSizeOfHeaders()
 	 */
-    void setSizeOfHeaders(long size);
+	public void setSizeOfHeaders(long size);
 
 	/**
 	 * Returns the combined total size of all sections with
@@ -297,69 +297,69 @@ public interface OptionalHeader extends StructConverter {
 	 * @return the combined total size of all sections with
 	 * the {@code IMAGE_SCN_CNT_CODE} attribute.
 	 */
-    long getSizeOfCode();
+	public long getSizeOfCode();
 
 	/**
 	 * @see #getSizeOfCode()
 	 */
-    void setSizeOfCode(long size);
+	public void setSizeOfCode(long size);
 
-	long getNumberOfRvaAndSizes();
+	public long getNumberOfRvaAndSizes();
 
 	/**
 	 * Returns the combined size of all initialized data sections.
 	 * @return the combined size of all initialized data sections
 	 */
-    long getSizeOfInitializedData();
+	public long getSizeOfInitializedData();
 
 	/**
 	 * @see #getSizeOfInitializedData()
 	 */
-    void setSizeOfInitializedData(long size);
+	public void setSizeOfInitializedData(long size);
 
 	/**
 	 * Returns the size of all sections with the uninitialized
 	 * data attributes.
 	 * @return the size of all sections with the uninitialized data attributes
 	 */
-    long getSizeOfUninitializedData();
+	public long getSizeOfUninitializedData();
 
 	/**
 	 * @see #getSizeOfUninitializedData()
 	 */
-    void setSizeOfUninitializedData(long size);
+	public void setSizeOfUninitializedData(long size);
 
 	/**
 	 * Returns the RVA of the first byte of code when loaded in memory.
 	 * @return the RVA of the first byte of code when loaded in memory
 	 */
-    long getBaseOfCode();
+	public long getBaseOfCode();
 
 	/**
 	 * @return the RVA of the first byte of data when loaded into memory
 	 */
-    long getBaseOfData();
+	public long getBaseOfData();
 
 	/**
 	 * This methods tells this optional header to process its data directories.
 	 */
-    void processDataDirectories(TaskMonitor monitor) throws IOException;
+	public void processDataDirectories(TaskMonitor monitor) throws IOException;
 
 	/**
 	 * Returns the array of data directories.
 	 * @return the array of data directories
 	 */
-    DataDirectory[] getDataDirectories();
+	public DataDirectory[] getDataDirectories();
 
 	/**
 	 * @return the section alignment
 	 */
-    int getSectionAlignment();
+	public int getSectionAlignment();
 
 	/**
 	 * @return the file alignment
 	 */
-    int getFileAlignment();
+	public int getFileAlignment();
 
 	/**
 	 * Writes this optional header to the specified random access file.
@@ -369,12 +369,12 @@ public interface OptionalHeader extends StructConverter {
 	 *
 	 * @throws IOException
 	 */
-    void writeHeader(RandomAccessFile raf, DataConverter dc) throws IOException;
+	public void writeHeader(RandomAccessFile raf, DataConverter dc) throws IOException;
 
-	void validateDataDirectories(Program program);
+	public void validateDataDirectories(Program program);
 
 	/**
 	 * @return true if the PE uses predominantly CLI code; otherwise, false.
 	 */
-    boolean isCLI() throws IOException;
+	public boolean isCLI() throws IOException;
 }

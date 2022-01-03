@@ -489,7 +489,7 @@ public class StringDataInstance {
 
 		if (stringLayout.shouldTrimTrailingNulls()) {
 			String str = getStringValueNoTrim();
-			return (str != null) && (!str.isEmpty()) && str.charAt(str.length() - 1) != 0;
+			return (str != null) && (str.length() > 0) && str.charAt(str.length() - 1) != 0;
 		}
 		return false;
 	}
@@ -793,7 +793,7 @@ public class StringDataInstance {
 			return UNKNOWN_DOT_DOT_DOT;
 		}
 
-		if (stringValue.isEmpty() && aci.byteStartOffset != 0) {
+		if (stringValue.length() == 0 && aci.byteStartOffset != 0) {
 			// If the byteStartOffset isn't zero it means there was one char that was the unicode BOM.
 			// Asking the Charset to decode it returned nothing, so force it.
 			stringValue = BOM_RESULT_STR;
@@ -882,7 +882,7 @@ public class StringDataInstance {
 					break;
 			}
 		}
-		return prefix + strBuf;
+		return prefix + strBuf.toString();
 	}
 
 	private byte[] getOriginalBytes(boolean isByteToStringCharEquiv, int charOffset, int codePoint,
@@ -993,7 +993,7 @@ public class StringDataInstance {
 		if (str == null) {
 			return defaultStr;
 		}
-		if (str.isEmpty()) {
+		if (str.length() == 0) {
 			return prefixStr;
 		}
 
@@ -1015,7 +1015,7 @@ public class StringDataInstance {
 			}
 			i += Character.charCount(codePoint);
 		}
-		return prefixStr + buffer;
+		return prefixStr + buffer.toString();
 	}
 
 	public String getOffcutLabelString(String prefixStr, String abbrevPrefixStr, String defaultStr,

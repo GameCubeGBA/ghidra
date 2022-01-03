@@ -22,7 +22,7 @@ public interface LldbModelTargetBreakpointLocation
 		extends LldbModelTargetObject, TargetBreakpointLocation {
 
 	@Override
-    Address getAddress();
+	public Address getAddress();
 
-	int getLocationId();
+	public int getLocationId();
 }

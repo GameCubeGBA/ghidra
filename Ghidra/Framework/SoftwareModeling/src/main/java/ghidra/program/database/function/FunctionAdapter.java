@@ -50,15 +50,15 @@ abstract class FunctionAdapter {
 	static final int CALLING_CONVENTION_ID_COL = 5;
 	static final int RETURN_STORAGE_COL = 6;
 
-	static final byte FUNCTION_VARARG_FLAG = 0x1; // Bit 0 is flag for "has vararg".
-	static final byte FUNCTION_INLINE_FLAG = 0x2; // Bit 1 is flag for "is inline".
-	static final byte FUNCTION_NO_RETURN_FLAG = 0x4; // Bit 2 is flag for "has no return".
-	static final byte FUNCTION_CUSTOM_PARAM_STORAGE_FLAG = 0x8; // Bit 3 is flag for "has custom storage"
-	static final byte FUNCTION_SIGNATURE_SOURCE = 0x30; // Bits 4-5 are storage for "signature SourceType"
+	static final byte FUNCTION_VARARG_FLAG = (byte) 0x1; // Bit 0 is flag for "has vararg".
+	static final byte FUNCTION_INLINE_FLAG = (byte) 0x2; // Bit 1 is flag for "is inline".
+	static final byte FUNCTION_NO_RETURN_FLAG = (byte) 0x4; // Bit 2 is flag for "has no return".
+	static final byte FUNCTION_CUSTOM_PARAM_STORAGE_FLAG = (byte) 0x8; // Bit 3 is flag for "has custom storage"
+	static final byte FUNCTION_SIGNATURE_SOURCE = (byte) 0x30; // Bits 4-5 are storage for "signature SourceType"
 
 	static final int FUNCTION_SIGNATURE_SOURCE_SHIFT = 4; // bit shift for flag storage of "signature SourceType"
 
-	static final Schema FUNCTION_SCHEMA = new Schema(CURRENT_VERSION, "ID",
+	final static Schema FUNCTION_SCHEMA = new Schema(CURRENT_VERSION, "ID",
 		new Field[] { LongField.INSTANCE, IntField.INSTANCE, IntField.INSTANCE, IntField.INSTANCE,
 			ByteField.INSTANCE, ByteField.INSTANCE, StringField.INSTANCE },
 		new String[] { "Return DataType ID", "StackPurge", "StackReturnOffset", "StackLocalSize",
@@ -168,7 +168,7 @@ abstract class FunctionAdapter {
 	/**
 	 * @param handle
 	 */
-    protected abstract void deleteTable(DBHandle handle) throws IOException;
+	abstract protected void deleteTable(DBHandle handle) throws IOException;
 
 	abstract int getVersion();
 

@@ -35,7 +35,8 @@ public class ObjectCacheTest extends AbstractGhidraHeadedIntegrationTest {
 	 * @param arg0
 	 */
 	public ObjectCacheTest() {
-    }
+		super();
+	}
 
 	@Test
 	public void testSetInvalid() {

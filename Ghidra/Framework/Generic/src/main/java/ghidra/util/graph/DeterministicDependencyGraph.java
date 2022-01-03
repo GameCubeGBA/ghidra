@@ -38,7 +38,8 @@ import org.apache.commons.collections4.set.ListOrderedSet;
 public class DeterministicDependencyGraph<T> extends AbstractDependencyGraph<T> {
 
 	public DeterministicDependencyGraph() {
-    }
+		super();
+	}
 
 	/**
 	 * Copy constructor

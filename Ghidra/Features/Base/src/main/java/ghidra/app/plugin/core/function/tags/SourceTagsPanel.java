@@ -90,6 +90,10 @@ public class SourceTagsPanel extends TagListPanel {
 	public boolean isSelectionEnabled() {
 		Set<FunctionTag> selectedTags = getSelectedTags();
 		Set<FunctionTag> assignedTags = getAssignedTags(function);
-        return !assignedTags.containsAll(selectedTags);
-    }
+		if (assignedTags.containsAll(selectedTags)) {
+			return false;
+		}
+
+		return true;
+	}
 }

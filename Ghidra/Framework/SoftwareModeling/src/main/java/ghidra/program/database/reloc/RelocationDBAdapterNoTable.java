@@ -27,7 +27,7 @@ import ghidra.program.model.address.AddressSetView;
  * A stub for a time when we did not produce these tables.
  */
 class RelocationDBAdapterNoTable extends RelocationDBAdapter {
-	static final int VERSION = 0;
+	final static int VERSION = 0;
 
 	@Override
 	void add(long addrKey, int type, long[] values, byte[] bytes, String symbolName) {

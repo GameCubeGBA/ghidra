@@ -57,8 +57,11 @@ public abstract class Switch {
 		if (opcode == PcodeOp.LOAD) {
 			// Absolute address jump table
 			TableEntry tableEntry = TableEntry.getTableEntry(program, op);
-            return tableEntry;
-        }
+			if (tableEntry != null) {
+				return tableEntry;
+			}
+			return null;
+		}
 		if (opcode == PcodeOp.INT_ADD) {
 			// Relative jump offset table 
 			RelativeJumpTableSwitch relJumpTableSwitch = RelativeJumpTableSwitch.getRelativeJumpTableSwitch(program, op);

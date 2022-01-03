@@ -27,5 +27,5 @@ public interface MarkerClickedListener {
 	 * Notification that the user double-clicked in the marker margin
 	 * @param location the MarkerLocation where the user double-clicked
 	 */
-    void markerDoubleClicked(MarkerLocation location);
+	public void markerDoubleClicked(MarkerLocation location);
 }

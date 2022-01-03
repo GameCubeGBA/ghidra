@@ -272,8 +272,11 @@ public class PopulateFidDialog extends DialogComponentProvider {
 			return false;
 		}
 		String symbolsFilePath = symbolsFileTextField.getText().trim();
-        return symbolsFilePath.isEmpty() || new File(symbolsFilePath).exists();
-    }
+		if (!symbolsFilePath.isEmpty() && !(new File(symbolsFilePath).exists())) {
+			return false;
+		}
+		return true;
+	}
 
 	private JButton createBrowseButton() {
 		JButton browseButton = ButtonPanelFactory.createButton(ButtonPanelFactory.BROWSE_TYPE);

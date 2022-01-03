@@ -92,10 +92,15 @@ public class MultipleParameterStringable extends Stringable {
 
 		MultipleParameterStringable other = (MultipleParameterStringable) obj;
 		if (parameterStringables == null) {
-            return other.parameterStringables == null;
+			if (other.parameterStringables != null) {
+				return false;
+			}
 		}
-		else return parameterStringables.equals(other.parameterStringables);
-    }
+		else if (!parameterStringables.equals(other.parameterStringables)) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public String getDisplayString() {

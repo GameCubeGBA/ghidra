@@ -59,13 +59,13 @@ public class MDArrayReferencedType extends MDModifierType {
 			MDEncodedNumber n1 = new MDEncodedNumber(dmang);
 			n1.parse();
 			int num = n1.getValue().intValue();
-			StringBuilder arrString = new StringBuilder();
+			String arrString = "";
 			while (num-- > 0) {
 				MDEncodedNumber n2 = new MDEncodedNumber(dmang);
 				n2.parse();
-				arrString.append('[').append(n2).append(']');
+				arrString = arrString + '[' + n2 + ']';
 			}
-			setArrayString(arrString.toString());
+			setArrayString(arrString);
 			// refDataType = MDDataTypeParser.parsePrimaryDataType(dmang,
 			// false);
 			// refDataType.setIsReferencedType();
@@ -84,7 +84,7 @@ public class MDArrayReferencedType extends MDModifierType {
 			dmang.insertString(builder, "(");
 			dmang.appendString(builder, ")");
 		}
-		dmang.appendString(builder, arrayString);
+		dmang.appendString(builder, getArrayString());
 		// refDataType.insert(builder);
 		refType.insert(builder);
 	}

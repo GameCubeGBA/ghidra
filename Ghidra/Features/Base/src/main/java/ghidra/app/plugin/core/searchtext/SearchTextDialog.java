@@ -462,7 +462,7 @@ class SearchTextDialog extends DialogComponentProvider {
 	 */
 	private boolean validate() {
 		String value = valueField.getText();
-		if (value.isEmpty()) {
+		if (value.length() == 0) {
 			setStatusText("Please enter a pattern to search for.");
 			return false;
 		}

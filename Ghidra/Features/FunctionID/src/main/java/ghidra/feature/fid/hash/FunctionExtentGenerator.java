@@ -33,5 +33,5 @@ public interface FunctionExtentGenerator {
 	 * @param func the function on which to calculate the extent
 	 * @return the list of codeunits in the function
 	 */
-    List<CodeUnit> calculateExtent(Function func);
+	public List<CodeUnit> calculateExtent(Function func);
 }

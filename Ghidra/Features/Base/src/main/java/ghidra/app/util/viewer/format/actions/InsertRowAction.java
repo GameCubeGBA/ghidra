@@ -45,7 +45,9 @@ public class InsertRowAction extends DockingAction {
     	Object contextObject = context.getContextObject();
 		if (contextObject instanceof FieldHeaderLocation) {
 			loc = (FieldHeaderLocation)contextObject;
-            return loc.getRow() < loc.getModel().getNumRows();
+			if (loc.getRow() < loc.getModel().getNumRows()) {
+				return true;
+			}
 		}
 		return false;
 	}

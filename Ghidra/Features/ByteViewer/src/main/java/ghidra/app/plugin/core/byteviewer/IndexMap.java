@@ -50,20 +50,20 @@ public class IndexMap {
 		this.bytesInLine = BigInteger.valueOf(bytesPerLine);
 
 		BigInteger nextStart = BigInteger.ZERO;
-        for (ByteBlock block : blocks) {
-            int blockPadding =
-                    ((block.getAlignment(bytesPerLine) + blockOffset) % bytesPerLine);
-            BigInteger blockStart = nextStart.add(BigInteger.valueOf(blockPadding));
-            BigInteger blockEnd = blockStart.add(block.getLength());
-            int remainder = blockEnd.remainder(bytesInLine).intValue();
-            BigInteger endIndex =
-                    remainder == 0 ? blockEnd : blockEnd.add(BigInteger.valueOf(bytesPerLine -
-                            remainder));
-            BigInteger endLayoutIndex = endIndex.divide(bytesInLine);
-            BlockInfo info = new BlockInfo(block, nextStart, blockStart, blockEnd, endIndex);
-            blockInfoMap.put(endLayoutIndex, info);
-            nextStart = endIndex.add(bytesInLine);
-        }
+		for (int i = 0; i < blocks.length; i++) {
+			int blockPadding =
+				((blocks[i].getAlignment(bytesPerLine) + blockOffset) % bytesPerLine);
+			BigInteger blockStart = nextStart.add(BigInteger.valueOf(blockPadding));
+			BigInteger blockEnd = blockStart.add(blocks[i].getLength());
+			int remainder = blockEnd.remainder(bytesInLine).intValue();
+			BigInteger endIndex =
+				remainder == 0 ? blockEnd : blockEnd.add(BigInteger.valueOf(bytesPerLine -
+					remainder));
+			BigInteger endLayoutIndex = endIndex.divide(bytesInLine);
+			BlockInfo info = new BlockInfo(blocks[i], nextStart, blockStart, blockEnd, endIndex);
+			blockInfoMap.put(endLayoutIndex, info);
+			nextStart = endIndex.add(bytesInLine);
+		}
 		numIndexes = nextStart.divide(bytesInLine).subtract(BigInteger.ONE);
 		if (nextStart.equals(BigInteger.ZERO)) {
 			numIndexes = BigInteger.ZERO;
@@ -135,29 +135,29 @@ public class IndexMap {
 
 	int getFieldOffset(BigInteger index, int fieldNum, FieldFactory[] factorys) {
 		int numFields = 0;
-        for (FieldFactory factory : factorys) {
-            ByteField bf = (ByteField) factory.getField(index);
-            if (bf != null) {
-                if (numFields == fieldNum) {
-                    return factory.getFieldOffset();
-                }
-                numFields++;
-            }
-        }
+		for (int i = 0; i < factorys.length; i++) {
+			ByteField bf = (ByteField) factorys[i].getField(index);
+			if (bf != null) {
+				if (numFields == fieldNum) {
+					return factorys[i].getFieldOffset();
+				}
+				numFields++;
+			}
+		}
 		return (numFields > 0) ? factorys[numFields - 1].getFieldOffset() : 0;
 	}
 
 	int getFieldNum(BigInteger index, int fieldOffset, FieldFactory[] factorys) {
 		int fieldNum = 0;
-        for (FieldFactory factory : factorys) {
-            ByteField bf = (ByteField) factory.getField(index);
-            if (bf != null) {
-                if (bf.getFieldOffset() == fieldOffset) {
-                    break;
-                }
-                fieldNum++;
-            }
-        }
+		for (int j = 0; j < factorys.length; j++) {
+			ByteField bf = (ByteField) factorys[j].getField(index);
+			if (bf != null) {
+				if (bf.getFieldOffset() == fieldOffset) {
+					break;
+				}
+				fieldNum++;
+			}
+		}
 		if (fieldNum >= factorys.length) {
 			fieldNum = 0;
 		}

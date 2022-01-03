@@ -44,8 +44,8 @@ import ghidra.util.Msg;
  * which matches any key. Similarly, the wild-card index is {@code []}.
  */
 public interface TargetObjectSchema {
-	ResyncMode DEFAULT_ELEMENT_RESYNC = ResyncMode.NEVER;
-	ResyncMode DEFAULT_ATTRIBUTE_RESYNC = ResyncMode.NEVER;
+	public static final ResyncMode DEFAULT_ELEMENT_RESYNC = ResyncMode.NEVER;
+	public static final ResyncMode DEFAULT_ATTRIBUTE_RESYNC = ResyncMode.NEVER;
 
 	/**
 	 * An identifier for schemas within a context.
@@ -85,8 +85,11 @@ public interface TargetObjectSchema {
 				return false;
 			}
 			SchemaName that = (SchemaName) obj;
-            return this.name.equals(that.name);
-        }
+			if (!this.name.equals(that.name)) {
+				return false;
+			}
+			return true;
+		}
 
 		@Override
 		public int hashCode() {

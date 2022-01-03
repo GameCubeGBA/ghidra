@@ -109,7 +109,7 @@ public class PcodeOpEmitter {
 	}
 
 	private int findOpCode(String name) {
-		if ("cpool".equals(name)) {
+		if (name.equals("cpool")) {
 			return PcodeOp.CPOOLREF;
 		}
 		return PcodeOp.COPY;

@@ -33,7 +33,13 @@ import docking.widgets.fieldpanel.field.FieldElement;
  */
 public interface AnnotatedStringHandler extends ExtensionPoint {
 
-	AnnotatedMouseHandler DUMMY_MOUSE_HANDLER = (location, mouseEvent, serviceProvider) -> false;
+	public static final AnnotatedMouseHandler DUMMY_MOUSE_HANDLER = new AnnotatedMouseHandler() {
+		@Override
+		public boolean handleMouseClick(ProgramLocation location, MouseEvent mouseEvent,
+				ServiceProvider serviceProvider) {
+			return false;
+		}
+	};
 
 	/**
 	 * Creates an {@link FieldElement} based upon the give array of Strings.  The first String
@@ -51,8 +57,8 @@ public interface AnnotatedStringHandler extends ExtensionPoint {
 	 * @throws AnnotationException if the given text data does not fit the expected format for
 	 *         the given handler implementation.
 	 */
-    AttributedString createAnnotatedString(AttributedString prototypeString, String[] text,
-                                           Program program) throws AnnotationException;
+	public AttributedString createAnnotatedString(AttributedString prototypeString, String[] text,
+			Program program) throws AnnotationException;
 
 	/**
 	 * Returns the annotation string names that this AnnotatedStringHandler supports (e.g., "symbol",
@@ -60,7 +66,7 @@ public interface AnnotatedStringHandler extends ExtensionPoint {
 	 *
 	 * @return the annotation string names that this AnnotatedStringHandler supports.
 	 */
-    String[] getSupportedAnnotations();
+	public String[] getSupportedAnnotations();
 
 	/**
 	 * A method that is notified when an annotation is clicked.  Returns true if this annotation
@@ -72,18 +78,18 @@ public interface AnnotatedStringHandler extends ExtensionPoint {
 	 * @return true if this annotation handles the click; return false if this annotation does 
 	 *         not do anything with the click.
 	 */
-    boolean handleMouseClick(String[] annotationParts, Navigatable sourceNavigatable,
-                             ServiceProvider serviceProvider);
+	public boolean handleMouseClick(String[] annotationParts, Navigatable sourceNavigatable,
+			ServiceProvider serviceProvider);
 
 	/**
 	 * Returns the String that represents the GUI presence of this option
 	 * @return the String to display in GUI components.
 	 */
-    String getDisplayString();
+	public String getDisplayString();
 
 	/**
 	 * Returns an example string of how the annotation is used
 	 * @return the example of how this is used.
 	 */
-    String getPrototypeString();
+	public String getPrototypeString();
 }

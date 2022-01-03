@@ -94,7 +94,7 @@ public class HeadlessTimedTaskMonitor implements TaskMonitor {
 
 	@Override
 	public void checkCanceled() throws CancelledException {
-		if (isCancelled) {
+		if (isCancelled()) {
 			throw new CancelledException();
 		}
 	}

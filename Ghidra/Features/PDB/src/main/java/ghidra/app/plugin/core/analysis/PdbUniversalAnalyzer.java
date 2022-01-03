@@ -172,7 +172,7 @@ public class PdbUniversalAnalyzer extends AbstractAnalyzer {
 
 		PdbLog.message(
 			"================================================================================");
-		PdbLog.message(new Date(System.currentTimeMillis()) + "\n");
+		PdbLog.message(new Date(System.currentTimeMillis()).toString() + "\n");
 		PdbLog.message("Ghidra Version: " + Application.getApplicationVersion());
 		PdbLog.message(NAME);
 		PdbLog.message(DESCRIPTION);
@@ -188,7 +188,7 @@ public class PdbUniversalAnalyzer extends AbstractAnalyzer {
 		}
 		catch (PdbException | IOException e) {
 			log.appendMsg(getName(),
-				"Issue processing PDB file:  " + pdbFile + ":\n   " + e);
+				"Issue processing PDB file:  " + pdbFile + ":\n   " + e.toString());
 			return false;
 		}
 

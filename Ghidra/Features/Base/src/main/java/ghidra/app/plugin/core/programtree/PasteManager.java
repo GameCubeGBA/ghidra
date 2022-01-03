@@ -67,13 +67,20 @@ class PasteManager {
 			}
 
 			if (destNode.isFragment() && pasteNode.isModule()) {
-                // destination fragment
-                return isCutOperation && !pasteNode.getModule().isDescendant(destNode.getFragment()); // pasted module can be flattened onto
-            }
+				if (isCutOperation && !pasteNode.getModule().isDescendant(destNode.getFragment())) {
+
+					return true; // pasted module can be flattened onto 
+					// destination fragment
+				}
+				return false;
+			}
 
 			if (destNode.isFragment() && pasteNode.isFragment()) {
-                return isCutOperation;
-            }
+				if (isCutOperation) {
+					return true;
+				}
+				return false;
+			}
 			if (destNode.isModule()) {
 				ProgramModule destModule = destNode.getModule();
 
@@ -81,9 +88,13 @@ class PasteManager {
 					if (pasteNode.getModule().isDescendant(destModule)) {
 						return false;
 					}
-                    return isCutOperation || !destModule.contains(pasteNode.getModule());
+					if (!isCutOperation && destModule.contains(pasteNode.getModule())) {
+						return false;
+					}
 				}
-				else return isCutOperation || !destModule.contains(pasteNode.getFragment());
+				else if (!isCutOperation && destModule.contains(pasteNode.getFragment())) {
+					return false;
+				}
 			}
 
 			return true;
@@ -127,23 +138,25 @@ class PasteManager {
 				return;
 			}
 
-            for (ProgramNode tnode : list) {
-                if (destNode.getRoot() != tnode.getRoot()) {
-                    lastGroupPasted = null;
-                    break;
-                }
+			for (int i = 0; i < list.size(); i++) {
+				ProgramNode tnode = list.get(i);
 
-                if (!destNode.getName().equals(tnode.getName())) {
-                    if (pasteGroup(destNode, tnode)) {
-                        if (!(destNode.isFragment() && tnode.isModule())) {
-                            // this was not a "flatten module" operation
-                            // so we can leave the busy cursor set
-                            // until the domain object event comes in
-                            lastGroupPasted = tnode.getName();
-                        }
-                    }
-                }
-            }
+				if (destNode.getRoot() != tnode.getRoot()) {
+					lastGroupPasted = null;
+					break;
+				}
+
+				if (!destNode.getName().equals(tnode.getName())) {
+					if (pasteGroup(destNode, tnode)) {
+						if (!(destNode.isFragment() && tnode.isModule())) {
+							// this was not a "flatten module" operation
+							// so we can leave the busy cursor set
+							// until the domain object event comes in
+							lastGroupPasted = tnode.getName();
+						}
+					}
+				}
+			}
 
 			if (lastGroupPasted == null) {
 				tree.setBusyCursor(false);

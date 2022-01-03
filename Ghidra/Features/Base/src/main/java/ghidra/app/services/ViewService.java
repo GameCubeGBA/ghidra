@@ -31,10 +31,10 @@ public interface ViewService {
      * @param loc program location to be added to the view
      * @return new addressSet for the added view
      */
-    AddressSetView addToView(ProgramLocation loc);
+    public AddressSetView addToView(ProgramLocation loc);
 
     /**
      * Get the current view.
      */
-    AddressSetView getCurrentView();
+    public AddressSetView getCurrentView();
 }

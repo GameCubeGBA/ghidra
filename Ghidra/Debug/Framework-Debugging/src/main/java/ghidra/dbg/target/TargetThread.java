@@ -31,7 +31,7 @@ public interface TargetThread extends TargetObject {
 	String TID_ATTRIBUTE_NAME = PREFIX_INVISIBLE + "tid";
 
 	@TargetAttributeType(name = TID_ATTRIBUTE_NAME, hidden = true)
-    default Integer getTid() {
+	public default Integer getTid() {
 		return getTypedAttributeNowByName(TID_ATTRIBUTE_NAME, Integer.class, null);
 	}
 }

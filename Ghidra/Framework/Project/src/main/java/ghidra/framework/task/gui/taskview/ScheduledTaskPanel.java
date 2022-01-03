@@ -37,7 +37,8 @@ public class ScheduledTaskPanel extends JPanel {
 	private ScheduledElementLayout layout;
 
 	public ScheduledTaskPanel(String labelText, int indention) {
-        this.indention = indention;
+		super();
+		this.indention = indention;
 
 		setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0));
 

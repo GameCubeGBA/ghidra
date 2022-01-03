@@ -42,7 +42,8 @@ public class PreCommentFieldFactoryTest extends AbstractGhidraHeadedIntegrationT
 	private Program program;
 
 	public PreCommentFieldFactoryTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

@@ -118,7 +118,7 @@ public class FoundString implements Comparable<FoundString> {
 			return false;
 		}
 		FoundString other = (FoundString) obj;
-		return address.equals(other.address);
+		return address.equals(other.getAddress());
 
 	}
 

@@ -138,7 +138,7 @@ public abstract class RemoteBlockStreamHandle<T extends BlockStream> implements 
 	 * @return preferred socket send/receive buffer size
 	 */
 	protected int getPreferredBufferSize() {
-		return (blockSize + 4) * 12;
+		return (getBlockSize() + 4) * 12;
 	}
 
 	/**

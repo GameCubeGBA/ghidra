@@ -30,51 +30,51 @@ public class DebugDirectoryParser {
 	/**
 	 * Unknown debug type.
 	 */
-    public static final byte IMAGE_DEBUG_TYPE_UNKNOWN = 0;
+	public final static byte IMAGE_DEBUG_TYPE_UNKNOWN = 0;
 	/**
 	 * COFF debug type.
 	 */
-    public static final byte IMAGE_DEBUG_TYPE_COFF = 1;
+	public final static byte IMAGE_DEBUG_TYPE_COFF = 1;
 	/**
 	 * CodeView debug type.
 	 */
-    public static final byte IMAGE_DEBUG_TYPE_CODEVIEW = 2;
+	public final static byte IMAGE_DEBUG_TYPE_CODEVIEW = 2;
 	/**
 	 * FPO debug type.
 	 */
-    public static final byte IMAGE_DEBUG_TYPE_FPO = 3;
+	public final static byte IMAGE_DEBUG_TYPE_FPO = 3;
 	/**
 	 * Misc debug type.
 	 */
-    public static final byte IMAGE_DEBUG_TYPE_MISC = 4;
+	public final static byte IMAGE_DEBUG_TYPE_MISC = 4;
 	/**
 	 * Exception debug type.
 	 */
-    public static final byte IMAGE_DEBUG_TYPE_EXCEPTION = 5;
+	public final static byte IMAGE_DEBUG_TYPE_EXCEPTION = 5;
 	/**
 	 * Fixup debug type.
 	 */
-    public static final byte IMAGE_DEBUG_TYPE_FIXUP = 6;
+	public final static byte IMAGE_DEBUG_TYPE_FIXUP = 6;
 	/**
 	 * OMAP-To-Source debug type.
 	 */
-    public static final byte IMAGE_DEBUG_TYPE_OMAP_TO_SRC = 7;
+	public final static byte IMAGE_DEBUG_TYPE_OMAP_TO_SRC = 7;
 	/**
 	 * OMAP-From-Source debug type.
 	 */
-    public static final byte IMAGE_DEBUG_TYPE_OMAP_FROM_SRC = 8;
+	public final static byte IMAGE_DEBUG_TYPE_OMAP_FROM_SRC = 8;
 	/**
 	 * Borland debug type.
 	 */
-    public static final byte IMAGE_DEBUG_TYPE_BORLAND = 9;
+	public final static byte IMAGE_DEBUG_TYPE_BORLAND = 9;
 	/**
 	 * Reserved debug type.
 	 */
-    public static final byte IMAGE_DEBUG_TYPE_RESERVED10 = 10;
+	public final static byte IMAGE_DEBUG_TYPE_RESERVED10 = 10;
 	/**
 	 * CLS ID debug type.
 	 */
-    public static final byte IMAGE_DEBUG_TYPE_CLSID = 11;
+	public final static byte IMAGE_DEBUG_TYPE_CLSID = 11;
 
 	private ArrayList<DebugDirectory> debugFormatList = new ArrayList<DebugDirectory>();
 	private DebugMisc miscDebug;

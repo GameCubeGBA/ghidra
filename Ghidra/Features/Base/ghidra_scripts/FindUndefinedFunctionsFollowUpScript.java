@@ -61,12 +61,12 @@ public class FindUndefinedFunctionsFollowUpScript extends GhidraScript {
 				if (fsa != null) {
 					disassemble(fsa);
 					removeFunction(f);
-					StringBuilder fname = new StringBuilder(Long.toHexString(fsa.getOffset()));
+					String fname = Long.toHexString(fsa.getOffset());
 					int i;
 					for (i = fname.length(); i < 8; i++)
-						fname.insert(0, "0");
-					fname.insert(0, "FUN_");
-					createFunction(fsa, fname.toString());
+						fname = "0" + fname;
+					fname = "FUN_" + fname;
+					createFunction(fsa, fname);
 					println("fixed func at 0x" + Long.toHexString(fsa.getOffset()));
 					count = count + 1;
 				}
@@ -170,8 +170,11 @@ public class FindUndefinedFunctionsFollowUpScript extends GhidraScript {
 			println("unknown context at " + Long.toHexString(a.getOffset()));
 		}
 
-        return pi != null;
-    }
+		if (pi == null)
+			return (false);
+
+		return (true);
+	}
 
 	private Address findHead(Address a) throws Exception {
 		// looking for something like this:

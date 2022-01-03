@@ -59,15 +59,21 @@ public class DefaultGdbDebuggerMappingOpinion implements DebuggerMappingOpinion 
 		if (env == null) {
 			return false;
 		}
-        return env.getDebugger().toLowerCase().contains("gdb");
-    }
+		if (!env.getDebugger().toLowerCase().contains("gdb")) {
+			return false;
+		}
+		return true;
+	}
 
 	public static boolean isLinux(TargetEnvironment env) {
 		if (env == null) {
 			return false;
 		}
-        return env.getOperatingSystem().contains("Linux");
-    }
+		if (!env.getOperatingSystem().contains("Linux")) {
+			return false;
+		}
+		return true;
+	}
 
 	protected Set<DebuggerMappingOffer> offersForLanguageAndCSpec(TargetObject target, String arch,
 			Endian endian, LanguageCompilerSpecPair lcsp) {

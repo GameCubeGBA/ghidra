@@ -32,7 +32,8 @@ public class RegisterPluginScreenShots extends GhidraScreenShotGenerator {
 	private RegisterPlugin plugin;
 
 	public RegisterPluginScreenShots() {
-    }
+		super();
+	}
 
 	@Override
 	public void setUp() throws Exception {

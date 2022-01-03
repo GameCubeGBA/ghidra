@@ -38,20 +38,20 @@ public interface GraphDisplayBroker {
 	 * Gets the currently active GraphDisplayProvider that will be used to display/export graphs
 	 * @return the currently active GraphDisplayProvider
 	 */
-    GraphDisplayProvider getDefaultGraphDisplayProvider();
+	public GraphDisplayProvider getDefaultGraphDisplayProvider();
 
 	/**
 	 * Adds a listener for notification when the set of graph display providers change or the currently
 	 * active graph display provider changes 
 	 * @param listener the listener to be notified
 	 */
-    void addGraphDisplayBrokerListener(GraphDisplayBrokerListener listener);
+	public void addGraphDisplayBrokerListener(GraphDisplayBrokerListener listener);
 
 	/**
 	 * Removes the given listener
 	 * @param listener the listener to no longer be notified of changes
 	 */
-    void removeGraphDisplayBrokerLisetener(GraphDisplayBrokerListener listener);
+	public void removeGraphDisplayBrokerLisetener(GraphDisplayBrokerListener listener);
 
 	/**
 	 * A convenience method for getting a {@link GraphDisplay} from the currently active provider
@@ -60,27 +60,27 @@ public interface GraphDisplayBroker {
 	 * @return a {@link GraphDisplay} object to sends graphs to be displayed or exported.
 	 * @throws GraphException thrown if an error occurs trying to get a graph display
 	 */
-    GraphDisplay getDefaultGraphDisplay(boolean reuseGraph, TaskMonitor monitor)
+	public GraphDisplay getDefaultGraphDisplay(boolean reuseGraph, TaskMonitor monitor)
 			throws GraphException;
 
 	/**
 	 * Checks if there is at least one {@link GraphDisplayProvider} in the system.
 	 * @return true if there is at least one {@link GraphDisplayProvider}
 	 */
-    boolean hasDefaultGraphDisplayProvider();
+	public boolean hasDefaultGraphDisplayProvider();
 
 	/**
 	 * Gets the {@link GraphDisplayProvider} with the given name
 	 * @param name the name of the GraphDisplayProvider to get
 	 * @return the GraphDisplayProvider with the given name or null if none with that name exists.
 	 */
-    GraphDisplayProvider getGraphDisplayProvider(String name);
+	public GraphDisplayProvider getGraphDisplayProvider(String name);
 
 	/**
 	 * Returns a list of all discovered {@link AttributedGraphExporter}.
 	 * @return  a list of all discovered {@link AttributedGraphExporter}.
 	 */
-    List<AttributedGraphExporter> getGraphExporters();
+	public List<AttributedGraphExporter> getGraphExporters();
 
 	/**
 	 * Returns the {@link AttributedGraphExporter} with the given name or null in no exporter with
@@ -90,6 +90,6 @@ public interface GraphDisplayBroker {
 	 * @return  the {@link AttributedGraphExporter} with the given name or null if no exporter with
 	 * that name is known
 	 */
-    AttributedGraphExporter getGraphExporters(String name);
+	public AttributedGraphExporter getGraphExporters(String name);
 
 }

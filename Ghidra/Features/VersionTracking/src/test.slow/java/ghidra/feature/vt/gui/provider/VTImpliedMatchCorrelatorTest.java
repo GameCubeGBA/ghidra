@@ -258,17 +258,22 @@ public class VTImpliedMatchCorrelatorTest extends AbstractVTCorrelatorTest {
 	protected VTMatch getMatch(VTMatchSet matches, Address sourceAddress,
 			Address destinationAddress) {
 
-        for (VTMatch match : matches.getMatches()) {
-            if (match.getSourceAddress().equals(sourceAddress) &&
-                    match.getDestinationAddress().equals(destinationAddress)) {
-                return match;
-            }
-        }
+		Iterator<VTMatch> it = matches.getMatches().iterator();
+		while (it.hasNext()) {
+			VTMatch match = it.next();
+			if (match.getSourceAddress().equals(sourceAddress) &&
+				match.getDestinationAddress().equals(destinationAddress)) {
+				return match;
+			}
+		}
 		return null;
 	}
 
 	public boolean isMatchInMatchSet(Address srcAddr, Address destAddr, VTMatchSet matchSet) {
-        return !matchSet.getMatches(srcAddr, destAddr).isEmpty();
-    }
+		if (matchSet.getMatches(srcAddr, destAddr).size() > 0) {
+			return true;
+		}
+		return false;
+	}
 
 }

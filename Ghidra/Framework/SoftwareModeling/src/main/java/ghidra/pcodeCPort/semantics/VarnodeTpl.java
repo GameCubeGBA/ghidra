@@ -122,8 +122,11 @@ public class VarnodeTpl {
 	}
 
 	public boolean isLocalTemp() {
-        return (space.getType() == const_type.spaceid) && (space.getSpace().getType() == spacetype.IPTR_INTERNAL);
-    }
+		if ((space.getType() != ConstTpl.const_type.spaceid) || (space.getSpace().getType() != spacetype.IPTR_INTERNAL)) {
+			return false;
+		}
+		return true;
+	}
 
 	public boolean isDynamic(ParserWalker walker) {
 		if (offset.getType() != ConstTpl.const_type.handle) {

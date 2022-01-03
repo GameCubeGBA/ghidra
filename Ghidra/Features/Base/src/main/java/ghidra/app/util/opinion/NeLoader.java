@@ -48,7 +48,7 @@ import ghidra.util.task.TaskMonitor;
  * A {@link Loader} for processing Microsoft New Executable (NE) files.
  */
 public class NeLoader extends AbstractLibrarySupportLoader {
-	public static final String NE_NAME = "New Executable (NE)";
+	public final static String NE_NAME = "New Executable (NE)";
 
 	private static final String TAB = "    ";
 	private static final long MIN_BYTE_LENGTH = 4;
@@ -70,7 +70,7 @@ public class NeLoader extends AbstractLibrarySupportLoader {
 		NewExecutable ne = new NewExecutable(RethrowContinuesFactory.INSTANCE, provider, null);
 		WindowsHeader wh = ne.getWindowsHeader();
 		if (wh != null) {
-			List<QueryResult> results = QueryOpinionService.query(NE_NAME,
+			List<QueryResult> results = QueryOpinionService.query(getName(),
 				"" + wh.getInformationBlock().getMagicNumber(), null);
 			for (QueryResult result : results) {
 				loadSpecs.add(new LoadSpec(this, 0, result));

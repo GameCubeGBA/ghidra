@@ -63,8 +63,11 @@ public class EventSequenceListener implements DebuggerModelListener {
 			if (!Objects.equals(this.description, that.description)) {
 				return false;
 			}
-            return Objects.equals(this.parameters, that.parameters);
-        }
+			if (!Objects.equals(this.parameters, that.parameters)) {
+				return false;
+			}
+			return true;
+		}
 
 		@Override
 		public int hashCode() {

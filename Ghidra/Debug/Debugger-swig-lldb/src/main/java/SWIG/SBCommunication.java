@@ -107,11 +107,11 @@ public class SBCommunication {
     return lldbJNI.SBCommunication_SetReadThreadBytesReceivedCallback(swigCPtr, this, SWIGTYPE_p_f_p_void_p_q_const__void_size_t__void.getCPtr(callback), SWIGTYPE_p_void.getCPtr(callback_baton));
   }
 
-  public static final int eBroadcastBitDisconnected = lldbJNI.SBCommunication_eBroadcastBitDisconnected_get();
-  public static final int eBroadcastBitReadThreadGotBytes = lldbJNI.SBCommunication_eBroadcastBitReadThreadGotBytes_get();
-  public static final int eBroadcastBitReadThreadDidExit = lldbJNI.SBCommunication_eBroadcastBitReadThreadDidExit_get();
-  public static final int eBroadcastBitReadThreadShouldExit = lldbJNI.SBCommunication_eBroadcastBitReadThreadShouldExit_get();
-  public static final int eBroadcastBitPacketAvailable = lldbJNI.SBCommunication_eBroadcastBitPacketAvailable_get();
-  public static final int eAllEventBits = lldbJNI.SBCommunication_eAllEventBits_get();
+  public final static int eBroadcastBitDisconnected = lldbJNI.SBCommunication_eBroadcastBitDisconnected_get();
+  public final static int eBroadcastBitReadThreadGotBytes = lldbJNI.SBCommunication_eBroadcastBitReadThreadGotBytes_get();
+  public final static int eBroadcastBitReadThreadDidExit = lldbJNI.SBCommunication_eBroadcastBitReadThreadDidExit_get();
+  public final static int eBroadcastBitReadThreadShouldExit = lldbJNI.SBCommunication_eBroadcastBitReadThreadShouldExit_get();
+  public final static int eBroadcastBitPacketAvailable = lldbJNI.SBCommunication_eBroadcastBitPacketAvailable_get();
+  public final static int eAllEventBits = lldbJNI.SBCommunication_eAllEventBits_get();
 
 }

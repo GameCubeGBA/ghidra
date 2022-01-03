@@ -48,7 +48,8 @@ public class ReferenceManagerTest extends AbstractGhidraHeadedIntegrationTest {
 	 * @param arg0
 	 */
 	public ReferenceManagerTest() {
-    }
+		super();
+	}
 
 	/* 
 	 * @see TestCase#setUp()
@@ -1167,20 +1168,20 @@ public class ReferenceManagerTest extends AbstractGhidraHeadedIntegrationTest {
 		Address[] addrs =
 			new Address[] { addr(0x200), addr(0x300), addr(0x400), addr(0x500), addr(0x600),
 				addr(0x700), addr(0x800), addr(0x900) };
-    for (Address value : addrs) {
-        refMgr.addExternalEntryPointRef(value);
-    }
+		for (int i = 0; i < addrs.length; i++) {
+			refMgr.addExternalEntryPointRef(addrs[i]);
+		}
 
 		AddressIterator iter = refMgr.getExternalEntryIterator();
-    for (Address address : addrs) {
-        assertTrue(iter.hasNext());
-        Address addr = iter.next();
-        assertEquals(address, addr);
-        ReferenceIterator ri = refMgr.getReferencesTo(addr);
-        assertTrue(ri.hasNext());
-        assertTrue(ri.next().isEntryPointReference());
-        assertTrue(!ri.hasNext());
-    }
+		for (int i = 0; i < addrs.length; i++) {
+			assertTrue(iter.hasNext());
+			Address addr = iter.next();
+			assertEquals(addrs[i], addr);
+			ReferenceIterator ri = refMgr.getReferencesTo(addr);
+			assertTrue(ri.hasNext());
+			assertTrue(ri.next().isEntryPointReference());
+			assertTrue(!ri.hasNext());
+		}
 		assertTrue(!iter.hasNext());
 
 	}

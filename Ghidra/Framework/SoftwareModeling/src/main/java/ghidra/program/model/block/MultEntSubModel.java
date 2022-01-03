@@ -191,7 +191,7 @@ public class MultEntSubModel implements SubroutineBlockModel {
 		}
 
 		// Check for failure to find entry point
-		if (entryPtList.isEmpty()) {
+		if (entryPtList.size() == 0) {
 			Msg.warn(this, "Failed to find entry point for subroutine containing " + addr);
 			entryPtList.add(addrSet.getMinAddress());
 		}

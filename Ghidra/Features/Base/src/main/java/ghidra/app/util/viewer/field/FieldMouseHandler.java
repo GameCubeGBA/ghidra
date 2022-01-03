@@ -40,14 +40,14 @@ public interface FieldMouseHandler {
 	 *         {@code clickedObject}
 	 * @see   ListingField#getClickedObject(ghidra.util.bean.field.FieldLocation)
 	 */
-    boolean fieldElementClicked(Object clickedObject, Navigatable sourceNavigatable,
-                                ProgramLocation programLocation, MouseEvent mouseEvent, ServiceProvider serviceProvider);
+	public boolean fieldElementClicked(Object clickedObject, Navigatable sourceNavigatable,
+			ProgramLocation programLocation, MouseEvent mouseEvent, ServiceProvider serviceProvider);
 
 	/**
 	 * Returns an array of types that this handler wishes to handle.
 	 * 
 	 * @return an array of types that this handler wishes to handle.
 	 */
-    Class<?>[] getSupportedProgramLocations();
+	public Class<?>[] getSupportedProgramLocations();
 
 }

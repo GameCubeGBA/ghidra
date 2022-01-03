@@ -30,6 +30,6 @@ import ghidra.dbg.target.TargetDeletable;
 public interface LldbModelTargetDeletable extends LldbModelTargetObject, TargetDeletable {
 
 	@Override
-    CompletableFuture<Void> delete();
+	public CompletableFuture<Void> delete();
 
 }

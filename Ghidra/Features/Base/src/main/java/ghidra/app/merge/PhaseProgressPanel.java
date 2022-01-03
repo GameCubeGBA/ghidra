@@ -30,7 +30,7 @@ import resources.ResourceManager;
  */
 public class PhaseProgressPanel extends JPanel {
 
-	private static final String DEFAULT_INFO = "Merge programs in progress...";
+	private final static String DEFAULT_INFO = "Merge programs in progress...";
 	private ImageIcon INFORM_ICON = ResourceManager.loadImage("images/information.png");
 
 	private JLabel titleLabel;
@@ -103,7 +103,12 @@ public class PhaseProgressPanel extends JPanel {
 		doSetMessage(DEFAULT_INFO);
 
 		// Sets up the timer for updating the GUI.
-		updateTimer = new Timer(250, e -> update());
+		updateTimer = new Timer(250, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				update();
+			}
+		});
 	}
 
 	// Method for use by the timer to update the progress bar or message.

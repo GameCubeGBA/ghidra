@@ -129,7 +129,7 @@ public class BuiltInDataTypeManager extends StandAloneDataTypeManager {
 			for (BuiltInDataType datatype : datatypes) {
 				list.clear();
 				findDataTypes(datatype.getName(), list);
-				if (list.isEmpty()) {
+				if (list.size() == 0) {
 					super.resolve(datatype, null);
 				}
 				else if (!list.get(0).isEquivalent(datatype)) {

@@ -51,54 +51,54 @@ import ghidra.util.task.TaskMonitor;
  */
 abstract class AbstractFunctionMerger implements ListingMergeConstants {
 
-	protected static final int BODY_CONFLICT_START = 35;
-	protected static final int BODY_CONFLICT_SIZE = 25;
-	protected static final int FUNCTION_CONFLICT_START = 60;
-	protected static final int FUNCTION_CONFLICT_SIZE = 25;
-	protected static final int DETAILS_CONFLICT_START = 85;
-	protected static final int DETAILS_CONFLICT_SIZE = 15;
+	static protected final int BODY_CONFLICT_START = 35;
+	static protected final int BODY_CONFLICT_SIZE = 25;
+	static protected final int FUNCTION_CONFLICT_START = 60;
+	static protected final int FUNCTION_CONFLICT_SIZE = 25;
+	static protected final int DETAILS_CONFLICT_START = 85;
+	static protected final int DETAILS_CONFLICT_SIZE = 15;
 
-	protected static final int FUNC_OVERLAP = 0x001;
-	protected static final int FUNC_BODY = 0x002;
-	protected static final int FUNC_REMOVE = 0x004;
-	protected static final int FUNC_THUNK = 0x008;
+	static protected final int FUNC_OVERLAP = 0x001;
+	static protected final int FUNC_BODY = 0x002;
+	static protected final int FUNC_REMOVE = 0x004;
+	static protected final int FUNC_THUNK = 0x008;
 
-	protected static final int FUNC_RETURN = 0x001; // return type/storage conflict
-	protected static final int FUNC_RETURN_ADDRESS_OFFSET = 0x002;
+	static protected final int FUNC_RETURN = 0x001; // return type/storage conflict
+	static protected final int FUNC_RETURN_ADDRESS_OFFSET = 0x002;
 // For now, we are not allowing you to set the parameter offset or local size outright.
 //	static protected final int FUNC_PARAMETER_OFFSET = 0x004;
 //	static protected final int FUNC_LOCAL_SIZE = 0x008;
-protected static final int FUNC_STACK_PURGE_SIZE = 0x010;
-	protected static final int FUNC_NAME = 0x020;
-	protected static final int FUNC_INLINE = 0x040;
-	protected static final int FUNC_NO_RETURN = 0x080;
-	protected static final int FUNC_CALLING_CONVENTION = 0x100;
+	static protected final int FUNC_STACK_PURGE_SIZE = 0x010;
+	static protected final int FUNC_NAME = 0x020;
+	static protected final int FUNC_INLINE = 0x040;
+	static protected final int FUNC_NO_RETURN = 0x080;
+	static protected final int FUNC_CALLING_CONVENTION = 0x100;
 //	static protected final int FUNC_CUSTOM_STORAGE = 0x200; // custom mode differs
-protected static final int FUNC_VAR_STORAGE = 0x400; // overlapping variable storage
-	protected static final int FUNC_SIGNATURE = 0x800;
-	protected static final int FUNC_LOCAL_DETAILS = 0x1000; // one or more local details differ
-	protected static final int FUNC_PARAM_DETAILS = 0x2000; // one or more param details differ
+	static protected final int FUNC_VAR_STORAGE = 0x400; // overlapping variable storage 
+	static protected final int FUNC_SIGNATURE = 0x800;
+	static protected final int FUNC_LOCAL_DETAILS = 0x1000; // one or more local details differ
+	static protected final int FUNC_PARAM_DETAILS = 0x2000; // one or more param details differ
 //	static protected final int FUNC_LOCAL_REMOVED = 0x4000; // deleted variable conflicts with changes
-protected static final int FUNC_SIGNATURE_SOURCE = 0x8000;
+	static protected final int FUNC_SIGNATURE_SOURCE = 0x8000;
 
 	// FUNC_DETAIL_MASK doesn't include the FUNC_SIGNATURE_SOURCE, since signature source conflicts 
 	// will get merged by priority instead of a user prompt.
 	// NOTE: Custom storage attribute should be handled as a side-affect of achieving desired storage
 	// for return and parameters not as an independently managed attribute
-    protected static final int FUNC_DETAIL_MASK = FUNC_RETURN_ADDRESS_OFFSET |
+	static protected final int FUNC_DETAIL_MASK = FUNC_RETURN_ADDRESS_OFFSET |
 		FUNC_STACK_PURGE_SIZE | FUNC_NAME | FUNC_INLINE | FUNC_NO_RETURN | // FUNC_CUSTOM_STORAGE |
 		FUNC_CALLING_CONVENTION;
 
 //	static protected final int VAR_TYPE = 0x001;
-protected static final int VAR_NAME = 0x002;
-	protected static final int VAR_DATATYPE = 0x004;
+	static protected final int VAR_NAME = 0x002;
+	static protected final int VAR_DATATYPE = 0x004;
 //	static protected final int VAR_LENGTH = 0x008;
-protected static final int VAR_COMMENT = 0x010;
+	static protected final int VAR_COMMENT = 0x010;
 //	static protected final int VAR_STORAGE = 0x020;
 //	static protected final int VAR_ORDINAL = 0x040;
 //	static protected final int VAR_FIRST_USE = 0x080;
 //	static protected final int VAR_REGISTER = 0x100;
-protected static final int VAR_REMOVED = 0x200;
+	static protected final int VAR_REMOVED = 0x200;
 
 	protected static final int HEADER = -1;
 	protected static final int RESULT = MergeConstants.RESULT;
@@ -232,12 +232,12 @@ protected static final int VAR_REMOVED = 0x200;
 	 * 	FUNC_INLINE, FUNC_NO_RETURN, FUNC_CALLING_CONVENTION, FUNC_VAR_STORAGE
 	 * 	FUNC_CUSTOM_STORAGE, FUNC_VAR_DETAILS, FUNC_SIGNATURE)
 	 */
-    protected abstract void saveFunctionDetailConflict(Function[] functions,
+	abstract protected void saveFunctionDetailConflict(Function[] functions,
 			int functionConflictFlags);
 
-	protected abstract String getInfoTitle();
+	abstract protected String getInfoTitle();
 
-	protected abstract String getErrorTitle();
+	abstract protected String getErrorTitle();
 
 	/**
 	 * Determines whether or not the part of the function, indicated by the type value, is in
@@ -351,9 +351,12 @@ protected static final int VAR_REMOVED = 0x200;
 			mergeFunctionDetail(FUNC_NAME, myEntryPoint, getMergeMy(), monitor);
 			return false;
 		}
-        // Keep LATEST.
-        return !myIsDefault;// LATEST & MY aren't defaults and were changed, so they conflict.
-    }
+		if (myIsDefault) {
+			// Keep LATEST.
+			return false;
+		}
+		return true; // LATEST & MY aren't defaults and were changed, so they conflict.
+	}
 
 	private boolean isDefaultName(Function function) {
 		if (function != null) {
@@ -1369,11 +1372,12 @@ protected static final int VAR_REMOVED = 0x200;
 
 	protected void mergeParamInfo(Address entryPt, List<ParamInfoConflict> paramInfoConflicts,
 			int chosenConflictOption, TaskMonitor monitor) throws CancelledException {
-        for (ParamInfoConflict paramInfoConflict : paramInfoConflicts) {
-            monitor.checkCanceled();
-            ParamInfoConflict pc = paramInfoConflict;
-            mergeParamInfo(entryPt, pc, chosenConflictOption, monitor);
-        }
+		Iterator<ParamInfoConflict> iter = paramInfoConflicts.iterator();
+		while (iter.hasNext()) {
+			monitor.checkCanceled();
+			ParamInfoConflict pc = iter.next();
+			mergeParamInfo(entryPt, pc, chosenConflictOption, monitor);
+		}
 	}
 
 	protected void mergeParamInfo(Address entryPt, ParamInfoConflict pc, int chosenConflictOption,
@@ -1400,11 +1404,12 @@ protected static final int VAR_REMOVED = 0x200;
 	protected void mergeParamInfo(Function[] functions, List<ParamInfoConflict> paramInfoConflicts,
 			int chosenConflictOption, TaskMonitor monitor) throws CancelledException {
 
-        for (ParamInfoConflict paramInfoConflict : paramInfoConflicts) {
-            monitor.checkCanceled();
-            ParamInfoConflict pc = paramInfoConflict;
-            mergeParamInfo(functions, pc, chosenConflictOption, monitor);
-        }
+		Iterator<ParamInfoConflict> iter = paramInfoConflicts.iterator();
+		while (iter.hasNext()) {
+			monitor.checkCanceled();
+			ParamInfoConflict pc = iter.next();
+			mergeParamInfo(functions, pc, chosenConflictOption, monitor);
+		}
 	}
 
 	protected void mergeParamInfo(Function[] functions, ParamInfoConflict pc,
@@ -1430,11 +1435,12 @@ protected static final int VAR_REMOVED = 0x200;
 
 	protected void mergeLocals(Address entryPt, List<LocalVariableConflict> localVarConflicts,
 			int chosenConflictOption, TaskMonitor monitor) throws CancelledException {
-        for (LocalVariableConflict localVarConflict : localVarConflicts) {
-            monitor.checkCanceled();
-            LocalVariableConflict lvc = localVarConflict;
-            mergeLocal(entryPt, lvc, chosenConflictOption, monitor);
-        }
+		Iterator<LocalVariableConflict> iter = localVarConflicts.iterator();
+		while (iter.hasNext()) {
+			monitor.checkCanceled();
+			LocalVariableConflict lvc = iter.next();
+			mergeLocal(entryPt, lvc, chosenConflictOption, monitor);
+		}
 	}
 
 	protected void mergeLocal(Address entryPt, LocalVariableConflict localVarConflict,

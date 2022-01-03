@@ -28,7 +28,7 @@ public class FileEntry {
 
 	FileEntry(BinaryReader reader) throws IOException {
 		fileName = reader.readNextAsciiString();
-		if (fileName.isEmpty()) {
+		if (fileName.length() == 0) {
 			return;
 		}
 		directoryIndex = LEB128.readAsLong(reader, false);

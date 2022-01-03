@@ -45,8 +45,8 @@ import ghidra.util.layout.VerticalLayout;
  */
 public class CompEditorPanel extends CompositeEditorPanel {
 
-	protected static final Insets LEFT_INSETS = new Insets(2, 3, 1, 0);
-	protected static final Insets VERTICAL_INSETS = new Insets(2, 0, 1, 0);
+	protected final static Insets LEFT_INSETS = new Insets(2, 3, 1, 0);
+	protected final static Insets VERTICAL_INSETS = new Insets(2, 0, 1, 0);
 
 	// GUI components for displaying composite data type information.
 	private GridBagLayout gridBagLayout;
@@ -907,7 +907,7 @@ public class CompEditorPanel extends CompositeEditorPanel {
 				if (doc.equals(nameTextField.getDocument())) {
 					model.clearStatus();
 					String name = nameTextField.getText().trim();
-					if (name.isEmpty()) {
+					if (name.length() == 0) {
 						return;
 					}
 					try {
@@ -1008,7 +1008,7 @@ public class CompEditorPanel extends CompositeEditorPanel {
 		String nameText = this.nameTextField.getText();
 		String newName = nameText.trim();
 		if (!DataUtilities.isValidDataTypeName(newName)) {
-			if (newName.isEmpty()) {
+			if (newName.length() == 0) {
 				model.setStatus("Name is required.");
 			}
 			else {
@@ -1017,7 +1017,7 @@ public class CompEditorPanel extends CompositeEditorPanel {
 			return;
 		}
 		String originalDtName = model.getOriginalDataTypeName();
-		if (!newName.equals(originalDtName) && newName.isEmpty()) {
+		if (!newName.equals(originalDtName) && newName.length() == 0) {
 			nameTextField.setText(originalDtName);
 			model.setStatus("Name is required. So original name has been restored.");
 			return;
@@ -1181,8 +1181,11 @@ public class CompEditorPanel extends CompositeEditorPanel {
 			if (table.isEditing()) {
 				table.editingCanceled(null);
 			}
-			boolean inserting = dropAction == DnDConstants.ACTION_COPY;
-            dndTableCellRenderer.selectRange(inserting);
+			boolean inserting = false;
+			if (dropAction == DnDConstants.ACTION_COPY) {
+				inserting = true;
+			}
+			dndTableCellRenderer.selectRange(inserting);
 			dndDtiCellRenderer.selectRange(inserting);
 			Point p = e.getLocation();
 			int row = table.rowAtPoint(p);
