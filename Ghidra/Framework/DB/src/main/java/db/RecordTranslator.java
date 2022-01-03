@@ -20,7 +20,7 @@ public interface RecordTranslator {
 	/**
 	 * Translate the indicated old database record into a current database record. 
 	 * @param oldRecord the old database record.
-	 * @return the new data base record in the form required for the current database version.
+	 * @return the new database record in the form required for the current database version.
 	 */
 	DBRecord translateRecord(DBRecord oldRecord);
 }

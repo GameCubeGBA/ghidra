@@ -149,7 +149,7 @@ public class DataTypeDependencyOrderer {
 	 * @return  pair of arrayLists--one of structs and one complete list of dependents
 	 */
 	public Pair<ArrayList<DataType>, ArrayList<DataType>> getAcyclicDependencyLists() {
-		if (processed == false) {
+		if (!processed) {
 			processDependencyLists();
 		}
 		return new Pair<>(structList, orderedDependentsList);
@@ -162,7 +162,7 @@ public class DataTypeDependencyOrderer {
 	 * @return  An arrayList of structs
 	 */
 	public ArrayList<DataType> getStructList() {
-		if (processed == false) {
+		if (!processed) {
 			processDependencyLists();
 		}
 		return structList;
@@ -173,7 +173,7 @@ public class DataTypeDependencyOrderer {
 	 * @return  An ArrayList of dependents.
 	 */
 	public ArrayList<DataType> getDependencyList() {
-		if (processed == false) {
+		if (!processed) {
 			processDependencyLists();
 		}
 		return orderedDependentsList;

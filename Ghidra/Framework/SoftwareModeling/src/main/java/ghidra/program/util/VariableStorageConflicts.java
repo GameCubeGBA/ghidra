@@ -175,7 +175,7 @@ public class VariableStorageConflicts {
 		VariableStorage storage = var.getVariableStorage();
 		if (storage.intersects(intersectSet)) {
 
-			expanded |= true;
+			expanded = true;
 			paramOnlyAddressSets = false;
 
 			variables.set(index, null); // avoid concurrent modification and mark as consumed

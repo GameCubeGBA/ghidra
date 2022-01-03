@@ -145,7 +145,7 @@ class InstDBAdapterV0 extends InstDBAdapter {
 	@Override
 	RecordIterator getRecords(Address start, Address end, boolean atStart) throws IOException {
 		return new RecordIteratorAdapter(new AddressKeyRecordIterator(instTable, addrMap,
-			atStart ? start : end, atStart == true));
+			atStart ? start : end, atStart));
 	}
 
 	/**

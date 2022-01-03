@@ -44,7 +44,7 @@ public class ProcessedPNG implements StructConverter {
 			fileSignature = reader.readNextByteArray(CrushedPNGConstants.SIGNATURE_BYTES.length);
 			totalLength += fileSignature.length;
 
-			while (true && !monitor.isCancelled()) {
+			while (!monitor.isCancelled()) {
 				PNGChunk chunk = new PNGChunk(reader);
 				if (chunk.getIDString().equals(CrushedPNGConstants.IEND_STRING)) {
 

@@ -248,7 +248,7 @@ public class ImportBatchTask extends Task {
 		int uas = userSrcPath.length();
 		int container = uas + 1;
 
-		int leadStart = (stripLeadingPath == false) ? 0 : userSrcPath.lastIndexOf('/') + 1;
+		int leadStart = (!stripLeadingPath) ? 0 : userSrcPath.lastIndexOf('/') + 1;
 		int leadEnd = Math.min(filename, userSrcPath.length());
 		String leading = (leadStart < filename) ? fullPath.substring(leadStart, leadEnd) : "";
 		String containerPath = container < filename && !stripInteriorContainerPath

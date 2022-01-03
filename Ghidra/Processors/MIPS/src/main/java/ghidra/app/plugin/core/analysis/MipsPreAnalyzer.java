@@ -211,7 +211,7 @@ public class MipsPreAnalyzer extends AbstractAnalyzer {
 		if (curvalue != null) {
 			inPairBit = (curvalue.intValue() == 1);
 		}
-		if (inPairBit == true) {
+		if (inPairBit) {
 			return;
 		}
 

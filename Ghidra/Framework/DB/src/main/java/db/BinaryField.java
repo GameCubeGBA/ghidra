@@ -158,8 +158,7 @@ public class BinaryField extends Field {
 		int len2 = f.data.length;
 		int offset1 = 0;
 		int offset2 = 0;
-		int n = Math.min(len1, len2);
-		while (n-- != 0) {
+		for (int n = Math.min(len1, len2); n != 0; n--) {
 			int b1 = data[offset1++] & 0xff;
 			int b2 = f.data[offset2++] & 0xff;
 			if (b1 != b2) {

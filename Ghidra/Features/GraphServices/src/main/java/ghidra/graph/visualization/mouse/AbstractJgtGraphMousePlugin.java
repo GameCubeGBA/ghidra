@@ -156,7 +156,7 @@ public abstract class AbstractJgtGraphMousePlugin<V, E>
 
 		selectedVertexState.isSelected(vertex);
 
-		if (selectedVertexState.isSelected(vertex) == false) {
+		if (!selectedVertexState.isSelected(vertex)) {
 			selectedVertexState.clear();
 			selectedVertexState.select(vertex, true);
 		}
@@ -179,7 +179,7 @@ public abstract class AbstractJgtGraphMousePlugin<V, E>
 
 		selectedVertexState.isSelected(edge);
 
-		if (selectedVertexState.isSelected(edge) == false) {
+		if (!selectedVertexState.isSelected(edge)) {
 			selectedVertexState.clear();
 			selectedVertexState.select(edge, true);
 		}

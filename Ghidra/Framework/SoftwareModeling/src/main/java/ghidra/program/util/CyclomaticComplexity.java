@@ -48,10 +48,7 @@ public class CyclomaticComplexity {
 		int nodes = 0;
 		int edges = 0;
 		int exits = 0;
-		while (codeBlockIterator.hasNext()) {
-			if (monitor.isCancelled()) {
-				break;
-			}
+		while (codeBlockIterator.hasNext() && !monitor.isCancelled()) {
 			CodeBlock codeBlock = codeBlockIterator.next();
 			++nodes;
 			if (codeBlock.getFlowType().isTerminal()) {
@@ -60,21 +57,19 @@ public class CyclomaticComplexity {
 				++edges;
 			}
 			CodeBlockReferenceIterator destinations = codeBlock.getDestinations(monitor);
-			while (destinations.hasNext()) {
-				if (monitor.isCancelled()) {
-					break;
-				}
+			while (codeBlockIterator.hasNext() && !monitor.isCancelled()) {
 				CodeBlockReference reference = destinations.next();
 				FlowType flowType = reference.getFlowType();
 				if (flowType.isIndirect() || flowType.isCall()) {
 					continue;
 				}
-				++edges;
+				
 				if (codeBlock.getFlowType().isTerminal() &&
 					reference.getDestinationAddress().equals(entryPoint)) {
-					// remove the edge I created since it already exists and was counted above at (*)
-					--edges;
+					// Do not add the edge since it already exists and was counted above at (*)
+					continue;
 				}
+				++edges;
 			}
 		}
 		return Math.max(edges - nodes + exits, 0);

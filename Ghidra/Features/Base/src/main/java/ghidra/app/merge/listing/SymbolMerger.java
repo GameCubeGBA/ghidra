@@ -772,7 +772,7 @@ class SymbolMerger extends AbstractListingMerger {
 						updateResolveIDs(originalPgm, id, -1);
 						deferredRemoveIDs.remove(id);
 						list.remove(i--);
-						removedSome |= true;
+						removedSome = true;
 						incrementProgress(1);
 					}
 				}

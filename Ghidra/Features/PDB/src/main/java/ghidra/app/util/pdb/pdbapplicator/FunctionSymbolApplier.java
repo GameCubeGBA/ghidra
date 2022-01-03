@@ -172,7 +172,7 @@ public class FunctionSymbolApplier extends MsSymbolApplier {
 	@Override
 	void apply() throws PdbException, CancelledException {
 		boolean result = applyTo(applicator.getCancelOnlyWrappingMonitor());
-		if (result == false) {
+		if (!result) {
 			throw new PdbException(this.getClass().getSimpleName() + ": failure at " + address +
 				" applying " + getName());
 		}
@@ -184,7 +184,7 @@ public class FunctionSymbolApplier extends MsSymbolApplier {
 		}
 
 		boolean functionSuccess = applyFunction(monitor);
-		if (functionSuccess == false) {
+		if (!functionSuccess) {
 			return false;
 		}
 		registerChangeCalculator = new RegisterChangeCalculator(procedureSymbol, function, monitor);
