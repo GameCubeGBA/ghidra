@@ -56,7 +56,7 @@ class ApplySymbols {
 				return;
 			}
 			XmlElement elem = xmlParser.next();
-			if (elem.isEnd() && "table".equals(elem.getName())) {
+			if (elem.isEnd() && elem.getName().equals("table")) {
 				break;
 			}
 			xmlParser.next();//skip end element
@@ -72,7 +72,7 @@ class ApplySymbols {
 
 			tagSet.add(tag);
 
-			if (name.isEmpty() || addr == 0) {
+			if (name.length() == 0 || addr == 0) {
 				continue;
 			}
 
@@ -98,7 +98,7 @@ class ApplySymbols {
 			}
 
 			// Place compiler generated symbols (e.g., $LN9) within containing function when possible
-			if (name.charAt(0) == '$' && !name.contains(Namespace.DELIMITER)) {
+			if (name.startsWith("$") && !name.contains(Namespace.DELIMITER)) {
 				Function f = functionManager.getFunctionContaining(address);
 				if (f != null && !f.getName().equals(name)) {
 					name = NamespaceUtils.getNamespaceQualifiedName(f, name, true);
@@ -169,8 +169,8 @@ class ApplySymbols {
 			if (GuidUtil.isGuidLabel(program, address, name)) {
 				pdbParser.createData(address, new GuidDataType(), log);
 			}
-			else if ("Data".equals(tag)) {
-				if (datatype.isEmpty()) {
+			else if (tag.equals("Data")) {
+				if (datatype.length() == 0) {
 					continue;
 				}
 				pdbParser.createData(address, datatype, log);
@@ -194,7 +194,9 @@ class ApplySymbols {
 		if (primarySymbol != null) {
 			SourceType primarySymbolSource = primarySymbol.getSource();
 
-            return primarySymbolSource.equals(SourceType.ANALYSIS);
+			if (primarySymbolSource.equals(SourceType.ANALYSIS)) {
+				return true;
+			}
 		}
 		return false;
 	}

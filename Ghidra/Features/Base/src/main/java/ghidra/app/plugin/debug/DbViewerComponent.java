@@ -39,7 +39,12 @@ class DbViewerComponent extends JPanel {
 
 	private static Table[] NO_TABLES = new Table[0];
 
-	private static Comparator<Table> TABLE_NAME_COMPARATOR = (o1, o2) -> (o1).getName().compareTo((o2).getName());
+	private static Comparator<Table> TABLE_NAME_COMPARATOR = new Comparator<>() {
+		@Override
+		public int compare(Table o1, Table o2) {
+			return (o1).getName().compareTo((o2).getName());
+		}
+	};
 
 	private DBHandle dbh;
 	private DBListener dbListener;
@@ -61,12 +66,22 @@ class DbViewerComponent extends JPanel {
 		subNorthPanel.add(dbLabel);
 		subNorthPanel.add(new GLabel("Tables:"));
 		combo = new GComboBox<>();
-		combo.addActionListener(e -> refreshTable());
+		combo.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				refreshTable();
+			}
+		});
 		subNorthPanel.add(combo);
 		northPanel.add(subNorthPanel);
 		add(northPanel, BorderLayout.NORTH);
 
-		updateMgr = new SwingUpdateManager(100, 2000, () -> refresh());
+		updateMgr = new SwingUpdateManager(100, 2000, new Runnable() {
+			@Override
+			public void run() {
+				refresh();
+			}
+		});
 	}
 
 	synchronized void closeDatabase() {

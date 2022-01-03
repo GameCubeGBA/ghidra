@@ -319,10 +319,10 @@ public class DWARFAttributeFactoryTest extends AbstractGenericTest {
 		// Test max block4 sized chunk
 		byte[] bytes = new byte[4 + DWARFAttributeFactory.MAX_BLOCK4_SIZE];
 		//DWARFAttributeFactory.MAX_BLOCK4_SIZE == 0x00_10_00_00
-		bytes[0] = 0x00;
-		bytes[1] = 0x10;
-		bytes[2] = 0x00;
-		bytes[3] = 0x00;
+		bytes[0] = (byte) 0x00;
+		bytes[1] = (byte) 0x10;
+		bytes[2] = (byte) 0x00;
+		bytes[3] = (byte) 0x00;
 		result = attribFactory.read(br(bytes), cu, DWARFForm.DW_FORM_block4);
 		assertTrue("Should be block", result instanceof DWARFBlobAttribute);
 		assertEquals("should be MAX_BLOCK4_SIZE", DWARFAttributeFactory.MAX_BLOCK4_SIZE,
@@ -331,10 +331,10 @@ public class DWARFAttributeFactoryTest extends AbstractGenericTest {
 		// Test block4 size that is larger than max
 		bytes = new byte[4 + DWARFAttributeFactory.MAX_BLOCK4_SIZE + 1];
 		//DWARFAttributeFactory.MAX_BLOCK4_SIZE == 0x00_10_00_00 + 1 == 0x00_10_00_01
-		bytes[0] = 0x00;
-		bytes[1] = 0x10;
-		bytes[2] = 0x00;
-		bytes[3] = 0x01;
+		bytes[0] = (byte) 0x00;
+		bytes[1] = (byte) 0x10;
+		bytes[2] = (byte) 0x00;
+		bytes[3] = (byte) 0x01;
 		try {
 			result = attribFactory.read(br(bytes), cu, DWARFForm.DW_FORM_block4);
 			fail(

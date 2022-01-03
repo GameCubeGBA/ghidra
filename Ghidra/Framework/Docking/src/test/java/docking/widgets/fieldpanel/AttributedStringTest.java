@@ -35,7 +35,8 @@ public class AttributedStringTest extends AbstractGenericTest {
 	FontMetrics fm;
 
 	public AttributedStringTest() {
-    }
+		super();
+	}
 
 	@SuppressWarnings("deprecation") // we mean to use getFontMetrics
 	@Before

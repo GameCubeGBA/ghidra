@@ -52,83 +52,83 @@ public class FileHeader implements StructConverter {
 	/**
 	 * The name to use when converting into a structure data type.
 	 */
-    public static final String NAME = "IMAGE_FILE_HEADER";
+	public final static String NAME = "IMAGE_FILE_HEADER";
 	/**
 	 * The size of the <code>IMAGE_FILE_HEADER</code> in bytes.
 	 */
-    public static final int IMAGE_SIZEOF_FILE_HEADER = 20;
+	public final static int IMAGE_SIZEOF_FILE_HEADER = 20;
 
 	/**
 	 * Relocation info stripped from file.
 	 */
-    public static final int IMAGE_FILE_RELOCS_STRIPPED = 0x0001;
+	public final static int IMAGE_FILE_RELOCS_STRIPPED = 0x0001;
 	/**
 	 * File is executable (no unresolved externel references).
 	 */
-    public static final int IMAGE_FILE_EXECUTABLE_IMAGE = 0x0002;
+	public final static int IMAGE_FILE_EXECUTABLE_IMAGE = 0x0002;
 	/**
 	 * Line nunbers stripped from file.
 	 */
-    public static final int IMAGE_FILE_LINE_NUMS_STRIPPED = 0x0004;
+	public final static int IMAGE_FILE_LINE_NUMS_STRIPPED = 0x0004;
 	/**
 	 * Local symbols stripped from file.
 	 */
-    public static final int IMAGE_FILE_LOCAL_SYMS_STRIPPED = 0x0008;
+	public final static int IMAGE_FILE_LOCAL_SYMS_STRIPPED = 0x0008;
 	/**
 	 * Agressively trim working set
 	 */
-    public static final int IMAGE_FILE_AGGRESIVE_WS_TRIM = 0x0010;
+	public final static int IMAGE_FILE_AGGRESIVE_WS_TRIM = 0x0010;
 	/**
 	 * App can handle &gt;2gb addresses
 	 */
-    public static final int IMAGE_FILE_LARGE_ADDRESS_AWARE = 0x0020;
+	public final static int IMAGE_FILE_LARGE_ADDRESS_AWARE = 0x0020;
 	/**
 	 * Bytes of machine word are reversed.
 	 */
-    public static final int IMAGE_FILE_BYTES_REVERSED_LO = 0x0080;
+	public final static int IMAGE_FILE_BYTES_REVERSED_LO = 0x0080;
 	/**
 	 * 32 bit word machine.
 	 */
-    public static final int IMAGE_FILE_32BIT_MACHINE = 0x0100;
+	public final static int IMAGE_FILE_32BIT_MACHINE = 0x0100;
 	/**
 	 * Debugging info stripped from file in .DBG file
 	 */
-    public static final int IMAGE_FILE_DEBUG_STRIPPED = 0x0200;
+	public final static int IMAGE_FILE_DEBUG_STRIPPED = 0x0200;
 	/**
 	 * If Image is on removable media, copy and run from the swap file.
 	 */
-    public static final int IMAGE_FILE_REMOVABLE_RUN_FROM_SWAP = 0x0400;
+	public final static int IMAGE_FILE_REMOVABLE_RUN_FROM_SWAP = 0x0400;
 	/**
 	 * If Image is on Net, copy and run from the swap file.
 	 */
-    public static final int IMAGE_FILE_NET_RUN_FROM_SWAP = 0x0800;
+	public final static int IMAGE_FILE_NET_RUN_FROM_SWAP = 0x0800;
 	/**
 	 * System File.
 	 */
-    public static final int IMAGE_FILE_SYSTEM = 0x1000;
+	public final static int IMAGE_FILE_SYSTEM = 0x1000;
 	/**
 	 * File is a DLL.
 	 */
-    public static final int IMAGE_FILE_DLL = 0x2000;
+	public final static int IMAGE_FILE_DLL = 0x2000;
 	/**
 	 * File should only be run on a UP machine.
 	 */
-    public static final int IMAGE_FILE_UP_SYSTEM_ONLY = 0x4000;
+	public final static int IMAGE_FILE_UP_SYSTEM_ONLY = 0x4000;
 	/**
 	 * Bytes of machine word are reversed.
 	 */
-    public static final int IMAGE_FILE_BYTES_REVERSED_HI = 0x8000;
+	public final static int IMAGE_FILE_BYTES_REVERSED_HI = 0x8000;
 
 	/**
 	 * Magic value in LordPE's Symbol Table pointer field.
 	 */
-    private static final int LORDPE_SYMBOL_TABLE = 0x726F4C5B;
+	private final static int LORDPE_SYMBOL_TABLE = 0x726F4C5B;
 	/**
 	 * Magic value in LordPE's Number of Symbols field.
 	 */
-    private static final int LORDPE_NUMBER_OF_SYMBOLS = 0x5D455064;
+	private final static int LORDPE_NUMBER_OF_SYMBOLS = 0x5D455064;
 
-	public static final String[] CHARACTERISTICS = { "Relocation info stripped from file",
+	public final static String[] CHARACTERISTICS = { "Relocation info stripped from file",
 		"File is executable  (i.e. no unresolved externel references)",
 		"Line nunbers stripped from file", "Local symbols stripped from file",
 		"Agressively trim working set", "App can handle >2gb addresses",
@@ -141,32 +141,32 @@ public class FileHeader implements StructConverter {
 	/**
 	 * Values for the Machine field indicating the intended processor architecture
 	 */
-    public static final int IMAGE_FILE_MACHINE_MASK = 0xFFFF;
-	public static final int IMAGE_FILE_MACHINE_UNKNOWN = 0x0; 		//	The content of this field is assumed to be applicable to any machine type
-	public static final int IMAGE_FILE_MACHINE_AM33 = 0x1d3; 		//	Matsushita AM33
-	public static final int IMAGE_FILE_MACHINE_AMD64 = 0x8664; 		//	x64
-	public static final int IMAGE_FILE_MACHINE_ARM = 0x1c0; 		//	ARM little endian
-	public static final int IMAGE_FILE_MACHINE_ARM64 = 0xaa64; 		//	ARM64 little endian
-	public static final int IMAGE_FILE_MACHINE_ARMNT = 0x1c4; 		//	ARM Thumb-2 little endian
-	public static final int IMAGE_FILE_MACHINE_EBC = 0xebc; 		//	EFI byte code
-	public static final int IMAGE_FILE_MACHINE_I386 = 0x14c; 		//	Intel 386 or later processors and compatible processors
-	public static final int IMAGE_FILE_MACHINE_IA64 = 0x200; 		//	Intel Itanium processor family
-	public static final int IMAGE_FILE_MACHINE_M32R = 0x9041; 		//	Mitsubishi M32R little endian
-	public static final int IMAGE_FILE_MACHINE_MIPS16 = 0x266; 		//	MIPS16
-	public static final int IMAGE_FILE_MACHINE_MIPSFPU = 0x366; 	//	MIPS with FPU
-	public static final int IMAGE_FILE_MACHINE_MIPSFPU16 = 0x466; 	//	MIPS16 with FPU
-	public static final int IMAGE_FILE_MACHINE_POWERPC = 0x1f0; 	//	Power PC little endian
-	public static final int IMAGE_FILE_MACHINE_POWERPCFP = 0x1f1; 	//	Power PC with floating point support
-	public static final int IMAGE_FILE_MACHINE_R4000 = 0x166; 		//	MIPS little endian
-	public static final int IMAGE_FILE_MACHINE_RISCV32 = 0x5032; 	//	RISC-V 32-bit address space
-	public static final int IMAGE_FILE_MACHINE_RISCV64 = 0x5064; 	//	RISC-V 64-bit address space
-	public static final int IMAGE_FILE_MACHINE_RISCV128 = 0x5128; 	//	RISC-V 128-bit address space
-	public static final int IMAGE_FILE_MACHINE_SH3 = 0x1a2; 		//	Hitachi SH3
-	public static final int IMAGE_FILE_MACHINE_SH3DSP = 0x1a3; 		//	Hitachi SH3 DSP
-	public static final int IMAGE_FILE_MACHINE_SH4 = 0x1a6; 		//	Hitachi SH4
-	public static final int IMAGE_FILE_MACHINE_SH5 = 0x1a8; 		//	Hitachi SH5
-	public static final int IMAGE_FILE_MACHINE_THUMB = 0x1c2; 		//	Thumb
-	public static final int IMAGE_FILE_MACHINE_WCEMIPSV2 = 0x169;	//	MIPS little-endian WCE v2
+	public final static int IMAGE_FILE_MACHINE_MASK = 0xFFFF;
+	public final static int IMAGE_FILE_MACHINE_UNKNOWN = 0x0; 		//	The content of this field is assumed to be applicable to any machine type
+	public final static int IMAGE_FILE_MACHINE_AM33 = 0x1d3; 		//	Matsushita AM33
+	public final static int IMAGE_FILE_MACHINE_AMD64 = 0x8664; 		//	x64
+	public final static int IMAGE_FILE_MACHINE_ARM = 0x1c0; 		//	ARM little endian
+	public final static int IMAGE_FILE_MACHINE_ARM64 = 0xaa64; 		//	ARM64 little endian
+	public final static int IMAGE_FILE_MACHINE_ARMNT = 0x1c4; 		//	ARM Thumb-2 little endian
+	public final static int IMAGE_FILE_MACHINE_EBC = 0xebc; 		//	EFI byte code
+	public final static int IMAGE_FILE_MACHINE_I386 = 0x14c; 		//	Intel 386 or later processors and compatible processors
+	public final static int IMAGE_FILE_MACHINE_IA64 = 0x200; 		//	Intel Itanium processor family
+	public final static int IMAGE_FILE_MACHINE_M32R = 0x9041; 		//	Mitsubishi M32R little endian
+	public final static int IMAGE_FILE_MACHINE_MIPS16 = 0x266; 		//	MIPS16
+	public final static int IMAGE_FILE_MACHINE_MIPSFPU = 0x366; 	//	MIPS with FPU
+	public final static int IMAGE_FILE_MACHINE_MIPSFPU16 = 0x466; 	//	MIPS16 with FPU
+	public final static int IMAGE_FILE_MACHINE_POWERPC = 0x1f0; 	//	Power PC little endian
+	public final static int IMAGE_FILE_MACHINE_POWERPCFP = 0x1f1; 	//	Power PC with floating point support
+	public final static int IMAGE_FILE_MACHINE_R4000 = 0x166; 		//	MIPS little endian
+	public final static int IMAGE_FILE_MACHINE_RISCV32 = 0x5032; 	//	RISC-V 32-bit address space
+	public final static int IMAGE_FILE_MACHINE_RISCV64 = 0x5064; 	//	RISC-V 64-bit address space
+	public final static int IMAGE_FILE_MACHINE_RISCV128 = 0x5128; 	//	RISC-V 128-bit address space
+	public final static int IMAGE_FILE_MACHINE_SH3 = 0x1a2; 		//	Hitachi SH3
+	public final static int IMAGE_FILE_MACHINE_SH3DSP = 0x1a3; 		//	Hitachi SH3 DSP
+	public final static int IMAGE_FILE_MACHINE_SH4 = 0x1a6; 		//	Hitachi SH4
+	public final static int IMAGE_FILE_MACHINE_SH5 = 0x1a8; 		//	Hitachi SH5
+	public final static int IMAGE_FILE_MACHINE_THUMB = 0x1c2; 		//	Thumb
+	public final static int IMAGE_FILE_MACHINE_WCEMIPSV2 = 0x169;	//	MIPS little-endian WCE v2
 
 	private short machine;
 	private short numberOfSections;
@@ -401,7 +401,7 @@ public class FileHeader implements StructConverter {
 		// RUNTIME_FUNCTION structures, bail if one isn't found
 		SectionHeader irfeHeader = null;
 		for (SectionHeader header : sections) {
-			if (".pdata".equals(header.getName())) {
+			if (header.getName().equals(".pdata")) {
 				irfeHeader = header;
 				break;
 			}
@@ -430,7 +430,7 @@ public class FileHeader implements StructConverter {
 
 		long oldIndex = reader.getPointerIndex();
 
-		int tmpIndex = pointerToSymbolTable;
+		int tmpIndex = getPointerToSymbolTable();
 		if (!ntHeader.checkRVA(tmpIndex)) {
 			Msg.error(this, "Invalid file index " + Integer.toHexString(tmpIndex));
 			return;
@@ -483,9 +483,12 @@ public class FileHeader implements StructConverter {
 	}
 
 	public boolean isLordPE() {
-        return pointerToSymbolTable == LORDPE_SYMBOL_TABLE &&
-                numberOfSymbols == LORDPE_NUMBER_OF_SYMBOLS;
-    }
+		if (getPointerToSymbolTable() == LORDPE_SYMBOL_TABLE &&
+			getNumberOfSymbols() == LORDPE_NUMBER_OF_SYMBOLS) {
+			return true;
+		}
+		return false;
+	}
 
 	private void parse() throws IOException {
 		reader.setPointerIndex(startIndex);

@@ -96,7 +96,7 @@ abstract class CoreGTreeNode implements Cloneable {
 	 * node when a new child is added to that parent node.
 	 * @param parent the node that this node is being added to.
 	 */
-    final synchronized void setParent(GTreeNode parent) {
+	synchronized final void setParent(GTreeNode parent) {
 		this.parent = parent;
 	}
 
@@ -296,7 +296,7 @@ abstract class CoreGTreeNode implements Cloneable {
 	 * See {@link GTreeSlowLoadingNode}
 	 * @return true if the node is in the process of loading its children.
 	 */
-    public final synchronized boolean isInProgress() {
+	public synchronized final boolean isInProgress() {
 		return isInProgress(children);
 	}
 
@@ -337,9 +337,12 @@ abstract class CoreGTreeNode implements Cloneable {
 	 * @return true if the node is in the progress of loading its children.
 	 */
 	private boolean isInProgress(List<GTreeNode> childList) {
-        return childList != null && childList.size() == 1 &&
-                childList.get(0) instanceof InProgressGTreeNode;
-    }
+		if (childList != null && childList.size() == 1 &&
+			childList.get(0) instanceof InProgressGTreeNode) {
+			return true;
+		}
+		return false;
+	}
 
 	protected void doFireNodeAdded(GTreeNode newNode) {
 		assertSwing();

@@ -35,7 +35,7 @@ import ghidra.util.task.TaskMonitor;
  * Points to an array of IMAGE_BOUND_IMPORT_DESCRIPTORs.
  */
 public class BoundImportDataDirectory extends DataDirectory {
-    private static final String NAME = "IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT";
+    private final static String NAME = "IMAGE_DIRECTORY_ENTRY_BOUND_IMPORT";
 
     private BoundImportDescriptor [] descriptors;
     private LinkedHashMap<String,Short> nameHash;
@@ -202,7 +202,7 @@ public class BoundImportDataDirectory extends DataDirectory {
 			prevOffset = currOffset.shortValue();
 
 			raf.write(name.getBytes());
-			raf.write(0);//null-terminator
+			raf.write((byte)0);//null-terminator
 		}
 	}
 
@@ -238,7 +238,7 @@ public class BoundImportDataDirectory extends DataDirectory {
 			}
 			else {
 				String moduleName = descriptor.getModuleName();
-				if (moduleName != null && !moduleName.isEmpty()) {
+				if (moduleName != null && moduleName.length() > 0) {
 					nameHash.put(moduleName, Short.valueOf((short) pos));
 					descriptor.setOffsetModuleName((short)pos);
 					pos += (descriptor.getModuleName().length() + 1);
@@ -256,7 +256,7 @@ public class BoundImportDataDirectory extends DataDirectory {
 				}
 				else {
 					String moduleName = forwarder.getModuleName();
-					if (moduleName != null && !moduleName.isEmpty()) {
+					if (moduleName != null && moduleName.length() > 0) {
 						nameHash.put(moduleName, Short.valueOf((short) pos));
 						forwarder.setOffsetModuleName((short)pos);
 						pos += (forwarder.getModuleName().length() + 1);

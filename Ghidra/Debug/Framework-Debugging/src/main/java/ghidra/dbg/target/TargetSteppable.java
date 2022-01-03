@@ -31,14 +31,14 @@ import ghidra.dbg.util.CollectionUtils.AbstractEmptySet;
 @DebuggerTargetObjectIface("Steppable")
 public interface TargetSteppable extends TargetObject {
 
-	interface TargetStepKindSet extends Set<TargetStepKind> {
+	public interface TargetStepKindSet extends Set<TargetStepKind> {
 
-		class EmptyTargetStepKindSet extends AbstractEmptySet<TargetStepKind>
+		public static class EmptyTargetStepKindSet extends AbstractEmptySet<TargetStepKind>
 				implements TargetStepKindSet {
 			// Nothing
 		}
 
-		class ImmutableTargetStepKindSet
+		public static class ImmutableTargetStepKindSet
 				extends CollectionUtils.AbstractNSet<TargetStepKind> implements TargetStepKindSet {
 
 			public ImmutableTargetStepKindSet(TargetStepKind... kinds) {
@@ -52,15 +52,15 @@ public interface TargetSteppable extends TargetObject {
 
 		TargetStepKindSet EMPTY = new EmptyTargetStepKindSet();
 
-		static TargetStepKindSet of() {
+		public static TargetStepKindSet of() {
 			return EMPTY;
 		}
 
-		static TargetStepKindSet of(TargetStepKind... kinds) {
+		public static TargetStepKindSet of(TargetStepKind... kinds) {
 			return new ImmutableTargetStepKindSet(kinds);
 		}
 
-		static TargetStepKindSet copyOf(Set<TargetStepKind> set) {
+		public static TargetStepKindSet copyOf(Set<TargetStepKind> set) {
 			return new ImmutableTargetStepKindSet(set);
 		}
 	}
@@ -185,7 +185,7 @@ public interface TargetSteppable extends TargetObject {
 		required = true,
 		fixed = true,
 		hidden = true)
-    default TargetStepKindSet getSupportedStepKinds() {
+	public default TargetStepKindSet getSupportedStepKinds() {
 		return getTypedAttributeNowByName(SUPPORTED_STEP_KINDS_ATTRIBUTE_NAME,
 			TargetStepKindSet.class, TargetStepKindSet.of());
 	}
@@ -220,7 +220,7 @@ public interface TargetSteppable extends TargetObject {
 	 * 
 	 * @return a future which completes when the object is stepping
 	 */
-    CompletableFuture<Void> step(TargetStepKind kind);
+	public CompletableFuture<Void> step(TargetStepKind kind);
 
 	/**
 	 * Step a target using the given arguments
@@ -228,7 +228,7 @@ public interface TargetSteppable extends TargetObject {
 	 * @param args the map of arguments.
 	 * @return a future which completes when the command is completed
 	 */
-	default CompletableFuture<Void> step(Map<String, ?> args) {
+	public default CompletableFuture<Void> step(Map<String, ?> args) {
 		return step(TargetStepKind.INTO);
 	}
 
@@ -241,7 +241,7 @@ public interface TargetSteppable extends TargetObject {
 	 * @see #step(TargetStepKind)
 	 * @see TargetStepKind#INTO
 	 */
-	default CompletableFuture<Void> step() {
+	public default CompletableFuture<Void> step() {
 		return step(TargetStepKind.INTO);
 	}
 }

@@ -839,11 +839,13 @@ public class VTAutoVersionTrackingTest extends AbstractGhidraHeadedIntegrationTe
 
 	private VTMatchSet getVTMatchSet(VTSession vtSession, String correlatorName) {
 		List<VTMatchSet> matchSets = vtSession.getMatchSets();
-        for (VTMatchSet matches : matchSets) {
-            if (matches.getProgramCorrelatorInfo().getName().equals(correlatorName)) {
-                return matches;
-            }
-        }
+		Iterator<VTMatchSet> iterator = matchSets.iterator();
+		while (iterator.hasNext()) {
+			VTMatchSet matches = iterator.next();
+			if (matches.getProgramCorrelatorInfo().getName().equals(correlatorName)) {
+				return matches;
+			}
+		}
 
 		fail("Unable to find a match set for '" + correlatorName + "'");
 		return null; /// can't get here
@@ -854,20 +856,22 @@ public class VTAutoVersionTrackingTest extends AbstractGhidraHeadedIntegrationTe
 		VTMatchSet matches = getVTMatchSet(vtSession, correlatorName);
 
 		Msg.info(this, score + " " + confidence);
-        for (VTMatch match : matches.getMatches()) {
-            VTAssociationStatus status = match.getAssociation().getStatus();
-            if (status.equals(VTAssociationStatus.ACCEPTED)) {
-                Msg.info(this,
-                        match.getSourceAddress().toString() + " " +
-                                match.getDestinationAddress().toString() + " " +
-                                match.getSimilarityScore().getFormattedScore() + " " +
-                                match.getConfidenceScore().getFormattedLog10Score());
-                if (match.getSimilarityScore().getScore() < score ||
-                        match.getConfidenceScore().getScore() < confidence) {
-                    return false;
-                }
-            }
-        }
+		Iterator<VTMatch> it = matches.getMatches().iterator();
+		while (it.hasNext()) {
+			VTMatch match = it.next();
+			VTAssociationStatus status = match.getAssociation().getStatus();
+			if (status.equals(VTAssociationStatus.ACCEPTED)) {
+				Msg.info(this,
+					match.getSourceAddress().toString() + " " +
+						match.getDestinationAddress().toString() + " " +
+						match.getSimilarityScore().getFormattedScore() + " " +
+						match.getConfidenceScore().getFormattedLog10Score());
+				if (match.getSimilarityScore().getScore() < score ||
+					match.getConfidenceScore().getScore() < confidence) {
+					return false;
+				}
+			}
+		}
 		return true;
 	}
 
@@ -875,12 +879,14 @@ public class VTAutoVersionTrackingTest extends AbstractGhidraHeadedIntegrationTe
 		VTMatchSet matches = getVTMatchSet(vtSession, correlatorName);
 
 		int count = 0;
-        for (VTMatch match : matches.getMatches()) {
-            VTAssociationStatus status = match.getAssociation().getStatus();
-            if (status.equals(VTAssociationStatus.ACCEPTED)) {
-                count++;
-            }
-        }
+		Iterator<VTMatch> it = matches.getMatches().iterator();
+		while (it.hasNext()) {
+			VTMatch match = it.next();
+			VTAssociationStatus status = match.getAssociation().getStatus();
+			if (status.equals(VTAssociationStatus.ACCEPTED)) {
+				count++;
+			}
+		}
 		return count;
 	}
 
@@ -889,24 +895,28 @@ public class VTAutoVersionTrackingTest extends AbstractGhidraHeadedIntegrationTe
 
 		VTMatchSet matches = getVTMatchSet(vtSession, correlatorName);
 
-        for (VTMatch match : matches.getMatches()) {
-            if (match.getSourceAddress().equals(sourceAddress) &&
-                    match.getDestinationAddress().equals(destinationAddress)) {
-                return match.getAssociation().getStatus();
-            }
-        }
+		Iterator<VTMatch> it = matches.getMatches().iterator();
+		while (it.hasNext()) {
+			VTMatch match = it.next();
+			if (match.getSourceAddress().equals(sourceAddress) &&
+				match.getDestinationAddress().equals(destinationAddress)) {
+				return match.getAssociation().getStatus();
+			}
+		}
 		return null;
 	}
 
 	private VTMatch getMatch(VTMatchSet matches, Address sourceAddress,
 			Address destinationAddress) {
 
-        for (VTMatch match : matches.getMatches()) {
-            if (match.getSourceAddress().equals(sourceAddress) &&
-                    match.getDestinationAddress().equals(destinationAddress)) {
-                return match;
-            }
-        }
+		Iterator<VTMatch> it = matches.getMatches().iterator();
+		while (it.hasNext()) {
+			VTMatch match = it.next();
+			if (match.getSourceAddress().equals(sourceAddress) &&
+				match.getDestinationAddress().equals(destinationAddress)) {
+				return match;
+			}
+		}
 		return null;
 	}
 
@@ -1095,7 +1105,7 @@ public class VTAutoVersionTrackingTest extends AbstractGhidraHeadedIntegrationTe
 			return false;
 		}
 		FunctionManager functionManager = program.getFunctionManager();
-		Function createFunction = functionManager.createFunction("FUN_" + address,
+		Function createFunction = functionManager.createFunction("FUN_" + address.toString(),
 			address, addressSet, SourceType.DEFAULT);
 		if (createFunction == null) {
 			return false;

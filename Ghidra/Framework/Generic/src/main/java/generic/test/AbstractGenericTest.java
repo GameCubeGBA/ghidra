@@ -1221,7 +1221,7 @@ public abstract class AbstractGenericTest extends AbstractGTest {
 		}
 
 		String getExceptionMessage() {
-			Throwable throwable = exception;
+			Throwable throwable = getException();
 			String message = throwable.getMessage();
 			if (message != null) {
 				return message;

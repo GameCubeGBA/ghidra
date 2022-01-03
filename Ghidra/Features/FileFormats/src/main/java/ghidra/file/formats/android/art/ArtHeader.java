@@ -64,14 +64,14 @@ public abstract class ArtHeader implements StructConverter {
 	 * -1 indicates unsupported
 	 * @return image base address
 	 */
-    public abstract int getImageBegin();
+	abstract public int getImageBegin();
 
 	/**
 	 * Required base size for mapping the image.
 	 * -1 indicates unsupported
 	 * @return image size
 	 */
-    public abstract int getImageSize();
+	abstract public int getImageSize();
 
 	/**
 	 * Returns the checksum of the matching OAT file.
@@ -79,19 +79,19 @@ public abstract class ArtHeader implements StructConverter {
 	 * -1 indicates unsupported
 	 * @return oat checksum
 	 */
-    public abstract int getOatChecksum();
+	abstract public int getOatChecksum();
 
 	/**
 	 *  -1 indicates unsupported
 	 * @return the oat file begin address
 	 */
-    public abstract int getOatFileBegin();
+	abstract public int getOatFileBegin();
 
 	/**
 	 * -1 indicates unsupported
 	 * @return the oat file end address
 	 */
-    public abstract int getOatFileEnd();
+	abstract public int getOatFileEnd();
 
 	/**
 	 * Returns the offset to the start of the .oatdata section,
@@ -99,28 +99,28 @@ public abstract class ArtHeader implements StructConverter {
 	 * -1 indicates unsupported
 	 * @return the oat data begin address
 	 */
-    public abstract int getOatDataBegin();
+	abstract public int getOatDataBegin();
 
 	/**
 	 * -1 indicates unsupported
 	 * @return the oat data end address
 	 */
-    public abstract int getOatDataEnd();
+	abstract public int getOatDataEnd();
 
 	/**
 	 * Pointer size (in bytes).
 	 * @return the pointer size
 	 */
-    public abstract int getPointerSize();
+	abstract public int getPointerSize();
 
-	public abstract int getArtMethodCountForVersion();
+	abstract public int getArtMethodCountForVersion();
 
 	/**
 	 * Parses the ART header data.
 	 * @param reader the binary reader
 	 * @throws IOException if an error occurs parsing the header
 	 */
-    protected abstract void parse(BinaryReader reader) throws IOException;
+	abstract protected void parse(BinaryReader reader) throws IOException;
 
 	protected final void parseImageMethods(BinaryReader reader) throws IOException {
 		for (int i = 0; i < getArtMethodCountForVersion(); ++i) {
@@ -134,7 +134,7 @@ public abstract class ArtHeader implements StructConverter {
 	 * @param monitor the task monitor
 	 * @throws Exception if an error occurs while marking up the program
 	 */
-    public abstract void markup(Program program, TaskMonitor monitor) throws Exception;
+	abstract public void markup(Program program, TaskMonitor monitor) throws Exception;
 
 	@Override
 	public DataType toDataType() throws DuplicateNameException, IOException {

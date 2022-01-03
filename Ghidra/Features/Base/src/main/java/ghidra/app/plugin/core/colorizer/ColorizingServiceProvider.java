@@ -50,7 +50,7 @@ class ColorizingServiceProvider implements ColorizingService {
 	@Override
 	public Color getMostRecentColor() {
 		List<Color> recentColors = getRecentColors();
-		if (recentColors != null && !recentColors.isEmpty()) {
+		if (recentColors != null && recentColors.size() > 0) {
 			return recentColors.get(0);
 		}
 		return DEFAULT_COLOR;
@@ -60,7 +60,7 @@ class ColorizingServiceProvider implements ColorizingService {
 	public List<Color> getRecentColors() {
 		if (colorChooser != null) {
 			List<Color> colorHistory = colorChooser.getColorHistory();
-			if (!colorHistory.isEmpty()) {
+			if (colorHistory.size() > 0) {
 				return colorHistory;
 			}
 		}

@@ -31,21 +31,21 @@ import ghidra.program.model.data.*;
 
 public class DescriptorDecoder {
 
-	public static final byte BASE_TYPE_BYTE = 'B';
-	public static final byte BASE_TYPE_CHAR = 'C';
-	public static final byte BASE_TYPE_SHORT = 'S';
-	public static final byte BASE_TYPE_INT = 'I';
-	public static final byte BASE_TYPE_LONG = 'J';
-	public static final byte BASE_TYPE_FLOAT = 'F';
-	public static final byte BASE_TYPE_DOUBLE = 'D';
-	public static final byte BASE_TYPE_BOOLEAN = 'Z';
-	public static final byte BASE_TYPE_STRING = 's';
-	public static final byte BASE_TYPE_VOID = 'V';
-	public static final byte BASE_TYPE_CLASS = 'c';
-	public static final byte BASE_TYPE_ARRAY = '[';
-	public static final byte BASE_TYPE_REFERENCE = 'L';
-	public static final byte BASE_TYPE_ENUM = 'e';
-	public static final byte BASE_TYPE_ANNOTATION = '@';
+	public final static byte BASE_TYPE_BYTE = 'B';
+	public final static byte BASE_TYPE_CHAR = 'C';
+	public final static byte BASE_TYPE_SHORT = 'S';
+	public final static byte BASE_TYPE_INT = 'I';
+	public final static byte BASE_TYPE_LONG = 'J';
+	public final static byte BASE_TYPE_FLOAT = 'F';
+	public final static byte BASE_TYPE_DOUBLE = 'D';
+	public final static byte BASE_TYPE_BOOLEAN = 'Z';
+	public final static byte BASE_TYPE_STRING = 's';
+	public final static byte BASE_TYPE_VOID = 'V';
+	public final static byte BASE_TYPE_CLASS = 'c';
+	public final static byte BASE_TYPE_ARRAY = '[';
+	public final static byte BASE_TYPE_REFERENCE = 'L';
+	public final static byte BASE_TYPE_ENUM = 'e';
+	public final static byte BASE_TYPE_ANNOTATION = '@';
 
 	//private constructor to enforce noninstantiability
 	private DescriptorDecoder() {
@@ -159,7 +159,7 @@ public class DescriptorDecoder {
 		int len = argString.length();
 		while (currentPosition < len) {
 			String currentParam = argString.substring(currentPosition, currentPosition + 1);
-			if ("[".equals(currentParam)) {
+			if (currentParam.equals("[")) {
 				int initialBracket = currentPosition;
 				while (argString.charAt(currentPosition) == '[') {
 					currentPosition++;
@@ -230,7 +230,9 @@ public class DescriptorDecoder {
 			String baseType = getTypeNameFromDescriptor(descriptor.replace("[", ""),
 				fullyQualifiedName, replaceSlash);
 			StringBuilder sb = new StringBuilder(baseType);
-            sb.append("[]".repeat(dimension));
+			for (int i = 0; i < dimension; ++i) {
+				sb.append("[]");
+			}
 			return sb.toString();
 		}
 		switch (descriptor.charAt(0)) {

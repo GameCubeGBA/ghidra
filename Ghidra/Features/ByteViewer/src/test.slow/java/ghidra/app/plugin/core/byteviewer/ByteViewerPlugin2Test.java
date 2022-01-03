@@ -77,7 +77,8 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 	 * @param arg0
 	 */
 	public ByteViewerPlugin2Test() {
-    }
+		super();
+	}
 
 	/*
 	 * @see TestCase#setUp()
@@ -918,7 +919,7 @@ public class ByteViewerPlugin2Test extends AbstractGhidraHeadedIntegrationTest {
 
 		// there should be no separator above the current location
 		field = c.getField(loc.getIndex().subtract(BigInteger.ONE), 0);
-		assertTrue(!"..".equals(field.getText()));
+		assertTrue(!field.getText().equals(".."));
 
 	}
 

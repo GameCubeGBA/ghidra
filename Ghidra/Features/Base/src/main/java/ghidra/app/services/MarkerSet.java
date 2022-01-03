@@ -29,20 +29,20 @@ public interface MarkerSet extends Comparable<MarkerSet> {
 	 * Add a marker at the address
 	 * @param addr the address
 	 */
-    void add(Address addr);
+	public void add(Address addr);
 
 	/**
 	 * Add the range given the start and end of the range
 	 * @param start the start address
 	 * @param end the end address
 	 */
-    void add(Address start, Address end);
+	public void add(Address start, Address end);
 
 	/**
 	 * Add a marker across the address range
 	 * @param range the addresses
 	 */
-    void add(AddressRange range);
+	public void add(AddressRange range);
 
 	/**
 	 * Sets the AddressSetCollection to be used for this this marker set.
@@ -55,152 +55,152 @@ public interface MarkerSet extends Comparable<MarkerSet> {
 	 * 
 	 * @param set the addressSetCollection to use as this markerSet's addressSetCollection. 
 	 */
-    void setAddressSetCollection(AddressSetCollection set);
+	public void setAddressSetCollection(AddressSetCollection set);
 
 	/**
 	 * Clears the current set off addresses in this markerSet and adds in the addresses
 	 * from the given AddressSet
 	 * @param set the set of addresses to use in this marker set
 	 */
-    void setAddressSet(AddressSetView set);
+	public void setAddressSet(AddressSetView set);
 
 	/**
 	 * Add a marker at each address in the given address set
 	 * @param addrSet the addresses
 	 */
-    void add(AddressSetView addrSet);
+	public void add(AddressSetView addrSet);
 
 	/**
 	 * Determine if this marker set contains the specified address
 	 * @param addr address
 	 * @return true if marker set contains addr
 	 */
-    boolean contains(Address addr);
+	public boolean contains(Address addr);
 
 	/**
 	 * Return the address set for this marker set
 	 * @return the addresses
 	 */
-    AddressSet getAddressSet();
+	public AddressSet getAddressSet();
 
 	/**
 	 * Clear any marker at the address
 	 * @param addr the address
 	 */
-    void clear(Address addr);
+	public void clear(Address addr);
 
 	/**
 	 * Clear any marker across the address range
 	 * @param range the addresses
 	 */
-    void clear(AddressRange range);
+	public void clear(AddressRange range);
 
 	/**
 	 * Remove the given range from the marker set
 	 * @param start the start of the range to remove
 	 * @param end the end of the range to remove
 	 */
-    void clear(Address start, Address end);
+	public void clear(Address start, Address end);
 
 	/**
 	 * Clear any marker at each address in the address set
 	 * @param addrSet the addresses
 	 */
-    void clear(AddressSetView addrSet);
+	public void clear(AddressSetView addrSet);
 
 	/**
 	 * Return the name of this MarkerSet
 	 * @return the name
 	 */
-    String getName();
+	public String getName();
 
 	/**
 	 * Clear all defined markers
 	 */
-    void clearAll();
+	public void clearAll();
 
 	/**
 	 * Get display priority
 	 * @return the priority
 	 */
-    int getPriority();
+	public int getPriority();
 
 	/**
 	 * Gets whether this marker is in the preferred group when determining display priority.
 	 * Typically point markers are in the preferred group and area markers are not.
 	 * @return true if preferred
 	 */
-    boolean isPreferred();
+	public boolean isPreferred();
 
 	/**
 	 * Return true if this marker set is active
 	 * @param state the state
 	 */
-    void setActive(boolean state);
+	public void setActive(boolean state);
 
 	/**
 	 * Get the color for the marker
 	 * @return the color
 	 */
-    Color getMarkerColor();
+	public Color getMarkerColor();
 
 	/**
 	 * Set the color for the marker
 	 * @param color marker color
 	 */
-    void setMarkerColor(Color color);
+	public void setMarkerColor(Color color);
 
 	/**
 	 * Set the marker manager listener to use for user interaction
 	 * with markers owned by this manager.
 	 * @param markerDescriptor the descriptor
 	 */
-    void setMarkerDescriptor(MarkerDescriptor markerDescriptor);
+	public void setMarkerDescriptor(MarkerDescriptor markerDescriptor);
 
 	/**
 	 * True if this marker manager displays in the right hand navigation bar
 	 * @return true if this marker manager displays in the right hand navigation bar
 	 */
-    boolean isDisplayedInNavigationBar();
+	public boolean isDisplayedInNavigationBar();
 
 	/**
 	 * True if this marker manager displays in the left hand marker bar
 	 * @return true if this marker manager displays in the left hand marker bar
 	 */
-    boolean displayInMarkerBar();
+	public boolean displayInMarkerBar();
 
 	/**
 	 * Returns true if this MarkerSet is coloring the background in the listing for locations
 	 * contained in this MarkerSet
 	 * @return true if coloring background
 	 */
-    boolean isColoringBackground();
+	public boolean isColoringBackground();
 
 	/**
 	 * Returns true if this MarkerSet is active.  Being "active" means that it is displayed
 	 * in the listing
 	 * @return true if active
 	 */
-    boolean isActive();
+	public boolean isActive();
 
 	/**
 	 * Sets whether or not the MarkerSet is coloring the background of areas in the listing
 	 * contained in this MarkerSet.
 	 * @param b true to color the background.
 	 */
-    void setColoringBackground(boolean b);
+	public void setColoringBackground(boolean b);
 
 	/**
 	 * Returns the minimum Address in this MarkerSet;
 	 * @return  the minimum Address in this MarkerSet;
 	 */
-    Address getMinAddress();
+	public Address getMinAddress();
 
 	/**
 	 * Returns the maximum Address in this MarkerSet;
 	 * @return  the maximum Address in this MarkerSet;
 	 */
-    Address getMaxAddress();
+	public Address getMaxAddress();
 
 	/** 
 	 * Returns true if any address in this MarkerSet is contained in the range defined by
@@ -209,6 +209,6 @@ public interface MarkerSet extends Comparable<MarkerSet> {
 	 * @param end the end address of the range to check for intersection.
 	 * @return true if the set of addresses contained in this MarkerSet intersects the given range.
 	 */
-    boolean intersects(Address start, Address end);
+	public boolean intersects(Address start, Address end);
 
 }

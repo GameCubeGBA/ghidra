@@ -57,7 +57,7 @@ public enum DllCharacteristics {
 	public static Set<DllCharacteristics> resolveCharacteristics(int value) {
 		Set<DllCharacteristics> applied = new HashSet<>();
 		for (DllCharacteristics ch : values()) {
-			if ((ch.mask & value) == ch.mask) {
+			if ((ch.getMask() & value) == ch.getMask()) {
 				applied.add(ch);
 			}
 		}

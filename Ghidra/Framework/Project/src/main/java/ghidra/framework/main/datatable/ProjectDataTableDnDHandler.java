@@ -243,23 +243,23 @@ public class ProjectDataTableDnDHandler implements DragSourceListener, DragGestu
 
 		TableColumn aColumn;
 		int columnWidth;
-        for (DomainFileInfo domainFileInfo : domainFileInfos) {
-            if (clip.y + clip.height < yOffset - startYOffset) {
-                return; // no need to paint past the end of our visible area
-            }
+		for (int row = 0; row < rowCount; row++) {
+			if (clip.y + clip.height < yOffset - startYOffset) {
+				return; // no need to paint past the end of our visible area
+			}
 
-            modelRow = model.getRowIndex(domainFileInfo);
-            cellRect = table.getCellRect(modelRow, 0, false);
-            cellRect.y -= startYOffset; // paint the row at the top of the graphics, not where it really lives
-            yOffset += cellRect.height;
-            for (int column = 0; column < columnCount; column++) {
-                aColumn = cm.getColumn(column);
-                columnWidth = aColumn.getWidth();
-                cellRect.width = columnWidth - columnMargin;
-                paintCell(rendererPane, g, cellRect, modelRow, column);
-                cellRect.x += columnWidth;
-            }
-        }
+			modelRow = model.getRowIndex(domainFileInfos.get(row));
+			cellRect = table.getCellRect(modelRow, 0, false);
+			cellRect.y -= startYOffset; // paint the row at the top of the graphics, not where it really lives
+			yOffset += cellRect.height;
+			for (int column = 0; column < columnCount; column++) {
+				aColumn = cm.getColumn(column);
+				columnWidth = aColumn.getWidth();
+				cellRect.width = columnWidth - columnMargin;
+				paintCell(rendererPane, g, cellRect, modelRow, column);
+				cellRect.x += columnWidth;
+			}
+		}
 	}
 
 	private void paintCell(CellRendererPane rendererPane, Graphics g, Rectangle cellRect, int row,
@@ -369,8 +369,12 @@ public class ProjectDataTableDnDHandler implements DragSourceListener, DragGestu
 				return false;
 			}
 
-            return !e.isControlDown() && !e.isAltDown() && !e.isShiftDown() && !e.isMetaDown();
-        }
+			if (e.isControlDown() || e.isAltDown() || e.isShiftDown() || e.isMetaDown()) {
+				return false;
+			}
+
+			return true;
+		}
 	}
 
 }

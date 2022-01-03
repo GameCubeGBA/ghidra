@@ -50,75 +50,75 @@ public class DebugCOFFSymbol implements StructConverter {
 	/**
 	 * The size of the <code>IMAGE_SYMBOL</code> structure.
 	 */
-    public static final int IMAGE_SIZEOF_SYMBOL = 18;
+    public final static int IMAGE_SIZEOF_SYMBOL = 18;
 
     //
     // Section values.
     //
     //
-    public static final short IMAGE_SYM_UNDEFINED =  0; // Symbol is undefined or is common.
-    public static final short IMAGE_SYM_ABSOLUTE  = -1; // Symbol is an absolute value.
-    public static final short IMAGE_SYM_DEBUG     = -2; // Symbol is a special debug item.
+    public final static short IMAGE_SYM_UNDEFINED =  0; // Symbol is undefined or is common.
+    public final static short IMAGE_SYM_ABSOLUTE  = -1; // Symbol is an absolute value.
+    public final static short IMAGE_SYM_DEBUG     = -2; // Symbol is a special debug item.
 
     //
     // Type (fundamental) values.
     //
-    public static final short IMAGE_SYM_TYPE_NULL      = 0x0000;  // no type.
-    public static final short IMAGE_SYM_TYPE_VOID      = 0x0001;  //
-    public static final short IMAGE_SYM_TYPE_CHAR      = 0x0002;  // type character.
-    public static final short IMAGE_SYM_TYPE_SHORT     = 0x0003;  // type short integer.
-    public static final short IMAGE_SYM_TYPE_INT       = 0x0004;  //
-    public static final short IMAGE_SYM_TYPE_LONG      = 0x0005;  //
-    public static final short IMAGE_SYM_TYPE_FLOAT     = 0x0006;  //
-    public static final short IMAGE_SYM_TYPE_DOUBLE    = 0x0007;  //
-    public static final short IMAGE_SYM_TYPE_STRUCT    = 0x0008;  //
-    public static final short IMAGE_SYM_TYPE_UNION     = 0x0009;  //
-    public static final short IMAGE_SYM_TYPE_ENUM      = 0x000A;  // enumeration.
-    public static final short IMAGE_SYM_TYPE_MOE       = 0x000B;  // member of enumeration.
-    public static final short IMAGE_SYM_TYPE_BYTE      = 0x000C;  //
-    public static final short IMAGE_SYM_TYPE_WORD      = 0x000D;  //
-    public static final short IMAGE_SYM_TYPE_UINT      = 0x000E;  //
-    public static final short IMAGE_SYM_TYPE_DWORD     = 0x000F;  //
-    public static final short IMAGE_SYM_TYPE_PCODE     = (short)0x8000;
+    public final static short IMAGE_SYM_TYPE_NULL      = 0x0000;  // no type.
+    public final static short IMAGE_SYM_TYPE_VOID      = 0x0001;  //
+    public final static short IMAGE_SYM_TYPE_CHAR      = 0x0002;  // type character.
+    public final static short IMAGE_SYM_TYPE_SHORT     = 0x0003;  // type short integer.
+    public final static short IMAGE_SYM_TYPE_INT       = 0x0004;  //
+    public final static short IMAGE_SYM_TYPE_LONG      = 0x0005;  //
+    public final static short IMAGE_SYM_TYPE_FLOAT     = 0x0006;  //
+    public final static short IMAGE_SYM_TYPE_DOUBLE    = 0x0007;  //
+    public final static short IMAGE_SYM_TYPE_STRUCT    = 0x0008;  //
+    public final static short IMAGE_SYM_TYPE_UNION     = 0x0009;  //
+    public final static short IMAGE_SYM_TYPE_ENUM      = 0x000A;  // enumeration.
+    public final static short IMAGE_SYM_TYPE_MOE       = 0x000B;  // member of enumeration.
+    public final static short IMAGE_SYM_TYPE_BYTE      = 0x000C;  //
+    public final static short IMAGE_SYM_TYPE_WORD      = 0x000D;  //
+    public final static short IMAGE_SYM_TYPE_UINT      = 0x000E;  //
+    public final static short IMAGE_SYM_TYPE_DWORD     = 0x000F;  //
+    public final static short IMAGE_SYM_TYPE_PCODE     = (short)0x8000;
 
     //
     // Type (derived) values.
     //
-    public static final short IMAGE_SYM_DTYPE_NULL       = 0;  // no derived type.
-    public static final short IMAGE_SYM_DTYPE_POINTER    = 1;  // pointer.
-    public static final short IMAGE_SYM_DTYPE_FUNCTION   = 2;  // function.
-    public static final short IMAGE_SYM_DTYPE_ARRAY      = 3;  // array.
+    public final static short IMAGE_SYM_DTYPE_NULL       = 0;  // no derived type.
+    public final static short IMAGE_SYM_DTYPE_POINTER    = 1;  // pointer.
+    public final static short IMAGE_SYM_DTYPE_FUNCTION   = 2;  // function.
+    public final static short IMAGE_SYM_DTYPE_ARRAY      = 3;  // array.
 
     //
     // Storage classes.
     //
-    public static final byte IMAGE_SYM_CLASS_END_OF_FUNCTION     = (byte)0xff;
-    public static final byte IMAGE_SYM_CLASS_NULL                = 0x00;
-    public static final byte IMAGE_SYM_CLASS_AUTOMATIC           = 0x01;
-    public static final byte IMAGE_SYM_CLASS_EXTERNAL            = 0x02;
-    public static final byte IMAGE_SYM_CLASS_STATIC              = 0x03;
-    public static final byte IMAGE_SYM_CLASS_REGISTER            = 0x04;
-    public static final byte IMAGE_SYM_CLASS_EXTERNAL_DEF        = 0x05;
-    public static final byte IMAGE_SYM_CLASS_LABEL               = 0x06;
-    public static final byte IMAGE_SYM_CLASS_UNDEFINED_LABEL     = 0x07;
-    public static final byte IMAGE_SYM_CLASS_MEMBER_OF_STRUCT    = 0x08;
-    public static final byte IMAGE_SYM_CLASS_ARGUMENT            = 0x09;
-    public static final byte IMAGE_SYM_CLASS_STRUCT_TAG          = 0x0A;
-    public static final byte IMAGE_SYM_CLASS_MEMBER_OF_UNION     = 0x0B;
-    public static final byte IMAGE_SYM_CLASS_UNION_TAG           = 0x0C;
-    public static final byte IMAGE_SYM_CLASS_TYPE_DEFINITION     = 0x0D;
-    public static final byte IMAGE_SYM_CLASS_UNDEFINED_STATIC    = 0x0E;
-    public static final byte IMAGE_SYM_CLASS_ENUM_TAG            = 0x0F;
-    public static final byte IMAGE_SYM_CLASS_MEMBER_OF_ENUM      = 0x10;
-    public static final byte IMAGE_SYM_CLASS_REGISTER_PARAM      = 0x11;
-    public static final byte IMAGE_SYM_CLASS_BIT_FIELD           = 0x12;
-    public static final byte IMAGE_SYM_CLASS_FAR_EXTERNAL        = 0x44;
-    public static final byte IMAGE_SYM_CLASS_BLOCK               = 0x64;
-    public static final byte IMAGE_SYM_CLASS_FUNCTION            = 0x65;
-    public static final byte IMAGE_SYM_CLASS_END_OF_STRUCT       = 0x66;
-    public static final byte IMAGE_SYM_CLASS_FILE                = 0x67;
-    public static final byte IMAGE_SYM_CLASS_SECTION             = 0x68;
-    public static final byte IMAGE_SYM_CLASS_WEAK_EXTERNAL       = 0x69;
+    public final static byte IMAGE_SYM_CLASS_END_OF_FUNCTION     = (byte)0xff;
+    public final static byte IMAGE_SYM_CLASS_NULL                = 0x00;
+    public final static byte IMAGE_SYM_CLASS_AUTOMATIC           = 0x01;
+    public final static byte IMAGE_SYM_CLASS_EXTERNAL            = 0x02;
+    public final static byte IMAGE_SYM_CLASS_STATIC              = 0x03;
+    public final static byte IMAGE_SYM_CLASS_REGISTER            = 0x04;
+    public final static byte IMAGE_SYM_CLASS_EXTERNAL_DEF        = 0x05;
+    public final static byte IMAGE_SYM_CLASS_LABEL               = 0x06;
+    public final static byte IMAGE_SYM_CLASS_UNDEFINED_LABEL     = 0x07;
+    public final static byte IMAGE_SYM_CLASS_MEMBER_OF_STRUCT    = 0x08;
+    public final static byte IMAGE_SYM_CLASS_ARGUMENT            = 0x09;
+    public final static byte IMAGE_SYM_CLASS_STRUCT_TAG          = 0x0A;
+    public final static byte IMAGE_SYM_CLASS_MEMBER_OF_UNION     = 0x0B;
+    public final static byte IMAGE_SYM_CLASS_UNION_TAG           = 0x0C;
+    public final static byte IMAGE_SYM_CLASS_TYPE_DEFINITION     = 0x0D;
+    public final static byte IMAGE_SYM_CLASS_UNDEFINED_STATIC    = 0x0E;
+    public final static byte IMAGE_SYM_CLASS_ENUM_TAG            = 0x0F;
+    public final static byte IMAGE_SYM_CLASS_MEMBER_OF_ENUM      = 0x10;
+    public final static byte IMAGE_SYM_CLASS_REGISTER_PARAM      = 0x11;
+    public final static byte IMAGE_SYM_CLASS_BIT_FIELD           = 0x12;
+    public final static byte IMAGE_SYM_CLASS_FAR_EXTERNAL        = 0x44;
+    public final static byte IMAGE_SYM_CLASS_BLOCK               = 0x64;
+    public final static byte IMAGE_SYM_CLASS_FUNCTION            = 0x65;
+    public final static byte IMAGE_SYM_CLASS_END_OF_STRUCT       = 0x66;
+    public final static byte IMAGE_SYM_CLASS_FILE                = 0x67;
+    public final static byte IMAGE_SYM_CLASS_SECTION             = 0x68;
+    public final static byte IMAGE_SYM_CLASS_WEAK_EXTERNAL       = 0x69;
   //public final static byte IMAGE_SYM_CLASS_CLR_TOKEN           = ??
 
     private String name;

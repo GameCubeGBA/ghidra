@@ -42,7 +42,8 @@ public class TableConcurrencyTest extends AbstractGenericTest {
 	 * @param arg0
 	 */
 	public TableConcurrencyTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

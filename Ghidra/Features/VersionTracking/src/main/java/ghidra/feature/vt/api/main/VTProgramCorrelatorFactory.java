@@ -28,25 +28,25 @@ public interface VTProgramCorrelatorFactory extends ExtensionPoint {
 	 * Returns the name of the correlator for display to the user in the GUI.
 	 * @return the name of the correlator
 	 */
-    String getName();
+	public String getName();
 
 	/**
 	 * Returns the description of the correlator for display to the user in the GUI.
 	 * @return the description of the correlator
 	 */
-    String getDescription();
+	public String getDescription();
 
 	/**
 	 * Returns the listing priority of the correlator; lower means higher in the list.
 	 * @return the listing priority of the correlator
 	 */
-    int getPriority();
+	public int getPriority();
 
 	/**
 	 * Returns the restriction preference of the correlator.
 	 * @return the restriction preference of the correlator
 	 */
-    VTProgramCorrelatorAddressRestrictionPreference getAddressRestrictionPreference();
+	public VTProgramCorrelatorAddressRestrictionPreference getAddressRestrictionPreference();
 
 	/**
 	 * Returns an options action that contains a list of all supported options for the algorithm and
@@ -54,7 +54,7 @@ public interface VTProgramCorrelatorFactory extends ExtensionPoint {
 	 * @return an options action that contains a list of all supported options for the algorithm and
 	 * their default values.
 	 */
-    VTOptions createDefaultOptions();
+	public VTOptions createDefaultOptions();
 
 	/**
 	 * Returns a VTProgramCorrelator instance created specifically for the given parameters.
@@ -67,7 +67,7 @@ public interface VTProgramCorrelatorFactory extends ExtensionPoint {
 	 * @param options the options to use for this correlation.
 	 * @return a new VTProgramCorrelator instance created specifically for this set of given parameters.
 	 */
-    VTProgramCorrelator createCorrelator(ServiceProvider serviceProvider,
-                                         Program sourceProgram, AddressSetView sourceAddressSet, Program destinationProgram,
-                                         AddressSetView destinationAddressSet, VTOptions options);
+	public VTProgramCorrelator createCorrelator(ServiceProvider serviceProvider,
+			Program sourceProgram, AddressSetView sourceAddressSet, Program destinationProgram,
+			AddressSetView destinationAddressSet, VTOptions options);
 }

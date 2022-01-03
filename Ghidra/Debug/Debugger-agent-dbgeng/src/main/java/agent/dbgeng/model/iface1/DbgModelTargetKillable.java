@@ -31,7 +31,7 @@ import ghidra.dbg.target.TargetKillable;
 public interface DbgModelTargetKillable extends DbgModelTargetObject, TargetKillable {
 
 	@Override
-    default CompletableFuture<Void> kill() {
+	public default CompletableFuture<Void> kill() {
 		DbgProcess process = getManager().getCurrentProcess();
 		return getModel().gateFuture(process.kill());
 	}

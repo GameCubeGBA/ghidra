@@ -19,7 +19,6 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-import ghidra.app.plugin.languages.sleigh.VisitorResults;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Before;
@@ -57,19 +56,22 @@ public class WithBlockTest extends AbstractGhidraHeadlessIntegrationTest {
 	protected Pair<DisjointPattern, Constructor> findConstructor(String table, String firstPrint) {
 		AtomicReference<DisjointPattern> fpat = new AtomicReference<>(null);
 		AtomicReference<Constructor> fcon = new AtomicReference<>(null);
-		SleighLanguages.traverseConstructors(lang, (subtable, pattern, cons) -> {
-            if (table.equals(subtable.getName()) &&
-                firstPrint.equals(cons.getPrintPieces().get(0))) {
-                if (null != fpat.get()) {
-                    throw new AssertionError("Multiple constructors found. " +
-                        "Write the test slaspec such that no two constructors in the same " +
-                        "table share the same first printpiece.");
-                }
-                fpat.set(pattern);
-                fcon.set(cons);
-            }
-            return VisitorResults.CONTINUE;
-        });
+		SleighLanguages.traverseConstructors(lang, new ConstructorEntryVisitor() {
+			@Override
+			public int visit(SubtableSymbol subtable, DisjointPattern pattern, Constructor cons) {
+				if (table.equals(subtable.getName()) &&
+					firstPrint.equals(cons.getPrintPieces().get(0))) {
+					if (null != fpat.get()) {
+						throw new AssertionError("Multiple constructors found. " +
+							"Write the test slaspec such that no two constructors in the same " +
+							"table share the same first printpiece.");
+					}
+					fpat.set(pattern);
+					fcon.set(cons);
+				}
+				return CONTINUE;
+			}
+		});
 		if (null == fpat.get()) {
 			throw new AssertionError(
 				"No such constructor found: " + table + ":" + firstPrint + "...");

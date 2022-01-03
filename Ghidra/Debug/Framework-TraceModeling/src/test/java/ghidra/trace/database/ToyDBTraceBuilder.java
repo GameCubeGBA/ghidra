@@ -24,7 +24,6 @@ import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
@@ -181,7 +180,7 @@ public class ToyDBTraceBuilder implements AutoCloseable {
 	}
 
 	public ByteBuffer buf(String str) {
-		CharsetEncoder ce = StandardCharsets.UTF_8.newEncoder();
+		CharsetEncoder ce = Charset.forName("UTF-8").newEncoder();
 		ByteBuffer result =
 			ByteBuffer.allocate(Math.round(ce.maxBytesPerChar() * str.length()) + 1);
 		ce.encode(CharBuffer.wrap(str), result, true);

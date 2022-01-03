@@ -54,16 +54,16 @@ public class EnumEditorProvider extends ComponentProviderAdapter
 		implements ChangeListener, EditorProvider {
 
 	static final ImageIcon EDITOR_ICON = ResourceManager.loadImage("images/enum.png");
-	private static final ImageIcon APPLY_ICON = ResourceManager.loadImage("images/disk.png");
-	private static final ImageIcon ADD_ICON = ResourceManager.loadImage("images/Plus.png");
-	private static final ImageIcon DELETE_ICON =
+	private final static ImageIcon APPLY_ICON = ResourceManager.loadImage("images/disk.png");
+	private final static ImageIcon ADD_ICON = ResourceManager.loadImage("images/Plus.png");
+	private final static ImageIcon DELETE_ICON =
 		ResourceManager.loadImage("images/edit-delete.png");
-	private static final String HELP_TOPIC = "DataTypeEditors";
+	private final static String HELP_TOPIC = "DataTypeEditors";
 
-	private static final int CANCEL = 0;
-	private static final int SAVE = 1;
-	private static final int NO_SAVE = 2;
-	private static final int ERROR = 3;
+	private final static int CANCEL = 0;
+	private final static int SAVE = 1;
+	private final static int NO_SAVE = 2;
+	private final static int ERROR = 3;
 
 	private DataTypeManagerPlugin plugin;
 	private EnumEditorPanel editorPanel;
@@ -169,7 +169,9 @@ public class EnumEditorProvider extends ComponentProviderAdapter
 	public boolean checkForSave(boolean allowCancel) {
 		int result = saveChangesForCloseEvent(allowCancel);
 		if (result == CANCEL || result == ERROR) {
-            return !allowCancel;
+			if (allowCancel) {
+				return false;
+			}
 		}
 		return true;
 	}

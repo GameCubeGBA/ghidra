@@ -60,8 +60,11 @@ public class PackAllDataTypesAction extends DockingAction {
 		if ((node instanceof ProgramArchiveNode) || (node instanceof ProjectArchiveNode) ||
 			(node instanceof FileArchiveNode)) {
 			ArchiveNode archiveNode = (ArchiveNode) node;
-            return archiveNode.isEnabled();
-        }
+			if (!archiveNode.isEnabled()) {
+				return false;
+			}
+			return true;
+		}
 		return false;
 	}
 

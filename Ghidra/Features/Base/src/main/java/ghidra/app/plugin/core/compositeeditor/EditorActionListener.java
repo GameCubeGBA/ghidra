@@ -21,11 +21,11 @@ public interface EditorActionListener {
 	 * Notification that the indicated actions were added.
 	 * @param actions the composite editor actions.
 	 */
-    void actionsAdded(CompositeEditorTableAction[] actions);
+	public void actionsAdded(CompositeEditorTableAction[] actions);
 	
 	/**
 	 * Notification that the indicated actions were removed.
 	 * @param actions the composite editor actions.
 	 */
-    void actionsRemoved(CompositeEditorTableAction[] actions);
+	public void actionsRemoved(CompositeEditorTableAction[] actions);
 }

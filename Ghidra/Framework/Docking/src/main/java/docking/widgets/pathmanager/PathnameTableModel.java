@@ -35,7 +35,8 @@ class PathnameTableModel extends AbstractTableModel {
 	 * 
 	 */
 	PathnameTableModel(String[] paths, boolean isEditable) {
-        this.isEditable = isEditable;
+		super();
+		this.isEditable = isEditable;
 		pathList = new ArrayList<>();
 		if (paths != null) {
 			Collections.addAll(pathList, paths);

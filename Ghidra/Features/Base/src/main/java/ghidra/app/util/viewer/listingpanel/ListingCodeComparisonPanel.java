@@ -2749,7 +2749,7 @@ public class ListingCodeComparisonPanel
 	 * @param saveState the new configuration state
 	 */
 	public void writeConfigState(String prefix, SaveState saveState) {
-		saveState.putBoolean(prefix + DUAL_LISTING_SIDE_BY_SIDE, isSideBySide);
+		saveState.putBoolean(prefix + DUAL_LISTING_SIDE_BY_SIDE, isSideBySide());
 		saveState.putBoolean(prefix + DUAL_LISTING_HEADER_SHOWING, isHeaderShowing());
 	}
 

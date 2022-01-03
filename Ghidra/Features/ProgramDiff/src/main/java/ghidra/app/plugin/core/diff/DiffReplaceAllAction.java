@@ -22,9 +22,9 @@ import ghidra.program.util.ProgramMergeFilter;
 
 public class DiffReplaceAllAction extends DockingAction {
 	
-	private static final String ACTION_NAME = "Set Replace for All Apply Settings";
-	private static final String GROUP_NAME = "DIFF_APPLY_ACTION";
-	private static final String DESCRIPTION = "Change all the difference type apply settings to Replace.";
+	private final static String ACTION_NAME = "Set Replace for All Apply Settings";
+	private final static String GROUP_NAME = "DIFF_APPLY_ACTION";
+	private final static String DESCRIPTION = "Change all the difference type apply settings to Replace.";
 	private static String[] popupPath = new String[] { ACTION_NAME };
 	private static String[] menuPath = new String[] { ACTION_NAME };
 	private DiffApplySettingsProvider provider;

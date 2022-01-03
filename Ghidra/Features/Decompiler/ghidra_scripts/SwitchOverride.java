@@ -117,7 +117,7 @@ public class SwitchOverride extends GhidraScript {
 			println("Please highlight or place the cursor on the instruction performing the computed jump");
 			return;
 		}
-		if (destlist.isEmpty()) {
+		if (destlist.size()==0) {
 			println("Please highlight destination instructions in addition to instruction performing switch");
 			println(" Or put CONDITIONAL_JUMP destination references at the branching instruction");
 			return;

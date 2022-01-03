@@ -64,7 +64,7 @@ public class MDObjectCPP extends MDObject {
 		if (hashedObjectFlag) {
 			return hashedObject.toString();
 		}
-		return qualifiedName.getBasicName().toString();
+		return getQualifiedName().getBasicName().toString();
 	}
 
 	/**
@@ -75,7 +75,7 @@ public class MDObjectCPP extends MDObject {
 		if (hashedObjectFlag) {
 			return hashedObject.getQualification();
 		}
-		return qualifiedName.getQualification();
+		return getQualifiedName().getQualification();
 	}
 
 	/**

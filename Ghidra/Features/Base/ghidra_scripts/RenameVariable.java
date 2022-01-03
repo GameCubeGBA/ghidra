@@ -55,13 +55,14 @@ public class RenameVariable extends GhidraScript {
 			Variable[] vars = f.getLocalVariables();
 
 			// iterate through all variables for current function
-            for (Variable v : vars) {
-                if (v.getName().equals(curName)) {
-                    println(f.getName() + "::" + v.getName());
-                    v.setName(newName, SourceType.USER_DEFINED);
-                    count = count + 1;
-                }
-            }
+			for (int i = 0; i < vars.length; i++) {
+				Variable v = vars[i];
+				if (v.getName().equals(curName)) {
+					println(f.getName() + "::" + v.getName());
+					v.setName(newName, SourceType.USER_DEFINED);
+					count = count + 1;
+				}
+			}
 		}
 
 		println("Found " + count + " instances of " + curName);

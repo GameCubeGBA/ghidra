@@ -63,22 +63,25 @@ public abstract class RenameTask {
 	 * @return true unless the user canceled
 	 */
 	private boolean runDialog(boolean oldNameIsCancel) {
-		InputDialogListener listener = dialog -> {
-            String name = dialog.getValue();
-            if ((name==null)||(name.isEmpty())) {
-                dialog.setStatusText("Cannot have empty name");
-                return false;
-            }
-            if (name.equals(oldName)) {		// No change to name
-                newName = name;
-                return true;				// but valid (ends up being equivalent to cancel
-            }
-            boolean res = isValid(name);
-            if (!res) {
-                dialog.setStatusText(errorMsg);
-            }
-            return res;
-        };
+		InputDialogListener listener = new InputDialogListener() {
+			@Override
+			public boolean inputIsValid(InputDialog dialog) {
+				String name = dialog.getValue();
+				if ((name==null)||(name.length()==0)) {
+					dialog.setStatusText("Cannot have empty name");
+					return false;
+				}
+				if (name.equals(oldName)) {		// No change to name
+					newName = name;
+					return true;				// but valid (ends up being equivalent to cancel
+				}
+				boolean res = isValid(name);
+				if (!res) {
+					dialog.setStatusText(errorMsg);
+				}
+				return res;
+			}
+		};
 		
 		String label = "Rename " + oldName + ":";
         InputDialog renameVarDialog = new InputDialog( getTransactionName(), 
@@ -89,9 +92,12 @@ public abstract class RenameTask {
         if (renameVarDialog.isCanceled()) {
         	return false;
         }
-        return !oldNameIsCancel || !newName.equals(oldName);
-
-    }
+		if (oldNameIsCancel && newName.equals(oldName)) {
+			return false;
+		}
+        return true;		
+		
+	}
 
 	/**
 	 * Perform the task of selecting a new name and committing it to the database
@@ -114,7 +120,7 @@ public abstract class RenameTask {
 			}
 			finally {
 				program.endTransaction(transaction, commit);
-				decompilerPanel.tokenRenamed(tokenAtCursor, newName);
+				decompilerPanel.tokenRenamed(tokenAtCursor, getNewName());
 			}
 		}
 

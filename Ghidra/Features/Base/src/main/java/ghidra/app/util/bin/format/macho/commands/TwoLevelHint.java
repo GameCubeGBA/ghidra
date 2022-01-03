@@ -29,7 +29,7 @@ import ghidra.util.exception.DuplicateNameException;
  * @see <a href="https://opensource.apple.com/source/xnu/xnu-4570.71.2/EXTERNAL_HEADERS/mach-o/loader.h.auto.html">mach-o/loader.h</a> 
  */
 public class TwoLevelHint implements StructConverter {
-	public static final int SIZEOF = 4;
+	public final static int SIZEOF = 4;
 
 	private int isub_image;
 	private int itoc;

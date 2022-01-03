@@ -90,6 +90,6 @@ public class OffcutReferencesValidator extends PostAnalysisValidator {
 
 	@Override
 	public String toString() {
-		return NAME;
+		return getName();
 	}
 }

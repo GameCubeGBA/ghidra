@@ -115,7 +115,7 @@ public class StructureMemberLocationDescriptor extends LocationDescriptor {
 		}
 
 		Msg.error(this,
-			"Could not find a Composite inside of a Structure Member location: " + this);
+			"Could not find a Composite inside of a Structure Member location: " + toString());
 		return null;
 	}
 

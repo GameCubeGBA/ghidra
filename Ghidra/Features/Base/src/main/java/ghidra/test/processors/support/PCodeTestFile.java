@@ -57,8 +57,11 @@ public class PCodeTestFile {
 		else if (!file.equals(other.file))
 			return false;
 		if (fileReferencePath == null) {
-            return other.fileReferencePath == null;
+			if (other.fileReferencePath != null)
+				return false;
 		}
-		else return fileReferencePath.equals(other.fileReferencePath);
-    }
+		else if (!fileReferencePath.equals(other.fileReferencePath))
+			return false;
+		return true;
+	}
 }

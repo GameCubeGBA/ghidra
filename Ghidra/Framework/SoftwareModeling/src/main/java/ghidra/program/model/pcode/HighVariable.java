@@ -183,8 +183,11 @@ public abstract class HighVariable {
 	 * @return true if this needs dynamic storage
 	 */
 	public boolean requiresDynamicStorage() {
-        return represent.isUnique() || (represent.getAddress().isStackAddress() && !represent.isAddrTied());
-    }
+		if (represent.isUnique() || (represent.getAddress().isStackAddress() && !represent.isAddrTied())) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Restore this HighVariable from a {@code <high>} XML tag

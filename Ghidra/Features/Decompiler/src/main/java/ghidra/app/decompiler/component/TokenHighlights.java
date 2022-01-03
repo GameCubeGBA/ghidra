@@ -240,8 +240,11 @@ public class TokenHighlights implements Iterable<HighlightToken> {
 		private boolean sameLines(ClangLine l1, ClangLine l2) {
 
 			if (l1 == null) {
-                return l2 == null;
-            }
+				if (l2 != null) {
+					return false;
+				}
+				return true;
+			}
 			else if (l2 == null) {
 				return false;
 			}

@@ -51,18 +51,18 @@ public class DefaultProcessRecorder implements ManagedProcessRecorder {
 
 	public CompletableFuture<byte[]> readProcessMemory(Address start, int length) {
 		Address tStart = recorder.getMemoryMapper().traceToTarget(start);
-		return processMemory.readMemory(tStart, length);
+		return getProcessMemory().readMemory(tStart, length);
 	}
 
 	public CompletableFuture<Void> writeProcessMemory(Address start, byte[] data) {
 		Address tStart = recorder.getMemoryMapper().traceToTarget(start);
-		return processMemory.writeMemory(tStart, data);
+		return getProcessMemory().writeMemory(tStart, data);
 	}
 
 	public AddressSetView getAccessibleProcessMemory() {
 		// TODO: Efficiently distinguish which memory is process vs. thread
 		///TODO Is this correct?
-		return processMemory.getAccessibleMemory(mem -> true, recorder.getMemoryMapper());
+		return getProcessMemory().getAccessibleMemory(mem -> true, recorder.getMemoryMapper());
 	}
 
 	@Override

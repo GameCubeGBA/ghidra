@@ -414,7 +414,7 @@ public interface AsyncUtils<T> {
 	CompletableFuture<Void> NIL = CompletableFuture.completedFuture(null);
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-    static <T> CompletableFuture<T> nil() {
+	public static <T> CompletableFuture<T> nil() {
 		return (CompletableFuture) NIL;
 	}
 
@@ -450,9 +450,9 @@ public interface AsyncUtils<T> {
 	 *            exiting the loop
 	 * @return a future which completes upon explicit loop termination
 	 */
-	static <T, U> CompletableFuture<T> loop(TypeSpec<T> loopType,
-                                            AsyncLoopFirstActionProduces<T, U> producer, TypeSpec<U> iterateType,
-                                            AsyncLoopSecondActionConsumes<T, ? super U> consumer) {
+	public static <T, U> CompletableFuture<T> loop(TypeSpec<T> loopType,
+			AsyncLoopFirstActionProduces<T, U> producer, TypeSpec<U> iterateType,
+			AsyncLoopSecondActionConsumes<T, ? super U> consumer) {
 		AsyncLoop<T, U> loop = new AsyncLoop<>(producer, iterateType, consumer);
 		loop.begin();
 		return loop;
@@ -482,8 +482,8 @@ public interface AsyncUtils<T> {
 	 *            result, upon whose completion the loop repeats.
 	 * @return a future which completes upon explicit loop termination
 	 */
-	static <T> CompletableFuture<T> loop(TypeSpec<T> loopType,
-                                         AsyncLoopOnlyActionRuns<T> action) {
+	public static <T> CompletableFuture<T> loop(TypeSpec<T> loopType,
+			AsyncLoopOnlyActionRuns<T> action) {
 		return loop(loopType, (handler) -> {
 			handler.consume(null, null);
 		}, TypeSpec.VOID, (v, handler) -> {
@@ -527,9 +527,9 @@ public interface AsyncUtils<T> {
 	 *            exiting the loop.
 	 * @return a future which completes upon loop termination
 	 */
-	static <T, E, U> CompletableFuture<T> each(TypeSpec<T> loopType, Iterator<E> it,
-                                               AsyncLoopFirstActionConsumesAndProduces<T, E, U> producer, TypeSpec<U> iterateType,
-                                               AsyncLoopSecondActionConsumes<T, U> consumer) {
+	public static <T, E, U> CompletableFuture<T> each(TypeSpec<T> loopType, Iterator<E> it,
+			AsyncLoopFirstActionConsumesAndProduces<T, E, U> producer, TypeSpec<U> iterateType,
+			AsyncLoopSecondActionConsumes<T, U> consumer) {
 		return loop(loopType, (handler) -> {
 			if (it.hasNext()) {
 				E elem;
@@ -573,8 +573,8 @@ public interface AsyncUtils<T> {
 	 *            producing no result, upon whose completion the loop repeats.
 	 * @return a future which completes upon loop termination
 	 */
-	static <T, E> CompletableFuture<T> each(TypeSpec<T> loopType, Iterator<E> it,
-                                            AsyncLoopSecondActionConsumes<T, E> action) {
+	public static <T, E> CompletableFuture<T> each(TypeSpec<T> loopType, Iterator<E> it,
+			AsyncLoopSecondActionConsumes<T, E> action) {
 		return each(loopType, it, (e, loop) -> {
 			loop.consume(e, null);
 		}, TypeSpec.obj((E) null), action);
@@ -607,7 +607,7 @@ public interface AsyncUtils<T> {
 	 * @param type the type "returned" by the sequence
 	 * @return an empty sequence ready to execute actions on the calling thread.
 	 */
-	static <R> AsyncSequenceWithoutTemp<R> sequence(TypeSpec<R> type) {
+	public static <R> AsyncSequenceWithoutTemp<R> sequence(TypeSpec<R> type) {
 		return sequence(new CompletableFuture<>());
 	}
 
@@ -622,7 +622,7 @@ public interface AsyncUtils<T> {
 	 * @param on the future to complete
 	 * @return an empty sequence ready to execute actions on the calling thread.
 	 */
-	static <R> AsyncSequenceWithoutTemp<R> sequence(CompletableFuture<R> on) {
+	public static <R> AsyncSequenceWithoutTemp<R> sequence(CompletableFuture<R> on) {
 		return new AsyncSequenceWithoutTemp<>(on, AsyncUtils.NIL);
 	}
 
@@ -638,7 +638,7 @@ public interface AsyncUtils<T> {
 	 * @param <A> the type of attachment expected by the method. Usually {@link Object} is
 	 *            sufficient, because the attachment is not passed to the wrapped future.
 	 */
-    class FutureCompletionHandler<T, A> implements CompletionHandler<T, A> {
+	static class FutureCompletionHandler<T, A> implements CompletionHandler<T, A> {
 		CompletableFuture<T> future = new CompletableFuture<>();
 
 		@Override
@@ -734,8 +734,8 @@ public interface AsyncUtils<T> {
 	 * @param func the function launching the asynchronous task
 	 * @return the future to receive the completion result
 	 */
-	static <T, A> CompletableFuture<T> completable(TypeSpec<T> type,
-                                                   TakesCompletionHandlerArity0<T> func) {
+	public static <T, A> CompletableFuture<T> completable(TypeSpec<T> type,
+			TakesCompletionHandlerArity0<T> func) {
 		FutureCompletionHandler<T, A> handler = new FutureCompletionHandler<>();
 		func.launch(null, handler);
 		return handler.future;
@@ -750,8 +750,8 @@ public interface AsyncUtils<T> {
 	 * @param func the function launching the asynchronous task
 	 * @return the future to receive the completion result
 	 */
-	static <T, P0, A> CompletableFuture<T> completable(TypeSpec<T> type,
-                                                       TakesCompletionHandlerArity1<T, P0> func, P0 arg0) {
+	public static <T, P0, A> CompletableFuture<T> completable(TypeSpec<T> type,
+			TakesCompletionHandlerArity1<T, P0> func, P0 arg0) {
 		FutureCompletionHandler<T, A> handler = new FutureCompletionHandler<>();
 		func.launch(arg0, null, handler);
 		return handler.future;
@@ -766,8 +766,8 @@ public interface AsyncUtils<T> {
 	 * @param func the function launching the asynchronous task
 	 * @return the future to receive the completion result
 	 */
-	static <T, P0, P1, A> CompletableFuture<T> completable(TypeSpec<T> type,
-                                                           TakesCompletionHandlerArity2<T, P0, P1> func, P0 arg0, P1 arg1) {
+	public static <T, P0, P1, A> CompletableFuture<T> completable(TypeSpec<T> type,
+			TakesCompletionHandlerArity2<T, P0, P1> func, P0 arg0, P1 arg1) {
 		FutureCompletionHandler<T, A> handler = new FutureCompletionHandler<>();
 		func.launch(arg0, arg1, null, handler);
 		return handler.future;
@@ -782,8 +782,8 @@ public interface AsyncUtils<T> {
 	 * @param func the function launching the asynchronous task
 	 * @return the future to receive the completion result
 	 */
-	static <T, P0, P1, P2, A> CompletableFuture<T> completable(TypeSpec<T> type,
-                                                               TakesCompletionHandlerArity3<T, P0, P1, P2> func, P0 arg0, P1 arg1, P2 arg2) {
+	public static <T, P0, P1, P2, A> CompletableFuture<T> completable(TypeSpec<T> type,
+			TakesCompletionHandlerArity3<T, P0, P1, P2> func, P0 arg0, P1 arg1, P2 arg2) {
 		FutureCompletionHandler<T, A> handler = new FutureCompletionHandler<>();
 		func.launch(arg0, arg1, arg2, null, handler);
 		return handler.future;
@@ -798,9 +798,9 @@ public interface AsyncUtils<T> {
 	 * @param func the function launching the asynchronous task
 	 * @return the future to receive the completion result
 	 */
-	static <T, P0, P1, P2, P3, A> CompletableFuture<T> completable(TypeSpec<T> type,
-                                                                   TakesCompletionHandlerArity4<T, P0, P1, P2, P3> func, P0 arg0, P1 arg1, P2 arg2,
-                                                                   P3 arg3) {
+	public static <T, P0, P1, P2, P3, A> CompletableFuture<T> completable(TypeSpec<T> type,
+			TakesCompletionHandlerArity4<T, P0, P1, P2, P3> func, P0 arg0, P1 arg1, P2 arg2,
+			P3 arg3) {
 		FutureCompletionHandler<T, A> handler = new FutureCompletionHandler<>();
 		func.launch(arg0, arg1, arg2, arg3, null, handler);
 		return handler.future;
@@ -816,8 +816,8 @@ public interface AsyncUtils<T> {
 	 * @param future the future to wrap
 	 * @param handler a handler to receive the callback on future completion
 	 */
-	static <T, A> void handle(CompletableFuture<T> future, A attachment,
-                              CompletionHandler<T, ? super A> handler) {
+	public static <T, A> void handle(CompletableFuture<T> future, A attachment,
+			CompletionHandler<T, ? super A> handler) {
 		future.handle((result, exc) -> {
 			if (exc != null) {
 				handler.failed(exc, attachment);
@@ -829,12 +829,12 @@ public interface AsyncUtils<T> {
 		});
 	}
 
-	interface TemperamentalRunnable {
-		void run() throws Throwable;
+	public interface TemperamentalRunnable {
+		public void run() throws Throwable;
 	}
 
-	interface TemperamentalSupplier<T> {
-		T get() throws Throwable;
+	public interface TemperamentalSupplier<T> {
+		public T get() throws Throwable;
 	}
 
 	/**
@@ -845,7 +845,7 @@ public interface AsyncUtils<T> {
 	 * 
 	 * @param cb the invocation of the user callback
 	 */
-	static void defensive(TemperamentalRunnable cb) {
+	public static void defensive(TemperamentalRunnable cb) {
 		try {
 			cb.run();
 		}
@@ -860,7 +860,7 @@ public interface AsyncUtils<T> {
 	 * @param e the (usually wrapped) exception
 	 * @return the nearest cause in the chain that is not a {@link CompletionException}
 	 */
-	static Throwable unwrapThrowable(Throwable e) {
+	public static Throwable unwrapThrowable(Throwable e) {
 		Throwable exc = e;
 		while (exc instanceof CompletionException || exc instanceof ExecutionException) {
 			exc = exc.getCause();
@@ -889,7 +889,7 @@ public interface AsyncUtils<T> {
 	 * @param dest the future to copy into
 	 * @return a function which handles the source future
 	 */
-	static <T> BiFunction<T, Throwable, T> copyTo(CompletableFuture<T> dest) {
+	public static <T> BiFunction<T, Throwable, T> copyTo(CompletableFuture<T> dest) {
 		return (t, ex) -> {
 			if (ex != null) {
 				dest.completeExceptionally(ex);

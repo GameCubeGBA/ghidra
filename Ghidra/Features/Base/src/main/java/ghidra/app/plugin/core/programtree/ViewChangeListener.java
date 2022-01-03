@@ -27,5 +27,5 @@ public interface ViewChangeListener {
      * Notification that the view changed.
      * @param addrSet the new AddressSet for the current view.
      */
-    void viewChanged(AddressSetView addrSet);
+    public void viewChanged(AddressSetView addrSet);
 }

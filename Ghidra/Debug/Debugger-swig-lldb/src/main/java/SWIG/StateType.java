@@ -12,19 +12,19 @@
 package SWIG;
 
 public final class StateType {
-  public static final StateType eStateInvalid = new StateType("eStateInvalid", lldbJNI.eStateInvalid_get());
-  public static final StateType eStateUnloaded = new StateType("eStateUnloaded");
-  public static final StateType eStateConnected = new StateType("eStateConnected");
-  public static final StateType eStateAttaching = new StateType("eStateAttaching");
-  public static final StateType eStateLaunching = new StateType("eStateLaunching");
-  public static final StateType eStateStopped = new StateType("eStateStopped");
-  public static final StateType eStateRunning = new StateType("eStateRunning");
-  public static final StateType eStateStepping = new StateType("eStateStepping");
-  public static final StateType eStateCrashed = new StateType("eStateCrashed");
-  public static final StateType eStateDetached = new StateType("eStateDetached");
-  public static final StateType eStateExited = new StateType("eStateExited");
-  public static final StateType eStateSuspended = new StateType("eStateSuspended");
-  public static final StateType kLastStateType = new StateType("kLastStateType", lldbJNI.kLastStateType_get());
+  public final static StateType eStateInvalid = new StateType("eStateInvalid", lldbJNI.eStateInvalid_get());
+  public final static StateType eStateUnloaded = new StateType("eStateUnloaded");
+  public final static StateType eStateConnected = new StateType("eStateConnected");
+  public final static StateType eStateAttaching = new StateType("eStateAttaching");
+  public final static StateType eStateLaunching = new StateType("eStateLaunching");
+  public final static StateType eStateStopped = new StateType("eStateStopped");
+  public final static StateType eStateRunning = new StateType("eStateRunning");
+  public final static StateType eStateStepping = new StateType("eStateStepping");
+  public final static StateType eStateCrashed = new StateType("eStateCrashed");
+  public final static StateType eStateDetached = new StateType("eStateDetached");
+  public final static StateType eStateExited = new StateType("eStateExited");
+  public final static StateType eStateSuspended = new StateType("eStateSuspended");
+  public final static StateType kLastStateType = new StateType("kLastStateType", lldbJNI.kLastStateType_get());
 
   public final int swigValue() {
     return swigValue;
@@ -37,9 +37,9 @@ public final class StateType {
   public static StateType swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-      for (StateType value : swigValues)
-          if (value.swigValue == swigValue)
-              return value;
+    for (int i = 0; i < swigValues.length; i++)
+      if (swigValues[i].swigValue == swigValue)
+        return swigValues[i];
     throw new IllegalArgumentException("No enum " + StateType.class + " with value " + swigValue);
   }
 

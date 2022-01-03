@@ -28,7 +28,7 @@ import ghidra.util.exception.DuplicateNameException;
 import java.io.IOException;
 
 public class ObjectiveC2_ClassRW implements StructConverter {
-	public static final String NAME = "class_rw_t";
+	public final static String NAME = "class_rw_t";
 
 	private ObjectiveC2_State _state;
 	private long _index;
@@ -195,7 +195,7 @@ public class ObjectiveC2_ClassRW implements StructConverter {
 	}
 
 	public void applyTo() throws Exception {
-		Address address = ObjectiveC1_Utilities.toAddress(_state.program, _index);
+		Address address = ObjectiveC1_Utilities.toAddress(_state.program, getIndex());
 
 		try {
 			ObjectiveC1_Utilities.applyData(_state.program, toDataType(), address);
@@ -204,11 +204,11 @@ public class ObjectiveC2_ClassRW implements StructConverter {
 
 		try {
 			Namespace namespace = ObjectiveC1_Utilities.createNamespace(_state.program, ObjectiveC1_Constants.NAMESPACE, ObjectiveC2_ClassRW.NAME);
-			ObjectiveC1_Utilities.createSymbol(_state.program, namespace, name, address);
+			ObjectiveC1_Utilities.createSymbol(_state.program, namespace, getName(), address);
 		}
 		catch (Exception e) {}
 
-		Namespace namespace = ObjectiveC1_Utilities.getClassNamespace(_state.program, null, name);
+		Namespace namespace = ObjectiveC1_Utilities.getClassNamespace(_state.program, null, getName());
 
 		if (baseMethods != null) {
 			baseMethods.applyTo(namespace);

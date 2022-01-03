@@ -12,15 +12,15 @@
 package SWIG;
 
 public final class TemplateArgumentKind {
-  public static final TemplateArgumentKind eTemplateArgumentKindNull = new TemplateArgumentKind("eTemplateArgumentKindNull", lldbJNI.eTemplateArgumentKindNull_get());
-  public static final TemplateArgumentKind eTemplateArgumentKindType = new TemplateArgumentKind("eTemplateArgumentKindType");
-  public static final TemplateArgumentKind eTemplateArgumentKindDeclaration = new TemplateArgumentKind("eTemplateArgumentKindDeclaration");
-  public static final TemplateArgumentKind eTemplateArgumentKindIntegral = new TemplateArgumentKind("eTemplateArgumentKindIntegral");
-  public static final TemplateArgumentKind eTemplateArgumentKindTemplate = new TemplateArgumentKind("eTemplateArgumentKindTemplate");
-  public static final TemplateArgumentKind eTemplateArgumentKindTemplateExpansion = new TemplateArgumentKind("eTemplateArgumentKindTemplateExpansion");
-  public static final TemplateArgumentKind eTemplateArgumentKindExpression = new TemplateArgumentKind("eTemplateArgumentKindExpression");
-  public static final TemplateArgumentKind eTemplateArgumentKindPack = new TemplateArgumentKind("eTemplateArgumentKindPack");
-  public static final TemplateArgumentKind eTemplateArgumentKindNullPtr = new TemplateArgumentKind("eTemplateArgumentKindNullPtr");
+  public final static TemplateArgumentKind eTemplateArgumentKindNull = new TemplateArgumentKind("eTemplateArgumentKindNull", lldbJNI.eTemplateArgumentKindNull_get());
+  public final static TemplateArgumentKind eTemplateArgumentKindType = new TemplateArgumentKind("eTemplateArgumentKindType");
+  public final static TemplateArgumentKind eTemplateArgumentKindDeclaration = new TemplateArgumentKind("eTemplateArgumentKindDeclaration");
+  public final static TemplateArgumentKind eTemplateArgumentKindIntegral = new TemplateArgumentKind("eTemplateArgumentKindIntegral");
+  public final static TemplateArgumentKind eTemplateArgumentKindTemplate = new TemplateArgumentKind("eTemplateArgumentKindTemplate");
+  public final static TemplateArgumentKind eTemplateArgumentKindTemplateExpansion = new TemplateArgumentKind("eTemplateArgumentKindTemplateExpansion");
+  public final static TemplateArgumentKind eTemplateArgumentKindExpression = new TemplateArgumentKind("eTemplateArgumentKindExpression");
+  public final static TemplateArgumentKind eTemplateArgumentKindPack = new TemplateArgumentKind("eTemplateArgumentKindPack");
+  public final static TemplateArgumentKind eTemplateArgumentKindNullPtr = new TemplateArgumentKind("eTemplateArgumentKindNullPtr");
 
   public final int swigValue() {
     return swigValue;
@@ -33,9 +33,9 @@ public final class TemplateArgumentKind {
   public static TemplateArgumentKind swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-      for (TemplateArgumentKind value : swigValues)
-          if (value.swigValue == swigValue)
-              return value;
+    for (int i = 0; i < swigValues.length; i++)
+      if (swigValues[i].swigValue == swigValue)
+        return swigValues[i];
     throw new IllegalArgumentException("No enum " + TemplateArgumentKind.class + " with value " + swigValue);
   }
 

@@ -45,9 +45,9 @@ import ghidra.util.HelpLocation;
 import ghidra.util.Msg;
 
 class ProjectActionManager {
-	private static final String CLOSE_ALL_OPEN_VIEWS = "Close All Read-Only Views";
-	private static final String LAST_VIEWED_PROJECT_DIRECTORY = "LastViewedProjectDirectory";
-	private static final String LAST_VIEWED_REPOSITORY_URL = "LastViewedRepositoryURL";
+	private final static String CLOSE_ALL_OPEN_VIEWS = "Close All Read-Only Views";
+	private final static String LAST_VIEWED_PROJECT_DIRECTORY = "LastViewedProjectDirectory";
+	private final static String LAST_VIEWED_REPOSITORY_URL = "LastViewedRepositoryURL";
 
 	private FrontEndTool tool;
 	private FrontEndPlugin plugin;
@@ -318,7 +318,7 @@ class ProjectActionManager {
 		}
 
 		// disable the menu if no recent project views
-		if (reopenViewsList.isEmpty()) {
+		if (reopenViewsList.size() == 0) {
 			DockingAction action = new DockingAction("View Recent", plugin.getName(), false) {
 				@Override
 				public void actionPerformed(ActionContext context) {

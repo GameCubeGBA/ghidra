@@ -33,18 +33,18 @@ public class Annotation {
 	private static final Pattern QUOTATION_PATTERN =
 		Pattern.compile("(?<!\\\\)[\"](.*?)(?<!\\\\)[\"]");
 
-    private String annotationText;
+	private static Map<String, AnnotatedStringHandler> ANNOTATED_STRING_MAP;
+
+	private String annotationText;
 	private String[] annotationParts;
 	private AnnotatedStringHandler annotatedStringHandler;
 	private AttributedString displayString;
 
-    private static final class AnnotatedStringMapHolder {
-        private static final Map<String, AnnotatedStringHandler> ANNOTATED_STRING_MAP = createAnnotatedStringHandlerMap();
-    }
-
-    private static Map<String, AnnotatedStringHandler> getAnnotatedStringHandlerMap() {
-        // lazy init due to our use of ClassSearcher
-        return AnnotatedStringMapHolder.ANNOTATED_STRING_MAP;
+	private static Map<String, AnnotatedStringHandler> getAnnotatedStringHandlerMap() {
+		if (ANNOTATED_STRING_MAP == null) { // lazy init due to our use of ClassSearcher
+			ANNOTATED_STRING_MAP = createAnnotatedStringHandlerMap();
+		}
+		return ANNOTATED_STRING_MAP;
 	}
 
 	// locates AnnotatedStringHandler implementations to handle annotations 
@@ -173,7 +173,7 @@ public class Annotation {
 		String[] strings = content.split("\\s");
 		for (String string : strings) {
 			// 0 length strings can happen when 'content' begins with a space
-			if (!string.isEmpty()) {
+			if (string.length() > 0) {
 				tokenContainer.add(string);
 			}
 		}

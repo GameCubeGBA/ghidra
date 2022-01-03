@@ -53,7 +53,8 @@ public class VTDomainObjectEventsTest extends VTBaseTestCase {
 	};
 
 	public VTDomainObjectEventsTest() {
-    }
+		super();
+	}
 
 	@Override
 	@Before

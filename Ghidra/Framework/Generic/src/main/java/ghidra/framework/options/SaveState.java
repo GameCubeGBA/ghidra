@@ -146,141 +146,169 @@ public class SaveState {
 	public SaveState(Element root) {
 		map = new HashMap<>();
 		saveStateName = root.getName();
-        for (Object o : root.getChildren()) {
-            Element elem = (Element) o;
-            String tag = elem.getName();
-            String name = elem.getAttributeValue(NAME);
-            String type = elem.getAttributeValue(TYPE);
-            String value = elem.getAttributeValue(VALUE);
-            if ("XML".equals(tag)) {
-                map.put(name, elem.getChildren().get(0));
-            } else if ("BYTES".equals(tag)) {
-                if (value != null) {
-                    map.put(name, NumericUtilities.convertStringToBytes(value));
-                }
-            } else if (STATE.equals(tag)) {
-                try {
-                    if (type == null) {
-                        // skip this element
-                    } else if ("byte".equals(type)) {
-                        map.put(name, Byte.valueOf(value));
-                    } else if ("short".equals(type)) {
-                        map.put(name, Short.valueOf(value));
-                    } else if ("int".equals(type)) {
-                        map.put(name, Integer.valueOf(value));
-                    } else if ("long".equals(type)) {
-                        map.put(name, Long.valueOf(value));
-                    } else if ("float".equals(type)) {
-                        map.put(name, Float.valueOf(value));
-                    } else if ("double".equals(type)) {
-                        map.put(name, Double.valueOf(value));
-                    } else if ("boolean".equals(type)) {
-                        map.put(name, Boolean.valueOf(value));
-                    } else if ("string".equals(type)) {
-                        String encodedValue = elem.getAttributeValue("ENCODED_VALUE");
-                        if (value == null && encodedValue != null) {
-                            byte[] strBytes = NumericUtilities.convertStringToBytes(encodedValue);
-                            value = new String(strBytes, StandardCharsets.UTF_8);
-                        }
-                        map.put(name, value);
-                    } else if ("Color".equals(type)) {
-                        map.put(name, new Color(Integer.valueOf(value)));
-                    } else if ("Date".equals(type)) {
-                        map.put(name, DATE_FORMAT.parse(value));
-                    } else if ("File".equals(type)) {
-                        map.put(name, new File(value));
-                    } else if ("KeyStroke".equals(type)) {
-                        map.put(name, KeyStroke.getKeyStroke(value));
-                    } else if ("Font".equals(type)) {
-                        map.put(name, Font.decode(value));
-                    }
-                } catch (Exception e) {
-                    Msg.warn(this, "Error processing primitive value in saveState", e);
-                }
-            } else if ("ARRAY".equals(tag)) {
-                if (type == null) {
-                    continue;
-                }
+		Iterator<?> iter = root.getChildren().iterator();
+		while (iter.hasNext()) {
+			Element elem = (Element) iter.next();
+			String tag = elem.getName();
+			String name = elem.getAttributeValue(NAME);
+			String type = elem.getAttributeValue(TYPE);
+			String value = elem.getAttributeValue(VALUE);
+			if ("XML".equals(tag)) {
+				map.put(name, elem.getChildren().get(0));
+			}
+			else if ("BYTES".equals(tag)) {
+				if (value != null) {
+					map.put(name, NumericUtilities.convertStringToBytes(value));
+				}
+			}
+			else if (STATE.equals(tag)) {
+				try {
+					if (type == null) {
+						// skip this element
+					}
+					else if ("byte".equals(type)) {
+						map.put(name, Byte.valueOf(value));
+					}
+					else if ("short".equals(type)) {
+						map.put(name, Short.valueOf(value));
+					}
+					else if ("int".equals(type)) {
+						map.put(name, Integer.valueOf(value));
+					}
+					else if ("long".equals(type)) {
+						map.put(name, Long.valueOf(value));
+					}
+					else if ("float".equals(type)) {
+						map.put(name, Float.valueOf(value));
+					}
+					else if ("double".equals(type)) {
+						map.put(name, Double.valueOf(value));
+					}
+					else if ("boolean".equals(type)) {
+						map.put(name, Boolean.valueOf(value));
+					}
+					else if ("string".equals(type)) {
+						String encodedValue = elem.getAttributeValue("ENCODED_VALUE");
+						if (value == null && encodedValue != null) {
+							byte[] strBytes = NumericUtilities.convertStringToBytes(encodedValue);
+							value = new String(strBytes, StandardCharsets.UTF_8);
+						}
+						map.put(name, value);
+					}
+					else if ("Color".equals(type)) {
+						map.put(name, new Color(Integer.valueOf(value)));
+					}
+					else if ("Date".equals(type)) {
+						map.put(name, DATE_FORMAT.parse(value));
+					}
+					else if ("File".equals(type)) {
+						map.put(name, new File(value));
+					}
+					else if ("KeyStroke".equals(type)) {
+						map.put(name, KeyStroke.getKeyStroke(value));
+					}
+					else if ("Font".equals(type)) {
+						map.put(name, Font.decode(value));
+					}
+				}
+				catch (Exception e) {
+					Msg.warn(this, "Error processing primitive value in saveState", e);
+				}
+			}
+			else if ("ARRAY".equals(tag)) {
+				if (type == null) {
+					continue;
+				}
 
-                try {
-                    List<?> list = elem.getChildren(ARRAY_ELEMENT_NAME);
-                    Iterator<?> it = list.iterator();
-                    int i = 0;
-                    if ("short".equals(type)) {
-                        short[] vals = new short[list.size()];
-                        while (it.hasNext()) {
-                            Element e = (Element) it.next();
-                            vals[i++] = Short.parseShort(e.getAttributeValue(VALUE));
-                        }
-                        map.put(name, vals);
-                    } else if ("int".equals(type)) {
-                        int[] vals = new int[list.size()];
-                        while (it.hasNext()) {
-                            Element e = (Element) it.next();
-                            vals[i++] = Integer.parseInt(e.getAttributeValue(VALUE));
-                        }
-                        map.put(name, vals);
-                    } else if ("long".equals(type)) {
-                        long[] vals = new long[list.size()];
-                        while (it.hasNext()) {
-                            Element e = (Element) it.next();
-                            vals[i++] = Long.parseLong(e.getAttributeValue(VALUE));
-                        }
-                        map.put(name, vals);
-                    } else if ("float".equals(type)) {
-                        float[] vals = new float[list.size()];
-                        while (it.hasNext()) {
-                            Element e = (Element) it.next();
-                            vals[i++] = Float.parseFloat(e.getAttributeValue(VALUE));
-                        }
-                        map.put(name, vals);
-                    } else if ("double".equals(type)) {
-                        double[] vals = new double[list.size()];
-                        while (it.hasNext()) {
-                            Element e = (Element) it.next();
-                            vals[i++] = Double.parseDouble(e.getAttributeValue(VALUE));
-                        }
-                        map.put(name, vals);
-                    } else if ("boolean".equals(type)) {
-                        boolean[] vals = new boolean[list.size()];
-                        while (it.hasNext()) {
-                            Element e = (Element) it.next();
-                            vals[i++] =
-                                    Boolean.valueOf(e.getAttributeValue(VALUE)).booleanValue();
-                        }
-                        map.put(name, vals);
-                    } else if ("string".equals(type)) {
-                        String[] vals = new String[list.size()];
-                        while (it.hasNext()) {
-                            Element e = (Element) it.next();
-                            vals[i++] = e.getAttributeValue(VALUE);
-                        }
-                        map.put(name, vals);
-                    }
-                } catch (Exception exc) {
-                    Msg.warn(this, "Error processing array value in saveState", exc);
-                }
-            } else if ("ENUM".equals(tag)) {
-                if ((type == null) || "stringenum".equals(type)) {
-                    // skip it, string enums are no longer supported
-                    continue;
-                }
-                if ("enum".equals(type)) {
-                    String className = elem.getAttributeValue("CLASS");
-                    Enum<?> e = getEnumValue(className, value);
-                    if (e != null) {
-                        map.put(name, e);
-                    }
-                }
-            } else if (SAVE_STATE.equals(tag)) {
-                Element element = (Element) elem.getChildren().get(0);
-                if (element != null) {
-                    map.put(name, new SaveState(element));
-                }
-            } else if ("NULL".equals(tag)) {
-                map.put(name, null);
-            }
-        }
+				try {
+					List<?> list = elem.getChildren(ARRAY_ELEMENT_NAME);
+					Iterator<?> it = list.iterator();
+					int i = 0;
+					if ("short".equals(type)) {
+						short[] vals = new short[list.size()];
+						while (it.hasNext()) {
+							Element e = (Element) it.next();
+							vals[i++] = Short.parseShort(e.getAttributeValue(VALUE));
+						}
+						map.put(name, vals);
+					}
+					else if ("int".equals(type)) {
+						int[] vals = new int[list.size()];
+						while (it.hasNext()) {
+							Element e = (Element) it.next();
+							vals[i++] = Integer.parseInt(e.getAttributeValue(VALUE));
+						}
+						map.put(name, vals);
+					}
+					else if ("long".equals(type)) {
+						long[] vals = new long[list.size()];
+						while (it.hasNext()) {
+							Element e = (Element) it.next();
+							vals[i++] = Long.parseLong(e.getAttributeValue(VALUE));
+						}
+						map.put(name, vals);
+					}
+					else if ("float".equals(type)) {
+						float[] vals = new float[list.size()];
+						while (it.hasNext()) {
+							Element e = (Element) it.next();
+							vals[i++] = Float.parseFloat(e.getAttributeValue(VALUE));
+						}
+						map.put(name, vals);
+					}
+					else if ("double".equals(type)) {
+						double[] vals = new double[list.size()];
+						while (it.hasNext()) {
+							Element e = (Element) it.next();
+							vals[i++] = Double.parseDouble(e.getAttributeValue(VALUE));
+						}
+						map.put(name, vals);
+					}
+					else if ("boolean".equals(type)) {
+						boolean[] vals = new boolean[list.size()];
+						while (it.hasNext()) {
+							Element e = (Element) it.next();
+							vals[i++] =
+								Boolean.valueOf(e.getAttributeValue(VALUE)).booleanValue();
+						}
+						map.put(name, vals);
+					}
+					else if ("string".equals(type)) {
+						String[] vals = new String[list.size()];
+						while (it.hasNext()) {
+							Element e = (Element) it.next();
+							vals[i++] = e.getAttributeValue(VALUE);
+						}
+						map.put(name, vals);
+					}
+				}
+				catch (Exception exc) {
+					Msg.warn(this, "Error processing array value in saveState", exc);
+				}
+			}
+			else if ("ENUM".equals(tag)) {
+				if ((type == null) || "stringenum".equals(type)) {
+					// skip it, string enums are no longer supported
+					continue;
+				}
+				if ("enum".equals(type)) {
+					String className = elem.getAttributeValue("CLASS");
+					Enum<?> e = getEnumValue(className, value);
+					if (e != null) {
+						map.put(name, e);
+					}
+				}
+			}
+			else if (SAVE_STATE.equals(tag)) {
+				Element element = (Element) elem.getChildren().get(0);
+				if (element != null) {
+					map.put(name, new SaveState(element));
+				}
+			}
+			else if ("NULL".equals(tag)) {
+				map.put(name, null);
+			}
+		}
 	}
 
 	protected SaveState(JsonObject root) {
@@ -501,83 +529,110 @@ public class SaveState {
 	 */
 	public Element saveToXml() {
 		Element root = new Element(saveStateName);
-        for (String key : map.keySet()) {
-            Object value = map.get(key);
-            Element elem = null;
-            if (value instanceof Element) {
-                elem = createElementFromElement(key, (Element) value);
-            } else if (value instanceof Byte) {
-                elem = setAttributes(key, "byte", ((Byte) value).toString());
-            } else if (value instanceof Short) {
-                elem = setAttributes(key, "short", ((Short) value).toString());
-            } else if (value instanceof Integer) {
-                elem = setAttributes(key, "int", ((Integer) value).toString());
-            } else if (value instanceof Long) {
-                elem = setAttributes(key, "long", ((Long) value).toString());
-            } else if (value instanceof Float) {
-                elem = setAttributes(key, "float", ((Float) value).toString());
-            } else if (value instanceof Double) {
-                elem = setAttributes(key, "double", ((Double) value).toString());
-            } else if (value instanceof Boolean) {
-                elem = setAttributes(key, "boolean", ((Boolean) value).toString());
-            } else if (value instanceof String) {
-                elem = new Element(STATE);
-                elem.setAttribute(NAME, key);
-                elem.setAttribute(TYPE, "string");
-                if (XmlUtilities.hasInvalidXMLCharacters((String) value)) {
-                    elem.setAttribute("ENCODED_VALUE", NumericUtilities.convertBytesToString(
-                            ((String) value).getBytes(StandardCharsets.UTF_8)));
-                } else {
-                    elem.setAttribute(VALUE, (String) value);
-                }
-            } else if (value instanceof Color) {
-                elem = setAttributes(key, "Color", Integer.toString(((Color) value).getRGB()));
-            } else if (value instanceof Date) {
-                elem = setAttributes(key, "Date", DATE_FORMAT.format((Date) value));
-            } else if (value instanceof File) {
-                elem = setAttributes(key, "File", ((File) value).getAbsolutePath());
-            } else if (value instanceof KeyStroke) {
-                elem = setAttributes(key, "KeyStroke", value.toString());
-            } else if (value instanceof Font) {
-                elem =
-                        setAttributes(key, "Font", OptionType.FONT_TYPE.convertObjectToString(value));
-            } else if (value instanceof byte[]) {
-                elem = new Element("BYTES");
-                elem.setAttribute(NAME, key);
-                elem.setAttribute(VALUE, NumericUtilities.convertBytesToString((byte[]) value));
-            } else if (value instanceof short[]) {
-                elem = setArrayAttributes(key, "short", value);
-            } else if (value instanceof int[]) {
-                elem = setArrayAttributes(key, "int", value);
-            } else if (value instanceof long[]) {
-                elem = setArrayAttributes(key, "long", value);
-            } else if (value instanceof float[]) {
-                elem = setArrayAttributes(key, "float", value);
-            } else if (value instanceof double[]) {
-                elem = setArrayAttributes(key, "double", value);
-            } else if (value instanceof boolean[]) {
-                elem = setArrayAttributes(key, "boolean", value);
-            } else if (value instanceof String[]) {
-                elem = setArrayAttributes(key, "string", value);
-            } else if (value instanceof Enum) {
-                Enum<?> e = (Enum<?>) value;
-                elem = new Element("ENUM");
-                elem.setAttribute(NAME, key);
-                elem.setAttribute(TYPE, "enum");
-                elem.setAttribute("CLASS", e.getClass().getName());
-                elem.setAttribute(VALUE, e.name());
-            } else if (value instanceof SaveState) {
-                Element element = ((SaveState) value).saveToXml();
-                elem = new Element(SAVE_STATE);
-                elem.setAttribute(NAME, key);
-                elem.setAttribute(TYPE, "SaveState");
-                elem.addContent(element);
-            } else {
-                elem = new Element("NULL");
-                elem.setAttribute(NAME, key);
-            }
-            root.addContent(elem);
-        }
+		Iterator<String> iter = map.keySet().iterator();
+		while (iter.hasNext()) {
+			String key = iter.next();
+			Object value = map.get(key);
+			Element elem = null;
+			if (value instanceof Element) {
+				elem = createElementFromElement(key, (Element) value);
+			}
+			else if (value instanceof Byte) {
+				elem = setAttributes(key, "byte", ((Byte) value).toString());
+			}
+			else if (value instanceof Short) {
+				elem = setAttributes(key, "short", ((Short) value).toString());
+			}
+			else if (value instanceof Integer) {
+				elem = setAttributes(key, "int", ((Integer) value).toString());
+			}
+			else if (value instanceof Long) {
+				elem = setAttributes(key, "long", ((Long) value).toString());
+			}
+			else if (value instanceof Float) {
+				elem = setAttributes(key, "float", ((Float) value).toString());
+			}
+			else if (value instanceof Double) {
+				elem = setAttributes(key, "double", ((Double) value).toString());
+			}
+			else if (value instanceof Boolean) {
+				elem = setAttributes(key, "boolean", ((Boolean) value).toString());
+			}
+			else if (value instanceof String) {
+				elem = new Element(STATE);
+				elem.setAttribute(NAME, key);
+				elem.setAttribute(TYPE, "string");
+				if (XmlUtilities.hasInvalidXMLCharacters((String) value)) {
+					elem.setAttribute("ENCODED_VALUE", NumericUtilities.convertBytesToString(
+						((String) value).getBytes(StandardCharsets.UTF_8)));
+				}
+				else {
+					elem.setAttribute(VALUE, (String) value);
+				}
+			}
+			else if (value instanceof Color) {
+				elem = setAttributes(key, "Color", Integer.toString(((Color) value).getRGB()));
+			}
+			else if (value instanceof Date) {
+				elem = setAttributes(key, "Date", DATE_FORMAT.format((Date) value));
+			}
+			else if (value instanceof File) {
+				elem = setAttributes(key, "File", ((File) value).getAbsolutePath());
+			}
+			else if (value instanceof KeyStroke) {
+				elem = setAttributes(key, "KeyStroke", value.toString());
+			}
+			else if (value instanceof Font) {
+				elem =
+					setAttributes(key, "Font", OptionType.FONT_TYPE.convertObjectToString(value));
+			}
+			else if (value instanceof byte[]) {
+				elem = new Element("BYTES");
+				elem.setAttribute(NAME, key);
+				elem.setAttribute(VALUE, NumericUtilities.convertBytesToString((byte[]) value));
+			}
+			else if (value instanceof short[]) {
+				elem = setArrayAttributes(key, "short", value);
+			}
+			else if (value instanceof int[]) {
+				elem = setArrayAttributes(key, "int", value);
+			}
+			else if (value instanceof long[]) {
+				elem = setArrayAttributes(key, "long", value);
+			}
+			else if (value instanceof float[]) {
+				elem = setArrayAttributes(key, "float", value);
+			}
+			else if (value instanceof double[]) {
+				elem = setArrayAttributes(key, "double", value);
+			}
+			else if (value instanceof boolean[]) {
+				elem = setArrayAttributes(key, "boolean", value);
+			}
+			else if (value instanceof String[]) {
+				elem = setArrayAttributes(key, "string", value);
+			}
+			else if (value instanceof Enum) {
+				Enum<?> e = (Enum<?>) value;
+				elem = new Element("ENUM");
+				elem.setAttribute(NAME, key);
+				elem.setAttribute(TYPE, "enum");
+				elem.setAttribute("CLASS", e.getClass().getName());
+				elem.setAttribute(VALUE, e.name());
+			}
+			else if (value instanceof SaveState) {
+				Element element = ((SaveState) value).saveToXml();
+				elem = new Element(SAVE_STATE);
+				elem.setAttribute(NAME, key);
+				elem.setAttribute(TYPE, "SaveState");
+				elem.addContent(element);
+			}
+			else {
+				elem = new Element("NULL");
+				elem.setAttribute(NAME, key);
+			}
+			root.addContent(elem);
+		}
 		return root;
 	}
 
@@ -614,125 +669,152 @@ public class SaveState {
 		JsonObject types = new JsonObject();
 		JsonObject values = new JsonObject();
 		JsonObject enumClasses = new JsonObject();
-        for (String key : map.keySet()) {
-            Object value = map.get(key);
-            if (value == null) {
-                types.addProperty(key, "null");
-                values.addProperty(key, "null");
-            } else if (value instanceof Element) {
-                types.addProperty(key, "xml");
-                String outputString = new XMLOutputter().outputString((Element) value);
-                values.addProperty(key, outputString);
-            } else if (value instanceof Color) {
-                types.addProperty(key, "Color");
-                values.addProperty(key, ((Color) value).getRGB());
-            } else if (value instanceof Date) {
-                types.addProperty(key, "Date");
-                values.addProperty(key, DATE_FORMAT.format((Date) value));
-            } else if (value instanceof File) {
-                types.addProperty(key, "File");
-                values.addProperty(key, ((File) value).getAbsolutePath());
-            } else if (value instanceof KeyStroke) {
-                types.addProperty(key, "KeyStroke");
-                values.addProperty(key, value.toString());
-            } else if (value instanceof Font) {
-                types.addProperty(key, "Font");
-                values.addProperty(key, OptionType.FONT_TYPE.convertObjectToString(value));
-            } else if (value instanceof Byte) {
-                types.addProperty(key, "byte");
-                values.addProperty(key, (Byte) value);
-            } else if (value instanceof Short) {
-                types.addProperty(key, "short");
-                values.addProperty(key, (Short) value);
-            } else if (value instanceof Integer) {
-                types.addProperty(key, "int");
-                values.addProperty(key, (Integer) value);
-            } else if (value instanceof Long) {
-                types.addProperty(key, "long");
-                values.addProperty(key, (Long) value);
-            } else if (value instanceof Float) {
-                types.addProperty(key, "float");
-                values.addProperty(key, (Float) value);
-            } else if (value instanceof Double) {
-                types.addProperty(key, "double");
-                values.addProperty(key, (Double) value);
-            } else if (value instanceof Boolean) {
-                types.addProperty(key, "boolean");
-                values.addProperty(key, (Boolean) value);
-            } else if (value instanceof String) {
-                types.addProperty(key, "String");
-                values.addProperty(key, (String) value);
-            } else if (value instanceof byte[]) {
-                JsonArray ja = new JsonArray();
-                for (byte b : (byte[]) value) {
-                    ja.add(b);
-                }
-                types.addProperty(key, "byte[]");
-                values.add(key, ja);
-            } else if (value instanceof short[]) {
-                JsonArray ja = new JsonArray();
-                for (short s : (short[]) value) {
-                    ja.add(s);
-                }
-                types.addProperty(key, "short[]");
-                values.add(key, ja);
-            } else if (value instanceof int[]) {
-                JsonArray ja = new JsonArray();
-                for (int i : (int[]) value) {
-                    ja.add(i);
-                }
-                types.addProperty(key, "int[]");
-                values.add(key, ja);
-            } else if (value instanceof long[]) {
-                JsonArray ja = new JsonArray();
-                for (long i : (long[]) value) {
-                    ja.add(i);
-                }
-                types.addProperty(key, "long[]");
-                values.add(key, ja);
-            } else if (value instanceof float[]) {
-                JsonArray ja = new JsonArray();
-                for (float f : (float[]) value) {
-                    ja.add(f);
-                }
-                types.addProperty(key, "float[]");
-                values.add(key, ja);
-            } else if (value instanceof double[]) {
-                JsonArray ja = new JsonArray();
-                for (double f : (double[]) value) {
-                    ja.add(f);
-                }
-                types.addProperty(key, "double[]");
-                values.add(key, ja);
-            } else if (value instanceof boolean[]) {
-                JsonArray ja = new JsonArray();
-                for (boolean b : (boolean[]) value) {
-                    ja.add(b);
-                }
-                types.addProperty(key, "boolean[]");
-                values.add(key, ja);
-            } else if (value instanceof String[]) {
-                JsonArray ja = new JsonArray();
-                for (String s : (String[]) value) {
-                    if (s != null) {
-                        ja.add(s);
-                    }
-                }
-                types.addProperty(key, "String[]");
-                values.add(key, ja);
-            } else if (value instanceof Enum) {
-                Enum<?> e = (Enum<?>) value;
-                types.addProperty(key, "enum");
-                enumClasses.addProperty(key, e.getClass().getName());
-                values.addProperty(key, e.name());
-            } else if (value instanceof SaveState) {
-                types.addProperty(key, "SaveState");
-                JsonObject json = ((SaveState) value).saveToJson();
-                values.add(key, json);
-            } else {
-                throw new AssertException("found unsupported object type: " + value.getClass());
-            }
-        }
+		Iterator<String> iter = map.keySet().iterator();
+		while (iter.hasNext()) {
+			String key = iter.next();
+			Object value = map.get(key);
+			if (value == null) {
+				types.addProperty(key, "null");
+				values.addProperty(key, "null");
+			}
+			else if (value instanceof Element) {
+				types.addProperty(key, "xml");
+				String outputString = new XMLOutputter().outputString((Element) value);
+				values.addProperty(key, outputString);
+			}
+			else if (value instanceof Color) {
+				types.addProperty(key, "Color");
+				values.addProperty(key, ((Color) value).getRGB());
+			}
+			else if (value instanceof Date) {
+				types.addProperty(key, "Date");
+				values.addProperty(key, DATE_FORMAT.format((Date) value));
+			}
+			else if (value instanceof File) {
+				types.addProperty(key, "File");
+				values.addProperty(key, ((File) value).getAbsolutePath());
+			}
+			else if (value instanceof KeyStroke) {
+				types.addProperty(key, "KeyStroke");
+				values.addProperty(key, value.toString());
+			}
+			else if (value instanceof Font) {
+				types.addProperty(key, "Font");
+				values.addProperty(key, OptionType.FONT_TYPE.convertObjectToString(value));
+			}
+			else if (value instanceof Byte) {
+				types.addProperty(key, "byte");
+				values.addProperty(key, (Byte) value);
+			}
+			else if (value instanceof Short) {
+				types.addProperty(key, "short");
+				values.addProperty(key, (Short) value);
+			}
+			else if (value instanceof Integer) {
+				types.addProperty(key, "int");
+				values.addProperty(key, (Integer) value);
+			}
+			else if (value instanceof Long) {
+				types.addProperty(key, "long");
+				values.addProperty(key, (Long) value);
+			}
+			else if (value instanceof Float) {
+				types.addProperty(key, "float");
+				values.addProperty(key, (Float) value);
+			}
+			else if (value instanceof Double) {
+				types.addProperty(key, "double");
+				values.addProperty(key, (Double) value);
+			}
+			else if (value instanceof Boolean) {
+				types.addProperty(key, "boolean");
+				values.addProperty(key, (Boolean) value);
+			}
+			else if (value instanceof String) {
+				types.addProperty(key, "String");
+				values.addProperty(key, (String) value);
+			}
+			else if (value instanceof byte[]) {
+				JsonArray ja = new JsonArray();
+				for (byte b : (byte[]) value) {
+					ja.add(b);
+				}
+				types.addProperty(key, "byte[]");
+				values.add(key, ja);
+			}
+			else if (value instanceof short[]) {
+				JsonArray ja = new JsonArray();
+				for (short s : (short[]) value) {
+					ja.add(s);
+				}
+				types.addProperty(key, "short[]");
+				values.add(key, ja);
+			}
+			else if (value instanceof int[]) {
+				JsonArray ja = new JsonArray();
+				for (int i : (int[]) value) {
+					ja.add(i);
+				}
+				types.addProperty(key, "int[]");
+				values.add(key, ja);
+			}
+			else if (value instanceof long[]) {
+				JsonArray ja = new JsonArray();
+				for (long i : (long[]) value) {
+					ja.add(i);
+				}
+				types.addProperty(key, "long[]");
+				values.add(key, ja);
+			}
+			else if (value instanceof float[]) {
+				JsonArray ja = new JsonArray();
+				for (float f : (float[]) value) {
+					ja.add(f);
+				}
+				types.addProperty(key, "float[]");
+				values.add(key, ja);
+			}
+			else if (value instanceof double[]) {
+				JsonArray ja = new JsonArray();
+				for (double f : (double[]) value) {
+					ja.add(f);
+				}
+				types.addProperty(key, "double[]");
+				values.add(key, ja);
+			}
+			else if (value instanceof boolean[]) {
+				JsonArray ja = new JsonArray();
+				for (boolean b : (boolean[]) value) {
+					ja.add(b);
+				}
+				types.addProperty(key, "boolean[]");
+				values.add(key, ja);
+			}
+			else if (value instanceof String[]) {
+				JsonArray ja = new JsonArray();
+				for (String s : (String[]) value) {
+					if (s != null) {
+						ja.add(s);
+					}
+				}
+				types.addProperty(key, "String[]");
+				values.add(key, ja);
+			}
+			else if (value instanceof Enum) {
+				Enum<?> e = (Enum<?>) value;
+				types.addProperty(key, "enum");
+				enumClasses.addProperty(key, e.getClass().getName());
+				values.addProperty(key, e.name());
+			}
+			else if (value instanceof SaveState) {
+				types.addProperty(key, "SaveState");
+				JsonObject json = ((SaveState) value).saveToJson();
+				values.add(key, json);
+			}
+			else {
+				throw new AssertException("found unsupported object type: " + value.getClass());
+			}
+		}
 		JsonObject jsonObject = new JsonObject();
 		jsonObject.addProperty("SAVE_STATE_NAME", saveStateName);
 		jsonObject.add("VALUES", values);
@@ -791,10 +873,11 @@ public class SaveState {
 	public String[] getNames() {
 		String[] names = new String[map.size()];
 		int idx = 0;
-        for (String s : map.keySet()) {
-            names[idx] = s;
-            ++idx;
-        }
+		Iterator<String> iter = map.keySet().iterator();
+		while (iter.hasNext()) {
+			names[idx] = iter.next();
+			++idx;
+		}
 		return names;
 	}
 

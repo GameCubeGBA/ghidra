@@ -23,14 +23,14 @@ import ghidra.program.model.address.Address;
 
 public interface DbgModelTargetMemoryContainer extends DbgModelTargetObject, TargetMemory {
 
-	DbgModelTargetMemoryRegion getTargetMemory(DbgModuleMemory region);
+	public DbgModelTargetMemoryRegion getTargetMemory(DbgModuleMemory region);
 
 	@Override
-    CompletableFuture<byte[]> readMemory(Address address, int length);
+	public CompletableFuture<byte[]> readMemory(Address address, int length);
 
 	@Override
-    CompletableFuture<Void> writeMemory(Address address, byte[] data);
+	public CompletableFuture<Void> writeMemory(Address address, byte[] data);
 
-	CompletableFuture<Void> requestElements(boolean refresh);
+	public CompletableFuture<Void> requestElements(boolean refresh);
 
 }

@@ -50,7 +50,7 @@ class OldStackFrameDB implements StackFrame {
 	private OldFunctionManager functionManager;
 	private OldStackVariableDBAdapter adapter;
 
-	private static final Variable[] emptyArray = {};
+	private final static Variable[] emptyArray = {};
 
 	/**
 	 * Construct a function stack frame.
@@ -142,7 +142,7 @@ class OldStackFrameDB implements StackFrame {
 				throw new RuntimeException(e); // unexpected
 			}
 		}
-		if (comment != null && !comment.isEmpty()) {
+		if (comment != null && comment.length() != 0) {
 			var.setComment(comment);
 		}
 		return var;

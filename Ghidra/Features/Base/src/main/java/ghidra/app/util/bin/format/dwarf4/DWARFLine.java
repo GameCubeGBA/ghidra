@@ -103,7 +103,7 @@ public class DWARFLine {
 		// Read all include directories
 		result.include_directories = new ArrayList<>();
 		String include = reader.readNextAsciiString();
-		while (!include.isEmpty()) {
+		while (include.length() != 0) {
 			result.include_directories.add(include);
 			include = reader.readNextAsciiString();
 		}
@@ -111,7 +111,7 @@ public class DWARFLine {
 		// Read all files
 		result.file_names = new ArrayList<>();
 		DWARFFile file = new DWARFFile(reader);
-		while (!file.getName().isEmpty()) {
+		while (file.getName().length() != 0) {
 			result.file_names.add(file);
 			file = new DWARFFile(reader);
 		}
@@ -225,7 +225,7 @@ public class DWARFLine {
 			this.name = reader.readNextAsciiString();
 
 			// This entry exists only if the length of the string is more than 0
-			if (!this.name.isEmpty()) {
+			if (this.name.length() > 0) {
 				this.directory_index = LEB128.readAsLong(reader, false);
 				this.modification_time = LEB128.readAsLong(reader, false);
 				this.length = LEB128.readAsLong(reader, false);

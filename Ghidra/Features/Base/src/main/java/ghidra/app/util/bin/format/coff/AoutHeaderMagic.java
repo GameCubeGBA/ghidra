@@ -18,7 +18,7 @@ package ghidra.app.util.bin.format.coff;
 
 public final class AoutHeaderMagic {
 
-	public static final short TIC80_AOUTHDR_MAGIC     = 0x108;
-	public static final short TICOFF_AOUTHDR_MAGIC    = 0x108;
+	public final static short TIC80_AOUTHDR_MAGIC     = 0x108;
+	public final static short TICOFF_AOUTHDR_MAGIC    = 0x108;
 
 }

@@ -30,7 +30,8 @@ public class OverlayAddressSpaceTest extends AbstractGhidraHeadedIntegrationTest
 	private ProgramDB program;
 
 	public OverlayAddressSpaceTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

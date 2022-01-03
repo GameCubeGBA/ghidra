@@ -261,9 +261,12 @@ public class DebuggerListingPlugin extends AbstractCodeBrowserPlugin<DebuggerLis
 		if (trigger instanceof TreeSelectionPluginEvent) {
 			return false;
 		}
-        return !(trigger instanceof ViewChangedPluginEvent);
+		if (trigger instanceof ViewChangedPluginEvent) {
+			return false;
+		}
 		//Msg.debug(this, "   Heeded");
-    }
+		return true;
+	}
 
 	@Override
 	public void processEvent(PluginEvent event) {

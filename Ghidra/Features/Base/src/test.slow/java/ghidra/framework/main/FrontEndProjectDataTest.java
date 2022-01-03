@@ -33,7 +33,8 @@ public class FrontEndProjectDataTest extends AbstractGhidraHeadedIntegrationTest
 	private TestEnv env;
 
 	public FrontEndProjectDataTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

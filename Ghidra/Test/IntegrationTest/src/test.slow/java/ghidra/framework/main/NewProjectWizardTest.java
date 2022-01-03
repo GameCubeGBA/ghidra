@@ -68,7 +68,8 @@ public class NewProjectWizardTest extends AbstractGhidraHeadedIntegrationTest {
 	}
 
 	public NewProjectWizardTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -155,7 +156,7 @@ public class NewProjectWizardTest extends AbstractGhidraHeadedIntegrationTest {
 
 			JTextField dirField = (JTextField) findComponentByName(projPanel, "Project Directory");
 			assertNotNull(dirField);
-			assertTrue(!dirField.getText().isEmpty());
+			assertTrue(dirField.getText().length() > 0);
 
 			final JTextField projField =
 				(JTextField) findComponentByName(projPanel, "Project Name");
@@ -353,7 +354,7 @@ public class NewProjectWizardTest extends AbstractGhidraHeadedIntegrationTest {
 
 			JTextField dirField = (JTextField) findComponentByName(projPanel, "Project Directory");
 			assertNotNull(dirField);
-			assertTrue(!dirField.getText().isEmpty());
+			assertTrue(dirField.getText().length() > 0);
 
 			final JTextField projField =
 				(JTextField) findComponentByName(projPanel, "Project Name");
@@ -427,8 +428,8 @@ public class NewProjectWizardTest extends AbstractGhidraHeadedIntegrationTest {
 
 			if (nextButton.isEnabled()) {
 				// enabled because we have left over server info from previous test
-				assertTrue(!serverField.getText().isEmpty());
-				assertTrue(!portNumberField.getText().isEmpty());
+				assertTrue(serverField.getText().length() > 0);
+				assertTrue(portNumberField.getText().length() > 0);
 			}
 
 			SwingUtilities.invokeAndWait(() -> {
@@ -484,7 +485,7 @@ public class NewProjectWizardTest extends AbstractGhidraHeadedIntegrationTest {
 
 			JTextField dirField = (JTextField) findComponentByName(projPanel, "Project Directory");
 			assertNotNull(dirField);
-			assertTrue(!dirField.getText().isEmpty());
+			assertTrue(dirField.getText().length() > 0);
 
 			final JTextField projField =
 				(JTextField) findComponentByName(projPanel, "Project Name");

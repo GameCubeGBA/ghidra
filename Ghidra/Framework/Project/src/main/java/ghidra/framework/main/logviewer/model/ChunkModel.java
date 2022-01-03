@@ -134,13 +134,15 @@ public class ChunkModel implements Iterable<Chunk> {
 
 		int totalLines = 0;
 
-        for (Chunk chunk : this) {
-            if (row < chunk.linesInChunk + totalLines) {
-                int myRow = chunk.linesInChunk - ((chunk.linesInChunk + totalLines) - row);
-                return chunk.rowToFilePositionMap.get(myRow);
-            }
-            totalLines += chunk.linesInChunk;
-        }
+		Iterator<Chunk> iter = this.iterator();
+		while (iter.hasNext()) {
+			Chunk chunk = iter.next();
+			if (row < chunk.linesInChunk + totalLines) {
+				int myRow = chunk.linesInChunk - ((chunk.linesInChunk + totalLines) - row);
+				return chunk.rowToFilePositionMap.get(myRow);
+			}
+			totalLines += chunk.linesInChunk;
+		}
 
 		return null;
 	}
@@ -156,22 +158,25 @@ public class ChunkModel implements Iterable<Chunk> {
 
 		int totalLines = 0;
 
-        for (Chunk chunk : this) {
-            // See if this byte is in this chunk before doing anything.
-            if (selectedByte >= chunk.start && selectedByte <= chunk.end) {
+		Iterator<Chunk> iter = this.iterator();
+		while (iter.hasNext()) {
+			Chunk chunk = iter.next();
+			
+			// See if this byte is in this chunk before doing anything.
+			if (selectedByte >= chunk.start && selectedByte <= chunk.end) {	
+				
+				// We know our byte is in this chunk, so now find out exactly which row it's in.
+				for (Map.Entry<Integer, Pair> entry : chunk.rowToFilePositionMap.entrySet()) {
+					Integer key = entry.getKey();
+					Pair value = entry.getValue();
+					if (selectedByte >= value.getStart() && selectedByte <= value.getEnd()) {
+						return key + totalLines;
+					}
+				}
+			}
 
-                // We know our byte is in this chunk, so now find out exactly which row it's in.
-                for (Map.Entry<Integer, Pair> entry : chunk.rowToFilePositionMap.entrySet()) {
-                    Integer key = entry.getKey();
-                    Pair value = entry.getValue();
-                    if (selectedByte >= value.getStart() && selectedByte <= value.getEnd()) {
-                        return key + totalLines;
-                    }
-                }
-            }
-
-            totalLines += chunk.linesInChunk;
-        }
+			totalLines += chunk.linesInChunk;
+		}
 
 		return -1;
 	}

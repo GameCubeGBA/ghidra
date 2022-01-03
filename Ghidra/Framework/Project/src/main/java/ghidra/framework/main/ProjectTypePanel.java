@@ -43,7 +43,8 @@ class ProjectTypePanel extends AbstractWizardJPanel {
 	private PanelManager panelManager;
 
 	ProjectTypePanel(PanelManager panelManager) {
-        this.panelManager = panelManager;
+		super();
+		this.panelManager = panelManager;
 		buildPanel();
 		setBorder(NewProjectPanelManager.EMPTY_BORDER);
 	}

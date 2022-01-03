@@ -243,7 +243,7 @@ public class DBTraceFunctionSymbol extends DBTraceNamespaceSymbol
 		DBTraceBookmarkType errType =
 			manager.trace.getBookmarkManager().getOrDefineBookmarkType(BookmarkType.ERROR);
 		manager.trace.getBookmarkManager()
-				.addBookmark(lifespan, entryPoint, errType,
+				.addBookmark(getLifespan(), entryPoint, errType,
 					"Bad Variables Removed", "Removed " + badns.size() + " bad variables");
 		for (AbstractDBTraceVariableSymbol s : badns) {
 			s.delete();
@@ -902,7 +902,7 @@ public class DBTraceFunctionSymbol extends DBTraceNamespaceSymbol
 			throws DuplicateNameException {
 		String name = param.getName();
 
-		if (name == null || name.isEmpty() || SymbolUtilities.isDefaultParameterName(name)) {
+		if (name == null || name.length() == 0 || SymbolUtilities.isDefaultParameterName(name)) {
 			return;
 		}
 
@@ -1097,7 +1097,7 @@ public class DBTraceFunctionSymbol extends DBTraceNamespaceSymbol
 				if (updateType == FunctionUpdateType.DYNAMIC_STORAGE_ALL_PARAMS &&
 					!thisParamRemoved &&
 					CompilerSpec.CALLING_CONVENTION_thiscall.contentEquals(callingConvention) &&
-                        !newParams.isEmpty()) {
+					newParams.size() != 0) {
 					// See FunctionDB's impl. It admits this is a hack.
 					// It'd be nice if all this fixing up were in some utilities....
 					Variable firstParam = newParams.get(0);
@@ -1172,7 +1172,7 @@ public class DBTraceFunctionSymbol extends DBTraceNamespaceSymbol
 				VariableStorage storage = useCustomStorage ? newParam.getVariableStorage()
 						: VariableStorage.UNASSIGNED_STORAGE;
 				String newName = newParam.getName();
-				if (newName == null || newName.isEmpty()) {
+				if (newName == null || newName.length() == 0) {
 					newName = SymbolUtilities.getDefaultParamName(i);
 				}
 				DBTraceParameterSymbol s = manager.parameterStore.create();
@@ -1508,7 +1508,7 @@ public class DBTraceFunctionSymbol extends DBTraceNamespaceSymbol
 			if (oldBody.equals(newBody)) {
 				return;
 			}
-			manager.functions.assertNotOverlapping(this, getEntryPoint(), lifespan, newBody);
+			manager.functions.assertNotOverlapping(this, getEntryPoint(), getLifespan(), newBody);
 			for (DBTraceLabelSymbol label : manager.labels.getChildren(this)) {
 				if (!newBody.contains(label.getAddress())) {
 					label.delete();

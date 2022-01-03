@@ -85,7 +85,7 @@ public class DeveloperDumpMDMangParseInfoScript extends GhidraScript {
 
 	private void demangle(Address address, String name) {
 
-		if (name == null || name.isEmpty()) {
+		if (name == null || name.length() == 0) {
 			Msg.info(this, "Invalid name.\n");
 			return;
 		}

@@ -67,7 +67,7 @@ public class ListingHighlightProvider
 	private static char[] UNDERSCORE_AND_PERIOD_OK = new char[] { '.', '_' };
 	private static char[] UNDERSCORE_OK = new char[] { '_' };
 
-	private static final Highlight[] NO_HIGHLIGHTS = new Highlight[0];
+	private final static Highlight[] NO_HIGHLIGHTS = new Highlight[0];
 
 	private Pattern currentHighlightPattern;
 	private String currentHighlightString;
@@ -169,7 +169,9 @@ public class ListingHighlightProvider
 		}
 		if (end < text.length() - 1) {
 			char c = text.charAt(end + 1);
-            return !Character.isLetterOrDigit(c);
+			if (Character.isLetterOrDigit(c)) {
+				return false;
+			}
 		}
 		return true;
 	}
@@ -327,7 +329,7 @@ public class ListingHighlightProvider
 				if (selectSubElement) {
 					String offsetStr =
 						StringUtilities.findWord(object.toString(), elementCol, UNDERSCORE_OK);
-					if (offsetStr != null && !offsetStr.isEmpty()) {
+					if (offsetStr != null && offsetStr.length() > 0) {
 						text = offsetStr;
 					}
 				}
@@ -472,7 +474,7 @@ public class ListingHighlightProvider
 			buf.append(obj);
 		}
 		text = buf.toString().trim();
-		if (text.isEmpty()) {
+		if (text.length() == 0) {
 			text = null;
 		}
 		return text;

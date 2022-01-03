@@ -23,7 +23,7 @@ import com.sun.jna.platform.win32.WinNT.HRESULT;
 import agent.dbgeng.jna.dbgeng.UnknownWithUtils.VTableIndex;
 
 public interface IDebugClient4 extends IDebugClient3 {
-	IID IID_IDEBUG_CLIENT4 = new IID("ca83c3de-5089-4cf8-93c8-d892387f2a5e");
+	final IID IID_IDEBUG_CLIENT4 = new IID("ca83c3de-5089-4cf8-93c8-d892387f2a5e");
 
 	enum VTIndices4 implements VTableIndex {
 		OPEN_DUMP_FILE_WIDE, //

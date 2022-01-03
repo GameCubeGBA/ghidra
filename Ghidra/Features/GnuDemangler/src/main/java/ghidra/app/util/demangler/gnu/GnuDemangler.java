@@ -53,8 +53,11 @@ public class GnuDemangler implements Demangler {
 
 		CompilerSpec spec = program.getCompilerSpec();
 		String specId = spec.getCompilerSpecID().getIdAsString();
-        return !specId.toLowerCase().contains("windows");
-    }
+		if (!specId.toLowerCase().contains("windows")) {
+			return true;
+		}
+		return false;
+	}
 
 	@Override
 	@Deprecated(since = "9.2", forRemoval = true)
@@ -98,7 +101,7 @@ public class GnuDemangler implements Demangler {
 
 			GnuDemanglerNativeProcess process = getNativeProcess(options);
 			String demangled = process.demangle(mangled).trim();
-			if (mangled.equals(demangled) || demangled.isEmpty()) {
+			if (mangled.equals(demangled) || demangled.length() == 0) {
 				throw new DemangledException(true);
 			}
 
@@ -198,8 +201,12 @@ public class GnuDemangler implements Demangler {
 		if (mangled.startsWith("?")) {
 			return false; // not sure about this one
 		}
-        return !isGnu2Or3Pattern(mangled);
-    }
+		if (isGnu2Or3Pattern(mangled)) {
+			return false;
+		}
+
+		return true;
+	}
 
 	private DemangledObject parse(String mangled, GnuDemanglerNativeProcess process,
 			String demangled, boolean demangleOnlyKnownPatterns) {
@@ -222,8 +229,12 @@ public class GnuDemangler implements Demangler {
 		//
 
 		// check for the case where good strings have '__' in them (which is valid GNU2 mangling)
-        return !isInvalidDoubleUnderscoreString(mangled, demangled);
-    }
+		if (isInvalidDoubleUnderscoreString(mangled, demangled)) {
+			return false;
+		}
+
+		return true;
+	}
 
 	private boolean isInvalidDoubleUnderscoreString(String mangled, String demangled) {
 

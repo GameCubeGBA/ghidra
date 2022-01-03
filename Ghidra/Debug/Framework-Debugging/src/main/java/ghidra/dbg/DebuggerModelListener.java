@@ -36,7 +36,7 @@ public interface DebuggerModelListener {
 	 * 
 	 * @param t the exception describing the error
 	 */
-    default void catastrophic(Throwable t) {
+	default public void catastrophic(Throwable t) {
 		Msg.error(this, "Catastrophic listener error", t);
 	}
 
@@ -46,13 +46,13 @@ public interface DebuggerModelListener {
 	 * <p>
 	 * For example, the connection to a debugger daemon has been established and negotiated.
 	 */
-    default void modelOpened() {
+	default public void modelOpened() {
 	}
 
 	/**
 	 * The model's state has changed, prompting an update to its description
 	 */
-    default void modelStateChanged() {
+	default public void modelStateChanged() {
 	}
 
 	/**
@@ -64,7 +64,7 @@ public interface DebuggerModelListener {
 	 * 
 	 * @param reason the reason for the model to close
 	 */
-    default void modelClosed(DebuggerModelClosedReason reason) {
+	default public void modelClosed(DebuggerModelClosedReason reason) {
 	}
 
 	/**
@@ -116,7 +116,7 @@ public interface DebuggerModelListener {
 	 * 
 	 * @param root the root object
 	 */
-    default void rootAdded(TargetObject root) {
+	default public void rootAdded(TargetObject root) {
 	}
 
 	/**

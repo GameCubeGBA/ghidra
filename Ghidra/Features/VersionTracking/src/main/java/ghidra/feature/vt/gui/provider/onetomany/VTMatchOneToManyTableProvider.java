@@ -174,24 +174,28 @@ public abstract class VTMatchOneToManyTableProvider extends ComponentProviderAda
 		tablePanel = new MatchThreadedTablePanel(oneToManyTableModel);
 		final GhidraTable table = tablePanel.getTable();
 
-        // it's our model, it must be our type
-        matchSelectionListener = e -> {
-            if (e.getValueIsAdjusting()) {
-                return;
-            }
+		matchSelectionListener = new ListSelectionListener() {
+			@Override
+			@SuppressWarnings("unchecked")
+			// it's our model, it must be our type
+			public void valueChanged(ListSelectionEvent e) {
+				if (e.getValueIsAdjusting()) {
+					return;
+				}
 
-            // we get out the model here in case it has been wrapped by one of the filters
-            RowObjectTableModel<VTMatch> model =
-                (RowObjectTableModel<VTMatch>) table.getModel();
-            int selectedRow = table.getSelectedRow();
-            VTMatch match =
-                (table.getSelectedRowCount() == 1) ? model.getRowObject(selectedRow) : null;
-            if (!SystemUtilities.isEqual(latestMatch, match) && match != null) {
-                latestMatch = match;
-                subToolManager.setMatch(match);
-            }
-            notifyContextChanged();
-        };
+				// we get out the model here in case it has been wrapped by one of the filters
+				RowObjectTableModel<VTMatch> model =
+					(RowObjectTableModel<VTMatch>) table.getModel();
+				int selectedRow = table.getSelectedRow();
+				VTMatch match =
+					(table.getSelectedRowCount() == 1) ? model.getRowObject(selectedRow) : null;
+				if (!SystemUtilities.isEqual(latestMatch, match) && match != null) {
+					latestMatch = match;
+					subToolManager.setMatch(match);
+				}
+				notifyContextChanged();
+			}
+		};
 		ListSelectionModel selectionModel = table.getSelectionModel();
 		selectionModel.addListSelectionListener(matchSelectionListener);
 

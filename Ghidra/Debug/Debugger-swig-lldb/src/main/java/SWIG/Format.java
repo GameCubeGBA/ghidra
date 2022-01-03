@@ -12,49 +12,49 @@
 package SWIG;
 
 public final class Format {
-  public static final Format eFormatDefault = new Format("eFormatDefault", lldbJNI.eFormatDefault_get());
-  public static final Format eFormatInvalid = new Format("eFormatInvalid", lldbJNI.eFormatInvalid_get());
-  public static final Format eFormatBoolean = new Format("eFormatBoolean");
-  public static final Format eFormatBinary = new Format("eFormatBinary");
-  public static final Format eFormatBytes = new Format("eFormatBytes");
-  public static final Format eFormatBytesWithASCII = new Format("eFormatBytesWithASCII");
-  public static final Format eFormatChar = new Format("eFormatChar");
-  public static final Format eFormatCharPrintable = new Format("eFormatCharPrintable");
-  public static final Format eFormatComplex = new Format("eFormatComplex");
-  public static final Format eFormatComplexFloat = new Format("eFormatComplexFloat", lldbJNI.eFormatComplexFloat_get());
-  public static final Format eFormatCString = new Format("eFormatCString");
-  public static final Format eFormatDecimal = new Format("eFormatDecimal");
-  public static final Format eFormatEnum = new Format("eFormatEnum");
-  public static final Format eFormatHex = new Format("eFormatHex");
-  public static final Format eFormatHexUppercase = new Format("eFormatHexUppercase");
-  public static final Format eFormatFloat = new Format("eFormatFloat");
-  public static final Format eFormatOctal = new Format("eFormatOctal");
-  public static final Format eFormatOSType = new Format("eFormatOSType");
-  public static final Format eFormatUnicode16 = new Format("eFormatUnicode16");
-  public static final Format eFormatUnicode32 = new Format("eFormatUnicode32");
-  public static final Format eFormatUnsigned = new Format("eFormatUnsigned");
-  public static final Format eFormatPointer = new Format("eFormatPointer");
-  public static final Format eFormatVectorOfChar = new Format("eFormatVectorOfChar");
-  public static final Format eFormatVectorOfSInt8 = new Format("eFormatVectorOfSInt8");
-  public static final Format eFormatVectorOfUInt8 = new Format("eFormatVectorOfUInt8");
-  public static final Format eFormatVectorOfSInt16 = new Format("eFormatVectorOfSInt16");
-  public static final Format eFormatVectorOfUInt16 = new Format("eFormatVectorOfUInt16");
-  public static final Format eFormatVectorOfSInt32 = new Format("eFormatVectorOfSInt32");
-  public static final Format eFormatVectorOfUInt32 = new Format("eFormatVectorOfUInt32");
-  public static final Format eFormatVectorOfSInt64 = new Format("eFormatVectorOfSInt64");
-  public static final Format eFormatVectorOfUInt64 = new Format("eFormatVectorOfUInt64");
-  public static final Format eFormatVectorOfFloat16 = new Format("eFormatVectorOfFloat16");
-  public static final Format eFormatVectorOfFloat32 = new Format("eFormatVectorOfFloat32");
-  public static final Format eFormatVectorOfFloat64 = new Format("eFormatVectorOfFloat64");
-  public static final Format eFormatVectorOfUInt128 = new Format("eFormatVectorOfUInt128");
-  public static final Format eFormatComplexInteger = new Format("eFormatComplexInteger");
-  public static final Format eFormatCharArray = new Format("eFormatCharArray");
-  public static final Format eFormatAddressInfo = new Format("eFormatAddressInfo");
-  public static final Format eFormatHexFloat = new Format("eFormatHexFloat");
-  public static final Format eFormatInstruction = new Format("eFormatInstruction");
-  public static final Format eFormatVoid = new Format("eFormatVoid");
-  public static final Format eFormatUnicode8 = new Format("eFormatUnicode8");
-  public static final Format kNumFormats = new Format("kNumFormats");
+  public final static Format eFormatDefault = new Format("eFormatDefault", lldbJNI.eFormatDefault_get());
+  public final static Format eFormatInvalid = new Format("eFormatInvalid", lldbJNI.eFormatInvalid_get());
+  public final static Format eFormatBoolean = new Format("eFormatBoolean");
+  public final static Format eFormatBinary = new Format("eFormatBinary");
+  public final static Format eFormatBytes = new Format("eFormatBytes");
+  public final static Format eFormatBytesWithASCII = new Format("eFormatBytesWithASCII");
+  public final static Format eFormatChar = new Format("eFormatChar");
+  public final static Format eFormatCharPrintable = new Format("eFormatCharPrintable");
+  public final static Format eFormatComplex = new Format("eFormatComplex");
+  public final static Format eFormatComplexFloat = new Format("eFormatComplexFloat", lldbJNI.eFormatComplexFloat_get());
+  public final static Format eFormatCString = new Format("eFormatCString");
+  public final static Format eFormatDecimal = new Format("eFormatDecimal");
+  public final static Format eFormatEnum = new Format("eFormatEnum");
+  public final static Format eFormatHex = new Format("eFormatHex");
+  public final static Format eFormatHexUppercase = new Format("eFormatHexUppercase");
+  public final static Format eFormatFloat = new Format("eFormatFloat");
+  public final static Format eFormatOctal = new Format("eFormatOctal");
+  public final static Format eFormatOSType = new Format("eFormatOSType");
+  public final static Format eFormatUnicode16 = new Format("eFormatUnicode16");
+  public final static Format eFormatUnicode32 = new Format("eFormatUnicode32");
+  public final static Format eFormatUnsigned = new Format("eFormatUnsigned");
+  public final static Format eFormatPointer = new Format("eFormatPointer");
+  public final static Format eFormatVectorOfChar = new Format("eFormatVectorOfChar");
+  public final static Format eFormatVectorOfSInt8 = new Format("eFormatVectorOfSInt8");
+  public final static Format eFormatVectorOfUInt8 = new Format("eFormatVectorOfUInt8");
+  public final static Format eFormatVectorOfSInt16 = new Format("eFormatVectorOfSInt16");
+  public final static Format eFormatVectorOfUInt16 = new Format("eFormatVectorOfUInt16");
+  public final static Format eFormatVectorOfSInt32 = new Format("eFormatVectorOfSInt32");
+  public final static Format eFormatVectorOfUInt32 = new Format("eFormatVectorOfUInt32");
+  public final static Format eFormatVectorOfSInt64 = new Format("eFormatVectorOfSInt64");
+  public final static Format eFormatVectorOfUInt64 = new Format("eFormatVectorOfUInt64");
+  public final static Format eFormatVectorOfFloat16 = new Format("eFormatVectorOfFloat16");
+  public final static Format eFormatVectorOfFloat32 = new Format("eFormatVectorOfFloat32");
+  public final static Format eFormatVectorOfFloat64 = new Format("eFormatVectorOfFloat64");
+  public final static Format eFormatVectorOfUInt128 = new Format("eFormatVectorOfUInt128");
+  public final static Format eFormatComplexInteger = new Format("eFormatComplexInteger");
+  public final static Format eFormatCharArray = new Format("eFormatCharArray");
+  public final static Format eFormatAddressInfo = new Format("eFormatAddressInfo");
+  public final static Format eFormatHexFloat = new Format("eFormatHexFloat");
+  public final static Format eFormatInstruction = new Format("eFormatInstruction");
+  public final static Format eFormatVoid = new Format("eFormatVoid");
+  public final static Format eFormatUnicode8 = new Format("eFormatUnicode8");
+  public final static Format kNumFormats = new Format("kNumFormats");
 
   public final int swigValue() {
     return swigValue;
@@ -67,9 +67,9 @@ public final class Format {
   public static Format swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-      for (Format value : swigValues)
-          if (value.swigValue == swigValue)
-              return value;
+    for (int i = 0; i < swigValues.length; i++)
+      if (swigValues[i].swigValue == swigValue)
+        return swigValues[i];
     throw new IllegalArgumentException("No enum " + Format.class + " with value " + swigValue);
   }
 

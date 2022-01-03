@@ -26,7 +26,7 @@ import java.io.*;
  */
 public final class ModifiedUTF8 {
 
-	public static final String decode(InputStream in, char[] out)
+	public final static String decode(InputStream in, char[] out)
 			throws UTFDataFormatException, IOException {
 		int s = 0;
 		while (true) {

@@ -123,7 +123,7 @@ public class NameStringPointersPlus extends GhidraScript {
 	private String getNameFromStruct(Data data) {
 		String name = null;
 		String dataTypeName = data.getDataType().getName();
-		if ("cfstringStruct".equals(dataTypeName)) {
+		if (dataTypeName.equals("cfstringStruct")) {
 			Data stringPointerField = data.getComponent(2);
 			if (stringPointerField != null) {
 				Object value = stringPointerField.getValue();

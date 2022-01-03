@@ -26,228 +26,228 @@ import java.lang.reflect.Modifier;
 public class CoffMachineType {
 
 	// TODO: Need to confirm these 2 TI values are correct.  TI datasheet doesn't mention them.
-    public static final short TICOFF1MAGIC = 0x00c1;
-	public static final short TICOFF2MAGIC = 0x00c2;
+	public final static short TICOFF1MAGIC = 0x00c1;
+	public final static short TICOFF2MAGIC = 0x00c2;
 
 	/**
 	 * The contents of this field are assumed to be applicable to any machine type
 	 */
-    public static final short IMAGE_FILE_MACHINE_UNKNOWN = 0x0000;
+	public final static short IMAGE_FILE_MACHINE_UNKNOWN = 0x0000;
 
 	/**
 	 * Alpha
 	 */
-    public static final short IMAGE_FILE_MACHINE_ALPHA = 0x0184;
+	public final static short IMAGE_FILE_MACHINE_ALPHA = 0x0184;
 
 	/**
 	 * Alpha 64
 	 */
-    public static final short IMAGE_FILE_MACHINE_ALPHA64 = 0x0284;
+	public final static short IMAGE_FILE_MACHINE_ALPHA64 = 0x0284;
 
 	/**
 	 * Matsushita AM33
 	 */
-    public static final short IMAGE_FILE_MACHINE_AM33 = 0x01d3;
+	public final static short IMAGE_FILE_MACHINE_AM33 = 0x01d3;
 
 	/**
 	 * x64
 	 */
-    public static final short IMAGE_FILE_MACHINE_AMD64 = (short) 0x8664;
+	public final static short IMAGE_FILE_MACHINE_AMD64 = (short) 0x8664;
 
 	/**
 	 * AMD Am29000 big endian
 	 */
-    public static final short IMAGE_FILE_MACHINE_AM29KBIGMAGIC = 0x017a;
+	public final static short IMAGE_FILE_MACHINE_AM29KBIGMAGIC = 0x017a;
 
 	/**
 	 * AMD Am29000 little endian
 	 */
-    public static final short IMAGE_FILE_MACHINE_AM29KLITTLEMAGIC = 0x017b;
+	public final static short IMAGE_FILE_MACHINE_AM29KLITTLEMAGIC = 0x017b;
 
 	/**
 	 * ARM little endian
 	 */
-    public static final short IMAGE_FILE_MACHINE_ARM = 0x01c0;
+	public final static short IMAGE_FILE_MACHINE_ARM = 0x01c0;
 
 	/**
 	 * ARM64 little endian
 	 */
-    public static final short IMAGE_FILE_MACHINE_ARM64 = (short) 0xaa64;
+	public final static short IMAGE_FILE_MACHINE_ARM64 = (short) 0xaa64;
 
 	/**
 	 * ARM Thumb-2 little endian
 	 */
-    public static final short IMAGE_FILE_MACHINE_ARMNT = 0x01c4;
+	public final static short IMAGE_FILE_MACHINE_ARMNT = 0x01c4;
 
 	/**
 	 * EFI byte code
 	 */
-    public static final short IMAGE_FILE_MACHINE_EBC = 0x0ebc;
+	public final static short IMAGE_FILE_MACHINE_EBC = 0x0ebc;
 
 	/**
 	 * Intel 386 or later processors and compatible processors
 	 */
-    public static final short IMAGE_FILE_MACHINE_I386 = 0x014c;
+	public final static short IMAGE_FILE_MACHINE_I386 = 0x014c;
 
 	/**
 	 * Intel 386 or later processors and compatible processors (PTX)
 	 */
-    public static final short IMAGE_FILE_MACHINE_I386_PTX = 0x0154;
+	public final static short IMAGE_FILE_MACHINE_I386_PTX = 0x0154;
 
 	/**
 	 * Intel 386 or later processors and compatible processors (AIX)
 	 */
-    public static final short IMAGE_FILE_MACHINE_I386_AIX = 0x0175;
+	public final static short IMAGE_FILE_MACHINE_I386_AIX = 0x0175;
 
 	/**
 	 * Intel i960 with read-only text segment
 	 */
-    public static final short IMAGE_FILE_MACHINE_I960ROMAGIC = 0x0160;
+	public final static short IMAGE_FILE_MACHINE_I960ROMAGIC = 0x0160;
 
 	/**
 	 * Intel i960 with read-write text segment
 	 */
-    public static final short IMAGE_FILE_MACHINE_I960RWMAGIC = 0x0161;
+	public final static short IMAGE_FILE_MACHINE_I960RWMAGIC = 0x0161;
 
 	/**
 	 * Intel Itanium processor family
 	 */
-    public static final short IMAGE_FILE_MACHINE_IA64 = 0x0200;
+	public final static short IMAGE_FILE_MACHINE_IA64 = 0x0200;
 
 	/**
 	 * Mitsubishi M32R little endian
 	 */
-    public static final short IMAGE_FILE_MACHINE_M32R = (short) 0x9041;
+	public final static short IMAGE_FILE_MACHINE_M32R = (short) 0x9041;
 
 	/**
 	 * MIPS16
 	 */
-    public static final short IMAGE_FILE_MACHINE_MIPS16 = 0x0266;
+	public final static short IMAGE_FILE_MACHINE_MIPS16 = 0x0266;
 
 	/**
 	 * MIPS with FPU
 	 */
-    public static final short IMAGE_FILE_MACHINE_MIPSFPU = 0x0366;
+	public final static short IMAGE_FILE_MACHINE_MIPSFPU = 0x0366;
 
 	/**
 	 * MIPS16 with FPU
 	 */
-    public static final short IMAGE_FILE_MACHINE_MIPSFPU16 = 0x0466;
+	public final static short IMAGE_FILE_MACHINE_MIPSFPU16 = 0x0466;
 
 	/**
 	 * Motorola 68000
 	 */
-    public static final short IMAGE_FILE_MACHINE_M68KMAGIC = 0x0268;
+	public final static short IMAGE_FILE_MACHINE_M68KMAGIC = 0x0268;
 
 	/**
 	 * PIC-30 (dsPIC30F)
 	 */
-    public static final short IMAGE_FILE_MACHINE_PIC30 = 0x1236;
+	public final static short IMAGE_FILE_MACHINE_PIC30 = 0x1236;
 
 	/**
 	 * Power PC little endian
 	 */
-    public static final short IMAGE_FILE_MACHINE_POWERPC = 0x01f0;
+	public final static short IMAGE_FILE_MACHINE_POWERPC = 0x01f0;
 
 	/**
 	 * Power PC with floating point support
 	 */
-    public static final short IMAGE_FILE_MACHINE_POWERPCFP = 0x01f1;
+	public final static short IMAGE_FILE_MACHINE_POWERPCFP = 0x01f1;
 
 	/**
 	 * MIPS little endian
 	 */
-    public static final short IMAGE_FILE_MACHINE_R3000 = 0x0162;
+	public final static short IMAGE_FILE_MACHINE_R3000 = 0x0162;
 
 	/**
 	 * MIPS little endian
 	 */
-    public static final short IMAGE_FILE_MACHINE_R4000 = 0x0166;
+	public final static short IMAGE_FILE_MACHINE_R4000 = 0x0166;
 
 	/**
 	 * MIPS little endian
 	 */
-    public static final short IMAGE_FILE_MACHINE_R10000 = 0x0168;
+	public final static short IMAGE_FILE_MACHINE_R10000 = 0x0168;
 
 	/**
 	 * RISC-V 32-bit address space
 	 */
-    public static final short IMAGE_FILE_MACHINE_RISCV32 = 0x5032;
+	public final static short IMAGE_FILE_MACHINE_RISCV32 = 0x5032;
 
 	/**
 	 * RISC-V 64-bit address space
 	 */
-    public static final short IMAGE_FILE_MACHINE_RISCV64 = 0x5064;
+	public final static short IMAGE_FILE_MACHINE_RISCV64 = 0x5064;
 
 	/**
 	 * RISC-V 128-bit address space
 	 */
-    public static final short IMAGE_FILE_MACHINE_RISCV128 = 0x5128;
+	public final static short IMAGE_FILE_MACHINE_RISCV128 = 0x5128;
 
 	/**
 	 * Hitachi SH3
 	 */
-    public static final short IMAGE_FILE_MACHINE_SH3 = 0x01a2;
+	public final static short IMAGE_FILE_MACHINE_SH3 = 0x01a2;
 
 	/**
 	 * Hitachi SH3 DSP
 	 */
-    public static final short IMAGE_FILE_MACHINE_SH3DSP = 0x01a3;
+	public final static short IMAGE_FILE_MACHINE_SH3DSP = 0x01a3;
 
 	/**
 	 * Hitachi SH4
 	 */
-    public static final short IMAGE_FILE_MACHINE_SH4 = 0x01a6;
+	public final static short IMAGE_FILE_MACHINE_SH4 = 0x01a6;
 
 	/**
 	 * Hitachi SH5
 	 */
-    public static final short IMAGE_FILE_MACHINE_SH5 = 0x01a8;
+	public final static short IMAGE_FILE_MACHINE_SH5 = 0x01a8;
 
 	/**
 	 * Texas Instruments TMS470
 	 */
-    public static final short IMAGE_FILE_MACHINE_TI_TMS470 = 0x0097;
+	public final static short IMAGE_FILE_MACHINE_TI_TMS470 = 0x0097;
 
 	/**
 	 * Texas Instruments TMS320C5400
 	 */
-    public static final short IMAGE_FILE_MACHINE_TI_TMS320C5400 = 0x0098;
+	public final static short IMAGE_FILE_MACHINE_TI_TMS320C5400 = 0x0098;
 
 	/**
 	 * Texas Instruments TMS320C6000
 	 */
-    public static final short IMAGE_FILE_MACHINE_TI_TMS320C6000 = 0x0099;
+	public final static short IMAGE_FILE_MACHINE_TI_TMS320C6000 = 0x0099;
 
 	/**
 	 * Texas Instruments TMS320C5500
 	 */
-    public static final short IMAGE_FILE_MACHINE_TI_TMS320C5500 = 0x009c;
+	public final static short IMAGE_FILE_MACHINE_TI_TMS320C5500 = 0x009c;
 
 	/**
 	 * Texas Instruments TMS320C2800
 	 */
-    public static final short IMAGE_FILE_MACHINE_TI_TMS320C2800 = 0x009d;
+	public final static short IMAGE_FILE_MACHINE_TI_TMS320C2800 = 0x009d;
 
 	/**
 	 * Texas Instruments MSP430
 	 */
-    public static final short IMAGE_FILE_MACHINE_TI_MSP430 = 0x00a0;
+	public final static short IMAGE_FILE_MACHINE_TI_MSP430 = 0x00a0;
 
 	/**
 	 * Texas Instruments TMS320C5500+
 	 */
-    public static final short IMAGE_FILE_MACHINE_TI_TMS320C5500_PLUS = 0x00a1;
+	public final static short IMAGE_FILE_MACHINE_TI_TMS320C5500_PLUS = 0x00a1;
 
 	/**
 	 * Thumb
 	 */
-    public static final short IMAGE_FILE_MACHINE_THUMB = 0x01c2;
+	public final static short IMAGE_FILE_MACHINE_THUMB = 0x01c2;
 
 	/**
 	 * MIPS little-endian WCE v2
 	 */
-    public static final short IMAGE_FILE_MACHINE_WCEMIPSV2 = 0x0169;
+	public final static short IMAGE_FILE_MACHINE_WCEMIPSV2 = 0x0169;
 
 	/**
 	 * Checks to see if the given machine type is defined in this file.

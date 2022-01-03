@@ -44,7 +44,7 @@ public class DemangledFunction extends DemangledObject {
 
 	public static final String VOLATILE = "volatile";
 	public static final String CONST = "const";
-	public static final String PTR64 = "__ptr64";
+	public final static String PTR64 = "__ptr64";
 	public static final String UNALIGNED = "__unaligned";
 	public static final String RESTRICT = "__restrict";
 
@@ -207,7 +207,7 @@ public class DemangledFunction extends DemangledObject {
 			if (isStatic) {
 				buffer.append("static ");
 			}
-			if (!isTypeCast) {
+			if (!isTypeCast()) {
 				buffer.append(returnType == null ? "" : returnType.getSignature() + " ");
 			}
 		}
@@ -219,7 +219,7 @@ public class DemangledFunction extends DemangledObject {
 		}
 
 		buffer.append(getDemangledName());
-		if (isTypeCast) {
+		if (isTypeCast()) {
 			buffer.append(returnType == null ? "" : " " + returnType.getSignature() + " ");
 		}
 
@@ -248,13 +248,13 @@ public class DemangledFunction extends DemangledObject {
 			buffer.append(partialSig);
 		}
 
-		if (isTrailingConst) {
+		if (isTrailingConst()) {
 			if (buffer.length() > 2) {
 				buffer.append(SPACE);
 			}
 			buffer.append(CONST);
 		}
-		if (isTrailingVolatile) {
+		if (isTrailingVolatile()) {
 			if (buffer.length() > 2) {
 				buffer.append(SPACE);
 			}
@@ -501,16 +501,23 @@ public class DemangledFunction extends DemangledObject {
 				// assume external manually manipulated without use of mangled name
 				return false;
 			}
-            // matching mangled name also resides at thunked function location
-            return mangled.equals(externalLocation.getOriginalImportedName());
+			if (mangled.equals(externalLocation.getOriginalImportedName())) {
+				// matching mangled name also resides at thunked function location
+				return true;
+			}
 
 			// TODO: carefully compare signature in absence of matching mangled name
-        }
+			return false;
+		}
 
-        // matching mangled name also resides at thunked function location
-        return symbolTable.getSymbol(mangled, thunkedFunction.getEntryPoint(),
-                program.getGlobalNamespace()) != null;
-    }
+		if (symbolTable.getSymbol(mangled, thunkedFunction.getEntryPoint(),
+			program.getGlobalNamespace()) != null) {
+			// matching mangled name also resides at thunked function location
+			return true;
+		}
+
+		return false;
+	}
 
 	private boolean hasVarArgs() {
 		if (parameters.isEmpty()) {
@@ -707,10 +714,13 @@ public class DemangledFunction extends DemangledObject {
 			// if there is only one compiler spec, then don't need to worry, just assign
 			// them as we see them
 			PrototypeModel[] specs = func.getProgram().getCompilerSpec().getCallingConventions();
-            return specs != null && specs.length != 1;
+			if (specs == null || specs.length == 1) {
+				return false;
+			}
 
 			// no params defined, can't tell if detected is different
-        }
+			return true;
+		}
 
 		return false;
 	}
@@ -744,9 +754,13 @@ public class DemangledFunction extends DemangledObject {
 		// if already a return type and this one has a return type
 		DataType returnDT = func.getReturnType();
 		returnDT = DataTypeUtilities.getBaseDataType(returnDT);
-        return !(returnDT == null || Undefined.isUndefined(returnDT)) &&
-                this.returnType != null;
-    }
+		if (!(returnDT == null || Undefined.isUndefined(returnDT)) &&
+			this.getReturnType() != null) {
+			return true;
+		}
+
+		return false;
+	}
 
 	/**
 	 * Overloaded operators with more than 1 parameter are global
@@ -804,14 +818,17 @@ public class DemangledFunction extends DemangledObject {
 
 		// If we have # params detected == num params we do not have a this call
 		// If we have # params detected == (num_params+1) we have this call
-        return func.getParameterCount() == mangledParameterCount + 1;
+		if (func.getParameterCount() == mangledParameterCount + 1) {
+			return true;
+		}
 
 		//       It STILL COULD be a this call, we just don't know!
 		//       But is also could be a static member function!
 		//       The only way to really tell is compare the number of detected parameters
 		//       to the number of parameters we have, OR, to detect the calling convention
 		//       based on say a passing of ECX
-    }
+		return false;
+	}
 
 	/**
 	 * Check that this function is not in the std namespace.
@@ -826,8 +843,11 @@ public class DemangledFunction extends DemangledObject {
 		if (ns == null) {
 			return false;
 		}
-        return ns.getName().equalsIgnoreCase(STD_NAMESPACE);
-    }
+		if (ns.getName().equalsIgnoreCase(STD_NAMESPACE)) {
+			return true;
+		}
+		return false;
+	}
 
 	protected Structure maybeCreateClassStructure(Program program, Function function,
 			String convention) {

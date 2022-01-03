@@ -182,12 +182,13 @@ public abstract class ContextDatabase {
 		vec.clear();
 
 		List<?> list = el.getChildren();
+		Iterator<?> iter = list.iterator();
 
-        for (Object o : list) {
-            Element subel = (Element) o;
-            vec.push_back(new TrackedContext());
-            vec.back().restoreXml(subel, trans);
-        }
+		while (iter.hasNext()) {
+			Element subel = (Element) iter.next();
+			vec.push_back(new TrackedContext());
+			vec.back().restoreXml(subel, trans);
+		}
 	}
 
 }

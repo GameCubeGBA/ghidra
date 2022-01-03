@@ -124,8 +124,11 @@ public abstract class AbstractManualMatchFromToolsAction extends DockingAction {
 				"There is a chance the cursor is not in the function you " +
 				"currently see.<br>Would you like to continue creating a match?",
 			"Yes", "No", OptionDialog.QUESTION_MESSAGE);
-        return choice == 1;
-    }
+		if (choice != 1) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public boolean isEnabledForContext(ActionContext context) {

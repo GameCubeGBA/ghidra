@@ -38,17 +38,17 @@ public final class VdexConstants {
 	 * static constexpr uint8_t kVdexMagic[] = { 'v', 'd', 'e', 'x' };
 	 * </pre>
 	 */
-    public static final String MAGIC = "vdex";
+	public final static String MAGIC = "vdex";
 
-	public static final String version_o_preview = "003";
-	public static final String VERSION_OREO_RELEASE = "006";
-	public static final String VERSION_OREO_M2_RELEASE = "010";
-	public static final String version_o_iot_preview_5 = "010";
-	public static final String version_o_mr1_iot_preview_6 = "011";
-	public static final String VERSION_PIE_RELEASE = "019";
-	public static final String VERSION_10_RELEASE = "021";
-	public static final String VERSION_11_RELEASE = "021";
-	public static final String VERSION_12_RELEASE = "027";
+	public final static String version_o_preview = "003";
+	public final static String VERSION_OREO_RELEASE = "006";
+	public final static String VERSION_OREO_M2_RELEASE = "010";
+	public final static String version_o_iot_preview_5 = "010";
+	public final static String version_o_mr1_iot_preview_6 = "011";
+	public final static String VERSION_PIE_RELEASE = "019";
+	public final static String VERSION_10_RELEASE = "021";
+	public final static String VERSION_11_RELEASE = "021";
+	public final static String VERSION_12_RELEASE = "027";
 
 	/**
 	 * The format version of the dex section header and the dex section, 
@@ -56,25 +56,25 @@ public final class VdexConstants {
 	 * Last update: Add owned section for CompactDex.
 	 * Cite: https://android.googlesource.com/platform/art/+/refs/heads/pie-release/runtime/vdex_file.h
 	 */
-    public static final String kDexSectionVersion = "002";
+	public final static String kDexSectionVersion = "002";
 
 	/**
 	 * If the .vdex file has no dex section (hence no dex code nor quickening data),
 	 * we encode this magic version.
 	 * Cite: https://android.googlesource.com/platform/art/+/refs/heads/pie-release/runtime/vdex_file.h
 	 */
-    public static final String kDexSectionVersionEmpty = "000";
+	public final static String kDexSectionVersionEmpty = "000";
 
 	/**
 	 * Note: The file is called "primary" to match the naming with profiles.
 	 */
-    public static final String kVdexNameInDmFile = "primary.vdex";
+	public final static String kVdexNameInDmFile = "primary.vdex";
 
 	/**
 	 * NOTE: only going to support RELEASE versions
 	 */
 	//@formatter:off
-    public static final String[] SUPPORTED_VERSIONS = new String[] {
+	public final static String[] SUPPORTED_VERSIONS = new String[] {
 		VERSION_OREO_RELEASE,
 		VERSION_OREO_M2_RELEASE, 
 		VERSION_PIE_RELEASE, 
@@ -84,7 +84,7 @@ public final class VdexConstants {
 	};
 	//@formatter:on
 
-	public static final boolean isSupportedVersion(String version) {
+	public final static boolean isSupportedVersion(String version) {
 		for (String supportedVersion : SUPPORTED_VERSIONS) {
 			if (supportedVersion.equals(version)) {
 				return true;
@@ -98,7 +98,7 @@ public final class VdexConstants {
 	 * @param program the program to inspect for being VDEX
 	 * @return true if the program is VDEX
 	 */
-    public static final boolean isVDEX(Program program) {
+	public final static boolean isVDEX(Program program) {
 		if (program != null) {
 			for (MemoryBlock block : program.getMemory().getBlocks()) {
 
@@ -117,7 +117,7 @@ public final class VdexConstants {
 		return false;
 	}
 
-	public static final Address findVDEX(Program program) {
+	public final static Address findVDEX(Program program) {
 		try {
 			if (program != null) {
 				for (MemoryBlock block : program.getMemory().getBlocks()) {

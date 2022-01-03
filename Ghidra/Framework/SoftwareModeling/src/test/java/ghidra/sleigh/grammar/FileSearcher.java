@@ -71,7 +71,7 @@ public class FileSearcher {
 			throw new FileSearcherException("File Type Extension list is NULL! " +
 				"Must Provide at least 1 File Type Extension to search for!");
 		}
-		else if ((currFileTypeExtList.isEmpty()) || (currFileTypeExtList.isEmpty())) {
+		else if ((currFileTypeExtList.size() == 0) || (currFileTypeExtList.isEmpty())) {
 			throw new FileSearcherException(
 				"Must Provide at least 1 File Type Extension to search for!");
 		}

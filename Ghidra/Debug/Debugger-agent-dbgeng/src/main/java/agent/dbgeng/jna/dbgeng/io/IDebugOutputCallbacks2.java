@@ -21,7 +21,7 @@ import com.sun.jna.platform.win32.WinDef.*;
 import com.sun.jna.platform.win32.WinNT.HRESULT;
 
 public interface IDebugOutputCallbacks2 extends IDebugOutputCallbacks {
-	IID IID_IDEBUG_OUTPUT_CALLBACKS2 = new IID("67721fe9-56d2-4a44-a325-2b65513ce6eb");
+	final IID IID_IDEBUG_OUTPUT_CALLBACKS2 = new IID("67721fe9-56d2-4a44-a325-2b65513ce6eb");
 
 	HRESULT GetInterestMask(ULONGByReference Mask);
 

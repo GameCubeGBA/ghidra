@@ -43,7 +43,12 @@ class VarnodeLocationCellEditor extends AbstractCellEditor implements TableCellE
 	private AddressInput addressInput;
 	private IntegerTextField offsetInput;
 
-	private Comparator<Register> registerWrapperComparator = (r1, r2) -> r1.toString().compareToIgnoreCase(r2.toString());
+	private Comparator<Register> registerWrapperComparator = new Comparator<Register>() {
+		@Override
+		public int compare(Register r1, Register r2) {
+			return r1.toString().compareToIgnoreCase(r2.toString());
+		}
+	};
 	private VarnodeInfo currentVarnode;
 	private int maxRegisterSize;
 
@@ -140,7 +145,12 @@ class VarnodeLocationCellEditor extends AbstractCellEditor implements TableCellE
 		if (address != null) {
 			addressInput.setAddress(address);
 		}
-		addressInput.addActionListener(e -> stopCellEditing());
+		addressInput.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				stopCellEditing();
+			}
+		});
 		return addressInput;
 	}
 
@@ -151,7 +161,12 @@ class VarnodeLocationCellEditor extends AbstractCellEditor implements TableCellE
 		if (address != null) {
 			offsetInput.setValue(address.getOffset());
 		}
-		offsetInput.addActionListener(e -> stopCellEditing());
+		offsetInput.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				stopCellEditing();
+			}
+		});
 		return offsetInput.getComponent();
 	}
 
@@ -197,12 +212,21 @@ class VarnodeLocationCellEditor extends AbstractCellEditor implements TableCellE
 			}
 		});
 
-		combo.addActionListener(e -> stopCellEditing());
+		combo.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				stopCellEditing();
+			}
+		});
 
-		SwingUtilities.invokeLater(() -> {
-            combo.showPopup();
-            combo.requestFocus();
-        });
+		SwingUtilities.invokeLater(new Runnable() {
+
+			@Override
+			public void run() {
+				combo.showPopup();
+				combo.requestFocus();
+			}
+		});
 		return combo;
 	}
 }

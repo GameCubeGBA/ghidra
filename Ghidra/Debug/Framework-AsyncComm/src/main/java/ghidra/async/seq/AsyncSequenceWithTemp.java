@@ -35,7 +35,7 @@ public class AsyncSequenceWithTemp<R, T> {
 	 * @param <R> the type of result for the shole sequence
 	 * @param <T> the type of temporary value produced
 	 */
-    abstract static class AbstractHandler<R, T> implements AsyncHandlerCanExit<R> {
+	static abstract class AbstractHandler<R, T> implements AsyncHandlerCanExit<R> {
 		final CompletableFuture<R> seqResult;
 		final CompletableFuture<T> future = new CompletableFuture<>();
 
@@ -62,7 +62,7 @@ public class AsyncSequenceWithTemp<R, T> {
 	 * @param <T> the type of value produced or stored
 	 * @param <U> the type of temporary value produced -- {@link Void} for actions that store
 	 */
-    abstract static class AbstractHandlerForProducer<R, T, U> extends AbstractHandler<R, U>
+	static abstract class AbstractHandlerForProducer<R, T, U> extends AbstractHandler<R, U>
 			implements AsyncSequenceHandlerForProducer<R, T> {
 		public AbstractHandlerForProducer(CompletableFuture<R> seqResult) {
 			super(seqResult);

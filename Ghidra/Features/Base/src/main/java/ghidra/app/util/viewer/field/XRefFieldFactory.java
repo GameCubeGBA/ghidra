@@ -69,7 +69,7 @@ public class XRefFieldFactory extends FieldFactory {
 		GROUP_TITLE + Options.DELIMITER + "Sort References by";
 	private static final String DISPLAY_REFERENCE_TYPE_KEY =
 		GROUP_TITLE + Options.DELIMITER + "Display Reference Type";
-	private static final String NAMESPACE_OPTIONS_KEY =
+	private final static String NAMESPACE_OPTIONS_KEY =
 		GROUP_TITLE + Options.DELIMITER + "Display Namespace";
 	static final String GROUP_BY_FUNCTION_KEY =
 		GROUP_TITLE + Options.DELIMITER + "Group by Function";

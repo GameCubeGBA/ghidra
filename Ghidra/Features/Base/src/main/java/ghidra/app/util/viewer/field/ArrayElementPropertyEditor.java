@@ -76,14 +76,17 @@ public class ArrayElementPropertyEditor extends PropertyEditorSupport
 			createLocalPrefixTextField(GROUP_SIZE_LABEL, GROUP_SIZE_LABEL_TOOLTIP, panel);
 		elementsLabel.setToolTipText(GROUP_SIZE_LABEL_TOOLTIP);
 
-		groupElementsCheckBox.addItemListener(e -> {
-            boolean enabled = groupElementsCheckBox.isSelected();
-            // only enable the text field if we are showing namespaces AND we are
-            // overriding the display value
-            elementsPerLineField.setEnabled(enabled);
-            elementsLabel.setEnabled(enabled);
-            firePropertyChange();
-        });
+		groupElementsCheckBox.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				boolean enabled = groupElementsCheckBox.isSelected();
+				// only enable the text field if we are showing namespaces AND we are 
+				// overriding the display value
+				elementsPerLineField.setEnabled(enabled);
+				elementsLabel.setEnabled(enabled);
+				firePropertyChange();
+			}
+		});
 		panel.setBorder(BorderFactory.createCompoundBorder(
 			BorderFactory.createEmptyBorder(10, 0, 10, 0), new TitledBorder("Grouping")));
 
@@ -103,7 +106,13 @@ public class ArrayElementPropertyEditor extends PropertyEditorSupport
 		elementsLabel = new GDLabel(labelText);
 		textFieldPanel.add(elementsLabel);
 		textFieldPanel.add(textField.getComponent());
-		textField.addChangeListener(e -> firePropertyChange());
+		textField.addChangeListener(new ChangeListener() {
+
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				firePropertyChange();
+			}
+		});
 
 		// add to the main panel
 		parent.add(textFieldPanel);

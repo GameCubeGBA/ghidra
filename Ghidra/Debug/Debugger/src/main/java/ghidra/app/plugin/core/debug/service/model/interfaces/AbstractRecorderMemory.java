@@ -24,17 +24,17 @@ import ghidra.program.model.address.*;
 
 public interface AbstractRecorderMemory {
 
-	void addRegion(TargetMemoryRegion region, TargetMemory memory);
+	public void addRegion(TargetMemoryRegion region, TargetMemory memory);
 
-	boolean removeRegion(TargetObject invalid);
+	public boolean removeRegion(TargetObject invalid);
 
-	CompletableFuture<byte[]> readMemory(Address address, int length);
+	public CompletableFuture<byte[]> readMemory(Address address, int length);
 
-	CompletableFuture<Void> writeMemory(Address address, byte[] data);
+	public CompletableFuture<Void> writeMemory(Address address, byte[] data);
 
-	AddressSet getAccessibleMemory(Predicate<TargetMemory> pred,
-								   DebuggerMemoryMapper memMapper);
+	public AddressSet getAccessibleMemory(Predicate<TargetMemory> pred,
+			DebuggerMemoryMapper memMapper);
 
-	AddressRange alignAndLimitToFloor(Address targetAddress, int length);
+	public AddressRange alignAndLimitToFloor(Address targetAddress, int length);
 
 }

@@ -27,9 +27,9 @@ import ghidra.program.model.data.Enum;
  */
 public class EditComponentAction extends CompositeEditorTableAction {
 
-	public static final String ACTION_NAME = "Edit Component";
-	private static final String GROUP_NAME = BASIC_ACTION_GROUP;
-	private static final String DESCRIPTION = "Edit the selected component";
+	public final static String ACTION_NAME = "Edit Component";
+	private final static String GROUP_NAME = BASIC_ACTION_GROUP;
+	private final static String DESCRIPTION = "Edit the selected component";
 	private static String[] POPUP_PATH = new String[] { ACTION_NAME };
 	private static String[] MENU_PATH = new String[] { ACTION_NAME };
 	private DataTypeManagerService dtmService;

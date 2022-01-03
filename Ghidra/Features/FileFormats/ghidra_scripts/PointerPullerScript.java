@@ -25,7 +25,7 @@ import ghidra.util.exception.DuplicateNameException;
 import ghidra.util.exception.InvalidInputException;
 
 public class PointerPullerScript extends GhidraScript {
-	private static final String stringPrefix = "s_";
+	private final static String stringPrefix = "s_";
 
 	@Override
 	public void run() throws Exception {

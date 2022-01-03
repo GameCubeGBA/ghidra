@@ -24,6 +24,6 @@ public interface DbgModelTargetRegisterContainerAndBank extends //
 		TargetRegisterContainer, //
 		TargetRegisterBank {
 
-	DbgModelTargetRegister getTargetRegister(DbgRegister register);
+	public DbgModelTargetRegister getTargetRegister(DbgRegister register);
 
 }

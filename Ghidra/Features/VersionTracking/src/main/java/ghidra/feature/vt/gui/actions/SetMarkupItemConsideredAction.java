@@ -62,7 +62,7 @@ abstract class SetMarkupItemConsideredAction extends DockingAction {
 	public boolean isEnabledForContext(ActionContext context) {
 		List<VTMarkupItem> markupItems = controller.getMarkupItems(context);
 
-		if (markupItems.isEmpty()) {
+		if (markupItems.size() == 0) {
 			return false;
 		}
 
@@ -82,7 +82,7 @@ abstract class SetMarkupItemConsideredAction extends DockingAction {
 	public boolean isAddToPopup(ActionContext context) {
 		List<VTMarkupItem> markupItems = controller.getMarkupItems(context);
 
-		if (markupItems.isEmpty()) {
+		if (markupItems.size() == 0) {
 			return false;
 		}
 

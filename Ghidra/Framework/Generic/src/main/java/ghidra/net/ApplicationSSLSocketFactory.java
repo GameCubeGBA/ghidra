@@ -47,7 +47,7 @@ public class ApplicationSSLSocketFactory extends SSLSocketFactory {
 			}
 		}
 		catch (NoSuchAlgorithmException e) {
-			Msg.error(this, "Failed to employ default SSLContext: " + e, e);
+			Msg.error(this, "Failed to employ default SSLContext: " + e.toString(), e);
 		}
 		this.socketFactory =
 			factory != null ? factory : (SSLSocketFactory) SSLSocketFactory.getDefault();

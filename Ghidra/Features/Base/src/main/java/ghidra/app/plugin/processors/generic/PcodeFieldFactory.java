@@ -41,12 +41,12 @@ public class PcodeFieldFactory extends FieldFactory {
 
 	public static final String FIELD_NAME = "PCode";
 
-	private static final String GROUP_TITLE = "Pcode Field";
-	public static final String MAX_DISPLAY_LINES_MSG =
+	private final static String GROUP_TITLE = "Pcode Field";
+	public final static String MAX_DISPLAY_LINES_MSG =
 		GROUP_TITLE + Options.DELIMITER + "Maximum Lines To Display";
 	public static final String DISPLAY_RAW_PCODE =
 		GROUP_TITLE + Options.DELIMITER + "Display Raw Pcode";
-	public static final int MAX_DISPLAY_LINES = 30;
+	public final static int MAX_DISPLAY_LINES = 30;
 
 	private PcodeFormatter formatter;
 
@@ -94,7 +94,7 @@ public class PcodeFieldFactory extends FieldFactory {
 			elements.add(new TextFieldElement(pcodeListing.get(i), i, 0));
 		}
 
-		if (!elements.isEmpty()) {
+		if (elements.size() > 0) {
 			FieldElement[] textElements = elements.toArray(new FieldElement[elements.size()]);
 			return ListingTextField.createMultilineTextField(this, proxy, textElements,
 				startX + varWidth, width, Integer.MAX_VALUE, hlProvider);

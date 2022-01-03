@@ -93,7 +93,7 @@ class GhidraScriptActionManager {
 
 				ScriptAction action = createAction(script);
 				String strokeStr = saveState.getString(name, null);
-				if (strokeStr == null || strokeStr.isEmpty()) {
+				if (strokeStr == null || strokeStr.length() == 0) {
 					action.setKeyBindingData(null);
 				}
 				else {

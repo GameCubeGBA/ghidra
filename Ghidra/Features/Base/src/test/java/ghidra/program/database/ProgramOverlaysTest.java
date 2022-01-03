@@ -40,7 +40,8 @@ public class ProgramOverlaysTest extends AbstractGenericTest {
 	byte[] fillA = new byte[] { 1, 2, 3, 4 };
 
 	public ProgramOverlaysTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

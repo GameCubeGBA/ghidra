@@ -55,7 +55,8 @@ public class CodeUnitMergeManager4Test extends AbstractListingMergeManagerTest {
 	 * @param arg0
 	 */
 	public CodeUnitMergeManager4Test() {
-    }
+		super();
+	}
 
 @Test
     public void testLatestByteDiff() throws Exception {

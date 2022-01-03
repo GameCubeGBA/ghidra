@@ -32,7 +32,7 @@ public class Offset implements Serializable {
 	public Offset(int off, String name) throws SledException {
 		if ((off % 8) != 0) throw new SledException("offset must be a multiple of eight bits");
 		offset = off/8;
-		if (name == null || name.isEmpty()) relToName = "";
+		if (name == null || name.length() == 0) relToName = "";
 		else relToName = name;
 	}
 
@@ -46,7 +46,7 @@ public class Offset implements Serializable {
 	 * @param opHash
 	 */
 	public void setRelativeOffset(Hashtable<String, Operand> opHash) throws SledException {
-		if (relToName != null && !relToName.isEmpty()) {
+		if (relToName != null && relToName.length() != 0) {
 			relTo = opHash.get(relToName);
 			if (relTo == null) throw new SledException("unable to find relative operand");
 		}

@@ -28,7 +28,7 @@ public interface DbgModelTargetModule extends DbgModelTargetObject, TargetModule
 	DbgModule getDbgModule();
 
 	@Override
-    default CompletableFuture<Void> init(Map<String, Object> map) {
+	public default CompletableFuture<Void> init(Map<String, Object> map) {
 		AddressSpace space = getModel().getAddressSpace("ram");
 		return requestNativeAttributes().thenAccept(attrs -> {
 			if (!isValid()) {

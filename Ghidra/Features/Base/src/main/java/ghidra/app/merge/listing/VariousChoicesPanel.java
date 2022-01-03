@@ -53,7 +53,7 @@ import ghidra.util.layout.MaximizeSpecificColumnGridLayout;
  */
 public class VariousChoicesPanel extends ConflictPanel {
 
-	private static final long serialVersionUID = 1;
+	private final static long serialVersionUID = 1;
 	private static final Border UNDERLINE_BORDER =
 		BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK);
 
@@ -70,7 +70,8 @@ public class VariousChoicesPanel extends ConflictPanel {
 	 * Constructor for a various choices panel.
 	 */
 	public VariousChoicesPanel() {
-        init();
+		super();
+		init();
 	}
 
 	/**
@@ -121,7 +122,7 @@ public class VariousChoicesPanel extends ConflictPanel {
 	 * @param text the text
 	 */
 	void setHeader(String text) {
-		if (text != null && !text.isEmpty()) {
+		if (text != null && text.length() != 0) {
 			headerLabel.setText(ConflictUtility.wrapAsHTML(text));
 			add(headerLabel, BorderLayout.NORTH);
 		}
@@ -190,7 +191,7 @@ public class VariousChoicesPanel extends ConflictPanel {
 			if (choices[i] == null) {
 				choices[i] = "-- none --";
 			}
-			else if (choices[i].isEmpty()) {
+			else if (choices[i].length() == 0) {
 				choices[i] = "-- empty --";
 			}
 		}
@@ -198,17 +199,20 @@ public class VariousChoicesPanel extends ConflictPanel {
 		MyRadioButton[] rb = new MyRadioButton[choices.length];
 		final int row = rows.size();
 		final ChoiceRow choiceRow = new ChoiceRow(titleComp, rb);
-		ItemListener itemListener = e -> {
-            adjustUseForAllEnablement();
-            if (listener != null) {
-                Object source = e.getSource();
-                if (((MyRadioButton) source).isSelected()) {
-                    ResolveConflictChangeEvent re =
-                        new ResolveConflictChangeEvent(source, row, choiceRow.getChoice());
-                    listener.stateChanged(re);
-                }
-            }
-        };
+		ItemListener itemListener = new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				adjustUseForAllEnablement();
+				if (listener != null) {
+					Object source = e.getSource();
+					if (((MyRadioButton) source).isSelected()) {
+						ResolveConflictChangeEvent re =
+							new ResolveConflictChangeEvent(source, row, choiceRow.getChoice());
+						listener.stateChanged(re);
+					}
+				}
+			}
+		};
 		ButtonGroup group = new ButtonGroup();
 		for (int i = 0; i < choices.length; i++) {
 			rb[i] = new MyRadioButton(choices[i]);
@@ -242,14 +246,17 @@ public class VariousChoicesPanel extends ConflictPanel {
 		MyCheckBox[] cb = new MyCheckBox[choices.length];
 		final int row = rows.size();
 		final ChoiceRow choiceRow = new ChoiceRow(titleComp, cb);
-		ItemListener itemListener = e -> {
-            adjustUseForAllEnablement();
-            if (listener != null) {
-                ResolveConflictChangeEvent re =
-                    new ResolveConflictChangeEvent(e.getSource(), row, choiceRow.getChoice());
-                listener.stateChanged(re);
-            }
-        };
+		ItemListener itemListener = new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				adjustUseForAllEnablement();
+				if (listener != null) {
+					ResolveConflictChangeEvent re =
+						new ResolveConflictChangeEvent(e.getSource(), row, choiceRow.getChoice());
+					listener.stateChanged(re);
+				}
+			}
+		};
 		for (int i = 0; i < choices.length; i++) {
 			cb[i] = new MyCheckBox(choices[i]);
 			cb[i].setName(getComponentName(row, (i + 1)));
@@ -296,9 +303,9 @@ public class VariousChoicesPanel extends ConflictPanel {
 		ChoiceRow cr = rows.get(rowNum);
 		rowPanel.remove(cr.titleLabel);
 		JComponent[] comps = cr.rb;
-        for (JComponent comp : comps) {
-            rowPanel.remove(comp);
-        }
+		for (int i = 0; i < comps.length; i++) {
+			rowPanel.remove(comps[i]);
+		}
 		rows.remove(rowNum);
 	}
 
@@ -308,19 +315,22 @@ public class VariousChoicesPanel extends ConflictPanel {
 			return 0;
 		}
 		int firstChoice = -1;
-        for (ChoiceRow cr : rows) {
-            int currentChoice = cr.getChoice();
-            if (cr.hasChoices()) {
-                if (currentChoice == 0) {
-                    return 0;
-                }
-                if (firstChoice == -1) {
-                    firstChoice = currentChoice;
-                } else if (currentChoice != firstChoice) {
-                    return 0;
-                }
-            }
-        }
+		Iterator<ChoiceRow> iter = rows.iterator();
+		while (iter.hasNext()) {
+			ChoiceRow cr = iter.next();
+			int currentChoice = cr.getChoice();
+			if (cr.hasChoices()) {
+				if (currentChoice == 0) {
+					return 0;
+				}
+				if (firstChoice == -1) {
+					firstChoice = currentChoice;
+				}
+				else if (currentChoice != firstChoice) {
+					return 0;
+				}
+			}
+		}
 		return (firstChoice != -1) ? firstChoice : 0;
 	}
 
@@ -329,11 +339,13 @@ public class VariousChoicesPanel extends ConflictPanel {
 	 */
 	@Override
 	public boolean allChoicesAreResolved() {
-        for (ChoiceRow cr : rows) {
-            if (cr.hasChoices() && cr.getChoice() == 0) {
-                return false;
-            }
-        }
+		Iterator<ChoiceRow> iter = rows.iterator();
+		while (iter.hasNext()) {
+			ChoiceRow cr = iter.next();
+			if (cr.hasChoices() && cr.getChoice() == 0) {
+				return false;
+			}
+		}
 		return true;
 	}
 
@@ -347,19 +359,22 @@ public class VariousChoicesPanel extends ConflictPanel {
 			return false;
 		}
 		int firstChoice = -1;
-        for (ChoiceRow cr : rows) {
-            int currentChoice = cr.getChoice();
-            if (cr.hasChoices()) {
-                if (currentChoice == 0) {
-                    return false;
-                }
-                if (firstChoice == -1) {
-                    firstChoice = currentChoice;
-                } else if (currentChoice != firstChoice) {
-                    return false;
-                }
-            }
-        }
+		Iterator<ChoiceRow> iter = rows.iterator();
+		while (iter.hasNext()) {
+			ChoiceRow cr = iter.next();
+			int currentChoice = cr.getChoice();
+			if (cr.hasChoices()) {
+				if (currentChoice == 0) {
+					return false;
+				}
+				if (firstChoice == -1) {
+					firstChoice = currentChoice;
+				}
+				else if (currentChoice != firstChoice) {
+					return false;
+				}
+			}
+		}
 		return (firstChoice != -1);
 	}
 
@@ -369,19 +384,23 @@ public class VariousChoicesPanel extends ConflictPanel {
 	@Override
 	public int getNumConflictsResolved() {
 		int count = 0;
-        for (ChoiceRow cr : rows) {
-            if (cr.getChoice() != 0) {
-                count++;
-            }
-        }
+		Iterator<ChoiceRow> iter = rows.iterator();
+		while (iter.hasNext()) {
+			ChoiceRow cr = iter.next();
+			if (cr.getChoice() != 0) {
+				count++;
+			}
+		}
 		return count;
 	}
 
 	@Override
 	public void removeAllListeners() {
-        for (ChoiceRow cr : rows) {
-            removeListeners(cr);
-        }
+		Iterator<ChoiceRow> iter = rows.iterator();
+		while (iter.hasNext()) {
+			ChoiceRow cr = iter.next();
+			removeListeners(cr);
+		}
 	}
 
 	private void removeListeners(ChoiceRow cr) {
@@ -477,11 +496,11 @@ public class VariousChoicesPanel extends ConflictPanel {
 		}
 
 		boolean hasChoices() {
-            for (JComponent jComponent : rb) {
-                if ((jComponent instanceof MyRadioButton) || (jComponent instanceof MyCheckBox)) {
-                    return true;
-                }
-            }
+			for (int i = 0; i < rb.length; i++) {
+				if ((rb[i] instanceof MyRadioButton) || (rb[i] instanceof MyCheckBox)) {
+					return true;
+				}
+			}
 			return false;
 		}
 	}
@@ -491,7 +510,7 @@ public class VariousChoicesPanel extends ConflictPanel {
 	 */
 	@Override
 	public boolean hasChoice() {
-		return !rows.isEmpty();
+		return rows.size() > 0;
 	}
 
 	private class MyLabel extends GLabel {
@@ -541,7 +560,7 @@ public class VariousChoicesPanel extends ConflictPanel {
 	}
 
 	private class MyRadioButton extends GRadioButton {
-		private static final long serialVersionUID = 1;
+		private final static long serialVersionUID = 1;
 
 		/**
 		 * @param text the text for this radio button
@@ -586,7 +605,7 @@ public class VariousChoicesPanel extends ConflictPanel {
 	}
 
 	private class MyCheckBox extends GCheckBox {
-		private static final long serialVersionUID = 1;
+		private final static long serialVersionUID = 1;
 
 		/**
 		 * @param text the text for this check box

@@ -150,7 +150,9 @@ public abstract class AbstractConvertAction extends ListingContextAction {
 			return baseString;
 		}
 		StringBuilder buf = new StringBuilder(baseString);
-		buf.append(" ".repeat(paddingSize));
+		for (int i = 0; i < paddingSize; i++) {
+			buf.append(" ");
+		}
 		return buf.toString();
 	}
 }

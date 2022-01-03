@@ -32,7 +32,8 @@ import ghidra.util.task.TaskMonitor;
 public class IntroScreenShots extends GhidraScreenShotGenerator {
 
 	public IntroScreenShots() {
-    }
+		super();
+	}
 
 	@Override
 	public void prepareTool() {

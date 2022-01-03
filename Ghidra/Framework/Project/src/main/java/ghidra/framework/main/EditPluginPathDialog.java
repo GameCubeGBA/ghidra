@@ -68,19 +68,19 @@ class EditPluginPathDialog extends DialogComponentProvider {
 
 	static final String ADD_DIR_BUTTON_TEXT = "Add Dir ...";
 	static final String ADD_JAR_BUTTON_TEXT = "Add Jar ...";
-	private static final int SIDE_MARGIN = 5;
-	private static final Color INVALID_PATH_COLOR = Color.red.brighter();
-	private static final Color INVALID_SELECTED_PATH_COLOR = Color.pink;
-	private static final Color STATUS_MESSAGE_COLOR = Color.blue.brighter();
-	static final String EMPTY_STATUS = " ";
+	private final static int SIDE_MARGIN = 5;
+	private final static Color INVALID_PATH_COLOR = Color.red.brighter();
+	private final static Color INVALID_SELECTED_PATH_COLOR = Color.pink;
+	private final static Color STATUS_MESSAGE_COLOR = Color.blue.brighter();
+	final static String EMPTY_STATUS = " ";
 
 	private ExtensionFileFilter JAR_FILTER =
 		new ExtensionFileFilter(new String[] { "jar", "zip" }, "Plugin Jar Files");
 
 	// codes used when handling actions
-    private static final byte UP = 0;
-	private static final byte DOWN = 1;
-	private static final byte REMOVE = 2;
+	private final static byte UP = (byte) 0;
+	private final static byte DOWN = (byte) 1;
+	private final static byte REMOVE = (byte) 2;
 
 	// state data
 	private DefaultListModel<String> listModel; // paths to search for finding plugins
@@ -197,7 +197,7 @@ class EditPluginPathDialog extends DialogComponentProvider {
 	}
 
 	private void setStatusMessage(String msg) {
-		if (msg == null || msg.isEmpty()) {
+		if (msg == null || msg.length() == 0) {
 			msg = EMPTY_STATUS;
 		}
 		statusMessage.setText(msg);

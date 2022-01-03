@@ -203,8 +203,12 @@ public class FunctionTagDB extends DatabaseObject implements FunctionTag {
 			return false;
 		}
 
-        return Objects.equals(getName(), other.getName());
-    }
+		if (!Objects.equals(getName(), other.getName())) {
+			return false;
+		}
+
+		return true;
+	}
 
 	@Override
 	public String toString() {

@@ -75,7 +75,12 @@ public abstract class AbstractNextPreviousAction extends NavigatableContextActio
 				isForward ? getNextAddress(monitor, context.getProgram(), context.getAddress())
 						: getPreviousAddress(monitor, context.getProgram(), context.getAddress());
 
-			SwingUtilities.invokeLater(() -> gotoAddress(context, address));
+			SwingUtilities.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					gotoAddress(context, address);
+				}
+			});
 
 		}
 		catch (CancelledException e) {
@@ -114,11 +119,11 @@ public abstract class AbstractNextPreviousAction extends NavigatableContextActio
 		return prefix + getNavigationTypeName();
 	}
 
-	protected abstract String getNavigationTypeName();
+	abstract protected String getNavigationTypeName();
 
-	protected abstract Address getNextAddress(TaskMonitor monitor, Program program, Address address)
+	abstract protected Address getNextAddress(TaskMonitor monitor, Program program, Address address)
 			throws CancelledException;
 
-	protected abstract Address getPreviousAddress(TaskMonitor monitor, Program program,
-                                                  Address address) throws CancelledException;
+	abstract protected Address getPreviousAddress(TaskMonitor monitor, Program program,
+			Address address) throws CancelledException;
 }

@@ -72,11 +72,13 @@ class ImageBaseDialog extends DialogComponentProvider {
 		textField = new JTextField(20);
 		textField.setText(currentAddr.toString());
 		textField.selectAll();
-		textField.addActionListener(e -> {
-            if (addr != null) {
-                okCallback();
-            }
-        });
+		textField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (addr != null) {
+					okCallback();
+				}
+			}
+		});
 		panel.add(textField);
 		
 		textField.getDocument().addDocumentListener(new DocumentListener() {

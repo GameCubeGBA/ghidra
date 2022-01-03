@@ -27,5 +27,5 @@ public interface FileSystemBrowserService {
 	 * 
 	 * @param fsrl The thing to open in a file system browser. 
 	 */
-    void openFileSystem(FSRL fsrl);
+	public void openFileSystem(FSRL fsrl);
 }

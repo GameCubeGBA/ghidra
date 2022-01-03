@@ -30,5 +30,5 @@ public interface MemoryReader {
 	 * regions, each generates a new request, forwarded to the wrapped read method.
 	 */
 	// TODO: Use ByteBuffer instead?
-    CompletableFuture<byte[]> readMemory(long address, int length);
+	public CompletableFuture<byte[]> readMemory(long address, int length);
 }

@@ -103,7 +103,7 @@ public class FunctionTagLoader {
 					String comment = "";
 					// If there's a name value, parse value of comment tag.
 					// Add name, comment to list of tags.
-					if (name != null && !name.trim().isEmpty()) {
+					if (name != null && name.trim().length() != 0) {
 						if (parser.hasNext() && "comment".equals(parser.peek().getName())) {
 							el = parser.next();
 							comment = parser.end().getText();

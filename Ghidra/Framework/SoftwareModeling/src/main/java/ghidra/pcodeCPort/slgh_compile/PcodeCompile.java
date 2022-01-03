@@ -46,7 +46,7 @@ import ghidra.sleigh.grammar.Location;
 
 public abstract class PcodeCompile {
 
-	public static final Logger log = LogManager.getLogger(PcodeCompile.class);
+	public final static Logger log = LogManager.getLogger(PcodeCompile.class);
 
 	public VectorSTL<String> noplist = new VectorSTL<>();
 	private int local_labelcount;
@@ -558,7 +558,7 @@ public abstract class PcodeCompile {
 			}
 		}
 
-		if (!errmsg.isEmpty()) { // Was there an error condition
+		if (errmsg.length() > 0) { // Was there an error condition
 			reportError(location, errmsg); // Report the error
 			VectorSTL<OpTpl> resops = rhs.ops; // Passthru old expression
 			rhs.ops = null;
@@ -589,7 +589,7 @@ public abstract class PcodeCompile {
 			finalout = new VarnodeTpl(location, vn);
 			res = createOpOut(location, finalout, OpCode.CPUI_INT_OR, res, rhs);
 		}
-		if (!errmsg.isEmpty()) {
+		if (errmsg.length() > 0) {
 			reportError(location, errmsg);
 		}
 		VectorSTL<OpTpl> resops = res.ops;
@@ -615,7 +615,7 @@ public abstract class PcodeCompile {
 
 		// Special case where we can set the size, without invoking
 		// a truncation operator
-		if ((errmsg.isEmpty()) && (bitoffset == 0) && (!maskneeded)) {
+		if ((errmsg.length() == 0) && (bitoffset == 0) && (!maskneeded)) {
 			if ((vn.getSpace().getType() == ConstTpl.const_type.handle) && vn.isZeroSize()) {
 				vn.setSize(new ConstTpl(ConstTpl.const_type.real, finalsize));
 				
@@ -625,7 +625,7 @@ public abstract class PcodeCompile {
 			}
 		}
 
-		if (errmsg.isEmpty()) {
+		if (errmsg.length() == 0) {
 			VarnodeTpl truncvn = buildTruncatedVarnode(location, vn, bitoffset, numbits);
 			if (truncvn != null) {		// If we are able to construct a simple truncated varnode
 				return new ExprTree(location, truncvn);
@@ -667,7 +667,7 @@ public abstract class PcodeCompile {
 
 		ExprTree res = new ExprTree(sym.getLocation(), vn);
 
-		if (!errmsg.isEmpty()) { // Check for error condition
+		if (errmsg.length() > 0) { // Check for error condition
 			reportError(location, errmsg);
 			return res;
 		}
@@ -878,8 +878,11 @@ public abstract class PcodeCompile {
 			}
 			zerovec = zerovec2;
 		}
-        return lastsize == 0;
-    }
+		if (lastsize != 0) {
+			return false;
+		}
+		return true;
+	}
 
 	public static void entry(String name, Object... args) {
 		StringBuilder sb = new StringBuilder();
@@ -1056,6 +1059,10 @@ public abstract class PcodeCompile {
 		if ("newobject".equals(name)) {
 			return true;
 		}
-        return "popcount".equals(name);
-    }
+		if ("popcount".equals(name)) {
+			return true;
+		}
+
+		return false;
+	}
 }

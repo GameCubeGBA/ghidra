@@ -91,8 +91,8 @@ public class SearchTextPlugin extends ProgramPlugin implements OptionsChangeList
 	private static final ImageIcon searchIcon = ResourceManager.loadImage("images/searchm_obj.gif");
 
 	private static final String DESCRIPTION = "Search program text for string";
-	private static final int DEFAULT_SEARCH_LIMIT = 500;
-	private static final Highlight[] NO_HIGHLIGHTS = new Highlight[0];
+	private final static int DEFAULT_SEARCH_LIMIT = 500;
+	private final static Highlight[] NO_HIGHLIGHTS = new Highlight[0];
 
 	private boolean waitingForSearchAll;
 	private SearchTextDialog searchDialog;
@@ -482,7 +482,12 @@ public class SearchTextPlugin extends ProgramPlugin implements OptionsChangeList
 		boolean isInstruction = false;
 		if (textSelection != null) {
 			if (codeUnit != null) {
-                isInstruction = codeUnit instanceof Instruction;
+				if (codeUnit instanceof Instruction) {
+					isInstruction = true;
+				}
+				else {
+					isInstruction = false;
+				}
 				searchDialog.setCurrentField(location, isInstruction);
 			}
 			searchDialog.setValueFieldText(textSelection);
@@ -669,7 +674,7 @@ public class SearchTextPlugin extends ProgramPlugin implements OptionsChangeList
 				}
 			}
 
-			if (list.isEmpty()) {
+			if (list.size() == 0) {
 				return NO_HIGHLIGHTS;
 			}
 			Highlight[] h = new Highlight[list.size()];
@@ -748,7 +753,9 @@ public class SearchTextPlugin extends ProgramPlugin implements OptionsChangeList
 				}
 			}
 			if (searchOptions.searchLabels()) {
-                return factoryClass == LabelFieldFactory.class;
+				if (factoryClass == LabelFieldFactory.class) {
+					return true;
+				}
 			}
 
 			return false;

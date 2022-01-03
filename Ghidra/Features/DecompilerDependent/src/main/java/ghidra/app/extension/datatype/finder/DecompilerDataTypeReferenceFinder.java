@@ -554,7 +554,7 @@ public class DecompilerDataTypeReferenceFinder implements DataTypeReferenceFinde
 			}
 			else {
 				System.err.print(
-					" '" + node.getClass().getSimpleName() + "' ['" + node + "'] ");
+					" '" + node.getClass().getSimpleName() + "' ['" + node.toString() + "'] ");
 			}
 
 			ClangToken token = (ClangToken) node;

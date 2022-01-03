@@ -12,15 +12,15 @@
 package SWIG;
 
 public final class StructuredDataType {
-  public static final StructuredDataType eStructuredDataTypeInvalid = new StructuredDataType("eStructuredDataTypeInvalid", lldbJNI.eStructuredDataTypeInvalid_get());
-  public static final StructuredDataType eStructuredDataTypeNull = new StructuredDataType("eStructuredDataTypeNull", lldbJNI.eStructuredDataTypeNull_get());
-  public static final StructuredDataType eStructuredDataTypeGeneric = new StructuredDataType("eStructuredDataTypeGeneric");
-  public static final StructuredDataType eStructuredDataTypeArray = new StructuredDataType("eStructuredDataTypeArray");
-  public static final StructuredDataType eStructuredDataTypeInteger = new StructuredDataType("eStructuredDataTypeInteger");
-  public static final StructuredDataType eStructuredDataTypeFloat = new StructuredDataType("eStructuredDataTypeFloat");
-  public static final StructuredDataType eStructuredDataTypeBoolean = new StructuredDataType("eStructuredDataTypeBoolean");
-  public static final StructuredDataType eStructuredDataTypeString = new StructuredDataType("eStructuredDataTypeString");
-  public static final StructuredDataType eStructuredDataTypeDictionary = new StructuredDataType("eStructuredDataTypeDictionary");
+  public final static StructuredDataType eStructuredDataTypeInvalid = new StructuredDataType("eStructuredDataTypeInvalid", lldbJNI.eStructuredDataTypeInvalid_get());
+  public final static StructuredDataType eStructuredDataTypeNull = new StructuredDataType("eStructuredDataTypeNull", lldbJNI.eStructuredDataTypeNull_get());
+  public final static StructuredDataType eStructuredDataTypeGeneric = new StructuredDataType("eStructuredDataTypeGeneric");
+  public final static StructuredDataType eStructuredDataTypeArray = new StructuredDataType("eStructuredDataTypeArray");
+  public final static StructuredDataType eStructuredDataTypeInteger = new StructuredDataType("eStructuredDataTypeInteger");
+  public final static StructuredDataType eStructuredDataTypeFloat = new StructuredDataType("eStructuredDataTypeFloat");
+  public final static StructuredDataType eStructuredDataTypeBoolean = new StructuredDataType("eStructuredDataTypeBoolean");
+  public final static StructuredDataType eStructuredDataTypeString = new StructuredDataType("eStructuredDataTypeString");
+  public final static StructuredDataType eStructuredDataTypeDictionary = new StructuredDataType("eStructuredDataTypeDictionary");
 
   public final int swigValue() {
     return swigValue;
@@ -33,9 +33,9 @@ public final class StructuredDataType {
   public static StructuredDataType swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-      for (StructuredDataType value : swigValues)
-          if (value.swigValue == swigValue)
-              return value;
+    for (int i = 0; i < swigValues.length; i++)
+      if (swigValues[i].swigValue == swigValue)
+        return swigValues[i];
     throw new IllegalArgumentException("No enum " + StructuredDataType.class + " with value " + swigValue);
   }
 

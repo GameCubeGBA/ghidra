@@ -55,7 +55,7 @@ public class ConstantPoolIntegerInfo extends AbstractConstantPoolInfoJava {
 
 	@Override
 	public String toString() {
-		return "" + bytes;
+		return "" + getValue();
 	}
 
 	@Override

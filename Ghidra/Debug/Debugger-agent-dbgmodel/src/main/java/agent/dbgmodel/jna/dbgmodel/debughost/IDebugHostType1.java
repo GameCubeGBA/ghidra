@@ -25,7 +25,7 @@ import agent.dbgmodel.jna.dbgmodel.DbgModelNative.ARRAY_DIMENSION.ByReference;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IDebugHostType1 extends IDebugHostBaseClass {
-	IID IID_IDEBUG_HOST_TYPE = new IID("3AADC353-2B14-4abb-9893-5E03458E07EE");
+	final IID IID_IDEBUG_HOST_TYPE = new IID("3AADC353-2B14-4abb-9893-5E03458E07EE");
 
 	enum VTIndices1 implements VTableIndex {
 		GET_TYPE_KIND, //

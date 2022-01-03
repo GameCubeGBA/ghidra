@@ -96,8 +96,13 @@ public class DataTypeReference {
 		// Note: I don't think we can have more than one access at a given address
 		DataTypeReference other = (DataTypeReference) obj;
 		if (address == null) {
-            return other.address == null;
+			if (other.address != null) {
+				return false;
+			}
 		}
-		else return address.equals(other.address);
-    }
+		else if (!address.equals(other.address)) {
+			return false;
+		}
+		return true;
+	}
 }

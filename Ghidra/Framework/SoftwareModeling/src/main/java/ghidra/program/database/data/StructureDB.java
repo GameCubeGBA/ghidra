@@ -1948,7 +1948,7 @@ class StructureDB extends CompositeDB implements StructureInternal {
 	}
 
 	private int getLastDefinedComponentOrdinal() {
-		if (components.isEmpty()) {
+		if (components.size() == 0) {
 			return 0;
 		}
 		DataTypeComponentDB dataTypeComponentDB = components.get(components.size() - 1);

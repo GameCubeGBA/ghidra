@@ -58,9 +58,12 @@ public class CrushedPNGFileSystem extends GFileSystemBase {
 			//Do a check for the iOS inserted chunk "CgBI" which is inserted
 			//before the usual first "IHDR" chunk
 			byte[] insertedChunkID = provider.readBytes(signatureArray.length + 4, 4);
-            return Arrays.equals(insertedChunkID, CrushedPNGConstants.INSERTED_IOS_CHUNK);
+			if (Arrays.equals(insertedChunkID, CrushedPNGConstants.INSERTED_IOS_CHUNK)) {
+				return true;
+			}
+			return false;
 
-        }
+		}
 		return false;
 
 	}

@@ -403,15 +403,15 @@ public class SelectByFlowPlugin extends Plugin implements OptionsChangeListener 
 
 	private boolean blockHasReferences(ReferenceManager referenceManager, CodeBlock block) {
 		Address[] starts = block.getStartAddresses();
-        for (Address start : starts) {
-            ReferenceIterator refIter = referenceManager.getReferencesTo(start);
-            while (refIter.hasNext()) {
-                Reference ref = refIter.next();
-                if (ref.isMemoryReference()) {
-                    return true; // somebody is referencing this block start
-                }
-            }
-        }
+		for (int i = 0; i < starts.length; i++) {
+			ReferenceIterator refIter = referenceManager.getReferencesTo(starts[i]);
+			while (refIter.hasNext()) {
+				Reference ref = refIter.next();
+				if (ref.isMemoryReference()) {
+					return true; // somebody is referencing this block start
+				}
+			}
+		}
 		return false;
 	}
 

@@ -52,13 +52,13 @@ import ghidra.util.task.TaskMonitor;
  */
 class SymbolMerger extends AbstractListingMerger {
 
-	static final String SYMBOLS_PHASE = "Symbols";
-	private static final int REMOVE_CONFLICT = 1; // Symbol was removed in one program & changed in other.
-	private static final int RENAME_CONFLICT = 2; // Symbol was renamed differently in the two programs.
-	private static final int NAMESPACE_CONFLICT = 3; // Two different symbols with same name in same namespace
-	private static final int ADDRESS_CONFLICT = 4;	// Two programs have same named symbol at same address,
+	final static String SYMBOLS_PHASE = "Symbols";
+	private final static int REMOVE_CONFLICT = 1; // Symbol was removed in one program & changed in other.
+	private final static int RENAME_CONFLICT = 2; // Symbol was renamed differently in the two programs.
+	private final static int NAMESPACE_CONFLICT = 3; // Two different symbols with same name in same namespace
+	private final static int ADDRESS_CONFLICT = 4;	// Two programs have same named symbol at same address,
 													// but different namespaces.
-                                                    private static final int PRIMARY_CONFLICT = 5; // Programs have set different symbols to primary at an address.
+	private final static int PRIMARY_CONFLICT = 5; // Programs have set different symbols to primary at an address.
 //	private final static int COMMENT_CONFLICT = 6; // Symbol comment was updated differently in the two programs.
 //	private final static int ADD_COMMENT_CONFLICT = 7; // Symbol comment was added differently in the two programs.
 
@@ -740,10 +740,11 @@ class SymbolMerger extends AbstractListingMerger {
 
 		// Save IDs to list since removal may mess up iterator.
 		LongArrayList list = new LongArrayList();
-        for (Long deferredRemoveID : deferredRemoveIDs) {
-            long id = deferredRemoveID.longValue();
-            list.add(id);
-        }
+		Iterator<Long> iter = deferredRemoveIDs.iterator();
+		while (iter.hasNext()) {
+			long id = iter.next().longValue();
+			list.add(id);
+		}
 		// Loop and retry removing if some were removed since this may have
 		// created empty namespaces that previously weren't empty.
 		boolean removedSome;
@@ -2066,21 +2067,27 @@ class SymbolMerger extends AbstractListingMerger {
 					showResolveInfo();
 				}
 			};
-			SwingUtilities.invokeAndWait(() -> {
-                getConflictPanel(conflictType, changeListener);
-                if (conflictPanel != null) {
-                    listingPanel.setBottomComponent(conflictPanel);
-                }
-                else {
-                    listingPanel.setBottomComponent(emptyConflictPanel);
-                }
-            });
-			SwingUtilities.invokeLater(() -> {
-                listingPanel.clearAllBackgrounds();
-                if (SymbolMerger.this.currentBackgroundSet != null) {
-                    listingPanel.paintAllBackgrounds(SymbolMerger.this.currentBackgroundSet);
-                }
-            });
+			SwingUtilities.invokeAndWait(new Runnable() {
+				@Override
+				public void run() {
+					getConflictPanel(conflictType, changeListener);
+					if (conflictPanel != null) {
+						listingPanel.setBottomComponent(conflictPanel);
+					}
+					else {
+						listingPanel.setBottomComponent(emptyConflictPanel);
+					}
+				}
+			});
+			SwingUtilities.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					listingPanel.clearAllBackgrounds();
+					if (SymbolMerger.this.currentBackgroundSet != null) {
+						listingPanel.paintAllBackgrounds(SymbolMerger.this.currentBackgroundSet);
+					}
+				}
+			});
 		}
 		catch (InterruptedException e) {
 			Msg.error(this, "Couldn't display Symbol Merger conflict panel. " + e.getMessage());
@@ -2367,7 +2374,7 @@ class SymbolMerger extends AbstractListingMerger {
 		else if (chosenConflictOption == RENAME_MY) {
 			try {
 				myHash.get(myID);
-				Msg.error(this, "Error: My symbol '" + originalOrMySymbol +
+				Msg.error(this, "Error: My symbol '" + originalOrMySymbol.toString() +
 					"' has already been merged.");
 				return; // Already been merged.
 			}
@@ -2905,7 +2912,7 @@ class SymbolMerger extends AbstractListingMerger {
 	 * A convenience class that is simply a hash set containing long values.
 	 */
 	private class LongHashSet extends HashSet<Long> {
-		private static final long serialVersionUID = 1;
+		private final static long serialVersionUID = 1;
 
 		public boolean add(long l) {
 			return super.add(Long.valueOf(l));

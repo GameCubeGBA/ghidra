@@ -427,8 +427,8 @@ public class GraphViewerUtils {
 	}
 
 	private static Double zoomOutRatio(Dimension currentSize, Dimension targetSize) {
-		Double widthRatio = (double) targetSize.width / currentSize.width;
-		Double heightRatio = (double) targetSize.height / currentSize.height;
+		Double widthRatio = (double) targetSize.width / (double) currentSize.width;
+		Double heightRatio = (double) targetSize.height / (double) currentSize.height;
 
 		return (widthRatio < heightRatio) ? widthRatio : heightRatio;
 	}

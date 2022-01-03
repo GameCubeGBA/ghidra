@@ -112,20 +112,20 @@ public class StructureEditorLockedEnablementTest extends AbstractStructureEditor
 				FavoritesAction favoritesAction = (FavoritesAction) action;
 				String name = favoritesAction.getName();
 				checkEnablement(action,
-					"byte".equals(name) || "word".equals(name) || "dword".equals(name) ||
-						"qword".equals(name) || "int".equals(name) || "long".equals(name) ||
-						"uint".equals(name) || "ulong".equals(name) || "float".equals(name) ||
-						"double".equals(name) || "longdouble".equals(name) || "char".equals(name) ||
-						"string".equals(name) || "TerminatedCString".equals(name) ||
-						"TerminatedUnicode".equals(name) || "pointer".equals(name));
+					name.equals("byte") || name.equals("word") || name.equals("dword") ||
+						name.equals("qword") || name.equals("int") || name.equals("long") ||
+						name.equals("uint") || name.equals("ulong") || name.equals("float") ||
+						name.equals("double") || name.equals("longdouble") || name.equals("char") ||
+						name.equals("string") || name.equals("TerminatedCString") ||
+						name.equals("TerminatedUnicode") || name.equals("pointer"));
 			}
 			else if (action instanceof CycleGroupAction) {
 				CycleGroupAction cycleGroupAction = (CycleGroupAction) action;
 				String name = cycleGroupAction.getName();
 				checkEnablement(action,
-					"Cycle: byte,word,dword,qword".equals(name) ||
-						"Cycle: float,double".equals(name) ||
-						"Cycle: char,string,unicode".equals(name));
+					name.equals("Cycle: byte,word,dword,qword") ||
+						name.equals("Cycle: float,double") ||
+						name.equals("Cycle: char,string,unicode"));
 			}
 			else {
 				checkEnablement(action, false);
@@ -162,20 +162,20 @@ public class StructureEditorLockedEnablementTest extends AbstractStructureEditor
 				FavoritesAction favoritesAction = (FavoritesAction) action;
 				String name = favoritesAction.getName();
 				checkEnablement(action,
-					"byte".equals(name) || "word".equals(name) || "dword".equals(name) ||
-						"qword".equals(name) || "int".equals(name) || "long".equals(name) ||
-						"uint".equals(name) || "ulong".equals(name) || "float".equals(name) ||
-						"double".equals(name) || "longdouble".equals(name) || "char".equals(name) ||
-						"string".equals(name) || "TerminatedCString".equals(name) ||
-						"TerminatedUnicode".equals(name) || "pointer".equals(name));
+					name.equals("byte") || name.equals("word") || name.equals("dword") ||
+						name.equals("qword") || name.equals("int") || name.equals("long") ||
+						name.equals("uint") || name.equals("ulong") || name.equals("float") ||
+						name.equals("double") || name.equals("longdouble") || name.equals("char") ||
+						name.equals("string") || name.equals("TerminatedCString") ||
+						name.equals("TerminatedUnicode") || name.equals("pointer"));
 			}
 			else if (action instanceof CycleGroupAction) {
 				CycleGroupAction cycleGroupAction = (CycleGroupAction) action;
 				String name = cycleGroupAction.getName();
 				checkEnablement(action,
-					"Cycle: byte,word,dword,qword".equals(name) ||
-						"Cycle: float,double".equals(name) ||
-						"Cycle: char,string,unicode".equals(name));
+					name.equals("Cycle: byte,word,dword,qword") ||
+						name.equals("Cycle: float,double") ||
+						name.equals("Cycle: char,string,unicode"));
 			}
 			else {
 				checkEnablement(action, false);
@@ -196,15 +196,20 @@ public class StructureEditorLockedEnablementTest extends AbstractStructureEditor
 				int numBytes = getModel().getMaxReplaceLength(0);
 				checkEnablement(action, len <= numBytes);
 			}
-			else checkEnablement(action, (action instanceof CycleGroupAction) ||
-                    (action instanceof InsertUndefinedAction) || (action instanceof EditFieldAction) ||
-                    (action instanceof AddBitFieldAction) ||
-                    (action instanceof ShowComponentPathAction) || (action instanceof MoveDownAction) ||
-                    (action instanceof DuplicateAction) ||
-                    (action instanceof DuplicateMultipleAction) || (action instanceof ClearAction) ||
-                    (action instanceof DeleteAction) || (action instanceof ArrayAction) ||
-                    (action instanceof PointerAction) || (action instanceof HexNumbersAction) ||
-                    (action instanceof CreateInternalStructureAction));
+			else if ((action instanceof CycleGroupAction) ||
+				(action instanceof InsertUndefinedAction) || (action instanceof EditFieldAction) ||
+				(action instanceof AddBitFieldAction) ||
+				(action instanceof ShowComponentPathAction) || (action instanceof MoveDownAction) ||
+				(action instanceof DuplicateAction) ||
+				(action instanceof DuplicateMultipleAction) || (action instanceof ClearAction) ||
+				(action instanceof DeleteAction) || (action instanceof ArrayAction) ||
+				(action instanceof PointerAction) || (action instanceof HexNumbersAction) ||
+				(action instanceof CreateInternalStructureAction)) {
+				checkEnablement(action, true);
+			}
+			else {
+				checkEnablement(action, false);
+			}
 		}
 	}
 
@@ -221,14 +226,19 @@ public class StructureEditorLockedEnablementTest extends AbstractStructureEditor
 				int numBytes = getModel().getMaxReplaceLength(3);
 				checkEnablement(action, len <= numBytes);
 			}
-			else checkEnablement(action, (action instanceof CycleGroupAction) ||
-                    (action instanceof InsertUndefinedAction) || (action instanceof EditFieldAction) ||
-                    (action instanceof AddBitFieldAction) ||
-                    (action instanceof ShowComponentPathAction) || (action instanceof MoveUpAction) ||
-                    (action instanceof MoveDownAction) || (action instanceof ClearAction) ||
-                    (action instanceof DeleteAction) || (action instanceof ArrayAction) ||
-                    (action instanceof PointerAction) || (action instanceof HexNumbersAction) ||
-                    (action instanceof CreateInternalStructureAction));
+			else if ((action instanceof CycleGroupAction) ||
+				(action instanceof InsertUndefinedAction) || (action instanceof EditFieldAction) ||
+				(action instanceof AddBitFieldAction) ||
+				(action instanceof ShowComponentPathAction) || (action instanceof MoveUpAction) ||
+				(action instanceof MoveDownAction) || (action instanceof ClearAction) ||
+				(action instanceof DeleteAction) || (action instanceof ArrayAction) ||
+				(action instanceof PointerAction) || (action instanceof HexNumbersAction) ||
+				(action instanceof CreateInternalStructureAction)) {
+				checkEnablement(action, true);
+			}
+			else {
+				checkEnablement(action, false);
+			}
 		}
 	}
 
@@ -244,15 +254,20 @@ public class StructureEditorLockedEnablementTest extends AbstractStructureEditor
 			if (action instanceof FavoritesAction) {
 				checkEnablement(action, true);
 			}
-			else checkEnablement(action, (action instanceof CycleGroupAction) ||
-                    (action instanceof InsertUndefinedAction) || (action instanceof EditFieldAction) ||
-                    (action instanceof AddBitFieldAction) ||
-                    (action instanceof ShowComponentPathAction) || (action instanceof MoveUpAction) ||
-                    (action instanceof ClearAction) || (action instanceof DeleteAction) ||
-                    (action instanceof DuplicateAction) ||
-                    (action instanceof DuplicateMultipleAction) || (action instanceof ArrayAction) ||
-                    (action instanceof PointerAction) || (action instanceof HexNumbersAction) ||
-                    (action instanceof CreateInternalStructureAction));
+			else if ((action instanceof CycleGroupAction) ||
+				(action instanceof InsertUndefinedAction) || (action instanceof EditFieldAction) ||
+				(action instanceof AddBitFieldAction) ||
+				(action instanceof ShowComponentPathAction) || (action instanceof MoveUpAction) ||
+				(action instanceof ClearAction) || (action instanceof DeleteAction) ||
+				(action instanceof DuplicateAction) ||
+				(action instanceof DuplicateMultipleAction) || (action instanceof ArrayAction) ||
+				(action instanceof PointerAction) || (action instanceof HexNumbersAction) ||
+				(action instanceof CreateInternalStructureAction)) {
+				checkEnablement(action, true);
+			}
+			else {
+				checkEnablement(action, false);
+			}
 		}
 	}
 
@@ -270,12 +285,17 @@ public class StructureEditorLockedEnablementTest extends AbstractStructureEditor
 					getModel().getNumBytesInRange(getModel().getSelectedRangeContaining(2));
 				checkEnablement(action, len <= numBytes);
 			}
-			else checkEnablement(action, (action instanceof CycleGroupAction) ||
-                    (action instanceof InsertUndefinedAction) || (action instanceof MoveUpAction) ||
-                    (action instanceof MoveDownAction) || (action instanceof ClearAction) ||
-                    (action instanceof DeleteAction) || (action instanceof ArrayAction) ||
-                    (action instanceof PointerAction) || (action instanceof HexNumbersAction) ||
-                    (action instanceof CreateInternalStructureAction));
+			else if ((action instanceof CycleGroupAction) ||
+				(action instanceof InsertUndefinedAction) || (action instanceof MoveUpAction) ||
+				(action instanceof MoveDownAction) || (action instanceof ClearAction) ||
+				(action instanceof DeleteAction) || (action instanceof ArrayAction) ||
+				(action instanceof PointerAction) || (action instanceof HexNumbersAction) ||
+				(action instanceof CreateInternalStructureAction)) {
+				checkEnablement(action, true);
+			}
+			else {
+				checkEnablement(action, false);
+			}
 		}
 	}
 
@@ -293,8 +313,13 @@ public class StructureEditorLockedEnablementTest extends AbstractStructureEditor
 					getModel().getNumBytesInRange(getModel().getSelectedRangeContaining(2));
 				checkEnablement(action, len <= numBytes);
 			}
-			else checkEnablement(action, (action instanceof CycleGroupAction) || (action instanceof ClearAction) ||
-                    (action instanceof DeleteAction) || (action instanceof HexNumbersAction));
+			else if ((action instanceof CycleGroupAction) || (action instanceof ClearAction) ||
+				(action instanceof DeleteAction) || (action instanceof HexNumbersAction)) {
+				checkEnablement(action, true);
+			}
+			else {
+				checkEnablement(action, false);
+			}
 		}
 	}
 

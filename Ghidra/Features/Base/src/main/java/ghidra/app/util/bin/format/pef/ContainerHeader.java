@@ -42,11 +42,11 @@ import java.util.List;
  * </pre>
  */
 public class ContainerHeader implements StructConverter {
-	public static final String TAG1 = "Joy!";
-	public static final String TAG2 = "peff";
+	public final static String TAG1 = "Joy!";
+	public final static String TAG2 = "peff";
 
-	public static final String ARCHITECTURE_PPC = "pwpc";
-	public static final String ARCHITECTURE_68k = "m68k";
+	public final static String ARCHITECTURE_PPC = "pwpc";
+	public final static String ARCHITECTURE_68k = "m68k";
 
 	private String  tag1;
 	private String  tag2;

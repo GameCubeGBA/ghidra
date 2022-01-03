@@ -99,8 +99,11 @@ public class AddressFieldLocation extends CodeUnitLocation {
 		if (!super.equals(obj) || (getClass() != obj.getClass()))
 			return false;
 		AddressFieldLocation other = (AddressFieldLocation) obj;
-        return Objects.equals(addrRepresentation, other.addrRepresentation);
-    }
+		if (!Objects.equals(addrRepresentation, other.addrRepresentation)) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public void saveState(SaveState obj) {

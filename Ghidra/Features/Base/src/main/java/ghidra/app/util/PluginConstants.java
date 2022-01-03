@@ -74,31 +74,31 @@ public interface PluginConstants {
 	/**
 	 * Name of the Options object for Search.
 	 */
-    String SEARCH_OPTION_NAME = "Search";
+	public static final String SEARCH_OPTION_NAME = "Search";
 	/**
 	 * Option name for highlight color
 	 */
-    String SEARCH_HIGHLIGHT_COLOR_NAME = " Highlight Color";
+	public static final String SEARCH_HIGHLIGHT_COLOR_NAME = " Highlight Color";
 
 	/**
 	 * Option name for highlight color used when something to highlight is at the current
 	 * address. 
 	 */
-    String SEARCH_HIGHLIGHT_CURRENT_COLOR_NAME =
+	public static final String SEARCH_HIGHLIGHT_CURRENT_COLOR_NAME =
 		"Highlight Color for Current Match";
 	/**
 	 * Option name for whether to highlight search results.
 	 */
-    String SEARCH_HIGHLIGHT_NAME = "Highlight Search Results";
+	public static final String SEARCH_HIGHLIGHT_NAME = "Highlight Search Results";
 
 	/**
 	 * Color for highlighting for searches.
 	 */
-    Color SEARCH_HIGHLIGHT_COLOR = new Color(255, 255, 200);
+	public static final Color SEARCH_HIGHLIGHT_COLOR = new Color(255, 255, 200);
 	/**
 	 * Default highlight color used when something to highlight is at the current
 	 * address. 
 	 */
-    Color SEARCH_HIGHLIGHT_CURRENT_ADDR_COLOR = Color.YELLOW;
+	public static final Color SEARCH_HIGHLIGHT_CURRENT_ADDR_COLOR = Color.YELLOW;
 
 }

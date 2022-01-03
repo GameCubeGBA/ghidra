@@ -58,7 +58,7 @@ public class GenericAddressTest extends AbstractGenericTest {
 			}
 			catch (DuplicateNameException e) {
 				e.printStackTrace();
-				Assert.fail("Unexpected Error: " + e);
+				Assert.fail("Unexpected Error: " + e.toString());
 			}
 		}
 	}

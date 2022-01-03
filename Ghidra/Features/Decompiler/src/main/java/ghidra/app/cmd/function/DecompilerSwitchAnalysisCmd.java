@@ -83,7 +83,7 @@ public class DecompilerSwitchAnalysisCmd extends BackgroundCommand {
 
 			String errMsg = getStatusMsg();
 			if (decompilerResults.getHighFunction() == null) {
-				String msg = (errMsg != null && !errMsg.isEmpty()) ? (": " + errMsg) : "";
+				String msg = (errMsg != null && errMsg.length() != 0) ? (": " + errMsg) : "";
 				Msg.debug(this, "  Failed to decompile function: " + f.getName() + msg);
 			}
 		}

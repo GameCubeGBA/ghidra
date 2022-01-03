@@ -26,5 +26,5 @@ public interface CaptureFunctionDataTypesListener {
 	 * @param cmd command that was completed; the command has the 
 	 * status as to whether the capture was successful
 	 */
-    void captureFunctionDataTypesCompleted(CaptureFunctionDataTypesCmd cmd);
+	public void captureFunctionDataTypesCompleted(CaptureFunctionDataTypesCmd cmd);
 }

@@ -40,16 +40,16 @@ import ghidra.util.timer.GTimerMonitor;
 public class DecompileProcess {
 
 	//	public static DecompileProcess decompProcess = null;
-    private static final byte[] command_start = { 0, 0, 1, 2 };
-	private static final byte[] command_end = { 0, 0, 1, 3 };
-	private static final byte[] query_response_start = { 0, 0, 1, 8 };
-	private static final byte[] query_response_end = { 0, 0, 1, 9 };
-	private static final byte[] string_start = { 0, 0, 1, 14 };
-	private static final byte[] string_end = { 0, 0, 1, 15 };
-	private static final byte[] exception_start = { 0, 0, 1, 10 };
-	private static final byte[] exception_end = { 0, 0, 1, 11 };
-	private static final byte[] byte_start = { 0, 0, 1, 12 };
-	private static final byte[] byte_end = { 0, 0, 1, 13 };
+	private final static byte[] command_start = { 0, 0, 1, 2 };
+	private final static byte[] command_end = { 0, 0, 1, 3 };
+	private final static byte[] query_response_start = { 0, 0, 1, 8 };
+	private final static byte[] query_response_end = { 0, 0, 1, 9 };
+	private final static byte[] string_start = { 0, 0, 1, 14 };
+	private final static byte[] string_end = { 0, 0, 1, 15 };
+	private final static byte[] exception_start = { 0, 0, 1, 10 };
+	private final static byte[] exception_end = { 0, 0, 1, 11 };
+	private final static byte[] byte_start = { 0, 0, 1, 12 };
+	private final static byte[] byte_end = { 0, 0, 1, 13 };
 
 	//private static final int MAXIMUM_RESULT_SIZE = 50 * 1024 * 1024; // maximum result size in bytes to allow from decompiler
 
@@ -81,10 +81,13 @@ public class DecompileProcess {
 		exepath = new String[] { path };
 //		exepath = new String[] { "/usr/bin/valgrind", "--tool=memcheck", "--leak-check=yes", "--track-origins=yes", "--error-limit=no", "--log-file=/tmp/decompvalgrindout%p.txt", path };
 
-		timeoutRunnable = () -> {
-            dispose();
-            disposestate = DisposeState.DISPOSED_ON_TIMEOUT;
-        };
+		timeoutRunnable = new Runnable() {
+			@Override
+			public void run() {
+				dispose();
+				disposestate = DisposeState.DISPOSED_ON_TIMEOUT;
+			}
+		};
 	}
 
 	public void dispose() {
@@ -258,7 +261,7 @@ public class DecompileProcess {
 		String type = readQueryString();
 		String message = readQueryString();
 		readToBurst(); // Read exception terminator
-		if ("alignment".equals(type)) {
+		if (type.equals("alignment")) {
 			throw new IOException("Alignment error: " + message);
 		}
 		throw new DecompileException(type, message);
@@ -287,16 +290,16 @@ public class DecompileProcess {
 								getBytes();						// getBytes
 								break;
 							case 'C':
-								if ("getComments".equals(name)) {
+								if (name.equals("getComments")) {
 									getComments();
 								}
-								else if ("getCallFixup".equals(name)) {
+								else if (name.equals("getCallFixup")) {
 									getPcodeInject(InjectPayload.CALLFIXUP_TYPE);
 								}
-								else if ("getCallotherFixup".equals(name)) {
+								else if (name.equals("getCallotherFixup")) {
 									getPcodeInject(InjectPayload.CALLOTHERFIXUP_TYPE);
 								}
-								else if ("getCallMech".equals(name)) {
+								else if (name.equals("getCallMech")) {
 									getPcodeInject(InjectPayload.CALLMECHANISM_TYPE);
 								}
 								else {
@@ -316,7 +319,7 @@ public class DecompileProcess {
 								getPcodePacked();				// getPacked
 								break;
 							case 'R':
-								if ("getRegister".equals(name)) {
+								if (name.equals("getRegister")) {
 									getRegister();
 								}
 								else {
@@ -324,7 +327,7 @@ public class DecompileProcess {
 								}
 								break;
 							case 'S':
-								if ("getString".equals(name)) {
+								if (name.equals("getString")) {
 									getStringData();
 								}
 								else {
@@ -332,7 +335,7 @@ public class DecompileProcess {
 								}
 								break;
 							case 'T':
-								if ("getType".equals(name)) {
+								if (name.equals("getType")) {
 									getType();
 								}
 								else {
@@ -626,7 +629,7 @@ public class DecompileProcess {
 		String name = readQueryString();
 		String res = callback.getRegister(name);
 		write(query_response_start);
-		if ((res != null) && (!res.isEmpty())) {
+		if ((res != null) && (res.length() != 0)) {
 			writeString(res);
 		}
 		write(query_response_end);
@@ -681,7 +684,7 @@ public class DecompileProcess {
 		String context = readQueryString();
 		String res = callback.getPcodeInject(name, context, type);
 		write(query_response_start);
-		if ((res != null) && (!res.isEmpty())) {
+		if ((res != null) && (res.length() != 0)) {
 			writeString(res);
 		}
 		write(query_response_end);
@@ -696,7 +699,7 @@ public class DecompileProcess {
 		}
 		String res = callback.getCPoolRef(refs);
 		write(query_response_start);
-		if ((res != null) && (!res.isEmpty())) {
+		if ((res != null) && (res.length() != 0)) {
 			writeString(res);
 		}
 		write(query_response_end);
@@ -707,7 +710,7 @@ public class DecompileProcess {
 
 		String res = callback.getMappedSymbolsXML(addr);
 		write(query_response_start);
-		if ((res != null) && (!res.isEmpty())) {
+		if ((res != null) && (res.length() != 0)) {
 			writeString(res);
 		}
 		write(query_response_end);
@@ -718,7 +721,7 @@ public class DecompileProcess {
 		long id = Long.parseLong(idString, 16);
 		String res = callback.getNamespacePath(id);
 		write(query_response_start);
-		if ((res != null) && (!res.isEmpty())) {
+		if ((res != null) && (res.length() != 0)) {
 			writeString(res);
 		}
 		write(query_response_end);
@@ -742,7 +745,7 @@ public class DecompileProcess {
 		String refaddr = readQueryString();
 		String res = callback.getExternalRefXML(refaddr);
 		write(query_response_start);
-		if ((res != null) && (!res.isEmpty())) {
+		if ((res != null) && (res.length() != 0)) {
 			writeString(res);
 		}
 		write(query_response_end);
@@ -787,7 +790,7 @@ public class DecompileProcess {
 		String id = readQueryString();
 		String res = callback.getType(name, id);
 		write(query_response_start);
-		if ((res != null) && (!res.isEmpty())) {
+		if ((res != null) && (res.length() != 0)) {
 			writeString(res);
 		}
 		write(query_response_end);

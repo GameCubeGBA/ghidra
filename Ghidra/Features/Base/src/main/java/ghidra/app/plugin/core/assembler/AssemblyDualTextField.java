@@ -125,7 +125,7 @@ public class AssemblyDualTextField {
 
 		@Override
 		public String toString() {
-			return display;
+			return getDisplay();
 		}
 
 		@Override

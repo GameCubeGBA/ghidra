@@ -317,7 +317,7 @@ public class FunctionEditorModel {
 	}
 
 	public boolean hasValidName() {
-		if (name.isEmpty()) {
+		if (name.length() == 0) {
 			statusText = "Missing function name";
 			return false;
 		}
@@ -413,7 +413,7 @@ public class FunctionEditorModel {
 			}
 			buf.append(FunctionSignature.VAR_ARGS_DISPLAY_STRING);
 		}
-		else if (parameters.isEmpty()) {
+		else if (parameters.size() == 0) {
 			buf.append(FunctionSignature.VOID_PARAM_DISPLAY_STRING);
 		}
 		buf.append(')');
@@ -421,7 +421,7 @@ public class FunctionEditorModel {
 	}
 
 	public String getNameString() {
-		return name.isEmpty() ? "?" : name;
+		return name.length() == 0 ? "?" : name;
 	}
 
 	private String getParamNameString(ParamInfo param) {
@@ -586,13 +586,14 @@ public class FunctionEditorModel {
 			}
 			autoParamCount = 0;
 			int paramCnt = parameters.size();
-            for (ParamInfo paramInfo : parameters) {
-                DataType dt = paramInfo.getDataType();
-                VariableStorage storage = paramInfo.getStorage();
-                signatureTransformed |= storage.isAutoStorage();
-                paramInfo.setFormalDataType(dt);
-                paramInfo.setStorage(storage.clone(program));
-            }
+			for (int i = 0; i < paramCnt; i++) {
+				ParamInfo paramInfo = parameters.get(i);
+				DataType dt = paramInfo.getDataType();
+				VariableStorage storage = paramInfo.getStorage();
+				signatureTransformed |= storage.isAutoStorage();
+				paramInfo.setFormalDataType(dt);
+				paramInfo.setStorage(storage.clone(program));
+			}
 		}
 		catch (InvalidInputException e) {
 			throw new AssertException(e); // unexpected
@@ -750,7 +751,7 @@ public class FunctionEditorModel {
 	public boolean canMoveParameterUp() {
 		// remember first row (return type) and auto-params cannot be moved.
 		int minRowToMoveUp = 2 + autoParamCount;
-		if (!parameters.isEmpty() && "this".equals(parameters.get(0).getName())) {
+		if (parameters.size() > 0 && parameters.get(0).getName().equals("this")) {
 			minRowToMoveUp++;
 		}
 		return selectedFunctionRows.length == 1 && selectedFunctionRows[0] >= minRowToMoveUp;
@@ -762,7 +763,7 @@ public class FunctionEditorModel {
 		}
 		// remember first row (return type) and auto-params cannot be moved.
 		int minRowToMoveDown = 1 + autoParamCount;
-		if (!parameters.isEmpty() && "this".equals(parameters.get(0).getName())) {
+		if (parameters.size() > 0 && parameters.get(0).getName().equals("this")) {
 			minRowToMoveDown++;
 		}
 		int selectedRow = selectedFunctionRows[0];
@@ -1011,7 +1012,7 @@ public class FunctionEditorModel {
 					}
 				}
 				if (changed && function.getSignatureSource() == SourceType.DEFAULT &&
-                        parameters.isEmpty() &&
+					parameters.size() == 0 &&
 					!Function.UNKNOWN_CALLING_CONVENTION_STRING.equals(callingConventionName)) {
 					function.setSignatureSource(SourceType.USER_DEFINED);
 				}

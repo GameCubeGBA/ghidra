@@ -27,7 +27,7 @@ import javax.security.auth.Subject;
  */
 public class GhidraPrincipal implements Principal, java.io.Serializable {
 	
-	public static final long serialVersionUID = 1L;
+	public final static long serialVersionUID = 1L;
 
 	private String username;
 	

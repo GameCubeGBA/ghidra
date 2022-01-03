@@ -54,7 +54,7 @@ public class ELFExternalSymbolResolver {
 		ProjectData projectData = program.getDomainFile().getParent().getProjectData();
 
 		Collection<Long> unresolvedExternalFunctionIds = getUnresolvedExternalFunctionIds(program);
-		if (unresolvedExternalFunctionIds.isEmpty()) {
+		if (unresolvedExternalFunctionIds.size() == 0) {
 			return;
 		}
 

@@ -151,10 +151,10 @@ public class DexHeaderFormatMarkup {
 			return;
 		}
 
-		for (EncodedMethod method : methods) {
+		for (int i = 0; i < methods.size(); ++i) {
 			monitor.checkCanceled();
 
-			EncodedMethod encodedMethod = method;
+			EncodedMethod encodedMethod = methods.get(i);
 
 			MethodIDItem methodID = header.getMethods().get(encodedMethod.getMethodIndex());
 			String methodName = DexUtil.convertToString(header, methodID.getNameIndex());
@@ -175,14 +175,15 @@ public class DexHeaderFormatMarkup {
 //				Address methodIndexAddress = baseAddress.add( DexUtil.LOOKUP_ADDRESS + ( methodIndex * 4 ) );
 //				Symbol primarySymbol = program.getSymbolTable().getPrimarySymbol( methodIndexAddress );
 //				program.getReferenceManager().addExternalReference( methodIndexAddress, (Namespace) null, primarySymbol.getName( ), null, SourceType.ANALYSIS, 0, RefType.EXTERNAL_REF );
-			} else {
+			}
+			else {
 				Address methodAddress =
-						baseAddress.add(DexUtil.METHOD_ADDRESS + encodedMethod.getCodeOffset());
+					baseAddress.add(DexUtil.METHOD_ADDRESS + encodedMethod.getCodeOffset());
 				createMethodSymbol(methodAddress, methodName, classNameSpace, log);
 				createMethodComment(methodAddress, header, item, methodID, encodedMethod, codeItem,
-						monitor);
+					monitor);
 				disassembleMethod(header, className, encodedMethod.isStatic(), methodAddress,
-						methodID, codeItem, monitor, log);
+					methodID, codeItem, monitor, log);
 			}
 		}
 	}
@@ -520,16 +521,16 @@ public class DexHeaderFormatMarkup {
 	private void processEncodedMethods(DexHeader header, ClassDefItem item,
 			List<EncodedMethod> methods, TaskMonitor monitor) throws Exception {
 
-		for (EncodedMethod encodedMethod : methods) {
+		for (int i = 0; i < methods.size(); ++i) {
 			monitor.checkCanceled();
 
-			EncodedMethod method = encodedMethod;
+			EncodedMethod method = methods.get(i);
 
 			MethodIDItem methodID = header.getMethods().get(method.getMethodIndex());
 
 			StringBuilder builder = new StringBuilder();
 			builder.append(
-					"Method Name: " + DexUtil.convertToString(header, methodID.getNameIndex()) + "\n");
+				"Method Name: " + DexUtil.convertToString(header, methodID.getNameIndex()) + "\n");
 			builder.append("Method Offset: 0x" + Long.toHexString(methodID.getFileOffset()) + "\n");
 			builder.append("Method Flags:\n");
 			builder.append(AccessFlags.toString(method.getAccessFlags()) + "\n");
@@ -541,7 +542,7 @@ public class DexHeaderFormatMarkup {
 			api.createData(address, dataType);
 			api.setPlateComment(address, builder.toString());
 			fragmentManager.encodedMethodsAddressSet.add(address,
-					address.add(dataType.getLength() - 1));
+				address.add(dataType.getLength() - 1));
 
 			processCodeItem(header, item, method, methodID);
 		}
@@ -1021,7 +1022,7 @@ public class DexHeaderFormatMarkup {
 
 	private void createStringSymbol(Address address, String string, String namespace) {
 		SymbolTable symbolTable = program.getSymbolTable();
-		if (!string.isEmpty()) {
+		if (string.length() > 0) {
 			Namespace nameSpace = DexUtil.getOrCreateNameSpace(program, namespace);
 			String symbolName = SymbolUtilities.replaceInvalidChars(string, true);
 			if (symbolName.length() > SymbolUtilities.MAX_SYMBOL_NAME_LENGTH) {

@@ -76,21 +76,22 @@ public class CodeUnitInfoPasteCmd implements Command {
 		Listing listing = program.getListing();
 		boolean offCutExists = false;
 
-        for (CodeUnitInfo info : infoList) {
-            Address a = startAddr.add(info.getIndex());
-            CodeUnit cu = listing.getCodeUnitAt(a);
-            if (cu == null) {
-                offCutExists = true;
-                continue;
-            }
-            if (pasteLabels) {
-                setFunction(listing, a, info);
-                setLabel(listing, symTable, a, info);
-            }
-            if (pasteComments) {
-                setComments(cu, a, info);
-            }
-        }
+		for (int i = 0; i < infoList.size(); i++) {
+			CodeUnitInfo info = infoList.get(i);
+			Address a = startAddr.add(info.getIndex());
+			CodeUnit cu = listing.getCodeUnitAt(a);
+			if (cu == null) {
+				offCutExists = true;
+				continue;
+			}
+			if (pasteLabels) {
+				setFunction(listing, a, info);
+				setLabel(listing, symTable, a, info);
+			}
+			if (pasteComments) {
+				setComments(cu, a, info);
+			}
+		}
 
 		if (offCutExists) {
 			messages.append(
@@ -98,8 +99,12 @@ public class CodeUnitInfoPasteCmd implements Command {
 			return false;
 		}
 
-        return messages.length() == 0;
-    }
+		if (messages.length() != 0) {
+			return false;
+		}
+
+		return true;
+	}
 
 	/**
 	 * @see ghidra.framework.cmd.Command#getStatusMsg()
@@ -214,22 +219,24 @@ public class CodeUnitInfoPasteCmd implements Command {
 	}
 
 	private Variable findStackVar(Variable[] stackVars, int stackOffset, int firstUseOffset) {
-        for (Variable var : stackVars) {
-            if (stackOffset == var.getStackOffset() && firstUseOffset == var.getFirstUseOffset()) {
-                return var;
-            }
-        }
+		for (int k = 0; k < stackVars.length; k++) {
+			Variable var = stackVars[k];
+			if (stackOffset == var.getStackOffset() && firstUseOffset == var.getFirstUseOffset()) {
+				return var;
+			}
+		}
 		return null;
 	}
 
 	private Variable findVar(Variable[] vars, Address storageAddr, int firstUseOffset) {
-        for (Variable var : vars) {
-            Varnode varnode = var.getVariableStorage().getFirstVarnode();
-            if (varnode != null && firstUseOffset == var.getFirstUseOffset() &&
-                    storageAddr.equals(varnode.getAddress())) {
-                return var;
-            }
-        }
+		for (int k = 0; k < vars.length; k++) {
+			Variable var = vars[k];
+			Varnode varnode = var.getVariableStorage().getFirstVarnode();
+			if (varnode != null && firstUseOffset == var.getFirstUseOffset() &&
+				storageAddr.equals(varnode.getAddress())) {
+				return var;
+			}
+		}
 		return null;
 	}
 
@@ -352,17 +359,17 @@ public class CodeUnitInfoPasteCmd implements Command {
 	private String[] appendComment(String[] comment1, String[] comment2) {
 		// first check for duplicate comments
 		ArrayList<String> list = new ArrayList<String>();
-        for (String value : comment2) {
-            list.add(value);
-        }
-        for (String s : comment1) {
-            for (int j = 0; j < list.size(); j++) {
-                if (s.equals(list.get(j))) {
-                    list.remove(j);
-                    --j;
-                }
-            }
-        }
+		for (int i = 0; i < comment2.length; i++) {
+			list.add(comment2[i]);
+		}
+		for (int i = 0; i < comment1.length; i++) {
+			for (int j = 0; j < list.size(); j++) {
+				if (comment1[i].equals(list.get(j))) {
+					list.remove(j);
+					--j;
+				}
+			}
+		}
 		comment2 = new String[list.size()];
 		comment2 = list.toArray(comment2);
 

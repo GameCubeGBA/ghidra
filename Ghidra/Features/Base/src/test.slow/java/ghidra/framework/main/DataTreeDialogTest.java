@@ -47,7 +47,8 @@ public class DataTreeDialogTest extends AbstractGhidraHeadedIntegrationTest {
 	 * @param arg0
 	 */
 	public DataTreeDialogTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -375,8 +376,11 @@ public class DataTreeDialogTest extends AbstractGhidraHeadedIntegrationTest {
 		 */
 		@Override
 		public boolean accept(DomainFile df) {
-            return df.getName().startsWith("tN");
-        }
+			if (df.getName().startsWith("tN")) {
+				return true;
+			}
+			return false;
+		}
 	}
 
 }

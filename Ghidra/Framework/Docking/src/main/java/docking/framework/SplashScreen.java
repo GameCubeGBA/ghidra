@@ -262,7 +262,7 @@ public class SplashScreen extends JWindow {
 	 *
 	 * @return The frame to use as the splash screen's parent.
 	 */
-    private static synchronized JFrame getParentFrame() {
+	private synchronized static JFrame getParentFrame() {
 
 		if (hiddenFrame == null) {
 			// hiddenFrame = new HiddenDockingFrame(Application.getName());

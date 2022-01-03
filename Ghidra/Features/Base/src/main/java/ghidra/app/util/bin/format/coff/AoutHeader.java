@@ -23,7 +23,7 @@ import ghidra.util.exception.DuplicateNameException;
 import java.io.IOException;
 
 public class AoutHeader implements StructConverter {
-	public static final int SIZEOF = 28;
+	public final static int SIZEOF = 28;
 
 	protected short    magic;        // magic value - machine specific
 	protected short    vstamp;       // version stamp

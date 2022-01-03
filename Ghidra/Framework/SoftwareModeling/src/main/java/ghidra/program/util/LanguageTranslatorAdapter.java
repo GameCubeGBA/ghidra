@@ -247,15 +247,17 @@ public abstract class LanguageTranslatorAdapter implements LanguageTranslator {
 	protected static AddressSpace findSpaceSameName(AddressSpace oldSpace,
 			ArrayList<AddressSpace> newSpaces) throws IncompatibleLanguageException {
 
-        for (AddressSpace space : newSpaces) {
-            if (space.getName().equals(oldSpace.getName())) {
-                if (oldSpace.getSize() > space.getSize()) {
-                    throw new IncompatibleLanguageException("Old language space (" +
-                            oldSpace.getName() + ") has larger address space than the new language");
-                }
-                return space;
-            }
-        }
+		Iterator<AddressSpace> it = newSpaces.iterator();
+		while (it.hasNext()) {
+			AddressSpace space = it.next();
+			if (space.getName().equals(oldSpace.getName())) {
+				if (oldSpace.getSize() > space.getSize()) {
+					throw new IncompatibleLanguageException("Old language space (" +
+						oldSpace.getName() + ") has larger address space than the new language");
+				}
+				return space;
+			}
+		}
 		return null;
 	}
 
@@ -421,8 +423,8 @@ public abstract class LanguageTranslatorAdapter implements LanguageTranslator {
 
 	@Override
 	public String toString() {
-		return "[" + oldLanguageID + " (Version " + oldLanguageVersion + ")] -> [" +
-                newLanguageID + " (Version " + newLanguageVersion + " )] {" + getClass().getName() +
+		return "[" + getOldLanguageID() + " (Version " + getOldVersion() + ")] -> [" +
+			getNewLanguageID() + " (Version " + getNewVersion() + " )] {" + getClass().getName() +
 			"}";
 	}
 
@@ -478,7 +480,7 @@ public abstract class LanguageTranslatorAdapter implements LanguageTranslator {
 				return oldCompilerSpecID;
 			}
 		}
-		if (!compilerSpecDescriptions.isEmpty()) {
+		if (compilerSpecDescriptions.size() != 0) {
 			return compilerSpecDescriptions.get(0).getCompilerSpecID();
 		}
 		return oldCompilerSpecID;

@@ -23,7 +23,7 @@ import java.io.Serializable;
  * 
  */
 public class DataTable implements Serializable {
-    private static final long serialVersionUID = 1;
+    private final static long serialVersionUID = 1;
 
     private Array[] dataColumns;
 	

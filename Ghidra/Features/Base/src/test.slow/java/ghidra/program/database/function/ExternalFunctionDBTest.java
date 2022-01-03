@@ -46,7 +46,8 @@ public class ExternalFunctionDBTest extends AbstractGhidraHeadedIntegrationTest 
 	 * @param arg0
 	 */
 	public ExternalFunctionDBTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

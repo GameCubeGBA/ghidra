@@ -42,7 +42,7 @@ import ghidra.util.exception.NoValueException;
  * appropriate add() and get() methods.
  */
 class PropertyPage implements Serializable {
-    private static final long serialVersionUID = 1;
+    private final static long serialVersionUID = 1;
     private ShortKeyIndexer indexer;
 	private ShortKeySet keySet;	// set of offsets on page having property
 	private DataTable table;
@@ -417,7 +417,7 @@ class PropertyPage implements Serializable {
         }
 
 		boolean result = keySet.remove(offset);
-        if (keySet.isEmpty()) {
+        if (keySet.size() == 0) {
             keySet = new RedBlackKeySet((short)(pageSize-1));
         }
         int row = getRow(offset,false);

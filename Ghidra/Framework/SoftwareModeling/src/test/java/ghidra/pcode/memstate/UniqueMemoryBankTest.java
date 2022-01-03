@@ -46,7 +46,8 @@ public class UniqueMemoryBankTest extends AbstractGenericTest {
 	}
 
 	public UniqueMemoryBankTest() {
-    }
+		super();
+	}
 
 	@Test
 	public void WordInfoBasicTest() {

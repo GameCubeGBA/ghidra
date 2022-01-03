@@ -44,9 +44,9 @@ import ghidra.util.DataConverter;
  */
 public class PointerDataType extends BuiltIn implements Pointer {
 
-	public static final PointerDataType dataType = new PointerDataType();
+	public final static PointerDataType dataType = new PointerDataType();
 
-	public static final int MAX_POINTER_SIZE_BYTES = 8;
+	public final static int MAX_POINTER_SIZE_BYTES = 8;
 
 	public static final String POINTER_NAME = "pointer";
 	public static final String POINTER_LABEL_PREFIX = "PTR";
@@ -275,7 +275,7 @@ public class PointerDataType extends BuiltIn implements Pointer {
 	public String getDisplayName() {
 		// NOTE: Pointer display name only specifies length if null base type
 		if (displayName == null) {
-			DataType dt = referencedDataType;
+			DataType dt = getDataType();
 			if (dt == null) {
 				displayName = POINTER_NAME;
 				if (length > 0) {
@@ -315,14 +315,14 @@ public class PointerDataType extends BuiltIn implements Pointer {
 			sbuf.append("-bit ");
 		}
 		sbuf.append(POINTER_NAME);
-		DataType dt = referencedDataType;
+		DataType dt = getDataType();
 		if (dt != null) {
 			sbuf.append(" to ");
 			if (dt instanceof Pointer) {
-				sbuf.append(referencedDataType.getDescription());
+				sbuf.append(getDataType().getDescription());
 			}
 			else {
-				sbuf.append(referencedDataType.getDisplayName());
+				sbuf.append(getDataType().getDisplayName());
 			}
 		}
 		return sbuf.toString();
@@ -504,7 +504,7 @@ public class PointerDataType extends BuiltIn implements Pointer {
 
 		isEquivalentActive.set(true);
 		try {
-			return referencedDataType.isEquivalent(otherDataType);
+			return getDataType().isEquivalent(otherDataType);
 		}
 		finally {
 			isEquivalentActive.set(false);
@@ -548,7 +548,7 @@ public class PointerDataType extends BuiltIn implements Pointer {
 
 	@Override
 	public CategoryPath getCategoryPath() {
-		DataType dt = referencedDataType;
+		DataType dt = getDataType();
 		if (dt == null) {
 			return CategoryPath.ROOT;
 		}

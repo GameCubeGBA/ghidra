@@ -718,7 +718,7 @@ public abstract class LocalFileSystem implements FileSystem {
 	 * @throws InvalidNameException if name is invalid
 	 */
 	public void testValidName(String name, boolean isPath) throws InvalidNameException {
-		if (name == null || name.isEmpty()) {
+		if (name == null || name.length() == 0) {
 			throw new InvalidNameException("path or name is empty or null");
 		}
 
@@ -809,14 +809,14 @@ public abstract class LocalFileSystem implements FileSystem {
 	 * @param parentPath full parent path
 	 * @param name child folder or item name
 	 */
-	protected static final String getPath(String parentPath, String name) {
+	protected final static String getPath(String parentPath, String name) {
 		if (parentPath.length() == 1) {
 			return parentPath + name;
 		}
 		return parentPath + SEPARATOR_CHAR + name;
 	}
 
-	protected static final String getParentPath(String path) {
+	protected final static String getParentPath(String path) {
 		if (path.length() == 1) {
 			return null;
 		}
@@ -827,7 +827,7 @@ public abstract class LocalFileSystem implements FileSystem {
 		return path.substring(0, index);
 	}
 
-	protected static final String getName(String path) {
+	protected final static String getName(String path) {
 		if (path.length() == 1) {
 			return path;
 		}
@@ -888,7 +888,9 @@ public abstract class LocalFileSystem implements FileSystem {
 		}
 		StringBuilder buf = new StringBuilder();
 		// keep number of hidden prefix chars even
-        buf.append(String.valueOf(HIDDEN_DIR_PREFIX_CHAR).repeat(Math.max(0, prefixCount)));
+		for (int i = 0; i < prefixCount; ++i) {
+			buf.append(HIDDEN_DIR_PREFIX_CHAR);
+		}
 		buf.append(name);
 		return buf.toString();
 	}

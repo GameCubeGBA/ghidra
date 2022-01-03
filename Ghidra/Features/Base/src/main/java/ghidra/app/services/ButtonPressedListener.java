@@ -37,6 +37,6 @@ public interface ButtonPressedListener {
 	 * @param field field from the ListingPanel
 	 * @param event mouse event for the button pressed
 	 */
-    void buttonPressed(ProgramLocation location,
-                       FieldLocation fieldLocation, ListingField field, MouseEvent event);
+	public void buttonPressed(ProgramLocation location, 
+				FieldLocation fieldLocation, ListingField field, MouseEvent event); 
 }

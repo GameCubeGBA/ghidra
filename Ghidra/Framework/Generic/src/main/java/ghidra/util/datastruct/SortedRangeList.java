@@ -43,9 +43,11 @@ public class SortedRangeList implements Iterable<Range> {
 	 */
 	public SortedRangeList(SortedRangeList list) {
 		set = new TreeSet<>();
-        for (Range r : list.set) {
-            addRange(r.min, r.max);
-        }
+		Iterator<Range> it = list.set.iterator();
+		while (it.hasNext()) {
+			Range r = it.next();
+			addRange(r.min, r.max);
+		}
 	}
 
 	/**
@@ -300,7 +302,9 @@ public class SortedRangeList implements Iterable<Range> {
 		SortedSet<Range> tail = set.tailSet(key);
 		if (!tail.isEmpty()) {
 			Range next = tail.first();
-            return next.min <= max;
+			if (next.min <= max) {
+				return true;
+			}
 		}
 		return false;
 	}

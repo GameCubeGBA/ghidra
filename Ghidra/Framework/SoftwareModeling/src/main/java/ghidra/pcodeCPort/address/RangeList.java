@@ -149,8 +149,11 @@ public class RangeList {
 		if ( !iter.get().getSpace().equals( addr.getSpace() ) ) {
 			return false;
 		}
-        return Utils.unsignedCompare(iter.get().getLast(), addr.getOffset() + size - 1) >= 0;
-    }
+		if ( Utils.unsignedCompare( iter.get().getLast(), addr.getOffset() + size - 1 ) >= 0 ) {
+			return true;
+		}
+		return false;
+	}
 
 	// Return size of biggest range (up to maxsize) starting at addr
 	// which is completely covered by this rangelist

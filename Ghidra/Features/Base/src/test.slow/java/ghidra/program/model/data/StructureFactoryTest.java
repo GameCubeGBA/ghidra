@@ -49,7 +49,8 @@ public class StructureFactoryTest extends AbstractGhidraHeadedIntegrationTest {
 	 * @param testName
 	 */
 	public StructureFactoryTest() {
-    }
+		super();
+	}
 
 	private Program buildProgram(String programName) throws Exception {
 		ProgramBuilder builder = new ProgramBuilder(programName, ProgramBuilder._TOY);

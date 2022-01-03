@@ -189,7 +189,7 @@ public class AbstractCodeBrowserNavigationTest extends AbstractGhidraHeadedInteg
 	}
 
 	protected TableComponentProvider<?>[] getProviders() {
-		TableServicePlugin plugin = getPlugin(tool, TableServicePlugin.class);
+		TableServicePlugin plugin = getPlugin(getTool(), TableServicePlugin.class);
 		return plugin.getManagedComponents();
 	}
 

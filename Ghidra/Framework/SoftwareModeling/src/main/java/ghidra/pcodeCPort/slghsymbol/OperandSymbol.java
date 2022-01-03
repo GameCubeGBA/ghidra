@@ -185,7 +185,7 @@ public class OperandSymbol extends SpecificSymbol {
 
 	@Override
 	public void print(PrintStream s, ParserWalker pos) {
-		pos.pushOperand(hand);
+		pos.pushOperand(getIndex());
 		if (triple != null) {
 			if (triple.getType() == symbol_type.subtable_symbol) {
 				pos.getConstructor().print(s, pos);

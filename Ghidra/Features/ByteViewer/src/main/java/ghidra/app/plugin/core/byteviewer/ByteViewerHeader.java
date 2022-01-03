@@ -18,13 +18,13 @@ package ghidra.app.plugin.core.byteviewer;
 
 import ghidra.util.table.GhidraTable;
 
-import javax.swing.*;
-import javax.swing.event.TableColumnModelListener;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.util.HashMap;
+import java.util.Iterator;
+
+import javax.swing.*;
+import javax.swing.event.TableColumnModelListener;
+import javax.swing.table.*;
 
 /**
  * JTableHeader that uses the default table column model to manage 
@@ -32,15 +32,24 @@ import java.util.HashMap;
  * component. Allows columns to be moved.
  */
 class ByteViewerHeader extends JTableHeader implements Scrollable {
+
 	private TableColumnModel columnModel;
+	private Component container;
 
 	private int separatorWidth;
 	private HashMap<Component, TableColumn> components; // table of components that map to columns
 
 	/**
-	 * Constructor
+	 * Constructor 
+	 * @param container Container that will be used to calculate the 
+	 * preferred size
 	 */
-	ByteViewerHeader() {
+	ByteViewerHeader(Component container) {
+
+		super();
+
+		this.container = container;
+		components = new HashMap<Component, TableColumn>();
 		Font font = new Font("Tahoma", Font.PLAIN, 11);
 		setFont(font);
 		setResizingAllowed(false);
@@ -167,17 +176,22 @@ class ByteViewerHeader extends JTableHeader implements Scrollable {
 	 */
 	private void recomputeColumnHeaders() {
 
-		for (Component c : components.keySet()) {
+		Iterator<Component> iter = components.keySet().iterator();
 
+		while (iter.hasNext()) {
+
+			Component c = iter.next();
 			TableColumn col = components.get(c);
 			int width = c.getPreferredSize().width;
 			int index = columnModel.getColumnIndex(col.getIdentifier());
 
 			if (index == 0) {
 				width += separatorWidth / 2;
-			} else if (index == components.size() - 1) {
+			}
+			else if (index == components.size() - 1) {
 				width += separatorWidth / 2;
-			} else {
+			}
+			else {
 				width += separatorWidth;
 			}
 			col.setMinWidth(width);

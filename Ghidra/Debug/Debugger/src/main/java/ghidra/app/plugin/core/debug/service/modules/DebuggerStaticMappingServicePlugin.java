@@ -978,8 +978,8 @@ public class DebuggerStaticMappingServicePlugin extends Plugin
 		manager.add(range, fromLifespan, toURL, toAddress.toString(true));
 	}
 
-	protected static AddressRange clippedRange(Trace trace, String spaceName, long min,
-                                               long max) {
+	static protected AddressRange clippedRange(Trace trace, String spaceName, long min,
+			long max) {
 		AddressSpace space = trace.getBaseAddressFactory().getAddressSpace(spaceName);
 		if (space == null) {
 			return null;
@@ -1457,8 +1457,11 @@ public class DebuggerStaticMappingServicePlugin extends Plugin
 			}
 		}
 		String fileName = df.getName().toLowerCase();
-        return fileName.contains(moduleLowerName);
-    }
+		if (fileName.contains(moduleLowerName)) {
+			return true;
+		}
+		return false;
+	}
 
 	@Override
 	public Map<TraceModule, SectionMapProposal> proposeSectionMaps(

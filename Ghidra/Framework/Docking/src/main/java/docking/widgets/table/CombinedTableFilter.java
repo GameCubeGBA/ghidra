@@ -121,7 +121,10 @@ public class CombinedTableFilter<T> implements TableFilter<T> {
 		}
 
 		CombinedTableFilter<?> other = (CombinedTableFilter<?>) obj;
-        return Objects.equals(filters, other.filters);
-    }
+		if (!Objects.equals(filters, other.filters)) {
+			return false;
+		}
+		return true;
+	}
 
 }

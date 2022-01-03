@@ -33,13 +33,13 @@ public interface VTAssociationManager {
 	 * @return Returns the total number of associations that have been defined regardless of whether or
 	 * not they have been accepted.
 	 */
-    int getAssociationCount();
+	public int getAssociationCount();
 
 	/**
 	 * Returns a list of all defined associations regardless of whether or not they have been accepted.
 	 * @return  a list of all defined associations regardless of whether or not they have been accepted.
 	 */
-    List<VTAssociation> getAssociations();
+	public List<VTAssociation> getAssociations();
 
 	/**
 	 * Returns an association for the given source and destination addresses if one has been defined or
@@ -48,22 +48,22 @@ public interface VTAssociationManager {
 	 * @param destinationAddress the destination address for the association.
 	 * @return the association if it has been defined or else null.
 	 */
-    VTAssociation getAssociation(Address sourceAddress, Address destinationAddress);
+	public VTAssociation getAssociation(Address sourceAddress, Address destinationAddress);
 
 	/**
 	 * Returns a collection of all defined associations that have the given source address.
 	 * @param sourceAddress the source address to use to search for associations.
 	 * @return a collection of all defined associations that have the given source address.
 	 */
-    Collection<VTAssociation> getRelatedAssociationsBySourceAddress(Address sourceAddress);
+	public Collection<VTAssociation> getRelatedAssociationsBySourceAddress(Address sourceAddress);
 
 	/**
 	 * Returns a collection of all defined associations that have the given destination address.
 	 * @param destinationAddress the source address to use to search for associations.
 	 * @return a collection of all defined associations that have the given destination address.
 	 */
-    Collection<VTAssociation> getRelatedAssociationsByDestinationAddress(
-            Address destinationAddress);
+	public Collection<VTAssociation> getRelatedAssociationsByDestinationAddress(
+			Address destinationAddress);
 
 	/**
 	 * Returns a collection of all defined associations that have the either the given source
@@ -73,6 +73,6 @@ public interface VTAssociationManager {
 	 * @return a collection of all defined associations that have either the given source
 	 * address or the given destination address.
 	 */
-    Collection<VTAssociation> getRelatedAssociationsBySourceAndDestinationAddress(
-            Address sourceAddress, Address destinationAddress);
+	public Collection<VTAssociation> getRelatedAssociationsBySourceAndDestinationAddress(
+			Address sourceAddress, Address destinationAddress);
 }

@@ -119,7 +119,7 @@ public class GNUExternalDisassembler implements ExternalDisassembler {
 			}
 			Msg.warn(GNUExternalDisassembler.class,
 				"Language " + currentLanguageID + " illegally maps to multiple (" +
-					externalNames.size() + ") external gnu names: " + sb +
+					externalNames.size() + ") external gnu names: " + sb.toString() +
 					".  The first external name will be used.");
 		}
 	}
@@ -147,7 +147,7 @@ public class GNUExternalDisassembler implements ExternalDisassembler {
 
 			List<String> architectures = language.getLanguageDescription().getExternalNames("gnu");
 			//get first non-null
-			if (architectures != null && !architectures.isEmpty()) {
+			if (architectures != null && architectures.size() > 0) {
 				architecture = architectures.get(0);
 				if (architectures.size() > 1) {
 					reportMultipleMappings(language);
@@ -473,7 +473,7 @@ public class GNUExternalDisassembler implements ExternalDisassembler {
 		List<GnuDisassembledInstruction> disassembly =
 			runDisassembler(gdisConfig, address, bytes, disOptions);
 
-		if (disassembly == null || disassembly.isEmpty() || disassembly.get(0) == null) {
+		if (disassembly == null || disassembly.size() == 0 || disassembly.get(0) == null) {
 			return "(bad)";
 		}
 		return disassembly.get(0).toString();
@@ -513,7 +513,7 @@ public class GNUExternalDisassembler implements ExternalDisassembler {
 	}
 
 	private String converBytesToString(byte[] bytes) {
-		StringBuilder byteString = null;
+		String byteString = null;
 		for (byte thisByte : bytes) {
 			String thisByteString = Integer.toHexString(thisByte);
 			if (thisByteString.length() == 1) {
@@ -523,10 +523,10 @@ public class GNUExternalDisassembler implements ExternalDisassembler {
 				thisByteString = thisByteString.substring(thisByteString.length() - 2);
 			}
 			// append this byte's hex string to the larger word length string
-			byteString.append(thisByteString);
+			byteString = byteString + thisByteString;
 		}
 
-		return byteString.toString();
+		return byteString;
 	}
 
 	private boolean setupDisassembler(GdisConfig gdisConfig) {
@@ -561,7 +561,7 @@ public class GNUExternalDisassembler implements ExternalDisassembler {
 			}
 			buf.append(' ');
 		}
-		Msg.debug(this, "Starting gdis: " + buf);
+		Msg.debug(this, "Starting gdis: " + buf.toString());
 
 		try {
 			Runtime rt = Runtime.getRuntime();

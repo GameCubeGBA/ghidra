@@ -187,7 +187,7 @@ public class CreateEHCatchHandlerMapBackgroundCmd
 				}
 				catch (InvalidDataTypeException | InvalidInputException e) {
 					String message =
-						"Couldn't create name for catch handler at " + refAddress + ".";
+						"Couldn't create name for catch handler at " + refAddress.toString() + ".";
 					handleErrorMessage(program, compAddress, message + " " + e.getMessage(),
 						message);
 					result = false;

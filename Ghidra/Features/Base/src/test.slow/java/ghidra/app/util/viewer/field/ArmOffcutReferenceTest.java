@@ -42,7 +42,8 @@ public class ArmOffcutReferenceTest extends AbstractGhidraHeadedIntegrationTest 
 	private ProgramBuilder builder;
 
 	public ArmOffcutReferenceTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

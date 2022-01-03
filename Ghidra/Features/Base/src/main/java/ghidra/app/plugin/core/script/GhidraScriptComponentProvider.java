@@ -103,7 +103,7 @@ public class GhidraScriptComponentProvider extends ComponentProviderAdapter {
 	private final BundleHost bundleHost;
 	private final RefreshingBundleHostListener refreshingBundleHostListener =
 		new RefreshingBundleHostListener();
-	private final SwingUpdateManager refreshUpdateManager = new SwingUpdateManager(this::doRefresh);
+	final private SwingUpdateManager refreshUpdateManager = new SwingUpdateManager(this::doRefresh);
 
 	GhidraScriptComponentProvider(GhidraScriptMgrPlugin plugin, BundleHost bundleHost) {
 		super(plugin.getTool(), "Script Manager", plugin.getName());

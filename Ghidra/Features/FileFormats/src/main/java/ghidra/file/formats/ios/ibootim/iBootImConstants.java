@@ -17,17 +17,17 @@ package ghidra.file.formats.ios.ibootim;
 
 public final class iBootImConstants {
 
-	public static final String  SIGNATURE            =  "iBootIm";
-	public static final byte [] SIGNATURE_BYTES      =  { 'i', 'B', 'o', 'o', 't', 'I', 'm', '\0' };
-	public static final int     SIGNATURE_LENGTH     =  0x8;
+	public final static String  SIGNATURE            =  "iBootIm";
+	public final static byte [] SIGNATURE_BYTES      =  { 'i', 'B', 'o', 'o', 't', 'I', 'm', '\0' };
+	public final static int     SIGNATURE_LENGTH     =  0x8;
 
-	public static final int     PADDING_LENGTH       =  0x28;
+	public final static int     PADDING_LENGTH       =  0x28;
 
-	public static final int     COMPRESSION_LZSS_BE  =  0x6c7a7373;
-	public static final int     COMPRESSION_LZSS_LE  =  0x73737a6c;
+	public final static int     COMPRESSION_LZSS_BE  =  0x6c7a7373;
+	public final static int     COMPRESSION_LZSS_LE  =  0x73737a6c;
   
-	public static final int     FORMAT_ARGB          =  0x61726762;
-	public static final int     FORMAT_GREY          =  0x67726579;
+	public final static int     FORMAT_ARGB          =  0x61726762;
+	public final static int     FORMAT_GREY          =  0x67726579;
 
-	public static final int     HEADER_LENGTH        =  SIGNATURE_LENGTH + 4 + 4 + 4 + 2 + 2 + PADDING_LENGTH;
+	public final static int     HEADER_LENGTH        =  SIGNATURE_LENGTH + 4 + 4 + 4 + 2 + 2 + PADDING_LENGTH;
 }

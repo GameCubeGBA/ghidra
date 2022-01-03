@@ -83,10 +83,13 @@ class EditMemoryReferencePanel extends EditReferencePanel {
 
 	@Override
 	public void requestFocus() {
-		SwingUtilities.invokeLater(() -> {
-            // do later to override the default later nature of focus
-            toAddressField.requestFocus();
-        });
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				// do later to override the default later nature of focus
+				toAddressField.requestFocus();
+			}
+		});
 	}
 
 	private void buildPanel() {
@@ -94,7 +97,12 @@ class EditMemoryReferencePanel extends EditReferencePanel {
 
 		offsetCheckbox = new GCheckBox("Offset:");
 		offsetCheckbox.setHorizontalAlignment(SwingConstants.RIGHT);
-		offsetCheckbox.addChangeListener(e -> enableOffsetField(offsetCheckbox.isSelected()));
+		offsetCheckbox.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				enableOffsetField(offsetCheckbox.isSelected());
+			}
+		});
 		offsetField = new JTextField();
 
 		addrLabel = new GDLabel("Base Address:");
@@ -672,23 +680,27 @@ class EditMemoryReferencePanel extends EditReferencePanel {
 	@SuppressWarnings("unchecked")
 	void readXmlDataState(Element element) {
 		List<Element> programElements = element.getChildren("ADDR_HISTORY");
-        for (Element programElement : programElements) {
-            String programName = programElement.getAttributeValue("PROGRAM");
-            Program program = getOpenProgram(programName);
-            if (program != null) {
-                AddressFactory addrFactory = program.getAddressFactory();
-                List<Element> addrElements = programElement.getChildren("ADDRESS");
-                for (Element addrElement : addrElements) {
-                    String addrStr = addrElement.getAttributeValue("VALUE");
-                    if (addrStr != null) {
-                        Address addr = addrFactory.getAddress(addrStr);
-                        if (addr != null) {
-                            addHistoryAddress(program, addr);
-                        }
-                    }
-                }
-            }
-        }
+		Iterator<Element> iter = programElements.iterator();
+		while (iter.hasNext()) {
+			Element programElement = iter.next();
+			String programName = programElement.getAttributeValue("PROGRAM");
+			Program program = getOpenProgram(programName);
+			if (program != null) {
+				AddressFactory addrFactory = program.getAddressFactory();
+				List<Element> addrElements = programElement.getChildren("ADDRESS");
+				Iterator<Element> addrIter = addrElements.iterator();
+				while (addrIter.hasNext()) {
+					Element addrElement = addrIter.next();
+					String addrStr = addrElement.getAttributeValue("VALUE");
+					if (addrStr != null) {
+						Address addr = addrFactory.getAddress(addrStr);
+						if (addr != null) {
+							addHistoryAddress(program, addr);
+						}
+					}
+				}
+			}
+		}
 	}
 
 	void writeXmlDataState(Element element) {

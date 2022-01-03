@@ -30,7 +30,8 @@ public class DefaultDropDownSelectionDataModelTest extends AbstractGenericTest {
 	private DefaultDropDownSelectionDataModel<TestType> model;
 
 	public DefaultDropDownSelectionDataModelTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

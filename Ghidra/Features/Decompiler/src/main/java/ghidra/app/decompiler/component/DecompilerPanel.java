@@ -61,10 +61,10 @@ import util.CollectionUtils;
 public class DecompilerPanel extends JPanel implements FieldMouseListener, FieldLocationListener,
 		FieldSelectionListener, ClangHighlightListener {
 
-	private static final Color NON_FUNCTION_BACKGROUND_COLOR_DEF = new Color(220, 220, 220);
+	private final static Color NON_FUNCTION_BACKGROUND_COLOR_DEF = new Color(220, 220, 220);
 
 	// Default color for specially highlighted tokens
-    private static final Color SPECIAL_COLOR_DEF = new Color(255, 100, 0, 128);
+	private final static Color SPECIAL_COLOR_DEF = new Color(255, 100, 0, 128);
 
 	private final DecompilerController controller;
 	private final DecompileOptions options;

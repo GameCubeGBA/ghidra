@@ -30,7 +30,7 @@ import ghidra.program.model.pcode.PcodeOverride;
  *
  */
 public class PcodeEmitPacked extends PcodeEmit {
-	public static final int unimpl_tag = 0x20, inst_tag = 0x21, op_tag = 0x22, void_tag = 0x23,
+	public final static int unimpl_tag = 0x20, inst_tag = 0x21, op_tag = 0x22, void_tag = 0x23,
 			spaceid_tag = 0x24, addrsz_tag = 0x25, end_tag = 0x60;				// End of a number
 
 	public static class LabelRef {
@@ -55,6 +55,7 @@ public class PcodeEmitPacked extends PcodeEmit {
 	 * for unimplemented or empty responses.
 	 */
 	public PcodeEmitPacked() {
+		super();
 		buf = new PackedBytes(64);
 	}
 
@@ -83,9 +84,9 @@ public class PcodeEmitPacked extends PcodeEmit {
 		}
 		for (LabelRef ref : labelref) {
 			if ((ref.labelIndex >= labeldef.size()) || (labeldef.get(ref.labelIndex) == null)) {
-				throw new SleighException("Reference to non-existent sleigh label");
+				throw new SleighException("Reference to non-existant sleigh label");
 			}
-			long res = (long) labeldef.get(ref.labelIndex) - ref.opIndex;
+			long res = (long) labeldef.get(ref.labelIndex) - (long) ref.opIndex;
 			if (ref.labelSize < 8) {
 				long mask = -1;
 				mask >>>= (8 - ref.labelSize) * 8;

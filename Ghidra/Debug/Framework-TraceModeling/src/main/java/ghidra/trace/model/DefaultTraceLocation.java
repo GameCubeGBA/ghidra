@@ -80,8 +80,11 @@ public class DefaultTraceLocation implements TraceLocation {
 		if (!Objects.equals(this.address, that.address)) {
 			return false;
 		}
-        return Objects.equals(this.lifespan, that.lifespan);
-    }
+		if (!Objects.equals(this.lifespan, that.lifespan)) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public int hashCode() {
@@ -102,11 +105,14 @@ public class DefaultTraceLocation implements TraceLocation {
 		if (result != 0) {
 			return result;
 		}
-		result = DBTraceUtils.compareRanges(this.lifespan, that.getLifespan());
+		result = DBTraceUtils.compareRanges(this.getLifespan(), that.getLifespan());
 		if (result != 0) {
 			return result;
 		}
 		result = this.address.compareTo(that.getAddress());
-        return result;
-    }
+		if (result != 0) {
+			return result;
+		}
+		return 0;
+	}
 }

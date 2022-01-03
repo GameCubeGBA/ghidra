@@ -63,7 +63,12 @@ public class FixedBitSizeValueField extends JPanel {
 			buttonPanel.add(menuButton, BorderLayout.EAST);
 			add(buttonPanel, BorderLayout.EAST);
 			menuButton.setFocusable(false);
-			menuButton.addActionListener(e -> showPopup());
+			menuButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					showPopup();
+				}
+			});
 
 		}
 		add(valueField, BorderLayout.CENTER);
@@ -105,10 +110,10 @@ public class FixedBitSizeValueField extends JPanel {
 
 	public boolean processText() {
 		String text = valueField.getText().trim();
-		if (text.isEmpty()) {
+		if (text.length() == 0) {
 			return true;
 		}
-		if (signed && "-".equals(text)) {
+		if (signed && text.equals("-")) {
 			return true;
 		}
 		BigInteger value = getValue(text);
@@ -118,18 +123,24 @@ public class FixedBitSizeValueField extends JPanel {
 		if (value.compareTo(maxValue) > 0) {
 			return false;
 		}
-        return value.compareTo(minValue) >= 0;
-    }
+		if (value.compareTo(minValue) < 0) {
+			return false;
+		}
+		return true;
+	}
 	public void setMinMax(BigInteger min, BigInteger max) {
 		minValue = min;
 		maxValue = max;
 	}
 
 	protected void createPopup() {
-		ActionListener actionListener = e -> {
-            JCheckBoxMenuItem item = (JCheckBoxMenuItem)e.getSource();
-            menuActivated(item);
-        };
+		ActionListener actionListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JCheckBoxMenuItem item = (JCheckBoxMenuItem)e.getSource();
+				menuActivated(item);
+			}
+		};
 
 		popupMenu = new JPopupMenu();
 		menuItems.add(new JCheckBoxMenuItem("Hex, Unsigned"));
@@ -221,7 +232,7 @@ public class FixedBitSizeValueField extends JPanel {
 
 		}
 		else {
-			if ("-".equals(valueField.getText().trim())) {
+			if (valueField.getText().trim().equals("-")) {
 				setValue(null);
 			}
 		}
@@ -279,7 +290,9 @@ public class FixedBitSizeValueField extends JPanel {
 		if (maxValueString.length() > valueString.length()) {
 			StringBuffer buf = new StringBuffer();
 			int n = maxValueString.length() - valueString.length();
-            buf.append("0".repeat(n));
+			for(int i=0;i<n;i++) {
+				buf.append("0");
+			}
 			buf.append(valueString);
 			valueString = buf.toString();
 		}
@@ -384,7 +397,7 @@ public class FixedBitSizeValueField extends JPanel {
 	}
 
 	public void valueChanged() {
-		if (listeners.isEmpty()) {
+		if (listeners.size() == 0) {
 			return;
 		}
 		ChangeEvent ev = new ChangeEvent(this);

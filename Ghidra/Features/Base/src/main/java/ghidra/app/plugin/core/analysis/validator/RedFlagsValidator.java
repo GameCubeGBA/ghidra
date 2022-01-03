@@ -68,6 +68,6 @@ public class RedFlagsValidator extends PostAnalysisValidator {
 
 	@Override
 	public String toString() {
-		return NAME;
+		return getName();
 	}
 }

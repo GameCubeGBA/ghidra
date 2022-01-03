@@ -37,7 +37,7 @@ import ghidra.util.task.TaskMonitor;
  * Points to an array of IMAGE_DEBUG_DIRECTORY structures.
  */
 public class DebugDataDirectory extends DataDirectory {
-    private static final String NAME = "IMAGE_DIRECTORY_ENTRY_DEBUG";
+    private final static String NAME = "IMAGE_DIRECTORY_ENTRY_DEBUG";
 
     private DebugDirectoryParser parser;
 
@@ -199,7 +199,7 @@ public class DebugDataDirectory extends DataDirectory {
 			return;
 		}
 		DebugDataDirectory templateDDD = (DebugDataDirectory) template.getNTHeader().getOptionalHeader().getDataDirectories()[OptionalHeader.IMAGE_DIRECTORY_ENTRY_DEBUG];
-		DebugDirectory [] templateDD = templateDDD.parser.getDebugDirectories();
+		DebugDirectory [] templateDD = templateDDD.getParser().getDebugDirectories();
 		DebugDirectory [] dd = parser.getDebugDirectories();
 		for (int i = 0; i < dd.length; i++) {
 			dd[i].writeHeader(raf, dc);

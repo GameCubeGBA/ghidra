@@ -78,15 +78,17 @@ public class AlignedStructurePacker {
 			new AlignedComponentPacker(structure.getStoredPackingValue(), dataOrganization);
 
 		// Remove any default components from list
-        for (InternalDataTypeComponent dataTypeComponent : components) {
-            DataType componentDt = dataTypeComponent.getDataType();
-            if (DataType.DEFAULT == componentDt) {
-                // transform improper DEFAULT datatype use to Undefined1
-                dataTypeComponent.setDataType(Undefined1DataType.dataType);
-                componentsChanged = true;
-            }
-            ++componentCount;
-        }
+		Iterator<? extends InternalDataTypeComponent> componentIterator = components.iterator();
+		while (componentIterator.hasNext()) {
+			InternalDataTypeComponent dataTypeComponent = componentIterator.next();
+			DataType componentDt = dataTypeComponent.getDataType();
+			if (DataType.DEFAULT == componentDt) {
+				// transform improper DEFAULT datatype use to Undefined1
+				dataTypeComponent.setDataType(Undefined1DataType.dataType);
+				componentsChanged = true;
+			}
+			++componentCount;
+		}
 
 		int index = 0;
 		for (InternalDataTypeComponent dataTypeComponent : components) {

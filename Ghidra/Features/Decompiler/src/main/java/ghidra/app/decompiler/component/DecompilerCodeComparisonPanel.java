@@ -47,7 +47,7 @@ public abstract class DecompilerCodeComparisonPanel<T extends DualDecompilerFiel
 		extends CodeComparisonPanel<DualDecompilerFieldPanelCoordinator> {
 
 	private static final String NO_FUNCTION_TITLE = "No Function";
-	static final String OPTIONS_TITLE = "Decompiler";
+	final static String OPTIONS_TITLE = "Decompiler";
 
 	private JSplitPane splitPane;
 	private CDisplayPanel[] cPanels = new CDisplayPanel[2];

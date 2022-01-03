@@ -61,32 +61,35 @@ public class LabelIndirectStringReferencesScript extends GhidraScript {
 		}
 
 		// Check strings are found
-		if (strAddrSet.isEmpty()) {
+		if (strAddrSet.size() == 0) {
 			popup("No strings found.  Try running 'Search -> For Strings...' first.");
 			return;
 		}
 
 		println("Number of strings found: " + strAddrSet.size());
 
-        for (Address strAddr : strAddrSet) {
-            List<Address> allRefAddrs = new ArrayList<Address>();
-            allRefAddrs = findAllReferences(strAddr, monitor);
+		for (int i = 0; i < strAddrSet.size(); i++) {
+			Address strAddr = strAddrSet.get(i);
 
-            // Loop through refs to see which that have references to them (ie a label there)
-            for (Address refFromAddr : allRefAddrs) {
-                if (listing.getInstructionContaining(refFromAddr) == null) {
-                    // if the reference to the string is not inside an instruction Code Unit get the references to the string references
-                    Reference[] refRef = getReferencesTo(refFromAddr);
-                    // if there are references to the ptr_stringAddr then put a ptr_string label on it
-                    if (refRef.length > 0) {
-                        String newLabel = "ptr_" + listing.getDataAt(strAddr).getLabel() + "_" +
-                                refFromAddr;
-                        println(newLabel);
-                        symbolTable.createLabel(refFromAddr, newLabel, SourceType.ANALYSIS);
-                    }
-                }
-            }
-        }
+			List<Address> allRefAddrs = new ArrayList<Address>();
+			allRefAddrs = findAllReferences(strAddr, monitor);
+
+			// Loop through refs to see which that have references to them (ie a label there)
+			for (int j = 0; j < allRefAddrs.size(); j++) {
+				Address refFromAddr = allRefAddrs.get(j);
+				if (listing.getInstructionContaining(refFromAddr) == null) {
+					// if the reference to the string is not inside an instruction Code Unit get the references to the string references
+					Reference[] refRef = getReferencesTo(refFromAddr);
+					// if there are references to the ptr_stringAddr then put a ptr_string label on it
+					if (refRef.length > 0) {
+						String newLabel = "ptr_" + listing.getDataAt(strAddr).getLabel() + "_" +
+							allRefAddrs.get(j);
+						println(newLabel);
+						symbolTable.createLabel(allRefAddrs.get(j), newLabel, SourceType.ANALYSIS);
+					}
+				}
+			}
+		}
 // 		final Address [] addrArray = (Address[]) resultSet.toArray();
 // 		show(addrArray);
 	}

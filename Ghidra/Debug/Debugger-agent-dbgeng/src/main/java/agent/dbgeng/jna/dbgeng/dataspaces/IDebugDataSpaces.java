@@ -25,7 +25,7 @@ import com.sun.jna.platform.win32.COM.IUnknown;
 import agent.dbgeng.jna.dbgeng.UnknownWithUtils.VTableIndex;
 
 public interface IDebugDataSpaces extends IUnknown {
-	IID IID_IDEBUG_DATA_SPACES = new IID("88f7dfab-3ea7-4c3a-aefb-c4e8106173aa");
+	final IID IID_IDEBUG_DATA_SPACES = new IID("88f7dfab-3ea7-4c3a-aefb-c4e8106173aa");
 
 	enum VTIndices implements VTableIndex {
 		READ_VIRTUAL, //

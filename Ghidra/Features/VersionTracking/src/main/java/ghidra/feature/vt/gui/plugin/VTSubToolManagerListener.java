@@ -20,6 +20,6 @@ import ghidra.feature.vt.api.main.VTMatch;
 
 public interface VTSubToolManagerListener {
 
-	void setSelectedMatch(VTMatch match);
+	public void setSelectedMatch(VTMatch match);
 
 }

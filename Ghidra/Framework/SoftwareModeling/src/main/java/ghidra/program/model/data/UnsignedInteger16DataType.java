@@ -23,7 +23,7 @@ public class UnsignedInteger16DataType extends AbstractIntegerDataType {
 	private static final long serialVersionUID = 1L;
 
 	/** A statically defined UnsignedInteger16DataType instance.*/
-    public static final UnsignedInteger16DataType dataType = new UnsignedInteger16DataType();
+	public final static UnsignedInteger16DataType dataType = new UnsignedInteger16DataType();
 
 	public UnsignedInteger16DataType() {
 		this(null);

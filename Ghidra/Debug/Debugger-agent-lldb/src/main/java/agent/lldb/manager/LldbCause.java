@@ -25,7 +25,7 @@ package agent.lldb.manager;
  * {@link LldbPendingCommand} as the cause.
  */
 public interface LldbCause {
-	enum Causes implements LldbCause {
+	public enum Causes implements LldbCause {
 		UNCLAIMED;
 	}
 }

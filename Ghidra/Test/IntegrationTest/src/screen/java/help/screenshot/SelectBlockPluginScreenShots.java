@@ -25,7 +25,8 @@ import docking.DialogComponentProvider;
 public class SelectBlockPluginScreenShots extends GhidraScreenShotGenerator {
 
 	public SelectBlockPluginScreenShots() {
-    }
+		super();
+	}
 
 @Test
     public void testDialog() {
@@ -59,14 +60,25 @@ public class SelectBlockPluginScreenShots extends GhidraScreenShotGenerator {
 
 	private void clickButton(final JRadioButton button) {
 
-		runSwing((Runnable) () -> button.setSelected(true));
+		runSwing(new Runnable() {
+
+			@Override
+			public void run() {
+				button.setSelected(true);
+
+			}
+		});
 	}
 
 	private void enableTextField(final JTextField field) {
 
-		runSwing((Runnable) () -> {
-            field.setEditable(true);
-            field.setEnabled(true);
-        });
+		runSwing(new Runnable() {
+
+			@Override
+			public void run() {
+				field.setEditable(true);
+				field.setEnabled(true);
+			}
+		});
 	}
 }

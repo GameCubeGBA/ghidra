@@ -161,7 +161,7 @@ public class PatternBlock {
 	public PatternBlock(ArrayList<?> list) {
 		PatternBlock res;
 
-		if (list.isEmpty()) {
+		if (list.size() == 0) {
 			offset = 0;
 			nonzerosize = 0;
 			maskvec = null;
@@ -381,7 +381,9 @@ public class PatternBlock {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-        sb.append("SS:".repeat(Math.max(0, offset)));
+		for (int i = 0; i < offset; i++) {
+			sb.append("SS:");
+		}
 		for (int i = 0; i < maskvec.length; i++) {
 			if (i != 0) {
 				sb.append(':');

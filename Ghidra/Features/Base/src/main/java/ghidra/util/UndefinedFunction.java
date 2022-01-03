@@ -98,8 +98,11 @@ public class UndefinedFunction implements Function {
 			return false;
 		}
 
-        return SystemUtilities.isEqual(body, otherFunc.body);
-    }
+		if (!SystemUtilities.isEqual(getBody(), otherFunc.getBody())) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public boolean isExternal() {
@@ -330,7 +333,7 @@ public class UndefinedFunction implements Function {
 			return new ReturnParameterImpl(dt,
 				(dt instanceof VoidDataType) ? VariableStorage.VOID_STORAGE
 						: VariableStorage.UNASSIGNED_STORAGE,
-                    p);
+				getProgram());
 		}
 		catch (InvalidInputException e) {
 			throw new AssertException(e);

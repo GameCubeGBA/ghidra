@@ -21,7 +21,7 @@ import ghidra.app.util.bin.StructConverter;
 abstract class AbstractSymbol implements StructConverter {
 
 	/** Weak symbol mask*/
-    public static final int kPEFWeakImportSymMask = 0x80;
+	public final static int kPEFWeakImportSymMask = 0x80;
 
 	/**
 	 * Returns the symbol's name.

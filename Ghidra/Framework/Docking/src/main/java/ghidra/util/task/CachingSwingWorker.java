@@ -107,7 +107,7 @@ public abstract class CachingSwingWorker<T> implements CachingLoader<T> {
 	 */
 	@Override
 	public T get(TaskMonitor monitor) {
-		T value = cachedValue;
+		T value = getCachedValue();
 		if (value != null) {
 			return value;
 		}

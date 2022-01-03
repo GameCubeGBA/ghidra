@@ -41,7 +41,7 @@ import ghidra.util.Msg;
  * can decide whether to implement {@link TargetLauncher} or {@link TargetAttacher} based on whether
  * it's a {@link LaunchingConnector} or an {@link AttachingConnector}. Granted, there are some UI
  * hiccups to work out when/if we take that approach, since
- * {@link DebugModelConventions#suitable(Class, TargetObject)} requires a unique answer. That
+ * {@link DebugModelConventions#findSuitable(Class, TargetObject)} requires a unique answer. That
  * would mean neither attach nor launch will be enabled anywhere except on a connector....
  */
 @TargetObjectSchemaInfo(

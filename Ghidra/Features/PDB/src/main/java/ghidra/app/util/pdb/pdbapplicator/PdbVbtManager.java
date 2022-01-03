@@ -193,7 +193,7 @@ public class PdbVbtManager extends VbtManager {
 		Address readAddress = address.add(ordinal * size);
 		long offset;
 		try {
-			offset = (size == 4) ? memory.getInt(readAddress) : memory.getLong(readAddress);
+			offset = (size == 4) ? (long) memory.getInt(readAddress) : memory.getLong(readAddress);
 		}
 		catch (MemoryAccessException e) {
 			throw new PdbException(
@@ -209,6 +209,7 @@ public class PdbVbtManager extends VbtManager {
 		private int entrySize;
 
 		PdbVirtualBaseTable(Memory memory, Address address, int entrySize) {
+			super();
 			this.memory = memory;
 			this.address = address;
 			this.entrySize = entrySize;

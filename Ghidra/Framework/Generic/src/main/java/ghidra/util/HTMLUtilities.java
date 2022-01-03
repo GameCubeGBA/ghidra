@@ -217,7 +217,9 @@ public class HTMLUtilities {
 	 */
 	public static String spaces(int num) {
 		StringBuilder buf = new StringBuilder(HTML_SPACE.length() * num);
-        buf.append(String.valueOf(HTML_SPACE).repeat(Math.max(0, num)));
+		for (int i = 0; i < num; i++) {
+			buf.append(HTML_SPACE);
+		}
 		return buf.toString();
 	}
 
@@ -272,9 +274,13 @@ public class HTMLUtilities {
 	 * @return true if the text cannot be correctly broken into lines
 	 */
 	public static boolean isUnbreakableHTML(String text) {
-        // this implies the client has already broken lines in their preferred location
-        return (text.contains(HTML_SPACE) && !text.contains(" ")) || text.contains(HTML_NEW_LINE);
-    }
+		if ((text.contains(HTML_SPACE) && !text.contains(" ")) || text.contains(HTML_NEW_LINE)) {
+			// this implies the client has already broken lines in their preferred location
+			return true;
+		}
+
+		return false;
+	}
 
 	private static void logUnbreakableHTMLWarning() {
 		//
@@ -539,7 +545,9 @@ public class HTMLUtilities {
 				continue;
 			case '\t':
 				int cnt = TAB_SIZE - (col % TAB_SIZE);
-                buffer.append(String.valueOf(HTML_SPACE).repeat(cnt));
+				for (int k = 0; k < cnt; k++) {
+					buffer.append(HTML_SPACE);
+				}
 				col = 0;
 				continue;
 			case ' ':
@@ -633,8 +641,11 @@ public class HTMLUtilities {
 	 * @return boolean true if character should be escaped
 	 */
 	public static boolean charNeedsHTMLEscaping(int codePoint) {
-        return codePoint != '\n' && codePoint != '\t' && (' ' > codePoint || codePoint >= 0x7F);
-    }
+		if (codePoint == '\n' || codePoint == '\t' || (' ' <= codePoint && codePoint < 0x7F)) {
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * A convenience method to split the given HTML into lines, based on the given length, and

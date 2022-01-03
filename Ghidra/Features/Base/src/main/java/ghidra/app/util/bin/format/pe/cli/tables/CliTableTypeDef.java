@@ -39,7 +39,8 @@ public class CliTableTypeDef extends CliAbstractTable {
 		
 		public CliTypeDefRow(int flags, int typeNameIndex, int typeNamespaceIndex,
 				int extendsIndex, int fieldListIndex, int methodListIndex) {
-            this.flags = flags;
+			super();
+			this.flags = flags;
 			this.typeNameIndex = typeNameIndex;
 			this.typeNamespaceIndex = typeNamespaceIndex;
 			this.extendsIndex = extendsIndex;

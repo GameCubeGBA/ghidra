@@ -30,7 +30,7 @@ import ghidra.util.task.TaskMonitor;
 
 class AutoTableDisassemblerModel extends AddressBasedTableModel<AddressTable> {
 
-	static final String MODEL_NAME = "Auto-table Disassembler";
+	final static String MODEL_NAME = "Auto-table Disassembler";
 
 	private AddressSetView addresses;
 	private int minimumTableSize;

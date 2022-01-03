@@ -141,8 +141,11 @@ public abstract class VTAbstractProgramCorrelator implements VTProgramCorrelator
 		if (!SystemUtilities.isEqual(sourceAddressSet, other.sourceAddressSet)) {
 			return false;
 		}
-        return options.equals(other.options);
-    }
+		if (!options.equals(other.options)) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public String toString() {

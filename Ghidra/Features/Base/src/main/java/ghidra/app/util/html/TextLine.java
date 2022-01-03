@@ -64,7 +64,7 @@ public class TextLine implements ValidatableLine {
 	}
 
 	private String colorStrig() {
-		return textColor == null ? "" : " " + textColor;
+		return textColor == null ? "" : " " + textColor.toString();
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public class TextLine implements ValidatableLine {
 				"TextLine can only be matched against other " + "TextLine implementations.");
 		}
 		TextLine textLine = (TextLine) otherLine;
-		return text.equals(textLine.text);
+		return text.equals(textLine.getText());
 	}
 
 	@Override
@@ -146,9 +146,14 @@ public class TextLine implements ValidatableLine {
 			return false;
 		}
 		if (textColor == null) {
-            return other.textColor == null;
+			if (other.textColor != null) {
+				return false;
+			}
 		}
-		else return textColor.equals(other.textColor);
-    }
+		else if (!textColor.equals(other.textColor)) {
+			return false;
+		}
+		return true;
+	}
 
 }

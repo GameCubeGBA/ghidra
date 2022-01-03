@@ -36,12 +36,12 @@ public class CompId {
 
 	public String getProductDescription() {
 
-		RichProduct prod = RichHeaderUtils.getProduct(productId);
+		RichProduct prod = RichHeaderUtils.getProduct(getProductId());
 
 		StringBuilder sb = new StringBuilder();
 
 		String prodVersion =
-			prod == null ? "Unknown Product (" + Integer.toHexString(productId) + ")"
+			prod == null ? "Unknown Product (" + Integer.toHexString(getProductId()) + ")"
 					: prod.getProductVersion();
 		MSProductType prodType = prod == null ? MSProductType.Unknown : prod.getProductType();
 
@@ -62,7 +62,7 @@ public class CompId {
 
 	@Override
 	public String toString() {
-		return getProductDescription() + ", build " + buildNumber;
+		return getProductDescription() + ", build " + getBuildNumber();
 	}
 
 }

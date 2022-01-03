@@ -30,8 +30,8 @@ import ghidra.program.util.*;
 import ghidra.util.HelpLocation;
 
 public class RecentlyUsedAction extends DataAction {
-	private static final KeyStroke DEFAULT_KEY_STROKE = KeyStroke.getKeyStroke(KeyEvent.VK_Y, 0);
-	private static final String GROUP_NAME = "Z_RECENT";
+	private final static KeyStroke DEFAULT_KEY_STROKE = KeyStroke.getKeyStroke(KeyEvent.VK_Y, 0);
+	private final static String GROUP_NAME = "Z_RECENT";
 
 	public RecentlyUsedAction(FunctionPlugin plugin) {
 		super("Recently Used", "Recent", new ByteDataType(), plugin);
@@ -74,8 +74,11 @@ public class RecentlyUsedAction extends DataAction {
 		if (location instanceof FunctionSignatureFieldLocation) {
 			return true;
 		}
-        return location instanceof VariableLocation;
-    }
+		if (location instanceof VariableLocation) {
+			return true;
+		}
+		return false;
+	}
 
 	private DataType getRecentDataType() {
 		DataTypeManagerService service = plugin.getTool().getService(DataTypeManagerService.class);

@@ -90,7 +90,7 @@ public class PseudoDisassembler {
 
 	private int pointerSize;
 
-	static final int MAX_REPEAT_BYTES_LIMIT = 4;  // only let 4 consecutive instructions with the same repeated bytes
+	final static int MAX_REPEAT_BYTES_LIMIT = 4;  // only let 4 consecutive instructions with the same repeated bytes
 
 	private int maxInstructions = DEFAULT_MAX_INSTRUCTIONS;
 

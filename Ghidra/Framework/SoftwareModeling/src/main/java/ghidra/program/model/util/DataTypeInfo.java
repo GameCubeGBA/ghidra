@@ -81,6 +81,8 @@ public class DataTypeInfo {
         if (!Objects.equals(dataTypeHandle, other.dataTypeHandle)) {
             return false;
         }
-        return dataTypeLength == other.dataTypeLength;
+        if (dataTypeLength != other.dataTypeLength)
+            return false;
+        return true;
     }
 }

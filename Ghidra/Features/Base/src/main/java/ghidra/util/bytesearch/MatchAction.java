@@ -30,12 +30,12 @@ public interface MatchAction {
 	 * @param addr where the match occured
 	 * @param match information about the match that occurred
 	 */
-    void apply(Program program, Address addr, Match match);
+	public void apply(Program program, Address addr, Match match);
 
 	/**
 	 * Action can be constructed from XML
 	 * 
 	 * @param parser XML pull parser to restore action from XML
 	 */
-    void restoreXml(XmlPullParser parser);
+	public void restoreXml(XmlPullParser parser);
 }

@@ -31,14 +31,14 @@ public interface InterpreterConnection {
 	 * 
 	 * @return The title of the interpreter
 	 */
-    String getTitle();
+	public String getTitle();
 
 	/**
 	 * Gets the icon associated with the interpreter.
 	 * 
 	 * @return The icon associated with the interpreter.  Null if default icon is desired.
 	 */
-    ImageIcon getIcon();
+	public ImageIcon getIcon();
 
 	/**
 	 * Gets a {@link List} of {@link CodeCompletion code completions} for the given command.
@@ -46,5 +46,5 @@ public interface InterpreterConnection {
 	 * @param cmd The command to get code completions for
 	 * @return A {@link List} of {@link CodeCompletion code completions} for the given command
 	 */
-    List<CodeCompletion> getCompletions(String cmd);
+	public List<CodeCompletion> getCompletions(String cmd);
 }

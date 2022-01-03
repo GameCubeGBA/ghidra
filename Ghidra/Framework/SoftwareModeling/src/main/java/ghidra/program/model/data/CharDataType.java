@@ -28,7 +28,7 @@ import ghidra.util.classfinder.ClassTranslator;
  * determined by the data organization of the associated data type manager.
  */
 public class CharDataType extends AbstractIntegerDataType implements DataTypeWithCharset {
-	private static final long serialVersionUID = 1;
+	private final static long serialVersionUID = 1;
 
 	static {
 		ClassTranslator.put("ghidra.program.model.data.AsciiDataType",

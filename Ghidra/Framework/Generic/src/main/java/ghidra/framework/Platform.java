@@ -234,8 +234,11 @@ public enum Platform {
 	}
 
 	private static boolean matchesCurrentPlatform(Platform platform) {
-        return (platform.operatingSystem == OperatingSystem.CURRENT_OPERATING_SYSTEM) && (platform.architecture == Architecture.CURRENT_ARCHITECTURE);
-    }
+		if ((platform.operatingSystem == OperatingSystem.CURRENT_OPERATING_SYSTEM) && (platform.architecture == Architecture.CURRENT_ARCHITECTURE)) {
+			return true;
+		}
+		return false;
+	}
 
 	public String getExecutableExtension() {
 		return executableExtension;

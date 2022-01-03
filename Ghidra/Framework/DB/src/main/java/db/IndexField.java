@@ -148,7 +148,7 @@ class IndexField extends Field {
 	 * @return new IndexField instance
 	 */
 	IndexField newIndexField(Field indexValue, Field key) {
-		if (!indexValue.isSameType(indexedField) || !primaryKey.isSameType(primaryKey)) {
+		if (!indexValue.isSameType(indexedField) || !primaryKey.isSameType(getPrimaryKey())) {
 			throw new IllegalArgumentException("incorrect index value or key type");
 
 		}

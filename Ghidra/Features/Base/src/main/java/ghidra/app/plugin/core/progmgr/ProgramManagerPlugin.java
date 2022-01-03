@@ -239,7 +239,7 @@ public class ProgramManagerPlugin extends Plugin implements ProgramManager {
 		}
 
 		String trimmedRef = ref.trim();
-		if (trimmedRef.isEmpty()) {
+		if (trimmedRef.length() == 0) {
 			return false;
 		}
 		List<Symbol> symbols = NamespaceUtils.getSymbols(trimmedRef, program);
@@ -560,7 +560,7 @@ public class ProgramManagerPlugin extends Plugin implements ProgramManager {
 		for (int i = 0; i < names.size(); i++) {
 			String optionName = names.get(i);
 			options[i] = currentProgram.getOptions(optionName);
-			if ("Program Information".equals(optionName)) {
+			if (optionName.equals("Program Information")) {
 				setPropertyEditor(options[i], "Executable Location");
 				options[i].setOptionsHelpLocation(new HelpLocation(getName(), "Program_Options"));
 			}

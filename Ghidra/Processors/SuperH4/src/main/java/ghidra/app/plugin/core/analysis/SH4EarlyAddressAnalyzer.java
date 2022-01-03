@@ -34,7 +34,8 @@ public class SH4EarlyAddressAnalyzer extends SH4AddressAnalyzer {
 	 * formed to stop mistakes in functions that flow together incorrectly.
 	 */
 	public SH4EarlyAddressAnalyzer() {
-        this.setPriority(AnalysisPriority.DISASSEMBLY);
+		super();
+		this.setPriority(AnalysisPriority.DISASSEMBLY);
 	}
 
 	@Override

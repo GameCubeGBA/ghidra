@@ -40,6 +40,6 @@ public class DbgSignalReceivedReason implements DbgReason {
 
 	@Override
 	public String desc() {
-		return "Signalled with " + signalName;
+		return "Signalled with " + getSignalName();
 	}
 }

@@ -910,7 +910,8 @@ public class EditReferencesProvider extends ComponentProviderAdapter
 	private class CellEditComboBox extends JComboBox<RefType> {
 
 		public CellEditComboBox() {
-        }
+			super();
+		}
 
 		@Override
 		public void setSelectedIndex(int anIndex) {

@@ -22,7 +22,7 @@ import com.sun.jna.platform.win32.WinNT.HRESULT;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IDebugHostConstant extends IDebugHostBaseClass {
-	IID IID_IDEBUG_HOST_CONSTANT = new IID("62787EDC-FA76-4690-BD71-5E8C3E2937EC");
+	final IID IID_IDEBUG_HOST_CONSTANT = new IID("62787EDC-FA76-4690-BD71-5E8C3E2937EC");
 
 	enum VTIndicesX implements VTableIndex {
 		GET_VALUE, //

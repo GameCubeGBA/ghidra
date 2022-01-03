@@ -51,7 +51,7 @@ class RelocationTableXmlMgr {
 				throw new CancelledException();
 			}
 			element = parser.next();
-			if (!"RELOCATION".equals(element.getName())) {
+			if (!element.getName().equals("RELOCATION")) {
 				break;
 			}
 			try {

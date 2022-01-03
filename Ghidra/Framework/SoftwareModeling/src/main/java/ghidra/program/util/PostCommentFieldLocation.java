@@ -46,6 +46,7 @@ public class PostCommentFieldLocation extends CommentFieldLocation {
 	 * an end-of-line field location from XML.
 	 */
 	public PostCommentFieldLocation() {
-    }
+		super();
+	}
 
 }

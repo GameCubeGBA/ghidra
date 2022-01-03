@@ -522,7 +522,11 @@ public Edge[] toArray()
         {
             throw new ConcurrentModificationException("Edge Set Modified");
         }
-        return nextPosition < capacity();
+        if( nextPosition < capacity() )
+        {
+            return true;
+        }
+        return false;
     }
 
     /** @return the next edge.

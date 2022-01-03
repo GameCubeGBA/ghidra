@@ -41,8 +41,8 @@ import ghidra.program.util.*;
 public class FunctionSignatureFieldFactory extends FieldFactory {
 	public static final String FIELD_NAME = "Function Signature";
 
-	public static final String GROUP_TITLE = "Function Signature Field";
-	public static final String DISPLAY_NAMESPACE =
+	public final static String GROUP_TITLE = "Function Signature Field";
+	public final static String DISPLAY_NAMESPACE =
 		GROUP_TITLE + Options.DELIMITER + GhidraOptions.DISPLAY_NAMESPACE;
 
 	private boolean displayFunctionScope;
@@ -270,7 +270,7 @@ public class FunctionSignatureFieldFactory extends FieldFactory {
 				}
 				ExternalManager externalManager = function.getProgram().getExternalManager();
 				String path = externalManager.getExternalLibraryPath(libName);
-				if (path == null || path.isEmpty()) {
+				if (path == null || path.length() == 0) {
 					return unresolvedThunkRefColor;
 				}
 				return resolvedThunkRefColor;

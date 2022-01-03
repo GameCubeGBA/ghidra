@@ -54,7 +54,8 @@ public class DisassembledViewPluginTest extends AbstractGhidraHeadedIntegrationT
 	private ProgramPlugin plugin;
 
 	public DisassembledViewPluginTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -251,14 +252,14 @@ public class DisassembledViewPluginTest extends AbstractGhidraHeadedIntegrationT
 		opt.setFont(optionToChange, currentFont.deriveFont((float) currentFont.getSize() + 1));
 
 		// now make sure that the changes have been propogated
-        for (String fieldName : fieldNames) {
+		for (int i = 0; i < fieldNames.length; i++) {
 
-            Object newValue = getInstanceField(fieldName, componentProvider);
+			Object newValue = getInstanceField(fieldNames[i], componentProvider);
 
-            assertTrue("The old value has not changed in response to " +
-                            "changing the options.  Value: " + fieldName,
-                    !(newValue.equals(optionsMap.get(fieldName))));
-        }
+			assertTrue("The old value has not changed in response to " +
+				"changing the options.  Value: " + fieldNames[i],
+				!(newValue.equals(optionsMap.get(fieldNames[i]))));
+		}
 	}
 
 	/**

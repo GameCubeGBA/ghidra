@@ -36,7 +36,7 @@ import resources.ResourceManager;
 
 public class PasteAction extends SymbolTreeContextAction {
 
-	private static final Icon PASTE_ICON = ResourceManager.loadImage("images/page_paste.png");
+	private final static Icon PASTE_ICON = ResourceManager.loadImage("images/page_paste.png");
 
 	public PasteAction(SymbolTreePlugin plugin, SymbolTreeProvider provider) {
 		super("Paste Symbols", plugin.getName());

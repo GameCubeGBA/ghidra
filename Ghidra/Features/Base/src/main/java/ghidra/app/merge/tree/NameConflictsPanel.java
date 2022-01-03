@@ -158,11 +158,14 @@ class NameConflictsPanel extends JPanel {
 		panel.add(rbPanel, BorderLayout.CENTER);
 
 		add(panel);
-		ItemListener itemListener = e -> {
-            if (listener != null) {
-                listener.stateChanged(null);
-            }
-        };
+		ItemListener itemListener = new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if (listener != null) {
+					listener.stateChanged(null);
+				}
+			}
+		};
 		keepOtherRB.addItemListener(itemListener);
 		addOrRenameRB.addItemListener(itemListener);
 		originalRB.addItemListener(itemListener);

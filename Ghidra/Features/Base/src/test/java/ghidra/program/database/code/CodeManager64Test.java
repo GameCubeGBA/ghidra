@@ -46,7 +46,8 @@ public class CodeManager64Test extends AbstractGenericTest {
 	 * @param arg0
 	 */
 	public CodeManager64Test() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

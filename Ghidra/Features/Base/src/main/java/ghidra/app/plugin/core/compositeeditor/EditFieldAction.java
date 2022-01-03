@@ -28,11 +28,11 @@ import docking.action.KeyBindingData;
  */
 public class EditFieldAction extends CompositeEditorTableAction {
 
-	public static final String ACTION_NAME = "Edit Component Field";
-	private static final String GROUP_NAME = BASIC_ACTION_GROUP;
-	private static final String DESCRIPTION =
+	public final static String ACTION_NAME = "Edit Component Field";
+	private final static String GROUP_NAME = BASIC_ACTION_GROUP;
+	private final static String DESCRIPTION =
 		"Edit the first editable field of the selected component.";
-	private static final KeyStroke KEY_STROKE = KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0);
+	private final static KeyStroke KEY_STROKE = KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0);
 	private static String[] POPUP_PATH = new String[] { ACTION_NAME };
 	private static String[] MENU_PATH = new String[] { ACTION_NAME };
 

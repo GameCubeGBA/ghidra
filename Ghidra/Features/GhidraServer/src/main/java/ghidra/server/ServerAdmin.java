@@ -207,7 +207,7 @@ public class ServerAdmin implements GhidraLaunchable {
 			UserAdmin.writeCommands(cmdList, cmdDir);
 		}
 		catch (IOException e) {
-			System.err.println("Failed to queue commands: " + e);
+			System.err.println("Failed to queue commands: " + e.toString());
 			System.exit(-1);
 		}
 		System.out.println(cmdList.size() + " command(s) queued.");

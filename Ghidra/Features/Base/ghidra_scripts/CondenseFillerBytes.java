@@ -52,7 +52,7 @@ public class CondenseFillerBytes extends GhidraScript {
 				"Auto");
 
 		// Check response
-		if ("auto".equalsIgnoreCase(fillValue)) {
+		if (fillValue.equalsIgnoreCase("auto")) {
 			filler = "0x" + determineFillerValue();
 		}
 		else {
@@ -158,7 +158,7 @@ public class CondenseFillerBytes extends GhidraScript {
 			}
 		}
 
-		println("Possible filler values (and their counts): " + fillValuesHash);
+		println("Possible filler values (and their counts): " + fillValuesHash.toString());
 
 		// Decide that filler value is the one with the greatest count				
 		String filler = getValueWithHighestCount(fillValuesHash);
@@ -179,11 +179,13 @@ public class CondenseFillerBytes extends GhidraScript {
 		}
 
 		// Determine key corresponding to max val
-        for (String nextKey : fillValuesHash.keySet()) {
-            if (fillValuesHash.get(nextKey).compareTo(max) == 0) {
-                return nextKey;
-            }
-        }
+		Iterator<String> keyIterator = fillValuesHash.keySet().iterator();
+		while (keyIterator.hasNext()) {
+			String nextKey = keyIterator.next();
+			if (fillValuesHash.get(nextKey).compareTo(max) == 0) {
+				return nextKey;
+			}
+		}
 
 		// Should theoretically never reach here
 		return null;

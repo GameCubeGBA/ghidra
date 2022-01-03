@@ -34,7 +34,7 @@ import ghidra.util.task.TaskMonitor;
 
 public class MotorolaHexLoader extends AbstractProgramLoader {
 
-	public static final String MOTOROLA_HEX_NAME = "Motorola Hex";
+	public final static String MOTOROLA_HEX_NAME = "Motorola Hex";
 
 	@Override
 	public LoaderTier getTier() {
@@ -55,7 +55,7 @@ public class MotorolaHexLoader extends AbstractProgramLoader {
 	private static final String OPTION_NAME_BLOCK_NAME = "Block Name";
 	private static final String OPTION_NAME_IS_OVERLAY = "Overlay";
 
-	private static final int BUFSIZE = 64 * 1024;
+	private final static int BUFSIZE = 64 * 1024;
 
 	@Override
 	public Collection<LoadSpec> findSupportedLoadSpecs(ByteProvider provider) throws IOException {
@@ -168,7 +168,7 @@ public class MotorolaHexLoader extends AbstractProgramLoader {
 		CompilerSpec importerCompilerSpec =
 			importerLanguage.getCompilerSpecByID(pair.compilerSpecID);
 
-		Program prog = createProgram(provider, programName, null, MOTOROLA_HEX_NAME, importerLanguage,
+		Program prog = createProgram(provider, programName, null, getName(), importerLanguage,
 			importerCompilerSpec, consumer);
 		boolean success = false;
 		try {
@@ -217,7 +217,7 @@ public class MotorolaHexLoader extends AbstractProgramLoader {
 		String blockName = getBlockName(options);
 		boolean isOverlay = isOverlay(options);
 
-		if (blockName == null || blockName.isEmpty()) {
+		if (blockName == null || blockName.length() == 0) {
 			blockName = generateBlockName(program, isOverlay, baseAddr.getAddressSpace());
 		}
 

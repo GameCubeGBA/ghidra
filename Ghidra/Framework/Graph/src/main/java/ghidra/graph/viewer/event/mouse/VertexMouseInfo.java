@@ -90,13 +90,16 @@ public class VertexMouseInfo<V extends VisualVertex, E extends VisualEdge<V>> {
 			return false;
 		}
 
-		return vertex.isGrabbable(mousedDestinationComponent);
+		return vertex.isGrabbable(getClickedComponent());
 	}
 
 	public boolean isButtonClick() {
-		Component clickedComponent = mousedDestinationComponent;
-        return clickedComponent instanceof JButton;
-    }
+		Component clickedComponent = getClickedComponent();
+		if (clickedComponent instanceof JButton) {
+			return true;
+		}
+		return false;
+	}
 
 	public boolean isVertexSelected() {
 		PickedState<V> pickedVertexState = viewer.getPickedVertexState();
@@ -232,7 +235,7 @@ public class VertexMouseInfo<V extends VisualVertex, E extends VisualEdge<V>> {
 	}
 
 	public boolean isPopupClick() {
-		return originalMouseEvent.getButton() == MouseEvent.BUTTON3;
+		return getOriginalMouseEvent().getButton() == MouseEvent.BUTTON3;
 	}
 
 	@Override

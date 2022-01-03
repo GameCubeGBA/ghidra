@@ -31,6 +31,7 @@ import javax.swing.event.ChangeListener;
 import docking.DialogComponentProvider;
 import docking.widgets.checkbox.GCheckBox;
 import docking.widgets.label.GLabel;
+import ghidra.app.plugin.core.format.ByteBlockSelection;
 import ghidra.app.plugin.core.format.DataFormatModel;
 import ghidra.app.util.AddressInput;
 import ghidra.app.util.bean.FixedBitSizeValueField;
@@ -209,7 +210,7 @@ public class ByteViewerOptionsDialog extends DialogComponentProvider
 	}
 
 	private boolean hasValidFieldValues() {
-		if (addressInputField.getValue().isEmpty()) {
+		if (addressInputField.getValue().length() == 0) {
 			setStatusText("Enter an alignment address");
 			return false;
 		}

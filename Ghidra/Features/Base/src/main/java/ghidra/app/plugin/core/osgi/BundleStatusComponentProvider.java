@@ -390,7 +390,7 @@ public class BundleStatusComponentProvider extends ComponentProviderAdapter {
 					buff.append(Path.toPathString(bundle.getFile()) + "\n");
 				}
 				Msg.showWarn(this, BundleStatusComponentProvider.this.getComponent(),
-					"Unabled to remove", "System bundles cannot be removed:\n" + buff);
+					"Unabled to remove", "System bundles cannot be removed:\n" + buff.toString());
 			}
 			bundleHost.remove(bundles.get(false));
 		}

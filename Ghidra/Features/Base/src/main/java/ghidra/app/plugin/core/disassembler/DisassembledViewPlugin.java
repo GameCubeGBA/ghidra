@@ -740,7 +740,7 @@ public class DisassembledViewPlugin extends ProgramPlugin implements DomainObjec
 		 * Gets the preview String for the provided code unit.
 		 */
 		public String getAddressPreview(CodeUnitFormat format) {
-			return wrappedAddress.toString() + " " + format.getRepresentationString(addressCodeUnit);
+			return getAddress().toString() + " " + format.getRepresentationString(addressCodeUnit);
 		}
 	}
 }

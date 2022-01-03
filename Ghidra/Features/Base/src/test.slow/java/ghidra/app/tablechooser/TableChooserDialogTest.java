@@ -512,7 +512,7 @@ public class TableChooserDialogTest extends AbstractGhidraHeadedIntegrationTest 
 //==================================================================================================
 
 	private interface TestExecutorDecision {
-		boolean decide(AddressableRowObject rowObject);
+		public boolean decide(AddressableRowObject rowObject);
 	}
 
 	private class SpyTableChooserExecutor implements TableChooserExecutor {
@@ -564,7 +564,7 @@ public class TableChooserDialogTest extends AbstractGhidraHeadedIntegrationTest 
 
 		@Override
 		public String toString() {
-			return addr.toString();
+			return getAddress().toString();
 		}
 	}
 

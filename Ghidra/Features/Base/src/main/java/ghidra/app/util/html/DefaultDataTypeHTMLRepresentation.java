@@ -44,7 +44,7 @@ public class DefaultDataTypeHTMLRepresentation extends HTMLDataTypeRepresentatio
 		}
 
 		String description = dataType.getDescription();
-		if (description == null || description.isEmpty()) {
+		if (description == null || description.length() == 0) {
 			return new TextLine(dataType.getName());
 		}
 		return new TextLine(description);

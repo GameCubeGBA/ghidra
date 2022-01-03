@@ -168,7 +168,7 @@ class EnumEditorPanel extends JPanel {
 
 	String getDescription() {
 		String desc = descField.getText();
-		if (desc.isEmpty()) {
+		if (desc.length() == 0) {
 			desc = null;
 		}
 		return desc;
@@ -227,7 +227,7 @@ class EnumEditorPanel extends JPanel {
 	}
 
 	void deleteSelectedEntries() {
-		EnumDataType enuum = editedEnumDT;
+		EnumDataType enuum = getEnum();
 		int[] rows = getSelectedRows();
 		for (int row : rows) {
 			String name = tableModel.getNameAt(row);
@@ -338,7 +338,7 @@ class EnumEditorPanel extends JPanel {
 
 			private void changed() {
 				String name = nameField.getText().trim();
-				if (name.isEmpty()) {
+				if (name.length() == 0) {
 					return;
 				}
 

@@ -857,8 +857,11 @@ public class PackedDatabase extends Database {
 		File tmpDir = new File(System.getProperty("java.io.tmpdir"));
 		File[] tempDbs = tmpDir.listFiles((FileFilter) file -> {
 			String name = file.getName();
-            return file.isDirectory() && (name.indexOf(TEMPDB_DIR_PREFIX) == 0 && name.endsWith(TEMPDB_DIR_EXT));
-        });
+			if (file.isDirectory() && (name.indexOf(TEMPDB_DIR_PREFIX) == 0 && name.endsWith(TEMPDB_DIR_EXT))) {
+				return true;
+			}
+			return false;
+		});
 		if (tempDbs == null) {
 			return;
 		}

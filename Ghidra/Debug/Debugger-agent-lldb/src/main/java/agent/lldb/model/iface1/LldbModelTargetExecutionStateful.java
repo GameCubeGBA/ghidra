@@ -31,7 +31,7 @@ import ghidra.dbg.target.TargetExecutionStateful;
 public interface LldbModelTargetExecutionStateful
 		extends LldbModelTargetObject, TargetExecutionStateful {
 
-	default void setExecutionState(TargetExecutionState state, String reason) {
+	public default void setExecutionState(TargetExecutionState state, String reason) {
 		changeAttributes(List.of(), Map.of( //
 			STATE_ATTRIBUTE_NAME, state //
 		), reason);

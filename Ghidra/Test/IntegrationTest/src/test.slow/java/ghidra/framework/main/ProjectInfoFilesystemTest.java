@@ -56,7 +56,8 @@ public class ProjectInfoFilesystemTest extends AbstractGhidraHeadedIntegrationTe
 	private ProjectInfoDialog dialog;
 
 	public ProjectInfoFilesystemTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -193,7 +194,7 @@ public class ProjectInfoFilesystemTest extends AbstractGhidraHeadedIntegrationTe
 		ProjectData projectData = project.getProjectData();
 		DomainFolder folder = projectData.getRootFolder();
 		for (String folderName : folderPath.split("/")) {
-			if (folderName.isEmpty()) {
+			if (folderName.length() == 0) {
 				continue;
 			}
 			DomainFolder f = folder.getFolder(folderName);

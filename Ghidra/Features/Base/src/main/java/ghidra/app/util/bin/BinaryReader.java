@@ -30,19 +30,19 @@ public class BinaryReader {
 	/**
 	 * The size of a BYTE in Java.
 	 */
-    public static final int SIZEOF_BYTE = 1;
+	public final static int SIZEOF_BYTE = 1;
 	/**
 	 * The size of a SHORT in Java.
 	 */
-    public static final int SIZEOF_SHORT = 2;
+	public final static int SIZEOF_SHORT = 2;
 	/**
 	 * The size of an INTEGER in Java.
 	 */
-    public static final int SIZEOF_INT = 4;
+	public final static int SIZEOF_INT = 4;
 	/**
 	 * The size of a LONG in Java.
 	 */
-    public static final int SIZEOF_LONG = 8;
+	public final static int SIZEOF_LONG = 8;
 
 	private final ByteProvider provider;
 	private DataConverter converter;

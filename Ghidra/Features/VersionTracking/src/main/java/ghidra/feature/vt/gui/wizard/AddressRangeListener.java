@@ -20,6 +20,6 @@ import ghidra.program.model.address.Address;
 
 public interface AddressRangeListener {
 
-	void processAddressRange(Address minAddress, Address maxAddress);
+	public void processAddressRange(Address minAddress, Address maxAddress);
 
 }

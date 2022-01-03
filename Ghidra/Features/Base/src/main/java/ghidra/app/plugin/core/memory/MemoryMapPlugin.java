@@ -51,8 +51,8 @@ import ghidra.program.util.ProgramLocation;
 //@formatter:on
 public class MemoryMapPlugin extends ProgramPlugin implements DomainObjectListener {
 
-	static final Cursor WAIT_CURSOR = new Cursor(Cursor.WAIT_CURSOR);
-	static final Cursor NORM_CURSOR = new Cursor(Cursor.DEFAULT_CURSOR);
+	final static Cursor WAIT_CURSOR = new Cursor(Cursor.WAIT_CURSOR);
+	final static Cursor NORM_CURSOR = new Cursor(Cursor.DEFAULT_CURSOR);
 
 	private MemoryMapProvider provider;
 	private GoToService goToService;

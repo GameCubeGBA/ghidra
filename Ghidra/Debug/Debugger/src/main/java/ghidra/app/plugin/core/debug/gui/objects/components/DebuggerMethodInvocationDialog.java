@@ -45,7 +45,7 @@ public class DebuggerMethodInvocationDialog extends DialogComponentProvider
 		implements PropertyChangeListener {
 	private static final String KEY_MEMORIZED_ARGUMENTS = "memorizedArguments";
 
-	static final class NameTypePair extends MutablePair<String, Class<?>> {
+	final static class NameTypePair extends MutablePair<String, Class<?>> {
 
 		public static NameTypePair fromParameter(ParameterDescription<?> parameter) {
 			return new NameTypePair(parameter.name, parameter.type);
@@ -118,7 +118,7 @@ public class DebuggerMethodInvocationDialog extends DialogComponentProvider
 		setParameters(parameterMap);
 		tool.showDialog(this);
 
-		return arguments;
+		return getArguments();
 	}
 
 	public void setParameters(Map<String, ParameterDescription<?>> parameterMap) {

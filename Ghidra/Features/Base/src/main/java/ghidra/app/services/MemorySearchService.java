@@ -22,16 +22,16 @@ public interface MemorySearchService {
 	/*
 	 * sets up MemSearchDialog based on given bytes
 	 */
-    void search(byte[] bytes, NavigatableActionContext context);
+	public void search(byte[] bytes, NavigatableActionContext context);
 
 	/*
 	 * sets the search value field to the masked bit string
 	 */
-    void setSearchText(String maskedString);
+	public void setSearchText(String maskedString);
 
 	/*
 	 * determines whether the dialog was called by a mnemonic or not
 	 */
-    void setIsMnemonic(boolean isMnemonic);
+	public void setIsMnemonic(boolean isMnemonic);
 
 }

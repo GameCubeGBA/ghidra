@@ -63,7 +63,8 @@ public class FunctionDBTest extends AbstractGhidraHeadedIntegrationTest
 	private int captureSubEvent;// not used if -1
 
 	public FunctionDBTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

@@ -41,7 +41,7 @@ import ghidra.util.task.TaskMonitor;
  */
 public class GzfLoader implements Loader {
 
-	public static final String GZF_NAME = "GZF Input Format";
+	public final static String GZF_NAME = "GZF Input Format";
 
 	@Override
 	public LoaderTier getTier() {
@@ -55,7 +55,7 @@ public class GzfLoader implements Loader {
 
 	@Override
 	public String validateOptions(ByteProvider provider, LoadSpec loadSpec, List<Option> options, Program program) {
-		if (options != null && !options.isEmpty()) {
+		if (options != null && options.size() > 0) {
 			return "GzfLoader takes no options";
 		}
 		return null;

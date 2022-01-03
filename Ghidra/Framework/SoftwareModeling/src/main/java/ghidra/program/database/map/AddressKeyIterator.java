@@ -131,7 +131,7 @@ public class AddressKeyIterator implements DBLongIterator {
 		this.table = table;
 
 		keyRangeList = addrMap.getKeyRanges(set, absolute, false);
-		if (keyRangeList.isEmpty()) {
+		if (keyRangeList.size() == 0) {
 			return;
 		}
 

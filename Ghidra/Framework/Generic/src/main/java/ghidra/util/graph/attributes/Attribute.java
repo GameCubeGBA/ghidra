@@ -56,8 +56,11 @@ public abstract class Attribute<T extends KeyedObject> {
 	/** Returns true iff the set attributes are defined for has not changed 
 	 * since the set was created. */
 	boolean owningSetIsUnmodified() {
-        return this.backingSetModificationNumber == this.owningSet.getModificationNumber();
-    }
+		if (this.backingSetModificationNumber == this.owningSet.getModificationNumber()) {
+			return true;
+		}
+		return false;
+	}
 
 	/** Return the current value of the modificationNumber which counts
 	 * the number of changes this Attribute has undergone.
@@ -82,13 +85,13 @@ public abstract class Attribute<T extends KeyedObject> {
 	/** Return the type of Attribute, i.e. what kind of values does
 	 * this attribute hold. "Long", "Object", "Double" are examples.
 	 */
-    public abstract String attributeType();
+	abstract public String attributeType();
 
 	/** Return the attribute of the specified KeyedObject as a String.
 	 */
-    public abstract String getValueAsString(KeyedObject o);
+	abstract public String getValueAsString(KeyedObject o);
 
 	/** Undefine all values set for this attribute. */
-    public abstract void clear();
+	abstract public void clear();
 
 }

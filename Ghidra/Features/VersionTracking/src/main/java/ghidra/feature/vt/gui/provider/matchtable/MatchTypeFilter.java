@@ -34,7 +34,12 @@ public class MatchTypeFilter extends CheckBoxBasedAncillaryFilter<VTMatch> {
 
 	@Override
 	protected void createCheckBoxInfos() {
-		ItemListener listener = e -> fireStatusChanged(getFilterStatus());
+		ItemListener listener = new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				fireStatusChanged(getFilterStatus());
+			}
+		};
 
 		VTAssociationType[] values = VTAssociationType.values();
 		for (VTAssociationType status : values) {

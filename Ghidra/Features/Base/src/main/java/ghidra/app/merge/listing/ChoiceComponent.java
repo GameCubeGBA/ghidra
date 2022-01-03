@@ -27,7 +27,8 @@ import javax.swing.JPanel;
 public abstract class ChoiceComponent extends JPanel {
 
 	public ChoiceComponent() {
-    }
+		super();
+	}
 
 	public ChoiceComponent(boolean isDoubleBuffered) {
 		super(isDoubleBuffered);

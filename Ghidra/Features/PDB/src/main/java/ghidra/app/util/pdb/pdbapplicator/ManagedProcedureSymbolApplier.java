@@ -192,7 +192,9 @@ public class ManagedProcedureSymbolApplier extends MsSymbolApplier {
 		}
 
 		boolean functionSuccess = applyFunction(monitor);
-        return functionSuccess != false;
+		if (functionSuccess == false) {
+			return false;
+		}
 //		registerChangeCalculator = new RegisterChangeCalculator(procedureSymbol, function, monitor);
 //
 //		baseParamOffset = VariableUtilities.getBaseStackParamOffset(function);
@@ -209,7 +211,9 @@ public class ManagedProcedureSymbolApplier extends MsSymbolApplier {
 		// TODO: not done yet
 //	ApplyLineNumbers applyLineNumbers = new ApplyLineNumbers(pdbParser, xmlParser, program);
 //	applyLineNumbers.applyTo(monitor, log);
-    }
+
+		return true;
+	}
 
 	Integer getRegisterPrologChange(Register register) {
 		return registerChangeCalculator.getRegChange(applicator, register);
@@ -417,11 +421,11 @@ public class ManagedProcedureSymbolApplier extends MsSymbolApplier {
 	}
 
 	private String getIndent(int indentLevel) {
-		StringBuilder indent = new StringBuilder();
+		String indent = "";
 		for (int i = 1; i < indentLevel; i++) {
-			indent.append(BLOCK_INDENT);
+			indent += BLOCK_INDENT;
 		}
-		return indent.toString();
+		return indent;
 	}
 
 	// Method copied from ApplyStackVariables (ghidra.app.util.bin.format.pdb package)

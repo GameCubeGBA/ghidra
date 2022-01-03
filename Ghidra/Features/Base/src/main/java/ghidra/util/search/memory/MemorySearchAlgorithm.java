@@ -29,5 +29,5 @@ public interface MemorySearchAlgorithm {
 	 * @param accumulator the results accumulator
 	 * @param monitor the monitor
 	 */
-    void search(Accumulator<MemSearchResult> accumulator, TaskMonitor monitor);
+	public void search(Accumulator<MemSearchResult> accumulator, TaskMonitor monitor);
 }

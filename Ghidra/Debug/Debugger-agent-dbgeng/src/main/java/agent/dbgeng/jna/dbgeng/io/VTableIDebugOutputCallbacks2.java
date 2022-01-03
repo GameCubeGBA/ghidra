@@ -40,11 +40,11 @@ public class VTableIDebugOutputCallbacks2 extends VTableIDebugOutputCallbacks {
 		return FIELDS;
 	}
 
-	public interface GetInterestMaskCallback extends StdCallLibrary.StdCallCallback {
+	public static interface GetInterestMaskCallback extends StdCallLibrary.StdCallCallback {
 		HRESULT invoke(Pointer thisPointer, ULONGByReference Mask);
 	}
 
-	public interface Output2Callback extends StdCallLibrary.StdCallCallback {
+	public static interface Output2Callback extends StdCallLibrary.StdCallCallback {
 		HRESULT invoke(Pointer thisPointer, ULONG Which, ULONG Flags, ULONGLONG Arg, WString Text);
 	}
 }

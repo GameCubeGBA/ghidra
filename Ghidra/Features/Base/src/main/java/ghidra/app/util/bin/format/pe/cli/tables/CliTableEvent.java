@@ -36,7 +36,8 @@ public class CliTableEvent extends CliAbstractTable {
 		public int eventTypeIndex;
 		
 		public CliEventRow(short eventFlags, int nameIndex, int eventTypeIndex) {
-            this.eventFlags = eventFlags;
+			super();
+			this.eventFlags = eventFlags;
 			this.nameIndex = nameIndex;
 			this.eventTypeIndex = eventTypeIndex;
 		}

@@ -104,8 +104,11 @@ public class AssemblyParseStateItem implements Comparable<AssemblyParseStateItem
 			return false;
 		}
 		AssemblyParseStateItem apsi = (AssemblyParseStateItem) that;
-        return (this.prod.getIndex() == apsi.prod.getIndex()) && (this.pos == apsi.pos);
-    }
+		if ((this.prod.getIndex() != apsi.prod.getIndex()) || (this.pos != apsi.pos)) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public int compareTo(AssemblyParseStateItem that) {
@@ -132,11 +135,11 @@ public class AssemblyParseStateItem implements Comparable<AssemblyParseStateItem
 		AssemblySentential<?> prec = prod.subList(0, pos);
 		AssemblySentential<?> proc = prod.subList(pos, prod.size());
 		StringBuilder sb = new StringBuilder(prod.getIndex() + ". " + prod.getLHS() + " => ");
-		if (!prec.isEmpty()) {
+		if (prec.size() != 0) {
 			sb.append(prec + " ");
 		}
 		sb.append("*");
-		if (!proc.isEmpty()) {
+		if (proc.size() != 0) {
 			sb.append(" " + proc);
 		}
 		return sb.toString();

@@ -95,34 +95,40 @@ public abstract class AbstractWeakValueMap<K, V> implements Map<K, V> {
 	@Override
 	public boolean containsValue(Object value) {
 		processQueue();
-        for (WeakValueRef<K, V> ref : getRefMap().values()) {
-            if (value.equals(ref.get())) {
-                return true;
-            }
-        }
+		Iterator<WeakValueRef<K, V>> it = getRefMap().values().iterator();
+		while (it.hasNext()) {
+			WeakValueRef<K, V> ref = it.next();
+			if (value.equals(ref.get())) {
+				return true;
+			}
+		}
 		return false;
 	}
 
 	@Override
 	public Collection<V> values() {
 		ArrayList<V> list = new ArrayList<>(getRefMap().size());
-        for (WeakValueRef<K, V> ref : getRefMap().values()) {
-            V value = ref.get();
-            if (value != null) {
-                list.add(value);
-            }
-        }
+		Iterator<WeakValueRef<K, V>> it = getRefMap().values().iterator();
+		while (it.hasNext()) {
+			WeakValueRef<K, V> ref = it.next();
+			V value = ref.get();
+			if (value != null) {
+				list.add(value);
+			}
+		}
 		return list;
 	}
 
 	@Override
 	public void putAll(Map<? extends K, ? extends V> map) {
-        for (K key : map.keySet()) {
-            V value = map.get(key);
-            if (value != null) {
-                put(key, value);
-            }
-        }
+		Iterator<? extends K> it = map.keySet().iterator();
+		while (it.hasNext()) {
+			K key = it.next();
+			V value = map.get(key);
+			if (value != null) {
+				put(key, value);
+			}
+		}
 	}
 
 	@Override
@@ -130,13 +136,15 @@ public abstract class AbstractWeakValueMap<K, V> implements Map<K, V> {
 		processQueue();
 		Set<Map.Entry<K, V>> list = new HashSet<>();
 		Set<Map.Entry<K, WeakValueRef<K, V>>> entrySet = getRefMap().entrySet();
-        for (Entry<K, WeakValueRef<K, V>> next : entrySet) {
-            WeakValueRef<K, V> valueRef = next.getValue();
-            V value = valueRef.get();
-            if (value != null) {
-                list.add(new GeneratedEntry(next.getKey(), value));
-            }
-        }
+		Iterator<Map.Entry<K, WeakValueRef<K, V>>> it = entrySet.iterator();
+		while (it.hasNext()) {
+			Map.Entry<K, WeakValueRef<K, V>> next = it.next();
+			WeakValueRef<K, V> valueRef = next.getValue();
+			V value = valueRef.get();
+			if (value != null) {
+				list.add(new GeneratedEntry(next.getKey(), value));
+			}
+		}
 		return list;
 	}
 

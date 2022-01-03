@@ -167,8 +167,11 @@ class OldFunctionDataDB {
 	 * @see ghidra.program.model.listing.Function#isStackDepthValid()
 	 */
 	public boolean isStackDepthValid() {
-        return getStackDepthChange() <= 0xffffff;
-    }
+		if (getStackDepthChange() > 0xffffff) {
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * Get the first parameter offset for the function stack frame.
@@ -260,9 +263,11 @@ class OldFunctionDataDB {
 		Parameter[] parms = new Parameter[regParams.size() + frame.getParameterCount()];
 		int ordinal = 0;
 
-        for (Parameter rp : regParams) {
-            parms[ordinal++] = rp;
-        }
+		Iterator<Parameter> iter = regParams.iterator();
+		while (iter.hasNext()) {
+			Parameter rp = iter.next();
+			parms[ordinal++] = rp;
+		}
 
 		try {
 			Variable[] stackParams = frame.getParameters();

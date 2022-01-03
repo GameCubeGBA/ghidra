@@ -274,7 +274,7 @@ public class JdiEventHandler implements Runnable {
 
 	private void setCurrentThread(EventSet set) {
 		ThreadReference thread;
-		if (!set.isEmpty()) {
+		if (set.size() > 0) {
 			/*
 			 * If any event in the set has a thread associated with it,
 			 * they all will, so just grab the first one.

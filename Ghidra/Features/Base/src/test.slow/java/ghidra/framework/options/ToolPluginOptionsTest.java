@@ -118,7 +118,7 @@ public class ToolPluginOptionsTest extends AbstractGhidraHeadedIntegrationTest {
 
 		List<String> diffs = getDiffs(initialValues, latestValues);
 
-		if (!diffs.isEmpty()) {
+		if (diffs.size() != 0) {
 			System.err.println(
 				"Options values are not restored back to the original settings - diffs");
 			for (String diff : diffs) {

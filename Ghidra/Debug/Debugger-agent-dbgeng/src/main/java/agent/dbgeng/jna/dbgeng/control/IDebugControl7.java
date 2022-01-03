@@ -20,7 +20,7 @@ import com.sun.jna.platform.win32.Guid.IID;
 import agent.dbgeng.jna.dbgeng.UnknownWithUtils.VTableIndex;
 
 public interface IDebugControl7 extends IDebugControl6 {
-	IID IID_IDEBUG_CONTROL7 = new IID("b86fb3b1-80d4-475b-aea3-cf06539cf63a");
+	final IID IID_IDEBUG_CONTROL7 = new IID("b86fb3b1-80d4-475b-aea3-cf06539cf63a");
 
 	enum VTIndices7 implements VTableIndex {
 		GET_DEBUGGEE_TYPE2, //

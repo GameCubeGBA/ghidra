@@ -60,10 +60,10 @@ class ApplyStackVariables {
 			monitor.checkCanceled();
 
 			XmlElement elem = xmlParser.peek();
-			if (elem.isEnd() && "function".equals(elem.getName())) {
+			if (elem.isEnd() && elem.getName().equals("function")) {
 				break;
 			}
-			else if (elem.isStart() && "line_number".equals(elem.getName())) {
+			else if (elem.isStart() && elem.getName().equals("line_number")) {
 				break;
 			}
 			elem = xmlParser.next();//stack variable number start tag

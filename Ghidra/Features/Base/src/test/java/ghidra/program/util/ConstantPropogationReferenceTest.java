@@ -49,7 +49,8 @@ public class ConstantPropogationReferenceTest extends AbstractGenericTest {
 	private ConstantPropagationAnalyzer analyzer;
 
 	public ConstantPropogationReferenceTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

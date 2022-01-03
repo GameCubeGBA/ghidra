@@ -104,6 +104,7 @@ public abstract class AbstractScreenShotGenerator extends AbstractGhidraHeadedIn
 	public Image image;
 
 	public AbstractScreenShotGenerator() {
+		super();
 
 		// this prevents test tool from appearing in the UI
 		setInstanceField("allowTestTools", ToolUtils.class, Boolean.FALSE);
@@ -416,7 +417,7 @@ public abstract class AbstractScreenShotGenerator extends AbstractGhidraHeadedIn
 	public void captureMenu() {
 		Set<Window> allWindows = getAllWindows();
 		for (Window window : allWindows) {
-			if ("HeavyWeightWindow".equals(window.getClass().getSimpleName())) {
+			if (window.getClass().getSimpleName().equals("HeavyWeightWindow")) {
 				captureComponent(window);
 			}
 		}
@@ -426,7 +427,7 @@ public abstract class AbstractScreenShotGenerator extends AbstractGhidraHeadedIn
 	public JPopupMenu getPopupMenu() {
 		Set<Window> allWindows = getAllWindows();
 		for (Window window : allWindows) {
-			if ("HeavyWeightWindow".equals(window.getClass().getSimpleName())) {
+			if (window.getClass().getSimpleName().equals("HeavyWeightWindow")) {
 				return findComponent(window, JPopupMenu.class);
 			}
 		}
@@ -1503,7 +1504,7 @@ public abstract class AbstractScreenShotGenerator extends AbstractGhidraHeadedIn
 		}
 		else {
 			double slope =
-				((double) end.y - start.y) / ((double) end.x - start.x);
+				((double) end.y - (double) start.y) / ((double) end.x - (double) start.x);
 			double crossSlope = 1 / slope;
 			unitX = Math.sqrt(1 / ((slope * slope) + 1));
 			unitY = Math.sqrt(1 / ((crossSlope * crossSlope) + 1));

@@ -26,5 +26,5 @@ public interface EditorListener {
 	/**
 	 * Notification that the editor is closed.
 	 */
-    void closed(EditorProvider editor);
+	public void closed(EditorProvider editor);
 }

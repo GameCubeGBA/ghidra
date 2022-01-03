@@ -205,7 +205,7 @@ public class CFStringAnalyzer extends AbstractAnalyzer {
 	}
 
 	private String makeLabel(String cFString) {
-		if (cFString.isEmpty()) {
+		if (cFString.length() == 0) {
 			return CF_STRING_LABEL_PREFIX + "\"\"";
 		}
 

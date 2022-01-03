@@ -102,17 +102,19 @@ public class UserManager {
 		}
 
 		log.info("Known Users:");
-        for (String name : userList.keySet()) {
-            String dnStr = "";
-            UserEntry entry = userList.get(name);
-            if (entry != null) {
-                X500Principal x500User = entry.x500User;
-                if (x500User != null) {
-                    dnStr = " DN={" + x500User.getName() + "}";
-                }
-            }
-            log.info("   " + name + dnStr);
-        }
+		Iterator<String> iter = userList.keySet().iterator();
+		while (iter.hasNext()) {
+			String name = iter.next();
+			String dnStr = "";
+			UserEntry entry = userList.get(name);
+			if (entry != null) {
+				X500Principal x500User = entry.x500User;
+				if (x500User != null) {
+					dnStr = " DN={" + x500User.getName() + "}";
+				}
+			}
+			log.info("   " + name + dnStr);
+		}
 
 		sshDir = new File(repositoryMgr.getRootDir(), SSH_KEY_FOLDER);
 		initSSH();
@@ -493,14 +495,16 @@ public class UserManager {
 			return;
 		}
 		boolean dataChanged = false;
-        for (UserEntry entry : userList.values()) {
-            if (enableLocalPasswords && getPasswordExpiration(entry) == 0) {
-                entry.passwordHash = null;
-                entry.passwordTime = 0;
-                dataChanged = true;
-                log.warn("Default password expired for user '" + entry.username + "'");
-            }
-        }
+		Iterator<UserEntry> it = userList.values().iterator();
+		while (it.hasNext()) {
+			UserEntry entry = it.next();
+			if (enableLocalPasswords && getPasswordExpiration(entry) == 0) {
+				entry.passwordHash = null;
+				entry.passwordTime = 0;
+				dataChanged = true;
+				log.warn("Default password expired for user '" + entry.username + "'");
+			}
+		}
 		if (dataChanged) {
 			writeUserList();
 		}
@@ -602,7 +606,7 @@ public class UserManager {
 							// Distinguished Name
 							if (st.hasMoreTokens()) {
 								String dn = st.nextToken();
-								if (!dn.isEmpty()) {
+								if (dn.length() > 0) {
 									entry.x500User = new X500Principal(dn);
 								}
 

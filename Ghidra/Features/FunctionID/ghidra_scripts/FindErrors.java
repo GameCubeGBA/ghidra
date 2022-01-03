@@ -63,7 +63,12 @@ public class FindErrors extends GhidraScript {
 			}
 		}
 
-		Collections.sort(results, (Comparator<Pair<DomainFile, Integer>>) (o1, o2) -> o1.second - o2.second);
+		Collections.sort(results, new Comparator<Pair<DomainFile, Integer>>() {
+			@Override
+			public int compare(Pair<DomainFile, Integer> o1, Pair<DomainFile, Integer> o2) {
+				return o1.second - o2.second;
+			}
+		});
 
 		for (Pair<DomainFile, Integer> pair : results) {
 			println(pair.first.toString() + ": " + pair.second);

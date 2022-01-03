@@ -128,11 +128,14 @@ public class DataTypeIndexer {
 			monitor.initialize(dataTypeManagers.size());
 			monitor.setMessage("Preparing to index data types...");
 
-            for (DataTypeManager dataTypeManager : dataTypeManagers) {
-                monitor.setMessage("Searching " + dataTypeManager.getName());
-                dataTypeManager.getAllDataTypes(list);
-                monitor.incrementProgress(1);
-            }
+			Iterator<DataTypeManager> iterator = dataTypeManagers.iterator();
+			while (iterator.hasNext()) {
+				DataTypeManager dataTypeManager = iterator.next();
+
+				monitor.setMessage("Searching " + dataTypeManager.getName());
+				dataTypeManager.getAllDataTypes(list);
+				monitor.incrementProgress(1);
+			}
 
 			Collections.sort(list, dataTypeComparator);
 		}

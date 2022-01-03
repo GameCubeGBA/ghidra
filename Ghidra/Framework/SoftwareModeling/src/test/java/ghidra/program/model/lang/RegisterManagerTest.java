@@ -32,8 +32,9 @@ import ghidra.program.model.address.AddressSpace;
 public class RegisterManagerTest extends AbstractGenericTest {
 
 	public RegisterManagerTest() {
+		super();
 
-    }
+	}
 
 	private Address addr(long offset) {
 		return AddressSpace.DEFAULT_REGISTER_SPACE.getAddress(offset);

@@ -31,7 +31,8 @@ public class CompositeHandler {
 	private Composite parent; // parent container for bitfields
 
 	public CompositeHandler(Composite parent) {
-        this.parent = parent;
+		super();
+		this.parent = parent;
 	}
 
 	public Composite getComposite() {

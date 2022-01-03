@@ -62,7 +62,8 @@ public class MangledLocalFileSystem extends LocalFileSystem {
 	 * Constructor for an empty read-only file-system.
 	 */
 	MangledLocalFileSystem() {
-    }
+		super();
+	}
 
 	@Override
 	public int getMaxNameLength() {

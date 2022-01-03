@@ -41,7 +41,8 @@ public class RegisterFieldFactoryTest extends AbstractGhidraHeadedIntegrationTes
 	private Program program;
 
 	public RegisterFieldFactoryTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

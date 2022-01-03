@@ -49,7 +49,7 @@ import java.lang.UnsupportedOperationException;
 
 class StackFrameImpl implements StackFrame {
 
-	protected static final Variable[] emptyArray = new Variable[0];
+	protected final static Variable[] emptyArray = new Variable[0];
 
 	protected int localSize = 0; // if local size == 0, size is longest defined local
 	protected int returnStart = 0;
@@ -101,7 +101,7 @@ class StackFrameImpl implements StackFrame {
 
 	@Override
 	public Variable[] getLocals() {
-		if (paramStart >= 0) {
+		if (getParameterOffset() >= 0) {
 			return getNegativeVariables();
 		}
 		return getPositiveVariables();
@@ -110,7 +110,7 @@ class StackFrameImpl implements StackFrame {
 	@Override
 	public Variable[] getParameters() {
 
-		return (paramStart >= 0) ? getPositiveVariables() : getNegativeVariables();
+		return (getParameterOffset() >= 0) ? getPositiveVariables() : getNegativeVariables();
 	}
 
 	@Override
@@ -146,9 +146,9 @@ class StackFrameImpl implements StackFrame {
 	@Override
 	public int getParameterSize() {
 		if (growsNegative()) {
-			return getPositiveSize() - paramStart;
+			return getPositiveSize() - getParameterOffset();
 		}
-		return getNegativeSize() + paramStart;
+		return getNegativeSize() + getParameterOffset();
 	}
 
 	/**
@@ -230,7 +230,7 @@ class StackFrameImpl implements StackFrame {
 	 * @return the negative portion size
 	 */
 	private int getNegativeSize() {
-		int paramStart = this.paramStart;
+		int paramStart = getParameterOffset();
 		if (variables.isEmpty()) {
 			return (growsNegative() ? 0 : -paramStart);
 		}
@@ -249,7 +249,7 @@ class StackFrameImpl implements StackFrame {
 	 * @return the positive portion size
 	 */
 	private int getPositiveSize() {
-		int paramStart = this.paramStart;
+		int paramStart = getParameterOffset();
 		if (variables.isEmpty()) {
 			return (growsNegative() ? paramStart : 0);
 		}
@@ -282,7 +282,7 @@ class StackFrameImpl implements StackFrame {
 				continue;
 			}
 			int start = var.getStackOffset();
-			if (start >= 0 || start > paramStart) {
+			if (start >= 0 || start > getParameterOffset()) {
 				break;
 			}
 		}
@@ -367,7 +367,10 @@ class StackFrameImpl implements StackFrame {
 				break;
 			}
 		}
-        return index;
+		if (index == 0) {
+			return 0;
+		}
+		return index;
 	}
 
 	/**

@@ -73,8 +73,11 @@ public class PathPattern implements PathPredicates {
 		if ("[]".equals(pat) && PathUtils.isIndex(key)) {
 			return true;
 		}
-        return "".equals(pat) && PathUtils.isName(key);
-    }
+		if ("".equals(pat) && PathUtils.isName(key)) {
+			return true;
+		}
+		return false;
+	}
 
 	protected boolean matchesUpTo(List<String> path, int length) {
 		for (int i = 0; i < length; i++) {

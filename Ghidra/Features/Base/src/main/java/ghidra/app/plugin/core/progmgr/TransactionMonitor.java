@@ -39,7 +39,8 @@ class TransactionMonitor extends JComponent implements TransactionListener {
 	Transaction lastTx;
 
 	TransactionMonitor() {
-        busyIcon = ResourceManager.loadImage("images/editbytes.gif");
+		super();
+		busyIcon = ResourceManager.loadImage("images/editbytes.gif");
 		prefSize = new Dimension(busyIcon.getIconWidth(), busyIcon.getIconHeight());
 		ToolTipManager.sharedInstance().registerComponent(this);
 	}
@@ -118,12 +119,13 @@ class TransactionMonitor extends JComponent implements TransactionListener {
 		if (lastTx != null) {
 			List<String> list = lastTx.getOpenSubTransactions();
 			StringBuffer tip = new StringBuffer();
-            for (String s : list) {
-                if (tip.length() != 0) {
-                    tip.append('\n');
-                }
-                tip.append(s);
-            }
+			Iterator<String> iter = list.iterator();
+			while (iter.hasNext()) {
+				if (tip.length() != 0) {
+					tip.append('\n');
+				}
+				tip.append(iter.next());
+			}
 			return HTMLUtilities.toHTML(tip.toString());
 		}
 		return null;

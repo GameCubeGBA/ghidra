@@ -29,7 +29,7 @@ import ghidra.program.model.symbol.Namespace;
 import ghidra.util.exception.DuplicateNameException;
 
 public class ObjectiveC2_PropertyList implements StructConverter {
-	public static final String NAME = "objc_property_list";
+	public final static String NAME = "objc_property_list";
 
 	private ObjectiveC2_State _state;
 	private long _index = -1;
@@ -90,7 +90,7 @@ public class ObjectiveC2_PropertyList implements StructConverter {
 	}
 
 	public void applyTo(Namespace namespace) throws Exception {
-		Address address = ObjectiveC1_Utilities.toAddress(_state.program, _index);
+		Address address = ObjectiveC1_Utilities.toAddress(_state.program, getIndex());
 		try {
 			ObjectiveC1_Utilities.applyData(_state.program, toDataType(), address);
 		}
@@ -102,7 +102,7 @@ public class ObjectiveC2_PropertyList implements StructConverter {
 		}
 		catch (Exception e) {}
 
-		for (ObjectiveC2_Property property : properties) {
+		for (ObjectiveC2_Property property : getProperties()) {
 			property.applyTo( namespace);
 		}
 	}

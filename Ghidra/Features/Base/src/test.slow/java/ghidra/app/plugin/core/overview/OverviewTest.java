@@ -47,7 +47,8 @@ public class OverviewTest extends AbstractGhidraHeadedIntegrationTest {
 	private OverviewColorComponent component;
 
 	public OverviewTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

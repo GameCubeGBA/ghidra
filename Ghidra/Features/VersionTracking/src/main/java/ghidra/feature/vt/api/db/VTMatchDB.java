@@ -232,8 +232,11 @@ public class VTMatchDB extends DatabaseObject implements VTMatch {
 			return false;
 		}
 
-        return SystemUtilities.isEqual(getAssociation(), other.getAssociation());
-    }
+		if (!SystemUtilities.isEqual(getAssociation(), other.getAssociation())) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public Address getSourceAddress() {

@@ -136,7 +136,7 @@ public class LldbModelTargetBreakpointContainerImpl extends LldbModelTargetObjec
 
 	@Override
 	public CompletableFuture<Void> requestElements(boolean refresh) {
-		return getManager().listBreakpoints(session).thenAccept(byNumber -> {
+		return getManager().listBreakpoints(getSession()).thenAccept(byNumber -> {
 			List<TargetObject> specs;
 			synchronized (this) {
 				specs = byNumber.values()

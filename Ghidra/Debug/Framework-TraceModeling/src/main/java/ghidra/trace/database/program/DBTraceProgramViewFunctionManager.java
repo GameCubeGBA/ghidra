@@ -213,8 +213,11 @@ public class DBTraceProgramViewFunctionManager implements FunctionManager {
 		return new WrappingFunctionIterator(
 			NestedIterator.start(asv.iterator(forward), rng -> getFunctionsInRange(rng, forward)),
 			f -> {
-                return asv.contains(f.getEntryPoint());
-            });
+				if (!asv.contains(f.getEntryPoint())) {
+					return false;
+				}
+				return true;
+			});
 	}
 
 	@Override
@@ -239,11 +242,14 @@ public class DBTraceProgramViewFunctionManager implements FunctionManager {
 				if (!asv.contains(f.getEntryPoint())) {
 					return false;
 				}
-                return program.trace.getCodeManager()
-                        .instructions()
-                        .getAt(program.snap,
-                                f.getEntryPoint()) != null;
-            });
+				if (program.trace.getCodeManager()
+						.instructions()
+						.getAt(program.snap,
+							f.getEntryPoint()) == null) {
+					return false;
+				}
+				return true;
+			});
 	}
 
 	@Override

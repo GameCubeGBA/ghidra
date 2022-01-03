@@ -51,7 +51,8 @@ public class CliTableAssembly extends CliAbstractTable {
 		public CliAssemblyRow(int hashAlg, short majorVersion, short minorVersion,
 				short buildNumber, short revisionNumber, int flags, int publicKeyIndex,
 				int nameIndex, int cultureIndex) {
-            this.hashAlg = hashAlg;
+			super();
+			this.hashAlg = hashAlg;
 			this.majorVersion = majorVersion;
 			this.minorVersion = minorVersion;
 			this.buildNumber = buildNumber;

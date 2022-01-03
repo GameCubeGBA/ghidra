@@ -59,8 +59,8 @@ abstract class MarkerSetImpl implements MarkerSet {
 
 	protected MarkerDescriptor markerDescriptor;
 
-	protected static final int MARKER_WIDTH_OFFSET = 7;
-	protected static final int MARKER_HEIGHT = 4;
+	protected final static int MARKER_WIDTH_OFFSET = 7;
+	protected final static int MARKER_HEIGHT = 4;
 
 	private static final int COLOR_VALUE = 200;
 
@@ -267,10 +267,10 @@ abstract class MarkerSetImpl implements MarkerSet {
 	public int compareTo(MarkerSet other) {
 		int result = 1;
 		if (other != null) {
-			if (this.isPreferred == other.isPreferred()) {
+			if (this.isPreferred() == other.isPreferred()) {
 				result = priority - other.getPriority();
 			}	//otherwise, exactly one isPreferred
-			else if (this.isPreferred) {
+			else if (this.isPreferred()) {
 				result = 1;
 			}
 			else {

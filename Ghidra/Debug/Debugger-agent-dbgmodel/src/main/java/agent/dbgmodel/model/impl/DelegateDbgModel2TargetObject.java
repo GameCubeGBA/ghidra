@@ -291,8 +291,8 @@ public class DelegateDbgModel2TargetObject extends DbgModel2TargetObjectImpl imp
 			return;
 		}
 		if (proxy instanceof DbgModelTargetRegisterContainer || //
-			"Stack".equals(proxy.getName()) ||
-			"Debug".equals(proxy.getName())) {
+			proxy.getName().equals("Stack") ||
+			proxy.getName().equals("Debug")) {
 			requestAttributes(false);
 			return;
 		}

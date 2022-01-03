@@ -329,8 +329,11 @@ public class ListingDiff {
 		int numOperands = codeUnit1.getNumOperands();
 		int otherNumOperands = codeUnit2.getNumOperands();
 		// Return whole operand string if number of operands differs.
-        return numOperands != otherNumOperands;
-    }
+		if (numOperands != otherNumOperands) {
+			return true;
+		}
+		return false;
+	}
 
 	private boolean sameType(CodeUnit codeUnit1, CodeUnit codeUnit2) {
 		if (codeUnit1 == null) {
@@ -353,8 +356,11 @@ public class ListingDiff {
 			return false;
 		}
 		// Detect that data type name or path differs?
-        return dt1.getPathName().equals(dt2.getPathName());
-    }
+		if (!dt1.getPathName().equals(dt2.getPathName())) {
+			return false;
+		}
+		return true;
+	}
 
 	@SuppressWarnings("unused")
 	private boolean sameBytes(CodeUnit cu1, CodeUnit cu2) {

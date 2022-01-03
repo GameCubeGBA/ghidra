@@ -65,12 +65,13 @@ class RemoveEquateCmd implements Command {
 
 		EquateTable etable = ((Program) obj).getEquateTable();
 		boolean success = true;
-        for (String name : equateNames) {
-            if (!etable.removeEquate(name)) {
-                tool.setStatusInfo("Unable to remove equate: " + name);
-                success = false;
-            }
-        }
+		for (int i = 0; i < equateNames.length; i++) {
+			String name = equateNames[i];
+			if (!etable.removeEquate(name)) {
+				tool.setStatusInfo("Unable to remove equate: " + name);
+				success = false;
+			}
+		}
 		if (!success) {
 			msg = "Failed to remove one or more equates";
 		}

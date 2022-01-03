@@ -119,7 +119,10 @@ public abstract class AbstractAddressSetView implements AddressSetView {
 				return false;
 			}
 		}
-		return !ait.hasNext() && !bit.hasNext();
+		if (ait.hasNext() || bit.hasNext()) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override

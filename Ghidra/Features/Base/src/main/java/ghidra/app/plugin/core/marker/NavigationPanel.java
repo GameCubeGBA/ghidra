@@ -31,7 +31,8 @@ public class NavigationPanel extends JPanel {
 	private MarkerManager manager;
 
 	NavigationPanel(MarkerManager manager) {
-        this.manager = manager;
+		super();
+		this.manager = manager;
 		init();
 	}
 

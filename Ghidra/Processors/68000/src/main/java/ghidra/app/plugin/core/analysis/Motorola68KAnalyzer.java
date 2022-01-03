@@ -40,7 +40,7 @@ public class Motorola68KAnalyzer extends ConstantPropagationAnalyzer {
 
 	private boolean recoverSwitchTables = SWITCH_OPTION_DEFAULT_VALUE;
 
-	private static final String PROCESSOR_NAME = "68000";
+	private final static String PROCESSOR_NAME = "68000";
 
 	public Motorola68KAnalyzer() {
 		super(PROCESSOR_NAME);
@@ -51,8 +51,12 @@ public class Motorola68KAnalyzer extends ConstantPropagationAnalyzer {
 		boolean canAnalyze = program.getLanguage().getProcessor().equals(
 			Processor.findOrPossiblyCreateProcessor(PROCESSOR_NAME));
 
-        return canAnalyze;
-    }
+		if (!canAnalyze) {
+			return false;
+		}
+
+		return true;
+	}
 
 	@Override
 	public AddressSetView flowConstants(final Program program, Address flowStart,
@@ -67,7 +71,7 @@ public class Motorola68KAnalyzer extends ConstantPropagationAnalyzer {
 				public boolean evaluateContext(VarnodeContext context, Instruction instr) {
 					String mnemonic = instr.getMnemonicString();
 
-					if ("pea".equals(mnemonic)) {
+					if (mnemonic.equals("pea")) {
 						// retrieve the value pushed onto the stack
 						try {
 							Varnode stackValue = context.getValue(context.getStackVarnode(), this);
@@ -94,7 +98,7 @@ public class Motorola68KAnalyzer extends ConstantPropagationAnalyzer {
 							// value not found doesn't matter
 						}
 					}
-					if ("lea".equals(mnemonic)) {
+					if (mnemonic.equals("lea")) {
 						Register destReg = instr.getRegister(1);
 						if (destReg == null) {
 							return false;
@@ -138,7 +142,7 @@ public class Motorola68KAnalyzer extends ConstantPropagationAnalyzer {
 					if (!instruction.getFlowType().isJump()) {
 						return false;
 					}
-					if ("jmp".equals(mnemonic)) {
+					if (mnemonic.equals("jmp")) {
 						// record the destination that is unknown
 						int numRefs = instruction.getReferencesFrom().length;
 						if (numRefs >= 4) {
@@ -387,9 +391,10 @@ public class Motorola68KAnalyzer extends ConstantPropagationAnalyzer {
 	}
 
 	private void createData(Program program, ArrayList<CreateDataCmd> dataCommands) {
-        for (CreateDataCmd createDataCmd : dataCommands) {
-            createDataCmd.applyTo(program);
-        }
+		for (Iterator<CreateDataCmd> iterator = dataCommands.iterator(); iterator.hasNext();) {
+			CreateDataCmd createDataCmd = iterator.next();
+			createDataCmd.applyTo(program);
+		}
 	}
 
 	private void labelTable(Program program, Address loc, ArrayList<Address> targets) {
@@ -409,14 +414,16 @@ public class Motorola68KAnalyzer extends ConstantPropagationAnalyzer {
 		}
 
 		int tableNumber = 0;
-        for (Address addr : targets) {
-            AddLabelCmd lcmd = new AddLabelCmd(addr, "case_" + Long.toHexString(tableNumber), space,
-                    SourceType.ANALYSIS);
-            tableNumber++;
-            lcmd.setNamespace(space);
+		for (Iterator<Address> iterator = targets.iterator(); iterator.hasNext();) {
+			Address addr = iterator.next();
 
-            lcmd.applyTo(program);
-        }
+			AddLabelCmd lcmd = new AddLabelCmd(addr, "case_" + Long.toHexString(tableNumber), space,
+				SourceType.ANALYSIS);
+			tableNumber++;
+			lcmd.setNamespace(space);
+
+			lcmd.applyTo(program);
+		}
 	}
 
 	@Override

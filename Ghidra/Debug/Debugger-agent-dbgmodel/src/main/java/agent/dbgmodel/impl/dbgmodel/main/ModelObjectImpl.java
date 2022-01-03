@@ -133,7 +133,7 @@ public class ModelObjectImpl implements ModelObjectInternal {
 		PointerByReference ppMetadata = new PointerByReference();
 		HRESULT hr = jnaData.GetKeyValue(new WString(searchKey), ppObject, ppMetadata);
 		if (!hr.equals(new HRESULT(0)) &&
-			("Parameters".equals(searchKey) || "LocalVariables".equals(searchKey))) {
+			(searchKey.equals("Parameters") || searchKey.equals("LocalVariables"))) {
 			return null;
 		}
 		if (hr.equals(COMUtilsExtra.E_FAIL)) {

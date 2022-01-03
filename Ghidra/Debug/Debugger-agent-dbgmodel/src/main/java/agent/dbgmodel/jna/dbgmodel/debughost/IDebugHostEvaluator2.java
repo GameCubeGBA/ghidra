@@ -23,7 +23,7 @@ import com.sun.jna.ptr.PointerByReference;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IDebugHostEvaluator2 extends IDebugHostEvaluator1 {
-	IID IID_IDEBUG_HOST_EVALUATOR2 = new IID("A117A435-1FB4-4092-A2AB-A929576C1E87");
+	final IID IID_IDEBUG_HOST_EVALUATOR2 = new IID("A117A435-1FB4-4092-A2AB-A929576C1E87");
 
 	enum VTIndices2 implements VTableIndex {
 		ASSIGN_TO, //

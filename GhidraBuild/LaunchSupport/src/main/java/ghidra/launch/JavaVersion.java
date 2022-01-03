@@ -143,8 +143,11 @@ public class JavaVersion implements Comparable<JavaVersion> {
 		if (patch != other.patch) {
 			return false;
 		}
-        return arch == other.arch;
-    }
+		if (arch != other.arch) {
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * Parses the major, minor, and optional patch integers out of the given version string.

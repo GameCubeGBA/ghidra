@@ -235,7 +235,8 @@ public class NumberRangeInputDialog extends DialogComponentProvider {
 			private JTextField documentTf;
 
 			private MyDocument(JTextField textField) {
-                this.documentTf = textField;
+				super();
+				this.documentTf = textField;
 			}
 
 			@Override

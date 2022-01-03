@@ -22,7 +22,7 @@ import ghidra.file.formats.android.oat.OatConstants;
 
 public final class OatMethodOffsetsFactory {
 
-	public static final OatMethodOffsets getOatMethodOffsets(BinaryReader reader, String oatVersion)
+	public final static OatMethodOffsets getOatMethodOffsets(BinaryReader reader, String oatVersion)
 			throws IOException {
 
 		switch (oatVersion) {

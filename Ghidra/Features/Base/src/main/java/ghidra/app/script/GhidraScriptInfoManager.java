@@ -118,7 +118,7 @@ public class GhidraScriptInfoManager {
 		}
 		ScriptInfo info = scriptFileToInfoMap.get(script);
 		if (info == null) {
-			String error = (script.exists() ? "" : "non") + "existing script" + script +
+			String error = (script.exists() ? "" : "non") + "existing script" + script.toString() +
 				" is missing expected ScriptInfo";
 			Msg.showError(GhidraScriptInfoManager.class, null, "ScriptInfo lookup", error);
 		}

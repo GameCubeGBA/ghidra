@@ -30,7 +30,8 @@ public abstract class AbstractMageJPanel<T> extends JPanel implements MagePanel<
 		WeakDataStructureFactory.createSingleThreadAccessWeakSet();
 
 	public AbstractMageJPanel() {
-    }
+		super();
+	}
 
 	public AbstractMageJPanel(LayoutManager layout) {
 		super(layout);

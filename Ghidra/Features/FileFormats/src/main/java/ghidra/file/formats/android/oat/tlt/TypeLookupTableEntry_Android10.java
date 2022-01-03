@@ -29,7 +29,8 @@ import ghidra.util.exception.DuplicateNameException;
 public class TypeLookupTableEntry_Android10 extends TypeLookupTableEntry {
 
 	public TypeLookupTableEntry_Android10(BinaryReader reader) throws IOException {
-        str_offset_ = reader.readNextInt();
+		super();
+		str_offset_ = reader.readNextInt();
 		data_ = reader.readNextInt();
 	}
 

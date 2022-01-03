@@ -53,7 +53,8 @@ public class ProgramDiff2Test extends AbstractProgramDiffTest {
 	protected Program resultProgram;
 
 	public ProgramDiff2Test() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

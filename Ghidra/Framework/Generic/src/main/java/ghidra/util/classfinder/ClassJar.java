@@ -124,10 +124,13 @@ class ClassJar extends ClassLocation {
 		//
 		// Production Mode - In production, only module lib jar files are scanned
 		//
-        return !isUserPluginJar(forwardSlashedPathName) && !isPatchJar(forwardSlashedPathName) && !isModuleDependencyJar(forwardSlashedPathName);
+		if (isUserPluginJar(forwardSlashedPathName) || isPatchJar(forwardSlashedPathName) || isModuleDependencyJar(forwardSlashedPathName)) {
+			return false;
+		}
 
 		// this is typically a 3rd-party jar file
-    }
+		return true;
+	}
 
 	private static boolean isUserPluginJar(String pathName) {
 		return USER_PLUGIN_PATHS.contains(pathName);

@@ -35,7 +35,7 @@ public class MessageLog {
 	/**
 	 * The default number of messages to store before clipping
 	 */
-    private static final int MAX_COUNT = 500;
+	private final static int MAX_COUNT = 500;
 
 	private List<String> messages = new ArrayList<>();
 	private int maxSize = MAX_COUNT;

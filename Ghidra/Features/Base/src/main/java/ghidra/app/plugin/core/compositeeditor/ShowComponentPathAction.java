@@ -25,9 +25,9 @@ import ghidra.program.model.data.DataTypeComponent;
  */
 public class ShowComponentPathAction extends CompositeEditorTableAction {
 
-	public static final String ACTION_NAME = "Show Component Path";
-	private static final String GROUP_NAME = BASIC_ACTION_GROUP;
-	private static final String DESCRIPTION =
+	public final static String ACTION_NAME = "Show Component Path";
+	private final static String GROUP_NAME = BASIC_ACTION_GROUP;
+	private final static String DESCRIPTION =
 		"Show the category for the selected component's data type";
 	private static String[] POPUP_PATH = new String[] { ACTION_NAME };
 	private static String[] MENU_PATH = new String[] { ACTION_NAME };

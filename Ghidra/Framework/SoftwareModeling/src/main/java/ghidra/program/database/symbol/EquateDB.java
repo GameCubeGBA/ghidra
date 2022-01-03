@@ -324,8 +324,11 @@ public class EquateDB extends DatabaseObject implements Equate {
 	@Override
 	public boolean isValidUUID() {
 		String equateName = getDisplayName();
-        return equateName != null && !equateName.contains(EquateManager.ERROR_TAG);
-    }
+		if (equateName == null || equateName.contains(EquateManager.ERROR_TAG)) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public boolean isEnumBased() {

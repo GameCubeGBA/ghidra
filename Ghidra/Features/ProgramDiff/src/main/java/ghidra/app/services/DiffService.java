@@ -33,20 +33,20 @@ public interface DiffService {
 	 * and the otherProgram.
 	 * @param otherProgram a domain file for the program to Diff the current program against.
 	 * @return true if the second program is opened and successfully Diffed.
-	 */
-    boolean launchDiff(DomainFile otherProgram);
+	 */	
+	public boolean launchDiff(DomainFile otherProgram);
 	
 	/**
 	 * Launch the Diff dialog and display differences between the current program 
 	 * and the otherProgram.
 	 * @param otherProgram the program to Diff the current program against.
 	 * @return true if the second program is opened and successfully Diffed.
-	 */
-    boolean launchDiff(Program otherProgram);
+	 */	
+	public boolean launchDiff(Program otherProgram);
 	
 	/**
 	 * Determine if the Diff service is currently displaying a Diff.
 	 */
-    boolean inProgress();
+	public boolean inProgress();
 
 }

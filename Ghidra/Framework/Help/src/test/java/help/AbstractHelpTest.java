@@ -36,7 +36,8 @@ public abstract class AbstractHelpTest extends AbstractGenericTest {
 	private Path testTempDir;
 
 	public AbstractHelpTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

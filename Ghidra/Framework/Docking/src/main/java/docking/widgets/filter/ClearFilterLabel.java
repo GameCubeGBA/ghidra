@@ -256,6 +256,9 @@ public class ClearFilterLabel extends GIconLabel {
 		double textWidth = bounds.getWidth() + bounds.getX();
 
 		int padding = 5;
-        return location.x + textWidth + padding > x;
-    }
+		if (location.x + textWidth + padding > x) {
+			return true;
+		}
+		return false;
+	}
 }

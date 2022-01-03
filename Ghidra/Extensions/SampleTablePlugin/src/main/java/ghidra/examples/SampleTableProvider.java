@@ -176,7 +176,7 @@ public class SampleTableProvider extends ComponentProviderAdapter implements Opt
 
 			@Override
 			public boolean isEnabledForContext(ActionContext context) {
-				return !filterTable.getSelectedRowObjects().isEmpty();
+				return filterTable.getSelectedRowObjects().size() > 0;
 			}
 
 			@Override

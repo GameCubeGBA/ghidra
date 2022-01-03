@@ -31,12 +31,12 @@ public interface ViewManagerService extends ViewService {
 	 * 
 	 * @param viewName
 	 */
-    void setCurrentViewProvider(String viewName);
+	public void setCurrentViewProvider(String viewName);
 
 	/**
 	 * Get the current view provider.
 	 */
-    ViewProviderService getCurrentViewProvider();
+	public ViewProviderService getCurrentViewProvider();
 
 	/**
 	 * Notification that a view name has changed.
@@ -44,6 +44,6 @@ public interface ViewManagerService extends ViewService {
 	 * @param vps service whose name has changed
 	 * @param oldName old name of the service
 	 */
-    void viewNameChanged(ViewProviderService vps, String oldName);
+	public void viewNameChanged(ViewProviderService vps, String oldName);
 
 }

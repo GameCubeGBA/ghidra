@@ -35,7 +35,8 @@ public class DataBufferTest extends AbstractGenericTest {
 	private byte[] buffer = new byte[16 * 1024];
 
 	public DataBufferTest() {
-    }
+		super();
+	}
 
 	private void transferData(boolean useRandomFill) throws Exception {
 

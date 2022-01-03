@@ -29,7 +29,13 @@ public class ErrorListingField extends ListingTextField {
 
 	private Throwable t;
 
-	private static HighlightProvider myProvider = (text, obj, fieldFactoryClass, cursorTextOffset) -> new Highlight[] { new Highlight(0, text.length() - 1, new Color(245, 158, 158)) };
+	private static HighlightProvider myProvider = new HighlightProvider() {
+
+		public Highlight[] getHighlights(String text, Object obj,
+				Class<? extends FieldFactory> fieldFactoryClass, int cursorTextOffset) {
+			return new Highlight[] { new Highlight(0, text.length() - 1, new Color(245, 158, 158)) };
+		}
+	};
 
 	public ErrorListingField(FieldFactory ff, ProxyObj proxy, int varWidth, Throwable t) {
 		super(ff, proxy, createField(ff, proxy, varWidth, t));

@@ -19,6 +19,7 @@ package ghidra.app.util.opinion;
 public class LoaderOpinionException extends RuntimeException {
 
     public LoaderOpinionException() {
+        super();
     }
 
     public LoaderOpinionException(String message, Throwable cause) {

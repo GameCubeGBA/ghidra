@@ -126,14 +126,14 @@ public class FrontEndTool extends PluginTool implements OptionsChangeListener {
 	 * Preference name for whether to show the "What's New" help page when the
 	 * Ghidra Project Window is displayed.
 	 */
-    private static final String GHIDRA_SHOW_WHATS_NEW = "GhidraShowWhatsNew";
+	private final static String GHIDRA_SHOW_WHATS_NEW = "GhidraShowWhatsNew";
 
 	/**
 	 * Window state preference for the location of the divider for the split
 	 * pane in the Ghidra Project Window. The divider is visible when another
 	 * project view is opened.
 	 */
-    private static final String GHIDRA_MAIN_PANEL_DIVIDER_LOC = "GhidraMainPanelDividerLocation";
+	private final static String GHIDRA_MAIN_PANEL_DIVIDER_LOC = "GhidraMainPanelDividerLocation";
 
 	private static final String FRONT_END_TOOL_XML_NAME = "FRONTEND";
 	private static final String FRONT_END_FILE_NAME = "FrontEndTool.xml";
@@ -413,20 +413,21 @@ public class FrontEndTool extends PluginTool implements OptionsChangeListener {
 			}
 		}
 
-		if (!changedList.isEmpty()) {
+		if (changedList.size() > 0) {
 			ChangedFilesDialog dialog = new ChangedFilesDialog(tool, changedList);
 			dialog.setCancelToolTipText("Cancel Check In");
 			if (!dialog.showDialog()) {// blocks until the user hits Save or Cancel
 				Msg.info(this, "Checkin canceled");
 				return;
 			}
-			for (DomainFile df : changedList) {
+			for (int i = 0; i < changedList.size(); i++) {
+				DomainFile df = changedList.get(i);
 				if (df.isChanged()) {
 					list.remove(df);
 				}
 			}
 		}
-		if (!list.isEmpty()) {
+		if (list.size() > 0) {
 			tool.execute(new CheckInTask(tool, list, parent));
 		}
 		else {
@@ -479,20 +480,21 @@ public class FrontEndTool extends PluginTool implements OptionsChangeListener {
 				}
 			}
 		}
-		if (!changedList.isEmpty()) {
+		if (changedList.size() > 0) {
 			ChangedFilesDialog dialog = new ChangedFilesDialog(tool, changedList);
 			dialog.setCancelToolTipText("Cancel Merge");
 			if (!dialog.showDialog()) {// blocks until the user hits Save or Cancel
 				Msg.info(this, "Merge canceled");
 				return;
 			}
-			for (DomainFile df : changedList) {
+			for (int i = 0; i < changedList.size(); i++) {
+				DomainFile df = changedList.get(i);
 				if (df.isChanged()) {
 					list.remove(df);
 				}
 			}
 		}
-		if (!list.isEmpty()) {
+		if (list.size() > 0) {
 			execute(new MergeTask(tool, list, taskListener));
 		}
 		else {

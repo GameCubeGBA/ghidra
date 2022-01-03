@@ -372,14 +372,14 @@ public class DynamicSymbolTableCommand extends LoadCommand {
 	private void markupReferencedSymbolTable(MachHeader header, FlatProgramAPI api,
 			Address baseAddress, ProgramModule parentModule, TaskMonitor monitor)
 			throws DuplicateNameException, IOException, CodeUnitInsertionException, Exception {
-		if (nextrefsyms == 0) {
+		if (getReferencedSymbolTableSize() == 0) {
 			return;
 		}
 		int id = 0;
-		Address dyrefStartAddr = baseAddress.getNewAddress(extrefsymoff);
+		Address dyrefStartAddr = baseAddress.getNewAddress(getReferencedSymbolTableOffset());
 		Address dyrefAddr = dyrefStartAddr;
 		int offset = 0;
-		for (DynamicLibraryReference dyref : referencedList) {
+		for (DynamicLibraryReference dyref : getReferencedSymbolList()) {
 			if (monitor.isCancelled()) {
 				return;
 			}
@@ -414,11 +414,11 @@ public class DynamicSymbolTableCommand extends LoadCommand {
 	private void makupIndirectSymbolTable(MachHeader header, FlatProgramAPI api,
 			Address baseAddress, ProgramModule parentModule, TaskMonitor monitor) throws Exception {
 		int SIZEOF_DWORD = 4;
-		if (nindirectsyms == 0) {
+		if (getIndirectSymbolTableSize() == 0) {
 			return;
 		}
-		Address start = baseAddress.getNewAddress(indirectsymoff);
-		long length = nindirectsyms * SIZEOF_DWORD;
+		Address start = baseAddress.getNewAddress(getIndirectSymbolTableOffset());
+		long length = getIndirectSymbolTableSize() * SIZEOF_DWORD;
 
 		api.createFragment(parentModule, "INDIRECT_SYMBOLS", start, length);
 
@@ -434,15 +434,15 @@ public class DynamicSymbolTableCommand extends LoadCommand {
 			}
 		}
 
-		api.createDwords(start, nindirectsyms);
+		api.createDwords(start, getIndirectSymbolTableSize());
 	}
 
 	private void markupExternalRelocations(FlatProgramAPI api, Address baseAddress,
 			ProgramModule parentModule, TaskMonitor monitor) throws Exception {
-		if (nextrel == 0) {
+		if (getExternalRelocationSize() == 0) {
 			return;
 		}
-		Address relocStartAddr = baseAddress.getNewAddress(extreloff);
+		Address relocStartAddr = baseAddress.getNewAddress(getExternalRelocationOffset());
 		long offset = 0;
 		for (RelocationInfo reloc : externalRelocations) {
 			if (monitor.isCancelled()) {
@@ -459,10 +459,10 @@ public class DynamicSymbolTableCommand extends LoadCommand {
 
 	private void markupLocalRelocations(FlatProgramAPI api, Address baseAddress,
 			ProgramModule parentModule, TaskMonitor monitor) throws Exception {
-		if (nlocrel == 0) {
+		if (getLocalRelocationSize() == 0) {
 			return;
 		}
-		Address relocStartAddr = baseAddress.getNewAddress(locreloff);
+		Address relocStartAddr = baseAddress.getNewAddress(getLocalRelocationOffset());
 		long offset = 0;
 		for (RelocationInfo reloc : localRelocations) {
 			if (monitor.isCancelled()) {
@@ -479,11 +479,11 @@ public class DynamicSymbolTableCommand extends LoadCommand {
 
 	private void markupModules(MachHeader header, FlatProgramAPI api, Address baseAddress,
 			ProgramModule parentModule, TaskMonitor monitor) throws Exception {
-		if (nmodtab == 0) {
+		if (getModuleTableSize() == 0) {
 			return;
 		}
 		SymbolTableCommand symtabCommand = header.getFirstLoadCommand(SymbolTableCommand.class);
-		Address moduleStartAddr = baseAddress.getNewAddress(modtaboff);
+		Address moduleStartAddr = baseAddress.getNewAddress(getModuleTableOffset());
 		long offset = 0;
 		int id = 0;
 		for (DynamicLibraryModule module : moduleList) {
@@ -509,10 +509,10 @@ public class DynamicSymbolTableCommand extends LoadCommand {
 
 	private void markupTOC(MachHeader header, FlatProgramAPI api, Address baseAddress,
 			ProgramModule parentModule, TaskMonitor monitor) throws Exception {
-		if (ntoc == 0) {
+		if (getTableOfContentsSize() == 0) {
 			return;
 		}
-		Address tocStartAddr = baseAddress.getNewAddress(tocoff);
+		Address tocStartAddr = baseAddress.getNewAddress(getTableOfContentsOffset());
 		long offset = 0;
 		for (TableOfContents toc : tocList) {
 			if (monitor.isCancelled()) {

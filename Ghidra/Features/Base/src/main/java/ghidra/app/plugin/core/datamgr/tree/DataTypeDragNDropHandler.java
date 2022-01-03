@@ -176,7 +176,9 @@ public class DataTypeDragNDropHandler implements GTreeDragNDropHandler {
 		}
 
 		if (isDroppingBuiltin(flavors)) {
-            return isValidBuiltinDropSite(destinationNode);
+			if (!isValidBuiltinDropSite(destinationNode)) {
+				return false;
+			}
 		}
 
 		return true;

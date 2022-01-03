@@ -50,7 +50,7 @@ public abstract class ConvertConstantAction extends AbstractDecompilerAction {
 	 * Max instructions to search through, when looking for a scalar match in the listing
 	 * that corresponds with the selected constant in the decompiler window.
 	 */
-	private static final int MAX_INSTRUCTION_WINDOW = 20;
+	private final static int MAX_INSTRUCTION_WINDOW = 20;
 	protected DecompilePlugin plugin;
 	private FontMetrics metrics = null;
 	private int convertType;				// The EquateSymbol conversion type performed by the action
@@ -98,7 +98,9 @@ public abstract class ConvertConstantAction extends AbstractDecompilerAction {
 			return baseString;
 		}
 		StringBuilder buf = new StringBuilder(baseString);
-        buf.append(" ".repeat(paddingSize));
+		for (int i = 0; i < paddingSize; i++) {
+			buf.append(" ");
+		}
 		return buf.toString();
 	}
 

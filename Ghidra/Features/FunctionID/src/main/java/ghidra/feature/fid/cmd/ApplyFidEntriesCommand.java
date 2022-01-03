@@ -114,7 +114,7 @@ public class ApplyFidEntriesCommand extends BackgroundCommand {
 		String bookmarkContents = null;
 		String plateCommentContents = null;
 
-		if (result.matches.isEmpty()) {
+		if (result.matches.size() == 0) {
 			// nothing to do - eliminate functions above might have removed all possibilities
 			return;
 		}
@@ -469,8 +469,12 @@ public class ApplyFidEntriesCommand extends BackgroundCommand {
 		if (containsPrimarySymbol(symTab, "_" + baseName)) {
 			return true;
 		}
-        return containsPrimarySymbol(symTab, "__" + baseName);
-    }
+		if (containsPrimarySymbol(symTab, "__" + baseName)) {
+			return true;
+		}
+
+		return false;
+	}
 
 	private void addSymbolToFunction(Function function, String name) {
 		SymbolTable symbolTable = function.getProgram().getSymbolTable();

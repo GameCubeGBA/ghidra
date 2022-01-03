@@ -56,8 +56,11 @@ public class OperandValue extends PatternValue {
 			return false;
 		}
 		OperandValue that = (OperandValue) obj;
-        return (this.index == that.index) && this.ct.equals(that.ct);
-    }
+		if ((this.index != that.index) || !this.ct.equals(that.ct)) {
+			return false;
+		}
+		return true;
+	}
 
 	public OperandValue() {
 	}

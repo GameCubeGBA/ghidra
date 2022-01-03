@@ -35,28 +35,28 @@ public interface InterpreterConsole extends Disposable {
 	 *The same problem applies to debugger interpreters / consoles.
 	 */
 
-	void clear();
+	public void clear();
 
-	InputStream getStdin();
+	public InputStream getStdin();
 
-	OutputStream getStdOut();
+	public OutputStream getStdOut();
 
-	OutputStream getStdErr();
+	public OutputStream getStdErr();
 
-	PrintWriter getOutWriter();
+	public PrintWriter getOutWriter();
 
-	PrintWriter getErrWriter();
+	public PrintWriter getErrWriter();
 
-	void setPrompt(String prompt);
+	public void setPrompt(String prompt);
 
 	/**
 	 * Signals that this console is one that the user can remove from the tool as desired. If this
 	 * method is not called, then the user cannot remove the console from the tool, which means that
 	 * closing the console only hides it.
 	 */
-    void setTransient();
+	public void setTransient();
 
-	void addAction(DockingAction action);
+	public void addAction(DockingAction action);
 
 	/**
 	 * Adds the given callback which will get called the first time the interpreter console is
@@ -64,21 +64,21 @@ public interface InterpreterConsole extends Disposable {
 	 * 
 	 * @param activationCallback The callback to execute when activation occurs for the first time.
 	 */
-    void addFirstActivationCallback(Callback activationCallback);
+	public void addFirstActivationCallback(Callback activationCallback);
 
 	/**
 	 * Checks whether the user can input commands.
 	 * 
 	 * @return true if permitted, false if prohibited
 	 */
-    boolean isInputPermitted();
+	public boolean isInputPermitted();
 
 	/**
 	 * Controls whether the user can input commands.
 	 * 
 	 * @param permitted true to permit input, false to prohibit input
 	 */
-    void setInputPermitted(boolean permitted);
+	public void setInputPermitted(boolean permitted);
 
 	/**
 	 * Check if the console is visible
@@ -89,15 +89,15 @@ public interface InterpreterConsole extends Disposable {
 	 * 
 	 * @return true if visible, false if hidden
 	 */
-    boolean isVisible();
+	public boolean isVisible();
 
 	/**
 	 * Show the console's provider in the tool
 	 */
-    void show();
+	public void show();
 
 	/**
 	 * Notify the tool that this console's title has changed
 	 */
-    void updateTitle();
+	public void updateTitle();
 }

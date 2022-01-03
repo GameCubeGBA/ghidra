@@ -26,7 +26,7 @@ import agent.dbgeng.jna.dbgeng.event.IDebugEventCallbacksWide;
 import agent.dbgeng.jna.dbgeng.io.IDebugOutputCallbacksWide;
 
 public interface IDebugClient5 extends IDebugClient4 {
-	IID IID_IDEBUG_CLIENT5 = new IID("e3acb9d7-7ec2-4f0c-a0da-e81e0cbbe628");
+	final IID IID_IDEBUG_CLIENT5 = new IID("e3acb9d7-7ec2-4f0c-a0da-e81e0cbbe628");
 
 	enum VTIndices5 implements VTableIndex {
 		ATTACH_KERNEL_WIDE, //

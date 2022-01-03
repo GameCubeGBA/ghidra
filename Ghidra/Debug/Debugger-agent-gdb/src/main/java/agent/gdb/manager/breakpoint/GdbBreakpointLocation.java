@@ -137,6 +137,9 @@ public class GdbBreakpointLocation {
 		if (!Objects.equals(this.addr, that.addr)) {
 			return false;
 		}
-        return Objects.equals(this.inferiorIds, that.inferiorIds);
-    }
+		if (!Objects.equals(this.inferiorIds, that.inferiorIds)) {
+			return false;
+		}
+		return true;
+	}
 }

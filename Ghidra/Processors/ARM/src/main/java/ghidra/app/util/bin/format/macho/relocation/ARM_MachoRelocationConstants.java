@@ -25,42 +25,42 @@ public class ARM_MachoRelocationConstants {
 	/**
 	 * Generic relocation as described above
 	 */
-    public static final int ARM_RELOC_VANILLA = 0;
+	public final static int ARM_RELOC_VANILLA = 0;
 
 	/**
 	 * The second relocation entry of a pair
 	 */
-    public static final int ARM_RELOC_PAIR = 1;
+	public final static int ARM_RELOC_PAIR = 1;
 
 	/**
 	 * A PAIR follows with subtract symbol value
 	 */
-    public static final int ARM_RELOC_SECTDIFF = 2;
+	public final static int ARM_RELOC_SECTDIFF = 2;
 
 	/**
 	 * Like ARM_RELOC_SECTDIFF, but the symbol referenced was local
 	 */
-    public static final int ARM_RELOC_LOCAL_SECTDIFF = 3;
+	public final static int ARM_RELOC_LOCAL_SECTDIFF = 3;
 
 	/**
 	 * Pre-bound lazy pointer
 	 */
-    public static final int ARM_RELOC_PB_LA_PTR = 4;
+	public final static int ARM_RELOC_PB_LA_PTR = 4;
 
 	/**
 	 * 24 bit branch displacement (to a word address)
 	 */
-    public static final int ARM_RELOC_BR24 = 5;
+	public final static int ARM_RELOC_BR24 = 5;
 
 	/**
 	 * 22 bit branch displacement (to a half-word address)
 	 */
-    public static final int ARM_THUMB_RELOC_BR22 = 6;
+	public final static int ARM_THUMB_RELOC_BR22 = 6;
 
 	/**
 	 * Obsolete - a thumb 32-bit branch instruction possibly needing page-spanning branch workaround
 	 */
-    public static final int ARM_THUMB_32BIT_BRANCH = 7;
+	public final static int ARM_THUMB_32BIT_BRANCH = 7;
 
 	/**
 	 * For these two r_type relocations they always have a pair following them and the r_length bits
@@ -77,6 +77,6 @@ public class ARM_MachoRelocationConstants {
 	 * The other half of the relocated expression is in the following pair relocation entry in the 
 	 * low 16 bits of r_address field.
 	 */
-    public static final int ARM_RELOC_HALF = 8;
-	public static final int ARM_RELOC_HALF_SECTDIFF = 9;
+	public final static int ARM_RELOC_HALF = 8;
+	public final static int ARM_RELOC_HALF_SECTDIFF = 9;
 }

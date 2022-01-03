@@ -54,7 +54,7 @@ public abstract class AbstractLocalOrParameterRelativeToVirtualFramePointerMsSym
 		myBuilder.append(typeRecordNumber.getNumber());
 		attributes.emit(myBuilder);
 		builder.append(String.format("%s: [%08X], %s %s", getSymbolTypeName(), offset,
-                myBuilder, name));
+			myBuilder.toString(), name));
 	}
 
 }

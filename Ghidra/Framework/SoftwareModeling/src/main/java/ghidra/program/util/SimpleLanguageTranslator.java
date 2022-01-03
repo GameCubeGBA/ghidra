@@ -309,48 +309,58 @@ class SimpleLanguageTranslator extends LanguageTranslatorAdapter {
 			null;
 
 		HashSet<String> newSpacesMapped = new HashSet<>();
-        for (Object o : languageTranslationElement.getChildren()) {
-            Element element = (Element) o;
-            String elementName = element.getName();
-            if ("from_language".equals(elementName)) {
-                if (fromLanguageID != null) {
-                    throw new SAXException("only one 'from_language' element permitted");
-                }
-                fromLanguageVersion = parseIntAttribute(element, "version");
-                fromLanguageID = getLanguageId(element.getText());
-            } else if ("to_language".equals(elementName)) {
-                if (toLanguageID != null) {
-                    throw new SAXException("only one 'to_language' element permitted");
-                }
-                toLanguageVersion = parseIntAttribute(element, "version");
-                toLanguageID = getLanguageId(element.getText());
-            } else if ("map_space".equals(elementName)) {
-                parseMapEntry(element, spaceMap, newSpacesMapped);
-            } else if ("delete_space".equals(elementName)) {
-                parseDeleteEntry(element, spaceMap);
-            } else if ("map_register".equals(elementName)) {
-                parseMapEntry(element, registerMap, null);
-            } else if ("set_context".equals(elementName)) {
-                parseSetContext(element, contextSettings);
-            } else if ("clear_all_context".equals(elementName)) {
-                clearAllContext = true;
-            } else if ("map_compiler_spec".equals(elementName)) {
-                parseMapEntry(element, compilerSpecMap, null);
-            } else if ("post_upgrade_handler".equals(elementName)) {
-                if (postUpgradeInstructionHandlerClass != null) {
-                    throw new SAXException("Only a single post_upgrade_analzer may be specified");
-                }
-                postUpgradeInstructionHandlerClass = parsePostUpgradeHandlerEntry(element);
-            } else {
-                throw new SAXException(
-                        "Unsupported language translator element '" + elementName + "'");
-            }
-        }
+		Iterator<?> iter = languageTranslationElement.getChildren().iterator();
+		while (iter.hasNext()) {
+			Element element = (Element) iter.next();
+			String elementName = element.getName();
+			if ("from_language".equals(elementName)) {
+				if (fromLanguageID != null) {
+					throw new SAXException("only one 'from_language' element permitted");
+				}
+				fromLanguageVersion = parseIntAttribute(element, "version");
+				fromLanguageID = getLanguageId(element.getText());
+			}
+			else if ("to_language".equals(elementName)) {
+				if (toLanguageID != null) {
+					throw new SAXException("only one 'to_language' element permitted");
+				}
+				toLanguageVersion = parseIntAttribute(element, "version");
+				toLanguageID = getLanguageId(element.getText());
+			}
+			else if ("map_space".equals(elementName)) {
+				parseMapEntry(element, spaceMap, newSpacesMapped);
+			}
+			else if ("delete_space".equals(elementName)) {
+				parseDeleteEntry(element, spaceMap);
+			}
+			else if ("map_register".equals(elementName)) {
+				parseMapEntry(element, registerMap, null);
+			}
+			else if ("set_context".equals(elementName)) {
+				parseSetContext(element, contextSettings);
+			}
+			else if ("clear_all_context".equals(elementName)) {
+				clearAllContext = true;
+			}
+			else if ("map_compiler_spec".equals(elementName)) {
+				parseMapEntry(element, compilerSpecMap, null);
+			}
+			else if ("post_upgrade_handler".equals(elementName)) {
+				if (postUpgradeInstructionHandlerClass != null) {
+					throw new SAXException("Only a single post_upgrade_analzer may be specified");
+				}
+				postUpgradeInstructionHandlerClass = parsePostUpgradeHandlerEntry(element);
+			}
+			else {
+				throw new SAXException(
+					"Unsupported language translator element '" + elementName + "'");
+			}
+		}
 
-		if (fromLanguageID == null || fromLanguageID.getIdAsString().trim().isEmpty()) {
+		if (fromLanguageID == null || fromLanguageID.getIdAsString().trim().length() == 0) {
 			throw new SAXException("Missing valid 'from_language' element");
 		}
-		if (toLanguageID == null || toLanguageID.getIdAsString().trim().isEmpty()) {
+		if (toLanguageID == null || toLanguageID.getIdAsString().trim().length() == 0) {
 			throw new SAXException("Missing valid 'to_language' element");
 		}
 		if (fromLanguageID.equals(toLanguageID) && fromLanguageVersion >= toLanguageVersion) {

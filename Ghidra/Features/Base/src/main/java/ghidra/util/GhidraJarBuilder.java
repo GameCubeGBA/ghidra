@@ -926,7 +926,7 @@ public class GhidraJarBuilder implements GhidraLaunchable {
 		buf.append(invocationName != null ? invocationName : "GhidraJarBuilder");
 		buf.append(
 			" [-output <output file>] [-srczip <src zip output file>] [-bin <compiled classes dir>] [-main <main-class>]\n");
-		System.err.println(buf);
+		System.err.println(buf.toString());
 		System.exit(0);
 	}
 
@@ -954,25 +954,25 @@ public class GhidraJarBuilder implements GhidraLaunchable {
 
 		for (int i = 0; i < args.length; i++) {
 			String arg = args[i];
-			if ("-output".equals(arg)) {
+			if (arg.equals("-output")) {
 				if (i == args.length - 1) {
 					usage(args);
 				}
 				outputFile = new File(args[++i]);
 			}
-			else if ("-srczip".equals(arg)) {
+			else if (arg.equals("-srczip")) {
 				if (i == args.length - 1) {
 					usage(args);
 				}
 				srczip = new File(args[++i]);
 			}
-			else if ("-bin".equals(arg)) {
+			else if (arg.equals("-bin")) {
 				if (i == args.length - 1) {
 					usage(args);
 				}
 				extraBinDir = new File(args[++i]);
 			}
-			else if ("-main".equals(arg)) {
+			else if (arg.equals("-main")) {
 				if (i == args.length - 1) {
 					usage(args);
 				}

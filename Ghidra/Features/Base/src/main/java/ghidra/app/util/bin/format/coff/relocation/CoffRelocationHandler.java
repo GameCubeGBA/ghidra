@@ -28,7 +28,7 @@ import ghidra.util.exception.NotFoundException;
  * An abstract class used to perform COFF relocations.  Classes should extend this class to
  * provide relocations in a machine/processor specific way.
  */
-public abstract class CoffRelocationHandler implements ExtensionPoint {
+abstract public class CoffRelocationHandler implements ExtensionPoint {
 
 	/**
 	 * Checks to see whether or not an instance of this COFF relocation hander can handle 
@@ -37,7 +37,7 @@ public abstract class CoffRelocationHandler implements ExtensionPoint {
 	 * @param fileHeader The file header associated with the COFF to relocate.
 	 * @return True if this relocation handler can do the relocation; otherwise, false.
 	 */
-    public abstract boolean canRelocate(CoffFileHeader fileHeader);
+	abstract public boolean canRelocate(CoffFileHeader fileHeader);
 
 	/**
 	 * Performs a relocation.
@@ -49,6 +49,6 @@ public abstract class CoffRelocationHandler implements ExtensionPoint {
 	 * @throws MemoryAccessException If there is a problem accessing memory during the relocation.
 	 * @throws NotFoundException If this handler didn't find a way to perform the relocation.
 	 */
-    public abstract void relocate(Program program, Address address, Symbol symbol,
+	abstract public void relocate(Program program, Address address, Symbol symbol,
 			CoffRelocation relocation) throws MemoryAccessException, NotFoundException;
 }

@@ -122,19 +122,19 @@ public abstract class PluginTool extends AbstractDockingTool {
 	/**
 	 * Name of the property for the tool name.
 	 */
-    public static final String TOOL_NAME_PROPERTY = "ToolName";
+	public final static String TOOL_NAME_PROPERTY = "ToolName";
 	/**
 	 * Name of the property for the tool icon.
 	 */
-    public static final String ICON_PROPERTY_NAME = "Icon";
+	public final static String ICON_PROPERTY_NAME = "Icon";
 	/**
 	 * Name of the property for the description of the tool.
 	 */
-    public static final String DESCRIPTION_PROPERTY_NAME = "Description";
+	public final static String DESCRIPTION_PROPERTY_NAME = "Description";
 	/**
 	 * Name of the property for the number of plugins the tool has.
 	 */
-    public static final String PLUGIN_COUNT_PROPERTY_NAME = "PluginCount";
+	public final static String PLUGIN_COUNT_PROPERTY_NAME = "PluginCount";
 
 	private static final String DOCKING_WINDOWS_ON_TOP = "Docking Windows On Top";
 
@@ -555,7 +555,7 @@ public abstract class PluginTool extends AbstractDockingTool {
 
 	public void putInstanceName(String newInstanceName) {
 		this.instanceName = newInstanceName;
-		if (instanceName.isEmpty()) {
+		if (instanceName.length() == 0) {
 			fullName = toolName;
 		}
 		else {
@@ -586,7 +586,7 @@ public abstract class PluginTool extends AbstractDockingTool {
 		toolName = root.getAttributeValue(ToolTemplate.TOOL_NAME_XML_NAME);
 		instanceName = root.getAttributeValue(ToolTemplate.TOOL_INSTANCE_NAME_XML_NAME);
 
-		if (instanceName.isEmpty()) {
+		if (instanceName.length() == 0) {
 			fullName = toolName;
 		}
 		else {
@@ -650,7 +650,7 @@ public abstract class PluginTool extends AbstractDockingTool {
 	public void setToolName(String name) {
 		String oldName = toolName;
 		toolName = name;
-		if (instanceName.isEmpty()) {
+		if (instanceName.length() == 0) {
 			fullName = toolName;
 		}
 		else {
@@ -1201,8 +1201,11 @@ public abstract class PluginTool extends AbstractDockingTool {
 				return false;
 			}
 		}
-        return pluginMgr.canClose();
-    }
+		if (!pluginMgr.canClose()) {
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * Can the domain object be closed?

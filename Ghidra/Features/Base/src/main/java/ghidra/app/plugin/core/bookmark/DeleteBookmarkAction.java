@@ -48,7 +48,7 @@ class DeleteBookmarkAction extends DockingAction {
 		setDescription("Delete " + bookmark.getTypeString() + " bookmark.");
 		String name = bookmark.getTypeString();
 		String comment = bookmark.getComment();
-		if (comment != null && !comment.isEmpty()) {
+		if (comment != null && comment.length() != 0) {
 			name += ": " + comment;
 		}
 		if (isOffcut) {

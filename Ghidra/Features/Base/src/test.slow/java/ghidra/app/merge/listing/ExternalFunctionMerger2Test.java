@@ -68,7 +68,8 @@ public class ExternalFunctionMerger2Test extends AbstractExternalMergerTest {
 	 * @param arg0
 	 */
 	public ExternalFunctionMerger2Test() {
-    }
+		super();
+	}
 
 	@Test
 	public void testFunctionParamNameVsDataTypeNoConflict() throws Exception {

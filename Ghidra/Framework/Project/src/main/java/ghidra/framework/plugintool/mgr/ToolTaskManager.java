@@ -475,7 +475,7 @@ public class ToolTaskManager implements Runnable {
 				if (!monitor.isCancelled()) {
 					monitor.cancel();
 					String msg = taskCmd.getStatusMsg();
-					if (msg == null || msg.isEmpty()) {
+					if (msg == null || msg.length() == 0) {
 						msg = "Unspecified error occurred.";
 					}
 					Msg.showError(this, tool.getToolFrame(), taskCmd.getName() + " Failed", msg);
@@ -561,11 +561,13 @@ public class ToolTaskManager implements Runnable {
 	}
 
 	private synchronized boolean hasQueuedTasksForDomainObject(DomainObject domainObject) {
-        for (BackgroundCommandTask task : tasks) {
-            if (task.getDomainObject() == domainObject) {
-                return true;
-            }
-        }
+		Iterator<BackgroundCommandTask> iter = tasks.iterator();
+		while (iter.hasNext()) {
+			BackgroundCommandTask task = iter.next();
+			if (task.getDomainObject() == domainObject) {
+				return true;
+			}
+		}
 		return false;
 	}
 

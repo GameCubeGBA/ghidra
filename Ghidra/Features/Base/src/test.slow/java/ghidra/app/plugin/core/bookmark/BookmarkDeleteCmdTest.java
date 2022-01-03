@@ -40,7 +40,8 @@ public class BookmarkDeleteCmdTest extends AbstractGhidraHeadedIntegrationTest {
 	private GhidraLocationGenerator locationGenerator;
 
 	public BookmarkDeleteCmdTest() {
-    }
+		super();
+	}
 
     @Before
     public void setUp() throws Exception {

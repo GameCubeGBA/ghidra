@@ -63,8 +63,11 @@ public class CompilerSpecID implements Comparable<CompilerSpecID> {
 			return false;
 		}
 		final CompilerSpecID other = (CompilerSpecID) obj;
-        return Objects.equals(id, other.id);
-    }
+		if (!Objects.equals(id, other.id)) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public String toString() {

@@ -12,9 +12,9 @@
 package SWIG;
 
 public final class Permissions {
-  public static final Permissions ePermissionsWritable = new Permissions("ePermissionsWritable", lldbJNI.ePermissionsWritable_get());
-  public static final Permissions ePermissionsReadable = new Permissions("ePermissionsReadable", lldbJNI.ePermissionsReadable_get());
-  public static final Permissions ePermissionsExecutable = new Permissions("ePermissionsExecutable", lldbJNI.ePermissionsExecutable_get());
+  public final static Permissions ePermissionsWritable = new Permissions("ePermissionsWritable", lldbJNI.ePermissionsWritable_get());
+  public final static Permissions ePermissionsReadable = new Permissions("ePermissionsReadable", lldbJNI.ePermissionsReadable_get());
+  public final static Permissions ePermissionsExecutable = new Permissions("ePermissionsExecutable", lldbJNI.ePermissionsExecutable_get());
 
   public final int swigValue() {
     return swigValue;
@@ -27,9 +27,9 @@ public final class Permissions {
   public static Permissions swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-      for (Permissions value : swigValues)
-          if (value.swigValue == swigValue)
-              return value;
+    for (int i = 0; i < swigValues.length; i++)
+      if (swigValues[i].swigValue == swigValue)
+        return swigValues[i];
     throw new IllegalArgumentException("No enum " + Permissions.class + " with value " + swigValue);
   }
 

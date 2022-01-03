@@ -49,7 +49,7 @@ import ghidra.xml.XmlPullParserFactory;
  * Based on information the decompiler has produced after working on a function.
  */
 public class HighParamID extends PcodeSyntaxTree {
-	public static final String DECOMPILER_TAG_MAP = "decompiler_tags";
+	public final static String DECOMPILER_TAG_MAP = "decompiler_tags";
 	private Function func; // The traditional function object
 	private String functionname;
 	private Address functionaddress;
@@ -235,7 +235,7 @@ public class HighParamID extends PcodeSyntaxTree {
 	 * 
 	 * @throws PcodeXMLException for improper XML
 	 */
-    public static XmlPullParser stringTree(String xml, ErrorHandler handler)
+	static public XmlPullParser stringTree(String xml, ErrorHandler handler)
 			throws PcodeXMLException {
 		try {
 			return XmlPullParserFactory.create(xml, "Decompiler Result Parser", handler, false);

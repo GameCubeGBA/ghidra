@@ -435,7 +435,7 @@ public class DropDownTextField<T> extends JTextField implements GComponent {
 		});
 
 		// adjust the display based upon the list contents
-		if (data.isEmpty()) {
+		if (data.size() == 0) {
 			updateDisplayLocation(false);
 			return;
 		}
@@ -458,7 +458,7 @@ public class DropDownTextField<T> extends JTextField implements GComponent {
 
 	// for testing so that we can override, otherwise would be private
 	protected List<T> getMatchingData(String searchText) {
-		if (searchText == null || searchText.isEmpty()) {
+		if (searchText == null || searchText.length() == 0) {
 			return Collections.emptyList();
 		}
 

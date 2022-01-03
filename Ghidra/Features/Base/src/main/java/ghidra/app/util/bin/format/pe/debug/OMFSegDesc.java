@@ -37,7 +37,7 @@ import java.io.*;
  * 
  */
 public class OMFSegDesc {
-    static final int IMAGE_SIZEOF_OMF_SEG_DESC = 12;
+    final static int IMAGE_SIZEOF_OMF_SEG_DESC = 12;
 
     private short seg;
     private short pad;

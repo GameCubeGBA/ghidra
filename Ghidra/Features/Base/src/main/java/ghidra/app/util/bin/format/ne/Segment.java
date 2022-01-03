@@ -28,27 +28,27 @@ import java.util.ArrayList;
  */
 public class Segment {
 	/**data segment type.*/
-    private static final short FLAG_DATA       = 0x0001;
+    private final static short FLAG_DATA       = (short) 0x0001;
     /**loaded has allocated memory.*/
-    private static final short FLAG_ALLOC      = 0x0002;
+    private final static short FLAG_ALLOC      = (short) 0x0002;
     /**segment is loaded.*/
-    private static final short FLAG_LOADED     = 0x0004;
+    private final static short FLAG_LOADED     = (short) 0x0004;
     /**segment not fixed.*/
-    private static final short FLAG_MOVEABLE   = 0x0010;
+    private final static short FLAG_MOVEABLE   = (short) 0x0010;
     /**pure (shareable) or impure (unshareable).*/
-    private static final short FLAG_PURE       = 0x0020;
+    private final static short FLAG_PURE       = (short) 0x0020;
     /**preload or load-on-call.*/
-    private static final short FLAG_PRELOAD    = 0x0040;
+    private final static short FLAG_PRELOAD    = (short) 0x0040;
     /**if code, segment is execute-only.*/
-    private static final short FLAG_EXE_ONLY   = 0x0080;
+    private final static short FLAG_EXE_ONLY   = (short) 0x0080;
     /**if data, segment is read-only.*/
-    private static final short FLAG_READ_ONLY  = 0x0080;
+    private final static short FLAG_READ_ONLY  = (short) 0x0080;
     /**segment has relocation records.*/
-    private static final short FLAG_RELOC_INFO = 0x0100;
+    private final static short FLAG_RELOC_INFO = (short) 0x0100;
     /**segment is discardable.*/
-    private static final short FLAG_DISCARD    = 0x1000;
+    private final static short FLAG_DISCARD    = (short) 0x1000;
     /**segment is 32 bit */
-    private static final short FLAG_32BIT      = 0x2000;
+    private final static short FLAG_32BIT      = (short) 0x2000;
 
     private FactoryBundledWithBinaryReader reader;
     private int segmentID;
@@ -230,9 +230,9 @@ public class Segment {
      * @return the bytes the comprise this segment
      */
     public byte [] getBytes() throws IOException {
-        int   offset_int = offsetAlign;
-        int   length_int = Conv.shortToInt(length);
-        int minalloc_int = Conv.shortToInt(minAllocSize);
+        int   offset_int = getOffsetShiftAligned();
+        int   length_int = Conv.shortToInt(getLength());
+        int minalloc_int = Conv.shortToInt(getMinAllocSize());
 
         if (minalloc_int == 0) minalloc_int = 0x10000;
 

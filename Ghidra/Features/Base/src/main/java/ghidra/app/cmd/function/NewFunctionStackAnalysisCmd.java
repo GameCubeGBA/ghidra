@@ -164,9 +164,9 @@ public class NewFunctionStackAnalysisCmd extends BackgroundCommand {
 			// Later this should change to stack locked.
 			Variable[] variables = func.getVariables(VariableFilter.STACK_VARIABLE_FILTER);
 			boolean hasReferences = false;
-			for (Variable variable : variables) {
+			for (int i = 0; i < variables.length; i++) {
 				Reference[] referencesTo =
-						program.getReferenceManager().getReferencesTo(variable);
+					program.getReferenceManager().getReferencesTo(variables[i]);
 				if (referencesTo.length != 0) {
 					hasReferences = true;
 					break;
@@ -272,7 +272,7 @@ public class NewFunctionStackAnalysisCmd extends BackgroundCommand {
 						}
 					}
 				}
-				if ("LEA".equals(instr.getMnemonicString())) {
+				if (instr.getMnemonicString().equals("LEA")) {
 					Register destReg = instr.getRegister(0);
 					if (destReg != null) {
 						Varnode value = context.getRegisterVarnodeValue(destReg);
@@ -314,7 +314,7 @@ public class NewFunctionStackAnalysisCmd extends BackgroundCommand {
 						return;
 					}
 					// TODO: Dirty Dirty nasty Hack for POP EBP problem, only very few cases of this!
-					if ("POP".equals(instr.getMnemonicString())) {
+					if (instr.getMnemonicString().equals("POP")) {
 						Register reg = instr.getRegister(opIndex);
 						if (reg != null && reg.getName().contains("BP")) {
 							return;
@@ -339,7 +339,7 @@ public class NewFunctionStackAnalysisCmd extends BackgroundCommand {
 
 		symEval.flowConstants(func.getEntryPoint(), func.getBody(), eval, true, monitor);
 
-		if (!sortedVariables.isEmpty()) {
+		if (sortedVariables.size() != 0) {
 
 			List<Variable> protectedFuncVars = new ArrayList<>();
 			for (Variable v : func.getAllVariables()) {
@@ -820,8 +820,8 @@ public class NewFunctionStackAnalysisCmd extends BackgroundCommand {
 			Variable lastVar = variablesIntersecting.get(variablesIntersecting.size() - 1);
 			int minOffset = firstVar.getStackOffset();
 			int maxOffset = lastVar.getStackOffset() + lastVar.getLength() - 1;
-			for (Variable variable : variablesIntersecting) {
-				sortedVariables.remove(variable);
+			for (int i = 0; i < variablesIntersecting.size(); i++) {
+				sortedVariables.remove(variablesIntersecting.get(i));
 			}
 
 			// combine all intersecting variables into one

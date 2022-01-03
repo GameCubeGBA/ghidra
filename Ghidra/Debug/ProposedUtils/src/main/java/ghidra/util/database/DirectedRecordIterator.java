@@ -24,8 +24,8 @@ import db.*;
 
 public interface DirectedRecordIterator extends DirectedIterator<DBRecord> {
 
-	static AbstractDirectedRecordIterator getIterator(Table table, Range<Long> keyRange,
-                                                      Direction direction) throws IOException {
+	public static AbstractDirectedRecordIterator getIterator(Table table, Range<Long> keyRange,
+			Direction direction) throws IOException {
 		long min = DirectedIterator.toIteratorMin(keyRange);
 		long max = DirectedIterator.toIteratorMax(keyRange);
 		if (direction == Direction.FORWARD) {
@@ -108,8 +108,8 @@ public interface DirectedRecordIterator extends DirectedIterator<DBRecord> {
 		return it;
 	}
 
-	static DirectedRecordIterator getIndexIterator(Table table, int columnIndex,
-                                                   Range<Field> fieldRange, Direction direction) throws IOException {
+	public static DirectedRecordIterator getIndexIterator(Table table, int columnIndex,
+			Range<Field> fieldRange, Direction direction) throws IOException {
 		Field lower = fieldRange.hasLowerBound() ? fieldRange.lowerEndpoint() : null;
 		Field upper = fieldRange.hasUpperBound() ? fieldRange.upperEndpoint() : null;
 		RecordIterator it =

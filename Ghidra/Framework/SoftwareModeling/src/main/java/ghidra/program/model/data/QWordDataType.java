@@ -23,7 +23,7 @@ public class QWordDataType extends AbstractIntegerDataType {
 	private static final long serialVersionUID = 1L;
 
 	/** A statically defined QWordDataType instance.*/
-    public static final QWordDataType dataType = new QWordDataType();
+	public final static QWordDataType dataType = new QWordDataType();
 
 	public QWordDataType() {
 		this(null);

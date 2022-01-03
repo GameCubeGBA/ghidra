@@ -125,12 +125,17 @@ public class StructureEditorAlignmentTest extends AbstractStructureEditorTest {
 		// Check enablement.
 		CompositeEditorTableAction[] pActions = provider.getActions();
 		for (int i = 0; i < pActions.length; i++) {
-            checkEnablement(pActions[i], (pActions[i] instanceof FavoritesAction) ||
-                    (pActions[i] instanceof CycleGroupAction) ||
-                    (pActions[i] instanceof EditFieldAction) ||
-                    (pActions[i] instanceof InsertUndefinedAction) ||
-                    (pActions[i] instanceof PointerAction) ||
-                    (pActions[i] instanceof HexNumbersAction) || (actions[i] instanceof ApplyAction));
+			if ((pActions[i] instanceof FavoritesAction) ||
+				(pActions[i] instanceof CycleGroupAction) ||
+				(pActions[i] instanceof EditFieldAction) ||
+				(pActions[i] instanceof InsertUndefinedAction) ||
+				(pActions[i] instanceof PointerAction) ||
+				(pActions[i] instanceof HexNumbersAction) || (actions[i] instanceof ApplyAction)) {
+				checkEnablement(pActions[i], true);
+			}
+			else {
+				checkEnablement(pActions[i], false);
+			}
 		}
 
 		assertEquals(3, structureModel.getNumComponents());

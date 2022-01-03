@@ -208,7 +208,7 @@ class DomainObjectDBTransaction implements Transaction {
 		String description = "";
 		for (TransactionEntry entry : list) {
 			description = entry.description;
-			if (description != null && !description.isEmpty()) {
+			if (description != null && description.length() != 0) {
 				description = domainObject.getDomainFile().getName() + ": " + description;
 				break;
 			}
@@ -222,11 +222,13 @@ class DomainObjectDBTransaction implements Transaction {
 	@Override
 	public ArrayList<String> getOpenSubTransactions() {
 		ArrayList<String> subTxList = new ArrayList<>();
-        for (TransactionEntry entry : list) {
-            if (entry.status == NOT_DONE) {
-                subTxList.add(entry.description);
-            }
-        }
+		Iterator<TransactionEntry> iter = list.iterator();
+		while (iter.hasNext()) {
+			TransactionEntry entry = iter.next();
+			if (entry.status == NOT_DONE) {
+				subTxList.add(entry.description);
+			}
+		}
 		return subTxList;
 	}
 

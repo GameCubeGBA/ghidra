@@ -43,7 +43,7 @@ import ghidra.program.model.mem.*;
 public class RTTI2DataType extends RTTIDataType {
 
 	private static final int ENTRY_SIZE = 4;
-	private static final long serialVersionUID = 1;
+	private final static long serialVersionUID = 1;
 	private RTTI1DataType rtti1;
 	private long rtti1Count;
 

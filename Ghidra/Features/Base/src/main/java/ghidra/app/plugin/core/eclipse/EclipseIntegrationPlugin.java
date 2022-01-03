@@ -115,7 +115,7 @@ public class EclipseIntegrationPlugin extends ProgramPlugin implements EclipseIn
 			featuresDirs.add(dropinsDir);
 			for (File dir : dropinsDir.listFiles(File::isDirectory)) {
 				for (File subdir : dir.listFiles(File::isDirectory)) {
-					if ("features".equals(subdir.getName())) {
+					if (subdir.getName().equals("features")) {
 						featuresDirs.add(subdir);
 						break;
 					}
@@ -255,15 +255,15 @@ public class EclipseIntegrationPlugin extends ProgramPlugin implements EclipseIn
 				eclipseInstallDir.getName().endsWith(".app")) {
 				eclipseInstallDir = new File(eclipseInstallDir, "Contents/Eclipse");
 			}
-			else if ("Contents".equals(eclipseInstallDir.getName())) {
+			else if (eclipseInstallDir.getName().equals("Contents")) {
 				eclipseInstallDir = new File(eclipseInstallDir, "Eclipse");
 			}
-			else if ("MacOS".equals(eclipseInstallDir.getName()) &&
-				"Contents".equals(eclipseInstallDir.getParentFile().getName())) {
+			else if (eclipseInstallDir.getName().equals("MacOS") &&
+				eclipseInstallDir.getParentFile().getName().equals("Contents")) {
 				eclipseInstallDir = new File(eclipseInstallDir.getParentFile(), "Eclipse");
 			}
-			else if ("Resources".equals(eclipseInstallDir.getName()) &&
-				"Contents".equals(eclipseInstallDir.getParentFile().getName())) {
+			else if (eclipseInstallDir.getName().equals("Resources") &&
+				eclipseInstallDir.getParentFile().getName().equals("Contents")) {
 				eclipseInstallDir = new File(eclipseInstallDir.getParentFile(), "Eclipse");
 			}
 		}

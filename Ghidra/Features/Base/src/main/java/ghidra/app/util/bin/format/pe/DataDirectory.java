@@ -46,12 +46,12 @@ public abstract class DataDirectory implements StructConverter, PeMarkupable {
 	/**
 	 * The name to use when converting into a structure data type.
 	 */
-    protected static final String TITLE = "IMAGE_DATA_DIRECTORY";
+	protected final static String TITLE = "IMAGE_DATA_DIRECTORY";
 
 	/**
 	 * The size of the data directory, in bytes.
 	 */
-    public static final byte IMAGE_SIZEOF_IMAGE_DIRECTORY_ENTRY = 8;
+	public final static byte IMAGE_SIZEOF_IMAGE_DIRECTORY_ENTRY = 8;
 
 	protected NTHeader ntHeader;
 	protected FactoryBundledWithBinaryReader reader;
@@ -221,7 +221,7 @@ public abstract class DataDirectory implements StructConverter, PeMarkupable {
 	 * @return true if this data directory is contained inside of a section
 	 */
 	boolean isContainedInSection() {
-		return rvaToPointer() != virtualAddress;
+		return rvaToPointer() != getVirtualAddress();
 	}
 
 	/**
@@ -252,9 +252,9 @@ public abstract class DataDirectory implements StructConverter, PeMarkupable {
 		if (virtualAddress == 0) {
 			return -1;
 		}
-		int ptr = ntHeader.rvaToPointer(virtualAddress);
+		int ptr = ntHeader.rvaToPointer(getVirtualAddress());
 		if (ptr < 0) {
-			Msg.error(this, "Invalid file index for " + Integer.toHexString(virtualAddress));
+			Msg.error(this, "Invalid file index for " + Integer.toHexString(getVirtualAddress()));
 		}
 		return ptr;
 	}

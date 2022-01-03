@@ -36,16 +36,16 @@ import ghidra.util.task.TaskMonitorAdapter;
 
 public class FunctionMergerUseForAllTest extends AbstractListingMergeManagerTest {
 
-	private static final String THUNK_A_ENTRY = "00401bd0";
-	private static final String THUNK_A_END = "00401bd9";
-	private static final String THUNK_A_ALT_END = "00401bdc";
-	private static final String THUNK_B_ENTRY = "00401bf0";
-	private static final String THUNK_B_END = "00401bf9";
-	private static final String THUNK_B_ALT_END = "00401bfc";
-	private static final String NO_PARAMS_ENTRY = "004011f0";
-	private static final String ONE_PARAM_ENTRY_A = "00401000";
-	private static final String ONE_PARAM_ENTRY_B = "00401040";
-	private static final String TWO_PARAMS_ENTRY = "004011a0";
+	private final static String THUNK_A_ENTRY = "00401bd0";
+	private final static String THUNK_A_END = "00401bd9";
+	private final static String THUNK_A_ALT_END = "00401bdc";
+	private final static String THUNK_B_ENTRY = "00401bf0";
+	private final static String THUNK_B_END = "00401bf9";
+	private final static String THUNK_B_ALT_END = "00401bfc";
+	private final static String NO_PARAMS_ENTRY = "004011f0";
+	private final static String ONE_PARAM_ENTRY_A = "00401000";
+	private final static String ONE_PARAM_ENTRY_B = "00401040";
+	private final static String TWO_PARAMS_ENTRY = "004011a0";
 
 	private void setupThunkFunctionUseForAll() throws Exception {
 		mtf.initialize("WallaceSrc", new ProgramModifierListener() {

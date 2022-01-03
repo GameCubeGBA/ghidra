@@ -29,7 +29,7 @@ public class DisassembledFormatModel implements ProgramDataFormatModel {
 
 	// Character used to mark a byte that is not part of an instruction or defined
 	// data.
-    public static final String BLOCK = "\u25A1"; // unicode for "WHITE SQUARE"
+	public final static String BLOCK = "\u25A1"; // unicode for "WHITE SQUARE"
 	private int symbolSize;
 	private Program program;
 	private Listing listing;

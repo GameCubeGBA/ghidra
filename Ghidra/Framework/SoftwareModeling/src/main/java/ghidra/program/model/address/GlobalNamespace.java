@@ -90,7 +90,7 @@ public class GlobalNamespace implements Namespace {
 	 */
 	@Override
 	public String toString() {
-		return GLOBAL_NAMESPACE_NAME;
+		return getName();
 	}
 
 	/**
@@ -112,7 +112,7 @@ public class GlobalNamespace implements Namespace {
 	 */
 	@Override
 	public String getName(boolean includeNamespacePath) {
-		return GLOBAL_NAMESPACE_NAME;
+		return getName();
 	}
 
 	/**

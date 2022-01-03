@@ -36,7 +36,7 @@ import ghidra.util.data.DataTypeParser.AllowedDataTypes;
  */
 public class ChooseDataTypeAction extends DockingAction {
 	private static final KeyStroke KEY_BINDING = KeyStroke.getKeyStroke(KeyEvent.VK_T, 0);
-	private static final String ACTION_NAME = "Choose Data Type";
+	private final static String ACTION_NAME = "Choose Data Type";
 
 	private FunctionPlugin plugin;
 
@@ -81,8 +81,11 @@ public class ChooseDataTypeAction extends DockingAction {
 		if (plugin.isValidDataLocation(location)) {
 			return true;
 		}
-        return location instanceof VariableLocation;
-    }
+		if (location instanceof VariableLocation) {
+			return true;
+		}
+		return false;
+	}
 
 	private void createDataType(ListingActionContext context) {
 		int maxSize = getSelectedVariableStorageSize(context);

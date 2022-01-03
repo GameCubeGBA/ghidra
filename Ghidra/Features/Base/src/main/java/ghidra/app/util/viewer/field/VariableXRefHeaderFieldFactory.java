@@ -73,7 +73,7 @@ public class VariableXRefHeaderFieldFactory extends VariableXRefFieldFactory {
 		}
 
 		String headString = getXRefHeaderString(obj);
-		if (headString == null || headString.isEmpty()) {
+		if (headString == null || headString.length() == 0) {
 			return null;
 		}
 

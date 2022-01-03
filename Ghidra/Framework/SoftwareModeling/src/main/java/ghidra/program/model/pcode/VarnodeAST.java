@@ -178,20 +178,22 @@ public class VarnodeAST extends Varnode {
 	 * @param vn  Varnode whose references will get replaced
 	 */
 	public void descendReplace(VarnodeAST vn) {
-        for (PcodeOp op : vn.descend) {
-            if (op.getOutput() == this)
-                continue;        // Cannot be input to your own definition
-            int num = op.getNumInputs();
-            for (int i = 0; i < num; ++i)
-                // Find reference to vn
-                if (op.getInput(i) == vn) {
-                    vn.removeDescendant(op);
-                    op.setInput(null, i);
-                    addDescendant(op);
-                    op.setInput(this, i);
-                    break;
-                }
-        }
+		ListIterator<PcodeOp> iter = vn.descend.listIterator();
+		while (iter.hasNext()) {
+			PcodeOp op = iter.next();
+			if (op.getOutput() == this)
+				continue;		// Cannot be input to your own definition
+			int num = op.getNumInputs();
+			for (int i = 0; i < num; ++i)
+				// Find reference to vn
+				if (op.getInput(i) == vn) {
+					vn.removeDescendant(op);
+					op.setInput(null, i);
+					addDescendant(op);
+					op.setInput(this, i);
+					break;
+				}
+		}
 	}
 
 	// This routine must be consistent with the Comparator classes used for sorting varnodes
@@ -211,17 +213,17 @@ public class VarnodeAST extends Varnode {
 		if (getOffset() != vn.getOffset() || getSize() != vn.getSize() ||
 			getSpace() != vn.getSpace())
 			return false;
-		if (bFree) {
-			if (vn.bFree)
+		if (isFree()) {
+			if (vn.isFree())
 				return (uniqId == vn.uniqId);
 			return false;
 		}
-		else if (vn.bFree)
+		else if (vn.isFree())
 			return false;
-		if (bInput != vn.bInput)
+		if (isInput() != vn.isInput())
 			return false;
 		if (def != null) {
-			PcodeOp vnDef = vn.def;
+			PcodeOp vnDef = vn.getDef();
 			if (vnDef == null)
 				return false;
 			return (def.getSeqnum().equals(vnDef.getSeqnum()));

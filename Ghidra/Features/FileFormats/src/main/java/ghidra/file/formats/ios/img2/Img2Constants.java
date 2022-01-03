@@ -18,22 +18,22 @@ package ghidra.file.formats.ios.img2;
 public final class Img2Constants {
 
 	/** IMG2 magic value */
-    public static final String IMG2_SIGNATURE  = "Img2";
+	public final static String IMG2_SIGNATURE  = "Img2";
 
 	/** IMG2 magic value as bytes */
-    public static final byte [] IMG2_SIGNATURE_BYTES  =  { '2', 'g', 'm', 'I' };
+	public final static byte [] IMG2_SIGNATURE_BYTES  =  { '2', 'g', 'm', 'I' };
 
 	/** Overall size of IMG2 header */
-    public static final int IMG2_LENGTH = 0x400;
+	public final static int IMG2_LENGTH = 0x400;
 
-	public static final String IMAGE_TYPE_logo = "logo";//applelogo.img2
-	public static final String IMAGE_TYPE_batC = "batC";//batterycharging.img2
-	public static final String IMAGE_TYPE_batl = "batl";//batterylow0.img2
-	public static final String IMAGE_TYPE_batL = "batL";//batterylow1.img2
-	public static final String IMAGE_TYPE_dtre = "dtre";//DeviceTree.m68ap.img2
-	public static final String IMAGE_TYPE_ibot = "ibot";//iBoot.m68a9.RELEASE.img2
-	public static final String IMAGE_TYPE_llbz = "llbz";//LLB.m68ap.RELEASE.img2
-	public static final String IMAGE_TYPE_nsvr = "nsrv";//needservice.img2
-	public static final String IMAGE_TYPE_recm = "recm";//recoverymode.img2
+	public final static String IMAGE_TYPE_logo = "logo";//applelogo.img2
+	public final static String IMAGE_TYPE_batC = "batC";//batterycharging.img2
+	public final static String IMAGE_TYPE_batl = "batl";//batterylow0.img2
+	public final static String IMAGE_TYPE_batL = "batL";//batterylow1.img2
+	public final static String IMAGE_TYPE_dtre = "dtre";//DeviceTree.m68ap.img2
+	public final static String IMAGE_TYPE_ibot = "ibot";//iBoot.m68a9.RELEASE.img2
+	public final static String IMAGE_TYPE_llbz = "llbz";//LLB.m68ap.RELEASE.img2
+	public final static String IMAGE_TYPE_nsvr = "nsrv";//needservice.img2
+	public final static String IMAGE_TYPE_recm = "recm";//recoverymode.img2
 
 }

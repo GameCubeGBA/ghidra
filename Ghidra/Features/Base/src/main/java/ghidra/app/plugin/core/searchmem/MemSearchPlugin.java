@@ -84,7 +84,7 @@ public class MemSearchPlugin extends Plugin implements OptionsChangeListener,
 	/** Constant for read/writeConfig() for dialog options */
 	private static final String SHOW_ADVANCED_OPTIONS = "Show Advanced Options";
 
-	static final Highlight[] NO_HIGHLIGHTS = new Highlight[0];
+	final static Highlight[] NO_HIGHLIGHTS = new Highlight[0];
 
 	private static final int MAX_PRE_POPULTATE_BYTE_COUNT = 20;
 

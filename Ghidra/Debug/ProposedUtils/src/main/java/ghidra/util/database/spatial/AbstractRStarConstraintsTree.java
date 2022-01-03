@@ -85,8 +85,11 @@ public abstract class AbstractRStarConstraintsTree< //
 				return result;
 			}
 			result = Double.compare(this.area, that.area);
-            return result;
-        }
+			if (result != 0) {
+				return result;
+			}
+			return 0;
+		}
 	}
 
 	protected class LeastDistanceFromCenterToPoint

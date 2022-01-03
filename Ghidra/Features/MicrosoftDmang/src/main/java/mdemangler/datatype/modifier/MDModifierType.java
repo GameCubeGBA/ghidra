@@ -221,13 +221,13 @@ public class MDModifierType extends MDDataType {
 			MDEncodedNumber n1 = new MDEncodedNumber(dmang);
 			n1.parse();
 			int num = n1.getValue().intValue();
-			StringBuilder arrString = new StringBuilder();
+			String arrString = "";
 			while (num-- > 0) {
 				MDEncodedNumber n2 = new MDEncodedNumber(dmang);
 				n2.parse();
-				arrString.append('[').append(n2).append(']');
+				arrString = arrString + '[' + n2 + ']';
 			}
-			setArrayString(arrString.toString());
+			setArrayString(arrString);
 			dmang.parseInfoPop();
 		}
 	}

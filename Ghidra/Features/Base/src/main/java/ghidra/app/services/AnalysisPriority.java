@@ -55,21 +55,21 @@ public class AnalysisPriority {
 	 * NOTE: there may be analyzers that run before this that need to fix issues like Non-Returning
 	 * functions.  Be very careful running an analyzer with a higher priority.
 	 */
-    public static final AnalysisPriority FORMAT_ANALYSIS = AnalysisPriority.getInitial("FORMAT");
+	public final static AnalysisPriority FORMAT_ANALYSIS = AnalysisPriority.getInitial("FORMAT");
 
 	/**
 	 * Defines block analysis as the second priority for automatic analysis.
 	 * Initial markup of raw bytes should occur at or after this priority (images, etc).
 	 * The initial disassembly of EntryPoints will occur at this priority.
 	 */
-    public static final AnalysisPriority BLOCK_ANALYSIS = FORMAT_ANALYSIS.getNext("BLOCK");
+	public final static AnalysisPriority BLOCK_ANALYSIS = FORMAT_ANALYSIS.getNext("BLOCK");
 
 	/**
 	 * Defines disassembly as the third priority for automatic analysis.
 	 * Disassembly of code found through good solid flow will occur at this priority.
 	 * More heuristic code recovery will occur later.
 	 */
-    public static final AnalysisPriority DISASSEMBLY = BLOCK_ANALYSIS.getNext("DISASSEMBLY");
+	public final static AnalysisPriority DISASSEMBLY = BLOCK_ANALYSIS.getNext("DISASSEMBLY");
 
 	/**
 	 * Defines code analysis as the fourth priority for automatic analysis.
@@ -81,7 +81,7 @@ public class AnalysisPriority {
 	 * bad flow is not fixed at an early priority, switch stmt recovery, function
 	 * boundaries, etc... may need to be redone and bad stuff cleaned up.
 	 */
-    public static final AnalysisPriority CODE_ANALYSIS = DISASSEMBLY.getNext("CODE");
+	public final static AnalysisPriority CODE_ANALYSIS = DISASSEMBLY.getNext("CODE");
 
 	/**
 	 * Defines function analysis as the fifth priority for automatic analysis.
@@ -89,14 +89,14 @@ public class AnalysisPriority {
 	 * More functions could be recovered in further analysis, but if your analysis
 	 * depends on basic function creation, you should go after this priority.
 	 */
-    public static final AnalysisPriority FUNCTION_ANALYSIS = CODE_ANALYSIS.getNext("FUNCTION");
+	public final static AnalysisPriority FUNCTION_ANALYSIS = CODE_ANALYSIS.getNext("FUNCTION");
 
 	/**
 	 * Defines reference analysis as the sixth priority for automatic analysis.
 	 * After this priority, basic reference recovery should have taken place.
 	 * More references could be recovered later.
 	 */
-    public static final AnalysisPriority REFERENCE_ANALYSIS =
+	public final static AnalysisPriority REFERENCE_ANALYSIS =
 		FUNCTION_ANALYSIS.getNext("REFERENCE");
 
 	/**
@@ -104,13 +104,13 @@ public class AnalysisPriority {
 	 * After this priority, data creation (strings, pointers) should have settled down.
 	 * More data can be recovered with further analysis.
 	 */
-    public static final AnalysisPriority DATA_ANALYSIS = REFERENCE_ANALYSIS.getNext("DATA");
+	public final static AnalysisPriority DATA_ANALYSIS = REFERENCE_ANALYSIS.getNext("DATA");
 
 	/**
 	 * Defines Function identification analysis as the eighth priority for automatic analysis.
 	 * After this priority, full function (name/class) evaluation should have taken place.
 	 */
-    public static final AnalysisPriority FUNCTION_ID_ANALYSIS =
+	public final static AnalysisPriority FUNCTION_ID_ANALYSIS =
 		DATA_ANALYSIS.getNext("FUNCTION ID");
 
 	/**
@@ -118,7 +118,7 @@ public class AnalysisPriority {
 	 * Data type propogation analysis should hapen as late as possible so that all basic code
 	 * recovery, reference analysis, etc... has taken place.
 	 */
-    public static final AnalysisPriority DATA_TYPE_PROPOGATION =
+	public final static AnalysisPriority DATA_TYPE_PROPOGATION =
 		FUNCTION_ID_ANALYSIS.getNext("DATA TYPE PROPOGATION");
 
 	public static final AnalysisPriority LOW_PRIORITY = new AnalysisPriority("LOW", 10000);

@@ -34,7 +34,8 @@ public class GhidraFolderTest extends AbstractGhidraHeadedIntegrationTest {
 	private GhidraFolder root;
 
 	public GhidraFolderTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

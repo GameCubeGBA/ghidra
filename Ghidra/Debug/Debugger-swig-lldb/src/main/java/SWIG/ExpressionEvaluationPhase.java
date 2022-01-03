@@ -12,10 +12,10 @@
 package SWIG;
 
 public final class ExpressionEvaluationPhase {
-  public static final ExpressionEvaluationPhase eExpressionEvaluationParse = new ExpressionEvaluationPhase("eExpressionEvaluationParse", lldbJNI.eExpressionEvaluationParse_get());
-  public static final ExpressionEvaluationPhase eExpressionEvaluationIRGen = new ExpressionEvaluationPhase("eExpressionEvaluationIRGen");
-  public static final ExpressionEvaluationPhase eExpressionEvaluationExecution = new ExpressionEvaluationPhase("eExpressionEvaluationExecution");
-  public static final ExpressionEvaluationPhase eExpressionEvaluationComplete = new ExpressionEvaluationPhase("eExpressionEvaluationComplete");
+  public final static ExpressionEvaluationPhase eExpressionEvaluationParse = new ExpressionEvaluationPhase("eExpressionEvaluationParse", lldbJNI.eExpressionEvaluationParse_get());
+  public final static ExpressionEvaluationPhase eExpressionEvaluationIRGen = new ExpressionEvaluationPhase("eExpressionEvaluationIRGen");
+  public final static ExpressionEvaluationPhase eExpressionEvaluationExecution = new ExpressionEvaluationPhase("eExpressionEvaluationExecution");
+  public final static ExpressionEvaluationPhase eExpressionEvaluationComplete = new ExpressionEvaluationPhase("eExpressionEvaluationComplete");
 
   public final int swigValue() {
     return swigValue;
@@ -28,9 +28,9 @@ public final class ExpressionEvaluationPhase {
   public static ExpressionEvaluationPhase swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-      for (ExpressionEvaluationPhase value : swigValues)
-          if (value.swigValue == swigValue)
-              return value;
+    for (int i = 0; i < swigValues.length; i++)
+      if (swigValues[i].swigValue == swigValue)
+        return swigValues[i];
     throw new IllegalArgumentException("No enum " + ExpressionEvaluationPhase.class + " with value " + swigValue);
   }
 

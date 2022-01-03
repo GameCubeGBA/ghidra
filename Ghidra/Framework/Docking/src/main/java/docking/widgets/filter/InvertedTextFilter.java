@@ -57,6 +57,9 @@ public class InvertedTextFilter implements TextFilter {
 		}
 
 		InvertedTextFilter other = (InvertedTextFilter) obj;
-        return Objects.equals(filter, other.filter);
-    }
+		if (!Objects.equals(filter, other.filter)) {
+			return false;
+		}
+		return true;
+	}
 }

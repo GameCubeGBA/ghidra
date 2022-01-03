@@ -44,17 +44,20 @@ public class AddressInput extends JPanel {
 	private JTextField spaceField;
 
 	private static final Comparator<AddressSpace> ADDRESS_SPACE_SORT_COMPARATOR =
-            (s1, s2) -> {
-                if (s1.isOverlaySpace()) {
-                    if (!s2.isOverlaySpace()) {
-                        return 1;
-                    }
-                }
-                else if (s2.isOverlaySpace()) {
-                    return -1;
-                }
-                return s1.getName().compareTo(s2.getName());
-            };
+		new Comparator<>() {
+			@Override
+			public int compare(AddressSpace s1, AddressSpace s2) {
+				if (s1.isOverlaySpace()) {
+					if (!s2.isOverlaySpace()) {
+						return 1;
+					}
+				}
+				else if (s2.isOverlaySpace()) {
+					return -1;
+				}
+				return s1.getName().compareTo(s2.getName());
+			}
+		};
 
 	/**
 	 * Constructor for AddressInput.
@@ -87,7 +90,12 @@ public class AddressInput extends JPanel {
 			}
 		});
 
-		combo.addActionListener(ev -> stateChanged());
+		combo.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ev) {
+				stateChanged();
+			}
+		});
 	}
 
 	/**
@@ -146,7 +154,7 @@ public class AddressInput extends JPanel {
 	 * a valid address.
 	 */
 	public boolean hasInput() {
-		return !textField.getText().isEmpty();
+		return textField.getText().length() != 0;
 	}
 
 	/**
@@ -281,7 +289,7 @@ public class AddressInput extends JPanel {
 			spaceField.setEnabled(false);
 			remove(combo);
 			add(spaceField, BorderLayout.WEST);
-			if (textField.getText().isEmpty()) {
+			if (textField.getText().length() == 0) {
 				updateSpaceField = true;
 			}
 		}

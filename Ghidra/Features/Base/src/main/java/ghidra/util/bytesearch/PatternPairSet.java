@@ -68,22 +68,23 @@ public class PatternPairSet {
 	}
 
 	public void createFinalPatterns(ArrayList<Pattern> finalpats) {
-        for (Pattern postpattern : postPatterns) {
-            int postcheck = postpattern.getNumFixedBits();
-            if (postcheck < postBitsOfCheck) {
-                continue;
-            }
-            for (DittedBitSequence prepattern : preSequences) {
-                int precheck = prepattern.getNumFixedBits();
-                if (precheck + postcheck < totalBitsOfCheck) {
-                    continue;
-                }
-                DittedBitSequence concat = prepattern.concatenate(postpattern);
-                Pattern finalpattern = new Pattern(concat, prepattern.getSize(),
-                        postpattern.getPostRules(), postpattern.getMatchActions());
-                finalpats.add(finalpattern);
-            }
-        }
+		for (int i = 0; i < postPatterns.size(); ++i) {
+			Pattern postpattern = postPatterns.get(i);
+			int postcheck = postpattern.getNumFixedBits();
+			if (postcheck < postBitsOfCheck) {
+				continue;
+			}
+			for (DittedBitSequence prepattern : preSequences) {
+				int precheck = prepattern.getNumFixedBits();
+				if (precheck + postcheck < totalBitsOfCheck) {
+					continue;
+				}
+				DittedBitSequence concat = prepattern.concatenate(postpattern);
+				Pattern finalpattern = new Pattern(concat, prepattern.getSize(),
+					postpattern.getPostRules(), postpattern.getMatchActions());
+				finalpats.add(finalpattern);
+			}
+		}
 	}
 
 	/**
@@ -91,9 +92,9 @@ public class PatternPairSet {
 	 * @param postpats array to add this PatternPairSets post patterns into
 	 */
 	public void extractPostPatterns(ArrayList<Pattern> postpats) {
-        for (Pattern postPattern : postPatterns) {
-            postpats.add(postPattern);
-        }
+		for (int i = 0; i < postPatterns.size(); ++i) {
+			postpats.add(postPatterns.get(i));
+		}
 	}
 
 	/**
@@ -119,7 +120,7 @@ public class PatternPairSet {
 			parser.start("postpatterns");
 			el = parser.peek();
 			ArrayList<DittedBitSequence> postdit = new ArrayList<DittedBitSequence>();
-			while (el.isStart() && "data".equals(el.getName())) {
+			while (el.isStart() && el.getName().equals("data")) {
 				DittedBitSequence postseq = new DittedBitSequence();
 				postseq.restoreXmlData(parser);
 				if (postseq.getNumFixedBits() >= postBitsOfCheck) {

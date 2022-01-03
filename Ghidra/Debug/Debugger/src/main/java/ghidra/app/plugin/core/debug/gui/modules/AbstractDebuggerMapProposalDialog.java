@@ -87,6 +87,6 @@ public abstract class AbstractDebuggerMapProposalDialog<R> extends DialogCompone
 		tableModel.clear();
 		tableModel.addAll(collection);
 		tool.showDialog(this);
-		return adjusted;
+		return getAdjusted();
 	}
 }

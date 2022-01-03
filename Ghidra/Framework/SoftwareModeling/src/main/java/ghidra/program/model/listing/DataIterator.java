@@ -51,7 +51,7 @@ public interface DataIterator extends Iterator<Data>, Iterable<Data>  {
 	// Helper static stuff
 	// --------------------------------------------------------------------------------
 
-	class IteratorWrapper implements DataIterator {
+	static class IteratorWrapper implements DataIterator {
 		private Iterator<Data> it;
 
 		IteratorWrapper(Iterator<Data> it) {

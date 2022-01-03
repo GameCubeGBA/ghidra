@@ -236,7 +236,7 @@ public abstract class AbstractLocationReferencesTest extends AbstractProgramBase
 		List<LocationReferencesProvider> providerList =
 			(List<LocationReferencesProvider>) getInstanceField("providerList",
 				locationReferencesPlugin);
-		if (providerList.isEmpty()) {
+		if (providerList.size() == 0) {
 			return null;
 		}
 

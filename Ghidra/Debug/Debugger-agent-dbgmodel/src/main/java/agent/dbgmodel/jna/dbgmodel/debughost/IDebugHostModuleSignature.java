@@ -24,7 +24,7 @@ import agent.dbgmodel.jna.dbgmodel.IUnknownEx;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IDebugHostModuleSignature extends IUnknownEx {
-	IID IID_IDEBUG_HOST_MODULE_SIGNATURE = new IID("31E53A5A-01EE-4BBB-B899-4B46AE7D595C");
+	final IID IID_IDEBUG_HOST_MODULE_SIGNATURE = new IID("31E53A5A-01EE-4BBB-B899-4B46AE7D595C");
 
 	enum VTIndices implements VTableIndex {
 		IS_MATCH, //

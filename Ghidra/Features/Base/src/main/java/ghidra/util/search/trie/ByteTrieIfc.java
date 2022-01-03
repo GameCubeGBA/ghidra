@@ -30,13 +30,13 @@ public interface ByteTrieIfc<T> {
 	 * Returns if the trie is empty.
 	 * @return if the trie is empty
 	 */
-    boolean isEmpty();
+	public abstract boolean isEmpty();
 
 	/**
 	 * Returns the number of byte sequences in the trie.
 	 * @return the number of byte sequences in the trie
 	 */
-    int size();
+	public abstract int size();
 
 	/**
 	 * Returns the number of nodes in the trie; this is essentially equal
@@ -44,7 +44,7 @@ public interface ByteTrieIfc<T> {
 	 * the trie, minus their shared prefixes.
 	 * @return the number of nodes in the trie
 	 */
-    int numberOfNodes();
+	public abstract int numberOfNodes();
 
 	/**
 	 * Adds a byte sequence to the trie, with corresponding user item.  Returns
@@ -54,7 +54,7 @@ public interface ByteTrieIfc<T> {
 	 * @param item a user item to store in that location
 	 * @return whether the add took place
 	 */
-    boolean add(byte[] value, T item);
+	public abstract boolean add(byte[] value, T item);
 
 	/**
 	 * Finds a byte sequence in the trie and returns a node interface object for it,
@@ -62,7 +62,7 @@ public interface ByteTrieIfc<T> {
 	 * @param value the byte sequence sought
 	 * @return the node interface if present, or null
 	 */
-    ByteTrieNodeIfc<T> find(byte[] value);
+	public abstract ByteTrieNodeIfc<T> find(byte[] value);
 
 	/**
 	 * Visits all the nodes in the trie such that the visitation order is properly
@@ -72,7 +72,7 @@ public interface ByteTrieIfc<T> {
 	 * @param op the operation to perform
 	 * @throws CancelledException if the user cancels
 	 */
-    void inorder(TaskMonitor monitor, Op<T> op) throws CancelledException;
+	public abstract void inorder(TaskMonitor monitor, Op<T> op) throws CancelledException;
 
 	/**
 	 * Search an array of bytes using the Aho-Corasick multiple string
@@ -81,7 +81,7 @@ public interface ByteTrieIfc<T> {
 	 * @return a list of results (tuple of offset position, text found)
 	 * @throws CancelledException if the search is cancelled
 	 */
-    List<SearchResult<Integer, T>> search(byte[] text, TaskMonitor monitor)
+	public abstract List<SearchResult<Integer, T>> search(byte[] text, TaskMonitor monitor)
 			throws CancelledException;
 
 	/**
@@ -94,6 +94,6 @@ public interface ByteTrieIfc<T> {
 	 * @throws MemoryAccessException if an error occurs reading the memory
 	 * @throws CancelledException if the search is cancelled
 	 */
-    List<SearchResult<Address, T>> search(Memory memory, AddressSetView view,
-                                          TaskMonitor monitor) throws MemoryAccessException, CancelledException;
+	public abstract List<SearchResult<Address, T>> search(Memory memory, AddressSetView view,
+			TaskMonitor monitor) throws MemoryAccessException, CancelledException;
 }

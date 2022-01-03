@@ -26,7 +26,7 @@ import ghidra.util.prop.LongPropertySet;
  */ 
 public class DefaultLongPropertyMap extends DefaultPropertyMap implements LongPropertyMap {
 	
-    private static final long serialVersionUID = 1;
+    private final static long serialVersionUID = 1;
     private LongPropertySet lps;
 
 

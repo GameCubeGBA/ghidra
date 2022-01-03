@@ -40,9 +40,9 @@ import ghidra.util.task.TaskMonitor;
 public abstract class AbstractBaseDBTraceDefinedUnitsView<T extends AbstractDBTraceCodeUnit<T>>
 		extends AbstractSingleDBTraceCodeUnitsView<T> {
 
-	protected static final int CACHE_MAX_REGIONS = 1000;
-	protected static final int CACHE_ADDRESS_BREADTH = 10000;
-	protected static final int CACHE_MAX_POINTS = 10000;
+	protected final static int CACHE_MAX_REGIONS = 1000;
+	protected final static int CACHE_ADDRESS_BREADTH = 10000;
+	protected final static int CACHE_MAX_POINTS = 10000;
 
 	protected class CacheForGetUnitContainingQueries
 			extends DBTraceCacheForContainingQueries<GetKey, T, T> {

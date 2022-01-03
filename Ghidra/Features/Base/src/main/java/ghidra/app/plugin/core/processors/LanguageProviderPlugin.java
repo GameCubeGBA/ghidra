@@ -303,7 +303,7 @@ public final class LanguageProviderPlugin extends Plugin implements FrontEndable
 			}
 			catch (LockException e) {
 				Msg.showError(this, null, "Set Language Failed",
-					"Program not checked out exclusively: " + e);
+					"Program not checked out exclusively: " + e.toString());
 				monitor.cancel();
 			}
 			finally {

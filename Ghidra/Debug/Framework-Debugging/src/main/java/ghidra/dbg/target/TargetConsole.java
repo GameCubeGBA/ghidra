@@ -16,7 +16,6 @@
 package ghidra.dbg.target;
 
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.concurrent.CompletableFuture;
 
 import ghidra.dbg.DebuggerTargetObjectIface;
@@ -39,12 +38,12 @@ import ghidra.lifecycle.Experimental;
 @Experimental
 @DebuggerTargetObjectIface("Console")
 public interface TargetConsole extends TargetObject {
-	Charset CHARSET = StandardCharsets.UTF_8;
+	Charset CHARSET = Charset.forName("utf-8");
 
 	/**
 	 * For console output notifications, indicates whether it is normal or error output
 	 */
-	enum Channel {
+	public static enum Channel {
 		STDOUT, STDERR;
 	}
 
@@ -54,5 +53,5 @@ public interface TargetConsole extends TargetObject {
 	 * @param data the data, often utf-8-encoded text
 	 * @return a future which completes when the data is sent
 	 */
-	CompletableFuture<Void> write(byte[] data);
+	public CompletableFuture<Void> write(byte[] data);
 }

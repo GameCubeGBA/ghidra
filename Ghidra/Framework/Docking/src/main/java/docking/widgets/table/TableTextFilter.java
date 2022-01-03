@@ -77,8 +77,11 @@ public class TableTextFilter<ROW_OBJECT> implements TableFilter<ROW_OBJECT> {
 			return false;
 		}
 
-        return Objects.equals(transformer, other.transformer);
-    }
+		if (!Objects.equals(transformer, other.transformer)) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public String toString() {

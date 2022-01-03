@@ -59,60 +59,61 @@ public class ReplaceInComments extends GhidraScript {
 		MemoryBlock[] blocks = getMemoryBlocks();
 
 		// iterate through all memory blocks in current program
-        for (MemoryBlock m : blocks) {
+		for (int i = 0; i < blocks.length; i++) {
 
-            // iterate through all addresses for current block
-            println("Scanning block beginning at 0x" + m.getStart().toString());
-            Address a;
-            for (a = m.getStart(); !a.equals(m.getEnd().add(1)); a = a.add(1)) {
+			// iterate through all addresses for current block
+			MemoryBlock m = blocks[i];
+			println("Scanning block beginning at 0x" + m.getStart().toString());
+			Address a;
+			for (a = m.getStart(); !a.equals(m.getEnd().add(1)); a = a.add(1)) {
 
-                if (monitor.isCancelled())
-                    return;
-                String curComment, newComment;
+				if (monitor.isCancelled())
+					return;
+				String curComment, newComment;
 
-                // replace target with replacement within each comment at address
+				// replace target with replacement within each comment at address
 
-                curComment = getEOLComment(a);
-                if (curComment != null) {
-                    newComment = curComment.replaceAll(tgtStr, replStr);
-                    if (!curComment.equals(newComment)) {
-                        println("   0x" + a.toString() + ":  " + newComment);
-                        setEOLComment(a, newComment);
-                        count = count + 1;
-                    }
-                }
+				curComment = getEOLComment(a);
+				if (curComment != null) {
+					newComment = curComment.replaceAll(tgtStr, replStr);
+					if (!curComment.equals(newComment)) {
+						println("   0x" + a.toString() + ":  " + newComment);
+						setEOLComment(a, newComment);
+						count = count + 1;
+					}
+				}
 
-                curComment = getPlateComment(a);
-                if (curComment != null) {
-                    newComment = curComment.replaceAll(tgtStr, replStr);
-                    if (!curComment.equals(newComment)) {
-                        println("   0x" + a.toString() + ":  " + newComment);
-                        setPlateComment(a, newComment);
-                        count = count + 1;
-                    }
-                }
+				curComment = getPlateComment(a);
+				if (curComment != null) {
+					newComment = curComment.replaceAll(tgtStr, replStr);
+					if (!curComment.equals(newComment)) {
+						println("   0x" + a.toString() + ":  " + newComment);
+						setPlateComment(a, newComment);
+						count = count + 1;
+					}
+				}
 
-                curComment = getPostComment(a);
-                if (curComment != null) {
-                    newComment = curComment.replaceAll(tgtStr, replStr);
-                    if (!curComment.equals(newComment)) {
-                        println("   0x" + a.toString() + ":  " + newComment);
-                        setPostComment(a, newComment);
-                        count = count + 1;
-                    }
-                }
+				curComment = getPostComment(a);
+				if (curComment != null) {
+					newComment = curComment.replaceAll(tgtStr, replStr);
+					if (!curComment.equals(newComment)) {
+						println("   0x" + a.toString() + ":  " + newComment);
+						setPostComment(a, newComment);
+						count = count + 1;
+					}
+				}
 
-                curComment = getPreComment(a);
-                if (curComment != null) {
-                    newComment = curComment.replaceAll(tgtStr, replStr);
-                    if (!curComment.equals(newComment)) {
-                        println("   0x" + a.toString() + ":  " + newComment);
-                        setPreComment(a, newComment);
-                        count = count + 1;
-                    }
-                }
-            }
-        }
+				curComment = getPreComment(a);
+				if (curComment != null) {
+					newComment = curComment.replaceAll(tgtStr, replStr);
+					if (!curComment.equals(newComment)) {
+						println("   0x" + a.toString() + ":  " + newComment);
+						setPreComment(a, newComment);
+						count = count + 1;
+					}
+				}
+			}
+		}
 
 		// iterate through all functions in current program's listing
 		FunctionIterator funcs = currentProgram.getListing().getFunctions(true);
@@ -147,17 +148,18 @@ public class ReplaceInComments extends GhidraScript {
 
 			// iterate through all variable comments for current function
 			Variable[] vars = f.getLocalVariables();
-            for (Variable v : vars) {
-                curComment = v.getComment();
-                if (curComment != null) {
-                    newComment = curComment.replaceAll(tgtStr, replStr);
-                    if (!curComment.equals(newComment)) {
-                        println("   " + f.getName() + "::" + v.getName() + ":  " + newComment);
-                        v.setComment(newComment);
-                        count = count + 1;
-                    }
-                }
-            }
+			for (int i = 0; i < vars.length; i++) {
+				Variable v = vars[i];
+				curComment = v.getComment();
+				if (curComment != null) {
+					newComment = curComment.replaceAll(tgtStr, replStr);
+					if (!curComment.equals(newComment)) {
+						println("   " + f.getName() + "::" + v.getName() + ":  " + newComment);
+						v.setComment(newComment);
+						count = count + 1;
+					}
+				}
+			}
 		}
 
 		println("Comments changed:  " + count);

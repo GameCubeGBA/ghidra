@@ -426,7 +426,7 @@ class AddBlockModel {
 	}
 
 	private boolean hasValidName() {
-		if (blockName == null || blockName.isEmpty()) {
+		if (blockName == null || blockName.length() == 0) {
 			message = "Please enter a Block Name";
 			return false;
 		}

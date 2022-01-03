@@ -125,8 +125,11 @@ public class ApplicationIdentifier {
 		if (!applicationReleaseName.equals(other.applicationReleaseName)) {
 			return false;
 		}
-        return applicationVersion.equals(other.applicationVersion);
-    }
+		if (!applicationVersion.equals(other.applicationVersion)) {
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * Parses application identifier components out of the given version string.

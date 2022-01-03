@@ -37,7 +37,8 @@ import ghidra.util.exception.*;
 public class ExternalUseForAllTest extends AbstractExternalMergerTest {
 
 	public ExternalUseForAllTest() {
-    }
+		super();
+	}
 
 	private void setupRemoveUseForAll() throws Exception {
 		mtf.initialize("WallaceSrc", new OriginalProgramModifierListener() {

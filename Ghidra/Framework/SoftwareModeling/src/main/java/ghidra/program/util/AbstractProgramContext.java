@@ -24,7 +24,7 @@ import ghidra.program.model.lang.RegisterValue;
 import ghidra.program.model.listing.DefaultProgramContext;
 import ghidra.program.model.listing.ProgramContext;
 
-public abstract class AbstractProgramContext implements ProgramContext, DefaultProgramContext {
+abstract public class AbstractProgramContext implements ProgramContext, DefaultProgramContext {
 
 	protected Language language;
 

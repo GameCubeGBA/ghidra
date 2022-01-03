@@ -32,9 +32,9 @@ import ghidra.test.*;
  */
 public class ChangeToolDataTest extends AbstractGhidraHeadedIntegrationTest {
 
-	private static final String DIRECTORY_NAME = AbstractGTest.getTestDirectoryPath();
-	private static final String DATA_NAME_1 = "TestData1";
-	private static final String DATA_NAME_2 = "TestData2";
+	private final static String DIRECTORY_NAME = AbstractGTest.getTestDirectoryPath();
+	private final static String DATA_NAME_1 = "TestData1";
+	private final static String DATA_NAME_2 = "TestData2";
 
 	private Project project;
 

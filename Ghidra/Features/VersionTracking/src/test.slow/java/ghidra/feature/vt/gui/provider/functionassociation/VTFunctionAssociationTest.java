@@ -809,7 +809,7 @@ public class VTFunctionAssociationTest extends AbstractGhidraHeadedIntegrationTe
 		for (VTMatchSet matchSet : matchSets) {
 			VTProgramCorrelatorInfo info = matchSet.getProgramCorrelatorInfo();
 			String matchSetName = info.getName();
-			if ("Exact Function Instructions Match".equals(matchSetName)) {
+			if (matchSetName.equals("Exact Function Instructions Match")) {
 				return matchSet;
 			}
 		}

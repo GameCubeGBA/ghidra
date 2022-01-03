@@ -30,7 +30,7 @@ public class FunctionAnalyzer extends AbstractAnalyzer {
 	private static final String DESCRIPTION =
 		"Create Function definitions for code that is called.";
 
-	private static final int NOTIFICATION_INTERVAL = 256;
+	private final static int NOTIFICATION_INTERVAL = 256;
 
 	protected boolean createOnlyThunks = false;
 	protected String analysisMessage = FIND_FUNCTION_STARTS_MSG;
@@ -161,8 +161,11 @@ public class FunctionAnalyzer extends AbstractAnalyzer {
 			return false;
 		}
 		// if instruction length longer than the body, or the instruction isn't terminal
-        return instr.getLength() > 1 || !instr.getFlowType().isTerminal();
-    }
+		if (instr.getLength() > 1 || !instr.getFlowType().isTerminal()) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Check if this reference is from a call instruction that also
@@ -179,6 +182,9 @@ public class FunctionAnalyzer extends AbstractAnalyzer {
 		if (instr == null) {
 			return false;
 		}
-        return instr.getFallThrough() == ref.getToAddress();
-    }
+		if (instr.getFallThrough() == ref.getToAddress()) {
+			return true;
+		}
+		return false;
+	}
 }

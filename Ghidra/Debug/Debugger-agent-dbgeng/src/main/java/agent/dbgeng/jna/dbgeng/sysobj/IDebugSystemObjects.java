@@ -23,7 +23,7 @@ import com.sun.jna.platform.win32.COM.IUnknown;
 import agent.dbgeng.jna.dbgeng.UnknownWithUtils.VTableIndex;
 
 public interface IDebugSystemObjects extends IUnknown {
-	IID IID_IDEBUG_SYSTEM_OBJECTS = new IID("6b86fe2c-2c4f-4f0c-9da2-174311acc327");
+	final IID IID_IDEBUG_SYSTEM_OBJECTS = new IID("6b86fe2c-2c4f-4f0c-9da2-174311acc327");
 
 	enum VTIndices implements VTableIndex {
 		GET_EVENT_THREAD, //

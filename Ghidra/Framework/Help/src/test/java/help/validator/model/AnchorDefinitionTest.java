@@ -29,7 +29,8 @@ import ghidra.util.exception.AssertException;
 public class AnchorDefinitionTest extends AbstractGenericTest {
 
 	public AnchorDefinitionTest() {
-    }
+		super();
+	}
 
 @Test
     public void testFileWithoutAnchor() {

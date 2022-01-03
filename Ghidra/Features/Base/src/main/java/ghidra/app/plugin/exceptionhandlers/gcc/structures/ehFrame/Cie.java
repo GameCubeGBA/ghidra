@@ -570,7 +570,7 @@ public class Cie extends GccAnalysisClass {
 		/*
 		 * If the first character is a 'z', Augmentation Data is included.
 		 */
-		if (augmentationString != null && !augmentationString.isEmpty() &&
+		if (augmentationString != null && augmentationString.length() > 0 &&
 			augmentationString.charAt(0) == 'z') {
 
 			// Create the Augmentation Data Length and Augmentation Data fields
@@ -709,7 +709,7 @@ public class Cie extends GccAnalysisClass {
 	 * @return the decoder for the FDE
 	 */
 	public DwarfEHDecoder getFDEDecoder() {
-		return DwarfDecoderFactory.getDecoder(fdeEncoding);
+		return DwarfDecoderFactory.getDecoder(getFDEEncoding());
 	}
 
 	/**
@@ -727,7 +727,7 @@ public class Cie extends GccAnalysisClass {
 	 * @return the decoder for the LSDA
 	 */
 	public DwarfEHDecoder getLSDADecoder() {
-		return DwarfDecoderFactory.getDecoder(lsdaEncoding);
+		return DwarfDecoderFactory.getDecoder(getLSDAEncoding());
 	}
 
 	/**

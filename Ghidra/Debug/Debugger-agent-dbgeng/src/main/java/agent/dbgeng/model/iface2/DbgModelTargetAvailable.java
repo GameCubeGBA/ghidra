@@ -21,8 +21,8 @@ public interface DbgModelTargetAvailable extends DbgModelTargetObject, TargetAtt
 	String PID_ATTRIBUTE_NAME = PREFIX_INVISIBLE + "pid";
 	// TODO: DESCRIPTION, TYPE, USER?
 
-	long getPid();
+	public long getPid();
 
-	void setBase(Object value);
+	public void setBase(Object value);
 
 }

@@ -89,7 +89,11 @@ class RenameDataFieldDialog extends DialogComponentProvider {
 
         choiceTextField = (JTextField)recentChoices.getEditor().getEditorComponent();
         setFocusComponent(choiceTextField);
-        choiceTextField.addActionListener(e -> okCallback());
+        choiceTextField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				okCallback();
+			}
+        });
 	    mainPanel.setBorder(new EmptyBorder(5,5,5,5));
 
 		return mainPanel;

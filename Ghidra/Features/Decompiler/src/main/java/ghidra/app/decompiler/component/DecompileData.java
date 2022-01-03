@@ -111,7 +111,7 @@ public class DecompileData {
 		if (!hasDecompileResults()) {
 			return false;
 		}
-		if (programLocation.getProgram() != program) {
+		if (programLocation.getProgram() != getProgram()) {
 			return false;
 		}
 		Address address = programLocation.getAddress();

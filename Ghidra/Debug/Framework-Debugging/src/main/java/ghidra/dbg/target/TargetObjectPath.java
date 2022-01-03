@@ -42,8 +42,8 @@ public class TargetObjectPath implements Comparable<TargetObjectPath> {
 			return false;
 		}
 		TargetObjectPath that = (TargetObjectPath) obj;
-		return this.model == that.model &&
-			Objects.equals(this.keyList, that.keyList);
+		return this.getModel() == that.getModel() &&
+			Objects.equals(this.getKeyList(), that.getKeyList());
 	}
 
 	@Override
@@ -56,8 +56,8 @@ public class TargetObjectPath implements Comparable<TargetObjectPath> {
 		if (this == that) {
 			return 0;
 		}
-		DebuggerObjectModel thisModel = this.model;
-		DebuggerObjectModel thatModel = that.model;
+		DebuggerObjectModel thisModel = this.getModel();
+		DebuggerObjectModel thatModel = that.getModel();
 		if (thisModel != thatModel) {
 			if (thisModel == null) {
 				return -1;
@@ -73,7 +73,7 @@ public class TargetObjectPath implements Comparable<TargetObjectPath> {
 			}
 			return result;
 		}
-		return PathComparator.KEYED.compare(this.keyList, that.keyList);
+		return PathComparator.KEYED.compare(this.getKeyList(), that.getKeyList());
 	}
 
 	@Override
@@ -102,7 +102,7 @@ public class TargetObjectPath implements Comparable<TargetObjectPath> {
 	}
 
 	public CompletableFuture<TargetObject> fetch() {
-		return model.fetchModelObject(keyList).thenApply(obj -> obj);
+		return model.fetchModelObject(getKeyList()).thenApply(obj -> obj);
 	}
 
 	public String toPathString() {

@@ -12,9 +12,9 @@
 package SWIG;
 
 public final class RunMode {
-  public static final RunMode eOnlyThisThread = new RunMode("eOnlyThisThread");
-  public static final RunMode eAllThreads = new RunMode("eAllThreads");
-  public static final RunMode eOnlyDuringStepping = new RunMode("eOnlyDuringStepping");
+  public final static RunMode eOnlyThisThread = new RunMode("eOnlyThisThread");
+  public final static RunMode eAllThreads = new RunMode("eAllThreads");
+  public final static RunMode eOnlyDuringStepping = new RunMode("eOnlyDuringStepping");
 
   public final int swigValue() {
     return swigValue;
@@ -27,9 +27,9 @@ public final class RunMode {
   public static RunMode swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-      for (RunMode value : swigValues)
-          if (value.swigValue == swigValue)
-              return value;
+    for (int i = 0; i < swigValues.length; i++)
+      if (swigValues[i].swigValue == swigValue)
+        return swigValues[i];
     throw new IllegalArgumentException("No enum " + RunMode.class + " with value " + swigValue);
   }
 

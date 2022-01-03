@@ -51,7 +51,12 @@ import ghidra.util.Msg;
  * @param <V> the type of listeners
  */
 public class ListenerMap<K, P, V extends P> {
-	public static final Executor CALLING_THREAD = command -> command.run();
+	public static final Executor CALLING_THREAD = new Executor() {
+		@Override
+		public void execute(Runnable command) {
+			command.run();
+		}
+	};
 
 	protected static final AtomicReference<Throwable> firstExc = new AtomicReference<>();
 

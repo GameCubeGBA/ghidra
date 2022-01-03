@@ -23,7 +23,7 @@ import ghidra.program.model.address.Address;
  */
 public interface SearchAddressIterator {
 
-	boolean hasNext();
+	public boolean hasNext();
 
-	Address next();
+	public Address next();
 }

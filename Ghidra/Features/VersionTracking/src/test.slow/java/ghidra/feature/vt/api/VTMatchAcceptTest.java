@@ -58,7 +58,8 @@ public class VTMatchAcceptTest extends AbstractGhidraHeadedIntegrationTest {
 	private Options options;
 
 	public VTMatchAcceptTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

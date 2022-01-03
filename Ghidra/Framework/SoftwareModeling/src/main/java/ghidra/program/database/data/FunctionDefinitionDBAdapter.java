@@ -54,7 +54,7 @@ abstract class FunctionDefinitionDBAdapter {
 	static final int FUNCTION_DEF_LAST_CHANGE_TIME_COL =
 		FunctionDefinitionDBAdapterV1.V1_FUNCTION_DEF_LAST_CHANGE_TIME_COL;
 
-	static final byte FUNCTION_DEF_VARARG_FLAG = 0x1; // Bit 0 is flag for "has vararg".
+	static final byte FUNCTION_DEF_VARARG_FLAG = (byte) 0x1; // Bit 0 is flag for "has vararg".
 
 	// Flags Bits 1..4 used for generic calling convention ID
 	static final int GENERIC_CALLING_CONVENTION_FLAG_MASK = 0xf;

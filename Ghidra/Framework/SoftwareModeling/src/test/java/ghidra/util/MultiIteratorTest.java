@@ -37,7 +37,8 @@ import ghidra.util.exception.AssertException;
 public class MultiIteratorTest extends AbstractGenericTest {
 
 	public MultiIteratorTest() {
-    }
+		super();
+	}
 
 	@Test
 	public void testSingleIterator_Forward() {
@@ -408,8 +409,11 @@ public class MultiIteratorTest extends AbstractGenericTest {
 				return false;
 			}
 
-            return Objects.equals(name, other.name);
-        }
+			if (!Objects.equals(name, other.name)) {
+				return false;
+			}
+			return true;
+		}
 
 		@Override
 		public String toString() {

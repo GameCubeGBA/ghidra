@@ -73,8 +73,11 @@ public class JdiBreakpointInfo {
 			return false;
 		}
 		JdiBreakpointInfo that = (JdiBreakpointInfo) obj;
-        return this.request == that.request;
-    }
+		if (this.request != that.request) {
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * Get the type of breakpoint

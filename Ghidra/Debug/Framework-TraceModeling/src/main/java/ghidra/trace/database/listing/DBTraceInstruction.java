@@ -442,8 +442,11 @@ public class DBTraceInstruction extends AbstractDBTraceCodeUnit<DBTraceInstructi
 		if (origFlowType.isJump() && referenceType.isJump()) {
 			return true;
 		}
-        return origFlowType.isTerminal() && referenceType.isTerminal();
-    }
+		if (origFlowType.isTerminal() && referenceType.isTerminal()) {
+			return true;
+		}
+		return false;
+	}
 
 	@Override
 	public void setFlowOverride(FlowOverride flowOverride) {
@@ -684,7 +687,7 @@ public class DBTraceInstruction extends AbstractDBTraceCodeUnit<DBTraceInstructi
 				getStartSnap() + "," + instructionAddress + ")");
 		}
 		// Ensure that prototype is the same implementation
-		InstructionPrototype otherProto = instruction.prototype;
+		InstructionPrototype otherProto = instruction.getPrototype();
 		if (!otherProto.getClass().equals(prototype.getClass())) {
 			throw new UnknownContextException("Instruction has incompatible prototype at: (" +
 				getStartSnap() + "," + instructionAddress + ")");

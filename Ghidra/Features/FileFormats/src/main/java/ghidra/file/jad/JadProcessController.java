@@ -64,13 +64,16 @@ public class JadProcessController {
 		this.wrapper = wrapper;
 		this.desc = desc;
 
-		timeoutRunnable = () -> {
-            if (disposeState == DisposeState.ENDED_HAPPY) {
-                return;
-            }
-            dispose();
-            disposeState = DisposeState.DISPOSED_ON_TIMEOUT;
-        };
+		timeoutRunnable = new Runnable() {
+			@Override
+			public void run() {
+				if (disposeState == DisposeState.ENDED_HAPPY) {
+					return;
+				}
+				dispose();
+				disposeState = DisposeState.DISPOSED_ON_TIMEOUT;
+			}
+		};
 	}
 
 	public void decompile(int timeoutSecs, TaskMonitor monitor) throws IOException {
@@ -141,7 +144,7 @@ public class JadProcessController {
 					Msg.error(this, "Exception while reading JAD process inputstream", e);
 				}
 				String string = buffer.toString().trim();
-				if (!string.isEmpty()) {
+				if (string.length() > 0) {
 					string = string.replace("\n", "\n" + streamName + ": ");
 					Msg.info(JadProcessController.this, "\n" + streamName + ": " + string);
 				}

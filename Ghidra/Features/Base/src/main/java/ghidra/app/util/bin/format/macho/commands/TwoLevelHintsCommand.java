@@ -115,7 +115,7 @@ public class TwoLevelHintsCommand extends LoadCommand {
 				Address addr = baseAddress.getNewAddress(getStartIndex());
 				api.createData(addr, toDataType());
 
-				Address hintStartAddress = baseAddress.add(offset);
+				Address hintStartAddress = baseAddress.add(getOffset());
 				Address hintAddress = hintStartAddress;
 				for (TwoLevelHint hint : hints) {
 					if (monitor.isCancelled()) {

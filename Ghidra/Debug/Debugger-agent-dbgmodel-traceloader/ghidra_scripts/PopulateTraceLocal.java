@@ -245,9 +245,11 @@ public class PopulateTraceLocal extends GhidraScript {
 						if (snap >= 0) {
 							Collection<? extends TraceModule> mods =
 								modules.getModulesByPath(moduleId);
-                            for (TraceModule next : mods) {
-                                next.setUnloadedSnap(snap);
-                            }
+							Iterator<? extends TraceModule> iterator = mods.iterator();
+							while (iterator.hasNext()) {
+								TraceModule next = iterator.next();
+								next.setUnloadedSnap(snap);
+							}
 						}
 					}
 				}
@@ -265,9 +267,11 @@ public class PopulateTraceLocal extends GhidraScript {
 						if (snap >= 0) {
 							Collection<? extends TraceThread> thrs =
 								threads.getThreadsByPath(threadId);
-                            for (TraceThread next : thrs) {
-                                next.setDestructionSnap(snap);
-                            }
+							Iterator<? extends TraceThread> iterator = thrs.iterator();
+							while (iterator.hasNext()) {
+								TraceThread next = iterator.next();
+								next.setDestructionSnap(snap);
+							}
 						}
 					}
 				}

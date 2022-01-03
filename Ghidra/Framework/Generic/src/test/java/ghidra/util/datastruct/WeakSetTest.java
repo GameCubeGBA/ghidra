@@ -43,7 +43,8 @@ public class WeakSetTest extends AbstractGenericTest {
 	 * 
 	 */
 	public WeakSetTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -123,7 +124,7 @@ public class WeakSetTest extends AbstractGenericTest {
 		weakSet.clear();
 
 		assertTrue("The weak set does not have 0 elements after calling " + "clear().",
-			(weakSet.isEmpty()));
+			(weakSet.size() == 0));
 
 		assertTrue("WeakSet.isEmpty() did not return true when the set is " + "empty.",
 			weakSet.isEmpty());

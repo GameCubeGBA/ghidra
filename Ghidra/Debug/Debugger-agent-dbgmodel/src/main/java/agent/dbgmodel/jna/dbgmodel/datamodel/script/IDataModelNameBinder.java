@@ -25,7 +25,7 @@ import agent.dbgmodel.jna.dbgmodel.IUnknownEx;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IDataModelNameBinder extends IUnknownEx {
-	IID IID_IDATA_MODEL_NAME_BINDER = new IID("AF352B7B-8292-4c01-B360-2DC3696C65E7");
+	final IID IID_IDATA_MODEL_NAME_BINDER = new IID("AF352B7B-8292-4c01-B360-2DC3696C65E7");
 
 	enum VTIndices implements VTableIndex {
 		BIND_VALUE, //

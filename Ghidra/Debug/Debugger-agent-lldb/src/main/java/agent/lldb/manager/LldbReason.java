@@ -40,5 +40,5 @@ public interface LldbReason {
 		return Reasons.UNKNOWN;
 	}
 
-	String desc();
+	public String desc();
 }

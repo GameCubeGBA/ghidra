@@ -32,7 +32,8 @@ public class ProgramDBChangeSetTest extends AbstractGhidraHeadedIntegrationTest 
 	private ProgramDB program;
 
 	public ProgramDBChangeSetTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

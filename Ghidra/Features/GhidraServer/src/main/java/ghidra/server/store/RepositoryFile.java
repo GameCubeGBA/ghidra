@@ -238,22 +238,22 @@ public class RepositoryFile {
 			if (!userObj.isAdmin()) {
 				Version[] versions = databaseItem.getVersions();
 				if (version == -1) {
-                    for (Version value : versions) {
-                        if (!user.equals(value.getUser())) {
-                            throw new UserAccessException(name + " version " +
-                                    value.getVersion() + " owned by " + value.getUser());
-                        }
-                    }
+					for (int i = 0; i < versions.length; i++) {
+						if (!user.equals(versions[i].getUser())) {
+							throw new UserAccessException(getName() + " version " +
+								versions[i].getVersion() + " owned by " + versions[i].getUser());
+						}
+					}
 				}
 				else if (version == versions[0].getVersion()) {
 					if (!user.equals(versions[0].getUser())) {
-						throw new UserAccessException(name + " version " + version +
+						throw new UserAccessException(getName() + " version " + version +
 							" owned by " + versions[0].getUser());
 					}
 				}
 				else if (version == versions[versions.length - 1].getVersion()) {
 					if (!user.equals(versions[versions.length - 1].getUser())) {
-						throw new UserAccessException(name + " version " + version +
+						throw new UserAccessException(getName() + " version " + version +
 							" owned by " + versions[versions.length - 1].getUser());
 					}
 				}
@@ -296,7 +296,7 @@ public class RepositoryFile {
 			String oldName = name;
 			String oldPath = getPathname();
 			String newFolderPath = newParent.getPathname();
-			fileSystem.moveItem(parent.getPathname(), name, newFolderPath, newItemName);
+			fileSystem.moveItem(parent.getPathname(), getName(), newFolderPath, newItemName);
 			name = newItemName;
 			parent.fileMoved(this, oldName, newParent);
 			parent = newParent;

@@ -57,18 +57,18 @@ public class OperandReferenceAnalyzer extends AbstractAnalyzer {
 	private static final String NAME = "Reference";
 	private static final String DESCRIPTION = "Analyzes data referenced by instructions.";
 
-	private static final String OPTION_NAME_ASCII = "Ascii String References";
-	private static final String OPTION_NAME_UNICODE = "Unicode String References";
-	private static final String OPTION_NAME_ALIGN_STRINGS = "Align End of Strings";
-	private static final String OPTION_NAME_MIN_STRING_LENGTH = "Minimum String Length";
-	private static final String OPTION_NAME_POINTER = "References to Pointers";
-	private static final String OPTION_NAME_RELOCATION_GUIDE = "Relocation Table Guide";
-	private static final String OPTION_NAME_SUBROUTINE = "Subroutine References";
-	private static final String OPTION_NAME_ADDRESS_TABLE = "Create Address Tables";
-	private static final String OPTION_NAME_SWITCH = "Switch Table References";
-	private static final String OPTION_NAME_SWITCH_ALIGNMENT = "Address Table Alignment";
-	private static final String OPTION_NAME_MINIMUM_TABLE_SIZE = "Address Table Minimum Size";
-	private static final String OPTION_NAME_RESPECT_EXECUTE_FLAG = "Respect Execute Flag";
+	private final static String OPTION_NAME_ASCII = "Ascii String References";
+	private final static String OPTION_NAME_UNICODE = "Unicode String References";
+	private final static String OPTION_NAME_ALIGN_STRINGS = "Align End of Strings";
+	private final static String OPTION_NAME_MIN_STRING_LENGTH = "Minimum String Length";
+	private final static String OPTION_NAME_POINTER = "References to Pointers";
+	private final static String OPTION_NAME_RELOCATION_GUIDE = "Relocation Table Guide";
+	private final static String OPTION_NAME_SUBROUTINE = "Subroutine References";
+	private final static String OPTION_NAME_ADDRESS_TABLE = "Create Address Tables";
+	private final static String OPTION_NAME_SWITCH = "Switch Table References";
+	private final static String OPTION_NAME_SWITCH_ALIGNMENT = "Address Table Alignment";
+	private final static String OPTION_NAME_MINIMUM_TABLE_SIZE = "Address Table Minimum Size";
+	private final static String OPTION_NAME_RESPECT_EXECUTE_FLAG = "Respect Execute Flag";
 
 	private static final String OPTION_DESCRIPTION_ASCII =
 		"Select this check box to create an ascii string if there is a reference to it.";
@@ -95,21 +95,21 @@ public class OperandReferenceAnalyzer extends AbstractAnalyzer {
 	private static final String OPTION_DESCRIPTION_RESPECT_EXECUTE_FLAG =
 		"Respect Execute flag on memory blocks when checking entry points for code.";
 
-	private static final boolean OPTION_DEFAULT_ASCII_ENABLED = true;
-	private static final boolean OPTION_DEFAULT_UNICODE_ENABLED = true;
-	private static final boolean OPTION_DEFAULT_ALIGN_STRINGS_ENABLED = false;
-	private static final int OPTION_DEFAULT_MIN_STRING_LENGTH = 5;
-	private static final boolean OPTION_DEFAULT_POINTER_ENABLED = true;
-	private static final boolean OPTION_DEFAULT_RELOCATION_GUIDE_ENABLED = true;
-	private static final boolean OPTION_DEFAULT_SUBROUTINES_ENABLED = true;
-	private static final boolean OPTION_DEFAULT_ADDRESS_TABLES_ENABLED = true;
-	private static final boolean OPTION_DEFAULT_SWITCH_TABLE_ENABLED = false;
-	private static final int OPTION_DEFAULT_SWITCH_TABLE_ALIGNMENT = 1;
-	private static final boolean OPTION_DEFAULT_RESPECT_EXECUTE_ENABLED = true;
+	private final static boolean OPTION_DEFAULT_ASCII_ENABLED = true;
+	private final static boolean OPTION_DEFAULT_UNICODE_ENABLED = true;
+	private final static boolean OPTION_DEFAULT_ALIGN_STRINGS_ENABLED = false;
+	private final static int OPTION_DEFAULT_MIN_STRING_LENGTH = 5;
+	private final static boolean OPTION_DEFAULT_POINTER_ENABLED = true;
+	private final static boolean OPTION_DEFAULT_RELOCATION_GUIDE_ENABLED = true;
+	private final static boolean OPTION_DEFAULT_SUBROUTINES_ENABLED = true;
+	private final static boolean OPTION_DEFAULT_ADDRESS_TABLES_ENABLED = true;
+	private final static boolean OPTION_DEFAULT_SWITCH_TABLE_ENABLED = false;
+	private final static int OPTION_DEFAULT_SWITCH_TABLE_ALIGNMENT = 1;
+	private final static boolean OPTION_DEFAULT_RESPECT_EXECUTE_ENABLED = true;
 
 	private static final int MINIMUM_POTENTIAL_TABLE_SIZE = 3;
-	private static final int NOTIFICATION_INTERVAL = 256;
-	private static final int MAX_NEG_ENTRIES = 32;
+	private final static int NOTIFICATION_INTERVAL = 256;
+	private final static int MAX_NEG_ENTRIES = 32;
 
 	private boolean asciiEnabled = OPTION_DEFAULT_ASCII_ENABLED;
 	private boolean unicodeEnabled = OPTION_DEFAULT_UNICODE_ENABLED;
@@ -680,7 +680,9 @@ public class OperandReferenceAnalyzer extends AbstractAnalyzer {
 			if (dataType3 instanceof Pointer) {
 				Pointer pointer = (Pointer) dataType3;
 				DataType pointerDataType = pointer.getDataType();
-                return pointerDataType instanceof FunctionDefinition;
+				if (pointerDataType instanceof FunctionDefinition) {
+					return true;
+				}
 			}
 		}
 		return false;
@@ -828,8 +830,11 @@ public class OperandReferenceAnalyzer extends AbstractAnalyzer {
 		int asciiLen = checkAnsiString(program.getMemory(), target);
 		if (asciiLen > 0) {
 			if (desiredDataMemoryContainsReference(program, target, asciiLen)) {
-                return asciiLen > 4; // didn't create a string, but act like we did!
-            }
+				if (asciiLen > 4) {
+					return true; // didn't create a string, but act like we did!
+				}
+				return false;
+			}
 			// check if it could be code
 			if (!isValidInstruction(pdis, target)) {
 				if (clearAllUndefined(program, target, asciiLen)) {
@@ -1034,7 +1039,9 @@ public class OperandReferenceAnalyzer extends AbstractAnalyzer {
 		RelocationTable relocationTable = program.getRelocationTable();
 		if (relocationTable.isRelocatable()) {
 			// if it is relocatable, then there should be no pointers in memory, other than relacatable ones
-            return relocationTable.getSize() <= 0 || relocationTable.getRelocation(target) != null;
+			if (relocationTable.getSize() > 0 && relocationTable.getRelocation(target) == null) {
+				return false;
+			}
 		}
 		return true;
 	}
@@ -1191,8 +1198,11 @@ public class OperandReferenceAnalyzer extends AbstractAnalyzer {
 		if (b >= 0x7f) {
 			return false;
 		}
-        return (b >= 0x20) || b == TAB || b == CARRIAGE_RETURN || b == LINE_FEED;
-    }
+		if ((b < 0x20) && b != TAB && b != CARRIAGE_RETURN && b != LINE_FEED) {
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * getWStrLen

@@ -201,7 +201,7 @@ public abstract class ThreadedTableModel<ROW_OBJECT, DATA_SOURCE>
 
 	private void initializeWorker() {
 		if (worker == null) {
-			worker = new Worker("GTable Worker: " + modelName, incrementalMonitor);
+			worker = new Worker("GTable Worker: " + getName(), incrementalMonitor);
 		}
 
 		cancelCurrentWorkerJob();
@@ -444,7 +444,7 @@ public abstract class ThreadedTableModel<ROW_OBJECT, DATA_SOURCE>
 		// copy the filter so that it is not changed by another thread whilst this filter is
 		// taking place
 
-		if ((data.isEmpty()) || !hasFilter()) {
+		if ((data.size() == 0) || !hasFilter()) {
 			return data;
 		}
 
@@ -452,17 +452,17 @@ public abstract class ThreadedTableModel<ROW_OBJECT, DATA_SOURCE>
 
 		TableFilter<ROW_OBJECT> filterCopy = getTableFilter();
 		List<ROW_OBJECT> filteredList = new ArrayList<>();
-        for (ROW_OBJECT datum : data) {
-            if (monitor.isCancelled()) {
-                return filteredList; // cancelled just return what has matches so far
-            }
+		for (int row = 0; row < data.size(); row++) {
+			if (monitor.isCancelled()) {
+				return filteredList; // cancelled just return what has matches so far
+			}
 
-            ROW_OBJECT rowObject = datum;
-            if (filterCopy.acceptsRow(rowObject)) {
-                filteredList.add(rowObject);
-            }
-            monitor.incrementProgress(1);
-        }
+			ROW_OBJECT rowObject = data.get(row);
+			if (filterCopy.acceptsRow(rowObject)) {
+				filteredList.add(rowObject);
+			}
+			monitor.incrementProgress(1);
+		}
 
 		return filteredList;
 	}

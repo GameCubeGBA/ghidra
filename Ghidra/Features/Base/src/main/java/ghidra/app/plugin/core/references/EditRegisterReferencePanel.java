@@ -67,12 +67,12 @@ class EditRegisterReferencePanel extends EditReferencePanel {
 
 	private void populateRefTypes(RefType adhocType) {
 		refTypes.clearModel();
-        for (RefType registerRefType : REGISTER_REF_TYPES) {
-            if (adhocType == registerRefType) {
-                adhocType = null;
-            }
-            refTypes.addItem(registerRefType);
-        }
+		for (int i = 0; i < REGISTER_REF_TYPES.length; i++) {
+			if (adhocType == REGISTER_REF_TYPES[i]) {
+				adhocType = null;
+			}
+			refTypes.addItem(REGISTER_REF_TYPES[i]);
+		}
 		if (adhocType != null) {
 			refTypes.addItem(adhocType);
 		}

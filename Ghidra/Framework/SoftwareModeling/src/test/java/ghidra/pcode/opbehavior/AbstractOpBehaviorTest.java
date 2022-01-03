@@ -24,7 +24,8 @@ import ghidra.util.StringUtilities;
 public abstract class AbstractOpBehaviorTest extends AbstractGenericTest {
 
 	public AbstractOpBehaviorTest() {
-    }
+		super();
+	}
 
 	protected void assertEquals(BigInteger expected, BigInteger result, int byteSize) {
 		// discards irrelevant bytes before comparing - ignores overflow bytes

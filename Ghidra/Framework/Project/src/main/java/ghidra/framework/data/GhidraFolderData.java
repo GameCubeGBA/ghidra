@@ -94,10 +94,10 @@ class GhidraFolderData {
 		this.parent = parent;
 		this.name = name;
 
-		this.fileManager = parent.fileManager;
-		this.fileSystem = parent.fileSystem;
-		this.versionedFileSystem = parent.versionedFileSystem;
-		this.listener = parent.listener;
+		this.fileManager = parent.getProjectFileManager();
+		this.fileSystem = parent.getLocalFileSystem();
+		this.versionedFileSystem = parent.getVersionedFileSystem();
+		this.listener = parent.getChangeListener();
 
 		try {
 			updateExistenceState();
@@ -162,7 +162,7 @@ class GhidraFolderData {
 		else if (folderPath.startsWith(FileSystem.SEPARATOR)) {
 			return fileManager.getRootFolderData().getFolderPathData(folderPath, lazy);
 		}
-		if (folderPath.isEmpty()) {
+		if (folderPath.length() == 0) {
 			return this;
 		}
 		int index = folderPath.indexOf(FileSystem.SEPARATOR);
@@ -179,7 +179,7 @@ class GhidraFolderData {
 		if (folderData == null) {
 			return null;
 		}
-		if (nextPath.isEmpty()) {
+		if (nextPath.length() == 0) {
 			return folderData;
 		}
 		return folderData.getFolderPathData(nextPath, lazy);
@@ -616,7 +616,7 @@ class GhidraFolderData {
 						}
 						hadError = true; // tolerate single file error and remove file reference
 						Msg.error(this,
-							"Domain File error on " + fileData.getPathname() + ": " + e);
+							"Domain File error on " + fileData.getPathname() + ": " + e.toString());
 					}
 					fileRemoved(fileName);
 				}
@@ -1024,7 +1024,7 @@ class GhidraFolderData {
 
 	GhidraFolder moveTo(GhidraFolderData newParent) throws IOException {
 		synchronized (fileSystem) {
-			if (newParent.fileSystem != fileSystem || fileSystem.isReadOnly()) {
+			if (newParent.getLocalFileSystem() != fileSystem || fileSystem.isReadOnly()) {
 				throw new AssertException("moveTo permitted within writeable project only");
 			}
 			if (getPathname().equals(newParent.getPathname())) {
@@ -1037,7 +1037,7 @@ class GhidraFolderData {
 			try {
 				if (newParent.containsFolder(name)) {
 					throw new DuplicateFileException(
-						"Folder named " + name + " already exists in " + newParent);
+						"Folder named " + getName() + " already exists in " + newParent);
 				}
 
 				if (folderExists) {
@@ -1104,7 +1104,7 @@ class GhidraFolderData {
 			if (this.equals(checkParent)) {
 				return true;
 			}
-			checkParent = checkParent.parent;
+			checkParent = checkParent.getParentData();
 		}
 		return false;
 	}

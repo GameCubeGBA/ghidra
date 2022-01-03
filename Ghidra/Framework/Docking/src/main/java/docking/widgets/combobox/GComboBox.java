@@ -37,7 +37,8 @@ public class GComboBox<E> extends JComboBox<E> implements GComponent {
 	 * <p>
 	 */
 	public GComboBox() {
-        init();
+		super();
+		init();
 	}
 
 	/**

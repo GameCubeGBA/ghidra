@@ -37,7 +37,7 @@ import ghidra.xml.*;
  * This manager is responsible for reading and writing datatypes in XML.
  */
 public class DataTypesXmlMgr {
-	private static final int DEFAULT_SIZE = 1;
+	private final static int DEFAULT_SIZE = 1;
 
 	private static HashMap<String, DataType> foreignTypedefs = new HashMap<>();
 	static {
@@ -89,7 +89,7 @@ public class DataTypesXmlMgr {
 					throw new CancelledException();
 				}
 				element = parser.peek();
-				if (element.isEnd() && "DATATYPES".equals(element.getName())) {
+				if (element.isEnd() && element.getName().equals("DATATYPES")) {
 					parser.next();
 					break;
 				}
@@ -122,12 +122,13 @@ public class DataTypesXmlMgr {
 			dtParser = null;
 		}
 
-        for (XmlTreeNode xmlTreeNode : todo) {
-            if (monitor.isCancelled()) {
-                throw new CancelledException();
-            }
-            logError(xmlTreeNode);
-        }
+		Iterator<XmlTreeNode> it = todo.iterator();
+		while (it.hasNext()) {
+			if (monitor.isCancelled()) {
+				throw new CancelledException();
+			}
+			logError(it.next());
+		}
 	}
 
 	private void logError(XmlTreeNode node) {
@@ -159,19 +160,19 @@ public class DataTypesXmlMgr {
 		String name = element.getName();
 
 		try {
-			if ("STRUCTURE".equals(name)) {
+			if (name.equals("STRUCTURE")) {
 				return processStructure(root, firstPass);
 			}
-			else if ("UNION".equals(name)) {
+			else if (name.equals("UNION")) {
 				return processUnion(root, firstPass);
 			}
-			else if ("FUNCTION_DEF".equals(name)) {
+			else if (name.equals("FUNCTION_DEF")) {
 				return processFunctionDef(root, firstPass);
 			}
-			else if ("ENUM".equals(name)) {
+			else if (name.equals("ENUM")) {
 				return processEnum(root);
 			}
-			else if ("TYPE_DEF".equals(name)) {
+			else if (name.equals("TYPE_DEF")) {
 				return processTypeDef(root, firstPass);
 			}
 			log.appendMsg("Unrecognized datatype tag: " + name);
@@ -603,7 +604,7 @@ public class DataTypesXmlMgr {
 	}
 
 	private void writeRegularComment(XmlWriter writer, String comment) {
-		if (comment != null && !comment.isEmpty()) {
+		if (comment != null && comment.length() > 0) {
 			writer.writeElement("REGULAR_CMT", null, comment);
 		}
 	}

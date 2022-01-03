@@ -30,7 +30,8 @@ public class IncompatibleMaskException extends UsrException {
 	 *  construct a new IncompatibleMaskException with no message.
 	 */
 	public IncompatibleMaskException() {
-    }
+		super();
+	}
 
 	/**
 	 * constructs a new IncompatiblemaskException with a descriptive

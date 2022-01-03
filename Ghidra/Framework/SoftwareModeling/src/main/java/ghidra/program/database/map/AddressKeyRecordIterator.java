@@ -137,7 +137,7 @@ public class AddressKeyRecordIterator implements RecordIterator {
 
 		keyRangeList = addrMap.getKeyRanges(set, absolute, false);
 		keyRangeIndex = addrMap.findKeyRange(keyRangeList, startAddr);
-		if (keyRangeList.isEmpty()) {
+		if (keyRangeList.size() == 0) {
 			return;
 		}
 

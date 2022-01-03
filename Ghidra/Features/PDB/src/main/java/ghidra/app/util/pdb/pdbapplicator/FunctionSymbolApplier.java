@@ -374,11 +374,11 @@ public class FunctionSymbolApplier extends MsSymbolApplier {
 	}
 
 	private String getIndent(int indentLevel) {
-		StringBuilder indent = new StringBuilder();
+		String indent = "";
 		for (int i = 1; i < indentLevel; i++) {
-			indent.append(BLOCK_INDENT);
+			indent += BLOCK_INDENT;
 		}
-		return indent.toString();
+		return indent;
 	}
 
 	// Method copied from ApplyStackVariables (ghidra.app.util.bin.format.pdb package)

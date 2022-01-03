@@ -213,7 +213,7 @@ public class SymbolTreePlugin4Test extends AbstractGhidraHeadedIntegrationTest {
 			GTreeNode node = lNode.getChild(i);
 			if (node instanceof SymbolNode) {
 				Symbol s = ((SymbolNode) node).getSymbol();
-				if ("MySymbol".equals(s.getName())) {
+				if (s.getName().equals("MySymbol")) {
 					util.selectNodes(new GTreeNode[] { node });
 					performAction(selectionAction, util.getSymbolTreeContext(), true);
 					assertTrue(cbPlugin.getCurrentSelection().isEmpty());

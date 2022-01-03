@@ -32,11 +32,11 @@ import ghidra.util.SystemUtilities;
  */
 class DataTypeSyncTableModel extends AbstractSortedTableModel<RowData> {
 
-	static final int CHECKED_COL = 0;
-	static final int STATUS_COL = 1;
-	static final int NAME_COL = 2;
-	static final int REF_PATH_COL = 3;
-	static final int CHANGE_TIME_COL = 4;
+	final static int CHECKED_COL = 0;
+	final static int STATUS_COL = 1;
+	final static int NAME_COL = 2;
+	final static int REF_PATH_COL = 3;
+	final static int CHANGE_TIME_COL = 4;
 
 	private String[] columnNames =
 		new String[] { "Apply", "Status", "Datatype", "Category Path", "Change Time", };
@@ -161,11 +161,13 @@ class DataTypeSyncTableModel extends AbstractSortedTableModel<RowData> {
 
 	public List<DataTypeSyncInfo> getSelectedItems() {
 		List<DataTypeSyncInfo> selectedItems = new ArrayList<>();
-        for (RowData rowData : rowDataList) {
-            if (rowData.isSelected()) {
-                selectedItems.add(rowData.syncInfo);
-            }
-        }
+		Iterator<RowData> iterator = rowDataList.iterator();
+		while (iterator.hasNext()) {
+			RowData rowData = iterator.next();
+			if (rowData.isSelected()) {
+				selectedItems.add(rowData.syncInfo);
+			}
+		}
 		return selectedItems;
 	}
 

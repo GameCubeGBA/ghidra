@@ -46,9 +46,9 @@ public interface TableService {
 	 *        navigate.
 	 * @return a provider to show a visible component for the data
 	 */
-    <T> TableComponentProvider<T> showTable(String componentProviderTitle,
-                                            String tableTypeName, GhidraProgramTableModel<T> model, String windowSubMenu,
-                                            Navigatable navigatable);
+	public <T> TableComponentProvider<T> showTable(String componentProviderTitle,
+			String tableTypeName, GhidraProgramTableModel<T> model, String windowSubMenu,
+			Navigatable navigatable);
 
 	/**
 	 * Creates a table view using the given model. This version creates markers.
@@ -63,13 +63,13 @@ public interface TableService {
 	 *        navigate.
 	 * @return a provider to show a visible component for the data
 	 */
-    <T> TableComponentProvider<T> showTableWithMarkers(String componentProviderTitle,
-                                                       String tableTypeName, GhidraProgramTableModel<T> model, Color markerColor,
-                                                       ImageIcon markerIcon, String windowSubMenu, Navigatable navigatable);
+	public <T> TableComponentProvider<T> showTableWithMarkers(String componentProviderTitle,
+			String tableTypeName, GhidraProgramTableModel<T> model, Color markerColor,
+			ImageIcon markerIcon, String windowSubMenu, Navigatable navigatable);
 
-	TableChooserDialog createTableChooserDialog(TableChooserExecutor executor,
-                                                Program program, String name, Navigatable navigatable);
+	public TableChooserDialog createTableChooserDialog(TableChooserExecutor executor,
+			Program program, String name, Navigatable navigatable);
 
-	TableChooserDialog createTableChooserDialog(TableChooserExecutor executor,
-                                                Program program, String name, Navigatable navigatable, boolean isModal);
+	public TableChooserDialog createTableChooserDialog(TableChooserExecutor executor,
+			Program program, String name, Navigatable navigatable, boolean isModal);
 }

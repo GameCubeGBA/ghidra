@@ -267,7 +267,7 @@ public class InsertBytesWidget extends DialogComponentProvider implements KeyLis
 
 		List<InstructionMetadata> instructions = new ArrayList<>();
 
-		while (!allBytes.isEmpty()) {
+		while (allBytes.size() > 0) {
 			try {
 
 				// First call the disassembler to get the first instruction.  

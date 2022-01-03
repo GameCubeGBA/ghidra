@@ -35,21 +35,21 @@ public interface DbgModelTargetStackFrame extends //
 		DbgEventsListenerAdapter, //
 		DbgModelSelectableObject {
 
-	String FUNC_ATTRIBUTE_NAME = "function";
-	String FUNC_TABLE_ENTRY_ATTRIBUTE_NAME = "Table Entry";
-	String FRAME_OFFSET_ATTRIBUTE_NAME = "Frame Offset";
-	String INST_OFFSET_ATTRIBUTE_NAME = "Inst. Offset";
-	String RETURN_OFFSET_ATTRIBUTE_NAME = "Return Offset";
-	String STACK_OFFSET_ATTRIBUTE_NAME = "Stack Offset";
-	String VIRTUAL_ATTRIBUTE_NAME = "Virtual";
-	String PARAM0_ATTRIBUTE_NAME = "Param[0]";
-	String PARAM1_ATTRIBUTE_NAME = "Param[1]";
-	String PARAM2_ATTRIBUTE_NAME = "Param[2]";
-	String PARAM3_ATTRIBUTE_NAME = "Param[3]";
-	String FROM_ATTRIBUTE_NAME = PREFIX_INVISIBLE + "from"; // TODO
+	public static final String FUNC_ATTRIBUTE_NAME = "function";
+	public static final String FUNC_TABLE_ENTRY_ATTRIBUTE_NAME = "Table Entry";
+	public static final String FRAME_OFFSET_ATTRIBUTE_NAME = "Frame Offset";
+	public static final String INST_OFFSET_ATTRIBUTE_NAME = "Inst. Offset";
+	public static final String RETURN_OFFSET_ATTRIBUTE_NAME = "Return Offset";
+	public static final String STACK_OFFSET_ATTRIBUTE_NAME = "Stack Offset";
+	public static final String VIRTUAL_ATTRIBUTE_NAME = "Virtual";
+	public static final String PARAM0_ATTRIBUTE_NAME = "Param[0]";
+	public static final String PARAM1_ATTRIBUTE_NAME = "Param[1]";
+	public static final String PARAM2_ATTRIBUTE_NAME = "Param[2]";
+	public static final String PARAM3_ATTRIBUTE_NAME = "Param[3]";
+	public static final String FROM_ATTRIBUTE_NAME = PREFIX_INVISIBLE + "from"; // TODO
 
 	@Override
-    default CompletableFuture<Void> setActive() {
+	public default CompletableFuture<Void> setActive() {
 		DbgManagerImpl manager = getManager();
 		DbgThreadImpl thread = manager.getCurrentThread();
 		String name = this.getName();
@@ -59,7 +59,7 @@ public interface DbgModelTargetStackFrame extends //
 	}
 
 	@Override
-    default CompletableFuture<Void> init(Map<String, Object> map) {
+	public default CompletableFuture<Void> init(Map<String, Object> map) {
 		AddressSpace space = getModel().getAddressSpace("ram");
 		return requestNativeAttributes().thenCompose(attrs -> {
 			if (attrs == null) {
@@ -109,12 +109,12 @@ public interface DbgModelTargetStackFrame extends //
 		});
 	}
 
-	void setFrame(DbgStackFrame frame);
+	public void setFrame(DbgStackFrame frame);
 
-	TargetObject getThread();
+	public TargetObject getThread();
 
-	Address getPC();
+	public Address getPC();
 
-	DbgModelTargetProcess getProcess();
+	public DbgModelTargetProcess getProcess();
 
 }

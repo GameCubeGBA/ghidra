@@ -102,7 +102,7 @@ public class JdiModelTargetLocation extends JdiModelTargetObjectImpl {
 	@Override
 	public String getDisplay() {
 		return location == null ? super.getDisplay()
-				: location + " [" + Long.toHexString(address.getOffset()) + "]";
+				: location.toString() + " [" + Long.toHexString(address.getOffset()) + "]";
 	}
 
 	public Address getAddress() {

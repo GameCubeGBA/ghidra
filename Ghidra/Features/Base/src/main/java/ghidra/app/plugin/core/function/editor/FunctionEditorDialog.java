@@ -108,7 +108,7 @@ public class FunctionEditorDialog extends DialogComponentProvider implements Mod
 			Address addr = extLoc.getAddress();
 			if (addr != null) {
 				strBuilder.append(" at ");
-				strBuilder.append(addr);
+				strBuilder.append(addr.toString());
 			}
 		}
 		else {
@@ -906,8 +906,11 @@ public class FunctionEditorDialog extends DialogComponentProvider implements Mod
 				comp.dispatchEvent(convertedMouseEvent);
 				return true;
 			}
-			else return comp == scroll.getViewport();
-        }
+			else if (comp == scroll.getViewport()) {
+				return true;
+			}
+			return false;
+		}
 
 		@Override
 		public void mouseDragged(MouseEvent e) {

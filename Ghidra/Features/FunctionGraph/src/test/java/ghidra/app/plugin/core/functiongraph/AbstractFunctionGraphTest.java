@@ -138,7 +138,7 @@ public abstract class AbstractFunctionGraphTest extends AbstractGhidraHeadedInte
 
 		showFunctionGraphProvider();
 
-		goToAddress(startAddressString);
+		goToAddress(getStartingAddress());
 
 		// make sure the default case is always set in the testing environment
 		FGController controller = getFunctionGraphController();
@@ -421,11 +421,16 @@ public abstract class AbstractFunctionGraphTest extends AbstractGhidraHeadedInte
 
 	protected boolean pointsAreSimilar(Point2D originalPoint, Point2D reloadedPoint) {
 		double xDiff = Math.abs(originalPoint.getX() - reloadedPoint.getX());
-		if (xDiff > 20.0) {
+		if (xDiff > 20) {
 			return false;
 		}
 
-        return (Math.abs(originalPoint.getY() - reloadedPoint.getY()) <= 20);
+		double yDiff = Math.abs(originalPoint.getY() - reloadedPoint.getY());
+		if (yDiff > 20) {
+			return false;
+		}
+
+		return true;
 	}
 
 	protected Address getAddress(String addressString) {
@@ -808,7 +813,7 @@ public abstract class AbstractFunctionGraphTest extends AbstractGhidraHeadedInte
 
 		List<DockingAction> list = actionMap.get(clipboarProvider);
 		for (DockingAction pluginAction : list) {
-			if ("Copy".equals(pluginAction.getName())) {
+			if (pluginAction.getName().equals("Copy")) {
 				return pluginAction;
 			}
 		}

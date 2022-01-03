@@ -23,7 +23,7 @@ public class Integer16DataType extends AbstractIntegerDataType {
 	private static final long serialVersionUID = 1L;
 
 	/** A statically defined Integer16DataType instance.*/
-    public static final Integer16DataType dataType = new Integer16DataType();
+	public final static Integer16DataType dataType = new Integer16DataType();
 
 	public Integer16DataType() {
 		this(null);

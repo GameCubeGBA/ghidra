@@ -33,5 +33,5 @@ public interface Writeable {
 	 * @param dc the data converter
 	 * @throws IOException if an I/O error occurs
 	 */
-    void write(RandomAccessFile raf, DataConverter dc) throws IOException;
+	public void write(RandomAccessFile raf, DataConverter dc) throws IOException;
 }

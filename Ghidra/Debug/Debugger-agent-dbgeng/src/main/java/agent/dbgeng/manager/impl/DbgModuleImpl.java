@@ -71,12 +71,12 @@ public class DbgModuleImpl implements DbgModule {
 
 	@Override
 	public String getImageName() {
-		return info == null ? name : info.getImageName();
+		return info == null ? getName() : info.getImageName();
 	}
 
 	@Override
 	public String getModuleName() {
-		return info == null ? name : info.getModuleName();
+		return info == null ? getName() : info.getModuleName();
 	}
 
 	@Override

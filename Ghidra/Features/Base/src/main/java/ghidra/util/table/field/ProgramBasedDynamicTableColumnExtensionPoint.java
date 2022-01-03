@@ -28,7 +28,8 @@ public abstract class ProgramBasedDynamicTableColumnExtensionPoint<ROW_TYPE, COL
 	// subclasses must implement
 
 	public ProgramBasedDynamicTableColumnExtensionPoint() {
-    }
+		super();
+	}
 
 	public ProgramBasedDynamicTableColumnExtensionPoint(String uniqueID) {
 		super(uniqueID);

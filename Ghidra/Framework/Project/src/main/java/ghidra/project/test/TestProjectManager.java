@@ -23,7 +23,7 @@ public class TestProjectManager extends DefaultProjectManager {
 
 	private static ProjectManager projectManager;
 
-	public static synchronized ProjectManager get() {
+	public synchronized static ProjectManager get() {
 
 		// TODO make a static test manager if needed
 		//
@@ -39,5 +39,6 @@ public class TestProjectManager extends DefaultProjectManager {
 	}
 
 	private TestProjectManager() {
-    }
+		super();
+	}
 }

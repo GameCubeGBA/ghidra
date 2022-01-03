@@ -70,20 +70,20 @@ public class DbgModelTargetMemoryRegionImpl extends DbgModelTargetObjectImpl
 
 		this.range = doGetRange(section);
 		allocProtect = region.getAllocationProtect();
-		StringBuilder apx = new StringBuilder();
+		String apx = "";
 		for (String p : allocProtect) {
-			apx.append(p).append(":");
+			apx += p + ":";
 		}
 		if (apx.length() > 1) {
-			apx = new StringBuilder(apx.substring(0, apx.length() - 1));
+			apx = apx.substring(0, apx.length() - 1);
 		}
 		protect = region.getProtect();
-		StringBuilder ipx = new StringBuilder();
+		String ipx = "";
 		for (String p : protect) {
-			ipx.append(p).append(":");
+			ipx += p + ":";
 		}
 		if (ipx.length() > 1) {
-			ipx = new StringBuilder(ipx.substring(0, ipx.length() - 1));
+			ipx = ipx.substring(0, ipx.length() - 1);
 		}
 		isRead = region.isRead();
 		isWrite = region.isWrite();
@@ -93,9 +93,9 @@ public class DbgModelTargetMemoryRegionImpl extends DbgModelTargetObjectImpl
 			DISPLAY_ATTRIBUTE_NAME, computeDisplay(region), //
 			MEMORY_ATTRIBUTE_NAME, memory, //
 			RANGE_ATTRIBUTE_NAME, doGetRange(section), //
-			READABLE_ATTRIBUTE_NAME, isRead, //
-			WRITABLE_ATTRIBUTE_NAME, isWrite, //
-			EXECUTABLE_ATTRIBUTE_NAME, isExec //
+			READABLE_ATTRIBUTE_NAME, isReadable(), //
+			WRITABLE_ATTRIBUTE_NAME, isWritable(), //
+			EXECUTABLE_ATTRIBUTE_NAME, isExecutable() //
 		), "Initialized");
 
 		AddressSpace space = getModel().getAddressSpace("ram");
@@ -104,8 +104,8 @@ public class DbgModelTargetMemoryRegionImpl extends DbgModelTargetObjectImpl
 			"EndAddress", space.getAddress(region.getVmaEnd()), //
 			"RegionSize", Long.toHexString(region.getVmaEnd() - region.getVmaStart()), //
 			"AllocationBase", space.getAddress(region.getAllocationBase()), //
-			"AllocationProtect", apx.toString(), //
-			"Protect", ipx.toString(), //
+			"AllocationProtect", apx, //
+			"Protect", ipx, //
 			"State", region.getState(), //
 			"Type", region.getType() //
 		), "Initialized");

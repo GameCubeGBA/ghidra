@@ -440,11 +440,11 @@ public class PathManager {
 	public static Path[] getPathsFromPreferences(String enablePathKey, Path[] defaultEnablePaths,
 			String disabledPathKey) {
 		String enablePath = Preferences.getProperty(enablePathKey, null, true);
-		if (enablePath != null && enablePath.isEmpty()) {
+		if (enablePath != null && enablePath.length() == 0) {
 			enablePath = null;
 		}
 		String disabledPath = Preferences.getProperty(disabledPathKey, null);
-		if (disabledPath != null && disabledPath.isEmpty()) {
+		if (disabledPath != null && disabledPath.length() == 0) {
 			disabledPath = null;
 		}
 		String[] enabledPaths = null;
@@ -461,7 +461,7 @@ public class PathManager {
 		ArrayList<Path> list = new ArrayList<>();
 		int disabledIndex = 0;
 		for (String p : enabledPaths) {
-			if (p.isEmpty()) {
+			if (p.length() == 0) {
 				// insert next disabled path at empty placeholder
 				if (disabledIndex < disabledPaths.length) {
 					list.add(new Path(disabledPaths[disabledIndex++], false));

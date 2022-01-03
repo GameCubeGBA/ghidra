@@ -105,7 +105,7 @@ public class AnyObjectTableModelTest {
 		}
 
 		String getPackageName() {
-			return name + "_package";
+			return getName() + "_package";
 		}
 
 		public String getNameThatIsAwesome() {

@@ -228,8 +228,11 @@ public class MemoryDiff {
 		if (!SystemUtilities.isEqual(block1.getComment(), block2.getComment())) {
 			return false;
 		}
-        return block1.isMapped() == block2.isMapped();
-    }
+		if (block1.isMapped() != block2.isMapped()) {
+			return false;
+		}
+		return true;
+	}
 	
 	
 	public boolean merge(int row, int mergeFields, TaskMonitor monitor) {

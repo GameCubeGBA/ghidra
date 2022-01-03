@@ -87,7 +87,8 @@ public class CodeUnitLocation extends ProgramLocation {
 	 * Default constructor for a code unit location needed for restoring from XML.
 	 */
 	public CodeUnitLocation() {
-    }
+		super();
+	}
 
 	@Override
 	public boolean isValid(Program p) {

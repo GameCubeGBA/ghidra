@@ -61,7 +61,7 @@ class ObjectTreeCellRenderer extends GTreeRenderer {
 				Map<String, ?> attrs = targetObject.getCachedAttributes();
 				String kind = (String) attrs.get(TargetObject.KIND_ATTRIBUTE_NAME);
 				if (kind != null && !kind.isEmpty()) {
-					if ("OBJECT_INTRINSIC".equals(kind)) {
+					if (kind.equals("OBJECT_INTRINSIC")) {
 						container.subscribe();
 					}
 					setColor(component, kind);

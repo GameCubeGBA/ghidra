@@ -622,7 +622,10 @@ public class ListingPanel extends JPanel implements FieldMouseListener, FieldLoc
 		if (programAddressSpace != locAddressSpace) {
 			FieldLocation compatibleLocation =
 				getFieldLocationForDifferingAddressSpaces(loc, program);
-            return compatibleLocation;
+			if (compatibleLocation == null) {
+				return null;
+			}
+			return compatibleLocation;
 		}
 
 		return layoutModel.getFieldLocation(new ProgramLocation(program, address));

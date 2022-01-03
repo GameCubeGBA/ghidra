@@ -48,7 +48,7 @@ public class SocketSetupRunnable implements Runnable {
 				String line;
 				while ((line = input.readLine()) != null) {
 					String command = line.substring(0, line.indexOf('_'));
-					if ("open".equals(command)) {
+					if (command.equals("open")) {
 						openInEditor(line.substring(line.indexOf('_') + 1));
 					}
 				}

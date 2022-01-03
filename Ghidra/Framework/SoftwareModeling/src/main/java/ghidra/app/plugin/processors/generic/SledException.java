@@ -39,7 +39,8 @@ public class SledException extends RuntimeException {
 	 * <p>Constructs a SledException with no detail message.<p>
 	 */
 	public SledException() {
-    }
+		super();
+	}
 	
 	/**
 	 * <p>Constructs a SledException with the specified

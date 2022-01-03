@@ -12,11 +12,11 @@
 package SWIG;
 
 public final class DescriptionLevel {
-  public static final DescriptionLevel eDescriptionLevelBrief = new DescriptionLevel("eDescriptionLevelBrief", lldbJNI.eDescriptionLevelBrief_get());
-  public static final DescriptionLevel eDescriptionLevelFull = new DescriptionLevel("eDescriptionLevelFull");
-  public static final DescriptionLevel eDescriptionLevelVerbose = new DescriptionLevel("eDescriptionLevelVerbose");
-  public static final DescriptionLevel eDescriptionLevelInitial = new DescriptionLevel("eDescriptionLevelInitial");
-  public static final DescriptionLevel kNumDescriptionLevels = new DescriptionLevel("kNumDescriptionLevels");
+  public final static DescriptionLevel eDescriptionLevelBrief = new DescriptionLevel("eDescriptionLevelBrief", lldbJNI.eDescriptionLevelBrief_get());
+  public final static DescriptionLevel eDescriptionLevelFull = new DescriptionLevel("eDescriptionLevelFull");
+  public final static DescriptionLevel eDescriptionLevelVerbose = new DescriptionLevel("eDescriptionLevelVerbose");
+  public final static DescriptionLevel eDescriptionLevelInitial = new DescriptionLevel("eDescriptionLevelInitial");
+  public final static DescriptionLevel kNumDescriptionLevels = new DescriptionLevel("kNumDescriptionLevels");
 
   public final int swigValue() {
     return swigValue;
@@ -29,9 +29,9 @@ public final class DescriptionLevel {
   public static DescriptionLevel swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-      for (DescriptionLevel value : swigValues)
-          if (value.swigValue == swigValue)
-              return value;
+    for (int i = 0; i < swigValues.length; i++)
+      if (swigValues[i].swigValue == swigValue)
+        return swigValues[i];
     throw new IllegalArgumentException("No enum " + DescriptionLevel.class + " with value " + swigValue);
   }
 

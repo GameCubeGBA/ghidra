@@ -26,7 +26,8 @@ import ghidra.app.util.viewer.field.XRefFieldFactory;
 public class LocationReferencesPluginScreenShots extends GhidraScreenShotGenerator {
 
 	public LocationReferencesPluginScreenShots() {
-    }
+		super();
+	}
 
 @Test
     public void testReferencesToDialog() {

@@ -29,9 +29,9 @@ import java.util.Date;
  * Handles both 32 and 64 bit cases.
  */
 public class XCoffFileHeader implements StructConverter {
-	private static final char NL = '\n';
+	private final static char NL = '\n';
 
-	public static final int SIZEOF = 20;
+	public final static int SIZEOF = 20;
 
 	private short f_magic;   // bytes: magic number
 	private short f_nscns;   // number of sections: 2 bytes

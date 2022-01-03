@@ -17,32 +17,32 @@ package ghidra.javaclass.format.attributes;
 
 public final class AttributesConstants {
 
-	public static final String ConstantValue = "ConstantValue";
-	public static final String Code = "Code";
-	public static final String StackMapTable = "StackMapTable";
-	public static final String Exceptions = "Exceptions";
-	public static final String InnerClasses = "InnerClasses";
-	public static final String EnclosingMethod = "EnclosingMethod";
-	public static final String Synthetic = "Synthetic";
-	public static final String Signature = "Signature";
-	public static final String SourceFile = "SourceFile";
-	public static final String SourceDebugExtension = "SourceDebugExtension";
-	public static final String LineNumberTable = "LineNumberTable";
-	public static final String LocalVariableTable = "LocalVariableTable";
-	public static final String LocalVariableTypeTable = "LocalVariableTypeTable";
-	public static final String Deprecated = "Deprecated";
-	public static final String RuntimeVisibleAnnotations = "RuntimeVisibleAnnotations";
-	public static final String RuntimeInvisibleAnnotations = "RuntimeInvisibleAnnotations";
-	public static final String RuntimeVisibleParameterAnnotations =
+	public final static String ConstantValue = "ConstantValue";
+	public final static String Code = "Code";
+	public final static String StackMapTable = "StackMapTable";
+	public final static String Exceptions = "Exceptions";
+	public final static String InnerClasses = "InnerClasses";
+	public final static String EnclosingMethod = "EnclosingMethod";
+	public final static String Synthetic = "Synthetic";
+	public final static String Signature = "Signature";
+	public final static String SourceFile = "SourceFile";
+	public final static String SourceDebugExtension = "SourceDebugExtension";
+	public final static String LineNumberTable = "LineNumberTable";
+	public final static String LocalVariableTable = "LocalVariableTable";
+	public final static String LocalVariableTypeTable = "LocalVariableTypeTable";
+	public final static String Deprecated = "Deprecated";
+	public final static String RuntimeVisibleAnnotations = "RuntimeVisibleAnnotations";
+	public final static String RuntimeInvisibleAnnotations = "RuntimeInvisibleAnnotations";
+	public final static String RuntimeVisibleParameterAnnotations =
 		"RuntimeVisibleParameterAnnotations";
-	public static final String RuntimeInvisibleParameterAnnotations =
+	public final static String RuntimeInvisibleParameterAnnotations =
 		"RuntimeInvisibleParameterAnnotations";
-	public static final String AnnotationDefault = "AnnotationDefault";
-	public static final String BootstrapMethods = "BootstrapMethods";
-	public static final String Module = "Module";
-	public static final String ModulePackages = "ModulePackages";
-	public static final String ModuleMainClass = "ModuleMainClass";
-	public static final String NestHost = "NestHost";
-	public static final String NestMembers = "NestMembers";
+	public final static String AnnotationDefault = "AnnotationDefault";
+	public final static String BootstrapMethods = "BootstrapMethods";
+	public final static String Module = "Module";
+	public final static String ModulePackages = "ModulePackages";
+	public final static String ModuleMainClass = "ModuleMainClass";
+	public final static String NestHost = "NestHost";
+	public final static String NestMembers = "NestMembers";
 
 }

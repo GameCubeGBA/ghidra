@@ -90,8 +90,11 @@ public abstract class AbstractAssemblyProduction<NT extends AssemblyNonTerminal>
 			return false;
 		}
 		AbstractAssemblyProduction<?> aap = (AbstractAssemblyProduction<?>) that;
-        return this.lhs.equals(aap.lhs) && this.rhs.equals(aap.rhs);
-    }
+		if (!this.lhs.equals(aap.lhs) || !this.rhs.equals(aap.rhs)) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public int compareTo(AbstractAssemblyProduction<NT> that) {

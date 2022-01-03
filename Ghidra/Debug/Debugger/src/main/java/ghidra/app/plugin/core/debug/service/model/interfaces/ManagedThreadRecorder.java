@@ -25,30 +25,30 @@ import ghidra.trace.model.thread.TraceThread;
 
 public interface ManagedThreadRecorder extends AbstractTraceRecorder {
 
-	TargetThread getTargetThread();
+	public TargetThread getTargetThread();
 
-	TraceThread getTraceThread();
+	public TraceThread getTraceThread();
 
-	void offerRegisters(TargetRegisterBank added);
+	public void offerRegisters(TargetRegisterBank added);
 
-	void removeRegisters(TargetRegisterBank removed);
+	public void removeRegisters(TargetRegisterBank removed);
 
-	void offerThreadRegion(TargetMemoryRegion region);
+	public void offerThreadRegion(TargetMemoryRegion region);
 
-	void recordRegisterValue(TargetRegister targetRegister, byte[] value);
+	public void recordRegisterValue(TargetRegister targetRegister, byte[] value);
 
-	void recordRegisterValues(TargetRegisterBank bank, Map<String, byte[]> updates);
+	public void recordRegisterValues(TargetRegisterBank bank, Map<String, byte[]> updates);
 
-	void invalidateRegisterValues(TargetRegisterBank bank);
+	public void invalidateRegisterValues(TargetRegisterBank bank);
 
-	boolean objectRemoved(TargetObject removed);
+	public boolean objectRemoved(TargetObject removed);
 
-	void stateChanged(TargetExecutionState state);
+	public void stateChanged(TargetExecutionState state);
 
-	void regMapperAmended(DebuggerRegisterMapper rm, TargetRegister reg, boolean b);
+	public void regMapperAmended(DebuggerRegisterMapper rm, TargetRegister reg, boolean b);
 
-	CompletableFuture<Void> doFetchAndInitRegMapper(TargetRegisterBank parent);
+	public CompletableFuture<Void> doFetchAndInitRegMapper(TargetRegisterBank parent);
 
-	ManagedStackRecorder getStackRecorder();
+	public ManagedStackRecorder getStackRecorder();
 
 }

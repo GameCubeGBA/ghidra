@@ -59,11 +59,11 @@ public abstract class AbstractStringSearcher {
 			CharSetRecognizer charSet, Endian endian, int minimumStringSize) {
 
 		matchersList.add(new MultiByteCharMatcher(minimumStringSize, charSet, CharWidth.UTF16,
-			endian, alignment, 0));
+			endian, getAlignment(), 0));
 
-		if (alignment == 1) {
+		if (getAlignment() == 1) {
 			matchersList.add(new MultiByteCharMatcher(minimumStringSize, charSet, CharWidth.UTF16,
-				endian, alignment, 1));
+				endian, getAlignment(), 1));
 		}
 
 	}
@@ -72,18 +72,18 @@ public abstract class AbstractStringSearcher {
 			CharSetRecognizer charSet, Endian endian, int minimumStringSize) {
 
 		matchers.add(new MultiByteCharMatcher(minimumStringSize, charSet, CharWidth.UTF32, endian,
-                alignment, 0));
+			getAlignment(), 0));
 
-		if (alignment == 2 || alignment == 1) {
+		if (getAlignment() == 2 || getAlignment() == 1) {
 			matchers.add(new MultiByteCharMatcher(minimumStringSize, charSet, CharWidth.UTF32,
-				endian, alignment, 2));
+				endian, getAlignment(), 2));
 		}
 
-		if (alignment == 1) {
+		if (getAlignment() == 1) {
 			matchers.add(new MultiByteCharMatcher(minimumStringSize, charSet, CharWidth.UTF32,
-				endian, alignment, 1));
+				endian, getAlignment(), 1));
 			matchers.add(new MultiByteCharMatcher(minimumStringSize, charSet, CharWidth.UTF32,
-				endian, alignment, 3));
+				endian, getAlignment(), 3));
 		}
 	}
 
@@ -183,15 +183,15 @@ public abstract class AbstractStringSearcher {
 	}
 
 	private AddressRange adjustRangeForAlignment(AddressRange range) {
-		if (alignment == 1) {
+		if (getAlignment() == 1) {
 			return range;
 		}
 		long offset = range.getMinAddress().getOffset();
-		long mod = offset % alignment;
+		long mod = offset % getAlignment();
 		if (mod == 0) {
 			return range;
 		}
-		Address newStart = range.getMinAddress().getNewAddress(offset + alignment - mod);
+		Address newStart = range.getMinAddress().getNewAddress(offset + getAlignment() - mod);
 		return new AddressRangeImpl(newStart, range.getMaxAddress());
 	}
 

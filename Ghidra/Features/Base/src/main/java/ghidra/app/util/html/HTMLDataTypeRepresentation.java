@@ -33,9 +33,9 @@ public abstract class HTMLDataTypeRepresentation {
 	protected static final String EMPTY_TAG = "<I></I>";
 
 	// max components to show in a tool tip for a composite or enum data type
-	protected static final int MAX_COMPONENTS = 50;
-	protected static final int MAX_CHARACTER_LENGTH = 80;
-	protected static final int MAX_LINE_LENGTH = MAX_CHARACTER_LENGTH * 3;
+	protected final static int MAX_COMPONENTS = 50;
+	protected final static int MAX_CHARACTER_LENGTH = 80;
+	protected final static int MAX_LINE_LENGTH = MAX_CHARACTER_LENGTH * 3;
 
 	// HTML Tag constants
 	protected static final String HTML_OPEN = "<HTML>";
@@ -78,17 +78,19 @@ public abstract class HTMLDataTypeRepresentation {
 	protected static final String ELLIPSES = "...";
 	protected static final String LENGTH_PREFIX = "Length: ";
 
-	protected static final String FORWARD_SLASH = "&#47;";
+	protected final static String FORWARD_SLASH = "&#47;";
 
-	protected static final String START_COMMENT = FORWARD_SLASH + '*' + BR;
-	protected static final String MIDDLE_COMMENT = HTML_SPACE + '*' + HTML_SPACE;
-	protected static final String END_COMMENT = HTML_SPACE + '*' + FORWARD_SLASH + BR;
+	protected final static String START_COMMENT = FORWARD_SLASH + '*' + BR;
+	protected final static String MIDDLE_COMMENT = HTML_SPACE + '*' + HTML_SPACE;
+	protected final static String END_COMMENT = HTML_SPACE + '*' + FORWARD_SLASH + BR;
 
-	protected static final Color DIFF_COLOR = ValidatableLine.INVALID_COLOR;
+	protected final static Color DIFF_COLOR = ValidatableLine.INVALID_COLOR;
 
 	private static String createSpace(int numberOfSpaces) {
 		StringBuilder buffer = new StringBuilder();
-        buffer.append(HTML_SPACE.repeat(Math.max(0, numberOfSpaces)));
+		for (int i = 0; i < numberOfSpaces; i++) {
+			buffer.append(HTML_SPACE);
+		}
 		return buffer.toString();
 	}
 
@@ -174,9 +176,10 @@ public abstract class HTMLDataTypeRepresentation {
 		for (String nativeCommentLine : string.split("\n")) {
 			List<String> wrappedLines = breakLongLineAtWordBoundaries(nativeCommentLine,
 				MAX_CHARACTER_LENGTH - MIDDLE_COMMENT.length());
-            for (String wrappedLine : wrappedLines) {
-                list.add(MIDDLE_COMMENT + wrappedLine + BR);
-            }
+			for (int i = 0; i < wrappedLines.size(); i++) {
+				String wrappedLine = wrappedLines.get(i);
+				list.add(MIDDLE_COMMENT + wrappedLine + BR);
+			}
 		}
 		return list;
 	}
@@ -244,7 +247,7 @@ public abstract class HTMLDataTypeRepresentation {
 	 * @return list of html marked-up {@link TextLine}s
 	 */
 	protected static List<TextLine> createCommentLines(String comment, int maxLines) {
-		if (comment == null || comment.isEmpty()) {
+		if (comment == null || comment.length() == 0) {
 			return Collections.emptyList();
 		}
 

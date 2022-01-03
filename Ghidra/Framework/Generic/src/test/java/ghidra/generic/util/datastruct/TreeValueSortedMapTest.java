@@ -225,7 +225,7 @@ public class TreeValueSortedMapTest {
 			checkConsistent(queue);
 		}
 		assertTrue(queue.isEmpty());
-		assertTrue(queue.isEmpty());
+		assertTrue(queue.size() == 0);
 	}
 
 	@Test

@@ -123,31 +123,33 @@ public class ToolOptions extends AbstractOptions {
 
 	private void readWrappedOptions(Element root) throws ReflectiveOperationException {
 
-        for (Object o : root.getChildren(WRAPPED_OPTION_NAME)) {
+		Iterator<?> it = root.getChildren(WRAPPED_OPTION_NAME).iterator();
+		while (it.hasNext()) {
 
-            Element element = (Element) o;
-            List<?> children = element.getChildren();
-            if (children.isEmpty()) {
-                continue; // shouldn't happen
-            }
+			Element element = (Element) it.next();
+			List<?> children = element.getChildren();
+			if (children.isEmpty()) {
+				continue; // shouldn't happen
+			}
 
-            String optionName = element.getAttributeValue(NAME_ATTRIBUTE);
-            Class<?> c = Class.forName(element.getAttributeValue(CLASS_ATTRIBUTE));
-            Constructor<?> constructor = c.getDeclaredConstructor();
-            WrappedOption wo = (WrappedOption) constructor.newInstance();
-            Option option = createUnregisteredOption(optionName, wo.getOptionType(), null);
-            valueMap.put(optionName, option);
+			String optionName = element.getAttributeValue(NAME_ATTRIBUTE);
+			Class<?> c = Class.forName(element.getAttributeValue(CLASS_ATTRIBUTE));
+			Constructor<?> constructor = c.getDeclaredConstructor();
+			WrappedOption wo = (WrappedOption) constructor.newInstance();
+			Option option = createUnregisteredOption(optionName, wo.getOptionType(), null);
+			valueMap.put(optionName, option);
 
-            Element child = (Element) children.get(0);
-            String elementName = child.getName();
-            if (CLEARED_VALUE_ELEMENT_NAME.equals(elementName)) {
-                // a signal that the default option value has been cleared
-                option.doSetCurrentValue(null); // use doSet so that it is not registered
-            } else {
-                wo.readState(new SaveState(element));
-                option.doSetCurrentValue(wo.getObject()); // use doSet so that it is not registered
-            }
-        }
+			Element child = (Element) children.get(0);
+			String elementName = child.getName();
+			if (CLEARED_VALUE_ELEMENT_NAME.equals(elementName)) {
+				// a signal that the default option value has been cleared
+				option.doSetCurrentValue(null); // use doSet so that it is not registered
+			}
+			else {
+				wo.readState(new SaveState(element));
+				option.doSetCurrentValue(wo.getObject()); // use doSet so that it is not registered
+			}
+		}
 	}
 
 	/**

@@ -24,7 +24,7 @@ import com.sun.jna.platform.win32.WinNT.HRESULT;
 import agent.dbgeng.jna.dbgeng.UnknownWithUtils.VTableIndex;
 
 public interface IDebugBreakpoint2 extends IDebugBreakpoint {
-	IID IID_IDEBUG_BREAKPOINT2 = new IID("1b278d20-79f2-426e-a3f9-c1ddf375d48e");
+	final IID IID_IDEBUG_BREAKPOINT2 = new IID("1b278d20-79f2-426e-a3f9-c1ddf375d48e");
 
 	enum VTIndices2 implements VTableIndex {
 		GET_COMMAND_WIDE, //

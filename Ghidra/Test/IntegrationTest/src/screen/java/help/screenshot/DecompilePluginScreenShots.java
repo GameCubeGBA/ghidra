@@ -35,7 +35,8 @@ public class DecompilePluginScreenShots extends GhidraScreenShotGenerator {
 	private static final Color PURPLE = new Color(155, 50, 155);
 
 	public DecompilePluginScreenShots() {
-    }
+		super();
+	}
 
 	@Test
 	public void testDecompWindow() {

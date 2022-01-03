@@ -24,7 +24,7 @@ import ghidra.util.exception.VersionException;
  * Adapter for version 1
  */
 class MemoryMapDBAdapterV1 extends MemoryMapDBAdapterV0 {
-	private static final int VERSION = 1;
+	private final static int VERSION = 1;
 
 //	private Schema SCHEMA = new Schema(VERSION, "Key", 
 //								new Class[] {StringField.class, 

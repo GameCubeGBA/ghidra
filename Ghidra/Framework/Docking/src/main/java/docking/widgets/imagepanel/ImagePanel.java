@@ -181,7 +181,7 @@ public class ImagePanel extends JPanel {
 	 */
 	public void setImage(Image image) {
 
-		Image oldImage = this.image;
+		Image oldImage = getImage();
 
 		this.image = image;
 
@@ -301,7 +301,7 @@ public class ImagePanel extends JPanel {
 	 * @see #resetZoom()
 	 */
 	public void setDefaultZoomFactor(float zoom) {
-		float oldDefaultZoom = defaultZoomFactor;
+		float oldDefaultZoom = getDefaultZoomFactor();
 		if (zoom == oldDefaultZoom) {
 			return;
 		}
@@ -313,7 +313,7 @@ public class ImagePanel extends JPanel {
 	}
 
 	public void resetZoom() {
-		setZoomFactor(defaultZoomFactor);
+		setZoomFactor(getDefaultZoomFactor());
 	}
 
 	private Point getImageComponentCenter() {
@@ -345,7 +345,7 @@ public class ImagePanel extends JPanel {
 	 */
 	public void zoomIn(Point center) {
 
-		if (!zoomEnabled || !canZoomIn()) {
+		if (!isImageZoomEnabled() || !canZoomIn()) {
 			return;
 		}
 
@@ -389,7 +389,7 @@ public class ImagePanel extends JPanel {
 	 */
 	public void zoomOut(Point center) {
 
-		if (!zoomEnabled || !canZoomOut()) {
+		if (!isImageZoomEnabled() || !canZoomOut()) {
 			return;
 		}
 
@@ -484,7 +484,7 @@ public class ImagePanel extends JPanel {
 
 	private void translateImage(int dX, int dY) {
 
-		if (!translateEnabled || (dX == 0 && dY == 0)) {
+		if (!isImageTranslationEnabled() || (dX == 0 && dY == 0)) {
 			return;
 		}
 

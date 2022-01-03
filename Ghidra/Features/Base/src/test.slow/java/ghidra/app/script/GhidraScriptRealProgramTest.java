@@ -41,6 +41,7 @@ public class GhidraScriptRealProgramTest extends AbstractGhidraHeadedIntegration
 	private int transactionID;
 
 	public GhidraScriptRealProgramTest() {
+		super();
 	}
 
 	@Before
@@ -77,11 +78,11 @@ public class GhidraScriptRealProgramTest extends AbstractGhidraHeadedIntegration
 	public void testFindByte() throws Exception {
 		GhidraScript script = getScript();
 		Address address1000 = script.toAddr(0x01001000);
-		byte bytePattern1 = 0x4d;
+		byte bytePattern1 = (byte) 0x4d;
 		assertEquals(addr(0x010022c0), script.find(address1000, bytePattern1));
 
 		Address address6420 = script.toAddr(0x01006420);
-		byte bytePattern2 = 0x68;
+		byte bytePattern2 = (byte) 0x68;
 		assertEquals(addr(0x01006425), script.find(address6420, bytePattern2));
 
 		String bytePattern1String = "\\x4d";

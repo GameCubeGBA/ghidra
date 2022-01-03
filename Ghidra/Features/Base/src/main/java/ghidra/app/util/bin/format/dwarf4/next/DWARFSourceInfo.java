@@ -75,8 +75,8 @@ public class DWARFSourceInfo {
 		return sourceInfo != null ? sourceInfo.getDescriptionStr() : null;
 	}
 
-	private final String filename;
-	private final int lineNum;
+	final private String filename;
+	final private int lineNum;
 
 	private DWARFSourceInfo(String filename, int lineNum) {
 		this.filename = filename;
@@ -139,8 +139,11 @@ public class DWARFSourceInfo {
 		else if (!filename.equals(other.filename)) {
 			return false;
 		}
-        return lineNum == other.lineNum;
-    }
+		if (lineNum != other.lineNum) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public String toString() {

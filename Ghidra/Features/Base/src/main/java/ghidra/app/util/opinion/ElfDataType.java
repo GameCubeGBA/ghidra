@@ -23,7 +23,7 @@ import ghidra.program.model.data.*;
 import ghidra.program.model.mem.*;
 
 public class ElfDataType extends FactoryStructureDataType {
-	private static final long serialVersionUID = 1;
+	private final static long serialVersionUID = 1;
 
     /**
      * Constructs a new ELF datatype.

@@ -58,7 +58,7 @@ public abstract class AbstractManagedLocalOrParameterRelativeToAlternateFramePoi
 		myBuilder.append(typeRecordNumber.getNumber());
 		attributes.emit(myBuilder);
 		builder.append(String.format("%s: %s+%08X, %s, %s", getSymbolTypeName(),
-			registerName.toString(), offset, myBuilder, name));
+			registerName.toString(), offset, myBuilder.toString(), name));
 	}
 
 }

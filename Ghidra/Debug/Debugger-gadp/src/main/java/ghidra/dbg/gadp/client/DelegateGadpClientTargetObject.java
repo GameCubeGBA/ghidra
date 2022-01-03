@@ -223,7 +223,7 @@ public class DelegateGadpClientTargetObject
 
 	protected void assertValid() {
 		if (!valid) {
-			throw new IllegalStateException("Object is no longer valid: " + this);
+			throw new IllegalStateException("Object is no longer valid: " + toString());
 		}
 	}
 

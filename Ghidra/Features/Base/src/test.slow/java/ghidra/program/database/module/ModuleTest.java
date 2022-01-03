@@ -47,7 +47,8 @@ public class ModuleTest extends AbstractGhidraHeadedIntegrationTest {
 	 * Creates a new test instance.
 	 */
 	public ModuleTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

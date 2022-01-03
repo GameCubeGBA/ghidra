@@ -24,7 +24,7 @@ import ghidra.util.StringUtilities;
 public class WideChar16DataType extends BuiltIn implements ArrayStringable, DataTypeWithCharset {
 
 	/** A statically defined WideCharDataType instance. */
-    public static final WideChar16DataType dataType = new WideChar16DataType();
+	public final static WideChar16DataType dataType = new WideChar16DataType();
 
 	public WideChar16DataType() {
 		this(null);

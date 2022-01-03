@@ -122,20 +122,19 @@ public class Constructor implements Comparable<Constructor> {
 	}
 
 	public String print(ParserWalker walker) throws MemoryAccessException {
-		StringBuilder res = new StringBuilder();
+		String res = "";
 		for (String element : printpiece) {
-			if (element.isEmpty()) {
-				continue;
-			}
-			if (element.charAt(0) == '\n') {
-				int index = element.charAt(1) - 'A';
-				res.append(operands[index].print(walker));
-			}
-			else {
-				res.append(element);
+			if (element.length() != 0) {
+				if (element.charAt(0) == '\n') {
+					int index = element.charAt(1) - 'A';
+					res += operands[index].print(walker);
+				}
+				else {
+					res += element;
+				}
 			}
 		}
-		return res.toString();
+		return res;
 	}
 
 	public String printSeparator(int separatorIndex) {
@@ -152,7 +151,7 @@ public class Constructor implements Comparable<Constructor> {
 
 		String cachedSeparator = separators[separatorIndex];
 		if (cachedSeparator != null) {
-			if (cachedSeparator.isEmpty()) {
+			if (cachedSeparator.length() == 0) {
 				return null;
 			}
 			return cachedSeparator;
@@ -161,7 +160,7 @@ public class Constructor implements Comparable<Constructor> {
 		// skip mnemonic and set curPos to first print-piece associated with operand 0
 		int curPos = 0;
 		while (curPos < printpiece.length &&
-			(printpiece[curPos].isEmpty() || printpiece[curPos].charAt(0) != ' ')) {
+			(printpiece[curPos].length() == 0 || printpiece[curPos].charAt(0) != ' ')) {
 			curPos++;
 		}
 		curPos++;
@@ -169,7 +168,7 @@ public class Constructor implements Comparable<Constructor> {
 		int opIndex = 0;
 		StringBuilder buf = new StringBuilder();
 		for (int i = curPos; i < printpiece.length && opIndex <= separatorIndex; i++) {
-			if (!printpiece[i].isEmpty()) {
+			if (printpiece[i].length() != 0) {
 				if (printpiece[i].charAt(0) == '\n') {
 					if (opIndex == separatorIndex) {
 						break;
@@ -184,7 +183,7 @@ public class Constructor implements Comparable<Constructor> {
 		String separator = buf.toString();
 		separator = separator.replaceAll(",\\s+", ",");
 		separators[separatorIndex] = separator;
-		if (separator.isEmpty()) {
+		if (separator.length() == 0) {
 			return null;
 		}
 		return separator;
@@ -199,7 +198,7 @@ public class Constructor implements Comparable<Constructor> {
 
 		for (String element : printpiece) {
 			int prevSize = list.size();
-			if (!element.isEmpty()) {
+			if (element.length() != 0) {
 				if (element.charAt(0) == '\n') {
 					int index = element.charAt(1) - 'A';
 					operands[index].printList(walker, list);
@@ -238,59 +237,57 @@ public class Constructor implements Comparable<Constructor> {
 	}
 
 	public String printMnemonic(ParserWalker walker) throws MemoryAccessException {
-		StringBuilder res = new StringBuilder();
+		String res = "";
 		if (flowthruindex != -1) {
 			Symbol sym = operands[flowthruindex].getDefiningSymbol();
 			if (sym instanceof SubtableSymbol) {
 				walker.pushOperand(flowthruindex);
-				res = new StringBuilder(walker.getConstructor().printMnemonic(walker));
+				res = walker.getConstructor().printMnemonic(walker);
 				walker.popOperand();
-				return res.toString();
+				return res;
 			}
 		}
 		int endind = (firstwhitespace == -1) ? printpiece.length : firstwhitespace;
 		for (int i = 0; i < endind; ++i) {
-			if (printpiece[i].isEmpty()) {
-				continue;
-			}
-			if (printpiece[i].charAt(0) == '\n') {
-				int index = printpiece[i].charAt(1) - 'A';
-				res.append(operands[index].print(walker));
-			}
-			else {
-				res.append(printpiece[i]);
+			if (printpiece[i].length() != 0) {
+				if (printpiece[i].charAt(0) == '\n') {
+					int index = printpiece[i].charAt(1) - 'A';
+					res += operands[index].print(walker);
+				}
+				else {
+					res += printpiece[i];
+				}
 			}
 		}
-		return res.toString();
+		return res;
 	}
 
 	public String printBody(ParserWalker walker) throws MemoryAccessException {
-		StringBuilder res = new StringBuilder();
+		String res = "";
 		if (flowthruindex != -1) {
 			Symbol sym = operands[flowthruindex].getDefiningSymbol();
 			if (sym instanceof SubtableSymbol) {
 				walker.pushOperand(flowthruindex);
-				res = new StringBuilder(walker.getConstructor().printBody(walker));
+				res = walker.getConstructor().printBody(walker);
 				walker.popOperand();
-				return res.toString();
+				return res;
 			}
 		}
 		if (firstwhitespace == -1) {
-			return res.toString();	// Nothing to print
+			return res;	// Nothing to print
 		}
 		for (int i = firstwhitespace + 1; i < printpiece.length; ++i) {
-			if (printpiece[i].isEmpty()) {
-				continue;
-			}
-			if (printpiece[i].charAt(0) == '\n') {
-				int index = printpiece[i].charAt(1) - 'A';
-				res.append(operands[index].print(walker));
-			}
-			else {
-				res.append(printpiece[i]);
+			if (printpiece[i].length() != 0) {
+				if (printpiece[i].charAt(0) == '\n') {
+					int index = printpiece[i].charAt(1) - 'A';
+					res += operands[index].print(walker);
+				}
+				else {
+					res += printpiece[i];
+				}
 			}
 		}
-		return res.toString();
+		return res;
 	}
 
 	/**
@@ -427,14 +424,14 @@ public class Constructor implements Comparable<Constructor> {
 		}
 		int count = 0;
 		for (int i = firstwhitespace + 1; i < printpiece.length; ++i) {
-			if (!printpiece[i].isEmpty() && printpiece[i].charAt(0) == '\n') {
+			if (printpiece[i].length() != 0 && printpiece[i].charAt(0) == '\n') {
 				count += 1;
 			}
 		}
 		int[] res = new int[count];
 		count = 0;
 		for (int i = firstwhitespace + 1; i < printpiece.length; ++i) {
-			if (!printpiece[i].isEmpty() && printpiece[i].charAt(0) == '\n') {
+			if (printpiece[i].length() != 0 && printpiece[i].charAt(0) == '\n') {
 				res[count++] = printpiece[i].charAt(1) - 'A';
 			}
 		}
@@ -467,8 +464,11 @@ public class Constructor implements Comparable<Constructor> {
 			return false;
 		}
 		Constructor that = (Constructor) obj;
-        return (this.id == that.id) && (this.parent.getId() == that.parent.getId());
-    }
+		if ((this.id != that.id) || (this.parent.getId() != that.parent.getId())) {
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * Returns the source file

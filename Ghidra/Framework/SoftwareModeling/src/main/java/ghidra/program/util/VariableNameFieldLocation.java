@@ -65,7 +65,8 @@ public class VariableNameFieldLocation extends VariableLocation {
 	 * Should only be used by XML restoration.
 	 */
 	public VariableNameFieldLocation() {
-    }
+		super();
+	}
 
 	/**
 	 * Returns the name of the variable for this location.
@@ -88,8 +89,11 @@ public class VariableNameFieldLocation extends VariableLocation {
 		if (!super.equals(obj) || (getClass() != obj.getClass()))
 			return false;
 		VariableNameFieldLocation other = (VariableNameFieldLocation) obj;
-        return Objects.equals(name, other.name);
-    }
+		if (!Objects.equals(name, other.name)) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public void restoreState(Program p, SaveState obj) {

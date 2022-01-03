@@ -45,7 +45,8 @@ public class RecoveryFileTest extends AbstractGenericTest {
 	 * @param arg0
 	 */
 	public RecoveryFileTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

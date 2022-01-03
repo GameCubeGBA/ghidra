@@ -45,7 +45,7 @@ public class NumberOfFunctionsValidator extends VTPreconditionValidator {
 		if (!monitor.isCancelled()) {
 			int diff = Math.abs(numSource - numDest);
 			int max = Math.max(numSource, numDest);
-			float percent = (float) diff / max;
+			float percent = (float) diff / (float) max;
 			if (percent > threshold) {
 				status = ConditionStatus.Warning;
 				warnings.append(sourceProgram.getDomainFile().getName() + " and " +

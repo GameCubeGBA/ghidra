@@ -73,8 +73,8 @@ public class ProgramCompilerSpec extends BasicCompilerSpec {
 
 	public static final String DECOMPILER_PROPERTY_LIST_NAME = "Decompiler";
 	public static final String DECOMPILER_OUTPUT_LANGUAGE = "Output Language";
-	public static final DecompilerLanguage DECOMPILER_OUTPUT_DEF = DecompilerLanguage.C_LANGUAGE;
-	public static final String DECOMPILER_OUTPUT_DESC =
+	public final static DecompilerLanguage DECOMPILER_OUTPUT_DEF = DecompilerLanguage.C_LANGUAGE;
+	public final static String DECOMPILER_OUTPUT_DESC =
 		"Select the source language output by the decompiler.";
 
 	public static final String EVALUATION_MODEL_PROPERTY_NAME = "Prototype Evaluation";
@@ -387,8 +387,11 @@ public class ProgramCompilerSpec extends BasicCompilerSpec {
 			return false;
 		}
 		ProgramCompilerSpec op2 = (ProgramCompilerSpec) obj;
-        return SystemUtilities.isEqual(usermodels, op2.usermodels);
-    }
+		if (!SystemUtilities.isEqual(usermodels, op2.usermodels)) {
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * Transition specified compiler specification langSpec into a program-specific one which

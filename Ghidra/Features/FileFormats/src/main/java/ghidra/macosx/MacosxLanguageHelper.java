@@ -83,7 +83,7 @@ public final class MacosxLanguageHelper {
 
         List<LanguageCompilerSpecPair> pairs = languageService.getLanguageCompilerSpecPairs( query );
 
-        if (!pairs.isEmpty()) {
+        if ( pairs.size() > 0 ) {
             if ( pairs.size() > 1 ) {
                 throw new LanguageNotFoundException( "Too many languages for " + Integer.toHexString( cpuType ) + "." + Integer.toHexString( cpuSubType ) );
             }

@@ -52,7 +52,8 @@ public class MemoryManagerTest extends AbstractGhidraHeadedIntegrationTest {
 	 * @param arg0
 	 */
 	public MemoryManagerTest() {
-    }
+		super();
+	}
 
 	/*
 	 * @see TestCase#setUp()

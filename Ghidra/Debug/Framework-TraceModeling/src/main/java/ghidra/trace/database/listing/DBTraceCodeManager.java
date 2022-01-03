@@ -433,8 +433,11 @@ public class DBTraceCodeManager
 
 		@Override
 		public boolean hasValue(Register register) {
-            return register != null && register == baseContextRegister;
-        }
+			if (register == null || register != baseContextRegister) {
+				return false;
+			}
+			return true;
+		}
 
 		@Override
 		public void setValue(Register register, BigInteger value) throws ContextChangeException {

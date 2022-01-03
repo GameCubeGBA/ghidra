@@ -29,7 +29,7 @@ public class ErrorPropertyEditor extends PropertyEditorSupport {
 		editorValue = value;
 		String message = errorMessage;
 		if (editorValue != null) {
-			message += " - value: " + value;
+			message += " - value: " + value.toString();
 		}
 
 		// Use native java JLabel because we can't use docking widgets here

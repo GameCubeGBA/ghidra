@@ -46,7 +46,8 @@ public class ElfBinaryAnalysisCommand extends FlatProgramAPI
 	private MessageLog messages = new MessageLog();
 
 	public ElfBinaryAnalysisCommand() {
-    }
+		super();
+	}
 
 	@Override
 	public boolean canApply(Program program) {

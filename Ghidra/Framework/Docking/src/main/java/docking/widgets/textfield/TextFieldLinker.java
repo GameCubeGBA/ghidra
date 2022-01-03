@@ -135,8 +135,11 @@ public class TextFieldLinker {
 				return false;
 			}
 			FieldState that = (FieldState) obj;
-            return this.text.equals(that.text) && (this.caret == that.caret);
-        }
+			if (!this.text.equals(that.text) || (this.caret != that.caret)) {
+				return false;
+			}
+			return true;
+		}
 
 		protected FieldState copy() {
 			FieldState cp = new FieldState();
@@ -177,8 +180,11 @@ public class TextFieldLinker {
 				return false;
 			}
 			LinkerState that = (LinkerState) o;
-            return (this.whichFocus == that.whichFocus) && this.fieldStates.equals(that.fieldStates);
-        }
+			if ((this.whichFocus != that.whichFocus) || !this.fieldStates.equals(that.fieldStates)) {
+				return false;
+			}
+			return true;
+		}
 
 		/**
 		 * Copy the state
@@ -233,7 +239,7 @@ public class TextFieldLinker {
 		public String getText(int omitSep) {
 			int lastPopulated;
 			for (lastPopulated = linkedFields.size() - 1; lastPopulated >= 0; lastPopulated--) {
-				if (!fieldStates.get(lastPopulated).text.isEmpty()) {
+				if (fieldStates.get(lastPopulated).text.length() != 0) {
 					break;
 				}
 			}
@@ -383,7 +389,7 @@ public class TextFieldLinker {
 				LinkedField lf = linkedFields.get(i);
 				FieldState fs = fieldStates.get(i);
 
-				if (text.isEmpty()) {
+				if (text.length() == 0) {
 					fs.text = "";
 					continue;
 				}

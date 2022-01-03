@@ -16,7 +16,7 @@
 package ghidra.app.util.opinion;
 
 public class MSCoffLoader extends CoffLoader {
-	public static final String MSCOFF_NAME = "MS Common Object File Format (COFF)";
+	public final static String MSCOFF_NAME = "MS Common Object File Format (COFF)";
 
 	@Override
 	public boolean isMicrosoftFormat() {

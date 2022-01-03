@@ -81,9 +81,9 @@ public class ProgramTreePlugin extends ProgramPlugin
 	private static final String TREE_NAME = "TreeName";
 	private static final String TOGGLE_STATE = "NavigationToggleState";
 
-	private static final String OPEN_VIEW_ICON_NAME = "images/openSmallFolder.png";
-	private static final String CREATE_ICON_NAME = "images/layout_add.png";
-	private static final Icon NAVIGATION_ICON = Icons.NAVIGATE_ON_INCOMING_EVENT_ICON;
+	private final static String OPEN_VIEW_ICON_NAME = "images/openSmallFolder.png";
+	private final static String CREATE_ICON_NAME = "images/layout_add.png";
+	private final static Icon NAVIGATION_ICON = Icons.NAVIGATE_ON_INCOMING_EVENT_ICON;
 
 	private HashMap<String, TreeViewProvider> providerMap;// map of view providers, key is the name
 	private GoToService goToService;
@@ -204,11 +204,13 @@ public class ProgramTreePlugin extends ProgramPlugin
 	 */
 	@Override
 	public void dispose() {
-        for (String treeName : providerMap.keySet()) {
-            TreeViewProvider provider = providerMap.get(treeName);
-            deregisterService(ViewProviderService.class, provider);
-            provider.dispose();
-        }
+		Iterator<String> iter = providerMap.keySet().iterator();
+		while (iter.hasNext()) {
+			String treeName = iter.next();
+			TreeViewProvider provider = providerMap.get(treeName);
+			deregisterService(ViewProviderService.class, provider);
+			provider.dispose();
+		}
 
 		goToService = null;
 		viewManagerService = null;
@@ -350,13 +352,15 @@ public class ProgramTreePlugin extends ProgramPlugin
 		HashMap<String, TreeViewProvider> map = new HashMap<>(providerMap);
 
 		// remove views from the map that are not in the providerList
-        for (String treeName : map.keySet()) {
-            TreeViewProvider provider = map.get(treeName);
-            if (!providerList.contains(provider)) {
-                deregisterService(ViewProviderService.class, provider);
-                providerMap.remove(treeName);
-            }
-        }
+		Iterator<String> iter = map.keySet().iterator();
+		while (iter.hasNext()) {
+			String treeName = iter.next();
+			TreeViewProvider provider = map.get(treeName);
+			if (!providerList.contains(provider)) {
+				deregisterService(ViewProviderService.class, provider);
+				providerMap.remove(treeName);
+			}
+		}
 	}
 
 	/**
@@ -422,7 +426,7 @@ public class ProgramTreePlugin extends ProgramPlugin
 			goTo(node.getModule().getAddressSet().getMinAddress());
 		}
 		else if (node.isRoot()) {
-			goTo(this.currentProvider.getView().getMinAddress());
+			goTo(this.getCurrentProvider().getView().getMinAddress());
 		}
 	}
 
@@ -608,10 +612,12 @@ public class ProgramTreePlugin extends ProgramPlugin
 	 * fragment was moved; update all the view maps.
 	 */
 	void fragmentMoved() {
-        for (String treeName : providerMap.keySet()) {
-            TreeViewProvider provider = providerMap.get(treeName);
-            provider.notifyListeners();
-        }
+		Iterator<String> iter = providerMap.keySet().iterator();
+		while (iter.hasNext()) {
+			String treeName = iter.next();
+			TreeViewProvider provider = providerMap.get(treeName);
+			provider.notifyListeners();
+		}
 	}
 
 	/**
@@ -676,32 +682,34 @@ public class ProgramTreePlugin extends ProgramPlugin
 				List<?> origViewList = tree.getViewList();
 				List<GroupPath> newViewList = new ArrayList<>();
 
-                for (Object value : nodeList) {
+				for (int i = 0; i < nodeList.size(); i++) {
 
-                    ProgramNode node = (ProgramNode) value;
-                    TreePath path = node.getTreePath();
-                    GroupPath gp = node.getGroupPath();
-                    if (tree.isExpanded(path)) {
-                        expandList.add(gp);
-                    }
-                    if (origViewList.contains(path)) {
-                        newViewList.add(gp);
-                    }
-                }
+					ProgramNode node = (ProgramNode) nodeList.get(i);
+					TreePath path = node.getTreePath();
+					GroupPath gp = node.getGroupPath();
+					if (tree.isExpanded(path)) {
+						expandList.add(gp);
+					}
+					if (origViewList.contains(path)) {
+						newViewList.add(gp);
+					}
+				}
 				tree.reload();
 
-                for (Object o : selectList) {
-                    GroupPath gp = (GroupPath) o;
-                    tree.addGroupSelectionPath(gp);
-                }
+				for (int i = 0; i < selectList.size(); i++) {
+					GroupPath gp = (GroupPath) selectList.get(i);
+					tree.addGroupSelectionPath(gp);
+				}
 
-                for (GroupPath gp : expandList) {
-                    tree.expand(gp);
-                }
-                for (GroupPath gp : newViewList) {
-                    tree.addGroupViewPath(gp);
-                }
-				if (!newViewList.isEmpty() && tree.getViewList().isEmpty()) {
+				for (int i = 0; i < expandList.size(); i++) {
+					GroupPath gp = expandList.get(i);
+					tree.expand(gp);
+				}
+				for (int i = 0; i < newViewList.size(); i++) {
+					GroupPath gp = newViewList.get(i);
+					tree.addGroupViewPath(gp);
+				}
+				if (newViewList.size() > 0 && tree.getViewList().size() == 0) {
 					tree.addGroupViewPath(new GroupPath(rootNode.getName()));
 				}
 			}

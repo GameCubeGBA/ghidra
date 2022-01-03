@@ -61,7 +61,7 @@ public class LabelHistoryAction extends ListingContextAction {
 			}
 		}
 		List<LabelHistory> list = getHistoryList(context.getProgram(), addr);
-		if (!list.isEmpty()) {
+		if (list.size() > 0) {
 			LabelHistoryDialog dialog =
 				new LabelHistoryDialog(tool, context.getProgram(), addr, getHistoryList(
 					context.getProgram(), addr));
@@ -76,9 +76,9 @@ public class LabelHistoryAction extends ListingContextAction {
 	private List<LabelHistory> getHistoryList(Program program, Address addr) {
 		List<LabelHistory> list = new ArrayList<LabelHistory>();
 		LabelHistory[] history = program.getSymbolTable().getLabelHistory(addr);
-        for (LabelHistory labelHistory : history) {
-            list.add(labelHistory);
-        }
+		for (int i = 0; i < history.length; i++) {
+			list.add(history[i]);
+		}
 		return list;
 	}
 

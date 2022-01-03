@@ -162,7 +162,7 @@ public final class LongField extends PrimitiveField {
 			copy.setNull();
 			return copy;
 		}
-		return new LongField(value);
+		return new LongField(getLongValue());
 	}
 
 	@Override

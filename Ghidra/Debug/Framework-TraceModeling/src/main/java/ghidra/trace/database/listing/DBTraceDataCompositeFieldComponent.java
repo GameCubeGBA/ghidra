@@ -38,7 +38,7 @@ public class DBTraceDataCompositeFieldComponent extends AbstractDBTraceDataCompo
 	@Override
 	public String getFieldName() {
 		String fieldName = dtc.getFieldName();
-		if (fieldName == null || fieldName.isEmpty()) {
+		if (fieldName == null || fieldName.length() == 0) {
 			return dtc.getDefaultFieldName();
 		}
 		return fieldName;

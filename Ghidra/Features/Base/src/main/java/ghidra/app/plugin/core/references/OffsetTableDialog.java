@@ -132,8 +132,18 @@ public class OffsetTableDialog extends DialogComponentProvider {
 		JPanel panel = new JPanel(new PairLayout(10, 5));
 		panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 10, 20));
 		addrInput = new AddressInput();
-		addrInput.addActionListener(e -> okCallback());
-		addrInput.addChangeListener(e -> clearStatusText());
+		addrInput.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				okCallback();
+			}
+		});
+		addrInput.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				clearStatusText();
+			}
+		});
 		addrInput.setAddressFactory(addrFactory);
 		addrInput.setAddress(defaultAddress);
 

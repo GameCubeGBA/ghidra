@@ -116,7 +116,7 @@ public class ArrayDataType extends DataTypeImpl implements Array {
 	public SettingsDefinition[] getSettingsDefinitions() {
 		// NOTE: it may be necessary to allow array-specific settings at some
 		// point to facilitate appropriate char array string generation
-		return dataType.getSettingsDefinitions();
+		return getDataType().getSettingsDefinitions();
 	}
 
 	@Override
@@ -128,8 +128,11 @@ public class ArrayDataType extends DataTypeImpl implements Array {
 			return false;
 		}
 		Array array = (Array) obj;
-        return (numElements == array.getNumElements()) && dataType.isEquivalent(array.getDataType()) && (!(dataType instanceof Dynamic) || getElementLength() == array.getElementLength());
-    }
+		if ((numElements != array.getNumElements()) || !dataType.isEquivalent(array.getDataType()) || (dataType instanceof Dynamic && getElementLength() != array.getElementLength())) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public int getNumElements() {
@@ -258,7 +261,7 @@ public class ArrayDataType extends DataTypeImpl implements Array {
 
 	@Override
 	public CategoryPath getCategoryPath() {
-		DataType dt = dataType;
+		DataType dt = getDataType();
 		return dt.getCategoryPath();
 	}
 
@@ -271,13 +274,13 @@ public class ArrayDataType extends DataTypeImpl implements Array {
 
 	@Override
 	public boolean dependsOn(DataType dt) {
-		DataType myDt = dataType;
+		DataType myDt = getDataType();
 		return (myDt == dt || myDt.dependsOn(dt));
 	}
 
 	@Override
 	public String getDefaultLabelPrefix() {
-		DataType dt = dataType;
+		DataType dt = getDataType();
 		if (dt == DataType.DEFAULT) {
 			return ARRAY_LABEL_PREFIX;
 		}

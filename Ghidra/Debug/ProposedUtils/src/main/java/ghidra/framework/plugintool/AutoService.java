@@ -22,11 +22,11 @@ import ghidra.framework.plugintool.util.AutoServiceListener;
 import ghidra.util.Msg;
 
 public interface AutoService {
-	interface Wiring {
+	public interface Wiring {
 		void dispose();
 	}
 
-	class WiringImpl implements Wiring {
+	static class WiringImpl implements Wiring {
 		@SuppressWarnings("unused") // strong reference
 		private AutoServiceListener<?> listener;
 
@@ -40,7 +40,7 @@ public interface AutoService {
 		}
 	}
 
-	static Wiring wireServicesProvidedAndConsumed(Plugin plugin) {
+	public static Wiring wireServicesProvidedAndConsumed(Plugin plugin) {
 		registerServicesProvided(plugin, plugin.getClass(), plugin);
 		return wireServicesConsumed(plugin, plugin);
 	}
@@ -75,7 +75,7 @@ public interface AutoService {
 		}
 	}
 
-	static Wiring wireServicesConsumed(PluginTool tool, Object receiver) {
+	public static Wiring wireServicesConsumed(PluginTool tool, Object receiver) {
 		AutoServiceListener<Object> listener = new AutoServiceListener<>(receiver);
 		tool.addServiceListener(listener);
 		listener.notifyCurrentServices(tool);
@@ -83,7 +83,7 @@ public interface AutoService {
 		return new WiringImpl(listener);
 	}
 
-	static Wiring wireServicesConsumed(Plugin plugin, Object receiver) {
+	public static Wiring wireServicesConsumed(Plugin plugin, Object receiver) {
 		// TODO: Validate against PluginInfo?
 		return wireServicesConsumed(plugin.getTool(), receiver);
 	}

@@ -32,5 +32,5 @@ public interface ByteArrayConverter {
 	 * @param dc the data converter to use
 	 * @return a byte array representing this object
 	 */
-    byte [] toBytes(DataConverter dc) throws IOException;
+	public byte [] toBytes(DataConverter dc) throws IOException;
 }

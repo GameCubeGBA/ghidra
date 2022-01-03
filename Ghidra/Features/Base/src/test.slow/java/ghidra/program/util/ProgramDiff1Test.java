@@ -55,7 +55,8 @@ public class ProgramDiff1Test extends AbstractGhidraHeadedIntegrationTest {
 
 	/** Creates new ProgramDiffTest */
 	public ProgramDiff1Test() {
-    }
+		super();
+	}
 
 	/**
 	 * @see TestCase#setUp()

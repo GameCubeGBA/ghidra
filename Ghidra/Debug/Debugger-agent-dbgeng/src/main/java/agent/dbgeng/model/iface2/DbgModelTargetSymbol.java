@@ -21,11 +21,11 @@ import ghidra.program.model.address.Address;
 public interface DbgModelTargetSymbol extends DbgModelTargetObject, TargetSymbol {
 
 	@Override
-    boolean isConstant();
+	public boolean isConstant();
 
 	@Override
-    Address getValue();
+	public Address getValue();
 
 	@Override
-    long getSize();
+	public long getSize();
 }

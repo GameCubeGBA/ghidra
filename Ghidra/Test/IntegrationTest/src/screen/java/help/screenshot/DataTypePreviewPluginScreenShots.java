@@ -22,7 +22,8 @@ import docking.ComponentProvider;
 public class DataTypePreviewPluginScreenShots extends GhidraScreenShotGenerator {
 
 	public DataTypePreviewPluginScreenShots() {
-    }
+		super();
+	}
 
 @Test
     public void testData_Type_Preview() {

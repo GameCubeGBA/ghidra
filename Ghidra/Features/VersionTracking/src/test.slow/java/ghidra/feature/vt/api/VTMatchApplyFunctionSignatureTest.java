@@ -71,7 +71,8 @@ public class VTMatchApplyFunctionSignatureTest extends AbstractGhidraHeadedInteg
 	//  Canary_Tester_... 0040131c   FUN... 0040132c    1 param & identical signature
 
 	public VTMatchApplyFunctionSignatureTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -89,7 +90,12 @@ public class VTMatchApplyFunctionSignatureTest extends AbstractGhidraHeadedInteg
 			VTSessionDB.createVTSession(testName.getMethodName() + " - Test Match Set Manager",
 				sourceProgram, destinationProgram, this);
 
-		runSwing(() -> controller.openVersionTrackingSession(session));
+		runSwing(new Runnable() {
+			@Override
+			public void run() {
+				controller.openVersionTrackingSession(session);
+			}
+		});
 
 		setAllOptionsToDoNothing();
 
@@ -592,14 +598,24 @@ public class VTMatchApplyFunctionSignatureTest extends AbstractGhidraHeadedInteg
 	public void testApplyMatch_ReplaceSignatureAndCallingConventionDifferentLanguageFailUsingNameMatch()
 			throws Exception {
 
-		runSwing(() -> controller.closeCurrentSessionIgnoringChanges());
+		runSwing(new Runnable() {
+			@Override
+			public void run() {
+				controller.closeCurrentSessionIgnoringChanges();
+			}
+		});
 
 		env.release(destinationProgram);
 		destinationProgram = createToyDestinationProgram();// env.getProgram("helloProgram"); // get a program without cdecl
 		session =
 			VTSessionDB.createVTSession(testName.getMethodName() + " - Test Match Set Manager",
 				sourceProgram, destinationProgram, this);
-		runSwing(() -> controller.openVersionTrackingSession(session));
+		runSwing(new Runnable() {
+			@Override
+			public void run() {
+				controller.openVersionTrackingSession(session);
+			}
+		});
 
 		useMatch("0x00401040", "0x00010938");
 
@@ -1537,10 +1553,13 @@ public class VTMatchApplyFunctionSignatureTest extends AbstractGhidraHeadedInteg
 		final String[] sourceStringBox = new String[1];
 		final String[] destinationStringBox = new String[1];
 
-		runSwing(() -> {
-            sourceStringBox[0] = sourceFunction.getPrototypeString(false, false);
-            destinationStringBox[0] = destinationFunction.getPrototypeString(false, false);
-        });
+		runSwing(new Runnable() {
+			@Override
+			public void run() {
+				sourceStringBox[0] = sourceFunction.getPrototypeString(false, false);
+				destinationStringBox[0] = destinationFunction.getPrototypeString(false, false);
+			}
+		});
 
 		assertEquals(expectedSourceSignature, sourceStringBox[0]);
 		assertEquals(expectedDestinationSignature, destinationStringBox[0]);

@@ -31,13 +31,15 @@ public class BlockCopy extends PcodeBlock {
 	private int altindex;		// Alternate index for correlating this block with result structure
 	
 	public BlockCopy() {
-        blocktype = PcodeBlock.COPY;
+		super();
+		blocktype = PcodeBlock.COPY;
 		address = Address.NO_ADDRESS;
 		ref = null;
 	}
 	
 	public BlockCopy(Object r,Address addr) {
-        ref = r;
+		super();
+		ref = r;
 		blocktype = PcodeBlock.COPY;
 		address = addr;
 	}

@@ -21,7 +21,7 @@ package ghidra.file.formats.android.oat;
 public enum OatInstructionSet {
 	kNone, kArm, kArm64, kThumb2, kX86, kX86_64, kMips, kMips64;
 
-	public static final String DISPLAY_NAME = "instruction_set_";
+	public final static String DISPLAY_NAME = "instruction_set_";
 
 	public static OatInstructionSet valueOf(int instructionSet) {
 		try {

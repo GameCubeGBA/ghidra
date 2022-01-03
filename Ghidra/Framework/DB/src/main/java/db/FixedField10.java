@@ -233,8 +233,11 @@ public class FixedField10 extends FixedField {
 			return false;
 		}
 		FixedField10 other = (FixedField10) obj;
-        return (hi8 == other.hi8) && (lo2 == other.lo2);
-    }
+		if ((hi8 != other.hi8) || (lo2 != other.lo2)) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public String getValueAsString() {

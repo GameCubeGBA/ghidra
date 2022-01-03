@@ -639,9 +639,13 @@ public Vertex[] toArray()
 	        {
 	            throw new ConcurrentModificationException("Set Modified");
 	        }
-
-            return nextPosition < capacity();
-        }
+	
+	        if( nextPosition < capacity() )
+	        {
+	            return true;
+	        }
+	        return false;
+	    }
 	
 		/** 
 		 * Return the next Vertex in the iteration

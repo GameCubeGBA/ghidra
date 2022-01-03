@@ -37,8 +37,12 @@ public class TOCItemReference extends TOCItem implements Comparable<TOCItemRefer
 		}
 
 		TOCItemExternal external = linkDatabase.getTOCExternal(this);
-        return external != null;
-    }
+		if (external != null) {
+			return true;
+		}
+
+		return false;
+	}
 
 	/** Overridden, as references cannot have targets, only their definitions */
 	@Override

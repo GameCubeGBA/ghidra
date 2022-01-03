@@ -58,12 +58,12 @@ class RegisterValuesXmlMgr {
 	void read(XmlPullParser parser, TaskMonitor monitor) throws SAXParseException, CancelledException { 
 		undefinedRegisterNames = new HashSet<String>();
 		XmlElement element = parser.next();
-		if (!element.isStart() || !"REGISTER_VALUES".equals(element.getName())) {
+		if (!element.isStart() || !element.getName().equals("REGISTER_VALUES")) {
 			throw new SAXParseException("Expected REGISTER_VALUES start tag", null, null, parser.getLineNumber(), parser.getColumnNumber());
 		}
 		
 		element = parser.next();
-		while (element != null && element.isStart() && "REGISTER_VALUE_RANGE".equals(element.getName())) {
+		while (element != null && element.isStart() && element.getName().equals("REGISTER_VALUE_RANGE")) {
 			if (monitor.isCancelled()) {
 				throw new CancelledException();	
 			}
@@ -71,7 +71,7 @@ class RegisterValuesXmlMgr {
 			processRegisterValues(element, parser);
 
 			element = parser.next();
-			if (element.isStart() || !"REGISTER_VALUE_RANGE".equalsIgnoreCase(element.getName())) {
+			if (element.isStart() || !element.getName().equalsIgnoreCase("REGISTER_VALUE_RANGE")) {
 				throw new SAXParseException("Expected REGISTER_VALUE_RANGE end tag", null, null, parser.getLineNumber(), parser.getColumnNumber());
 			}
 			
@@ -79,7 +79,7 @@ class RegisterValuesXmlMgr {
 			element = parser.next();
 		}
 		
-		if (element != null && !"REGISTER_VALUES".equals(element.getName())) {
+		if (element != null && !element.getName().equals("REGISTER_VALUES")) {
 			throw new SAXParseException("Expected REGISTER_VALUES end tag", null, null, parser.getLineNumber(), parser.getColumnNumber());
 		}
 	}
@@ -91,14 +91,17 @@ class RegisterValuesXmlMgr {
 	private List<Register> getUniqueRegisters() {
 	
 		ArrayList<Register> regs = new ArrayList<>(context.getRegisters());
-		Collections.sort(regs, (r1, r2) -> {
-            int size1 = r1.getMinimumByteSize();
-            int size2 = r2.getMinimumByteSize();
-            if (size1 != size2) {
-                return size1 - size2;
-            }
-            return r1.getOffset() - r2.getOffset();
-        });
+		Collections.sort(regs, new Comparator<Register>() {
+			@Override
+			public int compare(Register r1, Register r2) {
+				int size1 = r1.getMinimumByteSize();
+				int size2 = r2.getMinimumByteSize();
+				if (size1 != size2) {
+					return size1 - size2;	
+				}
+				return r1.getOffset() - r2.getOffset(); 
+			}
+		});
 		
 		return regs;
 	}

@@ -120,15 +120,18 @@ public class EditReferenceDialog extends DialogComponentProvider {
 
 		JPanel refTypePanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5));
 		refTypePanel.setBorder(new TitledBorder(new EtchedBorder(), "Type of Reference"));
-		ChangeListener refChoiceListener = e -> {
-            Object src = e.getSource();
-            if (src instanceof JRadioButton) {
-                JRadioButton refChoiceButton = (JRadioButton) src;
-                if (refChoiceButton.isSelected()) {
-                    refChoiceActivated(refChoiceButton);
-                }
-            }
-        };
+		ChangeListener refChoiceListener = new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				Object src = e.getSource();
+				if (src instanceof JRadioButton) {
+					JRadioButton refChoiceButton = (JRadioButton) src;
+					if (refChoiceButton.isSelected()) {
+						refChoiceActivated(refChoiceButton);
+					}
+				}
+			}
+		};
 
 		memRefChoice = new GRadioButton("Memory");
 		memRefChoice.addChangeListener(refChoiceListener);

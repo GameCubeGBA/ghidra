@@ -33,7 +33,8 @@ import docking.actions.*;
 public class GhidraScriptMgrPlugin1Test extends AbstractGhidraScriptMgrPluginTest {
 
 	public GhidraScriptMgrPlugin1Test() {
-    }
+		super();
+	}
 
 	@Test
 	public void testRunLastScriptAction() throws Exception {

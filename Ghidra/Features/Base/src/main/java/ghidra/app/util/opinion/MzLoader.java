@@ -44,12 +44,12 @@ import ghidra.util.task.TaskMonitor;
  * A {@link Loader} for processing Microsoft DOS MZ files.
  */
 public class MzLoader extends AbstractLibrarySupportLoader {
-	public static final String MZ_NAME = "Old-style DOS Executable (MZ)";
+	public final static String MZ_NAME = "Old-style DOS Executable (MZ)";
 
-	private static final String ENTRY_NAME = "entry";
-	private static final int INITIAL_SEGMENT_VAL = 0x1000;
-	private static final int FAR_RETURN_OPCODE = 0xCB;
-	private static final byte MOVW_DS_OPCODE = (byte) 0xba;
+	private final static String ENTRY_NAME = "entry";
+	private final static int INITIAL_SEGMENT_VAL = 0x1000;
+	private final static int FAR_RETURN_OPCODE = 0xCB;
+	private final static byte MOVW_DS_OPCODE = (byte) 0xba;
 	private static final long MIN_BYTE_LENGTH = 4;
 
 	private DataConverter converter = LittleEndianDataConverter.INSTANCE;
@@ -73,7 +73,7 @@ public class MzLoader extends AbstractLibrarySupportLoader {
 		DOSHeader dos = ose.getDOSHeader();
 		if (dos.isDosSignature() && !dos.hasNewExeHeader() && !dos.hasPeHeader()) {
 			List<QueryResult> results =
-				QueryOpinionService.query(MZ_NAME, "" + dos.e_magic(), null);
+				QueryOpinionService.query(getName(), "" + dos.e_magic(), null);
 			for (QueryResult result : results) {
 				loadSpecs.add(new LoadSpec(this, 0, result));
 			}

@@ -140,7 +140,7 @@ public abstract class AbstractSymbolTreePluginExternalsTest
 			createDialog.getComponent().getRootPane(), EditExternalLocationPanel.class);
 		JTextField extOriginalNameTextField =
 			(JTextField) getInstanceField("extOriginalLabelTextField", extLocPanel);
-		if (expectedText == null || expectedText.isEmpty()) {
+		if (expectedText == null || expectedText.length() == 0) {
 			assertNull(extOriginalNameTextField); // not shown
 		}
 		else {

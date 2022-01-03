@@ -44,13 +44,16 @@ public class ProviderToggleAction extends ToggleDockingAction {
     
     private void installVisibilityTracker( final ComponentProviderAdapter provider ) {
         JComponent component = provider.getComponent();
-        component.addHierarchyListener(e -> {
-            long changeFlags = e.getChangeFlags();
-            if ( HierarchyEvent.SHOWING_CHANGED ==
-                (changeFlags & HierarchyEvent.SHOWING_CHANGED) ) {
-                setSelected( provider.isVisible() );
+        component.addHierarchyListener( new HierarchyListener() {
+            
+            public void hierarchyChanged( HierarchyEvent e ) {
+                long changeFlags = e.getChangeFlags();
+                if ( HierarchyEvent.SHOWING_CHANGED ==
+                    (changeFlags & HierarchyEvent.SHOWING_CHANGED) ) {
+                    setSelected( provider.isVisible() );
+                }
             }
-        });
+        } );
     }
     
     @Override

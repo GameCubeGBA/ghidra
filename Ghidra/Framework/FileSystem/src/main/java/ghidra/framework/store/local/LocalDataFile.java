@@ -40,7 +40,7 @@ import ghidra.util.task.TaskMonitor;
  */
 public class LocalDataFile extends LocalFolderItem implements DataFileItem {
 
-	private static final int IO_BUFFER_SIZE = 32 * 1024;
+	private final static int IO_BUFFER_SIZE = 32 * 1024;
 	private static final String DATA_FILE = "data.1.gdf";
 
 	public LocalDataFile(LocalFileSystem fileSystem, PropertyFile propertyFile) throws IOException {

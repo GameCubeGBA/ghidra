@@ -59,7 +59,7 @@ import resources.ResourceManager;
 public class PythonPlugin extends ProgramPlugin
 		implements InterpreterConnection, OptionsChangeListener {
 
-	private static final int INPUT_THREAD_SHUTDOWN_TIMEOUT_MS = 1000;
+	private final static int INPUT_THREAD_SHUTDOWN_TIMEOUT_MS = 1000;
 
 	private InterpreterConsole console;
 	private GhidraPythonInterpreter interpreter;
@@ -68,10 +68,10 @@ public class PythonPlugin extends ProgramPlugin
 	private PythonPluginInputThread inputThread;
 
 	// Plugin options
-    private static final String INCLUDE_BUILTINS_LABEL = "Include \"builtins\" in code completion?";
-	private static final String INCLUDE_BUILTINS_DESCRIPTION =
+	private final static String INCLUDE_BUILTINS_LABEL = "Include \"builtins\" in code completion?";
+	private final static String INCLUDE_BUILTINS_DESCRIPTION =
 		"Whether or not to include Python's built-in functions and properties in the pop-up code completion window.";
-	private static final boolean INCLUDE_BUILTINS_DEFAULT = true;
+	private final static boolean INCLUDE_BUILTINS_DEFAULT = true;
 	private boolean includeBuiltins = INCLUDE_BUILTINS_DEFAULT;
 
 	/**

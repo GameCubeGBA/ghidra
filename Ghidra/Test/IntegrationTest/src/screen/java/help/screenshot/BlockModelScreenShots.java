@@ -43,7 +43,8 @@ import ghidra.util.task.TaskMonitorAdapter;
 public class BlockModelScreenShots extends GhidraScreenShotGenerator {
 
 	public BlockModelScreenShots() {
-    }
+		super();
+	}
 
 	@Test
 	public void testBasicBlockCode() throws Exception {

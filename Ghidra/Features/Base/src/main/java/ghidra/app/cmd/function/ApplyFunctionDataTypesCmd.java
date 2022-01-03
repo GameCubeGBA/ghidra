@@ -349,7 +349,7 @@ public class ApplyFunctionDataTypesCmd extends BackgroundCommand {
 	private List<Symbol> lookupSymbol(Map<String, List<Symbol>> symbolMap, String prefix,
 			String functionName) {
 
-		if (functionName == null || functionName.isEmpty()) {
+		if (functionName == null || functionName.length() == 0) {
 			return null;
 		}
 

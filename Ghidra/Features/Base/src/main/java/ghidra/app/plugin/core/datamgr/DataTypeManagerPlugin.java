@@ -333,9 +333,12 @@ public class DataTypeManagerPlugin extends ProgramPlugin
 		}
 		editorManager.dismissEditors(null);
 		dataTypeManagerHandler.updateKnownOpenArchives();
-        return ArchiveUtils.canClose(dataTypeManagerHandler.getAllModifiedFileArchives(),
-                provider.getComponent());
-    }
+		if (!ArchiveUtils.canClose(dataTypeManagerHandler.getAllModifiedFileArchives(),
+			provider.getComponent())) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	protected void close() {
@@ -791,7 +794,10 @@ public class DataTypeManagerPlugin extends ProgramPlugin
 
 	@Override
 	protected boolean saveData() {
-        return ArchiveUtils.canClose(dataTypeManagerHandler.getAllFileOrProjectArchives(),
-                provider.getComponent());
-    }
+		if (!ArchiveUtils.canClose(dataTypeManagerHandler.getAllFileOrProjectArchives(),
+			provider.getComponent())) {
+			return false;
+		}
+		return true;
+	}
 }

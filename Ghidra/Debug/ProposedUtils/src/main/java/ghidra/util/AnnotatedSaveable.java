@@ -55,16 +55,16 @@ public abstract class AnnotatedSaveable implements Saveable {
 
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.FIELD)
-	public @interface SaveableField {
+	public static @interface SaveableField {
 	}
 
-	public interface FieldAccessor {
+	public static interface FieldAccessor {
 		void save(AnnotatedSaveable saveable, ObjectStorage objStorage);
 
 		void restore(AnnotatedSaveable saveable, ObjectStorage objStorage);
 	}
 
-	public abstract static class AbstractFieldAccessor<T> implements FieldAccessor {
+	public static abstract class AbstractFieldAccessor<T> implements FieldAccessor {
 		protected final Field field;
 		protected final Function<ObjectStorage, T> objGetter;
 		protected final BiConsumer<ObjectStorage, T> objPutter;
@@ -188,7 +188,7 @@ public abstract class AnnotatedSaveable implements Saveable {
 		}
 	}
 
-	public interface FieldAccessorFactory extends Function<Field, FieldAccessor> {
+	public static interface FieldAccessorFactory extends Function<Field, FieldAccessor> {
 	}
 
 	public static class AnnotatedSaveableException extends AssertionError {
@@ -210,8 +210,11 @@ public abstract class AnnotatedSaveable implements Saveable {
 				return result;
 			}
 			result = f1.getName().compareTo(f2.getName());
-            return result;
-        });
+			if (result != 0) {
+				return result;
+			}
+			return 0;
+		});
 		this.fields = new FieldAccessor[fields.size()];
 		this.fieldClasses = new Class<?>[fields.size()];
 		for (int i = 0; i < fields.size(); i++) {

@@ -41,11 +41,11 @@ public class BoundImportForwarderRef implements StructConverter, ByteArrayConver
 	/**
 	 * The name to use when converting into a structure data type.
 	 */
-    public static final String NAME = "IMAGE_BOUND_FORWARDER_REF";
+    public final static String NAME = "IMAGE_BOUND_FORWARDER_REF";
 	/**
 	 * The size of the <code>IMAGE_BOUND_FORWARDER_REF</code> in bytes.
 	 */
-    public static final int IMAGE_SIZEOF_BOUND_IMPORT_FORWARDER_REF = 8;
+    public final static int IMAGE_SIZEOF_BOUND_IMPORT_FORWARDER_REF = 8;
 
     private int timeDateStamp;
     private short offsetModuleName;

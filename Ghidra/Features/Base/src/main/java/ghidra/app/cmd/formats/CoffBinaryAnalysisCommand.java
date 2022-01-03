@@ -41,7 +41,8 @@ public class CoffBinaryAnalysisCommand extends FlatProgramAPI
 	private MessageLog messages = new MessageLog();
 
 	public CoffBinaryAnalysisCommand() {
-    }
+		super();
+	}
 
 	@Override
 	public boolean canApply(Program program) {
@@ -172,25 +173,25 @@ public class CoffBinaryAnalysisCommand extends FlatProgramAPI
 		long length = header.getSymbolTableEntries() * CoffConstants.SYMBOL_SIZEOF;
 		Address address = start;
 		List<CoffSymbol> symbols = header.getSymbols();
-        for (CoffSymbol coffSymbol : symbols) {
-            if (monitor.isCancelled()) {
-                break;
-            }
-            CoffSymbol symbol = coffSymbol;
+		for (int i = 0; i < symbols.size(); ++i) {
+			if (monitor.isCancelled()) {
+				break;
+			}
+			CoffSymbol symbol = symbols.get(i);
 
-            DataType dt = symbol.toDataType();
-            createData(address, dt);
-            setPlateComment(address, symbol.getName());
-            address = address.add(dt.getLength());
+			DataType dt = symbol.toDataType();
+			createData(address, dt);
+			setPlateComment(address, symbol.getName());
+			address = address.add(dt.getLength());
 
-            List<CoffSymbolAux> auxiliarySymbols = symbol.getAuxiliarySymbols();
-            for (CoffSymbolAux auxSymbol : auxiliarySymbols) {
-                DataType auxDT = auxSymbol.toDataType();
-                createData(address, auxDT);
-                setPlateComment(address, "Auxiliary for " + symbol.getName());
-                address = address.add(auxDT.getLength());
-            }
-        }
+			List<CoffSymbolAux> auxiliarySymbols = symbol.getAuxiliarySymbols();
+			for (CoffSymbolAux auxSymbol : auxiliarySymbols) {
+				DataType auxDT = auxSymbol.toDataType();
+				createData(address, auxDT);
+				setPlateComment(address, "Auxiliary for " + symbol.getName());
+				address = address.add(auxDT.getLength());
+			}
+		}
 		createFragment("Symbols", start, length);
 	}
 

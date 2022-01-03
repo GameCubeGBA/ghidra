@@ -28,7 +28,7 @@ import ghidra.program.model.address.SegmentedAddress;
  */
 public class WindowsHeader {
 	/**The magic number for Windows NE files.*/
-    public static final short IMAGE_NE_SIGNATURE = 0x454E; //NE
+    public final static short IMAGE_NE_SIGNATURE = 0x454E; //NE
 
     private InformationBlock infoBlock;
     private SegmentTable segTable;

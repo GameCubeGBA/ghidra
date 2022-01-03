@@ -34,7 +34,8 @@ public class DataTypeTest extends AbstractGhidraHeadedIntegrationTest {
 	private DataTypeManager dtm;
 
 	public DataTypeTest() {
-    }
+		super();
+	}
 
 	private Program buildProgram(String programName) throws Exception {
 		ProgramBuilder builder = new ProgramBuilder(programName, ProgramBuilder._TOY);

@@ -57,7 +57,7 @@ public abstract class DataTypeConflictHandler {
 		RENAME_AND_ADD, USE_EXISTING, REPLACE_EXISTING;
 	}
 
-	public static final DataTypeConflictHandler DEFAULT_HANDLER = new DataTypeConflictHandler() {
+	public final static DataTypeConflictHandler DEFAULT_HANDLER = new DataTypeConflictHandler() {
 		@Override
 		public ConflictResult resolveConflict(DataType addedDataType, DataType existingDataType) {
 //			Msg.info(this,
@@ -78,7 +78,7 @@ public abstract class DataTypeConflictHandler {
 		}
 	};
 
-	private static final DataTypeConflictHandler DEFAULT_SUBSEQUENT_HANDLER =
+	private final static DataTypeConflictHandler DEFAULT_SUBSEQUENT_HANDLER =
 		new DataTypeConflictHandler() {
 			@Override
 			public ConflictResult resolveConflict(DataType addedDataType,
@@ -118,7 +118,7 @@ public abstract class DataTypeConflictHandler {
 			return SUBSEQUENT_REPLACE_HANDLER;
 		}
 	};
-	private static final DataTypeConflictHandler SUBSEQUENT_REPLACE_HANDLER =
+	private final static DataTypeConflictHandler SUBSEQUENT_REPLACE_HANDLER =
 		new DataTypeConflictHandler() {
 			@Override
 			public ConflictResult resolveConflict(DataType addedDataType,
@@ -137,7 +137,7 @@ public abstract class DataTypeConflictHandler {
 			}
 		};
 
-	public static final DataTypeConflictHandler KEEP_HANDLER = new DataTypeConflictHandler() {
+	public final static DataTypeConflictHandler KEEP_HANDLER = new DataTypeConflictHandler() {
 		@Override
 		public ConflictResult resolveConflict(DataType addedDataType, DataType existingDataType) {
 //			Msg.info(this, "New type not added in favor of existing type " +
@@ -170,7 +170,7 @@ public abstract class DataTypeConflictHandler {
 	 * Unlike the {@link #DEFAULT_HANDLER}, follow-on dependency datatype 
 	 * resolutions will retain the same conflict resolution strategy.
 	 */
-    public static final DataTypeConflictHandler REPLACE_EMPTY_STRUCTS_OR_RENAME_AND_ADD_HANDLER =
+	public final static DataTypeConflictHandler REPLACE_EMPTY_STRUCTS_OR_RENAME_AND_ADD_HANDLER =
 		new DataTypeConflictHandler() {
 
 			private ConflictResult resolveConflictReplaceEmpty(DataType addedDataType,
@@ -208,7 +208,7 @@ public abstract class DataTypeConflictHandler {
 			}
 		};
 
-	static final DataTypeConflictHandler BUILT_IN_MANAGER_HANDLER = new DataTypeConflictHandler() {
+	final static DataTypeConflictHandler BUILT_IN_MANAGER_HANDLER = new DataTypeConflictHandler() {
 		@Override
 		public ConflictResult resolveConflict(DataType addedDataType, DataType existingDataType) {
 			throw new UnsupportedOperationException(

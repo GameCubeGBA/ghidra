@@ -12,36 +12,36 @@
 package SWIG;
 
 public final class SymbolType {
-  public static final SymbolType eSymbolTypeAny = new SymbolType("eSymbolTypeAny", lldbJNI.eSymbolTypeAny_get());
-  public static final SymbolType eSymbolTypeInvalid = new SymbolType("eSymbolTypeInvalid", lldbJNI.eSymbolTypeInvalid_get());
-  public static final SymbolType eSymbolTypeAbsolute = new SymbolType("eSymbolTypeAbsolute");
-  public static final SymbolType eSymbolTypeCode = new SymbolType("eSymbolTypeCode");
-  public static final SymbolType eSymbolTypeResolver = new SymbolType("eSymbolTypeResolver");
-  public static final SymbolType eSymbolTypeData = new SymbolType("eSymbolTypeData");
-  public static final SymbolType eSymbolTypeTrampoline = new SymbolType("eSymbolTypeTrampoline");
-  public static final SymbolType eSymbolTypeRuntime = new SymbolType("eSymbolTypeRuntime");
-  public static final SymbolType eSymbolTypeException = new SymbolType("eSymbolTypeException");
-  public static final SymbolType eSymbolTypeSourceFile = new SymbolType("eSymbolTypeSourceFile");
-  public static final SymbolType eSymbolTypeHeaderFile = new SymbolType("eSymbolTypeHeaderFile");
-  public static final SymbolType eSymbolTypeObjectFile = new SymbolType("eSymbolTypeObjectFile");
-  public static final SymbolType eSymbolTypeCommonBlock = new SymbolType("eSymbolTypeCommonBlock");
-  public static final SymbolType eSymbolTypeBlock = new SymbolType("eSymbolTypeBlock");
-  public static final SymbolType eSymbolTypeLocal = new SymbolType("eSymbolTypeLocal");
-  public static final SymbolType eSymbolTypeParam = new SymbolType("eSymbolTypeParam");
-  public static final SymbolType eSymbolTypeVariable = new SymbolType("eSymbolTypeVariable");
-  public static final SymbolType eSymbolTypeVariableType = new SymbolType("eSymbolTypeVariableType");
-  public static final SymbolType eSymbolTypeLineEntry = new SymbolType("eSymbolTypeLineEntry");
-  public static final SymbolType eSymbolTypeLineHeader = new SymbolType("eSymbolTypeLineHeader");
-  public static final SymbolType eSymbolTypeScopeBegin = new SymbolType("eSymbolTypeScopeBegin");
-  public static final SymbolType eSymbolTypeScopeEnd = new SymbolType("eSymbolTypeScopeEnd");
-  public static final SymbolType eSymbolTypeAdditional = new SymbolType("eSymbolTypeAdditional");
-  public static final SymbolType eSymbolTypeCompiler = new SymbolType("eSymbolTypeCompiler");
-  public static final SymbolType eSymbolTypeInstrumentation = new SymbolType("eSymbolTypeInstrumentation");
-  public static final SymbolType eSymbolTypeUndefined = new SymbolType("eSymbolTypeUndefined");
-  public static final SymbolType eSymbolTypeObjCClass = new SymbolType("eSymbolTypeObjCClass");
-  public static final SymbolType eSymbolTypeObjCMetaClass = new SymbolType("eSymbolTypeObjCMetaClass");
-  public static final SymbolType eSymbolTypeObjCIVar = new SymbolType("eSymbolTypeObjCIVar");
-  public static final SymbolType eSymbolTypeReExported = new SymbolType("eSymbolTypeReExported");
+  public final static SymbolType eSymbolTypeAny = new SymbolType("eSymbolTypeAny", lldbJNI.eSymbolTypeAny_get());
+  public final static SymbolType eSymbolTypeInvalid = new SymbolType("eSymbolTypeInvalid", lldbJNI.eSymbolTypeInvalid_get());
+  public final static SymbolType eSymbolTypeAbsolute = new SymbolType("eSymbolTypeAbsolute");
+  public final static SymbolType eSymbolTypeCode = new SymbolType("eSymbolTypeCode");
+  public final static SymbolType eSymbolTypeResolver = new SymbolType("eSymbolTypeResolver");
+  public final static SymbolType eSymbolTypeData = new SymbolType("eSymbolTypeData");
+  public final static SymbolType eSymbolTypeTrampoline = new SymbolType("eSymbolTypeTrampoline");
+  public final static SymbolType eSymbolTypeRuntime = new SymbolType("eSymbolTypeRuntime");
+  public final static SymbolType eSymbolTypeException = new SymbolType("eSymbolTypeException");
+  public final static SymbolType eSymbolTypeSourceFile = new SymbolType("eSymbolTypeSourceFile");
+  public final static SymbolType eSymbolTypeHeaderFile = new SymbolType("eSymbolTypeHeaderFile");
+  public final static SymbolType eSymbolTypeObjectFile = new SymbolType("eSymbolTypeObjectFile");
+  public final static SymbolType eSymbolTypeCommonBlock = new SymbolType("eSymbolTypeCommonBlock");
+  public final static SymbolType eSymbolTypeBlock = new SymbolType("eSymbolTypeBlock");
+  public final static SymbolType eSymbolTypeLocal = new SymbolType("eSymbolTypeLocal");
+  public final static SymbolType eSymbolTypeParam = new SymbolType("eSymbolTypeParam");
+  public final static SymbolType eSymbolTypeVariable = new SymbolType("eSymbolTypeVariable");
+  public final static SymbolType eSymbolTypeVariableType = new SymbolType("eSymbolTypeVariableType");
+  public final static SymbolType eSymbolTypeLineEntry = new SymbolType("eSymbolTypeLineEntry");
+  public final static SymbolType eSymbolTypeLineHeader = new SymbolType("eSymbolTypeLineHeader");
+  public final static SymbolType eSymbolTypeScopeBegin = new SymbolType("eSymbolTypeScopeBegin");
+  public final static SymbolType eSymbolTypeScopeEnd = new SymbolType("eSymbolTypeScopeEnd");
+  public final static SymbolType eSymbolTypeAdditional = new SymbolType("eSymbolTypeAdditional");
+  public final static SymbolType eSymbolTypeCompiler = new SymbolType("eSymbolTypeCompiler");
+  public final static SymbolType eSymbolTypeInstrumentation = new SymbolType("eSymbolTypeInstrumentation");
+  public final static SymbolType eSymbolTypeUndefined = new SymbolType("eSymbolTypeUndefined");
+  public final static SymbolType eSymbolTypeObjCClass = new SymbolType("eSymbolTypeObjCClass");
+  public final static SymbolType eSymbolTypeObjCMetaClass = new SymbolType("eSymbolTypeObjCMetaClass");
+  public final static SymbolType eSymbolTypeObjCIVar = new SymbolType("eSymbolTypeObjCIVar");
+  public final static SymbolType eSymbolTypeReExported = new SymbolType("eSymbolTypeReExported");
 
   public final int swigValue() {
     return swigValue;
@@ -54,9 +54,9 @@ public final class SymbolType {
   public static SymbolType swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-      for (SymbolType value : swigValues)
-          if (value.swigValue == swigValue)
-              return value;
+    for (int i = 0; i < swigValues.length; i++)
+      if (swigValues[i].swigValue == swigValue)
+        return swigValues[i];
     throw new IllegalArgumentException("No enum " + SymbolType.class + " with value " + swigValue);
   }
 

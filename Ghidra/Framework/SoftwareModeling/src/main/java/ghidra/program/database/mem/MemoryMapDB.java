@@ -98,7 +98,7 @@ public class MemoryMapDB implements Memory, ManagerDB, LiveMemoryListener {
 
 	// lazy hashmap of block names to blocks, must be reloaded if blocks are removed or added
 	private HashMap<String, MemoryBlock> nameBlockMap = new HashMap<>();
-	private static final MemoryBlock NoBlock = new MemoryBlockStub();  // placeholder for no block, not given out
+	private final static MemoryBlock NoBlock = new MemoryBlockStub();  // placeholder for no block, not given out
 
 	Lock lock;
 

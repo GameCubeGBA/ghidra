@@ -39,7 +39,7 @@ import ghidradev.Activator;
  */
 public class PyDevUtils {
 
-	public static final String MIN_SUPPORTED_VERSION = "6.3.1";
+	public final static String MIN_SUPPORTED_VERSION = "6.3.1";
 
 	/**
 	 * Checks to see if a supported version of PyDev is installed.

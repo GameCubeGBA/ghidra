@@ -90,7 +90,8 @@ class ExternalAddConflictPanel extends JPanel implements CodeFormatService {
 
 	ExternalAddConflictPanel(MergeManager mergeManager, int totalConflicts, Program latestProgram,
 			Program myProgram, boolean showListingPanel) {
-        this.tool = mergeManager.getMergeTool();
+		super();
+		this.tool = mergeManager.getMergeTool();
 		this.mergeManager = mergeManager;
 		this.totalConflicts = totalConflicts;
 		this.latestProgram = latestProgram;

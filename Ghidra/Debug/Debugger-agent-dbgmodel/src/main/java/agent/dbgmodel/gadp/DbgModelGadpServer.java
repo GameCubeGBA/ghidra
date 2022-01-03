@@ -76,7 +76,7 @@ public interface DbgModelGadpServer extends DbgEngGadpServer {
 	 * @throws ExecutionException
 	 * @throws InterruptedException
 	 */
-	static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws Exception {
 		try {
 			new DbgModelRunner().run(args);
 		}
@@ -95,14 +95,14 @@ public interface DbgModelGadpServer extends DbgEngGadpServer {
 	 * @return the server instance
 	 * @throws IOException
 	 */
-	static DbgModelGadpServer newInstance(SocketAddress addr) throws IOException {
+	public static DbgModelGadpServer newInstance(SocketAddress addr) throws IOException {
 		return new DbgModelGadpServerImpl(addr);
 	}
 
 	/**
 	 * Runs the server from the command line or dbgeng javaprovider
 	 */
-    class DbgModelRunner extends DbgEngRunner {
+	public class DbgModelRunner extends DbgEngRunner {
 
 		public DbgModelRunner() {
 		}

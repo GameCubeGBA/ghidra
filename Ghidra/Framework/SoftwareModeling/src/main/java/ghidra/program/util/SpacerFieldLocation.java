@@ -51,7 +51,8 @@ public class SpacerFieldLocation extends CodeUnitLocation {
 	 * Should only be used by XML restoration.
 	 */
 	public SpacerFieldLocation() {
-    }
+		super();
+	}
 
 	/**
 	 * Returns the text of the Spacer field containing this location.
@@ -82,8 +83,11 @@ public class SpacerFieldLocation extends CodeUnitLocation {
 		if (!super.equals(obj) || (getClass() != obj.getClass()))
 			return false;
 		SpacerFieldLocation other = (SpacerFieldLocation) obj;
-        return Objects.equals(text, other.text);
-    }
+		if (!Objects.equals(text, other.text)) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public void restoreState(Program p, SaveState obj) {

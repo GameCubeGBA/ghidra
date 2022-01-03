@@ -55,7 +55,7 @@ public class SleighPreprocessorTest extends AbstractGenericTest {
 
 		assertTrue(
 			"Found 0 test input files; please fix this test so it finds them properly in the test environment",
-                !inputs.isEmpty());
+			inputs.size() > 0);
 
 		Assert.assertEquals("# inputs != # targets", inputs.size(), targets.size());
 

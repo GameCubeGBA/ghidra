@@ -274,11 +274,12 @@ public class LongArrayList implements List<Long> {
 
 	@Override
 	public boolean containsAll(Collection<?> c) {
-        for (Object o : c) {
-            if (!contains(o)) {
-                return false;
-            }
-        }
+		Iterator<?> it = c.iterator();
+		while(it.hasNext()) {
+			if (!contains(it.next())) {
+				return false;
+			}
+		}
 		return true;
 	}
 
@@ -319,11 +320,12 @@ public class LongArrayList implements List<Long> {
 	@Override
 	public boolean removeAll(Collection<?> c) {
 		boolean changed = false;
-        for (Object o : c) {
-            if (remove(o)) {
-                changed = true;
-            }
-        }
+		Iterator<?> it = c.iterator();
+		while(it.hasNext()) {
+			if (remove(it.next())) {
+				changed = true;
+			}
+		}
 		return changed;
 	
 	}
@@ -472,11 +474,12 @@ public class LongArrayList implements List<Long> {
 
 		@Override
 		public boolean containsAll(Collection<?> c) {
-            for (Object o : c) {
-                if (!contains(o)) {
-                    return false;
-                }
-            }
+			Iterator<?> it = c.iterator();
+			while(it.hasNext()) {
+				if (!contains(it.next())) {
+					return false;
+				}
+			}
 			return true;
 		}
 
@@ -531,11 +534,12 @@ public class LongArrayList implements List<Long> {
 		@Override
 		public boolean removeAll(Collection<?> c) {
 			boolean changed = false;
-            for (Object o : c) {
-                if (remove(o)) {
-                    changed = true;
-                }
-            }
+			Iterator<?> it = c.iterator();
+			while(it.hasNext()) {
+				if (remove(it.next())) {
+					changed = true;
+				}
+			}
 			return changed;
 		}
 

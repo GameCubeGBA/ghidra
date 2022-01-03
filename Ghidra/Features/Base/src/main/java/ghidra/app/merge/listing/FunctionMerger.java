@@ -80,10 +80,10 @@ class FunctionMerger extends AbstractFunctionMerger implements ListingMerger {
 	// End AbstractListingMerger variables.
 	//////////////////////////////////////////
 
-	static final String FUNCTIONS_PHASE = "Functions";
-	private static final String CONFLICT_TYPE = "Function";
-	private static final String INFO_TITLE = CONFLICT_TYPE + " Merge Information";
-	private static final String ERROR_TITLE = CONFLICT_TYPE + " Merge Errors";
+	final static String FUNCTIONS_PHASE = "Functions";
+	private final static String CONFLICT_TYPE = "Function";
+	private final static String INFO_TITLE = CONFLICT_TYPE + " Merge Information";
+	private final static String ERROR_TITLE = CONFLICT_TYPE + " Merge Errors";
 
 	private AddressSetView latestEntireDetailSet;
 	private AddressSetView latestDetailSet; // latest function change set
@@ -1065,22 +1065,23 @@ class FunctionMerger extends AbstractFunctionMerger implements ListingMerger {
 				mergeParamInfo(addr, paramInfoConflicts, parameterInfoChoice, monitor);
 			}
 			else if (askUser && mergeManager != null) {
-                for (ParamInfoConflict paramInfoConflict : paramInfoConflicts) {
-                    monitor.checkCanceled();
-                    ParamInfoConflict pc = paramInfoConflict;
-                    boolean useForAll = (parameterInfoChoice != ASK_USER);
-                    if (useForAll) {
-                        mergeParamInfo(addr, pc, parameterInfoChoice, monitor);
-                        continue;
-                    }
-                    VariousChoicesPanel choicesPanel = createParamInfoConflictPanel(pc, monitor);
+				Iterator<ParamInfoConflict> iter = paramInfoConflicts.iterator();
+				while (iter.hasNext()) {
+					monitor.checkCanceled();
+					ParamInfoConflict pc = iter.next();
+					boolean useForAll = (parameterInfoChoice != ASK_USER);
+					if (useForAll) {
+						mergeParamInfo(addr, pc, parameterInfoChoice, monitor);
+						continue;
+					}
+					VariousChoicesPanel choicesPanel = createParamInfoConflictPanel(pc, monitor);
 
-                    choicesPanel.setUseForAll(useForAll);
-                    choicesPanel.setConflictType("Function Parameter Info");
+					choicesPanel.setUseForAll(useForAll);
+					choicesPanel.setConflictType("Function Parameter Info");
 
-                    setupConflictPanel(listingPanel, choicesPanel, pc.entry, monitor);
-                    monitor.checkCanceled();
-                }
+					setupConflictPanel(listingPanel, choicesPanel, pc.entry, monitor);
+					monitor.checkCanceled();
+				}
 
 			}
 			else {
@@ -1908,8 +1909,11 @@ class FunctionMerger extends AbstractFunctionMerger implements ListingMerger {
 			function2.getParameters())) {
 			return false;
 		}
-        return VariableUtilities.equivalentVariableArrays(function1.getLocalVariables(),
-                function2.getLocalVariables());
+		if (!VariableUtilities.equivalentVariableArrays(function1.getLocalVariables(),
+			function2.getLocalVariables())) {
+			return false;
+		}
+		return true;
 
-    }
+	}
 }

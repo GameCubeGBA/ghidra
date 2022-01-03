@@ -58,14 +58,15 @@ public class X86InstructionSkipper implements InstructionSkipper {
 
 	@Override
 	public boolean shouldSkip(byte[] buffer,int size) {
-        for (byte[] pat : PATTERNS) {
-            if (pat.length != size) continue;
-            int i;
-            for (i = 0; i < size; ++i) {
-                if (pat[i] != buffer[i]) break;
-            }
-            if (i == size) return true;
-        }
+		for (int ii = 0; ii < PATTERNS.length; ++ii) {
+			byte[] pat = PATTERNS[ii];
+			if (pat.length != size) continue;
+			int i;
+			for(i=0;i<size;++i) {
+				if (pat[i] != buffer[i]) break;
+			}
+			if (i==size) return true;
+		}
 		return false;
 	}
 }

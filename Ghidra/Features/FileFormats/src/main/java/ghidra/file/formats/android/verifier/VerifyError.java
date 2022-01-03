@@ -20,29 +20,29 @@ package ghidra.file.formats.android.verifier;
  */
 public final class VerifyError {
 
-	public static final int VERIFY_ERROR_BAD_CLASS_HARD = 1 << 0;
+	public final static int VERIFY_ERROR_BAD_CLASS_HARD = 1 << 0;
 
-	public static final int VERIFY_ERROR_BAD_CLASS_SOFT = 1 << 1;
+	public final static int VERIFY_ERROR_BAD_CLASS_SOFT = 1 << 1;
 
-	public static final int VERIFY_ERROR_NO_CLASS = 1 << 2;
+	public final static int VERIFY_ERROR_NO_CLASS = 1 << 2;
 
-	public static final int VERIFY_ERROR_NO_FIELD = 1 << 3;
+	public final static int VERIFY_ERROR_NO_FIELD = 1 << 3;
 
-	public static final int VERIFY_ERROR_NO_METHOD = 1 << 4;
+	public final static int VERIFY_ERROR_NO_METHOD = 1 << 4;
 
-	public static final int VERIFY_ERROR_ACCESS_CLASS = 1 << 5;
+	public final static int VERIFY_ERROR_ACCESS_CLASS = 1 << 5;
 
-	public static final int VERIFY_ERROR_ACCESS_FIELD = 1 << 6;
+	public final static int VERIFY_ERROR_ACCESS_FIELD = 1 << 6;
 
-	public static final int VERIFY_ERROR_ACCESS_METHOD = 1 << 7;
+	public final static int VERIFY_ERROR_ACCESS_METHOD = 1 << 7;
 
-	public static final int VERIFY_ERROR_CLASS_CHANGE = 1 << 8;
+	public final static int VERIFY_ERROR_CLASS_CHANGE = 1 << 8;
 
-	public static final int VERIFY_ERROR_INSTANTIATION = 1 << 9;
+	public final static int VERIFY_ERROR_INSTANTIATION = 1 << 9;
 
-	public static final int VERIFY_ERROR_FORCE_INTERPRETER = 1 << 10;
+	public final static int VERIFY_ERROR_FORCE_INTERPRETER = 1 << 10;
 
-	public static final int VERIFY_ERROR_LOCKING = 1 << 11;
+	public final static int VERIFY_ERROR_LOCKING = 1 << 11;
 
-	public static final int VERIFY_ERROR_SKIP_COMPILER = 1 << 31;
+	public final static int VERIFY_ERROR_SKIP_COMPILER = 1 << 31;
 }

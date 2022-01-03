@@ -16,7 +16,6 @@
 package mdemangler;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 
 import org.junit.*;
 import org.junit.experimental.categories.Category;
@@ -4275,7 +4274,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 		mangled = "??_C@_01CIIBJEOE@?h?$AA@";
 		msTruth = "`string'";
 		//mdtruth = "\u00E8";
-		mdTruth = new String(new byte[] { (byte) 0xe8 }, StandardCharsets.UTF_8);
+		mdTruth = new String(new byte[] { (byte) 0xe8 }, "UTF-8");
 		demangleAndTest();
 	}
 
@@ -4284,7 +4283,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 		mangled = "??_C@_01FFPGGAKB@?m?$AA@";
 		msTruth = "`string'";
 		//mdtruth = "í"; //windows-1252
-		mdTruth = new String(new byte[] { (byte) 0xed }, StandardCharsets.UTF_8);
+		mdTruth = new String(new byte[] { (byte) 0xed }, "UTF-8");
 		demangleAndTest();
 	}
 
@@ -4293,7 +4292,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 		mangled = "??_C@_01KKJKAMLN@?p?$AA@";
 		msTruth = "`string'";
 		//mdtruth = "ð"; //windows-1252
-		mdTruth = new String(new byte[] { (byte) 0xf0 }, StandardCharsets.UTF_8);
+		mdTruth = new String(new byte[] { (byte) 0xf0 }, "UTF-8");
 		demangleAndTest();
 	}
 
@@ -4302,7 +4301,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 		mangled = "??_C@_01JIKMGODP@?r?$AA@";
 		msTruth = "`string'";
 		//mdtruth = "ò"; //windows-1252
-		mdTruth = new String(new byte[] { (byte) 0xf2 }, StandardCharsets.UTF_8);
+		mdTruth = new String(new byte[] { (byte) 0xf2 }, "UTF-8");
 		demangleAndTest();
 	}
 
@@ -4418,7 +4417,7 @@ public class MDMangBaseTest extends AbstractGenericTest {
 		mangled = "??_C@_13BDBHJCJN@u?3?$AA?$AA@";
 		msTruth = "`string'";
 		//mdtruth = "町"; //windows-1252
-		mdTruth = new String(new byte[] { 0x75, 0x3a }, StandardCharsets.UTF_16);
+		mdTruth = new String(new byte[] { 0x75, 0x3a }, "UTF-16");
 		demangleAndTest();
 	}
 

@@ -22,5 +22,5 @@ import ghidra.framework.model.DomainObject;
  * a domainObject until it is needed.
  */
 public interface DomainObjectService {
-	DomainObject getDomainObject();
+	public DomainObject getDomainObject();
 }

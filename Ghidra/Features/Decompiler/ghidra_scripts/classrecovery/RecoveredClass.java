@@ -207,7 +207,7 @@ public class RecoveredClass {
 		Address address = classOffsetToVftableMap.get(offset);
 		if (!address.equals(vftableAddress)) {
 			throw new Exception(name + " trying to add different vftable address (old: " +
-				vftableAddress.toString() + " new: " + address + ")  to same offset " +
+				vftableAddress.toString() + " new: " + address.toString() + ")  to same offset " +
 				offset);
 		}
 
@@ -309,12 +309,14 @@ public class RecoveredClass {
 	}
 
 	public void addConstructorDestructorList(List<Function> list) {
-        for (Function function : list) {
+		Iterator<Function> iterator = list.iterator();
+		while (iterator.hasNext()) {
 
-            if (!constructorAndDestructorList.contains(function)) {
-                constructorAndDestructorList.add(function);
-            }
-        }
+			Function function = iterator.next();
+			if (!constructorAndDestructorList.contains(function)) {
+				constructorAndDestructorList.add(function);
+			}
+		}
 		return;
 	}
 
@@ -373,11 +375,13 @@ public class RecoveredClass {
 	}
 
 	public void addIndeterminateConstructorOrDestructorList(List<Function> list) {
-        for (Function function : list) {
-            if (!indeterminateList.contains(function)) {
-                indeterminateList.add(function);
-            }
-        }
+		Iterator<Function> iterator = list.iterator();
+		while (iterator.hasNext()) {
+			Function function = iterator.next();
+			if (!indeterminateList.contains(function)) {
+				indeterminateList.add(function);
+			}
+		}
 		return;
 	}
 

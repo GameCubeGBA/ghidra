@@ -45,7 +45,8 @@ public class VersionedLocalBufferFileTest extends AbstractGenericTest {
 	private VersionedTestFileMgr versionedTestFileMgr;
 
 	public VersionedLocalBufferFileTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

@@ -24,7 +24,7 @@ import agent.dbgmodel.jna.dbgmodel.IUnknownEx;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IEquatableConcept extends IUnknownEx {
-	IID IID_IEQUATABLE_CONCEPT = new IID("C52D5D3D-609D-4d5d-8A82-46B0ACDEC4F4");
+	final IID IID_IEQUATABLE_CONCEPT = new IID("C52D5D3D-609D-4d5d-8A82-46B0ACDEC4F4");
 
 	enum VTIndices implements VTableIndex {
 		ARE_OBJECTS_EQUAL, //

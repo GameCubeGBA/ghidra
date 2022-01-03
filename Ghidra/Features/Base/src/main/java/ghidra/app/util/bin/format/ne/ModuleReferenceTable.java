@@ -48,8 +48,8 @@ public class ModuleReferenceTable {
         }
 
         ArrayList<LengthStringSet> list = new ArrayList<LengthStringSet>();
-        for (short offset : offsets) {
-            LengthStringSet lss = imp.getNameAt(offset);
+        for (int i = 0 ; i < offsets.length ; ++i) {
+            LengthStringSet lss = imp.getNameAt(offsets[i]);
             if (lss.getLength() == 0) break;
             list.add(lss);
         }

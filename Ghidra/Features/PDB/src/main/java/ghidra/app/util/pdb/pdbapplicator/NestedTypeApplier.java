@@ -94,8 +94,11 @@ public class NestedTypeApplier extends MsTypeApplier {
 		if (nestedTypeDefinitionApplier == null) {
 			return false;
 		}
-        return !(nestedTypeDefinitionApplier.getMsType() instanceof AbstractNestedTypeMsType);
-    }
+		if (nestedTypeDefinitionApplier.getMsType() instanceof AbstractNestedTypeMsType) {
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * Returns the attributes if they exist.

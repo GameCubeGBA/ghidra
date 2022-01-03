@@ -78,7 +78,7 @@ public abstract class AbstractModelForLldbX64RegistersTest
 		Map<List<String>, TargetRegisterBank> banks = findRegisterBanks(target.getPath());
 		for (TargetRegisterBank bank : banks.values()) {
 			List<String> path = bank.getPath();
-			for (Entry<String, byte[]> ent : REG_VALS.entrySet()) {
+			for (Entry<String, byte[]> ent : getRegisterWrites().entrySet()) {
 				String regName = ent.getKey();
 				Map<List<String>, TargetRegister> regs = m.findAll(TargetRegister.class,
 					path, pred -> pred.applyIndices(regName), false);
@@ -116,7 +116,7 @@ public abstract class AbstractModelForLldbX64RegistersTest
 			m.findWithIndex(TargetRegisterContainer.class, "0", target.getPath()));
 		Map<List<String>, TargetRegisterBank> banks =
 			m.findAll(TargetRegisterBank.class, c.getPath(), true);
-		Map<String, byte[]> exp = REG_VALS;
+		Map<String, byte[]> exp = getRegisterWrites();
 		Map<String, byte[]> read = new HashMap<>();
 		for (TargetRegisterBank bank : banks.values()) {
 			for (String name : exp.keySet()) {
@@ -144,7 +144,7 @@ public abstract class AbstractModelForLldbX64RegistersTest
 			m.findWithIndex(TargetRegisterContainer.class, "0", target.getPath()));
 		Map<List<String>, TargetRegisterBank> banks =
 			m.findAll(TargetRegisterBank.class, c.getPath(), true);
-		Map<String, byte[]> write = REG_VALS;
+		Map<String, byte[]> write = getRegisterWrites();
 		Map<String, byte[]> read = new HashMap<>();
 		for (TargetRegisterBank bank : banks.values()) {
 			for (String name : write.keySet()) {

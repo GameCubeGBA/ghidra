@@ -12,11 +12,11 @@
 package SWIG;
 
 public final class InputReaderGranularity {
-  public static final InputReaderGranularity eInputReaderGranularityInvalid = new InputReaderGranularity("eInputReaderGranularityInvalid", lldbJNI.eInputReaderGranularityInvalid_get());
-  public static final InputReaderGranularity eInputReaderGranularityByte = new InputReaderGranularity("eInputReaderGranularityByte");
-  public static final InputReaderGranularity eInputReaderGranularityWord = new InputReaderGranularity("eInputReaderGranularityWord");
-  public static final InputReaderGranularity eInputReaderGranularityLine = new InputReaderGranularity("eInputReaderGranularityLine");
-  public static final InputReaderGranularity eInputReaderGranularityAll = new InputReaderGranularity("eInputReaderGranularityAll");
+  public final static InputReaderGranularity eInputReaderGranularityInvalid = new InputReaderGranularity("eInputReaderGranularityInvalid", lldbJNI.eInputReaderGranularityInvalid_get());
+  public final static InputReaderGranularity eInputReaderGranularityByte = new InputReaderGranularity("eInputReaderGranularityByte");
+  public final static InputReaderGranularity eInputReaderGranularityWord = new InputReaderGranularity("eInputReaderGranularityWord");
+  public final static InputReaderGranularity eInputReaderGranularityLine = new InputReaderGranularity("eInputReaderGranularityLine");
+  public final static InputReaderGranularity eInputReaderGranularityAll = new InputReaderGranularity("eInputReaderGranularityAll");
 
   public final int swigValue() {
     return swigValue;
@@ -29,9 +29,9 @@ public final class InputReaderGranularity {
   public static InputReaderGranularity swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-      for (InputReaderGranularity value : swigValues)
-          if (value.swigValue == swigValue)
-              return value;
+    for (int i = 0; i < swigValues.length; i++)
+      if (swigValues[i].swigValue == swigValue)
+        return swigValues[i];
     throw new IllegalArgumentException("No enum " + InputReaderGranularity.class + " with value " + swigValue);
   }
 

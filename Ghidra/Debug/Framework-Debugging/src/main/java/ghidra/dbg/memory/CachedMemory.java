@@ -251,6 +251,9 @@ public class CachedMemory implements MemoryReader, MemoryWriter {
 
 	protected boolean isTimeout(Throwable e) {
 		e = AsyncUtils.unwrapThrowable(e);
-        return e instanceof TimeoutException;
-    }
+		if (e instanceof TimeoutException) {
+			return true;
+		}
+		return false;
+	}
 }

@@ -26,7 +26,8 @@ import ghidra.program.model.symbol.SourceType;
 public abstract class AbstractFunctionParameterMarkupItemTest extends AbstractVTMarkupItemTest {
 
 	public AbstractFunctionParameterMarkupItemTest() {
-    }
+		super();
+	}
 
 //==================================================================================================
 // Private Methods

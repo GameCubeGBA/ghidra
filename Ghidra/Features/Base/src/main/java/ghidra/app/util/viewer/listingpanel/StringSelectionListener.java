@@ -17,6 +17,6 @@
 package ghidra.app.util.viewer.listingpanel;
 
 public interface StringSelectionListener {
-	void setStringSelection(String string);
+	public void setStringSelection(String string);
 
 }

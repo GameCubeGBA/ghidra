@@ -40,8 +40,8 @@ import ghidra.util.task.TaskMonitor;
 public class MipsAddressAnalyzer extends ConstantPropagationAnalyzer {
 
 	private static final int MAX_UNIQUE_GP_SYMBOLS = 50;
-	private static final String OPTION_NAME_SWITCH_TABLE = "Attempt to recover switch tables";
-	private static final String OPTION_DESCRIPTION_SWITCH_TABLE = "";
+	private final static String OPTION_NAME_SWITCH_TABLE = "Attempt to recover switch tables";
+	private final static String OPTION_DESCRIPTION_SWITCH_TABLE = "";
 
 	private static final String OPTION_NAME_MARK_DUAL_INSTRUCTION =
 		"Mark dual instruction references";
@@ -81,7 +81,7 @@ public class MipsAddressAnalyzer extends ConstantPropagationAnalyzer {
 
 	private Address gp_assumption_value = null;
 
-	private static final String PROCESSOR_NAME = "MIPS";
+	private final static String PROCESSOR_NAME = "MIPS";
 
 	public MipsAddressAnalyzer() {
 		super(PROCESSOR_NAME);
@@ -445,7 +445,7 @@ public class MipsAddressAnalyzer extends ConstantPropagationAnalyzer {
 
 				if (trySwitchTables) {
 					String mnemonic = instruction.getMnemonicString();
-					if ("jr".equals(mnemonic)) {
+					if (mnemonic.equals("jr")) {
 						fixJumpTable(program, instruction, monitor);
 					}
 				}
@@ -609,8 +609,8 @@ public class MipsAddressAnalyzer extends ConstantPropagationAnalyzer {
 			curInstr = prevInstr;
 
 			// this is the size of the table
-			if (tableLen == -1 && ("sltiu".equals(curInstr.getMnemonicString()) ||
-				"_sltiu".equals(curInstr.getMnemonicString()))) {
+			if (tableLen == -1 && (curInstr.getMnemonicString().equals("sltiu") ||
+				curInstr.getMnemonicString().equals("_sltiu"))) {
 				Scalar scalar = curInstr.getScalar(2);
 				if (scalar == null) {
 					return;
@@ -623,7 +623,7 @@ public class MipsAddressAnalyzer extends ConstantPropagationAnalyzer {
 			}
 			// this is the table location
 			// assumes the mips markup has already found the lui/addiu pair
-			if (tableAddr == null && "addiu".equals(curInstr.getMnemonicString())) {
+			if (tableAddr == null && curInstr.getMnemonicString().equals("addiu")) {
 				if (target == null || target.equals(curInstr.getRegister(0))) {
 					Reference[] refs = curInstr.getReferencesFrom();
 					if (refs == null || refs.length == 0) {
@@ -635,15 +635,15 @@ public class MipsAddressAnalyzer extends ConstantPropagationAnalyzer {
 
 			if (tableLen == -1) {
 				// this is the step of the table
-				if (valueSize == -1 && ("sll".equals(curInstr.getMnemonicString()) ||
-					"_sll".equals(curInstr.getMnemonicString()))) {
-					valueSize = 1 << curInstr.getScalar(2).getUnsignedValue();
+				if (valueSize == -1 && (curInstr.getMnemonicString().equals("sll") ||
+					curInstr.getMnemonicString().equals("_sll"))) {
+					valueSize = 1 << (int) curInstr.getScalar(2).getUnsignedValue();
 				}
 				if (tableAddr == null) {
-					if (valueSize == -1 && "lw".equals(curInstr.getMnemonicString())) {
+					if (valueSize == -1 && curInstr.getMnemonicString().equals("lw")) {
 						valueSize = 4;
 					}
-					if ("addu".equals(curInstr.getMnemonicString())) {
+					if (curInstr.getMnemonicString().equals("addu")) {
 						target = curInstr.getRegister(2);
 					}
 				}
@@ -698,8 +698,12 @@ public class MipsAddressAnalyzer extends ConstantPropagationAnalyzer {
 			return true;
 		}
 		Reference[] refs = program.getReferenceManager().getReferencesFrom(addr);
-        return refs.length == 1 && !refs[0].getReferenceType().isData();
-    }
+		if (refs.length == 1 && !refs[0].getReferenceType().isData()) {
+			return true;
+		}
+
+		return false;
+	}
 
 	@Override
 	public void optionsChanged(Options options, Program program) {

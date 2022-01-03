@@ -33,11 +33,11 @@ import ghidra.util.exception.VersionException;
  */
 class FunctionTagAdapterV0 extends FunctionTagAdapter implements DBListener {
 
-	static final int SCHEMA_VERSION = 0;
+	final static int SCHEMA_VERSION = 0;
 	static final int V0_TAG_NAME_COL = 0;
 	static final int V0_COMMENT_COL = 1;
 
-	static final Schema V0_SCHEMA = new Schema(CURRENT_VERSION, "ID",
+	final static Schema V0_SCHEMA = new Schema(CURRENT_VERSION, "ID",
 		new Field[] { StringField.INSTANCE, StringField.INSTANCE },
 		new String[] { "Tag", "Comment" });
 

@@ -73,7 +73,8 @@ public class ExternalMergerChangeTest extends AbstractExternalMergerTest {
 	 * @param arg0
 	 */
 	public ExternalMergerChangeTest() {
-    }
+		super();
+	}
 
 	@Test
 	public void testExternalLabelChangeLatest() throws Exception {

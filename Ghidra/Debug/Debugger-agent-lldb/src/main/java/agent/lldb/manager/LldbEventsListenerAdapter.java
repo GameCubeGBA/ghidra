@@ -21,126 +21,126 @@ import agent.lldb.lldb.DebugModuleInfo;
 public interface LldbEventsListenerAdapter extends LldbEventsListener {
 
 	@Override
-    default void sessionAdded(SBTarget session, LldbCause cause) {
+	public default void sessionAdded(SBTarget session, LldbCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void sessionReplaced(SBTarget session, LldbCause cause) {
+	public default void sessionReplaced(SBTarget session, LldbCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void sessionRemoved(String sessionId, LldbCause cause) {
+	public default void sessionRemoved(String sessionId, LldbCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void sessionSelected(SBTarget session, LldbCause cause) {
+	public default void sessionSelected(SBTarget session, LldbCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void processAdded(SBProcess process, LldbCause cause) {
+	public default void processAdded(SBProcess process, LldbCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void processReplaced(SBProcess process, LldbCause cause) {
+	public default void processReplaced(SBProcess process, LldbCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void processRemoved(String processId, LldbCause cause) {
+	public default void processRemoved(String processId, LldbCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void processSelected(SBProcess process, LldbCause cause) {
+	public default void processSelected(SBProcess process, LldbCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void processStarted(SBProcess process, LldbCause cause) {
+	public default void processStarted(SBProcess process, LldbCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void processExited(SBProcess process, LldbCause cause) {
+	public default void processExited(SBProcess process, LldbCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void threadCreated(SBThread thread, LldbCause cause) {
+	public default void threadCreated(SBThread thread, LldbCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void threadReplaced(SBThread thread, LldbCause cause) {
+	public default void threadReplaced(SBThread thread, LldbCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void threadStateChanged(SBThread thread, StateType state, LldbCause cause,
-                                    LldbReason reason) {
+	public default void threadStateChanged(SBThread thread, StateType state, LldbCause cause,
+			LldbReason reason) {
 		// Extension point
 	}
 
 	@Override
-    default void threadExited(SBThread thread, SBProcess process, LldbCause cause) {
+	public default void threadExited(SBThread thread, SBProcess process, LldbCause cause) {
 		// Extension point
 
 	}
 
 	@Override
-    default void threadSelected(SBThread thread, SBFrame frame, LldbCause cause) {
+	public default void threadSelected(SBThread thread, SBFrame frame, LldbCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void moduleLoaded(SBProcess process, DebugModuleInfo info, int index,
-                              LldbCause cause) {
+	public default void moduleLoaded(SBProcess process, DebugModuleInfo info, int index,
+			LldbCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void moduleUnloaded(SBProcess process, DebugModuleInfo info, int index,
-                                LldbCause cause) {
+	public default void moduleUnloaded(SBProcess process, DebugModuleInfo info, int index,
+			LldbCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void breakpointCreated(Object info, LldbCause cause) {
+	public default void breakpointCreated(Object info, LldbCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void breakpointModified(Object info, LldbCause cause) {
+	public default void breakpointModified(Object info, LldbCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void breakpointDeleted(Object info, LldbCause cause) {
+	public default void breakpointDeleted(Object info, LldbCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void breakpointHit(Object info, LldbCause cause) {
+	public default void breakpointHit(Object info, LldbCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void memoryChanged(SBProcess process, long addr, int len, LldbCause cause) {
+	public default void memoryChanged(SBProcess process, long addr, int len, LldbCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void consoleOutput(String output, int mask) {
+	public default void consoleOutput(String output, int mask) {
 		// Extension point
 	}
 
 	@Override
-    default void promptChanged(String prompt) {
+	public default void promptChanged(String prompt) {
 		// Extension point
 	}
 

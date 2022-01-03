@@ -81,7 +81,7 @@ class SplitBlockDialog extends DialogComponentProvider {
 	protected void okCallback() {
 		// call plugin to do the work
 		String newBlockName = blockTwoNameField.getText();
-		if (newBlockName.isEmpty()) {
+		if (newBlockName.length() == 0) {
 			newBlockName = block.getName() + ".split";
 			blockTwoNameField.setText(newBlockName);
 		}
@@ -195,7 +195,12 @@ class SplitBlockDialog extends DialogComponentProvider {
 		blockOneEnd.addChangeListener(new AddressChangeListener(blockOneEnd));
 		blockTwoStart.addChangeListener(new AddressChangeListener(blockTwoStart));
 
-		ActionListener al = e -> setStatusText("");
+		ActionListener al = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setStatusText("");
+			}
+		};
 		blockOneLengthField.addActionListener(al);
 		blockTwoLengthField.addActionListener(al);
 		blockOneEnd.addActionListener(al);

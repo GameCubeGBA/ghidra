@@ -107,6 +107,9 @@ public class DefaultRowFilterTransformer<ROW_OBJECT> implements RowFilterTransfo
 		}
 
 		// use '==' so that we don't end up comparing all table data
-        return model == other.model;
-    }
+		if (model != other.model) {
+			return false;
+		}
+		return true;
+	}
 }

@@ -24,6 +24,7 @@ import ghidra.app.plugin.core.help.AboutDomainObjectUtils;
 public class AboutScreenShots extends GhidraScreenShotGenerator {
 
 	public AboutScreenShots() {
+		super();
 	}
 
 @Test

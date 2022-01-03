@@ -104,8 +104,11 @@ public class IncludeFileFinder {
 	}
 
 	private boolean isInclude(File file) {
-        return file.getName().endsWith(".h");
-    }
+		if (file.getName().endsWith(".h")) {
+			return true;
+		}
+		return false;
+	}
 
 	class IncludeFile {
 		private File file;

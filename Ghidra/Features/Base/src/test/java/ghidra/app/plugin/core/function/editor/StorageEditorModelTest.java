@@ -49,7 +49,8 @@ public class StorageEditorModelTest extends AbstractGenericTest {
 	}
 
 	protected StorageEditorModelTest(String languageId, String testRegName) {
-        this.languageId = languageId;
+		super();
+		this.languageId = languageId;
 		this.testRegName = testRegName;
 	}
 

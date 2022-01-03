@@ -17,6 +17,6 @@
 package ghidra.app.services;
 
 public interface ClipboardService {
-    void registerClipboardContentProvider(ClipboardContentProviderService service);
-    void deRegisterClipboardContentProvider(ClipboardContentProviderService service);
+    public void registerClipboardContentProvider( ClipboardContentProviderService service );
+    public void deRegisterClipboardContentProvider( ClipboardContentProviderService service );
 }

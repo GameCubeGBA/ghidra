@@ -25,6 +25,6 @@ import ghidra.dbg.target.TargetAttachable;
  */
 public interface JdiModelTargetAttachable extends JdiModelTargetObject, TargetAttachable {
 
-	long getId();
+	public long getId();
 
 }

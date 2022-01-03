@@ -122,8 +122,11 @@ public class BitFieldPackingImpl implements BitFieldPacking {
 	@Override
 	public boolean equals(Object obj) {
 		BitFieldPackingImpl op2 = (BitFieldPackingImpl) obj;
-        return (typeAlignmentEnabled == op2.typeAlignmentEnabled) && (useMSConvention == op2.useMSConvention) && (zeroLengthBoundary == op2.zeroLengthBoundary);
-    }
+		if ((typeAlignmentEnabled != op2.typeAlignmentEnabled) || (useMSConvention != op2.useMSConvention) || (zeroLengthBoundary != op2.zeroLengthBoundary)) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public int hashCode() {

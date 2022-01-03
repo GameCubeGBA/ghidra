@@ -103,8 +103,11 @@ public class StringDiff {
 		if (start != other.start) {
 			return false;
 		}
-        return end == other.end;
-    }
+		if (end != other.end) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public String toString() {

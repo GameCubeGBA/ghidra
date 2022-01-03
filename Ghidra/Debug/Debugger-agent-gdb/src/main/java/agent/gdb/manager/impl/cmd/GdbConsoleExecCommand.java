@@ -118,7 +118,9 @@ public class GdbConsoleExecCommand extends AbstractGdbCommandWithThreadAndFrameI
 			// At the very least, I should expect to see the (gdb) prompt.
 			if (evt instanceof GdbConsoleOutputEvent) {
 				GdbConsoleOutputEvent out = (GdbConsoleOutputEvent) evt;
-                return out.getInterpreter() == Interpreter.CLI;
+				if (out.getInterpreter() == Interpreter.CLI) {
+					return true;
+				}
 			}
 			return false;
 		}

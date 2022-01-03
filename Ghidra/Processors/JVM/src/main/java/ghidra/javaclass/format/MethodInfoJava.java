@@ -182,12 +182,12 @@ public class MethodInfoJava implements StructConverter {
 		StringBuffer stringBuffer = new StringBuffer();
 		stringBuffer.append(MethodsInfoAccessFlags.toString(accessFlags));
 
-		if ("<clinit>".equals(methodName.getString())) {
+		if (methodName.getString().equals("<clinit>")) {
 			stringBuffer.append(" (class initializer)");
 		}
 		else {
 			stringBuffer.append(' ');
-			if ("<init>".equals(methodName.getString())) {//replace constructors with name of this class
+			if (methodName.getString().equals("<init>")) {//replace constructors with name of this class
 				ConstantPoolClassInfo thisClass =
 					(ConstantPoolClassInfo) constantPool[classFile.getThisClass()];
 				ConstantPoolUtf8Info thisClassName =

@@ -163,7 +163,9 @@ public class TestFGLayoutProvider extends FGLayoutProvider {
 
 			Node right = node.right;
 			if (right != null) {
-                return right.col != 0;
+				if (right.col == 0) {
+					return false;
+				}
 			}
 
 			return true;

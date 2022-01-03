@@ -274,8 +274,8 @@ public class OptionsTest extends AbstractGenericTest {
 		options.setInt("INT", 3);
 		List<String> optionNames = options.getOptionNames();
 		assertEquals(2, optionNames.size());
-		assertTrue(("INT".equals(optionNames.get(0)) && "COLOR".equals(optionNames.get(1))) ||
-			("COLOR".equals(optionNames.get(0)) && "INT".equals(optionNames.get(1))));
+		assertTrue((optionNames.get(0).equals("INT") && optionNames.get(1).equals("COLOR")) ||
+			(optionNames.get(0).equals("COLOR") && optionNames.get(1).equals("INT")));
 	}
 
 	@Test

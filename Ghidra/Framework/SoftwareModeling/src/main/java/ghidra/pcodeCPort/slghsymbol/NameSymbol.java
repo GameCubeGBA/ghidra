@@ -60,7 +60,7 @@ public class NameSymbol extends ValueSymbol {
 	public Constructor resolve(ParserWalker pos) {
 		if (!tableisfilled) {
 			int ind = (int) patval.getValue(pos);
-			if ((ind >= nametable.size()) || (ind < 0) || (nametable.get(ind).isEmpty())) {
+			if ((ind >= nametable.size()) || (ind < 0) || (nametable.get(ind).length() == 0)) {
 				throw new BadDataError(
 					"No corresponding entry in nametable <" + getName() + ">, index=" + ind);
 			}

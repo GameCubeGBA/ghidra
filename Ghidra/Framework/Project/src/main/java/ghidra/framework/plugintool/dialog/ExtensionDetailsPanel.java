@@ -39,7 +39,8 @@ class ExtensionDetailsPanel extends AbstractDetailsPanel {
 	private SimpleAttributeSet pathAttrSet;
 
 	ExtensionDetailsPanel(ExtensionTablePanel tablePanel) {
-        createFieldAttributes();
+		super();
+		createFieldAttributes();
 		createMainPanel();
 
 		// Any time the table is reloaded or a new selection is made, we want to reload this 

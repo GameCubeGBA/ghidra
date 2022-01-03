@@ -125,7 +125,7 @@ public class YaraGhidraGUIScript extends GhidraScript {
 		StringBuilder yaraString = new StringBuilder("\n\nrule " + ruleName + "\n");
 		yaraString.append("{\n\tstrings:\n");
 
-		StringBuilder fullStr = new StringBuilder();
+		String fullStr = "";
 
 		// Get the "combined string" from the search data object; this is the ENTIRE set of 
 		// instructions in one string, with all masking applied.
@@ -151,20 +151,20 @@ public class YaraGhidraGUIScript extends GhidraScript {
 					: curByte.length() >= 4 ? curByte.substring(4) : "";
 
 			if (nibble1.contains(".")) {
-				fullStr.append("?");
+				fullStr += "?";
 			}
 			else {
-				fullStr.append(InstructionSearchUtils.toHex(nibble1, false).trim());
+				fullStr += InstructionSearchUtils.toHex(nibble1, false).trim();
 			}
 
 			if (nibble2.contains(".")) {
-				fullStr.append("?");
+				fullStr += "?";
 			}
 			else {
-				fullStr.append(InstructionSearchUtils.toHex(nibble2, false).trim());
+				fullStr += InstructionSearchUtils.toHex(nibble2, false).trim();
 			}
 
-			fullStr.append(" ");
+			fullStr += " ";
 		}
 
 		// Add the formatted string to our final output, and add some boilerplate Yara 

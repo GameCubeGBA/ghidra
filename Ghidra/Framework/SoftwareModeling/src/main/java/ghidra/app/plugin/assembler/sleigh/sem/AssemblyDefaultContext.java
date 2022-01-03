@@ -39,7 +39,7 @@ public class AssemblyDefaultContext implements DisassemblerContext, DefaultProgr
 	protected AssemblyPatternBlock curctx; // the pseudo context value
 	protected AssemblyPatternBlock defctx; // the computed default
 
-	protected static final DbgTimer dbg = DbgTimer.INACTIVE;
+	protected final static DbgTimer dbg = DbgTimer.INACTIVE;
 
 	/**
 	 * Compute the default context at most addresses for the given language
@@ -96,7 +96,7 @@ public class AssemblyDefaultContext implements DisassemblerContext, DefaultProgr
 	 * @return the value as a pattern block for assembly
 	 */
 	public AssemblyPatternBlock getDefaultAt(Address addr) {
-		return new AssemblyDefaultContext(lang, addr).defctx;
+		return new AssemblyDefaultContext(lang, addr).getDefault();
 	}
 
 	@Override

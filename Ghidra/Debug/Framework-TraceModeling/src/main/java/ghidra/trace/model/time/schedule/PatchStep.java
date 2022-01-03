@@ -62,8 +62,11 @@ public class PatchStep implements Step {
 		if (this.threadKey != that.threadKey) {
 			return false;
 		}
-        return this.sleigh.equals(that.sleigh);
-    }
+		if (!this.sleigh.equals(that.sleigh)) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public String toString() {
@@ -82,7 +85,7 @@ public class PatchStep implements Step {
 	@Override
 	public boolean isNop() {
 		// TODO: If parsing beforehand, base on number of ops
-		return sleigh.isEmpty();
+		return sleigh.length() == 0;
 	}
 
 	@Override
@@ -146,8 +149,12 @@ public class PatchStep implements Step {
 
 		// TODO: Compare ops, if/when we pre-compile
 		result = CompareResult.unrelated(this.sleigh.compareTo(that.sleigh));
-        return result;
-    }
+		if (result != CompareResult.EQUALS) {
+			return result;
+		}
+
+		return CompareResult.EQUALS;
+	}
 
 	@Override
 	public <T> void execute(PcodeThread<T> emuThread, Consumer<PcodeThread<T>> stepAction,

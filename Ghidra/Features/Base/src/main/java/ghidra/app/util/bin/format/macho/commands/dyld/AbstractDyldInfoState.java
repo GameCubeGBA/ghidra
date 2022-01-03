@@ -26,7 +26,7 @@ import ghidra.program.model.symbol.SymbolIterator;
 import ghidra.util.DataConverter;
 import ghidra.util.task.TaskMonitor;
 
-public abstract class AbstractDyldInfoState {
+abstract public class AbstractDyldInfoState {
 	protected MachHeader header;
 	protected Program program;
 
@@ -42,9 +42,9 @@ public abstract class AbstractDyldInfoState {
 		this.program = program;
 	}
 
-	public abstract String print();
+	abstract public String print();
 
-	public final void perform(TaskMonitor monitor) throws Exception {
+	final public void perform(TaskMonitor monitor) throws Exception {
 //		if ( SystemUtilities.isInDevelopmentMode() ) {
 //			System.out.println( print( ) );
 //		}

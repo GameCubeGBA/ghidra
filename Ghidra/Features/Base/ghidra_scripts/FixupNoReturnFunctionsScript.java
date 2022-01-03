@@ -316,7 +316,7 @@ public class FixupNoReturnFunctionsScript extends GhidraScript {
 		}
 
 		public boolean isFixed() {
-			return "fixed".equals(getStatus());
+			return getStatus().equals("fixed");
 		}
 
 		public void setStatus(String status) {
@@ -329,7 +329,7 @@ public class FixupNoReturnFunctionsScript extends GhidraScript {
 
 		@Override
 		public Address getAddress() {
-			return addr;
+			return getNoReturnAddr();
 		}
 
 		public Address getNoReturnAddr() {
@@ -361,8 +361,8 @@ public class FixupNoReturnFunctionsScript extends GhidraScript {
 
 		@Override
 		public String toString() {
-			return "NoReturn At:" + getAddress() + "  because: " + explanation + " at " +
-                    whyAddr;
+			return "NoReturn At:" + getAddress() + "  because: " + getExplanation() + " at " +
+				getWhyAddr();
 		}
 	}
 

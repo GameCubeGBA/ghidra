@@ -106,6 +106,6 @@ public class VTOptionDefines {
 	public static final String IGNORE_EXCLUDED_MARKUP_ITEMS = APPLY_MARKUP_OPTIONS_NAME +
 		".Set Excluded Markup Items To Ignored";
 
-	public static final String DISPLAY_APPLY_MARKUP_OPTIONS = APPLY_MARKUP_OPTIONS_NAME +
+	public final static String DISPLAY_APPLY_MARKUP_OPTIONS = APPLY_MARKUP_OPTIONS_NAME +
 		Options.DELIMITER + "Display Apply Markup Options";
 }

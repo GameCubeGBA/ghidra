@@ -328,7 +328,7 @@ class DataTypeArchiveDBChangeSet implements DataTypeArchiveChangeSet, DomainObje
 	}
 
 	private void writeIdRecords(DBHandle dbh, String tableName, Set<Long> ids) throws IOException {
-		if (!ids.isEmpty()) {
+		if (ids.size() > 0) {
 			Table table = dbh.createTable(tableName, STORED_ID_SCHEMA);
 			DBRecord rec = STORED_ID_SCHEMA.createRecord(0);
 			int key = 1;
@@ -352,10 +352,13 @@ class DataTypeArchiveDBChangeSet implements DataTypeArchiveChangeSet, DomainObje
 
 	@Override
 	public boolean hasChanges() {
-        return !changedDataTypeIds.isEmpty() || !changedCategoryIds.isEmpty() ||
-                !changedSourceArchiveIds.isEmpty() || !addedDataTypeIds.isEmpty() ||
-                !addedCategoryIds.isEmpty() || !addedSourceArchiveIds.isEmpty();
-    }
+		if (changedDataTypeIds.isEmpty() && changedCategoryIds.isEmpty() &&
+			changedSourceArchiveIds.isEmpty() && addedDataTypeIds.isEmpty() &&
+			addedCategoryIds.isEmpty() && addedSourceArchiveIds.isEmpty()) {
+			return false;
+		}
+		return true;
+	}
 
 }
 

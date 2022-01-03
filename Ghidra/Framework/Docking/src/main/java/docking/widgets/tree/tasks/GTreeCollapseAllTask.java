@@ -60,7 +60,7 @@ public class GTreeCollapseAllTask extends GTreeTask {
 		}
 		monitor.checkCanceled();
 		List<GTreeNode> allChildren = node.getChildren();
-		if (allChildren.isEmpty()) {
+		if (allChildren.size() == 0) {
 			return;
 		}
 		TreePath treePath = node.getTreePath();

@@ -40,7 +40,7 @@ public interface TargetInterpreter extends TargetObject {
 	 * @param cmd the command to issue to the CLI
 	 * @return a future that completes when the command has completed execution
 	 */
-    CompletableFuture<Void> execute(String cmd);
+	public CompletableFuture<Void> execute(String cmd);
 
 	/**
 	 * Execute an interpreter command, capturing the output
@@ -53,7 +53,7 @@ public interface TargetInterpreter extends TargetObject {
 	 * @param cmd the command to issue to the CLI
 	 * @return a future that completes with the captured output
 	 */
-    CompletableFuture<String> executeCapture(String cmd);
+	public CompletableFuture<String> executeCapture(String cmd);
 
 	/**
 	 * Get the prompt for user input
@@ -67,7 +67,7 @@ public interface TargetInterpreter extends TargetObject {
 	 * @return the current prompt
 	 */
 	@TargetAttributeType(name = PROMPT_ATTRIBUTE_NAME, required = true, hidden = true)
-    default String getPrompt() {
+	public default String getPrompt() {
 		return getTypedAttributeNowByName(PROMPT_ATTRIBUTE_NAME, String.class, ">");
 	}
 }

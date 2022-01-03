@@ -21,6 +21,6 @@ import ghidra.program.model.listing.Function;
 import ghidra.util.task.TaskMonitor;
 
 public interface DecompilerMapFunction<D> {
-	D evaluate(DecompInterface decompiler, Function function, TaskMonitor monitor)
+	public D evaluate(DecompInterface decompiler, Function function, TaskMonitor monitor)
 			throws Exception;
 }

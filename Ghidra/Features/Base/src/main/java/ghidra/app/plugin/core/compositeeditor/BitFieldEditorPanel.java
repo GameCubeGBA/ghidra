@@ -78,7 +78,8 @@ public class BitFieldEditorPanel extends JPanel {
 
 	BitFieldEditorPanel(Composite composite, DataTypeManagerService dtmService,
 			Predicate<DataType> dataTypeValidator) {
-        this.composite = composite;
+		super();
+		this.composite = composite;
 
 		if (composite.isPackingEnabled()) {
 			// A different bitfield editor should be used for aligned composites
@@ -474,7 +475,7 @@ public class BitFieldEditorPanel extends JPanel {
 		String dtName = textField.getText().trim();
 		boolean isValid = true;
 		try {
-			if (dtName.isEmpty() || !dtChoiceEditor.validateUserSelection()) {
+			if (dtName.length() == 0 || !dtChoiceEditor.validateUserSelection()) {
 				setStatus("Valid bitfield base datatype entry required");
 				isValid = false;
 			}

@@ -85,8 +85,11 @@ public class CreateTypeDefFromDialogAction extends AbstractTypeDefAction {
 		if (categoryNode == null || !categoryNode.isEnabled()) {
 			return false;
 		}
-        return !(categoryNode instanceof BuiltInArchiveNode);
-    }
+		if (categoryNode instanceof BuiltInArchiveNode) {
+			return false;
+		}
+		return true;
+	}
 
 	private CategoryNode getCategoryNode(ActionContext context) {
 		if (!(context instanceof DataTypesActionContext)) {

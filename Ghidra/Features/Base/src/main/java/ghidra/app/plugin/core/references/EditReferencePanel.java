@@ -29,7 +29,8 @@ import javax.swing.SwingUtilities;
 abstract class EditReferencePanel extends JPanel {
 	
 	EditReferencePanel(String name) {
-        setName(name);
+		super();
+		setName(name);
 	}
 	
 	/**
@@ -89,10 +90,12 @@ abstract class EditReferencePanel extends JPanel {
 	 */
 	@Override
     public void requestFocus() {
-		SwingUtilities.invokeLater(() -> {
-            KeyboardFocusManager kfm = KeyboardFocusManager.getCurrentKeyboardFocusManager();
-            kfm.focusNextComponent(EditReferencePanel.this);
-        });
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				KeyboardFocusManager kfm = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+				kfm.focusNextComponent(EditReferencePanel.this);
+			}
+		});
 	}
 
 	/**

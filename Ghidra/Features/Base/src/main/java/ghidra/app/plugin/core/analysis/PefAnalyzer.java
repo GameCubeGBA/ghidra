@@ -82,7 +82,7 @@ public class PefAnalyzer extends AbstractAnalyzer {
 				continue;
 			}
 			Register register = (Register) operandObjects1[1];
-			if (!"r2".equals(register.getName())) {
+			if (!register.getName().equals("r2")) {
 				continue;
 			}
 			Scalar scalar = (Scalar) operandObjects1[0];
@@ -142,10 +142,10 @@ public class PefAnalyzer extends AbstractAnalyzer {
 			return;
 		}
 		Register register = (Register) operandObjects0[0];
-		if (!"r12".equals(register.getName())) {
+		if (!register.getName().equals("r12")) {
 			return;
 		}
-		if (!"lwz".equals(instruction.getMnemonicString())) {
+		if (!instruction.getMnemonicString().equals("lwz")) {
 			return;
 		}
 		Function function = listing.getFunctionContaining(instruction.getMinAddress());

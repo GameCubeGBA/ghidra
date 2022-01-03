@@ -55,6 +55,9 @@ public class NumberUtil {
 	 */
 	public static boolean equalsMaxUnsignedValue(Number value) {
 		// All number types should be the max when equal to signed value -1 in two's complement
-        return value.longValue() == -1;
-    }
+		if (value.longValue() == -1) {
+			return true;
+		}
+		return false;
+	}
 }

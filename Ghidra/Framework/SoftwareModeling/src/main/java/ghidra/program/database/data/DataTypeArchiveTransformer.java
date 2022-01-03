@@ -126,13 +126,13 @@ public class DataTypeArchiveTransformer implements GhidraLaunchable {
 	private static void validate(File oldFile, File newFile, File destinationFile)
 			throws InvalidInputException {
 
-		if (oldFile == null || oldFile.getPath().isEmpty()) {
+		if (oldFile == null || oldFile.getPath().length() == 0) {
 			throw new InvalidInputException("Old data type archive file must be specified.");
 		}
-		if (newFile == null || newFile.getPath().isEmpty()) {
+		if (newFile == null || newFile.getPath().length() == 0) {
 			throw new InvalidInputException("New data type archive file must be specified.");
 		}
-		if (destinationFile == null || destinationFile.getPath().isEmpty()) {
+		if (destinationFile == null || destinationFile.getPath().length() == 0) {
 			throw new InvalidInputException(
 				"Destination data type archive file must be specified.");
 		}
@@ -661,8 +661,11 @@ public class DataTypeArchiveTransformer implements GhidraLaunchable {
 		if ((newDataType instanceof Structure && hasAnonymousName(name, "_struct_")) || (newDataType instanceof Union && name.startsWith("_union_"))) {
 			return true;
 		}
-        return newDataType instanceof Enum && name.startsWith("enum_");
-    }
+		if (newDataType instanceof Enum && name.startsWith("enum_")) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Checks to see if the indicated name is an anonymous name with the indicated prefix
@@ -676,8 +679,11 @@ public class DataTypeArchiveTransformer implements GhidraLaunchable {
 			return false; // doesn't have expected prefix.
 		}
 		String suffix = name.substring(prefix.length());
-        return StringUtils.isNumeric(suffix);
-    }
+		if (!StringUtils.isNumeric(suffix)) {
+			return false;
+		}
+		return true;
+	}
 
 	private static SourceArchive getLocalSourceArchive(DataType dataType) {
 		DataTypeManager dataTypeManager = dataType.getDataTypeManager();

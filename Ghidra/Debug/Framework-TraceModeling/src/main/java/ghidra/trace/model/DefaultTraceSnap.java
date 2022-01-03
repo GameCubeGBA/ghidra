@@ -58,8 +58,11 @@ public class DefaultTraceSnap implements TraceSnap {
 		if (this.trace != that.trace) {
 			return false;
 		}
-        return this.snap == that.snap;
-    }
+		if (this.snap != that.snap) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public int hashCode() {
@@ -77,6 +80,9 @@ public class DefaultTraceSnap implements TraceSnap {
 			return result;
 		}
 		result = Long.compareUnsigned(this.snap, that.getSnap());
-        return result;
-    }
+		if (result != 0) {
+			return result;
+		}
+		return 0;
+	}
 }

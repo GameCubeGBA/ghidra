@@ -409,7 +409,9 @@ public class GHelpBroker extends DefaultHelpBroker {
 	private boolean isModalWindow(Window window) {
 		if (window instanceof Dialog) {
 			Dialog dialog = (Dialog) window;
-            return dialog.isModal();
+			if (dialog.isModal()) {
+				return true;
+			}
 		}
 		return false;
 	}

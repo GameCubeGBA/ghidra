@@ -52,8 +52,8 @@ import ghidra.util.SystemUtilities;
 //@formatter:on
 public class ProcessorListPlugin extends Plugin implements FrontEndable {
 
-	public static final String PLUGIN_NAME = "ProgramListPlugin";
-	public static final String ACTION_NAME = "Installed Processors";
+	public final static String PLUGIN_NAME = "ProgramListPlugin";
+	public final static String ACTION_NAME = "Installed Processors";
 
 	private DockingAction processorListAction;
 

@@ -32,9 +32,9 @@ import ghidra.util.exception.NotFoundException;
  * <code>ElfRelocationHandler</code> provides the base class for processor specific
  * ELF relocation handlers.  
  */
-public abstract class ElfRelocationHandler implements ExtensionPoint {
+abstract public class ElfRelocationHandler implements ExtensionPoint {
 
-	public abstract boolean canRelocate(ElfHeader elf);
+	abstract public boolean canRelocate(ElfHeader elf);
 
 	/**
 	 * Get the architecture-specific relative relocation type 
@@ -68,7 +68,7 @@ public abstract class ElfRelocationHandler implements ExtensionPoint {
 	 * @throws MemoryAccessException memory access failure
 	 * @throws NotFoundException required relocation data not found
 	 */
-    public abstract void relocate(ElfRelocationContext elfRelocationContext,
+	abstract public void relocate(ElfRelocationContext elfRelocationContext,
 			ElfRelocation relocation, Address relocationAddress)
 			throws MemoryAccessException, NotFoundException;
 

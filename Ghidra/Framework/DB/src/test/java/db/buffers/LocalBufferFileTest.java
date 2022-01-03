@@ -38,7 +38,8 @@ public class LocalBufferFileTest extends AbstractGenericTest {
 	private File testDir = new File(AbstractGenericTest.getTestDirectoryPath(), "LocalBufferFileTest");
 
 	public LocalBufferFileTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

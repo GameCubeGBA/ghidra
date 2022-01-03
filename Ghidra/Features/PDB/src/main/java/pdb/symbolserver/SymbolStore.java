@@ -84,7 +84,7 @@ public interface SymbolStore extends SymbolServer {
 	 * @param filename filename
 	 * @return boolean true if filename indicates that the file is compressed
 	 */
-	static boolean isCompressedFilename(String filename) {
+	public static boolean isCompressedFilename(String filename) {
 		return filename.endsWith("_");
 	}
 

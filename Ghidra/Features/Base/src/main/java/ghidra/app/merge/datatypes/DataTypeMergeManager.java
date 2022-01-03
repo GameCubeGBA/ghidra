@@ -482,7 +482,7 @@ public class DataTypeMergeManager implements MergeResolver {
 	}
 
 	private void processDataTypeConflicts() throws CancelledException {
-		while (!dtConflictList.isEmpty()) {
+		while (dtConflictList.size() > 0) {
 			currentMonitor.checkCanceled();
 			currentMonitor.setProgress(++progressIndex);
 
@@ -496,7 +496,7 @@ public class DataTypeMergeManager implements MergeResolver {
 
 		cleanUpDataTypes();
 
-		if (!fixUpList.isEmpty()) {
+		if (fixUpList.size() > 0) {
 			StringBuffer sb = new StringBuffer();
 			sb.append("The following data types are unresolved:\n");
 			for (FixUpInfo info : fixUpList) {
@@ -1719,8 +1719,11 @@ public class DataTypeMergeManager implements MergeResolver {
 			if (parent1 != null && parent2 != null) {
 				return !parent1.getCategoryPath().equals(parent2.getCategoryPath());
 			}
-            return parent1 != null || parent2 != null;
-        }
+			if (parent1 == null && parent2 == null) {
+				return false;
+			}
+			return true;
+		}
 
 		return false;
 	}
@@ -1857,9 +1860,12 @@ public class DataTypeMergeManager implements MergeResolver {
 		if (dtm1.getID(dtc1.getDataType()) != dtm2.getID(dtc2.getDataType())) {
 			return true;
 		}
-        return !Objects.equals(dtc1.getFieldName(), dtc2.getFieldName()) ||
-                !Objects.equals(dtc1.getComment(), dtc2.getComment());
-    }
+		if (!Objects.equals(dtc1.getFieldName(), dtc2.getFieldName()) ||
+			!Objects.equals(dtc1.getComment(), dtc2.getComment())) {
+			return true;
+		}
+		return false;
+	}
 
 	private boolean dataTypeSourceWasChanged(long id, DataTypeManager dtm) {
 		return dataTypeSourceWasChanged(id, dtms[ORIGINAL], dtm);
@@ -1889,7 +1895,9 @@ public class DataTypeMergeManager implements MergeResolver {
 					"\n        Source Archive = " + sourceArchive2.getName() + "        ";
 				Msg.error(this, msg);
 			}
-            return !Objects.equals(universalID1, universalID2);
+			if (!Objects.equals(universalID1, universalID2)) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -3341,18 +3349,21 @@ public class DataTypeMergeManager implements MergeResolver {
 				return;
 			}
 			Set<Map<Long, DataType>> keySet = map.keySet();
-            for (Map<Long, DataType> ht : keySet) {
-                DataType dt = ht.get(id);
-                if (dt instanceof Composite) {
-                    int[] indexArray = map.get(ht);
-                    if (dt instanceof Union) {
-                        cleanUpUnion(indexArray, (Union) dt);
-                    } else {
-                        cleanUpStructure(indexArray, (Structure) dt);
-                    }
-                    map.remove(ht); // remove it from the map
-                }
-            }
+			Iterator<Map<Long, DataType>> iterator = keySet.iterator();
+			while (iterator.hasNext()) {
+				Map<Long, DataType> ht = iterator.next();
+				DataType dt = ht.get(id);
+				if (dt instanceof Composite) {
+					int[] indexArray = map.get(ht);
+					if (dt instanceof Union) {
+						cleanUpUnion(indexArray, (Union) dt);
+					}
+					else {
+						cleanUpStructure(indexArray, (Structure) dt);
+					}
+					map.remove(ht); // remove it from the map
+				}
+			}
 			map = null;
 		}
 

@@ -43,7 +43,7 @@ public class MatchTagComboBox extends GhidraComboBox {
 			initialTag = startTag;
 		}
 		else {
-			initialTag = (matches != null && !matches.isEmpty()) ? matches.get(0).getTag() : null;
+			initialTag = (matches != null && matches.size() > 0) ? matches.get(0).getTag() : null;
 		}
 
 		VTMatchTag currentTag = initialTag;

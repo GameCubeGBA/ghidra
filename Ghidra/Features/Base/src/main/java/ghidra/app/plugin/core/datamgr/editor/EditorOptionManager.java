@@ -24,11 +24,11 @@ import ghidra.util.HelpLocation;
 public class EditorOptionManager implements OptionsChangeListener, StructureEditorOptionManager,
 		UnionEditorOptionManager {
 
-	private static final String STRUCTURE_EDITOR_NAME = "Structure Editor";
-	private static final String UNION_EDITOR_NAME = "Union Editor";
-	private static final String HEX_STRUCT_NUMBERS_OPTION_NAME = STRUCTURE_EDITOR_NAME +
+	private final static String STRUCTURE_EDITOR_NAME = "Structure Editor";
+	private final static String UNION_EDITOR_NAME = "Union Editor";
+	private final static String HEX_STRUCT_NUMBERS_OPTION_NAME = STRUCTURE_EDITOR_NAME +
 			Options.DELIMITER + "Show Numbers In Hex";
-	private static final String HEX_UNION_NUMBERS_OPTION_NAME = UNION_EDITOR_NAME +
+	private final static String HEX_UNION_NUMBERS_OPTION_NAME = UNION_EDITOR_NAME +
 			Options.DELIMITER + "Show Numbers In Hex";
 
 	private Plugin plugin;

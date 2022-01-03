@@ -38,7 +38,7 @@ public class DebugCOFFLineNumber {
 	/**
 	 * The size of the <code>IMAGE_LINENUMBER</code> structure.
 	 */
-    public static final int IMAGE_SIZEOF_LINENUMBER = 6;
+    public final static int IMAGE_SIZEOF_LINENUMBER = 6;
 
     private int symbolTableIndex;
     private int virtualAddress;

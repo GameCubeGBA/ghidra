@@ -37,6 +37,7 @@ public class DataTableTest extends AbstractGenericTest {
 
     /** Creates new DataTableTest */
     public DataTableTest() {
+        super();
     }
 @Test
     public void testByteArrays() {

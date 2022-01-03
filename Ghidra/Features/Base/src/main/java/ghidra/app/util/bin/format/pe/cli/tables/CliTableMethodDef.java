@@ -468,11 +468,11 @@ public class CliTableMethodDef extends CliAbstractTable {
 				Msg.warn(this, err);
 			}
 			catch (DuplicateNameException e) {
-				StringBuilder paramNames = new StringBuilder();
+				String paramNames = "";
 				for (int i = 0; i < parameters.length - 1; i++) {
-					paramNames.append(parameters[i].getName()).append(", ");
+					paramNames += parameters[i].getName() + ", ";
 				}
-				paramNames.append(parameters[parameters.length - 1].getName());
+				paramNames += parameters[parameters.length - 1].getName();
 				Msg.warn(this, "Error processing function \"" + funcName + "\" (" + methodRowIndex +
 					"): Duplicate parameter name (" + paramNames + ")");
 			}
@@ -494,14 +494,14 @@ public class CliTableMethodDef extends CliAbstractTable {
 	}
 
 	private String commaifyList(List<?> list) {
-		StringBuilder commaSeparated = new StringBuilder();
+		String commaSeparated = "";
 		for (Object item : list) {
-			commaSeparated.append(item).append(", ");
+			commaSeparated += item + ", ";
 		}
-		if (!list.isEmpty()) {
-			commaSeparated = new StringBuilder(commaSeparated.substring(0, commaSeparated.length() - 2));
+		if (list.size() > 0) {
+			commaSeparated = commaSeparated.substring(0, commaSeparated.length() - 2);
 		}
-		return commaSeparated.toString();
+		return commaSeparated;
 	}
 
 }

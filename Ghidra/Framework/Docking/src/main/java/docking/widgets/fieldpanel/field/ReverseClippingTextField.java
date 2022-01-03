@@ -115,9 +115,12 @@ public class ReverseClippingTextField implements TextField {
 
 	@Override
 	public boolean contains(int x, int y) {
-        return (x >= startX) && (x < startX + width) && (y >= -textElement.getHeightAbove()) &&
-                (y < textElement.getHeightBelow());
-    }
+		if ((x >= startX) && (x < startX + width) && (y >= -textElement.getHeightAbove()) &&
+			(y < textElement.getHeightBelow())) {
+			return true;
+		}
+		return false;
+	}
 
 	@Override
 	public int getCol(int row, int x) {

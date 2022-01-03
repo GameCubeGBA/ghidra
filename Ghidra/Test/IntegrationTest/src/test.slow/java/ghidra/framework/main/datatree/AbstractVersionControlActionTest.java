@@ -152,7 +152,7 @@ public class AbstractVersionControlActionTest extends AbstractGhidraHeadedIntegr
 		waitForSwing();
 		Set<DockingActionIf> dialogActions = dialog.getActions();
 		for (DockingActionIf action : dialogActions) {
-			if ("Delete Version".equals(action.getName())) {
+			if (action.getName().equals("Delete Version")) {
 				return action;
 			}
 		}

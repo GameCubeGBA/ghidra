@@ -227,9 +227,9 @@ public class CompositeEditorActionManager {
 		int length = listeners.size();
 		CompositeEditorTableAction[] cea =
 			actions.toArray(new CompositeEditorTableAction[actions.size()]);
-        for (EditorActionListener listener : listeners) {
-            listener.actionsAdded(cea);
-        }
+		for (int i = 0; i < length; i++) {
+			listeners.get(i).actionsAdded(cea);
+		}
 	}
 
 	private void notifyActionsRemoved(ArrayList<? extends CompositeEditorTableAction> actions) {
@@ -239,8 +239,8 @@ public class CompositeEditorActionManager {
 		int length = listeners.size();
 		CompositeEditorTableAction[] cea =
 			actions.toArray(new CompositeEditorTableAction[actions.size()]);
-        for (EditorActionListener listener : listeners) {
-            listener.actionsRemoved(cea);
-        }
+		for (int i = 0; i < length; i++) {
+			listeners.get(i).actionsRemoved(cea);
+		}
 	}
 }

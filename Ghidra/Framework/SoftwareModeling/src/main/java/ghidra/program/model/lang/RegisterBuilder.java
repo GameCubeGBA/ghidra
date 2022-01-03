@@ -107,7 +107,7 @@ public class RegisterBuilder {
 		List<Register> unprocessed = new LinkedList<>(registerList);
 
 		int bitSize = 1;
-		while (!unprocessed.isEmpty()) {
+		while (unprocessed.size() > 0) {
 			int nextLargerSize = Integer.MAX_VALUE;
 			Iterator<Register> it = unprocessed.iterator();
 			while (it.hasNext()) {
@@ -148,9 +148,12 @@ public class RegisterBuilder {
 
 		long parentOffset = parent.getOffset();
 		long childOffset = child.getOffset();
-        return (childOffset >= parentOffset) && (childOffset +
-                child.getMinimumByteSize() <= parentOffset + parent.getMinimumByteSize()) && (parent.getLeastSignificantBit() == 0) && (parent.getBitLength() == parent.getMinimumByteSize() * 8);
-    }
+		if ((childOffset < parentOffset) || (childOffset +
+			child.getMinimumByteSize() > parentOffset + parent.getMinimumByteSize()) || (parent.getLeastSignificantBit() != 0) || (parent.getBitLength() != parent.getMinimumByteSize() * 8)) {
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * Returns the register with the given name;

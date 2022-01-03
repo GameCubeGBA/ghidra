@@ -153,11 +153,13 @@ class PlaceholderSet {
 
 		String name = matchee.getName();
 		String group = matchee.getGroup();
-        for (ComponentPlaceholder placeholder : placeholders) {
-            if (placeholder.getName().equals(name) && placeholder.getGroup().equals(group)) {
-                return placeholder;
-            }
-        }
+		Iterator<ComponentPlaceholder> it = placeholders.iterator();
+		while (it.hasNext()) {
+			ComponentPlaceholder placeholder = it.next();
+			if (placeholder.getName().equals(name) && placeholder.getGroup().equals(group)) {
+				return placeholder;
+			}
+		}
 		return null;
 	}
 }

@@ -132,9 +132,9 @@ public class FieldListTypeApplier extends MsTypeApplier {
 				applicator.getTypeApplier(indexType.getReferencedRecordNumber());
 			if (referencedTypeApplier instanceof FieldListTypeApplier) {
 				FieldListTypeApplier subApplier = (FieldListTypeApplier) referencedTypeApplier;
-				baseClassList.addAll(subApplier.baseClassList);
-				memberList.addAll(subApplier.memberList);
-				methodList.addAll(subApplier.methodList);
+				baseClassList.addAll(subApplier.getBaseClassList());
+				memberList.addAll(subApplier.getMemberList());
+				methodList.addAll(subApplier.getMethodList());
 			}
 			else {
 				pdbLogAndInfoMessage(this, "referenceTypeApplier is not FieldListTypeApplier");

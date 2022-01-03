@@ -140,34 +140,39 @@ public class ArchiveRootNode extends DataTypeTreeNode {
 	}
 
 	public CategoryNode findCategoryNode(Category category) {
-        for (GTreeNode node : getChildren()) {
-            ArchiveNode archiveNode = (ArchiveNode) node;
-            CategoryNode categoryNode = archiveNode.findCategoryNode(category);
-            if (categoryNode != null) {
-                return categoryNode;
-            }
-        }
+		Iterator<GTreeNode> iterator = getChildren().iterator();
+		while (iterator.hasNext()) {
+			GTreeNode node = iterator.next();
+			ArchiveNode archiveNode = (ArchiveNode) node;
+			CategoryNode categoryNode = archiveNode.findCategoryNode(category);
+			if (categoryNode != null) {
+				return categoryNode;
+			}
+		}
 		return null;
 	}
 
 	public ArchiveNode getNodeForManager(DataTypeManager dtm) {
-        for (GTreeNode node : getChildren()) {
-            ArchiveNode archiveNode = (ArchiveNode) node;
-            Archive archive = archiveNode.getArchive();
-            DataTypeManager manager = archive.getDataTypeManager();
-            if (manager.equals(dtm)) {
-                return archiveNode;
-            }
-        }
+		Iterator<GTreeNode> iterator = getChildren().iterator();
+		while (iterator.hasNext()) {
+			GTreeNode node = iterator.next();
+			ArchiveNode archiveNode = (ArchiveNode) node;
+			Archive archive = archiveNode.getArchive();
+			DataTypeManager manager = archive.getDataTypeManager();
+			if (manager.equals(dtm)) {
+				return archiveNode;
+			}
+		}
 		return null;
 	}
 
 	@Override
 	public List<GTreeNode> generateChildren() {
 		List<GTreeNode> list = new ArrayList<>();
-        for (Archive archive : archiveManager.getAllArchives()) {
-            list.add(createArchiveNode(archive, filterState));
-        }
+		Iterator<Archive> iterator = archiveManager.getAllArchives().iterator();
+		while (iterator.hasNext()) {
+			list.add(createArchiveNode(iterator.next(), filterState));
+		}
 		Collections.sort(list);
 		return list;
 	}
@@ -197,14 +202,16 @@ public class ArchiveRootNode extends DataTypeTreeNode {
 				return;
 			}
 			List<GTreeNode> allChildrenList = getChildren();
-            for (GTreeNode node : allChildrenList) {
-                ArchiveNode archiveNode = (ArchiveNode) node;
-                if (archive == archiveNode.getArchive()) {
-                    removeNode(archiveNode);
-                    archiveNode.dispose();
-                    return;
-                }
-            }
+			Iterator<GTreeNode> iterator = allChildrenList.iterator();
+			while (iterator.hasNext()) {
+				GTreeNode node = iterator.next();
+				ArchiveNode archiveNode = (ArchiveNode) node;
+				if (archive == archiveNode.getArchive()) {
+					removeNode(archiveNode);
+					archiveNode.dispose();
+					return;
+				}
+			}
 		}
 
 		@Override

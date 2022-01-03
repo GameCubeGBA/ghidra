@@ -53,8 +53,13 @@ public class QueryResult {
 		}
 		QueryResult other = (QueryResult) obj;
 		if (pair == null) {
-            return other.pair == null;
+			if (other.pair != null) {
+				return false;
+			}
 		}
-		else return pair.equals(other.pair);
-    }
+		else if (!pair.equals(other.pair)) {
+			return false;
+		}
+		return true;
+	}
 }

@@ -87,7 +87,7 @@ public class TaskUtilities {
 	 */
 	public static boolean isExecutingTasks() {
 		if (SystemUtilities.isInTestingMode()) {
-			return !runningTasks.isEmpty();
+			return runningTasks.size() > 0;
 		}
 
 		return false;

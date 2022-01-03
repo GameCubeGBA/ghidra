@@ -22,100 +22,100 @@ import agent.dbgeng.manager.evt.AbstractDbgEvent;
 public interface DbgEventsListenerAdapter extends DbgEventsListener {
 
 	@Override
-    default void sessionAdded(DbgSession session, DbgCause cause) {
+	public default void sessionAdded(DbgSession session, DbgCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void sessionRemoved(DebugSessionId sessionId, DbgCause cause) {
+	public default void sessionRemoved(DebugSessionId sessionId, DbgCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void sessionSelected(DbgSession session, DbgCause cause) {
+	public default void sessionSelected(DbgSession session, DbgCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void processAdded(DbgProcess process, DbgCause cause) {
+	public default void processAdded(DbgProcess process, DbgCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void processRemoved(DebugProcessId processId, DbgCause cause) {
+	public default void processRemoved(DebugProcessId processId, DbgCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void processSelected(DbgProcess process, DbgCause cause) {
+	public default void processSelected(DbgProcess process, DbgCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void processStarted(DbgProcess process, DbgCause cause) {
+	public default void processStarted(DbgProcess process, DbgCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void processExited(DbgProcess process, DbgCause cause) {
+	public default void processExited(DbgProcess process, DbgCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void threadCreated(DbgThread thread, DbgCause cause) {
+	public default void threadCreated(DbgThread thread, DbgCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void threadStateChanged(DbgThread thread, DbgState state, DbgCause cause,
-                                    DbgReason reason) {
+	public default void threadStateChanged(DbgThread thread, DbgState state, DbgCause cause,
+			DbgReason reason) {
 		// Extension point
 	}
 
 	@Override
-    default void threadExited(DebugThreadId threadId, DbgProcess process, DbgCause cause) {
+	public default void threadExited(DebugThreadId threadId, DbgProcess process, DbgCause cause) {
 		// Extension point
 
 	}
 
 	@Override
-    default void threadSelected(DbgThread thread, DbgStackFrame frame, DbgCause cause) {
+	public default void threadSelected(DbgThread thread, DbgStackFrame frame, DbgCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void eventSelected(AbstractDbgEvent<?> event, DbgCause cause) {
+	public default void eventSelected(AbstractDbgEvent<?> event, DbgCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void moduleLoaded(DbgProcess process, DebugModuleInfo info, DbgCause cause) {
+	public default void moduleLoaded(DbgProcess process, DebugModuleInfo info, DbgCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void moduleUnloaded(DbgProcess process, DebugModuleInfo info, DbgCause cause) {
+	public default void moduleUnloaded(DbgProcess process, DebugModuleInfo info, DbgCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void breakpointCreated(DbgBreakpointInfo info, DbgCause cause) {
+	public default void breakpointCreated(DbgBreakpointInfo info, DbgCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void breakpointModified(DbgBreakpointInfo newInfo, DbgBreakpointInfo oldInfo,
-                                    DbgCause cause) {
+	public default void breakpointModified(DbgBreakpointInfo newInfo, DbgBreakpointInfo oldInfo,
+			DbgCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void breakpointDeleted(DbgBreakpointInfo info, DbgCause cause) {
+	public default void breakpointDeleted(DbgBreakpointInfo info, DbgCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void breakpointHit(DbgBreakpointInfo info, DbgCause cause) {
+	public default void breakpointHit(DbgBreakpointInfo info, DbgCause cause) {
 		// Extension point
 	}
 
@@ -140,17 +140,17 @@ public interface DbgEventsListenerAdapter extends DbgEventsListener {
 	*/
 
 	@Override
-    default void memoryChanged(DbgProcess process, long addr, int len, DbgCause cause) {
+	public default void memoryChanged(DbgProcess process, long addr, int len, DbgCause cause) {
 		// Extension point
 	}
 
 	@Override
-    default void consoleOutput(String output, int mask) {
+	public default void consoleOutput(String output, int mask) {
 		// Extension point
 	}
 
 	@Override
-    default void promptChanged(String prompt) {
+	public default void promptChanged(String prompt) {
 		// Extension point
 	}
 

@@ -55,26 +55,26 @@ import ghidra.program.model.mem.*;
 @Deprecated
 public class RTTI1DataType extends RTTIDataType {
 
-	private static final long serialVersionUID = 1;
+	private final static long serialVersionUID = 1;
 
 	// PMD fields
-    private static final int PMD_LENGTH = 12;
-	private static final int M_DISP_OFFSET = 0;
-	private static final int P_DISP_OFFSET = 4;
-	private static final int V_DISP_OFFSET = 8;
+	private final static int PMD_LENGTH = 12;
+	private final static int M_DISP_OFFSET = 0;
+	private final static int P_DISP_OFFSET = 4;
+	private final static int V_DISP_OFFSET = 8;
 
 	// RTTI 1 fields
-    private static final int LENGTH = 28;
-	private static final int RTTI_0_OFFSET = 0;
-	private static final int NUM_CONTAINED_BASES_OFFSET = 4;
+	private final static int LENGTH = 28;
+	private final static int RTTI_0_OFFSET = 0;
+	private final static int NUM_CONTAINED_BASES_OFFSET = 4;
 	// Commented the following out and replaced it with offset of PMD structure.
 	// Leaving it in until we are certain we want the actual PMD structure in this dynamic data type.
 //	private final static int PMD_MDISP_OFFSET = 8;
 //	private final static int PMD_PDISP_OFFSET = 12;
 //	private final static int PMD_VDISP_OFFSET = 16;
-    private static final int PMD_OFFSET = 8;
-	private static final int ATTRIBUTES_OFFSET = 20;
-	private static final int RTTI_3_OFFSET = 24;
+	private final static int PMD_OFFSET = 8;
+	private final static int ATTRIBUTES_OFFSET = 20;
+	private final static int RTTI_3_OFFSET = 24;
 
 	private RTTI0DataType rtti0;
 	private RTTI3DataType rtti3;
@@ -301,9 +301,12 @@ public class RTTI1DataType extends RTTIDataType {
 		// Make sure we don't follow flow or validation will get stuck in infinite loop.
 		DataValidationOptions dontFollowOptions = new DataValidationOptions(validationOptions);
 		dontFollowOptions.setValidateReferredToData(false);
-        return rtti3Address != null &&
-                (!validateReferredToData || rtti3.isValid(program, rtti3Address, dontFollowOptions));
-    }
+		if (rtti3Address == null ||
+			(validateReferredToData && !rtti3.isValid(program, rtti3Address, dontFollowOptions))) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public String getDefaultLabelPrefix() {

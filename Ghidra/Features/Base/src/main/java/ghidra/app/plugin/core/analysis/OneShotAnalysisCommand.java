@@ -56,7 +56,7 @@ public class OneShotAnalysisCommand extends BackgroundCommand {
 	public String getStatusMsg() {
 		String statusMessage = log.getStatus();
 
-		if (!statusMessage.isEmpty()) {
+		if (statusMessage.length() > 0) {
 			return statusMessage;
 		}
 

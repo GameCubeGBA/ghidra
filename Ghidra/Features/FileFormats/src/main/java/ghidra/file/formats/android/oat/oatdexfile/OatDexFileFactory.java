@@ -23,8 +23,8 @@ import ghidra.file.formats.android.oat.bundle.OatBundle;
 
 public final class OatDexFileFactory {
 
-	public static final OatDexFile getOatDexFile(BinaryReader reader, String oatVersion,
-                                                 OatBundle bundle) throws IOException {
+	public final static OatDexFile getOatDexFile(BinaryReader reader, String oatVersion,
+			OatBundle bundle) throws IOException {
 
 		switch (oatVersion) {
 			case OatConstants.VERSION_KITKAT_RELEASE:

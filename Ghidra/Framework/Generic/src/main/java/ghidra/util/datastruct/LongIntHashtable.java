@@ -97,7 +97,10 @@ public class LongIntHashtable implements Serializable {
      * @return true if key is found and removed, false otherwise.
      */
     public boolean remove(long key) {
-        return indexer.remove(key) >= 0;
+        if (indexer.remove(key) < 0) {
+            return false;
+        }
+        return true;
     }
 
     /**

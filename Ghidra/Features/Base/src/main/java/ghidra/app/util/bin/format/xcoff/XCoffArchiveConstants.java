@@ -18,7 +18,7 @@ package ghidra.app.util.bin.format.xcoff;
 
 public final class XCoffArchiveConstants {
 
-	public static final String MAGIC        = "<bigaf>\n";
-	public static final int    MAGIC_LENGTH = MAGIC.length();
+	public final static String MAGIC        = "<bigaf>\n";
+	public final static int    MAGIC_LENGTH = MAGIC.length();
 
 }

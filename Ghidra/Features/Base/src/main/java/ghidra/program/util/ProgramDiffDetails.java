@@ -117,7 +117,9 @@ public class ProgramDiffDetails {
 	private static String getIndentString(int indentCount) {
 		int indentChars = indentCount * INDENT_SIZE;
 		StringBuffer buf = new StringBuffer(indentChars);
-        buf.append(" ".repeat(Math.max(0, indentChars)));
+		for (int i = 0; i < indentChars; i++) {
+			buf.append(' ');
+		}
 		return buf.toString();
 	}
 
@@ -139,7 +141,7 @@ public class ProgramDiffDetails {
 	 * This address should be derived from program1.
 	 * @return a string indicating the differences.
 	 */
-	public static String getDiffDetails(Program p1, Program p2, Address p1DiffAddress) {
+	static public String getDiffDetails(Program p1, Program p2, Address p1DiffAddress) {
 		ProgramDiffDetails diffDetails = new ProgramDiffDetails(p1, p2);
 		return diffDetails.getDiffDetails(p1DiffAddress);
 	}
@@ -155,7 +157,7 @@ public class ProgramDiffDetails {
 	 * @param filter the program diff filter that indicates the diff details to show.
 	 * @return a string indicating the differences.
 	 */
-	public static String getDiffDetails(Program p1, Program p2, Address p1DiffAddress,
+	static public String getDiffDetails(Program p1, Program p2, Address p1DiffAddress,
 			ProgramDiffFilter filter) {
 		ProgramDiffDetails diffDetails = new ProgramDiffDetails(p1, p2);
 		return diffDetails.getDiffDetails(p1DiffAddress, filter);
@@ -985,18 +987,19 @@ public class ProgramDiffDetails {
 		Address min = cu.getMinAddress();
 		Address max = cu.getMaxAddress();
 		String addrRangeStr = min + ((min.equals(max)) ? "" : " - " + max);
-		StringBuilder cuRep;
+		String cuRep;
 		if (cu instanceof Data) {
-			cuRep = new StringBuilder(((Data) cu).getDataType().getPathName());
+			cuRep = ((Data) cu).getDataType().getPathName();
 		}
 		else if (cu instanceof Instruction) {
 			Instruction inst = (Instruction) cu;
 			boolean removedFallThrough =
 				inst.isFallThroughOverridden() && (inst.getFallThrough() == null);
 			boolean hasFlowOverride = inst.getFlowOverride() != FlowOverride.NONE;
-			cuRep = new StringBuilder(cu.toString());
+			cuRep = cu.toString();
 			if (removedFallThrough) {
-				cuRep.append(newLine).append(indent).append(getSpaces(addrRangeStr.length())).append("    ").append("Removed FallThrough");
+				cuRep += newLine + indent + getSpaces(addrRangeStr.length()) + "    " +
+					"Removed FallThrough";
 			}
 			else if (inst.isFallThroughOverridden()) {
 				// Show the fallthrough override.
@@ -1008,17 +1011,21 @@ public class ProgramDiffDetails {
 						boolean isOverride = SystemUtilities.isEqual(fallThroughAddress, toAddress);
 						String prefix =
 							isOverride ? "FallThrough Override: " : "FallThrough Reference: ";
-						cuRep.append(newLine).append(indent).append(getSpaces(addrRangeStr.length())).append("    ").append(prefix).append(DiffUtility.getUserToAddressString(inst.getProgram(), ref));
+						cuRep += newLine + indent + getSpaces(addrRangeStr.length()) + "    " +
+							prefix + DiffUtility.getUserToAddressString(inst.getProgram(), ref);
 					}
 				}
 			}
 			if (hasFlowOverride) {
-				cuRep.append(newLine).append(indent).append(getSpaces(addrRangeStr.length())).append("    ").append("Flow Override: ").append(inst.getFlowOverride());
+				cuRep += newLine + indent + getSpaces(addrRangeStr.length()) + "    " +
+					"Flow Override: " + inst.getFlowOverride();
 			}
-			cuRep.append(newLine).append(indent).append(getSpaces(addrRangeStr.length())).append("    ").append("Instruction Prototype hash = ").append(Integer.toHexString(inst.getPrototype().hashCode()));
+			cuRep += newLine + indent + getSpaces(addrRangeStr.length()) + "    " +
+				"Instruction Prototype hash = " +
+				Integer.toHexString(inst.getPrototype().hashCode());
 		}
 		else {
-			cuRep = new StringBuilder(cu.toString());
+			cuRep = cu.toString();
 		}
 		buf.append(indent + addrRangeStr + "    " + cuRep + newLine);
 		return min;
@@ -1201,8 +1208,8 @@ public class ProgramDiffDetails {
 		}
 		else {
 			addDisplayEquate(null, nameLen, valueLen);
-			for (Equate equate : eq) {
-				addDisplayEquate(equate, nameLen, valueLen);
+			for (int i = 0; i < num; i++) {
+				addDisplayEquate(eq[i], nameLen, valueLen);
 			}
 		}
 	}
@@ -1442,7 +1449,7 @@ public class ProgramDiffDetails {
 	 * @return
 	 */
 	private String getTagInfo(Collection<FunctionTag> tags) {
-		if (tags == null || tags.isEmpty()) {
+		if (tags == null || tags.size() == 0) {
 			return "";
 		}
 
@@ -2212,7 +2219,7 @@ public class ProgramDiffDetails {
 						// handle any unrecognized property below after checking all types.
 					}
 					if (objProp != null) {
-						buf.append(indent2 + propertyName + ": " + objProp + newLine);
+						buf.append(indent2 + propertyName + ": " + objProp.toString() + newLine);
 						continue;
 					}
 					// Void property
@@ -2365,8 +2372,12 @@ public class ProgramDiffDetails {
 			return false;
 		}
 		// Detect that data type name or path differs?
-        return dt1.getPathName().equals(dt2.getPathName());
-    }
+		if (!dt1.getPathName().equals(dt2.getPathName())) {
+			return false;
+		}
+
+		return true;
+	}
 
 	/**
 	 * Creates a formatted difference string for an individual line difference
@@ -2412,7 +2423,9 @@ public class ProgramDiffDetails {
 			return "";
 		}
 		StringBuffer buf = new StringBuffer(numSpaces);
-        buf.append(" ".repeat(numSpaces));
+		for (int i = 0; i < numSpaces; i++) {
+			buf.append(" ");
+		}
 		return buf.toString();
 	}
 

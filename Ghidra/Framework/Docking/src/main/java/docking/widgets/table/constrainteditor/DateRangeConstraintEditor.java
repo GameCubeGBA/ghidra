@@ -134,7 +134,7 @@ public class DateRangeConstraintEditor extends AbstractColumnConstraintEditor<Lo
 			infoLabel.setText(formatStatus(String.format("Range Size: %,d days", days), false));
 		}
 		else {
-			infoLabel.setText(formatStatus(errorMessage, true));
+			infoLabel.setText(formatStatus(getErrorMessage(), true));
 		}
 
 	}

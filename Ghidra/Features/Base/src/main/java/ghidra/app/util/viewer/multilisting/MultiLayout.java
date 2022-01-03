@@ -49,10 +49,10 @@ class MultiLayout {
 			layout.fillHeights(rowHeights);
 
 		}
-        for (Layout value : layouts) {
-            MultiRowLayout layout = (MultiRowLayout) value;
-            layout.align(rowHeights);
-        }
+		for (int i = 0; i < layouts.length; i++) {
+			MultiRowLayout layout = (MultiRowLayout) layouts[i];
+			layout.align(rowHeights);
+		}
 	}
 
 	private int getDefaultID(Layout[] layouts1) {

@@ -57,14 +57,14 @@ public interface DebugAdvancedInternal extends DebugAdvanced {
 			PREFERRED_ADVANCED_IIDS, supplier);
 	}
 
-	enum WhichSystemObjectInformation {
+	public enum WhichSystemObjectInformation {
 		THREAD_BASIC_INFORMATION, //
 		THREAD_NAME_WIDE, //
 		CURRENT_PROCESS_COOKIE, //
 		;
 	}
 
-	enum ThreadBasicInformationValidBits implements BitmaskUniverse {
+	public enum ThreadBasicInformationValidBits implements BitmaskUniverse {
 		EXIT_STATUS(1 << 0), //
 		PRIORITY_CLASS(1 << 1), //
 		PRIORITY(1 << 2), //

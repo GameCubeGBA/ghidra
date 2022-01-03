@@ -46,7 +46,8 @@ public class LabelFieldFactoryTest extends AbstractGhidraHeadedIntegrationTest {
 	private Program program;
 
 	public LabelFieldFactoryTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

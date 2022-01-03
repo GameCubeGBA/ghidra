@@ -12,9 +12,9 @@
 package SWIG;
 
 public final class QueueItemKind {
-  public static final QueueItemKind eQueueItemKindUnknown = new QueueItemKind("eQueueItemKindUnknown", lldbJNI.eQueueItemKindUnknown_get());
-  public static final QueueItemKind eQueueItemKindFunction = new QueueItemKind("eQueueItemKindFunction");
-  public static final QueueItemKind eQueueItemKindBlock = new QueueItemKind("eQueueItemKindBlock");
+  public final static QueueItemKind eQueueItemKindUnknown = new QueueItemKind("eQueueItemKindUnknown", lldbJNI.eQueueItemKindUnknown_get());
+  public final static QueueItemKind eQueueItemKindFunction = new QueueItemKind("eQueueItemKindFunction");
+  public final static QueueItemKind eQueueItemKindBlock = new QueueItemKind("eQueueItemKindBlock");
 
   public final int swigValue() {
     return swigValue;
@@ -27,9 +27,9 @@ public final class QueueItemKind {
   public static QueueItemKind swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-      for (QueueItemKind value : swigValues)
-          if (value.swigValue == swigValue)
-              return value;
+    for (int i = 0; i < swigValues.length; i++)
+      if (swigValues[i].swigValue == swigValue)
+        return swigValues[i];
     throw new IllegalArgumentException("No enum " + QueueItemKind.class + " with value " + swigValue);
   }
 

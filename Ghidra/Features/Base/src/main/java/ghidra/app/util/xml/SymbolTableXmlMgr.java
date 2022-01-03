@@ -177,7 +177,7 @@ class SymbolTableXmlMgr {
 	private void processSymbol(XmlElement element, XmlPullParser parser, int passNumber) {
 		try {
 			String type = element.getAttribute("TYPE");
-			boolean isLocal = (type != null) && "local".equalsIgnoreCase(type);
+			boolean isLocal = (type != null) && type.equalsIgnoreCase("local");
 
 			String name = element.getAttribute("NAME");
 			boolean isDefaultFunctionName =
@@ -202,7 +202,7 @@ class SymbolTableXmlMgr {
 			String primary = element.getAttribute("PRIMARY");
 			String sourceTypeString = element.getAttribute("SOURCE_TYPE");
 
-			boolean isPrimary = (primary == null) || "y".equalsIgnoreCase(primary);
+			boolean isPrimary = (primary == null) || primary.equalsIgnoreCase("y");
 
 			SourceType sourceType = SourceType.USER_DEFINED;
 			try {
@@ -232,7 +232,7 @@ class SymbolTableXmlMgr {
 				localNamespace.getName().equalsIgnoreCase(namespace)) {
 				scope = localNamespace;
 			}
-			else if (namespace != null && !namespace.isEmpty()) {
+			else if (namespace != null && namespace.length() != 0) {
 				if (program.getGlobalNamespace().equals(localNamespace)) {
 					scope = NamespaceUtils.createNamespaceHierarchy(namespace,
 						program.getGlobalNamespace(), program, sourceType);

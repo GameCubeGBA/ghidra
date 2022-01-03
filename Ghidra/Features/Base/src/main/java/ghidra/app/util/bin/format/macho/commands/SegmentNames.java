@@ -19,39 +19,39 @@ public final class SegmentNames {
 	/**
 	 * the pagezero segment which has no protections and catches NULL
 	 * references for MH_EXECUTE files
-	 */
-    public static final String SEG_PAGEZERO      = "__PAGEZERO";
+	 */ 
+	public final static String SEG_PAGEZERO      = "__PAGEZERO";
 	/**
 	 * the traditional UNIX text segment
 	 */
-    public static final String SEG_TEXT          = "__TEXT";
+	public final static String SEG_TEXT          = "__TEXT";
 	/** 
 	 * the traditional UNIX data segment
 	 */
-    public static final String SEG_DATA          = "__DATA";
+	public final static String SEG_DATA          = "__DATA";
 	/** 
 	 * objective-C runtime segment
 	 */
-    public static final String SEG_OBJC          = "__OBJC";
+	public final static String SEG_OBJC          = "__OBJC";
 	/** 
 	 * the icon segment
 	 */
-    public static final String SEG_ICON          = "__ICON";
+	public final static String SEG_ICON          = "__ICON";
 	/**
 	 * the segment containing all structs created and maintained by the link editor.  
 	 * Created with -seglinkedit option to ld(1) for MH_EXECUTE and FVMLIB file types only
 	 */
-    public static final String SEG_LINKEDIT      = "__LINKEDIT";
+	public final static String SEG_LINKEDIT      = "__LINKEDIT";
 	/** 
 	 * the unix stack segment
 	 */
-    public static final String SEG_UNIXSTACK     = "__UNIXSTACK";
+	public final static String SEG_UNIXSTACK     = "__UNIXSTACK";
 	/**
 	 * the segment for the self (dyld) modifying code 
 	 * stubs that has read, write and execute permissions 
 	 */
-    public static final String SEG_IMPORT       = "__IMPORT";
+	public final static String SEG_IMPORT       = "__IMPORT";
 
-	public static final String SEG_TEXT_EXEC = "__TEXT_EXEC";
-	public static final String SEG_PRELINK_TEXT = "__PRELINK_TEXT";
+	public final static String SEG_TEXT_EXEC = "__TEXT_EXEC";
+	public final static String SEG_PRELINK_TEXT = "__PRELINK_TEXT";
 }

@@ -12,9 +12,9 @@
 package SWIG;
 
 public final class QueueKind {
-  public static final QueueKind eQueueKindUnknown = new QueueKind("eQueueKindUnknown", lldbJNI.eQueueKindUnknown_get());
-  public static final QueueKind eQueueKindSerial = new QueueKind("eQueueKindSerial");
-  public static final QueueKind eQueueKindConcurrent = new QueueKind("eQueueKindConcurrent");
+  public final static QueueKind eQueueKindUnknown = new QueueKind("eQueueKindUnknown", lldbJNI.eQueueKindUnknown_get());
+  public final static QueueKind eQueueKindSerial = new QueueKind("eQueueKindSerial");
+  public final static QueueKind eQueueKindConcurrent = new QueueKind("eQueueKindConcurrent");
 
   public final int swigValue() {
     return swigValue;
@@ -27,9 +27,9 @@ public final class QueueKind {
   public static QueueKind swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-      for (QueueKind value : swigValues)
-          if (value.swigValue == swigValue)
-              return value;
+    for (int i = 0; i < swigValues.length; i++)
+      if (swigValues[i].swigValue == swigValue)
+        return swigValues[i];
     throw new IllegalArgumentException("No enum " + QueueKind.class + " with value " + swigValue);
   }
 

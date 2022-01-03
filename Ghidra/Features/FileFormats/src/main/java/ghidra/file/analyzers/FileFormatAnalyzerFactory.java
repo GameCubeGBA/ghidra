@@ -21,7 +21,7 @@ import ghidra.util.classfinder.ClassSearcher;
 
 public final class FileFormatAnalyzerFactory {
 
-	public static final List<FileFormatAnalyzer> getAnalyzers() {
+	public final static List<FileFormatAnalyzer> getAnalyzers() {
 		return ClassSearcher.getInstances(FileFormatAnalyzer.class);
 	}
 }

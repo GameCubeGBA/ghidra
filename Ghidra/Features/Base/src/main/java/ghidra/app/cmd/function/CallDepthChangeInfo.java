@@ -406,8 +406,12 @@ public class CallDepthChangeInfo {
 		reg = trans.getRegister(output);
 
 		// is this register the stack pointer
-        return reg == stackReg;
-    }
+		if (reg == stackReg) {
+			return true;
+		}
+
+		return false;
+	}
 
 	/**
 	 * Get the default/assumed stack depth change for this language

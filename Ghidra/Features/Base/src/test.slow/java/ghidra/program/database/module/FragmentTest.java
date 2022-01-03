@@ -54,7 +54,8 @@ public class FragmentTest extends AbstractGhidraHeadedIntegrationTest {
 	 * @param name
 	 */
 	public FragmentTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -93,9 +94,9 @@ public class FragmentTest extends AbstractGhidraHeadedIntegrationTest {
 		assertEquals(3, f1.getNumParents());
 		ProgramModule[] parents = f1.getParents();
 		assertEquals(3, parents.length);
-        for (ProgramModule parent : parents) {
-            assertTrue(parent.equals(root) || parent.equals(m1) || parent.equals(m2));
-        }
+		for (int i = 0; i < parents.length; i++) {
+			assertTrue(parents[i].equals(root) || parents[i].equals(m1) || parents[i].equals(m2));
+		}
 	}
 
 	@Test

@@ -27,7 +27,8 @@ import generic.test.AbstractGenericTest;
 public class FixedSizeMRUCachingFactoryTest extends AbstractGenericTest {
 
 	public FixedSizeMRUCachingFactoryTest() {
-    }
+		super();
+	}
 
 	private HitCountIdentityFactory<Integer> callCountFactory;
 

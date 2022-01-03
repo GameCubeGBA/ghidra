@@ -47,7 +47,8 @@ public class ProgramContextTest extends AbstractGhidraHeadedIntegrationTest {
 	private AddressSpace space;
 
 	public ProgramContextTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws IOException {

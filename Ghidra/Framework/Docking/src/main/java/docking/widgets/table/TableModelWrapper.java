@@ -202,9 +202,10 @@ public class TableModelWrapper<ROW_OBJECT>
 
 		List<ROW_OBJECT> list = new ArrayList<>();
 		int size = filteredIndexList.size();
-        for (Integer modelRowIndex : filteredIndexList) {
-            list.add(wrappedModel.getRowObject(modelRowIndex));
-        }
+		for (int row = 0; row < size; row++) {
+			Integer modelRowIndex = filteredIndexList.get(row);
+			list.add(wrappedModel.getRowObject(modelRowIndex));
+		}
 		return list;
 	}
 

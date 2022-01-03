@@ -52,7 +52,7 @@ class EquatesXmlMgr {
 				throw new CancelledException();	
 			}
 			element = parser.peek();
-			if (element == null || !"EQUATE_GROUP".equals(element.getName())) {
+			if (element == null || !element.getName().equals("EQUATE_GROUP")) {
 				break;
 			}
 			processEquateGroup(parser, monitor);
@@ -91,16 +91,16 @@ class EquatesXmlMgr {
 		while (!monitor.isCancelled()) {
 			element = parser.peek();
 
-			if ("DISPLAY_SETTINGS".equals(element.getName()) ||
-				"REGULAR_CMT".equals(element.getName()) ||
-				"REPEATABLE_CMT".equals(element.getName()) ||
-				"BIT_MASK".equals(element.getName())) {
+			if (element.getName().equals("DISPLAY_SETTINGS") ||
+				element.getName().equals("REGULAR_CMT") || 
+				element.getName().equals("REPEATABLE_CMT") || 
+				element.getName().equals("BIT_MASK")) {
 
 				element = parser.next();
 				element = parser.next();
 				continue;
 			}
-			if (!"EQUATE".equals(element.getName())) {
+			if (!element.getName().equals("EQUATE")) {
 				break;
 			}
 			processEquate(parser, element);
@@ -135,12 +135,12 @@ class EquatesXmlMgr {
 		}
 
 		element = parser.peek();
-		if ("REGULAR_CMT".equals(element.getName())) {
+		if (element.getName().equals("REGULAR_CMT")) {
 			element = parser.next();
 			element = parser.next();
 		}
 		element = parser.peek();
-		if ("REPEATABLE_CMT".equals(element.getName())) {
+		if (element.getName().equals("REPEATABLE_CMT")) {
 			element = parser.next();
 			element = parser.next();
 		}
@@ -156,12 +156,12 @@ class EquatesXmlMgr {
 		}
 		else {
 			EquateReference[] refs = equate.getReferences();
-            for (EquateReference ref : refs) {
-                if (set.contains(ref.getAddress())) {
-                    okToWrite = true;
-                    break;
-                }
-            }
+			for (int i=0; i<refs.length; ++i) {
+				if (set.contains(refs[i].getAddress())) {
+					okToWrite = true;
+					break;
+				}
+			}
 		}
 		if (okToWrite) {
 			XmlAttributes attrs = new XmlAttributes();

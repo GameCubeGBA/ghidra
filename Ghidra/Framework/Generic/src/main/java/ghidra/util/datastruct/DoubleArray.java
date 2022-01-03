@@ -27,7 +27,7 @@ import java.io.Serializable;
  * Array of doubles that grows as needed.
  */
 public class DoubleArray implements Array, Serializable {
-    private static final long serialVersionUID = 1;
+    private final static long serialVersionUID = 1;
     public static final int MIN_SIZE = 4;
     double[] doubles;
     int lastNonZeroIndex = -1;

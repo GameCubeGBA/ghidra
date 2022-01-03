@@ -65,7 +65,8 @@ public class VariableLocFieldLocation extends VariableLocation {
 	 * Should only be used by XML restoration.
 	 */
 	public VariableLocFieldLocation() {
-    }
+		super();
+	}
 
 	/**
 	 * Gets the location string. (For stack variables this is the offset as a string.)
@@ -88,8 +89,11 @@ public class VariableLocFieldLocation extends VariableLocation {
 		if (!super.equals(obj) || (getClass() != obj.getClass()))
 			return false;
 		VariableLocFieldLocation other = (VariableLocFieldLocation) obj;
-        return Objects.equals(loc, other.loc);
-    }
+		if (!Objects.equals(loc, other.loc)) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public void restoreState(Program program1, SaveState obj) {

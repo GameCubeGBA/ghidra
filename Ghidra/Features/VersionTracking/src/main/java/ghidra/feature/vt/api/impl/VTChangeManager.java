@@ -30,7 +30,7 @@ public interface VTChangeManager {
 	//
 	////////////////////////////////////////////////////////////////////////////
 
-	int DOCR_VT_MATCH_SET_ADDED = 1010;
+	public static final int DOCR_VT_MATCH_SET_ADDED = 1010;
 
 	////////////////////////////////////////////////////////////////////////////
 	//
@@ -42,18 +42,18 @@ public interface VTChangeManager {
 	 * The status of a match item in the version tracking results has changed.
 	 */
 
-    int DOCR_VT_ASSOCIATION_STATUS_CHANGED = 1021;
-	int DOCR_VT_ASSOCIATION_MARKUP_STATUS_CHANGED = 1027;
+	public static final int DOCR_VT_ASSOCIATION_STATUS_CHANGED = 1021;
+	public static final int DOCR_VT_ASSOCIATION_MARKUP_STATUS_CHANGED = 1027;
 
-	int DOCR_VT_MATCH_ADDED = 1022;
+	public static final int DOCR_VT_MATCH_ADDED = 1022;
 
-	int DOCR_VT_MATCH_DELETED = 1023;
+	public static final int DOCR_VT_MATCH_DELETED = 1023;
 
-	int DOCR_VT_MATCH_TAG_CHANGED = 1024;
+	public static final int DOCR_VT_MATCH_TAG_CHANGED = 1024;
 
-	int DOCR_VT_ASSOCIATION_ADDED = 1025;
+	public static final int DOCR_VT_ASSOCIATION_ADDED = 1025;
 
-	int DOCR_VT_ASSOCIATION_REMOVED = 1026;
+	public static final int DOCR_VT_ASSOCIATION_REMOVED = 1026;
 
 	////////////////////////////////////////////////////////////////////////////
 	//
@@ -64,18 +64,18 @@ public interface VTChangeManager {
 	/**
 	 * The status of a version tracking mark-up item has changed.
 	 */
-    int DOCR_VT_MARKUP_ITEM_STATUS_CHANGED = 1030;
+	public static final int DOCR_VT_MARKUP_ITEM_STATUS_CHANGED = 1030;
 
 	/**
 	 * The destination address of a version tracking mark-up item has changed.
 	 */
-    int DOCR_VT_MARKUP_ITEM_DESTINATION_CHANGED = 1031;
+	public static final int DOCR_VT_MARKUP_ITEM_DESTINATION_CHANGED = 1031;
 
-	int DOCR_VT_TAG_ADDED = 1040;
+	public static final int DOCR_VT_TAG_ADDED = 1040;
 
-	int DOCR_VT_TAG_REMOVED = 1041;
+	public static final int DOCR_VT_TAG_REMOVED = 1041;
 
-	int DOCR_VT_VOTE_COUNT_CHANGED = 1050;
+	public static final int DOCR_VT_VOTE_COUNT_CHANGED = 1050;
 
 	/**
 	 * Mark the state of a Version Tracking item as having changed and generate
@@ -84,7 +84,7 @@ public interface VTChangeManager {
 	 * @param oldValue original value or an Object that is related to the event.
 	 * @param newValue new value or an Object that is related to the event.
 	 */
-    void setChanged(int type, Object oldValue, Object newValue);
+	public void setChanged(int type, Object oldValue, Object newValue);
 
 	/**
 	 * Mark the state of a Version Tracking item as having changed and generate
@@ -94,6 +94,6 @@ public interface VTChangeManager {
 	 * @param oldValue original value or an Object that is related to the event.
 	 * @param newValue new value or an Object that is related to the event.
 	 */
-    void setObjectChanged(int type, Object affectedObject, Object oldValue, Object newValue);
+	public void setObjectChanged(int type, Object affectedObject, Object oldValue, Object newValue);
 
 }

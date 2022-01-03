@@ -20,11 +20,11 @@ import java.util.function.BiFunction;
 import ghidra.framework.model.UndoableDomainObject;
 
 public interface TransactionCoalescer {
-	interface TxFactory<T extends UndoableDomainObject, U>
+	public interface TxFactory<T extends UndoableDomainObject, U>
 			extends BiFunction<T, String, U> {
 	}
 
-	interface CoalescedTx extends AutoCloseable {
+	public interface CoalescedTx extends AutoCloseable {
 		@Override
 		void close();
 	}

@@ -199,8 +199,11 @@ public final class LanguageCompilerSpecPair implements Comparable<LanguageCompil
 		if (!Objects.equals(compilerSpecID, other.compilerSpecID)) {
 			return false;
 		}
-        return Objects.equals(languageID, other.languageID);
-    }
+		if (!Objects.equals(languageID, other.languageID)) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public String toString() {

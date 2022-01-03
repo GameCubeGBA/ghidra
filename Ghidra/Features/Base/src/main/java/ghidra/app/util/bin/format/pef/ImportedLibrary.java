@@ -39,12 +39,12 @@ import ghidra.util.exception.DuplicateNameException;
  * </pre>
  */
 public class ImportedLibrary implements StructConverter {
-	public static final int SIZEOF = 24;
+	public final static int SIZEOF = 24;
 
 	/** The imported library is allowed to be missing. */
-    public static final int OPTION_kPEFWeakImportLibMask  = 0x40;
+	public final static int OPTION_kPEFWeakImportLibMask  = 0x40;
 	/** The imported library must be initialized first. */
-    public static final int OPTION_kPEFInitLibBeforeMask  = 0x80;
+	public final static int OPTION_kPEFInitLibBeforeMask  = 0x80;
 
 
 	private int   nameOffset;

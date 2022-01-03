@@ -52,7 +52,8 @@ public class PackedDatabaseTest extends AbstractGenericTest {
 	private PackedDBHandle dbh2;
 
 	public PackedDatabaseTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

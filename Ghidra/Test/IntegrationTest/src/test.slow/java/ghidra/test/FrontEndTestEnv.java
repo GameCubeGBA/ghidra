@@ -445,6 +445,6 @@ public class FrontEndTestEnv {
 	}
 
 	public interface ModifyProgramCallback {
-		void call(Program p) throws Exception;
+		public void call(Program p) throws Exception;
 	}
 }

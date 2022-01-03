@@ -81,8 +81,10 @@ public class RegisterFieldLocation extends ProgramLocation {
 		RegisterFieldLocation other = (RegisterFieldLocation) obj;
 		if (!Arrays.equals(registerNames, other.registerNames))
 			return false;
-        return Arrays.equals(registerStrings, other.registerStrings);
-    }
+		if (!Arrays.equals(registerStrings, other.registerStrings))
+			return false;
+		return true;
+	}
 
 	@Override
 	public void saveState(SaveState obj) {

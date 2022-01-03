@@ -18,7 +18,7 @@ package ghidra.app.util.query;
 
 public interface AddressAlignmentListener {
 	
-	void alignmentChanged();
+	public void alignmentChanged();
 	
-	void alignmentPermissionChanged();
+	public void alignmentPermissionChanged();
 }

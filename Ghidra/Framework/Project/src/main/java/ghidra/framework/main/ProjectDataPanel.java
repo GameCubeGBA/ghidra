@@ -48,11 +48,11 @@ import ghidra.util.Msg;
  * project views.
  */
 class ProjectDataPanel extends JSplitPane {
-	private static final String BORDER_PREFIX = "Active Project: ";
-	private static final String READ_ONLY_BORDER = "READ-ONLY Project Data";
-	private static final int TYPICAL_NUM_VIEWS = 2;
-	private static final int DIVIDER_SIZE = 2;
-	private static final double DIVIDER_LOCATION = 0.50d;
+	private final static String BORDER_PREFIX = "Active Project: ";
+	private final static String READ_ONLY_BORDER = "READ-ONLY Project Data";
+	private final static int TYPICAL_NUM_VIEWS = 2;
+	private final static int DIVIDER_SIZE = 2;
+	private final static double DIVIDER_LOCATION = 0.50d;
 
 	private static final String EXPANDED_PATHS = "EXPANDED_PATHS";
 
@@ -68,7 +68,8 @@ class ProjectDataPanel extends JSplitPane {
 
 	ProjectDataPanel(FrontEndPlugin plugin, ProjectDataTreePanel activePanel,
 			ProjectDataTablePanel tablePanel, String projectName) {
-        this.frontEndPlugin = plugin;
+		super();
+		this.frontEndPlugin = plugin;
 		this.tablePanel = tablePanel;
 		tool = ((FrontEndTool) plugin.getTool());
 		this.treePanel = activePanel;
@@ -292,7 +293,7 @@ class ProjectDataPanel extends JSplitPane {
 		((ProjectDataTreePanel) view).dispose();
 
 		// if we have no more views, hide the read-only tabbed pane
-		if (readOnlyViews.isEmpty()) {
+		if (readOnlyViews.size() == 0) {
 			setViewsVisible(false);
 		}
 		tool.getProject().removeProjectView(url);

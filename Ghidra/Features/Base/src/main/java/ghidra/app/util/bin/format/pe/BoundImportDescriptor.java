@@ -43,11 +43,11 @@ public class BoundImportDescriptor implements StructConverter, ByteArrayConverte
 	/**
 	 * The name to use when converting into a structure data type.
 	 */
-    public static final String NAME = "IMAGE_BOUND_IMPORT_DESCRIPTOR";
+    public final static String NAME = "IMAGE_BOUND_IMPORT_DESCRIPTOR";
 	/**
 	 * The size of the <code>IMAGE_BOUND_IMPORT_DESCRIPTOR</code> in bytes.
 	 */
-    public static final int IMAGE_SIZEOF_BOUND_IMPORT_DESCRIPTOR = 8;
+    public final static int IMAGE_SIZEOF_BOUND_IMPORT_DESCRIPTOR = 8;
 
     private String moduleName;
     private int    timeDateStamp;
@@ -150,12 +150,13 @@ public class BoundImportDescriptor implements StructConverter, ByteArrayConverte
 		buffer.append("OffsetModuleName:"+Integer.toHexString(Conv.shortToInt(offsetModuleName))+"["+moduleName+"]"+",");
 		buffer.append("NumberOfModuleForwarderRefs:"+Integer.toHexString(Conv.shortToInt(numberOfModuleForwarderRefs)));
 		buffer.append("\n");
-        for (BoundImportForwarderRef ref : forwarders) {
-            buffer.append("\t" + "TimeStamp:" + Integer.toHexString(ref.getTimeDateStamp()) + ",");
-            buffer.append("\t" + "OffsetModuleName:" + Integer.toHexString(Conv.shortToInt(ref.getOffsetModuleName())) + "[" + ref.getModuleName() + "]" + ",");
-            buffer.append("\t" + "Reserved:" + Integer.toHexString(Conv.shortToInt(ref.getReserved())));
-            buffer.append("\n");
-        }
+		for(int i=0;i<forwarders.size();i++) {
+			BoundImportForwarderRef ref = forwarders.get(i);
+			buffer.append("\t"+"TimeStamp:"+Integer.toHexString(ref.getTimeDateStamp())+",");
+			buffer.append("\t"+"OffsetModuleName:"+Integer.toHexString(Conv.shortToInt(ref.getOffsetModuleName()))+"["+ref.getModuleName()+"]"+",");
+			buffer.append("\t"+"Reserved:"+Integer.toHexString(Conv.shortToInt(ref.getReserved())));
+			buffer.append("\n");
+		}
 		return buffer.toString();
 	}
 
@@ -169,9 +170,10 @@ public class BoundImportDescriptor implements StructConverter, ByteArrayConverte
         struct.add( WORD,"OffsetModuleName",null);
         struct.add( WORD,"NumberOfModuleForwarderRefs",null);
 
-        for (BoundImportForwarderRef ref : forwarders) {
+        for(int i=0;i<forwarders.size();i++) {
+            BoundImportForwarderRef ref = forwarders.get(i);
             struct.add(ref.toDataType());
-        }
+		}
 
         struct.setCategoryPath(new CategoryPath("/PE"));
 

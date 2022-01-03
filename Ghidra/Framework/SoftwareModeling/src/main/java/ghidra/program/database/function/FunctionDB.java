@@ -252,7 +252,7 @@ public class FunctionDB extends DatabaseObject implements Function {
 	public ExternalLocation getExternalLocation() {
 		if (isExternal()) {
 			ExternalManagerDB extMgr = (ExternalManagerDB) program.getExternalManager();
-			return extMgr.getExternalLocation(functionSymbol);
+			return extMgr.getExternalLocation(getSymbol());
 		}
 		return null;
 	}
@@ -731,8 +731,11 @@ public class FunctionDB extends DatabaseObject implements Function {
 			if (thunkedFunction != null) {
 				return thunkedFunction.isStackPurgeSizeValid();
 			}
-            return getStackPurgeSize() <= 0xffffff;
-        }
+			if (getStackPurgeSize() > 0xffffff) {
+				return false;
+			}
+			return true;
+		}
 		finally {
 			manager.lock.release();
 		}
@@ -993,7 +996,7 @@ public class FunctionDB extends DatabaseObject implements Function {
 			var = getResolvedVariable(var, false, false);
 
 			String name = var.getName();
-			if (name == null || name.isEmpty() ||
+			if (name == null || name.length() == 0 ||
 				SymbolUtilities.isDefaultParameterName(name)) {
 				name = DEFAULT_LOCAL_PREFIX;
 				source = SourceType.DEFAULT;
@@ -1079,7 +1082,7 @@ public class FunctionDB extends DatabaseObject implements Function {
 	 * @return variables array with 'this' auto-param adjusted if needed
 	 */
 	private Variable[] adjustThunkThisParameter(Variable[] variables) {
-		Symbol s = functionSymbol;
+		Symbol s = getSymbol();
 		if (s.getParentNamespace().getID() == Namespace.GLOBAL_NAMESPACE_ID) {
 			return variables;
 		}
@@ -1098,7 +1101,7 @@ public class FunctionDB extends DatabaseObject implements Function {
 	 * @return variables array with 'this' auto-param adjusted if needed
 	 */
 	private Parameter[] adjustThunkThisParameter(Parameter[] parameters) {
-		Symbol s = functionSymbol;
+		Symbol s = getSymbol();
 		if (s.getParentNamespace().getID() == Namespace.GLOBAL_NAMESPACE_ID) {
 			return parameters;
 		}
@@ -1123,7 +1126,7 @@ public class FunctionDB extends DatabaseObject implements Function {
 		if (!parameter.isAutoParameter()) {
 			return parameter;
 		}
-		Symbol s = functionSymbol;
+		Symbol s = getSymbol();
 		if (s.getParentNamespace().getID() == Namespace.GLOBAL_NAMESPACE_ID) {
 			return parameter;
 		}
@@ -1418,7 +1421,7 @@ public class FunctionDB extends DatabaseObject implements Function {
 				if (updateType == FunctionUpdateType.DYNAMIC_STORAGE_ALL_PARAMS &&
 					!thisParamRemoved &&
 					CompilerSpec.CALLING_CONVENTION_thiscall.equals(callingConvention) &&
-                        !newParams.isEmpty()) {
+					newParams.size() != 0) {
 					// Attempt to remove inferred unnamed 'this' parameter
 					// WARNING! This is a bit of a hack - not sure how to account for what may be auto-params
 					// within a list of parameters computed via analysis
@@ -1504,7 +1507,7 @@ public class FunctionDB extends DatabaseObject implements Function {
 				VariableStorage storage = useCustomStorage ? newParam.getVariableStorage()
 						: VariableStorage.UNASSIGNED_STORAGE;
 				String name = newParam.getName();
-				if (name == null || name.isEmpty()) {
+				if (name == null || name.length() == 0) {
 					name = SymbolUtilities.getDefaultParamName(i);
 				}
 				VariableSymbolDB s = symbolMgr.createVariableSymbol(name, this,
@@ -1536,7 +1539,7 @@ public class FunctionDB extends DatabaseObject implements Function {
 			Set<String> nonParamNames) throws DuplicateNameException {
 
 		String name = param.getName();
-		if (name == null || name.isEmpty() || SymbolUtilities.isDefaultParameterName(name)) {
+		if (name == null || name.length() == 0 || SymbolUtilities.isDefaultParameterName(name)) {
 			return;
 		}
 
@@ -1650,7 +1653,7 @@ public class FunctionDB extends DatabaseObject implements Function {
 
 			String name = var.getName();
 			SourceType paramSource = source;
-			if (name == null || name.isEmpty() || paramSource == SourceType.DEFAULT ||
+			if (name == null || name.length() == 0 || paramSource == SourceType.DEFAULT ||
 				SymbolUtilities.isDefaultParameterName(name)) {
 				name = DEFAULT_PARAM_PREFIX;
 				paramSource = SourceType.DEFAULT;
@@ -2561,7 +2564,7 @@ public class FunctionDB extends DatabaseObject implements Function {
 		if (name == null || Function.UNKNOWN_CALLING_CONVENTION_STRING.equals(name)) {
 			return null;
 		}
-		FunctionManager functionMgr = manager;
+		FunctionManager functionMgr = getFunctionManager();
 		if (Function.DEFAULT_CALLING_CONVENTION_STRING.equals(name)) {
 			return functionMgr.getDefaultCallingConvention();
 		}
@@ -2841,7 +2844,7 @@ public class FunctionDB extends DatabaseObject implements Function {
 			// Get a list of all tag records that map to our function.
 			FunctionTagManagerDB tagManager =
 				(FunctionTagManagerDB) manager.getFunctionTagManager();
-			tags = tagManager.getFunctionTagsByFunctionID(key);
+			tags = tagManager.getFunctionTagsByFunctionID(getID());
 		}
 		catch (IOException e) {
 			manager.dbError(e);
@@ -2866,8 +2869,8 @@ public class FunctionDB extends DatabaseObject implements Function {
 				tag = tagManager.createFunctionTag(name, "");
 			}
 
-			if (!tagManager.isTagApplied(key, tag.getId())) {
-				tagManager.applyFunctionTag(key, tag.getId());
+			if (!tagManager.isTagApplied(getID(), tag.getId())) {
+				tagManager.applyFunctionTag(getID(), tag.getId());
 
 				Address addr = getEntryPoint();
 				program.setChanged(ChangeManager.DOCR_TAG_ADDED_TO_FUNCTION, addr, addr, tag, tag);
@@ -2899,7 +2902,7 @@ public class FunctionDB extends DatabaseObject implements Function {
 
 			FunctionTagManagerDB tagManager =
 				(FunctionTagManagerDB) manager.getFunctionTagManager();
-			boolean removed = tagManager.removeFunctionTag(key, tag.getId());
+			boolean removed = tagManager.removeFunctionTag(getID(), tag.getId());
 
 			if (removed) {
 				Address addr = getEntryPoint();

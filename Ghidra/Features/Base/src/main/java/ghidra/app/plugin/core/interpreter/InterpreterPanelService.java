@@ -27,6 +27,6 @@ public interface InterpreterPanelService {
 	 * @param visible True if the panel should be visible when created; otherwise, false.
 	 * @return The interpreter console that corresponds to the panel.
 	 */
-    InterpreterConsole createInterpreterPanel(InterpreterConnection interpreter,
-                                              boolean visible);
+	public InterpreterConsole createInterpreterPanel(InterpreterConnection interpreter,
+			boolean visible);
 }

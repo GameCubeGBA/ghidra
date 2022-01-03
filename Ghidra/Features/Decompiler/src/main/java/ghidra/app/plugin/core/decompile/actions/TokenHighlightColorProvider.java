@@ -30,5 +30,5 @@ public interface TokenHighlightColorProvider {
 	 * @param token the token
 	 * @return the color
 	 */
-    Color getColor(ClangToken token);
+	public Color getColor(ClangToken token);
 }

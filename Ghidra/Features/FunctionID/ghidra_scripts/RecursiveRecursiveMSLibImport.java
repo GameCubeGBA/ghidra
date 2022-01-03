@@ -35,8 +35,8 @@ import ghidra.util.exception.*;
 import ghidra.util.task.TaskMonitor;
 
 public class RecursiveRecursiveMSLibImport extends GhidraScript {
-	static final Predicate<Loader> LOADER_FILTER = new SingleLoaderFilter(MSCoffLoader.class);
-	static final LoadSpecChooser LOADSPEC_CHOOSER = new CsHintLoadSpecChooser("windows");
+	final static Predicate<Loader> LOADER_FILTER = new SingleLoaderFilter(MSCoffLoader.class);
+	final static LoadSpecChooser LOADSPEC_CHOOSER = new CsHintLoadSpecChooser("windows");
 
 	@Override
 	protected void run() throws Exception {

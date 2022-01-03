@@ -456,7 +456,7 @@ public class DataTypeWriter {
 		sb.append(compositeType + " " + composite.getDisplayName() + " {");
 
 		String descrip = composite.getDescription();
-		if (descrip != null && !descrip.isEmpty()) {
+		if (descrip != null && descrip.length() > 0) {
 			sb.append(" " + comment(descrip));
 		}
 		sb.append(EOL);
@@ -480,7 +480,7 @@ public class DataTypeWriter {
 		sb.append(annotator.getPrefix(composite, component));
 
 		String fieldName = component.getFieldName();
-		if (fieldName == null || fieldName.isEmpty()) {
+		if (fieldName == null || fieldName.length() == 0) {
 			fieldName = component.getDefaultFieldName();
 		}
 
@@ -493,7 +493,7 @@ public class DataTypeWriter {
 		sb.append(annotator.getSuffix(composite, component));
 
 		String comment = component.getComment();
-		if (comment != null && !comment.isEmpty()) {
+		if (comment != null && comment.length() > 0) {
 			sb.append(" " + comment(comment));
 		}
 		sb.append(EOL);
@@ -540,7 +540,7 @@ public class DataTypeWriter {
 			}
 			else {
 				componentString = getDataTypePrefix(dataType) + dataType.getDisplayName();
-				if (!name.isEmpty()) {
+				if (name.length() != 0) {
 					componentString += " " + name;
 				}
 			}
@@ -577,7 +577,7 @@ public class DataTypeWriter {
 
 		writer.write("typedef enum " + enumName + " " + "{");
 		String description = enumm.getDescription();
-		if (description != null && !description.isEmpty()) {
+		if (description != null && description.length() != 0) {
 			writer.write(" " + comment(description));
 		}
 		writer.write(EOL);
@@ -814,7 +814,9 @@ public class DataTypeWriter {
 		}
 		if (functionPointerArrayType instanceof Pointer) {
 			Pointer p = (Pointer) functionPointerArrayType;
-            sb.append("*".repeat(Math.max(0, getPointerDepth(p))));
+			for (int i = 0; i < getPointerDepth(p); i++) {
+				sb.append('*');
+			}
 			if (name != null) {
 				sb.append(' ');
 			}
@@ -828,7 +830,7 @@ public class DataTypeWriter {
 		if (name != null) {
 			sb.append(name);
 		}
-		if (!arrayDecorations.isEmpty()) {
+		if (arrayDecorations.length() != 0) {
 			sb.append(arrayDecorations);
 		}
 		sb.append(")");
@@ -840,7 +842,7 @@ public class DataTypeWriter {
 			return getFunctionPointerString((FunctionDefinition) baseReturnType, sb.toString(),
 				returnType, writeEnabled, monitor);
 		}
-		return returnType.getDisplayName() + " " + sb;
+		return returnType.getDisplayName() + " " + sb.toString();
 	}
 
 	private String getParameterListString(FunctionDefinition fd, boolean includeParamNames,

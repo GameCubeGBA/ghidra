@@ -30,7 +30,7 @@ dependencies {
 
 	api project(":GraphServices")
    
-   	testImplementation "org.jmockit:jmockit:1.49"
+   	testImplementation "org.jmockit:jmockit:1.44"
     
 	helpPath project(path: ":Base", configuration: 'helpPath')
 }

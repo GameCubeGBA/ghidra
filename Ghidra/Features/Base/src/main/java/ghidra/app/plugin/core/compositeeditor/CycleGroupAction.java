@@ -26,7 +26,7 @@ import ghidra.program.model.data.CycleGroup;
  */
 public class CycleGroupAction extends CompositeEditorTableAction {
 
-	private static final String GROUP_NAME = DATA_ACTION_GROUP;
+	private final static String GROUP_NAME = DATA_ACTION_GROUP;
 	private CycleGroup cycleGroup;
 
 	public CycleGroupAction(CompositeEditorProvider provider, CycleGroup cycleGroup) {

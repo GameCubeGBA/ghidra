@@ -315,8 +315,11 @@ public class ArchivePlugin extends Plugin implements FrontEndOnly, ProjectListen
 		String format = entry.getName();
 		jarIn.close();
 
-        return format.equalsIgnoreCase(ArchivePlugin.JAR_VERSION_TAG);
-    }
+		if (format.equalsIgnoreCase(ArchivePlugin.JAR_VERSION_TAG)) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Gets the project name for the indicated project archive file.

@@ -26,9 +26,9 @@ import ghidra.util.exception.DuplicateNameException;
 import java.io.IOException;
 
 public class ObjectiveC2_ImageInfo implements StructConverter {
-	public static final int OBJC_IMAGE_IS_REPLACEMENT = 1 << 0;
-	public static final int OBJC_IMAGE_SUPPORTS_GC    = 1 << 1;
-	public static final int OBJC_IMAGE_REQUIRES_GC    = 1 << 2;
+	public final static int OBJC_IMAGE_IS_REPLACEMENT = 1 << 0;
+	public final static int OBJC_IMAGE_SUPPORTS_GC    = 1 << 1;
+	public final static int OBJC_IMAGE_REQUIRES_GC    = 1 << 2;
 
 	private ObjectiveC2_State _state;
 	private long _index;
@@ -77,7 +77,7 @@ public class ObjectiveC2_ImageInfo implements StructConverter {
 	}
 
 	public void applyTo() throws Exception {
-		Address address = ObjectiveC1_Utilities.toAddress(_state.program, _index);
+		Address address = ObjectiveC1_Utilities.toAddress(_state.program, getIndex());
 		try {
 			ObjectiveC1_Utilities.applyData(_state.program, toDataType(), address);
 		}

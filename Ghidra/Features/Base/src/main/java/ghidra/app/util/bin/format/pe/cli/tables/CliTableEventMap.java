@@ -31,7 +31,8 @@ public class CliTableEventMap extends CliAbstractTable {
 		public int eventIndex;
 		
 		public CliEventMapRow(int parentIndex, int eventIndex) {
-            this.parentIndex = parentIndex;
+			super();
+			this.parentIndex = parentIndex;
 			this.eventIndex = eventIndex;
 		}
 

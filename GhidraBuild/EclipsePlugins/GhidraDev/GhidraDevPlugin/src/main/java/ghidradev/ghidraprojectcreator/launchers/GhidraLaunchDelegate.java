@@ -105,7 +105,7 @@ public class GhidraLaunchDelegate extends JavaLaunchDelegate {
 		wc.setAttribute(IJavaLaunchConfigurationConstants.ATTR_VM_ARGUMENTS, vmArgs);
 
 		// Handle special debug mode tasks
-		if ("debug".equals(mode)) {
+		if (mode.equals("debug")) {
 			handleDebugMode();
 		}
 
@@ -124,20 +124,20 @@ public class GhidraLaunchDelegate extends JavaLaunchDelegate {
 	 * @throws CoreException if there was an Eclipse-related problem with getting the dependencies.
 	 */
 	private static String getProjectDependencyDirs(IJavaProject javaProject) throws CoreException {
-		StringBuilder paths = new StringBuilder();
+		String paths = "";
 		for (IClasspathEntry entry : javaProject.getRawClasspath()) {
 			if (entry.getEntryKind() == IClasspathEntry.CPE_PROJECT) {
-				if (paths.length() > 0) {
-					paths.append(File.pathSeparator);
+				if (!paths.isEmpty()) {
+					paths += File.pathSeparator;
 				}
 				IResource resource =
 					ResourcesPlugin.getWorkspace().getRoot().findMember(entry.getPath());
 				if (resource != null) {
-					paths.append(resource.getLocation());
+					paths += resource.getLocation();
 				}
 			}
 		}
-		return paths.toString();
+		return paths;
 	}
 
 	/**

@@ -29,7 +29,7 @@ import ghidra.util.task.TaskMonitor;
 
 public abstract class ArtImageSections {
 
-	public static final int UNSUPPORTED_SECTION = -1;
+	public final static int UNSUPPORTED_SECTION = -1;
 
 	protected ArtHeader header;
 
@@ -202,40 +202,40 @@ public abstract class ArtImageSections {
 			Address address =
 				program.getMinAddress().getNewAddress(header.getImageBegin() + section.getOffset());
 
-            for (ArtField artField : fieldList) {
-                monitor.checkCanceled();
-                ArtField field = artField;
-                DataType dataType = field.toDataType();
-                program.getListing().createData(address, dataType);
+			for (int i = 0; i < fieldList.size(); ++i) {
+				monitor.checkCanceled();
+				ArtField field = fieldList.get(i);
+				DataType dataType = field.toDataType();
+				program.getListing().createData(address, dataType);
 
-                String comment =
-                        "Declaring Class: 0x" + Integer.toHexString(field.getDeclaringClass());
-                program.getListing().setComment(address, CodeUnit.PLATE_COMMENT, comment);
+				String comment =
+					"Declaring Class: 0x" + Integer.toHexString(field.getDeclaringClass());
+				program.getListing().setComment(address, CodeUnit.PLATE_COMMENT, comment);
 
-                address = address.add(dataType.getLength());
+				address = address.add(dataType.getLength());
 
-                monitor.incrementProgress(1);
-            }
+				monitor.incrementProgress(1);
+			}
 		}
 
 		if (section.getSize() > 0) {
 			Address address =
 				program.getMinAddress().getNewAddress(header.getImageBegin() + section.getOffset());
-            for (ArtFieldGroup artFieldGroup : fieldGroupList) {
-                monitor.checkCanceled();
-                ArtFieldGroup fieldGroup = artFieldGroup;
-                DataType dataType = fieldGroup.toDataType();
-                program.getListing().createData(address, dataType);
-                if (fieldGroup.getFieldCount() > 0) {
-                    ArtField artField = fieldGroup.getFieldList().get(0);
-                    String comment =
-                            "Declaring Class: 0x" + Integer.toHexString(artField.getDeclaringClass());
-                    program.getListing().setComment(address, CodeUnit.PLATE_COMMENT, comment);
-                }
-                address = address.add(dataType.getLength());
+			for (int i = 0; i < fieldGroupList.size(); ++i) {
+				monitor.checkCanceled();
+				ArtFieldGroup fieldGroup = fieldGroupList.get(i);
+				DataType dataType = fieldGroup.toDataType();
+				program.getListing().createData(address, dataType);
+				if (fieldGroup.getFieldCount() > 0) {
+					ArtField artField = fieldGroup.getFieldList().get(0);
+					String comment =
+						"Declaring Class: 0x" + Integer.toHexString(artField.getDeclaringClass());
+					program.getListing().setComment(address, CodeUnit.PLATE_COMMENT, comment);
+				}
+				address = address.add(dataType.getLength());
 
-                monitor.incrementProgress(1);
-            }
+				monitor.incrementProgress(1);
+			}
 		}
 	}
 
@@ -253,41 +253,41 @@ public abstract class ArtImageSections {
 		if (section.getSize() > 0) {
 			Address address =
 				program.getMinAddress().getNewAddress(header.getImageBegin() + section.getOffset());
-            for (ArtMethod artMethod : methodList) {
-                monitor.checkCanceled();
+			for (int i = 0; i < methodList.size(); ++i) {
+				monitor.checkCanceled();
 
-                ArtMethod method = artMethod;
-                DataType dataType = method.toDataType();
-                program.getListing().createData(address, dataType);
-                String comment =
-                        "Declaring Class: 0x" + Integer.toHexString(method.getDeclaringClass());
-                program.getListing().setComment(address, CodeUnit.PLATE_COMMENT, comment);
+				ArtMethod method = methodList.get(i);
+				DataType dataType = method.toDataType();
+				program.getListing().createData(address, dataType);
+				String comment =
+					"Declaring Class: 0x" + Integer.toHexString(method.getDeclaringClass());
+				program.getListing().setComment(address, CodeUnit.PLATE_COMMENT, comment);
 
-                address = address.add(dataType.getLength());
+				address = address.add(dataType.getLength());
 
-                monitor.incrementProgress(1);
-            }
+				monitor.incrementProgress(1);
+			}
 		}
 
 		if (section.getSize() > 0) {
 			Address address =
 				program.getMinAddress().getNewAddress(header.getImageBegin() + section.getOffset());
-            for (ArtMethodGroup artMethodGroup : methodGroupList) {
-                monitor.checkCanceled();
+			for (int i = 0; i < methodGroupList.size(); ++i) {
+				monitor.checkCanceled();
 
-                ArtMethodGroup methodGroup = artMethodGroup;
-                DataType dataType = methodGroup.toDataType();
-                program.getListing().createData(address, dataType);
-                if (methodGroup.getMethodCount() > 0) {
-                    ArtMethod artMethod = methodGroup.getMethodList().get(0);
-                    String comment =
-                            "Declaring Class: 0x" + Integer.toHexString(artMethod.getDeclaringClass());
-                    program.getListing().setComment(address, CodeUnit.PLATE_COMMENT, comment);
-                }
-                address = address.add(dataType.getLength());
+				ArtMethodGroup methodGroup = methodGroupList.get(i);
+				DataType dataType = methodGroup.toDataType();
+				program.getListing().createData(address, dataType);
+				if (methodGroup.getMethodCount() > 0) {
+					ArtMethod artMethod = methodGroup.getMethodList().get(0);
+					String comment =
+						"Declaring Class: 0x" + Integer.toHexString(artMethod.getDeclaringClass());
+					program.getListing().setComment(address, CodeUnit.PLATE_COMMENT, comment);
+				}
+				address = address.add(dataType.getLength());
 
-                monitor.incrementProgress(1);
-            }
+				monitor.incrementProgress(1);
+			}
 		}
 	}
 

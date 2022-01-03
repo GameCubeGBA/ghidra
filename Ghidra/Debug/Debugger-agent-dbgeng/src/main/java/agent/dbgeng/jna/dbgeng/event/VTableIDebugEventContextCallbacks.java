@@ -61,30 +61,30 @@ public class VTableIDebugEventContextCallbacks extends Structure {
 		return FIELDS;
 	}
 
-	public interface GetInterestMaskCallback extends StdCallLibrary.StdCallCallback {
+	public static interface GetInterestMaskCallback extends StdCallLibrary.StdCallCallback {
 		HRESULT invoke(Pointer thisPointer, ULONGByReference Mask);
 	}
 
-	public interface BreakpointCallback extends StdCallLibrary.StdCallCallback {
+	public static interface BreakpointCallback extends StdCallLibrary.StdCallCallback {
 		HRESULT invoke(Pointer thisPointer, WrapIDebugBreakpoint2.ByReference Bp, Pointer Context,
 				ULONG ContextSize);
 	}
 
-	public interface ExceptionCallback extends StdCallLibrary.StdCallCallback {
+	public static interface ExceptionCallback extends StdCallLibrary.StdCallCallback {
 		HRESULT invoke(Pointer thisPointer, EXCEPTION_RECORD64.ByReference Exception,
 				ULONG FirstChance, Pointer Context, ULONG ContextSize);
 	}
 
-	public interface CreateThreadCallback extends StdCallLibrary.StdCallCallback {
+	public static interface CreateThreadCallback extends StdCallLibrary.StdCallCallback {
 		HRESULT invoke(Pointer thisPointer, ULONGLONG Handle, ULONGLONG DataOffset,
 				ULONGLONG StartOffset, Pointer Context, ULONG ContextSize);
 	}
 
-	public interface ExitThreadCallback extends StdCallLibrary.StdCallCallback {
+	public static interface ExitThreadCallback extends StdCallLibrary.StdCallCallback {
 		HRESULT invoke(Pointer thisPointer, ULONG ExitCode, Pointer Context, ULONG ContextSize);
 	}
 
-	public interface CreateProcessCallback extends StdCallLibrary.StdCallCallback {
+	public static interface CreateProcessCallback extends StdCallLibrary.StdCallCallback {
 		HRESULT invoke(Pointer thisPointer, ULONGLONG ImageFileHandle, ULONGLONG Handle,
 				ULONGLONG BaseOffset, ULONG ModuleSize, WString ModuleName, WString ImageName,
 				ULONG CheckSum, ULONG TimeDateStamp, ULONGLONG InitialThreadHandle,
@@ -92,41 +92,41 @@ public class VTableIDebugEventContextCallbacks extends Structure {
 				ULONG ContextSize);
 	}
 
-	public interface ExitProcessCallback extends StdCallLibrary.StdCallCallback {
+	public static interface ExitProcessCallback extends StdCallLibrary.StdCallCallback {
 		HRESULT invoke(Pointer thisPointer, ULONG ExitCode, Pointer Context, ULONG ContextSize);
 	}
 
-	public interface LoadModuleCallback extends StdCallLibrary.StdCallCallback {
+	public static interface LoadModuleCallback extends StdCallLibrary.StdCallCallback {
 		HRESULT invoke(Pointer thisPointer, ULONGLONG ImageFileHandle, ULONGLONG BaseOffset,
 				ULONG ModuleSize, WString ModuleName, WString ImageName, ULONG CheckSum,
 				ULONG TimeDateStamp, Pointer Context, ULONG ContextSize);
 	}
 
-	public interface UnloadModuleCallback extends StdCallLibrary.StdCallCallback {
+	public static interface UnloadModuleCallback extends StdCallLibrary.StdCallCallback {
 		HRESULT invoke(Pointer thisPointer, WString ImageBaseName, ULONGLONG BaseOffset,
 				Pointer Context, ULONG ContextSize);
 	}
 
-	public interface SystemErrorCallback extends StdCallLibrary.StdCallCallback {
+	public static interface SystemErrorCallback extends StdCallLibrary.StdCallCallback {
 		HRESULT invoke(Pointer thisPointer, ULONG Error, ULONG Level, Pointer Context,
 				ULONG ContextSize);
 	}
 
-	public interface SessionStatusCallback extends StdCallLibrary.StdCallCallback {
+	public static interface SessionStatusCallback extends StdCallLibrary.StdCallCallback {
 		HRESULT invoke(Pointer thisPointer, ULONG Status);
 	}
 
-	public interface ChangeDebuggeeStateCallback extends StdCallLibrary.StdCallCallback {
+	public static interface ChangeDebuggeeStateCallback extends StdCallLibrary.StdCallCallback {
 		HRESULT invoke(Pointer thisPointer, ULONG Flags, ULONGLONG Argument, Pointer Context,
 				ULONG ContextSize);
 	}
 
-	public interface ChangeEngineStateCallback extends StdCallLibrary.StdCallCallback {
+	public static interface ChangeEngineStateCallback extends StdCallLibrary.StdCallCallback {
 		HRESULT invoke(Pointer thisPointer, ULONG Flags, ULONGLONG Argument, Pointer Context,
 				ULONG ContextSize);
 	}
 
-	public interface ChangeSymbolStateCallback extends StdCallLibrary.StdCallCallback {
+	public static interface ChangeSymbolStateCallback extends StdCallLibrary.StdCallCallback {
 		HRESULT invoke(Pointer thisPointer, ULONG Flags, ULONGLONG Argument);
 	}
 }

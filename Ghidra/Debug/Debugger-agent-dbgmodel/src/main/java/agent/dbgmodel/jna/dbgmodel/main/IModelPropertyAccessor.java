@@ -25,7 +25,7 @@ import agent.dbgmodel.jna.dbgmodel.IUnknownEx;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IModelPropertyAccessor extends IUnknownEx {
-	IID IID_IMODEL_PROPERTY_ACCESSOR = new IID("5A0C63D9-0526-42b8-960C-9516A3254C85");
+	final IID IID_IMODEL_PROPERTY_ACCESSOR = new IID("5A0C63D9-0526-42b8-960C-9516A3254C85");
 
 	enum VTIndices implements VTableIndex {
 		GET_VALUE, //

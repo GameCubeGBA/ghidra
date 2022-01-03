@@ -33,8 +33,8 @@ import ghidra.test.ProjectTestUtils;
  */
 public class RunToolTest extends AbstractGhidraHeadedIntegrationTest {
 
-	private static final String DIRECTORY_NAME = AbstractGTest.getTestDirectoryPath();
-	private static final String TOOL_NAME = "TestTool";
+	private final static String DIRECTORY_NAME = AbstractGTest.getTestDirectoryPath();
+	private final static String TOOL_NAME = "TestTool";
 
 	private Project project;
 	private PluginTool runningTool;
@@ -48,10 +48,13 @@ public class RunToolTest extends AbstractGhidraHeadedIntegrationTest {
 
 	@After
 	public void tearDown() throws Exception {
-		runSwing(() -> {
-            project.save();
-            project.close();
-        });
+		runSwing(new Runnable() {
+			@Override
+			public void run() {
+				project.save();
+				project.close();
+			}
+		});
 		ProjectTestUtils.deleteProject(DIRECTORY_NAME, PROJECT_NAME);
 	}
 
@@ -70,15 +73,23 @@ public class RunToolTest extends AbstractGhidraHeadedIntegrationTest {
 		ProjectTestUtils.deleteTool(project, TOOL_NAME);
 
 		// Create tool and save tool config
-		runSwing(() -> {
-            tool = ProjectTestUtils.getTool(project, null);
-            tool.setToolName(TOOL_NAME);
-        });
+		runSwing(new Runnable() {
+			@Override
+			public void run() {
+				tool = ProjectTestUtils.getTool(project, null);
+				tool.setToolName(TOOL_NAME);
+			}
+		});
 
 		try {
 
 			final ToolTemplate toolConfig = ProjectTestUtils.saveTool(project, tool);
-			runSwing(() -> tool.close());
+			runSwing(new Runnable() {
+				@Override
+				public void run() {
+					tool.close();
+				}
+			});
 
 			//
 			// TEST 1: launch the tool without data
@@ -92,18 +103,29 @@ public class RunToolTest extends AbstractGhidraHeadedIntegrationTest {
 			// use the first one for the test
 			final Workspace activeWorkspace = workspaces[0];
 
-			runSwing(() -> {
-                runningTool = activeWorkspace.runTool(toolConfig);
-            });
+			runSwing(new Runnable() {
+				@Override
+				public void run() {
+					runningTool = activeWorkspace.runTool(toolConfig);
+				}
+			});
 			assertNotNull(runningTool);
-			runSwing(() -> runningTool.close());
+			runSwing(new Runnable() {
+				@Override
+				public void run() {
+					runningTool.close();
+				}
+			});
 
 		}
 		finally {
 			// Don't leave the tool in the tool chest
-			runSwing(() -> {
-                ProjectTestUtils.deleteTool(project, TOOL_NAME);
-            });
+			runSwing(new Runnable() {
+				@Override
+				public void run() {
+					ProjectTestUtils.deleteTool(project, TOOL_NAME);
+				}
+			});
 		}
 
 	}

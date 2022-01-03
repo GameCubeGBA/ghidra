@@ -41,10 +41,10 @@ public class MakeFunctionsScript extends GhidraScript {
 					"Please re-enter your function byte pattern in separated by spaces");
 		}
 		String textBytes = "";
-        for (byte functionByte : functionBytes) {
-            textBytes = textBytes.concat(toHexString(functionByte, true, false));
-            textBytes = textBytes.concat(" ");
-        }
+		for (int i = 0; i < functionBytes.length; i++) {
+			textBytes = textBytes.concat(toHexString(functionBytes[i], true, false));
+			textBytes = textBytes.concat(" ");
+		}
 		println("Searching for " + textBytes + ". . .");
 
 		MemoryBlock[] memoryBlock = currentProgram.getMemory().getBlocks();
@@ -68,42 +68,45 @@ public class MakeFunctionsScript extends GhidraScript {
 		}
 		int foundCount = 0;
 		int madeCount = 0;
-        for (MemoryBlock block : memoryBlock) {
-            if (block.isExecute()) {
-                boolean keepSearching = true;
-                Address start = block.getStart();
-                Address end = block.getEnd();
+		for (int i = 0; i < memoryBlock.length; i++) {
+			if (memoryBlock[i].isExecute()) {
+				boolean keepSearching = true;
+				Address start = memoryBlock[i].getStart();
+				Address end = memoryBlock[i].getEnd();
 
-                while ((keepSearching) && (!monitor.isCancelled())) {
-                    Address found =
-                            memory.findBytes(start, end, functionBytes, null, true, monitor);
-                    if ((found != null) && block.contains(found)) {
-                        foundCount++;
-                        Function testFunc = getFunctionContaining(found);
-                        if (testFunc == null) {
-                            boolean didDisassemble = disassemble(found);
-                            if (didDisassemble) {
-                                Function func = createFunction(found, null);
-                                if (func != null) {
-                                    println("Made function at address: " + found.toString());
-                                    madeCount++;
-                                } else {
-                                    println("***Function could not be made at address: " +
-                                            found.toString());
-                                }
-                            }
-                        } else {
-                            println("Function already exists at address: " + found.toString());
-                        }
-                        start = found.add(4);
-                    } else {
-                        keepSearching = false;
-                    }
-                }
+				while ((keepSearching) && (!monitor.isCancelled())) {
+					Address found =
+						memory.findBytes(start, end, functionBytes, null, true, monitor);
+					if ((found != null) && memoryBlock[i].contains(found)) {
+						foundCount++;
+						Function testFunc = getFunctionContaining(found);
+						if (testFunc == null) {
+							boolean didDisassemble = disassemble(found);
+							if (didDisassemble) {
+								Function func = createFunction(found, null);
+								if (func != null) {
+									println("Made function at address: " + found.toString());
+									madeCount++;
+								}
+								else {
+									println("***Function could not be made at address: " +
+										found.toString());
+								}
+							}
+						}
+						else {
+							println("Function already exists at address: " + found.toString());
+						}
+						start = found.add(4);
+					}
+					else {
+						keepSearching = false;
+					}
+				}
 
-            }
+			}
 
-        }
+		}
 		if (foundCount == 0) {
 			println("No functions found with given byte pattern.");
 			return;

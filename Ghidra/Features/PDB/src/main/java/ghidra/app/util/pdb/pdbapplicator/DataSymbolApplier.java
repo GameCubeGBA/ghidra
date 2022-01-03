@@ -216,8 +216,11 @@ public class DataSymbolApplier extends MsSymbolApplier {
 
 		// All forms of Undefined data are replaceable
 		// TODO: maybe it should check the length of the data type before putting it down.
-        return Undefined.isUndefined(dataType);
-    }
+		if (Undefined.isUndefined(dataType)) {
+			return true;
+		}
+		return false;
+	}
 
 	private boolean isEquivalent(Data existingData, int existingDataTypeLength,
 			DataType newDataType) {
@@ -226,7 +229,9 @@ public class DataSymbolApplier extends MsSymbolApplier {
 				Array array = (Array) newDataType;
 				DataType arrayDataType = array.getDataType();
 				if (arrayDataType instanceof ArrayStringable) {
-                    return array.getLength() == existingDataTypeLength;
+					if (array.getLength() == existingDataTypeLength) {
+						return true;
+					}
 				}
 			}
 		}

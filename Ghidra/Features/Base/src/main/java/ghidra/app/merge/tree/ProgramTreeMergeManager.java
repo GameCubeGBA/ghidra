@@ -38,8 +38,8 @@ import ghidra.util.task.TaskMonitor;
 public class ProgramTreeMergeManager implements MergeResolver {
 
 	private static String[] PROGRAM_TREE_PHASE = new String[] { "Program Trees" };
-	static final String NAME_PANEL_ID = "Name Panel";
-	static final String CONFLICTS_PANEL_ID = "Name/Content Conflicts Panel";
+	final static String NAME_PANEL_ID = "Name Panel";
+	final static String CONFLICTS_PANEL_ID = "Name/Content Conflicts Panel";
 
 	private Program resultProgram;
 	private Program originalProgram;

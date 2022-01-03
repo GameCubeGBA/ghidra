@@ -174,7 +174,7 @@ public class DataGatheringParams {
 		}
 		contextRegsCSV = contextRegsCSV.trim();
 		//literal string null: this can be a value in a .properties file
-		if ((contextRegsCSV.isEmpty()) || "null".equals(contextRegsCSV)) {
+		if ((contextRegsCSV.isEmpty()) || contextRegsCSV.equals("null")) {
 			return contextRegisters;
 		}
 

@@ -42,25 +42,25 @@ import ghidra.util.bean.field.AnnotatedTextFieldElement;
   */
 public class EolCommentFieldFactory extends FieldFactory {
 	public static final String FIELD_NAME = "EOL Comment";
-	private static final String GROUP_TITLE = "EOL Comments Field";
+	private final static String GROUP_TITLE = "EOL Comments Field";
 	private static final String SEMICOLON_PREFIX = "; ";
-	public static final String ENABLE_WORD_WRAP_MSG =
+	public final static String ENABLE_WORD_WRAP_MSG =
 		GROUP_TITLE + Options.DELIMITER + "Enable Word Wrapping";
-	public static final String MAX_DISPLAY_LINES_MSG =
+	public final static String MAX_DISPLAY_LINES_MSG =
 		GROUP_TITLE + Options.DELIMITER + "Maximum Lines To Display";
-	public static final String ENABLE_SHOW_SEMICOLON_MSG =
+	public final static String ENABLE_SHOW_SEMICOLON_MSG =
 		GROUP_TITLE + Options.DELIMITER + "Show Semicolon at Start of Each Line";
-	public static final String ENABLE_ALWAYS_SHOW_REPEATABLE_MSG =
+	public final static String ENABLE_ALWAYS_SHOW_REPEATABLE_MSG =
 		GROUP_TITLE + Options.DELIMITER + "Always Show the Repeatable Comment";
-	public static final String ENABLE_ALWAYS_SHOW_REF_REPEATABLE_MSG =
+	public final static String ENABLE_ALWAYS_SHOW_REF_REPEATABLE_MSG =
 		GROUP_TITLE + Options.DELIMITER + "Always Show the Referenced Repeatable Comments";
-	public static final String ENABLE_ALWAYS_SHOW_AUTOMATIC_MSG =
+	public final static String ENABLE_ALWAYS_SHOW_AUTOMATIC_MSG =
 		GROUP_TITLE + Options.DELIMITER + "Always Show the Automatic Comment";
 	public static final String USE_ABBREVIATED_AUTOMITIC_COMMENT_MSG =
 		GROUP_TITLE + Options.DELIMITER + "Use Abbreviated Automatic Comments";
 	public static final String SHOW_FUNCTION_AUTOMITIC_COMMENT_MSG =
 		GROUP_TITLE + Options.DELIMITER + "Show Function Reference Automatic Comments";
-	public static final String ENABLE_PREPEND_REF_ADDRESS_MSG =
+	public final static String ENABLE_PREPEND_REF_ADDRESS_MSG =
 		GROUP_TITLE + Options.DELIMITER + "Prepend the Address to Each Referenced Comment";
 	public static final Color DEFAULT_COLOR = Color.BLUE;
 

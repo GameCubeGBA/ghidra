@@ -119,7 +119,7 @@ public class ApplicationKeyManagerFactory {
 	private static String prunePath(String path) {
 		if (path != null) {
 			path = path.trim();
-			if (path.isEmpty()) {
+			if (path.length() == 0) {
 				path = null;
 			}
 		}
@@ -202,7 +202,7 @@ public class ApplicationKeyManagerFactory {
 	 * (NOTE: this is intended for server use only when client will not be performing
 	 * CA validation).
 	 */
-    public static synchronized void setDefaultIdentity(X500Principal identity) {
+	public synchronized static void setDefaultIdentity(X500Principal identity) {
 		defaultIdentity = identity;
 		getKeyManagerWrapper().invalidateKey();
 	}
@@ -213,7 +213,7 @@ public class ApplicationKeyManagerFactory {
 	 * if user forgets keystore password or other keystore problem.
 	 * @return true if key manager initialized, otherwise false
 	 */
-    public static synchronized boolean initialize() {
+	public synchronized static boolean initialize() {
 		try {
 			return getKeyManagerWrapper().init();
 		}
@@ -225,7 +225,7 @@ public class ApplicationKeyManagerFactory {
 	/**
 	 * Invalidate the key managers associated with this factory
 	 */
-    public static synchronized void invalidateKeyManagers() {
+	public synchronized static void invalidateKeyManagers() {
 		getKeyManagerWrapper().invalidateKey();
 	}
 
@@ -549,7 +549,7 @@ public class ApplicationKeyManagerFactory {
 
 			ProtectedKeyStoreData keystoreData = null;
 			try {
-				if (newKeystorePath != null && !newKeystorePath.isEmpty()) {
+				if (newKeystorePath != null && newKeystorePath.length() != 0) {
 					keystoreData = getProtectedKeyStoreData(newKeystorePath);
 				}
 				else if (defaultIdentity != null) {

@@ -21,13 +21,13 @@ import ghidra.program.model.address.AddressSetView;
 
 public interface VTProgramCorrelatorInfo {
 
-	String getName();
+	public String getName();
 
-	String getCorrelatorClassName();
+	public String getCorrelatorClassName();
 
-	Options getOptions();
+	public Options getOptions();
 
-	AddressSetView getDestinationAddressSet();
+	public AddressSetView getDestinationAddressSet();
 
-	AddressSetView getSourceAddressSet();
+	public AddressSetView getSourceAddressSet();
 }

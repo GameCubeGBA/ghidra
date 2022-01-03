@@ -26,7 +26,7 @@ import com.sun.jna.ptr.PointerByReference;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IDebugHostSymbol2 extends IDebugHostSymbol1 {
-	IID IID_IDEBUG_HOST_SYMBOL2 = new IID("21515B67-6720-4257-8A68-077DC944471C");
+	final IID IID_IDEBUG_HOST_SYMBOL2 = new IID("21515B67-6720-4257-8A68-077DC944471C");
 
 	enum VTIndices2 implements VTableIndex {
 		ENUMERATE_CHILDREN_EX, //

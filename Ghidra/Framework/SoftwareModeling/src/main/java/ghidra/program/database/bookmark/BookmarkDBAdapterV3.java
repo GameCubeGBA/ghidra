@@ -171,7 +171,7 @@ public class BookmarkDBAdapterV3 extends BookmarkDBAdapter {
 		while (it.hasNext()) {
 			DBRecord rec = it.next();
 			String cat = rec.getString(V3_CATEGORY_COL);
-			if (cat != null && !cat.isEmpty()) {
+			if (cat != null && cat.length() != 0) {
 				set.add(cat);
 			}
 		}

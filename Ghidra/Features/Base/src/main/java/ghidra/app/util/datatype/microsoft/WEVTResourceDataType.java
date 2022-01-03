@@ -121,37 +121,37 @@ public class WEVTResourceDataType extends DynamicDataType {
 						memBuffer.getAddress().add(tempOffset), comps, tempOffset);
 
 				//Loop over all the Event Provider Descriptors
-                for (Integer providerElementDescriptor : providerElementDescriptors) {
-                    // Loop over all the Event Providers in each Descriptor
-                    for (int i = 0; i < providerElementDescriptor; i++) {
+				for (int j = 0; j < providerElementDescriptors.size(); j++) {
+					// Loop over all the Event Providers in each Descriptor
+					for (int i = 0; i < providerElementDescriptors.get(j); i++) {
 
-                        //get the offset of the current provider element
-                        int lastUsedOffset = tempOffset;
-                        tempOffset = providerElementOffsets.get(currentProviderElement);
+						//get the offset of the current provider element
+						int lastUsedOffset = tempOffset;
+						tempOffset = providerElementOffsets.get(currentProviderElement);
 
-                        if (lastUsedOffset < tempOffset) {
-                            int diff = tempOffset - lastUsedOffset;
-                            ArrayDataType padding =
-                                    new ArrayDataType(ByteDataType.dataType, diff, 1);
-                            tempOffset =
-                                    addComp(padding, diff, "padding",
-                                            memBuffer.getAddress().add(lastUsedOffset), comps,
-                                            lastUsedOffset);
-                        }
+						if (lastUsedOffset < tempOffset) {
+							int diff = tempOffset - lastUsedOffset;
+							ArrayDataType padding =
+								new ArrayDataType(ByteDataType.dataType, diff, 1);
+							tempOffset =
+								addComp(padding, diff, "padding",
+									memBuffer.getAddress().add(lastUsedOffset), comps,
+									lastUsedOffset);
+						}
 
-                        //check to make sure there is a valid signature there
-                        byte[] bytes = new byte[4];
-                        memBuffer.getBytes(bytes, tempOffset);
+						//check to make sure there is a valid signature there
+						byte[] bytes = new byte[4];
+						memBuffer.getBytes(bytes, tempOffset);
 
-                        tempOffset = processProviderElement(bytes, memBuffer, tempOffset, comps);
-                        if (tempOffset < 0) {
-                            Msg.debug(this, "Error processing Provider Element.");
-                            return null;
-                        }
-                        currentProviderElement++;
-                    }
+						tempOffset = processProviderElement(bytes, memBuffer, tempOffset, comps);
+						if (tempOffset < 0) {
+							Msg.debug(this, "Error processing Provider Element.");
+							return null;
+						}
+						currentProviderElement++;
+					}
 
-                }
+				}
 
 			}
 			catch (MemoryAccessException e1) {
@@ -435,10 +435,10 @@ public class WEVTResourceDataType extends DynamicDataType {
 					"Error applying WEVT Resource Data Type - Invalid VMAP or BMAP signature");
 			}
 		}
-        for (Integer mapStringDataOffset : mapStringDataOffsets) {
-            tempOffset = mapStringDataOffset;
-            struct.add(createMapStringStructure(memBuffer, tempOffset));
-        }
+		for (int i = 0; i < mapStringDataOffsets.size(); i++) {
+			tempOffset = mapStringDataOffsets.get(i);
+			struct.add(createMapStringStructure(memBuffer, tempOffset));
+		}
 
 		return struct;
 	}
@@ -545,20 +545,20 @@ public class WEVTResourceDataType extends DynamicDataType {
 			tempOffset += 16;
 		}
 
-        for (Integer channelDataOffset : channelDataOffsets) {
-            if (tempOffset < channelDataOffset) {
-                //if the current offset is less than the next data to be laid down, figure out how much padding is needed and lay it down
-                int diff = channelDataOffset - tempOffset;
-                ArrayDataType padding = new ArrayDataType(ByteDataType.dataType, diff, 1);
-                struct.add(padding.getDataType(), diff, "Padding", "");
-                //then update the current offset to the correct location so that the data can be laid down
-                tempOffset = channelDataOffset;
-            }
-            int channelDataSize = memBuffer.getInt(tempOffset);
-            struct.add(createChannelDataStructure(memBuffer, tempOffset), channelDataSize,
-                    "Channel Data", "");
-            tempOffset += channelDataSize;
-        }
+		for (int i = 0; i < channelDataOffsets.size(); i++) {
+			if (tempOffset < channelDataOffsets.get(i)) {
+				//if the current offset is less than the next data to be laid down, figure out how much padding is needed and lay it down
+				int diff = channelDataOffsets.get(i) - tempOffset;
+				ArrayDataType padding = new ArrayDataType(ByteDataType.dataType, diff, 1);
+				struct.add(padding.getDataType(), diff, "Padding", "");
+				//then update the current offset to the correct location so that the data can be laid down
+				tempOffset = channelDataOffsets.get(i);
+			}
+			int channelDataSize = memBuffer.getInt(tempOffset);
+			struct.add(createChannelDataStructure(memBuffer, tempOffset), channelDataSize,
+				"Channel Data", "");
+			tempOffset += channelDataSize;
+		}
 		return struct;
 	}
 

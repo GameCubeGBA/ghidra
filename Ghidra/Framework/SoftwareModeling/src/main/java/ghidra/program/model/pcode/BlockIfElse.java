@@ -30,7 +30,8 @@ package ghidra.program.model.pcode;
 public class BlockIfElse extends BlockGraph {
 
 	public BlockIfElse() {
-        blocktype = PcodeBlock.IFELSE;
+		super();
+		blocktype = PcodeBlock.IFELSE;
 	}
 
 }

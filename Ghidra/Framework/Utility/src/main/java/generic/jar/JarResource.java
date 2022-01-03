@@ -54,8 +54,8 @@ public class JarResource implements Resource {
 		if (path.startsWith("/")) {
 			path = path.substring(1);
 		}
-		if (path.isEmpty()) {
-			myName = parent.name;
+		if (path.length() == 0) {
+			myName = parent.getName();
 			myNode = parent.node;
 			myPath = parent.path;
 		}
@@ -211,7 +211,7 @@ public class JarResource implements Resource {
 
 	@Override
 	public Resource getResource(String childPath) {
-		if (childPath == null || childPath.isEmpty()) {
+		if (childPath == null || childPath.length() == 0) {
 			return this;
 		}
 		return new JarResource(this, childPath);

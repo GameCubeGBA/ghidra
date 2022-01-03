@@ -23,13 +23,13 @@ import java.util.Arrays;
 
 public class GZipUtil {
 	
-	public static final boolean isGZip(Program program ) {
+	public final static boolean isGZip( Program program ) {
 		ByteProvider provider = new MemoryByteProvider( program.getMemory(), 
 														program.getAddressFactory().getDefaultAddressSpace() );
 		return isGZip( provider );
 	}
 
-	public static final boolean isGZip(ByteProvider provider ) {
+	public final static boolean isGZip( ByteProvider provider ) {
 		try {
 			byte [] bytes = provider.readBytes( 0, GZipConstants.MAGIC_BYTES.length  );
 			return Arrays.equals( bytes, GZipConstants.MAGIC_BYTES );
@@ -39,7 +39,7 @@ public class GZipUtil {
 		return false;
 	}
 
-	public static final boolean isGZip(byte [ ] bytes ) {
+	public final static boolean isGZip( byte [ ] bytes ) {
 		if ( bytes.length >= GZipConstants.MAGIC_BYTES.length ) {
 			return bytes[ 0 ] == GZipConstants.MAGIC_BYTES[ 0 ] && bytes[ 1 ] == GZipConstants.MAGIC_BYTES[ 1 ];
 		}

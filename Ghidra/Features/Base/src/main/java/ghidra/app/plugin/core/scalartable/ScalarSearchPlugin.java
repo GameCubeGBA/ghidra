@@ -54,7 +54,7 @@ import ghidra.util.task.SwingUpdateManager;
 //@formatter:on
 public class ScalarSearchPlugin extends ProgramPlugin implements DomainObjectListener {
 
-	static final String SEARCH_ACTION_NAME = "Search for Scalars";
+	final static String SEARCH_ACTION_NAME = "Search for Scalars";
 
 	private SwingUpdateManager reloadUpdateMgr;
 	private DockingAction searchAction;

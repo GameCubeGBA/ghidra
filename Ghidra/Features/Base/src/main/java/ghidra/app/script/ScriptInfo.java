@@ -433,15 +433,15 @@ public class ScriptInfo {
 	 * @return the script menu path as a string
 	 */
 	public String getMenuPathAsString() {
-		StringBuilder menuPath = new StringBuilder();
+		String menuPath = "";
 		String[] menuPathArr = getMenuPath();
 		for (String path : menuPathArr) {
 			if (menuPath.length() > 0) {
-				menuPath.append("->");
+				menuPath = menuPath + "->";
 			}
-			menuPath.append(path);
+			menuPath = menuPath + path;
 		}
-		return menuPath.toString();
+		return menuPath;
 	}
 
 	/**
@@ -561,18 +561,18 @@ public class ScriptInfo {
 	 * @return true if the script either has compiler errors, or is a duplicate
 	 */
 	public boolean hasErrors() {
-		return isCompileErrors || isDuplicate;
+		return isCompileErrors() || isDuplicate();
 	}
 
 	/**
 	 * @return a generic error message
 	 */
 	public String getErrorMessage() {
-		if (isCompileErrors) {
+		if (isCompileErrors()) {
 			return "Error compiling script (see console)";
 		}
 
-		if (isDuplicate) {
+		if (isDuplicate()) {
 			return "Script is a duplicate of another script";
 		}
 

@@ -90,10 +90,13 @@ public class CreateEnumFromSelectionTest extends AbstractGhidraHeadedIntegration
 	public void tearDown() throws Exception {
 
 		plugin.getEditorManager().dismissEditors(null);// Close all editors that might be open.
-		executeOnSwingWithoutBlocking(() -> {
-            ProgramManager pm = tool.getService(ProgramManager.class);
-            pm.closeProgram();
-        });
+		executeOnSwingWithoutBlocking(new Runnable() {
+			@Override
+			public void run() {
+				ProgramManager pm = tool.getService(ProgramManager.class);
+				pm.closeProgram();
+			}
+		});
 
 		// this handles the save changes dialog and potential analysis dialogs
 		closeAllWindows();
@@ -146,7 +149,12 @@ public class CreateEnumFromSelectionTest extends AbstractGhidraHeadedIntegration
 		assertTrue(action.isEnabledForContext(provider.getActionContext(null)));
 		assertTrue(action.isAddToPopup(provider.getActionContext(null)));
 
-		executeOnSwingWithoutBlocking(() -> DataTypeTestUtils.performAction(action, tree));
+		executeOnSwingWithoutBlocking(new Runnable() {
+			@Override
+			public void run() {
+				DataTypeTestUtils.performAction(action, tree);
+			}
+		});
 
 		Window window = waitForWindow("Name new ENUM");
 		assertNotNull(window);
@@ -241,7 +249,12 @@ public class CreateEnumFromSelectionTest extends AbstractGhidraHeadedIntegration
 		assertTrue(action.isEnabledForContext(provider.getActionContext(null)));
 		assertTrue(action.isAddToPopup(provider.getActionContext(null)));
 
-		executeOnSwingWithoutBlocking(() -> DataTypeTestUtils.performAction(action, tree));
+		executeOnSwingWithoutBlocking(new Runnable() {
+			@Override
+			public void run() {
+				DataTypeTestUtils.performAction(action, tree);
+			}
+		});
 
 		Window window = waitForWindow("Name new ENUM");
 		assertNotNull(window);

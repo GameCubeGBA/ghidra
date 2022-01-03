@@ -86,7 +86,7 @@ public class Range implements Comparable<Range>, Iterable<Integer> {
 	 * @return the size
 	 */
 	public long size() {
-		return (long) max - min + 1;
+		return (long) max - (long) min + 1;
 	}
 
 	@Override

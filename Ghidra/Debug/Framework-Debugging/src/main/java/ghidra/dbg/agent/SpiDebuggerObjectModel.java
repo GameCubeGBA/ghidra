@@ -37,7 +37,7 @@ public interface SpiDebuggerObjectModel extends DebuggerObjectModel {
 		return AsyncUtils.NIL;
 	}
 
-	static CompletableFuture<Object> fetchFreshChild(TargetObject obj, String key) {
+	public static CompletableFuture<Object> fetchFreshChild(TargetObject obj, String key) {
 		if (PathUtils.isIndex(key)) {
 			return obj.fetchElements(true).thenApply(elements -> {
 				return elements.get(PathUtils.parseIndex(key));
@@ -48,8 +48,8 @@ public interface SpiDebuggerObjectModel extends DebuggerObjectModel {
 		});
 	}
 
-	static CompletableFuture<Object> fetchSuccessorValue(TargetObject obj,
-                                                         List<String> path, boolean refresh, boolean followLinks) {
+	public static CompletableFuture<Object> fetchSuccessorValue(TargetObject obj,
+			List<String> path, boolean refresh, boolean followLinks) {
 		if (path.isEmpty()) {
 			return CompletableFuture.completedFuture(obj);
 		}
@@ -90,20 +90,20 @@ public interface SpiDebuggerObjectModel extends DebuggerObjectModel {
 	}
 
 	@Override
-    default CompletableFuture<?> fetchModelValue(List<String> path, boolean refresh) {
+	public default CompletableFuture<?> fetchModelValue(List<String> path, boolean refresh) {
 		return fetchModelRoot().thenCompose(root -> {
 			return fetchSuccessorValue(root, path, refresh, true);
 		});
 	}
 
 	@Override
-    default CompletableFuture<?> fetchModelValue(List<String> path) {
+	public default CompletableFuture<?> fetchModelValue(List<String> path) {
 		return fetchModelValue(path, false);
 	}
 
 	@Override
-    default CompletableFuture<? extends Map<String, ? extends TargetObject>> fetchObjectElements(
-            List<String> path, boolean refresh) {
+	public default CompletableFuture<? extends Map<String, ? extends TargetObject>> fetchObjectElements(
+			List<String> path, boolean refresh) {
 		return fetchModelObject(path).thenCompose(obj -> {
 			if (obj == null) {
 				return AsyncUtils.nil();

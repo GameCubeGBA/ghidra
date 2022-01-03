@@ -101,7 +101,12 @@ public class CondenseAllRepeatingBytes extends GhidraScript {
 							boolean noLabelCollisions = st.hasSymbol(currentAddr);
 							//TODO ?? add check for label collisions? 
 							currentMemoryBlock = currentProgram.getMemory().getBlock(currentAddr);
-                            sameMemoryBlock = currentMemoryBlock.equals(memoryBlock);
+							if(currentMemoryBlock.equals(memoryBlock)){
+								sameMemoryBlock = true;
+							}
+							else{
+								sameMemoryBlock = false;
+							}
 								
 							while((currentAddrExists) && (sameMemoryBlock) && (nextByte == repeatingByte) && (noDataCollisions) && (!noLabelCollisions)){
 								repeatLen++;

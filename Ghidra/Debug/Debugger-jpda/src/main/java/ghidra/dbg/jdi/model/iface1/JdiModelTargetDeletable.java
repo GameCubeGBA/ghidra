@@ -30,6 +30,6 @@ import ghidra.dbg.target.TargetDeletable;
 public interface JdiModelTargetDeletable extends JdiModelTargetObject, TargetDeletable {
 
 	@Override
-    CompletableFuture<Void> delete();
+	public CompletableFuture<Void> delete();
 
 }

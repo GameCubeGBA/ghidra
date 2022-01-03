@@ -33,14 +33,14 @@ import resources.ResourceManager;
  */
 public class InsertUndefinedAction extends CompositeEditorTableAction {
 
-	private static final ImageIcon ICON =
+	private final static ImageIcon ICON =
 		ResourceManager.loadImage("images/Plus.png");
-	public static final String ACTION_NAME = "Insert Undefined Byte";
-	private static final String GROUP_NAME = COMPONENT_ACTION_GROUP;
-	private static final String DESCRIPTION = "Insert an undefined byte before the selection";
+	public final static String ACTION_NAME = "Insert Undefined Byte";
+	private final static String GROUP_NAME = COMPONENT_ACTION_GROUP;
+	private final static String DESCRIPTION = "Insert an undefined byte before the selection";
 	private static String[] POPUP_PATH = new String[] { ACTION_NAME };
 
-	private static final KeyStroke KEY_STROKE =
+	private final static KeyStroke KEY_STROKE =
 		KeyStroke.getKeyStroke(KeyEvent.VK_U, InputEvent.ALT_DOWN_MASK);
 
 	public InsertUndefinedAction(CompositeEditorProvider provider) {

@@ -74,7 +74,7 @@ public class DWARFAbbreviation
 		DWARFAbbreviation abbrev = null;
 		while ((abbrev = DWARFAbbreviation.read(reader, prog, monitor)) != null) {
 			monitor.checkCanceled();
-			result.put(abbrev.abbreviationCode, abbrev);
+			result.put(abbrev.getAbbreviationCode(), abbrev);
 		}
 
 		return result;
@@ -91,8 +91,8 @@ public class DWARFAbbreviation
 	@Override
 	public String toString()
 	{
-		return Integer.toHexString(abbreviationCode) + ":" +
-			DWARFUtil.toString(DWARFTag.class, tag);
+		return Integer.toHexString(getAbbreviationCode()) + ":" +
+			DWARFUtil.toString(DWARFTag.class, getTag());
 	}
 
 	/**

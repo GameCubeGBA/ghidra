@@ -28,7 +28,7 @@ public interface MutableByteProvider extends ByteProvider {
 	 * @param value the value to write at the specified index
 	 * @throws IOException if an I/O error occurs
 	 */
-    void writeByte(long index, byte value) throws IOException;
+	public void writeByte(long index, byte value) throws IOException;
 
 	/**
 	 * Writes a byte array at the specified index.
@@ -36,5 +36,5 @@ public interface MutableByteProvider extends ByteProvider {
 	 * @param values the values to write at the specified index
 	 * @throws IOException if an I/O error occurs
 	 */
-    void writeBytes(long index, byte[] values) throws IOException;
+	public void writeBytes(long index, byte[] values) throws IOException;
 }

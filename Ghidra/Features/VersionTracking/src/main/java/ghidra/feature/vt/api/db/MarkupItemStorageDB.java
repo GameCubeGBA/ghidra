@@ -133,7 +133,7 @@ public class MarkupItemStorageDB extends DatabaseObject implements MarkupItemSto
 	public MarkupItemStorage reset() {
 		associationManager.lock.acquire();
 		try {
-			MarkupItemStorage storage = new MarkupItemStorageImpl(association, getMarkupType(),
+			MarkupItemStorage storage = new MarkupItemStorageImpl(getAssociation(), getMarkupType(),
 				getSourceAddress(), getDestinationAddress(), getDestinationAddressSource());
 			associationManager.removeMarkupRecord(record);
 			return storage;
@@ -188,7 +188,7 @@ public class MarkupItemStorageDB extends DatabaseObject implements MarkupItemSto
 		buffy.append('\t').append("Status                  = ").append(getStatus()).append('\n');
 		buffy.append('\t').append("Source Value            = ").append(getSourceValue()).append('\n');
 		buffy.append('\t').append("Dest Value              = ").append(getDestinationValue()).append('\n');
-		buffy.append('\t').append("Association             = ").append(association).append('\n');
+		buffy.append('\t').append("Association             = ").append(getAssociation()).append('\n');
 		buffy.append('\t').append("Algorithm               = ").append(getDestinationAddressSource()).append('\n');
 		//@formatter:on
 		return buffy.toString();

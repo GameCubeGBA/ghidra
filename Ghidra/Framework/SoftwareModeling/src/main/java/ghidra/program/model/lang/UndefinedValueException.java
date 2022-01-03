@@ -30,7 +30,8 @@ public class UndefinedValueException extends UsrException {
 	 *  construct a new UndefinedValueException with no message.
 	 */
 	public UndefinedValueException() {
-    }
+		super();
+	}
 
 	/**
 	 * constructs a new UndefinedValueException with a descriptive

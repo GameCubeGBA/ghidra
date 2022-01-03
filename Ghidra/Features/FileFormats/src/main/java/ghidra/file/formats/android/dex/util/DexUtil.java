@@ -27,20 +27,20 @@ import ghidra.util.exception.InvalidInputException;
 
 public final class DexUtil {
 
-	public static final long METHOD_ADDRESS = 0x50000000L;
+	public final static long METHOD_ADDRESS = 0x50000000L;
 
-	public static final long LOOKUP_ADDRESS = 0xE0000000L;
+	public final static long LOOKUP_ADDRESS = 0xE0000000L;
 
 	/**
 	 * Max size possible 0x10000 (2^16) methods * pointer size
 	 */
-    public static final long MAX_METHOD_LENGTH = 0x80000;
+	public final static long MAX_METHOD_LENGTH = 0x80000;
 
-	public static final String CLASSDEF_NAME = "__classdef__";
+	public final static String CLASSDEF_NAME = "__classdef__";
 
-	public static final String CATEGORY_PATH = "classes/";
+	public final static String CATEGORY_PATH = "classes/";
 
-	public static final String HANDLE_PATH = "/handles/";
+	public final static String HANDLE_PATH = "/handles/";
 
 	/**
 	 * Converts the method index into the address where the method is stored in memory
@@ -220,7 +220,7 @@ public final class DexUtil {
 	 * @return the Ghidra datatype
 	 */
 	public static DataType toDataType(DataTypeManager dtm, String dataTypeString) {
-		if (dataTypeString.isEmpty()) {
+		if (dataTypeString.length() == 0) {
 			return null;
 		}
 		switch (dataTypeString.charAt(0)) {

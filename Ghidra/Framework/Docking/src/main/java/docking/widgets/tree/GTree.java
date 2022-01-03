@@ -324,7 +324,7 @@ public class GTree extends JPanel implements BusyListener {
 
 		lastFilterTask = new GTreeFilterTask(this, filter);
 
-		if (isFilteringEnabled) {
+		if (isFilteringEnabled()) {
 			worker.schedule(lastFilterTask);
 		}
 	}
@@ -397,7 +397,7 @@ public class GTree extends JPanel implements BusyListener {
 	}
 
 	public List<TreePath> getExpandedPaths() {
-		return getExpandedPaths(realViewRootNode);
+		return getExpandedPaths(getViewRoot());
 	}
 
 	public List<TreePath> getExpandedPaths(GTreeNode node) {
@@ -413,7 +413,7 @@ public class GTree extends JPanel implements BusyListener {
 	}
 
 	public void expandAll() {
-		runTask(new GTreeExpandAllTask(this, realViewRootNode));
+		runTask(new GTreeExpandAllTask(this, getViewRoot()));
 	}
 
 	public void collapseAll(GTreeNode node) {
@@ -607,7 +607,7 @@ public class GTree extends JPanel implements BusyListener {
 	 * be a clone of the corresponding model node.
 	 */
 	public GTreeNode getModelNodeForPath(TreePath path) {
-		return getNodeForPath(realModelRootNode, path);
+		return getNodeForPath(getModelRoot(), path);
 	}
 
 	/**
@@ -619,7 +619,7 @@ public class GTree extends JPanel implements BusyListener {
 	 * @return the current node in the displayed (possibly filtered) tree
 	 */
 	public GTreeNode getViewNodeForPath(TreePath path) {
-		return getNodeForPath(realViewRootNode, path);
+		return getNodeForPath(getViewRoot(), path);
 	}
 
 	private GTreeNode getNodeForPath(GTreeNode root, TreePath path) {
@@ -865,7 +865,7 @@ public class GTree extends JPanel implements BusyListener {
 			}
 			buf.append("]");
 		}
-		out.println(buf);
+		out.println(buf.toString());
 	}
 
 //==================================================================================================
@@ -1210,7 +1210,7 @@ public class GTree extends JPanel implements BusyListener {
 
 	@Override
 	public String toString() {
-		GTreeNode rootNode = realModelRootNode;
+		GTreeNode rootNode = getModelRoot();
 		if (rootNode == null) {
 			return "GTree - no root node";
 		}
@@ -1227,7 +1227,7 @@ public class GTree extends JPanel implements BusyListener {
 	}
 
 	public void clearSizeCache() {
-		recurseClearSizeCache(realViewRootNode);
+		recurseClearSizeCache(getViewRoot());
 	}
 
 	private void recurseClearSizeCache(GTreeNode node) {

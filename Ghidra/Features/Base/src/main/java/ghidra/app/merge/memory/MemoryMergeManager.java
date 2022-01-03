@@ -233,8 +233,11 @@ public class MemoryMergeManager implements MergeResolver {
 		String myName = myBlocks[index].getName();
 		String origName = origBlocks[index].getName();
 
-        return !myName.equals(origName) && !latestName.equals(origName) && !myName.equals(latestName);
-    }
+		if (!myName.equals(origName) && !latestName.equals(origName) && !myName.equals(latestName)) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Return whether the permissions on a block are in conflict between 
@@ -246,9 +249,12 @@ public class MemoryMergeManager implements MergeResolver {
 		int myPermissions = myBlocks[index].getPermissions();
 		int origPermissions = origBlocks[index].getPermissions();
 
-        return myPermissions != origPermissions && latestPermissions != origPermissions &&
-                myPermissions != latestPermissions;
-    }
+		if (myPermissions != origPermissions && latestPermissions != origPermissions &&
+			myPermissions != latestPermissions) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Return whether the comments on a block are in conflict between 
@@ -265,9 +271,12 @@ public class MemoryMergeManager implements MergeResolver {
 			!latestComments.equals(origComments) && !myComments.equals(latestComments)) {
 			return true;
 		}
-        return myComments == null && origComments != null && latestComments != null &&
-                !latestComments.equals(origComments);
-    }
+		if (myComments == null && origComments != null && latestComments != null &&
+			!latestComments.equals(origComments)) {
+			return true;
+		}
+		return false;
+	}
 
 //	/**
 //	 * Show panel to resolve image base conflict.
@@ -429,13 +438,16 @@ public class MemoryMergeManager implements MergeResolver {
 	private void showMergePanel(final String panelID, final String title, final String latestStr,
 			final String myStr, final String origStr) {
 		try {
-			SwingUtilities.invokeAndWait(() -> {
-                if (mergePanel == null) {
-                    mergePanel = new MemoryMergePanel(mergeManager, conflictCount);
-                }
-                mergePanel.setConflictInfo(currentConflictIndex, panelID, title, latestStr,
-                    myStr, origStr);
-            });
+			SwingUtilities.invokeAndWait(new Runnable() {
+				@Override
+				public void run() {
+					if (mergePanel == null) {
+						mergePanel = new MemoryMergePanel(mergeManager, conflictCount);
+					}
+					mergePanel.setConflictInfo(currentConflictIndex, panelID, title, latestStr,
+						myStr, origStr);
+				}
+			});
 		}
 		catch (InterruptedException e) {
 			Msg.error(this, "Unexpected Exception: " + e.getMessage(), e);

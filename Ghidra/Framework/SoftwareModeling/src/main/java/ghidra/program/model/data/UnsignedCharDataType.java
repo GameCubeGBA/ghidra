@@ -22,7 +22,7 @@ package ghidra.program.model.data;
  * associated data type manager.
  */
 public class UnsignedCharDataType extends CharDataType {
-	private static final long serialVersionUID = 1;
+	private final static long serialVersionUID = 1;
 
 	public static final UnsignedCharDataType dataType = new UnsignedCharDataType();
 

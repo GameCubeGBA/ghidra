@@ -47,7 +47,8 @@ public class CodeBrowserPluginScreenShots extends GhidraScreenShotGenerator {
 	private CodeBrowserPlugin plugin;
 
 	public CodeBrowserPluginScreenShots() {
-    }
+		super();
+	}
 
 	@Override
 	public void setUp() throws Exception {

@@ -42,46 +42,46 @@ interface ListingMerger {
 	 * @throws MemoryAccessException if memory can't be accessed to get/set byte values.
 	 * @throws CancelledException if the user cancels the merge.
 	 */
-    void autoMerge(int progressMin, int progressMax, TaskMonitor monitor)
+	abstract public void autoMerge(int progressMin, int progressMax, TaskMonitor monitor)
 	throws ProgramConflictException, MemoryAccessException, CancelledException;
 	
 	/**
 	 * Method called when the Apply button is pressed on the GUI conflict resolution window.
 	 * @return true if apply succeeded.
 	 */
-    boolean apply();
+	abstract public boolean apply();
 	
 	/**
 	 * Method called when the Cancel button is pressed on the GUI conflict resolution window.
 	 */
-    void cancel();
+	abstract public void cancel();
 
 	/**
 	 * Returns a string indicating the type of listing conflict this merger handles.
 	 * <br>For example, Function, Symbol, etc.
 	 */
-    String getConflictType();
+	abstract public String getConflictType();
 	
 	/**
 	 * Determines the number of conflicts that have currently been resolved on 
 	 * the conflict resolution window.
 	 * @return the number of conflicts resolved by the user selecting buttons or checkboxes.
 	 */
-    int getNumConflictsResolved();
+	abstract public int getNumConflictsResolved();
 
 	/**
 	 * Determines if there is a conflict at the specified address.
 	 * @param addr
 	 * @return true if there is one or more conflicts at the address.
 	 */
-    boolean hasConflict(Address addr);
+	abstract public boolean hasConflict(Address addr);
 	
 	/**
 	 * Determines the number of conflicts at the indicated address.
 	 * @param addr the address
 	 * @return the number of conflicts at the indicated address.
 	 */
-    int getConflictCount(Address addr);
+	abstract public int getConflictCount(Address addr);
 	
 	/**
 	 * Performs a manual merge of all conflicts at the indicated address for 
@@ -95,12 +95,12 @@ interface ListingMerger {
 	 * @throws CancelledException if the user cancels the merge.
 	 * @throws MemoryAccessException if memory can't be accessed to get/set byte values.
 	 */
-    void mergeConflicts(ListingMergePanel listingPanel, Address addr, int conflictOption, TaskMonitor monitor)
+	abstract public void mergeConflicts(ListingMergePanel listingPanel, Address addr, int conflictOption, TaskMonitor monitor)
 	throws CancelledException, MemoryAccessException;
 
 	/**
 	 * @return an address set indicating where there are conflicts to resolve.
 	 */
-    AddressSetView getConflicts();
+	abstract public AddressSetView getConflicts();
 	
 }

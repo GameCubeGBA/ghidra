@@ -65,7 +65,12 @@ public class SearchGuiSingle extends SearchBaseExtended {
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
 		searchButton.setText("Search");
-		searchButton.addActionListener(evt -> jButton1ActionPerformed(evt));
+		searchButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				jButton1ActionPerformed(evt);
+			}
+		});
 
 		jLabel1.setText("Search Parameters ...");
 

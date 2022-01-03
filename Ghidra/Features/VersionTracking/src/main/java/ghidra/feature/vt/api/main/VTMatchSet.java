@@ -31,7 +31,7 @@ public interface VTMatchSet {
 	 * Returns the VTSession that contains this match set.
 	 * @return the VTSession that contains this match set.
 	 */
-    VTSession getSession();
+	public VTSession getSession();
 
 	/**
 	 * Creates a match based on the given info and adds it to this match set.
@@ -39,13 +39,13 @@ public interface VTMatchSet {
 	 * @param info the info for the match to add to this match set.
 	 * @return the new VTMatch that was added.
 	 */
-    VTMatch addMatch(VTMatchInfo info);
+	public VTMatch addMatch(VTMatchInfo info);
 
 	/**
 	 * Returns a collection of all VTMatches contained in this match set.
 	 * @return  a collection of all VTMatches contained in this match set.
 	 */
-    Collection<VTMatch> getMatches();
+	public Collection<VTMatch> getMatches();
 
 	/**
 	 * Returns information about the program correlator that was used to generate the matches
@@ -53,20 +53,20 @@ public interface VTMatchSet {
 	 * @return  information about the program correlator that was used to generate the matches
 	 * for this match set.
 	 */
-    VTProgramCorrelatorInfo getProgramCorrelatorInfo();
+	public VTProgramCorrelatorInfo getProgramCorrelatorInfo();
 
 	/**
 	 * Returns the number of matches contained in this match set.
 	 * @return
 	 */
-    int getMatchCount();
+	public int getMatchCount();
 
 	/**
 	 * Returns a unique id for this match set.  The ids are one-up numbers indicating the order this
 	 * match set was generated in relation to other match sets in the VTSession. 
 	 * @return
 	 */
-    int getID();
+	public int getID();
 
 	/**
 	 * Returns a collection of all matches for the given association.
@@ -74,7 +74,7 @@ public interface VTMatchSet {
 	 * @return a collection of all matches for the given association.
 	 * @see #getMatches(Address, Address, VTAssociationType)
 	 */
-    Collection<VTMatch> getMatches(VTAssociation association);
+	public Collection<VTMatch> getMatches(VTAssociation association);
 
 	/**
 	 * Returns a collection of matches for the given source and destination address.  This is
@@ -87,7 +87,7 @@ public interface VTMatchSet {
 	 * @return a collection of all matches for the association represented by the given addresses
 	 * @see #getMatches(VTAssociation)
 	 */
-    Collection<VTMatch> getMatches(Address sourceAddress, Address destinationAddress);
+	public Collection<VTMatch> getMatches(Address sourceAddress, Address destinationAddress);
 
 	/**
 	 * Removes a match from this match set. Note that this operation is only supported for built-in
@@ -95,11 +95,11 @@ public interface VTMatchSet {
 	 * @param match the match to remove.
 	 * @return true if the match was removed.
 	 */
-    boolean removeMatch(VTMatch match);
+	public boolean removeMatch(VTMatch match);
 
 	/**
 	 * Returns true if this match set supports removing matches.
 	 * @return true if this match set supports removing matches.
 	 */
-    boolean hasRemovableMatches();
+	public boolean hasRemovableMatches();
 }

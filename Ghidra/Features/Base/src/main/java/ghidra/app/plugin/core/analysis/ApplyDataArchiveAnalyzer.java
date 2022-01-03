@@ -31,7 +31,7 @@ import ghidra.util.exception.VersionException;
 import ghidra.util.task.TaskMonitor;
 
 public class ApplyDataArchiveAnalyzer extends AbstractAnalyzer {
-	private static final String NAME = "Apply Data Archives";
+	private final static String NAME = "Apply Data Archives";
 	private static final String DESCRIPTION =
 		"Apply known data type archives based on program information.";
 
@@ -78,7 +78,7 @@ public class ApplyDataArchiveAnalyzer extends AbstractAnalyzer {
 				Throwable cause = e.getCause();
 				if (cause instanceof VersionException) {
 					log.appendMsg("Apply Data Archives",
-						"Unable to open archive " + archiveName + ": " + cause);
+						"Unable to open archive " + archiveName + ": " + cause.toString());
 				}
 				else {
 					String msg = e.getMessage();

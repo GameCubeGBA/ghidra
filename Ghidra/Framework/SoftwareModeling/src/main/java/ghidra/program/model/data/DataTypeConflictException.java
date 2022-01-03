@@ -29,7 +29,8 @@ public class DataTypeConflictException extends RuntimeException {
 	 * Construct a new DataTypeConflictException with no message
 	 */
 	public DataTypeConflictException() {
-    }
+		super();
+	}
 
 	/**
 	 * Construct a new DataTypeConflictException with the given message

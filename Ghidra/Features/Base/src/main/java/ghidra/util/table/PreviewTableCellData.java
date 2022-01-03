@@ -108,7 +108,7 @@ public class PreviewTableCellData implements Comparable<PreviewTableCellData> {
 
 	private String getPreview(CodeUnit cu, boolean htmlFriendly) {
 		String preview = getFormatedCodeUnitPreview(cu);
-		if (preview == null || preview.isEmpty()) {
+		if (preview == null || preview.length() == 0) {
 			preview = "??";
 		}
 

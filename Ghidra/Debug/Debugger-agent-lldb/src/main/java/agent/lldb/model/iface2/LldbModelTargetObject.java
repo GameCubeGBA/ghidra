@@ -31,17 +31,17 @@ import ghidra.util.datastruct.ListenerSet;
 public interface LldbModelTargetObject extends SpiTargetObject {
 
 	@Override
-    AbstractLldbModel getModel();
+	public AbstractLldbModel getModel();
 
-	default CompletableFuture<Void> init(Map<String, Object> map) {
+	public default CompletableFuture<Void> init(Map<String, Object> map) {
 		return CompletableFuture.completedFuture(null);
 	}
 
-	default LldbManagerImpl getManager() {
+	public default LldbManagerImpl getManager() {
 		return (LldbManagerImpl) getModel().getManager();
 	}
 
-	default LldbManagerImpl getManagerWithCheck() {
+	public default LldbManagerImpl getManagerWithCheck() {
 		LldbManagerImpl impl = (LldbManagerImpl) getModel().getManager();
 		if (impl == null) {
 			return impl;
@@ -49,39 +49,39 @@ public interface LldbModelTargetObject extends SpiTargetObject {
 		return impl;
 	}
 
-	Delta<?, ?> changeAttributes(List<String> remove, Map<String, ?> add, String reason);
+	public Delta<?, ?> changeAttributes(List<String> remove, Map<String, ?> add, String reason);
 
-	CompletableFuture<? extends Map<String, ?>> requestNativeAttributes();
+	public CompletableFuture<? extends Map<String, ?>> requestNativeAttributes();
 
-	default CompletableFuture<Void> requestAugmentedAttributes() {
+	public default CompletableFuture<Void> requestAugmentedAttributes() {
 		return AsyncUtils.NIL;
 	}
 
-	CompletableFuture<List<TargetObject>> requestNativeElements();
+	public CompletableFuture<List<TargetObject>> requestNativeElements();
 
-	ListenerSet<DebuggerModelListener> getListeners();
+	public ListenerSet<DebuggerModelListener> getListeners();
 
-	LldbModelTargetSession getParentSession();
+	public LldbModelTargetSession getParentSession();
 
-	LldbModelTargetProcess getParentProcess();
+	public LldbModelTargetProcess getParentProcess();
 
-	LldbModelTargetThread getParentThread();
+	public LldbModelTargetThread getParentThread();
 
-	TargetObject getProxy();
+	public TargetObject getProxy();
 
-	void setModified(Map<String, Object> map, boolean b);
+	public void setModified(Map<String, Object> map, boolean b);
 
-	void setModified(boolean modified);
+	public void setModified(boolean modified);
 
-	void resetModified();
+	public void resetModified();
 
-	Object getModelObject();
+	public Object getModelObject();
 
-	void setModelObject(Object modelObject);
+	public void setModelObject(Object modelObject);
 
-	void addMapObject(Object object, TargetObject targetObject);
+	public void addMapObject(Object object, TargetObject targetObject);
 
-	TargetObject getMapObject(Object object);
+	public TargetObject getMapObject(Object object);
 
-	void deleteMapObject(Object object);
+	public void deleteMapObject(Object object);
 }

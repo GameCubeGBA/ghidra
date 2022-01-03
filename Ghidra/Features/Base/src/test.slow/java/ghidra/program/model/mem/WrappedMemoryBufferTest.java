@@ -36,7 +36,8 @@ public class WrappedMemoryBufferTest extends AbstractGhidraHeadedIntegrationTest
 	private MemBuffer memBuf;
 
 	public WrappedMemoryBufferTest() {
-    }
+		super();
+	}
 
 	private void loadProgram(String name) throws Exception {
 		ProgramBuilder builder = new ProgramBuilder(name, ProgramBuilder._TOY);

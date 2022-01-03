@@ -77,7 +77,7 @@ public abstract class OatHeader implements StructConverter {
 		reader.setPointerIndex(getOatDexFilesOffset(reader));
 		for (int i = 0; i < getDexFileCount(); ++i) {
 			oatDexFileList.add(
-				OatDexFileFactory.getOatDexFile(reader, version, bundle));
+				OatDexFileFactory.getOatDexFile(reader, getVersion(), bundle));
 		}
 	}
 
@@ -102,31 +102,31 @@ public abstract class OatHeader implements StructConverter {
 	 * @param reader the binary reader with the file bytes.
 	 * @return the binary offset to the DEX files.
 	 */
-    public abstract int getOatDexFilesOffset(BinaryReader reader);
+	abstract public int getOatDexFilesOffset(BinaryReader reader);
 
 	/**
 	 * Returns the number of DEX files embedded inside this OAT file.
 	 * @return the number of DEX files embedded inside this OAT file.
 	 */
-    public abstract int getDexFileCount();
+	abstract public int getDexFileCount();
 
 	/**
 	 * Returns the size (in bytes) of the Key/Value store contained inside this OAT file.
 	 * @return the size (in bytes) of the Key/Value store contained inside this OAT file.
 	 */
-    public abstract int getKeyValueStoreSize();
+	abstract public int getKeyValueStoreSize();
 
 	/**
 	 * Returns a list of the OatDexFileHeader, a structure defining the embedded DEX files.
 	 * @return a list of the OatDexFileHeader, a structure defining the embedded DEX files.
 	 */
-    public abstract List<OatDexFile> getOatDexFileList();
+	abstract public List<OatDexFile> getOatDexFileList();
 
 	/**
 	 * Returns the OAT instruction set (ARM, X86, etc).
 	 * @return the OAT instruction set (ARM, X86, etc).
 	 */
-    public abstract OatInstructionSet getInstructionSet();
+	abstract public OatInstructionSet getInstructionSet();
 
 	/**
 	 * Returns the offset to the executable code.
@@ -134,12 +134,12 @@ public abstract class OatHeader implements StructConverter {
 	 * The executable code can also be located using the "oatexec" symbol.
 	 * @return the offset to the executable code.
 	 */
-    public abstract int getExecutableOffset();
+	abstract public int getExecutableOffset();
 
 	/**
 	 * Returns the OAT checksum value.
 	 * @return the OAT checksum value.
 	 */
-    public abstract int getChecksum();
+	abstract public int getChecksum();
 
 }

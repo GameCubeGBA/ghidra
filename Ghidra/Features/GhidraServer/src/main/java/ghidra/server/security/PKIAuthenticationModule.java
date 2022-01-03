@@ -107,12 +107,12 @@ public class PKIAuthenticationModule implements AuthenticationModule {
 
 		SignatureCallback sigCb = null;
 		if (callbacks != null) {
-            for (Callback callback : callbacks) {
-                if (callback instanceof SignatureCallback) {
-                    sigCb = (SignatureCallback) callback;
-                    break;
-                }
-            }
+			for (int i = 0; i < callbacks.length; i++) {
+				if (callbacks[i] instanceof SignatureCallback) {
+					sigCb = (SignatureCallback) callbacks[i];
+					break;
+				}
+			}
 		}
 		if (sigCb == null) {
 			throw new FailedLoginException("PKI Signature callback required");

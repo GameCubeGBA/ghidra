@@ -119,16 +119,16 @@ public class AddressLabelInfo implements Comparable<AddressLabelInfo> {
 			return 1;
 		}
 
-		String addrStr = info.addr.toString();
-		String thisStr = addr.toString();
+		String addrStr = info.getAddress().toString();
+		String thisStr = getAddress().toString();
 		int stringCompare = thisStr.compareTo(addrStr);
 
 		if (stringCompare != 0) {
 			return stringCompare;
 		}
 
-		String addrLabel = info.label;
-		String thisLabel = label;
+		String addrLabel = info.getLabel();
+		String thisLabel = getLabel();
 
 		if (addrLabel == null) {
 			if (thisLabel == null) {

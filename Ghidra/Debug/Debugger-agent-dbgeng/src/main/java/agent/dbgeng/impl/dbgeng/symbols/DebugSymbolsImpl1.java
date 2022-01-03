@@ -126,57 +126,60 @@ public class DebugSymbolsImpl1 implements DebugSymbolsInternal {
 	@Override
 	public Iterable<DebugSymbolName> iterateSymbolMatches(String pattern) {
 		ULONGLONGByReference pullHandle = new ULONGLONGByReference();
-		return () -> {
-            COMUtils.checkRC(jnaSymbols.StartSymbolMatch(pattern, pullHandle));
-            return new Iterator<DebugSymbolName>() {
-                ULONGByReference pulMatchSize = new ULONGByReference();
-                ULONGLONGByReference pullOffset = new ULONGLONGByReference();
+		return new Iterable<DebugSymbolName>() {
+			@Override
+			public Iterator<DebugSymbolName> iterator() {
+				COMUtils.checkRC(jnaSymbols.StartSymbolMatch(pattern, pullHandle));
+				return new Iterator<DebugSymbolName>() {
+					ULONGByReference pulMatchSize = new ULONGByReference();
+					ULONGLONGByReference pullOffset = new ULONGLONGByReference();
 
-                @Override
-                public boolean hasNext() {
-                    try {
-                        COMUtils.checkRC(jnaSymbols.GetNextSymbolMatch(pullHandle.getValue(),
-                            null, new ULONG(0), pulMatchSize, null));
-                    }
-                    catch (COMException e) {
-                        if (!COMUtilsExtra.isE_NOINTERFACE(e)) {
-                            throw e;
-                        }
-                        return false;
-                    }
-                    return true;
-                }
+					@Override
+					public boolean hasNext() {
+						try {
+							COMUtils.checkRC(jnaSymbols.GetNextSymbolMatch(pullHandle.getValue(),
+								null, new ULONG(0), pulMatchSize, null));
+						}
+						catch (COMException e) {
+							if (!COMUtilsExtra.isE_NOINTERFACE(e)) {
+								throw e;
+							}
+							return false;
+						}
+						return true;
+					}
 
-                @Override
-                public DebugSymbolName next() {
-                    try {
-                        if (pulMatchSize.getValue().intValue() == 0) {
-                            COMUtils.checkRC(jnaSymbols.GetNextSymbolMatch(
-                                pullHandle.getValue(), null, new ULONG(0), pulMatchSize, null));
-                        }
-                        byte[] aBuffer = new byte[pulMatchSize.getValue().intValue()];
-                        COMUtils.checkRC(jnaSymbols.GetNextSymbolMatch(pullHandle.getValue(),
-                            aBuffer, pulMatchSize.getValue(), null, pullOffset));
-                        return new DebugSymbolName(Native.toString(aBuffer),
-                            pullOffset.getValue().longValue());
-                    }
-                    catch (COMException e) {
-                        if (!COMUtilsExtra.isE_NOINTERFACE(e)) {
-                            throw e;
-                        }
-                        return null;
-                    }
-                    finally {
-                        pulMatchSize.getValue().setValue(0);
-                    }
-                }
+					@Override
+					public DebugSymbolName next() {
+						try {
+							if (pulMatchSize.getValue().intValue() == 0) {
+								COMUtils.checkRC(jnaSymbols.GetNextSymbolMatch(
+									pullHandle.getValue(), null, new ULONG(0), pulMatchSize, null));
+							}
+							byte[] aBuffer = new byte[pulMatchSize.getValue().intValue()];
+							COMUtils.checkRC(jnaSymbols.GetNextSymbolMatch(pullHandle.getValue(),
+								aBuffer, pulMatchSize.getValue(), null, pullOffset));
+							return new DebugSymbolName(Native.toString(aBuffer),
+								pullOffset.getValue().longValue());
+						}
+						catch (COMException e) {
+							if (!COMUtilsExtra.isE_NOINTERFACE(e)) {
+								throw e;
+							}
+							return null;
+						}
+						finally {
+							pulMatchSize.getValue().setValue(0);
+						}
+					}
 
-                @Override
-                protected void finalize() throws Throwable {
-                    COMUtils.checkRC(jnaSymbols.EndSymbolMatch(pullHandle.getValue()));
-                }
-            };
-        };
+					@Override
+					protected void finalize() throws Throwable {
+						COMUtils.checkRC(jnaSymbols.EndSymbolMatch(pullHandle.getValue()));
+					}
+				};
+			}
+		};
 	}
 
 	@Override

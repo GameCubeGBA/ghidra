@@ -45,7 +45,7 @@ public class PrintStructureScript extends GhidraScript {
 	private void printStructure(DataType dataType) {
 		StringBuilder buffer = new StringBuilder();
 		printStructureRecursively(dataType, buffer, 0);
-		println("\n" + buffer);
+		println("\n" + buffer.toString());
 	}
 
 	private void printStructureRecursively(DataType dataType, StringBuilder buffer, int level) {
@@ -84,7 +84,9 @@ public class PrintStructureScript extends GhidraScript {
 	}
 
 	private void tabs(StringBuilder buffer, int level) {
-        buffer.append("\t".repeat(Math.max(0, level + 1)));
+		for (int i = 0; i < level + 1; i++) {
+			buffer.append('\t');
+		}
 	}
 
 	private DataType findDataTypeByName(String name) {

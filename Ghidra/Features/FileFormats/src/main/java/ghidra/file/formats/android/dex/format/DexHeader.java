@@ -404,7 +404,7 @@ public class DexHeader implements StructConverter {
 			if (res == null) {
 				TypeIDItem typeIDItem = types.get(typeId);
 				String typeString = DexUtil.convertToString(this, typeIDItem.getDescriptorIndex());
-				if (!typeString.isEmpty() && typeString.charAt(0) == 'L') {
+				if (typeString.length() != 0 && typeString.charAt(0) == 'L') {
 					StringBuilder buffer = new StringBuilder();
 					buffer.append(DexUtil.HANDLE_PATH);
 					buffer.append("group").append(typeId / 100);

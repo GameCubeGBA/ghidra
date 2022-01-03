@@ -44,8 +44,9 @@ public abstract class AbstractGhidraHeadedIntegrationTest
 		extends AbstractGhidraHeadlessIntegrationTest {
 
 	public AbstractGhidraHeadedIntegrationTest() {
+		super();
 
-        // Ensure that all headed tests use swing popups when displaying errors.  Setting this
+		// Ensure that all headed tests use swing popups when displaying errors.  Setting this
 		// to false would force errors to only be written to the console.
 		setErrorGUIEnabled(true);
 	}
@@ -99,11 +100,13 @@ public abstract class AbstractGhidraHeadedIntegrationTest
 
 	public static Plugin getPluginByName(PluginTool tool, String pluginName) {
 		List<Plugin> list = tool.getManagedPlugins();
-        for (Plugin p : list) {
-            if (pluginName.equals(p.getName())) {
-                return p;
-            }
-        }
+		Iterator<Plugin> it = list.iterator();
+		while (it.hasNext()) {
+			Plugin p = it.next();
+			if (pluginName.equals(p.getName())) {
+				return p;
+			}
+		}
 		return null;
 	}
 

@@ -304,8 +304,12 @@ public class AssociationDatabaseManager implements VTAssociationManager {
 			return true;
 		}
 
-        return acceptedDestinationAssociations.contains(destinationAddress);
-    }
+		if (acceptedDestinationAssociations.contains(destinationAddress)) {
+			return true;
+		}
+
+		return false;
+	}
 
 	@Override
 	public int getAssociationCount() {
@@ -318,11 +322,11 @@ public class AssociationDatabaseManager implements VTAssociationManager {
 		lock.acquire();
 		try {
 			RecordIterator iterator = associationTableAdapter.getRecords();
-            while (iterator.hasNext()) {
-                DBRecord nextRecord = iterator.next();
-                list.add(getAssociationForRecord(nextRecord));
-            }
-        }
+			for (; iterator.hasNext();) {
+				DBRecord nextRecord = iterator.next();
+				list.add(getAssociationForRecord(nextRecord));
+			}
+		}
 		catch (IOException e) {
 			session.dbError(e);
 		}

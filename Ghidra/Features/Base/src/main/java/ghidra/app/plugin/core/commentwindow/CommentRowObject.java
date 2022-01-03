@@ -64,8 +64,11 @@ class CommentRowObject implements Comparable<CommentRowObject> {
 		else if (!address.equals(other.address)) {
 			return false;
 		}
-        return commentType == other.commentType;
-    }
+		if (commentType != other.commentType) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public int compareTo(CommentRowObject o) {

@@ -293,7 +293,7 @@ public class CliStreamMetadata extends CliAbstractStream {
 
 			default:
 				Msg.warn(this,
-					"Parsing table type \"" + tableType + "\" is not supported.");
+					"Parsing table type \"" + tableType.toString() + "\" is not supported.");
 				return null;
 		}
 	}
@@ -454,7 +454,7 @@ public class CliStreamMetadata extends CliAbstractStream {
 			"# of rows for each corresponding present table");
 		for (CliAbstractTable table : tables) {
 			struct.add(table.toDataType(), table.toString(),
-				"CLI Metadata Table: " + table);
+				"CLI Metadata Table: " + table.toString());
 		}
 		return struct;
 	}

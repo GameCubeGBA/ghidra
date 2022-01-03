@@ -32,8 +32,8 @@ public abstract class AbstractBinaryFormatAnalyzer extends AbstractAnalyzer {
 		this.command = command;
 	}
 
-	public final boolean added(Program program, AddressSetView set, TaskMonitor monitor,
-                               MessageLog log) throws CancelledException {
+	final public boolean added(Program program, AddressSetView set, TaskMonitor monitor,
+			MessageLog log) throws CancelledException {
 
 		try {
 			return command.applyTo(program, monitor);
@@ -48,11 +48,11 @@ public abstract class AbstractBinaryFormatAnalyzer extends AbstractAnalyzer {
 		return false;
 	}
 
-	public final boolean canAnalyze(Program program) {
+	final public boolean canAnalyze(Program program) {
 		return command.canApply(program);
 	}
 
-	public final boolean getDefaultEnablement(Program program) {
+	final public boolean getDefaultEnablement(Program program) {
 		return command.canApply(program);
 	}
 

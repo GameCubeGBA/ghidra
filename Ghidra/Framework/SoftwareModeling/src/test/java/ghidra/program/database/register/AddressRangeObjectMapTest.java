@@ -34,7 +34,8 @@ public class AddressRangeObjectMapTest extends AbstractGenericTest {
 	private GenericAddressSpace space;
 
 	public AddressRangeObjectMapTest() {
-    }
+		super();
+	}
 
     @Before
     public void setUp() throws Exception {

@@ -25,7 +25,7 @@ import java.math.BigInteger;
  */
 public class HexFormatModel implements UniversalDataFormatModel {
 
-	public static final String NAME = "Hex";
+	public final static String NAME = "Hex";
 
 	private int symbolSize;
 	private int unitByteSize;
@@ -304,7 +304,9 @@ public class HexFormatModel implements UniversalDataFormatModel {
 		else {
 			int len = 2 - strLen;
 
-            sb.append("0".repeat(len));
+			for (int i = 0; i < len; i++) {
+				sb.append("0");
+			}
 			sb.append(value);
 		}
 		return (sb.toString());

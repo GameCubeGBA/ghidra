@@ -30,5 +30,5 @@ public interface TargetDetachable extends TargetObject {
 	 * 
 	 * @return a future which completes when the request is processed
 	 */
-    CompletableFuture<Void> detach();
+	public CompletableFuture<Void> detach();
 }

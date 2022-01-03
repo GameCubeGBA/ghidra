@@ -67,7 +67,7 @@ import ghidra.util.exception.DuplicateNameException;
  */
 public class ImageRuntimeFunctionEntries {
 
-	private static final int UNWIND_INFO_SIZE = 0x0C;
+	private final static int UNWIND_INFO_SIZE = 0x0C;
 
 	List<_IMAGE_RUNTIME_FUNCTION_ENTRY> functionEntries = new ArrayList<>();
 

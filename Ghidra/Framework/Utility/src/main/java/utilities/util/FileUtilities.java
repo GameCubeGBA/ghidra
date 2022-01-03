@@ -56,8 +56,8 @@ import ghidra.util.task.TaskMonitor;
 
 public final class FileUtilities {
 
-	private static final int MAX_FILE_SIZE = 0x10000000;// 268Mb
-	public static final int IO_BUFFER_SIZE = 32 * 1024;
+	private final static int MAX_FILE_SIZE = 0x10000000;// 268Mb
+	public final static int IO_BUFFER_SIZE = 32 * 1024;
 
 	private static final ThreadLocal<NumberFormat> SIZE_FORMAT_THREAD_LOCAL =
 		ThreadLocal.withInitial(() -> new DecimalFormat("#,###,###.##"));

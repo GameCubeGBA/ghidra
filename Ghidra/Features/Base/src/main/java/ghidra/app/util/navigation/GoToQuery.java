@@ -231,7 +231,7 @@ public class GoToQuery {
 	private boolean processInputAsSymbolInAllPrograms() {
 		for (Program program : programs) {
 			List<ProgramLocation> programLocations = getValidSymbolLocationsForProgram(program);
-			if (!programLocations.isEmpty()) {
+			if (programLocations.size() > 0) {
 				goToProgramLocations(program, programLocations);
 				return true;
 			}
@@ -486,8 +486,11 @@ public class GoToQuery {
 		}
 		SymbolTable symTable = program.getSymbolTable();
 		Namespace namespace = symTable.getNamespace(scopeName, parent);
-        return namespace;
-    }
+		if (namespace != null) {
+			return namespace;
+		}
+		return null;
+	}
 
 	private boolean processSymbolInCurrentProgram() {
 		Program program = navigatable.getProgram();
@@ -518,8 +521,11 @@ public class GoToQuery {
 			return false;
 		}
 
-        return goToService.goTo(navigatable, loc, program);
-    }
+		if (goToService.goTo(navigatable, loc, program)) {
+			return true;
+		}
+		return false;
+	}
 
 	private boolean goTo(Program program, ProgramLocation loc) {
 		if (loc == null) {

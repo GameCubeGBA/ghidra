@@ -41,7 +41,7 @@ public class FieldNameFieldFactory extends FieldFactory {
 
 	public static final String FIELD_NAME = "Field Name";
 
-	public static final String ARRAY_INDEX_FORMAT_NAME =
+	public final static String ARRAY_INDEX_FORMAT_NAME =
 		FormatManager.ARRAY_OPTIONS_GROUP + Options.DELIMITER + "Array Index Format";
 
 	public static enum IndexFormat {
@@ -112,7 +112,7 @@ public class FieldNameFieldFactory extends FieldFactory {
 		Data data = (Data) obj;
 
 		String fieldName = getFieldName(data);
-		if ((fieldName == null) || (fieldName.isEmpty())) {
+		if ((fieldName == null) || (fieldName.length() == 0)) {
 			return null;
 		}
 		AttributedString as = new AttributedString(fieldName, color, getMetrics());

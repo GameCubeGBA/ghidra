@@ -24,5 +24,6 @@ import java.beans.PropertyEditorSupport;
 public class BooleanEditor extends PropertyEditorSupport {
     
 	public BooleanEditor() {
-    }
+        super();
+	}
 }

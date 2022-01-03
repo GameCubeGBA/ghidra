@@ -25,7 +25,7 @@ import java.util.ArrayList;
  * This class manages the use and reuse of those indexes.
  */
 public class IntIndexManager implements Serializable {
-    private static final long serialVersionUID = 1;
+    private final static long serialVersionUID = 1;
 
     private int nextIndex;        // the smallest index that has never been used.
     private ArrayList<Integer> freeList;
@@ -44,7 +44,7 @@ public class IntIndexManager implements Serializable {
      * indexes.
      */
     public int allocate() {
-        if (freeList.isEmpty()) {
+        if (freeList.size() == 0) {
             if (nextIndex < 0) {
                 throw new IndexOutOfBoundsException();
             }

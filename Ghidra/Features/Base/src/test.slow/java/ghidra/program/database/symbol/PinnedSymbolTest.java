@@ -53,7 +53,8 @@ public class PinnedSymbolTest extends AbstractGhidraHeadlessIntegrationTest {
 	private Address originalFunctionAddress;
 
 	public PinnedSymbolTest() {
-    }
+		super();
+	}
 
 	@Test
 	public void testMoveImageBase()

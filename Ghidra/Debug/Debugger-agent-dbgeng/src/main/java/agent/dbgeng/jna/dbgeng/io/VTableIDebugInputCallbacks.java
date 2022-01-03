@@ -44,23 +44,23 @@ public class VTableIDebugInputCallbacks extends Structure {
 		return FIELDS;
 	}
 
-	public interface QueryInterfaceCallback extends StdCallLibrary.StdCallCallback {
+	public static interface QueryInterfaceCallback extends StdCallLibrary.StdCallCallback {
 		HRESULT invoke(Pointer thisPointer, REFIID refid, PointerByReference ppvObject);
 	}
 
-	public interface AddRefCallback extends StdCallLibrary.StdCallCallback {
+	public static interface AddRefCallback extends StdCallLibrary.StdCallCallback {
 		int invoke(Pointer thisPointer);
 	}
 
-	public interface ReleaseCallback extends StdCallLibrary.StdCallCallback {
+	public static interface ReleaseCallback extends StdCallLibrary.StdCallCallback {
 		int invoke(Pointer thisPointer);
 	}
 
-	public interface StartInputCallback extends StdCallLibrary.StdCallCallback {
+	public static interface StartInputCallback extends StdCallLibrary.StdCallCallback {
 		HRESULT invoke(Pointer thisPointer, ULONG BufferSize);
 	}
 
-	public interface EndInputCallback extends StdCallLibrary.StdCallCallback {
+	public static interface EndInputCallback extends StdCallLibrary.StdCallCallback {
 		HRESULT invoke(Pointer thisPointer);
 	}
 }

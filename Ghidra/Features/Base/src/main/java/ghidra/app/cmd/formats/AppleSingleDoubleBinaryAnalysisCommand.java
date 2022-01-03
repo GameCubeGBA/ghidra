@@ -42,7 +42,8 @@ public class AppleSingleDoubleBinaryAnalysisCommand extends FlatProgramAPI
 	private MessageLog messages = new MessageLog();
 
 	public AppleSingleDoubleBinaryAnalysisCommand() {
-    }
+		super();
+	}
 
 	@Override
 	public boolean analysisWorkerCallback(Program program, Object workerContext,

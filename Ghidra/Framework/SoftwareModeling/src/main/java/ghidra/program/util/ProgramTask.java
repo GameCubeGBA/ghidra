@@ -66,5 +66,5 @@ public abstract class ProgramTask extends Task {
 		}
 	}
 
-	protected abstract void doRun(TaskMonitor monitor);
+	abstract protected void doRun(TaskMonitor monitor);
 }

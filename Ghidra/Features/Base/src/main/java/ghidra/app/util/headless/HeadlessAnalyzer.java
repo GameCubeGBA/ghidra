@@ -270,12 +270,12 @@ public class HeadlessAnalyzer {
 		}
 
 		path = path.trim();
-		if (path.isEmpty()) {
+		if (path.length() == 0) {
 			throw new MalformedURLException("Unsupported repository URL: " + ghidraURL);
 		}
 
 		if (!options.runScriptsNoImport) { // Running in -import mode
-			if ((filesToImport == null || filesToImport.isEmpty()) &&
+			if ((filesToImport == null || filesToImport.size() == 0) &&
 				options.preScripts.isEmpty() && options.postScripts.isEmpty()) {
 				Msg.warn(this, "REPORT: Nothing to do ... must specify files for import.");
 				return;
@@ -389,7 +389,7 @@ public class HeadlessAnalyzer {
 		}
 		else {
 			// If we are importing, need some files to import or at least a script to run!
-			if ((filesToImport == null || filesToImport.isEmpty()) &&
+			if ((filesToImport == null || filesToImport.size() == 0) &&
 				options.preScripts.isEmpty() && options.postScripts.isEmpty()) {
 				Msg.warn(this, "REPORT: Nothing to do ... must specify file(s) for import.");
 				return;
@@ -807,7 +807,7 @@ public class HeadlessAnalyzer {
 	private void compileScripts() throws IOException {
 
 		// Check that given locations for .properties files are valid
-		if (!options.propertiesFileStrPaths.isEmpty()) {
+		if (options.propertiesFileStrPaths.size() > 0) {
 
 			options.propertiesFilePaths.clear();
 
@@ -880,7 +880,7 @@ public class HeadlessAnalyzer {
 					currScript = (GhidraScript) c.getConstructor().newInstance();
 					currScript.setScriptArgs(scriptArgs);
 
-					if (!options.propertiesFilePaths.isEmpty()) {
+					if (options.propertiesFilePaths.size() > 0) {
 						currScript.setPotentialPropertiesFileLocations(options.propertiesFilePaths);
 					}
 
@@ -895,7 +895,7 @@ public class HeadlessAnalyzer {
 					currScript = provider.getScriptInstance(currScriptFile, writer);
 					currScript.setScriptArgs(scriptArgs);
 
-					if (!options.propertiesFilePaths.isEmpty()) {
+					if (options.propertiesFilePaths.size() > 0) {
 						currScript.setPotentialPropertiesFileLocations(options.propertiesFilePaths);
 					}
 				}
@@ -1691,7 +1691,7 @@ public class HeadlessAnalyzer {
 			// to programs not being released during Importing
 			List<DomainFile> domainFileContainer = new ArrayList<>();
 			TransientDataManager.getTransients(domainFileContainer);
-			if (!domainFileContainer.isEmpty()) {
+			if (domainFileContainer.size() > 0) {
 				TransientDataManager.releaseFiles(this);
 			}
 

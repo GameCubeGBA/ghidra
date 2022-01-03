@@ -166,7 +166,7 @@ public abstract class ByteViewerComponentProvider extends ComponentProviderAdapt
 	@Override
 	public void optionsChanged(ToolOptions options, String optionName, Object oldValue,
 			Object newValue) {
-		if ("ByteViewer".equals(options.getName())) {
+		if (options.getName().equals("ByteViewer")) {
 
 			if (optionName.equals(OPTION_CURRENT_VIEW_CURSOR_COLOR)) {
 				panel.setCurrentCursorColor((Color) newValue);

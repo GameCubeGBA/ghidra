@@ -30,6 +30,6 @@ import ghidra.dbg.target.TargetDetachable;
 public interface LldbModelTargetDetachable extends LldbModelTargetObject, TargetDetachable {
 
 	@Override
-    CompletableFuture<Void> detach();
+	public CompletableFuture<Void> detach();
 
 }

@@ -23,6 +23,6 @@ public interface StackDepthChangeListener extends EventListener {
     /**
      * Invoked when an action occurs.
      */
-    void actionPerformed(StackDepthChangeEvent e);
+    public void actionPerformed(StackDepthChangeEvent e);
 
 }

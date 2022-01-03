@@ -30,6 +30,7 @@ public class NotYetImplementedException extends RuntimeException {
 	 * <p>Constructs a NotYetImplementedException with no detail message.<p>
 	 */
 	public NotYetImplementedException() {
+		super();
     }
 	
 	/**

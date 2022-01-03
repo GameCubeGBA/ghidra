@@ -247,7 +247,7 @@ public class DiffApplyIgnoreTest extends DiffApplyTestAdapter {
 
 		ProgramSelection origDiffs = diffPlugin.getDiffHighlightSelection();
 		AddressSet as = new AddressSet(addr("100299e"), addr("100299e"));
-		assertTrue("Original diff set doesn't contain " + as, origDiffs.contains(as));
+		assertTrue("Original diff set doesn't contain " + as.toString(), origDiffs.contains(as));
 		ignore(functionApplyCB);
 		setDiffSelection(as);
 		apply();

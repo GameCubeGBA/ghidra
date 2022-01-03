@@ -151,7 +151,7 @@ public class EnumColumnConstraint<T extends Enum<T>> implements ColumnConstraint
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(enumClass, acceptableValues);
+		return Objects.hash(getEnumClass(), getSelectedValues());
 	}
 
 	@Override

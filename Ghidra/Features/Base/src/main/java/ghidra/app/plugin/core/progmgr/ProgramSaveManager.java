@@ -101,9 +101,11 @@ class ProgramSaveManager {
 			return saveChangedPrograms(saveList);
 		}
 		finally {
-            for (Program p : lockList) {
-                p.unlock();
-            }
+			Iterator<Program> it = lockList.iterator();
+			while (it.hasNext()) {
+				Program p = it.next();
+				p.unlock();
+			}
 		}
 	}
 
@@ -176,7 +178,7 @@ class ProgramSaveManager {
 			}
 		}
 
-		if (saveProgramsList.isEmpty()) {
+		if (saveProgramsList.size() == 0) {
 			return true;
 		}
 		// calling can close here ensures that we use the same dialog for single files
@@ -371,10 +373,11 @@ class ProgramSaveManager {
 				"The Program is currently being modified by the following actions/tasks:\n ");
 			Transaction t = program.getCurrentTransaction();
 			List<String> list = t.getOpenSubTransactions();
-            for (String s : list) {
-                buf.append("\n     ");
-                buf.append(s);
-            }
+			Iterator<String> it = list.iterator();
+			while (it.hasNext()) {
+				buf.append("\n     ");
+				buf.append(it.next());
+			}
 			buf.append("\n \n");
 			buf.append("WARNING! The above task(s) should be cancelled before attempting a " +
 				actionName + ".\n");
@@ -404,10 +407,11 @@ class ProgramSaveManager {
 				"The Program is currently being modified by the following actions/tasks:\n ");
 			Transaction t = program.getCurrentTransaction();
 			List<String> list = t.getOpenSubTransactions();
-            for (String s : list) {
-                buf.append("\n     ");
-                buf.append(s);
-            }
+			Iterator<String> it = list.iterator();
+			while (it.hasNext()) {
+				buf.append("\n     ");
+				buf.append(it.next());
+			}
 			buf.append("\n \n");
 			buf.append(
 				"WARNING! The above task(s) should be cancelled before attempting a Save As...\n");
@@ -442,7 +446,7 @@ class ProgramSaveManager {
 			ActionListener listener = event -> {
 				DomainFolder folder = dataTreeSaveDialog.getDomainFolder();
 				String newName = dataTreeSaveDialog.getNameText();
-				if (newName.isEmpty()) {
+				if (newName.length() == 0) {
 					dataTreeSaveDialog.setStatusText("Please enter a name");
 					return;
 				}

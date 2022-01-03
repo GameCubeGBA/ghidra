@@ -24,7 +24,8 @@ import generic.test.AbstractGenericTest;
 public class MapSTLTest extends AbstractGenericTest {
 
 	public MapSTLTest() {
-    }
+		super();
+	}
 
 	@Test
 	public void testInsert() {

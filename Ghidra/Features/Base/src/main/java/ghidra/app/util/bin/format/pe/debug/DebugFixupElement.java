@@ -28,7 +28,7 @@ import ghidra.app.util.bin.format.*;
  * 
  */
 public class DebugFixupElement {
-    static final int SIZEOF = 12;
+    final static int SIZEOF = 12;
 
     private int type;
     private int addr1;

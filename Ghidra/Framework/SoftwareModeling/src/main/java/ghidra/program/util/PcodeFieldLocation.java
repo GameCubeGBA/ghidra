@@ -59,8 +59,11 @@ public class PcodeFieldLocation extends ProgramLocation {
 		if (!super.equals(obj) || (getClass() != obj.getClass()))
 			return false;
 		PcodeFieldLocation other = (PcodeFieldLocation) obj;
-        return Objects.equals(pcodeStrings, other.pcodeStrings);
-    }
+		if (!Objects.equals(pcodeStrings, other.pcodeStrings)) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public void saveState(SaveState obj) {
@@ -83,7 +86,7 @@ public class PcodeFieldLocation extends ProgramLocation {
 	}
 
 	private String getPcodeSample() {
-		if (pcodeStrings.isEmpty()) {
+		if (pcodeStrings.size() == 0) {
 			return "<no pcode>";
 		}
 		return pcodeStrings.get(0);

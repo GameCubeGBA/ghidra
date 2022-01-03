@@ -510,9 +510,9 @@ public class CppCompositeTypeTest extends AbstractGenericTest {
 		return builder.toString();
 	}
 
-	private static final DataType u1 = Undefined1DataType.dataType;
+	private final static DataType u1 = Undefined1DataType.dataType;
 	//private final static DataType u2 = Undefined2DataType.dataType;
-    private static final DataType u4 = Undefined4DataType.dataType;
+	private final static DataType u4 = Undefined4DataType.dataType;
 	//private final static DataType u8 = Undefined8DataType.dataType;
 
 	// Note: the problem with using the following static variables is that the process of

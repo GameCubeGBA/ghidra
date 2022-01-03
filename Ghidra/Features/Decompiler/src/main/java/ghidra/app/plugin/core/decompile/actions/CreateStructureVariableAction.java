@@ -51,8 +51,10 @@ public abstract class CreateStructureVariableAction extends DockingAction {
 		if (var instanceof HighParam) {
 			int slot = ((HighParam) var).getSlot();
 			Parameter parameter = f.getParameter(slot);
-            return (parameter != null) &&
-                    (parameter.getAutoParameterType() == AutoParameterType.THIS);
+			if ((parameter != null) &&
+				(parameter.getAutoParameterType() == AutoParameterType.THIS)) {
+				return true;
+			}
 		}
 		return false;
 	}

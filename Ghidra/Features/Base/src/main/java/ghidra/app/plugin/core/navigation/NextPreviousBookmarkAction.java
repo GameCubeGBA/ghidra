@@ -164,7 +164,7 @@ public class NextPreviousBookmarkAction extends MultiStateDockingAction<String> 
 			if (bookmarkType.equals(BookmarkType.ALL_TYPES)) {
 				return nextBookmark;
 			}
-			else if ("Custom".equals(bookmarkType) &&
+			else if (bookmarkType.equals("Custom") &&
 				isNotBuiltInType(address, nextBookmark, nextAddress)) {
 				return nextBookmark;
 			}
@@ -201,7 +201,12 @@ public class NextPreviousBookmarkAction extends MultiStateDockingAction<String> 
 			isForward ? getNextAddress(context.getProgram(), context.getAddress(), bookmarkType)
 					: getPreviousAddress(context.getProgram(), context.getAddress(), bookmarkType);
 
-		SwingUtilities.invokeLater(() -> gotoAddress(context, address));
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				gotoAddress(context, address);
+			}
+		});
 	}
 
 	private void gotoAddress(NavigatableActionContext listingActionContext, Address address) {

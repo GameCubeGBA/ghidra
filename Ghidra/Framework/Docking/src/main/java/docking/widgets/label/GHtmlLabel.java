@@ -53,7 +53,8 @@ public class GHtmlLabel extends JLabel implements GComponent {
 	 * <p>
 	 */
 	public GHtmlLabel() {
-    }
+		super();
+	}
 
 	/**
 	 * Creates a immutable label with the specified text, with {@link SwingConstants#LEADING} horizontal

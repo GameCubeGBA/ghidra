@@ -798,7 +798,7 @@ class DataDB extends CodeUnitDB implements Data {
 
 	@Override
 	public Class<?> getValueClass() {
-		DataType dt = baseDataType;
+		DataType dt = getBaseDataType();
 		if (dt != null) {
 			return dt.getValueClass(this);
 		}

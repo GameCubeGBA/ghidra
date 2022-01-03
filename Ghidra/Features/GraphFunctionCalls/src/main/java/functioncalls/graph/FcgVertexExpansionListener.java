@@ -25,12 +25,12 @@ public interface FcgVertexExpansionListener {
 	 * 
 	 * @param v the vertex
 	 */
-    void toggleIncomingVertices(FcgVertex v);
+	public void toggleIncomingVertices(FcgVertex v);
 
 	/**
 	 * Show or hide those vertices that are on outgoing edges to v
 	 * 
 	 * @param v the vertex
 	 */
-    void toggleOutgoingVertices(FcgVertex v);
+	public void toggleOutgoingVertices(FcgVertex v);
 }

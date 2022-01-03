@@ -139,7 +139,7 @@ public class IntegerRangeConstraintEditor<T extends Number>
 			infoLabel.setText(statusMsg);
 		}
 		else {
-			infoLabel.setText(formatStatus(errorMessage, true));
+			infoLabel.setText(formatStatus(getErrorMessage(), true));
 		}
 
 	}

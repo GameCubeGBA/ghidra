@@ -27,12 +27,12 @@ import ghidra.program.model.listing.Program;
 @ServiceInfo(defaultProvider = DebuggerMemviewPlugin.class, description = "Display memory vs. time events")
 public interface MemviewService {
 
-	void setBoxes(List<MemoryBox> boxList);
+	public void setBoxes(List<MemoryBox> boxList);
 
-	void initViews();
+	public void initViews();
 
-	void setProgram(Program currentProgram);
+	public void setProgram(Program currentProgram);
 
-	MemviewProvider getProvider();
+	public MemviewProvider getProvider();
 
 }

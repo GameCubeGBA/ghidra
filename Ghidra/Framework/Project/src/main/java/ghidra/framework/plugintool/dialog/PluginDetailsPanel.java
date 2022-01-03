@@ -52,7 +52,8 @@ class PluginDetailsPanel extends AbstractDetailsPanel {
 	private final PluginConfigurationModel model;
 
 	PluginDetailsPanel(PluginConfigurationModel model) {
-        this.model = model;
+		super();
+		this.model = model;
 		createFieldAttributes();
 		createMainPanel();
 	}
@@ -161,7 +162,7 @@ class PluginDetailsPanel extends AbstractDetailsPanel {
 		buffer.append("</TD>");
 
 		Set<DockingActionIf> actions = model.getActionsForPlugin(pluginDescription);
-		if (actions.isEmpty()) {
+		if (actions.size() == 0) {
 			buffer.append("<TD VALIGN=\"TOP\">");
 			insertHTMLLine(buffer, "No actions for plugin", noValueAttrSet);
 			buffer.append("</TD>");

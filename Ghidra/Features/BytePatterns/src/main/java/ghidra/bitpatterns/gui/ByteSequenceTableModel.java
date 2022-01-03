@@ -87,7 +87,7 @@ public class ByteSequenceTableModel extends ThreadedTableModelStub<ByteSequenceR
 	 */
 	public DittedBitSequence mergeSelectedRows() {
 		List<ByteSequenceRowObject> rows = getLastSelectedObjects();
-		if (rows.isEmpty()) {
+		if (rows.size() == 0) {
 			return null;
 		}
 		DittedBitSequence currentMerge = ByteSequenceRowObject.merge(rows);

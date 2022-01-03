@@ -30,7 +30,7 @@ import ghidra.program.model.symbol.Symbol;
 import ghidra.util.exception.DuplicateNameException;
 
 public class ObjectiveC2_Class implements StructConverter {
-	public static final String NAME = "class_t";
+	public final static String NAME = "class_t";
 
 	private ObjectiveC2_State _state;
 	private long _index;
@@ -52,7 +52,7 @@ public class ObjectiveC2_Class implements StructConverter {
 		AddressSpace space = _state.program.getAddressFactory().getDefaultAddressSpace();
 		Address addr = space.getAddress(_index);
 		Symbol symbol = _state.program.getSymbolTable().getPrimarySymbol(addr);
-		if (symbol != null && symbol.getParentNamespace().getName().equals(SectionNames.SECT_GOT)) {
+		if (symbol.getParentNamespace().getName().equals(SectionNames.SECT_GOT)) {
 			return;
 		}
 
@@ -217,7 +217,7 @@ public class ObjectiveC2_Class implements StructConverter {
 		}
 		_state.beenApplied.add(_index);
 
-		Address address = ObjectiveC1_Utilities.toAddress(_state.program, _index);
+		Address address = ObjectiveC1_Utilities.toAddress(_state.program, getIndex());
 		try {
 			ObjectiveC1_Utilities.applyData(_state.program, toDataType(), address);
 		}

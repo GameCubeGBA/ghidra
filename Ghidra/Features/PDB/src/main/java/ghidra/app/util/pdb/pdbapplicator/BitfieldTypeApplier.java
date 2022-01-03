@@ -74,7 +74,7 @@ public class BitfieldTypeApplier extends MsTypeApplier {
 		}
 		catch (InvalidDataTypeException e) {
 			applicator.appendLogMsg(
-				"Problem creating PdbBitField for " + type.getName() + ", error: " + e);
+				"Problem creating PdbBitField for " + type.getName() + ", error: " + e.toString());
 			return null;
 		}
 		return bitFieldDataType;

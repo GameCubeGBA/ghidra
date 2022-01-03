@@ -43,7 +43,9 @@ abstract class AbstractLineDispenser {
 
     static String getFill(int amt){
         StringBuffer fill = new StringBuffer();
-        fill.append(" ".repeat(Math.max(0, amt)));
+        for (int i = 0 ; i < amt ; ++i) {
+            fill.append(" ");
+        }
         return fill.toString();
     }
 

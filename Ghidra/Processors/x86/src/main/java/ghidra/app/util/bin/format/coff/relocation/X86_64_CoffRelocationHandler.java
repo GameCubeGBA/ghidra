@@ -95,87 +95,87 @@ public class X86_64_CoffRelocationHandler extends CoffRelocationHandler {
 	/**
 	 * The relocation is ignored.
 	 */
-    public static final short IMAGE_REL_AMD64_ABSOLUTE = 0x0000;
+	public final static short IMAGE_REL_AMD64_ABSOLUTE = 0x0000;
 
 	/**
 	 * The 64-bit VA of the relocation target.
 	 */
-    public static final short IMAGE_REL_AMD64_ADDR64 = 0x0001;
+	public final static short IMAGE_REL_AMD64_ADDR64 = 0x0001;
 
 	/**
 	 * The 32-bit VA of the relocation target.
 	 */
-    public static final short IMAGE_REL_AMD64_ADDR32 = 0x0002;
+	public final static short IMAGE_REL_AMD64_ADDR32 = 0x0002;
 
 	/**
 	 * The 32-bit address without an image base (RVA).
 	 */
-    public static final short IMAGE_REL_AMD64_ADDR32NB = 0x0003;
+	public final static short IMAGE_REL_AMD64_ADDR32NB = 0x0003;
 
 	/**
 	 * The 32-bit relative address from the byte following the relocation.
 	 */
-    public static final short IMAGE_REL_AMD64_REL32 = 0x0004;
+	public final static short IMAGE_REL_AMD64_REL32 = 0x0004;
 
 	/**
 	 * The 32-bit address relative to byte distance 1 from the relocation.
 	 */
-    public static final short IMAGE_REL_AMD64_REL32_1 = 0x0005;
+	public final static short IMAGE_REL_AMD64_REL32_1 = 0x0005;
 
 	/**
 	 * The 32-bit address relative to byte distance 2 from the relocation.
 	 */
-    public static final short IMAGE_REL_AMD64_REL32_2 = 0x0006;
+	public final static short IMAGE_REL_AMD64_REL32_2 = 0x0006;
 
 	/**
 	 * The 32-bit address relative to byte distance 3 from the relocation.
 	 */
-    public static final short IMAGE_REL_AMD64_REL32_3 = 0x0007;
+	public final static short IMAGE_REL_AMD64_REL32_3 = 0x0007;
 
 	/**
 	 * The 32-bit address relative to byte distance 4 from the relocation.
 	 */
-    public static final short IMAGE_REL_AMD64_REL32_4 = 0x0008;
+	public final static short IMAGE_REL_AMD64_REL32_4 = 0x0008;
 
 	/**
 	 * The 32-bit address relative to byte distance 5 from the relocation.
 	 */
-    public static final short IMAGE_REL_AMD64_REL32_5 = 0x0009;
+	public final static short IMAGE_REL_AMD64_REL32_5 = 0x0009;
 
 	/**
 	 * The 16-bit section index of the section that contains the target. 
 	 * This is used to support debugging information.
 	 */
-    public static final short IMAGE_REL_AMD64_SECTION = 0x000a;
+	public final static short IMAGE_REL_AMD64_SECTION = 0x000a;
 
 	/**
 	 * The 32-bit offset of the target from the beginning of its section. 
 	 * This is used to support debugging information and static thread local storage.
 	 */
-    public static final short IMAGE_REL_AMD64_SECREL = 0x000b;
+	public final static short IMAGE_REL_AMD64_SECREL = 0x000b;
 
 	/**
 	 * A 7-bit unsigned offset from the base of the section that contains the target.
 	 */
-    public static final short IMAGE_REL_AMD64_SECREL7 = 0x000c;
+	public final static short IMAGE_REL_AMD64_SECREL7 = 0x000c;
 
 	/**
 	 * CLR tokens.
 	 */
-    public static final short IMAGE_REL_AMD64_TOKEN = 0x000d;
+	public final static short IMAGE_REL_AMD64_TOKEN = 0x000d;
 
 	/**
 	 * A 32-bit signed span-dependent value emitted into the object.
 	 */
-    public static final short IMAGE_REL_AMD64_SREL32 = 0x000e;
+	public final static short IMAGE_REL_AMD64_SREL32 = 0x000e;
 
 	/**
 	 * A pair that must immediately follow every span-dependent value.
 	 */
-    public static final short IMAGE_REL_AMD64_PAIR = 0x000f;
+	public final static short IMAGE_REL_AMD64_PAIR = 0x000f;
 
 	/**
 	 * A 32-bit signed span-dependent value that is applied at link time.
 	 */
-    public static final short IMAGE_REL_AMD64_SSPAN32 = 0x0010;
+	public final static short IMAGE_REL_AMD64_SSPAN32 = 0x0010;
 }

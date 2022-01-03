@@ -92,8 +92,11 @@ public class AnchoredLayout implements Layout {
 
 	@Override
 	public boolean contains(int y) {
-        return (y >= yPos) && (y < yPos + layout.getHeight());
-    }
+		if ((y >= yPos) && (y < yPos + layout.getHeight())) {
+			return true;
+		}
+		return false;
+	}
 
 	@Override
 	public int cursorBeginning(FieldLocation cursorLoc) {

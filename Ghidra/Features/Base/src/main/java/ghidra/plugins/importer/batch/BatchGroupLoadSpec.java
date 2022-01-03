@@ -74,8 +74,11 @@ public class BatchGroupLoadSpec implements Comparable<BatchGroupLoadSpec> {
 		else if (!lcsPair.equals(other.lcsPair)) {
 			return false;
 		}
-        return preferred == other.preferred;
-    }
+		if (preferred != other.preferred) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public int compareTo(BatchGroupLoadSpec o) {

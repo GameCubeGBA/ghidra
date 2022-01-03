@@ -24,7 +24,7 @@ import agent.dbgmodel.jna.dbgmodel.IUnknownEx;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IDebugHostErrorSink extends IUnknownEx {
-	IID IID_IDEBUG_HOST_ERROR_SINK = new IID("C8FF0F0B-FCE9-467e-8BB3-5D69EF109C00");
+	final IID IID_IDEBUG_HOST_ERROR_SINK = new IID("C8FF0F0B-FCE9-467e-8BB3-5D69EF109C00");
 
 	enum VTIndices implements VTableIndex {
 		REPORT_ERROR, //

@@ -49,7 +49,8 @@ public class CodeBrowserNavigationSegmentedAddressTest extends AbstractGhidraHea
 	private DockingActionIf prevFunction;
 
 	public CodeBrowserNavigationSegmentedAddressTest() {
-    }
+		super();
+	}
 
 	private Address addr(String address) {
 		return addrFactory.getAddress(address);

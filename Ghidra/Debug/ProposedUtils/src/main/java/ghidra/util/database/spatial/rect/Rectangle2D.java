@@ -31,8 +31,11 @@ public interface Rectangle2D<X, Y, R extends Rectangle2D<X, Y, R>> extends Bound
 		if (outer.getSpace().compareY(outer.getY1(), inner.getY1()) > 0) {
 			return false;
 		}
-        return outer.getSpace().compareY(outer.getY2(), inner.getY2()) >= 0;
-    }
+		if (outer.getSpace().compareY(outer.getY2(), inner.getY2()) < 0) {
+			return false;
+		}
+		return true;
+	}
 
 	X getX1();
 
@@ -60,8 +63,11 @@ public interface Rectangle2D<X, Y, R extends Rectangle2D<X, Y, R>> extends Bound
 		if (!this.getY1().equals(that.getY1())) {
 			return false;
 		}
-        return this.getY2().equals(that.getY2());
-    }
+		if (!this.getY2().equals(that.getY2())) {
+			return false;
+		}
+		return true;
+	}
 
 	default int doHashCode() {
 		return Objects.hash(getX1(), getX2(), getY1(), getY2());
@@ -81,8 +87,11 @@ public interface Rectangle2D<X, Y, R extends Rectangle2D<X, Y, R>> extends Bound
 		if (getSpace().compareY(y, getY1()) < 0) {
 			return false;
 		}
-        return getSpace().compareY(y, getY2()) <= 0;
-    }
+		if (getSpace().compareY(y, getY2()) > 0) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	default double getArea() {
@@ -154,8 +163,11 @@ public interface Rectangle2D<X, Y, R extends Rectangle2D<X, Y, R>> extends Bound
 		if (getSpace().compareY(this.getY1(), shape.getY2()) > 0) {
 			return false;
 		}
-        return getSpace().compareY(this.getY2(), shape.getY1()) >= 0;
-    }
+		if (getSpace().compareY(this.getY2(), shape.getY1()) < 0) {
+			return false;
+		}
+		return true;
+	}
 
 	default R intersection(R shape) {
 		X intX1 = getSpace().maxX(this.getX1(), shape.getX1());

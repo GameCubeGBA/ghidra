@@ -193,7 +193,7 @@ public class MDTemplateArgumentsList extends MDParsableItem {
 
 	@Override
 	public void insert(StringBuilder builder) {
-		if (!args.isEmpty()) {
+		if (args.size() > 0) {
 			// boolean firstArgDone = false;
 			Iterator<Boolean> delimIter = commaDelimiter.iterator();
 			for (MDType arg : args) {

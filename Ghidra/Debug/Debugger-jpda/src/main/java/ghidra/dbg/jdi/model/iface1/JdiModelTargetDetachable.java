@@ -30,6 +30,6 @@ import ghidra.dbg.target.TargetDetachable;
 public interface JdiModelTargetDetachable extends JdiModelTargetObject, TargetDetachable {
 
 	@Override
-    CompletableFuture<Void> detach();
+	public CompletableFuture<Void> detach();
 
 }

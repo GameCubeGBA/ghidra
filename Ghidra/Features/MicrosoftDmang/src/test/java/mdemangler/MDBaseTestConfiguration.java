@@ -130,8 +130,11 @@ public class MDBaseTestConfiguration {
 		else if (s.startsWith("__")) {
 			return true;
 		}
-		else return (s.charAt(0) == '_') || Character.isUpperCase(s.charAt(1));
-    }
+		else if ((s.charAt(0) == '_') || Character.isUpperCase(s.charAt(1))) {
+			return true;
+		}
+		return false;
+	}
 
 	private static final String printHeaderTens =
 		"0000000000111111111122222222223333333333444444444455555555556666666666777777777788888888889999999999";

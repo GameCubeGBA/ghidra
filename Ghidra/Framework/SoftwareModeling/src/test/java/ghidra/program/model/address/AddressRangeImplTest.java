@@ -36,7 +36,8 @@ public class AddressRangeImplTest extends AbstractGenericTest {
 	 * @param name
 	 */
 	public AddressRangeImplTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -256,13 +257,15 @@ public class AddressRangeImplTest extends AbstractGenericTest {
 
 		AddressRange r1 = new AddressRangeImpl(start, limit);
 		int addrCount = 0;
-        for (Address address : r1) {
-            addrCount++;
-        }
+		Iterator<Address> addrItr = r1.iterator();
+		while (addrItr.hasNext()) {
+			addrItr.next();
+			addrCount++;
+		}
 
 		assertTrue(
 			"Address Iterator does not properly enumerate address range: " +
-					String.format("%s (%d long) -- found %d", r1, r1.getLength(), addrCount),
+					String.format("%s (%d long) -- found %d", r1.toString(), r1.getLength(), addrCount),
 					addrCount == (size + 1));
 	}
 

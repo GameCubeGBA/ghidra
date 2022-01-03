@@ -132,28 +132,29 @@ public class DexLoader extends AbstractLibrarySupportLoader {
 
 	protected void createMethods(Program program, DexHeader header, ClassDefItem item,
 			List<EncodedMethod> methods, TaskMonitor monitor, MessageLog log) throws Exception {
-        for (EncodedMethod method : methods) {
-            monitor.checkCanceled();
+		for (int i = 0; i < methods.size(); ++i) {
+			monitor.checkCanceled();
 
-            EncodedMethod encodedMethod = method;
+			EncodedMethod encodedMethod = methods.get(i);
 
-            CodeItem codeItem = encodedMethod.getCodeItem();
+			CodeItem codeItem = encodedMethod.getCodeItem();
 
-            Address methodIndexAddress =
-                    DexUtil.toLookupAddress(program, encodedMethod.getMethodIndex());
+			Address methodIndexAddress =
+				DexUtil.toLookupAddress(program, encodedMethod.getMethodIndex());
 
-            if (codeItem == null) {
-                //external method
-            } else {
-                Address methodAddress =
-                        toAddr(program, DexUtil.METHOD_ADDRESS + encodedMethod.getCodeOffset());
+			if (codeItem == null) {
+				//external method
+			}
+			else {
+				Address methodAddress =
+					toAddr(program, DexUtil.METHOD_ADDRESS + encodedMethod.getCodeOffset());
 
-                byte[] instructionBytes = codeItem.getInstructionBytes();
-                program.getMemory().setBytes(methodAddress, instructionBytes);
+				byte[] instructionBytes = codeItem.getInstructionBytes();
+				program.getMemory().setBytes(methodAddress, instructionBytes);
 
-                program.getMemory().setInt(methodIndexAddress, (int) methodAddress.getOffset());
-            }
-        }
+				program.getMemory().setInt(methodIndexAddress, (int) methodAddress.getOffset());
+			}
+		}
 	}
 
 	protected Address toAddr(Program program, long offset) {

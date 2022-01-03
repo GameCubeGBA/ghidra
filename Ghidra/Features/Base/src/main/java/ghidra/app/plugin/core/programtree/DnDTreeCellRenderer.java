@@ -66,7 +66,8 @@ class DnDTreeCellRenderer extends DefaultTreeCellRenderer {
 	 * Construct a new DnDTreeCellRenderer.
 	 */
 	DnDTreeCellRenderer() {
-        defaultNonSelectionColor = getBackgroundNonSelectionColor();
+		super();
+		defaultNonSelectionColor = getBackgroundNonSelectionColor();
 		defaultSelectionColor = getBackgroundSelectionColor();
 		rowForFeedback = -1;
 

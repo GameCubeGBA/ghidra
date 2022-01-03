@@ -257,13 +257,13 @@ public class FunctionGraphOptions extends VisualGraphOptions {
 
 	public Color getColor(FlowType flowType) {
 		if (flowType.isFallthrough()) {
-			return fallthroughEdgeColor;
+			return getFallthroughEdgeColor();
 		}
 		else if (flowType.isUnConditional()) {
-			return unconditionalJumpEdgeColor;
+			return getUnconditionalJumpEdgeColor();
 		}
 		else if (flowType.isJump()) {
-			return conditionalJumpEdgeColor;
+			return getConditionalJumpEdgeColor();
 		}
 
 		return Color.BLACK;
@@ -271,13 +271,13 @@ public class FunctionGraphOptions extends VisualGraphOptions {
 
 	public Color getHighlightColor(FlowType flowType) {
 		if (flowType.isFallthrough()) {
-			return fallthroughEdgeHighlightColor;
+			return getFallthroughEdgeHighlightColor();
 		}
 		else if (flowType.isUnConditional()) {
-			return unconditionalJumpEdgeHighlightColor;
+			return getUnconditionalJumpEdgeHighlightColor();
 		}
 		else if (flowType.isJump()) {
-			return conditionalJumpEdgeHighlightColor;
+			return getConditionalJumpEdgeHighlightColor();
 		}
 
 		return Color.BLACK;

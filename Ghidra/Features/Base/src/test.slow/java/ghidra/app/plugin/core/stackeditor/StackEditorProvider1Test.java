@@ -32,7 +32,8 @@ import ghidra.program.model.listing.*;
 public class StackEditorProvider1Test extends AbstractStackEditorProviderTest {
 
 	public StackEditorProvider1Test() {
-    }
+		super();
+	}
 
 	// Change LOCAL size.
 	@Test

@@ -31,7 +31,7 @@ import ghidra.util.datastruct.RedBlackTree;
  */
 
 public class AddressSet implements AddressSetView {
-	private static final double LOGBASE2 = Math.log(2);
+	private final static double LOGBASE2 = Math.log(2);
 	private RedBlackTree<Address, Address> rbTree = new RedBlackTree<>();
 	private RedBlackEntry<Address, Address> lastNode;
 	private long addressCount = 0;
@@ -720,17 +720,19 @@ public class AddressSet implements AddressSetView {
 			entry = rbTree.getFirst();
 		}
 
-        for (AddressRange range : addrSet) {
-            while (range.compareTo(entry.getValue()) > 0) {
-                entry = entry.getSuccessor();
-                if (entry == null) {
-                    return false;
-                }
-            }
-            if (range.getMaxAddress().compareTo(entry.getKey()) >= 0) {
-                return true;
-            }
-        }
+		Iterator<AddressRange> iterator = addrSet.iterator();
+		while (iterator.hasNext()) {
+			AddressRange range = iterator.next();
+			while (range.compareTo(entry.getValue()) > 0) {
+				entry = entry.getSuccessor();
+				if (entry == null) {
+					return false;
+				}
+			}
+			if (range.getMaxAddress().compareTo(entry.getKey()) >= 0) {
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -740,17 +742,19 @@ public class AddressSet implements AddressSetView {
 		if (entry == null) {
 			return false;
 		}
-        for (AddressRange range : addrSet) {
-            while (range.compareTo(entry.getValue()) > 0) {
-                entry = entry.getSuccessor();
-                if (entry == null) {
-                    return false;
-                }
-            }
-            if (range.getMaxAddress().compareTo(entry.getValue()) > 0) {
-                return false;
-            }
-        }
+		Iterator<AddressRange> iterator = addrSet.iterator();
+		while (iterator.hasNext()) {
+			AddressRange range = iterator.next();
+			while (range.compareTo(entry.getValue()) > 0) {
+				entry = entry.getSuccessor();
+				if (entry == null) {
+					return false;
+				}
+			}
+			if (range.getMaxAddress().compareTo(entry.getValue()) > 0) {
+				return false;
+			}
+		}
 		return true;
 	}
 

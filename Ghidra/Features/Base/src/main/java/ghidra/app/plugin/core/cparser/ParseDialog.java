@@ -61,7 +61,7 @@ import resources.ResourceManager;
  *
  */
 class ParseDialog extends DialogComponentProvider {
-	static final String PROFILE_DIR = "parserprofiles";
+	final static String PROFILE_DIR = "parserprofiles";
 
 	private static String FILE_EXTENSION = ".prf";
 
@@ -273,11 +273,11 @@ class ParseDialog extends DialogComponentProvider {
 			String line = null;
 			while ((line = br.readLine()) != null) {
 				line = line.trim();
-				if (line.startsWith("-") || (line.isEmpty() && sb.length() > 0)) {
+				if (line.startsWith("-") || (line.length() == 0 && sb.length() > 0)) {
 					// this is a compiler directive
 					sb.append(line + "\n");
 				}
-				else if (!line.isEmpty()) {
+				else if (line.length() > 0) {
 					File f = new File(line);
 					pathList.add(f.getPath());
 				}
@@ -449,7 +449,7 @@ class ParseDialog extends DialogComponentProvider {
 		plugin.getTool().showDialog(d, getComponent());
 
 		String name = d.getValue();
-		if (name != null && !name.isEmpty()) {
+		if (name != null && name.length() > 0) {
 			if (!name.endsWith(FILE_EXTENSION)) {
 				name = name + FILE_EXTENSION;
 			}

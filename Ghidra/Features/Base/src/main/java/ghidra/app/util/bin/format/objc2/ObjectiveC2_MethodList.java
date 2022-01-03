@@ -24,7 +24,7 @@ import ghidra.program.model.data.*;
 import ghidra.util.exception.DuplicateNameException;
 
 public class ObjectiveC2_MethodList extends ObjectiveC_MethodList {
-	public static final String NAME = "method_list_t";
+	public final static String NAME = "method_list_t";
 
 	private int entsizeAndFlags;
 	private int count;

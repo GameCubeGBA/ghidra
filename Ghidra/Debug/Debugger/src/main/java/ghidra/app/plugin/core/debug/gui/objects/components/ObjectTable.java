@@ -58,13 +58,16 @@ public class ObjectTable<R> implements ObjectPane {
 		this.listingService = container.getProvider().getListingService();
 		this.modelService = container.getProvider().getModelService();
 
-		table.getSelectionModel().addListSelectionListener(e -> {
-            if (e.getValueIsAdjusting()) {
-                return;
-            }
-            DebuggerObjectsProvider provider = container.getProvider();
-            provider.getTool().contextChanged(provider);
-        });
+		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				if (e.getValueIsAdjusting()) {
+					return;
+				}
+				DebuggerObjectsProvider provider = container.getProvider();
+				provider.getTool().contextChanged(provider);
+			}
+		});
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -143,7 +146,7 @@ public class ObjectTable<R> implements ObjectPane {
 	private List<R> generateRows(ObjectContainer changed) {
 		List<R> list = new ArrayList<>();
 		for (ObjectContainer child : changed.getCurrentChildren()) {
-			if (child.isVisible() || !container.getProvider().isHideIntrinsics()) {
+			if (child.isVisible() || !getContainer().getProvider().isHideIntrinsics()) {
 				TargetObject to = child.getTargetObject();
 				try {
 					R r = clazz

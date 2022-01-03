@@ -61,7 +61,7 @@ public class InvalidFileArchive implements Archive {
 	@Override
 	public int compareTo(Archive archive) {
 		if (archive instanceof InvalidFileArchive) {
-			return name.compareToIgnoreCase(archive.getName());
+			return getName().compareToIgnoreCase(archive.getName());
 		}
 		return 1;
 	}

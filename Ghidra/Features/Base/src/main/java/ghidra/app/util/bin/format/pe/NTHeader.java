@@ -47,8 +47,8 @@ public class NTHeader implements StructConverter, OffsetValidator {
 	/**
 	 * The size of the NT header signature.
 	 */
-    public static final int SIZEOF_SIGNATURE = BinaryReader.SIZEOF_INT;
-	public static final int MAX_SANE_COUNT = 0x10000;
+	public final static int SIZEOF_SIGNATURE = BinaryReader.SIZEOF_INT;
+	public final static int MAX_SANE_COUNT = 0x10000;
 
 	private int signature;
 	private FileHeader fileHeader;
@@ -227,7 +227,7 @@ public class NTHeader implements StructConverter, OffsetValidator {
 	 * @return the pointer into binary image, 0 if not valid
 	 */
 	public long vaToPointer(long va) {
-		return rvaToPointer(va - optionalHeader.getImageBase());
+		return rvaToPointer(va - getOptionalHeader().getImageBase());
 	}
 
 	/**

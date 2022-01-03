@@ -40,9 +40,9 @@ import ghidra.util.task.TaskMonitor;
 public class PropertyListMergeManager implements MergeResolver {
 	static final int CANCELED = -2; // user canceled the merge operation
 	static final int ASK_USER = -1;// prompt the user to choose resolution
-	static final int LATEST_VERSION = 1;
-	static final int MY_VERSION = 2;
-	static final int ORIGINAL_VERSION = 3;
+	final static int LATEST_VERSION = 1;
+	final static int MY_VERSION = 2;
+	final static int ORIGINAL_VERSION = 3;
 
 	private static String[] PROPERTY_LIST_PHASE = new String[] { "Property List" };
 	private int conflictOption;
@@ -218,14 +218,16 @@ public class PropertyListMergeManager implements MergeResolver {
 		List<String> myNameList = myList.getOptionNames();
 		List<String> resultNameList = resultList.getOptionNames();
 
-        for (String name : myNameList) {
-            if (resultNameList.contains(name)) {
-                updateValue(myList, resultList, origList, name);
-            } else {
-                // not in the result
-                checkForAddedProperty(myList, resultList, origList, name);
-            }
-        }
+		for (int i = 0; i < myNameList.size(); i++) {
+			String name = myNameList.get(i);
+			if (resultNameList.contains(name)) {
+				updateValue(myList, resultList, origList, name);
+			}
+			else {
+				// not in the result
+				checkForAddedProperty(myList, resultList, origList, name);
+			}
+		}
 		checkDeletedProperties(resultList, origList, myNameList, resultNameList,
 			origList.getOptionNames());
 	}
@@ -240,27 +242,30 @@ public class PropertyListMergeManager implements MergeResolver {
 	private void checkDeletedProperties(Options latestList, Options origList, List<String> myNames,
 			List<String> latestNames, List<String> origNames) {
 
-        for (String propertyName : latestNames) {
-            if (!myNames.contains(propertyName) && origNames.contains(propertyName)) {
-                try {
-                    Object latestValue = getValue(latestList, propertyName);
-                    Object origValue = getValue(origList, propertyName);
+		for (int i = 0; i < latestNames.size(); i++) {
+			String propertyName = latestNames.get(i);
+			if (!myNames.contains(propertyName) && origNames.contains(propertyName)) {
+				try {
+					Object latestValue = getValue(latestList, propertyName);
+					Object origValue = getValue(origList, propertyName);
 
-                    if (latestValue.equals(origValue)) {
-                        latestList.removeOption(propertyName);
-                        currentMonitor.setProgress(++progressIndex);
-                    } else {
-                        String listName = latestList.getName();
-                        ArrayList<ConflictInfo> mapList = getConflictList(listName);
-                        mapList.add(new ConflictInfo(listName, propertyName,
-                                latestList.getType(propertyName), OptionType.NO_TYPE,
-                                origList.getType(propertyName), latestValue, null, origValue));
-                        ++totalConflictCount;
-                    }
-                } catch (IllegalArgumentException e) {
-                }
-            }
-        }
+					if (latestValue.equals(origValue)) {
+						latestList.removeOption(propertyName);
+						currentMonitor.setProgress(++progressIndex);
+					}
+					else {
+						String listName = latestList.getName();
+						ArrayList<ConflictInfo> mapList = getConflictList(listName);
+						mapList.add(new ConflictInfo(listName, propertyName,
+							latestList.getType(propertyName), OptionType.NO_TYPE,
+							origList.getType(propertyName), latestValue, null, origValue));
+						++totalConflictCount;
+					}
+				}
+				catch (IllegalArgumentException e) {
+				}
+			}
+		}
 	}
 
 	private void updateValue(Options myList, Options resultList, Options origList,
@@ -400,59 +405,63 @@ public class PropertyListMergeManager implements MergeResolver {
 	private void processConflictList(ArrayList<ConflictInfo> conflictList, int listNameIndex,
 			String currentListName) throws CancelledException {
 
-        for (ConflictInfo conflictInfo : conflictList) {
-            currentMonitor.setProgress(++progressIndex);
+		for (int i = 0; i < conflictList.size(); i++) {
+			currentMonitor.setProgress(++progressIndex);
 
-            ConflictInfo info = conflictInfo;
+			ConflictInfo info = conflictList.get(i);
 
-            ++currentConflict;
-            if (propertyListChoice != ASK_USER) {
-                conflictOption = propertyListChoice;
-            } else if (mergeManager != null && conflictOption == ASK_USER) {
-                showMergePanel(info, currentConflict, totalConflictCount);
-                // block until the user resolves the conflict or cancels the
-                // process
-            }
+			++currentConflict;
+			if (propertyListChoice != ASK_USER) {
+				conflictOption = propertyListChoice;
+			}
+			else if (mergeManager != null && conflictOption == ASK_USER) {
+				showMergePanel(info, currentConflict, totalConflictCount);
+				// block until the user resolves the conflict or cancels the 
+				// process 
+			}
 
-            switch (conflictOption) {
-                case LATEST_VERSION:
-                    break;// no action required
+			switch (conflictOption) {
+				case LATEST_VERSION:
+					break;// no action required
 
-                case MY_VERSION:
-                case ORIGINAL_VERSION:
-                    Options options = resultProgram.getOptions(info.getListName());
-                    options.removeOption(info.getPropertyName());
-                    if (conflictOption == MY_VERSION) {
-                        Object myValue = info.getMyValue();
-                        if (myValue != null) {
-                            setValue(options, info.getPropertyName(), info.getMyType(),
-                                    info.getMyValue());
-                        }
-                    } else {
-                        Object origValue = info.getOrigValue();
-                        if (origValue != null) {
-                            setValue(options, info.getPropertyName(), info.getOrigType(),
-                                    info.getOrigValue());
-                        }
-                    }
-                    break;
+				case MY_VERSION:
+				case ORIGINAL_VERSION:
+					Options options = resultProgram.getOptions(info.getListName());
+					options.removeOption(info.getPropertyName());
+					if (conflictOption == MY_VERSION) {
+						Object myValue = info.getMyValue();
+						if (myValue != null) {
+							setValue(options, info.getPropertyName(), info.getMyType(),
+								info.getMyValue());
+						}
+					}
+					else {
+						Object origValue = info.getOrigValue();
+						if (origValue != null) {
+							setValue(options, info.getPropertyName(), info.getOrigType(),
+								info.getOrigValue());
+						}
+					}
+					break;
 
-                case CANCELED:
-                    throw new CancelledException();
-            }
-            conflictOption = ASK_USER;
-        }
+				case CANCELED:
+					throw new CancelledException();
+			}
+			conflictOption = ASK_USER;
+		}
 	}
 
 	private void showMergePanel(final ConflictInfo info, final int conflictIndex,
 			final int totalNumConflicts) {
 		try {
-			SwingUtilities.invokeAndWait(() -> {
-                if (mergePanel == null) {
-                    mergePanel = new PropertyListMergePanel(mergeManager, totalNumConflicts);
-                }
-                mergePanel.setConflictInfo(conflictIndex, info);
-            });
+			SwingUtilities.invokeAndWait(new Runnable() {
+				public void run() {
+					if (mergePanel == null) {
+						mergePanel = new PropertyListMergePanel(mergeManager, totalNumConflicts);
+					}
+					mergePanel.setConflictInfo(conflictIndex, info);
+				}
+			});
 		}
 		catch (InterruptedException e) {
 		}

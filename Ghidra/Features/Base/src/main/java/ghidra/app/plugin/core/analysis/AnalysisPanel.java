@@ -63,7 +63,7 @@ class AnalysisPanel extends JPanel implements PropertyChangeListener {
 	private static final String OPTIONS_FILE_EXTENSION = "options";
 
 	public static final String PROTOTYPE = " (Prototype)";
-	public static final int COLUMN_ANALYZER_IS_ENABLED = 0;
+	public final static int COLUMN_ANALYZER_IS_ENABLED = 0;
 
 	static final String ANALYZER_OPTIONS_SAVE_DIR = "analyzer_options";
 
@@ -348,7 +348,7 @@ class AnalysisPanel extends JPanel implements PropertyChangeListener {
 			return;
 		}
 		saveName = saveName.trim();
-		if (saveName.isEmpty()) {
+		if (saveName.length() == 0) {
 			return;
 		}
 		File saveFile = getOptionsSaveFile(saveName);
@@ -477,9 +477,11 @@ class AnalysisPanel extends JPanel implements PropertyChangeListener {
 	void setAnalyzerEnabled(String analyzerName, boolean enabled, boolean fireEvent) {
 		List<Component> list = analyzerManagedComponentsMap.get(analyzerName);
 		if (list != null) {
-            for (Component next : list) {
-                next.setEnabled(enabled);
-            }
+			Iterator<Component> iterator = list.iterator();
+			while (iterator.hasNext()) {
+				Component next = iterator.next();
+				next.setEnabled(enabled);
+			}
 		}
 		if (fireEvent) {
 			propertyChange(null);
@@ -782,7 +784,7 @@ class AnalysisPanel extends JPanel implements PropertyChangeListener {
 
 	private File getMostRecentApplicationSettingsDirWithSavedOptions() {
 		List<File> ghidraUserDirsByTime = GenericRunInfo.getPreviousApplicationSettingsDirsByTime();
-		if (ghidraUserDirsByTime.isEmpty()) {
+		if (ghidraUserDirsByTime.size() == 0) {
 			return null;
 		}
 
@@ -797,11 +799,14 @@ class AnalysisPanel extends JPanel implements PropertyChangeListener {
 	}
 
 	private boolean isUserConfiguration(Options options) {
-        // these two are not user configurations.
-        return options != STANDARD_DEFAULT_OPTIONS &&
-                options != currentProgramOptions;
+		if (options == STANDARD_DEFAULT_OPTIONS ||
+			options == currentProgramOptions) {
+			// these two are not user configurations.
+			return false;
+		}
+		return true;
 
-    }
+	}
 
 	private void optionsComboBoxChanged(ItemEvent e) {
 		if (e.getStateChange() == ItemEvent.SELECTED) {

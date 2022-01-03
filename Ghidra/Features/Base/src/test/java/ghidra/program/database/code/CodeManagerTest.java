@@ -62,7 +62,8 @@ public class CodeManagerTest extends AbstractGenericTest {
 	 * @param arg0
 	 */
 	public CodeManagerTest() {
-    }
+		super();
+	}
 
 	/*
 	 * @see TestCase#setUp()
@@ -496,8 +497,8 @@ public class CodeManagerTest extends AbstractGenericTest {
 		assertNotNull(name1);
 		String name2 = iter.next();
 		assertNotNull(name2);
-		assertTrue("FavoriteColor".equals(name1) || "Numbers".equals(name1));
-		assertTrue("FavoriteColor".equals(name2) || "Numbers".equals(name2));
+		assertTrue(name1.equals("FavoriteColor") || name1.equals("Numbers"));
+		assertTrue(name2.equals("FavoriteColor") || name2.equals("Numbers"));
 	}
 
 	@Test

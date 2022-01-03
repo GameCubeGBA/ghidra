@@ -621,7 +621,7 @@ class ProgramDBChangeSet implements ProgramChangeSet, DomainObjectDBChangeSet {
 	}
 
 	private void writeIdRecords(DBHandle dbh, String tableName, Set<Long> ids) throws IOException {
-		if (!ids.isEmpty()) {
+		if (ids.size() > 0) {
 			Table table = dbh.createTable(tableName, STORED_ID_SCHEMA);
 			DBRecord rec = STORED_ID_SCHEMA.createRecord(0);
 			int key = 1;
@@ -660,14 +660,17 @@ class ProgramDBChangeSet implements ProgramChangeSet, DomainObjectDBChangeSet {
 
 	@Override
 	public boolean hasChanges() {
-        return !changedAddrsSinceSave.isEmpty() || !changedRegAddrsSinceSave.isEmpty() ||
-                !changedDataTypeIds.isEmpty() || !changedCategoryIds.isEmpty() ||
-                !changedProgramTreeIds.isEmpty() || !changedSymbolIds.isEmpty() ||
-                !changedSourceArchiveIds.isEmpty() || !changedTagIds.isEmpty() ||
-                !addedDataTypeIds.isEmpty() || !addedCategoryIds.isEmpty() ||
-                !addedProgramTreeIds.isEmpty() || !addedSymbolIds.isEmpty() ||
-                !addedSourceArchiveIds.isEmpty() || !addedTagIds.isEmpty();
-    }
+		if (changedAddrsSinceSave.isEmpty() && changedRegAddrsSinceSave.isEmpty() &&
+			changedDataTypeIds.isEmpty() && changedCategoryIds.isEmpty() &&
+			changedProgramTreeIds.isEmpty() && changedSymbolIds.isEmpty() &&
+			changedSourceArchiveIds.isEmpty() && changedTagIds.isEmpty() &&
+			addedDataTypeIds.isEmpty() && addedCategoryIds.isEmpty() &&
+			addedProgramTreeIds.isEmpty() && addedSymbolIds.isEmpty() &&
+			addedSourceArchiveIds.isEmpty() && addedTagIds.isEmpty()) {
+			return false;
+		}
+		return true;
+	}
 }
 
 class ChangeDiff {

@@ -65,9 +65,9 @@ import resources.*;
 public class BookmarkPlugin extends ProgramPlugin
 		implements DomainObjectListener, PopupActionProvider, BookmarkService {
 
-	private static final int MAX_DELETE_ACTIONS = 10;
+	private final static int MAX_DELETE_ACTIONS = 10;
 
-	static final int TIMER_DELAY = 500;
+	final static int TIMER_DELAY = 500;
 
 	public static final int MIN_TIMEOUT = 1000;
 	public static final int MAX_TIMEOUT = 1000 * 60 * 20;
@@ -266,9 +266,11 @@ public class BookmarkPlugin extends ProgramPlugin
 	}
 
 	private void disposeAllBookmarkers() {
-        for (BookmarkNavigator nav : bookmarkNavigators.values()) {
-            nav.dispose();
-        }
+		Iterator<BookmarkNavigator> it = bookmarkNavigators.values().iterator();
+		while (it.hasNext()) {
+			BookmarkNavigator nav = it.next();
+			nav.dispose();
+		}
 		bookmarkNavigators.clear();
 	}
 
@@ -625,9 +627,10 @@ public class BookmarkPlugin extends ProgramPlugin
 				types.add(type);
 			}
 			else {
-                for (String s : bookmarkNavigators.keySet()) {
-                    types.add(s);
-                }
+				Iterator<String> it = bookmarkNavigators.keySet().iterator();
+				while (it.hasNext()) {
+					types.add(it.next());
+				}
 			}
 			updateMgr.update();
 		}
@@ -655,9 +658,11 @@ public class BookmarkPlugin extends ProgramPlugin
 				running = true;
 			}
 			try {
-                for (String type : myTypes) {
-                    updateNav(type);
-                }
+				Iterator<String> it = myTypes.iterator();
+				while (it.hasNext()) {
+					String type = it.next();
+					updateNav(type);
+				}
 			}
 			catch (Throwable t) {
 				// This is squashed due to the nature of this primitive thread.  This thread 

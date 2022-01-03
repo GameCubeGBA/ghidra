@@ -23,7 +23,7 @@ import ghidra.program.model.listing.Program;
 
 public final class BootImageUtil {
 
-	public static final boolean isBootImage(Program program) {
+	public final static boolean isBootImage(Program program) {
 		byte[] bytes = new byte[BootImageConstants.BOOT_MAGIC_SIZE];
 		try {
 			Address address = program.getMinAddress();
@@ -35,7 +35,7 @@ public final class BootImageUtil {
 		return Arrays.equals(bytes, BootImageConstants.BOOT_MAGIC.getBytes());
 	}
 
-	public static final boolean isBootImage(BinaryReader reader) {
+	public final static boolean isBootImage(BinaryReader reader) {
 		try {
 			String magic = reader.readAsciiString(0, BootImageConstants.BOOT_MAGIC_SIZE);
 			return BootImageConstants.BOOT_MAGIC.equals(magic);
@@ -46,7 +46,7 @@ public final class BootImageUtil {
 		return false;
 	}
 
-	public static final boolean isVendorBootImage(Program program) {
+	public final static boolean isVendorBootImage(Program program) {
 		byte[] bytes = new byte[BootImageConstants.VENDOR_BOOT_MAGIC_SIZE];
 		try {
 			Address address = program.getMinAddress();
@@ -58,7 +58,7 @@ public final class BootImageUtil {
 		return Arrays.equals(bytes, BootImageConstants.VENDOR_BOOT_MAGIC.getBytes());
 	}
 
-	public static final boolean isVendorBootImage(BinaryReader reader) {
+	public final static boolean isVendorBootImage(BinaryReader reader) {
 		try {
 			String magic = reader.readAsciiString(0, BootImageConstants.VENDOR_BOOT_MAGIC_SIZE);
 			return BootImageConstants.VENDOR_BOOT_MAGIC.equals(magic);
@@ -69,7 +69,7 @@ public final class BootImageUtil {
 		return false;
 	}
 
-	public static final String getOSVersionString(int os_version) {
+	public final static String getOSVersionString(int os_version) {
 		int a = (os_version & 0xfe000000) >>> 25;
 		int b = (os_version & 0x01fc0000) >>> 18;
 		int c = (os_version & 0x0003f800) >>> 11;

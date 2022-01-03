@@ -38,9 +38,9 @@ public class LinuxJavaFinder extends JavaFinder {
 
 	@Override
 	protected File getJreHomeFromJavaHome(File javaHomeDir) {
-		if (javaHomeDir.isDirectory() && !"jre".equals(javaHomeDir.getName())) {
+		if (javaHomeDir.isDirectory() && !javaHomeDir.getName().equals("jre")) {
 			for (File dir : javaHomeDir.listFiles()) {
-				if (dir.isDirectory() && "jre".equals(dir.getName())) {
+				if (dir.isDirectory() && dir.getName().equals("jre")) {
 					return dir;
 				}
 			}
@@ -50,7 +50,7 @@ public class LinuxJavaFinder extends JavaFinder {
 
 	@Override
 	protected File getJdkHomeFromJavaHome(File javaHomeDir) {
-		if ("jre".equals(javaHomeDir.getName())) {
+		if (javaHomeDir.getName().equals("jre")) {
 			return javaHomeDir.getParentFile();
 		}
 		return javaHomeDir;

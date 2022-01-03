@@ -29,7 +29,7 @@ import ghidra.xml.XmlPullParser;
  *
  */
 public interface ParamList {
-	class WithSlotRec {	// Object for passing back slot and slotsize
+	public static class WithSlotRec {	// Object for passing back slot and slotsize
 		int slot;
 		int slotsize;
 	}

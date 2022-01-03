@@ -67,7 +67,7 @@ public class StringUtilities {
 	/**
 	* The platform specific string that is the line separator.
 	*/
-	public static final String LINE_SEPARATOR = System.lineSeparator();
+	public final static String LINE_SEPARATOR = System.lineSeparator();
 
 	public static final int UNICODE_REPLACEMENT = 0xFFFD;
 
@@ -460,8 +460,12 @@ public class StringUtilities {
 			return false;
 		}
 		int endIndex = startIndex + length;
-        return (endIndex >= text.length()) || !Character.isJavaIdentifierPart(text.charAt(endIndex));
-    }
+		if ((endIndex < text.length()) && Character.isJavaIdentifierPart(text.charAt(endIndex))) {
+			return false;
+		}
+
+		return true;
+	}
 
 	/**
 	 * Convert tabs in the given string to spaces using a default tab width of 8 spaces.
@@ -585,7 +589,9 @@ public class StringUtilities {
 
 		int n = length - source.length();
 		StringBuilder buffer = new StringBuilder();
-        buffer.append(String.valueOf(filler).repeat(Math.max(0, n)));
+		for (int i = 0; i < n; i++) {
+			buffer.append(filler);
+		}
 
 		if (rightJustify) {
 			buffer.append(source);

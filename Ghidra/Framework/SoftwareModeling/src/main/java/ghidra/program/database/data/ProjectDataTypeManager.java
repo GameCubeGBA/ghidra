@@ -84,7 +84,7 @@ public class ProjectDataTypeManager extends DataTypeManagerDB
 
 	@Override
 	public void setName(String name) throws InvalidNameException {
-		if (name == null || name.isEmpty()) {
+		if (name == null || name.length() == 0) {
 			throw new InvalidNameException("Name is invalid: " + name);
 		}
 

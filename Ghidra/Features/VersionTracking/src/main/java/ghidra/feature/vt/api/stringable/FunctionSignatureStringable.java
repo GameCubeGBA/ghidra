@@ -218,7 +218,7 @@ public class FunctionSignatureStringable extends Stringable {
 		buildy.append(getSavableFunctionSignatureSource()).append(DELIMITER);
 		buildy.append(getSavableIsInline()).append(DELIMITER);
 		buildy.append(getSavableHasNoReturn()).append(DELIMITER);
-		buildy.append(callingConventionName).append(DELIMITER);
+		buildy.append(getSavableCallingConvention()).append(DELIMITER);
 		buildy.append(getSavableCallFixup()).append(DELIMITER);
 		buildy.append(originalName).append(DELIMITER);
 		buildy.append(getSavableHasCustomStorage()).append(DELIMITER);
@@ -307,7 +307,7 @@ public class FunctionSignatureStringable extends Stringable {
 		hasNoReturn = Boolean.parseBoolean(strings.remove(0)); // NoReturn Flag
 		callingConventionName = strings.remove(0); // Calling Convention Name
 		callFixup = strings.remove(0); // Call Fixup
-		if ("none".equals(callFixup)) {
+		if (callFixup.equals("none")) {
 			callFixup = null;
 		}
 		originalName = strings.remove(0); // Original Function Name
@@ -378,7 +378,8 @@ public class FunctionSignatureStringable extends Stringable {
 	private String saveParameterInfos() {
 		StringBuilder storageBuilder = new StringBuilder();
 		int nameCount = parameterInfos.size();
-		for (ParameterInfo parameterInfo : parameterInfos) {
+		for (int i = 0; i < nameCount; i++) {
+			ParameterInfo parameterInfo = parameterInfos.get(i);
 			String name = parameterInfo.name;
 			SourceType source = parameterInfo.source;
 			String comment = parameterInfo.comment;
@@ -1028,7 +1029,7 @@ public class FunctionSignatureStringable extends Stringable {
 			}
 			if (commentChoice == CommentChoices.APPEND_TO_EXISTING) {
 				String mergedComment = StringUtilities.mergeStrings(toComment, fromComment);
-				if (mergedComment != null && mergedComment.isEmpty()) {
+				if (mergedComment != null && mergedComment.length() == 0) {
 					mergedComment = null;
 				}
 				if (!SystemUtilities.isEqual(mergedComment, toComment)) {
@@ -1036,7 +1037,7 @@ public class FunctionSignatureStringable extends Stringable {
 				}
 			}
 			if (commentChoice == CommentChoices.OVERWRITE_EXISTING) {
-				if (fromComment != null && fromComment.isEmpty()) {
+				if (fromComment != null && fromComment.length() == 0) {
 					fromComment = null;
 				}
 				toParameter.setComment(fromComment);
@@ -1067,7 +1068,7 @@ public class FunctionSignatureStringable extends Stringable {
 			this.storage = storage;
 			this.source = source;
 			this.comment = comment;
-			if (comment != null && comment.trim().isEmpty()) {
+			if (comment != null && comment.trim().length() == 0) {
 				comment = null;
 			}
 		}
@@ -1094,7 +1095,7 @@ public class FunctionSignatureStringable extends Stringable {
 			this.storage = storage;
 			this.source = source;
 			this.comment = comment;
-			if (comment != null && comment.trim().isEmpty()) {
+			if (comment != null && comment.trim().length() == 0) {
 				comment = null;
 			}
 		}
@@ -1109,8 +1110,11 @@ public class FunctionSignatureStringable extends Stringable {
 			if (!SystemUtilities.isEqual(comment, other.comment)) {
 				return false;
 			}
-            return DataTypeUtilities.isSameOrEquivalentDataType(dataType, other.dataType);
-        }
+			if (!DataTypeUtilities.isSameOrEquivalentDataType(dataType, other.dataType)) {
+				return false;
+			}
+			return true;
+		}
 
 		@Override
 		public String toString() {

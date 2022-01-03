@@ -86,10 +86,12 @@ public class FilterDialog extends DialogComponentProvider {
 	private void initCheckBoxes() {
 		setChanged(false);
 		ignoreCallbacks = true;
-        for (String filterName : checkBoxMap.keySet()) {
-            JCheckBox cb = checkBoxMap.get(filterName);
-            cb.setSelected(filter.isActive(filterName));
-        }
+		Iterator<String> it = checkBoxMap.keySet().iterator();
+		while (it.hasNext()) {
+			String filterName = it.next();
+			JCheckBox cb = checkBoxMap.get(filterName);
+			cb.setSelected(filter.isActive(filterName));
+		}
 		ignoreCallbacks = false;
 		advancedFilterCheckbox.setSelected(filter.getActiveAdvancedFilterCount() > 0);
 		update();

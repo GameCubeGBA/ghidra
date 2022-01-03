@@ -71,7 +71,7 @@ public class ClosedSequenceMiner {
 				new ProjectedDatabase(database, singletonFrequentItem);
 			Set<FrequentSequenceItem> backwardExtensionItems =
 				projectedDatabase.getBackwardExtensionItems();
-			if (backwardExtensionItems.isEmpty()) {
+			if (backwardExtensionItems.size() == 0) {
 				bide(projectedDatabase, monitor);
 			}
 		}
@@ -89,7 +89,7 @@ public class ClosedSequenceMiner {
 			projectedDatabase.getLocallyFrequentItems(globallyFrequentItems, minSupport);
 		Set<FrequentSequenceItem> forwardExtensionItems =
 			projectedDatabase.getForwardExtensionItems(locallyFrequentItems);
-		if (forwardExtensionItems.isEmpty()) {
+		if (forwardExtensionItems.size() == 0) {
 			frequentClosedSequences.add(new FrequentSequence(projectedDatabase.getPrefix(),
 				projectedDatabase.getSupport()));
 		}
@@ -99,7 +99,7 @@ public class ClosedSequenceMiner {
 			}
 			ProjectedDatabase extended = new ProjectedDatabase(projectedDatabase, fItem.getItem());
 			Set<FrequentSequenceItem> backwardExtensionItems = extended.getBackwardExtensionItems();
-			if (backwardExtensionItems.isEmpty()) {
+			if (backwardExtensionItems.size() == 0) {
 				bide(extended, monitor);
 			}
 		}

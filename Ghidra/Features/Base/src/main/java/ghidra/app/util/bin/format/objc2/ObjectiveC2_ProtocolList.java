@@ -30,7 +30,7 @@ import ghidra.util.Conv;
 import ghidra.util.exception.DuplicateNameException;
 
 public class ObjectiveC2_ProtocolList implements StructConverter {
-	public static final String NAME = "protocol_list_t";
+	public final static String NAME = "protocol_list_t";
 
 	private ObjectiveC2_State _state;
 	private long _index;
@@ -97,7 +97,7 @@ public class ObjectiveC2_ProtocolList implements StructConverter {
 	}
 
 	public void applyTo(Namespace namespace) throws Exception {
-		Address address = ObjectiveC1_Utilities.toAddress(_state.program, _index);
+		Address address = ObjectiveC1_Utilities.toAddress(_state.program, getIndex());
 		try {
 			ObjectiveC1_Utilities.applyData(_state.program, toDataType(), address);
 		}
@@ -109,7 +109,7 @@ public class ObjectiveC2_ProtocolList implements StructConverter {
 		}
 		catch (Exception e) {}
 
-		for (ObjectiveC2_Protocol protocol : protocols) {
+		for (ObjectiveC2_Protocol protocol : getProtocols()) {
 			protocol.applyTo(namespace);
 		}
 	}

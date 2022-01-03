@@ -404,7 +404,7 @@ public class GhidraFileData {
 			DomainObjectAdapter doa = ch.getReadOnlyObject(item, version, true, consumer, monitor);
 			doa.setChanged(false);
 
-			DomainFileProxy proxy = new DomainFileProxy(name, parent.getPathname(), doa,
+			DomainFileProxy proxy = new DomainFileProxy(name, getParent().getPathname(), doa,
 				version, fileID, parent.getProjectLocator());
 			proxy.setLastModified(getLastModifiedTime());
 			return doa;
@@ -426,7 +426,7 @@ public class GhidraFileData {
 					DomainObjectAdapter.getContentHandler(versionedFolderItem.getContentType());
 				obj = ch.getImmutableObject(versionedFolderItem, consumer, version, -1, monitor);
 			}
-			DomainFileProxy proxy = new DomainFileProxy(name, parent.getPathname(), obj,
+			DomainFileProxy proxy = new DomainFileProxy(name, getParent().getPathname(), obj,
 				version, fileID, parent.getProjectLocator());
 			proxy.setLastModified(getLastModifiedTime());
 			return obj;
@@ -462,7 +462,7 @@ public class GhidraFileData {
 			if (monitor == null) {
 				return true;
 			}
-			monitor.setMessage(name);
+			monitor.setMessage(getName());
 			return dbObjDB.getDBHandle().takeRecoverySnapshot(dbObjDB.getChangeSet(), monitor);
 		}
 		catch (CancelledException e) {
@@ -1054,7 +1054,7 @@ public class GhidraFileData {
 
 				DomainObjectAdapter checkinObj = ch.getDomainObject(versionedFolderItem, null,
 					folderItem.getCheckoutId(), okToUpgrade, false, this, monitor);
-				checkinObj.setDomainFile(new DomainFileProxy(name, parent.getPathname(),
+				checkinObj.setDomainFile(new DomainFileProxy(name, getParent().getPathname(),
 					checkinObj, versionedFolderItem.getCurrentVersion() + 1, fileID,
 					parent.getProjectLocator()));
 
@@ -1549,7 +1549,7 @@ public class GhidraFileData {
 			if (fileSystem.isReadOnly()) {
 				throw new ReadOnlyException("moveTo permitted within writeable project only");
 			}
-			if (parent.getPathname().equals(newParent.getPathname())) {
+			if (getParent().getPathname().equals(newParent.getPathname())) {
 				throw new IllegalArgumentException("newParent must differ from current parent");
 			}
 			checkInUse();
@@ -1698,7 +1698,7 @@ public class GhidraFileData {
 			if (!isVersioned()) {
 				return;
 			}
-			GhidraFolderData oldParent = parent;
+			GhidraFolderData oldParent = getParent();
 			if (isCheckedOut()) {
 				// keep local changed file - discard revision information
 				folderItem.clearCheckout();

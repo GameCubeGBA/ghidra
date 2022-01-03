@@ -24,11 +24,11 @@ import ghidra.util.Msg;
 
 public class JavaClassUtil {
 
-	public static final long LOOKUP_ADDRESS = 0xE0000000L;
+	public final static long LOOKUP_ADDRESS = 0xE0000000L;
 	//65536 is the maximum size of the methods_count item in a class file
 	public static final long METHOD_INDEX_SIZE = 65536 * 4;
 
-	public static final boolean isClassFile(Program program) {
+	public final static boolean isClassFile(Program program) {
 
 		AddressFactory factory = program.getAddressFactory();
 		byte[] bytes = new byte[4];

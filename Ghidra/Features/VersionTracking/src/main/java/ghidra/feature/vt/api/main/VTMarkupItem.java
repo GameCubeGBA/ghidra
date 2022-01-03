@@ -23,21 +23,21 @@ import ghidra.program.model.address.Address;
 import ghidra.program.util.ProgramLocation;
 
 public interface VTMarkupItem {
-	String USER_DEFINED_ADDRESS_SOURCE = "User Defined";
-	String FUNCTION_ADDRESS_SOURCE = "Function";
-	String DATA_ADDRESS_SOURCE = "Data";
+	public static final String USER_DEFINED_ADDRESS_SOURCE = "User Defined";
+	public static final String FUNCTION_ADDRESS_SOURCE = "Function";
+	public static final String DATA_ADDRESS_SOURCE = "Data";
 
 	/**
 	 * Returns true if this markup item can be applied.
 	 * @return true if this markup item can be applied.
 	 */
-    boolean canApply();
+	public boolean canApply();
 
 	/**
 	 * Returns true if this markup item can be unapplied.
 	 * @return true if this markup item can be unapplied.
 	 */
-    boolean canUnapply();
+	public boolean canUnapply();
 
 	/**    
 	 * Applies this markup item using the given action at the give address.  The destination 
@@ -47,7 +47,7 @@ public interface VTMarkupItem {
 	 * @throws VersionTrackingApplyException if an error occurred while attempting to apply the
 	 * markup item.
 	 */
-    void apply(VTMarkupItemApplyActionType applyAction, ToolOptions options)
+	public void apply(VTMarkupItemApplyActionType applyAction, ToolOptions options)
 			throws VersionTrackingApplyException;
 
 	/**
@@ -55,7 +55,7 @@ public interface VTMarkupItem {
 	 * @throws VersionTrackingApplyException if an error occurred while attempting to unapply the
 	 * markup item.
 	 */
-    void unapply() throws VersionTrackingApplyException;
+	public void unapply() throws VersionTrackingApplyException;
 
 	/**
 	 * Sets the default destination address for this item.  This address will not be saved, as it
@@ -71,7 +71,7 @@ public interface VTMarkupItem {
 	 *        values.
 	 *  @see #setDestinationAddress(Address)
 	 */
-    void setDefaultDestinationAddress(Address address, String addressSource);
+	public void setDefaultDestinationAddress(Address address, String addressSource);
 
 	/**
 	 * Sets the actual destination address for the markup item.  This method differs from
@@ -88,7 +88,7 @@ public interface VTMarkupItem {
 	 *         can use {@link #canUnapply()} to know if this item is applied).
 	 * @see #setDefaultDestinationAddress(Address, String)
 	 */
-    void setDestinationAddress(Address address);
+	public void setDestinationAddress(Address address);
 
 	/**
 	 * Returns the editable status of this markup item's destination address.
@@ -96,7 +96,7 @@ public interface VTMarkupItem {
 	 * @return the editable status of this markup item's destination address.
 	 * @see #setDestinationAddress(Address, String)
 	 */
-    VTMarkupItemDestinationAddressEditStatus getDestinationAddressEditStatus();
+	public VTMarkupItemDestinationAddressEditStatus getDestinationAddressEditStatus();
 
 	/**
 	 * Sets a considered status on this item without applying this item.  This is useful to 
@@ -112,63 +112,63 @@ public interface VTMarkupItem {
 	 * @throws IllegalStateException if you call this method on an applied item
 	 * @see #setUnconsidered()
 	 */
-    void setConsidered(VTMarkupItemConsideredStatus status);
+	public void setConsidered(VTMarkupItemConsideredStatus status);
 
 	/**
 	 * Returns the status of this markup item. 
 	 * @return  the status of this markup item.
 	 */
-    VTMarkupItemStatus getStatus();
+	public VTMarkupItemStatus getStatus();
 
 	/** 
 	 * Returns an optional description of the current markup item status.  For example, if there
 	 * status is {@link VTMarkupItemStatus#FAILED_APPLY}, then this method should return a 
 	 * description of the failure.
 	 */
-    String getStatusDescription();
+	public String getStatusDescription();
 
 	/**
 	 * Returns the VTAssocation that generated this markup item.
 	 * @return  the VTAssocation that generated this markup item.
 	 */
-    VTAssociation getAssociation();
+	public VTAssociation getAssociation();
 
 	/**
 	 * Returns the address in the source program for this association.
 	 * @return the address in the source program for this association.
 	 */
-    Address getSourceAddress();
+	public Address getSourceAddress();
 
 	/**
 	 * Returns the field specific program location in the source program for this association.
 	 * @return the field specific program location in the source program for this association.
 	 */
-    ProgramLocation getSourceLocation();
+	public ProgramLocation getSourceLocation();
 
 	/**
 	 * Returns a Stringable that represents the value of the markup item in the source program.
 	 * @return a Stringable that represents the value of the markup item in the source program.
 	 */
-    Stringable getSourceValue();
+	public Stringable getSourceValue();
 
 	/**
 	 * Returns the address in the destination program for this association.
 	 * @return the address in the destination program for this association.
 	 */
-    Address getDestinationAddress();
+	public Address getDestinationAddress();
 
 	/**
 	 * Returns the field specific program location in the destination program for this association.
 	 * @return the field specific program location in the destination program for this association.
 	 */
-    ProgramLocation getDestinationLocation();
+	public ProgramLocation getDestinationLocation();
 
 	/**
 	 * Returns a string that indicates the origin of the destination address. Typically, it is
 	 * determined either by an algorithm or the user.
 	 * @return  a string that indicates the origin of the destination address.
 	 */
-    String getDestinationAddressSource();
+	public String getDestinationAddressSource();
 
 	/**
 	 * Returns a Stringable that represents the current value of the markup item in the destination
@@ -176,7 +176,7 @@ public interface VTMarkupItem {
 	 * @return a Stringable that represents the current value of the markup item in the destination
 	 * program.
 	 */
-    Stringable getCurrentDestinationValue();
+	public Stringable getCurrentDestinationValue();
 
 	/**
 	 * Returns a Stringable that represents the original value of the markup item in the destination
@@ -184,20 +184,20 @@ public interface VTMarkupItem {
 	 * @return a Stringable that represents the original value of the markup item in the destination
 	 * program.
 	 */
-    Stringable getOriginalDestinationValue();
+	public Stringable getOriginalDestinationValue();
 
 	/**
 	 * Returns true if this markupItem supports an apply for the given apply action type.
 	 * @param actionType the VTMarkupITemApplyActionType to test.
 	 * @return true if this markup item can be applied using the given action type.
 	 */
-    boolean supportsApplyAction(VTMarkupItemApplyActionType actionType);
+	public boolean supportsApplyAction(VTMarkupItemApplyActionType actionType);
 
 	/**
 	 * Returns the VTMarkupType for this markup Item.  VTMarkup types include comments, labels, 
 	 * function names, etc.
 	 * @return the VTMarkupType for this markup Item.
 	 */
-    VTMarkupType getMarkupType();
+	public VTMarkupType getMarkupType();
 
 }

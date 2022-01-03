@@ -42,47 +42,47 @@ public interface DataTypeManagerService extends DataTypeQueryService {
 	 * Get the data type manager that has all of the built in types.
 	 * @return data type manager for built in data types
 	 */
-    DataTypeManager getBuiltInDataTypesManager();
+	public DataTypeManager getBuiltInDataTypesManager();
 
 	/**
 	 * Get the data types marked as favorites that will show up on
 	 * a popup menu.
 	 * @return list of favorite datatypess
 	 */
-    List<DataType> getFavorites();
+	public List<DataType> getFavorites();
 
 	/**
 	 * Adds a listener to be notified when changes occur to any open datatype manager.
 	 * @param listener the listener to be added.
 	 */
-    void addDataTypeManagerChangeListener(DataTypeManagerChangeListener listener);
+	public void addDataTypeManagerChangeListener(DataTypeManagerChangeListener listener);
 
 	/**
 	 * Removes the given listener from receiving dataTypeManger change notifications.
 	 * @param listener the listener to be removed.
 	 */
-    void removeDataTypeManagerChangeListener(DataTypeManagerChangeListener listener);
+	public void removeDataTypeManagerChangeListener(DataTypeManagerChangeListener listener);
 
 	/**
 	 * Set the given data type as the most recently used to apply a
 	 * data type to a Program.
 	 * @param dt data type that was most recently used
 	 */
-    void setRecentlyUsed(DataType dt);
+	public void setRecentlyUsed(DataType dt);
 
 	/**
 	 * Get the data type that was most recently used to apply data to a
 	 * Program.
 	 * @return data type that was most recently used
 	 */
-    DataType getRecentlyUsed();
+	public DataType getRecentlyUsed();
 
 	/**
 	 * Gets the location of the help for editing the specified data type.
 	 * @param dataType the data type to be edited.
 	 * @return the help location for editing the data type.
 	 */
-    HelpLocation getEditorHelpLocation(DataType dataType);
+	public HelpLocation getEditorHelpLocation(DataType dataType);
 
 	/**
 	 * Determine if the indicated data type can be edited 
@@ -90,7 +90,7 @@ public interface DataTypeManagerService extends DataTypeQueryService {
 	 * @param dt data type to be edited
 	 * @return true if this service can invoke an editor for changing the data type.
 	 */
-    boolean isEditable(DataType dt);
+	public boolean isEditable(DataType dt);
 
 	/**
 	 * Pop up an editor dialog for the given data type.
@@ -99,7 +99,7 @@ public interface DataTypeManagerService extends DataTypeQueryService {
 	 * @throws IllegalArgumentException if the given has not been resolved by a DataTypeManager;
 	 *         in other words, if {@link DataType#getDataTypeManager()} returns null.
 	 */
-    void edit(DataType dt);
+	public void edit(DataType dt);
 
 	/**
 	 * Closes the archive for the given {@link DataTypeManager}.  This will ignore request to 
@@ -107,7 +107,7 @@ public interface DataTypeManagerService extends DataTypeQueryService {
 	 * 
 	 * @param dtm the data type manager of the archive to close
 	 */
-    void closeArchive(DataTypeManager dtm);
+	public void closeArchive(DataTypeManager dtm);
 
 	/**
 	 * Opens the specified data type archive contained within the Ghidra installation.
@@ -119,7 +119,7 @@ public interface DataTypeManagerService extends DataTypeQueryService {
 	 * @throws IOException if an i/o error occurs opening the data type archive
 	 * @throws DuplicateIdException if another archive with the same ID is already open
 	 */
-    DataTypeManager openDataTypeArchive(String archiveName)
+	public DataTypeManager openDataTypeArchive(String archiveName)
 			throws IOException, DuplicateIdException;
 
 	/** 
@@ -129,7 +129,7 @@ public interface DataTypeManagerService extends DataTypeQueryService {
 	 * @param dataTypeArchive the archive from which to create an Archive
 	 * @return an Archive based upon the given DataTypeArchive
 	 */
-    Archive openArchive(DataTypeArchive dataTypeArchive);
+	public Archive openArchive(DataTypeArchive dataTypeArchive);
 
 	/**
 	 * A method to open an Archive for the given, pre-existing archive file (*.gdt)
@@ -140,7 +140,7 @@ public interface DataTypeManagerService extends DataTypeQueryService {
 	 * @throws IOException if an i/o error occurs opening the data type archive
 	 * @throws DuplicateIdException if another archive with the same ID is already open
 	 */
-    Archive openArchive(File file, boolean acquireWriteLock)
+	public Archive openArchive(File file, boolean acquireWriteLock)
 			throws IOException, DuplicateIdException;
 
 	/**
@@ -149,7 +149,7 @@ public interface DataTypeManagerService extends DataTypeQueryService {
 	 * 
 	 * @param dataType The data type to select.
 	 */
-    void setDataTypeSelected(DataType dataType);
+	public void setDataTypeSelected(DataType dataType);
 
 	/**
 	 * Shows the user a dialog that allows them to choose a data type from a tree of all available
@@ -158,7 +158,7 @@ public interface DataTypeManagerService extends DataTypeQueryService {
 	 * @param selectedPath An optional tree path to select in the tree
 	 * @return A data type chosen by the user
 	 */
-    DataType getDataType(TreePath selectedPath);
+	public DataType getDataType(TreePath selectedPath);
 
 	/**
 	 * Examines all enum dataTypes for items that match the given value. Returns a list of Strings
@@ -166,5 +166,5 @@ public interface DataTypeManagerService extends DataTypeQueryService {
 	 * @param value the value to search for.
 	 * @return the list of enum item names that match the given value
 	 */
-    Set<String> getPossibleEquateNames(long value);
+	public Set<String> getPossibleEquateNames(long value);
 }

@@ -47,13 +47,13 @@ import ghidra.util.HelpLocation;
  */
 abstract class OperandFieldHelper extends FieldFactory {
 
-	private static final String ENABLE_WORD_WRAP_MSG =
+	private final static String ENABLE_WORD_WRAP_MSG =
 		GhidraOptions.OPERAND_GROUP_TITLE + Options.DELIMITER + "Enable Word Wrapping";
-	private static final String MAX_DISPLAY_LINES_MSG =
+	private final static String MAX_DISPLAY_LINES_MSG =
 		GhidraOptions.OPERAND_GROUP_TITLE + Options.DELIMITER + "Maximum Lines To Display";
-	private static final String UNDERLINE_OPTION =
+	private final static String UNDERLINE_OPTION =
 		GhidraOptions.OPERAND_GROUP_TITLE + Options.DELIMITER + "Underline References";
-	private static final String SPACE_AFTER_SEPARATOR_OPTION =
+	private final static String SPACE_AFTER_SEPARATOR_OPTION =
 		GhidraOptions.OPERAND_GROUP_TITLE + Options.DELIMITER + "Add Space After Separator";
 
 	public static enum UNDERLINE_CHOICE {
@@ -449,9 +449,9 @@ abstract class OperandFieldHelper extends FieldFactory {
 
 	private int addElements(Instruction inst, List<OperandFieldElement> elements, List<?> objList,
 			int opIndex, int subOpIndex, boolean underline, int characterOffset) {
-		for (Object o : objList) {
-			characterOffset = addElement(inst, elements, o, underline, opIndex,
-					subOpIndex, characterOffset);
+		for (int i = 0; i < objList.size(); i++) {
+			characterOffset = addElement(inst, elements, objList.get(i), underline, opIndex,
+				subOpIndex, characterOffset);
 		}
 		return characterOffset;
 	}
@@ -514,8 +514,8 @@ abstract class OperandFieldHelper extends FieldFactory {
 	}
 
 	private boolean containsNonPrimary(Reference[] refs) {
-		for (Reference ref : refs) {
-			if (!ref.isPrimary()) {
+		for (int i = 0; i < refs.length; i++) {
+			if (!refs[i].isPrimary()) {
 				return true;
 			}
 		}
@@ -582,7 +582,7 @@ abstract class OperandFieldHelper extends FieldFactory {
 
 				// has external reference been resolved?
 				String path = extMgr.getExternalLibraryPath(extLoc.getLibraryName());
-				if (path != null && !path.isEmpty()) {
+				if (path != null && path.length() > 0) {
 					return externalRefAttributes;
 				}
 				return badRefAttributes;
@@ -608,7 +608,9 @@ abstract class OperandFieldHelper extends FieldFactory {
 				return false;
 			}
 			Equate equate = program.getEquateTable().getEquate(address, 0, scalar.getValue());
-            return equate != null && !equate.isValidUUID();
+			if (equate != null && !equate.isValidUUID()) {
+				return true;
+			}
 		}
 		return false;
 	}

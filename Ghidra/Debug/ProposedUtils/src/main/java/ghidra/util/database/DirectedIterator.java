@@ -21,7 +21,7 @@ import com.google.common.collect.BoundType;
 import com.google.common.collect.Range;
 
 public interface DirectedIterator<T> {
-	enum Direction {
+	public enum Direction {
 		FORWARD, BACKWARD;
 
 		static Direction reverse(Direction direction) {

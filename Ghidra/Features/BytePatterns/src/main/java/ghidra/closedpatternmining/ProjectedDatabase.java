@@ -67,14 +67,14 @@ public class ProjectedDatabase {
 	 * @param extendingItem item to extend by
 	 */
 	public ProjectedDatabase(ProjectedDatabase projDatabase, SequenceItem extendingItem) {
-		List<SequenceItem> initialList = projDatabase.prefixSequence;
+		List<SequenceItem> initialList = projDatabase.getPrefix();
 		SequenceItem lastItem = initialList.get(initialList.size() - 1);
 		if (lastItem.getIndex() >= extendingItem.getIndex()) {
 			throw new IllegalArgumentException(
 				"extending item must be after all items of the prefixSequence of projDatabase!");
 		}
 
-		database = projDatabase.database;
+		database = projDatabase.getDatabase();
 
 		prefixSequence = new ArrayList<>(initialList);
 		prefixSequence.add(extendingItem);
@@ -84,7 +84,7 @@ public class ProjectedDatabase {
 		support = 0;
 		int indexToCheck = extendingItem.getIndex();
 		String symbolToFind = extendingItem.getSymbol();
-		for (ProjectedSequenceInfo projSeq : projDatabase.projectedInfo) {
+		for (ProjectedSequenceInfo projSeq : projDatabase.getProjectedInfo()) {
 			Sequence sequence = sequences.get(projSeq.getSequenceIndex());
 			String seqAsString = sequence.getSequenceAsString();
 			if (seqAsString.substring(indexToCheck, indexToCheck + 1).equals(symbolToFind)) {
@@ -216,7 +216,7 @@ public class ProjectedDatabase {
 	 */
 	public Set<FrequentSequenceItem> getBackwardExtensionItems() {
 		Set<FrequentSequenceItem> backwardExtensionItems = new HashSet<FrequentSequenceItem>();
-		if (projectedInfo.isEmpty()) {
+		if (projectedInfo.size() == 0) {
 			return backwardExtensionItems;
 		}
 

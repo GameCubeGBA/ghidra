@@ -28,7 +28,7 @@ import ghidra.program.util.ProgramLocation;
  * is based upon {@link Annotation} objects, which are elements that perform actions when the 
  * use clicks an instance of this class in the display.
  */
-public final class AnnotatedTextFieldElement extends AbstractTextFieldElement {
+final public class AnnotatedTextFieldElement extends AbstractTextFieldElement {
 
 	private final Annotation annotation;
 

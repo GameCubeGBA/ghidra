@@ -119,16 +119,18 @@ public class ClassDataItem implements StructConverter {
 	}
 
 	public EncodedMethod getMethodByIndex(int index) {
-        for (EncodedMethod encodedMethod : directMethods) {
-            if (encodedMethod.getMethodIndex() == index) {
-                return encodedMethod;
-            }
-        }
-        for (EncodedMethod encodedMethod : virtualMethods) {
-            if (encodedMethod.getMethodIndex() == index) {
-                return encodedMethod;
-            }
-        }
+		for (int i = 0; i < directMethods.size(); ++i) {
+			EncodedMethod encodedMethod = directMethods.get(i);
+			if (encodedMethod.getMethodIndex() == index) {
+				return encodedMethod;
+			}
+		}
+		for (int i = 0; i < virtualMethods.size(); ++i) {
+			EncodedMethod encodedMethod = virtualMethods.get(i);
+			if (encodedMethod.getMethodIndex() == index) {
+				return encodedMethod;
+			}
+		}
 		return null;
 	}
 

@@ -28,7 +28,7 @@ import agent.dbgmodel.jna.dbgmodel.DbgModelNative.ModelObjectKind;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IDataModelManager1 extends IUnknownEx {
-	IID IID_IDATA_MODEL_MANAGER = new IID("73FE19F4-A110-4500-8ED9-3C28896F508C");
+	final IID IID_IDATA_MODEL_MANAGER = new IID("73FE19F4-A110-4500-8ED9-3C28896F508C");
 
 	enum VTIndices1 implements VTableIndex {
 		CLOSE, //

@@ -33,7 +33,7 @@ public interface SleighUseropLibrary<T> {
 	SleighUseropLibrary<?> NIL = new EmptySleighUseropLibrary();
 
 	@SuppressWarnings("unchecked")
-    static <T> SleighUseropLibrary<T> nil() {
+	public static <T> SleighUseropLibrary<T> nil() {
 		return (SleighUseropLibrary<T>) NIL;
 	}
 

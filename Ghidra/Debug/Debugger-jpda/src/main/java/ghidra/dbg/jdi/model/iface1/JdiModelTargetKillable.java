@@ -30,6 +30,6 @@ import ghidra.dbg.target.TargetKillable;
 public interface JdiModelTargetKillable extends JdiModelTargetObject, TargetKillable {
 
 	@Override
-    CompletableFuture<Void> kill();
+	public CompletableFuture<Void> kill();
 
 }

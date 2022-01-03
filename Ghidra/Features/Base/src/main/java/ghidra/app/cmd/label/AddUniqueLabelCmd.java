@@ -63,7 +63,7 @@ public class AddUniqueLabelCmd implements Command {
 			return true;//symbol already exist at this address, just complete
 		}
 		catch (InvalidInputException e) {
-			if ((name == null) || (name.isEmpty())) {
+			if ((name == null) || (name.length() == 0)) {
 				errorMsg = "You must enter a valid label name";
 			}
 			else {

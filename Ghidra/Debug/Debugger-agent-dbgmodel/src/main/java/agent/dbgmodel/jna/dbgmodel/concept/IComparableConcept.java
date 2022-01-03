@@ -24,7 +24,7 @@ import agent.dbgmodel.jna.dbgmodel.IUnknownEx;
 import agent.dbgmodel.jna.dbgmodel.UnknownWithUtils.VTableIndex;
 
 public interface IComparableConcept extends IUnknownEx {
-	IID IID_ICOMPARABLE_CONCEPT = new IID("A7830646-9F0C-4a31-BA19-503F33E6C8A3");
+	final IID IID_ICOMPARABLE_CONCEPT = new IID("A7830646-9F0C-4a31-BA19-503F33E6C8A3");
 
 	enum VTIndices implements VTableIndex {
 		COMPARE_OBJECTS, //

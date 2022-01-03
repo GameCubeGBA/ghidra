@@ -285,7 +285,8 @@ public class ScrollableTextArea extends JScrollPane {
 		 * the initial string is null, and rows/columns are set to 0.
 		 */
 		private PrivateTextArea() {
-        }
+			super();
+		}
 
 		/**
 		 * Constructs a new TextArea with the specified text displayed.

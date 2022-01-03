@@ -36,7 +36,7 @@ public abstract class InputDialogComponentProvider extends DialogComponentProvid
 	 * Creates the main input panel
 	 * @return the panel
 	 */
-    protected abstract JPanel createPanel();
+	abstract protected JPanel createPanel();
 
 	@Override
 	protected void okCallback() {

@@ -422,7 +422,7 @@ public class MachoProgramBuilder {
 				}
 
 				String string = symbol.getString();
-				if (string.isEmpty()) {
+				if (string.length() == 0) {
 					continue;
 				}
 				string = SymbolUtilities.replaceInvalidChars(string, true);
@@ -502,7 +502,7 @@ public class MachoProgramBuilder {
 				NList symbol = symbolTableCommand.getSymbolAt(symbolIndex);
 				if (symbol != null) {
 					String name = generateValidName(symbol.getString());
-					if (name != null && !name.isEmpty()) {
+					if (name != null && name.length() > 0) {
 						try {
 							program.getSymbolTable()
 									.createLabel(startAddr, name, namespace, SourceType.IMPORTED);
@@ -622,7 +622,7 @@ public class MachoProgramBuilder {
 				}
 			}
 		}
-		if (undefinedSymbols.isEmpty()) {
+		if (undefinedSymbols.size() == 0) {
 			return;
 		}
 		Address start = getAddress();
@@ -644,7 +644,7 @@ public class MachoProgramBuilder {
 			}
 			try {
 				String name = generateValidName(symbol.getString());
-				if (name != null && !name.isEmpty()) {
+				if (name != null && name.length() > 0) {
 					program.getSymbolTable().createLabel(start, name, SourceType.IMPORTED);
 				}
 			}
@@ -680,7 +680,7 @@ public class MachoProgramBuilder {
 				}
 			}
 		}
-		if (absoluteSymbols.isEmpty()) {
+		if (absoluteSymbols.size() == 0) {
 			return;
 		}
 		Address start = getAddress();
@@ -694,7 +694,7 @@ public class MachoProgramBuilder {
 		for (NList symbol : absoluteSymbols) {
 			try {
 				String name = generateValidName(symbol.getString());
-				if (name != null && !name.isEmpty()) {
+				if (name != null && name.length() > 0) {
 					program.getSymbolTable().createLabel(start, name, SourceType.IMPORTED);
 				}
 			}
@@ -735,7 +735,7 @@ public class MachoProgramBuilder {
 
 		//then we are use the old school binding technique.
 		//this only still appears in powerpc
-		if (commands.isEmpty()) {
+		if (commands.size() == 0) {
 			ClassicBindProcessor classicBindProcess =
 				new ClassicBindProcessor(machoHeader, program);
 			try {

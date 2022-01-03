@@ -25,24 +25,24 @@ import ghidra.util.task.TaskMonitor;
 
 public interface ListingModel {
 
-	String FUNCTION_POINTER_OPTION_GROUP_NAME = "Function Pointers";
+	static final String FUNCTION_POINTER_OPTION_GROUP_NAME = "Function Pointers";
 
-	String DISPLAY_EXTERNAL_FUNCTION_POINTER_OPTION_NAME =
+	public static final String DISPLAY_EXTERNAL_FUNCTION_POINTER_OPTION_NAME =
 		FUNCTION_POINTER_OPTION_GROUP_NAME + Options.DELIMITER +
 			"Display External Function Pointer Header";
-	String DISPLAY_NONEXTERNAL_FUNCTION_POINTER_OPTION_NAME =
+	public static final String DISPLAY_NONEXTERNAL_FUNCTION_POINTER_OPTION_NAME =
 		FUNCTION_POINTER_OPTION_GROUP_NAME + Options.DELIMITER +
 			"Display Non-External Function Pointer Header";
 
-	AddressSetView getAddressSet();
+	public AddressSetView getAddressSet();
 
-	Address getAddressAfter(Address address);
+	public Address getAddressAfter(Address address);
 
-	Address getAddressBefore(Address address);
+	public Address getAddressBefore(Address address);
 
-	Layout getLayout(Address address, boolean isGapAddress);
+	public Layout getLayout(Address address, boolean isGapAddress);
 
-	int getMaxWidth();
+	public int getMaxWidth();
 
 	/**
 	 * Returns true if the data is open
@@ -50,14 +50,14 @@ public interface ListingModel {
 	 * @param data the data to check
 	 * @return true if the data is open
 	 */
-    boolean isOpen(Data data);
+	public boolean isOpen(Data data);
 
 	/**
 	 * Changes the open state of the given data (open -&gt; closes; closed-&gt; open).
 	 * 
 	 * @param data the data to open
 	 */
-    void toggleOpen(Data data);
+	public void toggleOpen(Data data);
 
 	/**
 	 * Opens the given data, but not any sub-components.
@@ -65,7 +65,7 @@ public interface ListingModel {
 	 * @param data the data to open
 	 * @return true if the data was opened (will return false if the data is already open or has no children)
 	 */
-    boolean openData(Data data);
+	public boolean openData(Data data);
 
 	/**
 	 * Recursively open the given data and its sub-components.
@@ -73,7 +73,7 @@ public interface ListingModel {
 	 * @param data the data to open
 	 * @param monitor the task monitor
 	 */
-    void openAllData(Data data, TaskMonitor monitor);
+	public void openAllData(Data data, TaskMonitor monitor);
 
 	/**
 	 * Opens all data found within the given addresses.  Each data is fully opened.
@@ -81,14 +81,14 @@ public interface ListingModel {
 	 * @param addresses the range of addresses to search for data
 	 * @param monitor the task monitor
 	 */
-    void openAllData(AddressSetView addresses, TaskMonitor monitor);
+	public void openAllData(AddressSetView addresses, TaskMonitor monitor);
 
 	/**
 	 * Closes the given data, but not any sub-components.
 	 * 
 	 * @param data the data to close
 	 */
-    void closeData(Data data);
+	public void closeData(Data data);
 
 	/**
 	 * Recursively close the given data and its sub-components.
@@ -96,7 +96,7 @@ public interface ListingModel {
 	 * @param data the data to close
 	 * @param monitor the task monitor
 	 */
-    void closeAllData(Data data, TaskMonitor monitor);
+	public void closeAllData(Data data, TaskMonitor monitor);
 
 	/**
 	 * Closes all data found within the given addresses.  Each data is fully closed.
@@ -104,25 +104,25 @@ public interface ListingModel {
 	 * @param addresses the range of addresses to search for data
 	 * @param monitor the task monitor
 	 */
-    void closeAllData(AddressSetView addresses, TaskMonitor monitor);
+	public void closeAllData(AddressSetView addresses, TaskMonitor monitor);
 
-	void addListener(ListingModelListener listener);
+	public void addListener(ListingModelListener listener);
 
-	void removeListener(ListingModelListener listener);
+	public void removeListener(ListingModelListener listener);
 
-	Program getProgram();
+	public Program getProgram();
 
-	boolean isClosed();
+	public boolean isClosed();
 
-	void setFormatManager(FormatManager formatManager);
+	public void setFormatManager(FormatManager formatManager);
 
-	void dispose();
+	public void dispose();
 
-	AddressSet adjustAddressSetToCodeUnitBoundaries(AddressSet addressSet);
+	public AddressSet adjustAddressSetToCodeUnitBoundaries(AddressSet addressSet);
 
 	/**
 	 * Makes a copy of this model.
 	 * @return a copy of this model.
 	 */
-    ListingModel copy();
+	public ListingModel copy();
 }

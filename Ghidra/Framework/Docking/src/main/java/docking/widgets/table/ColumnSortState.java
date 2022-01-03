@@ -114,8 +114,11 @@ public class ColumnSortState {
 			return false;
 		}
 
-        return sortOrder_OneBased == other.sortOrder_OneBased;
-    }
+		if (sortOrder_OneBased != other.sortOrder_OneBased) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public String toString() {

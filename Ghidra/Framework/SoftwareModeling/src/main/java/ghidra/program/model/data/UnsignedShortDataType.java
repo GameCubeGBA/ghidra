@@ -20,10 +20,10 @@ package ghidra.program.model.data;
  */
 public class UnsignedShortDataType extends AbstractIntegerDataType {
 
-	private static final long serialVersionUID = 1;
+	private final static long serialVersionUID = 1;
 
 	/** A statically defined UnsignedShortDataType instance.*/
-    public static final UnsignedShortDataType dataType = new UnsignedShortDataType();
+	public final static UnsignedShortDataType dataType = new UnsignedShortDataType();
 
 	public UnsignedShortDataType() {
 		this(null);

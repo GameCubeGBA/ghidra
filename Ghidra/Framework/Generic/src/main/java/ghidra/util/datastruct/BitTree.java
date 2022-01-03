@@ -28,7 +28,7 @@ import java.util.Arrays;
  */
 
 public class BitTree implements ShortKeySet, Serializable {
-    private static final long serialVersionUID = 1;
+    private final static long serialVersionUID = 1;
 
     private int size;        // The maximum number of keys in the set.  Keys range from 0 to size-1
     private int power2;      // The next power of 2 that is greater than size.

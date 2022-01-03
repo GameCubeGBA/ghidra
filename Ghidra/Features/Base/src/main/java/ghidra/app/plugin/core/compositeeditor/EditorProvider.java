@@ -28,28 +28,28 @@ public interface EditorProvider {
 	/**
 	 * Get the name of this editor.
 	 */
-    String getName();
+	public String getName();
 
 	/**
 	 * Get the pathname of the data type being edited.
 	 */
-    DataTypePath getDtPath();
+	public DataTypePath getDtPath();
 
 	/**
 	 * Get the component provider for this editor.
 	 */
-    ComponentProvider getComponentProvider();
+	public ComponentProvider getComponentProvider();
 
 	/**
 	 * Get the datatype manager associated with this editor.
 	 */
-    DataTypeManager getDataTypeManager();
+	public DataTypeManager getDataTypeManager();
 
 	/**
 	 * Notification that the data type manager domain object (program or data type archive) was restored.
 	 * @param domainObject the program or data type archive that was restored.
 	 */
-    void domainObjectRestored(DataTypeManagerDomainObject domainObject);
+	public void domainObjectRestored(DataTypeManagerDomainObject domainObject);
 
 	/**
 	 * Return whether this editor is editing the data type with the given
@@ -57,33 +57,33 @@ public interface EditorProvider {
 	 * @param dtPath path of a data type
 	 * @return true if the data type for the pathname is being edited
 	 */
-    boolean isEditing(DataTypePath dtPath);
+	public boolean isEditing(DataTypePath dtPath);
 
 	/**
 	 * Add an editor listener that will be notified when the edit window is
 	 * closed.
 	 */
-    void addEditorListener(EditorListener listener);
+	public void addEditorListener(EditorListener listener);
 
 	/**
 	 * Show the editor.
 	 */
-    void show();
+	public void show();
 
 	/**
 	 * Returns whether changes need to be saved.
 	 */
-    boolean needsSave();
+	public boolean needsSave();
 
 	/**
 	  * Prompt the user if this editor has changes that need saving.
 	  * @param allowCancel true means that the user can cancel the edits
 	  * @return true if the user doesn't cancel.
 	  */
-    boolean checkForSave(boolean allowCancel);
+	public boolean checkForSave(boolean allowCancel);
 
 	/**
 	 * Dispose of resource that this editor may be using.
 	 */
-    void dispose();
+	public void dispose();
 }

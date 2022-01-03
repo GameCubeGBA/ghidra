@@ -117,7 +117,7 @@ public class StackFrameDataType extends BiDirectionDataType {
 			String comment = var.getComment();
 			if (comment != null) {
 				comment = comment.trim();
-				if (comment.isEmpty()) {
+				if (comment.length() == 0) {
 					comment = null;
 				}
 			}
@@ -419,7 +419,7 @@ public class StackFrameDataType extends BiDirectionDataType {
 		String fieldName = comp.getFieldName();
 		if (name != null) {
 			name = name.trim();
-			if (name.isEmpty() || isDefaultName(name)) {
+			if (name.length() == 0 || isDefaultName(name)) {
 				name = null;
 			}
 		}
@@ -449,7 +449,7 @@ public class StackFrameDataType extends BiDirectionDataType {
 		String oldComment = comp.getComment();
 		if (comment != null) {
 			comment = comment.trim();
-			if (comment.isEmpty()) {
+			if (comment.length() == 0) {
 				comment = null;
 			}
 		}
@@ -478,13 +478,16 @@ public class StackFrameDataType extends BiDirectionDataType {
 	private boolean canDefineComponent(DataType dt, int length, String newName, String comment) {
 		if (comment != null) {
 			comment = comment.trim();
-			if (comment.isEmpty()) {
+			if (comment.length() == 0) {
 				comment = null;
 			}
 		}
-        return !dt.isEquivalent(DataType.DEFAULT) || (newName != null && !newName.isEmpty()) ||
-                (comment != null);
-    }
+		if (dt.isEquivalent(DataType.DEFAULT) && (newName == null || newName.length() == 0) &&
+			(comment == null)) {
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * Currently no validation is done on the name.
@@ -618,7 +621,7 @@ public class StackFrameDataType extends BiDirectionDataType {
 	 */
 	public String getDefaultName(DataTypeComponent element) {
 		int offset = element.getOffset();
-		int paramBaseOffset = splitOffset;
+		int paramBaseOffset = getParameterOffset();
 		boolean isLocal = growsNegative ? (offset < paramBaseOffset) : (offset >= paramBaseOffset);
 		if (isLocal) {
 			return SymbolUtilities.getDefaultLocalName(function.getProgram(), offset, 0);
@@ -685,8 +688,11 @@ public class StackFrameDataType extends BiDirectionDataType {
 			return false;
 		}
 		int index = Collections.binarySearch(components, Integer.valueOf(ordinal), ordinalComparator);
-        return index >= 0;
-    }
+		if (index >= 0) {
+			return true;
+		}
+		return false;
+	}
 
 //	public static void main(String[] args) {
 //		StackFrameImpl sf = new StackFrameImpl(0x4);

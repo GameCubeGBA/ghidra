@@ -55,40 +55,41 @@ public class FindAudioInProgramScript extends GhidraScript {
 		int numDataFound = 0;
 		List<Address> foundList = scanForAudioData(pattern, mask);
 		//Loop over all potential found WAVs
-        for (Address address : foundList) {
-            boolean foundData = false;
-            //See if already applied WAV
-            Data data = getDataAt(address);
-            //If not already applied, try to apply WAV data type
-            if (data == null) {
-                println("Trying to apply " + dataName + " datatype at " +
-                        address.toString());
+		for (int i = 0; i < foundList.size(); i++) {
+			boolean foundData = false;
+			//See if already applied WAV
+			Data data = getDataAt(foundList.get(i));
+			//If not already applied, try to apply WAV data type
+			if (data == null) {
+				println("Trying to apply " + dataName + " datatype at " +
+					foundList.get(i).toString());
 
-                try {
-                    Data newData = createData(address, dt);
-                    if (newData != null) {
-                        println("Applied WAV at " + newData.getAddressString(false, true));
-                        foundData = true;
-                    }
-                }
-                //If data does not apply correctly then it is not really that kind of data
-                //Or it is bumping into other data
-                catch (Exception e) {
-                    println("Invalid " + dataName + " at " + address);
-                }
-            } else if (data.getMnemonicString().equals(dataName)) {
-                println(dataName + " already applied at " + data.getAddressString(false, true));
-                foundData = true;
-            }
+				try {
+					Data newData = createData(foundList.get(i), dt);
+					if (newData != null) {
+						println("Applied WAV at " + newData.getAddressString(false, true));
+						foundData = true;
+					}
+				}
+				//If data does not apply correctly then it is not really that kind of data
+				//Or it is bumping into other data
+				catch (Exception e) {
+					println("Invalid " + dataName + " at " + foundList.get(i).toString());
+				}
+			}
+			else if (data.getMnemonicString().equals(dataName)) {
+				println(dataName + " already applied at " + data.getAddressString(false, true));
+				foundData = true;
+			}
 
-            //print found message only for those that apply correctly or were already applied
-            if (foundData) {
-                println("Found " + dataName + " in program " + currentProgram.getExecutablePath() +
-                        " at address " + address.toString());
-                numDataFound++;
-            }
+			//print found message only for those that apply correctly or were already applied
+			if (foundData) {
+				println("Found " + dataName + " in program " + currentProgram.getExecutablePath() +
+					" at address " + foundList.get(i).toString());
+				numDataFound++;
+			}
 
-        }
+		}
 		return numDataFound;
 	}
 
@@ -98,24 +99,25 @@ public class FindAudioInProgramScript extends GhidraScript {
 
 		List<Address> foundImages = new ArrayList<Address>();
 
-        for (MemoryBlock block : blocks) {
-            if (block.isInitialized()) {
-                Address start = block.getStart();
-                Address found = null;
-                while (true) {
-                    if (monitor.isCancelled()) {
-                        break;
-                    }
-                    found =
-                            memory.findBytes(start, block.getEnd(), imageBytes, mask, true, monitor);
-                    if (found != null) {
-                        foundImages.add(found);
-                        start = found.add(1);
-                    } else
-                        break;
-                }
-            }
-        }
+		for (int i = 0; i < blocks.length; i++) {
+			if (blocks[i].isInitialized()) {
+				Address start = blocks[i].getStart();
+				Address found = null;
+				while (true) {
+					if (monitor.isCancelled()) {
+						break;
+					}
+					found =
+						memory.findBytes(start, blocks[i].getEnd(), imageBytes, mask, true, monitor);
+					if (found != null) {
+						foundImages.add(found);
+						start = found.add(1);
+					}
+					else
+						break;
+				}
+			}
+		}
 		return foundImages;
 	}
 }

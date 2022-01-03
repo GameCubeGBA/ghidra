@@ -179,8 +179,8 @@ public class GhidraFileChooser extends DialogComponentProvider
 	/** Instruction to display both files and directories. */
 	public static final int FILES_AND_DIRECTORIES = 2;
 
-	static final File MY_COMPUTER = new File("My Computer");
-	static final File RECENT = new File("Recent");
+	final static File MY_COMPUTER = new File("My Computer");
+	final static File RECENT = new File("Recent");
 
 	private static final int MAX_RECENT = 10;
 
@@ -799,7 +799,7 @@ public class GhidraFileChooser extends DialogComponentProvider
 
 	private File currentDirectory() {
 		String path = currentPathTextField.getText();
-		if (path.isEmpty()) {
+		if (path.length() == 0) {
 			return null;
 		}
 
@@ -894,8 +894,8 @@ public class GhidraFileChooser extends DialogComponentProvider
 		}
 
 		if (GhidraFileChooser.MY_COMPUTER.equals(getCurrentDirectory())) {
-			String str = fileChooserModel.getDescription(file);
-			if (str == null || str.isEmpty()) {
+			String str = getModel().getDescription(file);
+			if (str == null || str.length() == 0) {
 				str = file.getAbsolutePath();
 			}
 			return str;
@@ -1305,8 +1305,11 @@ public class GhidraFileChooser extends DialogComponentProvider
 	}
 
 	private boolean isUserEditing() {
-        return filenameTextField.isMatchingListShowing();
-    }
+		if (filenameTextField.isMatchingListShowing()) {
+			return true;
+		}
+		return false;
+	}
 
 	private void goUpOneDirectoryLevel() {
 		cancelEdits();
@@ -1481,7 +1484,7 @@ public class GhidraFileChooser extends DialogComponentProvider
 	}
 
 	private void updateDirectoryPresentationMode() {
-		if (showDetails) {
+		if (isTableShowing()) {
 			directoryModel = directoryTable;
 			card.show(cardPanel, CARD_TABLE);
 			int[] rows = directoryTable.getSelectedRows();
@@ -1613,7 +1616,7 @@ public class GhidraFileChooser extends DialogComponentProvider
 
 	@Override
 	protected void okCallback() {
-		if (multiSelectionEnabled) {
+		if (isMultiSelectionEnabled()) {
 			okCallbackForMultipleSelectionMode();
 		}
 		else {
@@ -1746,7 +1749,7 @@ public class GhidraFileChooser extends DialogComponentProvider
 		selectedFiles.setFiles(files);
 
 		// Update the display to...
-		if (multiSelectionEnabled && selectedFiles.size() > 1) {
+		if (isMultiSelectionEnabled() && selectedFiles.size() > 1) {
 			// clear the filename text field when multiple files are selected
 			filenameTextField.setText("");
 		}
@@ -1775,7 +1778,7 @@ public class GhidraFileChooser extends DialogComponentProvider
 
 		// user entered text takes precedence
 		String filenameFieldText = filenameTextField.getText();
-		if (filenameFieldText != null && !filenameFieldText.trim().isEmpty()) {
+		if (filenameFieldText != null && filenameFieldText.trim().length() != 0) {
 			// begin user text validation...
 			File testFile =
 				new GhidraFile(filenameTextField.getText(), fileChooserModel.getSeparator());

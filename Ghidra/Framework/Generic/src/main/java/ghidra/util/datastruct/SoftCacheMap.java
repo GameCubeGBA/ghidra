@@ -117,11 +117,13 @@ public class SoftCacheMap<K, V> implements Map<K, V> {
 	@Override
 	public boolean containsValue(Object value) {
 		processQueue();
-        for (MySoftReference ref : map.values()) {
-            if (value.equals(ref.get())) {
-                return true;
-            }
-        }
+		Iterator<MySoftReference> it = map.values().iterator();
+		while (it.hasNext()) {
+			MySoftReference ref = it.next();
+			if (value.equals(ref.get())) {
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -131,12 +133,14 @@ public class SoftCacheMap<K, V> implements Map<K, V> {
 	@Override
 	public Collection<V> values() {
 		List<V> list = new ArrayList<>(map.size());
-        for (MySoftReference ref : map.values()) {
-            V obj = ref.get();
-            if (obj != null) {
-                list.add(obj);
-            }
-        }
+		Iterator<MySoftReference> it = map.values().iterator();
+		while (it.hasNext()) {
+			MySoftReference ref = it.next();
+			V obj = ref.get();
+			if (obj != null) {
+				list.add(obj);
+			}
+		}
 		return list;
 	}
 
@@ -145,12 +149,14 @@ public class SoftCacheMap<K, V> implements Map<K, V> {
 	 */
 	@Override
 	public void putAll(Map<? extends K, ? extends V> t) {
-        for (K key : t.keySet()) {
-            V value = t.get(key);
-            if (value != null) {
-                put(key, value);
-            }
-        }
+		Iterator<? extends K> it = t.keySet().iterator();
+		while (it.hasNext()) {
+			K key = it.next();
+			V value = t.get(key);
+			if (value != null) {
+				put(key, value);
+			}
+		}
 	}
 
 	/**

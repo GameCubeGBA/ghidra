@@ -121,8 +121,11 @@ public class FieldRange implements Comparable<FieldRange> {
 		if (compareTo(newRange) > 0) {
 			return newRange.canMerge(this);
 		}
-        return end.compareTo(newRange.start) >= 0;
-    }
+		if (end.compareTo(newRange.start) < 0) {
+			return false;
+		}
+		return true;
+	}
 
 	public void merge(FieldRange newRange) {
 		if (!canMerge(newRange)) {
@@ -191,8 +194,11 @@ public class FieldRange implements Comparable<FieldRange> {
 			((start.getIndex().intValue() == index) && (start.fieldNum != 0 || start.row != 0 || start.col != 0))) {
 			return false;
 		}
-        return end.getIndex().intValue() > index;
-    }
+		if (end.getIndex().intValue() <= index) {
+			return false;
+		}
+		return true;
+	}
 
 	public boolean containsEntirely(BigInteger index) {
 		int compareTo = start.getIndex().compareTo(index);
@@ -200,7 +206,10 @@ public class FieldRange implements Comparable<FieldRange> {
 			((compareTo == 0) && (start.fieldNum != 0 || start.row != 0 || start.col != 0))) {
 			return false;
 		}
-        return end.getIndex().compareTo(index) > 0;
-    }
+		if (end.getIndex().compareTo(index) <= 0) {
+			return false;
+		}
+		return true;
+	}
 
 }

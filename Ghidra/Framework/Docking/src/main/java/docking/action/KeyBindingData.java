@@ -110,13 +110,13 @@ public class KeyBindingData {
 			return null;
 		}
 
-		KeyStroke keyBinding = newKeyBindingData.keyStroke;
+		KeyStroke keyBinding = newKeyBindingData.getKeyBinding();
 		if (keyBinding == null) {
 			// not sure when this can happen
 			return newKeyBindingData;
 		}
 
-		KeyBindingPrecedence precedence = newKeyBindingData.keyBindingPrecedence;
+		KeyBindingPrecedence precedence = newKeyBindingData.getKeyBindingPrecedence();
 		if (precedence == KeyBindingPrecedence.ReservedActionsLevel) {
 			return createReservedKeyBindingData(KeyBindingUtils.validateKeyStroke(keyBinding));
 		}

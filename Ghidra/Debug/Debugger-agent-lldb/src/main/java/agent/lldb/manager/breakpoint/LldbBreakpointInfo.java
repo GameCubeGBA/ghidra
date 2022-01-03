@@ -83,8 +83,11 @@ public class LldbBreakpointInfo {
 			return false;
 		}
 		LldbBreakpointInfo that = (LldbBreakpointInfo) obj;
-        return this.getId() == that.getId();
-    }
+		if (this.getId() != that.getId()) {
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * Get the breakpoint disposition, i.e., what happens to the breakpoint once it has been hit

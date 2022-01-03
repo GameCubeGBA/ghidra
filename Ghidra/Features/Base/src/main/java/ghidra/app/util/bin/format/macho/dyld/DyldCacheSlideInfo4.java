@@ -143,12 +143,12 @@ public class DyldCacheSlideInfo4 extends DyldCacheSlideInfoCommon {
 		List<DyldCacheMappingInfo> mappingInfos = dyldCacheHeader.getMappingInfos();
 		DyldCacheMappingInfo dyldCacheMappingInfo = mappingInfos.get(DATA_PAGE_MAP_ENTRY);
 		long dataPageStart = dyldCacheMappingInfo.getAddress();
-		long pageSize = page_size;
-		long pageStartsCount = page_starts_count;
+		long pageSize = getPageSize();
+		long pageStartsCount = getPageStartsCount();
 
-		long deltaMask = delta_mask;
+		long deltaMask = getDeltaMask();
 		long deltaShift = Long.numberOfTrailingZeros(deltaMask);
-		long valueAdd = value_add;
+		long valueAdd = getValueAdd();
 
 		short[] pageEntries = getPageStarts();
 		short[] extraEntries = getPageExtras();

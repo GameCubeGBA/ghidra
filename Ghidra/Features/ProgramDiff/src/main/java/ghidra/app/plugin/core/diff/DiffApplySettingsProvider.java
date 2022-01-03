@@ -366,9 +366,10 @@ public class DiffApplySettingsProvider extends ComponentProviderAdapter {
 		if (adjustingApplyFilter) {
 			return;
 		}
-        for (ActionListener listener : listenerList) {
-            listener.actionPerformed(new ActionEvent(this, 0, APPLY_FILTER_CHANGED_ACTION));
-        }
+		for (int i = 0; i < listenerList.size(); i++) {
+			ActionListener listener = listenerList.get(i);
+			listener.actionPerformed(new ActionEvent(this, 0, APPLY_FILTER_CHANGED_ACTION));
+		}
 	}
 
 	@Override
@@ -390,7 +391,7 @@ public class DiffApplySettingsProvider extends ComponentProviderAdapter {
 	}
 
 	class Choice extends JPanel implements Comparable<Choice> {
-		private static final long serialVersionUID = 1L;
+		private final static long serialVersionUID = 1L;
 		String type;
 		boolean allowMerge;
 		JLabel label;
@@ -450,7 +451,7 @@ public class DiffApplySettingsProvider extends ComponentProviderAdapter {
 	}
 
 	class SymbolsChoice extends Choice {
-		private static final long serialVersionUID = 1L;
+		private final static long serialVersionUID = 1L;
 
 		public SymbolsChoice() {
 			super("Labels", true);

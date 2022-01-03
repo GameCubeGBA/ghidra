@@ -25,7 +25,7 @@ import ghidra.framework.model.DomainObjectChangeRecord;
  *</p>
  */
 public class DataTypeArchiveChangeRecord extends DomainObjectChangeRecord {
-    private static final long serialVersionUID = 1;
+    private final static long serialVersionUID = 1;
 
     private Object affectedObj; // may be null
 

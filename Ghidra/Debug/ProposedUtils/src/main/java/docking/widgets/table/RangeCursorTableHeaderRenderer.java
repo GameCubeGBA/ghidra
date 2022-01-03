@@ -28,8 +28,8 @@ import com.google.common.collect.Range;
 
 public class RangeCursorTableHeaderRenderer<N extends Number & Comparable<N>>
 		extends GTableHeaderRenderer {
-	protected static final int ARROW_SIZE = 10;
-	protected static final Polygon ARROW = new Polygon(
+	protected final static int ARROW_SIZE = 10;
+	protected final static Polygon ARROW = new Polygon(
 		new int[] { 0, -ARROW_SIZE, -ARROW_SIZE },
 		new int[] { 0, ARROW_SIZE, -ARROW_SIZE }, 3);
 

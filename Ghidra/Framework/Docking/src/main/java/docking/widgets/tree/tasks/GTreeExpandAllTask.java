@@ -58,7 +58,7 @@ public class GTreeExpandAllTask extends GTreeTask {
 		}
 		monitor.checkCanceled();
 		List<GTreeNode> allChildren = parent.getChildren();
-		if (allChildren.isEmpty()) {
+		if (allChildren.size() == 0) {
 			return;
 		}
 		TreePath treePath = parent.getTreePath();

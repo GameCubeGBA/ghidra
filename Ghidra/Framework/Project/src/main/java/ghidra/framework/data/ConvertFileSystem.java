@@ -54,7 +54,8 @@ public class ConvertFileSystem implements GhidraLaunchable {
 
 	public static class ConvertFileSystemException extends IOException {
 		public ConvertFileSystemException() {
-        }
+			super();
+		}
 
 		public ConvertFileSystemException(String message) {
 			super(message);

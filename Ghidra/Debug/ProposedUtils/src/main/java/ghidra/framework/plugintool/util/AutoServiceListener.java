@@ -30,9 +30,9 @@ public class AutoServiceListener<R> implements ServiceListener {
 		new HashMap<>();
 
 	protected interface ServiceSetter<R, S> {
-		void set(R receiver, S service);
+		public void set(R receiver, S service);
 
-		Class<S> getServiceIface();
+		public Class<S> getServiceIface();
 	}
 
 	protected static class FieldServiceSetter<R, S> implements ServiceSetter<R, S> {

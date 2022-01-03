@@ -30,8 +30,8 @@ import mobiledevices.dmg.hfsplus.AttributesFileParser;
 import mobiledevices.dmg.zlib.ZLIB;
 
 public class DmgFileReader implements Closeable {
-	private static final GDataConverter ledc = new GDataConverterLE();
-	private static final GDataConverter bedc = new GDataConverterBE();
+	private final static GDataConverter ledc = new GDataConverterLE();
+	private final static GDataConverter bedc = new GDataConverterBE();
 
 	private GByteProvider provider;
 	private AttributesFileParser parser;
@@ -263,7 +263,7 @@ public class DmgFileReader implements Closeable {
 
 	public List<FSEntry> getListing( String path ) {
 		List<FSEntry> list = new ArrayList<FSEntry>();
-		if ( path == null || "/".equals(path) ) {
+		if ( path == null || path.equals( "/" ) ) {
 			for ( FileSystemHandler handler : fileSystemHandlers ) {
 				list.add( handler.getRoot() );
 			}
@@ -329,7 +329,7 @@ public class DmgFileReader implements Closeable {
 	 * Path should contain the file system handler name.
 	 */
 	public FSEntry getFileByPath( String path ) {
-		if ( path == null || "/".equals(path) ) {//ROOT
+		if ( path == null || path.equals( "/" ) ) {//ROOT
 			return null;
 		}
 		for ( FileSystemHandler handler : fileSystemHandlers ) {

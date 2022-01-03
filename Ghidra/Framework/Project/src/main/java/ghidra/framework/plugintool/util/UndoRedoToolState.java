@@ -31,20 +31,24 @@ public class UndoRedoToolState {
 	 */
 	public UndoRedoToolState(List<Plugin> plugins, DomainObject domainObject) {
 		states = new ArrayList<>();
-        for (Plugin plugin : plugins) {
-            Object state = plugin.getUndoRedoState(domainObject);
-            if (state != null) {
-                states.add(new PluginState(plugin, state));
-            }
-        }
+		Iterator<Plugin> it = plugins.iterator();
+		while(it.hasNext()) {
+			Plugin plugin = it.next();
+			Object state = plugin.getUndoRedoState(domainObject);
+			if (state != null) {
+				states.add(new PluginState(plugin, state));
+			}
+		}
     }
     /**
      * Restore the tool's state.
      */
 	public void restoreTool(DomainObject domainObject) {
-        for (PluginState ps : states) {
-            ps.restoreUndoRedoState(domainObject);
-        }
+		Iterator<PluginState> it = states.iterator();
+		while(it.hasNext()) {
+			PluginState ps = it.next();
+			ps.restoreUndoRedoState(domainObject);
+		}
 	}
 	
 	private static class PluginState {

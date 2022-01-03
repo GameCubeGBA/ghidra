@@ -25,10 +25,10 @@ import java.util.List;
 
 public final class ObjectiveC1_Constants {
 
-	public static final String NAMESPACE = "objc";
+	public final static String NAMESPACE = "objc";
 
-	public static final String CATEGORY = "/objc";
-	public static final CategoryPath CATEGORY_PATH = new CategoryPath(CATEGORY);
+	public final static String CATEGORY = "/objc";
+	public final static CategoryPath CATEGORY_PATH = new CategoryPath(CATEGORY);
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	 *   
@@ -39,26 +39,26 @@ public final class ObjectiveC1_Constants {
 
 	private static final String SECTION_FIELD_NAME_PREFIX              = "OBJC_SECTION_";
 
-	public static final String OBJC_SECTION_CATEGORY                   = "__category";
-	public static final String OBJC_SECTION_CATEGORY_CLASS_METHODS     = "__cat_cls_meth";
-	public static final String OBJC_SECTION_CATEGORY_INSTANCE_METHODS  = "__cat_inst_meth";
-	public static final String OBJC_SECTION_CLASS                      = "__class";
-	public static final String OBJC_SECTION_CLASS_METHODS              = "__cls_meth";
-	public static final String OBJC_SECTION_CLASS_REFS                 = "__cls_refs";
-	public static final String OBJC_SECTION_INSTANCE_METHODS           = "__inst_meth";
-	public static final String OBJC_SECTION_INSTANCE_VARS              = "__instance_vars";
-	public static final String OBJC_SECTION_MESSAGE_REFS               = "__message_refs";
-	public static final String OBJC_SECTION_METACLASS                  = "__meta_class";
-	public static final String OBJC_SECTION_MODULE_INFO                = "__module_info";
-	public static final String OBJC_SECTION_PROTOCOL                   = "__protocol";
-	public static final String OBJC_SECTION_SYMBOLS                    = "__symbols";
-	public static final String OBJC_SECTION_DATA					   = "__data";
+	public final static String OBJC_SECTION_CATEGORY                   = "__category";
+	public final static String OBJC_SECTION_CATEGORY_CLASS_METHODS     = "__cat_cls_meth";
+	public final static String OBJC_SECTION_CATEGORY_INSTANCE_METHODS  = "__cat_inst_meth";
+	public final static String OBJC_SECTION_CLASS                      = "__class";
+	public final static String OBJC_SECTION_CLASS_METHODS              = "__cls_meth";
+	public final static String OBJC_SECTION_CLASS_REFS                 = "__cls_refs";
+	public final static String OBJC_SECTION_INSTANCE_METHODS           = "__inst_meth";
+	public final static String OBJC_SECTION_INSTANCE_VARS              = "__instance_vars";
+	public final static String OBJC_SECTION_MESSAGE_REFS               = "__message_refs";
+	public final static String OBJC_SECTION_METACLASS                  = "__meta_class";
+	public final static String OBJC_SECTION_MODULE_INFO                = "__module_info";
+	public final static String OBJC_SECTION_PROTOCOL                   = "__protocol";
+	public final static String OBJC_SECTION_SYMBOLS                    = "__symbols";
+	public final static String OBJC_SECTION_DATA					   = "__data";
 
 	/**
 	 * Returns a list containing valid Objective-C section names.
 	 * @return a list containing valid Objective-C section names
 	 */
-    public static final List<String> getObjectiveCSectionNames() {
+	public final static List<String> getObjectiveCSectionNames() {
 		List<String> sectionNames = new ArrayList<String>();
 		Field [] declaredFields = ObjectiveC1_Constants.class.getDeclaredFields();
 		for (Field field : declaredFields) {
@@ -74,28 +74,28 @@ public final class ObjectiveC1_Constants {
 		return sectionNames;
 	}
 
-	public static final String READ_UNIX2003                   = "_read$UNIX2003";
-	public static final String OBJC_MSG_SEND                   = "_objc_msgSend";
-	public static final String OBJC_MSG_SEND_WILDCARD          = "_objc_msgSend*";
-	public static final String OBJC_MSG_SEND_RTP_NAME          = "_objc_msgSend_rtp";
+	public final static String READ_UNIX2003                   = "_read$UNIX2003";
+	public final static String OBJC_MSG_SEND                   = "_objc_msgSend";
+	public final static String OBJC_MSG_SEND_WILDCARD          = "_objc_msgSend*";
+	public final static String OBJC_MSG_SEND_RTP_NAME          = "_objc_msgSend_rtp";
 
 	/** Absolute symbol binding the runtime page (RTP) version of objc_msgSend. */
-    public static final long OBJ_MSGSEND_RTP       = 0xfffeff00L;
+	public final static long OBJ_MSGSEND_RTP       = 0xfffeff00L;
 
 	/** Absolute symbol binding the runtime page (RTP) version of objc_msgSend_Exit. */
-    public static final long OBJ_MSGSEND_RTP_EXIT  = 0xfffeff00L+0x100;
+	public final static long OBJ_MSGSEND_RTP_EXIT  = 0xfffeff00L+0x100;
 
 	/**
 	 * Returns true if this program contains Objective-C.
 	 * @param program the program to check
 	 * @return true if the program contains Objective-C.
 	 */
-    public static final boolean isObjectiveC(Program program) {
+	public final static boolean isObjectiveC(Program program) {
 		String format = program.getExecutableFormat();
 		if (MachoLoader.MACH_O_NAME.equals(format)) {
 			for (String objcSection : getObjectiveCSectionNames()) {
 				if (program.getMemory().getBlock(objcSection) != null) {
-					if( !"__data".equals(objcSection)) {
+					if( !objcSection.equals("__data")) {
 						return true;
 					}
 				}

@@ -208,11 +208,11 @@ public abstract class DragNDropTree extends JTree implements Draggable, Droppabl
 			return false;
 		}
 
-        for (ProgramNode draggedNode : draggedNodes) {
-            if (targetNode.equals(draggedNode)) {
-                return true;
-            }
-        }
+		for (int i = 0; i < draggedNodes.length; i++) {
+			if (targetNode.equals(draggedNodes[i])) {
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -221,11 +221,11 @@ public abstract class DragNDropTree extends JTree implements Draggable, Droppabl
 			return false;
 		}
 
-        for (ProgramNode draggedNode : draggedNodes) {
-            if (targetNode.isNodeAncestor(draggedNode)) {
-                return true;
-            }
-        }
+		for (int i = 0; i < draggedNodes.length; i++) {
+			if (targetNode.isNodeAncestor(draggedNodes[i])) {
+				return true;
+			}
+		}
 		return false;
 	}
 

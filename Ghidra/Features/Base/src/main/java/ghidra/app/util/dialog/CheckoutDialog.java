@@ -50,17 +50,23 @@ public class CheckoutDialog extends DialogComponentProvider {
 		setHelpLocation(new HelpLocation(HelpTopics.PROGRAM, "FileNotCheckedOut"));
 
 		JButton checkoutButton = new JButton("Yes");
-		checkoutButton.addActionListener(e -> {
-            actionID = CHECKOUT;
-            close();
-        });
+		checkoutButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				actionID = CHECKOUT;
+				close();
+			}
+		});
 		addButton(checkoutButton);
 
 		JButton noCheckoutButton = new JButton("No");
-		noCheckoutButton.addActionListener(e -> {
-            actionID = DO_NOT_CHECKOUT;
-            close();
-        });
+		noCheckoutButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				actionID = DO_NOT_CHECKOUT;
+				close();
+			}
+		});
 		addButton(noCheckoutButton);
 
 	}
@@ -75,7 +81,12 @@ public class CheckoutDialog extends DialogComponentProvider {
 		}
 		else {
 			try {
-				SwingUtilities.invokeAndWait(() -> DockingWindowManager.showDialog(null, CheckoutDialog.this));
+				SwingUtilities.invokeAndWait(new Runnable() {
+					@Override
+					public void run() {
+						DockingWindowManager.showDialog(null, CheckoutDialog.this);
+					}
+				});
 			}
 			catch (Exception e) {
 			}
@@ -112,7 +123,12 @@ public class CheckoutDialog extends DialogComponentProvider {
 			if (user.hasWritePermission()) {
 				final JCheckBox exclusiveCB = new GCheckBox("Request exclusive check out");
 				exclusiveCB.setSelected(false);
-				exclusiveCB.addActionListener(e -> exclusiveCheckout = exclusiveCB.isSelected());
+				exclusiveCB.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						exclusiveCheckout = exclusiveCB.isSelected();
+					}
+				});
 				JPanel cbPanel = new JPanel(new BorderLayout());
 				cbPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
 				cbPanel.add(exclusiveCB);

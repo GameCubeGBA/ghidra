@@ -84,9 +84,9 @@ public class FunctionBitPatternsGTreeNode extends GTreeNode {
 	@Override
 	public int compareTo(GTreeNode other) {
 		if (other instanceof FunctionBitPatternsGTreeNode) {
-			return -Integer.compare(count, ((FunctionBitPatternsGTreeNode) other).count);
+			return -Integer.compare(count, ((FunctionBitPatternsGTreeNode) other).getCount());
 		}
-		return name.compareToIgnoreCase(other.getName());
+		return getName().compareToIgnoreCase(other.getName());
 	}
 
 	/**
@@ -166,7 +166,7 @@ public class FunctionBitPatternsGTreeNode extends GTreeNode {
 	public void filterByPercentage(PercentageFilter filter) {
 		for (GTreeNode node : getChildren()) {
 			FunctionBitPatternsGTreeNode fspNode = (FunctionBitPatternsGTreeNode) node;
-			if (filter.allows(fspNode.percentage)) {
+			if (filter.allows(fspNode.getPercentage())) {
 				fspNode.filterByPercentage(filter);
 			}
 			else {

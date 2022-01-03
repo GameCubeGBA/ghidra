@@ -38,21 +38,21 @@ public interface AsyncHandlerCanExit<R> {
 	 * @param exc the exception if completed exceptionally
 	 * @return
 	 */
-    Void exit(R result, Throwable exc);
+	public Void exit(R result, Throwable exc);
 
 	/**
 	 * Complete the chain with the given result
 	 * 
 	 * @param result the result
 	 */
-	default void exit(R result) {
+	public default void exit(R result) {
 		exit(result, null);
 	}
 
 	/**
 	 * Complete the chain with {@code null}
 	 */
-	default void exit() {
+	public default void exit() {
 		exit(null, null);
 	}
 
@@ -61,7 +61,7 @@ public interface AsyncHandlerCanExit<R> {
 	 * 
 	 * @param exc the exception
 	 */
-	default void exit(Throwable exc) {
+	public default void exit(Throwable exc) {
 		exit(null, exc);
 	}
 }

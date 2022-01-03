@@ -598,7 +598,7 @@ public class GnuDemanglerParser {
 	private List<String> tokenizeParameters(String parameterString) {
 		List<String> parameters = new ArrayList<>();
 
-		if (parameterString.isEmpty()) {
+		if (parameterString.length() == 0) {
 			return parameters;
 		}
 
@@ -901,7 +901,7 @@ public class GnuDemanglerParser {
 				dt.setEnum();
 				i += 3;
 			}
-			else if ("long".equals(dt.getName())) {
+			else if (dt.getName().equals("long")) {
 				if (substr.startsWith("long")) {
 					dt.setName(DemangledDataType.LONG_LONG);
 					i += 3;
@@ -912,7 +912,7 @@ public class GnuDemanglerParser {
 				}
 			}
 			// unsigned can also mean unsigned long, int
-			else if ("unsigned".equals(dt.getName())) {
+			else if (dt.getName().equals("unsigned")) {
 				dt.setUnsigned();
 				if (substr.startsWith("long")) {
 					dt.setName(DemangledDataType.LONG);
@@ -1282,10 +1282,10 @@ public class GnuDemanglerParser {
 
 		DemangledDataType dt = new DemangledDataType(mangledSource, demangledSource, realName);
 		String type = matcher.group(1);
-		if ("*".equals(type)) {
+		if (type.equals("*")) {
 			dt.incrementPointerLevels();
 		}
-		else if ("&".equals(type)) {
+		else if (type.equals("&")) {
 			dt.setReference();
 		}
 		else {
@@ -1394,7 +1394,7 @@ public class GnuDemanglerParser {
 	 * @return the newly created type
 	 */
 	private DemangledType convertToNamespaces(List<String> names) {
-		if (names.isEmpty()) {
+		if (names.size() == 0) {
 			return null;
 		}
 		int index = names.size() - 1;
@@ -1610,8 +1610,12 @@ public class GnuDemanglerParser {
 
 			int operatorStart = matcher.start(2);
 			int leafStart = findNamespaceStart(demangled, text.length() - 1, operatorStart);
-            return leafStart <= operatorStart; // operator is inside of a non-leaf namespace entry
-        }
+			if (leafStart > operatorStart) {
+				return false; // operator is inside of a non-leaf namespace entry
+			}
+
+			return true;
+		}
 
 		@Override
 		DemangledObject build() {

@@ -85,7 +85,7 @@ public abstract class ChecksumAlgorithm implements ExtensionPoint {
 	 * @throws MemoryAccessException If there was a problem accessing the specified memory.
 	 * @throws CancelledException If checksum generation was cancelled.
 	 */
-    public final void updateChecksum(Memory memory, AddressSetView addrSet, TaskMonitor monitor)
+	final public void updateChecksum(Memory memory, AddressSetView addrSet, TaskMonitor monitor)
 			throws MemoryAccessException, CancelledException {
 		updateChecksum(memory, addrSet, monitor, null);
 	}

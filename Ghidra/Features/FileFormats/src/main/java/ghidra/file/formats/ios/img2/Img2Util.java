@@ -23,7 +23,7 @@ import java.util.Arrays;
 
 public final class Img2Util {
 
-	public static final boolean isIMG2(Program program) {
+	public final static boolean isIMG2(Program program) {
 		Address address = program.getMinAddress();
 		byte [] bytes = new byte[4];
 		try {

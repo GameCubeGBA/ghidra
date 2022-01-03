@@ -469,7 +469,7 @@ abstract class VariableImpl implements Variable {
 		strBuilder.append("[");
 		strBuilder.append(dataType.getName());
 		strBuilder.append(" ");
-		strBuilder.append(name);
+		strBuilder.append(getName());
 		strBuilder.append("@");
 		strBuilder.append(variableStorage.toString());
 		strBuilder.append("]");
@@ -522,8 +522,11 @@ abstract class VariableImpl implements Variable {
 		if (getFirstUseOffset() != otherVar.getFirstUseOffset()) {
 			return false;
 		}
-        return DataTypeUtilities.isSameOrEquivalentDataType(getDataType(), otherVar.getDataType());
-    }
+		if (!DataTypeUtilities.isSameOrEquivalentDataType(getDataType(), otherVar.getDataType())) {
+			return false;
+		}
+		return true;
+	}
 
 	///// STORAGE RESIZE /////
 
@@ -547,7 +550,7 @@ abstract class VariableImpl implements Variable {
 		}
 		if (curSize == 0 || curStorage.isUniqueStorage() || curStorage.isHashStorage()) {
 			throw new InvalidInputException(
-				"Current storage can't be resized: " + curStorage);
+				"Current storage can't be resized: " + curStorage.toString());
 		}
 		if (newSize > curSize) {
 			return expandStorage(curStorage, newSize, type);

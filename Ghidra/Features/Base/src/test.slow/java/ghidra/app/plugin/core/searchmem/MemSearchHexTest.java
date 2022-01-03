@@ -47,7 +47,8 @@ import ghidra.program.model.mem.MemoryBlock;
 public class MemSearchHexTest extends AbstractMemSearchTest {
 
 	public MemSearchHexTest() {
-    }
+		super();
+	}
 
 	@Override
 	@Before

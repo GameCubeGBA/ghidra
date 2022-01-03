@@ -41,15 +41,15 @@ import ghidra.util.task.TaskMonitor;
 
 public class EntryPointAnalyzer extends AbstractAnalyzer {
 
-	private static final String NAME = "Disassemble Entry Points";
+	private final static String NAME = "Disassemble Entry Points";
 	private static final String DESCRIPTION = "Disassembles entry points in newly added memory.";
 
-	private static final String OPTION_NAME_RESPECT_EXECUTE_FLAG = "Respect Execute Flag";
+	private final static String OPTION_NAME_RESPECT_EXECUTE_FLAG = "Respect Execute Flag";
 
 	private static final String OPTION_DESCRIPTION_RESPECT_EXECUTE_FLAG =
 		"Respect Execute flag on memory blocks when checking entry points for code.";
 
-	private static final boolean OPTION_DEFAULT_RESPECT_EXECUTE_ENABLED = true;
+	private final static boolean OPTION_DEFAULT_RESPECT_EXECUTE_ENABLED = true;
 
 	private boolean respectExecuteFlags = OPTION_DEFAULT_RESPECT_EXECUTE_ENABLED;
 
@@ -177,16 +177,20 @@ public class EntryPointAnalyzer extends AbstractAnalyzer {
 			Set<Address> doNowSet) {
 		SymbolTable symbolTable = program.getSymbolTable();
 		if (externalCount == 1 && doNowSet.size() == 1) {
-            return symbolTable.getPrimarySymbol(doNowSet.iterator().next()).isExternalEntryPoint();
+			if (symbolTable.getPrimarySymbol(doNowSet.iterator().next()).isExternalEntryPoint()) {
+				return true;
+			}
 		}
 		return false;
 	}
 
 	private AddressSetView toAddressSet(Set<Address> doLaterSet) {
 		AddressSet set = new AddressSet();
-        for (Address address : doLaterSet) {
-            set.add(address);
-        }
+		Iterator<Address> iterator = doLaterSet.iterator();
+		while (iterator.hasNext()) {
+			Address address = iterator.next();
+			set.add(address);
+		}
 		return set;
 	}
 

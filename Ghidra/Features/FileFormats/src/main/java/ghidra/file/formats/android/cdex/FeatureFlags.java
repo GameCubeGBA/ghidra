@@ -17,5 +17,5 @@ package ghidra.file.formats.android.cdex;
 
 public final class FeatureFlags {
 
-	public static final int kDefaultMethods = 0x1;
+	public final static int kDefaultMethods = 0x1;
 }

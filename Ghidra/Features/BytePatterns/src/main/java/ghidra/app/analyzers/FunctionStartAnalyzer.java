@@ -49,16 +49,17 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 	private static final String DESCRIPTION =
 		"Search for architecture specific byte patterns: typically starts of functions";
 	private static final String PRE_FUNCTION_MATCH_PROPERTY_NAME = "PreFunctionMatch";
-	private static final String OPTION_NAME_DATABLOCKS = "Search Data Blocks";
+	private final static String OPTION_NAME_DATABLOCKS = "Search Data Blocks";
 	private static final String OPTION_DESCRIPTION_DATABLOCKS =
 		"Search for byte patterns in blocks that are not executable";
-	private static final boolean OPTION_DEFAULT_DATABLOCKS = false;
-	private static final String OPTION_NAME_BOOKMARKS = "Bookmark Functions";
-	private static final String OPTION_DESCRIPTION_BOOKMARKS =
+	private final static boolean OPTION_DEFAULT_DATABLOCKS = false;
+	private final static String OPTION_NAME_BOOKMARKS = "Bookmark Functions";
+	private final static String OPTION_DESCRIPTION_BOOKMARKS =
 		"Place a bookmark at functions that were discovered by a pattern";
-	private static final boolean OPTION_DEFAULT_BOOKMARKS = false;
+	private final static boolean OPTION_DEFAULT_BOOKMARKS = false;
 
-    // always need to initialize the root.
+	private static ProgramDecisionTree patternDecisitionTree;
+	// always need to initialize the root.
 	SequenceSearchState rootState = null;
 	SequenceSearchState explicitState = null;  //for use during dynamic function start pattern discovery
 
@@ -83,12 +84,11 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 	protected AddressSet postreqFailedResult = null; // Discovered pattern, but a post req failed (not following a defined thing)
 	protected ArrayList<RegisterValue> contextValueList = null;
 
-    private static final class PatternDecisitionTreeHolder {
-        private static final ProgramDecisionTree patternDecisitionTree = Patterns.getPatternDecisionTree();
-    }
-
-    private static ProgramDecisionTree getPatternDecisionTree() {
-        return PatternDecisitionTreeHolder.patternDecisitionTree;
+	private static ProgramDecisionTree getPatternDecisionTree() {
+		if (patternDecisitionTree == null) {
+			patternDecisitionTree = Patterns.getPatternDecisionTree();
+		}
+		return patternDecisitionTree;
 	}
 
 	public FunctionStartAnalyzer() {
@@ -132,13 +132,17 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 		}
 		ProgramContext programContext = program.getProgramContext();
 
-        for (RegisterValue contextValue : contextValueList) {
-            try {
-                programContext.setRegisterValue(addr, addr, contextValue);
-            } catch (ContextChangeException e) {
-                // context conflicts cause problems, let already layed down context win.
-            }
-        }
+		Iterator<RegisterValue> iterator = contextValueList.iterator();
+		while (iterator.hasNext()) {
+			RegisterValue contextValue = iterator.next();
+
+			try {
+				programContext.setRegisterValue(addr, addr, contextValue);
+			}
+			catch (ContextChangeException e) {
+				// context conflicts cause problems, let already layed down context win.
+			}
+		}
 
 		// context applied at location, throw away
 		contextValueList = null;
@@ -148,13 +152,17 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 		if (contextValueList == null) {
 			return;
 		}
-        for (RegisterValue contextValue : contextValueList) {
-            try {
-                pcont.setRegisterValue(contextValue);
-            } catch (ContextChangeException e) {
-                // context conflicts cause problems, let already layed down context win.
-            }
-        }
+		Iterator<RegisterValue> iterator = contextValueList.iterator();
+		while (iterator.hasNext()) {
+			RegisterValue contextValue = iterator.next();
+
+			try {
+				pcont.setRegisterValue(contextValue);
+			}
+			catch (ContextChangeException e) {
+				// context conflicts cause problems, let already layed down context win.
+			}
+		}
 	}
 
 	public class CodeBoundaryAction implements MatchAction {
@@ -238,7 +246,9 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 					pseudoDisassembler.setMaxInstructions(validcode);
 					isvalid = pseudoDisassembler.checkValidSubroutine(addr, pcont, true, false);
 				}
-                return isvalid;
+				if (!isvalid) {
+					return false;
+				}
 			}
 
 			return true;
@@ -359,27 +369,39 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 					if (funcAbove == null) {
 						return false;
 					}
-                    return !checkAlreadyInFunctionAbove(program, addr, funcAbove);
+					if (checkAlreadyInFunctionAbove(program, addr, funcAbove)) {
+						return false;
+					}
 				}
 				else if (name.startsWith("inst")) {
 					// make sure there is an end of function at location to check
 					Instruction instr = program.getListing().getInstructionContaining(addrToCheck);
-                    return instr != null;
+					if (instr == null) {
+						return false;
+					}
 				}
 				else if (name.startsWith("data")) {
 					// make sure there is defined data at location to check
 					Data data = program.getListing().getDefinedDataContaining(addrToCheck);
-                    return data != null;
+					if (data == null) {
+						return false;
+					}
 				}
 				else if (name.startsWith("def")) {
 					// make sure there is something at location to check
 					Instruction instr = program.getListing().getInstructionContaining(addrToCheck);
 					if (instr != null) {
-                        return !checkAlreadyInFunctionAbove(program, addr);
-                    }
+						if (checkAlreadyInFunctionAbove(program, addr)) {
+							return false;
+						}
+						return true;
+					}
 					Data data = program.getListing().getDefinedDataContaining(addrToCheck);
-                    return data != null;
-                }
+					if (data != null) {
+						return true;
+					}
+					return false;
+				}
 			}
 			return true;
 		}
@@ -408,9 +430,12 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 			if (funcAbove != null) {
 				// check if in function right above
 				Function myfunc = program.getFunctionManager().getFunctionContaining(addr);
-                return myfunc != null && myfunc.getEntryPoint().equals(funcAbove.getEntryPoint());
+				if (myfunc != null && myfunc.getEntryPoint().equals(funcAbove.getEntryPoint())) {
+					return true;
+				}
 				// I could be in a different function, just not one above
-            }
+				return false;
+			}
 
 			// no function above, but check for references, that would make this a function
 			// or references that would imply it is part of another function.
@@ -491,14 +516,14 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 			if (el.hasAttribute("validcode")) {
 				validcode = 8;
 				String validcodeStr = el.getAttribute("validcode");
-				if ("0".equals(validcodeStr) || "false".equals(validcodeStr)) {
+				if (validcodeStr.equals("0") || validcodeStr.equals("false")) {
 					validcode = 0;
 				}
-				else if ("true".equalsIgnoreCase(validcodeStr) ||
-					"subroutine".equalsIgnoreCase(validcodeStr)) { // must be a valid subroutine
+				else if (validcodeStr.equalsIgnoreCase("true") ||
+					validcodeStr.equalsIgnoreCase("subroutine")) { // must be a valid subroutine
 					validcode = -1;
 				}
-				else if ("function".equalsIgnoreCase(validcodeStr)) { // must be at a defined subroutine
+				else if (validcodeStr.equalsIgnoreCase("function")) { // must be at a defined subroutine
 					validFunction = true;
 					hasFunctionStartConstraints = true;
 				}
@@ -794,7 +819,7 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 		if (patternlist == null) {
 			return null;
 		}
-		if (patternlist.isEmpty()) {
+		if (patternlist.size() == 0) {
 			return null;
 		}
 
@@ -823,16 +848,16 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 
 	@Override
 	public MatchAction getMatchActionByName(String nm) {
-		if ("funcstart".equals(nm)) {
+		if (nm.equals("funcstart")) {
 			return new FunctionStartAction();
 		}
-		else if ("possiblefuncstart".equals(nm)) {
+		else if (nm.equals("possiblefuncstart")) {
 			return new PossibleFunctionStartAction();
 		}
-		else if ("codeboundary".equals(nm)) {
+		else if (nm.equals("codeboundary")) {
 			return new CodeBoundaryAction();
 		}
-		else if ("setcontext".equals(nm)) {
+		else if (nm.equals("setcontext")) {
 			return new ContextAction();
 		}
 		return null;
@@ -840,7 +865,7 @@ public class FunctionStartAnalyzer extends AbstractAnalyzer implements PatternFa
 
 	@Override
 	public PostRule getPostRuleByName(String nm) {
-		if ("align".equals(nm)) {
+		if (nm.equals("align")) {
 			return new AlignRule();
 		}
 		return null;

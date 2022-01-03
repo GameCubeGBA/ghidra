@@ -112,8 +112,11 @@ public class ToolIconURL implements Comparable<ToolIconURL> {
 			return false;
 		}
 		ToolIconURL other = (ToolIconURL) obj;
-        return Objects.equals(location, other.location);
-    }
+		if (!Objects.equals(location, other.location)) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public String toString() {

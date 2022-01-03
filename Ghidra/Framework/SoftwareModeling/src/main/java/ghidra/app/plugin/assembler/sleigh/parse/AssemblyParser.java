@@ -312,8 +312,11 @@ public class AssemblyParser {
 				return false;
 			}
 			MergeKey mk = (MergeKey) that;
-            return (this.finalState == mk.finalState) && this.prod.equals(mk.prod);
-        }
+			if ((this.finalState != mk.finalState) || !this.prod.equals(mk.prod)) {
+				return false;
+			}
+			return true;
+		}
 
 		@Override
 		public int compareTo(MergeKey that) {

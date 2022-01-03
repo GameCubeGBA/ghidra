@@ -59,8 +59,8 @@ public abstract class AbstractGTest {
 		UniversalIdGenerator.initialize();
 	}
 
-	public static final boolean BATCH_MODE = SystemUtilities.isInTestingBatchMode();
-	protected static final boolean PARALLEL_MODE = Boolean.parseBoolean(
+	public final static boolean BATCH_MODE = SystemUtilities.isInTestingBatchMode();
+	protected final static boolean PARALLEL_MODE = Boolean.parseBoolean(
 		System.getProperty("ghidra.test.property.parallel.mode", Boolean.FALSE.toString()));
 
 	// currently set to 200ms in parallel mode; we can increase as needed; too long slows tests

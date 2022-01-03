@@ -29,7 +29,8 @@ public class WeakValueTreeMap<K, V> extends AbstractWeakValueNavigableMap<K, V> 
 	 * Constructs a new weak map
 	 */
 	public WeakValueTreeMap() {
-        refMap = new TreeMap<>();
+		super();
+		refMap = new TreeMap<>();
 	}
 
 	/**
@@ -38,7 +39,8 @@ public class WeakValueTreeMap<K, V> extends AbstractWeakValueNavigableMap<K, V> 
 	 * @param comparator the comparator, or {@code null} for the natural ordering
 	 */
 	public WeakValueTreeMap(Comparator<K> comparator) {
-        refMap = new TreeMap<>(comparator);
+		super();
+		refMap = new TreeMap<>(comparator);
 	}
 
 	@Override

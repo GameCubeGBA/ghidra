@@ -106,7 +106,7 @@ public class SymbolTreePlugin extends Plugin {
 		SymbolType type = symbol.getSymbolType();
 		if (type.isNamespace() && type != SymbolType.FUNCTION) {
 			tool.setStatusInfo("Can not navigate to " + (symbol.isExternal() ? "external " : "") +
-                    type + " symbol: " + symbol.getName());
+				type.toString() + " symbol: " + symbol.getName());
 			return;
 		}
 
@@ -132,7 +132,7 @@ public class SymbolTreePlugin extends Plugin {
 
 		if (!success) {
 			tool.setStatusInfo("Can not navigate to " + (symbol.isExternal() ? "external " : "") +
-                    type + " symbol: " + symbol.getName() + reason);
+				type.toString() + " symbol: " + symbol.getName() + reason);
 		}
 	}
 

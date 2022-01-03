@@ -23,54 +23,54 @@ public final class CoffFileHeaderFlag {
 	 * in this file. This is usually clear for objects
 	 * and set for executables.
 	 */
-    public static final int F_RELFLG  = 0x0001;
+	public final static int F_RELFLG  = 0x0001;
 
 	/**
 	 * If set, all unresolved symbols have been resolved 
 	 * and the file may be considered executable.
 	 */
-    public static final int F_EXEC    = 0x0002;
+	public final static int F_EXEC    = 0x0002;
 
 	/**
 	 * If set, all line number information has been removed
 	 * from the file (or was never added in the first place).
 	 */
-    public static final int F_LNNO    = 0x0004;
+	public final static int F_LNNO    = 0x0004;
 
 	/**
 	 * If set, all local symbols have been removed from 
 	 * the file (or were never added in the first place).
 	 */
-    public static final int F_LSYMS   = 0x0008;
+	public final static int F_LSYMS   = 0x0008;
 
 	/**
 	 * Indicates this file is a minimal object file (".m")
 	 */
-    public static final int F_MINMAL  = 0x0010;
+	public final static int F_MINMAL  = 0x0010;
 
 	/**
 	 * Indicates this file is a fully bound update
 	 * file.
 	 */
-    public static final int F_UPDATE  = 0x0020;
+	public final static int F_UPDATE  = 0x0020;
 
 	/**
 	 * Indicates this file has had its bytes
 	 * swabbed (in names).
 	 */
-    public static final int F_SWABD   = 0x0040;
+	public final static int F_SWABD   = 0x0040;
 
-	public static final int F_AR16WR  = 0x0080;
+	public final static int F_AR16WR  = 0x0080;
 
 	/**
 	 * Indicates that the file is 32-bit little endian.
 	 */
-    public static final int F_AR32WR  = 0x0100;
+	public final static int F_AR32WR  = 0x0100;
 
-	public static final int F_AR32W   = 0x0200;
+	public final static int F_AR32W   = 0x0200;
 
-	public static final int F_PATCH   = 0x0400;
+	public final static int F_PATCH   = 0x0400;
 
-	public static final int F_NODF    = 0x0400;
+	public final static int F_NODF    = 0x0400;
 
 }

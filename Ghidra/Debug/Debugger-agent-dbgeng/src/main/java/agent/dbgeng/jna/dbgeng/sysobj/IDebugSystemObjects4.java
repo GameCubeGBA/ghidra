@@ -20,7 +20,7 @@ import com.sun.jna.platform.win32.Guid.IID;
 import agent.dbgeng.jna.dbgeng.UnknownWithUtils.VTableIndex;
 
 public interface IDebugSystemObjects4 extends IDebugSystemObjects3 {
-	IID IID_IDEBUG_SYSTEM_OBJECTS4 = new IID("489468e6-7d0f-4af5-87ab-25207454d553");
+	final IID IID_IDEBUG_SYSTEM_OBJECTS4 = new IID("489468e6-7d0f-4af5-87ab-25207454d553");
 
 	enum VTIndices4 implements VTableIndex {
 		GET_CURRENT_PROCESS_EXECUTABLE_NAME_WIDE, //

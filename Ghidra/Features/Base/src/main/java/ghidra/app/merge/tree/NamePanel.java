@@ -111,11 +111,14 @@ class NamePanel extends JPanel {
 		panel.add(rbPanel, BorderLayout.CENTER);
 
 		add(panel);
-		ItemListener itemListener = e -> {
-            if (listener != null) {
-                listener.stateChanged(null);
-            }
-        };
+		ItemListener itemListener = new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if (listener != null) {
+					listener.stateChanged(null);
+				}
+			}
+		};
 		keepOtherRB.addItemListener(itemListener);
 		keepMyRB.addItemListener(itemListener);
 		newTreeRB.addItemListener(itemListener);

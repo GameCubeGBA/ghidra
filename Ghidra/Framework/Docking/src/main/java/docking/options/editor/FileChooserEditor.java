@@ -42,7 +42,7 @@ import docking.widgets.filechooser.GhidraFileChooserMode;
  */
 public class FileChooserEditor extends PropertyEditorSupport {
 
-	private static final int NUMBER_OF_COLUMNS = 20;
+	private final static int NUMBER_OF_COLUMNS = 20;
 	private File currentFileValue;
 	private JTextField textField = new JTextField(NUMBER_OF_COLUMNS);
 	private File currentDir;
@@ -137,7 +137,7 @@ public class FileChooserEditor extends PropertyEditorSupport {
 			}
 
 			String path = textField.getText().trim();
-			if (!path.isEmpty()) {
+			if (path.length() != 0) {
 				File f = new File(path);
 				if (f.isDirectory()) {
 					fileChooser.setCurrentDirectory(f);

@@ -22,13 +22,13 @@ import ghidra.program.model.lang.*;
 
 public class LanguageSortedTableModel extends AbstractSortedTableModel<LanguageCompilerSpecPair> {
 
-	static final int PROCESSOR_COL = 0;
-	static final int VARIANT_COL = 1;
-	static final int SIZE_COL = 2;
-	static final int ENDIAN_COL = 3;
-	static final int COMPILER_SPEC_COL = 4;
+	final static int PROCESSOR_COL = 0;
+	final static int VARIANT_COL = 1;
+	final static int SIZE_COL = 2;
+	final static int ENDIAN_COL = 3;
+	final static int COMPILER_SPEC_COL = 4;
 
-	static final String[] COL_NAMES =
+	final static String[] COL_NAMES =
 		new String[] { "Processor", "Variant", "Size", "Endian", "Compiler", };
 
 	private List<LanguageCompilerSpecPair> languageList = new ArrayList<>();

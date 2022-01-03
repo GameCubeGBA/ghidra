@@ -37,7 +37,7 @@ class OldFunctionDBAdapterV1 extends OldFunctionDBAdapter {
 
 	static final String FUNCTIONS_TABLE_NAME = "Functions";
 
-	static final int SCHEMA_VERSION = 1;
+	final static int SCHEMA_VERSION = 1;
 
 	static final int V1_RETURN_DATA_TYPE_ID_COL = 0;
 	static final int V1_STACK_DEPTH_COL = 1;
@@ -46,7 +46,7 @@ class OldFunctionDBAdapterV1 extends OldFunctionDBAdapter {
 	static final int V1_STACK_LOCAL_SIZE_COL = 4;
 	static final int V1_REPEATABLE_COMMENT_COL = 5;
 
-	static final Schema V1_FUNCTIONS_SCHEMA = new Schema(SCHEMA_VERSION, "Entry Point",
+	final static Schema V1_FUNCTIONS_SCHEMA = new Schema(SCHEMA_VERSION, "Entry Point",
 		new Field[] { LongField.INSTANCE, IntField.INSTANCE, IntField.INSTANCE, IntField.INSTANCE,
 			IntField.INSTANCE, StringField.INSTANCE },
 		new String[] { "Return DataType ID", "StackDepth", "StackParamOffset", "StackReturnOffset",

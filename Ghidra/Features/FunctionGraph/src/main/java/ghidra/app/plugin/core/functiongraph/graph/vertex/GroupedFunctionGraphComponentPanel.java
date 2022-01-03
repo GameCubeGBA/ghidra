@@ -229,14 +229,14 @@ public class GroupedFunctionGraphComponentPanel extends AbstractGraphComponentPa
 				Set<FGVertex> vertices = controller.getSelectedVertices();
 				vertices.remove(vertex);
 
-				if (vertices.isEmpty()) {
+				if (vertices.size() == 0) {
 					Msg.showInfo(getClass(), GroupedFunctionGraphComponentPanel.this,
 						"Cannot Group 1 Vertex",
 						"You must have more than 1 vertex selected to add to this group");
 					return false;
 				}
 
-				return !vertices.isEmpty();
+				return vertices.size() > 0;
 			}
 		};
 		addToGroupAction.setDescription("Add the selected vertices to this group");

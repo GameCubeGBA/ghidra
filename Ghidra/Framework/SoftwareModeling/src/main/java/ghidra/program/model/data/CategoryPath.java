@@ -126,7 +126,7 @@ public class CategoryPath implements Comparable<CategoryPath> {
 	// constructor, called with a single argument that would not be escaped, would conflict with
 	// this constructor, which requires an escaped argument. 
 	public CategoryPath(String path) {
-		if (path == null || path.isEmpty() || DELIMITER_STRING.equals(path)) {
+		if (path == null || path.length() == 0 || DELIMITER_STRING.equals(path)) {
 			// parent can only be null for ROOT
 			parent = null;
 			name = "";
@@ -219,8 +219,11 @@ public class CategoryPath implements Comparable<CategoryPath> {
 		if (!Objects.equals(name, other.name)) {
 			return false;
 		}
-        return Objects.equals(parent, other.parent);
-    }
+		if (!Objects.equals(parent, other.parent)) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public int hashCode() {
@@ -253,7 +256,7 @@ public class CategoryPath implements Comparable<CategoryPath> {
 			if (candidateAncestorPath.equals(path)) {
 				return true;
 			}
-			path = path.parent;
+			path = path.getParent();
 		}
 		return false;
 	}
@@ -279,10 +282,10 @@ public class CategoryPath implements Comparable<CategoryPath> {
 			return isRoot() ? -1 : 1;
 		}
 
-		int result = parent.compareTo(other.parent);
+		int result = parent.compareTo(other.getParent());
 
 		if (result == 0) {
-			result = name.compareTo(other.name);
+			result = name.compareTo(other.getName());
 		}
 		return result;
 	}

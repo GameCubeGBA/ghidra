@@ -83,7 +83,7 @@ public enum SectionFlags {
 	public static Set<SectionFlags> resolveFlags(int value) {
 		Set<SectionFlags> applied = new HashSet<>();
 		for (SectionFlags ch : values()) {
-			if ((ch.mask & value) == ch.mask) {
+			if ((ch.getMask() & value) == ch.getMask()) {
 				applied.add(ch);
 			}
 		}

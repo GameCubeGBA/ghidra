@@ -25,7 +25,8 @@ import ghidra.util.table.GhidraTable;
 public class DataPluginScreenShots extends GhidraScreenShotGenerator {
 
 	public DataPluginScreenShots() {
-    }
+		super();
+	}
 
 	@Test
 	public void testCreateStructureDialog() {

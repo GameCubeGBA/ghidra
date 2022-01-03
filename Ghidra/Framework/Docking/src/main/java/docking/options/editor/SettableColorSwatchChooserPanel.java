@@ -371,7 +371,7 @@ class HistorySwatchPanel extends SwatchPanel {
 			colors[i] = defaultRecentColor;
 		}
 
-		if (recentColors != null && !recentColors.isEmpty()) {
+		if (recentColors != null && recentColors.size() > 0) {
 			int recentColorCount = recentColors.size();
 			for (int i = 0; i < recentColorCount; i++) {
 				colors[i] = recentColors.get(i);

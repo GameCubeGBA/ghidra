@@ -53,11 +53,16 @@ public class UnionEditorActions1Test extends AbstractUnionEditorTest {
 		// Check enablement.
 		CompositeEditorTableAction[] pActions = provider.getActions();
 		for (int i = 0; i < pActions.length; i++) {
-            checkEnablement(pActions[i], (pActions[i] instanceof FavoritesAction) ||
-                    (pActions[i] instanceof CycleGroupAction) ||
-                    (pActions[i] instanceof EditFieldAction) ||
-                    (pActions[i] instanceof PointerAction) ||
-                    (pActions[i] instanceof HexNumbersAction) || (actions[i] instanceof ApplyAction));
+			if ((pActions[i] instanceof FavoritesAction) ||
+				(pActions[i] instanceof CycleGroupAction) ||
+				(pActions[i] instanceof EditFieldAction) ||
+				(pActions[i] instanceof PointerAction) ||
+				(pActions[i] instanceof HexNumbersAction) || (actions[i] instanceof ApplyAction)) {
+				checkEnablement(pActions[i], true);
+			}
+			else {
+				checkEnablement(pActions[i], false);
+			}
 		}
 	}
 
@@ -83,9 +88,14 @@ public class UnionEditorActions1Test extends AbstractUnionEditorTest {
 
 		// Check enablement on blank line selected.
 		for (CompositeEditorTableAction action : actions) {
-            checkEnablement(action, (action instanceof FavoritesAction) || (action instanceof CycleGroupAction) ||
-                    (action instanceof EditFieldAction) || (action instanceof PointerAction) ||
-                    (action instanceof HexNumbersAction));
+			if ((action instanceof FavoritesAction) || (action instanceof CycleGroupAction) ||
+				(action instanceof EditFieldAction) || (action instanceof PointerAction) ||
+				(action instanceof HexNumbersAction)) {
+				checkEnablement(action, true);
+			}
+			else {
+				checkEnablement(action, false);
+			}
 		}
 	}
 
@@ -97,13 +107,18 @@ public class UnionEditorActions1Test extends AbstractUnionEditorTest {
 		// Check enablement on first component selected.
 		setSelection(new int[] { 0 });
 		for (CompositeEditorTableAction action : actions) {
-            checkEnablement(action, (action instanceof FavoritesAction) || (action instanceof CycleGroupAction) ||
-                    (action instanceof EditFieldAction) ||
-                    (action instanceof ShowComponentPathAction) || (action instanceof MoveDownAction) ||
-                    (action instanceof DuplicateAction) ||
-                    (action instanceof DuplicateMultipleAction) || (action instanceof DeleteAction) ||
-                    (action instanceof ArrayAction) || (action instanceof PointerAction) ||
-                    (action instanceof HexNumbersAction));
+			if ((action instanceof FavoritesAction) || (action instanceof CycleGroupAction) ||
+				(action instanceof EditFieldAction) ||
+				(action instanceof ShowComponentPathAction) || (action instanceof MoveDownAction) ||
+				(action instanceof DuplicateAction) ||
+				(action instanceof DuplicateMultipleAction) || (action instanceof DeleteAction) ||
+				(action instanceof ArrayAction) || (action instanceof PointerAction) ||
+				(action instanceof HexNumbersAction)) {
+				checkEnablement(action, true);
+			}
+			else {
+				checkEnablement(action, false);
+			}
 		}
 	}
 
@@ -115,13 +130,18 @@ public class UnionEditorActions1Test extends AbstractUnionEditorTest {
 		// Check enablement on central component selected.
 		setSelection(new int[] { 1 });
 		for (CompositeEditorTableAction action : actions) {
-            checkEnablement(action, (action instanceof FavoritesAction) || (action instanceof CycleGroupAction) ||
-                    (action instanceof EditFieldAction) ||
-                    (action instanceof ShowComponentPathAction) || (action instanceof MoveUpAction) ||
-                    (action instanceof MoveDownAction) || (action instanceof DuplicateAction) ||
-                    (action instanceof DuplicateMultipleAction) || (action instanceof DeleteAction) ||
-                    (action instanceof ArrayAction) || (action instanceof PointerAction) ||
-                    (action instanceof HexNumbersAction));
+			if ((action instanceof FavoritesAction) || (action instanceof CycleGroupAction) ||
+				(action instanceof EditFieldAction) ||
+				(action instanceof ShowComponentPathAction) || (action instanceof MoveUpAction) ||
+				(action instanceof MoveDownAction) || (action instanceof DuplicateAction) ||
+				(action instanceof DuplicateMultipleAction) || (action instanceof DeleteAction) ||
+				(action instanceof ArrayAction) || (action instanceof PointerAction) ||
+				(action instanceof HexNumbersAction)) {
+				checkEnablement(action, true);
+			}
+			else {
+				checkEnablement(action, false);
+			}
 		}
 	}
 
@@ -133,13 +153,18 @@ public class UnionEditorActions1Test extends AbstractUnionEditorTest {
 		// Check enablement on last component selected.
 		setSelection(new int[] { model.getNumComponents() - 1 });
 		for (CompositeEditorTableAction action : actions) {
-            checkEnablement(action, (action instanceof FavoritesAction) || (action instanceof CycleGroupAction) ||
-                    (action instanceof EditFieldAction) ||
-                    (action instanceof ShowComponentPathAction) || (action instanceof MoveUpAction) ||
-                    (action instanceof DuplicateAction) ||
-                    (action instanceof DuplicateMultipleAction) || (action instanceof DeleteAction) ||
-                    (action instanceof ArrayAction) || (action instanceof PointerAction) ||
-                    (action instanceof HexNumbersAction));
+			if ((action instanceof FavoritesAction) || (action instanceof CycleGroupAction) ||
+				(action instanceof EditFieldAction) ||
+				(action instanceof ShowComponentPathAction) || (action instanceof MoveUpAction) ||
+				(action instanceof DuplicateAction) ||
+				(action instanceof DuplicateMultipleAction) || (action instanceof DeleteAction) ||
+				(action instanceof ArrayAction) || (action instanceof PointerAction) ||
+				(action instanceof HexNumbersAction)) {
+				checkEnablement(action, true);
+			}
+			else {
+				checkEnablement(action, false);
+			}
 		}
 	}
 
@@ -151,10 +176,15 @@ public class UnionEditorActions1Test extends AbstractUnionEditorTest {
 		// Check enablement on a contiguous multi-component selection.
 		setSelection(new int[] { 2, 3, 4 });
 		for (CompositeEditorTableAction action : actions) {
-            checkEnablement(action, (action instanceof FavoritesAction) || (action instanceof CycleGroupAction)// enabled to show message
-                    || (action instanceof MoveDownAction) || (action instanceof MoveUpAction) ||
-                    (action instanceof DeleteAction) || (action instanceof PointerAction) ||
-                    (action instanceof HexNumbersAction));
+			if ((action instanceof FavoritesAction) || (action instanceof CycleGroupAction)// enabled to show message
+				|| (action instanceof MoveDownAction) || (action instanceof MoveUpAction) ||
+				(action instanceof DeleteAction) || (action instanceof PointerAction) ||
+				(action instanceof HexNumbersAction)) {
+				checkEnablement(action, true);
+			}
+			else {
+				checkEnablement(action, false);
+			}
 		}
 	}
 
@@ -167,8 +197,13 @@ public class UnionEditorActions1Test extends AbstractUnionEditorTest {
 		// Check enablement on a non-contiguous multi-component selection.
 		setSelection(new int[] { 2, 3, 6, 7 });
 		for (CompositeEditorTableAction action : actions) {
-            checkEnablement(action, (action instanceof FavoritesAction) || (action instanceof CycleGroupAction) ||
-                    (action instanceof DeleteAction) || (action instanceof HexNumbersAction));
+			if ((action instanceof FavoritesAction) || (action instanceof CycleGroupAction) ||
+				(action instanceof DeleteAction) || (action instanceof HexNumbersAction)) {
+				checkEnablement(action, true);
+			}
+			else {
+				checkEnablement(action, false);
+			}
 		}
 	}
 
@@ -779,7 +814,7 @@ public class UnionEditorActions1Test extends AbstractUnionEditorTest {
 		assertEquals(model.getStatus(), "Name is not valid.");
 		assertTrue(complexUnion.isEquivalent(model.viewComposite));
 		assertTrue(viewCopy.isEquivalent(model.viewComposite));
-		assertTrue(!model.getStatus().isEmpty());
+		assertTrue(model.getStatus().length() > 0);
 		assertEquals("complexUnion#/$", model.getCompositeName());
 		assertEquals("complexUnion", complexUnion.getName());
 	}

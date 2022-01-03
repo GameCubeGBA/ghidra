@@ -460,13 +460,13 @@ public class ProgramMergeManager {
 
 		merger.reApplyDuplicateEquates();
 		String dupEquatesMessage = merger.getDuplicateEquatesInfo();
-		if (!dupEquatesMessage.isEmpty()) {
+		if (dupEquatesMessage.length() > 0) {
 			infoMsg.append(dupEquatesMessage);
 		}
 
 		merger.reApplyDuplicateSymbols();
 		String dupSymbolsMessage = merger.getDuplicateSymbolsInfo();
-		if (!dupSymbolsMessage.isEmpty()) {
+		if (dupSymbolsMessage.length() > 0) {
 			infoMsg.append(dupSymbolsMessage);
 		}
 
@@ -475,8 +475,11 @@ public class ProgramMergeManager {
 	}
 
 	private boolean hasMergeAddresses(AddressSetView p1AddressSet) {
-        return program1.getMemory().contains(p1AddressSet);
-    }
+		if (program1.getMemory().contains(p1AddressSet)) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * <CODE>mergeProgramContext</CODE> merges all program context register values

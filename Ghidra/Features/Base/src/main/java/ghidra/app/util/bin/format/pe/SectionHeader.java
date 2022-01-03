@@ -54,15 +54,15 @@ public class SectionHeader implements StructConverter, ByteArrayConverter {
 	/**
 	 * The name to use when converting into a structure data type.
 	 */
-    public static final String NAME = "IMAGE_SECTION_HEADER";
+	public final static String NAME = "IMAGE_SECTION_HEADER";
 	/**
 	 * The size of the section header short name.
 	 */
-    public static final int IMAGE_SIZEOF_SHORT_NAME = 8;
+	public final static int IMAGE_SIZEOF_SHORT_NAME = 8;
 	/**
 	 * The size of the section header.
 	 */
-    public static final int IMAGE_SIZEOF_SECTION_HEADER = 40;
+	public final static int IMAGE_SIZEOF_SECTION_HEADER = 40;
 
 //  public final static int IMAGE_SCN_TYPE_REG                   = 0x00000000;
 //  public final static int IMAGE_SCN_TYPE_DSECT                 = 0x00000001;
@@ -73,27 +73,27 @@ public class SectionHeader implements StructConverter, ByteArrayConverter {
 	/**
 	 * Section contains code.
 	 */
-    public static final int IMAGE_SCN_CNT_CODE = 0x00000020;
+	public final static int IMAGE_SCN_CNT_CODE = 0x00000020;
 	/**
 	 * Section contains initialized data.
 	 */
-    public static final int IMAGE_SCN_CNT_INITIALIZED_DATA = 0x00000040;
+	public final static int IMAGE_SCN_CNT_INITIALIZED_DATA = 0x00000040;
 	/**
 	 * Section contains uninitialized data.
 	 */
-    public static final int IMAGE_SCN_CNT_UNINITIALIZED_DATA = 0x00000080;
+	public final static int IMAGE_SCN_CNT_UNINITIALIZED_DATA = 0x00000080;
 //  public final static int IMAGE_SCN_LNK_OTHER                  = 0x00000100;
 	/**
 	 * Section contains information for use by the linker. 
 	 * Only exists in OBJs.
 	 */
-    public static final int IMAGE_SCN_LNK_INFO = 0x00000200;
+	public final static int IMAGE_SCN_LNK_INFO = 0x00000200;
 //  public final static int IMAGE_SCN_TYPE_OVER                  = 0x00000400;
 	/**
 	 * Section contents will not become part of the image. 
 	 * This only appears in OBJ files.
 	 */
-    public static final int IMAGE_SCN_LNK_REMOVE = 0x00000800;
+	public final static int IMAGE_SCN_LNK_REMOVE = 0x00000800;
 	/**
 	 * Section contents is communal data (comdat). 
 	 * Communal data is data (or code) that can be 
@@ -103,17 +103,17 @@ public class SectionHeader implements StructConverter, ByteArrayConverter {
 	 * and function-level linking. Comdat sections only 
 	 * appear in OBJ files.
 	 */
-    public static final int IMAGE_SCN_LNK_COMDAT = 0x00001000;
+	public final static int IMAGE_SCN_LNK_COMDAT = 0x00001000;
 //  Reserved.                                                    = 0x00002000; 
 //  public final static int IMAGE_SCN_MEM_PROTECTED - Obsolete   = 0x00004000;
 	/**
 	 * Reset speculative exceptions handling bits in the TLB entries for this section.
 	 */
-    public static final int IMAGE_SCN_NO_DEFER_SPEC_EXC = 0x00004000;
+	public final static int IMAGE_SCN_NO_DEFER_SPEC_EXC = 0x00004000;
 	/**
 	 * Section content can be accessed relative to GP.
 	 */
-    public static final int IMAGE_SCN_GPREL = 0x00008000;
+	public final static int IMAGE_SCN_GPREL = 0x00008000;
 //  public final static int IMAGE_SCN_MEM_FARDATA                = 0x00008000;
 //  public final static int IMAGE_SCN_MEM_SYSHEAP  - Obsolete    = 0x00010000;
 //  public final static int IMAGE_SCN_MEM_PURGEABLE              = 0x00020000;
@@ -123,81 +123,81 @@ public class SectionHeader implements StructConverter, ByteArrayConverter {
 	/**
 	 * Align on 1-byte boundary.
 	 */
-    public static final int IMAGE_SCN_ALIGN_1BYTES = 0x00100000;
+	public final static int IMAGE_SCN_ALIGN_1BYTES = 0x00100000;
 	/**
 	 * Align on 2-byte boundary.
 	 */
-    public static final int IMAGE_SCN_ALIGN_2BYTES = 0x00200000;
+	public final static int IMAGE_SCN_ALIGN_2BYTES = 0x00200000;
 	/**
 	 * Align on 4-byte boundary.
 	 */
-    public static final int IMAGE_SCN_ALIGN_4BYTES = 0x00300000;
+	public final static int IMAGE_SCN_ALIGN_4BYTES = 0x00300000;
 	/**
 	 * Align on 8-byte boundary.
 	 */
-    public static final int IMAGE_SCN_ALIGN_8BYTES = 0x00400000;
+	public final static int IMAGE_SCN_ALIGN_8BYTES = 0x00400000;
 	/**
 	 * Align on 16-byte boundary.
 	 */
-    public static final int IMAGE_SCN_ALIGN_16BYTES = 0x00500000;
+	public final static int IMAGE_SCN_ALIGN_16BYTES = 0x00500000;
 	/**
 	 * Align on 32-byte boundary.
 	 */
-    public static final int IMAGE_SCN_ALIGN_32BYTES = 0x00600000;
+	public final static int IMAGE_SCN_ALIGN_32BYTES = 0x00600000;
 	/**
 	 * Align on 64-byte boundary.
 	 */
-    public static final int IMAGE_SCN_ALIGN_64BYTES = 0x00700000;
+	public final static int IMAGE_SCN_ALIGN_64BYTES = 0x00700000;
 	/**
 	 * Align on 128-byte boundary.
 	 */
-    public static final int IMAGE_SCN_ALIGN_128BYTES = 0x00800000;
+	public final static int IMAGE_SCN_ALIGN_128BYTES = 0x00800000;
 	/**
 	 * Align on 256-byte boundary.
 	 */
-    public static final int IMAGE_SCN_ALIGN_256BYTES = 0x00900000;
+	public final static int IMAGE_SCN_ALIGN_256BYTES = 0x00900000;
 	/**
 	 * Align on 512-byte boundary.
 	 */
-    public static final int IMAGE_SCN_ALIGN_512BYTES = 0x00A00000;
+	public final static int IMAGE_SCN_ALIGN_512BYTES = 0x00A00000;
 	/**
 	 * Align on 1024-byte boundary.
 	 */
-    public static final int IMAGE_SCN_ALIGN_1024BYTES = 0x00B00000;
+	public final static int IMAGE_SCN_ALIGN_1024BYTES = 0x00B00000;
 	/**
 	 * Align on 2048-byte boundary.
 	 */
-    public static final int IMAGE_SCN_ALIGN_2048BYTES = 0x00C00000;
+	public final static int IMAGE_SCN_ALIGN_2048BYTES = 0x00C00000;
 	/**
 	 * Align on 4096-byte boundary.
 	 */
-    public static final int IMAGE_SCN_ALIGN_4096BYTES = 0x00D00000;
+	public final static int IMAGE_SCN_ALIGN_4096BYTES = 0x00D00000;
 	/**
 	 * Align on 8192-byte boundary.
 	 */
-    public static final int IMAGE_SCN_ALIGN_8192BYTES = 0x00E00000;
+	public final static int IMAGE_SCN_ALIGN_8192BYTES = 0x00E00000;
 //  Unused                                                       = 0x00F00000;
 //  public final static int IMAGE_SCN_ALIGN_MASK                 = 0x00F00000;
 	/**
 	 * Section contains extended relocations.
 	 */
-    public static final int IMAGE_SCN_LNK_NRELOC_OVFL = 0x01000000;
+	public final static int IMAGE_SCN_LNK_NRELOC_OVFL = 0x01000000;
 	/**
 	 * The section can be discarded from the final executable. 
 	 * Used to hold information for the linker's use, 
 	 * including the .debug$ sections.
 	 */
-    public static final int IMAGE_SCN_MEM_DISCARDABLE = 0x02000000;
+	public final static int IMAGE_SCN_MEM_DISCARDABLE = 0x02000000;
 	/**
 	 * Section is not cachable.
 	 */
-    public static final int IMAGE_SCN_MEM_NOT_CACHED = 0x04000000;
+	public final static int IMAGE_SCN_MEM_NOT_CACHED = 0x04000000;
 	/**
 	 * The section is not pageable, so it should 
 	 * always be physically present in memory. 
 	 * Often used for kernel-mode drivers.
 	 */
-    public static final int IMAGE_SCN_MEM_NOT_PAGED = 0x08000000;
+	public final static int IMAGE_SCN_MEM_NOT_PAGED = 0x08000000;
 	/**
 	 * Section is shareable. The physical pages containing this 
 	 * section's data will be shared between all processes 
@@ -207,21 +207,21 @@ public class SectionHeader implements StructConverter, ByteArrayConverter {
 	 * instances of a process. To make a section shared, 
 	 * use the /section:name,S linker switch.
 	 */
-    public static final int IMAGE_SCN_MEM_SHARED = 0x10000000;
+	public final static int IMAGE_SCN_MEM_SHARED = 0x10000000;
 	/**
 	 * Section is executable.
 	 */
-    public static final int IMAGE_SCN_MEM_EXECUTE = 0x20000000;
+	public final static int IMAGE_SCN_MEM_EXECUTE = 0x20000000;
 	/**
 	 * Section is readable.
 	 */
-    public static final int IMAGE_SCN_MEM_READ = 0x40000000;
+	public final static int IMAGE_SCN_MEM_READ = 0x40000000;
 	/**
 	 * Section is writeable.
 	 */
-    public static final int IMAGE_SCN_MEM_WRITE = 0x80000000;
+	public final static int IMAGE_SCN_MEM_WRITE = 0x80000000;
 
-	public static final int NOT_SET = -1;
+	public final static int NOT_SET = -1;
 
 	private String name;
 	private int physicalAddress;
@@ -476,7 +476,7 @@ public class SectionHeader implements StructConverter, ByteArrayConverter {
 
 	@Override
 	public byte[] toBytes(DataConverter dc) throws IOException {
-		return reader.readByteArray(getPointerToRawData(), sizeOfRawData);
+		return reader.readByteArray(getPointerToRawData(), getSizeOfRawData());
 	}
 
 	/**
@@ -584,7 +584,7 @@ public class SectionHeader implements StructConverter, ByteArrayConverter {
 	public void writeBytes(RandomAccessFile raf, int rafIndex, DataConverter dc, MemoryBlock block,
 			boolean useBlockBytes) throws IOException, MemoryAccessException {
 
-		if (sizeOfRawData == 0) {
+		if (getSizeOfRawData() == 0) {
 			return;
 		}
 
@@ -601,7 +601,7 @@ public class SectionHeader implements StructConverter, ByteArrayConverter {
 			raf.write(toBytes(dc));
 		}
 
-		int padLength = sizeOfRawData - getVirtualSize();
+		int padLength = getSizeOfRawData() - getVirtualSize();
 		if (padLength > 0) {
 			raf.write(new byte[padLength]);
 		}

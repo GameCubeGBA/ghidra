@@ -23,12 +23,12 @@ public interface AddressTranslator {
 	/** Gets the destination program for addresses that have been translated.
 	 * @return program1.
 	 */
-    Program getDestinationProgram();
+	public Program getDestinationProgram();
 
 	/** Gets the source program for obtaining the addresses that need to be translated.
 	 * @return program2.
 	 */
-    Program getSourceProgram();
+	public Program getSourceProgram();
 
 	/**
 	 * Converts the given source address to the returned destination address.
@@ -40,7 +40,7 @@ public interface AddressTranslator {
 	 * throws AddressTranslationException if the address can't be translated to an equivalent
 	 * address in the other program.
 	 */
-    Address getAddress(Address sourceAddress) throws AddressTranslationException;
+	public Address getAddress(Address sourceAddress) throws AddressTranslationException;
 
 	/**
 	 * This method should return true if it can translate an address set from the source program 
@@ -51,7 +51,7 @@ public interface AddressTranslator {
 	 * individual translated addresses are from each other.
 	 * Otherwise this should return false.
 	 */
-    boolean isOneForOneTranslator();
+	public boolean isOneForOneTranslator();
 
 	/**
 	 * Converts the given source address range to the returned destination address range.
@@ -64,7 +64,7 @@ public interface AddressTranslator {
 	 * throws AddressTranslationException if the address set can't be translated to an equivalent
 	 * address range in the other program.
 	 */
-    AddressRange getAddressRange(AddressRange sourceAddressRange)
+	public AddressRange getAddressRange(AddressRange sourceAddressRange)
 			throws AddressTranslationException;
 
 	/**
@@ -78,6 +78,6 @@ public interface AddressTranslator {
 	 * throws AddressTranslationException if the address set can't be translated to an equivalent
 	 * address set in the other program.
 	 */
-    AddressSet getAddressSet(AddressSetView sourceAddressSet)
+	public AddressSet getAddressSet(AddressSetView sourceAddressSet)
 			throws AddressTranslationException;
 }

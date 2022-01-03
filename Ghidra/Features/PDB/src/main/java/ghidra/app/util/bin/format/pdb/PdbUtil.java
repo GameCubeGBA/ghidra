@@ -33,7 +33,7 @@ final class PdbUtil {
 	 * @param relativeOffset the relative offset
 	 * @return the calculated {@link Address}
 	 */
-    static final Address reladdr(Program program, int relativeOffset) {
+	final static Address reladdr(Program program, int relativeOffset) {
 		return reladdr(program, relativeOffset & Conv.INT_MASK);
 	}
 
@@ -43,7 +43,7 @@ final class PdbUtil {
 	 * @param relativeOffset the relative offset
 	 * @return the calculated {@link Address}
 	 */
-    static final Address reladdr(Program program, long relativeOffset) {
+	final static Address reladdr(Program program, long relativeOffset) {
 		return program.getImageBase().add(relativeOffset);
 	}
 
@@ -54,7 +54,7 @@ final class PdbUtil {
 	 * @param text comment text
 	 * @param commentType comment type ({@link CodeUnit}
 	 */
-    static final void appendComment(Program program, Address address, String text,
+	final static void appendComment(Program program, Address address, String text,
 			int commentType) {
 
 		String comment = program.getListing().getComment(commentType, address);
@@ -78,7 +78,7 @@ final class PdbUtil {
 	 * @param length the length for the check
 	 * @return {@code true} upon success
 	 */
-    static final boolean isFunction(Program program, String symbol, Address addr, int length) {
+	final static boolean isFunction(Program program, String symbol, Address addr, int length) {
 		int atpos = symbol.lastIndexOf('@');
 		if (atpos > 0) {
 			String s = symbol.substring(atpos + 1);
@@ -105,7 +105,7 @@ final class PdbUtil {
 		return false;
 	}
 
-	static final void clearComponents(Composite composite) {
+	final static void clearComponents(Composite composite) {
 		if (composite instanceof Structure) {
 			((Structure) composite).deleteAll();
 		}
@@ -131,7 +131,7 @@ final class PdbUtil {
 	 * @param pass the number value of the pass to make pretty
 	 * @return the string result
 	 */
-    static final String getPass(int pass) {
+	final static String getPass(int pass) {
 		if (pass > 20) {
 			pass = (pass % 10);
 		}

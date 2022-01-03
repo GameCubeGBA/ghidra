@@ -20,7 +20,8 @@ import org.junit.Test;
 public class ClearPluginScreenShots extends GhidraScreenShotGenerator {
 
 	public ClearPluginScreenShots() {
-    }
+		super();
+	}
 
 	@Test
 	public void testClearFlow() {

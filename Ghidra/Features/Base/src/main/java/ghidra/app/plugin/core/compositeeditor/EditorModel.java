@@ -31,38 +31,38 @@ public interface EditorModel {
 	 * @param offline false indicates don't try to keep the composite itself
 	 * in the editor's data type manager.
 	 */
-    void load(Composite dataType, boolean offline);
+	public void load(Composite dataType, boolean offline);
 
 	/**
 	 * Called when the model is no longer needed. 
 	 * This is where all cleanup code for the model should be placed.
 	 */
-    void dispose();
+	public void dispose();
 
 	/**
 	 * Returns the docking windows component provider associated with this edit model.
 	 * @return the component provider
 	 */
-    CompositeEditorProvider getProvider();
+	public CompositeEditorProvider getProvider();
 
 	/**
 	 * Adds a CompositeEditorModelListener to be notified when changes occur.
 	 * @param listener the listener to add.
 	 */
-    void addCompositeEditorModelListener(CompositeEditorModelListener listener);
+	public void addCompositeEditorModelListener(CompositeEditorModelListener listener);
 
 	/**
 	 * Removes a CompositeEditorModelListener that was being notified when changes occur.
 	 * @param listener the listener to remove.
 	 */
-    void removeCompositeEditorModelListener(CompositeEditorModelListener listener);
+	public void removeCompositeEditorModelListener(CompositeEditorModelListener listener);
 
 	/**
 	 * Gets a data type within this editor that is equivalent to the indicated data type.
 	 * @param dt the data type to resolve
 	 * @return the equivalent data type within this editor.
 	 */
-    DataType resolve(DataType dt);
+	public DataType resolve(DataType dt);
 
 	/**
 	 * Returns whether or not addition of the specified component is allowed
@@ -71,7 +71,7 @@ public interface EditorModel {
 	 *
 	 * @param datatype the data type to be added.
 	 */
-    boolean isAddAllowed(DataType datatype);
+	public boolean isAddAllowed(DataType datatype);
 
 	/**
 	 * Returns whether or not addition of the specified component is allowed
@@ -81,22 +81,22 @@ public interface EditorModel {
 	 * @param rowIndex row index of the component in the composite data type.
 	 * @param datatype the data type to be inserted.
 	 */
-    boolean isAddAllowed(int rowIndex, DataType datatype);
+	public boolean isAddAllowed(int rowIndex, DataType datatype);
 
 	/**
 	 * Returns whether or not the selection is allowed to be changed into an array.
 	 */
-    boolean isArrayAllowed();
+	public boolean isArrayAllowed();
 
 	/**
 	 * Returns whether or not a bitfield is allowed at the current location.
 	 */
-    boolean isBitFieldAllowed();
+	public boolean isBitFieldAllowed();
 
 	/**
 	 * Returns whether or not clearing the selected components is allowed.
 	 */
-    boolean isClearAllowed();
+	public boolean isClearAllowed();
 
 	/**
 	 * Returns whether or not the current selection can be cycled using the
@@ -105,18 +105,18 @@ public interface EditorModel {
 	 * @return true, so that a message can be written to the user indicating
 	 * the criteria for cycling.
 	 */
-    boolean isCycleAllowed(CycleGroup cycleGroup);
+	public boolean isCycleAllowed(CycleGroup cycleGroup);
 
 	/**
 	 * Returns whether or not the selected components can be deleted.
 	 */
-    boolean isDeleteAllowed();
+	public boolean isDeleteAllowed();
 
 	/**
 	 * Returns whether or not the component at the selected index
 	 * is allowed to be duplicated.
 	 */
-    boolean isDuplicateAllowed();
+	public boolean isDuplicateAllowed();
 
 	/**
 	 * Returns whether or not the base type of the component at the
@@ -124,7 +124,7 @@ public interface EditorModel {
 	 * then it is editable.
 	 * Also, if there isn't a selection then it isn't allowed.
 	 */
-    boolean isEditComponentAllowed();
+	public boolean isEditComponentAllowed();
 
 	/**
 	 * 
@@ -132,7 +132,7 @@ public interface EditorModel {
 	 * @param column
 	 * @return
 	 */
-    boolean isEditFieldAllowed(int rowIndex, int column);
+	public boolean isEditFieldAllowed(int rowIndex, int column);
 
 //	/**
 //	 * Returns whether or not insertion of the specified data type is allowed
@@ -150,17 +150,17 @@ public interface EditorModel {
 	 * @param rowIndex row index of the component in the composite data type.
 	 * @param datatype the data type to be inserted.
 	 */
-    boolean isInsertAllowed(int rowIndex, DataType datatype);
+	public boolean isInsertAllowed(int rowIndex, DataType datatype);
 
 	/**
 	 * Returns whether the selected component(s) can be moved down (to the next higher index).
 	 */
-    boolean isMoveDownAllowed();
+	public boolean isMoveDownAllowed();
 
 	/**
 	 * Returns whether the selected component(s) can be moved up (to the next lower index).
 	 */
-    boolean isMoveUpAllowed();
+	public boolean isMoveUpAllowed();
 
 //	/**
 //	 * 
@@ -175,18 +175,18 @@ public interface EditorModel {
 	 * @param dataType
 	 * @return
 	 */
-    boolean isReplaceAllowed(int rowIndex, DataType dataType);
+	public boolean isReplaceAllowed(int rowIndex, DataType dataType);
 
 	/**
 	 * Returns whether the selected component can be unpackaged.
 	 */
-    boolean isUnpackageAllowed();
+	public boolean isUnpackageAllowed();
 
 	/**
 	 * Returns whether or not the editor has changes that haven't been applied.
 	 * Changes can also mean a new data type that hasn't yet been saved.
 	 */
-    boolean hasChanges();
+	public boolean hasChanges();
 
 	/**
 	 *  Sets the name for the composite data type being edited.
@@ -195,21 +195,21 @@ public interface EditorModel {
 	 * 
 	 * @throws DuplicateNameException if the name already exists.
 	 */
-    void setName(String name) throws DuplicateNameException, InvalidNameException;
+	public void setName(String name) throws DuplicateNameException, InvalidNameException;
 
 	/**
 	 *  Sets the description for the composite data type being edited.
 	 *
 	 * @param desc the new description.
 	 */
-    void setDescription(String desc);
+	public void setDescription(String desc);
 
 	/**
 	 * Sets the data type for the component at the indicated rowIndex.
 	 * @param rowIndex the row index of the component 
 	 * @param dataTypeObject a String or a DataType
 	 */
-    void setComponentDataType(int rowIndex, Object dataTypeObject) throws UsrException;
+	public void setComponentDataType(int rowIndex, Object dataTypeObject) throws UsrException;
 
 	/**
 	 * Sets the data type for the component at the indicated row index.
@@ -218,7 +218,7 @@ public interface EditorModel {
 	 * @param length component length
 	 * @throws UsrException if invalid datatype or length specified
 	 */
-    void setComponentDataTypeInstance(int rowIndex, DataType dt, int length)
+	public void setComponentDataTypeInstance(int rowIndex, DataType dt, int length)
 			throws UsrException;
 
 	/**
@@ -226,7 +226,7 @@ public interface EditorModel {
 	 * @param rowIndex the row index of the component 
 	 * @param name
 	 */
-    void setComponentName(int rowIndex, String name)
+	public void setComponentName(int rowIndex, String name)
 			throws InvalidInputException, InvalidNameException, DuplicateNameException;
 
 	/**
@@ -234,13 +234,13 @@ public interface EditorModel {
 	 * @param rowIndex the row index of the component 
 	 * @param comment
 	 */
-    void setComponentComment(int rowIndex, String comment) throws InvalidInputException;
+	public void setComponentComment(int rowIndex, String comment) throws InvalidInputException;
 
 	/**
 	 *  Returns whether or not the editor is showing undefined bytes.
 	 *  @return true if the editor is showing undefined bytes.
 	 */
-    boolean isShowingUndefinedBytes();
+	public boolean isShowingUndefinedBytes();
 
 	/**
 	 * Gets the column number of the first editable field found for the indicated row.
@@ -248,7 +248,7 @@ public interface EditorModel {
 	 * @param rowIndex the index number of the row
 	 * @return the index number of the editable column or -1 if no fields are editable.
 	 */
-    int getFirstEditableColumn(int rowIndex);
+	public int getFirstEditableColumn(int rowIndex);
 
 	/**
 	 * 
@@ -256,22 +256,22 @@ public interface EditorModel {
 	 * @param column
 	 * @return
 	 */
-    boolean beginEditingField(int rowIndex, int column);
+	public boolean beginEditingField(int rowIndex, int column);
 
 	/**
 	 *  Change the edit state to indicate no longer editing a field.
 	 */
-    boolean endEditingField();
+	public boolean endEditingField();
 
 	/**
 	 *  Returns whether the user is currently editing a field's value.
 	 */
-    boolean isEditingField();
+	public boolean isEditingField();
 
 	/**
 	 * 
 	 */
-    void endFieldEditing();
+	public void endFieldEditing();
 
 	/**
 	 * 
@@ -279,7 +279,7 @@ public interface EditorModel {
 	 * @return
 	 * @throws UsrException
 	 */
-    DataTypeComponent add(DataType dataType) throws UsrException;
+	public DataTypeComponent add(DataType dataType) throws UsrException;
 
 	/**
 	 * 
@@ -288,7 +288,7 @@ public interface EditorModel {
 	 * @return
 	 * @throws UsrException
 	 */
-    DataTypeComponent add(int rowIndex, DataType dataType) throws UsrException;
+	public DataTypeComponent add(int rowIndex, DataType dataType) throws UsrException;
 
 	/**
 	 * 
@@ -298,7 +298,7 @@ public interface EditorModel {
 	 * @return
 	 * @throws UsrException
 	 */
-    DataTypeComponent add(int rowIndex, DataType dt, int dtLength) throws UsrException;
+	public DataTypeComponent add(int rowIndex, DataType dt, int dtLength) throws UsrException;
 
 	/**
 	 * Apply the changes for the current edited composite back to the
@@ -308,33 +308,33 @@ public interface EditorModel {
 	 * @throws EmptyCompositeException if the structure doesn't have any components.
 	 * @throws InvalidDataTypeException if this structure has a component that it is part of.
 	 */
-    boolean apply() throws EmptyCompositeException, InvalidDataTypeException;
+	public boolean apply() throws EmptyCompositeException, InvalidDataTypeException;
 
-	void clearComponent(int rowIndex);
+	public void clearComponent(int rowIndex);
 
 	/**
 	 * 
 	 * @throws UsrException
 	 */
-    void clearSelectedComponents() throws UsrException;
+	public void clearSelectedComponents() throws UsrException;
 
 	/**
 	 * @param cycleGroup
 	 */
-    void cycleDataType(CycleGroup cycleGroup);
+	public void cycleDataType(CycleGroup cycleGroup);
 
 	/**
 	 * Create array component
 	 * @throws UsrException
 	 */
-    void createArray() throws UsrException;
+	public void createArray() throws UsrException;
 
 	/**
 	 *  Delete the selected components.
 	 *
 	 * @throws UsrException if the data type isn't allowed to be deleted.
 	 */
-    void deleteSelectedComponents() throws UsrException;
+	public void deleteSelectedComponents() throws UsrException;
 
 	/**
 	 * Creates multiple duplicates of the indicated component.
@@ -345,7 +345,7 @@ public interface EditorModel {
 	 * @param monitor the task monitor
 	 * @throws UsrException if component can't be duplicated the indicated number of times.
 	 */
-    void duplicateMultiple(int rowIndex, int multiple, TaskMonitor monitor)
+	public void duplicateMultiple(int rowIndex, int multiple, TaskMonitor monitor)
 			throws UsrException;
 
 	/**
@@ -354,7 +354,7 @@ public interface EditorModel {
 	 * @return
 	 * @throws UsrException
 	 */
-    DataTypeComponent insert(DataType dataType) throws UsrException;
+	public DataTypeComponent insert(DataType dataType) throws UsrException;
 
 	/**
 	 * 
@@ -363,7 +363,7 @@ public interface EditorModel {
 	 * @return
 	 * @throws UsrException
 	 */
-    DataTypeComponent insert(int rowIndex, DataType dataType) throws UsrException;
+	public DataTypeComponent insert(int rowIndex, DataType dataType) throws UsrException;
 
 	/**
 	 * 
@@ -373,7 +373,7 @@ public interface EditorModel {
 	 * @return
 	 * @throws UsrException
 	 */
-    DataTypeComponent insert(int rowIndex, DataType dt, int dtLength) throws UsrException;
+	public DataTypeComponent insert(int rowIndex, DataType dt, int dtLength) throws UsrException;
 
 	/**
 	 * Moves a contiguous selection of components up by a single position. 
@@ -384,7 +384,7 @@ public interface EditorModel {
 	 * @return true if selected components were moved up.
 	 * @throws UsrException if components can't be moved up.
 	 */
-    boolean moveUp() throws UsrException;
+	public boolean moveUp() throws UsrException;
 
 	/**
 	 * Moves a contiguous selection of components down by a single position. 
@@ -395,7 +395,7 @@ public interface EditorModel {
 	 * @return true if selected components were moved down.
 	 * @throws UsrException if components can't be moved down.
 	 */
-    boolean moveDown() throws UsrException;
+	public boolean moveDown() throws UsrException;
 
 //	/**
 //	 * 
@@ -422,7 +422,7 @@ public interface EditorModel {
 	 * @return
 	 * @throws UsrException
 	 */
-    DataTypeComponent replace(int rowIndex, DataType dt, int dtLength) throws UsrException;
+	public DataTypeComponent replace(int rowIndex, DataType dt, int dtLength) throws UsrException;
 
 	/**
 	 * Gets the maximum number of bytes available for a data type that is added at the indicated
@@ -430,7 +430,7 @@ public interface EditorModel {
 	 *
 	 * @param rowIndex index of the row in the editor's composite data type.
 	 */
-    int getMaxAddLength(int rowIndex);
+	public int getMaxAddLength(int rowIndex);
 
 	/**
 	 * Determine the maximum number of duplicates that can be created for 
@@ -442,7 +442,7 @@ public interface EditorModel {
 	 * @param rowIndex the index of the row for the component to be duplicated.
 	 * @return the maximum number of duplicates.
 	 */
-    int getMaxDuplicates(int rowIndex);
+	public int getMaxDuplicates(int rowIndex);
 
 	/**
 	 * Determine the maximum number of array elements that can be created for 
@@ -452,7 +452,7 @@ public interface EditorModel {
 	 *
 	 * @return the number of array elements that fit in the current selection.
 	 */
-    int getMaxElements();
+	public int getMaxElements();
 
 	/**
 	 * Gets the maximum number of bytes available for a new data type that 
@@ -463,27 +463,27 @@ public interface EditorModel {
 	 * @param rowIndex index of the row for the component to replace.
 	 * @return the maximum number of bytes that can be replaced.
 	 */
-    int getMaxReplaceLength(int rowIndex);
+	public int getMaxReplaceLength(int rowIndex);
 
 	/**
 	 * Return the last number of bytes the user entered when prompted for 
 	 * a data type size.
 	 * @return the number of bytes
 	 */
-    int getLastNumBytes();
+	public int getLastNumBytes();
 
 	/**
 	 * Return the last number of duplicates the user entered when prompted for 
 	 * creating duplicates of a component.
 	 * @return the number of duplicates
 	 */
-    int getLastNumDuplicates();
+	public int getLastNumDuplicates();
 
 	/**
 	 * Return the last number of elements the user entered when prompted for 
 	 * creating an array.
 	 * @return the number of elements
 	 */
-    int getLastNumElements();
+	public int getLastNumElements();
 
 }

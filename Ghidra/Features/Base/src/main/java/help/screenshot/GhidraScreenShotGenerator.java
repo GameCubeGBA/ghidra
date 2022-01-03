@@ -42,7 +42,8 @@ public abstract class GhidraScreenShotGenerator extends AbstractScreenShotGenera
 	private static final String CAPTURE = "Capture";
 
 	protected GhidraScreenShotGenerator() {
-    }
+		super();
+	}
 
 	@Override
 	@After

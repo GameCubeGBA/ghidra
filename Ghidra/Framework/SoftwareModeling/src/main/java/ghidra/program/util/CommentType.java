@@ -60,7 +60,9 @@ public class CommentType {
 	}
 
 	public static boolean isCommentAllowed(CodeUnit cu, ProgramLocation loc) {
-        return cu != null;
+		if (cu == null) {
+			return false;
+		}
 		// changed ref SCR #8041
 //		if (cu instanceof Data) {
 //			Data d = (Data) cu;
@@ -68,6 +70,7 @@ public class CommentType {
 //				return false;
 //			}
 //		}
-    }
+		return true;
+	}
 
 }

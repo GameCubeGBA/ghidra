@@ -349,7 +349,7 @@ public class DataTypeSelectionEditor extends AbstractCellEditor {
 	 */
 	private boolean parseDataTypeTextEntry() throws InvalidDataTypeException {
 
-		if (selectionField.getText().trim().isEmpty()) {
+		if (selectionField.getText().trim().length() == 0) {
 			// no need to invoke parser on empty string
 			return false;
 		}

@@ -27,116 +27,116 @@ public final class MachHeaderFlags {
 	/**
 	 * the object file has no undefined references.
 	 */
-    public static final int MH_NOUNDEFS                 = 0x1;
+	public final static int MH_NOUNDEFS                 = 0x1;
 	/**
 	 * the object file is the output of an incremental 
 	 * link against a base file and can't be link 
 	 * edited again.
 	 */
-    public static final int MH_INCRLINK                 = 0x2;
+	public final static int MH_INCRLINK                 = 0x2;
 	/**
 	 * the object file is input for the dynamic 
 	 * linker and can't be staticly link edited again.
 	 */
-    public static final int MH_DYLDLINK                 = 0x4;
+	public final static int MH_DYLDLINK                 = 0x4;
 	/**
 	 * the object file's undefined references 
 	 * are bound by the dynamic linker when loaded.
 	 */
-    public static final int MH_BINDATLOAD               = 0x8;
+	public final static int MH_BINDATLOAD               = 0x8;
 	/**
 	 * the file has its dynamic undefined references 
 	 * prebound.
 	 */
-    public static final int MH_PREBOUND                 = 0x10;
+	public final static int MH_PREBOUND                 = 0x10;
 	/**
 	 * the file has its read-only and read-write 
 	 * segments split.
 	 */
-    public static final int MH_SPLIT_SEGS               = 0x20;
+	public final static int MH_SPLIT_SEGS               = 0x20;
 	/**
 	 * the shared library init routine is to be 
 	 * run lazily via catching memory faults to its 
 	 * writeable segments (obsolete).
 	 */
-    public static final int MH_LAZY_INIT                = 0x40;
+	public final static int MH_LAZY_INIT                = 0x40;
 	/**
 	 * the image is using two-level name space bindings.
 	 */
-    public static final int MH_TWOLEVEL                 = 0x80;
+	public final static int MH_TWOLEVEL                 = 0x80;
 	/**
 	 * the executable is forcing all images to use 
 	 * flat name space bindings.
 	 */
-    public static final int MH_FORCE_FLAT               = 0x100;
+	public final static int MH_FORCE_FLAT               = 0x100;
 	/**
 	 * this umbrella guarantees no multiple defintions 
 	 * of symbols in its sub-images so the two-level 
 	 * namespace hints can always be used.
 	 * */
-    public static final int MH_NOMULTIDEFS              = 0x200;
+	public final static int MH_NOMULTIDEFS              = 0x200;
 	/**
 	 * do not have dyld notify the prebinding 
 	 * agent about this executable.
 	 */
-    public static final int MH_NOFIXPREBINDING          = 0x400;
+	public final static int MH_NOFIXPREBINDING          = 0x400;
 	/**
 	 * the binary is not prebound but can have 
 	 * its prebinding redone. only used when 
 	 * MH_PREBOUND is not set.
 	 */
-    public static final int MH_PREBINDABLE              = 0x800;
+	public final static int MH_PREBINDABLE              = 0x800;
 	/**
 	 * indicates that this binary binds to all 
 	 * two-level namespace modules of its dependent 
 	 * libraries. only used when MH_PREBINDABLE and 
 	 * MH_TWOLEVEL are both set.
 	 */
-    public static final int MH_ALLMODSBOUND             = 0x1000;
+	public final static int MH_ALLMODSBOUND             = 0x1000; 
 	/**
 	 * safe to divide up the sections into 
 	 * sub-sections via symbols for dead code 
 	 * stripping.
 	 */
-    public static final int MH_SUBSECTIONS_VIA_SYMBOLS  = 0x2000;
+	public final static int MH_SUBSECTIONS_VIA_SYMBOLS  = 0x2000;
 	/**
 	 * the binary has been canonicalized via the unprebind operation.
 	 */
-    public static final int MH_CANONICAL                = 0x4000;
+	public final static int MH_CANONICAL                = 0x4000;
 	/**
 	 * the final linked image contains external weak symbols.
 	 */
-    public static final int MH_WEAK_DEFINES             = 0x8000;
+	public final static int MH_WEAK_DEFINES             = 0x8000;
 	/**
 	 * the final linked image uses weak symbols.
 	 */
-    public static final int MH_BINDS_TO_WEAK            = 0x10000;
+	public final static int MH_BINDS_TO_WEAK            = 0x10000;
 	/**
 	 * when this bit is set, all stacks in the task 
 	 * will be given stack execution privilege.
 	 * only used in MH_EXECUTE filetypes.
 	 */
-    public static final int MH_ALLOW_STACK_EXECUTION    = 0x20000;
+	public final static int MH_ALLOW_STACK_EXECUTION    = 0x20000;
 	/**
 	 * When this bit is set, the binary declares it is safe for use in
 	 * processes with uid zero
 	 */
-    public static final int MH_ROOT_SAFE                 = 0x40000;
+	public final static int MH_ROOT_SAFE                 = 0x40000;
 	/**
 	 * When this bit is set, the binary declares it is safe for use in
 	 * processes when issetugid() is true
 	 */
-    public static final int MH_SETUID_SAFE               = 0x80000;
+	public final static int MH_SETUID_SAFE               = 0x80000;
 	/**
 	 * When this bit is set on a dylib, the static linker does not need to
 	 * examine dependent dylibs to see if any are re-exported
 	 */
-    public static final int MH_NO_REEXPORTED_DYLIBS      = 0x100000;
+	public final static int MH_NO_REEXPORTED_DYLIBS      = 0x100000;
 	/**
 	 * When this bit is set, the OS will load the main executable at a
 	 * random address.  Only used in MH_EXECUTE filetypes.
 	 */
-    public static final int MH_PIE                       = 0x200000;
+	public final static int MH_PIE                       = 0x200000;
 	/**
 	 * Only for use on dylibs. 
 	 * When linking against a dylib that
@@ -144,27 +144,27 @@ public final class MachHeaderFlags {
 	 * LC_LOAD_DYLIB load command to the
 	 * dylib if no symbols are being referenced from the dylib.
 	 */
-    public static final int MH_DEAD_STRIPPABLE_DYLIB    = 0x400000;
+	public final static int MH_DEAD_STRIPPABLE_DYLIB    = 0x400000;
 	/**
 	 * Contains a section of type S_THREAD_LOCAL_VARIABLES.
 	 */
-    public static final int MH_HAS_TLV_DESCRIPTORS      = 0x800000;
+	public final static int MH_HAS_TLV_DESCRIPTORS      = 0x800000;
 	/**
 	 * When this bit is set, the OS will run the main executable
 	 * with a non-executable heap even on platforms ( e.g., i386 )
 	 * that don't require it.
 	 * Only used in MH_EXECUTE file types.
 	 */
-    public static final int MH_NO_HEAP_EXECUTION        = 0x1000000;
+	public final static int MH_NO_HEAP_EXECUTION        = 0x1000000;
 	/**
 	 * 
 	 */
-    public static final int MH_APP_EXTENSION_SAFE        = 0x2000000;
+	public final static int MH_APP_EXTENSION_SAFE        = 0x2000000;
 
 	/**
 	 * Returns string representation of the flag values.
 	 */
-    public static final List<String> getFlags(int flags) {
+	public final static List<String> getFlags(int flags) {
 		List<String> list = new ArrayList<String>();
 		Field [] fields = MachHeaderFlags.class.getDeclaredFields();
 		for (Field field : fields) {

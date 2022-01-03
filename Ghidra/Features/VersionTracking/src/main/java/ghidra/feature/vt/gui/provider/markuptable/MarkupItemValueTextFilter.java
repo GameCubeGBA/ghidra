@@ -40,7 +40,7 @@ class MarkupItemValueTextFilter extends AbstractTextFilter<VTMarkupItem> {
 
 	private boolean passesValueTextFilterImpl(VTMarkupItem adapter) {
 		String filterText = getTextFieldText();
-		if (filterText == null || filterText.trim().isEmpty()) {
+		if (filterText == null || filterText.trim().length() == 0) {
 			return true; // no text for this filter
 		}
 
@@ -59,7 +59,9 @@ class MarkupItemValueTextFilter extends AbstractTextFilter<VTMarkupItem> {
 		Stringable destinationValue = adapter.getOriginalDestinationValue();
 		if (destinationValue != null) {
 			String destinationValueText = sourceValue.getDisplayString();
-            return destinationValueText.toLowerCase().contains(filterText.toLowerCase());
+			if (destinationValueText.toLowerCase().contains(filterText.toLowerCase())) {
+				return true;
+			}
 		}
 
 		return false;

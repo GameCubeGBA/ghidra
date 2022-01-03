@@ -476,7 +476,7 @@ public class VisualGraphJobRunnerTest extends AbstractGenericTest {
 			boolean isFinished = job.isFinished();
 			boolean didShortcut = job.didShortcut();
 
-			buffy.append("\njob: ").append(job).append('\n');
+			buffy.append("\njob: ").append(job.toString()).append('\n');
 			buffy.append("\tfinished? ").append(isFinished).append('\n');
 			buffy.append("\tshortcut? ").append(didShortcut).append('\n');
 
@@ -494,7 +494,7 @@ public class VisualGraphJobRunnerTest extends AbstractGenericTest {
 			boolean isFinished = job.isFinished();
 			boolean didShortcut = job.didShortcut();
 
-			buffy.append("\njob: ").append(job).append('\n');
+			buffy.append("\njob: ").append(job.toString()).append('\n');
 			buffy.append("\tfinished? ").append(isFinished).append('\n');
 			buffy.append("\tshortcut? ").append(didShortcut).append('\n');
 
@@ -511,7 +511,7 @@ public class VisualGraphJobRunnerTest extends AbstractGenericTest {
 			boolean wasDisposed = job.isDisposed();
 			boolean didNotStart = !job.didStart();
 
-			buffy.append("\njob: ").append(job).append('\n');
+			buffy.append("\njob: ").append(job.toString()).append('\n');
 			buffy.append("\tdisposed? ").append(wasDisposed).append('\n');
 			buffy.append("\tnot started? ").append(didNotStart).append('\n');
 
@@ -708,7 +708,7 @@ public class VisualGraphJobRunnerTest extends AbstractGenericTest {
 			}
 
 			return "Job.isFinished()?: " + started + " | " + shortcut + " | " + runState +
-				" (" + this + ")";
+				" (" + toString() + ")";
 		}
 
 		boolean didShortcut() {
@@ -799,7 +799,8 @@ public class VisualGraphJobRunnerTest extends AbstractGenericTest {
 	private class NonShortcuttableJob extends TimeBasedJob {
 
 		NonShortcuttableJob() {
-        }
+			super();
+		}
 
 		NonShortcuttableJob(long runtime) {
 			super(runtime);

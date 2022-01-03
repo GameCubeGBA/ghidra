@@ -54,7 +54,7 @@ public class SymbolHashRecord implements Comparable<SymbolHashRecord> {
 
 	@Override
 	public int compareTo(SymbolHashRecord o) {
-		return (int) ((offsetVal != o.offsetVal) ? offsetVal - o.offsetVal
+		return (int) ((offsetVal != o.getOffset()) ? offsetVal - o.getOffset()
 				: referenceCount - o.getReferenceCount());
 	}
 

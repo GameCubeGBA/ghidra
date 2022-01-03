@@ -410,23 +410,24 @@ public class Pic18Analyzer extends AbstractAnalyzer {
 
 		DirectedGraph graph = new DirectedGraph();
 
-        for (Address address : blockEntrySet) {
-            CodeBlock srcBlock = model.getCodeBlockAt(address, monitor);
-            Vertex srcVertex = getConnectedVertex(graph, srcBlock, null);
+		Iterator<Address> iter = blockEntrySet.iterator();
+		while (iter.hasNext()) {
+			CodeBlock srcBlock = model.getCodeBlockAt(iter.next(), monitor);
+			Vertex srcVertex = getConnectedVertex(graph, srcBlock, null);
 
-            CodeBlockReferenceIterator refIter = srcBlock.getDestinations(monitor);
-            while (refIter.hasNext()) {
-                CodeBlockReference blockRef = refIter.next();
-                Address destAddr = blockRef.getReference();
-                if (!blockEntrySet.contains(destAddr) ||
-                        destAddr.equals(srcBlock.getFirstStartAddress())) {
-                    // skip destinations not contained within the initial set or is a self-reference
-                    continue;
-                }
-                CodeBlock destBlock = blockRef.getDestinationBlock();
-                getConnectedVertex(graph, destBlock, srcVertex);
-            }
-        }
+			CodeBlockReferenceIterator refIter = srcBlock.getDestinations(monitor);
+			while (refIter.hasNext()) {
+				CodeBlockReference blockRef = refIter.next();
+				Address destAddr = blockRef.getReference();
+				if (!blockEntrySet.contains(destAddr) ||
+					destAddr.equals(srcBlock.getFirstStartAddress())) {
+					// skip destinations not contained within the initial set or is a self-reference
+					continue;
+				}
+				CodeBlock destBlock = blockRef.getDestinationBlock();
+				getConnectedVertex(graph, destBlock, srcVertex);
+			}
+		}
 		return graph;
 	}
 

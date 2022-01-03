@@ -54,7 +54,7 @@ import ghidra.xml.XmlPullParserFactory;
  * Based on information the decompiler has produced after working on a function.
  */
 public class HighFunction extends PcodeSyntaxTree {
-	public static final String DECOMPILER_TAG_MAP = "decompiler_tags";
+	public final static String DECOMPILER_TAG_MAP = "decompiler_tags";
 	private Function func; // The traditional function object
 	private Language language;
 	private CompilerSpec compilerSpec;
@@ -365,7 +365,7 @@ public class HighFunction extends PcodeSyntaxTree {
 					oldinst.add(curvn);
 				}
 			}
-			if (oldinst.isEmpty()) {
+			if (oldinst.size() == 0) {
 				return high; // Everybody is in the same group
 			}
 			if (!(high instanceof HighLocal)) {
@@ -465,18 +465,18 @@ public class HighFunction extends PcodeSyntaxTree {
 		}
 		localSymbols.buildLocalDbXML(resBuf, namespace);
 		proto.buildPrototypeXML(resBuf, getDataTypeManager());
-		if ((jumpTables != null) && (!jumpTables.isEmpty())) {
+		if ((jumpTables != null) && (jumpTables.size() > 0)) {
 			resBuf.append("<jumptablelist>\n");
 			for (JumpTable jumpTable : jumpTables) {
 				jumpTable.buildXml(resBuf);
 			}
 			resBuf.append("</jumptablelist>\n");
 		}
-		boolean hasOverrideTag = ((protoOverrides != null) && (!protoOverrides.isEmpty()));
+		boolean hasOverrideTag = ((protoOverrides != null) && (protoOverrides.size() > 0));
 		if (hasOverrideTag) {
 			resBuf.append("<override>\n");
 		}
-		if ((protoOverrides != null) && (!protoOverrides.isEmpty())) {
+		if ((protoOverrides != null) && (protoOverrides.size() > 0)) {
 			PcodeDataTypeManager dtmanage = getDataTypeManager();
 			for (DataTypeSymbol sym : protoOverrides) {
 				Address addr = sym.getAddress();
@@ -600,7 +600,7 @@ public class HighFunction extends PcodeSyntaxTree {
 	 *
 	 * @throws PcodeXMLException for format errors in the XML
 	 */
-    public static XmlPullParser stringTree(InputStream xml, ErrorHandler handler)
+	static public XmlPullParser stringTree(InputStream xml, ErrorHandler handler)
 			throws PcodeXMLException {
 		try {
 			return XmlPullParserFactory.create(xml, "Decompiler Result Parser", handler, false);
@@ -616,9 +616,12 @@ public class HighFunction extends PcodeSyntaxTree {
 	 * @param namespace is the namespace
 	 * @return true if equivalent
 	 */
-    public static final boolean collapseToGlobal(Namespace namespace) {
-        return namespace instanceof Library;
-    }
+	static final public boolean collapseToGlobal(Namespace namespace) {
+		if (namespace instanceof Library) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Append an XML &lt;parent&gt; tag to the buffer describing the formal path elements
@@ -626,7 +629,7 @@ public class HighFunction extends PcodeSyntaxTree {
 	 * @param buf is the buffer to write to
 	 * @param namespace is the namespace being described
 	 */
-    public static void createNamespaceTag(StringBuilder buf, Namespace namespace) {
+	static public void createNamespaceTag(StringBuilder buf, Namespace namespace) {
 		buf.append("<parent>\n");
 		if (namespace != null) {
 			ArrayList<Namespace> arr = new ArrayList<>();
@@ -656,7 +659,7 @@ public class HighFunction extends PcodeSyntaxTree {
 	 * @param doc -- String through which to search for tags
 	 * @return all characters between beginning and ending XML tags, excluding tags themselves
 	 */
-    public static String tagFindExclude(String tagname, String doc) {
+	static public String tagFindExclude(String tagname, String doc) {
 		if (doc == null) {
 			return null;
 		}

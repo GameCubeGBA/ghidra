@@ -44,7 +44,7 @@ public class CodeCompletion implements Comparable<CodeCompletion> {
 	 */
 	public static boolean isValid(CodeCompletion completion) {
 		return ((completion != null) &&
-				(completion.insertion != null));
+				(completion.getInsertion() != null));
 	}
 
 	
@@ -102,7 +102,7 @@ public class CodeCompletion implements Comparable<CodeCompletion> {
 	 */
 	@Override
     public String toString() {
-		return "CodeCompletion: '" + description + "' (" + insertion + ")";
+		return "CodeCompletion: '" + getDescription() + "' (" + getInsertion() + ")";
 	}
 
 	public int compareTo(CodeCompletion that) {

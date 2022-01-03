@@ -32,7 +32,8 @@ import ghidra.program.model.data.Enum;
 public class CParserTest extends AbstractGenericTest {
 
 	public CParserTest() {
-    }
+		super();
+	}
 
 	/**
 	 * This method just tries to parse a bunch o'
@@ -45,7 +46,7 @@ public class CParserTest extends AbstractGenericTest {
 		DataType pdt = parser.parse("typedef long int32_t;");
 		assertTrue(pdt != null);
 		assertTrue(pdt instanceof TypeDef);
-		assertTrue("int32_t".equals(pdt.getName()));
+		assertTrue(pdt.getName().equals("int32_t"));
 		DataType dt = parser.getDataTypeManager().getDataType("/int32_t");
 		assertTrue(dt != null);
 		assertTrue(dt instanceof TypeDef);
@@ -64,7 +65,7 @@ public class CParserTest extends AbstractGenericTest {
 
 		assertTrue(pdt64 != null);
 		assertTrue(pdt64 instanceof TypeDef);
-		assertTrue("uint64_t".equals(pdt64.getName()));
+		assertTrue(pdt64.getName().equals("uint64_t"));
 		assertEquals(4, pdt64.getLength());
 
 		DataType dt = parser.getDataTypeManager().getDataType("/uint64_t");
@@ -75,7 +76,7 @@ public class CParserTest extends AbstractGenericTest {
 		DataType pdt32 = parser.parse("typedef unsigned long long int uint64_t;");
 		assertTrue(pdt32 != null);
 		assertTrue(pdt32 instanceof TypeDef);
-		assertTrue("uint64_t".equals(pdt32.getName()));
+		assertTrue(pdt32.getName().equals("uint64_t"));
 		assertEquals(8, pdt32.getLength());
 	}
 
@@ -192,27 +193,27 @@ public class CParserTest extends AbstractGenericTest {
 		dt = dtMgr.getDataType(new CategoryPath("/functions"), "bob");
 		assertTrue("not a function", dt instanceof FunctionDefinition);
 		str = ((FunctionDefinition) dt).getPrototypeString();
-		assertTrue("signature not correct", "int bob(int b)".equals(str));
+		assertTrue("signature not correct", str.equals("int bob(int b)"));
 
 		dt = dtMgr.getDataType(new CategoryPath("/functions"), "bobCRef");
 		assertTrue("not a function", dt instanceof FunctionDefinition);
 		str = ((FunctionDefinition) dt).getPrototypeString();
 		assertTrue("signature not correct",
-			"int bobCRef(int a, fstruct * fs, fstruct * fp)".equals(str));
+			str.equals("int bobCRef(int a, fstruct * fs, fstruct * fp)"));
 
 		dt = dtMgr.getDataType(new CategoryPath("/functions"), "stdcall_func");
 		assertTrue("not a function", dt instanceof FunctionDefinition);
 		str = ((FunctionDefinition) dt).getPrototypeString();
 		assertTrue("Callee should not purge", ((FunctionDefinition) dt)
 				.getGenericCallingConvention() == GenericCallingConvention.stdcall);
-		assertTrue("signature not correct", "int stdcall_func(int b)".equals(str));
+		assertTrue("signature not correct", str.equals("int stdcall_func(int b)"));
 
 		dt = dtMgr.getDataType(new CategoryPath("/functions"), "cdecl_func");
 		assertTrue("not a function", dt instanceof FunctionDefinition);
 		str = ((FunctionDefinition) dt).getPrototypeString();
 		assertTrue("Caller should purge", ((FunctionDefinition) dt)
 				.getGenericCallingConvention() != GenericCallingConvention.stdcall);
-		assertTrue("signature not correct", "int cdecl_func(int a)".equals(str));
+		assertTrue("signature not correct", str.equals("int cdecl_func(int a)"));
 
 		dt = dtMgr.getDataType(new CategoryPath("/functions"), "cdecl_func_after");
 		assertTrue("not a function", dt instanceof FunctionDefinition);

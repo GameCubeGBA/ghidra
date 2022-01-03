@@ -203,7 +203,7 @@ public class GhidraSshPtyFactory implements PtyFactory {
 
 		try {
 			Session session =
-				jsch.getSession(username.isEmpty() ? null : username, hostname, port);
+				jsch.getSession(username.length() == 0 ? null : username, hostname, port);
 			session.setUserInfo(new GhidraUserInfo());
 			session.connect();
 			return session;

@@ -45,8 +45,12 @@ public abstract class CreateDataTypeAction extends DockingAction {
 		if (categoryNode == null || !categoryNode.isEnabled()) {
 			return false;
 		}
-        return !(categoryNode instanceof BuiltInArchiveNode);
-    }
+		if (categoryNode instanceof BuiltInArchiveNode) {
+			return false;
+		}
+
+		return true;
+	}
 
 	@Override
 	public boolean isEnabledForContext(ActionContext context) {

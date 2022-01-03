@@ -229,7 +229,12 @@ public class GenericHeader extends JPanel {
 		add(menuCloseToolbar, BorderLayout.EAST);
 
 		numLines = 2;
-        toolbar.setUseSingleLineLayout(useSingleLineLayoutOverride);
+		if (useSingleLineLayoutOverride) {
+			toolbar.setUseSingleLineLayout(true);
+		}
+		else {
+			toolbar.setUseSingleLineLayout(false);
+		}
 
 		validateInvalidate();
 	}

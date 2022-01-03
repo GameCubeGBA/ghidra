@@ -41,7 +41,7 @@ import ghidra.util.task.TaskMonitor;
 public class XmlLoader extends AbstractProgramLoader {
 
 	private static final String FILE_EXTENSION = ".xml";
-	public static final String XML_SRC_NAME = "XML Input Format";
+	public final static String XML_SRC_NAME = "XML Input Format";
 
 	@Override
 	public LoaderTier getTier() {
@@ -123,8 +123,11 @@ public class XmlLoader extends AbstractProgramLoader {
 				getLanguageService().getLanguageCompilerSpecPairs(broadQuery);
 
 			if (!pairs.isEmpty()) {
-				boolean preferred = pairs.size() == 1;
-                for (LanguageCompilerSpecPair pair : pairs) {
+				boolean preferred = false;
+				if (pairs.size() == 1) {
+					preferred = true;
+				}
+				for (LanguageCompilerSpecPair pair : pairs) {
 					loadSpecs.add(new LoadSpec(this, 0, pair, preferred));
 				}
 			}
@@ -193,7 +196,7 @@ public class XmlLoader extends AbstractProgramLoader {
 		if (result.lastInfo.imageBase != null) {
 			imageBase = importerLanguage.getAddressFactory().getAddress(result.lastInfo.imageBase);
 		}
-		Program prog = createProgram(provider, programName, imageBase, XML_SRC_NAME, importerLanguage,
+		Program prog = createProgram(provider, programName, imageBase, getName(), importerLanguage,
 			importerCompilerSpec, consumer);
 		boolean success = false;
 		try {

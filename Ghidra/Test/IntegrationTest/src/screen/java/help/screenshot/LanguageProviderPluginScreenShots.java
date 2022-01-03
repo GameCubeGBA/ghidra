@@ -32,7 +32,8 @@ import ghidra.app.util.viewer.format.FormatManager;
 public class LanguageProviderPluginScreenShots extends GhidraScreenShotGenerator {
 
 	public LanguageProviderPluginScreenShots() {
-    }
+		super();
+	}
 
 @Test
     public void testLanguages() {
@@ -40,13 +41,21 @@ public class LanguageProviderPluginScreenShots extends GhidraScreenShotGenerator
 		Object newLanguagePanel = getInstanceField("selectLangPanel", dialog);
 		final GTableFilterPanel<?> filterPanel =
 			(GTableFilterPanel<?>) getInstanceField("tableFilterPanel", newLanguagePanel);
-		runSwing((Runnable) () -> filterPanel.setFilterText("x86"));
+		runSwing(new Runnable() {
+			@Override
+			public void run() {
+				filterPanel.setFilterText("x86");
+			}
+		});
 		showDialogWithoutBlocking(tool, dialog);
-		runSwing((Runnable) () -> {
-            dialog.setStatusText("");
-            JButton okButton = (JButton) getInstanceField("okButton", dialog);
-            okButton.setEnabled(true);
-        });
+		runSwing(new Runnable() {
+			@Override
+			public void run() {
+				dialog.setStatusText("");
+				JButton okButton = (JButton) getInstanceField("okButton", dialog);
+				okButton.setEnabled(true);
+			}
+		});
 		captureDialog();
 	}
 
@@ -76,9 +85,14 @@ public class LanguageProviderPluginScreenShots extends GhidraScreenShotGenerator
 				+ "this operation. \n \nWhen complete you can Save the results or Open the results\n"
 				+ "in the CodeBrowser tool";
 
-		runSwing((Runnable) () -> OptionDialog.showOptionDialog(tool.getToolFrame(),
-            "Set Language: " + program.getName(), msg + "\n \n" + "" +
-                "\n \nDo you want to continue?", "Ok", OptionDialog.WARNING_MESSAGE), false);
+		runSwing(new Runnable() {
+			@Override
+			public void run() {
+				OptionDialog.showOptionDialog(tool.getToolFrame(),
+					"Set Language: " + program.getName(), msg + "\n \n" + "" +
+						"\n \nDo you want to continue?", "Ok", OptionDialog.WARNING_MESSAGE);
+			}
+		}, false);
 		captureDialog();
 	}
 }

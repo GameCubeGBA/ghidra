@@ -47,7 +47,8 @@ public class Fragment20BitTest extends AbstractGhidraHeadedIntegrationTest {
 	private TestEnv env;
 
 	public Fragment20BitTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

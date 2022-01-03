@@ -121,7 +121,9 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 		// check for or create function pointer if valid function pointed to
 		Data data = currentProgram.getListing().getDefinedDataAt(address);
 		if (data != null) {
-            return data.isPointer() && getPointedToFunction(address) != null;
+			if (data.isPointer() && getPointedToFunction(address) != null) {
+				return true;
+			}
 		}
 		else {
 
@@ -142,8 +144,9 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 				return false;
 			}
 		}
+		return false;
 
-    }
+	}
 
 	/**
 	 * Method to determine if the given address is a null pointer. If it isn't but is valid length
@@ -172,9 +175,13 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 		}
 
 		PointerDataType pointerDataType = new PointerDataType();
-        return d.getDataType().isEquivalent(pointerDataType);
+		if (d.getDataType().isEquivalent(pointerDataType)) {
+			return true;
+		}
 
-    }
+		return false;
+
+	}
 
 	/**
 	 * Method to check for num zeros at the given address
@@ -290,7 +297,9 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 			if (functionContaining.isThunk() && flowType.isJump()) {
 				return true;
 			}
-            return flowType.isJump();
+			if (flowType.isJump()) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -446,32 +455,33 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 			return;
 		}
 
-        for (Address containedAddress : containedAddresses) {
-            monitor.checkCanceled();
-            Address address = containedAddress;
+		Iterator<Address> iterator = containedAddresses.iterator();
+		while (iterator.hasNext()) {
+			monitor.checkCanceled();
+			Address address = iterator.next();
 
-            // a previously created one might call the one that contains this so
-            // it may have already been created - if so, skip
-            Function functionContaining = getFunctionContaining(address);
-            if (functionContaining != null) {
-                continue;
-            }
+			// a previously created one might call the one that contains this so
+			// it may have already been created - if so, skip
+			Function functionContaining = getFunctionContaining(address);
+			if (functionContaining != null) {
+				continue;
+			}
 
-            Function newFunction = createFunctionBefore(address, filler);
-            if (newFunction == null) {
-                //println("Can't find function containing " + address.toString());
-                continue;
-            }
+			Function newFunction = createFunctionBefore(address, filler);
+			if (newFunction == null) {
+				//println("Can't find function containing " + address.toString());
+				continue;
+			}
 
-            AddressSetView functionBody = newFunction.getBody();
-            while (!functionBody.contains(address)) {
-                newFunction = createFunctionBefore(address, filler);
-                if (newFunction == null) {
-                    continue;
-                }
-                functionBody = newFunction.getBody();
-            }
-        }
+			AddressSetView functionBody = newFunction.getBody();
+			while (!functionBody.contains(address)) {
+				newFunction = createFunctionBefore(address, filler);
+				if (newFunction == null) {
+					continue;
+				}
+				functionBody = newFunction.getBody();
+			}
+		}
 	}
 
 	/**
@@ -490,8 +500,12 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 
 			CreateFunctionCmd cmd = new CreateFunctionCmd(null, subroutineAddresses.getMinAddress(),
 				null, SourceType.DEFAULT);
-            return cmd.applyTo(prog, monitor);
-        }
+			if (cmd.applyTo(prog, monitor)) {
+				return true;
+			}
+
+			return false;
+		}
 		catch (CancelledException e) {
 			// FIXME: this should not be caught by this method and should propogate 
 			return false;
@@ -664,13 +678,14 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 			return false;
 		}
 
-        for (Function function : bFunctions) {
-            monitor.checkCanceled();
-            Function bFunction = function;
-            if (doesFunctionACallFunctionB(aFunction, bFunction)) {
-                return true;
-            }
-        }
+		Iterator<Function> bFunctionsIterator = bFunctions.iterator();
+		while (bFunctionsIterator.hasNext()) {
+			monitor.checkCanceled();
+			Function bFunction = bFunctionsIterator.next();
+			if (doesFunctionACallFunctionB(aFunction, bFunction)) {
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -725,12 +740,13 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 			List<Address> referencesToFunctionBFromFunctionA =
 				getReferencesToFunctionBFromFunctionA(callingFunction, calledFunction);
 			// add them to list of ref address pairs
-            for (Address address : referencesToFunctionBFromFunctionA) {
-                monitor.checkCanceled();
-                Address sourceRefAddr = address;
-                referenceAddressPairs.add(
-                        new ReferenceAddressPair(sourceRefAddr, calledFunction.getEntryPoint()));
-            }
+			Iterator<Address> iterator = referencesToFunctionBFromFunctionA.iterator();
+			while (iterator.hasNext()) {
+				monitor.checkCanceled();
+				Address sourceRefAddr = iterator.next();
+				referenceAddressPairs.add(
+					new ReferenceAddressPair(sourceRefAddr, calledFunction.getEntryPoint()));
+			}
 		}
 
 		referenceAddressPairs.sort((a1, a2) -> a1.getSource().compareTo(a2.getSource()));
@@ -787,16 +803,17 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 		if (calledFunctions.contains(bFunction)) {
 			return true;
 		}
-        for (Function function : calledFunctions) {
-            monitor.checkCanceled();
-            Function calledFunction = function;
-            if (calledFunction.isThunk()) {
-                calledFunction = calledFunction.getThunkedFunction(true);
-                if (calledFunction.equals(bFunction)) {
-                    return true;
-                }
-            }
-        }
+		Iterator<Function> functionIterator = calledFunctions.iterator();
+		while (functionIterator.hasNext()) {
+			monitor.checkCanceled();
+			Function calledFunction = functionIterator.next();
+			if (calledFunction.isThunk()) {
+				calledFunction = calledFunction.getThunkedFunction(true);
+				if (calledFunction.equals(bFunction)) {
+					return true;
+				}
+			}
+		}
 		return false;
 	}
 
@@ -826,7 +843,9 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 		if (dataType instanceof Pointer) {
 			Pointer ptr = (Pointer) dataType;
 			DataType baseDataType = ptr.getDataType();
-            return baseDataType instanceof Structure && baseDataType.isNotYetDefined();
+			if (baseDataType instanceof Structure && baseDataType.isNotYetDefined()) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -887,20 +906,21 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 		List<Address> referencesToFunctions = new ArrayList<Address>();
 
 		List<Address> referenceAddresses = new ArrayList<Address>(referenceToClassMap.keySet());
-        for (Address address : referenceAddresses) {
-            monitor.checkCanceled();
-            Address referenceAddress = address;
-            Address referencedAddress = getSingleReferencedAddress(referenceAddress);
-            if (referencedAddress == null) {
-                continue;
-            }
-            Function function = getFunctionAt(referencedAddress);
+		Iterator<Address> referenceIterator = referenceAddresses.iterator();
+		while (referenceIterator.hasNext()) {
+			monitor.checkCanceled();
+			Address referenceAddress = referenceIterator.next();
+			Address referencedAddress = getSingleReferencedAddress(referenceAddress);
+			if (referencedAddress == null) {
+				continue;
+			}
+			Function function = getFunctionAt(referencedAddress);
 
-            // skip the ones that reference a vftable
-            if (function != null) {
-                referencesToFunctions.add(referenceAddress);
-            }
-        }
+			// skip the ones that reference a vftable
+			if (function != null) {
+				referencesToFunctions.add(referenceAddress);
+			}
+		}
 
 		return referencesToFunctions;
 	}
@@ -963,8 +983,12 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 	 */
 	public boolean isEmptyStructure(DataType dataType) {
 
-        return dataType instanceof Structure && dataType.isNotYetDefined();
-    }
+		if (dataType instanceof Structure && dataType.isNotYetDefined()) {
+			return true;
+		}
+
+		return false;
+	}
 
 	/**
 	 * Method to remove all symbols at the given address
@@ -1012,9 +1036,12 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 		// FIXME: if you are going to use a Namespace arg you should its program not currentProgram
 		SymbolIterator namespaceSymbols = currentProgram.getSymbolTable().getSymbols(namespace);
 
-        return namespaceSymbols.hasNext();
+		if (namespaceSymbols.hasNext()) {
+			return true;
+		}
+		return false;
 
-    }
+	}
 
 	/**
 	 * Create data type manager path that will be used when data types are created to place them in the correct folder
@@ -1060,11 +1087,11 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 				newCategoryName = newCategoryName.concat(character);
 				index++;
 
-				if ("<".equals(character)) {
+				if (character.equals("<")) {
 					insideBrackets = true;
 					numOpenedBrackets++;
 				}
-				if (">".equals(character)) {
+				if (character.equals(">")) {
 					numOpenedBrackets--;
 				}
 				if (numOpenedBrackets == 0) {
@@ -1101,14 +1128,20 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 		int numOpenLips = getNumSubstrings(name, "<");
 		int numClosedLips = getNumSubstrings(name, ">");
 
-        return numOpenLips > 0 && numClosedLips > 0 && numOpenLips == numClosedLips;
-    }
+		if (numOpenLips > 0 && numClosedLips > 0 && numOpenLips == numClosedLips) {
+			return true;
+		}
+		return false;
+	}
 
 	private boolean containsSimpleTemplate(String name) {
 
 		int indexOf = name.indexOf(",");
-        return indexOf == -1;
-    }
+		if (indexOf == -1) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Method to return the number of the given substrings contained in the given string
@@ -1141,121 +1174,127 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 
 		// create list with only classes that have templates in name and add completely stripped
 		// template name to class var
-        for (RecoveredClass value : recoveredClasses) {
-            monitor.checkCanceled();
-            RecoveredClass recoveredClass = value;
+		Iterator<RecoveredClass> recoveredClassesIterator = recoveredClasses.iterator();
+		while (recoveredClassesIterator.hasNext()) {
+			monitor.checkCanceled();
+			RecoveredClass recoveredClass = recoveredClassesIterator.next();
 
-            String className = recoveredClass.getName();
+			String className = recoveredClass.getName();
 
-            if (containsTemplate(className)) {
-                String shortenedName = removeTemplate(className) + "<...>";
-                recoveredClass.addShortenedTemplatedName(shortenedName);
-                classesWithTemplates.add(recoveredClass);
-            }
-        }
+			if (containsTemplate(className)) {
+				String shortenedName = removeTemplate(className) + "<...>";
+				recoveredClass.addShortenedTemplatedName(shortenedName);
+				classesWithTemplates.add(recoveredClass);
+			}
+		}
 
 		// iterate over map and remove entries that already have unique shortened names on map and 
 		// add those unique names to class as shorted name
 		// for those with non-unique names, process them as a group of matched names
 		List<RecoveredClass> classesToProcess = new ArrayList<RecoveredClass>(classesWithTemplates);
 
-        for (RecoveredClass classesWithTemplate : classesWithTemplates) {
-            monitor.checkCanceled();
-            RecoveredClass currentClass = classesWithTemplate;
+		Iterator<RecoveredClass> classWithTemplatesIterator = classesWithTemplates.iterator();
 
-            // skip if already processed
-            if (!classesToProcess.contains(currentClass)) {
-                continue;
-            }
+		while (classWithTemplatesIterator.hasNext()) {
+			monitor.checkCanceled();
+			RecoveredClass currentClass = classWithTemplatesIterator.next();
 
-            String currentShortenedName = currentClass.getShortenedTemplateName();
+			// skip if already processed
+			if (!classesToProcess.contains(currentClass)) {
+				continue;
+			}
 
-            // if removing the middle of template results in unique name then keep that name and
-            // remove class from list to process
-            List<RecoveredClass> classesWithSameShortenedName =
-                    getClassesWithSameShortenedName(classesToProcess, currentShortenedName);
+			String currentShortenedName = currentClass.getShortenedTemplateName();
 
-            if (classesWithSameShortenedName.size() == 1) {
-                classesToProcess.remove(currentClass);
-                continue;
-            }
+			// if removing the middle of template results in unique name then keep that name and
+			// remove class from list to process
+			List<RecoveredClass> classesWithSameShortenedName =
+				getClassesWithSameShortenedName(classesToProcess, currentShortenedName);
 
-            Iterator<RecoveredClass> classesWithSameShortnameIterator =
-                    classesWithSameShortenedName.iterator();
-            while (classesWithSameShortnameIterator.hasNext()) {
-                monitor.checkCanceled();
+			if (classesWithSameShortenedName.size() == 1) {
+				classesToProcess.remove(currentClass);
+				continue;
+			}
 
-                RecoveredClass classWithSameShortName = classesWithSameShortnameIterator.next();
+			Iterator<RecoveredClass> classesWithSameShortnameIterator =
+				classesWithSameShortenedName.iterator();
+			while (classesWithSameShortnameIterator.hasNext()) {
+				monitor.checkCanceled();
 
-                // if removing the middle of template results in duplicate names then
-                // check for a simple internal to the template (ie just one item in it
-                // if that is the case then just keep the original name
-                if (containsSimpleTemplate(classWithSameShortName.getName())) {
-                    classWithSameShortName.addShortenedTemplatedName(new String());
-                    classesWithSameShortnameIterator.remove();
-                    classesToProcess.remove(classWithSameShortName);
-                }
-            }
+				RecoveredClass classWithSameShortName = classesWithSameShortnameIterator.next();
 
-            // if none left after removing simple ones then continue processing next class
-            if (classesWithSameShortenedName.isEmpty()) {
-                continue;
-            }
+				// if removing the middle of template results in duplicate names then
+				// check for a simple internal to the template (ie just one item in it
+				// if that is the case then just keep the original name 
+				if (containsSimpleTemplate(classWithSameShortName.getName())) {
+					classWithSameShortName.addShortenedTemplatedName(new String());
+					classesWithSameShortnameIterator.remove();
+					classesToProcess.remove(classWithSameShortName);
+				}
+			}
 
-            // if only one left after removing the simple templates then use it with first part of
-            // template internal
-            if (classesWithSameShortenedName.size() == 1) {
-                RecoveredClass classWithSameShortName = classesWithSameShortenedName.get(0);
-                String newName = getNewShortenedTemplateName(classWithSameShortName, 1);
-                classWithSameShortName.addShortenedTemplatedName(newName);
-                classesToProcess.remove(classWithSameShortName);
-                continue;
-            }
+			// if none left after removing simple ones then continue processing next class
+			if (classesWithSameShortenedName.isEmpty()) {
+				continue;
+			}
 
-            // if more than one complex left over after all the removals above, then keep trying to
-            // get unique name
-            int commaIndex = 1;
-            while (!classesWithSameShortenedName.isEmpty()) {
+			// if only one left after removing the simple templates then use it with first part of 
+			// template internal
+			if (classesWithSameShortenedName.size() == 1) {
+				RecoveredClass classWithSameShortName = classesWithSameShortenedName.get(0);
+				String newName = getNewShortenedTemplateName(classWithSameShortName, 1);
+				classWithSameShortName.addShortenedTemplatedName(newName);
+				classesToProcess.remove(classWithSameShortName);
+				continue;
+			}
 
-                List<RecoveredClass> leftoversWithSameShortName =
-                        new ArrayList<RecoveredClass>(classesWithSameShortenedName);
+			// if more than one complex left over after all the removals above, then keep trying to
+			// get unique name
+			int commaIndex = 1;
+			while (!classesWithSameShortenedName.isEmpty()) {
 
-                // update all their shorted names to include up to the n'th comma
+				List<RecoveredClass> leftoversWithSameShortName =
+					new ArrayList<RecoveredClass>(classesWithSameShortenedName);
 
-                for (RecoveredClass aClass : leftoversWithSameShortName) {
+				// update all their shorted names to include up to the n'th comma
+				Iterator<RecoveredClass> leftoversIterator = leftoversWithSameShortName.iterator();
 
-                    monitor.checkCanceled();
-                    RecoveredClass currentClassWithSameShortName = aClass;
-                    currentClassWithSameShortName.addShortenedTemplatedName(
-                            getNewShortenedTemplateName(currentClassWithSameShortName, commaIndex));
-                }
+				while (leftoversIterator.hasNext()) {
 
-                // now iterate and see if any are unique and if so remove from list
-                // if not, add up to next comma and so on until all are unique
-                List<RecoveredClass> leftovers2WithSameShortName =
-                        new ArrayList<RecoveredClass>(classesWithSameShortenedName);
+					monitor.checkCanceled();
+					RecoveredClass currentClassWithSameShortName = leftoversIterator.next();
+					currentClassWithSameShortName.addShortenedTemplatedName(
+						getNewShortenedTemplateName(currentClassWithSameShortName, commaIndex));
+				}
 
-                for (RecoveredClass recoveredClass : leftovers2WithSameShortName) {
+				// now iterate and see if any are unique and if so remove from list
+				// if not, add up to next comma and so on until all are unique
+				List<RecoveredClass> leftovers2WithSameShortName =
+					new ArrayList<RecoveredClass>(classesWithSameShortenedName);
+				Iterator<RecoveredClass> leftovers2Iterator =
+					leftovers2WithSameShortName.iterator();
 
-                    monitor.checkCanceled();
-                    RecoveredClass currentClassWithSameShortName = recoveredClass;
+				while (leftovers2Iterator.hasNext()) {
 
-                    String shortenedTemplateName =
-                            currentClassWithSameShortName.getShortenedTemplateName();
+					monitor.checkCanceled();
+					RecoveredClass currentClassWithSameShortName = leftovers2Iterator.next();
 
-                    List<RecoveredClass> classesWithSameShortName =
-                            getClassesWithSameShortenedName(classesToProcess, shortenedTemplateName);
+					String shortenedTemplateName =
+						currentClassWithSameShortName.getShortenedTemplateName();
 
-                    if (classesWithSameShortName.size() == 1) {
-                        classesToProcess.remove(classesWithSameShortName.get(0));
-                        classesWithSameShortenedName.remove(classesWithSameShortName.get(0));
-                    }
-                }
+					List<RecoveredClass> classesWithSameShortName =
+						getClassesWithSameShortenedName(classesToProcess, shortenedTemplateName);
 
-                commaIndex++;
-            }
+					if (classesWithSameShortName.size() == 1) {
+						classesToProcess.remove(classesWithSameShortName.get(0));
+						classesWithSameShortenedName.remove(classesWithSameShortName.get(0));
+					}
+				}
 
-        }
+				commaIndex++;
+			}
+
+		}
 
 	}
 
@@ -1303,14 +1342,15 @@ public class ExtendedFlatProgramAPI extends FlatProgramAPI {
 
 		List<RecoveredClass> classesWithSameShortenedName = new ArrayList<RecoveredClass>();
 
-        for (RecoveredClass templateClass : templateClasses) {
-            monitor.checkCanceled();
-            RecoveredClass currentClass = templateClass;
+		Iterator<RecoveredClass> classIterator = templateClasses.iterator();
+		while (classIterator.hasNext()) {
+			monitor.checkCanceled();
+			RecoveredClass currentClass = classIterator.next();
 
-            if (currentClass.getShortenedTemplateName().equals(shortenedName)) {
-                classesWithSameShortenedName.add(currentClass);
-            }
-        }
+			if (currentClass.getShortenedTemplateName().equals(shortenedName)) {
+				classesWithSameShortenedName.add(currentClass);
+			}
+		}
 		return classesWithSameShortenedName;
 
 	}

@@ -109,7 +109,7 @@ public class AddressIndexKeyIterator implements DBLongIterator {
 		this.indexCol = indexCol;
 
 		keyRangeList = addrMap.getKeyRanges(set, absolute, false);
-		if (keyRangeList.isEmpty()) {
+		if (keyRangeList.size() == 0) {
 			return;
 		}
 
@@ -162,7 +162,7 @@ public class AddressIndexKeyIterator implements DBLongIterator {
 
 		keyRangeList = addrMap.getKeyRanges(null, absolute, false);
 		keyRangeIndex = addrMap.findKeyRange(keyRangeList, start);
-		if (keyRangeList.isEmpty()) {
+		if (keyRangeList.size() == 0) {
 			return;
 		}
 

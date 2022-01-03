@@ -16,10 +16,11 @@
 package ghidra.util;
 
 import java.awt.Font;
-import java.io.*;
+import java.io.File;
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.StringTokenizer;
 import java.util.function.Supplier;
@@ -45,12 +46,6 @@ public class SystemUtilities {
 	public static final String FONT_SIZE_OVERRIDE_PROPERTY_NAME = "font.size.override";
 	private static final Integer FONT_SIZE_OVERRIDE_VALUE =
 		Integer.getInteger(SystemUtilities.FONT_SIZE_OVERRIDE_PROPERTY_NAME);
-
-	/**
-	 * isInTestingMode - lazy load value - must allow time for runtime property to be set
-	 * by GenericTestCase
-	 */
-	private static volatile Boolean isInTestingMode;
 
 	/**
 	 * The system property that can be checked during testing to determine if
@@ -80,6 +75,12 @@ public class SystemUtilities {
 	private static final boolean IS_IN_TESTING_BATCH_MODE =
 		Boolean.TRUE.toString().equalsIgnoreCase(System.getProperty(TESTING_BATCH_PROPERTY));
 
+	/**
+	 * isInTestingMode - lazy load value - must allow time for runtime property to be set
+	 * by GenericTestCase
+	 */
+	private static volatile Boolean isInTestingMode;
+
 	private static boolean checkForDevelopmentMode() {
 		Class<?> myClass = SystemUtilities.class;
 		ClassLoader loader = myClass.getClassLoader();
@@ -102,7 +103,7 @@ public class SystemUtilities {
 
 	/**
 	 * Get the user that is running the ghidra application
-	 * @return the username
+	 * @return the user name
 	 */
 	public static String getUserName() {
 		if (userName == null) {
@@ -262,7 +263,7 @@ public class SystemUtilities {
 	 * @return true if the application is a release and not in development or testing
 	 */
 	public static boolean isInReleaseMode() {
-		return !IS_IN_DEVELOPMENT_MODE && !isInTestingMode() && !IS_IN_TESTING_BATCH_MODE;
+		return !isInDevelopmentMode() && !isInTestingMode() && !isInTestingBatchMode();
 	}
 
 	/**
@@ -303,7 +304,7 @@ public class SystemUtilities {
 	}
 
 	public static void assertTrue(boolean booleanValue, String string) {
-		boolean isProductionMode = !isInTestingMode() && !IS_IN_DEVELOPMENT_MODE;
+		boolean isProductionMode = !isInTestingMode() && !isInDevelopmentMode();
 		if (isProductionMode) {
 			return; // squash during production mode
 		}
@@ -319,7 +320,7 @@ public class SystemUtilities {
 	 * @param errorMessage The message to display when the assert fails
 	 */
 	public static void assertThisIsTheSwingThread(String errorMessage) {
-		boolean isProductionMode = !isInTestingMode() && !IS_IN_DEVELOPMENT_MODE;
+		boolean isProductionMode = !isInTestingMode() && !isInDevelopmentMode();
 		if (isProductionMode) {
 			return; // squash during production mode
 		}
@@ -344,7 +345,12 @@ public class SystemUtilities {
 		URL url = classObject.getClassLoader().getResource(name);
 
 		String urlFile = url.getFile();
-		urlFile = URLDecoder.decode(urlFile, StandardCharsets.UTF_8);
+		try {
+			urlFile = URLDecoder.decode(urlFile, "UTF-8");
+		}
+		catch (UnsupportedEncodingException e) {
+			// can't happen, since we know the encoding is correct
+		}
 
 		if ("file".equals(url.getProtocol())) {
 			int packageLevel = getPackageLevel(classObject);
@@ -452,8 +458,9 @@ public class SystemUtilities {
 		//       Users can set the system property cpu.core.override to specify an exact
 		//       value to use for non-GUI usage.
 		//
-		if (numProcessors > 8) {
-			numProcessors = 8;
+		if (numProcessors > 10) {
+			// TODO: This bound is fairly arbitrary, probably could be made even lower
+			numProcessors = 10;
 		}
 
 		// Note:  this serves only to limit the number of cores possible, not to increase

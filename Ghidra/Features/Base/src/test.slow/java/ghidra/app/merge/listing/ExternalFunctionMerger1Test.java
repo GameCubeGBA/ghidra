@@ -69,7 +69,8 @@ public class ExternalFunctionMerger1Test extends AbstractExternalMergerTest {
 	 * @param arg0
 	 */
 	public ExternalFunctionMerger1Test() {
-    }
+		super();
+	}
 
 	@Test
 	public void testAddExternalFunctionInBothDemangledMy() throws Exception {

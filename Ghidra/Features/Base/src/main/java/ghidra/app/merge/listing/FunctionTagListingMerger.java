@@ -69,7 +69,7 @@ import ghidra.util.task.TaskMonitor;
  */
 public class FunctionTagListingMerger extends AbstractListingMerger {
 
-	static final String[] FUNCTION_TAG_LISTING_PHASE = { "Function Tags" };
+	final static String[] FUNCTION_TAG_LISTING_PHASE = { "Function Tags" };
 
 	private VerticalChoicesPanel conflictPanel;
 
@@ -557,49 +557,58 @@ public class FunctionTagListingMerger extends AbstractListingMerger {
 		this.currentMonitor = monitor;
 
 		try {
-			final ChangeListener changeListener = e -> {
+			final ChangeListener changeListener = new ChangeListener() {
+				@Override
+				public void stateChanged(ChangeEvent e) {
 
-                // If choice has already been set, then just use that option and don't
-                // prompt the user.
-                conflictOption = conflictPanel.getSelectedOptions();
-                if (conflictOption == ASK_USER) {
-                    if (mergeManager != null) {
-                        mergeManager.setApplyEnabled(false);
-                        try {
-                            mergeConflictingTag(addr, KEEP_LATEST, currentMonitor);
-                        }
-                        catch (CancelledException ce) {
-                            // no need to do anything
-                        }
-                    }
-                    return;
-                }
-                if (mergeManager != null) {
-                    mergeManager.clearStatusText();
-                }
-                try {
-                    mergeConflictingTag(addr, conflictOption, currentMonitor);
-                }
-                catch (CancelledException ce) {
-                    // no need to do anything
-                }
-                if (mergeManager != null) {
-                    mergeManager.setApplyEnabled(true);
-                }
-            };
-			SwingUtilities.invokeAndWait(() -> {
-                setupConflictsPanel(listingPanel, FunctionTagListingMerger.this.currentAddress, tagID,
-                    changeListener);
-                listingPanel.setBottomComponent(conflictPanel);
-            });
-			SwingUtilities.invokeLater(() -> {
-                Address addressToShow = FunctionTagListingMerger.this.currentAddress;
-                listingPanel.clearAllBackgrounds();
-                if (addressToShow != null) {
-                    listingPanel.paintAllBackgrounds(getCodeUnitAddressSet(addressToShow));
-                    listingPanel.goTo(addressToShow);
-                }
-            });
+					// If choice has already been set, then just use that option and don't
+					// prompt the user.
+					conflictOption = conflictPanel.getSelectedOptions();
+					if (conflictOption == ASK_USER) {
+						if (mergeManager != null) {
+							mergeManager.setApplyEnabled(false);
+							try {
+								mergeConflictingTag(addr, KEEP_LATEST, currentMonitor);
+							}
+							catch (CancelledException ce) {
+								// no need to do anything
+							}
+						}
+						return;
+					}
+					if (mergeManager != null) {
+						mergeManager.clearStatusText();
+					}
+					try {
+						mergeConflictingTag(addr, conflictOption, currentMonitor);
+					}
+					catch (CancelledException ce) {
+						// no need to do anything
+					}
+					if (mergeManager != null) {
+						mergeManager.setApplyEnabled(true);
+					}
+				}
+			};
+			SwingUtilities.invokeAndWait(new Runnable() {
+				@Override
+				public void run() {
+					setupConflictsPanel(listingPanel, FunctionTagListingMerger.this.currentAddress, tagID,
+						changeListener);
+					listingPanel.setBottomComponent(conflictPanel);
+				}
+			});
+			SwingUtilities.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					Address addressToShow = FunctionTagListingMerger.this.currentAddress;
+					listingPanel.clearAllBackgrounds();
+					if (addressToShow != null) {
+						listingPanel.paintAllBackgrounds(getCodeUnitAddressSet(addressToShow));
+						listingPanel.goTo(addressToShow);
+					}
+				}
+			});
 		}
 		catch (InterruptedException | InvocationTargetException e) {
 			Msg.showError(this, null, "Merge Error", "Error displaying merge panel", e);

@@ -30,7 +30,8 @@ public class CliTableAssemblyRefProcessor extends CliAbstractTable {
 		public int assemblyRefIndex;
 		
 		public CliAssemblyRefProcessorRow(int processor, int assemblyRefIndex) {
-            this.processor = processor;
+			super();
+			this.processor = processor;
 			this.assemblyRefIndex = assemblyRefIndex;
 		}
 

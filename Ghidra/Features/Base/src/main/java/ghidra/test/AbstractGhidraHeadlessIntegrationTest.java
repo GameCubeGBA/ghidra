@@ -68,8 +68,9 @@ public abstract class AbstractGhidraHeadlessIntegrationTest extends AbstractDock
 	private static Language Z80_LANGUAGE;
 
 	public AbstractGhidraHeadlessIntegrationTest() {
+		super();
 
-        // Ensure that all error messages do NOT use a gui popup, and instead are routed to the
+		// Ensure that all error messages do NOT use a gui popup, and instead are routed to the
 		// console.
 		setErrorGUIEnabled(false);
 	}
@@ -350,11 +351,13 @@ public abstract class AbstractGhidraHeadlessIntegrationTest extends AbstractDock
 
 	public static <T extends Plugin> T getPlugin(PluginTool tool, Class<T> c) {
 		List<Plugin> list = tool.getManagedPlugins();
-        for (Plugin p : list) {
-            if (p.getClass() == c) {
-                return c.cast(p);
-            }
-        }
+		Iterator<Plugin> it = list.iterator();
+		while (it.hasNext()) {
+			Plugin p = it.next();
+			if (p.getClass() == c) {
+				return c.cast(p);
+			}
+		}
 		return null;
 	}
 
@@ -567,7 +570,7 @@ public abstract class AbstractGhidraHeadlessIntegrationTest extends AbstractDock
 	 * Get language service used for testing.
 	 * @return language service.
 	 */
-    public static synchronized LanguageService getLanguageService() {
+	public synchronized static LanguageService getLanguageService() {
 		return DefaultLanguageService.getLanguageService();
 	}
 

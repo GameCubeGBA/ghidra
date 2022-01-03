@@ -68,13 +68,17 @@ public class WeightedDigraph extends DirectedGraph {
       double degree = 0.0;
       Edge[] edges = this.incomingEdges( v );
       int length = edges.length;
-        for (Edge edge : edges) {
-            try {
-                degree += weights().getValue(edge);
-            } catch (NoValueException exc) {
-                degree += defaultValue;
-            }
-        }
+      for( int i=0; i< length; i++ )
+      {
+         try
+         {
+         	degree += weights().getValue( edges[i] );
+         }
+         catch( NoValueException exc )
+         {
+         	degree += defaultValue;
+         }
+      }
       return degree;
 	}
 	
@@ -87,13 +91,17 @@ public class WeightedDigraph extends DirectedGraph {
       double degree = 0.0;
       Edge[] edges = this.outgoingEdges( v );
       int length = edges.length;
-        for (Edge edge : edges) {
-            try {
-                degree += weights().getValue(edge);
-            } catch (NoValueException exc) {
-                degree += defaultValue;
-            }
-        }
+      for( int i=0; i< length; i++ )
+      {
+         try
+         {
+         	degree += weights().getValue( edges[i] );
+         }
+         catch( NoValueException exc )
+         {
+         	degree += defaultValue;
+         }
+      }
       return degree;
 	}
 	
@@ -105,13 +113,17 @@ public class WeightedDigraph extends DirectedGraph {
       double degree = 0.0;
       Edge[] edges = this.selfEdges( v );
       int length = edges.length;
-        for (Edge edge : edges) {
-            try {
-                degree += weights().getValue(edge);
-            } catch (NoValueException exc) {
-                degree += 0.0;
-            }
-        }
+      for( int i=0; i< length; i++ )
+      {
+         try
+         {
+         	degree += weights().getValue( edges[i] );
+         }
+         catch( NoValueException exc )
+         {
+         	degree += 0.0;
+         }
+      }
       return degree;
 	}
 	
@@ -192,7 +204,7 @@ public class WeightedDigraph extends DirectedGraph {
 	@Override
     public DirectedGraph copy()
 	{
-		WeightedDigraph copy = new WeightedDigraph(this.numVertices(), this.numEdges(), this.defaultValue);
+		WeightedDigraph copy = new WeightedDigraph(this.numVertices(), this.numEdges(), this.getDefaultEdgeWeight());
 		copyAll( copy );
 		return copy;
 	}

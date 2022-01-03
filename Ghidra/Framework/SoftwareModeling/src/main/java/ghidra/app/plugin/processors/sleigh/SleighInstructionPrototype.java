@@ -77,23 +77,23 @@ import ghidra.util.exception.NotYetImplementedException;
  */
 public class SleighInstructionPrototype implements InstructionPrototype {
 	// Flowflags for resolving flowType
-    public static final int RETURN = 0x01;
-	public static final int CALL_INDIRECT = 0x02;
-	public static final int BRANCH_INDIRECT = 0x04;
-	public static final int CALL = 0x08;
-	public static final int JUMPOUT = 0x10;
-	public static final int NO_FALLTHRU = 0x20;		// op does not fallthru
-	public static final int BRANCH_TO_END = 0x40;
-	public static final int CROSSBUILD = 0x80;
-	public static final int LABEL = 0x100;
+	public final static int RETURN = 0x01;
+	public final static int CALL_INDIRECT = 0x02;
+	public final static int BRANCH_INDIRECT = 0x04;
+	public final static int CALL = 0x08;
+	public final static int JUMPOUT = 0x10;
+	public final static int NO_FALLTHRU = 0x20;		// op does not fallthru
+	public final static int BRANCH_TO_END = 0x40;
+	public final static int CROSSBUILD = 0x80;
+	public final static int LABEL = 0x100;
 
-	public static class FlowRecord {
+	static public class FlowRecord {
 		public ConstructState addressnode;		// Constructor state containing destination address of flow
 		public OpTpl op;						// The pcode template producing the flow
 		public int flowFlags;					// flags associated with this flow		
 	}
 
-	public static class FlowSummary {
+	static public class FlowSummary {
 		public int delay;
 		public boolean hasCrossBuilds;
 		public ArrayList<FlowRecord> flowState;
@@ -118,9 +118,9 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 	private boolean hasCrossBuilds;
 	private ArrayList<ArrayList<FlowRecord>> flowStateListNamed;
 
-	private static final PcodeOp[] emptyPCode = {};
-	private static final Object[] emptyObject = {};
-	private static final Address[] emptyFlow = {};
+	private final static PcodeOp[] emptyPCode = {};
+	private final static Object[] emptyObject = {};
+	private final static Address[] emptyFlow = {};
 
 	private ContextCache contextCache;
 //	private InstructionContext instructionContextCache;
@@ -470,7 +470,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 	public int getDelaySlotDepth(InstructionContext context) {
 		int delayInstrCnt = 0;
 		int byteCnt = 0;
-		int offset = length;
+		int offset = getLength();
 		if (delaySlotByteCnt == 1) {
 			return 1;
 		}
@@ -481,7 +481,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 				MemBuffer delaymem = new WrappedMemBuffer(context.getMemBuffer(), offset);
 				SleighInstructionPrototype proto =
 					(SleighInstructionPrototype) language.parse(delaymem, roContext, true);
-				int len = proto.length;
+				int len = proto.getLength();
 				offset += len;
 				byteCnt += len;
 				++delayInstrCnt;
@@ -569,11 +569,11 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 	@Override
 	public int getFallThroughOffset(InstructionContext context) {
 		if (delaySlotByteCnt <= 0) {
-			return length;
+			return getLength();
 		}
 
 		try {
-			int offset = length;
+			int offset = getLength();
 			int bytecount = 0;
 			ReadOnlyProcessorContext roContext =
 				new ReadOnlyProcessorContext(context.getProcessorContext());
@@ -581,7 +581,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 				MemBuffer delaymem = new WrappedMemBuffer(context.getMemBuffer(), offset);
 				SleighInstructionPrototype proto =
 					(SleighInstructionPrototype) language.parse(delaymem, roContext, true);
-				int len = proto.length;
+				int len = proto.getLength();
 				offset += len;
 				bytecount += len;
 			}
@@ -589,7 +589,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 			return offset;
 		}
 		catch (Exception e) {
-			return length;
+			return getLength();
 		}
 	}
 
@@ -685,7 +685,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 	@Override
 	public Address[] getFlows(InstructionContext context) {
 
-		if (flowStateList.isEmpty())
+		if (flowStateList.size() == 0)
 			return emptyFlow;
 
 		ArrayList<Address> addresses = new ArrayList<>();
@@ -696,7 +696,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 			return emptyFlow;
 		}
 
-		if (addresses.isEmpty())
+		if (addresses.size() == 0)
 			return emptyFlow;
 		return addresses.toArray(new Address[addresses.size()]);
 	}
@@ -979,14 +979,14 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 			UniqueAddressFactory uniqueFactory) {
 		try {
 			SleighParserContext protoContext = (SleighParserContext) context.getParserContext();
-			int fallOffset = length;
+			int fallOffset = getLength();
 			if (delaySlotByteCnt > 0) {
 				int bytecount = 0;
 				do {
 					Address addr = context.getAddress().add(fallOffset);
 					SleighParserContext delay =
 						(SleighParserContext) context.getParserContext(addr);
-					int len = delay.getPrototype().length;
+					int len = delay.getPrototype().getLength();
 					fallOffset += len;
 					bytecount += len;
 				}
@@ -1019,7 +1019,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 	@Override
 	public PackedBytes getPcodePacked(InstructionContext context, PcodeOverride override,
 			UniqueAddressFactory uniqueFactory) {
-		int fallOffset = length;
+		int fallOffset = getLength();
 		try {
 			SleighParserContext protoContext = (SleighParserContext) context.getParserContext();
 			if (delaySlotByteCnt > 0) {
@@ -1028,7 +1028,7 @@ public class SleighInstructionPrototype implements InstructionPrototype {
 					Address addr = context.getAddress().add(fallOffset);
 					SleighParserContext delay =
 						(SleighParserContext) context.getParserContext(addr);
-					int len = delay.getPrototype().length;
+					int len = delay.getPrototype().getLength();
 					fallOffset += len;
 					bytecount += len;
 				}

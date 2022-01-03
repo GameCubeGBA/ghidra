@@ -70,7 +70,8 @@ public class ClipboardPanel extends JPanel {
 	 * @param plugin
 	 */
 	public ClipboardPanel(FunctionBitPatternsExplorerPlugin plugin) {
-        BoxLayout mainLayout = new BoxLayout(this, BoxLayout.Y_AXIS);
+		super();
+		BoxLayout mainLayout = new BoxLayout(this, BoxLayout.Y_AXIS);
 		setLayout(mainLayout);
 
 		this.plugin = plugin;
@@ -168,7 +169,7 @@ public class ClipboardPanel extends JPanel {
 		parser.start("patternlist");
 		XmlElement el = parser.peek();
 		while (el.isStart()) {
-			if ("patternpairs".equals(el.getName())) {
+			if (el.getName().equals("patternpairs")) {
 				pairSet = new PatternPairSet();
 				pairSet.restoreXml(parser, new ClipboardPatternFactory());
 			}
@@ -248,10 +249,12 @@ public class ClipboardPanel extends JPanel {
 			return;
 		}
 
-		for (Match match : mymatches) {
+		for (int i = 0; i < mymatches.size(); ++i) {
+			Match match = mymatches.get(i);
 			if (onlyPrePatterns) {
 				evaluatePrePatternMatch(match, program, block, matchStats);
-			} else {
+			}
+			else {
 				evaluateMatch(match, program, block, matchStats);
 			}
 		}
@@ -431,7 +434,7 @@ public class ClipboardPanel extends JPanel {
 			}
 		}
 		//only prepatterns
-		if ((postPatterns.isEmpty())) {
+		if ((postPatterns.size() == 0)) {
 			for (PatternInfoRowObject row : rows) {
 				patternList.add(new Pattern(row.getDittedBitSequence(), 0, new PostRule[0],
 					new MatchAction[0]));
@@ -441,7 +444,7 @@ public class ClipboardPanel extends JPanel {
 		}
 		onlyPrePatterns = false;
 		//only postpatterns
-		if (prePatterns.isEmpty()) {
+		if (prePatterns.size() == 0) {
 			for (PatternInfoRowObject row : rows) {
 				patternList.add(new Pattern(row.getDittedBitSequence(), 0, getAlignRule(null, row),
 					new MatchAction[0]));

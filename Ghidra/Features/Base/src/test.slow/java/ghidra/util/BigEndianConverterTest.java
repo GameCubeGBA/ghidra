@@ -41,7 +41,8 @@ public class BigEndianConverterTest extends AbstractGhidraHeadedIntegrationTest 
 	 * @param arg0
 	 */
 	public BigEndianConverterTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() {

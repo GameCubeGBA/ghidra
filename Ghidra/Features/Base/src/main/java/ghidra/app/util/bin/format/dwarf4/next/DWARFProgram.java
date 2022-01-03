@@ -259,8 +259,10 @@ public class DWARFProgram implements Closeable {
 			MemoryByteProvider mbp = (MemoryByteProvider) bp;
 			Address startAddr = mbp.getAddress(0);
 			Address endAddr = mbp.getAddress(mbp.length() - 1);
-            return program.getRelocationTable().getRelocations(
-                    new AddressSet(startAddr, endAddr)).hasNext();
+			if (program.getRelocationTable().getRelocations(
+				new AddressSet(startAddr, endAddr)).hasNext()) {
+				return true;
+			}
 		}
 		return false;
 	}
@@ -596,7 +598,7 @@ public class DWARFProgram implements Closeable {
 	}
 
 	public DWARFCompilationUnit getCompilationUnitFor(long offset) {
-		for (DWARFCompilationUnit cu : compUnits) {
+		for (DWARFCompilationUnit cu : getCompilationUnits()) {
 			if (cu.containsOffset(offset)) {
 				return cu;
 			}
@@ -860,10 +862,10 @@ public class DWARFProgram implements Closeable {
 		monitor.setIndeterminate(false);
 		monitor.setShowProgressValue(true);
 
-		monitor.setMaximum(compUnits.size());
+		monitor.setMaximum(getCompilationUnits().size());
 
-		if (!compUnits.isEmpty() &&
-			compUnits.get(0).getCompileUnit().hasDWO()) {
+		if (getCompilationUnits().size() > 0 &&
+			getCompilationUnits().get(0).getCompileUnit().hasDWO()) {
 			// probably won't get anything from the file because its all in an external DWO
 			Msg.warn(this,
 				"Unsupported DWARF DWO (external debug file) detected -- unlikely any debug information will be found");
@@ -877,9 +879,9 @@ public class DWARFProgram implements Closeable {
 		totalDIECount = 0;
 		totalAggregateCount = 0;
 		clearDIEIndexes();
-		for (DWARFCompilationUnit cu : compUnits) {
+		for (DWARFCompilationUnit cu : getCompilationUnits()) {
 			monitor.setMessage("DWARF Checking Preconditions - Compilation Unit #" +
-				cu.getCompUnitNumber() + "/" + compUnits.size());
+				cu.getCompUnitNumber() + "/" + getCompilationUnits().size());
 			monitor.setProgress(cu.getCompUnitNumber());
 
 			cu.readDIEs(currentDIEs, monitor);

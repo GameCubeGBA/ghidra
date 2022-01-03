@@ -197,7 +197,7 @@ public class GdbModuleImpl implements GdbModule {
 				String sectionName = matcher.group("name");
 				List<String> attrs = new ArrayList<>();
 				for (String a : matcher.group("attrs").split("\\s+")) {
-					if (!a.isEmpty()) {
+					if (a.length() != 0) {
 						attrs.add(a);
 					}
 				}

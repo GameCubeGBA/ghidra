@@ -12,12 +12,12 @@
 package SWIG;
 
 public final class RegisterKind {
-  public static final RegisterKind eRegisterKindEHFrame = new RegisterKind("eRegisterKindEHFrame", lldbJNI.eRegisterKindEHFrame_get());
-  public static final RegisterKind eRegisterKindDWARF = new RegisterKind("eRegisterKindDWARF");
-  public static final RegisterKind eRegisterKindGeneric = new RegisterKind("eRegisterKindGeneric");
-  public static final RegisterKind eRegisterKindProcessPlugin = new RegisterKind("eRegisterKindProcessPlugin");
-  public static final RegisterKind eRegisterKindLLDB = new RegisterKind("eRegisterKindLLDB");
-  public static final RegisterKind kNumRegisterKinds = new RegisterKind("kNumRegisterKinds");
+  public final static RegisterKind eRegisterKindEHFrame = new RegisterKind("eRegisterKindEHFrame", lldbJNI.eRegisterKindEHFrame_get());
+  public final static RegisterKind eRegisterKindDWARF = new RegisterKind("eRegisterKindDWARF");
+  public final static RegisterKind eRegisterKindGeneric = new RegisterKind("eRegisterKindGeneric");
+  public final static RegisterKind eRegisterKindProcessPlugin = new RegisterKind("eRegisterKindProcessPlugin");
+  public final static RegisterKind eRegisterKindLLDB = new RegisterKind("eRegisterKindLLDB");
+  public final static RegisterKind kNumRegisterKinds = new RegisterKind("kNumRegisterKinds");
 
   public final int swigValue() {
     return swigValue;
@@ -30,9 +30,9 @@ public final class RegisterKind {
   public static RegisterKind swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-      for (RegisterKind value : swigValues)
-          if (value.swigValue == swigValue)
-              return value;
+    for (int i = 0; i < swigValues.length; i++)
+      if (swigValues[i].swigValue == swigValue)
+        return swigValues[i];
     throw new IllegalArgumentException("No enum " + RegisterKind.class + " with value " + swigValue);
   }
 

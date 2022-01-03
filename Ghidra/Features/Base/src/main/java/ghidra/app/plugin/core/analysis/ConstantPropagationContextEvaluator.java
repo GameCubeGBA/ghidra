@@ -131,8 +131,9 @@ public class ConstantPropagationContextEvaluator extends ContextEvaluatorAdapter
 				return false;
 			}
 			PcodeOp[] pcode = instr.getPcode();
-            // for simple pcode, assume it is a good location.
-            return pcode.length <= 1;
+			if (pcode.length > 1) { // for simple pcode, assume it is a good location.
+				return false;
+			}
 		}
 
 		return true;

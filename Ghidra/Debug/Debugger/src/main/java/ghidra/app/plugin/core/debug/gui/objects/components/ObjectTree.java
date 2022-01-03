@@ -121,13 +121,17 @@ public class ObjectTree implements ObjectPane {
 			}
 		});
 		tree.setCellRenderer(new ObjectTreeCellRenderer(root.getProvider()));
-		tree.setDataTransformer(t -> {
-            if (t instanceof ObjectNode) {
-                ObjectNode node = (ObjectNode) t;
-                return List.of(node.getContainer().getDecoratedName());
-            }
-            return null;
-        });
+		tree.setDataTransformer(new FilterTransformer<GTreeNode>() {
+
+			@Override
+			public List<String> transform(GTreeNode t) {
+				if (t instanceof ObjectNode) {
+					ObjectNode node = (ObjectNode) t;
+					return List.of(node.getContainer().getDecoratedName());
+				}
+				return null;
+			}
+		});
 		tree.addTreeExpansionListener(new TreeExpansionListener() {
 
 			@Override
@@ -256,7 +260,7 @@ public class ObjectTree implements ObjectPane {
 			return;
 		}
 		AsyncUtils.sequence(TypeSpec.VOID).then(seq -> {
-			DebugModelConventions.suitable(TargetAccessConditioned.class, targetObject)
+			DebugModelConventions.findSuitable(TargetAccessConditioned.class, targetObject)
 					.handle(seq::next);
 		}, access).then(seq -> {
 			boolean accessible = true;

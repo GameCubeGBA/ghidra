@@ -30,5 +30,5 @@ public interface TargetKillable extends TargetObject {
 	 * 
 	 * @return a future which completes upon successfully terminating the target
 	 */
-    CompletableFuture<Void> kill();
+	public CompletableFuture<Void> kill();
 }

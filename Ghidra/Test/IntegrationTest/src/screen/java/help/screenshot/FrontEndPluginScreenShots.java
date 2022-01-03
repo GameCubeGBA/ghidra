@@ -52,11 +52,12 @@ import resources.MultiIcon;
 
 public class FrontEndPluginScreenShots extends GhidraScreenShotGenerator {
 	private static final String OTHER_PROJECT = "Other_Project";
-	private static final String TEMP_DIR = System.getProperty("java.io.tmpdir");
+	private final static String TEMP_DIR = System.getProperty("java.io.tmpdir");
 	Icon icon = (Icon) getInstanceField("CONVERT_ICON", ProjectInfoDialog.class);
 
 	public FrontEndPluginScreenShots() {
-    }
+		super();
+	}
 
 	@Override
 	public void prepareTool() {

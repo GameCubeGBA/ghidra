@@ -44,7 +44,7 @@ public interface TargetModule extends TargetObject {
 	 * @return the base address, or {@code null}
 	 */
 	@TargetAttributeType(name = RANGE_ATTRIBUTE_NAME, required = true, hidden = true)
-    default AddressRange getRange() {
+	public default AddressRange getRange() {
 		return getTypedAttributeNowByName(RANGE_ATTRIBUTE_NAME, AddressRange.class, null);
 	}
 
@@ -54,7 +54,7 @@ public interface TargetModule extends TargetObject {
 	 * @return the module name
 	 */
 	@TargetAttributeType(name = MODULE_NAME_ATTRIBUTE_NAME, required = true, hidden = true)
-    default String getModuleName() {
+	public default String getModuleName() {
 		return getTypedAttributeNowByName(MODULE_NAME_ATTRIBUTE_NAME, String.class, null);
 	}
 }

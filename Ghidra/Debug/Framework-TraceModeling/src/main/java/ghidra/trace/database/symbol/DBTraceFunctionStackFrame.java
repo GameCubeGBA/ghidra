@@ -218,11 +218,12 @@ public class DBTraceFunctionStackFrame implements StackFrame, Unfinished {
 					}
 				}
 				else {
-                    for (Parameter p : params) {
-                        if (offset <= p.getLastStorageVarnode().getOffset()) {
-                            ordinal = p.getOrdinal();
-                        }
-                    }
+					for (int i = 0; i < params.length; i++) {
+						Parameter p = params[i];
+						if (offset <= p.getLastStorageVarnode().getOffset()) {
+							ordinal = p.getOrdinal();
+						}
+					}
 				}
 
 				result = function.insertParameter(ordinal, var, source);

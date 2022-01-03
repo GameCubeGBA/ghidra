@@ -42,18 +42,19 @@ public class FidFileManager {
 	private static final String INACTIVE_FID_FILES = "FID.INACTIVE";
 	private static final String USER_ADDED_FILES = "FID.USER.ADDED";
 
-    private Set<FidFile> fidFiles;
+	private static FidFileManager THE_FID_FILE_MANAGER;
+
+	private Set<FidFile> fidFiles;
 	private WeakSet<ChangeListener> listeners;
 
-    private static final class TheFidFileManagerHolder {
-        private static final FidFileManager THE_FID_FILE_MANAGER = new FidFileManager();
-    }
-
-    /**
+	/**
 	 * Returns the singleton instance of the FidFileManager.
 	 */
 	public static FidFileManager getInstance() {
-        return TheFidFileManagerHolder.THE_FID_FILE_MANAGER;
+		if (THE_FID_FILE_MANAGER == null) {
+			THE_FID_FILE_MANAGER = new FidFileManager();
+		}
+		return THE_FID_FILE_MANAGER;
 	}
 
 	private FidFileManager() {
@@ -268,7 +269,7 @@ public class FidFileManager {
 		String[] filePaths = concatenatedFilePaths.split(SEPARATOR);
 		for (String filePath : filePaths) {
 			filePath = filePath.trim();
-			if (filePath.isEmpty()) {
+			if (filePath.length() == 0) {
 				continue;
 			}
 			Path path = new Path(filePath);

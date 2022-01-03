@@ -168,7 +168,7 @@ class LibrarySymbolTable {
 				noReturn = true;
 			}
 
-			if (fowardLibrary != null && !fowardLibrary.isEmpty()) {
+			if (fowardLibrary != null && fowardLibrary.length() > 0) {
 				forwards.add(fowardLibrary);
 			}
 
@@ -302,7 +302,7 @@ class LibrarySymbolTable {
 				}
 
 				String nameStr = inString.substring(nameColumnStartIndex).trim();
-				if (nameStr.isEmpty()) {
+				if (nameStr.length() == 0) {
 					break; // unexpected
 				}
 
@@ -316,7 +316,7 @@ class LibrarySymbolTable {
 					nameStr = nameStr.substring(0, index);
 				}
 
-				if (nameStr.isEmpty()) {
+				if (nameStr.length() == 0) {
 					continue; // skip if no name
 				}
 
@@ -412,29 +412,31 @@ class LibrarySymbolTable {
 			version = root.getAttributeValue("VERSION");
 
 			List<Element> children = CollectionUtils.asList(root.getChildren(), Element.class);
-            for (Element export : children) {
-                int ordinal = Integer.parseInt(export.getAttributeValue("ORDINAL"));
-                String name = export.getAttributeValue("NAME");
-                int purge = Integer.parseInt(export.getAttributeValue("PURGE"));
-                String comment = export.getAttributeValue("COMMENT");
-                String fowardLibName = export.getAttributeValue("FOWARDLIBRARY");
-                String fowardSymName = export.getAttributeValue("FOWARDSYMBOL");
+			Iterator<Element> iter = children.iterator();
+			while (iter.hasNext()) {
+				Element export = iter.next();
+				int ordinal = Integer.parseInt(export.getAttributeValue("ORDINAL"));
+				String name = export.getAttributeValue("NAME");
+				int purge = Integer.parseInt(export.getAttributeValue("PURGE"));
+				String comment = export.getAttributeValue("COMMENT");
+				String fowardLibName = export.getAttributeValue("FOWARDLIBRARY");
+				String fowardSymName = export.getAttributeValue("FOWARDSYMBOL");
 
-                String noReturnStr = export.getAttributeValue("NO_RETURN");
-                boolean noReturn = noReturnStr != null && "y".equals(noReturnStr);
+				String noReturnStr = export.getAttributeValue("NO_RETURN");
+				boolean noReturn = noReturnStr != null && "y".equals(noReturnStr);
 
-                if (fowardLibName != null && !fowardLibName.isEmpty() &&
-                        !fowardLibName.equals(tableName)) {
-                    forwards.add(fowardLibName);
-                }
+				if (fowardLibName != null && fowardLibName.length() > 0 &&
+					!fowardLibName.equals(tableName)) {
+					forwards.add(fowardLibName);
+				}
 
-                LibraryExportedSymbol sym = new LibraryExportedSymbol(tableName, size, ordinal,
-                        name, fowardLibName, fowardSymName, purge, noReturn, comment);
+				LibraryExportedSymbol sym = new LibraryExportedSymbol(tableName, size, ordinal,
+					name, fowardLibName, fowardSymName, purge, noReturn, comment);
 
-                exportList.add(sym);
-                symMap.put(name, sym);
-                ordMap.put(Integer.valueOf(ordinal), sym);
-            }
+				exportList.add(sym);
+				symMap.put(name, sym);
+				ordMap.put(Integer.valueOf(ordinal), sym);
+			}
 		}
 		catch (JDOMException e) {
 			throw new IOException(e);
@@ -479,26 +481,29 @@ class LibrarySymbolTable {
 		root.setAttribute("DATE", TIMESTAMP_FORMAT.format(new Date(lastModifiedSeconds)));
 		root.setAttribute("VERSION", lversion);
 
-        for (LibraryExportedSymbol sym : exportList) {
-            Element export = new Element("EXPORT");
+		Iterator<LibraryExportedSymbol> iter = exportList.iterator();
+		while (iter.hasNext()) {
+			LibraryExportedSymbol sym = iter.next();
 
-            export.setAttribute("ORDINAL", sym.getOrdinal() + "");
-            export.setAttribute("NAME", sym.getName() == null ? "" : sym.getName());
-            export.setAttribute("PURGE", sym.getPurge() + "");
-            export.setAttribute("COMMENT", sym.getComment() == null ? "" : sym.getComment());
+			Element export = new Element("EXPORT");
 
-            if (sym.hasNoReturn()) {
-                export.setAttribute("NO_RETURN", "y");
-            }
+			export.setAttribute("ORDINAL", sym.getOrdinal() + "");
+			export.setAttribute("NAME", sym.getName() == null ? "" : sym.getName());
+			export.setAttribute("PURGE", sym.getPurge() + "");
+			export.setAttribute("COMMENT", sym.getComment() == null ? "" : sym.getComment());
 
-            if (sym.isFowardEntry()) {
-                export.setAttribute("FOWARDLIBRARY",
-                        sym.getFowardLibraryName() == null ? "" : sym.getFowardLibraryName());
-                export.setAttribute("FOWARDSYMBOL",
-                        sym.getFowardSymbolName() == null ? "" : sym.getFowardSymbolName());
-            }
-            root.addContent(export);
-        }
+			if (sym.hasNoReturn()) {
+				export.setAttribute("NO_RETURN", "y");
+			}
+
+			if (sym.isFowardEntry()) {
+				export.setAttribute("FOWARDLIBRARY",
+					sym.getFowardLibraryName() == null ? "" : sym.getFowardLibraryName());
+				export.setAttribute("FOWARDSYMBOL",
+					sym.getFowardSymbolName() == null ? "" : sym.getFowardSymbolName());
+			}
+			root.addContent(export);
+		}
 
 		FileOutputStream fos = new FileOutputStream(output);
 		try {

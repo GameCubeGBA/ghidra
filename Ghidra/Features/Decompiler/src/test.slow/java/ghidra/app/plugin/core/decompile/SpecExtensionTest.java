@@ -193,7 +193,7 @@ public class SpecExtensionTest extends AbstractDecompilerTest {
 		program.endTransaction(id2, true);
 		myproto = cspec.getCallingConvention("myproto");
 		assertNull(myproto);
-		assertFalse("myproto".equals(func.getCallingConventionName()));
+		assertFalse(func.getCallingConventionName().equals("myproto"));
 		evalModel =
 			program.getCompilerSpec().getPrototypeEvaluationModel(EvaluationModelType.EVAL_CURRENT);
 		assertEquals(evalModel.getName(), "__stdcall");

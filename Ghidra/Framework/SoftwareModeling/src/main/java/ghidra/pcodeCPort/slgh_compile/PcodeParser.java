@@ -76,7 +76,7 @@ import ghidra.util.exception.AssertException;
 
 public class PcodeParser extends PcodeCompile {
 
-	public static final Logger log = LogManager.getLogger(PcodeParser.class);
+	public final static Logger log = LogManager.getLogger(PcodeParser.class);
 
 	private SleighBase sleigh;
 	private long tempbase;
@@ -229,17 +229,17 @@ public class PcodeParser extends PcodeCompile {
 		String errstring = "";
 		if (rtl != null) {
 			errstring = checkLabels();
-			if ((errstring.isEmpty()) && (!propagateSize(rtl))) {
+			if ((errstring.length() == 0) && (!propagateSize(rtl))) {
 				errstring = "   Could not resolve at least 1 variable size";
 			}
-			if ((errstring.isEmpty()) && rtl.delaySlot() != 0) { // Delay slot is present in this
+			if ((errstring.length() == 0) && rtl.delaySlot() != 0) { // Delay slot is present in this
 				errstring = "   delayslot not permitted in pcode fragment";
 			}
 			if (rtl.getResult() != null) {
 				errstring = "   export not permitted in pcode fragment";
 			}
 		}
-		if (!errstring.isEmpty()) {
+		if (errstring.length() != 0) {
 			throw new SleighException(errstring);
 		}
 		return rtl;

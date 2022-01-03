@@ -34,7 +34,8 @@ import ghidra.util.task.TaskMonitorAdapter;
 public class DiffOverlayApplyTest extends DiffApplyTestAdapter {
 
 	public DiffOverlayApplyTest() {
-    }
+		super();
+	}
 
 @Test
     public void testShowHideDiffApplySettings() throws Exception {

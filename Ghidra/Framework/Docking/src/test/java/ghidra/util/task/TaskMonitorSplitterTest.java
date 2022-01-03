@@ -25,7 +25,8 @@ public class TaskMonitorSplitterTest extends AbstractDockingTest {
 	TaskMonitor baseMonitor;
 
 	public TaskMonitorSplitterTest() {
-        baseMonitor = new TaskMonitorComponent();
+		super();
+		baseMonitor = new TaskMonitorComponent();
 	}
 
 	@Test

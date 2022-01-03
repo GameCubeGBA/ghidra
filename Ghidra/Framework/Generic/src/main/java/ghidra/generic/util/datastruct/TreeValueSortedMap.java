@@ -1552,9 +1552,9 @@ public class TreeValueSortedMap<K, V> extends AbstractMap<K, V> implements Value
 
 	// Pre-constructed views. Unlike Java's stock collections, I create these outright
 	// At least one ought to be accessed for this implementation to be useful
-    private final transient ValueSortedTreeMapEntrySet entrySet = createEntrySet();
-	private final transient ValueSortedTreeMapKeySet keySet = createKeySet();
-	private final transient ValueSortedTreeMapValues values = createValues();
+	private transient final ValueSortedTreeMapEntrySet entrySet = createEntrySet();
+	private transient final ValueSortedTreeMapKeySet keySet = createKeySet();
+	private transient final ValueSortedTreeMapValues values = createValues();
 
 	// Pointers into the data structure
 	protected Node root; // The root of the binary tree
@@ -1669,8 +1669,11 @@ public class TreeValueSortedMap<K, V> extends AbstractMap<K, V> implements Value
 	 * @return true if the node need not be moved
 	 */
 	private boolean isOrdered(Node n) {
-        return ((n.prev == null) || (comparator.compare(n.prev.val, n.val) <= 0)) && ((n.next == null) || (comparator.compare(n.next.val, n.val) >= 0));
-    }
+		if (((n.prev != null) && (comparator.compare(n.prev.val, n.val) > 0)) || ((n.next != null) && (comparator.compare(n.next.val, n.val) < 0))) {
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * {@inheritDoc}

@@ -266,13 +266,15 @@ public class GdbInferiorImpl implements GdbInferior {
 	}
 
 	protected void resyncRetainModules(Set<String> names) {
-        for (Entry<String, GdbModuleImpl> ent : modules.entrySet()) {
-            if (!names.contains(ent.getKey())) {
-                Msg.warn(this, "Resync: Missed unloaded module/library: " + ent);
+		for (Iterator<Entry<String, GdbModuleImpl>> mit = modules.entrySet().iterator(); mit
+				.hasNext();) {
+			Entry<String, GdbModuleImpl> ent = mit.next();
+			if (!names.contains(ent.getKey())) {
+				Msg.warn(this, "Resync: Missed unloaded module/library: " + ent);
 				/*manager.listenersInferior.fire.libraryUnloaded(this, ent.getKey(),
 					Causes.UNCLAIMED);*/
-            }
-        }
+			}
+		}
 	}
 
 	protected void parseAndUpdateAllModuleSections(String out) {

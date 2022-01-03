@@ -177,24 +177,27 @@ public class ClearDialog extends DialogComponentProvider {
 
 		// if a user clears the code, then we will force them
 		// to clear all user references...
-		codeCb.addItemListener(e -> {
-            if (codeCb.isSelected()) {
-                userReferencesCb.setSelected(true);
-                userReferencesCb.setEnabled(false);
-                analysisReferencesCb.setSelected(true);
-                analysisReferencesCb.setEnabled(false);
-                importReferencesCb.setSelected(true);
-                importReferencesCb.setEnabled(false);
-                systemReferencesCb.setSelected(true);
-                systemReferencesCb.setEnabled(false);
-            }
-            else {
-                userReferencesCb.setEnabled(true);
-                analysisReferencesCb.setEnabled(true);
-                importReferencesCb.setEnabled(true);
-                systemReferencesCb.setEnabled(true);
-            }
-        });
+		codeCb.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if (codeCb.isSelected()) {
+					userReferencesCb.setSelected(true);
+					userReferencesCb.setEnabled(false);
+					analysisReferencesCb.setSelected(true);
+					analysisReferencesCb.setEnabled(false);
+					importReferencesCb.setSelected(true);
+					importReferencesCb.setEnabled(false);
+					systemReferencesCb.setSelected(true);
+					systemReferencesCb.setEnabled(false);
+				}
+				else {
+					userReferencesCb.setEnabled(true);
+					analysisReferencesCb.setEnabled(true);
+					importReferencesCb.setEnabled(true);
+					systemReferencesCb.setEnabled(true);
+				}
+			}
+		});
 
 		userReferencesCb.setEnabled(false);
 		analysisReferencesCb.setEnabled(false);
@@ -218,10 +221,20 @@ public class ClearDialog extends DialogComponentProvider {
 
 		JPanel buttonPanel = new JPanel();
 		JButton selectAllButton = new JButton("Select All");
-		selectAllButton.addActionListener(e -> setAllCheckBoxesSelected(true, checkBoxList));
+		selectAllButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setAllCheckBoxesSelected(true, checkBoxList);
+			}
+		});
 
 		JButton deselectAllbutton = new JButton("Deselect All");
-		deselectAllbutton.addActionListener(e -> setAllCheckBoxesSelected(false, checkBoxList));
+		deselectAllbutton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setAllCheckBoxesSelected(false, checkBoxList);
+			}
+		});
 
 		buttonPanel.add(selectAllButton);
 		buttonPanel.add(Box.createHorizontalStrut(10));

@@ -321,9 +321,10 @@ public class DiffDetailsProvider extends ComponentProviderAdapter {
 
 	@Override
 	public void componentHidden() {
-        for (ActionListener listener : listenerList) {
-            listener.actionPerformed(new ActionEvent(this, 0, DIFF_DETAILS_HIDDEN_ACTION));
-        }
+		for (int i = 0; i < listenerList.size(); i++) {
+			ActionListener listener = listenerList.get(i);
+			listener.actionPerformed(new ActionEvent(this, 0, DIFF_DETAILS_HIDDEN_ACTION));
+		}
 		isDisplayed = false;
 		p1DetailsLocation = null;
 	}

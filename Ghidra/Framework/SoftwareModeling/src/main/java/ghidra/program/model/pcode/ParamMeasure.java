@@ -43,8 +43,10 @@ public class ParamMeasure {
 	}
 
 	public boolean isEmpty() {
-        return vn == null;
-    }
+		if (vn == null)
+			return true;
+		return false;
+	}
 
 	/**
 	 * Create a ParamMeasure object by parsing the XML elements

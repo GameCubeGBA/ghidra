@@ -48,8 +48,11 @@ public abstract class UnaryExpression extends PatternExpression {
 			return false;
 		}
 		UnaryExpression that = (UnaryExpression) obj;
-        return this.unary.equals(that.unary);
-    }
+		if (!this.unary.equals(that.unary)) {
+			return false;
+		}
+		return true;
+	}
 
 	public PatternExpression getUnary() {
 		return unary;

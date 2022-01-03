@@ -23,9 +23,9 @@ import ghidra.util.exception.DuplicateNameException;
 import java.io.IOException;
 
 public final class XCoffOptionalHeader implements StructConverter {
-	private static final char NL = '\n';
+	private final static char NL = '\n';
 
-	public static final int AOUTHDRSZ = 72;	// First 28 bytes same as for COFF
+	public final static int AOUTHDRSZ = 72;	// First 28 bytes same as for COFF
 
 	private short   o_magic;      //type of file (0x010B)
 	private short   o_vstamp;     //version stamp (1)
@@ -119,7 +119,7 @@ public final class XCoffOptionalHeader implements StructConverter {
 		buffer.append("data_start = ").append(o_data_start).append(NL);
 		buffer.append("o_toc      = ").append(o_toc).append(NL);
 		buffer.append("o_snentry  = ").append(o_snentry).append(NL);
-		buffer.append("o_sntext   = ").append(o_sntext).append(NL);
+		buffer.append("o_sntext   = ").append(getSectionNumberForText()).append(NL);
 		buffer.append("o_sndata   = ").append(o_sndata).append(NL);
 		buffer.append("o_sntoc    = ").append(o_sntoc).append(NL);
 		buffer.append("o_snloader = ").append(o_snloader).append(NL);

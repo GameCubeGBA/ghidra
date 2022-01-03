@@ -48,17 +48,17 @@ public class BytesFieldFactory extends FieldFactory {
 	public static final String FIELD_NAME = "Bytes";
 	public static final Color DEFAULT_COLOR = Color.BLUE;
 	public static final Color ALIGNMENT_BYTES_COLOR = Color.gray;
-	public static final String GROUP_TITLE = "Bytes Field";
-	public static final String MAX_DISPLAY_LINES_MSG =
+	public final static String GROUP_TITLE = "Bytes Field";
+	public final static String MAX_DISPLAY_LINES_MSG =
 		GROUP_TITLE + Options.DELIMITER + "Maximum Lines To Display";
-	public static final String DELIMITER_MSG = GROUP_TITLE + Options.DELIMITER + "Delimiter";
-	public static final String BYTE_GROUP_SIZE_MSG =
+	public final static String DELIMITER_MSG = GROUP_TITLE + Options.DELIMITER + "Delimiter";
+	public final static String BYTE_GROUP_SIZE_MSG =
 		GROUP_TITLE + Options.DELIMITER + "Byte Group Size";
-	public static final String DISPLAY_UCASE_MSG =
+	public final static String DISPLAY_UCASE_MSG =
 		GROUP_TITLE + Options.DELIMITER + "Display in Upper Case";
-	public static final String REVERSE_INSTRUCTION_BYTE_ORDERING =
+	public final static String REVERSE_INSTRUCTION_BYTE_ORDERING =
 		GROUP_TITLE + Options.DELIMITER + "Reverse Instruction Byte Ordering";
-	public static final String DISPLAY_STRUCTURE_ALIGNMENT_BYTES_MSG =
+	public final static String DISPLAY_STRUCTURE_ALIGNMENT_BYTES_MSG =
 		GROUP_TITLE + Options.DELIMITER + "Display Structure Alignment Bytes";
 
 	private String delim = " ";

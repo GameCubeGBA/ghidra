@@ -62,8 +62,8 @@ import ghidra.util.SystemUtilities;
 import ghidra.util.xml.GenericXMLOutputter;
 
 public class VTSubToolManager implements VTControllerListener, OptionsChangeListener {
-	private static final String SOURCE_TOOL_NAME = "Version Tracking (SOURCE TOOL)";
-	private static final String DESTINATION_TOOL_NAME = "Version Tracking (DESTINATION TOOL)";
+	private final static String SOURCE_TOOL_NAME = "Version Tracking (SOURCE TOOL)";
+	private final static String DESTINATION_TOOL_NAME = "Version Tracking (DESTINATION TOOL)";
 
 	private final VTPlugin plugin;
 	private final VTController controller;

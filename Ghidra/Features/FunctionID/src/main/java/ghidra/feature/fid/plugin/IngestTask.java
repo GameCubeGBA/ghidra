@@ -128,7 +128,7 @@ public class IngestTask extends Task {
 		String line = reader.readLine();
 		while (line != null) {
 			monitor.checkCanceled();
-			if (!line.isEmpty()) {
+			if (line.length() != 0) {
 				res.add(line);
 			}
 			line = reader.readLine();

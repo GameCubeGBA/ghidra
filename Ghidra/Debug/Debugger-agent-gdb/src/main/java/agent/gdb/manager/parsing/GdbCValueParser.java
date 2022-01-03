@@ -29,7 +29,12 @@ import utility.function.ExceptionalFunction;
 
 public class GdbCValueParser extends AbstractGdbParser {
 	public interface GdbCValue {
-		GdbCValue EMPTY = () -> true;
+		public GdbCValue EMPTY = new GdbCValue() {
+			@Override
+			public boolean isEmpty() {
+				return true;
+			}
+		};
 
 		boolean isEmpty();
 
@@ -47,9 +52,9 @@ public class GdbCValueParser extends AbstractGdbParser {
 	}
 
 	public interface GdbCompositeValue extends GdbCValue, Map<String, GdbCValue> {
-		GdbCompositeValue EMPTY = new DefaultGdbCompositeValue(Map.of());
+		public GdbCompositeValue EMPTY = new DefaultGdbCompositeValue(Map.of());
 
-		class Builder {
+		public static class Builder {
 			private final Map<String, GdbCValue> map = new LinkedHashMap<>();
 
 			private Builder() {
@@ -68,7 +73,7 @@ public class GdbCValueParser extends AbstractGdbParser {
 			}
 		}
 
-		static Builder builder() {
+		public static Builder builder() {
 			return new Builder();
 		}
 	}
@@ -81,9 +86,9 @@ public class GdbCValueParser extends AbstractGdbParser {
 	}
 
 	public interface GdbArrayValue extends GdbCValue, List<GdbCValue> {
-		GdbArrayValue EMPTY = new DefaultGdbArrayValue(List.of());
+		public GdbArrayValue EMPTY = new DefaultGdbArrayValue(List.of());
 
-		class Builder {
+		public static class Builder {
 			private final List<GdbCValue> list = new ArrayList<>();
 
 			private Builder() {
@@ -99,19 +104,19 @@ public class GdbCValueParser extends AbstractGdbParser {
 			}
 		}
 
-		static Builder builder() {
+		public static Builder builder() {
 			return new Builder();
 		}
 
-		default List<Integer> expectInts() {
+		public default List<Integer> expectInts() {
 			return stream().map(v -> v.expectInt()).collect(Collectors.toList());
 		}
 
-		default List<Long> expectLongs() {
+		public default List<Long> expectLongs() {
 			return stream().map(v -> v.expectLong()).collect(Collectors.toList());
 		}
 
-		default List<BigInteger> expectBigInts() {
+		public default List<BigInteger> expectBigInts() {
 			return stream().map(v -> v.expectedBigInt()).collect(Collectors.toList());
 		}
 	}

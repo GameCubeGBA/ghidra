@@ -72,7 +72,9 @@ public class ApplyEnumsAsLabelsAction extends DockingAction {
 	private boolean isValidNode(GTreeNode node) {
 		if (node instanceof DataTypeNode) {
 			DataType dataType = ((DataTypeNode) node).getDataType();
-            return dataType instanceof Enum;
+			if (dataType instanceof ghidra.program.model.data.Enum) {
+				return true;
+			}
 		}
 		return false;
 	}

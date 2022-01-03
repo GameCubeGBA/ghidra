@@ -412,17 +412,17 @@ public class TaskMonitorComponent extends JPanel implements TaskMonitor {
 	}
 
 	private String createProgressString() {
-		long currentProgress = progress;
+		long currentProgress = getProgress();
 		if (currentProgress <= 0) {
 			return "0%";
 		}
 
-		long maximum = maxProgress;
+		long maximum = getMaximum();
 		if (currentProgress >= maximum) {
 			return "100%";
 		}
 
-		float percent = ((float) currentProgress / maximum);
+		float percent = ((float) currentProgress / (float) maximum);
 		String formattedPercent = percentFormat.format(percent);
 		if (!paintProgressValue) {
 			return formattedPercent;

@@ -354,7 +354,7 @@ class ServerConnectTask extends Task {
 			}
 			else if (name.startsWith(GhidraServerHandle.BIND_NAME_PREFIX)) {
 				String version = name.substring(GhidraServerHandle.BIND_NAME_PREFIX.length());
-				if (version.isEmpty()) {
+				if (version.length() == 0) {
 					version = "4.3.x (or older)";
 				}
 				exc = new RemoteException(

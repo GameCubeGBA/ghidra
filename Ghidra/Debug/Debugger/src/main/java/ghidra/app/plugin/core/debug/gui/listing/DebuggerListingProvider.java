@@ -20,6 +20,7 @@ import static ghidra.app.plugin.core.debug.gui.DebuggerResources.OPTION_NAME_COL
 
 import java.awt.Color;
 import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.lang.invoke.MethodHandles;
 import java.util.*;
@@ -99,7 +100,10 @@ public class DebuggerListingProvider extends CodeViewerProvider {
 		if (!Objects.equals(a.getThread(), b.getThread())) {
 			return false; // for reg/pc tracking
 		}
-		return Objects.equals(a.getFrame(), b.getFrame()); // for reg/pc tracking
+		if (!Objects.equals(a.getFrame(), b.getFrame())) {
+			return false; // for reg/pc tracking
+		}
+		return true;
 	}
 
 	protected class SyncToStaticListingAction extends AbstractSyncToStaticListingAction {
@@ -324,7 +328,7 @@ public class DebuggerListingProvider extends CodeViewerProvider {
 
 	/**
 	 * Check if this is the main dynamic listing.
-	 *
+	 * 
 	 * <p>
 	 * The method {@link #isConnected()} is not quite the same as this, although the concepts are a
 	 * little conflated, since before the debugger, no one else presented a listing that could claim
@@ -334,7 +338,7 @@ public class DebuggerListingProvider extends CodeViewerProvider {
 	 * listing presented by this plugin, and so it has certain unique features. Calling
 	 * {@link DebuggerListingPlugin#getConnectedProvider()} will return the main dynamic listing,
 	 * despite it not really being "connected."
-	 *
+	 * 
 	 * @return true if this is the main listing for the plugin.
 	 */
 	public boolean isMainListing() {
@@ -359,7 +363,7 @@ public class DebuggerListingProvider extends CodeViewerProvider {
 
 	@Override
 	public void writeDataState(SaveState saveState) {
-		if (!isMainListing) {
+		if (!isMainListing()) {
 			current.writeDataState(tool, saveState, KEY_DEBUGGER_COORDINATES);
 		}
 		super.writeDataState(saveState);
@@ -367,7 +371,7 @@ public class DebuggerListingProvider extends CodeViewerProvider {
 
 	@Override
 	public void readDataState(SaveState saveState) {
-		if (!isMainListing) {
+		if (!isMainListing()) {
 			DebuggerCoordinates coordinates =
 				DebuggerCoordinates.readDataState(tool, saveState, KEY_DEBUGGER_COORDINATES, true);
 			coordinatesActivated(coordinates);
@@ -400,7 +404,7 @@ public class DebuggerListingProvider extends CodeViewerProvider {
 		trackingTrait.readConfigState(saveState);
 		readsMemTrait.readConfigState(saveState);
 
-		if (isMainListing) {
+		if (isMainListing()) {
 			actionSyncToStaticListing.setSelected(syncToStaticListing);
 			followsCurrentThread = true;
 		}
@@ -432,7 +436,7 @@ public class DebuggerListingProvider extends CodeViewerProvider {
 		return new CodeBrowserClipboardProvider(tool, this) {
 			@Override
 			protected boolean pasteBytes(Transferable pasteData)
-					throws IOException {
+					throws UnsupportedFlavorException, IOException {
 				return false;
 			}
 
@@ -502,7 +506,7 @@ public class DebuggerListingProvider extends CodeViewerProvider {
 		createNewStaticTrackingMarker();
 		updateMarkerServiceColorModel();
 
-		if (this.markerService != null && !isMainListing) {
+		if (this.markerService != null && !isMainListing()) {
 			// NOTE: Connected provider marker listener is taken care of by CodeBrowserPlugin
 			this.markerService.addChangeListener(markerChangeListener);
 		}
@@ -539,7 +543,7 @@ public class DebuggerListingProvider extends CodeViewerProvider {
 	}
 
 	public void programOpened(Program program) {
-		if (!isMainListing) {
+		if (!isMainListing()) {
 			return;
 		}
 		DomainFile df = program.getDomainFile();
@@ -629,7 +633,7 @@ public class DebuggerListingProvider extends CodeViewerProvider {
 	}
 
 	protected void createActions() {
-		if (isMainListing) {
+		if (isMainListing()) {
 			actionSyncToStaticListing = new SyncToStaticListingAction();
 		}
 		else {
@@ -654,7 +658,7 @@ public class DebuggerListingProvider extends CodeViewerProvider {
 			ProgramManager.OPEN_CURRENT);
 	}
 
-	protected static boolean isEffectivelyDifferent(ProgramLocation cur, ProgramLocation dest) {
+	protected boolean isEffectivelyDifferent(ProgramLocation cur, ProgramLocation dest) {
 		if (Objects.equals(cur, dest)) {
 			return false;
 		}
@@ -669,7 +673,10 @@ public class DebuggerListingProvider extends CodeViewerProvider {
 		if (curView.getTrace() != destView.getTrace()) {
 			return true;
 		}
-		return !Objects.equals(cur.getAddress(), dest.getAddress());
+		if (!Objects.equals(cur.getAddress(), dest.getAddress())) {
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -710,9 +717,12 @@ public class DebuggerListingProvider extends CodeViewerProvider {
 				if (!gotoProgram.getMemory().contains(location.getAddress())) {
 					return false;
 				}
-				//doSyncToStatic(location);
-				//doAutoImportCurrentModule();
-				return super.goTo(gotoProgram, location);
+				if (super.goTo(gotoProgram, location)) {
+					//doSyncToStatic(location);
+					//doAutoImportCurrentModule();
+					return true;
+				}
+				return false;
 			}
 		});
 	}
@@ -731,7 +741,7 @@ public class DebuggerListingProvider extends CodeViewerProvider {
 	}
 
 	protected void doSyncToStatic(ProgramLocation location) {
-		if (syncToStaticListing && location != null) {
+		if (isSyncToStaticListing() && location != null) {
 			ProgramLocation staticLoc = mappingService.getStaticLocationFromDynamic(location);
 			if (staticLoc != null) {
 				Swing.runIfSwingOrRunLater(() -> plugin.fireStaticLocationEvent(staticLoc));
@@ -790,7 +800,7 @@ public class DebuggerListingProvider extends CodeViewerProvider {
 	protected void doCheckCurrentModuleMissing() {
 		// Is there any reason to try to open the module if we're not syncing listings?
 		// I don't think so.
-		if (!syncToStaticListing) {
+		if (!isSyncToStaticListing()) {
 			return;
 		}
 		Trace trace = current.getTrace();
@@ -879,7 +889,7 @@ public class DebuggerListingProvider extends CodeViewerProvider {
 	}
 
 	public void setSyncToStaticListing(boolean sync) {
-		if (!isMainListing) {
+		if (!isMainListing()) {
 			throw new IllegalStateException(
 				"Only the main dynamic listing can be synced to the main static listing");
 		}
@@ -898,7 +908,7 @@ public class DebuggerListingProvider extends CodeViewerProvider {
 	}
 
 	public void setFollowsCurrentThread(boolean follows) {
-		if (isMainListing) {
+		if (isMainListing()) {
 			throw new IllegalStateException(
 				"The main dynamic listing always follows the current trace and thread");
 		}
@@ -977,7 +987,7 @@ public class DebuggerListingProvider extends CodeViewerProvider {
 
 	public void staticProgramLocationChanged(ProgramLocation location) {
 		TraceProgramView view = current.getView(); // NB. Used for snap (don't want emuSnap)
-		if (!syncToStaticListing || view == null || location == null) {
+		if (!isSyncToStaticListing() || view == null || location == null) {
 			return;
 		}
 		ProgramLocation dyn = mappingService.getDynamicLocationFromStatic(view, location);

@@ -407,14 +407,14 @@ class SymbolServerPanel extends JPanel {
 		String[] envParts = envString.split("[*;]");
 		List<String> results = new ArrayList<>();
 		Set<String> locationStringDeduplicationSet = new HashSet<>();
-        for (String envPart : envParts) {
-            String locationString = envPart.trim();
-            if (!locationString.isBlank() && !"srv".equalsIgnoreCase(locationString) &&
-                    !locationStringDeduplicationSet.contains(locationString)) {
-                results.add(locationString);
-                locationStringDeduplicationSet.add(locationString);
-            }
-        }
+		for (int i = 0; i < envParts.length; i++) {
+			String locationString = envParts[i].trim();
+			if (!locationString.isBlank() && !locationString.equalsIgnoreCase("srv") &&
+				!locationStringDeduplicationSet.contains(locationString)) {
+				results.add(locationString);
+				locationStringDeduplicationSet.add(locationString);
+			}
+		}
 
 		return results;
 	}

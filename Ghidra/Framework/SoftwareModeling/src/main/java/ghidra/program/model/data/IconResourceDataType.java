@@ -29,7 +29,7 @@ public class IconResourceDataType extends BitmapResourceDataType {
 			IconResourceDataType.class.getName());
 	}
 
-	private static final long serialVersionUID = 1;
+	private final static long serialVersionUID = 1;
 
 	public IconResourceDataType() {
 		this(null, "IconResource", null);

@@ -97,34 +97,35 @@ class ComponentNode extends Node {
 
 		int topIndex = Integer.parseInt(elem.getAttributeValue("TOP_INFO"));
 
-        for (Object o : elem.getChildren()) {
-            Element e = (Element) o;
-            String name = e.getAttributeValue("NAME");
-            String owner = e.getAttributeValue("OWNER");
-            String title = e.getAttributeValue("TITLE");
-            String group = e.getAttributeValue("GROUP");
-            if (group == null || group.trim().isEmpty()) {
-                group = ComponentProvider.DEFAULT_WINDOW_GROUP;
-            }
+		Iterator<?> it = elem.getChildren().iterator();
+		while (it.hasNext()) {
+			Element e = (Element) it.next();
+			String name = e.getAttributeValue("NAME");
+			String owner = e.getAttributeValue("OWNER");
+			String title = e.getAttributeValue("TITLE");
+			String group = e.getAttributeValue("GROUP");
+			if (group == null || group.trim().isEmpty()) {
+				group = ComponentProvider.DEFAULT_WINDOW_GROUP;
+			}
 
-            boolean isActive = Boolean.valueOf(e.getAttributeValue("ACTIVE")).booleanValue();
+			boolean isActive = Boolean.valueOf(e.getAttributeValue("ACTIVE")).booleanValue();
 
-            long uniqueID = getUniqueID(e, 0);
+			long uniqueID = getUniqueID(e, 0);
 
-            String mappedOwner = ComponentProvider.getMappedOwner(owner, name);
-            if (mappedOwner != null) {
-                name = ComponentProvider.getMappedName(owner, name);
-                owner = mappedOwner;
-            }
+			String mappedOwner = ComponentProvider.getMappedOwner(owner, name);
+			if (mappedOwner != null) {
+				name = ComponentProvider.getMappedName(owner, name);
+				owner = mappedOwner;
+			}
 
-            ComponentPlaceholder placeholder =
-                    new ComponentPlaceholder(name, owner, group, title, isActive, this, uniqueID);
+			ComponentPlaceholder placeholder =
+				new ComponentPlaceholder(name, owner, group, title, isActive, this, uniqueID);
 
-            if (!containsPlaceholder(placeholder)) {
-                windowPlaceholders.add(placeholder);
-                restoredPlaceholders.add(placeholder);
-            }
-        }
+			if (!containsPlaceholder(placeholder)) {
+				windowPlaceholders.add(placeholder);
+				restoredPlaceholders.add(placeholder);
+			}
+		}
 		if (topIndex >= 0 && topIndex < windowPlaceholders.size()) {
 			top = windowPlaceholders.get(topIndex);
 		}
@@ -250,11 +251,13 @@ class ComponentNode extends Node {
 	@Override
 	void close() {
 		List<ComponentPlaceholder> list = new ArrayList<>(windowPlaceholders);
-        for (ComponentPlaceholder placeholder : list) {
-            if (placeholder.isShowing()) {
-                placeholder.close();
-            }
-        }
+		Iterator<ComponentPlaceholder> it = list.iterator();
+		while (it.hasNext()) {
+			ComponentPlaceholder placeholder = it.next();
+			if (placeholder.isShowing()) {
+				placeholder.close();
+			}
+		}
 	}
 
 	@Override
@@ -461,17 +464,20 @@ class ComponentNode extends Node {
 			}
 		}
 		root.setAttribute("TOP_INFO", "" + topIndex);
-        for (ComponentPlaceholder placeholder : windowPlaceholders) {
+		Iterator<ComponentPlaceholder> it = windowPlaceholders.iterator();
+		while (it.hasNext()) {
 
-            Element elem = new Element("COMPONENT_INFO");
-            elem.setAttribute("NAME", placeholder.getName());
-            elem.setAttribute("OWNER", placeholder.getOwner());
-            elem.setAttribute("TITLE", placeholder.getTitle());
-            elem.setAttribute("ACTIVE", "" + placeholder.isShowing());
-            elem.setAttribute("GROUP", placeholder.getGroup());
-            elem.setAttribute("INSTANCE_ID", Long.toString(placeholder.getInstanceID()));
-            root.addContent(elem);
-        }
+			ComponentPlaceholder placeholder = it.next();
+
+			Element elem = new Element("COMPONENT_INFO");
+			elem.setAttribute("NAME", placeholder.getName());
+			elem.setAttribute("OWNER", placeholder.getOwner());
+			elem.setAttribute("TITLE", placeholder.getTitle());
+			elem.setAttribute("ACTIVE", "" + placeholder.isShowing());
+			elem.setAttribute("GROUP", placeholder.getGroup());
+			elem.setAttribute("INSTANCE_ID", Long.toString(placeholder.getInstanceID()));
+			root.addContent(elem);
+		}
 		return root;
 	}
 

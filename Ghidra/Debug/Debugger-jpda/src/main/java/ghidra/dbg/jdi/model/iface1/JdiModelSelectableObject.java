@@ -21,6 +21,6 @@ import ghidra.dbg.jdi.model.iface2.JdiModelTargetObject;
 
 public interface JdiModelSelectableObject extends JdiModelTargetObject {
 
-	CompletableFuture<Void> setActive();
+	public CompletableFuture<Void> setActive();
 
 }

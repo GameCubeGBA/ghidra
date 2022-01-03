@@ -121,8 +121,11 @@ public abstract class AbstractDBTraceSymbol extends DBAnnotatedObject
 		if (!this.getAddress().equals(that.getAddress())) {
 			return false;
 		}
-        return Objects.equals(this.getParentSymbol(), that.getParentSymbol());
-    }
+		if (!Objects.equals(this.getParentSymbol(), that.getParentSymbol())) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public int hashCode() {

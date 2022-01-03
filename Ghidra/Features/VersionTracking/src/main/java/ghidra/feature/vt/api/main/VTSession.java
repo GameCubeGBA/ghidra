@@ -36,7 +36,7 @@ public interface VTSession extends ErrorHandler, UndoableDomainObject {
 	 * Returns the AssociationManager.
 	 * @return the AssociationManager.
 	 */
-    VTAssociationManager getAssociationManager();
+	public VTAssociationManager getAssociationManager();
 
 	/**
 	 * Creates a new VTMatchSet that will contain all the matches discovered by some 
@@ -45,102 +45,102 @@ public interface VTSession extends ErrorHandler, UndoableDomainObject {
 	 * be added to this VTMatchSet.
 	 * @return A new VTMatchSet that can be used to store VTMatch objects.
 	 */
-    VTMatchSet createMatchSet(VTProgramCorrelator correlator);
+	public VTMatchSet createMatchSet(VTProgramCorrelator correlator);
 
 	/**
 	 * Returns a list of all VTMatchSets contained in this VTSession
 	 * @return a list of all VTMatchSets contained in this VTSession
 	 */
-    List<VTMatchSet> getMatchSets();
+	public List<VTMatchSet> getMatchSets();
 
 	/**
 	 * Returns the source program associated with this VTSession.
 	 * @return the source program associated with this VTSession.
 	 */
-    Program getSourceProgram();
+	public Program getSourceProgram();
 
 	/**
 	 * Returns the destination program associated with this VTSession.
 	 * @return the destination program associated with this VTSession.
 	 */
-    Program getDestinationProgram();
+	public Program getDestinationProgram();
 
 	/**
 	 * Returns the name of this VTSession
 	 * @return the name of this VTSession
 	 */
-    String getName();
+	public String getName();
 
 	/**
 	 * Saves this VTSession.
 	 * @throws IOException
 	 */
-    void save() throws IOException;
+	public void save() throws IOException;
 
 	/**
 	 * Adds a DomainObjectListener to this VTSession.
 	 * @param domainObjectListener the listener to add.
 	 */
-    void addListener(DomainObjectListener domainObjectListener);
+	public void addListener(DomainObjectListener domainObjectListener);
 
 	/**
 	 * Removes a DomainObjectListener from this VTSession.
 	 * @param domainObjectListener the listener to remove.
 	 */
-    void removeListener(DomainObjectListener domainObjectListener);
+	public void removeListener(DomainObjectListener domainObjectListener);
 
 	/**
 	 * Creates a new match tag with the given name.
 	 * @param name the name of the new tag to create.
 	 * @return the new VTMatchTag object.
 	 */
-    VTMatchTag createMatchTag(String name);
+	public VTMatchTag createMatchTag(String name);
 
 	/**
 	 * Deletes the given VTMatchTag from this session.
 	 * @param tag the VTMatchTag to delete.
 	 */
-    void deleteMatchTag(VTMatchTag tag);
+	public void deleteMatchTag(VTMatchTag tag);
 
 	/**
 	 * Returns a set of all VTMatchTags in this session.
 	 * @return a set of all VTMatchTags in this session.
 	 */
-    Set<VTMatchTag> getMatchTags();
+	public Set<VTMatchTag> getMatchTags();
 
 	/**
 	 * Returns the built-in VTMatchSet used to store manually created VTMatches.
 	 * @return the built-in VTMatchSet used to store manually created VTMatches.
 	 */
-    VTMatchSet getManualMatchSet();
+	public VTMatchSet getManualMatchSet();
 
 	/**
 	 * Returns the built-in VTMatchSet used to store implied VTMatches.
 	 * @return the built-in VTMatchSet used to store implied VTMatches.
 	 */
-    VTMatchSet getImpliedMatchSet();
+	public VTMatchSet getImpliedMatchSet();
 
 	/**
 	 * Returns a list of all VTMatches for the given association.
 	 * @param association the VTAssociation for which to retrieve all VTMatches.
 	 * @return a list of all VTMatches for the given association.
 	 */
-    List<VTMatch> getMatches(VTAssociation association);
+	public List<VTMatch> getMatches(VTAssociation association);
 
 	/**
 	 * Adds an Association hook that will be called whenever an association is accepted or cleared.
 	 * @param hook the callback hook.
 	 */
-    void addAssociationHook(AssociationHook hook);
+	public void addAssociationHook(AssociationHook hook);
 
 	/**
 	 * Removes the given Association hook.
 	 * @param hook the callback hook to remove.
 	 */
-    void removeAssociationHook(AssociationHook hook);
+	public void removeAssociationHook(AssociationHook hook);
 
-	void updateSourceProgram(Program newProgram);
+	public void updateSourceProgram(Program newProgram);
 
-	void updateDestinationProgram(Program newProgram);
+	public void updateDestinationProgram(Program newProgram);
 
 }

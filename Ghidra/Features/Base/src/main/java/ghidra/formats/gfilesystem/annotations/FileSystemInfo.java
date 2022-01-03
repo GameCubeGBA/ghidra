@@ -64,9 +64,9 @@ public @interface FileSystemInfo {
 	 */
 	int priority() default PRIORITY_DEFAULT;
 
-	int PRIORITY_DEFAULT = 0;
-	int PRIORITY_HIGH = 10;
-	int PRIORITY_LOW = -10;
-	int PRIORITY_LOWEST = Integer.MIN_VALUE;
+	public static final int PRIORITY_DEFAULT = 0;
+	public static final int PRIORITY_HIGH = 10;
+	public static final int PRIORITY_LOW = -10;
+	public static final int PRIORITY_LOWEST = Integer.MIN_VALUE;
 
 }

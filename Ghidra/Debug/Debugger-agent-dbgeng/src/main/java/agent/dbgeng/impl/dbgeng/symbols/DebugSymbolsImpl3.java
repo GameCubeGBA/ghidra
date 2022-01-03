@@ -90,9 +90,9 @@ public class DebugSymbolsImpl3 extends DebugSymbolsImpl2 {
 		COMUtils.checkRC(jnaSymbols.GetSymbolEntriesByNameWide(wsPattern, new ULONG(0), aIds,
 			pulEntries.getValue(), null));
 		List<DebugSymbolId> result = new ArrayList<>(aIds.length);
-        for (DEBUG_MODULE_AND_ID aId : aIds) {
-            result.add(new DebugSymbolId(aId.ModuleBase.longValue(), aId.Id.longValue()));
-        }
+		for (int i = 0; i < aIds.length; i++) {
+			result.add(new DebugSymbolId(aIds[i].ModuleBase.longValue(), aIds[i].Id.longValue()));
+		}
 		return result;
 	}
 

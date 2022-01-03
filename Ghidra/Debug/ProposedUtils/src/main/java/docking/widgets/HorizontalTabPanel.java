@@ -101,7 +101,8 @@ public class HorizontalTabPanel<T> extends JPanel {
 	}
 
 	public HorizontalTabPanel() {
-        setLayout(new BorderLayout());
+		super();
+		setLayout(new BorderLayout());
 		list.setBackground(getBackground());
 		add(scroll, BorderLayout.CENTER);
 		add(left, BorderLayout.WEST);

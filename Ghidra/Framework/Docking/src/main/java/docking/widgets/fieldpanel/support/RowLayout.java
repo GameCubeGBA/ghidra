@@ -171,7 +171,7 @@ public class RowLayout implements Layout {
 			return;
 		}
 		g.setColor(fieldBackgroundColor);
-		g.fillRect(fields[fieldNum].getStartX(), -heightAbove, fields[fieldNum].getWidth(),
+		g.fillRect(fields[fieldNum].getStartX(), -getHeightAbove(), fields[fieldNum].getWidth(),
 			getHeight());
 	}
 
@@ -370,8 +370,11 @@ public class RowLayout implements Layout {
 
 	@Override
 	public boolean contains(int yPos) {
-        return (yPos >= 0) && (yPos < heightAbove + heightBelow);
-    }
+		if ((yPos >= 0) && (yPos < heightAbove + heightBelow)) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Finds the most appropriate field to place the cursor for the given horizontal

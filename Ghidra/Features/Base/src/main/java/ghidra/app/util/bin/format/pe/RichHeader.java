@@ -31,9 +31,9 @@ import ghidra.util.DataConverter;
  */
 public class RichHeader implements StructConverter, Writeable {
 
-	public static final int IMAGE_RICH_SIGNATURE = 0x68636952; // Rich
-	public static final int IMAGE_DANS_SIGNATURE = 0x536E6144; // DanS
-	public static final String NAME = "IMAGE_RICH_HEADER";
+	public final static int IMAGE_RICH_SIGNATURE = 0x68636952; // Rich
+	public final static int IMAGE_DANS_SIGNATURE = 0x536E6144; // DanS
+	public final static String NAME = "IMAGE_RICH_HEADER";
 
 	private FactoryBundledWithBinaryReader reader;
 	private RichTable table;

@@ -62,66 +62,66 @@ public class VTableIDebugEventCallbacks extends Structure {
 		return FIELDS;
 	}
 
-	public interface GetInterestMaskCallback extends StdCallLibrary.StdCallCallback {
+	public static interface GetInterestMaskCallback extends StdCallLibrary.StdCallCallback {
 		HRESULT invoke(Pointer thisPointer, ULONGByReference Mask);
 	}
 
-	public interface BreakpointCallback extends StdCallLibrary.StdCallCallback {
+	public static interface BreakpointCallback extends StdCallLibrary.StdCallCallback {
 		HRESULT invoke(Pointer thisPointer, WrapIDebugBreakpoint.ByReference Bp);
 	}
 
-	public interface ExceptionCallback extends StdCallLibrary.StdCallCallback {
+	public static interface ExceptionCallback extends StdCallLibrary.StdCallCallback {
 		HRESULT invoke(Pointer thisPointer, EXCEPTION_RECORD64.ByReference Exception,
 				ULONG FirstChance);
 	}
 
-	public interface CreateThreadCallback extends StdCallLibrary.StdCallCallback {
+	public static interface CreateThreadCallback extends StdCallLibrary.StdCallCallback {
 		HRESULT invoke(Pointer thisPointer, ULONGLONG Handle, ULONGLONG DataOffset,
 				ULONGLONG StartOffset);
 	}
 
-	public interface ExitThreadCallback extends StdCallLibrary.StdCallCallback {
+	public static interface ExitThreadCallback extends StdCallLibrary.StdCallCallback {
 		HRESULT invoke(Pointer thisPointer, ULONG ExitCode);
 	}
 
-	public interface CreateProcessCallback extends StdCallLibrary.StdCallCallback {
+	public static interface CreateProcessCallback extends StdCallLibrary.StdCallCallback {
 		HRESULT invoke(Pointer thisPointer, ULONGLONG ImageFileHandle, ULONGLONG Handle,
 				ULONGLONG BaseOffset, ULONG ModuleSize, String ModuleName, String ImageName,
 				ULONG CheckSum, ULONG TimeDateStamp, ULONGLONG InitialThreadHandle,
 				ULONGLONG ThreadDataOffset, ULONGLONG StartOffset);
 	}
 
-	public interface ExitProcessCallback extends StdCallLibrary.StdCallCallback {
+	public static interface ExitProcessCallback extends StdCallLibrary.StdCallCallback {
 		HRESULT invoke(Pointer thisPointer, ULONG ExitCode);
 	}
 
-	public interface LoadModuleCallback extends StdCallLibrary.StdCallCallback {
+	public static interface LoadModuleCallback extends StdCallLibrary.StdCallCallback {
 		HRESULT invoke(Pointer thisPointer, ULONGLONG ImageFileHandle, ULONGLONG BaseOffset,
 				ULONG ModuleSize, String ModuleName, String ImageName, ULONG CheckSum,
 				ULONG TimeDateStamp);
 	}
 
-	public interface UnloadModuleCallback extends StdCallLibrary.StdCallCallback {
+	public static interface UnloadModuleCallback extends StdCallLibrary.StdCallCallback {
 		HRESULT invoke(Pointer thisPointer, String ImageBaseName, ULONGLONG BaseOffset);
 	}
 
-	public interface SystemErrorCallback extends StdCallLibrary.StdCallCallback {
+	public static interface SystemErrorCallback extends StdCallLibrary.StdCallCallback {
 		HRESULT invoke(Pointer thisPointer, ULONG Error, ULONG Level);
 	}
 
-	public interface SessionStatusCallback extends StdCallLibrary.StdCallCallback {
+	public static interface SessionStatusCallback extends StdCallLibrary.StdCallCallback {
 		HRESULT invoke(Pointer thisPointer, ULONG Status);
 	}
 
-	public interface ChangeDebuggeeStateCallback extends StdCallLibrary.StdCallCallback {
+	public static interface ChangeDebuggeeStateCallback extends StdCallLibrary.StdCallCallback {
 		HRESULT invoke(Pointer thisPointer, ULONG Flags, ULONGLONG Argument);
 	}
 
-	public interface ChangeEngineStateCallback extends StdCallLibrary.StdCallCallback {
+	public static interface ChangeEngineStateCallback extends StdCallLibrary.StdCallCallback {
 		HRESULT invoke(Pointer thisPointer, ULONG Flags, ULONGLONG Argument);
 	}
 
-	public interface ChangeSymbolStateCallback extends StdCallLibrary.StdCallCallback {
+	public static interface ChangeSymbolStateCallback extends StdCallLibrary.StdCallCallback {
 		HRESULT invoke(Pointer thisPointer, ULONG Flags, ULONGLONG Argument);
 	}
 }

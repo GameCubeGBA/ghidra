@@ -30,21 +30,21 @@ public interface DwarfEHDecoder {
 	 * 
 	 * @return the data decoding format
 	 */
-    DwarfEHDataDecodeFormat getDataFormat();
+	public DwarfEHDataDecodeFormat getDataFormat();
 
 	/**
 	 * Gets the data application mode.
 	 * 
 	 * @return the data application mode
 	 */
-    DwarfEHDataApplicationMode getDataApplicationMode();
+	public DwarfEHDataApplicationMode getDataApplicationMode();
 
 	/**
 	 * Whether or not this decoder is for decoding signed or unsigned data.
 	 * 
 	 * @return true if the decoder is for signed data. false for unsigned
 	 */
-    boolean isSigned();
+	public boolean isSigned();
 
 	/**
 	 * Gets the size of the encoded data.
@@ -52,7 +52,7 @@ public interface DwarfEHDecoder {
 	 * @param program the program containing the data to be decoded.
 	 * @return the size of the encoded data
 	 */
-    int getDecodeSize(Program program);
+	public int getDecodeSize(Program program);
 
 	/**
 	 * Decodes an integer value which is indicated by the context.
@@ -61,7 +61,7 @@ public interface DwarfEHDecoder {
 	 * @return the value
 	 * @throws MemoryAccessException if the data can't be read
 	 */
-    long decode(DwarfDecodeContext context) throws MemoryAccessException;
+	public long decode(DwarfDecodeContext context) throws MemoryAccessException;
 
 	/**
 	 * Decodes the address which is indicated by the context.
@@ -70,7 +70,7 @@ public interface DwarfEHDecoder {
 	 * @return the address
 	 * @throws MemoryAccessException if the data can't be read
 	 */
-    Address decodeAddress(DwarfDecodeContext context) throws MemoryAccessException;
+	public Address decodeAddress(DwarfDecodeContext context) throws MemoryAccessException;
 
 	/**
 	 * Gets this decoder's encoded data type.
@@ -78,5 +78,5 @@ public interface DwarfEHDecoder {
 	 * @param program the program containing the data to be decoded.
 	 * @return the data type.
 	 */
-    DataType getDataType(Program program);
+	public DataType getDataType(Program program);
 }

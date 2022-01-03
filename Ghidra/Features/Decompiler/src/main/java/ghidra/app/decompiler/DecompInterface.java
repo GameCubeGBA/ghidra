@@ -89,7 +89,12 @@ public class DecompInterface {
 	protected DecompileProcess decompProcess;
 	protected DecompileCallback decompCallback;
 	private DecompileDebug debug;
-	protected CancelledListener monitorListener = () -> stopProcess();
+	protected CancelledListener monitorListener = new CancelledListener() {
+		@Override
+		public void cancelled() {
+			stopProcess();
+		}
+	};
 
 	// Initialization state
 	private String actionname; // Name of simplification action
@@ -163,13 +168,17 @@ public class DecompInterface {
 	}
 
 	private boolean isErrorMessage() {
-		if (decompileMessage == null || decompileMessage.isEmpty()) {
+		if (decompileMessage == null || decompileMessage.length() == 0) {
 			return false;
 		}
 
 		// do not count warning messages as error messages
-        return !decompileMessage.toLowerCase().contains("warning");
-    }
+		if (decompileMessage.toLowerCase().contains("warning")) {
+			return false;
+		}
+
+		return true;
+	}
 
 	private static String fileToString(ResourceFile file) throws IOException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream()));
@@ -218,50 +227,50 @@ public class DecompInterface {
 		decompCallback.setNativeMessage(null);
 		decompProcess.registerProgram(decompCallback, pspecxml, cspecxml, tspec, coretypes);
 		String nativeMessage = decompCallback.getNativeMessage();
-		if ((nativeMessage != null) && (!nativeMessage.isEmpty())) {
+		if ((nativeMessage != null) && (nativeMessage.length() != 0)) {
 			throw new IOException("Could not register program: " + nativeMessage);
 		}
 		if (xmlOptions != null) {
 			decompProcess.setMaxResultSize(xmlOptions.getMaxPayloadMBytes());
-			if (!"t"
-					.equals(decompProcess.sendCommand1Param("setOptions", xmlOptions.getXML(this))
-                            .toString())) {
+			if (!decompProcess.sendCommand1Param("setOptions", xmlOptions.getXML(this))
+					.toString()
+					.equals("t")) {
 				throw new IOException("Did not accept decompiler options");
 			}
 		}
 		if (actionname == null) {
 			throw new IOException("Decompile action not specified");
 		}
-		if (!"decompile".equals(actionname)) {
-			if (!"t"
-					.equals(decompProcess.sendCommand2Params("setAction", actionname, "")
-                            .toString())) {
+		if (!actionname.equals("decompile")) {
+			if (!decompProcess.sendCommand2Params("setAction", actionname, "")
+					.toString()
+					.equals("t")) {
 				throw new IOException("Could not set decompile action");
 			}
 		}
 		if (!printSyntaxTree) {
-			if (!"t"
-					.equals(decompProcess.sendCommand2Params("setAction", "", "notree")
-                            .toString())) {
+			if (!decompProcess.sendCommand2Params("setAction", "", "notree")
+					.toString()
+					.equals("t")) {
 				throw new IOException("Could not turn off syntax tree");
 			}
 		}
 		if (!printCCode) {
-			if (!"t".equals(decompProcess.sendCommand2Params("setAction", "", "noc").toString())) {
+			if (!decompProcess.sendCommand2Params("setAction", "", "noc").toString().equals("t")) {
 				throw new IOException("Could not turn off C printing");
 			}
 		}
 		if (sendParamMeasures) {
-			if (!"t"
-					.equals(decompProcess.sendCommand2Params("setAction", "", "parammeasures")
-                            .toString())) {
+			if (!decompProcess.sendCommand2Params("setAction", "", "parammeasures")
+					.toString()
+					.equals("t")) {
 				throw new IOException("Could not turn on sending of parameter measures");
 			}
 		}
 		if (jumpLoad) {
-			if (!"t"
-					.equals(decompProcess.sendCommand2Params("setAction", "", "jumpload")
-                            .toString())) {
+			if (!decompProcess.sendCommand2Params("setAction", "", "jumpload")
+					.toString()
+					.equals("t")) {
 				throw new IOException("Could not turn on jumptable loads");
 			}
 		}
@@ -405,9 +414,9 @@ public class DecompInterface {
 		}
 		try {
 			verifyProcess();
-			return "t"
-					.equals(decompProcess.sendCommand2Params("setAction", actionstring, "")
-                            .toString());
+			return decompProcess.sendCommand2Params("setAction", actionstring, "")
+					.toString()
+					.equals("t");
 		}
 		catch (IOException e) {
 			// don't care
@@ -443,9 +452,9 @@ public class DecompInterface {
 		String printstring = val ? "tree" : "notree";
 		try {
 			verifyProcess();
-			return "t"
-					.equals(decompProcess.sendCommand2Params("setAction", "", printstring)
-                            .toString());
+			return decompProcess.sendCommand2Params("setAction", "", printstring)
+					.toString()
+					.equals("t");
 		}
 		catch (IOException e) {
 			// don't care
@@ -482,9 +491,9 @@ public class DecompInterface {
 		String printstring = val ? "c" : "noc";
 		try {
 			verifyProcess();
-			return "t"
-					.equals(decompProcess.sendCommand2Params("setAction", "", printstring)
-                            .toString());
+			return decompProcess.sendCommand2Params("setAction", "", printstring)
+					.toString()
+					.equals("t");
 		}
 		catch (IOException e) {
 			// don't care
@@ -520,9 +529,9 @@ public class DecompInterface {
 		String printstring = val ? "parammeasures" : "noparammeasures";
 		try {
 			verifyProcess();
-			return "t"
-					.equals(decompProcess.sendCommand2Params("setAction", "", printstring)
-                            .toString());
+			return decompProcess.sendCommand2Params("setAction", "", printstring)
+					.toString()
+					.equals("t");
 		}
 		catch (IOException e) {
 			// don't care
@@ -551,9 +560,9 @@ public class DecompInterface {
 		String jumpstring = val ? "jumpload" : "nojumpload";
 		try {
 			verifyProcess();
-			return "t"
-					.equals(decompProcess.sendCommand2Params("setAction", "", jumpstring)
-                            .toString());
+			return decompProcess.sendCommand2Params("setAction", "", jumpstring)
+					.toString()
+					.equals("t");
 		}
 		catch (IOException e) {
 			// don't care
@@ -589,9 +598,9 @@ public class DecompInterface {
 		try {
 			verifyProcess();
 			decompProcess.setMaxResultSize(xmlOptions.getMaxPayloadMBytes());
-			return "t"
-					.equals(decompProcess.sendCommand1Param("setOptions", xmloptions.getXML(this))
-                            .toString());
+			return decompProcess.sendCommand1Param("setOptions", xmloptions.getXML(this))
+					.toString()
+					.equals("t");
 		}
 		catch (IOException e) {
 			// don't care

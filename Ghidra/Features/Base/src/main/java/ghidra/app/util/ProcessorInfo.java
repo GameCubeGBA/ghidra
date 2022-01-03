@@ -24,42 +24,42 @@ public interface ProcessorInfo {
 	/**
 	 * The default address space in a program.
 	 */
-    String DEFAULT_SPACE = "MEM";
+	public static final String DEFAULT_SPACE = "MEM";
 	/**
 	 * The code space in a program.
 	 */
-    String CODE_SPACE = "CODE";
+	public static final String CODE_SPACE = "CODE";
 	/**
 	 * The internal memory space in a program.
 	 */
-    String INTMEM_SPACE = "INTMEM";
+	public static final String INTMEM_SPACE = "INTMEM";
 	/**
 	 * The bit space in a program.
 	 */
-    String BIT_SPACE = "BITS";
+	public static final String BIT_SPACE = "BITS";
 	/**
 	 * The external memory space in a program.
 	 */
-    String EXTMEM_SPACE = "EXTMEM";
+	public static final String EXTMEM_SPACE = "EXTMEM";
 	/**
 	 * The Special function registers space in a program
 	 */
-    String SFR_SPACE = "SFR";
+	public static final String SFR_SPACE = "SFR";
 	
 	/**
 	 * ID for the CODE_SPACE.
 	 */
-    int CODE_SPACE_ID = 0;
+	public static final int CODE_SPACE_ID = 0;
 	/**
 	 * ID for the INTMEM_SPACE.
 	 */
-    int INTMEM_SPACE_ID = 3;
+	public static final int INTMEM_SPACE_ID = 3;
 	/**
 	 * ID for the SFR_SPACE.
 	 */
-    int SFR_SPACE_ID = 4;
+	public static final int SFR_SPACE_ID = 4;
 	/**
 	 * ID for the EXTMEM_SPACE.
 	 */
-    int EXTMEM_SPACE_ID = 8;
+	public static final int EXTMEM_SPACE_ID = 8;
 }

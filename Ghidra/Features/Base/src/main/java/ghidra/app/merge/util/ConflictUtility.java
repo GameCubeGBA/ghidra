@@ -88,7 +88,9 @@ public class ConflictUtility {
 	 */
 	public static String spaces(int num) {
 		StringBuffer buf = new StringBuffer(6 * num);
-        buf.append("&nbsp;".repeat(Math.max(0, num)));
+		for (int i = 0; i < num; i++) {
+			buf.append("&nbsp;");
+		}
 		return buf.toString();
 	}
 

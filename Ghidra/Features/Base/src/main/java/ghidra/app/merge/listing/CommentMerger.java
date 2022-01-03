@@ -44,7 +44,7 @@ import javax.swing.event.ChangeListener;
  */
 class CommentMerger extends AbstractListingMerger {
 
-	static final String COMMENTS_PHASE = "Comments";
+	final static String COMMENTS_PHASE = "Comments";
 	private int programMergeType;
 
 	private AddressSet conflictPlate;
@@ -405,44 +405,50 @@ class CommentMerger extends AbstractListingMerger {
 		this.programMergeType = programMergeCommentType;
 		this.currentMonitor = monitor;
 		try {
-			final ChangeListener changeListener = e -> {
-                conflictOption = conflictPanel.getSelectedOptions();
-                if (conflictOption == ASK_USER) {
-                    if (mergeManager != null) {
-                        mergeManager.setApplyEnabled(false);
-                        try {
-                            merge(addr, programMergeCommentType, KEEP_LATEST, currentMonitor);
-                        }
-                        catch (CancelledException ce) {
-                        }
-                    }
-                    return;
-                }
-                if (mergeManager != null) {
-                    mergeManager.clearStatusText();
-                }
-                try {
-                    merge(addr, programMergeCommentType, conflictOption, currentMonitor);
-                }
-                catch (CancelledException ce) {
-                }
-                if (mergeManager != null) {
-                    mergeManager.setApplyEnabled(true);
-                }
-            };
-			SwingUtilities.invokeAndWait(() -> {
-                setupConflictsPanel(listingPanel, CommentMerger.this.currentAddress,
-                    CommentMerger.this.programMergeType, changeListener);
-                listingPanel.setBottomComponent(conflictPanel);
-            });
-			SwingUtilities.invokeLater(() -> {
-                Address addressToShow = CommentMerger.this.currentAddress;
-                listingPanel.clearAllBackgrounds();
-                if (addressToShow != null) {
-                    listingPanel.paintAllBackgrounds(getCodeUnitAddressSet(addressToShow));
-                    listingPanel.goTo(addressToShow);
-                }
-            });
+			final ChangeListener changeListener = new ChangeListener() {
+				public void stateChanged(ChangeEvent e) {
+					conflictOption = conflictPanel.getSelectedOptions();
+					if (conflictOption == ASK_USER) {
+						if (mergeManager != null) {
+							mergeManager.setApplyEnabled(false);
+							try {
+								merge(addr, programMergeCommentType, KEEP_LATEST, currentMonitor);
+							}
+							catch (CancelledException ce) {
+							}
+						}
+						return;
+					}
+					if (mergeManager != null) {
+						mergeManager.clearStatusText();
+					}
+					try {
+						merge(addr, programMergeCommentType, conflictOption, currentMonitor);
+					}
+					catch (CancelledException ce) {
+					}
+					if (mergeManager != null) {
+						mergeManager.setApplyEnabled(true);
+					}
+				}
+			};
+			SwingUtilities.invokeAndWait(new Runnable() {
+				public void run() {
+					setupConflictsPanel(listingPanel, CommentMerger.this.currentAddress,
+						CommentMerger.this.programMergeType, changeListener);
+					listingPanel.setBottomComponent(conflictPanel);
+				}
+			});
+			SwingUtilities.invokeLater(new Runnable() {
+				public void run() {
+					Address addressToShow = CommentMerger.this.currentAddress;
+					listingPanel.clearAllBackgrounds();
+					if (addressToShow != null) {
+						listingPanel.paintAllBackgrounds(getCodeUnitAddressSet(addressToShow));
+						listingPanel.goTo(addressToShow);
+					}
+				}
+			});
 		}
 		catch (InterruptedException e) {
 		}

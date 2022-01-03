@@ -125,7 +125,9 @@ class IndexFieldFactory {
 		int nchars = width / charWidth;
 		if (indexMap != null) {
 			StringBuffer sb = new StringBuffer();
-            sb.append(".".repeat(Math.max(0, nchars)));
+			for (int i = 0; i < nchars; i++) {
+				sb.append(".");
+			}
 			noValueStr = sb.toString();
 		}
 	}

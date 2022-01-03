@@ -18,9 +18,12 @@ package ghidra.app.plugin.core.diff;
 /** A simple listener to allow signalling when a diff tasks starts and ends */
 public interface DiffTaskListener {
 
-	DiffTaskListener NULL_LISTENER = inProgress -> {
-        // no-op
-    };
+	public static DiffTaskListener NULL_LISTENER = new DiffTaskListener() {
+		@Override
+		public void taskInProgress(boolean inProgress) {
+			// no-op
+		}
+	};
 
-	void taskInProgress(boolean inProgress);
+	public void taskInProgress(boolean inProgress);
 }

@@ -32,7 +32,7 @@ public final class MachoRelocationHandlerFactory {
 	 *   that is defined by the given Mach-O header.  Could return null if no such handler was
 	 *   found.
 	 */
-    public static final MachoRelocationHandler getHandler(MachHeader header) {
+	public final static MachoRelocationHandler getHandler(MachHeader header) {
 		return ClassSearcher.getInstances(MachoRelocationHandler.class)
 				.stream()
 				.filter(h -> h.canRelocate(header))

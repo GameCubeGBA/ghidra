@@ -163,13 +163,13 @@ public class AnalyzeHeadless implements GhidraLaunchable {
 				// Already processed
 				argi++;
 			}
-			else if ("-overwrite".equalsIgnoreCase(arg)) {
+			else if (arg.equalsIgnoreCase("-overwrite")) {
 				options.enableOverwriteOnConflict(true);
 			}
-			else if ("-noanalysis".equalsIgnoreCase(arg)) {
+			else if (arg.equalsIgnoreCase("-noanalysis")) {
 				options.enableAnalysis(false);
 			}
-			else if ("-deleteproject".equalsIgnoreCase(arg)) {
+			else if (arg.equalsIgnoreCase("-deleteproject")) {
 				options.setDeleteCreatedProjectOnClose(true);
 			}
 			else if (checkArgument("-loader", args, argi)) {
@@ -269,7 +269,7 @@ public class AnalyzeHeadless implements GhidraLaunchable {
 						keystore.getAbsolutePath() + " is not a valid keystore file.");
 				}
 			}
-			else if ("-p".equalsIgnoreCase(arg)) {
+			else if (arg.equalsIgnoreCase("-p")) {
 				allowPasswordPrompt = true;
 			}
 			else if ("-analysisTimeoutPerFile".equalsIgnoreCase(args[argi])) {
@@ -338,7 +338,7 @@ public class AnalyzeHeadless implements GhidraLaunchable {
 		// only if there are scripts to be run.
 		if (options.runScriptsNoImport) {
 
-			if (filesToImport != null && !filesToImport.isEmpty()) {
+			if (filesToImport != null && filesToImport.size() > 0) {
 				System.err.print("Must use either -process or -import parameters, but not both.");
 				System.err.print(" -process runs scripts over existing program(s) in a project, " +
 					"whereas -import");
@@ -360,7 +360,7 @@ public class AnalyzeHeadless implements GhidraLaunchable {
 			}
 		}
 		else {
-			if (filesToImport == null || filesToImport.isEmpty()) {
+			if (filesToImport == null || filesToImport.size() == 0) {
 				if (options.preScripts.isEmpty() && options.postScripts.isEmpty()) {
 					System.err.println("Nothing to do ... must specify -import, -process, or " +
 						"prescript and/or postscript.");

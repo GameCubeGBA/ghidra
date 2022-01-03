@@ -23,7 +23,7 @@ import ghidra.program.model.mem.MemBuffer;
 import ghidra.program.model.mem.MemoryAccessException;
 
 public class AlignmentDataType extends BuiltIn implements Dynamic {
-	private static final long serialVersionUID = 1;
+	private final static long serialVersionUID = 1;
 
 	private static final int MAX_LENGTH = 1024;
 

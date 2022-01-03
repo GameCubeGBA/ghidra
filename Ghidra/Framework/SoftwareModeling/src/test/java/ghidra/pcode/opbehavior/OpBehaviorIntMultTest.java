@@ -25,7 +25,8 @@ import ghidra.pcode.utils.Utils;
 public class OpBehaviorIntMultTest extends AbstractOpBehaviorTest {
 
 	public OpBehaviorIntMultTest() {
-    }
+		super();
+	}
 
 	@Test
     public void testEvaluateBinaryLong() {

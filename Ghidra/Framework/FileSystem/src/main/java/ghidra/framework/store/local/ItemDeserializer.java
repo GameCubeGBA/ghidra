@@ -47,7 +47,7 @@ public class ItemDeserializer {
 	private static final int FORMAT_VERSION = ItemSerializer.FORMAT_VERSION;
 	private static final String ZIP_ENTRY_NAME = ItemSerializer.ZIP_ENTRY_NAME;
 
-	private static final int IO_BUFFER_SIZE = ItemSerializer.IO_BUFFER_SIZE;
+	private final static int IO_BUFFER_SIZE = ItemSerializer.IO_BUFFER_SIZE;
 
 	private InputStream in;
 	private String itemName;
@@ -83,7 +83,7 @@ public class ItemDeserializer {
 
 			itemName = objIn.readUTF();
 			contentType = objIn.readUTF();
-			if (contentType.isEmpty()) {
+			if (contentType.length() == 0) {
 				contentType = null;
 			}
 			fileType = objIn.readInt();

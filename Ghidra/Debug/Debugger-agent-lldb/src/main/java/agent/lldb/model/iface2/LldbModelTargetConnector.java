@@ -26,16 +26,16 @@ public interface LldbModelTargetConnector
 		extends LldbModelSelectableObject, TargetLauncher {
 
 	@Override
-    default String getDisplay() {
+	public default String getDisplay() {
 		return getName();
 	}
 
 	@Override
-    CompletableFuture<Void> setActive();
+	public CompletableFuture<Void> setActive();
 
 	@Override
-    TargetParameterMap getParameters();
+	public TargetParameterMap getParameters();
 
 	@Override
-    CompletableFuture<Void> launch(Map<String, ?> args);
+	public CompletableFuture<Void> launch(Map<String, ?> args);
 }

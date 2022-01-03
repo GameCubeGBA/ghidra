@@ -84,7 +84,7 @@ public class OpenDeclarations {
 				}
 			}
 
-			if (indexNames.isEmpty()) {
+			if (indexNames.size() == 0) {
 				EclipseMessageUtils.info("Found no definitions, looking for declarations...");
 				for (IIndexBinding binding : bindings) {
 					IIndexName[] names = index.findNames(binding, IIndex.FIND_DECLARATIONS);
@@ -229,7 +229,7 @@ public class OpenDeclarations {
 		dialog.setMessage(OpenTypeMessages.OpenTypeDialog_message);
 		dialog.setDialogSettings(getClass().getName());
 		dialog.setIgnoreCase(true);
-		if (!functionName.isEmpty() && functionName.length() < 80) {
+		if (functionName.length() > 0 && functionName.length() < 80) {
 			dialog.setFilter(functionName, true);
 		}
 	}

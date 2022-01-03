@@ -37,7 +37,8 @@ public class AddableLongIntHashtable extends LongIntHashtable {
 	}
 
 	public AddableLongIntHashtable() {
-    }
+		super();
+	}
 
 	/** Adds value associated with the stored key */
 	public void add(long key, int value) {

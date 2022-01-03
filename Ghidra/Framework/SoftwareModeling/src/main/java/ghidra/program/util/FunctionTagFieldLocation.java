@@ -65,8 +65,11 @@ public class FunctionTagFieldLocation extends FunctionLocation {
 		if (!super.equals(obj) || (getClass() != obj.getClass()))
 			return false;
 		FunctionTagFieldLocation other = (FunctionTagFieldLocation) obj;
-        return Objects.equals(tags, other.tags);
-    }
+		if (!Objects.equals(tags, other.tags)) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public String toString() {

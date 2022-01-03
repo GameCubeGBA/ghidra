@@ -27,8 +27,8 @@ import java.util.*;
  * A class to represent the VS_VERSION_INFO data structure.
  */
 public class VS_VERSION_INFO implements StructConverter {
-	public static final String NAME = "VS_VERSION_INFO";
-	public static final int SIZEOF = 92;
+	public final static String NAME = "VS_VERSION_INFO";
+	public final static int SIZEOF = 92;
 
 	private short structLength;
 	private short valueLength;

@@ -19,7 +19,7 @@ import ghidra.program.model.lang.Processor;
 import ghidra.util.classfinder.ExtensionPoint;
 
 public interface InstructionSkipper extends ExtensionPoint {
-	Processor getApplicableProcessor();
+	public Processor getApplicableProcessor();
 
-	boolean shouldSkip(byte[] buffer, int size);
+	public boolean shouldSkip(byte[] buffer,int size);
 }

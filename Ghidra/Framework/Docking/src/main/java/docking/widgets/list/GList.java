@@ -46,7 +46,8 @@ public class GList<T> extends JList<T> implements GComponent {
 	 * Constructs a <code>GhidraList</code> with an empty model.
 	 */
 	public GList() {
-        init();
+		super();
+		init();
 	}
 
 	/**

@@ -282,7 +282,7 @@ public class LocalBufferFile implements BufferFile {
 	public static DataBuffer peek(File file, int bufferIndex) throws IOException {
 		LocalBufferFile bf = new LocalBufferFile(file, false);
 		try {
-			DataBuffer buf = new DataBuffer(bf.bufferSize);
+			DataBuffer buf = new DataBuffer(bf.getBufferSize());
 			bf.get(buf, bufferIndex);
 			return buf;
 		}
@@ -441,7 +441,7 @@ public class LocalBufferFile implements BufferFile {
 		// Add 1 to buffer index to obtain block index (first useable buffer, buffer#0, is 
 		// contained within block#1 since block#0 contains file header)
 		int blockIndex = bufferIndex + 1;
-		long offset = (long) blockIndex * blockSize;
+		long offset = (long) blockIndex * (long) blockSize;
 		raf.seek(offset);
 		return blockIndex;
 	}
@@ -455,7 +455,7 @@ public class LocalBufferFile implements BufferFile {
 	 */
 	private void seekBlock(int blockIndex, int offsetWithinBlock) throws IOException {
 		// Perform long multiplication to support file sizes greater than 2-GBytes
-		long offset = ((long) blockIndex * blockSize) + offsetWithinBlock;
+		long offset = ((long) blockIndex * (long) blockSize) + offsetWithinBlock;
 		raf.seek(offset);
 	}
 
@@ -1528,7 +1528,9 @@ public class LocalBufferFile implements BufferFile {
 		public boolean accept(File file) {
 			if (file.isFile()) {
 				String name = file.getName();
-                return (prefix == null || name.indexOf(prefix) == 0) && (ext == null || name.endsWith(ext));
+				if ((prefix == null || name.indexOf(prefix) == 0) && (ext == null || name.endsWith(ext))) {
+					return true;
+				}
 			}
 			return false;
 		}

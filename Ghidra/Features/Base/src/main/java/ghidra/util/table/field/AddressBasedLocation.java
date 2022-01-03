@@ -138,7 +138,7 @@ public class AddressBasedLocation implements Comparable<AddressBasedLocation> {
 			// addressable unit size
 			ShiftedReference shiftedRef = (ShiftedReference) reference;
 			StringBuilder buf = new StringBuilder();
-			buf.append(address);
+			buf.append(address.toString());
 			buf.append("(0x");
 			buf.append(Long.toHexString(shiftedRef.getValue()));
 			buf.append("<<");
@@ -183,7 +183,7 @@ public class AddressBasedLocation implements Comparable<AddressBasedLocation> {
 		ExternalLocation extLoc = program.getExternalManager().getExternalLocation(symbol);
 		Address extAddr = extLoc.getAddress();
 		if (extAddr != null) {
-			return "External[" + extAddr + "]";
+			return "External[" + extAddr.toString() + "]";
 		}
 		return "External[ ? ]";
 	}

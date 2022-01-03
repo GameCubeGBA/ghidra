@@ -42,7 +42,8 @@ public class StackVariableReferencesTest extends AbstractGhidraHeadedIntegration
 	 * @param arg0
 	 */
 	public StackVariableReferencesTest() {
-    }
+		super();
+	}
 
 	/* 
 	 * @see TestCase#setUp()

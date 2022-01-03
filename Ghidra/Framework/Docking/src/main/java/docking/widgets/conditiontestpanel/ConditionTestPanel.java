@@ -338,7 +338,7 @@ public class ConditionTestPanel extends JPanel {
 			int width = size.width - insets.left - insets.right;
 			int height = size.height - insets.top - insets.bottom;
 			g.clearRect(x, y, width, height);
-			int fillWidth = (int) (((double) progress / maxProgress) * width + .5);
+			int fillWidth = (int) (((double) progress / (double) maxProgress) * width + .5);
 			g.setColor(color);
 			g.fillRect(x, y, fillWidth, height);
 		}

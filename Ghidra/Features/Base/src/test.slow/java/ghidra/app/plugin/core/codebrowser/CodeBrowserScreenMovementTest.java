@@ -798,16 +798,18 @@ public class CodeBrowserScreenMovementTest extends AbstractProgramBasedTest {
 	private void resetFormatOptions(CodeBrowserPlugin plugin) {
 		Options fieldOptions = plugin.getFormatManager().getFieldOptions();
 		List<String> names = fieldOptions.getOptionNames();
-        for (String name : names) {
-            if (!name.startsWith("Format Code")) {
-                continue;
-            }
-            if (name.contains("Show ") || name.contains("Flag ")) {
-                fieldOptions.setBoolean(name, false);
-            } else if (name.contains("Lines")) {
-                fieldOptions.setInt(name, 0);
-            }
-        }
+		for (int i = 0; i < names.size(); i++) {
+			String name = names.get(i);
+			if (!name.startsWith("Format Code")) {
+				continue;
+			}
+			if (name.contains("Show ") || name.contains("Flag ")) {
+				fieldOptions.setBoolean(name, false);
+			}
+			else if (name.contains("Lines")) {
+				fieldOptions.setInt(name, 0);
+			}
+		}
 		waitForSwing();
 		plugin.updateNow();
 	}

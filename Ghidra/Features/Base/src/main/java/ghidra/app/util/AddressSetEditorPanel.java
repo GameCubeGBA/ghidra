@@ -68,7 +68,12 @@ public class AddressSetEditorPanel extends JPanel {
 		minAddressPanel.add(minLabel, BorderLayout.WEST);
 		minAddressField = new AddressInput();
 		minAddressField.setAddressFactory(addressFactory);
-		ChangeListener listener = e -> validateAddRemoveButton();
+		ChangeListener listener = new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				validateAddRemoveButton();
+			}
+		};
 		minAddressField.addChangeListener(listener);
 		minAddressPanel.add(minAddressField, BorderLayout.CENTER);
 
@@ -83,10 +88,20 @@ public class AddressSetEditorPanel extends JPanel {
 		maxAddressPanel.add(maxAddressField, BorderLayout.CENTER);
 		maxAddressPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 0));
 		addRangeButton = new JButton(ADD_ICON);
-		addRangeButton.addActionListener(e -> addRange());
+		addRangeButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				addRange();
+			}
+		});
 		addRangeButton.setToolTipText("Add the range to the set of included addresses");
 		subtractRangeButton = new JButton(SUBTRACT_ICON);
-		subtractRangeButton.addActionListener(e -> subtractRange());
+		subtractRangeButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				subtractRange();
+			}
+		});
 		subtractRangeButton.setToolTipText("Remove the range from the set of included addresses");
 
 		JPanel addressPanel = new JPanel();
@@ -118,7 +133,12 @@ public class AddressSetEditorPanel extends JPanel {
 		bottomButtons.setLayout(new MiddleLayout());
 
 		removeRangeButton = new JButton("Remove Selected Range(s)");
-		removeRangeButton.addActionListener(e -> removeRange());
+		removeRangeButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				removeRange();
+			}
+		});
 
 		bottomButtons.add(removeRangeButton);
 		return bottomButtons;
@@ -129,7 +149,12 @@ public class AddressSetEditorPanel extends JPanel {
 		listModel = new AddressSetListModel(addressSet.toList());
 		list = new JList<>(listModel);
 		list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		list.getSelectionModel().addListSelectionListener(e -> validateRemoveButton());
+		list.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				validateRemoveButton();
+			}
+		});
 		JScrollPane scrollPane = new JScrollPane(list);
 		panel.setBorder(BorderFactory.createTitledBorder(
 			BorderFactory.createEmptyBorder(10, 10, 10, 10), "Included Address Ranges:"));
@@ -224,8 +249,11 @@ public class AddressSetEditorPanel extends JPanel {
 		if (!minAddress.getAddressSpace().equals(maxAddress.getAddressSpace())) {
 			return false;
 		}
-        return minAddress.compareTo(maxAddress) <= 0;
-    }
+		if (minAddress.compareTo(maxAddress) > 0) {
+			return false;
+		}
+		return true;
+	}
 
 	static class AddressSetListModel extends AbstractListModel<AddressRange> {
 		private List<AddressRange> addressList;

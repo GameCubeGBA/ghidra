@@ -120,9 +120,10 @@ public class TableServicePlugin extends ProgramPlugin
 		}
 		// make a copy of the list because the provider updates the list
 		List<TableComponentProvider<?>> list = new ArrayList<>(plist);
-        for (ComponentProvider provider : list) {
-            provider.closeComponent();
-        }
+		for (int i = 0; i < list.size(); i++) {
+			ComponentProvider provider = list.get(i);
+			provider.closeComponent();
+		}
 		programMap.remove(program);
 	}
 
@@ -133,9 +134,10 @@ public class TableServicePlugin extends ProgramPlugin
 		}
 		// make a copy of the list because the dialog updates the list
 		List<TableChooserDialog> list = new ArrayList<>(dlist);
-        for (TableChooserDialog dialog : list) {
-            dialog.close();
-        }
+		for (int i = 0; i < list.size(); i++) {
+			TableChooserDialog dialog = list.get(i);
+			dialog.close();
+		}
 		programMap.remove(program);
 	}
 
@@ -184,27 +186,31 @@ public class TableServicePlugin extends ProgramPlugin
 	}
 
 	void remove(TableComponentProvider<?> provider) {
-        for (Program p : programMap.keySet()) {
-            List<TableComponentProvider<?>> list = programMap.get(p);
-            if (list.remove(provider)) {
-                if (list.isEmpty()) {
-                    programMap.remove(p);
-                    return;
-                }
-            }
-        }
+		Iterator<Program> iter = programMap.keySet().iterator();
+		while (iter.hasNext()) {
+			Program p = iter.next();
+			List<TableComponentProvider<?>> list = programMap.get(p);
+			if (list.remove(provider)) {
+				if (list.size() == 0) {
+					programMap.remove(p);
+					return;
+				}
+			}
+		}
 	}
 
 	void removeDialog(MyTableChooserDialog dialog) {
-        for (Program p : programToDialogMap.keySet()) {
-            List<TableChooserDialog> list = programToDialogMap.get(p);
-            if (list.remove(dialog)) {
-                if (list.isEmpty()) {
-                    programToDialogMap.remove(p);
-                    return;
-                }
-            }
-        }
+		Iterator<Program> iter = programToDialogMap.keySet().iterator();
+		while (iter.hasNext()) {
+			Program p = iter.next();
+			List<TableChooserDialog> list = programToDialogMap.get(p);
+			if (list.remove(dialog)) {
+				if (list.size() == 0) {
+					programToDialogMap.remove(p);
+					return;
+				}
+			}
+		}
 	}
 
 	@Override
@@ -223,17 +229,20 @@ public class TableServicePlugin extends ProgramPlugin
 
 	private List<TableComponentProvider<?>> getProviders() {
 		List<TableComponentProvider<?>> clist = new ArrayList<>();
-        for (List<TableComponentProvider<?>> list : programMap.values()) {
-            clist.addAll(list);
-        }
+		Iterator<List<TableComponentProvider<?>>> iter = programMap.values().iterator();
+		while (iter.hasNext()) {
+			List<TableComponentProvider<?>> list = iter.next();
+			clist.addAll(list);
+		}
 		return clist;
 	}
 
 	private void updateProviders() {
 		List<TableComponentProvider<?>> list = getProviders();
-        for (TableComponentProvider<?> provider : list) {
-            provider.refresh();
-        }
+		for (int i = 0; i < list.size(); i++) {
+			TableComponentProvider<?> provider = list.get(i);
+			provider.refresh();
+		}
 	}
 
 	@Override

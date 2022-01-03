@@ -59,7 +59,8 @@ public class SmallBorderButton extends JButton {
 	 *
 	 */
 	public SmallBorderButton() {
-        initBorder();
+		super();
+		initBorder();
 	}
 
 	/**

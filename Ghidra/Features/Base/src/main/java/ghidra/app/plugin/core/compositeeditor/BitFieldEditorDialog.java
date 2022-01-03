@@ -94,7 +94,9 @@ public class BitFieldEditorDialog extends DialogComponentProvider {
 			else if (option == OptionDialog.CANCEL_OPTION) {
 				return false;
 			}
-			else return bitFieldEditorPanel.endCurrentEdit();
+			else if (!bitFieldEditorPanel.endCurrentEdit()) {
+				return false;
+			}
 		}
 		return true;
 	}

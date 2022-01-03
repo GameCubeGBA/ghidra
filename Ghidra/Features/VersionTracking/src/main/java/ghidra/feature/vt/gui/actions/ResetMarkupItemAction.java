@@ -94,7 +94,7 @@ public class ResetMarkupItemAction extends DockingAction {
 	public boolean isEnabledForContext(ActionContext context) {
 		List<VTMarkupItem> markupItems = controller.getMarkupItems(context);
 
-		if (markupItems.isEmpty()) {
+		if (markupItems.size() == 0) {
 			return false;
 		}
 

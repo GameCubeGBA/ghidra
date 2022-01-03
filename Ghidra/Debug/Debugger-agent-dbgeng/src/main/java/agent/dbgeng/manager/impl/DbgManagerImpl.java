@@ -185,7 +185,7 @@ public class DbgManagerImpl implements DbgManager {
 			for (DebugThreadId tid : toRemove) {
 				removeThread(tid);
 			}
-			listenersEvent.fire.processRemoved(id, cause);
+			getEventListeners().fire.processRemoved(id, cause);
 		}
 	}
 
@@ -230,7 +230,7 @@ public class DbgManagerImpl implements DbgManager {
 			if (sessions.remove(id) == null) {
 				throw new IllegalArgumentException("There is no session with id " + id);
 			}
-			listenersEvent.fire.sessionRemoved(id, cause);
+			getEventListeners().fire.sessionRemoved(id, cause);
 		}
 	}
 
@@ -530,7 +530,7 @@ public class DbgManagerImpl implements DbgManager {
 		}
 
 		synchronized (this) {
-			boolean waitState = waiting;
+			boolean waitState = isWaiting();
 			waiting = false;
 			DebugStatus ret = evt.isStolen() ? null : handlerMap.handle(evt, null);
 			if (ret == null) {
@@ -557,12 +557,12 @@ public class DbgManagerImpl implements DbgManager {
 
 	@Override
 	public void addEventsListener(DbgEventsListener listener) {
-		listenersEvent.add(listener);
+		getEventListeners().add(listener);
 	}
 
 	@Override
 	public void removeEventsListener(DbgEventsListener listener) {
-		listenersEvent.remove(listener);
+		getEventListeners().remove(listener);
 	}
 
 	private DbgState stateFilter(DbgState cur, DbgState set, DbgCause cause) {
@@ -668,8 +668,8 @@ public class DbgManagerImpl implements DbgManager {
 
 		DebugBreakpoint bp = evt.getInfo();
 		DbgBreakpointInfo info = new DbgBreakpointInfo(bp, getEventProcess(), getEventThread());
-		listenersEvent.fire.threadSelected(eventThread, null, evt.getCause());
-		listenersEvent.fire.breakpointHit(info, evt.getCause());
+		getEventListeners().fire.threadSelected(eventThread, null, evt.getCause());
+		getEventListeners().fire.breakpointHit(info, evt.getCause());
 
 		String key = Integer.toHexString(bp.getId());
 		if (statusByNameMap.containsKey(key)) {
@@ -687,8 +687,8 @@ public class DbgManagerImpl implements DbgManager {
 	 */
 	protected DebugStatus processException(DbgExceptionEvent evt, Void v) {
 		DebugThreadId eventId = updateState();
-		listenersEvent.fire.eventSelected(evt, evt.getCause());
-		listenersEvent.fire.threadSelected(eventThread, null, evt.getCause());
+		getEventListeners().fire.eventSelected(evt, evt.getCause());
+		getEventListeners().fire.threadSelected(eventThread, null, evt.getCause());
 
 		DebugExceptionRecord64 info = evt.getInfo();
 		String key = Integer.toHexString(info.code);
@@ -713,9 +713,9 @@ public class DbgManagerImpl implements DbgManager {
 		DbgProcessImpl process = getCurrentProcess();
 		int tid = so.getCurrentThreadSystemId();
 		DbgThreadImpl thread = getThreadComputeIfAbsent(eventId, process, tid);
-		listenersEvent.fire.eventSelected(evt, evt.getCause());
-		listenersEvent.fire.threadCreated(thread, DbgCause.Causes.UNCLAIMED);
-		listenersEvent.fire.threadSelected(thread, null, evt.getCause());
+		getEventListeners().fire.eventSelected(evt, evt.getCause());
+		getEventListeners().fire.threadCreated(thread, DbgCause.Causes.UNCLAIMED);
+		getEventListeners().fire.threadSelected(thread, null, evt.getCause());
 
 		String key = Integer.toHexString(eventId.id);
 		if (statusByNameMap.containsKey(key)) {
@@ -739,8 +739,8 @@ public class DbgManagerImpl implements DbgManager {
 			thread.remove();
 		}
 		process.threadExited(eventId);
-		listenersEvent.fire.eventSelected(evt, evt.getCause());
-		listenersEvent.fire.threadExited(eventId, process, evt.getCause());
+		getEventListeners().fire.eventSelected(evt, evt.getCause());
+		getEventListeners().fire.threadExited(eventId, process, evt.getCause());
 
 		String key = Integer.toHexString(eventId.id);
 		if (statusByNameMap.containsKey(key)) {
@@ -761,7 +761,7 @@ public class DbgManagerImpl implements DbgManager {
 
 		currentThread = evt.getThread();
 		currentThread.setState(evt.getState(), evt.getCause(), evt.getReason());
-		listenersEvent.fire.threadSelected(currentThread, evt.getFrame(), evt.getCause());
+		getEventListeners().fire.threadSelected(currentThread, evt.getFrame(), evt.getCause());
 
 		String key = Integer.toHexString(eventId.id);
 		if (statusByNameMap.containsKey(key)) {
@@ -788,16 +788,16 @@ public class DbgManagerImpl implements DbgManager {
 		//so.setCurrentProcessId(id);
 		int pid = so.getCurrentProcessSystemId();
 		DbgProcessImpl proc = getProcessComputeIfAbsent(id, pid);
-		listenersEvent.fire.eventSelected(evt, evt.getCause());
-		listenersEvent.fire.processAdded(proc, evt.getCause());
-		listenersEvent.fire.processSelected(proc, evt.getCause());
+		getEventListeners().fire.eventSelected(evt, evt.getCause());
+		getEventListeners().fire.processAdded(proc, evt.getCause());
+		getEventListeners().fire.processSelected(proc, evt.getCause());
 
 		handle = info.initialThreadInfo.handle;
 		DebugThreadId idt = so.getThreadIdByHandle(handle);
 		int tid = so.getCurrentThreadSystemId();
 		DbgThreadImpl thread = getThreadComputeIfAbsent(idt, proc, tid);
-		listenersEvent.fire.threadCreated(thread, evt.getCause());
-		listenersEvent.fire.threadSelected(thread, null, evt.getCause());
+		getEventListeners().fire.threadCreated(thread, evt.getCause());
+		getEventListeners().fire.threadSelected(thread, null, evt.getCause());
 
 		//proc.moduleLoaded(info.moduleInfo);
 		//getEventListeners().fire.moduleLoaded(proc, info.moduleInfo, evt.getCause());
@@ -822,9 +822,9 @@ public class DbgManagerImpl implements DbgManager {
 		DbgProcessImpl process = getCurrentProcess();
 		process.setExitCode(Long.valueOf(evt.getInfo()));
 
-		listenersEvent.fire.eventSelected(evt, evt.getCause());
-		listenersEvent.fire.threadExited(eventId, process, evt.getCause());
-		listenersEvent.fire.processExited(process, evt.getCause());
+		getEventListeners().fire.eventSelected(evt, evt.getCause());
+		getEventListeners().fire.threadExited(eventId, process, evt.getCause());
+		getEventListeners().fire.processExited(process, evt.getCause());
 
 		for (DebugBreakpoint bpt : getBreakpoints()) {
 			breaksById.remove(bpt.getId());
@@ -833,7 +833,7 @@ public class DbgManagerImpl implements DbgManager {
 			thread.remove();
 		}
 		process.remove(evt.getCause());
-		listenersEvent.fire.processRemoved(process.getId(), evt.getCause());
+		getEventListeners().fire.processRemoved(process.getId(), evt.getCause());
 
 		String key = Integer.toHexString(process.getId().id);
 		if (statusByNameMap.containsKey(key)) {
@@ -853,7 +853,7 @@ public class DbgManagerImpl implements DbgManager {
 		DebugThreadId eventId = updateState();
 
 		currentProcess = evt.getProcess();
-		listenersEvent.fire.processSelected(currentProcess, evt.getCause());
+		getEventListeners().fire.processSelected(currentProcess, evt.getCause());
 
 		String key = Integer.toHexString(eventId.id);
 		if (statusByNameMap.containsKey(key)) {
@@ -874,8 +874,8 @@ public class DbgManagerImpl implements DbgManager {
 		DbgProcessImpl process = getCurrentProcess();
 		DebugModuleInfo info = evt.getInfo();
 		process.moduleLoaded(info);
-		listenersEvent.fire.eventSelected(evt, evt.getCause());
-		listenersEvent.fire.moduleLoaded(process, info, evt.getCause());
+		getEventListeners().fire.eventSelected(evt, evt.getCause());
+		getEventListeners().fire.moduleLoaded(process, info, evt.getCause());
 
 		String key = info.getModuleName();
 		if (statusByNameMap.containsKey(key)) {
@@ -896,8 +896,8 @@ public class DbgManagerImpl implements DbgManager {
 		DbgProcessImpl process = getCurrentProcess();
 		DebugModuleInfo info = evt.getInfo();
 		process.moduleUnloaded(info);
-		listenersEvent.fire.eventSelected(evt, evt.getCause());
-		listenersEvent.fire.moduleUnloaded(process, info, evt.getCause());
+		getEventListeners().fire.eventSelected(evt, evt.getCause());
+		getEventListeners().fire.moduleUnloaded(process, info, evt.getCause());
 
 		String key = info.getModuleName();
 		if (statusByNameMap.containsKey(key)) {
@@ -983,7 +983,7 @@ public class DbgManagerImpl implements DbgManager {
 				if (key.id == id) {
 					DbgThread thread = getThread(key);
 					if (thread != null) {
-						listenersEvent.fire.threadSelected(thread, null, evt.getCause());
+						getEventListeners().fire.threadSelected(thread, null, evt.getCause());
 					}
 					processEvent(new DbgPromptChangedEvent(getControl().getPromptText()));
 					break;
@@ -1007,7 +1007,7 @@ public class DbgManagerImpl implements DbgManager {
 		DebugThreadId eventId = updateState();
 
 		currentSession = evt.getSession();
-		listenersEvent.fire.sessionSelected(currentSession, evt.getCause());
+		getEventListeners().fire.sessionSelected(currentSession, evt.getCause());
 
 		String key = Integer.toHexString(eventId.id);
 		if (statusByNameMap.containsKey(key)) {
@@ -1045,23 +1045,23 @@ public class DbgManagerImpl implements DbgManager {
 
 	protected void processDebuggeeStateChanged(DbgDebuggeeStateChangeEvent evt, Void v) {
 		if (evt.getFlags().contains(ChangeDebuggeeState.DATA)) {
-			listenersEvent.fire.memoryChanged(currentProcess, 0L, 0, evt.getCause());
+			getEventListeners().fire.memoryChanged(currentProcess, 0L, 0, evt.getCause());
 		}
 	}
 
 	protected void processSystemErrorEvent(DbgSystemErrorEvent evt, Void v) {
-		listenersEvent.fire.eventSelected(evt, evt.getCause());
+		getEventListeners().fire.eventSelected(evt, evt.getCause());
 		String error = "SystemError " + evt.getError() + ":" + evt.getLevel();
-		listenersEvent.fire.consoleOutput(error, 0);
+		getEventListeners().fire.consoleOutput(error, 0);
 	}
 
 	protected void processConsoleOutput(DbgConsoleOutputEvent evt, Void v) {
-		listenersEvent.fire.eventSelected(evt, evt.getCause());
-		listenersEvent.fire.consoleOutput(evt.getInfo(), evt.getMask());
+		getEventListeners().fire.eventSelected(evt, evt.getCause());
+		getEventListeners().fire.consoleOutput(evt.getInfo(), evt.getMask());
 	}
 
 	protected void processPromptChanged(DbgPromptChangedEvent evt, Void v) {
-		listenersEvent.fire.promptChanged(evt.getPrompt());
+		getEventListeners().fire.promptChanged(evt.getPrompt());
 	}
 
 	/**
@@ -1127,7 +1127,7 @@ public class DbgManagerImpl implements DbgManager {
 	@Internal
 	public void doBreakpointCreated(DbgBreakpointInfo newInfo, DbgCause cause) {
 		addKnownBreakpoint(newInfo, false);
-		listenersEvent.fire.breakpointCreated(newInfo, cause);
+		getEventListeners().fire.breakpointCreated(newInfo, cause);
 	}
 
 	/**
@@ -1139,7 +1139,7 @@ public class DbgManagerImpl implements DbgManager {
 	@Internal
 	public void doBreakpointModified(DbgBreakpointInfo newInfo, DbgCause cause) {
 		DbgBreakpointInfo oldInfo = addKnownBreakpoint(newInfo, true);
-		listenersEvent.fire.breakpointModified(newInfo, oldInfo, cause);
+		getEventListeners().fire.breakpointModified(newInfo, oldInfo, cause);
 	}
 
 	/**
@@ -1154,7 +1154,7 @@ public class DbgManagerImpl implements DbgManager {
 		if (oldInfo == null) {
 			return;
 		}
-		listenersEvent.fire.breakpointDeleted(oldInfo, cause);
+		getEventListeners().fire.breakpointDeleted(oldInfo, cause);
 	}
 
 	protected void doBreakpointModifiedSameLocations(DbgBreakpointInfo newInfo,
@@ -1162,7 +1162,7 @@ public class DbgManagerImpl implements DbgManager {
 		if (Objects.equals(newInfo, oldInfo)) {
 			return;
 		}
-		listenersEvent.fire.breakpointModified(newInfo, oldInfo, cause);
+		getEventListeners().fire.breakpointModified(newInfo, oldInfo, cause);
 	}
 
 	@Internal
@@ -1529,7 +1529,7 @@ public class DbgManagerImpl implements DbgManager {
 	}
 
 	public void fireThreadExited(DebugThreadId id, DbgProcessImpl process, DbgCause cause) {
-		listenersEvent.fire.threadExited(id, process, cause);
+		getEventListeners().fire.threadExited(id, process, cause);
 	}
 
 	@Override
@@ -1551,7 +1551,7 @@ public class DbgManagerImpl implements DbgManager {
 		//System.err.println("EXIT");
 		waiting = false;
 		updateState();
-		listenersEvent.fire.threadSelected(eventThread, null, Causes.UNCLAIMED);
+		getEventListeners().fire.threadSelected(eventThread, null, Causes.UNCLAIMED);
 		return CompletableFuture.completedFuture(null);
 	}
 

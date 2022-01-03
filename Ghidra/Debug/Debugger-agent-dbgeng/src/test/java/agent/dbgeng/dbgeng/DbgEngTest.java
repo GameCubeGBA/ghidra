@@ -87,10 +87,13 @@ public class DbgEngTest extends AbstractGhidraHeadlessIntegrationTest {
 	@Test
 	public void testPrintln() {
 		CompletableFuture<String> cb = new CompletableFuture<>();
-		client.setOutputCallbacks((mask, text) -> {
-            System.out.print(text);
-            cb.complete(text);
-        });
+		client.setOutputCallbacks(new DebugOutputCallbacks() {
+			@Override
+			public void output(int mask, String text) {
+				System.out.print(text);
+				cb.complete(text);
+			}
+		});
 		control.outln("Hello, World!");
 		String back = cb.getNow(null);
 		// NOTE: I'd like to be precise wrt/ new lines, but it seems to vary with version.
@@ -122,7 +125,7 @@ public class DbgEngTest extends AbstractGhidraHeadlessIntegrationTest {
 		}
 	}
 
-	public abstract static class NoisyDebugEventCallbacksAdapter
+	public static abstract class NoisyDebugEventCallbacksAdapter
 			extends DebugEventCallbacksAdapter {
 		final DebugStatus defaultStatus;
 
@@ -246,12 +249,15 @@ public class DbgEngTest extends AbstractGhidraHeadlessIntegrationTest {
 					return DebugStatus.BREAK;
 				}
 			});
-			client.setOutputCallbacks((mask, text) -> {
-                System.out.print(text);
-                if (outputCapture != null) {
-                    outputCapture.append(text);
-                }
-            });
+			client.setOutputCallbacks(new DebugOutputCallbacks() {
+				@Override
+				public void output(int mask, String text) {
+					System.out.print(text);
+					if (outputCapture != null) {
+						outputCapture.append(text);
+					}
+				}
+			});
 
 			Msg.debug(this, "Starting " + cmdLine + " with client " + client);
 			control.execute(".create " + cmdLine);
@@ -424,7 +430,7 @@ public class DbgEngTest extends AbstractGhidraHeadlessIntegrationTest {
 				collected2.add(info);
 			}
 
-			assertTrue(!collected1.isEmpty());
+			assertTrue(collected1.size() > 0);
 			assertEquals(collected1, collected2);
 
 			// For comparison
@@ -631,10 +637,13 @@ public class DbgEngTest extends AbstractGhidraHeadlessIntegrationTest {
 		// or condition to indicate when all threads have been discovered.
 		String specimen =
 			Application.getOSFile("sctldbgeng", "expCreateThreadSpin.exe").getCanonicalPath();
-		client.setOutputCallbacks((mask, text) -> {
-            System.out.print(text);
-            System.out.flush();
-        });
+		client.setOutputCallbacks(new DebugOutputCallbacks() {
+			@Override
+			public void output(int mask, String text) {
+				System.out.print(text);
+				System.out.flush();
+			}
+		});
 		client.setEventCallbacks(new DebugEventCallbacksAdapter() {
 			@Override
 			public DebugStatus breakpoint(DebugBreakpoint bp) {
@@ -713,9 +722,9 @@ public class DbgEngTest extends AbstractGhidraHeadlessIntegrationTest {
 		protected final DebugRegisters regs;
 		protected final DebugSystemObjects objs;
 
-		protected volatile long currentThread = 0;
-		protected volatile DebugProcessInfo createdProc = null;
-		protected volatile String lastReg = null;
+		volatile protected long currentThread = 0;
+		volatile protected DebugProcessInfo createdProc = null;
+		volatile protected String lastReg = null;
 
 		public BreakAllCallbacks(DebugClient client) {
 			this.control = client.getControl();

@@ -1069,9 +1069,12 @@ public abstract class CompEditorModel extends CompositeEditorModel {
 		if (rowIndex >= numRowComponents) {
 			return true; // Beyond last component.
 		}
-        // On last displayed component.
-        return rowIndex + 1 == numRowComponents;
-    }
+		if (rowIndex + 1 == numRowComponents) {
+			// On last displayed component.
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Determine whether or not there are only undefined data types from the indicated rowIndex

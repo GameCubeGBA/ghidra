@@ -86,8 +86,12 @@ public class EditMarkupAddressAction extends DockingAction {
 	@Override
 	public boolean isAddToPopup(ActionContext context) {
 		List<VTMarkupItem> markupItems = controller.getMarkupItems(context);
-        return markupItems.size() == 1;
-    }
+		if (markupItems.size() != 1) {
+			return false;
+		}
+
+		return true;
+	}
 
 	private void editDestinationAddress(final VTMarkupItem markupItem, final JComponent component) {
 
@@ -111,20 +115,23 @@ public class EditMarkupAddressAction extends DockingAction {
 			new EditableListingAddress(destinationProgram, destinationAddress, markupItem);
 		final DialogProvider dialog = new DialogProvider(editableAddress);
 		dialog.setRememberSize(false);
-		SwingUtilities.invokeLater(() -> {
-            controller.getTool().showDialog(dialog, component);
-            Address newDestinationAddress = dialog.getAddress();
-            if (SystemUtilities.isEqual(destinationAddress, newDestinationAddress)) {
-                return;
-            }
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				controller.getTool().showDialog(dialog, component);
+				Address newDestinationAddress = dialog.getAddress();
+				if (SystemUtilities.isEqual(destinationAddress, newDestinationAddress)) {
+					return;
+				}
 
-            ArrayList<VTMarkupItem> arrayList = new ArrayList<VTMarkupItem>();
-            arrayList.add(markupItem);
-            SetMarkupItemDestinationAddressTask task =
-                new SetMarkupItemDestinationAddressTask(controller.getSession(), arrayList,
-                    newDestinationAddress);
-            controller.runVTTask(task);
-        });
+				ArrayList<VTMarkupItem> arrayList = new ArrayList<VTMarkupItem>();
+				arrayList.add(markupItem);
+				SetMarkupItemDestinationAddressTask task =
+					new SetMarkupItemDestinationAddressTask(controller.getSession(), arrayList,
+						newDestinationAddress);
+				controller.runVTTask(task);
+			}
+		});
 
 	}
 

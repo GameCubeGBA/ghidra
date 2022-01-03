@@ -17,5 +17,5 @@
 package ghidra.app.plugin.core.functiongraph.graph.vertex;
 
 public interface GroupListener {
-	void groupDescriptionChanged(String oldText, String newText);
+	public void groupDescriptionChanged(String oldText, String newText);
 }

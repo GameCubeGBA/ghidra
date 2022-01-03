@@ -26,118 +26,118 @@ public final class NListConstants {
 	 */
 
 	/**if any of these bits set, a symbolic debugging entry*/
-    public static final int MASK_N_STAB = 0xe0;
+	public final static int MASK_N_STAB = 0xe0;
 	/**private external symbol bit*/
-    public static final int MASK_N_PEXT = 0x10;
+	public final static int MASK_N_PEXT = 0x10;
 	/**mask for the type bits*/
-    public static final int MASK_N_TYPE = 0x0e;
+	public final static int MASK_N_TYPE = 0x0e;
 	/**external symbol bit, set for external symbols*/
-    public static final int MASK_N_EXT  = 0x01;
+	public final static int MASK_N_EXT  = 0x01;
 
 	/*
 	 * Values for N_TYPE bits of the n_type field.
 	 */
 
 	/**undefined, n_sect == NO_SECT */
-    public static final byte TYPE_N_UNDF = 0x0;
+	public final static byte TYPE_N_UNDF = 0x0;
 	/**absolute, n_sect == NO_SECT */
-    public static final byte TYPE_N_ABS  = 0x2;
+	public final static byte TYPE_N_ABS  = 0x2;
 	/**indirect*/
-    public static final byte TYPE_N_INDR = 0xa;
+	public final static byte TYPE_N_INDR = 0xa;
 	/**prebound undefined (defined in a dylib)*/
-    public static final byte TYPE_N_PBUD = 0xc;
+	public final static byte TYPE_N_PBUD = 0xc;
 	/**defined in section number n_sect */
-    public static final byte TYPE_N_SECT = 0xe;
+	public final static byte TYPE_N_SECT = 0xe;
 
 	/**
 	 * Reference type bits of the n_desc field of undefined symbols
 	 */
-    public static final int REFERENCE_TYPE                            = 0x7;
+	public final static int REFERENCE_TYPE                            = 0x7;
 
-	public static final int REFERENCE_FLAG_UNDEFINED_NON_LAZY         = 0x0;
-	public static final int REFERENCE_FLAG_UNDEFINED_LAZY             = 0x1;
-	public static final int REFERENCE_FLAG_DEFINED                    = 0x2;
-	public static final int REFERENCE_FLAG_PRIVATE_DEFINED            = 0x3;
-	public static final int REFERENCE_FLAG_PRIVATE_UNDEFINED_NON_LAZY = 0x4;
-	public static final int REFERENCE_FLAG_PRIVATE_UNDEFINED_LAZY     = 0x5;
+	public final static int REFERENCE_FLAG_UNDEFINED_NON_LAZY         = 0x0;
+	public final static int REFERENCE_FLAG_UNDEFINED_LAZY             = 0x1;
+	public final static int REFERENCE_FLAG_DEFINED                    = 0x2;
+	public final static int REFERENCE_FLAG_PRIVATE_DEFINED            = 0x3;
+	public final static int REFERENCE_FLAG_PRIVATE_UNDEFINED_NON_LAZY = 0x4;
+	public final static int REFERENCE_FLAG_PRIVATE_UNDEFINED_LAZY     = 0x5;
 
-	public static final int REFERENCED_DYNAMICALLY = 0x0010;
+	public final static int REFERENCED_DYNAMICALLY = 0x0010;
 
 	/** symbol is not in any section */
-    public static final byte NO_SECT = 0;
+	public final static byte NO_SECT = 0;
 
-	public static final short DESC_N_NO_DEAD_STRIP = 0x0020;/* symbol is not to be dead stripped */
-	public static final short DESC_N_DESC_DISCARDED = 0x0020;/* symbol is discarded */
-	public static final short DESC_N_WEAK_REF = 0x0040;/* symbol is weak referenced */
-	public static final short DESC_N_WEAK_DEF = 0x0080;/* coalesed symbol is a weak definition */
-	public static final short DESC_N_REF_TO_WEAK = 0x0080;/* reference to a weak symbol */
-	public static final short DESC_N_ARM_THUMB_DEF = 0x0008;
+	public final static short DESC_N_NO_DEAD_STRIP = 0x0020;/* symbol is not to be dead stripped */
+	public final static short DESC_N_DESC_DISCARDED = 0x0020;/* symbol is discarded */
+	public final static short DESC_N_WEAK_REF = 0x0040;/* symbol is weak referenced */
+	public final static short DESC_N_WEAK_DEF = 0x0080;/* coalesed symbol is a weak definition */
+	public final static short DESC_N_REF_TO_WEAK = 0x0080;/* reference to a weak symbol */
+	public final static short DESC_N_ARM_THUMB_DEF = 0x0008;
 
 	//
 	// Symbolic debugger symbols
 	//
 
 	/** global symbol: name,,NO_SECT,type,0 */
-    public static final byte DEBUG_N_GSYM    = 0x20;
+	public final static byte DEBUG_N_GSYM    = (byte)0x20;
 	/** procedure name (f77 kludge): name,,NO_SECT,0,0 */
-    public static final byte DEBUG_N_FNAME   = 0x22;
+	public final static byte DEBUG_N_FNAME   = (byte)0x22;
 	/** procedure: name,,n_sect,linenumber,address */
-    public static final byte DEBUG_N_FUN     = 0x24;
+	public final static byte DEBUG_N_FUN     = (byte)0x24;
 	/** static symbol: name,,n_sect,type,address */
-    public static final byte DEBUG_N_STSYM   = 0x26;
+	public final static byte DEBUG_N_STSYM   = (byte)0x26;
 	/** .lcomm symbol: name,,n_sect,type,address */
-    public static final byte DEBUG_N_LCSYM   = 0x28;
+	public final static byte DEBUG_N_LCSYM   = (byte)0x28;
 	/** begin nsect sym: 0,,n_sect,0,address */
-    public static final byte DEBUG_N_BNSYM   = 0x2e;
+	public final static byte DEBUG_N_BNSYM   = (byte)0x2e;
 	/** emitted with gcc2_compiled and in gcc source */
-    public static final byte DEBUG_N_OPT     = 0x3c;
+	public final static byte DEBUG_N_OPT     = (byte)0x3c;
 	/** register sym: name,,NO_SECT,type,register */
-    public static final byte DEBUG_N_RSYM    = 0x40;
+	public final static byte DEBUG_N_RSYM    = (byte)0x40;
 	/** src line: 0,,n_sect,linenumber,address */
-    public static final byte DEBUG_N_SLINE   = 0x44;
+	public final static byte DEBUG_N_SLINE   = (byte)0x44;
 	/** end nsect sym: 0,,n_sect,0,address */
-    public static final byte DEBUG_N_ENSYM   = 0x4e;
+	public final static byte DEBUG_N_ENSYM   = (byte)0x4e;
 	/** structure elt: name,,NO_SECT,type,struct_offset */
-    public static final byte DEBUG_N_SSYM    = 0x60;
+	public final static byte DEBUG_N_SSYM    = (byte)0x60;
 	/** source file name: name,,n_sect,0,address */
-    public static final byte DEBUG_N_SO      = 0x64;
+	public final static byte DEBUG_N_SO      = (byte)0x64;
 	/** object file name: name,,0,0,st_mtime */
-    public static final byte DEBUG_N_OSO     = 0x66;
+	public final static byte DEBUG_N_OSO     = (byte)0x66;
 	/** local sym: name,,NO_SECT,type,offset */
-    public static final byte DEBUG_N_LSYM    = (byte)0x80;
+	public final static byte DEBUG_N_LSYM    = (byte)0x80;
 	/** include file beginning: name,,NO_SECT,0,sum */
-    public static final byte DEBUG_N_BINCL   = (byte)0x82;
+	public final static byte DEBUG_N_BINCL   = (byte)0x82;
 	/** #included file name: name,,n_sect,0,address */
-    public static final byte DEBUG_N_SOL     = (byte)0x84;
+	public final static byte DEBUG_N_SOL     = (byte)0x84;
 	/** compiler parameters: name,,NO_SECT,0,0 */
-    public static final byte DEBUG_N_PARAMS  = (byte)0x86;
+	public final static byte DEBUG_N_PARAMS  = (byte)0x86;
 	/** compiler version: name,,NO_SECT,0,0 */
-    public static final byte DEBUG_N_VERSION = (byte)0x88;
+	public final static byte DEBUG_N_VERSION = (byte)0x88;
 	/** compiler -O level: name,,NO_SECT,0,0 */
-    public static final byte DEBUG_N_OLEVEL  = (byte)0x8A;
+	public final static byte DEBUG_N_OLEVEL  = (byte)0x8A;
 	/** parameter: name,,NO_SECT,type,offset */
-    public static final byte DEBUG_N_PSYM    = (byte)0xa0;
+	public final static byte DEBUG_N_PSYM    = (byte)0xa0;
 	/** include file end: name,,NO_SECT,0,0 */
-    public static final byte DEBUG_N_EINCL   = (byte)0xa2;
+	public final static byte DEBUG_N_EINCL   = (byte)0xa2;
 	/** alternate entry: name,,n_sect,linenumber,address */
-    public static final byte DEBUG_N_ENTRY   = (byte)0xa4;
+	public final static byte DEBUG_N_ENTRY   = (byte)0xa4;
 	/** left bracket: 0,,NO_SECT,nesting level,address */
-    public static final byte DEBUG_N_LBRAC   = (byte)0xc0;
+	public final static byte DEBUG_N_LBRAC   = (byte)0xc0;
 	/** deleted include file: name,,NO_SECT,0,sum */
-    public static final byte DEBUG_N_EXCL    = (byte)0xc2;
+	public final static byte DEBUG_N_EXCL    = (byte)0xc2;
 	/** right bracket: 0,,NO_SECT,nesting level,address */
-    public static final byte DEBUG_N_RBRAC   = (byte)0xe0;
+	public final static byte DEBUG_N_RBRAC   = (byte)0xe0;
 	/** begin common: name,,NO_SECT,0,0 */
-    public static final byte DEBUG_N_BCOMM   = (byte)0xe2;
+	public final static byte DEBUG_N_BCOMM   = (byte)0xe2;
 	/** end common: name,,n_sect,0,0 */
-    public static final byte DEBUG_N_ECOMM   = (byte)0xe4;
+	public final static byte DEBUG_N_ECOMM   = (byte)0xe4;
 	/** end common (local name): 0,,n_sect,0,address */
-    public static final byte DEBUG_N_ECOML   = (byte)0xe8;
+	public final static byte DEBUG_N_ECOML   = (byte)0xe8;
 	/** second stab entry with length information */
-    public static final byte DEBUG_N_LENG    = (byte)0xfe;
+	public final static byte DEBUG_N_LENG    = (byte)0xfe;
 
-	public static final byte   SELF_LIBRARY_ORDINAL  = 0x00;
-	public static final byte    MAX_LIBRARY_ORDINAL  =  (byte)0xfd;
-	public static final byte DYNAMIC_LOOKUP_ORDINAL  =  (byte)0xfe;
-	public static final byte     EXECUTABLE_ORDINAL  =  (byte)0xff;
+	public final static byte   SELF_LIBRARY_ORDINAL  =  (byte)0x00;
+	public final static byte    MAX_LIBRARY_ORDINAL  =  (byte)0xfd;
+	public final static byte DYNAMIC_LOOKUP_ORDINAL  =  (byte)0xfe;
+	public final static byte     EXECUTABLE_ORDINAL  =  (byte)0xff;
 }

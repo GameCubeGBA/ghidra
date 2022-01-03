@@ -252,9 +252,11 @@ public class TestEnv {
 		AbstractGenericTest.runSwing(() -> {
 			disposeSingleTool(tool);
 
-            for (PluginTool pt : extraTools) {
-                disposeSingleTool(pt);
-            }
+			Iterator<PluginTool> it = extraTools.iterator();
+			while (it.hasNext()) {
+				PluginTool pt = it.next();
+				disposeSingleTool(pt);
+			}
 			extraTools.clear();
 		});
 	}
@@ -963,9 +965,11 @@ public class TestEnv {
 
 			Collection<WeakSet<PluginTool>> values = toolMap.values();
 			for (WeakSet<PluginTool> toolSet : values) {
-                for (PluginTool aaTool : toolSet) {
-                    manager.removeTool(aaTool);
-                }
+				Iterator<PluginTool> iterator = toolSet.iterator();
+				while (iterator.hasNext()) {
+					PluginTool aaTool = iterator.next();
+					manager.removeTool(aaTool);
+				}
 			}
 		}
 	}

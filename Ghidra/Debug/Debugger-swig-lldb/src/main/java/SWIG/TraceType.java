@@ -12,8 +12,8 @@
 package SWIG;
 
 public final class TraceType {
-  public static final TraceType eTraceTypeNone = new TraceType("eTraceTypeNone", lldbJNI.eTraceTypeNone_get());
-  public static final TraceType eTraceTypeProcessorTrace = new TraceType("eTraceTypeProcessorTrace");
+  public final static TraceType eTraceTypeNone = new TraceType("eTraceTypeNone", lldbJNI.eTraceTypeNone_get());
+  public final static TraceType eTraceTypeProcessorTrace = new TraceType("eTraceTypeProcessorTrace");
 
   public final int swigValue() {
     return swigValue;
@@ -26,9 +26,9 @@ public final class TraceType {
   public static TraceType swigToEnum(int swigValue) {
     if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
       return swigValues[swigValue];
-      for (TraceType value : swigValues)
-          if (value.swigValue == swigValue)
-              return value;
+    for (int i = 0; i < swigValues.length; i++)
+      if (swigValues[i].swigValue == swigValue)
+        return swigValues[i];
     throw new IllegalArgumentException("No enum " + TraceType.class + " with value " + swigValue);
   }
 

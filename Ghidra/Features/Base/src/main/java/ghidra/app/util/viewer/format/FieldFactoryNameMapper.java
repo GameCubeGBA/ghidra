@@ -32,11 +32,11 @@ public class FieldFactoryNameMapper {
 			return null;
 		}
 
-        for (FieldFactory prototypeFactory : prototypeFactories) {
-            if (prototypeFactory.getFieldName().equals(fieldName)) {
-                return prototypeFactory;
-            }
-        }
+		for (int i = 0; i < prototypeFactories.length; i++) {
+			if (prototypeFactories[i].getFieldName().equals(fieldName)) {
+				return prototypeFactories[i];
+			}
+		}
 
 		Map<String, FieldFactory> deprecatedfactories = getDeprecatedFieldFactories();
 		return deprecatedfactories.get(fieldName.toLowerCase());

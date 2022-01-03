@@ -60,7 +60,9 @@ public class LanguageTranslatorFactory {
 
 	public static final String LANGUAGE_TRANSLATOR_FILE_EXT = ".trans";
 
-    private Comparator<Object> TRANSLATOR_VERSION_COMPARATOR =
+	private static LanguageTranslatorFactory languageTranslatorFactory;
+
+	private Comparator<Object> TRANSLATOR_VERSION_COMPARATOR =
 		(o1, o2) -> ((LanguageTranslator) o1).getOldVersion() - ((Integer) o2).intValue();
 
 	/**
@@ -84,20 +86,19 @@ public class LanguageTranslatorFactory {
 			minionList = new ArrayList<>();
 		}
 		minionList.add(minion);
-		if (LanguageTranslatorFactoryHolder.languageTranslatorFactory != null) {
-			LanguageTranslatorFactoryHolder.languageTranslatorFactory.processMinion(minion);
+		if (languageTranslatorFactory != null) {
+			languageTranslatorFactory.processMinion(minion);
 		}
 	}
 
-    private static final class LanguageTranslatorFactoryHolder {
-        private static final LanguageTranslatorFactory languageTranslatorFactory = new LanguageTranslatorFactory();
-    }
-
-    /**
+	/**
 	 * Returns the single instance of the OldLanguageFactory.
 	 */
 	public static LanguageTranslatorFactory getLanguageTranslatorFactory() {
-        return LanguageTranslatorFactoryHolder.languageTranslatorFactory;
+		if (languageTranslatorFactory == null) {
+			languageTranslatorFactory = new LanguageTranslatorFactory();
+		}
+		return languageTranslatorFactory;
 	}
 
 	/**

@@ -28,7 +28,7 @@ import java.io.IOException;
  * Typically appStackSize has the value kDefaultStackSize.
  */
 public class CFragUsage1Union implements StructConverter {
-	public static final int kDefaultStackSize = 0;
+	public final static int kDefaultStackSize = 0;
 
 	private int appStackSize;
 

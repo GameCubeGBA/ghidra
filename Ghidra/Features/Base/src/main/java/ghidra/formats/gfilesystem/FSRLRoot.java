@@ -73,7 +73,7 @@ public class FSRLRoot extends FSRL {
 		if (containerFile instanceof FSRLRoot) {
 			throw new RuntimeException("Can't make nestedFS with FSRLRoot path: " + containerFile);
 		}
-		return new FSRLRoot(containerFile, copyFSRL.path);
+		return new FSRLRoot(containerFile, copyFSRL.getProtocol());
 	}
 
 	/**

@@ -119,8 +119,11 @@ public abstract class AbstractAssemblyGrammar<NT extends AssemblyNonTerminal, P 
 	 * @return true iff the production is purely recursive
 	 */
 	protected boolean isPureRecursive(P prod) {
-        return (prod.size() == 1) && prod.getLHS().equals(prod.getRHS().get(0));
-    }
+		if ((prod.size() != 1) || !prod.getLHS().equals(prod.getRHS().get(0))) {
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * Change the start symbol for the grammar

@@ -172,7 +172,7 @@ public class ElfSectionHeaderConstants {
 	//  
 
 	/**undefined, missing, irrelevant section*/
-	public static final short SHN_UNDEF = 0x0000;
+	public static final short SHN_UNDEF = (short) 0x0000;
 	/**lower bound on range of reserved indexes*/
 	public static final short SHN_LORESERVE = (short) 0xff00;
 	/**lower bound for processor-specific semantics*/

@@ -48,7 +48,7 @@ public class Preferences {
 	/**
 	 * Preference name of the user plugin path.
 	 */
-    private static final String USER_PLUGIN_PATH = "UserPluginPath";
+	private final static String USER_PLUGIN_PATH = "UserPluginPath";
 
 	/**
 	 * Preference name for the last opened archive directory.
@@ -58,31 +58,31 @@ public class Preferences {
 	/**
 	 * Preference name for the project directory.
 	 */
-    public static final String PROJECT_DIRECTORY = "ProjectDirectory";
+	public final static String PROJECT_DIRECTORY = "ProjectDirectory";
 
 	/**
 	 * Preference name for import directory that was last accessed for tools.
 	 */
-    public static final String LAST_TOOL_IMPORT_DIRECTORY = "LastToolImportDirectory";
+	public final static String LAST_TOOL_IMPORT_DIRECTORY = "LastToolImportDirectory";
 	/**
 	 * Preference name for export directory that was last accessed for tools.
 	 */
-    public static final String LAST_TOOL_EXPORT_DIRECTORY = "LastToolExportDirectory";
+	public final static String LAST_TOOL_EXPORT_DIRECTORY = "LastToolExportDirectory";
 
 	/**
 	 * Preference name for directory last selected for creating a new project.
 	 */
-    public static final String LAST_NEW_PROJECT_DIRECTORY = "LastNewProjectDirectory";
+	public final static String LAST_NEW_PROJECT_DIRECTORY = "LastNewProjectDirectory";
 
 	/**
 	 * Preference name for the import directory that was last accessed for
 	 * domain files.
 	 */
-    public static final String LAST_IMPORT_DIRECTORY = "LastImportDirectory";
+	public final static String LAST_IMPORT_DIRECTORY = "LastImportDirectory";
 	/**
 	 * Preference name for the export directory that was last accessed.
 	 */
-    public static final String LAST_EXPORT_DIRECTORY = "LastExportDirectory";
+	public final static String LAST_EXPORT_DIRECTORY = "LastExportDirectory";
 
 	/**
 	 * The data storage for this class.

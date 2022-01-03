@@ -24,7 +24,8 @@ import ghidra.app.plugin.core.checksums.ComputeChecksumsProvider;
 public class ComputeChecksumsPluginScreenShots extends GhidraScreenShotGenerator {
 
 	public ComputeChecksumsPluginScreenShots() {
-    }
+		super();
+	}
 
 	@Test
 	public void testDialog_Blank() {

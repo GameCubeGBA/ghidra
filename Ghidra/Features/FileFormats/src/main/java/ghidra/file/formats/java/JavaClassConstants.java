@@ -20,6 +20,6 @@ package ghidra.file.formats.java;
  */
 /* package */ class JavaClassConstants {
 
-	public static final byte[] MAGIC_BYTES = { (byte) 0xca, (byte) 0xfe, (byte) 0xba, (byte) 0xbe };
+	public final static byte[] MAGIC_BYTES = { (byte) 0xca, (byte) 0xfe, (byte) 0xba, (byte) 0xbe };
 
 }

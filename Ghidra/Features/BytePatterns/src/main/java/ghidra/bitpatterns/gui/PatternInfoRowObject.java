@@ -138,8 +138,11 @@ public class PatternInfoRowObject {
 		if (!Objects.equals(otherRow.cRegFilter, cRegFilter)) {
 			return false;
 		}
-        return Objects.equals(alignment, otherRow.alignment);
-    }
+		if (!Objects.equals(alignment, otherRow.alignment)) {
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * Export the patterns to an XML file
@@ -162,18 +165,18 @@ public class PatternInfoRowObject {
 			bWriter.write("\">\n");
 			bWriter.write("    <prepatterns>\n");
 			for (PatternInfoRowObject row : rows) {
-				if (row.type.equals(PatternType.PRE)) {
+				if (row.getPatternType().equals(PatternType.PRE)) {
 					bWriter.write("        <data>");
-					bWriter.write(row.bitSequence.getHexString());
+					bWriter.write(row.getDittedBitSequence().getHexString());
 					bWriter.write("</data>\n");
 				}
 			}
 			bWriter.write("    </prepatterns>\n");
 			bWriter.write("    <postpatterns>\n");
 			for (PatternInfoRowObject row : rows) {
-				if (row.type.equals(PatternType.FIRST)) {
+				if (row.getPatternType().equals(PatternType.FIRST)) {
 					bWriter.write("       <data>");
-					bWriter.write(row.bitSequence.getHexString());
+					bWriter.write(row.getDittedBitSequence().getHexString());
 					bWriter.write("</data>\n");
 				}
 			}
@@ -181,9 +184,9 @@ public class PatternInfoRowObject {
 			Integer alignment = null;
 			ContextRegisterFilter cRegFilter = null;
 			for (PatternInfoRowObject row : rows) {
-				if (row.type.equals(PatternType.FIRST)) {
-					alignment = row.alignment;
-					cRegFilter = row.cRegFilter;
+				if (row.getPatternType().equals(PatternType.FIRST)) {
+					alignment = row.getAlignment();
+					cRegFilter = row.getContextRegisterFilter();
 					break;
 				}
 			}

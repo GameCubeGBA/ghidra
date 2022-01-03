@@ -79,7 +79,12 @@ public class SequenceSearchState implements Comparable<SequenceSearchState> {
 	 * Sort the sequences that have been added 
 	 */
 	public void sortSequences() {
-		Comparator<DittedBitSequence> comp = (o1, o2) -> o1.getIndex() - o2.getIndex();
+		Comparator<DittedBitSequence> comp = new Comparator<DittedBitSequence>() {
+			@Override
+			public int compare(DittedBitSequence o1, DittedBitSequence o2) {
+				return o1.getIndex() - o2.getIndex();
+			}
+		};
 		Collections.sort(possible, comp);
 		if (success != null) {
 			Collections.sort(success, comp);
@@ -403,12 +408,14 @@ public class SequenceSearchState implements Comparable<SequenceSearchState> {
 	static ArrayList<SequenceSearchState> buildTransitionLevel(ArrayList<SequenceSearchState> prev,
 			int pos) {
 		ArrayList<SequenceSearchState> res = new ArrayList<SequenceSearchState>();
-        for (SequenceSearchState next : prev) {            // For each current state
-            next.trans = new SequenceSearchState[256];
-            for (int i = 0; i < 256; ++i) {        // Try every byte transition
-                next.buildSingleTransition(res, pos, i);
-            }
-        }
+		Iterator<SequenceSearchState> iterator = prev.iterator();
+		while (iterator.hasNext()) {			// For each current state
+			SequenceSearchState next = iterator.next();
+			next.trans = new SequenceSearchState[256];
+			for (int i = 0; i < 256; ++i) {		// Try every byte transition
+				next.buildSingleTransition(res, pos, i);
+			}
+		}
 		if (res.isEmpty()) {
 			return res;
 		}
@@ -437,7 +444,7 @@ public class SequenceSearchState implements Comparable<SequenceSearchState> {
 	 * @param patterns bit sequence patterns
 	 * @return search state the will match the given sequences
 	 */
-    public static SequenceSearchState buildStateMachine(
+	static public SequenceSearchState buildStateMachine(
 			ArrayList<? extends DittedBitSequence> patterns) {
 		SequenceSearchState root = new SequenceSearchState(null);
 		for (int i = 0; i < patterns.size(); ++i) {

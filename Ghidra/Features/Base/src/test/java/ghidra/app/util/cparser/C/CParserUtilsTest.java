@@ -25,7 +25,8 @@ import generic.test.AbstractGenericTest;
 public class CParserUtilsTest extends AbstractGenericTest {
 
 	public CParserUtilsTest() {
-    }
+		super();
+	}
 
 	@Test
     public void testUserMessage_OnTokenMgrError() {

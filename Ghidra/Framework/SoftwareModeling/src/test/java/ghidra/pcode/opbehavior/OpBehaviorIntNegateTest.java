@@ -23,7 +23,8 @@ import org.junit.Test;
 public class OpBehaviorIntNegateTest extends AbstractOpBehaviorTest {
 
 	public OpBehaviorIntNegateTest() {
-    }
+		super();
+	}
 
 	@Test
     public void testevaluateUnaryLong() {

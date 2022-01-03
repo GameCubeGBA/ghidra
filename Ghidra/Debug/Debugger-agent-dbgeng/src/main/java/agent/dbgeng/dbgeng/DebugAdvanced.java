@@ -19,7 +19,7 @@ package agent.dbgeng.dbgeng;
  * A wrapper for {@code IDebugAdvanced} and its newer variants.
  */
 public interface DebugAdvanced {
-	class DebugThreadBasicInformation {
+	public static class DebugThreadBasicInformation {
 		public final Integer exitStatus;
 		public final Integer priorityClass;
 		public final Integer priority;

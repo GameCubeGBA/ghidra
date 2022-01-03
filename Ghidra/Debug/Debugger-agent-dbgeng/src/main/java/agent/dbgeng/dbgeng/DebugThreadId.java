@@ -43,8 +43,11 @@ public class DebugThreadId implements Comparable<DebugThreadId> {
 			return false;
 		}
 		DebugThreadId that = (DebugThreadId) obj;
-        return this.id == that.id;
-    }
+		if (this.id != that.id) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public int compareTo(DebugThreadId that) {

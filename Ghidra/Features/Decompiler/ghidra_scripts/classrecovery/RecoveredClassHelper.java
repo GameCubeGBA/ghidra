@@ -195,10 +195,12 @@ public class RecoveredClassHelper {
 	public void addReferenceToVtableMapping(List<Address> referencesToVftable,
 			Address vftableAddress) throws CancelledException {
 
-        for (Address vtableReference : referencesToVftable) {
-            monitor.checkCanceled();
-            vftableRefToVftableMap.put(vtableReference, vftableAddress);
-        }
+		Iterator<Address> referencesIterator = referencesToVftable.iterator();
+		while (referencesIterator.hasNext()) {
+			Address vtableReference = referencesIterator.next();
+			monitor.checkCanceled();
+			vftableRefToVftableMap.put(vtableReference, vftableAddress);
+		}
 	}
 
 	public Address getVftableAddress(Address vftableReference) {
@@ -214,23 +216,25 @@ public class RecoveredClassHelper {
 			Map<Address, Function> vftableRefToFunctionMapping) throws CancelledException {
 
 		Set<Address> keySet = vftableRefToFunctionMapping.keySet();
-        for (Address address : keySet) {
-            monitor.checkCanceled();
-            Address vtableReference = address;
-            Function function = vftableRefToFunctionMapping.get(vtableReference);
-            if (functionToVftableRefsMap.containsKey(function)) {
-                List<Address> referenceList = functionToVftableRefsMap.get(function);
-                if (!referenceList.contains(vtableReference)) {
-                    List<Address> newReferenceList = new ArrayList<Address>(referenceList);
-                    newReferenceList.add(vtableReference);
-                    functionToVftableRefsMap.replace(function, referenceList, newReferenceList);
-                }
-            } else {
-                List<Address> referenceList = new ArrayList<Address>();
-                referenceList.add(vtableReference);
-                functionToVftableRefsMap.put(function, referenceList);
-            }
-        }
+		Iterator<Address> referencesIterator = keySet.iterator();
+		while (referencesIterator.hasNext()) {
+			monitor.checkCanceled();
+			Address vtableReference = referencesIterator.next();
+			Function function = vftableRefToFunctionMapping.get(vtableReference);
+			if (functionToVftableRefsMap.containsKey(function)) {
+				List<Address> referenceList = functionToVftableRefsMap.get(function);
+				if (!referenceList.contains(vtableReference)) {
+					List<Address> newReferenceList = new ArrayList<Address>(referenceList);
+					newReferenceList.add(vtableReference);
+					functionToVftableRefsMap.replace(function, referenceList, newReferenceList);
+				}
+			}
+			else {
+				List<Address> referenceList = new ArrayList<Address>();
+				referenceList.add(vtableReference);
+				functionToVftableRefsMap.put(function, referenceList);
+			}
+		}
 	}
 
 	public List<Address> getVftableReferences(Function function) {
@@ -248,27 +252,28 @@ public class RecoveredClassHelper {
 	public void addFunctionsToClassMapping(List<Function> functions, RecoveredClass recoveredClass)
 			throws CancelledException {
 
-        for (Function value : functions) {
-            monitor.checkCanceled();
-            Function function = value;
-            // if the map already contains a mapping for function and if
-            // the associated class list doesn't contain the new class, then
-            // add the new class and update the mapping
-            if (functionToClassesMap.containsKey(function)) {
-                List<RecoveredClass> classList = functionToClassesMap.get(function);
-                if (!classList.contains(recoveredClass)) {
-                    List<RecoveredClass> newClassList = new ArrayList<RecoveredClass>(classList);
-                    newClassList.add(recoveredClass);
-                    functionToClassesMap.replace(function, classList, newClassList);
-                }
-            }
-            // if the map doesn't contain a mapping for function, then add it
-            else {
-                List<RecoveredClass> classList = new ArrayList<RecoveredClass>();
-                classList.add(recoveredClass);
-                functionToClassesMap.put(function, classList);
-            }
-        }
+		Iterator<Function> functionIterator = functions.iterator();
+		while (functionIterator.hasNext()) {
+			monitor.checkCanceled();
+			Function function = functionIterator.next();
+			// if the map already contains a mapping for function and if
+			// the associated class list doesn't contain the new class, then
+			// add the new class and update the mapping
+			if (functionToClassesMap.containsKey(function)) {
+				List<RecoveredClass> classList = functionToClassesMap.get(function);
+				if (!classList.contains(recoveredClass)) {
+					List<RecoveredClass> newClassList = new ArrayList<RecoveredClass>(classList);
+					newClassList.add(recoveredClass);
+					functionToClassesMap.replace(function, classList, newClassList);
+				}
+			}
+			// if the map doesn't contain a mapping for function, then add it
+			else {
+				List<RecoveredClass> classList = new ArrayList<RecoveredClass>();
+				classList.add(recoveredClass);
+				functionToClassesMap.put(function, classList);
+			}
+		}
 
 	}
 
@@ -368,17 +373,20 @@ public class RecoveredClassHelper {
 	public void createCalledFunctionMap(List<RecoveredClass> recoveredClasses)
 			throws CancelledException {
 
-        for (RecoveredClass aClass : recoveredClasses) {
-            monitor.checkCanceled();
-            RecoveredClass recoveredClass = aClass;
-            List<Function> constructorOrDestructorFunctions =
-                    recoveredClass.getConstructorOrDestructorFunctions();
-            for (Function constructorOrDestructorFunction : constructorOrDestructorFunctions) {
-                monitor.checkCanceled();
-                Function function = constructorOrDestructorFunction;
-                createFunctionToCalledConstructorOrDestructorRefAddrPairMapping(function);
-            }
-        }
+		Iterator<RecoveredClass> recoveredClassIterator = recoveredClasses.iterator();
+
+		while (recoveredClassIterator.hasNext()) {
+			monitor.checkCanceled();
+			RecoveredClass recoveredClass = recoveredClassIterator.next();
+			List<Function> constructorOrDestructorFunctions =
+				recoveredClass.getConstructorOrDestructorFunctions();
+			Iterator<Function> functionIterator = constructorOrDestructorFunctions.iterator();
+			while (functionIterator.hasNext()) {
+				monitor.checkCanceled();
+				Function function = functionIterator.next();
+				createFunctionToCalledConstructorOrDestructorRefAddrPairMapping(function);
+			}
+		}
 
 	}
 
@@ -392,31 +400,33 @@ public class RecoveredClassHelper {
 
 		List<ReferenceAddressPair> referenceAddressPairs = new ArrayList<ReferenceAddressPair>();
 		Set<Function> calledFunctions = function.getCalledFunctions(monitor);
-        for (Function value : calledFunctions) {
-            monitor.checkCanceled();
-            Function calledFunction = value;
-            Function referencedFunction = calledFunction;
-            if (calledFunction.isThunk()) {
-                Function thunkFunction = calledFunction.getThunkedFunction(true);
-                calledFunction = thunkFunction;
-            }
-            // if thunk, need to use the thunked function to see if it is on list of cds
-            // but always need to use the actual called function to get reference address
-            // need to used the thunked function on the hashmap
-            if (allConstructorsAndDestructors.contains(calledFunction)) {
-                // get list of refs to this function from the calling function
-                List<Address> referencesToFunctionBFromFunctionA =
-                        extendedFlatAPI.getReferencesToFunctionBFromFunctionA(function,
-                                referencedFunction);
-                // add them to list of ref address pairs
-                for (Address address : referencesToFunctionBFromFunctionA) {
-                    monitor.checkCanceled();
-                    Address sourceRefAddr = address;
-                    referenceAddressPairs.add(
-                            new ReferenceAddressPair(sourceRefAddr, calledFunction.getEntryPoint()));
-                }
-            }
-        }
+		Iterator<Function> calledFunctionIterator = calledFunctions.iterator();
+		while (calledFunctionIterator.hasNext()) {
+			monitor.checkCanceled();
+			Function calledFunction = calledFunctionIterator.next();
+			Function referencedFunction = calledFunction;
+			if (calledFunction.isThunk()) {
+				Function thunkFunction = calledFunction.getThunkedFunction(true);
+				calledFunction = thunkFunction;
+			}
+			// if thunk, need to use the thunked function to see if it is on list of cds
+			// but always need to use the actual called function to get reference address 
+			// need to used the thunked function on the hashmap
+			if (allConstructorsAndDestructors.contains(calledFunction)) {
+				// get list of refs to this function from the calling function
+				List<Address> referencesToFunctionBFromFunctionA =
+					extendedFlatAPI.getReferencesToFunctionBFromFunctionA(function,
+						referencedFunction);
+				// add them to list of ref address pairs
+				Iterator<Address> iterator = referencesToFunctionBFromFunctionA.iterator();
+				while (iterator.hasNext()) {
+					monitor.checkCanceled();
+					Address sourceRefAddr = iterator.next();
+					referenceAddressPairs.add(
+						new ReferenceAddressPair(sourceRefAddr, calledFunction.getEntryPoint()));
+				}
+			}
+		}
 		// add list to global map
 		functionToCalledConsDestRefAddrPairMap.put(function, referenceAddressPairs);
 
@@ -519,17 +529,21 @@ public class RecoveredClassHelper {
 
 		List<RecoveredClass> classes = new ArrayList<RecoveredClass>();
 
-        for (Address reference : vftableReferences) {
-            monitor.checkCanceled();
-            Address vftableReference = reference;
-            Address vftableAddress = vftableRefToVftableMap.get(vftableReference);
-            RecoveredClass recoveredClass = vftableToClassMap.get(vftableAddress);
-            if (!classes.contains(recoveredClass)) {
-                classes.add(recoveredClass);
-            }
-        }
-        return classes.size() <= 1;
-    }
+		Iterator<Address> iterator = vftableReferences.iterator();
+		while (iterator.hasNext()) {
+			monitor.checkCanceled();
+			Address vftableReference = iterator.next();
+			Address vftableAddress = vftableRefToVftableMap.get(vftableReference);
+			RecoveredClass recoveredClass = vftableToClassMap.get(vftableAddress);
+			if (!classes.contains(recoveredClass)) {
+				classes.add(recoveredClass);
+			}
+		}
+		if (classes.size() > 1) {
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * Method to return the first reference to the class vftable in the given function
@@ -549,24 +563,25 @@ public class RecoveredClassHelper {
 
 		Collections.sort(vftableReferenceList);
 
-        for (Address address : vftableReferenceList) {
-            monitor.checkCanceled();
-            Address vftableRef = address;
+		Iterator<Address> vftableRefs = vftableReferenceList.iterator();
+		while (vftableRefs.hasNext()) {
+			monitor.checkCanceled();
+			Address vftableRef = vftableRefs.next();
 
-            Address vftableAddress = vftableRefToVftableMap.get(vftableRef);
-            if (vftableAddress == null) {
-                continue;
-            }
+			Address vftableAddress = vftableRefToVftableMap.get(vftableRef);
+			if (vftableAddress == null) {
+				continue;
+			}
 
-            RecoveredClass referencedClass = vftableToClassMap.get(vftableAddress);
-            if (referencedClass == null) {
-                continue;
-            }
+			RecoveredClass referencedClass = vftableToClassMap.get(vftableAddress);
+			if (referencedClass == null) {
+				continue;
+			}
 
-            if (referencedClass.equals(recoveredClass)) {
-                return vftableRef;
-            }
-        }
+			if (referencedClass.equals(recoveredClass)) {
+				return vftableRef;
+			}
+		}
 		return null;
 
 	}
@@ -593,14 +608,15 @@ public class RecoveredClassHelper {
 		// make a list of all related class references
 		List<Address> listOfAncestorRefs = new ArrayList<Address>();
 		Set<Address> ancestorRefs = referenceToClassMapForFunction.keySet();
-        for (Address ref : ancestorRefs) {
-            monitor.checkCanceled();
-            Address ancestorRef = ref;
-            RecoveredClass mappedClass = referenceToClassMapForFunction.get(ancestorRef);
-            if (classHierarchy.contains(mappedClass)) {
-                listOfAncestorRefs.add(ancestorRef);
-            }
-        }
+		Iterator<Address> ancestorRefIterator = ancestorRefs.iterator();
+		while (ancestorRefIterator.hasNext()) {
+			monitor.checkCanceled();
+			Address ancestorRef = ancestorRefIterator.next();
+			RecoveredClass mappedClass = referenceToClassMapForFunction.get(ancestorRef);
+			if (classHierarchy.contains(mappedClass)) {
+				listOfAncestorRefs.add(ancestorRef);
+			}
+		}
 
 		Collections.sort(listOfAncestorRefs);
 		return listOfAncestorRefs;
@@ -626,20 +642,21 @@ public class RecoveredClassHelper {
 		}
 
 		// iterate through all vftable refs in the function and add it to ref/Parent map
-        for (Address ref : vftableRefs) {
+		Iterator<Address> vftableRefIterator = vftableRefs.iterator();
+		while (vftableRefIterator.hasNext()) {
 
-            monitor.checkCanceled();
+			monitor.checkCanceled();
 
-            Address vftableRef = ref;
-            Address vftableAddress = extendedFlatAPI.getSingleReferencedAddress(vftableRef);
+			Address vftableRef = vftableRefIterator.next();
+			Address vftableAddress = extendedFlatAPI.getSingleReferencedAddress(vftableRef);
 
-            if (vftableAddress == null) {
-                continue;
-            }
+			if (vftableAddress == null) {
+				continue;
+			}
 
-            RecoveredClass parentClass = vftableToClassMap.get(vftableAddress);
-            referenceToParentMap.put(vftableRef, parentClass);
-        }
+			RecoveredClass parentClass = vftableToClassMap.get(vftableAddress);
+			referenceToParentMap.put(vftableRef, parentClass);
+		}
 
 		// remove duplicate vftable refs (occasionally there are LEA then MOV of same vftable address
 		// a few intructions of each other. It confuses later processes to have both.
@@ -656,29 +673,31 @@ public class RecoveredClassHelper {
 			return referenceToParentMap;
 		}
 
-        for (ReferenceAddressPair refAddrPairsToCalledParent : refAddrPairsToCalledParents) {
+		Iterator<ReferenceAddressPair> refAddPairIterator = refAddrPairsToCalledParents.iterator();
 
-            monitor.checkCanceled();
+		while (refAddPairIterator.hasNext()) {
 
-            ReferenceAddressPair parentRefAddrPair = refAddrPairsToCalledParent;
+			monitor.checkCanceled();
 
-            Address parentConstructorAddress = parentRefAddrPair.getDestination();
-            Function parentConstructor =
-                    program.getFunctionManager().getFunctionAt(parentConstructorAddress);
+			ReferenceAddressPair parentRefAddrPair = refAddPairIterator.next();
 
-            if (parentConstructor.isThunk()) {
-                parentConstructor = parentConstructor.getThunkedFunction(true);
-            }
+			Address parentConstructorAddress = parentRefAddrPair.getDestination();
+			Function parentConstructor =
+				program.getFunctionManager().getFunctionAt(parentConstructorAddress);
 
-            RecoveredClass ancestorClass =
-                    getAncestorClassWithGivenFunction(recoveredClass, parentConstructor);
+			if (parentConstructor.isThunk()) {
+				parentConstructor = parentConstructor.getThunkedFunction(true);
+			}
 
-            if (ancestorClass == null) {
-                continue;
-            }
+			RecoveredClass ancestorClass =
+				getAncestorClassWithGivenFunction(recoveredClass, parentConstructor);
 
-            referenceToParentMap.put(parentRefAddrPair.getSource(), ancestorClass);
-        }
+			if (ancestorClass == null) {
+				continue;
+			}
+
+			referenceToParentMap.put(parentRefAddrPair.getSource(), ancestorClass);
+		}
 
 		return referenceToParentMap;
 	}
@@ -771,7 +790,7 @@ public class RecoveredClassHelper {
 			classList.remove(recoveredClass);
 		}
 
-		if (classList.isEmpty()) {
+		if (classList.size() == 0) {
 			return null;
 		}
 
@@ -783,16 +802,17 @@ public class RecoveredClassHelper {
 			new ArrayList<RecoveredClass>(recoveredClass.getClassHierarchyMap().keySet());
 
 		// try direct parents first
-        for (RecoveredClass aClass : parentClasses) {
-            monitor.checkCanceled();
-            RecoveredClass parentClass = aClass;
-            List<Function> constructorDestructorList =
-                    new ArrayList<Function>(parentClass.getConstructorList());
-            constructorDestructorList.addAll(parentClass.getDestructorList());
-            if (constructorDestructorList.contains(function)) {
-                return parentClass;
-            }
-        }
+		Iterator<RecoveredClass> parentsIterator = parentClasses.iterator();
+		while (parentsIterator.hasNext()) {
+			monitor.checkCanceled();
+			RecoveredClass parentClass = parentsIterator.next();
+			List<Function> constructorDestructorList =
+				new ArrayList<Function>(parentClass.getConstructorList());
+			constructorDestructorList.addAll(parentClass.getDestructorList());
+			if (constructorDestructorList.contains(function)) {
+				return parentClass;
+			}
+		}
 
 		// if not found in direct parents, try all ancestors
 		List<RecoveredClass> ancestorClasses = recoveredClass.getClassHierarchy();
@@ -851,18 +871,19 @@ public class RecoveredClassHelper {
 	public Address getStoredVftableAddress(List<OffsetPcodeOpPair> storedPcodeOps)
 			throws CancelledException {
 
-		if (!storedPcodeOps.isEmpty()) {
-            // figure out if vftable is referenced
-            for (OffsetPcodeOpPair storedPcodeOp : storedPcodeOps) {
-                monitor.checkCanceled();
-                OffsetPcodeOpPair offsetPcodeOpPair = storedPcodeOp;
-                PcodeOp pcodeOp = offsetPcodeOpPair.getPcodeOp();
-                Varnode storedValue = pcodeOp.getInput(2);
-                Address vftableAddress = decompilerUtils.getAssignedAddressFromPcode(storedValue);
-                if (vftableAddress != null && vftableToClassMap.containsKey(vftableAddress)) {
-                    return vftableAddress;
-                }
-            }
+		if (storedPcodeOps.size() > 0) {
+			Iterator<OffsetPcodeOpPair> iterator = storedPcodeOps.iterator();
+			// figure out if vftable is referenced
+			while (iterator.hasNext()) {
+				monitor.checkCanceled();
+				OffsetPcodeOpPair offsetPcodeOpPair = iterator.next();
+				PcodeOp pcodeOp = offsetPcodeOpPair.getPcodeOp();
+				Varnode storedValue = pcodeOp.getInput(2);
+				Address vftableAddress = decompilerUtils.getAssignedAddressFromPcode(storedValue);
+				if (vftableAddress != null && vftableToClassMap.containsKey(vftableAddress)) {
+					return vftableAddress;
+				}
+			}
 		}
 		return null;
 	}
@@ -919,14 +940,15 @@ public class RecoveredClassHelper {
 	private boolean isSymbolAddressOnList(List<Symbol> symbols, Address address)
 			throws CancelledException {
 
-        for (Symbol value : symbols) {
-            monitor.checkCanceled();
-            Symbol symbol = value;
-            if (symbol.getAddress().equals(address)) {
-                return true;
-            }
+		Iterator<Symbol> symbolIterator = symbols.iterator();
+		while (symbolIterator.hasNext()) {
+			monitor.checkCanceled();
+			Symbol symbol = symbolIterator.next();
+			if (symbol.getAddress().equals(address)) {
+				return true;
+			}
 
-        }
+		}
 		return false;
 	}
 
@@ -947,17 +969,18 @@ public class RecoveredClassHelper {
 			}
 			return true;
 		}
-        for (RecoveredClass functionClass : functionClasses) {
-            monitor.checkCanceled();
-            RecoveredClass recoveredClass = functionClass;
+		Iterator<RecoveredClass> functionClassesIterator = functionClasses.iterator();
+		while (functionClassesIterator.hasNext()) {
+			monitor.checkCanceled();
+			RecoveredClass recoveredClass = functionClassesIterator.next();
 
-            if (recoveredClass.getInlinedDestructorList().contains(function)) {
-                return true;
-            }
-            if (recoveredClass.getIndeterminateInlineList().contains(function)) {
-                return true;
-            }
-        }
+			if (recoveredClass.getInlinedDestructorList().contains(function)) {
+				return true;
+			}
+			if (recoveredClass.getIndeterminateInlineList().contains(function)) {
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -1238,14 +1261,15 @@ public class RecoveredClassHelper {
 	public boolean isClassAnAncestorOfAnyOnList(List<RecoveredClass> recoveredClasses,
 			RecoveredClass possibleAncestor) throws Exception {
 
-        for (RecoveredClass aClass : recoveredClasses) {
-            monitor.checkCanceled();
-            RecoveredClass recoveredClass = aClass;
+		Iterator<RecoveredClass> classIterator = recoveredClasses.iterator();
+		while (classIterator.hasNext()) {
+			monitor.checkCanceled();
+			RecoveredClass recoveredClass = classIterator.next();
 
-            if (isClassAnAncestor(recoveredClass, possibleAncestor)) {
-                return true;
-            }
-        }
+			if (isClassAnAncestor(recoveredClass, possibleAncestor)) {
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -1270,8 +1294,11 @@ public class RecoveredClassHelper {
 		//remove self
 		classHierarchy.remove(recoveredClass);
 
-        return classHierarchy.contains(possibleAncestorClass);
-    }
+		if (classHierarchy.contains(possibleAncestorClass)) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Method to return subList of offset/pcodeOp pairs from the given list that are contained in the current function
@@ -1309,8 +1336,11 @@ public class RecoveredClassHelper {
 
 		Function calledFunction =
 			api.getFunctionAt(calledPcodeOp.getInput(0).getAddress());
+		if (calledFunction == null) {
+			return null;
+		}
 
-        return calledFunction;
+		return calledFunction;
 	}
 
 	/**
@@ -1346,13 +1376,14 @@ public class RecoveredClassHelper {
 
 		List<RecoveredClass> classesWithVFunctions = new ArrayList<RecoveredClass>();
 
-        for (RecoveredClass aClass : recoveredClasses) {
-            monitor.checkCanceled();
-            RecoveredClass recoveredClass = aClass;
-            if (recoveredClass.hasVftable()) {
-                classesWithVFunctions.add(recoveredClass);
-            }
-        }
+		Iterator<RecoveredClass> classIterator = recoveredClasses.iterator();
+		while (classIterator.hasNext()) {
+			monitor.checkCanceled();
+			RecoveredClass recoveredClass = classIterator.next();
+			if (recoveredClass.hasVftable()) {
+				classesWithVFunctions.add(recoveredClass);
+			}
+		}
 
 		return classesWithVFunctions;
 	}
@@ -1379,15 +1410,16 @@ public class RecoveredClassHelper {
 		List<RecoveredClass> parentClassList =
 			new ArrayList<RecoveredClass>(classHierarchyMap.keySet());
 
-        for (RecoveredClass aClass : parentClassList) {
+		Iterator<RecoveredClass> parentIterator = parentClassList.iterator();
+		while (parentIterator.hasNext()) {
 
-            monitor.checkCanceled();
+			monitor.checkCanceled();
 
-            RecoveredClass parentClass = aClass;
-            if (parentClass.hasVftable()) {
-                parentsWithVFunctions.add(parentClass);
-            }
-        }
+			RecoveredClass parentClass = parentIterator.next();
+			if (parentClass.hasVftable()) {
+				parentsWithVFunctions.add(parentClass);
+			}
+		}
 
 		return parentsWithVFunctions;
 	}
@@ -1410,15 +1442,16 @@ public class RecoveredClassHelper {
 
 		List<RecoveredClass> classHierarchyList = recoveredClass.getClassHierarchy();
 
-        for (RecoveredClass aClass : classHierarchyList) {
+		Iterator<RecoveredClass> ancestorIterator = classHierarchyList.iterator();
+		while (ancestorIterator.hasNext()) {
 
-            monitor.checkCanceled();
+			monitor.checkCanceled();
 
-            RecoveredClass parentClass = aClass;
-            if (parentClass.hasVftable()) {
-                ancestorsWithVFunctions.add(parentClass);
-            }
-        }
+			RecoveredClass parentClass = ancestorIterator.next();
+			if (parentClass.hasVftable()) {
+				ancestorsWithVFunctions.add(parentClass);
+			}
+		}
 
 		return ancestorsWithVFunctions;
 	}
@@ -1436,18 +1469,20 @@ public class RecoveredClassHelper {
 
 		List<RecoveredClass> classHierarchy = recoveredClass.getClassHierarchy();
 
-        for (RecoveredClass aClass : classHierarchy) {
-            monitor.checkCanceled();
-            RecoveredClass ancestorClass = aClass;
+		Iterator<RecoveredClass> hierarchyIterator = classHierarchy.iterator();
 
-            // skip self
-            if (ancestorClass.equals(recoveredClass)) {
-                continue;
-            }
-            if (!ancestorClass.hasVftable()) {
-                ancestorsWithoutVfunctions.add(ancestorClass);
-            }
-        }
+		while (hierarchyIterator.hasNext()) {
+			monitor.checkCanceled();
+			RecoveredClass ancestorClass = hierarchyIterator.next();
+
+			// skip self
+			if (ancestorClass.equals(recoveredClass)) {
+				continue;
+			}
+			if (!ancestorClass.hasVftable()) {
+				ancestorsWithoutVfunctions.add(ancestorClass);
+			}
+		}
 
 		return ancestorsWithoutVfunctions;
 	}
@@ -1461,13 +1496,14 @@ public class RecoveredClassHelper {
 	public boolean hasNonVirtualFunctionAncestor(RecoveredClass recoveredClass)
 			throws CancelledException {
 		List<RecoveredClass> classHierarchy = recoveredClass.getClassHierarchy();
-        for (RecoveredClass aClass : classHierarchy) {
-            monitor.checkCanceled();
-            RecoveredClass currentClass = aClass;
-            if (!currentClass.hasVftable()) {
-                return true;
-            }
-        }
+		Iterator<RecoveredClass> recoveredClassIterator = classHierarchy.iterator();
+		while (recoveredClassIterator.hasNext()) {
+			monitor.checkCanceled();
+			RecoveredClass currentClass = recoveredClassIterator.next();
+			if (!currentClass.hasVftable()) {
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -1492,13 +1528,14 @@ public class RecoveredClassHelper {
 			List<Function> constructorList =
 				new ArrayList<Function>(currentClass.getConstructorList());
 			constructorList.addAll(currentClass.getInlinedConstructorList());
-            for (Function function : constructorList) {
-                monitor.checkCanceled();
-                Function constructor = function;
-                if (!allAncestorConstructors.contains(constructor)) {
-                    allAncestorConstructors.add(constructor);
-                }
-            }
+			Iterator<Function> constructors = constructorList.iterator();
+			while (constructors.hasNext()) {
+				monitor.checkCanceled();
+				Function constructor = constructors.next();
+				if (!allAncestorConstructors.contains(constructor)) {
+					allAncestorConstructors.add(constructor);
+				}
+			}
 		}
 		return allAncestorConstructors;
 	}
@@ -1524,13 +1561,14 @@ public class RecoveredClassHelper {
 			List<Function> destructorList =
 				new ArrayList<Function>(parentClass.getDestructorList());
 			destructorList.addAll(parentClass.getInlinedDestructorList());
-            for (Function function : destructorList) {
-                monitor.checkCanceled();
-                Function destructor = function;
-                if (!allAncestorDestructors.contains(destructor)) {
-                    allAncestorDestructors.add(destructor);
-                }
-            }
+			Iterator<Function> destructors = destructorList.iterator();
+			while (destructors.hasNext()) {
+				monitor.checkCanceled();
+				Function destructor = destructors.next();
+				if (!allAncestorDestructors.contains(destructor)) {
+					allAncestorDestructors.add(destructor);
+				}
+			}
 		}
 		return allAncestorDestructors;
 	}
@@ -1547,22 +1585,24 @@ public class RecoveredClassHelper {
 		List<Function> allDescendantConstructors = new ArrayList<Function>();
 
 		List<RecoveredClass> childClasses = recoveredClass.getChildClasses();
-        for (RecoveredClass aClass : childClasses) {
-            monitor.checkCanceled();
-            RecoveredClass childClass = aClass;
+		Iterator<RecoveredClass> childClassIterator = childClasses.iterator();
+		while (childClassIterator.hasNext()) {
+			monitor.checkCanceled();
+			RecoveredClass childClass = childClassIterator.next();
 
-            List<Function> constructorList =
-                    new ArrayList<Function>(childClass.getConstructorList());
-            constructorList.addAll(childClass.getInlinedConstructorList());
-            for (Function function : constructorList) {
-                monitor.checkCanceled();
-                Function constructor = function;
-                if (!allDescendantConstructors.contains(constructor)) {
-                    allDescendantConstructors.add(constructor);
-                }
-            }
-            allDescendantConstructors.addAll(getAllDescendantConstructors(childClass));
-        }
+			List<Function> constructorList =
+				new ArrayList<Function>(childClass.getConstructorList());
+			constructorList.addAll(childClass.getInlinedConstructorList());
+			Iterator<Function> constructors = constructorList.iterator();
+			while (constructors.hasNext()) {
+				monitor.checkCanceled();
+				Function constructor = constructors.next();
+				if (!allDescendantConstructors.contains(constructor)) {
+					allDescendantConstructors.add(constructor);
+				}
+			}
+			allDescendantConstructors.addAll(getAllDescendantConstructors(childClass));
+		}
 
 		return allDescendantConstructors;
 	}
@@ -1579,21 +1619,23 @@ public class RecoveredClassHelper {
 		List<Function> allDescendantDestructors = new ArrayList<Function>();
 
 		List<RecoveredClass> childClasses = recoveredClass.getChildClasses();
-        for (RecoveredClass aClass : childClasses) {
-            monitor.checkCanceled();
-            RecoveredClass childClass = aClass;
+		Iterator<RecoveredClass> childClassIterator = childClasses.iterator();
+		while (childClassIterator.hasNext()) {
+			monitor.checkCanceled();
+			RecoveredClass childClass = childClassIterator.next();
 
-            List<Function> destructorList = new ArrayList<Function>(childClass.getDestructorList());
-            destructorList.addAll(childClass.getInlinedDestructorList());
-            for (Function function : destructorList) {
-                monitor.checkCanceled();
-                Function destructor = function;
-                if (!allDescendantDestructors.contains(destructor)) {
-                    allDescendantDestructors.add(destructor);
-                }
-            }
-            allDescendantDestructors.addAll(getAllDescendantDestructors(childClass));
-        }
+			List<Function> destructorList = new ArrayList<Function>(childClass.getDestructorList());
+			destructorList.addAll(childClass.getInlinedDestructorList());
+			Iterator<Function> destructors = destructorList.iterator();
+			while (destructors.hasNext()) {
+				monitor.checkCanceled();
+				Function destructor = destructors.next();
+				if (!allDescendantDestructors.contains(destructor)) {
+					allDescendantDestructors.add(destructor);
+				}
+			}
+			allDescendantDestructors.addAll(getAllDescendantDestructors(childClass));
+		}
 
 		return allDescendantDestructors;
 	}
@@ -1617,18 +1659,19 @@ public class RecoveredClassHelper {
 		}
 
 		Address minVftableReference = extendedFlatAPI.getMinimumAddressOnList(vftableReferenceList);
+		Iterator<ReferenceAddressPair> iterator = refAddrPairList.iterator();
 
-        for (ReferenceAddressPair referenceAddressPair : refAddrPairList) {
-            monitor.checkCanceled();
-            ReferenceAddressPair refAddrPair = referenceAddressPair;
-            Address sourceAddr = refAddrPair.getSource();
-            if (sourceAddr.compareTo(minVftableReference) < 0) {
-                Function calledFunction = api.getFunctionAt(refAddrPair.getDestination());
-                if (calledFunction != null) {
-                    possibleParentConstructors.add(calledFunction);
-                }
-            }
-        }
+		while (iterator.hasNext()) {
+			monitor.checkCanceled();
+			ReferenceAddressPair refAddrPair = iterator.next();
+			Address sourceAddr = refAddrPair.getSource();
+			if (sourceAddr.compareTo(minVftableReference) < 0) {
+				Function calledFunction = api.getFunctionAt(refAddrPair.getDestination());
+				if (calledFunction != null) {
+					possibleParentConstructors.add(calledFunction);
+				}
+			}
+		}
 		return possibleParentConstructors;
 	}
 
@@ -1690,18 +1733,19 @@ public class RecoveredClassHelper {
 		}
 
 		Address maxVftableReference = extendedFlatAPI.getMaximumAddressOnList(vftableReferenceList);
+		Iterator<ReferenceAddressPair> iterator = refAddrPairList.iterator();
 
-        for (ReferenceAddressPair referenceAddressPair : refAddrPairList) {
-            monitor.checkCanceled();
-            ReferenceAddressPair refAddrPair = referenceAddressPair;
-            Address sourceAddr = refAddrPair.getSource();
-            if (sourceAddr.compareTo(maxVftableReference) > 0) {
-                Function calledFunction = extendedFlatAPI.getFunctionAt(refAddrPair.getDestination());
-                if (calledFunction != null) {
-                    possibleParentDestructors.add(calledFunction);
-                }
-            }
-        }
+		while (iterator.hasNext()) {
+			monitor.checkCanceled();
+			ReferenceAddressPair refAddrPair = iterator.next();
+			Address sourceAddr = refAddrPair.getSource();
+			if (sourceAddr.compareTo(maxVftableReference) > 0) {
+				Function calledFunction = extendedFlatAPI.getFunctionAt(refAddrPair.getDestination());
+				if (calledFunction != null) {
+					possibleParentDestructors.add(calledFunction);
+				}
+			}
+		}
 		return possibleParentDestructors;
 	}
 
@@ -1737,45 +1781,46 @@ public class RecoveredClassHelper {
 		List<Function> childConstructors = getAllClassConstructors(recoveredClass);
 		List<Function> childDestructors = getAllClassDestructors(recoveredClass);
 
-        for (Function destFunction : constDestFunctions) {
-            monitor.checkCanceled();
+		Iterator<Function> constDestIterator = constDestFunctions.iterator();
+		while (constDestIterator.hasNext()) {
+			monitor.checkCanceled();
 
-            Function constDestFunction = destFunction;
+			Function constDestFunction = constDestIterator.next();
 
-            // based on call order get possible parent constructors for the given function
-            List<Function> possibleParentConstructors =
-                    getPossibleParentConstructors(constDestFunction);
+			// based on call order get possible parent constructors for the given function
+			List<Function> possibleParentConstructors =
+				getPossibleParentConstructors(constDestFunction);
 
-            // remove any known destructors since they can't also be constructors - rarely these
-            // show up on possible const list
-            possibleParentConstructors.removeAll(parentDestructors);
+			// remove any known destructors since they can't also be constructors - rarely these 
+			// show up on possible const list
+			possibleParentConstructors.removeAll(parentDestructors);
 
-            Function parentConstructor =
-                    getFunctionOnBothLists(possibleParentConstructors, parentConstDestFunctions);
+			Function parentConstructor =
+				getFunctionOnBothLists(possibleParentConstructors, parentConstDestFunctions);
 
-            // another sanity check - make sure child function isn't a known destructor
-            if (parentConstructor != null && !childDestructors.contains(constDestFunction)) {
-                childParentConstructorMap.put(constDestFunction, parentConstructor);
-                continue;
-            }
+			// another sanity check - make sure child function isn't a known destructor
+			if (parentConstructor != null && !childDestructors.contains(constDestFunction)) {
+				childParentConstructorMap.put(constDestFunction, parentConstructor);
+				continue;
+			}
 
-            // based on call order get possible parent destructors for the given function
-            List<Function> possibleParentDestructors =
-                    getPossibleParentDestructors(constDestFunction);
+			// based on call order get possible parent destructors for the given function 
+			List<Function> possibleParentDestructors =
+				getPossibleParentDestructors(constDestFunction);
 
-            // remove any known constructors since they can't also be destructors - rarely these
-            // show up on possible dest list
-            possibleParentDestructors.removeAll(parentConstructors);
+			// remove any known constructors since they can't also be destructors - rarely these 
+			// show up on possible dest list
+			possibleParentDestructors.removeAll(parentConstructors);
 
-            Function parentDestructor =
-                    getFunctionOnBothLists(possibleParentDestructors, parentConstDestFunctions);
+			Function parentDestructor =
+				getFunctionOnBothLists(possibleParentDestructors, parentConstDestFunctions);
 
-            // another sanity check - make sure child function isn't a known constructor
-            if (parentDestructor != null && !childConstructors.contains(constDestFunction)) {
-                childParentDestructorMap.put(constDestFunction, parentDestructor);
-                continue;
-            }
-        }
+			// another sanity check - make sure child function isn't a known constructor			
+			if (parentDestructor != null && !childConstructors.contains(constDestFunction)) {
+				childParentDestructorMap.put(constDestFunction, parentDestructor);
+				continue;
+			}
+		}
 
 		// check to make sure there is no overlap in the poss c and poss d maps
 		Set<Function> constructorKeySet = childParentConstructorMap.keySet();
@@ -1783,7 +1828,7 @@ public class RecoveredClassHelper {
 		Set<Function> functionsContainedInBothSets =
 			getFunctionsContainedInBothSets(constructorKeySet, destructorKeySet);
 
-		if (!functionsContainedInBothSets.isEmpty()) {
+		if (functionsContainedInBothSets.size() > 0) {
 			constructorKeySet.removeAll(functionsContainedInBothSets);
 			destructorKeySet.removeAll(functionsContainedInBothSets);
 			if (constructorKeySet.isEmpty() && destructorKeySet.isEmpty()) {
@@ -1794,26 +1839,28 @@ public class RecoveredClassHelper {
 		// once all checks pass, add both the child and parent constructors to their class 
 		// constructor list and remove from the indeterminate lists
 		// the addConstructor method processes the offsets and types for the initialized class data
-        for (Function value : constructorKeySet) {
-            monitor.checkCanceled();
-            Function childConstructor = value;
-            addConstructorToClass(recoveredClass, childConstructor);
-            recoveredClass.removeIndeterminateConstructorOrDestructor(childConstructor);
-            Function parentConstructor = childParentConstructorMap.get(childConstructor);
-            addConstructorToClass(parentClass, parentConstructor);
-            parentClass.removeIndeterminateConstructorOrDestructor(parentConstructor);
-        }
+		Iterator<Function> childConstructorIterator = constructorKeySet.iterator();
+		while (childConstructorIterator.hasNext()) {
+			monitor.checkCanceled();
+			Function childConstructor = childConstructorIterator.next();
+			addConstructorToClass(recoveredClass, childConstructor);
+			recoveredClass.removeIndeterminateConstructorOrDestructor(childConstructor);
+			Function parentConstructor = childParentConstructorMap.get(childConstructor);
+			addConstructorToClass(parentClass, parentConstructor);
+			parentClass.removeIndeterminateConstructorOrDestructor(parentConstructor);
+		}
 
 		// Do the same for the child/parent destructors
-        for (Function function : destructorKeySet) {
-            monitor.checkCanceled();
-            Function childDestructor = function;
-            addDestructorToClass(recoveredClass, childDestructor);
-            recoveredClass.removeIndeterminateConstructorOrDestructor(childDestructor);
-            Function parentDestructor = childParentDestructorMap.get(childDestructor);
-            addDestructorToClass(parentClass, parentDestructor);
-            parentClass.removeIndeterminateConstructorOrDestructor(parentDestructor);
-        }
+		Iterator<Function> childDestructorIterator = destructorKeySet.iterator();
+		while (childDestructorIterator.hasNext()) {
+			monitor.checkCanceled();
+			Function childDestructor = childDestructorIterator.next();
+			addDestructorToClass(recoveredClass, childDestructor);
+			recoveredClass.removeIndeterminateConstructorOrDestructor(childDestructor);
+			Function parentDestructor = childParentDestructorMap.get(childDestructor);
+			addDestructorToClass(parentClass, parentDestructor);
+			parentClass.removeIndeterminateConstructorOrDestructor(parentDestructor);
+		}
 		return true;
 
 	}
@@ -1872,7 +1919,7 @@ public class RecoveredClassHelper {
 
 		// create vftable mapping for any class that didn't have a constructor when the
 		// original mappings were created
-		if (recoveredClass.getOrderToVftableMap().isEmpty()) {
+		if (recoveredClass.getOrderToVftableMap().size() == 0) {
 			createVftableOrderMapping(recoveredClass);
 		}
 
@@ -1951,7 +1998,7 @@ public class RecoveredClassHelper {
 
 		Map<Integer, Address> classOffsetToVftableMap = recoveredClass.getClassOffsetToVftableMap();
 
-		if (classOffsetToVftableMap.isEmpty()) {
+		if (classOffsetToVftableMap.size() == 0) {
 			return;
 		}
 
@@ -1967,13 +2014,14 @@ public class RecoveredClassHelper {
 		Collections.sort(offsetList);
 
 		int order = 0;
-        for (Integer integer : offsetList) {
-            monitor.checkCanceled();
-            Integer offset = integer;
-            Address vftableAddress = classOffsetToVftableMap.get(offset);
-            recoveredClass.addOrderToVftableMapping(order, vftableAddress);
-            order++;
-        }
+		Iterator<Integer> offsetIterator = offsetList.iterator();
+		while (offsetIterator.hasNext()) {
+			monitor.checkCanceled();
+			Integer offset = offsetIterator.next();
+			Address vftableAddress = classOffsetToVftableMap.get(offset);
+			recoveredClass.addOrderToVftableMapping(order, vftableAddress);
+			order++;
+		}
 	}
 
 	/**
@@ -1983,14 +2031,15 @@ public class RecoveredClassHelper {
 	 */
 	public void createVftableOrderMap(List<RecoveredClass> recoveredClasses)
 			throws CancelledException {
+		Iterator<RecoveredClass> recoveredClassIterator = recoveredClasses.iterator();
 
-        for (RecoveredClass aClass : recoveredClasses) {
-            monitor.checkCanceled();
-            RecoveredClass recoveredClass = aClass;
+		while (recoveredClassIterator.hasNext()) {
+			monitor.checkCanceled();
+			RecoveredClass recoveredClass = recoveredClassIterator.next();
 
-            // create a mapping of the order of the vftable to the vftable address and save to class
-            createVftableOrderMapping(recoveredClass);
-        }
+			// create a mapping of the order of the vftable to the vftable address and save to class
+			createVftableOrderMapping(recoveredClass);
+		}
 	}
 
 	/**
@@ -2006,24 +2055,25 @@ public class RecoveredClassHelper {
 			List<Address> referencesToConstructors) throws CancelledException,
 			InvalidInputException, DuplicateNameException, CircularDependencyException {
 
-        for (Address referencesToConstructor : referencesToConstructors) {
-            monitor.checkCanceled();
+		Iterator<Address> constructorIterator = referencesToConstructors.iterator();
+		while (constructorIterator.hasNext()) {
+			monitor.checkCanceled();
 
-            Address constructorReference = referencesToConstructor;
-            RecoveredClass recoveredClass = referenceToClassMap.get(constructorReference);
+			Address constructorReference = constructorIterator.next();
+			RecoveredClass recoveredClass = referenceToClassMap.get(constructorReference);
 
-            Function constructor = extendedFlatAPI.getReferencedFunction(constructorReference, true);
+			Function constructor = extendedFlatAPI.getReferencedFunction(constructorReference, true);
 
-            if (recoveredClass.getIndeterminateList().contains(constructor)) {
-                addConstructorToClass(recoveredClass, constructor);
-                recoveredClass.removeIndeterminateConstructorOrDestructor(constructor);
-                continue;
-            }
+			if (recoveredClass.getIndeterminateList().contains(constructor)) {
+				addConstructorToClass(recoveredClass, constructor);
+				recoveredClass.removeIndeterminateConstructorOrDestructor(constructor);
+				continue;
+			}
 
-            if (recoveredClass.getIndeterminateInlineList().contains(constructor)) {
-                processInlineConstructor(recoveredClass, constructor, referenceToClassMap);
-            }
-        }
+			if (recoveredClass.getIndeterminateInlineList().contains(constructor)) {
+				processInlineConstructor(recoveredClass, constructor, referenceToClassMap);
+			}
+		}
 	}
 
 	/**
@@ -2049,14 +2099,15 @@ public class RecoveredClassHelper {
 		List<Address> referencesToVftables = new ArrayList<Address>();
 
 		List<Address> referenceAddresses = new ArrayList<Address>(referenceToClassMap.keySet());
-        for (Address referenceAddress : referenceAddresses) {
-            monitor.checkCanceled();
-            Address reference = referenceAddress;
-            Address vftableAddress = getVftableAddress(reference);
-            if (vftableAddress != null) {
-                referencesToVftables.add(reference);
-            }
-        }
+		Iterator<Address> referenceIterator = referenceAddresses.iterator();
+		while (referenceIterator.hasNext()) {
+			monitor.checkCanceled();
+			Address reference = referenceIterator.next();
+			Address vftableAddress = getVftableAddress(reference);
+			if (vftableAddress != null) {
+				referencesToVftables.add(reference);
+			}
+		}
 
 		if (referencesToVftables.isEmpty()) {
 			return;
@@ -2067,22 +2118,23 @@ public class RecoveredClassHelper {
 		int numRefs = referencesToVftables.size();
 		Address lastRef = referencesToVftables.get(numRefs - 1);
 
-        for (Address referencesToVftable : referencesToVftables) {
-            monitor.checkCanceled();
-            Address refToVftable = referencesToVftable;
-            RecoveredClass referencedClass = referenceToClassMap.get(refToVftable);
+		Iterator<Address> refToVtablesIterator = referencesToVftables.iterator();
+		while (refToVtablesIterator.hasNext()) {
+			monitor.checkCanceled();
+			Address refToVftable = refToVtablesIterator.next();
+			RecoveredClass referencedClass = referenceToClassMap.get(refToVftable);
 
-            // last reference is the constructor
-            if (refToVftable.equals(lastRef)) {
-                addConstructorToClass(referencedClass, inlinedConstructorFunction);
-            }
-            // the rest are inlined constructors
-            else {
-                addInlinedConstructorToClass(referencedClass, inlinedConstructorFunction);
+			// last reference is the constructor
+			if (refToVftable.equals(lastRef)) {
+				addConstructorToClass(referencedClass, inlinedConstructorFunction);
+			}
+			// the rest are inlined constructors
+			else {
+				addInlinedConstructorToClass(referencedClass, inlinedConstructorFunction);
 
-            }
-            referencedClass.removeIndeterminateInline(inlinedConstructorFunction);
-        }
+			}
+			referencedClass.removeIndeterminateInline(inlinedConstructorFunction);
+		}
 
 		return;
 
@@ -2108,14 +2160,15 @@ public class RecoveredClassHelper {
 		List<Address> referencesToVftables = new ArrayList<Address>();
 
 		List<Address> referenceAddresses = new ArrayList<Address>(referenceToClassMap.keySet());
-        for (Address referenceAddress : referenceAddresses) {
-            monitor.checkCanceled();
-            Address reference = referenceAddress;
-            Address vftableAddress = getVftableAddress(reference);
-            if (vftableAddress != null) {
-                referencesToVftables.add(reference);
-            }
-        }
+		Iterator<Address> referenceIterator = referenceAddresses.iterator();
+		while (referenceIterator.hasNext()) {
+			monitor.checkCanceled();
+			Address reference = referenceIterator.next();
+			Address vftableAddress = getVftableAddress(reference);
+			if (vftableAddress != null) {
+				referencesToVftables.add(reference);
+			}
+		}
 
 		if (referencesToVftables.isEmpty()) {
 			return;
@@ -2127,22 +2180,23 @@ public class RecoveredClassHelper {
 		int numRefs = referencesToVftables.size();
 		Address lastRef = referencesToVftables.get(numRefs - 1);
 
-        for (Address referencesToVftable : referencesToVftables) {
-            monitor.checkCanceled();
-            Address refToVftable = referencesToVftable;
-            RecoveredClass referencedClass = referenceToClassMap.get(refToVftable);
+		Iterator<Address> refToVtablesIterator = referencesToVftables.iterator();
+		while (refToVtablesIterator.hasNext()) {
+			monitor.checkCanceled();
+			Address refToVftable = refToVtablesIterator.next();
+			RecoveredClass referencedClass = referenceToClassMap.get(refToVftable);
 
-            // last reference is the constructor
-            if (refToVftable.equals(lastRef)) {
-                addDestructorToClass(referencedClass, inlinedDestructorFunction);
-            }
-            // the rest are inlined constructors
-            else {
-                addInlinedDestructorToClass(referencedClass, inlinedDestructorFunction);
+			// last reference is the constructor
+			if (refToVftable.equals(lastRef)) {
+				addDestructorToClass(referencedClass, inlinedDestructorFunction);
+			}
+			// the rest are inlined constructors
+			else {
+				addInlinedDestructorToClass(referencedClass, inlinedDestructorFunction);
 
-            }
-            referencedClass.removeIndeterminateInline(inlinedDestructorFunction);
-        }
+			}
+			referencedClass.removeIndeterminateInline(inlinedDestructorFunction);
+		}
 
 		return;
 
@@ -2196,24 +2250,26 @@ public class RecoveredClassHelper {
 		List<ReferenceAddressPair> calledFunctionRefAddrPairs =
 			getCalledConstDestRefAddrPairs(function);
 
-        for (ReferenceAddressPair calledFunctionRefAddrPair : calledFunctionRefAddrPairs) {
+		Iterator<ReferenceAddressPair> calledFunctionIterator =
+			calledFunctionRefAddrPairs.iterator();
+		while (calledFunctionIterator.hasNext()) {
 
-            monitor.checkCanceled();
+			monitor.checkCanceled();
 
-            ReferenceAddressPair referenceAddressPair = calledFunctionRefAddrPair;
+			ReferenceAddressPair referenceAddressPair = calledFunctionIterator.next();
 
-            Address calledFunctionAddress = referenceAddressPair.getDestination();
-            Function calledFunction = extendedFlatAPI.getFunctionAt(calledFunctionAddress);
+			Address calledFunctionAddress = referenceAddressPair.getDestination();
+			Function calledFunction = extendedFlatAPI.getFunctionAt(calledFunctionAddress);
 
-            if (calledFunction.isThunk()) {
-                calledFunction = calledFunction.getThunkedFunction(true);
-            }
+			if (calledFunction.isThunk()) {
+				calledFunction = calledFunction.getThunkedFunction(true);
+			}
 
-            if (allConstructors.contains(calledFunction) ||
-                    allInlinedConstructors.contains(calledFunction)) {
-                return true;
-            }
-        }
+			if (getAllConstructors().contains(calledFunction) ||
+				getAllInlinedConstructors().contains(calledFunction)) {
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -2228,24 +2284,26 @@ public class RecoveredClassHelper {
 		List<ReferenceAddressPair> calledFunctionRefAddrPairs =
 			getCalledConstDestRefAddrPairs(function);
 
-        for (ReferenceAddressPair calledFunctionRefAddrPair : calledFunctionRefAddrPairs) {
+		Iterator<ReferenceAddressPair> calledFunctionIterator =
+			calledFunctionRefAddrPairs.iterator();
+		while (calledFunctionIterator.hasNext()) {
 
-            monitor.checkCanceled();
+			monitor.checkCanceled();
 
-            ReferenceAddressPair referenceAddressPair = calledFunctionRefAddrPair;
+			ReferenceAddressPair referenceAddressPair = calledFunctionIterator.next();
 
-            Address calledFunctionAddress = referenceAddressPair.getDestination();
-            Function calledFunction = extendedFlatAPI.getFunctionAt(calledFunctionAddress);
+			Address calledFunctionAddress = referenceAddressPair.getDestination();
+			Function calledFunction = extendedFlatAPI.getFunctionAt(calledFunctionAddress);
 
-            if (calledFunction.isThunk()) {
-                calledFunction = calledFunction.getThunkedFunction(true);
-            }
+			if (calledFunction.isThunk()) {
+				calledFunction = calledFunction.getThunkedFunction(true);
+			}
 
-            if (allDestructors.contains(calledFunction) ||
-                    allInlinedDestructors.contains(calledFunction)) {
-                return true;
-            }
-        }
+			if (getAllDestructors().contains(calledFunction) ||
+				getAllInlinedDestructors().contains(calledFunction)) {
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -2259,12 +2317,13 @@ public class RecoveredClassHelper {
 			throws CancelledException {
 
 		int total = 0;
-        for (RecoveredClass aClass : recoveredClasses) {
-            monitor.checkCanceled();
-            RecoveredClass recoveredClass = aClass;
-            List<Function> constructorList = recoveredClass.getConstructorList();
-            total += constructorList.size();
-        }
+		Iterator<RecoveredClass> classIterator = recoveredClasses.iterator();
+		while (classIterator.hasNext()) {
+			monitor.checkCanceled();
+			RecoveredClass recoveredClass = classIterator.next();
+			List<Function> constructorList = recoveredClass.getConstructorList();
+			total += constructorList.size();
+		}
 		return total;
 	}
 
@@ -2278,13 +2337,14 @@ public class RecoveredClassHelper {
 			throws CancelledException {
 
 		int total = 0;
-        for (RecoveredClass aClass : recoveredClasses) {
-            monitor.checkCanceled();
-            RecoveredClass recoveredClass = aClass;
+		Iterator<RecoveredClass> classIterator = recoveredClasses.iterator();
+		while (classIterator.hasNext()) {
+			monitor.checkCanceled();
+			RecoveredClass recoveredClass = classIterator.next();
 
-            int numDestructors = recoveredClass.getDestructorList().size();
-            total += numDestructors;
-        }
+			int numDestructors = recoveredClass.getDestructorList().size();
+			total += numDestructors;
+		}
 		return total;
 	}
 
@@ -2298,13 +2358,14 @@ public class RecoveredClassHelper {
 			throws CancelledException {
 
 		int total = 0;
-        for (RecoveredClass aClass : recoveredClasses) {
-            monitor.checkCanceled();
-            RecoveredClass recoveredClass = aClass;
+		Iterator<RecoveredClass> classIterator = recoveredClasses.iterator();
+		while (classIterator.hasNext()) {
+			monitor.checkCanceled();
+			RecoveredClass recoveredClass = classIterator.next();
 
-            int numInlinedDestructors = recoveredClass.getInlinedDestructorList().size();
-            total += numInlinedDestructors;
-        }
+			int numInlinedDestructors = recoveredClass.getInlinedDestructorList().size();
+			total += numInlinedDestructors;
+		}
 		return total;
 	}
 
@@ -2318,13 +2379,14 @@ public class RecoveredClassHelper {
 			throws CancelledException {
 
 		int total = 0;
-        for (RecoveredClass aClass : recoveredClasses) {
-            monitor.checkCanceled();
-            RecoveredClass recoveredClass = aClass;
+		Iterator<RecoveredClass> classIterator = recoveredClasses.iterator();
+		while (classIterator.hasNext()) {
+			monitor.checkCanceled();
+			RecoveredClass recoveredClass = classIterator.next();
 
-            List<Function> deletingDestructors = recoveredClass.getDeletingDestructors();
-            total += deletingDestructors.size();
-        }
+			List<Function> deletingDestructors = recoveredClass.getDeletingDestructors();
+			total += deletingDestructors.size();
+		}
 		return total;
 	}
 
@@ -2338,12 +2400,13 @@ public class RecoveredClassHelper {
 			throws CancelledException {
 
 		int total = 0;
-        for (RecoveredClass aClass : recoveredClasses) {
-            monitor.checkCanceled();
-            RecoveredClass recoveredClass = aClass;
-            List<Function> cloneFunctions = recoveredClass.getCloneFunctions();
-            total += cloneFunctions.size();
-        }
+		Iterator<RecoveredClass> classIterator = recoveredClasses.iterator();
+		while (classIterator.hasNext()) {
+			monitor.checkCanceled();
+			RecoveredClass recoveredClass = classIterator.next();
+			List<Function> cloneFunctions = recoveredClass.getCloneFunctions();
+			total += cloneFunctions.size();
+		}
 		return total;
 	}
 
@@ -2357,15 +2420,16 @@ public class RecoveredClassHelper {
 			throws CancelledException {
 
 		int total = 0;
-        for (RecoveredClass aClass : recoveredClasses) {
-            monitor.checkCanceled();
-            RecoveredClass recoveredClass = aClass;
+		Iterator<RecoveredClass> classIterator = recoveredClasses.iterator();
+		while (classIterator.hasNext()) {
+			monitor.checkCanceled();
+			RecoveredClass recoveredClass = classIterator.next();
 
-            Function cloneFunction = recoveredClass.getVBaseDestructor();
-            if (cloneFunction != null) {
-                total++;
-            }
-        }
+			Function cloneFunction = recoveredClass.getVBaseDestructor();
+			if (cloneFunction != null) {
+				total++;
+			}
+		}
 		return total;
 	}
 
@@ -2379,18 +2443,19 @@ public class RecoveredClassHelper {
 			throws CancelledException {
 
 		int total = 0;
-        for (RecoveredClass aClass : recoveredClasses) {
-            monitor.checkCanceled();
-            RecoveredClass recoveredClass = aClass;
+		Iterator<RecoveredClass> classIterator = recoveredClasses.iterator();
+		while (classIterator.hasNext()) {
+			monitor.checkCanceled();
+			RecoveredClass recoveredClass = classIterator.next();
 
-            List<Function> vfunctionList = recoveredClass.getAllVirtualFunctions();
-            if (vfunctionList == null) {
-                continue;
-            }
+			List<Function> vfunctionList = recoveredClass.getAllVirtualFunctions();
+			if (vfunctionList == null) {
+				continue;
+			}
 
-            total += vfunctionList.size();
+			total += vfunctionList.size();
 
-        }
+		}
 		return total;
 	}
 
@@ -2406,18 +2471,19 @@ public class RecoveredClassHelper {
 			throws CancelledException {
 
 		List<Function> remainingIndeterminates = new ArrayList<Function>();
-        for (RecoveredClass aClass : recoveredClasses) {
-            monitor.checkCanceled();
-            RecoveredClass recoveredClass = aClass;
+		Iterator<RecoveredClass> classIterator = recoveredClasses.iterator();
+		while (classIterator.hasNext()) {
+			monitor.checkCanceled();
+			RecoveredClass recoveredClass = classIterator.next();
 
-            List<Function> indeterminateConstructorOrDestructorList =
-                    recoveredClass.getIndeterminateList();
-            remainingIndeterminates.addAll(indeterminateConstructorOrDestructorList);
+			List<Function> indeterminateConstructorOrDestructorList =
+				recoveredClass.getIndeterminateList();
+			remainingIndeterminates.addAll(indeterminateConstructorOrDestructorList);
 
-            List<Function> indeterminateInlines = recoveredClass.getIndeterminateInlineList();
-            remainingIndeterminates.addAll(indeterminateInlines);
+			List<Function> indeterminateInlines = recoveredClass.getIndeterminateInlineList();
+			remainingIndeterminates.addAll(indeterminateInlines);
 
-        }
+		}
 		return remainingIndeterminates;
 	}
 
@@ -2433,24 +2499,25 @@ public class RecoveredClassHelper {
 			List<Address> referencesToDestructors)
 			throws CancelledException, InvalidInputException, DuplicateNameException {
 
-        for (Address referencesToDestructor : referencesToDestructors) {
-            monitor.checkCanceled();
+		Iterator<Address> destructorIterator = referencesToDestructors.iterator();
+		while (destructorIterator.hasNext()) {
+			monitor.checkCanceled();
 
-            Address destructorReference = referencesToDestructor;
-            RecoveredClass recoveredClass = referenceToClassMap.get(destructorReference);
+			Address destructorReference = destructorIterator.next();
+			RecoveredClass recoveredClass = referenceToClassMap.get(destructorReference);
 
-            Function destructor = extendedFlatAPI.getReferencedFunction(destructorReference, true);
+			Function destructor = extendedFlatAPI.getReferencedFunction(destructorReference, true);
 
-            if (recoveredClass.getIndeterminateList().contains(destructor)) {
-                addDestructorToClass(recoveredClass, destructor);
-                recoveredClass.removeIndeterminateConstructorOrDestructor(destructor);
-                continue;
-            }
+			if (recoveredClass.getIndeterminateList().contains(destructor)) {
+				addDestructorToClass(recoveredClass, destructor);
+				recoveredClass.removeIndeterminateConstructorOrDestructor(destructor);
+				continue;
+			}
 
-            if (recoveredClass.getIndeterminateInlineList().contains(destructor)) {
-                processInlineDestructor(recoveredClass, destructor, referenceToClassMap);
-            }
-        }
+			if (recoveredClass.getIndeterminateInlineList().contains(destructor)) {
+				processInlineDestructor(recoveredClass, destructor, referenceToClassMap);
+			}
+		}
 	}
 
 	/**
@@ -2465,34 +2532,35 @@ public class RecoveredClassHelper {
 			List<RecoveredClass> recoveredClasses) throws CancelledException, InvalidInputException,
 			DuplicateNameException, CircularDependencyException {
 
-        for (RecoveredClass aClass : recoveredClasses) {
-            monitor.checkCanceled();
-            RecoveredClass recoveredClass = aClass;
-            List<Function> indeterminateFunctions = recoveredClass.getIndeterminateList();
-            Iterator<Function> functionIterator = indeterminateFunctions.iterator();
-            while (functionIterator.hasNext()) {
+		Iterator<RecoveredClass> recoveredClassIterator = recoveredClasses.iterator();
+		while (recoveredClassIterator.hasNext()) {
+			monitor.checkCanceled();
+			RecoveredClass recoveredClass = recoveredClassIterator.next();
+			List<Function> indeterminateFunctions = recoveredClass.getIndeterminateList();
+			Iterator<Function> functionIterator = indeterminateFunctions.iterator();
+			while (functionIterator.hasNext()) {
 
-                monitor.checkCanceled();
+				monitor.checkCanceled();
 
-                Function function = functionIterator.next();
-                Namespace namespace = function.getParentNamespace();
-                if (!namespace.equals(recoveredClass.getClassNamespace())) {
-                    continue;
-                }
-                String name = function.getName();
-                if (name.equals(recoveredClass.getName())) {
-                    addConstructorToClass(recoveredClass, function);
-                    functionIterator.remove();
-                    continue;
-                }
-                if (name.equals("~" + recoveredClass.getName())) {
-                    addDestructorToClass(recoveredClass, function);
-                    functionIterator.remove();
-                    continue;
-                }
-            }
+				Function function = functionIterator.next();
+				Namespace namespace = function.getParentNamespace();
+				if (!namespace.equals(recoveredClass.getClassNamespace())) {
+					continue;
+				}
+				String name = function.getName();
+				if (name.equals(recoveredClass.getName())) {
+					addConstructorToClass(recoveredClass, function);
+					functionIterator.remove();
+					continue;
+				}
+				if (name.equals("~" + recoveredClass.getName())) {
+					addDestructorToClass(recoveredClass, function);
+					functionIterator.remove();
+					continue;
+				}
+			}
 
-        }
+		}
 	}
 
 	/**
@@ -2520,8 +2588,11 @@ public class RecoveredClassHelper {
 			return false;
 		}
 
-        return !recoveredClass.hasChildClass() || hasChildWithVBaseAndDestructor(recoveredClass);
-    }
+		if (!recoveredClass.hasChildClass() || hasChildWithVBaseAndDestructor(recoveredClass)) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Method to determine if the given class has a child class with both a vbase destructor and a 
@@ -2535,14 +2606,15 @@ public class RecoveredClassHelper {
 			throws CancelledException {
 		if (recoveredClass.hasChildClass()) {
 			List<RecoveredClass> childClasses = recoveredClass.getChildClasses();
-            for (RecoveredClass aClass : childClasses) {
-                monitor.checkCanceled();
-                RecoveredClass childClass = aClass;
-                if (childClass.getDestructorList().size() == 1 &&
-                        childClass.getVBaseDestructor() != null) {
-                    return true;
-                }
-            }
+			Iterator<RecoveredClass> childIterator = childClasses.iterator();
+			while (childIterator.hasNext()) {
+				monitor.checkCanceled();
+				RecoveredClass childClass = childIterator.next();
+				if (childClass.getDestructorList().size() == 1 &&
+					childClass.getVBaseDestructor() != null) {
+					return true;
+				}
+			}
 		}
 		return false;
 	}
@@ -2597,92 +2669,95 @@ public class RecoveredClassHelper {
 
 		List<RecoveredClass> recoveredClasses = new ArrayList<RecoveredClass>();
 
-        for (Symbol symbol : vftableSymbolList) {
-            monitor.checkCanceled();
-            Symbol vftableSymbol = symbol;
-            Address vftableAddress = vftableSymbol.getAddress();
+		Iterator<Symbol> vftableSymbolsIterator = vftableSymbolList.iterator();
+		while (vftableSymbolsIterator.hasNext()) {
+			monitor.checkCanceled();
+			Symbol vftableSymbol = vftableSymbolsIterator.next();
+			Address vftableAddress = vftableSymbol.getAddress();
 
-            // Get class name from class vftable is in
-            Namespace vftableNamespace = vftableSymbol.getParentNamespace();
-            if (vftableNamespace.equals(globalNamespace)) {
-                if (DEBUG) {
-                    Msg.debug(this,
-                            "vftable is in the global namespace, ie not in a class namespace, so cannot process");
-                }
-                continue;
-            }
+			// Get class name from class vftable is in
+			Namespace vftableNamespace = vftableSymbol.getParentNamespace();
+			if (vftableNamespace.equals(globalNamespace)) {
+				if (DEBUG) {
+					Msg.debug(this,
+						"vftable is in the global namespace, ie not in a class namespace, so cannot process");
+				}
+				continue;
+			}
 
-            // get only the functions from the ones that are not already processed structures
-            // return null if not an unprocessed table
-            List<Function> virtualFunctions = getFunctionsFromVftable(vftableAddress, vftableSymbol,
-                    allowNullFunctionPtrs, allowDefaultRefsInMiddle);
+			// get only the functions from the ones that are not already processed structures
+			// return null if not an unprocessed table
+			List<Function> virtualFunctions = getFunctionsFromVftable(vftableAddress, vftableSymbol,
+				allowNullFunctionPtrs, allowDefaultRefsInMiddle);
 
-            // the vftable has already been processed - skip it
-            if (virtualFunctions == null) {
-                continue;
-            }
+			// the vftable has already been processed - skip it
+			if (virtualFunctions == null) {
+				continue;
+			}
 
-            // Check to see if already have an existing RecoveredClass object for the
-            // class associated with the current vftable.
-            RecoveredClass recoveredClass = getClass(vftableNamespace);
+			// Check to see if already have an existing RecoveredClass object for the
+			// class associated with the current vftable. 
+			RecoveredClass recoveredClass = getClass(vftableNamespace);
 
-            if (recoveredClass == null) {
-                // Create a RecoveredClass object for the current class
-                recoveredClass = createNewClass(vftableNamespace, true);
-                recoveredClass.addVftableAddress(vftableAddress);
-                recoveredClass.addVftableVfunctionsMapping(vftableAddress, virtualFunctions);
+			if (recoveredClass == null) {
+				// Create a RecoveredClass object for the current class
+				recoveredClass = createNewClass(vftableNamespace, true);
+				recoveredClass.addVftableAddress(vftableAddress);
+				recoveredClass.addVftableVfunctionsMapping(vftableAddress, virtualFunctions);
 
-                // add it to the running list of RecoveredClass objects
-                recoveredClasses.add(recoveredClass);
-            } else {
-                recoveredClass.addVftableAddress(vftableAddress);
-                recoveredClass.addVftableVfunctionsMapping(vftableAddress, virtualFunctions);
-                if (!recoveredClasses.contains(recoveredClass)) {
-                    recoveredClasses.add(recoveredClass);
-                }
+				// add it to the running list of RecoveredClass objects
+				recoveredClasses.add(recoveredClass);
+			}
+			else {
+				recoveredClass.addVftableAddress(vftableAddress);
+				recoveredClass.addVftableVfunctionsMapping(vftableAddress, virtualFunctions);
+				if (!recoveredClasses.contains(recoveredClass)) {
+					recoveredClasses.add(recoveredClass);
+				}
 
-            }
+			}
 
-            // add it to the vftableAddress to Class map
-            updateVftableToClassMap(vftableAddress, recoveredClass);
+			// add it to the vftableAddress to Class map
+			updateVftableToClassMap(vftableAddress, recoveredClass);
 
-            List<Address> referencesToVftable = getReferencesToVftable(vftableAddress);
-            addReferenceToVtableMapping(referencesToVftable, vftableAddress);
+			List<Address> referencesToVftable = getReferencesToVftable(vftableAddress);
+			addReferenceToVtableMapping(referencesToVftable, vftableAddress);
 
-            Map<Address, Function> vftableReferenceToFunctionMapping =
-                    createVftableReferenceToFunctionMapping(referencesToVftable);
+			Map<Address, Function> vftableReferenceToFunctionMapping =
+				createVftableReferenceToFunctionMapping(referencesToVftable);
 
-            //vftableReferenceToFunctionMapping
-            List<Function> possibleConstructorDestructorsForThisClass =
-                    findPossibleConstructorDestructors(vftableReferenceToFunctionMapping);
+			//vftableReferenceToFunctionMapping
+			List<Function> possibleConstructorDestructorsForThisClass =
+				findPossibleConstructorDestructors(vftableReferenceToFunctionMapping);
 
-            addFunctionsToClassMapping(possibleConstructorDestructorsForThisClass, recoveredClass);
+			addFunctionsToClassMapping(possibleConstructorDestructorsForThisClass, recoveredClass);
 
-            // add the vftable reference to function mapping to the global list
-            addFunctionToVftableReferencesMapping(vftableReferenceToFunctionMapping);
+			// add the vftable reference to function mapping to the global list
+			addFunctionToVftableReferencesMapping(vftableReferenceToFunctionMapping);
 
-            // add the possible constructor/destructor list to the class
-            recoveredClass.addConstructorDestructorList(possibleConstructorDestructorsForThisClass);
-            recoveredClass.addIndeterminateConstructorOrDestructorList(
-                    possibleConstructorDestructorsForThisClass);
+			// add the possible constructor/destructor list to the class
+			recoveredClass.addConstructorDestructorList(possibleConstructorDestructorsForThisClass);
+			recoveredClass.addIndeterminateConstructorOrDestructorList(
+				possibleConstructorDestructorsForThisClass);
 
-            // Add them to the list of all constructors and destructors in program
-            updateAllConstructorsAndDestructorsList(possibleConstructorDestructorsForThisClass);
+			// Add them to the list of all constructors and destructors in program			
+			updateAllConstructorsAndDestructorsList(possibleConstructorDestructorsForThisClass);
 
-        } // end of looping over vfTables
+		} // end of looping over vfTables
 		return recoveredClasses;
 	}
 
 	public void promoteClassNamespaces(List<RecoveredClass> recoveredClasses)
 			throws CancelledException {
 
-        for (RecoveredClass aClass : recoveredClasses) {
-            monitor.checkCanceled();
+		Iterator<RecoveredClass> classIterator = recoveredClasses.iterator();
+		while (classIterator.hasNext()) {
+			monitor.checkCanceled();
 
-            RecoveredClass recoveredClass = aClass;
-            Namespace classNamespace = recoveredClass.getClassNamespace();
-            promoteNamespaces(classNamespace);
-        }
+			RecoveredClass recoveredClass = classIterator.next();
+			Namespace classNamespace = recoveredClass.getClassNamespace();
+			promoteNamespaces(classNamespace);
+		}
 	}
 
 	private boolean promoteNamespaces(Namespace namespace) throws CancelledException {
@@ -2758,14 +2833,15 @@ public class RecoveredClassHelper {
 			List<Address> referencesToVftable) throws CancelledException {
 
 		Map<Address, Function> vftableRefToFunctionMapping = new HashMap<Address, Function>();
-        for (Address address : referencesToVftable) {
-            monitor.checkCanceled();
-            Address vftableReference = address;
-            Function functionContaining = extendedFlatAPI.getFunctionContaining(vftableReference);
-            if (functionContaining != null) {
-                vftableRefToFunctionMapping.put(vftableReference, functionContaining);
-            }
-        }
+		Iterator<Address> referencesIterator = referencesToVftable.iterator();
+		while (referencesIterator.hasNext()) {
+			monitor.checkCanceled();
+			Address vftableReference = referencesIterator.next();
+			Function functionContaining = extendedFlatAPI.getFunctionContaining(vftableReference);
+			if (functionContaining != null) {
+				vftableRefToFunctionMapping.put(vftableReference, functionContaining);
+			}
+		}
 		return vftableRefToFunctionMapping;
 	}
 
@@ -2781,14 +2857,15 @@ public class RecoveredClassHelper {
 
 		List<Function> cdFunctions = new ArrayList<Function>();
 		Set<Address> keySet = vftableReferenceToFunctionMapping.keySet();
-        for (Address address : keySet) {
-            monitor.checkCanceled();
-            Address vtableReference = address;
-            Function function = vftableReferenceToFunctionMapping.get(vtableReference);
-            if (!cdFunctions.contains(function)) {
-                cdFunctions.add(function);
-            }
-        }
+		Iterator<Address> referencesIterator = keySet.iterator();
+		while (referencesIterator.hasNext()) {
+			monitor.checkCanceled();
+			Address vtableReference = referencesIterator.next();
+			Function function = vftableReferenceToFunctionMapping.get(vtableReference);
+			if (!cdFunctions.contains(function)) {
+				cdFunctions.add(function);
+			}
+		}
 		return cdFunctions;
 	}
 
@@ -2944,56 +3021,58 @@ public class RecoveredClassHelper {
 		List<Address> notInFunctionVftableRefs = new ArrayList<Address>();
 		List<Address> newFunctions = new ArrayList<Address>();
 
-        for (Symbol symbol : vftableSymbols) {
-            monitor.checkCanceled();
-            Symbol vftableSymbol = symbol;
-            Address vftableAddress = vftableSymbol.getAddress();
-            vftableAddresses.add(vftableAddress);
+		Iterator<Symbol> vftableSymbolIterator = vftableSymbols.iterator();
+		while (vftableSymbolIterator.hasNext()) {
+			monitor.checkCanceled();
+			Symbol vftableSymbol = vftableSymbolIterator.next();
+			Address vftableAddress = vftableSymbol.getAddress();
+			vftableAddresses.add(vftableAddress);
 
-            // check direct refs to see if they are in undefined area or not in function
-            byte[] bytes = ProgramMemoryUtil.getDirectAddressBytes(program, vftableAddress);
+			// check direct refs to see if they are in undefined area or not in function
+			byte[] bytes = ProgramMemoryUtil.getDirectAddressBytes(program, vftableAddress);
 
-            addByteSearchPattern(searcher, notInFunctionVftableRefs, newFunctions, vftableAddress,
-                    bytes, monitor);
+			addByteSearchPattern(searcher, notInFunctionVftableRefs, newFunctions, vftableAddress,
+				bytes, monitor);
 
-        }
+		}
 
 		searcher.search(program, searchSet, monitor);
 
 		// check existing refs to see if in instruction but not in function
-        for (Address address : vftableAddresses) {
-            monitor.checkCanceled();
+		Iterator<Address> vftableAddressIterator = vftableAddresses.iterator();
+		while (vftableAddressIterator.hasNext()) {
+			monitor.checkCanceled();
 
-            Address vftableAddress = address;
+			Address vftableAddress = vftableAddressIterator.next();
 
-            ReferenceIterator referencesIterator =
-                    program.getReferenceManager().getReferencesTo(vftableAddress);
+			ReferenceIterator referencesIterator =
+				program.getReferenceManager().getReferencesTo(vftableAddress);
 
-            while (referencesIterator.hasNext()) {
-                monitor.checkCanceled();
+			while (referencesIterator.hasNext()) {
+				monitor.checkCanceled();
 
-                Reference reference = referencesIterator.next();
-                Address vftableReference = reference.getFromAddress();
-                Function functionContaining =
-                        program.getListing().getFunctionContaining(vftableReference);
+				Reference reference = referencesIterator.next();
+				Address vftableReference = reference.getFromAddress();
+				Function functionContaining =
+					program.getListing().getFunctionContaining(vftableReference);
 
-                if (functionContaining == null) {
+				if (functionContaining == null) {
 
-                    Instruction instructionContaining =
-                            program.getListing().getInstructionContaining(vftableReference);
-                    if (instructionContaining != null) {
-                        boolean functionCreated =
-                                extendedFlatAPI.createFunction(program, vftableReference);
+					Instruction instructionContaining =
+						program.getListing().getInstructionContaining(vftableReference);
+					if (instructionContaining != null) {
+						boolean functionCreated =
+							extendedFlatAPI.createFunction(program, vftableReference);
 
-                        if (!functionCreated) {
-                            notInFunctionVftableRefs.add(vftableReference);
+						if (!functionCreated) {
+							notInFunctionVftableRefs.add(vftableReference);
 
-                        }
+						}
 
-                    }
-                }
-            }
-        }
+					}
+				}
+			}
+		}
 
 		return notInFunctionVftableRefs;
 	}
@@ -3086,19 +3165,21 @@ public class RecoveredClassHelper {
 			Map<RecoveredClass, Boolean> parentToBaseTypeMap =
 				recoveredClass.getParentToBaseTypeMap();
 			Set<RecoveredClass> ancestors = parentToBaseTypeMap.keySet();
-            for (RecoveredClass aClass : ancestors) {
-                monitor.checkCanceled();
-                RecoveredClass ancestor = aClass;
-                if (directParents.contains(ancestor)) {
+			Iterator<RecoveredClass> ancestorIterator = ancestors.iterator();
+			while (ancestorIterator.hasNext()) {
+				monitor.checkCanceled();
+				RecoveredClass ancestor = ancestorIterator.next();
+				if (directParents.contains(ancestor)) {
 
-                    Boolean isVirtualParent = parentToBaseTypeMap.get(ancestor);
-                    if (isVirtualParent != null && isVirtualParent) {
-                        classString = classString.concat(" : virtual " + ancestor.getName());
-                    } else {
-                        classString = classString.concat(" : " + ancestor.getName());
-                    }
-                }
-            }
+					Boolean isVirtualParent = parentToBaseTypeMap.get(ancestor);
+					if (isVirtualParent != null && isVirtualParent) {
+						classString = classString.concat(" : virtual " + ancestor.getName());
+					}
+					else {
+						classString = classString.concat(" : " + ancestor.getName());
+					}
+				}
+			}
 		}
 		parentStringBuffer.append("class " + classString);
 		return parentStringBuffer;
@@ -3173,54 +3254,56 @@ public class RecoveredClassHelper {
 		String className = recoveredClass.getName();
 
 		List<Function> constructorList = recoveredClass.getConstructorList();
+		Iterator<Function> constructorsIterator = constructorList.iterator();
 
-        for (Function function : constructorList) {
-            monitor.checkCanceled();
-            Function constructorFunction = function;
+		while (constructorsIterator.hasNext()) {
+			monitor.checkCanceled();
+			Function constructorFunction = constructorsIterator.next();
 
-            if (nameVfunctions) {
-                createNewSymbolAtFunction(constructorFunction, className, classNamespace, true,
-                        true);
-            }
+			if (nameVfunctions) {
+				createNewSymbolAtFunction(constructorFunction, className, classNamespace, true,
+					true);
+			}
 
-            // check to see if the "this" data type is an empty placeholder for the class
-            // structure and replace it with the one that was just created by the script
-            //NEW
-            if (replaceClassStructures) {
-                replaceClassStructure(constructorFunction, className, classStruct);
-            }
+			// check to see if the "this" data type is an empty placeholder for the class
+			// structure and replace it with the one that was just created by the script
+			//NEW
+			if (replaceClassStructures) {
+				replaceClassStructure(constructorFunction, className, classStruct);
+			}
 
-            // if current decompiler function return type is a pointer then set the return type
-            // to a pointer to the class structure, otherwise if it is a void, make it a void so the
-            // listing has void too, otherwise, leave it as is, probably a void
-            String returnType = getReturnTypeFromDecompiler(constructorFunction);
+			// if current decompiler function return type is a pointer then set the return type
+			// to a pointer to the class structure, otherwise if it is a void, make it a void so the
+			// listing has void too, otherwise, leave it as is, probably a void
+			String returnType = getReturnTypeFromDecompiler(constructorFunction);
 
-            // Set error bookmark, add error message, and  get the listing return type if the
-            // decompiler return type is null
-            if (returnType == null) {
+			// Set error bookmark, add error message, and  get the listing return type if the 
+			// decompiler return type is null
+			if (returnType == null) {
 
-                String msg1 = "Decompiler Error: Failed to decompile function";
-                String msg2 = ", possibly due to the addition of class structure.";
+				String msg1 = "Decompiler Error: Failed to decompile function";
+				String msg2 = ", possibly due to the addition of class structure.";
 
-                Msg.debug(this, msg1 + " at " + constructorFunction.getEntryPoint() + msg2);
+				Msg.debug(this, msg1 + " at " + constructorFunction.getEntryPoint() + msg2);
 
-                program.getBookmarkManager().setBookmark(constructorFunction.getEntryPoint(),
-                        BookmarkType.ERROR, "Decompiler Error", msg1 + msg2);
+				program.getBookmarkManager().setBookmark(constructorFunction.getEntryPoint(),
+					BookmarkType.ERROR, "Decompiler Error", msg1 + msg2);
 
-                // get the return type from the listing and in some cases it will
-                // indicate the correct type to help determine the below type to add
-                returnType = constructorFunction.getReturnType().getDisplayName();
-            }
+				// get the return type from the listing and in some cases it will
+				// indicate the correct type to help determine the below type to add
+				returnType = constructorFunction.getReturnType().getDisplayName();
+			}
 
-            if ("void".equals(returnType)) {
-                DataType voidDataType = new VoidDataType();
-                constructorFunction.setReturnType(voidDataType, SourceType.ANALYSIS);
-            } else if (returnType.contains("*")) {
-                DataType classPointerDataType = dataTypeManager.getPointer(classStruct);
-                constructorFunction.setReturnType(classPointerDataType, SourceType.ANALYSIS);
-            }
+			if (returnType.equals("void")) {
+				DataType voidDataType = new VoidDataType();
+				constructorFunction.setReturnType(voidDataType, SourceType.ANALYSIS);
+			}
+			else if (returnType.contains("*")) {
+				DataType classPointerDataType = dataTypeManager.getPointer(classStruct);
+				constructorFunction.setReturnType(classPointerDataType, SourceType.ANALYSIS);
+			}
 
-        }
+		}
 	}
 
 	/**
@@ -3252,25 +3335,26 @@ public class RecoveredClassHelper {
 		String className = recoveredClass.getName();
 
 		List<Function> destructorList = recoveredClass.getDestructorList();
-        for (Function function : destructorList) {
-            monitor.checkCanceled();
-            Function destructorFunction = function;
-            String destructorName = "~" + className;
+		Iterator<Function> destructorIterator = destructorList.iterator();
+		while (destructorIterator.hasNext()) {
+			monitor.checkCanceled();
+			Function destructorFunction = destructorIterator.next();
+			String destructorName = "~" + className;
 
-            if (nameVfunctions) {
-                createNewSymbolAtFunction(destructorFunction, destructorName, classNamespace, true,
-                        true);
-            }
+			if (nameVfunctions) {
+				createNewSymbolAtFunction(destructorFunction, destructorName, classNamespace, true,
+					true);
+			}
 
-            // check to see if the "this" data type is an empty placeholder for the class
-            // structure and replace it with the one that was just created by the script
-            //NEW
-            if (replaceClassStructures) {
-                replaceClassStructure(destructorFunction, className, classStruct);
-            }
+			// check to see if the "this" data type is an empty placeholder for the class
+			// structure and replace it with the one that was just created by the script
+			//NEW
+			if (replaceClassStructures) {
+				replaceClassStructure(destructorFunction, className, classStruct);
+			}
 
-            destructorFunction.setReturnType(new VoidDataType(), SourceType.ANALYSIS);
-        }
+			destructorFunction.setReturnType(new VoidDataType(), SourceType.ANALYSIS);
+		}
 	}
 
 	/**
@@ -3285,14 +3369,15 @@ public class RecoveredClassHelper {
 		String className = recoveredClass.getName();
 
 		List<Function> nonThisDestructorList = recoveredClass.getNonThisDestructors();
-        for (Function function : nonThisDestructorList) {
-            monitor.checkCanceled();
-            Function destructorFunction = function;
-            String destructorName = "~" + className;
+		Iterator<Function> destructorIterator = nonThisDestructorList.iterator();
+		while (destructorIterator.hasNext()) {
+			monitor.checkCanceled();
+			Function destructorFunction = destructorIterator.next();
+			String destructorName = "~" + className;
 
-            createNewSymbolAtFunction(destructorFunction, destructorName, classNamespace, false,
-                    false);
-        }
+			createNewSymbolAtFunction(destructorFunction, destructorName, classNamespace, false,
+				false);
+		}
 	}
 
 	/**
@@ -3373,7 +3458,7 @@ public class RecoveredClassHelper {
 		List<Symbol> symbolsByNameAtAddress = getSymbolsByNameAtAddress(address, name);
 
 		// if no same name symbol, add new symbol
-		if (symbolsByNameAtAddress.isEmpty()) {
+		if (symbolsByNameAtAddress.size() == 0) {
 			AddLabelCmd lcmd = new AddLabelCmd(address, name, namespace, SourceType.ANALYSIS);
 			if (!lcmd.applyTo(program)) {
 				if (DEBUG) {
@@ -3384,11 +3469,12 @@ public class RecoveredClassHelper {
 		}
 		//put the same name one in the namespace
 		else {
-            for (Symbol byNameAtAddress : symbolsByNameAtAddress) {
-                monitor.checkCanceled();
-                Symbol sameNameSymbol = byNameAtAddress;
-                sameNameSymbol.setNamespace(namespace);
-            }
+			Iterator<Symbol> iterator = symbolsByNameAtAddress.iterator();
+			while (iterator.hasNext()) {
+				monitor.checkCanceled();
+				Symbol sameNameSymbol = iterator.next();
+				sameNameSymbol.setNamespace(namespace);
+			}
 		}
 
 		return;
@@ -3524,9 +3610,12 @@ public class RecoveredClassHelper {
 			return true;
 		}
 
-        return program.getBookmarkManager().getBookmark(address, BookmarkType.ANALYSIS,
-                "Function ID Analyzer") != null;
-    }
+		if (program.getBookmarkManager().getBookmark(address, BookmarkType.ANALYSIS,
+			"Function ID Analyzer") != null) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Method to remove existing class structures from the data type manager that were replaced by 
@@ -3620,7 +3709,7 @@ public class RecoveredClassHelper {
 			getSymbolsByNameAtAddress(function.getEntryPoint(), name);
 
 		// if no same name symbol, add new symbol
-		if (symbolsByNameAtAddress.isEmpty()) {
+		if (symbolsByNameAtAddress.size() == 0) {
 			AddLabelCmd lcmd =
 				new AddLabelCmd(function.getEntryPoint(), name, namespace, SourceType.ANALYSIS);
 			if (!lcmd.applyTo(program)) {
@@ -3645,11 +3734,12 @@ public class RecoveredClassHelper {
 		}
 		//put the same name one in the namespace
 		else {
-            for (Symbol byNameAtAddress : symbolsByNameAtAddress) {
-                monitor.checkCanceled();
-                Symbol sameNameSymbol = byNameAtAddress;
-                sameNameSymbol.setNamespace(namespace);
-            }
+			Iterator<Symbol> iterator = symbolsByNameAtAddress.iterator();
+			while (iterator.hasNext()) {
+				monitor.checkCanceled();
+				Symbol sameNameSymbol = iterator.next();
+				sameNameSymbol.setNamespace(namespace);
+			}
 		}
 
 		return;
@@ -3765,17 +3855,18 @@ public class RecoveredClassHelper {
 
 		// if bad structures were found delete and recreate the function and all calling functions
 		// in order to remove the bad data types from the function signature
-		if (!badStructureDataTypes.isEmpty()) {
+		if (badStructureDataTypes.size() > 0) {
 			// find all functions that call this function and do the same
 			fixBadSignatures(function, badStructureDataTypes);
 			// add all the new bad dts to the list of bad ones 
-            for (Structure badStructureDataType : badStructureDataTypes) {
-                monitor.checkCanceled();
-                Structure structure = badStructureDataType;
-                if (!badFIDStructures.contains(structure)) {
-                    badFIDStructures.add(structure);
-                }
-            }
+			Iterator<Structure> badStructuresIterator = badStructureDataTypes.iterator();
+			while (badStructuresIterator.hasNext()) {
+				monitor.checkCanceled();
+				Structure structure = badStructuresIterator.next();
+				if (!badFIDStructures.contains(structure)) {
+					badFIDStructures.add(structure);
+				}
+			}
 		}
 	}
 
@@ -3812,19 +3903,20 @@ public class RecoveredClassHelper {
 			callingFunctions.addAll(moreCallingFunctions);
 		}
 
-        for (Function functionsToFix : allFunctionsToFix) {
-            monitor.checkCanceled();
-            Function functionToFix = functionsToFix;
-            if (!functionToFix.isThunk()) {
+		Iterator<Function> functionsToFixIterator = allFunctionsToFix.iterator();
+		while (functionsToFixIterator.hasNext()) {
+			monitor.checkCanceled();
+			Function functionToFix = functionsToFixIterator.next();
+			if (!functionToFix.isThunk()) {
 
-                removeBadReturnType(functionToFix, badStructureDataTypes);
-                removeBadParameterDataTypes(functionToFix, badStructureDataTypes);
+				removeBadReturnType(functionToFix, badStructureDataTypes);
+				removeBadParameterDataTypes(functionToFix, badStructureDataTypes);
 
-                if (!fixedFIDFunctions.contains(functionToFix)) {
-                    fixedFIDFunctions.add(functionToFix);
-                }
-            }
-        }
+				if (!fixedFIDFunctions.contains(functionToFix)) {
+					fixedFIDFunctions.add(functionToFix);
+				}
+			}
+		}
 
 	}
 
@@ -4054,40 +4146,42 @@ public class RecoveredClassHelper {
 			extendedFlatAPI.getOrderedReferenceAddressPairsFromCallingFunction(constructor);
 
 		// if there are no calls from the function then return false
-		if (orderedReferenceAddressPairsFromCallingFunction.isEmpty()) {
+		if (orderedReferenceAddressPairsFromCallingFunction.size() == 0) {
 			return false;
 		}
 
-        for (ReferenceAddressPair referenceAddressPair : orderedReferenceAddressPairsFromCallingFunction) {
-            monitor.checkCanceled();
-            ReferenceAddressPair refPair = referenceAddressPair;
-            int callRefCompareToVftableRef = refPair.getSource().compareTo(vftableReference);
-            // if call is after the vtable reference then return false
-            if (callRefCompareToVftableRef > 0) {
-                return false;
-            }
+		Iterator<ReferenceAddressPair> iterator =
+			orderedReferenceAddressPairsFromCallingFunction.iterator();
+		while (iterator.hasNext()) {
+			monitor.checkCanceled();
+			ReferenceAddressPair refPair = iterator.next();
+			int callRefCompareToVftableRef = refPair.getSource().compareTo(vftableReference);
+			// if call is after the vtable reference then return false
+			if (callRefCompareToVftableRef > 0) {
+				return false;
+			}
 
-            // if call is before vtable and is not an inherited constructor and not the operator_new
-            // then return true
-            Address calledAddress = refPair.getDestination();
-            Function calledFunction = api.getFunctionAt(calledAddress);
-            if (calledFunction.isThunk()) {
-                calledFunction = calledFunction.getThunkedFunction(true);
-            }
+			// if call is before vtable and is not an inherited constructor and not the operator_new 
+			// then return true
+			Address calledAddress = refPair.getDestination();
+			Function calledFunction = api.getFunctionAt(calledAddress);
+			if (calledFunction.isThunk()) {
+				calledFunction = calledFunction.getThunkedFunction(true);
+			}
 
-            if (calledFunction.equals(operator_new)) {
-                continue;
-            }
+			if (calledFunction.equals(operator_new)) {
+				continue;
+			}
 
-            if (calledFunction.getName().contains("prolog")) {
-                continue;
-            }
+			if (calledFunction.getName().contains("prolog")) {
+				continue;
+			}
 
-            if (!allConstructors.contains(calledFunction)) {
-                return true;
-            }
+			if (!getAllConstructors().contains(calledFunction)) {
+				return true;
+			}
 
-        }
+		}
 		return false;
 
 	}
@@ -4103,33 +4197,35 @@ public class RecoveredClassHelper {
 
 		Map<Function, RecoveredClass> cloneToClassMap = new HashMap<Function, RecoveredClass>();
 
-        for (RecoveredClass aClass : recoveredClasses) {
-            monitor.checkCanceled();
+		Iterator<RecoveredClass> recoveredClassIterator = recoveredClasses.iterator();
+		while (recoveredClassIterator.hasNext()) {
+			monitor.checkCanceled();
 
-            RecoveredClass recoveredClass = aClass;
+			RecoveredClass recoveredClass = recoveredClassIterator.next();
 
-            List<Function> allOtherConstructors =
-                    new ArrayList<Function>(allConstructors);
-            allOtherConstructors.removeAll(recoveredClass.getConstructorList());
+			List<Function> allOtherConstructors =
+				new ArrayList<Function>(getAllConstructors());
+			allOtherConstructors.removeAll(recoveredClass.getConstructorList());
 
-            // iterate through the vtable functions
-            List<Function> virtualFunctions = recoveredClass.getAllVirtualFunctions();
-            if (virtualFunctions == null) {
-                continue;
-            }
-            for (Function virtualFunction : virtualFunctions) {
-                monitor.checkCanceled();
+			// iterate through the vtable functions
+			List<Function> virtualFunctions = recoveredClass.getAllVirtualFunctions();
+			if (virtualFunctions == null) {
+				continue;
+			}
+			Iterator<Function> vfunctionIterator = virtualFunctions.iterator();
+			while (vfunctionIterator.hasNext()) {
+				monitor.checkCanceled();
 
-                Function vfunction = virtualFunction;
-                if (extendedFlatAPI.doesFunctionACallAnyListedFunction(vfunction,
-                        recoveredClass.getConstructorList()) &&
-                        !extendedFlatAPI.doesFunctionACallAnyListedFunction(vfunction,
-                                allOtherConstructors)) {
-                    cloneToClassMap.put(vfunction, recoveredClass);
-                }
-            }
+				Function vfunction = vfunctionIterator.next();
+				if (extendedFlatAPI.doesFunctionACallAnyListedFunction(vfunction,
+					recoveredClass.getConstructorList()) &&
+					!extendedFlatAPI.doesFunctionACallAnyListedFunction(vfunction,
+						allOtherConstructors)) {
+					cloneToClassMap.put(vfunction, recoveredClass);
+				}
+			}
 
-        }
+		}
 
 		// use the clone functions with only two calls (one to constructor and one to operator new)
 		Function operatorNew = identifyOperatorNewFunction(cloneToClassMap);
@@ -4138,14 +4234,15 @@ public class RecoveredClassHelper {
 		// if more than one operator new remove
 		if (operatorNew != null) {
 			Set<Function> cloneFunctions = cloneToClassMap.keySet();
-            for (Function function : cloneFunctions) {
-                monitor.checkCanceled();
-                Function cloneFunction = function;
-                if (isBasicCloneFunction(cloneFunction, operator_new, cloneToClassMap)) {
-                    RecoveredClass recoveredClass = cloneToClassMap.get(cloneFunction);
-                    recoveredClass.addCloneFunction(cloneFunction);
-                }
-            }
+			Iterator<Function> cloneIterator = cloneFunctions.iterator();
+			while (cloneIterator.hasNext()) {
+				monitor.checkCanceled();
+				Function cloneFunction = cloneIterator.next();
+				if (isBasicCloneFunction(cloneFunction, operator_new, cloneToClassMap)) {
+					RecoveredClass recoveredClass = cloneToClassMap.get(cloneFunction);
+					recoveredClass.addCloneFunction(cloneFunction);
+				}
+			}
 		}
 
 	}
@@ -4176,8 +4273,12 @@ public class RecoveredClassHelper {
 			secondFunction = secondFunction.getThunkedFunction(true);
 		}
 
-        return constructorList.contains(secondFunction);
-    }
+		if (!constructorList.contains(secondFunction)) {
+			return false;
+		}
+
+		return true;
+	}
 
 	/**
 	 * Method to identify the operator_new function using found clone functions
@@ -4192,36 +4293,38 @@ public class RecoveredClassHelper {
 		Map<Function, Integer> functionOccuranceMap = new HashMap<Function, Integer>();
 
 		Set<Function> cloneFunctions = cloneToClassMap.keySet();
-        for (Function function : cloneFunctions) {
-            monitor.checkCanceled();
-            Function cloneFunction = function;
+		Iterator<Function> cloneIterator = cloneFunctions.iterator();
+		while (cloneIterator.hasNext()) {
+			monitor.checkCanceled();
+			Function cloneFunction = cloneIterator.next();
 
-            // Easiest to find using those with only two calls so skip the bigger ones
-            Set<Function> calledFunctions = cloneFunction.getCalledFunctions(monitor);
-            if (calledFunctions.size() != 2) {
-                continue;
-            }
-            // get first called function which should be the operator_new function
-            // The second call is a class constructor and we know it is called
-            // from the cloneFunction or it wouldn't be a cloneFunction
-            Function firstCalledFunction =
-                    extendedFlatAPI.getCalledFunctionByCallOrder(cloneFunction, 1);
-            if (firstCalledFunction == null) {
-                continue;
-            }
-            // skip any constructor or destructors that are called first
-            if (allConstructorsAndDestructors.contains(firstCalledFunction)) {
-                continue;
-            }
+			// Easiest to find using those with only two calls so skip the bigger ones
+			Set<Function> calledFunctions = cloneFunction.getCalledFunctions(monitor);
+			if (calledFunctions.size() != 2) {
+				continue;
+			}
+			// get first called function which should be the operator_new function
+			// The second call is a class constructor and we know it is called
+			// from the cloneFunction or it wouldn't be a cloneFunction
+			Function firstCalledFunction =
+				extendedFlatAPI.getCalledFunctionByCallOrder(cloneFunction, 1);
+			if (firstCalledFunction == null) {
+				continue;
+			}
+			// skip any constructor or destructors that are called first
+			if (getAllConstructorsAndDestructors().contains(firstCalledFunction)) {
+				continue;
+			}
 
-            if (!functionOccuranceMap.containsKey(firstCalledFunction)) {
-                functionOccuranceMap.put(firstCalledFunction, 1);
-            } else {
-                Integer numOccurances = functionOccuranceMap.get(firstCalledFunction);
-                functionOccuranceMap.replace(firstCalledFunction, numOccurances + 1);
-            }
+			if (!functionOccuranceMap.containsKey(firstCalledFunction)) {
+				functionOccuranceMap.put(firstCalledFunction, 1);
+			}
+			else {
+				Integer numOccurances = functionOccuranceMap.get(firstCalledFunction);
+				functionOccuranceMap.replace(firstCalledFunction, numOccurances + 1);
+			}
 
-        }
+		}
 
 		Function probableOperatorNewFunction = getMostFrequentFunction(functionOccuranceMap);
 
@@ -4231,7 +4334,7 @@ public class RecoveredClassHelper {
 
 		Integer numOccurances = functionOccuranceMap.get(probableOperatorNewFunction);
 		if (functionOccuranceMap.get(probableOperatorNewFunction) < MIN_OPERATOR_NEW_REFS) {
-			Msg.debug(this, probableOperatorNewFunction +
+			Msg.debug(this, probableOperatorNewFunction.toString() +
 				" is a possible operator_new function but has less than the defined minimum number " +
 				"of matching calls " + numOccurances);
 
@@ -4265,20 +4368,21 @@ public class RecoveredClassHelper {
 		Integer highest = null;
 		Function mostFrequentFunction = null;
 		Set<Function> keySet = map.keySet();
-        for (Function value : keySet) {
-            monitor.checkCanceled();
-            Function function = value;
-            if (mostFrequentFunction == null) {
-                mostFrequentFunction = function;
-                highest = map.get(function);
-                continue;
-            }
-            Integer frequency = map.get(function);
-            if (frequency > highest) {
-                highest = frequency;
-                mostFrequentFunction = function;
-            }
-        }
+		Iterator<Function> iterator = keySet.iterator();
+		while (iterator.hasNext()) {
+			monitor.checkCanceled();
+			Function function = iterator.next();
+			if (mostFrequentFunction == null) {
+				mostFrequentFunction = function;
+				highest = map.get(function);
+				continue;
+			}
+			Integer frequency = map.get(function);
+			if (frequency > highest) {
+				highest = frequency;
+				mostFrequentFunction = function;
+			}
+		}
 		return mostFrequentFunction;
 	}
 
@@ -4289,15 +4393,16 @@ public class RecoveredClassHelper {
 	 */
 	public void removeEmptyClassesAndStructures() throws CancelledException {
 
-        for (Namespace badFIDNamespace : badFIDNamespaces) {
-            monitor.checkCanceled();
-            Namespace badNamespace = badFIDNamespace;
+		Iterator<Namespace> badNamespaceIterator = badFIDNamespaces.iterator();
+		while (badNamespaceIterator.hasNext()) {
+			monitor.checkCanceled();
+			Namespace badNamespace = badNamespaceIterator.next();
 
-            // delete empty namespace and parent namespaces
-            if (!extendedFlatAPI.hasSymbolsInNamespace(badNamespace)) {
-                removeEmptyNamespaces(badNamespace);
-            }
-        }
+			// delete empty namespace and parent namespaces
+			if (!extendedFlatAPI.hasSymbolsInNamespace(badNamespace)) {
+				removeEmptyNamespaces(badNamespace);
+			}
+		}
 
 		// remove unused empty structures
 		removeEmptyStructures();
@@ -4330,23 +4435,24 @@ public class RecoveredClassHelper {
 	 */
 	private void removeEmptyStructures() throws CancelledException {
 
-        for (Structure badFIDStructure : badFIDStructures) {
+		Iterator<Structure> badStructureIterator = badFIDStructures.iterator();
+		while (badStructureIterator.hasNext()) {
 
-            monitor.checkCanceled();
+			monitor.checkCanceled();
 
-            Structure badStructure = badFIDStructure;
-            // if not used by anything remove it
-            ListAccumulator<LocationReference> accumulator = new ListAccumulator<>();
-            ReferenceUtils.findDataTypeReferences(accumulator, badStructure, null, program, true,
-                    monitor);
+			Structure badStructure = badStructureIterator.next();
+			// if not used by anything remove it
+			ListAccumulator<LocationReference> accumulator = new ListAccumulator<>();
+			ReferenceUtils.findDataTypeReferences(accumulator, badStructure, null, program, true,
+				monitor);
 
-            List<LocationReference> referenceList = accumulator.asList();
-            if (referenceList.isEmpty()) {
-                // delete empty class data type and empty parent folders
-                removeEmptyStructure(badStructure.getDataTypePath().getCategoryPath(),
-                        badStructure.getName());
-            }
-        }
+			List<LocationReference> referenceList = accumulator.asList();
+			if (referenceList.isEmpty()) {
+				// delete empty class data type and empty parent folders
+				removeEmptyStructure(badStructure.getDataTypePath().getCategoryPath(),
+					badStructure.getName());
+			}
+		}
 	}
 
 	/**
@@ -4508,144 +4614,148 @@ public class RecoveredClassHelper {
 		CategoryPath classPath = recoveredClass.getClassPath();
 
 		List<Address> vftableAddresses = recoveredClass.getVftableAddresses();
+		Iterator<Address> vftableAddressIterator = vftableAddresses.iterator();
 
-        for (Address address : vftableAddresses) {
-            monitor.checkCanceled();
-            Address vftableAddress = address;
+		while (vftableAddressIterator.hasNext()) {
+			monitor.checkCanceled();
+			Address vftableAddress = vftableAddressIterator.next();
 
-            PointerDataType vftablePointerDataType =
-                    (PointerDataType) vftableToStructureMap.get(vftableAddress);
+			PointerDataType vftablePointerDataType =
+				(PointerDataType) vftableToStructureMap.get(vftableAddress);
 
-            DataType vftableDataType = vftablePointerDataType.getDataType();
+			DataType vftableDataType = vftablePointerDataType.getDataType();
 
-            String vftableStructureName = vftableDataType.getName();
-            vftableDataType = dataTypeManager.getDataType(vftableDataType.getCategoryPath(),
-                    vftableStructureName);
+			String vftableStructureName = vftableDataType.getName();
+			vftableDataType = dataTypeManager.getDataType(vftableDataType.getCategoryPath(),
+				vftableStructureName);
 
-            Structure vftableStruct = (Structure) vftableDataType;
+			Structure vftableStruct = (Structure) vftableDataType;
 
-            if (nameVfunctions) {
-                // if no pdb info, name all the vfunctions for this vftable and put in class namespace
-                nameVfunctions(recoveredClass, vftableAddress, vftableStructureName);
-            }
+			if (nameVfunctions) {
+				// if no pdb info, name all the vfunctions for this vftable and put in class namespace
+				nameVfunctions(recoveredClass, vftableAddress, vftableStructureName);
+			}
 
 
-            List<Function> vFunctions = recoveredClass.getVirtualFunctions(vftableAddress);
-            int vfunctionNumber = 1;
+			List<Function> vFunctions = recoveredClass.getVirtualFunctions(vftableAddress);
+			int vfunctionNumber = 1;
+			Iterator<Function> vfIterator = vFunctions.iterator();
 
-            for (Function vFunction : vFunctions) {
+			while (vfIterator.hasNext()) {
 
-                monitor.checkCanceled();
-                Function vfunction = vFunction;
+				monitor.checkCanceled();
+				Function vfunction = vfIterator.next();
 
-                if (vfunction == null) {
-                    Pointer nullPointer = dataTypeManager.getPointer(DataType.DEFAULT);
-                    vftableStruct.add(nullPointer, "null pointer", null);
-                    continue;
-                }
+				if (vfunction == null) {
+					Pointer nullPointer = dataTypeManager.getPointer(DataType.DEFAULT);
+					vftableStruct.add(nullPointer, "null pointer", null);
+					continue;
+				}
 
-                // check to see if the "this" data type is an empty placeholder for the class
-                // structure and replace it with the one that was just created by the script
-                //NEW
-                if (replaceClassStructures) {
-                    replaceClassStructure(vfunction, recoveredClass.getName(), classStruct);
-                }
+				// check to see if the "this" data type is an empty placeholder for the class
+				// structure and replace it with the one that was just created by the script
+				//NEW
+				if (replaceClassStructures) {
+					replaceClassStructure(vfunction, recoveredClass.getName(), classStruct);
+				}
 
-                // get the classPath of highest level parent with vfAddress in their vftable
-                classPath =
-                        getCategoryPathForFunctionSignature(vfunction, recoveredClass, vftableAddress);
+				// get the classPath of highest level parent with vfAddress in their vftable
+				classPath =
+					getCategoryPathForFunctionSignature(vfunction, recoveredClass, vftableAddress);
 
-                Symbol vfunctionSymbol = symbolTable.getPrimarySymbol(vfunction.getEntryPoint());
-                Namespace parentNamespace = vfunctionSymbol.getParentNamespace();
+				Symbol vfunctionSymbol = symbolTable.getPrimarySymbol(vfunction.getEntryPoint());
+				Namespace parentNamespace = vfunctionSymbol.getParentNamespace();
 
-                String classCommentPrefix = "";
+				String classCommentPrefix = "";
 
-                if (!parentNamespace.equals(globalNamespace)) {
-                    RecoveredClass vfunctionClass = getClass(parentNamespace);
+				if (!parentNamespace.equals(globalNamespace)) {
+					RecoveredClass vfunctionClass = getClass(parentNamespace);
 
-                    // this is null when there is a class from somewhere other than RTTI so it is
-                    // not stored in the map. Just use the parent namespace name in this case
-                    if (vfunctionClass == null) {
-                        classCommentPrefix = parentNamespace.getName();
-                    } else if (vfunctionClass.getShortenedTemplateName() != null &&
-                            useShortTemplates && !vfunctionClass.getShortenedTemplateName().isEmpty()) {
-                        classCommentPrefix = vfunctionClass.getShortenedTemplateName();
-                    } else {
-                        classCommentPrefix = vfunctionClass.getName();
-                    }
+					// this is null when there is a class from somewhere other than RTTI so it is
+					// not stored in the map. Just use the parent namespace name in this case
+					if (vfunctionClass == null) {
+						classCommentPrefix = parentNamespace.getName();
+					}
+					else if (vfunctionClass.getShortenedTemplateName() != null &&
+						useShortTemplates && !vfunctionClass.getShortenedTemplateName().isEmpty()) {
+						classCommentPrefix = vfunctionClass.getShortenedTemplateName();
+					}
+					else {
+						classCommentPrefix = vfunctionClass.getName();
+					}
 
-                }
+				}
 
-                // Create comment to indicate it is a virtual function and which number in the table
-                String comment = VFUNCTION_COMMENT + vfunctionNumber;
+				// Create comment to indicate it is a virtual function and which number in the table
+				String comment = VFUNCTION_COMMENT + vfunctionNumber;
 
-                // add suffix for multi classes to distinguish which vftable it is for
-                String commentSuffix = getForClassSuffix(vftableStructureName);
-                if (!commentSuffix.isEmpty()) {
-                    int index = commentSuffix.indexOf("for_");
-                    if (index > 0) {
-                        commentSuffix = " for parent class " + commentSuffix.substring(index + 4);
-                    }
-                    comment = comment + commentSuffix;
-                }
+				// add suffix for multi classes to distinguish which vftable it is for
+				String commentSuffix = getForClassSuffix(vftableStructureName);
+				if (!commentSuffix.isEmpty()) {
+					int index = commentSuffix.indexOf("for_");
+					if (index > 0) {
+						commentSuffix = " for parent class " + commentSuffix.substring(index + 4);
+					}
+					comment = comment + commentSuffix;
+				}
 
-                // if function is "purecall" function make the class field name "vfunction #n" instead
-                // of using the function name of "purecall" and prepend "pure" to the comment so
-                // they know it is pure virtual function, ie not actually implemented in the parent class
-                String nameField = vfunction.getName();
+				// if function is "purecall" function make the class field name "vfunction #n" instead
+				// of using the function name of "purecall" and prepend "pure" to the comment so
+				// they know it is pure virtual function, ie not actually implemented in the parent class
+				String nameField = vfunction.getName();
 
-                FunctionDefinition functionDataType =
-                        new FunctionDefinitionDataType(vfunction, true);
+				FunctionDefinition functionDataType =
+					new FunctionDefinitionDataType(vfunction, true);
 
-                functionDataType.setReturnType(vfunction.getReturnType());
+				functionDataType.setReturnType(vfunction.getReturnType());
 
-                // if the function is a purecall need to create the function definition using
-                // the equivalent child virtual function signature
-                if (nameField.contains("purecall")) {
+				// if the function is a purecall need to create the function definition using
+				// the equivalent child virtual function signature
+				if (nameField.contains("purecall")) {
 
-                    nameField = DEFAULT_VFUNCTION_PREFIX + vfunctionNumber;
+					nameField = DEFAULT_VFUNCTION_PREFIX + vfunctionNumber;
 
-                    // get function sig from child class
-                    Function childVirtualFunction =
-                            getChildVirtualFunction(recoveredClass, vftableAddress, vfunctionNumber);
-                    if (childVirtualFunction != null) {
-                        functionDataType =
-                                new FunctionDefinitionDataType(childVirtualFunction, true);
-                        functionDataType.setReturnType(childVirtualFunction.getReturnType());
-                        Symbol childFunctionSymbol =
-                                symbolTable.getPrimarySymbol(childVirtualFunction.getEntryPoint());
+					// get function sig from child class
+					Function childVirtualFunction =
+						getChildVirtualFunction(recoveredClass, vftableAddress, vfunctionNumber);
+					if (childVirtualFunction != null) {
+						functionDataType =
+							new FunctionDefinitionDataType(childVirtualFunction, true);
+						functionDataType.setReturnType(childVirtualFunction.getReturnType());
+						Symbol childFunctionSymbol =
+							symbolTable.getPrimarySymbol(childVirtualFunction.getEntryPoint());
 
-                        // if the child function has a default name, rename the function definition
-                        // data type to the "vfunction<vfunctionNumber>" name
-                        if (childFunctionSymbol.getSource() == SourceType.DEFAULT) {
-                            functionDataType.setName(nameField);
-                        }
-                    }
-                    comment = recoveredClass.getName() + " pure " + comment;
+						// if the child function has a default name, rename the function definition
+						// data type to the "vfunction<vfunctionNumber>" name
+						if (childFunctionSymbol.getSource() == SourceType.DEFAULT) {
+							functionDataType.setName(nameField);
+						}
+					}
+					comment = recoveredClass.getName() + " pure " + comment;
 
-                }
+				}
 
-                PointerDataType functionPointerDataType =
-                        createFunctionSignaturePointerDataType(functionDataType, classPath);
+				PointerDataType functionPointerDataType =
+					createFunctionSignaturePointerDataType(functionDataType, classPath);
 
-                vftableStruct.add(functionPointerDataType, nameField,
-                        classCommentPrefix + " " + comment);
-                vfunctionNumber++;
-            }
+				vftableStruct.add(functionPointerDataType, nameField,
+					classCommentPrefix + " " + comment);
+				vfunctionNumber++;
+			}
 
-            // align the structure then add it to the data type manager
-            vftableStruct.setPackingEnabled(true);
-            vftableStruct = (Structure) dataTypeManager.addDataType(vftableStruct,
-                    DataTypeConflictHandler.DEFAULT_HANDLER);
+			// align the structure then add it to the data type manager
+			vftableStruct.setPackingEnabled(true);
+			vftableStruct = (Structure) dataTypeManager.addDataType(vftableStruct,
+				DataTypeConflictHandler.DEFAULT_HANDLER);
 
-            // clear the array or unprocessed structure at the current vftable location and
-            // apply the structure. It has to be one or the other and the correct length
-            // because of the check at the beginning of the script that checked for either
-            // array or structure of pointers and got size from them initially
-            api.clearListing(vftableAddress);
-            api.createData(vftableAddress, vftableStruct);
+			// clear the array or unprocessed structure at the current vftable location and 
+			// apply the structure. It has to be one or the other and the correct length
+			// because of the check at the beginning of the script that checked for either
+			// array or structure of pointers and got size from them initially
+			api.clearListing(vftableAddress);
+			api.createData(vftableAddress, vftableStruct);
 
-        }
+		}
 	}
 
 	/**
@@ -4839,8 +4949,11 @@ public class RecoveredClassHelper {
 		}
 
 		List<RecoveredClass> classHierarchy = childClass.getClassHierarchy();
-        return classHierarchy.contains(possibleParentClass);
-    }
+		if (classHierarchy.contains(possibleParentClass)) {
+			return true;
+		}
+		return false;
+	}
 
 	// may skip a parent so continue through all parents
 	// for multi-inheritance, get the correct parent class for the given vftable
@@ -4864,7 +4977,7 @@ public class RecoveredClassHelper {
 		// if no ancestor has virtual functions then return the given class's class path
 		List<RecoveredClass> ancestorsWithVirtualFunctions =
 			getAncestorsWithVirtualFunctions(recoveredClass);
-		if (ancestorsWithVirtualFunctions.isEmpty()) {
+		if (ancestorsWithVirtualFunctions.size() == 0) {
 			return classPath;
 		}
 
@@ -4954,30 +5067,32 @@ public class RecoveredClassHelper {
 		String className = recoveredClass.getName();
 
 		List<Function> inlinedConstructorList = recoveredClass.getInlinedConstructorList();
+		Iterator<Function> inlinedConstructorsIterator = inlinedConstructorList.iterator();
 
-        for (Function function : inlinedConstructorList) {
-            monitor.checkCanceled();
-            Function inlinedFunction = function;
+		while (inlinedConstructorsIterator.hasNext()) {
+			monitor.checkCanceled();
+			Function inlinedFunction = inlinedConstructorsIterator.next();
 
-            List<Address> listOfClassRefsInFunction =
-                    getSortedListOfAncestorRefsInFunction(inlinedFunction, recoveredClass);
+			List<Address> listOfClassRefsInFunction =
+				getSortedListOfAncestorRefsInFunction(inlinedFunction, recoveredClass);
 
-            if (!listOfClassRefsInFunction.isEmpty()) {
+			if (!listOfClassRefsInFunction.isEmpty()) {
 
-                Address markupAddress = listOfClassRefsInFunction.get(0);
-                String markupString = classNamespace.getName(true) + "::" + className;
+				Address markupAddress = listOfClassRefsInFunction.get(0);
+				String markupString = classNamespace.getName(true) + "::" + className;
 
-                String existingComment = api.getPreComment(markupAddress);
-                if (existingComment != null) {
-                    existingComment = existingComment + "\n";
-                } else {
-                    existingComment = "";
-                }
-                api.setPreComment(markupAddress,
-                        existingComment + "inlined constructor: " + markupString);
-                bookmarkAddress(markupAddress, INLINE_CONSTRUCTOR_BOOKMARK + " " + markupString);
-            }
-        }
+				String existingComment = api.getPreComment(markupAddress);
+				if (existingComment != null) {
+					existingComment = existingComment + "\n";
+				}
+				else {
+					existingComment = "";
+				}
+				api.setPreComment(markupAddress,
+					existingComment + "inlined constructor: " + markupString);
+				bookmarkAddress(markupAddress, INLINE_CONSTRUCTOR_BOOKMARK + " " + markupString);
+			}
+		}
 	}
 
 	/**
@@ -4992,20 +5107,21 @@ public class RecoveredClassHelper {
 		String className = recoveredClass.getName();
 
 		List<Function> inlinedDestructorList = recoveredClass.getInlinedDestructorList();
-        for (Function function : inlinedDestructorList) {
-            monitor.checkCanceled();
-            Function destructorFunction = function;
-            Address classVftableRef = getFirstClassVftableReference(recoveredClass, destructorFunction);
+		Iterator<Function> inlinedDestructorIterator = inlinedDestructorList.iterator();
+		while (inlinedDestructorIterator.hasNext()) {
+			monitor.checkCanceled();
+			Function destructorFunction = inlinedDestructorIterator.next();
+			Address classVftableRef = getFirstClassVftableReference(recoveredClass, destructorFunction);
 
-            if (classVftableRef == null) {
-                continue;
-            }
+			if (classVftableRef == null) {
+				continue;
+			}
 
-            String markupString = classNamespace.getName(true) + "::~" + className;
-            api.setPreComment(classVftableRef, "inlined destructor: " + markupString);
+			String markupString = classNamespace.getName(true) + "::~" + className;
+			api.setPreComment(classVftableRef, "inlined destructor: " + markupString);
 
-            bookmarkAddress(classVftableRef, INLINE_DESTRUCTOR_BOOKMARK + " " + markupString);
-        }
+			bookmarkAddress(classVftableRef, INLINE_DESTRUCTOR_BOOKMARK + " " + markupString);
+		}
 	}
 
 	/**
@@ -5018,23 +5134,25 @@ public class RecoveredClassHelper {
 		Namespace classNamespace = recoveredClass.getClassNamespace();
 
 		List<Function> functionsContainingInlineList = recoveredClass.getIndeterminateInlineList();
-        for (Function function : functionsContainingInlineList) {
-            monitor.checkCanceled();
-            Function functionContainingInline = function;
+		Iterator<Function> functionsContainingInlineIterator =
+			functionsContainingInlineList.iterator();
+		while (functionsContainingInlineIterator.hasNext()) {
+			monitor.checkCanceled();
+			Function functionContainingInline = functionsContainingInlineIterator.next();
 
-            Address classVftableRef =
-                    getFirstClassVftableReference(recoveredClass, functionContainingInline);
+			Address classVftableRef =
+				getFirstClassVftableReference(recoveredClass, functionContainingInline);
 
-            if (classVftableRef == null) {
-                continue;
-            }
+			if (classVftableRef == null) {
+				continue;
+			}
 
-            String markupString = "inlined constructor or destructor (approx location) for " +
-                    classNamespace.getName(true);
-            api.setPreComment(classVftableRef, markupString);
+			String markupString = "inlined constructor or destructor (approx location) for " +
+				classNamespace.getName(true);
+			api.setPreComment(classVftableRef, markupString);
 
-            bookmarkAddress(classVftableRef, INDETERMINATE_INLINE_BOOKMARK + " " + markupString);
-        }
+			bookmarkAddress(classVftableRef, INDETERMINATE_INLINE_BOOKMARK + " " + markupString);
+		}
 	}
 
 	/**
@@ -5050,22 +5168,23 @@ public class RecoveredClassHelper {
 		String className = recoveredClass.getName();
 
 		List<Function> unknownIfConstructorOrDestructorLIst = recoveredClass.getIndeterminateList();
-        for (Function function : unknownIfConstructorOrDestructorLIst) {
-            monitor.checkCanceled();
-            Function indeterminateFunction = function;
+		Iterator<Function> unknownsIterator = unknownIfConstructorOrDestructorLIst.iterator();
+		while (unknownsIterator.hasNext()) {
+			monitor.checkCanceled();
+			Function indeterminateFunction = unknownsIterator.next();
 
-            if (nameVfunctions) {
-                createNewSymbolAtFunction(indeterminateFunction,
-                        className + "_Constructor_or_Destructor", classNamespace, false, false);
-            }
+			if (nameVfunctions) {
+				createNewSymbolAtFunction(indeterminateFunction,
+					className + "_Constructor_or_Destructor", classNamespace, false, false);
+			}
 
-            // check to see if the "this" data type is an empty placeholder for the class
-            // structure and replace it with the one that was just created by the script
-            //NEW
-            if (replaceClassStructures) {
-                replaceClassStructure(indeterminateFunction, className, classStruct);
-            }
-        }
+			// check to see if the "this" data type is an empty placeholder for the class
+			// structure and replace it with the one that was just created by the script
+			//NEW
+			if (replaceClassStructures) {
+				replaceClassStructure(indeterminateFunction, className, classStruct);
+			}
+		}
 	}
 
 	/**
@@ -5135,50 +5254,52 @@ public class RecoveredClassHelper {
 			List<RecoveredClass> recoveredClasses) throws CancelledException, Exception {
 
 		Function possibleOperatorDelete = null;
-        for (RecoveredClass aClass : recoveredClasses) {
-            monitor.checkCanceled();
+		Iterator<RecoveredClass> recoveredClassIterator = recoveredClasses.iterator();
+		while (recoveredClassIterator.hasNext()) {
+			monitor.checkCanceled();
 
-            RecoveredClass recoveredClass = aClass;
-            List<Function> deletingDestructors = recoveredClass.getDeletingDestructors();
-            for (Function destructor : deletingDestructors) {
-                monitor.checkCanceled();
-                Function deletingDestructor = destructor;
+			RecoveredClass recoveredClass = recoveredClassIterator.next();
+			List<Function> deletingDestructors = recoveredClass.getDeletingDestructors();
+			Iterator<Function> deletingDestructorIterator = deletingDestructors.iterator();
+			while (deletingDestructorIterator.hasNext()) {
+				monitor.checkCanceled();
+				Function deletingDestructor = deletingDestructorIterator.next();
 
-                if (deletingDestructorsThatCallDestructor.contains(deletingDestructor)) {
-                    Set<Function> calledFunctions = deletingDestructor.getCalledFunctions(monitor);
+				if (deletingDestructorsThatCallDestructor.contains(deletingDestructor)) {
+					Set<Function> calledFunctions = deletingDestructor.getCalledFunctions(monitor);
 
-                    // just use the ones that call two functions to find operator_delete
-                    if (calledFunctions.size() != 2) {
-                        return null;
-                    }
-                    // get first called function and verify it is on cd list
-                    Function firstCalledFunction =
-                            extendedFlatAPI.getCalledFunctionByCallOrder(deletingDestructor, 1);
-                    if (firstCalledFunction == null ||
-                            !recoveredClass.getConstructorOrDestructorFunctions()
-                                    .contains(
-                                            firstCalledFunction)) {
-                        return null;
-                    }
+					// just use the ones that call two functions to find operator_delete
+					if (calledFunctions.size() != 2) {
+						return null;
+					}
+					// get first called function and verify it is on cd list
+					Function firstCalledFunction =
+						extendedFlatAPI.getCalledFunctionByCallOrder(deletingDestructor, 1);
+					if (firstCalledFunction == null ||
+						!recoveredClass.getConstructorOrDestructorFunctions()
+								.contains(
+									firstCalledFunction)) {
+						return null;
+					}
 
-                    // get second one and if operator_delete has not been assigned yet, assign it
-                    Function secondCalledFunction =
-                            extendedFlatAPI.getCalledFunctionByCallOrder(deletingDestructor, 2);
-                    if (secondCalledFunction == null) {
-                        return null;
-                    }
+					// get second one and if operator_delete has not been assigned yet, assign it
+					Function secondCalledFunction =
+						extendedFlatAPI.getCalledFunctionByCallOrder(deletingDestructor, 2);
+					if (secondCalledFunction == null) {
+						return null;
+					}
 
-                    // if we didn't already have one, set it here
-                    if (possibleOperatorDelete == null) {
-                        possibleOperatorDelete = secondCalledFunction;
-                    }
-                    // if we find another possibility and they don't match return null
-                    else if (!possibleOperatorDelete.equals(secondCalledFunction)) {
-                        return null;
-                    }
-                }
-            }
-        }
+					// if we didn't already have one, set it here
+					if (possibleOperatorDelete == null) {
+						possibleOperatorDelete = secondCalledFunction;
+					}
+					// if we find another possibility and they don't match return null
+					else if (!possibleOperatorDelete.equals(secondCalledFunction)) {
+						return null;
+					}
+				}
+			}
+		}
 		// If we get this far then we are sure the operator_delete function
 		// is correct so assign the global variable. If its symbol is not already named then name it
 		if (possibleOperatorDelete != null) {
@@ -5220,18 +5341,19 @@ public class RecoveredClassHelper {
 		ownConstructorOrDestructorFunctions.removeAll(recoveredClass.getConstructorList());
 		ownConstructorOrDestructorFunctions.removeAll(recoveredClass.getInlinedConstructorList());
 
-        for (Function ownConstructorOrDestructorFunction : ownConstructorOrDestructorFunctions) {
-            monitor.checkCanceled();
-            Function function = ownConstructorOrDestructorFunction;
+		Iterator<Function> functionIterator = ownConstructorOrDestructorFunctions.iterator();
+		while (functionIterator.hasNext()) {
+			monitor.checkCanceled();
+			Function function = functionIterator.next();
 
-            //Type 4 - class c/d called from other than first vfunction
-            if (extendedFlatAPI.doesFunctionACallFunctionB(virtualFunction, function)) {
-                recoveredClass.addDeletingDestructor(virtualFunction);
-                addDestructorToClass(recoveredClass, function);
-                recoveredClass.removeIndeterminateConstructorOrDestructor(function);
-                return;
-            }
-        }
+			//Type 4 - class c/d called from other than first vfunction
+			if (extendedFlatAPI.doesFunctionACallFunctionB(virtualFunction, function)) {
+				recoveredClass.addDeletingDestructor(virtualFunction);
+				addDestructorToClass(recoveredClass, function);
+				recoveredClass.removeIndeterminateConstructorOrDestructor(function);
+				return;
+			}
+		}
 
 		// Type 4 inlined - inlined class c/d called from other than first function
 		// either just vftable ref before operator delete or vftableref followed by parent call
@@ -5330,32 +5452,34 @@ public class RecoveredClassHelper {
 	public void separateInlinedConstructorDestructors(List<RecoveredClass> recoveredClasses)
 			throws CancelledException {
 
-        for (RecoveredClass aClass : recoveredClasses) {
-            monitor.checkCanceled();
-            RecoveredClass recoveredClass = aClass;
-            List<Function> indeterminateFunctions = recoveredClass.getIndeterminateList();
-            Iterator<Function> indeterminateIterator = indeterminateFunctions.iterator();
-            while (indeterminateIterator.hasNext()) {
-                monitor.checkCanceled();
-                Function indeterminateFunction = indeterminateIterator.next();
+		Iterator<RecoveredClass> recoveredClassIterator = recoveredClasses.iterator();
 
-                List<Address> vftableReferenceList = getVftableReferences(indeterminateFunction);
-                if (vftableReferenceList == null) {
-                    continue;
-                }
+		while (recoveredClassIterator.hasNext()) {
+			monitor.checkCanceled();
+			RecoveredClass recoveredClass = recoveredClassIterator.next();
+			List<Function> indeterminateFunctions = recoveredClass.getIndeterminateList();
+			Iterator<Function> indeterminateIterator = indeterminateFunctions.iterator();
+			while (indeterminateIterator.hasNext()) {
+				monitor.checkCanceled();
+				Function indeterminateFunction = indeterminateIterator.next();
 
-                // if inline, put on separate list and remove from indeterminate list
-                // process later
-                if (vftableReferenceList.size() > 1) {
-                    if (!areVftablesInSameClass(vftableReferenceList)) {
-                        recoveredClass.addIndeterminateInline(indeterminateFunction);
-                        indeterminateIterator.remove();
-                    }
+				List<Address> vftableReferenceList = getVftableReferences(indeterminateFunction);
+				if (vftableReferenceList == null) {
+					continue;
+				}
 
-                    continue;
-                }
-            }
-        }
+				// if inline, put on separate list and remove from indeterminate list
+				// process later
+				if (vftableReferenceList.size() > 1) {
+					if (!areVftablesInSameClass(vftableReferenceList)) {
+						recoveredClass.addIndeterminateInline(indeterminateFunction);
+						indeterminateIterator.remove();
+					}
+
+					continue;
+				}
+			}
+		}
 	}
 
 	/**
@@ -5445,7 +5569,7 @@ public class RecoveredClassHelper {
 			getVirtualParentClassStructures(recoveredClass);
 
 		// if there are no virtual parents there will be no internal data		
-		if (virtualParentClassStructures.isEmpty()) {
+		if (virtualParentClassStructures.size() == 0) {
 			return NONE;
 		}
 
@@ -5521,18 +5645,19 @@ public class RecoveredClassHelper {
 		Map<RecoveredClass, Boolean> parentToBaseTypeMap = recoveredClass.getParentToBaseTypeMap();
 
 		Set<RecoveredClass> parentClasses = parentToBaseTypeMap.keySet();
-        for (RecoveredClass aClass : parentClasses) {
+		Iterator<RecoveredClass> parentClassIterator = parentClasses.iterator();
+		while (parentClassIterator.hasNext()) {
 
-            monitor.checkCanceled();
-            RecoveredClass parentClass = aClass;
-            if (parentClass.getName().equals(parentClassName)) {
-                Boolean isVirtualParent = parentToBaseTypeMap.get(parentClass);
-                if (isVirtualParent) {
-                    return true;
-                }
-            }
+			monitor.checkCanceled();
+			RecoveredClass parentClass = parentClassIterator.next();
+			if (parentClass.getName().equals(parentClassName)) {
+				Boolean isVirtualParent = parentToBaseTypeMap.get(parentClass);
+				if (isVirtualParent) {
+					return true;
+				}
+			}
 
-        }
+		}
 		return false;
 
 	}
@@ -5586,16 +5711,17 @@ public class RecoveredClassHelper {
 		List<RecoveredClass> virtualParents = new ArrayList<RecoveredClass>();
 
 		Set<RecoveredClass> parentClasses = parentToBaseTypeMap.keySet();
-        for (RecoveredClass aClass : parentClasses) {
+		Iterator<RecoveredClass> parentClassIterator = parentClasses.iterator();
+		while (parentClassIterator.hasNext()) {
 
-            monitor.checkCanceled();
-            RecoveredClass parentClass = aClass;
+			monitor.checkCanceled();
+			RecoveredClass parentClass = parentClassIterator.next();
 
-            Boolean isVirtualParent = parentToBaseTypeMap.get(parentClass);
-            if (isVirtualParent) {
-                virtualParents.add(parentClass);
-            }
-        }
+			Boolean isVirtualParent = parentToBaseTypeMap.get(parentClass);
+			if (isVirtualParent) {
+				virtualParents.add(parentClass);
+			}
+		}
 
 		return virtualParents;
 
@@ -5608,11 +5734,14 @@ public class RecoveredClassHelper {
 	 */
 	public boolean isClassOffsetToVftableMapComplete(RecoveredClass recoveredClass) {
 
-        return recoveredClass.getClassOffsetToVftableMap()
-                .values()
-                .containsAll(
-                        recoveredClass.getVftableAddresses());
-    }
+		if (recoveredClass.getClassOffsetToVftableMap()
+				.values()
+				.containsAll(
+					recoveredClass.getVftableAddresses())) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Method to find deleting destructors that call a destructor but have no reference to a vftable
@@ -5622,42 +5751,45 @@ public class RecoveredClassHelper {
 	public void findDeletingDestructorsWithCallToDestructorWithNoVftableReference(
 			List<RecoveredClass> recoveredClasses) throws CancelledException {
 
-        for (RecoveredClass aClass : recoveredClasses) {
-            monitor.checkCanceled();
-            RecoveredClass recoveredClass = aClass;
+		Iterator<RecoveredClass> recoveredClassIterator = recoveredClasses.iterator();
 
-            List<Function> virtualFunctions = recoveredClass.getAllVirtualFunctions();
+		while (recoveredClassIterator.hasNext()) {
+			monitor.checkCanceled();
+			RecoveredClass recoveredClass = recoveredClassIterator.next();
 
-            if (virtualFunctions == null) {
-                continue;
-            }
+			List<Function> virtualFunctions = recoveredClass.getAllVirtualFunctions();
 
-            for (Function virtualFunction : virtualFunctions) {
-                monitor.checkCanceled();
-                Function vFunction = virtualFunction;
+			if (virtualFunctions == null) {
+				continue;
+			}
 
-                Set<Function> calledFunctions = vFunction.getCalledFunctions(monitor);
-                if (calledFunctions.size() != 2) {
-                    continue;
-                }
+			Iterator<Function> vfIterator = virtualFunctions.iterator();
+			while (vfIterator.hasNext()) {
+				monitor.checkCanceled();
+				Function vFunction = vfIterator.next();
 
-                // get first called function and verify is not a c/d function in current class or
-                // any class get second called function and verify it is operator delete
-                Function firstCalledFunction =
-                        extendedFlatAPI.getCalledFunctionByCallOrder(vFunction, 1);
-                Function secondCalledFunction =
-                        extendedFlatAPI.getCalledFunctionByCallOrder(vFunction, 2);
-                if (firstCalledFunction != null && secondCalledFunction != null &&
-                        !recoveredClass.getConstructorOrDestructorFunctions()
-                                .contains(
-                                        firstCalledFunction) &&
-                        secondCalledFunction.equals(operator_delete) &&
-                        !allConstructorsAndDestructors.contains(vFunction)) {
-                    recoveredClass.addDeletingDestructor(vFunction);
-                    recoveredClass.setVBaseDestructor(firstCalledFunction);
-                }
-            }
-        }
+				Set<Function> calledFunctions = vFunction.getCalledFunctions(monitor);
+				if (calledFunctions.size() != 2) {
+					continue;
+				}
+
+				// get first called function and verify is not a c/d function in current class or 
+				// any class get second called function and verify it is operator delete
+				Function firstCalledFunction =
+					extendedFlatAPI.getCalledFunctionByCallOrder(vFunction, 1);
+				Function secondCalledFunction =
+					extendedFlatAPI.getCalledFunctionByCallOrder(vFunction, 2);
+				if (firstCalledFunction != null && secondCalledFunction != null &&
+					!recoveredClass.getConstructorOrDestructorFunctions()
+							.contains(
+								firstCalledFunction) &&
+					secondCalledFunction.equals(operator_delete) &&
+					!getAllConstructorsAndDestructors().contains(vFunction)) {
+					recoveredClass.addDeletingDestructor(vFunction);
+					recoveredClass.setVBaseDestructor(firstCalledFunction);
+				}
+			}
+		}
 	}
 
 	/**
@@ -5668,66 +5800,68 @@ public class RecoveredClassHelper {
 	public void findDestructorsWithNoParamsOrReturn(List<RecoveredClass> recoveredClasses)
 			throws CancelledException {
 
-        for (RecoveredClass aClass : recoveredClasses) {
+		Iterator<RecoveredClass> recoveredClassIterator = recoveredClasses.iterator();
+		while (recoveredClassIterator.hasNext()) {
 
-            monitor.checkCanceled();
+			monitor.checkCanceled();
 
-            RecoveredClass recoveredClass = aClass;
-            List<Function> indeterminateFunctions = recoveredClass.getIndeterminateList();
-            Iterator<Function> indeterminateIterator = indeterminateFunctions.iterator();
-            while (indeterminateIterator.hasNext()) {
-                monitor.checkCanceled();
-                Function indeterminateFunction = indeterminateIterator.next();
+			RecoveredClass recoveredClass = recoveredClassIterator.next();
+			List<Function> indeterminateFunctions = recoveredClass.getIndeterminateList();
+			Iterator<Function> indeterminateIterator = indeterminateFunctions.iterator();
+			while (indeterminateIterator.hasNext()) {
+				monitor.checkCanceled();
+				Function indeterminateFunction = indeterminateIterator.next();
 
-                DataType returnDataType =
-                        decompilerUtils.getDecompilerReturnType(indeterminateFunction);
-                if (returnDataType == null) {
-                    continue;
-                }
+				DataType returnDataType =
+					decompilerUtils.getDecompilerReturnType(indeterminateFunction);
+				if (returnDataType == null) {
+					continue;
+				}
 
-                String returnDataName = returnDataType.getDisplayName();
-                //ParameterDefinition[] params = getParametersFromDecompiler(indeterminateFunction);
-                ParameterDefinition[] params =
-                        decompilerUtils.getParametersFromDecompiler(indeterminateFunction);
-                int numberParams = 0;
+				String returnDataName = returnDataType.getDisplayName();
+				//ParameterDefinition[] params = getParametersFromDecompiler(indeterminateFunction);
+				ParameterDefinition[] params =
+					decompilerUtils.getParametersFromDecompiler(indeterminateFunction);
+				int numberParams = 0;
 
-                if (params == null) {
-                    numberParams = indeterminateFunction.getParameterCount();
-                } else {
-                    numberParams = params.length;
-                }
+				if (params == null) {
+					numberParams = indeterminateFunction.getParameterCount();
+				}
+				else {
+					numberParams = params.length;
+				}
 
-                if (numberParams == 0 && "void".equals(returnDataName)) {
+				if (numberParams == 0 && returnDataName.equals("void")) {
 
-                    Address firstVftableReference =
-                            getFirstVftableReferenceInFunction(indeterminateFunction);
-                    if (firstVftableReference == null) {
-                        continue;
-                    }
+					Address firstVftableReference =
+						getFirstVftableReferenceInFunction(indeterminateFunction);
+					if (firstVftableReference == null) {
+						continue;
+					}
 
-                    FillOutStructureCmd fillCmd =
-                            runFillOutStructureCmd(indeterminateFunction, firstVftableReference);
+					FillOutStructureCmd fillCmd =
+						runFillOutStructureCmd(indeterminateFunction, firstVftableReference);
 
-                    if (fillCmd == null) {
-                        continue;
-                    }
+					if (fillCmd == null) {
+						continue;
+					}
 
-                    List<OffsetPcodeOpPair> stores = fillCmd.getStorePcodeOps();
-                    List<OffsetPcodeOpPair> loads = fillCmd.getLoadPcodeOps();
-                    stores = removePcodeOpsNotInFunction(indeterminateFunction, stores);
-                    loads = removePcodeOpsNotInFunction(indeterminateFunction, loads);
+					List<OffsetPcodeOpPair> stores = fillCmd.getStorePcodeOps();
+					List<OffsetPcodeOpPair> loads = fillCmd.getLoadPcodeOps();
+					stores = removePcodeOpsNotInFunction(indeterminateFunction, stores);
+					loads = removePcodeOpsNotInFunction(indeterminateFunction, loads);
 
-                    if (loads == null || stores == null) {
-                        continue;
-                    }
+					if (loads == null || stores == null) {
+						continue;
+					}
 
-                    if (stores.size() == 1 && loads.isEmpty()) {
-                        recoveredClass.addNonThisDestructor(indeterminateFunction);
-                        indeterminateIterator.remove();
-                    }
-                }
-            }
-        }
+					if (stores.size() == 1 && loads.size() == 0) {
+						recoveredClass.addNonThisDestructor(indeterminateFunction);
+						indeterminateIterator.remove();
+					}
+				}
+			}
+		}
 	}
 
 	/**
@@ -5740,55 +5874,56 @@ public class RecoveredClassHelper {
 	 */
 	public void findMoreInlinedConstructors(List<RecoveredClass> recoveredClasses)
 			throws CancelledException, InvalidInputException, DuplicateNameException {
+		Iterator<RecoveredClass> recoveredClassIterator = recoveredClasses.iterator();
 
-        for (RecoveredClass aClass : recoveredClasses) {
-            monitor.checkCanceled();
-            RecoveredClass recoveredClass = aClass;
-            List<Function> constructorList = recoveredClass.getConstructorList();
-            Iterator<Function> constructorIterator = constructorList.iterator();
-            while (constructorIterator.hasNext()) {
-                monitor.checkCanceled();
-                Function constructor = constructorIterator.next();
+		while (recoveredClassIterator.hasNext()) {
+			monitor.checkCanceled();
+			RecoveredClass recoveredClass = recoveredClassIterator.next();
+			List<Function> constructorList = recoveredClass.getConstructorList();
+			Iterator<Function> constructorIterator = constructorList.iterator();
+			while (constructorIterator.hasNext()) {
+				monitor.checkCanceled();
+				Function constructor = constructorIterator.next();
 
-                // get the references to the vftable(s) that are referenced in this function
+				// get the references to the vftable(s) that are referenced in this function
 
-                List<Address> referencesToVftablesFromFunction = getVftableReferences(constructor);
+				List<Address> referencesToVftablesFromFunction = getVftableReferences(constructor);
 
-                if (referencesToVftablesFromFunction == null) {
-                    continue;
-                }
+				if (referencesToVftablesFromFunction == null) {
+					continue;
+				}
 
-                Collections.sort(referencesToVftablesFromFunction);
-                Address firstVftableReferenceAddress = referencesToVftablesFromFunction.get(0);
+				Collections.sort(referencesToVftablesFromFunction);
+				Address firstVftableReferenceAddress = referencesToVftablesFromFunction.get(0);
 
-                Address firstEndOfBlock = getEndOfFirstBlockAddress(constructor);
-                if (firstEndOfBlock != null) {
+				Address firstEndOfBlock = getEndOfFirstBlockAddress(constructor);
+				if (firstEndOfBlock != null) {
 
-                    // not as reliable for virtual or multi-virtual inheritance so skip
-                    if (recoveredClass.inheritsVirtualAncestor() ||
-                            recoveredClass.hasMultipleVirtualInheritance()) {
-                        continue;
-                    }
+					// not as reliable for virtual or multi-virtual inheritance so skip
+					if (recoveredClass.inheritsVirtualAncestor() ||
+						recoveredClass.hasMultipleVirtualInheritance()) {
+						continue;
+					}
 
-                    // if the first vftable reference is not in the first code block and the
-                    // constructor calls any non-inherited constructors before the vtable reference,
-                    // the constructor function is really another function with the constructor
-                    // function inlined in it
+					// if the first vftable reference is not in the first code block and the 
+					// constructor calls any non-inherited constructors before the vtable reference, 
+					// the constructor function is really another function with the constructor 
+					// function inlined in it
 
-                    if (firstVftableReferenceAddress.compareTo(firstEndOfBlock) > 0) {
-                        if (doesFunctionCallAnyNonParentConstructorsBeforeVtableReference(
-                                recoveredClass, constructor, firstVftableReferenceAddress)) {
+					if (firstVftableReferenceAddress.compareTo(firstEndOfBlock) > 0) {
+						if (doesFunctionCallAnyNonParentConstructorsBeforeVtableReference(
+							recoveredClass, constructor, firstVftableReferenceAddress)) {
 
-                            // remove from the allConstructors too
-                            addInlinedConstructorToClass(recoveredClass, constructor);
-                            constructorIterator.remove();
-                            removeFromAllConstructors(constructor);
+							// remove from the allConstructors too
+							addInlinedConstructorToClass(recoveredClass, constructor);
+							constructorIterator.remove();
+							removeFromAllConstructors(constructor);
 
-                        }
-                    }
-                }
-            }
-        }
+						}
+					}
+				}
+			}
+		}
 
 	}
 
@@ -5862,26 +5997,29 @@ public class RecoveredClassHelper {
 		highVariables.addAll(
 			getVariableThatStoresVftablePointer(highFunction, firstVftableReference));
 
-        for (HighVariable highVariable : highVariables) {
+		Iterator<HighVariable> highVariableIterator = highVariables.iterator();
 
-            monitor.checkCanceled();
+		while (highVariableIterator.hasNext()) {
 
-            FillOutStructureCmd fillCmd = new FillOutStructureCmd(program, location, tool);
-            fillCmd.processStructure(highVariable, function);
-            List<OffsetPcodeOpPair> stores = fillCmd.getStorePcodeOps();
-            stores = removePcodeOpsNotInFunction(function, stores);
+			HighVariable highVariable = highVariableIterator.next();
+			monitor.checkCanceled();
 
-            // this method checks the storedPcodeOps to see if one is the vftable address
-            Address storedVftableAddress = getStoredVftableAddress(stores);
-            if (storedVftableAddress == null) {
-                continue;
-            }
+			FillOutStructureCmd fillCmd = new FillOutStructureCmd(program, location, tool);
+			fillCmd.processStructure(highVariable, function);
+			List<OffsetPcodeOpPair> stores = fillCmd.getStorePcodeOps();
+			stores = removePcodeOpsNotInFunction(function, stores);
 
-            if (storedVftableAddress.equals(vftableAddress)) {
-                return fillCmd;
-            }
+			// this method checks the storedPcodeOps to see if one is the vftable address
+			Address storedVftableAddress = getStoredVftableAddress(stores);
+			if (storedVftableAddress == null) {
+				continue;
+			}
 
-        }
+			if (storedVftableAddress.equals(vftableAddress)) {
+				return fillCmd;
+			}
+
+		}
 		return null;
 	}
 
@@ -5901,142 +6039,147 @@ public class RecoveredClassHelper {
 			throws CancelledException, InvalidInputException, DuplicateNameException,
 			CircularDependencyException {
 
-        for (RecoveredClass aClass : recoveredClasses) {
-            monitor.checkCanceled();
-            RecoveredClass recoveredClass = aClass;
+		Iterator<RecoveredClass> recoveredClassIterator = recoveredClasses.iterator();
 
-            List<Function> inlineFunctionsList =
-                    new ArrayList<>(recoveredClass.getIndeterminateInlineList());
+		while (recoveredClassIterator.hasNext()) {
+			monitor.checkCanceled();
+			RecoveredClass recoveredClass = recoveredClassIterator.next();
 
-            for (Function value : inlineFunctionsList) {
-                monitor.checkCanceled();
+			List<Function> inlineFunctionsList =
+				new ArrayList<>(recoveredClass.getIndeterminateInlineList());
 
-                Function inlineFunction = value;
+			Iterator<Function> inlineIterator = inlineFunctionsList.iterator();
+			while (inlineIterator.hasNext()) {
+				monitor.checkCanceled();
 
-                // get the addresses in the function that refer to classes either by
-                // referencing a vftable in a class or by calling a function in a class
-                // TODO: add the atexit refs and then check them - make a map of atexit call to class map if not already
-                Map<Address, RecoveredClass> referenceToClassMap =
-                        getReferenceToClassMap(recoveredClass, inlineFunction);
-                List<Address> referencesToFunctions =
-                        extendedFlatAPI.getReferencesToFunctions(referenceToClassMap);
+				Function inlineFunction = inlineIterator.next();
 
-                // if some of the references are to functions figure out if they are
-                // constructors destructors or add them to list of indetermined
-                boolean isConstructor = false;
-                boolean isDestructor = false;
-                List<Address> referenceToIndeterminates = new ArrayList<Address>();
+				// get the addresses in the function that refer to classes either by 
+				// referencing a vftable in a class or by calling a function in a class
+				// TODO: add the atexit refs and then check them - make a map of atexit call to class map if not already
+				Map<Address, RecoveredClass> referenceToClassMap =
+					getReferenceToClassMap(recoveredClass, inlineFunction);
+				List<Address> referencesToFunctions =
+					extendedFlatAPI.getReferencesToFunctions(referenceToClassMap);
 
-                if (!referencesToFunctions.isEmpty()) {
-                    for (Address referencesToFunction : referencesToFunctions) {
+				// if some of the references are to functions figure out if they are 
+				// constructors destructors or add them to list of indetermined
+				boolean isConstructor = false;
+				boolean isDestructor = false;
+				List<Address> referenceToIndeterminates = new ArrayList<Address>();
 
-                        monitor.checkCanceled();
-                        Address functionReference = referencesToFunction;
-                        Function function =
-                                extendedFlatAPI.getReferencedFunction(functionReference, true);
-                        if (function == null) {
-                            continue;
-                        }
+				if (!referencesToFunctions.isEmpty()) {
+					Iterator<Address> functionReferenceIterator = referencesToFunctions.iterator();
+					while (functionReferenceIterator.hasNext()) {
 
-                        if (allConstructors.contains(function) ||
-                                allInlinedConstructors.contains(function)) {
-                            isConstructor = true;
-                            continue;
-                        }
+						monitor.checkCanceled();
+						Address functionReference = functionReferenceIterator.next();
+						Function function =
+							extendedFlatAPI.getReferencedFunction(functionReference, true);
+						if (function == null) {
+							continue;
+						}
 
-                        if (allDestructors.contains(function) ||
-                                allInlinedDestructors.contains(function)) {
-                            isDestructor = true;
-                            continue;
-                        }
+						if (getAllConstructors().contains(function) ||
+							getAllInlinedConstructors().contains(function)) {
+							isConstructor = true;
+							continue;
+						}
 
-                        // TODO: refactor to make this function and refactor method that uses
-                        // it to use function instead of refiguring it out
-                        referenceToIndeterminates.add(functionReference);
+						if (getAllDestructors().contains(function) ||
+							getAllInlinedDestructors().contains(function)) {
+							isDestructor = true;
+							continue;
+						}
 
-                    }
+						// TODO: refactor to make this function and refactor method that uses
+						// it to use function instead of refiguring it out
+						referenceToIndeterminates.add(functionReference);
 
-                }
+					}
 
-                // if one or more is a constructor and none are destructors then the indeterminate
-                // inline is is an inlined constructor
-                if (isConstructor == true && isDestructor == false) {
-                    processInlineConstructor(recoveredClass, inlineFunction, referenceToClassMap);
-                }
-                // if one or more is a destructor and none are constructors then the indeterminate
-                // inline is an inlined destructor
-                else if (isConstructor == false && isDestructor == true) {
-                    processInlineDestructor(recoveredClass, inlineFunction, referenceToClassMap);
-                } else {
+				}
 
-                    // otherwise, use pcode info to figure out if inlined constructor or destructor
-                    //If not already, make function a this call
-                    makeFunctionThiscall(inlineFunction);
+				// if one or more is a constructor and none are destructors then the indeterminate
+				// inline is is an inlined constructor
+				if (isConstructor == true && isDestructor == false) {
+					processInlineConstructor(recoveredClass, inlineFunction, referenceToClassMap);
+				}
+				// if one or more is a destructor and none are constructors then the indeterminate
+				// inline is an inlined destructor
+				else if (isConstructor == false && isDestructor == true) {
+					processInlineDestructor(recoveredClass, inlineFunction, referenceToClassMap);
+				}
+				else {
 
-                    List<OffsetPcodeOpPair> loads = getLoadPcodeOpPairs(inlineFunction);
-                    List<OffsetPcodeOpPair> stores = getStorePcodeOpPairs(inlineFunction);
+					// otherwise, use pcode info to figure out if inlined constructor or destructor
+					//If not already, make function a this call	
+					makeFunctionThiscall(inlineFunction);
 
-                    if (loads == null || stores == null) {
-                        Address firstVftableReferenceInFunction =
-                                getFirstVftableReferenceInFunction(inlineFunction);
-                        if (firstVftableReferenceInFunction == null) {
-                            continue;
-                        }
-                        FillOutStructureCmd fillOutStructureCmd =
-                                runFillOutStructureCmd(inlineFunction, firstVftableReferenceInFunction);
+					List<OffsetPcodeOpPair> loads = getLoadPcodeOpPairs(inlineFunction);
+					List<OffsetPcodeOpPair> stores = getStorePcodeOpPairs(inlineFunction);
 
-                        if (fillOutStructureCmd == null) {
-                            continue;
-                        }
+					if (loads == null || stores == null) {
+						Address firstVftableReferenceInFunction =
+							getFirstVftableReferenceInFunction(inlineFunction);
+						if (firstVftableReferenceInFunction == null) {
+							continue;
+						}
+						FillOutStructureCmd fillOutStructureCmd =
+							runFillOutStructureCmd(inlineFunction, firstVftableReferenceInFunction);
 
-                        loads = fillOutStructureCmd.getLoadPcodeOps();
-                        loads = removePcodeOpsNotInFunction(inlineFunction, loads);
-                        stores = fillOutStructureCmd.getStorePcodeOps();
-                        stores = removePcodeOpsNotInFunction(inlineFunction, stores);
+						if (fillOutStructureCmd == null) {
+							continue;
+						}
 
-                        updateFunctionToStorePcodeOpsMap(inlineFunction, stores);
-                        updateFunctionToLoadPcodeOpsMap(inlineFunction, loads);
+						loads = fillOutStructureCmd.getLoadPcodeOps();
+						loads = removePcodeOpsNotInFunction(inlineFunction, loads);
+						stores = fillOutStructureCmd.getStorePcodeOps();
+						stores = removePcodeOpsNotInFunction(inlineFunction, stores);
 
-                    }
+						updateFunctionToStorePcodeOpsMap(inlineFunction, stores);
+						updateFunctionToLoadPcodeOpsMap(inlineFunction, loads);
 
-                    if (loads == null || stores == null) {
-                        continue;
-                    }
+					}
 
-                    // inlined constructor
-                    if (stores.size() > 1 && loads.isEmpty()) {
-                        processInlineConstructor(recoveredClass, inlineFunction,
-                                referenceToClassMap);
-                        isConstructor = true;
-                    }
+					if (loads == null || stores == null) {
+						continue;
+					}
 
-                    // inlined destructor
-                    else if (stores.size() == 1 && !loads.isEmpty()) {
-                        processInlineDestructor(recoveredClass, inlineFunction,
-                                referenceToClassMap);
-                        isDestructor = true;
-                    }
-                }
+					// inlined constructor
+					if (stores.size() > 1 && loads.size() == 0) {
+						processInlineConstructor(recoveredClass, inlineFunction,
+							referenceToClassMap);
+						isConstructor = true;
+					}
 
-                if (!referenceToIndeterminates.isEmpty()) {
-                    // make the other referenced indeterminate c/d functions constructors
-                    if (isConstructor == true && isDestructor == false) {
-                        createListedConstructorFunctions(referenceToClassMap,
-                                referenceToIndeterminates);
-                        continue;
-                    }
-                    // make the other referenced indeterminate c/d functions destructors
-                    if (isConstructor == false && isDestructor == true) {
-                        createListedDestructorFunctions(referenceToClassMap,
-                                referenceToIndeterminates);
-                        continue;
-                    }
+					// inlined destructor
+					else if (stores.size() == 1 && loads.size() > 0) {
+						processInlineDestructor(recoveredClass, inlineFunction,
+							referenceToClassMap);
+						isDestructor = true;
+					}
+				}
 
-                }
+				if (!referenceToIndeterminates.isEmpty()) {
+					// make the other referenced indeterminate c/d functions constructors
+					if (isConstructor == true && isDestructor == false) {
+						createListedConstructorFunctions(referenceToClassMap,
+							referenceToIndeterminates);
+						continue;
+					}
+					// make the other referenced indeterminate c/d functions destructors 
+					if (isConstructor == false && isDestructor == true) {
+						createListedDestructorFunctions(referenceToClassMap,
+							referenceToIndeterminates);
+						continue;
+					}
 
-            }
+				}
 
-        }
+			}
+
+		}
 	}
 
 
@@ -6083,95 +6226,97 @@ public class RecoveredClassHelper {
 			List<RecoveredClass> recoveredClasses) throws CancelledException, InvalidInputException,
 			DuplicateNameException, CircularDependencyException {
 
-        for (RecoveredClass aClass : recoveredClasses) {
-            monitor.checkCanceled();
-            RecoveredClass recoveredClass = aClass;
+		Iterator<RecoveredClass> classIterator = recoveredClasses.iterator();
+		while (classIterator.hasNext()) {
+			monitor.checkCanceled();
+			RecoveredClass recoveredClass = classIterator.next();
 
-            List<Function> indeterminateList = recoveredClass.getIndeterminateList();
-            Iterator<Function> indeterminateIterator = indeterminateList.iterator();
-            while (indeterminateIterator.hasNext()) {
-                monitor.checkCanceled();
-                Function indeterminateFunction = indeterminateIterator.next();
+			List<Function> indeterminateList = recoveredClass.getIndeterminateList();
+			Iterator<Function> indeterminateIterator = indeterminateList.iterator();
+			while (indeterminateIterator.hasNext()) {
+				monitor.checkCanceled();
+				Function indeterminateFunction = indeterminateIterator.next();
 
-                // first try identifying useing known constructors and destructors
-                boolean callsKnownConstructor = callsKnownConstructor(indeterminateFunction);
-                boolean callsKnownDestrutor = callsKnownDestructor(indeterminateFunction);
-                boolean callsAtexit =
-                        extendedFlatAPI.doesFunctionACallFunctionB(indeterminateFunction, atexit);
+				// first try identifying useing known constructors and destructors
+				boolean callsKnownConstructor = callsKnownConstructor(indeterminateFunction);
+				boolean callsKnownDestrutor = callsKnownDestructor(indeterminateFunction);
+				boolean callsAtexit =
+					extendedFlatAPI.doesFunctionACallFunctionB(indeterminateFunction, atexit);
 
-                if (callsKnownConstructor && !callsKnownDestrutor) {
-                    addConstructorToClass(recoveredClass, indeterminateFunction);
-                    indeterminateIterator.remove();
-                    continue;
-                }
-                if (!callsKnownConstructor && callsKnownDestrutor) {
-                    addDestructorToClass(recoveredClass, indeterminateFunction);
-                    indeterminateIterator.remove();
-                    continue;
-                }
+				if (callsKnownConstructor && !callsKnownDestrutor) {
+					addConstructorToClass(recoveredClass, indeterminateFunction);
+					indeterminateIterator.remove();
+					continue;
+				}
+				if (!callsKnownConstructor && callsKnownDestrutor) {
+					addDestructorToClass(recoveredClass, indeterminateFunction);
+					indeterminateIterator.remove();
+					continue;
+				}
 
-                if (!callsKnownConstructor && callsAtexit) {
-                    addDestructorToClass(recoveredClass, indeterminateFunction);
-                    indeterminateIterator.remove();
-                    continue;
-                }
+				if (!callsKnownConstructor && callsAtexit) {
+					addDestructorToClass(recoveredClass, indeterminateFunction);
+					indeterminateIterator.remove();
+					continue;
+				}
 
-                // Next try identifying constructors using decompiler return type
-                DataType decompilerReturnType =
-                        decompilerUtils.getDecompilerReturnType(indeterminateFunction);
-                if (decompilerReturnType != null) {
+				// Next try identifying constructors using decompiler return type
+				DataType decompilerReturnType =
+					decompilerUtils.getDecompilerReturnType(indeterminateFunction);
+				if (decompilerReturnType != null) {
 
-                    String returnDataName = decompilerReturnType.getDisplayName();
-                    if (returnDataName.contains("*") && !isFidFunction(indeterminateFunction)) {
+					String returnDataName = decompilerReturnType.getDisplayName();
+					if (returnDataName.contains("*") && !isFidFunction(indeterminateFunction)) {
 
-                        addConstructorToClass(recoveredClass, indeterminateFunction);
-                        indeterminateIterator.remove();
-                        continue;
-                    }
-                }
+						addConstructorToClass(recoveredClass, indeterminateFunction);
+						indeterminateIterator.remove();
+						continue;
+					}
+				}
 
-                // Next try identifying using load/store information
-                List<OffsetPcodeOpPair> loads = getLoadPcodeOpPairs(indeterminateFunction);
+				// Next try identifying using load/store information
+				List<OffsetPcodeOpPair> loads = getLoadPcodeOpPairs(indeterminateFunction);
 
-                List<OffsetPcodeOpPair> stores = getStorePcodeOpPairs(indeterminateFunction);
+				List<OffsetPcodeOpPair> stores = getStorePcodeOpPairs(indeterminateFunction);
 
-                if (loads == null || stores == null) {
-                    Address firstVftableReferenceInFunction =
-                            getFirstVftableReferenceInFunction(indeterminateFunction);
-                    if (firstVftableReferenceInFunction == null) {
-                        continue;
-                    }
-                    FillOutStructureCmd fillOutStructureCmd = runFillOutStructureCmd(
-                            indeterminateFunction, firstVftableReferenceInFunction);
+				if (loads == null || stores == null) {
+					Address firstVftableReferenceInFunction =
+						getFirstVftableReferenceInFunction(indeterminateFunction);
+					if (firstVftableReferenceInFunction == null) {
+						continue;
+					}
+					FillOutStructureCmd fillOutStructureCmd = runFillOutStructureCmd(
+						indeterminateFunction, firstVftableReferenceInFunction);
 
-                    if (fillOutStructureCmd == null) {
-                        continue;
-                    }
+					if (fillOutStructureCmd == null) {
+						continue;
+					}
 
-                    loads = fillOutStructureCmd.getLoadPcodeOps();
-                    loads = removePcodeOpsNotInFunction(indeterminateFunction, loads);
-                    stores = fillOutStructureCmd.getStorePcodeOps();
-                    stores = removePcodeOpsNotInFunction(indeterminateFunction, stores);
+					loads = fillOutStructureCmd.getLoadPcodeOps();
+					loads = removePcodeOpsNotInFunction(indeterminateFunction, loads);
+					stores = fillOutStructureCmd.getStorePcodeOps();
+					stores = removePcodeOpsNotInFunction(indeterminateFunction, stores);
 
-                    updateFunctionToStorePcodeOpsMap(indeterminateFunction, stores);
-                    updateFunctionToLoadPcodeOpsMap(indeterminateFunction, loads);
+					updateFunctionToStorePcodeOpsMap(indeterminateFunction, stores);
+					updateFunctionToLoadPcodeOpsMap(indeterminateFunction, loads);
 
-                }
+				}
 
-                if (loads == null || stores == null) {
-                    continue;
-                }
+				if (loads == null || stores == null) {
+					continue;
+				}
 
-                if (stores.size() > 1 && loads.isEmpty()) {
-                    addConstructorToClass(recoveredClass, indeterminateFunction);
-                    indeterminateIterator.remove();
-                } else if (stores.size() == 1 && !loads.isEmpty()) {
-                    addDestructorToClass(recoveredClass, indeterminateFunction);
-                    indeterminateIterator.remove();
-                }
+				if (stores.size() > 1 && loads.size() == 0) {
+					addConstructorToClass(recoveredClass, indeterminateFunction);
+					indeterminateIterator.remove();
+				}
+				else if (stores.size() == 1 && loads.size() > 0) {
+					addDestructorToClass(recoveredClass, indeterminateFunction);
+					indeterminateIterator.remove();
+				}
 
-            }
-        }
+			}
+		}
 
 	}
 
@@ -6189,8 +6334,11 @@ public class RecoveredClassHelper {
 
 		Bookmark bookmark = bm.getBookmark(address, BookmarkType.ANALYSIS, "Function ID Analyzer");
 
-        return bookmark != null;
-    }
+		if (bookmark == null) {
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * Method to identify missing functions using param to _atexit function
@@ -6293,25 +6441,27 @@ public class RecoveredClassHelper {
 	private void findFirstDeletingDestructors(List<RecoveredClass> recoveredClasses)
 			throws CancelledException, InvalidInputException, DuplicateNameException {
 
-        for (RecoveredClass aClass : recoveredClasses) {
-            monitor.checkCanceled();
+		Iterator<RecoveredClass> recoveredClassIterator = recoveredClasses.iterator();
+		while (recoveredClassIterator.hasNext()) {
+			monitor.checkCanceled();
 
-            RecoveredClass recoveredClass = aClass;
+			RecoveredClass recoveredClass = recoveredClassIterator.next();
 
-            if (!recoveredClass.hasVftable()) {
-                continue;
-            }
+			if (!recoveredClass.hasVftable()) {
+				continue;
+			}
 
-            List<Address> vftableAddresses = recoveredClass.getVftableAddresses();
-            for (Address address : vftableAddresses) {
-                monitor.checkCanceled();
-                Address vftableAddress = address;
+			List<Address> vftableAddresses = recoveredClass.getVftableAddresses();
+			Iterator<Address> vftableIterator = vftableAddresses.iterator();
+			while (vftableIterator.hasNext()) {
+				monitor.checkCanceled();
+				Address vftableAddress = vftableIterator.next();
 
-                // this gets the first function pointer in the vftable
-                Function firstVirtualFunction = extendedFlatAPI.getPointedToFunction(vftableAddress);
-                processDeletingDestructor(recoveredClass, firstVirtualFunction);
-            }
-        }
+				// this gets the first function pointer in the vftable
+				Function firstVirtualFunction = extendedFlatAPI.getPointedToFunction(vftableAddress);
+				processDeletingDestructor(recoveredClass, firstVirtualFunction);
+			}
+		}
 	}
 
 	/**
@@ -6339,38 +6489,41 @@ public class RecoveredClassHelper {
 
 		// then use it to find more deleting destructors of type 3 (the ones that call their own
 		// destructor)
-        for (RecoveredClass aClass : recoveredClasses) {
-            monitor.checkCanceled();
+		Iterator<RecoveredClass> recoveredClassIterator = recoveredClasses.iterator();
+		while (recoveredClassIterator.hasNext()) {
+			monitor.checkCanceled();
 
-            RecoveredClass recoveredClass = aClass;
-            if (!recoveredClass.hasVftable()) {
-                continue;
-            }
+			RecoveredClass recoveredClass = recoveredClassIterator.next();
+			if (!recoveredClass.hasVftable()) {
+				continue;
+			}
 
-            List<Address> vftableAddresses = recoveredClass.getVftableAddresses();
-            for (Address address : vftableAddresses) {
-                monitor.checkCanceled();
-                Address vftableAddress = address;
+			List<Address> vftableAddresses = recoveredClass.getVftableAddresses();
+			Iterator<Address> vftableAddressIterator = vftableAddresses.iterator();
+			while (vftableAddressIterator.hasNext()) {
+				monitor.checkCanceled();
+				Address vftableAddress = vftableAddressIterator.next();
 
-                Function firstVirtualFunction = extendedFlatAPI.getPointedToFunction(vftableAddress);
-                List<Function> virtualFunctions =
-                        recoveredClass.getVirtualFunctions(vftableAddress);
+				Function firstVirtualFunction = extendedFlatAPI.getPointedToFunction(vftableAddress);
+				List<Function> virtualFunctions =
+					recoveredClass.getVirtualFunctions(vftableAddress);
 
-                if (virtualFunctions == null) {
-                    continue;
-                }
+				if (virtualFunctions == null) {
+					continue;
+				}
 
-                for (Function function : virtualFunctions) {
-                    monitor.checkCanceled();
-                    Function virtualFunction = function;
-                    if (virtualFunction.equals(firstVirtualFunction)) {
-                        continue;
-                    }
-                    processClassDeletingDestructorByOperatorDelete(recoveredClass, virtualFunction,
-                            operatorDeleteFunction);
-                }
-            }
-        }
+				Iterator<Function> virtualFunctionsIterator = virtualFunctions.iterator();
+				while (virtualFunctionsIterator.hasNext()) {
+					monitor.checkCanceled();
+					Function virtualFunction = virtualFunctionsIterator.next();
+					if (virtualFunction.equals(firstVirtualFunction)) {
+						continue;
+					}
+					processClassDeletingDestructorByOperatorDelete(recoveredClass, virtualFunction,
+						operatorDeleteFunction);
+				}
+			}
+		}
 
 	}
 
@@ -6395,7 +6548,7 @@ public class RecoveredClassHelper {
 		// if the first function on the vftable IS ALSO on the class constructor/destructor list
 		// then it is a deleting destructor with and inline destructor and we need to 
 		// determine if the inline is the class or parent/grandparent class destructor
-		if (allConstructorsAndDestructors.contains(firstVftableFunction)) {
+		if (getAllConstructorsAndDestructors().contains(firstVftableFunction)) {
 
 			recoveredClass.addDeletingDestructor(firstVftableFunction);
 			recoveredClass.removeFromConstructorDestructorList(firstVftableFunction);
@@ -6405,26 +6558,27 @@ public class RecoveredClassHelper {
 			if (vftableReferences == null) {
 				return;
 			}
-            for (Address reference : vftableReferences) {
-                monitor.checkCanceled();
-                Address vftableReference = reference;
-                Address vftableAddress = getVftableAddress(vftableReference);
-                if (vftableAddress == null) {
-                    continue;
-                }
-                // Type 1
-                if (recoveredClass.getVftableAddresses().contains(vftableAddress)) {
-                    recoveredClass.addInlinedDestructor(firstVftableFunction);
-                }
-                // Type 2
-                else {
-                    //RecoveredClass parentClass = vftableToClassMap.get(vftableAddress);
-                    RecoveredClass parentClass = getVftableClass(vftableAddress);
-                    parentClass.addInlinedDestructor(firstVftableFunction);
-                    parentClass.removeFromConstructorDestructorList(firstVftableFunction);
-                    parentClass.removeIndeterminateConstructorOrDestructor(firstVftableFunction);
-                }
-            }
+			Iterator<Address> vftableReferencesIterator = vftableReferences.iterator();
+			while (vftableReferencesIterator.hasNext()) {
+				monitor.checkCanceled();
+				Address vftableReference = vftableReferencesIterator.next();
+				Address vftableAddress = getVftableAddress(vftableReference);
+				if (vftableAddress == null) {
+					continue;
+				}
+				// Type 1
+				if (recoveredClass.getVftableAddresses().contains(vftableAddress)) {
+					recoveredClass.addInlinedDestructor(firstVftableFunction);
+				}
+				// Type 2
+				else {
+					//RecoveredClass parentClass = vftableToClassMap.get(vftableAddress);
+					RecoveredClass parentClass = getVftableClass(vftableAddress);
+					parentClass.addInlinedDestructor(firstVftableFunction);
+					parentClass.removeFromConstructorDestructorList(firstVftableFunction);
+					parentClass.removeIndeterminateConstructorOrDestructor(firstVftableFunction);
+				}
+			}
 
 		}
 		// else, if first function pointed to by the vftable CALLS a function on the constructor/destructor list
@@ -6451,21 +6605,22 @@ public class RecoveredClassHelper {
 		List<Function> classConstructorOrDestructorFunctions =
 			recoveredClass.getConstructorOrDestructorFunctions();
 
-        for (Function classConstructorOrDestructorFunction : classConstructorOrDestructorFunctions) {
-            monitor.checkCanceled();
+		Iterator<Function> functionIterator = classConstructorOrDestructorFunctions.iterator();
+		while (functionIterator.hasNext()) {
+			monitor.checkCanceled();
 
-            Function function = classConstructorOrDestructorFunction;
+			Function function = functionIterator.next();
 
-            if (extendedFlatAPI.doesFunctionACallFunctionB(firstVirtualFunction, function)) {
-                recoveredClass.addDeletingDestructor(firstVirtualFunction);
-                addDestructorToClass(recoveredClass, function);
-                recoveredClass.removeIndeterminateConstructorOrDestructor(function);
+			if (extendedFlatAPI.doesFunctionACallFunctionB(firstVirtualFunction, function)) {
+				recoveredClass.addDeletingDestructor(firstVirtualFunction);
+				addDestructorToClass(recoveredClass, function);
+				recoveredClass.removeIndeterminateConstructorOrDestructor(function);
 
-                if (!deletingDestructorsThatCallDestructor.contains(firstVirtualFunction)) {
-                    deletingDestructorsThatCallDestructor.add(firstVirtualFunction);
-                }
-            }
-        }
+				if (!deletingDestructorsThatCallDestructor.contains(firstVirtualFunction)) {
+					deletingDestructorsThatCallDestructor.add(firstVirtualFunction);
+				}
+			}
+		}
 	}
 
 	/**
@@ -6481,24 +6636,28 @@ public class RecoveredClassHelper {
 			List<RecoveredClass> recoveredClasses) throws CancelledException, InvalidInputException,
 			DuplicateNameException, CircularDependencyException {
 
-        for (RecoveredClass aClass : recoveredClasses) {
-            monitor.checkCanceled();
-            RecoveredClass recoveredClass = aClass;
+		Iterator<RecoveredClass> recoveredClassIterator = recoveredClasses.iterator();
 
-            List<RecoveredClass> parentsToProcess = recoveredClass.getParentList();
+		while (recoveredClassIterator.hasNext()) {
+			monitor.checkCanceled();
+			RecoveredClass recoveredClass = recoveredClassIterator.next();
 
-            if (parentsToProcess.isEmpty()) {
-                continue;
-            }
+			List<RecoveredClass> parentsToProcess = recoveredClass.getParentList();
 
-            for (RecoveredClass toProcess : parentsToProcess) {
+			if (parentsToProcess.isEmpty()) {
+				continue;
+			}
 
-                monitor.checkCanceled();
+			Iterator<RecoveredClass> parentsToProcessIterator = parentsToProcess.iterator();
 
-                RecoveredClass parentToProcess = toProcess;
-                processConstructorsAndDestructorsUsingParent(recoveredClass, parentToProcess);
-            }
-        }
+			while (parentsToProcessIterator.hasNext()) {
+
+				monitor.checkCanceled();
+
+				RecoveredClass parentToProcess = parentsToProcessIterator.next();
+				processConstructorsAndDestructorsUsingParent(recoveredClass, parentToProcess);
+			}
+		}
 
 	}
 
@@ -6517,56 +6676,58 @@ public class RecoveredClassHelper {
 			List<RecoveredClass> recoveredClasses) throws CancelledException, InvalidInputException,
 			DuplicateNameException, CircularDependencyException {
 
-        for (RecoveredClass aClass : recoveredClasses) {
-            monitor.checkCanceled();
-            RecoveredClass recoveredClass = aClass;
+		Iterator<RecoveredClass> recoveredClassIterator = recoveredClasses.iterator();
 
-            List<Function> indeterminateList = recoveredClass.getIndeterminateList();
-            if (indeterminateList.isEmpty()) {
-                continue;
-            }
+		while (recoveredClassIterator.hasNext()) {
+			monitor.checkCanceled();
+			RecoveredClass recoveredClass = recoveredClassIterator.next();
 
-            List<Function> allAncestorConstructors = getAllAncestorConstructors(recoveredClass);
-            List<Function> allAncestorDestructors = getAncestorDestructors(recoveredClass);
+			List<Function> indeterminateList = recoveredClass.getIndeterminateList();
+			if (indeterminateList.isEmpty()) {
+				continue;
+			}
 
-            Iterator<Function> indeterminateIterator = indeterminateList.iterator();
-            while (indeterminateIterator.hasNext()) {
+			List<Function> allAncestorConstructors = getAllAncestorConstructors(recoveredClass);
+			List<Function> allAncestorDestructors = getAncestorDestructors(recoveredClass);
 
-                monitor.checkCanceled();
+			Iterator<Function> indeterminateIterator = indeterminateList.iterator();
+			while (indeterminateIterator.hasNext()) {
 
-                Function indeterminateFunction = indeterminateIterator.next();
+				monitor.checkCanceled();
 
-                List<Function> possibleAncestorConstructors =
-                        getPossibleParentConstructors(indeterminateFunction);
-                Function ancestorConstructor =
-                        getFunctionOnBothLists(possibleAncestorConstructors, allAncestorConstructors);
+				Function indeterminateFunction = indeterminateIterator.next();
 
-                List<Function> possibleAncestorDestructors =
-                        getPossibleParentDestructors(indeterminateFunction);
-                Function ancestorDestructor =
-                        getFunctionOnBothLists(possibleAncestorDestructors, allAncestorDestructors);
+				List<Function> possibleAncestorConstructors =
+					getPossibleParentConstructors(indeterminateFunction);
+				Function ancestorConstructor =
+					getFunctionOnBothLists(possibleAncestorConstructors, allAncestorConstructors);
 
-                // skip if both null - no results
-                if (ancestorConstructor == null && ancestorDestructor == null) {
-                    continue;
-                }
+				List<Function> possibleAncestorDestructors =
+					getPossibleParentDestructors(indeterminateFunction);
+				Function ancestorDestructor =
+					getFunctionOnBothLists(possibleAncestorDestructors, allAncestorDestructors);
 
-                // skip if neither null - conflicting results
-                if (ancestorConstructor != null && ancestorDestructor != null) {
-                    continue;
-                }
+				// skip if both null - no results
+				if (ancestorConstructor == null && ancestorDestructor == null) {
+					continue;
+				}
 
-                if (ancestorConstructor != null) {
-                    addConstructorToClass(recoveredClass, indeterminateFunction);
-                    indeterminateIterator.remove();
-                }
+				// skip if neither null - conflicting results
+				if (ancestorConstructor != null && ancestorDestructor != null) {
+					continue;
+				}
 
-                if (ancestorDestructor != null) {
-                    addDestructorToClass(recoveredClass, indeterminateFunction);
-                    indeterminateIterator.remove();
-                }
-            }
-        }
+				if (ancestorConstructor != null) {
+					addConstructorToClass(recoveredClass, indeterminateFunction);
+					indeterminateIterator.remove();
+				}
+
+				if (ancestorDestructor != null) {
+					addDestructorToClass(recoveredClass, indeterminateFunction);
+					indeterminateIterator.remove();
+				}
+			}
+		}
 
 	}
 
@@ -6586,80 +6747,83 @@ public class RecoveredClassHelper {
 			List<RecoveredClass> recoveredClasses) throws CancelledException, InvalidInputException,
 			DuplicateNameException, CircularDependencyException {
 
-        for (RecoveredClass aClass : recoveredClasses) {
-            monitor.checkCanceled();
-            RecoveredClass recoveredClass = aClass;
+		Iterator<RecoveredClass> recoveredClassIterator = recoveredClasses.iterator();
 
-            List<Function> indeterminateList =
-                    new ArrayList<Function>(recoveredClass.getIndeterminateInlineList());
+		while (recoveredClassIterator.hasNext()) {
+			monitor.checkCanceled();
+			RecoveredClass recoveredClass = recoveredClassIterator.next();
 
-            if (indeterminateList.isEmpty()) {
-                continue;
-            }
+			List<Function> indeterminateList =
+				new ArrayList<Function>(recoveredClass.getIndeterminateInlineList());
 
-            List<Function> allRelatedConstructors = getAllAncestorConstructors(recoveredClass);
-            List<Function> allRelatedDestructors = getAncestorDestructors(recoveredClass);
+			if (indeterminateList.isEmpty()) {
+				continue;
+			}
 
-            for (Function function : indeterminateList) {
-                monitor.checkCanceled();
-                Function indeterminateFunction = function;
+			List<Function> allRelatedConstructors = getAllAncestorConstructors(recoveredClass);
+			List<Function> allRelatedDestructors = getAncestorDestructors(recoveredClass);
 
-                // get the addresses in the function that refer to classes either by
-                // referencing a vftable in a class or by calling a function in a class
-                Map<Address, RecoveredClass> referenceToClassMap =
-                        getReferenceToClassMap(recoveredClass, indeterminateFunction);
+			Iterator<Function> indeterminateIterator = indeterminateList.iterator();
+			while (indeterminateIterator.hasNext()) {
+				monitor.checkCanceled();
+				Function indeterminateFunction = indeterminateIterator.next();
 
-                List<Function> allDescendantConstructors =
-                        getAllDescendantConstructors(recoveredClass);
-                if (allDescendantConstructors.contains(indeterminateFunction)) {
-                    processInlineConstructor(recoveredClass, indeterminateFunction,
-                            referenceToClassMap);
-                    continue;
-                }
+				// get the addresses in the function that refer to classes either by 
+				// referencing a vftable in a class or by calling a function in a class
+				Map<Address, RecoveredClass> referenceToClassMap =
+					getReferenceToClassMap(recoveredClass, indeterminateFunction);
 
-                List<Function> allDescendantDestructors =
-                        getAllDescendantDestructors(recoveredClass);
-                if (allDescendantDestructors.contains(indeterminateFunction)) {
-                    processInlineDestructor(recoveredClass, indeterminateFunction,
-                            referenceToClassMap);
-                    continue;
-                }
+				List<Function> allDescendantConstructors =
+					getAllDescendantConstructors(recoveredClass);
+				if (allDescendantConstructors.contains(indeterminateFunction)) {
+					processInlineConstructor(recoveredClass, indeterminateFunction,
+						referenceToClassMap);
+					continue;
+				}
 
-                List<Function> possibleAncestorConstructors =
-                        getPossibleParentConstructors(indeterminateFunction);
+				List<Function> allDescendantDestructors =
+					getAllDescendantDestructors(recoveredClass);
+				if (allDescendantDestructors.contains(indeterminateFunction)) {
+					processInlineDestructor(recoveredClass, indeterminateFunction,
+						referenceToClassMap);
+					continue;
+				}
 
-                Function ancestorConstructor =
-                        getFunctionOnBothLists(possibleAncestorConstructors, allRelatedConstructors);
+				List<Function> possibleAncestorConstructors =
+					getPossibleParentConstructors(indeterminateFunction);
 
-                List<Function> possibleAncestorDestructors =
-                        getPossibleParentDestructors(indeterminateFunction);
-                Function ancestorDestructor =
-                        getFunctionOnBothLists(possibleAncestorDestructors, allRelatedDestructors);
+				Function ancestorConstructor =
+					getFunctionOnBothLists(possibleAncestorConstructors, allRelatedConstructors);
 
-                // skip if both null - no results
-                if (ancestorConstructor == null && ancestorDestructor == null) {
-                    continue;
-                }
+				List<Function> possibleAncestorDestructors =
+					getPossibleParentDestructors(indeterminateFunction);
+				Function ancestorDestructor =
+					getFunctionOnBothLists(possibleAncestorDestructors, allRelatedDestructors);
 
-                // skip if both null - conflicting results
-                if (ancestorConstructor != null && ancestorDestructor != null) {
-                    continue;
-                }
+				// skip if both null - no results
+				if (ancestorConstructor == null && ancestorDestructor == null) {
+					continue;
+				}
 
-                if (ancestorConstructor != null) {
-                    processInlineConstructor(recoveredClass, indeterminateFunction,
-                            referenceToClassMap);
-                    continue;
-                }
+				// skip if both null - conflicting results
+				if (ancestorConstructor != null && ancestorDestructor != null) {
+					continue;
+				}
 
-                if (ancestorDestructor != null) {
-                    processInlineDestructor(recoveredClass, indeterminateFunction,
-                            referenceToClassMap);
-                    continue;
-                }
+				if (ancestorConstructor != null) {
+					processInlineConstructor(recoveredClass, indeterminateFunction,
+						referenceToClassMap);
+					continue;
+				}
 
-            }
-        }
+				if (ancestorDestructor != null) {
+					processInlineDestructor(recoveredClass, indeterminateFunction,
+						referenceToClassMap);
+					continue;
+				}
+
+			}
+		}
 
 	}
 
@@ -6675,34 +6839,36 @@ public class RecoveredClassHelper {
 	public void findDestructorsUsingAtexitCalledFunctions(List<RecoveredClass> recoveredClasses)
 			throws CancelledException, InvalidInputException, DuplicateNameException {
 
-        for (RecoveredClass aClass : recoveredClasses) {
-            monitor.checkCanceled();
-            RecoveredClass recoveredClass = aClass;
+		Iterator<RecoveredClass> recoveredClassIterator = recoveredClasses.iterator();
 
-            List<Function> indeterminateList = recoveredClass.getIndeterminateList();
+		while (recoveredClassIterator.hasNext()) {
+			monitor.checkCanceled();
+			RecoveredClass recoveredClass = recoveredClassIterator.next();
 
-            Iterator<Function> indeterminateIterator = indeterminateList.iterator();
-            while (indeterminateIterator.hasNext()) {
-                monitor.checkCanceled();
-                Function indeterminateFunction = indeterminateIterator.next();
-                if (atexitCalledFunctions.contains(indeterminateFunction)) {
-                    recoveredClass.addNonThisDestructor(indeterminateFunction);
-                    indeterminateIterator.remove();
-                }
-            }
+			List<Function> indeterminateList = recoveredClass.getIndeterminateList();
 
-            List<Function> indeterminateInlineList = recoveredClass.getIndeterminateInlineList();
+			Iterator<Function> indeterminateIterator = indeterminateList.iterator();
+			while (indeterminateIterator.hasNext()) {
+				monitor.checkCanceled();
+				Function indeterminateFunction = indeterminateIterator.next();
+				if (atexitCalledFunctions.contains(indeterminateFunction)) {
+					recoveredClass.addNonThisDestructor(indeterminateFunction);
+					indeterminateIterator.remove();
+				}
+			}
 
-            Iterator<Function> indeterminateInlineIterator = indeterminateInlineList.iterator();
-            while (indeterminateInlineIterator.hasNext()) {
-                monitor.checkCanceled();
-                Function indeterminateFunction = indeterminateInlineIterator.next();
-                if (atexitCalledFunctions.contains(indeterminateFunction)) {
-                    addInlinedDestructorToClass(recoveredClass, indeterminateFunction);
-                    indeterminateInlineIterator.remove();
-                }
-            }
-        }
+			List<Function> indeterminateInlineList = recoveredClass.getIndeterminateInlineList();
+
+			Iterator<Function> indeterminateInlineIterator = indeterminateInlineList.iterator();
+			while (indeterminateInlineIterator.hasNext()) {
+				monitor.checkCanceled();
+				Function indeterminateFunction = indeterminateInlineIterator.next();
+				if (atexitCalledFunctions.contains(indeterminateFunction)) {
+					addInlinedDestructorToClass(recoveredClass, indeterminateFunction);
+					indeterminateInlineIterator.remove();
+				}
+			}
+		}
 	}
 
 	/**
@@ -6734,19 +6900,21 @@ public class RecoveredClassHelper {
 	public void findRealVBaseFunctions(List<RecoveredClass> recoveredClasses)
 			throws CancelledException, InvalidInputException, DuplicateNameException {
 
-        for (RecoveredClass aClass : recoveredClasses) {
-            monitor.checkCanceled();
-            RecoveredClass recoveredClass = aClass;
-            Function vBaseDestructor = recoveredClass.getVBaseDestructor();
-            if (vBaseDestructor == null) {
-                continue;
-            }
-            if (!hasVbaseDestructor(recoveredClass)) {
-                addDestructorToClass(recoveredClass, vBaseDestructor);
-                recoveredClass.setVBaseDestructor(null);
-            }
+		Iterator<RecoveredClass> recoveredClassIterator = recoveredClasses.iterator();
 
-        }
+		while (recoveredClassIterator.hasNext()) {
+			monitor.checkCanceled();
+			RecoveredClass recoveredClass = recoveredClassIterator.next();
+			Function vBaseDestructor = recoveredClass.getVBaseDestructor();
+			if (vBaseDestructor == null) {
+				continue;
+			}
+			if (!hasVbaseDestructor(recoveredClass)) {
+				addDestructorToClass(recoveredClass, vBaseDestructor);
+				recoveredClass.setVBaseDestructor(null);
+			}
+
+		}
 	}
 
 	/**
@@ -6841,50 +7009,54 @@ public class RecoveredClassHelper {
 
 		Function possiblePureCall = null;
 
-        for (RecoveredClass aClass : recoveredClasses) {
-            monitor.checkCanceled();
+		Iterator<RecoveredClass> recoveredClassIterator = recoveredClasses.iterator();
 
-            RecoveredClass recoveredClass = aClass;
-            if (recoveredClass.hasChildClass()) {
-                Function sameFunction = null;
-                List<Function> deletingDestructors = recoveredClass.getDeletingDestructors();
-                List<Function> virtualFunctions = recoveredClass.getAllVirtualFunctions();
-                if (virtualFunctions.size() < 3) {
-                    continue;
-                }
-                for (Function virtualFunction : virtualFunctions) {
-                    monitor.checkCanceled();
-                    Function vfunction = virtualFunction;
-                    // skip the deleting destructors
-                    if (deletingDestructors.contains(vfunction)) {
-                        continue;
-                    }
-                    if (sameFunction == null) {
-                        sameFunction = vfunction;
-                    } else if (!sameFunction.equals(vfunction)) {
-                        sameFunction = null;
-                        break;
-                    }
+		while (recoveredClassIterator.hasNext()) {
+			monitor.checkCanceled();
 
-                }
+			RecoveredClass recoveredClass = recoveredClassIterator.next();
+			if (recoveredClass.hasChildClass()) {
+				Function sameFunction = null;
+				List<Function> deletingDestructors = recoveredClass.getDeletingDestructors();
+				List<Function> virtualFunctions = recoveredClass.getAllVirtualFunctions();
+				if (virtualFunctions.size() < 3) {
+					continue;
+				}
+				Iterator<Function> vfunctionIterator = virtualFunctions.iterator();
+				while (vfunctionIterator.hasNext()) {
+					monitor.checkCanceled();
+					Function vfunction = vfunctionIterator.next();
+					// skip the deleting destructors
+					if (deletingDestructors.contains(vfunction)) {
+						continue;
+					}
+					if (sameFunction == null) {
+						sameFunction = vfunction;
+					}
+					else if (!sameFunction.equals(vfunction)) {
+						sameFunction = null;
+						break;
+					}
 
-                if (sameFunction == null) {
-                    continue;
-                }
+				}
 
-                // if we didn't already assign it, do it here
-                if (possiblePureCall == null) {
-                    possiblePureCall = sameFunction;
-                }
-                // if they ever don't match return
-                else if (!possiblePureCall.equals(sameFunction)) {
-                    if (DEBUG) {
-                        Msg.debug(this, "Could not identify pure call. ");
-                    }
-                    return;
-                }
-            }
-        }
+				if (sameFunction == null) {
+					continue;
+				}
+
+				// if we didn't already assign it, do it here
+				if (possiblePureCall == null) {
+					possiblePureCall = sameFunction;
+				}
+				// if they ever don't match return 
+				else if (!possiblePureCall.equals(sameFunction)) {
+					if (DEBUG) {
+						Msg.debug(this, "Could not identify pure call. ");
+					}
+					return;
+				}
+			}
+		}
 
 		// If we get this far then we are sure the purecall function
 		// is correct so assign the global variable to it
@@ -6908,13 +7080,14 @@ public class RecoveredClassHelper {
 
 		List<Function> listOfUniqueFunctions = new ArrayList<Function>();
 
-        for (Function value : list) {
-            monitor.checkCanceled();
-            Function function = value;
-            if (!listOfUniqueFunctions.contains(function)) {
-                listOfUniqueFunctions.add(function);
-            }
-        }
+		Iterator<Function> listIterator = list.iterator();
+		while (listIterator.hasNext()) {
+			monitor.checkCanceled();
+			Function function = listIterator.next();
+			if (!listOfUniqueFunctions.contains(function)) {
+				listOfUniqueFunctions.add(function);
+			}
+		}
 		return listOfUniqueFunctions;
 	}
 
@@ -6928,13 +7101,14 @@ public class RecoveredClassHelper {
 
 		List<Address> listOfUniqueAddresses = new ArrayList<Address>();
 
-        for (Address value : list) {
-            monitor.checkCanceled();
-            Address address = value;
-            if (!listOfUniqueAddresses.contains(address)) {
-                listOfUniqueAddresses.add(address);
-            }
-        }
+		Iterator<Address> listIterator = list.iterator();
+		while (listIterator.hasNext()) {
+			monitor.checkCanceled();
+			Address address = listIterator.next();
+			if (!listOfUniqueAddresses.contains(address)) {
+				listOfUniqueAddresses.add(address);
+			}
+		}
 		return listOfUniqueAddresses;
 	}
 
@@ -6944,43 +7118,44 @@ public class RecoveredClassHelper {
 
 		List<Object> changedItems = new ArrayList<Object>();
 
-        for (Symbol classVftableSymbol : classVftableSymbols) {
-            monitor.checkCanceled();
-            Symbol vftableSymbol = classVftableSymbol;
-            Address vftableAddress = vftableSymbol.getAddress();
-            Data data = api.getDataAt(vftableAddress);
-            if (data == null) {
-                continue;
-            }
-            DataType baseDataType = data.getBaseDataType();
-            if (!(baseDataType instanceof Structure)) {
-                continue;
-            }
+		Iterator<Symbol> vftableIterator = classVftableSymbols.iterator();
+		while (vftableIterator.hasNext()) {
+			monitor.checkCanceled();
+			Symbol vftableSymbol = vftableIterator.next();
+			Address vftableAddress = vftableSymbol.getAddress();
+			Data data = api.getDataAt(vftableAddress);
+			if (data == null) {
+				continue;
+			}
+			DataType baseDataType = data.getBaseDataType();
+			if (!(baseDataType instanceof Structure)) {
+				continue;
+			}
 
-            Structure vfunctionStructure = (Structure) baseDataType;
+			Structure vfunctionStructure = (Structure) baseDataType;
 
-            Category category = getDataTypeCategory(vfunctionStructure);
+			Category category = getDataTypeCategory(vfunctionStructure);
 
-            if (category == null) {
-                continue;
-            }
+			if (category == null) {
+				continue;
+			}
 
-            String classNameWithNamespace = classNamespace.getName(true);
-            CategoryPath classPath = extendedFlatAPI.createDataTypeCategoryPath(
-                    classDataTypesCategoryPath, classNameWithNamespace);
+			String classNameWithNamespace = classNamespace.getName(true);
+			CategoryPath classPath = extendedFlatAPI.createDataTypeCategoryPath(
+				classDataTypesCategoryPath, classNameWithNamespace);
 
-            // check that the given vftable data type is in the right ClassDataTypes/<class_folder>
-            // path
-            if (!category.getCategoryPath().equals(classPath)) {
-                continue;
-            }
+			// check that the given vftable data type is in the right ClassDataTypes/<class_folder>
+			// path
+			if (!category.getCategoryPath().equals(classPath)) {
+				continue;
+			}
 
-            if (vfunctionStructure.getName().startsWith(classNamespace.getName() + "_vftable")) {
-                List<Object> newChangedItems =
-                        updateVfunctionDataTypes(data, vfunctionStructure, vftableAddress);
-                changedItems = updateList(changedItems, newChangedItems);
-            }
-        }
+			if (vfunctionStructure.getName().startsWith(classNamespace.getName() + "_vftable")) {
+				List<Object> newChangedItems =
+					updateVfunctionDataTypes(data, vfunctionStructure, vftableAddress);
+				changedItems = updateList(changedItems, newChangedItems);
+			}
+		}
 		return changedItems;
 	}
 
@@ -7719,58 +7894,59 @@ public class RecoveredClassHelper {
 
 		List<Object> changedItems = new ArrayList<Object>();
 
-        for (Symbol classVftableSymbol : classVftableSymbols) {
-            monitor.checkCanceled();
-            Symbol vftableSymbol = classVftableSymbol;
-            Address vftableAddress = vftableSymbol.getAddress();
-            Data data = api.getDataAt(vftableAddress);
-            if (data == null) {
-                continue;
-            }
-            DataType baseDataType = data.getBaseDataType();
-            if (!(baseDataType instanceof Structure)) {
-                continue;
-            }
+		Iterator<Symbol> vftableIterator = classVftableSymbols.iterator();
+		while (vftableIterator.hasNext()) {
+			monitor.checkCanceled();
+			Symbol vftableSymbol = vftableIterator.next();
+			Address vftableAddress = vftableSymbol.getAddress();
+			Data data = api.getDataAt(vftableAddress);
+			if (data == null) {
+				continue;
+			}
+			DataType baseDataType = data.getBaseDataType();
+			if (!(baseDataType instanceof Structure)) {
+				continue;
+			}
 
-            Structure vfunctionStructure = (Structure) baseDataType;
+			Structure vfunctionStructure = (Structure) baseDataType;
 
-            Category category = getDataTypeCategory(vfunctionStructure);
+			Category category = getDataTypeCategory(vfunctionStructure);
 
-            if (category == null) {
-                continue;
-            }
+			if (category == null) {
+				continue;
+			}
 
-            // check that the structure name starts with <classname>_vtable and that it is in
-            // the dt folder with name <classname>
-            if (category.getName().equals(classNamespace.getName()) &&
-                    vfunctionStructure.getName().startsWith(classNamespace.getName() + "_vftable")) {
+			// check that the structure name starts with <classname>_vtable and that it is in 
+			// the dt folder with name <classname>
+			if (category.getName().equals(classNamespace.getName()) &&
+				vfunctionStructure.getName().startsWith(classNamespace.getName() + "_vftable")) {
 
-                DataTypeComponent[] vfunctionComponents = vfunctionStructure.getComponents();
-                for (DataTypeComponent vfunctionComponent : vfunctionComponents) {
-                    monitor.checkCanceled();
-                    Object changedItem =
-                            updateListingVfunctionSignature(data, vfunctionComponent, vftableAddress);
-                    if (changedItem != null && !changedItems.contains(changedItem)) {
-                        changedItems.add(changedItem);
+				DataTypeComponent[] vfunctionComponents = vfunctionStructure.getComponents();
+				for (DataTypeComponent vfunctionComponent : vfunctionComponents) {
+					monitor.checkCanceled();
+					Object changedItem =
+						updateListingVfunctionSignature(data, vfunctionComponent, vftableAddress);
+					if (changedItem != null && !changedItems.contains(changedItem)) {
+						changedItems.add(changedItem);
 
-                        FunctionDefinition newFunctionDefinition =
-                                getComponentFunctionDefinition(vfunctionComponent);
-                        if (newFunctionDefinition == null) {
-                            continue;
-                        }
+						FunctionDefinition newFunctionDefinition =
+							getComponentFunctionDefinition(vfunctionComponent);
+						if (newFunctionDefinition == null) {
+							continue;
+						}
 
-                        List<Object> changedStructs =
-                                applyNewFunctionDefinitionToComponents(vfunctionComponent,
-                                        newFunctionDefinition);
-                        if (changedStructs.isEmpty()) {
-                            continue;
-                        }
+						List<Object> changedStructs =
+							applyNewFunctionDefinitionToComponents(vfunctionComponent,
+								newFunctionDefinition);
+						if (changedStructs.isEmpty()) {
+							continue;
+						}
 
-                        changedItems = updateList(changedItems, changedStructs);
-                    }
-                }
-            }
-        }
+						changedItems = updateList(changedItems, changedStructs);
+					}
+				}
+			}
+		}
 		List<Object> newChangedItems = updateFunctionSignaturesForChangedDefinitions(changedItems);
 		changedItems = updateList(changedItems, newChangedItems);
 

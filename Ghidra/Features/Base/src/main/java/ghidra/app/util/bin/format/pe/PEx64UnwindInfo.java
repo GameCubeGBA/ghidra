@@ -26,19 +26,19 @@ import ghidra.util.exception.DuplicateNameException;
 // TODO: If public visibility is required improved member protection is needed
 class PEx64UnwindInfo implements StructConverter {
 
-	static final int UNW_FLAG_NHANDLER = 0x0;
-	static final int UNW_FLAG_EHANDLER = 0x1;
-	static final int UNW_FLAG_UHANDLER = 0x2;
-	static final int UNW_FLAG_CHAININFO = 0x4;
+	final static int UNW_FLAG_NHANDLER = 0x0;
+	final static int UNW_FLAG_EHANDLER = 0x1;
+	final static int UNW_FLAG_UHANDLER = 0x2;
+	final static int UNW_FLAG_CHAININFO = 0x4;
 
-	private static final int UNWIND_INFO_VERSION_MASK = 0x07;
-	private static final int UNWIND_INFO_FLAGS_MASK = 0x1F;
-	private static final int UNWIND_INFO_FLAGS_SHIFT = 0x03;
-	private static final int UNWIND_INFO_FRAME_REGISTER_MASK = 0x0F;
-	private static final int UNWIND_INFO_FRAME_OFFSET_SHIFT = 0x04;
-	private static final int UNWIND_INFO_OPCODE_MASK = 0x0F;
-	private static final int UNWIND_INFO_OPCODE_INFO_SHIFT = 0x04;
-	private static final int UNWIND_INFO_OPCODE_INFO_MASK = 0x0F;
+	private final static int UNWIND_INFO_VERSION_MASK = 0x07;
+	private final static int UNWIND_INFO_FLAGS_MASK = 0x1F;
+	private final static int UNWIND_INFO_FLAGS_SHIFT = 0x03;
+	private final static int UNWIND_INFO_FRAME_REGISTER_MASK = 0x0F;
+	private final static int UNWIND_INFO_FRAME_OFFSET_SHIFT = 0x04;
+	private final static int UNWIND_INFO_OPCODE_MASK = 0x0F;
+	private final static int UNWIND_INFO_OPCODE_INFO_SHIFT = 0x04;
+	private final static int UNWIND_INFO_OPCODE_INFO_MASK = 0x0F;
 
 	byte version;
 	byte flags;

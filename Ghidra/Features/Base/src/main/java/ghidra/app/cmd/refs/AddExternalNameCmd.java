@@ -44,7 +44,7 @@ public class AddExternalNameCmd implements Command {
 	public AddExternalNameCmd(String name, SourceType source) {
 		this.name = name;
 		this.source = source;
-		if (name == null || name.isEmpty()) {
+		if (name == null || name.length() == 0) {
 			throw new IllegalArgumentException("name is invalid: "+name);
 		}
 	}

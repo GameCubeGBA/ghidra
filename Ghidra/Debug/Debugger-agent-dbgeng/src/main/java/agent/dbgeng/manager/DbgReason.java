@@ -40,5 +40,5 @@ public interface DbgReason {
 		return Reasons.UNKNOWN;
 	}
 
-	String desc();
+	public String desc();
 }

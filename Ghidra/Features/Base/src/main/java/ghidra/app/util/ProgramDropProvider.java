@@ -28,20 +28,20 @@ public interface ProgramDropProvider {
 	 * Returns the priority of this provider.  Higher priority services will be chosen
 	 * if there are multiple services that accept the same type in the same context.
 	 */
-    int getPriority();
+	public int getPriority();
 	
 	/**
 	 * Get the data flavors that this drop service accepts.
 	 * @return an array of all DataFlavors that this drop service supports
 	 */
-    DataFlavor[] getDataFlavors();
+	public DataFlavor[] getDataFlavors();
 	
 	/**
 	 * Returns true if this service can accept a drop with the specified context.
 	 * @param contextObj The object where the drop will occur
 	 * @param evt The event associated with the drop that includes the dropped DataFlavors
 	 */
-    boolean isDropOk(Object contextObj, DropTargetDragEvent evt);
+	public boolean isDropOk(Object contextObj, DropTargetDragEvent evt);
 	
 	/**
 	 * Adds the dropped data to this drop service.
@@ -49,6 +49,6 @@ public interface ProgramDropProvider {
 	 * @param data The actual data dropped
 	 * @param flavor The selected data flavor
 	 */
-    void add(Object contextObj, Object data, DataFlavor flavor);
+	public void add(Object contextObj, Object data, DataFlavor flavor);
 
 }

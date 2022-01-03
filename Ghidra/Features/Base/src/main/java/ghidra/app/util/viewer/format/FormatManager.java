@@ -44,9 +44,9 @@ public class FormatManager implements OptionsChangeListener {
 		HIGHLIGHT_GROUP + Options.DELIMITER + "Highlight Color";
 	public static final String HIGHLIGHT_ALT_COLOR_NAME =
 		HIGHLIGHT_GROUP + Options.DELIMITER + "Alternate Highlight Color";
-	public static final String ARRAY_DISPLAY_OPTIONS =
+	public final static String ARRAY_DISPLAY_OPTIONS =
 		ARRAY_OPTIONS_GROUP + Options.DELIMITER + "Array Display Options";
-	public static final String ARRAY_DISPLAY_DESCRIPTION = "Adjusts the Array Field display";
+	public final static String ARRAY_DISPLAY_DESCRIPTION = "Adjusts the Array Field display";
 
 	private static final int NUM_MODELS = 7;
 

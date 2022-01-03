@@ -119,7 +119,7 @@ public class AskScript extends GhidraScript {
 
 		}
 		catch (IllegalArgumentException iae) {
-			Msg.warn(this, "Error during headless processing: " + iae);
+			Msg.warn(this, "Error during headless processing: " + iae.toString());
 		}
 
 	}

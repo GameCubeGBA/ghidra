@@ -24,7 +24,7 @@ import ghidra.util.classfinder.ExtensionPoint;
  */
 public interface Demangler extends ExtensionPoint {
 
-	boolean canDemangle(Program program);
+	public boolean canDemangle(Program program);
 
 	/**
 	 * Deprecated.  Use {@link #demangle(String)} or
@@ -38,7 +38,7 @@ public interface Demangler extends ExtensionPoint {
 	 * @deprecated see above
 	 */
 	@Deprecated(since = "9.2", forRemoval = true)
-    DemangledObject demangle(String mangled, boolean demangleOnlyKnownPatterns)
+	public DemangledObject demangle(String mangled, boolean demangleOnlyKnownPatterns)
 			throws DemangledException;
 
 	/**
@@ -49,7 +49,7 @@ public interface Demangler extends ExtensionPoint {
 	 * @return the result
 	 * @throws DemangledException if the string cannot be demangled
 	 */
-	default DemangledObject demangle(String mangled) throws DemangledException {
+	public default DemangledObject demangle(String mangled) throws DemangledException {
 		return demangle(mangled, createDefaultOptions());
 	}
 
@@ -61,14 +61,14 @@ public interface Demangler extends ExtensionPoint {
 	 * @return the result
 	 * @throws DemangledException if the string cannot be demangled
 	 */
-    DemangledObject demangle(String mangled, DemanglerOptions options)
+	public DemangledObject demangle(String mangled, DemanglerOptions options)
 			throws DemangledException;
 
 	/**
 	 * Creates default options for this particular demangler
 	 * @return the options
 	 */
-	default DemanglerOptions createDefaultOptions() {
+	public default DemanglerOptions createDefaultOptions() {
 		return new DemanglerOptions();
 	}
 }

@@ -82,7 +82,7 @@ class PythonPluginExecutionThread extends Thread {
 		}
 		catch (PyException pye) {
 			String exceptionName = PyException.exceptionClassName(pye.type);
-			if ("exceptions.SystemExit".equalsIgnoreCase(exceptionName)) {
+			if (exceptionName.equalsIgnoreCase("exceptions.SystemExit")) {
 				plugin.reset();
 			}
 			else {

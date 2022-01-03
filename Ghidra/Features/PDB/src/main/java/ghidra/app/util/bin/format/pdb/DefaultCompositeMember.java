@@ -233,11 +233,11 @@ public class DefaultCompositeMember extends CompositeMember {
 		if (m.memberIsZeroLengthArray) {
 			// transform last member into flexible array
 			Structure struct = (Structure) memberDataType;
-			Array array = (Array) m.memberDataType;
+			Array array = (Array) m.getDataType();
 			// TODO: there may be a more direct approach since we now handle zero-length array instantiation
 			struct.delete(struct.getNumComponents() - 1); // delete placeholder component
 			struct.insertAtOffset(m.memberOffset,
-				new ArrayDataType(array.getDataType(), 0, 1, dataTypeManager), 0, m.memberName,
+				new ArrayDataType(array.getDataType(), 0, 1, dataTypeManager), 0, m.getName(),
 				m.memberComment); // use unmodified comment
 		}
 	}
@@ -276,7 +276,7 @@ public class DefaultCompositeMember extends CompositeMember {
 		if (!isStructureContainer()) {
 			return;
 		}
-		Structure struct = (Structure) memberDataType;
+		Structure struct = (Structure) getDataType();
 
 		if (struct.isNotYetDefined() && preferredSize > 0) {
 			// handle special case of empty structure
@@ -381,8 +381,10 @@ public class DefaultCompositeMember extends CompositeMember {
 			// both components are bit fields
 			BitFieldDataType bitfieldDt = (BitFieldDataType) dtc.getDataType();
 			BitFieldDataType nonPackedBitfieldDt = (BitFieldDataType) nonPackedDtc.getDataType();
-            return bitfieldDt.getBitOffset() == nonPackedBitfieldDt.getBitOffset() &&
-                    bitfieldDt.getBitSize() == nonPackedBitfieldDt.getBitSize();
+			if (bitfieldDt.getBitOffset() != nonPackedBitfieldDt.getBitOffset() ||
+				bitfieldDt.getBitSize() != nonPackedBitfieldDt.getBitSize()) {
+				return false;
+			}
 		}
 		return true;
 	}
@@ -546,7 +548,7 @@ public class DefaultCompositeMember extends CompositeMember {
 		DefaultCompositeMember memberCopy = new DefaultCompositeMember(this);
 		memberCopy.memberOffset = 0;
 
-		CategoryPath tempCategoryPath = parent.memberDataType.getCategoryPath();
+		CategoryPath tempCategoryPath = parent.getDataType().getCategoryPath();
 		String tempName = allocateTemporaryContainerName("union");
 
 		Union nestedUnion = new UnionDataType(tempCategoryPath, tempName, dataTypeManager);
@@ -602,7 +604,7 @@ public class DefaultCompositeMember extends CompositeMember {
 		DefaultCompositeMember memberCopy = new DefaultCompositeMember(this);
 		memberCopy.memberOffset = 0;
 
-		CategoryPath tempCategoryPath = parent.memberDataType.getCategoryPath();
+		CategoryPath tempCategoryPath = parent.getDataType().getCategoryPath();
 		String tempName = allocateTemporaryContainerName("struct");
 
 		Structure nestedStructure =
@@ -726,11 +728,11 @@ public class DefaultCompositeMember extends CompositeMember {
 
 		if (isUnionContainer() && existingMember.isStructureContainer()) {
 			DefaultCompositeMember structureMember = (DefaultCompositeMember) existingMember;
-			return structureMember.isRelatedBitField(newMember.memberOffset, newMember);
+			return structureMember.isRelatedBitField(newMember.getOffset(), newMember);
 		}
 
 		if (!existingMember.isBitFieldMember() ||
-			existingMember.getOffset() != newMember.memberOffset ||
+			existingMember.getOffset() != newMember.getOffset() ||
 			existingMember.getLength() != newMember.getLength()) {
 			return false;
 		}
@@ -750,7 +752,7 @@ public class DefaultCompositeMember extends CompositeMember {
 			return false;
 		}
 
-		PdbBitField newBitField = (PdbBitField) newMember.memberDataType;
+		PdbBitField newBitField = (PdbBitField) newMember.getDataType();
 
 		// NOTE: assumes little-endian bitfield packing
 		// TODO: Add support for big-endian
@@ -794,7 +796,7 @@ public class DefaultCompositeMember extends CompositeMember {
 			nextBitOffset = bfGroup.getConsumedBits();
 		}
 
-		PdbBitField nextBitfieldDt = (PdbBitField) nextBitFieldMember.memberDataType;
+		PdbBitField nextBitfieldDt = (PdbBitField) nextBitFieldMember.getDataType();
 
 		int bitOffsetWithinBase = nextBitfieldDt.getBitOffsetWithinBase();
 		if (bitOffsetWithinBase > nextBitOffset) {
@@ -834,7 +836,7 @@ public class DefaultCompositeMember extends CompositeMember {
 						bitOffset = 0;
 					}
 					insertMinimalStructureBitfield((Structure) memberDataType, member.memberOffset,
-                            member.memberName, bitfieldDt, member.getMemberComment());
+						member.getName(), bitfieldDt, member.getMemberComment());
 				}
 				else {
 					((Structure) memberDataType).insertAtOffset(member.memberOffset,
@@ -894,7 +896,7 @@ public class DefaultCompositeMember extends CompositeMember {
 				bfGroup.addToGroup(member);
 
 				insertMinimalStructureBitfield((Structure) memberDataType, member.memberOffset,
-                        member.memberName, bitfieldDt, member.getMemberComment());
+					member.getName(), bitfieldDt, member.getMemberComment());
 
 				member.parent = this;
 
@@ -906,7 +908,7 @@ public class DefaultCompositeMember extends CompositeMember {
 			}
 
 			// adjust this member's offset for addition to container
-			member.setOffset(member.memberOffset - conflictMember.getOffset());
+			member.setOffset(member.getOffset() - conflictMember.getOffset());
 
 			return conflictMember.addMember(member);
 		}
@@ -920,7 +922,7 @@ public class DefaultCompositeMember extends CompositeMember {
 
 		if (member.memberOffset == 0) {
 
-			if (!unionMemberList.isEmpty() && member.isBitFieldMember()) {
+			if (unionMemberList.size() != 0 && member.isBitFieldMember()) {
 				CompositeMember lastUnionMember = unionMemberList.get(unionMemberList.size() - 1);
 				if (isRelatedBitField(lastUnionMember, member)) {
 					if (lastUnionMember.isSingleBitFieldMember() &&
@@ -938,8 +940,11 @@ public class DefaultCompositeMember extends CompositeMember {
 			if (parent != null) {
 				parent.sizeChanged(this);
 			}
-            return !member.memberIsZeroLengthArray || member.transformIntoStructureContainer();
-        }
+			if (member.memberIsZeroLengthArray && !member.transformIntoStructureContainer()) {
+				return false;
+			}
+			return true;
+		}
 
 		// NOTE: It is assumed that offset will always be ascending and not reach back to union
 		// members before the last one
@@ -1000,7 +1005,7 @@ public class DefaultCompositeMember extends CompositeMember {
 				DataTypeComponent component = union.getComponent(i);
 				if (fieldName.equals(component.getFieldName())) {
 					union.delete(i);
-					union.insert(i, newContainerMember.memberDataType,
+					union.insert(i, newContainerMember.getDataType(),
 						newContainerMember.getLength(), newContainerMember.memberName, null);
 					break;
 				}
@@ -1009,10 +1014,10 @@ public class DefaultCompositeMember extends CompositeMember {
 		else if (isStructureContainer()) {
 			Structure struct = (Structure) memberDataType;
 			// TODO: complicated by bitfields where multiple components may occupy same byte
-			struct.deleteAtOffset(newContainerMember.memberOffset);
-			struct.insertAtOffset(newContainerMember.memberOffset, newContainerMember.memberDataType,
+			struct.deleteAtOffset(newContainerMember.getOffset());
+			struct.insertAtOffset(newContainerMember.getOffset(), newContainerMember.getDataType(),
 				newContainerMember.getLength());
-			structureMemberOffsetMap.put(newContainerMember.memberOffset, newContainerMember);
+			structureMemberOffsetMap.put(newContainerMember.getOffset(), newContainerMember);
 		}
 	}
 

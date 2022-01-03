@@ -43,8 +43,8 @@ public interface GFileSystemProgramProvider {
 	 * @throws Exception if errors occur
 	 */
 
-    Program getProgram(GFile file, LanguageService languageService, TaskMonitor monitor,
-                       Object consumer) throws Exception;
+	public Program getProgram(GFile file, LanguageService languageService, TaskMonitor monitor,
+			Object consumer) throws Exception;
 
 	/**
 	 * Returns true if this GFileSystem can convert the specified GFile instance into
@@ -54,5 +54,5 @@ public interface GFileSystemProgramProvider {
 	 * @return boolean true if calls to {@link #getProgram(GFile, LanguageService, TaskMonitor, Object)}
 	 * will be able to convert the file into a program.
 	 */
-    boolean canProvideProgram(GFile file);
+	public boolean canProvideProgram(GFile file);
 }

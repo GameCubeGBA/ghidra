@@ -289,11 +289,11 @@ public class FunctionGraphVertexAttributes {
 	private void clearAllPropertiesForAddressRange(PropertyMap propertyMap,
 			AddressSetView addresses) {
 		AddressIterator iterator = addresses.getAddresses(true);
-        while (iterator.hasNext()) {
-            Address address = iterator.next();
-            propertyMap.remove(address);
-        }
-    }
+		for (; iterator.hasNext();) {
+			Address address = iterator.next();
+			propertyMap.remove(address);
+		}
+	}
 
 	public void save() {
 		int transactionID = programUserData.startTransaction();

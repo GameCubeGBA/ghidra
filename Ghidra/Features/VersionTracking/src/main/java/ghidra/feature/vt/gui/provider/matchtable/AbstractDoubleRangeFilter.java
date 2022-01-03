@@ -175,7 +175,11 @@ public abstract class AbstractDoubleRangeFilter<T> extends Filter<T>
 		}
 
 		Double upperBoundFilter = Double.valueOf(upperBoundText);
-		return filterableValue.compareTo(upperBoundFilter) <= 0; // the filter value is higher than the upper range filter
+		if (filterableValue.compareTo(upperBoundFilter) > 0) {
+			return false; // the filter value is higher than the upper range filter
+		}
+
+		return true;
 	}
 
 	/**
@@ -202,7 +206,11 @@ public abstract class AbstractDoubleRangeFilter<T> extends Filter<T>
 		}
 
 		String upperText = upperBoundField.getText();
-		return maxValue.equals(Double.valueOf(upperText));
+		if (!maxValue.equals(Double.valueOf(upperText))) {
+			return false;
+		}
+
+		return true;
 	}
 
 	@Override

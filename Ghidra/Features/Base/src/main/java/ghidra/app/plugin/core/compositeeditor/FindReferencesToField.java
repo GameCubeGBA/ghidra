@@ -31,9 +31,9 @@ import ghidra.util.Msg;
  */
 public class FindReferencesToField extends CompositeEditorTableAction {
 
-	public static final String ACTION_NAME = "Find Uses of";
-	private static final String GROUP_NAME = BASIC_ACTION_GROUP;
-	private static final String DESCRIPTION = "Find uses of field in the selected row";
+	public final static String ACTION_NAME = "Find Uses of";
+	private final static String GROUP_NAME = BASIC_ACTION_GROUP;
+	private final static String DESCRIPTION = "Find uses of field in the selected row";
 	private static String[] popupPath = new String[] { ACTION_NAME };
 
 	public FindReferencesToField(CompositeEditorProvider provider) {

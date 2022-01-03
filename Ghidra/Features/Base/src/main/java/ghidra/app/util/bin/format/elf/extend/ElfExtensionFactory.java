@@ -23,11 +23,11 @@ import ghidra.util.classfinder.ClassSearcher;
 
 public final class ElfExtensionFactory {
 
-	private static final List<ElfExtension> getAllExtensions() {
+	private final static List<ElfExtension> getAllExtensions() {
 		return new ArrayList<ElfExtension>(ClassSearcher.getInstances(ElfExtension.class));
 	}
 
-	public static final ElfLoadAdapter getLoadAdapter(ElfHeader elf) {
+	public final static ElfLoadAdapter getLoadAdapter(ElfHeader elf) {
 		for (ElfExtension handler : getAllExtensions()) {
 			if (handler.canHandle(elf)) {
 				return handler;

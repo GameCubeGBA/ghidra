@@ -24,12 +24,12 @@ import ghidra.formats.gfilesystem.FSRL;
 
 public class ImportBatchTaskTest {
 	private static String mkFSRL(int depth) {
-		StringBuilder result = new StringBuilder("fsrl://");
+		String result = "fsrl://";
 		for (int i = 0; i < depth; i++) {
-			result.append("/");
-			result.append((char) ('a' + i));
+			result += "/";
+			result += (char) ('a' + i);
 		}
-		return result.toString();
+		return result;
 	}
 
 	private static void iterateFsrlToPathParamPermutations(int srcDepth, int targetDepth)

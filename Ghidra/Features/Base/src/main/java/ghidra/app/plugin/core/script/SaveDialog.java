@@ -77,7 +77,7 @@ public class SaveDialog extends DialogComponentProvider implements ListSelection
 
 		JPanel panel = new JPanel(new BorderLayout(10, 10));
 		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-		if (!paths.isEmpty()) {
+		if (paths.size() != 0) {
 			panel.add(pathPanel, BorderLayout.CENTER);
 			panel.add(namePanel, BorderLayout.SOUTH);
 		}
@@ -148,11 +148,11 @@ public class SaveDialog extends DialogComponentProvider implements ListSelection
 
 	@Override
 	protected void okCallback() {
-		if (!paths.isEmpty() && listPanel.getSelectedIndex() == -1) {
+		if (paths.size() != 0 && listPanel.getSelectedIndex() == -1) {
 			setStatusText("Please select a directory.");
 			return;
 		}
-		if (nameField.getText().isEmpty()) {
+		if (nameField.getText().length() == 0) {
 			setStatusText("Please enter a file name.");
 			return;
 		}
@@ -218,7 +218,7 @@ public class SaveDialog extends DialogComponentProvider implements ListSelection
 	}
 
 	protected ResourceFile getDirectory() {
-		if (paths.isEmpty() && scriptFile != null) {
+		if (paths.size() == 0 && scriptFile != null) {
 			return scriptFile.getParentFile();
 		}
 		int index = listPanel.getSelectedIndex();
@@ -230,7 +230,7 @@ public class SaveDialog extends DialogComponentProvider implements ListSelection
 
 	ResourceFile getFile() {
 		ResourceFile directory = getDirectory();
-		if (directory == null || nameField.getText().isEmpty()) {
+		if (directory == null || nameField.getText().length() == 0) {
 			return null;
 		}
 		String name = nameField.getText();

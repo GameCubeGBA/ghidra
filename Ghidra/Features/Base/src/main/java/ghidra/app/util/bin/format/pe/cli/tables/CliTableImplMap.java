@@ -37,7 +37,8 @@ public class CliTableImplMap extends CliAbstractTable {
 		
 		public CliImplMapRow(short mappingFlags, int memberForwardedIndex, int importNameIndex,
 				int importScopeIndex) {
-            this.mappingFlags = mappingFlags;
+			super();
+			this.mappingFlags = mappingFlags;
 			this.memberForwardedIndex = memberForwardedIndex;
 			this.importNameIndex = importNameIndex;
 			this.importScopeIndex = importScopeIndex;

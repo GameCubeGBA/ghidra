@@ -23,17 +23,17 @@ public interface AssociationHook {
 	 * Called whenever an association has been accepted.
 	 * @param association the association that has been accepted.
 	 */
-    void associationAccepted(VTAssociation association);
+	public void associationAccepted(VTAssociation association);
 
 	/**
 	 * Called whenever an association has been cleared from the accepted state.
 	 * @param association the association that has been cleared from the accepted state.
 	 */
-    void associationCleared(VTAssociation association);
+	public void associationCleared(VTAssociation association);
 
 	/**
 	 * Called whenever a markupItem's status changes.
 	 * @param markupItem the markupItem that changed.
 	 */
-    void markupItemStatusChanged(VTMarkupItem markupItem);
+	public void markupItemStatusChanged(VTMarkupItem markupItem);
 }

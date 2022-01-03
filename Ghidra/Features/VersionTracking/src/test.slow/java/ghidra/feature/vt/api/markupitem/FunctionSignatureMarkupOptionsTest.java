@@ -70,7 +70,8 @@ public class FunctionSignatureMarkupOptionsTest extends AbstractFunctionSignatur
 	//  Gadget::use 00411570    FUN... 00411560
 
 	public FunctionSignatureMarkupOptionsTest() {
-    }
+		super();
+	}
 
 @Test
     public void testExcludeCallingConvention() throws Exception {

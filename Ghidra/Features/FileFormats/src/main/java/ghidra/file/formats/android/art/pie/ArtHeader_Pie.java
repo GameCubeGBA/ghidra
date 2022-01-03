@@ -175,7 +175,7 @@ public class ArtHeader_Pie extends ArtHeader implements ArtCompression {
 
 	@Override
 	public long getDecompressedOffset() {
-		return _compressedOffset;
+		return getCompressedOffset();
 	}
 
 	@Override

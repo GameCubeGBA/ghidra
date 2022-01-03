@@ -519,8 +519,10 @@ public class ImporterDialog extends DialogComponentProvider {
 			(parentPath != null) ? ProjectDataUtils.lookupDomainPath(destinationFolder, parentPath)
 					: destinationFolder;
 		if (localDestFolder != null) {
-            return localDestFolder.getFolder(filename) != null ||
-                    localDestFolder.getFile(filename) != null;
+			if (localDestFolder.getFolder(filename) != null ||
+				localDestFolder.getFile(filename) != null) {
+				return true;
+			}
 		}
 		return false;
 	}

@@ -51,10 +51,10 @@ public class TOCConverter {
 	private String sourceFilename;
 	private String outFilename;
 
-	private static final String TOC_VERSION = "<toc version";
-	private static final String TOCITEM = "<tocitem";
-	private static final String TEXT = "text";
-	private static final String TARGET = " target";
+	private final static String TOC_VERSION = "<toc version";
+	private final static String TOCITEM = "<tocitem";
+	private final static String TEXT = "text";
+	private final static String TARGET = " target";
 
 	private Map<String, String> urlMap; // map TOC target tag to its corresponding URL
 	private List<String> tocList; // list of TOC entry names values
@@ -129,7 +129,7 @@ public class TOCConverter {
 				}
 				line = getPadString(line) + TOCITEM + " " + TEXT + "=\"" + item.getText() + "\"";
 
-				if (!item.getTarget().isEmpty()) {
+				if (item.getTarget().length() > 0) {
 					line = line + TARGET + "=\"" + item.getTarget() + "\"";
 				}
 				line = line + endline;
@@ -246,7 +246,7 @@ public class TOCConverter {
 
 				String url = atts.getValue(1);
 				String target = url;
-				if (url != null && !url.isEmpty()) {
+				if (url != null && url.length() > 0) {
 					target = target.replace('.', '_');
 					target = target.replace('#', '_');
 					target = target.replace('-', '_');
@@ -260,7 +260,7 @@ public class TOCConverter {
 		}
 	}
 
-	public static final void main(String[] args) {
+	public final static void main(String[] args) {
 		if (args.length < 2) {
 			System.out.println("Usage: TOCConverter [source TOC filename] [out filename]");
 			System.exit(0);

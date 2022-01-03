@@ -33,7 +33,7 @@ public class ByteBlockChangeManager {
 	private ProgramByteBlockSet blockSet;
 	private List<ByteEditInfo> changeList; // list of changes for this tool
 
-	private static final String NUMBER_OF_CHANGES = "NumberOfByteBlockChanges";
+	private final static String NUMBER_OF_CHANGES = "NumberOfByteBlockChanges";
 	private static String BLOCK_NUMBER = "BlockNumber";
 	private static String BLOCK_OFFSET = "BlockOffset";
 	private static String OLD_VALUE = "OldValue";
@@ -145,12 +145,13 @@ public class ByteBlockChangeManager {
 	 * @param offset offset into the block
 	 */
 	private boolean contains(Address blockAddr, BigInteger offset) {
-        for (ByteEditInfo edit : changeList) {
-            if (edit.getBlockAddress().compareTo(blockAddr) == 0 &&
-                    edit.getOffset().equals(offset)) {
-                return true;
-            }
-        }
+		for (int i = 0; i < changeList.size(); i++) {
+			ByteEditInfo edit = changeList.get(i);
+			if (edit.getBlockAddress().compareTo(blockAddr) == 0 &&
+				edit.getOffset().equals(offset)) {
+				return true;
+			}
+		}
 		return false;
 	}
 }

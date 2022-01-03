@@ -33,7 +33,7 @@ import ghidra.util.NumericUtilities;
 import ghidra.util.SystemUtilities;
 
 public class AsyncProtobufMessageChannelTest {
-	public static final long TIMEOUT_MILLIS =
+	public final static long TIMEOUT_MILLIS =
 		SystemUtilities.isInTestingBatchMode() ? 1000 : Long.MAX_VALUE;
 
 	public static <T> T get(CompletableFuture<T> future) throws Exception {

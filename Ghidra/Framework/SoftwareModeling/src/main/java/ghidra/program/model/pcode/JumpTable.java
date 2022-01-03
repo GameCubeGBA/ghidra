@@ -156,8 +156,11 @@ public class JumpTable {
 	}
 
 	public boolean isEmpty() {
-        return (addressTable == null) || (addressTable.length == 0);
-    }
+		if ((addressTable == null) || (addressTable.length == 0)) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Create a JumpTable object by parsing the XML elements
@@ -301,7 +304,7 @@ public class JumpTable {
 				destlist.add(addr);
 			}
 		}
-		if ((branchind != null) && (!destlist.isEmpty())) {
+		if ((branchind != null) && (destlist.size() > 0)) {
 			return new JumpTable(branchind, destlist, true);
 		}
 		return null;

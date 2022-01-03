@@ -58,7 +58,7 @@ class DefinedDataXmlMgr {
 					throw new CancelledException();
 				}
 				element = parser.next();
-				if (!"DEFINED_DATA".equals(element.getName())) {
+				if (!element.getName().equals("DEFINED_DATA")) {
 					break;
 				}
 				String addrStr = element.getAttribute("ADDRESS");
@@ -106,15 +106,15 @@ class DefinedDataXmlMgr {
 					// there was a problem in that we write "DISPLAY_SETTINGS" and
 					// were reading "DISPLAY_SETTING".  Not knowing which is correct,
 					// just handle both in case older Ghidra versions used the other
-					if ("DISPLAY_SETTING".equals(parser.peek().getName())) {
+					if (parser.peek().getName().equals("DISPLAY_SETTING")) {
 						DisplaySettingsHandler.readSettings(parser.next(), data);
 						parser.next();
 					}
-					if ("DISPLAY_SETTINGS".equals(parser.peek().getName())) {
+					if (parser.peek().getName().equals("DISPLAY_SETTINGS")) {
 						DisplaySettingsHandler.readSettings(parser.next(), data);
 						parser.next();
 					}
-					if ("TYPEINFO_CMT".equals(parser.peek().getName())) {
+					if (parser.peek().getName().equals("TYPEINFO_CMT")) {
 						//TODO: handle TypeInfo comment...
 						parser.discardSubTree("TYPEINFO_CMT");
 					}

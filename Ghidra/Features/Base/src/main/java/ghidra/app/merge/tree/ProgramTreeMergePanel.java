@@ -136,10 +136,13 @@ class ProgramTreeMergePanel extends JPanel {
 	}
 
 	private JPanel createConflictPanel() {
-		ChangeListener changeListener = e -> {
-            mergeManager.clearStatusText();
-            mergeManager.setApplyEnabled(true);
-        };
+		ChangeListener changeListener = new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				mergeManager.clearStatusText();
+				mergeManager.setApplyEnabled(true);
+			}
+		};
 
 		cardLayout = new CardLayout();
 		JPanel panel = new JPanel(cardLayout);

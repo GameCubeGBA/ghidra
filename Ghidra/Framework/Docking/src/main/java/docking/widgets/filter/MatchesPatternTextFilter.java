@@ -57,7 +57,10 @@ public abstract class MatchesPatternTextFilter extends AbstractPatternTextFilter
 		if (allowGlobbing != other.allowGlobbing) {
 			return false;
 		}
-        return caseSensitive == other.caseSensitive;
-    }
+		if (caseSensitive != other.caseSensitive) {
+			return false;
+		}
+		return true;
+	}
 
 }

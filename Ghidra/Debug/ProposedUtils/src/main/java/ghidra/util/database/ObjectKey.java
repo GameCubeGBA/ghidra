@@ -49,8 +49,11 @@ public class ObjectKey implements Comparable<ObjectKey> {
 		if (!(Objects.equals(this.tableName, that.tableName))) {
 			return false;
 		}
-        return this.key == that.key;
-    }
+		if (this.key != that.key) {
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public int hashCode() {
@@ -72,6 +75,9 @@ public class ObjectKey implements Comparable<ObjectKey> {
 			return result;
 		}
 		result = Long.compareUnsigned(this.key, that.key);
-        return result;
-    }
+		if (result != 0) {
+			return result;
+		}
+		return 0;
+	}
 }

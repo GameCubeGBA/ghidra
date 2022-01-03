@@ -56,7 +56,8 @@ public class EquateMergeManager1Test extends AbstractListingMergeManagerTest {
 	 * @param arg0
 	 */
 	public EquateMergeManager1Test() {
-    }
+		super();
+	}
 
 	@Test
 	public void testRemoveEquate() throws Exception {

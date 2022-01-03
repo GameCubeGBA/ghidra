@@ -68,7 +68,7 @@ public class ClangVariableToken extends ClangToken {
 	}
 	@Override
     public HighVariable getHighVariable() {
-		Varnode inst = varnode;
+		Varnode inst = getVarnode();
 		if (inst != null) {
 			HighVariable hvar = inst.getHigh();
 			if (hvar != null && hvar.getRepresentative() == null) {

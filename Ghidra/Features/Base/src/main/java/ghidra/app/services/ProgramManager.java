@@ -38,25 +38,25 @@ public interface ProgramManager {
 	 * Program will be open in a Hidden state if not already open. This mode is generally used in
 	 * conjunction with a persistent program owner.
 	 */
-    int OPEN_HIDDEN = 0;
+	public static final int OPEN_HIDDEN = 0;
 
 	/**
 	 * Program will be open as the currently active program within the tool.
 	 */
-    int OPEN_CURRENT = 1;
+	public static final int OPEN_CURRENT = 1;
 
 	/**
 	 * Program will be open within the tool but no change will be made to the currently active
 	 * program. If this is the only program open, it will become the currently active program.
 	 */
-    int OPEN_VISIBLE = 2;
+	public static final int OPEN_VISIBLE = 2;
 
 	/**
 	 * Return the program that is currently active.
 	 * 
 	 * @return may return null if no program is open
 	 */
-    Program getCurrentProgram();
+	public Program getCurrentProgram();
 
 	/**
 	 * Returns true if the specified program is open and considered visible to the user.
@@ -64,7 +64,7 @@ public interface ProgramManager {
 	 * @param program the program
 	 * @return true if the specified program is open and considered visible to the user
 	 */
-    boolean isVisible(Program program);
+	public boolean isVisible(Program program);
 
 	/**
 	 * Closes the currently active program
@@ -72,7 +72,7 @@ public interface ProgramManager {
 	 * @return true if the close is successful. false if the close fails or if there is no program
 	 *         currently active.
 	 */
-    boolean closeProgram();
+	public boolean closeProgram();
 
 	/**
 	 * Open the program corresponding to the given url.
@@ -84,7 +84,7 @@ public interface ProgramManager {
 	 *         displayed.
 	 * @see GhidraURL
 	 */
-    Program openProgram(URL ghidraURL, int state);
+	public Program openProgram(URL ghidraURL, int state);
 
 	/**
 	 * Open the program for the given domainFile. Once open it will become the active program.
@@ -92,7 +92,7 @@ public interface ProgramManager {
 	 * @param domainFile domain file that has the program
 	 * @return null if the user canceled the "open" for the new program
 	 */
-    Program openProgram(DomainFile domainFile);
+	public Program openProgram(DomainFile domainFile);
 
 	/**
 	 * Open the program for the given domainFile. Once open it will become the active program.
@@ -107,7 +107,7 @@ public interface ProgramManager {
 	 *             {@link #openProgram(DomainFile)}
 	 */
 	@Deprecated
-    Program openProgram(DomainFile domainFile, Component dialogParent);
+	public Program openProgram(DomainFile domainFile, Component dialogParent);
 
 	/**
 	 * Opens the specified version of the program represented by the given DomainFile. This method
@@ -117,7 +117,7 @@ public interface ProgramManager {
 	 * @param version the version of the Program to open
 	 * @return the opened program or null if the given version does not exist.
 	 */
-    Program openProgram(DomainFile df, int version);
+	public Program openProgram(DomainFile df, int version);
 
 	/**
 	 * Open the program for the given domainFile
@@ -130,7 +130,7 @@ public interface ProgramManager {
 	 * @return null if the user canceled the "open" for the new program or an error occurred and was
 	 *         displayed.
 	 */
-    Program openProgram(DomainFile domainFile, int version, int state);
+	public Program openProgram(DomainFile domainFile, int version, int state);
 
 	/**
 	 * Opens the program to the tool. In this case the program is already open, but this tool may
@@ -138,7 +138,7 @@ public interface ProgramManager {
 	 * 
 	 * @param program the program to register as open with the tool.
 	 */
-    void openProgram(Program program);
+	public void openProgram(Program program);
 
 	/**
 	 * Opens the program to the tool. In this case the program is already open, but this tool may
@@ -150,7 +150,7 @@ public interface ProgramManager {
 	 * @deprecated use openProgram(Program program, int state) instead.
 	 */
 	@Deprecated
-    void openProgram(Program program, boolean current);
+	public void openProgram(Program program, boolean current);
 
 	/**
 	 * Open the specified program in the tool.
@@ -159,31 +159,31 @@ public interface ProgramManager {
 	 * @param state initial open state (OPEN_HIDDEN, OPEN_CURRENT, OPEN_VISIBLE). The visibility
 	 *            states will be ignored if the program is already open.
 	 */
-    void openProgram(Program program, int state);
+	public void openProgram(Program program, int state);
 
 	/**
 	 * Saves the current program, possibly prompting the user for a new name.
 	 */
-    void saveProgram();
+	public void saveProgram();
 
 	/**
 	 * Saves the specified program, possibly prompting the user for a new name.
 	 * 
 	 * @param program the program
 	 */
-    void saveProgram(Program program);
+	public void saveProgram(Program program);
 
 	/**
 	 * Prompts the user to save the current program to a selected file.
 	 */
-    void saveProgramAs();
+	public void saveProgramAs();
 
 	/**
 	 * Prompts the user to save the specified program to a selected file.
 	 * 
 	 * @param program the program
 	 */
-    void saveProgramAs(Program program);
+	public void saveProgramAs(Program program);
 
 	/**
 	 * Establish a persistent owner on an open program. This will cause the program manager to imply
@@ -195,7 +195,7 @@ public interface ProgramManager {
 	 *         owner is already the owner.
 	 * @see #releaseProgram(Program, Object)
 	 */
-    boolean setPersistentOwner(Program program, Object owner);
+	public boolean setPersistentOwner(Program program, Object owner);
 
 	/**
 	 * Release the persistent ownership of a program.
@@ -209,7 +209,7 @@ public interface ProgramManager {
 	 * @param program the program
 	 * @param persistentOwner the owner defined by {@link #setPersistentOwner(Program, Object)}
 	 */
-    void releaseProgram(Program program, Object persistentOwner);
+	public void releaseProgram(Program program, Object persistentOwner);
 
 	/**
 	 * Closes the given program with the option of saving any changes. The exact behavior of this
@@ -235,7 +235,7 @@ public interface ProgramManager {
 	 * @return true if all other programs were closed. Returns false if the user canceled the close
 	 *         while being prompted to save.
 	 */
-    boolean closeOtherPrograms(boolean ignoreChanges);
+	public boolean closeOtherPrograms(boolean ignoreChanges);
 
 	/**
 	 * Closes all open programs in this tool. If this tool is the only tool with a program open and
@@ -246,14 +246,14 @@ public interface ProgramManager {
 	 * @return true if all programs were closed. Returns false if the user canceled the close while
 	 *         being prompted to save.
 	 */
-    boolean closeAllPrograms(boolean ignoreChanges);
+	public boolean closeAllPrograms(boolean ignoreChanges);
 
 	/**
 	 * Sets the given program to be the current active program in the tool.
 	 * 
 	 * @param p the program to make active.
 	 */
-    void setCurrentProgram(Program p);
+	public void setCurrentProgram(Program p);
 
 	/**
 	 * Returns the first program in the list of open programs that contains the given address.
@@ -264,14 +264,14 @@ public interface ProgramManager {
 	 * @param addr the address for which to search.
 	 * @return the first program that can be found to contain the given address.
 	 */
-    Program getProgram(Address addr);
+	public Program getProgram(Address addr);
 
 	/**
 	 * Returns a list of all open program.
 	 * 
 	 * @return the programs
 	 */
-    Program[] getAllOpenPrograms();
+	public Program[] getAllOpenPrograms();
 
 	/**
 	 * Allows program manager state to be locked/unlocked. While locked, the program manager will
@@ -281,7 +281,7 @@ public interface ProgramManager {
 	 * @deprecated deprecated for 10.1; removal for 10.3 or later
 	 */
 	@Deprecated
-    void lockDown(boolean state);
+	public void lockDown(boolean state);
 
 	/**
 	 * Returns true if program manager is in the locked state
@@ -290,5 +290,5 @@ public interface ProgramManager {
 	 * @deprecated deprecated for 10.1; removal for 10.3 or later
 	 */
 	@Deprecated
-    boolean isLocked();
+	public boolean isLocked();
 }

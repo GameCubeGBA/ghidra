@@ -25,7 +25,8 @@ import generic.test.AbstractGenericTest;
 public class VectorSTLTest extends AbstractGenericTest {
 
 	public VectorSTLTest() {
-    }
+		super();
+	}
 
 	@Test
 	public void testLowerBound() {

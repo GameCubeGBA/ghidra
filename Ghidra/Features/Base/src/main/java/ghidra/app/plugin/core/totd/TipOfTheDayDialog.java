@@ -65,17 +65,30 @@ class TipOfTheDayDialog extends DialogComponentProvider {
 
 		showTipsCheckbox = new GCheckBox("Show Tips on Startup?");
 		showTipsCheckbox.setSelected(true); // TODO (FixMe) Moved this before its listener to prevent project save for now.
-		showTipsCheckbox.addItemListener(e -> showTipsChanged());
+		showTipsCheckbox.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				showTipsChanged();
+			}
+		});
 
 		nextTipButton = new JButton("Next Tip");
-		nextTipButton.addActionListener(e -> {
-            incrementTipIndex();
-            loadNextTip();
-        });
+		nextTipButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				incrementTipIndex();
+				loadNextTip();
+			}
+		});
 		addButton(nextTipButton);
 
 		closeButton = new JButton("Close");
-		closeButton.addActionListener(e -> close());
+		closeButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				close();
+			}
+		});
 		addButton(closeButton);
 
 		JPanel panel = new JPanel(new BorderLayout());

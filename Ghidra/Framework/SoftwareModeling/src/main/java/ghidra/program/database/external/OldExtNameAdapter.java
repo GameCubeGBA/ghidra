@@ -30,7 +30,7 @@ import ghidra.util.task.TaskMonitor;
 
 class OldExtNameAdapter {
 
-	static final String EXT_NAME_TABLE_NAME = "External Program Names";
+	final static String EXT_NAME_TABLE_NAME = "External Program Names";
 
 	static final Schema EXT_NAME_SCHEMA =
 		new Schema(0, "Key", new Field[] { StringField.INSTANCE, StringField.INSTANCE },

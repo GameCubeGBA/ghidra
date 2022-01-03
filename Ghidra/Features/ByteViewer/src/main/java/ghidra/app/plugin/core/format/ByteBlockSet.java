@@ -31,7 +31,7 @@ public interface ByteBlockSet {
 	 * 
 	 * @return the blocks
 	 */
-    ByteBlock[] getBlocks();
+	public ByteBlock[] getBlocks();
 
 	/**
 	 * Get a plugin event for the given block and offset.
@@ -42,8 +42,8 @@ public interface ByteBlockSet {
 	 * @param column the column within the UI byte field
 	 * @return the event
 	 */
-    ProgramLocationPluginEvent getPluginEvent(String source, ByteBlock block,
-                                              BigInteger offset, int column);
+	public ProgramLocationPluginEvent getPluginEvent(String source, ByteBlock block,
+			BigInteger offset, int column);
 
 	/**
 	 * Get the appropriate plugin event for the given block selection.
@@ -52,7 +52,7 @@ public interface ByteBlockSet {
 	 * @param selection selection to use to generate the event
 	 * @return the event
 	 */
-    ProgramSelectionPluginEvent getPluginEvent(String source, ByteBlockSelection selection);
+	public ProgramSelectionPluginEvent getPluginEvent(String source, ByteBlockSelection selection);
 
 	/**
 	 * Return true if the block has been changed at the given index.
@@ -62,7 +62,7 @@ public interface ByteBlockSet {
 	 * @param length number of bytes in question
 	 * @return true if changed
 	 */
-    boolean isChanged(ByteBlock block, BigInteger index, int length);
+	public boolean isChanged(ByteBlock block, BigInteger index, int length);
 
 	/**
 	 * Send a notification that a byte block edit occurred.
@@ -72,13 +72,13 @@ public interface ByteBlockSet {
 	 * @param oldValue old byte values
 	 * @param newValue new byte values
 	 */
-    void notifyByteEditing(ByteBlock block, BigInteger index, byte[] oldValue,
-                           byte[] newValue);
+	public void notifyByteEditing(ByteBlock block, BigInteger index, byte[] oldValue,
+			byte[] newValue);
 
 	/**
 	 * Release resources that this object may be using.
 	 */
-    void dispose();
+	public void dispose();
 
 	/**
 	 * Convert the byte block selection to the address set it covers
@@ -86,5 +86,5 @@ public interface ByteBlockSet {
 	 * @param selection the selection from the byte block perspective
 	 * @return the selection from the address perspective
 	 */
-    AddressSet getAddressSet(ByteBlockSelection selection);
+	public AddressSet getAddressSet(ByteBlockSelection selection);
 }

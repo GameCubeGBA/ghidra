@@ -220,8 +220,12 @@ public class GraphJobRunner implements GraphJobListener {
 		//
 		// See if we can shortcut the current job 
 		//
-        return shortcutCurrentJob() && shortcutPendingJobs(shortcutAll);
-    }
+		if (!shortcutCurrentJob() || !shortcutPendingJobs(shortcutAll)) {
+			return false;
+		}
+
+		return true;
+	}
 
 	/**
 	 * Attempts to shortcut the currently running job, if there is one

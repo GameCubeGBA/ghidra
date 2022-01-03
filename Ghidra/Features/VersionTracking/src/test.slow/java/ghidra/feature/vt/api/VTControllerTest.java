@@ -34,7 +34,8 @@ public class VTControllerTest extends AbstractGhidraHeadedIntegrationTest {
 	private VTController controller;
 
 	public VTControllerTest() {
-    }
+		super();
+	}
 
     @Before
     public void setUp() throws Exception {

@@ -48,7 +48,8 @@ public class NamespaceManagerTest extends AbstractGhidraHeadedIntegrationTest {
 	 * @param arg0
 	 */
 	public NamespaceManagerTest() {
-    }
+		super();
+	}
 
 	@Before
 	public void setUp() throws Exception {

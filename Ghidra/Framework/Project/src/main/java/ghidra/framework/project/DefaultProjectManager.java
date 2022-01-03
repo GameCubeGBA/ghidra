@@ -65,7 +65,7 @@ public class DefaultProjectManager implements ProjectManager {
 	/**
 	 * Preference name for the last opened project.
 	 */
-    private static final String LAST_OPENED_PROJECT = "LastOpenedProject";
+	private final static String LAST_OPENED_PROJECT = "LastOpenedProject";
 
 	private static final Logger LOG = LogManager.getLogger(DefaultProjectManager.class);
 
@@ -213,7 +213,7 @@ public class DefaultProjectManager implements ProjectManager {
 	@Override
 	public ProjectLocator getLastOpenedProject() {
 		String projectPath = Preferences.getProperty(LAST_OPENED_PROJECT);
-		if (projectPath == null || projectPath.trim().isEmpty()) {
+		if (projectPath == null || projectPath.trim().length() == 0) {
 			return null;
 		}
 		return getLocatorFromProjectPath(projectPath);
@@ -369,7 +369,7 @@ public class DefaultProjectManager implements ProjectManager {
 
 	private File getMostRecentValidProjectDirectory() {
 		List<File> ghidraUserDirsByTime = GenericRunInfo.getPreviousApplicationSettingsDirsByTime();
-		if (ghidraUserDirsByTime.isEmpty()) {
+		if (ghidraUserDirsByTime.size() == 0) {
 			return null;
 		}
 

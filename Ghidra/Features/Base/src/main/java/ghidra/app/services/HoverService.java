@@ -32,19 +32,19 @@ public interface HoverService {
 	 * Returns the priority of this hover service.   A lower priority is more important.
 	 * @return the priority
 	 */
-    int getPriority();
+	public int getPriority();
 
 	/**
 	 * If this service's window supports scrolling, scroll by the specified amount.
 	 * @param amount the amount to scroll
 	 */
-    void scroll(int amount);
+	public void scroll(int amount);
 
 	/**
 	 * Return whether hover mode is "on"
 	 * @return the priority
 	 */
-    boolean hoverModeSelected();
+	public boolean hoverModeSelected();
 
 	/**
 	 * Returns a component to be shown in a popup window that is relevant to the given parameters.
@@ -55,17 +55,17 @@ public interface HoverService {
 	 * @param field the field over which the mouse is hovering
 	 * @return The component to be shown for the given location information.
 	 */
-    JComponent getHoverComponent(Program program, ProgramLocation programLocation,
-                                 FieldLocation fieldLocation, Field field);
+	public JComponent getHoverComponent(Program program, ProgramLocation programLocation,
+			FieldLocation fieldLocation, Field field);
 
 	/**
 	 * Provides notification when this hover component is popped-down
 	 */
-    void componentHidden();
+	public void componentHidden();
 
 	/**
 	 * Provides notification when this hover component is popped-up
 	 */
-    void componentShown();
+	public void componentShown();
 
 }

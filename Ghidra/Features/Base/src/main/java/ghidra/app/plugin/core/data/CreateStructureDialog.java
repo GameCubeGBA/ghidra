@@ -151,7 +151,7 @@ public class CreateStructureDialog extends DialogComponentProvider {
 			private void checkText(Document document) {
 				try {
 					String text = document.getText(0, document.getLength());
-					if ((text == null) || (text.trim().isEmpty())) {
+					if ((text == null) || (text.trim().length() == 0)) {
 						okButton.setEnabled(false);
 						updateStatusText(true, null);
 					}
@@ -382,10 +382,14 @@ public class CreateStructureDialog extends DialogComponentProvider {
 
 		// be sure to do the easiest comparisons first, those based on
 		// equality and then do the possibly recursive calls last
-        return (dtcA.getLength() == dtcB.getLength()) && (dtcA.getOffset() == dtcB.getOffset()) &&
-                (dtcA.getOrdinal() == dtcB.getOrdinal()) &&
-                compareDataTypes(dtcA.getDataType(), dtcB.getDataType());
-    }
+		if ((dtcA.getLength() == dtcB.getLength()) && (dtcA.getOffset() == dtcB.getOffset()) &&
+			(dtcA.getOrdinal() == dtcB.getOrdinal()) &&
+			compareDataTypes(dtcA.getDataType(), dtcB.getDataType())) {
+			return true;
+		}
+
+		return false;
+	}
 
 	// called by compareDataTypeComponents() in order to compare the data
 	// types of the components
@@ -400,9 +404,13 @@ public class CreateStructureDialog extends DialogComponentProvider {
 
 			return false;
 		}
-		else return typeA.getName().equals(typeB.getName()) &&
-                typeA.getLength() == typeB.getLength();
-    }
+		else if (typeA.getName().equals(typeB.getName()) &&
+			typeA.getLength() == typeB.getLength()) {
+			return true;
+		}
+
+		return false;
+	}
 
 	/**
 	 * Shows a dialog that allows the user to create a new structure.

@@ -30,7 +30,8 @@ public class DbgDebugEventCallbacksAdapter extends DebugEventCallbacksAdapter {
 	private DbgManagerImpl manager;
 
 	public DbgDebugEventCallbacksAdapter(DbgManagerImpl manager) {
-        this.manager = manager;
+		super();
+		this.manager = manager;
 	}
 
 	protected DebugStatus checkInterrupt(DebugStatus normal) {

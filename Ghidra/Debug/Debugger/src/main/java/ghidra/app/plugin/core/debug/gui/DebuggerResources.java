@@ -734,7 +734,7 @@ public interface DebuggerResources {
 		Icon ICON = ICON_DISCONNECT;
 		String HELP_ANCHOR = "disconnect_all";
 
-		static ActionBuilder builder(Plugin owner, Plugin helpOwner) {
+		public static ActionBuilder builder(Plugin owner, Plugin helpOwner) {
 			return new ActionBuilder(owner.getName(), NAME)
 					.description(DESCRIPTION)
 					.menuIcon(ICON)
@@ -748,7 +748,7 @@ public interface DebuggerResources {
 		Icon ICON = ICON_PIN;
 		String HELP_ANCHOR = "pin";
 
-		static ToggleActionBuilder builder(Plugin owner) {
+		public static ToggleActionBuilder builder(Plugin owner) {
 			String ownerName = owner.getName();
 			return new ToggleActionBuilder(ownerName, NAME)
 					.description(DESCRIPTION)
@@ -763,7 +763,7 @@ public interface DebuggerResources {
 		Icon ICON = ICON_TERMINATE;
 		String HELP_ANCHOR = "interrupt";
 
-		static ActionBuilder builder(Plugin owner) {
+		public static ActionBuilder builder(Plugin owner) {
 			String ownerName = owner.getName();
 			return new ActionBuilder(ownerName, NAME)
 					.description(DESCRIPTION)
@@ -1963,7 +1963,7 @@ public interface DebuggerResources {
 		}
 	}
 
-	abstract class AbstractDebuggerConnectionsNode extends GTreeNode {
+	public abstract class AbstractDebuggerConnectionsNode extends GTreeNode {
 		@Override
 		public String getName() {
 			return "Connections";
@@ -1980,7 +1980,7 @@ public interface DebuggerResources {
 		}
 	}
 
-	abstract class AbstractDebuggerModelNode extends GTreeNode {
+	public abstract class AbstractDebuggerModelNode extends GTreeNode {
 		@Override
 		public Icon getIcon(boolean expanded) {
 			return ICON_CONNECTION;
@@ -2031,7 +2031,7 @@ public interface DebuggerResources {
 		table.scrollToSelectedRow();
 	}
 
-	class ToToggleSelectionListener implements BooleanChangeAdapter {
+	public static class ToToggleSelectionListener implements BooleanChangeAdapter {
 		private final ToggleDockingAction action;
 
 		public ToToggleSelectionListener(ToggleDockingAction action) {

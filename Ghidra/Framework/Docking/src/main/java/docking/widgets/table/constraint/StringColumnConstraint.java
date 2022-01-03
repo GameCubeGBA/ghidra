@@ -114,7 +114,7 @@ public abstract class StringColumnConstraint implements ColumnConstraint<String>
 
 	@Override
 	public String getConstraintValueTooltip() {
-		return "\"" + HTMLUtilities.italic(patternString) + "\"";
+		return "\"" + HTMLUtilities.italic(getConstraintValueString()) + "\"";
 	}
 
 	@Override
@@ -129,7 +129,7 @@ public abstract class StringColumnConstraint implements ColumnConstraint<String>
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(this.getClass(), patternString);
+		return Objects.hash(this.getClass(), getPatternString());
 	}
 
 	@Override
@@ -143,7 +143,7 @@ public abstract class StringColumnConstraint implements ColumnConstraint<String>
 
 		StringColumnConstraint otherConstraint = (StringColumnConstraint) o;
 
-		return patternString.equals(otherConstraint.patternString);
+		return getPatternString().equals(otherConstraint.getPatternString());
 
 	}
 
@@ -155,6 +155,6 @@ public abstract class StringColumnConstraint implements ColumnConstraint<String>
 	}
 
 	public boolean isValidPatternString(String value) {
-		return !value.isEmpty();
+		return value.length() > 0;
 	}
 }

@@ -30,5 +30,5 @@ public interface FunctionComparisonModelListener {
 	 * 
 	 * @param model the current state of the model
 	 */
-    void modelChanged(List<FunctionComparison> model);
+	public void modelChanged(List<FunctionComparison> model);
 }

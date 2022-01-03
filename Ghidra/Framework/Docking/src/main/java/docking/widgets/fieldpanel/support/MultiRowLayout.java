@@ -285,8 +285,11 @@ public class MultiRowLayout implements Layout {
 
 	@Override
 	public boolean contains(int yPos) {
-        return (yPos >= 0) && (yPos < heightAbove + heightBelow);
-    }
+		if ((yPos >= 0) && (yPos < heightAbove + heightBelow)) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Returns the row containing the given FieldLocation.

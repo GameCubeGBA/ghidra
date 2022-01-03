@@ -50,7 +50,7 @@ public interface Function extends Namespace {
 	String NORETURN = "noreturn";
 	String THUNK = "thunk";
 
-	enum FunctionUpdateType {
+	public enum FunctionUpdateType {
 		/**
 		 * All parameters and return have been specified with their storage.
 		 */

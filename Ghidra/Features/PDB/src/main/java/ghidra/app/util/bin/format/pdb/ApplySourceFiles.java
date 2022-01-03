@@ -39,7 +39,7 @@ class ApplySourceFiles {
 				return;
 			}
 			XmlElement elem = xmlParser.next();
-			if (elem.isEnd() && "table".equals(elem.getName())) {
+			if (elem.isEnd() && elem.getName().equals("table")) {
 				break;
 			}
 

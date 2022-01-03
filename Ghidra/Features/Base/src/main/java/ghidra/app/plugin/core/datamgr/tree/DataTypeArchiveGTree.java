@@ -346,7 +346,7 @@ public class DataTypeArchiveGTree extends GTree {
 			else if (value instanceof DomainFileArchiveNode) {
 				DomainFileArchiveNode node = (DomainFileArchiveNode) value;
 				String info = node.getDomainObjectInfo();
-				if (!info.isEmpty()) {
+				if (info.length() > 0) {
 					label.setText(label.getText() + info);
 				}
 			}

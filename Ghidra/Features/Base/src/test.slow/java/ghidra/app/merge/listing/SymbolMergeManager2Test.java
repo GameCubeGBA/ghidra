@@ -67,7 +67,8 @@ public class SymbolMergeManager2Test extends AbstractListingMergeManagerTest {
 	 * @param arg0
 	 */
 	public SymbolMergeManager2Test() {
-    }
+		super();
+	}
 
 	@Test
 	public void testAddFunctionSymbolNoConflict() throws Exception {

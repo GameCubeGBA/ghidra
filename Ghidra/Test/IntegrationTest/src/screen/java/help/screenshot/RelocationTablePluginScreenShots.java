@@ -20,7 +20,8 @@ import org.junit.Test;
 public class RelocationTablePluginScreenShots extends GhidraScreenShotGenerator {
 
 	public RelocationTablePluginScreenShots() {
-    }
+		super();
+	}
 
 @Test
     public void testRelocation_Table() {

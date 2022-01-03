@@ -51,8 +51,8 @@ import ghidra.util.exception.AssertException;
 public class RecoverySnapshotMgrPlugin extends Plugin
 		implements FrontEndOnly, OptionsChangeListener, ProjectListener {
 
-	private static final String OPTIONS_TITLE = "Recovery";
-	private static final String SNAPSHOT_PERIOD_OPTION = "Snapshot period (minutes, 0=disabled)";
+	private final static String OPTIONS_TITLE = "Recovery";
+	private final static String SNAPSHOT_PERIOD_OPTION = "Snapshot period (minutes, 0=disabled)";
 
 	private static final int DELAYED_RETRY_PERIOD_MSEC = 10000;  // 10 seconds
 	private int snapshotPeriodMin = 5; // default period = 5 minutes
