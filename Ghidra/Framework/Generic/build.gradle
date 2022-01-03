@@ -40,10 +40,9 @@ dependencies {
 	api 'org.bouncycastle:bcprov-jdk15on:1.70'
 	api 'org.bouncycastle:bcutil-jdk15on:1.70'
 
-	compileOnly "junit:junit:4.12"
+	compileOnly 'junit:junit:4.13.2'
 }
 
 ext.addExports([
 	'java.desktop/sun.awt=ALL-UNNAMED'
 ])
-

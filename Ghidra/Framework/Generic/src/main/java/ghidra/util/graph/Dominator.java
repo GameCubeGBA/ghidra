@@ -16,7 +16,7 @@
 package ghidra.util.graph;
 
 import java.util.Vector;
-
+import java.util.Iterator;
 import ghidra.util.Msg;
 import ghidra.util.exception.NoValueException;
 import ghidra.util.graph.attributes.AttributeManager;
